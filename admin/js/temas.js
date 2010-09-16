@@ -1,13 +1,15 @@
 /*
-Title: Arvore
+Title: temas.js
 
-Funções javascript utilizadas no sistema de administração do menu de mapas
+Funções que controlam a interface dos editores de um tema
 
-File: i3geo/admin/mapas.js
+Utilizado no editor da árvore de temas para manipular os dados de cada nó
 
-About: Licença
+Licenca:
 
-I3Geo Interface Integrada de Ferramentas de Geoprocessamento para Internet
+GPL2
+
+i3Geo Interface Integrada de Ferramentas de Geoprocessamento para Internet
 
 Direitos Autorais Reservados (c) 2006 Ministério do Meio Ambiente Brasil
 Desenvolvedor: Edmar Moretti edmar.moretti@mma.gov.br
@@ -24,6 +26,10 @@ Você deve ter recebido uma cópia da Licença Pública Geral do
 GNU junto com este programa; se não, escreva para a
 Free Software Foundation, Inc., no endereço
 59 Temple Street, Suite 330, Boston, MA 02111-1307 USA.
+
+Arquivo:
+
+i3geo/admin/js/menus.js
 */
 contaN = 0;
 objcontype = [

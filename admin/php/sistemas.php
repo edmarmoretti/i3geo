@@ -1,10 +1,16 @@
 <?php
 /*
-Title: Administração do cadastro de sistemas
+Title: sistemas.php
 
-About: Licença
+Funções utilizadas pelo editor do cadastro de sistemas
 
-I3Geo Interface Integrada de Ferramentas de Geoprocessamento para Internet
+Sistemas são opções adicionais que pode ser incluídas na árvore de adição de temas do i3Geo
+
+Licenca:
+
+GPL2
+
+i3Geo Interface Integrada de Ferramentas de Geoprocessamento para Internet
 
 Direitos Autorais Reservados (c) 2006 Ministério do Meio Ambiente Brasil
 Desenvolvedor: Edmar Moretti edmar.moretti@mma.gov.br
@@ -22,89 +28,207 @@ GNU junto com este programa; se não, escreva para a
 Free Software Foundation, Inc., no endereço
 59 Temple Street, Suite 330, Boston, MA 02111-1307 USA.
 
-File: i3geo/admin/sistemas.php
+Arquivo:
 
-19/6/2007
+i3geo/admin/php/sistemas.php
 
+Parametros:
+
+O parâmetro principal é "funcao", que define qual operação será executada, por exemplo, sistemas.php?funcao=pegasistemas.
+
+Cada operação possuí seus próprios parâmetros, que devem ser enviados também na requisição da operação.
 */
 include_once("admin.php");
 error_reporting(0);
 //faz a busca da função que deve ser executada
-switch ($funcao)
+switch (strtoupper($funcao))
 {
-	case "pegaSistemas":
-	retornaJSON(pegaDados('SELECT * from i3geoadmin_sistemas order by nome_sistema'));
-	exit;
-	break;
-
-	case "pegaSistema":
-	retornaJSON(pegaDados("SELECT * from i3geoadmin_sistemas where id_sistema='$id_sistema'"));
-	exit;
-	break;
-
-	case "pegaFuncoes":	
-	retornaJSON(pegaDados("SELECT * from i3geoadmin_sistemasf where id_sistema ='$id_sistema'"));
-	exit;
-	break;
-
-	case "pegaFuncao":	
-	retornaJSON(pegaDados("SELECT * from i3geoadmin_sistemasf where id_funcao ='$id_funcao'"));
-	exit;
-	break;
-
+	/*
+	Note:
 	
-	case "alterarSistemas":
-	if(verificaEditores($editores) == "nao")
-	{echo "Vc nao e um editor cadastrado. Apenas os editores definidos em i3geo/ms_configura.php podem acessar o sistema de administracao.";exit;}
-	$novo = alterarSistemas();
-	$sql = "SELECT * from i3geoadmin_sistemas WHERE id_sistema = '".$novo."'";
-	retornaJSON(pegaDados($sql));
-	exit;
-	break;
-
-	case "alterarFuncoes":
-	if(verificaEditores($editores) == "nao")
-	{echo "Vc nao e um editor cadastrado. Apenas os editores definidos em i3geo/ms_configura.php podem acessar o sistema de administracao.";exit;}
-	$novo = alterarFuncoes();
-	$sql = "SELECT * from i3geoadmin_sistemasf WHERE id_funcao = '".$novo."'";
-	retornaJSON(pegaDados($sql));	
-	exit;
-	break;
+	Valores que o parâmetro &funcao pode receber. Os parâmetros devem ser enviados na requisição em AJAX.
+	*/
+	/*
+	Valor: PEGASISTEMAS
 	
-	case "excluirSistema":
-	if(verificaEditores($editores) == "nao")
-	{echo "Vc nao e um editor cadastrado. Apenas os editores definidos em i3geo/ms_configura.php podem acessar o sistema de administracao.";exit;}
-	$tabela = "i3geoadmin_sistemas";
-	$f = verificaFilhos();
-	if(!$f)
-	{
-		retornaJSON(excluirSistemas());
+	Lista de sistemas
+		
+	Retorno:
+	
+	{JSON}
+	*/
+	case "PEGASISTEMAS":
+		retornaJSON(pegaDados('SELECT * from i3geoadmin_sistemas order by nome_sistema'));
 		exit;
-	}
-	else
-	{
-		retornaJSON("erro");
+	break;
+	/*
+	Valor: PEGASISTEMA
+	
+	Dados de um sistemas
+	
+	Parametro:
+	
+	id_sistema
+		
+	Retorno:
+	
+	{JSON}
+	*/
+	case "PEGASISTEMA":
+		retornaJSON(pegaDados("SELECT * from i3geoadmin_sistemas where id_sistema='$id_sistema'"));
 		exit;
-	}
+	break;
+	/*
+	Valor: PEGAFUNCOES
+	
+	Lista de funções de um sistema
+	
+	Parametro:
+	
+	id_sistema
+		
+	Retorno:
+	
+	{JSON}
+	*/
+	case "PEGAFUNCOES":	
+		retornaJSON(pegaDados("SELECT * from i3geoadmin_sistemasf where id_sistema ='$id_sistema'"));
+		exit;
+	break;
+	/*
+	Valor: PEGAFUNCAO
+	
+	Pega os dados de uma função específica
+	
+	Parametro:
+	
+	id_funcao
+		
+	Retorno:
+	
+	{JSON}
+	*/
+	case "PEGAFUNCAO":	
+		retornaJSON(pegaDados("SELECT * from i3geoadmin_sistemasf where id_funcao ='$id_funcao'"));
+		exit;
+	break;
+	/*
+	Valor: ALTERARSISTEMAS
+	
+	Altera os dados de um sistema
+	
+	Parametros:
+	
+	id_sistema
+	
+	perfil_sistema
+	
+	nome_sistema
+	
+	publicado_sistema
+		
+	Retorno:
+	
+	{JSON}
+	*/	
+	case "ALTERARSISTEMAS":
+		if(verificaEditores($editores) == "nao")
+		{echo "Vc nao e um editor cadastrado. Apenas os editores definidos em i3geo/ms_configura.php podem acessar o sistema de administracao.";exit;}
+		$novo = alterarSistemas();
+		$sql = "SELECT * from i3geoadmin_sistemas WHERE id_sistema = '".$novo."'";
+		retornaJSON(pegaDados($sql));
+		exit;
+	break;
+	/*
+	Valor: ALTERARFUNCOES
+	
+	Altera os dados de uma função
+	
+	Parametros:
+	
+	id_sistema
+	
+	id_funcao
+	
+	perfil_funcao
+	
+	nome_funcao
+	
+	w_funcao
+	
+	h_funcao
+	
+	abrir_funcao
+		
+	Retorno:
+	
+	{JSON}
+	*/
+	case "ALTERARFUNCOES":
+		if(verificaEditores($editores) == "nao")
+		{echo "Vc nao e um editor cadastrado. Apenas os editores definidos em i3geo/ms_configura.php podem acessar o sistema de administracao.";exit;}
+		$novo = alterarFuncoes();
+		$sql = "SELECT * from i3geoadmin_sistemasf WHERE id_funcao = '".$novo."'";
+		retornaJSON(pegaDados($sql));	
+		exit;
+	break;
+	/*
+	Valor: EXCLUIRSISTEMA
+	
+	Exclui um sistema
+	
+	Parametros:
+	
+	id
+		
+	Retorno:
+	
+	{JSON}
+	*/	
+	case "EXCLUIRSISTEMA":
+		if(verificaEditores($editores) == "nao")
+		{echo "Vc nao e um editor cadastrado. Apenas os editores definidos em i3geo/ms_configura.php podem acessar o sistema de administracao.";exit;}
+		$tabela = "i3geoadmin_sistemas";
+		$f = verificaFilhos();
+		if(!$f)
+		{
+			retornaJSON(excluirSistemas());
+			exit;
+		}
+		else
+		{
+			retornaJSON("erro");
+			exit;
+		}
+	break;
+	/*
+	Valor: EXCLUIRFUNCAO
+	
+	Exclui uma função
+	
+	Parametros:
+	
+	id
+		
+	Retorno:
+	
+	{JSON}
+	*/	
+	case "EXCLUIRFUNCAO":
+		if(verificaEditores($editores) == "nao")
+		{echo "Vc nao e um editor cadastrado. Apenas os editores definidos em i3geo/ms_configura.php podem acessar o sistema de administracao.";exit;}
+		retornaJSON(excluirFuncoes());
+		exit;
 	break;
 	
-	case "excluirFuncao":
-	if(verificaEditores($editores) == "nao")
-	{echo "Vc nao e um editor cadastrado. Apenas os editores definidos em i3geo/ms_configura.php podem acessar o sistema de administracao.";exit;}
-	retornaJSON(excluirFuncoes());
-	exit;
-	break;
-	
-	case "importarXmlSistemas":
-	if(verificaEditores($editores) == "nao")
-	{echo "Vc nao e um editor cadastrado. Apenas os editores definidos em i3geo/ms_configura.php podem acessar o sistema de administracao.";exit;}
-	retornaJSON(importarXmlSistemas());
-	exit;
+	case "IMPORTARXMLSISTEMAS":
+		if(verificaEditores($editores) == "nao")
+		{echo "Vc nao e um editor cadastrado. Apenas os editores definidos em i3geo/ms_configura.php podem acessar o sistema de administracao.";exit;}
+		retornaJSON(importarXmlSistemas());
+		exit;
 	break;
 }
 /*
-Function: alterarSistemas
-
 Altera o registro de um WS
 */
 function alterarSistemas()

@@ -1,46 +1,8 @@
-/*
-Title: Menutemas
 
-Funções javascript utilizadas no sistema de administração do menu de temas
-
-File: i3geo/admin/menutemas.js
-
-About: Licença
-
-I3Geo Interface Integrada de Ferramentas de Geoprocessamento para Internet
-
-Direitos Autorais Reservados (c) 2006 Ministério do Meio Ambiente Brasil
-Desenvolvedor: Edmar Moretti edmar.moretti@mma.gov.br
-
-Este programa é software livre; você pode redistribuí-lo
-e/ou modificá-lo sob os termos da Licença Pública Geral
-GNU conforme publicada pela Free Software Foundation;
-tanto a versão 2 da Licença.
-Este programa é distribuído na expectativa de que seja útil,
-porém, SEM NENHUMA GARANTIA; nem mesmo a garantia implícita
-de COMERCIABILIDADE OU ADEQUAÇÃO A UMA FINALIDADE ESPECÍFICA.
-Consulte a Licença Pública Geral do GNU para mais detalhes.
-Você deve ter recebido uma cópia da Licença Pública Geral do
-GNU junto com este programa; se não, escreva para a
-Free Software Foundation, Inc., no endereço
-59 Temple Street, Suite 330, Boston, MA 02111-1307 USA.
-*/
-/*
-Function: iniciaAdmin
-
-Inicializa as variáveis globais e checa o cadastro do editor do sistema de administração
-*/
 function iniciaAdmin()
 {
 	verificaEditores()
 }
-/*
-Function: importarXmlMenu
-
-Importa um arquivo xml para o banco de dados.
-
-O xml deve ser estruturado no padrão menutemas.xml
-*/
 function importarXmlMenu()
 {
 	$i("resultado").innerHTML = $mensagemAguarde
@@ -49,13 +11,6 @@ function importarXmlMenu()
 	var p = "../php/menutemas.php?funcao=importarXmlMenu&nomemenu="+$i("nome").value+"&xml="+$i("arquivo").value;
 	cPaint.call(p,"",retorna);
 }
-/*
-Function: montaParametros
-
-Monta o html com os parametros e os divs que receberão os dados dos formulários.
-
-Para cada registro na variável $parametrs, é montado um formulário.
-*/
 function montaParametros()
 {
 	var ins = ""
@@ -74,12 +29,6 @@ function montaParametros()
 	$i("aguarde").style.display="none"
 	//pegaParametros()
 }
-/*
-Function: pegaParametros
-
-Pega os parâmetros do mapfiles.php
-
-*/
 function pegaParametros(tipo)
 {
 	if(tipo == "perfis" || arguments.length == 0 && $i("perfis"))
@@ -232,9 +181,6 @@ function pegaParametros(tipo)
 		cPaint.call(p,"pegaSubXGrupos",retornaSubXGrupos);
 	}
 }
-/*
-Function: montaOpcoes
-*/
 function montaOpcoes(prefixo,id,nome,desc,opc)
 {
 	var ins = "<tr>"
@@ -244,15 +190,6 @@ function montaOpcoes(prefixo,id,nome,desc,opc)
 	ins += "<td><input onchange=this.style.color='blue'  id='desc"+prefixo+"_"+id+"' type=text size=20 value='"+desc+"' /></td></tr>"
 	return (ins)
 }
-/*
-Function: montaDivTemas
-
-Preenche a div com os dados de um tema específico na edição da lista de temas
-
-Parameters:
-
-i - objeto json com os dados para montar o formulário
-*/
 function montaDivTemas(i)
 {
 	var ins = "<br><fieldset><legend>+- "+i.nome_tema+"</legend>"
@@ -317,12 +254,6 @@ function registraTag(id,tag)
 	else
 	$i(id).value = $i(id).value+" "+tag
 }
-
-/*
-Function: alterar
-
-Altera o valor de uma variável
-*/
 function alterar(prefixo,id)
 {
 	//if(confirm("Você realmente quer fazer isso?"))
@@ -457,11 +388,6 @@ function alterar(prefixo,id)
 		cPaint.call(p,"",retorna);	
 	//}
 }
-/*
-Function: excluir
-
-Exclui um registro
-*/
 function excluir(prefixo,id)
 {
 	if(confirm("Você realmente quer fazer isso?"))
@@ -474,15 +400,6 @@ function excluir(prefixo,id)
 	}
 }
 
-/*
-Function: pegaMapfiles
-
-Pega a lista de mapfiles existentes no i3geo
-
-Parameters:
-
-retorna - nome da função que processará o resultado
-*/
 function pegaMapfiles(retorna)
 {
 	var cPaint = new cpaint();

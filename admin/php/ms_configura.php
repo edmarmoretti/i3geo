@@ -1,12 +1,16 @@
 <?php
 /*
-Title: Administração do ms_configura.php
+Title: ms_configura.php
 
-Utilizado no sistema de administração do arquivo ms_configura.php
+Funções utilizadas pelo editor do arquivo ms_configura
 
-About: Licença
+ms_configura.php contém uma série de variáveis de configuração do i3Geo.
 
-I3Geo Interface Integrada de Ferramentas de Geoprocessamento para Internet
+Licenca:
+
+GPL2
+
+i3Geo Interface Integrada de Ferramentas de Geoprocessamento para Internet
 
 Direitos Autorais Reservados (c) 2006 Ministério do Meio Ambiente Brasil
 Desenvolvedor: Edmar Moretti edmar.moretti@mma.gov.br
@@ -24,9 +28,15 @@ GNU junto com este programa; se não, escreva para a
 Free Software Foundation, Inc., no endereço
 59 Temple Street, Suite 330, Boston, MA 02111-1307 USA.
 
-File: i3geo/admin/ms_configura.php
+Arquivo:
 
-19/6/2007
+i3geo/admin/php/ms_configura.php
+
+Parametros:
+
+O parâmetro principal é "funcao", que define qual operação será executada, por exemplo, arvore.php?funcao=pegaGrupos.
+
+Cada operação possuí seus próprios parâmetros, que devem ser enviados também na requisição da operação.
 
 */
 include_once("admin.php");
@@ -34,64 +44,83 @@ if(verificaEditores($editores) == "nao")
 {echo "Vc nao e um editor cadastrado. Apenas os editores definidos em i3geo/ms_configura.php podem acessar o sistema de administracao.";exit;}
 
 //faz a busca da função que deve ser executada
-switch ($funcao)
+switch (strtoupper($funcao))
 {
-	//pega os parâmetros do ms_configura
-	case "pegaParametrosConfigura":
-	$vs = array(
-		"\$dir_tmp",
-		"\$mensagemInicia",
-		"\$tituloInstituicao",
-		"\$locaplic",
-		"\$temasdir",
-		"\$temasaplic",
-		"\$locmapserv",
-		"\$locsistemas",
-		"\$locidentifica",
-		"\$locmapas",
-		"\$R_path",
-		"\$postgis_con",
-		"\$srid_area",
-		"\$postgis_mapa",
-		"\$utilizacgi",
-		"\$atlasxml",
-		"\$expoeMapfile",
-		"\$menutemas",
-		"\$conexaoadmin",
-		"\$googleApiKey",
-		"\$interfacePadrao"
-	);
-	$par = array();
-	foreach ($vs as $v)
-	{
-		eval("\$s = $v;");
-		if(is_array($s))
+	/*
+	Note:
+	
+	Valores que o parâmetro &funcao pode receber. Os parâmetros devem ser enviados na requisição em AJAX.
+	*/
+	/*
+	Valor: PEGAPARAMETROSCONFIGURA
+	
+	Lista os valores atuais das variáveis registradas no ms_configura
+	
+	Retorno:
+	
+	{JSON}
+	*/
+	case "PEGAPARAMETROSCONFIGURA":
+		$vs = array(
+			"\$dir_tmp",
+			"\$mensagemInicia",
+			"\$tituloInstituicao",
+			"\$locaplic",
+			"\$temasdir",
+			"\$temasaplic",
+			"\$locmapserv",
+			"\$locsistemas",
+			"\$locidentifica",
+			"\$locmapas",
+			"\$R_path",
+			"\$postgis_con",
+			"\$srid_area",
+			"\$postgis_mapa",
+			"\$utilizacgi",
+			"\$atlasxml",
+			"\$expoeMapfile",
+			"\$menutemas",
+			"\$conexaoadmin",
+			"\$googleApiKey",
+			"\$interfacePadrao"
+		);
+		$par = array();
+		foreach ($vs as $v)
 		{
-			$par[$v] = $s;
+			eval("\$s = $v;");
+			if(is_array($s))
+			{
+				$par[$v] = $s;
+			}
+			else
+			$par[$v] = utf8_encode($s);
 		}
-		else
-		$par[$v] = utf8_encode($s);
-	}
-	retornaJSON($par);
-	exit;
+		retornaJSON($par);
+		exit;
 	break;
-	//salva um novo valor para uma variável do ms_configura
-	case "salvaConfigura":
-	salvaConfigura($variavel,$valor);
-	retornaJSON("ok");
+	/*
+	Valor: SALVACONFIGURA
+	
+	Salva um novo valor de uma variável no ms_configura.php
+
+	Parameters:
+
+	variavel - nome da variável
+
+	valor - novo valor
+	
+	Retorno:
+	
+	{JSON}
+	*/
+	case "SALVACONFIGURA":
+		salvaConfigura($variavel,$valor);
+		retornaJSON("ok");
 	exit;
 	break;
 }
 /*
-Function: salvaConfigura
-
 Salva um novo valor de uma variável no ms_configura.php
-
-Parameters:
-
-variavel - nome da variável
-
-valor - novo valor
 */
 function salvaConfigura($variavel,$valor)
 {

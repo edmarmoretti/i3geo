@@ -1,30 +1,6 @@
-/*
-Title: Admin
-
-Funções javascript utilizadas no sistema de administração
-
-File: i3geo/admin/admin.js
-
-About: Licença
-
-I3Geo Interface Integrada de Ferramentas de Geoprocessamento para Internet
-
-Direitos Autorais Reservados (c) 2006 Ministério do Meio Ambiente Brasil
-Desenvolvedor: Edmar Moretti edmar.moretti@mma.gov.br
-
-Este programa é software livre; você pode redistribuí-lo
-e/ou modificá-lo sob os termos da Licença Pública Geral
-GNU conforme publicada pela Free Software Foundation;
-tanto a versão 2 da Licença.
-Este programa é distribuído na expectativa de que seja útil,
-porém, SEM NENHUMA GARANTIA; nem mesmo a garantia implícita
-de COMERCIABILIDADE OU ADEQUAÇÃO A UMA FINALIDADE ESPECÍFICA.
-Consulte a Licença Pública Geral do GNU para mais detalhes.
-Você deve ter recebido uma cópia da Licença Pública Geral do
-GNU junto com este programa; se não, escreva para a
-Free Software Foundation, Inc., no endereço
-59 Temple Street, Suite 330, Boston, MA 02111-1307 USA.
-*/
+//
+//usado apenas no importador de xml
+//
 //variáveis globais
 navn = false;
 navm = false;
@@ -32,16 +8,9 @@ navm = false;
 var app = navigator.appName.substring(0,1);
 if (app==='N'){navn=true;}else{navm=true;}
 
-/*
-Variable: $mensagemAguarde
-*/
 $mensagemAguarde = "<img src='../../imagens/aguarde.gif' />";//"<span style=color:red ><p>Aguarde...</p></span>"
 $i = function(i)
 {return document.getElementById(i);};
-/*
-Variable: cPaint
-Objeto cpaint para chamada ajax
-*/
 cPaint = new cpaint();
 cPaint.set_async("true");
 cPaint.set_response_type("JSON");
@@ -73,7 +42,6 @@ function ativaTR()
 		{this.style.backgroundColor = ""}
 	}
 }
-
 function ativaLegenda()
 {
 	var etrs = document.getElementsByTagName("legend")
@@ -101,25 +69,10 @@ function ativaLegenda()
 		}
 	}
 }
-/*
-Function: abre
-
-Abre uma url específica no lugar da página atual
-
-Parameters:
-
-url - nome do programa que será aberto
-*/
 function abre(url)
 {
 	window.location.href = url
 }
-/*
-Function: verificaEditores
-
-Verifica se o usuário está cadastrado como um editor do i3geo
-
-*/
 function verificaEditores()
 {
 	var retorna = function(retorno)
@@ -131,11 +84,6 @@ function verificaEditores()
 	var p = "../php/mapfiles.php?funcao=verificaEditores";
 	cPaint.call(p,"",retorna);
 }
-/*
-Function: combosimnao
-
-Retorna os itens option de um combo sim nao
-*/
 function combosimnao(marcar)
 {
 	var ins = "<option value='' "
@@ -149,11 +97,6 @@ function combosimnao(marcar)
 	ins += ">nao</option>";
 	return(ins)
 }
-/*
-Function: combolista
-
-Retorna os itens option de um combo baseado em uma lista (array)
-*/
 function combolista(lista,marcar)
 {
 	var ins = "<option value='' "
@@ -167,11 +110,6 @@ function combolista(lista,marcar)
 	}
 	return(ins)
 }
-/*
-Function: comboObjeto
-
-Retorna os itens option de um combo baseado em um objeto json
-*/
 function comboObjeto(obj,valor,texto,marcar)
 {
 	var ins = "<option value='' "
@@ -187,15 +125,6 @@ function comboObjeto(obj,valor,texto,marcar)
 	}
 	return(ins)
 }
-/*
-Function: montaCampos
-
-Monta o html com os parametros
-
-Parameters?
-
-$parametros - array com os parâmetros
-*/
 function montaCampos()
 {
 	var ins = ""
@@ -278,4 +207,3 @@ function registraPerfil(id,perfil)
 	else
 	$i(id).value = $i(id).value+" "+perfil
 }
-

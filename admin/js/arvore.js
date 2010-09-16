@@ -1,4 +1,42 @@
+/*
+Title: arvore.js
+
+Funções que controlam a interface do editor da árvore de temas
+
+Atuam no controle dos nós da árvore
+
+Licenca:
+
+GPL2
+
+i3Geo Interface Integrada de Ferramentas de Geoprocessamento para Internet
+
+Direitos Autorais Reservados (c) 2006 Ministério do Meio Ambiente Brasil
+Desenvolvedor: Edmar Moretti edmar.moretti@mma.gov.br
+
+Este programa é software livre; você pode redistribuí-lo
+e/ou modificá-lo sob os termos da Licença Pública Geral
+GNU conforme publicada pela Free Software Foundation;
+tanto a versão 2 da Licença.
+Este programa é distribuído na expectativa de que seja útil,
+porém, SEM NENHUMA GARANTIA; nem mesmo a garantia implícita
+de COMERCIABILIDADE OU ADEQUAÇÃO A UMA FINALIDADE ESPECÍFICA.
+Consulte a Licença Pública Geral do GNU para mais detalhes.
+Você deve ter recebido uma cópia da Licença Pública Geral do
+GNU junto com este programa; se não, escreva para a
+Free Software Foundation, Inc., no endereço
+59 Temple Street, Suite 330, Boston, MA 02111-1307 USA.
+
+Arquivo:
+
+i3geo/admin/js/arvore.js
+*/
 YAHOO.namespace("example.container");
+/*
+Function: initMenu
+
+Inicializa a árvore
+*/
 function initMenu()
 {
 	var editorDeMenus = function()
@@ -31,6 +69,13 @@ function initMenu()
 	core_ativaPainelAjuda("ajuda","botaoAjuda");
 	core_pegaPerfis("pegaMenus()");
 }
+/*
+Function: pegaMenus
+
+Obtém a lista de menus e monta os nós principais da árvore
+
+<PEGAMENUS>
+*/
 function pegaMenus()
 {
 	try
@@ -38,6 +83,13 @@ function pegaMenus()
 	catch(e){}
 	core_pegaDados("buscando menus...","../php/menutemas.php?funcao=pegaMenus2&idioma="+idiomaSel(),"montaArvore")
 }
+/*
+Function: montaArvore
+
+Monta a árvore de temas
+
+<PEGAGRUPOS>
+*/
 function montaArvore(dados)
 {
 
@@ -110,6 +162,13 @@ function montaNosMenus(dados,redesenha)
 //
 //adiciona os grupos em um menu
 //
+/*
+Function: montaNosGrupos
+
+Monta os nós com os grupos e permite abrir os subgrupos
+
+<PEGASUBGRUPOS>
+*/
 function montaNosGrupos(idmenu,no,dados,redesenha)
 {
 	function temaIconMode()
@@ -170,6 +229,13 @@ function montaNosGrupos(idmenu,no,dados,redesenha)
 	}
 	if(redesenha){tree.draw();}
 }
+/*
+Function: montaNosSubgrupos
+
+Monta os nós com os temas
+
+<PEGATEMAS>
+*/
 function montaNosSubgrupos(idmenu,no,dados,redesenha)
 {
     function loadTemasData(node, fnLoadComplete)
@@ -305,6 +371,13 @@ function montaTemasRaizGrupo(idmenu,no,dados,redesenha)
 //adiciona um novo tema na raiz do menu
 //id = id do menu alvo
 //
+/*
+Function: novoTemaRaiz
+
+Adiciona um novo tema na raiz de um menu
+
+<ADICIONARTEMARAIZ>
+*/
 function novoTemaRaiz(id)
 {
 	core_carregando("ativa");
@@ -329,6 +402,13 @@ function novoTemaRaiz(id)
 	};
 	core_makeRequest(sUrl,callback)
 }
+/*
+Function: novoTemaRaizGrupo
+
+Adiciona um novo tema na raiz de um grupo
+
+<ADICIONARTEMARAIZGRUPO>
+*/
 function novoTemaRaizGrupo(idmenu,id)
 {
 	core_carregando("ativa");
@@ -353,10 +433,13 @@ function novoTemaRaizGrupo(idmenu,id)
 	};
 	core_makeRequest(sUrl,callback)
 }
+/*
+Function: novoGrupo
 
-//
-//adiciona um novo grupo
-//
+Adiciona um novo grupo em um menu
+
+<ADICIONARGRUPO>
+*/
 function novoGrupo(id_menu)
 {
 	core_carregando("ativa");
@@ -378,9 +461,13 @@ function novoGrupo(id_menu)
 	};
 	core_makeRequest(sUrl,callback)
 }
-//
-//adiciona um novo sub-grupo
-//
+/*
+Function: novoSubGrupo
+
+Adiciona um novo subgrupo em um grupo
+
+<ADICIONARSUBGRUPO>
+*/
 function novoSubGrupo(idmenu,id_n1)
 {
 	core_carregando("ativa");
@@ -402,9 +489,13 @@ function novoSubGrupo(idmenu,id_n1)
 	};
 	core_makeRequest(sUrl,callback)
 }
-//
-//adiciona um novo tema em um sub-grupo
-//
+/*
+Function: novoTema
+
+Adiciona um novo tema
+
+<ADICIONARTEMA>
+*/
 function novoTema(idmenu,id_n2)
 {
 	core_carregando("ativa");
@@ -568,7 +659,6 @@ function montaDivRaiz(i)
 	ins += "<input type=hidden value="+i.ordem+" id='Eordem' />"
 	return(ins)
 }
-
 function registraPerfil(valor,id)
 {
 	var inp = $i(id)
@@ -578,6 +668,19 @@ function registraPerfil(valor,id)
 	else
 	inp.value = perfis+" "+valor
 }
+/*
+Function: gravaDados
+
+Altera dados de um nó
+
+<ALTERARGRUPO>
+
+<ALTERARSUBGRUPO>
+
+<ALTERARTEMA>
+
+<ALTERARRAIZ>
+*/
 function gravaDados(tipo,id)
 {
 	if(tipo == "grupo")
@@ -735,5 +838,4 @@ function sobeDesce(movimento,tipo,id)
 		core_makeRequest(sUrl,callback)
 	}
 }
-
 YAHOO.util.Event.addListener(window, "load", initMenu);

@@ -1,10 +1,16 @@
 <?php
 /*
-Title: Administração do cadastro de web services
+Title: webservices.php
 
-About: Licença
+Funções utilizadas pelo editor do cadastro de Web Services
 
-I3Geo Interface Integrada de Ferramentas de Geoprocessamento para Internet
+É utilizado nas funções em AJAX da interface de edição
+
+Licenca:
+
+GPL2
+
+i3Geo Interface Integrada de Ferramentas de Geoprocessamento para Internet
 
 Direitos Autorais Reservados (c) 2006 Ministério do Meio Ambiente Brasil
 Desenvolvedor: Edmar Moretti edmar.moretti@mma.gov.br
@@ -22,9 +28,15 @@ GNU junto com este programa; se não, escreva para a
 Free Software Foundation, Inc., no endereço
 59 Temple Street, Suite 330, Boston, MA 02111-1307 USA.
 
-File: i3geo/admin/webservices.php
+Arquivo:
 
-19/6/2007
+i3geo/admin/php/webservices.php
+
+Parametros:
+
+O parâmetro principal é "funcao", que define qual operação será executada, por exemplo, arvore.php?funcao=pegaGrupos.
+
+Cada operação possuí seus próprios parâmetros, que devem ser enviados também na requisição da operação.
 
 */
 error_reporting(0);
@@ -35,44 +47,102 @@ ob_start();
 include_once("admin.php");
 ob_clean();
 //faz a busca da função que deve ser executada
-switch ($funcao)
+switch (strtoupper($funcao))
 {
-	case "pegaWS":
-	retornaJSON(pegaDados('SELECT id_ws,nome_ws,tipo_ws from i3geoadmin_ws order by tipo_ws,nome_ws'));
-	exit;
+	/*
+	Note:
+	
+	Valores que o parâmetro &funcao pode receber. Os parâmetros devem ser enviados na requisição em AJAX.
+	*/
+	/*
+	Valor: PEGAWS
+	
+	Lista de serviços cadastrados
+	
+	Retorno:
+	
+	{JSON}
+	*/
+	case "PEGAWS":
+		retornaJSON(pegaDados('SELECT id_ws,nome_ws,tipo_ws from i3geoadmin_ws order by tipo_ws,nome_ws'));
+		exit;
+	break;
+	/*
+	Valor: PEGADADOS
+	
+	Dados de um servico
+	
+	Parametro:
+	
+	id_ws {string}
+	
+	Retorno:
+	
+	{JSON}
+	*/	
+	case "PEGADADOS":
+		retornaJSON(pegaDados("SELECT * from i3geoadmin_ws where id_ws='$id_ws'"));
+		exit;
+	break;
+	/*
+	Valor: ALTERARWS
+	
+	Altera um registro
+	
+	Parametros:
+	
+	id_ws
+	
+	desc_ws
+	
+	nome_ws
+	
+	link_ws
+	
+	autor_ws
+	
+	tipo_ws
+	
+	Retorno:
+	
+	{JSON}
+	*/	
+	case "ALTERARWS":
+		if(verificaEditores($editores) == "nao")
+		{echo "Vc nao e um editor cadastrado. Apenas os editores definidos em i3geo/ms_configura.php podem acessar o sistema de administracao.";exit;}
+		$novo = alterarWS();
+		$sql = "SELECT * from i3geoadmin_ws WHERE id_ws = '".$novo."'";
+		retornaJSON(pegaDados($sql));
+		exit;
+	break;
+	/*
+	Valor: EXCLUIR
+	
+	Exclui um registro
+	
+	Parametro:
+	
+	id {string}
+	
+	Retorno:
+	
+	{JSON}
+	*/		
+	case "EXCLUIR":
+		if(verificaEditores($editores) == "nao")
+		{echo "Vc nao e um editor cadastrado. Apenas os editores definidos em i3geo/ms_configura.php podem acessar o sistema de administracao.";exit;}
+		retornaJSON(excluirWS());
+		exit;
 	break;
 	
-	case "pegaDados":
-	retornaJSON(pegaDados("SELECT * from i3geoadmin_ws where id_ws='$id_ws'"));
-	exit;
-	break;
-	
-	case "alterarWS":
-	if(verificaEditores($editores) == "nao")
-	{echo "Vc nao e um editor cadastrado. Apenas os editores definidos em i3geo/ms_configura.php podem acessar o sistema de administracao.";exit;}
-	$novo = alterarWS();
-	$sql = "SELECT * from i3geoadmin_ws WHERE id_ws = '".$novo."'";
-	retornaJSON(pegaDados($sql));
-	exit;
-	break;
-	
-	case "excluir":
-	if(verificaEditores($editores) == "nao")
-	{echo "Vc nao e um editor cadastrado. Apenas os editores definidos em i3geo/ms_configura.php podem acessar o sistema de administracao.";exit;}
-	retornaJSON(excluirWS());
-	exit;
-	break;
-	
-	case "importarXmlWS":
-	if(verificaEditores($editores) == "nao")
-	{echo "Vc nao e um editor cadastrado. Apenas os editores definidos em i3geo/ms_configura.php podem acessar o sistema de administracao.";exit;}
-	retornaJSON(importarXmlWS());
-	exit;
+	case "IMPORTARXMLWS":
+		if(verificaEditores($editores) == "nao")
+		{echo "Vc nao e um editor cadastrado. Apenas os editores definidos em i3geo/ms_configura.php podem acessar o sistema de administracao.";exit;}
+		retornaJSON(importarXmlWS());
+		exit;
 	break;
 }
 /*
-Function: alterarWS
-
 Altera o registro de um WS
 */
 function alterarWS()

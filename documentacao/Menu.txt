@@ -296,8 +296,9 @@ Group: Administração  {
    File: Menu principal  (admin\index.html)
 
    Group: Utilitários  {
+
       File: Estatísticas do banco de dados de administração  (admin\php\estatisticas.php)
-      File: Inclui tag MAP  (admin\php\incluiMAP.php)
+      File: incluiMAP.php  (admin\php\incluiMAP.php)
       File: abrefontemapfile  (admin\abrefontemapfile.php)
       File: hiperbolica  (admin\hiperbolica.php)
       File: rssgrupos  (admin\rssgrupos.php)
@@ -314,28 +315,33 @@ Group: Administração  {
       File: xmlservicoswms  (admin\xmlservicoswms.php)
       File: xmlservicosws  (admin\xmlservicosws.php)
       File: xmlsistemas  (admin\xmlsistemas.php)
+      File: parsemapfile.php  (admin\php\parsemapfile.php)
+      File: sqlite.php  (admin\php\sqlite.php)
       }  # Group: Utilitários
 
    Group: Js  {
 
-      File: Admin  (admin\js\admin.js)
-      File: Admin  (admin\js\ms_configura.js)
-      File: Arvore  (admin\js\temas.js)
+      File: arvore.js  (admin\js\arvore.js)
+      File: atlas.js  (admin\js\atlas.js)
       File: core.js  (admin\js\core.js)
-      File: mapfiles  (admin\js\mapfiles.js)
-      File: Menutemas  (admin\js\menutemas.js)
+      File: editormapfile.js  (admin\js\editormapfile.js)
+      File: grupos.js  (admin\js\grupos.js)
+      File: identifica.js  (admin\js\identifica.js)
+      File: importar.js  (admin\js\importar.js)
+      File: mapas.js  (admin\js\mapas.js)
+      File: mapfiles.js  (admin\js\mapfiles.js)
+      File: menu.js  (admin\js\menu.js)
+      File: ms_configura.js  (admin\js\ms_configura.js)
+      File: perfis.js  (admin\js\perfis.js)
+      File: sistemas.js  (admin\js\sistemas.js)
+      File: subgrupos.js  (admin\js\subgrupos.js)
+      File: tags.js  (admin\js\tags.js)
+      File: temas.js  (admin\js\temas.js)
+      File: webservices.js  (admin\js\webservices.js)
       }  # Group: Js
 
    Group: Php  {
 
-      File: Administração do cadastro de funções da ferramenta identifica  (admin\php\identifica.php)
-      File: Administração do cadastro de sistemas  (admin\php\sistemas.php)
-      File: Administração do cadastro de sistemas  (admin\php\temas.php)
-      File: Administração do cadastro de web services  (admin\php\webservices.php)
-      File: Administração do menu de mapas  (admin\php\mapas.php)
-      File: Administração do ms_configura.php  (admin\php\ms_configura.php)
-      File: Administração dos mapfiles principais  (admin\php\menutemas.php)
-      File: Administração dos mapfiles principais  (admin\php\mapfiles.php)
       File: arvore.php  (admin\php\arvore.php)
       File: atlas.php  (admin\php\atlas.php)
       File: classe_arvore.php  (admin\php\classe_arvore.php)
@@ -344,7 +350,14 @@ Group: Administração  {
       File: editormapfile.php  (admin\php\editormapfile.php)
       File: Exemplo de arquivo de conexão alternativo  (admin\php\conexaomma.php)
       File: Funções de uso geral  (admin\php\admin.php)
-      File: xml  (admin\php\xml.php)
+      File: identifica.php  (admin\php\identifica.php)
+      File: mapas.php  (admin\php\mapas.php)
+      File: mapfiles.php  (admin\php\mapfiles.php)
+      File: menutemas.php  (admin\php\menutemas.php)
+      File: ms_configura.php  (admin\php\ms_configura.php)
+      File: sistemas.php  (admin\php\sistemas.php)
+      File: webservices.php  (admin\php\webservices.php)
+      File: xml.php  (admin\php\xml.php)
       }  # Group: Php
 
    Group: Html  {

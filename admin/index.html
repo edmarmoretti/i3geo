@@ -3,7 +3,6 @@
 <META HTTP-EQUIV="Content-Type" CONTENT="text/html; charset=ISO-8859-1">
 <link rel="stylesheet" type="text/css" href="html/admin.css">
 <script src="../pacotes/cpaint/cpaint2.inc.compressed.js" type="text/javascript"></script>
-<script src="js/admin.js" type="text/javascript"></script>
 </head>
 <body>
 <div style=width:80%;text-align:left;>
@@ -222,12 +221,50 @@ HTML com a lista de opções do sistema de administração e orientações de uso
 
 <http://localhost/i3geo/admin/index.html>
 
+Veja também:
+
+<Ajuste de mapfiles>
+
+<Editor da árvore de menus>
+
+<Editor da interface Atlas>
+
+<Editor de mapfiles>
+
+<Editor de mapfiles de inicialização>
+
+<Editor do ms_configura>
+
+<Importador da lista de Atlas>
+
+<Importador da lista de mapas>
+
+<Importador da lista de sistemas da ferramenta de identificação>
+
+<Importador da lista de sistemas especiais de adição de temas>
+
+<Importador da lista de Web Services>
+
+<Importador do xml menutemas.xml>
+
+<Mapas>
+
+<Opções da ferramenta identifica>
+
+<Perfis>
+
+<Sistemas de adição de temas>
+
+<Tags>
+
+<Web Services>
+
+
 Licenca:
 
 GPL2
 
-
-I3Geo Interface Integrada de Ferramentas de Geoprocessamento para Internet
+i3Geo Interface Integrada de Ferramentas de Geoprocessamento para Internet
 
 Direitos Autorais Reservados (c) 2006 Ministério do Meio Ambiente Brasil
 Desenvolvedor: Edmar Moretti edmar.moretti@mma.gov.br
@@ -249,11 +286,49 @@ Arquivo:
 
 i3geo/admin/index.html
 */
-ativaTR()
-ativaLegenda()
+navn = false;
+navm = false;
+//seta as variáveis navn e navm
+var app = navigator.appName.substring(0,1);
+if (app==='N'){navn=true;}else{navm=true;}
+var etrs = document.getElementsByTagName("tr")
+for(t = 0;t < etrs.length;t++)
+{
+	etrs[t].onmouseover = function()
+	{this.style.backgroundColor = "beige"}
+	etrs[t].onmouseout = function()
+	{this.style.backgroundColor = ""}
+}
+var etrs = document.getElementsByTagName("legend")
+for(t = 0;t < etrs.length;t++)
+{
+	etrs[t].innerHTML = "<img src='../imagens/desce.gif' id='img_"+t+"' >&nbsp;" + etrs[t].innerHTML;
+	etrs[t].onclick = function()
+	{
+		var c = this.parentNode.childNodes;
+		for(h = 0;h < c.length;h++)
+		{
+			if(c[h].style && c[h].tagName != "LEGEND")
+			{
+				var i = this.getElementsByTagName("img");
+				if(c[h].style.display=="none"){
+					c[h].style.display="block";
+					i[0].src = '../imagens/sobe.gif';
+				}
+				else{
+					c[h].style.display="none";
+					i[0].src = '../imagens/desce.gif';
+				}
+			}
+		}
+	}
+}
 function ajuda(i,t)
-{$i(i).style.display="block";t.style.display="none"}
+{document.getElementById(i).style.display="block";t.style.display="none"}
+function abre(url)
+{window.location.href = url}
 if(navm)
 {$i("mensagemIE").style.display = "block";}
+
 </script>
 </html>

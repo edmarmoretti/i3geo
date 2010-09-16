@@ -1,6 +1,6 @@
 <?php
 /*
-Title: xml
+Title: xml.php
 
 Conjunto de funções que geram arquivos na estrutura XML conforme os dados cadastrados no sistema de administração.
 

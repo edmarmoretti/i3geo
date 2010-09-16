@@ -457,8 +457,6 @@ switch (strtoupper($funcao))
 	
 	Exclui um registro
 	
-	<exclui>
-	
 	Parametros:
 	
 	tabela

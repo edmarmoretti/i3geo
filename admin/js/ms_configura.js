@@ -1,13 +1,13 @@
 /*
-Title: Admin
+Title: ms_configura.js
 
-Funções javascript utilizadas no sistema de administração
+Funções que controlam a interface do editor das variáveis de inicialização
 
-File: i3geo/admin/admin.js
+Licenca:
 
-About: Licença
+GPL2
 
-I3Geo Interface Integrada de Ferramentas de Geoprocessamento para Internet
+i3Geo Interface Integrada de Ferramentas de Geoprocessamento para Internet
 
 Direitos Autorais Reservados (c) 2006 Ministério do Meio Ambiente Brasil
 Desenvolvedor: Edmar Moretti edmar.moretti@mma.gov.br
@@ -24,13 +24,12 @@ Você deve ter recebido uma cópia da Licença Pública Geral do
 GNU junto com este programa; se não, escreva para a
 Free Software Foundation, Inc., no endereço
 59 Temple Street, Suite 330, Boston, MA 02111-1307 USA.
+
+Arquivo:
+
+i3geo/admin/js/ms_configura.js
 */
 YAHOO.namespace("example.container");
-/*
-Function: iniciaAdmin
-
-Inicializa as variáveis globais e checa o cadastro do editor do sistema de administração
-*/
 function initMenu()
 {
 	core_ativaPainelAjuda("ajuda","botaoAjuda");
@@ -61,12 +60,6 @@ function initMenu()
 	core_carregando("ativa");
 	core_pegaDados("buscando parâmetros...","../php/ms_configura.php?funcao=pegaParametrosConfigura","pegaParametros")
 }
-/*
-Function: pegaParametros
-
-Pega os parâmetros do ms_configura.php
-
-*/
 function pegaParametros(retorno)
 {
 	var ins = ""
@@ -87,11 +80,6 @@ function pegaParametros(retorno)
 	}
 	core_carregando("desativa");
 }
-/*
-Function - salva
-
-Salva o novo valor de uma variável
-*/
 function salva(variavel)
 {
 	if(variavel == "$postgis_mapa")

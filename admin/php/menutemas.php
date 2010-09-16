@@ -51,19 +51,30 @@ if($idioma == "")
 //faz a busca da função que deve ser executada
 switch (strtoupper($funcao))
 {
-	//verifica os editores
+	/*
+	Note:
+	
+	Valores que o parâmetro &funcao pode receber. Os parâmetros devem ser enviados na requisição em AJAX.
+	*/
 	case "VERIFICAEDITORES":
 		retornaJSON(verificaEditores($editores));
 		exit;
-	break;
-	
+	break;	
 	case "IMPORTARXMLMENU":
 		if(verificaEditores($editores) == "nao")
 		{echo "Vc nao e um editor cadastrado. Apenas os editores definidos em i3geo/ms_configura.php podem acessar o sistema de administracao.";exit;}
 		retornaJSON(importarXmlMenu());
 		exit;
 	break;
+	/*
+	Valor: PEGAMENUS
 	
+	Lista de menus contendo todas as colunas
+	
+	Retorno:
+	
+	{JSON}
+	*/	
 	case "PEGAMENUS":
 		if($idioma == "pt")
 		{$coluna = "nome_tema";}
@@ -73,7 +84,15 @@ switch (strtoupper($funcao))
 		retornaJSON($dados);
 		exit;
 	break;
-
+	/*
+	Valor: PEGAMENUS2
+	
+	Lista de menus contendo apenas colunas selecionadas
+	
+	Retorno:
+	
+	{JSON}
+	*/	
 	case "PEGAMENUS2":
 		if($idioma == "pt")
 		{$coluna = "nome_menu";}
@@ -83,14 +102,30 @@ switch (strtoupper($funcao))
 		retornaJSON($dados);
 		exit;
 	break;
-
+	/*
+	Valor: PEGATAGS
+	
+	Lista de tags
+	
+	Retorno:
+	
+	{JSON}
+	*/	
 	case "PEGATAGS":
 		$sql = "SELECT * from i3geoadmin_tags order by nome";
 		retornaJSON(pegaDados($sql));
 		exit;
-		break;
-		
-		case "PEGATAGSPORMAPFILE":
+	break;
+	/*
+	Valor: PEGATAGSPORMAPFILE
+	
+	Lista de tags por mapfile
+	
+	Retorno:
+	
+	{JSON}
+	*/		
+	case "PEGATAGSPORMAPFILE":
 		if($idioma == "pt")
 		{$coluna = "nome_tema";}
 		else
@@ -121,21 +156,65 @@ switch (strtoupper($funcao))
 		retornaJSON($temas);
 		exit;
 	break;	
+	/*
+	Valor: PEGAPERFIS
 	
+	Lista de perfis
+	
+	Retorno:
+	
+	{JSON}
+	*/			
 	case "PEGAPERFIS":
 		$dados = pegaDados('SELECT * from i3geoadmin_perfis order by perfil');
 		if(count($dados) == 0){$dados = array("id_perfil"=>"","perfil"=>"");}
 		retornaJSON($dados);
 		exit;
 	break;
-
+	/*
+	Valor: ALTERAMENUS
+	
+	Altera os dados de um menu
+	
+	Parametros:
+	
+	nome
+	
+	desc
+	
+	id
+	
+	aberto
+	
+	perfil
+	
+	publicado_menu
+	
+	en
+	
+	es
+	
+	it;
+	
+	Retorno:
+	
+	{JSON}
+	*/
 	case "ALTERAMENUS":
 		if(verificaEditores($editores) == "nao")
 		{echo "Vc nao e um editor cadastrado. Apenas os editores definidos em i3geo/ms_configura.php podem acessar o sistema de administracao.";exit;}
 		retornaJSON(alteraMenus());
 		exit;
 	break;
-
+	/*
+	Valor: PEGAGRUPOS
+	
+	Lista de grupos com todas as colunas
+	
+	Retorno:
+	
+	{JSON}
+	*/
 	case "PEGAGRUPOS":
 		$nome = "nome_grupo";
 		if($idioma != "pt")
@@ -144,7 +223,15 @@ switch (strtoupper($funcao))
 		retornaJSON($dados);
 		exit;
 	break;
-
+	/*
+	Valor: PEGAGRUPOS2
+	
+	Lista de grupos contendo as colunas principais
+	
+	Retorno:
+	
+	{JSON}
+	*/
 	case "PEGAGRUPOS2":
 		$nome = "nome_grupo";
 		if($idioma != "pt")
@@ -153,20 +240,58 @@ switch (strtoupper($funcao))
 		retornaJSON($dados);
 		exit;
 	break;
-
+	/*
+	Valor: ALTERAGRUPOS
+	
+	Altera os dados de um grupo
+	
+	Parametros:
+	
+	nome
+	
+	desc
+	
+	id
+	
+	en
+	
+	es
+	
+	it
+	
+	Retorno:
+	
+	{JSON}
+	*/
 	case "ALTERAGRUPOS":
 		if(verificaEditores($editores) == "nao")
 		{echo "Vc nao e um editor cadastrado. Apenas os editores definidos em i3geo/ms_configura.php podem acessar o sistema de administracao.";exit;}
 		retornaJSON(alteraGrupos());
 		exit;
 	break;
-
+	/*
+	Valor: PEGASUBGRUPOS
+	
+	Lista de subgrupos com todas as colunas
+	
+	Retorno:
+	
+	{JSON}
+	*/
 	case "PEGASUBGRUPOS":
 		$dados = pegaDados('SELECT * from i3geoadmin_subgrupos order by nome_subgrupo');
 		retornaJSON($dados);
 		exit;
 	break;
+	/*
+	Valor: PEGASUBGRUPOS2
 	
+	Lista de grupos contendo as colunas principais
+	
+	Retorno:
+	
+	{JSON}
+	*/	
 	case "PEGASUBGRUPOS2":
 		$nome = "nome_subgrupo";
 		if($idioma != "pt")
@@ -175,20 +300,62 @@ switch (strtoupper($funcao))
 		retornaJSON($dados);
 		exit;
 	break;
+	/*
+	Valor: ALTERASUBGRUPOS
 	
+	Altera os dados de um subgrupo
+	
+	Parametros:
+	
+	nome
+	
+	desc
+	
+	i
+	
+	en
+	
+	es
+	
+	it
+	
+	Retorno:
+	
+	{JSON}
+	*/	
 	case "ALTERASUBGRUPOS":
 		if(verificaEditores($editores) == "nao")
 		{echo "Vc nao e um editor cadastrado. Apenas os editores definidos em i3geo/ms_configura.php podem acessar o sistema de administracao.";exit;}
 		retornaJSON(alteraSubGrupos());
 		exit;
 	break;
-
+	/*
+	Valor: PEGATEMAS
+	
+	Lista de temas com todas as colunas
+	
+	Retorno:
+	
+	{JSON}
+	*/
 	case "PEGATEMAS":
 		$sql = "SELECT * from i3geoadmin_temas where id_tema = '$id_tema'";
 		retornaJSON(pegaDados($sql));
 		exit;
 	break;
+	/*
+	Valor: PEGATEMAPORMAPFILE
 	
+	Lista os dados de um tema procurando registros com base no nome do mapfile
+	
+	Parametro:
+	
+	codigo_tema - nome do mapfile sem ".map"
+	
+	Retorno:
+	
+	{JSON}
+	*/	
 	case "PEGATEMAPORMAPFILE":
 		$sql = "SELECT * from i3geoadmin_temas where codigo_tema = '$codigo_tema'";
 		$dados = pegaDados($sql);
@@ -202,12 +369,54 @@ switch (strtoupper($funcao))
 		retornaJSON($dados);
 		exit;
 	break;	
+	/*
+	Valor: PEGATEMAS2
 	
+	Lista de temas com as colunas principais
+	
+	Retorno:
+	
+	{JSON}
+	*/	
 	case "PEGATEMAS2":
 		retornaJSON(pegaTemas2());
 		exit;
 	break;
+	/*
+	Valor: ALTERATEMAS
 	
+	Altera os dados de um tema
+	
+	Parametros:
+	
+	nome
+	
+	desc
+	
+	id
+	
+	codigo
+	
+	tipoa
+	
+	download
+	
+	ogc
+	
+	kml
+	
+	link
+	
+	tags
+	
+	kmz
+	
+	locaplic
+	
+	Retorno:
+	
+	{JSON}
+	*/	
 	case "ALTERATEMAS":
 		//$r será igual ao novo id criado, no caso de inserção de um novo tema
 		if(verificaEditores($editores) == "nao")
@@ -219,7 +428,21 @@ switch (strtoupper($funcao))
 		retornaJSON(pegaDados("select * from i3geoadmin_temas where id_tema = '$id'"));
 		exit;
 	break;
+	/*
+	Valor: ALTERATAGS
 	
+	Altera os dados de um tag
+	
+	Parametros:
+	
+	nome
+	
+	id
+	
+	Retorno:
+	
+	{JSON}
+	*/	
 	case "ALTERATAGS":
 		if(verificaEditores($editores) == "nao")
 		{echo "Vc nao e um editor cadastrado. Apenas os editores definidos em i3geo/ms_configura.php podem acessar o sistema de administracao.";exit;}
@@ -228,7 +451,21 @@ switch (strtoupper($funcao))
 		retornaJSON(pegaDados($sql));
 		exit;
 	break;
+	/*
+	Valor: ALTERAPERFIS
 	
+	Altera os dados de um perfil
+	
+	Parametros:
+	
+	perfil
+	
+	id
+	
+	Retorno:
+	
+	{JSON}
+	*/	
 	case "ALTERAPERFIS":
 		if(verificaEditores($editores) == "nao")
 		{echo "Vc nao e um editor cadastrado. Apenas os editores definidos em i3geo/ms_configura.php podem acessar o sistema de administracao.";exit;}
@@ -301,7 +538,7 @@ switch (strtoupper($funcao))
 		exit;
 		break;
 		
-		case "listaMapsTemas":
+	case "LISTAMAPSTEMAS":
 		retornaJSON(listaMapsTemas());
 		exit;
 	break;

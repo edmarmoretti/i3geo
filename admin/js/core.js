@@ -1,13 +1,13 @@
 /*
 Title: core.js
 
-Carrega os arquivos js e css básicos utilizados pela interface de administração e define algumas funções de uso geral
+Funções de uso comum das interfaces dos editores
 
-File: i3geo/admin/js/core.js
+Licenca:
 
-About: Licença
+GPL2
 
-I3Geo Interface Integrada de Ferramentas de Geoprocessamento para Internet
+i3Geo Interface Integrada de Ferramentas de Geoprocessamento para Internet
 
 Direitos Autorais Reservados (c) 2006 Ministério do Meio Ambiente Brasil
 Desenvolvedor: Edmar Moretti edmar.moretti@mma.gov.br
@@ -24,7 +24,12 @@ Você deve ter recebido uma cópia da Licença Pública Geral do
 GNU junto com este programa; se não, escreva para a
 Free Software Foundation, Inc., no endereço
 59 Temple Street, Suite 330, Boston, MA 02111-1307 USA.
+
+Arquivo:
+
+i3geo/admin/js/core.js
 */
+
 /*
 Function: $i
 
