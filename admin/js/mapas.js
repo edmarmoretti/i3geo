@@ -30,6 +30,13 @@ Arquivo:
 i3geo/admin/js/mapas.js
 */
 YAHOO.namespace("example.container");
+/*
+Function: initMenu
+
+Inicializa o editor
+
+<ALTERARMAPA>
+*/
 function initMenu()
 {
 	core_ativaBotaoAdicionaLinha("../php/mapas.php?funcao=alterarMapa")
@@ -38,10 +45,24 @@ function initMenu()
 	//core_pegaPerfis("pegaMapas()");
 	pegaMapas();
 }
+/*
+Function: pegaMapas
+
+Obtém a lista de mapas
+
+<PEGAMAPAS>
+*/
 function pegaMapas()
 {
 	core_pegaDados("buscando mapas...","../php/mapas.php?funcao=pegaMapas","montaTabela")
 }
+/*
+Function: montaTabela
+
+Monta a tabela com as opções de edição de cada registro
+
+<PEGADADOSMAPA>
+*/
 function montaTabela(dados)
 {
     YAHOO.example.InlineCellEditing = new function()
@@ -239,6 +260,13 @@ function excluiLinha(id,row)
 	var sUrl = "../php/mapas.php?funcao=excluirMapa&id="+id;
 	core_excluiLinha(sUrl,row,mensagem)
 }
+/*
+Function: gravaDadosMapa
+
+Aplica as alterações feitas em um mapa
+
+<ALTERARMAPA>
+*/
 function gravaDadosMapa(id,recordid)
 {
 	var campos = new Array("publicado","ordem","perfil","ligados","temas","desc","ext","imagem","linkdireto","nome","outros")

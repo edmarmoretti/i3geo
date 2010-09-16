@@ -31,9 +31,11 @@ i3geo/admin/js/mapfiles.js
 */
 YAHOO.namespace("example.container");
 /*
-Function: iniciaAdmin
+Function: initMenu
 
-Inicializa as variáveis globais e checa o cadastro do editor do sistema de administração
+Inicializa o editor
+
+<PEGAPARAMETROSCONFIGURA>
 */
 function initMenu()
 {
@@ -78,9 +80,11 @@ function pegaParametros(retorno)
 	core_carregando("desativa");
 }
 /*
-Function - salva
+Function: salva
 
 Salva o novo valor de uma variável
+
+<SALVACONFIGURA>
 */
 function salva(variavel)
 {

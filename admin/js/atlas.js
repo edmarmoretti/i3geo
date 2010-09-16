@@ -30,6 +30,11 @@ Arquivo:
 i3geo/admin/js/atlas.js
 */
 YAHOO.namespace("example.container");
+/*
+Function: initMenu
+
+Inicializa o editor
+*/
 function initMenu()
 {
 	ativaBotaoAdicionaAtlas("../php/atlas.php?funcao=alterarAtlas","adiciona")
@@ -62,10 +67,24 @@ function ativaBotaoAdicionaAtlas(sUrl,idBotao)
 	//cria o botão de adição de um novo menu
 	var adiciona = new YAHOO.widget.Button(idBotao,{ onclick: { fn: adiciona } });
 }
+/*
+Function: pegaAtlas
+
+Obtém a lista de atlas
+
+<PEGAATLAS>
+*/
 function pegaAtlas()
 {
 	core_pegaDados("buscando atlas...","../php/atlas.php?funcao=pegaAtlas","montaArvore")
 }
+/*
+Function: montaArvore
+
+Monta a árvore de edição
+
+<PEGAPRANCHAS>
+*/
 function montaArvore(dados)
 {
 	YAHOO.example.treeExample = new function()
@@ -138,6 +157,13 @@ function adicionaNosTemas(no,dados,redesenha)
 	}
 	if(redesenha){tree.draw();}
 }
+/*
+Function: adicionaNosPranchas
+
+Mostra os nós de uma prancha
+
+<PEGATEMAS>
+*/
 function adicionaNosPranchas(no,dados,redesenha)
 {
 	function temaIconMode()
@@ -190,7 +216,6 @@ function adicionaNosPranchas(no,dados,redesenha)
 	}
 	if(redesenha){tree.draw();}
 }
-
 function adicionaNosAtlas(dados,redesenha)
 {
 	var root = tree.getRoot();
@@ -205,6 +230,17 @@ function adicionaNosAtlas(dados,redesenha)
 	}
 	if(redesenha){tree.draw();}
 }
+/*
+Function: editar
+
+Abre o editor de um nó
+
+<PEGADADOSATLAS>
+
+<PEGADADOSPRANCHA>
+
+<PEGADADOSTEMA>
+*/
 function editar(tipo,id)
 {
 	core_carregando("ativa");
@@ -357,6 +393,17 @@ function sobeDesce(movimento,tipo,id)
 		core_makeRequest(sUrl,callback)
 	}
 }
+/*
+Function: excluir
+
+Exclui um elemento do atlas
+
+<EXCLUIRATLAS>
+
+<EXCLUIRPRANCHA>
+
+<EXCLUIRTEMA>
+*/
 function excluir(tipo,id)
 {
 	var mensagem = " excluindo o registro do id= "+id;
@@ -377,6 +424,13 @@ function excluir(tipo,id)
 	}
 	core_excluiNoTree(sUrl,no,mensagem)
 }
+/*
+Function: adicionarTema
+
+Adiciona um novo tema
+
+<ALTERARTEMA>
+*/
 function adicionarTema(id)
 {
 	var mensagem = " adicionando tema...";
@@ -394,6 +448,13 @@ function adicionarTema(id)
 	};
 	core_makeRequest(sUrl,callback)
 }
+/*
+Function: adicionarPrancha
+
+Adiciona uma nova prancha
+
+<ALTERARPRANCHA>
+*/
 function adicionarPrancha(id)
 {
 	var mensagem = " adicionando prancha...";
@@ -411,6 +472,17 @@ function adicionarPrancha(id)
 	};
 	core_makeRequest(sUrl,callback)
 }
+/*
+Function: gravaDados
+
+Altera dados de um elemento do Atlas
+
+<ALTERARATLAS>
+
+<ALTERARPRANCHA>
+
+<ALTERARTEMA>
+*/
 function gravaDados(tipo,id)
 {
 	if(tipo == "atlas")

@@ -129,7 +129,11 @@ objalignment = [
 ];
 
 YAHOO.namespace("example.container");
+/*
+Function: initMenu
 
+Inicializa a árvore de edição
+*/
 function initMenu()
 {
 	ativaBotaoAdicionaMapfile("adiciona")
@@ -159,6 +163,13 @@ function ativaBotaoAdicionaMapfile(idBotao)
 	//cria o botão de adição de um novo menu
 	var adiciona = new YAHOO.widget.Button(idBotao,{ onclick: { fn: adiciona } });
 }
+/*
+Function: montaArvore
+
+Monta a árvore
+
+<PEGALAYERS>
+*/
 function montaArvore()
 {
 	YAHOO.example.treeExample = new function()
@@ -231,6 +242,13 @@ function testarMapfile(codigoMap)
 {
 	window.open("../../testamapfile.php?map="+codigoMap+".map")
 }
+/*
+Function: montaRaizTema
+
+Monta as opções de edição básicas de um LAYER
+
+<LISTACLASSES>
+*/
 function montaRaizTema(no,dados)
 {
 	var codigoMap = no.data.codigoMap;
@@ -283,6 +301,13 @@ function montaRaizTema(no,dados)
 	}
 	tree.draw();
 }
+/*
+Function: montaParametrosTemas
+
+Complementa as opções de edição básicas de um LAYER
+
+<LISTAESTILOS>
+*/
 function montaParametrosTemas(no,dados,redesenha)
 {
 	var codigoMap = no.data.codigoMap;
@@ -443,6 +468,13 @@ function editorDeTexto(codigoMap)
 	}; 
 	core_makeRequest(sUrl,callback)
 }
+/*
+Function: adicionaNovoMapfile
+
+Adiciona um novo mapfile
+
+<CRIARNOVOMAP>
+*/
 function adicionaNovoMapfile()
 {
 	core_carregando("ativa");
@@ -478,6 +510,13 @@ function adicionaNovoMapfile()
 	}; 
 	core_makeRequest(sUrl,callback)
 }
+/*
+Function: adicionaNovoLayer
+
+Adiciona um novo layer
+
+<CRIARNOVOLAYER>
+*/
 function adicionaNovoLayer(codigoMap)
 {
 	core_carregando("ativa");
@@ -509,6 +548,13 @@ function adicionaNovoLayer(codigoMap)
 	}; 
 	core_makeRequest(sUrl,callback)
 }
+/*
+Function: adicionaNovaClasse
+
+Adiciona uma nova classe
+
+<CRIARNOVACLASSE>
+*/
 function adicionaNovaClasse(codigoMap,codigoLayer,indiceClasse)
 {
 	core_carregando("ativa");
@@ -540,6 +586,13 @@ function adicionaNovaClasse(codigoMap,codigoLayer,indiceClasse)
 	}; 
 	core_makeRequest(sUrl,callback)
 }
+/*
+Function: classesAuto
+
+Adiciona classes automaticamente
+
+<AUTOCLASSESLAYER>
+*/
 function classesAuto(codigoMap,codigoLayer)
 {
 	function on_editorCheckBoxChange(p_oEvent)
@@ -628,6 +681,13 @@ function classesAuto(codigoMap,codigoLayer)
 	}
 	YAHOO.example.container.panelEditorAutoClasses.show();
 }
+/*
+Function: adicionaNovoEstilo
+
+Adiciona um novo estilo
+
+<CRIARNOVOESTILO>
+*/
 function adicionaNovoEstilo(codigoMap,codigoLayer,indiceClasse)
 {
 	core_carregando("ativa");
@@ -659,6 +719,13 @@ function adicionaNovoEstilo(codigoMap,codigoLayer,indiceClasse)
 	}; 
 	core_makeRequest(sUrl,callback)
 }
+/*
+Function: excluirMapfile
+
+Exclui um mapfile
+
+<EXCLUIRMAPFILE>
+*/
 function excluirMapfile(codigoMap)
 {
 	var mensagem = " excluindo "+codigoMap;
@@ -666,6 +733,13 @@ function excluirMapfile(codigoMap)
 	var sUrl = "../php/editormapfile.php?funcao=excluirMapfile&codigoMap="+codigoMap;
 	core_excluiNoTree(sUrl,no,mensagem)	
 }
+/*
+Function: excluirLayer
+
+Exclui um layer
+
+<EXCLUIRLAYER>
+*/
 function excluirLayer(codigoMap,codigoLayer)
 {
 	var mensagem = " excluindo "+codigoLayer;
@@ -673,6 +747,13 @@ function excluirLayer(codigoMap,codigoLayer)
 	var sUrl = "../php/editormapfile.php?funcao=excluirLayer&codigoMap="+codigoMap+"&codigoLayer="+codigoLayer;
 	core_excluiNoTree(sUrl,no,mensagem)	
 }
+/*
+Function: excluirClasse
+
+Exclui uma classe
+
+<EXCLUIRCLASSE>
+*/
 function excluirClasse(codigoMap,codigoLayer,indiceClasse)
 {
 	var handleYes = function()
@@ -709,6 +790,13 @@ function excluirClasse(codigoMap,codigoLayer,indiceClasse)
 	var largura = "300"
 	core_dialogoContinua(handleYes,handleNo,mensagem,largura)
 }
+/*
+Function: excluirEstilo
+
+Exclui um estilo
+
+<EXCLUIRESTILO>
+*/
 function excluirEstilo(codigoMap,codigoLayer,indiceClasse,indiceEstilo)
 {
 	var handleYes = function()
@@ -745,36 +833,78 @@ function excluirEstilo(codigoMap,codigoLayer,indiceClasse,indiceEstilo)
 	var largura = "300"
 	core_dialogoContinua(handleYes,handleNo,mensagem,largura)
 }
+/*
+Function: editorConexao
+
+Abre o editor de conexões
+
+<PEGACONEXAO>
+*/
 function editorConexao(codigoMap,codigoLayer)
 {
 	core_montaEditor("","600px","500px")
 	var sUrl = "../php/editormapfile.php?funcao=pegaConexao&codigoMap="+codigoMap+"&codigoLayer="+codigoLayer;
 	core_pegaDados("Obtendo dados...",sUrl,"montaEditorConexao")
 }
+/*
+Function: editorMetadados
+
+Abre o editor de metadados
+
+<PEGAMETADADOS>
+*/
 function editorMetadados(codigoMap,codigoLayer)
 {
 	core_montaEditor("","600px","500px")
 	var sUrl = "../php/editormapfile.php?funcao=pegaMetadados&codigoMap="+codigoMap+"&codigoLayer="+codigoLayer;
 	core_pegaDados("Obtendo dados...",sUrl,"montaEditorMetadados")
 }
+/*
+Function: editorGeral
+
+Abre o editor de dados gerais de um layer
+
+<PEGAGERAL>
+*/
 function editorGeral(codigoMap,codigoLayer)
 {
 	core_montaEditor("","600px","500px")
 	var sUrl = "../php/editormapfile.php?funcao=pegaGeral&codigoMap="+codigoMap+"&codigoLayer="+codigoLayer;
 	core_pegaDados("Obtendo dados...",sUrl,"montaEditorGeral")
 }
+/*
+Function: editorClasseGeral
+
+Abre o editor de dados gerais de uma classe
+
+<PEGAGERAL>
+*/
 function editorClasseGeral(codigoMap,codigoLayer,indiceClasse)
 {
 	core_montaEditor("","600px","500px")
 	var sUrl = "../php/editormapfile.php?funcao=pegaClasseGeral&codigoMap="+codigoMap+"&codigoLayer="+codigoLayer+"&indiceClasse="+indiceClasse;
 	core_pegaDados("Obtendo dados...",sUrl,"montaEditorClasseGeral")
 }
+/*
+Function: editorClasseLabel
+
+Abre o editor dos labels de um layer
+
+<PEGACLASSELABEL>
+*/
 function editorClasseLabel(codigoMap,codigoLayer,indiceClasse)
 {
 	core_montaEditor("","600px","500px")
 	var sUrl = "../php/editormapfile.php?funcao=pegaClasseLabel&codigoMap="+codigoMap+"&codigoLayer="+codigoLayer+"&indiceClasse="+indiceClasse;
 	core_pegaDados("Obtendo dados...",sUrl,"montaEditorClasseLabel")
 }
+/*
+Function: editorEstilo
+
+Abre o editor de dados gerais de um estilo
+
+<PEGAESTILO>
+*/
 function editorEstilo(codigoMap,codigoLayer,indiceClasse,indiceEstilo)
 {
 	core_montaEditor("","600px","500px")
@@ -1206,6 +1336,21 @@ function montaEditorEstilo(dados)
 	{salvarDadosEditor('estilo',dados.codigoMap,dados.codigoLayer,dados.indiceClasse,dados.indiceEstilo)}
 	new YAHOO.widget.Button("salvarEditor",{ onclick: { fn: temp }});	
 }
+/*
+Function: salvarDadosEditor
+
+Altera um mapfile conforme o editor específico de uma característica
+
+<alterarConexao>
+
+<alterarMetadados>
+
+<alterarGeral>
+
+<alterarClasseLabel>
+
+<alterarEstilo>
+*/
 function salvarDadosEditor(tipo,codigoMap,codigoLayer,indiceClasse,indiceEstilo,testar)
 {
 	if(arguments.length < 6){var testar = false;}

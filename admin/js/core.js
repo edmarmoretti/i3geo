@@ -302,6 +302,8 @@ function: core_pegaPerfis
 
 Pega a lista de perfis
 
+<PEGAPERFIS>
+
 Parameters:
 
 funcao - (opcional) string com o nome da funcao que será executada após a chamada ajax ter tido sucesso
@@ -343,6 +345,8 @@ function core_pegaPerfis(funcao)
 function: core_pegaMapfiles
 
 Pega a lista de mapfiles
+
+<LISTAMAPSTEMAS>
 
 Parameters:
 
@@ -449,6 +453,8 @@ Function: core_comboPranchas
 
 Cria um combo para escolha de pranchas de um atlas
 
+<PEGAPRANCHAS>
+
 Parameters:
 
 onde - id do elemento que receberá o combo
@@ -489,6 +495,8 @@ function core_comboPranchas(onde,id,marcar,funcao,id_atlas)
 Function: core_comboGrupos
 
 Cria um combo para escolha de um grupo
+
+<PEGAGRUPOS>
 
 Parameters:
 
@@ -531,6 +539,8 @@ Function: core_comboSubGrupos
 
 Cria um combo para escolha de um sub-grupo
 
+<PEGASUBGRUPOS>
+
 Parameters:
 
 onde - id do elemento que receberá o combo
@@ -571,6 +581,8 @@ function core_comboSubGrupos(onde,id,marcar,funcao)
 Function: core_comboTemas
 
 Cria um combo para escolha de um tema
+
+<PEGATEMAS2>
 
 Parameters:
 
@@ -613,6 +625,8 @@ function core_comboTemas(onde,id,marcar,funcao)
 function: core_pegaTags
 
 Pega a lista de tags
+
+<PEGATAGS>
 
 Parameters:
 

@@ -36,7 +36,7 @@ i3geo/admin/php/menutemas.php
 
 Parametros:
 
-O parâmetro principal é "funcao", que define qual operação será executada, por exemplo, arvore.php?funcao=pegaMenus.
+O parâmetro principal é "funcao", que define qual operação será executada, por exemplo, menutemas.php?funcao=pegaMenus
 
 Cada operação possuí seus próprios parâmetros, que devem ser enviados também na requisição da operação.
 
@@ -194,7 +194,7 @@ switch (strtoupper($funcao))
 	
 	es
 	
-	it;
+	it
 	
 	Retorno:
 	
@@ -311,7 +311,7 @@ switch (strtoupper($funcao))
 	
 	desc
 	
-	i
+	id
 	
 	en
 	

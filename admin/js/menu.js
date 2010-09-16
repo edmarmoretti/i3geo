@@ -29,11 +29,25 @@ Arquivo:
 
 i3geo/admin/js/menus.js
 */
+/*
+Function: initEditorMenu
+
+Inicializa o editor
+
+<ALTERAMENUS>
+*/
 function initEditorMenu()
 {
 	core_ativaBotaoAdicionaLinha("../php/menutemas.php?funcao=alteraMenus&publicado_menu=&perfil=&nome=&desc=&id=&aberto=","adicionaNovoMenu","pegaMenus_M")
 	pegaMenus_M()
 }
+/*
+Function: pegaMenus_M
+
+Obtém a lista de menus
+
+<PEGAMENUS>
+*/
 function pegaMenus_M()
 {
 	core_carregando("ativa");
@@ -144,6 +158,13 @@ function montaTabela_M(dados)
     };
     core_carregando("desativa");
 }
+/*
+Function: gravaLinha_M
+
+Aplica as alterações em um menu
+
+<ALTERAMENUS>
+*/
 function gravaLinha_M(row)
 {
 	var r = myDataTable.getRecordSet().getRecord(row);

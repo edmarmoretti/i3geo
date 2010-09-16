@@ -29,12 +29,25 @@ Arquivo:
 
 i3geo/admin/js/grupos.js
 */
+/*
+Function: initEditorGrupos
 
+Inicializa o editor
+
+<ALTERAGRUPOS>
+*/
 function initEditorGrupos()
 {
 	core_ativaBotaoAdicionaLinha("../php/menutemas.php?funcao=alteraGrupos","adicionaNovoGrupo","pegaGrupos_G")
 	pegaGrupos_G()
 }
+/*
+Function: pegaGrupos_G
+
+Obtém a lista de grupos
+
+<PEGAGRUPOS>
+*/
 function pegaGrupos_G()
 {
 	core_carregando("ativa");
@@ -139,6 +152,13 @@ function montaTabela_G(dados)
     };
     core_carregando("desativa");
 }
+/*
+Function: gravaLinha_G
+
+Aplica as alterações feitas em um registro
+
+<ALTERAGRUPOS>
+*/
 function gravaLinha_G(row)
 {
 	var r = myDataTable.getRecordSet().getRecord(row);

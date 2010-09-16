@@ -336,7 +336,6 @@ Group: Administração  {
       File: sistemas.js  (admin\js\sistemas.js)
       File: subgrupos.js  (admin\js\subgrupos.js)
       File: tags.js  (admin\js\tags.js)
-      File: temas.js  (admin\js\temas.js)
       File: webservices.js  (admin\js\webservices.js)
       }  # Group: Js
 

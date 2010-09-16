@@ -30,6 +30,13 @@ Arquivo:
 i3geo/admin/js/ms_configura.js
 */
 YAHOO.namespace("example.container");
+/*
+Function: initMenu
+
+Inicializa o editor
+
+<PEGAPARAMETROSCONFIGURA>
+*/
 function initMenu()
 {
 	core_ativaPainelAjuda("ajuda","botaoAjuda");
@@ -80,6 +87,13 @@ function pegaParametros(retorno)
 	}
 	core_carregando("desativa");
 }
+/*
+Function: salva
+
+Aplica as alterações feitas em uma variável
+
+<SALVACONFIGURA>
+*/
 function salva(variavel)
 {
 	if(variavel == "$postgis_mapa")

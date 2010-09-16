@@ -30,6 +30,13 @@ Arquivo:
 i3geo/admin/js/sistemas.js
 */
 YAHOO.namespace("example.container");
+/*
+Function: initMenu
+
+Inicializa o editor
+
+<ALTERARSISTEMAS>
+*/
 function initMenu()
 {
 	ativaBotaoAdicionaRaiz("../php/sistemas.php?funcao=alterarSistemas","adiciona")
@@ -62,10 +69,24 @@ function ativaBotaoAdicionaRaiz(sUrl,idBotao)
 	//cria o botão de adição de um novo menu
 	var adiciona = new YAHOO.widget.Button(idBotao,{ onclick: { fn: adiciona } });
 }
+/*
+Function: pegaSistemas
+
+Obtém a lista de sistemas
+
+<PEGASISTEMAS>
+*/
 function pegaSistemas()
 {
 	core_pegaDados("buscando sistemas...","../php/sistemas.php?funcao=pegaSistemas","montaArvore")
 }
+/*
+Function: montaArvore
+
+Monta a árvore de edição
+
+<PEGAFUNCOES>
+*/
 function montaArvore(dados)
 {
 	YAHOO.example.treeExample = new function()
@@ -142,6 +163,15 @@ function adicionaNosRaiz(dados,redesenha)
 	}
 	if(redesenha){tree.draw();}
 }
+/*
+Function: editar
+
+Monta o editor específico de um nó
+
+<PEGAFUNCAO>
+
+<PEGASISTEMA>
+*/
 function editar(tipo,id)
 {
 	if(tipo == "funcao")
@@ -243,6 +273,15 @@ function montaDivFuncoes(i)
 	ins += core_geraLinhas(param)	
 	return(ins)
 }
+/*
+Function: excluir
+
+Exclui um nó específico
+
+<EXCLUIRSISTEMA>
+
+<EXCLUIRFUNCAO>
+*/
 function excluir(tipo,id)
 {
 	var mensagem = " excluindo o registro do id= "+id;
@@ -258,6 +297,13 @@ function excluir(tipo,id)
 	}
 	core_excluiNoTree(sUrl,no,mensagem)
 }
+/*
+Function: adicionarFuncao
+
+Adiciona uma nova função
+
+<ALTERARFUNCOES>
+*/
 function adicionarFuncao(id)
 {
 	var mensagem = " adicionando função...";
@@ -276,6 +322,13 @@ function adicionarFuncao(id)
 	
 	core_makeRequest(sUrl,callback)
 }
+/*
+Function: gravaDadosFuncao
+
+Altera uma função
+
+<ALTERARFUNCOES>
+*/
 function gravaDadosFuncao(id)
 {
 	var campos = new Array("perfil","w","h","abrir","nome")
@@ -314,6 +367,13 @@ function gravaDadosFuncao(id)
 	}; 
 	core_makeRequest(sUrl,callback)
 }
+/*
+Function: gravaDadosSistema
+
+Altera um sistema
+
+<ALTERARSISTEMAS>
+*/
 function gravaDadosSistema(id)
 {
 	var campos = new Array("perfil","nome","publicado")

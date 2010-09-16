@@ -30,6 +30,13 @@ Arquivo:
 i3geo/admin/js/perfis.js
 */
 YAHOO.namespace("example.container");
+/*
+Function: initMenu
+
+Inicializa o editor
+
+<ALTERAPERFIS>
+*/
 function initMenu()
 {
 	core_ativaBotaoAdicionaLinha("../php/menutemas.php?funcao=alteraPerfis")
@@ -37,6 +44,13 @@ function initMenu()
 	core_ativaPainelAjuda("ajuda","botaoAjuda");
 	pegaPerfis();
 }
+/*
+Function: pegaPerfis
+
+Obtém a lista de perfis
+
+<PEGAPERFIS>
+*/
 function pegaPerfis()
 {
 	core_pegaDados("buscando perfis...","../php/menutemas.php?funcao=pegaPerfis","montaTabela")
@@ -138,6 +152,13 @@ function montaTabela(dados)
     };
     core_carregando("desativa");
 }
+/*
+Function: gravaLinha
+
+Aplica as alterações feitas em um perfil
+
+<ALTERAPERFIS>
+*/
 function gravaLinha(row)
 {
 	var r = myDataTable.getRecordSet().getRecord(row);

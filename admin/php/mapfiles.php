@@ -36,7 +36,7 @@ i3geo/admin/php/mapfiles.php
 
 Parametros:
 
-O parâmetro principal é "funcao", que define qual operação será executada, por exemplo, arvore.php?funcao=pegaGrupos.
+O parâmetro principal é "funcao", que define qual operação será executada, por exemplo, mapfiles.php?funcao=PEGAPARAMETROSCONFIGURA
 
 Cada operação possuí seus próprios parâmetros, que devem ser enviados também na requisição da operação.
 

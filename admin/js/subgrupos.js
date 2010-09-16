@@ -30,11 +30,25 @@ Arquivo:
 i3geo/admin/js/subgrupos.js
 */
 //YAHOO.namespace("example.container");
+/*
+Function: initEditorSubGrupos
+
+Inicializa o editor
+
+<ALTERASUBGRUPOS>
+*/
 function initEditorSubGrupos()
 {
 	core_ativaBotaoAdicionaLinha("../php/menutemas.php?funcao=alteraSubGrupos","adicionaNovoSubGrupo","pegaSubGrupos_S")
 	pegaSubGrupos_S()
 }
+/*
+Function: pegaSubGrupos_S
+
+Obtém a lista de subgrupos
+
+<PEGASUBGRUPOS>
+*/
 function pegaSubGrupos_S()
 {
 	core_carregando("ativa");
@@ -141,6 +155,13 @@ function montaTabela_S(dados)
     };
     core_carregando("desativa");
 }
+/*
+Function: gravaLinha_S
+
+Aplica as alterações em um registro
+
+<ALTERASUBGRUPOS>
+*/
 function gravaLinha_S(row)
 {
 	var r = myDataTable.getRecordSet().getRecord(row);

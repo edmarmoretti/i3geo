@@ -34,7 +34,7 @@ i3geo/admin/php/webservices.php
 
 Parametros:
 
-O parâmetro principal é "funcao", que define qual operação será executada, por exemplo, arvore.php?funcao=pegaGrupos.
+O parâmetro principal é "funcao", que define qual operação será executada, por exemplo, webservices.php?funcao=pegaws
 
 Cada operação possuí seus próprios parâmetros, que devem ser enviados também na requisição da operação.
 

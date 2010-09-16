@@ -30,6 +30,13 @@ Arquivo:
 i3geo/admin/js/webservices.js
 */
 YAHOO.namespace("example.container");
+/*
+Function: initMenu
+
+Inicializa o editor
+
+<ALTERARWS>
+*/
 function initMenu()
 {
 	core_ativaBotaoAdicionaLinha("../php/webservices.php?funcao=alterarWS","adiciona")
@@ -37,10 +44,24 @@ function initMenu()
 	core_ativaPainelAjuda("ajuda","botaoAjuda");
 	pegaWS();
 }
+/*
+Function: pegaWS
+
+Obtém a lista de WS
+
+<PEGAWS>
+*/
 function pegaWS()
 {
 	core_pegaDados("buscando endereços...","../php/webservices.php?funcao=pegaWS","montaTabela")
 }
+/*
+Function: montaTabela
+
+Monta a tabela de edição
+
+<PEGADADOS>
+*/
 function montaTabela(dados)
 {
     YAHOO.example.InlineCellEditing = new function()
@@ -203,6 +224,13 @@ function excluiLinha(id,row)
 	var sUrl = "../php/webservices.php?funcao=excluir&id="+id;
 	core_excluiLinha(sUrl,row,mensagem)
 }
+/*
+Function: gravaDados
+
+Aplica as alterações feitas em um WS
+
+<ALTERARWS>
+*/
 function gravaDados(id,recordid)
 {
 	var campos = new Array("desc","nome","link","tipo","autor")

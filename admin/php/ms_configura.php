@@ -34,7 +34,7 @@ i3geo/admin/php/ms_configura.php
 
 Parametros:
 
-O parâmetro principal é "funcao", que define qual operação será executada, por exemplo, arvore.php?funcao=pegaGrupos.
+O parâmetro principal é "funcao", que define qual operação será executada, por exemplo, ms_configura.php?funcao=PEGAPARAMETROSCONFIGURA
 
 Cada operação possuí seus próprios parâmetros, que devem ser enviados também na requisição da operação.
 

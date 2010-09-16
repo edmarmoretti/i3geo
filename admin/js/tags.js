@@ -30,6 +30,13 @@ Arquivo:
 i3geo/admin/js/tags.js
 */
 YAHOO.namespace("example.container");
+/*
+Function: initMenu
+
+Inicializa o editor
+
+<ALTERATAGS>
+*/
 function initMenu()
 {
 	core_ativaBotaoAdicionaLinha("../php/menutemas.php?funcao=alteraTags","adiciona")
@@ -37,6 +44,13 @@ function initMenu()
 	core_ativaPainelAjuda("ajuda","botaoAjuda");
 	pegaTags();
 }
+/*
+Function: pegaTags
+
+Obtém a lista de tags
+
+<PEGATAGS>
+*/
 function pegaTags()
 {
 	core_pegaDados("buscando tags...","../php/menutemas.php?funcao=pegaTags","montaTabela")
@@ -137,6 +151,13 @@ function montaTabela(dados)
     };
     core_carregando("desativa");
 }
+/*
+Function: gravaLinha
+
+Aplica as alterações em um tag
+
+<ALTERATAGS>
+*/
 function gravaLinha(row)
 {
 	var r = myDataTable.getRecordSet().getRecord(row);
