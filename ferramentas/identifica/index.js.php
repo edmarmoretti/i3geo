@@ -209,6 +209,10 @@ i3GEOF.identifica = {
 		var i = $i("i3GEOF.identifica_c").style;
 		i3GEO.janela.ULTIMOZINDEX++;
 		i.zIndex = 10000 + i3GEO.janela.ULTIMOZINDEX;
+		temp = "identifica";
+		if(i3GEO.Interface.ATIVAMENUCONTEXTO && i3GEO.Interface.ATUAL !== "googlemaps")
+		{temp = "identifica_contexto";}
+		i3GEO.util.mudaCursor(i3GEO.configura.cursores,temp,i3GEO.Interface.IDMAPA,i3GEO.configura.locaplic);
 	},
 	/*
 	Function: html

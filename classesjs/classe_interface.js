@@ -1376,19 +1376,25 @@ i3GEO.Interface = {
 		},
 		recalcPar: function(){
 			try{
-				var bounds,sw,ne;
+				var bounds,
+					sw,
+					ne,
+					escalaAtual = i3GEO.parametros.mapscale;
 				g_operacao = "";
 				g_tipoacao = "";
 				sw = i3GeoMapOverlay.getProjection().fromContainerPixelToLatLng(new google.maps.Point(0,i3GEO.parametros.h));
 				ne = i3GeoMapOverlay.getProjection().fromContainerPixelToLatLng(new google.maps.Point(i3GEO.parametros.w,0));
 				i3GEO.parametros.mapexten = sw.lng()+" "+sw.lat()+" "+ne.lng()+" "+ne.lat();
 				i3GEO.parametros.mapscale = i3GEO.Interface.googlemaps.calcescala();
+				//alert(i3GEO.parametros.mapscale)
 				sw = i3GeoMapOverlay.getProjection().fromContainerPixelToLatLng(new google.maps.Point(0,1));
 				ne = i3GeoMapOverlay.getProjection().fromContainerPixelToLatLng(new google.maps.Point(1,0));
-
 				i3GEO.parametros.pixelsize = sw.lng() - ne.lng();
 				if(i3GEO.parametros.pixelsize < 0)
 				{i3GEO.parametros.pixelsize = i3GEO.parametros.pixelsize * -1;}
+				
+				if (i3GEO.parametros.mapscale !== escalaAtual && escalaAtual !== 0)
+				{i3GEO.arvoreDeCamadas.atualizaFarol(i3GEO.parametros.mapscale);}	
 			}
 			catch(e){
 				i3GEO.parametros.mapexten = "0 0 0 0";
@@ -1422,7 +1428,7 @@ i3GEO.Interface = {
 			i3GeoMap.fitBounds(new google.maps.LatLngBounds(sw,ne));		
 		},
 		pan2ponto: function(x,y){
-			i3GeoMap.panTo(new google.maps.LatLng(x,y));
+			i3GeoMap.panTo(new google.maps.LatLng(y,x));
 		},
 		/*
 		Function: adicionaKml

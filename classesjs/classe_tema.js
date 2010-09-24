@@ -50,23 +50,27 @@ i3GEO.tema = {
 		//remove o tema do DOM e seus filhos
 		var layer,
 			indice,
+			p;
+		try{
 			p = document.getElementById("idx"+tema).parentNode.parentNode.parentNode;
-		do
-		{p.removeChild(p.childNodes[0]);}
-		while
-		(p.childNodes.length > 0);
-		p.parentNode.removeChild(p);
+			do
+			{p.removeChild(p.childNodes[0]);}
+			while
+			(p.childNodes.length > 0);
+			p.parentNode.removeChild(p);
+		}
+		catch(e){}
 		i3GEO.janela.abreAguarde("i3GEO.atualiza",$trad("o1"));
 		i3GEO.contadorAtualiza++;
+		if(i3GEO.Interface.ATUAL === "googlemaps"){
+			indice = i3GEO.Interface.googlemaps.retornaIndiceLayer(tema);
+			i3GeoMap.overlayMapTypes.removeAt(indice);
+		}
 		i3GEO.php.excluitema(i3GEO.atualiza,tema);
 		i3GEO.mapa.ativaTema("");
 		if(i3GEO.Interface.ATUAL === "openlayers"){
 			layer = i3geoOL.getLayersByName(tema)[0];
 			i3geoOL.removeLayer(layer);
-		}
-		if(i3GEO.Interface.ATUAL === "googlemaps"){
-			indice = i3GEO.Interface.googlemaps.retornaIndiceLayer(tema);
-			i3GeoMap.overlayMapTypes.removeAt(indice);
 		}
 	},
 	/*

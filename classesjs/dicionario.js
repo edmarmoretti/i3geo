@@ -152,7 +152,7 @@ it:"Proprietà"
 //submenus
 "u1": [
 {
-pt: "Sobre o I3Geo",
+pt: "Sobre o i3Geo",
 en:"About",
 es:"Sobre I3Geo",
 it:"Informazioni WebGis"

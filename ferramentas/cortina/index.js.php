@@ -135,7 +135,7 @@ i3GEOF.cortina = {
 				catch(e){}
 			}
 			if(i3GEO.Interface.ATUAL === "googlemaps"){
-				var divlayer = i3GEO.Interface.googlemaps.retornaDivLayer(i3GEO.temaAtivo);
+				var estilo = (i3GEO.Interface.googlemaps.retornaDivLayer(i3GEO.temaAtivo)).style;
 				if(navm)
 				{estilo.clip = "rect(0px,"+i3GEO.parametros.w+"px,"+i3GEO.parametros.h+"px,0px)";}
 				else

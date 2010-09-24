@@ -596,11 +596,15 @@ i3GEO.arvoreDeCamadas = {
 	                		//exclui tema
    		             		if(DDM.getDDById(id).id === "i3geo_lixeira"){
                 				if(i3GEO.arvoreDeCamadas.ARRASTARLIXEIRA === true){
-                					i3GEO.janela.abreAguarde("ajaxCorpoMapa",$trad("o1"));
+                					tema = (this.getEl()).id.split("arrastar_")[1];
+									i3GEO.tema.exclui(tema);
+									/*
+									i3GEO.janela.abreAguarde("ajaxCorpoMapa",$trad("o1"));
                 					tema = (this.getEl()).id.split("arrastar_")[1];
 									i3GEO.contadorAtualiza++;
 									i3GEO.php.excluitema(i3GEO.atualiza,tema);							
 									i3GEO.mapa.ativaTema("");
+									*/
 								}
 							}
 							//muda ordem de desenho do tema
@@ -748,9 +752,7 @@ i3GEO.arvoreDeCamadas = {
 			if(i3GEO.Interface.ATUAL !== "flamingo")
 			{i3GEO.arvoreDeCamadas.adicionaOpcaoTema($trad("t22"),$trad("t23"),'i3GEO.tema.dialogo.procuraratrib(\"'+ltema.name+'\")',node);}
 			i3GEO.arvoreDeCamadas.adicionaOpcaoTema($trad("t24"),$trad("t25"),'i3GEO.tema.dialogo.toponimia(\"'+ltema.name+'\")',node);
-			if(i3GEO.Interface.ATUAL === "padrao"){
-				i3GEO.arvoreDeCamadas.adicionaOpcaoTema($trad("t26"),$trad("t27"),'i3GEO.tema.dialogo.etiquetas(\"'+ltema.name+'\")',node);
-			}
+			i3GEO.arvoreDeCamadas.adicionaOpcaoTema($trad("t26"),$trad("t27"),'i3GEO.tema.dialogo.etiquetas(\"'+ltema.name+'\")',node);
 			i3GEO.arvoreDeCamadas.adicionaOpcaoTema($trad("t28"),$trad("t29"),'i3GEO.tema.dialogo.filtro(\"'+ltema.name+'\")',node);
 			i3GEO.arvoreDeCamadas.adicionaOpcaoTema($trad("t30"),$trad("t31"),'i3GEO.tema.dialogo.tabela(\"'+ltema.name+'\")',node);
 			if(i3GEO.parametros.versaoms > 4){
@@ -760,7 +762,9 @@ i3GEO.arvoreDeCamadas = {
 		if (ltema.type < 4){
 			i3GEO.arvoreDeCamadas.adicionaOpcaoTema($trad("t32"),$trad("t33"),'i3GEO.tema.dialogo.editaLegenda(\"'+ltema.name+'\")',node);
 		}
-		i3GEO.arvoreDeCamadas.adicionaOpcaoTema($trad("t34"),$trad("t35"),'i3GEO.navega.destacaTema.inicia(\"'+ltema.name+'\")',node);
+		if(i3GEO.Interface.ATUAL !== "googlemaps"){
+			i3GEO.arvoreDeCamadas.adicionaOpcaoTema($trad("t34"),$trad("t35"),'i3GEO.navega.destacaTema.inicia(\"'+ltema.name+'\")',node);
+		}
 		if(i3GEO.Interface.ATUAL !== "padrao"){
 			i3GEO.arvoreDeCamadas.adicionaOpcaoTema($trad("t42"),$trad("t42"),'i3GEO.tema.dialogo.cortina(\"'+ltema.name+'\")',node);
 		}	

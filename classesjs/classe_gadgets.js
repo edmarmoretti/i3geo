@@ -49,7 +49,11 @@ i3GEO.gadgets = {
 	
 	Você pode acessar os parâmetros da seguinte forma:
 	
-	i3GEO.gadgets.PARAMETROS.mostraMenuSuspenso.deslocaEsquerda = 400
+	i3GEO.gadgets.PARAMETROS.mostraMenuSuspenso.deslocaEsquerda = 400;
+	
+	Para evitar o funcionamento de um gadget experimente utilizar o seguinte exemplo:
+	
+	i3GEO.gadgets.PARAMETROS.mostraCoordenadasUTM.idhtml = "";
 	
 	Default:
 	
@@ -355,8 +359,14 @@ i3GEO.gadgets = {
 				}
 				if(arguments.length === 1)
 				{e.value = escala;}
-				else
-				{e.value = parseInt(i3GEO.parametros.mapscale,10);}
+				else{
+					if(i3GEO.parametros.mapscale != ""){
+						e.value = parseInt(i3GEO.parametros.mapscale,10);
+					}
+					else{
+						e.value = 0;
+					}
+				}
 			};
 			if(!$i("i3geo_escalanum")){
 				i = $inputText(id,"155","i3geo_escalanum",$trad("d10"),"15",parseInt(i3GEO.parametros.mapscale,10));

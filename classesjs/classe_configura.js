@@ -434,9 +434,9 @@ i3GEO.configura = {
 		"pan":
 		{ff:"/imagens/cursores/pan.png",ie:"/imagens/cursores/pan.cur"},
 		"area":
-		{ff:"/imagens/cursores/area.png",ie:"crosshair"},
+		{ff:"crosshair",ie:"crosshair"},
 		"distancia":
-		{ff:"/imagens/cursores/distancia.png",ie:"crosshair"},
+		{ff:"crosshair",ie:"crosshair"},
 		"zoom":
 		{ff:"/imagens/cursores/zoom.png",ie:"/imagens/cursores/zoom.cur"},
 		"contexto":
@@ -647,6 +647,7 @@ i3GEO.configura = {
 				i3GEO.barraDeBotoes.BOTAOPADRAO = "pan";
 				if(i3GEO.Interface.ATUAL === "googlemaps"){
 					i3GeoMap.setOptions({draggable:true});
+					i3GEO.util.mudaCursor(i3GEO.configura.cursores,"pan",i3GEO.Interface.IDMAPA,i3GEO.configura.locaplic);
 					return;
 				}
 				if($i(i3GEO.Interface.IDMAPA)){
@@ -791,7 +792,7 @@ i3GEO.configura = {
 				if($i(i3GEO.Interface.IDMAPA)){
 					$i(i3GEO.Interface.IDMAPA).title = "";
 					temp = "identifica";
-					if(i3GEO.Interface.ATIVAMENUCONTEXTO)
+					if(i3GEO.Interface.ATIVAMENUCONTEXTO && i3GEO.Interface.ATUAL !== "googlemaps")
 					{temp = "identifica_contexto";}
 					i3GEO.util.mudaCursor(i3GEO.configura.cursores,temp,i3GEO.Interface.IDMAPA,i3GEO.configura.locaplic);
 				}

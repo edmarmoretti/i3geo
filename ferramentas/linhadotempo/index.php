@@ -17,6 +17,7 @@ Timeline_parameters='bundle=true';
 <body name="ancora" onload="inicializa()" onresize="onResize()">
 <p class=paragrafo >Escolha o tema para gerar a linha do tempo:</p>
 <div class=paragrafo id="combotemas" ></div>
+<div class=paragrafo id="totaleventos" style="position:absolute;top:30px;left:200px;"></div>
 <div class=paragrafo id="tl" style="height: 220px; border: 1px solid #aaa;overflow-x:hidden; overflow-y:scroll"> </div>
 
 <script>
@@ -169,6 +170,7 @@ function carregaDados(){
 	tl_el.innerHTML = "<span style=color:red; >Aguarde...</span>";
 	var retorna = function(retorno){
 		//eventSource1.clear();
+		$i("totaleventos").innerHTML = retorno.data.events.length+" eventos";
 		tl = Timeline.create(tl_el, bandInfos, Timeline.HORIZONTAL);
 		eventSource1.loadJSON(retorno.data, '.'); // The data was stored into the 
 		tl.layout(); // display the Timeline	

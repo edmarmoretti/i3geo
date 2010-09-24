@@ -488,34 +488,45 @@ i3GEO.util = {
 			i,
 			c,
 			n,
-			layers;
+			layers,
+			cursor;
 		//
 		//no caso da interface openlayers, o cursor deve ser definido no estilo
 		//do elemento img de cada TILE de cada LAYER
 		//para achar os img faz-se a busca pela classe css utilizada pelo OpenLayers nos img desse tipo
 		//
-		if(i3GEO.Interface.ATUAL === "openlayers"){
-			os = YAHOO.util.Dom.getElementsByClassName('olTileImage', 'img');
-		}
-		else
-		{os.push(document.getElementById(idobjeto));}
-		n = os.length;
-		for(i=0;i<n;i++){
-			o = os[i];
+		try{
+			os.push(document.getElementById(idobjeto));
+			if(i3GEO.Interface.ATUAL === "openlayers"){
+				os = YAHOO.util.Dom.getElementsByClassName('olTileImage', 'img');
+			}
+			if(i3GEO.Interface.ATUAL === "googlemaps"){
+				os = document.getElementById(idobjeto).firstChild;
+				os = os.getElementsByTagName("div");
+			}
+			n = os.length;
 			if(tipo === "default" || tipo === "pointer" || tipo === "crosshair" || tipo === "help" || tipo === "move" || tipo === "text")
-			{o.style.cursor = tipo;}
+			{cursor = tipo;}
 			else{
-				c = eval("cursores."+tipo+".ie");
-				if(o){
-					if(navm){
-						o.style.cursor = "URL(\""+locaplic+eval("cursores."+tipo+".ie")+"\"),auto";
-					}
-					else{
-						o.style.cursor = "URL(\""+locaplic+eval("cursores."+tipo+".ff")+"\"),auto";
-					}			
+				if(navm){
+					cursor = "URL(\""+locaplic+eval("cursores."+tipo+".ie")+"\"),auto";
+					c = eval("cursores."+tipo+".ie");
 				}
+				else{
+					cursor = "URL(\""+locaplic+eval("cursores."+tipo+".ff")+"\"),auto";
+					c = eval("cursores."+tipo+".ff");
+				}			
+			}
+			//testa novamente
+			if(c === "default" || c === "pointer" || c === "crosshair" || c === "help" || c === "move" || c === "text")
+			{cursor = c;}		
+			for(i=0;i<n;i++){
+				o = os[i];
+				if(o)
+				{o.style.cursor = cursor;}
 			}
 		}
+		catch(e){}
 	},
 	/*
 	Function: criaBox

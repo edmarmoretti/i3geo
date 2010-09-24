@@ -1192,7 +1192,14 @@ Muda a extensão geográfica do mapa de acordo com a abrangência de um tema.
 		include_once("classe_temas.php");
 		copiaSeguranca($map_file);
 		$m = new Temas($map_file,$tema);
+		if($interface == "googlemaps")
+		{
+			$projMapa = $m->mapa->getProjection();
+			$m->mapa->setProjection("init=epsg:4291");
+		}	
 		$m->zoomTema();
+		if($interface == "googlemaps")
+		{$m->mapa->setProjection($projMapa);}
 		$m->salva();
 		redesenhaMapa();
 	break;
@@ -1207,7 +1214,14 @@ Muda a extensão geográfica do mapa de acordo com a abrangência dos elementos sel
 		include_once("classe_temas.php");
 		copiaSeguranca($map_file);
 		$m = new Temas($map_file,$tema);
+		if($interface == "googlemaps")
+		{
+			$projMapa = $m->mapa->getProjection();
+			$m->mapa->setProjection("init=epsg:4291");
+		}	
 		$m->zoomSel();
+		if($interface == "googlemaps")
+		{$m->mapa->setProjection($projMapa);}
 		$m->salva();
 		redesenhaMapa();
 	break;
@@ -1340,6 +1354,11 @@ Altera uma classe de um tema, aplicando uma nova classificação ou modificando pa
 		include_once("classe_alteraclasse.php");
 		copiaSeguranca($map_file);
 		$m = new Alteraclasse($map_file,$tema,"",$ext);
+		if($interface == "googlemaps")
+		{
+			$projMapa = $m->mapa->getProjection();
+			$m->mapa->setProjection("init=epsg:4291");
+		}			
 		if ($opcao == "adicionaclasse")
 		{$retorno = $m->adicionaclasse();}
 		if ($opcao == "valorunico")
@@ -1358,6 +1377,8 @@ Altera uma classe de um tema, aplicando uma nova classificação ou modificando pa
 		}
 		if ($opcao == "simbolounico")
 		{$retorno = $m->simbolounico();}
+		if($interface == "googlemaps")
+		{$m->mapa->setProjection($projMapa);}		
 		$salvo = $m->salva();
 	break;
 /*
@@ -1968,6 +1989,8 @@ Procura valores em uma tabela que aderem a uma palavra de busca.
 		include_once("classe_atributos.php");
 		if(!isset($tema)){$tema = "";}
 		$m = new Atributos($map_file,$tema,"",$ext);
+		if($interface == "googlemaps")
+		{$m->mapa->setProjection("init=epsg:4291");}			
 		$retorno = $m->buscaRegistros($palavra,$lista,$tipo,$onde);
 	break;
 /*
@@ -1983,8 +2006,19 @@ Identifica elementos no mapa.
 		if (!isset($tema)){$tema = "";}
 		if (!isset($resolucao)){$resolucao = 5;}
 		include_once("classe_atributos.php");
-		$m = new Atributos($map_file,$tema);
+		$m = new Atributos($map_file,$tema);	
+		if($interface == "googlemaps")
+		{
+			$projMapa = $m->mapa->getProjection();
+			$m->mapa->setProjection("init=epsg:4291");
+			$m->salva();
+		}		
 		$retorno = $m->identifica($opcao,$xy,$resolucao);
+		if($interface == "googlemaps")
+		{
+			$m->mapa->setProjection($projMapa);
+			$m->salva();
+		}
 	break;
 /*
 Valor: IDENTIFICA2
@@ -1999,15 +2033,21 @@ Identifica elementos no mapa.
 		include_once("classe_atributos.php");
 		if(!isset($ext))
 		{$ext = "";}
-		if(isset($ext) && $ext != "" && $interface == "googlemaps")
-		{
-			$ext = projetaExt($map_file,$ext);
-			$xy = projetaExt($map_file,$xy,",");
-		}
 		$m = new Atributos($map_file,$tema,"",$ext);
+		if($interface == "googlemaps")
+		{
+			$projMapa = $m->mapa->getProjection();
+			$m->mapa->setProjection("init=epsg:4291");
+			$m->salva();
+		}		
 		$retorno = $m->identifica2($opcao,$xy,$resolucao,$ext,$listaDeTemas);
+		if($interface == "googlemaps")
+		{
+			$m->mapa->setProjection($projMapa);
+			$m->salva();
+		}		
+		
 	break;
-
 /*
 Valor: IDENTIFICAUNICO
 
