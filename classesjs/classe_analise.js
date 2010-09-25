@@ -232,6 +232,7 @@ i3GEO.analise = {
 				xpt: [],
 				ypt: [],
 				dist: [],
+				distV: [],
 				xtela: [],
 				ytela: [],
 				ximg: [],
@@ -323,7 +324,7 @@ i3GEO.analise = {
 		Adiciona uma marca na tela e realiza o cálculo de distância dos pontos inseridos
 		*/
 		clique: function(){
-			var n,d,decimal,dd;
+			var n,d,decimal,dd,dV;
 			if (g_tipoacao == "mede"){
 				n = pontosdistobj.xpt.length;
 				pontosdistobj.xpt[n] = objposicaocursor.ddx;
@@ -385,7 +386,7 @@ i3GEO.analise = {
 		Realiza os cálculos e desenho da linha conforme o usuário movimenta o mouse
 		*/
 		movimento: function(){
-			var n,d,r,decimal,da,mostra;
+			var n,d,r,decimal,da,mostra,texto;
 			if (g_tipoacao == "mede"){
 				if($i("mostradistancia"))
 				{$i("mostradistancia").style.display="block";}
@@ -396,6 +397,7 @@ i3GEO.analise = {
 						r = i3GEO.calculo.direcao(pontosdistobj.xpt[n-1],pontosdistobj.ypt[n-1],objposicaocursor.ddx,objposicaocursor.ddy);
 						r = i3GEO.calculo.dd2dms(r,r);
 						r = r[0];
+						
 						d = d + "";
 						d = d.split(".");
 						decimal = d[1].substr(0,5);
@@ -407,9 +409,12 @@ i3GEO.analise = {
 						decimal = da[1].substr(0,5);
 						da = da[0]+"."+decimal;
 						da = da * 1;
+						
 						mostra = $i("mostradistancia_calculo");
 						if (mostra){
-							mostra.innerHTML = " Dist acum.= "+da+" km <br>atual= "+d+" km <br> Direção (DMS)= "+r;
+							texto = " Dist acum.= "+da+" km <br>atual= "+d+" km <br> Direção (DMS)= "+r;
+							texto += "<br>Método cálculo de distâncias: "+i3GEO.calculo.metododistancia;
+							mostra.innerHTML = texto;
 						}
 						if(i3GEO.Interface.ATUAL != "googleearth")
 						{i3GEO.desenho.aplica("resizeLinha",pontosdistobj.linhas[n-1],n);}

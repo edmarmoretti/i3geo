@@ -279,7 +279,7 @@ Include:
 */
 	function redesenhaCorpo($locsistemas,$locidentifica,$tipoimagem,$utilizacgi,$locmapserv)
 	{
-  		if(file_exists($this->locaplic."/classe_imagem.php"))
+		if(file_exists($this->locaplic."/classe_imagem.php"))
   		include_once($this->locaplic."/classe_imagem.php");
   		else
   		include_once("classe_imagem.php");
@@ -325,11 +325,11 @@ Include:
 		}
 		else
 		{
-			if($tipoimagem != "nenhum")
-			{
+			//if($tipoimagem != "nenhum")
+			//{
 				$of = $this->mapa->outputformat;
 				$of->set("imagemode",MS_IMAGEMODE_RGB);
-			}
+			//}
 			if (!$qy)
 			{$imgo = @$this->mapa->draw();}
 			else
@@ -388,7 +388,6 @@ Include:
 			$nomer = $locmapserv."?map=".$this->arquivo."&mode=map&".nomeRandomico();
 		}
 		$res = "g_locidentifica='".$locidentifica."';g_sistemas='".$locsistemas."';var g_celula=".$this->mapa->cellsize.";var mapscale = ".$this->mapa->scale.";var mapres=".$this->mapa->resolution.";var mapcellsize=".$this->mapa->cellsize.";var mapexten='".$ext."';var mapimagem='".$nomer."';var mapwidth=".$imgo->width.";var mapheight=".$imgo->height.";var mappath='".$imgo->imagepath."';var mapurl='".$imgo->imageurl."';var erro='".$mensagemErro."'";
-		//$imgo->free();
 		return $res;
 	}
 /*

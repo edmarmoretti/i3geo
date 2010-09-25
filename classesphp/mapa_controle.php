@@ -748,7 +748,7 @@ Altera a cor do fundo do mapa.
 		copiaSeguranca($map_file);
 		//no caso da interface openlayers, o mapfile é outro
 		$nomefundo = str_replace(".map","fundo.map",$map_file);
-		if(file_exists($nomefundo))
+		if(file_exists($nomefundo) && $interface == "openlayers")
 		{$m = new Mapa($nomefundo);}
 		else
 		{$m = new Mapa($map_file);}
@@ -767,7 +767,7 @@ Pega a cor do fundo do mapa atual.
 		include_once("classe_mapa.php");
 		//no caso da interface openlayers, o mapfile é outro
 		$nomefundo = str_replace(".map","fundo.map",$map_file);
-		if(file_exists($nomefundo))
+		if(file_exists($nomefundo) && $interface == "openlayers")
 		{$m = new Mapa($nomefundo);}
 		else
 		{$m = new Mapa($map_file);}

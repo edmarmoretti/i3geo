@@ -60,6 +60,8 @@ $of = $map->outputformat;
 $of->set("driver","AGG/PNG");
 $of->set("imagemode","RGB");
 $map = ms_newMapObj($temp);
+if($interface == "googlemaps")
+{$map->setProjection("init=epsg:4291");}
 //$legenda =$map->legend;
 //$legenda->set("status",MS_EMBED);
 //altera o nome das classes vazias
@@ -77,7 +79,7 @@ foreach ($temas as $tema)
 		}
 	}
 }
-if($interface == "openlayers"){
+if($interface == "openlayers" || $interface == "googlemaps"){
 	if($mapexten != ""){
 		$ext = explode(" ",$mapexten);
 		$extatual = $map->extent;

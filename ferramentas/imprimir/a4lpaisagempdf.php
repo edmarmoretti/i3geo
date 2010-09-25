@@ -39,6 +39,9 @@ $nomes = nomeRandomico();
 substituiCon($map_file,$postgis_mapa);
 $map = ms_newMapObj($map_file);
 
+if($interface == "googlemaps")
+{$map->setProjection("init=epsg:4291");}
+
 $w = $map->width;
 $h = $map->height;
 
@@ -59,7 +62,8 @@ foreach ($temas as $tema)
 		}
 	}
 }
-if($interface == "openlayers"){
+$o = $map->outputformat;
+if($interface == "openlayers" || $interface == "googlemaps"){
 	if($mapexten != ""){
 		$ext = explode(" ",$mapexten);
 		$extatual = $map->extent;
@@ -67,9 +71,9 @@ if($interface == "openlayers"){
 	}
 	$legenda = $map->legend;
 	$legenda->set("status",MS_EMBED);
-	$o = $map->outputformat;
 	$o->set("imagemode",MS_IMAGEMODE_RGB);
 }
+$o->set("transparent","false");
 $imgo = $map->draw();
 $nomer = ($imgo->imagepath)."mapa".$nomes.".png";
 $imgo->saveImage($nomer);

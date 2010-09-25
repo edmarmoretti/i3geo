@@ -60,6 +60,8 @@ $of = $map->outputformat;
 $of->set("driver","GDAL/GTiff");
 $of->set("imagemode","RGB");
 $map = ms_newMapObj($temp);
+if($interface == "googlemaps")
+{$map->setProjection("init=epsg:4291");}
 //$legenda =$map->legend;
 //$legenda->set("status",MS_EMBED);
 //altera o nome das classes vazias
@@ -77,19 +79,17 @@ foreach ($temas as $tema)
 		}
 	}
 }
-if($interface == "openlayers"){
+$o = $map->outputformat;
+if($interface == "openlayers" || $interface == "googlemaps"){
 	if($mapexten != ""){
 		$ext = explode(" ",$mapexten);
 		$extatual = $map->extent;
 		$extatual->setextent($ext[0],$ext[1],$ext[2],$ext[3]);
 	}
-
 	$legenda = $map->legend;
 	$legenda->set("status",MS_EMBED);
-	$o = $map->outputformat;
 	$o->set("imagemode",MS_IMAGEMODE_RGB);
 }
-
 
 $imgo = $map->draw();
 $nomer = ($imgo->imagepath)."mapa".$nomes.".tif";

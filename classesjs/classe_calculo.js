@@ -38,6 +38,18 @@ Classe: i3GEO.calculo
 Utilitários para cálculos.
 */
 i3GEO.calculo = {
+	
+	/*
+	Propriedade: metododistancia
+	
+	Método utilizado no cálculo de distâncias
+	
+	vicenty|vicenty
+	
+	Default:
+	{vicenty}
+	*/
+	metododistancia: "vicenty",
 	/*
 	Function: dms2dd
 	
@@ -284,6 +296,34 @@ i3GEO.calculo = {
 
 	Calcula a distância em km entre dois pontos.
 
+	O método de cálculo é definido na variável i3GEO.calculo.metododistancia
+	
+	Parametros:
+
+	lon1 {Numeric} - x inicial.
+
+	lat1 {Numeric} - y inicial
+
+	lon2 {Numeric} - x final
+
+	lat2 {Numeric} - y final
+	
+	Return:
+	
+	Type:
+	{Numeric}
+	*/	
+	distancia: function(lon1,lat1,lon2,lat2){
+		if(i3GEO.calculo.metododistancia === "haversine")
+		{return i3GEO.calculo.distHaversine(lon1,lat1,lon2,lat2);}
+		if(i3GEO.calculo.metododistancia === "vicenty")
+		{return i3GEO.calculo.distVincenty(lon1,lat1,lon2,lat2);}
+	},	
+	/*
+	Function: distHaversine
+
+	Calcula a distância em km entre dois pontos (método Haversine).
+
 	Baseado no site http://www.movable-type.co.uk/scripts/latlong.html (indicado por louriques@yahoo.com.br)
 	
 	Em versões anteriores utilizava-se o cálculo proposto em http://www.wcrl.ars.usda.gov/cec/java/lat-long.htm
@@ -303,7 +343,7 @@ i3GEO.calculo = {
 	Type:
 	{Numeric}
 	*/	
-	distancia: function(lon1,lat1,lon2,lat2){
+	distHaversine: function(lon1,lat1,lon2,lat2){
 		if(typeof(console) !== 'undefined'){console.info("i3GEO.calculo.distancia()");}
 		var dLat,dLon,a,c,d;
 		dLat = ((lat2-lat1))* Math.PI / 180;
@@ -312,9 +352,86 @@ i3GEO.calculo = {
        	Math.cos(lat1 * Math.PI / 180) * Math.cos(lat2 * Math.PI / 180) * 
        	Math.sin(dLon/2) * Math.sin(dLon/2); 
 		c = 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1-a)); 
-		d = 6371 * c;
+		d = 6378.137 * c;
 		return d;
 	},
+	/*
+	Function: distVincenty
+
+	Given two objects representing points with geographic coordinates, this
+	calculates the distance between those points on the surface of an
+	ellipsoid.
+
+	Baseado em OpenLayers.Util.distVincenty
+
+	Parametros:
+
+	lon1 {Numeric} - x inicial.
+
+	lat1 {Numeric} - y inicial
+
+	lon2 {Numeric} - x final
+
+	lat2 {Numeric} - y final
+
+	Return:
+		
+		{Numeric} - The distance (in km) between the two input points as measured on an
+	ellipsoid.  Note that the input point objects must be in geographic
+	coordinates (decimal degrees) and the return distance is in kilometers.
+	 */
+	distVincenty: function(lon1,lat1,lon2,lat2) {
+		var rad = function(x) {return x*Math.PI/180;};
+		var ct = {
+			a: 6378137,
+			b: 6356752.3142,
+			f: 1/298.257223563
+		};
+		var p1 = {
+			lat: lat1,
+			lon: lon1
+		};
+		var p2 = {
+			lat: lat2,
+			lon: lon2
+		};
+		var a = ct.a, b = ct.b, f = ct.f;
+		var L = rad(p2.lon - p1.lon);
+		var U1 = Math.atan((1-f) * Math.tan(rad(p1.lat)));
+		var U2 = Math.atan((1-f) * Math.tan(rad(p2.lat)));
+		var sinU1 = Math.sin(U1), cosU1 = Math.cos(U1);
+		var sinU2 = Math.sin(U2), cosU2 = Math.cos(U2);
+		var lambda = L, lambdaP = 2*Math.PI;
+		var iterLimit = 20;
+		while (Math.abs(lambda-lambdaP) > 1e-12 && --iterLimit>0) {
+			var sinLambda = Math.sin(lambda), cosLambda = Math.cos(lambda);
+			var sinSigma = Math.sqrt((cosU2*sinLambda) * (cosU2*sinLambda) +
+			(cosU1*sinU2-sinU1*cosU2*cosLambda) * (cosU1*sinU2-sinU1*cosU2*cosLambda));
+			if (sinSigma==0) {
+				return 0;  // co-incident points
+			}
+			var cosSigma = sinU1*sinU2 + cosU1*cosU2*cosLambda;
+			var sigma = Math.atan2(sinSigma, cosSigma);
+			var alpha = Math.asin(cosU1 * cosU2 * sinLambda / sinSigma);
+			var cosSqAlpha = Math.cos(alpha) * Math.cos(alpha);
+			var cos2SigmaM = cosSigma - 2*sinU1*sinU2/cosSqAlpha;
+			var C = f/16*cosSqAlpha*(4+f*(4-3*cosSqAlpha));
+			lambdaP = lambda;
+			lambda = L + (1-C) * f * Math.sin(alpha) *
+			(sigma + C*sinSigma*(cos2SigmaM+C*cosSigma*(-1+2*cos2SigmaM*cos2SigmaM)));
+		}
+		if (iterLimit==0) {
+			return NaN;  // formula failed to converge
+		}
+		var uSq = cosSqAlpha * (a*a - b*b) / (b*b);
+		var A = 1 + uSq/16384*(4096+uSq*(-768+uSq*(320-175*uSq)));
+		var B = uSq/1024 * (256+uSq*(-128+uSq*(74-47*uSq)));
+		var deltaSigma = B*sinSigma*(cos2SigmaM+B/4*(cosSigma*(-1+2*cos2SigmaM*cos2SigmaM)-
+			B/6*cos2SigmaM*(-3+4*sinSigma*sinSigma)*(-3+4*cos2SigmaM*cos2SigmaM)));
+		var s = b*A*(sigma-deltaSigma);
+		var d = s.toFixed(3)/1000; // round to 1mm precision
+		return d;
+	},	
 	/*
 	Function: direcao
 

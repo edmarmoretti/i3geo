@@ -81,6 +81,7 @@ i3GEO.desenho = {
 			xpt: [],
 			ypt: [],
 			dist: [],
+			distV: [],
 			xtela: [],
 			ytela: [],
 			ximg: [],

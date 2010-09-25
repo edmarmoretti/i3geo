@@ -57,6 +57,8 @@ $temp = str_replace(".map","xxx.map",$map_file);
 $map->save($temp);
 substituiCon($temp,$postgis_mapa);
 $map = ms_newMapObj($temp);
+if($interface == "googlemaps")
+{$map->setProjection("init=epsg:4291");}
 //$legenda =$map->legend;
 //$legenda->set("status",MS_EMBED);
 //altera o nome das classes vazias
@@ -72,6 +74,14 @@ foreach ($temas as $tema)
 			if (($classe->name == "") || ($classe->name == " "))
 			{$classe->set("name",$layer->getmetadata("tema"));}
 		}
+	}
+}
+$o = $map->outputformat;
+if($interface == "openlayers" || $interface == "googlemaps"){
+	if($mapexten != ""){
+		$ext = explode(" ",$mapexten);
+		$extatual = $map->extent;
+		$extatual->setextent($ext[0],$ext[1],$ext[2],$ext[3]);
 	}
 }
 $map->selectOutputFormat("svg");
