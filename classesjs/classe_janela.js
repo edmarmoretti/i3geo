@@ -206,7 +206,8 @@ i3GEO.janela = {
 		if($i(id))
 		{$i("i3geo").removeChild($i(id));}
 		ins = '<div id="'+id+'_cabecalho" class="hd" style="background-color:white;">';
-		ins += "<img id='"+id+"_imagemCabecalho' style='position:absolute;left:3px;top:2px;visibility:hidden;' src=\'"+i3GEO.configura.locaplic+"/imagens/aguarde.gif\' />";
+		if(i3GEO.configura !== undefined)
+		{ins += "<img id='"+id+"_imagemCabecalho' style='position:absolute;left:3px;top:2px;visibility:hidden;' src=\'"+i3GEO.configura.locaplic+"/imagens/aguarde.gif\' />";}
 		ins += texto;
 		if(funcaoMinimiza)
 		{ins += "<div id='"+id+"_minimizaCabecalho' class='container-minimiza' ></div>";}

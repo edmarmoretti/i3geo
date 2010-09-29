@@ -189,13 +189,21 @@ i3GEO.gadgets = {
 		{id = i3GEO.gadgets.PARAMETROS.mostraCoordenadasUTM.idhtml;}
 		else
 		{i3GEO.gadgets.PARAMETROS.mostraCoordenadasUTM.idhtml = id;}
-		if (!$i(id)){return;}
+		if (!$i(id) || i3GEO.gadgets.PARAMETROS.mostraCoordenadasUTM.idhtml == ""){
+			if(i3GEO.eventos.MOUSEPARADO.toString().search("atualizaCoordenadasUTM()") >= 0)
+			{i3GEO.eventos.MOUSEPARADO.remove("atualizaCoordenadasUTM()");}
+			return;
+		}
 		atualizaCoordenadasUTM = function()
 		{
+			if(i3GEO.gadgets.PARAMETROS.mostraCoordenadasUTM.idhtml == ""){
+				if(i3GEO.eventos.MOUSEPARADO.toString().search("atualizaCoordenadasUTM()") >= 0)
+				{i3GEO.eventos.MOUSEPARADO.remove("atualizaCoordenadasUTM()");}
+				return;
+			}
 			if(i3GEO.Interface.STATUS.atualizando.length > 0)
 			{return;}
 			if(typeof(console) !== 'undefined'){console.info("atualizaCoordenadasUTM()");}
-			//if($i(i3GEO.gadgets.PARAMETROS.mostraCoordenadasUTM.idhtml).style.display == "block"){return;}
 			if(objposicaocursor.imgx < 10 || objposicaocursor.imgy < 10)
 			{return;}
 			if($i("wdoca")){return;}
@@ -212,16 +220,17 @@ i3GEO.gadgets = {
 				{return;}
 			}
 			tempUtm = function(retorno){
-				var funcao,temp;
+				var funcao,temp,texto;
 				funcao = "$i(i3GEO.gadgets.PARAMETROS.mostraCoordenadasUTM.idhtml).style.display='none';";
 				funcao += "if(i3GEO.gadgets.PARAMETROS.mostraCoordenadasGEO.idhtml == i3GEO.gadgets.PARAMETROS.mostraCoordenadasUTM.idhtml)";
 				funcao += "{$i(i3GEO.gadgets.PARAMETROS.mostraCoordenadasGEO.idhtml).style.display='block';i3GEO.gadgets.mostraCoordenadasGEO();}";
-				setTimeout(funcao,3400);
+				idSetTimeoutMostraUTM = setTimeout(funcao,3400);
 				temp = $i(i3GEO.gadgets.PARAMETROS.mostraCoordenadasUTM.idhtml);
 				if(retorno.data){
 					temp.style.display="block";
-					temp.innerHTML = "<div>UTM: x="+retorno.data.x+" y="+retorno.data.y+" zn="+retorno.data.zona+" "+retorno.data.datum+"</div>";
-					//return (retorno.data);
+					texto = "<div onclick='javascript:clearTimeout(idSetTimeoutMostraUTM);i3GEO.gadgets.PARAMETROS.mostraCoordenadasUTM.idhtml = \"\";i3GEO.gadgets.mostraCoordenadasGEO();' style='width:300px;font-size:10px;' >UTM: x="+retorno.data.x+" y="+retorno.data.y+" zn="+retorno.data.zona+" "+retorno.data.datum;
+					texto += "&nbsp;<img  class='x' src='"+i3GEO.util.$im("branco.gif")+"' /></div>";
+					temp.innerHTML = texto;
 				}
 			};
 			i3GEO.php.geo2utm(tempUtm,objposicaocursor.ddx,objposicaocursor.ddy);

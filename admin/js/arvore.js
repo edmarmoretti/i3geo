@@ -106,6 +106,10 @@ function montaArvore(dados)
 		}
         function loadNodeData(node, fnLoadComplete)
         {
+			if(node.data.id_menu == undefined){
+				fnLoadComplete.call();
+				return;
+			}
 			var sUrl = "../php/arvore.php?funcao=pegaGrupos&id_menu="+node.data.id_menu+"&idioma="+idiomaSel();
 			var callback =
 			{
@@ -142,6 +146,12 @@ function montaArvore(dados)
    	montaNosMenus(dados)
    	tree.draw();
 }
+function temaIconMode()
+{
+	var newVal = parseInt(this.value);
+	if (newVal != currentIconMode)
+	{currentIconMode = newVal;}
+}
 //
 //adiciona os menus na árvore
 //
@@ -171,64 +181,84 @@ Monta os nós com os grupos e permite abrir os subgrupos
 */
 function montaNosGrupos(idmenu,no,dados,redesenha)
 {
-	function temaIconMode()
-	{
-		var newVal = parseInt(this.value);
-		if (newVal != currentIconMode)
-		{currentIconMode = newVal;}
-	}
-    function loadSubgruposData(node, fnLoadComplete)
-    {
-		var sUrl = "../php/arvore.php?funcao=pegaSubGrupos&id_n1="+node.data.id_n1+"&id_menu="+idmenu+"&idioma="+idiomaSel();
-		var callback =
-		{
-            success: function(oResponse)
-            {
-                var dados = YAHOO.lang.JSON.parse(oResponse.responseText)
-				montaNosSubgrupos(idmenu,node,dados,true)
-                oResponse.argument.fnLoadComplete();
-            },
-            failure: function(oResponse)
-            {
-                oResponse.argument.fnLoadComplete();
-            },
-            argument:
-            {
-                "node": node,
-                "fnLoadComplete": fnLoadComplete
-            },
-            timeout: 7000
-        };
-        YAHOO.util.Connect.asyncRequest('GET', sUrl, callback);
-    }
     //pega os temas que ficam na raiz da árvore
 	if(!tree.getNodeByProperty("etiquetaTemasRaiz","menu_"+idmenu))
-	montaTemasRaiz(no,dados,true)
+	{montaTemasRaiz(no,dados,true);}
 	//pega os grupos do menu
-    if(!tree.getNodeByProperty("etiquetaGrupo","menu_"+idmenu))
+    if(idmenu == undefined)
+	{return;}
+	if(!tree.getNodeByProperty("etiquetaGrupo","menu_"+idmenu))
     {
-		var conteudo = "<img style=\"position:relative;cursor:pointer;top:2px\" onclick=\"novoGrupo('"+idmenu+"')\" title='adiciona grupo' src=\"../imagens/05.png\" />"
 		var temp = "menu_"+idmenu
-		var d = {tipo:"etiqueta","etiquetaGrupo":temp,html:conteudo+"<i>Grupos:</i>"}
-		var tempNode = new YAHOO.widget.HTMLNode(d, no, false,true);
-		tempNode.isLeaf = true;
-	}
+		var d = {tipo:"etiqueta","etiquetaGrupo":temp,html:"<i>Grupos</i>"}
+		var tempNodeR = new YAHOO.widget.HTMLNode(d, no, false,true);
+		tempNodeR.isLeaf = false;
+		
+		var conteudo = "<img style=\"position:relative;cursor:pointer;top:2px\" onclick=\"novoGrupo('"+idmenu+"')\" title='adiciona grupo' src=\"../imagens/05.png\" /> Adicionar um novo"
+		var d = {html:conteudo};
+		var tempNode = new YAHOO.widget.HTMLNode(d, tempNodeR, false,true);
+		tempNode.isLeaf = true;			
+	}	
 	for (var i=0, j=dados.grupos.length; i<j; i++)
 	{
-		var conteudo = "&nbsp;<img style=\"position:relative;cursor:pointer;top:0px\" onclick=\"sobeDesce('sobe','grupo','"+dados.grupos[i].id_n1+"')\" title=sobe src=\"../imagens/34.png\" />"
-		conteudo += "&nbsp;<img style=\"position:relative;cursor:pointer;top:0px\" onclick=\"sobeDesce('desce','grupo','"+dados.grupos[i].id_n1+"')\" title=desce src=\"../imagens/33.png\" />"
-		conteudo += "&nbsp;<img style=\"position:relative;cursor:pointer;top:0px\" onclick=\"excluir('grupo','"+dados.grupos[i].id_n1+"')\" title=excluir width='10px' heigth='10px' src=\"../imagens/01.png\" />"
-		conteudo += "&nbsp;<img style=\"position:relative;cursor:pointer;top:0px\" onclick=\"editar('grupo','"+dados.grupos[i].id_n1+"')\" title=editar width='10px' heigth='10px' src=\"../imagens/06.png\" />&nbsp;";
-		var cor = "";
-		if(dados.grupos[i].publicado == "NAO")
-		var cor = "style='color:red'";
-		conteudo += "<span "+cor+" >"+dados.grupos[i].nome_grupo+"</span>"
-		var d = {html:conteudo,id_n1:dados.grupos[i].id_n1,tipo:"grupo"}
-		var tempNode = new YAHOO.widget.HTMLNode(d, no, false,true);
-		tempNode.setDynamicLoad(loadSubgruposData, temaIconMode);
+		var conteudo = montaConteudoNo(dados.grupos[i].id_n1,dados.grupos[i].publicado,dados.grupos[i].nome_grupo,"grupo")
+		var d = {idmenu:idmenu,html:conteudo,id_n1:dados.grupos[i].id_n1,tipo:"grupo"}
+		var tempNode = new YAHOO.widget.HTMLNode(d, tempNodeR, false,true);
+		tempNode.setDynamicLoad(loadSubgruposData, temaIconMode, idmenu);
 	}
 	if(redesenha){tree.draw();}
 }
+function loadSubgruposData(node, fnLoadComplete)
+{
+	var idmenu = node.data.idmenu;
+	var sUrl = "../php/arvore.php?funcao=pegaSubGrupos&id_n1="+node.data.id_n1+"&id_menu="+idmenu+"&idioma="+idiomaSel();
+	var callback =
+	{
+		success: function(oResponse)
+		{
+			var dados = YAHOO.lang.JSON.parse(oResponse.responseText)
+			montaNosSubgrupos(idmenu,node,dados,true)
+			oResponse.argument.fnLoadComplete();
+		},
+		failure: function(oResponse)
+		{
+			oResponse.argument.fnLoadComplete();
+		},
+		argument:
+		{
+			"node": node,
+			"fnLoadComplete": fnLoadComplete
+		},
+		timeout: 7000
+	};
+	YAHOO.util.Connect.asyncRequest('GET', sUrl, callback);
+}
+function loadTemasData(node, fnLoadComplete)
+{
+	var idmenu = node.data.idmenu;
+	var sUrl = "../php/arvore.php?funcao=pegaTemas&id_n2="+node.data.id_n2+"&idioma="+idiomaSel();
+	var callback =
+	{
+		success: function(oResponse)
+		{
+			var dados = YAHOO.lang.JSON.parse(oResponse.responseText)
+			montaTemas(idmenu,node,dados,false)
+			oResponse.argument.fnLoadComplete();
+		},
+		failure: function(oResponse)
+		{
+			oResponse.argument.fnLoadComplete();
+		},
+		argument:
+		{
+			"node": node,
+			"fnLoadComplete": fnLoadComplete
+		},
+		timeout: 7000
+	};
+	YAHOO.util.Connect.asyncRequest('GET', sUrl, callback);
+}
+
 /*
 Function: montaNosSubgrupos
 
@@ -238,57 +268,26 @@ Monta os nós com os temas
 */
 function montaNosSubgrupos(idmenu,no,dados,redesenha)
 {
-    function loadTemasData(node, fnLoadComplete)
-    {
-		var sUrl = "../php/arvore.php?funcao=pegaTemas&id_n2="+node.data.id_n2+"&idioma="+idiomaSel();
-		var callback =
-		{
-            success: function(oResponse)
-            {
-                var dados = YAHOO.lang.JSON.parse(oResponse.responseText)
-				montaTemas(idmenu,node,dados,false)
-                oResponse.argument.fnLoadComplete();
-            },
-            failure: function(oResponse)
-            {
-                oResponse.argument.fnLoadComplete();
-            },
-            argument:
-            {
-                "node": node,
-                "fnLoadComplete": fnLoadComplete
-            },
-            timeout: 7000
-        };
-        YAHOO.util.Connect.asyncRequest('GET', sUrl, callback);
-    }
     if(!tree.getNodeByProperty("etiquetaTemasGrupo","grupo_"+no.data.id_n1))
 	montaTemasRaizGrupo(idmenu,no,dados,true)
+    if(idmenu == undefined)
+	{return;}	
 	if(!tree.getNodeByProperty("etiquetaTemasSubGrupo",no.data.id_n1))
 	{
+		var d = {tipo:"etiqueta",etiquetaTemasSubGrupo:no.data.id_n1,html:"<i>Sub-grupos</i>"}
+		var tempNodeR = new YAHOO.widget.HTMLNode(d, no, false,true);
+		tempNodeR.isLeaf = false;
+		
 		var conteudo = "<img style=\"position:relative;cursor:pointer;top:2px\" onclick=\"novoSubGrupo('"+idmenu+"','"+no.data.id_n1+"')\" title='adiciona sub-grupo' src=\"../imagens/05.png\" />"
-		var d = {tipo:"etiqueta",etiquetaTemasSubGrupo:no.data.id_n1,html:conteudo+"<i>Sub-grupos:</i>"}
-		var tempNode = new YAHOO.widget.HTMLNode(d, no, false,true);
-		tempNode.isLeaf = true;
-	}
-	function temaIconMode()
-	{
-		var newVal = parseInt(this.value);
-		if (newVal != currentIconMode)
-		{currentIconMode = newVal;}
+		var d = {html:conteudo+"<i>Adicionar um novo</i>"}
+		var tempNode = new YAHOO.widget.HTMLNode(d, tempNodeR, false,true);
+		tempNode.isLeaf = true;		
 	}
 	for (var i=0, j=dados.subgrupos.length; i<j; i++)
 	{
-		var conteudo = "&nbsp;<img style=\"position:relative;cursor:pointer;top:0px\" onclick=\"sobeDesce('sobe','subgrupo','"+dados.subgrupos[i].id_n2+"')\" title=sobe src=\"../imagens/34.png\" />"
-		conteudo += "&nbsp;<img style=\"position:relative;cursor:pointer;top:0px\" onclick=\"sobeDesce('desce','subgrupo','"+dados.subgrupos[i].id_n2+"')\" title=desce src=\"../imagens/33.png\" />"
-		conteudo += "&nbsp;<img style=\"position:relative;cursor:pointer;top:0px\" onclick=\"excluir('subgrupo','"+dados.subgrupos[i].id_n2+"')\" title=excluir width='10px' heigth='10px' src=\"../imagens/01.png\" />"
-		conteudo += "&nbsp;<img style=\"position:relative;cursor:pointer;top:0px\" onclick=\"editar('subgrupo','"+dados.subgrupos[i].id_n2+"')\" title=editar width='10px' heigth='10px' src=\"../imagens/06.png\" />&nbsp;"
-		var cor = "";
-		if(dados.subgrupos[i].publicado == "NAO")
-		var cor = "style='color:red'";
-		conteudo += "<span "+cor+" >"+dados.subgrupos[i].nome_subgrupo+"</span>"
-		var d = {html:conteudo,id_n2:dados.subgrupos[i].id_n2,tipo:"subgrupo"}
-		var tempNode = new YAHOO.widget.HTMLNode(d, no, false,true);
+		var conteudo = montaConteudoNo(dados.subgrupos[i].id_n2,dados.subgrupos[i].publicado,dados.subgrupos[i].nome_subgrupo,"subgrupo")
+		var d = {idmenu:idmenu,html:conteudo,id_n2:dados.subgrupos[i].id_n2,tipo:"subgrupo"}
+		var tempNode = new YAHOO.widget.HTMLNode(d, tempNodeR, false,true);
 		tempNode.setDynamicLoad(loadTemasData, temaIconMode);
 	}
 	if(redesenha){tree.draw();}
@@ -297,40 +296,53 @@ function montaTemas(idmenu,no,dados,redesenha)
 {
 	if(!tree.getNodeByProperty("etiquetaTemas",no.data.id_n2))
 	{
+		var d = {tipo:"etiqueta",etiquetaTemas:no.data.id_n2,html:"<i>Temas</i>"}
+		var tempNodeR = new YAHOO.widget.HTMLNode(d, no, false,true);
+		tempNodeR.isLeaf = false;
+		
 		var conteudo = "<img style=\"position:relative;cursor:pointer;top:2px\" onclick=\"novoTema('"+idmenu+"','"+no.data.id_n2+"')\" title='adiciona tema' src=\"../imagens/05.png\" />"
-		var d = {tipo:"etiqueta",etiquetaTemas:no.data.id_n2,html:conteudo+"<i>Temas:</i>"}
-		var tempNode = new YAHOO.widget.HTMLNode(d, no, false,true);
-		tempNode.isLeaf = true;
+		var d = {html:conteudo+"<i>Adicionar um novo</i>"}
+		var tempNode = new YAHOO.widget.HTMLNode(d, tempNodeR, false,true);
+		tempNode.isLeaf = true;		
 	}
 	for (i=0, j=dados.length; i<j; i++)
 	{
-		var conteudo = "&nbsp;<img style=\"position:relative;cursor:pointer;top:0px\" onclick=\"sobeDesce('sobe','tema','"+dados[i].id_n3+"')\" title=sobe src=\"../imagens/34.png\" />"
-		conteudo += "&nbsp;<img style=\"position:relative;cursor:pointer;top:0px\" onclick=\"sobeDesce('desce','tema','"+dados[i].id_n3+"')\" title=desce src=\"../imagens/33.png\" />"
-		conteudo += "&nbsp;<img style=\"position:relative;cursor:pointer;top:0px\" onclick=\"excluir('tema','"+dados[i].id_n3+"')\" title=excluir width='10px' heigth='10px' src=\"../imagens/01.png\" />"
-		conteudo += "&nbsp;<img style=\"position:relative;cursor:pointer;top:0px\" onclick=\"editar('tema','"+dados[i].id_n3+"')\" title=editar width='10px' heigth='10px' src=\"../imagens/06.png\" />&nbsp;"
-		var cor = "";
-		if(dados[i].publicado == "NAO")
-		var cor = "style='color:red'";
-		if(dados[i].nome_tema)
-		conteudo += "<span "+cor+" >"+dados[i].nome_tema+"</span>"
-		else
-		conteudo += "<span "+cor+" >edite para escolher o tema</span>"
+		var conteudo = montaConteudoNo(dados[i].id_n3,dados[i].publicado,dados[i].nome_tema,"tema");
 		var d = {html:conteudo,id_n3:dados[i].id_n3,tipo:"tema"}
-		var tempNode = new YAHOO.widget.HTMLNode(d, no, false,true);
+		var tempNode = new YAHOO.widget.HTMLNode(d, tempNodeR, false,true);
 		tempNode.isLeaf = true;
 	}
 	if(redesenha){tree.draw();}
 }
+function montaConteudoNo(id,publicado,nome,tipo){
+	var conteudo = "&nbsp;<img style=\"position:relative;cursor:pointer;top:0px\" onclick=\"sobeDesce('sobe','"+tipo+"','"+id+"')\" title=sobe src=\"../imagens/34.png\" />"
+	conteudo += "&nbsp;<img style=\"position:relative;cursor:pointer;top:0px\" onclick=\"sobeDesce('desce','"+tipo+"','"+id+"')\" title=desce src=\"../imagens/33.png\" />"
+	conteudo += "&nbsp;<img style=\"position:relative;cursor:pointer;top:0px\" onclick=\"excluir('"+tipo+"','"+id+"')\" title=excluir width='10px' heigth='10px' src=\"../imagens/01.png\" />"
+	conteudo += "&nbsp;<img style=\"position:relative;cursor:pointer;top:0px\" onclick=\"editar('"+tipo+"','"+id+"')\" title=editar width='10px' heigth='10px' src=\"../imagens/06.png\" />&nbsp;"
+	var cor = "";
+	if(publicado == "NAO")
+	{var cor = "style='color:red'";}
+	if(nome)
+	conteudo += "<span "+cor+" >"+nome+"</span>"
+	else
+	conteudo += "<span "+cor+" > ??? vc precisa editar esse nó</span>"
+	return conteudo;
+}
 function montaTemasRaiz(no,dados,redesenha)
 {
-    if(!tree.getNodeByProperty("etiquetaTemasRaiz","menu_"+no.data.id_menu))
-    {
-		var temp = "menu_"+no.data.id_menu
-		var d = {etiquetaTemasRaiz:temp,tipo:"etiqueta",html:"<img style=\"position:relative;cursor:pointer;top:2px\" onclick=\"novoTemaRaiz('"+no.data.id_menu+"')\" title='adiciona tema'  src=\"../imagens/05.png\" /><i>Temas na raiz do menu:</i>"}
-		var tempNode = new YAHOO.widget.HTMLNode(d, no, false,true);
-		tempNode.isLeaf = true;
-	}
 	var resultado = new Array();
+	if(no.data.id_menu == undefined)
+	{return;}
+	if(!tree.getNodeByProperty("etiquetaTemasRaiz","menu_"+no.data.id_menu))
+    {
+		var temp = "menu_"+no.data.id_menu;
+		var d = {id_menu:no.data.id_menu,tipo:"etiqueta",etiquetaTemasRaiz:temp,html:"<i>Temas na raiz do menu</i>"}
+		var tempNodeR = new YAHOO.widget.HTMLNode(d, no, false,true);
+		tempNodeR.isLeaf = false;
+		var d = {tipo:"etiqueta",html:"<img style=\"position:relative;cursor:pointer;top:2px\" onclick=\"novoTemaRaiz('"+no.data.id_menu+"')\" title='adiciona tema'  src=\"../imagens/05.png\" /><i>Adicionar um novo</i>"}
+		var tempNode = new YAHOO.widget.HTMLNode(d, tempNodeR, false,true);
+		tempNode.isLeaf = true;		
+	}	
 	for (var i=0, j=dados.raiz.length; i<j; i++)
 	{
 		var conteudo = "&nbsp;<img style=\"position:relative;cursor:pointer;top:0px\" onclick=\"sobeDesce('sobe','raizmenu','"+dados.raiz[i].id_raiz+"')\" title=sobe src=\"../imagens/34.png\" />"
@@ -338,7 +350,7 @@ function montaTemasRaiz(no,dados,redesenha)
 		conteudo += "&nbsp;<img style=\"position:relative;cursor:pointer;top:0px\" onclick=\"excluir('raizmenu','"+dados.raiz[i].id_raiz+"')\" title=excluir width='10px' heigth='10px' src=\"../imagens/01.png\" />"
 		conteudo += "&nbsp;<img style=\"position:relative;cursor:pointer;top:0px\" onclick=\"editar('raizmenu','"+dados.raiz[i].id_raiz+"')\" title=editar width='10px' heigth='10px' src=\"../imagens/06.png\" />&nbsp;<span>"+dados.raiz[i].nome_tema+"</span>"
 		var d = {html:conteudo,id_raiz:dados.raiz[i].id_raiz,tipo:"raizmenu"}
-		var tempNode = new YAHOO.widget.HTMLNode(d, no, false,true);
+		var tempNode = new YAHOO.widget.HTMLNode(d, tempNodeR, false,true);
 		tempNode.isLeaf = true;
 		resultado.push(tempNode)
 	}
@@ -346,31 +358,29 @@ function montaTemasRaiz(no,dados,redesenha)
 }
 function montaTemasRaizGrupo(idmenu,no,dados,redesenha)
 {
-    if(!tree.getNodeByProperty("etiquetaTemasGrupo","grupo_"+no.data.id_n1))
+    var resultado = new Array();
+	if(no.data.id_n1 == undefined)
+	{return;}	
+	if(!tree.getNodeByProperty("etiquetaTemasGrupo","grupo_"+no.data.id_n1))
     {
-		var temp = "grupo_"+no.data.id_n1
-		var d = {etiquetaTemasGrupo:temp,tipo:"etiqueta",html:"<img style=\"position:relative;cursor:pointer;top:2px\" onclick=\"novoTemaRaizGrupo('"+idmenu+"','"+no.data.id_n1+"')\" title='adiciona tema'  src=\"../imagens/05.png\" /><i>Temas na raiz do grupo:</i>"}
-		var tempNode = new YAHOO.widget.HTMLNode(d, no, false,true);
-		tempNode.isLeaf = true;
+		var temp = "grupo_"+no.data.id_n1;
+		var d = {etiquetaTemasGrupo:temp,tipo:"etiqueta",html:"<i>Temas na raiz do grupo:</i>"};
+		var tempNodeR = new YAHOO.widget.HTMLNode(d, no, false,true);
+		tempNodeR.isLeaf = false;
+		var d = {tipo:"etiqueta",html:"<img style=\"position:relative;cursor:pointer;top:2px\" onclick=\"novoTemaRaizGrupo('"+idmenu+"','"+no.data.id_n1+"')\" title='adiciona tema'  src=\"../imagens/05.png\" /><i>Adicionar um novo</i>"};
+		var tempNode = new YAHOO.widget.HTMLNode(d, tempNodeR, false,true);
+		tempNode.isLeaf = true;		
 	}
-	var resultado = new Array();
 	for (var i=0, j=dados.raiz.length; i<j; i++)
 	{
-		var conteudo = "&nbsp;<img style=\"position:relative;cursor:pointer;top:0px\" onclick=\"sobeDesce('sobe','raizgrupo','"+dados.raiz[i].id_raiz+"')\" title=sobe src=\"../imagens/34.png\" />"
-		conteudo += "&nbsp;<img style=\"position:relative;cursor:pointer;top:0px\" onclick=\"sobeDesce('desce','raizgrupo','"+dados.raiz[i].id_raiz+"')\" title=desce src=\"../imagens/33.png\" />"
-		conteudo += "&nbsp;<img style=\"position:relative;cursor:pointer;top:0px\" onclick=\"excluir('raizgrupo','"+dados.raiz[i].id_raiz+"')\" title=excluir width='10px' heigth='10px' src=\"../imagens/01.png\" />"
-		conteudo += "&nbsp;<img style=\"position:relative;cursor:pointer;top:0px\" onclick=\"editar('raizgrupo','"+dados.raiz[i].id_raiz+"')\" title=editar width='10px' heigth='10px' src=\"../imagens/06.png\" />&nbsp;<span>"+dados.raiz[i].nome_tema+"</span>"
-		var d = {html:conteudo,id_raiz:dados.raiz[i].id_raiz,tipo:"raizmenu"}
-		var tempNode = new YAHOO.widget.HTMLNode(d, no, false,true);
+		var conteudo = montaConteudoNo(dados.raiz[i].id_raiz,"SIM",dados.raiz[i].nome_tema,"raizgrupo");
+		var d = {html:conteudo,id_raiz:dados.raiz[i].id_raiz,tipo:"raizgrupo"};
+		var tempNode = new YAHOO.widget.HTMLNode(d, tempNodeR,false,true);
 		tempNode.isLeaf = true;
 		resultado.push(tempNode)
 	}
 	return resultado;	
 }
-//
-//adiciona um novo tema na raiz do menu
-//id = id do menu alvo
-//
 /*
 Function: novoTemaRaiz
 
@@ -383,17 +393,18 @@ function novoTemaRaiz(id)
 	core_carregando("ativa");
 	var mensagem = " adicionando tema...";
 	core_carregando(mensagem);
-	var no = tree.getNodeByProperty("id_menu",id)
-	var noEtiquetaGrupo = tree.getNodeByProperty("etiquetaGrupo","menu_"+id)
+	var no = tree.getNodeByProperty("etiquetaTemasRaiz","menu_"+id)
 	var sUrl = "../php/arvore.php?funcao=adicionarTemaRaiz&id_menu="+id+"&idioma="+idiomaSel();
 	var callback =
 	{
     	success: function(oResponse)
 		{
 			var dados = YAHOO.lang.JSON.parse(oResponse.responseText)
-			var nos = montaTemasRaiz(no,dados,false)
-			tree.popNode(nos[0])
-			nos[0].insertBefore(noEtiquetaGrupo)
+			dados = dados.raiz[0];
+			var conteudo = montaConteudoNo(dados.id_raiz,"SIM","","raizmenu");
+			var d = {html:conteudo,id_raiz:dados.id_raiz,tipo:"raizmenu"}
+			var tempNode = new YAHOO.widget.HTMLNode(d, no, false,true);
+			tempNode.isLeaf = true;
 			tree.draw();
 			core_carregando("desativa");
 		},
@@ -414,17 +425,18 @@ function novoTemaRaizGrupo(idmenu,id)
 	core_carregando("ativa");
 	var mensagem = " adicionando tema...";
 	core_carregando(mensagem);
-	var no = tree.getNodeByProperty("id_n1",id)
-	var noEtiquetaSubGrupo = tree.getNodeByProperty("etiquetaTemasSubGrupo",id)
+	var no = tree.getNodeByProperty("etiquetaTemasGrupo","grupo_"+id)
 	var sUrl = "../php/arvore.php?funcao=adicionarTemaRaizGrupo&id_n1="+id+"&id_menu="+idmenu+"&idioma="+idiomaSel();
 	var callback =
 	{
     	success: function(oResponse)
 		{
 			var dados = YAHOO.lang.JSON.parse(oResponse.responseText)
-			var nos = montaTemasRaizGrupo(idmenu,no,dados,false)
-			tree.popNode(nos[0])
-			nos[0].insertBefore(noEtiquetaSubGrupo)
+			dados = dados.raiz[0];
+			var conteudo = montaConteudoNo(dados.id_raiz,"SIM","","raizgrupo");
+			var d = {html:conteudo,id_raiz:dados.id_raiz,tipo:"raizgrupo"}
+			var tempNode = new YAHOO.widget.HTMLNode(d, no, false,true);
+			tempNode.isLeaf = true;
 			tree.draw();
 			core_carregando("desativa");
 		},
@@ -450,11 +462,16 @@ function novoGrupo(id_menu)
 	{
     	success: function(oResponse)
 		{
+			var no = tree.getNodeByProperty("etiquetaGrupo","menu_"+id_menu)
 			var dados = YAHOO.lang.JSON.parse(oResponse.responseText)
-			var no = tree.getNodeByProperty("id_menu",id_menu)
-			montaNosGrupos(id_menu,no,dados,false)
+			dados = dados.grupos[0];
+			var conteudo = montaConteudoNo(dados.id_n1,"NAO","","grupo");
+			var d = {idmenu:id_menu,html:conteudo,id_n1:dados.id_n1,tipo:"grupo"}
+			var tempNode = new YAHOO.widget.HTMLNode(d, no, false,true);
+			tempNode.isLeaf = false;
+			tempNode.setDynamicLoad(loadSubgruposData, temaIconMode, id_menu);
 			tree.draw();
-			core_carregando("desativa");
+			core_carregando("desativa");			
 		},
   		failure:core_handleFailure,
   		argument: { foo:"foo", bar:"bar" }
@@ -468,7 +485,7 @@ Adiciona um novo subgrupo em um grupo
 
 <ADICIONARSUBGRUPO>
 */
-function novoSubGrupo(idmenu,id_n1)
+function novoSubGrupo(id_menu,id_n1)
 {
 	core_carregando("ativa");
 	var mensagem = " adicionando Sub-grupo...";
@@ -478,9 +495,14 @@ function novoSubGrupo(idmenu,id_n1)
 	{
     	success: function(oResponse)
 		{
+			var no = tree.getNodeByProperty("etiquetaTemasSubGrupo",id_n1)
 			var dados = YAHOO.lang.JSON.parse(oResponse.responseText)
-			var no = tree.getNodeByProperty("id_n1",id_n1)
-			montaNosSubgrupos(idmenu,no,dados,false)
+			dados = dados.subgrupos[0];
+			var conteudo = montaConteudoNo(dados.id_n2,dados.publicado,"","subgrupo");
+			var d = {idmenu:id_menu,html:conteudo,id_n2:dados.id_n2,tipo:"subgrupo"}
+			var tempNode = new YAHOO.widget.HTMLNode(d, no, false,true);
+			tempNode.isLeaf = false;
+			tempNode.setDynamicLoad(loadSubgruposData, temaIconMode, id_menu);
 			tree.draw();
 			core_carregando("desativa");
 		},
@@ -496,7 +518,7 @@ Adiciona um novo tema
 
 <ADICIONARTEMA>
 */
-function novoTema(idmenu,id_n2)
+function novoTema(id_menu,id_n2)
 {
 	core_carregando("ativa");
 	var mensagem = " adicionando tema...";
@@ -506,9 +528,13 @@ function novoTema(idmenu,id_n2)
 	{
     	success: function(oResponse)
 		{
+			var no = tree.getNodeByProperty("etiquetaTemas",id_n2);
 			var dados = YAHOO.lang.JSON.parse(oResponse.responseText)
-			var no = tree.getNodeByProperty("id_n2",id_n2)
-			montaTemas(idmenu,no,dados,false)
+			dados = dados[0];
+			var conteudo = montaConteudoNo(dados.id_n3,dados.publicado,"","tema");
+			var d = {idmenu:id_menu,html:conteudo,id_n3:dados.id_n3,tipo:"tema"}
+			var tempNode = new YAHOO.widget.HTMLNode(d, no, false,true);
+			tempNode.isLeaf = true;
 			tree.draw();
 			core_carregando("desativa");
 		},
@@ -654,8 +680,8 @@ function montaDivRaiz(i)
 	ins += "<p>Perfis que podem ver: </p>"
 	ins += "<input size=50 type=text id='Eperfil' value='"+i.perfil+"' /></p>"
 	ins += "<div id=comboPerfil >Buscando...</div>";
-	ins += "<br><br>Para criar um novo tema clique <a href='temas.html' >aqui</a>."
-	ins += "<br><br>Para criar um novo perfil clique <a href='perfis.html' >aqui</a>."
+	ins += "<br><br>Para criar um novo mapfile clique <a href='../html/editormapfile.html' target=_blank >aqui</a>."
+	ins += "<br><br>Para criar um novo perfil clique <a href='../html/perfis.html' target=_blank >aqui</a>."
 	ins += "<input type=hidden value="+i.ordem+" id='Eordem' />"
 	return(ins)
 }

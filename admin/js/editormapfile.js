@@ -402,7 +402,7 @@ function montaParametrosClasses(no,dados,redesenha)
 	}
     if(!tree.getNodeByProperty("etiquetaClasseLabel",no.data.id))
     {
-		var conteudo = "<span style=cursor:pointer; onclick=\"editorClasseLabel('"+codigoMap+"','"+codigoLayer+"','"+indiceClasse+"')\" ><img width='10px' heigth='10px' style=\"position:relative;top:0px\" title='edita características da classe' src=\"../imagens/06.png\" /> Editar etiquetas</span>"
+		var conteudo = "<span style=cursor:pointer; onclick=\"editorClasseLabel('"+codigoMap+"','"+codigoLayer+"','"+indiceClasse+"')\" ><img width='10px' heigth='10px' style=\"position:relative;top:0px\" title='edita identificadores de texto' src=\"../imagens/06.png\" /> Editar toponímia</span>"
 		var d = {tipo:"etiquetaClasseLabel",etiquetaClasseLabel:codigoMap+"_"+codigoLayer+"_"+indiceClasse,html:conteudo}
 		var tempNode = new YAHOO.widget.HTMLNode(d, no, false,true);
 		tempNode.isLeaf = true;
@@ -1302,7 +1302,7 @@ function montaEditorEstilo(dados)
 			{ajuda:"Color to use for drawing features.",
 			titulo:"Color",id:"color",value:dados.color,tipo:"cor"},
 			{ajuda:"Background-color to use for drawing features.",
-			titulo:"Backgroundcolorolor",id:"backgroundcolor",value:dados.backgroundcolor,tipo:"cor"},
+			titulo:"Backgroundcolo",id:"backgroundcolor",value:dados.backgroundcolor,tipo:"cor"},
 			{ajuda:"Height, in pixels, of the symbol/pattern to be used. Only useful with scalable symbols. Default is 1. For symbols of Type HATCH, the SIZE is the distance between hatched lines. For its use with hatched lines, see Example#8 in the SYMBOL examples.",
 			titulo:"Size",id:"size",value:dados.size,tipo:"text"},
 			{ajuda:"Color to use for outlining polygons and certain marker symbols. Line symbols do not support outline colors.",

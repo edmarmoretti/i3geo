@@ -274,6 +274,7 @@ botao - id do elemento que deverá ser lcicado para abrir o painel
 */
 function core_ativaPainelAjuda(id,botao)
 {
+	$i(id).style.display = "block";
 	if(!YAHOO.example.container.panelAjuda)
 	{
 		YAHOO.example.container.panelAjuda = new YAHOO.widget.Panel(id, { width:"350px", height:"200px",overflow:"auto", visible:false,constraintoviewport:true } );
@@ -1207,7 +1208,12 @@ function idiomaSel(){
 }
 function core_abreCor(janela,elemento)
 {
-	i3GEO.janela.cria("420","230px","../../ferramentas/colorpicker/index.htm?doc=&elemento="+elemento,"","","Cor","i3geo_janelaCor",true);
+	if(i3GEO.configura == undefined )
+	{i3GEO.configura = {locaplic: "../.."};}
+	i3GEO.util.abreCor("",elemento,"rgb");
+	$i("i3geo_janelaCori").style.width = "350px";
+	$i("i3geo_janelaCori").style.height = "290px";
+	//i3GEO.janela.cria("350px","250px","../../ferramentas/colorpicker/index.htm?doc=&elemento="+elemento+"&tipo=rgb","","","Cor","i3geo_janelaCor",true);
 }
 //
 //carregador de javascript
