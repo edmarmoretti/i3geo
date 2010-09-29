@@ -1097,7 +1097,7 @@ function core_excluiNoTree(sUrl,no,mensagem)
   					else
   					{
 						tree.removeNode(no);
-						tree.draw()
+						tree.draw();
   						core_carregando("desativa");
   					}
   				}

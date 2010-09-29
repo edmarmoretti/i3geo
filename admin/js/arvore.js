@@ -194,7 +194,7 @@ function montaNosGrupos(idmenu,no,dados,redesenha)
 		var tempNodeR = new YAHOO.widget.HTMLNode(d, no, false,true);
 		tempNodeR.isLeaf = false;
 		
-		var conteudo = "<img style=\"position:relative;cursor:pointer;top:2px\" onclick=\"novoGrupo('"+idmenu+"')\" title='adiciona grupo' src=\"../imagens/05.png\" /> Adicionar um novo"
+		var conteudo = "<span onclick=\"novoGrupo('"+idmenu+"')\" style=\"cursor:pointer;\" ><img style=\"position:relative;top:2px\" src=\"../imagens/05.png\" /> Adicionar um novo</span>"
 		var d = {html:conteudo};
 		var tempNode = new YAHOO.widget.HTMLNode(d, tempNodeR, false,true);
 		tempNode.isLeaf = true;			
@@ -278,8 +278,8 @@ function montaNosSubgrupos(idmenu,no,dados,redesenha)
 		var tempNodeR = new YAHOO.widget.HTMLNode(d, no, false,true);
 		tempNodeR.isLeaf = false;
 		
-		var conteudo = "<img style=\"position:relative;cursor:pointer;top:2px\" onclick=\"novoSubGrupo('"+idmenu+"','"+no.data.id_n1+"')\" title='adiciona sub-grupo' src=\"../imagens/05.png\" />"
-		var d = {html:conteudo+"<i>Adicionar um novo</i>"}
+		var conteudo = "<span style=\"cursor:pointer;\" onclick=\"novoSubGrupo('"+idmenu+"','"+no.data.id_n1+"')\" ><img style=\"position:relative;top:2px\" src=\"../imagens/05.png\" /><i> Adicionar um novo</i></span>"
+		var d = {html:conteudo}
 		var tempNode = new YAHOO.widget.HTMLNode(d, tempNodeR, false,true);
 		tempNode.isLeaf = true;		
 	}
@@ -300,8 +300,8 @@ function montaTemas(idmenu,no,dados,redesenha)
 		var tempNodeR = new YAHOO.widget.HTMLNode(d, no, false,true);
 		tempNodeR.isLeaf = false;
 		
-		var conteudo = "<img style=\"position:relative;cursor:pointer;top:2px\" onclick=\"novoTema('"+idmenu+"','"+no.data.id_n2+"')\" title='adiciona tema' src=\"../imagens/05.png\" />"
-		var d = {html:conteudo+"<i>Adicionar um novo</i>"}
+		var conteudo = "<span onclick=\"novoTema('"+idmenu+"','"+no.data.id_n2+"')\" style=\"cursor:pointer;\"><img style=\"position:relative;top:2px\" src=\"../imagens/05.png\" /><i> Adicionar um novo</i></span>"
+		var d = {html:conteudo}
 		var tempNode = new YAHOO.widget.HTMLNode(d, tempNodeR, false,true);
 		tempNode.isLeaf = true;		
 	}
@@ -339,7 +339,7 @@ function montaTemasRaiz(no,dados,redesenha)
 		var d = {id_menu:no.data.id_menu,tipo:"etiqueta",etiquetaTemasRaiz:temp,html:"<i>Temas na raiz do menu</i>"}
 		var tempNodeR = new YAHOO.widget.HTMLNode(d, no, false,true);
 		tempNodeR.isLeaf = false;
-		var d = {tipo:"etiqueta",html:"<img style=\"position:relative;cursor:pointer;top:2px\" onclick=\"novoTemaRaiz('"+no.data.id_menu+"')\" title='adiciona tema'  src=\"../imagens/05.png\" /><i>Adicionar um novo</i>"}
+		var d = {tipo:"etiqueta",html:"<span style=\"cursor:pointer;\" onclick=\"novoTemaRaiz('"+no.data.id_menu+"')\" ><img style=\"position:relative;top:2px\" src=\"../imagens/05.png\" /><i>Adicionar um novo</i></span>"}
 		var tempNode = new YAHOO.widget.HTMLNode(d, tempNodeR, false,true);
 		tempNode.isLeaf = true;		
 	}	
@@ -367,7 +367,7 @@ function montaTemasRaizGrupo(idmenu,no,dados,redesenha)
 		var d = {etiquetaTemasGrupo:temp,tipo:"etiqueta",html:"<i>Temas na raiz do grupo:</i>"};
 		var tempNodeR = new YAHOO.widget.HTMLNode(d, no, false,true);
 		tempNodeR.isLeaf = false;
-		var d = {tipo:"etiqueta",html:"<img style=\"position:relative;cursor:pointer;top:2px\" onclick=\"novoTemaRaizGrupo('"+idmenu+"','"+no.data.id_n1+"')\" title='adiciona tema'  src=\"../imagens/05.png\" /><i>Adicionar um novo</i>"};
+		var d = {tipo:"etiqueta",html:"<span onclick=\"novoTemaRaizGrupo('"+idmenu+"','"+no.data.id_n1+"')\" style=\"cursor:pointer;\" ><img style=\"position:relative;top:2px\" src=\"../imagens/05.png\" /><i>Adicionar um novo</i></span>"};
 		var tempNode = new YAHOO.widget.HTMLNode(d, tempNodeR, false,true);
 		tempNode.isLeaf = true;		
 	}

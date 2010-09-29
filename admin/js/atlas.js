@@ -140,8 +140,8 @@ function adicionaNosTemas(no,dados,redesenha)
 {
 	if(!redesenha)
 	{
-		var conteudo = "<img style=\"position:relative;cursor:pointer;top:0px\" onclick=\"adicionarTema('"+no.data.id_prancha+"')\" title='adiciona tema' width='10px' heigth='10px' src=\"../imagens/05.png\" />"
-		var d = {html:conteudo+"<i>Temas:</i>"}
+		var conteudo = "<span onclick=\"adicionarTema('"+no.data.id_prancha+"')\" style=\"cursor:pointer;\" ><img style=\"position:relative;top:0px\" width='10px' heigth='10px' src=\"../imagens/05.png\" /><i>Adicionar novo tema:</i></span>"
+		var d = {html:conteudo}
 		var tempNode = new YAHOO.widget.HTMLNode(d, no, false,true);
 		tempNode.isLeaf = true;
 	}
@@ -198,8 +198,8 @@ function adicionaNosPranchas(no,dados,redesenha)
     }
     if(!redesenha)
     {
-		var conteudo = "<img style=\"position:relative;cursor:pointer;top:2px\" onclick=\"adicionarPrancha('"+no.data.id_atlas+"')\" title='adiciona prancha' src=\"../imagens/05.png\" />"
-		var d = {html:conteudo+"<i>Pranchas:</i>"}
+		var conteudo = "<span style=\"cursor:pointer;\" onclick=\"adicionarPrancha('"+no.data.id_atlas+"')\" ><img style=\"position:relative;top:2px\" src=\"../imagens/05.png\" /><i>Adicionar nova prancha</i></span>"
+		var d = {html:conteudo}
 		var tempNode = new YAHOO.widget.HTMLNode(d, no, false,true);
 		tempNode.isLeaf = true;
 	}
