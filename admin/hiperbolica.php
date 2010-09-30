@@ -57,10 +57,16 @@ else
 	$encoding = "ISO-8859-1";
 }
 $xml .= "<capa>";
+//
+//obtém a lista de menus
+//
 $menus = pegaDados("SELECT * from i3geoadmin_menus order by nome_menu ",$locaplic);
 $xml .= '<termo cor="#FFFFFF" id="00" nome="Dados geo">';
 $contador = 0;
 $xml .= '<item cor="#FFFFCC" id="'.$contador.'" tipo="TE1" nome="Menus" familia="1" />  '."\n";
+//
+//varre cada menu
+//
 foreach ($menus as $menu)
 {
 	if(strtolower($menu["publicado_menu"]) == "nao")
@@ -70,6 +76,9 @@ foreach ($menus as $menu)
 	$nome = h_converteTexto($nome);
 	//menu
 	$xml .= '<item cor="#FFFF99" id="'.$contador.'" tipo="TE2" nome="'.$nome.'" familia="'.$id.'" />  '."\n";
+	//
+	//obtém a lista de grupos
+	//
 	$grupos = pegaDados("select i3geoadmin_grupos.nome_grupo,id_n1,id_menu from i3geoadmin_n1 LEFT JOIN i3geoadmin_grupos ON i3geoadmin_n1.id_grupo = i3geoadmin_grupos.id_grupo where id_menu='$id' order by ordem",$locaplic);
 	for($i=0;$i < count($grupos);++$i)
 	{
@@ -80,9 +89,20 @@ foreach ($menus as $menu)
 		//grupo
 		$xml .= '<item cor="#FFCC99" id="'.$contador.'" tipo="TE3" nome="'.$nome.'" familia="'.$id.'" />  '."\n";
 		$contador++;
-		$xml .= '<item cor="#FF9966" id="'.$contador.'" tipo="TE4" nome="SUBGRUPOS" familia="'.$id.'" />  '."\n";
-		
+		//
+		//obtem os temas na raiz do grupo
+		//
+		$temasRaizGrupo = pegaDados("select i3geoadmin_temas.tags_tema as tags_tema,i3geoadmin_temas.codigo_tema as codigo_tema,i3geoadmin_raiz.id_tema,nome_tema as nome_tema,perfil FROM i3geoadmin_raiz LEFT JOIN i3geoadmin_temas ON i3geoadmin_temas.id_tema = i3geoadmin_raiz.id_tema where i3geoadmin_raiz.nivel = 1 and i3geoadmin_raiz.id_nivel = ".$grupos[$i]["id_n1"]." order by ordem");
+		//var_dump($temasRaizGrupo);exit;
+		$t = obtemTemas($temasRaizGrupo,$contador,$id);
+		$xml .= $t[0];
+		$contador += $t[1];		
+		//
+		//obtem os subgrupos
+		//
 		$subgrupos = pegaDados("select i3geoadmin_subgrupos.nome_subgrupo,i3geoadmin_n2.id_n2 from i3geoadmin_n2 LEFT JOIN i3geoadmin_subgrupos ON i3geoadmin_n2.id_subgrupo = i3geoadmin_subgrupos.id_subgrupo where i3geoadmin_n2.id_n1='$idgrupo' order by ordem",$locaplic);
+		if(count($subgrupos) > 0)
+		$xml .= '<item cor="#FF9966" id="'.$contador.'" tipo="TE4" nome="SUBGRUPOS" familia="'.$id.'" />  '."\n";		
 		for($j=0;$j < count($subgrupos);++$j)
 		{
 			$contador++;
@@ -94,33 +114,9 @@ foreach ($menus as $menu)
 			$xml .= '<item cor="#FF6633" id="'.$contador.'" tipo="TE6" nome="TEMAS" familia="'.$id.'" />  '."\n";
 			$id_n2 = $subgrupos[$j]["id_n2"];
 			$temas = pegaDados("select i3geoadmin_temas.tags_tema,i3geoadmin_temas.nome_tema,i3geoadmin_temas.codigo_tema,i3geoadmin_n3.id_n3 from i3geoadmin_n3 LEFT JOIN i3geoadmin_temas ON i3geoadmin_n3.id_tema = i3geoadmin_temas.id_tema where i3geoadmin_n3.id_n2='$id_n2' order by ordem",$locaplic);
-			for($k=0;$k < count($temas);++$k)
-			{
-				$contador++;
-				$nome = html_entity_decode($temas[$k]["nome_tema"]);
-				$nome = h_converteTexto($nome);
-				$nid = "tema,".$temas[$k]["codigo_tema"];
-				if($nome != "")
-				{
-					//tema
-					$xml .= '<item cor="#33CCFF" id="'.$contador.'" tipo="TE7" nome="'.$nome.'" familia="'.$nid.'" />  '."\n";
-					$contador++;
-					$tags = explode(" ",$temas[$k]["tags_tema"]);
-					if(count($tags) > 0)
-					{
-						//tags
-						$xml .= '<item cor="#99cccc" id="'.$contador.'" tipo="TE8" nome="TAGs" familia="'.$id.'" />  '."\n";
-						foreach($tags as $tag)
-						{
-							$contador++;
-							$tag = html_entity_decode($tag);
-							$tag = h_converteTexto($tag);
-							if($tag != "")
-							$xml .= '<item cor="#ffffff" id="'.$contador.'" tipo="TE9" nome="'.$tag.'" familia="tag,'.$tag.'" />  '."\n";
-						}
-					}
-				}
-			}
+			$t = obtemTemas($temas,$contador,$id);
+			$xml .= $t[0];
+			$contador += $t[1];
 		}
 	}
 }
@@ -193,5 +189,38 @@ function h_converteTexto($i)
 	$s = mb_detect_encoding($i, 'UTF-8, UTF-7, ASCII, ISO-8859-1');
 	return mb_convert_encoding($i,$encoding,$s);	
 }
-
+function obtemTemas($temas,$contador,$id)
+{
+	$xml = "";
+	for($k=0;$k < count($temas);++$k)
+	{
+		$contador++;
+		$nome = html_entity_decode($temas[$k]["nome_tema"]);
+		$nome = h_converteTexto($nome);
+		$nid = "tema,".$temas[$k]["codigo_tema"];
+		if($nome != "")
+		{
+			//tema
+			$xml .= '<item cor="#33CCFF" id="'.$contador.'" tipo="TE7" nome="'.$nome.'" familia="'.$nid.'" />  '."\n";
+			$contador++;
+			$tags = explode(" ",$temas[$k]["tags_tema"]);
+			if(count($tags) > 0 && $temas[$k]["tags_tema"] != "")
+			{
+				//tags
+				$xml .= '<item cor="#99cccc" id="'.$contador.'" tipo="TE8" nome="TAGs" familia="'.$id.'" />  '."\n";
+				foreach($tags as $tag)
+				{
+					$contador++;
+					$tag = html_entity_decode($tag);
+					$tag = h_converteTexto($tag);
+					if($tag != "")
+					$xml .= '<item cor="#ffffff" id="'.$contador.'" tipo="TE9" nome="'.$tag.'" familia="tag,'.$tag.'" />  '."\n";
+				}
+			}
+		}
+	}
+	$retorno[] = $xml;
+	$retorno[] = $contador;
+	return $retorno;
+}
 ?> 

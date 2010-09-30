@@ -45,6 +45,9 @@ position:absolute;
 right:25px;
 top:0;
 }
+.yui-skin-sam .yui-panel .bd{
+border: 1px solid black;
+}
 </STYLE>
 <body leftmargin="0" topmargin="0" class=" yui-skin-sam">
 		<applet style=z-index:0;" code="tree.HTApplet.class" archive="tree4.jar" width="100%" height="100%" MAYSCRIPT="true">
