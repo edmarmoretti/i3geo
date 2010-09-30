@@ -84,16 +84,20 @@ i3GEO.tema = {
 	*/
 	fonte: function(tema){
 		if(typeof(console) !== 'undefined'){console.info("i3GEO.tema.fonte()");}
+		i3GEO.mapa.ativaTema(tema);
+		window.open(i3GEO.configura.locaplic+"/admin/abrefontemapfile.php?tema="+tema);
+		/*
 		i3GEO.janela.abreAguarde("i3GEO.atualiza",$trad("o1"));
 		i3GEO.mapa.ativaTema(tema);
 		var temp = function(retorno){
 			i3GEO.janela.fechaAguarde();
 			if(retorno.data !== "erro")
-			{window.open(retorno.data);}
+			{window.open(i3GEO.configura.locaplic+"/admin/abrefontemapfile.php?tema="+tema);}
 			else
 			{alert("Não existe fonte registrada para esse tema");}
 		};
 		i3GEO.php.fontetema(temp,tema);
+		*/
 	},
 	/*
 	Function: sobe

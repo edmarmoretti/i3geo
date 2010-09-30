@@ -7,6 +7,7 @@ MAP
     GROUP "Grupo 1"
     METADATA
       "ltempoitemimagem"	""
+      "cache"	""
       "CLASSE"	"SIM"
       "ltempoitemdescricao"	""
       "palletestep"	""
@@ -40,9 +41,8 @@ MAP
       EXPRESSION ('[ID]'eq'2.00')
       STYLE
         ANGLE 360
-        COLOR 215 84 223
+        COLOR 138 134 150
         OPACITY 100
-        SYMBOL 0
       END
     END
     CLASS
@@ -50,7 +50,7 @@ MAP
       EXPRESSION ('[ID]'eq'5.00')
       STYLE
         ANGLE 360
-        COLOR 123 237 180
+        COLOR 105 219 217
         OPACITY 100
         SYMBOL 0
       END
@@ -60,7 +60,7 @@ MAP
       EXPRESSION ('[ID]'eq'3.00')
       STYLE
         ANGLE 360
-        COLOR 247 156 142
+        COLOR 186 52 176
         OPACITY 100
         SYMBOL 0
       END
@@ -70,7 +70,7 @@ MAP
       EXPRESSION ('[ID]'eq'6.00')
       STYLE
         ANGLE 360
-        COLOR 48 115 235
+        COLOR 125 128 2
         OPACITY 100
         SYMBOL 0
       END
@@ -80,7 +80,7 @@ MAP
       EXPRESSION ('[ID]'eq'1.00')
       STYLE
         ANGLE 360
-        COLOR 167 153 179
+        COLOR 129 234 3
         OPACITY 100
         SYMBOL 0
       END
@@ -90,7 +90,7 @@ MAP
       EXPRESSION ('[ID]'eq'4.00')
       STYLE
         ANGLE 360
-        COLOR 255 102 70
+        COLOR 159 226 219
         OPACITY 100
         SYMBOL 0
       END

@@ -207,14 +207,14 @@ Return:
 							$tags1 = $this->removeAcentos(mb_convert_encoding($tema["tags_tema"],"ISO-8859-1","UTF-8"));
 							$nome1 = $this->removeAcentos(mb_convert_encoding($tema["nome_tema"],"ISO-8859-1","UTF-8"));
 							$miniatura = "nao";
-							if(file_exists($this->locaplic."/temas/miniaturas/".$tema["codigo_tema"].".map.mini.png"))
+							if(file_exists($this->locaplic."/temas/miniaturas/".$t["codigo_tema"].".map.mini.png"))
 							{$miniatura = "sim";}
 							$down = "sim";
 							if (strtolower($t["download_tema"]) == "nao")
 							{$down = "nao";}
 							$texto = array("miniatura"=>$miniatura,"tid"=>$t["codigo_tema"],"nome"=>$this->converte($tema["nome_tema"]),"link"=>$t["link_tema"],"download"=>$down);
 							if($procurar == "")
-							{$resultado[] = $texto;}
+							{$temasRaizGrupo[] = $texto;}
 							else
 							{
 								if (stristr($nome,$procurar) || stristr($nome1,$procurar))

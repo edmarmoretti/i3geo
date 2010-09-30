@@ -915,7 +915,7 @@ i3GEO.arvoreDeTemas = {
 						true
 					);
 					tempNode.enableHighlight = false;
-					tempNode.isLeaf = true;
+					tempNode.isLeaf = false;
 				}
 			}
 			for (i=0;i<c; i++){
@@ -970,13 +970,21 @@ i3GEO.arvoreDeTemas = {
 				{mostra = false;}
 				if(mostra){
 					tempNode = new YAHOO.widget.HTMLNode(
-						{html:i3GEO.arvoreDeTemas.montaTextoTema("gray",raiz[i])},
+						{
+							nacessos:raiz[i].nacessos,
+							html:i3GEO.arvoreDeTemas.montaTextoTema("gray",raiz[i]),
+							idtema:raiz[i].tid,
+							fonte:raiz[i].link,
+							ogc:raiz[i].ogc,
+							kmz:raiz[i].kmz
+						},
 						node,
 						false,
 						true
 					);
+					tempNode.setDynamicLoad(i3GEO.arvoreDeTemas.propTemas, 1);
 					tempNode.enableHighlight = false;
-					tempNode.isLeaf = true;
+					tempNode.isLeaf = false;		
 				}
 			}
 			for (i=0;i<c; i++){
@@ -1046,7 +1054,6 @@ i3GEO.arvoreDeTemas = {
 						false,
 						true
 					);
-					//tempNode.nowrap = true;
 					tempNode.setDynamicLoad(i3GEO.arvoreDeTemas.propTemas, 1);
 					tempNode.isLeaf = false;
 					tempNode.enableHighlight = false;
@@ -1126,9 +1133,7 @@ i3GEO.arvoreDeTemas = {
 	*/
 	montaTextoTema: function(cor,tema){
 		var html,
-			estilo;
-		
-		estilo = "vertical-align:top;padding-top:5px;";
+			estilo = "vertical-align:top;padding-top:5px;";
 		if(navm)
 		{estilo = "vertical-align:top;padding-top:2px;";}
 		html = "<td style='"+estilo+"'><span ><input style='cursor:pointer;border:solid 0 white;' ";

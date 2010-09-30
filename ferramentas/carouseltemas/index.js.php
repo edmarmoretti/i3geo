@@ -88,10 +88,20 @@ i3GEOF.carouseltemas = {
 					tema,
 					min,
 					max;
-				ngrupos = retorno.data.length;
-				
+				if(retorno.data == undefined)
+				{return;}
+				ngrupos = retorno.data.length;				
 				for(i=0;i<ngrupos;i++){
 					grupo = retorno.data[i];
+					ntemasg = grupo.temas.length;
+					for(k=0;k<ntemasg;k++){
+						tema = grupo.temas[k];
+						if(tema.miniatura === "sim"){
+							min = i3GEO.configura.locaplic+"/temas/miniaturas/"+tema.tid+".map.mini.png";
+							max = i3GEO.configura.locaplic+"/temas/miniaturas/"+tema.tid+".map.grande.png";
+							ins += "<li><img onmouseover='i3GEOF.carouseltemas.amplia(\""+max+"\")' onclick='i3GEOF.carouseltemas.insereTema(\""+tema.tid+"\")' title='"+tema.nome+"' src='"+min+"' ></li>";
+						}
+					}
 					nsub = grupo.subgrupos.length;
 					for(j=0;j<nsub;j++){
 						sub = grupo.subgrupos[j];

@@ -1,3 +1,14 @@
+<html>
+<style>
+body
+{
+	font:14pt arial,helvetica,clean,sans-serif;
+	color:rgb(100,100,100);
+}
+
+
+</style>
+<body>
 <?php
 /*
 Title: abrefontemapfile
@@ -66,9 +77,10 @@ $editor = verificaEditores($editores);
 $dbh = "";
 include($locaplic."/admin/php/conexao.php");
 $r = pegaDados("select * from i3geoadmin_temas where codigo_tema = '$tema'");
+error_reporting(0);
 $link = $r[0]["link_tema"];
 if($link == "")
-{echo "Link não encontrado";}
+{echo "O link para a fonte não está cadastrado. Entre em contato com o administrador do sistema.";}
 else
 {echo "<meta http-equiv='refresh' content='0;url=$link'>";}
 ?>
