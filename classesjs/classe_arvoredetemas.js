@@ -1653,13 +1653,15 @@ i3GEO.arvoreDeTemas = {
 	comboGruposMenu: function(locaplic,funcaoOnchange,idDestino,idCombo,largura,altura,id_menu){
 		if(typeof(console) !== 'undefined'){console.info("i3GEO.arvoreDeTemas.comboGruposMenu()");}
 		i3GEO.configura.locaplic = locaplic;
+		i3GEO.arvoreDeTemas.temasRaizGrupos = [];
 		var combo = function (retorno){
-			var obGrupos,ins,ig;
-			obGrupos = retorno.data;
+			var ins,ig;
+			var obGrupos = retorno.data;
 			ins = "<select id='"+idCombo+"' SIZE="+altura+" style=width:"+largura+"px onchange='"+funcaoOnchange+"(this.value)' ><option value='' >Escolha um grupo:</option>";
 			for (ig=0;ig<obGrupos.grupos.length; ig++){
 				if(obGrupos.grupos[ig].nome)
 				{ins += "<option value="+obGrupos.grupos[ig].id_n1+" >"+obGrupos.grupos[ig].nome+"</option>";}
+				i3GEO.arvoreDeTemas.temasRaizGrupos[obGrupos.grupos[ig].id_n1] = obGrupos.grupos[ig].temasgrupo;
 			}
 			$i(idDestino).innerHTML = ins+"</select>";
 		};
@@ -1708,9 +1710,7 @@ i3GEO.arvoreDeTemas = {
 	/*
 	Function: comboTemasMenu
 
-	Monta um combo com a lista de subgrupos de um grupo do menu de temas do i3geo.
-
-	Ao escolher um subgrupo, a função de retorno receberá o id do grupo e o id do subgrupo.
+	Monta um combo com a lista de temas do i3geo.
 
 	Parametros:
 
@@ -1731,21 +1731,26 @@ i3GEO.arvoreDeTemas = {
 	altura - altura do combo em linhas
 	
 	id_menu - id do menu escolhido
+	
+	temas - (opcional) objeto contendo a lista de temas
 	*/
-	comboTemasMenu: function(locaplic,funcaoOnchange,idDestino,idCombo,idGrupo,idSubGrupo,largura,altura,id_menu){
+	comboTemasMenu: function(locaplic,funcaoOnchange,idDestino,idCombo,idGrupo,idSubGrupo,largura,altura,id_menu,temas){
 		if(typeof(console) !== 'undefined'){console.info("i3GEO.arvoreDeTemas.comboTemasMenu()");}
 		var combo = function(retorno){
-			var ins,sg,ig;
+			var ins,sg,ig,temas;
 			ins = "<select id='"+idCombo+"' size="+altura+" style=width:"+largura+"px onchange='"+funcaoOnchange+"("+idGrupo+","+idSubGrupo+",this.value)' ><option value='' >Escolha um tema:</option>";
-			if (retorno.data.temas[i]){
-				sg = retorno.data.temas;
-				for (ig=0;ig<sg.length; ig++){	
-					ins += "<option value="+sg[ig].tid+" >"+sg[ig].nome+"</option>";
-				}
+			if(retorno.data != undefined)
+			{retorno = retorno.data.temas;}
+			sg = retorno.length;
+			for (ig=0;ig<sg; ig++){	
+				ins += "<option value="+retorno[ig].tid+" >"+retorno[ig].nome+"</option>";
 			}
 			$i(idDestino).innerHTML = ins+"</select>";
 		};
-		i3GEO.php.pegalistadetemas(combo,id_menu,idGrupo,idSubGrupo);
+		if(temas == undefined)
+		{i3GEO.php.pegalistadetemas(combo,id_menu,idGrupo,idSubGrupo);}
+		else
+		{combo(temas);}
 	},
 	/*
 	Classe: dialogo

@@ -1143,6 +1143,13 @@ en:"Não existe nenhuma camada com etiquetas ativas",
 es:"Não existe nenhuma camada com etiquetas ativas",
 it:"Não existe nenhuma camada com etiquetas ativas"
 }],
+"d32":[
+{
+pt:"Aplicativos",
+en:"Applications",
+es:"Aplicaciones",
+it:"Applicazioni"
+}],
 "ge1":[
 {
 pt:"Navegação com o mouse",

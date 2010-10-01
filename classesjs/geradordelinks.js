@@ -268,8 +268,11 @@ function i3geo_gl_configura(loc_i3geo,nomeseltema,temasa,link,grupo,subgrupo,tem
 
 	idGrupo - id do grupo que será pesquisado
 	*/	
-	this.combosubgrupos = function(idGrupo)
+	this.combosubgrupos = function(idGrupo,dados)
 	{
+		$i3geo_gl.combotemas(idGrupo,$i3geo_gl.subgrupo,i3GEO.arvoreDeTemas.temasRaizGrupos[idGrupo]);
+		//if(dados != undefined)
+		//{$i3geo_gl.combotemas(idGrupo,$i3geo_gl.subgrupo,dados.temasgrupo);}
 		$i($i3geo_gl.subgrupo).innerHTML = "<span style=color:red >Aguarde...</span>";
 		i3GEO.arvoreDeTemas.comboSubGruposMenu($i3geo_gl.loc_i3geo,"$i3geo_gl.combotemas",$i3geo_gl.subgrupo,"",idGrupo,"530","1")
 	}
@@ -286,10 +289,12 @@ function i3geo_gl_configura(loc_i3geo,nomeseltema,temasa,link,grupo,subgrupo,tem
 	
 	idSubGrupo - id do sibgrupo
 	*/
-	this.combotemas = function (idGrupo,idSubGrupo)
+	this.combotemas = function (idGrupo,idSubGrupo,temas)
 	{
+		if(temas == undefined)
+		{temas = "";}
 		$i($i3geo_gl.tema).innerHTML = "<span style=color:red >Aguarde...</span>";
-		i3GEO.arvoreDeTemas.comboTemasMenu($i3geo_gl.loc_i3geo,"$i3geo_gl.preseltema",$i3geo_gl.tema,"",idGrupo,idSubGrupo,"530","5","")
+		i3GEO.arvoreDeTemas.comboTemasMenu($i3geo_gl.loc_i3geo,"$i3geo_gl.preseltema",$i3geo_gl.tema,"",idGrupo,0,"530","5","",temas)
 	}
 	/*
 	Function: preseltema
