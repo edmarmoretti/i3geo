@@ -71,8 +71,8 @@ i3GEOF.metar = {
 				i3GEO.eventos.NAVEGAMAPA.push("i3GEOF.metar.lista()");
 			}
 			if(i3GEO.Interface.ATUAL === "googlemaps"){
-   				metarDragend = GEvent.addListener(i3GeoMap, "dragend", function() {i3GEOF.metar.lista();});
-   				metarZoomend = GEvent.addListener(i3GeoMap, "zoomend", function() {i3GEOF.metar.lista();});						
+   				metarDragend = google.maps.event.addListener(i3GeoMap, "dragend", function() {i3GEOF.metar.lista();});
+   				metarZoomend = google.maps.event.addListener(i3GeoMap, "zoomend", function() {i3GEOF.metar.lista();});						
 			}
 			i3GEOF.metar.lista();
 		}

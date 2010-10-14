@@ -50,7 +50,8 @@ if (isset($_FILES['i3GEOuploadshp']['name']))
 		$novolayer->setmetadata("TEMA",$_FILES['i3GEOuploadshp']['name']);
 		$novolayer->setmetadata("DOWNLOAD","SIM");
 		$sfileObj = ms_newShapefileObj($dirmap."/".$_FILES['i3GEOuploadshp']['name'], -1);
-		$tipo = $sfileObj->type;
+		if(!isset($tipo) || $tipo == "")
+		{$tipo = $sfileObj->type;}
 		if ($tipo == 1){$novolayer->set("type",MS_LAYER_POINT);} // ponto
 		if ($tipo == 3){$novolayer->set("type",MS_LAYER_LINE);}
 		if ($tipo == 5){$novolayer->set("type",MS_LAYER_POLYGON);}

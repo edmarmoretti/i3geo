@@ -84,7 +84,7 @@ i3GEOF.etiqueta = {
 	html:function(){
 		var ins = '';
 		ins += '<p class="paragrafo" >Escolha o item que ser&aacute; utilizado como fonte de dados para incluir a etiqueta:<br>';	
-		ins += '<div id=i3GEOetiquetalistai class=digitar style="left:0px;top:0px;330px;height:80px;overflow:auto;display:block;"></div>';
+		ins += '<div id=i3GEOetiquetalistai class=digitar style="text-align:left;left:0px;top:0px;330px;height:80px;overflow:auto;display:block;"></div>';
 		ins += '<br><br>';
 		ins += '<p class="paragrafo" >';
 		ins += '<input id=i3GEOetiquetabotao1 size=35  type=button value="Ativar" />';
@@ -148,7 +148,7 @@ i3GEOF.etiqueta = {
 			itensatuais = i3GEO.arvoreDeCamadas.pegaTema(i3GEO.temaAtivo);
 			itensatuais = itensatuais.etiquetas.split(",");
 			ins = [];
-			ins.push("<table class=lista6 >");
+			ins.push("<table class=lista >");
 			n = retorno.data.valores.length;
 			for (i=0;i<n; i++){
 				item = retorno.data.valores[i].item;

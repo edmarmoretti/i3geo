@@ -48,7 +48,22 @@ foreach ($temas as $tema)
 			{$classe->set("name",$layer->getmetadata("tema"));}
 		}
 	}
+	if ($layer->getmetadata("classe") == "NAO")
+	{
+		$nclasses = $layer->numclasses;
+		if ($nclasses > 0)
+		{
+			for($i=0;$i<$nclasses;$i++)
+			{
+				$classe = $layer->getclass($i);
+				$classe->set("name","classeNula");
+			}
+		}
+	}	
 }
+$map->save($temp);
+removeLinha("classeNula",$temp);
+$map = ms_newMapObj($temp);
 $of = $map->outputformat;
 $of->set("driver","swf");
 $of->set("imagemode","PC256");

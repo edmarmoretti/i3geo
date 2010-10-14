@@ -74,7 +74,8 @@ i3GEOF.inseretxt = {
 				 		$i("i3GEOinseretxtDivComboTemas").style.display = "block";
 				 		if ($i("i3GEOinseretxtComboTemas")){
 				 			$i("i3GEOinseretxtComboTemas").onchange = function(){
-				 				i3GEO.mapa.ativaTema($i("i3GEOinseretxtComboTemas").value);
+				 				$i("i3GEOinseretxtDivComboItens").innerHTML = "<p class=paragrafo style=color:red >Aguarde...</p>";
+								i3GEO.mapa.ativaTema($i("i3GEOinseretxtComboTemas").value);
 				 				//combodeitens
 								i3GEO.util.comboItens(
 									"i3GEOinseretxtComboItens",
@@ -373,6 +374,11 @@ i3GEOF.inseretxt = {
 			}
 			else{
 				temp = function(retorno){
+					if(retorno.data[0] == " "){
+						alert("Nada encontrado.");
+						i3GEOF.inseretxt.aguarde.visibility = "hidden";
+						return;
+					}
 					i3GEOF.inseretxt.insere(retorno.data);
 				};
 				tema = $i("i3GEOinseretxtComboTemas").value;

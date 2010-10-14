@@ -43,6 +43,7 @@ MAP
         ANGLE 360
         COLOR 138 134 150
         OPACITY 100
+        SYMBOL 0
       END
     END
     CLASS

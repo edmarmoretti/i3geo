@@ -499,6 +499,27 @@ $valor - Novo valor da transparência
 		return("ok");
 	}
 /*
+function: inverteStatusLegenda
+
+Muda o metadata CLASSE, invertendo seu valor
+
+*/
+	function inverteStatusLegenda()
+	{
+        //error_reporting(E_ALL);
+		$valor = $this->layer->getmetadata("classe");
+		if($valor == "" || strtolower($valor) == "sim")
+		{$valor = "NAO";}
+		else
+		{$valor = "SIM";}
+		foreach ($this->grupo as $lg)
+		{
+			$ll = $this->mapa->getlayerbyname($lg);
+			$ll->setmetaData("classe",$valor);
+		}
+		return("ok");
+	}	
+/*
 function: mudaNome
 
 Muda nome do tema.

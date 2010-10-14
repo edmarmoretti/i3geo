@@ -78,7 +78,23 @@ foreach ($temas as $tema)
 			{$classe->set("name",$layer->getmetadata("tema"));}
 		}
 	}
+	if ($layer->getmetadata("classe") == "NAO")
+	{
+		$nclasses = $layer->numclasses;
+		if ($nclasses > 0)
+		{
+			for($i=0;$i<$nclasses;$i++)
+			{
+				$classe = $layer->getclass($i);
+				$classe->set("name","classeNula");
+			}
+		}
+	}	
 }
+$map->save($temp);
+removeLinha("classeNula",$temp);
+$map = ms_newMapObj($temp);
+$o = $map->outputformat;
 if($interface == "openlayers" || $interface == "googlemaps"){
 	if($mapexten != ""){
 		$ext = explode(" ",$mapexten);
@@ -87,9 +103,9 @@ if($interface == "openlayers" || $interface == "googlemaps"){
 	}
 	$legenda = $map->legend;
 	$legenda->set("status",MS_EMBED);
-	$o = $map->outputformat;
 	$o->set("imagemode",MS_IMAGEMODE_RGB);
 }
+$o->set("imagemode",MS_IMAGEMODE_RGB);
 $imgo = $map->draw();
 $nomer = ($imgo->imagepath)."mapa".$nomes.".png";
 $imgo->saveImage($nomer);

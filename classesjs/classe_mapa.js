@@ -256,7 +256,7 @@ i3GEO.mapa = {
 		/*
 		Function: atualiza
 		
-		Atualiza a legenda do mapa que são utilizados para mostrar a legenda
+		Atualiza o elemento HTML do mapa utilizado para mostrar a legenda
 		*/
 		atualiza: function(){
 			if(typeof(console) !== 'undefined'){console.info("i3GEO.mapa.legendaHTML.atualiza()");}
@@ -648,24 +648,27 @@ i3GEO.mapa = {
 									nds = ds.length;
 									for(s=0;s<nds;s++){
 										for(r=0;r<ntips;r++){
-											eval("var alias = ds[s]."+tips[r]+".alias");
-											eval("var valor = ds[s]."+tips[r]+".valor");
-											eval("var link = ds[s]."+tips[r]+".link");
-											eval("var img = ds[s]."+tips[r]+".img");
-											if (i3GEO.configura.tipotip === "completo" || i3GEO.configura.tipotip === "balao"){
-												if(valor !== "" && link === "") 
-												{ins += "<span class='tiptexto' style='text-align:left;font-size:8pt'>" + alias + " :" + valor + "</span><br>";}
-												if(valor !== "" && link !== "") 
-												{ins += "<span class='tiptexto' style='text-align:left;font-size:8pt'>" + alias + " : <a style='color:blue;cursor:pointer' target=_blanck href='"+link+"' >" + valor + "</a></span><br>";}
-												if(img !== "")
-												{ins += img+"<br>";}
-												ins += "<nl>";
-												mostra = true;
+											try{
+												eval("var alias = ds[s]."+tips[r]+".alias");
+												eval("var valor = ds[s]."+tips[r]+".valor");
+												eval("var link = ds[s]."+tips[r]+".link");
+												eval("var img = ds[s]."+tips[r]+".img");
+												if (i3GEO.configura.tipotip === "completo" || i3GEO.configura.tipotip === "balao"){
+													if(valor !== "" && link === "") 
+													{ins += "<span class='tiptexto' style='text-align:left;font-size:8pt'>" + alias + " :" + valor + "</span><br>";}
+													if(valor !== "" && link !== "") 
+													{ins += "<span class='tiptexto' style='text-align:left;font-size:8pt'>" + alias + " : <a style='color:blue;cursor:pointer' target=_blanck href='"+link+"' >" + valor + "</a></span><br>";}
+													if(img !== "")
+													{ins += img+"<br>";}
+													ins += "<nl>";
+													mostra = true;
+												}
+												else{
+													ins += "<span class='tiptexto' style='text-align:left;font-size:8pt'>" + valor + "</span><br>";
+													mostra = true;
+												}
 											}
-											else{
-												ins += "<span class='tiptexto' style='text-align:left;font-size:8pt'>" + valor + "</span><br>";
-												mostra = true;
-											}
+											catch(e){}
 										}
 									}
 								}
@@ -688,7 +691,6 @@ i3GEO.mapa = {
 							}
 							else{
 								if(i3GEO.Interface.ATUAL === "googleearth"){
-									//res = '<div style="text-align:left;" >'+res+'</div>';
 									i3GEO.Interface.googleearth.balao(res,objposicaocursor.ddx,objposicaocursor.ddy);
 								}
 								else{

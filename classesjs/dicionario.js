@@ -2,7 +2,7 @@ g_traducao = {
 //texto da janela de mensagens
 "p1": [
 {
-pt:"O I3Geo &eacute; software livre! Para download clique <a href='http://mapas.mma.gov.br/download' target=blank >aqui</a>. <b><a href='http://"+window.location.host+"/i3geo/mobile/qrcode.htm' target=blank >Qrcode mobile</a></b>",
+pt:"O i3Geo &eacute; software livre! Para download clique <a href='http://mapas.mma.gov.br/download' target=blank >aqui</a>. <b><a href='http://"+window.location.host+"/i3geo/mobile/qrcode.htm' target=blank >Qrcode mobile</a></b>",
 en:"I3geo is a open source software! <a href='http://mapas.mma.gov.br/download' target=blank >Click</a> to download.",
 es:"I3Geo es software libre. <a href='http://mapas.mma.gov.br/download' target=blank > Download</a>",
 it:"I3geo è un software libero! <a href='http://mapas.mma.gov.br/download' target=blank >clicca qui </a> per il download."
@@ -112,6 +112,27 @@ pt: "Camadas de fundo",
 en:"Base layers",
 es:"Base layers",
 it:"Base layers"
+}],
+"p17": [
+{
+pt: "Imprime legenda",
+en:"Enable legend",
+es:"Activar Subtitulo",
+it:"Attiva legenda"
+}],
+"p18": [
+{
+pt: "Não imprime a legenda",
+en:"Disable legend",
+es:"Desactivar Subtitulo",
+it:"Disattiva legenda"
+}],
+"p19": [
+{
+pt: "Ativa ou desativa a legenda de um tema na opção de impressão do mapa",
+en:"Ativa ou desativa a legenda de um tema na opção de impressão do mapa",
+es:"Ativa ou desativa a legenda de um tema na opção de impressão do mapa",
+it:"Ativa ou desativa a legenda de um tema na opção de impressão do mapa"
 }],
 //itens do menu suspenso
 "s1": [
@@ -921,14 +942,14 @@ it:"Inserisci le coordinate di un punto (X=longitudine e Y=latitudine) per indiv
 }],
 "d2":[
 {
-pt:"Altera a escala do mapa ajustando-a para mostrar a mesma abrang&circ;ncia geogr&aacute;fica da inicializa&ccedil;&atilde;o.",
+pt:"Altera a escala do mapa ajustando-a para mostrar a mesma abrang&ecirc;ncia geogr&aacute;fica da inicializa&ccedil;&atilde;o.",
 en:"Change the scale of the map adjusting it to show the same initial geographical cover.",
 es:"Modifica la escala del mapa ajust&aacute;ndola para mostrar la misma &aacute;rea geogr&aacute;fica inicial",
 it:"Modificare la scala della mappa adeguandola per mostrare la stessa copertura geografica sin dall'inizializzazione"
 }],
 "d3":[
 {
-pt:"Amplia o mapa - coloca o ponto clicado no centro da tela ou amplia a regi&atilde;o indicada por um ret&acirc;ngulo.Ap&oacute;s ativada, clique e arraste o mouse sobre o mapa na &aacute;rea de zoom desejada.",
+pt:"Amplia o mapa - desloca o ponto clicado para centro da tela ou amplia a regi&atilde;o indicada por um ret&acirc;ngulo. Ap&oacute;s ativada, clique e arraste o mouse sobre o mapa na &aacute;rea de zoom desejada.",
 en:"Extends the map - place the clicked point in the center of the screen or extends the region indicated by a rectangular.After enabled, click and drag the mouse over the map in the area of zoom desired.",
 es:"Ampl&iacute;a el mapa - coloca el punto donde se hizo clic en el centro de la pantalla o ampl&iacute;a la regi&oacute;n indicada por un rect&aacute;ngulo. Despu&eacute;s de activarla, haga clic y arrastre el rat&oacute;n sobre el mapa en el &aacute;rea de zoom deseada",
 it:"Ampliare la mappa - pone il punto cliccato nel centro dello schermo o ingrandisce la regione indicata con un rettangolo. Dopo aver attivata, cliccare e trascinare il mouse sopra la mappa nell’area di zoom desiderata."
@@ -956,7 +977,7 @@ it:"Riduci la mappa tenendo come referimento il centro corrente"
 }],
 "d7":[
 {
-pt:"Mostra informa&ccedil;&otilde;es sobre um ponto no mapa. Ap&oacute;s ativada, clique sobre o mesmo.",
+pt:"Mostra informa&ccedil;&otilde;es sobre um ponto no mapa. Ap&oacute;s ativada, clique sobre o mapa.",
 en:"Displays information about a point on the map. Once activated, click on it.",
 es:"Muestra informaci&oacute;n sobre un punto en el mapa. Despu&eacute;s de activarla haga clic sobre el mismo.",
 it:"Mostra gli informazioni su un punto sulla mappa. Dopo averla attivata, fare clic su di esso."
@@ -1068,9 +1089,9 @@ it:"Misura la distanza tra due o più punti cliccati sulla mappa (minore distanza
 }],
 "d21a":[
 {
-pt:"Mede a &aacute;rea de um pol&iacute;gono desenhado na tela. O c&aacute;lculo de &aacute;ria &eacute; aproximado e sua precis&atilde;o depende da escala do mapa.",
+pt:"Mede a &aacute;rea de um pol&iacute;gono desenhado na tela. O c&aacute;lculo de &aacute;rea &eacute; aproximado e sua precis&atilde;o depende da escala do mapa.",
 en:"It measures the area on the map. The calculation of area is approximate and their accuracy depends on the scale of the map.",
-es:"Mede a &aacute;rea de um pol&iacute;gono desenhado na tela. O c&aacute;lculo de &aacute;ria &eacute; aproximado e sua precis&atilde;o depende da escala do mapa.",
+es:"Mede a &aacute;rea de um pol&iacute;gono desenhado na tela. O c&aacute;lculo de &aacute;rea &eacute; aproximado e sua precis&atilde;o depende da escala do mapa.",
 it:"Misura l'area di un poligono tracciato sullo schermo. Il calcolo della superficie è approssimativo e la sua precisione dipende dalla scala della mappa."
 }],
 "d22":[

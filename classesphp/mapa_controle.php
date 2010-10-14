@@ -1272,6 +1272,21 @@ Aplica processos em um tema do tipo imagem
 		redesenhaMapa();
 	break;
 /*
+Valor: INVERTESTATUSLEGENDA
+
+Inverte o metadata CLASSE
+
+<Temas->inverteStatusLegenda>
+*/					
+	case "INVERTESTATUSLEGENDA":
+		include_once("classe_temas.php");
+		copiaSeguranca($map_file);
+		$m = new Temas($map_file,$tema);
+		$m->inverteStatusLegenda();
+		$m->salva();
+		redesenhaMapa();
+	break;	
+/*
 Valor: MUDATRANSP
 
 Altera a transparência de um tema
@@ -1547,7 +1562,18 @@ Os valores para o gráfico são obtidos do tema indicado na classe. Para cada novo
 		include_once("classe_shp.php");
 		copiaSeguranca($map_file);
 		$m = new SHP($map_file,$tema,$locaplic);
+		if($interface == "googlemaps")
+		{
+			$projMapa = $m->mapa->getProjection();
+			$m->mapa->setProjection("init=epsg:4291");
+			$m->salva();
+		}		
 		$retorno = $m->insereSHPgrafico($x,$y,$itens,$width,$inclinacao,$shadow_height);
+		if($interface == "googlemaps")
+		{
+			$m->mapa->setProjection($projMapa);
+			$m->salva();
+		}		
 	break;
 /*
 Valor: MOSTRAWKT
@@ -2045,8 +2071,7 @@ Identifica elementos no mapa.
 		{
 			$m->mapa->setProjection($projMapa);
 			$m->salva();
-		}		
-		
+		}
 	break;
 /*
 Valor: IDENTIFICAUNICO
@@ -2058,9 +2083,22 @@ Identifica elementos no mapa retornando apenas o valor de um único item.
 	case "IDENTIFICAUNICO":
 		if (!isset($resolucao)){$resolucao = 5;}
 		include_once("classe_atributos.php");
-		$m = new Atributos($map_file,$tema);
+		if(!isset($ext))
+		{$ext = "";}		
+		$m = new Atributos($map_file,$tema,"",$ext);
+		if($interface == "googlemaps")
+		{
+			$projMapa = $m->mapa->getProjection();
+			$m->mapa->setProjection("init=epsg:4291");
+			$m->salva();
+		}		
 		$xy = explode(",",$xy);
 		$retorno = $m->identificaQBP($tema,$xy[0],$xy[1],$map_file,$resolucao,$item,$tiporetorno="unico");
+		if($interface == "googlemaps")
+		{
+			$m->mapa->setProjection($projMapa);
+			$m->salva();
+		}		
 	break;
 /*
 Valor: ESTATISTICA
@@ -2238,8 +2276,8 @@ Aplica uma resolução nova ao mapa atual e gera uma imagem para a lente.
 		$m = new Navegacao($map_file);
 		if(!isset($ext))
 		{$ext = "";}
+		$ext = projetaExt($map_file,$ext);
 		$m->aplicaResolucao($resolucao,$ext);
-		//$m->desabilitaRASTER();
 		$retorno = ($m->mapa->width).",".($m->mapa->height).",".$m->gravaImagemCorpo();
 	break;
 /*
@@ -2500,6 +2538,7 @@ Seleciona elementos utilizando um ponto.
 <Selecao->selecaoPT>
 */	
 	case "SELECAOPT":
+		//error_reporting(E_ALL);
 		include_once("classe_selecao.php");
 		copiaSeguranca($map_file);
 		if(!isset($xy)){$xy = "";}

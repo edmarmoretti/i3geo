@@ -67,7 +67,7 @@ i3GEOF.inserexy = {
 			//eventos das guias
 			$i("i3GEOinserexyguia1").onclick = function(){
 				i3GEO.guias.mostraGuiaFerramenta("i3GEOinserexyguia1","i3GEOinserexyguia");
-				$i("i3GEOinserexyprojecao").style.display = "block";
+				$i("i3GEOinserexyprojecao").style.display = "none";
 			};
 			$i("i3GEOinserexyguia2").onclick = function(){
 				i3GEO.guias.mostraGuiaFerramenta("i3GEOinserexyguia2","i3GEOinserexyguia");
@@ -153,7 +153,7 @@ i3GEOF.inserexy = {
 		'		<li><a href="#ancora"><em><div id="i3GEOinserexyguia6" style="text-align:center;left:0px;" >Coordenadas</div></em></a></li>' +
 		'	</ul>' +
 		'</div><br>' +
-		'<div id=i3GEOinserexyprojecao style="left:0px;display:block">' +
+		'<div id=i3GEOinserexyprojecao style="text-align:left;left:0px;display:none">' +
 		'   <p class=paragrafo >Proje&ccedil;&atilde;o:</p>' +
 		'	<div id="i3GEOinserexylistaepsg" style="text-align:left;border:1px solid gray;width:300px;overflow:auto;height:60px;display:block;left:1px" >' +
 		'	</div>' +
@@ -194,13 +194,13 @@ i3GEOF.inserexy = {
 		'	</div>' +
 		'</div> '+
 		'<div class=guiaobj id="i3GEOinserexyguia3obj" style="left:1px;display:none;">' +
-		'	<div id=i3GEOinserexytipodig style="left:0px">' +
+		'	<div id=i3GEOinserexytipodig style="text-align:left;left:0px">' +
 		'		<p class=paragrafo >Tipo de entrada:</p>' +
 		'		<table summary="Tipo de entrada" class=lista6 >' +
 		'		<tr>' +
-		'			<td><input style=cursor:pointer title="DMS" onclick="i3GEOF.inserexy.escolhedig(\'i3GEOinserexydigmascara\')" name=i3GEOinserexytipodig type=radio id="i3GEOinserexytipodigmascara" checked /></td>' +
+		'			<td><input style="border:0px solid white;cursor:pointer" title="DMS" onclick="i3GEOF.inserexy.escolhedig(\'i3GEOinserexydigmascara\')" name=i3GEOinserexytipodig type=radio id="i3GEOinserexytipodigmascara" checked /></td>' +
 		'			<td>Máscara</td>' +
-		'			<td><input style=cursor:pointer title="DMS" onclick="i3GEOF.inserexy.escolhedig(\'i3GEOinserexydigcampo\')" name=i3GEOinserexytipodig type=radio id="i3GEOinserexytipodigcampo" /></td>' +
+		'			<td><input style="border:0px solid white;cursor:pointer" title="DMS" onclick="i3GEOF.inserexy.escolhedig(\'i3GEOinserexydigcampo\')" name=i3GEOinserexytipodig type=radio id="i3GEOinserexytipodigcampo" /></td>' +
 		'			<td>Campo &uacute;nico</td>' +
 		'		</tr>' +
 		'		</table><br>' +
@@ -421,9 +421,11 @@ i3GEOF.inserexy = {
 	Function: adicionaClique
 	
 	Adiciona um ponto no mapa no local onde o usuário clicar com o mouse
+	
+	As coordenadas são obtidas do objeto objposicaocursor
 	*/
 	adicionaClique: function(){
-		i3GEOF.inserexy.adiciona(objposicaocursor.ddx+" "+objposicaocursor.ddy);
+		i3GEOF.inserexy.adiciona(objposicaocursor.ddx+" "+objposicaocursor.ddy,"cliqueMapa");
 	},
 	/*
 	Function: inserirdd
@@ -540,11 +542,17 @@ i3GEOF.inserexy = {
 	
 	Adiciona um ponto no mapa
 	
+	Parametros:
+	
+	xy {string} - coordenadas x e y separadas por espaço
+	
+	fonte {string} - (opcional) como a coordenada foi obtida. Se for "cliqueMapa" o parametro projeção será enviado como vazio para o servidor
+	
 	Veja:
 	
 	<i3GEO.php.insereSHP>
 	*/
-	adiciona: function(xy){
+	adiciona: function(xy,fonte){
 		if(i3GEOF.inserexy.aguarde.visibility === "visible")
 		{return;}
 		if(g_tipoacao === "inserexy"){
@@ -557,7 +565,8 @@ i3GEOF.inserexy = {
 				n,
 				i,
 				temparray,
-				xyn;
+				xyn,
+				projecao = i3GEOF.inserexy.pegaProjecao();
 				
 			xyn = xy.split(" ");
 			n = xyn.length;
@@ -578,7 +587,10 @@ i3GEOF.inserexy = {
 					i3GEO.Interface.atualizaTema(retorno,tema);
 					i3GEOF.inserexy.aguarde.visibility = "hidden"
 				};
-				i3GEO.php.insereSHP(temp,tema,item,valoritem,xy,i3GEOF.inserexy.pegaProjecao());
+				if(fonte !== undefined){
+					projecao = "";
+				}
+				i3GEO.php.insereSHP(temp,tema,item,valoritem,xy,projecao);
 			}
 		}
 	},

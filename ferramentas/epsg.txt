@@ -1,5 +1,7 @@
 # Geográfica SAD69
 <4291> +proj=longlat +ellps=GRS67 +no_defs  no_defs   <>
+# WGS 84
+<4326> +proj=longlat +ellps=WGS84 +datum=WGS84 +no_defs  no_defs <>
 # Corrego Alegre / UTM zone 21S
 <22521> +proj=utm +zone=21 +south +ellps=intl +towgs84=-206,172,-6,0,0,0,0 +units=m +no_defs  <>
 # Corrego Alegre / UTM zone 22S

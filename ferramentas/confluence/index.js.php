@@ -66,8 +66,8 @@ i3GEOF.confluence = {
 				i3GEO.eventos.NAVEGAMAPA.push("i3GEOF.confluence.lista()");
 			}
 			if(i3GEO.Interface.ATUAL === "googlemaps"){
-   				confluenceDragend = GEvent.addListener(i3GeoMap, "dragend", function() {i3GEOF.confluence.lista();});
-   				confluenceZoomend = GEvent.addListener(i3GeoMap, "zoomend", function() {i3GEOF.confluence.lista();});						
+   				confluenceDragend = google.maps.event.addListener(i3GeoMap, "dragend", function() {i3GEOF.confluence.lista();});
+   				confluenceZoomend = google.maps.event.addListener(i3GeoMap, "zoomend", function() {i3GEOF.confluence.lista();});						
 			}
 			i3GEOF.confluence.lista();
 		}
@@ -124,8 +124,8 @@ i3GEOF.confluence = {
 				i3GEO.eventos.NAVEGAMAPA.remove("i3GEOF.confluence.lista()");
 			}
 			if(i3GEO.Interface.ATUAL === "googlemaps"){
-				GEvent.removeListener(confluenceDragend);
-				GEvent.removeListener(confluenceZoomend);
+				google.maps.event.removeListener(confluenceDragend);
+				google.maps.event.removeListener(confluenceZoomend);
 			}
 		};
 		YAHOO.util.Event.addListener(janela[0].close, "click", temp);		

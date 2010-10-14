@@ -113,11 +113,10 @@ i3GEO.calculo = {
 	dd2tela: function (vx,vy,docmapa,ext,cellsize){
 		try{
 			var pos,latlng,xyn,dc,imgext,c,xy;
-			if(i3GEO.Interface.ATUAL == "googlemaps"){
+			if(i3GEO.Interface.ATUAL == "googlemaps" && docmapa.id != "mapaReferencia"){
 				pos = i3GEO.util.pegaPosicaoObjeto($i(i3GEO.Interface.IDCORPO));
 				xyn = i3GeoMapOverlay.getProjection().fromLatLngToContainerPixel(new google.maps.LatLng(vy,vx));
 				xy = [];
-				console.info(xyn.x);
 				return [(xyn.x)+pos[0],(xyn.y)+pos[1]];
 			}
 			if(i3GEO.Interface.ATUAL == "openlayers" && docmapa.id != "mapaReferencia"){
@@ -590,7 +589,8 @@ i3GEO.calculo = {
    		xyMax = i3GEO.calculo.dd2tela(rectbox[2],rectbox[3],documento,boxext,pixel);
 		w = xyMax[0]-xyMin[0];
 		h = xyMin[1]-xyMax[1];
-   		tl = i3GEO.calculo.dd2tela(rectbox[0],rectbox[3],documento,mapext,pixel);  		
+		tl = i3GEO.calculo.dd2tela(rectbox[0],rectbox[3],documento,mapext,pixel);  		
+
 		pos = i3GEO.util.pegaPosicaoObjeto(documento);
 		t = tl[1] - pos[1];
 		l = tl[0] - pos[0];

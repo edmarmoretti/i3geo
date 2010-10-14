@@ -132,9 +132,14 @@ i3GEOF.identifica = {
 			$i("i3GEOidentificaguia4").onclick = function(){
 				i3GEO.guias.mostraGuiaFerramenta("i3GEOidentificaguia4","i3GEOidentificaguia");
 				new YAHOO.widget.Button("i3GEOidentificabotao1",{onclick:{fn: function(){
-					//window.location.href = "../etiqueta/index.htm?tema="+tema;
-					if(i3GEO.temaAtivo !== "")
-					{i3GEO.tema.dialogo.etiquetas(i3GEO.temaAtivo);}
+					if(i3GEO.temaAtivo !== ""){
+						
+						var ltema = i3GEO.arvoreDeCamadas.pegaTema(i3GEO.temaAtivo);
+						if(ltema.identifica == "nao" || ltema.identifica == "NAO")
+						{alert("Esse tema não permite etiquetas");}
+						else
+						{i3GEO.tema.dialogo.etiquetas(i3GEO.temaAtivo);}
+					}
 					else
 					{alert("Nenhum tema definido");}
 				}}});
@@ -319,11 +324,11 @@ i3GEOF.identifica = {
 			}
 			
 			if(lista[l].identifica !== "nao")
-			{linhas1 += "<tr><td style='border-top:1px solid beige;'><input onclick='i3GEOF.identifica.buscaDadosTema(\""+tema+"\")' style=cursor:pointer type=radio name=i3GEOidentificatema /></td><td style='border-top:1px solid beige;' >"+nome+"</td></tr>";}
+			{linhas1 += "<tr><td style='border-top:1px solid beige;'><input onclick='i3GEOF.identifica.buscaDadosTema(\""+tema+"\")' style='border:0px solid white;cursor:pointer;' type=radio name=i3GEOidentificatema /></td><td style='border-top:1px solid beige;' >"+nome+"</td></tr>";}
 		}
 		divResultado = $i("i3GEOidentificalistaTemas");
 		if(divResultado)
-		{divResultado.innerHTML = linhas+"<table class=lista2 ><tr><td style=text-align:left ><input onclick='i3GEOF.identifica.buscaDadosTema(\"ligados\")' style=cursor:pointer type=radio name=i3GEOidentificatema /></td><td>Todos</td></tr>"+linhas1+"</table>";}
+		{divResultado.innerHTML = linhas+"<table class=lista2 ><tr><td style=text-align:left ><input onclick='i3GEOF.identifica.buscaDadosTema(\"ligados\")' style='border:0px solid white;;cursor:pointer' type=radio name=i3GEOidentificatema /></td><td>Todos</td></tr>"+linhas1+"</table>";}
 	},
 	/*
 	Function: montaLinkGeohack
@@ -407,7 +412,7 @@ i3GEOF.identifica = {
 				{
 					ltema = i3GEOF.identifica.sistemasAdicionais[l].split(",");
 					if (ltema.length > 1)
-					{linhas += "<tr><td style='border-top:1px solid beige;'><input onclick='i3GEOF.identifica.mostraDadosSistema("+ltema[1]+",\""+ltema[2]+"\")' style=cursor:pointer type=radio name=i3GEOidentificatema /></td><td style='border-top:1px solid beige;' >"+ltema[0]+"</td></tr>";}
+					{linhas += "<tr><td style='border-top:1px solid beige;'><input onclick='i3GEOF.identifica.mostraDadosSistema("+ltema[1]+",\""+ltema[2]+"\")' style='border:0px solid white;cursor:pointer' type=radio name=i3GEOidentificatema /></td><td style='border-top:1px solid beige;' >"+ltema[0]+"</td></tr>";}
 					
 				}
 				if(divins){

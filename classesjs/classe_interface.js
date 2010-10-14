@@ -10,7 +10,7 @@ Licenca:
 
 GPL2
 
-I3Geo Interface Integrada de Ferramentas de Geoprocessamento para Internet
+i3Geo Interface Integrada de Ferramentas de Geoprocessamento para Internet
 
 Direitos Autorais Reservados (c) 2006 Ministério do Meio Ambiente Brasil
 Desenvolvedor: Edmar Moretti edmar.moretti@mma.gov.br
@@ -781,8 +781,8 @@ i3GEO.Interface = {
 				}
 			}
 			catch(e){}
-			if(i3geoOL.getLayersByName("Fundo").length == 0 && fundoIsBase === true){
-				layer = new OpenLayers.Layer.WMS( "Fundo", urlfundo,{map_imagetype:i3GEO.Interface.OUTPUTFORMAT},{ratio: 1,singleTile:true,isBaseLayer:true, opacity: 1,visibility:true});
+			if(i3geoOL.getLayersByName("Nenhum").length == 0 && fundoIsBase === true){
+				layer = new OpenLayers.Layer.WMS( "Nenhum", urlfundo,{map_imagetype:i3GEO.Interface.OUTPUTFORMAT},{ratio: 1,singleTile:true,isBaseLayer:true, opacity: 1,visibility:true});
 				i3geoOL.addLayer(layer);
 			}
 			opcoes = {
@@ -909,7 +909,7 @@ i3GEO.Interface = {
 		},
 		ligaDesliga:function(obj){
 			var layers = i3geoOL.getLayersByName(obj.value),
-				temp = function(){},
+				temp = function(){i3GEO.mapa.legendaHTML.atualiza();},
 				desligar = "",
 				ligar = "";
 			if(layers.length > 0){
@@ -1159,7 +1159,10 @@ i3GEO.Interface = {
     		ret = pol.split(" ");
 			function montaMapa(retorno){
 				var pos, sw,ne,z,myMapType;
-				i3GeoMap = new google.maps.Map($i(i3GEO.Interface.IDMAPA),{scaleControl:true});
+				try{
+					i3GeoMap = new google.maps.Map($i(i3GEO.Interface.IDMAPA),{scaleControl:true});
+				}
+				catch(e){alert(e);return;}
 				//
 				//carrega o javascript que permite fazer o zoom por box
 				//
@@ -1184,6 +1187,7 @@ i3GEO.Interface = {
 				i3GEO.gadgets.mostraCoordenadasUTM();
 				i3GEO.gadgets.mostraEscalaNumerica();
 				i3GEO.gadgets.mostraMenuSuspenso();
+				i3GEO.idioma.mostraSeletor();
 				g_operacao = "";
 				g_tipoacao = "";
 				if(i3GEO.parametros.kmlurl !== "")
@@ -1242,7 +1246,7 @@ i3GEO.Interface = {
 			google.maps.event.addListener(i3GeoMap, "tilesloaded", function() {
 				i3GEO.Interface.googlemaps.recalcPar();
 			});			
-			google.maps.event.addListener(i3GeoMap, "zoom_changed", function() {
+			google.maps.event.addListener(i3GeoMap, "bounds_changed", function() {
 				i3GEO.Interface.googlemaps.recalcPar();
 				g_operacao = "";
 				g_tipoacao = "";
@@ -1329,7 +1333,7 @@ i3GEO.Interface = {
 		},
 		ligaDesliga:function(obj){
 			var indice = i3GEO.Interface.googlemaps.retornaIndiceLayer(obj.value),
-				temp = function(){},
+				temp = function(){i3GEO.mapa.legendaHTML.atualiza();},
 				desligar = "",
 				ligar = "";
 			//alert(indice+" "+obj.value)
@@ -1382,11 +1386,10 @@ i3GEO.Interface = {
 					escalaAtual = i3GEO.parametros.mapscale;
 				g_operacao = "";
 				g_tipoacao = "";
-				sw = i3GeoMapOverlay.getProjection().fromContainerPixelToLatLng(new google.maps.Point(0,i3GEO.parametros.h));
-				ne = i3GeoMapOverlay.getProjection().fromContainerPixelToLatLng(new google.maps.Point(i3GEO.parametros.w,0));
+				sw = i3GeoMap.getBounds().getSouthWest();
+				ne = i3GeoMap.getBounds().getNorthEast();
 				i3GEO.parametros.mapexten = sw.lng()+" "+sw.lat()+" "+ne.lng()+" "+ne.lat();
 				i3GEO.parametros.mapscale = i3GEO.Interface.googlemaps.calcescala();
-				//alert(i3GEO.parametros.mapscale)
 				sw = i3GeoMapOverlay.getProjection().fromContainerPixelToLatLng(new google.maps.Point(0,1));
 				ne = i3GeoMapOverlay.getProjection().fromContainerPixelToLatLng(new google.maps.Point(1,0));
 				i3GEO.parametros.pixelsize = sw.lng() - ne.lng();

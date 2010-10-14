@@ -11,7 +11,7 @@ Licenca:
 
 GPL2
 
-I3Geo Interface Integrada de Ferramentas de Geoprocessamento para Internet
+i3Geo Interface Integrada de Ferramentas de Geoprocessamento para Internet
 
 Direitos Autorais Reservados (c) 2006 Ministério do Meio Ambiente Brasil
 Desenvolvedor: Edmar Moretti edmar.moretti@mma.gov.br
@@ -212,6 +212,8 @@ i3GEO.maparef = {
 			$i("i3geo_winRef").style.border = "1px solid gray";
 			moveX = pos[0] + i3GEO.parametros.w + 153 - i3GEO.maparef.RIGHT - 300;
 			moveY = pos[1] + i3GEO.maparef.TOP;
+			if(i3GEO.Interface.ATUAL == "googlemaps")
+			{moveY += 30;}
 			YAHOO.janelaRef.xp.panel.moveTo(moveX,moveY);
 			escondeRef = function(){
 				YAHOO.util.Event.removeListener(YAHOO.janelaRef.xp.panel.close, "click");
@@ -226,7 +228,6 @@ i3GEO.maparef = {
 				{YAHOO.util.Event.addListener($i("imagemReferencia"),"mousemove", atualizaLocalizarxy);}
 			}
 		}
-		//YAHOO.log("Fim initJanelaRef", "i3geo");
 		if(i3GEO.eventos.NAVEGAMAPA.toString().search("i3GEO.maparef.atualiza()") < 0)
 		{i3GEO.eventos.NAVEGAMAPA.push("i3GEO.maparef.atualiza()");}
 		this.atualiza(true);
@@ -353,6 +354,9 @@ i3GEO.maparef = {
 			if (navm){novoel.style.filter='alpha(opacity=40)';}
 			else{novoel.style.opacity= 0.4;}
 			$i("mapaReferencia").appendChild(novoel);
+			//
+			//aplica os eventos de movimentação sobre o box azul
+			//
 			boxrefdd = new YAHOO.util.DD("boxref");
 			//
 			//atualiza o mapa principal quando o box é modificado manualmente

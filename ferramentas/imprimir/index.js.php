@@ -69,32 +69,32 @@ i3GEOF.imprimir = {
 	String com o código html
 	*/
 	html:function(){
-		var ins = '<p class=paragrafo > Escolha o modelo:</p>' +
+		var ins = '<p class=paragrafo > Escolha o modelo: (utilize as propriedades do mapa para compor a legenda e outros elementos do mapa)</p>' +
 			'<table class=lista6 width="200px">';
 			if(i3GEO.Interface.ATUAL == "padrao"){
 			ins += '	<tr>' +
-			'		<td><input style="cursor:pointer" onclick=i3GEOF.imprimir.abreI(this) type=radio value="a4l.htm" name=cmodelo /></td>' +
+			'		<td><input style="border:0px solid white;cursor:pointer" onclick=i3GEOF.imprimir.abreI(this) type=radio value="a4l.htm" name=cmodelo /></td>' +
 			'		<td>A4 paisagem</td>' +
 			'	</tr>' +
 			'	<tr>' +
-			'		<td ><input style="cursor:pointer" onclick=i3GEOF.imprimir.abreI(this) type=radio value="a4p.htm" name=cmodelo  /></td>' +
+			'		<td ><input style="border:0px solid white;cursor:pointer" onclick=i3GEOF.imprimir.abreI(this) type=radio value="a4p.htm" name=cmodelo  /></td>' +
 			'		<td >A4 retrato</td>' +
 			'	</tr>';
 			}
 			ins += '	<tr>' +
-			'		<td><input style="cursor:pointer" onclick=i3GEOF.imprimir.abreI(this) type=radio value="a4lpaisagempdf.htm" name=cmodelo /></td>' +
+			'		<td><input style="border:0px solid white;cursor:pointer" onclick=i3GEOF.imprimir.abreI(this) type=radio value="a4lpaisagempdf.htm" name=cmodelo /></td>' +
 			'		<td>A4 com margens pdf</td>' +
 			'	</tr>' +
 			'	<tr>' +
-			'		<td><input style="cursor:pointer" onclick=i3GEOF.imprimir.abreI(this) type=radio value="geotif.php" name=cmodelo /></td>' +
+			'		<td><input style="border:0px solid white;cursor:pointer" onclick=i3GEOF.imprimir.abreI(this) type=radio value="geotif.php" name=cmodelo /></td>' +
 			'		<td>Geo Tiff</td>' +
 			'	</tr>' +
 			'	<tr>' +
-			'		<td><input style="cursor:pointer" onclick=i3GEOF.imprimir.abreI(this) type=radio value="aggpng.php" name=cmodelo /></td>' +
+			'		<td><input style="border:0px solid white;cursor:pointer" onclick=i3GEOF.imprimir.abreI(this) type=radio value="aggpng.php" name=cmodelo /></td>' +
 			'		<td>Agg/Png alta qualidade</td>' +
 			'	</tr>' +
 			'	<tr>' +
-			'		<td><input style="cursor:pointer" onclick=i3GEOF.imprimir.abreI(this) type=radio value="svg.php" name=cmodelo /></td>' +
+			'		<td><input style="border:0px solid white;cursor:pointer" onclick=i3GEOF.imprimir.abreI(this) type=radio value="svg.php" name=cmodelo /></td>' +
 			'		<td>Svg - vetorial</td>' +
 			'	</tr>' +
 			'</table>';
@@ -114,8 +114,8 @@ i3GEOF.imprimir = {
 		//cria a janela flutuante
 		titulo = "Imprimir <a class=ajuda_usuario target=_blank href='" + i3GEO.configura.locaplic + "/ajuda_usuario.php?idcategoria=5&idajuda=49' >&nbsp;&nbsp;&nbsp;</a>";
 		janela = i3GEO.janela.cria(
-			"220px",
-			"140px",
+			"250px",
+			"180px",
 			"",
 			"",
 			"",

@@ -118,8 +118,8 @@ i3GEOF.opcoesTamanho = {
 		//cria a janela flutuante
 		titulo = "Tamanho <a class=ajuda_usuario target=_blank href='" + i3GEO.configura.locaplic + "/ajuda_usuario.php?idcategoria=1&idajuda=4' >&nbsp;&nbsp;&nbsp;</a>";
 		janela = i3GEO.janela.cria(
-			"150px",
-			"120px",
+			"190px",
+			"130px",
 			"",
 			"",
 			"",

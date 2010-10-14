@@ -212,15 +212,15 @@ i3GEOF.tabela = {
 		ins += '	<div id=i3GEOtabelaguia1obj style="width:99%">';
 		ins += '		<table summary="" class=lista2 >';
 		ins += '		<tr>';
-		ins += '			<td><input style="cursor:pointer" onclick="i3GEOF.tabela.pegaRegistros()" type=checkbox id=i3GEOtabelatiporeg CHECKED /></td>';
+		ins += '			<td><input style="cursor:pointer;border:0px solid white;" onclick="i3GEOF.tabela.pegaRegistros()" type=checkbox id=i3GEOtabelatiporeg CHECKED /></td>';
 		ins += '			<td>Considerar na listagem a regi&atilde;o mostrada no mapa (se essa opção for desmarcada, ser&aacute; considerada a extens&atilde;o geogr&aacute;fica do mapa inicial)</td>';
 		ins += '		</tr>';
 		ins += '		<tr>';
-		ins += '			<td><input style="cursor:pointer" type=checkbox onclick="i3GEOF.tabela.ativaAutoAtualiza(this)"  /></td>';
+		ins += '			<td><input style="cursor:pointer;border:0px solid white;" type=checkbox onclick="i3GEOF.tabela.ativaAutoAtualiza(this)"  /></td>';
 		ins += '			<td>Atualiza a tabela após navegar no mapa</td>';
 		ins += '		</tr>';
 		ins += '		<tr>';
-		ins += '			<td><input style="cursor:pointer" onclick="i3GEOF.tabela.pegaRegistros()" type=checkbox id=i3GEOtabelatipolista /></td>';
+		ins += '			<td><input style="cursor:pointer;border:0px solid white;" onclick="i3GEOF.tabela.pegaRegistros()" type=checkbox id=i3GEOtabelatipolista /></td>';
 		ins += '			<td>Mostrar na listagem apenas os selecionados</td>';
 		ins += '		</tr>';
 		ins += '		</table>';
@@ -430,7 +430,7 @@ i3GEOF.tabela = {
 					else
 					{stat = "";}
 				}
-				ins += "<td><input title='marca' onclick='i3GEOF.tabela.registraLinha(this)' style='cursor:pointer' type='checkbox' "+stat+"  name="+retorno.data[1].registros[i].indice+" /></td>";
+				ins += "<td><input title='marca' onclick='i3GEOF.tabela.registraLinha(this)' style='cursor:pointer;border:0px solid white;' type='checkbox' "+stat+"  name="+retorno.data[1].registros[i].indice+" /></td>";
 			 	if(stat === "CHECKED")
 			 	{i3GEOF.tabela.registros[retorno.data[1].registros[i].indice] = true;}
 			 	vals = retorno.data[1].registros[i].valores;

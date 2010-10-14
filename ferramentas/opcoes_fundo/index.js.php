@@ -75,7 +75,7 @@ i3GEOF.opcoesFundo = {
 			cp.call(p,"corQM",retorno);
 		}
 		catch(erro){alert(erro);}
-		if(i3GEO.Interface.atual === "googlemaps")
+		if(i3GEO.Interface.ATUAL === "googlemaps")
 		{alert("Essa operacao afeta apenas a ferramenta de impressao do mapa");}
 	},
 	/*

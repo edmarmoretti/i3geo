@@ -837,6 +837,8 @@ $zoom - fator de zoom
 
 $tipo - tipo de referência dinamico|mapa
 
+$interface - interface do mapa atual padrao|openlayers|googlemaps|flamingo|googleearth
+
 Parametros:
 
 $ext {string} - (opcional) extensão geográfica do mapa
@@ -847,17 +849,18 @@ String contendo variáveis no formato javascript
 */
 function retornaReferenciaDinamica($ext="")
 {
-	global $nomeImagem,$map_file,$utilizacgi,$locmapserv,$locaplic,$zoom,$tipo;
+	global $nomeImagem,$map_file,$utilizacgi,$locmapserv,$locaplic,$zoom,$tipo,$interface;
 	//
 	//adiciona o tema com o web service com o mapa mundi
 	//
 	$objMapa = ms_newMapObj($map_file);
+	if($interface == "googlemaps")
+	{$objMapa->setProjection("init=epsg:4291");}	
 	if($ext && $ext != ""){
 		$e = explode(" ",$ext);
 		$extatual = $objMapa->extent;
 		$extatual->setextent((min($e[0],$e[2])),(min($e[1],$e[3])),(max($e[0],$e[2])),(max($e[1],$e[3])));
 	}
-
 	$numlayers = $objMapa->numlayers;
 	for ($i=0;$i < $numlayers;++$i)
 	{
@@ -900,6 +903,8 @@ function retornaReferenciaDinamica($ext="")
 	$nomer = ($objImagem->imageurl).basename($nomer);
 	$s =  "var refimagem='".$nomer."';var refwidth=".$objImagem->width.";var refheight=".$objImagem->height.";var refpath='".$objImagem->imagepath."';var refurl='".$objImagem->imageurl."'";
 	$mapa = ms_newMapObj($map_file);
+	if($interface == "googlemaps")
+	{$mapa->setProjection("init=epsg:4291");}
 	$ref = $mapa->reference;
 	$r = $ref->extent;
 	//
@@ -2585,4 +2590,41 @@ function cpjson($obj){
 		$cp->return_data();
 	}
 }
+/*
+Function: removeLinha
+
+Remove uma linha do mapfile baseado na comparação de strings.
+
+Parametros:
+
+$texto
+
+$mapfile
+*/
+function removeLinha($texto,$mapfile)
+{
+	$abre = fopen($mapfile, "r");
+	while (!feof($abre))
+	{
+		$buffer = fgets($abre);
+		$maparray[] = $buffer;
+	}
+	fclose($abre);
+	$novoarray = array();
+	foreach ($maparray as $e)
+	{
+		$remove = "nao";
+		$testa = explode($texto,$e);
+		if (count($testa) > 1)
+		{$remove = "sim";}
+		if ($remove == "nao")
+		{$novoarray[] = $e;}
+	}
+	//salva o mapfile
+	$abre = fopen($mapfile, "wt");
+	foreach($novoarray as $linha)
+	{$escreve = fwrite ($abre,$linha);}
+	$fecha = fclose ($abre);
+}	
+
 ?>

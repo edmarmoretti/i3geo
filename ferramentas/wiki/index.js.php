@@ -65,8 +65,8 @@ i3GEOF.wiki = {
 				i3GEO.eventos.NAVEGAMAPA.push("i3GEOF.wiki.lista()");
 			}
 			if(i3GEO.Interface.ATUAL === "googlemaps"){
-   				wikiDragend = GEvent.addListener(i3GeoMap, "dragend", function() {i3GEOF.wiki.lista();});
-   				wikiZoomend = GEvent.addListener(i3GeoMap, "zoomend", function() {i3GEOF.wiki.lista();});						
+   				wikiDragend = google.maps.event.addListener(i3GeoMap, "dragend", function() {i3GEOF.wiki.lista();});
+   				wikiZoomend = google.maps.event.addListener(i3GeoMap, "zoomend", function() {i3GEOF.wiki.lista();});						
 			}
 			i3GEOF.wiki.lista();
 		}
@@ -123,8 +123,8 @@ i3GEOF.wiki = {
 				i3GEO.eventos.NAVEGAMAPA.remove("i3GEOF.wiki.lista()");
 			}
 			if(i3GEO.Interface.ATUAL === "googlemaps"){
-				GEvent.removeListener(wikiDragend);
-				GEvent.removeListener(wikiZoomend);
+				google.maps.event.removeListener(wikiDragend);
+				google.maps.event.removeListener(wikiZoomend);
 			}
 		};
 		YAHOO.util.Event.addListener(janela[0].close, "click", temp);		

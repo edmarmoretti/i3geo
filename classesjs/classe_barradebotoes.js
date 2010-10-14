@@ -41,6 +41,18 @@ Veja também classe_interface.js (i3GEO.Interface) que possuí parâmetros que perm
 */
 i3GEO.barraDeBotoes = {
 	/*
+	Propriedade: AJUDA
+	
+	Mostra um texto de ajuda colado à barra de botões
+	
+	Tipo:
+	{boolean}
+	
+	Default:
+	{true}
+	*/
+	AJUDA: true,
+	/*
 	Propriedade: SOICONES
 	
 	Esconde as bordas das barras e o fundo, mostrando apenas os ícones
@@ -428,8 +440,8 @@ i3GEO.barraDeBotoes = {
 					if(l[b].conteudo)
 					{eval('$i(l[b].iddiv).innerHTML = "'+l[b].conteudo+'"');}
 					if(l[b].dica){
-						eval('$i("'+l[b].iddiv+'").onmouseover = function(){i3GEO.ajuda.mostraJanela("'+l[b].dica+'","");}');
-						eval('$i("'+l[b].iddiv+'").onmouseout = function(){i3GEO.ajuda.mostraJanela("");};');
+						eval('$i("'+l[b].iddiv+'").onmouseover = function(){i3GEO.barraDeBotoes.mostraJanela(this,"'+l[b].dica+'","");}');
+						eval('$i("'+l[b].iddiv+'").onmouseout = function(){i3GEO.barraDeBotoes.mostraJanela(this,"");};');
 					}
 					if(l[b].funcaoonclick){
 						$i(l[b].iddiv).onclick = l[b].funcaoonclick;
@@ -849,6 +861,40 @@ i3GEO.barraDeBotoes = {
 				$i(id+"_c").style.visibility = "hidden";
 			}
 		}	
+	},
+	mostraJanela: function(objeto,mensagem){
+		var divmensagem = $i("divMensagemBarraDeBotoes"),
+			pos = YAHOO.util.Dom.getXY(objeto);
+		if(i3GEO.barraDeBotoes.AJUDA == false || $i("janelaMenTexto")){
+			i3GEO.ajuda.mostraJanela(mensagem);
+			i3GEO.barraDeBotoes.escondeJanelaAjuda();
+			return;
+		}
+		if(!divmensagem){
+			divmensagem = document.createElement("div");
+			divmensagem.id = "divMensagemBarraDeBotoes";
+			divmensagem.style.border = "0px solid rgb(120 120 120)";
+			divmensagem.style.position = "absolute";
+			if($i("i3geo"))
+			{$i("i3geo").appendChild(divmensagem);}
+			else
+			{document.body.appendChild(divmensagem);}
+			divmensagem.innerHTML = "<table style='z-index:8000' ><tr><td id='imgMensagemBarraDeBotoes' style='background:none;padding-top:2px;padding-right:3px;vertical-align:top'><img src='"+$im("left.png")+"' ></td><td style='text-align:left;border-left:1px solid rgb(210,210,210)'><span style='text-align:left;cursor:pointer;color:blue;' onclick='javascript:i3GEO.barraDeBotoes.AJUDA = false;'>parar</span><br><div style='vertical-align:middle;text-align:left;width:250px;border: 0px solid black;border-left:1px;' id='divMensagemBarraDeBotoesCorpo'></div></td></tr></table>";
+		}
+		if(mensagem != ""){
+			divmensagem.style.left = parseInt(YAHOO.util.Dom.getStyle(objeto,"width"),10)+pos[0]+10+"px";
+			divmensagem.style.top = pos[1]-2+(parseInt(YAHOO.util.Dom.getStyle(objeto,"height"),10) / 2)+"px";
+			$i("divMensagemBarraDeBotoesCorpo").innerHTML = mensagem;
+			divmensagem.style.display="block";
+			try{clearTimeout(timeAjudaBotoes);}catch(e){}
+			timeAjudaBotoes = setTimeout("i3GEO.barraDeBotoes.escondeJanelaAjuda()",3000);
+		}
+	},
+	escondeJanelaAjuda:function(){
+		var i = $i("divMensagemBarraDeBotoes");
+		if(i)
+		{i.style.display="none";}
+		clearTimeout(timeAjudaBotoes);
 	}
 };
 //YAHOO.log("carregou classe barradebotoes", "Classes i3geo");

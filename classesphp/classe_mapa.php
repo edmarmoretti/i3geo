@@ -249,7 +249,8 @@ string - javascript com os parametros
 					"editorsql"=>$editorsql,
 					"linhadotempo"=>$ltempo,
 					"escondido"=>strtolower($escondido),
-					"iconetema"=>($oLayer->getmetadata("iconetema"))
+					"iconetema"=>($oLayer->getmetadata("iconetema")),
+					"classe"=>($oLayer->getmetadata("classe"))
 				);
 			}
 		}

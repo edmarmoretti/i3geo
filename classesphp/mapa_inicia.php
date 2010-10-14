@@ -126,6 +126,9 @@ function iniciaMapa()
 			{$layer->set("status",MS_OFF);}			
 			if($layer->type == MS_LAYER_POLYGON)
 			{
+				if($layer->opacity == "");
+				{$layer->set("opacity",50);}
+				/*
 				$nclasses = $layer->numclasses;
 				for($ii=0;$ii<$nclasses;++$ii){
 					$classe = $layer->getclass($ii);
@@ -136,6 +139,7 @@ function iniciaMapa()
 						$estilo->set("size","2");
 					}	
 				}
+				*/
 			}
 			//echo $l->getProjection();exit;
 			if($layer->getProjection() == "" )

@@ -73,7 +73,7 @@ i3GEOF.opcoesEscala = {
 			i3GEOF.opcoesEscala.parametrosAtuais();
 		}
 		catch(erro){alert(erro);}
-		if(i3GEO.Interface.atual !== "padrao")
+		if(i3GEO.Interface.ATUAL !== "padrao")
 		{alert("Essa operacao afeta apenas a barra de escala utilizada na ferramenta de impressao do mapa");}
 
 	},
@@ -150,7 +150,7 @@ i3GEOF.opcoesEscala = {
 		titulo = "Barra de escala <a class=ajuda_usuario target=_blank href='" + i3GEO.configura.locaplic + "/ajuda_usuario.php?idcategoria=1&idajuda=3' >&nbsp;&nbsp;&nbsp;</a>";
 		janela = i3GEO.janela.cria(
 			"250px",
-			"300px",
+			"350px",
 			"",
 			"",
 			"",
@@ -189,7 +189,7 @@ i3GEOF.opcoesEscala = {
 		i3GEOF.opcoesEscala.aguarde.visibility = "visible";
 		var temp = function(){
 				i3GEOF.opcoesEscala.aguarde.visibility = "hidden";
-				if(i3GEO.Interface.atual === "padrao")
+				if(i3GEO.Interface.ATUAL === "padrao")
 				{i3GEO.atualiza();}
 			},
 			par = i3GEOF.opcoesEscala.parametrosFormulario(),

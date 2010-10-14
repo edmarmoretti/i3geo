@@ -394,7 +394,7 @@ i3GEO.php = {
 	*/
 	identificaunico: function(funcao,xy,tema,item){
 		i3GEO.php.verifica();
-		var p = i3GEO.configura.locaplic+"/classesphp/mapa_controle.php?funcao=identificaunico&xy="+xy+"&resolucao=5&tema="+tema+"&item="+item+"&g_sid="+i3GEO.configura.sid;
+		var p = i3GEO.configura.locaplic+"/classesphp/mapa_controle.php?funcao=identificaunico&xy="+xy+"&resolucao=5&tema="+tema+"&item="+item+"&g_sid="+i3GEO.configura.sid+"&ext="+i3GEO.parametros.mapexten;
 		cpJSON.call(p,"identificaunico",funcao);	
 	},
 	/*
@@ -563,7 +563,7 @@ i3GEO.php = {
 	aplicaResolucao: function(funcao,resolucao){
 		i3GEO.php.verifica();
 		var p = i3GEO.configura.locaplic+"/classesphp/mapa_controle.php?funcao=crialente&resolucao="+resolucao+"&g_sid="+i3GEO.configura.sid+"&ext="+i3GEO.parametros.mapexten;
-		cpJSON.call(p,"crialente",funcao);	
+		cpJSON.call(p,"crialente",funcao);
 	},
 	/*
 	Function: geradestaque
@@ -716,6 +716,16 @@ i3GEO.php = {
 		cpJSON.call(p,"limpasel",funcao);	
 	},
 	/*
+	Function: invertestatuslegenda
+
+	<INVERTESTATUSLEGENDA>	
+	*/
+	invertestatuslegenda: function(funcao,tema){
+		i3GEO.php.verifica();
+		var p = i3GEO.configura.locaplic+"/classesphp/mapa_controle.php?funcao=invertestatuslegenda&tema="+tema+"&g_sid="+i3GEO.configura.sid;
+		cpJSON.call(p,"invertestatuslegenda",funcao);	
+	},
+	/*
 	Function: mudatransp
 
 	<MUDATRANSP>	
@@ -724,7 +734,7 @@ i3GEO.php = {
 		i3GEO.php.verifica();
 		var p = i3GEO.configura.locaplic+"/classesphp/mapa_controle.php?funcao=mudatransp&tema="+tema+"&valor="+valor+"&g_sid="+i3GEO.configura.sid;
 		cpJSON.call(p,"mudatransp",funcao);	
-	},
+	},	
 	/*
 	Function: mudanome
 

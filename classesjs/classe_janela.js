@@ -42,6 +42,18 @@ As janelas são criadas por meio da biblioteca YUI
 */
 i3GEO.janela = {
 	/*
+	Propriedade: ESTILOABD
+	
+	Estilo que será aplicado ao elemento body da janela (class='bd')
+	
+	Tipo:
+	{String}
+	
+	Default:
+	{display:block;padding:5px 0 5px 0}
+	*/
+	ESTILOBD: "display:block;padding:5px 0 5px 0",
+	/*
 	Propriedade: ESTILOAGUARDE
 	
 	Estilo da janela de aguarde
@@ -211,7 +223,7 @@ i3GEO.janela = {
 		ins += texto;
 		if(funcaoMinimiza)
 		{ins += "<div id='"+id+"_minimizaCabecalho' class='container-minimiza' ></div>";}
-		ins += '</div><div id="'+id+'_corpo" class="bd" style="display:block;padding:5px">';
+		ins += '</div><div id="'+id+'_corpo" class="bd" style="'+i3GEO.janela.ESTILOBD+'">';
 		if(wsrc !== "")
 		{ins += '<iframe name="'+id+'i" id="'+id+'i" valign="top" style="border:0px white solid"></iframe>';}
 		ins += '</div>';
@@ -235,10 +247,15 @@ i3GEO.janela = {
 		else{
 			if(waltura !== "auto")
 			{$i(id+'_corpo').style.height=parseInt(waltura,10);}
+			$i(id+'_corpo').style.width=parseInt(wlargura,10);
+			if(navm)
+			{$i(id+'_corpo').style.width=parseInt(wlargura,10)-2;}
+			/*
 			if(navn)
 			{$i(id+'_corpo').style.width=parseInt(wlargura,10)-10;}
 			else
 			{$i(id+'_corpo').style.width=parseInt(wlargura,10)-2;}
+			*/
 		}
 		fix = false;
 		if(nx === "" || nx === "center")
@@ -415,8 +432,8 @@ i3GEO.janela = {
 		{document.body.removeChild($i(id+"_c"));}
 		YAHOO.namespace("aguarde."+id);
 		pos = [0,0];
-		if($i("corpoMapa"))
-		{pos = YAHOO.util.Dom.getXY($i("corpoMapa"));}
+		if($i(i3GEO.Interface.IDCORPO))
+		{pos = YAHOO.util.Dom.getXY($i(i3GEO.Interface.IDCORPO));}
 		else if ($i("contemImg"))
 		{pos = YAHOO.util.Dom.getXY($i("contemImg"));}
 		texto += "<br><span style='color:navy;cursor:pointer;font-size:9px;' onclick='javascript:if(i3GEO.janela.AGUARDEMODAL == true){i3GEO.janela.AGUARDEMODAL = false;}else{i3GEO.janela.AGUARDEMODAL = true;}'>bloquear/desbloquear</span>";
@@ -441,7 +458,7 @@ i3GEO.janela = {
 		{$i(id+"_mask").style.zIndex=5000;}
 		if($i(id+"_c")){
 			$i(id+"_c").style.zIndex=6000;
-			$i(id+"_c").style.backgroundColor = "white";
+			$i(id+"_c").style.backgroundColor = "";
 		}
 		
 		//YAHOO.log("Fim abreAguarde", "janela");	
@@ -697,7 +714,10 @@ try{
                    			nBodyBottomPadding = parseInt(Dom.getStyle(oBody, "paddingBottom"), 10);
                    			nBodyOffset = nBodyBorderTopWidth + nBodyBorderBottomWidth + nBodyTopPadding + nBodyBottomPadding;
                			}
-               			me.cfg.setProperty("width", nStartWidth + "px");
+						//
+						//ajusta o tamanho do body no IE qd a janela é redimensionada
+						//
+						me.cfg.setProperty("width", nStartWidth + "px");
                			aStartPos = [Event.getPageX(e), Event.getPageY(e)];
            			};
            			this.ddResize.onDrag = function(e){
@@ -706,9 +726,11 @@ try{
                    			nOffsetY = aNewPos[1] - aStartPos[1],
                    			nNewWidth = Math.max(nStartWidth + nOffsetX, 10),
                    			nNewHeight = Math.max(nStartHeight + nOffsetY, 10),
-                   			nBodyHeight = (nNewHeight - (oFooter.offsetHeight + oHeader.offsetHeight + nBodyOffset));
-               			me.cfg.setProperty("width", nNewWidth + "px");
-               			oBody.style.width = nNewWidth - nBodyOffset+"px";
+                   			nBodyHeight = (nNewHeight - (oFooter.offsetHeight + oHeader.offsetHeight + nBodyOffset));							
+						me.cfg.setProperty("width", nNewWidth + "px");
+						if(navm)
+						{nNewWidth = nNewWidth - 2;}
+               			oBody.style.width = nNewWidth+"px";
                			if (nBodyHeight < 0)
                			{nBodyHeight = 0;}
                			oBody.style.height =  nBodyHeight + "px";
@@ -717,6 +739,7 @@ try{
 							$i("wdocai").style.width = oBody.style.width;
 						}
            			};
+           			this.ddResize.onMouseUp = this.ddResize.onDrag.call();					
        			}
        			function onBeforeShow(){
        				initResizeFunctionality.call(this);

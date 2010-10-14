@@ -702,7 +702,7 @@ i3GEO.arvoreDeCamadas = {
 		}
 		if(i3GEO.arvoreDeCamadas.OPCOESTEMAS === true){
 			conteudo = $trad("t18a");
-			d = {html:conteudo,idopcoes:ltema.name};
+			d = {html:conteudo,idopcoes:ltema.name,identifica:ltema.identifica};
 			opcoesNode = new YAHOO.widget.HTMLNode(d, node, false,true);
 			opcoesNode.enableHighlight = false;
 			opcoesNode.setDynamicLoad(i3GEO.arvoreDeCamadas.mostraOpcoes, 1);
@@ -728,7 +728,7 @@ i3GEO.arvoreDeCamadas = {
 	mostraOpcoes: function(node){
 		if(typeof(console) !== 'undefined'){console.info("i3GEO.arvoreDeCamadas.mostraOpcoes()");}
 		//YAHOO.log("Mostrando as opções da árvore de camadas", "i3geo");
-		var idtema,ltema,tnome,d,n;
+		var idtema,ltema,tnome,d,n,temp;
 		idtema = node.data.idopcoes;
 		ltema = i3GEO.arvoreDeCamadas.pegaTema(idtema);
 		if(navm)
@@ -752,13 +752,19 @@ i3GEO.arvoreDeCamadas = {
 			if(i3GEO.Interface.ATUAL !== "flamingo")
 			{i3GEO.arvoreDeCamadas.adicionaOpcaoTema($trad("t22"),$trad("t23"),'i3GEO.tema.dialogo.procuraratrib(\"'+ltema.name+'\")',node);}
 			i3GEO.arvoreDeCamadas.adicionaOpcaoTema($trad("t24"),$trad("t25"),'i3GEO.tema.dialogo.toponimia(\"'+ltema.name+'\")',node);
-			i3GEO.arvoreDeCamadas.adicionaOpcaoTema($trad("t26"),$trad("t27"),'i3GEO.tema.dialogo.etiquetas(\"'+ltema.name+'\")',node);
+			if(ltema.identifica == "sim" || ltema.identifica == "SIM" || ltema.identifica == "")
+			{i3GEO.arvoreDeCamadas.adicionaOpcaoTema($trad("t26"),$trad("t27"),'i3GEO.tema.dialogo.etiquetas(\"'+ltema.name+'\")',node);}
 			i3GEO.arvoreDeCamadas.adicionaOpcaoTema($trad("t28"),$trad("t29"),'i3GEO.tema.dialogo.filtro(\"'+ltema.name+'\")',node);
 			i3GEO.arvoreDeCamadas.adicionaOpcaoTema($trad("t30"),$trad("t31"),'i3GEO.tema.dialogo.tabela(\"'+ltema.name+'\")',node);
 			if(i3GEO.parametros.versaoms > 4){
 				i3GEO.arvoreDeCamadas.adicionaOpcaoTema($trad("t37"),$trad("t37"),'i3GEO.tema.dialogo.graficotema(\"'+ltema.name+'\")',node);
 			}
 		}
+		temp = $trad("p18");
+		if(ltema.classe.toLowerCase() == "nao")
+		{temp = $trad("p17");}
+		i3GEO.arvoreDeCamadas.adicionaOpcaoTema($trad("p19"),temp,'i3GEO.tema.invertestatuslegenda(\"'+ltema.name+'\")',node);
+		
 		if (ltema.type < 4){
 			i3GEO.arvoreDeCamadas.adicionaOpcaoTema($trad("t32"),$trad("t33"),'i3GEO.tema.dialogo.editaLegenda(\"'+ltema.name+'\")',node);
 		}

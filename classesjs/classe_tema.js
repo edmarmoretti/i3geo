@@ -236,6 +236,28 @@ i3GEO.tema = {
 		{alert("Valor não definido.");}
 	},
 	/*
+	Function: invertestatuslegenda
+
+	Inverte o status atual do metadata CLASSE, permitindo esconder ou mostrar a legenda do tema
+
+	Parametros:
+
+	idtema - código do tema
+	*/
+	invertestatuslegenda: function(idtema){
+		if(typeof(console) !== 'undefined'){console.info("i3GEO.tema.invertestatuslegenda()");}
+		alert("Essa opção afeta apenas a impressão do mapa");
+		i3GEO.mapa.ativaTema(idtema);
+		g_operacao = "transparencia";
+		var temp = function(retorno){
+			i3GEO.atualiza(retorno);
+			i3GEO.arvoreDeCamadas.atualiza();
+		};
+		i3GEO.janela.abreAguarde("i3GEO.atualiza",$trad("o1"));
+		i3GEO.contadorAtualiza++;
+		i3GEO.php.invertestatuslegenda(temp,idtema);
+	},	
+	/*
 	Function: mudanome
 	
 	Muda o nome de um tema

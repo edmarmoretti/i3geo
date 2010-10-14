@@ -471,7 +471,6 @@ i3GEO.configura = {
 		{ text: "p8", url: "javascript:i3GEO.mapa.dialogo.queryMap()"},
 		{ text: "p9", url: "javascript:i3GEO.mapa.dialogo.corFundo()"},
 		{ text: "p10", url: "javascript:i3GEO.mapa.dialogo.gradeCoord()"},
-		{ text: "p11", url: "javascript:i3GEO.mapa.dialogo.template()"},
 		{ text: "p12", url: "javascript:i3GEO.mapa.dialogo.autoredesenha()"}
 		]
 	},

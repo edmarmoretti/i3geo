@@ -25,6 +25,7 @@ body {
 
 <style type="text/css">
   #container { position: relative; padding: 6px; background-color: #eeeeee; width: 300px; height:200px; }
+  .yui-picker-controls li {padding: 01px;}
 </style>
 
 
@@ -50,7 +51,6 @@ API -->
         picker;
 
     Event.onDOMReady(function() {
-			YAHOO.log("Creating Color Picker.", "info", "example");
             picker = new YAHOO.widget.ColorPicker("container", {
                     showhsvcontrols: true,
                     showhexcontrols: true,
@@ -59,37 +59,21 @@ API -->
 						HUE_THUMB: window.parent.i3GEO.configura.locaplic+"/pacotes/yui270/build/colorpicker/assets/hue_thumb.png"
     				}
                 });
-			YAHOO.log("Finished creating Color Picker.", "info", "example");
-			
-			//a listener for logging RGB color changes;
-			//this will only be visible if logger is enabled:
 			var onRgbChange = function(o) {
-				/*o is an object
-					{ newValue: (array of R, G, B values),
-					  prevValue: (array of R, G, B values),
-					  type: "rgbChange"
-					 }
-				*/
-				YAHOO.log("The new color value is " + o.newValue, "info", "example");
 			}
-			
-			//subscribe to the rgbChange event;
 			picker.on("rgbChange", onRgbChange);
-			
-			//use setValue to reset the value to white:
+			document.getElementById("yui-picker-swatch").style.display = "none";
+			document.getElementById("yui-picker-controls").style.top = "0px";
+			document.getElementById("yui-picker-websafe-swatch").style.left = "245px";
+			document.getElementById("yui-picker-websafe-swatch").style.top = "185px";
 			Event.on("reset", "click", function(e) {
-				picker.setValue([255, 255, 255], false); //false here means that rgbChange
-													     //wil fire; true would silence it
+				picker.setValue([255, 255, 255], false);
+				
 			});
-			
-			//use the "get" method to get the current value
-			//of one of the Color Picker's properties; in 
-			//this case, we'll get the hex value and write it
-			//to the log:
 			Event.on("gethex", "click", function(e) {
-				YAHOO.log("Current hex value: " + picker.get("hex"), "info", "example"); 
 			});
         });
+	
 })();
 //
 //utilize tipo para definir o tipo de cor de retorno
@@ -117,6 +101,8 @@ function aplicarCor()
 	doc.getElementById(elemento).value = ncor;
 	window.parent.YAHOO.janelaCor.xp.panel.destroy();
 }
+
+
 </script>
 
 <!--END SOURCE CODE FOR EXAMPLE =============================== -->

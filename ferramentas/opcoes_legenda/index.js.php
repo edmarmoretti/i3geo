@@ -74,7 +74,7 @@ i3GEOF.opcoesLegenda = {
 			i3GEOF.opcoesLegenda.parametrosAtuais();
 		}
 		catch(erro){if(typeof(console) !== 'undefined'){console.error(erro);}}
-		if(i3GEO.Interface.atual !== "padrao")
+		if(i3GEO.Interface.ATUAL !== "padrao")
 		{alert("Essa operacao afeta apenas a legenda utilizada na ferramenta de impressao do mapa");}
 	},
 	/*
@@ -137,7 +137,7 @@ i3GEOF.opcoesLegenda = {
 			$inputText("","","i3GEOopcoesLegendalabelsize","",4,"") +
 			'<td></tr>' +
 			'<tr><td>&nbsp;</td><td></td></tr>' +			
-			'<tr><td>Fonte:</td>' +
+			'<tr><td>Fonte: (teste a fonte mais adequada para apresentação correta da acentuação)</td>' +
 			'	<td id=i3GEOopcoesLegendafontef >aguarde...</td>' +
 			'</tr></table><br>'+
 			'<p class=paragrafo >' +
@@ -161,7 +161,7 @@ i3GEOF.opcoesLegenda = {
 		titulo = "Legenda <a class=ajuda_usuario target=_blank href='" + i3GEO.configura.locaplic + "/ajuda_usuario.php?idcategoria=1&idajuda=2' >&nbsp;&nbsp;&nbsp;</a>";
 		janela = i3GEO.janela.cria(
 			"320px",
-			"350px",
+			"390px",
 			"",
 			"",
 			"",
@@ -200,7 +200,7 @@ i3GEOF.opcoesLegenda = {
 		i3GEOF.opcoesLegenda.aguarde.visibility = "visible";
 		var temp = function(){
 				i3GEOF.opcoesLegenda.aguarde.visibility = "hidden";
-				if(i3GEO.Interface.atual === "padrao")
+				if(i3GEO.Interface.ATUAL === "padrao")
 				{i3GEO.atualiza();}
 			},
 			par = i3GEOF.opcoesLegenda.parametrosFormulario(),

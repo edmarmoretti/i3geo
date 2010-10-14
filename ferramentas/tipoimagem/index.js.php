@@ -95,7 +95,7 @@ i3GEOF.tipoimagem = {
 	html:function(){
 		var ins = '<p class=paragrafo >Escolha um ou mais filtros de cores. Vc pode editar manualmente a lista de filtros.</p>' +
 			'<input type=text size=29 value="" id="i3GEOFtipoImagemListaDeFiltros" style="position:relative;top:-2px" /> ' +
-			'<input id=i3GEOFtipoImagemListaDeFiltrosOk type=button value="ok"/><br>' +
+			'<input id=i3GEOFtipoImagemListaDeFiltrosOk type=button value="Aplicar "/><br>' +
 			'<table class=lista6 width="200px">' +
 			'	<tr>' +
 			'		<td><input onclick="javascript:$i(\'i3GEOFtipoImagemListaDeFiltros\').value = \'\'" style="cursor:pointer" type=radio name=i3GEOtipoimagemtipo value=nenhum ></td>' +
@@ -164,7 +164,7 @@ i3GEOF.tipoimagem = {
 		//cria a janela flutuante
 		titulo = "Filtro de cores <a class=ajuda_usuario target=_blank href='" + i3GEO.configura.locaplic + "/ajuda_usuario.php?idcategoria=1&idajuda=1' >&nbsp;&nbsp;&nbsp;</a>";
 		janela = i3GEO.janela.cria(
-			"300px",
+			"310px",
 			"260px",
 			"",
 			"",

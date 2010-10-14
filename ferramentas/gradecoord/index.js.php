@@ -115,7 +115,7 @@ i3GEOF.gradeCoord = {
 		'	<td id=i3GEOgradeCoordfontef ></td></tr>' +
 		'<tr><td>&nbsp;</td><td></td></tr>' +
 		'<tr>' +
-		'	<td>Cor da m&aacute +scara de um pixel de entorno:</td><td>' +
+		'	<td>Cor da m&aacute;scara de um pixel de entorno:</td><td>' +
 		$inputText("","","i3GEOgradeCoordmascara_i","",11,"-1,-1,-1") +
 		'<img alt="aquarela.gif" style=cursor:pointer src="'+i3GEO.configura.locaplic+'/imagens/aquarela.gif" onclick="i3GEOF.gradeCoord.corj(\'i3GEOgradeCoordmascara_i\')" />' +
 		'	</td>' +
@@ -151,7 +151,7 @@ i3GEOF.gradeCoord = {
 		titulo = "Grade de coordenadas <a class=ajuda_usuario target=_blank href='" + i3GEO.configura.locaplic + "/ajuda_usuario.php?idcategoria=1&idajuda=7' >&nbsp;&nbsp;&nbsp;</a>";
 		janela = i3GEO.janela.cria(
 			"350px",
-			"250px",
+			"440px",
 			"",
 			"",
 			"",

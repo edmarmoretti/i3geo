@@ -36,8 +36,11 @@ $nomes = nomeRandomico();
 //
 //substitui a string de conexão com o banco em cada layer se for necessário
 //
-substituiCon($map_file,$postgis_mapa);
 $map = ms_newMapObj($map_file);
+$temp = str_replace(".map","xxx.map",$map_file);
+$map->save($temp);
+substituiCon($temp,$postgis_mapa);
+$map = ms_newMapObj($temp);
 
 if($interface == "googlemaps")
 {$map->setProjection("init=epsg:4291");}
@@ -61,7 +64,23 @@ foreach ($temas as $tema)
 			{$classe->set("name",$layer->getmetadata("tema"));}
 		}
 	}
+	if ($layer->getmetadata("classe") == "NAO")
+	{
+		$nclasses = $layer->numclasses;
+		if ($nclasses > 0)
+		{
+			for($i=0;$i<$nclasses;$i++)
+			{
+				$classe = $layer->getclass($i);
+				$classe->set("name","classeNula");
+			}
+		}
+	}	
 }
+$map->save($temp);
+removeLinha("classeNula",$temp);
+$map = ms_newMapObj($temp);
+
 $o = $map->outputformat;
 if($interface == "openlayers" || $interface == "googlemaps"){
 	if($mapexten != ""){
@@ -73,6 +92,7 @@ if($interface == "openlayers" || $interface == "googlemaps"){
 	$legenda->set("status",MS_EMBED);
 	$o->set("imagemode",MS_IMAGEMODE_RGB);
 }
+$o->set("imagemode",MS_IMAGEMODE_RGB);
 $o->set("transparent","false");
 $imgo = $map->draw();
 $nomer = ($imgo->imagepath)."mapa".$nomes.".png";

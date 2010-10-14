@@ -109,16 +109,19 @@ $tema - nome do tema
 $template - nome do template para processar a legenda
 */
 
-	function __construct($map_file,$locaplic="",$tema="",$template="")
+	function __construct($map_file="",$locaplic="",$tema="",$template="")
 	{
   		//error_reporting(E_ALL);
   		if(file_exists($locaplic."/funcoes_gerais.php"))
   		include_once($locaplic."/funcoes_gerais.php");
   		else
   		include_once("funcoes_gerais.php");
-  		$this->mapa = ms_newMapObj($map_file);
+		$this->localaplicacao = $locaplic;
+  		if($map_file == "")
+		{return;}		
+		$this->mapa = ms_newMapObj($map_file);
   		$this->arquivo = $map_file;
-  		$this->localaplicacao = $locaplic;
+
    		if($tema != "" && @$this->mapa->getlayerbyname($tema))
   		{
   			$this->layer = $this->mapa->getlayerbyname($tema);
@@ -445,6 +448,7 @@ Para cada tipo de simbologia deve haver um arquivo .map com as definições básica
 Todos os símbolos do arquivo symbols/simbolos serão retornados como imagens. 
 
 parameters:
+
 $tipo - Tipo de representação do símbolo, 0 pontos, 1 linhas e 2 polígonos.
 
 $dir_tmp - Diretório temporário do mapserver.
@@ -461,10 +465,15 @@ String no formato HTML com as imagens dos símbolos
 */
 	function listaSimbolos($tipo,$dir_tmp,$imgdir,$onclick,$tamanho=8,$width=1)
 	{
+		//error_reporting(E_ALL);
 		if ($tipo == 3){$tipo = 2;} //tipo raster
-		if (!file_exists($dir_tmp."/".$imgdir."/simbolos".$tipo.".inc"))
+		if($imgdir == "")
+		{$dir = $dir_tmp;}
+		else
+		{$dir = $dir_tmp."/".$imgdir;}
+		if (!file_exists($dir."/simbolos".$tipo.".inc"))
 		{
-			$f = fopen($dir_tmp."/".$imgdir."/simbolos".$tipo.".inc","w");
+			$f = fopen($dir."/simbolos".$tipo.".inc","w");
 			if ($tipo == 2){$t="simpol.map";}
 			if ($tipo == 0){$t="simpt.map";}
 			if ($tipo == 1){
@@ -499,13 +508,13 @@ String no formato HTML com as imagens dos símbolos
 			}
 			fwrite($f,"<?php \$res = \"".$ins."\";?>");
 			fclose($f);
-			copy ($dir_tmp."/".$imgdir."/simbolos".$tipo.".inc",$dir_tmp."/comum/simbolos".$tipo.".inc");
+			//copy ($dir."/simbolos".$tipo.".inc",$dir_tmp."/comum/simbolos".$tipo.".inc");
 			return $ins;
 		}
 		else
 		{
 			$res = "";
-			include_once $dir_tmp."/comum/simbolos".$tipo.".inc";
+			include_once $dir."/simbolos".$tipo.".inc";
 			return $res;
 		}
 	}

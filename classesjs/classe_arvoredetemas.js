@@ -710,7 +710,7 @@ i3GEO.arvoreDeTemas = {
 			if(navm){insp += "style='top:0px;'";}
 			else
 			{insp += "style='top:4px;'";}
-			insp += " title='"+$trad("a1")+"' src='"+i3GEO.util.$im("branco.gif")+"' onclick='i3GEO.arvoreDeTemas.buscaTema2(document.getElementById(\"i3geo_buscatema\").value)' style='cursor:pointer;top:2px;position:relative;' /></td>";
+			insp += " src='"+i3GEO.util.$im("branco.gif")+"' onclick='i3GEO.arvoreDeTemas.buscaTema2(document.getElementById(\"i3geo_buscatema\").value)' /></td>";
 			insp += "</tr></table>&nbsp;";
 			tempNode = new YAHOO.widget.HTMLNode(
 				{html:insp},

@@ -41,7 +41,7 @@ class SHP
 	
 	Objeto mapa
 	*/
-	protected $mapa;
+	public $mapa;
 	/*
 	Variavel: $arquivo
 	

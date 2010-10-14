@@ -897,16 +897,15 @@ i3GEO.util = {
 			novoel,
 			wdocaiframe,
 			fix = false,
-			wlargura = "400",
-			waltura = "240",
+			wlargura = "300",
+			waltura = "250",
 			wsrc = i3GEO.configura.locaplic+"/ferramentas/colorpicker/index.htm?doc="+janela+"&elemento="+elemento+"&tipo="+tipo,
 			nx = "",
 			ny = "",
 			texto = "Cor",
 			id = "i3geo_janelaCor",
 			modal = true,
-			classe = "hd",
-			wlargura_ = "400px";
+			classe = "hd"
 		YAHOO.namespace("janelaCor.xp");
 		if ($i(id))
 		{YAHOO.janelaCor.xp.panel.destroy();}
@@ -915,7 +914,7 @@ i3GEO.util = {
 		ins += texto;
 		ins += '</div><div id="i3geo_janelaCor_corpo" class="bd" style="padding:5px">';
 		if(wsrc !== "")
-		{ins += '<iframe name="'+id+'i" id="i3geo_janelaCori" valign="top" style="border:0px white solid"></iframe>';}
+		{ins += '<iframe name="'+id+'i" id="i3geo_janelaCori" valign="top" style="height:230px,border:0px white solid"></iframe>';}
 		ins += '</div>';
 		novoel = document.createElement("div");
 		novoel.id = "i3geo_janelaCor";
@@ -928,14 +927,14 @@ i3GEO.util = {
 		wdocaiframe = $i("i3geo_janelaCori");
 		if (wdocaiframe)
 		{
-			temp = wdocaiframe.style;
-			temp.width = parseInt(wlargura,10)-12;
-			temp.height=waltura;
 			wdocaiframe.style.display = "block";
 			wdocaiframe.src = wsrc;
+			wdocaiframe.style.height = "250px";
+			wdocaiframe.style.width = "325px";
+			wdocaiframe.style.border = "0px solid white";
 		}
 		if(nx === "" || nx === "center"){fix = true;}
-		YAHOO.janelaCor.xp.panel = new YAHOO.widget.ResizePanel(id, { zIndex:5000, modal:modal, width: wlargura_, fixedcenter: fix, constraintoviewport: false, visible: true, iframe:false} );
+		YAHOO.janelaCor.xp.panel = new YAHOO.widget.ResizePanel(id, { height:"300px",zIndex:5000, modal:modal, width: "350px", fixedcenter: fix, constraintoviewport: false, visible: true, iframe:false} );
 		YAHOO.janelaCor.xp.panel.render();
 		$i(id+'_cabecalho').className = classe;
 	},
@@ -1834,13 +1833,14 @@ i3GEO.util = {
 			var ins = new Array(),
 				i,n,temp;
 			if (retorno.data !== undefined){
-
 				ins.push("<table class=lista2 >");
-				ins.push("<tr><td><input size=2 style='cursor:pointer' name='"+prefixo+"EPSG' type=radio checked value='' /></td>");
+				ins.push("<tr><td><input size=2 style='border:0px solid white;cursor:pointer' name='"+prefixo+"EPSG' type=radio checked value='' /></td>");
 				ins.push("<td>"+retorno.data[0].nome+"</td></tr>");
+				ins.push("<tr><td><input size=2 style='border:0px solid white;cursor:pointer' name='"+prefixo+"EPSG' type=radio value='' /></td>");
+				ins.push("<td>"+retorno.data[1].nome+"</td></tr>");				
 				n = retorno.data.length;
-				for (i=1;i<n; i++){
-					ins.push("<tr><td><input size=2 style='cursor:pointer' name='"+prefixo+"EPSG' type=radio value='"+retorno.data[i].codigo+"' /></td>");
+				for (i=2;i<n; i++){
+					ins.push("<tr><td><input size=2 style='border:0px solid white;cursor:pointer' name='"+prefixo+"EPSG' type=radio value='"+retorno.data[i].codigo+"' /></td>");
 					ins.push("<td>"+retorno.data[i].nome+"</td></tr>");
 				}
 				ins.push("</table>");

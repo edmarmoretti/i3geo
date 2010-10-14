@@ -88,7 +88,7 @@ i3GEOF.uploadgpx = {
 		var ins = '<form id=i3GEOuploadgpxf target="i3GEOuploadgpxiframe" action="'+i3GEO.configura.locaplic+'/ferramentas/uploadgpx/upload.php" method="post" ENCTYPE="multipart/form-data">' +
 		'<p class="paragrafo" >Arquivo gpx: <br><input class=digitar type="file" size=42 name="i3GEOuploadgpx" style="top:0px;left:0px;cursor:pointer;"></p>' +
 		'<p class=paragrafo >Proje&ccedil;&atilde;o:</p>' +
-		'<div id=i3GEOuploadgpxListaepsg width="98%" style="border:1px solid gray;left:0px;overflow:auto;height:60px"></div>' +
+		'<div id=i3GEOuploadgpxListaepsg width="98%" style="text-align:left;border:1px solid gray;left:0px;overflow:auto;height:60px"></div>' +
 		'<br><p class="paragrafo" ><input id=i3GEOuploadgpxbotao1 type="button" value="Criar camada" size=12 name="submit">' +
 		'<input type=hidden name=g_sid value="'+i3GEO.configura.sid+'" >' +
 		'<input type="hidden" name="MAX_FILE_SIZE" value="100000">' +

@@ -86,7 +86,11 @@ $ext - extensão geográfica do mapa
 	{
   		//error_reporting(E_ALL);
 		$this->qyfile = str_replace(".map",".qy",$map_file);
-  		$this->mapa = ms_newMapObj($map_file);
+  		if($tema != "")
+		{$this->qyfileTema = dirname($map_file)."/".$tema.".php";}
+		else
+		{$this->qyfileTema = "";}
+		$this->mapa = ms_newMapObj($map_file);
   		$this->arquivo = $map_file;
   		if($tema != "" && @$this->mapa->getlayerbyname($tema))
  		$this->layer = $this->mapa->getlayerbyname($tema);
@@ -139,6 +143,7 @@ $ys - lista de coordenadas y separadas por virgula
 		{$this->mapa->loadquery($this->qyfile);}
 		$indxlayer = $this->layer->index;
 		$res_count = $this->layer->getNumresults();
+		/*
 		$shp_atual = array();
 		for ($i = 0; $i < $res_count;++$i)
 		{
@@ -146,6 +151,11 @@ $ys - lista de coordenadas y separadas por virgula
 			$shp_atual[] = $rc->shapeindex;
 		}
 		$this->mapa->freequery($indxlayer);
+		*/
+		$shp_atual = array();
+		if($this->qyfileTema != "" && file_exists($this->qyfileTema))
+		{$shp_atual = $this->unserializeQ($this->qyfileTema);}
+		
 		$shpi = array();
 		//transforma os pontos em shape
 		$s = ms_newShapeObj(MS_SHAPE_POLYGON);
@@ -197,13 +207,16 @@ $tipo - Tipo de operação adiciona|retira|inverte|limpa
 		$tipoLayero = $layero->type;
 		$this->layer->set("template","none.htm");
 		$layero->set("template","none.htm");
+		/*
 		if (file_exists($this->qyfile))
 		{$this->mapa->loadquery($this->qyfile);}
+		*/
 		$indxlayer = $this->layer->index;
 		$res_count = $this->layer->getNumresults();
 		$res_counto = $layero->getNumresults();
 		if ($res_counto == 0)
 		{return false;}
+		/*
 		$shp_atual = array();
 		for ($i = 0; $i < $res_count;++$i)
 		{
@@ -211,6 +224,11 @@ $tipo - Tipo de operação adiciona|retira|inverte|limpa
 			$shp_atual[] = $rc->shapeindex;
 		}
 		$this->mapa->freequery($indxlayer);
+		*/
+		$shp_atual = array();
+		if($this->qyfileTema != "" && file_exists($this->qyfileTema))
+		{$shp_atual = $this->unserializeQ($this->qyfileTema);}
+		
 		$shpi = array();
 		$i = $layero->index;
 		$selecao = "";
@@ -357,6 +375,7 @@ $valor - Valor.
 		}
 		$this->layer->set("template","none.htm");
 		$indxlayer = $this->layer->index;
+		/*
 		if (file_exists($this->qyfile))
 		{$this->mapa->loadquery($this->qyfile);}
 		$res_count = $this->layer->getNumresults();
@@ -367,6 +386,11 @@ $valor - Valor.
 			$shp_atual[] = $rc->shapeindex;
 		}
 		$this->mapa->freequery($indxlayer);
+		*/
+		$shp_atual = array();
+		if($this->qyfileTema != "" && file_exists($this->qyfileTema))
+		{$shp_atual = $this->unserializeQ($this->qyfileTema);}
+		
 		$shpi = array();
 		if($this->layer->connectiontype == MS_POSTGIS)
 		{
@@ -422,6 +446,7 @@ $valor - Valor.
 		if(!$this->layer){return "erro";}
 		$this->layer->set("template","none.htm");
 		$indxlayer = $this->layer->index;
+		/*
 		if (file_exists($this->qyfile))
 		{$this->mapa->loadquery($this->qyfile);}
 		$res_count = $this->layer->getNumresults();
@@ -432,6 +457,11 @@ $valor - Valor.
 			$shp_atual[] = $rc->shapeindex;
 		}
 		$this->mapa->freequery($indxlayer);
+		*/
+		$shp_atual = array();
+		if($this->qyfileTema != "" && file_exists($this->qyfileTema))
+		{$shp_atual = $this->unserializeQ($this->qyfileTema);}
+		
 		$shpi = array();
 		$items = pegaItens($this->layer);
 		$filtro = str_replace("|","'",$filtro);
@@ -476,6 +506,8 @@ $tipo - Tipo de operação adiciona|retira|inverte|limpa
 		if ($tipo == "inverte")
 		{return ($this->selecaoInverte());}
 		if(!$this->layer){return "erro";}
+		/*
+		$shp_atual = array();
 		if (file_exists($this->qyfile))
 		{$this->mapa->loadquery($this->qyfile);}
 		$indxlayer = $this->layer->index;
@@ -487,6 +519,11 @@ $tipo - Tipo de operação adiciona|retira|inverte|limpa
 			$shp_atual[] = $rc->shapeindex;
 		}
 		$this->mapa->freequery($indxlayer);
+		*/
+		$shp_atual = array();
+		if($this->qyfileTema != "" && file_exists($this->qyfileTema))
+		{$shp_atual = $this->unserializeQ($this->qyfileTema);}
+		
 		$shpi = array();
 		$c = explode(" ",$xy);
 		$pt = ms_newPointObj();
@@ -549,6 +586,8 @@ Limpa a seleção do tema.
 */
 	function selecaoLimpa()
 	{
+		if(file_exists($this->qyfileTema))
+		{unlink($this->qyfileTema);}
 		if ($this->nome != "") //limpa de um tema
 		{
 			if(!$this->layer){return "erro";}
@@ -578,6 +617,7 @@ Inverte seleção do tema.
 		{$this->mapa->loadquery($this->qyfile);}
 		$indxlayer = $this->layer->index;
 		$items = pegaItens($this->layer);
+		/*
 		$res_count = $this->layer->getNumresults();
 		$shp_atual = array();
 		for ($i = 0; $i < $res_count;++$i)
@@ -586,9 +626,11 @@ Inverte seleção do tema.
 			$shp_atual[] = $rc->shapeindex;
 		}
 		$this->mapa->freequery($indxlayer);
-		//$qstring = "/.*/";
-		//if($this->layer->connectiontype == MS_POSTGIS)
-		//{$qstring = $items[0].' ~* \'^.\'  ';}
+		*/
+		$shp_atual = array();
+		if($this->qyfileTema != "" && file_exists($this->qyfileTema))
+		{$shp_atual = $this->unserializeQ($this->qyfileTema);}
+		
 		$this->layer->queryByrect($this->mapa->extent);
 		$res_count = $this->layer->getNumresults();
 		$shp_todos = array();
@@ -602,6 +644,7 @@ Inverte seleção do tema.
 		foreach ($shp as $indx)
 		{$this->mapa->querybyindex($indxlayer,-1,$indx,MS_TRUE);}
 		$this->mapa->savequery($this->qyfile);
+		$this->serializeQ($this->qyfileTema,$shp);
 		return("ok");
 	}
 /*
@@ -617,6 +660,7 @@ $shp_atual - Indices dos elementos já selecionados.
 */
 	function selecaoAdiciona($shpi,$shp_atual)
 	{
+		error_reporting(E_ALL);
 		if(!$this->layer){return "erro";}
 		$indxlayer = $this->layer->index;
 		$shp = array_merge($shpi,$shp_atual);
@@ -625,7 +669,7 @@ $shp_atual - Indices dos elementos já selecionados.
 		foreach ($shp as $indx)
 		{@$this->mapa->querybyindex($indxlayer,-1,$indx,MS_TRUE);}
 		$this->mapa->savequery($this->qyfile);
-
+		$this->serializeQ($this->qyfileTema,$shp);
 		return("ok");
 	}
 /*
@@ -650,6 +694,7 @@ $shp_atual - Indices dos elementos já selecionados.
 		foreach ($shp as $indx)
 		{$this->mapa->querybyindex($indxlayer,-1,$indx,MS_TRUE);}
 		$this->mapa->savequery($this->qyfile);
+		$this->serializeQ($this->qyfileTema,$shp);
 		return("ok");
 	}
 /*
@@ -674,6 +719,7 @@ $ids - Ids separados por vírgula correspondendo aos registros.
 		foreach ($ids as $i)
 		{$this->mapa->queryByIndex($indxlayer, -1, $i);}
 		$this->mapa->savequery($this->qyfile);
+		$this->serializeQ($this->qyfileTema,$ids);
 		return("ok");
 	}
 /*
@@ -725,6 +771,7 @@ $tipo - Tipo de operação adiciona|retira|inverte|limpa
 		if (file_exists($this->qyfile))
 		{$this->mapa->loadquery($this->qyfile);}
 		$indxlayer = $this->layer->index;
+		/*
 		$res_count = $this->layer->getNumresults();
 		$shp_atual = array();
 		for ($i = 0; $i < $res_count;++$i)
@@ -733,6 +780,11 @@ $tipo - Tipo de operação adiciona|retira|inverte|limpa
 			$shp_atual[] = $rc->shapeindex;
 		}
 		$this->mapa->freequery($indxlayer);
+		*/
+		$shp_atual = array();
+		if($this->qyfileTema != "" && file_exists($this->qyfileTema))
+		{$shp_atual = $this->unserializeQ($this->qyfileTema);}
+		
 		$shpi = array();
 		$rect = $this->mapa->extent;
 		$ident = @$this->layer->queryByRect($rect);
@@ -773,6 +825,7 @@ $ext - coordenadas separadas por espaços no estilo xmin ymin xmax ymax
 		if (file_exists($this->qyfile))
 		{$this->mapa->loadquery($this->qyfile);}
 		$indxlayer = $this->layer->index;
+		/*
 		$res_count = $this->layer->getNumresults();
 		$shp_atual = array();
 		for ($i = 0; $i < $res_count;++$i)
@@ -781,6 +834,11 @@ $ext - coordenadas separadas por espaços no estilo xmin ymin xmax ymax
 			$shp_atual[] = $rc->shapeindex;
 		}
 		$this->mapa->freequery($indxlayer);
+		*/
+		$shp_atual = array();
+		if($this->qyfileTema != "" && file_exists($this->qyfileTema))
+		{$shp_atual = $this->unserializeQ($this->qyfileTema);}
+		
 		$shpi = array();
 		$temp = explode(" ",$ext);
 		$rect = ms_newRectObj();
@@ -804,5 +862,39 @@ $ext - coordenadas separadas por espaços no estilo xmin ymin xmax ymax
 		if ($tipo == "retira")
 		{return($this->selecaoRetira($shpi,$shp_atual));}
 	}
+/*
+function unserializeQ
+
+Deserializa um arquivo de geometrias.
+
+Parametros:
+$arquivo - arquivo que será processado
+*/ 	 	
+	function unserializeQ($arq)
+	{
+		$handle = fopen ($arq, "r");
+		$conteudo = fread ($handle, filesize ($arq));
+		fclose ($handle);
+		return(unserialize($conteudo));
+	}
+/*
+function serializeQ
+
+Deserializa um arquivo de geometrias.
+
+Parametros:
+$arquivo - arquivo que será processado
+
+$geos - array com os dados
+*/ 	 	
+	function serializeQ($arq,$geos)
+	{
+		if (file_exists($arq))
+		{unlink($arq);}
+		$fp = fopen($arq,"w");
+		$r = serialize($geos);
+		fwrite($fp,$r);
+		fclose($fp);
+	}	
 }
 ?>

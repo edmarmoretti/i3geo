@@ -237,6 +237,7 @@ $item Lista de Itens separados por vírgula que serão utilizados.
 	function ativaEtiquetas($item)
 	{
 		if(!$this->layer){return "erro";}
+		$this->layer->setmetadata("IDENTIFICA","");
 		$this->layer->setmetadata("TIP",$item);
 		return("ok");
 	}
