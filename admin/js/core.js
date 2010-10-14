@@ -1215,6 +1215,20 @@ function core_abreCor(janela,elemento)
 	$i("i3geo_janelaCori").style.height = "290px";
 	//i3GEO.janela.cria("350px","250px","../../ferramentas/colorpicker/index.htm?doc=&elemento="+elemento+"&tipo=rgb","","","Cor","i3geo_janelaCor",true);
 }
+function core_desativaforms(lista){
+	var n = lista.length,
+		i;
+	for (i=0;i<n;i++){
+		$i(lista[i]).style.background = "pink";
+	}
+}
+function core_ativaforms(lista){
+	var n = lista.length,
+		i;
+	for (i=0;i<n;i++){
+		$i(lista[i]).style.background = "white";
+	}
+}
 //
 //carregador de javascript
 //

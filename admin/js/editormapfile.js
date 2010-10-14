@@ -43,7 +43,6 @@ objcontype = [
 	{texto:"MS_ORACLESPATIAL",valor:"8"},
 	{texto:"MS_WFS",valor:"9"},
 	{texto:"MS_GRATICULE",valor:"10"},
-	{texto:"MS_MYGIS",valor:"11"},
 	{texto:"MS_RASTER",valor:"12"},
 	{texto:"MS_PLUGIN",valor:"13"}
 ];
@@ -884,7 +883,7 @@ Abre o editor de conexões
 */
 function editorConexao(codigoMap,codigoLayer)
 {
-	core_montaEditor("","600px","500px")
+	core_montaEditor("","450px","650px")
 	var sUrl = "../php/editormapfile.php?funcao=pegaConexao&codigoMap="+codigoMap+"&codigoLayer="+codigoLayer;
 	core_pegaDados("Obtendo dados...",sUrl,"montaEditorConexao")
 }
@@ -897,7 +896,7 @@ Abre o editor de metadados
 */
 function editorMetadados(codigoMap,codigoLayer)
 {
-	core_montaEditor("","600px","500px")
+	core_montaEditor("","450px","500px")
 	var sUrl = "../php/editormapfile.php?funcao=pegaMetadados&codigoMap="+codigoMap+"&codigoLayer="+codigoLayer;
 	core_pegaDados("Obtendo dados...",sUrl,"montaEditorMetadados")
 }
@@ -910,7 +909,7 @@ Abre o editor de dados gerais de um layer
 */
 function editorGeral(codigoMap,codigoLayer)
 {
-	core_montaEditor("","600px","500px")
+	core_montaEditor("","450px","500px")
 	var sUrl = "../php/editormapfile.php?funcao=pegaGeral&codigoMap="+codigoMap+"&codigoLayer="+codigoLayer;
 	core_pegaDados("Obtendo dados...",sUrl,"montaEditorGeral")
 }
@@ -923,7 +922,7 @@ Abre o editor de dados gerais de uma classe
 */
 function editorClasseGeral(codigoMap,codigoLayer,indiceClasse)
 {
-	core_montaEditor("","600px","500px")
+	core_montaEditor("","450px","500px")
 	var sUrl = "../php/editormapfile.php?funcao=pegaClasseGeral&codigoMap="+codigoMap+"&codigoLayer="+codigoLayer+"&indiceClasse="+indiceClasse;
 	core_pegaDados("Obtendo dados...",sUrl,"montaEditorClasseGeral")
 }
@@ -936,7 +935,7 @@ Abre o editor dos labels de um layer
 */
 function editorClasseLabel(codigoMap,codigoLayer,indiceClasse)
 {
-	core_montaEditor("","600px","500px")
+	core_montaEditor("","450px","500px")
 	var sUrl = "../php/editormapfile.php?funcao=pegaClasseLabel&codigoMap="+codigoMap+"&codigoLayer="+codigoLayer+"&indiceClasse="+indiceClasse;
 	core_pegaDados("Obtendo dados...",sUrl,"montaEditorClasseLabel")
 }
@@ -949,12 +948,13 @@ Abre o editor de dados gerais de um estilo
 */
 function editorEstilo(codigoMap,codigoLayer,indiceClasse,indiceEstilo)
 {
-	core_montaEditor("","600px","500px")
+	core_montaEditor("","450px","500px")
 	var sUrl = "../php/editormapfile.php?funcao=pegaEstilo&codigoMap="+codigoMap+"&codigoLayer="+codigoLayer+"&indiceClasse="+indiceClasse+"&indiceEstilo="+indiceEstilo;
 	core_pegaDados("Obtendo dados...",sUrl,"montaEditorEstilo")
 }
 function montaEditorConexao(dados)
 {
+	var idsForms = ["connection","data","tileitem","tileindex","type"];
 	var param = {
 		"linhas":[
 		{ajuda:"Type of connection. Default is local.",
@@ -963,6 +963,8 @@ function montaEditorConexao(dados)
 		titulo:"Connection",id:"connection",value:dados.connection,tipo:"text"},
 		{ajuda:"Full filename of the spatial data to process. No file extension is necessary for shapefiles. Can be specified relative to the SHAPEPATH option from the Map Object.If this is an SDE layer, the parameter should include the name of the layer as well as the geometry column, i.e. 'mylayer,shape,myversion'.If this is a PostGIS layer, the parameter should be in the form of '<columnname> from <tablename>', where 'columnname' is the name of the column containing the geometry objects and 'tablename' is the name of the table from which the geometry data will be read.For Oracle, use 'shape FROM table' or 'shape FROM (SELECT statement)' or even more complex Oracle compliant queries! Note that there are important performance impacts when using spatial subqueries however. Try using MapServer's FILTER whenever possible instead. You can also see the SQL submitted by forcing an error, for instance by submitting a DATA parameter you know won't work, using for example a bad column name. Exemplo postgis: the_geom FROM (select * FROM biomas) as foo USING UNIQUE gid USING SRID=4291 . Exemplo shapefile: c://ms4w/Apache/htdocs/geodados/brasil/limitespol/localidades.shp",
 		titulo:"Data",id:"data",value:dados.data,tipo:"text"},
+		{ajuda:"Specifies how the data should be drawn. Need not be the same as the shapefile type. For example, a polygon shapefile may be drawn as a point layer, but a point shapefile may not be drawn as a polygon layer. Common sense rules. Annotation means that a label point will be calculated for the features, but the feature itself will not be drawn although a marker symbol can be optionally drawn. this allows for advanced labeling like numbered highway shields. Points are labeled at that point. Polygons are labeled first using a centroid, and if that doesn't fall in the polygon a scanline approach is used to guarantee the label falls within the feature. Lines are labeled at the middle of the longest arc in the visible portion of the line. Query only means the layer can be queried but not drawn.In order to differentiate between POLYGONs and POLYLINEs (which do not exist as a type), simply respectively use or ommit the COLOR keyword when classifying. If you use it, it's a polygon with a fill color, otherwise it's a polyline with only an OUTLINECOLOR.For CHART layers, see the Dynamic Charting howto.A circle must be defined by a a minimum bounding rectangle. That is, 2 points that define the smallest square that can contain it. These 2 points are the two opposite corners of said box",
+		titulo:"Type",id:"",value:dados.type,tipo:"text",div:"<div id=cType ></div>"},
 		{ajuda:"Item that contains the location of an individual tile, default is 'location'.",
 		titulo:"tileitem",id:"tileitem",value:dados.tileitem,tipo:"text"},
 		{ajuda:"Name of the tileindex file or layer. A tileindex is similar to an ArcInfo library index. The tileindex contains polygon features for each tile. The item that contains the location of the tiled data is given using the TILEITEM parameter. When a file is used as the tileindex for shapefile or raster layers, the tileindex should be a shapefile. For CONNECTIONTYPE OGR layers, any OGR supported datasource can be a tileindex. Normally the location should contain the path to the tile file relative to the shapepath, not relative to the tileindex itself. If the DATA parameter contains a value then it is added to the end of the location. When a tileindex layer is used, it works similarly to directly referring to a file, but any supported feature source can be used (ie. postgres, oracle).NOTE: All files in the tileindex should have the same coordinate system, and for vector files the same set of attributes in the same order.",
@@ -970,20 +972,29 @@ function montaEditorConexao(dados)
 		]
 	}
 	var ins = "<input type=button title='Salvar' value='Salvar' id=salvarEditor />"
+	ins += "&nbsp;<input type=button title='Testar' value='Testar' id=testarEditor />"
+
 	if(dados.postgis_mapa.length > 0)
 	{
-		ins += "<p>Os seguintes 'alias' estão disponíveis para uso na opção 'connection': ";
-		ins += dados.postgis_mapa+"</p>"
+		ins += "<p>Os seguintes 'alias' estão definidos no metadata 'ITENS': ";
+		ins += dados.postgis_mapa;
+		ins += "<br>Os campos em cores não são compatíveis com o tipo de conexão.</p>";
 	}
-	ins += "<input type=button title='Testar' value='Testar' id=testarEditor />"
 	ins += core_geraLinhas(param)
 	ins += "<br><br><br>"
 	$i("editor_bd").innerHTML = ins
+	
 	temp = "<select id='connectiontype' >"
 	temp += core_comboObjeto(objcontype,"valor","texto",dados.connectiontype)
 	temp += "</select>"
 	$i("cConnectiontype").innerHTML = temp
-
+	
+	temp = "<select id='type' >"
+	temp += core_comboObjeto(objlayertypes,"valor","texto",dados.type)
+	temp += "</select>"
+	$i("cType").innerHTML = temp
+	
+	
 	var temp = function()
 	{salvarDadosEditor('conexao',dados.codigoMap,dados.codigoLayer,false)}
 	new YAHOO.widget.Button("salvarEditor",{ onclick: { fn: temp }});
@@ -991,6 +1002,27 @@ function montaEditorConexao(dados)
 	var temp = function()
 	{salvarDadosEditor('conexao',dados.codigoMap,dados.codigoLayer,"","",true)}
 	new YAHOO.widget.Button("testarEditor",{ onclick: { fn: temp }});
+	core_desativaforms(idsForms);
+	$i("connectiontype").onchange = function(){
+		core_desativaforms(idsForms);
+		var valor = $i("connectiontype").value,
+			d = [];
+		//["connection","data","tileitem","tileindex"]
+		if(valor == 0 || valor == 10)
+		{d = [];}
+		if(valor == 1 || valor == 12)
+		{d = ["data","type"];}
+		if(valor == 2)
+		{d = ["tileitem","tileindex","type"];}
+		if(valor == 3 || valor == 4 || valor == 6 || valor == 8 || valor == 13)
+		{d = idsForms;}
+		if(valor == 5)
+		{d = ["connection","tileitem","tileindex","type"];}
+		if(valor == 7 || valor == 9)
+		{d = ["connection","type"];}
+		core_ativaforms(d);
+	};
+	$i("connectiontype").onchange.call();
 }
 function montaEditorMetadados(dados)
 {
@@ -1169,10 +1201,12 @@ function montaEditorGeral(dados)
 	temp += core_comboObjeto(objstatus,"valor","texto",dados.status)
 	temp += "</select>"
 	$i("cStatus").innerHTML = temp	
+	
 	temp = "<select id='type' >"
 	temp += core_comboObjeto(objlayertypes,"valor","texto",dados.type)
 	temp += "</select>"
-	$i("cType").innerHTML = temp	
+	$i("cType").innerHTML = temp
+	
 	temp = "<select id='sizeunits' >"
 	temp += core_comboObjeto(objmapunits,"valor","texto",dados.sizeunits)
 	temp += "</select>"
@@ -1315,7 +1349,7 @@ function montaEditorClasseLabel(dados)
 	temp += core_comboObjeto(objfonttypes,"valor","texto",dados.type)
 	temp += "</select>"
 	$i("cType").innerHTML = temp	
-
+	
 	temp = "<select id='partials' >"
 	temp += core_comboObjeto(objbool_tf,"valor","texto",dados.partials)
 	temp += "</select>"
@@ -1340,11 +1374,11 @@ function montaEditorEstilo(dados)
 	var param = {
 		"linhas":[
 			{ajuda:"The symbol name or number to use for all features if attribute tables are not used. The number is the index of the symbol in the symbol file, starting at 1, the 5th symbol in the file is therefore symbol number 5. You can also give your symbols names using the NAME keyword in the symbol definition file, and use those to refer to them. Default is 0, which results in a single pixel, single width line, or solid polygon fill, depending on layer type.You can also specify a gif or png filename. The path is relative to the location of the mapfile.",
-			titulo:"Symbolname",id:"symbolname",value:dados.symbolname,tipo:"text"},
+			titulo:"Symbolname",id:"",value:dados.symbolname,tipo:"text",div:"<div id=cSymbolname ></div>"},
 			{ajuda:"Color to use for drawing features.",
 			titulo:"Color",id:"color",value:dados.color,tipo:"cor"},
 			{ajuda:"Background-color to use for drawing features.",
-			titulo:"Backgroundcolo",id:"backgroundcolor",value:dados.backgroundcolor,tipo:"cor"},
+			titulo:"Backgroundcolor",id:"backgroundcolor",value:dados.backgroundcolor,tipo:"cor"},
 			{ajuda:"Height, in pixels, of the symbol/pattern to be used. Only useful with scalable symbols. Default is 1. For symbols of Type HATCH, the SIZE is the distance between hatched lines. For its use with hatched lines, see Example#8 in the SYMBOL examples.",
 			titulo:"Size",id:"size",value:dados.size,tipo:"text"},
 			{ajuda:"Color to use for outlining polygons and certain marker symbols. Line symbols do not support outline colors.",
@@ -1374,9 +1408,33 @@ function montaEditorEstilo(dados)
 	ins += "<br><br><br>"
 	$i("editor_bd").innerHTML = ins	
 
+	temp = "<input type='text' value='"+dados.symbolname+"' id='symbolname' size='50'>";
+	temp += "<div id='listaSimbolos' style='overflow:auto;width:400px;height:50px;'></div>";
+	$i("cSymbolname").innerHTML = temp	
+	
 	var temp = function()
 	{salvarDadosEditor('estilo',dados.codigoMap,dados.codigoLayer,dados.indiceClasse,dados.indiceEstilo)}
-	new YAHOO.widget.Button("salvarEditor",{ onclick: { fn: temp }});	
+	new YAHOO.widget.Button("salvarEditor",{ onclick: { fn: temp }});
+
+	escolheSimbolo = function(nome){
+		$i("symbolname").value = nome;
+	};
+	//lista os simbolos
+	var sUrl = "../php/editormapfile.php?funcao=editasimbolo&tipo="+dados.type+"&opcao=listaSimbolos&onclick=escolheSimbolo(this.title)";
+	var callback =
+	{
+  		success:function(o)
+  		{
+  			try
+  			{
+				$i("listaSimbolos").innerHTML = o.responseText;
+  			}
+  			catch(e){}
+  		},
+  		failure:core_handleFailure,
+  		argument: { foo:"foo", bar:"bar" }
+	}; 
+	core_makeRequest(sUrl,callback,'POST')
 }
 /*
 Function: salvarDadosEditor
@@ -1398,7 +1456,7 @@ function salvarDadosEditor(tipo,codigoMap,codigoLayer,indiceClasse,indiceEstilo,
 	if(arguments.length < 6){var testar = false;}
 	if(tipo == "conexao")
 	{
-		var campos = new Array("connection","data","connectiontype","tileitem","tileindex")
+		var campos = new Array("type","connection","data","connectiontype","tileitem","tileindex")
 		var par = "&codigoMap="+codigoMap+"&codigoLayer="+codigoLayer
 		var prog = "../php/editormapfile.php?funcao=alterarConexao"
 	}
@@ -1462,8 +1520,8 @@ function salvarDadosEditor(tipo,codigoMap,codigoLayer,indiceClasse,indiceEstilo,
 	}
 	prog += "&testar="+testar;
 	try{
-	for (i=0;i<campos.length;i++)
-	{par += "&"+campos[i]+"="+($i(campos[i]).value)}
+		for (i=0;i<campos.length;i++)
+		{par += "&"+campos[i]+"="+($i(campos[i]).value)}
 	}catch(e){alert(e)}
 	core_carregando("ativa");
 	core_carregando(" gravando o registro do layer= "+codigoLayer);

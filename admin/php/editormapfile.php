@@ -77,6 +77,31 @@ switch (strtoupper($funcao))
 		exit;
 	break;
 	/*
+	Valor: EDITASIMBOLO
+	
+	Lista os símbolos de um determinado tipo
+	
+	Parametros:
+	
+	tipo {string} - tipo de layer
+	
+	onclick {string} - função javascript que será executada ao se clicar no símbilo
+	
+	Retorno:
+	
+	{JSON}
+	*/	
+	case "EDITASIMBOLO":
+		include_once("../../classesphp/classe_legenda.php");
+		if (strtoupper(substr(PHP_OS, 0, 3) == 'WIN'))
+		{$map_file = $locaplic."/aplicmap/geral1windows.map";}
+		else
+		{$map_file = $locaplic."/aplicmap/geral1.map";}
+		$m = new Legenda($map_file,$locaplic);
+		retornaJSON($m->listaSimbolos($tipo,$dir_tmp,"",$onclick));
+		exit;
+	break;	
+	/*
 	Valor: PEGALAYERS
 	
 	Lista os layers existentes em um mapfile
@@ -470,6 +495,8 @@ switch (strtoupper($funcao))
 	tileitem
 	
 	tileindex
+	
+	type
 	
 	Retorno:
 	
@@ -1112,11 +1139,12 @@ function pegaConexao()
 	$dados["postgis_mapa"] = $postgis_mapa;
 	$dados["codigoMap"] = $codigoMap;
 	$dados["codigoLayer"] = $codigoLayer;
+	$dados["type"] = $layer->type;
 	return $dados;
 }
 function alterarConexao()
 {
-	global $dir_tmp,$testar,$codigoMap,$codigoLayer,$locaplic,$connection,$connectiontype,$data,$tileitem,$tileindex;
+	global $type,$dir_tmp,$testar,$codigoMap,$codigoLayer,$locaplic,$connection,$connectiontype,$data,$tileitem,$tileindex;
 	$mapfile = $locaplic."/temas/".$codigoMap.".map";
 	$mapa = ms_newMapObj($mapfile);
 	$layer = $mapa->getlayerbyname($codigoLayer);
@@ -1128,6 +1156,7 @@ function alterarConexao()
 	$layer->set("data",$data);
 	$layer->set("tileitem",$tileitem);
 	$layer->set("tileindex",$tileindex);
+	$layer->set("type",$type);
 	if($testar == "true")
 	{
 		$nome = $dir_tmp."/".$codigoMap.".map";
@@ -1509,6 +1538,7 @@ function pegaEstilo()
 	$dados["indiceClasse"] = $indiceClasse;
 	$dados["indiceEstilo"] = $indiceEstilo;
 	//$dados["opacity"] = $estilo->opacity;
+	$dados["type"] = $layer->type;
 	return $dados;
 }
 function alterarEstilo()
