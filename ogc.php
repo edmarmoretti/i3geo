@@ -116,7 +116,8 @@ if(count($_GET) == 0){
 }
 if(isset($tema) && $tipo != "metadados")
 {$tipo = "";}
-$req->setParameter("VeRsIoN","1.1.0");
+if(!isset($version))
+{$req->setParameter("VeRsIoN","1.1.0");}
 $oMap = ms_newMapobj("aplicmap/ogcws.map");
 //
 //altera os caminhos das imagens
