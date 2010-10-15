@@ -518,11 +518,11 @@ i3GEO.php = {
 			atualiza = true;
 			geo = false;
 		}
-		if(geo === 'undefined')
+		if(geo === undefined)
 		{geo = false;}
-		if(atualiza === 'undefined')
+		if(atualiza === undefined)
 		{atualiza = true;}
-		if(ext === 'undefined')
+		if(ext === undefined)
 		{alert("extensao nao definida");return;}
 		retorno = function(retorno){
 			if(i3GEO.Interface.ATUAL === "googlemaps"){
@@ -539,7 +539,9 @@ i3GEO.php = {
 			//
 			//o try é necessario para não dar erro
 			//
-			try{funcao.call(retorno);}
+			try{
+				funcao.call(retorno);
+			}
 			catch(e){}
 		};
 		p = locaplic+"/classesphp/mapa_controle.php?funcao=mudaext&tipoimagem="+tipoimagem+"&ext="+ext+"&g_sid="+sid+"&geo="+geo;

@@ -575,6 +575,10 @@ i3GEO = {
 		var diminuix,diminuiy,menos,novow,novoh,w,h,temp;
 		diminuix = (navm) ? i3GEO.configura.diminuixM : i3GEO.configura.diminuixN;
 		diminuiy = (navm) ? i3GEO.configura.diminuiyM : i3GEO.configura.diminuiyN;
+		if(chro){
+			diminuix = diminuix - 10;
+			diminuiy = diminuiy - 50;
+		}
 		//
 		//subtrai barra de rolagem
 		//

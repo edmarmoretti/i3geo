@@ -10,7 +10,7 @@ LAYER
     END
     NAME "cbersgeo"
     STATUS DEFAULT
-    TEMPLATE "none.htm"
+    #TEMPLATE "none.htm"
     TYPE RASTER
     UNITS METERS
     CLASS

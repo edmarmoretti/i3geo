@@ -145,6 +145,10 @@ $tamanho Tamanho do texto.
 $fonte Fonte.
 
 $tipo Tipo teste|
+
+Retorno:
+
+{string} - código do layer criado
 */
 	function criaToponimia($item,$position,$partials,$offsetx,$offsety,$minfeaturesize,$mindistance,$force,$shadowcolor,$shadowsizex,$shadowsizey,$outlinecolor,$cor,$sombray,$sombrax,$sombra,$fundo,$angulo,$tamanho,$fonte,$tipo)
 	{
@@ -174,6 +178,7 @@ $tipo Tipo teste|
 		else
 		{
 			$novac = $this->layer->getclass(0);
+			$nomer = $this->layer->name;
 		}
 		$label = $novac->label;
 		if ($fonte != "bitmap")
@@ -224,7 +229,7 @@ $tipo Tipo teste|
 			return ($i["url"]);
 		}
 		else
-		{return("ok");}
+		{return($nomer);}
 	}
 /*
 function: ativaEtiquetas

@@ -56,6 +56,18 @@ Default:
 
 */
 navn = false;
+/*
+Propriedade: chro
+
+Verdadeiro (true) se o navegador for o Chrome
+
+Tipo:
+{boolean}
+
+Default:
+{false}
+*/
+chro = navigator.userAgent.toLowerCase().indexOf('chrome') > -1;
 //seta as variáveis navn e navm
 var app = navigator.appName.substring(0,1);
 if (app==='N'){navn=true;}else{navm=true;}

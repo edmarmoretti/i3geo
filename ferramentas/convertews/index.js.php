@@ -109,8 +109,8 @@ i3GEOF.converteMapaWS = {
 			var enderecowms = "Ocorreu um erro ao criar o WMS",
 				enderecowmc = "Ocorreu um erro ao criar o WMS";
 			if (retorno.data != undefined){
-				enderecowms = window.location.protocol+"//"+window.location.host+retorno.data.wms+"&"+retorno.data.wms+"&";
-				enderecowmc = window.location.protocol+"//"+window.location.host+retorno.data.wmc+"&"+retorno.data.wmc+"&";
+				enderecowms = window.location.protocol+"//"+window.location.host+retorno.data.wms+"&";
+				enderecowmc = window.location.protocol+"//"+window.location.host+retorno.data.wmc+"&";
 			}
 			i3GEOF.converteMapaWS.html(divid,enderecowms,enderecowmc);
 		};

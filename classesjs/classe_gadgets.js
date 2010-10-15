@@ -1029,6 +1029,8 @@ i3GEO.gadgets = {
 			{temp.border = "0px solid white";}
 			else
 			{temp.border = "1px dotted white";}
+			if(navm && i3GEO.Interface.ATUAL == "googlemaps")
+			{temp.border = "2px dotted white";}
 		}
 	}
 };

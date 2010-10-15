@@ -146,11 +146,11 @@ i3GEObuscaRapida = {
 		{var resultado = i3GEObuscaRapida.montaResultado;}
 		aguarde("block")
 		$i("resultado").innerHTML = "Aguarde..."
+		$i(i3GEObuscaRapida.idresultado).style.display = "none";
 		var palavra = i3GEO.util.removeAcentos(palavra);
 		i3GEObuscaRapida.palavra = palavra;
 		i3GEObuscaRapida.locaplic = locaplic;
 		i3GEO.php.buscaRapida(resultado,locaplic,i3GEObuscaRapida.servico,palavra);
-		//i3GEObuscaRapida.montaResultado()
 	},
 	/*
 	Function: montaResultado
@@ -188,6 +188,7 @@ i3GEObuscaRapida = {
 			}
 		}
 		catch(e){var ins = "Erro ao acessar o serviço "+i3GEObuscaRapida.servico+"<br>";}
+		$i(i3GEObuscaRapida.idresultado).style.display = "block";
 		$i(i3GEObuscaRapida.idresultado).innerHTML = ins
 		aguarde("none")
 		if(i3GEObuscaRapida.buscaemtemas){	

@@ -894,7 +894,9 @@ i3GEO.barraDeBotoes = {
 		var i = $i("divMensagemBarraDeBotoes");
 		if(i)
 		{i.style.display="none";}
-		clearTimeout(timeAjudaBotoes);
+		try
+		{clearTimeout(timeAjudaBotoes);}
+		catch(e){}
 	}
 };
 //YAHOO.log("carregou classe barradebotoes", "Classes i3geo");

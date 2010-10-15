@@ -50,9 +50,9 @@ i3GEO.janela = {
 	{String}
 	
 	Default:
-	{display:block;padding:5px 0 5px 0}
+	{display:block;padding:5px 0px 5px 2px}
 	*/
-	ESTILOBD: "display:block;padding:5px 0 5px 0",
+	ESTILOBD: "display:block;padding:5px 0px 5px 2px;",
 	/*
 	Propriedade: ESTILOAGUARDE
 	
@@ -210,7 +210,7 @@ i3GEO.janela = {
 		if (arguments.length === 10){
 			funcaoMinimiza = null;
 		}
-		wlargura_ = parseInt(wlargura,10)+0+"px";
+		wlargura_ = parseInt(wlargura,10)+2+"px";
 		if ($i(id))
 		{YAHOO.janelaDoca.xp.panel.destroy();}
 		if($i(id+"_c"))
@@ -250,12 +250,6 @@ i3GEO.janela = {
 			$i(id+'_corpo').style.width=parseInt(wlargura,10);
 			if(navm)
 			{$i(id+'_corpo').style.width=parseInt(wlargura,10)-2;}
-			/*
-			if(navn)
-			{$i(id+'_corpo').style.width=parseInt(wlargura,10)-10;}
-			else
-			{$i(id+'_corpo').style.width=parseInt(wlargura,10)-2;}
-			*/
 		}
 		fix = false;
 		if(nx === "" || nx === "center")
@@ -730,7 +724,7 @@ try{
 						me.cfg.setProperty("width", nNewWidth + "px");
 						if(navm)
 						{nNewWidth = nNewWidth - 2;}
-               			oBody.style.width = nNewWidth+"px";
+               			oBody.style.width = nNewWidth - 2 +"px";
                			if (nBodyHeight < 0)
                			{nBodyHeight = 0;}
                			oBody.style.height =  nBodyHeight + "px";
