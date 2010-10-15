@@ -905,7 +905,7 @@ i3GEO.util = {
 			texto = "Cor",
 			id = "i3geo_janelaCor",
 			modal = true,
-			classe = "hd"
+			classe = "hd";
 		YAHOO.namespace("janelaCor.xp");
 		if ($i(id))
 		{YAHOO.janelaCor.xp.panel.destroy();}

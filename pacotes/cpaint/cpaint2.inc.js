@@ -704,7 +704,7 @@ function cpaint_call() {
     if (httpobj.readyState == 4
       && httpobj.status == 200) {
       if(httpobj.responseText == ""){
-      	alert("O servidor demorou muito - timeout");
+      	alert("Ocorreu um erro! Retorno vazio.");
 		client_callback("", "erro");
 		return;
       }
@@ -767,7 +767,7 @@ function cpaint_call() {
 		{
 			debug('invalid HTTP response code \''+Number(httpobj.status)+'\'',0);
 			if(httpobj.status==500){
-				alert("O servidor demorou muito - timeout");
+				alert("Ocorreu um erro! 500");
 				client_callback("", "erro");	
 			}
 			else{

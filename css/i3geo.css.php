@@ -354,6 +354,14 @@ h1 {padding:.25em .5em;background-color:#ccc;}
 	width:20px;
 	height:10px;
 }
+#menuinterface
+{
+	background-image:URL('../imagens/visual/default/sprite.png');
+	background-repeat: no-repeat;
+	background-position: 3px -1775px;
+	width:52px;
+	height:15px;
+}
 #menuajudaMenu
 {
 	background-image:URL('../imagens/visual/default/sprite.png');
@@ -807,14 +815,6 @@ h1 {padding:.25em .5em;background-color:#ccc;}
 	width:18px;
 	height:20px;
 	cursor:pointer;
-}
-#menuinterface
-{
-	background-image:URL('../imagens/visual/default/sprite.png');
-	background-repeat: no-repeat;
-	background-position: 3px -1775px;
-	width:52px;
-	height:15px;
 }
 #rota
 {

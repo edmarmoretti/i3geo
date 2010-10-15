@@ -135,9 +135,10 @@ i3GEOF.selecao = {
 		'<div class=guiaobj id="i3GEOselecaoguia1obj" style="left:1px;display:none;top:-5px">' +
 		'	<p class=paragrafo ><img id=i3GEOselecaopt onclick="i3GEOF.selecao.tiposel(this)" src="'+i3GEO.configura.locaplic+'/imagens/gisicons/point.png" title="Clique no mapa para selecionar" style="cursor:pointer;border:1px solid gray" />' +
 		'	<img id=i3GEOselecaopoli onclick="i3GEOF.selecao.tiposel(this)" src="'+i3GEO.configura.locaplic+'/imagens/gisicons/polygon.png" title="Desenhe um poligono no mapa para selecionar" style="cursor:pointer;border:1px solid RGB(230,230,230);" />' +
-		'	<img id=i3GEOselecaoext onclick="i3GEOF.selecao.tiposel(this)" src="'+i3GEO.configura.locaplic+'/imagens/gisicons/map.png" title="Seleciona o que estiver visivel no mapa" style="cursor:pointer;border:1px solid RGB(230,230,230);" />' +
-		'	<img id=i3GEOselecaobox onclick="i3GEOF.selecao.tiposel(this)" src="'+i3GEO.configura.locaplic+'/imagens/gisicons/region.png" title="Desenhe um retangulo no mapa para selecionar" style="cursor:pointer;border:1px solid RGB(230,230,230);" />' +
-		'	<img onclick="i3GEOF.selecao.grafico()" src="'+i3GEO.configura.locaplic+'/imagens/gisicons/layer-vector-chart-add.png" title="Grafico" style="cursor:pointer;border:1px solid RGB(230,230,230);" />' +
+		'	<img id=i3GEOselecaoext onclick="i3GEOF.selecao.tiposel(this)" src="'+i3GEO.configura.locaplic+'/imagens/gisicons/map.png" title="Seleciona o que estiver visivel no mapa" style="cursor:pointer;border:1px solid RGB(230,230,230);" />';
+		if(i3GEO.Interface.ATUAL != "googlemaps")
+		{ins += '	<img id=i3GEOselecaobox onclick="i3GEOF.selecao.tiposel(this)" src="'+i3GEO.configura.locaplic+'/imagens/gisicons/region.png" title="Desenhe um retangulo no mapa para selecionar" style="cursor:pointer;border:1px solid RGB(230,230,230);" />';}
+		ins += '	<img onclick="i3GEOF.selecao.grafico()" src="'+i3GEO.configura.locaplic+'/imagens/gisicons/layer-vector-chart-add.png" title="Grafico" style="cursor:pointer;border:1px solid RGB(230,230,230);" />' +
 		'	<img onclick="i3GEOF.selecao.operacao(\'inverte\')" src="'+i3GEO.configura.locaplic+'/imagens/gisicons/undo.png" title="Inverte a selecao" style="cursor:pointer;border:1px solid RGB(230,230,230);" />' +
 		'	<img onclick="i3GEOF.selecao.operacao(\'limpa\')" src="'+i3GEO.configura.locaplic+'/imagens/gisicons/erase.png" title="Limpa a selecao" style="cursor:pointer;border:1px solid RGB(230,230,230);" />' +
 		'	<img onclick="i3GEOF.selecao.criatema()" src="'+i3GEO.configura.locaplic+'/imagens/gisicons/save1.png" title="Salva a selecao como um novo tema" style="cursor:pointer;border:1px solid RGB(230,230,230);" />' +

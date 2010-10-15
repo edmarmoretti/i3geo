@@ -1190,8 +1190,6 @@ i3GEO.Interface = {
 				i3GEO.idioma.mostraSeletor();
 				g_operacao = "";
 				g_tipoacao = "";
-				if(i3GEO.parametros.kmlurl !== "")
-				{i3GEO.mapa.insereKml(true,i3GEO.parametros.kmlurl);}
 				//i3GEO.parametros.mapscale = i3GEO.Interface.googlemaps.calcescala();
 				//atualizaEscalaNumerica(parseInt(i3GEO.parametros.mapscale,10));
 				//
@@ -1200,6 +1198,9 @@ i3GEO.Interface = {
 				i3GEO.arvoreDeCamadas.ATIVATEMA = "i3GEO.Interface.googlemaps.ligaDesliga(this)";
 				i3GEO.arvoreDeCamadas.cria("",i3GEO.arvoreDeCamadas.CAMADAS,i3GEO.configura.sid,i3GEO.configura.locaplic);
 				i3GEO.Interface.googlemaps.adicionaListaKml();
+				if(i3GEO.parametros.kmlurl !== "")
+				{i3GEO.Interface.googlemaps.adicionaKml(true,i3GEO.parametros.kmlurl);}
+
 			};
 			i3GEO.php.googlemaps(montaMapa);
 		},
@@ -1438,7 +1439,7 @@ i3GEO.Interface = {
 	
 		Insere no mapa uma camada KML com base na API do Google Maps
 	
-		As camadas adicionadas são crescentadas na árvore de camadas
+		As camadas adicionadas são acrescentadas na árvore de camadas
 	
 		A lista de nomes dos objetos geoXml criados é mantida em i3GEO.mapas.GEOXML
 	
@@ -1470,8 +1471,6 @@ i3GEO.Interface = {
 				titulo = ngeoxml;
 				ativo = true;
 			}
-			if(arguments.length === 2)
-			{ativo = true;}
 			if(url === "")
 			{return;}
 			//"http://api.flickr.com/services/feeds/geo/?g=322338@N20&lang=en-us&format=feed-georss"
@@ -1537,6 +1536,8 @@ i3GEO.Interface = {
 			i3GEO.Interface.googlemaps.ARVORE.draw();
 			i3GEO.Interface.googlemaps.ARVORE.collapseAll();
 			node.expand();
+			if(ativo == true)
+			{eval(id+" = new google.maps.KmlLayer('"+url+"',{map:i3GeoMap,preserveViewport:true});");}
 		},
 		criaArvoreKML: function(){
 			var arvore,a,root,titulo,d,node;
@@ -1814,7 +1815,6 @@ i3GEO.Interface = {
 			i3GEO.Interface.googleearth.ativaBotoes();
 			i3GEO.gadgets.mostraInserirKml("inserirKml");
 			i3GEO.Interface.googleearth.adicionaListaKml();
-			
 		},
 		recalcPar: function(){
 			var bounds;
