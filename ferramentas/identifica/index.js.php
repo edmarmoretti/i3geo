@@ -480,6 +480,8 @@ i3GEOF.identifica = {
 	*/
 	mostraDadosTema: function(retorno){
 		var res="",div0,ntemas,i,resultados,nres,cor,j,itens,nitens,k;
+		if(retorno == "")
+		{$i("i3GEOidentificaocorrencia").innerHTML="Nada encontrado";}
 		if (retorno.data !== undefined)
 		{
 			retorno = retorno.data;

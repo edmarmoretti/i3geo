@@ -1,0 +1,43 @@
+SYMBOLSET ../symbols/simbolos.sym
+FONTSET   "../symbols/fontes.txt"
+
+LAYER
+  NAME cbersi
+  TYPE RASTER
+  TILEINDEX "c://ms4w/Apache/htdocs/geodados/indicecbers.shp"
+  TILEITEM "location"
+	TEMPLATE "none.htm"
+  STATUS off
+	MAXSCALE 2500000
+  METADATA
+  	TEMA "Imagens CBERS2"
+  	CLASSE "SIM"
+    TEXTO "NAO"
+		TABELA "NAO"
+		BUSCA "NAO"
+  END
+	TOLERANCE 0.001
+	OFFSITE 0 0 0
+		
+END  # LAYER
+LAYER
+  NAME cbersii
+  TYPE polygon
+  DATA "c://ms4w/Apache/htdocs/geodados/indicecbers.shp"
+  STATUS off
+	TEMPLATE "none.htm"
+  METADATA
+		TEMA "Índice imagens CBERS2"
+		TITULO "Índice imagens CBERS2"
+  	CLASSE "NAO"
+    TEXTO "NAO"
+		BUSCA "SIM"
+  END
+     CLASS
+		    NAME ' '
+        COLOR -1 -1 -1
+        OUTLINECOLOR 50 50 50
+     END  # CLASS
+END  # LAYER
+
+END

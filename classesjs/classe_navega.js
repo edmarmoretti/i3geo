@@ -1424,7 +1424,6 @@ i3GEO.navega = {
 				}
 				catch(e){
 					i3GEO.eventos.NAVEGAMAPA.remove("atualizagoogle()");
-					if(typeof(console) !== 'undefined'){console.error(e);}
 				}
 			};
 			if(i3GEO.eventos.NAVEGAMAPA.toString().search("atualizagoogle()") < 0)

@@ -710,7 +710,6 @@ $listaDeTemas - (opcional) Lista com os códigos dos temas que serão identificado
 		{$temas = $this->mapa->getalllayernames();}
 		foreach ($temas as $tem)
 		{
-			
 			$vermultilayer = new vermultilayer();
 			$vermultilayer->verifica($this->arquivo,$tem);
 			if ($vermultilayer->resultado == 1) // o tema e multi layer
@@ -750,7 +749,7 @@ $listaDeTemas - (opcional) Lista com os códigos dos temas que serão identificado
 				$gr = $layerteste->group;
 				if ((!(($mclasse == "NAO") && ($mtema == "NAO"))) || ($gr != ""))
 				{
-					if (($layerteste->data != "") && ($layerteste->connectiontype != MS_WMS))
+					if (($layerteste->data != "") && ($layerteste->connectiontype != MS_WMS) || ($layerteste->tileindex != ""))
 					{$listatemas[] = $t;}
 				}
 			}
