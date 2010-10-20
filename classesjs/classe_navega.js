@@ -138,15 +138,27 @@ i3GEO.navega = {
 	x {Numeric} - coordenada em décimos de grau da longitude
 	
 	y {Numeric} - coordenada em décimos de grau da latitude
+	
+	tamanho {Numeric} - opcional, tamanho do símbolo do ponto que será inserido no mapa
+	
+	simbolo {String} - opcional, nome do símbolo para o ponto
+	
+	cor {String} - opcional, cor em r g b (p.ex. "255 0 0")
 	*/
-	zoomponto: function(locaplic,sid,x,y){
+	zoomponto: function(locaplic,sid,x,y,tamanho,simbolo,cor){
 		if(typeof(console) !== 'undefined'){console.info("i3GEO.navega.zoomponto()");}
+		if(!simbolo)
+		{simbolo = "ponto";}
+		if(!tamanho)
+		{tamanho = 15;}
+		if(!cor)
+		{cor = "255 0 0";}
 		//YAHOO.log("zoomponto", "i3geo");
 		if(locaplic !== ""){i3GEO.configura.locaplic = locaplic;}
 		if(sid !== ""){i3GEO.configura.sid = sid;}
 		var f = "i3GEO.navega.timerNavega = null;i3GEO.janela.abreAguarde('i3GEO.atualiza','"+$trad('o1')+"');"+
 			"i3GEO.contadorAtualiza++;"+
-			"i3GEO.php.zoomponto(i3GEO.atualiza,"+x+","+y+");";
+			"i3GEO.php.zoomponto(i3GEO.atualiza,"+x+","+y+","+tamanho+",'"+simbolo+"','"+cor+"');";
 		if(i3GEO.navega.timerNavega !== undefined)
 		{clearTimeout(i3GEO.navega.timerNavega);}
 		i3GEO.navega.timerNavega = setTimeout(f,i3GEO.navega.TEMPONAVEGAR);

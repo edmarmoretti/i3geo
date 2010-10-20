@@ -196,7 +196,7 @@ i3GEOF.identifica = {
 		divid = janela[2].id;
 		i3GEOF.identifica.inicia(i3GEO.temaAtivo,objposicaocursor.ddx,objposicaocursor.ddy,divid,true,true);
 		$i("i3GEOF.identifica_corpo").style.backgroundColor = "white";
-		if(i3GEO.Interface.ATUAL !== "googlemaps"){
+		if(i3GEO.Interface.ATUAL !== "googlemaps" && i3GEO.Interface.ATUAL !== "googleearth"){
 			temp = function(){
 				i3GEO.eventos.MOUSECLIQUE.remove("cliqueIdentifica()");
 				i3GEO.barraDeBotoes.ativaBotoes();

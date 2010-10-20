@@ -320,12 +320,15 @@ i3GEOF.tabela = {
 		i3GEOF.tabela.aguarde = $i("i3GEOF.tabela_imagemCabecalho").style;
 		i3GEOF.tabela.inicia(divid);
 		temp = function(){
-			if(i3GEO.Interface.ATUAL !== "googlemaps"){
+			if(i3GEO.Interface.ATUAL !== "googlemaps" && i3GEO.Interface.ATUAL !== "googleearth"){
 				i3GEO.eventos.NAVEGAMAPA.remove("i3GEOF.tabela.pegaRegistros()");
 			}
 			if(i3GEO.Interface.ATUAL === "googlemaps"){
 				google.maps.event.removeListener(tabelaDragend);
 				google.maps.event.removeListener(tabelaZoomend);
+			}
+			if(i3GEO.Interface.ATUAL === "googleearth"){
+				google.earth.removeEventListener(tabelaDragend);
 			}
 		};
 		YAHOO.util.Event.addListener(janela[0].close, "click", temp);
@@ -349,21 +352,27 @@ i3GEOF.tabela = {
 	*/
 	ativaAutoAtualiza:function(obj){
 		if(obj.checked == true){
-			if(i3GEO.Interface.ATUAL !== "googlemaps"){
+			if(i3GEO.Interface.ATUAL !== "googlemaps" && i3GEO.Interface.ATUAL !== "googleearth"){
 				i3GEO.eventos.NAVEGAMAPA.push("i3GEOF.tabela.pegaRegistros()");
 			}
 			if(i3GEO.Interface.ATUAL === "googlemaps"){
    				tabelaDragend = google.maps.event.addListener(i3GeoMap, "dragend", function() {i3GEOF.tabela.pegaRegistros();});
    				tabelaZoomend = google.maps.event.addListener(i3GeoMap, "zoomend", function() {i3GEOF.tebela.pegaRegistros();});						
 			}
+			if(i3GEO.Interface.ATUAL === "googleearth"){
+   				tabelaDragend = google.earth.addEventListener(i3GeoMap.getView(), "viewchangeend", function() {i3GEOF.tabela.pegaRegistros();});
+			}			
 		}
 		else{
-			if(i3GEO.Interface.ATUAL !== "googlemaps"){
+			if(i3GEO.Interface.ATUAL !== "googlemaps" && i3GEO.Interface.ATUAL !== "googleearth"){
 				i3GEO.eventos.NAVEGAMAPA.remove("i3GEOF.tabela.pegaRegistros()");
 			}
 			if(i3GEO.Interface.ATUAL === "googlemaps"){
 				google.maps.event.removeListener(tabelaDragend);
 				google.maps.event.removeListener(tabelaZoomend);
+			}
+			if(i3GEO.Interface.ATUAL === "googleearth"){
+				google.earth.removeEventListener(tabelaDragend);
 			}
 		}
 	},

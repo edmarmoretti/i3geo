@@ -955,7 +955,7 @@ i3GEO.arvoreDeCamadas = {
 	*/
 	montaTextoTema: function(tema){
 		var ck,html,display="none",estilo;
-		if(tema.status === 2){ck = ' CHECKED ';}
+		if(tema.status === 2 || tema.status === "2"){ck = ' CHECKED ';}
 		else
 		{ck = "";}
 		if(navm)
@@ -1058,12 +1058,12 @@ i3GEO.arvoreDeCamadas = {
 		{t = i3GEO.arvoreDeCamadas.listaLigadosDesligados("mantem");}
 		if(tipo === "ligartodos"){
 			t = i3GEO.arvoreDeCamadas.listaLigadosDesligados("marca");
-			if(i3GEO.Interface.ATUAL === "openlayers" || i3GEO.Interface.ATUAL === "googlemaps")
+			if(i3GEO.Interface.ATUAL === "googleearth" || i3GEO.Interface.ATUAL === "openlayers" || i3GEO.Interface.ATUAL === "googlemaps")
 			{return;}
 		}
 		if(tipo === "desligartodos"){
 			t = i3GEO.arvoreDeCamadas.listaLigadosDesligados("desmarca");
-			if(i3GEO.Interface.ATUAL === "openlayers" || i3GEO.Interface.ATUAL === "googlemaps")
+			if(i3GEO.Interface.ATUAL === "googleearth" || i3GEO.Interface.ATUAL === "openlayers" || i3GEO.Interface.ATUAL === "googlemaps")
 			{return;}
 		}
 		//
@@ -1142,6 +1142,9 @@ i3GEO.arvoreDeCamadas = {
 							if(i3GEO.Interface.ATUAL === "googlemaps"){
 								i3GEO.Interface.googlemaps.ligaDesliga(c);
 							}
+							if(i3GEO.Interface.ATUAL === "googleearth"){
+								i3GEO.Interface.googleearth.ligaDesliga(c);
+							}
 						}
 						if(tipo === "desmarca"){
 							c.checked = false;
@@ -1149,6 +1152,8 @@ i3GEO.arvoreDeCamadas = {
 							{i3GEO.Interface.openlayers.ligaDesliga(c);}
 							if(i3GEO.Interface.ATUAL === "googlemaps")
 							{i3GEO.Interface.googlemaps.ligaDesliga(c);}
+							if(i3GEO.Interface.ATUAL === "googleearth")
+							{i3GEO.Interface.googleearth.ligaDesliga(c);}							
 						}
 					}
 				}
@@ -1223,7 +1228,7 @@ i3GEO.arvoreDeCamadas = {
 				if(novo[i].tema !== atual[i].tema)
 				{return (false);}
 				if(novo[i].sel !== atual[i].sel)
-				{return (false);}
+				{return (false);}				
 			}
 			return(true);
 		}

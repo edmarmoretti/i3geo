@@ -65,7 +65,7 @@ i3GEOF.salvaMapa = {
 		},
 		atualiza = true,
 		geo = false;
-		if(i3GEO.Interface.ATUAL === "googlemaps"){
+		if(i3GEO.Interface.ATUAL === "googlemaps" || i3GEO.Interface.ATUAL === "googleearth"){
 			atualiza = false;
 			geo = true;
 		}

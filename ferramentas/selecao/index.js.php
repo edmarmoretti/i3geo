@@ -136,7 +136,7 @@ i3GEOF.selecao = {
 		'	<p class=paragrafo ><img id=i3GEOselecaopt onclick="i3GEOF.selecao.tiposel(this)" src="'+i3GEO.configura.locaplic+'/imagens/gisicons/point.png" title="Clique no mapa para selecionar" style="cursor:pointer;border:1px solid gray" />' +
 		'	<img id=i3GEOselecaopoli onclick="i3GEOF.selecao.tiposel(this)" src="'+i3GEO.configura.locaplic+'/imagens/gisicons/polygon.png" title="Desenhe um poligono no mapa para selecionar" style="cursor:pointer;border:1px solid RGB(230,230,230);" />' +
 		'	<img id=i3GEOselecaoext onclick="i3GEOF.selecao.tiposel(this)" src="'+i3GEO.configura.locaplic+'/imagens/gisicons/map.png" title="Seleciona o que estiver visivel no mapa" style="cursor:pointer;border:1px solid RGB(230,230,230);" />';
-		if(i3GEO.Interface.ATUAL != "googlemaps")
+		if(i3GEO.Interface.ATUAL != "googlemaps" && i3GEO.Interface.ATUAL != "googleearth")
 		{ins += '	<img id=i3GEOselecaobox onclick="i3GEOF.selecao.tiposel(this)" src="'+i3GEO.configura.locaplic+'/imagens/gisicons/region.png" title="Desenhe um retangulo no mapa para selecionar" style="cursor:pointer;border:1px solid RGB(230,230,230);" />';}
 		ins += '	<img onclick="i3GEOF.selecao.grafico()" src="'+i3GEO.configura.locaplic+'/imagens/gisicons/layer-vector-chart-add.png" title="Grafico" style="cursor:pointer;border:1px solid RGB(230,230,230);" />' +
 		'	<img onclick="i3GEOF.selecao.operacao(\'inverte\')" src="'+i3GEO.configura.locaplic+'/imagens/gisicons/undo.png" title="Inverte a selecao" style="cursor:pointer;border:1px solid RGB(230,230,230);" />' +
@@ -244,6 +244,8 @@ i3GEOF.selecao = {
 		i.zIndex = 10000 + i3GEO.janela.ULTIMOZINDEX;
 		if(i3GEO.Interface.ATUAL == "googlemaps")
 		{i3GEO.Interface.googlemaps.recalcPar();}
+		if(i3GEO.Interface.ATUAL == "googleearth")
+		{i3GEO.Interface.googleearth.recalcPar();}		
 	},
 	/*
 	Function: mudaicone

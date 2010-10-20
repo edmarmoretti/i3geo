@@ -260,6 +260,9 @@ i3GEObuscaRapida = {
 			if(window.parent.i3GEO.Interface.ATUAL == "googlemaps"){
 				window.parent.i3GEO.Interface.googlemaps.zoom2extent(ext);
 			}
+			if(window.parent.i3GEO.Interface.ATUAL == "googleearth"){
+				window.parent.i3GEO.Interface.googleearth.zoom2extent(ext);
+			}			
 			if(window.parent.i3GEO.Interface.ATUAL == "openlayers"){
 				window.parent.i3GEO.Interface.openlayers.zoom2ext(ext);
 			}
@@ -309,6 +312,8 @@ i3GEObuscaRapida = {
 			if(!window.parent){return;}
 			if(!window.parent.i3GEO){return;}
 			if(!window.parent.i3GEO.calculo){return;}
+			if(window.parent.i3GEO.Interface.ATUAL === "googleearth")
+			{return;}
 		}
 		catch(e){if(typeof(console) !== 'undefined'){console.error(e);};return;}
 		var ext = i3GEO.util.wkt2ext(wkt,"polygon");

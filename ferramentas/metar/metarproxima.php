@@ -139,6 +139,8 @@ echo $resultado;
 		i3GEO.util.escondeBox();
 	}
 	function mostraxy(){
+		if(i3GEO.Interface.ATUAL === "googleearth")
+		{return;}
 		i3GEO.util.criaBox("boxpin");
 		xy = i3GEO.calculo.dd2tela(x*1,y*1,$i(i3GEO.Interface.IDCORPO),i3GEO.parametros.mapexten,i3GEO.parametros.pixelsize);
 		var box = $i("boxpin");

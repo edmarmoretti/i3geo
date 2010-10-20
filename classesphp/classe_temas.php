@@ -607,7 +607,6 @@ $fonte - Fonte.
 				$tipo = "POINT";
 			}
 		}
-		//se o novo layer nao existir, cria um novo copiando o layer "pin" que ja deve existir no map file (no map file que iniciou a aplicacao)
 		if (!$this->layer)
 		{
 			$pinlayer = criaLayer($this->mapa,MS_LAYER_LINE,MS_DEFAULT,"Ins",$metaClasse="SIM");
@@ -618,6 +617,8 @@ $fonte - Fonte.
 			$e->set("symbol","ponto");
 			$core = $e->color;
 			$core->setrgb(255,0,0);
+			if(!isset($cor))
+			{$cor = "255 0 0";}
 			switch ($tipo)
 			{
 				case "GRAFICOPIZZA":
@@ -631,6 +632,7 @@ $fonte - Fonte.
 				if(!isset($tamanho)){$tamanho = 5;}
 				$e->set("size",$tamanho);
 				$e->set("symbolname",$marca);
+				corE($e,$cor,"color");
 				$pinlayer->setmetadata("tema","Pontos inseridos");
 				$pinlayer->set("type",MS_LAYER_POINT);
 				break;

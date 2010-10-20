@@ -92,7 +92,7 @@ $map->save($temp);
 removeLinha("classeNula",$temp);
 $map = ms_newMapObj($temp);
 $o = $map->outputformat;
-if($interface == "openlayers" || $interface == "googlemaps"){
+if($interface == "openlayers" || $interface == "googlemaps" || $interface == "googleearth"){
 	if($mapexten != ""){
 		$ext = explode(" ",$mapexten);
 		$extatual = $map->extent;

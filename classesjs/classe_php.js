@@ -474,8 +474,14 @@ i3GEO.php = {
 
 	<ZOOMPONTO>	
 	*/
-	zoomponto: function(funcao,x,y){
+	zoomponto: function(funcao,x,y,tamanho,simbolo,cor){
 		i3GEO.php.verifica();
+		if(!simbolo)
+		{simbolo = "ponto";}
+		if(!tamanho)
+		{tamanho = 15;}
+		if(!cor)
+		{cor = "255 0 0";}		
 		var retorno = function(retorno){
 			if(i3GEO.Interface.ATUAL === "openlayers"){
 				i3GEO.Interface.openlayers.pan2ponto(x,y);
@@ -487,7 +493,7 @@ i3GEO.php = {
 			}
 			funcao.call(retorno);
 		};
-		var p = i3GEO.configura.locaplic+"/classesphp/mapa_controle.php?funcao=zoomponto&pin=pin&xy="+x+" "+y+"&g_sid="+i3GEO.configura.sid;
+		var p = i3GEO.configura.locaplic+"/classesphp/mapa_controle.php?funcao=zoomponto&pin=pin&xy="+x+" "+y+"&g_sid="+i3GEO.configura.sid+"&marca="+simbolo+"&tamanho="+tamanho+"&cor="+cor;
 		cpJSON.call(p,"zoomponto",retorno);	
 	},
 	/*
@@ -671,6 +677,11 @@ i3GEO.php = {
 				i3GEO.Interface.googlemaps.zoom2extent(mapexten);
     			i3GEO.janela.fechaAguarde();
 			}
+			if(i3GEO.Interface.ATUAL === "googleearth"){
+				eval(retorno.data.variaveis);
+				i3GEO.Interface.googleearth.zoom2extent(mapexten);
+    			i3GEO.janela.fechaAguarde();
+			}			
 			if(i3GEO.Interface.ATUAL === "openlayers"){
 				eval(retorno.data.variaveis);
 				i3GEO.Interface.openlayers.zoom2ext(mapexten);
@@ -894,7 +905,16 @@ i3GEO.php = {
 		var p = i3GEO.configura.locaplic+"/classesphp/mapa_controle.php?funcao=googlemaps&g_sid="+i3GEO.configura.sid;
 		cpJSON.call(p,"googlemaps",funcao);	
 	},
+	/*
+	Function: googleearth
 
+	<GOOGLEEARTH>	
+	*/
+	googleearth: function(funcao){
+		i3GEO.php.verifica();
+		var p = i3GEO.configura.locaplic+"/classesphp/mapa_controle.php?funcao=googleearth&g_sid="+i3GEO.configura.sid;
+		cpJSON.call(p,"googleearth",funcao);	
+	},
 	/*
 	Function: openlayers
 

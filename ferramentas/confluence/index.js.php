@@ -18,7 +18,7 @@ Licenca:
 
 GPL2
 
-I3Geo Interface Integrada de Ferramentas de Geoprocessamento para Internet
+i3Geo Interface Integrada de Ferramentas de Geoprocessamento para Internet
 
 Direitos Autorais Reservados (c) 2006 Ministério do Meio Ambiente Brasil
 Desenvolvedor: Edmar Moretti edmar.moretti@mma.gov.br
@@ -62,13 +62,16 @@ i3GEOF.confluence = {
 		try{
 			$i(iddiv).innerHTML += i3GEOF.confluence.html();
 			i3GEOF.confluence.ativaFoco();
-			if(i3GEO.Interface.ATUAL !== "googlemaps"){
+			if(i3GEO.Interface.ATUAL !== "googlemaps" && i3GEO.Interface.ATUAL !== "googleearth"){
 				i3GEO.eventos.NAVEGAMAPA.push("i3GEOF.confluence.lista()");
 			}
 			if(i3GEO.Interface.ATUAL === "googlemaps"){
    				confluenceDragend = google.maps.event.addListener(i3GeoMap, "dragend", function() {i3GEOF.confluence.lista();});
    				confluenceZoomend = google.maps.event.addListener(i3GeoMap, "zoomend", function() {i3GEOF.confluence.lista();});						
 			}
+			if(i3GEO.Interface.ATUAL === "googleearth"){
+   				confluenceDragend = google.earth.addEventListener(i3GeoMap.getView(), "viewchangeend", function() {i3GEOF.confluence.lista();});
+			}			
 			i3GEOF.confluence.lista();
 		}
 		catch(erro){alert(erro);}
@@ -127,6 +130,9 @@ i3GEOF.confluence = {
 				google.maps.event.removeListener(confluenceDragend);
 				google.maps.event.removeListener(confluenceZoomend);
 			}
+			if(i3GEO.Interface.ATUAL === "googleearth"){
+				google.earth.removeEventListener(confluenceDragend);
+			}
 		};
 		YAHOO.util.Event.addListener(janela[0].close, "click", temp);		
 	},
@@ -161,6 +167,8 @@ i3GEOF.confluence = {
 	Indica a confluência no mapa
 	*/
 	mostraxy: function(xy){
+		if(i3GEO.Interface.ATUAL === "googleearth")
+		{return;}
 		xy = xy.split(",");
 	 	xy = i3GEO.calculo.dd2tela(xy[1]*1,xy[0]*1,$i(i3GEO.Interface.IDMAPA),i3GEO.parametros.mapexten,i3GEO.parametros.pixelsize);
 		var box = $i("boxpin");

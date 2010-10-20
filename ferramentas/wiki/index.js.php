@@ -61,13 +61,16 @@ i3GEOF.wiki = {
 		try{
 			$i(iddiv).innerHTML += i3GEOF.wiki.html();
 			i3GEOF.wiki.ativaFoco();
-			if(i3GEO.Interface.ATUAL !== "googlemaps"){
+			if(i3GEO.Interface.ATUAL !== "googlemaps" && i3GEO.Interface.ATUAL !== "googleearth"){
 				i3GEO.eventos.NAVEGAMAPA.push("i3GEOF.wiki.lista()");
 			}
 			if(i3GEO.Interface.ATUAL === "googlemaps"){
    				wikiDragend = google.maps.event.addListener(i3GeoMap, "dragend", function() {i3GEOF.wiki.lista();});
    				wikiZoomend = google.maps.event.addListener(i3GeoMap, "zoomend", function() {i3GEOF.wiki.lista();});						
 			}
+			if(i3GEO.Interface.ATUAL === "googleearth"){
+   				wikiDragend = google.earth.addEventListener(i3GeoMap.getView(), "viewchangeend", function() {i3GEOF.wiki.lista();});
+			}			
 			i3GEOF.wiki.lista();
 		}
 		catch(erro){if(typeof(console) !== 'undefined'){console.error(erro);}}
@@ -119,13 +122,16 @@ i3GEOF.wiki = {
 		i3GEOF.wiki.aguarde = $i("i3GEOF.wiki_imagemCabecalho").style;
 		i3GEOF.wiki.inicia(divid);
 		temp = function(){
-			if(i3GEO.Interface.ATUAL !== "googlemaps"){
+			if(i3GEO.Interface.ATUAL !== "googlemaps" && i3GEO.Interface.ATUAL !== "googleearth"){
 				i3GEO.eventos.NAVEGAMAPA.remove("i3GEOF.wiki.lista()");
 			}
 			if(i3GEO.Interface.ATUAL === "googlemaps"){
 				google.maps.event.removeListener(wikiDragend);
 				google.maps.event.removeListener(wikiZoomend);
 			}
+			if(i3GEO.Interface.ATUAL === "googleearth"){
+				google.earth.removeEventListener(wikiDragend);
+			}			
 		};
 		YAHOO.util.Event.addListener(janela[0].close, "click", temp);		
 	},

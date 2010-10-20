@@ -328,12 +328,15 @@ i3GEOF.graficointerativo = {
 		else
 		{i3GEOF.graficointerativo.inicia(divid,dados);}
 		temp = function(){
-			if(i3GEO.Interface.ATUAL !== "googlemaps"){
+			if(i3GEO.Interface.ATUAL !== "googlemaps" && i3GEO.Interface.ATUAL !== "googleearth"){
 				i3GEO.eventos.NAVEGAMAPA.remove("i3GEOF.graficointerativo.obterDados()");
 			}
 			if(i3GEO.Interface.ATUAL == "googlemaps"){
 				google.maps.event.removeListener(graficointerativoDragend);
 				google.maps.event.removeListener(graficointerativoZoomend);
+			}
+			if(i3GEO.Interface.ATUAL === "googleearth"){
+   				google.earth.removeEventListener(graficointerativoDragend);
 			}
 		};
 		YAHOO.util.Event.addListener(janela[0].close, "click", temp);
@@ -808,21 +811,27 @@ i3GEOF.graficointerativo = {
 	*/
 	ativaNavegacao: function(obj){
 		if(obj === true){
-			if(i3GEO.Interface.ATUAL !== "googlemaps"){
+			if(i3GEO.Interface.ATUAL !== "googlemaps" && i3GEO.Interface.ATUAL !== "googleearth"){
 				i3GEO.eventos.NAVEGAMAPA.push("i3GEOF.graficointerativo.obterDados()");
 			}
 			if(i3GEO.Interface.ATUAL === "googlemaps"){
    				graficointerativoDragend = GEvent.addListener(i3GeoMap, "dragend", function() {i3GEOF.graficointerativo.obterDados();});
    				graficointerativoZoomend = GEvent.addListener(i3GeoMap, "zoomend", function() {i3GEOF.graficointerativo.obterDados();});						
 			}
+			if(i3GEO.Interface.ATUAL === "googleearth"){
+   				graficointerativoDragend = google.earth.addEventListener(i3GeoMap.getView(), "viewchangeend", function() {i3GEOF.graficointerativo.obterDados();});
+			}			
 		}
 		else{
-			if(i3GEO.Interface.ATUAL !== "googlemaps"){
+			if(i3GEO.Interface.ATUAL !== "googlemaps" && i3GEO.Interface.ATUAL !== "googleearth"){
 				i3GEO.eventos.NAVEGAMAPA.remove("i3GEOF.graficointerativo.obterDados()");
 			}
 			if(i3GEO.Interface.ATUAL === "googlemaps"){
 				GEvent.removeListener(graficointerativoDragend);
 				GEvent.removeListener(graficointerativoZoomend);
+			}
+			if(i3GEO.Interface.ATUAL === "googleearth"){
+				google.earth.removeEventListener(graficointerativoDragend);
 			}
 		}
 	}

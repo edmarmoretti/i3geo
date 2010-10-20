@@ -263,7 +263,16 @@ Prepara o mapa atual para funcionar na interface googlemaps.
 		include_once("mapa_inicia.php");
 		iniciaMapa();
 	break;
-	
+/*
+Valor: GOOGLEEARTH
+
+Prepara o mapa atual para funcionar na interface googleearth.
+*/
+	case "GOOGLEEARTH":
+		$interface = "googleearth";
+		include_once("mapa_inicia.php");
+		iniciaMapa();
+	break;
 /*
 Section: Análise
 
@@ -2313,7 +2322,9 @@ Desloca o centro do mapa para um ponto específico.
 		$m->zoomPonto($xy);
 		$m->salva();
 		$m = new Temas($map_file,"");
-		$m->insereFeature("ponto","POINT",$xy,$texto,$position,$partials,$offsetx,$offsety,$minfeaturesize,$mindistance,$force,$shadowcolor,$shadowsizex,$shadowsizey,$outlinecolor,$cor,$sombray,$sombrax,$sombra,$fundo,$angulo,$tamanho,$fonte);
+		if(!isset($marca))
+		{$marca = "ponto";}
+		$m->insereFeature($marca,"POINT",$xy,$texto,$position,$partials,$offsetx,$offsety,$minfeaturesize,$mindistance,$force,$shadowcolor,$shadowsizex,$shadowsizey,$outlinecolor,$cor,$sombray,$sombrax,$sombra,$fundo,$angulo,$tamanho,$fonte);
 		$m->salva();	
 		redesenhaMapa();
 	break;

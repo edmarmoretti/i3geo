@@ -67,13 +67,16 @@ i3GEOF.metar = {
 		try{
 			$i(iddiv).innerHTML += i3GEOF.metar.html();
 			i3GEOF.metar.ativaFoco();
-			if(i3GEO.Interface.ATUAL !== "googlemaps"){
+			if(i3GEO.Interface.ATUAL !== "googlemaps" && i3GEO.Interface.ATUAL !== "googleearth"){
 				i3GEO.eventos.NAVEGAMAPA.push("i3GEOF.metar.lista()");
 			}
 			if(i3GEO.Interface.ATUAL === "googlemaps"){
    				metarDragend = google.maps.event.addListener(i3GeoMap, "dragend", function() {i3GEOF.metar.lista();});
    				metarZoomend = google.maps.event.addListener(i3GeoMap, "zoomend", function() {i3GEOF.metar.lista();});						
 			}
+			if(i3GEO.Interface.ATUAL === "googleearth"){
+   				metarDragend = google.earth.addEventListener(i3GeoMap.getView(), "viewchangeend", function() {i3GEOF.metar.lista();});
+			}			
 			i3GEOF.metar.lista();
 		}
 		catch(erro){alert(erro);}
@@ -125,9 +128,16 @@ i3GEOF.metar = {
 		i3GEOF.metar.aguarde = $i("i3GEOF.metar_imagemCabecalho").style;
 		i3GEOF.metar.inicia(divid);
 		temp = function(){
-			if(i3GEO.Interface.ATUAL !== "googlemaps"){
+			if(i3GEO.Interface.ATUAL !== "googlemaps" && i3GEO.Interface.ATUAL !== "googleearth"){
 				i3GEO.eventos.NAVEGAMAPA.remove("i3GEOF.metar.lista()");
 			}
+			if(i3GEO.Interface.ATUAL === "googlemaps"){
+				google.maps.event.removeListener(metarDragend);
+				google.maps.event.removeListener(metarZoomend);
+			}
+			if(i3GEO.Interface.ATUAL === "googleearth"){
+				google.earth.removeEventListener(metarDragend);
+			}			
 		};
 		YAHOO.util.Event.addListener(janela[0].close, "click", temp);		
 	},
@@ -205,6 +215,8 @@ i3GEOF.metar = {
 	y {Numero} - latitude em dd
 	*/
 	mostraxy: function(x,y){
+		if(i3GEO.Interface.ATUAL === "googleearth")
+		{return;}
 		i3GEO.util.criaBox("boxpin");
 		xy = i3GEO.calculo.dd2tela(x*1,y*1,$i(i3GEO.Interface.IDCORPO),i3GEO.parametros.mapexten,i3GEO.parametros.pixelsize);
 		var box = $i("boxpin");

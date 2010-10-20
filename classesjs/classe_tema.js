@@ -66,6 +66,10 @@ i3GEO.tema = {
 			indice = i3GEO.Interface.googlemaps.retornaIndiceLayer(tema);
 			i3GeoMap.overlayMapTypes.removeAt(indice);
 		}
+		if(i3GEO.Interface.ATUAL === "googleearth"){
+			indice = i3GEO.Interface.googleearth.retornaObjetoLayer(tema);
+			i3GeoMap.getFeatures().removeChild(indice);
+		}		
 		i3GEO.php.excluitema(i3GEO.atualiza,tema);
 		i3GEO.mapa.ativaTema("");
 		if(i3GEO.Interface.ATUAL === "openlayers"){
