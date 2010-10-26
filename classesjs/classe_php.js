@@ -536,7 +536,9 @@ i3GEO.php = {
 				{i3GEO.Interface.googlemaps.zoom2extent(ext);}
 			}
 			if(i3GEO.Interface.ATUAL === "googleearth"){
-				i3GEO.Interface.googleearth.redesenha();
+				if(atualiza === true)
+				{i3GEO.Interface.googleearth.zoom2extent(ext);}
+
 			}
 			if(i3GEO.Interface.ATUAL === "openlayers"){
 				i3GEO.Interface.openlayers.zoom2ext(ext);			

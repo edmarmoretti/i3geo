@@ -388,7 +388,17 @@ Include:
 		{
 			$nomer = $locmapserv."?map=".$this->arquivo."&mode=map&".nomeRandomico();
 		}
-		$res = "g_locidentifica='".$locidentifica."';g_sistemas='".$locsistemas."';var g_celula=".$this->mapa->cellsize.";var mapscale = ".$this->mapa->scale.";var mapres=".$this->mapa->resolution.";var mapcellsize=".$this->mapa->cellsize.";var mapexten='".$ext."';var mapimagem='".$nomer."';var mapwidth=".$imgo->width.";var mapheight=".$imgo->height.";var mappath='".$imgo->imagepath."';var mapurl='".$imgo->imageurl."';var erro='".$mensagemErro."'";
+		//$res = "g_locidentifica='".$locidentifica."';g_sistemas='".$locsistemas."';var g_celula=".$this->mapa->cellsize.";var mapscale = ".$this->mapa->scale.";var mapres=".$this->mapa->resolution.";var mapcellsize=".$this->mapa->cellsize.";var mapexten='".$ext."';var mapimagem='".$nomer."';var mapwidth=".$imgo->width.";var mapheight=".$imgo->height.";var mappath='".$imgo->imagepath."';var mapurl='".$imgo->imageurl."';var erro='".$mensagemErro."'";
+		$res["mapscale"] = $this->mapa->scale;
+		$res["mapres"] = $this->mapa->resolution;
+		$res["pixelsize"] = $this->mapa->cellsize;
+		$res["mapexten"] = $ext;
+		$res["mapimagem"] = $nomer;
+		$res["w"] = $imgo->width;
+		$res["h"] = $imgo->height;
+		$res["mappath"] = $imgo->imagepath;
+		$res["mapurl"] = $imgo->imageurl;		
+		$res["erro"] = $mensagemErro;
 		return $res;
 	}
 /*

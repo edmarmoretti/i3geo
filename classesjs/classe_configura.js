@@ -142,7 +142,7 @@ i3GEO.configura = {
 			{ id:"omenudataAnalise18",text: $trad("d30"), url: "javascript:i3GEO.analise.dialogo.linhaDoTempo()" }
 			],
 			"janelas": [
-			{ id:"omenudataJanelas1",text: $trad("u15"), url: "javascript:initJanelaZoom('1');initJanelaZoom('2')" },
+			{ id:"omenudataJanelas1",text: $trad("u15"), url: "javascript:i3GEO.barraDeBotoes.reativa(0);i3GEO.barraDeBotoes.reativa(1)" },
 			{ id:"omenudataJanelas2",text: $trad("u16"), url: "javascript:i3GEO.ajuda.abreJanela()" }        
 			],
 			"arquivos": [
@@ -803,7 +803,8 @@ i3GEO.configura = {
 				g_operacao='identifica';
 				i3GEO.barraDeBotoes.BOTAOPADRAO = "identifica";
 				cliqueIdentifica = function(){
-					if (g_operacao === "identifica"){
+					if (g_operacao === "identifica" || i3GEO.barraDeBotoes.BOTAOPADRAO === "identifica"){
+						g_operacao = "identifica";
 						eval(i3GEO.configura.funcaoIdentifica);
 					}
 				};

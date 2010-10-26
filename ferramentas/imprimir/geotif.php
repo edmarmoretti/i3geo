@@ -101,8 +101,8 @@ if($interface == "openlayers" || $interface == "googlemaps" || $interface == "go
 		$extatual = $map->extent;
 		$extatual->setextent($ext[0],$ext[1],$ext[2],$ext[3]);
 	}
-	$legenda = $map->legend;
-	$legenda->set("status",MS_EMBED);
+	//$legenda = $map->legend;
+	//$legenda->set("status",MS_EMBED);
 	$o->set("imagemode",MS_IMAGEMODE_RGB);
 }
 $o->set("imagemode",MS_IMAGEMODE_RGB);
@@ -111,5 +111,6 @@ $nomer = ($imgo->imagepath)."mapa".$nomes.".tif";
 $imgo->saveImage($nomer);
 $protocolo = explode("/",$_SERVER['SERVER_PROTOCOL']);
 $nomemapa = strtolower($protocolo[0])."://".$_SERVER['HTTP_HOST'].($imgo->imageurl).basename($nomer);
+echo "<p>Utilize a opção de alteração das propriedades do mapa para ajustar a legenda, tamanho e outras características</p>";
 echo "<a style=font-family:Verdana,Arial,Helvetica,sans-serif; href='$nomemapa' >Arquivo gerado! Clique para ver.</a>";
 ?>

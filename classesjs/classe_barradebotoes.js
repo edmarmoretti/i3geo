@@ -792,14 +792,20 @@ i3GEO.barraDeBotoes = {
 	*/
 	reativa: function(indice){
 		if(typeof(console) !== 'undefined'){console.info("i3GEO.barraDeBotoes.reativa()");}
-		var n,i;
-		if(arguments.length == 1)
-		{i3GEO.barraDeBotoes.BARRAS[indice].show();}
-		else{
-			n = i3GEO.barraDeBotoes.BARRAS.length;
-			for(i=0;i<n;i++)
-			{i3GEO.barraDeBotoes.BARRAS[i].show();}
+		var abre = function(){
+				var i,
+					n = i3GEO.barraDeBotoes.BARRAS.length;
+				for(i=0;i<n;i++)
+				{i3GEO.barraDeBotoes.BARRAS[i].show();}
+			};
+		try{
+			if(arguments.length == 1)
+			{i3GEO.barraDeBotoes.BARRAS[indice].show();}
+			else{
+				abre.call();
+			}
 		}
+		catch(e){abre.call();}
 	},
 	/*
 	Function: recria
@@ -879,11 +885,12 @@ i3GEO.barraDeBotoes = {
 			divmensagem.id = "divMensagemBarraDeBotoes";
 			divmensagem.style.border = "0px solid rgb(120 120 120)";
 			divmensagem.style.position = "absolute";
+			divmensagem.style.zIndex = 20000;
 			if($i("i3geo"))
 			{$i("i3geo").appendChild(divmensagem);}
 			else
 			{document.body.appendChild(divmensagem);}
-			divmensagem.innerHTML = "<table style='z-index:8000' ><tr><td id='imgMensagemBarraDeBotoes' style='background:none;padding-top:2px;padding-right:3px;vertical-align:top'><img src='"+$im("left.png")+"' ></td><td style='text-align:left;border-left:1px solid rgb(210,210,210)'><span style='text-align:left;cursor:pointer;color:blue;' onclick='javascript:i3GEO.barraDeBotoes.AJUDA = false;'>parar</span><br><div style='vertical-align:middle;text-align:left;width:250px;border: 0px solid black;border-left:1px;' id='divMensagemBarraDeBotoesCorpo'></div></td></tr></table>";
+			divmensagem.innerHTML = "<table style='z-index:20000' ><tr><td id='imgMensagemBarraDeBotoes' style='background:none;padding-top:2px;padding-right:3px;vertical-align:top'><img src='"+$im("left.png")+"' ></td><td style='text-align:left;border-left:1px solid rgb(210,210,210)'><span style='text-align:left;cursor:pointer;color:blue;' onclick='javascript:i3GEO.barraDeBotoes.AJUDA = false;'>parar</span><br><div style='vertical-align:middle;text-align:left;width:250px;border: 0px solid black;border-left:1px;' id='divMensagemBarraDeBotoesCorpo'></div></td></tr></table>";
 		}
 		if(mensagem != ""){
 			divmensagem.style.left = parseInt(YAHOO.util.Dom.getStyle(objeto,"width"),10)+pos[0]+10+"px";

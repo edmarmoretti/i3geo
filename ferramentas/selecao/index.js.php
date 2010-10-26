@@ -255,7 +255,8 @@ i3GEOF.selecao = {
 	mudaicone: function(){
 		$i("i3GEOselecaopt").style.border = "1px solid RGB(230,230,230)"
 		$i("i3GEOselecaoext").style.border = "1px solid RGB(230,230,230)"
-		$i("i3GEOselecaobox").style.border = "1px solid RGB(230,230,230)"
+		if($i("i3GEOselecaobox"))
+		{$i("i3GEOselecaobox").style.border = "1px solid RGB(230,230,230)";}
 		$i("i3GEOselecaopoli").style.border = "1px solid RGB(230,230,230)"
 		i3GEO.desenho.richdraw.fecha;
 		if($i(i3GEO.Interface.IDMAPA)){

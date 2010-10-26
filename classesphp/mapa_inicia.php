@@ -234,6 +234,46 @@ function iniciaMapa()
 	{$nomer = ($imgo->imageurl).basename($nomer);}
 	$iref = $m->mapa->reference;
 	$irefH = $iref->height;
+	
+	$res["mapexten"] = $ext;
+	$res["mapscale"] = $escalaMapa;
+	$res["mapres"] = $m->mapa->resolution;
+	$res["pixelsize"] = $celula;
+	if ((isset($expoeMapfile)) && ($expoeMapfile == "nao"))
+	{$res["mapfile"] = "";}
+	else
+	{$res["mapfile"] = $map_file;}
+	$res["cgi"] = $locmapserv;
+	$res["extentTotal"] = $ext;
+	$res["mapimagem"] = $nomer;	
+	$geoip = "nao";
+	if (file_exists($locaplic."/pacotes/geoip") && file_exists($locaplic."/pacotes/geoip/GeoLiteCity.dat"))
+	{$geoip = "sim";}
+	$res["geoip"] = $geoip;
+	$res["listavisual"] = (file_exists($locaplic."/imagens/visual")) ? implode(",",listaDiretorios($locaplic."/imagens/visual")) : "";					
+	$res["utilizacgi"] = $utilizacgi;					
+	$versao = versao();
+	$res["versaoms"] = $versao["principal"];
+	$res["versaomscompleta"] = $versao["completa"];
+	$res["mensagens"] = $m->pegaMensagens();
+	$res["locsistemas"] = $locsistemas;
+	$res["locidentifica"] = $locidentifica;
+	$res["r"] = (isset($R_path)) ? "sim" : "nao";					
+	$res["locmapas"] = $locmapas;					
+	$res["extentref"] = "";					
+	$res["kmlurl"] = $kmlurl;					
+	$res["mensageminicia"] = $mensagemInicia;					
+	$res["interfacePadrao"] = $interfacePadrao;					
+	$res["embedLegenda"] =	$embedLegenda;				
+	$res["w"] = $w;
+	$res["h"] = $h;
+	$res["titulo"] = $tituloInstituicao;
+	$res["tempo"] = microtime(1) - $tempo;
+	$res["embedLegenda"] = $embedLegenda;
+	$res["erro"] = '';
+	$res["mappath"] = $imgo->imagepath;
+	$res["mapurl"] = $imgo->imageurl;
+	/*
 	$res = "var mapexten= '".$ext."';var mapscale=".$escalaMapa.";var mapres=".$m->mapa->resolution.";var g_celula=".$celula.";var mapimagem='".$nomer."';var mapwidth=".$imgo->width.";var mapheight=".$imgo->height.";var mappath='".$imgo->imagepath."';var mapurl='".$imgo->imageurl."'";
 	$res .= ";var extentref = '';var refimagem='';var refwidth=0;var refpath='';var refurl=''";
 	$res .= ";var legimagem='';var legwidth=0;var legheight=0;var legpath='';var legurl='';var locsistemas='".$locsistemas."';var locidentifica='".$locidentifica."'";
@@ -270,7 +310,9 @@ function iniciaMapa()
 	$res .= "var mensagemInicia ='".$mensagemInicia."';";
 	$res .= "var interfacePadrao ='".$interfacePadrao."';";
 	$res .= "var embedLegenda ='".$embedLegenda."';";
-	$res .= "var erro ='';";	
+	$res .= "var erro ='';";
+	*/
+
 	copy($map_file,(str_replace(".map","reinc.map",$map_file)));
 	copy($map_file,(str_replace(".map","seguranca.map",$map_file)));
 	//$cp->set_data(array("variaveis"=>$res,"temas"=>$temas));

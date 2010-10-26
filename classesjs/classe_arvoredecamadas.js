@@ -1228,6 +1228,8 @@ i3GEO.arvoreDeCamadas = {
 				if(novo[i].tema !== atual[i].tema)
 				{return (false);}
 				if(novo[i].sel !== atual[i].sel)
+				{return (false);}
+				if(novo[i].status !== atual[i].status)
 				{return (false);}				
 			}
 			return(true);

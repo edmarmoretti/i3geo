@@ -88,8 +88,8 @@ if($interface == "openlayers" || $interface == "googlemaps" || $interface == "go
 		$extatual = $map->extent;
 		$extatual->setextent($ext[0],$ext[1],$ext[2],$ext[3]);
 	}
-	$legenda = $map->legend;
-	$legenda->set("status",MS_EMBED);
+	//$legenda = $map->legend;
+	//$legenda->set("status",MS_EMBED);
 	$o->set("imagemode",MS_IMAGEMODE_RGB);
 }
 $o->set("imagemode",MS_IMAGEMODE_RGB);
@@ -101,10 +101,10 @@ $protocolo = explode("/",$_SERVER['SERVER_PROTOCOL']);
 $pathMapa = $dir_tmp."/".basename($imgo->imageurl)."/".basename($nomer);
 $nomeImagem = nomeRandomico();
 $legenda = $map->legend;
-$legenda->set("keysizex",20);
-$legenda->set("keysizey",20);
-$label = $legenda->label;
-$label->set("size",14);
+//$legenda->set("keysizex",20);
+//$legenda->set("keysizey",20);
+//$label = $legenda->label;
+//$label->set("size",14);
 $imgo = $map->drawlegend();
 $nomer = ($imgo->imagepath)."leg".$nomeImagem.".PNG";
 $imgo->saveImage($nomer);

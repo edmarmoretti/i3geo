@@ -2986,29 +2986,21 @@ function redesenhaMapa()
 	{
 		$e = $m->mapa->extent;
 		$ext = $e->minx." ".$e->miny." ".$e->maxx." ".$e->maxy;
-		$imagem = "var erro = '';var mapimagem='';var mapexten='".$ext."';var mapres = ''";
+		$res["mapimagem"] = "";
+		$res["mapexten"] = $ext;
+		$res["mapres"] = "";
 	}
 	else{
-		$imagem = $m->redesenhaCorpo($locsistemas,$locidentifica,$tipoimagem,$utilizacgi,$locmapserv);
-		if ($imagem == "erro")
-		{
-			unlink($map_file);
-			copy(str_replace(".map","seguranca.map",$map_file),$map_file);
-			$m = New Mapa($map_file);
-			$par = $m->parametrosTemas();
-			if (isset($utilizacgi) && strtolower($utilizacgi) == "sim")
-			{$imagem = "var erro = '';var mapimagem='".$locmapserv."?map=".$map_file."&mode=map&".nomeRandomico()."'";}
-			else
-			{$imagem = $m->redesenhaCorpo($locsistemas,$locidentifica,$tipoimagem);}
-		}
+		$res = $m->redesenhaCorpo($locsistemas,$locidentifica,$tipoimagem,$utilizacgi,$locmapserv);
 	}
-	$mensagens = "var mensagens ='".$m->pegaMensagens()."'";
+	$res["mensagens"] = $m->pegaMensagens();
+	$res["tempo"] = microtime(1) - $tempo;
 	restauraCon($map_file,$postgis_mapa);
 	ob_clean();
-	if (($par == "") || ($imagem == ""))
+	if ($par == "")
 	{$retorno = "erro";}
 	else
-	{$retorno = array("variaveis"=>($mensagens.";".$imagem.";var erro = '';var tempo=".(microtime(1) - $tempo)),"temas"=>$par);}
+	{$retorno = array("variaveis"=>$res,"temas"=>$par);}
 	cpjson($retorno);
 }
 ?>

@@ -225,6 +225,8 @@ i3GEO = {
 		//
 		tamanho = i3GEO.calculaTamanho();
 		i3GEO.Interface.cria(tamanho[0],tamanho[1]);
+		
+		/*
 		i3GEO.parametros = {
 			mapexten: "",
 			mapscale: "",
@@ -253,6 +255,7 @@ i3GEO = {
 			embedLegenda:"nao",
 			celularef: ""
 		};
+		*/
 		if(tamanho[0] < 550){
 			i = $i(i3GEO.gadgets.PARAMETROS.mostraQuadros.idhtml);
 			if(i){i.style.display = "none";}
@@ -296,6 +299,8 @@ i3GEO = {
 					//
 					//executa com eval a string que é retornada pelo servidor (função inicia do mapa_controle.php
 					//
+					
+					/*
 					tempo = "";
 					titulo = "";
 					eval(retorno.data.variaveis);
@@ -303,10 +308,9 @@ i3GEO = {
 						if (titulo !== "")
 						{top.document.title = titulo;}
 					}
-					catch(e){
-						if(typeof(console) !== 'undefined'){console.error(e);}
-					}
+					catch(e){}
 					i3GEO.ajuda.mostraJanela("Tempo de desenho em segundos: "+tempo,"");
+					
 					try{
 						i3GEO.parametros.mapexten= mapexten;
 						i3GEO.parametros.mapscale= parseInt(mapscale,10);
@@ -333,23 +337,10 @@ i3GEO = {
 						i3GEO.parametros.interfacePadrao = interfacePadrao;
 						i3GEO.parametros.embedLegenda = embedLegenda;
 					}
-					catch(e){alert("Erro durante a definicao de i3GEO.parametros "+e);}					
+					catch(e){alert("Erro durante a definicao de i3GEO.parametros "+e);}	
+					*/
+					i3GEO.parametros = retorno.data.variaveis;
 					i3GEO.arvoreDeCamadas.CAMADAS = retorno.data.temas;
-					
-					i3GEO.gadgets.quadros.inicia(10);
-					i3GEO.gadgets.quadros.grava("extensao",mapexten);
-					
-					i3GEO.util.arvore("<b>"+$trad("p13")+"</b>","listaPropriedades",i3GEO.configura.listaDePropriedadesDoMapa);
-
-					i3GEO.gadgets.mostraBuscaRapida();
-					i3GEO.gadgets.mostraVersao();
-					i3GEO.guias.cria();
-					
-					if($i("arvoreAdicionaTema"))
-					{i3GEO.arvoreDeTemas.cria(i3GEO.configura.sid,i3GEO.configura.locaplic,"arvoreAdicionaTema");}
-					
-					if($i("mst"))
-					{$i("mst").style.display="block";}
 					//
 					//na interface padrão é necessário executar a atualização pois a geração do mapa
 					//ainda não foi feita
@@ -359,20 +350,13 @@ i3GEO = {
 					//
 					//calcula (opcional) o tamanho correto da tabela onde fica o mapa
 					//se não for feito esse cálculo, o mapa fica ajustado à esquerda
-					//			
+					//				
 					temp = 0;
 					if ($i("contemFerramentas")){temp = temp + parseInt($i("contemFerramentas").style.width,10);}
 					if ($i("ferramentas")){temp = temp + parseInt($i("ferramentas").style.width,10);}
 					if($i("mst"))
 					{$i("mst").style.width=i3GEO.parametros.w + temp + "px";}
-					if (i3GEO.configura.entorno === "sim"){
-						i3GEO.configura.entorno = "nao";
-						i3GEO.navega.entorno.ativaDesativa();
-					}
-					i3GEO.navega.autoRedesenho.ativa();
-					if ($i("i3geo_escalanum")){$i("i3geo_escalanum").value = i3GEO.parametros.mapscale;}
-					if ((i3GEO.parametros.geoip === "nao") && ($i("ondeestou")))
-					{$i("ondeestou").style.display="none";}
+					
 					i3GEO.Interface.inicia();
 				}
 				else
@@ -458,21 +442,33 @@ i3GEO = {
 		{i3GEO.contadorAtualiza--;return;}
 		if(i3GEO.contadorAtualiza > 0)
 		{i3GEO.contadorAtualiza--;}
+		//
+		//funcao que pega os dados do mapa no servidor
+		//
 		corpoMapa = function(){
 			if($i("ajaxCorpoMapa"))
 			{return;}
-			i3GEO.janela.abreAguarde("ajaxCorpoMapa",$trad("o1")+" atualizando");
+			i3GEO.janela.abreAguarde("ajaxCorpoMapa",$trad("o1")+" atualizando...");
 			i3GEO.php.corpo(i3GEO.atualiza,i3GEO.configura.tipoimagem);		
 		};
+		//
+		//se retorno não tiver sido definido, busca os dados no servidor e chama novamente a função atualiza
+		//
 		if(arguments.length === 0){
 			i3GEO.janela.fechaAguarde("ajaxCorpoMapa");
 			corpoMapa.call();
 			return;
 		}
+		//
+		//igual a anterior para efeitos de compatibilidade com outras versões do i3geo
+		//
 		if(retorno === ""){
 			corpoMapa.call();
 			return;
 		}
+		//
+		//se retorno.data não existir, é pq ocorreu um erro
+		//
 		if(!retorno.data){
 			alert(retorno);
 			i3GEO.mapa.recupera.inicia();
@@ -505,40 +501,41 @@ i3GEO = {
 			}
 			return;
 		};
-		try{
-			eval(retorno.data.variaveis);
-		}
-		catch(e){
-			if(typeof(console) !== 'undefined'){console.error(e);}
-			erro.call();
-			return;
-		}
+		//
+		//atualiza as variáveis
+		//
 		if(arguments.length === 0 || retorno === "" || retorno.data.variaveis === undefined)
 		{erro.call();return;}
 		else{	
+			//
+			//se deu tudo certo, pega os valores do retorno e seta as variáveis do mapa
+			//
 			if(arguments.length === 0){return;}
 			i3GEO.mapa.verifica(retorno);
-			tempo = "";
+			var tempo = "";
 			if(i3GEO.desenho.richdraw)
 			{i3GEO.desenho.richdraw.clearWorkspace();}
-			mapscale = "";
-			mapexten = "";
-			//transforma o retorno em variáveis
-			eval(retorno.data.variaveis);
-			if(erro != "")
-			{alert(erro);}			
+			var mapscale = i3GEO.parametros.mapscale;
+
+			i3GEO.parametros.mapscale = retorno.data.variaveis.mapscale;
+			i3GEO.parametros.mapres = retorno.data.variaveis.mapres;
+			i3GEO.parametros.pixelsize = retorno.data.variaveis.pixelsize;
+			i3GEO.parametros.mapexten = retorno.data.variaveis.mapexten;
+			i3GEO.parametros.mapimagem = retorno.data.variaveis.mapimagem;
+			i3GEO.parametros.w = retorno.data.variaveis.w;
+			i3GEO.parametros.h = retorno.data.variaveis.h;
+			i3GEO.parametros.mappath = retorno.data.variaveis.mappath;
+			i3GEO.parametros.mapurl = retorno.data.variaveis.mapurl;
+			
+			if(retorno.data.variaveis.erro != "")
+			{alert(retorno.data.variaveis.erro);}			
 			//
 			//o try aqui é necessário pois na interface googlemaps os parâmetros retorno.data.variaveis não são gerados completamente
 			//
 			try{
 				i3GEO.arvoreDeCamadas.atualiza(retorno.data.temas);
 				if (i3GEO.parametros.mapscale !== mapscale)
-				{i3GEO.arvoreDeCamadas.atualizaFarol(mapscale);}
-				i3GEO.parametros.mapexten = mapexten;
-				i3GEO.parametros.mapscale = mapscale;
-				i3GEO.parametros.mapres = mapres;
-				i3GEO.parametros.pixelsize = g_celula;
-				i3GEO.parametros.mapimagem = mapimagem;
+				{i3GEO.arvoreDeCamadas.atualizaFarol(i3GEO.parametros.mapscale);}
 			}
 			catch(e){}
 			i3GEO.arvoreDeCamadas.CAMADAS = retorno.data.temas;
@@ -550,7 +547,6 @@ i3GEO = {
 			}
 			else
 			{g_operacao = "";}
-			//i3GEO.parametros.mapexten = mapexten;
 			if ($i("mensagemt"))
 			{$i("mensagemt").value = i3GEO.parametros.mapexten;}
 			
@@ -559,7 +555,7 @@ i3GEO = {
 				i3GEO.navega.entorno.geraURL();
 				i3GEO.navega.entorno.ajustaPosicao();
 			}
-			i3GEO.ajuda.mostraJanela("Tempo de redesenho em segundos: "+tempo,"");
+			i3GEO.ajuda.mostraJanela("Tempo de redesenho em segundos: "+retorno.data.variaveis.tempo,"");
 		}	
 	},
 	/*

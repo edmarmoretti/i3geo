@@ -18,51 +18,78 @@ include_once("../ms_configura.php");
 <script type="text/javascript" src="http://www.google.com/jsapi?key=<?php echo $googleApiKey; ?>"></script>
 <script type="text/javascript" src="../classesjs/i3geonaocompacto.js"></script>
 </head>
-<body id=i3geo >
+<body id="i3geo" >
 <center>
-<table id='mst' width=100% cellspacing='0'>
-<tr style="border:0px"><td colspan=2 style="background-image:url('../imagens/visual/default/cabeca.png');height:10px"></td></tr>
+<table id='mst' summary="" style='display:none' width=100% cellspacing='0'>
+<tr style="border:0px">
+	<td colspan=2 id="barraSuperior" style="background-image:url('../imagens/visual/default/cabeca.png');height:10px"></td>
+</tr>
 <tr>
- <td class=tdbranca id=contemFerramentas style="border:0px;vertical-align:top;width:268px;text-align:left;">
+<td>
   <table width=100% cellspacing=0 cellpadding=0 >
-   <tr><td style="background-color:white;border-bottom:0px solid rgb(230,230,230);height:45px">
-    <!-- Guias principais, não mude o ID, apenas o nome se for desejado -->
-    <div style="top:0px;cursor:pointer;">
+   <tr>
+   <td title="libera guias" class=tdclaro id=encolheFerramentas style="vertical-align:top;width:5px;text-align:left;"></td>
+   <td>
+    <div class=verdeescuro style="top:0px;cursor:pointer;">
 	 <div id=guia1 class=guia ></div>
 	 <div id=guia2 class=guia ></div>
 	 <div id=guia4 class=guia ></div>
 	 <div id=guia5 class=guia ></div>
     </div>
-   </td></tr>
+   </td>
+   </tr>
   </table>
+</td>
+<td id="contemMenu" style="text-align:right;height:0px;border-width:0pt 0pt 1px;border-color:rgb(240,240,240)">
+	 <div id="menus" ></div>    
+</td>
+</tr>
+<tr>
+ <td class=tdbranca id=contemFerramentas style="vertical-align:top;width:268px;text-align:left;">
   <div id='guia1obj' >
-	<div id=listaPropriedades style='top:15px;' ></div>
-	<div id=listaTemas style='top:15px;' ></div>
+  	<div style='left:5px;top:10px;' id=buscaRapida ></div>
+  	<div id=listaPropriedades style='top:15px;' ></div>
+  	<div id=listaTemas style='top:15px;'></div>
   </div>
   <div id='guia2obj' style='display:none;'>Aguarde...<img alt="" src="../imagens/branco.gif" width=248 /></div>
   <div id='guia4obj' style='display:none;text-align:left'><div id='legenda' style='text-align:left'></div></div>
   <div id='guia5obj' style='display:none;text-align:left'><div id='banners' style='overflow:auto;text-align:left'>Aguarde...</div></div>
  </td>
- <td class=verdeclaro style="background-color:white;vertical-align:top;border-width:0px;">
-  <table width="100%" style="vertical-align:top;">
-   <!-- Corpo do mapa. Pode ser reposicionado, mas não mude os IDs -->
-   <tr><td></td></tr>
-   <tr><td  class=verdeclaro id=contemImg style="text-align:left;background-image:url('../imagens/i3geo1bw.jpg')">
-    <div id=googleearth ></div>
+ <td style="vertical-align:top;border-width:0px;">
+  <table width="100%" style="vertical-align:top;border-width:0px">
+   <tr><td  class=verdeclaro id=contemImg >
+    <div id=googleearth style="background-image:url('../imagens/i3geo1bw.jpg');"></div>
    </td></tr>
   </table>
  </td>
-</tr>
+ </tr>
 <tr>
  <td class=tdbranca >
+ 	<div id="seletorIdiomas" ></div>
+ 	<div id=tempoRedesenho style=color:green;background-color:black;width:50px;display:none ></div>
  </td>
  <td class=tdbranca >
-   	<div id=inserirKml ></div>
+  <table width=100% ><tr>
+  <td class=tdbranca >
+  </td>
+  <td class=tdbranca style=text-align:center >
+	<div id=escala ></div>
+  </td>
+  <td class=tdbranca >
+    	<div id=inserirKml ></div>
+  </td>
+  <td class=tdbranca >
+  	<div id=localizarxy ></div>
+  </td>
+  </tr>
+  <tr><td></td><td class="tdbranca"><div style="text-align:left;font-size:10px;background-color:white;display:none;" id=mostraUTM ></div></td><td></td></tr>
+  </table>
  </td>
 </tr>
-<tr style="border:0px"><td colspan=2 style="background-image:url('../imagens/visual/default/rodape.png');height:10px"></td></tr>
+<tr style="border:0px"><td colspan=3 id="barraInferior" style="background-image:url('../imagens/visual/default/rodape.png');height:10px"></td></tr>
+<tr style="border:0px"><td colspan=3 style=background-color:black ><input style="border:0px none; background-color:black;color:white;font-size:12pt;" type="text" size="1" id="i3geo_letreiro" ></td></tr>
+<tr style="border:0px"><td colspan=3 style=background-color:black;color:white >geoprocessamento@mma.gov.br</td></tr>
 </table>
-<a style=text-align:center;color:white href="mailto:edmar.moretti@mma.gov.br">Cr&iacute;ticas e sugest&otilde;es</a>
 </center>
 <script type="text/javascript">
 /*

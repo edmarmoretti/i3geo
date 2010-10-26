@@ -360,6 +360,7 @@ i3GEO.gadgets = {
 		if(arguments.length === 0)
 		{id = i3GEO.gadgets.PARAMETROS.mostraEscalaNumerica.idhtml;}
 		if($i(id)){
+			$i(id).style.display = "block";
 			atualizaEscalaNumerica = function(escala){
 				var e = $i("i3geo_escalanum");  
 				if(!e){
@@ -1019,6 +1020,9 @@ i3GEO.gadgets = {
 			if(i3GEO.Interface.ATUAL !== "padrao" && $i("omenudataArquivos3")){
 				YAHOO.widget.MenuManager.getMenuItem("omenudataArquivos3").cfg.setProperty("disabled", true);
 			}
+			if(i3GEO.Interface.ATUAL === "googleearth" && $i("omenudataJanelas1")){
+				YAHOO.widget.MenuManager.getMenuItem("omenudataJanelas1").cfg.setProperty("disabled", true);
+			}			
 			
 			//
 			//corrige problemas de estilo
