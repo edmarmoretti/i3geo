@@ -341,6 +341,8 @@ i3GEO = {
 					*/
 					i3GEO.parametros = retorno.data.variaveis;
 					i3GEO.arvoreDeCamadas.CAMADAS = retorno.data.temas;
+					if(retorno.data.variaveis.navegacaoDir == "sim")
+					{i3GEO.arvoreDeTemas.OPCOESADICIONAIS.navegacaoDir=true;}
 					//
 					//na interface padrão é necessário executar a atualização pois a geração do mapa
 					//ainda não foi feita
@@ -516,16 +518,7 @@ i3GEO = {
 			if(i3GEO.desenho.richdraw)
 			{i3GEO.desenho.richdraw.clearWorkspace();}
 			var mapscale = i3GEO.parametros.mapscale;
-
-			i3GEO.parametros.mapscale = retorno.data.variaveis.mapscale;
-			i3GEO.parametros.mapres = retorno.data.variaveis.mapres;
-			i3GEO.parametros.pixelsize = retorno.data.variaveis.pixelsize;
-			i3GEO.parametros.mapexten = retorno.data.variaveis.mapexten;
-			i3GEO.parametros.mapimagem = retorno.data.variaveis.mapimagem;
-			i3GEO.parametros.w = retorno.data.variaveis.w;
-			i3GEO.parametros.h = retorno.data.variaveis.h;
-			i3GEO.parametros.mappath = retorno.data.variaveis.mappath;
-			i3GEO.parametros.mapurl = retorno.data.variaveis.mapurl;
+			i3GEO.atualizaParametros(retorno.data.variaveis);
 			
 			if(retorno.data.variaveis.erro != "")
 			{alert(retorno.data.variaveis.erro);}			
@@ -626,6 +619,26 @@ i3GEO = {
 			temp.style.width=w + "px";
 		}
 		return [w,h];	
+	},
+	/*
+	Function: atualizaParametros
+	
+	Atualiza os valores da variável i3GEO.parametros
+	
+	Parametro:
+	
+	variaveis {obj} - objeto JSON com os valores. Tipicamente é obtido do servidor por meio de uma chamada AJAX
+	*/
+	atualizaParametros:function(variaveis){
+		i3GEO.parametros.mapscale = variaveis.mapscale;
+		i3GEO.parametros.mapres = variaveis.mapres;
+		i3GEO.parametros.pixelsize = variaveis.pixelsize;
+		i3GEO.parametros.mapexten = variaveis.mapexten;
+		i3GEO.parametros.mapimagem = variaveis.mapimagem;
+		i3GEO.parametros.w = variaveis.w;
+		i3GEO.parametros.h = variaveis.h;
+		i3GEO.parametros.mappath = variaveis.mappath;
+		i3GEO.parametros.mapurl = variaveis.mapurl;
 	}
 };
 /*

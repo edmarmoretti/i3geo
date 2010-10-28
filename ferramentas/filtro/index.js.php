@@ -315,7 +315,8 @@ i3GEOF.filtro = {
 				cp = new cpaint(),
 				temp = function(retorno){
 					i3GEOF.filtro.aguarde.visibility = "hidden";
-					i3GEO.atualiza(retorno);
+					if(i3GEO.Interface.ATUAL === "padrao")
+					{i3GEO.atualiza(retorno);}
 					i3GEO.Interface.atualizaTema(retorno,i3GEO.temaAtivo);
 				};
 			cp.set_response_type("JSON");
@@ -389,7 +390,8 @@ i3GEOF.filtro = {
 			}
 			else{
 			 	temp = function(retorno){
-			 		i3GEO.atualiza(retorno);
+			 		if(i3GEO.Interface.ATUAL === "padrao")
+					{i3GEO.atualiza(retorno);}
 					i3GEO.Interface.atualizaTema(retorno,i3GEO.temaAtivo);
 			 		i3GEOF.filtro.aguarde.visibility = "hidden";
 			 	};		

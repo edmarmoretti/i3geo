@@ -675,18 +675,18 @@ i3GEO.php = {
 		var retorno,p;
 		retorno = function(retorno){
 			if(i3GEO.Interface.ATUAL === "googlemaps"){
-				eval(retorno.data.variaveis);
-				i3GEO.Interface.googlemaps.zoom2extent(mapexten);
+				i3GEO.atualizaParametros(retorno.data.variaveis);
+				i3GEO.Interface.googlemaps.zoom2extent(i3GEO.parametros.mapexten);
     			i3GEO.janela.fechaAguarde();
 			}
 			if(i3GEO.Interface.ATUAL === "googleearth"){
-				eval(retorno.data.variaveis);
-				i3GEO.Interface.googleearth.zoom2extent(mapexten);
+				i3GEO.atualizaParametros(retorno.data.variaveis);
+				i3GEO.Interface.googleearth.zoom2extent(i3GEO.parametros.mapexten);
     			i3GEO.janela.fechaAguarde();
 			}			
 			if(i3GEO.Interface.ATUAL === "openlayers"){
-				eval(retorno.data.variaveis);
-				i3GEO.Interface.openlayers.zoom2ext(mapexten);
+				i3GEO.atualizaParametros(retorno.data.variaveis);
+				i3GEO.Interface.openlayers.zoom2ext(i3GEO.parametros.mapexten);
     			i3GEO.janela.fechaAguarde();
 			}
 			if(i3GEO.Interface.ATUAL === "padrao")
@@ -704,14 +704,19 @@ i3GEO.php = {
 		i3GEO.php.verifica();
 		var retorno,p;
 		retorno = function(retorno){
+			if(i3GEO.Interface.ATUAL === "googleearth"){
+				i3GEO.atualizaParametros(retorno.data.variaveis);
+				i3GEO.Interface.googleearth.zoom2extent(i3GEO.parametros.mapexten);
+    			i3GEO.janela.fechaAguarde();
+			}		
 			if(i3GEO.Interface.ATUAL === "googlemaps"){
-				eval(retorno.data.variaveis);
-				i3GEO.Interface.googlemaps.zoom2extent(mapexten);
+				i3GEO.atualizaParametros(retorno.data.variaveis);
+				i3GEO.Interface.googlemaps.zoom2extent(i3GEO.parametros.mapexten);
     			i3GEO.janela.fechaAguarde();
 			}
 			if(i3GEO.Interface.ATUAL === "openlayers"){
-				eval(retorno.data.variaveis);
-				i3GEO.Interface.openlayers.zoom2ext(mapexten);
+				i3GEO.atualizaParametros(retorno.data.variaveis);
+				i3GEO.Interface.openlayers.zoom2ext(i3GEO.parametros.mapexten);
     			i3GEO.janela.fechaAguarde();
 			}
 			if(i3GEO.Interface.ATUAL === "padrao")

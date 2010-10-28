@@ -583,7 +583,8 @@ i3GEOF.inserexy = {
 			{alert("Nenhum tema definido para editar");}
 			else{
 				temp = function(retorno){
-					i3GEO.atualiza();
+					if(i3GEO.Interface.ATUAL === "padrao")
+					{i3GEO.atualiza();}
 					i3GEO.Interface.atualizaTema(retorno,tema);
 					i3GEOF.inserexy.aguarde.visibility = "hidden"
 				};

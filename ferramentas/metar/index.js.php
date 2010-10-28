@@ -166,28 +166,31 @@ i3GEOF.metar = {
 	  		success:function(o){
 	  			var ins,dados,ndados,i,temp,temp1;
 				i3GEOF.metar.aguarde.visibility = "hidden";
-				dados = YAHOO.lang.JSON.parse(o.responseText)[0].weatherObservations;
-				ndados = dados.length;
 				ins = "<p class=paragrafo >Navegue no mapa para atualizar a lista de resultados (são mostradas apenas as 10 primeiras estações encontradas)</p>";
-				ins += "<table class=lista4 >";
-				for(i=0;i<ndados;i++){
-					temp = "i3GEOF.metar.mostraxy("+dados[i].lng+","+dados[i].lat+")";
-					temp1 = "i3GEO.navega.zoomponto(i3GEO.configura.locaplic,i3GEO.configura.sid,"+dados[i].lng+","+dados[i].lat+")";
-					ins += 	"<tr><td style=background:yellow ><b>Estação</b></td><td style=background:yellow ><b>" + dados[i].stationName + "</b></td></tr>" +
-							"<tr><td></td><td><a href='#' onclick='"+temp1+"' onmouseover='"+temp+"' onmouseout='i3GEO.util.escondeBox()' >long: " + dados[i].lng + ", lat: "+dados[i].lat+"</a></td></tr>" +
-							"<tr><td>temperatura</td><td>" + dados[i].temperature + " C</td></tr>" +
-							"<tr><td>condição</td><td>" + dados[i].weatherCondition + "</td></tr>" +
-							"<tr><td>observação</td><td>" + dados[i].observation + "</td></tr>" +
-							"<tr><td>nuvens</td><td>" + dados[i].clouds + "</td></tr>" +
-							"<tr><td>direção do vento</td><td>" + dados[i].windDirection + "</td></tr>" +
-							"<tr><td>ponto de orvalho</td><td>" + dados[i].dewPoint + " C</td></tr>" +
-							"<tr><td>velocidade do vento</td><td>" + dados[i].windSpeed + " mph</td></tr>" +
-							"<tr><td>humidade</td><td>" + dados[i].humidity + " %</td></tr>" +
-							"<tr><td>data</td><td>" + dados[i].datetime + "</td></tr>" +
-							"<tr><td>pressão</td><td>" + dados[i].hectoPascAltimeter +" hpa</td></tr>" +
-							"<tr><td>ICAO</td><td>" + dados[i].ICAO + "</td></tr>";					
+				try{
+					dados = YAHOO.lang.JSON.parse(o.responseText)[0].weatherObservations;
+					ndados = dados.length;
+					ins += "<table class=lista4 >";
+					for(i=0;i<ndados;i++){
+						temp = "i3GEOF.metar.mostraxy("+dados[i].lng+","+dados[i].lat+")";
+						temp1 = "i3GEO.navega.zoomponto(i3GEO.configura.locaplic,i3GEO.configura.sid,"+dados[i].lng+","+dados[i].lat+")";
+						ins += 	"<tr><td style=background:yellow ><b>Estação</b></td><td style=background:yellow ><b>" + dados[i].stationName + "</b></td></tr>" +
+								"<tr><td></td><td><a href='#' onclick='"+temp1+"' onmouseover='"+temp+"' onmouseout='i3GEO.util.escondeBox()' >long: " + dados[i].lng + ", lat: "+dados[i].lat+"</a></td></tr>" +
+								"<tr><td>temperatura</td><td>" + dados[i].temperature + " C</td></tr>" +
+								"<tr><td>condição</td><td>" + dados[i].weatherCondition + "</td></tr>" +
+								"<tr><td>observação</td><td>" + dados[i].observation + "</td></tr>" +
+								"<tr><td>nuvens</td><td>" + dados[i].clouds + "</td></tr>" +
+								"<tr><td>direção do vento</td><td>" + dados[i].windDirection + "</td></tr>" +
+								"<tr><td>ponto de orvalho</td><td>" + dados[i].dewPoint + " C</td></tr>" +
+								"<tr><td>velocidade do vento</td><td>" + dados[i].windSpeed + " mph</td></tr>" +
+								"<tr><td>humidade</td><td>" + dados[i].humidity + " %</td></tr>" +
+								"<tr><td>data</td><td>" + dados[i].datetime + "</td></tr>" +
+								"<tr><td>pressão</td><td>" + dados[i].hectoPascAltimeter +" hpa</td></tr>" +
+								"<tr><td>ICAO</td><td>" + dados[i].ICAO + "</td></tr>";					
+					}
+					$i("i3GEOmetarLista").innerHTML = ins+"</table>";
 				}
-				$i("i3GEOmetarLista").innerHTML = ins+"</table>";  				
+				catch(e){$i("i3GEOmetarLista").innerHTML = ins + "Ocorreu um erro ou nada foi encontrado";}
 	  		},
 	  		failure: function(o){
 	 			$i("i3GEOmetarLista").innerHTML = "Erro. A operação demorou muito.";

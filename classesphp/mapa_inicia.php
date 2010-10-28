@@ -273,6 +273,7 @@ function iniciaMapa()
 	$res["erro"] = '';
 	$res["mappath"] = $imgo->imagepath;
 	$res["mapurl"] = $imgo->imageurl;
+	$res["navegacaoDir"] = $navegadoresLocais;
 	/*
 	$res = "var mapexten= '".$ext."';var mapscale=".$escalaMapa.";var mapres=".$m->mapa->resolution.";var g_celula=".$celula.";var mapimagem='".$nomer."';var mapwidth=".$imgo->width.";var mapheight=".$imgo->height.";var mappath='".$imgo->imagepath."';var mapurl='".$imgo->imageurl."'";
 	$res .= ";var extentref = '';var refimagem='';var refwidth=0;var refpath='';var refurl=''";

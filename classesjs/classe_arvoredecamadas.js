@@ -768,10 +768,10 @@ i3GEO.arvoreDeCamadas = {
 		if (ltema.type < 4){
 			i3GEO.arvoreDeCamadas.adicionaOpcaoTema($trad("t32"),$trad("t33"),'i3GEO.tema.dialogo.editaLegenda(\"'+ltema.name+'\")',node);
 		}
-		if(i3GEO.Interface.ATUAL !== "googlemaps"){
+		if(i3GEO.Interface.ATUAL !== "googlemaps" && i3GEO.Interface.ATUAL !== "googleearth"){
 			i3GEO.arvoreDeCamadas.adicionaOpcaoTema($trad("t34"),$trad("t35"),'i3GEO.navega.destacaTema.inicia(\"'+ltema.name+'\")',node);
 		}
-		if(i3GEO.Interface.ATUAL !== "padrao"){
+		if(i3GEO.Interface.ATUAL !== "padrao" &&  i3GEO.Interface.ATUAL !== "googleearth"){
 			i3GEO.arvoreDeCamadas.adicionaOpcaoTema($trad("t42"),$trad("t42"),'i3GEO.tema.dialogo.cortina(\"'+ltema.name+'\")',node);
 		}	
 		i3GEO.arvoreDeCamadas.adicionaOpcaoTema($trad("t38"),$trad("t39"),'i3GEO.tema.dialogo.sld(\"'+ltema.name+'\")',node);

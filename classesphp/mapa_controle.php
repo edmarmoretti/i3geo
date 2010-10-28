@@ -2989,6 +2989,14 @@ function redesenhaMapa()
 		$res["mapimagem"] = "";
 		$res["mapexten"] = $ext;
 		$res["mapres"] = "";
+		$res["erro"] = "";
+		$res["mapscale"] = "";
+		$res["pixelsize"] = "";
+		$res["mapimagem"] = "";
+		$res["w"] = "";
+		$res["h"] = "";
+		$res["mappath"] = "";
+		$res["mapurl"] = "";		
 	}
 	else{
 		$res = $m->redesenhaCorpo($locsistemas,$locidentifica,$tipoimagem,$utilizacgi,$locmapserv);

@@ -692,6 +692,7 @@ i3GEO.mapa = {
 							else{
 								if(i3GEO.Interface.ATUAL === "googleearth"){
 									i3GEO.Interface.googleearth.balao(res,objposicaocursor.ddx,objposicaocursor.ddy);
+									i3GEO.Interface.googleearth.aguarde.visibility = "hidden";
 								}
 								else{
 									i3GEO.util.criaPin('marcaIdentifica',i3GEO.configura.locaplic+"/imagens/grabber.gif","12px","12px");
@@ -720,6 +721,8 @@ i3GEO.mapa = {
 						{temp = "identifica_contexto";}
 						i3GEO.util.mudaCursor(i3GEO.configura.cursores,temp,"img",i3GEO.configura.locaplic);
 					}
+					if(i3GEO.Interface.ATUAL == "googleearth")
+					{i3GEO.Interface.googleearth.aguarde.visibility = "hidden";}
 					if(typeof(console) !== 'undefined'){console.error(e);}
 				}
 			};

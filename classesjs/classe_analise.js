@@ -277,11 +277,10 @@ i3GEO.analise = {
 				ins += "<span style='color:navy;cursor:pointer;text-align:left;' >";
 				ins += "<table><tr><td><input style='cursor:pointer' type='checkbox' id='pararraios' checked /></td><td>Raios</td><td>&nbsp;</td>";
 				
-				if(i3GEO.Interface.ATUAL !== "googleearth"){
-					ins += "<td>";
-					ins += "<input style='cursor:pointer' type='checkbox' id='parartextos' checked />";
-					ins += "</td><td>Textos<td>";
-				}
+				ins += "<td>";
+				ins += "<input style='cursor:pointer' type='checkbox' id='parartextos' checked />";
+				ins += "</td><td>Textos<td>";
+				
 				ins += "</tr></table></span>";
 				ins += '</div>';
 				ins += '</div>';
@@ -307,7 +306,7 @@ i3GEO.analise = {
 		Fecha a janela e os elementos gráficos criados para a ferramenta de medição
 		*/
 		fechaJanela: function(){
-			if(i3GEO.Interface.ATUAL != "googleearth")
+			if(i3GEO.Interface.ATUAL !== "googleearth")
 			{i3GEO.desenho.richdraw.fecha();}
 			else
 			{i3GEO.Interface.googleearth.removePlacemark("divGeometriasTemp");}
@@ -361,23 +360,24 @@ i3GEO.analise = {
 						}
 						if(i3GEO.Interface.ATUAL === "googleearth"){
 							dd = Math.sqrt(((Math.pow((pontosdistobj.xpt[n] - pontosdistobj.xpt[n-1]),2)) + (Math.pow((pontosdistobj.ypt[n] - pontosdistobj.ypt[n-1]),2)) ));
-							i3GEO.Interface.googleearth.insereCirculo(pontosdistobj.xpt[n],pontosdistobj.ypt[n],dd,"divGeometriasTemp");
+							i3GEO.Interface.googleearth.insereCirculo(pontosdistobj.xpt[n],pontosdistobj.ypt[n],dd,"","divGeometriasTemp");
 						}
 					}
 					if($i("parartextos") && $i("parartextos").checked === true ){
 						if(i3GEO.Interface.ATUAL === "padrao"  || i3GEO.Interface.ATUAL === "openlayers"  || i3GEO.Interface.ATUAL === "googlemaps"){
 							i3GEO.desenho.aplica("insereTexto","",n,d+" km");
 						}
+						if(i3GEO.Interface.ATUAL === "googleearth")
+						{i3GEO.Interface.googleearth.insereMarca(d+" km",objposicaocursor.ddx,objposicaocursor.ddy,"","divGeometriasTemp");}
+
 					}
 					//cria a linha ligando os dois últimos pontos
 					if(i3GEO.Interface.ATUAL === "googleearth"){
-						i3GEO.Interface.googleearth.insereLinha(pontosdistobj.xpt[n-1],pontosdistobj.ypt[n-1],pontosdistobj.xpt[n],pontosdistobj.ypt[n],"divGeometriasTemp");
+						i3GEO.Interface.googleearth.insereLinha(pontosdistobj.xpt[n-1],pontosdistobj.ypt[n-1],pontosdistobj.xpt[n],pontosdistobj.ypt[n],"","divGeometriasTemp");
 					}
 				}
 				if(i3GEO.Interface.ATUAL === "padrao" || i3GEO.Interface.ATUAL === "openlayers" || i3GEO.Interface.ATUAL === "googlemaps")
 				{i3GEO.util.insereMarca.cria(objposicaocursor.imgx,objposicaocursor.imgy,i3GEO.analise.medeDistancia.fechaJanela,"divGeometriasTemp");}
-				if(i3GEO.Interface.ATUAL === "googleearth")
-				{i3GEO.util.insereMarca.cria(objposicaocursor.ddx,objposicaocursor.ddy,i3GEO.analise.medeDistancia.fechaJanela,"divGeometriasTemp","");}
 			}
 		},
 		/*

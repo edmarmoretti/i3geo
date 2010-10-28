@@ -133,9 +133,10 @@ i3GEOF.selecao = {
 		'	</ul>' +
 		'</div><br>' +
 		'<div class=guiaobj id="i3GEOselecaoguia1obj" style="left:1px;display:none;top:-5px">' +
-		'	<p class=paragrafo ><img id=i3GEOselecaopt onclick="i3GEOF.selecao.tiposel(this)" src="'+i3GEO.configura.locaplic+'/imagens/gisicons/point.png" title="Clique no mapa para selecionar" style="cursor:pointer;border:1px solid gray" />' +
-		'	<img id=i3GEOselecaopoli onclick="i3GEOF.selecao.tiposel(this)" src="'+i3GEO.configura.locaplic+'/imagens/gisicons/polygon.png" title="Desenhe um poligono no mapa para selecionar" style="cursor:pointer;border:1px solid RGB(230,230,230);" />' +
-		'	<img id=i3GEOselecaoext onclick="i3GEOF.selecao.tiposel(this)" src="'+i3GEO.configura.locaplic+'/imagens/gisicons/map.png" title="Seleciona o que estiver visivel no mapa" style="cursor:pointer;border:1px solid RGB(230,230,230);" />';
+		'	<p class=paragrafo ><img id=i3GEOselecaopt onclick="i3GEOF.selecao.tiposel(this)" src="'+i3GEO.configura.locaplic+'/imagens/gisicons/point.png" title="Clique no mapa para selecionar" style="cursor:pointer;border:1px solid gray" />';
+		if(i3GEO.Interface.ATUAL != "googlemaps" && i3GEO.Interface.ATUAL != "googleearth")
+		{ins += '	<img id=i3GEOselecaopoli onclick="i3GEOF.selecao.tiposel(this)" src="'+i3GEO.configura.locaplic+'/imagens/gisicons/polygon.png" title="Desenhe um poligono no mapa para selecionar" style="cursor:pointer;border:1px solid RGB(230,230,230);" />'}
+		ins += '	<img id=i3GEOselecaoext onclick="i3GEOF.selecao.tiposel(this)" src="'+i3GEO.configura.locaplic+'/imagens/gisicons/map.png" title="Seleciona o que estiver visivel no mapa" style="cursor:pointer;border:1px solid RGB(230,230,230);" />';
 		if(i3GEO.Interface.ATUAL != "googlemaps" && i3GEO.Interface.ATUAL != "googleearth")
 		{ins += '	<img id=i3GEOselecaobox onclick="i3GEOF.selecao.tiposel(this)" src="'+i3GEO.configura.locaplic+'/imagens/gisicons/region.png" title="Desenhe um retangulo no mapa para selecionar" style="cursor:pointer;border:1px solid RGB(230,230,230);" />';}
 		ins += '	<img onclick="i3GEOF.selecao.grafico()" src="'+i3GEO.configura.locaplic+'/imagens/gisicons/layer-vector-chart-add.png" title="Grafico" style="cursor:pointer;border:1px solid RGB(230,230,230);" />' +
@@ -257,7 +258,8 @@ i3GEOF.selecao = {
 		$i("i3GEOselecaoext").style.border = "1px solid RGB(230,230,230)"
 		if($i("i3GEOselecaobox"))
 		{$i("i3GEOselecaobox").style.border = "1px solid RGB(230,230,230)";}
-		$i("i3GEOselecaopoli").style.border = "1px solid RGB(230,230,230)"
+		if($i("i3GEOselecaopoli"))
+		{$i("i3GEOselecaopoli").style.border = "1px solid RGB(230,230,230)";}
 		i3GEO.desenho.richdraw.fecha;
 		if($i(i3GEO.Interface.IDMAPA)){
 			$i(i3GEO.Interface.IDMAPA).title = "";
@@ -304,7 +306,8 @@ i3GEOF.selecao = {
 			var tema = i3GEO.temaAtivo,
 				fim = function(retorno){
 					i3GEOF.selecao.aguarde.visibility = "hidden";
-					i3GEO.atualiza(retorno);
+					if(i3GEO.Interface.ATUAL === "padrao")
+					{i3GEO.atualiza(retorno);}
 					i3GEO.Interface.atualizaTema(retorno,tema);
 				};
 			i3GEO.php.selecaopt(fim,tema,"",tipo,0);
@@ -330,7 +333,8 @@ i3GEOF.selecao = {
 			//$i("parapoli").style.display = "none";
 			var fim = function(retorno){
 					i3GEOF.selecao.aguarde.visibility = "hidden";
-					i3GEO.atualiza(retorno);
+					if(i3GEO.Interface.ATUAL === "padrao")
+					{i3GEO.atualiza(retorno);}
 					i3GEO.Interface.atualizaTema(retorno,tema);
 				},
 				tema = i3GEOF.selecao.pegaTemasSel();
@@ -545,7 +549,8 @@ i3GEOF.selecao = {
 		if(typeof(console) !== 'undefined')
 		{console.info("i3GEO.navega.selecao.porbox()");}
 		var retorna = function(retorno){
-			i3GEO.atualiza(retorno);
+			if(i3GEO.Interface.ATUAL === "padrao")
+			{i3GEO.atualiza(retorno);}
 			i3GEO.Interface.atualizaTema(retorno,tema);
 		};
 		i3GEO.janela.abreAguarde("i3GEO.atualiza",$trad("o1"));
@@ -584,7 +589,8 @@ i3GEOF.selecao = {
 	porxy: function(tema,tipo,tolerancia){
 		if(typeof(console) !== 'undefined'){console.info("i3GEO.selecao.porxy()");}
 		var retorna = function(retorno){
-			i3GEO.atualiza(retorno);
+			if(i3GEO.Interface.ATUAL === "padrao")
+			{i3GEO.atualiza(retorno);}
 			i3GEO.Interface.atualizaTema(retorno,tema);
 		};
 		i3GEO.janela.abreAguarde("i3GEO.atualiza",$trad("o1"));
@@ -694,7 +700,8 @@ i3GEOF.selecao = {
 			ys = pontos.ypt.toString(",");
 			retorna = function(retorno){
 				i3GEO.janela.fechaAguarde("i3GEO.atualiza",$trad("o1"));
-				i3GEO.atualiza(retorno);
+				if(i3GEO.Interface.ATUAL === "padrao")
+				{i3GEO.atualiza(retorno);}
 				i3GEO.Interface.atualizaTema(retorno,tema);
 			};
 			i3GEO.janela.abreAguarde("i3GEO.atualiza",$trad("o1"));
@@ -880,7 +887,8 @@ i3GEOF.selecao = {
 			}
 			g_operacao = "selecao"
 		 	temp = function(retorno){
-		 		i3GEO.atualiza(retorno);
+		 		if(i3GEO.Interface.ATUAL === "padrao")
+				{i3GEO.atualiza(retorno);}
 		 		i3GEOF.selecao.aguarde.visibility = "hidden";
 				i3GEO.Interface.atualizaTema(retorno,i3GEO.temaAtivo);
 		 	};		
@@ -904,7 +912,8 @@ i3GEOF.selecao = {
 		try{
 			i3GEOF.selecao.aguarde.visibility = "visible";
 	 		var temp = function(retorno){
-		 		i3GEO.atualiza(retorno);
+		 		if(i3GEO.Interface.ATUAL === "padrao")
+				{i3GEO.atualiza(retorno);}
 		 		i3GEOF.selecao.aguarde.visibility = "hidden";
 				i3GEO.Interface.atualizaTema(retorno,i3GEO.temaAtivo);
 		 	};
