@@ -2137,6 +2137,8 @@ i3GEO.Interface = {
 			{return;}
 			i3GEO.mapa.GEOXML.push(ngeoxml);
 			linki3geokml = i3GeoMap.createLink('');
+			if(url.split("http").length == 1)
+			{url = i3GEO.util.protocolo()+"://"+window.location.host+url;}
           	linki3geokml.setHref(url);
 			eval(ngeoxml+" = i3GeoMap.createNetworkLink('')");
 			eval(ngeoxml+".setLink(linki3geokml)");

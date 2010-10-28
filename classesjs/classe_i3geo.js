@@ -340,6 +340,13 @@ i3GEO = {
 					catch(e){alert("Erro durante a definicao de i3GEO.parametros "+e);}	
 					*/
 					i3GEO.parametros = retorno.data.variaveis;
+					
+					i3GEO.parametros.mapscale = i3GEO.parametros.mapscale*1;
+					i3GEO.parametros.mapres = i3GEO.parametros.mapres*1;
+					i3GEO.parametros.pixelsize = i3GEO.parametros.pixelsize*1;
+					i3GEO.parametros.w = i3GEO.parametros.w*1;
+					i3GEO.parametros.h = i3GEO.parametros.h*1;					
+					
 					i3GEO.arvoreDeCamadas.CAMADAS = retorno.data.temas;
 					if(retorno.data.variaveis.navegacaoDir == "sim")
 					{i3GEO.arvoreDeTemas.OPCOESADICIONAIS.navegacaoDir=true;}
@@ -358,7 +365,6 @@ i3GEO = {
 					if ($i("ferramentas")){temp = temp + parseInt($i("ferramentas").style.width,10);}
 					if($i("mst"))
 					{$i("mst").style.width=i3GEO.parametros.w + temp + "px";}
-					
 					i3GEO.Interface.inicia();
 				}
 				else
@@ -630,13 +636,13 @@ i3GEO = {
 	variaveis {obj} - objeto JSON com os valores. Tipicamente é obtido do servidor por meio de uma chamada AJAX
 	*/
 	atualizaParametros:function(variaveis){
-		i3GEO.parametros.mapscale = variaveis.mapscale;
-		i3GEO.parametros.mapres = variaveis.mapres;
-		i3GEO.parametros.pixelsize = variaveis.pixelsize;
+		i3GEO.parametros.mapscale = variaveis.mapscale*1;
+		i3GEO.parametros.mapres = variaveis.mapres*1;
+		i3GEO.parametros.pixelsize = variaveis.pixelsize*1;
 		i3GEO.parametros.mapexten = variaveis.mapexten;
 		i3GEO.parametros.mapimagem = variaveis.mapimagem;
-		i3GEO.parametros.w = variaveis.w;
-		i3GEO.parametros.h = variaveis.h;
+		i3GEO.parametros.w = variaveis.w*1;
+		i3GEO.parametros.h = variaveis.h*1;
 		i3GEO.parametros.mappath = variaveis.mappath;
 		i3GEO.parametros.mapurl = variaveis.mapurl;
 	}
