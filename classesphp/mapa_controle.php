@@ -1390,7 +1390,11 @@ Altera uma classe de um tema, aplicando uma nova classificação ou modificando pa
 		if ($opcao == "intervalosiguais")
 		{$retorno = $m->intervalosiguais($item,$nclasses,$ignorar);}
 		if ($opcao == "quartis")
-		{$retorno = $m->quartis($item,$ignorar);}
+		{
+			if(!isset($tipoLegenda))
+			{$tipoLegenda = "";}
+			$retorno = $m->quartis($item,$ignorar,$tipoLegenda);
+		}
 		if ($opcao == "alteraclasses")
 		{
 			//esta operação é chamada com POST via cpaint

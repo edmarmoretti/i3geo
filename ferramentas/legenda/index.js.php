@@ -220,6 +220,12 @@ i3GEOF.legenda = {
 		'	<p class=paragrafo ><input id=i3GEOlegendabotao8 size="25" type="button" value="Intervalos iguais">'+
 		'	<hr><p class=paragrafo >Cria classes para um item numérico utilizando os quartis (o item utilizado é o mesmo indicado acima)</p>'+
 		'	<p class=paragrafo ><input id=i3GEOlegendabotao9 size="25" type="button" value="Quartis">'+
+		'	<p class=paragrafo >Estilo dos nomes das classes: ' +
+		'	<select id=estiloClassesQuartis >' +
+		'	<option value=minimo select >só os valores</option>' +
+		'	<option value=simples select >quartil e os valores</option>' +
+		'	<option value=completo select >expressão completa</option>' +
+		'	</select></p>' +
 		'</div>'+
 		'<div id=i3GEOlegendaguia3obj style="width:99%;text-align:left;">'+
 		'	<div id="i3GEOlegendacomboestilos" style="position:relative;top:0px;left:0px;text-align:left">'+
@@ -702,7 +708,7 @@ i3GEOF.legenda = {
 			{return;}
 			var item = $i("i3GEOlegendaSelItem").value,
 				nclasses = $i("i3GEOlegendanclasses").value,
-				p = i3GEO.configura.locaplic+"/classesphp/mapa_controle.php?g_sid="+i3GEO.configura.sid+"&funcao=alteraclasse&tema="+i3GEOF.legenda.tema+"&item="+item+"&opcao=quartis&ignorar="+$i("i3GEOlegendaignorar").value+"&ext="+i3GEO.parametros.mapexten,
+				p = i3GEO.configura.locaplic+"/classesphp/mapa_controle.php?g_sid="+i3GEO.configura.sid+"&funcao=alteraclasse&tema="+i3GEOF.legenda.tema+"&item="+item+"&opcao=quartis&ignorar="+$i("i3GEOlegendaignorar").value+"&ext="+i3GEO.parametros.mapexten+"&tipoLegenda="+$i("estiloClassesQuartis").value,
 				cp = new cpaint();
 				fim = function(){
 					i3GEO.atualiza();

@@ -265,10 +265,12 @@ $item - Item da tabela de atributos utilizado para gerar as classes.
 
 $ignorar - valor que será ignorado na listagem final
 
+$tipoLegenda - tipo de texto que será incluído no nome de cada classe completo|simples|minimo
+
 Include:
 <classe_estatistica.php>
 */
-	function quartis($item,$ignorar)
+	function quartis($item,$ignorar="",$tipoLegenda="minimo")
 	{
 		if(!$this->layer){return "erro";}
 
@@ -295,6 +297,11 @@ Include:
 			$expressao[] = "(([".$item."]>".($calc["quartil1"]).")and([".$item."]<=".($calc["quartil2"])."))";
 			$expressao[] = "(([".$item."]>".($calc["quartil2"]).")and([".$item."]<=".($calc["quartil3"])."))";
 			$expressao[] = "([".$item."]>".($calc["quartil3"]).")";
+			$nomes[] = "<= ".($calc["quartil1"]);
+			$nomes[] = "> ".($calc["quartil1"])." e <= ".($calc["quartil2"]);
+			$nomes[] = "> ".($calc["quartil2"])." e <= ".($calc["quartil3"]);
+			$nomes[] = "> ".($calc["quartil3"]);
+			
 			$vcor = array(250,230,150,0);
 			for ($i=0;$i < 4;++$i)
 			{
@@ -306,7 +313,14 @@ Include:
 					$novoestilo->set("size","6");
 				}
 				$classe->setexpression($expressao[$i]);
-				$classe->set("name","Quartil ".($i+1)." ".$expressao[$i]);
+				if($tipoLegenda == "completo")
+				{$nomeClasse = "Quartil ".($i+1)." ".$expressao[$i];}
+				if($tipoLegenda == "simples")
+				{$nomeClasse = "Quartil ".($i+1)." ".$nomes[$i];}
+				if($tipoLegenda == "minimo" || $tipoLegenda == "")
+				{$nomeClasse = $nomes[$i];}
+				
+				$classe->set("name",$nomeClasse);
 				$ncor = $novoestilo->color;
 				$ncor->setrgb(255,$vcor[$i],$vcor[$i]);
 			}
