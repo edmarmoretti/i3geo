@@ -258,17 +258,24 @@ i3GEO.janela = {
 		{underlay = "none";}
 		else
 		{underlay = "shadow";}
+		if(i3GEO.Interface.ATUAL === "googleearth" || i3GEO.Interface.ATUAL === "flamingo")
+		{ifr = true;}
+		else
+		{ifr = false;}
 		if(waltura === "auto")
-		{YAHOO.janelaDoca.xp.panel = new YAHOO.widget.Panel(id, { modal:modal, width: wlargura_,underlay:"none", fixedcenter: fix, constraintoviewport: false, visible: true,monitorresize:false,dragOnly:true,keylisteners:null} );}	
-		else{
-			YAHOO.janelaDoca.xp.panel = new YAHOO.widget.ResizePanel(id, { iframe:false,underlay:underlay, modal:modal, width: wlargura_, fixedcenter: fix, constraintoviewport: false, visible: true,monitorresize:false,dragOnly:true,keylisteners:null} );
-		}
+		{YAHOO.janelaDoca.xp.panel = new YAHOO.widget.Panel(id, { iframe:ifr,modal:modal, width: wlargura_,underlay:"none", fixedcenter: fix, constraintoviewport: false, visible: true,monitorresize:false,dragOnly:true,keylisteners:null} );}	
+		else{YAHOO.janelaDoca.xp.panel = new YAHOO.widget.ResizePanel(id, { iframe:ifr,underlay:underlay, modal:modal, width: wlargura_, fixedcenter: fix, constraintoviewport: false, visible: true,monitorresize:false,dragOnly:true,keylisteners:null} );}
+		
 		if(nx !== "" && nx !== "center"){
 			pos = [nx,ny];
 			YAHOO.janelaDoca.xp.panel.moveTo(pos[0],pos[1]+50);
 		}
 		YAHOO.janelaDoca.xp.manager.register(YAHOO.janelaDoca.xp.panel);
 		YAHOO.janelaDoca.xp.panel.render();
+		if(navm && id !== "i3geo_janelaMensagens")
+		{YAHOO.janelaDoca.xp.panel.moveTo(0,0);}
+		if(ifr == true)
+		{YAHOO.janelaDoca.xp.panel.iframe.style.zIndex = 0;}
 		if(modal === true){
 			if($i(id+"_mask"))
 			{$i(id+"_mask").style.zIndex = 9000;}

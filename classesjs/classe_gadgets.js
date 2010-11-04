@@ -919,7 +919,7 @@ i3GEO.gadgets = {
 		{id = i3GEO.gadgets.PARAMETROS.mostraMenuSuspenso.idhtml;}
 		else
 		{i3GEO.gadgets.PARAMETROS.mostraMenuSuspenso.idhtml = id;}
-		var objid,ins,sobe,alinhamento,n,i,estilo,t,onMenuBarBeforeRender,temp;
+		var objid,ins,sobe,alinhamento,n,i,estilo,t,onMenuBarBeforeRender,temp,ifr;
 		objid = $i(id);
 		if(objid){
 			objid.className="yuimenubar";
@@ -988,10 +988,14 @@ i3GEO.gadgets = {
 					}
 				}
 			};
- 			i3GEOoMenuBar=new YAHOO.widget.MenuBar(id,{autosubmenudisplay: true, showdelay: 100, hidedelay: 500, lazyload: false});
+ 			if(i3GEO.Interface.ATUAL == "googleearth" || i3GEO.Interface.ATUAL == "flamingo")
+			{ifr = true;}
+			else
+			{ifr = false;}
+			i3GEOoMenuBar=new YAHOO.widget.MenuBar(id,{iframe:ifr,autosubmenudisplay: true, showdelay: 100, hidedelay: 500, lazyload: false});
  			YAHOO.widget.MenuManager.addMenu(i3GEOoMenuBar);
  			i3GEOoMenuBar.beforeRenderEvent.subscribe(onMenuBarBeforeRender);
- 			i3GEOoMenuBar.render();
+ 			i3GEOoMenuBar.render();		
  			//
  			//marca o tipo de interface em uso
  			//
