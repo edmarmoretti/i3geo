@@ -36,6 +36,9 @@ Arquivo:
 i3geo/classesphp/flamingo.inc
 */
 $string1 = "<?xml version='1.0' encoding='UTF-8'?>";
+$protocolo = explode("/",$_SERVER['SERVER_PROTOCOL']);
+$host = $protocolo[0]."://".$_SERVER['HTTP_HOST'];
+
 $string1 .= 
 '<FLAMINGO xmlns:fmc="fmc" lang="en" languages="en" tooltipdelay="500">
 <fmc:Logo id="logo"/>
@@ -75,7 +78,8 @@ $string1 .=
 </fmc:MonitorLayer>
 <fmc:Map id="overview" movequality="HIGH" right="right" bottom="bottom" width="150" height="150" extent="-79.8713331401,-41.7736536401,-26.2264448599,11.8712346401" fullextent="-79.8713331401,-41.7736536401,-26.2264448599,11.8712346401">
 <fmc:LayerOverview listento="map" followfactor="10000"/>
-<fmc:LayerImage id="brasil" imageurl="../imagens/referencia1.png" extent="-79.8713331401,-41.7736536401,-26.2264448599,11.8712346401" />
+<fmc:LayerImage id="brasil" imageurl="';
+$string0 = $host.'/i3geo/imagens/referencia1.png" extent="-79.8713331401,-41.7736536401,-26.2264448599,11.8712346401" />
 </fmc:Map>
 
 <fmc:Container borderwidth="0" bordercolor="#b8b8b8" left="left" top="top" bottom="bottom" right="right">
@@ -89,15 +93,12 @@ $string1 .=
 		<fmc:LayerGrid gridwidth="0.5" gridheight="0.5" minscale="100" maxscale="500"/>
 		<fmc:LayerGrid gridwidth="0.1" gridheight="0.1" maxscale="100"/>
 		<fmc:LayerOGWMS id="OG3"  format="PNG" url="';
-	$protocolo = explode("/",$_SERVER['SERVER_PROTOCOL']);
-	$host = $protocolo[0]."://".$_SERVER['HTTP_HOST'];
-	//include_once("../ms_configura.php");
 	$string2 = $host."/i3geo/classesphp/flamingoogc.php?g_sid=".$g_sid;
 	$string3 = '&WMS=OGC:WMS&SERVICE=WMS&VERSION=1.1.0&SRS=EPSG:4291&EXCEPTIONS=INIMAGE&BGCOLOR=0xF0F0F0" LAYERS="copyright"/>
 	</fmc:Map>
 </fmc:Container>
 </FLAMINGO>';
-	$stringFinal = $string1.$string2.$string3;
+	$stringFinal = $string1.$string0.$string2.$string3;
 	$arq = dirname($map_file)."/flamingo.xml";
 	$fp = fopen($arq,"w");
 	fwrite($fp,$stringFinal);

@@ -566,6 +566,7 @@ i3GEO.Interface = {
 			};
 			i3GEO.php.flamingo(monta);
 			i3GEO.eventos.ativa($i("flamingo"));
+			/*
 			i3GEO.maparef.atualiza();
 			if (i3GEO.configura.mapaRefDisplay !== "none")
 			{
@@ -573,6 +574,7 @@ i3GEO.Interface = {
 				{i3GEO.configura.mapaRefDisplay = i3GEO.util.pegaCookie("i3GEO.configura.mapaRefDisplay");}
 				if (i3GEO.configura.mapaRefDisplay === "block"){i3GEO.maparef.inicia();}
 			}
+			*/
 			//
 			//i3GEO.arvoreDeCamadas.CAMADAS é definido na inicialização (classe_i3geo)
 			//

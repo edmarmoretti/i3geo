@@ -272,7 +272,7 @@ i3GEO.janela = {
 		}
 		YAHOO.janelaDoca.xp.manager.register(YAHOO.janelaDoca.xp.panel);
 		YAHOO.janelaDoca.xp.panel.render();
-		if(navm && id !== "i3geo_janelaMensagens")
+		if(navm && id !== "i3geo_janelaMensagens" && i3GEO.Interface.ATUAL == "googleearth")
 		{YAHOO.janelaDoca.xp.panel.moveTo(0,0);}
 		if(ifr == true)
 		{YAHOO.janelaDoca.xp.panel.iframe.style.zIndex = 0;}
@@ -341,14 +341,14 @@ i3GEO.janela = {
 	fecha: function(event){
 		if(typeof(console) !== 'undefined'){console.info("i3GEO.janela.fecha()");}
 		var i,old,id;
-		//esconde o box do google
+		//esconde elementos gráficos q a ferramenta pode ter aberto
 		i3GEO.util.escondePin();
 		i3GEO.util.escondeBox();
 		//fecha o container de desenho de elementos na tela
 		if($i("divGeometriasTemp"))
 		{i3GEO.desenho.richdraw.fecha();}
-		if($i("flamingoi"))
-		{$i("flamingoi").style.display="block";}
+		//if($i("flamingoi"))
+		//{$i("flamingoi").style.display="block";}
 		//executa as funções de fechamento
 		if(i3GEO.janela.ANTESFECHA){
 			for(i=0;i<i3GEO.janela.ANTESFECHA.length;i++)
@@ -450,10 +450,7 @@ i3GEO.janela = {
 		if(i3GEO.janela.ESTILOAGUARDE === "normal" || i3GEO.janela.ESTILOAGUARDE === "minima")
 		{eval ('YAHOO.aguarde.'+id+'.setHeader("<span><img id=aguardeGifAberto src=\'"+i3GEO.configura.locaplic+"/imagens/aguarde.gif\' /></span>&nbsp;<span style=font-size:8px >'+contador+'</span>")');}
 		eval ('YAHOO.aguarde.'+id+'.render(document.body)');
-		if($i("flamingo"))
-		{eval ('YAHOO.aguarde.'+id+'.moveTo(0,0)');}
-		else
-		{eval ('YAHOO.aguarde.'+id+'.moveTo('+pos[0]+','+pos[1]+')');}
+		eval ('YAHOO.aguarde.'+id+'.moveTo('+pos[0]+','+pos[1]+')');
 		eval ('YAHOO.aguarde.'+id+'.show()');
 		if($i(id+"_mask"))
 		{$i(id+"_mask").style.zIndex=5000;}
