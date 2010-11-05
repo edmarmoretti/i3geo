@@ -1213,11 +1213,12 @@ i3GEO.Interface = {
 				sw = new google.maps.LatLng(ret[1],ret[0]);
 				ne = new google.maps.LatLng(ret[3],ret[2]);
 				i3GeoMap.fitBounds(new google.maps.LatLngBounds(sw,ne));
-				i3GEO.Interface.googlemaps.criaLayers();
+				
 				i3GeoMapOverlay = new google.maps.OverlayView();
 				i3GeoMapOverlay.draw = function() {};
-				i3GeoMapOverlay.setMap(i3GeoMap);		
-				
+						
+				i3GEO.Interface.googlemaps.criaLayers();
+				i3GeoMapOverlay.setMap(i3GeoMap);
 				i3GEO.Interface.googlemaps.registraEventos();
 								
 				i3GEO.gadgets.mostraInserirKml();
@@ -1241,7 +1242,6 @@ i3GEO.Interface = {
 				i3GEO.Interface.googlemaps.adicionaListaKml();
 				if(i3GEO.parametros.kmlurl !== "")
 				{i3GEO.Interface.googlemaps.adicionaKml(true,i3GEO.parametros.kmlurl);}
-
 			};
 			i3GEO.php.googlemaps(montaMapa);
 		},
@@ -1260,7 +1260,7 @@ i3GEO.Interface = {
 				}
 			}
 		},
-		insereLayer: function(nomeLayer,indice){
+		criaImageMap: function(nomeLayer){
 			var i3GEOTileO,s;
 			s = "i3GEOTileO = new google.maps.ImageMapType({ "+
 					"getTileUrl: function(coord, zoom) {" +
@@ -1273,7 +1273,11 @@ i3GEO.Interface = {
 					"name: '" + nomeLayer + "'" +
 				"});";
 			eval(s);
-			i3GeoMap.overlayMapTypes.insertAt(indice, i3GEOTileO);							
+			return i3GEOTileO;
+		},
+		insereLayer: function(nomeLayer,indice){
+			var i = i3GEO.Interface.googlemaps.criaImageMap(nomeLayer);
+			i3GeoMap.overlayMapTypes.insertAt(indice, i);							
 		},
 		registraEventos: function(){
 			var pos;

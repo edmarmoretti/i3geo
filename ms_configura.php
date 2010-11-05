@@ -21,7 +21,7 @@ Licenca:
 
 GPL2
 
-I3Geo Interface Integrada de Ferramentas de Geoprocessamento para Internet
+i3Geo Interface Integrada de Ferramentas de Geoprocessamento para Internet
 
 Direitos Autorais Reservados (c) 2006 Ministério do Meio Ambiente Brasil
 Desenvolvedor: Edmar Moretti edmar.moretti@mma.gov.br
@@ -50,7 +50,7 @@ Arquivo: ms_configura.php
 	Tipo:
 	{string}
 */
-$mensagemInicia = 'Vers&atilde;o 4.4 - beta - Revis&atilde;o SVN 1748';
+$mensagemInicia = 'Vers&atilde;o 4.5 - Revis&atilde;o SVN 1777';
 /*
 	Variable: tituloInstituicao
 	

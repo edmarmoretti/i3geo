@@ -105,6 +105,8 @@ Retorno:
 function iniciaMapa()
 {
 	global $interfacePadrao,$mensagemInicia,$kmlurl,$tituloInstituicao,$tempo,$navegadoresLocais,$locaplic,$embedLegenda,$map_file,$mapext,$w,$h,$locsistemas,$locidentifica,$R_path,$locmapas,$locmapserv,$postgis_con,$utilizacgi,$expoeMapfile,$interface;
+	if(!isset($kmlurl))
+	{$kmlurl = "";}
 	error_reporting(E_ALL);
 	//
 	//pega o xml com os sietmas para identificação
