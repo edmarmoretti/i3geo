@@ -51,72 +51,85 @@ File: Testa um mapfile  (testamapfile.php)
 
 Group: API javascript  {
 
-   File: Árvore de camadas  (classesjs\classe_arvoredecamadas.js)
-   File: Árvore de temas  (classesjs\classe_arvoredetemas.js)
-   File: Ajuda  (classesjs\classe_ajuda.js)
-   File: Análise geográfica  (classesjs\classe_analise.js)
+   File: i3geo - carregador de javascripts  (classesjs\i3geo.js)
+   File: Gerador de links  (classesjs\geradordelinks.js)
    File: Atlas  (classesjs\atlas.js)
-   File: Barra de botões  (classesjs\classe_barradebotoes.js)
-   File: Cálculos  (classesjs\classe_calculo.js)
-   File: Cliente de web services  (classesjs\wscliente.js)
-   File: Compactador de javascript  (classesjs\compactajs.php)
-   File: Configurações gerais  (classesjs\classe_configura.js)
    File: Data download  (classesjs\datadownload.js)
    File: Depreciados  (classesjs\depreciados.js)
-   File: Desenho de elementos gráficos  (classesjs\classe_desenho.js)
-   File: Eventos  (classesjs\classe_eventos.js)
-   File: Gadgets &lparen;objetos marginais do mapa&rparen;  (classesjs\classe_gadgets.js)
-   File: Gerador de links  (classesjs\geradordelinks.js)
-   File: Guias  (classesjs\classe_guias.js)
-   File: i3Geo  (classesjs\classe_i3geo.js)
-   File: i3geo - carregador de javascripts  (classesjs\i3geo.js)
-   File: i3geo.js  (classesjs\zerocal\i3geo.js)
-   File: Idioma  (classesjs\classe_idioma.js)
-   File: Interface  (classesjs\classe_interface.js)
-   File: Janelas  (classesjs\classe_janela.js)
-   File: Mapa  (classesjs\classe_mapa.js)
-   File: Mapa de referência  (classesjs\classe_maparef.js)
-   File: Navegação sobre o mapa  (classesjs\classe_navega.js)
-   File: PHP  (classesjs\classe_php.js)
-   File: Seleção de elementos &lparen;depreciado&rparen;  (classesjs\classe_selecao.js)
-   File: Temas  (classesjs\classe_tema.js)
-   File: Utilitários  (classesjs\classe_util.js)
+
+   Group: Classes  {
+
+      File: i3Geo  (classesjs\classe_i3geo.js)
+      File: Árvore de camadas  (classesjs\classe_arvoredecamadas.js)
+      File: Árvore de temas  (classesjs\classe_arvoredetemas.js)
+      File: Ajuda  (classesjs\classe_ajuda.js)
+      File: Análise geográfica  (classesjs\classe_analise.js)
+      File: Barra de botões  (classesjs\classe_barradebotoes.js)
+      File: Cálculos  (classesjs\classe_calculo.js)
+      File: Cliente de web services  (classesjs\wscliente.js)
+      File: Compactador de javascript  (classesjs\compactajs.php)
+      File: Configurações gerais  (classesjs\classe_configura.js)
+      File: Desenho de elementos gráficos  (classesjs\classe_desenho.js)
+      File: Eventos  (classesjs\classe_eventos.js)
+      File: Gadgets &lparen;objetos marginais do mapa&rparen;  (classesjs\classe_gadgets.js)
+      File: Guias  (classesjs\classe_guias.js)
+      File: Idioma  (classesjs\classe_idioma.js)
+      File: Interface  (classesjs\classe_interface.js)
+      File: Janelas  (classesjs\classe_janela.js)
+      File: Mapa  (classesjs\classe_mapa.js)
+      File: Mapa de referência  (classesjs\classe_maparef.js)
+      File: Navegação sobre o mapa  (classesjs\classe_navega.js)
+      File: PHP  (classesjs\classe_php.js)
+      File: Temas  (classesjs\classe_tema.js)
+      File: Utilitários  (classesjs\classe_util.js)
+      }  # Group: Classes
+
    }  # Group: API javascript
 
 Group: API PHP  {
 
    File: atlas_controle.php  (classesphp\atlas_controle.php)
    File: carrega_ext.php  (classesphp\carrega_ext.php)
-   File: class.palette.php  (classesphp\class.palette.php)
-   File: classe_alteraclasse.php  (classesphp\classe_alteraclasse.php)
-   File: classe_analise.php  (classesphp\classe_analise.php)
-   File: classe_atlas.php  (classesphp\classe_atlas.php)
-   File: classe_atributos  (classesphp\classe_atributos.php)
-   File: classe_escala.php  (classesphp\classe_escala.php)
-   File: classe_estatistica.php  (classesphp\classe_estatistica.php)
-   File: classe_imagem.php  (classesphp\classe_imagem.php)
-   File: classe_legenda.php  (classesphp\classe_legenda.php)
-   File: classe_mapa.php  (classesphp\classe_mapa.php)
-   File: classe_menutemas.php  (classesphp\classe_menutemas.php)
-   File: classe_navegacao.php  (classesphp\classe_navegacao.php)
-   File: classe_selecao.php  (classesphp\classe_selecao.php)
-   File: classe_shp.php  (classesphp\classe_shp.php)
-   File: classe_temas.php  (classesphp\classe_temas.php)
-   File: classe_toponimia.php  (classesphp\classe_toponimia.php)
-   File: classe_vermultilayer.php  (classesphp\classe_vermultilayer.php)
-   File: flamingo.inc  (classesphp\flamingo.inc)
-   File: flamingoogc.php  (classesphp\flamingoogc.php)
    File: funcoes_gerais.php  (classesphp\funcoes_gerais.php)
    File: graficopizza.php  (classesphp\graficopizza.php)
    File: graficos.php  (classesphp\graficos.php)
    File: mapa_controle.php  (classesphp\mapa_controle.php)
-   File: mapa_googlemaps.php  (classesphp\mapa_googlemaps.php)
-   File: mapa_inicia.php  (classesphp\mapa_inicia.php)
-   File: mapa_openlayers.php  (classesphp\mapa_openlayers.php)
-   File: parse_cgi.php  (classesphp\parse_cgi.php)
    File: pega_variaveis.php  (classesphp\pega_variaveis.php)
    File: wmswfs.php  (classesphp\wmswfs.php)
    File: wscliente.php  (classesphp\wscliente.php)
+
+   Group: Interfaces  {
+
+      File: flamingo.inc  (classesphp\flamingo.inc)
+      File: flamingoogc.php  (classesphp\flamingoogc.php)
+      File: mapa_googleearth.php  (classesphp\mapa_googleearth.php)
+      File: mapa_googlemaps.php  (classesphp\mapa_googlemaps.php)
+      File: mapa_inicia.php  (classesphp\mapa_inicia.php)
+      File: mapa_openlayers.php  (classesphp\mapa_openlayers.php)
+      File: parse_cgi.php  (classesphp\parse_cgi.php)
+      }  # Group: Interfaces
+
+   Group: Classes  {
+
+      File: class.palette.php  (classesphp\class.palette.php)
+      File: classe_alteraclasse.php  (classesphp\classe_alteraclasse.php)
+      File: classe_analise.php  (classesphp\classe_analise.php)
+      File: classe_atlas.php  (classesphp\classe_atlas.php)
+      File: classe_atributos  (classesphp\classe_atributos.php)
+      File: classe_escala.php  (classesphp\classe_escala.php)
+      File: classe_estatistica.php  (classesphp\classe_estatistica.php)
+      File: classe_imagem.php  (classesphp\classe_imagem.php)
+      File: classe_legenda.php  (classesphp\classe_legenda.php)
+      File: classe_mapa.php  (classesphp\classe_mapa.php)
+      File: classe_menutemas.php  (classesphp\classe_menutemas.php)
+      File: classe_navegacao.php  (classesphp\classe_navegacao.php)
+      File: classe_selecao.php  (classesphp\classe_selecao.php)
+      File: classe_shp.php  (classesphp\classe_shp.php)
+      File: classe_temas.php  (classesphp\classe_temas.php)
+      File: classe_toponimia.php  (classesphp\classe_toponimia.php)
+      File: classe_vermultilayer.php  (classesphp\classe_vermultilayer.php)
+      }  # Group: Classes
+
    }  # Group: API PHP
 
 Group: Ferramentas  {
@@ -181,7 +194,7 @@ Group: Ferramentas  {
       File: Wikipédia  (ferramentas\wiki\index.js.php)
       }  # Group: Consulta e navegação
 
-   Group: Mapa  {
+   Group: Manipulação do mapa  {
 
       File: Auto redesenho  (ferramentas\opcoes_autoredesenha\index.js.php)
       File: Barra de escala  (ferramentas\opcoes_escala\index.js.php)
@@ -206,9 +219,9 @@ Group: Ferramentas  {
       File: Quadros de animação  (ferramentas\opcoes_quadros\index.js.php)
       File: Salva mapa  (ferramentas\salvamapa\index.js.php)
       File: Tamanho do mapa  (ferramentas\opcoes_tamanho\index.js.php)
-      }  # Group: Mapa
+      }  # Group: Manipulação do mapa
 
-   Group: Tema  {
+   Group: Manipulação de tema  {
 
       File: Converte um tema em kml  (ferramentas\convertekml\index.js.php)
       File: Download de um tema  (ferramentas\download\index.js.php)
@@ -219,7 +232,7 @@ Group: Ferramentas  {
       File: Gráfico tema  (ferramentas\graficotema\index.js.php)
       File: Tabela de atributos  (ferramentas\tabela\index.js.php)
       File: Toponímia de um tema  (ferramentas\toponimia\index.js.php)
-      }  # Group: Tema
+      }  # Group: Manipulação de tema
 
    }  # Group: Ferramentas
 
@@ -275,15 +288,13 @@ Group: Aplicativos adicionais  {
 
 Group: Interfaces HTML e mapfiles de inicialização e configuração  {
 
-   File: Flamingo &lparen;experimental&rparen;  (aplicmap\flamingo.htm)
+   File: Flamingo  (aplicmap\flamingo.htm)
    File: Google Earth &lparen;experimental&rparen;  (aplicmap\googleearth.phtml)
    File: Google Maps  (aplicmap\googlemaps.phtml)
    File: Interface minima  (aplicmap\minima.htm)
    File: Interface normal  (aplicmap\geral.htm)
-   File: Interface normal  (aplicmap\openlayers.htm)
-   File: Interface normal  (aplicmap\debug.htm)
-   File: Interface normal &lparen;para exemplos&rparen;  (no auto-title, aplicmap\meumapa.htm)
    File: Interface normal com debug  (aplicmap\geraldebug.htm)
+   File: Interface Openlayers  (aplicmap\openlayers.htm)
    File: Interface simples 1  (aplicmap\simples1.htm)
    File: Interface simples 2  (aplicmap\simples2.htm)
    File: Interface zerocal  (aplicmap\zerocal.htm)

@@ -374,7 +374,7 @@ if (strtoupper(substr(PHP_OS, 0, 3) == 'WIN'))
 	 Tipo:
 	 {string}
 	*/
-	$interfacePadrao = "flamingo.htm";
+	$interfacePadrao = "openlayers.htm";
 }
 else //se for linux
 {
@@ -396,6 +396,6 @@ else //se for linux
 	$atlasxml = "";//"../menutemas/atlas.xml";
 	$expoeMapfile = "sim";
 	$conexaoadmin = "";
-	$interfacePadrao = "geral.htm";
+	$interfacePadrao = "openlayers.htm";
 }
 ?>

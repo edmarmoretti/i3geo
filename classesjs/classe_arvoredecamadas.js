@@ -616,7 +616,7 @@ i3GEO.arvoreDeCamadas = {
 	   	    	         			destEl.appendChild(this.getEl()); 
 	 								els = i3GEO.arvoreDeCamadas.listaLigadosDesligados();
 	 								lista = els[2].join(",");
-	 								i3GEO.contadorAtualiza++;
+	 								//i3GEO.contadorAtualiza++;
 									temp = function(retorno){
 										i3GEO.atualiza(retorno);
 										if(i3GEO.Interface.ATUAL === "openlayers")

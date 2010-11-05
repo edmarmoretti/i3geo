@@ -880,7 +880,7 @@ i3GEO.util = {
 		if(typeof(console) !== 'undefined'){console.info("i3GEO.util.adicionaSHP()");}
 		i3GEO.janela.abreAguarde("i3GEO.atualiza",$trad("o1"));
 		var temp = path.split(".");
-		i3GEO.contadorAtualiza++;
+		//i3GEO.contadorAtualiza++;
 		if ((temp[1] === "SHP") || (temp[1] === "shp"))
 		{i3GEO.php.adicionaTemaSHP(i3GEO.atualiza,path);}
 		else

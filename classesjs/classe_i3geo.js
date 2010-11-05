@@ -174,9 +174,8 @@ i3GEO = {
 	Variavel: contadorAtualiza
 	
 	Essa variável é um contador utilizado para indicar quantos processos estão ativos e que
-	farão o redesenho do mapa. O mapa só é atualizado quando o contador for menor que 1.
-	Essi contador é utilizado no método i3GEO.atualiza e todas as funções que chamam esse
-	método devem acrescentar 1 ao contador, por exemplo, i3GEO.contadoratualiza++
+	irão executar o redesenho do mapa. O mapa só é atualizado quando o contador for menor que 1.
+	Esse contador é utilizado no método i3GEO.atualiza 
 	O contador é necessário para evitar chamadas desnecessárias à função de redesenho do mapa.
 	
 	Tipo:
@@ -450,6 +449,7 @@ i3GEO = {
 		{i3GEO.contadorAtualiza--;return;}
 		if(i3GEO.contadorAtualiza > 0)
 		{i3GEO.contadorAtualiza--;}
+		i3GEO.contadorAtualiza++;
 		//
 		//funcao que pega os dados do mapa no servidor
 		//

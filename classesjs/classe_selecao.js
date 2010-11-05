@@ -1,58 +1,13 @@
 /*jslint plusplus:false,white:false,undef: false, rhino: true, onevar: true, evil: true */
 
 /*
-Title: Seleção de elementos (depreciado)
-
 Esta classe foi depreciada e poderá ser removida. Veja i3geo/ferramentas/selecao/index.js.php
 
-Arquivo:
-
-i3geo/classesjs/classe_selecao.js
-
-Licenca:
-
-GPL2
-
-I3Geo Interface Integrada de Ferramentas de Geoprocessamento para Internet
-
-Direitos Autorais Reservados (c) 2006 Ministério do Meio Ambiente Brasil
-Desenvolvedor: Edmar Moretti edmar.moretti@mma.gov.br
-
-Este programa é software livre; você pode redistribuí-lo
-e/ou modificá-lo sob os termos da Licença Pública Geral
-GNU conforme publicada pela Free Software Foundation;
-tanto a versão 2 da Licença.
-Este programa é distribuído na expectativa de que seja útil,
-porém, SEM NENHUMA GARANTIA; nem mesmo a garantia implícita
-de COMERCIABILIDADE OU ADEQUAÇÃO A UMA FINALIDADE ESPECÍFICA.
-Consulte a Licença Pública Geral do GNU para mais detalhes.
-Você deve ter recebido uma cópia da Licença Pública Geral do
-GNU junto com este programa; se não, escreva para a
-Free Software Foundation, Inc., no endereço
-59 Temple Street, Suite 330, Boston, MA 02111-1307 USA.
 */
 if(typeof(i3GEO) === 'undefined'){
 	i3GEO = [];
 }
-/*
- i3GEO.selecao
-
-Realiza operações de seleção de elementos do mapa
-*/
 i3GEO.selecao = {
-	/*
-	 porxy
-	
-	Executa a seleção de elementos de um tema com base em um par de coordenadas xy
-	
-	Parametros:
-	
-	tema {String} - código do tema
-	
-	tipo {String} - tipo de operação adiciona|retira
-	
-	tolerancia {Integer} - tolerância de busca
-	*/
 	porxy: function(tema,tipo,tolerancia){
 		if(typeof(console) !== 'undefined'){console.info("i3GEO.selecao.porxy()");}
 		var retorna = function(retorno)
@@ -60,19 +15,6 @@ i3GEO.selecao = {
 		i3GEO.janela.abreAguarde("i3GEO.atualiza",$trad("o1"));
 		i3GEO.php.selecaopt(retorna,tema,objposicaocursor.ddx+" "+objposicaocursor.ddy,tipo,tolerancia);
 	},
-	/*
-	 porbox
-	
-	Seleciona elementos de um tema com base em um retângulo
-	
-	Parametros:
-	
-	tema {String} - código do tema
-	
-	tipo {String} - tipo de operação adiciona|retira
-	
-	box {String} - xmin ymin xmax ymax
-	*/
 	porbox: function(tema,tipo,box){
 		if(typeof(console) !== 'undefined'){console.info("i3GEO.navega.selecao.porbox()");}
 		var retorna = function(retorno)
@@ -80,13 +22,6 @@ i3GEO.selecao = {
 		i3GEO.janela.abreAguarde("i3GEO.atualiza",$trad("o1"));
 		i3GEO.php.selecaobox(retorna,tema,tipo,box);
 	},
-	/*
-	 janelaOpcoes
-	
-	Abre a janela de opções da ferramenta de seleção.
-	
-	A janela terá como id "wdocai"
-	*/
 	janelaOpcoes: function(){
 		if(typeof(console) !== 'undefined'){console.info("i3GEO.selecao.janelaOpcoes()");}
 		var janela,temp;
@@ -112,14 +47,6 @@ i3GEO.selecao = {
 		};
 		YAHOO.util.Event.addListener(janela[0].close, "click", temp);
 	},
-	/*
-	 atualizaGrafico
-	
-	Atualiza o gráfico de barras da ferramenta de seleção
-	
-	O gráfico é atualizado sempre que ocorrer uma nova seleção no mapa, o que implica no redesnho do mapa e
-	disparo do evento NAVEGAMAPA
-	*/
 	atualizaGrafico: function(){
 		if(typeof(console) !== 'undefined'){console.info("i3GEO.selecao.atualizaGrafico()");}
 		if(g_tipoacao === "selecao"){
@@ -132,11 +59,6 @@ i3GEO.selecao = {
 			}
 		}		
 	},
-	/*
-	 clique
-	
-	Seleciona elementos clicando no mapa
-	*/
 	clique: function(){
 		if(typeof(console) !== 'undefined'){console.info("i3GEO.selecao.clique()");}
 		if (g_tipoacao === "selecao"){
@@ -154,17 +76,7 @@ i3GEO.selecao = {
 			{i3GEO.selecao.porxy(i3GEO.temaAtivo,tipo,tolerancia);}
 		}
 	},
-	/*
-	 i3GEO.selecao.box
-	
-	Controla o desenho do box para a seleção e executa a função de seleção
-	*/
 	box: {
-		/*
-		 inicia
-		
-		Marca o início do desenho do box, capturando a posição do mouse
-		*/
 		inicia: function(){
 			if(g_tipoacao !== 'selecaobox')
 			{return;}

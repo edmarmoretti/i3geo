@@ -403,7 +403,7 @@ i3GEO.maparef = {
 		}
 		try{
 			i3GEO.janela.abreAguarde("i3GEO.atualiza",$trad("o1"));
-			i3GEO.contadorAtualiza++;
+			//i3GEO.contadorAtualiza++;
 			i3GEO.php.pan(i3GEO.atualiza,i3GEO.parametros.mapscale,"ref",objposicaocursor.refx,objposicaocursor.refy);
 		}
 		catch(e){

@@ -116,7 +116,7 @@ i3GEO.mapa = {
 		if(typeof(console) !== 'undefined'){console.info("i3GEO.mapa.ativaLogo()");}
 		if(i3GEO.Interface.ATUAL === "googlemaps")
 		{alert("Essa operação não funciona nessa interface");return;}
-		i3GEO.contadorAtualiza++;
+		//i3GEO.contadorAtualiza++;
 		i3GEO.php.ativalogo(i3GEO.atualiza);
 	},
 	/*
@@ -156,7 +156,7 @@ i3GEO.mapa = {
 				alert("Recuperacao impossivel. Sera feita uma tentativa de reiniciar o mapa.");
 				if (i3GEO.mapa.recupera.TENTATIVA === 1){
 					i3GEO.mapa.recupera.TENTATIVA = 2;
-					i3GEO.contadorAtualiza++;
+					//i3GEO.contadorAtualiza++;
 					i3GEO.php.reiniciaMapa(i3GEO.atualiza);
 				}		
 			}
@@ -308,7 +308,7 @@ i3GEO.mapa = {
 		ativaDesativaTema: function(inputbox){
 			if(typeof(console) !== 'undefined'){console.info("i3GEO.mapa.legendaHTML.ativaDesativaTema()");}
 			var temp = function(){
-				i3GEO.contadorAtualiza++;
+				//i3GEO.contadorAtualiza++;
 				i3GEO.php.corpo(i3GEO.atualiza,i3GEO.configura.tipoimagem);
 				i3GEO.arvoreDeCamadas.atualiza("");
 				i3GEO.janela.fechaAguarde("redesenha");
