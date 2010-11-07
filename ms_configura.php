@@ -47,10 +47,15 @@ Arquivo: ms_configura.php
 	
 	Mensagem de inicialização mostrada pelo programa ms_criamapa.php
 	
+	É obtida de um include para permitir a atualização da versão nos pacotes de correção
+	
 	Tipo:
 	{string}
 */
-$mensagemInicia = 'Vers&atilde;o 4.5 - Revis&atilde;o SVN 1777';
+if(file_exists("versao.php"))
+{include_once("versao.php");}
+else
+{$mensagemInicia = "";}
 /*
 	Variable: tituloInstituicao
 	
