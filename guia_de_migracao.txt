@@ -1,5 +1,14 @@
 GUIA DE UPDATES
 -------------------------------------------------------------------------------------------------
+Para a versão 4.5
+
+	Os arquivos com as interfaces HTML dos diferentes mapas do i3Geo foram movidos do diretório
+	i3geo/aplicmap para o diretório i3geo/interface. Caso existam links apontando diretamente para
+	esses arquivos, vc pode simplesmente copiar os arquivos existentes na nova pasta para a antiga.
+
+
+
+-------------------------------------------------------------------------------------------------
 Para a versão 4.4
 
 	Verifique se o PHP está configurado (php.ini) para permitir a passagem de parâmetros por referência
