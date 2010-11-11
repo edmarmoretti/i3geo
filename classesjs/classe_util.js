@@ -501,13 +501,16 @@ i3GEO.util = {
 			c,
 			n,
 			layers,
-			cursor;
+			cursor="",
+			ext = ".ff";
 		//
 		//no caso da interface openlayers, o cursor deve ser definido no estilo
 		//do elemento img de cada TILE de cada LAYER
 		//para achar os img faz-se a busca pela classe css utilizada pelo OpenLayers nos img desse tipo
 		//
 		try{
+			if(navm)
+			{ext = ".ie";}
 			os.push(document.getElementById(idobjeto));
 			if(i3GEO.Interface.ATUAL === "openlayers"){
 				os = YAHOO.util.Dom.getElementsByClassName('olTileImage', 'img');
@@ -519,19 +522,13 @@ i3GEO.util = {
 			n = os.length;
 			if(tipo === "default" || tipo === "pointer" || tipo === "crosshair" || tipo === "help" || tipo === "move" || tipo === "text")
 			{cursor = tipo;}
-			else{
-				if(navm){
-					cursor = "URL(\""+locaplic+eval("cursores."+tipo+".ie")+"\"),auto";
-					c = eval("cursores."+tipo+".ie");
-				}
-				else{
-					cursor = "URL(\""+locaplic+eval("cursores."+tipo+".ff")+"\"),auto";
-					c = eval("cursores."+tipo+".ff");
-				}			
-			}
+			else
+			{c = eval("cursores."+tipo+ext);}
 			//testa novamente
 			if(c === "default" || c === "pointer" || c === "crosshair" || c === "help" || c === "move" || c === "text")
 			{cursor = c;}		
+			if(cursor == "")
+			{cursor = "URL(\""+locaplic+eval("cursores."+tipo+ext)+"\"),auto";}
 			for(i=0;i<n;i++){
 				o = os[i];
 				if(o)

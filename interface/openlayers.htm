@@ -4,7 +4,7 @@
 <meta http-equiv="Category" content="I3Geo Mapa interativo MMA geoprocessamento sig mobile">
 <META HTTP-EQUIV="Content-Type" CONTENT="text/html; charset=ISO-8859-1">
 <title>i3GEO - OpenLayers</title>
-<script type="text/javascript" src="../classesjs/i3geo.js"></script>
+<script type="text/javascript" src="../classesjs/i3geonaocompacto.js"></script>
 <script type="text/javascript" src="../pacotes/openlayers/OpenLayers29.js.php"></script>
 </head>
 <body id="i3geo">
@@ -89,8 +89,6 @@
  		Nesse div são incluídos os ícones que permitem ao usuário modificar o visual de cores dos ícones
  		<div id=visual ></div>
  	-->
- 	<!-- aqui serão incluídas as bandeiras que permitem a troca de idioma -->
- 	<div id="seletorIdiomas" ></div>
  	<!-- aqui será incluído o contador de tempo quando o temporizador de redesenho do mapa estiver ativo -->
  	<div id=tempoRedesenho style=color:green;background-color:black;width:50px;display:none ></div>
  </td>
@@ -105,7 +103,8 @@
 		<!-- aqui será incluído o gadget que mostra a coordenada geográfica da posição do mouse -->
 		<div id=localizarxy style="text-align:left;font-size:10px;">Aguarde...</div>
 	  </td>
-
+ 	  <!-- aqui serão incluídas as bandeiras que permitem a troca de idioma -->	  
+	  <td class=tdbranca  ><div id=seletorIdiomas ></div></td>
 	  <!--
 		A opção de localização 'onde estou?' baseia-se na identificação do IP do usuário. Para
 		que esta opção funcione corretamente, deve estar instalado no I3Geo o pacote geoIP. Veja no
@@ -132,14 +131,16 @@
 <br><br>
 <table>
 <tr>
-	<td><center><h1><div id=versaoi3geo ></div><h2>Software livre para criação de mapas interativos e geoprocessamento<h3>Baseado no Mapserver, é licenciado sob GPL e integra o Portal do Software Público Brasileiro</h3></h2></h1></td>
+	<td><center><h1><div id=versaoi3geo ></div><h2>i3Geo - Software livre para criação de mapas interativos e geoprocessamento<h3>Baseado no Mapserver, é licenciado sob GPL e integra o Portal do Software Público Brasileiro</h3></h2></h1></td>
 </tr>
 <tr>
 	<td style="padding:10px;"><center><img alt="logomarca" src='../imagens/logo_inicio.png'></td>
 </tr>
 <tr>
 	<td><center>
-		<script type="text/javascript" src="http://www.ohloh.net/p/150688/widgets/project_users.js?style=red"></script>
+		<!--
+		<script id="ohloh" type="text/javascript" src="http://www.ohloh.net/p/150688/widgets/project_users.js?style=red"></script>
+		-->
 	</td>
 </tr>
 </table>
@@ -149,11 +150,15 @@ Title: Interface Openlayers
 
 Abre o i3geo com todas as suas funcionalidades e interface de navegação controlada pela API Openlayers.
 
-File: i3geo/aplicmap/openlayers.htm
+File: i3geo/interface/openlayers.htm
 
 Exemplo:
 
 http://<host>/i3geo/ms_criamapa.php
+
+http://<host>/i3geo/interface/openlayers.htm
+
+http://<host>/i3geo
 
 Para definir quais botões das barras de ferramentas serão incluídos no mapa, veja: <classe_barradebotoes.js> i3GEO.barraDeBotoes.INCLUIBOTAO
 
@@ -190,15 +195,15 @@ i3GEO.barraDeBotoes.ATIVAMENUCONTEXTO = false;
 i3GEO.barraDeBotoes.PERMITEFECHAR = true;
 i3GEO.barraDeBotoes.PERMITEDESLOCAR = true;
 i3GEO.barraDeBotoes.AUTO = true;
-i3GEO.barraDeBotoes.COMPORTAMENTO = "laranja"
+i3GEO.barraDeBotoes.COMPORTAMENTO = "laranja";
 
-i3GEO.Interface.BARRABOTOESLEFT = 50
-i3GEO.Interface.BARRABOTOESTOP = 10
+i3GEO.Interface.BARRABOTOESLEFT = 50;
+i3GEO.Interface.BARRABOTOESTOP = 10;
 
-i3GEO.idioma.IDSELETOR = "seletorIdiomas"
-i3GEO.Interface.ATIVAMENUCONTEXTO = true
+i3GEO.idioma.IDSELETOR = "seletorIdiomas";
+i3GEO.Interface.ATIVAMENUCONTEXTO = false;
 i3GEO.arvoreDeTemas.TIPOBOTAO = "radio";
-i3GEO.arvoreDeTemas.ATIVATEMAIMEDIATO = true
+i3GEO.arvoreDeTemas.ATIVATEMAIMEDIATO = true;
 //
 //esta é uma variável interna do OpenLayers que define o endereço do diretório onde estão as imagens usadas nos ícones
 //

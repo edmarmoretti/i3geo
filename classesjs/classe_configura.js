@@ -616,7 +616,7 @@ i3GEO.configura = {
 				{alert("Pressione a tecla CTRL junto com o botão esquerdo do mouse");return;}				
 				var temp;
 				temp = "zoom";
-				if(i3GEO.Interface.ATIVAMENUCONTEXTO)
+				if(i3GEO.Interface.ATIVAMENUCONTEXTO && i3GEO.Interface.ATUAL == "padrao")
 				{temp = "zoom_contexto";}
 				i3GEO.util.mudaCursor(i3GEO.configura.cursores,temp,i3GEO.Interface.IDMAPA,i3GEO.configura.locaplic);
 				g_operacao='navega';

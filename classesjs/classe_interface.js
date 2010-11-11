@@ -726,6 +726,7 @@ i3GEO.Interface = {
 					pz = new OpenLayers.Control.PanZoomBar();
 					i3geoOL.addControl(pz);
 					pz.div.style.zIndex = 5000;
+					pz.div.style.top ="7px";
 				}
 				if(i3GEO.Interface.openlayers.GADGETS.PanZoom == true){
 					pz = new OpenLayers.Control.PanZoom();

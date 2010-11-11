@@ -7,20 +7,13 @@
 
 <!-- Leitura dos programas javaScript e estilos individualmente. Pode-se ler os 
 arquivos não compactados, bastando substituir por i3geonaocompacto -->
-<script type="text/javascript" src="../classesjs/i3geo.js"></script>
-
-<!--
-<style>
-#box1
-{font-size:0px;cursor:crosshair;opacity:.25;background-color: gray;position: absolute;visibility: hidden;width: 0px;height: 0px;border: 2px solid green;}
-</style>
--->
+<script type="text/javascript" src="../classesjs/i3geonaocompacto.js"></script>
+<script type="text/javascript" src="../pacotes/openlayers/OpenLayers29.js.php"></script>
 
 </head>
 <body id=i3geo  >
 <center>
 <table id='mst' style=display:none width=100% cellspacing='0'>
-<!-- Inclui a barra superior. Se vc não quiser o menu, é só comentar -->
 <tr style="border:0px"><td colspan=2 style="background-image:url('../imagens/visual/default/cabeca.png');height:10px"></td></tr>
 <tr>
 <td>
@@ -30,17 +23,12 @@ arquivos não compactados, bastando substituir por i3geonaocompacto -->
 </tr>
 <tr>
  <td class=tdbranca id=contemFerramentas style="vertical-align:top;width:268px;text-align:left;">
-  <!-- Esta div acrescenta a opção de busca rápida, caso vc queira colocá-la em um lugar específico
-  <div id=buscaRapida ></div>
-  -->
   <div id='guia1obj' ><div style='left:5px;top:10px;' id=buscaRapida ></div><div id=listaTemas style='top:15px;'></div></div>
   <div id='guia2obj' style='display:none;'>Aguarde...<img alt="" src="../imagens/branco.gif" width=248 /></div>
   <div id='guia4obj' style='display:none;text-align:left'><div id='legenda' style='text-align:left'></div></div>
-  <div id='guia5obj' style='display:none;text-align:left'><div id='banners' style='overflow:auto;text-align:left'>Aguarde...</div></div>
  </td>
  <td style="vertical-align:top;border-width:0px;">
   <table width="100%" style="vertical-align:top;border-width:0px">
-   <!-- Corpo do mapa. Pode ser reposicionado, mas não mude os IDs. Se vc quiser que o mapa tenha um tamanho específico, inclua o estilo, exemplo, style=width:300px;height:300px -->
    <tr><td  class=verdeclaro id=contemImg >
     <div id=corpoMapa style="background-image:url('../imagens/i3geo1bw.jpg');"></div>
    </td></tr>
@@ -48,37 +36,29 @@ arquivos não compactados, bastando substituir por i3geonaocompacto -->
   
  </td>
  </tr>
-<!-- Mostra as coordenadas conforme o mouse é movimentado
-  <div class=pcenter10 id='longlat'>Longitude e latitude</div>
--->  
-<!-- Escala gráfica. Pode ser excluída. 
-  <div id="escalaGrafica" style="text-align:left"></div>
--->
-<!--- vc pode optar por colocar mensagens de ajuda em algum lugar 
-<tr><td colspan=2 ><div id=ajuda class=verdeescuro style="text-align:left;" >I3Geo</div></td></tr>
--->
 <tr>
  <td class=tdbranca >
- 	<div id=visual ></div>
- 	<div id=tempoRedesenho style=color:green;background-color:black;width:50px;display:none ></div>
  </td>
  <td class=tdbranca >
-  <table width=100% ><tr>
-  <td class=tdbranca ><div id=lugarquadros ></div></td>
-  <td class=tdbranca ><div id=localizarxy >Aguarde...</div></td>
-  <td class=tdbranca ><div id=escala ></div></td>
-  <!-- A opção de localização 'onde estou?' baseia-se na identificação do IP do usuário. Para
-  que esta opção funcione corretamente, deve estar instalado no I3Geo o pacote geoIP. Veja no
-  SVN do portal do software público o diretório arquivos_versões/pacotes para maiores informações -->
-  <td class=tdbranca ><div id=ondeestou ></div></td>
-  </tr></table>
+ <table width=100% >
+  <tr>
+	  <td class=tdbranca width="33%">
+		<div id=escala style="text-align:right;"></div>
+	  </td>
+	  <td class=tdbranca width="33%" >
+		<div id=localizarxy style="text-align:center;font-size:10px;">Aguarde...</div>
+	  </td>
+	  <td class=tdbranca style="text-align:right;;display:inline;width:33%">
+		<div id=seletorIdiomas style="text-align:right;" ></div>
+	  </td>
+  </tr>
+  </table>
+
  </td>
 </tr>
 <tr style="border:0px"><td colspan=3 style="background-image:url('../imagens/visual/default/rodape.png');height:10px"></td></tr>
 </table>
-<a style=text-align:center;color:white href="mailto:edmar.moretti@mma.gov.br">Cr&iacute;ticas e sugest&otilde;es</a>
 </center>
-<!-- barra de botoes que serão incluídos na janela móvel de navegação -->
 <div id=barraDeBotoes1 style='display:none'> 
    <table title="zoom" style="width:100%"><caption style="text-align:center">&nbsp;</caption><tr><td style='background-color:rgb(250,250,250);'><img title="zoom" alt="" src="../imagens/branco.gif" id='zoomli'/></td></tr></table>
    <table title="desloca" style="width:100%"><caption style="text-align:center">&nbsp;</caption><tr><td style='background-color:rgb(250,250,250);'><img title="desloca" alt="" src="../imagens/branco.gif" ID='pan'/></td></tr></table>
@@ -89,28 +69,70 @@ arquivos não compactados, bastando substituir por i3geonaocompacto -->
    <table title="area" style="width:100%"><caption style="text-align:center">&nbsp;</caption><tr><td style='background-color:rgb(250,250,250);'><img title="area" alt="" src="../imagens/branco.gif" id='area'/></td></tr></table>   
    <table title="imprimir" style="width:100%"><caption style="text-align:center">&nbsp;</caption><tr><td style='background-color:rgb(250,250,250);'><img title="imprimir" alt="" src="../imagens/branco.gif" id='imprimir'/></td></tr></table>   
 </div>
-<!-- Variáveis globais e inicialização do mapa-->
 <script type="text/javascript">
 /*
 Title: Interface minima
 
-Interface alternativa para o i3Geo
+Interface alternativa para o i3Geo com funções de navegação e manipulação dos temas
 
 Exemplo:
 
-http://localhost/i3geo/ms_criamapa.php?interface=minima.htm
+http://localhost/i3geo/interface/minima.htm
 
 */
-g_locaplic = i3GEO.util.protocolo()+"://"+window.location.host+"/i3geo";
-g_barraFerramentas2 = "nao"
-g_mapaRefDisplay = "none"
-;
-g_embedLegenda = "sim";
-objmapa = new Mapa();
+i3GEO.configura.locaplic = i3GEO.util.protocolo()+"://"+window.location.host+"/i3geo";
 
-g_visual = "default";
-g_autoRedesenho = 0;
-objmapa.inicializa();
+i3GEO.Interface.ATUAL = "openlayers";
+i3GEO.Interface.IDCORPO = "contemImg";
+i3GEO.configura.diminuixN = 20
+
+i3GEO.Interface.openlayers.GADGETS = {
+		PanZoomBar:true,
+		PanZoom:false,
+		LayerSwitcher:false,
+		ScaleLine:true,
+		OverviewMap:false	
+	};
+i3GEO.Interface.openlayers.TILES = true;
+
+i3GEO.cria()
+i3GEO.barraDeBotoes.INCLUIBOTAO = {
+		zoomli: true,
+		pan: true,
+		zoomtot:true,
+		identifica: true,
+		identificaBalao: true,
+		mede: true,
+		area: true,
+		imprimir: true,
+		reinicia: false,
+		exten: false,
+		referencia: true,
+		inserexy: false,
+		textofid: false,
+		selecao: false,
+		google: true,
+		buscafotos: false,
+		wiki: false,
+		metar: false,
+		lentei: false,
+		confluence: false,
+		inseregrafico: false,
+		v3d: false
+	};
+i3GEO.Interface.BARRABOTOESLEFT = 50;
+i3GEO.Interface.BARRABOTOESTOP = 10;
+i3GEO.barraDeBotoes.AUTO = true;
+i3GEO.barraDeBotoes.AUTOALTURA = false;
+i3GEO.barraDeBotoes.PERMITEFECHAR = false
+i3GEO.barraDeBotoes.ATIVAMENUCONTEXTO = false
+i3GEO.barraDeBotoes.COMPORTAMENTO = "laranja"
+i3GEO.idioma.IDSELETOR = "seletorIdiomas"
+i3GEO.interface.ATIVAMENUCONTEXTO = false;
+i3GEO.arvoreDeTemas.TIPOBOTAO = "radio";
+i3GEO.arvoreDeTemas.ATIVATEMAIMEDIATO = true;
+OpenLayers.ImgPath = "../pacotes/openlayers/img/"
+i3GEO.inicia();
 </script>
 </body>
 </html>
