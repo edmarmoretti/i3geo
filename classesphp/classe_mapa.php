@@ -170,26 +170,11 @@ string - javascript com os parametros
 		//$qy = file_exists($this->qyfile);
 		foreach($this->layers as $l)
 		{$l->set("template","none.htm");}
-
-		//if ($qy)
-		//{$this->mapa->loadquery($this->qyfile);}
 		foreach ($this->layers as $oLayer)
 		{
 			$sel = "nao";
 			if(file_exists($dir."/".$oLayer->name.".php"))
 			{$sel = "sim";$existesel = true;}
-			/*
-			if ($qy) //verifica se existe alguma selecao no tema
-			{
-				$sopen = $oLayer->open();
-				if($sopen != MS_FAILURE)
-				{			
-					$res_count = $oLayer->getNumresults();
-					$oLayer->close();
-					if ($res_count > 0){$sel = "sim";$existesel = true;}
-				}
-			}
-			*/
 			$escondido = $oLayer->getmetadata("escondido");
 			if($escondido == "")
 			{$escondido = "nao";}
@@ -294,8 +279,10 @@ Include:
 		if($qy)
 		{
 			foreach($this->layers as $l)
-			{$l->set("template","none.htm");}
-			$this->mapa->loadquery($this->qyfile);
+			{
+				$l->set("template","none.htm");
+				carregaquery($this->arquivo,&$l,&$this->mapa);
+			}
 		}
 		$legenda = $this->mapa->legend;
 		//

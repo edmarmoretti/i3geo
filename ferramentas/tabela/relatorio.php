@@ -42,8 +42,11 @@ if($ext && $ext != ""){
 $layer = $mapa->getlayerbyname($temarel);
 $layer->set("template","none.html");
 $existesel = "nao";
+/*
 if (file_exists($map_file."qy"))
 {$mapa->loadquery($map_file."qy");}
+*/
+carregaquery($map_file,&$layer,&$mapa);
 if ($layer->getNumresults() > 0){$existesel = "sim";}
 if ($existesel == "nao")
 {$layer->querybyrect($mapa->extent);}

@@ -87,6 +87,11 @@ $ext - (opcional) extensão geográfica que será aplicada ao mapa
 	function __construct($map_file,$tema="",$locaplic="",$ext="")
 	{
   		//error_reporting(E_ALL);
+  		if (!function_exists('ms_newMapObj')) {return false;}
+  		if(file_exists($locaplic."/funcoes_gerais.php"))
+  		include_once($locaplic."/funcoes_gerais.php");
+  		else
+  		include_once("funcoes_gerais.php");		
 		$this->qyfile = str_replace(".map",".qy",$map_file);
   		$this->locaplic = $locaplic;
   		$this->mapa = ms_newMapObj($map_file);
@@ -239,10 +244,7 @@ $tipo - Tipo de busca brasil|null
 		$this->layer->setfilter("");
 		//le o arquivo de query se existir e checa se existe seleção para o tema
 		$items = pegaItens($this->layer);
-		$existesel = "nao";
-		if (file_exists($this->qyfile))
-		{$this->mapa->loadquery($this->qyfile);}
-		if ($this->layer->getNumresults() > 0){$existesel = "sim";}
+		$existesel = carregaquery($this->arquivo,&$this->layer,&$this->mapa);
 		if ($existesel == "nao")
 		{$this->layer->querybyrect($this->mapa->extent);}
 		$sopen = $this->layer->open();
@@ -306,8 +308,7 @@ $tipolista - Indica se serão mostrados todos os registros ou apenas os seleciona
 		else
 		{$items[] = $itemtema;}
 		$resultadoFinal[] = array("itens"=>$items);
-		if (file_exists($this->qyfile))
-		{$this->mapa->loadquery($this->qyfile);}
+		carregaquery($this->arquivo,&$this->layer,&$this->mapa);
 		$indxlayer = $this->layer->index;
 		$sopen = $this->layer->open();
 		if($sopen == MS_FAILURE){return "erro";}
@@ -506,10 +507,7 @@ Include:
 		$filtro = $this->layer->getfilterstring();
 		if ($filtro != ""){$this->layer->setfilter("");}
 		//le o arquivo de query se existir e checa se existe sele&ccedil;&atilde;o para o tema
-		$existesel = "nao";
-		if (file_exists($this->qyfile))
-		{$this->mapa->loadquery($this->qyfile);}
-		if ($this->layer->getNumresults() > 0){$existesel = "sim";}
+		$existesel = carregaquery($this->arquivo,&$this->layer,&$this->mapa);
 		if ($existesel == "nao")
 		{$this->layer->queryByrect($this->mapa->extent);}
 		$sopen = $this->layer->open();

@@ -386,21 +386,8 @@ function iniciaDadosGrafico($map_file,$tema,$exclui,$itemclasses,$itemvalores,$t
 		$extatual = $map->extent;
 		$extatual->setextent((min($e[0],$e[2])),(min($e[1],$e[3])),(max($e[0],$e[2])),(max($e[1],$e[3])));
 	}
-	$selecionados = "sim";
-	$qyfile = str_replace(".map",".qy",$map_file);
-	if (file_exists($qyfile))
-	{$map->loadquery($qyfile);}
-	else
-	{$selecionados = "nao";}
 	$layer = $map->getLayerByName($tema);
-	if ($selecionados == "sim")
-	{
-		$layer->open();
-		$res_count = $layer->getNumresults();
-		$layer->close();
-		if ($res_count < 1)
-		{$selecionados = "nao";}	
-	}
+	$selecionados = carregaquery($map_file,&$layer,&$map);	
 	if ($exclui == ""){$exclui = "nulo";}
 	$valores = pegaValoresM($map,$layer,array($itemclasses,$itemvalores),$exclui,$selecionados);
 	$dados = agrupaValores($valores,0,1,$tipo);
@@ -442,21 +429,8 @@ function dadosLinhaDoTempo($map_file,$tema,$ext="")
 		$extatual = $map->extent;
 		$extatual->setextent((min($e[0],$e[2])),(min($e[1],$e[3])),(max($e[0],$e[2])),(max($e[1],$e[3])));
 	}
-	$selecionados = "sim";
-	$qyfile = str_replace(".map",".qy",$map_file);
-	if (file_exists($qyfile))
-	{$map->loadquery($qyfile);}
-	else
-	{$selecionados = "nao";}
 	$layer = $map->getLayerByName($tema);
-	if ($selecionados == "sim")
-	{
-		$layer->open();
-		$res_count = $layer->getNumresults();
-		$layer->close();
-		if ($res_count < 1)
-		{$selecionados = "nao";}	
-	}
+	$selecionados = carregaquery($map_file,&$layer,&$map);
 	if ($exclui == ""){$exclui = "nulo";}
 	//define os itens para pegar os dados
 	$itens = array();

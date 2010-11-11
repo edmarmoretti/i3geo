@@ -104,6 +104,7 @@ $ext - (opcional) extensão geográfica que será aplicada ao mapa
 	{
   		//error_reporting(E_ALL);
 		$this->qyfile = str_replace(".map",".qy",$map_file);
+		$this->arquivo = $map_file;
   		if(file_exists($locaplic."/funcoes_gerais.php"))
   		include_once($locaplic."/funcoes_gerais.php");
   		else
@@ -745,8 +746,7 @@ $nome - nome que será dado a geometria
 		$ext = $this->mapa->extent;
 		$sb = $this->mapa->scalebar;
 		$sb->set("status",MS_OFF);
-		if (file_exists($this->qyfile))
-		{$this->mapa->loadquery($this->qyfile);}
+		carregaquery($this->arquivo,&$this->layer,&$this->mapa);
 		$items = pegaItens($this->layer);
 		$sopen = $this->layer->open();
 		if($sopen == MS_FAILURE){return "erro";}
@@ -970,8 +970,7 @@ Calcula a extensão geográfica dos elementos selecionados de um tema e ajusta o m
 		$extatual = $this->mapa->extent;
 		$prjMapa = "";
 		$prjTema = "";
-		if (file_exists($this->qyfile))
-		{$this->mapa->loadquery($this->qyfile);}
+		carregaquery($this->arquivo,&$this->layer,&$this->mapa);
 		$sopen = $this->layer->open();
 		if($sopen == MS_FAILURE){return "erro";}
 		$res_count = $this->layer->getNumresults();

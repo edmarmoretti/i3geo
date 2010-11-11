@@ -960,10 +960,7 @@ $locaplic - Localização do I3geo.
 		$nomeshp = $this->diretorio."/".$nomefinal;
 		//pega os shapes selecionados
 		$itemspt = pegaItens($layerPt);
-		$existesel = "nao";
-		if (file_exists($this->qyfile))
-		{$this->mapa->loadquery($this->qyfile);}
-		if ($layerPt->getNumresults() > 0){$existesel = "sim";}
+		$existesel = carregaquery($this->arquivo,&$this->layer,&$this->mapa);
 		if ($existesel == "nao")
 		{
 			if($layerPt->getProjection() == "" )
@@ -1111,9 +1108,8 @@ function distanciaptpt($temaorigem,$temadestino,$temaoverlay,$locaplic,$itemorig
 	//define o nome do novo shapefile que será criado
 	$nomefinal = nomeRandomico();
 	$nomeshp = $this->diretorio."/".$nomefinal;
-	if (file_exists($this->qyfile))
-	{$this->mapa->loadquery($this->qyfile);}
-	else
+	$existesel = carregaquery($this->arquivo,&$this->layer,&$this->mapa);
+	if ($existesel == "nao")
 	{return "errox";}
 	$layerorigem = $this->mapa->getlayerbyname($temaorigem);
 	$layerdestino = $this->mapa->getlayerbyname($temadestino);
@@ -1237,8 +1233,7 @@ nome do layer criado com o buffer.
 		$nomebuffer = nomeRandomico();
 		$nomeshp = $this->diretorio."/".$nomebuffer;
 		//pega os shapes selecionados
-		if (file_exists($this->qyfile))
-		{$this->mapa->loadquery($this->qyfile);}
+		carregaquery($this->arquivo,&$this->layer,&$this->mapa);
 		$sopen = $this->layer->open();
 		if($sopen == MS_FAILURE){return "erro";}
 		$items = pegaItens($this->layer);
@@ -1349,8 +1344,7 @@ $locaplic - Localização do I3geo.
 		$nomeCentroides = nomeRandomico();
 		$nomeshp = $this->diretorio."/".$nomeCentroides;
 		//pega os shapes selecionados
-		if (file_exists($this->qyfile))
-		{$this->mapa->loadquery($this->qyfile);}
+		carregaquery($this->arquivo,&$this->layer,&$this->mapa);
 		$sopen = $this->layer->open();
 		if($sopen == MS_FAILURE){return "erro";}
 		$items = pegaItens($this->layer);
@@ -1923,8 +1917,7 @@ Salva o mapa acrescentando um novo layer com o resultado.
 		else	
 		include_once "../pacotes/phpxbase/api_conversion.php";
 		//define o nome do novo shapefile que será criado
-		if (file_exists($this->qyfile))
-		{$this->mapa->loadquery($this->qyfile);}
+		carregaquery($this->arquivo,&$this->layer,&$this->mapa);
 		$sopen = $this->layer->open();
 		if($sopen == MS_FAILURE){return "erro";}
 		$res_count = $this->layer->getNumresults();
@@ -2043,8 +2036,7 @@ $locaplic - Localização do I3geo
 		else	
 		include_once "../pacotes/phpxbase/api_conversion.php";
 		//define o nome do novo shapefile que será criado
-		if (file_exists($this->qyfile))
-		{$this->mapa->loadquery($this->qyfile);}
+		carregaquery($this->arquivo,&$this->layer,&$this->mapa);
 		$sopen = $this->layer->open();
 		if($sopen == MS_FAILURE){return "erro";}
 		$res_count = $this->layer->getNumresults();
@@ -2435,10 +2427,7 @@ function gravaCoordenadasPt($tema,$limitepontos="TRUE",$extendelimite)
 		$nomefinal = nomeRandomico();
 		$nomearq = $this->diretorio."/".$nomefinal;
 		$itemspt = pegaItens($layerPt);
-		$existesel = "nao";
-		if (file_exists($this->qyfile))
-		{$this->mapa->loadquery($this->qyfile);}
-		if ($layerPt->getNumresults() > 0){$existesel = "sim";}
+		$existesel = carregaquery($this->arquivo,&$this->layer,&$this->mapa);
 		if ($existesel == "nao")
 		{
 			if($layerPt->getProjection() == "" )
