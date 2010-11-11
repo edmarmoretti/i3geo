@@ -166,15 +166,19 @@ string - javascript com os parametros
 	function parametrosTemas()
 	{
 		$existesel = false;
-		$qy = file_exists($this->qyfile);
+		$dir = dirname($this->arquivo);
+		//$qy = file_exists($this->qyfile);
 		foreach($this->layers as $l)
 		{$l->set("template","none.htm");}
 
-		if ($qy)
-		{$this->mapa->loadquery($this->qyfile);}
+		//if ($qy)
+		//{$this->mapa->loadquery($this->qyfile);}
 		foreach ($this->layers as $oLayer)
 		{
 			$sel = "nao";
+			if(file_exists($dir."/".$oLayer->name.".php"))
+			{$sel = "sim";$existesel = true;}
+			/*
 			if ($qy) //verifica se existe alguma selecao no tema
 			{
 				$sopen = $oLayer->open();
@@ -185,6 +189,7 @@ string - javascript com os parametros
 					if ($res_count > 0){$sel = "sim";$existesel = true;}
 				}
 			}
+			*/
 			$escondido = $oLayer->getmetadata("escondido");
 			if($escondido == "")
 			{$escondido = "nao";}

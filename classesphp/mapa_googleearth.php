@@ -93,11 +93,28 @@ function retornaWms(){
 	}
 	$mapa = ms_newMapObj($_GET["map"]);
 	$mapa->setProjection("init=epsg:4326");
+	/*
 	$qyfile = str_replace(".map",".qy",$_GET["map"]);
 	$qy = file_exists($qyfile);
 	if($qy)
 	{$mapa->loadquery($qyfile);}
-
+	*/
+	//
+	//resolve o problema da seleção na versão nova do mapserver
+	//
+	$qyfile = dirname($_GET["map"])."/".$_GET["layer"].".php";
+	$qy = file_exists($qyfile);
+	if($qy)
+	{
+		$l = $mapa->getLayerByname($_GET["layer"]);
+		$indxlayer = $l->index;
+		$handle = fopen ($qyfile, "r");
+		$conteudo = fread ($handle, filesize ($qyfile));
+		fclose ($handle);
+		$shp = unserialize($conteudo);	
+		foreach ($shp as $indx)
+		{$mapa->querybyindex($indxlayer,-1,$indx,MS_TRUE);}
+	}	
 	$layersNames = $mapa->getalllayernames();
 	foreach ($layersNames as $layerName)
 	{

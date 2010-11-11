@@ -586,16 +586,19 @@ Limpa a seleção do tema.
 */
 	function selecaoLimpa()
 	{
+		//apaga o arquivo do i3geo com os ids selecionados
 		if(file_exists($this->qyfileTema))
 		{unlink($this->qyfileTema);}
 		if ($this->nome != "") //limpa de um tema
 		{
 			if(!$this->layer){return "erro";}
 			if (file_exists($this->qyfile))
-			{$this->mapa->loadquery($this->qyfile);}
-			$indxlayer = $this->layer->index;
-			$this->mapa->freequery($indxlayer);
-			$this->mapa->savequery($this->qyfile);
+			{
+				$this->mapa->loadquery($this->qyfile);
+				$indxlayer = $this->layer->index;
+				$this->mapa->freequery($indxlayer);
+				$this->mapa->savequery($this->qyfile);
+			}
 		}
 		else //limpa de todos os temas
 		{
@@ -668,6 +671,7 @@ $shp_atual - Indices dos elementos já selecionados.
 		$this->mapa->freequery($indxlayer);
 		foreach ($shp as $indx)
 		{@$this->mapa->querybyindex($indxlayer,-1,$indx,MS_TRUE);}
+		//echo $this->layer->getNumresults();
 		$this->mapa->savequery($this->qyfile);
 		$this->serializeQ($this->qyfileTema,$shp);
 		return("ok");
@@ -865,7 +869,7 @@ $ext - coordenadas separadas por espaços no estilo xmin ymin xmax ymax
 /*
 function unserializeQ
 
-Deserializa um arquivo de geometrias.
+Deserializa um arquivo.
 
 Parametros:
 $arquivo - arquivo que será processado
@@ -880,7 +884,7 @@ $arquivo - arquivo que será processado
 /*
 function serializeQ
 
-Deserializa um arquivo de geometrias.
+Serializa um arquivo.
 
 Parametros:
 $arquivo - arquivo que será processado
