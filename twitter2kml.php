@@ -1,11 +1,82 @@
 <?php
-//exemplo: http://localhost/i3geo/twitter2kml.php?q=twit2kml&rpp=20
+/*
+Title: twitter2geo.php
+
+Converte mensagens registradas no twitter, para um determinado TAG, em um arquivo georreferenciado
+
+As mensagens são consideradas apenas qd possuírem as TAGs #x ou #y, ou então, #lat ou #long
+
+São aceitos todos os parâmetros de busca da API do Twitter, como definidos em http://search.twitter.com/
+
+Licenca
+
+i3Geo Interface Integrada de Ferramentas de Geoprocessamento para Internet
+
+Direitos Autorais Reservados (c) 2006 Ministério do Meio Ambiente Brasil
+Desenvolvedor: Edmar Moretti edmar.moretti@mma.gov.br
+
+Este programa é software livre; você pode redistribuí-lo
+e/ou modificá-lo sob os termos da Licença Pública Geral
+GNU conforme publicada pela Free Software Foundation;
+tanto a versão 2 da Licença.
+Este programa é distribuído na expectativa de que seja útil,
+porém, SEM NENHUMA GARANTIA; nem mesmo a garantia implícita
+de COMERCIABILIDADE OU ADEQUAÇÃO A UMA FINALIDADE ESPECÍFICA.
+Consulte a Licença Pública Geral do GNU para mais detalhes.
+Você deve ter recebido uma cópia da Licença Pública Geral do
+GNU junto com este programa; se não, escreva para a
+Free Software Foundation, Inc., no endereço
+59 Temple Street, Suite 330, Boston, MA 02111-1307 USA.
+
+Arquivo: i3geo/twitter2geo.php
+
+Parametros:
+
+ajuda - se for definida na URL, mostra uma ajuda ao usuário
+
+tipo - tipo de arquivo que será retornado
+
+Valores:
+
+	twitter - retona os resultados originais encontrados
+	
+	kml - retorna os dados no formato kml
+
+Exemplos:
+
+twitter2geo.php?ajuda
+
+twitter2geo.php?tipo=kml&q=twit2kml
+*/
 include("classesphp/carrega_ext.php");
 /*
 Código de consulta à API adaptado de http://www.reynoldsftw.com/2009/02/using-jquery-php-ajax-with-the-twitter-api/
 */
 $par = array_merge($_POST,$_GET);
 $chaves = array_keys($par);
+
+if($par["ajuda"] || !$par["tipo"]){
+	echo "<pre>Title: twitter2geo.php
+		Converte mensagens registradas no twitter, para um determinado TAG, em um arquivo georreferenciado
+		As mensagens são consideradas apenas qd possuírem as TAGs #x ou #y, ou então, #lat ou #long
+		São aceitos todos os parâmetros de busca da API do Twitter, como definidos em http://search.twitter.com/
+
+		Parametros:
+
+		ajuda - se for definida na URL, mostra uma ajuda ao usuário
+		tipo - tipo de arquivo que será retornado
+
+		Valores:
+
+		twitter - retona os resultados originais encontrados		
+		kml - retorna os dados no formato kml
+
+		Exemplos:
+
+		twitter2geo.php?ajuda
+		twitter2geo.php?tipo=kml&q=twit2kml";
+		exit;
+}
 $query = array();
 foreach($chaves as $chave)
 {$query[] = $chave."=".$par[$chave];}
@@ -21,6 +92,11 @@ curl_setopt($curl, CURLOPT_RETURNTRANSFER, 1);
 $result = curl_exec ($curl);
 curl_close ($curl);
 $result = fixEncoding($result);
+if(strtolower($par["tipo"]) == "twitter"){
+	//echo header("Content-type: application/json");
+	echo $result;
+	exit;
+}
 $result = json_decode( $result, true );
 $kml = '<?xml version="1.0" encoding="UTF-8"?><kml xmlns="http://earth.google.com/kml/2.0"><Document><name>twitter</name>';
 $kml .= '<Folder><description>'.$q.'</description><name>'.$q.'</name><open>1</open>';
