@@ -38,7 +38,7 @@ if (isset($_FILES['i3GEOuploadgpx']['name']))
 	if($status == 1)
 	{
 		echo "<p class='paragrafo' >Arquivo enviado. Adicionando tema...</p>";
-		$mapt = ms_newMapObj($temasaplic."/novotema.map");
+		$mapt = ms_newMapObj($locaplic."/aplicmap/novotema.map");
 		$novolayer = $mapt->getLayerByName("novotema");
 		$tipos = array("waypoints","routes","tracks","route_points","track_points");
 		foreach($tipos as $tipo){

@@ -103,7 +103,6 @@ if (strtoupper(substr(PHP_OS, 0, 3) == 'WIN'))
 	Tipo:
 	{array}
 	*/
-	
 	$navegadoresLocais = array(
 							array(
 							"ip"=>"127.0.0.1",
@@ -142,25 +141,6 @@ if (strtoupper(substr(PHP_OS, 0, 3) == 'WIN'))
 	{string}
 	*/
 	$locaplic = "c:/ms4w/apache/htdocs/i3geo";
-	/*
-	Variable: temasdir
-	
-	Caminho completo do diretório onde ficam os arquivos .map correspondentes aos temas disponíveis
-	Esta variável não está implementada completamente. Os mapfiles devem ficar obrigatoriamente no diretório temas
-	
-	Tipo:
-	{string}
-	*/
-	$temasdir = $locaplic."/temas"; //"c:/ms4w/apache/htdocs/i3geo/temas";
-	/*
-	Variable: temasaplic
-	
-	Caminho completo onde ficam os arquivos .map específicos do I3Geo
-	
-	Tipo:
-	{string}
-	*/
-	$temasaplic = $locaplic."/aplicmap";//"c:\ms4w\apache\htdocs\i3geo\aplicmap";
 	/*
 	Variable: locmapserv
 	
@@ -235,17 +215,6 @@ if (strtoupper(substr(PHP_OS, 0, 3) == 'WIN'))
 	{string}
 	*/
 	$R_path = "c:/r/win/bin/R.exe";
-	/*
-	Depreciado - não é mais necessário na versão 5.x do Mapserver
-	string de conexão com o banco de dados postgis utilizada para reallização de cálculos
-	se não existir, deixe em branco
-	*/
-	$postgis_con = "";
-	/*
-	Depreciado - não é mais necessário na versão 5.x do Mapserver
-	srid utilizado nos cálculos que exigem projeção equivalente
-	*/
-	$srid_area = 1;
 	/*
 	Variable: postgis_mapa
 	
@@ -385,16 +354,12 @@ else //se for linux
 {
 	$editores = array("127.0.0.1","localhost");
 	$dir_tmp = "/var/tmp/ms_tmp";
-	$temasdir = "/opt/www/html/i3geo/temas";
-	$temasaplic = "/opt/www/html/i3geo/aplicmap";
 	$locmapserv = "/cgi-bin/mapserv";
 	$locaplic = "/opt/www/html/i3geo";
 	$locsistemas= "";//"http://dsvmapas.mma.gov.br/i3geo/menutemas/sistemas.xml";
 	$locidentifica = "";//"http://dsvmapas.mma.gov.br/i3geo/menutemas/identifica.xml";
 	$locmapas = "";//"http://dsvmapas.mma.gov.br/abremapa.php?id=xml";
 	$R_path = "R";//se vc não instalou o R no seu servidor, tente o endereço $R_path = $locaplic."/pacotes/r/linux/r";
-	$postgis_con = "";
-	$srid_area = 1;
 	$postgis_mapa = "";
 	$menutemas = ""; 
 	$utilizacgi = "nao";

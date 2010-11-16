@@ -108,7 +108,7 @@ if (isset($_FILES['i3GEOuploaddbffile']['name']))
 				}
 			}
 			$shapefileObj->free();	
-			$mapt = ms_newMapObj($temasaplic."/novotema.map");
+			$mapt = ms_newMapObj($locaplic."/aplicmap/novotema.map");
 			$novolayer = $mapt->getLayerByName("novotema");
 			$novolayer->set("data",$nomeshp);
 			$novolayer->set("name",basename($nomeshp));

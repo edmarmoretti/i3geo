@@ -43,7 +43,7 @@ if (isset($_FILES['i3GEOuploadshp']['name']))
 	if($status == 1)
 	{
 		echo "<p class='paragrafo' >Arquivo enviado. Adicionando tema...</p>";
-		$mapt = ms_newMapObj($temasaplic."/novotema.map");
+		$mapt = ms_newMapObj($locaplic."/aplicmap/novotema.map");
 		$novolayer = $mapt->getLayerByName("novotema");
 		$novolayer->set("data",$dirmap."/".$_FILES['i3GEOuploadshp']['name']);
 		$novolayer->set("name",$_FILES['i3GEOuploadshp']['name']);

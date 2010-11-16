@@ -33,12 +33,12 @@ if (!function_exists('ms_GetVersion'))
 $maptemp = "";
 if ($temaz=="")
 {
-	if (file_exists($temasaplic."/".$map3d))
+	if (file_exists($locaplic."/aplicmap/".$map3d))
 	{
 	if (strtoupper(substr(PHP_OS, 0, 3) == 'WIN'))
-		{$maptemp = ms_newMapObj($temasaplic."\\".$map3d);}
+		{$maptemp = ms_newMapObj($locaplic."\\aplicmap\\".$map3d);}
 		else
-		{$maptemp = ms_newMapObj($temasaplic."/".$map3d);}
+		{$maptemp = ms_newMapObj($locaplic."/aplicmap".$map3d);}
 	}
 	if (file_exists($map3d))
 	{$maptemp = ms_newMapObj($map3d);}

@@ -246,34 +246,18 @@ else
 }
 function calculaarea($geo)
 {
-	global $postgis_con,$srid_area;
 	$v = versao();
 	if (($v["principal"] != 5) && ($postgis_con == ""))
-	{return ("erro. Nao foi definida a conexao com o Postgis.");}
-	if ($v["principal"] != 5)
-	{
-		$pgconn = pg_connect($postgis_con);
-		$g = $geo->towkt();
-		$sql = "select area(transform( GeomFromText('$g',4291),$srid_area))::float as aream";
-		//echo $sql."<br>";
-		$result=pg_query($pgconn, $sql);
-		pg_close($pgconn);	
-		$calculo = pg_fetch_all($result);
-		return $calculo[0]["aream"] / 10000;
-	}
-	else
-	{
-		$g = $geo->towkt();
-		$shape = ms_shapeObjFromWkt($g);
-		$rect = $shape->bounds;
-		$projInObj = ms_newprojectionobj("proj=latlong");
-		$projOutObj = ms_newprojectionobj("proj=laea,lat_0=".$rect->miny.",lon_0=".$rect->minx.",x_0=500000,y_0=10000000,ellps=GRS67,units=m,no_defs");					
-		$shape->project($projInObj, $projOutObj);
-		$s = $shape->towkt();
-		$shape = ms_shapeObjFromWkt($s);
-		$area = $shape->getArea();
-		return $area / 10000;
-	}
+	{return ("erro. É necessária uma versão maior que 5.0 do Mapserver.");}
+	$g = $geo->towkt();
+	$shape = ms_shapeObjFromWkt($g);
+	$rect = $shape->bounds;
+	$projInObj = ms_newprojectionobj("proj=latlong");
+	$projOutObj = ms_newprojectionobj("proj=laea,lat_0=".$rect->miny.",lon_0=".$rect->minx.",x_0=500000,y_0=10000000,ellps=GRS67,units=m,no_defs");					
+	$shape->project($projInObj, $projOutObj);
+	$s = $shape->towkt();
+	$shape = ms_shapeObjFromWkt($s);
+	$area = $shape->getArea();
+	return $area / 10000;
 }
-
 ?>

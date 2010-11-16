@@ -68,8 +68,6 @@ $locmapas - Variável definida no arquivo ms_configura.php que indica se a guia d
 
 $locmapserv - Variável definida no arquivo ms_configura.php que indica nome do mapserver cgi.
 
-$postgis_con - Variável definida no arquivo ms_configura.php que indica qual conexão postgis deve ser utilizada (algumas funções de análise utilizam essa conexão, se existir)
-
 $kmlurl - url de um arquivo kml que será inserido no mapa. Válido para a interface google maps
 
 Retorno:
@@ -104,7 +102,7 @@ Retorno:
 */
 function iniciaMapa()
 {
-	global $interfacePadrao,$mensagemInicia,$kmlurl,$tituloInstituicao,$tempo,$navegadoresLocais,$locaplic,$embedLegenda,$map_file,$mapext,$w,$h,$locsistemas,$locidentifica,$R_path,$locmapas,$locmapserv,$postgis_con,$utilizacgi,$expoeMapfile,$interface;
+	global $interfacePadrao,$mensagemInicia,$kmlurl,$tituloInstituicao,$tempo,$navegadoresLocais,$locaplic,$embedLegenda,$map_file,$mapext,$w,$h,$locsistemas,$locidentifica,$R_path,$locmapas,$locmapserv,$utilizacgi,$expoeMapfile,$interface;
 	if(!isset($kmlurl))
 	{$kmlurl = "";}
 	error_reporting(E_ALL);

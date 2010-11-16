@@ -51,8 +51,6 @@ cp - o resultado da operação será retornado em um objeto CPAINT.
 Variáveis de Seção:
 
 dir_tmp - diretório, no servidor, temporário utilizado pelo I3Geo, exemplo: c:/ms4w/tmp/ms_tmp
-temasdir - diretório, no servidor, onde ficam os arquivos map_file de cada tema, exemplo: c:/ms4w/apache/htdocs/i3geo/temas
-temasaplic - diretório, no servidor, onde ficam os arquivos de inicialização, exemplo: c:\ms4w\apache\htdocs\i3geo\aplicmap
 locmapserv - localização, no servidor, do CGI, exemplo: /cgi-bin/mapserv.exe
 locaplic - localização, no servidor, do I3Geo, exemplo: c:/ms4w/apache/htdocs/i3geo
 locsistemas - localização do xml com a llista de temas, exemplo: /menutemas/sistemas.xml

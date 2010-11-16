@@ -48,7 +48,6 @@ function initMenu()
 	{ mensagem: "Diretório (caminho absoluto) utilizado para armazenar os mapfiles temporários e outros arquivos utilizados durante a operação do i3geo. Em sistemas Linux, você pode criar um link simbólico para esse diretório.",cabeca: "Diretório temporário", variavel: "$dir_tmp"},
 	{ mensagem: "Chave utilizada pelo Google Maps",cabeca: "Google maps", variavel: "$googleApiKey"},
 	{ mensagem: "Local no servidor (caminho absoluto) onde o i3geo está armazenado.",cabeca: "Localização do i3geo", variavel: "$locaplic"},
-	{ mensagem: "Diretório onde ficam os arquivos mapfiles dos temas disponíveis para uso na guia de adição de temas.",cabeca: "Diretório com os temas", variavel: "$temasdir"},
 	{ mensagem: "Diretório onde ficam armazenados os arquivos de template HTML e mapfiles iniciais",cabeca: "Diretório aplicmap", variavel: "$temasaplic"},
 	{ mensagem: "Onde está armazenado o mapserv CGI no servidor",cabeca: "Mapserv CGI", variavel: "$locmapserv"},
 	{ mensagem: "Endereço do arquivo XML ou programa PHP que gera o xml com a lista de sistemas que são incluídos na guia de adição de temas. Se você deixar em branco, será utilizado o banco de dados administrativo ao invés do arquivo XML em disco.",cabeca: "XML sistemas", variavel: "$locsistemas"},

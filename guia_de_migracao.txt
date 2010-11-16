@@ -6,7 +6,7 @@ Para a versão 4.5
 	i3geo/aplicmap para o diretório i3geo/interface. Caso existam links apontando diretamente para
 	esses arquivos, vc pode simplesmente copiar os arquivos existentes na nova pasta para a antiga.
 
-
+	As variáveis de configuração $temasdir e $temasaplic foram removidas. Em seu lugar, utilize $locaplic
 
 -------------------------------------------------------------------------------------------------
 Para a versão 4.4

@@ -26,7 +26,7 @@ Licenca:
 
 GPL2
 
-I3Geo Interface Integrada de Ferramentas de Geoprocessamento para Internet
+i3Geo Interface Integrada de Ferramentas de Geoprocessamento para Internet
 
 Direitos Autorais Reservados (c) 2006 Ministério do Meio Ambiente Brasil
 Desenvolvedor: Edmar Moretti edmar.moretti@mma.gov.br
@@ -82,8 +82,6 @@ echo "Incluindo...\n<br>";
 include ("ms_configura.php");
 echo "<b>$mensagemInicia </b> \n";
 echo "dir_tmp = $dir_tmp \n";
-echo "temasdir = $temasdir \n";
-echo "temasaplic = $temasaplic \n";
 echo "locmapserv = $locmapserv \n";
 echo "locaplic = $locaplic \n";
 echo "locsistemas = $locsistemas \n";

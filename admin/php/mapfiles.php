@@ -72,7 +72,7 @@ switch (strtoupper($funcao))
 		$par = array();
 		foreach ($vs as $v)
 		{
-			$handle = fopen ($temasaplic."/".$mapfile.".map", "r");
+			$handle = fopen ($locaplic."/aplicmap/".$mapfile.".map", "r");
 			while (!feof ($handle)) {
 				$buffer = fgets($handle);
 				if(!(stristr($buffer, $v) === FALSE))
@@ -96,8 +96,8 @@ switch (strtoupper($funcao))
 		if(verificaEditores($editores) == "nao")
 		{echo "Vc nao e um editor cadastrado. Apenas os editores definidos em i3geo/ms_configura.php podem acessar o sistema de administracao.";exit;}
 		$cp->register('restauraConfigura');
-		unlink($temasaplic."/".$mapfile.".map");
-		copy ($temasaplic."/".$mapfile.".default",$temasaplic."/".$mapfile.".map");
+		unlink($locaplic."/aplicmap/".$mapfile.".map");
+		copy ($locaplic."/aplicmap/".$mapfile.".default",$locaplic."/aplicmap/".$mapfile.".map");
 		$cp->set_data("ok");
 		$cp->return_data();
 	break;
@@ -119,7 +119,7 @@ switch (strtoupper($funcao))
 	case "SALVACONFIGURA":
 		if(verificaEditores($editores) == "nao")
 		{echo "Vc nao e um editor cadastrado. Apenas os editores definidos em i3geo/ms_configura.php podem acessar o sistema de administracao.";exit;}
-		salvaConfigura($variavel,$valor,$mapfile,$temasaplic);
+		salvaConfigura($variavel,$valor,$mapfile,$locaplic);
 		retornaJSON("ok");
 		exit;
 	break;
@@ -127,9 +127,9 @@ switch (strtoupper($funcao))
 /*
 Salva um novo valor de uma variável no ms_configura.php
 */
-function salvaConfigura($variavel,$valor,$mapfile,$temasaplic)
+function salvaConfigura($variavel,$valor,$mapfile,$locaplic)
 {
-	$handle = fopen ($temasaplic."/".$mapfile.".map", "r");
+	$handle = fopen ($locaplic."/aplicmap/".$mapfile.".map", "r");
 	$linhas = array();
 	$valor = str_replace("\\\"",'"',$valor);
 	while (!feof ($handle)) {
@@ -151,8 +151,8 @@ function salvaConfigura($variavel,$valor,$mapfile,$temasaplic)
 		$linhas[] = $buffer;
 	}
 	fclose ($handle);
-	unlink($temasaplic."/".$mapfile.".map");
-	$handle = fopen ($temasaplic."/".$mapfile.".map", "w");
+	unlink($locaplic."/aplicmap/".$mapfile.".map");
+	$handle = fopen ($locaplic."/aplicmap/".$mapfile.".map", "w");
 	foreach ($linhas as $linha)
 	{
 		fwrite($handle, $linha);

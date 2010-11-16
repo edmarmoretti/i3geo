@@ -2217,6 +2217,7 @@ function: calculaGeometrias
 Funções de cálculo de geometrias da ferramenta Geometrias.
 
 parameters:
+
 $dir_tmp - Diretório temporário do mapserver
 
 $imgdir - Diretório das imagens do mapa atual
@@ -2225,7 +2226,7 @@ $lista - Arquivos com as geometrias
 
 $operacao - Tipo de análise.
 */
-	function calculaGeometrias($dir_tmp,$imgdir,$lista,$operacao,$postgis_con,$srid_area)
+	function calculaGeometrias($dir_tmp,$imgdir,$lista,$operacao)
 	{
 		//error_reporting(E_ALL);
 		$lista = explode(",",$lista);
@@ -2238,72 +2239,37 @@ $operacao - Tipo de análise.
 			//se for anterior a 5, utiliza a conexão com o postgis para fazer o processamento dos daods
 			//
             $v = versao();
-			if (($v["principal"] != 5) && ($postgis_con == ""))
-			{return ("erro. Nao foi definida a conexao com o Postgis.");}
-			if ($v["principal"] != 5)
+			if (($v["principal"] != 5))
+			{return ("erro. E necessario uma versão maior que 5.0 do Mapserver.");}
+			foreach ($geos["dados"] as &$geo)
 			{
-				$pgconn = pg_connect($postgis_con);
-				foreach ($geos["dados"] as &$geo)
+				$g = $geo["wkt"];
+				switch ($operacao)
 				{
-					$g = $geo["wkt"];
-					switch ($operacao)
-					{
-						case "perimetro":
-							$sql = "select perimeter(transform( GeomFromText('$g',4291),$srid_area))::float as perim";
-							$result=pg_query($pgconn, $sql);
-							pg_close($pgconn);	
-							$calculo = pg_fetch_all($result);
-							$geo["valores"][] = array("item"=>"P_perim_metros","valor"=>$calculo[0]["perim"]);
-						break;
-						case "area":
-							$sql = "select area(transform( GeomFromText('$g',4291),$srid_area))::float as aream";
-							$result=pg_query($pgconn, $sql);
-							pg_close($pgconn);	
-							$calculo = pg_fetch_all($result);
-							$geo["valores"][] = array("item"=>"P_area_metros","valor"=>$calculo[0]["aream"]);
-						break;
-						case "comprimento":
-							$sql = "select length(transform( GeomFromText('$g',4291),$srid_area))::float as compm";
-							$result=pg_query($pgconn, $sql);
-							pg_close($pgconn);	
-							$calculo = pg_fetch_all($result);
-							$geo["valores"][] = array("item"=>"P_compr_metros","valor"=>$calculo[0]["compm"]);	
-						break;
-					}
-				}
-			}
-			else
-			{
-				foreach ($geos["dados"] as &$geo)
-				{
-					$g = $geo["wkt"];
-					switch ($operacao)
-					{
-						case "perimetro":
-							$shape = ms_shapeObjFromWkt($g);
-							$rect = $shape->bounds;
-							$projInObj = ms_newprojectionobj("proj=latlong");
-							$projOutObj = ms_newprojectionobj("proj=poly,ellps=GRS67,lat_0=".$rect->miny.",lon_0=".$rect->minx.",x_0=5000000,y_0=10000000,units=m");
-							$shape->project($projInObj, $projOutObj);
-							$s = $shape->towkt();
-							$shape = ms_shapeObjFromWkt($s);
-							$area = $shape->getLength();
-							$geo["valores"][] = array("item"=>"P_perim_metros","valor"=>$area);
-						break;
-						case "area":
-							$shape = ms_shapeObjFromWkt($g);
-							$rect = $shape->bounds;
-							$projInObj = ms_newprojectionobj("proj=latlong");
-							$projOutObj = ms_newprojectionobj("proj=laea,lat_0=".$rect->miny.",lon_0=".$rect->minx.",x_0=500000,y_0=10000000,ellps=GRS67,units=m,no_defs");					
-							$shape->project($projInObj, $projOutObj);
-							$s = $shape->towkt();
-							$shape = ms_shapeObjFromWkt($s);
-							$area = $shape->getArea();
-							$geo["valores"][] = array("item"=>"P_area_metros","valor"=>$area);
-						break;
-						case "comprimento":
-						break;
-					}
+					case "perimetro":
+						$shape = ms_shapeObjFromWkt($g);
+						$rect = $shape->bounds;
+						$projInObj = ms_newprojectionobj("proj=latlong");
+						$projOutObj = ms_newprojectionobj("proj=poly,ellps=GRS67,lat_0=".$rect->miny.",lon_0=".$rect->minx.",x_0=5000000,y_0=10000000,units=m");
+						$shape->project($projInObj, $projOutObj);
+						$s = $shape->towkt();
+						$shape = ms_shapeObjFromWkt($s);
+						$area = $shape->getLength();
+						$geo["valores"][] = array("item"=>"P_perim_metros","valor"=>$area);
+					break;
+					case "area":
+						$shape = ms_shapeObjFromWkt($g);
+						$rect = $shape->bounds;
+						$projInObj = ms_newprojectionobj("proj=latlong");
+						$projOutObj = ms_newprojectionobj("proj=laea,lat_0=".$rect->miny.",lon_0=".$rect->minx.",x_0=500000,y_0=10000000,ellps=GRS67,units=m,no_defs");					
+						$shape->project($projInObj, $projOutObj);
+						$s = $shape->towkt();
+						$shape = ms_shapeObjFromWkt($s);
+						$area = $shape->getArea();
+						$geo["valores"][] = array("item"=>"P_area_metros","valor"=>$area);
+					break;
+					case "comprimento":
+					break;
 				}
 			}
 			$this->serializeGeo($dir.$l,$geos);
@@ -2327,8 +2293,6 @@ $lista - Nomes, sem o caminho, dos arquivos com as geometrias, separados por vír
 	{
 		$lista = explode(",",$lista);
 		$dir = $dir_tmp."/".$imgdir."/";
-		//if ($postgis_con == "")
-		//{return ("erro. Nao foi definida a conexao com o Postgis.");}
 		$shapes = array();
 		$valoresoriginais = array();
 		foreach ($lista as $l)

@@ -1,6 +1,6 @@
 <?php
 /*
-Title: Inicializa o I3Geo via URL ms_criamapa.php
+Title: Inicializa o i3Geo via URL ms_criamapa.php
 
 Cria os diretórios temporários para o i3Geo e o mapfile que será utilizado no mapa. Esse é o programa principal de inicialização, podendo ser chamado diretamente pelo navegador web.
 
@@ -168,8 +168,6 @@ As variáveis vêm do arquivo ms_configura.php e são armazenadas em uma seção com 
 */
 if (!isset($mapext)){$mapext="";}
 $dir_tmp_ = $dir_tmp;
-$temasdir_ = $temasdir;
-$temasaplic_ = $temasaplic;
 $locmapserv_ = $locmapserv;
 $locaplic_ = $locaplic;
 $locsistemas_ = $locsistemas;
@@ -177,8 +175,6 @@ $locidentifica_ = $locidentifica;
 $R_path_ = $R_path;
 $mapext_ = $mapext;
 $locmapas_ = $locmapas;
-$postgis_con_ = $postgis_con;
-$srid_area_ = $srid_area;
 $debug_ = $debug;
 $ler_extensoes_ = $ler_extensoes;
 $postgis_mapa_ = $postgis_mapa;
@@ -224,8 +220,6 @@ Aqui é necessário verificar se $executa está definido
 isso pq algumas aplicações podem ser prejudicadas caso o aguarde seja mostrado
 */
 $_SESSION["dir_tmp"] = $dir_tmp_;
-$_SESSION["temasdir"] = $temasdir_;
-$_SESSION["temasaplic"] = $temasaplic_;
 $_SESSION["locmapserv"] = $locmapserv_;
 $_SESSION["locaplic"] = $locaplic_;
 $_SESSION["locsistemas"] = $locsistemas_;
@@ -233,8 +227,6 @@ $_SESSION["locidentifica"] = $locidentifica_;
 $_SESSION["R_path"] = $R_path_;
 $_SESSION["mapext"] = $mapext_;
 $_SESSION["locmapas"] = $locmapas_;
-$_SESSION["postgis_con"] = $postgis_con_;
-$_SESSION["srid_area"] = $srid_area_;
 $_SESSION["debug"] = $debug_;
 $_SESSION["ler_extensoes"] = $ler_extensoes_;
 $_SESSION["postgis_mapa"] = $postgis_mapa_;
@@ -295,8 +287,8 @@ if (file_exists($base))
 }
 else
 {
-	$map = ms_newMapObj($temasaplic."/".$base.".map");
-	$mapn = ms_newMapObj($temasaplic."/".$base.".map");
+	$map = ms_newMapObj($locaplic."/aplicmap/".$base.".map");
+	$mapn = ms_newMapObj($locaplic."/aplicmap/".$base.".map");
 }
 /*
  Parâmetros adicionais.
@@ -524,7 +516,11 @@ Inclui os temas definidos na variável $temasa
 */
 function incluiTemasIniciais()
 {
-	global $temasa,$estadosl,$temasaplic,$temasdir,$mapn;
+	global $temasa,$estadosl,$mapn,$locaplic;
+	if (strtoupper(substr(PHP_OS, 0, 3)) == 'WIN')
+	{$temasdir = $locaplic."\\temas";}
+	else
+	{$temasdir = $locaplic."/temas";}
 	if (!isset($temasa)){$temasa = $estadosl;}
 	$temasa = str_replace(','," ",$temasa);
 	$alayers = explode(" ",$temasa);
@@ -537,10 +533,10 @@ function incluiTemasIniciais()
 		{continue;}
 		if (file_exists($arqt))
 		{$arqtemp = $arqt;}
-		if ((strtoupper(substr(PHP_OS, 0, 3) == 'WIN')) && (file_exists($temasaplic."\\".$arqt.".map")))
-		{$arqtemp = $temasaplic."\\".$arqt.".map";}
-		elseif (file_exists($temasaplic."/".$arqt.".map"))
-		{$arqtemp = $temasaplic."/".$arqt.".map";}
+		if ((strtoupper(substr(PHP_OS, 0, 3) == 'WIN')) && (file_exists($locaplic."\\aplicmap\\".$arqt.".map")))
+		{$arqtemp = $locaplic."\\aplicmap\\".$arqt.".map";}
+		elseif (file_exists($locaplic."/aplicmap/".$arqt.".map"))
+		{$arqtemp = $locaplic."/aplicmap/".$arqt.".map";}
 		if ((strtoupper(substr(PHP_OS, 0, 3) == 'WIN')) && (file_exists($temasdir."\\".$arqt.".map")))
 		{$arqtemp = $temasdir."\\".$arqt.".map";}
 		elseif (file_exists($temasdir."/".$arqt.".map"))
@@ -560,7 +556,7 @@ function incluiTemasIniciais()
 					if($layern->type == MS_LAYER_RASTER)
 					{$existeraster = true;}
 					if ($layern->name == "estadosl")
-					{$layern->set("data",$temasaplic."/dados/estados.shp");}
+					{$layern->set("data",$locaplic."/aplicmap/dados/estados.shp");}
 					$layern->setmetadata("NOMEORIGINAL",$layern->name);
 					autoClasses(&$layern,$mapn);
 					ms_newLayerObj(&$mapn, $layern);
