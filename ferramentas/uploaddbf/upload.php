@@ -108,17 +108,20 @@ if (isset($_FILES['i3GEOuploaddbffile']['name']))
 				}
 			}
 			$shapefileObj->free();	
-			$mapt = ms_newMapObj($locaplic."/aplicmap/novotema.map");
-			$novolayer = $mapt->getLayerByName("novotema");
+			$novolayer = ms_newLayerObj($mapa);
 			$novolayer->set("data",$nomeshp);
 			$novolayer->set("name",basename($nomeshp));
 			$novolayer->setmetadata("TEMA",basename($nomeshp));
 			$novolayer->setmetadata("DOWNLOAD","SIM");
 			$novolayer->setmetadata("TEMALOCAL","SIM");
+			$novolayer->setmetadata("CLASSE","SIM");
+			$novolayer->setmetadata("TEXTO","NAO");			
 			$novolayer->set("type",MS_LAYER_POINT);
 			$novolayer->setfilter("");
-			$classe = $novolayer->getclass(0);
-			$estilo = $classe->getstyle(0);
+			$classe = ms_newClassObj($novolayer);
+			$estilo = ms_newStyleObj($classe);
+			$estilo->color->setrgb(200,50,0);
+			$estilo->outlinecolor->setrgb(0,0,0);
 			$estilo->set("symbolname","ponto");
 			$estilo->set("size",6);
 			// le os itens
@@ -133,7 +136,7 @@ if (isset($_FILES['i3GEOuploaddbffile']['name']))
 				$novolayer->setmetadata("ITENSDESC",$its);
 				$novolayer->set("template","none.htm");
 			}
-			if($uploaddbfEPSG != "")
+			if(isset($uploadEPSG) && $uploaddbfEPSG != "")
 			{$novolayer->setProjection("init=epsg:".$uploaddbfEPSG);}
 			$adiciona = ms_newLayerObj($mapa, $novolayer);
 			$salvo = $mapa->save($map_file);

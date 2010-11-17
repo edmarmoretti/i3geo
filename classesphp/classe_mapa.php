@@ -1125,12 +1125,12 @@ Include:
 		//limpa selecao
 		if (file_exists($this->qyfile))
 		{unlink ($this->qyfile);}
-		$nmap = ms_newMapObj($locaplic."/aplicmap/novotema.map");
-		$layer = $nmap->getlayerbyname("novotema");
-		//$layer->set("name",nomeRandomico());
+		$layer = ms_newLayerObj($this->mapa);
 		$layer->set("status",MS_DEFAULT);
 		if($nomecamada == "default")
 		$nomecamada = $tema;
+		$layer->setmetadata("CLASSE","SIM");
+		$layer->setmetadata("TEXTO","NAO");		
 		$layer->setmetadata("tema",$nomecamada);
 		$layer->setmetadata("nomeoriginal",$tema); //nome original do layer no web service
 		$layer->setmetadata("tipooriginal",$tiporep);
@@ -1140,8 +1140,8 @@ Include:
 			if ($tiporep == "linear")
 			{
 				$layer->set("type",MS_LAYER_LINE);
-				$classe = $layer->getclass(0);
-				$estilo = $classe->getstyle(0);
+				$classe = ms_newClassObj($layer);
+				$estilo = ms_newStyleObj($classe);
 				$cor = $estilo->color;
 				$cor->setRGB(-1,-1,-1);
 			}
@@ -1210,21 +1210,10 @@ Include:
 		}
 		$layer->setmetadata("wms_format",$im);
 		$layer->setmetadata("wfs","nao");
-		//verifica se o serviço tem wfs
-		/*
-		$wfs = existeWFS();
-		if ($wfs != "nao")
-		{
-			$layer->setmetadata("wfs","sim");
-			//$existeWFS = existeTemaWFS();
-			//if ($existeWFS == "sim")
-			//{$layer->setmetadata("wfs","sim");}
-		}
-		*/
 		$layer->setmetadata("wfs","nao");
 		$c = $layer->offsite;
 		$c->setrgb(255,255,255);
-		ms_newLayerObj($this->mapa, $layer);
+		
 		$of = $this->mapa->outputformat;
 		$of->set("imagemode",MS_IMAGEMODE_RGB);
 		$this->salva();

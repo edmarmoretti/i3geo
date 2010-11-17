@@ -1776,10 +1776,6 @@ function criaSHP($tema,$map_file,$locaplic,$dir_tmp,$nomeRand=TRUE)
 	$nomeshp = $dir_tmp."/".$novonomelayer;
 	if(file_exists($nomeshp.".shp"))
 	{return $nomeshp;}
-	if (strtoupper(substr(PHP_OS, 0, 3) == 'WIN'))
-	{$mapt = ms_newMapObj($locaplic."\\aplicmap\\novotema.map");}
-	else
-	{$mapt = ms_newMapObj($locaplic."/aplicmap/novotema.map");}
 	$novoshpf = ms_newShapefileObj($nomeshp, $tipol);
 	$novoshpf->free();
 	//se for do tipo features
@@ -1833,12 +1829,8 @@ function criaSHP($tema,$map_file,$locaplic,$dir_tmp,$nomeRand=TRUE)
 		$existesel = carregaquery($map_file,&$layer,&$map);
 		if ($existesel == "nao")
 		{@$layer->queryByrect($map->extent);}
-		
 		//pega cada registro
 		$res_count = $layer->getNumresults();
-		
-		//echo $res_count;exit;
-		
 		if ($res_count > 0)
 		{
 			$sopen = $layer->open();

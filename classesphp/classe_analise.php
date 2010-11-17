@@ -1183,10 +1183,6 @@ function distanciaptpt($temaorigem,$temadestino,$temaoverlay,$locaplic,$itemorig
 	$novoshpf->free();
 	xbase_close($db);
 	//adiciona no mapa atual o novo tema
-	if (strtoupper(substr(PHP_OS, 0, 3) == 'WIN'))
-	{$mapt = ms_newMapObj($locaplic."\\aplicmap\\novotema.map");}
-	else
-	{$mapt = ms_newMapObj($locaplic."/aplicmap/novotema.map");}
 	$novolayer = criaLayer($this->mapa,MS_LAYER_LINE,MS_DEFAULT,("Distancias (".$nomefinal.")"),$metaClasse="SIM");
 	$novolayer->set("data",$nomeshp.".shp");
 	$novolayer->setmetadata("DOWNLOAD","SIM");
@@ -1303,10 +1299,6 @@ nome do layer criado com o buffer.
 		$novoshpf->free();
 		xbase_close($db);
 		//adiciona no mapa atual o novo tema
-		if (strtoupper(substr(PHP_OS, 0, 3) == 'WIN'))
-		{$mapt = ms_newMapObj($locaplic."\\aplicmap\\novotema.map");}
-		else
-		{$mapt = ms_newMapObj($locaplic."/aplicmap/novotema.map");}
 		$novolayer = criaLayer($this->mapa,MS_LAYER_POLYGON,MS_DEFAULT,("Buffer (".$nomebuffer.")"),$metaClasse="SIM");
 		$novolayer->set("data",$nomeshp.".shp");
 		$novolayer->setmetadata("DOWNLOAD","SIM");
@@ -1392,10 +1384,6 @@ $locaplic - Localização do I3geo.
 		$novoshpf->free();
 		xbase_close($db);
 		//adiciona no mapa atual o novo tema
-		if (strtoupper(substr(PHP_OS, 0, 3) == 'WIN'))
-		{$mapt = ms_newMapObj($locaplic."\\aplicmap\\novotema.map");}
-		else
-		{$mapt = ms_newMapObj($locaplic."/aplicmap/novotema.map");}
 		$novolayer = criaLayer($this->mapa,MS_LAYER_POINT,MS_DEFAULT,("Centróide (".$nomeCentroides.")"),$metaClasse="SIM");
 		$novolayer->set("data",$nomeshp.".shp");
 		$novolayer->setmetadata("DOWNLOAD","SIM");

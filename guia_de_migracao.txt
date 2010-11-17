@@ -16,6 +16,8 @@ Para a versão 4.5
 	http://localhost/i3geo/ms_criamapa.php?interface=zerocal.htm ou
 	http://localhost/i3geo/interface/zerocal.htm
 	
+	A pasta "images" foi removida e as imagens movidas para a pasta "imagens\depreciado"
+	
 	
 
 -------------------------------------------------------------------------------------------------

@@ -43,8 +43,7 @@ if (isset($_FILES['i3GEOuploadshp']['name']))
 	if($status == 1)
 	{
 		echo "<p class='paragrafo' >Arquivo enviado. Adicionando tema...</p>";
-		$mapt = ms_newMapObj($locaplic."/aplicmap/novotema.map");
-		$novolayer = $mapt->getLayerByName("novotema");
+		$novolayer = ms_newLayerObj($mapa);
 		$novolayer->set("data",$dirmap."/".$_FILES['i3GEOuploadshp']['name']);
 		$novolayer->set("name",$_FILES['i3GEOuploadshp']['name']);
 		$novolayer->setmetadata("TEMA",$_FILES['i3GEOuploadshp']['name']);
@@ -56,15 +55,19 @@ if (isset($_FILES['i3GEOuploadshp']['name']))
 		if ($tipo == 3){$novolayer->set("type",MS_LAYER_LINE);}
 		if ($tipo == 5){$novolayer->set("type",MS_LAYER_POLYGON);}
 		$novolayer->setmetadata("TEMALOCAL","SIM");
+		$novolayer->setmetadata("CLASSE","SIM");
+		$novolayer->setmetadata("TEXTO","NAO");
 		//if (($tipo != 3) and ($tipo != 8 )){$novolayer->set("type",0);}
 		$novolayer->setfilter("");
-		$classe = $novolayer->getclass(0);
-		$estilo = $classe->getstyle(0);
+			$classe = ms_newClassObj($novolayer);
+			$estilo = ms_newStyleObj($classe);
 		if ($tipo == 1)
 		{
 			$estilo->set("symbolname","ponto");
 			$estilo->set("size",6);
 		}
+		$estilo->color->setrgb(200,50,0);
+		$estilo->outlinecolor->setrgb(0,0,0);		
 		// le os itens
 		$novolayer->set("status",MS_DEFAULT);
 		$abriu = $novolayer->open();
@@ -77,7 +80,7 @@ if (isset($_FILES['i3GEOuploadshp']['name']))
 			$novolayer->setmetadata("ITENSDESC",$its);
 			$novolayer->set("template","none.htm");
 		}
-		if($uploadEPSG != "")
+		if(isset($uploadEPSG) && $uploadEPSG != "")
 		{$novolayer->setProjection("init=epsg:".$uploadEPSG);}
 		$adiciona = ms_newLayerObj($mapa, $novolayer);
 		$salvo = $mapa->save($map_file);

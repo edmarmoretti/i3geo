@@ -38,8 +38,7 @@ if (isset($_FILES['i3GEOuploadgpx']['name']))
 	if($status == 1)
 	{
 		echo "<p class='paragrafo' >Arquivo enviado. Adicionando tema...</p>";
-		$mapt = ms_newMapObj($locaplic."/aplicmap/novotema.map");
-		$novolayer = $mapt->getLayerByName("novotema");
+		$novolayer = ms_newLayerObj($mapa);
 		$tipos = array("waypoints","routes","tracks","route_points","track_points");
 		foreach($tipos as $tipo){
 			$novolayer->set("connection",$dirmap."/".$_FILES['i3GEOuploadgpx']['name']);
@@ -51,6 +50,8 @@ if (isset($_FILES['i3GEOuploadgpx']['name']))
 			$novolayer->set("name",$nome.$tipo);
 			$novolayer->setmetadata("TEMA",$_FILES['i3GEOuploadgpx']['name']." ".$tipo);
 			$novolayer->setmetadata("DOWNLOAD","SIM");
+			$novolayer->setmetadata("CLASSE","SIM");
+			$novolayer->setmetadata("TEXTO","NAO");
 			if($tipo == "waypoints" || $tipo == "route_points" ||$tipo == "track_points")
 			{$novolayer->set("type",MS_LAYER_POINT);}
 			else
@@ -58,17 +59,19 @@ if (isset($_FILES['i3GEOuploadgpx']['name']))
 			$novolayer->set("data",$tipo);
 			$novolayer->setmetadata("TEMALOCAL","SIM");
 			$novolayer->setfilter("");
-			$classe = $novolayer->getclass(0);
-			$estilo = $classe->getstyle(0);
+			$classe = ms_newClassObj($novolayer);
+			$estilo = ms_newStyleObj($classe);
 			if($tipo == "waypoints" || $tipo == "route_points" ||$tipo == "track_points")
 			{
 				$estilo->set("symbolname","ponto");
 				$estilo->set("size",6);
 			}
+			$estilo->color->setrgb(200,50,0);
+			$estilo->outlinecolor->setrgb(0,0,0);
 			// le os itens
 			$novolayer->set("status",MS_DEFAULT);
 			$novolayer->set("template","none.htm");
-			if($uploadEPSG != "")
+			if(isset($uploadEPSG) && $uploadEPSG != "")
 			{$novolayer->setProjection("init=epsg:".$uploadEPSG);}
 			$adiciona = ms_newLayerObj($mapa, $novolayer);
 		}
