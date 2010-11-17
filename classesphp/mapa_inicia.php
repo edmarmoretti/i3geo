@@ -58,13 +58,7 @@ $w - Largura da imagem do mapa.
 
 $h - Altura da imagem do mapa.
 
-$locsistemas - Variável definida no arquivo ms_configura.php que identifica se existem sistemas associados que serão incluídos na guia de adição de temas.
-
-$locidentifica - Variável definida no arquivo ms_configura.php que identifica se existem sistemas adicionais a ser mostrados na opção de identificação.
-
 $R_path - Variável definida no arquivo ms_configura.php que indica se o software R está instalado.
-
-$locmapas - Variável definida no arquivo ms_configura.php que indica se a guia de mapas deve ser mostrada.
 
 $locmapserv - Variável definida no arquivo ms_configura.php que indica nome do mapserver cgi.
 
@@ -102,7 +96,7 @@ Retorno:
 */
 function iniciaMapa()
 {
-	global $interfacePadrao,$mensagemInicia,$kmlurl,$tituloInstituicao,$tempo,$navegadoresLocais,$locaplic,$embedLegenda,$map_file,$mapext,$w,$h,$locsistemas,$locidentifica,$R_path,$locmapas,$locmapserv,$utilizacgi,$expoeMapfile,$interface;
+	global $interfacePadrao,$mensagemInicia,$kmlurl,$tituloInstituicao,$tempo,$navegadoresLocais,$locaplic,$embedLegenda,$map_file,$mapext,$w,$h,$R_path,$locmapserv,$utilizacgi,$expoeMapfile,$interface;
 	if(!isset($kmlurl))
 	{$kmlurl = "";}
 	error_reporting(E_ALL);
@@ -150,7 +144,6 @@ function iniciaMapa()
 	$protocolo = $protocolo[0];
 	$protocolo = strtolower($protocolo) . '://'.$_SERVER['SERVER_NAME'] .":". $_SERVER['SERVER_PORT'];
 	$urli3geo = str_replace("/classesphp/mapa_controle.php","",$protocolo.$_SERVER["PHP_SELF"]);
-	$locidentifica = ($locidentifica == "") ? $urli3geo."/admin/xmlidentifica.php" : $locidentifica;
 	//altera o tamanho do query map para ficar igual ao do mapa
 	include_once("classe_mapa.php");
 	error_reporting(E_ALL);
@@ -256,10 +249,7 @@ function iniciaMapa()
 	$res["versaoms"] = $versao["principal"];
 	$res["versaomscompleta"] = $versao["completa"];
 	$res["mensagens"] = $m->pegaMensagens();
-	$res["locsistemas"] = $locsistemas;
-	$res["locidentifica"] = $locidentifica;
 	$res["r"] = (isset($R_path)) ? "sim" : "nao";					
-	$res["locmapas"] = $locmapas;					
 	$res["extentref"] = "";					
 	$res["kmlurl"] = $kmlurl;					
 	$res["mensageminicia"] = $mensagemInicia;					
@@ -274,49 +264,9 @@ function iniciaMapa()
 	$res["mappath"] = $imgo->imagepath;
 	$res["mapurl"] = $imgo->imageurl;
 	$res["navegacaoDir"] = $navegadoresLocais;
-	/*
-	$res = "var mapexten= '".$ext."';var mapscale=".$escalaMapa.";var mapres=".$m->mapa->resolution.";var g_celula=".$celula.";var mapimagem='".$nomer."';var mapwidth=".$imgo->width.";var mapheight=".$imgo->height.";var mappath='".$imgo->imagepath."';var mapurl='".$imgo->imageurl."'";
-	$res .= ";var extentref = '';var refimagem='';var refwidth=0;var refpath='';var refurl=''";
-	$res .= ";var legimagem='';var legwidth=0;var legheight=0;var legpath='';var legurl='';var locsistemas='".$locsistemas."';var locidentifica='".$locidentifica."'";
-	$r = (isset($R_path)) ? "sim" : "nao";
-	$res .= ";var r='".$r."'"; //identifica se o r esta instalado
-	$res .= ";var locmapas='".$locmapas."'";
-	if ((isset($expoeMapfile)) && ($expoeMapfile == "nao"))
-	{$res .= ";var mapfile=''";}
-	else
-	{$res .= ";var mapfile='".$map_file."'";}
-	$res .= ";var cgi='".$locmapserv."'";
-	$res .= ";var utilizacgi='".$utilizacgi."'";
-	$res .= ";var titulo='".$tituloInstituicao."'";
-	$versao = versao();
-	$res .= ";var versaoms ='".$versao["principal"]."'";
-	$res .= ";var versaomscompleta ='".$versao["completa"]."'";
-	//Pega os estilos disponíveis
-	$visual = (file_exists($locaplic."/imagens/visual")) ? implode(",",listaDiretorios($locaplic."/imagens/visual")) : "";
-	$res .= ";var listavisual='".$visual."'";
-	//pega os usuários navegadores
-	//para efeitos de compatibilidade
-	$res .= ";var navegacaoDir='".$navegadoresLocais."'";
-	$res .= ($navegadoresLocais == "sim") ? ";i3GEO.arvoreDeTemas.OPCOESADICIONAIS.navegacaoDir=true" : ";i3GEO.arvoreDeTemas.OPCOESADICIONAIS.navegacaoDir=false";
-	//
-	//verifica se o pacote geoip está instalado ou não
-	//
-	$geoip = "nao";
-	if (file_exists($locaplic."/pacotes/geoip") && file_exists($locaplic."/pacotes/geoip/GeoLiteCity.dat"))
-	{$geoip = "sim";}
-	$res .= ";var geoip='".$geoip."';";
-	$res .= "var tempo =".(microtime(1) - $tempo).";";
-	$res .= "var mensagens ='".$m->pegaMensagens()."';";
-	$res .= "var kmlurl ='".$kmlurl."';";
-	$res .= "var mensagemInicia ='".$mensagemInicia."';";
-	$res .= "var interfacePadrao ='".$interfacePadrao."';";
-	$res .= "var embedLegenda ='".$embedLegenda."';";
-	$res .= "var erro ='';";
-	*/
 
 	copy($map_file,(str_replace(".map","reinc.map",$map_file)));
 	copy($map_file,(str_replace(".map","seguranca.map",$map_file)));
-	//$cp->set_data(array("variaveis"=>$res,"temas"=>$temas));
 	cpjson(array("variaveis"=>$res,"temas"=>$temas));
 }
 ?>

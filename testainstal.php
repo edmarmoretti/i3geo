@@ -83,9 +83,6 @@ include ("ms_configura.php");
 echo "<b>$mensagemInicia </b> \n";
 echo "dir_tmp = $dir_tmp \n";
 echo "locmapserv = $locmapserv \n";
-echo "locaplic = $locaplic \n";
-echo "locsistemas = $locsistemas \n";
-echo "locidentifica = $locidentifica \n";
 echo "\n<br>";
 echo "editores: \n";
 var_dump($editores);
@@ -99,56 +96,53 @@ else $ip = "UNKNOWN";
 echo "IP do cliente = $ip \n";
 echo "\n";
 
-if($menutemas == "")
+echo "verificando banco de dados de administra&ccedil;&atilde;o...\n";
+$tabelas = array(
+	"i3geoadmin_sistemasf"=>"abrir_funcao,h_funcao,id_funcao,id_sistema,nome_funcao,perfil_funcao,w_funcao",
+	"i3geoadmin_tags"=>"id_tag,nome",
+	"i3geoadmin_perfis"=>"id_perfil,perfil",
+	"i3geoadmin_atlasp"=>"ordem_prancha,desc_prancha,h_prancha,icone_prancha,id_atlas,id_prancha,link_prancha,mapext_prancha,titulo_prancha,w_prancha",
+	"i3geoadmin_atlast"=>"ordem_tema,codigo_tema,id_prancha,id_tema,ligado_tema",
+	"i3geoadmin_mapas"=>"publicado_mapa,ordem_mapa,perfil_mapa,ligados_mapa,temas_mapa,desc_mapa,ext_mapa,id_mapa,imagem_mapa,linkdireto_mapa,nome_mapa,outros_mapa",
+	"i3geoadmin_atlas"=>"publicado_atlas,ordem_atlas,basemapfile_atlas,desc_atlas,h_atlas,icone_atlas,id_atlas,link_atlas,pranchadefault_atlas,template_atlas,tipoguias_atlas,titulo_atlas,w_atlas",
+	"i3geoadmin_sistemas"=>"publicado_sistema,id_sistema,nome_sistema,perfil_sistema",
+	"i3geoadmin_identifica"=>"publicado_i,abrir_i,id_i,nome_i,target_i",
+	"i3geoadmin_raiz"=>"ordem,id_tema,id_menu,id_nivel,id_raiz,nivel,perfil",
+	"i3geoadmin_n1"=>"publicado,ordem,id_menu,id_grupo,id_n1,n1_perfil",
+	"i3geoadmin_n2"=>"publicado,ordem,id_n1,id_n2,id_subgrupo,n2_perfil",
+	"i3geoadmin_n3"=>"publicado,ordem,id_n2,id_n3,id_tema,n3_perfil",
+	"i3geoadmin_ws"=>"nacessosok,nacessos,autor_ws,desc_ws,id_ws,link_ws,nome_ws,tipo_ws",
+	"i3geoadmin_grupos"=>"it,es,en,desc_grupo,id_grupo,nome_grupo",
+	"i3geoadmin_subgrupos"=>"it,es,en,desc_subgrupo,id_subgrupo,nome_subgrupo",
+	"i3geoadmin_temas"=>"it,es,en,kmz_tema,nacessos,id_tema,kml_tema,ogc_tema,download_tema,tags_tema,tipoa_tema,link_tema,desc_tema,nome_tema,codigo_tema",
+	"i3geoadmin_menus"=>"it,es,en,publicado_menu,perfil_menu,aberto,desc_menu,id_menu,nome_menu"
+);
+include_once("admin/php/conexao.php");
+foreach(array_keys($tabelas) as $tabela)
 {
-	echo "verificando banco de dados de administra&ccedil;&atilde;o...\n";
-	$tabelas = array(
-		"i3geoadmin_sistemasf"=>"abrir_funcao,h_funcao,id_funcao,id_sistema,nome_funcao,perfil_funcao,w_funcao",
-		"i3geoadmin_tags"=>"id_tag,nome",
-		"i3geoadmin_perfis"=>"id_perfil,perfil",
-		"i3geoadmin_atlasp"=>"ordem_prancha,desc_prancha,h_prancha,icone_prancha,id_atlas,id_prancha,link_prancha,mapext_prancha,titulo_prancha,w_prancha",
-		"i3geoadmin_atlast"=>"ordem_tema,codigo_tema,id_prancha,id_tema,ligado_tema",
-		"i3geoadmin_mapas"=>"publicado_mapa,ordem_mapa,perfil_mapa,ligados_mapa,temas_mapa,desc_mapa,ext_mapa,id_mapa,imagem_mapa,linkdireto_mapa,nome_mapa,outros_mapa",
-		"i3geoadmin_atlas"=>"publicado_atlas,ordem_atlas,basemapfile_atlas,desc_atlas,h_atlas,icone_atlas,id_atlas,link_atlas,pranchadefault_atlas,template_atlas,tipoguias_atlas,titulo_atlas,w_atlas",
-		"i3geoadmin_sistemas"=>"publicado_sistema,id_sistema,nome_sistema,perfil_sistema",
-		"i3geoadmin_identifica"=>"publicado_i,abrir_i,id_i,nome_i,target_i",
-		"i3geoadmin_raiz"=>"ordem,id_tema,id_menu,id_nivel,id_raiz,nivel,perfil",
-		"i3geoadmin_n1"=>"publicado,ordem,id_menu,id_grupo,id_n1,n1_perfil",
-		"i3geoadmin_n2"=>"publicado,ordem,id_n1,id_n2,id_subgrupo,n2_perfil",
-		"i3geoadmin_n3"=>"publicado,ordem,id_n2,id_n3,id_tema,n3_perfil",
-		"i3geoadmin_ws"=>"nacessosok,nacessos,autor_ws,desc_ws,id_ws,link_ws,nome_ws,tipo_ws",
-		"i3geoadmin_grupos"=>"it,es,en,desc_grupo,id_grupo,nome_grupo",
-		"i3geoadmin_subgrupos"=>"it,es,en,desc_subgrupo,id_subgrupo,nome_subgrupo",
-		"i3geoadmin_temas"=>"it,es,en,kmz_tema,nacessos,id_tema,kml_tema,ogc_tema,download_tema,tags_tema,tipoa_tema,link_tema,desc_tema,nome_tema,codigo_tema",
-		"i3geoadmin_menus"=>"it,es,en,publicado_menu,perfil_menu,aberto,desc_menu,id_menu,nome_menu"
-	);
-	include_once("admin/php/conexao.php");
-	foreach(array_keys($tabelas) as $tabela)
+	echo "     Tabela: <b>".$tabela."</b>";
+	$sql = "select * from $tabela ";
+	$q = $dbh->query($sql,PDO::FETCH_ASSOC);
+	if($q !== false)
 	{
-		echo "     Tabela: <b>".$tabela."</b>";
-		$sql = "select * from $tabela ";
-		$q = $dbh->query($sql,PDO::FETCH_ASSOC);
-		if($q !== false)
+		$resultado = $q->fetchAll();
+		if(count($resultado) > 0)
 		{
-			$resultado = $q->fetchAll();
-			if(count($resultado) > 0)
+			echo "...ok\n";
+			foreach(explode(",",$tabelas[$tabela]) as $coluna)
 			{
-				echo "...ok\n";
-				foreach(explode(",",$tabelas[$tabela]) as $coluna)
-				{
-					echo "         coluna: ".$coluna;
-					if(in_array($coluna,array_keys($resultado[0])))
-					{echo "...ok\n";}
-					else
-					{echo "<span style=color:red >..n&atilde;o encontrada</span>\n";}
-				}
+				echo "         coluna: ".$coluna;
+				if(in_array($coluna,array_keys($resultado[0])))
+				{echo "...ok\n";}
+				else
+				{echo "<span style=color:red >..n&atilde;o encontrada</span>\n";}
 			}
-			else
-			{echo "<span style=color:red >...n&atilde;o existem registros cadastrados</span>\n";}
 		}
 		else
-		{echo "<span style=color:red >..n&atilde;o encontrada</span>\n";}
+		{echo "<span style=color:red >...n&atilde;o existem registros cadastrados</span>\n";}
 	}
+	else
+	{echo "<span style=color:red >..n&atilde;o encontrada</span>\n";}
 }
 echo "\n";
 echo "localizando o cgi...\n";
@@ -163,30 +157,12 @@ $f = @fopen($dir_tmp."/teste.txt",w);
 if (file_exists($dir_tmp."/teste.txt")) echo "ok\n"; else saindo("N&atilde;o foi poss&iacute;vel gravar no diret&oacute;rio tempor&aacute;rio");
 echo "Existe o geral1.map? ";
 if(file_exists("$locaplic/aplicmap/geral1.map")) echo "Sim\n"; else {echo "Nao";saindo("geral1.map n&atilde;o encontrado");}
-if ($locsistemas != "")
-{
-	echo "Existe o $locsistemas? ";
-	if (file_exists("menutemas/sistemas.xml")) echo "ok\n"; else saindo();
-	echo "Lendo sistemas.xml \n";
-	simplexml_load_file("menutemas/sistemas.xml");
-}
-if ($locidentifica != "")
-{
-	echo "Existe o $locidentifica? ";
-	if (file_exists("menutemas/identifica.xml")) echo "ok\n"; else saindo();
-	echo "Lendo locidentifica.xml \n";
-	simplexml_load_file("menutemas/identifica.xml");
-}
-echo "Existe o menutemas.xml? ";
-if (file_exists($locaplic."/menutemas/menutemas.xml")) echo "ok\n"; else saindo("menutemas.xml não encontrado");
-echo "Lendo $locaplic/menutemas/menutemas.xml \n";
-simplexml_load_file($locaplic."/menutemas/menutemas.xml");
 echo " \n";
 echo "Carregando o map_file geral1...\n";
 if (strtoupper(substr(PHP_OS, 0, 3) == 'WIN'))
-{$mapa = ms_newMapObj($temasaplic."/geral1windows.map");}
+{$mapa = ms_newMapObj($locaplic."/aplicmap/geral1windows.map");}
 else
-{$mapa = ms_newMapObj($temasaplic."/geral1.map");}
+{$mapa = ms_newMapObj($locaplic."/aplicmap/geral1.map");}
 echo "<b>E agora..desenhando o mapa (se o mapa n&atilde;o aparecer &eacute; um problema...\nverifique os caminhos no ms_configura.php e no geral1.map ou geral1windows.map):</b>\n";
 $imgo = $mapa->draw();
 $nome = ($imgo->imagepath)."teste.png";
@@ -200,9 +176,9 @@ $error = "";
 ms_ResetErrorList();
 echo "Carregando o map_file geral1... e acrescentando o estadosl.map \n";
 if (strtoupper(substr(PHP_OS, 0, 3) == 'WIN'))
-{$maptemp = ms_newMapObj($temasaplic."/estadoslwindows.map");}
+{$maptemp = ms_newMapObj($locaplic."/aplicmap/estadoslwindows.map");}
 else
-{$maptemp = ms_newMapObj($temasaplic."/estadosl.map");}
+{$maptemp = ms_newMapObj($locaplic."/aplicmap/estadosl.map");}
 while($error && $error->code != MS_NOERR)
 {
 	printf("<br>Error in %s: %s<br>\n", $error->routine, $error->message);
@@ -218,7 +194,7 @@ for($i=0;$i<($maptemp->numlayers);$i++)
 {
 	$layern = $maptemp->getLayer($i);
 	if ($layern->name == "estadosl")
-	{$layern->set("data",$temasaplic."/dados/estados.shp");}
+	{$layern->set("data",$locaplic."/aplicmap/dados/estados.shp");}
 	ms_newLayerObj($mapa, $layern);
 }
 

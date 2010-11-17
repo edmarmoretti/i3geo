@@ -53,11 +53,7 @@ $map_file - (opcional) endereço do mapfile no servidor
 
 $perfil - (opcional) lista dos perfis, separados por espaços, que devem restringir a lista de menus, grupos, temas e etc.
 
-$locsistemas - (opcional) endereço do xml com a lista de sistemas adicionais que serão listados na opção de adiçao de temas
-
 $locaplic - (opcional) endereço físico do i3geo
-
-$menutemas - (opcional) array contendo a lista de menus para compor a árvore de temas (veja o i3geo/ms_configura)
 
 $urli3geo - (opcional) url onde está o i3geo (p.ex. http://localhost/i3geo
 
@@ -65,14 +61,16 @@ $editores - (opcional) array com os editores cadastrados no ms_configura.php
 
 $idioma - (opcional) pt|en|es|it
 */  	
-	function __construct($map_file="",$perfil="",$locsistemas="",$locaplic="",$menutemas="",$urli3geo="",$editores="",$idioma="pt")
+	function __construct($map_file="",$perfil="",$locaplic="",$urli3geo="",$editores="",$idioma="pt")
 	{
+		if($editores == "")
+		{
+			if(file_exists("../ms_configura.php"))
+			{include_once("../ms_configura.php");}
+		}
 		$perfil = str_replace(" ",",",$perfil);
 		$this->perfil = explode(",",$perfil);
-		$this->locsistemas = $locsistemas;
-		$this->xmlsistemas = "";
 		$this->locaplic = $locaplic;
-		$this->menutemas = $menutemas;
 		$this->urli3geo = $urli3geo;
 		$this->idioma = $idioma;
 		if (($map_file != "") && (file_exists($map_file)))
@@ -113,23 +111,12 @@ array
 		$resultado = array();
 		//necessário por conta da inclusao do conexao.php
 		$locaplic = $this->locaplic;
-		//
-		//se $menutemas estiver "", o i3geo
-		//irá utilizar o sistema de administração para pegar os menus
-		//
-		if($this->menutemas == "")
-		{
-			if(!isset($this->locaplic))
-			{return "locaplic nao foi definido";}
-			include_once($this->locaplic."/admin/php/classe_arvore.php");
-			$arvore = new Arvore($this->locaplic,$this->idioma);
-			$resultado = $arvore->pegaListaDeMenus($this->perfil);
-			unset($arvore);
-		}
-		else
-		{$resultado = $this->menutemas;}
-		if(count($resultado) == 0)
-		{$resultado[] = array("publicado"=>"SIM","idmenu"=>"i3geo (xml)","arquivo"=>"../menutemas/menutemas.xml","status"=>"aberto");}
+		if(!isset($this->locaplic))
+		{return "locaplic nao foi definido";}
+		include_once($this->locaplic."/admin/php/classe_arvore.php");
+		$arvore = new Arvore($this->locaplic,$this->idioma);
+		$resultado = $arvore->pegaListaDeMenus($this->perfil);
+		unset($arvore);
 		return ($resultado);
 	}
 /*
@@ -155,173 +142,23 @@ array
 */
 	function pegaListaDeGrupos($idmenu="",$listasistemas="sim",$listasgrupos="sim")
 	{
-		//
-		//lê os arquivos xml
-		//"&tipo=gruposeraiz" pega apenas os nomes dos grupos e temas na raiz
-		//
-		//necessário por conta da inclusao do conexao.php
 		$locaplic = $this->locaplic;
-		include_once($this->locaplic."/admin/php/xml.php");
 		if($listasgrupos == "sim")
 		{$tipo = "";}
 		else
 		{$tipo = "gruposeraiz";}
-		$this->xml = "";
 		$tempm = $this->pegaListaDeMenus();
-		$xmls = array();
 		foreach($tempm as $menu)
 		{
 			if($menu["idmenu"] == $idmenu || $idmenu == "")
 			{
-				if(!isset($menu["url"])){$menu["url"] = "";} //para efeitos de compatibilidade entre versões do i3geo
-				$ondexml = $menu["arquivo"];
-				//if(!isset($menu["publicado"])){$ondexml = $menu["url"];}
-				if($ondexml != "" && $this->menutemas != "")
-				{
-					$xml = simplexml_load_file($ondexml);
-					$grupos = $this->retornaGrupos($xml,$listasistemas,$idmenu,$listasgrupos);
-				}
-				else //pega o xml do sistema de administração
-				{
-					include_once("../admin/php/classe_arvore.php");
-					$arvore = new Arvore($this->locaplic,$this->idioma);
-					$grupos = $arvore->formataGruposMenu($idmenu,$this->perfil,$listasgrupos);
-					unset($arvore);
-				}
+				include_once("../admin/php/classe_arvore.php");
+				$arvore = new Arvore($this->locaplic,$this->idioma);
+				$grupos = $arvore->formataGruposMenu($idmenu,$this->perfil,$listasgrupos);
+				unset($arvore);
 			}
 		}
 		return ($grupos);
-	}
-	function retornaGrupos($xml,$listasistemas,$idmenu,$listasgrupos)
-	{
-		$sistemas = array();
-		$grupos = array();
-		$temasraiz = array();
-		//
-		//pega os temas na raiz
-		//
-		foreach($xml->TEMA as $temar)
-		{
-			$down = "sim";
-			$ogc = "sim";
-			$temp = $this->ixml($temar,"DOWNLOAD");
-			if (($temp == "nao") || ($temp == "NAO"))
-			{$down = "nao";}
-			$temp = $this->ixml($temar,"OGC");
-			if (($temp == "nao") || ($temp == "NAO"))
-			{$ogc = "nao";}
-			$link = " ";
-			$temp = $this->ixml($temar,"TLINK");
-			if ($temp != "")
-			{$link = $temp;}
-			$tid = $this->ixml($temar,"TID");
-			$nome = $this->ixml($temar,"TNOME");
-			$temasraiz[] = array("tid"=>$tid,"nome"=>$nome,"link"=>$link,"download"=>$down,"ogc"=>$ogc);
-		}
-		foreach($xml->GRUPO as $grupo)
-		{
-			$incluigrupo = TRUE;
-			//filtra pelo perfil
-			$temp = $this->ixml($grupo,"PERFIL");
-			if ($temp != "")
-			{
-				$incluigrupo = FALSE;
-				$perfis = str_replace(","," ",$temp);
-				$perfis = explode(" ",$perfis);
-				if ($this->array_in_array($this->perfil,$perfis))
-				{$incluigrupo = TRUE;}
-			}
-			//verifica se existem temas no nível de grupo
-			if ($incluigrupo == TRUE)
-			{
-				$temas = array();
-				foreach($grupo->TEMA as $temar)
-				{
-					$down = "sim";
-					$ogc = "sim";
-					$temp = $this->ixml($temar,"DOWNLOAD");
-					if (($temp == "nao") || ($temp == "NAO"))
-					{$down = "nao";}
-					$temp = $this->ixml($temar,"OGC");
-					if (($temp == "nao") || ($temp == "NAO"))
-					{$ogc = "nao";}
-					$link = " ";
-					$temp = $this->ixml($temar,"TLINK");
-					if ($temp != "")
-					{$link = $temp;}
-					$tid = $this->ixml($temar,"TID");
-					$nome = $this->ixml($temar,"TNOME");
-					$temas[] = array("tid"=>$tid,"nome"=>$nome,"link"=>$link,"download"=>$down,"ogc"=>$ogc);
-				}
-				$grupodown = "sim";
-				$grupoogc = "sim";
-				foreach($grupo->SGRUPO as $sgrupo)
-				{
-					foreach($sgrupo->TEMA as $tema)
-					{
-						$temp = $this->ixml($tema,"DOWNLOAD");
-						if (($temp == "nao") || ($temp == "NAO"))
-						{$grupodown = "nao";}
-						else
-						{$grupodown = "sim";}
-						$temp = $this->ixml($tema,"OGC");
-						if (($temp == "nao") || ($temp == "NAO"))
-						{$grupoogc = "nao";}
-						else
-						{$grupoogc = "sim";}						
-					}
-				}
-				$subgrupos = array();
-				if($listasgrupos=="sim")
-				{
-					foreach($grupo->SGRUPO as $sgrupo)
-					{
-						$incluisgrupo = TRUE;
-						$temp = $this->ixml($sgrupo,"PERFIL");
-						if ($temp != "")
-						{
-							$incluisgrupo = FALSE;
-							$perfis = str_replace(","," ",$temp);
-							$perfis = explode(" ",$perfis);
-							if ($this->array_in_array($this->perfil,$perfis))
-							{$incluisgrupo = TRUE;}
-						}
-						if ($incluisgrupo == TRUE)
-						{
-							//verifica se existem temas que podem receber download
-							$down = "sim";
-							$ogc = "sim";
-							foreach($sgrupo->TEMA as $tema)
-							{
-								$temp = $this->ixml($tema,"DOWNLOAD");
-								if (($temp == "nao") || ($temp == "NAO"))
-								{$down = "nao";}
-								else
-								{$down = "sim";}
-								$temp = $this->ixml($tema,"OGC");
-								if (($temp == "nao") || ($temp == "NAO"))
-								{$ogc = "nao";}
-								else
-								{$ogc = "sim";}
-							}
-							$nome = $this->ixml($sgrupo,"SDTIPO");
-							$subgrupos[] = array("nome"=>$nome,"download"=>$down,"ogc"=>$ogc);
-						}
-					}
-				}
-				$nome = $this->ixml($grupo,"GTIPO");
-				$grupos[] = array("nome"=>$nome,"ogc"=>$grupoogc,"download"=>$grupodown,"subgrupos"=>$subgrupos,"temasgrupo"=>$temas);
-			}
-		}
-		$grupos[] = array("temasraiz"=>$temasraiz);
-		//pega os sistemas checando os perfis
-		$sistemas = array();
-		if ($listasistemas == "sim")
-		{$sistemas = pegaSistemas();}
-		$grupos[] = array("idmenu"=>$idmenu);
-		$grupos[] = array("sistemas"=>$sistemas);
-		return($grupos);		
-		
 	}
 /*
 function: pegaListaDeSubGrupos
@@ -345,106 +182,20 @@ array
 	function pegaListaDeSubGrupos($codgrupo,$idmenu="")
 	{
 		$locaplic=$this->locaplic;
-		include_once($this->locaplic."/admin/php/xml.php");
 		$tipo = "subgrupos";
-		$this->xml = "";
 		foreach($this->pegaListaDeMenus() as $menu)
 		{
 			if($menu["idmenu"] == $idmenu || $idmenu == "")
 			{
-				if(!isset($menu["url"])){$menu["url"] = "";} //para efeitos de compatibilidade entre versões do i3geo
-				$ondexml = $menu["arquivo"];
-				if($menu["url"] != ""){$ondexml = $menu["url"];}
-				if($ondexml != "" && $this->menutemas != "")
-				{$this->xml = simplexml_load_file($ondexml);}
-				else //pega o xml do sistema de administração
-				{
-					//$this->xml = simplexml_load_string(geraXmlMenutemas(implode(" ",$this->perfil),$idmenu,$tipo,$this->locaplic));
-					//echo geraXmlMenutemas(implode(" ",$this->perfil),$idmenu,$tipo,$this->locaplic);exit;	
-					include_once("../admin/php/classe_arvore.php");
-					$arvore = new Arvore($this->locaplic,$this->idioma);
-					$subGrupos = $arvore->formataSubgruposGrupo($idmenu,$codgrupo,$this->perfil);
-					unset($arvore);
-					return($subGrupos);
-				}
+				include_once("../admin/php/classe_arvore.php");
+				$arvore = new Arvore($this->locaplic,$this->idioma);
+				$subGrupos = $arvore->formataSubgruposGrupo($idmenu,$codgrupo,$this->perfil);
+				unset($arvore);
+				return($subGrupos);
 			}
 		}
 		$conta = 0;
 		$subgrupos[] = array();
-		foreach($this->xml->GRUPO as $grupo)
-		{
-			$temp = $this->ixml($grupo,"PERFIL");
-			if ($conta == $codgrupo)
-			{
-				$incluigrupo = TRUE;
-				if ($temp != "")
-				{
-					$incluigrupo = FALSE;
-					$perfis = str_replace(","," ",$temp);
-					$perfis = explode(" ",$perfis);
-					if ($this->array_in_array($this->perfil,$perfis))
-					{$incluigrupo = TRUE;}
-				}
-				//verifica se existem temas no nível de grupo
-				if ($incluigrupo == TRUE)
-				{
-					$subgrupos = array();
-					foreach($grupo->SGRUPO as $sgrupo)
-					{
-						$incluisgrupo = TRUE;
-						$temp = $this->ixml($sgrupo,"PERFIL");
-						if ($temp != "")
-						{
-							$incluisgrupo = FALSE;
-							$perfis = str_replace(","," ",$temp);
-							$perfis = explode(" ",$perfis);
-							if ($this->array_in_array($this->perfil,$perfis))
-							{$incluisgrupo = TRUE;}
-						}
-						if (($incluisgrupo == TRUE))
-						{
-							$down = "sim";
-							$ogc = "sim";
-							foreach($sgrupo->TEMA as $tema)
-							{
-								$temp = $this->ixml($tema,"DOWNLOAD");
-								if (($temp == "nao") || ($temp == "NAO"))
-								{$down = "nao";}
-								else
-								{$down = "sim";}
-								$temp = $this->ixml($tema,"OGC");
-								if (($temp == "nao") || ($temp == "NAO"))
-								{$ogc = "nao";}
-								else
-								{$ogc = "sim";}					
-							}
-							$nome = $this->ixml($sgrupo,"SDTIPO");
-							$subgrupos[] = array("nome"=>$nome,"ogc"=>$ogc,"download"=>$down);
-						}
-					}
-				}
-				$temas = array();
-				foreach($grupo->TEMA as $temar)
-				{
-					$down = "sim";
-					$ogc = "sim";
-					$temp = $this->ixml($temar,"DOWNLOAD");
-					if (($temp == "nao") || ($temp == "NAO"))
-					{$down = "nao";}
-					$temp = $this->ixml($temar,"OGC");
-					if (($temp == "nao") || ($temp == "NAO"))
-					{$ogc = "nao";}
-					$link = " ";
-					$temp = $this->ixml($temar,"TLINK");
-					if ($temp != "")
-					{$link = $temp;}
-					$tid = $this->ixml($temar,"TID");
-					$nome = $this->ixml($temar,"TNOME");
-					$temas[] = array("tid"=>$tid,"nome"=>$nome,"link"=>$link,"download"=>$down,"ogc"=>$ogc);
-				}
-			}
-			$conta = $conta + 1;
-		}
 		return (array("subgrupo"=>$subgrupos,"temasgrupo"=>$temas));
 	}
 /*
@@ -462,101 +213,11 @@ array
 */
 	function pegaListaDeTemas($grupo,$subgrupo,$idmenu)
 	{
-		include_once($this->locaplic."/admin/php/xml.php");
-		$tipo = "";
-		$this->xml = "";
-		foreach($this->pegaListaDeMenus() as $menu)
-		{
-			if($menu["idmenu"] == $idmenu || $idmenu == "")
-			{
-				if(!isset($menu["url"])){$menu["url"] = "";} //para efeitos de compatibilidade entre versões do i3geo
-				$ondexml = $menu["arquivo"];
-				if($menu["url"] != ""){$ondexml = $menu["url"];}
-				if($ondexml != "" && $this->menutemas != "")
-				{$this->xml = simplexml_load_file($ondexml);}
-				else //pega os dados do sistema de administração
-				{
-					//$this->xml = simplexml_load_string(geraXmlMenutemas(implode(" ",$this->perfil),$idmenu,$tipo,$this->locaplic));	
-					include_once("../admin/php/classe_arvore.php");
-					$arvore = new Arvore($this->locaplic,$this->idioma);
-					$temas = $arvore->formataTemasSubgrupo($subgrupo,$this->perfil);
-					unset($arvore);
-					return($temas);
-				}
-			}
-		}
-		$contagrupo = 0;
-		$temas = array();
-		foreach($this->xml->GRUPO as $g)
-		{
-			$incluigrupo = TRUE;
-			if ($this->ixml($g,"PERFIL") != "")
-			{
-				$incluigrupo = FALSE;
-				$temp = $this->ixml($g,"PERFIL");
-				$perfis = str_replace(","," ",$temp);
-				$perfis = explode(" ",$perfis);
-				if ($this->array_in_array($this->perfil,$perfis))
-				{$incluigrupo = TRUE;}
-			}
-			if ($incluigrupo == TRUE)
-			{
-				if ($contagrupo == $grupo)
-				{
-					$contasubgrupo = 0;
-					foreach ($g->SGRUPO as $s)
-					{
-						$incluisgrupo = TRUE;
-						if ($this->ixml($s,"PERFIL") != "")
-						{
-							$incluisgrupo = FALSE;
-							$temp = $this->ixml($s,"PERFIL");
-							$perfis = str_replace(","," ",$temp);
-							$perfis = explode(" ",$perfis);
-							if ($this->array_in_array($this->perfil,$perfis))
-							{$incluisgrupo = TRUE;}
-						}
-						if ($incluisgrupo == TRUE)
-						{
-							if ($contasubgrupo == $subgrupo)
-							{
-								foreach($s->TEMA as $tema)
-								{
-									$inclui = TRUE;
-									if ($this->ixml($tema,"PERFIL") != "")
-									{	
-										$inclui = FALSE;
-										$temp = $this->ixml($tema,"PERFIL");
-										$perfis = str_replace(","," ",$temp);
-										$perfis = explode(" ",$perfis);
-										if ($this->array_in_array($this->perfil,$perfis))
-										{$inclui = TRUE;}
-									}
-									if ($inclui == TRUE)
-									{
-										$down = "sim";
-										if (($tema->DOWNLOAD == "nao") || ($tema->DOWNLOAD == "NAO"))
-										{$down = "nao";}
-										$ogc = "sim";
-										if (($tema->OGC == "nao") || ($tema->OGC == "NAO"))
-										{$ogc = "nao";}
-										$link = " ";
-										if ($tema->TLINK != "")
-										{$link = $this->ixml($tema,"TLINK");}
-										$tid = $this->ixml($tema,"TID");
-										$nome = $this->ixml($tema,"TNOME");
-										$temas[] = array("nacessos"=>($this->ixml($tema,"NACESSOS")),"tid"=>$tid,"nome"=>$nome,"link"=>$link,"download"=>$down,"ogc"=>$ogc,"kmz"=>"nao");
-									}
-								}
-							}
-							$contasubgrupo = $contasubgrupo + 1;
-						}
-					}
-				}
-				$contagrupo = $contagrupo + 1;
-			}
-		}
-		return ($temas);
+		include_once("../admin/php/classe_arvore.php");
+		$arvore = new Arvore($this->locaplic,$this->idioma);
+		$temas = $arvore->formataTemasSubgrupo($subgrupo,$this->perfil);
+		unset($arvore);
+		return($temas);
 	}
 /*
 function: pegaListaDeMapas
@@ -621,13 +282,12 @@ Array
 	{
 		error_reporting(0);
 		include_once($this->locaplic."/admin/php/xml.php");
-		if ($this->locsistemas != "")
-		{$xmlsistemas = simplexml_load_file($this->locsistemas);}
-		else
-		{$xmlsistemas = simplexml_load_string(geraXmlSistemas(implode(" ",$this->perfil),$this->locaplic,$this->editores));}
+		$xmlsistemas = simplexml_load_string(geraXmlSistemas(implode(" ",$this->perfil),$this->locaplic,$this->editores));
+		$sistemas = array();
 		foreach($xmlsistemas->SISTEMA as $s)
 		{
 			$publicado = $this->ixml($s,"PUBLICADO");
+
 			if(strtolower($publicado) != "nao" || $this->editor)
 			{
 				$nomesis = $this->ixml($s,"NOMESIS");

@@ -13,7 +13,7 @@ Licenca:
 
 GPL2
 
-I3Geo Interface Integrada de Ferramentas de Geoprocessamento para Internet
+i3Geo Interface Integrada de Ferramentas de Geoprocessamento para Internet
 
 Direitos Autorais Reservados (c) 2006 Ministério do Meio Ambiente Brasil
 Desenvolvedor: Edmar Moretti edmar.moretti@mma.gov.br
@@ -163,15 +163,14 @@ function pegaListaDeAtlas()
 			{
 				local.innerHTML = retorno.data.tituloinstituicao+"<br><p><b>Nenhum atlas encontrado";
 				return;
-			}
-				
+			}	
 			atlasxml = retorno.data.atlasxml;
 			var i = 0;
 			do
 			{
 				if (listaAtlas[i].ID)
 				{
-					var inicia = i3GEO.configura.locaplic+"/classesphp/atlas_controle.php?atlasxml= "+atlasxml+"&atlasId_="+listaAtlas[i].ID+"&funcao=criaAtlas";
+					var inicia = i3GEO.configura.locaplic+"/classesphp/atlas_controle.php?atlasId_="+listaAtlas[i].ID+"&funcao=criaAtlas";
 					texto += "<tr><td >";
 					if (listaAtlas[i].ICONE != "")
 					{

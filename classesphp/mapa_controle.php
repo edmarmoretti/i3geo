@@ -88,8 +88,6 @@ Variáveis de Seção:
 dir_tmp - diretório, no servidor, temporário utilizado pelo I3Geo, exemplo: c:/ms4w/tmp/ms_tmp
 locmapserv - localização, no servidor, do CGI, exemplo: /cgi-bin/mapserv.exe
 locaplic - localização, no servidor, do I3Geo, exemplo: c:/ms4w/apache/htdocs/i3geo
-locsistemas - localização do xml com a llista de temas, exemplo: /menutemas/sistemas.xml
-locidentifica - localilzação do xml que define os sistemas adicionais incluídos na opção de identificação, exemplo: /menutemas/identifica.xml
 R_path - localização, no servidor, do executável do pacote R, exemplo: c:/ms4w/apache/htdocs/i3geo/pacotes/r/win/bin/R.exe
 imgurl - url das imagens geradas pelo mapa, exemplo: http://localhost/ms_tmp/imgTVHbdijFMk/
 tmpurl - url do diretório temporário, exemplo: http://localhost/ms_tmp/
@@ -1737,15 +1735,8 @@ Pega a lista de tags registrados nos menus de temas.
 <Menutemas->listatags>
 */
 	case "LISTATAGS":
-		if(!isset($menutemas))
-		{
-			if (file_exists("../ms_configura.php"))
-			{include_once("../ms_configura.php");}
-			else
-			{include_once($locaplic."/ms_configura.php");}
-		}
 		include_once("classe_menutemas.php");
-		$m = new Menutemas($map_file,$perfil,$locsistemas,$locaplic,$menutemas,$urli3geo);
+		$m = new Menutemas($map_file,$perfil,$locaplic,$urli3geo);
 		$retorno = $m->listatags($rss,$nrss);
 	break;
 /*
@@ -1756,15 +1747,8 @@ Pega a lista de menus para incluir na guia adiciona.
 <Menutemas->pegaListaDeMenus>
 */
 	case "PEGALISTADEMENUS":
-		if(!isset($menutemas) || !isset($editores))
-		{
-			if (file_exists("../ms_configura.php"))
-			{include_once("../ms_configura.php");}
-			else
-			{include_once($locaplic."/ms_configura.php");}
-		}
 		include_once("classe_menutemas.php");
-		$m = new Menutemas($map_file,$perfil,$locsistemas,$locaplic,$menutemas,$urli3geo,$editores,$idioma);
+		$m = new Menutemas($map_file,$perfil,$locaplic,$urli3geo,$editores,$idioma);
 		$retorno = $m->pegaListaDeMenus();
 	break;
 /*
@@ -1775,17 +1759,9 @@ Pega a lista de grupos do menu.
 <Menutemas->pegaListaDeGrupos>
 */
 	case "PEGALISTADEGRUPOS":
-		if(!isset($menutemas) || !isset($editores))
-		{
-			if (file_exists("../ms_configura.php"))
-			{include_once("../ms_configura.php");}
-			else
-			{include_once($locaplic."/ms_configura.php");}
-		}
 		include_once("classe_menutemas.php");
-
 		if(!isset($urli3geo)){$urli3geo = "";}
-		$m = new Menutemas($map_file,$perfil,$locsistemas,$locaplic,$menutemas,$urli3geo,$editores,$idioma);
+		$m = new Menutemas($map_file,$perfil,$locaplic,$urli3geo,$editores,$idioma);
 		if(!isset($idmenu)){$idmenu="";}
 		if(!isset($listasistemas)){$listasistemas="nao";}
 		if(!isset($listasgrupos)){$listasgrupos="nao";}
@@ -1799,15 +1775,8 @@ Pega a lista de sistemas.
 <Menutemas->pegaSistemas>
 */
 	case "PEGASISTEMAS":
-		if(!isset($locsistemas) || !isset($editores))
-		{
-			if (file_exists("../ms_configura.php"))
-			{include_once("../ms_configura.php");}
-			else
-			{include_once($locaplic."/ms_configura.php");}
-		}
 		include_once("classe_menutemas.php");
-		$m = new Menutemas($map_file,$perfil,$locsistemas,$locaplic,"","",$editores,$idioma);
+		$m = new Menutemas($map_file,$perfil,$locaplic,"",$editores,$idioma);
 		$retorno = $m->pegaSistemas();
 	break;
 
@@ -1819,15 +1788,8 @@ Pega a lista de subgrupos de um grupo do menu.
 <Menutemas->pegaListaDeSubGrupos>
 */
 	case "PEGALISTADESUBGRUPOS":
-		if(!isset($menutemas) || !isset($editores))
-		{
-			if (file_exists("../ms_configura.php"))
-			{include_once("../ms_configura.php");}
-			else
-			{include_once($locaplic."/ms_configura.php");}
-		}
 		include_once("classe_menutemas.php");
-		$m = new Menutemas($map_file,$perfil,$locsistemas,$locaplic,$menutemas,$urli3geo,$editores,$idioma);
+		$m = new Menutemas($map_file,$perfil,$locaplic,$urli3geo,$editores,$idioma);
 		if(!isset($idmenu)){$idmenu = "";}
 		$retorno = $m->pegaListaDeSubGrupos($grupo,$idmenu);
 	break;
@@ -1839,15 +1801,8 @@ Pega a lista de temas do menu.
 <Menutemas->pegaListaDeTemas>
 */
 	case "PEGALISTADETEMAS":
-		if(!isset($menutemas) || !isset($editores))
-		{
-			if (file_exists("../ms_configura.php"))
-			{include_once("../ms_configura.php");}
-			else
-			{include_once($locaplic."/ms_configura.php");}
-		}
 		include_once("classe_menutemas.php");
-		$m = new Menutemas($map_file,$perfil,$locsistemas,$locaplic,$menutemas,$urli3geo,$editores,$idioma);
+		$m = new Menutemas($map_file,$perfil,$locaplic,$urli3geo,$editores,$idioma);
 		if(!isset($idmenu)){$idmenu = "";}
 		$retorno = array("temas"=>$m->pegaListaDeTemas($grupo,$subgrupo,$idmenu));
 	break;
@@ -1859,15 +1814,8 @@ Procura um tema no menu considerando apenas os existentes em subgruppos.
 <Menutemas->procurartemas>
 */
 	case "PROCURARTEMAS":
-		if(!isset($menutemas) || !isset($editores))
-		{
-			if (file_exists("../ms_configura.php"))
-			{include_once("../ms_configura.php");}
-			else
-			{include_once($locaplic."/ms_configura.php");}
-		}
 		include_once("classe_menutemas.php");
-		$m = new Menutemas($map_file,$perfil,$locsistemas,$locaplic,$menutemas,$urli3geo,$editores,$idioma);
+		$m = new Menutemas($map_file,$perfil,$locaplic,$urli3geo,$editores,$idioma);
 		$retorno = $m->procurartemas($procurar);
 	break;
 /*
@@ -1878,15 +1826,8 @@ Procura um tema no menu considerando todos os níveis.
 <Menutemas->procurartemas2>
 */
 	case "PROCURARTEMAS2":
-		if(!isset($menutemas) || !isset($editores))
-		{
-			if (file_exists("../ms_configura.php"))
-			{include_once("../ms_configura.php");}
-			else
-			{include_once($locaplic."/ms_configura.php");}
-		}
 		include_once("classe_menutemas.php");
-		$m = new Menutemas($map_file,$perfil,$locsistemas,$locaplic,$menutemas,$urli3geo,$editores,$idioma);
+		$m = new Menutemas($map_file,$perfil,$locaplic,$urli3geo,$editores,$idioma);
 		$retorno = $m->procurartemas2($procurar);
 	break;	
 /*
@@ -1900,14 +1841,7 @@ Utilizado no preenchimento da guia mapas
 */
 	case "PEGAMAPAS":
 		include_once("classe_menutemas.php");
-		if(!isset($menutemas) || !isset($editores))
-		{
-			if (file_exists("../ms_configura.php"))
-			{include_once("../ms_configura.php");}
-			else
-			{include_once($locaplic."/ms_configura.php");}
-		}
-		$m = new Menutemas($map_file,$perfil,$locsistemas,$locaplic,$menutemas,$urli3geo,$idioma);
+		$m = new Menutemas($map_file,$perfil,$locaplic,$urli3geo,$idioma);
 		$retorno = $m->pegaListaDeMapas($locmapas);
 	break;	
 /*
@@ -2968,7 +2902,7 @@ tipoimagem {String} - tipo de imagem que será gerada nenhum|cinza|sepianormal|se
 */
 function redesenhaMapa()
 {
-	global $tempo,$map_file,$locsistemas,$locidentifica,$tipoimagem,$cp,$postgis_mapa,$utilizacgi,$locmapserv,$interface,$mapexten;
+	global $tempo,$map_file,$tipoimagem,$cp,$postgis_mapa,$utilizacgi,$locmapserv,$interface,$mapexten;
 	if($tipoimagem != "nenhum" && $tipoimagem != "")
 	{$utilizacgi = "nao";}
 	if (connection_aborted()){exit();}
@@ -3001,7 +2935,7 @@ function redesenhaMapa()
 		$res["mapurl"] = "";		
 	}
 	else{
-		$res = $m->redesenhaCorpo($locsistemas,$locidentifica,$tipoimagem,$utilizacgi,$locmapserv);
+		$res = $m->redesenhaCorpo($tipoimagem,$utilizacgi,$locmapserv);
 	}
 	$res["mensagens"] = $m->pegaMensagens();
 	$res["tempo"] = microtime(1) - $tempo;

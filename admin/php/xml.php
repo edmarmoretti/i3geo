@@ -402,7 +402,7 @@ function geraXmlRSS($locaplic,$sql,$descricao)
 }
 function geraXmlAtlas($locaplic,$editores)
 {
-	error_reporting(0);
+	error_reporting(E_ALL);
 	$dbh = "";
 	include($locaplic."/admin/php/conexao.php");
 	if($convUTF)
@@ -410,7 +410,6 @@ function geraXmlAtlas($locaplic,$editores)
 	else
 	$xml = "<"."\x3F"."xml version='1.0' encoding='ISO-8859-1' "."\x3F".">";
 	$xml .= "\n<RAIZ>\n";
-	
 	//$q = "select * from i3geoadmin_atlas";
 	$qatlas = $dbh->query("select * from i3geoadmin_atlas");
 	

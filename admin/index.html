@@ -20,10 +20,7 @@
 <p>Entre uma versão e outra do i3Geo o banco de dados de administração pode sofrer alterações. Consulte o documento i3geo/guia_de_migracao.txt para verificar os detalhes.</p>
 <p>Antes da vers&atilde;o 4.0 o i3geo utilizava arquivos armazenados em disco (arquivos XML) para configurar as 
 &aacute;rvores de adi&ccedil;&atilde;o de camadas, listagens de endere&ccedil;os, lista de mapas, etc.  
-Com a nova estrutura de administra&ccedil;&atilde;o, esses arquivos podem ser substitu&iacute;dos por registros em bancos de dados.
-Se voc&ecirc; optar por usar um banco de dados, os arquivos antigos poder&atilde;o ser importados para o banco 
-(veja as op&ccedil;ões de importa&ccedil;&atilde;o). Se vc desejar continuar utilizando os arquivos XML em disco, basta 
-editar as vari&aacute;veis de configura&ccedil;&atilde;o existentes em i3geo/ms_configura.php.</p>
+Com a nova estrutura de administra&ccedil;&atilde;o, esses arquivos foram substitu&iacute;dos por registros em bancos de dados.</p>
 <p>Para possibilitar a distribui&ccedil;&atilde;o do i3geo de forma independente de banco de dados, optou-se pelo uso do gerenciador 
 SQLITE, cujo arquivo com os dados fica armazenado em i3geo/menutemas/admin.db. Os programas em PHP que gerenciam esse banco 
 utilizam o pacote PDO, possibilitando que seja utilizado outro gerenciador, como o POSTGRESQL, entre outros.</p>
@@ -83,7 +80,6 @@ essa cria&ccedil;&atilde;o podem ser obtidos no item "Outras op&ccedil;ões".</p>
 <table class=lista1 >
 <tr onclick="ajuda('a2',this)"><td><div class=ajuda  ></div></td><td>Ajuda</td></tr>
 <tr onclick="abre('html/arvore.html')"><td><div class=aplicar ></div></td><td>Editar a &aacute;rvore dos menus</td></tr>
-<tr onclick="abre('html/importarmenu.html')"><td><div class=aplicar ></div></td><td>Importar XML</td></tr>
 </table>
 </div>
 </fieldset>
@@ -112,7 +108,6 @@ essa cria&ccedil;&atilde;o podem ser obtidos no item "Outras op&ccedil;ões".</p>
 <table class=lista1 >
 <tr onclick="ajuda('a3',this)"><td><div class=ajuda  ></div></td><td>Ajuda</td></tr>
 <tr onclick="abre('html/mapas.html')"><td><div class=aplicar ></div></td><td>Edi&ccedil;&atilde;o dos links</td></tr>
-<tr onclick="abre('html/mapas_importar.html')"><td><div class=aplicar ></div></td><td>Importar XML</td></tr>
 </table>
 </div>
 </fieldset>
@@ -129,7 +124,6 @@ essa cria&ccedil;&atilde;o podem ser obtidos no item "Outras op&ccedil;ões".</p>
 <table class=lista1 >
 <tr onclick="ajuda('a7',this)"><td><div class=ajuda  ></div></td><td>Ajuda</td></tr>
 <tr onclick="abre('html/atlas.html')"><td><div class=aplicar ></div></td><td>Edi&ccedil;&atilde;o dos atlas</td></tr>
-<tr onclick="abre('html/atlas_importar.html')"><td><div class=aplicar ></div></td><td>Importar XML</td></tr>
 </table>
 </div>
 </fieldset>
@@ -147,7 +141,6 @@ essa cria&ccedil;&atilde;o podem ser obtidos no item "Outras op&ccedil;ões".</p>
 <table class=lista1 >
 <tr onclick="ajuda('a4',this)"><td><div class=ajuda  ></div></td><td>Ajuda</td></tr>
 <tr onclick="abre('html/webservices.html')"><td><div class=aplicar ></div></td><td>Edi&ccedil;&atilde;o do cadastro</td></tr>
-<tr onclick="abre('html/webservices_importar.html')"><td><div class=aplicar ></div></td><td>Importar XML</td></tr>
 </table>
 </div>
 </fieldset>
@@ -162,7 +155,6 @@ essa cria&ccedil;&atilde;o podem ser obtidos no item "Outras op&ccedil;ões".</p>
 <table class=lista1 >
 <tr onclick="ajuda('a5',this)"><td><div class=ajuda  ></div></td><td>Ajuda</td></tr>
 <tr onclick="abre('html/identifica.html')"><td><div class=aplicar ></div></td><td>Edi&ccedil;&atilde;o dos sistemas</td></tr>
-<tr onclick="abre('html/identifica_importar.html')"><td><div class=aplicar ></div></td><td>Importar XML</td></tr>
 </table>
 </div>
 </fieldset>
@@ -179,7 +171,6 @@ essa cria&ccedil;&atilde;o podem ser obtidos no item "Outras op&ccedil;ões".</p>
 <table class=lista1 >
 <tr onclick="ajuda('a6',this)"><td><div class=ajuda  ></div></td><td>Ajuda</td></tr>
 <tr onclick="abre('html/sistemas.html')"><td><div class=aplicar ></div></td><td>Edi&ccedil;&atilde;o dos sistemas</td></tr>
-<tr onclick="abre('html/sistemas_importar.html')"><td><div class=aplicar ></div></td><td>Importar XML</td></tr>
 </table>
 </div>
 </fieldset>
@@ -194,10 +185,7 @@ essa cria&ccedil;&atilde;o podem ser obtidos no item "Outras op&ccedil;ões".</p>
 <tr onclick="abre('php/sqlite.php')"><td><div class=aplicar ></div></td><td>Descri&ccedil;&atilde;o do banco padr&atilde;o (SQLITE)</td></tr>
 <tr onclick="abre('php/criabanco.php')"><td><div class=aplicar ></div></td><td>Criar banco de dados</td></tr>
 <tr onclick="abre('../geraminiatura.php')"><td><div class=aplicar ></div></td><td>Gera as miniaturas (thumbnails) para os temas existentes no diret&oacute;rio i3geo/temas</td></tr>
-<tr onclick="abre('xmlmenutemas.php?id_menu=0')"><td><div class=aplicar ></div></td><td>Ver xml com a &aacute;rvore de temas</td></tr>
-<tr onclick="abre('xmlatlas.php')"><td><div class=aplicar ></div></td><td>Ver xml com os Atlas</td></tr>
-<tr onclick="abre('xmlidentifica.php')"><td><div class=aplicar ></div></td><td>Ver xml com os sistemas utilizados na ferramenta de identifica&ccedil;&atilde;o</td></tr>
-<tr onclick="abre('xmlmapas.php')"><td><div class=aplicar ></div></td><td>Ver xml com a lista de mapas</td></tr>
+
 <tr onclick="abre('xmlgeorss.php')"><td><div class=aplicar ></div></td><td>Ver xml com a lista de servi&ccedil;os Geo RSS</td></tr>
 <tr onclick="abre('xmlservicoswms.php')"><td><div class=aplicar ></div></td><td>Ver xml com a lista de servi&ccedil;os WMS</td></tr>
 <tr onclick="abre('xmlservicosws.php')"><td><div class=aplicar ></div></td><td>Ver xml com a lista de servi&ccedil;os WS (webservices convencionais)</td></tr>
@@ -234,18 +222,6 @@ Veja também:
 <Editor de mapfiles de inicialização>
 
 <Editor do ms_configura>
-
-<Importador da lista de Atlas>
-
-<Importador da lista de mapas>
-
-<Importador da lista de sistemas da ferramenta de identificação>
-
-<Importador da lista de sistemas especiais de adição de temas>
-
-<Importador da lista de Web Services>
-
-<Importador do xml menutemas.xml>
 
 <Mapas>
 

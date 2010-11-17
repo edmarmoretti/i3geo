@@ -46,11 +46,10 @@ parameters:
 
 $atlasxml - Objeto xml com o atlas.
 */  	
-	function __construct($xml,$arquivo)
+	function __construct($xml)
 	{
-  		error_reporting(0);
+  		error_reporting(E_ALL);
   		$this->xml = $xml;
-  		$this->arquivo = $arquivo;
 	}
 /*
 Method: pegaListaDeAtlas
@@ -69,7 +68,7 @@ tituloinstituicao - é utilizado para montar o cabeçalho HTML com a lista de atla
 		{
 			$atlas[] =  array("PUBLICADO"=>ixml($s,"PUBLICADO"),"ID"=>ixml($s,"ID"),"TITULO"=>ixml($s,"TITULO"),"DESCRICAO"=>ixml($s,"DESCRICAO"),"ICONE"=>ixml($s,"ICONE"),"W"=>ixml($s,"WABERTURA"),"H"=>ixml($s,"HABERTURA"),"TEMPLATEHTML"=>ixml($s,"TEMPLATEHTML"));
 		}
-		return (array("atlas"=>$atlas,"tituloinstituicao"=>$tituloinstituicao,"atlasxml"=>$this->arquivo));
+		return (array("atlas"=>$atlas,"tituloinstituicao"=>$tituloinstituicao));
 	}
 /*
 Method: criaAtlas

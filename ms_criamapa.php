@@ -72,7 +72,7 @@ executa - programa ou função em php que será executado via include. O include é 
 
 interface - nome da interface que será utilizada para abrir o mapa. As interfaces são arquivos HTML que podem estar no diretório aplicmap. Por default, utiliza-se o geral.htm. Vc pode copiar esse html e alterá-lo para customizar o mapa. Para chamar o html customizado, utilize ms_criamapa.php?interface=meumapa.htm
 
-perfil - perfil utilizado para restringir os menus de temas. O menu com os temas mostrados no i3geo são definidos no arquivo menutemas/menutemas.xml. Nesse arquivo,pode-se utilizar um elemento <PERFIL></PERFIL> indicando que o tema apenas será mostrado em perfis específicos. Por exempo: ms_criamapa.php?perfil=usuário1
+perfil - perfil utilizado para restringir os menus de temas. ms_criamapa.php?perfil=usuário1
 
 caminho - caminho para os programas que serão incluídos com "include". Ao chamar o programa ms_criamapa.php por meio de "include" é necessário especificar essa variável para indicar o caminho correto do i3geo.
 

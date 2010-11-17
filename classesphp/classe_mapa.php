@@ -257,8 +257,6 @@ Redesenha o mapa e retorna as variáveis necessárias para montar o mapa.
 
 Parametros:
 
-$locsistemas - Endereço do arquivo xml com a lista de sistemas adicionais.
-$locidentifica - Variável definida no arquivo ms_configura.php que identifica se existem sistemas adicionais a ser mostrados na opção de identificação.
 $tipoimagem - filtro que será aplicado na imagem (opcional).
 
 Return:
@@ -268,7 +266,7 @@ string - parametros do corpo do mapa
 Include:
 <classe_imagem.php>
 */
-	function redesenhaCorpo($locsistemas,$locidentifica,$tipoimagem,$utilizacgi,$locmapserv)
+	function redesenhaCorpo($tipoimagem,$utilizacgi,$locmapserv)
 	{
 		if(file_exists($this->locaplic."/classe_imagem.php"))
   		include_once($this->locaplic."/classe_imagem.php");
@@ -380,7 +378,6 @@ Include:
 		{
 			$nomer = $locmapserv."?map=".$this->arquivo."&mode=map&".nomeRandomico();
 		}
-		//$res = "g_locidentifica='".$locidentifica."';g_sistemas='".$locsistemas."';var g_celula=".$this->mapa->cellsize.";var mapscale = ".$this->mapa->scale.";var mapres=".$this->mapa->resolution.";var mapcellsize=".$this->mapa->cellsize.";var mapexten='".$ext."';var mapimagem='".$nomer."';var mapwidth=".$imgo->width.";var mapheight=".$imgo->height.";var mappath='".$imgo->imagepath."';var mapurl='".$imgo->imageurl."';var erro='".$mensagemErro."'";
 		$res["mapscale"] = $this->mapa->scale;
 		$res["mapres"] = $this->mapa->resolution;
 		$res["pixelsize"] = $this->mapa->cellsize;

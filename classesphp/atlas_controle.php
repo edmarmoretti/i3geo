@@ -53,8 +53,6 @@ Variáveis de Seção:
 dir_tmp - diretório, no servidor, temporário utilizado pelo I3Geo, exemplo: c:/ms4w/tmp/ms_tmp
 locmapserv - localização, no servidor, do CGI, exemplo: /cgi-bin/mapserv.exe
 locaplic - localização, no servidor, do I3Geo, exemplo: c:/ms4w/apache/htdocs/i3geo
-locsistemas - localização do xml com a llista de temas, exemplo: /menutemas/sistemas.xml
-locidentifica - localilzação do xml que define os sistemas adicionais incluídos na opção de identificação, exemplo: /menutemas/identifica.xml
 R_path - localização, no servidor, do executável do pacote R, exemplo: c:/ms4w/apache/htdocs/i3geo/pacotes/r/win/bin/R.exe
 imgurl - url das imagens geradas pelo mapa, exemplo: http://localhost/ms_tmp/imgTVHbdijFMk/
 tmpurl - url do diretório temporário, exemplo: http://localhost/ms_tmp/
@@ -80,39 +78,22 @@ if(isset($g_sid))
 	session_id($g_sid);
 	session_start();
 	foreach(array_keys($_SESSION) as $k)
-	{
-		eval("\$".$k."='".$_SESSION[$k]."';");
-	}
+	{eval("\$".$k."='".$_SESSION[$k]."';");}
 	$postgis_mapa = $_SESSION["postgis_mapa"];
 }
 if (($funcao == "pegaListaDeAtlas") || ($funcao == "criaAtlas"))
 {$map_file = "";}
-
-if (!isset($atlasxml) || $atlasxml == "")// || !isset($editores))
-{
-	include_once("../ms_configura.php");
-}
 //
 //ativa o php mapscript e as extensões necessárias
 //se as extensões já estiverem carregadas no PHP, vc pode comentar essa linha para que o processamento fique mais rápido
 //
 include_once("carrega_ext.php");
 include_once("funcoes_gerais.php");
-//include_once("../pacotes/cpaint/cpaint2.inc.php");
-
-//
-//cria objeto cpaint para uso com ajax
-//
-//$cp = new cpaint();
-//$cp->set_data("");
 //
 //verifica se o usuário está tentando utilizar um link que não funciona mais
 //
 if (!isset($map_file))
 {
-	//nesse caso é necessário criar o diretório temporário e iniciar o mapa
-	//$cp->set_data("linkquebrado");
-	//$cp->return_data();
 	cpjson(array("erro"=>"linkquebrado"));
 	exit;
 }
@@ -129,13 +110,15 @@ if ($map_file != "")
 	//
 	substituiCon($map_file,$postgis_mapa);
 }
-if($atlasxml == "")
+if(!isset($locaplic))
 {
-	include($locaplic."/admin/php/xml.php");
-	$xml = simplexml_load_string(geraXmlAtlas($locaplic,$editores));
+	if(file_exists("../ms_configura.php"))
+	{include_once("../ms_configura.php");}
+	else
+	{include_once("ms_configura.php");}
 }
-else
-$xml = simplexml_load_file($atlasxml);
+include($locaplic."/admin/php/xml.php");
+$xml = simplexml_load_string(geraXmlAtlas($locaplic,$editores));
 //
 //faz a busca da função que deve ser executada
 //
@@ -150,7 +133,7 @@ Pega a lista de Atlas definida no arquivo xml menutemas/atlas.xml.
 */
 	case "PEGALISTADEATLAS":
 		include_once("classe_atlas.php");
-		$atl = new Atlas($xml,$atlasxml);
+		$atl = new Atlas($xml);
 		$retorno = $atl->pegaListaDeAtlas($tituloInstituicao);
 	break;
 /*
@@ -158,14 +141,13 @@ Valor: CRIAATLAS
 
 Abre um Atlas específico, criando o mapa e chamando a interface desejada.
 
-Esse programa é chamado diretamente, por exemplo, i3geo/classesphp/atlas_controle.php?atlasxml=&atlasId=
+Esse programa é chamado diretamente, por exemplo, i3geo/classesphp/atlas_controle.php?&atlasId=
 
 <criaAtlas()>
 */
 	case "CRIAATLAS":
 		include_once("classe_atlas.php");
-		$atlasxmltemp = $atlasxml;
-		$atl = new Atlas($xml,$atlasxml);
+		$atl = new Atlas($xml);
 		$res = $atl->criaAtlas($atlasId_);
 		$interface = $res["interface"];
 		$base = $res["base"];
@@ -193,7 +175,7 @@ Pega a lista de pranchas de um atlas específico.
 */
 	case "PEGALISTADEPRANCHAS":
 		include_once("classe_atlas.php");
-		$atl = new Atlas($xml,$atlasxml);
+		$atl = new Atlas($xml);
 		$retorno = $atl->pegaListaDePranchas($atlasId);
 	break;
 /*
@@ -205,7 +187,7 @@ Ativa uma prancha do atlas.
 */
 	case "ABREPRANCHA":
 		include_once("classe_atlas.php");
-		$atl = new Atlas($xml,$atlasxml);
+		$atl = new Atlas($xml);
 		$retorno = $atl->abrePrancha($atlasId,$pranchaId,$map_file,$locaplic);
 	break;
 }
@@ -222,10 +204,9 @@ else
 {exit();}
 function gravaid()
 {
-	global $atlasId_,$tmpfname,$atlasxmltemp;//a variavel tmpfname vem do ms_criamapa.php
+	global $atlasId_,$tmpfname;//a variavel tmpfname vem do ms_criamapa.php
 	$_SESSION["atlasId"] = $atlasId_;
 	$_SESSION["utilizacgi"] = "nao";
-	$_SESSION["atlasxml"] = $atlasxmltemp;
 	$m = ms_newMapObj($tmpfname);
 	$c = $m->numlayers;
 	for ($i=0;$i < $c;++$i)

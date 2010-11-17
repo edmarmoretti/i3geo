@@ -155,40 +155,6 @@ if (strtoupper(substr(PHP_OS, 0, 3) == 'WIN'))
 	*/
 	$locmapserv = "/cgi-bin/mapserv.exe";
 	/*
-	Variable: locsistemas
-	
-	Onde fica o xml que será utilizado para complementar a lista de temas disponíveis na árvore de adição de temas.
-	
-	Se for "" será utilizado o sistema de administração do i3geo (veja i3geo/admin).
-	
-	Com base no arquivo xml é montada uma árvore de opções que é adicionada à arvore de temas mostrada na guia "Adiciona" do i3geo.
-	
-	Por meio dessa nova árvore pode-se disparar programas PHP que executam operações especiais para a montagem de uma nova camada a ser adicionada ao mapa.
-	
-	Veja a documentação específica do arquivo sistemas.xml para maiores detalhes.
-	
-	Tipo:
-	{string}
-	*/
-	$locsistemas = "";
-	/*
-	Variable: locidentifica 
-	
-	Onde fica o xml que será utilizado para complementar a lista de temas disponíveis na ferramenta de identificação.
-	
-	Se for "" será utilizado o sistema de administração do i3geo (veja i3geo/admin).		
-	
-	Com base no arquivo xml é montada uma lista de opções que é adicionada à lista de temas mostrada ferramenta de identificação de elementos no mapa.
-	
-	Por meio dessa lista pode-se disparar programas PHP que executam operações especiais para a obtenção de dados com base em um par de coordenadas xy.
-	
-	Veja a documentação específica do arquivo identifica.xml para maiores detalhes.
-	
-	Tipo:
-	{string}
-	*/
-	$locidentifica = "";
-	/*
 	Variable: locmapas 
 	
 	Onde fica o xml, para preencher a guia mapas.
@@ -243,32 +209,6 @@ if (strtoupper(substr(PHP_OS, 0, 3) == 'WIN'))
 	*/
 	$postgis_mapa = array("teste"=>"user=postgres password=postgres dbname=pgutf8 host=localhost port=5432 options='-c client_encoding=LATIN1'"); //"user=geodados password=geodados dbname=geodados host=10.1.1.36 port=5432";
 	/*
-	Variable: menutemas
-	
-	Array com a lista de arquivos xml que serão incluidos na guia de adição de temas. Se for "", será utilizado o arquivo default menutemas/menutemas.xml.
-	
-	Esse xml define a lista de temas que serão mostrados na guia "Adiciona".
-	
-	Para mais detalhes veja a documentação específica do arquivo menutemas/menutemas.xml
-	
-	Utilize o caminho completo no servidor para o nome dos wml, assim vc evita problemas em serviços do tipo kml e ogc
-	
-	Example:
-
-	$menutemas = array(
-		array("publicado"=>"sim","idmenu"=>"A","arquivo"=>"http://localhost/i3geo/menutemas/geopr.xml","status"=>"fechado"),
-		array("publicado"=>"sim","idmenu"=>"B","arquivo"=>"http://localhost/i3geo/menutemas/menutemas.xml","status"=>"aberto")
-		);
-
-		
-	Para usar o menu default, utilize apenas $menutemas = ""; nesse caso, os menus serão obtidos do 
-	banco de dados de administração. Para editar o banco de dados utilize http://localhost/i3geo/admin
-	
-	Tipo:
-	{string}
-	*/
-	$menutemas = "";
-	/*
 	Variable: utilizacgi
 	
 	Variável indicando se o desenho do corpo do mapa será baseado no modo cgi.
@@ -286,17 +226,6 @@ if (strtoupper(substr(PHP_OS, 0, 3) == 'WIN'))
 	{string}
 	*/
 	$utilizacgi = "nao";
-	/*
-	 Variable: atlasxml
-	 
-	 Indica o nome do arquivo xml que será utilizado na interface Atlas do i3geo.
-	 
-	 Pode ser utilizado o caminho relativo, tendo como base i3geo/diretorio
-	 
-	 Tipo:
-	 {string}
-	*/
-	$atlasxml = "";
 	/*
 	 Variable: expoeMapfile
 	 
@@ -356,14 +285,9 @@ else //se for linux
 	$dir_tmp = "/var/tmp/ms_tmp";
 	$locmapserv = "/cgi-bin/mapserv";
 	$locaplic = "/opt/www/html/i3geo";
-	$locsistemas= "";//"http://dsvmapas.mma.gov.br/i3geo/menutemas/sistemas.xml";
-	$locidentifica = "";//"http://dsvmapas.mma.gov.br/i3geo/menutemas/identifica.xml";
-	$locmapas = "";//"http://dsvmapas.mma.gov.br/abremapa.php?id=xml";
 	$R_path = "R";//se vc não instalou o R no seu servidor, tente o endereço $R_path = $locaplic."/pacotes/r/linux/r";
 	$postgis_mapa = "";
-	$menutemas = ""; 
 	$utilizacgi = "nao";
-	$atlasxml = "";//"../menutemas/atlas.xml";
 	$expoeMapfile = "sim";
 	$conexaoadmin = "";
 	$interfacePadrao = "openlayers.htm";

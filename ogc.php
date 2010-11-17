@@ -2,7 +2,7 @@
 /*
 Title: ogc.php
 
-Gera web services nos padrões OGC baseado no menutemas.xml
+Gera web services nos padrões OGC
 
 Licenca
 
@@ -236,7 +236,7 @@ else
 	$conta = 0;
 	$int = explode(",",$intervalo);
 	$codigosTema = array();
-	$m = new Menutemas("",$perfil,$locsistemas,$locaplic,$menutemas,$urli3geo);
+	$m = new Menutemas("",$perfil,$locaplic,$urli3geo);
 	$menus = $m->pegaListaDeMenus();
 	foreach ($menus as $menu)
 	{	
@@ -325,21 +325,11 @@ ms_ioresethandlers();
 //
 function ogc_pegaListaDeMenus()
 {
-	global $perfil,$menutemas,$locsistemas,$locaplic,$urli3geo;
+	global $perfil,$locaplic,$urli3geo;
 	if(!isset($perfil)){$perfil = "";}
-	if($menutemas != "" || is_array($menutemas))
-	{
-		foreach($menutemas as $m)
-		{$menus[] = $m["arquivo"];	}
-	}
-	else
-	{
-		$m = new Menutemas("",$perfil,$locsistemas,$locaplic,"",$urli3geo);
-		foreach($m->pegaListaDeMenus() as $menu)
-		{$menus[] = $urli3geo."/admin/xmlmenutemas.php?id_menu=".$menu["idmenu"];}
-	}
-	if(!isset($menus))
-	{$menus = array("menutemas/menutemas.xml");}
+	$m = new Menutemas("",$perfil,$locsistemas,$locaplic,"",$urli3geo);
+	foreach($m->pegaListaDeMenus() as $menu)
+	{$menus[] = $urli3geo."/admin/xmlmenutemas.php?id_menu=".$menu["idmenu"];}
 	return $menus;
 }
 function ogc_imprimeAjuda()
@@ -356,8 +346,8 @@ function ogc_imprimeAjuda()
 }
 function ogc_imprimeListaDeTemas()
 {
-	global $urli3geo,$perfil,$locsistemas,$locaplic,$menutemas;
-	$m = new Menutemas("",$perfil,$locsistemas,$locaplic,$menutemas,$urli3geo);
+	global $urli3geo,$perfil,$locaplic;
+	$m = new Menutemas("",$perfil,$locaplic,$urli3geo);
 	$menus = $m->pegaListaDeMenus();
 	echo '<html><head><title>WMS</title><META HTTP-EQUIV="Content-Type" CONTENT="text/html; charset=ISO-8859-1"><meta name="description" content="OGC"><meta name="keywords" content="WMS OGC mapa sig gis webmapping geo geoprocessamento interativo meio ambiente MMA cartografia geografia"> <meta name="robots" content="index,follow">';
 	echo "<body><b>Lista de temas por grupos e subgrupos e endereços de acesso aos dados por meio de Web Services WMS (os códigos dos temas estão em vermelho)</b><br><br>";

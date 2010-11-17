@@ -91,7 +91,7 @@ $protocolo = strtolower($protocolo[0]) . '://'.$_SERVER['SERVER_NAME'] .":". $_S
 $urli3geo = str_replace("/mobile/adicionatema.php","",$protocolo.$_SERVER["PHP_SELF"]);
 if ($tipo == "listatemas")
 {
-	$m = new Menutemas("","",$locsistemas,$locaplic,$menutemas,$urli3geo,$editores);
+	$m = new Menutemas("","",$locaplic,$urli3geo,$editores);
 	$r = $m->pegaListaDeTemas($grupo,$subgrupo,$idmenu);
 	echo "<h1>Escolha o tema:</h1>";
 	foreach($r as $l)
@@ -112,7 +112,7 @@ if($tipo == "adicionatema")
 if ($tipo == "adicionar")
 {
 	echo "<h1>Escolha o sub-grupo:</h1>";
-	$m = new Menutemas("","",$locsistemas,$locaplic,$menutemas,$urli3geo,$editores);
+	$m = new Menutemas("","",$locaplic,$urli3geo,$editores);
 	$menus = $m->pegaListaDeMenus();
 	
 	foreach ($menus as $menu)
