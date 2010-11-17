@@ -6,7 +6,17 @@ Para a versão 4.5
 	i3geo/aplicmap para o diretório i3geo/interface. Caso existam links apontando diretamente para
 	esses arquivos, vc pode simplesmente copiar os arquivos existentes na nova pasta para a antiga.
 
-	As variáveis de configuração $temasdir e $temasaplic foram removidas. Em seu lugar, utilize $locaplic
+	As variáveis de configuração $temasdir e $temasaplic foram removidas. Em seu lugar, utilize $locaplic e o local fixo
+	dos arquivos, por exemplo $locaplic."/temas" e $locaplic."/aplicmap"
+	
+	A opção de administração com base em arquivos XML em disco foi removido. Deve-se sempre utilizar o banco de dados
+	de admnistração
+	
+	O "alias" para a interface zerocal foi removido, utilize em seu lugar:
+	http://localhost/i3geo/ms_criamapa.php?interface=zerocal.htm ou
+	http://localhost/i3geo/interface/zerocal.htm
+	
+	
 
 -------------------------------------------------------------------------------------------------
 Para a versão 4.4
