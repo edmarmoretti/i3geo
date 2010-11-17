@@ -6,7 +6,7 @@ Define a conexão com o banco de dados que contém as tabelas do sistema de admini
 
 Verifique se sua instalação do PHP suporta o uso da biblioteca PDO com sqlite
 
-Por padrão, a conexão é feita com o banco de dados SQLITE i3geo/menutemas/admin.db mas vc pode usar outro banco de dados
+Por padrão, a conexão é feita com o banco de dados SQLITE i3geo/admin/admin.db mas vc pode usar outro banco de dados
 
 Você pode alterar a conexão PDO modificando a variável de configuaração $conexaoadmin no i3geo/ms_configura.php
 
@@ -71,7 +71,7 @@ $convUTF = true;
 
 if($conexaoadmin == "")
 {
-	$arquivosqlite = $locaplic."/menutemas/admin.db";
+	$arquivosqlite = $locaplic."/admin/admin.db";
 	if(!file_exists($arquivosqlite))
 	{
 		echo "O arquivo menutemas/admin.db não existe. Utilize i3geo/admin/criabanco.php para criar o banco de dados SQLITE.";
