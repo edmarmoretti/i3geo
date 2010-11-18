@@ -109,10 +109,31 @@ function montaDivTemas(i)
 	ins += "<p>Permite acesso via kmz (kml com dados vetoriais)?<br>"
 	ins += "<select  id='kmz_tema' >"
 	ins += core_combosimnao(i.kmz_tema)
-	ins += "</select></p><br><br><br>"
+	ins += "</select></p>"
+	
+	ins += "<p><span onclick='atualizaMiniatura()' style='color:blue;cursor:pointer' >Atualiza ou cria a miniatura</span><br>";
+	ins += "<img id='imagemMiniatura' src='../../temas/miniaturas/"+i.imagem+"' /></p><br><br>";
+
 	
 	ins += "<input type=hidden id=codigo_tema value='"+i.codigo_tema+"'/>"
 	return(ins)
+}
+function atualizaMiniatura(){
+	$i("imagemMiniatura").src = "../../imagens/aguarde.gif";
+	var tema = $i("codigo_tema").value;
+	var sUrl = "../php/menutemas.php?funcao=atualizaMiniatura&tema="+tema;
+	var callback =
+	{
+  		success:function(o)
+  		{
+  			try
+  			{$i("imagemMiniatura").src = "../../temas/miniaturas/"+tema+".map.grande.png";}
+  			catch(e){core_handleFailure(e,o.responseText);}
+  		},
+  		failure:core_handleFailure,
+  		argument: { foo:"foo", bar:"bar" }
+	}; 
+	core_makeRequest(sUrl,callback,"GET")	
 }
 function gravaDadosTema(id)
 {

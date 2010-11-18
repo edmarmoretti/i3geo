@@ -2267,14 +2267,19 @@ Retorno:
 
 {objeto} layer modificado
 */
-function autoClasses(&$nlayer,$mapa)
+function autoClasses(&$nlayer,$mapa,$locaplic=null)
 {
 	$postgis_mapa = "";
 	$substituicon = "nao";
-	if(file_exists("ms_configura.php"))
-	include_once("ms_configura.php");
+	if(!isset($locaplic))
+	{
+		if(file_exists("ms_configura.php"))
+		include_once("ms_configura.php");
+		else
+		include_once("../ms_configura.php");
+	}
 	else
-	include_once("../ms_configura.php");
+	{include_once("$locaplic/ms_configura.php");}
 	if ($nlayer->connectiontype == MS_POSTGIS)
 	{
 		if ($nlayer->connection == " ")

@@ -4,13 +4,14 @@ Title: geraminiatura.php
 
 Gera as miniaturas dos mapas baseado nos mapfiles existentes em i3geo/temas. As miniaturas são utilizadas no i3geo na guia temas para mostrar um preview de cada tema.
 
-As imagens são armazenadas no diretório temporário do i3geo e devem ser movidas para o diretório i3geo/temas/miniaturas 
+Por padrão, as imagens são armazenadas no diretório temporário do i3geo e devem ser movidas para o diretório i3geo/temas/miniaturas 
 para poderem ser utilizadas. O programa verifica se a miniatura já existe no diretório temas/miniaturas e gera apenas as que faltarem.
 
+É utilizado também como um include pelo sistema de administração, permitindo armazenar as miniaturas no local correto.
 
 Licenca:
 
-I3Geo Interface Integrada de Ferramentas de Geoprocessamento para Internet
+i3Geo Interface Integrada de Ferramentas de Geoprocessamento para Internet
 
 Direitos Autorais Reservados (c) 2006 Ministério do Meio Ambiente Brasil
 Desenvolvedor: Edmar Moretti edmar.moretti@mma.gov.br
@@ -43,10 +44,6 @@ tipo - tipo de retorno mini|grande|todos
 error_reporting(E_ALL);
 set_time_limit(300);
 ini_set('max_execution_time', 300);
-include("ms_configura.php");
-include("classesphp/funcoes_gerais.php");
-require_once("classesphp/pega_variaveis.php");
-include_once ("classesphp/carrega_ext.php");
 //
 //carrega o phpmapscript
 //
@@ -60,46 +57,63 @@ if (!function_exists('ms_GetVersion'))
 	else
 	{dl('php_mapscript.so');}
 }
-ms_ResetErrorList();
-if (!isset($tipo))
+//
+//no caso do programa ser utilizado via URL
+//
+if(!isset($tipo))
+{$tipo = "";}
+if($tipo == "mini" || $tipo == "todos" || $tipo == "grande")
 {
-	echo "Utilize geraminiatura.php?tipo=mini ou grande ou todos. As imagens são armazenadas no diretório temporário.";
-	echo "<br>Após geradas as imagens, copie os arquivos para o diretório i3geo/temas/miniaturas.";
-	echo "<br>As miniaturas são geradas apenas para os arquivos que ainda não existem no diretório temas/miniaturas.";
-	echo "<br><a href='geraminiatura.php?tipo=todos' >Gerar todas as miniaturas</a>";
-	echo "<br><a href='geraminiatura.php?tipo=mini' >Gerar apenas as pequenas</a>";
-	echo "<br><a href='geraminiatura.php?tipo=grande' >Gerar apenas as grandes</a>";
-	exit;
-}
-$arqs = listaArquivos("temas");
-foreach ($arqs["arquivos"] as $arq)
-{
-	$temp = explode(".",$arq);
-	if($temp[(count($temp) - 1)] == "map")
+	ms_ResetErrorList();
+	if (!isset($tipo))
 	{
-		if($tipo == "mini" || $tipo == "todos")
-		{if(!file_exists('temas/miniaturas/'.$arq.'.mini.png')){echo "<br>".$arq."<br>";verifica($arq,"mini");}}
-		if($tipo == "grande"  || $tipo == "todos")
-		{if(!file_exists('temas/miniaturas/'.$arq.'.grande.png')){echo "<br>".$arq."<br>";verifica($arq,"grande");}}
+		echo "Utilize geraminiatura.php?tipo=mini ou grande ou todos. As imagens são armazenadas no diretório temporário.";
+		echo "<br>Após geradas as imagens, copie os arquivos para o diretório i3geo/temas/miniaturas.";
+		echo "<br>As miniaturas são geradas apenas para os arquivos que ainda não existem no diretório temas/miniaturas.";
+		echo "<br><a href='geraminiatura.php?tipo=todos' >Gerar todas as miniaturas</a>";
+		echo "<br><a href='geraminiatura.php?tipo=mini' >Gerar apenas as pequenas</a>";
+		echo "<br><a href='geraminiatura.php?tipo=grande' >Gerar apenas as grandes</a>";
+		exit;
+	}
+
+	include("ms_configura.php");
+	include("classesphp/funcoes_gerais.php");
+	require_once("classesphp/pega_variaveis.php");
+	include_once ("classesphp/carrega_ext.php");
+	$arqs = listaArquivos("temas");
+	foreach ($arqs["arquivos"] as $arq)
+	{
+		$temp = explode(".",$arq);
+		if($temp[(count($temp) - 1)] == "map")
+		{
+			if($tipo == "mini" || $tipo == "todos")
+			{if(!file_exists('temas/miniaturas/'.$arq.'.mini.png')){echo "<br>".$arq."<br>";verificaMiniatura($arq,"mini");}}
+			if($tipo == "grande"  || $tipo == "todos")
+			{if(!file_exists('temas/miniaturas/'.$arq.'.grande.png')){echo "<br>".$arq."<br>";verificaMiniatura($arq,"grande");}}
+		}
 	}
 }
-function verifica($map,$tipo)
+//
+//se tipo for igual a "admin", as imagens são gravadas em i3geo/temas/miniaturas
+//
+function verificaMiniatura($map,$tipo,$admin=false)
 {
 	global $locaplic;
 	ms_ResetErrorList();
+	error_reporting(E_ALL);
 	$tema = "";
 	$map = str_replace("\\","/",$map);
 	$map = basename($map);
-	if (file_exists('temas/'.$map))
-	{$tema = 'temas/'.$map;}
-	if (file_exists('temas/'.$map.'.map'))
-	{$tema = 'temas/'.$map.".map";}
+	if (file_exists($locaplic.'/temas/'.$map))
+	{$tema = $locaplic.'/temas/'.$map;}
+	if (file_exists($locaplic.'/temas/'.$map.'.map'))
+	{$tema = $locaplic.'/temas/'.$map.".map";}
 	if ($tema != "")
 	{
 		if (strtoupper(substr(PHP_OS, 0, 3) == 'WIN'))
-		{$mapa = ms_newMapObj("aplicmap/geral1windows.map");}
+		{$mapa = ms_newMapObj("$locaplic/aplicmap/geral1windows.map");}
 		else
-		{$mapa = ms_newMapObj("aplicmap/geral1.map");}
+		{$mapa = ms_newMapObj("$locaplic/aplicmap/geral1.map");}
 		if(@ms_newMapObj($tema))
 		{$nmapa = ms_newMapObj($tema);}
 		else
@@ -114,7 +128,7 @@ function verifica($map,$tipo)
 			$layern = $nmapa->getLayerByName($teman);
 			$layern->set("status",MS_DEFAULT);
 			ms_newLayerObj($mapa, $layern);
-			autoClasses(&$layern,$mapa);
+			autoClasses(&$layern,$mapa,$locaplic);
 			if ($layern->data == "")
 			$dados = $layern->connection;
 			else
@@ -139,40 +153,65 @@ function verifica($map,$tipo)
 				}
 			}
 		}
-		zoomTema($pegarext,&$mapa);
-		if ($tipo == "mini")
+		zoomTemaMiniatura($pegarext,&$mapa);
+		if ($tipo == "mini"  || $tipo == "todos")
 		{
-		 	 $mapa->setsize(50,50);
-			 $sca = $mapa->scalebar;
-			 $sca->set("status",MS_OFF);
+		 	$mapa->setsize(50,50);
+			$sca = $mapa->scalebar;
+			$sca->set("status",MS_OFF);
+			$objImagemM = @$mapa->draw();
+			if (!$objImagemM)
+			{echo "Problemas ao gerar o mapa<br>";return;}
+			$weboM = $mapa->web;
+			$urlM = $weboM->imageurl."/".$map;
 		}
-		if ($tipo == "grande")
+		if ($tipo == "grande"  || $tipo == "todos")
 		{
-		 	 $mapa->setsize(300,300);
-			 $sca = $mapa->scalebar;
-			 $sca->set("status",MS_OFF);
+		 	$mapa->setsize(300,300);
+			$sca = $mapa->scalebar;
+			$sca->set("status",MS_OFF);
+			$objImagemG = @$mapa->draw();
+			if (!$objImagemG)
+			{echo "Problemas ao gerar o mapa<br>";return;}
+			$weboG = $mapa->web;
+			$urlG = $weboG->imageurl."/".$map;
 		}
-		$objImagem = @$mapa->draw();
-		$webo = $mapa->web;
-		$url = $webo->imageurl."/".$map;
-		
-		if (!$objImagem)
-		{echo "Problemas ao gerar o mapa<br>";return;}
 		if($tipo=="mini" || $tipo == "todos")
 		{
-			$nomec = ($objImagem->imagepath).$map.".mini.png";
-			echo "<br><img src='".$url.".mini.png' /><br>";
+			$nomecM = ($objImagemM->imagepath).$map.".mini.png";
+			$objImagemM->saveImage($nomecM);
 		}
 		if($tipo=="grande" || $tipo == "todos")
 		{
-			$nomec = ($objImagem->imagepath).$map.".grande.png";
-			echo "<br><img src='".$url.".grande.png' /><br>";
+			$nomecG = ($objImagemG->imagepath).$map.".grande.png";
+			$objImagemG->saveImage($nomecG);
 		}
-		$objImagem->saveImage($nomec);
-		//$objImagem->free();
+
+		if($admin == false)
+		{
+			if($tipo=="mini" || $tipo == "todos")
+			{echo "<br><img src='".$urlM.".mini.png' /><br>";}
+			if($tipo=="grande" || $tipo == "todos")
+			{echo "<br><img src='".$urlG.".grande.png' /><br>";}
+		}
+		//
+		//copia a imagem
+		//
+		if($admin == true)
+		{
+			$dir = $locaplic."/temas/miniaturas";
+			$mini = $dir."/".$map.".map.mini.png";
+			$grande = $dir."/".$map.".map.grande.png";
+			if(file_exists($mini))
+			{unlink($mini);}
+			if(file_exists($grande))
+			{unlink($grande);}
+			copy(($objImagemG->imagepath).$map.".grande.png",$grande);
+			copy(($objImagemM->imagepath).$map.".mini.png",$mini);
+		}
 	}
 }
-function zoomTema($nomelayer,&$mapa)
+function zoomTemaMiniatura($nomelayer,&$mapa)
 {
 	$layer = $mapa->getlayerbyname($nomelayer);
 	if($layer->type > 2)

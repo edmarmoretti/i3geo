@@ -60,12 +60,6 @@ switch (strtoupper($funcao))
 		retornaJSON(verificaEditores($editores));
 		exit;
 	break;	
-	case "IMPORTARXMLMENU":
-		if(verificaEditores($editores) == "nao")
-		{echo "Vc nao e um editor cadastrado. Apenas os editores definidos em i3geo/ms_configura.php podem acessar o sistema de administracao.";exit;}
-		retornaJSON(importarXmlMenu());
-		exit;
-	break;
 	/*
 	Valor: PEGAMENUS
 	
@@ -364,6 +358,10 @@ switch (strtoupper($funcao))
 			registraTema();
 			$dados = pegaDados($sql);
 		}
+		$imagem = "";
+		if(file_exists($locaplic."/temas/miniaturas/".$codigo_tema.".map.grande.png"))
+		{$imagem = $codigo_tema.".map.grande.png";}		
+		$dados[0]["imagem"] = $imagem;
 		if(is_array($dados) && count($dados) > 1)
 		{$dados = "erro. Mais de um mapfile com mesmo código registrado no banco";}
 		retornaJSON($dados);
@@ -380,6 +378,21 @@ switch (strtoupper($funcao))
 	*/	
 	case "PEGATEMAS2":
 		retornaJSON(pegaTemas2());
+		exit;
+	break;
+	/*
+	Valor: ATUALIZAMINIATURA
+	
+	Atualiza as imagens das miniaturas de um tema
+	
+	Retorno:
+	
+	{JSON}
+	*/	
+	case "ATUALIZAMINIATURA":
+		if(verificaEditores($editores) == "nao")
+		{echo "Vc nao e um editor cadastrado. Apenas os editores definidos em i3geo/ms_configura.php podem acessar o sistema de administracao.";exit;}
+		retornaJSON(atualizaMiniatura($tema));
 		exit;
 	break;
 	/*
@@ -1162,5 +1175,12 @@ function removeCabecalho($arq,$symbolset=true)
 	}
 	fclose($handle);
 	chmod($arq, 0666);
+}
+function atualizaMiniatura(){
+	global $tema,$locaplic;
+	include_once("../../classesphp/funcoes_gerais.php");
+	require("../../geraminiatura.php");
+	verificaMiniatura($tema,"todos",true);
+	exit;
 }
 ?>
