@@ -240,6 +240,10 @@ i3GEOF.inseretxt = {
 		'					</select>' +
 		'				</td>' +
 		'			</tr>' +
+		'			<tr><td>&nbsp;</td><td></td></tr>' +
+		'			<tr><td>Caractere usado para indicar uma quebra de texto:</td><td>' +
+		$inputText("","","i3GEOinseretxtwrap_i","",5,"") +
+		'			</td></tr>' +
 		'		</table>' +			
 		'	</div>' +
 		'</div>	';
@@ -337,7 +341,8 @@ i3GEOF.inseretxt = {
 			"&fundo="+$i("i3GEOinseretxtfundoc_i").value+
 			"&sombra="+$i("i3GEOinseretxtsombra_i").value+
 			"&outlinecolor="+$i("i3GEOinseretxtmascara_i").value+
-			"&shadowcolor="+$i("i3GEOinseretxtfrentes_i").value;
+			"&shadowcolor="+$i("i3GEOinseretxtfrentes_i").value+
+			"&wrap="+$i("i3GEOinseretxtwrap_i").value;
 		return par;
 	},
 	/*

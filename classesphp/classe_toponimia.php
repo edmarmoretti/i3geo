@@ -146,11 +146,13 @@ $fonte Fonte.
 
 $tipo Tipo teste|
 
+$wrap
+
 Retorno:
 
 {string} - código do layer criado
 */
-	function criaToponimia($item,$position,$partials,$offsetx,$offsety,$minfeaturesize,$mindistance,$force,$shadowcolor,$shadowsizex,$shadowsizey,$outlinecolor,$cor,$sombray,$sombrax,$sombra,$fundo,$angulo,$tamanho,$fonte,$tipo)
+	function criaToponimia($item,$position,$partials,$offsetx,$offsety,$minfeaturesize,$mindistance,$force,$shadowcolor,$shadowsizex,$shadowsizey,$outlinecolor,$cor,$sombray,$sombrax,$sombra,$fundo,$angulo,$tamanho,$fonte,$tipo,$wrap)
 	{
 		if(!$this->layer){return "erro";}
 		if (!isset($tipo)){$tipo = "";}
@@ -179,6 +181,14 @@ Retorno:
 		{
 			$novac = $this->layer->getclass(0);
 			$nomer = $this->layer->name;
+		}
+		$label = $novac->label;
+		if($wrap != "")
+		{
+			$label->set("maxlength",1);
+			$s = $novac->getTextString;
+			$s = "CLASS LABEL WRAP '$wrap' END END";
+			$novac->updateFromString($s);
 		}
 		$label = $novac->label;
 		if ($fonte != "bitmap")

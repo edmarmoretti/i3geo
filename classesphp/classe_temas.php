@@ -594,9 +594,11 @@ $angulo - Ângulo do texto.
 
 $tamanho - Tamanho do texto.
 
-$fonte - Fonte.
+$fonte - Fonte
+
+$wrap - caractere que indica quebra de linha
 */
-	function insereFeature($marca,$tipo,$xy,$texto,$position,$partials,$offsetx,$offsety,$minfeaturesize,$mindistance,$force,$shadowcolor,$shadowsizex,$shadowsizey,$outlinecolor,$cor,$sombray,$sombrax,$sombra,$fundo,$angulo,$tamanho,$fonte)
+	function insereFeature($marca,$tipo,$xy,$texto,$position,$partials,$offsetx,$offsety,$minfeaturesize,$mindistance,$force,$shadowcolor,$shadowsizex,$shadowsizey,$outlinecolor,$cor,$sombray,$sombrax,$sombra,$fundo,$angulo,$tamanho,$fonte,$wrap)
 	{
 		//verifica se j'a existe um layer criado anteriormente com o mesmo nome e apaga se existir
 		if ($tipo == "limpaponto")
@@ -658,6 +660,15 @@ $fonte - Fonte.
 				$c->set("status",MS_DELETE);
 				$novac = ms_newclassobj($pinlayer);
 				$label = $novac->label;
+				if($wrap != "")
+				{
+					$label->set("maxlength",1);
+					$s = $novac->getTextString;
+					$s = "CLASS LABEL WRAP '$wrap' END END";
+					$novac->updateFromString($s);
+				}
+				$label = $novac->label;
+				
 				if ($fonte != "bitmap")
 				{
 					$label->set("type",MS_TRUETYPE);

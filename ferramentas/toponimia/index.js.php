@@ -215,6 +215,10 @@ i3GEOF.toponimia = {
 		'					</select>' +
 		'				</td>' +
 		'			</tr>' +
+		'			<tr><td>&nbsp;</td><td></td></tr>' +
+		'			<tr><td>Caractere usado para indicar uma quebra de texto:</td><td>' +
+		$inputText("","","i3GEOtoponimiawrap_i","",5,"") +
+		'			</td></tr>' +
 		'		</table>' +			
 		'	</div>' +
 		'	<div class=guiaobj id="i3GEOtoponimiaguia3obj" style="left:1px;90%;display:none;">' +
@@ -291,6 +295,7 @@ i3GEOF.toponimia = {
 			"&outlinecolor="+$i("i3GEOtoponimiamascara_i").value+
 			"&shadowcolor="+$i("i3GEOtoponimiafrentes_i").value+
 			"&item="+$i("i3GEOtoponimiaListaItens").value+
+			"&wrap="+$i("i3GEOtoponimiawrap_i").value+
 			"&tema="+i3GEO.temaAtivo;
 		return par;
 	},

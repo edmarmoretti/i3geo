@@ -1125,7 +1125,7 @@ Insere elemento gráfico em um tema.
 		copiaSeguranca($map_file);
 		$m = new Temas($map_file,"");
 		if(!isset($marca)){$marca="";}
-		$m->insereFeature($marca,$tipo,$xy,$texto,$position,$partials,$offsetx,$offsety,$minfeaturesize,$mindistance,$force,$shadowcolor,$shadowsizex,$shadowsizey,$outlinecolor,$cor,$sombray,$sombrax,$sombra,$fundo,$angulo,$tamanho,$fonte);
+		$m->insereFeature($marca,$tipo,$xy,$texto,$position,$partials,$offsetx,$offsety,$minfeaturesize,$mindistance,$force,$shadowcolor,$shadowsizex,$shadowsizey,$outlinecolor,$cor,$sombray,$sombrax,$sombra,$fundo,$angulo,$tamanho,$fonte,$wrap);
 		$m->salva();
 		redesenhaMapa();
 	break;
@@ -2683,7 +2683,7 @@ Cria um novo tema com a toponímia do tema atual.
 		copiaSeguranca($map_file);
 		$m = new Toponimia($map_file,$tema);
 		if(!isset($tipo)){$tipo="";}
-		$retorno = $m->criaToponimia($item,$position,$partials,$offsetx,$offsety,$minfeaturesize,$mindistance,$force,$shadowcolor,$shadowsizex,$shadowsizey,$outlinecolor,$cor,$sombray,$sombrax,$sombra,$fundo,$angulo,$tamanho,$fonte,$tipo);
+		$retorno = $m->criaToponimia($item,$position,$partials,$offsetx,$offsety,$minfeaturesize,$mindistance,$force,$shadowcolor,$shadowsizex,$shadowsizey,$outlinecolor,$cor,$sombray,$sombrax,$sombra,$fundo,$angulo,$tamanho,$fonte,$tipo,$wrap);
 		if ($tipo != "teste")
 		{$m->salva();}
 	break;
