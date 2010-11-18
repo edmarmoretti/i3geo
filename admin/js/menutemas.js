@@ -3,14 +3,6 @@ function iniciaAdmin()
 {
 	verificaEditores()
 }
-function importarXmlMenu()
-{
-	$i("resultado").innerHTML = $mensagemAguarde
-	var retorna = function(retorno)
-	{$i("resultado").innerHTML = retorno.data}
-	var p = "../php/menutemas.php?funcao=importarXmlMenu&nomemenu="+$i("nome").value+"&xml="+$i("arquivo").value;
-	cPaint.call(p,"",retorna);
-}
 function montaParametros()
 {
 	var ins = ""
@@ -399,11 +391,9 @@ function excluir(prefixo,id)
 		cPaint.call(p,"",retorna);	
 	}
 }
-
 function pegaMapfiles(retorna)
 {
 	var cPaint = new cpaint();
-	//cPaint.set_async("true");
 	cPaint.set_response_type("JSON");
 	var p = "../php/menutemas.php?funcao=listaMapsTemas";
 	cPaint.call(p,"listaMapsTemas",retorna);	

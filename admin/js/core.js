@@ -364,7 +364,6 @@ function core_pegaMapfiles(funcaoM,letra)
 	if(arguments.length == 1){
 		var letra = "";
 	}
-
 	var sUrl = "../php/menutemas.php?funcao=listaMapsTemas&letra="+letra;
 	var callbackM =
 	{

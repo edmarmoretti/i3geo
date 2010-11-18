@@ -83,6 +83,19 @@ Imprime na saída a string JSON
 function retornaJSON($obj)
 {
 	global $locaplic;
+	if(function_exists("json_encode"))
+	{echojson(json_encode($obj));}
+	else
+	{
+		include_once($locaplic."/pacotes/cpaint/JSON/json2.php");
+		error_reporting(0);
+		$j = new Services_JSON();
+		$texto = $j->encode($obj);
+		if (!mb_detect_encoding($texto,"UTF-8",true))
+		$texto = utf8_encode($texto);
+		echo $texto;
+	}
+/*
 	include_once($locaplic."/pacotes/cpaint/JSON/json2.php");
 	error_reporting(0);
 	$j = new Services_JSON();
@@ -96,6 +109,7 @@ function retornaJSON($obj)
 	header('Pragma: no-cache');
 	echo $texto;
 	exit;
+*/
 }
 /*
 Function: verificaDuplicados

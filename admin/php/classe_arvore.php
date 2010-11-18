@@ -140,9 +140,7 @@ Return:
 		}
 		else
 		$sql = "SELECT publicado_menu,perfil_menu,aberto,desc_menu,id_menu,$coluna as nome_menu from i3geoadmin_menus where publicado_menu != 'NAO' or publicado_menu isnull order by nome_menu";
-		
 		$regs = $this->execSQL($sql);
-	
 		$resultado = array();
 		foreach($regs as $reg)
 		{

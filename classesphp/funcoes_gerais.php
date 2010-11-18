@@ -2553,7 +2553,7 @@ function echojson($a)
 	echo $a;
 	if(extension_loaded('zlib'))
 	{ob_end_flush();}
-	exit;	
+	exit;
 }
 /*
 Function: cpjson

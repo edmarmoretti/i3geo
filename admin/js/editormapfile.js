@@ -230,10 +230,13 @@ function montaNosRaiz(redesenha)
 	var nos = new Array()
 	for (var i=0, j=$mapfiles.length; i<j; i++)
 	{
-		conteudo = "&nbsp;<img style=\"position:relative;cursor:pointer;top:2px\" onclick=\"excluirMapfile('"+$mapfiles[i]+"')\" title=excluir src=\"../imagens/01.png\" />"
-		conteudo += "&nbsp;<img style=\"position:relative;cursor:pointer;top:2px\" onclick=\"editorTemaMapfile('"+$mapfiles[i]+"')\" title='editar tema associado' src=\"../imagens/06.png\" />"
-		conteudo += "&nbsp;<img style=\"position:relative;cursor:pointer;top:2px\" onclick=\"testarMapfile('"+$mapfiles[i]+"')\" title='testar!' src=\"../imagens/41.png\" /><b>&nbsp;<span>"+$mapfiles[i]+"</span>"
-		var d = {html:conteudo,id:$mapfiles[i],codigoMap:$mapfiles[i]};
+		conteudo = "&nbsp;<img style=\"position:relative;cursor:pointer;top:2px\" onclick=\"excluirMapfile('"+$mapfiles[i].codigo+"')\" title=excluir src=\"../imagens/01.png\" />"
+		conteudo += "&nbsp;<img style=\"position:relative;cursor:pointer;top:2px\" onclick=\"editorTemaMapfile('"+$mapfiles[i].codigo+"')\" title='editar tema associado' src=\"../imagens/06.png\" />"
+		conteudo += "&nbsp;<img style=\"position:relative;cursor:pointer;top:2px\" onclick=\"testarMapfile('"+$mapfiles[i].codigo+"')\" title='testar!' src=\"../imagens/41.png\" /><b>&nbsp;<span>"+$mapfiles[i].codigo+" <span style=color:gray >"+$mapfiles[i].nome+"</span></span>"
+		if($mapfiles[i].imagem != "" && $i("mostraMini").checked == true){
+			conteudo += "</b><br><img src='../../temas/miniaturas/"+$mapfiles[i].imagem+"'/>";
+		}
+		var d = {html:conteudo,id:$mapfiles[i].codigo,codigoMap:$mapfiles[i].codigo};
 		var tempNode = new YAHOO.widget.HTMLNode(d, root, false,true);
 		nos.push(tempNode)
 	}

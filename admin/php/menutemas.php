@@ -749,15 +749,11 @@ function alteraMenus()
     	return "ok";
 	}
 	catch (PDOException $e)
-	{
-    	return "Error!: " . $e->getMessage();
-	}
+	{return "Error!: " . $e->getMessage();}
 }
 function alteraPerfis()
 {
 	global $perfil,$id;
-	//$perfil = resolveAcentos($perfil,"html");
-	
 	try 
 	{
 		$dbh = "";
@@ -860,18 +856,14 @@ function alteraPerfis()
     	return $retorna;
 	}
 	catch (PDOException $e)
-	{
-    	return "Error!: " . $e->getMessage();
-	}
+	{return "Error!: " . $e->getMessage();}
 }
 function alteraTags()
 {
 	global $nome,$id;
 	try 
 	{
-		
 		$dbh = "";
-		//$nome = mb_convert_encoding($nome,"UTF-8","ISO-8859-1");
     	include("conexao.php");
     	if($convUTF) $nome = utf8_encode($nome);
     	$retorna = "";
@@ -884,20 +876,6 @@ function alteraTags()
     			foreach($q as $row)
     			{$original = $row["nome"];}
     			$dbhw->query("UPDATE i3geoadmin_tags SET nome = '$nome' WHERE id_tag = $id");
-    			//exclui os registros do tag alterado nos temas
-    			/*
-    			if($original != "")
-    			{
-    				$q = $dbh->query("select tags_tema,id_tema from i3geoadmin_temas");
-    				foreach($q as $row)
-		    		{
-	        			$ts = $row['tags_tema'];
-	        			$i = $row['id_tema'];
-	        			$ts = str_replace($original,$nome,$ts);
-	        			$dbhw->query("UPDATE i3geoadmin_temas SET tags_tema = '$ts' WHERE id_tema = $i");
-		    		}
-    			}
-    			*/	
     		}
     		$retorna = $id;		
 		}
@@ -1069,18 +1047,14 @@ function alteraTemas()
     	foreach($tags as $tag)
     	{
     		if(!(verificaDuplicados("select * from i3geoadmin_tags where nome = '$tag'",$dbh)))
-    		{
-		    	$dbhw->query("INSERT INTO i3geoadmin_tags (nome) VALUES ('$tag')");   		
-    		}	
+    		{$dbhw->query("INSERT INTO i3geoadmin_tags (nome) VALUES ('$tag')");}	
     	}
     	$dbhw = null;
     	$dbh = null;
     	return $retorna;
 	}
 	catch (PDOException $e)
-	{
-    	return "Error!: " . $e->getMessage();
-	}
+	{return "Error!: " . $e->getMessage();}
 }
 /*
 Retorna a lista de mapfiles do diretorio i3geo/temas
@@ -1113,257 +1087,30 @@ function listaMapsTemas()
        	closedir($dh);
    	}
    	sort($arquivos);
- 	return $arquivos;
-}
-/*
-Importa um arquivo xml do tipo "menutemas" para o banco de dados
-*/
-function importarXmlMenu()
-{
-	global $nomemenu,$xml;
-	error_reporting(E_ALL);
-	set_time_limit(0);
-	$listaDeTags = array();
-	if(!file_exists($xml))
-	{return "<br><b>Arquivo $xml n&atilde;o encontrado";}
-	include_once("../../classesphp/funcoes_gerais.php");
-	include("conexao.php");
-	if($convUTF) $nomemenu = utf8_encode($nomemenu);
-	$dbhw->query("INSERT INTO i3geoadmin_menus (perfil_menu,desc_menu,nome_menu,publicado_menu,aberto) VALUES ('','','$nomemenu','SIM','NAO')");
-	$id_menu = $dbh->query("SELECT id_menu FROM i3geoadmin_menus where nome_menu = '$nomemenu'");
-	$id_menu = $id_menu->fetchAll();
-	$id_menu = $id_menu[0]['id_menu'];
-	$xml = simplexml_load_file($xml);
 	//
-	//importa os grupos
+	//pega o nome de cada tema
 	//
-	$gruposExistentes = array();
-	$q = $dbh->query("select * from i3geoadmin_grupos");
-	$resultado = $q->fetchAll();
-	foreach($resultado as $r)
-	{$gruposExistentes[$r["nome_grupo"]] = 0;}
-	foreach($xml->GRUPO as $grupo)
+	$sql = "select nome_tema,codigo_tema from i3geoadmin_temas ";
+	$dbh = "";
+	include($locaplic."/admin/php/conexao.php");
+	$q = $dbh->query($sql,PDO::FETCH_ASSOC);
+	$regs = $q->fetchAll();	
+	$nomes = array();
+	foreach($regs as $reg)
+	{$nomes[$reg["codigo_tema"]] = $reg["nome_tema"];}
+	$lista = array();
+	foreach($arquivos as $arq)
 	{
-		$nome = html_entity_decode(ixml($grupo,"GTIPO"));
-		$descricao = html_entity_decode(ixml($grupo,"DTIPO"));
-		if($convUTF)
-		{
-			$nome = utf8_encode($nome);
-			$descricao = utf8_encode($descricao);
-		}
-		if(!isset($gruposExistentes[$nome]))
-		{
-			$nome = str_replace("'","",$nome);
-			$descricao = str_replace("'","",$descricao);
-			$dbhw->query("INSERT INTO i3geoadmin_grupos (desc_grupo,nome_grupo) VALUES ('$descricao','$nome')");
-		}
-		$gruposExistentes[$nome] = 0;
+		$n = explode(".",$arq);
+		$n = $nomes[$n[0]];
+		if(!$n)
+		{$n = "";}
+		$imagem = "";
+		if(file_exists($locaplic."/temas/miniaturas/".$arq.".map.mini.png"))
+		{$imagem = $arq.".map.mini.png";}
+		$lista[] = array("nome"=>$n,"codigo"=>$arq,"imagem"=>$imagem);
 	}
-	//
-	//importa os sub-grupos
-	//
-	$subgruposExistentes = array();
-	$q = $dbh->query("select * from i3geoadmin_subgrupos");
-	$resultado = $q->fetchAll();
-	foreach($resultado as $r)
-	{$subgruposExistentes[$r["nome_subgrupo"]] = 0;}
-	foreach($xml->GRUPO as $grupo)
-	{
-		foreach($grupo->SGRUPO as $sgrupo)
-		{
-			$nome = html_entity_decode(ixml($sgrupo,"SDTIPO"));
-			if($convUTF)
-			{
-				$nome = utf8_encode($nome);
-			}
-			$descricao = "";
-			if(!isset($subgruposExistentes[$nome]))
-			{
-				$nome = str_replace("'","",$nome);
-				$descricao = str_replace("'","",$descricao);
-				$dbhw->query("INSERT INTO i3geoadmin_subgrupos (desc_subgrupo,nome_subgrupo) VALUES ('$descricao','$nome')");
-				$subgruposExistentes[$nome] = 0;
-			}
-		}
-	}
-	//
-	//importa os temas
-	//
-	$temasExistentes = array();
-	$q = $dbh->query("select * from i3geoadmin_temas");
-	$resultado = $q->fetchAll();
-	foreach($resultado as $r)
-	{
-		if($r["codigo_tema"])
-		$temasExistentes[$r["codigo_tema"]] = 0;
-	}
-	foreach($xml->TEMA as $tema)
-	{
-		$nome = html_entity_decode(ixml($tema,"TNOME"));
-		$descricao = html_entity_decode(ixml($tema,"TDESC"));
-		if($convUTF)
-		{
-			$nome = utf8_encode($nome);
-			$descricao = utf8_encode($descricao);
-		}
-		$codigo = ixml($tema,"TID");
-		$link = ixml($tema,"TLINK");
-		$tipo = ixml($tema,"TIPOA");
-		$tags = ixml($tema,"TAGS");
-		if($convUTF) $tags = utf8_encode($tags);
-		$down = ixml($tema,"DOWNLOAD");
-		$kml = ixml($tema,"KML");
-		$ogc = ixml($tema,"OGC");
-		$listaDeTags = array_merge($listaDeTags,explode(" ",$tags));		
-		if(!isset($temasExistentes[$codigo]))
-		{
-			$nome = str_replace("'","",$nome);
-			$descricao = str_replace("'","",$descricao);
-			$dbhw->query("INSERT INTO i3geoadmin_temas (nacessos,kml_tema,kmz_tema,ogc_tema,download_tema,tags_tema,tipoa_tema,link_tema,desc_tema,nome_tema,codigo_tema) VALUES (0,'$kml','NAO','$ogc','$down','$tags','$tipo','$link','$descricao','$nome','$codigo')");
-		}
-		$temasExistentes[$codigo] = 0;
-	}
-	foreach($xml->GRUPO as $grupo)
-	{
-		foreach($grupo->TEMA as $tema)
-		{
-			$nome = html_entity_decode(ixml($tema,"TNOME"));
-			$descricao = html_entity_decode(ixml($tema,"TDESC"));
-			if($convUTF)
-			{
-				$nome = utf8_encode($nome);
-				$descricao = utf8_encode($descricao);
-			}
-			$codigo = ixml($tema,"TID");
-			$link = ixml($tema,"TLINK");
-			$tipo = ixml($tema,"TIPOA");
-			$tags = ixml($tema,"TAGS");
-			if($convUTF) $tags = utf8_encode($tags);
-			$down = ixml($tema,"DOWNLOAD");
-			$kml = ixml($tema,"KML");
-			$ogc = ixml($tema,"OGC");		
-			$listaDeTags = array_merge($listaDeTags,explode(" ",$tags));		
-			if(!isset($temasExistentes[$codigo]))
-			{
-				$nome = str_replace("'","",$nome);
-				$descricao = str_replace("'","",$descricao);
-				$dbhw->query("INSERT INTO i3geoadmin_temas (nacessos,kml_tema,kmz_tema,ogc_tema,download_tema,tags_tema,tipoa_tema,link_tema,desc_tema,nome_tema,codigo_tema) VALUES (0,'$kml','NAO','$ogc','$down','$tags','$tipo','$link','$descricao','$nome','$codigo')");
-			}
-			$temasExistentes[$codigo] = 0;
-		}
-		foreach($grupo->SGRUPO as $sgrupo)
-		{
-			foreach($sgrupo->TEMA as $tema)
-			{
-				$nome = html_entity_decode(ixml($tema,"TNOME"));
-				$descricao = html_entity_decode(ixml($tema,"TDESC"));
-				if($convUTF)
-				{
-					$nome = utf8_encode($nome);
-					$descricao = utf8_encode($descricao);
-				}
-				$codigo = ixml($tema,"TID");
-				$link = ixml($tema,"TLINK");
-				$tipo = ixml($tema,"TIPOA");
-				$tags = html_entity_decode(ixml($tema,"TAGS"));
-				if($convUTF) $tags = utf8_encode($tags);
-				$down = ixml($tema,"DOWNLOAD");
-				$kml = ixml($tema,"KML");
-				$ogc = ixml($tema,"OGC");		
-				$listaDeTags = array_merge($listaDeTags,explode(" ",$tags));		
-				if(!isset($temasExistentes[$codigo]))
-				{
-					$nome = str_replace("'","",$nome);
-					$descricao = str_replace("'","",$descricao);
-					$dbhw->query("INSERT INTO i3geoadmin_temas (nacessos,kml_tema,kmz_tema,ogc_tema,download_tema,tags_tema,tipoa_tema,link_tema,desc_tema,nome_tema,codigo_tema) VALUES (0,'$kml','NAO','$ogc','$down','$tags','$tipo','$link','$descricao','$nome','$codigo')");
-				}
-				$temasExistentes[$codigo] = 0;
-			}
-		}		
-	}
-	//
-	//monta árvore
-	//
-	//
-	//registra os temas no nível da raiz
-	//
-	foreach($xml->TEMA as $tema)
-	{
-		$codigo = ixml($tema,"TID");
-		$perfil = ixml($tema,"PERFIL");
-		$r = $dbh->query("select id_tema from i3geoadmin_temas where codigo_tema = '$codigo'");
-		$id_tema = $r->fetchAll();
-		$id_tema = $id_tema[0]['id_tema'];
-		$dbhw->query("INSERT INTO i3geoadmin_raiz (id_tema,id_menu,id_nivel,nivel,perfil,ordem) VALUES ('$id_tema','$id_menu','0','0','$perfil','0')");		
-	}
-	//
-	//registra o restante
-	//
-	$contaGrupo = 0;
-	foreach($xml->GRUPO as $grupo)
-	{
-		$gtipo = html_entity_decode(ixml($grupo,"GTIPO"));
-		if($convUTF) $gtipo = utf8_encode($gtipo);
-		$n1_perfil = ixml($grupo,"PERFIL");
-		$r = $dbh->query("select id_grupo from i3geoadmin_grupos where nome_grupo = '$gtipo'");
-		$id_grupo = $r->fetchAll();
-		$id_grupo = $id_grupo[0]['id_grupo'];
-		//echo "INSERT INTO i3geoadmin_n1 (ordem,publicado,id_menu,id_grupo,n1_perfil) VALUES ($contaGrupo,'SIM',$id_menu,$id_grupo,'$n1_perfil')"."<br>";
-		
-		$dbhw->query("INSERT INTO i3geoadmin_n1 (ordem,publicado,id_menu,id_grupo,n1_perfil) VALUES ($contaGrupo,'SIM',$id_menu,$id_grupo,'$n1_perfil')");
-
-		$contaGrupo++;
-		$id_n1 = $dbh->query("SELECT id_n1 FROM i3geoadmin_n1 where id_menu = '$id_menu' and id_grupo = '$id_grupo'");
-		$id_n1 = $id_n1->fetchAll();
-		$id_n1 = $id_n1[0]['id_n1'];
-
-		foreach($grupo->TEMA as $tema)
-		{
-			$codigo = ixml($tema,"TID");
-			$perfil = ixml($tema,"PERFIL");
-			$r = $dbh->query("select id_tema from i3geoadmin_temas where codigo_tema = '$codigo'");
-			$id_tema = $r->fetchAll();
-			$id_tema = $id_tema[0]['id_tema'];
-			$dbhw->query("INSERT INTO i3geoadmin_raiz (id_tema,id_menu,id_nivel,nivel,perfil,ordem) VALUES ($id_tema,$id_menu,$id_n1,'1','$perfil','0')");		
-		}
-		$contaSubGrupo = 0;
-		foreach($grupo->SGRUPO as $subgrupo)
-		{
-			$sdtipo = html_entity_decode(ixml($subgrupo,"SDTIPO"));
-			if($convUTF) $sdtipo = utf8_encode($sdtipo);
-			$n2_perfil = ixml($subgrupo,"PERFIL");
-			$r = $dbh->query("select id_subgrupo from i3geoadmin_subgrupos where nome_subgrupo = '$sdtipo'");
-			$id_subgrupo = $r->fetchAll();
-			$id_subgrupo = $id_subgrupo[0]['id_subgrupo'];
-			
-			$dbhw->query("INSERT INTO i3geoadmin_n2 (publicado,ordem,id_n1,id_subgrupo,n2_perfil) VALUES ('SIM',$contaSubGrupo,$id_n1,$id_subgrupo,'$n2_perfil')");
-			$contaSubGrupo++;
-			$id_n2 = $dbh->query("SELECT id_n2 FROM i3geoadmin_n2 where id_n1='$id_n1' and id_subgrupo = '$id_subgrupo'");
-			$id_n2 = $id_n2->fetchAll();
-			$id_n2 = $id_n2[0]['id_n2'];
-			$contaTema = 0;
-			foreach($subgrupo->TEMA as $tema)
-			{
-				$codigo = ixml($tema,"TID");
-				$perfil = ixml($tema,"PERFIL");
-				$r = $dbh->query("select id_tema from i3geoadmin_temas where codigo_tema = '$codigo'");
-				$id_tema = $r->fetchAll();
-				$id_tema = $id_tema[0]['id_tema'];
-				$dbhw->query("INSERT INTO i3geoadmin_n3 (publicado,ordem,id_n2,id_tema,n3_perfil) VALUES ('SIM',$contaTema,$id_n2,$id_tema,'$perfil')");		
-				$contaTema++;
-			}		
-		}
-	}	
-	//registra os tags
-	$listaDeTags = array_unique($listaDeTags);
-	foreach ($listaDeTags as $t)
-	{
-		if($t != "" && !(verificaDuplicados("select * from i3geoadmin_tags where nome = '$t'",$dbh)))
-		$dbhw->query("INSERT INTO i3geoadmin_tags (nome) VALUES ('$t')");			
-	}
-	$dbhw = null;
-	$dbh = null;
-	return "Dados importados.";
+ 	return $lista;
 }
 
 function removeCabecalho($arq,$symbolset=true)
@@ -1373,11 +1120,7 @@ function removeCabecalho($arq,$symbolset=true)
 	{
     	$cabeca = array();
     	if($symbolset)
-    	{
-    		$cabeca[] = "MAP\n";
-    		//$final[] = "SYMBOLSET ../symbols/simbolos.sym\n";
-    		//$final[] = "FONTSET   ".'"'."../symbols/fontes.txt".'"'."\n";
-    	}
+    	{$cabeca[] = "MAP\n";}
     	$grava = false;
     	while (!feof($handle)) 
     	{
