@@ -430,6 +430,32 @@ A nova classe será uma cópia da classe 0.
 		return("ok");
 	}
 /*
+function: adicionaopacidade
+
+Adiciona opacidade variável de 0 a 100 conforme o número de classes
+
+*/
+	function adicionaopacidade()
+	{
+		//error_reporting(E_ALL);
+		if(!$this->layer){return "erro";}
+		$numclasses = $this->layer->numclasses;
+		$n = intval(100 / $numclasses);
+		for($i=0;$i<$numclasses;++$i)
+		{
+			$classe = $this->layer->getclass($i);
+			$numestilos = $classe->numstyles;
+			$o = $i * $n;
+			for($j=0;$j<$numestilos;++$j)
+			{
+				$estilo = $classe->getstyle($j);
+				$estilo->set("opacity",$o);
+			}
+		}
+		$this->layer->setMetaData("cache","");
+		return("ok");
+	}	
+/*
 function: alteraCoresClasses
 
 Altera as cores das classes existentes em um objeto layer gerando uma paleta de cores de acordo com um valor inicial e final.

@@ -545,6 +545,7 @@ string com o tipo do layer,id do estilo,outlinecolor,backgroundcolor,color,symbo
 			$linha[] = corRGB($estilo->color);
 			$linha[] = $estilo->symbolname;
 			$linha[] = $estilo->size;
+			$linha[] = $estilo->opacity;
 			$linhas[] = $tipoLayer."#".implode("#",$linha);
 		}
 		//retorna tipo do layer,id do estilo,outlinecolor,backgroundcolor,color,symbolname,size
@@ -568,9 +569,11 @@ $color - Cor da frente.
 
 $symbolname - Nome do símbolo.
 
-$size - Tamanho que será aplicado ao símbolo. 
+$size - Tamanho que será aplicado ao símbolo.
+
+$opacidade - Opacidade 
 */
-	function aplicaParametro($classe,$estilo,$outlinecolor,$backgroundcolor,$color,$symbolname,$size)
+	function aplicaParametro($classe,$estilo,$outlinecolor,$backgroundcolor,$color,$symbolname,$size,$opacidade)
 	{
 		if(!$this->layer){return "erro";}
 		$classe = $this->layer->getclass($classe);
@@ -597,12 +600,14 @@ $size - Tamanho que será aplicado ao símbolo.
 		{$estilo->set("symbolname",$symbolname);}
 		if ((isset ($size)) && ($size != "-1"))
 		{$estilo->set("size",$size);}
+		if(isset($opacidade))
+		{$estilo->set("opacity",$opacidade);}
 		if ($this->layer->getmetadata("sld") != "")
 		{
 			$sld = $this->layer->getmetadata("sld");
 			reSLD($this->arquivo,$this->nome,$sld);
 		}
-		$this->layer->removeMetaData("cache");
+		$this->layer->setMetaData("cache","");
 		return "ok";
 	}
 /*

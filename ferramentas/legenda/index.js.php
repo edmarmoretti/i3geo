@@ -122,6 +122,10 @@ i3GEOF.legenda = {
 				{onclick:{fn: i3GEOF.legenda.adicionaConta}}
 			);
 			new YAHOO.widget.Button(
+				"i3GEOlegendabotao15",
+				{onclick:{fn: i3GEOF.legenda.adicionaOpacidade}}
+			);			
+			new YAHOO.widget.Button(
 				"i3GEOlegendabotao4",
 				{onclick:{fn: i3GEOF.legenda.paleta}}
 			);
@@ -184,9 +188,11 @@ i3GEOF.legenda = {
 		'</div><br>'+
 		'<div id=i3GEOlegendaguia1obj style="width:99%;text-align:left;">'+
 		'	<p class=paragrafo ><input id=i3GEOlegendabotao1 size="22" type="button" value="Aplicar alterações">'+
-		'	<input id=i3GEOlegendabotao2 size="22" type="button" value="Adicionar classe">' +
-		'	<input id=i3GEOlegendabotao3 size="25" type="button" value="Adiciona contagem"></p>' +
-		'	<table summary="" class=lista5 width="400px">' + 
+		'	<input id=i3GEOlegendabotao2 size="22" type="button" value="+ classe">' +
+		'	<input id=i3GEOlegendabotao3 size="25" type="button" value="+ contagem">' +
+		'	<input id=i3GEOlegendabotao15 size="25" type="button" value="Opacidade variável"></p>' +
+		
+		'	<table summary="" class=lista5 >' + 
 		'		<tr>' +
 		'			<td><input id=i3GEOlegendabotao4 type="button" size=15 value="Gerar cores"></td>' +
 		'			<td>de:</td>' +
@@ -481,6 +487,30 @@ i3GEOF.legenda = {
 		cp.set_response_type("JSON");
 		cp.call(p,"alteraclasse",i3GEOF.legenda.mostralegenda);
 	},
+	/*
+	Function: adicionaOpacidade
+	
+	Adiciona opacidade variável em cada classe
+	
+	Veja:
+	
+	<ALTERACLASSE>
+	*/
+	adicionaOpacidade: function(){
+		var retorna = function(){
+			i3GEO.atualiza();
+			i3GEO.Interface.atualizaTema("",i3GEOF.legenda.tema);
+			i3GEO.arvoreDeCamadas.atualizaLegenda(i3GEOF.legenda.tema);
+			i3GEOF.legenda.aguarde.visibility = "hidden";
+			i3GEOF.legenda.mostralegenda();
+		};
+		if(i3GEOF.legenda.aguarde.visibility === "visible")
+		{return;}
+		var p = i3GEO.configura.locaplic+"/classesphp/mapa_controle.php?g_sid="+i3GEO.configura.sid+"&funcao=alteraclasse&opcao=adicionaopacidade"+"&tema="+i3GEOF.legenda.tema+"&ext="+i3GEO.parametros.mapexten,
+		cp = new cpaint();
+		cp.set_response_type("JSON");
+		cp.call(p,"alteraclasse",retorna);
+	},	
 	/*
 	Function: paleta
 	
@@ -873,6 +903,9 @@ i3GEOF.legenda = {
 			"<tr><td style='text-align:left;'>Tamanho:</td><td>"+
 			$inputText("","","i3GEOlegendasizes","",12,linha[6]) +
 			"</td><td></td></tr>" +
+			"<tr><td style='text-align:left;'>Opacidade:</td><td>"+
+			$inputText("","","i3GEOlegendaopacidade","",3,linha[7]) +
+			"</td><td></td></tr>" +			
 			"<tr><td style='text-align:left;'>S&iacute;mbolo:</td><td>"+
 			$inputText("","","i3GEOlegendasymbolname","",12,linha[5]) +
 			"</td><td></td></tr></table>";
@@ -932,6 +965,7 @@ i3GEOF.legenda = {
 				valido = "nao",
 				n = simbolos.length,
 				size = $i("i3GEOlegendasizes").value,
+				opacidade = $i("i3GEOlegendaopacidade").value,
 				p,cp,fim;
 			for (i=0;i<n;i++){
 				if(simbolos[i].title == symbolname)
@@ -942,7 +976,7 @@ i3GEOF.legenda = {
 				i3GEOF.legenda.aguarde.visibility = "hidden";
 				return;
 			}
-			p = i3GEO.configura.locaplic+"/classesphp/mapa_controle.php?g_sid="+i3GEO.configura.sid+"&funcao=editasimbolo&opcao=aplica&tema="+i3GEOF.legenda.tema+"&classe="+i3GEOF.legenda.classe+"&estilo="+i3GEOF.legenda.estilo+"&outlinecolor="+outlinecolor+"&backgroundcolor="+backgroundcolor+"&color="+color+"&symbolname="+symbolname+"&size="+size;
+			p = i3GEO.configura.locaplic+"/classesphp/mapa_controle.php?g_sid="+i3GEO.configura.sid+"&funcao=editasimbolo&opcao=aplica&tema="+i3GEOF.legenda.tema+"&classe="+i3GEOF.legenda.classe+"&estilo="+i3GEOF.legenda.estilo+"&outlinecolor="+outlinecolor+"&backgroundcolor="+backgroundcolor+"&color="+color+"&symbolname="+symbolname+"&size="+size+"&opacidade="+opacidade;
 			cp = new cpaint();
 			fim = function(){
 				i3GEO.atualiza();
