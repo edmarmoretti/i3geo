@@ -663,7 +663,6 @@ $wrap - caractere que indica quebra de linha
 				if($wrap != "")
 				{
 					$label->set("maxlength",1);
-					$s = $novac->getTextString;
 					$s = "CLASS LABEL WRAP '$wrap' END END";
 					$novac->updateFromString($s);
 				}

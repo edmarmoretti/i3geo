@@ -1380,7 +1380,9 @@ Altera uma classe de um tema, aplicando uma nova classificação ou modificando pa
 			$m->mapa->setProjection("init=epsg:4291");
 		}
 		if ($opcao == "adicionaopacidade")
-		{$retorno = $m->adicionaopacidade();}		
+		{$retorno = $m->adicionaopacidade();}
+		if ($opcao == "alterageometria")
+		{$retorno = $m->alterageometria($tipo);}		
 		if ($opcao == "adicionaclasse")
 		{$retorno = $m->adicionaclasse();}
 		if ($opcao == "valorunico")

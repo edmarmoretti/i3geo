@@ -153,6 +153,10 @@ i3GEOF.legenda = {
 				"i3GEOlegendabotao10",
 				{onclick:{fn: i3GEOF.legenda.aplicaEstilo}}
 			);
+			new YAHOO.widget.Button(
+				"i3GEOlegendabotao17",
+				{onclick:{fn: i3GEOF.legenda.alteraGeometriaTema}}
+			);
 			i3GEOF.legenda.ativaFoco();
 			i3GEOF.legenda.mostralegenda();
 			i3GEO.util.comboItens(
@@ -213,6 +217,18 @@ i3GEOF.legenda = {
 		'	<p class=paragrafo style="color:red;" >Aten&ccedil;&atilde;o: para a montagem das classes s&atilde;o considerados apenas os elementos vis&iacute;veis na extens&atilde;o atual do mapa</p>'+
 		'	<p class=paragrafo >Ao gerar as classes, ignorar valores iguais a:'+
 		$inputText("","","i3GEOlegendaignorar","",10,"") +
+		'	<hr><p class=paragrafo >Transforma a representação geométrica dos elementos do tema. Após alterar esse parâmetro, pode ser necessário modificar as características do símbolo.</p>'+
+		'	<p class=paragrafo >' +
+		'	<select id=i3GEOlegentaTipoGeo >'+
+		'		<option value="">nenhuma transformação</option>'+		
+		'		<option value="centroid">centróide</option>'+
+		'		<option value="bbox">box</option>'+
+		'		<option value="vertices">vértices</option>'+
+		'		<option value="start">vértice inicial</option>'+
+		'		<option value="end">vértice final</option>'+
+		'	</select>'+
+		'	<p class=paragrafo >' +
+		'	<input id=i3GEOlegendabotao17 size="35" type="button" value="Altera geometria"></p>'+
 		'	<hr><p class=paragrafo >Altera o tipo de representação do tema. Se for poligonal, passa para linear e vice-versa.</p>'+
 		'	<p class=paragrafo ><input id=i3GEOlegendabotao7 size="25" type="button" value="Altera tipo"></p>'+
 		'	<hr><p class=paragrafo >Todos os elementos serão desenhados com um único símbolo</p>'+
@@ -451,6 +467,31 @@ i3GEOF.legenda = {
 		}
 		catch(e){alert("Erro: "+ e);i3GEOF.legenda.aguarde.visibility = "hidden";}
 	},
+	/*
+	Function: alteraGeometria
+	
+	Altera o tipo de representação geométrica dos elementos de um layer
+	
+	Veja:
+	
+	<ALTERACLASSE>
+	*/
+	alteraGeometriaTema: function(){
+		if(i3GEOF.legenda.aguarde.visibility === "visible")
+		{return;}
+		i3GEOF.legenda.aguarde.visibility = "visible";
+		var retorna = function(){
+			i3GEO.atualiza();
+			i3GEO.Interface.atualizaTema("",i3GEOF.legenda.tema);
+			i3GEO.arvoreDeCamadas.atualizaLegenda(i3GEOF.legenda.tema);
+			i3GEOF.legenda.aguarde.visibility = "hidden";
+			i3GEOF.legenda.mostralegenda();
+		};
+		var p = i3GEO.configura.locaplic+"/classesphp/mapa_controle.php?g_sid="+i3GEO.configura.sid+"&funcao=alteraclasse&opcao=alterageometria&tema="+i3GEOF.legenda.tema+"&tipo="+$i("i3GEOlegentaTipoGeo").value,
+			cp = new cpaint();
+		cp.set_response_type("JSON");
+		cp.call(p,"",retorna);
+	},	
 	/*
 	Function: adicionaConta
 	

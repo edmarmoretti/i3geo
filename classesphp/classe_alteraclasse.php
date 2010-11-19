@@ -454,6 +454,31 @@ Adiciona opacidade variável de 0 a 100 conforme o número de classes
 		}
 		$this->layer->setMetaData("cache","");
 		return("ok");
+	}
+/*
+function: alterageometria
+
+Altera a geometria de representação de todos os estilos de todas as classes de um layer
+
+*/
+	function alterageometria($tipo)
+	{
+		error_reporting(E_ALL);
+		if(!$this->layer){return "erro";}
+		$numclasses = $this->layer->numclasses;
+		for($i=0;$i<$numclasses;++$i)
+		{
+			$classe = $this->layer->getclass($i);
+			$numestilos = $classe->numstyles;
+			for($j=0;$j<$numestilos;++$j)
+			{
+				$estilo = $classe->getstyle($j);
+				$s = "STYLE geomtransform '$tipo' END";
+				$estilo->updateFromString($s);
+			}			
+		}
+		$this->layer->setMetaData("cache","");
+		return("ok");
 	}	
 /*
 function: alteraCoresClasses
