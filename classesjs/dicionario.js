@@ -721,7 +721,7 @@ it:"Exporta a legenda para o padrão SLD."
 }],
 "t39":[
 {
-pt:"SLD...",
+pt:"Exportar SLD...",
 en:"SLD...",
 es:"SLD...",
 it:"SLD..."
@@ -735,7 +735,7 @@ it:"Abre a ferramenta que permite alterar o SQL de acesso aos dados"
 }],
 "t41":[
 {
-pt:"SQL...",
+pt:"Editar SQL...",
 en:"SQL...",
 es:"SQL...",
 it:"SQL..."
@@ -746,6 +746,13 @@ pt:"Cortina...",
 en:"Curtain...",
 es:"Cortina...",
 it:"Tenda..."
+}],
+"t43":[
+{
+pt:"Aplicar SLD...",
+en:"Aplicar SLD...",
+es:"Aplicar SLD...",
+it:"Aplicar SLD..."
 }],
 //guia adiciona
 "a1":[

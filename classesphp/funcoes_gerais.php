@@ -618,6 +618,7 @@ function gravaDados($dados,$arq)
 	{
 		fwrite($fp,$dado."\n");
 	}
+	fclose($fp);
 }
 /*
 Function: listaTrueType

@@ -770,6 +770,14 @@ g_traducao_ajuda = {
 			complemento:"",
 			tela:"",
 			apijs:"i3GEO.tema.dialogo.cortina()"
+		},
+		"91": {
+			titulo: "Aplicar SLD",
+			diretorio:"i3geo/classesjs/classe_tema.js",
+			categoria:"5",
+			pt:"Aplica um arquivo XML, no formato SLD, ao tema ativo.",
+			complemento:"SLD é um formato padrão que permite definir filtros e simbologia. Vários softwraes permitem criar arquivos nesse padrão.",
+			apijs:"i3GEO.tema.dialogo.aplicarsld()"
 		}
 	}
 };
