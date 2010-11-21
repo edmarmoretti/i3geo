@@ -109,6 +109,9 @@ i3GEOF.legenda = {
 				i3GEO.guias.mostraGuiaFerramenta("i3GEOlegendaguia4","i3GEOlegendaguia");
 				i3GEOF.legenda.mostraGrafico();
 			};
+			$i("i3GEOlegendaguia5").onclick = function(){
+				i3GEO.guias.mostraGuiaFerramenta("i3GEOlegendaguia5","i3GEOlegendaguia");
+			};
 			new YAHOO.widget.Button(
 				"i3GEOlegendabotao1",
 				{onclick:{fn: i3GEOF.legenda.mudaLegenda}}
@@ -157,6 +160,14 @@ i3GEOF.legenda = {
 				"i3GEOlegendabotao17",
 				{onclick:{fn: i3GEOF.legenda.alteraGeometriaTema}}
 			);
+			new YAHOO.widget.Button(
+				"i3GEOlegendabotaoSLDe",
+				{onclick:{fn: function(){window.open(i3GEO.configura.locaplic+"/classesphp/mapa_controle.php?funcao=tema2sld&tema="+i3GEOF.legenda.tema+"&g_sid="+i3GEO.configura.sid);}}}
+			);
+			new YAHOO.widget.Button(
+				"i3GEOlegendabotaoSLDi",
+				{onclick:{fn: function(){i3GEO.tema.dialogo.aplicarsld(i3GEOF.legenda.tema);}}}
+			);
 			i3GEOF.legenda.ativaFoco();
 			i3GEOF.legenda.mostralegenda();
 			i3GEO.util.comboItens(
@@ -188,6 +199,7 @@ i3GEOF.legenda = {
 		'		<li><a href="#ancora"><em><div id="i3GEOlegendaguia2" style="text-align:center;left:0px;" >Classes</div></em></a></li>'+
 		'		<li><a href="#ancora"><em><div id="i3GEOlegendaguia3" style="text-align:center;left:0px;" >Editor</div></em></a></li>'+
 		'		<li><a href="#ancora"><em><div id="i3GEOlegendaguia4" style="text-align:center;left:0px;" >Gr&aacute;ficos</div></em></a></li>'+
+		'		<li><a href="#ancora"><em><div id="i3GEOlegendaguia5" style="text-align:center;left:0px;" >Aplicar/exportar</div></em></a></li>'+
 		'	</ul>'+
 		'</div><br>'+
 		'<div id=i3GEOlegendaguia1obj style="width:99%;text-align:left;">'+
@@ -259,6 +271,12 @@ i3GEOF.legenda = {
 		'	</div>'+
 		'</div>'+
 		'<div id=i3GEOlegendaguia4obj style="width:99%;text-align:left;">'+
+		'</div>'+
+		'<div id=i3GEOlegendaguia5obj style="width:99%;text-align:left;">'+
+		'	<p class=paragrafo >Gera um arquivo XML, no padrão SLD, contendo a legenda atual da camada. Para maiores informações, veja <a href="http://mapserver.org/ogc/sld.html#sld" target=_blank >Mapserver SLD</a>'+
+		'	<p class=paragrafo ><input id=i3GEOlegendabotaoSLDe size="25" type="button" value="Exportar SLD"></p>'+
+		'	<p class=paragrafo >Aplica um arquivo SLD à camada ativa' +
+		'	<p class=paragrafo ><input id=i3GEOlegendabotaoSLDi size="25" type="button" value="Aplicar SLD"></p>'+		
 		'</div>';
 		return ins;
 	},

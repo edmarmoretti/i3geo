@@ -278,10 +278,10 @@ i3GEO.janela = {
 		{YAHOO.janelaDoca.xp.panel.iframe.style.zIndex = 0;}
 		if(modal === true){
 			if($i(id+"_mask"))
-			{$i(id+"_mask").style.zIndex = 9000;}
+			{$i(id+"_mask").style.zIndex = 9000 + i3GEO.janela.ULTIMOZINDEX + 1;}
 		}
 		if($i(id+"_c"))
-		{$i(id+"_c").style.zIndex = 10000;}
+		{$i(id+"_c").style.zIndex = 10000 + i3GEO.janela.ULTIMOZINDEX + 1;}
 		if(funcaoCabecalho)
 		{$i(id+'_cabecalho').onclick = funcaoCabecalho;}
 		if(funcaoMinimiza)
