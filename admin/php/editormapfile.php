@@ -18,7 +18,7 @@ Desenvolvedor: Edmar Moretti edmar.moretti@mma.gov.br
 Este programa é software livre; você pode redistribuí-lo
 e/ou modificá-lo sob os termos da Licença Pública Geral
 GNU conforme publicada pela Free Software Foundation;
-tanto a versão 2 da Licença.
+
 Este programa é distribuído na expectativa de que seja útil,
 porém, SEM NENHUMA GARANTIA; nem mesmo a garantia implícita
 de COMERCIABILIDADE OU ADEQUAÇÃO A UMA FINALIDADE ESPECÍFICA.
@@ -135,6 +135,41 @@ switch (strtoupper($funcao))
 	*/	
 	case "PEGAITENSLAYER":
 		retornaJSON(pegaItensLayer());
+		exit;
+	break;
+	/*
+	Valor: LIMPARCACHEMAPFILE
+	
+	Apaga o diretório contendo o cache de um tema (mapfile)
+	
+	Parametros:
+	
+	codigoMap {string} - nome do mapfile (sem .map)
+	
+	Retorno:
+	
+	{JSON}
+	*/	
+	case "LIMPARCACHEMAPFILE":
+		error_reporting(E_ALL);
+		$mapfile = $locaplic."/temas/".$codigoMap.".map";
+		$mapa = ms_newMapObj($mapfile);
+		$nomes = $mapa->getalllayernames();
+		foreach($nomes as $nome)
+		{
+			$dir = $dir_tmp."/cache/".$nome;
+			if (is_dir($dir)) {
+				$objects = scandir($dir);
+				foreach ($objects as $object) {
+					if ($object != "." && $object != "..") {
+						if (filetype($dir."/".$object) == "dir") rrmdir($dir."/".$object); else unlink($dir."/".$object);
+					}
+				}
+				reset($objects);
+				rmdir($dir);
+			} 
+		}
+		retornaJSON("ok");
 		exit;
 	break;
 	/*

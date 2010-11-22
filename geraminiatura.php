@@ -21,7 +21,7 @@ Colaboração: Luis Henrique Weirich de Matos
 Este programa é software livre; você pode redistribuí-lo
 e/ou modificá-lo sob os termos da Licença Pública Geral
 GNU conforme publicada pela Free Software Foundation;
-tanto a versão 2 da Licença.
+
 Este programa é distribuído na expectativa de que seja útil,
 porém, SEM NENHUMA GARANTIA; nem mesmo a garantia implícita
 de COMERCIABILIDADE OU ADEQUAÇÃO A UMA FINALIDADE ESPECÍFICA.

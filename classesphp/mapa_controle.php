@@ -46,7 +46,7 @@ Desenvolvedor: Edmar Moretti edmar.moretti@mma.gov.br
 Este programa é software livre; você pode redistribuí-lo
 e/ou modificá-lo sob os termos da Licença Pública Geral
 GNU conforme publicada pela Free Software Foundation;
-tanto a versão 2 da Licença.
+
 Este programa é distribuído na expectativa de que seja útil,
 porém, SEM NENHUMA GARANTIA; nem mesmo a garantia implícita
 de COMERCIABILIDADE OU ADEQUAÇÃO A UMA FINALIDADE ESPECÍFICA.
@@ -1024,6 +1024,18 @@ Processa os layers do mapa.
 
 <classe_temas.php>
 */
+/*
+Valor: PEGANOMELAYER
+
+Obtém o nome de um layer e de seu arquivo mapfile original.
+
+<Temas->peganomelayer>
+*/	
+	case "PEGANOMELAYER":
+		include_once("classe_temas.php");
+		$m = new Temas($map_file,$tema);
+		$retorno = $m->peganomelayer();
+	break;
 /*
 Valor: PEGADATA
 

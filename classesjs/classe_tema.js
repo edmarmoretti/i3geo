@@ -14,7 +14,7 @@ Desenvolvedor: Edmar Moretti edmar.moretti@mma.gov.br
 Este programa é software livre; você pode redistribuí-lo
 e/ou modificá-lo sob os termos da Licença Pública Geral
 GNU conforme publicada pela Free Software Foundation;
-tanto a versão 2 da Licença.
+
 Este programa é distribuído na expectativa de que seja útil,
 porém, SEM NENHUMA GARANTIA; nem mesmo a garantia implícita
 de COMERCIABILIDADE OU ADEQUAÇÃO A UMA FINALIDADE ESPECÍFICA.
@@ -384,6 +384,20 @@ i3GEO.tema = {
 				i3GEO.util.scriptTag(js,"i3GEOF.converteKml.criaJanelaFlutuante('"+tema+"','"+tipo+"')","i3GEOF.converteKml_script");
 			}
 		},
+		/*
+		Function: salvaMapfile
+
+		Abre a janela de diálogo da ferramenta salvamapfile
+
+		Parametros:
+
+		idtema - código do tema
+		*/
+		salvaMapfile: function(idtema){
+			i3GEO.mapa.ativaTema(idtema);
+			if(typeof(i3GEOF.graficoTema) === 'undefined')
+			{i3GEO.util.dialogoFerramenta("i3GEO.tema.dialogo.salvamapfile()","salvamapfile","salvamapfile");}
+		},		
 		/*
 		Function: graficotema
 

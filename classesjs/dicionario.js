@@ -754,6 +754,13 @@ en:"Aplicar SLD...",
 es:"Aplicar SLD...",
 it:"Aplicar SLD..."
 }],
+"t44": [
+{
+pt: "Salvar mapfile",
+en:"Save mapfile",
+es:"Guardar mapfile",
+it:"Salva mapfile"
+}],
 //guia adiciona
 "a1":[
 {

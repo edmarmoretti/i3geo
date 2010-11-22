@@ -19,7 +19,7 @@ Desenvolvedor: Edmar Moretti edmar.moretti@mma.gov.br
 Este programa é software livre; você pode redistribuí-lo
 e/ou modificá-lo sob os termos da Licença Pública Geral
 GNU conforme publicada pela Free Software Foundation;
-tanto a versão 2 da Licença.
+
 Este programa é distribuído na expectativa de que seja útil,
 porém, SEM NENHUMA GARANTIA; nem mesmo a garantia implícita
 de COMERCIABILIDADE OU ADEQUAÇÃO A UMA FINALIDADE ESPECÍFICA.
@@ -348,7 +348,7 @@ i3GEO = {
 					
 					i3GEO.arvoreDeCamadas.CAMADAS = retorno.data.temas;
 					if(retorno.data.variaveis.navegacaoDir == "sim")
-					{i3GEO.arvoreDeTemas.OPCOESADICIONAIS.navegacaoDir=true;}
+					{i3GEO.arvoreDeTemas.OPCOESADICIONAIS.navegacaoDir = true;}
 					//
 					//na interface padrão é necessário executar a atualização pois a geração do mapa
 					//ainda não foi feita

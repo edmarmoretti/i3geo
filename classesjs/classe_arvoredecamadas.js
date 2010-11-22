@@ -19,7 +19,7 @@ Desenvolvedor: Edmar Moretti edmar.moretti@mma.gov.br
 Este programa é software livre; você pode redistribuí-lo
 e/ou modificá-lo sob os termos da Licença Pública Geral
 GNU conforme publicada pela Free Software Foundation;
-tanto a versão 2 da Licença.
+
 Este programa é distribuído na expectativa de que seja útil,
 porém, SEM NENHUMA GARANTIA; nem mesmo a garantia implícita
 de COMERCIABILIDADE OU ADEQUAÇÃO A UMA FINALIDADE ESPECÍFICA.
@@ -779,7 +779,8 @@ i3GEO.arvoreDeCamadas = {
 		//i3GEO.arvoreDeCamadas.adicionaOpcaoTema($trad("t43"),$trad("t43"),'i3GEO.tema.dialogo.aplicarsld(\"'+ltema.name+'\")',node);
 		if(ltema.editorsql == "sim" || ltema.editorsql == "SIM")
 		{i3GEO.arvoreDeCamadas.adicionaOpcaoTema($trad("t40"),$trad("t41"),'i3GEO.tema.dialogo.editorsql(\"'+ltema.name+'\")',node);}
-
+		if(i3GEO.arvoreDeTemas.OPCOESADICIONAIS.navegacaoDir == true)
+		{i3GEO.arvoreDeCamadas.adicionaOpcaoTema($trad("t44"),"<span style=color:red >"+$trad("t44")+"</span>",'i3GEO.tema.dialogo.salvaMapfile(\"'+ltema.name+'\")',node);}		
 		node.loadComplete();
 	},
 	/*

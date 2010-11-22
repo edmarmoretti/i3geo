@@ -15,7 +15,7 @@ Desenvolvedor: Edmar Moretti edmar.moretti@mma.gov.br
 Este programa é software livre; você pode redistribuí-lo
 e/ou modificá-lo sob os termos da Licença Pública Geral
 GNU conforme publicada pela Free Software Foundation;
-tanto a versão 2 da Licença.
+
 Este programa é distribuído na expectativa de que seja útil,
 porém, SEM NENHUMA GARANTIA; nem mesmo a garantia implícita
 de COMERCIABILIDADE OU ADEQUAÇÃO A UMA FINALIDADE ESPECÍFICA.
@@ -231,6 +231,7 @@ function montaNosRaiz(redesenha)
 	for (var i=0, j=$mapfiles.length; i<j; i++)
 	{
 		conteudo = "&nbsp;<img style=\"position:relative;cursor:pointer;top:2px\" onclick=\"excluirMapfile('"+$mapfiles[i].codigo+"')\" title=excluir src=\"../imagens/01.png\" />"
+		conteudo += "&nbsp;<img style=\"position:relative;cursor:pointer;top:2px\" onclick=\"limparCacheMapfile('"+$mapfiles[i].codigo+"')\" title='limpa o chache de imagens se houver' src=\"../imagens/limparcache.png\" />"
 		conteudo += "&nbsp;<img style=\"position:relative;cursor:pointer;top:2px\" onclick=\"editorTemaMapfile('"+$mapfiles[i].codigo+"')\" title='editar tema associado' src=\"../imagens/06.png\" />"
 		conteudo += "&nbsp;<img style=\"position:relative;cursor:pointer;top:2px\" onclick=\"testarMapfile('"+$mapfiles[i].codigo+"')\" title='testar!' src=\"../imagens/41.png\" /><b>&nbsp;<span>"+$mapfiles[i].codigo+" <span style=color:gray >"+$mapfiles[i].nome+"</span></span>"
 		if($mapfiles[i].imagem != "" && $i("mostraMini").checked == true){
@@ -768,6 +769,41 @@ function adicionaNovoEstilo(codigoMap,codigoLayer,indiceClasse)
 	core_makeRequest(sUrl,callback)
 }
 /*
+Function: limparCacheMapfile
+
+Exclui o cache de imagens referentes ao mapfile
+
+<LIMPARCACHEMAPFILE>
+*/
+function limparCacheMapfile(codigoMap)
+{
+	var mensagem = " limpando "+codigoMap;
+	var sUrl = "../php/editormapfile.php?funcao=limparCacheMapfile&codigoMap="+codigoMap;
+	var handleYes = function()
+	{
+		this.hide();
+		core_carregando("ativa");
+		core_carregando(mensagem);
+		var callback =
+		{
+  			success:function(o)
+  			{
+  				try
+  				{core_carregando("desativa");}
+  				catch(e){core_handleFailure(o,o.responseText);}
+  			},
+  			failure:core_handleFailure,
+  			argument: { foo:"foo", bar:"bar" }
+		}; 
+		core_makeRequest(sUrl,callback)
+	};
+	var handleNo = function()
+	{this.hide();};
+	var mensagem = "Exclui o cache temporário de renderização?";
+	var largura = "300"
+	core_dialogoContinua(handleYes,handleNo,mensagem,largura)	
+}
+/*
 Function: excluirMapfile
 
 Exclui um mapfile
@@ -1039,7 +1075,7 @@ function montaEditorMetadados(dados)
 		titulo:"Escala (ESCALA)",id:"escala",value:dados.escala,tipo:"text"},
 		{ajuda:"Extensão geográfica máxima do tema, no formato xmin ymin xmax ymax. É utilizado na opção de 'zoom para o tema'. Quando o tema é baseado em shapefile, esse metadata não é necessário, pois o mapserver consegue calcular a extensão. Já em outros tipos de dados, como Postgis, o parâmetro é necessário. Nesse caso, se não for indicado, o botão de zoom para o tema não será visível para o usuário",
 		titulo:"Extensao (EXTENSAO)",id:"extensao",value:dados.extensao,tipo:"text"},
-		{ajuda:"Ativa ou não a manutenção de um cache para armazenar as imagens geradas para montar o mapa. Essa opção afeta apenas as interfaces do i3Geo que utilizam o modo TILE (como a interface OpenLayers). O cache é mantido no diretório temporário utilizado pelo i3Geo, na pasta chamada cache. Para cada camada é criada uma sub-pasta específica",
+		{ajuda:"Ativa ou não a manutenção de um cache para armazenar as imagens geradas para montar o mapa. Essa opção afeta apenas as interfaces do i3Geo que utilizam o modo TILE (como a interface OpenLayers). O cache é mantido no diretório temporário utilizado pelo i3Geo, na pasta chamada cache. Para cada camada é criada uma sub-pasta. Para limpar o cache, utilize a opção existente junto ao nó principal desse mapfile",
 		titulo:"Cache de mapas (CACHE)",id:"",value:dados.cache,tipo:"text",div:"<div id=cCache ></div>"},
 		{ajuda:"Indica se a extensão geográfica do mapa deve ser alterada quando o tema for adicionado ao mapa",
 		titulo:"Aplica extensao (APLICAEXTENSAO)",id:"",value:dados.aplicaextensao,tipo:"text",div:"<div id=cAplicaextensao ></div>"},
