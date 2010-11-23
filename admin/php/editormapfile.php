@@ -92,7 +92,7 @@ switch (strtoupper($funcao))
 	{JSON}
 	*/	
 	case "EDITASIMBOLO":
-		include_once("../../classesphp/classe_legenda.php");
+		include_once("$locaplic/classesphp/classe_legenda.php");
 		if (strtoupper(substr(PHP_OS, 0, 3) == 'WIN'))
 		{$map_file = $locaplic."/aplicmap/geral1windows.map";}
 		else
@@ -203,13 +203,36 @@ switch (strtoupper($funcao))
 		}
 		else
 		{
-			unlink("../../temas/".$codigoMap.".map");
+			unlink("$locaplic/temas/".$codigoMap.".map");
 			$tabela = "i3geoadmin_temas";
 			exclui();
 			retornaJSON("ok");
 			exit;
 		}
 	break;
+	/*
+	Valor: REFAZERLAYER
+	
+	Altera um layer existente em um mapfile com base em um layer existente em outro mapfile
+	
+	Parametros:
+	
+	codigomap {string} - nome do mapfile existente em i3geo/temas que será atualizado (sem .map)
+	
+	maporigem {string} - nome completo do arquivo mapfile que contem o layer que será utilizado para alterar o original
+	
+	nomelayer {string} - código do layer em mapfile que será utilizado para atualizar codigoMap
+	
+	Retorno:
+	
+	{JSON}
+	*/	
+	case "REFAZERLAYER":
+		if(verificaEditores($editores) == "nao")
+		{echo "Vc nao e um editor cadastrado. Apenas os editores definidos em i3geo/ms_configura.php podem acessar o sistema de administracao.";exit;}
+		retornaJSON(refazerLayer());
+		exit;
+	break;	
 	/*
 	Valor: CRIARNOVOLAYER
 	
@@ -911,6 +934,26 @@ switch (strtoupper($funcao))
 		exit;
 	break;
 }
+function refazerLayer()
+{
+	global $nomelayer, $codigomap, $maporigem, $locaplic;
+	error_reporting(E_ALL);
+	$mapa = ms_newMapObj($maporigem);
+	$arqtema = $locaplic."/temas/".$codigomap.".map";
+	$mapatema = ms_newMapObj($arqtema);
+	$layeroriginal = @$mapatema->getlayerbyname($codigomap);
+	$layernovo = @$mapa->getlayerbyname($nomelayer);
+	if($layeroriginal != "" && $layernovo != "")
+	{
+		$layeroriginal->set("status",MS_DELETE);
+		$nl = ms_newLayerObj($mapatema,$layernovo);
+		$nl->set("name",$codigomap);
+		$mapatema->save($arqtema);
+		removeCabecalho($arqtema);
+		return array("data"=>"ok");		
+	}
+	return "erro";
+}
 function sobeDesce()
 {
 	global $movimento,$tipo,$codigoMap,$codigoLayer,$indiceClasse,$indiceEstilo,$locaplic;
@@ -997,7 +1040,7 @@ function criarNovoMap()
 function criarNovoLayer()
 {
 	global $locaplic,$codigoMap;
-	include_once("../../classesphp/funcoes_gerais.php");
+	include_once("$locaplic/classesphp/funcoes_gerais.php");
 	$mapfile = $locaplic."/temas/".$codigoMap.".map";
 	$mapa = ms_newMapObj($mapfile);
 	$nl = ms_newLayerObj($mapa);
@@ -1011,7 +1054,7 @@ function autoClassesLayer()
 {
 	global $codigoMap,$codigoLayer,$itemExpressao,$itemNome,$locaplic,$dir_tmp;
 	$mapfile = $locaplic."/temas/".$codigoMap.".map";
-	include_once("../../classesphp/classe_alteraclasse.php");
+	include_once("$locaplic/classesphp/classe_alteraclasse.php");
 	error_reporting(0);
 	$nometemp = $dir_tmp."/".nomerandomico().".map";
 	if (strtoupper(substr(PHP_OS, 0, 3) == 'WIN'))

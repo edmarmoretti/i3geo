@@ -778,6 +778,14 @@ g_traducao_ajuda = {
 			pt:"Aplica um arquivo XML, no formato SLD, ao tema ativo.",
 			complemento:"SLD é um formato padrão que permite definir filtros e simbologia. Vários softwraes permitem criar arquivos nesse padrão.",
 			apijs:"i3GEO.tema.dialogo.aplicarsld()"
+		},
+		"92": {
+			titulo: "Aplicar SLD",
+			diretorio:"i3geo/ferramentas/salvamapfile",
+			categoria:"5",
+			pt:"Salva as definições da camada no arquivo mapfile de origem",
+			complemento:"Essa opção só é ativada para usuários que são administradores. Permite que a camada seja alterada, por exemplo, modificando-se a legenda, e que o resultado seja salvo nas definições originais da camada.",
+			apijs:"i3GEO.tema.dialogo.salvaMapfile()"
 		}
 	}
 };

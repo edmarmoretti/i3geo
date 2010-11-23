@@ -1030,6 +1030,20 @@ Retorna o SLD correspondente à legenda do tema.
 		return $this->layer->generateSLD();
 	}
 /*
+function: peganomelayer
+
+Retorna o nome do layer e outros dados relacionados
+*/
+	function peganomelayer()
+	{
+		if(!$this->layer){return "erro";}
+		$nomeoriginal = $this->layer->getmetadata("nomeoriginal");
+		$nomearquivo = $this->locaplic."/temas/".$nomeoriginal;
+		if(!file_exists($nomearquivo))
+		{$nomearquivo = "";}
+		return array("mapfile"=>$this->arquivo,"nomeoriginal"=>$nomeoriginal,"nomelayer"=>$this->layer->name,"nomearquivo"=>$nomearquivo);
+	}
+/*
 function: pegadata
 
 Retorna o valor do elemento DATA
