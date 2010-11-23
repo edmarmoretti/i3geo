@@ -231,6 +231,7 @@ function montaNosRaiz(redesenha)
 	for (var i=0, j=$mapfiles.length; i<j; i++)
 	{
 		conteudo = "&nbsp;<img style=\"position:relative;cursor:pointer;top:2px\" onclick=\"excluirMapfile('"+$mapfiles[i].codigo+"')\" title=excluir src=\"../imagens/01.png\" />"
+		conteudo += "&nbsp;<img style=\"position:relative;cursor:pointer;top:2px\" onclick=\"clonarMapfile('"+$mapfiles[i].codigo+"')\" title='cria uma cópia' src=\"../imagens/clonar.png\" />"
 		conteudo += "&nbsp;<img style=\"position:relative;cursor:pointer;top:2px\" onclick=\"limparCacheMapfile('"+$mapfiles[i].codigo+"')\" title='limpa o chache de imagens se houver' src=\"../imagens/limparcache.png\" />"
 		conteudo += "&nbsp;<img style=\"position:relative;cursor:pointer;top:2px\" onclick=\"editorTemaMapfile('"+$mapfiles[i].codigo+"')\" title='editar tema associado' src=\"../imagens/06.png\" />"
 		conteudo += "&nbsp;<img style=\"position:relative;cursor:pointer;top:2px\" onclick=\"testarMapfile('"+$mapfiles[i].codigo+"')\" title='testar!' src=\"../imagens/41.png\" /><b>&nbsp;<span>"+$mapfiles[i].codigo+" <span style=color:gray >"+$mapfiles[i].nome+"</span></span>"
@@ -816,6 +817,47 @@ function excluirMapfile(codigoMap)
 	var no = tree.getNodeByProperty("id",codigoMap)
 	var sUrl = "../php/editormapfile.php?funcao=excluirMapfile&codigoMap="+codigoMap;
 	core_excluiNoTree(sUrl,no,mensagem)	
+}
+/*
+Function: clonarMapfile
+
+Exclui um mapfile
+
+<CLONARMAPFILE>
+*/
+function clonarMapfile(codigoMap)
+{
+	var mensagem = " clonando "+codigoMap;
+	var sUrl = "../php/editormapfile.php?funcao=clonarMapfile&codigomap="+codigoMap;
+	var handleYes = function()
+	{
+		var novonome = $i("clonarComo").value;
+		this.hide();
+		if(novonome == "")
+		{return;}
+		core_carregando("ativa");
+		core_carregando("Copiando...");
+		var callback =
+		{
+  			success:function(o)
+  			{
+  				try
+  				{
+					core_carregando("desativa");
+					initMenu();
+				}
+  				catch(e){core_handleFailure(o,o.responseText);}
+  			},
+  			failure:core_handleFailure,
+  			argument: { foo:"foo", bar:"bar" }
+		}; 
+		core_makeRequest(sUrl+"&novomap="+novonome,callback)
+	};
+	var handleNo = function()
+	{this.hide();};
+	var mensagem = "Nome do novo arquivo:<br><input type=text value='' id=clonarComo />";
+	var largura = "300"
+	core_dialogoPergunta(handleYes,handleNo,mensagem,largura)	
 }
 /*
 Function: excluirLayer

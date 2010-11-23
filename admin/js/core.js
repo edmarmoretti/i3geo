@@ -264,6 +264,43 @@ function core_dialogoContinua(handleYes,handleNo,mensagem,largura)
 	YAHOO.continua.container.simpledialog1.show();
 }
 /*
+Function: core_dialogoPergunta
+
+Mostra um diálogo do tipo sim não com uma pergunta
+
+Parameters:
+
+handleYes - função para sim
+
+handleNo - função para não
+
+mensagem - mensagem do diálogo
+
+largura - largura do diálogo em px
+*/
+function core_dialogoPergunta(handleYes,handleNo,mensagem,largura)
+{
+	// Instantiate the Dialog
+	YAHOO.namespace("continua.container");
+	YAHOO.continua.container.simpledialog1 = 
+		new YAHOO.widget.SimpleDialog("simpledialog1", 
+			 { width: largura+"px",
+			   fixedcenter: true,
+			   visible: false,
+			   draggable: false,
+			   close: true,
+			   text: mensagem,
+			   icon: "",
+			   modal: true,
+			   constraintoviewport: true,
+			   buttons: [ { text:"Continua", handler:handleYes, isDefault:true },
+						  { text:"Cancela",  handler:handleNo } ]
+	} );
+	//YAHOO.continua.container.simpledialog1.setHeader("Tem certeza?");
+	YAHOO.continua.container.simpledialog1.render(document.body);
+	YAHOO.continua.container.simpledialog1.show();
+}
+/*
 Function: core_ativaPainelAjuda
 
 Parameters:

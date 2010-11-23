@@ -192,7 +192,8 @@ switch (strtoupper($funcao))
 		{echo "Vc nao e um editor cadastrado. Apenas os editores definidos em i3geo/ms_configura.php podem acessar o sistema de administracao.";exit;}
 		//pega oid do tema
 		$dados = pegaDados("SELECT id_tema from i3geoadmin_temas WHERE codigo_tema = '".$codigoMap."'");
-		$id = $dados[0]["id_tema"];
+		if(count($dados) > 0)
+		{$id = $dados[0]["id_tema"];}
 		$tabela = "mapfiles";
 		$coluna = "id_tema";
 		$f = verificaFilhos();
@@ -203,9 +204,11 @@ switch (strtoupper($funcao))
 		}
 		else
 		{
-			unlink("$locaplic/temas/".$codigoMap.".map");
+			if(file_exists("$locaplic/temas/".$codigoMap.".map"))
+			{unlink("$locaplic/temas/".$codigoMap.".map");}
 			$tabela = "i3geoadmin_temas";
-			exclui();
+			if($id)
+			{exclui();}
 			retornaJSON("ok");
 			exit;
 		}
@@ -232,7 +235,28 @@ switch (strtoupper($funcao))
 		{echo "Vc nao e um editor cadastrado. Apenas os editores definidos em i3geo/ms_configura.php podem acessar o sistema de administracao.";exit;}
 		retornaJSON(refazerLayer());
 		exit;
-	break;	
+	break;
+	/*
+	Valor: CLONARMAPFILE
+	
+	Copia um mapfile existente
+	
+	Parametros:
+	
+	codigomap {string} - nome do mapfile existente em i3geo/temas que será clonado (sem .map)
+	
+	novomap {string} - nome do mapfile que será criado
+	
+	Retorno:
+	
+	{JSON}
+	*/	
+	case "CLONARMAPFILE":
+		if(verificaEditores($editores) == "nao")
+		{echo "Vc nao e um editor cadastrado. Apenas os editores definidos em i3geo/ms_configura.php podem acessar o sistema de administracao.";exit;}
+		retornaJSON(clonarMapfile());
+		exit;
+	break;
 	/*
 	Valor: CRIARNOVOLAYER
 	
@@ -933,6 +957,20 @@ switch (strtoupper($funcao))
 		retornaJSON($res);
 		exit;
 	break;
+}
+function clonarMapfile()
+{
+	global $novomap, $codigomap, $locaplic;
+	error_reporting(E_ALL);
+	$arqtema = $locaplic."/temas/".$codigomap.".map";
+	$novotema = $locaplic."/temas/".$novomap.".map";
+	copy($arqtema,$novotema);
+	$mapa = ms_newMapObj($novotema);
+	$layer = @$mapa->getlayerbyname($codigomap);
+	$layer->set("name",$novomap);
+	$mapa->save($novotema);
+	removeCabecalho($novotema);
+	return array("data"=>"ok");		
 }
 function refazerLayer()
 {
