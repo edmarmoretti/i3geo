@@ -308,6 +308,9 @@ if(!isset($interface))
 	$interface = $interfacePadrao;
 }
 
+if(isset($layers) && !isset($temasa))
+{$temasa = $layers;}
+
 incluiTemasIniciais();
 
 if(isset($layers))

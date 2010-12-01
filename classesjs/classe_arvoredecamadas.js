@@ -246,7 +246,9 @@ i3GEO.arvoreDeCamadas = {
 			
 			"editorsql":"sim",
 			
-			"iconetema":""			
+			"iconetema":"",
+
+			"permitecomentario":""
 		}
 	]
 	
@@ -698,6 +700,20 @@ i3GEO.arvoreDeCamadas = {
 			iconesNode = new YAHOO.widget.HTMLNode(d, node, false,true);
 			iconesNode.enableHighlight = false;
 			iconesNode.isLeaf = true;
+			
+			if(ltema.permitecomentario.toLowerCase() !== "nao" && i3GEO.arvoreDeTemas.OPCOESADICIONAIS.comentarios == true)
+			{
+				temp = i3GEO.configura.locaplic+"/ms_criamapa.php?layers="+ltema.name;
+				tnome = "<iframe src='http://www.facebook.com/plugins/like.php?href="+temp+"&amp;layout=button_count&amp;show_faces=false&amp;width=100&amp;action=like&amp;colorscheme=light&amp;height=21' scrolling='no' frameborder='0' style='border:none; overflow:hidden; width:100px; height:21px;' allowTransparency='true'></iframe>";			
+				d = {html:tnome};
+				iconesNode = new YAHOO.widget.HTMLNode(d, node, false,true);
+				iconesNode.enableHighlight = false;
+				iconesNode.isLeaf = true;
+			
+			}
+
+			
+			
 		}
 		if(i3GEO.arvoreDeCamadas.OPCOESTEMAS === true){
 			conteudo = $trad("t18a");
@@ -778,9 +794,10 @@ i3GEO.arvoreDeCamadas = {
 		//i3GEO.arvoreDeCamadas.adicionaOpcaoTema($trad("t43"),$trad("t43"),'i3GEO.tema.dialogo.aplicarsld(\"'+ltema.name+'\")',node);
 		if(ltema.editorsql == "sim" || ltema.editorsql == "SIM")
 		{i3GEO.arvoreDeCamadas.adicionaOpcaoTema($trad("t40"),$trad("t41"),'i3GEO.tema.dialogo.editorsql(\"'+ltema.name+'\")',node);}
-		if(ltema.permitecomentario.toLowerCase() !== "nao")
-		{i3GEO.arvoreDeCamadas.adicionaOpcaoTema($trad("t45"),$trad("t45"),'i3GEO.tema.dialogo.comentario(\"'+ltema.name+'\")',node);}
-
+		if(ltema.permitecomentario.toLowerCase() !== "nao" && i3GEO.arvoreDeTemas.OPCOESADICIONAIS.comentarios == true)
+		{
+			i3GEO.arvoreDeCamadas.adicionaOpcaoTema($trad("t45"),$trad("t45"),'i3GEO.tema.dialogo.comentario(\"'+ltema.name+'\")',node);
+		}
 		if(i3GEO.arvoreDeTemas.OPCOESADICIONAIS.navegacaoDir == true)
 		{i3GEO.arvoreDeCamadas.adicionaOpcaoTema($trad("t44"),"<span style=color:red >"+$trad("t44")+"</span>",'i3GEO.tema.dialogo.salvaMapfile(\"'+ltema.name+'\")',node);}		
 		node.loadComplete();
