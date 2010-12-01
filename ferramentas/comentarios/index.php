@@ -2,8 +2,10 @@
 <head>
 <META HTTP-EQUIV="Content-Type" CONTENT="text/html; charset=ISO-8859-1">
 <link rel="stylesheet" type="text/css" href="../../admin/html/admin.css">
+<script type="text/javascript" src="../../classesjs/classe_util.js"></script>
 </head>
 <body>
+<p>Bookmark esse tema com: <span id="bm" style="width:100px;cursor:pointer;"></span></p>
 <?php
 /*
 Parametros:
@@ -67,8 +69,6 @@ function listaComentarios()
 	$id_tema = $id_tema[0]["id_tema"];
 	$lista = $dbh->query("select * from i3geoadmin_comentarios where id_tema = $id_tema ",PDO::FETCH_ASSOC);
 	$lista = $lista->fetchAll();
-	echo "<p><a href='../../admin/rsscomentariostemas.php'><img src='../../imagens/rss.gif' style='border:0px solid gray;' > todos os comentários</a>";
-	echo " <a href='../../admin/rsscomentariostemas.php?id_tema=".$id_tema."'><img src='../../imagens/rss.gif' style='border:0px solid gray;' > comentários para o tema</a></p>";
 
 	echo "<table>";
 	foreach ($lista as $reg)
@@ -84,6 +84,9 @@ function listaComentarios()
 	echo "</table><hr>";
    	$dbhw = null;
    	$dbh = null;
+	echo "<p><a href='../../admin/rsscomentariostemas.php'><img src='../../imagens/rss.gif' style='border:0px solid gray;' > todos os comentários</a>";
+	echo " <a href='../../admin/rsscomentariostemas.php?id_tema=".$id_tema."'><img src='../../imagens/rss.gif' style='border:0px solid gray;' > comentários para o tema</a></p>";
+
 }
 function gravaComentario()
 {
@@ -108,5 +111,7 @@ function converte($texto){
 }
 ?>
 <script>
-
+i3GEO.configura = {"locaplic": "<?php echo $_SESSION["locaplic"];?>"};
+if(document.getElementById("bm"))
+{document.getElementById("bm").innerHTML = i3GEO.util.bookmark("<?php echo $_SESSION["locaplic"]."/ms_criamapa.php?layers=".$_SESSION["tema"];?>");}
 </script>
