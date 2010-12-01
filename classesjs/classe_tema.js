@@ -350,6 +350,18 @@ i3GEO.tema = {
 	*/
 	dialogo:{
 		/*
+		Function: comentario
+
+		Abre a janela de diálogo para o usuário ver e inserir comentarios em um tema
+		
+		Parametros:
+
+		tema - código do tema escolhido
+		*/
+		comentario: function(tema){
+			i3GEO.janela.cria("530px","330px",i3GEO.configura.locaplic+"/ferramentas/comentarios/index.php?tema="+tema+"&g_sid="+i3GEO.configura.sid+"&locaplic="+i3GEO.configura.locaplic,"","","<img src='"+i3GEO.configura.locaplic+"/imagens/player_volta.png' style=cursor:pointer onclick='javascript:history.go(-1)'><span style=position:relative;top:-2px; > Comentários de "+tema+" </span><a class=ajuda_usuario target=_blank href='"+i3GEO.configura.locaplic+"/ajuda_usuario.php?idcategoria=7&idajuda=68' >&nbsp;&nbsp;&nbsp;</a>","comentario"+Math.random());
+		},
+		/*
 		Function: cortina
 
 		Abre a janela de diálogo da ferramenta cortina

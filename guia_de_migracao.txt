@@ -18,7 +18,13 @@ Para a versão 4.5
 	
 	A pasta "images" foi removida e as imagens movidas para a pasta "imagens\depreciado"
 	
-	
+	Opção de comentários em temas
+		Foram acrescentadas novas variáveis em ms_configura.php. Veja esse arquivo para editar as variáveis e registrar
+		as APIs das redes sociais como Twitter e Facebook
+		Por default, todos os temas podem receber comentários. Para bloquear comentários em temas específicos,
+		utilize o editor de mapfiles do sistema de admnistração
+		Os comentários são armazenados em uma tabela no banco de dados de administração. Essa tabela precisa ser criada no banco.
+		Para criar a tabela veja o item "Outras opções" em http://localhost/i3geo/admin
 
 -------------------------------------------------------------------------------------------------
 Para a versão 4.4

@@ -43,6 +43,96 @@ Arquivo: ms_configura.php
 
 */
 /*
+	Variavel: linkedinoauth (ainda não implementado)
+	
+	Parâmetros registrados no Linkedin para permitir que o i3Geo faça autenticação com base na conta do usuário
+	
+	O Linkedin exige que cada site seja registrado para permitir que a API de autenticação funcione
+	
+	Veja o site para maiores informações: http://developer.linkedin.com/docs/DOC-1008
+
+	Caso vc não queira permitir essa opção, deixe essa variável vazia, e.x
+		
+	Ao registrar utilize o valor http://meuservidor/i3geo/pacotes/openid/login.php?login
+
+	Exemplo:
+	
+	$linkedinoauth = array(
+		"consumerkey" => "0oQ30ge-ggKarx4HGaXVK118n8mekMBbFYTrC-agGV9hvxUXfeWwS1q7ZMvD-8LL",
+		"consumersecret" => "nRGXfHp1XNMt0eCG7tWJpoCcXX1uoZseDtgiU-CRy1ajqipo4KpjjZdDUXmqZGQA"
+	);	
+	
+	Tipo:
+	{array}
+*/
+$linkedinoauth = "";
+/*
+	Variavel: facebookoauth
+	
+	Parâmetros registrados no Facebook para permitir que o i3Geo faça autenticação com base na conta do usuário
+	
+	O Facebook exige que cada site seja registrado para permitir que a API de autenticação funcione
+	
+	Veja o site para maiores informações: http://developers.facebook.com/setup/
+
+	Caso vc não queira permitir essa opção, deixe essa variável vazia, e.x
+		
+	Ao registrar utilize o valor http://meuservidor/i3geo/pacotes/openid/login.php?login
+
+	Exemplo:
+	
+	$facebookoauth = array(
+		"consumerkey" => "136279263094148",
+		"consumersecret" => "679fc4a007b1d289377fa8af8f7086b6"
+	);	
+	
+	Tipo:
+	{array}
+*/
+$facebookoauth = array(
+		"consumerkey" => "136279263094148",
+		"consumersecret" => "679fc4a007b1d289377fa8af8f7086b6"
+	);
+/*
+	Variavel: twitteroauth
+	
+	Parâmetros registrados no Twitter para permitir que o i3Geo faça autenticação com base na conta do usuário
+	
+	O Twitter exige que cada site seja registrado para permitir que a API de autenticação funcione
+	
+	Veja o site para maiores informações: http://www.snipe.net/2009/07/writing-your-first-twitter-application-with-oauth/
+
+	Lista de aplicações cadastradas: https://twitter.com/oauth_clients/
+
+	Caso vc não queira permitir essa opção, deixe essa variável vazia, e.x
+	
+	$twitteroauth = "";
+	
+	Ao registrar a aplicação, utilize o endereço do i3geo em Application Website, por exemplo http://meuservidor/i3geo
+	
+	Ao registrar utilize como "Callback URL" o valor http://meuservidor/i3geo/pacotes/openid/login.php?login
+
+	Exemplo:
+	
+	$twitteroauth = array(
+		"consumerkey" => "vUvBcsOULjS0ewxuSvbS6w",
+		"consumersecret" => "0Hj6uCyycDCeNOgzTUF1bBSel75KtfbnCS4bxWVqaxk",
+		"requesttokenurl" => "https://twitter.com/oauth/request_token",
+		"accesstokenurl" => "https://twitter.com/oauth/access_token",
+		"authorizeurl" => "https://twitter.com/oauth/authorize"
+	);	
+	
+	Tipo:
+	{array}
+*/
+$twitteroauth = array(
+		"consumerkey" => "vUvBcsOULjS0ewxuSvbS6w",
+		"consumersecret" => "0Hj6uCyycDCeNOgzTUF1bBSel75KtfbnCS4bxWVqaxk",
+		"requesttokenurl" => "https://twitter.com/oauth/request_token",
+		"accesstokenurl" => "https://twitter.com/oauth/access_token",
+		"authorizeurl" => "https://twitter.com/oauth/authorize"
+	);
+/*
 	Variavel: mensagemInicia
 	
 	Mensagem de inicialização mostrada pelo programa ms_criamapa.php

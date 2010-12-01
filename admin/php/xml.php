@@ -92,6 +92,28 @@ function geraXmlSistemas($perfil,$locaplic,$editores)
 	return $xml;	
 }
 /*
+Function: geraRSScomentariosTemas
+
+RSS com os comentarios sobre um ou todos os temas
+
+Parametros:
+
+locaplic {string} - localização do i3Geo no sistema de arquivos
+
+id_tema {numeric} - (opcional) id do tema para mostrar apenas os comentários de um tema
+
+Retorno:
+
+RSS
+*/
+function geraRSScomentariosTemas($locaplic,$id_tema="")
+{
+	$sql = "select b.nome_tema||' '||a.data as nome_ws,a.openidnome||' '||a.openidurl||' &amp;lt;br&amp;gt;'||a.comentario as desc_ws, a.openidnome as autor_ws, b.link_tema as link_ws from i3geoadmin_comentarios as a,i3geoadmin_temas as b where a.id_tema = b.id_tema ";
+	if($id_tema != "")
+	{$sql .= " and a.id_tema = $id_tema ";}
+	return geraXmlRSS($locaplic,$sql,"Lista de comentarios");
+}
+/*
 Function: geraRSStemas
 
 RSS com os temas cadastrados

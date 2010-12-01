@@ -221,6 +221,9 @@ string - javascript com os parametros
 				$ltempo = "nao";
 				if($oLayer->getmetadata("ltempoformatodata") !== "")
 				{$ltempo = "sim";}
+				$permitecomentario = "nao";
+				if($oLayer->getmetadata("nomeoriginal") != "" && strtoupper($oLayer->getmetadata("pemitecomentario")) != "NAO")
+				{$permitecomentario = "sim";}
 				$temas[] = array(
 					"name"=>($oLayer->name),
 					"status"=>($oLayer->status),
@@ -240,7 +243,8 @@ string - javascript com os parametros
 					"linhadotempo"=>$ltempo,
 					"escondido"=>strtolower($escondido),
 					"iconetema"=>($oLayer->getmetadata("iconetema")),
-					"classe"=>($oLayer->getmetadata("classe"))
+					"classe"=>($oLayer->getmetadata("classe")),
+					"permitecomentario"=>$permitecomentario
 				);
 			}
 		}

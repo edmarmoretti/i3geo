@@ -83,7 +83,9 @@ i3GEO.arvoreDeTemas = {
 		
 		carousel: true,
 		
-		uploadgpx: true
+		uploadgpx: true,
+		
+		comentarios: true
 	}
 	
 	Tipo:
@@ -108,7 +110,8 @@ i3GEO.arvoreDeTemas = {
 		estrelas: true,
 		refresh: true,
 		carousel: true,
-		uploadgpx: true
+		uploadgpx: true,
+		comentarios: true
 	},
 	/*
 	Propriedade: FATORESTRELA
@@ -976,7 +979,8 @@ i3GEO.arvoreDeTemas = {
 							idtema:raiz[i].tid,
 							fonte:raiz[i].link,
 							ogc:raiz[i].ogc,
-							kmz:raiz[i].kmz
+							kmz:raiz[i].kmz,
+							permitecomentario:raiz[i].permitecomentario
 						},
 						node,
 						false,
@@ -1209,6 +1213,17 @@ i3GEO.arvoreDeTemas = {
 			tempNode.enableHighlight = false;
 			tempNode.isLeaf = true;
 		}
+		if (node.data.permitecomentario != "nao" && i3GEO.arvoreDeTemas.OPCOESADICIONAIS.comentarios === true){
+			html = "<a href='#' title='' onclick='i3GEO.tema.dialogo.comentario(\""+node.data.idtema+"\",\"comentario\")' >Comentário</a>";		
+			tempNode = new YAHOO.widget.HTMLNode(
+				{html:html},
+				node,
+				false,
+				true
+			);
+			tempNode.enableHighlight = false;
+			tempNode.isLeaf = true;
+		}			
 		if(i3GEO.arvoreDeTemas.OPCOESADICIONAIS.qrcode === true){
 			lkgrcode = i3GEO.arvoreDeTemas.LOCAPLIC+"/pacotes/qrcode/php/qr_html.php?d="+i3GEO.arvoreDeTemas.LOCAPLIC+"/mobile/index.php?temasa="+node.data.idtema;
 			lkgrcode1 = i3GEO.arvoreDeTemas.LOCAPLIC+"/pacotes/qrcode/php/qr_img.php?d="+i3GEO.arvoreDeTemas.LOCAPLIC+"/mobile/index.php?temasa="+node.data.idtema;

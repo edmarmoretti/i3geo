@@ -658,7 +658,6 @@ Verifica se uma string ocorre em um array
 		$texto = mb_convert_encoding($texto,mb_detect_encoding($texto),"UTF-8");
 		else
 		$texto = mb_convert_encoding($texto,mb_detect_encoding($texto),"ISO-8859-1");
-		
 		return $texto;	
 	}
 }

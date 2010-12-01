@@ -786,6 +786,14 @@ g_traducao_ajuda = {
 			pt:"Salva as definições da camada no arquivo mapfile de origem",
 			complemento:"Essa opção só é ativada para usuários que são administradores. Permite que a camada seja alterada, por exemplo, modificando-se a legenda, e que o resultado seja salvo nas definições originais da camada.",
 			apijs:"i3GEO.tema.dialogo.salvaMapfile()"
+		},
+		"93": {
+			titulo: "Comentários",
+			diretorio:"i3geo/ferramentas/comentarios",
+			categoria:"5",
+			pt:"Mostra os comentários existentes sobre o tema e permite ao usuário inserir novos",
+			complemento:"Para entar com um comentário, o usuário precisa ser autenticado em alguma das redes sociais compatíveis com a rotina de login disponível no i3Geo",
+			apijs:"i3GEO.tema.dialogo.comentario()"
 		}
 	}
 };

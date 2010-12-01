@@ -5,7 +5,7 @@ Title: criabanco.php
 Cria um novo banco de dados de administração.
 
 Se vc quiser recriar o banco de dados default, apague o arquivo
-i3geo/menutemas/admin.db ou faça uma cópia. Depois é só executar esse programa.
+i3geo/admin/admin.db ou faça uma cópia. Depois é só executar esse programa.
 
 Se a configuração do arquivo de conexão foi alterada (veja ms_configura.php), o novo
 banco irá ser criado conforme a nova string de conexão.
@@ -60,15 +60,17 @@ $tabelas = array(
 "CREATE TABLE i3geoadmin_raiz (ordem NUMERIC, id_tema NUMERIC, id_menu NUMERIC, id_nivel NUMERIC, id_raiz INTEGER PRIMARY KEY, nivel NUMERIC, perfil TEXT)",
 "CREATE TABLE i3geoadmin_n1 (publicado TEXT, ordem NUMERIC, id_menu NUMERIC, id_grupo NUMERIC, id_n1 INTEGER PRIMARY KEY, n1_perfil TEXT)",
 "CREATE TABLE i3geoadmin_n2 (publicado TEXT, ordem NUMERIC, id_n1 NUMERIC, id_n2 INTEGER PRIMARY KEY, id_subgrupo NUMERIC, n2_perfil TEXT)",
-"CREATE TABLE i3geoadmin_n3 (publicado TEXT, ordem NUMERIC, id_n2 NUMERIC, id_n3 INTEGER PRIMARY KEY, id_tema NUMERIC, n3_perfil TEXT)"
+"CREATE TABLE i3geoadmin_n3 (publicado TEXT, ordem NUMERIC, id_n2 NUMERIC, id_n3 INTEGER PRIMARY KEY, id_tema NUMERIC, n3_perfil TEXT)",
+"CREATE TABLE i3geoadmin_comentarios (comentario TEXT, data TEXT, openidnome TEXT, openidimagem TEXT, openidservico TEXT, openidusuario TEXT, openidurl TEXT, id_tema NUMERIC)"
+
 );
 if($conexaoadmin == "")
 {
-	if(file_exists("../../menutemas/admin.db"))
-	{echo "Arquivo menutemas/admin.db ja existe";exit;}
-	$banco = sqlite_open("../../menutemas/admin.db",0666);
+	if(file_exists("../../admin/admin.db"))
+	{echo "Arquivo admin/admin.db ja existe";exit;}
+	$banco = sqlite_open("../../admin/admin.db",0666);
 	$banco = null;
-	$dbhw = new PDO('sqlite:../../menutemas/admin.db');
+	$dbhw = new PDO('sqlite:../../admin/admin.db');
 }
 else
 {

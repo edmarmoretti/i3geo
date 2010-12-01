@@ -32,13 +32,13 @@ Arquivo:
 
 i3geo/admin/php/sqlite.php
 */
-if(!file_exists("../../menutemas/admin.db"))
+if(!file_exists("../admin.db"))
 {
 	echo "O arquivo menutemas/admin.db não existe. Utilize i3geo/admin/criasqlite.php para criar o banco de dados SQLITE.";
 	exit;
 }
 echo "<pre>";
-$dbh = new PDO('sqlite:../../menutemas/admin.db');
+$dbh = new PDO('sqlite:../admin.db');
 echo "<br><br><span style=color:red >Lista de tabelas</span><br><br>";
 $q = $dbh->query("SELECT name FROM (SELECT * FROM sqlite_master UNION ALL SELECT * FROM sqlite_temp_master) WHERE type='table' ORDER BY name",PDO::FETCH_ASSOC);
 $resultado = $q->fetchAll();

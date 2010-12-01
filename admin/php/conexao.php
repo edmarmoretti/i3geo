@@ -74,7 +74,7 @@ if($conexaoadmin == "")
 	$arquivosqlite = $locaplic."/admin/admin.db";
 	if(!file_exists($arquivosqlite))
 	{
-		echo "O arquivo menutemas/admin.db não existe. Utilize i3geo/admin/criabanco.php para criar o banco de dados SQLITE.";
+		echo "O arquivo admin.db não existe. Utilize i3geo/admin/criabanco.php para criar o banco de dados SQLITE.";
 		exit;
 	}
 	$conAdmin = "sqlite:$arquivosqlite";

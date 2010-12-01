@@ -42,6 +42,8 @@ Inicia um mapa e obtém os parâmetros necessários para o funcionamento da interfa
 
 Globais:
 
+$openid - indica se o usuário foi ou não autenticado em alguma rede social (veja i3geo/pacotes/openid)
+
 $interfacePadrao - interface definida em ms_configura.php
 
 $navegadoresLocais - array que indica quais usuários podem navegar no servidor
@@ -96,7 +98,7 @@ Retorno:
 */
 function iniciaMapa()
 {
-	global $interfacePadrao,$mensagemInicia,$kmlurl,$tituloInstituicao,$tempo,$navegadoresLocais,$locaplic,$embedLegenda,$map_file,$mapext,$w,$h,$R_path,$locmapserv,$utilizacgi,$expoeMapfile,$interface;
+	global $openid,$interfacePadrao,$mensagemInicia,$kmlurl,$tituloInstituicao,$tempo,$navegadoresLocais,$locaplic,$embedLegenda,$map_file,$mapext,$w,$h,$R_path,$locmapserv,$utilizacgi,$expoeMapfile,$interface;
 	if(!isset($kmlurl))
 	{$kmlurl = "";}
 	error_reporting(E_ALL);
@@ -195,7 +197,7 @@ function iniciaMapa()
 	//
 	$qyfile = str_replace(".map",".qy",$map_file);
 	$arqsel = (file_exists($qyfile)) ? true : false;
-	$m = New Mapa($map_file);
+	$m = New Mapa($map_file,$locaplic);
 	$temas = $m->parametrosTemas();
 	//$m->ligaDesligaTemas("",implode(",",$m->nomes),"nao");
 	//
@@ -264,6 +266,10 @@ function iniciaMapa()
 	$res["mappath"] = $imgo->imagepath;
 	$res["mapurl"] = $imgo->imageurl;
 	$res["navegacaoDir"] = $navegadoresLocais;
+	if($openid == true)
+	{$res["autenticadoopenid"] = "sim";}
+	else
+	{$res["autenticadoopenid"] = "nao";}
 
 	copy($map_file,(str_replace(".map","reinc.map",$map_file)));
 	copy($map_file,(str_replace(".map","seguranca.map",$map_file)));

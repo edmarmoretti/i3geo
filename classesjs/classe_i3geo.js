@@ -114,6 +114,8 @@ i3GEO = {
 	embedLegenda {String} - sim|nao indica se na inicialização a legenda foi inserida no conteúdo do mapa ou não
 	
 	celularef {Numeric} - tamanho da célula do mapa de referência
+	
+	autenticadoopenid {sim|nao} - indica se o usuário foi autenticado em alguma rede social
 	*/
 	parametros: {
 		mapexten: "",
@@ -141,7 +143,8 @@ i3GEO = {
 		mensageminicia:"",
 		interfacePadrao:"geral.htm",
 		embedLegenda:"nao",
-		celularef:""
+		celularef:"",
+		autenticadoopenid:"nao"
 	},
 	/*
 	Propriedade: finaliza
@@ -224,37 +227,6 @@ i3GEO = {
 		//
 		tamanho = i3GEO.calculaTamanho();
 		i3GEO.Interface.cria(tamanho[0],tamanho[1]);
-		
-		/*
-		i3GEO.parametros = {
-			mapexten: "",
-			mapscale: "",
-			mapres: "",
-			pixelsize: "",
-			mapfile: "",
-			cgi: "",
-			extentTotal: "",
-			mapimagem: "",
-			geoip: "",
-			listavisual: "",
-			utilizacgi:"",
-			versaoms:"",
-			versaomscompleta:"",
-			mensagens:"",
-			w: tamanho[0],
-			h: tamanho[1],
-			locsistemas:"",
-			locidentifica:"",
-			r:"",
-			locmapas:"",
-			extentref:"",
-			kmlurl:"",
-			mensageminicia:"",
-			interfacePadrao:"geral.htm",
-			embedLegenda:"nao",
-			celularef: ""
-		};
-		*/
 		if(tamanho[0] < 550){
 			i = $i(i3GEO.gadgets.PARAMETROS.mostraQuadros.idhtml);
 			if(i){i.style.display = "none";}
@@ -295,57 +267,12 @@ i3GEO = {
 			}
 			else{
 				if(retorno.data.variaveis){
-					//
-					//executa com eval a string que é retornada pelo servidor (função inicia do mapa_controle.php
-					//
-					
-					/*
-					tempo = "";
-					titulo = "";
-					eval(retorno.data.variaveis);
-					try{
-						if (titulo !== "")
-						{top.document.title = titulo;}
-					}
-					catch(e){}
-					i3GEO.ajuda.mostraJanela("Tempo de desenho em segundos: "+tempo,"");
-					
-					try{
-						i3GEO.parametros.mapexten= mapexten;
-						i3GEO.parametros.mapscale= parseInt(mapscale,10);
-						i3GEO.parametros.mapres= mapres;
-						i3GEO.parametros.pixelsize= g_celula;
-						i3GEO.parametros.mapfile= mapfile;
-						i3GEO.parametros.cgi= cgi;
-						i3GEO.parametros.extentTotal=mapexten;
-						i3GEO.parametros.mapimagem= mapimagem;
-						i3GEO.parametros.geoip= geoip;
-						i3GEO.parametros.listavisual= listavisual;
-						i3GEO.parametros.utilizacgi= utilizacgi;
-						i3GEO.parametros.versaoms= versaoms;
-						i3GEO.parametros.mensagens= mensagens;
-						i3GEO.parametros.locsistemas = locsistemas;
-						i3GEO.parametros.locidentifica = locidentifica;
-						i3GEO.parametros.r = r;
-						i3GEO.parametros.locmapas = locmapas;
-						i3GEO.parametros.extentref = extentref;
-						i3GEO.parametros.versaoms = versaoms;
-						i3GEO.parametros.versaomscompleta = versaomscompleta;
-						i3GEO.parametros.kmlurl = kmlurl;
-						i3GEO.parametros.mensageminicia = mensagemInicia;
-						i3GEO.parametros.interfacePadrao = interfacePadrao;
-						i3GEO.parametros.embedLegenda = embedLegenda;
-					}
-					catch(e){alert("Erro durante a definicao de i3GEO.parametros "+e);}	
-					*/
 					i3GEO.parametros = retorno.data.variaveis;
-					
 					i3GEO.parametros.mapscale = i3GEO.parametros.mapscale*1;
 					i3GEO.parametros.mapres = i3GEO.parametros.mapres*1;
 					i3GEO.parametros.pixelsize = i3GEO.parametros.pixelsize*1;
 					i3GEO.parametros.w = i3GEO.parametros.w*1;
 					i3GEO.parametros.h = i3GEO.parametros.h*1;					
-					
 					i3GEO.arvoreDeCamadas.CAMADAS = retorno.data.temas;
 					if(retorno.data.variaveis.navegacaoDir == "sim")
 					{i3GEO.arvoreDeTemas.OPCOESADICIONAIS.navegacaoDir = true;}
@@ -389,8 +316,6 @@ i3GEO = {
 		if (!$i("i3geo"))
 		{document.body.id = "i3geo";}
 		$i("i3geo").className = "yui-skin-sam";
-		//if($i("mst"))
-		//{$i("mst").style.visibility ="hidden";}
 		//
 		//se i3GEO.configura.sid = "", o html foi aberto diretamente
 		//então, é necessário criar os arquivos temporários do mapa

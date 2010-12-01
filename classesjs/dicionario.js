@@ -761,6 +761,13 @@ en:"Save mapfile",
 es:"Guardar mapfile",
 it:"Salva mapfile"
 }],
+"t45": [
+{
+pt: "Comentar",
+en:"Comentar",
+es:"Comentar",
+it:"Comentar"
+}],
 //guia adiciona
 "a1":[
 {

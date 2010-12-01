@@ -246,8 +246,7 @@ i3GEO.arvoreDeCamadas = {
 			
 			"editorsql":"sim",
 			
-			"iconetema":""
-			
+			"iconetema":""			
 		}
 	]
 	
@@ -779,6 +778,9 @@ i3GEO.arvoreDeCamadas = {
 		//i3GEO.arvoreDeCamadas.adicionaOpcaoTema($trad("t43"),$trad("t43"),'i3GEO.tema.dialogo.aplicarsld(\"'+ltema.name+'\")',node);
 		if(ltema.editorsql == "sim" || ltema.editorsql == "SIM")
 		{i3GEO.arvoreDeCamadas.adicionaOpcaoTema($trad("t40"),$trad("t41"),'i3GEO.tema.dialogo.editorsql(\"'+ltema.name+'\")',node);}
+		if(ltema.permitecomentario.toLowerCase() !== "nao")
+		{i3GEO.arvoreDeCamadas.adicionaOpcaoTema($trad("t45"),$trad("t45"),'i3GEO.tema.dialogo.comentario(\"'+ltema.name+'\")',node);}
+
 		if(i3GEO.arvoreDeTemas.OPCOESADICIONAIS.navegacaoDir == true)
 		{i3GEO.arvoreDeCamadas.adicionaOpcaoTema($trad("t44"),"<span style=color:red >"+$trad("t44")+"</span>",'i3GEO.tema.dialogo.salvaMapfile(\"'+ltema.name+'\")',node);}		
 		node.loadComplete();
