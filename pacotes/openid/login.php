@@ -34,23 +34,25 @@ try {
 <a href="http://oauth.net/" target=_blank ><img width=135px style="border:0px solid gray;" src="../../imagens/redes_oauth.png"/></a><br>
 
 Utilize uma das redes abaixo para confirmar sua identidade<br><br>
-<img src="../../imagens/redes_google.png" onclick="submete('google')"/>&nbsp;
+<img src="../../imagens/redes_google.png" onclick="submete('google')"/>
+<img src="../../imagens/redes_myspace.png" onclick="submete('myspace')"/>
+<img src="../../imagens/redes_myopenid.png" onclick="submete('myopenid')"/>
+<!--<img src="../../imagens/redes_windowslive.png" onclick="submete('windowslive')"/>-->
+<img src="../../imagens/redes_wordpress.png" onclick="submete('wordpress')"/>
+<img src="../../imagens/redes_blogger.png" onclick="submete('blogger')"/>
 <?php
 if(is_array($facebookoauth))
-{echo '<img src="../../imagens/redes_facebook.png" onclick="submete(\'facebook\')"/>&nbsp;';}
+{echo '<img src="../../imagens/redes_facebook.png" onclick="submete(\'facebook\')"/> ';}
 ?>
-<img src="../../imagens/redes_myspace.png" onclick="submete('myspace')"/>&nbsp;
 <?php
 if(is_array($twitteroauth))
-{echo '<img src="../../imagens/redes_twitter.png" onclick="submete(\'twitter\')"/>&nbsp;';}
+{echo '<img src="../../imagens/redes_twitter.png" onclick="submete(\'twitter\')"/> ';}
 ?>
 <?php
 if(is_array($linkedinoauth))
-{echo '<img src="../../imagens/redes_linkedin.png" onclick="submete(\'linkedin\')"/>&nbsp;';}
+{echo '<img src="../../imagens/redes_linkedin.png" onclick="submete(\'linkedin\')"/> ';}
 ?>
-<img src="../../imagens/redes_windowslive.png"/>&nbsp;
-<img src="../../imagens/redes_wordpress.png" onclick="submete('wordpress')"/>&nbsp;
-<img src="../../imagens/redes_blogger.png" onclick="submete('blogger')"/>&nbsp;
+
 </div>
 
 <script>
@@ -65,6 +67,12 @@ function submete(quem){
 		if(!u){return;}
 		var url = 'http://www.google.com/profiles/'+u;
 	}
+	if(quem == "myopenid")
+	{
+		var u = window.prompt("Usuário","");
+		if(!u){return;}
+		var url = "http://"+u+".myopenid.com/";
+	}	
 	if(quem == "myspace")
 	{
 		var u = window.prompt("Usuário","");
@@ -91,7 +99,7 @@ function submete(quem){
 	{
 		var url = "<?php echo $_SESSION["locaplic"]; ?>/pacotes/facebookoauth/index.php";
 	}
-	if(quem == "google" || quem == "myspace" || quem == "wordpress" || quem == "blogger"){
+	if(quem == "myopenid" || quem == "google" || quem == "myspace" || quem == "wordpress" || quem == "blogger"){
 		url = "login.php?&usuario="+u+"&openid_identifier="+url+"&servico="+quem+"&imagem=&nome="+u;
 	}
 	document.getElementById("corpo").style.display = "none";
