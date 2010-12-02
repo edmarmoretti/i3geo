@@ -143,6 +143,12 @@ SYMBOLSET
     Type PIXMAP
     Image "aviao.png"
   END
+  
+  Symbol
+    Name "rosa200"
+    Type PIXMAP
+    Image "rosa200.png"
+  END  
 	
   Symbol
     Name "seta"

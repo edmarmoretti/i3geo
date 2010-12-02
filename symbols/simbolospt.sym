@@ -1,4 +1,10 @@
 SYMBOLSET
+  Symbol
+    Name "rosa200"
+    Type PIXMAP
+    Image "rosa200.png"
+  END 
+
 	Symbol 
 		NAME 'p0' 
 		TYPE VECTOR 

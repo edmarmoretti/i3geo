@@ -364,4 +364,26 @@ LAYER
 			TEXT "-    i3Geo"
 		END
 	END
+	LAYER
+		METADATA
+			"TEMA"	"Rosa dos ventos"
+		END
+		NAME "rosadosventos"
+		SIZEUNITS PIXELS
+		STATUS DEFAULT
+		TOLERANCE 0
+		TOLERANCEUNITS PIXELS
+		TRANSFORM lr
+		TYPE POINT
+		UNITS pixels
+		CLASS
+			SYMBOL 'rosa200'
+			SIZE 90
+		END
+		FEATURE
+			POINTS
+				-70 -70
+			END
+		END
+	END
 END
