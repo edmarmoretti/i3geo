@@ -254,9 +254,14 @@ i3GEO.Interface = {
 	*/
 	inicia: function(w,h){
 		if(typeof(console) !== 'undefined'){console.info("i3GEO.Interface.inicia()");}
+		var temp;
 		//
 		//inicialização  que afeta todas as interfaces
 		//
+		if($i("i3GEOcurtirFB")){
+			temp = window.location.href.split("?")[0];
+			$i("i3GEOcurtirFB").innerHTML = "<iframe src='http://www.facebook.com/plugins/like.php?href="+temp+"&amp;layout=button_count&amp;show_faces=false&amp;width=100&amp;action=like&amp;colorscheme=light&amp;height=21' scrolling='no' frameborder='0' style='border:none; overflow:hidden; width:100px; height:21px;' allowTransparency='true'></iframe>";
+		}
 		i3GEO.gadgets.quadros.inicia(10);
 		i3GEO.gadgets.quadros.grava("extensao",i3GEO.parametros.extentTotal);					
 		i3GEO.gadgets.mostraBuscaRapida();
