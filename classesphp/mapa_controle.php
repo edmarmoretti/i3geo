@@ -124,11 +124,11 @@ if ($funcao != "criaMapa")
 		eval("\$".$k."='".$_SESSION[$k]."';");
 	}
 	$postgis_mapa = $_SESSION["postgis_mapa"];
-	//if(isset($fingerprint))
-	//{
+	if(isset($fingerprint))
+	{
 		if (md5('I3GEOSEC' . $_SERVER['HTTP_USER_AGENT'] . session_id()) != $fingerprint)
 		{exit;}
-	//}
+	}
 }
 //
 //verifica se deve ativar o debug

@@ -37,6 +37,8 @@ P
 <p>A lista de temas baseia-se nas configurações específicas de cada servidor onde o i3Geo está instalado. Para obter uma lista de outros Web Services, acesse o <a href="wscliente.htm" >cliente de webservices.</a>
 <p>Você pode usar um Web Service para acessar os dados configurados nesse servidor por meio de outros softwares de geoprocessamento, como o <a href="http://www.gvsig.gva.es/index.php?id=gvsig&L=0" >gvSIG.</a>
 <p>Para maiores informações sobre o uso de web services, veja <a href='http://www.opengeospatial.org/standards' target=blank >http://www.opengeospatial.org/standards</a>
+<p>Bookmark: <span id=bm1 ></span>
+<p><div style=text-align:left id=curtir ></div>
 <div style="background-color:white"><p><img src="imagens/i3geo1bw.jpg" /></div>
 </div>
 </body>
@@ -70,9 +72,14 @@ Free Software Foundation, Inc., no endereço
 59 Temple Street, Suite 330, Boston, MA 02111-1307 USA.
 */
 var loc = window.location.href;
+
 g_locaplic = loc.split("/ogc.htm");
 g_locaplic = g_locaplic[0]
 i3GEO.configura.locaplic = g_locaplic
+
+$i("bm1").innerHTML = i3GEO.util.bookmark(loc);
+$i("curtir").innerHTML = "<iframe src='http://www.facebook.com/plugins/like.php?href="+loc+"&amp;layout=button_count&amp;show_faces=false&amp;width=100&amp;action=like&amp;colorscheme=light&amp;height=21' scrolling='no' frameborder='0' style='border:none; overflow:hidden; width:100px; height:21px;' allowTransparency='true'></iframe>";
+
 g_arvoreClicks = ""
 i3GEO.idioma.IDSELETOR = "bandeiras";
 i3GEO.idioma.mostraSeletor();
@@ -97,10 +104,14 @@ function ogc_endereco(tema)
 {
 	tema.checked = false
 	tema = tema.value
-	ins = "<H1>Endere&ccedil;o do web service:</H1><br>"
+	ins = "<H1>Endere&ccedil;o do web service:</H1>"
 	var re = new RegExp(".htm", "g");
-	var servico = window.location.href.replace(re,'.php?tema=')+tema	
+	var servico = window.location.href.replace(re,'.php?tema=')+tema
 	ins += "<p>"+servico
+
+	ins += "<p>Bookmark: <span id=bm ></span>"
+	ins  += "<p><iframe src='http://www.facebook.com/plugins/like.php?href="+servico+"&amp;layout=button_count&amp;show_faces=false&amp;width=100&amp;action=like&amp;colorscheme=light&amp;height=21' scrolling='no' frameborder='0' style='border:none; overflow:hidden; width:100px; height:21px;' allowTransparency='true'></iframe>";			
+
 	ins += "<p><a target=blank href='"+servico+"&SRS=EPSG:4291&WIDTH=500&HEIGHT=500&BBOX=-76.5125927,-39.3925675209,-29.5851853,9.49014852081&FORMAT=image/png&service=wms&version=1.1.0&request=getmap&layers="+tema+"' />testar</a>"
 	if(!$i("panellistaarquivos")){
 		YAHOO.namespace("datadownloadLista");
@@ -113,6 +124,7 @@ function ogc_endereco(tema)
 	};
 	YAHOO.datadownloadLista.panel.setBody(ins);
 	YAHOO.datadownloadLista.panel.show();
+	$i("bm").innerHTML = i3GEO.util.bookmark(servico);
 	//document.getElementById("corpo").innerHTML = ins
 }
 

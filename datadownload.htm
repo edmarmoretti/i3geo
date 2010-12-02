@@ -5,7 +5,7 @@
 <meta name="description" content="Mapa interativo do MMA"> 
 <meta name="keywords" content="WMS OGC mapa sig gis webmapping geo geoprocessamento interativo meio ambiente MMA cartografia geografia"> 
 <meta name="robots" content="index,follow">
-<script type="text/javascript" src="classesjs/i3geo.js"></script>
+<script type="text/javascript" src="classesjs/i3geonaocompacto.js"></script>
 <script type="text/javascript" src="classesjs/datadownload.js"></script>
 <style>
 P 
@@ -46,7 +46,8 @@ O formato "shape file" &eacute; composto por tr&ecirc;s arquivos (shp, shx e dbf
 <p>Para abrir o "shape file", voc&ecirc; poder&aacute; utilizar softwares livres como o
  <a href="http://www.gvsig.gva.es/index.php?id=gvsig&L=0" target=blank>GVSIG</a>, <a href="http://qgis.org/" target=blank > QGIS</a>, ou <a href="http://jump-pilot.sourceforge.net/OpenJUMP.html" target=blank >JUMP</a>.
 <p>Conhe&ccedil;a tamb&eacute;m o <a href="http://mapas.mma.gov.br/i3geo/ms_criamapa.php" target=blank >mapa interativo do MMA.</a>
-
+<p>Bookmark: <span id=bm1 ></span>
+<p><div style=text-align:left id=curtir ></div>
 
 </body>
 <script>
@@ -91,6 +92,9 @@ Se o array estiver vazio, será utilizado o default, baseado no sistema de admini
 g_RSSl = new Array("");
 i3GEO.idioma.IDSELETOR = "bandeiras";
 i3GEO.idioma.mostraSeletor();
+$i("bm1").innerHTML = i3GEO.util.bookmark(window.location.href);
+$i("curtir").innerHTML = "<iframe src='http://www.facebook.com/plugins/like.php?href="+window.location.href+"&amp;layout=button_count&amp;show_faces=false&amp;width=100&amp;action=like&amp;colorscheme=light&amp;height=21' scrolling='no' frameborder='0' style='border:none; overflow:hidden; width:100px; height:21px;' allowTransparency='true'></iframe>";
+
 DDinicia()
 </script>
 </html>
