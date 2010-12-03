@@ -131,6 +131,7 @@ i3GEO.configura = {
 			{ id:"omenudataAnalise7",text: $trad("u12"), url: "javascript:i3GEO.analise.dialogo.nptPol()" },
 			{ id:"omenudataAnalise8",text: $trad("u13"), url: "javascript:i3GEO.analise.dialogo.pontoempoligono()" },
 			{ id:"omenudataAnalise9",text: $trad("u14"), url: "javascript:i3GEO.analise.dialogo.pontosdistri()" },
+			{ id:"omenudataAnalise9a",text: $trad("u28"), url: "javascript:i3GEO.analise.dialogo.centromassa()" },
     		{ id:"omenudataAnalise10",text: '<span style=color:gray;text-decoration:underline; ><b>'+$trad("u24")+'</b></span>',url: "#"}, 
 			{ id:"omenudataAnalise11",text: $trad("u25"), url: "javascript:i3GEO.analise.dialogo.dissolve()" },
     		{ id:"omenudataAnalise12",text: '<span style=color:gray;text-decoration:underline; ><b>'+$trad("u27")+'</b></span>',url: "#"}, 

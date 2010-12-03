@@ -794,6 +794,15 @@ g_traducao_ajuda = {
 			pt:"Mostra os comentários existentes sobre o tema e permite ao usuário inserir novos",
 			complemento:"Para entar com um comentário, o usuário precisa ser autenticado em alguma das redes sociais compatíveis com a rotina de login disponível no i3Geo",
 			apijs:"i3GEO.tema.dialogo.comentario()"
+		},
+		"94": {
+			titulo: "Centro médio",
+			diretorio:"i3geo/ferramentas/centromassa",
+			categoria:"3",
+			pt:"O centro médio é uma medida da distribuição de um conjunto de pontos. Sendo definido por Gerardi & Silva (1980) como: o ponto que minimiza a soma das distâncias quadráticas a todos os outros pontos do plano",
+			complemento:"Mais detalhes em http://www.criminologia-rsm.org/LinkClick.aspx?fileticket=XT%2BDy%2BNyrZM%3D&tabid=484&mid=1614",
+			tela:"ferramentas/nptpol/exemplo.htm",
+			apijs:"i3GEO.analise.dialogo.centromassa()"
 		}
 	}
 };

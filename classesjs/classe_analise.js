@@ -153,6 +153,15 @@ i3GEO.analise = {
 			{i3GEO.util.dialogoFerramenta("i3GEO.analise.dialogo.pontoempoligono()","pontoempoligono","pontoEmPoligono");}
 		},
 		/*
+		Function: centromassa
+
+		Abre a janela de diálogo da ferramenta centro médio
+		*/
+		centromassa: function(){
+			if(typeof(i3GEOF.centromassa) === 'undefined')
+			{i3GEO.util.dialogoFerramenta("i3GEO.analise.dialogo.centromassa()","centromassa","centromassa");}
+		},
+		/*
 		Function: nptPol
 
 		Abre a janela de diálogo da ferramenta nptpol

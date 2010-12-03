@@ -1314,6 +1314,90 @@ nome do layer criado com o buffer.
 		return($novolayer->name);
 	}
 /*
+function: centroMassa
+
+Calcula o centro médio.
+
+Se "item" for diferente de vazio, calcula o centro médio ponderado baseado no item
+
+Parametros:
+
+$item {string} - (opcional) Item q será utilizado para ponderar os valores.
+*/
+	function centroMassa($item="")
+	{
+		if(!$this->layer){return "erro";}
+		set_time_limit(180);
+		//para manipular dbf
+		if(file_exists($this->locaplic."/pacotes/phpxbase/api_conversion.php"))
+		include_once($this->locaplic."/pacotes/phpxbase/api_conversion.php");
+		else	
+		include_once "../pacotes/phpxbase/api_conversion.php";
+		error_reporting(E_ALL);
+		$nomeCentro = nomeRandomico();
+		$nomeshp = $this->diretorio."/".$nomeCentro;
+		//pega os shapes selecionados
+		carregaquery($this->arquivo,&$this->layer,&$this->mapa);
+		if($this->layer->getNumresults() == 0)
+		{$this->layer->querybyrect($this->mapa->extent);}
+		$sopen = $this->layer->open();
+		if($sopen == MS_FAILURE){return "erro";}
+		$this->layer->open();
+		$res_count = $this->layer->getNumresults();
+		$shapes = array();
+		$pondera = 1;
+		$xs = 0;
+		$ys = 0;
+		for ($i = 0; $i < $res_count; ++$i)
+		{
+			$result = $this->layer->getResult($i);
+			$shp_index  = $result->shapeindex;
+			$shape = $this->layer->getfeature($shp_index,-1);
+			if($item != "")
+			{$pondera = $shape->values[$item];}
+			$pt = $shape->line(0)->point(0);
+			$xs += ($pt->x * $pondera);
+			$ys += ($pt->y * $pondera);
+		}
+		$fechou = $this->layer->close();
+		//gera o novo arquivo shape file
+		// cria o shapefile
+		$novoshpf = ms_newShapefileObj($nomeshp, MS_SHP_POINT);
+		// cria o dbf
+		$def[] = array("id","C","254");
+		if(!function_exists("dbase_create"))
+		{$db = xbase_create($nomeshp.".dbf", $def);xbase_close($db);}
+		else
+		{$db = dbase_create($nomeshp.".dbf", $def);dbase_close($db);}
+		//acrescenta os pontos no novo shapefile
+		$dbname = $nomeshp.".dbf";
+		$db=xbase_open($dbname,2);
+		$reg[] = "";
+		
+		$shp = ms_newShapeObj(MS_SHP_POINT);
+		$linha = ms_newLineObj();
+		$linha->addXY(($xs / $res_count),($ys / $res_count));
+		$shp->add($linha);
+		$novoshpf->addShape($shp);
+		
+		xbase_add_record($db,$reg);
+		$novoshpf->free();
+		xbase_close($db);
+		//adiciona no mapa atual o novo tema
+		$novolayer = criaLayer($this->mapa,MS_LAYER_POINT,MS_DEFAULT,("Centróide (".$nomeCentro.")"),$metaClasse="SIM");
+		$novolayer->set("data",$nomeshp.".shp");
+		$novolayer->setmetadata("DOWNLOAD","SIM");
+		$novolayer->set("template","none.htm");
+		$novolayer->setmetadata("TEMALOCAL","SIM");
+		$classe = $novolayer->getclass(0);
+		$estilo = $classe->getstyle(0);
+		$estilo->set("size","12");
+		//limpa selecao
+		if (file_exists($this->qyfile))
+		{unlink ($this->qyfile);}
+		return("ok");
+	}
+/*
 function: criaCentroide
 
 Gera centroide dos elementos selecionados de um tema.
@@ -1394,6 +1478,7 @@ $locaplic - Localização do I3geo.
 		{unlink ($this->qyfile);}
 		return("ok");
 	}
+	
 /*
 function: gradeDePontos
 

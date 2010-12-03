@@ -484,13 +484,36 @@ Salva o mapa acrescentando um novo layer com os pontos.
 	case "CRIACENTROIDE":
 		include_once("classe_analise.php");
 		copiaSeguranca($map_file);
-		$m = new Analise($map_file,$tema,$locaplic);
+		$m = new Analise($map_file,$tema,$locaplic,$ext);
 		if($interface == "googlemaps")
 		{
 			$projMapa = $m->mapa->getProjection();
 			$m->mapa->setProjection("init=epsg:4291");
 		}			
 		$retorno = $m->criaCentroide($locaplic);
+		if($interface == "googlemaps")
+		{$m->mapa->setProjection($projMapa);}
+		$m->salva();
+	break;
+/*
+Valor: CENTROMASSA
+
+Calcula o centro médio de uma distribuição de pontos.
+
+Salva o mapa acrescentando um novo layer com o ponto.
+
+<Analise->centroMassa>
+*/	
+	case "CENTROMASSA":
+		include_once("classe_analise.php");
+		copiaSeguranca($map_file);
+		$m = new Analise($map_file,$tema,$locaplic,$ext);
+		if($interface == "googlemaps")
+		{
+			$projMapa = $m->mapa->getProjection();
+			$m->mapa->setProjection("init=epsg:4291");
+		}			
+		$retorno = $m->centroMassa($item);
 		if($interface == "googlemaps")
 		{$m->mapa->setProjection($projMapa);}
 		$m->salva();

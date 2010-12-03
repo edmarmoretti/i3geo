@@ -395,6 +395,13 @@ en:"Others",
 es:"Otros",
 it:"Altri"
 }],
+"u28": [
+{
+pt: "Centro médio",
+en:"Centro médio",
+es:"Centro médio",
+it:"Centro médio"
+}],
 //arvore com a lista de temas
 "t1": [
 {
