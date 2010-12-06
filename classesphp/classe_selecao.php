@@ -124,7 +124,7 @@ Seleciona os elementos de um tema baseado em um conjunto de pontos que formarão 
 
 parameters:
 
-$tipo - Tipo de operação adiciona|retira|inverte|limpa
+$tipo - Tipo de operação adiciona|retira|inverte|limpa|novo
 
 $xs - lista de coordenadas x separadas por virgula
 
@@ -134,6 +134,11 @@ $ys - lista de coordenadas y separadas por virgula
 	{
 		if(!$this->layer){return "erro";}
 		$this->layer->set("tolerance",0);
+		if ($tipo == "novo")
+		{
+			$this->selecaoLimpa();
+			$tipo = "adiciona"
+		}		
 		if ($tipo == "limpa")
 		{return($this->selecaoLimpa());}
 		if ($tipo == "inverte")
@@ -190,12 +195,17 @@ parameters:
 
 $temao - Tema que será processado.
 
-$tipo - Tipo de operação adiciona|retira|inverte|limpa
+$tipo - Tipo de operação adiciona|retira|inverte|limpa|novo
 */
 	function selecaoTema($temao,$tipo)
 	{
 		if(!$this->layer){return "erro";}
 		$this->layer->set("tolerance",0);
+		if ($tipo == "novo")
+		{
+			$this->selecaoLimpa();
+			$tipo = "adiciona"
+		}
 		if ($tipo == "limpa")
 		{return($this->selecaoLimpa());}
 		if ($tipo == "inverte")
@@ -353,7 +363,7 @@ deve estar no padrão utilizado pelo mapserver.
 
 parameters:
 
-$tipo - Tipo de operação adiciona|retira|inverte|limpa
+$tipo - Tipo de operação adiciona|retira|inverte|limpa|novo
 
 $item - Item que será consultado.
 
@@ -363,6 +373,11 @@ $valor - Valor.
 */
 	function selecaoAtributos($tipo,$item,$operador,$valor)
 	{
+		if ($tipo == "novo")
+		{
+			$this->selecaoLimpa();
+			$tipo = "adiciona"
+		}
 		if ($tipo == "limpa")
 		{return($this->selecaoLimpa());}
 		if ($tipo == "inverte")
@@ -435,10 +450,15 @@ $valor - Valor.
 	
 	$filtro - Expressão de seleção
 	
-	$tipo - Tipo de operação adiciona|retira|inverte|limpa
+	$tipo - Tipo de operação adiciona|retira|inverte|limpa|novo
 	*/	
 	function selecaoAtributos2($filtro,$tipo)
 	{
+		if ($tipo == "novo")
+		{
+			$this->selecaoLimpa();
+			$tipo = "adiciona"
+		}	
 		if ($tipo == "limpa")
 		{return($this->selecaoLimpa());}
 		if ($tipo == "inverte")
@@ -497,10 +517,15 @@ parameters:
 
 $xy - X e Y separados por vírgula.
 
-$tipo - Tipo de operação adiciona|retira|inverte|limpa
+$tipo - Tipo de operação adiciona|retira|inverte|limpa|novo
 */
 	function selecaoPT($xy,$tipo,$tolerancia)
 	{
+		if ($tipo == "novo")
+		{
+			$this->selecaoLimpa();
+			$tipo = "adiciona"
+		}	
 		if ($tipo == "limpa")
 		{return ($this->selecaoLimpa());}
 		if ($tipo == "inverte")
@@ -762,10 +787,15 @@ Seleciona por extensão geográfica.
 
 parameters:
 
-$tipo - Tipo de operação adiciona|retira|inverte|limpa
+$tipo - Tipo de operação adiciona|retira|inverte|limpa|novo
 */
 	function selecaoEXT($tipo)
 	{
+		if ($tipo == "novo")
+		{
+			$this->selecaoLimpa();
+			$tipo = "adiciona"
+		}	
 		if(!$this->layer){return "erro";}
 		$this->layer->set("tolerance",0);
 		if ($tipo == "limpa")
@@ -814,12 +844,17 @@ Seleciona por retângulo.
 
 parameters:
 
-$tipo - Tipo de operação adiciona|retira|inverte|limpa
+$tipo - Tipo de operação adiciona|retira|inverte|limpa|novo
 
 $ext - coordenadas separadas por espaços no estilo xmin ymin xmax ymax
 */
 	function selecaoBOX($tipo,$ext)
 	{
+		if ($tipo == "novo")
+		{
+			$this->selecaoLimpa();
+			$tipo = "adiciona"
+		}
 		if(!$this->layer){return "erro";}
 		$this->layer->set("tolerance",0);
 		if ($tipo == "limpa")

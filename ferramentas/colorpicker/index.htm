@@ -99,6 +99,10 @@ function aplicarCor()
 	else
 	{var ncor = "#"+document.getElementById("yui-picker-hex").value;}
 	doc.getElementById(elemento).value = ncor;
+	try{
+		doc.getElementById(elemento).onChange.call();
+	}
+	catch(e){}
 	window.parent.YAHOO.janelaCor.xp.panel.destroy();
 }
 

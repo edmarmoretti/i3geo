@@ -889,6 +889,13 @@ en:"Layer",
 es:"Temas",
 it:"Temi"
 }],
+"g1a":[
+{
+pt:"Catálogo",
+en:"Catalog",
+es:"Catalogo",
+it:"Catalog"
+}],
 "g2":[
 {
 pt:"Adiciona",

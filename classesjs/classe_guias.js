@@ -90,7 +90,7 @@ i3GEO.guias = {
 			click:""
 		},
 		"adiciona":{
-			titulo:"+"+$trad("g1"),
+			titulo:$trad("g1a"),
 			id:"guia2",
 			idconteudo:"guia2obj",
 			click: function(){

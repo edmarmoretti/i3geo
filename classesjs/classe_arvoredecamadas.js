@@ -775,11 +775,13 @@ i3GEO.arvoreDeCamadas = {
 				i3GEO.arvoreDeCamadas.adicionaOpcaoTema($trad("t37"),$trad("t37"),'i3GEO.tema.dialogo.graficotema(\"'+ltema.name+'\")',node);
 			}
 		}
+		//essas opções foram migradas para o editor de legenda
+		/*
 		temp = $trad("p18");
 		if(ltema.classe.toLowerCase() == "nao")
 		{temp = $trad("p17");}
 		i3GEO.arvoreDeCamadas.adicionaOpcaoTema($trad("p19"),temp,'i3GEO.tema.invertestatuslegenda(\"'+ltema.name+'\")',node);
-		
+		*/
 		if (ltema.type < 4){
 			i3GEO.arvoreDeCamadas.adicionaOpcaoTema($trad("t32"),$trad("t33"),'i3GEO.tema.dialogo.editaLegenda(\"'+ltema.name+'\")',node);
 		}

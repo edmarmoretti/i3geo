@@ -1414,6 +1414,8 @@ Altera uma classe de um tema, aplicando uma nova classificação ou modificando pa
 			$projMapa = $m->mapa->getProjection();
 			$m->mapa->setProjection("init=epsg:4291");
 		}
+		if ($opcao == "alteracor")
+		{$retorno = $m->alteracor($idclasse,$cor);}		
 		if ($opcao == "adicionaopacidade")
 		{$retorno = $m->adicionaopacidade();}
 		if ($opcao == "alterageometria")

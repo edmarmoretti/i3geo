@@ -510,8 +510,6 @@ i3GEO.barraDeBotoes = {
 	*/
 	inicializaBarra:function(idconteudo,idconteudonovo,barraZoom,x,y,onde){
 		if(typeof(console) !== 'undefined'){console.info("i3GEO.barraDeBotoes.inicializaBarra()");}
-		if(i3GEO.util.pegaCookie("botoesAjuda") == "nao")
-		{i3GEO.barraDeBotoes.AJUDA = false;}
 		if(i3GEO.barraDeBotoes.TEMPLATEBOTAO === "")
 		{i3GEO.barraDeBotoes.TEMPLATEBOTAO = "<div style='display:inline;background-color:rgb(250,250,250);'><p style='font-size:2px;'>&nbsp;</p><img style='border:0px solid white;' src='"+i3GEO.configura.locaplic+"/imagens/branco.gif' id='$$'/></div>";}
 		var tipo,mostra,numerobotoes = 0,i,temp,elementos,nelementos = 0,e,wj,recuo,novoel,alturadisponivel,n,chaves,re,estilo;

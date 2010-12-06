@@ -9,7 +9,7 @@ Licenca:
 
 GPL2
 
-I3Geo Interface Integrada de Ferramentas de Geoprocessamento para Internet
+i3Geo Interface Integrada de Ferramentas de Geoprocessamento para Internet
 
 Direitos Autorais Reservados (c) 2006 Ministério do Meio Ambiente Brasil
 Desenvolvedor: Edmar Moretti edmar.moretti@mma.gov.br
@@ -455,6 +455,30 @@ Adiciona opacidade variável de 0 a 100 conforme o número de classes
 		$this->layer->setMetaData("cache","");
 		return("ok");
 	}
+/*
+function: alteracor
+
+Aplica uma nova cor aos estilos de uma classe
+
+*/
+	function alteracor($idclasse,$cor)
+	{
+		error_reporting(E_ALL);
+		if(!$this->layer){return "erro";}
+		$numclasses = $this->layer->numclasses;
+		$cor = str_replace(" ",",",$cor);
+		$cor = explode(",",$cor);
+		$classe = $this->layer->getclass($idclasse);
+		$numestilos = $classe->numstyles;
+		for($j=0;$j<$numestilos;++$j)
+		{
+			$estilo = $classe->getstyle($j);
+			$ncor = $estilo->color;
+			$ncor->setrgb($cor[0],$cor[1],$cor[2]);
+		}
+		$this->layer->setMetaData("cache","");
+		return("ok");
+	}	
 /*
 function: alterageometria
 

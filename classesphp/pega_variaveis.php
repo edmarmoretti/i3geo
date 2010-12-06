@@ -73,24 +73,24 @@ if (isset($_POST))
 		{
 			foreach($_POST["cpaint_argument"] as $argumento_)
 			{
+				
 				if (strtoupper(substr(PHP_OS, 0, 3) == 'WIN'))
 				{$argumento_ = str_replace("\\\"","",$argumento_);}
 				else
 				{$argumento_ = str_replace("\"","",$argumento_);}
+				$argumento_ = explode('"',$argumento_);
+				$argumento_ = implode("&",$argumento_);
 				$parametros_ = explode("&",$argumento_);
 				foreach($parametros_ as $parametro_)
 				{	
-					//echo $parametro_;
 					$p_ = explode("=",$parametro_);
 					$parametro = $p_[0];
 					$p_ = array_slice($p_, 1, count($p_));;
 					$valor = implode("=",$p_);
-					//echo $valor."<br>";
 					if($parametro != "")
-					eval("\$".$parametro."='".(strip_tags($valor))."';");	
+					eval("\$".$parametro."='".(strip_tags($valor))."';");				
 				}
-			}	
-			
+			}				
 		}
 	}
 }
