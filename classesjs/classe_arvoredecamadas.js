@@ -456,7 +456,7 @@ i3GEO.arvoreDeCamadas = {
 					//busca na lista de temas
 					for(k=0;k<nk; k++){
 						ltema = temas[k];
-						if(ltema.name === i3GEO.configura.grupoLayers[i].layers[j]){
+						if(ltema.name === i3GEO.configura.grupoLayers[i].layers[j]  && ltema.escondido == "nao"){
 							d = {html:i3GEO.arvoreDeCamadas.montaTextoTema(ltema),id:ltema.name,tipo:"tema"};
 							temaNode = new YAHOO.widget.HTMLNode(d, tempNode, i3GEO.arvoreDeCamadas.EXPANDIDA,true);
 							temaNode.setDynamicLoad(i3GEO.arvoreDeCamadas.montaOpcoes, currentIconMode);							
@@ -477,7 +477,7 @@ i3GEO.arvoreDeCamadas = {
 				ltema = temas[k];
 				n = false;
 				for(j=0;j<c; j++){
-					if(incluidos[j] === ltema.name)
+					if(incluidos[j] === ltema.name || ltema.escondido == "sim")
 					{n = true;}
 				}
 				if (n === false){

@@ -53,6 +53,8 @@ Arquivo:
 
 i3geo/classesphp/pega_variaveis.php
 */
+//echo "<pre>";
+//var_dump($_POST);exit;
 if (isset($_GET))
 {
 	foreach(array_keys($_GET) as $k)
@@ -85,13 +87,15 @@ if (isset($_POST))
 				{	
 					$p_ = explode("=",$parametro_);
 					$parametro = $p_[0];
-					$p_ = array_slice($p_, 1, count($p_));;
+					$p_ = array_slice($p_, 1, count($p_));
 					$valor = implode("=",$p_);
+					
 					if($parametro != "")
-					eval("\$".$parametro."='".(strip_tags($valor))."';");				
+					eval("\$".$parametro."='".(($valor))."';");				
 				}
 			}				
 		}
 	}
 }
+//echo $exps;exit;
 ?>
