@@ -361,6 +361,8 @@ i3GEOF.identifica = {
 		param = y[0]+"_"+y[1]+"_"+y[2]+"_"+s+"_"+x[0]+"_"+x[1]+"_"+x[2]+"_"+w;
 		url = "http://tools.wikimedia.de/~magnus/geo/geohack.php?params="+param;
 		linhas = "<a href='"+url+"' target=blank >Buscadores web</a><br>";
+		//url = i3GEO.configura.locaplic+"/ferramentas/identifica/twitter.php?geocode="+i3GEOF.identifica.x+","+i3GEOF.identifica.y+",5km";
+		//linhas = "<a href='"+url+"' target=blank >Twitter</a><br>";
 		return linhas;
 	},
 	/*
