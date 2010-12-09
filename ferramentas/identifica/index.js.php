@@ -149,12 +149,16 @@ i3GEOF.identifica = {
 			//verifica se existem sistemas para identificar
 			//
 			if(i3GEOF.identifica.mostraSistemasAdicionais === true){
+				/*
 				if (i3GEO.parametros.locidentifica !== ""){
 					if(i3GEO.tempXMLSISTEMAS === undefined)
 					{i3GEO.util.ajaxexecASXml(i3GEO.parametros.locidentifica,"i3GEOF.identifica.montaListaSistemas");}
 					else
 					{i3GEOF.identifica.montaListaSistemas(i3GEO.tempXMLSISTEMAS);}
 				}
+				*/
+				var p = i3GEO.configura.locaplic+"/classesphp/mapa_controle.php?funcao=pegaSistemasIdentificacao&g_sid="+i3GEO.configura.sid;
+				cpJSON.call(p,"foo",i3GEOF.identifica.montaListaSistemas);	
 			}
 			if (i3GEO.temaAtivo !== "")
 			{i3GEOF.identifica.buscaDadosTema(i3GEO.temaAtivo);}
@@ -366,34 +370,28 @@ i3GEOF.identifica = {
 	
 	O resultado é inserido no div com id "listaSistemas".
 	
-	A lista de sistemas é obtida de um XML definido no i3Geo na variável i3GEO.parametros.locidentifica
-	
 	Cada sistema consiste em uma URL para a qual serão passados os parâmetros x e y.
 	
-	Parametros:
-	
-	xmlDoc - documento xml
 	*/
-	montaListaSistemas: function(xmlDoc){
+	montaListaSistemas: function(retorno){
 		var divins,sisig,sistema,pub,exec,temp,t,linhas,ltema;
-		if (xmlDoc !== undefined)
+		if (retorno !== undefined)
 		{
-			i3GEO.tempXMLSISTEMAS = xmlDoc;
 			divins = $i("i3GEOidentificalistaSistemas");
-			sis = xmlDoc.getElementsByTagName("FUNCAO");
+			sis = retorno.data;
 			for (ig=0;ig<sis.length;ig++)
 			{	
-				sistema = sis[ig].getElementsByTagName("NOMESIS")[0].firstChild.nodeValue;
-				if(sis[ig].getElementsByTagName("PUBLICADO")[0])
+				sistema = sis[ig].NOME;
+				if(sis[ig].PUBLICADO)
 				{
-					if(sis[ig].getElementsByTagName("PUBLICADO")[0].firstChild)
+					if(sis[ig].PUBLICADO)
 					{
-						pub = sis[ig].getElementsByTagName("PUBLICADO")[0].firstChild.nodeValue;
+						pub = sis[ig].PUBLICADO;
 						if(pub === "NAO" || pub === "nao")
 						{sistema = "<s>"+sistema+"</s>";}
 					}
 				}
-				exec = sis[ig].getElementsByTagName("ABRIR")[0].firstChild.nodeValue;
+				exec = sis[ig].ABRIR;
 				temp = exec.split('"');
 				if(temp.length === 1)
 				{exec = '"'+exec+'"';}
@@ -401,8 +399,8 @@ i3GEOF.identifica = {
 				if(temp.length !== 2)
 				{exec += '+"?"';}
 				t = "blank";
-				if (sis[ig].getElementsByTagName("TARGET")[0])
-				{t = sis[ig].getElementsByTagName("TARGET")[0].firstChild.nodeValue;}
+				if (sis[ig].TARGET)
+				{t = sis[ig].TARGET;}
 				i3GEOF.identifica.sistemasAdicionais.push(sistema+","+exec+","+t);
 			}
 			if (i3GEOF.identifica.sistemasAdicionais.length > 0)

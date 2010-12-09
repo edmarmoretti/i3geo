@@ -1809,6 +1809,18 @@ Pega a lista de grupos do menu.
 		$retorno = array("idmenu"=>$idmenu,"grupos"=>$m->pegaListaDeGrupos($idmenu,$listasistemas,$listasgrupos));
 	break;
 /*
+Valor: PEGASISTEMASIDENTIFICACAO
+
+Pega a lista de sistemas especiais de identificação de elementos no mapa
+
+<Menutemas->pegaSistemasI>
+*/
+	case "PEGASISTEMASIDENTIFICACAO":
+		include_once("classe_menutemas.php");
+		$m = new Menutemas($map_file,$perfil,$locaplic,"",$editores,$idioma);
+		$retorno = $m->pegaSistemasI();
+	break;
+/*
 Valor: PEGASISTEMAS
 
 Pega a lista de sistemas.
@@ -1820,7 +1832,6 @@ Pega a lista de sistemas.
 		$m = new Menutemas($map_file,$perfil,$locaplic,"",$editores,$idioma);
 		$retorno = $m->pegaSistemas();
 	break;
-
 /*
 Valor: PEGALISTADESUBGRUPOS
 

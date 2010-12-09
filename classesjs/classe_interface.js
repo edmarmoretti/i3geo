@@ -973,8 +973,8 @@ i3GEO.Interface = {
 				nlayers = layers.length,
 				i;
 			for(i=0;i<nlayers;i++){
-				if(layers[i].visibility === true){
-					layers[i].mergeNewParams({r:Math.random()});
+				layers[i].mergeNewParams({r:Math.random()});
+				if(layers[i].visibility === true){	
 					layers[i].redraw();
 				}
 			}

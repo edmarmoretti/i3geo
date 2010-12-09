@@ -314,6 +314,40 @@ Array
 		return $sistemas;		
 	}
 /*
+function: pegaSistemasI
+
+Retorna a lista de sistemas especiais de identificação de temas.
+
+parameters:
+
+Return:
+
+Array
+*/
+	function pegaSistemasI()
+	{
+		error_reporting(0);
+		include_once($this->locaplic."/admin/php/xml.php");
+		$xmlsistemas = simplexml_load_string(geraXmlIdentifica(implode(" ",$this->perfil),$this->locaplic,$this->editores));
+		$sistemas = array();
+		foreach($xmlsistemas->FUNCAO as $s)
+		{
+			$publicado = $this->ixml($s,"PUBLICADO");
+			if(strtolower($publicado) != "nao" || $this->editor)
+			{
+				$nomesis = $this->ixml($s,"NOMESIS");
+				$ps = $this->ixml($s,"PERFIL");
+				$perfis = str_replace(","," ",$ps);
+				$perfis = explode(" ",$perfis);
+				if (($this->array_in_array($this->perfil,$perfis)) || ($ps == ""))
+				{
+					$sistemas[] = array("PUBLICADO"=>$publicado,"NOME"=>$nomesis,"TARGET"=>($this->ixml($s,"TARGET")),"ABRIR"=>($this->ixml($s,"ABRIR")));
+				}
+			}
+		}
+		return $sistemas;		
+	}	
+/*
 function: procurartemas
 
 Procura um tema no menu de temas considerando apenas os subgrupos.

@@ -367,6 +367,9 @@ LAYER
 	LAYER
 		METADATA
 			"TEMA"	"Rosa dos ventos"
+			"IDENTIFICA" "nao"
+			"TABELA" "nao"
+
 		END
 		NAME "rosadosventos"
 		SIZEUNITS PIXELS
