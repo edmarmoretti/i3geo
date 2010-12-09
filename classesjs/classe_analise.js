@@ -323,6 +323,8 @@ i3GEO.analise = {
 			YAHOO.util.Event.removeListener(YAHOO.janelaDocamede.xp.panel.close, "click");
 			i3GEO.eventos.MOUSECLIQUE.remove("i3GEO.analise.medeDistancia.clique()");
 			i3GEO.eventos.MOUSEMOVE.remove("i3GEO.analise.medeDistancia.movimento()");
+			i3GEO.eventos.NAVEGAMAPA.remove("i3GEO.analise.medeDistancia.fechaJanela()");
+
 			if($i("mostradistancia_c")){document.body.removeChild($i("mostradistancia_c"));}
 			i3GEO.barraDeBotoes.ativaBotoes();
 		},
@@ -570,6 +572,7 @@ i3GEO.analise = {
 			YAHOO.util.Event.removeListener(YAHOO.janelaDocaarea.xp.panel.close, "click");
 			i3GEO.eventos.MOUSECLIQUE.remove("i3GEO.analise.medeArea.clique()");
 			i3GEO.eventos.MOUSEMOVE.remove("i3GEO.analise.medeArea.movimento()");
+			i3GEO.eventos.NAVEGAMAPA.remove("i3GEO.analise.medeArea.fechaJanela()");
 			if($i("mostraarea_c")){document.body.removeChild($i("mostraarea_c"));}
 			i3GEO.barraDeBotoes.ativaBotoes();
 		},

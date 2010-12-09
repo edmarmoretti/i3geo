@@ -47,6 +47,20 @@ Exemplos:
 */
 i3GEO.arvoreDeCamadas = {
 	/*
+	Propriedade: VERIFICAABRANGENCIATEMAS
+	
+	Verifica ou não se um tema da árvore está dentro da abrangência do mapa atual
+	
+	A verificação só é feita se o tema possuir a extensão geográfica registrada (veja o sistema de administração)
+	
+	Default:
+	{true}
+	 
+	Type:
+	{boolean}
+	*/
+	VERIFICAABRANGENCIATEMAS: true,
+	/*
 	Propriedade: finaliza
 	
 	Nome de uma função que será executada após a árvore ter sido montada
@@ -248,7 +262,9 @@ i3GEO.arvoreDeCamadas = {
 			
 			"iconetema":"",
 
-			"permitecomentario":""
+			"permitecomentario":"",
+			
+			"exttema":""
 		}
 	]
 	
@@ -508,6 +524,10 @@ i3GEO.arvoreDeCamadas = {
 		if(i3GEO.temaAtivo !== ""){
 			i3GEO.mapa.ativaTema(i3GEO.temaAtivo);
 		}
+		i3GEO.arvoreDeCamadas.verificaAbrangenciaTemas();
+		if(i3GEO.arvoreDeCamadas.VERIFICAABRANGENCIATEMAS == true && i3GEO.eventos.NAVEGAMAPA.toString().search("i3GEO.arvoreDeCamadas.verificaAbrangenciaTemas()") < 0)
+		{i3GEO.eventos.NAVEGAMAPA.push("i3GEO.arvoreDeCamadas.verificaAbrangenciaTemas()");}
+		
 	},
 	/*
 	Function: ativaDragDrop
@@ -1020,9 +1040,9 @@ i3GEO.arvoreDeCamadas = {
 		{estilo = "cursor:move;vertical-align:top;";}
 		
 		if(i3GEO.arvoreDeCamadas.AGUARDALEGENDA)
-		{html += "&nbsp;<span style='"+estilo+"' onclick=\"i3GEO.tema.mostralegendajanela('"+tema.name+"','"+tema.tema+"','abrejanela');\" onmouseover=\"javascript:i3GEO.ajuda.mostraJanela('"+$trad("t7a")+"','');i3GEO.tema.mostralegendajanela('"+tema.name+"','"+tema.tema+"','ativatimer');\" onmouseout=\"javascript:i3GEO.ajuda.mostraJanela('');i3GEO.tema.mostralegendajanela('"+tema.name+"','','desativatimer');\" >"+tema.tema+"</span>";}
+		{html += "&nbsp;<span id='ArvoreTituloTema"+tema.name+"' style='"+estilo+"' onclick=\"i3GEO.tema.mostralegendajanela('"+tema.name+"','"+tema.tema+"','abrejanela');\" onmouseover=\"javascript:i3GEO.ajuda.mostraJanela('"+$trad("t7a")+"','');i3GEO.tema.mostralegendajanela('"+tema.name+"','"+tema.tema+"','ativatimer');\" onmouseout=\"javascript:i3GEO.ajuda.mostraJanela('');i3GEO.tema.mostralegendajanela('"+tema.name+"','','desativatimer');\" >"+tema.tema+"</span>";}
 		else
-		{html += "&nbsp;<span style='"+estilo+"' onmouseover=\"javascript:i3GEO.ajuda.mostraJanela('"+$trad("t7")+"','')\" onmouseout=\"javascript:i3GEO.ajuda.mostraJanela('')\" >"+tema.tema+"</span>";}
+		{html += "&nbsp;<span id='ArvoreTituloTema"+tema.name+"' style='"+estilo+"' onmouseover=\"javascript:i3GEO.ajuda.mostraJanela('"+$trad("t7")+"','')\" onmouseout=\"javascript:i3GEO.ajuda.mostraJanela('')\" >"+tema.tema+"</span>";}
 		
 		html += "</p>";
 		return(html);
@@ -1359,5 +1379,38 @@ i3GEO.arvoreDeCamadas = {
       		}
    			while(i < nelementos);
    		}
-	}	
+	},
+	verificaAbrangenciaTemas: function(){
+    	if(typeof(console) !== 'undefined'){console.info("i3GEO.arvoreDeCamadas.verificaAbrangenciaTemas()");}
+    	if(i3GEO.arvoreDeCamadas.VERIFICAABRANGENCIATEMAS == false)
+		{return}
+		try{
+			var resultado = [],
+				i = 0,
+				temp,
+				nelementos = i3GEO.arvoreDeCamadas.CAMADAS.length,
+				ltema,
+				intersec,
+				node;
+			if (nelementos > 0){
+				do{
+					ltema = i3GEO.arvoreDeCamadas.CAMADAS[i];
+					temp = ltema.exttema;
+					if(temp != ""){
+						intersec = i3GEO.util.intersectaBox(temp,i3GEO.parametros.mapexten);
+						node = $i("ArvoreTituloTema"+ltema.name);
+						if(intersec == false){
+							node.style.color = "gray";
+						}
+						else{
+							node.style.color = "black";
+						}
+					}
+					i++;        		
+				}
+				while(i < nelementos);
+			}
+		}
+		catch(e){}
+	}
 };

@@ -908,14 +908,14 @@ i3GEO.Interface = {
 		},
 		loadStartLayer: function(event){
 			i3GEO.Interface.STATUS.atualizando.push(event.object.name);
-			var i = $i("arrastar_"+event.object.name);
+			var i = $i("ArvoreTituloTema"+event.object.name);
 			if(i){
 				i.style.backgroundColor = "RGB(240,240,240)";
 			}
 		},
 		loadStopLayer: function(event){
 			i3GEO.Interface.STATUS.atualizando.remove(event.object.name);
-			var i = $i("arrastar_"+event.object.name);
+			var i = $i("ArvoreTituloTema"+event.object.name);
 			if(i){
 				i.style.backgroundColor = "";
 			}

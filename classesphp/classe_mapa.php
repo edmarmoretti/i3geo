@@ -197,9 +197,16 @@ string - javascript com os parametros
 				//
 				//verifica se o tema pode receber a operação de zoom para o tema
 				//
-				$zoomtema = "sim";
 				if (($ct != 1) && ($oLayer->getmetadata("extensao") == ""))
-				{$zoomtema = "nao";}
+				{
+					$zoomtema = "nao";
+					$exttema = "";
+				}
+				else
+				{
+					$zoomtema = "sim";
+					$exttema = $oLayer->getmetadata("extensao");
+				}
 				//
 				//verifica se existe restrição de escala
 				//
@@ -244,7 +251,8 @@ string - javascript com os parametros
 					"escondido"=>strtolower($escondido),
 					"iconetema"=>($oLayer->getmetadata("iconetema")),
 					"classe"=>($oLayer->getmetadata("classe")),
-					"permitecomentario"=>$permitecomentario
+					"permitecomentario"=>$permitecomentario,
+					"exttema"=>$exttema
 				);
 			}
 		}
