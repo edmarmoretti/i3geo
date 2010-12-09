@@ -254,6 +254,8 @@ i3GEO.analise = {
 				{i3GEO.eventos.MOUSECLIQUE.push("i3GEO.analise.medeDistancia.clique()");}
 				if(i3GEO.eventos.MOUSEMOVE.toString().search("i3GEO.analise.medeDistancia.movimento()") < 0)
 				{i3GEO.eventos.MOUSEMOVE.push("i3GEO.analise.medeDistancia.movimento()");}
+				if(i3GEO.eventos.NAVEGAMAPA.toString().search("i3GEO.analise.medeDistancia.fechaJanela()") < 0)
+				{i3GEO.eventos.NAVEGAMAPA.push("i3GEO.analise.medeDistancia.fechaJanela()");}
 				$i("mostradistancia").style.display="block";
 				if(i3GEO.Interface.ATUAL != "googleearth"){
 					i3GEO.desenho.criaContainerRichdraw();
@@ -285,11 +287,9 @@ i3GEO.analise = {
 				ins += '<div style="text-align:left;font-size:10px" >';
 				ins += "<span style='color:navy;cursor:pointer;text-align:left;' >";
 				ins += "<table><tr><td><input style='cursor:pointer' type='checkbox' id='pararraios' checked /></td><td>Raios</td><td>&nbsp;</td>";
-				
 				ins += "<td>";
 				ins += "<input style='cursor:pointer' type='checkbox' id='parartextos' checked />";
-				ins += "</td><td>Textos<td>";
-				
+				ins += "</td><td>Textos<td>";		
 				ins += "</tr></table></span>";
 				ins += '</div>';
 				ins += '</div>';
@@ -386,8 +386,21 @@ i3GEO.analise = {
 					}
 				}
 				if(i3GEO.Interface.ATUAL === "padrao" || i3GEO.Interface.ATUAL === "openlayers" || i3GEO.Interface.ATUAL === "googlemaps")
-				{i3GEO.util.insereMarca.cria(objposicaocursor.imgx,objposicaocursor.imgy,i3GEO.analise.medeDistancia.fechaJanela,"divGeometriasTemp");}
+				{i3GEO.util.insereMarca.cria(objposicaocursor.imgx,objposicaocursor.imgy,i3GEO.analise.medeDistancia.paraCalculo,"divGeometriasTemp");}
 			}
+		},
+		/*
+		Function: paraCalculo
+		
+		Para o cálculo de distâncias e ativa o botão "pan"
+		*/
+		paraCalculo: function(){
+			g_tipoacao == "";
+			var botaoPan = $i("pan");
+			if(botaoPan)
+			{botaoPan.onclick.call();}
+			else
+			{i3GEO.barraDeBotoes.ativaBotoes();}
 		},
 		/*
 		Function: movimento
@@ -479,7 +492,9 @@ i3GEO.analise = {
 				if(i3GEO.eventos.MOUSECLIQUE.toString().search("i3GEO.analise.medeArea.clique()") < 0)
 				{i3GEO.eventos.MOUSECLIQUE.push("i3GEO.analise.medeArea.clique()");}
 				if(i3GEO.eventos.MOUSEMOVE.toString().search("i3GEO.analise.medeArea.movimento()") < 0)
-				{i3GEO.eventos.MOUSEMOVE.push("i3GEO.analise.medeArea.movimento()");}		
+				{i3GEO.eventos.MOUSEMOVE.push("i3GEO.analise.medeArea.movimento()");}
+				if(i3GEO.eventos.NAVEGAMAPA.toString().search("i3GEO.analise.medeArea.fechaJanela()") < 0)
+				{i3GEO.eventos.NAVEGAMAPA.push("i3GEO.analise.medeArea.fechaJanela()");}				
 				YAHOO.util.Event.addListener(YAHOO.janelaDocaarea.xp.panel.close, "click", i3GEO.analise.medeArea.fechaJanela);
 				//
 				//é necessário pegar a resolução de cada pixel do servidor
@@ -600,11 +615,24 @@ i3GEO.analise = {
 				if($i("mostraarea_calculo"))
 				{$i("mostraarea_calculo").innerHTML = "<br>m2</b>= "+m.toFixed(2)+"<br><b>km2</b>= "+(m/1000000).toFixed(2)+"<br><b>ha</b>= "+(m/10000).toFixed(2);}
 				if(i3GEO.Interface.ATUAL === "padrao" || i3GEO.Interface.ATUAL === "openlayers" || i3GEO.Interface.ATUAL === "googlemaps")
-				{i3GEO.util.insereMarca.cria(objposicaocursor.imgx,objposicaocursor.imgy,i3GEO.analise.medeArea.fechaJanela,"divGeometriasTemp");}
+				{i3GEO.util.insereMarca.cria(objposicaocursor.imgx,objposicaocursor.imgy,i3GEO.analise.medeArea.paraCalculo,"divGeometriasTemp");}
 				if(i3GEO.Interface.ATUAL === "googleearth")
-				{i3GEO.util.insereMarca.cria(objposicaocursor.ddx,objposicaocursor.ddy,i3GEO.analise.medeArea.fechaJanela,"divGeometriasTemp","");}
+				{i3GEO.util.insereMarca.cria(objposicaocursor.ddx,objposicaocursor.ddy,i3GEO.analise.medeArea.paraCalculo,"divGeometriasTemp","");}
 			}
 		},
+		/*
+		Function: paraCalculo
+		
+		Para o cálculo de área e ativa o botão "pan"
+		*/
+		paraCalculo: function(){
+			g_tipoacao == "";
+			var botaoPan = $i("pan");
+			if(botaoPan)
+			{botaoPan.onclick.call();}
+			else
+			{i3GEO.barraDeBotoes.ativaBotoes();}
+		},		
 		/*
 		Function: movimento
 		
