@@ -587,8 +587,6 @@ i3GEO.util = {
 	
 	Cria um elemento imagem na página atual.
 	
-	Esse elemento pode ser utilizado para desenhar pontos sobre o mapa
-	
 	Parametros:
 	
 	id {String} - (opcional) id do elemento que será criado. Por default, será 'boxpin'
@@ -645,7 +643,7 @@ i3GEO.util = {
 		my = parseInt(i.style.height,10) / 2;
 		i.style.position = "absolute";
 		i.style.top = objposicaocursor.telay - my;
-		i.style.left = objposicaocursor.telax - mx;	
+		i.style.left = objposicaocursor.telax - mx;
 	},
 	/*
 	Function: escondePin
@@ -785,19 +783,23 @@ i3GEO.util = {
 
 		Parametros:
 
-		xi {Numeric} - coordenada x.
+		xi {Numeric} - coordenada x no mapa.
 
-		yi {Numeric} - coordenada y.
+		yi {Numeric} - coordenada y no mapa.
 
 		funcaoOnclick {String} - funcao que sera executada quando a marca 
 		for clicada, se for "", o container será esvaziado ao ser clicado na marca
 	
-		container {String} - id do container que receberá os pontos. No caso da interface google Earth, é utilizado na definição do nome da marca (setname).
+		container {String} - id do container que receberá os pontos. Se não existir um elemento com esse ID, será criado um novo DIV. No caso da interface google Earth, é utilizado na definição do nome da marca (setname).
 		
-		texto [String} - (apenas para interface Google Earth) nome que será adicionado junto da marca
+		texto {String} - (apenas para interface Google Earth) nome que será adicionado junto da marca
+		
+		srci {string} - (opcional) endereço da imagem (será incluido em SRC do tag IMG)
 		*/
-		cria:function(xi,yi,funcaoOnclick,container,texto){
+		cria:function(xi,yi,funcaoOnclick,container,texto,srci){
 			if(typeof(console) !== 'undefined'){console.info("i3GEO.util.insereMarca.cria()");}
+			if(!srci)
+			{srci = i3GEO.configura.locaplic+"/imagens/dot2.gif";}
 			if(i3GEO.Interface.ATUAL === "googleearth"){
 				i3GEO.Interface.googleearth.insereMarca(texto,xi,yi,container);
 				return;
@@ -836,7 +838,7 @@ i3GEO.util = {
 				{novoimg.onclick = funcaoOnclick;}
 				else
 				{novoimg.onclick=function(){i3GEO.util.insereMarca.limpa();};}
-				novoimg.src=i3GEO.configura.locaplic+"/imagens/dot2.gif";
+				novoimg.src=srci;
 				temp = novoimg.style;
 				temp.width="5px";
 				temp.height="5px";

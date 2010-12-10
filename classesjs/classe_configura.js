@@ -808,6 +808,11 @@ i3GEO.configura = {
 						g_operacao = "identifica";
 						eval(i3GEO.configura.funcaoIdentifica);
 					}
+					i3GEO.util.criaPin("i3GEOmarcaIdentifica",i3GEO.configura.locaplic+"/imagens/marcaidentify.png",48,48);
+					i3GEO.util.posicionaImagemNoMapa("i3GEOmarcaIdentifica");
+					var i = $i("i3GEOmarcaIdentifica");
+					if(i)
+					{i.style.display = "block";}
 				};
 				if(i3GEO.eventos.MOUSECLIQUE.toString().search("cliqueIdentifica()") < 0)
 				{i3GEO.eventos.MOUSECLIQUE.push("cliqueIdentifica()");}
