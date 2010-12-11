@@ -18,6 +18,10 @@ servidor - endereco do servidor OGC utilizado. Por default é "../ogc.php" o que 
 largura - lagura do mapa em pixels
 
 altura - altura do mapa em pixels
+
+pontos - lista de coordenadas x e y que serão incluídas como marcas no mapa
+
+marca - nome do arquivo que contém a imagem que será utilizada para mostrar as coordenadas
 */
 include_once("../classesphp/pega_variaveis.php");
 include_once("../classesphp/carrega_ext.php");
@@ -172,6 +176,8 @@ Parâmetros:
 	maxextent - extensão geográfica do mapa (xmin,ymin,xmax,ymax)
 	largura - lagura do mapa em pixels
 	altura - altura do mapa em pixels
+	pontos - lista de coordenadas x e y que serão incluídas como marcas no mapa
+	marca - nome do arquivo que contém a imagem que será utilizada para mostrar as coordenadas	
 
 	controles - lista com os nomes dos controles que serão adicionados ao mapa. Se não for definido, todos os controles serão adicionados
 		navigation

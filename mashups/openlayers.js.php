@@ -33,6 +33,17 @@ i3GEOOL = {
 						{echo "''";}
 					?>],
 	botoes: <?php echo $botoes; ?>,
+	pontos: [<?php
+				if(isset($pontos)){
+					$pontos = str_replace(" ",",",$pontos);
+					echo $pontos;
+				}
+			?>],
+	marca: "<?php
+				if(isset($marca)){echo $marca;}
+				else
+				{echo "../pacotes/openlayers/img/marker-gold.png";}
+			?>",
 	mapa: new OpenLayers.Map('i3geoMapa', {
 		controls: [
 			<?php echo implode(",",$objControles); ?>
@@ -66,12 +77,13 @@ i3GEOOL = {
 		if(i3GEOOL.layergrafico != ""){
 			i3GEOOL.mapa.addLayers([i3GEOOL.layergrafico]);
 		}
-		
+		i3GEOOL.adicionaMarcas();
 		i3GEOOL.mapa.zoomToMaxExtent();
 		i3GEOOL.coordenadas();	
 		i3GEOOL.criaJanelaBusca();
 		i3GEOOL.criaJanelaAtivaTema();
 		i3GEOOL.criaBotoes(i3GEOOL.botoes);
+		
 	},
 	layersLigados: function(){
 		var layers = i3GEOOL.mapa.layers;
@@ -581,5 +593,49 @@ i3GEOOL = {
 			panel.addControls(controles);
 			i3GEOOL.mapa.addControl(panel);
 		}
+	},
+	adicionaMarcas: function(){
+		if(i3GEOOL.pontos.length == 0)
+		{return;}
+		var SHADOW_Z_INDEX = 10,
+			MARKER_Z_INDEX = 11,      
+			DIAMETER = 200,
+            layer = new OpenLayers.Layer.Vector(
+                "pontos",
+                {
+                    styleMap: new OpenLayers.StyleMap({
+                        externalGraphic: i3GEOOL.marca,
+                        backgroundGraphic: "../pacotes/openlayers/img/marker_shadow.png",
+                        backgroundXOffset: 0,
+                        backgroundYOffset: -7,
+                        graphicZIndex: MARKER_Z_INDEX,
+                        backgroundGraphicZIndex: SHADOW_Z_INDEX,
+                        pointRadius: 10
+                    }),
+                    isBaseLayer: false,
+                    rendererOptions: {yOrdering: true},
+					displayInLayerSwitcher:true,
+					visibility:true
+                }
+            ),
+			index,
+			x = [],
+			y = [],
+			pixel,
+			lonlat,
+			features = [];
+		for (index = 0; index < i3GEOOL.pontos.length; index = index + 2){
+			x.push(i3GEOOL.pontos[index]);
+			y.push(i3GEOOL.pontos[index+1]);
+		};
+		for (index = 0; index < x.length; index++) {
+			features.push(
+				new OpenLayers.Feature.Vector(
+					new OpenLayers.Geometry.Point(x[index], y[index])
+				)
+			);
+		}
+		layer.addFeatures(features);
+		i3GEOOL.mapa.addLayer(layer);
 	}
 };
