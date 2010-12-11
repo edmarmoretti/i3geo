@@ -88,6 +88,12 @@ poligonos - lista de coordenadas x e y que serão adicionadas como polígonos no m
 
 nometemapoligonos - nome do tema de polígonos
 
+simbolo - nome do símbolo que será utilizado para desenhar os elementos inseridos (veja arquivo de símbolos em i3geo/symbols)
+
+corsimbolo - cor do símbolo definido em RGB separados por espaço ou vírgula
+
+tamanhosimbolo - tamanho do símbolo em pixels
+
 wkt - insere elementos no mapa com coordenadas definidas em wkt
 
 nometemawkt - nome do tema em wkt
@@ -116,11 +122,10 @@ Verifica a variável $caminho
 
 Essa variável deve ser definida em programas que utilizam o ms_criamapa.php via include.
 Indica onde está o diretório i3geo para que os includes seguintes possam ser localizados.
-$caminho é sempre colocada antes do nome dos arquivos que serão incçuídos, p.e., 
+$caminho é sempre colocada antes do nome dos arquivos que serão incluídos, p.e., 
 require_once ($caminho."classesphp/carrega_ext.php");
 */
-$_COOKIE = array();
-
+//$_COOKIE = array();
 if (!isset($caminho)){$caminho = "";}
 if (!file_exists($caminho."classesphp/carrega_ext.php"))
 {echo "<b> Nao foi possivel localizar o diretório classephp. Provavelmente vc precisara definir a variavel $camino";exit;}
@@ -134,7 +139,7 @@ A carga das extensões geralmente é necessária nas instalações windows (ms4w) ou 
 */
 include_once ($caminho."classesphp/carrega_ext.php");
 /*
- Include dos arquivos PHP.
+Include dos arquivos PHP.
 
 Inclui os programas php com funções utilizadas pelo ms_criamapa.php
 */
@@ -631,7 +636,7 @@ Insere elementos no mapa a partir de uma string definida em wkt
 */
 function insereWKTUrl()
 {
-	global $wkt,$nometemawkt,$dir_tmp,$imgdir,$tmpfname,$locaplic;
+	global $tamanhosimbolo,$simbolo,$corsimbolo,$wkt,$nometemawkt,$dir_tmp,$imgdir,$tmpfname,$locaplic;
 	include_once "pacotes/phpxbase/api_conversion.php";
 	if (!isset($nometemapontos))
 	{$nometemapontos="WKT";}
@@ -672,7 +677,7 @@ function insereWKTUrl()
 	$layer->set("name","wktins");
 	$layer->set("data",$nomeshp.".shp");
 	$layer->setmetadata("DOWNLOAD","sim");
-	
+	$layer->setmetadata("temalocal","sim");
 	$layer->setmetadata("tema",$nometemawkt);
 	$layer->setmetadata("classe","sim");
 	$layer->set("type",$shape->type);
@@ -682,18 +687,28 @@ function insereWKTUrl()
 	$estilo = ms_newStyleObj($classe);
 	if($shape->type == 0)
 	{
+		if(!isset($simbolo))
 		$estilo->set("symbolname","ponto");
+		if(!isset($tamanhosimbolo))
 		$estilo->set("size",6);
 	}
 	if($shape->type == 1)
 	{
+		if(!isset($simbolo))
 		$estilo->set("symbolname","linha");
+		if(!isset($tamanhosimbolo))
 		$estilo->set("size",3);
 	}
 	if($shape->type == 2)
 	{$layer->set("opacity","50");}
+	
 	$cor = $estilo->color;
-	$cor->setRGB(255,0,0);
+	if(!isset($corsimbolo))
+	{$corsimbolo ="255,0,0";}
+	$corsimbolo = str_replace(" ",",",$corsimbolo);
+	$corsimbolo = explode(",",$corsimbolo);
+	$cor->setRGB($corsimbolo[0],$corsimbolo[1],$corsimbolo[2]);
+	
 	$salvo = $mapa->save($tmpfname);
 	erroCriacao();
 }
@@ -703,7 +718,7 @@ Insere um tema do tipo ponto
 */
 function inserePontosUrl()
 {
-	global $pontos,$nometemapontos,$dir_tmp,$imgdir,$tmpfname,$locaplic;
+	global $pontos,$tamanhosimbolo,$simbolo,$corsimbolo,$nometemapontos,$dir_tmp,$imgdir,$tmpfname,$locaplic;
 	include_once "pacotes/phpxbase/api_conversion.php";
 	if (!isset($nometemapontos))
 	{$nometemapontos="Pontos";}
@@ -753,16 +768,27 @@ function inserePontosUrl()
 	$layer->setmetadata("DOWNLOAD","sim");
 	$layer->setmetadata("tema",$nometemapontos);
 	$layer->setmetadata("classe","sim");
+	$layer->setmetadata("temalocal","sim");
 	$layer->setmetadata("ATLAS","nao");
 	$layer->set("type",MS_LAYER_POINT);
 	$layer->set("status",MS_DEFAULT);
 	$classe = ms_newClassObj($layer);
 	$classe->set("name"," ");
 	$estilo = ms_newStyleObj($classe);
-	$estilo->set("symbolname","ponto");
-	$estilo->set("size",6);
+	
+	if(!isset($simbolo))
+	{$simbolo = "ponto";}
+	$estilo->set("symbolname",$simbolo);
+	if(!isset($tamanhosimbolo))
+	{$tamanhosimbolo = 6;}	
+	$estilo->set("size",$tamanhosimbolo);
 	$cor = $estilo->color;
-	$cor->setRGB(255,0,0);
+	if(!isset($corsimbolo))
+	{$corsimbolo ="255,0,0";}
+	$corsimbolo = str_replace(" ",",",$corsimbolo);
+	$corsimbolo = explode(",",$corsimbolo);
+	$cor->setRGB($corsimbolo[0],$corsimbolo[1],$corsimbolo[2]);
+	
 	$salvo = $mapa->save($tmpfname);
 	erroCriacao();
 }
@@ -774,7 +800,7 @@ As linhas devem ter os pontos separados por espaços e cada linha separada por ví
 */
 function insereLinhasUrl()
 {
-	global $linhas,$nometemalinhas,$dir_tmp,$imgdir,$tmpfname,$locaplic;
+	global $tamanhosimbolo,$simbolo,$corsimbolo,$linhas,$nometemalinhas,$dir_tmp,$imgdir,$tmpfname,$locaplic;
 	include_once "pacotes/phpxbase/api_conversion.php";
 	if (!isset($nometemalinhas))
 	{$nometemalinhas="Linhas";}
@@ -830,7 +856,7 @@ function insereLinhasUrl()
 	$layer->set("name","linhains");
 	$layer->set("data",$nomeshp.".shp");
 	$layer->setmetadata("DOWNLOAD","sim");
-
+	$layer->setmetadata("temalocal","sim");
 	$layer->setmetadata("tema",$nometemalinhas);
 	$layer->setmetadata("classe","sim");
 	$layer->setmetadata("ATLAS","nao");
@@ -839,10 +865,20 @@ function insereLinhasUrl()
 	$classe = ms_newClassObj($layer);
 	$classe->set("name"," ");
 	$estilo = ms_newStyleObj($classe);
-	$estilo->set("symbolname","linha");
-	$estilo->set("size",3);
+
+	if(!isset($simbolo))
+	{$simbolo = "linha";}
+	$estilo->set("symbolname",$simbolo);
+	if(!isset($tamanhosimbolo))
+	{$tamanhosimbolo = 6;}	
+	$estilo->set("size",$tamanhosimbolo);
 	$cor = $estilo->color;
-	$cor->setRGB(255,0,0);
+	if(!isset($corsimbolo))
+	{$corsimbolo ="255,0,0";}
+	$corsimbolo = str_replace(" ",",",$corsimbolo);
+	$corsimbolo = explode(",",$corsimbolo);
+	$cor->setRGB($corsimbolo[0],$corsimbolo[1],$corsimbolo[2]);
+	
 	$salvo = $mapa->save($tmpfname);
 	erroCriacao();
 }
@@ -853,7 +889,7 @@ Os polígonos devem ter os pontos separados por espaços e cada polígono separado 
 */
 function inserePoligonosUrl()
 {
-	global $poligonos,$nometemapoligonos,$dir_tmp,$imgdir,$tmpfname,$locaplic;
+	global $tamanhosimbolo,$simbolo,$corsimbolo,$poligonos,$nometemapoligonos,$dir_tmp,$imgdir,$tmpfname,$locaplic;
 	include_once "pacotes/phpxbase/api_conversion.php";
 	if (!isset($nometemapoligonos))
 	{$nometemapoligonos="Poligonos";}
@@ -910,7 +946,7 @@ function inserePoligonosUrl()
 	$layer->set("name","linhains");
 	$layer->set("data",$nomeshp.".shp");
 	$layer->setmetadata("DOWNLOAD","sim");
-
+	$layer->setmetadata("temalocal","sim");
 	$layer->setmetadata("tema",$nometemapoligonos);
 	$layer->setmetadata("classe","sim");
 	$layer->setmetadata("ATLAS","nao");
@@ -920,10 +956,14 @@ function inserePoligonosUrl()
 	$classe = ms_newClassObj($layer);
 	$classe->set("name"," ");
 	$estilo = ms_newStyleObj($classe);
-	//$estilo->set("symbolname","linha");
-	//$estilo->set("size",3);
+
 	$cor = $estilo->color;
-	$cor->setRGB(255,0,0);
+	if(!isset($corsimbolo))
+	{$corsimbolo ="255,0,0";}
+	$corsimbolo = str_replace(" ",",",$corsimbolo);
+	$corsimbolo = explode(",",$corsimbolo);
+	$cor->setRGB($corsimbolo[0],$corsimbolo[1],$corsimbolo[2]);
+
 	$salvo = $mapa->save($tmpfname);
 	erroCriacao();
 }

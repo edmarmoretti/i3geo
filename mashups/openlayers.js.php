@@ -1,4 +1,4 @@
-<?php error_reporting(0);if(extension_loaded('zlib')){ob_start('ob_gzhandler');} header("Content-type: text/javascript"); ?>$i = function(id){return document.getElementById(id);};
+$i = function(id){return document.getElementById(id);};
 navn = false;
 //seta as variáveis navn e navm
 var navn = false;
@@ -26,7 +26,7 @@ i3GEOOL = {
 		{layers: "landsat7"}
 	),
 	layergrafico: new OpenLayers.Layer.Vector("Edição",{displayInLayerSwitcher:true,visibility:true}),
-	layersIniciais: [<?php 
+	layersIniciais: [<?php
 						if(isset($objOpenLayers) && $objOpenLayers != "")
 						{echo implode(",",$objOpenLayers);}
 						else
@@ -583,4 +583,3 @@ i3GEOOL = {
 		}
 	}
 };
-<?php if(extension_loaded('zlib')){ob_end_flush();}?>

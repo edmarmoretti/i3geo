@@ -1,3 +1,4 @@
+<?php error_reporting(0);if(extension_loaded('zlib')){ob_start('ob_gzhandler');} header("Content-type: text/html"); ?>
 <?php
 /*
 Parametros:
@@ -18,9 +19,9 @@ largura - lagura do mapa em pixels
 
 altura - altura do mapa em pixels
 */
-
 include_once("../classesphp/pega_variaveis.php");
 include_once("../classesphp/carrega_ext.php");
+error_reporting(0);
 //
 //imprime na tela a ajuda ao usuário
 //
@@ -210,6 +211,7 @@ Parâmetros:
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
 <html>
 <head>
+<META HTTP-EQUIV="Content-Type" CONTENT="text/html; charset=ISO-8859-1">
 <link rel="stylesheet" type="text/css" href="../pacotes/yui270/build/fonts/fonts-min.css" />
 <link rel="stylesheet" type="text/css" href="../pacotes/yui270/build/container/assets/skins/sam/container.css" />
 <script type="text/javascript" src="../pacotes/yui270/build/yahoo-dom-event/yahoo-dom-event.js"></script>
@@ -223,9 +225,10 @@ Parâmetros:
 <body class=" yui-skin-sam">
 <div id=i3geoMapa style="width:<?php echo $largura;?>px;height:<?php echo $altura;?>px;"></div>
 <div id=i3geoSelTemaAtivo style="height:15em;z-index:3000" class=" yui-skin-sam"></div>
-<script type="text/javascript">
-<?php include("openlayers.js.php"); ?>
-i3GEOOL.inicia()
+<script>
+<?php include("openlayers.js.php");?>
+i3GEOOL.inicia();
 </script>
 </body>
 </html>
+<?php if(extension_loaded('zlib')){ob_end_flush();}?>
