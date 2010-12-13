@@ -328,6 +328,7 @@ Array
 	{
 		error_reporting(0);
 		include_once($this->locaplic."/admin/php/xml.php");
+		
 		$xmlsistemas = simplexml_load_string(geraXmlIdentifica(implode(" ",$this->perfil),$this->locaplic,$this->editores));
 		$sistemas = array();
 		foreach($xmlsistemas->FUNCAO as $s)

@@ -33,6 +33,18 @@ Arquivo:
 
 i3geo/admin/php/xml.php
 */
+if(!function_exists("verificaEditores"))
+{
+	if(isset($locaplic))
+	{include_once($locaplic."/classesphp/funcoes_gerais.php");}
+	else
+	{
+		if(file_exists("../../classesphp/funcoes_gerais.php"))
+		{
+			include_once("../../classesphp/funcoes_gerais.php");
+		}
+	}
+}
 /*
 Function: geraXmlSistemas (depreciado)
 
@@ -762,19 +774,5 @@ function entity_decode($texto)
 {
 	return html_entity_decode($texto);
 }
-function verificaEditores($editores)
-{
-	$editor = "nao";
-	foreach ($editores as $e)
-	{
-		$e = gethostbyname($e);
-		$ip = "UNKNOWN";
-		if (getenv("HTTP_CLIENT_IP")) $ip = getenv("HTTP_CLIENT_IP");
-		else if(getenv("HTTP_X_FORWARDED_FOR")) $ip = getenv("HTTP_X_FORWARDED_FOR");
-		else if(getenv("REMOTE_ADDR")) $ip = getenv("REMOTE_ADDR");
-		else $ip = "UNKNOWN";
-		if ($e == $ip){$editor="sim";}
-	}
-	return $editor;
-}
+
 ?>

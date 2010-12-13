@@ -1026,7 +1026,12 @@ function core_gravaLinha(mensagem,row,sUrl,nomeFuncao)
 			var rec = myDataTable.getRecordSet().getRecord(row);
 			var linha = myDataTable.getTrEl(rec);
 			if(nomeFuncao != "")
-			{eval(nomeFuncao+"()")}
+			{
+				eval(nomeFuncao+"()")
+				try
+				{myDataTable.updateRow(rec,YAHOO.lang.JSON.parse(o.responseText)[0])}
+				catch(e){}
+			}
 			else
 			{
 				myDataTable.updateRow(rec,YAHOO.lang.JSON.parse(o.responseText)[0])

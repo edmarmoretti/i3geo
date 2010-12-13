@@ -223,6 +223,10 @@ Inicia o mapa, pegando os parâmetros necessários para a montagem inicial.
 */
 	case "INICIA":
 		include_once("mapa_inicia.php");
+		//
+		//a variável $editores vem do ms_configura.php
+		//
+		$editor = verificaEditores($editores);
 		iniciaMapa();
 	break;
 /*

@@ -124,6 +124,9 @@ i3GEOF.identifica = {
 			i3GEOF.identifica.y = y;
 			i3GEOF.identifica.mostraLinkGeohack = mostraLinkGeohack;
 			i3GEOF.identifica.mostraSistemasAdicionais = mostraSistemasAdicionais;
+			//se o usuário for editor, força mostrar a lista de sistemas
+			if(i3GEO.parametros.editor == "sim")
+			{i3GEOF.identifica.mostraSistemasAdicionais == true;}
 			i3GEO.guias.mostraGuiaFerramenta("i3GEOidentificaguia1","i3GEOidentificaguia");
 			//eventos das guias
 			$i("i3GEOidentificaguia1").onclick = function(){i3GEOF.identifica.listaTemas("ligados");i3GEO.guias.mostraGuiaFerramenta("i3GEOidentificaguia1","i3GEOidentificaguia");};
@@ -148,14 +151,17 @@ i3GEOF.identifica = {
 			//
 			//verifica se existem sistemas para identificar
 			//
-			if(i3GEOF.identifica.mostraSistemasAdicionais === true){
-				var p = i3GEO.configura.locaplic+"/classesphp/mapa_controle.php?funcao=pegaSistemasIdentificacao&g_sid="+i3GEO.configura.sid;
-				cpJSON.call(p,"foo",i3GEOF.identifica.montaListaSistemas);	
-			}
+			i3GEOF.identifica.atualizaSistemas();
 			if (i3GEO.temaAtivo !== "")
 			{i3GEOF.identifica.buscaDadosTema(i3GEO.temaAtivo);}
 		}
 		catch(erro){alert(erro);}
+	},
+	atualizaSistemas: function(){
+		if(i3GEOF.identifica.mostraSistemasAdicionais === true){
+			var p = i3GEO.configura.locaplic+"/classesphp/mapa_controle.php?funcao=pegaSistemasIdentificacao&g_sid="+i3GEO.configura.sid;
+			cpJSON.call(p,"foo",i3GEOF.identifica.montaListaSistemas);	
+		}	
 	},
 	/*
 	Function: criaJanelaFlutuante
@@ -416,7 +422,12 @@ i3GEOF.identifica = {
 					
 				}
 				if(divins){
-					divins.innerHTML = "<table class='lista2' >"+linhas+"</table>";
+					if(i3GEO.parametros.editor == "sim"){
+						temp = "<p class=paragrafo ><a href='#' title='Opção visível apenas para quem é editor' style=color:red onclick=\"i3GEOF.identifica.abrejanelaIframe('1050','500','"+i3GEO.configura.locaplic+"/admin/html/identifica.html');\" >Editar a lista de sistemas adicionais</a></p>";
+					}
+					else
+					{temp = "";}
+					divins.innerHTML = temp+"<table class='lista2' >"+linhas+"</table>";
 					return;
 				}
 			}
@@ -464,11 +475,32 @@ i3GEOF.identifica = {
 		if(target === "target")
 		{window.open(exec);}
 		else {
-			i3GEO.janela.cria("500","500",exec,parseInt(Math.random()*100,10),10,exec,"janela"+i3GEO.util.randomRGB(),false);
+			i3GEOF.identifica.abrejanelaIframe("500","500",exec);
 		}
 		var i = $i("i3GEOmarcaIdentifica");
 		if(i)
 		{i.style.display = "block";}		
+	},
+	/*
+	Function abrejanelaIframe
+	
+	Abre uma janela flutuante contendo um iframe
+	
+	Parametros:
+	
+	w {string} - largura
+	
+	h {string} - altura
+	
+	s {string} - src do iframe
+	*/
+	abrejanelaIframe: function(w,h,s){
+		var janelaeditor = i3GEO.janela.cria(w,h,s,parseInt(Math.random()*100,10),10,s,"janela"+i3GEO.util.randomRGB(),false);
+		var temp = function(){
+			i3GEOF.identifica.sistemasAdicionais = [];
+			i3GEOF.identifica.atualizaSistemas();
+		};
+		YAHOO.util.Event.addListener(janelaeditor[0].close, "click", temp,janelaeditor[0].panel,{id:janelaeditor[0].id},true);
 	},
 	/*
 	Function: mostraDadosTema

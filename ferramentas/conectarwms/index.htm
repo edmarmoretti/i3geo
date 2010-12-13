@@ -68,24 +68,30 @@ body {
 <script type="text/javascript" >
 mensagemAjuda("men1",document.getElementById("men1").innerHTML)
 mensagemAjuda("men2",document.getElementById("men2").innerHTML)
-g_RSSwms = new Array("")
+if(window.parent.i3GEO.parametros.editor == "sim"){
+	var temp = "<p><a href='#' style='color:red' onclick='abrejanelaIframe()' title='Opção visível apenas para usuários editores'>Editar a lista de endereços dos serviços</a></p>";
+	document.getElementById("opc1").innerHTML += temp;
+}	
 
-aguarde("block")
-//g_locaplic = window.parent.i3GEO.configura.locaplic;
-if (document.getElementById("RSSwms"))
-{
-	if (g_RSSwms.length > 0)
+iniciaListaWS()
+function iniciaListaWS(){
+	g_RSSwms = new Array("")
+	aguarde("block")
+	//g_locaplic = window.parent.i3GEO.configura.locaplic;
+	if (document.getElementById("RSSwms"))
 	{
-		var p = g_locaplic+"/classesphp/wscliente.php?funcao=listaRSSwsARRAY&rss="+g_RSSwms.join("|")+"&tipo=WMS";
-		var cp = new cpaint();
-		//cp.set_debug(2)
-		cp.set_response_type("JSON");
-		cp.call(p,"listaRSSwsARRAY",mostraRetornowmsRSS);
+		if (g_RSSwms.length > 0)
+		{
+			var p = g_locaplic+"/classesphp/wscliente.php?funcao=listaRSSwsARRAY&rss="+g_RSSwms.join("|")+"&tipo=WMS";
+			var cp = new cpaint();
+			//cp.set_debug(2)
+			cp.set_response_type("JSON");
+			cp.call(p,"listaRSSwsARRAY",mostraRetornowmsRSS);
+		}
 	}
 }
 function mostraRetornowmsRSS(retorno)
 {
-	
 	var reg = /Erro/gi;
 	if (retorno.data.rss.search(reg) != -1)
 	{

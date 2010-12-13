@@ -53,7 +53,17 @@ Obtém a lista de WS
 */
 function pegaWS()
 {
-	core_pegaDados("buscando endereços...","../php/webservices.php?funcao=pegaWS","montaTabela")
+    //
+	//pega o tipo de WS que será listado se tiver sido definido na url
+	//
+	var tipows = "";
+	try{
+		var u = window.location.href.split("?");
+		var u = u[1].split("=");
+		tipows = u[1];
+	}
+	catch(e){tipows = "";}
+	core_pegaDados("buscando endereços...","../php/webservices.php?funcao=pegaWS&tipows="+tipows,"montaTabela")
 }
 /*
 Function: montaTabela
@@ -64,14 +74,13 @@ Monta a tabela de edição
 */
 function montaTabela(dados)
 {
-    YAHOO.example.InlineCellEditing = new function()
+	YAHOO.example.InlineCellEditing = new function()
     {
         // Custom formatter for "address" column to preserve line breaks
         var formatTextoId = function(elCell, oRecord, oColumn, oData)
         {
             elCell.innerHTML = "<p>" + oData + "</p>";
         };
-
         var formatMais = function(elCell, oRecord, oColumn)
         {
             elCell.innerHTML = "<div class=editar style='text-align:center' ></div>";
@@ -90,9 +99,7 @@ function montaTabela(dados)
         myDataSource = new YAHOO.util.DataSource(dados);
         myDataSource.responseType = YAHOO.util.DataSource.TYPE_JSARRAY;
         myDataSource.responseSchema =
-        {
-            fields: ["id_ws","nome_ws","tipo_ws"]
-        };
+        {fields: ["id_ws","nome_ws","tipo_ws"]};
         myDataTable = new YAHOO.widget.DataTable("tabela", myColumnDefs, myDataSource);
         // Set up editing flow
 		myDataTable.subscribe('cellClickEvent',function(ev)

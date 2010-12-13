@@ -430,7 +430,7 @@ function listaRSSws2()
 		}
 		else
 		{$canali = simplexml_load_file($rss);}
-		$linhas[] = "<a href='".$endereco."' target=blank ><img src='imagens/rss.gif' /></a>####";
+		$linhas[] = "<a href='".$endereco."' target=blank ><img style='border:0px solid white' src='imagens/rss.gif' /></a>####";
 		//var_dump($canali);
 		foreach ($canali->channel->item as $item)
 		{
@@ -512,10 +512,10 @@ function listaRSSwsARRAY()
 		else
 		{$canali = simplexml_load_file($rss);}
 		if($r != "")
-		$linhas["rss"] = "<a href='".$r."' target=blank ><img src='imagens/rss.gif' /></a>";
+		$linhas["rss"] = "<a href='".$r."' target=blank ><img style='border:0px solid white;' src='imagens/rss.gif' /></a>";
 		else
 		{
-			$linhas["rss"] = "<a href='".$linkrss."' target=blank ><img src='imagens/rss.gif' /></a>";			
+			$linhas["rss"] = "<a href='".$linkrss."' target=blank ><img style='border:0px solid white;' src='imagens/rss.gif' /></a>";			
 		}
 		//var_dump($canali);
 		$canais = array();
@@ -555,7 +555,7 @@ function listaRSSws()
 		if ($rss)
 		{
 			$erro = "";
-			$linhas[] = "<a href='".$r."' target=blank ><img src='imagens/rss.gif' /></a>####";
+			$linhas[] = "<a href='".$r."' target=blank ><img style='border:0px solid white;' src='imagens/rss.gif' /></a>####";
 			foreach ( $rss->items as $item )
 			{
 				$linha[] = $item['title'];

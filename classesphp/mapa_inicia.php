@@ -98,7 +98,9 @@ Retorno:
 */
 function iniciaMapa()
 {
-	global $openid,$interfacePadrao,$mensagemInicia,$kmlurl,$tituloInstituicao,$tempo,$navegadoresLocais,$locaplic,$embedLegenda,$map_file,$mapext,$w,$h,$R_path,$locmapserv,$utilizacgi,$expoeMapfile,$interface;
+	global $openid,$interfacePadrao,$mensagemInicia,$kmlurl,$tituloInstituicao,$tempo,$navegadoresLocais,$editor,$locaplic,$embedLegenda,$map_file,$mapext,$w,$h,$R_path,$locmapserv,$utilizacgi,$expoeMapfile,$interface;
+	if(!isset($editor) || empty($editor))
+	{$editor = "nao";}
 	if(!isset($kmlurl))
 	{$kmlurl = "";}
 	error_reporting(E_ALL);
@@ -229,7 +231,7 @@ function iniciaMapa()
 	{$nomer = ($imgo->imageurl).basename($nomer);}
 	$iref = $m->mapa->reference;
 	$irefH = $iref->height;
-	
+	 $res["editor"] = $editor;
 	$res["mapexten"] = $ext;
 	$res["mapscale"] = $escalaMapa;
 	$res["mapres"] = $m->mapa->resolution;

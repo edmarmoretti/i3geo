@@ -135,37 +135,6 @@ function verificaDuplicados($sql,$dbh)
 	return false;
 }
 /*
-Function: verificaEditores
-
-Verifica se o usuário atual está cadastrado como editor
-
-Parametros:
-
-editores - array com a lista de editores
-
-Return:
-
-{string} - sim|nao
-*/
-function verificaEditores($editores)
-{
-	if (strtolower($_SERVER['HTTP_HOST']) == "localhost")
-	{return "sim";}
-	$editor = "nao";
-	if($editores == ""){return $editor;}
-	foreach ($editores as $e)
-	{
-		//$e = gethostbyname($e);
-		$ip = "UNKNOWN";
-		if (getenv("HTTP_CLIENT_IP")) $ip = getenv("HTTP_CLIENT_IP");
-		else if(getenv("HTTP_X_FORWARDED_FOR")) $ip = getenv("HTTP_X_FORWARDED_FOR");
-		else if(getenv("REMOTE_ADDR")) $ip = getenv("REMOTE_ADDR");
-		else $ip = "UNKNOWN";
-		if ($e == $ip){$editor="sim";}
-	}
-	return $editor;
-}
-/*
 Function: exclui
 
 Exlcui um registro de uma tabela do banco de dados de administração

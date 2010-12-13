@@ -97,7 +97,7 @@ i3GEO.janela = {
 	/*
 	Propriedade: ANTESFECHA
 	
-	Lista com os nomes das funções que serão executadas após fechar a janela.
+	Lista com os nomes das funções que serão executadas antes de fechar a janela.
 	
 	Este é um array que pode ser modificado utilizando-se as funções javascript de
 	manipulação de arrays.

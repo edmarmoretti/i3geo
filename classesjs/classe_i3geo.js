@@ -116,6 +116,8 @@ i3GEO = {
 	celularef {Numeric} - tamanho da célula do mapa de referência
 	
 	autenticadoopenid {sim|nao} - indica se o usuário foi autenticado em alguma rede social
+	
+	editor {sim|nao} - indica se o usuário atual é um editor (administrador)
 	*/
 	parametros: {
 		mapexten: "",

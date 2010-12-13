@@ -250,7 +250,7 @@ function seltema(tipo,tema,legenda,nometema,nomecamada,sldflag)
 	{
 		var retorno = function(retorno)
 		{
-			aguarde("none")
+			aguarde("none");
 			if(retorno.data != "ok")
 			{alert("Ooops! Problemas ao acessar o serviço.");aguarde("none");}
 			else
@@ -264,4 +264,22 @@ function seltema(tipo,tema,legenda,nometema,nomecamada,sldflag)
 		cp.set_response_type("JSON");
 		cp.call(p,"adicionatemawms",retorno);
 	}
+}
+/*
+Function abrejanelaIframe
+
+Abre uma janela flutuante contendo um iframe
+
+Parametros:
+
+w {string} - largura
+
+h {string} - altura
+
+s {string} - src do iframe
+*/
+function abrejanelaIframe(){
+	var s = window.parent.i3GEO.configura.locaplic+"/admin/html/webservices.html?tipo=wms";
+	var janelaeditor = window.parent.i3GEO.janela.cria("1000","500",s,parseInt(Math.random()*100,10),10,s,"janela"+window.parent.i3GEO.util.randomRGB(),false);
+	YAHOO.util.Event.addListener(janelaeditor[0].close, "click", iniciaListaWS,janelaeditor[0].panel,{id:janelaeditor[0].id},true);
 }

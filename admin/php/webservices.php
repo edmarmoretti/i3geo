@@ -64,7 +64,11 @@ switch (strtoupper($funcao))
 	{JSON}
 	*/
 	case "PEGAWS":
-		retornaJSON(pegaDados('SELECT id_ws,nome_ws,tipo_ws from i3geoadmin_ws order by tipo_ws,nome_ws'));
+		if(isset($tipows) && $tipows != "")
+		{$sql = "SELECT id_ws,nome_ws,tipo_ws from i3geoadmin_ws where tipo_ws = '".strtoupper($tipows)."' order by tipo_ws,nome_ws ";}
+		else
+		{$sql = "SELECT id_ws,nome_ws,tipo_ws from i3geoadmin_ws order by tipo_ws,nome_ws";}
+		retornaJSON(pegaDados($sql));
 		exit;
 	break;
 	/*

@@ -64,7 +64,10 @@ switch (strtoupper($funcao))
 	{JSON}
 	*/	
 	case "PEGAFUNCOES":
-		$dados = pegaDados('SELECT * from i3geoadmin_identifica');
+		if(isset($id_i) && $id_i != "")
+		{$dados = pegaDados("SELECT * from i3geoadmin_identifica where id_i = $id_i ");}
+		else
+		{$dados = pegaDados('SELECT * from i3geoadmin_identifica');}
 		retornaJSON($dados);
 		exit;
 	break;

@@ -47,6 +47,10 @@ function montaTabela(dados)
     YAHOO.example.InlineCellEditing = new function()
     {
         // Custom formatter for "address" column to preserve line breaks
+        var formatMais = function(elCell, oRecord, oColumn)
+        {
+            elCell.innerHTML = "<div class=editar style='text-align:center' ></div>";
+        };
         var formatTexto = function(elCell, oRecord, oColumn, oData)
         {
             elCell.innerHTML = "<pre ><p>" + oData + "</pre>";
@@ -61,7 +65,7 @@ function montaTabela(dados)
         };
         var myColumnDefs = [
             {key:"excluir",label:"excluir",formatter:formatExclui},
-            {label:"salvar",formatter:formatSalva},
+			{key:"mais",label:"editar",formatter:formatMais},
             {label:"id",key:"id_i", formatter:formatTexto},
 			{label:"nome",resizeable:true,key:"nome_i", formatter:formatTexto, editor:"textbox"},
 			{label:"publicado?",key:"publicado_i",editor:"radio" ,editorOptions:{radioOptions:["SIM","NAO"],disableBtns:false}},
@@ -76,6 +80,7 @@ function montaTabela(dados)
         };
         myDataTable = new YAHOO.widget.DataTable("tabela", myColumnDefs, myDataSource);
         // Set up editing flow
+		/*
         myDataTable.highlightEditableCell = function(oArgs)
         {
             var elCell = oArgs.target;
@@ -96,6 +101,7 @@ function montaTabela(dados)
         };
         myDataTable.subscribe("cellMouseoverEvent", myDataTable.highlightEditableCell);
         myDataTable.subscribe("cellMouseoutEvent", myDataTable.unhighlightEditableCell);
+		*/
 		myDataTable.subscribe('cellClickEvent',function(ev)
 		{
 			var target = YAHOO.util.Event.getTarget(ev);
@@ -110,9 +116,28 @@ function montaTabela(dados)
 				var record = this.getRecord(target);
 				excluiLinha(record.getData('id_i'),target);
 			}
-			else
+			if (column.key == 'mais')
 			{
-				this.onEventShowCellEditor(ev);
+				var record = this.getRecord(target);
+				core_carregando("ativa");
+				core_carregando("buscando dados...");
+				$clicouId = record.getData('id_i');
+				$recordid = record.getId();
+				var sUrl = "../php/identifica.php?funcao=pegafuncoes&id_i="+record.getData('id_i');
+				var callback =
+				{
+  					success:function(o)
+  					{
+  						try
+  						{
+  							montaEditor(YAHOO.lang.JSON.parse(o.responseText),$clicouId,$recordid);
+  						}
+  						catch(e){core_handleFailure(e,o.responseText);}
+  					},
+  					failure:core_handleFailure,
+  					argument: { foo:"foo", bar:"bar" }
+				}; 
+				core_makeRequest(sUrl,callback)
 			}
 		});
         // Hook into custom event to customize save-flow of "radio" editor
@@ -128,6 +153,7 @@ function montaTabela(dados)
         {
             this.cancelCellEditor();
         });
+		/*
         myDataTable.subscribe("editorSaveEvent", function(oArgs)
         {
 			if(oArgs.newData != oArgs.oldData)
@@ -135,21 +161,119 @@ function montaTabela(dados)
 			linha.style.color = "blue";
 			linha.style.textDecoration = "blink";
         });
+		*/
     };
     core_carregando("desativa");
 }
-function gravaLinha(row)
+function montaEditor(dados,id,recordid)
 {
-	var r = myDataTable.getRecordSet().getRecord(row);
-	var publicado_i = r.getData("publicado_i");
-	var abrir_i = r.getData("abrir_i")
-	var id_i = r.getData("id_i")
-	var nome_i = r.getData("nome_i")
-	var target_i = r.getData("target_i")
-	var mensagem = " gravando o registro do id= "+id_i
-	var sUrl = "../php/identifica.php?funcao=alterarFuncoes&publicado_i="+publicado_i+"&abrir_i="+abrir_i+"&nome_i="+nome_i+"&id_i="+id_i+"&target_i="+target_i;
-	core_gravaLinha(mensagem,row,sUrl)
+	function on_editorCheckBoxChange(p_oEvent)
+	{
+		var ins = "";
+		if(p_oEvent.newValue.get("value") == "OK")
+		{
+			gravaDados(id,recordid);
+		}
+		else
+		{
+			YAHOO.example.container.panelEditor.destroy();
+			YAHOO.example.container.panelEditor = null;
+		}
+	};
+	if(!YAHOO.example.container.panelEditor)
+	{
+		var novoel = document.createElement("div");
+		novoel.id =  "janela_editor";
+		var ins = '<div class="hd">Editor</div>';
+		ins += "<div class='bd' style='height:354px;overflow:auto'>";
+		ins += "<div id='okcancel_checkbox'></div><div id='editor_bd'></div>";
+		novoel.innerHTML = ins;
+		document.body.appendChild(novoel);
+		var editorBotoes = new YAHOO.widget.ButtonGroup({id:"okcancel_checkbox_id", name:  "okcancel_checkbox_id", container:  "okcancel_checkbox" });
+		editorBotoes.addButtons([
+            { label: "Salva", value: "OK", checked: false},
+            { label: "Cancela", value: "CANCEL", checked: false }
+        ]);
+		editorBotoes.on("checkedButtonChange", on_editorCheckBoxChange);	
+		YAHOO.example.container.panelEditor = new YAHOO.widget.Panel("janela_editor", { fixedcenter:true,close:false,width:"400px", height:"400px",overflow:"auto", visible:false,constraintoviewport:true } );
+		YAHOO.example.container.panelEditor.render();
+	}
+	YAHOO.example.container.panelEditor.show();
+	//carrega os dados na janela
+	$i("editor_bd").innerHTML = montaDiv(dados[0])
+	core_carregando("desativa");
 }
+function montaDiv(i)
+{
+	var param = {
+		"linhas":[
+		{titulo:"Nome:",id:"Enome_i",size:"50",value:i.nome_i,tipo:"text",div:""},
+		{titulo:"Programa:",id:"Eabrir_i",size:"50",value:i.abrir_i,tipo:"text",div:""},
+		{titulo:"Abrir como:",id:"Etarget_i",size:"50",value:i.target_i,tipo:"text",div:""}
+		]
+	}
+	var ins = ""
+	ins += core_geraLinhas(param)	
+
+	ins += "<p>Publicado?<br>"
+	ins += "<select  id='Epublicado_i' />"
+	ins += "<option value='' "
+	if (i.publicado_i == ""){ins += "selected";}
+	ins += ">---</option>"
+	ins += "<option value='SIM' "
+	if (i.publicado_i == "SIM"){ins += "selected";}
+	ins += " >sim</option>"
+	ins += "<option value='NAO' "
+	if (i.publicado_i == "NAO"){ins += "selected";}
+	ins += " >não</option>"
+	ins += "</select></p>"
+	return(ins)
+}
+/*
+Function: gravaDados
+
+Aplica as alterações feitas em um WS
+
+<ALTERARWS>
+*/
+function gravaDados(id,recordid)
+{
+	var campos = new Array("nome","publicado","abrir","target")
+	var par = ""
+	for (i=0;i<campos.length;i++)
+	{par += "&"+campos[i]+"_i="+($i("E"+campos[i]+"_i").value)}
+	par += "&id_i="+id
+	core_carregando("ativa");
+	core_carregando(" gravando o registro do id= "+id);
+	var sUrl = "../php/identifica.php?funcao=alterarFuncoes"+par;
+	var callback =
+	{
+  		success:function(o)
+  		{
+  			try
+  			{
+  				if(YAHOO.lang.JSON.parse(o.responseText) == "erro")
+  				{
+  					core_carregando("<span style=color:red >Não foi possível excluir. Verifique se não existem registros vinculados</span>");
+  					setTimeout("core_carregando('desativa')",3000)
+  				}
+  				else
+  				{
+  					var rec = myDataTable.getRecordSet().getRecord(recordid);
+  					myDataTable.updateRow(rec,YAHOO.lang.JSON.parse(o.responseText)[0])
+  					core_carregando("desativa");
+  				}
+				YAHOO.example.container.panelEditor.destroy();
+				YAHOO.example.container.panelEditor = null;
+  			}
+  			catch(e){core_handleFailure(e,o.responseText);}
+  		},
+  		failure:core_handleFailure,
+  		argument: { foo:"foo", bar:"bar" }
+	}; 
+	core_makeRequest(sUrl,callback)
+}
+
 function excluiLinha(id,row)
 {
 	var mensagem = " excluindo o registro do id= "+id;
