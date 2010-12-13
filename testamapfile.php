@@ -134,8 +134,6 @@ function verifica($map,$solegenda)
 		if (file_exists('temas/'.$map.'.map'))
 		{$tema = 'temas/'.$map.".map";}
 	}
-
-	
 	if(($tipo == "") || ($tipo == "todos"))
 	echo "<hr><br><br><span style='color:red' ><b>Testando: $tema </span><pre></b>";
 	if(!file_exists($tema)){echo "Arquivo ".$map." não encontrado.";exit;}
@@ -166,16 +164,31 @@ function verifica($map,$solegenda)
 		{
 			$layern = $nmapa->getLayerByName($teman);
 			$layern->set("status",MS_DEFAULT);
-			if ($layern->connectiontype == MS_POSTGIS)
+			if (isset($postgis_mapa))
 			{
-				if ($layern->connection == " " || $layern->connection == "")
+				if (($postgis_mapa != "") || ($postgis_mapa != " "))
 				{
-					if(!is_array($postgis_mapa))
-					$l->set("connection",$postgis_mapa);
-					else
-					$l->set("connection",$postgis_mapa[$l->connection]);
-				}				
-			}			
+					if ($layern->connectiontype == MS_POSTGIS)
+					{
+						$lcon = $layern->connection;
+						if (($lcon == " ") || ($lcon == "") || (in_array($lcon,array_keys($postgis_mapa))))
+						{
+							//
+							//o metadata CONEXAOORIGINAL guarda o valor original para posterior substituição
+							//				
+							if(($lcon == " ") || ($lcon == ""))
+							{
+								$layern->set("connection",$postgis_mapa);
+							}
+							else
+							{
+								$layern->set("connection",$postgis_mapa[$lcon]);
+							}					
+						}
+					}
+				}
+			}
+			
 			autoClasses(&$layern,$nmapa);
 			ms_newLayerObj($mapa, $layern);
 			if ($layern->data == "")
@@ -183,24 +196,6 @@ function verifica($map,$solegenda)
 			else
 			$dados = $layern->data;
 			$pegarext = $teman;	
-		}
-		if (isset($postgis_mapa))
-		{
-			if ($postgis_mapa != "")
-			{
-				$numlayers = $mapa->numlayers;
-				for ($i=0;$i < $numlayers;$i++)
-				{
-					$layer = $mapa->getlayer($i);
-					if ($layer->connectiontype == MS_POSTGIS)
-					{
-						if ($layer->connection == " ")
-						{
-							$layer->set("connection",$postgis_mapa);
-						}
-					}
-				}
-			}
 		}
 		zoomTema($pegarext,&$mapa);
 		if ($tipo == "mini")
@@ -242,8 +237,6 @@ function verifica($map,$solegenda)
 		$nomel = ($objImagemLegenda->imagepath).nomeRandomico()."testel.png";
 		$objImagemLegenda->saveImage($nomel);
 		$nomerl = ($objImagemLegenda->imageurl).basename($nomel);
-		
-		
 		if(($tipo == "") || ($tipo == "todos"))
 		{
 			if($solegenda == "nao")
