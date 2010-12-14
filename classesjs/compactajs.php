@@ -141,7 +141,7 @@ $jsfiles = array(
 );
 
 $buffer .= "\$i = function(id){return document.getElementById(id);};\n";
-salvatudojs($jsfiles,$buffer,"i3geo_tudo_compacto.js","js");
+salvatudojs($jsfiles,$buffer,"i3geo_tudo_compacto45.js","js");
 //
 //gera um único css
 //
@@ -165,7 +165,7 @@ $cssfiles = array(
 ); 
 
 $buffer = "";
-salvatudojs($cssfiles,$buffer,"../css/i3geo.css","css");
+salvatudojs($cssfiles,$buffer,"../css/i3geo45.css","css");
 
 //
 //compacta o ferramentas/funcoes.js
@@ -216,10 +216,10 @@ foreach ($cssfiles as $f)
 	fclose($abre);
 	$buffer .= "\n";
 }
-$abre = fopen("../css/i3geo_ferramentas.css", "wt");
+$abre = fopen("../css/i3geo_ferramentas45.css", "wt");
 $escreve = fwrite ($abre,$buffer);
 $fecha = fclose ($abre);
-chmod("../css/i3geo_ferramentas.css",0777);
+chmod("../css/i3geo_ferramentas45.css",0777);
 
 
 function inicia($arquivo)

@@ -145,3 +145,21 @@ function adicionatema(id)
 	cp.set_response_type("JSON");
 	cp.call(p,"adicionaTemaGeoRSS",redesenha);
 }
+/*
+Function abrejanelaIframe
+
+Abre uma janela flutuante contendo um iframe
+
+Parametros:
+
+w {string} - largura
+
+h {string} - altura
+
+s {string} - src do iframe
+*/
+function abrejanelaIframe(){
+	var s = window.parent.i3GEO.configura.locaplic+"/admin/html/webservices.html?tipo=GEORSS";
+	var janelaeditor = window.parent.i3GEO.janela.cria("700","500",s,parseInt(Math.random()*100,10),10,s,"janela"+window.parent.i3GEO.util.randomRGB(),false);
+	YAHOO.util.Event.addListener(janelaeditor[0].close, "click", iniciaListaGEORSS,janelaeditor[0].panel,{id:janelaeditor[0].id},true);
+}

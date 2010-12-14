@@ -423,7 +423,7 @@ i3GEOF.identifica = {
 				}
 				if(divins){
 					if(i3GEO.parametros.editor == "sim"){
-						temp = "<p class=paragrafo ><a href='#' title='Opção visível apenas para quem é editor' style=color:red onclick=\"i3GEOF.identifica.abrejanelaIframe('1050','500','"+i3GEO.configura.locaplic+"/admin/html/identifica.html');\" >Editar a lista de sistemas adicionais</a></p>";
+						temp = "<p class=paragrafo ><a href='#' title='Opção visível apenas para quem é editor' style=color:red onclick=\"i3GEOF.identifica.abrejanelaIframe('1050','500','"+i3GEO.configura.locaplic+"/admin/html/webservices.html');\" >Editar a lista de sistemas adicionais</a></p>";
 					}
 					else
 					{temp = "";}

@@ -68,7 +68,7 @@ h1
 }
 </style>
 <META HTTP-EQUIV="Content-Type" CONTENT="text/html; charset=ISO-8859-1">
-<link rel="stylesheet" type="text/css" href="../css/i3geo_ferramentas.css">
+<link rel="stylesheet" type="text/css" href="../css/i3geo_ferramentas45.css">
 <body>
 <form id='f' action='mobile.php?' method='get'>
 	<input type='hidden' name='tmpfname' value='<?php echo $tmpfname; ?>' />

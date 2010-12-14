@@ -1,7 +1,7 @@
 <html>
 <head>
 <META HTTP-EQUIV="Content-Type" CONTENT="text/html; charset=ISO-8859-1">
-<link rel="stylesheet" type="text/css" href="../../css/i3geo_ferramentas.css">
+<link rel="stylesheet" type="text/css" href="../../css/i3geo_ferramentas45.css">
 <title></title> 
 <style type="text/css" >button{background:url(../../imagens/tic.png) 98% 50% no-repeat;}</style>
 <link rel="stylesheet" type="text/css" href="../../pacotes/yui270/build/button/assets/skins/sam/button.css"/>
@@ -33,22 +33,28 @@ body {
 		</div>
 	</div>
 
-<script src="../i3geo_tudo_compacto.js.php" type="text/javascript"></script>
+<script src="../i3geo_tudo_compacto45.js.php" type="text/javascript"></script>
 <script language="JavaScript" type="text/javascript" src="index.js"></script>
 
 <script type="text/javascript" >
+if(window.parent.i3GEO.parametros.editor == "sim"){
+	var temp = "<p><a href='#' style='color:red' onclick='abrejanelaIframe()' title='Opção visível apenas para usuários editores'>Editar a lista de endereços dos serviços</a></p>";
+	document.getElementById("opc1").innerHTML += temp;
+}
 aguarde("block");
 g_RSS = new Array("");
-
-if (document.getElementById("RSS"))
-{
-	if (g_RSS.length > 0)
+iniciaListaGEORSS()
+function iniciaListaGEORSS(){
+	if (document.getElementById("RSS"))
 	{
-		var p = "../../classesphp/wscliente.php?funcao=listaRSSwsARRAY&rss="+g_RSS.join("|")+"&tipo=GEORSS";
-		var cp = new cpaint();
-		//cp.set_debug(2)
-		cp.set_response_type("JSON");
-		cp.call(p,"listaRSSwsARRAY",mostraRetornoRSS);
+		if (g_RSS.length > 0)
+		{
+			var p = "../../classesphp/wscliente.php?funcao=listaRSSwsARRAY&rss="+g_RSS.join("|")+"&tipo=GEORSS";
+			var cp = new cpaint();
+			//cp.set_debug(2)
+			cp.set_response_type("JSON");
+			cp.call(p,"listaRSSwsARRAY",mostraRetornoRSS);
+		}
 	}
 }
 function mostraRetornoRSS(retorno)

@@ -25,6 +25,11 @@ Para a versão 4.5
 		utilize o editor de mapfiles do sistema de admnistração
 		Os comentários são armazenados em uma tabela no banco de dados de administração. Essa tabela precisa ser criada no banco.
 		Para criar a tabela veja o item "Outras opções" em http://localhost/i3geo/admin
+		
+	O nome dos arquivos js e ccs compactados foram renomeados, incluindo o valor da versão no final. Isso foi feito para se
+	evitar problemas de cache de versões antigas. Os arquivos renomeados foram:
+		classesjs/i3geo_tudo_compacto45.js
+		css/i3geo_ferramentas45.css
 
 -------------------------------------------------------------------------------------------------
 Para a versão 4.4
