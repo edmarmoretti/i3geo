@@ -675,8 +675,8 @@ i3GEO.arvoreDeTemas = {
 	*/
 	atualiza: function(){
 		if(typeof(console) !== 'undefined'){console.info("i3GEO.arvoreDeTemas.atualiza()");}
-		this.ARVORE = null;
-		this.cria(i3GEO.arvoreDeTemas.SID,i3GEO.arvoreDeTemas.LOCAPLIC,i3GEO.arvoreDeTemas.IDHTML);
+		i3GEO.arvoreDeTemas.ARVORE = null;
+		i3GEO.arvoreDeTemas.cria(i3GEO.arvoreDeTemas.SID,i3GEO.arvoreDeTemas.LOCAPLIC,i3GEO.arvoreDeTemas.IDHTML);
 	},
 	/*
 	Function: montaArvore
@@ -687,7 +687,7 @@ i3GEO.arvoreDeTemas = {
 	*/
 	montaArvore: function() {
 		if(typeof(console) !== 'undefined'){console.info("i3GEO.arvoreDeTemas.montaArvore()");}
-		var newVal,currentIconMode,d,tempNode,retorno,nomeSis,root,insp,outrasOpcoes,dados,c,i,j,conteudo;
+		var newVal,currentIconMode,d,tempNode,retorno,nomeSis,root,insp,outrasOpcoes,dados,c,i,j,conteudo,editor;
 		YAHOO.example.treeExample = function(){
 			function changeIconMode(){
 				newVal = parseInt(this.value,10);
@@ -774,7 +774,7 @@ i3GEO.arvoreDeTemas = {
 		if(i3GEO.arvoreDeTemas.OPCOESADICIONAIS.navegacaoDir === true){
 			tempNode = new YAHOO.widget.HTMLNode(
 				{
-					html:"<a href='../admin' target=blank >Sistema de administração</a>",
+					html:"<a style='color:red' title='opção visível apenas para editores' href='../admin' target=blank >Sistema de administração</a>",
 					idmenu:""
 				},
 				root,
@@ -784,7 +784,17 @@ i3GEO.arvoreDeTemas = {
 			tempNode.enableHighlight = false;
 			tempNode = new YAHOO.widget.HTMLNode(
 				{
-					html:"<a href='../admin/html/arvore.html' target=blank >Editor de menus</a>",
+					html:"<a style='color:red' title='opção visível apenas para editores' href='../admin/html/arvore.html' target=blank >Editar árvore</a>",
+					idmenu:""
+				},
+				root,
+				false,
+				true
+			);
+			tempNode.enableHighlight = false;
+			tempNode = new YAHOO.widget.HTMLNode(
+				{
+					html:"<span style='color:red;cursor:pointer' title='opção visível apenas para editores' onclick='i3GEO.arvoreDeTemas.abrejanelaIframe(\"900\",\"500\",\""+i3GEO.configura.locaplic+"/admin/html/menus.html\")' target=blank >Editar menus</span>",
 					idmenu:""
 				},
 				root,
@@ -797,9 +807,13 @@ i3GEO.arvoreDeTemas = {
 		//wms
 		//
 		if(i3GEO.arvoreDeTemas.INCLUIWMS === true){
+			if(i3GEO.parametros.editor == "sim")
+			{editor = "<img title='Editar lista' onclick='i3GEO.arvoreDeTemas.abrejanelaIframe(\"900\",\"500\",\""+i3GEO.configura.locaplic+"/admin/html/webservices.html?tipo=WMS\")' style='width:11px;position:relative;left:3px' src='"+i3GEO.configura.locaplic+"/imagens/edit.gif' />";}
+			else
+			{editor = "";}
 			tempNode = new YAHOO.widget.HTMLNode(
 				{
-					html:"<b>&nbsp;OGC-WMS</b>"+" <a class=ajuda_usuario target=_blank href='"+i3GEO.configura.locaplic+"/ajuda_usuario.php?idcategoria=4&idajuda=33' >&nbsp;&nbsp;&nbsp;</a>",
+					html:"<b>&nbsp;OGC-WMS</b>"+" <a class=ajuda_usuario target=_blank href='"+i3GEO.configura.locaplic+"/ajuda_usuario.php?idcategoria=4&idajuda=33' >&nbsp;&nbsp;&nbsp;</a>"+editor,
 					idwms:"raiz"
 				},
 				root,
@@ -818,11 +832,15 @@ i3GEO.arvoreDeTemas = {
 		{
 			if(!dados[i].nomemenu)
 			{dados[i].nomemenu = dados[i].idmenu;}
+			if(i3GEO.parametros.editor == "sim")
+			{editor = "<img title='Editar grupos' onclick='i3GEO.arvoreDeTemas.abrejanelaIframe(\"900\",\"500\",\""+i3GEO.configura.locaplic+"/admin/html/arvore.html?id_menu="+dados[i].idmenu+"\")' style='width:11px;position:relative;left:3px;top:2px;' src='"+i3GEO.configura.locaplic+"/imagens/edit.gif' />";}
+			else
+			{editor = "";}
 			if(!dados[i].publicado){dados[i].publicado = "sim";}
 			if(dados[i].publicado.toLowerCase() != "nao")
-			{conteudo = "<b>&nbsp;<span title='"+(dados[i].desc)+"'>"+dados[i].nomemenu+"</span>";}
+			{conteudo = "<b>&nbsp;<span title='"+(dados[i].desc)+"'>"+dados[i].nomemenu+"</span>"+editor;}
 			else
-			{conteudo = "<b>&nbsp;<span title='nao publicado' style=color:red; >"+dados[i].nomemenu+"</span>";}
+			{conteudo = "<b>&nbsp;<span title='nao publicado' ><s>"+dados[i].nomemenu+"</s></span>"+editor;}
 			tempNode = new YAHOO.widget.HTMLNode(
 				{html:conteudo,idmenu:dados[i].idmenu},
 				root,
@@ -855,7 +873,7 @@ i3GEO.arvoreDeTemas = {
 					nomeSis = sis[ig].NOME;
 					if(sis[ig].PUBLICADO){
 						if(sis[ig].PUBLICADO == "NAO" || sis[ig].PUBLICADO == "nao")
-						{nomeSis = "<span style='color:red' >"+sis[ig].NOME+"</span>";}
+						{nomeSis = "<s>"+sis[ig].NOME+"</s>";}
 					}
 					sisNode = new YAHOO.widget.HTMLNode(
 						{html:nomeSis},
@@ -899,7 +917,7 @@ i3GEO.arvoreDeTemas = {
 	montaGrupos: function(node){		
 		if(typeof(console) !== 'undefined'){console.info("i3GEO.arvoreDeTemas.montaGrupos()");}
 		var temp=function(){
-			var grupos,c,raiz,nraiz,mostra,html,i,d;
+			var grupos,c,raiz,nraiz,mostra,html,i,d,editor;
 			grupos = i3GEO.arvoreDeTemas.GRUPOS.grupos;
 			c = grupos.length - 3;
 			raiz = grupos[c].temasraiz;
@@ -927,6 +945,10 @@ i3GEO.arvoreDeTemas = {
 				{mostra = false;}
 				if(i3GEO.arvoreDeTemas.FILTRAOGC && grupos[i].ogc == "nao")
 				{mostra = false;}
+				if(i3GEO.parametros.editor == "sim")
+				{editor = "<img title='Editar subgrupos' onclick='i3GEO.arvoreDeTemas.abrejanelaIframe(\"900\",\"500\",\""+i3GEO.configura.locaplic+"/admin/html/arvore.html?id_menu="+node.data.idmenu+"&id_grupo="+grupos[i].id_n1+"\")' style='width:11px;position:relative;left:3px;top:2px;' src='"+i3GEO.configura.locaplic+"/imagens/edit.gif' />";}
+				else
+				{editor = "";}
 				if(mostra){
 					//se id_n1 existir, significa que os grupos possuem id, pois são oriundos do sistema
 					//de administração
@@ -934,12 +956,12 @@ i3GEO.arvoreDeTemas = {
 					//sendo necessário o uso da ordem dos grupos como identificador
 					if(grupos[i].publicado){
 						if(grupos[i].publicado == "NAO"){
-							grupos[i].nome = "<span title='nao publicado' style=color:red; >"+grupos[i].nome+"</span>";
+							grupos[i].nome = "<span title='nao publicado' ><s>"+grupos[i].nome+"</s></span>";
 						}
 					}
-					d = {html:grupos[i].nome,idmenu:node.data.idmenu,idgrupo:i};
+					d = {html:grupos[i].nome+editor,idmenu:node.data.idmenu,idgrupo:i};
 					if(grupos[i].id_n1)
-					{d = {html:grupos[i].nome,idmenu:node.data.idmenu,idgrupo:grupos[i].id_n1};}
+					{d = {html:grupos[i].nome+editor,idmenu:node.data.idmenu,idgrupo:grupos[i].id_n1};}
 					tempNode = new YAHOO.widget.HTMLNode(d, node, false,true);
 					tempNode.enableHighlight = false;
 					tempNode.setDynamicLoad(i3GEO.arvoreDeTemas.montaSubGrupos, 1);
@@ -997,7 +1019,10 @@ i3GEO.arvoreDeTemas = {
 				{mostra = false;}
 				if(i3GEO.arvoreDeTemas.FILTRAOGC && subgrupos[i].ogc == "nao")
 				{mostra = false;}
-
+				if(i3GEO.parametros.editor == "sim")
+				{editor = "<img title='Editar temas' onclick='i3GEO.arvoreDeTemas.abrejanelaIframe(\"900\",\"500\",\""+i3GEO.configura.locaplic+"/admin/html/arvore.html?id_menu="+node.data.idmenu+"&id_grupo="+node.data.idgrupo+"&id_subgrupo="+subgrupos[i].id_n2+"\")' style='width:11px;position:relative;left:3px;top:2px;' src='"+i3GEO.configura.locaplic+"/imagens/edit.gif' />";}
+				else
+				{editor = "";}
 				if(mostra){
 					//se id_n2 existir, significa que os grupos possuem id, pois são oriundos do sistema
 					//de administração
@@ -1005,12 +1030,12 @@ i3GEO.arvoreDeTemas = {
 					//sendo necessário o uso da ordem dos grupos como identificador
 					if(subgrupos[i].publicado){
 						if(subgrupos[i].publicado == "NAO"){
-							subgrupos[i].nome = "<span title='nao publicado' style=color:red; >"+subgrupos[i].nome+"</span>";
+							subgrupos[i].nome = "<span title='nao publicado' ><s>"+subgrupos[i].nome+"</s></span>";
 						}
 					}	
-					d = {html:subgrupos[i].nome,idmenu:node.data.idmenu,idgrupo:node.data.idgrupo,idsubgrupo:i};
+					d = {html:subgrupos[i].nome+editor,idmenu:node.data.idmenu,idgrupo:node.data.idgrupo,idsubgrupo:i};
 					if(subgrupos[i].id_n2)
-					{d = {html:subgrupos[i].nome,idmenu:node.data.idmenu,idgrupo:node.data.idgrupo,idsubgrupo:subgrupos[i].id_n2};}
+					{d = {html:subgrupos[i].nome+editor,idmenu:node.data.idmenu,idgrupo:node.data.idgrupo,idsubgrupo:subgrupos[i].id_n2};}
 					tempNode = new YAHOO.widget.HTMLNode(d, node, false,true);
 					tempNode.setDynamicLoad(i3GEO.arvoreDeTemas.montaTemas, 1);
 					tempNode.isLeaf = false;
@@ -1042,7 +1067,7 @@ i3GEO.arvoreDeTemas = {
 				if(mostra){
 					if(temas[i].publicado){
 						if(temas[i].publicado == "NAO"){
-							temas[i].nome = "<span title='nao publicado' style=color:red; >"+temas[i].nome+"</span>";
+							temas[i].nome = "<span title='nao publicado' ><s>"+temas[i].nome+"</s></span>";
 						}
 					}
 					tempNode = new YAHOO.widget.HTMLNode(
@@ -1892,6 +1917,24 @@ i3GEO.arvoreDeTemas = {
 				i3GEO.util.scriptTag(js,"i3GEOF.uploadgpx.criaJanelaFlutuante()","i3GEOF.uploadgpx_script");
 			}
 		}
-	}
+	},
+	/*
+	Function abrejanelaIframe
+
+	Abre uma janela flutuante contendo um iframe
+
+	Parametros:
+
+	w {string} - largura
+
+	h {string} - altura
+
+	s {string} - src do iframe
+	*/
+	abrejanelaIframe: function(w,h,s){
+		//var s = window.parent.i3GEO.configura.locaplic+"/admin/html/webservices.html?tipo=GEORSS";
+		var janelaeditor = i3GEO.janela.cria(w,h,s,parseInt(Math.random()*100,10),10,s,"janela"+i3GEO.util.randomRGB(),false);
+		YAHOO.util.Event.addListener(janelaeditor[0].close, "click", i3GEO.arvoreDeTemas.atualiza,janelaeditor[0].panel,{id:janelaeditor[0].id},true);
+	}	
 };
 //YAHOO.log("carregou classe arvoredetemas", "Classes i3geo");

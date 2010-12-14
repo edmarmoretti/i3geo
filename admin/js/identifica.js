@@ -79,29 +79,6 @@ function montaTabela(dados)
             fields: ["publicado_i","abrir_i","id_i","nome_i","target_i"]
         };
         myDataTable = new YAHOO.widget.DataTable("tabela", myColumnDefs, myDataSource);
-        // Set up editing flow
-		/*
-        myDataTable.highlightEditableCell = function(oArgs)
-        {
-            var elCell = oArgs.target;
-            var column = myDataTable.getColumn(oArgs.target);
-            //if(column.editor != "null")
-            if(!YAHOO.lang.isNull(column.editor))
-            {
-				YAHOO.util.Dom.addClass(elCell,'yui-dt-highlighted');
-            }
-        };
-        myDataTable.unhighlightEditableCell = function(oArgs)
-        {
-            var elCell = oArgs.target;
-            if(elCell.style.cursor="pointer")
-            {
-				YAHOO.util.Dom.removeClass(elCell,'yui-dt-highlighted');
-            }
-        };
-        myDataTable.subscribe("cellMouseoverEvent", myDataTable.highlightEditableCell);
-        myDataTable.subscribe("cellMouseoutEvent", myDataTable.unhighlightEditableCell);
-		*/
 		myDataTable.subscribe('cellClickEvent',function(ev)
 		{
 			var target = YAHOO.util.Event.getTarget(ev);
@@ -140,28 +117,7 @@ function montaTabela(dados)
 				core_makeRequest(sUrl,callback)
 			}
 		});
-        // Hook into custom event to customize save-flow of "radio" editor
-        myDataTable.subscribe("editorUpdateEvent", function(oArgs)
-        {
-            if(oArgs.editor.column.key === "active")
-            {
-                this.saveCellEditor();
-                
-            }
-        });
-        myDataTable.subscribe("editorBlurEvent", function(oArgs)
-        {
-            this.cancelCellEditor();
-        });
-		/*
-        myDataTable.subscribe("editorSaveEvent", function(oArgs)
-        {
-			if(oArgs.newData != oArgs.oldData)
-			var linha = myDataTable.getTrEl(oArgs.editor.getRecord())
-			linha.style.color = "blue";
-			linha.style.textDecoration = "blink";
-        });
-		*/
+
     };
     core_carregando("desativa");
 }
@@ -232,9 +188,9 @@ function montaDiv(i)
 /*
 Function: gravaDados
 
-Aplica as alterações feitas em um WS
+Salva as alterações feitas
 
-<ALTERARWS>
+<ALTERARFUNCOES>
 */
 function gravaDados(id,recordid)
 {

@@ -70,11 +70,10 @@ switch (strtoupper($funcao))
 	{JSON}
 	*/	
 	case "PEGAMENUS":
-		if($idioma == "pt")
-		{$coluna = "nome_tema";}
+		if(isset($id_menu) && $id_menu != "")
+		{$dados = pegaDados("SELECT * from i3geoadmin_menus where id_menu = $id_menu order by nome_menu");}
 		else
-		{$coluna = $idioma;}
-		$dados = pegaDados('SELECT * from i3geoadmin_menus order by nome_menu');
+		{$dados = pegaDados('SELECT * from i3geoadmin_menus order by nome_menu');}
 		retornaJSON($dados);
 		exit;
 	break;
@@ -92,7 +91,10 @@ switch (strtoupper($funcao))
 		{$coluna = "nome_menu";}
 		else
 		{$coluna = $idioma;}
-		$dados = pegaDados("SELECT publicado_menu,perfil_menu,aberto,desc_menu,id_menu,$coluna as nome_menu from i3geoadmin_menus order by nome_menu");
+		if(isset($id_menu) && $id_menu != "")
+		{$dados = pegaDados("SELECT publicado_menu,perfil_menu,aberto,desc_menu,id_menu,$coluna as nome_menu from i3geoadmin_menus where id_menu = $id_menu order by nome_menu");}
+		else
+		{$dados = pegaDados("SELECT publicado_menu,perfil_menu,aberto,desc_menu,id_menu,$coluna as nome_menu from i3geoadmin_menus order by nome_menu");}		
 		retornaJSON($dados);
 		exit;
 	break;
@@ -172,23 +174,23 @@ switch (strtoupper($funcao))
 	
 	Parametros:
 	
-	nome
+	nome_menu
 	
-	desc
+	desc_menu
 	
-	id
+	id_menu
 	
 	aberto
 	
-	perfil
+	perfil_menu
 	
 	publicado_menu
 	
-	en
+	en_menu
 	
-	es
+	es_menu
 	
-	it
+	it_menu
 	
 	Retorno:
 	
@@ -197,7 +199,8 @@ switch (strtoupper($funcao))
 	case "ALTERAMENUS":
 		if(verificaEditores($editores) == "nao")
 		{echo "Vc nao e um editor cadastrado. Apenas os editores definidos em i3geo/ms_configura.php podem acessar o sistema de administracao.";exit;}
-		retornaJSON(alteraMenus());
+		alteraMenus();
+		retornaJSON(pegaDados("SELECT * from i3geoadmin_menus where id_menu = $id_menu order by nome_menu"));
 		exit;
 	break;
 	/*
@@ -739,7 +742,7 @@ Altera o registro de um menu. Se id for vazio acrescenta o registro
 */
 function alteraMenus()
 {
-	global $nome,$desc,$id,$aberto,$perfil,$publicado_menu,$en,$es,$it;
+	global $nome_menu,$desc_menu,$id_menu,$aberto,$perfil_menu,$publicado_menu,$en,$es,$it;
 	try 
 	{
 		$retorna = "";
@@ -749,9 +752,9 @@ function alteraMenus()
 			$nome = utf8_encode($nome);
 			$desc = utf8_encode($desc);
 		}
-    	if($id != "")
+    	if($id_menu != "")
     	{
-    		$dbhw->query("UPDATE i3geoadmin_menus SET en = '$en', es = '$es', it = '$it', publicado_menu = '$publicado_menu',aberto = '$aberto', nome_menu = '$nome', desc_menu = '$desc', perfil_menu = '$perfil' WHERE id_menu = $id");
+    		$dbhw->query("UPDATE i3geoadmin_menus SET en = '$en', es = '$es', it = '$it', publicado_menu = '$publicado_menu',aberto = '$aberto', nome_menu = '$nome_menu', desc_menu = '$desc_menu', perfil_menu = '$perfil_mennu' WHERE id_menu = $id_menu");
     	}
     	else
     	{

@@ -38,6 +38,7 @@ Inicializa o editor
 */
 function initEditorMenu()
 {
+	YAHOO.namespace("example.container");
 	core_ativaBotaoAdicionaLinha("../php/menutemas.php?funcao=alteraMenus&publicado_menu=&perfil=&nome=&desc=&id=&aberto=","adicionaNovoMenu","pegaMenus_M")
 	pegaMenus_M()
 }
@@ -70,9 +71,13 @@ function montaTabela_M(dados)
         {
             elCell.innerHTML = "<div class=excluir title='exclui' style='text-align:center' ></div>";//onclick='excluiLinha_M(\""+oRecord.getData("id_menu")+"\",\""+oRecord.getId()+"\")'></div>";
         };
+        var formatMais = function(elCell, oRecord, oColumn)
+        {
+            elCell.innerHTML = "<div class=editar style='text-align:center' ></div>";
+        };
         var myColumnDefs = [
             {key:"excluir",label:"excluir",formatter:formatExclui},
-            {label:"salvar",formatter:formatSalva},
+			{key:"mais",label:"editar",formatter:formatMais},
             {label:"id",key:"id_menu", formatter:formatTexto},
 			{label:"nome",resizeable:true,key:"nome_menu", formatter:formatTexto,editor:new YAHOO.widget.TextboxCellEditor({disableBtns:true})},
 			{label:"en",resizeable:true,key:"en", formatter:formatTexto,editor:new YAHOO.widget.TextboxCellEditor({disableBtns:true})},
@@ -91,25 +96,6 @@ function montaTabela_M(dados)
             fields: ["it","es","en","publicado_menu","perfil_menu","aberto","desc_menu","id_menu","nome_menu"]
         };
         myDataTable = new YAHOO.widget.DataTable("tabela", myColumnDefs, myDataSource);
-        // Set up editing flow
-        myDataTable.highlightEditableCell = function(oArgs)
-        {
-            var elCell = oArgs.target;
-            var column = myDataTable.getColumn(oArgs.target);
-            //if(column.editor != "null")
-            if(!YAHOO.lang.isNull(column.editor))
-            {YAHOO.util.Dom.addClass(elCell,'yui-dt-highlighted');}
-        };
-        myDataTable.unhighlightEditableCell = function(oArgs)
-        {
-            var elCell = oArgs.target;
-            if(elCell.style.cursor="pointer")
-            {
-				YAHOO.util.Dom.removeClass(elCell,'yui-dt-highlighted');
-            }
-        };
-        myDataTable.subscribe("cellMouseoverEvent", myDataTable.highlightEditableCell);
-        myDataTable.subscribe("cellMouseoutEvent", myDataTable.unhighlightEditableCell);
 		myDataTable.subscribe('cellClickEvent',function(ev)
 		{
 			var target = YAHOO.util.Event.getTarget(ev);
@@ -124,63 +110,155 @@ function montaTabela_M(dados)
 				var record = this.getRecord(target);
 				excluiLinha_M(record.getData('id_menu'),target);
 			}
-			else
+			if (column.key == 'mais')
 			{
-				if (column.key == 'perfil_menu')
+				var record = this.getRecord(target);
+				core_carregando("ativa");
+				core_carregando("buscando dados...");
+				$clicouId = record.getData('id_menu');
+				$recordid = record.getId();
+				var sUrl = "../php/menutemas.php?funcao=pegamenus&id_menu="+record.getData('id_menu');
+				var callback =
 				{
-					var record = this.getRecord(target);
-					var selecionados = record.getData('perfil_menu');
-					var selecionados = selecionados.split(",");
-					core_menuCheckBox($perfisArray,$perfisArray,selecionados,target,record,"perfil_menu");
-				}
-				else
-				{this.onEventShowCellEditor(ev);}
+  					success:function(o)
+  					{
+  						try
+  						{
+  							montaEditor_M(YAHOO.lang.JSON.parse(o.responseText),$clicouId,$recordid);
+  						}
+  						catch(e){core_handleFailure(e,o.responseText);}
+  					},
+  					failure:core_handleFailure,
+  					argument: { foo:"foo", bar:"bar" }
+				}; 
+				core_makeRequest(sUrl,callback)
 			}
 		});
-        // Hook into custom event to customize save-flow of "radio" editor
-        myDataTable.subscribe("editorUpdateEvent", function(oArgs)
-        {
-            if(oArgs.editor.column.key === "active")
-            {this.saveCellEditor();}
-        });
-        myDataTable.subscribe("editorBlurEvent", function(oArgs)
-        {
-            this.cancelCellEditor();
-        });
-        myDataTable.subscribe("editorSaveEvent", function(oArgs)
-        {
-			if(oArgs.newData != oArgs.oldData)
-			var linha = myDataTable.getTrEl(oArgs.editor.getRecord())
-			linha.style.color = "blue";
-			linha.style.textDecoration = "blink";
-        });
-		//destroy
     };
     core_carregando("desativa");
 }
+function montaEditor_M(dados,id,recordid)
+{
+	function on_editorCheckBoxChange(p_oEvent)
+	{
+		var ins = "";
+		if(p_oEvent.newValue.get("value") == "OK")
+		{
+			gravaDados_M(id,recordid);
+		}
+		else
+		{
+			YAHOO.example.container.panelEditor.destroy();
+			YAHOO.example.container.panelEditor = null;
+		}
+	};
+	if(!$i("janela_editor2"))
+	{
+		var novoel = document.createElement("div");
+		novoel.id =  "janela_editor2";
+		var ins = '<div class="hd">Editor</div>';
+		ins += "<div class='bd' style='height:354px;overflow:auto'>";
+		ins += "<div id='okcancel_checkbox2'></div><div id='editor_bd2'></div>";
+		novoel.innerHTML = ins;
+		document.body.appendChild(novoel);
+		var editorBotoes = new YAHOO.widget.ButtonGroup({id:"okcancel_checkbox_id2", name:  "okcancel_checkbox_id2", container:  "okcancel_checkbox2" });
+		editorBotoes.addButtons([
+            { label: "Salva", value: "OK", checked: false},
+            { label: "Cancela", value: "CANCEL", checked: false }
+        ]);
+		editorBotoes.on("checkedButtonChange", on_editorCheckBoxChange);	
+		YAHOO.example.container.panelEditor = new YAHOO.widget.Panel("janela_editor2", { fixedcenter:true,close:false,width:"400px", height:"480px",overflow:"auto", visible:false,constraintoviewport:true } );
+		YAHOO.example.container.panelEditor.render();
+	}
+	YAHOO.example.container.panelEditor.show();
+	$i("editor_bd2").innerHTML = montaDiv_M(dados[0])
+	core_carregando("desativa");
+}
+function montaDiv_M(i)
+{
+	var param = {
+		"linhas":[
+			{titulo:"Nome:",id:"Enome_menu",size:"50",value:i.nome_menu,tipo:"text",div:""},
+			{titulo:"Descricao:",id:"Edesc_menu",size:"50",value:i.desc_menu,tipo:"text",div:""},
+			{titulo:"Inglês:",id:"Een",size:"50",value:i.en,tipo:"text",div:""},
+			{titulo:"Espanhol:",id:"Ees",size:"50",value:i.es,tipo:"text",div:""},
+			{titulo:"Italiano:",id:"Eit",size:"50",value:i.it,tipo:"text",div:""},
+			{titulo:"Perfis:",id:"Eperfil_menu",size:"50",value:i.perfil_menu,tipo:"text",div:""}
+		]
+	};
+	var ins = ""
+	ins += core_geraLinhas(param)	
+	ins += "<p>Publicado?<br>"
+	ins += "<select  id='Epublicado_menu' />"
+	ins += "<option value='' "
+	if (i.publicado_menu == ""){ins += "selected";}
+	ins += ">---</option>"
+	ins += "<option value='SIM' "
+	if (i.publicado_menu == "SIM"){ins += "selected";}
+	ins += " >sim</option>"
+	ins += "<option value='NAO' "
+	if (i.publicado_menu == "NAO"){ins += "selected";}
+	ins += " >não</option>"
+	ins += "</select></p>"
+	ins += "<p>Aberto?<br>"
+	ins += "<select  id='Eaberto' />"
+	ins += "<option value='' "
+	if (i.aberto == ""){ins += "selected";}
+	ins += ">---</option>"
+	ins += "<option value='SIM' "
+	if (i.aberto == "SIM"){ins += "selected";}
+	ins += " >sim</option>"
+	ins += "<option value='NAO' "
+	if (i.aberto == "NAO"){ins += "selected";}
+	ins += " >não</option>"
+	ins += "</select></p>"
+	return(ins)
+}
 /*
-Function: gravaLinha_M
+Function: gravaDados_M
 
-Aplica as alterações em um menu
+Salva as alterações feitas
 
 <ALTERAMENUS>
 */
-function gravaLinha_M(row)
+function gravaDados_M(id,recordid)
 {
-	var r = myDataTable.getRecordSet().getRecord(row);
-	var publicado_menu = r.getData("publicado_menu");
-	var perfil_menu = r.getData("perfil_menu");
-	var aberto = r.getData("aberto")
-	var desc_menu = r.getData("desc_menu")
-	var id_menu = r.getData("id_menu")
-	var nome_menu = r.getData("nome_menu")
-	var en = r.getData("en");
-	var es = r.getData("es");
-	var it = r.getData("it");
+	var campos = new Array("publicado_menu","perfil_menu","nome_menu","desc_menu","aberto","en","es","it");
+	var par = ""
+	for (i=0;i<campos.length;i++)
+	{
+		par += "&"+campos[i]+"="+($i("E"+campos[i]).value)
+	}
+	par += "&id_menu="+id
 	core_carregando("ativa");
-	var sUrl = "../php/menutemas.php?funcao=alteraMenus&publicado_menu="+publicado_menu+"&perfil="+perfil_menu+"&nome="+nome_menu+"&desc="+desc_menu+"&id="+id_menu+"&aberto="+aberto+"&en="+en+"&es="+es+"&it="+it+"";
-	var mensagem = " gravando registro "+id_menu
-	core_gravaLinha(mensagem,row,sUrl,"pegaMenus_M")
+	core_carregando(" gravando o registro do id= "+id);
+	var sUrl = "../php/menutemas.php?funcao=alteraMenus"+par;
+	var callback =
+	{
+  		success:function(o)
+  		{
+  			try
+  			{
+  				if(YAHOO.lang.JSON.parse(o.responseText) == "erro")
+  				{
+  					core_carregando("<span style=color:red >Não foi possível excluir. Verifique se não existem registros vinculados</span>");
+  					setTimeout("core_carregando('desativa')",3000)
+  				}
+  				else
+  				{
+  					var rec = myDataTable.getRecordSet().getRecord(recordid);
+  					myDataTable.updateRow(rec,YAHOO.lang.JSON.parse(o.responseText)[0])
+  					core_carregando("desativa");
+  				}
+				YAHOO.example.container.panelEditor.destroy();
+				YAHOO.example.container.panelEditor = null;
+  			}
+  			catch(e){core_handleFailure(e,o.responseText);}
+  		},
+  		failure:core_handleFailure,
+  		argument: { foo:"foo", bar:"bar" }
+	}; 
+	core_makeRequest(sUrl,callback)
 }
 function excluiLinha_M(id,row)
 {
