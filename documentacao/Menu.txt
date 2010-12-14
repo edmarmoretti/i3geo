@@ -44,7 +44,7 @@ Don't Index: Properties
 
 
 File: Página principal com a lista de aplicativos do i3geo  (principal.htm)
-File: Inicializa o I3Geo via URL ms_criamapa.php  (ms_criamapa.php)
+File: Inicializa o i3Geo via URL ms_criamapa.php  (ms_criamapa.php)
 File: Variáveis de inicialização ms_configura.php  (ms_configura.php)
 File: Testa a instalação do I3Geo  (testainstal.php)
 File: Testa um mapfile  (testamapfile.php)
@@ -240,8 +240,6 @@ Group: Redirecionadores  {
 
    File: Redirecionador para o ms_criamapa.php com extensão HTML  (index.html)
    File: Redirecionador para o ms_criamapa.php com extensão HTM  (index.htm)
-   File: Redirecionador HTM para o ms_criamapa.php com interface zerocal  (zerocal\index.htm)
-   File: Redirecionador HTML para o ms_criamapa.php com interface zerocal  (zerocal\index.html)
    File: Redirecionador para o pacotes/arvorehiper/index.php com extensão HTML  (hiperbolica.html)
    }  # Group: Redirecionadores
 
@@ -259,9 +257,9 @@ Group: Aplicativos adicionais  {
 
    Group: Atlas  {
 
-      File: geral.htm  (atlas\geral.htm)
       File: index.htm  (atlas\index.htm)
       File: index.html  (atlas\index.html)
+      File: Interface padrão dos Atlas  (atlas\geral.htm)
       }  # Group: Atlas
 
    Group: Mobile  {
@@ -283,24 +281,29 @@ Group: Aplicativos adicionais  {
       }  # Group: Mobile
 
    File: Mashups  (mashups\index.html)
-   File: Redes sociais  (ferramentas\redessociais\index.php)
+
+   Group: Ferramentas  {
+
+      File: aplicarsld  (ferramentas\aplicarsld\index.js.php)
+      File: Centro de massa  (ferramentas\centromassa\index.js.php)
+      File: Redes sociais  (ferramentas\redessociais\index.php)
+      File: Salva as definições de uma camada no arquivo mapfile correspondente  (ferramentas\salvamapfile\index.js.php)
+      }  # Group: Ferramentas
+
+   Group: Interface  {
+
+      File: Flamingo  (interface\flamingo.htm)
+      File: Google Earth &lparen;experimental&rparen;  (interface\googleearth.phtml)
+      File: Google Maps  (interface\googlemaps.phtml)
+      File: Interface minima  (interface\minima.htm)
+      File: Interface normal  (interface\geral.htm)
+      File: Interface Openlayers  (interface\openlayers.htm)
+      File: Interface zerocal  (interface\zerocal.htm)
+      File: Interface zerocalol  (interface\zerocalol.htm)
+      }  # Group: Interface
+
+   File: twitter2geo.php  (twitter2geo.php)
    }  # Group: Aplicativos adicionais
-
-Group: Interfaces HTML e mapfiles de inicialização e configuração  {
-
-   File: Flamingo  (aplicmap\flamingo.htm)
-   File: Google Earth &lparen;experimental&rparen;  (aplicmap\googleearth.phtml)
-   File: Google Maps  (aplicmap\googlemaps.phtml)
-   File: Interface minima  (aplicmap\minima.htm)
-   File: Interface normal  (aplicmap\geral.htm)
-   File: Interface normal com debug  (aplicmap\geraldebug.htm)
-   File: Interface Openlayers  (aplicmap\openlayers.htm)
-   File: Interface simples 1  (aplicmap\simples1.htm)
-   File: Interface simples 2  (aplicmap\simples2.htm)
-   File: Interface zerocal  (aplicmap\zerocal.htm)
-   File: Redirecionador para o ms_criamapa.php com extensão HTM  (aplicmap\index.htm)
-   File: Redirecionador para o ms_criamapa.php com extensão HTML  (aplicmap\index.html)
-   }  # Group: Interfaces HTML e mapfiles de inicialização e configuração
 
 Group: Administração  {
 
@@ -308,10 +311,18 @@ Group: Administração  {
 
    Group: Utilitários  {
 
-      File: Estatísticas do banco de dados de administração  (admin\php\estatisticas.php)
-      File: incluiMAP.php  (admin\php\incluiMAP.php)
       File: abrefontemapfile  (admin\abrefontemapfile.php)
       File: hiperbolica  (admin\hiperbolica.php)
+
+      Group: Php  {
+
+         File: Estatísticas do banco de dados de administração  (admin\php\estatisticas.php)
+         File: incluiMAP.php  (admin\php\incluiMAP.php)
+         File: parsemapfile.php  (admin\php\parsemapfile.php)
+         File: sqlite.php  (admin\php\sqlite.php)
+         }  # Group: Php
+
+      File: rsscomentariostemas  (admin\rsscomentariostemas.php)
       File: rssgrupos  (admin\rssgrupos.php)
       File: rsssubgrupos  (admin\rsssubgrupos.php)
       File: rsstemas  (admin\rsstemas.php)
@@ -326,8 +337,6 @@ Group: Administração  {
       File: xmlservicoswms  (admin\xmlservicoswms.php)
       File: xmlservicosws  (admin\xmlservicosws.php)
       File: xmlsistemas  (admin\xmlsistemas.php)
-      File: parsemapfile.php  (admin\php\parsemapfile.php)
-      File: sqlite.php  (admin\php\sqlite.php)
       }  # Group: Utilitários
 
    Group: Js  {
@@ -366,6 +375,7 @@ Group: Administração  {
       File: menutemas.php  (admin\php\menutemas.php)
       File: ms_configura.php  (admin\php\ms_configura.php)
       File: sistemas.php  (admin\php\sistemas.php)
+      File: upgradebanco44_45.php  (admin\php\upgradebanco44_45.php)
       File: webservices.php  (admin\php\webservices.php)
       File: xml.php  (admin\php\xml.php)
       }  # Group: Php
@@ -375,15 +385,10 @@ Group: Administração  {
       File: Ajuste de mapfiles  (admin\html\incluimap.html)
       File: Editor da árvore de menus  (admin\html\arvore.html)
       File: Editor da interface Atlas  (admin\html\atlas.html)
+      File: Editor da lista de menus  (admin\html\menus.html)
       File: Editor de mapfiles  (admin\html\editormapfile.html)
       File: Editor de mapfiles de inicialização  (admin\html\mapfiles.html)
       File: Editor do ms_configura  (admin\html\ms_configura.html)
-      File: Importador da lista de Atlas  (admin\html\atlas_importar.html)
-      File: Importador da lista de mapas  (admin\html\mapas_importar.html)
-      File: Importador da lista de sistemas da ferramenta de identificação  (admin\html\identifica_importar.html)
-      File: Importador da lista de sistemas especiais de adição de temas  (admin\html\sistemas_importar.html)
-      File: Importador da lista de Web Services  (admin\html\webservices_importar.html)
-      File: Importador do xml menutemas.xml  (admin\html\importarmenu.html)
       File: Mapas  (admin\html\mapas.html)
       File: Opções da ferramenta identifica  (admin\html\identifica.html)
       File: Perfis  (admin\html\perfis.html)
