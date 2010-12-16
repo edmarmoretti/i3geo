@@ -20,11 +20,23 @@ i3GEOOL = {
 		"http://labs.metacarta.com/wms/vmap0",
 		{layers: 'basic'}
 	),
-	jpl_wms: new OpenLayers.Layer.WMS(
-		"NASA Global Mosaic",
-		"http://t1.hypercube.telascience.org/cgi-bin/landsat7",
-		{layers: "landsat7"}
+	jpl_wms: new OpenLayers.Layer.WMS( "NASA Global Mosaic", "http://wms.jpl.nasa.gov/wms.cgi", {layers: "modis,global_mosaic"},{singleTile:true}),
+	
+	osm_wms: new OpenLayers.Layer.WMS(
+		"Open Street Map",
+		"http://full.wms.geofabrik.de/std/demo_key?",
+		{layers: ""}
 	),
+	top_wms: new OpenLayers.Layer.WMS(
+		"Toponímia MMA",
+		"http://mapas.mma.gov.br/cgi-bin/mapserv?map=/opt/www/html/webservices/baseref.map&",
+		{layers: "base",FORMAT:'image/png'}
+	),
+	est_wms: new OpenLayers.Layer.WMS(
+		"Estados do Brasil",
+		"http://mapas.mma.gov.br/i3geo/ogc.php?tema=estadosl&",
+		{layers: "estadosl",FORMAT:'image/png'}
+	),	
 	layergrafico: new OpenLayers.Layer.Vector("Edição",{displayInLayerSwitcher:true,visibility:true}),
 	layersIniciais: [<?php
 						if(isset($objOpenLayers) && $objOpenLayers != "")
@@ -53,20 +65,16 @@ i3GEOOL = {
 	}),
 	inicia: function(){
 		var alayers = [];
-		if(i3GEOOL.ol_mma != ""){
-			i3GEOOL.ol_mma.transitionEffect = "resize";
-			alayers.push(i3GEOOL.ol_mma);
+		<?php
+		foreach($fundo as $f){
+			echo "try{";
+			echo "i3GEOOL.".$f.".transitionEffect = 'resize';";
+			echo "i3GEOOL.".$f.".setVisibility(false);";
+			echo "alayers.push(i3GEOOL.".$f.");";
+			echo "}catch(e){}";
 		}
-		if(i3GEOOL.ol_wms != ""){
-			i3GEOOL.ol_wms.transitionEffect = "resize";
-			i3GEOOL.ol_wms.setVisibility(false);
-			alayers.push(i3GEOOL.ol_wms);
-		}
-		if(i3GEOOL.jpl_wms != ""){
-			i3GEOOL.jpl_wms.transitionEffect = "resize";
-			alayers.push(i3GEOOL.jpl_wms);
-			i3GEOOL.jpl_wms.setVisibility(false);
-		}
+		echo "try{alayers[0].setVisibility(true);}catch(e){}";
+		?>
 		i3GEOOL.mapa.addLayers(alayers);
 		
 		if(i3GEOOL.layersIniciais != ""){

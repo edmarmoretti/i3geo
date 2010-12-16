@@ -1,28 +1,5 @@
 <?php error_reporting(0);if(extension_loaded('zlib')){ob_start('ob_gzhandler');} header("Content-type: text/html"); ?>
 <?php
-/*
-Parametros:
-
-temas - lista com os temas (mapfiles) do i3Geo que serão incluídos no mapa
-
-numzoomlevels - número de níveis de zoom, default=6
-
-maxextent - extensão geográfica do mapa
-
-controles - lista separada por "," com os nomes dos controles que serão adicionados ao mapa. Se não for definido, todos os controles serão adicionados.
-
-botoes - lista com os nomes dos botoes que serão adicionados ao mapa. Se não for definido, todos os botões serão adicionados
-
-servidor - endereco do servidor OGC utilizado. Por default é "../ogc.php" o que força o uso do i3geo local
-
-largura - lagura do mapa em pixels
-
-altura - altura do mapa em pixels
-
-pontos - lista de coordenadas x e y que serão incluídas como marcas no mapa
-
-marca - nome do arquivo que contém a imagem que será utilizada para mostrar as coordenadas
-*/
 include_once("../classesphp/pega_variaveis.php");
 include_once("../classesphp/carrega_ext.php");
 error_reporting(0);
@@ -133,6 +110,18 @@ else{
 }
 $botoes = "{".implode(",",$objBotoes)."}";
 //
+//define a lista de layers do tipo baselayers
+//$fundo é um array com a lista dos nomes possíveis ou passados pela url
+//cada um deve ser definido em openlayers.js.php
+//
+if(isset($fundo) && $fundo != ""){
+	$fundo = str_replace(","," ",$fundo);
+	$fundo = explode(" ",$fundo);
+}
+else{
+	$fundo = array("est_wms","ol_mma","ol_wms","jpl_wms","osm_wms","top_wms");
+}
+//
 //define quais os layers que comporão o mapa
 //
 if($temas != "")
@@ -157,7 +146,12 @@ if($temas != "")
 					$layern = $maptemp->getLayer($i);
 					$layers[] = $layern->name;
 				}
-				$objOpenLayers[] = 'new OpenLayers.Layer.WMS( "'.($layern->getmetadata("tema")).'", "../ogc.php?tema='.$tema.'&",{layers:"'.implode(",",$layers).'",transparent: "true", format: "image/png"},{isBaseLayer:false})';
+				$ebase = "false";
+				if(in_array($tema,$fundo))
+				{
+					$ebase = "true";
+				}
+				$objOpenLayers[] = 'new OpenLayers.Layer.WMS( "'.($layern->getmetadata("tema")).'", "../ogc.php?tema='.$tema.'&",{layers:"'.implode(",",$layers).'",transparent: "true", format: "image/png"},{isBaseLayer:'.$ebase.'})';
 			}
 			else
 			{echo $tema." não foi encontrado.<br>";}
@@ -178,7 +172,19 @@ Parâmetros:
 	altura - altura do mapa em pixels
 	pontos - lista de coordenadas x e y que serão incluídas como marcas no mapa
 	marca - nome do arquivo que contém a imagem que será utilizada para mostrar as coordenadas	
-
+	
+	fundo - lista com os nomes, separados por ',' dos layers que serão usados como fundo para o mapa. Se não for definido,
+			será usado o default. O primeiro da lista será o fundo ativo. Se na lista de temas de fundo estiver algum
+			tema incluido com o parametro 'temas', esses serão incluídos como temas de fundo.
+			Os seguintes fundos podem usados nessa lista:
+			
+			ol_mma - base cartográfica do Brasil
+			ol_wms - base mundial da Meta Carta
+			jpl_wms - mosaico de imagens de satélite
+			osm_wms - base do open Street Map
+			top_wms - toponímia do servidor do MMA usado no mapa de referência
+			est_wms - estados do Brasil
+			
 	controles - lista com os nomes dos controles que serão adicionados ao mapa. Se não for definido, todos os controles serão adicionados
 		navigation
 		panzoombar 

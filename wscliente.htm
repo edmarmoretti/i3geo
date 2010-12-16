@@ -100,7 +100,8 @@ verificar os serviços disponíveis.
 	<p><b>Lista de serviços cadastrados (clique para selecionar)</b><br>
 	<div class=listaServico id=resultadoRSSws ></div>
 </div>
-<script src="ferramentas/i3geo_tudo_compacto45.js.php" type="text/javascript"></script>
+<script src="ferramentas/i3geo_tudo_compacto.js.php" type="text/javascript"></script>
+<script src="classesjs/i3geo_tudo_compacto45.js.php" type="text/javascript"></script>
 </body>
 <script>
 /*
@@ -143,7 +144,7 @@ Por exemplo
 i3geo/wscliente.htm?wms,endereco_servico
 
 */
-var g_locaplic = protocolo()+"://"+window.location.host+"/i3geo";
+var g_locaplic = i3GEO.util.protocolo()+"://"+window.location.host+"/i3geo";
 var i3geo_wscliente_configura = new i3geo_wscliente_configura
 (
 	g_locaplic,
