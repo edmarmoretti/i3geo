@@ -4,7 +4,7 @@
 <meta http-equiv="Category" content="I3Geo Mapa interativo MMA geoprocessamento sig mobile">
 <META HTTP-EQUIV="Content-Type" CONTENT="text/html; charset=ISO-8859-1">
 <title>i3Geo - Mapa interativo</title>
-<script type="text/javascript" src="../classesjs/i3geo.js"></script>
+<script type="text/javascript" src="../classesjs/i3geonaocompacto.js"></script>
 	<style> 
 	.yui-log .i3geo {background-color:yellow;} /* customize a color */
 	.yui-log .redesenho {background-color:yellow;} /* customize a color */
@@ -167,9 +167,10 @@
 i3GEO.configura.locaplic = i3GEO.util.protocolo()+"://"+window.location.host+"/i3geo";
 i3GEO.configura.templateLegenda = "legendagrupos.htm";
 i3GEO.configura.grupoLayers = [
-                           	{nome:"Grupo 1",layers:["zee","estadosl"]},
-                           	{nome:"Grupo 2",layers:["mundo"]}
-                           ]
+	{nome:"Grupo 1",icone:true,dinamico:true,expandido:true,layers:["zee","estadosl"]},
+	{nome:"Grupo 2",icone:true,dinamico:true,expandido:true,layers:["mundo"]}
+];
+
 i3GEO.cria();
 i3GEO.inicia();
 

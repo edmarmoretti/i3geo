@@ -384,7 +384,7 @@ i3GEO.arvoreDeCamadas = {
 			temas = i3GEO.arvoreDeCamadas.CAMADAS;
 			i3GEO.arvoreDeCamadas.CAMADAS = "";
 		}
-		var temp,currentIconMode,newVal,root,tempNode,titulo,d,c,ltema,temaNode,i,j,n,nk,k,incluidos=[];
+		var estilo,temp,currentIconMode,newVal,root,tempNode,titulo,d,c,ltema,temaNode,grupoNode,i,j,n,nk,k,incluidos=[];
 		//
 		//essa verificacao é necessaria quando a arvore é criada fora dos padrões normais
 		//
@@ -430,6 +430,13 @@ i3GEO.arvoreDeCamadas = {
 		tempNode = new YAHOO.widget.HTMLNode(d, root, true,true);
 		tempNode.enableHighlight = false;
 		//
+		//estilo usado no input qd existirem grupos
+		//
+		if(navm)
+		{estilo = "text-align:left;font-size:11px;vertical-align:middle;display:table-cell;";}
+		else
+		{estilo = "text-align:left;font-size:11px;vertical-align:vertical-align:top;padding-top:4px;";}		
+		//
 		//monta a árvore.
 		//se i3GEO.configura.grupoLayers estiver definido
 		//o processo é diferenciado
@@ -462,10 +469,16 @@ i3GEO.arvoreDeCamadas = {
 			c = i3GEO.configura.grupoLayers.length;
 			//grupos
 			for(i=0;i<c; i++){
-				d = {html:"<b>"+i3GEO.configura.grupoLayers[i].nome+"</b>"};
-				temaNode = new YAHOO.widget.HTMLNode(d, tempNode, false,true);
-				temaNode.expanded = false;
-				temaNode.enableHighlight = false;				
+				temp = "";
+				if(i3GEO.configura.grupoLayers[i].icone && i3GEO.configura.grupoLayers[i].icone==true){
+					temp += "<p style="+estilo+" ><input style=cursor:pointer onclick='i3GEO.arvoreDeCamadas.ligaDesligaTemas(\""+i3GEO.configura.grupoLayers[i].layers+"\",this.checked)' type=checkbox title='Ligar/desligar temas do grupo' />&nbsp;";
+				}
+				temp += "<span style="+estilo+";vertical-align:top ><b>"+i3GEO.configura.grupoLayers[i].nome+"</b></span></p>";
+				d = {html:temp};
+				grupoNode = new YAHOO.widget.HTMLNode(d, tempNode, i3GEO.arvoreDeCamadas.EXPANDIDA,true);
+				grupoNode.enableHighlight = false;
+				if(i3GEO.configura.grupoLayers[i].expandido && i3GEO.configura.grupoLayers[i].expandido==true)
+				{grupoNode.expanded = true;}
 				n = i3GEO.configura.grupoLayers[i].layers.length;
 				//layers de um grupo
 				for(j=0;j<n; j++){
@@ -474,7 +487,12 @@ i3GEO.arvoreDeCamadas = {
 						ltema = temas[k];
 						if(ltema.name === i3GEO.configura.grupoLayers[i].layers[j]  && ltema.escondido == "nao"){
 							d = {html:i3GEO.arvoreDeCamadas.montaTextoTema(ltema),id:ltema.name,tipo:"tema"};
-							temaNode = new YAHOO.widget.HTMLNode(d, tempNode, i3GEO.arvoreDeCamadas.EXPANDIDA,true);
+							
+							if(i3GEO.configura.grupoLayers[i].dinamico && i3GEO.configura.grupoLayers[i].dinamico==true)
+							{temaNode = new YAHOO.widget.HTMLNode(d, grupoNode, i3GEO.arvoreDeCamadas.EXPANDIDA,true);}
+							else
+							{temaNode = new YAHOO.widget.HTMLNode(d, tempNode, i3GEO.arvoreDeCamadas.EXPANDIDA,true);}
+							
 							temaNode.setDynamicLoad(i3GEO.arvoreDeCamadas.montaOpcoes, currentIconMode);							
 							temaNode.expanded = false;
 							temaNode.enableHighlight = false;
@@ -485,9 +503,9 @@ i3GEO.arvoreDeCamadas = {
 			}
 			//inclui os temas não agrupados
 			d = {html:"<b>Outros</b>"};
-			temaNode = new YAHOO.widget.HTMLNode(d, tempNode, false,true);
-			temaNode.expanded = false;
-			temaNode.enableHighlight = false;
+			grupoNode = new YAHOO.widget.HTMLNode(d, tempNode, i3GEO.arvoreDeCamadas.EXPANDIDA,true);
+			grupoNode.expanded = false;
+			grupoNode.enableHighlight = false;
 			c = incluidos.length;
 			for(k=0;k<nk; k++){
 				ltema = temas[k];
@@ -498,7 +516,7 @@ i3GEO.arvoreDeCamadas = {
 				}
 				if (n === false){
 					d = {html:i3GEO.arvoreDeCamadas.montaTextoTema(ltema),id:ltema.name,tipo:"tema"};
-					temaNode = new YAHOO.widget.HTMLNode(d, tempNode, i3GEO.arvoreDeCamadas.EXPANDIDA,true);
+					temaNode = new YAHOO.widget.HTMLNode(d, grupoNode, i3GEO.arvoreDeCamadas.EXPANDIDA,true);
 					temaNode.setDynamicLoad(i3GEO.arvoreDeCamadas.montaOpcoes, currentIconMode);
 					temaNode.expanded = false;
 					temaNode.enableHighlight = false;	
@@ -528,6 +546,26 @@ i3GEO.arvoreDeCamadas = {
 		if(i3GEO.arvoreDeCamadas.VERIFICAABRANGENCIATEMAS == true && i3GEO.eventos.NAVEGAMAPA.toString().search("i3GEO.arvoreDeCamadas.verificaAbrangenciaTemas()") < 0)
 		{i3GEO.eventos.NAVEGAMAPA.push("i3GEO.arvoreDeCamadas.verificaAbrangenciaTemas()");}
 		
+	},
+	/*
+	Function: ligaDesligaTemas
+	
+	Marca ou desmarca os checkbox da árvore de uma lista de temas
+	
+	Parametros:
+	
+	lista {string} - lista, separada por vírgulas, dos códigos dos temas
+	
+	status {boolean} - marca ou desmarca
+	*/
+	ligaDesligaTemas: function(lista,status){
+		var n,i;
+		lista = lista.split(",");
+		n = lista.length;
+		for(i=0;i<n;i++){
+			i3GEO.arvoreDeCamadas.capturaCheckBox(lista[i]).checked = status;
+		}
+		i3GEO.arvoreDeCamadas.aplicaTemas();
 	},
 	/*
 	Function: ativaDragDrop

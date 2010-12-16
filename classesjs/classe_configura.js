@@ -57,12 +57,20 @@ i3GEO.configura = {
 	Lista de grupos e seus respectivos layers, para montagem da árvore de camadas.
 	
 	Se essa propriedade estiver definida, as camadas serão agrupadas na árvore de camadas conforme os grupos definidos.
+	
+	Layers que não constarem nessa propriedade serão incluídos no grupo "outros"
+	
+	Ao definir grupos, a árvore não conterá as opções de mudança da prdem de desenho das camadas 
+	( veja http://localhost/i3geo/exemplos/legenda2.htm )
 
 	Por exemplo
 	i3GEO.configura.grupoLayers = [
-		{nome:"Grupo 1",layers:["zee","estadosl"]},
-		{nome:"Grupo 2",layers:["mundo"]}
-	]
+		{nome:"Grupo 1",icone:true,dinamico:true,expandido:true,layers:["zee","estadosl"]},
+		{nome:"Grupo 2",icone:false,dinamico:true,expandido:false,layers:["mundo"]}
+	];
+	
+	Onde "icone" indica se o ícone de ligar/desligar todos os temas do grupo será mostrado,
+	"dinamico" significa que o nó pode ser expandido ou não, e "expandido" significa que o nó inicia aberto se a árvore for dinâmica
 	
 	Type:
 	{JSON}
@@ -154,11 +162,11 @@ i3GEO.configura = {
 			{ id:"omenudataArquivos5",text: $trad("u20a"), url: "javascript:i3GEO.mapa.dialogo.convertekml()" }
 			],
 			"interface": [
-			{ id:"omenudataInterface1",text: "Interface normal", url: "javascript:window.location = i3GEO.configura.locaplic+'/aplicmap/'+i3GEO.parametros.interfacePadrao+'?'+i3GEO.configura.sid" },
-			{ id:"omenudataInterface2",text: "OpenLayers", url: "javascript:window.location = i3GEO.configura.locaplic+'/aplicmap/openlayers.htm?'+i3GEO.configura.sid" },
-			{ id:"omenudataInterface3",text: "Flash", url: "javascript:window.location = i3GEO.configura.locaplic+'/aplicmap/flamingo.htm?'+i3GEO.configura.sid" },
-			{ id:"omenudataInterface4",text: "Google Maps", url: "javascript:window.location = i3GEO.configura.locaplic+'/aplicmap/googlemaps.phtml?'+i3GEO.configura.sid" },
-			{ id:"omenudataInterface5",text: "Google Earth", url: "javascript:window.location = i3GEO.configura.locaplic+'/aplicmap/googleearth.phtml?'+i3GEO.configura.sid" },
+			{ id:"omenudataInterface1",text: "Interface normal", url: "javascript:window.location = i3GEO.configura.locaplic+'/interface/geral.htm?'+i3GEO.configura.sid" },
+			{ id:"omenudataInterface2",text: "OpenLayers", url: "javascript:window.location = i3GEO.configura.locaplic+'/interface/openlayers.htm?'+i3GEO.configura.sid" },
+			{ id:"omenudataInterface3",text: "Flash", url: "javascript:window.location = i3GEO.configura.locaplic+'/interface/flamingo.htm?'+i3GEO.configura.sid" },
+			{ id:"omenudataInterface4",text: "Google Maps", url: "javascript:window.location = i3GEO.configura.locaplic+'/interface/googlemaps.phtml?'+i3GEO.configura.sid" },
+			{ id:"omenudataInterface5",text: "Google Earth", url: "javascript:window.location = i3GEO.configura.locaplic+'/interface/googleearth.phtml?'+i3GEO.configura.sid" },
 			{ id:"omenudataInterface6",text: $trad("u21"), url: "javascript:var w = window.open(i3GEO.configura.locaplic+'/geradordelinks.htm')" },
 			{ id:"omenudataInterface7",text: "Serviços WMS", url: "javascript:var w = window.open(i3GEO.configura.locaplic+'/ogc.htm')" },
 			{ id:"omenudataInterface8",text: "Hiperbólica", url: "javascript:var w = window.open(i3GEO.configura.locaplic+'/hiperbolica.html')" },
