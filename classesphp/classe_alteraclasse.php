@@ -119,6 +119,7 @@ Todos os elementos passarão a ser desenhados conforme essa primeira classe, uma 
 		{
 			//elimina a expressão da primeira classe
 			$classe0 = $this->layer->getClass(0);
+			//echo "<pre>";var_dump($classe0);exit;
 			$classe0->setexpression("");
 			$classe0->set("name"," ");
 			//apaga todas as classes menos a primeira

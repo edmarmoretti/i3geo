@@ -294,7 +294,7 @@ function i3geo_gl_configura(loc_i3geo,nomeseltema,temasa,link,grupo,subgrupo,tem
 		if(temas == undefined)
 		{temas = "";}
 		$i($i3geo_gl.tema).innerHTML = "<span style=color:red >Aguarde...</span>";
-		i3GEO.arvoreDeTemas.comboTemasMenu($i3geo_gl.loc_i3geo,"$i3geo_gl.preseltema",$i3geo_gl.tema,"",idGrupo,0,"530","5","",temas)
+		i3GEO.arvoreDeTemas.comboTemasMenu($i3geo_gl.loc_i3geo,"$i3geo_gl.preseltema",$i3geo_gl.tema,"",idGrupo,idSubGrupo,"530","5","",temas)
 	}
 	/*
 	Function: preseltema

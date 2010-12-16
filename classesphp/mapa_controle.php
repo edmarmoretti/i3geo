@@ -107,6 +107,7 @@ error_reporting(0);
 //
 $tempo = microtime(1);
 include_once("pega_variaveis.php");
+$interfaceTemp = $interface;
 //
 //inicializa a sessão
 //
@@ -130,6 +131,12 @@ if ($funcao != "criaMapa")
 		{exit;}
 	}
 }
+//
+//isso é necessário pois a variável "interface" pode ser utilizada como parâmetro em algumas funções ajax
+//nesses casos, é necessário recuperar o valor correto e não da sessão
+//
+$_SESSION["interface"] = $interfaceTemp;
+$interface = $interfaceTemp;
 //
 //verifica se deve ativar o debug
 //

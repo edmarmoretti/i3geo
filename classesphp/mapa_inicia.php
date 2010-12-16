@@ -119,7 +119,7 @@ function iniciaMapa()
 		{
 			$layer = $m->getlayer($i);
 			if($layer->name == "mundo" || $layer->name == "estados")
-			{$layer->set("status",MS_OFF);}			
+			{$layer->set("status",MS_OFF);}		
 			if($layer->type == MS_LAYER_POLYGON)
 			{
 				if($layer->opacity == "");
@@ -127,6 +127,10 @@ function iniciaMapa()
 			}
 			if($layer->getProjection() == "" )
 			{$layer->setProjection("init=epsg:4291");}
+			if($layer->name == "rosadosventos")
+			{
+				$layer->set("status",MS_DELETE);
+			}
 		}
 		$temp = $m->scalebar;
 		$temp->set("status",MS_OFF);
