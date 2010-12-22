@@ -106,6 +106,36 @@ Salva o mapfile atual
 	  	$this->mapa->save($this->arquivo);
 	}
 /*
+Function: aplicacoresrgb
+
+Aplica cores nas classes atuais conforme uma lista de cores em RGB
+
+Parametro:
+
+cores {array} - array com a lista de valores RGB
+*/	
+	function aplicacoresrgb($cores)
+	{
+		if(!$this->layer){return "erro";}
+		$numclasses = $this->layer->numclasses;
+		if ($numclasses > 0)
+		{
+			for ($i=0; $i < $numclasses; $i++)
+			{
+				$classe = $this->layer->getClass($i);
+				$estilo = $classe->getstyle(0);
+				if($cores[$i])
+				{
+					$cor = explode(",",$cores[$i]);
+					$ncor = $estilo->color;
+					$ncor->setrgb($cor[0],$cor[1],$cor[2]);
+				}
+			}
+		}
+		$this->layer->setMetaData("cache","");
+		return("ok");	
+	}
+/*
 function: simbolounico
 
 Elimina as classes existentes em um objeto layer mantendo apenas a primeira classe.

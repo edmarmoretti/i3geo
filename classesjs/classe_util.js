@@ -68,9 +68,23 @@ Default:
 {false}
 */
 chro = navigator.userAgent.toLowerCase().indexOf('chrome') > -1;
-//seta as variáveis navn e navm
+/*
+Propriedade: opera
+
+Verdadeiro (true) se o navegador for o Opera
+
+Tipo:
+{boolean}
+
+Default:
+{false}
+*/
+opera = navigator.userAgent.toLowerCase().indexOf('opera') > -1;
 var app = navigator.appName.substring(0,1);
-if (app==='N'){navn=true;}else{navm=true;}
+if (app==='N'){navn=true;}
+if (app==='M'){navm=true;}
+if(opera == true)
+{navn = true;}
 /*
 Variavel: g_operacao
 
@@ -2036,6 +2050,64 @@ i3GEO.util = {
 		{return true;}
 		
 		return false;
+	},
+	/*
+	Function: abreColourRamp
+	
+	Abre a janela flutuante para escolha de um degradê de cores
+	
+	Parametros:
+	
+	janela {String} - id do conteúdo da janela flutuante que chamou a função. Pode ser "" caso elemento exista em document
+	
+	elemento {String} - id do elemento que receberá os valores da cor selecionada
+	
+	ncores {numerico} - número de cores default ao abrir  o seletor de cores
+	*/	
+	abreColourRamp: function(janela,elemento,ncores){
+		if(typeof(console) !== 'undefined'){console.info("i3GEO.util.abreColourRamp()");}
+		var ins,
+			temp,
+			novoel,
+			wdocaiframe,
+			fix = false,
+			wlargura = "300",
+			waltura = "480",
+			wsrc = i3GEO.configura.locaplic+"/ferramentas/colourramp/index.php?ncores="+ncores+"&doc="+janela+"&elemento="+elemento, //+janela+"&elemento="+elemento+"&tipo="+tipo,
+			nx = "",
+			ny = "",
+			texto = "Cor",
+			id = "i3geo_janelaCorRamp",
+			modal = true,
+			classe = "hd";
+		YAHOO.namespace("janelaCorRamp.xp");
+		if ($i(id))
+		{YAHOO.janelaCorRamp.xp.panel.destroy();}
+		ins = '<div id="'+id+'_cabecalho" class="hd">';
+		ins += "<span><img id='i3geo_janelaCorRamp_imagemCabecalho' style='visibility:hidden;' src=\'"+i3GEO.configura.locaplic+"/imagens/aguarde.gif\' /></span>";
+		ins += texto;
+		ins += '</div><div id="i3geo_janelaCorRamp_corpo" class="bd" style="padding:5px">';
+		ins += '<iframe name="'+id+'i" id="i3geo_janelaCorRampi" valign="top" ></iframe>';
+		ins += '</div>';
+		novoel = document.createElement("div");
+		novoel.id = "i3geo_janelaCorRamp";
+		novoel.style.display="block";
+		novoel.innerHTML = ins;
+		if($i("i3geo"))
+		{$i("i3geo").appendChild(novoel);}
+		else
+		{document.body.appendChild(novoel);}
+		wdocaiframe = $i("i3geo_janelaCorRampi");
+		wdocaiframe.style.display = "block";
+		wdocaiframe.src = wsrc;
+		wdocaiframe.style.height = "430px";
+		wdocaiframe.style.width = "340px";
+		wdocaiframe.style.border = "0px solid white";
+
+		if(nx === "" || nx === "center"){fix = true;}
+		YAHOO.janelaCorRamp.xp.panel = new YAHOO.widget.ResizePanel(id, { height:"480px",zIndex:5000, modal:modal, width: "350px", fixedcenter: fix, constraintoviewport: false, visible: true, iframe:false} );
+		YAHOO.janelaCorRamp.xp.panel.render();
+		$i(id+'_cabecalho').className = classe;
 	}
 };
 

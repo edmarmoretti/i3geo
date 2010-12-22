@@ -312,7 +312,6 @@ array
 					$nomeexp = $classe->getExpressionString();
 					if (function_exists("mb_convert_encoding"))
 					{$nomeexp = mb_convert_encoding($nomeexp,"UTF-8","ISO-8859-1");}
-
 					$linhas[] = array("tema"=>$l,"idclasse"=>$c,"nomeclasse"=>$nomeclasse,"expressao"=>$nomeexp,"imagem"=>$i,"proc"=>"");
 				}
 				if (($totaliza=="sim") && ($nc > 1))
@@ -326,24 +325,29 @@ array
 					for ($c = 0;$c < $nc;$c++)
 					{
 						$exp = $linhas[$c]["expressao"];
-						if($this->layer->connectiontype == MS_POSTGIS)
+						if($exp !== "")
 						{
-							$exp = str_replace("eq"," = ",$exp);
-							$exp = str_replace("ne"," != ",$exp);
-							$exp = str_replace("lt"," < ",$exp);
-							$exp = str_replace("gt"," < ",$exp);
-							$exp = str_replace("(","",$exp);
-							$exp = str_replace(")","",$exp);
-							$exp = str_replace("'[","",$exp);
-							$exp = str_replace("]'","",$exp);
-							$exp = str_replace("' [","",$exp);
-							$exp = str_replace("] '","",$exp);
-							$exp = str_replace("and"," and ",$exp);
-							$exp = str_replace("or"," or ",$exp);
-							$exp = str_replace("[","",$exp);
-							$exp = str_replace("]","",$exp);
+							if($this->layer->connectiontype == MS_POSTGIS)
+							{
+								$exp = str_replace("eq"," = ",$exp);
+								$exp = str_replace("ne"," != ",$exp);
+								$exp = str_replace("lt"," < ",$exp);
+								$exp = str_replace("gt"," < ",$exp);
+								$exp = str_replace("(","",$exp);
+								$exp = str_replace(")","",$exp);
+								$exp = str_replace("'[","",$exp);
+								$exp = str_replace("]'","",$exp);
+								$exp = str_replace("' [","",$exp);
+								$exp = str_replace("] '","",$exp);
+								$exp = str_replace("and"," and ",$exp);
+								$exp = str_replace("or"," or ",$exp);
+								$exp = str_replace("[","",$exp);
+								$exp = str_replace("]","",$exp);
+							}
+							$teste = $layer->queryByAttributes($itens[0], $exp, 1);
 						}
-						$teste = $layer->queryByAttributes($itens[0], $exp, 1);
+						else
+						{$teste = 0;}
 						if ($teste == 0)
 						{
 							$n = $layer->getNumResults();

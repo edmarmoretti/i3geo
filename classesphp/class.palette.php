@@ -23,7 +23,13 @@ i3geo/classesphp/class.palette.php
 /*
 Classe: palette
 
-Gera um degradê de cores.
+Gera um degradê de cores ou lista as peletes existentes.
+
+As cores pré-definidas são armazenadas em i3geo/symbols/colourramp
+
+Os arquivos .cores correspondem a um array serializado contendo as cores tipo $cor[0] = array("r"=>,"g"=>,"b"=>)
+
+Para cada arquivo existe um .gif com a imagem da palete
 */
 class palette{
 
@@ -53,9 +59,12 @@ $colors - Array com as cores de início e fim de palette.
 $numSteps - número de cores finais
 */
   public function __construct($colors=NULL,$numSteps=NULL){
-    if($colors!=NULL) $this->colors=$colors;
-    if($numSteps!=NULL) $this->numSteps=$numSteps;
-    $this->generate();
+    if($colors!=NULL && is_array($colors))
+	{$this->colors=$colors;}
+    if($numSteps!=NULL)
+	{$this->numSteps=$numSteps;}
+    if($colors==NULL || is_array($colors))
+	$this->generate();
   }
 
   public function generate(){
@@ -113,6 +122,39 @@ $numSteps - número de cores finais
     }
     $string.="\t</tr>\n</table>\n";
     return($string);
+  }
+  
+  public function listaColourRamps($locaplic){
+	$arquivos = array();
+	if ($dh = opendir($locaplic."/symbols/colourramp")) 
+	{
+		while (($file = readdir($dh)) !== false) 
+		{
+			if(!stristr($file, '.cores') === FALSE)
+			{
+				$arquivos[] = str_replace(".cores","",basename($file));
+			}
+		}
+	}
+	closedir($dh);
+	return $arquivos;
+  }
+  public function geraCoresColourRamp($locaplic="",$codigo=1,$inicio=0,$fim=255,$ncores=0){
+	//error_reporting(E_ALL);
+	$arq = $locaplic."/symbols/colourramp/".$codigo.".cores";
+	$handle = fopen ($arq, "r");
+	$conteudo = fread ($handle, filesize ($arq));
+	fclose ($handle);
+	$cores = unserialize($conteudo);
+	if($ncores == 0)
+	{return $cores;}
+	$coresfinais = array();
+	$p = intval(($fim - $inicio) / $ncores);
+	for($i=$inicio;$i<=$fim;$i = $i + $p){
+		if(count($coresfinais) < $ncores)
+		$coresfinais[] = $cores[$i];
+	}
+	return $coresfinais;
   }
 }
 ?>

@@ -471,7 +471,7 @@ i3GEO.arvoreDeCamadas = {
 			for(i=0;i<c; i++){
 				temp = "";
 				if(i3GEO.configura.grupoLayers[i].icone && i3GEO.configura.grupoLayers[i].icone==true){
-					temp += "<p style="+estilo+" ><input style=cursor:pointer onclick='i3GEO.arvoreDeCamadas.ligaDesligaTemas(\""+i3GEO.configura.grupoLayers[i].layers+"\",this.checked)' type=checkbox title='Ligar/desligar temas do grupo' />&nbsp;";
+					temp += "<p style="+estilo+" ><input class=inputsb style=cursor:pointer onclick='i3GEO.arvoreDeCamadas.ligaDesligaTemas(\""+i3GEO.configura.grupoLayers[i].layers+"\",this.checked)' type=checkbox title='Ligar/desligar temas do grupo' />&nbsp;";
 				}
 				temp += "<span style="+estilo+";vertical-align:top ><b>"+i3GEO.configura.grupoLayers[i].nome+"</b></span></p>";
 				d = {html:temp};
@@ -559,13 +559,18 @@ i3GEO.arvoreDeCamadas = {
 	status {boolean} - marca ou desmarca
 	*/
 	ligaDesligaTemas: function(lista,status){
-		var n,i;
+		var n,i,aplica = false;
 		lista = lista.split(",");
 		n = lista.length;
 		for(i=0;i<n;i++){
+			if(i3GEO.arvoreDeCamadas.capturaCheckBox(lista[i]).checked != status)
+			{aplica = true;}
 			i3GEO.arvoreDeCamadas.capturaCheckBox(lista[i]).checked = status;
+			if(aplica == true && i3GEO.Interface.ATUAL !== "padrao")
+			{i3GEO.arvoreDeCamadas.capturaCheckBox(lista[i]).onclick.call();}
 		}
-		i3GEO.arvoreDeCamadas.aplicaTemas();
+		if(aplica == true && i3GEO.Interface.ATUAL == "padrao")
+		{i3GEO.arvoreDeCamadas.aplicaTemas();}
 	},
 	/*
 	Function: ativaDragDrop
@@ -762,7 +767,7 @@ i3GEO.arvoreDeCamadas = {
 			if(ltema.permitecomentario.toLowerCase() !== "nao" && i3GEO.arvoreDeTemas.OPCOESADICIONAIS.comentarios == true)
 			{
 				temp = i3GEO.configura.locaplic+"/ms_criamapa.php?layers="+ltema.name;
-				tnome = "<iframe src='http://www.facebook.com/plugins/like.php?href="+temp+"&amp;layout=button_count&amp;show_faces=false&amp;width=100&amp;action=like&amp;colorscheme=light&amp;height=21' scrolling='no' frameborder='0' style='border:none; overflow:hidden; width:100px; height:21px;' allowTransparency='true'></iframe>";			
+				tnome = "<iframe src='http://www.facebook.com/plugins/like.php?href="+temp+"&amp;layout=button_count&amp;show_faces=false&amp;width=200&amp;action=like&amp;colorscheme=light&amp;height=21' scrolling='no' frameborder='0' style='border:none; overflow:hidden; width:200px; height:21px;' allowTransparency='true'></iframe>";			
 				d = {html:tnome};
 				iconesNode = new YAHOO.widget.HTMLNode(d, node, false,true);
 				iconesNode.enableHighlight = false;
@@ -1170,7 +1175,8 @@ i3GEO.arvoreDeCamadas = {
 		if(tipo === "desligartodos"){
 			ligar = "";
 			desligar = t[2].toString();
-		}		
+		}
+		
 		i3GEO.php.ligatemas(temp,desligar,ligar);
 	},
 	/*

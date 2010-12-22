@@ -115,9 +115,7 @@ if ($funcao != "criaMapa")
 {
 	session_name("i3GeoPHP");
 	if (isset($g_sid) && $g_sid != "")
-	{
-		session_id($g_sid);
-	}
+	{session_id($g_sid);}
 	session_start();
 	foreach(array_keys($_SESSION) as $k)
 	{
@@ -1425,6 +1423,13 @@ Altera uma classe de um tema, aplicando uma nova classificação ou modificando pa
 			$projMapa = $m->mapa->getProjection();
 			$m->mapa->setProjection("init=epsg:4291");
 		}
+		if ($opcao == "aplicacoresrgb")
+		{
+			$cores = str_replace("rgb","",$cores);
+			$cores = str_replace(")","",$cores);
+			$cores = str_replace("(","",$cores);
+			$retorno = $m->aplicacoresrgb(explode(";",$cores));
+		}			
 		if ($opcao == "alteracor")
 		{$retorno = $m->alteracor($idclasse,$cor);}		
 		if ($opcao == "adicionaopacidade")
@@ -2334,6 +2339,16 @@ Processa a legenda do mapa e de temas específicos.
 
 <classe_legenda.php>
 */
+/*
+Valor: GERACORESCOLOURRAMP
+
+Retorna uma lista de valores RGB de cores geradas com base nsa grades de cores existentes (ver i3geo/symbols/colourramps)
+*/
+	case "GERACORESCOLOURRAMP":
+		include_once("class.palette.php");
+		$m = new palette();
+		$retorno = $m->geraCoresColourRamp("..",$codigo,$inicio,$fim,$ncores);
+	break;
 /*
 Valor: EDITASIMBOLO
 
