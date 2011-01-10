@@ -84,7 +84,6 @@ $ext - extensão geográfica do mapa
 
 	function __construct($map_file,$tema="",$ext="")
 	{
-  		//error_reporting(E_ALL);
 		$this->qyfile = str_replace(".map",".qy",$map_file);
   		if($tema != "")
 		{$this->qyfileTema = dirname($map_file)."/".$tema.".php";}
@@ -137,7 +136,7 @@ $ys - lista de coordenadas y separadas por virgula
 		if ($tipo == "novo")
 		{
 			$this->selecaoLimpa();
-			$tipo = "adiciona"
+			$tipo = "adiciona";
 		}		
 		if ($tipo == "limpa")
 		{return($this->selecaoLimpa());}
@@ -204,7 +203,7 @@ $tipo - Tipo de operação adiciona|retira|inverte|limpa|novo
 		if ($tipo == "novo")
 		{
 			$this->selecaoLimpa();
-			$tipo = "adiciona"
+			$tipo = "adiciona";
 		}
 		if ($tipo == "limpa")
 		{return($this->selecaoLimpa());}
@@ -376,7 +375,7 @@ $valor - Valor.
 		if ($tipo == "novo")
 		{
 			$this->selecaoLimpa();
-			$tipo = "adiciona"
+			$tipo = "adiciona";
 		}
 		if ($tipo == "limpa")
 		{return($this->selecaoLimpa());}
@@ -457,7 +456,7 @@ $valor - Valor.
 		if ($tipo == "novo")
 		{
 			$this->selecaoLimpa();
-			$tipo = "adiciona"
+			$tipo = "adiciona";
 		}	
 		if ($tipo == "limpa")
 		{return($this->selecaoLimpa());}
@@ -524,27 +523,13 @@ $tipo - Tipo de operação adiciona|retira|inverte|limpa|novo
 		if ($tipo == "novo")
 		{
 			$this->selecaoLimpa();
-			$tipo = "adiciona"
+			$tipo = "adiciona";
 		}	
 		if ($tipo == "limpa")
 		{return ($this->selecaoLimpa());}
 		if ($tipo == "inverte")
 		{return ($this->selecaoInverte());}
 		if(!$this->layer){return "erro";}
-		/*
-		$shp_atual = array();
-		if (file_exists($this->qyfile))
-		{$this->mapa->loadquery($this->qyfile);}
-		$indxlayer = $this->layer->index;
-		$res_count = $this->layer->getNumresults();
-		$shp_atual = array();
-		for ($i = 0; $i < $res_count;++$i)
-		{
-			$rc = $this->layer->getResult($i);
-			$shp_atual[] = $rc->shapeindex;
-		}
-		$this->mapa->freequery($indxlayer);
-		*/
 		$shp_atual = array();
 		if($this->qyfileTema != "" && file_exists($this->qyfileTema))
 		{$shp_atual = $this->unserializeQ($this->qyfileTema);}
@@ -794,7 +779,7 @@ $tipo - Tipo de operação adiciona|retira|inverte|limpa|novo
 		if ($tipo == "novo")
 		{
 			$this->selecaoLimpa();
-			$tipo = "adiciona"
+			$tipo = "adiciona";
 		}	
 		if(!$this->layer){return "erro";}
 		$this->layer->set("tolerance",0);
@@ -853,7 +838,7 @@ $ext - coordenadas separadas por espaços no estilo xmin ymin xmax ymax
 		if ($tipo == "novo")
 		{
 			$this->selecaoLimpa();
-			$tipo = "adiciona"
+			$tipo = "adiciona";
 		}
 		if(!$this->layer){return "erro";}
 		$this->layer->set("tolerance",0);

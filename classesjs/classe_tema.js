@@ -260,6 +260,30 @@ i3GEO.tema = {
 		i3GEO.janela.abreAguarde("i3GEO.atualiza",$trad("o1"));
 		//i3GEO.contadorAtualiza++;
 		i3GEO.php.invertestatuslegenda(temp,idtema);
+	},
+	/*
+	Function: alteracorclasse
+
+	Altera a cor de uma classe de um tema
+
+	Parametros:
+
+	idtema - código do tema
+	
+	idclasse - id da classe
+	
+	rgb - nova cor (r,g,b)
+	*/
+	alteracorclasse: function(idtema,idclasse,rgb){
+		if(typeof(console) !== 'undefined'){console.info("i3GEO.tema.alteracorclasse()");}
+		i3GEO.mapa.ativaTema(idtema);
+		var temp = function(){
+			i3GEO.atualiza();
+			i3GEO.Interface.atualizaTema("",idtema);
+			i3GEO.arvoreDeCamadas.atualizaLegenda(idtema);
+		};
+		i3GEO.janela.abreAguarde("i3GEO.atualiza",$trad("o1"));
+		i3GEO.php.aplicaCorClasseTema(temp,idtema,idclasse,rgb);
 	},	
 	/*
 	Function: mudanome

@@ -143,7 +143,7 @@ i3GEOF.selecao = {
 		'	<img onclick="i3GEOF.selecao.operacao(\'inverte\')" src="'+i3GEO.configura.locaplic+'/imagens/gisicons/undo.png" title="Inverte a selecao" style="cursor:pointer;border:1px solid RGB(230,230,230);" />' +
 		'	<img onclick="i3GEOF.selecao.operacao(\'limpa\')" src="'+i3GEO.configura.locaplic+'/imagens/gisicons/erase.png" title="Limpa a selecao" style="cursor:pointer;border:1px solid RGB(230,230,230);" />' +
 		'	<img onclick="i3GEOF.selecao.criatema()" src="'+i3GEO.configura.locaplic+'/imagens/gisicons/save1.png" title="Salva a selecao como um novo tema" style="cursor:pointer;border:1px solid RGB(230,230,230);" />' +
-		'	&nbsp;<select title="Tipo de operacao" style=position:relative;top:-8px; id=i3GEOselecaotipoOperacao >' +
+		'	<br><select title="Tipo de operacao" style=position:relative;top:6px; id=i3GEOselecaotipoOperacao >' +
 		'	<option value="adiciona" >Adicionar à seleção</option>' +
 		'	<option value="novo" >Nova seleção</option>' +		
 		'	<option value="retira" >Retirar da seleção</option>' +

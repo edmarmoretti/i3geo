@@ -494,10 +494,7 @@ i3GEOF.legenda = {
 			i3GEOF.legenda.aguarde.visibility = "hidden";
 			i3GEOF.legenda.mostralegenda();
 		};
-		var p = i3GEO.configura.locaplic+"/classesphp/mapa_controle.php?g_sid="+i3GEO.configura.sid+"&funcao=alteraclasse&opcao=alteracor&tema="+i3GEOF.legenda.tema+"&idclasse="+id+"&cor="+$i("tempCor").value,
-			cp = new cpaint();
-		cp.set_response_type("JSON");
-		cp.call(p,"",retorna);
+		i3GEO.php.aplicaCorClasseTema(retorna,i3GEOF.legenda.tema,id,$i("tempCor").value);
 	},
 	/*
 	Function: mudaLegenda

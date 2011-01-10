@@ -1007,6 +1007,39 @@ i3GEO.arvoreDeCamadas = {
 		}
 	},
 	/*
+	Function: escolheCorClasse
+	
+	Abre uma janela para escolher uma nova cor para o símbolo da classe.
+	
+	A chamada dessa função é definida em aplicmap/legenda2.htm
+	
+	Parametro:
+	
+	leg {Object input} - objeto do tipo INPUT com o id da classe e o id do tema
+	*/
+	escolheCorClasse: function (leg){
+		//cria um elemento que receberá a escolha da cor e que irá disparar a função de mudança de cor da classe
+		var obj,novoel;
+		leg = leg.parentNode.getElementsByTagName("input")[0];
+		if(!$i("tempinputcorclasse")){
+			novoel = document.createElement("input");
+			novoel.id = "tempinputcorclasse";
+			novoel.style.display="none";
+			novoel.alt = "objeto criado para guardar dados da funcao escolohercorclasse";
+			novoel.onchange = "";
+			document.body.appendChild(novoel);
+		}
+		obj = $i("tempinputcorclasse");
+		obj.value = "";
+		obj.tema = leg.name;
+		obj.idclasse = leg.value;
+		obj.onchange = function(){
+			var obj = $i("tempinputcorclasse");
+			i3GEO.tema.alteracorclasse(obj.tema,obj.idclasse,obj.value);
+		};
+		i3GEO.util.abreCor("","tempinputcorclasse");
+	},	
+	/*
 	Function: inverteStatusClasse
 	
 	Liga ou desliga uma classe da legenda.

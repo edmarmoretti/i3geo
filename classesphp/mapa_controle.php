@@ -2617,7 +2617,7 @@ Seleciona elementos utilizando um retângulo.
 		$temas = explode(",",$tema);
 		foreach($temas as $tema)
 		{
-			$m = new Selecao($map_file,$tema);
+			$m = new Selecao($map_file,$tema,$ext);
 			if($interface == "googlemaps")
 			{
 				$projMapa = $m->mapa->getProjection();
@@ -2625,7 +2625,6 @@ Seleciona elementos utilizando um retângulo.
 			}			
 			$ok[] = $m->selecaoBOX($tipo,$ext);
 		}
-		
 		redesenhaMapa();		
 	break;
 

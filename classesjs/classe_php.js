@@ -746,6 +746,16 @@ i3GEO.php = {
 		cpJSON.call(p,"invertestatuslegenda",funcao);	
 	},
 	/*
+	Function: aplicaCorClasseTema
+
+	<APLICACORCLASSETEMA>	
+	*/
+	aplicaCorClasseTema: function(funcao,idtema,idclasse,rgb){
+		i3GEO.php.verifica();
+		var p = i3GEO.configura.locaplic+"/classesphp/mapa_controle.php?funcao=alteraclasse&opcao=alteracor&tema="+idtema+"&idclasse="+idclasse+"&cor="+rgb+"&g_sid="+i3GEO.configura.sid;
+		cpJSON.call(p,"aplicaCorClasseTema",funcao);	
+	},
+	/*
 	Function: mudatransp
 
 	<MUDATRANSP>	
