@@ -1422,6 +1422,11 @@ i3GEO.arvoreDeCamadas = {
    			while(i < nelementos);
    		}
 	},
+	/*
+	Function: verificaAbrangenciaTemas
+	
+	Verifica se um tema está ou não na abrangência espacial do mapa atual modificando a cor com que o nome é mostrado na árvore
+	*/
 	verificaAbrangenciaTemas: function(){
     	if(typeof(console) !== 'undefined'){console.info("i3GEO.arvoreDeCamadas.verificaAbrangenciaTemas()");}
     	if(i3GEO.arvoreDeCamadas.VERIFICAABRANGENCIATEMAS == false)
@@ -1454,5 +1459,35 @@ i3GEO.arvoreDeCamadas = {
 			}
 		}
 		catch(e){}
-	}
+	},
+	/*
+	Function: verificaAplicaExtensao
+	
+	Verifica se algum tema está marcado com o metadado Aplicaextensao. Retorna a primeira ocorrência se houver
+	
+	Return:
+	
+	{string} código do tema ou ""
+	*/
+	verificaAplicaExtensao: function(){
+    	if(typeof(console) !== 'undefined'){console.info("i3GEO.arvoreDeCamadas.verificaAplicaExtensao()");}
+		try{
+			var i = 0,
+				temp = "",
+				nelementos = i3GEO.arvoreDeCamadas.CAMADAS.length,
+				ltema;
+			if (nelementos > 0){
+				do{
+					ltema = i3GEO.arvoreDeCamadas.CAMADAS[i];
+					if(ltema.aplicaextensao == "sim"){
+						temp = ltema.name;
+					}
+					i++;        		
+				}
+				while(i < nelementos);
+			}
+		}
+		catch(e){return "";}
+		return temp;
+	}	
 };

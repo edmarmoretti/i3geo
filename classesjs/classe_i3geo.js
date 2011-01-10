@@ -484,6 +484,12 @@ i3GEO = {
 				i3GEO.navega.entorno.ajustaPosicao();
 			}
 			i3GEO.ajuda.mostraJanela("Tempo de redesenho em segundos: "+retorno.data.variaveis.tempo,"");
+			//
+			//verifica se deve ser feito o zoom em algum tema
+			//
+			var temp = i3GEO.arvoreDeCamadas.verificaAplicaExtensao();
+			if(temp != "")
+			{i3GEO.tema.zoom(temp)}
 		}	
 	},
 	/*

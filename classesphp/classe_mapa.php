@@ -231,6 +231,9 @@ string - javascript com os parametros
 				$permitecomentario = "nao";
 				if($oLayer->getmetadata("nomeoriginal") != "" && strtoupper($oLayer->getmetadata("pemitecomentario")) != "NAO")
 				{$permitecomentario = "sim";}
+				$aplicaextensao = "nao";
+				if(strtoupper($oLayer->getmetadata("aplicaextensao")) == "SIM")
+				{$aplicaextensao = "sim";}
 				$temas[] = array(
 					"name"=>($oLayer->name),
 					"status"=>($oLayer->status),
@@ -252,7 +255,8 @@ string - javascript com os parametros
 					"iconetema"=>($oLayer->getmetadata("iconetema")),
 					"classe"=>($oLayer->getmetadata("classe")),
 					"permitecomentario"=>$permitecomentario,
-					"exttema"=>$exttema
+					"exttema"=>$exttema,
+					"aplicaextensao"=>$aplicaextensao
 				);
 			}
 		}
@@ -924,8 +928,8 @@ $random - indica se os nomes dos novos layers serão modificados ou nao
 						//
 						//verifica se deve ser feito o zoom para o tema
 						//
-						if(strtolower($l->getmetadata("aplicaextensao")) == "sim")
-						{$zoomlayer = $nlayer->name;}
+						//if(strtolower($l->getmetadata("aplicaextensao")) == "sim")
+						//{$zoomlayer = $nlayer->name;}
 						//reposiciona o layer se for o caso
 						if ($l->group == "")
 						{
@@ -955,7 +959,8 @@ $random - indica se os nomes dos novos layers serão modificados ou nao
 		}
 		//
 		//faz o zoom para o tema se for o caso
-		//
+		//essa função foi desabilitada
+		/*
 		if($zoomlayer != "")
 		{
 			$this->salva();
@@ -968,6 +973,7 @@ $random - indica se os nomes dos novos layers serão modificados ou nao
 			//
 			return(false);
 		}
+		*/
 		return(true);
 	}
 /*

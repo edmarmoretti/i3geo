@@ -29,6 +29,8 @@ MAP
       "identifica"	"NAO"
       "editorsql"	""
       "ltempoitemfim"	""
+	      "extensao" "-44 -23 -39 -21"
+    "aplicaextensao" "SIM"
     END
     NAME "biomashp"
     STATUS OFF

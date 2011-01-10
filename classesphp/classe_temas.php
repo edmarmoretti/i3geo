@@ -387,6 +387,10 @@ Calcula a extensão geográfica de um tema e ajusta o mapa para essa extensão.
 		}	
 		$extatual = $this->mapa->extent;
 		$ret = $this->layer->getmetadata("extensao");
+		//
+		//necessário para evitar que em qualquer redesenho do mapa, seja aplicado o zoom para o tema marcado com aplicaextensao
+		//
+		$this->layer->setmetadata("aplicaextensao","");
 		if($ret == "" && $this->layer->type == MS_LAYER_RASTER)
 		{$ret = "-75.233614607 -33.7515829981 -27.592958622 5.272156";}
 		if ($ret == "")
@@ -405,6 +409,7 @@ Calcula a extensão geográfica de um tema e ajusta o mapa para essa extensão.
 		{
 			$ret = explode(" ",$ret);
 			$extatual->setextent($ret[0],$ret[1],$ret[2],$ret[3]);
+			//echo "oi";exit;
 		}
 		return("ok");
 	}

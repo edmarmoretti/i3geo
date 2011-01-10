@@ -1145,7 +1145,7 @@ $listaDeTemas - (opcional) Lista com os códigos dos temas que serão identificado
 			$mapa = desligamargem($mapa);
 			$imgo = $mapa->draw();
 
-			$formatoinfo = "MIME";
+			//$formatoinfo = "MIME";
 			$formatosinfo = $layer->getmetadata("formatosinfo");
 			if ($formatosinfo != "")
 			{
@@ -1157,6 +1157,14 @@ $listaDeTemas - (opcional) Lista com os códigos dos temas que serão identificado
 					{$formatoinfo = "text/plain";}
 				}						
 			}
+			else
+			{
+				$formatoinfo = $layer->getmetadata("wms_feature_info_type");
+				if($formatoinfo == "")
+				{$formatoinfo = $layer->getmetadata("wms_feature_info_mime_type");}
+				if($formatoinfo == "")
+				{$formatoinfo = "text/plain";}
+			}			
 			/*
 			$srs = $layer->getmetadata("wms_srs");
 			$srss = explode(" ",$srs);
@@ -1193,32 +1201,39 @@ $listaDeTemas - (opcional) Lista com os códigos dos temas que serão identificado
 			}
 	*/
 			$n = array();
-			foreach($resposta as $r)
+			if(strtoupper($formatoinfo) == "TEXT/HTML")
 			{
-				$t = explode("=",$r);
-				$v = str_replace("\\n","",$t[1]);
-				$v = str_replace("\\r","",$v);
-				if(trim($v) != "")
-				{
-					$va = trim($v);
-					$va = $this->converte($va);
-					$n[] = array("alias"=>trim($t[0]),"valor"=>$va,"link"=>"","img"=>"");
-				}
+				$n[] = array("alias"=>"","valor"=>"<iframe width=270px src='".$res."'></iframe>","link"=>"","img"=>"");
 			}
-			//caso esri
-			if($n[0] == "")
+			else
 			{
-				//error_reporting(E_ALL);
-				$resposta = file($res);
-				$cabecalho = str_replace('"   "','"|"',$resposta[0]);
-				$cabecalho = explode("|",$cabecalho);
-				
-				$linha = str_replace('"  "','"|"',$resposta[1]);
-				$linha = explode("|",$linha);
-				for($i=0;$i < count($cabecalho);++$i)
+				foreach($resposta as $r)
 				{
-					$va = $this->converte($linha[$i]);
-					$n[] = array("alias"=>$cabecalho[$i],"valor"=>$va,"link"=>"","img"=>"");
+					$t = explode("=",$r);
+					$v = str_replace("\\n","",$t[1]);
+					$v = str_replace("\\r","",$v);
+					if(trim($v) != "")
+					{
+						$va = trim($v);
+						$va = $this->converte($va);
+						$n[] = array("alias"=>trim($t[0]),"valor"=>$va,"link"=>"","img"=>"");
+					}
+				}
+				//caso esri
+				if($n[0] == "")
+				{
+					//error_reporting(E_ALL);
+					$resposta = file($res);
+					$cabecalho = str_replace('"   "','"|"',$resposta[0]);
+					$cabecalho = explode("|",$cabecalho);
+					
+					$linha = str_replace('"  "','"|"',$resposta[1]);
+					$linha = explode("|",$linha);
+					for($i=0;$i < count($cabecalho);++$i)
+					{
+						$va = $this->converte($linha[$i]);
+						$n[] = array("alias"=>$cabecalho[$i],"valor"=>$va,"link"=>"","img"=>"");
+					}
 				}
 			}
 			$n[] = array("alias"=>"Link WMS","valor"=>"getfeatureinfo ".$formatoinfo,"link"=>$res,"img"=>"");

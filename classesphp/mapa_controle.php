@@ -964,7 +964,7 @@ Adiciona um novo tema ao mapa.
 		$m = new Mapa($map_file);
 		$salvar = $m->adicionaTema($temas,$locaplic);
 		if($salvar)
-		$m->salva();
+		{$m->salva();}
 		$retorno = "ok";
 		if($interface != "openlayers"){
 			$teste = testaMapa($map_file,$postgis_mapa);

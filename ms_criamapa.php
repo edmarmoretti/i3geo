@@ -567,6 +567,10 @@ function incluiTemasIniciais()
 					{$layern->set("data",$locaplic."/aplicmap/dados/estados.shp");}
 					$layern->setmetadata("NOMEORIGINAL",$layern->name);
 					autoClasses(&$layern,$mapn);
+					//
+					//necessário para não alterar a extensão do mapa por esse parâmetro
+					//
+					$layern->setmetadata("aplicaextensao","");
 					ms_newLayerObj(&$mapn, $layern);
 				}
 			}	
