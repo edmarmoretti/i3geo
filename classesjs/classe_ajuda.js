@@ -150,17 +150,20 @@ i3GEO.ajuda = {
 	abreJanela: function(){
 		if(typeof(console) !== 'undefined'){console.info("i3GEO.ajuda.abreJanela()");}
 		try	{
-			var nx,ny,pos,corpo,texto,janela;				
+			var nx,ny,pos,corpo,texto,janela,largura=262;				
 			if(i3GEO.ajuda.ATIVAJANELA === false){return;}
+			if($i("contemFerramentas")){
+				largura = parseInt($i("contemFerramentas").style.width,10) - 3;
+			}			
 			if (!$i("janelaMenTexto")){
 				corpo = $i(i3GEO.Interface.IDCORPO);
 				if(corpo){
 					pos = YAHOO.util.Dom.getXY(corpo);
-					nx = pos[0] - 267;
-					ny = i3GEO.parametros.h - 70;
+					nx = pos[0] - largura - 3;
+					ny = i3GEO.parametros.h - 78;
 				}
 				texto = '<div id="janelaMenTexto" style="text-align:left;font-size:10px;color:rgb(80,80,80)">'+i3GEO.ajuda.MENSAGEMPADRAO+'</div>';
-				janela = i3GEO.janela.cria("262","auto","",nx,ny,"&nbsp;","i3geo_janelaMensagens",false);
+				janela = i3GEO.janela.cria(largura,"auto","",nx,ny,"&nbsp;","i3geo_janelaMensagens",false);
 				janela[2].innerHTML = texto;
 				YAHOO.util.Event.addListener(janela[0].close, "click", i3GEO.ajuda.fechaJanela);
 				i3GEO.ajuda.ativaCookie();
@@ -266,7 +269,7 @@ i3GEO.ajuda = {
 	*/
 	mostraJanela: function(texto){
 		if(typeof(console) !== 'undefined'){console.info("i3GEO.ajuda.mostraJanela()");}
-		var j,k;
+		var j,k,h;
 		j = $i(i3GEO.ajuda.DIVAJUDA);
 		if(j){
 			if (texto === ""){j.innerHTML="-";}
@@ -275,6 +278,8 @@ i3GEO.ajuda = {
 		}
 		else{
 			k = $i("janelaMenTexto");
+			h = parseInt(YAHOO.util.Dom.getStyle("i3geo_janelaMensagens","height"),10);
+			YAHOO.util.Dom.setY("i3geo_janelaMensagens",YAHOO.util.Dom.getY("i3geo_janelaMensagens") + h);
 			if(k && i3GEO.ajuda.TRANSICAOSUAVE){
 				j = $i("i3geo_janelaMensagens");
 				if(texto !== ""){
@@ -290,7 +295,9 @@ i3GEO.ajuda = {
 					{j.style.opacity= i3GEO.ajuda.OPACIDADE / 100;}								
 				}
 			}
-			if(k){k.innerHTML= texto;}
+			if(k){k.innerHTML = texto;}
+			h = parseInt(YAHOO.util.Dom.getStyle("i3geo_janelaMensagens","height"),10);
+			YAHOO.util.Dom.setY("i3geo_janelaMensagens",YAHOO.util.Dom.getY("i3geo_janelaMensagens") - h);
 		}
 	},
 	/*
