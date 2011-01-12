@@ -175,7 +175,6 @@ i3GEO.configura.locaplic = i3GEO.util.protocolo()+"://"+window.location.host+"/i
 
 i3GEO.Interface.ATUAL = "openlayers";
 i3GEO.Interface.IDCORPO = "contemImg";
-i3GEO.configura.diminuixN = 20
 
 i3GEO.Interface.openlayers.GADGETS = {
 		PanZoomBar:true,
@@ -193,15 +192,17 @@ i3GEO.cria();
 /*
 	Inicializa o mapa
 */
-i3GEO.barraDeBotoes.AUTOALTURA = false;
+i3GEO.barraDeBotoes.AUTOALTURA = true;
 i3GEO.barraDeBotoes.ATIVAMENUCONTEXTO = false;
 i3GEO.barraDeBotoes.PERMITEFECHAR = true;
 i3GEO.barraDeBotoes.PERMITEDESLOCAR = true;
 i3GEO.barraDeBotoes.AUTO = true;
 i3GEO.barraDeBotoes.COMPORTAMENTO = "laranja";
 
-i3GEO.Interface.BARRABOTOESLEFT = 50;
-i3GEO.Interface.BARRABOTOESTOP = 10;
+i3GEO.Interface.BARRABOTOESLEFT = 0;
+i3GEO.Interface.BARRABOTOESTOP = 2;
+i3GEO.Interface.BARRADEZOOMTOP = 10;
+i3GEO.Interface.BARRADEZOOMLEFT = 40;
 
 i3GEO.idioma.IDSELETOR = "seletorIdiomas";
 i3GEO.Interface.ATIVAMENUCONTEXTO = false;

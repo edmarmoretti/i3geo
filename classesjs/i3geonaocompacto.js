@@ -68,7 +68,7 @@ for (i = 0; i < jsfiles.length; i++)
 var allCssTags = "";
 var cssfiles = new Array(
 "../css/geral.css",
-"../css/botoes.css",
+"../css/botoes2.css",
 "../css/documentation.css",
 "../pacotes/yui270/build/logger/assets/skins/sam/logger.css",
 "../pacotes/yui270/build/fonts/fonts-min.css",

@@ -265,7 +265,7 @@ i3GEO.configura = {
 	Default:
 	{13}
 	*/
-	diminuixM: 13,
+	diminuixM: 0,
 	/*
 	Propriedade: diminuixN
 
@@ -278,7 +278,7 @@ i3GEO.configura = {
 	Default:
 	{11}
 	*/
-	diminuixN: 18,
+	diminuixN: 0,
 	/*
 	Propriedade: diminuiyM
 
@@ -291,7 +291,7 @@ i3GEO.configura = {
 	Default:
 	{106}
 	*/
-	diminuiyM: 106,
+	diminuiyM: 100,
 	/*
 	Propriedade: diminuiyN
 
@@ -304,7 +304,7 @@ i3GEO.configura = {
 	Default:
 	{103}
 	*/
-	diminuiyN: 103,
+	diminuiyN: 100,
 	/*
 	Propriedade: map3d
 

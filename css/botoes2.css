@@ -1,8 +1,5 @@
-/*
-utiliza botões antigos até a versão 4.4 do i3geo
-*/
 #uploadgpx,#metar,#carouselTemas,#identificaBalao,#rota,#buscafotos,#area,#confluence,#scielo,#wiki,#inseregrafico,#realca,#reinicia,#google,#zoomtot,#pan,#zoomli,#zoomlo,#zoomiauto,#zoomoauto,#identifica,#lentei,#reinicia,#exten,#selecao,#inserexy,#textofid,#mede,#perfil,#cruza,#tamanho,#imprimir,#salva,#carrega,#referencia,#pegaimagens,#v3d
-{cursor:pointer;border: 0px solid rgb(50,50,50);border-bottom:1px solid rgb(50,50,50);border-left:1px solid rgb(50,50,50);width:22;height:22;z-index:1000;position:relative;}
+{margin:2px;cursor:pointer;border: 0px solid rgb(50,50,50);border-bottom:1px solid rgb(50,50,50);border-left:1px solid rgb(50,50,50);width:24;height:24;z-index:1000;position:relative;}
 #box1
 {font-size:0px;cursor:crosshair;opacity:.25;background-color: gray;position: absolute;visibility: hidden;width: 0px;height: 0px;border: 2px solid #ff0000;}
 #boxg
@@ -28,134 +25,162 @@ utiliza botões antigos até a versão 4.4 do i3geo
 {background-image:URL('../imagens/carrega.gif');}
 #salva
 {background-image:URL('../imagens/salva.gif');}
-#imprimir
-{
-	background-image:URL('../imagens/visual/default/sprite.png');
-	background-repeat: no-repeat;
-	background-position: 0px 0px;
-}
 #tamanho
 {background-image:URL('../imagens/amp.gif');}
 #cruza
 {background-image:URL('../imagens/cruzapt.png');}
 #perfil
 {background-image:URL('../imagens/perfil.gif');}
-#mede
-{
-	background-image:URL('../imagens/visual/default/sprite.png');
-	background-repeat: no-repeat;
-	background-position: 0px -25px;
-}
-#textofid
-{
-	background-image:URL('../imagens/visual/default/sprite.png');
-	background-repeat: no-repeat;
-	background-position: 0px -50px;
-}
-#inserexy
-{
-	background-image:URL('../imagens/visual/default/sprite.png');
-	background-repeat: no-repeat;
-	background-position: 0px -75px;
-}
-#selecao
-{
-	background-image:URL('../imagens/visual/default/sprite.png');
-	background-repeat: no-repeat;
-	background-position: 0px -100px;
-}
-#exten
-{
-	background-image:URL('../imagens/visual/default/sprite.png');
-	background-repeat: no-repeat;
-	background-position: 0px -125px;
-}
-#reinicia
-{
-	background-image:URL('../imagens/visual/default/sprite.png');
-	background-repeat: no-repeat;
-	background-position: 0px -150px;
-}
-#lentei
-{
-	background-image:URL('../imagens/visual/default/sprite.png');
-	background-repeat: no-repeat;
-	background-position: 0px -175px;
-}
-#identificaBalao
-{
-	background-image:URL('../imagens/visual/default/sprite.png');
-	background-repeat: no-repeat;
-	background-position: 0px -200px;
-	cursor:pointer;
-}
-#zoomtot
-{
-	background-image:URL('../imagens/visual/default/sprite.png');
-	background-repeat: no-repeat;
-	background-position: 0px -225px;
-}
-#pan
-{
-	background-image:URL('../imagens/visual/default/sprite.png');
-	background-repeat: no-repeat;
-	background-position: 0px -250px;
-}
-#google
-{
-	background-image:URL('../imagens/visual/default/sprite.png');
-	background-repeat: no-repeat;
-	background-position: 0px -275px;
-}
-#referencia
-{
-	background-image:URL('../imagens/visual/default/sprite.png');
-	background-repeat: no-repeat;
-	background-position: 0px -300px;
-}
 #pegaimagens
 {background-image:URL('../imagens/legend.gif');}
 #realca
 {background-image:URL('../imagens/realca.gif');}
 #zoomlo
 {background-image:URL('../imagens/zoomlo.gif');}
+
+#imprimir
+{
+	background-image:URL('../imagens/visual/default/sprite2.png');
+	background-repeat: no-repeat;
+	background-position: 0px 0px;
+}
+#mede
+{
+	background-image:URL('../imagens/visual/default/sprite2.png');
+	background-repeat: no-repeat;
+	background-position: 0px -24px;
+}
+#textofid
+{
+	background-image:URL('../imagens/visual/default/sprite2.png');
+	background-repeat: no-repeat;
+	background-position: 0px -48px;
+}
+#inserexy
+{
+	background-image:URL('../imagens/visual/default/sprite2.png');
+	background-repeat: no-repeat;
+	background-position: 0px -72px;
+}
+#selecao
+{
+	background-image:URL('../imagens/visual/default/sprite2.png');
+	background-repeat: no-repeat;
+	background-position: 0px -96px;
+}
+#exten
+{
+	background-image:URL('../imagens/visual/default/sprite2.png');
+	background-repeat: no-repeat;
+	background-position: 0px -120px;
+}
+#reinicia
+{
+	background-image:URL('../imagens/visual/default/sprite2.png');
+	background-repeat: no-repeat;
+	background-position: 0px -144px;
+}
+#lentei
+{
+	background-image:URL('../imagens/visual/default/sprite2.png');
+	background-repeat: no-repeat;
+	background-position: 0px -168px;
+}
+#identificaBalao
+{
+	background-image:URL('../imagens/visual/default/sprite2.png');
+	background-repeat: no-repeat;
+	background-position: 0px -192px;
+	cursor:pointer;
+}
+#zoomtot
+{
+	background-image:URL('../imagens/visual/default/sprite2.png');
+	background-repeat: no-repeat;
+	background-position: 0px -216px;
+}
+#pan
+{
+	background-image:URL('../imagens/visual/default/sprite2.png');
+	background-repeat: no-repeat;
+	background-position: 0px -240px;
+}
+#google
+{
+	background-image:URL('../imagens/visual/default/sprite2.png');
+	background-repeat: no-repeat;
+	background-position: 0px -264px;
+}
+#referencia
+{
+	background-image:URL('../imagens/visual/default/sprite2.png');
+	background-repeat: no-repeat;
+	background-position: 0px -288px;
+}
 #inseregrafico
 {
-	background-image:URL('../imagens/visual/default/sprite.png');
+	background-image:URL('../imagens/visual/default/sprite2.png');
 	background-repeat: no-repeat;
-	background-position: 0px -325px;
+	background-position: 0px -312px;
 }
 #wiki
 {
-	background-image:URL('../imagens/visual/default/sprite.png');
+	background-image:URL('../imagens/visual/default/sprite2.png');
 	background-repeat: no-repeat;
-	background-position: 0px -350px;
+	background-position: 0px -336px;
 }
 #scielo
 {
-	background-image:URL('../imagens/visual/default/sprite.png');
+	background-image:URL('../imagens/visual/default/sprite2.png');
 	background-repeat: no-repeat;
-	background-position: 0px -375px;
+	background-position: 0px -360px;
 }
 #confluence
 {
-	background-image:URL('../imagens/visual/default/sprite.png');
+	background-image:URL('../imagens/visual/default/sprite2.png');
 	background-repeat: no-repeat;
-	background-position: 0px -400px;
+	background-position: 0px -384px;
 }
 #v3d
 {
-	background-image:URL('../imagens/visual/default/sprite.png');
+	background-image:URL('../imagens/visual/default/sprite2.png');
 	background-repeat: no-repeat;
-	background-position: 0px -425px;
+	background-position: 0px -408px;
 }
 #area
 {
-	background-image:URL('../imagens/visual/default/sprite.png');
+	background-image:URL('../imagens/visual/default/sprite2.png');
 	background-repeat: no-repeat;
-	background-position: 0px -450px;
+	background-position: 0px -432px;
 }
-/*icone do geoip*/
+#identifica
+{
+	background-image:URL('../imagens/visual/default/sprite2.png');
+	background-repeat: no-repeat;
+	background-position: 0px -456px;
+	cursor:pointer;
+}
+#metar
+{
+	background-image:URL('../imagens/visual/default/sprite2.png');
+	background-repeat: no-repeat;
+	background-position: 0px -480px;
+	cursor:pointer;
+}
+#buscafotos
+{
+	background-image:URL('../imagens/visual/default/sprite2.png');
+	background-repeat: no-repeat;
+	background-position: 0px -504px;
+	cursor:pointer;
+}
+#rota
+{
+	background-image:URL('../imagens/visual/default/sprite2.png');
+	background-repeat: no-repeat;
+	background-position: 0px -528px;
+}
+
 #ondeestou
 {
 	background-image:URL('../imagens/visual/default/sprite.png');
@@ -229,6 +254,15 @@ utiliza botões antigos até a versão 4.4 do i3geo
 	background-image:URL('../imagens/visual/default/sprite.png');
 	background-repeat: no-repeat;
 	background-position: 0px -1400px;
+	width:20px;
+	height:10px;
+	cursor:pointer;
+}
+#italiano
+{
+	background-image:URL('../imagens/visual/default/sprite.png');
+	background-repeat: no-repeat;
+	background-position: 0px -1725px;
 	width:20px;
 	height:10px;
 	cursor:pointer;
@@ -495,13 +529,6 @@ utiliza botões antigos até a versão 4.4 do i3geo
 	width:10px;
 	height:20px;
 }
-#buscafotos
-{
-	background-image:URL('../imagens/visual/default/sprite.png');
-	background-repeat: no-repeat;
-	background-position: 0px -1425px;
-	cursor:pointer;
-}
 #desceferramentas
 {
 	background-image:URL('../imagens/visual/default/sprite.png');
@@ -510,6 +537,7 @@ utiliza botões antigos até a versão 4.4 do i3geo
 	cursor:pointer;
 	width:22px;
 	height:10px;
+	margin: 2px;
 }
 #sobeferramentas
 {
@@ -519,6 +547,7 @@ utiliza botões antigos até a versão 4.4 do i3geo
 	cursor:pointer;
 	width:22px;
 	height:10px;
+	margin: 2px;
 }
 /*marcador de lista das propriedades do mapa*/
 .ticPropriedades
@@ -608,15 +637,6 @@ utiliza botões antigos até a versão 4.4 do i3geo
 	height:11px;
 	cursor:pointer;
 }
-#italiano
-{
-	background-image:URL('../imagens/visual/default/sprite.png');
-	background-repeat: no-repeat;
-	background-position: 0px -1725px;
-	width:20px;
-	height:10px;
-	cursor:pointer;
-}
 .refresh
 {
 	background-image:URL('../imagens/visual/default/sprite.png');
@@ -626,12 +646,7 @@ utiliza botões antigos até a versão 4.4 do i3geo
 	height:20px;
 	cursor:pointer;
 }
-#rota
-{
-	background-image:URL('../imagens/visual/default/sprite.png');
-	background-repeat: no-repeat;
-	background-position: 0px -1800px;
-}
+
 .conectarwmst
 {
 	background-image:URL('../imagens/visual/default/sprite.png');
@@ -681,14 +696,6 @@ utiliza botões antigos até a versão 4.4 do i3geo
 	height:20px;
 	cursor:pointer;
 }
-
-#identifica
-{
-	background-image:URL('../imagens/visual/default/sprite.png');
-	background-repeat: no-repeat;
-	background-position: 0px -1975px;
-	cursor:pointer;
-}
 .carouselTemas
 {
 	background-image:URL('../imagens/visual/default/sprite.png');
@@ -696,13 +703,6 @@ utiliza botões antigos até a versão 4.4 do i3geo
 	background-position: 0px -2000px;
 	width: 16px;
 	border: 1px solid #DCDCDC;
-	cursor:pointer;
-}
-#metar
-{
-	background-image:URL('../imagens/visual/default/sprite.png');
-	background-repeat: no-repeat;
-	background-position: 0px -2025px;
 	cursor:pointer;
 }
 .uploadgpx

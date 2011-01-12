@@ -506,24 +506,20 @@ i3GEO = {
 		diminuix = (navm) ? i3GEO.configura.diminuixM : i3GEO.configura.diminuixN;
 		diminuiy = (navm) ? i3GEO.configura.diminuiyM : i3GEO.configura.diminuiyN;
 		if(chro){
-			diminuix = diminuix - 10;
-			diminuiy = diminuiy - 50;
+			//diminuix = diminuix - 10;
+			//diminuiy = diminuiy - 50;
 		}
-		//
-		//subtrai barra de rolagem
-		//
-		try{diminuiy += i3GEO.util.getScrollerWidth();}
-		catch(e){
-			if(typeof(console) !== 'undefined'){console.error(e);}
-		}
-		//
 		menos = 0;
 		if ($i("contemFerramentas"))
 		{menos += parseInt($i("contemFerramentas").style.width,10);}
 		if ($i("ferramentas"))
 		{menos += parseInt($i("ferramentas").style.width,10);}
-		novow = parseInt(screen.availWidth,10) - diminuix;
-		novoh = parseInt(screen.availHeight,10) - diminuiy;
+		
+		//novow = parseInt(screen.availWidth,10) - diminuix;
+		novow = YAHOO.util.Dom.getDocumentWidth() - i3GEO.util.getScrollerWidth();
+		//novoh = parseInt(screen.availHeight,10) - diminuiy;
+		novoh = YAHOO.util.Dom.getDocumentHeight();
+		
 		if (window.top === window.self){//nao se aplica em iframe		
 			window.resizeTo(screen.availWidth,screen.availHeight);
 			window.moveTo(0,0);
@@ -539,10 +535,11 @@ i3GEO = {
 			if(typeof(console) !== 'undefined'){console.error(e);}
 		}
 		//novoh = 500
-		document.body.style.width = novow - diminuix;
+		document.body.style.width = novow;
 		document.body.style.height = novoh;
 		w = novow - menos - diminuix;
 		h = novoh - diminuiy;
+
 		temp = $i("corpoMapa");
 		if (temp){
 			if(temp.style){

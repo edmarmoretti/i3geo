@@ -148,7 +148,7 @@ salvatudojs($jsfiles,$buffer,"i3geo_tudo_compacto45.js","js");
 
 $cssfiles = array(
 "../css/geral.css",
-"../css/botoes.css",
+"../css/botoes2.css",
 "../css/documentation.css",
 "../pacotes/yui270/build/logger/assets/skins/sam/logger.css",
 "../pacotes/yui270/build/fonts/fonts-min.css",

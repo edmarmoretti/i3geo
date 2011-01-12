@@ -511,23 +511,20 @@ i3GEO.barraDeBotoes = {
 	inicializaBarra:function(idconteudo,idconteudonovo,barraZoom,x,y,onde){
 		if(typeof(console) !== 'undefined'){console.info("i3GEO.barraDeBotoes.inicializaBarra()");}
 		if(i3GEO.barraDeBotoes.TEMPLATEBOTAO === "")
-		{i3GEO.barraDeBotoes.TEMPLATEBOTAO = "<div style='display:inline;background-color:rgb(250,250,250);'><p style='font-size:2px;'>&nbsp;</p><img style='border:0px solid white;' src='"+i3GEO.configura.locaplic+"/imagens/branco.gif' id='$$'/></div>";}
-		var tipo,mostra,numerobotoes = 0,i,temp,elementos,nelementos = 0,e,wj,recuo,novoel,alturadisponivel,n,chaves,re,estilo;
+		{i3GEO.barraDeBotoes.TEMPLATEBOTAO = "<div style='display:inline;background-color:rgb(250,250,250);'><img style='border:0px solid white;' src='"+i3GEO.configura.locaplic+"/imagens/branco.gif' id='$$'/></div>";}
+		var falta,ticone,tipo,mostra,numerobotoes = 0,i,temp,elementos,nelementos = 0,e,wj,recuo,novoel,alturadisponivel,n,chaves,re,estilo;
 		if(i3GEO.barraDeBotoes.AUTO === true){
 			if(idconteudo === "barraDeBotoes1"){
 				novoel = document.createElement("div");
 				novoel.id = "barraDeBotoes1";
-				temp = '<table style="width:100%"><caption style="text-align:center">&nbsp;</caption><tr><td style="background-color:rgb(250,250,250);"><div ID="historicozoom" ></div></td></tr><tr><td style=height:5px ></td></tr></table>' +
+				temp = '<table style="width:100%"><tr><td style="background-color:rgb(250,250,250);"><div ID="historicozoom" ></div></td></tr><tr><td style=height:5px ></td></tr></table>' +
 					"<div style='display:inline;background-color:rgb(250,250,250);'>" +
-					"<p style='font-size:4px;'>&nbsp;</p>" +
 					'<img title="zoom" alt="zoom" src="'+i3GEO.configura.locaplic+'/imagens/branco.gif" id="zoomli"/>' +
 					"</div>" +
 					"<div style='display:inline;background-color:rgb(250,250,250);'>" +
-					"<p style='font-size:4px;'>&nbsp;</p>" +
 					'<img title="desloca" alt="desloca" src="'+i3GEO.configura.locaplic+'/imagens/branco.gif" id="pan"/>' +
 					"</div>" +
 					"<div style='display:inline;background-color:rgb(250,250,250);'>" +
-					"<p style='font-size:4px;'>&nbsp;</p>" +
 					'<img title="geral" alt="geral" src="'+i3GEO.configura.locaplic+'/imagens/branco.gif" id="zoomtot"/>' +
 					"</div>";
 				novoel.innerHTML = temp;
@@ -548,10 +545,10 @@ i3GEO.barraDeBotoes = {
 					estilo = "font-size:2px;";
 					if(i3GEO.barraDeBotoes.SOICONES === true)
 					{estilo = "font-size:0px;";}
-					novoel.innerHTML = "<table style='width:100%'><caption style='text-align:center'>&nbsp;</caption>"+
+					novoel.innerHTML = "<table style='width:100%'>"+
 						"<tr><td style='background-color:rgb(250,250,250);'><img title='' alt='sobe' src='"+i3GEO.configura.locaplic+"/imagens/branco.gif' id='sobeferramentas'/></td></tr>"+
 						"</table>" +temp+
-						"<table style='width:100%;'><tr><td style='background-color:rgb(250,250,250);'><p style='"+estilo+"'>&nbsp;</p><img title='desce' alt='' src='"+i3GEO.configura.locaplic+"/imagens/branco.gif' id='desceferramentas'/></td></tr></table>";
+						"<table style='width:100%;'><tr><td style='background-color:rgb(250,250,250);'><img title='desce' alt='' src='"+i3GEO.configura.locaplic+"/imagens/branco.gif' id='desceferramentas'/></td></tr></table>";
 					document.body.appendChild(novoel);
 				}
 				else{
@@ -587,7 +584,7 @@ i3GEO.barraDeBotoes = {
 		temp = "";
 		if (barraZoom === true)
 		{temp += i3GEO.navega.barraDeZoom.cria();}
-		temp += '<div id="'+idconteudonovo+'_" style="left:'+recuo+';top:-6px;"  ></div>';
+		temp += '<div id="'+idconteudonovo+'_" style="left:'+recuo+';top:0px;"  ></div>';
 		novoel.innerHTML = temp;
 		novoel.onmouseover = function(){
 			//objposicaocursor.imgx = 0;
@@ -612,12 +609,14 @@ i3GEO.barraDeBotoes = {
 		if(i3GEO.barraDeBotoes.ATIVAMENUCONTEXTO)
 		{i3GEO.util.mudaCursor(i3GEO.configura.cursores,"contexto",idconteudonovo,i3GEO.configura.locaplic);}
 		//copia os botoes do HTML para a janela
+		ticone = 28;
+		alturadisponivel = i3GEO.parametros.h - i3GEO.Interface.BARRABOTOESTOP - ticone - 18;
+		numerobotoes = parseInt(alturadisponivel / ticone,10);
+		falta = alturadisponivel - (ticone * numerobotoes);
 		if($i(idconteudo))
 		{
 			$i(idconteudonovo+"_").innerHTML = $i(idconteudo).innerHTML;
 			$i(idconteudo).innerHTML = "";
-			alturadisponivel = i3GEO.parametros.h - 4;
-			numerobotoes = parseInt(alturadisponivel / 35,10);
 			elementos = $i(idconteudonovo+"_").getElementsByTagName("img");
 			nelementos = elementos.length;
 			//faz o cálculo do número de botões que devem ficar visíveis em função do tamanho da barra
@@ -651,8 +650,7 @@ i3GEO.barraDeBotoes = {
 		YAHOO.namespace("janelaBotoes.xp");
 		if(i3GEO.barraDeBotoes.AUTOALTURA === false || barraZoom === true || (elementos.length > numerobotoes))
 		{YAHOO.janelaBotoes.xp.panel = new YAHOO.widget.Panel(idconteudonovo, {width:wj, fixedcenter: false, constraintoviewport: false, underlay:"none", close:i3GEO.barraDeBotoes.PERMITEFECHAR, visible:true, draggable:i3GEO.barraDeBotoes.PERMITEDESLOCAR, modal:false,iframe:false } );}
-		else
-		{YAHOO.janelaBotoes.xp.panel = new YAHOO.widget.Panel(idconteudonovo, {height:i3GEO.parametros.h - 4,width:wj, fixedcenter: false, constraintoviewport: false, underlay:"none", close:i3GEO.barraDeBotoes.PERMITEFECHAR, visible:true, draggable:i3GEO.barraDeBotoes.PERMITEDESLOCAR, modal:false,iframe:false } );}
+
 		if(i3GEO.barraDeBotoes.SOICONES === true){
 			temp = $i("i3geo_barra2");
 			if(temp)
@@ -665,8 +663,9 @@ i3GEO.barraDeBotoes = {
 		{i3GEO.navega.barraDeZoom.ativa();}
 		YAHOO.janelaBotoes.xp.panel.render();
 		if(i3GEO.barraDeBotoes.AUTOALTURA === true){
-			y = y - i3GEO.Interface.BARRABOTOESTOP + 2;
-			x = x - 3;
+			temp = $i("i3geo_barra2");
+			if(temp)
+			{temp.style.height = i3GEO.parametros.h - i3GEO.Interface.BARRABOTOESTOP - 2 + "px";}
 		}
 		YAHOO.janelaBotoes.xp.panel.moveTo(x,y);
 		if($i("sobeferramentas")){

@@ -84,7 +84,30 @@ i3GEO.Interface = {
 	{3}
 	*/
 	BARRABOTOESLEFT: 3,	
-
+	/*
+	Propriedade: BARRAZOOMTOP
+	
+	Distância da barra de zoom em ralação ao topo do mapa.
+	
+	Tipo:
+	{number}
+	
+	Default:
+	{12}
+	*/
+	BARRAZOOMTOP: 7,
+	/*
+	Propriedade: BARRAZOOMLEFT
+	
+	Distância da barra de zoom em ralação ao lado esquerdo do mapa.
+	
+	Tipo:
+	{number}
+	
+	Default:
+	{3}
+	*/
+	BARRAZOOMLEFT: 10,
 	/*
 	Propriedade: ATUAL
 	
@@ -731,7 +754,8 @@ i3GEO.Interface = {
 					pz = new OpenLayers.Control.PanZoomBar();
 					i3geoOL.addControl(pz);
 					pz.div.style.zIndex = 5000;
-					pz.div.style.top ="7px";
+					pz.div.style.top = i3GEO.Interface.BARRADEZOOMTOP+"px";
+					pz.div.style.left = i3GEO.Interface.BARRADEZOOMLEFT+"px";
 				}
 				if(i3GEO.Interface.openlayers.GADGETS.PanZoom == true){
 					pz = new OpenLayers.Control.PanZoom();
@@ -759,8 +783,11 @@ i3GEO.Interface = {
 					if(i3GEO.Interface.openlayers.GADGETS.LayerSwitcher == true)
 					{i3geoOL.addControl(new OpenLayers.Control.LayerSwitcher());}
 				}
-				if(i3GEO.Interface.openlayers.GADGETS.ScaleLine == true)
-				{i3geoOL.addControl(new OpenLayers.Control.ScaleLine());}
+				if(i3GEO.Interface.openlayers.GADGETS.ScaleLine == true){
+					pz = new OpenLayers.Control.ScaleLine();
+					i3geoOL.addControl(pz);
+					pz.div.style.left = i3GEO.Interface.BARRADEZOOMLEFT+5+"px";
+				}
 				if(i3GEO.Interface.openlayers.GADGETS.OverviewMap == true)
 				{i3geoOL.addControl(new OpenLayers.Control.OverviewMap());}
 				//i3geoOL.addControl(new OpenLayers.Control.KeyboardDefaults());	
