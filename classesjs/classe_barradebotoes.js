@@ -596,6 +596,8 @@ i3GEO.barraDeBotoes = {
 				else
 				{novoel.style.opacity = 0.85;}
 			}
+			if(i3GEO.barraDeBotoes.PERMITEFECHAR == true)
+			{novoel.getElementsByClassName('container-close')[0].style.display='block';}		
 		};
 		novoel.onmouseout = function(){
 			if(i3GEO.barraDeBotoes.TRANSICAOSUAVE){
@@ -650,6 +652,8 @@ i3GEO.barraDeBotoes = {
 		YAHOO.namespace("janelaBotoes.xp");
 		if(i3GEO.barraDeBotoes.AUTOALTURA === false || barraZoom === true || (elementos.length > numerobotoes))
 		{YAHOO.janelaBotoes.xp.panel = new YAHOO.widget.Panel(idconteudonovo, {width:wj, fixedcenter: false, constraintoviewport: false, underlay:"none", close:i3GEO.barraDeBotoes.PERMITEFECHAR, visible:true, draggable:i3GEO.barraDeBotoes.PERMITEDESLOCAR, modal:false,iframe:false } );}
+		else
+		{YAHOO.janelaBotoes.xp.panel = new YAHOO.widget.Panel(idconteudonovo, {height:i3GEO.parametros.h - 4,width:wj, fixedcenter: false, constraintoviewport: false, underlay:"none", close:i3GEO.barraDeBotoes.PERMITEFECHAR, visible:true, draggable:i3GEO.barraDeBotoes.PERMITEDESLOCAR, modal:false,iframe:false } );}
 
 		if(i3GEO.barraDeBotoes.SOICONES === true){
 			temp = $i("i3geo_barra2");
@@ -665,7 +669,7 @@ i3GEO.barraDeBotoes = {
 		if(i3GEO.barraDeBotoes.AUTOALTURA === true){
 			temp = $i("i3geo_barra2");
 			if(temp)
-			{temp.style.height = i3GEO.parametros.h - i3GEO.Interface.BARRABOTOESTOP - 2 + "px";}
+			{temp.style.height = i3GEO.parametros.h - i3GEO.Interface.BARRABOTOESTOP - 1 + "px";}
 		}
 		YAHOO.janelaBotoes.xp.panel.moveTo(x,y);
 		if($i("sobeferramentas")){
@@ -756,6 +760,18 @@ i3GEO.barraDeBotoes = {
 		}	
 		if($i(idconteudonovo+"_h"))
 		{$i(idconteudonovo+"_h").className = "hd2";}
+		//
+		//esconde x
+		//
+		if(i3GEO.barraDeBotoes.PERMITEFECHAR == true){
+			var id = $i(idconteudonovo);
+			if(id){
+				var iconex = id.getElementsByClassName("container-close")[0];
+				if(iconex){
+					iconex.style.display='none';
+				}
+			}	
+		}
 	},
 	/*
 	Function: ativaMenuContexto

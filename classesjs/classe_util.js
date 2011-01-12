@@ -1277,11 +1277,16 @@ i3GEO.util = {
 	ini - funcao do JS que será executada ao ser carregado o script (pode ser "")
 	
 	id - id do elemento script que será criado
+	
+	aguarde {boolena} - mostra ou não a janela de aguarde
 	*/
-	scriptTag: function(js,ini,id){
+	scriptTag: function(js,ini,id,aguarde){
 		if(typeof(console) !== 'undefined'){console.info("i3GEO.util.scriptTag()");}
-		var head,script;
+		if(!aguarde){var aguarde = true;}
+		var head,script, tipojanela = i3GEO.janela.ESTILOAGUARDE;
 		if(!$i(id) || id === ""){
+			i3GEO.janela.ESTILOAGUARDE = "reduzida";
+			i3GEO.janela.abreAguarde(id+"aguarde","Carregando JS");
 			head= document.getElementsByTagName('head')[0];
 			script= document.createElement('script');
 			script.type= 'text/javascript';
@@ -1289,11 +1294,20 @@ i3GEO.util = {
 				if(navm){
 					script.onreadystatechange = function(){
 						if(this.readyState === 'loaded' || this.readyState === 'complete')
-						{eval(ini);}
+						{
+							i3GEO.janela.fechaAguarde(id+"aguarde");
+							i3GEO.janela.ESTILOAGUARDE = tipojanela;
+							eval(ini);
+						}
 					};
 				}
-				else
-				{script.onload=function(){eval(ini);};}
+				else{
+					script.onload=function(){
+						i3GEO.janela.fechaAguarde(id+"aguarde");
+						i3GEO.janela.ESTILOAGUARDE = tipojanela;
+						eval(ini);
+					};
+				}
 			}
 			script.src= js;
 			if(id !== "")
