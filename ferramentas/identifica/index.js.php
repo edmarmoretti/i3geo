@@ -117,7 +117,7 @@ i3GEOF.identifica = {
 	*/
 	inicia: function(tema,x,y,iddiv,mostraLinkGeohack,mostraSistemasAdicionais){
 		try{
-			var g_locidentifica;
+			var g_locidentifica, temp;
 			$i(iddiv).innerHTML += i3GEOF.identifica.html();
 			i3GEOF.identifica.tema = tema;
 			i3GEOF.identifica.x = x;
@@ -147,6 +147,27 @@ i3GEOF.identifica = {
 					{alert("Nenhum tema definido");}
 				}}});
 			};
+			$i("i3GEOidentificaguia5").onclick = function(){
+				i3GEO.guias.mostraGuiaFerramenta("i3GEOidentificaguia5","i3GEOidentificaguia");
+				var ins = "",retorna;
+				$i("i3GEOidentificacoord").innerHTML = "Aguarde...";
+				retorna = function(utm){
+					temp = i3GEO.calculo.dd2dms(i3GEOF.identifica.x,i3GEOF.identifica.y);
+					ins += "<br><p class=paragrafo >Grau, minuto e segundo (DMS)</p>";
+					ins += "<p class=paragrafo style=left:10px ><i>X (longitude): </i>"+temp[0]+"</p>";
+					ins += "<p class=paragrafo style=left:10px ><i>Y (latitude): </i>"+temp[1]+"</p>";				
+					ins += "<br><p class=paragrafo >UTM (metros)</p>";
+					ins += "<p class=paragrafo style=left:10px ><i>X (longitude): </i>"+utm.data.x+"</p>";
+					ins += "<p class=paragrafo style=left:10px ><i>Y (latitude): </i>"+utm.data.y+"</p>";
+					ins += "<p class=paragrafo style=left:10px ><i>Zona: </i>"+utm.data.zona+"</p>";					
+					ins += "<br><p class=paragrafo >Décimos de grau</p>";
+					ins += "<p class=paragrafo style=left:10px ><i>X (longitude): </i>"+i3GEOF.identifica.x+"</p>";
+					ins += "<p class=paragrafo style=left:10px ><i>Y (latitude): </i>"+i3GEOF.identifica.y+"</p>";
+					$i("i3GEOidentificacoord").innerHTML = ins;
+				};
+				i3GEO.php.geo2utm(retorna,i3GEOF.identifica.x,i3GEOF.identifica.y);
+			};
+			
 			i3GEOF.identifica.listaTemas("ligados");
 			//
 			//verifica se existem sistemas para identificar
@@ -243,9 +264,10 @@ i3GEOF.identifica = {
 		ins += '<div id=i3GEOidentificaguiasYUI class="yui-navset" style="top:0px;cursor:pointer;left:0px;">';
 		ins += '	<ul class="yui-nav" style="border-width:0pt 0pt 0px;border-color:rgb(240,240,240);border-bottom-color:white;">';
 		ins += '		<li><a href="#ancora"><em><div id="i3GEOidentificaguia1" style="text-align:center;left:0px;" >Temas vis&iacute;veis</div></em></a></li>';
-		ins += '		<li><a href="#ancora"><em><div id="i3GEOidentificaguia2" style="text-align:center;left:0px;" >Todos os temas</div></em></a></li>';
-		ins += '		<li><a href="#ancora"><em><div id="i3GEOidentificaguia3" style="text-align:center;left:0px;" >Propriedades</div></em></a></li>';
+		ins += '		<li><a href="#ancora"><em><div id="i3GEOidentificaguia2" style="text-align:center;left:0px;" >Todos</div></em></a></li>';
 		ins += '		<li><a href="#ancora"><em><div id="i3GEOidentificaguia4" style="text-align:center;left:0px;" >Etiquetas</div></em></a></li>';
+		ins += '		<li><a href="#ancora"><em><div id="i3GEOidentificaguia5" style="text-align:center;left:0px;" >XY</div></em></a></li>';
+		ins += '		<li><a href="#ancora"><em><div id="i3GEOidentificaguia3" style="text-align:center;left:0px;" >Propriedades</div></em></a></li>';
 		ins += '	</ul>';
 		ins += '</div>';
 		//ins += '<div class="geralFerramentas" style="left:0px;top:0px;width:98%;height:86%;">';
@@ -265,6 +287,10 @@ i3GEOF.identifica = {
 		ins += '		As etiquetas são mostradas quando o mouse é estacionado sobre um elemento.';
 		ins += '		<br><br><input id=i3GEOidentificabotao1 size=20  type=button value="Configurar etiquetas" />';
 		ins += '	</div>';
+		ins += '	<div class=guiaobj id="i3GEOidentificaguia5obj" style="left:1px;top:10px;display:none;font-size:12px;overflow:hidden" >';
+		ins += '		<b>Valores para o ponto indicado no mapa<br></b>';
+		ins += '		<div id=i3GEOidentificacoord ></div>';
+		ins += '	</div>';		
 		//ins += '</div>	';
 		return ins;
 	},
@@ -515,6 +541,7 @@ i3GEOF.identifica = {
 	*/
 	mostraDadosTema: function(retorno){
 		var res="",div0,ntemas,i,resultados,nres,cor,j,itens,nitens,k;
+		$i("i3GEOF.identifica_corpo").scrollTop = 0;
 		if(retorno == "")
 		{$i("i3GEOidentificaocorrencia").innerHTML="Nada encontrado";}
 		var i = $i("i3GEOmarcaIdentifica");
