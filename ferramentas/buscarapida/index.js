@@ -193,7 +193,7 @@ i3GEObuscaRapida = {
 		aguarde("none")
 		if(i3GEObuscaRapida.buscaemtemas){	
 			try{
-				window.parent.i3GEO.php.procurartemas(i3GEObuscaRapida.resultadoTemas,i3GEObuscaRapida.palavra,i3GEObuscaRapida.locaplic);	
+				window.parent.i3GEO.php.procurartemas2(i3GEObuscaRapida.resultadoTemas,i3GEObuscaRapida.palavra,i3GEObuscaRapida.locaplic);	
 			}catch(e){}
 		}
 	},

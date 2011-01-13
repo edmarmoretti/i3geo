@@ -1359,18 +1359,21 @@ Retorno:
 */
 function buscaRapida($servico,$palavra)
 {
-	include_once('../pacotes/SOAP/nusoap.php');
-	//include_once("../pacotes/SOAP/easy_parser.inc");
-	$soapclient = new Xsoapclient($servico."?wsdl","wsdl");
-	$vv = "erro";
-	if (@$p = $soapclient->getproxy())
+	if (function_exists('ereg'))
 	{
-		$vv = $soapclient->call("procurar",array("palavra"=>$palavra,"tipoBusca"=>"qualquer"));
-		if($vv == ""){$vv = "erro";}
-		return ($vv);
+		include_once('../pacotes/SOAPdepreciado/nusoap.php');
+		new Xsoapclient($servico."?wsdl","wsdl");
 	}
 	else
-	{return "erro";}
+	{
+		include_once('../pacotes/SOAP/nusoap.php');
+		$soapclient = new nusoap_client($servico);
+	}
+	
+	$vv = "erro";
+	$vv = $soapclient->call("procurar",array("palavra"=>$palavra,"tipoBusca"=>"qualquer"));
+	if($vv == ""){$vv = "erro";}
+	return ($vv);
 }
 /*
 Section: coordenadas

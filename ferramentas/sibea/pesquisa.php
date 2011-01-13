@@ -36,7 +36,10 @@ Free Software Foundation, Inc., no endereço
 */
 require_once("../../pacotes/cpaint/cpaint2.inc.php");
 require_once("../../classesphp/pega_variaveis.php");
-require_once('../../pacotes/SOAP/nusoap.php');
+if (function_exists('ereg'))
+{require_once('../../pacotes/SOAPdepreciado/nusoap.php');}
+else
+{require_once('../../pacotes/SOAP/nusoap.php');}
 if (isset($g_sid))
 {session_id($g_sid);}
 session_start();
@@ -76,7 +79,10 @@ function listaTipoFiltro()
 {
 	global $cp,$servico;
 	$resultado = array();
+	if (function_exists('ereg'))
 	$soapclient = new Xsoapclient($servico."?wsdl","wsdl");
+	else
+	$soapclient = new nusoap_client($servico);
 	$resultado = $soapclient->call("tipoBusca","");
 	$cp->set_data($resultado);
 }
@@ -89,8 +95,10 @@ function listaValorFiltro()
 {
 	global $cp,$servico,$execFuncao;
 	$resultado = array();
+	if (function_exists('ereg'))
 	$soapclient = new Xsoapclient($servico."?wsdl","wsdl");
-	$resultado = $soapclient->call($execFuncao,"");
+	else
+	$soapclient = new nusoap_client($servico);	$resultado = $soapclient->call($execFuncao,"");
 	$cp->set_data($resultado);
 }
 /*
@@ -118,7 +126,11 @@ function adicionatema()
 	//
 	//pega a lista de códigos siafi
 	//
+	if (function_exists('ereg'))
 	$soapclient = new Xsoapclient($servico."?wsdl","wsdl");
+	else
+	$soapclient = new nusoap_client($servico);
+	
 	if ($filtro == "tipoTitulacaoMaxima")
 	{
 		$resultado = $soapclient->call("sibeaTitulacaoMaxima",$valor);

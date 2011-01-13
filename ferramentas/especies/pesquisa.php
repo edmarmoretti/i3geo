@@ -37,7 +37,10 @@ Free Software Foundation, Inc., no endereço
 set_time_limit(180);
 require_once("../../pacotes/cpaint/cpaint2.inc.php");
 require_once("../../classesphp/pega_variaveis.php");
-require_once('../../pacotes/SOAP/nusoap.php');
+if (function_exists('ereg'))
+{require_once('../../pacotes/SOAPdepreciado/nusoap.php');}
+else
+{require_once('../../pacotes/SOAP/nusoap.php');}
 if (isset($g_sid))
 {session_id($g_sid);}
 session_start();
@@ -83,7 +86,10 @@ function listaBancos()
 {
 	global $cp,$servico;
 	$resultado = array();
+	if (function_exists('ereg'))
 	$soapclient = new Xsoapclient($servico."?wsdl","wsdl");
+	else
+	$soapclient = new nusoap_client($servico);	
 	$resultado = $soapclient->call("natureserveDatabase","");
 	$cp->set_data($resultado);
 }
@@ -96,7 +102,10 @@ function listaFamilias()
 {
 	global $cp,$servico,$banco;
 	$resultado = array();
+	if (function_exists('ereg'))
 	$soapclient = new Xsoapclient($servico."?wsdl","wsdl");
+	else
+	$soapclient = new nusoap_client($servico);
 	$resultado = $soapclient->call("natureserveFamily",$banco);
 	$cp->set_data($resultado);
 }
@@ -109,7 +118,10 @@ function listaEspecies()
 {
 	global $cp,$servico,$banco,$familia;
 	$resultado = array();
+	if (function_exists('ereg'))
 	$soapclient = new Xsoapclient($servico."?wsdl","wsdl");
+	else
+	$soapclient = new nusoap_client($servico);
 	$resultado = $soapclient->call("natureserveEspecie",array($banco,$familia));
 	$cp->set_data($resultado);
 }
@@ -122,7 +134,12 @@ function adicionatema()
 {
 	global $map_file,$dir_tmp,$imgdir,$banco,$familia,$servico,$cp,$especie,$cor,$locaplic,$imgurl;
 	$retorno = "erro.";
+	
+	if (function_exists('ereg'))
 	$soapclient = new Xsoapclient($servico."?wsdl","wsdl");
+	else
+	$soapclient = new nusoap_client($servico);
+	
 	$resultado = $soapclient->call("natureserveGidEspecie",array($banco,$especie));
 	$tabelas = $resultado["especies"];
 	$mapa = ms_newMapObj($map_file);
