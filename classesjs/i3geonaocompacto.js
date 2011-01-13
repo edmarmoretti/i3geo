@@ -31,6 +31,7 @@ var jsfiles = new Array(
 "../pacotes/yui270/build/treeview/treeview.js",
 "../pacotes/yui270/build/button/button-min.js",
 "../pacotes/yui270/build/json/json-min.js",
+"../pacotes/yui270/build/resize/resize-min.js",
 "../pacotes/balloon-tooltips/htdocs/js/balloon.config.js",
 "../pacotes/balloon-tooltips/htdocs/js/balloon.js",
 "classe_i3geo.js",
@@ -81,6 +82,7 @@ var cssfiles = new Array(
 "../pacotes/yui270/build/treeview/assets/skins/sam/treeview.css",
 "../pacotes/yui270/build/button/assets/skins/sam/button.css",
 "../pacotes/yui270/build/slider/assets/skins/sam/slider.css",
+"../pacotes/yui270/build/resize/assets/skins/sam/resize.css",
 "../css/corrigeyui_geral.css"
 );
 for (i = 0; i < cssfiles.length; i++)

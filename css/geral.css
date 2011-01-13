@@ -193,3 +193,5 @@ h1 {padding:.25em .5em;background-color:#ccc;}
 /*hack opera */
 @media all and (-webkit-min-device-pixel-ratio:10000), not all and (-webkit-min-device-pixel-ratio:0) 
 { .inputsb {border:1px solid black} }
+
+

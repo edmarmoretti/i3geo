@@ -177,6 +177,28 @@ i3GEOF.identifica = {
 			{i3GEOF.identifica.buscaDadosTema(i3GEO.temaAtivo);}
 		}
 		catch(erro){alert(erro);}
+
+    var Dom = YAHOO.util.Dom,
+        Event = YAHOO.util.Event,
+        col1 = null
+        col2 = null;
+
+        col1 = Dom.get('i3GEOidentificatemaativo');
+        col2 = Dom.get('i3GEOidentificaocorrencia');
+        var resize = new YAHOO.util.Resize('i3GEOidentificatemaativo', {
+            handles: ['r'],
+			maxWidth: 180
+        });
+        resize.on('resize', function(ev) {
+            var w = ev.width;
+            Dom.setStyle(col1, 'height', '');
+			//150 é o tamanho inicial da parte esquerda, corresponde a 40%
+			var w1 = parseInt(col1.style.width);
+			var dif = parseInt((w1 * 40) / 150,10);
+			Dom.setStyle(col2, 'width', 40 - dif + 60 + '%');
+			Dom.setStyle(col2, 'left', w1 + 15 + 'px');
+        });
+        resize.resize(null, null, null, 0, 0, true);
 	},
 	atualizaSistemas: function(){
 		if(i3GEOF.identifica.mostraSistemasAdicionais === true){
@@ -272,11 +294,11 @@ i3GEOF.identifica = {
 		ins += '</div>';
 		//ins += '<div class="geralFerramentas" style="left:0px;top:0px;width:98%;height:86%;">';
 		ins += '	<div class=guiaobj id="i3GEOidentificaguia1obj" style="left:1px;90%">';
-		ins += '		<div class="geralFerramentas" style="display:block;position:relative;top:-5px;left:0px;width:150px">';
-		ins += '			<div style="left:0px;width:120px;text-align:left;" id="i3GEOidentificalistaTemas" >Aguarde...</div>';
-		ins += '			<div style="left:0px;width:120px;text-align:left;" id="i3GEOidentificalistaSistemas" >Aguarde...</div>';
+		ins += '		<div id="i3GEOidentificatemaativo" class="geralFerramentas" style="overflow: hidden;display:block;position:relative;top:-5px;left:0px;width:150px">';
+		ins += '			<div style="left:0px;width:150px;text-align:left;" id="i3GEOidentificalistaTemas" >Aguarde...</div>';
+		ins += '			<div style="left:0px;width:150px;text-align:left;" id="i3GEOidentificalistaSistemas" >Aguarde...</div>';
 		ins += '		</div>';
-		ins += '		<div id="i3GEOidentificaocorrencia" style="font-size: 10px;display:block;position:absolute;top:5px;left:160px;width:60%"></div>';
+		ins += '		<div id="i3GEOidentificaocorrencia" style="overflow: hidden;font-size: 10px;display:block;position:absolute;top:5px;left:165px;width:60%"></div>';
 		ins += '	</div>';
 		ins += '	<div class=guiaobj id="i3GEOidentificaguia2obj" style="left:1px">';
 		ins += '	</div>';
