@@ -41,7 +41,7 @@ Classe: i3GEOF.identifica
 */
 i3GEOF.identifica = {
 	/*
-	Variavel: mostraLinkGeohack
+	Propriedade: mostraLinkGeohack
 	
 	Mostra ou não o link para abrir o site GeoHack.
 	
@@ -52,7 +52,7 @@ i3GEOF.identifica = {
 	*/
 	mostraLinkGeohack: true,
 	/*
-	Variavel: mostraSistemasAdicionais
+	Propriedade: mostraSistemasAdicionais
 	
 	Mostra ou não a lista de sistemas adicionais de busca de dados.
 
@@ -96,6 +96,15 @@ i3GEOF.identifica = {
 	{Array}
 	*/
 	sistemasAdicionais: [],
+	/*
+	Variavel: dadosIdentifica
+	
+	Guarda os dados obtidos com a chamada em AJAX de identificação
+	
+	Type:
+	{Array}
+	*/
+	dadosIdentifica: [],	
 	/*
 	Function: inicia
 	
@@ -246,7 +255,7 @@ i3GEOF.identifica = {
 				i3GEO.eventos.MOUSECLIQUE.remove("cliqueIdentifica()");
 				i3GEO.barraDeBotoes.ativaBotoes();
 				i3GEOF.identifica.limpaMarca();
-				if(i3GEO.eventos.NAVEGAMAPA.toString().search("i3GEOF.identifica.limpaMarca()") > 0)
+				if(i3GEO.eventos.NAVEGAMAPA.toString().search("i3GEOF.identifica") > 0)
 				{i3GEO.eventos.NAVEGAMAPA.remove("i3GEOF.identifica.limpaMarca()");}
 			};
 			YAHOO.util.Event.addListener(janela[0].close, "click", temp);
@@ -255,7 +264,10 @@ i3GEOF.identifica = {
 		{i3GEO.eventos.NAVEGAMAPA.push("i3GEOF.identifica.limpaMarca()");}
 	},
 	limpaMarca: function(){
-		i3GEO.util.escondePin();	
+		try{
+			i3GEO.util.escondePin();
+		}
+		catch(e){}
 	},
 	/*
 	Function: ativaFoco
@@ -353,7 +365,7 @@ i3GEOF.identifica = {
 	retorno {JSON} - objeto retornado por i3GEO.php.listaTemas ou por i3GEO.arvoreDeCamadas.filtraCamadas
 	*/
 	montaListaTemas: function(retorno){
-		var lista,linhas,linhas1,l,nome,tema,divResultado;
+		var lista,linhas,linhas1,l,nome,tema,divResultado,marcado="";
 		if(retorno.data)
 		{lista = retorno.data;}
 		else
@@ -372,6 +384,7 @@ i3GEOF.identifica = {
 		linhas1 = "";
 		for (l=0;l<lista.length;l++)
 		{
+			marcado="";
 			if(lista[l].nome){
 				nome = lista[l].nome;
 				tema = lista[l].tema;
@@ -380,9 +393,10 @@ i3GEOF.identifica = {
 				nome = lista[l].tema;
 				tema = lista[l].name;
 			}
-			
+			if(tema == i3GEO.temaAtivo)
+			{marcado = "CHECKED";}
 			if(lista[l].identifica !== "nao")
-			{linhas1 += "<tr><td style='border-top:1px solid beige;'><input onclick='i3GEOF.identifica.buscaDadosTema(\""+tema+"\")' style='border:0px solid white;cursor:pointer;' type=radio name=i3GEOidentificatema /></td><td style='border-top:1px solid beige;' >"+nome+"</td></tr>";}
+			{linhas1 += "<tr><td style='border-top:1px solid beige;'><input onclick='i3GEOF.identifica.buscaDadosTema(\""+tema+"\")' style='border:0px solid white;cursor:pointer;' type=radio "+marcado+" name=i3GEOidentificatema /></td><td style='border-top:1px solid beige;' >"+nome+"</td></tr>";}
 		}
 		divResultado = $i("i3GEOidentificalistaTemas");
 		if(divResultado)
@@ -492,7 +506,7 @@ i3GEOF.identifica = {
 	<i3GEO.php.identifica2>
 	*/	
 	buscaDadosTema: function(tema){
-		var res,opcao,resolucao,listaDeTemas="";
+		var res,opcao,resolucao,listaDeTemas="",temp;
 		$i("i3GEOidentificaocorrencia").innerHTML = "<img src='"+i3GEO.configura.locaplic+"/imagens/aguarde.gif' />";
 		res = $i("i3GEOidentificaresolucao");
 		if(res)
@@ -505,7 +519,14 @@ i3GEOF.identifica = {
 		{opcao = "ligados";}
 		else
 		{opcao = "tema";}
-		i3GEO.php.identifica2(i3GEOF.identifica.mostraDadosTema,i3GEOF.identifica.x,i3GEOF.identifica.y,resolucao,opcao,i3GEO.configura.locaplic,i3GEO.configura.sid,tema,i3GEO.parametros.mapexten,listaDeTemas);
+		temp = function(retorno){
+			i3GEOF.identifica.dadosIdentifica = retorno.data;
+			if(retorno !== undefined)
+			{i3GEOF.identifica.mostraDadosTema(i3GEOF.identifica.dadosIdentifica);}
+			else
+			{i3GEOF.identifica.mostraDadosTema(undefined);}
+		}
+		i3GEO.php.identifica2(temp,i3GEOF.identifica.x,i3GEOF.identifica.y,resolucao,opcao,i3GEO.configura.locaplic,i3GEO.configura.sid,tema,i3GEO.parametros.mapexten,listaDeTemas);
 	},
 	/*
 	Function: mostraDadosSistema
@@ -562,16 +583,17 @@ i3GEOF.identifica = {
 	retorno {JSON} - objeto JSON com os dados <i3GEO.php.identifica2>
 	*/
 	mostraDadosTema: function(retorno){
-		var res="",div0,ntemas,i,resultados,nres,cor,j,itens,nitens,k;
+		var res="",div0,ntemas,i,resultados,nres,cor,j,itens,nitens,k,atualN = "todas",inicio=0,numResultados;
+		if($i("i3GEOFidentificaNocorrencias"))
+		{atualN = $i("i3GEOFidentificaNocorrencias").value;}
 		$i("i3GEOF.identifica_corpo").scrollTop = 0;
 		if(retorno == "")
 		{$i("i3GEOidentificaocorrencia").innerHTML="Nada encontrado";}
 		var i = $i("i3GEOmarcaIdentifica");
 		if(i)
 		{i.style.display = "block";}		
-		if (retorno.data !== undefined)
+		if (retorno !== undefined)
 		{
-			retorno = retorno.data;
 			divO = $i("i3GEOidentificaocorrencia");
 			divO.innerHTML="";
 			ntemas = retorno.length;
@@ -581,9 +603,14 @@ i3GEOF.identifica = {
 				res += "<div style='padding-top:6px;left:2px;text-align:left;width:100%;' >"+retorno[i].nome+"</div>";	
 				if(resultados[0] !== " ")
 				{
-					nres = resultados.length;	
+					nres = resultados.length;
+					numResultados = nres;
 					cor = "RGB(250,250,250)";
-					for(j=0;j<nres;j++)
+					if(atualN != "todas"){
+						nres = atualN*1;
+						inicio = atualN*1 - 1;
+					}
+					for(j=inicio;j<nres;j++)
 					{
 						nitens = resultados[j].length;
 						for(k=0;k<nitens;k++){
@@ -603,8 +630,35 @@ i3GEOF.identifica = {
 				else
 				{res += "Nada encontrado";}
 			}
+			if(ntemas == 1)
+			{res = i3GEOF.identifica.montaOpcoesIdentificaOcorrencia(atualN,numResultados) + res;}
 			$i("i3GEOidentificaocorrencia").innerHTML=res;
 		}
+	},
+	montaOpcoesIdentificaOcorrencia: function(atual,nres){
+		var ins,select,i,nocor;
+		if(!atual){
+			atual = "todas";
+		}
+		sel = "";
+		select = "<select id=i3GEOFidentificaNocorrencias onchange='i3GEOF.identifica.mostraDadosTema(i3GEOF.identifica.dadosIdentifica)'>";
+		if(atual == "todas")
+		{sel = "SELECTED";}
+		select += "<option value='todas' "+sel+" >todas</option>";
+		nocor = nres + 1;
+		for(i=1;i<nocor;i++)		
+		{
+			sel = "";
+			if(atual == i)
+			{sel = "SELECTED";}
+			select += "<option value="+i+" "+sel+" >"+i+"</option>";
+		}
+		select += "</select>";
+		ins = "<table><tr>";
+		ins += "<td>Mostra a ocorrência: </td>";
+		ins += "<td> "+select+"</td>";
+		ins += "</tr></table>";
+		return ins;
 	}
 };
 <?php error_reporting(0);if(extension_loaded('zlib')){ob_end_flush();}?>

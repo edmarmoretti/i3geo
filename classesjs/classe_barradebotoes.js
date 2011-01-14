@@ -596,8 +596,6 @@ i3GEO.barraDeBotoes = {
 				else
 				{novoel.style.opacity = 0.85;}
 			}
-			if(i3GEO.barraDeBotoes.PERMITEFECHAR == true)
-			{novoel.getElementsByClassName('container-close')[0].style.display='block';}		
 		};
 		novoel.onmouseout = function(){
 			if(i3GEO.barraDeBotoes.TRANSICAOSUAVE){
@@ -763,6 +761,7 @@ i3GEO.barraDeBotoes = {
 		//
 		//esconde x
 		//
+		/*
 		if(i3GEO.barraDeBotoes.PERMITEFECHAR == true){
 			var id = $i(idconteudonovo);
 			if(id){
@@ -770,8 +769,12 @@ i3GEO.barraDeBotoes = {
 				if(iconex){
 					iconex.style.display='none';
 				}
-			}	
+			}
+			var over = ;		
+			if($i(idconteudonovo+"_h"))
+			{$i(idconteudonovo+"_h").onmouseover = eval("function(){$i('"+idconteudonovo+"').getElementsByClassName('container-close')[0].style.display='block';}")};
 		}
+		*/
 	},
 	/*
 	Function: ativaMenuContexto
