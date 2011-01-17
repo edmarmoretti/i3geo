@@ -767,7 +767,7 @@ i3GEO.arvoreDeCamadas = {
 			if(ltema.permitecomentario.toLowerCase() !== "nao" && i3GEO.arvoreDeTemas.OPCOESADICIONAIS.comentarios == true)
 			{
 				temp = i3GEO.configura.locaplic+"/ms_criamapa.php?layers="+ltema.name;
-				tnome = "<iframe src='http://www.facebook.com/plugins/like.php?href="+temp+"&amp;layout=button_count&amp;show_faces=false&amp;width=200&amp;action=like&amp;colorscheme=light&amp;height=21' scrolling='no' frameborder='0' style='border:none; overflow:hidden; width:200px; height:21px;' allowTransparency='true'></iframe>";			
+				tnome = i3GEO.social.compartilhar("",temp,temp,"semtotal");			
 				d = {html:tnome};
 				iconesNode = new YAHOO.widget.HTMLNode(d, node, false,true);
 				iconesNode.enableHighlight = false;

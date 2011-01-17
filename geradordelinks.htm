@@ -118,8 +118,9 @@ File: i3geo/geradordelinks.htm
 
 var g_locaplic = i3GEO.util.protocolo()+"://"+window.location.host+"/i3geo";
 i3GEO.configura.locaplic = g_locaplic;
-$i("bm1").innerHTML = i3GEO.util.bookmark(window.location.href);
-$i("curtir").innerHTML = "<iframe src='http://www.facebook.com/plugins/like.php?href="+window.location.href+"&amp;layout=button_count&amp;show_faces=false&amp;width=100&amp;action=like&amp;colorscheme=light&amp;height=21' scrolling='no' frameborder='0' style='border:none; overflow:hidden; width:100px; height:21px;' allowTransparency='true'></iframe>";
+$i("bm1").innerHTML = i3GEO.social.bookmark(window.location.href);
+loc = window.location.href;
+i3GEO.social.compartilhar("curtir",loc,loc,"comtotal");
 
 var i3geo_gl_configura = new i3geo_gl_configura(
 	g_locaplic,

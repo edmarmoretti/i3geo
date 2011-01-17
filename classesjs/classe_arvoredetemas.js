@@ -1277,7 +1277,7 @@ i3GEO.arvoreDeTemas = {
 			tempNode.isLeaf = true;
 		}
 		if(i3GEO.arvoreDeTemas.OPCOESADICIONAIS.bookmark === true){
-			html = i3GEO.util.bookmark(i3GEO.configura.locaplic+"/ms_criamapa.php?layers="+node.data.idtema);
+			html = i3GEO.social.bookmark(i3GEO.configura.locaplic+"/ms_criamapa.php?layers="+node.data.idtema);
 			tempNode = new YAHOO.widget.HTMLNode({html:html}, node, false,true);
 			tempNode.enableHighlight = false;
 			tempNode.isLeaf = true;

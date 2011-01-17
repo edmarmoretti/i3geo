@@ -53,6 +53,7 @@ var jsfiles = new Array(
 "classe_guias.js",
 "classe_arvoredecamadas.js",
 "classe_navega.js",
+"classe_social.js",
 //"classe_selecao.js", depreciado
 "classe_eventos.js",
 "classe_arvoredetemas.js",

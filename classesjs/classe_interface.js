@@ -111,10 +111,23 @@ i3GEO.Interface = {
 	/*
 	Propriedade: ATUAL
 	
-	Interface atual em uso.
+	Interface utilizada na criação e controle do mapa.
+	
+	Veja como usar nos arquivos de apresentação do mapa existentes no diretório i3geo/interface
+	
+	O i3Geo, além da interface própria, permite o uso de outras APIs
+	para a construção do mapa, como Google Maps ou Openlayers. Essa propriedade define qual interface será usada.
+	Não confundir com o nome do HTML que é utilizado para mostrar o mapa.
+	
+	Para definir a interface, utilize
+	
+	i3GEO.Interface.ATUAL = "<valor>"
 	
 	Tipo:
 	{string}
+	
+	Valores:
+	{geral|openlayers|flamingo|googlemaps|googleearth}
 	
 	Default:
 	{"padrao"}
@@ -277,21 +290,20 @@ i3GEO.Interface = {
 	*/
 	inicia: function(w,h){
 		if(typeof(console) !== 'undefined'){console.info("i3GEO.Interface.inicia()");}
-		var temp;
 		//
 		//inicialização  que afeta todas as interfaces
 		//
-		if($i("i3GEOcurtirFB")){
-			temp = window.location.href.split("?")[0];
-			$i("i3GEOcurtirFB").innerHTML = "<iframe src='http://www.facebook.com/plugins/like.php?href="+temp+"&amp;layout=button_count&amp;show_faces=false&amp;width=200&amp;action=like&amp;colorscheme=light&amp;height=21' scrolling='no' frameborder='0' style='border:none; overflow:hidden; width:220px; height:21px;' allowTransparency='true'></iframe>";
-		}
+		var temp = window.location.href.split("?")[0];
+		if($i("i3GEOcompartilhar"))
+		{i3GEO.social.compartilhar("i3GEOcompartilhar",temp,temp);}
+	
 		i3GEO.gadgets.quadros.inicia(10);
 		i3GEO.gadgets.quadros.grava("extensao",i3GEO.parametros.extentTotal);					
 		i3GEO.gadgets.mostraBuscaRapida();
 		i3GEO.gadgets.mostraVersao();
 		i3GEO.guias.cria();					
-		if($i("arvoreAdicionaTema"))
-		{i3GEO.arvoreDeTemas.cria(i3GEO.configura.sid,i3GEO.configura.locaplic,"arvoreAdicionaTema");}
+		//if($i("arvoreAdicionaTema"))
+		//{i3GEO.arvoreDeTemas.cria(i3GEO.configura.sid,i3GEO.configura.locaplic,"arvoreAdicionaTema");}
 		//
 		//esse id é utilizado apenas para manter o mapa não visível até que tudo seja montado
 		//

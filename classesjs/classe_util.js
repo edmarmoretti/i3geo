@@ -1984,28 +1984,6 @@ i3GEO.util = {
 		i3GEO.util.scriptTag(js,"i3GEOF."+nome+".criaJanelaFlutuante()","i3GEOF."+nome+"_script");
 	},
 	/*
-	Function: bookmark
-	
-	Cria os botões de bookmark em redes sociais
-	
-	Gera o HTML contendo as tags IMG com os links
-	
-	Parametro:
-	
-	link {string} - link que será marcado
-	
-	Return:
-	
-	HTML com os botões
-	*/
-	bookmark: function(link){
-		ins = "<img src='"+i3GEO.configura.locaplic+"/imagens/delicious.gif' onclick='javascript:window.open(\"http://del.icio.us/post?url="+link+"\")' title='Delicious'/> ";
-		ins += "<img src='"+i3GEO.configura.locaplic+"/imagens/digg.gif' onclick='javascript:window.open(\"http://digg.com/submit/post?url="+link+"\")' title='Digg'/> ";
-		ins += "<img src='"+i3GEO.configura.locaplic+"/imagens/facebook.gif' onclick='javascript:window.open(\"http://www.facebook.com/sharer.php?u="+link+"\")' title='Facebook'/> ";
-		ins += "<img src='"+i3GEO.configura.locaplic+"/imagens/stumbleupon.gif' onclick='javascript:window.open(\"http://www.stumbleupon.com/submit?url="+link+"\")' title='StumbleUpon'/>";
-		return ins;
-	},
-	/*
 	Function: intersectaBox
 	
 	Verifica se um retângulo está dentro de outro retângulo

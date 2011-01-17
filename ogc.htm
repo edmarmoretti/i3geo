@@ -77,8 +77,8 @@ g_locaplic = loc.split("/ogc.htm");
 g_locaplic = g_locaplic[0]
 i3GEO.configura.locaplic = g_locaplic
 
-$i("bm1").innerHTML = i3GEO.util.bookmark(loc);
-$i("curtir").innerHTML = "<iframe src='http://www.facebook.com/plugins/like.php?href="+loc+"&amp;layout=button_count&amp;show_faces=false&amp;width=100&amp;action=like&amp;colorscheme=light&amp;height=21' scrolling='no' frameborder='0' style='border:none; overflow:hidden; width:100px; height:21px;' allowTransparency='true'></iframe>";
+$i("bm1").innerHTML = i3GEO.social.bookmark(loc);
+i3GEO.social.compartilhar("curtir",loc,loc,"comtotal");
 
 g_arvoreClicks = ""
 i3GEO.idioma.IDSELETOR = "bandeiras";

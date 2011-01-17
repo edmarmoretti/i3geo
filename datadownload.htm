@@ -92,8 +92,9 @@ Se o array estiver vazio, será utilizado o default, baseado no sistema de admini
 g_RSSl = new Array("");
 i3GEO.idioma.IDSELETOR = "bandeiras";
 i3GEO.idioma.mostraSeletor();
-$i("bm1").innerHTML = i3GEO.util.bookmark(window.location.href);
-$i("curtir").innerHTML = "<iframe src='http://www.facebook.com/plugins/like.php?href="+window.location.href+"&amp;layout=button_count&amp;show_faces=false&amp;width=100&amp;action=like&amp;colorscheme=light&amp;height=21' scrolling='no' frameborder='0' style='border:none; overflow:hidden; width:100px; height:21px;' allowTransparency='true'></iframe>";
+$i("bm1").innerHTML = i3GEO.social.bookmark(window.location.href);
+loc = window.location.href;
+i3GEO.social.compartilhar("curtir",loc,loc,"comtotal");
 
 DDinicia()
 </script>
