@@ -1144,7 +1144,6 @@ $listaDeTemas - (opcional) Lista com os códigos dos temas que serão identificado
 			$mapa = desligatemas($mapa);
 			$mapa = desligamargem($mapa);
 			$imgo = $mapa->draw();
-
 			//$formatoinfo = "MIME";
 			$formatosinfo = $layer->getmetadata("formatosinfo");
 			if ($formatosinfo != "")
@@ -1164,42 +1163,12 @@ $listaDeTemas - (opcional) Lista com os códigos dos temas que serão identificado
 				{$formatoinfo = $layer->getmetadata("wms_feature_info_mime_type");}
 				if($formatoinfo == "")
 				{$formatoinfo = "text/plain";}
-			}			
-			/*
-			$srs = $layer->getmetadata("wms_srs");
-			$srss = explode(" ",$srs);
-			$srs = "EPSG:4326";
-			foreach ($srss as $s)
-			{
-				if(strtoupper($s) == "EPSG:4291")
-				{$srs = "EPSG:4291";}
 			}
-			$res .= "&SRS=".$srs;
-			$resposta = file($res."&FORMAT=".$formatoinfo);
-			*/
 			$res = $layer->getWMSFeatureInfoURL($ptimg->x, $ptimg->y, 1,$formatoinfo);
 			$res = str_replace("INFOFORMAT","INFO_FORMAT",$res);
 			$res2 = $layer->getWMSFeatureInfoURL($ptimg->x, $ptimg->y, 1,"MIME");
 			$res2 = str_replace("INFOFORMAT","INFO_FORMAT",$res2);
 			$resposta = file($res);
-	/*		
-			$resposta = str_ireplace('<?xml version="1.0" encoding="UTF-8"?>',"",$resposta);
-			$resposta = str_ireplace('<?xml version="1.0" encoding="ISO-8859-1"?>',"",$resposta);
-			$resposta = str_ireplace("<?xml version='1.0' encoding='ISO-8859-1'?>","",$resposta);
-			$resposta = str_ireplace('<?xml',"",$resposta);
-			$resposta = str_ireplace("<","zzzzzzzzzz",$resposta);
-			$resposta = str_ireplace(">","zzzzzzzzzz",$resposta);
-			if (stristr(implode(" ",$resposta),"msWMSLoadGetMapParams"))
-			{
-				$resposta = file($res);
-				$resposta = str_ireplace('<?xml version="1.0" encoding="UTF-8"?>',"",$resposta);
-				$resposta = str_ireplace('<?xml version="1.0" encoding="ISO-8859-1"?>',"",$resposta);
-				$resposta = str_ireplace("<?xml version='1.0' encoding='ISO-8859-1'?>","",$resposta);
-				$resposta = str_ireplace('<?xml',"",$resposta);
-				$resposta = str_ireplace("<","zzzzzzzzzz",$resposta);
-				$resposta = str_ireplace(">","zzzzzzzzzz",$resposta);
-			}
-	*/
 			$n = array();
 			if(strtoupper($formatoinfo) == "TEXT/HTML")
 			{
@@ -1269,9 +1238,7 @@ $listaDeTemas - (opcional) Lista com os códigos dos temas que serão identificado
 			$locimg = $layer->getmetadata("IMGLOC"); //indica o local onde estão os ícones
 			$tips = $layer->getmetadata("TIP");
 			$itensLayer = pegaItens($layer);
-			
 			$nitens = count($itensLayer);
-
 			if($itens == "")
 			{$itens = $itensLayer;}
 			else
@@ -1296,6 +1263,8 @@ $listaDeTemas - (opcional) Lista com os códigos dos temas que serão identificado
 			{$locimg = array_fill(0, $nitens-1,'');}
 			else
 			{$locimg = explode(",",$locimg);}
+			$tips = str_replace(" ",",",$tips);
+			$tips = explode(",",$tips);
 			//o retorno deve ser do tipo TIP
 			if($etip == true)
 			{
@@ -1308,7 +1277,6 @@ $listaDeTemas - (opcional) Lista com os códigos dos temas que serão identificado
 				$lks = array();
 				$itemimg = array();
 				$locimg = array();
-				$tips = explode(",",$tips);
 				foreach($tips as $t)
 				{
 					$itens[] = $t;
@@ -1343,13 +1311,17 @@ $listaDeTemas - (opcional) Lista com os códigos dos temas que serão identificado
 					{$img = "<img src='".$locimg[$conta]."//".$shape->values[$itemimg[$conta]]."' //>";}
 					else
 					if($itemimg[$conta] != "")
-					{$img = "<img src='".$shape->values[$itemimg[$conta]]."' //>";}
-					
+					{$img = "<img src='".$shape->values[$itemimg[$conta]]."' //>";}					
+					//indica se o item é tbm uma etiqueta
+					$etiqueta = "nao";
+					if(in_array($it,$tips))
+					{$etiqueta = "sim";}
 					$arraytemp = array(
 						"alias"=>$this->converte($itensdesc[$conta]),
 						"valor"=>$this->converte($val),
 						"link"=>$link,
-						"img"=>$img
+						"img"=>$img,
+						"tip"=>$etiqueta
 					);
 					if($etip==false)
 					{$valori[] = $arraytemp;}

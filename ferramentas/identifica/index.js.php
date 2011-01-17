@@ -145,12 +145,12 @@ i3GEOF.identifica = {
 				i3GEO.guias.mostraGuiaFerramenta("i3GEOidentificaguia4","i3GEOidentificaguia");
 				new YAHOO.widget.Button("i3GEOidentificabotao1",{onclick:{fn: function(){
 					if(i3GEO.temaAtivo !== ""){
-						
 						var ltema = i3GEO.arvoreDeCamadas.pegaTema(i3GEO.temaAtivo);
 						if(ltema.identifica == "nao" || ltema.identifica == "NAO")
 						{alert("Esse tema não permite etiquetas");}
 						else
 						{i3GEO.tema.dialogo.etiquetas(i3GEO.temaAtivo);}
+						$i("i3GEOidentificaocorrencia").innerHTML = "";
 					}
 					else
 					{alert("Nenhum tema definido");}
@@ -583,7 +583,7 @@ i3GEOF.identifica = {
 	retorno {JSON} - objeto JSON com os dados <i3GEO.php.identifica2>
 	*/
 	mostraDadosTema: function(retorno){
-		var res="",div0,ntemas,i,resultados,nres,cor,j,itens,nitens,k,atualN = "todas",inicio=0,numResultados;
+		var res="",div0,ntemas,i,resultados,nres,cor,j,itens,nitens,k,atualN = "todas",inicio=0,numResultados,tip;
 		if($i("i3GEOFidentificaNocorrencias"))
 		{atualN = $i("i3GEOFidentificaNocorrencias").value;}
 		$i("i3GEOF.identifica_corpo").scrollTop = 0;
@@ -614,10 +614,14 @@ i3GEOF.identifica = {
 					{
 						nitens = resultados[j].length;
 						for(k=0;k<nitens;k++){
+							tip = "&nbsp;&nbsp;";
+							if(resultados[j][k].tip == "sim"){
+								tip = "<img style='margin-right:2px;' src='"+i3GEO.configura.locaplic+"/imagens/tips.png' title='Etiqueta ativa' />";
+							}
 							if(resultados[j][k].link === "")
-							{res +=  "<div style='width:100%;text-align:left;background-color:"+cor+"' >&nbsp;&nbsp;"+resultados[j][k].alias+":&nbsp;"+resultados[j][k].valor+"</div>";}
+							{res +=  "<div style='width:100%;text-align:left;background-color:"+cor+"' >"+tip+resultados[j][k].alias+":&nbsp;"+resultados[j][k].valor+"</div>";}
 							else
-							{res +=  "<div style='width:100%;text-align:left;background-color:"+cor+"' >&nbsp;&nbsp;"+resultados[j][k].alias+":&nbsp;<a href='"+resultados[j][k].link+"' target=_blank >"+resultados[j][k].valor+"</a></div>";}
+							{res +=  "<div style='width:100%;text-align:left;background-color:"+cor+"' >"+tip+resultados[j][k].alias+":&nbsp;<a href='"+resultados[j][k].link+"' target=_blank >"+resultados[j][k].valor+"</a></div>";}
 							if(resultados[j][k].img !== "")
 							{res +=  "<div style='width:100%;text-align:left;background-color:"+cor+"' >"+resultados[j][k].img+"</div>";}
 							if (cor === "RGB(250,250,250)"){cor = "beige";}

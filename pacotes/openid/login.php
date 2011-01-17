@@ -136,5 +136,6 @@ function submete(quem){
     }
 } catch(ErrorException $e) {
     echo $e->getMessage();
+	echo "<br>O nome de usuario pode estar errado.";
 }
 ?>

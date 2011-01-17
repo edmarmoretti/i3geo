@@ -85,7 +85,9 @@ i3GEO.arvoreDeTemas = {
 		
 		uploadgpx: true,
 		
-		comentarios: true
+		comentarios: true,
+		
+		bookmark: true
 	}
 	
 	Tipo:
@@ -111,7 +113,8 @@ i3GEO.arvoreDeTemas = {
 		refresh: true,
 		carousel: true,
 		uploadgpx: true,
-		comentarios: true
+		comentarios: true,
+		bookmark: true
 	},
 	/*
 	Propriedade: FATORESTRELA
@@ -1077,7 +1080,8 @@ i3GEO.arvoreDeTemas = {
 							idtema:temas[i].tid,
 							fonte:temas[i].link,
 							ogc:temas[i].ogc,
-							kmz:temas[i].kmz
+							kmz:temas[i].kmz,
+							bookmark:"sim"
 						},
 						node,
 						false,
@@ -1272,6 +1276,12 @@ i3GEO.arvoreDeTemas = {
 			tempNode.enableHighlight = false;
 			tempNode.isLeaf = true;
 		}
+		if(i3GEO.arvoreDeTemas.OPCOESADICIONAIS.bookmark === true){
+			html = i3GEO.util.bookmark(i3GEO.configura.locaplic+"/ms_criamapa.php?layers="+node.data.idtema);
+			tempNode = new YAHOO.widget.HTMLNode({html:html}, node, false,true);
+			tempNode.enableHighlight = false;
+			tempNode.isLeaf = true;
+		}		
 		node.loadComplete();
 	},
 	/*

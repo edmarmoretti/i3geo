@@ -868,7 +868,7 @@ i3GEO.Interface = {
 				if(i3geoOL.getLayersByName(camada.name).length == 0){
 					urllayer = url+"&layer="+camada.name;
 					try{
-						if(camada.escondido === "sim" || camada.connectiontype === 10 || camada.type === 4 || camada.type === 8 )
+						if(camada.escondido === "sim" || camada.connectiontype === 10 || camada.type === 0 || camada.type === 4 || camada.type === 8 )
 						{opcoes.singleTile = true;}
 						else{
 							if(camada.type === 3) //raster

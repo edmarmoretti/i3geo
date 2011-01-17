@@ -24,6 +24,7 @@ if(!empty($parametrosURL["limpalogin"]))
 	session_name("openid");
 	session_start();
 	$_SESSION["g_sid"] = $parametrosURL["g_sid"];
+	$_SESSION["locaplic"] = $parametrosURL["locaplic"];
 }
 if(!empty($parametrosURL["tema"]))
 {$_SESSION["tema"] = $parametrosURL["tema"];}
@@ -52,7 +53,7 @@ function linkOpenId()
 function formularioInsere()
 {
 	echo "<p>Adicione um comentário:</p>";
-	$url = $_SESSION["locaplic"]."/ferramentas/comentarios/index.php?g_sid=".$_SESSION["g_sid"]."&tema=".$_SESSION["tema"];
+	$url = $_SESSION["locaplic"]."/ferramentas/comentarios/index.php?g_sid=".$_SESSION["g_sid"]."&tema=".$_SESSION["tema"]."&locaplic=".$_SESSION["locaplic"];
 	echo "<form action='".$url."' method='post'>";
 	echo "	<textarea name=novocomentario value='' type='text' style='height:150px;width:98%' ></textarea><br>";
 	echo "	<input type=submit value='Salvar' />";
