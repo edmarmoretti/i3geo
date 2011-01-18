@@ -110,6 +110,32 @@ i3GEO.janela = {
 	*/
 	ANTESFECHA: [],
 	/*
+	Propriedade: TRANSICAOSUAVE
+	
+	Altera a transparência das barras quando o mouse sobrepõe a janela e quando sai da barra
+	
+	Tipo:
+	{boolean}
+	
+	Default:
+	{true}
+	*/
+	TRANSICAOSUAVE: true,
+	/*
+	Propriedade: OPACIDADE
+	
+	Valor da opacidade miníma utilizada quando TRANSICAOSUAVE for igual a true.
+	
+	Varia de 0 a 100
+	
+	Tipo:
+	{numeric}
+	
+	Default:
+	{65}
+	*/
+	OPACIDADE: 65,
+	/*
 	Variavel: TIPS
 	
 	Lista os tips inseridos no mapa, possibilitando sua remoção em lote
@@ -165,23 +191,19 @@ i3GEO.janela = {
 	
 	modal {Boolean} - (opcional) indica se a janela bloqueará as inferiores ou não. Por default é false
 	
-	classe {String} - (opcional) classe CSS que será aplicada à barra de menu. Por default o valor é hd2
+	classe {String} - (opcional) classe CSS que será aplicada à barra de menu. Por default o valor é hd2. Na interface Google Earth, esse valor é sempre alterado para "hd".
 
 	funcaoCabecalho {function} - (opcional) funcao que será executada quando o usuário clicar no cabecalho
 	
 	funcaoMinimiza {function} - (opcional) funcao que será executada para minimizar a janela
 	
-	escondeX {boolean} - esconde ou não o botão de fechar, de forma que ele apenas apareça ao posicionar o mouse sobre o cabeçalho da janela
-
 	Return:
 	
 	{Array} Array contendo: objeto YAHOO.panel criado,elemento HTML com o cabecalho, elemento HTML com o corpo
 	*/
-	cria: function(wlargura,waltura,wsrc,nx,ny,texto,id,modal,classe,funcaoCabecalho,funcaoMinimiza,escondeX){
+	cria: function(wlargura,waltura,wsrc,nx,ny,texto,id,modal,classe,funcaoCabecalho,funcaoMinimiza){
 		if(typeof(console) !== 'undefined'){console.info("i3GEO.janela.cria()");}
 		var i,wlargura_,ins,novoel,wdocaiframe,pos,temp,fix,underlay,ifr;
-		if(!escondeX)
-		{escondeX = false;}
 		if(i3GEO.janela.ANTESCRIA){
 			for(i=0;i<i3GEO.janela.ANTESCRIA.length;i++)
 			{eval(i3GEO.janela.ANTESCRIA[i]);}
@@ -192,18 +214,18 @@ i3GEO.janela = {
 		if (arguments.length < 7 || id === ""){
 			id = "wdoca";
 			modal = false;
-			classe = "hd";
+			classe = "hd2";
 			funcaoCabecalho = null;
 			funcaoMinimiza = null;
 		}
 		if (arguments.length === 7){
 			modal = false;
-			classe = "hd";
+			classe = "hd2";
 			funcaoCabecalho = null;
 			funcaoMinimiza = null;
 		}
 		if (arguments.length === 8){
-			classe = "hd";
+			classe = "hd2";
 			funcaoCabecalho = null;
 			funcaoMinimiza = null;
 		}
@@ -214,6 +236,11 @@ i3GEO.janela = {
 		if (arguments.length === 10){
 			funcaoMinimiza = null;
 		}
+		if(i3GEO.Interface.ATUAL == "googleearth")
+		{
+			classe = "hd";
+			i3GEO.janela.TRANSICAOSUAVE = false;
+		}
 		wlargura_ = parseInt(wlargura,10)+2+"px";
 		if ($i(id))
 		{YAHOO.janelaDoca.xp.panel.destroy();}
@@ -221,11 +248,10 @@ i3GEO.janela = {
 		{$i("i3geo").removeChild($i(id+"_c"));}
 		if($i(id))
 		{$i("i3geo").removeChild($i(id));}
-		//var mouseout =  "$i('"+id+"').getElementsByClassName('container-close')[0].style.display='none';";
-		var mouseover =  "$i('"+id+"').getElementsByClassName('container-close')[0].style.display='block';";			
-		if(funcaoMinimiza)
-		{mouseover += "$i('"+id+"_minimizaCabecalho').style.display='block';";}
-		ins = '<div onmouseover="'+mouseover+'" id="'+id+'_cabecalho" class="hd" style="background-color:white;">';
+		//var mouseover =  "$i('"+id+"').getElementsByClassName('container-close')[0].style.display='block';";			
+		//if(funcaoMinimiza)
+		//{mouseover += "$i('"+id+"_minimizaCabecalho').style.display='block';";}
+		ins = '<div id="'+id+'_cabecalho" class="'+classe+'" style="background-color:white;">';
 		if(i3GEO.configura !== undefined)
 		{ins += "<img id='"+id+"_imagemCabecalho' style='position:absolute;left:3px;top:2px;visibility:hidden;' src=\'"+i3GEO.configura.locaplic+"/imagens/aguarde.gif\' />";}
 		ins += texto;
@@ -240,6 +266,26 @@ i3GEO.janela = {
 		novoel.style.display="block";
 		novoel.style.border = "1px solid rgb(120 120 120)";
 		novoel.innerHTML = ins;
+		if(i3GEO.janela.TRANSICAOSUAVE){
+			if (navm){novoel.style.filter='alpha(opacity='+i3GEO.janela.OPACIDADE+')';}
+			else{novoel.style.opacity= i3GEO.janela.OPACIDADE / 100;}
+			novoel.onmouseover = function(){
+				if (navm)
+				{novoel.style.filter='alpha(opacity=100)';}
+				else
+				{novoel.style.opacity = 1;}
+			};
+			novoel.onmouseout = function(){
+				if (navm)
+				{novoel.style.filter='alpha(opacity='+i3GEO.janela.OPACIDADE+')';}
+				else
+				{novoel.style.opacity= i3GEO.janela.OPACIDADE / 100;}
+			};				
+		}
+		else{
+			if (navm){novoel.style.filter='alpha(opacity=100)';}
+			else{novoel.style.opacity= 1;}
+		}	
 		if($i("i3geo"))
 		{$i("i3geo").appendChild(novoel);}
 		else
@@ -296,17 +342,6 @@ i3GEO.janela = {
 		{$i(id+"_minimizaCabecalho").onclick = funcaoMinimiza;}
 		YAHOO.util.Event.addListener(YAHOO.janelaDoca.xp.panel.close, "click", i3GEO.janela.fecha,YAHOO.janelaDoca.xp.panel,{id:id},true);
 		i3GEO.janela.ULTIMOZINDEX++;
-		//
-		//esconde/mostra ícone de fechar a janela
-		//
-		if(escondeX == true){
-			var iconex = $i(id).getElementsByClassName("container-close")[0];
-			if(iconex)
-			{iconex.style.display='none';}
-			iconex = $i(id+"_minimizaCabecalho");
-			if(iconex)
-			{iconex.style.display='none';}			
-		}
 		return([YAHOO.janelaDoca.xp.panel,$i(id+"_cabecalho"),$i(id+"_corpo")]);
 	},
 	/*

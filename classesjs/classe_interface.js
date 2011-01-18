@@ -2038,7 +2038,7 @@ i3GEO.Interface = {
 			};
 			var janela = i3GEO.janela.cria(
 				"230px",
-				"70px",
+				"100px",
 				"",
 				"",
 				"",
