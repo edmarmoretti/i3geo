@@ -214,18 +214,18 @@ i3GEO.janela = {
 		if (arguments.length < 7 || id === ""){
 			id = "wdoca";
 			modal = false;
-			classe = "hd2";
+			classe = "hd";
 			funcaoCabecalho = null;
 			funcaoMinimiza = null;
 		}
 		if (arguments.length === 7){
 			modal = false;
-			classe = "hd2";
+			classe = "hd";
 			funcaoCabecalho = null;
 			funcaoMinimiza = null;
 		}
 		if (arguments.length === 8){
-			classe = "hd2";
+			classe = "hd";
 			funcaoCabecalho = null;
 			funcaoMinimiza = null;
 		}
@@ -248,9 +248,7 @@ i3GEO.janela = {
 		{$i("i3geo").removeChild($i(id+"_c"));}
 		if($i(id))
 		{$i("i3geo").removeChild($i(id));}
-		//var mouseover =  "$i('"+id+"').getElementsByClassName('container-close')[0].style.display='block';";			
-		//if(funcaoMinimiza)
-		//{mouseover += "$i('"+id+"_minimizaCabecalho').style.display='block';";}
+		
 		ins = '<div id="'+id+'_cabecalho" class="'+classe+'" style="background-color:white;">';
 		if(i3GEO.configura !== undefined)
 		{ins += "<img id='"+id+"_imagemCabecalho' style='position:absolute;left:3px;top:2px;visibility:hidden;' src=\'"+i3GEO.configura.locaplic+"/imagens/aguarde.gif\' />";}
@@ -267,8 +265,6 @@ i3GEO.janela = {
 		novoel.style.border = "1px solid rgb(120 120 120)";
 		novoel.innerHTML = ins;
 		if(i3GEO.janela.TRANSICAOSUAVE){
-			if (navm){novoel.style.filter='alpha(opacity='+i3GEO.janela.OPACIDADE+')';}
-			else{novoel.style.opacity= i3GEO.janela.OPACIDADE / 100;}
 			novoel.onmouseover = function(){
 				if (navm)
 				{novoel.style.filter='alpha(opacity=100)';}
@@ -319,7 +315,6 @@ i3GEO.janela = {
 		if(waltura === "auto")
 		{YAHOO.janelaDoca.xp.panel = new YAHOO.widget.Panel(id, { iframe:ifr,modal:modal, width: wlargura_,underlay:"none", fixedcenter: fix, constraintoviewport: false, visible: true,monitorresize:false,dragOnly:true,keylisteners:null} );}	
 		else{YAHOO.janelaDoca.xp.panel = new YAHOO.widget.ResizePanel(id, { iframe:ifr,underlay:underlay, modal:modal, width: wlargura_, fixedcenter: fix, constraintoviewport: false, visible: true,monitorresize:false,dragOnly:true,keylisteners:null} );}
-		
 		if(nx !== "" && nx !== "center"){
 			pos = [nx,ny];
 			YAHOO.janelaDoca.xp.panel.moveTo(pos[0],pos[1]+50);
@@ -335,7 +330,7 @@ i3GEO.janela = {
 			{$i(id+"_mask").style.zIndex = 9000 + i3GEO.janela.ULTIMOZINDEX + 1;}
 		}
 		if($i(id+"_c"))
-		{$i(id+"_c").style.zIndex = 10000 + i3GEO.janela.ULTIMOZINDEX + 1;}
+		{$i(id+"_c").style.zIndex = 23000 + i3GEO.janela.ULTIMOZINDEX + 1;}
 		if(funcaoCabecalho)
 		{$i(id+'_cabecalho').onclick = funcaoCabecalho;}
 		if(funcaoMinimiza)
@@ -504,16 +499,17 @@ i3GEO.janela = {
 		if(i3GEO.janela.ESTILOAGUARDE === "normal" || i3GEO.janela.ESTILOAGUARDE === "minima")
 		{eval ('YAHOO.aguarde.'+id+'.setHeader("<span><img id=aguardeGifAberto src=\'"+i3GEO.configura.locaplic+"/imagens/aguarde.gif\' /></span>&nbsp;<span style=font-size:8px >'+contador+'</span>")');}
 		eval ('YAHOO.aguarde.'+id+'.render(document.body)');
-		eval ('YAHOO.aguarde.'+id+'.moveTo('+pos[0]+','+pos[1]+')');
+		if(i3GEO.parametros.w > 0)
+		{eval ('YAHOO.aguarde.'+id+'.moveTo('+(pos[0] + (i3GEO.parametros.w / 2) - 120)+','+pos[1]+')');}
+		else
+		{eval ('YAHOO.aguarde.'+id+'.moveTo('+pos[0]+','+pos[1]+')');}
 		eval ('YAHOO.aguarde.'+id+'.show()');
 		if($i(id+"_mask"))
-		{$i(id+"_mask").style.zIndex=5000;}
+		{$i(id+"_mask").style.zIndex=25000;}
 		if($i(id+"_c")){
-			$i(id+"_c").style.zIndex=6000;
+			$i(id+"_c").style.zIndex=26000;
 			$i(id+"_c").style.backgroundColor = "";
 		}
-		
-		//YAHOO.log("Fim abreAguarde", "janela");	
 	},
 	/*
 	Function: tip

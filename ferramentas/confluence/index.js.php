@@ -146,7 +146,7 @@ i3GEOF.confluence = {
 		i3GEO.util.criaPin();
 		var i = $i("i3GEOF.confluence_c").style;
 		i3GEO.janela.ULTIMOZINDEX++;
-		i.zIndex = 10000 + i3GEO.janela.ULTIMOZINDEX;
+		i.zIndex = 21000 + i3GEO.janela.ULTIMOZINDEX;
 	},
 	/*
 	Function: escondexy

@@ -180,7 +180,7 @@ i3GEOF.insereGrafico = {
 			$i("i3GEOinseregraficolistai").innerHTML = "";
 			var i = $i("i3GEOF.insereGrafico_c").style;
 			i3GEO.janela.ULTIMOZINDEX++;
-			i.zIndex = 10000 + i3GEO.janela.ULTIMOZINDEX;
+			i.zIndex = 21000 + i3GEO.janela.ULTIMOZINDEX;
 		}			
 	},
 	/*

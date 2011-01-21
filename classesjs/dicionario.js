@@ -775,6 +775,13 @@ en:"Comentar",
 es:"Comentar",
 it:"Comentar"
 }],
+"t46": [
+{
+pt: "Mais populares",
+en:"Mais populares",
+es:"Mais populares",
+it:"Mais populares"
+}],
 //guia adiciona
 "a1":[
 {

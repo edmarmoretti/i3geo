@@ -1103,15 +1103,11 @@ height:20px;
 .yui-skin-sam .yui-panel .hd2 {
 background:transparent url(../pacotes/yui270/build/assets/skins/sam/sprite.png) repeat-x scroll 0 -200px;
 color:#000000;
-font-size:70%;
+font-size:80%;
 font-weight:bold;
 line-height:2;
 padding:0 10px;
-opacity:.80;
-filter:alpha(opacity=80);
-}
-
-.yui-skin-sam .yui-panel .hd {
+height:20px;
 opacity:.80;
 filter:alpha(opacity=80);
 }

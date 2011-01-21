@@ -252,7 +252,7 @@ i3GEOF.analisaGeometrias = {
 		}
 		var i = $i("i3GEOF.analisaGeometrias_c").style;
 		i3GEO.janela.ULTIMOZINDEX++;
-		i.zIndex = 10000 + i3GEO.janela.ULTIMOZINDEX;
+		i.zIndex = 21000 + i3GEO.janela.ULTIMOZINDEX;
 		i3GEO.barraDeBotoes.ativaIcone("selecao");
 	},
 	/*

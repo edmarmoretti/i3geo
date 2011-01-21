@@ -133,7 +133,7 @@ i3GEOF.etiqueta = {
 		i3GEO.php.listaItensTema(i3GEOF.etiqueta.montaListaItens,i3GEO.temaAtivo);
 		var i = $i("i3GEOF.etiqueta_c").style;
 		i3GEO.janela.ULTIMOZINDEX++;
-		i.zIndex = 10000 + i3GEO.janela.ULTIMOZINDEX;
+		i.zIndex = 21000 + i3GEO.janela.ULTIMOZINDEX;
 	},
 	/*
 	Function: montaListaItens

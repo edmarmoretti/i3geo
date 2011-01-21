@@ -279,6 +279,109 @@ Return:
 		return $final;
 	}
 /*
+Function: procuraTemasEstrela
+
+Localiza temas que têm um determinado número (nível) de estrelas
+
+Parametros:
+
+nivel {numeric} - número de estrelas
+
+perfil {string} - considera apenas esse perfil
+
+Return:
+
+{array}
+*/
+	function procuraTemasEstrela ($nivel,$fatorestrela,$perfil)
+	{
+		$menus = $this->pegaListaDeMenus($perfil);
+		$resultado = array();
+		$subgrupo = array();
+		$final = array();
+		foreach($menus as $menu)
+		{
+			$grupos = $this->pegaGruposMenu($menu["idmenu"]);
+			foreach($grupos["grupos"] as $grupo)
+			{
+				$a = $grupo["n1_perfil"];
+				$a = str_replace(" ",",",$a);
+				if($this->verificaOcorrencia($perfil,explode(",",$a)))
+				{
+					$sgrupos = $this->pegaSubgruposGrupo($menu["idmenu"],$grupo["id_n1"]);
+					$temasRaizGrupo = array();
+					$temasR = $this->pegaTemasRaizGrupo($menu["idmenu"],$grupo["id_n1"]);
+					foreach($temasR as $tema)
+					{
+						$a = $tema["perfil"];
+						$a = str_replace(" ",",",$a);								
+						if($this->verificaOcorrencia($perfil,explode(",",$a)))
+						{
+							$t = $this->pegaTema($tema["id_tema"]);
+							$t = $t[0];
+							$nome = $this->removeAcentos($tema["nome_tema"]);
+							$tags = $this->removeAcentos($tema["tags_tema"]);
+							$tags1 = $this->removeAcentos(mb_convert_encoding($tema["tags_tema"],"ISO-8859-1","UTF-8"));
+							$nome1 = $this->removeAcentos(mb_convert_encoding($tema["nome_tema"],"ISO-8859-1","UTF-8"));
+							$miniatura = "nao";
+							if(file_exists($this->locaplic."/temas/miniaturas/".$t["codigo_tema"].".map.mini.png"))
+							{$miniatura = "sim";}
+							$down = "sim";
+							if (strtolower($t["download_tema"]) == "nao")
+							{$down = "nao";}
+							$texto = array("miniatura"=>$miniatura,"tid"=>$t["codigo_tema"],"nome"=>$this->converte($tema["nome_tema"]),"link"=>$t["link_tema"],"download"=>$down);
+							$n = abs($t["nacessos"] / $fatorestrela);		
+							if($n >= 5){$n = 5;}
+							if ($n == $nivel)
+							{$temasRaizGrupo[] = $texto;}
+						}
+					}				
+					foreach($sgrupos["subgrupos"] as $sgrupo)
+					{
+						$a = $sgrupo["n2_perfil"];
+						$a = str_replace(" ",",",$a);
+						if($this->verificaOcorrencia($perfil,explode(",",$a)))
+						{
+							$temas = $this->pegaTemasSubGrupo($sgrupo["id_n2"]);
+							foreach ($temas as $tema)
+							{
+								$a = $tema["n3_perfil"];
+								$a = str_replace(" ",",",$a);								
+								if($this->verificaOcorrencia($perfil,explode(",",$a)))
+								{
+									$t = $this->pegaTema($tema["id_tema"]);
+									$t = $t[0];
+									$nome = $this->removeAcentos($tema["nome_tema"]);
+									$tags = $this->removeAcentos($tema["tags_tema"]);
+									$tags1 = $this->removeAcentos(mb_convert_encoding($tema["tags_tema"],"ISO-8859-1","UTF-8"));
+									$nome1 = $this->removeAcentos(mb_convert_encoding($tema["nome_tema"],"ISO-8859-1","UTF-8"));
+									$miniatura = "nao";
+									if(file_exists($this->locaplic."/temas/miniaturas/".$tema["codigo_tema"].".map.mini.png"))
+									{$miniatura = "sim";}
+									$down = "sim";
+									if (strtolower($t["download_tema"]) == "nao")
+									{$down = "nao";}
+									$texto = array("miniatura"=>$miniatura,"tid"=>$tema["codigo_tema"],"nome"=>$this->converte($tema["nome_tema"]),"link"=>$t["link_tema"],"download"=>$down);
+									$n = abs($t["nacessos"] / $fatorestrela);		
+									if($n >= 5){$n = 5;}
+									if ($n == $nivel)
+									{$resultado[] = $texto;}
+								}
+							}
+						}
+						if (count($resultado) > 0)
+						{$subgrupo[] = array("subgrupo"=>$this->converte($sgrupo["nome_subgrupo"]),"temas"=>$resultado);}
+						$resultado = array();
+					}	
+				}
+				if (count($subgrupo) > 0 || count($temasRaizGrupo) > 0)
+				{$final[] = array("grupo"=>$this->converte($grupo["nome_grupo"]),"temas"=>$temasRaizGrupo,"subgrupos"=>$subgrupo);}
+				$subgrupo = array();				
+			}
+		}
+		return $final;
+	}
+/*
 Function: pegaGruposMenu
 
 Retorna a lista de grupos de um menu

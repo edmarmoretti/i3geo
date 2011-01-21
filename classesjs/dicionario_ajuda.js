@@ -803,6 +803,15 @@ g_traducao_ajuda = {
 			complemento:"Mais detalhes em http://www.criminologia-rsm.org/LinkClick.aspx?fileticket=XT%2BDy%2BNyrZM%3D&tabid=484&mid=1614",
 			tela:"ferramentas/nptpol/exemplo.htm",
 			apijs:"i3GEO.analise.dialogo.centromassa()"
+		},
+		"95": {
+			titulo: "Temas mais populares",
+			diretorio:"",
+			categoria:"4",
+			pt:"Cada vez que um usuário adiciona uma camada ao mapa, por meio do catálogo de temas, é feito um registro no banco de dados de administração. Esse registro é cumulativo e permite classificar os temas conforme sua popularidade.",
+			complemento:"",
+			tela:"",
+			apijs:"i3GEO.arvoreDeTemas"
 		}
 	}
 };

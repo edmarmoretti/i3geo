@@ -144,7 +144,7 @@ i3GEOF.wiki = {
 		g_operacao = "navega";
 		var i = $i("i3GEOF.wiki_c").style;
 		i3GEO.janela.ULTIMOZINDEX++;
-		i.zIndex = 10000 + i3GEO.janela.ULTIMOZINDEX;
+		i.zIndex = 21000 + i3GEO.janela.ULTIMOZINDEX;
 	},
 	/*
 	Function: lista

@@ -342,7 +342,7 @@ i3GEOF.legenda = {
 		{alert("O tema ja nao existe mais no mapa");}
 		var i = $i("i3GEOF.legenda_c").style;
 		i3GEO.janela.ULTIMOZINDEX++;
-		i.zIndex = 10000 + i3GEO.janela.ULTIMOZINDEX;
+		i.zIndex = 21000 + i3GEO.janela.ULTIMOZINDEX;
 	},
 	/*
 	Function: mostralegenda

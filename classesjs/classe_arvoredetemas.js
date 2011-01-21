@@ -126,7 +126,7 @@ i3GEO.arvoreDeTemas = {
 	Tipo:
 	{Numeric}
 	*/
-	FATORESTRELA: "50",
+	FATORESTRELA: "10",
 	/*
 	Propriedade: INCLUISISTEMAS
 	
@@ -145,6 +145,15 @@ i3GEO.arvoreDeTemas = {
 	{Boolean}
 	*/
 	INCLUIWMS: true,
+	/*
+	Propriedade: INCLUIESTRELAS
+	
+	Inclui na árvore um nó com a lista de temas classificados conforme o número de estrelas que possuí
+	
+	Tipo:
+	{Boolean}
+	*/
+	INCLUIESTRELAS: true,	
 	/*
 	Propriedade: FILTRADOWNLOAD
 	
@@ -623,6 +632,78 @@ i3GEO.arvoreDeTemas = {
 		i3GEO.php.listadrives(retorno);
 	},
 	/*
+	Function: listaEstrelas
+	
+	Busca e insere na árvore de temas os temas que contém um certo nível de estrelas
+	
+	Parametros:
+	
+	node {objeto} - nó da árvore que foi expandido pelo usuário
+	*/
+	listaEstrelas: function(node){
+		if(typeof(console) !== 'undefined'){console.info("i3GEO.arvoreDeTemas.listaEstrelas()");}
+		var busca,root,temp;
+		temp = function(retorno)
+		{
+			var mostra,tempNode,d,ig,
+				montaTexto = function(ngSgrupo){
+					var tempn,ngTema,tempng,mostra,d,lk,tempNode,st,sg;
+					tempn = ngSgrupo.length;
+					for(sg=0;sg<tempn;sg++){
+						ngTema = ngSgrupo[sg].temas;
+						tempng = ngTema.length;
+						for (st=0;st<tempng;st++){
+							mostra = true;
+							try{
+								if(i3GEO.arvoreDeTemas.FILTRADOWNLOAD && ngTema[st].download == "nao")
+								{mostra = false;}
+								if(i3GEO.arvoreDeTemas.FILTRAOGC && ngTema[st].ogc == "nao")
+								{mostra = false;}
+							}
+							catch(e){}
+							if(mostra){
+								d = i3GEO.arvoreDeTemas.montaTextoTema("gray",ngTema[st]);
+								if ( ngTema[st].link != " ")
+								{lk = "<a href='"+ngTema[st].link+"' target='blank'>&nbsp;fonte</a>";}
+								if(ngSgrupo[sg].subgrupo)
+								{d += "<td style='text-allign:left'> ("+(ngSgrupo[sg].subgrupo)+") "+lk+"</td>";}
+								else
+								{d += "<td style='text-allign:left'> ("+(ngSgrupo[sg].grupo)+")"+lk+"</td>";}
+								tempNode = new YAHOO.widget.HTMLNode(d, node, false,true);
+								tempNode.isLeaf = true;
+								tempNode.enableHighlight = false;
+							}
+							conta++;
+						}
+					}
+				};
+			if(!retorno.data)
+			{alert("Ocorreu um erro");}
+			else{
+				retorno = retorno.data;
+				conta = 0;
+				if ((retorno != "erro") && (retorno !== undefined)){
+					ig = retorno.length-1;
+					if(ig >= 0){
+						do{
+							montaTexto([retorno[ig]]);
+							montaTexto(retorno[ig].subgrupos);
+						}
+						while(ig--);
+					}
+					else{
+						d = "<span style='color:red'>Nada encontrado<br><br></span>";
+						tempNode = new YAHOO.widget.HTMLNode(d, node, false,true);
+						tempNode.isLeaf = true;
+						tempNode.enableHighlight = false;
+					}
+				}
+			}
+			node.loadComplete();
+		};	
+		i3GEO.php.procurartemasestrela(temp,node.data.nivel,i3GEO.arvoreDeTemas.FATORESTRELA*1);	
+	},
+	/*
 	Function: cria
 	
 	Cria a árvore com os menus disponíveis.
@@ -690,7 +771,7 @@ i3GEO.arvoreDeTemas = {
 	*/
 	montaArvore: function() {
 		if(typeof(console) !== 'undefined'){console.info("i3GEO.arvoreDeTemas.montaArvore()");}
-		var newVal,currentIconMode,d,tempNode,retorno,nomeSis,root,insp,outrasOpcoes,dados,c,i,j,conteudo,editor;
+		var newVal,currentIconMode,d,tempNode,tempNode1,retorno,nomeSis,root,insp,outrasOpcoes,dados,c,i,j,conteudo,editor;
 		YAHOO.example.treeExample = function(){
 			function changeIconMode(){
 				newVal = parseInt(this.value,10);
@@ -826,6 +907,27 @@ i3GEO.arvoreDeTemas = {
 			tempNode.enableHighlight = false;
 			tempNode.setDynamicLoad(i3GEO.arvoreDeTemas.listaWMS, 1);
 		}
+		//
+		//estrelas
+		//
+		if(i3GEO.arvoreDeTemas.INCLUIESTRELAS === true){
+			tempNode = new YAHOO.widget.HTMLNode(
+				{html:"<b>&nbsp;"+$trad("t46")+"</b> <a class=ajuda_usuario target=_blank href='"+i3GEO.configura.locaplic+"/ajuda_usuario.php?idcategoria=4&idajuda=95' >&nbsp;&nbsp;&nbsp;</a>",enableHighlight: false},
+				root,
+				false,
+				true
+			);
+			ig=5;
+			do{
+				tempNode1 = new YAHOO.widget.HTMLNode(
+					{html:"<img src='"+$im("e"+ig+".png")+"' />",enableHighlight: false,nivel:ig},
+					tempNode,false,true
+				);			
+				tempNode1.setDynamicLoad(i3GEO.arvoreDeTemas.listaEstrelas,1);				
+				ig--;
+			}
+			while(ig > 0);
+		}		
 		//
 		//adiciona na árvore a raiz de cada menu
 		//

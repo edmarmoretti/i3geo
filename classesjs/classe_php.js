@@ -879,6 +879,19 @@ i3GEO.php = {
 		}catch(e){}
 	},
 	/*
+	Function: procurartemasestrela
+
+	<PROCURARTEMASESTRELA>	
+	*/
+	procurartemasestrela: function(funcao,nivel,fatorestrela,locaplic){
+		if(arguments.length === 3)
+		{locaplic = i3GEO.configura.locaplic;}
+		try{
+			var p = locaplic+"/classesphp/mapa_controle.php?funcao=procurartemasestrela&map_file=&nivel="+nivel+"&fatorestrela="+fatorestrela+"&idioma="+i3GEO.idioma.ATUAL;
+			cpJSON.call(p,"foo",funcao);
+		}catch(e){}
+	},
+	/*
 	Function: adtema
 
 	<ADTEMA>	

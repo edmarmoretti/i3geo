@@ -101,7 +101,6 @@ foreach ($layersNames as $layerName)
 					{$l->set("connection",$postgis_mapa[$lcon]);}					
 				}
 			}
-
 		}
 	}
 	if($layerName == $_GET["layer"])
@@ -216,6 +215,7 @@ function carregaCacheImagem($bbox,$layer,$map,$w,$h){
 	{$bbox = "";}
 	if($layer == "")
 	{$layer = "fundo";}
+	
 	$nome = $w.$h.$bbox;
 	$nome = dirname(dirname($map))."/cache/".$layer."/".$nome;
 	if(file_exists($nome))

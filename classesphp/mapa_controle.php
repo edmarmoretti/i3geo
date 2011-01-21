@@ -1897,7 +1897,19 @@ Procura um tema no menu considerando todos os níveis.
 		include_once("classe_menutemas.php");
 		$m = new Menutemas($map_file,$perfil,$locaplic,$urli3geo,$editores,$idioma);
 		$retorno = $m->procurartemas2($procurar);
-	break;	
+	break;
+/*
+Valor: PROCURARTEMASESTRELA
+
+Procura um tema com um certo número de estrelas.
+
+<Menutemas->procurartemasestrela>
+*/
+	case "PROCURARTEMASESTRELA":
+		include_once("classe_menutemas.php");
+		$m = new Menutemas($map_file,$perfil,$locaplic,$urli3geo,$editores,$idioma);
+		$retorno = $m->procurartemasestrela($nivel,$fatorestrela);
+	break;
 /*
 Valor: PEGAMAPAS
 

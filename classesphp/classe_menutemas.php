@@ -492,7 +492,25 @@ $procurar - String que será procurada.
 		unset($arvore);
 		return($temas);
 	}
+/*
+function: procurartemasestrela
 
+Procura temas com determinado número de estrelas
+
+parameters:
+
+$nivel - número de estrelas
+
+$fatorestrela - valor para normalizar o total de acessos com o valor da estrela
+*/
+	function procurartemasestrela($nivel,$fatorestrela)
+	{
+		include_once("../admin/php/classe_arvore.php");
+		$arvore = new Arvore($this->locaplic,$this->idioma);
+		$temas = $arvore->procuraTemasEstrela($nivel,$fatorestrela,$this->perfil);
+		unset($arvore);
+		return($temas);
+	}
 /*
 function: listaTags
 

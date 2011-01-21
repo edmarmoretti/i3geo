@@ -204,7 +204,7 @@ i3GEOF.nuvemtags = {
 		i3GEO.barraDeBotoes.ativaIcone("nuvemtags");
 		var i = $i("i3GEOF.nuvemtags_c").style;
 		i3GEO.janela.ULTIMOZINDEX++;
-		i.zIndex = 10000 + i3GEO.janela.ULTIMOZINDEX;
+		i.zIndex = 21000 + i3GEO.janela.ULTIMOZINDEX;
 	},
 	/*
 	Function: montaNuvem
