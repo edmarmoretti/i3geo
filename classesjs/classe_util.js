@@ -2100,11 +2100,48 @@ i3GEO.util = {
 		YAHOO.janelaCorRamp.xp.panel = new YAHOO.widget.ResizePanel(id, { height:"480px",zIndex:5000, modal:modal, width: "350px", fixedcenter: fix, constraintoviewport: false, visible: true, iframe:false} );
 		YAHOO.janelaCorRamp.xp.panel.render();
 		$i(id+'_cabecalho').className = classe;
+	},
+	/*
+	Function: localizai3GEO
+	
+	Tenta identificar onde os JS do i3Geo estão localizados
+	
+	Aplica o resultado à variável i3GEO.configura.locaplic
+	
+	Return:
+	
+	{string} - url onde está instalado o i3geo
+	*/		
+	localizai3GEO: function(){
+		var scriptLocation = "",
+			scripts = document.getElementsByTagName('script'),
+			i = 0,
+			index,
+			ns = scripts.length;
+		for (i = 0; i < ns; i++) {
+			var src = scripts[i].getAttribute('src');
+			if (src) {
+				var index = src.lastIndexOf("classesjs/i3geo.js");
+				// is it found, at the end of the URL?
+				if ((index > -1) && (index + "classesjs/i3geo.js".length == src.length)) {
+					scriptLocation = src.slice(0, -"classesjs/i3geo.js".length);
+					break;
+				}
+				var index = src.lastIndexOf("classesjs/i3geonaocompacto.js");
+				if ((index > -1) && (index + "classesjs/i3geonaocompacto.js".length == src.length)) {
+					scriptLocation = src.slice(0, -"classesjs/i3geonaocompacto.js".length);
+					break;
+				}
+			}
+		}
+		//i3GEO.util.protocolo()+"://"+window.location.host+"/i3geo"
+		if(i3GEO.configura)
+		{i3GEO.configura.locaplic = scriptLocation;}
+		else
+		{i3GEO.push({configura: scriptLocation})}
+		return scriptLocation;
 	}
 };
-
-
-
 //++++++++++++++++++++++++++++++++++++
 // YUI ACCORDION
 // 1/22/2008 - Edwart Visser

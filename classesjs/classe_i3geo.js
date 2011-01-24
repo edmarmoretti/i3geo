@@ -212,8 +212,9 @@ i3GEO = {
 		else
 		{i3GEO.configura.sid = "";}
 		//
-		//para efeitos de compatibilidade
+		//para efeitos de compatibilidade (depreciado)
 		//
+		/*
 		g_panM = "nao";
 		g_sid = i3GEO.configura.sid;
 		try {i3GEO.configura.locaplic = g_locaplic;}
@@ -223,7 +224,14 @@ i3GEO = {
 		try{i3GEO.configura.diminuixM = g_diminuixM;}catch(e){}
 		try{i3GEO.configura.diminuixN = g_diminuixN;}catch(e){}
 		try{i3GEO.configura.diminuiyM = g_diminuiyM;}catch(e){}
-		try{i3GEO.configura.diminuiyN = g_diminuiyN;}catch(e){}			
+		try{i3GEO.configura.diminuiyN = g_diminuiyN;}catch(e){}	
+		*/
+		//
+		//tenta definir automaticamente a variável que indica a localização do i3geo
+		//
+		if(!i3GEO.configura.locaplic){
+			i3GEO.util.localizai3GEO();
+		}
 		//
 		//calcula o tamanho do mapa
 		//

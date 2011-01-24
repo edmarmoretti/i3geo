@@ -77,7 +77,15 @@ Exemplo:
 http://localhost/i3geo/ms_criamapa.php?interface=flamingo.htm
 
 */
-g_locaplic = i3GEO.util.protocolo()+"://"+window.location.host+"/i3geo";
+/*
+	Indica a localização correta do i3geo.
+	
+	É utilizada para identificar o local correto onde estão os programas em php que são utilizados.
+	
+	Se não for definida, o i3Geo tentará encontrar o local automaticamente
+*/
+//i3GEO.configura.locaplic = i3GEO.util.protocolo()+"://"+window.location.host+"/i3geo";
+
 i3GEO.configura.mapaRefDisplay = "none";
 i3GEO.interface.ATUAL = "flamingo";
 i3GEO.interface.IDCORPO = "contemImg";

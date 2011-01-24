@@ -94,5 +94,5 @@ i3GEO.social = {
 		ins += "<img src='"+i3GEO.configura.locaplic+"/imagens/facebook.gif' onclick='javascript:window.open(\"http://www.facebook.com/sharer.php?u="+link+"\")' title='Facebook'/> ";
 		ins += "<img src='"+i3GEO.configura.locaplic+"/imagens/stumbleupon.gif' onclick='javascript:window.open(\"http://www.stumbleupon.com/submit?url="+link+"\")' title='StumbleUpon'/>";
 		return ins;
-	},	
+	}
 };

@@ -194,15 +194,14 @@ Para definir quais botões das barras de ferramentas serão incluídos no mapa, vej
 
 */
 /*
-i3GEO.configura.locaplic indica a localização correta do i3geo.
+	Indica a localização correta do i3geo.
 	
-Se vc instalou o i3geo em um diretório diferente do normal, altere o valor da variável abaixo.
-
-Por exemplo, se vc instalou no diretório "i3geoteste", modifique para:
-
-i3GEO.configura.locaplic = i3GEO.util.protocolo()+"://"+window.location.host+"/i3geoteste";
+	É utilizada para identificar o local correto onde estão os programas em php que são utilizados.
+	
+	Se não for definida, o i3Geo tentará encontrar o local automaticamente
 */
-i3GEO.configura.locaplic = i3GEO.util.protocolo()+"://"+window.location.host+"/i3geo";
+//i3GEO.configura.locaplic = i3GEO.util.protocolo()+"://"+window.location.host+"/i3geo";
+
 
 i3GEO.cria()
 

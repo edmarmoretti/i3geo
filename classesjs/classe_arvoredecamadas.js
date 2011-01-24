@@ -772,11 +772,7 @@ i3GEO.arvoreDeCamadas = {
 				iconesNode = new YAHOO.widget.HTMLNode(d, node, false,true);
 				iconesNode.enableHighlight = false;
 				iconesNode.isLeaf = true;
-			
 			}
-
-			
-			
 		}
 		if(i3GEO.arvoreDeCamadas.OPCOESTEMAS === true){
 			conteudo = $trad("t18a");
