@@ -5,6 +5,11 @@ Title: Wikipédia
 
 Busca na Wikipédia artigos relacionados à extensão geográfica do mapa atual.
 
+A busca utiliza um Web Service do site Geonames. Para utilizar esse serviço é necessário cadastrar um usuário.
+Por padrão, o i3Geo utiliza o usuário "i3geo", que pode ter sua cota de acesso diário ultrapassada.
+Para criar um usuário novo, utilize o site http://www.geonames.org/login e edite o programa i3geo/ferramentas/wiki/funcoes.php
+para alterar a variável $usuarioGeonames
+
 Veja:
 
 <i3GEO.navega.dialogo.wiki>

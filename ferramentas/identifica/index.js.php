@@ -616,8 +616,11 @@ i3GEOF.identifica = {
 						for(k=0;k<nitens;k++){
 							tip = "&nbsp;&nbsp;";
 							if(resultados[j][k].tip == "sim"){
-								tip = "<img style='margin-right:2px;' src='"+i3GEO.configura.locaplic+"/imagens/tips.png' title='Etiqueta ativa' />";
+								tip = "<img style='margin-right:2px;position:relative;top:3px;width:12px;' src='"+i3GEO.configura.locaplic+"/imagens/tips.png' title='Etiqueta ativa' />";
 							}
+							else{
+								tip = "<img style='margin-right:2px;position:relative;top:3px;width:12px;' src='"+i3GEO.configura.locaplic+"/imagens/branco.gif' title='' />";
+							}							
 							if(resultados[j][k].link === "")
 							{res +=  "<div style='width:100%;text-align:left;background-color:"+cor+"' >"+tip+resultados[j][k].alias+":&nbsp;"+resultados[j][k].valor+"</div>";}
 							else

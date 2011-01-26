@@ -1,19 +1,20 @@
 <?php
-
+$usuarioGeonames = "i3geo";
 //set_time_limit(600);
 require_once("../../pacotes/cpaint/cpaint2.inc.php");
 require_once("../../classesphp/pega_variaveis.php");
 require_once("../../classesphp/carrega_ext.php");
-error_reporting(0);
+error_reporting(E_ALL);
 $cp = new cpaint();
 $cp->register('listaartigos');
 $cp->start();
 $cp->return_data();
 function listaartigos()
 {
-	global $ret, $cp;
+	global $ret, $cp, $usuarioGeonames;
 	$e = explode(" ",$ret);
-	$url = "http://ws.geonames.org/wikipediaBoundingBox?srv=121&north=".$e[3]."&south=".$e[1]."&east=".$e[2]."&west=".$e[0]."&maxRows=20";
+	$url = "http://api.geonames.org/wikipediaBoundingBox?username=".$usuarioGeonames."&style=full&north=".$e[3]."&south=".$e[1]."&east=".$e[2]."&west=".$e[0]."&maxRows=20";
+	echo $url;
 	$xml = simplexml_load_file($url."&lang=pt");
 	$conta = 0;
 	$fim = array();
