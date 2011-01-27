@@ -84,7 +84,6 @@ i3GEO.calculo = {
 			dd = (cd * 1) + (mpg * 1) + (spm * 1);
 			if (sinal == 'negativo')
 			{dd = dd * -1;}
-			//YAHOO.log("Fim dms2dd", "i3geo");
 			return (dd);
 		}
 		catch(e){return (0);}

@@ -2556,6 +2556,7 @@ $a {string}
 function echojson($a)
 {
 	//ob_clean();
+	error_reporting(0);
 	if(extension_loaded('zlib'))
 	{ob_start('ob_gzhandler');}
 	header("Content-type: text/html");

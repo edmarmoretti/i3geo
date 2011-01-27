@@ -98,11 +98,8 @@ i3GEO.guias = {
 				i3GEO.guias.mostra("adiciona");
 				if(!$i("arvoreAdicionaTema"))
 				{
-					ondeArvore = "guia2obj";
-					if(typeof(objmapa) !== 'undefined'){
-						if (typeof(objmapa.guiaMenu) !== 'undefined')
-						{ondeArvore = objmapa.guiaMenu+"obj";}
-					}
+					try{ondeArvore = objmapa.guiaMenu+"obj";}
+					catch(e){ondeArvore = "guia2obj";}
 				}
 				else
 				{ondeArvore = "arvoreAdicionaTema";}
@@ -329,7 +326,6 @@ i3GEO.guias = {
 							temp.style.display = "none";
 							temp.id = "";
 							ins += '<dt style=height:17px id="'+i3GEO.guias.CONFIGURA[guias[ng]].id+'" >';
-							//ins += i3GEO.guias.CONFIGURA[guias[ng]].titulo+'<img id="" src="'+i3GEO.configura.locaplic+'/imagens/branco.gif" style="width:10px;" /></dt>';
 							ins += '<table class=accordiontable ><tr><td width="98%" >'+i3GEO.guias.CONFIGURA[guias[ng]].titulo+'</td><td width="2%" ><img id="" src="'+i3GEO.configura.locaplic+'/imagens/branco.gif" style="width:10px;" /></td></tr></table>';
 							ins += '<dd clas=close >';
 							ins += '<div class=bd >';
@@ -522,13 +518,8 @@ i3GEO.guias = {
 				novoel = document.createElement("div");
 				novoel.id = "janelaguias";
 				novoel.style.display="block";
-				temp = '<div class="hd">Guias</div>';
-				temp += '<div class="bd" id="conteudojanelaguias"></div>';
-				novoel.innerHTML = temp;
-				if($i("i3geo"))
-				{$i("i3geo").appendChild(novoel);}
-				else
-				{document.body.appendChild(novoel);}
+				novoel.innerHTML = '<div class="hd">Guias</div><div class="bd" id="conteudojanelaguias"></div>';
+				$i("i3geo") ? $i("i3geo").appendChild(novoel) : document.body.appendChild(novoel);
 				YAHOO.namespace("janelaguias.xp");
 				YAHOO.janelaguias.xp.panel = new YAHOO.widget.Panel("janelaguias", {width:"270px", fixedcenter: true, constraintoviewport: false, underlay:"none", close:true, visible:true, draggable:true, modal:false,iframe:false } );
 				YAHOO.janelaguias.xp.panel.render();
@@ -541,11 +532,12 @@ i3GEO.guias = {
 				for(g=0;g<nguias;g++){
 					if($i(i3GEO.guias.CONFIGURA[guias[g]].idconteudo)){
 						$i("janelaguias").appendChild($i(i3GEO.guias.CONFIGURA[guias[g]].idconteudo));
-						$i(i3GEO.guias.CONFIGURA[guias[g]].idconteudo).style.background="white";
-						$i(i3GEO.guias.CONFIGURA[guias[g]].idconteudo).style.border="1px solid black";
-						$i(i3GEO.guias.CONFIGURA[guias[g]].idconteudo).style.borderTop="0px solid black";
-						$i(i3GEO.guias.CONFIGURA[guias[g]].idconteudo).style.width="270px";
-						$i(i3GEO.guias.CONFIGURA[guias[g]].idconteudo).style.left="-1px";
+						temp = $i(i3GEO.guias.CONFIGURA[guias[g]].idconteudo).style;
+						temp.background="white";
+						temp.border="1px solid black";
+						temp.borderTop="0px solid black";
+						temp.width="270px";
+						temp.left="-1px";
 					}
 				}
 				i3GEO.atualiza("");
@@ -572,23 +564,17 @@ i3GEO.guias = {
 	
 	guia {String} - O elemento html cujo id for igual a guia+"obj" terá seu estilo (display) definido como block, tornando-o visível
 	
-	namespace {String} - Todas elementos html que tiverem como id o namespace, seguindo por um número e "obj", terão seu estilo alterado para none, tornando-se invisíveis
+	namespace {String} - Todos os elementos html que tiverem como id o namespace, seguindo por um número e "obj", terão seu estilo alterado para none, tornando-se invisíveis
 	
 	*/
 	mostraGuiaFerramenta: function(guia,namespace){
 		if(typeof(console) !== 'undefined'){console.info("i3GEO.guias.mostraGuiaFerramenta()");}
 		var g;
-		if(arguments.length === 1)
+		if(!namespace)
 		{namespace = "guia";}
-		for(g=0;g<12;g++)
-		{
-			if ($i(namespace+g+"obj")){
-				$i(namespace+g+"obj").style.display="none";
-			}
+		for(g=0;g<12;g++){
+			YAHOO.util.Dom.setStyle(namespace+g+"obj","display","none");
 		}
-		if ($i(guia+"obj")){
-			$i(guia+"obj").style.display="block";
-		}	
+		YAHOO.util.Dom.setStyle(guia+"obj","display","block");
 	}
 };
-//YAHOO.log("carregou classe guias", "Classes i3geo");

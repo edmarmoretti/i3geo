@@ -1278,7 +1278,7 @@ i3GEO.util = {
 	
 	id - id do elemento script que será criado
 	
-	aguarde {boolena} - mostra ou não a janela de aguarde
+	aguarde {boolean} - mostra ou não a janela de aguarde
 	*/
 	scriptTag: function(js,ini,id,aguarde){
 		if(typeof(console) !== 'undefined'){console.info("i3GEO.util.scriptTag()");}
@@ -1317,6 +1317,60 @@ i3GEO.util = {
 		else{
 			if(ini !== ""){eval(ini);}
 		}
+	},
+	/*
+	Function: removeScriptTag
+	
+	Remove um javascript no documento HTML
+	
+	Parametros:
+	
+	id - id do elemento script que será removido
+	*/
+	removeScriptTag: function(id){
+		try{
+			old = $i("loadscriptI3GEO");
+			if (old !== null) {
+				old.parentNode.removeChild(old);
+				old = null;
+				eval(id+" = null;");
+			}
+			old = $i(id);
+			if (old !== null) {
+				old.parentNode.removeChild(old);
+			}
+		}
+		catch(erro){
+			if(typeof(console) !== 'undefined'){console.error(erro);}
+		}	
+	},
+	/*
+	Function: verificaScriptTag
+	
+	Verifica se um javascript está carregado no documento.
+	
+	Útil para verificar se existe alguma ferramenta ativa ao procurar por i3GEOF.
+	
+	Parametros:
+	
+	texto - nome do javascript
+	
+	Retorno:
+	
+	{boolean}
+	*/
+	verificaScriptTag: function(texto){
+		var s = document.getElementsByTagName("script"),
+			n = s.length,
+			i,
+			t;
+		for (i=0;i < n;i++){
+			t = s[i].id;
+			t = t.split(".");
+			if(t[0] === texto)
+			{return true;}
+		}
+		return false
 	},
 	/*
 	Function: mensagemAjuda
@@ -1970,6 +2024,8 @@ i3GEO.util = {
 	
 	Atalho para abrir a janela de diálogo de uma ferramenta padrão
 	
+	O script adicionado terá como ID "i3GEOF."+nome+"_script"
+	
 	Parametros:
 	
 	mensagem {string} - mensagem que será enviada ao console no caso do Firefox
@@ -1980,8 +2036,10 @@ i3GEO.util = {
 	*/
 	dialogoFerramenta: function(mensagem,dir,nome){
 		if(typeof(console) !== 'undefined'){console.info(mensagem);}
-		var js = i3GEO.configura.locaplic+"/ferramentas/"+dir+"/index.js.php";
-		i3GEO.util.scriptTag(js,"i3GEOF."+nome+".criaJanelaFlutuante()","i3GEOF."+nome+"_script");
+		if(!$i("i3GEOF."+nome+"_script")){
+			var js = i3GEO.configura.locaplic+"/ferramentas/"+dir+"/index.js.php";
+			i3GEO.util.scriptTag(js,"i3GEOF."+nome+".criaJanelaFlutuante()","i3GEOF."+nome+"_script");
+		}
 	},
 	/*
 	Function: intersectaBox
@@ -2134,12 +2192,49 @@ i3GEO.util = {
 				}
 			}
 		}
-		//i3GEO.util.protocolo()+"://"+window.location.host+"/i3geo"
 		if(i3GEO.configura)
 		{i3GEO.configura.locaplic = scriptLocation;}
-		else
-		{i3GEO.push({configura: scriptLocation})}
 		return scriptLocation;
+	},
+	/*
+	Function: removeChild
+	
+	Remove um filho de um elemento DOM
+	
+	Pode-se especificar o pai e o filha a ser removido ou simplesmente o ID do nó que se quer remover
+	
+	Parametros:
+	
+	id {string} - id do elemento que será removido (filho)
+	
+	el {node} - (opcional) node (DOM) que contém o elemento. Se não for definido, será obtido o parent de id
+	*/
+	removeChild: function(id,el){
+		var j = $i(id);
+		if(j){
+			if(!el){
+				el = j.parentNode;
+			}
+			el.removeChild(j);
+		}	
+	},
+	/*
+	Function: defineValor
+	
+	Aplica um valor a uma propriedade de um elemento
+	
+	Parametros:
+	
+	id {string} - id do elemento que será removido (filho)
+	
+	prop {string} - propriedade que receberá o valor
+	
+	valor {string} - valor que será aplicado
+	*/
+	defineValor: function(id,prop,valor){
+		try
+		{eval("$i('"+id+"')."+prop+"='"+valor+"';");}
+		catch(e){}
 	}
 };
 //++++++++++++++++++++++++++++++++++++
@@ -2230,7 +2325,6 @@ try{
 				}
 			}
 		},
-		
 		collapse : function(header) {
 			YAHOO.util.Dom.removeClass(YAHOO.util.Dom.getPreviousSibling(header),"selected");
 			if(!this.properties.animation) {
@@ -2306,4 +2400,3 @@ $top = function(id,valor){
 $left = function(id,valor){
 	i3GEO.util.$left(id,valor);
 };
-//YAHOO.log("carregou classe util", "Classes i3geo");

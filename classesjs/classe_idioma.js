@@ -185,9 +185,7 @@ i3GEO.idioma = {
 	*/
 	traduzir: function(id) {
 		if(i3GEO.idioma.DICIONARIO[id]){
-			//YAHOO.log("traduzir", "i3geo");
 			var t = i3GEO.idioma.DICIONARIO[id][0];
-			//YAHOO.log("Fim traduzir", "i3geo");
 			return t[i3GEO.idioma.ATUAL];
 		}
 		else
@@ -279,7 +277,6 @@ i3GEO.idioma = {
 	*/
 	mostraSeletor: function(){
 		if(typeof(console) !== 'undefined'){console.info("i3GEO.idioma.mostraSeletor()");}
-		//alert(i3GEO.idioma.MOSTRASELETOR)
 		if(!i3GEO.idioma.MOSTRASELETOR){return;}
 		//
 		//monta o elemento HTML com as bandeiras
@@ -336,22 +333,21 @@ Returns:
 var $trad = function(id)
 {return (i3GEO.idioma.traduzir(id));};
 //
-	try {
-		var c = i3GEO.util.pegaCookie("i3geolingua");
-		if(c) {
-			i3GEO.idioma.define(c);
-			g_linguagem = c;
-		}
-		else {
-			if(typeof(g_linguagem) !== "undefined")
-			{i3GEO.idioma.define(g_linguagem);}
-			else {
-				g_linguagem = "pt";
-				i3GEO.idioma.define("pt");
-			}
-		}
-		if(typeof('g_traducao') !== "undefined")
-		{i3GEO.idioma.defineDicionario(g_traducao);}
+try {
+	var c = i3GEO.util.pegaCookie("i3geolingua");
+	if(c) {
+		i3GEO.idioma.define(c);
+		g_linguagem = c;
 	}
-	catch(e){alert("Problemas com idiomas "+e);}
-//YAHOO.log("carregou classe idioma", "Classes i3geo");
+	else {
+		if(typeof(g_linguagem) !== "undefined")
+		{i3GEO.idioma.define(g_linguagem);}
+		else {
+			g_linguagem = "pt";
+			i3GEO.idioma.define("pt");
+		}
+	}
+	if(typeof('g_traducao') !== "undefined")
+	{i3GEO.idioma.defineDicionario(g_traducao);}
+}
+catch(e){alert("Problemas com idiomas "+e);}

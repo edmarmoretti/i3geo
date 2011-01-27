@@ -210,22 +210,6 @@ i3GEO.eventos = {
 	mouseupMapa: function(){
 		if(typeof(console) !== 'undefined'){console.info("i3GEO.eventos.mouseupMapa()");}
 		i3GEO.eventos.executaEventos(i3GEO.eventos.MOUSEUP);
-		/*
-		if (i3GEO.eventos.MOUSEUP.length > 0){
-			var f,temp;
-			f = i3GEO.eventos.MOUSEUP.length-1;
-			if (f >= 0){
-				do{
-					temp = i3GEO.eventos.MOUSEUP[f].replace("()", "");
-					if(eval('typeof ' + temp) == 'function'){
-						eval(i3GEO.eventos.MOUSEUP[f]);
-						//YAHOO.log("mouseupMapa", "i3geo");
-					}
-				}
-				while(f--);
-			}
-		}
-		*/	
 	},
 	/*
 	Function: mousecliqueMapa

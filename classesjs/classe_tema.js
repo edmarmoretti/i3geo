@@ -397,8 +397,7 @@ i3GEO.tema = {
 		*/
 		cortina: function(tema){
 			i3GEO.mapa.ativaTema(tema);
-			if(typeof(i3GEOF.cortina) === 'undefined')
-			{i3GEO.util.dialogoFerramenta("i3GEO.tema.dialogo.cortina()","cortina","cortina");}
+			i3GEO.util.dialogoFerramenta("i3GEO.tema.dialogo.cortina()","cortina","cortina");
 		},
 		/*
 		Function: abreKml
@@ -431,8 +430,7 @@ i3GEO.tema = {
 		*/
 		salvaMapfile: function(idtema){
 			i3GEO.mapa.ativaTema(idtema);
-			if(typeof(i3GEOF.graficoTema) === 'undefined')
-			{i3GEO.util.dialogoFerramenta("i3GEO.tema.dialogo.salvamapfile()","salvamapfile","salvamapfile");}
+			i3GEO.util.dialogoFerramenta("i3GEO.tema.dialogo.salvamapfile()","salvamapfile","salvamapfile");
 		},		
 		/*
 		Function: graficotema
@@ -445,8 +443,7 @@ i3GEO.tema = {
 		*/
 		graficotema: function(idtema){
 			i3GEO.mapa.ativaTema(idtema);
-			if(typeof(i3GEOF.graficoTema) === 'undefined')
-			{i3GEO.util.dialogoFerramenta("i3GEO.tema.dialogo.graficotema()","graficotema","graficoTema");}
+			i3GEO.util.dialogoFerramenta("i3GEO.tema.dialogo.graficotema()","graficotema","graficoTema");
 		},
 		/*
 		Function: toponimia
@@ -459,8 +456,7 @@ i3GEO.tema = {
 		*/
 		toponimia: function(idtema){
 			i3GEO.mapa.ativaTema(idtema);
-			if(typeof(i3GEOF.toponimia) === 'undefined')
-			{i3GEO.util.dialogoFerramenta("i3GEO.tema.dialogo.toponimia()","toponimia","toponimia");}
+			i3GEO.util.dialogoFerramenta("i3GEO.tema.dialogo.toponimia()","toponimia","toponimia");
 		},
 		/*
 		Function: filtro
@@ -473,8 +469,7 @@ i3GEO.tema = {
 		*/
 		filtro: function(idtema){
 			i3GEO.mapa.ativaTema(idtema);
-			if(typeof(i3GEOF.filtro) === 'undefined')
-			{i3GEO.util.dialogoFerramenta("i3GEO.tema.dialogo.filtro()","filtro","filtro");}
+			i3GEO.util.dialogoFerramenta("i3GEO.tema.dialogo.filtro()","filtro","filtro");
 		},
 		/*
 		Function: procuraratrib
@@ -487,8 +482,7 @@ i3GEO.tema = {
 		*/
 		procuraratrib: function(idtema){
 			i3GEO.mapa.ativaTema(idtema);
-			if(typeof(i3GEOF.busca) === 'undefined')
-			{i3GEO.util.dialogoFerramenta("i3GEO.tema.dialogo.procuraratrib()","busca","busca");}
+			i3GEO.util.dialogoFerramenta("i3GEO.tema.dialogo.procuraratrib()","busca","busca");
 		},
 		/*
 		Function: tabela
@@ -501,8 +495,7 @@ i3GEO.tema = {
 		*/
 		tabela: function(idtema){
 			i3GEO.mapa.ativaTema(idtema);
-			if(typeof(i3GEOF.tabela) === 'undefined')
-			{i3GEO.util.dialogoFerramenta("i3GEO.tema.dialogo.tabela()","tabela","tabela");}
+			i3GEO.util.dialogoFerramenta("i3GEO.tema.dialogo.tabela()","tabela","tabela");
 		},
 		/*
 		Function: etiquetas
@@ -515,8 +508,7 @@ i3GEO.tema = {
 		*/
 		etiquetas: function(idtema){
 			i3GEO.mapa.ativaTema(idtema);
-			if(typeof(i3GEOF.etiqueta) === 'undefined')
-			{i3GEO.util.dialogoFerramenta("i3GEO.tema.dialogo.etiquetas()","etiqueta","etiqueta");}
+			i3GEO.util.dialogoFerramenta("i3GEO.tema.dialogo.etiquetas()","etiqueta","etiqueta");
 		},
 		/*
 		Function: editaLegenda
@@ -529,8 +521,7 @@ i3GEO.tema = {
 		*/
 		editaLegenda: function(idtema){
 			i3GEO.mapa.ativaTema(idtema);
-			if(typeof(i3GEOF.legenda) === 'undefined')
-			{i3GEO.util.dialogoFerramenta("i3GEO.tema.dialogo.editaLegenda()","legenda","legenda");}
+			i3GEO.util.dialogoFerramenta("i3GEO.tema.dialogo.editaLegenda()","legenda","legenda");
 		},
 		/*
 		Function: download
@@ -543,8 +534,7 @@ i3GEO.tema = {
 		*/
 		download: function(idtema){
 			i3GEO.mapa.ativaTema(idtema);
-			if(typeof(i3GEOF.download) === 'undefined')
-			{i3GEO.util.dialogoFerramenta("i3GEO.tema.dialogo.download()","download","download");}
+			i3GEO.util.dialogoFerramenta("i3GEO.tema.dialogo.download()","download","download");
 		},
 		/*
 		Function: sld
@@ -572,8 +562,8 @@ i3GEO.tema = {
 		*/
 		aplicarsld: function(idtema){
 			i3GEO.mapa.ativaTema(idtema);
-			if(typeof(i3GEOF.download) === 'undefined')
-			{i3GEO.util.dialogoFerramenta("i3GEO.tema.dialogo.aplicarsld()","aplicarsld","aplicarsld");}		},
+			i3GEO.util.dialogoFerramenta("i3GEO.tema.dialogo.aplicarsld()","aplicarsld","aplicarsld");
+		},
 		/*
 		Function: editorsql
 
@@ -585,8 +575,7 @@ i3GEO.tema = {
 		*/
 		editorsql: function(idtema){
 			i3GEO.mapa.ativaTema(idtema);
-			if(typeof(i3GEOF.editorsql) === 'undefined')
-			{i3GEO.util.dialogoFerramenta("i3GEO.tema.dialogo.editorsql()","editorsql","editorsql");}
+			i3GEO.util.dialogoFerramenta("i3GEO.tema.dialogo.editorsql()","editorsql","editorsql");
 		}
 	}
 };

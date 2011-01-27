@@ -852,6 +852,11 @@ i3GEO.configura = {
 				g_operacao='identifica';
 				i3GEO.barraDeBotoes.BOTAOPADRAO = "identificaBalao";
 				verificaTip = function(){
+					//
+					//cancela se existir alguma ferramenta ativa
+					//
+					if(i3GEO.util.verificaScriptTag("i3GEOF") === true)
+					{return;}
 					if(g_operacao !== "identifica" || i3GEOF.identifica){return;}
 					if($i("marcaIdentifica")){return;}
 					//funcao default para pegar os dados

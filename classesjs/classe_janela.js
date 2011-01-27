@@ -242,12 +242,10 @@ i3GEO.janela = {
 			i3GEO.janela.TRANSICAOSUAVE = false;
 		}
 		wlargura_ = parseInt(wlargura,10)+2+"px";
-		if ($i(id))
-		{YAHOO.janelaDoca.xp.panel.destroy();}
-		if($i(id+"_c"))
-		{$i("i3geo").removeChild($i(id+"_c"));}
 		if($i(id))
-		{$i("i3geo").removeChild($i(id));}
+		{YAHOO.janelaDoca.xp.panel.destroy();}
+		i3GEO.util.removeChild(id+"_c");
+		i3GEO.util.removeChild(id);
 		
 		ins = '<div id="'+id+'_cabecalho" class="'+classe+'" style="background-color:white;">';
 		if(i3GEO.configura !== undefined)
@@ -266,26 +264,16 @@ i3GEO.janela = {
 		novoel.innerHTML = ins;
 		if(i3GEO.janela.TRANSICAOSUAVE){
 			novoel.onmouseover = function(){
-				if (navm)
-				{novoel.style.filter='alpha(opacity=100)';}
-				else
-				{novoel.style.opacity = 1;}
+				YAHOO.util.Dom.setStyle(novoel,"opacity",1);
 			};
 			novoel.onmouseout = function(){
-				if (navm)
-				{novoel.style.filter='alpha(opacity='+i3GEO.janela.OPACIDADE+')';}
-				else
-				{novoel.style.opacity= i3GEO.janela.OPACIDADE / 100;}
+				YAHOO.util.Dom.setStyle(novoel,"opacity",i3GEO.janela.OPACIDADE / 100);
 			};				
 		}
 		else{
-			if (navm){novoel.style.filter='alpha(opacity=100)';}
-			else{novoel.style.opacity= 1;}
+			YAHOO.util.Dom.setStyle(novoel,"opacity",1);
 		}	
-		if($i("i3geo"))
-		{$i("i3geo").appendChild(novoel);}
-		else
-		{document.body.appendChild(novoel);}
+		document.body.appendChild(novoel);
 		wdocaiframe = $i(id+"i");
 		if(wdocaiframe){
 			temp = wdocaiframe.style;
@@ -316,8 +304,7 @@ i3GEO.janela = {
 		{YAHOO.janelaDoca.xp.panel = new YAHOO.widget.Panel(id, { iframe:ifr,modal:modal, width: wlargura_,underlay:"none", fixedcenter: fix, constraintoviewport: false, visible: true,monitorresize:false,dragOnly:true,keylisteners:null} );}	
 		else{YAHOO.janelaDoca.xp.panel = new YAHOO.widget.ResizePanel(id, { iframe:ifr,underlay:underlay, modal:modal, width: wlargura_, fixedcenter: fix, constraintoviewport: false, visible: true,monitorresize:false,dragOnly:true,keylisteners:null} );}
 		if(nx !== "" && nx !== "center"){
-			pos = [nx,ny];
-			YAHOO.janelaDoca.xp.panel.moveTo(pos[0],pos[1]+50);
+			YAHOO.janelaDoca.xp.panel.moveTo(nx,ny + 50);
 		}
 		YAHOO.janelaDoca.xp.manager.register(YAHOO.janelaDoca.xp.panel);
 		YAHOO.janelaDoca.xp.panel.render();
@@ -417,24 +404,7 @@ i3GEO.janela = {
 		//
 		//remove script tag se houver
 		//
-		try{
-			old = $i("loadscriptI3GEO");
-			if (old !== null) {
-				old.parentNode.removeChild(old);
-				old = null;
-				if(id)
-				{eval(id+" = null;");}
-			}
-			old = $i(id+"_script");
-			if (old !== null) {
-				old.parentNode.removeChild(old);
-				old = null;
-				eval("delete " + id);
-			}
-		}
-		catch(erro){
-			if(typeof(console) !== 'undefined'){console.error(erro);}
-		}
+		i3GEO.util.removeScriptTag(id+"_script");
 	},
 	/*
 	Function: alteraTamanho

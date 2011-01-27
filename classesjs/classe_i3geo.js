@@ -229,7 +229,7 @@ i3GEO = {
 		//
 		//tenta definir automaticamente a variável que indica a localização do i3geo
 		//
-		if(!i3GEO.configura.locaplic){
+		if(!i3GEO.configura.locaplic || i3GEO.configura.locaplic == ""){
 			i3GEO.util.localizai3GEO();
 		}
 		//
@@ -278,11 +278,15 @@ i3GEO = {
 			else{
 				if(retorno.data.variaveis){
 					i3GEO.parametros = retorno.data.variaveis;
+					//
+					//converte string em número
+					//
 					i3GEO.parametros.mapscale = i3GEO.parametros.mapscale*1;
 					i3GEO.parametros.mapres = i3GEO.parametros.mapres*1;
 					i3GEO.parametros.pixelsize = i3GEO.parametros.pixelsize*1;
 					i3GEO.parametros.w = i3GEO.parametros.w*1;
-					i3GEO.parametros.h = i3GEO.parametros.h*1;					
+					i3GEO.parametros.h = i3GEO.parametros.h*1;
+					//					
 					i3GEO.arvoreDeCamadas.CAMADAS = retorno.data.temas;
 					if(retorno.data.variaveis.navegacaoDir == "sim")
 					{i3GEO.arvoreDeTemas.OPCOESADICIONAIS.navegacaoDir = true;}
@@ -296,11 +300,12 @@ i3GEO = {
 					//calcula (opcional) o tamanho correto da tabela onde fica o mapa
 					//se não for feito esse cálculo, o mapa fica ajustado à esquerda
 					//				
-					temp = 0;
+					temp = 0;					
 					if ($i("contemFerramentas")){temp = temp + parseInt($i("contemFerramentas").style.width,10);}
 					if ($i("ferramentas")){temp = temp + parseInt($i("ferramentas").style.width,10);}
 					if($i("mst"))
 					{$i("mst").style.width=i3GEO.parametros.w + temp + "px";}
+					
 					i3GEO.Interface.inicia();
 				}
 				else
@@ -308,7 +313,7 @@ i3GEO = {
 				//
 				//ativa a janela de mensagens se for o caso
 				//
-				if(document.getElementById("ajuda")) //para efeitos de compatibilidade com as versões anteriores a 4.1
+				if($i("ajuda")) //para efeitos de compatibilidade com as versões anteriores a 4.1
 				{i3GEO.ajuda.DIVAJUDA = "ajuda";}
 				if(i3GEO.util.pegaCookie("botoesAjuda") == "nao")
 				{i3GEO.barraDeBotoes.AJUDA = false;}
@@ -545,6 +550,7 @@ i3GEO = {
 		//novoh = 500
 		document.body.style.width = novow;
 		document.body.style.height = novoh;
+
 		w = novow - menos - diminuix;
 		h = novoh - diminuiy;
 

@@ -92,6 +92,8 @@ i3GEO.mapa = {
 	
 	Altera a variável i3GEO.temaAtivo e atualiza a interface em função do novo tema que for ativado
 	
+	O tema anteriormente ativo tem sua cor alterada para a cor normal e o novo tema é destacado com uma cor diferente
+	
 	Parametros:
 	
 	codigo {string} - código da camada
@@ -105,7 +107,7 @@ i3GEO.mapa = {
 		}
 		if(noArvoreCamadas){
 			noArvoreCamadas.style.color = "brown";
-		}			
+		}
 	},
 	/*
 	Function: ativaLogo
@@ -389,8 +391,7 @@ i3GEO.mapa = {
 		Abre a janela de diálogo da ferramenta de geração da visualização em 3d
 		*/
 		t3d: function(){
-			if(typeof(i3GEOF.t3d) === 'undefined')
-			{i3GEO.util.dialogoFerramenta("i3GEO.mapa.dialogo.t3d()","3d","t3d");}
+			i3GEO.util.dialogoFerramenta("i3GEO.mapa.dialogo.t3d()","3d","t3d");
 		},
 		/*
 		Function: imprimir
@@ -398,8 +399,7 @@ i3GEO.mapa = {
 		Abre a janela de diálogo da ferramenta que permite imprimir o mapa atual
 		*/
 		imprimir: function(){
-			if(typeof(i3GEOF.imprimir) === 'undefined')
-			{i3GEO.util.dialogoFerramenta("i3GEO.mapa.dialogo.imprimir()","imprimir","imprimir");}
+			i3GEO.util.dialogoFerramenta("i3GEO.mapa.dialogo.imprimir()","imprimir","imprimir");
 		},
 		/*
 		Function: mostraExten
@@ -407,8 +407,7 @@ i3GEO.mapa = {
 		Abre a janela de diálogo da ferramenta que mostra a extensão geográfica atual do mapa
 		*/
 		mostraExten: function(){
-			if(typeof(i3GEOF.mostraExten) === 'undefined')
-			{i3GEO.util.dialogoFerramenta("i3GEO.mapa.dialogo.mostraExten()","mostraexten","mostraExten");}
+			i3GEO.util.dialogoFerramenta("i3GEO.mapa.dialogo.mostraExten()","mostraexten","mostraExten");
 		},
 		/*
 		Function: outputformat
@@ -416,8 +415,7 @@ i3GEO.mapa = {
 		Abre a janela de diálogo da ferramenta outputformat
 		*/
 		outputformat: function(){
-			if(typeof(i3GEOF.outputformat) === 'undefined')
-			{i3GEO.util.dialogoFerramenta("i3GEO.mapa.dialogo.outputformat()","outputformat","outputformat");}
+			i3GEO.util.dialogoFerramenta("i3GEO.mapa.dialogo.outputformat()","outputformat","outputformat");
 		},
 		/*
 		Function: autoredesenha
@@ -425,8 +423,7 @@ i3GEO.mapa = {
 		Abre a janela de diálogo da ferramenta opcoes_autoredesenha
 		*/
 		autoredesenha: function(){
-			if(typeof(i3GEOF.opcoesTempo) === 'undefined')
-			{i3GEO.util.dialogoFerramenta("i3GEO.mapa.dialogo.autoredesenha()","opcoes_autoredesenha","opcoesTempo");}
+			i3GEO.util.dialogoFerramenta("i3GEO.mapa.dialogo.autoredesenha()","opcoes_autoredesenha","opcoesTempo");
 		},
 		/*
 		Function: salvaMapa
@@ -436,8 +433,7 @@ i3GEO.mapa = {
 		salvaMapa: function(){
 			if(i3GEO.parametros === "")
 			{alert("Essa opcao nao pode ser ativada. Consulte o administrador do sistema. Mapfile nao esta exposto.");return;}
-			if(typeof(i3GEOF.salvaMapa) === 'undefined')
-			{i3GEO.util.dialogoFerramenta("i3GEO.mapa.dialogo.salvaMapa()","salvamapa","salvaMapa");}
+			i3GEO.util.dialogoFerramenta("i3GEO.mapa.dialogo.salvaMapa()","salvamapa","salvaMapa");
 		},
 		/*
 		Function: carregaMapa
@@ -445,8 +441,7 @@ i3GEO.mapa = {
 		Abre a janela de diálogo da ferramenta carregamapa
 		*/
 		carregaMapa: function(){
-			if(typeof(i3GEOF.carregaMapa) === 'undefined')
-			{i3GEO.util.dialogoFerramenta("i3GEO.mapa.dialogo.carregaMapa()","carregamapa","carregaMapa");}
+			i3GEO.util.dialogoFerramenta("i3GEO.mapa.dialogo.carregaMapa()","carregamapa","carregaMapa");
 		},
 		/*
 		Function: convertews
@@ -456,8 +451,7 @@ i3GEO.mapa = {
 		convertews: function(){
 			if(i3GEO.parametros.mapfile === "")
 			{alert("Essa opcao nao pode ser ativada. Consulte o administrador do sistema. Mapfile nao esta exposto.");return;}
-			if(typeof(i3GEOF.convertews) === 'undefined')
-			{i3GEO.util.dialogoFerramenta("i3GEO.mapa.dialogo.convertews()","convertews","converteMapaWS");}
+			i3GEO.util.dialogoFerramenta("i3GEO.mapa.dialogo.convertews()","convertews","converteMapaWS");
 		},
 		/*
 		Function: convertekml
@@ -467,8 +461,7 @@ i3GEO.mapa = {
 		convertekml: function(){
 			if(i3GEO.parametros.mapfile === "")
 			{alert("Essa opcao nao pode ser ativada. Consulte o administrador do sistema. Mapfile nao esta exposto.");return;}
-			if(typeof(i3GEOF.converteKml) === 'undefined')
-			{i3GEO.util.dialogoFerramenta("i3GEO.mapa.dialogo.convertekml()","convertemapakml","converteMapaKml");}
+			i3GEO.util.dialogoFerramenta("i3GEO.mapa.dialogo.convertekml()","convertemapakml","converteMapaKml");
 		},
 		/*
 		Function: queryMap
@@ -476,8 +469,7 @@ i3GEO.mapa = {
 		Abre a janela de diálogo da ferramenta opcoes_querymap
 		*/
 		queryMap: function(){
-			if(typeof(i3GEOF.opcoesQuery) === 'undefined')
-			{i3GEO.util.dialogoFerramenta("i3GEO.mapa.dialogo.queryMap()","opcoes_querymap","opcoesQuery");}
+			i3GEO.util.dialogoFerramenta("i3GEO.mapa.dialogo.queryMap()","opcoes_querymap","opcoesQuery");
 		},
 		/*
 		Function: template
@@ -492,8 +484,7 @@ i3GEO.mapa = {
 		Abre a janela de diálogo da ferramenta opcoes_tamanho
 		*/
 		tamanho: function(){
-			if(typeof(i3GEOF.opcoesTamanho) === 'undefined')
-			{i3GEO.util.dialogoFerramenta("i3GEO.mapa.dialogo.tamanho()","opcoes_tamanho","opcoesTamanho");}
+			i3GEO.util.dialogoFerramenta("i3GEO.mapa.dialogo.tamanho()","opcoes_tamanho","opcoesTamanho");
 		},
 		/*
 		Function: tipoimagem
@@ -501,8 +492,7 @@ i3GEO.mapa = {
 		Abre a janela de diálogo da ferramenta tipoimagem
 		*/
 		tipoimagem: function(){
-			if(typeof(i3GEOF.tipoimagem) === 'undefined')
-			{i3GEO.util.dialogoFerramenta("i3GEO.mapa.dialogo.tipoimagem()","tipoimagem","tipoimagem");}
+			i3GEO.util.dialogoFerramenta("i3GEO.mapa.dialogo.tipoimagem()","tipoimagem","tipoimagem");
 		},
 		/*
 		Function: corFundo
@@ -510,8 +500,7 @@ i3GEO.mapa = {
 		Abre a janela de diálogo da ferramenta opcoes_fundo
 		*/
 		corFundo: function(){
-			if(typeof(i3GEOF.opcoesFundo) === 'undefined')
-			{i3GEO.util.dialogoFerramenta("i3GEO.mapa.dialogo.corFundo()","opcoes_fundo","opcoesFundo");}
+			i3GEO.util.dialogoFerramenta("i3GEO.mapa.dialogo.corFundo()","opcoes_fundo","opcoesFundo");
 		},
 		/*
 		Function: opcoesEscala
@@ -519,8 +508,7 @@ i3GEO.mapa = {
 		Abre a janela de diálogo da ferramenta opcoes_escala
 		*/
 		opcoesEscala: function(){
-			if(typeof(i3GEOF.opcoesEscala) === 'undefined')
-			{i3GEO.util.dialogoFerramenta("i3GEO.mapa.dialogo.opcoesEscala()","opcoes_escala","opcoesEscala");}
+			i3GEO.util.dialogoFerramenta("i3GEO.mapa.dialogo.opcoesEscala()","opcoes_escala","opcoesEscala");
 		},
 		/*
 		Function: opcoesLegenda
@@ -528,8 +516,7 @@ i3GEO.mapa = {
 		Abre a janela de diálogo da ferramenta opcoes_legenda
 		*/
 		opcoesLegenda: function(){
-			if(typeof(i3GEOF.opcoesLegenda) === 'undefined')
-			{i3GEO.util.dialogoFerramenta("i3GEO.mapa.dialogo.opcoesLegenda()","opcoes_legenda","opcoesLegenda");}
+			i3GEO.util.dialogoFerramenta("i3GEO.mapa.dialogo.opcoesLegenda()","opcoes_legenda","opcoesLegenda");
 		},
 		/*
 		Function: gradeCoord
@@ -537,8 +524,7 @@ i3GEO.mapa = {
 		Abre a janela de diálogo da ferramenta gradecoord
 		*/
 		gradeCoord: function(){
-			if(typeof(i3GEOF.gradeCoord) === 'undefined')
-			{i3GEO.util.dialogoFerramenta("i3GEO.mapa.dialogo.gradeCoord()","gradecoord","gradeCoord");}
+			i3GEO.util.dialogoFerramenta("i3GEO.mapa.dialogo.gradeCoord()","gradecoord","gradeCoord");
 		},
 		/*
 		Function: cliqueTexto
@@ -546,8 +532,7 @@ i3GEO.mapa = {
 		Abre a janela de diálogo da ferramenta inseretxt
 		*/
 		cliqueTexto: function(){
-			if(typeof(i3GEOF.inseretxt) === 'undefined')
-			{i3GEO.util.dialogoFerramenta("i3GEO.mapa.dialogo.cliqueTexto()","inseretxt","inseretxt");}
+			i3GEO.util.dialogoFerramenta("i3GEO.mapa.dialogo.cliqueTexto()","inseretxt","inseretxt");
 		},
 		/*
 		Function: selecao
@@ -555,8 +540,7 @@ i3GEO.mapa = {
 		Abre a janela de diálogo da ferramenta selecao
 		*/
 		selecao: function(){
-			if(typeof(i3GEOF.selecao) === 'undefined')
-			{i3GEO.util.dialogoFerramenta("i3GEO.mapa.dialogo.selecao()","selecao","selecao");}
+			i3GEO.util.dialogoFerramenta("i3GEO.mapa.dialogo.selecao()","selecao","selecao");
 		},
 		/*
 		Function: cliquePonto
@@ -564,8 +548,7 @@ i3GEO.mapa = {
 		Abre a janela de diálogo da ferramenta inserexy2
 		*/
 		cliquePonto: function(){
-			if(typeof(i3GEOF.inserexy) === 'undefined')
-			{i3GEO.util.dialogoFerramenta("i3GEO.mapa.dialogo.cliquePonto()","inserexy2","inserexy");}
+			i3GEO.util.dialogoFerramenta("i3GEO.mapa.dialogo.cliquePonto()","inserexy2","inserexy");
 		},
 		/*
 		Function: cliqueGrafico
@@ -573,8 +556,7 @@ i3GEO.mapa = {
 		Abre a janela de diálogo da ferramenta inseregrafico
 		*/
 		cliqueGrafico: function(){
-			if(typeof(i3GEOF.insereGrafico) === 'undefined')
-			{i3GEO.util.dialogoFerramenta("i3GEO.mapa.dialogo.cliqueGrafico()","inseregrafico","insereGrafico");}
+			i3GEO.util.dialogoFerramenta("i3GEO.mapa.dialogo.cliqueGrafico()","inseregrafico","insereGrafico");
 		},
 		/*
 		Function: cliqueIdentificaDefault

@@ -64,20 +64,19 @@ body {
 
 <script src="../i3geo_tudo_compacto.js.php" type="text/javascript"></script>
 <script language="JavaScript" type="text/javascript" src="index.js"></script>
-
 <script type="text/javascript" >
-mensagemAjuda("men1",document.getElementById("men1").innerHTML)
-mensagemAjuda("men2",document.getElementById("men2").innerHTML)
+//mensagemAjuda("men1",document.getElementById("men1").innerHTML)
+//mensagemAjuda("men2",document.getElementById("men2").innerHTML)
 if(window.parent.i3GEO.parametros.editor == "sim"){
 	var temp = "<p><a href='#' style='color:red' onclick='abrejanelaIframe()' title='Opção visível apenas para usuários editores'>Editar a lista de endereços dos serviços</a></p>";
 	document.getElementById("opc1").innerHTML += temp;
-}	
-
+}
+g_locaplic = "../..";
 iniciaListaWS()
 function iniciaListaWS(){
 	g_RSSwms = new Array("")
 	aguarde("block")
-	//g_locaplic = window.parent.i3GEO.configura.locaplic;
+	
 	if (document.getElementById("RSSwms"))
 	{
 		if (g_RSSwms.length > 0)

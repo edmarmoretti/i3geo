@@ -30,6 +30,8 @@ Para a versão 4.5
 	evitar problemas de cache de versões antigas. Os arquivos renomeados foram:
 		classesjs/i3geo_tudo_compacto45.js
 		css/i3geo_ferramentas45.css
+		
+	Testado o uso de zlib.output_compression = On no php.ini
 
 -------------------------------------------------------------------------------------------------
 Para a versão 4.4

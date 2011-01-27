@@ -147,15 +147,7 @@ i3GEO.gadgets = {
 		{id = i3GEO.gadgets.PARAMETROS.mostraVersao.idhtml;}
 		else
 		{i3GEO.gadgets.PARAMETROS.mostraVersao.idhtml = id;}
-		var temp = $i(id);
-		try
-		{
-			if(temp)
-			{temp.innerHTML = i3GEO.parametros.mensageminicia;}
-		}
-		catch(e){
-			if(typeof(console) !== 'undefined'){console.error(e);}
-		}
+		i3GEO.util.defineValor(id,"innerHTML",i3GEO.parametros.mensageminicia);
 	},
 	/*
 	Function: mostraCoordenadasUTM
@@ -211,25 +203,19 @@ i3GEO.gadgets = {
 			//
 			//cancela se existir alguma ferramenta ativa
 			//
-			s = document.getElementsByTagName("script");
-			n = s.length;
-			for (i=0;i < n;i++){
-				t = s[i].id;
-				t = t.split(".");
-				if(t[0] === "i3GEOF")
-				{return;}
-			}
+			if(i3GEO.util.verificaScriptTag("i3GEOF") === true)
+			{return;}
 			tempUtm = function(retorno){
 				var funcao,temp,texto;
-				funcao = "$i(i3GEO.gadgets.PARAMETROS.mostraCoordenadasUTM.idhtml).style.display='none';";
-				funcao += "if(i3GEO.gadgets.PARAMETROS.mostraCoordenadasGEO.idhtml == i3GEO.gadgets.PARAMETROS.mostraCoordenadasUTM.idhtml)";
-				funcao += "{$i(i3GEO.gadgets.PARAMETROS.mostraCoordenadasGEO.idhtml).style.display='block';i3GEO.gadgets.mostraCoordenadasGEO();}";
+				funcao = "$i(i3GEO.gadgets.PARAMETROS.mostraCoordenadasUTM.idhtml).style.display='none';"+
+				"if(i3GEO.gadgets.PARAMETROS.mostraCoordenadasGEO.idhtml == i3GEO.gadgets.PARAMETROS.mostraCoordenadasUTM.idhtml)"+
+				"{$i(i3GEO.gadgets.PARAMETROS.mostraCoordenadasGEO.idhtml).style.display='block';i3GEO.gadgets.mostraCoordenadasGEO();}";
 				idSetTimeoutMostraUTM = setTimeout(funcao,3400);
 				temp = $i(i3GEO.gadgets.PARAMETROS.mostraCoordenadasUTM.idhtml);
 				if(retorno.data){
 					temp.style.display="block";
-					texto = "<div onclick='javascript:clearTimeout(idSetTimeoutMostraUTM);i3GEO.gadgets.PARAMETROS.mostraCoordenadasUTM.idhtml = \"\";i3GEO.gadgets.mostraCoordenadasGEO();' style='width:300px;font-size:10px;' >UTM: x="+retorno.data.x+" y="+retorno.data.y+" zn="+retorno.data.zona+" "+retorno.data.datum;
-					texto += "&nbsp;<img  class='x' src='"+i3GEO.util.$im("branco.gif")+"' /></div>";
+					texto = "<div onclick='javascript:clearTimeout(idSetTimeoutMostraUTM);i3GEO.gadgets.PARAMETROS.mostraCoordenadasUTM.idhtml = \"\";i3GEO.gadgets.mostraCoordenadasGEO();' style='width:300px;font-size:10px;' >UTM: x="+retorno.data.x+" y="+retorno.data.y+" zn="+retorno.data.zona+" "+retorno.data.datum +
+					" &nbsp;<img  class='x' src='"+i3GEO.util.$im("branco.gif")+"' /></div>";
 					temp.innerHTML = texto;
 				}
 			};
@@ -264,19 +250,19 @@ i3GEO.gadgets = {
 			{i3GEO.gadgets.PARAMETROS.mostraCoordenadasGEO.idhtml = id;}
 			if($i(id)){
 				if(!$i("xm")){
-					ins = "<table style='text-align:center'><tr>";
-					ins += "<td>X:&nbsp;</td>";
-					ins += "<td>"+$inputText(id,"315","xg","grau","3","-00")+"&nbsp;</td>";
-					ins += "<td>"+$inputText("","","xm","minuto","3","00")+"&nbsp;</td>";
-					ins += "<td>"+$inputText("","","xs","segundo","5","00.00")+"&nbsp;</td>";
-					ins += "<td>Y:"+$inputText("","","yg","grau","3","-00")+"&nbsp;</td>";
-					ins += "<td>"+$inputText("","","ym","minuto","3","00")+"&nbsp;</td>";
-					ins += "<td>"+$inputText("","","ys","segundo","5","00.00")+"</td>";
-					temp = 'var xxx = i3GEO.calculo.dms2dd($i("xg").value,$i("xm").value,$i("xs").value);';
-					temp +=	'var yyy = i3GEO.calculo.dms2dd($i("yg").value,$i("ym").value,$i("ys").value);';
-					temp +=	'i3GEO.navega.zoomponto(i3GEO.configura.locaplic,i3GEO.configura.sid,xxx,yyy);';		
-					ins += "<td><img  class='tic' title='zoom' onclick='"+temp+"' src='"+i3GEO.util.$im("branco.gif")+"' id=procurarxy /></td>";
-					ins += "</tr></table>";
+					ins = "<table style='text-align:center'><tr>" +
+					"<td>X:&nbsp;</td>" +
+					"<td>"+$inputText(id,"315","xg","grau","3","-00")+"&nbsp;</td>" +
+					"<td>"+$inputText("","","xm","minuto","3","00")+"&nbsp;</td>" +
+					"<td>"+$inputText("","","xs","segundo","5","00.00")+"&nbsp;</td>" +
+					"<td>Y:"+$inputText("","","yg","grau","3","-00")+"&nbsp;</td>" +
+					"<td>"+$inputText("","","ym","minuto","3","00")+"&nbsp;</td>" +
+					"<td>"+$inputText("","","ys","segundo","5","00.00")+"</td>";
+					temp = 'var xxx = i3GEO.calculo.dms2dd($i("xg").value,$i("xm").value,$i("xs").value);' +
+					'var yyy = i3GEO.calculo.dms2dd($i("yg").value,$i("ym").value,$i("ys").value);' +
+					'i3GEO.navega.zoomponto(i3GEO.configura.locaplic,i3GEO.configura.sid,xxx,yyy);';		
+					ins += "<td><img  class='tic' title='zoom' onclick='"+temp+"' src='"+i3GEO.util.$im("branco.gif")+"' id=procurarxy /></td>" +
+					"</tr></table>";
 					$i(id).innerHTML = ins;
 					$i3geo_temp_xg = $i("xg");
 					$i3geo_temp_xm = $i("xm");
@@ -1027,7 +1013,6 @@ i3GEO.gadgets = {
 			if(i3GEO.Interface.ATUAL === "googleearth" && $i("omenudataJanelas1")){
 				YAHOO.widget.MenuManager.getMenuItem("omenudataJanelas1").cfg.setProperty("disabled", true);
 			}			
-			
 			//
 			//corrige problemas de estilo
 			//

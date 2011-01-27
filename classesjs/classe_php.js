@@ -91,9 +91,9 @@ i3GEO.php = {
 	*/
 	verifica: function(){
 		if(i3GEO.configura.locaplic === undefined)
-		{alert("variavel i3GEO.configura.locaplic não esta definida");}
+		{alert("i3GEO.php diz: variavel i3GEO.configura.locaplic não esta definida");}
 		if(i3GEO.configura.sid === undefined)
-		{alert("variavel i3GEO.configura.locaplic não esta definida");}
+		{alert("i3GEO.php diz: variavel i3GEO.configura.sid não esta definida");}
 	},
 	/*
 	Function: insereSHPgrafico
@@ -531,22 +531,21 @@ i3GEO.php = {
 		if(ext === undefined)
 		{alert("extensao nao definida");return;}
 		retorno = function(retorno){
-			if(i3GEO.Interface.ATUAL === "googlemaps"){
-				if(atualiza === true)
-				{i3GEO.Interface.googlemaps.zoom2extent(ext);}
-			}
-			if(i3GEO.Interface.ATUAL === "googleearth"){
-				if(atualiza === true)
-				{i3GEO.Interface.googleearth.zoom2extent(ext);}
-
-			}
-			if(i3GEO.Interface.ATUAL === "openlayers"){
-				i3GEO.Interface.openlayers.zoom2ext(ext);			
-			}
+			switch(i3GEO.Interface.ATUAL)
+			{
+				case "googlemaps":
+					if(atualiza === true)
+					{i3GEO.Interface.googlemaps.zoom2extent(ext);}
+					break;
+				case "googleearth":
+					if(atualiza === true)
+					{i3GEO.Interface.googleearth.zoom2extent(ext);}
+					break;
+				case "openlayers":
+					i3GEO.Interface.openlayers.zoom2ext(ext);
+					break;
+			};		
 			i3GEO.janela.fechaAguarde();
-			//
-			//o try é necessario para não dar erro
-			//
 			try{
 				funcao.call(retorno);
 			}
@@ -674,23 +673,27 @@ i3GEO.php = {
 		i3GEO.php.verifica();
 		var retorno,p;
 		retorno = function(retorno){
-			if(i3GEO.Interface.ATUAL === "googlemaps"){
-				i3GEO.atualizaParametros(retorno.data.variaveis);
-				i3GEO.Interface.googlemaps.zoom2extent(i3GEO.parametros.mapexten);
-    			i3GEO.janela.fechaAguarde();
-			}
-			if(i3GEO.Interface.ATUAL === "googleearth"){
-				i3GEO.atualizaParametros(retorno.data.variaveis);
-				i3GEO.Interface.googleearth.zoom2extent(i3GEO.parametros.mapexten);
-    			i3GEO.janela.fechaAguarde();
-			}			
-			if(i3GEO.Interface.ATUAL === "openlayers"){
-				i3GEO.atualizaParametros(retorno.data.variaveis);
-				i3GEO.Interface.openlayers.zoom2ext(i3GEO.parametros.mapexten);
-    			i3GEO.janela.fechaAguarde();
-			}
-			if(i3GEO.Interface.ATUAL === "padrao")
-			{i3GEO.atualiza(retorno);}
+			switch(i3GEO.Interface.ATUAL)
+			{
+				case "googlemaps":
+					i3GEO.atualizaParametros(retorno.data.variaveis);
+					i3GEO.Interface.googlemaps.zoom2extent(i3GEO.parametros.mapexten);
+					i3GEO.janela.fechaAguarde();
+					break;
+				case "googleearth":
+					i3GEO.atualizaParametros(retorno.data.variaveis);
+					i3GEO.Interface.googleearth.zoom2extent(i3GEO.parametros.mapexten);
+					i3GEO.janela.fechaAguarde();
+					break;
+				case "openlayers":
+					i3GEO.atualizaParametros(retorno.data.variaveis);
+					i3GEO.Interface.openlayers.zoom2ext(i3GEO.parametros.mapexten);
+					i3GEO.janela.fechaAguarde();
+					break;
+				case "padrao":
+					i3GEO.atualiza(retorno);
+					break;
+			};
 		};
 		p = i3GEO.configura.locaplic+"/classesphp/mapa_controle.php?funcao=zoomtema&tema="+tema+"&g_sid="+i3GEO.configura.sid;
 		cpJSON.call(p,"zoomtema",retorno);	
@@ -704,23 +707,27 @@ i3GEO.php = {
 		i3GEO.php.verifica();
 		var retorno,p;
 		retorno = function(retorno){
-			if(i3GEO.Interface.ATUAL === "googleearth"){
-				i3GEO.atualizaParametros(retorno.data.variaveis);
-				i3GEO.Interface.googleearth.zoom2extent(i3GEO.parametros.mapexten);
-    			i3GEO.janela.fechaAguarde();
-			}		
-			if(i3GEO.Interface.ATUAL === "googlemaps"){
-				i3GEO.atualizaParametros(retorno.data.variaveis);
-				i3GEO.Interface.googlemaps.zoom2extent(i3GEO.parametros.mapexten);
-    			i3GEO.janela.fechaAguarde();
-			}
-			if(i3GEO.Interface.ATUAL === "openlayers"){
-				i3GEO.atualizaParametros(retorno.data.variaveis);
-				i3GEO.Interface.openlayers.zoom2ext(i3GEO.parametros.mapexten);
-    			i3GEO.janela.fechaAguarde();
-			}
-			if(i3GEO.Interface.ATUAL === "padrao")
-			{i3GEO.atualiza(retorno);}
+			switch(i3GEO.Interface.ATUAL)
+			{
+				case "googlemaps":
+					i3GEO.atualizaParametros(retorno.data.variaveis);
+					i3GEO.Interface.googlemaps.zoom2extent(i3GEO.parametros.mapexten);
+					i3GEO.janela.fechaAguarde();
+					break;
+				case "googleearth":
+					i3GEO.atualizaParametros(retorno.data.variaveis);
+					i3GEO.Interface.googleearth.zoom2extent(i3GEO.parametros.mapexten);
+					i3GEO.janela.fechaAguarde();
+					break;
+				case "openlayers":
+					i3GEO.atualizaParametros(retorno.data.variaveis);
+					i3GEO.Interface.openlayers.zoom2ext(i3GEO.parametros.mapexten);
+					i3GEO.janela.fechaAguarde();
+					break;
+				case "padrao":
+					i3GEO.atualiza(retorno);
+					break;
+			};
 		};
 		p = i3GEO.configura.locaplic+"/classesphp/mapa_controle.php?funcao=zoomsel&tema="+tema+"&g_sid="+i3GEO.configura.sid;
 		cpJSON.call(p,"zoomsel",retorno);
