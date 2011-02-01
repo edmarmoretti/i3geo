@@ -189,21 +189,21 @@ function pegaDados($sql,$locaplic="")
    	include("$locaplic/admin/php/conexao.php");
    	error_reporting(E_ALL);
    	$q = $dbh->query($sql,PDO::FETCH_ASSOC);
-   	//var_dump($q);
    	if($q)
    	{
    		$resultado = $q->fetchAll();
    		$dbh = null;
    		$dbhw = null;
-   		//error_reporting(0);
    		return $resultado;
    	}
    	else
    	{
-    	$e = $dbh->errorInfo();
-    	echo " erro: ".$e[2];
-    	//echo $sql;
-   		return;
+		$e = $dbh->errorInfo();
+		//$e1 = $dbhw->errorInfo();
+   		$dbh = null;
+   		$dbhw = null;    	
+		//echo " erro: ".$e[2];
+		throw new Exception(" erro admin.php funcao pegaDados: <br><span style=color:red >".$e[2]."<br><span style=color:green >");
    	}
 }
 /*

@@ -117,9 +117,10 @@ $tabelas = array(
 	"i3geoadmin_ws"=>"nacessosok,nacessos,autor_ws,desc_ws,id_ws,link_ws,nome_ws,tipo_ws",
 	"i3geoadmin_grupos"=>"it,es,en,desc_grupo,id_grupo,nome_grupo",
 	"i3geoadmin_subgrupos"=>"it,es,en,desc_subgrupo,id_subgrupo,nome_subgrupo",
-	"i3geoadmin_temas"=>"it,es,en,kmz_tema,nacessos,id_tema,kml_tema,ogc_tema,download_tema,tags_tema,tipoa_tema,link_tema,desc_tema,nome_tema,codigo_tema",
+	"i3geoadmin_temas"=>"it,es,en,kmz_tema,id_tema,kml_tema,ogc_tema,download_tema,tags_tema,tipoa_tema,link_tema,desc_tema,nome_tema,codigo_tema",
 	"i3geoadmin_menus"=>"it,es,en,publicado_menu,perfil_menu,aberto,desc_menu,id_menu,nome_menu",
-	"i3geoadmin_comentarios"=>"comentario,data,openidnome,openidimagem,openidservico,openidusuario,openidurl,id_tema"
+	"i3geoadmin_comentarios"=>"comentario,data,openidnome,openidimagem,openidservico,openidusuario,openidurl,id_tema",
+	"i3geoadmin_acessostema"=>"codigo_tema,nacessos,dia,mes,ano"
 );
 include_once("admin/php/conexao.php");
 foreach(array_keys($tabelas) as $tabela)
@@ -139,14 +140,14 @@ foreach(array_keys($tabelas) as $tabela)
 				if(in_array($coluna,array_keys($resultado[0])))
 				{echo "...ok\n";}
 				else
-				{echo "<span style=color:red >..n&atilde;o encontrada</span>\n";}
+				{echo "<span style=color:red >..n&atilde;o encontrada. Consulte o i3geo/guia_de_migracao.txt</span>\n";}
 			}
 		}
 		else
 		{echo "<span style=color:red >...n&atilde;o existem registros cadastrados</span>\n";}
 	}
 	else
-	{echo "<span style=color:red >..n&atilde;o encontrada</span>\n";}
+	{echo "<span style=color:red >..n&atilde;o encontrada. Consulte o i3geo/guia_de_migracao.txt</span>\n";}
 }
 echo "\n";
 echo "localizando o cgi...\n";

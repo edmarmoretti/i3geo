@@ -38,23 +38,27 @@ i3geo/admin/php/criabanco.php
 */
 $funcao = "";
 include_once("admin.php");
-error_reporting(0);
+include_once("conexao.php");
+
 if(verificaEditores($editores) == "nao")
 {echo "Vc nao e um editor cadastrado. Apenas os editores definidos em i3geo/ms_configura.php podem acessar o sistema de administracao.";exit;}
-
+error_reporting(E_ALL);
 $tabelas = array(
-"CREATE TABLE i3geoadmin_comentarios (comentario TEXT, data TEXT, openidnome TEXT, openidimagem TEXT, openidservico TEXT, openidusuario TEXT, openidurl TEXT, id_tema NUMERIC)"
+"CREATE TABLE i3geoadmin_comentarios (comentario TEXT, data TEXT, openidnome TEXT, openidimagem TEXT, openidservico TEXT, openidusuario TEXT, openidurl TEXT, id_tema NUMERIC)",
+"CREATE TABLE i3geoadmin_acessostema (codigo_tema TEXT, nacessos NUMERIC,dia NUMERIC, mes NUMERIC, ano NUMERIC)"
 );
+/*
 if($conexaoadmin == "")
 {
-	$banco = sqlite_open("../admin.db",0666);
-	$banco = null;
+	//$banco = sqlite_open("../admin.db",0666);
+	//$banco = null;
 	$dbhw = new PDO('sqlite:../admin.db');
 }
 else
 {
 	include($conexaoadmin);	
 }
+*/
 foreach($tabelas as $tabela)
 {
 	if($dbhw->getAttribute(PDO::ATTR_DRIVER_NAME) == "pgsql")
@@ -62,7 +66,19 @@ foreach($tabelas as $tabela)
 		$tabela = str_replace("INTEGER PRIMARY KEY","SERIAL PRIMARY KEY NOT NULL",$tabela);
 	}
 	$q = $dbhw->query($tabela);
+   	if($q)
+   	{
+		$banco = null;
+		echo "<br>Feito!!!<pre>";
+		var_dump($tabelas);
+   	}
+   	else
+   	{
+		echo "<pre>Ocorreu algum problema. Tabelas que deveriam ter sido criadas:\n";
+		var_dump($tabelas);
+		$e = $dbhw->errorInfo();
+		throw new Exception($e[2]);
+   	}
 }
-$banco = null;
-echo "Feito!!!";
+
 ?>

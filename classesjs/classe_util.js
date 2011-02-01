@@ -2179,15 +2179,15 @@ i3GEO.util = {
 		for (i = 0; i < ns; i++) {
 			var src = scripts[i].getAttribute('src');
 			if (src) {
-				var index = src.lastIndexOf("classesjs/i3geo.js");
+				var index = src.lastIndexOf("/classesjs/i3geo.js");
 				// is it found, at the end of the URL?
-				if ((index > -1) && (index + "classesjs/i3geo.js".length == src.length)) {
-					scriptLocation = src.slice(0, -"classesjs/i3geo.js".length);
+				if ((index > -1) && (index + "/classesjs/i3geo.js".length == src.length)) {
+					scriptLocation = src.slice(0, -"/classesjs/i3geo.js".length);
 					break;
 				}
-				var index = src.lastIndexOf("classesjs/i3geonaocompacto.js");
-				if ((index > -1) && (index + "classesjs/i3geonaocompacto.js".length == src.length)) {
-					scriptLocation = src.slice(0, -"classesjs/i3geonaocompacto.js".length);
+				var index = src.lastIndexOf("/classesjs/i3geonaocompacto.js");
+				if ((index > -1) && (index + "/classesjs/i3geonaocompacto.js".length == src.length)) {
+					scriptLocation = src.slice(0, -"/classesjs/i3geonaocompacto.js".length);
 					break;
 				}
 			}

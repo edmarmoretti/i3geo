@@ -85,8 +85,10 @@ idioma {string} - default = "pt"
 		$this->sql_temasraiz = "select id_raiz,i3geoadmin_raiz.id_tema,$coluna as nome_tema,tipoa_tema,perfil FROM i3geoadmin_raiz LEFT JOIN i3geoadmin_temas ON i3geoadmin_temas.id_tema = i3geoadmin_raiz.id_tema ";
 		$this->sql_temasSubgrupo = "select i3geoadmin_temas.tipoa_tema, i3geoadmin_temas.codigo_tema,i3geoadmin_temas.tags_tema,i3geoadmin_n3.id_n3,i3geoadmin_temas.$coluna as nome_tema,i3geoadmin_n3.publicado,i3geoadmin_n3.n3_perfil,i3geoadmin_n3.id_tema,i3geoadmin_temas.download_tema,i3geoadmin_temas.ogc_tema from i3geoadmin_n3 LEFT JOIN i3geoadmin_temas ON i3geoadmin_n3.id_tema = i3geoadmin_temas.id_tema ";
 
-		$this->sql_temas = "select kmz_tema,nacessos,id_tema,kml_tema,ogc_tema,download_tema,tags_tema,tipoa_tema,link_tema,desc_tema,$coluna as nome_tema,codigo_tema from i3geoadmin_temas ";
+		//$this->sql_temas = "select kmz_tema,nacessos,id_tema,kml_tema,ogc_tema,download_tema,tags_tema,tipoa_tema,link_tema,desc_tema,$coluna as nome_tema,codigo_tema from i3geoadmin_temas ";
 
+		$this->sql_temas = "select kmz_tema,b.soma as nacessos,id_tema,kml_tema,ogc_tema,download_tema,tags_tema,tipoa_tema,link_tema,desc_tema,$coluna as nome_tema,codigo_tema  from i3geoadmin_temas as a,(SELECT c.codigo_tema codigo_soma,sum( r.nacessos) as soma FROM i3geoadmin_temas c LEFT JOIN i3geoadmin_acessostema r ON (c.codigo_tema = r.codigo_tema) group by  c.codigo_tema) as b WHERE a.codigo_tema = b.codigo_soma	";	
+		
 		$this->locaplic = $locaplic;
 		$dbh = "";
 		error_reporting(0);
@@ -293,7 +295,7 @@ Return:
 
 {array}
 */
-	function procuraTemasEstrela ($nivel,$fatorestrela,$perfil)
+	function procuraTemasEstrela($nivel,$fatorestrela,$perfil)
 	{
 		$menus = $this->pegaListaDeMenus($perfil);
 		$resultado = array();
@@ -330,8 +332,9 @@ Return:
 							if (strtolower($t["download_tema"]) == "nao")
 							{$down = "nao";}
 							$texto = array("miniatura"=>$miniatura,"tid"=>$t["codigo_tema"],"nome"=>$this->converte($tema["nome_tema"]),"link"=>$t["link_tema"],"download"=>$down);
-							$n = abs($t["nacessos"] / $fatorestrela);		
+							$n = intval($t["nacessos"] / $fatorestrela);							
 							if($n >= 5){$n = 5;}
+							
 							if ($n == $nivel)
 							{$temasRaizGrupo[] = $texto;}
 						}
@@ -455,7 +458,7 @@ Return:
 */
 	function pegaTema($id_tema)
 	{
-		return $this->execSQL($this->sql_temas."where id_tema = '$id_tema' ");
+		return $this->execSQL($this->sql_temas." and id_tema = '$id_tema' ");
 	}
 /*
 Function: pegaTemasSubGrupo

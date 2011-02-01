@@ -26,6 +26,11 @@ Para a versão 4.5
 		Os comentários são armazenados em uma tabela no banco de dados de administração. Essa tabela precisa ser criada no banco.
 		Para criar a tabela veja o item "Outras opções" em http://localhost/i3geo/admin
 		
+	Contagem do número de acessos de cada tema
+		Foi criada uma nova tabela no sistema de administração para guardar o número de vezes que um tema é acessado. Antes
+		a contagem era mantida na tabela i3geoadmin_temas, cuja coluna nacessos foi depreciada. Essa nova tabela guarda também o dia do acesso.
+		Para criar a tabela veja o item "Outras opções" em http://localhost/i3geo/admin
+		
 	O nome dos arquivos js e ccs compactados foram renomeados, incluindo o valor da versão no final. Isso foi feito para se
 	evitar problemas de cache de versões antigas. Os arquivos renomeados foram:
 		classesjs/i3geo_tudo_compacto45.js
