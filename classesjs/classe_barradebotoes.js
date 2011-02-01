@@ -572,24 +572,16 @@ i3GEO.barraDeBotoes = {
 		}
 		else
 		{novoel.style.border="0px solid white";}
-		if(i3GEO.barraDeBotoes.TRANSICAOSUAVE){
-			if (navm){novoel.style.filter='alpha(opacity='+i3GEO.barraDeBotoes.OPACIDADE+')';}
-			else{novoel.style.opacity= i3GEO.barraDeBotoes.OPACIDADE / 100;}
-		}
-		else{
-			if (navm){novoel.style.filter='alpha(opacity=90)';}
-			else{novoel.style.opacity= 0.85;}
-		}
+		YAHOO.util.Dom.setStyle(novoel,"opacity",i3GEO.barraDeBotoes.OPACIDADE / 100);
 		temp = "";
 		if (barraZoom === true)
 		{temp += i3GEO.navega.barraDeZoom.cria();}
 		temp += '<div id="'+idconteudonovo+'_" style="left:'+recuo+';top:0px;"  ></div>';
 		novoel.innerHTML = temp;
 		novoel.onmouseover = function(){
-			//objposicaocursor.imgx = 0;
 			YAHOO.util.Dom.setStyle("i3geo_rosa","display","none");
-			if(i3GEO.barraDeBotoes.OPACIDADE){
-				YAHOO.util.Dom.setStyle(novoel,"opacity","0.85");
+			if(i3GEO.barraDeBotoes.TRANSICAOSUAVE){
+				YAHOO.util.Dom.setStyle(novoel,"opacity",1);
 			}
 		};
 		novoel.onmouseout = function(){
@@ -602,7 +594,7 @@ i3GEO.barraDeBotoes = {
 		{i3GEO.util.mudaCursor(i3GEO.configura.cursores,"contexto",idconteudonovo,i3GEO.configura.locaplic);}
 		//copia os botoes do HTML para a janela
 		ticone = 28;
-		alturadisponivel = i3GEO.parametros.h - i3GEO.Interface.BARRABOTOESTOP - ticone - 18 - 28;
+		alturadisponivel = i3GEO.parametros.h - i3GEO.Interface.BARRABOTOESTOP - ticone - 25 - 28;
 		if(i3GEO.barraDeBotoes.AUTOALTURA === true)
 		{alturadisponivel += 28;}
 		numerobotoes = parseInt(alturadisponivel / ticone,10);
