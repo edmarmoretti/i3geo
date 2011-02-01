@@ -50,6 +50,7 @@ i3geo/testainstal.php
 
 */
 error_reporting(E_ALL);
+echo "<html><body>";
 echo "<pre>\n";
 echo "<b>TESTE DE INSTALACAO DO i3Geo</b><br>\n";
 echo getcwd();
@@ -58,8 +59,10 @@ echo "<br><br>PHP (a vers&atilde;o deve ser a 5x e menor que 5.3): ";
 echo "<br>".phpversion()."<br>\n";
 include("classesphp/carrega_ext.php");
 $exts = get_loaded_extensions();
-echo "Obs: MapServer (a vers&atilde;o deve ser &gt;= 5.2 para que a sobreposi&ccedil;&atilde;o de temas funcione na interface Google Maps): ";
+echo "Obs: MapServer (a vers&atilde;o deve ser &gt;= 5.2 para que a sobreposi&ccedil;&atilde;o de temas funcione na interface Google Maps): <br>";
 echo ms_GetVersion()."<br><br>";
+if(!function_exists("ms_GetVersion"))
+{echo "O MAPSERVER PARECE NAO ESTAR INSTALADO<br><br>";}
 echo "---";
 echo "<br><pre>Extens&otilde;es:<br>";
 if (!extension_loaded("libxml")){echo "<span style=color:red >Problema: n&atilde;o est&aacute; instalado a libxml<br></span>";}
@@ -76,8 +79,8 @@ if (!extension_loaded( "mbstring")){echo "<span style=color:red >Obs: n&atilde;o
 
 var_dump( $exts );
 
-echo "Existe o ms_configura.php? ";
-if(file_exists("ms_configura.php")) echo "Sim\n"; else {echo "Nao";saindo("ms_configura não encontrado");}
+echo "Existe o ms_configura.php? <br>";
+if(file_exists("ms_configura.php")) echo "Sim\n"; else {echo "Nao";saindo(" ms_configura não encontrado");}
 echo "Incluindo...\n<br>";
 include ("ms_configura.php");
 echo "<b>$mensagemInicia </b> \n";

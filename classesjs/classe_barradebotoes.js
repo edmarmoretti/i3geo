@@ -594,7 +594,7 @@ i3GEO.barraDeBotoes = {
 		{i3GEO.util.mudaCursor(i3GEO.configura.cursores,"contexto",idconteudonovo,i3GEO.configura.locaplic);}
 		//copia os botoes do HTML para a janela
 		ticone = 28;
-		alturadisponivel = i3GEO.parametros.h - i3GEO.Interface.BARRABOTOESTOP - ticone - 25 - 28;
+		alturadisponivel = i3GEO.parametros.h - i3GEO.Interface.BARRABOTOESTOP - ticone - 28 - 28;
 		if(i3GEO.barraDeBotoes.AUTOALTURA === true)
 		{alturadisponivel += 28;}
 		numerobotoes = parseInt(alturadisponivel / ticone,10);
@@ -645,7 +645,7 @@ i3GEO.barraDeBotoes = {
 		{i3GEO.navega.barraDeZoom.ativa();}
 		YAHOO.janelaBotoes.xp.panel.render();
 		if(i3GEO.barraDeBotoes.AUTOALTURA === true){
-			YAHOO.util.Dom.setStyle("i3geo_barra2","height",i3GEO.parametros.h - i3GEO.Interface.BARRABOTOESTOP - 1 + "px");
+			//YAHOO.util.Dom.setStyle("i3geo_barra2","height",i3GEO.parametros.h - i3GEO.Interface.BARRABOTOESTOP - 1 + "px");
 		}
 		YAHOO.janelaBotoes.xp.panel.moveTo(x,y);
 		if($i("sobeferramentas")){

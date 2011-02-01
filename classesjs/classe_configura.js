@@ -306,6 +306,19 @@ i3GEO.configura = {
 	*/
 	diminuiyN: 100,
 	/*
+	Propriedade: autotamanho
+
+	Calcula o tamanho do mapa conforme o tamanho da janela do navegador (false) ou calcula o tamanho do mapa
+	conforme o tamanho da tela do monitor (true)
+	
+	Tipo:
+	{boolean}
+	
+	Default:
+	{false}
+	*/
+	autotamanho: false,
+	/*
 	Propriedade: map3d
 
 	Variável que define o nome do map_file que possuí o layer para uso na função 3d.

@@ -526,17 +526,17 @@ i3GEO = {
 		if ($i("contemFerramentas"))
 		{menos += parseInt($i("contemFerramentas").style.width,10);}
 		if ($i("ferramentas"))
-		{menos += parseInt($i("ferramentas").style.width,10);}
-		
-		//novow = parseInt(screen.availWidth,10) - diminuix;
-		novow = YAHOO.util.Dom.getDocumentWidth() - i3GEO.util.getScrollerWidth();
-		//novoh = parseInt(screen.availHeight,10) - diminuiy;
-		novoh = YAHOO.util.Dom.getDocumentHeight();
-		
-		if (window.top === window.self){//nao se aplica em iframe		
-			window.resizeTo(screen.availWidth,screen.availHeight);
-			window.moveTo(0,0);
+		{menos += parseInt($i("ferramentas").style.width,10);}	
+		if(i3GEO.configura.autotamanho === true){
+			//novow = parseInt(screen.availWidth,10) - diminuix - i3GEO.util.getScrollerWidth();
+			//novoh = parseInt(screen.availHeight,10) - diminuiy;
+			if (window.top === window.self){//nao se aplica em iframe		
+				window.resizeTo(screen.availWidth,screen.availHeight);
+				window.moveTo(0,0);
+			}
 		}
+		novow = YAHOO.util.Dom.getDocumentWidth() - i3GEO.util.getScrollerWidth();
+		novoh = YAHOO.util.Dom.getDocumentHeight();
 		//o try aqui é necessário por conta do uso possível do i3geo em um iframe
 		try{
 			if (novow < 800){
