@@ -1,7 +1,7 @@
 <html>
 <head>
 <META HTTP-EQUIV="Content-Type" CONTENT="text/html; charset=UTF-8">
-<link rel="stylesheet" type="text/css" href="../../css/i3geo.css.php">
+<link rel="stylesheet" type="text/css" href="../../css/i3geo45.css.php">
 </head>
 <body style="background-color:white;margin:10px">
 <?php
