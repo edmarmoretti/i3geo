@@ -467,8 +467,8 @@ i3GEO.Interface = {
 			objmapaparado = "nao"; //utilizado para verificar se o mouse esta parado
 			i3GEO.gadgets.mostraMenuSuspenso();
 			i3GEO.eventos.ativa(i);
-			i3GEO.gadgets.mostraCoordenadasGEO();
-			i3GEO.gadgets.mostraCoordenadasUTM();
+			i3GEO.coordenadas.mostraCoordenadasGEO();
+			i3GEO.coordenadas.mostraCoordenadasUTM();
 			i3GEO.gadgets.mostraEscalaNumerica();
 			i3GEO.gadgets.mostraEscalaGrafica();
 			i3GEO.gadgets.visual.inicia();
@@ -774,8 +774,8 @@ i3GEO.Interface = {
 				}
 
 			};
-			i3GEO.gadgets.mostraCoordenadasGEO();
-			i3GEO.gadgets.mostraCoordenadasUTM();
+			i3GEO.coordenadas.mostraCoordenadasGEO();
+			i3GEO.coordenadas.mostraCoordenadasUTM();
 			montaMapa();
 			//i3GEO.php.openlayers(montaMapa);
 			i3GEO.gadgets.mostraMenuSuspenso();
@@ -1207,8 +1207,8 @@ i3GEO.Interface = {
 				i3GEO.gadgets.mostraInserirKml();
 				i3GEO.Interface.googlemaps.ativaBotoes();
 				i3GEO.eventos.ativa($i(i3GEO.Interface.IDMAPA));
-				i3GEO.gadgets.mostraCoordenadasGEO();
-				i3GEO.gadgets.mostraCoordenadasUTM();
+				i3GEO.coordenadas.mostraCoordenadasGEO();
+				i3GEO.coordenadas.mostraCoordenadasUTM();
 				i3GEO.gadgets.mostraEscalaNumerica();
 				i3GEO.gadgets.mostraMenuSuspenso();
 				i3GEO.idioma.mostraSeletor();

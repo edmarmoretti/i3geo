@@ -66,6 +66,7 @@ packer("classe_idioma.js","compactados/classe_idioma_compacto.js","Normal");
 packer("classe_ajuda.js","compactados/classe_ajuda_compacto.js","Normal");
 packer("classe_configura.js","compactados/classe_configura_compacto.js","Normal");
 packer("classe_navega.js","compactados/classe_navega_compacto.js","Normal");
+packer("classe_coordenadas.js","compactados/classe_coordenadas_compacto.js","Normal");
 packer("classe_gadgets.js","compactados/classe_gadgets_compacto.js","Normal");
 packer("classe_eventos.js","compactados/classe_eventos_compacto.js","Normal");
 packer("classe_barradebotoes.js","compactados/classe_barradebotoes_compacto.js","Normal");
@@ -136,10 +137,10 @@ $jsfiles = array(
 "compactados/classe_arvoredecamadas_compacto.js",
 "compactados/classe_navega_compacto.js",
 "compactados/classe_eventos_compacto.js",
-//"classe_eventos.js",
 "compactados/classe_arvoredetemas_compacto.js",
 "compactados/classe_barradebotoes_compacto.js",
 "../pacotes/richdraw/richdraw_tudo_compacto.js",
+"compactados/classe_coordenadas_compacto.js",
 "compactados/classe_gadgets_compacto.js",
 "compactados/classe_social_compacto.js"
 );

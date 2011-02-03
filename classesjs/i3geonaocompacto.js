@@ -59,6 +59,7 @@ var jsfiles = new Array(
 "classe_arvoredetemas.js",
 "classe_barradebotoes.js",
 "../pacotes/richdraw/richdraw_tudo_compacto.js",
+"classe_coordenadas.js",
 "classe_gadgets.js"
 );
 for (i = 0; i < jsfiles.length; i++)

@@ -2,6 +2,14 @@
 <head>
 <META HTTP-EQUIV="Content-Type" CONTENT="text/html; charset=UTF-8">
 <link rel="stylesheet" type="text/css" href="../../css/i3geo45.css.php">
+<style>
+p {
+color:#2F4632;
+font-family:Verdana,Arial,Helvetica,sans-serif;
+font-size:12px;
+text-align:left;
+}
+</style>
 </head>
 <body style="background-color:white;margin:10px">
 <?php
