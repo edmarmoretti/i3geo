@@ -96,6 +96,7 @@ packer("../pacotes/balloon-tooltips/htdocs/js/balloon.js","../pacotes/balloon-to
 //gera um único js para a inicialização do I3Geo
 //
 $jsfiles = array(
+"../pacotes/proj4js/lib/proj4js-compressed.js",
 "../pacotes/cpaint/cpaint2_compacto.inc.js",
 "../pacotes/yui270/build/yahoo/yahoo-min.js",
 "../pacotes/yui270/build/yahoo-dom-event/yahoo-dom-event.js",

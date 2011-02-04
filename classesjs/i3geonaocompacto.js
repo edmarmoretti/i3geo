@@ -14,6 +14,7 @@ for (var i = 0; i < scripts.length; i++) {
 }
 var allScriptTags = "";
 var jsfiles = new Array(
+"../pacotes/proj4js/lib/proj4js-compressed.js",
 "../pacotes/yui270/build/yahoo/yahoo-min.js",
 "../pacotes/yui270/build/yahoo-dom-event/yahoo-dom-event.js",
 "../pacotes/yui270/build/dom/dom-min.js",
