@@ -1139,6 +1139,8 @@ function montaEditorMetadados(dados)
 		titulo:"Escondido (ESCONDIDO)",id:"",value:dados.escondido,tipo:"text",div:"<div id=cEscondido ></div>"},
 		{ajuda:"Indica se o tema irá ser mostrado na ferramenta de identificação",
 		titulo:"Identifica (IDENTIFICA)",id:"",value:dados.identifica,tipo:"text",div:"<div id=cIdentifica ></div>"},
+		{ajuda:"Aplica efeitos de transição nas operações de zoom e pan na interface Openlayers",
+		titulo:"Efeitos de transição zoom (TRANSITIONEFFECT)",id:"",value:dados.transitioneffect,tipo:"text",div:"<div id=cTransitioneffect ></div>"},
 		{ajuda:"Nomes das colunas da tabela de atributos do tema, que serão mostradas na ferramenta de identificação. Se for vazio, todas as colunas serão mostradas. A lista de itens deve ser separada por ',' e grafada em caixa alta no caso de shapefile.",
 		titulo:"Itens (ITENS)",id:"itens",value:dados.itens,tipo:"text"},
 		{ajuda:"Lista com os 'alias', ou apelidos, para os nomes das colunas listados no metadata 'itens'. Os alias devem ser separados por ',' e seguir a ordem definida em ITENS.",
@@ -1225,6 +1227,10 @@ function montaEditorMetadados(dados)
 	temp += core_combosimnao(dados.identifica)
 	temp += "</select>"
 	$i("cIdentifica").innerHTML = temp
+	temp = "<select id='transitioneffect' >"
+	temp += core_combosimnao(dados.transitioneffect)
+	temp += "</select>"
+	$i("cTransitioneffect").innerHTML = temp
 
 	var temp = function()
 	{salvarDadosEditor('metadados',dados.codigoMap,dados.codigoLayer)}
@@ -1569,7 +1575,7 @@ function salvarDadosEditor(tipo,codigoMap,codigoLayer,indiceClasse,indiceEstilo,
 			else
 			{alert("Valor de escala incorreto");return;}
 		}
-		var campos = new Array("permitecomentario","cache","iconetema","ltempoformatodata","ltempoiteminicio","ltempoitemfim","ltempoitemtitulo","ltempoitemdescricao","ltempoitemtip","ltempoitemimagem","ltempoitemicone","ltempoitemlink","editorsql","description_template","palletefile","palletestep","arquivodownload","aplicaextensao","classestamanho","classessimbolo","classescor","classesnome","classesitem","mensagem","identifica","extensao","escondido","download","escala","tema","classe","tip","itenslink","itens","itensdesc")
+		var campos = new Array("permitecomentario","cache","iconetema","ltempoformatodata","ltempoiteminicio","ltempoitemfim","ltempoitemtitulo","ltempoitemdescricao","ltempoitemtip","ltempoitemimagem","ltempoitemicone","ltempoitemlink","editorsql","description_template","palletefile","palletestep","arquivodownload","aplicaextensao","classestamanho","classessimbolo","classescor","classesnome","classesitem","mensagem","identifica","transitioneffect","extensao","escondido","download","escala","tema","classe","tip","itenslink","itens","itensdesc")
 		var par = "&codigoMap="+codigoMap+"&codigoLayer="+codigoLayer
 		var prog = "../php/editormapfile.php?funcao=alterarMetadados"
 	}

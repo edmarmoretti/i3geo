@@ -5,23 +5,27 @@ MAP
     CONNECTION ""
     DATA "c:\ms4w\apache\htdocs\i3geo\aplicmap\dados\locali"
     METADATA
+      "cache"	""
+      "TIP"	"TIPO,ANOCRIA,NOMELOC"
       "LTEMPOITEMIMAGEM"	""
-      "LTEMPOITEMDESCRICAO"	"TIPO"
       "CLASSE"	"SIM"
-      "palletestep"	""
+      "LTEMPOITEMDESCRICAO"	"TIPO"
       "LTEMPOITEMINICIO"	"ANOCRIA"
+      "palletestep"	""
       "LTEMPOITEMTIP"	"ANOCRIA"
-      "description_template"	""
+      "iconetema"	""
       "LTEMPOITEMTITULO"	"NOMELOC"
+      "description_template"	""
       "LTEMPOITEMLINK"	""
       "palletefile"	""
       "LTEMPOFORMATODATA"	"iso8601"
+      "permitecomentario"	""
       "LTEMPOITEMICONE"	""
       "arquivodownload"	""
+      "transitioneffect"	"NAO"
       "TEMA"	"Localidades"
       "editorsql"	""
       "LTEMPOITEMFIM"	""
-	  "TIP" "TIPO,ANOCRIA,NOMELOC"
     END
     NAME "locali"
     STATUS OFF
@@ -34,9 +38,9 @@ MAP
       STYLE
         ANGLE 360
         COLOR 209 36 9
-        OPACITY 100
         SIZE 4
         SYMBOL "ponto"
+        WIDTH 1
       END
     END
     CLASS
@@ -45,9 +49,9 @@ MAP
       STYLE
         ANGLE 360
         COLOR 62 9 41
-        OPACITY 100
         SIZE 6
         SYMBOL "ponto"
+        WIDTH 1
       END
     END
     CLASS
@@ -56,9 +60,9 @@ MAP
       STYLE
         ANGLE 360
         COLOR 112 203 244
-        OPACITY 100
         SIZE 6
         SYMBOL "capital"
+        WIDTH 1
       END
     END
   END

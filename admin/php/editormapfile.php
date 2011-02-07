@@ -668,6 +668,8 @@ switch (strtoupper($funcao))
 	
 	identifica
 	
+	transitioneffect
+	
 	extensao
 	
 	escondido
@@ -1307,6 +1309,7 @@ function pegaMetadados()
 	$dados["escondido"] = $layer->getmetadata("escondido");
 	$dados["extensao"] = $layer->getmetadata("extensao");
 	$dados["identifica"] = $layer->getmetadata("identifica");
+	$dados["transitioneffect"] = $layer->getmetadata("transitioneffect");
 	$dados["mensagem"] = $layer->getmetadata("mensagem");
 	$dados["classesitem"] = $layer->getmetadata("classesitem");
 	$dados["classesnome"] = $layer->getmetadata("classesnome");
@@ -1338,7 +1341,7 @@ function pegaMetadados()
 }
 function alterarMetadados()
 {
-	global $permitecomentario,$iconetema,$ltempoformatodata,$ltempoiteminicio,$ltempoitemfim,$ltempoitemtitulo,$ltempoitemdescricao,$ltempoitemtip,$ltempoitemimagem,$ltempoitemicone,$ltempoitemlink,$description_template,$palletestep,$palletefile,$arquivodownload,$codigoMap,$codigoLayer,$locaplic,$aplicaextensao,$classestamanho,$classessimbolo,$classescor,$classesnome,$classesitem,$mensagem,$identifica,$extensao,$escondido,$download,$escala,$tema,$classe,$tip,$itenslink,$itens,$itensdesc,$editorsql,$cache;
+	global $permitecomentario,$iconetema,$ltempoformatodata,$ltempoiteminicio,$ltempoitemfim,$ltempoitemtitulo,$ltempoitemdescricao,$ltempoitemtip,$ltempoitemimagem,$ltempoitemicone,$ltempoitemlink,$description_template,$palletestep,$palletefile,$arquivodownload,$codigoMap,$codigoLayer,$locaplic,$aplicaextensao,$classestamanho,$classessimbolo,$classescor,$classesnome,$classesitem,$mensagem,$identifica,$transitioneffect,$extensao,$escondido,$download,$escala,$tema,$classe,$tip,$itenslink,$itens,$itensdesc,$editorsql,$cache;
 	$dados = array();
 	$mapfile = $locaplic."/temas/".$codigoMap.".map";
 	$mapa = ms_newMapObj($mapfile);
@@ -1354,6 +1357,7 @@ function alterarMetadados()
 	$layer->setmetadata("escondido",$escondido);
 	$layer->setmetadata("extensao",$extensao);
 	$layer->setmetadata("identifica",$identifica);
+	$layer->setmetadata("transitioneffect",$transitioneffect);
 	$layer->setmetadata("mensagem",$mensagem);
 	$layer->setmetadata("classesitem",$classesitem);
 	$layer->setmetadata("classesnome",$classesnome);
@@ -1735,7 +1739,7 @@ function removeCabecalho($arq,$symbolset=true)
 		$teste = str_replace("'","",$teste);
 		$teste = str_replace('"',"",$teste);
 		$teste = preg_replace('/[\n\r\t ]*/', '', $teste);
-      	$testar = array("KEYIMAGE","TILEINDEX","TILEITEM","SYMBOL","LABELITEM","FILTERITEM","GROUP","ENCODING","TIP","CLASSE","ITENSDESC","CLASSESNOME","ITENSLINK","ESCALA","CLASSESSIMBOLO","MENSAGEM","EXTENSAO","CLASSESITEM","ESCONDIDO","CLASSESCOR","DOWNLOAD","CLASSESTAMANHO","ITENS","TEMA","APLICAEXTENSAO","IDENTIFICA");
+      	$testar = array("KEYIMAGE","TILEINDEX","TILEITEM","SYMBOL","LABELITEM","FILTERITEM","GROUP","ENCODING","TIP","CLASSE","ITENSDESC","CLASSESNOME","ITENSLINK","ESCALA","CLASSESSIMBOLO","MENSAGEM","EXTENSAO","CLASSESITEM","ESCONDIDO","CLASSESCOR","DOWNLOAD","CLASSESTAMANHO","ITENS","TEMA","APLICAEXTENSAO","IDENTIFICA","TRANSITIONEFFECT");
 		$passou = true;
 		foreach ($testar as $t)
 		{if($teste == $t){$passou = false;}}

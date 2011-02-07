@@ -822,6 +822,7 @@ i3GEO.Interface = {
 				ratio:1,
 				buffer:i3GEO.Interface.openlayers.BUFFER,
 				wrapDateLine:true,
+				transitionEffect: "resize",
 				eventListeners:{
 					"loadstart": i3GEO.Interface.openlayers.loadStartLayer,
 					"loadend": i3GEO.Interface.openlayers.loadStopLayer
@@ -838,11 +839,12 @@ i3GEO.Interface = {
 							camada.type === 3 ? opcoes.singleTile = false : opcoes.singleTile = !(i3GEO.Interface.openlayers.TILES);
 						}
 						camada.type === 0 ? opcoes.gutter = 20 : opcoes.gutter = 0;
+						camada.transitioneffect === "nao" ? opcoes.transitionEffect = "null" : opcoes.transitionEffect = "resize";
 					}
 					catch(e){}
 					layer = new OpenLayers.Layer.WMS(camada.name, urllayer,{map_imagetype:i3GEO.Interface.OUTPUTFORMAT},opcoes);
-					if(camada.escondido !== "sim")
-					{layer.transitionEffect ="resize";}
+					if(camada.escondido === "sim")
+					{layer.transitionEffect = "null";}
 					i3geoOL.addLayer(layer);
 				}
 				else

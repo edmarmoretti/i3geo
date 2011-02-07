@@ -228,6 +228,13 @@ string - javascript com os parametros
 				$ltempo = "nao";
 				if($oLayer->getmetadata("ltempoformatodata") !== "")
 				{$ltempo = "sim";}
+				//
+				//verifica se o tema receberá efeito de transição de zoom
+				//
+				$transitioneffect = "sim";
+				if($oLayer->getmetadata("transitioneffect") == "NAO")
+				{$transitioneffect = "nao";}
+				//
 				$permitecomentario = "nao";
 				if($oLayer->getmetadata("nomeoriginal") != "" && strtoupper($oLayer->getmetadata("pemitecomentario")) != "NAO")
 				{$permitecomentario = "sim";}
@@ -256,7 +263,8 @@ string - javascript com os parametros
 					"classe"=>($oLayer->getmetadata("classe")),
 					"permitecomentario"=>$permitecomentario,
 					"exttema"=>$exttema,
-					"aplicaextensao"=>$aplicaextensao
+					"aplicaextensao"=>$aplicaextensao,
+					"transitioneffect"=>$transitioneffect
 				);
 			}
 		}
