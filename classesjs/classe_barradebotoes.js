@@ -322,6 +322,12 @@ i3GEO.barraDeBotoes = {
 	{String}
 	*/
 	BOTAOCLICADO: "",
+	ativaPadrao: function(){
+		try{
+			$i(i3GEO.barraDeBotoes.BOTAOPADRAO).onclick.call();
+		}
+		catch(e){}
+	},
 	/*
 	Function: ativaIcone
 	
@@ -372,7 +378,6 @@ i3GEO.barraDeBotoes = {
 				}
 			}
 		}
-
 		if(i3GEO.barraDeBotoes.COMPORTAMENTO == "destacado"){
 			if(ko >= 0){
 				do{

@@ -610,8 +610,10 @@ i3GEO.util = {
 	w {String} - (opcional) largura da imagem
 	
 	h {String} - (opcional) altura da imagem
+	
+	mouseover - função que será executada no evento mouseover
 	*/
-	criaPin: function(id,imagem,w,h){
+	criaPin: function(id,imagem,w,h,mouseover){
 		if(typeof(console) !== 'undefined'){console.info("i3GEO.util.criaPin()");}
 		if(arguments.length < 1 || id === ""){
 			id = "boxpin";
@@ -636,6 +638,9 @@ i3GEO.util = {
 			novoel.src = imagem;
 			if(id === "boxpin")
 			{novoel.onmouseover = function(){$i("boxpin").style.display="none";};}
+			else if(mouseover){
+				novoel.onmouseover = mouseover;
+			}
 			document.body.appendChild(novoel);
 			i3GEO.util.PINS.push(id);
 		}	
