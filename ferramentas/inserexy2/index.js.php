@@ -673,7 +673,7 @@ i3GEOF.inserexy = {
 			{xy.push(divs[i].innerHTML);}
 			xy = xy.join(" ")
 			cp.set_response_type("JSON");
-			cp.call(g_locaplic+"/classesphp/mapa_controle.php?g_sid="+i3GEO.configura.sid+"&funcao=mostrawkt&xy="+xy,"xy2wkt",mostra);
+			cp.call(i3GEO.configura.locaplic+"/classesphp/mapa_controle.php?g_sid="+i3GEO.configura.sid+"&funcao=mostrawkt&xy="+xy,"xy2wkt",mostra);
 		}
 		catch(e){alert("Erro: "+e);i3GEOF.inserexy.aguarde.visibility = "hidden";}
 	}

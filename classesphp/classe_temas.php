@@ -630,88 +630,93 @@ $wrap - caractere que indica quebra de linha
 			switch ($tipo)
 			{
 				case "GRAFICOPIZZA":
-				if(!isset($tamanho)){$tamanho = 5;}
-				$e->set("size",$tamanho);
-				$pinlayer->setmetadata("tema","Pontos inseridos");
-				$pinlayer->set("type",MS_LAYER_POINT);
+					if(!isset($tamanho)){$tamanho = 5;}
+					$e->set("size",$tamanho);
+					$pinlayer->setmetadata("tema","Pontos inseridos");
+					$pinlayer->set("type",MS_LAYER_POINT);
 				break;
 				case "POINT";
-				if ((!isset($marca)) || ($marca=="")){$marca="marca";}
-				if(!isset($tamanho)){$tamanho = 5;}
-				$e->set("size",$tamanho);
-				$e->set("symbolname",$marca);
-				corE($e,$cor,"color");
-				$pinlayer->setmetadata("tema","Pontos inseridos");
-				$pinlayer->set("type",MS_LAYER_POINT);
+					if ((!isset($marca)) || ($marca=="")){$marca="marca";}
+					if(!isset($tamanho)){$tamanho = 5;}
+					$e->set("size",$tamanho);
+					$e->set("symbolname",$marca);
+					corE($e,$cor,"color");
+					$pinlayer->setmetadata("tema","Pontos inseridos");
+					$pinlayer->set("type",MS_LAYER_POINT);
 				break;
 				case "LINE":
-				if (!isset($marca)){$marca="linha";}
-				if(!isset($tamanho)){$tamanho = 2;}
-				$e->set("size",$tamanho);
-				$e->set("symbolname",$marca);
-				$pinlayer->setmetadata("tema","Linhas inseridas");
-				$pinlayer->set("type",MS_LAYER_LINE);
+					if (!isset($marca) || $marca == ""){$marca="linha";}
+					if(!isset($tamanho)){$tamanho = 2;}
+					$e->set("size",$tamanho);
+					$e->set("symbolname",$marca);
+					if(isset($cor) && $cor != "")
+					{corE($e,$cor,"color");}
+					if(isset($texto) && $texto != "")
+					{$pinlayer->setmetadata("TEMA",$texto);}
+					else
+					{$pinlayer->setmetadata("tema","Linhas inseridas");}
+					$pinlayer->set("type",MS_LAYER_LINE);
 				break;
 				case "POLYGON":
-				if (!isset($marca)){$marca="p9";}
-				if(!isset($tamanho)){$tamanho = 5;}
-				$e->set("size",$tamanho);
-				$e->set("symbolname",$marca);
-				$pinlayer->setmetadata("tema","Poligonos inseridos");
-				$pinlayer->set("type",MS_LAYER_POLYGON);
-				$pinlayer->set("opacity","50");
+					if (!isset($marca)){$marca="p9";}
+					if(!isset($tamanho)){$tamanho = 5;}
+					$e->set("size",$tamanho);
+					$e->set("symbolname",$marca);
+					$pinlayer->setmetadata("tema","Poligonos inseridos");
+					$pinlayer->set("type",MS_LAYER_POLYGON);
+					$pinlayer->set("opacity","50");
 				break;
 				case "ANNOTATION":
-				$c->set("status",MS_DELETE);
-				$novac = ms_newclassobj($pinlayer);
-				$label = $novac->label;
-				if($wrap != "")
-				{
-					$label->set("maxlength",1);
-					$s = "CLASS LABEL WRAP '$wrap' END END";
-					$novac->updateFromString($s);
-				}
-				$label = $novac->label;
-				
-				if ($fonte != "bitmap")
-				{
-					$label->set("type",MS_TRUETYPE);
-					$label->set("font",$fonte);
-					$label->set("size",$tamanho);
-				}
-				else
-				{
-					$label->set("type",MS_BITMAP);
-					//$label->set("font",$fonte);
-					$t = MS_TINY;
-					if ($tamanho > 5 ){$t = MS_TINY;}
-					if ($tamanho >= 7 ){$t = MS_SMALL;}
-					if ($tamanho >= 10 ){$t = MS_MEDIUM;}
-					if ($tamanho >= 12 ){$t = MS_LARGE;}
-					if ($tamanho >= 14 ){$t = MS_GIANT;}
-					$label->set("size",$t);
-				}				
-				$label->set("angle",$angulo);
-				corE($label,$fundo,"backgroundcolor");
-				corE($label,$sombra,"backgroundshadowcolor");
-				corE($label,$cor,"color");
-				$label->set("backgroundshadowsizex",$sombrax);
-				$label->set("backgroundshadowsizey",$sombray);
-				corE($label,$outlinecolor,"outlinecolor");
-				corE($label,$shadowcolor,"shadowcolor");
-				$label->set("shadowsizex",$shadowsizex);
-				$label->set("shadowsizey",$shadowsizey);
-				$label->set("force",$force);
-				$label->set("mindistance",$mindistance);
-				$label->set("minfeaturesize",$minfeaturesize);
-				$label->set("offsetx",$offsetx);
-				$label->set("offsety",$offsety);
-				$label->set("partials",$partials);
-				$p = array("MS_AUTO"=>MS_AUTO,"MS_UL"=>MS_UL,"MS_LR"=>MS_LR,"MS_UR"=>MS_UR,"MS_LL"=>MS_LL,"MS_CR"=>MS_CR,"MS_CL"=>MS_CL,"MS_UC"=>MS_UC,"MS_LC"=>MS_LC,"MS_CC"=>MS_CC);
-				$label->set("position",$p[$position]);
-				$pinlayer->setmetadata("TEMA",$texto);
-				$pinlayer->set("type",MS_LAYER_ANNOTATION);
-				$pinlayer->set("opacity","100");
+					$c->set("status",MS_DELETE);
+					$novac = ms_newclassobj($pinlayer);
+					$label = $novac->label;
+					if($wrap != "")
+					{
+						$label->set("maxlength",1);
+						$s = "CLASS LABEL WRAP '$wrap' END END";
+						$novac->updateFromString($s);
+					}
+					$label = $novac->label;
+					
+					if ($fonte != "bitmap")
+					{
+						$label->set("type",MS_TRUETYPE);
+						$label->set("font",$fonte);
+						$label->set("size",$tamanho);
+					}
+					else
+					{
+						$label->set("type",MS_BITMAP);
+						//$label->set("font",$fonte);
+						$t = MS_TINY;
+						if ($tamanho > 5 ){$t = MS_TINY;}
+						if ($tamanho >= 7 ){$t = MS_SMALL;}
+						if ($tamanho >= 10 ){$t = MS_MEDIUM;}
+						if ($tamanho >= 12 ){$t = MS_LARGE;}
+						if ($tamanho >= 14 ){$t = MS_GIANT;}
+						$label->set("size",$t);
+					}				
+					$label->set("angle",$angulo);
+					corE($label,$fundo,"backgroundcolor");
+					corE($label,$sombra,"backgroundshadowcolor");
+					corE($label,$cor,"color");
+					$label->set("backgroundshadowsizex",$sombrax);
+					$label->set("backgroundshadowsizey",$sombray);
+					corE($label,$outlinecolor,"outlinecolor");
+					corE($label,$shadowcolor,"shadowcolor");
+					$label->set("shadowsizex",$shadowsizex);
+					$label->set("shadowsizey",$shadowsizey);
+					$label->set("force",$force);
+					$label->set("mindistance",$mindistance);
+					$label->set("minfeaturesize",$minfeaturesize);
+					$label->set("offsetx",$offsetx);
+					$label->set("offsety",$offsety);
+					$label->set("partials",$partials);
+					$p = array("MS_AUTO"=>MS_AUTO,"MS_UL"=>MS_UL,"MS_LR"=>MS_LR,"MS_UR"=>MS_UR,"MS_LL"=>MS_LL,"MS_CR"=>MS_CR,"MS_CL"=>MS_CL,"MS_UC"=>MS_UC,"MS_LC"=>MS_LC,"MS_CC"=>MS_CC);
+					$label->set("position",$p[$position]);
+					$pinlayer->setmetadata("TEMA",$texto);
+					$pinlayer->set("type",MS_LAYER_ANNOTATION);
+					$pinlayer->set("opacity","100");
 				break;
 			}
 		}
@@ -719,19 +724,19 @@ $wrap - caractere que indica quebra de linha
 		switch ($tipo)
 		{
 			case "ANNOTATION":
-			$shp = ms_newshapeobj(MS_SHAPE_POINT);
-			$texto = str_replace("*","&",$texto);
-			$texto = str_replace("|",";",$texto);
-			$shp->set("text",$texto);
+				$shp = ms_newshapeobj(MS_SHAPE_POINT);
+				$texto = str_replace("*","&",$texto);
+				$texto = str_replace("|",";",$texto);
+				$shp->set("text",$texto);
 			break;
 			case "POINT":
-			$shp = ms_newshapeobj(MS_SHAPE_POINT);
+				$shp = ms_newshapeobj(MS_SHAPE_POINT);
 			break;
 			case "LINE":
-			$shp = ms_newshapeobj(MS_SHAPE_LINE);
+				$shp = ms_newshapeobj(MS_SHAPE_LINE);
 			break;
 			case "POLYGON":
-			$shp = ms_newshapeobj(MS_SHAPE_POLYGON);
+				$shp = ms_newshapeobj(MS_SHAPE_POLYGON);
 			break;
 		}
 		$lin = ms_newlineobj();

@@ -345,7 +345,7 @@ function montaParametrosTemas(no,dados,redesenha)
 	}
     if(!tree.getNodeByProperty("etiquetaMetadados",id))
     {
-		conteudo = "<span style=cursor:pointer; onclick=\"editorMetadados('"+codigoMap+"','"+codigoLayer+"')\" ><img width='10px' heigth='10px' style=\"position:relative;top:0px\" title='edita metadados' src=\"../imagens/06.png\" /> Editar metadados</span>"
+		conteudo = "<span style=cursor:pointer; onclick=\"editorMetadados('"+codigoMap+"','"+codigoLayer+"')\" ><img width='10px' heigth='10px' style=\"position:relative;top:0px\" title='edita metadados' src=\"../imagens/06.png\" /> Editar metaparâmetros</span>"
 		var d = {tipo:"etiquetaMetadados",etiquetaMetadados:id,html:conteudo}
 		var tempNode = new YAHOO.widget.HTMLNode(d, no, false,true);
 		tempNode.isLeaf = true;

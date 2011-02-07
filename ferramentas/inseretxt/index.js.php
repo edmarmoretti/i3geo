@@ -50,6 +50,18 @@ i3GEOF.inseretxt = {
 	*/
 	aguarde: "",
 	/*
+	Variavel: contaPontos
+	
+	Conta quantos pontos o usuário clicou na adição de um conector
+	*/
+	contaPontos: 0,
+	/*
+	Variavel: pontoi
+	
+	Primeiro ponto do conector clicado no mapa em DD
+	*/
+	pontoi: "0,0",	
+	/*
 	Function: inicia
 	
 	Inicia a ferramenta. É chamado por criaJanelaFlutuante
@@ -128,8 +140,9 @@ i3GEOF.inseretxt = {
 		'		<p class="paragrafo" >Texto que será inserido:<br><br>' +	
 		$inputText("","","i3GEOinseretxttexto","",60,"") +
 		'		<br><br>' +
+		'		<input class=inputsb style=cursor:pointer type=checkbox id=i3GEOinseretxttextoconector >&nbsp;Insere com conector' +
 		'		<div id=i3GEOinseretxtmen1 style="text-align:left;" >'+
-		'			<p class="paragrafo" >Digite o texto e clique no mapa no ponto de inclus&atilde;o. Para definir os par&acirc;metros de fonte, tamanho, etc, utilize a guia de propriedades. Se o texto contiver acentuação, não use a fonte padrão (bitmap).' +
+		'			<p class="paragrafo" >Digite o texto e clique no mapa no ponto de inclus&atilde;o. Para definir os par&acirc;metros de fonte, tamanho, etc, utilize a guia de propriedades. Se o texto contiver acentuação, não use a fonte padrão (bitmap). Ativando o conector, vc dever&aacute; clicar no ponto inicial e final.' +
 		'		</div>' +
 		'	</div>' +
 		'	<div class=guiaobj id="i3GEOinseretxtguia2obj" style="left:1px;display:none;">' +
@@ -151,6 +164,10 @@ i3GEOF.inseretxt = {
 		'			<tr><td>Tamanho:</td><td>' +
 		$inputText("","","i3GEOinseretxttamanho_i","",2,"8") +
 		'			</td></tr>' +
+		'			<tr><td>Largura do conector:</td><td>' +
+		$inputText("","","i3GEOinseretxttamanho_c","",2,"8") +
+		'			</td></tr>' +
+
 		'			<tr><td>&nbsp;</td><td></td></tr>' +
 		'			<tr><td>&Acirc;ngulo (no caso de linhas pode ser utilizado AUTO ou FOLLOW (segue a linha), nesses casos, a fonte n&atilde;o pode ser do tipo bitmap):</td><td>' +
 		$inputText("","","i3GEOinseretxtangulo_i","",4,"0") +
@@ -169,6 +186,10 @@ i3GEOF.inseretxt = {
 		$inputText("","","i3GEOinseretxtfrente_i","",11,"0 0 0") +
 		'			<img alt="aquarela.gif" style=cursor:pointer src="'+i3GEO.configura.locaplic+'/imagens/aquarela.gif" onclick="i3GEOF.inseretxt.corj(\'i3GEOinseretxtfrente_i\')" /></td></tr>' +
 		'			<tr><td>&nbsp;</td><td></td></tr>' +
+		'			<tr><td>Cor do conector:</td><td>'+
+		$inputText("","","i3GEOinseretxtfrente_c","",11,"0 0 0") +
+		'			<img alt="aquarela.gif" style=cursor:pointer src="'+i3GEO.configura.locaplic+'/imagens/aquarela.gif" onclick="i3GEOF.inseretxt.corj(\'i3GEOinseretxtfrente_c\')" /></td></tr>' +
+		'			<tr><td>&nbsp;</td><td></td></tr>' +
 		'			<tr><td>Cor da m&aacute;scara de um pixel de entorno:</td><td>' +
 		$inputText("","","i3GEOinseretxtmascara_i","",11,"") +
 		'			<img alt="aquarela.gif" style=cursor:pointer src="'+i3GEO.configura.locaplic+'/imagens/aquarela.gif" onclick="i3GEOF.inseretxt.corj(\'i3GEOinseretxtmascara_i\')" /></td></tr>' +
@@ -180,7 +201,7 @@ i3GEOF.inseretxt = {
 		'						<option value="MS_AUTO" >autom&aacute;tico</option>' +
 		'						<option value="MS_UL" >superior esquerdo</option>' +
 		'						<option value="MS_UC" >superior centro</option>' +
-		'						<option value="MS_UR" >superior direito</option>' +
+		'						<option value="MS_UR" selected >superior direito</option>' +
 		'						<option value="MS_CL" >centro esquerdo</option>' +
 		'						<option value="MS_CC" >centro</option>' +
 		'						<option value="MS_CR" >centro direito</option>' +
@@ -374,7 +395,23 @@ i3GEOF.inseretxt = {
 					return;
 				}
 				else{
-					i3GEOF.inseretxt.insere(texto);
+					if($i("i3GEOinseretxttextoconector").checked){
+						if(i3GEOF.inseretxt.contaPontos == 0){
+							i3GEOF.inseretxt.contaPontos = 1;
+							i3GEOF.inseretxt.pontoi = objposicaocursor.ddx+" "+objposicaocursor.ddy;
+							i3GEOF.inseretxt.aguarde.visibility = "hidden";
+							alert("Clique no fim do conector");
+							return;
+						}
+						if(i3GEOF.inseretxt.contaPontos == 1){
+							i3GEOF.inseretxt.insere(texto);
+							i3GEOF.inseretxt.insereConector(i3GEOF.inseretxt.pontoi+" "+objposicaocursor.ddx+" "+objposicaocursor.ddy,texto);
+							i3GEOF.inseretxt.contaPontos = 0;
+							return;
+						}
+					}
+					else
+					{i3GEOF.inseretxt.insere(texto);}
 				}			
 			}
 			else{
@@ -417,6 +454,41 @@ i3GEOF.inseretxt = {
 		par = i3GEOF.inseretxt.pegaPar();
 		p = i3GEO.configura.locaplic+"/classesphp/mapa_controle.php?g_sid="+i3GEO.configura.sid+
 				"&funcao=inserefeature&"+par+"&pin="+nometema+"&tipo=ANNOTATION&texto="+texto+"&xy="+objposicaocursor.ddx+" "+objposicaocursor.ddy;
+		if(par === false){
+			i3GEOF.inseretxt.aguarde.visibility = "hidden";
+			return;
+		}
+		cp = new cpaint();
+		cp.set_response_type("JSON");
+		cp.call(p,"inserefeature",monta);
+	},
+	/*
+	Function: insereConector
+	
+	Insere um conector de textos
+	
+	Veja:
+	
+	<INSEREFEATURE>
+	
+	Parametro:
+	
+	xy {string} - lista de pontos
+	*/
+	insereConector: function(xy,texto){
+		var monta,par,p,nometema,temp;
+		monta = function(){
+		 	i3GEOF.inseretxt.aguarde.visibility = "hidden";
+		 	i3GEO.atualiza();
+		};
+		temp = Math.random() + "b";
+		temp = temp.split(".");
+		nometema = "pin"+temp[1];
+		par = i3GEOF.inseretxt.pegaPar();
+		par += "&tamanho="+$i("i3GEOinseretxttamanho_c").value;
+		par += "&cor="+$i("i3GEOinseretxtfrente_c").value;
+		p = i3GEO.configura.locaplic+"/classesphp/mapa_controle.php?g_sid="+i3GEO.configura.sid+
+				"&funcao=inserefeature&"+par+"&pin="+nometema+"&tipo=LINE&texto="+texto+" (conector)&xy="+xy;
 		if(par === false){
 			i3GEOF.inseretxt.aguarde.visibility = "hidden";
 			return;
