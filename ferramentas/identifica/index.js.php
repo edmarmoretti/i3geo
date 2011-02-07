@@ -159,6 +159,9 @@ i3GEOF.identifica = {
 			$i("i3GEOidentificaguia5").onclick = function(){
 				i3GEO.guias.mostraGuiaFerramenta("i3GEOidentificaguia5","i3GEOidentificaguia");
 				var ins = "",retorna;
+					i3GEO.coordenadas.formato = "lista";
+					i3GEO.coordenadas.mostraCoordenadas(false,"i3GEOidentificacoord",i3GEOF.identifica.x,i3GEOF.identifica.y);				
+				/*
 				$i("i3GEOidentificacoord").innerHTML = "Aguarde...";
 				retorna = function(utm){
 					temp = i3GEO.calculo.dd2dms(i3GEOF.identifica.x,i3GEOF.identifica.y);
@@ -175,6 +178,7 @@ i3GEOF.identifica = {
 					$i("i3GEOidentificacoord").innerHTML = ins;
 				};
 				i3GEO.php.geo2utm(retorna,i3GEOF.identifica.x,i3GEOF.identifica.y);
+				*/
 			};
 			
 			i3GEOF.identifica.listaTemas("ligados");

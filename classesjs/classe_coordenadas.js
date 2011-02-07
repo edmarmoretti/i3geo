@@ -32,7 +32,12 @@ if(typeof(i3GEO) === 'undefined'){
 /*
 Classe: i3GEO.coordenadas
 
-Inclui elementos especiais no mapa para apresentação de coordenadas
+Inclui elementos especiais no mapa para apresentação de coordenadas.
+
+Contém funções que permitem a conversão de coordenadas, entre sistemas de projeção deiferentes, com base na biblioteca Proj4js.
+Cria também o bloco de apresentação de coordenadas com base na posição do mouse sobre o mapa.
+Mais informações em http://trac.osgeo.org/proj4js/
+Para adicionar novas projeções ou modificar as atuais, edit a variável i3GEO.coordenadas.config e defOrigem
 
 */
 i3GEO.coordenadas = {
@@ -54,12 +59,15 @@ i3GEO.coordenadas = {
 	separado - mostra todos os tipos em lugares diferentes conforme o valor de idhtml
 	
 	lista - mostra cada tipo em um lugar diferente conforme o valor de idhtml
+	
+	janela - cria uma janela flutuante para mostrar os dados
+	
 	*/
 	formato: "bloco", //bloco,separado,lista,janela
 	/*
 	Propriedade: padrao
 	
-	Indica qual tipo de coordenada é mostrado como padrão. Deve existir em i3GEO.coordenadas.config
+	Indica qual tipo de coordenada é mostrado como padrão quando formato for igual a "bloco". Deve existir em i3GEO.coordenadas.config
 	
 	Default:
 	"geoProj"
@@ -78,9 +86,9 @@ i3GEO.coordenadas = {
 	/*
 	Propriedade: config
 	
-	Define as configurações de cada tipo de coordenada mostrada
+	Define as configurações de cada tipo de coordenada que será utilizada e/ou mostrada no mapa
 	
-	Para alterar os parâmetros ou acrescentar novas projeções, altere esse objeto por meio de javascript
+	Para alterar os parâmetros ou acrescentar novas projeções, altere esse objeto
 	
 	Para mais detalhes, veja i3geo/classesjs/classe_coordenada.js
 	
@@ -97,7 +105,7 @@ i3GEO.coordenadas = {
 		"policonicaSad69":{
 			idhtml: "localizarxy",
 			tipo: "metrica",
-			titulo: "Policônica SAD-69",
+			titulo: "Polic SAD-69",
 			ativo: true,
 			defepsg: "+proj=poly +lat_0=0 +lon_0=-54 +x_0=5000000 +y_0=10000000 +ellps=aust_SA +units=m +no_defs"
 		},		
@@ -126,7 +134,7 @@ i3GEO.coordenadas = {
 		"utmSirgas2000Proj":{
 			idhtml: "localizarxy",
 			tipo: "utm",
-			titulo: "UTM Sirgas 2000",
+			titulo: "UTM Sirgas",
 			ativo: true,
 			defepsg: "",
 			zona:{
@@ -337,7 +345,7 @@ i3GEO.coordenadas = {
 	*/
 	criaMascaraDMS: function(prefixo,titulo,caixa){
 		var ins = "<table id="+prefixo+" style=display:block;text-align:center ><tr style='border-bottom:2px solid white' >" +
-		"<td style=width:150px;text-align:right >"+titulo+" X:&nbsp;</td>" +
+		"<td style=width:120px;text-align:right >"+titulo+" X:&nbsp;</td>" +
 		"<td>"+$inputText("","315",prefixo+"xg","grau","3","-00")+"&nbsp;</td>" +
 		"<td>"+$inputText("","",prefixo+"xm","minuto","3","00")+"&nbsp;</td>" +
 		"<td>"+$inputText("","",prefixo+"xs","segundo","5","00.00")+"&nbsp;</td>" +
@@ -395,7 +403,7 @@ i3GEO.coordenadas = {
 	*/
 	criaMascaraMetrica: function(prefixo,titulo,caixa){
 		var ins = "<table id="+prefixo+" style=display:block;text-align:center ><tr style='border-bottom:2px solid white' >" +
-		"<td style=width:150px;text-align:right >"+titulo+" X:&nbsp;</td>" +
+		"<td style=width:120px;text-align:right >"+titulo+" X:&nbsp;</td>" +
 		"<td>"+$inputText("","",prefixo+"X","X","12","00")+"&nbsp;</td>" +
 		"<td>Y:"+$inputText("","",prefixo+"Y","Y","12","00")+"&nbsp;</td>" +
 		"<td>Zn:"+$inputText("","",prefixo+"ZN","Zona","2","--")+"&nbsp;</td>" +
@@ -415,39 +423,71 @@ i3GEO.coordenadas = {
 	configProj {string}
 	
 	*/
-	atualizaProj4: function(configProj){
+	atualizaProj4: function(onde,configProj,x,y){
+		try{
+			if(!$i(onde+configProj+"ZN"))
+			{return;}
+		}
+		catch(e){return;}		
 		eval("temp = i3GEO.coordenadas.config."+configProj+";");
 		try{
-			if($i(configProj).style.display == "none")
+			if($i(onde+configProj).style.display == "none")
 			{return;}
 		}
 		catch(e){}
 		if(temp.tipo === "metrica"){
 			var destino = temp.defepsg;
 		}
+		if(x == undefined)
+		{x = objposicaocursor.ddx;}
+		if(y == undefined)
+		{y = objposicaocursor.ddy;}		
 		if(temp.tipo === "utm"){
-			var zona = i3GEO.coordenadas.geo2zonaUtm(objposicaocursor.ddx);
-			$i(configProj+"ZN").value = zona
+			var zona = i3GEO.coordenadas.geo2zonaUtm(x);
+			$i(onde+configProj+"ZN").value = zona
 			if(objposicaocursor.ddy*1 > 0)
 			{var destino = temp.zona[zona+"N"];}
 			else
 			{var destino = temp.zona[zona+"S"];}
 			if(destino == undefined){
-				i3GEO.util.defineValor(configProj+"X","value","?");
-				i3GEO.util.defineValor(configProj+"Y","value","?");
+				i3GEO.util.defineValor(onde+configProj+"X","value","?");
+				i3GEO.util.defineValor(onde+configProj+"Y","value","?");
 				return;
 			}
 		}		
+		var p = i3GEO.coordenadas.calculaProj4(i3GEO.coordenadas.defOrigem,destino,x,y);
+		i3GEO.util.defineValor(onde+configProj+"X","value",p.x);
+		i3GEO.util.defineValor(onde+configProj+"Y","value",p.y);
+	},
+	/*
+	Function: calculaProj4
+	
+	Faz a projeção de x e y da origem para o destino
+	
+	Parametros:
+	
+	origem {string} - CRS contendo o código da projeção de origem
+	
+	destino {string} - CRS contendo o código da projeção de destino
+	
+	x {numerico} - coordenada x ou longitude
+	
+	y {numerico} - coordenada y ou latitude
+	
+	Retorno:
+	
+	{Proj4js.transform}
+	*/
+	calculaProj4: function(origem,destino,x,y){
 		Proj4js.defs = {
-			'ORIGEM' : i3GEO.coordenadas.defOrigem,
+			'ORIGEM' : origem,
 			'DESTINO': destino
 		};
 		var source = new Proj4js.Proj("ORIGEM"),
 			dest = new Proj4js.Proj("DESTINO"),
-			p = new Proj4js.Point(objposicaocursor.ddx,objposicaocursor.ddy);
+			p = new Proj4js.Point(x,y);
 		Proj4js.transform(source, dest, p);
-		i3GEO.util.defineValor(configProj+"X","value",p.x);
-		i3GEO.util.defineValor(configProj+"Y","value",p.y);
+		return p;
 	},
 	/*
 	Function: ativaBloco
@@ -456,7 +496,7 @@ i3GEO.coordenadas = {
 	
 	Mostra o que estiver definido em i3GEO.coordenadas.padrao
 	*/
-	ativaBloco: function(){
+	ativaBloco: function(prefixo){
 		var tipos = i3GEO.util.listaChaves(i3GEO.coordenadas.config),
 			n = tipos.length,
 			temp,
@@ -468,9 +508,9 @@ i3GEO.coordenadas = {
 			eval("temp = i3GEO.coordenadas.config."+tipos[i]+";");
 			if(temp.ativo === true){
 				if(tipos[i] == i3GEO.coordenadas.padrao)
-				{$i(tipos[i]).style.display = "block";}
+				{$i(prefixo+tipos[i]).style.display = "block";}
 				else
-				{$i(tipos[i]).style.display = "none";}
+				{$i(prefixo+tipos[i]).style.display = "none";}
 			}
 		}
 	},
@@ -483,7 +523,7 @@ i3GEO.coordenadas = {
 	
 	tipo {string} - tipo de coordenada
 	*/	
-	mudaTipo: function(obj){
+	mudaTipo: function(obj,onde){
 		if(obj.value === "janela"){
 			i3GEO.coordenadas.formato = "janela";
 			i3GEO.coordenadas.mostraCoordenadas();
@@ -491,22 +531,37 @@ i3GEO.coordenadas = {
 		}
 		i3GEO.coordenadas.padrao = obj.value;
 		obj.selectedIndex = 0;
-		i3GEO.coordenadas.ativaBloco();
+		i3GEO.coordenadas.ativaBloco(onde);
 	},
 	/*
 	Function: mostraCoordenadas
 	
 	Constrói o conjunto de elementos HTML para mostrar as coordenadas e define as funções de atualização.
+	
+	Parametro:
+	
+	ativaMovimento {boolean} - (opcional) aplica ou não as funções ligadas à movimentação do mouse
+	
+	onde {string} - (opcional) id onde o resultado será mostrado (irá ignorar os ids definidos em coordenadas.config)
 	*/
-	mostraCoordenadas: function(){
+	mostraCoordenadas: function(ativaMovimento,onde,x,y){
 		try{
 			var tipos = i3GEO.util.listaChaves(i3GEO.coordenadas.config),
 				n = tipos.length,
 				temp,
 				ins = "",
-				onde = "",
-				i = 0,
-				caixa = "<select onchange='javascript:i3GEO.coordenadas.mudaTipo(this);' style='font-size:10px;height:15px;width:50px;' ><option>---</option><option value='janela' >janela</option>";
+				i = 0;
+			if(arguments.length === 0){
+				var ativaMovimento = true;
+				var onde = "";
+			}
+			
+			//
+			//cria o HTML
+			//
+			if(onde === "")
+			{eval("onde = i3GEO.coordenadas.config."+tipos[0]+".idhtml;");}
+			var caixa = "<select onchange='javascript:i3GEO.coordenadas.mudaTipo(this,\""+onde+"\");' style='font-size:10px;height:15px;width:50px;' ><option>---</option><option value='janela' >janela</option>";
 			//
 			//cria a caixa de seleção
 			//			
@@ -518,25 +573,20 @@ i3GEO.coordenadas = {
 			}
 			caixa += "</select>";
 			if(i3GEO.coordenadas.formato !== "bloco")
-			{caixa = "";}			
-			//
-			//cria o HTML
-			//
+			{caixa = "";}
 			for(i=0;i<n;i++){
 				eval("temp = i3GEO.coordenadas.config."+tipos[i]+";");
 				if(temp.ativo === true){
 					if(temp.tipo === "geo"){
-						ins += i3GEO.coordenadas.criaMascaraDMS(tipos[i],temp.titulo,caixa);
+						ins += i3GEO.coordenadas.criaMascaraDMS(onde+tipos[i],temp.titulo,caixa);
 						if(i3GEO.coordenadas.formato === "separado"){
 							try{$i(temp.idhtml).innerHTML = ins;}
 							catch(e){}
 							ins = "";
 						}
-						else
-						{onde = temp.idhtml;}
 					}
 					else{
-						ins += i3GEO.coordenadas.criaMascaraMetrica(tipos[i],temp.titulo,caixa);
+						ins += i3GEO.coordenadas.criaMascaraMetrica(onde+tipos[i],temp.titulo,caixa);
 					}
 				}
 			}
@@ -564,7 +614,7 @@ i3GEO.coordenadas = {
 				{$i(onde).innerHTML = "";}
 				onde = "i3GEOJanelaCoordenadas_corpo";
 			}
-			if($i(onde))
+			if(onde != "" && $i(onde))
 			{$i(onde).innerHTML = ins;}
 			//
 			//aplica as funções de movimentação do mouse
@@ -573,22 +623,36 @@ i3GEO.coordenadas = {
 				eval("temp = i3GEO.coordenadas.config."+tipos[i]+";");
 				if(temp.ativo === true){
 					if(temp.tipo === "geo"){
-						atualizaLocalizarGeo = function(id){
+						atualizaLocalizarGeo = function(id,x,y){
+							if(x == undefined)
+							{x = objposicaocursor.dmsx;}
+							if(y == undefined)
+							{y = objposicaocursor.dmsy;}
 							temp = $i(id);
 							if(temp && temp.style.display == "block")
-							{i3GEO.coordenadas.atualizaGeo(objposicaocursor.dmsx,objposicaocursor.dmsy,id);}
+							{i3GEO.coordenadas.atualizaGeo(x,y,id);}
 						};
-						if(i3GEO.eventos.MOUSEMOVE.toString().search("atualizaLocalizarGeo('"+tipos[i]+"')") < 0)
-						{i3GEO.eventos.MOUSEMOVE.push("atualizaLocalizarGeo('"+tipos[i]+"')");}
+						if(ativaMovimento === true){
+							if(i3GEO.eventos.MOUSEMOVE.toString().search("atualizaLocalizarGeo('"+onde+tipos[i]+"')") < 0)
+							{i3GEO.eventos.MOUSEMOVE.push("atualizaLocalizarGeo('"+onde+tipos[i]+"')");}
+						}
+						if(x != undefined){
+							atualizaLocalizarGeo(onde+tipos[i],i3GEO.calculo.dd2dms(x)[0],i3GEO.calculo.dd2dms(y)[0]);
+						}
 					}
 					else{
-						if(i3GEO.eventos.MOUSEMOVE.toString().search("i3GEO.coordenadas.atualizaProj4('"+tipos[i]+"')") < 0)
-						{i3GEO.eventos.MOUSEMOVE.push("i3GEO.coordenadas.atualizaProj4('"+tipos[i]+"')");}
+						if(ativaMovimento === true){
+							if(i3GEO.eventos.MOUSEMOVE.toString().search("i3GEO.coordenadas.atualizaProj4('"+onde+"','"+tipos[i]+"')") < 0)
+							{i3GEO.eventos.MOUSEMOVE.push("i3GEO.coordenadas.atualizaProj4('"+onde+"','"+tipos[i]+"')");}
+						}
+						if(x != undefined){
+							i3GEO.coordenadas.atualizaProj4(onde,tipos[i],x,y);
+						}
 					}
 				}
 			}
 			if(i3GEO.coordenadas.formato === "bloco")
-			{i3GEO.coordenadas.ativaBloco();}
+			{i3GEO.coordenadas.ativaBloco(onde);}
 		}
 		catch(e){}
 	}
