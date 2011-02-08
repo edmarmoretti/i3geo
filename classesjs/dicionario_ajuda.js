@@ -812,6 +812,15 @@ g_traducao_ajuda = {
 			complemento:"",
 			tela:"",
 			apijs:"i3GEO.arvoreDeTemas"
+		},
+		"96": {
+			titulo: "Gráfico de perfil",
+			diretorio:"",
+			categoria:"3",
+			pt:"Cria um gráfico de perfil com base em um conjunto de dados contendo os valores de Z.",
+			complemento:"Os valores de Z podem ser obtidos de um tema ou de um serviço do tipo Google API",
+			tela:"",
+			apijs:"i3GEO.analise"
 		}
 	}
 };

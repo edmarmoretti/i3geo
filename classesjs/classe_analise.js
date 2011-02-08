@@ -58,8 +58,7 @@ i3GEO.analise = {
 		Abre a janela de diálogo da ferramenta graficointerativo
 		*/
 		graficoInterativo: function(){
-			if(typeof(i3GEOF.graficointerativo) === 'undefined')
-			{i3GEO.util.dialogoFerramenta("i3GEO.analise.dialogo.graficoInterativo()","graficointerativo","graficointerativo");}
+			i3GEO.util.dialogoFerramenta("i3GEO.analise.dialogo.graficoInterativo()","graficointerativo","graficointerativo");
 		},
 		/*
 		Function: linhaDoTempo
@@ -89,6 +88,14 @@ i3GEO.analise = {
 			};		
 			if(i3GEO.eventos.NAVEGAMAPA.toString().search("atualizaLinhaDoTempo()") < 0)
 			{i3GEO.eventos.NAVEGAMAPA.push("atualizaLinhaDoTempo()");}
+		},
+		/*
+		Function: perfil
+
+		Abre a janela de diálogo da ferramenta perfil
+		*/
+		perfil: function(){
+			i3GEO.util.dialogoFerramenta("i3GEO.analise.dialogo.perfil()","perfil","perfil");
 		},
 		/*
 		Function: gradePontos
@@ -269,6 +276,7 @@ i3GEO.analise = {
 				'<td>' +
 				'<input style="cursor:pointer" type="checkbox" id="parartextos" checked />' +
 				'</td><td>Textos<td>' +
+				'<td>&nbsp;<input id=i3GEObotaoPerfil size="22" type="button" value="perfil"></td>' +
 				'</tr></table></span>' +
 				'</div>' +
 				'</div>';
@@ -285,6 +293,17 @@ i3GEO.analise = {
 			imagemxy = i3GEO.util.pegaPosicaoObjeto($i(i3GEO.Interface.IDCORPO));
 			YAHOO.janelaDocamede.xp.panel.moveTo(imagemxy[0]+150,imagemxy[1]);
 			YAHOO.util.Event.addListener(YAHOO.janelaDocamede.xp.panel.close, "click", i3GEO.analise.medeDistancia.fechaJanela);
+			//
+			//botao que abre a ferramenta de cálculo de perfis.
+			//pontosdistobj contém as coordenadas dos pontos
+			//
+			new YAHOO.widget.Button(
+				"i3GEObotaoPerfil",
+				{onclick:{fn: function(){
+					var js = i3GEO.configura.locaplic+"/ferramentas/perfil/index.js.php";
+					i3GEO.util.scriptTag(js,"i3GEOF.perfil.criaJanelaFlutuante(pontosdistobj)","i3GEOF.perfil_script");
+				}}}
+			);
 		},
 		/*
 		Function: fechaJanela
@@ -295,6 +314,8 @@ i3GEO.analise = {
 			i3GEO.Interface.ATUAL !== "googleearth" ? i3GEO.desenho.richdraw.fecha() : i3GEO.Interface.googleearth.removePlacemark("divGeometriasTemp");
 			i3GEO.util.removeChild("pontosins");
 			i3GEO.util.removeChild("mostradistancia_c");
+			if($i("divGeometriasTemp"))
+			{i3GEO.desenho.richdraw.fecha();}			
 			YAHOO.util.Event.removeListener(YAHOO.janelaDocamede.xp.panel.close, "click");
 			i3GEO.eventos.MOUSECLIQUE.remove("i3GEO.analise.medeDistancia.clique()");
 			i3GEO.eventos.MOUSEMOVE.remove("i3GEO.analise.medeDistancia.movimento()");

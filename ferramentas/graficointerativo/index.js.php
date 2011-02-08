@@ -55,6 +55,12 @@ i3GEOF.graficointerativo = {
 	*/
 	aguarde: "",
 	/*
+	Propriedade: titulo
+	
+	Título do gráfico. Se for vazio, será obtido do nome do tema selecionado
+	*/
+	titulo: "",	
+	/*
 	Propriedade: tipo
 	
 	Tipo de gráfico escolhido pelo usuário.
@@ -117,10 +123,10 @@ i3GEOF.graficointerativo = {
 	
 	iddiv {String} - id do div que receberá o conteudo HTML da ferramenta
 	
-	dados {JSON} - dados para o gráfico (opcional)
+	dados {JSON} - dados para o gráfico (opcional) exemplo ["n;x","'Argentina';33796870","'Paraguay';4773464","'Brazil';151525400","'Chile';13772710"]
 	*/
 	inicia: function(iddiv,dados){
-		try{
+		//try{
 			$i(iddiv).innerHTML += i3GEOF.graficointerativo.html();
 			$i("i3GEOgraficointerativoAcumula").checked = i3GEOF.graficointerativo.acumula;
 			$i("i3GEOgraficointerativoRelativa").checked = i3GEOF.graficointerativo.relativa;
@@ -202,8 +208,8 @@ i3GEOF.graficointerativo = {
 				i3GEOF.graficointerativo.montaTabelaDados(dados);
 				$i("i3GEOgraficointerativoguia4").onclick.call();
 			}
-		}
-		catch(erro){alert(erro);}
+		//}
+		//catch(erro){alert(erro);}
 	},
 	/*
 	Function: html
@@ -350,7 +356,7 @@ i3GEOF.graficointerativo = {
 		i3GEO.barraDeBotoes.ativaIcone("graficointerativo");
 		var i = $i("i3GEOF.graficointerativo_c").style;
 		i3GEO.janela.ULTIMOZINDEX++;
-		i.zIndex = 21000 + i3GEO.janela.ULTIMOZINDEX;
+		i.zIndex = i3GEO.janela.ULTIMOZINDEX;
 	},
 	/*
 	Function: ativaTipo
@@ -478,7 +484,7 @@ i3GEOF.graficointerativo = {
 			i,
 			id,
 			cor = "#d01f3c";
-		if(!retorno.dados)
+		if(!retorno.dados && retorno.data != undefined)
 		{dados = retorno.data.dados;}
 		else
 		{dados = retorno;}
@@ -556,6 +562,8 @@ i3GEOF.graficointerativo = {
 			legendaY = "",
 			fill = "#C4B86A",
 			pointSize = 2;
+		if(i3GEOF.graficointerativo.titulo != "")
+		{titulo = i3GEOF.graficointerativo.titulo}
 		if($i("i3GEOgraficointerativoComboXid"))
 		{legendaX = $i("i3GEOgraficointerativoComboXid").value;}
 		if($i("i3GEOgraficointerativoComboYid"))

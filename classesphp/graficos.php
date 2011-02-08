@@ -520,4 +520,19 @@ function dadosLinhaDoTempo($map_file,$tema,$ext="")
 		"events"=>$eventos
 	);
 }
+function dadosPerfilRelevo($pontos,$opcao,$amostragem){
+	if($opcao == "google"){
+		$urlGoogle = "http://maps.google.com/maps/api/elevation/json?sensor=false&path=";
+		$pontos = str_replace(",","|",$pontos);
+		$pontos = str_replace(" ",",",$pontos);
+		$urlGoogle .= $pontos."&samples=".$amostragem;
+		$curl = curl_init();
+		curl_setopt ($curl, CURLOPT_URL, $urlGoogle);
+		curl_setopt($curl, CURLOPT_RETURNTRANSFER, 1);
+		$result = curl_exec($curl);
+		curl_close ($curl);
+		$result = json_decode( $result, true );
+	}
+	return $result;
+}
 ?>

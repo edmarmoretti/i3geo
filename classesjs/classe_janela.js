@@ -313,11 +313,15 @@ i3GEO.janela = {
 		if(ifr == true)
 		{YAHOO.janelaDoca.xp.panel.iframe.style.zIndex = 0;}
 		if(modal === true){
-			if($i(id+"_mask"))
-			{$i(id+"_mask").style.zIndex = 9000 + i3GEO.janela.ULTIMOZINDEX + 1;}
+			if($i(id+"_mask")){
+				$i(id+"_mask").style.zIndex = 9000 + i3GEO.janela.ULTIMOZINDEX + 1;
+				i3GEO.janela.ULTIMOZINDEX = 9000 + i3GEO.janela.ULTIMOZINDEX + 1;
+			}
 		}
-		if($i(id+"_c"))
-		{$i(id+"_c").style.zIndex = 23000 + i3GEO.janela.ULTIMOZINDEX + 1;}
+		if($i(id+"_c")){
+			$i(id+"_c").style.zIndex = 23000 + i3GEO.janela.ULTIMOZINDEX + 1;
+			i3GEO.janela.ULTIMOZINDEX = 23000 + i3GEO.janela.ULTIMOZINDEX + 1;
+		}
 		if(funcaoCabecalho)
 		{$i(id+'_cabecalho').onclick = funcaoCabecalho;}
 		if(funcaoMinimiza)
@@ -381,10 +385,8 @@ i3GEO.janela = {
 		i3GEO.util.escondePin();
 		i3GEO.util.escondeBox();
 		//fecha o container de desenho de elementos na tela
-		if($i("divGeometriasTemp"))
-		{i3GEO.desenho.richdraw.fecha();}
-		//if($i("flamingoi"))
-		//{$i("flamingoi").style.display="block";}
+		//if($i("divGeometriasTemp"))
+		//{i3GEO.desenho.richdraw.fecha();}
 		//executa as funções de fechamento
 		if(i3GEO.janela.ANTESFECHA){
 			for(i=0;i<i3GEO.janela.ANTESFECHA.length;i++)

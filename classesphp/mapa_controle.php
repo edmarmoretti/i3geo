@@ -1769,13 +1769,26 @@ Valor: DADOSLINHADOTEMPO
 
 Pega os dados de um tema para geração do gráfico de linha do tempo.
 
-<graficoPizza>
+<dadosLinhaDoTempo>
 */
 	case "DADOSLINHADOTEMPO":
 		include_once("graficos.php");
 		if(!isset($ext))
 		{$ext = "";}
 		$retorno = dadosLinhaDoTempo($map_file,$tema,$ext);
+	break;
+/*
+Valor: DADOSPERFILRELEVO
+
+Pega os dados para elaboração de gráfico de perfil do relevo
+
+<dadosPerfilRelevo>
+*/
+	case "DADOSPERFILRELEVO":
+		include_once("graficos.php");
+		if(!isset($ext))
+		{$ext = "";}
+		$retorno = dadosPerfilRelevo($pontos,$opcao,$amostragem);
 	break;
 /*
 Section: Menu de temas

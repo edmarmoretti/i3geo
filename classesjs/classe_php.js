@@ -1107,5 +1107,18 @@ i3GEO.php = {
 		i3GEO.php.verifica();
 		var p = i3GEO.configura.locaplic+"/classesphp/mapa_controle.php?g_sid="+i3GEO.configura.sid+"&funcao=alteradata&tema="+tema+"&novodata="+data;
 		cpJSON.call(p,"alteradata",funcao);	
-	}
+	},
+	/*
+	Function: dadosPerfilRelevo
+
+	<DADOSPERFILRELEVO>	
+	*/
+	dadosPerfilRelevo: function(funcao,opcao,pontos,amostragem){
+		i3GEO.php.verifica();
+		var p = i3GEO.configura.locaplic+"/classesphp/mapa_controle.php?g_sid="+i3GEO.configura.sid+"&funcao=dadosPerfilRelevo&opcao="+opcao;
+		var cp = new cpaint();
+		cp.set_transfer_mode('POST');
+		cp.set_response_type("JSON");
+		cp.call(p,"foo",funcao,"&pontos="+pontos+"&amostragem="+amostragem);
+	}	
 };
