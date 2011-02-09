@@ -83,7 +83,7 @@ opera = navigator.userAgent.toLowerCase().indexOf('opera') > -1;
 var app = navigator.appName.substring(0,1);
 if (app==='N'){navn=true;}
 if (app==='M'){navm=true;}
-if(opera == true)
+if(opera === true)
 {navn = true;}
 /*
 Variavel: g_operacao
@@ -122,7 +122,7 @@ Obtém um elemento DOM a partir de seu id
 Parametros:
 
 id - {String} ID do elemento.
-    
+	
 Returns:
 
 {Object} Objeto.
@@ -250,8 +250,8 @@ i3GEO.util = {
 		var keys,key;
 		keys = [];
 		for(key in obj){
-   			if(obj[key])
-   			{keys.push(key);}
+			if(obj[key])
+			{keys.push(key);}
 		}
 		return keys;
 	},
@@ -380,8 +380,7 @@ i3GEO.util = {
 			temaNode.enableHighlight = false;
 		}
 		arvore.collapseAll();
-   		arvore.draw();
-   		//YAHOO.log("Fim arvore", "i3geo");
+		arvore.draw();
 	},
 	/*
 	Function: removeAcentos
@@ -426,7 +425,7 @@ i3GEO.util = {
 		if(typeof(console) !== 'undefined'){console.info("i3GEO.util.protocolo()");}
 		var u = window.location.href;
 		u = u.split(":");
-		return (u[0]);	
+		return (u[0]);
 	},
 	/*
 	Function: pegaPosicaoObjeto
@@ -486,7 +485,7 @@ i3GEO.util = {
 		if (e.srcElement)
 		{targ = e.srcElement;}
 		if (targ.nodeType === 3)
-   		{targ = targ.parentNode;}
+		{targ = targ.parentNode;}
 		tparent=targ.parentNode;
 		return(tparent);
 	},
@@ -541,7 +540,7 @@ i3GEO.util = {
 			//testa novamente
 			if(c === "default" || c === "pointer" || c === "crosshair" || c === "help" || c === "move" || c === "text")
 			{cursor = c;}		
-			if(cursor == "")
+			if(cursor === "")
 			{cursor = "URL(\""+locaplic+eval("cursores."+tipo+ext)+"\"),auto";}
 			for(i=0;i<n;i++){
 				o = os[i];
@@ -839,7 +838,7 @@ i3GEO.util = {
 					}
 					else{
 						i.top = parseInt($i(i3GEO.Interface.IDMAPA).style.top,10);
-						i.left = parseInt($i(i3GEO.Interface.IDMAPA).style.left,10);					
+						i.left = parseInt($i(i3GEO.Interface.IDMAPA).style.left,10);
 					}
 					document.body.appendChild(novoel);
 				}
@@ -878,7 +877,7 @@ i3GEO.util = {
 					{$i(i3GEO.util.insereMarca.CONTAINER[i]).innerHTML = "";}
 				}
 				i3GEO.util.insereMarca.CONTAINER = [];
-				i3GEO.eventos.NAVEGAMAPA.remove("i3GEO.util.insereMarca.limpa()");					
+				i3GEO.eventos.NAVEGAMAPA.remove("i3GEO.util.insereMarca.limpa()");
 			}
 			catch(e){
 				if(typeof(console) !== 'undefined'){console.error(e);}
@@ -920,7 +919,7 @@ i3GEO.util = {
 	abreCor: function(janela,elemento,tipo){
 		if(typeof(console) !== 'undefined'){console.info("i3GEO.util.abreCor()");}
 		//i3GEO.janela.cria("400","240",i3GEO.configura.locaplic+"/ferramentas/colorpicker/index.htm?doc="+janela+"&elemento="+elemento,"","","Cor","i3geo_janelaCor",true);
-		if(arguments.length == 2)
+		if(arguments.length === 2)
 		{tipo = "rgb";}
 		var ins,
 			temp,
@@ -1093,7 +1092,7 @@ i3GEO.util = {
 				{obj.style.opacity= 1;}
 			}
 		};
-		tempoFadei = setTimeout(fadei, tempo);	
+		tempoFadei = setTimeout(fadei, tempo);
 	},
 	/*
 	Function: desaparece
@@ -1154,7 +1153,7 @@ i3GEO.util = {
 				}
 			}
 		};
-		tempoFade = setTimeout(fade, tempo);	
+		tempoFade = setTimeout(fade, tempo);
 	},
 	/*
 	Function: wkt2ext
@@ -1185,9 +1184,9 @@ i3GEO.util = {
 				x = [];
 				y = [];
 				for (w=0;w<wkt.length; w++){
- 					temp = wkt[w].split(" ");
- 					x.push(temp[0]);
- 					y.push(temp[1]);
+					temp = wkt[w].split(" ");
+					x.push(temp[0]);
+					y.push(temp[1]);
 				}
 				x.sort(i3GEO.util.sortNumber);
 				xMin = x[0];
@@ -1237,38 +1236,37 @@ i3GEO.util = {
 	altura
 	*/
 	getScrollerWidth: function() {
-    	if(typeof(console) !== 'undefined'){console.info("i3GEO.util.getScrollerWidth()");}
-    	var scr = null,
-    		inn = null,
-    		wNoScroll = 0,
-    		wScroll = 0;
-    	// Outer scrolling div
-    	scr = document.createElement('div');
-    	scr.style.position = 'absolute';
-    	scr.style.top = '-1000px';
-    	scr.style.left = '-1000px';
-    	scr.style.width = '100px';
-    	scr.style.height = '50px';
-    	// Start with no scrollbar
-    	scr.style.overflow = 'hidden';
-    	// Inner content div
-    	inn = document.createElement('div');
-    	inn.style.width = '100%';
-   		inn.style.height = '200px';
-	    // Put the inner div in the scrolling div
-    	scr.appendChild(inn);
-    	// Append the scrolling div to the doc
-    	document.body.appendChild(scr);
-    	// Width of the inner div sans scrollbar
-    	wNoScroll = inn.offsetWidth;
-    	// Add the scrollbar
-    	scr.style.overflow = 'auto';
-    	// Width of the inner div width scrollbar
-    	wScroll = inn.offsetWidth;
-    	// Remove the scrolling div from the doc
-   		document.body.removeChild(document.body.lastChild);
-    	// Pixel width of the scroller
-    	return (wNoScroll - wScroll);
+		if(typeof(console) !== 'undefined'){console.info("i3GEO.util.getScrollerWidth()");}
+		var scr = null,
+			inn = null,
+			wNoScroll = 0,
+			wScroll = 0;
+		scr = document.createElement('div');
+		scr.style.position = 'absolute';
+		scr.style.top = '-1000px';
+		scr.style.left = '-1000px';
+		scr.style.width = '100px';
+		scr.style.height = '50px';
+		// Start with no scrollbar
+		scr.style.overflow = 'hidden';
+		// Inner content div
+		inn = document.createElement('div');
+		inn.style.width = '100%';
+		inn.style.height = '200px';
+		// Put the inner div in the scrolling div
+		scr.appendChild(inn);
+		// Append the scrolling div to the doc
+		document.body.appendChild(scr);
+		// Width of the inner div sans scrollbar
+		wNoScroll = inn.offsetWidth;
+		// Add the scrollbar
+		scr.style.overflow = 'auto';
+		// Width of the inner div width scrollbar
+		wScroll = inn.offsetWidth;
+		// Remove the scrolling div from the doc
+		document.body.removeChild(document.body.lastChild);
+		// Pixel width of the scroller
+		return (wNoScroll - wScroll);
 	},
 	/*
 	Function: scriptTag
@@ -1287,7 +1285,7 @@ i3GEO.util = {
 	*/
 	scriptTag: function(js,ini,id,aguarde){
 		if(typeof(console) !== 'undefined'){console.info("i3GEO.util.scriptTag()");}
-		if(!aguarde){var aguarde = true;}
+		if(!aguarde){aguarde = true;}
 		var head,script, tipojanela = i3GEO.janela.ESTILOAGUARDE;
 		if(!$i(id) || id === ""){
 			i3GEO.janela.ESTILOAGUARDE = "reduzida";
@@ -1375,7 +1373,7 @@ i3GEO.util = {
 			if(t[0] === texto)
 			{return true;}
 		}
-		return false
+		return false;
 	},
 	/*
 	Function: mensagemAjuda
@@ -1417,7 +1415,7 @@ i3GEO.util = {
 		g = parseInt(255*v,10);
 		v = Math.random();
 		b = parseInt(255*v,10);
-		return (r+","+g+","+b);		
+		return (r+","+g+","+b);
 	},
 	/*
 	Function: rgb2hex
@@ -1436,7 +1434,7 @@ i3GEO.util = {
 		function hex(x)  {
 			var hexDigits = ["0", "1", "2", "3", "4", "5", "6", "7", "8","9", "A", "B", "C", "D", "E", "F"];
 			return hexDigits[(x - x % 16) / 16] + hexDigits[x% 16];
-		};
+		}
 		return "#" + hex(rgb[0]) + hex(rgb[1]) + hex(rgb[2]);
 	},
 	/*
@@ -1771,15 +1769,15 @@ i3GEO.util = {
 	onde {String} - id do elemento HTML que receberá o combo. É utilizado apenas para inserir uma mensagem de aguarde.
 	*/	
 	comboValoresItem: function(id,tema,itemTema,funcao,onde){
-		if (arguments.length == 5)
+		if (arguments.length === 5)
 		{$i(onde).innerHTML="<span style=color:red;font-size:10px; >buscando valores...</span>";}
 		var monta = function(retorno){
 			var ins = [],
 				i,
 				pares,
 				j,
-				temp;		
-			if (retorno.data != undefined){
+				temp;
+			if (retorno.data !== undefined){
 				ins.push("<select  id="+id+" >");
 				ins.push("<option value='' >---</option>");
 				for (i=0;i<retorno.data[1].registros.length; i++){
@@ -1848,17 +1846,17 @@ i3GEO.util = {
 	comboSimNao: function(id,selecionado){
 		if(typeof(console) !== 'undefined'){console.info("i3GEO.util.comboSimNao()");}
 		var combo = "<select name="+id+" id="+id+" >";
-    	combo+= "<option value='' >---</option>";
-    	if(selecionado === "sim")
-    	{combo+= "<option value=TRUE selected >sim</option>";}
-    	else
-    	{combo+= "<option value=TRUE >sim</option>";}
-    	if(selecionado === "nao")
+		combo+= "<option value='' >---</option>";
+		if(selecionado === "sim")
+		{combo+= "<option value=TRUE selected >sim</option>";}
+		else
+		{combo+= "<option value=TRUE >sim</option>";}
+		if(selecionado === "nao")
 		{combo += "<option value=FALSE selected >não</option>";}
 		else
 		{combo += "<option value=FALSE >não</option>";}
 		combo += "</select>";
-		return(combo);	
+		return(combo);
 	},
 	/*
 	Function: checkItensEditaveis
@@ -1888,7 +1886,7 @@ i3GEO.util = {
 			var ins = [],
 				i,
 				temp,
-				n;			
+				n;
 			if (retorno.data !== undefined)
 			{
 				ins.push("<table class=lista3 >");
@@ -1928,14 +1926,14 @@ i3GEO.util = {
 		if (arguments.length === 2)
 		{$i(onde).innerHTML="<span style=color:red;font-size:10px; >buscando...</span>";}
 		var cp,monta = function(retorno){
-			var ins = new Array(),
+			var ins = [],
 				i,n,temp;
 			if (retorno.data !== undefined){
 				ins.push("<table class=lista2 >");
 				ins.push("<tr><td><input size=2 style='border:0px solid white;cursor:pointer' name='"+prefixo+"EPSG' type=radio checked value='' /></td>");
 				ins.push("<td>"+retorno.data[0].nome+"</td></tr>");
 				ins.push("<tr><td><input size=2 style='border:0px solid white;cursor:pointer' name='"+prefixo+"EPSG' type=radio value='' /></td>");
-				ins.push("<td>"+retorno.data[1].nome+"</td></tr>");				
+				ins.push("<td>"+retorno.data[1].nome+"</td></tr>");
 				n = retorno.data.length;
 				for (i=2;i<n; i++){
 					ins.push("<tr><td><input size=2 style='border:0px solid white;cursor:pointer' name='"+prefixo+"EPSG' type=radio value='"+retorno.data[i].codigo+"' /></td>");
@@ -1976,7 +1974,8 @@ i3GEO.util = {
 			ndiv = document.createElement("div"),
 			nids,
 			i,
-			fundo;
+			fundo,
+			b;
 			
 		if(temp){$i(container).removeChild(temp);}
 		if (!document.getElementById(idatual))
@@ -1992,13 +1991,13 @@ i3GEO.util = {
 			
 			$i(container).appendChild(ndiv);
 			
-			new YAHOO.widget.Button(idatual+"anterior_",{
+			b = new YAHOO.widget.Button(idatual+"anterior_",{
 				onclick:{fn: function(){
 					eval(anterior+"()");
 				},
 				lazyloadmenu:true 
 			}});
-			new YAHOO.widget.Button(idatual+"proxima_",
+			b = new YAHOO.widget.Button(idatual+"proxima_",
 				{onclick:{fn: function(){
 					eval(proxima+"()");
 				},
@@ -2062,18 +2061,19 @@ i3GEO.util = {
 	boolean
 	*/
 	intersectaBox: function(box1,box2){
-		var box1 = box1.split(" "),
-			box2 = box2.split(" "),
-			box1i = box2,
+		box1 = box1.split(" ");
+		box2 = box2.split(" ");
+		var	box1i = box2,
 			box2i = box1,
 			coordx,
 			coordy,
 			i;
 		coordx = box1[0]*1;
 		coordy = box1[1]*1;
-		if(coordx >= box2[0]*1 && coordx <= box2[2]*1 && coordy >= box2[1]*1 && coordy <= box2[3]*1)
-		coordx = box1[0]*1;
-		coordy = box1[3]*1;
+		if(coordx >= box2[0]*1 && coordx <= box2[2]*1 && coordy >= box2[1]*1 && coordy <= box2[3]*1){
+			coordx = box1[0]*1;
+			coordy = box1[3]*1;
+		}
 		if(coordx >= box2[0]*1 && coordx <= box2[2]*1 && coordy >= box2[1]*1 && coordy <= box2[3]*1)		
 		{return true;}
 		coordx = box1[2]*1;
@@ -2090,9 +2090,10 @@ i3GEO.util = {
 		
 		coordx = box1[0]*1;
 		coordy = box1[1]*1;
-		if(coordx >= box2[0]*1 && coordx <= box2[2]*1 && coordy >= box2[1]*1 && coordy <= box2[3]*1)
-		coordx = box1[0]*1;
-		coordy = box1[3]*1;
+		if(coordx >= box2[0]*1 && coordx <= box2[2]*1 && coordy >= box2[1]*1 && coordy <= box2[3]*1){
+			coordx = box1[0]*1;
+			coordy = box1[3]*1;
+		}
 		if(coordx >= box2[0]*1 && coordx <= box2[2]*1 && coordy >= box2[1]*1 && coordy <= box2[3]*1)		
 		{return true;}
 		coordx = box1[2]*1;
@@ -2180,18 +2181,19 @@ i3GEO.util = {
 			scripts = document.getElementsByTagName('script'),
 			i = 0,
 			index,
-			ns = scripts.length;
+			ns = scripts.length,
+			src;
 		for (i = 0; i < ns; i++) {
-			var src = scripts[i].getAttribute('src');
+			src = scripts[i].getAttribute('src');
 			if (src) {
-				var index = src.lastIndexOf("/classesjs/i3geo.js");
+				index = src.lastIndexOf("/classesjs/i3geo.js");
 				// is it found, at the end of the URL?
-				if ((index > -1) && (index + "/classesjs/i3geo.js".length == src.length)) {
+				if ((index > -1) && (index + "/classesjs/i3geo.js".length === src.length)) {
 					scriptLocation = src.slice(0, -"/classesjs/i3geo.js".length);
 					break;
 				}
-				var index = src.lastIndexOf("/classesjs/i3geonaocompacto.js");
-				if ((index > -1) && (index + "/classesjs/i3geonaocompacto.js".length == src.length)) {
+				index = src.lastIndexOf("/classesjs/i3geonaocompacto.js");
+				if ((index > -1) && (index + "/classesjs/i3geonaocompacto.js".length === src.length)) {
 					scriptLocation = src.slice(0, -"/classesjs/i3geonaocompacto.js".length);
 					break;
 				}
@@ -2284,36 +2286,40 @@ try{
 			if(ativa) {
 				this.properties.ativa = ativa;
 			}
-			var accordionObject = document.getElementById(this.properties.Id);
+			var accordionObject = document.getElementById(this.properties.Id),
+				headers,
+				bodies;
 			if(accordionObject) {
-				if(accordionObject.nodeName == "DL") {
-					var headers = accordionObject.getElementsByTagName("dt");
-					var bodies = headers[0].parentNode.getElementsByTagName("dd");
+				if(accordionObject.nodeName === "DL") {
+					headers = accordionObject.getElementsByTagName("dt");
+					bodies = headers[0].parentNode.getElementsByTagName("dd");
 				}
 				this.attachEvents(headers,0);
 			}
 		},
 
 		attachEvents : function(headers,nr) {
-			for(var i=0; i<headers.length; i++) {
-				var headerProperties = {
+			var i,headerProperties,parentObj,header;
+			for(i=0; i<headers.length; i++) {
+				headerProperties = {
 					objRef : headers[i],
 					nr : i,
 					jsObj : this
 				};
 				YAHOO.util.Event.addListener(headers[i],"click",this.clickHeader,headerProperties);
 			}
-			var parentObj = headers[this.properties.ativa].parentNode;
-			var headers = parentObj.getElementsByTagName("dd"); 
-			var header = headers[this.properties.ativa];
+			parentObj = headers[this.properties.ativa].parentNode;
+			headers = parentObj.getElementsByTagName("dd"); 
+			header = headers[this.properties.ativa];
 
 			this.expand(header);
 		},
 
 		clickHeader : function(e,headerProperties) {
-			var parentObj = headerProperties.objRef.parentNode;
-			var headers = parentObj.getElementsByTagName("dd"); 
-			var header = headers[headerProperties.nr];
+			var parentObj = headerProperties.objRef.parentNode,
+				headers = parentObj.getElementsByTagName("dd"),
+				header = headers[headerProperties.nr],
+				i;
 
 			if(YAHOO.util.Dom.hasClass(header,"open")) {
 				headerProperties.jsObj.collapse(header);
@@ -2321,7 +2327,7 @@ try{
 				if(headerProperties.jsObj.properties.multipleOpen) {
 					headerProperties.jsObj.expand(header);
 				} else {
-					for(var i=0; i<headers.length; i++) {
+					for(i=0; i<headers.length; i++) {
 						if(YAHOO.util.Dom.hasClass(headers[i],"open")) {
 							headerProperties.jsObj.collapse(headers[i]);
 						}
@@ -2347,11 +2353,12 @@ try{
 			}
 		},
 		initAnimation : function(header,dir) {
-			if(dir == "open") {
+			var attributes,animation,animationEnd;
+			if(dir === "open") {
 				YAHOO.util.Dom.setStyle(header,"visibility","hidden");
 				YAHOO.util.Dom.setStyle(header,"height",this.properties.altura);
 				YAHOO.util.Dom.addClass(header,"open");
-				var attributes = {
+				attributes = {
 					height : {
 						from : 0,
 						to : this.properties.altura
@@ -2359,8 +2366,7 @@ try{
 				};
 				YAHOO.util.Dom.setStyle(header,"height",0);
 				YAHOO.util.Dom.setStyle(header,"visibility","visible");
-				
-				var animation = new YAHOO.util.Anim(header,attributes);
+				animation = new YAHOO.util.Anim(header,attributes);
 				animationEnd = function() {
 					//alert(this.properties.altura+"px")
 					header.style.height = this.properties.altura+"px";
@@ -2370,15 +2376,15 @@ try{
 				animation.onComplete.subscribe(animationEnd);
 				animation.animate();
 			} else if ("close") {
-				var attributes = {
+				attributes = {
 					height : {
 						to : 0
 					}
-				};			
+				};
 				animationEnd = function() {
 					YAHOO.util.Dom.removeClass(header,"open");
 				};
-				var animation = new YAHOO.util.Anim(header,attributes);
+				animation = new YAHOO.util.Anim(header,attributes);
 				animation.duration = this.properties.animationDuration;
 				animation.useSeconds = false;
 				animation.onComplete.subscribe(animationEnd);

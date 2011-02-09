@@ -240,7 +240,7 @@ i3GEO.mapa = {
 		permitindo que seja criada a janela flutuante apenas, por exemplo:
 		
 		i3GEO.mapa.legendaHTML.cria("");
-		i3GEO.mapa.legendaHTML.libera();		
+		i3GEO.mapa.legendaHTML.libera();
 		
 		Parametros:
 		
@@ -253,7 +253,7 @@ i3GEO.mapa = {
 			i3GEO.mapa.legendaHTML.ID = id;
 			if(i3GEO.eventos.NAVEGAMAPA.toString().search("i3GEO.mapa.legendaHTML.atualiza()") < 0)
 			{i3GEO.eventos.NAVEGAMAPA.push("i3GEO.mapa.legendaHTML.atualiza()");}					
-			i3GEO.mapa.legendaHTML.atualiza();			
+			i3GEO.mapa.legendaHTML.atualiza();
 		},
 		/*
 		Function: atualiza
@@ -600,7 +600,7 @@ i3GEO.mapa = {
 			{return;}
 			if(i3GEO.Interface.ATUAL==="padrao")
 			{$i("img").style.cursor = "wait";}
-			if(i3GEO.Interface.ATUAL == "googleearth")
+			if(i3GEO.Interface.ATUAL === "googleearth")
 			{i3GEO.Interface.googleearth.aguarde.visibility = "visible";}
 			retorna = function(retorno){
 				var temp,rfes,n,balloon,i,mostra,res,temas,ntemas,titulo,tips,j,ntips,ins,r,ds,nds,s;
@@ -703,7 +703,7 @@ i3GEO.mapa = {
 						{temp = "identifica_contexto";}
 						i3GEO.util.mudaCursor(i3GEO.configura.cursores,temp,"img",i3GEO.configura.locaplic);
 					}
-					if(i3GEO.Interface.ATUAL == "googleearth")
+					if(i3GEO.Interface.ATUAL === "googleearth")
 					{i3GEO.Interface.googleearth.aguarde.visibility = "hidden";}
 					if(typeof(console) !== 'undefined'){console.error(e);}
 				}

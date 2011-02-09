@@ -123,7 +123,7 @@ i3GEO.selecao = {
 				{novoel.style.opacity = 0.25;}
 				novoel.style.backgroundColor = "yellow";
 				novoel.style.position="absolute";
-				novoel.style.border = "2px solid #ff0000";		
+				novoel.style.border = "2px solid #ff0000";
 				if (navm)
 				{novoel.style.filter = "alpha(opacity=25)";}
 				novoel.onmousemove = function(){

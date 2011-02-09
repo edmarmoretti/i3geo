@@ -123,7 +123,7 @@ function i3geo_gl_configura(loc_i3geo,nomeseltema,temasa,link,grupo,subgrupo,tem
 	/*
 	Guarda o valor do parâmetro menu
 	*/
-	this.menu = menu;	
+	this.menu = menu;
 	/*
 	Guarda o valor do parâmetro grupo
 	*/

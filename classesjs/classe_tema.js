@@ -355,7 +355,7 @@ i3GEO.tema = {
 				janela = i3GEO.janela.cria("250px","","","","",nome,"janelaLegenda"+idtema,false);
 				janela[2].style.textAlign="left";
 				janela[2].style.background="white";
-				janela[2].innerHTML = $trad("o1");	
+				janela[2].innerHTML = $trad("o1");
 			}
 			i3GEO.php.criaLegendaHTML(retorna,idtema,"legenda3.htm");
 		}

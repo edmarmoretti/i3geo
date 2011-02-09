@@ -449,7 +449,7 @@ function aguarde()
 	alert("aguarde foi depreciado utilize i3GEO.janela");
 	this.abre = function(aguardeId,texto)
 	{
-		i3GEO.janela.abreAguarde(aguardeId,texto);		
+		i3GEO.janela.abreAguarde(aguardeId,texto);
 	};
 	this.fecha = function(aguardeId)
 	{

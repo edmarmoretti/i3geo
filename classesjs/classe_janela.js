@@ -203,7 +203,7 @@ i3GEO.janela = {
 	*/
 	cria: function(wlargura,waltura,wsrc,nx,ny,texto,id,modal,classe,funcaoCabecalho,funcaoMinimiza){
 		if(typeof(console) !== 'undefined'){console.info("i3GEO.janela.cria()");}
-		var i,wlargura_,ins,novoel,wdocaiframe,pos,temp,fix,underlay,ifr;
+		var i,wlargurA ,ins,novoel,wdocaiframe,pos,temp,fix,underlay,ifr;
 		if(i3GEO.janela.ANTESCRIA){
 			for(i=0;i<i3GEO.janela.ANTESCRIA.length;i++)
 			{eval(i3GEO.janela.ANTESCRIA[i]);}
@@ -236,12 +236,12 @@ i3GEO.janela = {
 		if (arguments.length === 10){
 			funcaoMinimiza = null;
 		}
-		if(i3GEO.Interface.ATUAL == "googleearth")
+		if(i3GEO.Interface.ATUAL === "googleearth")
 		{
 			classe = "hd";
 			i3GEO.janela.TRANSICAOSUAVE = false;
 		}
-		wlargura_ = parseInt(wlargura,10)+2+"px";
+		wlargurA = parseInt(wlargura,10)+2+"px";
 		if($i(id))
 		{YAHOO.janelaDoca.xp.panel.destroy();}
 		i3GEO.util.removeChild(id+"_c");
@@ -268,7 +268,7 @@ i3GEO.janela = {
 			};
 			novoel.onmouseout = function(){
 				YAHOO.util.Dom.setStyle(novoel,"opacity",i3GEO.janela.OPACIDADE / 100);
-			};				
+			};
 		}
 		else{
 			YAHOO.util.Dom.setStyle(novoel,"opacity",1);
@@ -301,16 +301,16 @@ i3GEO.janela = {
 		else
 		{ifr = false;}
 		if(waltura === "auto")
-		{YAHOO.janelaDoca.xp.panel = new YAHOO.widget.Panel(id, { iframe:ifr,modal:modal, width: wlargura_,underlay:"none", fixedcenter: fix, constraintoviewport: false, visible: true,monitorresize:false,dragOnly:true,keylisteners:null} );}	
-		else{YAHOO.janelaDoca.xp.panel = new YAHOO.widget.ResizePanel(id, { iframe:ifr,underlay:underlay, modal:modal, width: wlargura_, fixedcenter: fix, constraintoviewport: false, visible: true,monitorresize:false,dragOnly:true,keylisteners:null} );}
+		{YAHOO.janelaDoca.xp.panel = new YAHOO.widget.Panel(id, { iframe:ifr,modal:modal, width: wlargurA,underlay:"none", fixedcenter: fix, constraintoviewport: false, visible: true,monitorresize:false,dragOnly:true,keylisteners:null} );}	
+		else{YAHOO.janelaDoca.xp.panel = new YAHOO.widget.ResizePanel(id, { iframe:ifr,underlay:underlay, modal:modal, width: wlargurA, fixedcenter: fix, constraintoviewport: false, visible: true,monitorresize:false,dragOnly:true,keylisteners:null} );}
 		if(nx !== "" && nx !== "center"){
 			YAHOO.janelaDoca.xp.panel.moveTo(nx,ny + 50);
 		}
 		YAHOO.janelaDoca.xp.manager.register(YAHOO.janelaDoca.xp.panel);
 		YAHOO.janelaDoca.xp.panel.render();
-		if(navm && id !== "i3geo_janelaMensagens" && i3GEO.Interface.ATUAL == "googleearth")
+		if(navm && id !== "i3geo_janelaMensagens" && i3GEO.Interface.ATUAL === "googleearth")
 		{YAHOO.janelaDoca.xp.panel.moveTo(0,0);}
-		if(ifr == true)
+		if(ifr === true)
 		{YAHOO.janelaDoca.xp.panel.iframe.style.zIndex = 0;}
 		if(modal === true){
 			if($i(id+"_mask")){
@@ -463,19 +463,19 @@ i3GEO.janela = {
 		for(index=0; index<i3GEO.contadorAtualiza; index++) {
 			contador = contador + ".";
 		}
-		eval ('YAHOO.aguarde.'+id+' = new YAHOO.widget.Panel("'+id+'",{width:"240px",fixedcenter:false,underlay:"none",close:true,draggable:false,modal:'+i3GEO.janela.AGUARDEMODAL.toString()+',monitorresize:false})');
+		eval('YAHOO.aguarde.'+id+' = new YAHOO.widget.Panel("'+id+'",{width:"240px",fixedcenter:false,underlay:"none",close:true,draggable:false,modal:'+i3GEO.janela.AGUARDEMODAL.toString()+',monitorresize:false})');
 		if(i3GEO.janela.ESTILOAGUARDE === "normal" || i3GEO.janela.ESTILOAGUARDE === "reduzida"){
-			eval ('YAHOO.aguarde.'+id+'.setBody(texto)');
-			eval ('YAHOO.aguarde.'+id+'.body.style.padding="5px"');
+			eval('YAHOO.aguarde.'+id+'.setBody(texto)');
+			eval('YAHOO.aguarde.'+id+'.body.style.padding="5px"');
 		}
 		if(i3GEO.janela.ESTILOAGUARDE === "normal" || i3GEO.janela.ESTILOAGUARDE === "minima")
-		{eval ('YAHOO.aguarde.'+id+'.setHeader("<span><img id=aguardeGifAberto src=\'"+i3GEO.configura.locaplic+"/imagens/aguarde.gif\' /></span>&nbsp;<span style=font-size:8px >'+contador+'</span>")');}
-		eval ('YAHOO.aguarde.'+id+'.render(document.body)');
+		{eval('YAHOO.aguarde.'+id+'.setHeader("<span><img id=aguardeGifAberto src=\'"+i3GEO.configura.locaplic+"/imagens/aguarde.gif\' /></span>&nbsp;<span style=font-size:8px >'+contador+'</span>")');}
+		eval('YAHOO.aguarde.'+id+'.render(document.body)');
 		if(i3GEO.parametros.w > 0)
-		{eval ('YAHOO.aguarde.'+id+'.moveTo('+(pos[0] + (i3GEO.parametros.w / 2) - 120)+','+pos[1]+')');}
+		{eval('YAHOO.aguarde.'+id+'.moveTo('+(pos[0] + (i3GEO.parametros.w / 2) - 120)+','+pos[1]+')');}
 		else
-		{eval ('YAHOO.aguarde.'+id+'.moveTo('+pos[0]+','+pos[1]+')');}
-		eval ('YAHOO.aguarde.'+id+'.show()');
+		{eval('YAHOO.aguarde.'+id+'.moveTo('+pos[0]+','+pos[1]+')');}
+		eval('YAHOO.aguarde.'+id+'.show()');
 		if($i(id+"_mask"))
 		{$i(id+"_mask").style.zIndex=25000;}
 		if($i(id+"_c")){
@@ -588,42 +588,42 @@ i3GEO.janela = {
 		novoel.tabindex = "-1";
 		novoel.innerHTML = '<div style="cursor:default;position:absolute;top:4px" id="slider-thumb"><img src="'+i3GEO.configura.locaplic+'/imagens/thumb-n.gif"></div>';
 		janela[2].appendChild(novoel);
-    	Event = YAHOO.util.Event;
-        Dom   = YAHOO.util.Dom;
-        lang  = YAHOO.lang;
-        bg="slider-bg";
-        thumb="slider-thumb"; 
-        valuearea="slider-value";
-        textfield="slider-converted-value";
+		Event = YAHOO.util.Event;
+		Dom   = YAHOO.util.Dom;
+		lang  = YAHOO.lang;
+		bg="slider-bg";
+		thumb="slider-thumb"; 
+		valuearea="slider-value";
+		textfield="slider-converted-value";
 		novoel.style.position = "relative";
-        novoel.style.background= 'url('+i3GEO.configura.locaplic+'/imagens/bg-fader.gif) 5px 0 no-repeat';
-        novoel.style.height = "28px";
-        novoel.style.width= "228px"; 
-    	// The slider can move 0 pixels up
-    	topConstraint = 0;
-    	// The slider can move 200 pixels down
-    	bottomConstraint = 200;
-    	// Custom scale factor for converting the pixel offset into a real value
-    	scaleFactor = 1;
-    	// The amount the slider moves when the value is changed with the arrow
-    	// keys
-    	keyIncrement = 20;
-    	tickSize = 20;
-    	Event.onDOMReady(function() {
-        	slider = YAHOO.widget.Slider.getHorizSlider(bg,thumb, topConstraint, bottomConstraint, 20);
-        	slider.setValue(parseInt(inicial,10));
-        	slider.getRealValue = function() {
-            	return Math.round(this.getValue() * scaleFactor);
-        	};
-        	slider.subscribe("slideEnd", function(offsetFromStart) {
-            	var actualValue = slider.getRealValue();
-            	eval(funcao+"("+actualValue+")");
+		novoel.style.background= 'url('+i3GEO.configura.locaplic+'/imagens/bg-fader.gif) 5px 0 no-repeat';
+		novoel.style.height = "28px";
+		novoel.style.width= "228px"; 
+		// The slider can move 0 pixels up
+		topConstraint = 0;
+		// The slider can move 200 pixels down
+		bottomConstraint = 200;
+		// Custom scale factor for converting the pixel offset into a real value
+		scaleFactor = 1;
+		// The amount the slider moves when the value is changed with the arrow
+		// keys
+		keyIncrement = 20;
+		tickSize = 20;
+		Event.onDOMReady(function() {
+			slider = YAHOO.widget.Slider.getHorizSlider(bg,thumb, topConstraint, bottomConstraint, 20);
+			slider.setValue(parseInt(inicial,10));
+			slider.getRealValue = function() {
+				return Math.round(this.getValue() * scaleFactor);
+			};
+			slider.subscribe("slideEnd", function(offsetFromStart) {
+				var actualValue = slider.getRealValue();
+				eval(funcao+"("+actualValue+")");
 			});
-        });
-        // Use setValue to reset the value to white:
-        Event.on("putval", "click", function(e) {
-            slider.setValue(100, false); //false here means to animate if possible
-        });
+		});
+		// Use setValue to reset the value to white:
+		Event.on("putval", "click", function(e) {
+			slider.setValue(100, false); //false here means to animate if possible
+		});
 	},
 	/*
 	Function: fechaAguarde
@@ -687,100 +687,100 @@ try{
 	//controle dos painéis que podem ser redimensionados
 	YAHOO.widget.ResizePanel = function(el, userConfig)
 	{
-    	if (arguments.length > 0) 
-    	{YAHOO.widget.ResizePanel.superclass.constructor.call(this, el, userConfig);}
+		if (arguments.length > 0) 
+		{YAHOO.widget.ResizePanel.superclass.constructor.call(this, el, userConfig);}
 	};
 	YAHOO.widget.ResizePanel.CSS_PANEL_RESIZE = "yui-resizepanel";
 	YAHOO.widget.ResizePanel.CSS_RESIZE_HANDLE = "resizehandle";
 	YAHOO.extend(
 		YAHOO.widget.ResizePanel, YAHOO.widget.Panel,{
-   			init: function(el, userConfig){
-    			YAHOO.widget.ResizePanel.superclass.init.call(this, el);
-       			this.beforeInitEvent.fire(YAHOO.widget.ResizePanel);
-       			var Dom = YAHOO.util.Dom,
-           			Event = YAHOO.util.Event,
-           			oInnerElement = this.innerElement,
-           			oResizeHandle = document.createElement("DIV"),
-           			sResizeHandleId = this.id + "_resizehandle";
-       			oResizeHandle.id = sResizeHandleId;
-       			oResizeHandle.className = YAHOO.widget.ResizePanel.CSS_RESIZE_HANDLE;
-       			Dom.addClass(oInnerElement, YAHOO.widget.ResizePanel.CSS_PANEL_RESIZE);
-       			this.resizeHandle = oResizeHandle;
-       			function initResizeFunctionality(){
-           			var me = this,
-               			oHeader = this.header,
-               			oBody = this.body,
-               			oFooter = this.footer,
-               			nStartWidth,
-               			nStartHeight,
-               			aStartPos,
-               			nBodyBorderTopWidth,
-               			nBodyBorderBottomWidth,
-               			nBodyTopPadding,
-               			nBodyBottomPadding,
-               			nBodyOffset;
-           			oInnerElement.appendChild(oResizeHandle);
-           			this.ddResize = new YAHOO.util.DragDrop(sResizeHandleId, this.id);
-           			this.ddResize.setHandleElId(sResizeHandleId);
-           			this.ddResize.onMouseDown = function(e){
-               			nStartWidth = oInnerElement.offsetWidth;
-               			nStartHeight = oInnerElement.offsetHeight;
-               			if (YAHOO.env.ua.ie && document.compatMode  === "BackCompat")
-               			{nBodyOffset = 0;}
-               			else{
-                   			nBodyBorderTopWidth = parseInt(Dom.getStyle(oBody, "borderTopWidth"), 10);
-                   			nBodyBorderBottomWidth = parseInt(Dom.getStyle(oBody, "borderBottomWidth"), 10);
-                   			nBodyTopPadding = parseInt(Dom.getStyle(oBody, "paddingTop"), 10);
-                   			nBodyBottomPadding = parseInt(Dom.getStyle(oBody, "paddingBottom"), 10);
-                   			nBodyOffset = nBodyBorderTopWidth + nBodyBorderBottomWidth + nBodyTopPadding + nBodyBottomPadding;
-               			}
+			init: function(el, userConfig){
+				YAHOO.widget.ResizePanel.superclass.init.call(this, el);
+				this.beforeInitEvent.fire(YAHOO.widget.ResizePanel);
+				var Dom = YAHOO.util.Dom,
+					Event = YAHOO.util.Event,
+					oInnerElement = this.innerElement,
+					oResizeHandle = document.createElement("DIV"),
+					sResizeHandleId = this.id + "_resizehandle";
+				oResizeHandle.id = sResizeHandleId;
+				oResizeHandle.className = YAHOO.widget.ResizePanel.CSS_RESIZE_HANDLE;
+				Dom.addClass(oInnerElement, YAHOO.widget.ResizePanel.CSS_PANEL_RESIZE);
+				this.resizeHandle = oResizeHandle;
+				function initResizeFunctionality(){
+					var me = this,
+						oHeader = this.header,
+						oBody = this.body,
+						oFooter = this.footer,
+						nStartWidth,
+						nStartHeight,
+						aStartPos,
+						nBodyBorderTopWidth,
+						nBodyBorderBottomWidth,
+						nBodyTopPadding,
+						nBodyBottomPadding,
+						nBodyOffset;
+					oInnerElement.appendChild(oResizeHandle);
+					this.ddResize = new YAHOO.util.DragDrop(sResizeHandleId, this.id);
+					this.ddResize.setHandleElId(sResizeHandleId);
+					this.ddResize.onMouseDown = function(e){
+						nStartWidth = oInnerElement.offsetWidth;
+						nStartHeight = oInnerElement.offsetHeight;
+						if (YAHOO.env.ua.ie && document.compatMode  === "BackCompat")
+						{nBodyOffset = 0;}
+						else{
+							nBodyBorderTopWidth = parseInt(Dom.getStyle(oBody, "borderTopWidth"), 10);
+							nBodyBorderBottomWidth = parseInt(Dom.getStyle(oBody, "borderBottomWidth"), 10);
+							nBodyTopPadding = parseInt(Dom.getStyle(oBody, "paddingTop"), 10);
+							nBodyBottomPadding = parseInt(Dom.getStyle(oBody, "paddingBottom"), 10);
+							nBodyOffset = nBodyBorderTopWidth + nBodyBorderBottomWidth + nBodyTopPadding + nBodyBottomPadding;
+						}
 						//
 						//ajusta o tamanho do body no IE qd a janela é redimensionada
 						//
 						me.cfg.setProperty("width", nStartWidth + "px");
-               			aStartPos = [Event.getPageX(e), Event.getPageY(e)];
-           			};
-           			this.ddResize.onDrag = function(e){
-               			var aNewPos = [Event.getPageX(e), Event.getPageY(e)],
-                   			nOffsetX = aNewPos[0] - aStartPos[0],
-                   			nOffsetY = aNewPos[1] - aStartPos[1],
-                   			nNewWidth = Math.max(nStartWidth + nOffsetX, 10),
-                   			nNewHeight = Math.max(nStartHeight + nOffsetY, 10),
-                   			nBodyHeight = (nNewHeight - (oFooter.offsetHeight + oHeader.offsetHeight + nBodyOffset));							
+						aStartPos = [Event.getPageX(e), Event.getPageY(e)];
+					};
+					this.ddResize.onDrag = function(e){
+						var aNewPos = [Event.getPageX(e), Event.getPageY(e)],
+							nOffsetX = aNewPos[0] - aStartPos[0],
+							nOffsetY = aNewPos[1] - aStartPos[1],
+							nNewWidth = Math.max(nStartWidth + nOffsetX, 10),
+							nNewHeight = Math.max(nStartHeight + nOffsetY, 10),
+							nBodyHeight = (nNewHeight - (oFooter.offsetHeight + oHeader.offsetHeight + nBodyOffset));
 						me.cfg.setProperty("width", nNewWidth + "px");
 						if(navm)
 						{nNewWidth = nNewWidth - 2;}
-               			oBody.style.width = nNewWidth - 2 +"px";
-               			if (nBodyHeight < 0)
-               			{nBodyHeight = 0;}
-               			oBody.style.height =  nBodyHeight + "px";
-               			if ($i("wdocai")){
+						oBody.style.width = nNewWidth - 2 +"px";
+						if (nBodyHeight < 0)
+						{nBodyHeight = 0;}
+						oBody.style.height =  nBodyHeight + "px";
+						if ($i("wdocai")){
 							$i("wdocai").style.height = nBodyHeight;
 							$i("wdocai").style.width = oBody.style.width;
 						}
-           			};
-           			this.ddResize.onMouseUp = this.ddResize.onDrag.call();					
-       			}
-       			function onBeforeShow(){
-       				initResizeFunctionality.call(this);
-       				this.unsubscribe("beforeShow", onBeforeShow);
-       			}
-       			function onBeforeRender(){
-           			if (!this.footer)
-           			{this.setFooter("");}
-           			if (this.cfg.getProperty("visible"))
-           			{initResizeFunctionality.call(this);}
-           			else
-           			{this.subscribe("beforeShow", onBeforeShow);}
-       				this.unsubscribe("beforeRender", onBeforeRender);
-       			}
-       			this.subscribe("beforeRender", onBeforeRender);
-       			if (userConfig)
-       			{this.cfg.applyConfig(userConfig, true);}
-       			this.initEvent.fire(YAHOO.widget.ResizePanel);
-   			},
-   			toString: function()
-   			{return "ResizePanel " + this.id;}
+					};
+					this.ddResize.onMouseUp = this.ddResize.onDrag.call();
+				}
+				function onBeforeShow(){
+					initResizeFunctionality.call(this);
+					this.unsubscribe("beforeShow", onBeforeShow);
+				}
+				function onBeforeRender(){
+					if (!this.footer)
+					{this.setFooter("");}
+					if (this.cfg.getProperty("visible"))
+					{initResizeFunctionality.call(this);}
+					else
+					{this.subscribe("beforeShow", onBeforeShow);}
+					this.unsubscribe("beforeRender", onBeforeRender);
+				}
+				this.subscribe("beforeRender", onBeforeRender);
+				if (userConfig)
+				{this.cfg.applyConfig(userConfig, true);}
+				this.initEvent.fire(YAHOO.widget.ResizePanel);
+			},
+			toString: function()
+			{return "ResizePanel " + this.id;}
 		}
 	);
 }

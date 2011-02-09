@@ -29,7 +29,7 @@ GNU junto com este programa; se não, escreva para a
 Free Software Foundation, Inc., no endereço
 59 Temple Street, Suite 330, Boston, MA 02111-1307 USA.
 */
-if(typeof(i3GEO) == 'undefined'){
+if(typeof(i3GEO) === 'undefined'){
 	i3GEO = [];
 }
 /*
@@ -150,7 +150,7 @@ i3GEO.ajuda = {
 	abreJanela: function(){
 		if(typeof(console) !== 'undefined'){console.info("i3GEO.ajuda.abreJanela()");}
 		try	{
-			var nx,ny,pos,corpo,texto,janela,largura=262;				
+			var nx,ny,pos,corpo,texto,janela,largura=262;
 			if(i3GEO.ajuda.ATIVAJANELA === false){return;}
 			
 			if($i("contemFerramentas")){
@@ -213,18 +213,18 @@ i3GEO.ajuda = {
 			{clearTimeout(i3GEO.ajuda.tempoLetreiro);}
 			catch(e){i3GEO.ajuda.tempoLetreiro = "";}
 			l = $i(i3GEO.ajuda.DIVLETREIRO);
-			if(l.style.display=="none"){return;}
+			if(l.style.display==="none"){return;}
 			l.style.cursor="pointer";
 			if(mensagem === ""){
 				l.value = "";
 				return;
 			}
-			if (l.size == 1)
+			if (l.size === 1)
 			{l.size = i3GEO.parametros.w / 8;}
 			BMessage = mensagem + " ---Clique para parar--- ";
 			l.onclick = function()
 			{l.style.display = "none";};
-			if (BMessage != " ---Clique para parar--- "){
+			if (BMessage !== " ---Clique para parar--- "){
 				BQuantas = 0;
 				BSize = l.size;
 				BPos=BSize;
@@ -255,7 +255,7 @@ i3GEO.ajuda = {
 	fechaJanela: function(){
 		if(typeof(console) !== 'undefined'){console.info("i3GEO.ajuda.fechaJanela()");}
 		i3GEO.ajuda.desativaCookie();
-		i3GEO.util.removeChild("i3geo_janelaMensagens_c",document.body)
+		i3GEO.util.removeChild("i3geo_janelaMensagens_c",document.body);
 	},
 	/*
 	Function: mostraJanela
@@ -271,7 +271,8 @@ i3GEO.ajuda = {
 		var j = $i(i3GEO.ajuda.DIVAJUDA),
 			k = $i("janelaMenTexto"),
 			jm = $i("i3geo_janelaMensagens"),
-			h = parseInt(YAHOO.util.Dom.getStyle(jm,"height"),10);
+			h = parseInt(YAHOO.util.Dom.getStyle(jm,"height"),10),
+			temp;
 		if(j){
 			j.innerHTML = texto === "" ? "-" : texto;
 		}
@@ -279,7 +280,7 @@ i3GEO.ajuda = {
 			YAHOO.util.Dom.setY("i3geo_janelaMensagens",YAHOO.util.Dom.getY(jm) + h);
 			if(k){k.innerHTML = texto;}
 			if(i3GEO.ajuda.TRANSICAOSUAVE){
-				texto !== "" ? YAHOO.util.Dom.setStyle(jm,"opacity","1") : YAHOO.util.Dom.setStyle(jm,"opacity",i3GEO.ajuda.OPACIDADE / 100);
+				temp = texto !== "" ? YAHOO.util.Dom.setStyle(jm,"opacity","1") : YAHOO.util.Dom.setStyle(jm,"opacity",(i3GEO.ajuda.OPACIDADE / 100));
 			}
 			h = parseInt(YAHOO.util.Dom.getStyle(jm,"height"),10);
 			YAHOO.util.Dom.setY(jm,YAHOO.util.Dom.getY(jm) - h);
@@ -295,7 +296,7 @@ i3GEO.ajuda = {
 	*/
 	mostraLetreiro: function(){
 		if(typeof(console) !== 'undefined'){console.info("i3GEO.ajuda.mostraLetreiro()");}
-		for (count=0; count<BPos; count++)
+		for (count=0; count<BPos; count += 1)
 		{BSpaces+= " ";}
 		if (BPos < 1){
 			$i(i3GEO.ajuda.DIVLETREIRO).value = BMessage.substring(Math.abs(BPos), BMessage.length);

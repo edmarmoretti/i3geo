@@ -225,18 +225,18 @@ i3GEO.coordenadas = {
 	mostraCoordenadasUTM: function(id){
 		if(typeof(console) !== 'undefined'){console.info("i3GEO.coordenadas.mostraCoordenadasUTM()");}
 		try{
-			if(arguments.length === 0 || id === "" || id == undefined)
+			if(arguments.length === 0 || id === "" || typeof(id) === 'undefined')
 			{id = i3GEO.coordenadas.PARAMETROS.mostraCoordenadasUTM.idhtml;}
 			else
 			{i3GEO.coordenadas.PARAMETROS.mostraCoordenadasUTM.idhtml = id;}
-			if (!$i(id) || i3GEO.coordenadas.PARAMETROS.mostraCoordenadasUTM.idhtml == ""){
+			if (!$i(id) || i3GEO.coordenadas.PARAMETROS.mostraCoordenadasUTM.idhtml === ""){
 				if(i3GEO.eventos.MOUSEPARADO.toString().search("atualizaCoordenadasUTM()") >= 0)
 				{i3GEO.eventos.MOUSEPARADO.remove("atualizaCoordenadasUTM()");}
 				return;
 			}
 			atualizaCoordenadasUTM = function()
 			{
-				if(i3GEO.coordenadas.PARAMETROS.mostraCoordenadasUTM.idhtml == ""){
+				if(i3GEO.coordenadas.PARAMETROS.mostraCoordenadasUTM.idhtml === ""){
 					if(i3GEO.eventos.MOUSEPARADO.toString().search("atualizaCoordenadasUTM()") >= 0)
 					{i3GEO.eventos.MOUSEPARADO.remove("atualizaCoordenadasUTM()");}
 					return;
@@ -291,7 +291,7 @@ i3GEO.coordenadas = {
 		if(typeof(console) !== 'undefined'){console.info("i3GEO.coordenadas.mostraCoordenadasGEO()");}
 		try{
 			var ins,temp;
-			if(arguments.length === 0 || id === "" || id == undefined)
+			if(arguments.length === 0 || id === "" || typeof(id) === 'undefined')
 			{id = i3GEO.coordenadas.PARAMETROS.mostraCoordenadasGEO.idhtml;}
 			else
 			{i3GEO.coordenadas.PARAMETROS.mostraCoordenadasGEO.idhtml = id;}
@@ -354,7 +354,7 @@ i3GEO.coordenadas = {
 		"<td>"+$inputText("","",prefixo+"ys","segundo","5","00.00")+"</td>";
 		temp = 'var '+prefixo+'xxx = i3GEO.calculo.dms2dd($i("'+prefixo+'xg").value,$i("'+prefixo+'xm").value,$i("'+prefixo+'xs").value);' +
 		'var '+prefixo+'yyy = i3GEO.calculo.dms2dd($i("'+prefixo+'yg").value,$i("'+prefixo+'ym").value,$i("'+prefixo+'ys").value);' +
-		'i3GEO.navega.zoomponto(i3GEO.configura.locaplic,i3GEO.configura.sid,'+prefixo+'xxx,'+prefixo+'yyy);';		
+		'i3GEO.navega.zoomponto(i3GEO.configura.locaplic,i3GEO.configura.sid,'+prefixo+'xxx,'+prefixo+'yyy);';
 		ins += '<td><img  class=tic title=zoom onclick="'+temp+'" src="'+i3GEO.util.$im("branco.gif")+'" /></td>' +
 		"<td>"+caixa+"<td>" +
 		"</tr></table>";
@@ -424,6 +424,7 @@ i3GEO.coordenadas = {
 	
 	*/
 	atualizaProj4: function(onde,configProj,x,y){
+		var destino,zona,temp,p;
 		try{
 			if(!$i(onde+configProj+"ZN"))
 			{return;}
@@ -431,31 +432,31 @@ i3GEO.coordenadas = {
 		catch(e){return;}		
 		eval("temp = i3GEO.coordenadas.config."+configProj+";");
 		try{
-			if($i(onde+configProj).style.display == "none")
+			if($i(onde+configProj).style.display === "none")
 			{return;}
 		}
-		catch(e){}
+		catch(men){}
 		if(temp.tipo === "metrica"){
-			var destino = temp.defepsg;
+			destino = temp.defepsg;
 		}
-		if(x == undefined)
+		if(typeof(x) === 'undefined')
 		{x = objposicaocursor.ddx;}
-		if(y == undefined)
+		if(typeof(y) === 'undefined')
 		{y = objposicaocursor.ddy;}		
 		if(temp.tipo === "utm"){
-			var zona = i3GEO.coordenadas.geo2zonaUtm(x);
-			$i(onde+configProj+"ZN").value = zona
+			zona = i3GEO.coordenadas.geo2zonaUtm(x);
+			$i(onde+configProj+"ZN").value = zona;
 			if(objposicaocursor.ddy*1 > 0)
-			{var destino = temp.zona[zona+"N"];}
+			{destino = temp.zona[zona+"N"];}
 			else
-			{var destino = temp.zona[zona+"S"];}
-			if(destino == undefined){
+			{destino = temp.zona[zona+"S"];}
+			if(typeof(destino) === 'undefined'){
 				i3GEO.util.defineValor(onde+configProj+"X","value","?");
 				i3GEO.util.defineValor(onde+configProj+"Y","value","?");
 				return;
 			}
 		}		
-		var p = i3GEO.coordenadas.calculaProj4(i3GEO.coordenadas.defOrigem,destino,x,y);
+		p = i3GEO.coordenadas.calculaProj4(i3GEO.coordenadas.defOrigem,destino,x,y);
 		i3GEO.util.defineValor(onde+configProj+"X","value",p.x);
 		i3GEO.util.defineValor(onde+configProj+"Y","value",p.y);
 	},
@@ -507,7 +508,7 @@ i3GEO.coordenadas = {
 		for(i=0;i<n;i++){
 			eval("temp = i3GEO.coordenadas.config."+tipos[i]+";");
 			if(temp.ativo === true){
-				if(tipos[i] == i3GEO.coordenadas.padrao)
+				if(tipos[i] === i3GEO.coordenadas.padrao)
 				{$i(prefixo+tipos[i]).style.display = "block";}
 				else
 				{$i(prefixo+tipos[i]).style.display = "none";}
@@ -550,10 +551,12 @@ i3GEO.coordenadas = {
 				n = tipos.length,
 				temp,
 				ins = "",
-				i = 0;
+				i = 0,
+				caixa,
+				janela;
 			if(arguments.length === 0){
-				var ativaMovimento = true;
-				var onde = "";
+				ativaMovimento = true;
+				onde = "";
 			}
 			
 			//
@@ -561,7 +564,7 @@ i3GEO.coordenadas = {
 			//
 			if(onde === "")
 			{eval("onde = i3GEO.coordenadas.config."+tipos[0]+".idhtml;");}
-			var caixa = "<select onchange='javascript:i3GEO.coordenadas.mudaTipo(this,\""+onde+"\");' style='font-size:10px;height:15px;width:50px;' ><option>---</option><option value='janela' >janela</option>";
+			caixa = "<select onchange='javascript:i3GEO.coordenadas.mudaTipo(this,\""+onde+"\");' style='font-size:10px;height:15px;width:50px;' ><option>---</option><option value='janela' >janela</option>";
 			//
 			//cria a caixa de seleção
 			//			
@@ -591,7 +594,7 @@ i3GEO.coordenadas = {
 				}
 			}
 			if(i3GEO.coordenadas.formato === "janela"){
-				var janela = i3GEO.janela.cria(
+				janela = i3GEO.janela.cria(
 					"450px",
 					"90px",
 					"",
@@ -614,29 +617,29 @@ i3GEO.coordenadas = {
 				{$i(onde).innerHTML = "";}
 				onde = "i3GEOJanelaCoordenadas_corpo";
 			}
-			if(onde != "" && $i(onde))
+			if(onde !== "" && $i(onde))
 			{$i(onde).innerHTML = ins;}
 			//
 			//aplica as funções de movimentação do mouse
 			//
+			atualizaLocalizarGeo = function(id,x,y){
+				if(typeof(x) === 'undefined')
+				{x = objposicaocursor.dmsx;}
+				if(typeof(y) === 'undefined')
+				{y = objposicaocursor.dmsy;}
+				temp = $i(id);
+				if(temp && temp.style.display === "block")
+				{i3GEO.coordenadas.atualizaGeo(x,y,id);}
+			};
 			for(i=0;i<n;i++){
 				eval("temp = i3GEO.coordenadas.config."+tipos[i]+";");
 				if(temp.ativo === true){
 					if(temp.tipo === "geo"){
-						atualizaLocalizarGeo = function(id,x,y){
-							if(x == undefined)
-							{x = objposicaocursor.dmsx;}
-							if(y == undefined)
-							{y = objposicaocursor.dmsy;}
-							temp = $i(id);
-							if(temp && temp.style.display == "block")
-							{i3GEO.coordenadas.atualizaGeo(x,y,id);}
-						};
 						if(ativaMovimento === true){
 							if(i3GEO.eventos.MOUSEMOVE.toString().search("atualizaLocalizarGeo('"+onde+tipos[i]+"')") < 0)
 							{i3GEO.eventos.MOUSEMOVE.push("atualizaLocalizarGeo('"+onde+tipos[i]+"')");}
 						}
-						if(x != undefined){
+						if(typeof(x) !== 'undefined'){
 							atualizaLocalizarGeo(onde+tipos[i],i3GEO.calculo.dd2dms(x)[0],i3GEO.calculo.dd2dms(y)[0]);
 						}
 					}
@@ -645,7 +648,7 @@ i3GEO.coordenadas = {
 							if(i3GEO.eventos.MOUSEMOVE.toString().search("i3GEO.coordenadas.atualizaProj4('"+onde+"','"+tipos[i]+"')") < 0)
 							{i3GEO.eventos.MOUSEMOVE.push("i3GEO.coordenadas.atualizaProj4('"+onde+"','"+tipos[i]+"')");}
 						}
-						if(x != undefined){
+						if(typeof(x) !== 'undefined'){
 							i3GEO.coordenadas.atualizaProj4(onde,tipos[i],x,y);
 						}
 					}
@@ -654,6 +657,6 @@ i3GEO.coordenadas = {
 			if(i3GEO.coordenadas.formato === "bloco")
 			{i3GEO.coordenadas.ativaBloco(onde);}
 		}
-		catch(e){}
+		catch(men){}
 	}
 };

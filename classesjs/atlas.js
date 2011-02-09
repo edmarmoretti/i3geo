@@ -176,7 +176,7 @@ function pegaListaDeAtlas()
 					{
 						texto += "<img src='"+listaAtlas[i].ICONE+"' />";
 					}
-					texto += "</td>";				
+					texto += "</td>";
 					texto += "<td><div class='titulo' style='cursor:pointer' onclick='abreatlas(\""+listaAtlas[i].ID+"\")' >";
 					texto += "<input style='cursor:pointer' type='radio' name='atlas' value='"+listaAtlas[i].ID+"'/>&nbsp;";
 					if(listaAtlas[i].PUBLICADO)

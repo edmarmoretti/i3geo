@@ -519,7 +519,7 @@ i3GEO.guias = {
 				novoel.id = "janelaguias";
 				novoel.style.display="block";
 				novoel.innerHTML = '<div class="hd">Guias</div><div class="bd" id="conteudojanelaguias"></div>';
-				$i("i3geo") ? $i("i3geo").appendChild(novoel) : document.body.appendChild(novoel);
+				temp = $i("i3geo") ? $i("i3geo").appendChild(novoel) : document.body.appendChild(novoel);
 				YAHOO.namespace("janelaguias.xp");
 				YAHOO.janelaguias.xp.panel = new YAHOO.widget.Panel("janelaguias", {width:"270px", fixedcenter: true, constraintoviewport: false, underlay:"none", close:true, visible:true, draggable:true, modal:false,iframe:false } );
 				YAHOO.janelaguias.xp.panel.render();
@@ -544,7 +544,7 @@ i3GEO.guias = {
 				i.style.display="block";
 				i.style.left = "-1px";
 				i.style.width = "270px";
-			};	
+			};
 			i3GEO.janela.abreAguarde("i3GEO.atualiza",$trad("o1"));
 			i3GEO.php.mudatamanho(temp,a,l);
 		}

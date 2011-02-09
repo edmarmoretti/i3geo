@@ -233,7 +233,7 @@ function expandeDiretorio(id)
 	var cp = new cpaint();
 	//cp.set_debug(2)
 	cp.set_response_type("JSON");
-	cp.call(p,"listaDiretorios",volta);	
+	cp.call(p,"listaDiretorios",volta);
 }
 /*
 Function: listaArquivos

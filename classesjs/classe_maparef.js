@@ -159,7 +159,7 @@ i3GEO.maparef = {
 				temp = "javascript:if(i3GEO.maparef.fatorZoomDinamico == -1){i3GEO.maparef.fatorZoomDinamico = 1};i3GEO.maparef.fatorZoomDinamico = i3GEO.maparef.fatorZoomDinamico + 1 ;$i(\"refDinamico\").checked = true;i3GEO.maparef.atualiza();";
 				ins += "<img class=mais onclick='"+temp+"' src="+i3GEO.util.$im("branco.gif")+" />";
 				temp = "javascript:if(i3GEO.maparef.fatorZoomDinamico == 1){i3GEO.maparef.fatorZoomDinamico = -1};i3GEO.maparef.fatorZoomDinamico = i3GEO.maparef.fatorZoomDinamico - 1 ;$i(\"refDinamico\").checked = true;i3GEO.maparef.atualiza();";
-				ins += "<img class=menos onclick='"+temp+"' src="+i3GEO.util.$im("branco.gif")+" /></span>&nbsp;";		
+				ins += "<img class=menos onclick='"+temp+"' src="+i3GEO.util.$im("branco.gif")+" /></span>&nbsp;";
 				if(i3GEO.maparef.SELETORTIPO){
 					ins += "<select style='font-size:9px;' id='refDinamico' onchange='javascript:i3GEO.parametros.celularef=\"\";i3GEO.maparef.atualiza()'>";
 					ins += "<option value='fixo' select >fixo</option>";
@@ -177,7 +177,7 @@ i3GEO.maparef = {
 			if(i3GEO.maparef.TRANSICAOSUAVE){
 				YAHOO.util.Dom.setStyle(novoel,"opacity",i3GEO.maparef.OPACIDADE / 100);
 				novoel.onmouseover = function(){
-					YAHOO.util.Dom.setStyle(novoel,"opacity",1);			
+					YAHOO.util.Dom.setStyle(novoel,"opacity",1);
 				};
 				novoel.onmouseout = function(){
 					YAHOO.util.Dom.setStyle(novoel,"opacity",i3GEO.janela.OPACIDADE / 100);
@@ -200,16 +200,16 @@ i3GEO.maparef = {
 			$i("i3geo_winRef").style.border = "1px solid gray";
 			moveX = pos[0] + i3GEO.parametros.w + 153 - i3GEO.maparef.RIGHT - 300;
 			moveY = pos[1] + i3GEO.maparef.TOP;
-			if(i3GEO.Interface.ATUAL == "googlemaps")
+			if(i3GEO.Interface.ATUAL === "googlemaps")
 			{moveY += 30;}
 			YAHOO.janelaRef.xp.panel.moveTo(moveX,moveY);
 			escondeRef = function(){
 				YAHOO.util.Event.removeListener(YAHOO.janelaRef.xp.panel.close, "click");
 				$i("imagemReferencia").src = "";
-				YAHOO.janelaRef.xp.panel.destroy();	
+				YAHOO.janelaRef.xp.panel.destroy();
 				i3GEO.util.insereCookie("i3GEO.configura.mapaRefDisplay","none");
 			};
-			YAHOO.util.Event.addListener(YAHOO.janelaRef.xp.panel.close, "click", escondeRef);	
+			YAHOO.util.Event.addListener(YAHOO.janelaRef.xp.panel.close, "click", escondeRef);
 			i3GEO.util.insereCookie("i3GEO.configura.mapaRefDisplay","block");
 			
 			if(typeof(atualizaLocalizarxy) === "function"){
@@ -240,12 +240,12 @@ i3GEO.maparef = {
 	Se houve alteração na extensão, é preciso refazer o mapa de referência se não, a imagem atual é armazenada no quado de animação
 	*/
 	atualiza: function(forca){
-		if(arguments.length == 0)
+		if(arguments.length === 0)
 		{forca = false;}
 		if(typeof(console) !== 'undefined'){console.info("i3GEO.maparef.atualiza()");}
 		var dinamico,tiporef,temp,re;
 		dinamico = false;
-		$i("refDinamico") ? tiporef = $i("refDinamico").value : tiporef = "fixo";;
+		temp = $i("refDinamico") ? tiporef = $i("refDinamico").value : tiporef = "fixo";
 		if ($i("mapaReferencia")){
 			temp = $i("maparefmaismenosZoom");
 			if(tiporef === "dinamico"){
@@ -256,11 +256,11 @@ i3GEO.maparef = {
 				//
 				//no modo cgi ativado, a obtenção da imagem é feita de forma diferente do modo normal do mapa
 				//
-				if($i("imagemReferencia").src == "" || i3GEO.parametros.utilizacgi !== "sim"){
+				if($i("imagemReferencia").src === "" || i3GEO.parametros.utilizacgi !== "sim"){
 					//
 					//se o valor do tamanho da celula já existir, não é necessário redesenhar a imagem
 					//
-					if(i3GEO.parametros.celularef === "" || $i("imagemReferencia").src == "" || forca == true)
+					if(i3GEO.parametros.celularef === "" || $i("imagemReferencia").src === "" || forca === true)
 					{i3GEO.php.referencia(i3GEO.maparef.processaImagem);}
 					else
 					{i3GEO.maparef.atualizaBox();}

@@ -230,8 +230,8 @@ i3GEO.eventos = {
 	eventos {array} - array com os nomes das funções
 	*/
 	executaEventos: function(eventos){
+		var f,temp;
 		try{
-			var f,temp;
 			if (eventos.length > 0){
 				f = eventos.length-1;
 				if (f >= 0){
@@ -484,21 +484,19 @@ i3GEO.eventos = {
 	*/
 	cliqueCapturaPt: function(ixg,ixm,ixs,iyg,iym,iys){
 		if(typeof(console) !== 'undefined'){console.info("i3GEO.eventos.cliqueCapturaPt()");}
+		var x,y,doc;
 		if(arguments.length === 0){
-			var ixg = "ixg",
-				ixm = "ixm",
-				ixs = "ixs",
-				iyg = "iyg",
-				iym = "iym",
-				iys = "iys",
-				x,y;
+			ixg = "ixg";
+			ixm = "ixm";
+			ixs = "ixs";
+			iyg = "iyg";
+			iym = "iym";
+			iys = "iys";
 			if($i("wdocai"))
 			{doc = (navm) ? document.frames("wdocai").document : $i("wdocai").contentDocument;}
 		}
 		else{
-			var doc = document,
-			x,
-			y;
+			doc = document;
 		}
 		if (g_tipoacao !== "capturaponto"){return;}
 		else{

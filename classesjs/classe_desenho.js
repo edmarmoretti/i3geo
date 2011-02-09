@@ -123,7 +123,7 @@ i3GEO.desenho = {
 			//
 			i3GEO.eventos.ativa(divgeo);
 		}
-		catch(erro){alert("Erro ao tentar criar container richdraw");}
+		catch(men){alert("Erro ao tentar criar container richdraw");}
 	},
 	/*
 	Function: criaDivContainer
@@ -164,7 +164,7 @@ i3GEO.desenho = {
 			ne.left=pos[0];
 			document.body.appendChild(novoel);
 		}
-		return ($i("divGeometriasTemp"));	
+		return ($i("divGeometriasTemp"));
 	},
 	/*
 	Function: aplica
@@ -182,7 +182,7 @@ i3GEO.desenho = {
 	texto {string} - texto que será inserido no tipo "insereTexto"
 	*/
 	aplica: function(tipo,objeto,n,texto){
-		var pos,r,elemento,elementos,dy,dx,w,n,i,nindice;
+		var pos,r,elemento,elementos,dy,dx,w,i,nindice;
 		if(i3GEO.desenho.richdraw && $i(i3GEO.Interface.IDCORPO)){
 			pos = i3GEO.util.pegaPosicaoObjeto($i(i3GEO.Interface.IDCORPO));
 			//
@@ -198,26 +198,26 @@ i3GEO.desenho = {
 			if((tipo==="resizeLinha") && navm){
 				r = $i(i3GEO.desenho.richdraw.container.id);
 				elementos = r.childNodes;
-				if(desenhoUltimaLinha != "")
+				if(desenhoUltimaLinha !== "")
 				{r.removeChild(desenhoUltimaLinha);}
 				dy = objposicaocursor.imgy;
 				dx = objposicaocursor.imgx - (i3GEO.parametros.w/2);
-				i3GEO.desenho.richdraw.renderer.create(i3GEO.desenho.richdraw.mode, i3GEO.desenho.richdraw.fillColor, i3GEO.desenho.richdraw.lineColor, i3GEO.desenho.richdraw.lineWidth, (pontosdistobj.ximg[n-1])-(i3GEO.parametros.w/2),pontosdistobj.yimg[n-1],dx,dy);				
+				i3GEO.desenho.richdraw.renderer.create(i3GEO.desenho.richdraw.mode, i3GEO.desenho.richdraw.fillColor, i3GEO.desenho.richdraw.lineColor, i3GEO.desenho.richdraw.lineWidth, (pontosdistobj.ximg[n-1])-(i3GEO.parametros.w/2),pontosdistobj.yimg[n-1],dx,dy);
 				desenhoUltimaLinha = r.childNodes[$i(i3GEO.desenho.richdraw.container.id).childNodes.length - 1];
 			}
 			if((tipo==="resizePoligono") && navm){
 				try{
 					r = $i(i3GEO.desenho.richdraw.container.id);
 					elementos = r.childNodes;
-					if(desenhoUltimaLinhaPol != "")
+					if(desenhoUltimaLinhaPol !== "")
 					{r.removeChild(desenhoUltimaLinhaPol);}
 					dy = objposicaocursor.imgy;
 					dx = objposicaocursor.imgx - (i3GEO.parametros.w/2);
-					i3GEO.desenho.richdraw.renderer.create(i3GEO.desenho.richdraw.mode, i3GEO.desenho.richdraw.fillColor, i3GEO.desenho.richdraw.lineColor, i3GEO.desenho.richdraw.lineWidth, (pontosdistobj.ximg[n-1])-(i3GEO.parametros.w/2),pontosdistobj.yimg[n-1],dx,dy);				
+					i3GEO.desenho.richdraw.renderer.create(i3GEO.desenho.richdraw.mode, i3GEO.desenho.richdraw.fillColor, i3GEO.desenho.richdraw.lineColor, i3GEO.desenho.richdraw.lineWidth, (pontosdistobj.ximg[n-1])-(i3GEO.parametros.w/2),pontosdistobj.yimg[n-1],dx,dy);
 					desenhoUltimaLinhaPol = r.childNodes[$i(i3GEO.desenho.richdraw.container.id).childNodes.length - 1];
 				}
-				catch(erro){
-					if(typeof(console) !== 'undefined'){console.error(erro);}
+				catch(men){
+					if(typeof(console) !== 'undefined'){console.error(men);}
 				}			
 			}
 			if(tipo==="insereCirculo"){
@@ -228,16 +228,16 @@ i3GEO.desenho = {
 					try{
 						i3GEO.desenho.richdraw.renderer.create('circ', '', 'rgb(250,250,250)', i3GEO.desenho.richdraw.lineWidth, pontosdistobj.ximg[n-1],pontosdistobj.yimg[n-1],w,w);
 					}
-					catch(erro){
-						if(typeof(console) !== 'undefined'){console.error(erro);}
+					catch(men){
+						if(typeof(console) !== 'undefined'){console.error(men);}
 					}
 				}
 				else{
 					try{
 						i3GEO.desenho.richdraw.renderer.create('circ', '', 'rgb(250,250,250)', i3GEO.desenho.richdraw.lineWidth, pontosdistobj.ximg[n-1]-w,pontosdistobj.yimg[n-1]-w,w*2,w*2);
 					}
-					catch(erro){
-						if(typeof(console) !== 'undefined'){console.error(erro);}
+					catch(men){
+						if(typeof(console) !== 'undefined'){console.error(men);}
 					}
 				}
 			}
@@ -245,8 +245,8 @@ i3GEO.desenho = {
 				try{
 					i3GEO.desenho.richdraw.renderer.create('text', '', 'rgb(250,250,250)', i3GEO.desenho.richdraw.lineWidth, pontosdistobj.ximg[n-1],pontosdistobj.yimg[n-1],"","",texto);
 				}
-				catch(erro){
-					if(typeof(console) !== 'undefined'){console.error(erro);}
+				catch(men){
+					if(typeof(console) !== 'undefined'){console.error(men);}
 				}
 			}
 		}
