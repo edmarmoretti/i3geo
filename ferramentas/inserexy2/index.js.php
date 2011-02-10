@@ -288,6 +288,7 @@ i3GEOF.inserexy = {
 			i3GEO.eventos.MOUSECLIQUE.remove("i3GEOF.inserexy.adicionaClique()");
 		};
 		YAHOO.util.Event.addListener(janela[0].close, "click", temp);
+		i3GEO.util.mudaCursor(i3GEO.configura.cursores,"crosshair",i3GEO.Interface.IDMAPA,i3GEO.configura.locaplic);
 	},
 	/*
 	Function: ativaFoco

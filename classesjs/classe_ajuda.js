@@ -185,6 +185,7 @@ i3GEO.ajuda = {
 	*/
 	ativaCookie: function(){
 		i3GEO.util.insereCookie("g_janelaMen","sim");
+		i3GEO.util.insereCookie("botoesAjuda","sim");
 	},
 	/*
 	Function: ativaLetreiro
@@ -273,17 +274,20 @@ i3GEO.ajuda = {
 			jm = $i("i3geo_janelaMensagens"),
 			h = parseInt(YAHOO.util.Dom.getStyle(jm,"height"),10),
 			temp;
+	
 		if(j){
 			j.innerHTML = texto === "" ? "-" : texto;
 		}
 		else{
-			YAHOO.util.Dom.setY("i3geo_janelaMensagens",YAHOO.util.Dom.getY(jm) + h);
+			if(h)
+			{YAHOO.util.Dom.setY("i3geo_janelaMensagens",YAHOO.util.Dom.getY(jm) + h);}
 			if(k){k.innerHTML = texto;}
 			if(i3GEO.ajuda.TRANSICAOSUAVE){
 				temp = texto !== "" ? YAHOO.util.Dom.setStyle(jm,"opacity","1") : YAHOO.util.Dom.setStyle(jm,"opacity",(i3GEO.ajuda.OPACIDADE / 100));
 			}
 			h = parseInt(YAHOO.util.Dom.getStyle(jm,"height"),10);
-			YAHOO.util.Dom.setY(jm,YAHOO.util.Dom.getY(jm) - h);
+			if(h)
+			{YAHOO.util.Dom.setY(jm,YAHOO.util.Dom.getY(jm) - h);}
 		}
 	},
 	/*
@@ -307,7 +311,7 @@ i3GEO.ajuda = {
 		{$i(i3GEO.ajuda.DIVLETREIRO).value = BSpaces + BMessage;}
 		BPos-=BSpeed;
 		if (BQuantas < 2)
-		{i3GEO.ajuda.tempoLetreiro = setTimeout('i3GEO.ajuda.mostraLetreiro();', 140);}
+		{i3GEO.ajuda.tempoLetreiro = setTimeout(function(){i3GEO.ajuda.mostraLetreiro();}, 140);}
 	},
 	/*
 	Function: redesSociais

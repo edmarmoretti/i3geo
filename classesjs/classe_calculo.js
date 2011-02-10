@@ -543,9 +543,9 @@ i3GEO.calculo = {
 	*/
 	rect2ext: function(idrect,mapext,pixel){
 		if(typeof(console) !== 'undefined'){console.info("i3GEO.calculo.rect2ext()");}
-		var bx,bxs,xfig,yfig,nx,ny,pix,piy,pos,amext,dx,dy,x1,y1,x2,y2;
-		eval('pix = parseInt(document.getElementById("'+idrect+'").style.' + g_tipoleft + ',10);');
-		eval('piy = parseInt(document.getElementById("'+idrect+'").style.' + g_tipotop + ',10);');
+		var bx,bxs,xfig,yfig,nx,ny,pix,piy,pos,amext,dx,dy,x1,y1,x2,y2,
+			pix = parseInt(document.getElementById(idrect).style.left,10),
+			piy = parseInt(document.getElementById(idrect).style.top,10);
 		if($i(idrect)){
 			bx = $i(idrect);
 			bxs = bx.style;

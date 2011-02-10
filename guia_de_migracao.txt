@@ -37,6 +37,12 @@ Para a versão 4.5
 		css/i3geo_ferramentas45.css
 		
 	Testado o uso de zlib.output_compression = On no php.ini
+	
+	Variáveis ou funções removidas
+		i3GEO.interface (utilize i3GEO.Interface, com "I" maiúsculo)
+		g_postpx
+		g_tipotop
+		g_tipoleft
 
 -------------------------------------------------------------------------------------------------
 Para a versão 4.4

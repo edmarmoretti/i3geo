@@ -41,7 +41,7 @@ i3GEO.social = {
 		if(tipo === "comtotal")
 		{return "<iframe src='http://www.facebook.com/plugins/like.php?href="+url+"&amp;layout=button_count&amp;show_faces=false&amp;width=160&amp;action=like&amp;colorscheme=light&amp;height=21' scrolling='no' frameborder='0' style='border:none; overflow:hidden; width:160px; height:21px;' allowTransparency='true'></iframe>";}
 		if(tipo === "semtotal")
-		{return "<iframe src='http://www.facebook.com/plugins/like.php?href="+url+"&amp;layout=button_count&amp;show_faces=false&amp;width=75&amp;action=like&amp;colorscheme=light&amp;height=21' scrolling='no' frameborder='0' style='border:none; overflow:hidden; width:75px; height:21px;' allowTransparency='true'></iframe>";}
+		{return "<iframe src='http://www.facebook.com/plugins/like.php?href="+url+"&amp;layout=button_count&amp;show_faces=false&amp;action=like&amp;colorscheme=light&amp;height=21' scrolling='no' frameborder='0' style='border:none; overflow:hidden; width:100px; height:21px;' allowTransparency='true'></iframe>";}
 	},
 	publicarTwitter: function(url,tipo){
 		if(tipo === "comtotal")
@@ -89,9 +89,9 @@ i3GEO.social = {
 				tabela += "<td>"+i3GEO.social.publicarTwitter(urlpt,tipo)+"</td>";
 			}
 			if(urlcf !== ""){
+				//tabela += "<td><img style='cursor:pointer' src='"+locaplic+"/imagens/facebook.gif' onclick='javascript:window.open(\"http://www.facebook.com/sharer.php?u="+urlcf+"\")' title='Compartilhar'/></td>";
 				tabela += "<td>"+i3GEO.social.curtirFacebook(urlcf,tipo)+"</td>";
-				tabela += "<td><img style='cursor:pointer' src='"+locaplic+"/imagens/facebook.gif' onclick='javascript:window.open(\"http://www.facebook.com/sharer.php?u="+urlcf+"\")' title='Compartilhar'/></td>";
-			}
+			}			
 			tabela += "</tr></table>";
 			if(id !== "")
 			{onde.innerHTML = tabela;}

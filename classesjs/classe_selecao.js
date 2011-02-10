@@ -87,8 +87,8 @@ i3GEO.selecao = {
 			i.height=0;
 			i.visibility="visible";
 			i.display="block";
-			i.left = objposicaocursor.imgx + adicionaxyBox[0] + g_postpx;
-			i.top = objposicaocursor.imgy + adicionaxyBox[1] + g_postpx;
+			i.left = objposicaocursor.imgx + adicionaxyBox[0];
+			i.top = objposicaocursor.imgy + adicionaxyBox[1];
 			
 			boxxini = objposicaocursor.imgx + adicionaxyBox[0];
 			boxyini = objposicaocursor.imgy + adicionaxyBox[1];

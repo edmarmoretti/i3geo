@@ -725,7 +725,7 @@ i3GEO.configura = {
 				};
 				panMapaDesloca = function(){
 					var nx,ny,l,t;
-					if ($i(i3GEO.Interface.IDMAPA) && (g_panM === "sim")){
+					if (typeof(g_panM) !== 'undefined' && $i(i3GEO.Interface.IDMAPA) && (g_panM === "sim")){
 						nx = objposicaocursor.telax - leftinicial - clicinicialx;
 						ny = objposicaocursor.telay - topinicial - clicinicialy;
 						if (i3GEO.configura.entorno === "nao"){

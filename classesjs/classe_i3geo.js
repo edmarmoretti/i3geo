@@ -314,8 +314,13 @@ i3GEO = {
 				//
 				if($i("ajuda")) //para efeitos de compatibilidade com as versões anteriores a 4.1
 				{i3GEO.ajuda.DIVAJUDA = "ajuda";}
-				if(i3GEO.util.pegaCookie("botoesAjuda") === "nao")
-				{i3GEO.barraDeBotoes.AJUDA = false;}
+				abreJM = "sim";
+				if(i3GEO.util.pegaCookie("botoesAjuda")){
+					abreJM = i3GEO.util.pegaCookie("botoesAjuda");
+					i3GEO.barraDeBotoes.AJUDA = (abreJM === "sim") ? true : false;
+				}				
+				//if(i3GEO.util.pegaCookie("botoesAjuda") === "nao")
+				//{i3GEO.barraDeBotoes.AJUDA = false;}
 				abreJM = "sim";
 				if(i3GEO.util.pegaCookie("g_janelaMen")){
 					abreJM = i3GEO.util.pegaCookie("g_janelaMen");

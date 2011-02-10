@@ -407,6 +407,7 @@ i3GEO.eventos = {
 		docMapa.onmouseover = function(){
 			objposicaocursor.dentroDomapa = true;
 			this.onmousemove=function(exy){
+				//var executar = new Function("i3GEO.eventos.mouseParado().call");
 				i3GEO.eventos.posicaoMouseMapa(exy);
 				try{
 					try
@@ -414,7 +415,7 @@ i3GEO.eventos = {
 					catch(e){
 						if(typeof(console) !== 'undefined'){console.error(e);}
 					}
-					i3GEO.eventos.TIMERPARADO = setTimeout('i3GEO.eventos.mouseParado()',i3GEO.configura.tempoMouseParado);
+					i3GEO.eventos.TIMERPARADO = setTimeout(function(){i3GEO.eventos.mouseParado();},i3GEO.configura.tempoMouseParado);
 				}
 				catch(e){
 					if(typeof(console) !== 'undefined'){console.error(e);}

@@ -324,9 +324,9 @@ i3GEO.barraDeBotoes = {
 	BOTAOCLICADO: "",
 	ativaPadrao: function(){
 		try{
-			$i(i3GEO.barraDeBotoes.BOTAOPADRAO).onclick.call();
+			$i(i3GEO.barraDeBotoes.BOTAOPADRAO).onclick.apply(); //call não funciona no IE
 		}
-		catch(e){}
+		catch(e){alert(e)}
 	},
 	/*
 	Function: ativaIcone
@@ -447,7 +447,7 @@ i3GEO.barraDeBotoes = {
 	*/
 	ativaBotoes:function(padrao){
 		if(typeof(console) !== 'undefined'){console.info("i3GEO.barraDeBotoes.ativaBotoes()");}
-		var l,b;
+		var l,b,d;
 		if(arguments.length === 0)
 		{padrao = i3GEO.barraDeBotoes.BOTAOPADRAO;}
 		i3GEO.barraDeBotoes.BOTAOCLICADO = padrao;
@@ -464,7 +464,7 @@ i3GEO.barraDeBotoes = {
 					}
 					if(l[b].funcaoonclick){
 						$i(l[b].iddiv).onclick = l[b].funcaoonclick;
-						if(l[b].iddiv === padrao)
+						if(l[b].iddiv == padrao)
 						{l[b].funcaoonclick();}
 					}
 					if(l[b].constroiconteudo)
@@ -539,7 +539,7 @@ i3GEO.barraDeBotoes = {
 				chaves = i3GEO.util.listaChaves(i3GEO.barraDeBotoes.INCLUIBOTAO);
 				n = chaves.length;
 				for(i=0;i<n;i+=1){
-					if(eval("i3GEO.barraDeBotoes.INCLUIBOTAO."+chaves[i]) === true){
+					if(i3GEO.barraDeBotoes.INCLUIBOTAO[chaves[i]] === true){
 						temp += i3GEO.barraDeBotoes.TEMPLATEBOTAO.replace("$$",chaves[i]);
 					}
 				}
@@ -739,7 +739,7 @@ i3GEO.barraDeBotoes = {
 		YAHOO.util.Dom.replaceClass(idconteudonovo+"_h","hd2");
 	},
 	/*
-	Function: ativaMenuContexto
+	Function: ativaMenuContexto (depreciado na versão 4.5)
 	
 	Ativa o menu de contexto acionado com o botão direito do mouse
 	
@@ -898,7 +898,7 @@ i3GEO.barraDeBotoes = {
 			$i("divMensagemBarraDeBotoesCorpo").innerHTML = mensagem;
 			divmensagem.style.display="block";
 			try{clearTimeout(timeAjudaBotoes);}catch(e){}
-			timeAjudaBotoes = setTimeout("i3GEO.barraDeBotoes.escondeJanelaAjuda()",3000);
+			timeAjudaBotoes = setTimeout(function(){i3GEO.barraDeBotoes.escondeJanelaAjuda();},3000);
 		}
 	},
 	escondeJanelaAjuda:function(){

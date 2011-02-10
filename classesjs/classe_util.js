@@ -1,4 +1,4 @@
-/*jslint plusplus:false,white:false,undef: false, rhino: true, onevar: true, evil: true */
+/*jslint plusplus:false,white:false,undef: false, rhino: true, onevar: true, evil: false */
 /*
 Title: Utilitários
 
@@ -104,6 +104,7 @@ Quando o usuário clica no mapa, essa variável é pesquisada para definir o tipo d
 */
 g_tipoacao = "zoomli";
 
+/*
 g_postpx = "px";
 g_tipotop = "top";
 g_tipoleft = "left";
@@ -113,7 +114,7 @@ if (navm)
 	g_tipotop = "pixelTop"; //utilizado para crossbrowser
 	g_tipoleft = "pixelLeft"; //utilizado para crossbrowser
 }
-
+*/
 /*
 Function: $i
 
@@ -279,13 +280,17 @@ i3GEO.util = {
 	*/
 	criaBotaoAplicar: function (nomeFuncao,titulo,classe,obj) {
 		if(typeof(console) !== 'undefined'){console.info("i3GEO.util.criaBotaoAplicar()");}
-		try
-		{clearTimeout(tempoBotaoAplicar);}
+		try{
+			if(typeof(tempoBotaoAplicar) !== 'undefined')
+			{clearTimeout(tempoBotaoAplicar);}
+		}
 		catch(e){
 			if(typeof(console) !== 'undefined'){console.error(e);}
 		}
-		var novoel,xy;
-		tempoBotaoAplicar = eval("setTimeout('"+nomeFuncao+"\(\)',(i3GEO.configura.tempoAplicar))");
+		var executar = new Function(nomeFuncao+"().call;clearTimeout(tempoBotaoAplicar);"),
+			novoel,xy;
+		//tempoBotaoAplicar = eval("setTimeout('"+nomeFuncao+"\(\)',(i3GEO.configura.tempoAplicar))");
+		tempoBotaoAplicar = setTimeout(executar,(i3GEO.configura.tempoAplicar));
 		autoRedesenho("reinicia");
 		if(arguments.length === 1)
 		{titulo = "Aplicar";}

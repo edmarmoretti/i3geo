@@ -652,8 +652,8 @@ i3GEO.navega = {
 			i.height=0;
 			i.visibility="visible";
 			i.display="block";
-			i.left = objposicaocursor.telax + g_postpx;
-			i.top = objposicaocursor.telay + g_postpx;
+			i.left = objposicaocursor.telax;
+			i.top = objposicaocursor.telay;
 			boxxini = objposicaocursor.telax;
 			boxyini = objposicaocursor.telay;
 			tamanhox = 0;
@@ -960,7 +960,7 @@ i3GEO.navega = {
 				document.body.appendChild(novoel);
 			}
 			temp = $i('boxlente').style;
-			temp.borderWidth = '1' + g_postpx;
+			temp.borderWidth = '1';
 			temp.borderColor = "red";
 			temp.display = "block";
 			$i("lente").style.display = "block";
@@ -1049,8 +1049,10 @@ i3GEO.navega = {
 					clipt = "rect("+ (topo - 40) + " " + (esq + 40) + " " + (topo + 40) + " " + (esq - 40) +")";
 					i = $i("lente").style;
 					i.clip = clipt;
-					eval("i." + g_tipotop + "= (pos[1] - (topo - 40)) + g_postpx");
-					eval("i." + g_tipoleft +  "= (pos[0] - (esq - 40)) + g_postpx");
+					i.top = pos[1] - (topo - 40);
+					i.left = pos[0] - (esq - 40);
+					//eval("i." + g_tipotop + "= (pos[1] - (topo - 40))");
+					//eval("i." + g_tipoleft +  "= (pos[0] - (esq - 40)");
 				}
 			}
 			catch(e){

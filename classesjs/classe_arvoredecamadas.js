@@ -343,19 +343,19 @@ i3GEO.arvoreDeCamadas = {
 		if(!YAHOO.lang.isUndefined(funcaoTema)){
 			i3GEO.arvoreDeCamadas.ATIVATEMA = funcaoTema;
 		}
-		this.SID = typeof(g_sid) !== 'undefined' ? g_sid : i3GEO.configura.sid;
-		this.LOCAPLIC = typeof(g_locaplic) !== 'undefined' ? g_locaplic : i3GEO.configura.locaplic;
+		i3GEO.arvoreDeCamadas.SID = typeof(g_sid) !== 'undefined' ? g_sid : i3GEO.configura.sid;
+		i3GEO.arvoreDeCamadas.LOCAPLIC = typeof(g_locaplic) !== 'undefined' ? g_locaplic : i3GEO.configura.locaplic;
 		if(onde !== "")
-		{this.IDHTML = onde;}
-		if(this.IDHTML === "")
+		{i3GEO.arvoreDeCamadas.IDHTML = onde;}
+		if(i3GEO.arvoreDeCamadas.IDHTML === "")
 		{return;}
-		if(!$i(this.IDHTML))
+		if(!$i(i3GEO.arvoreDeCamadas.IDHTML))
 		{return;}
 		if(YAHOO.lang.isUndefined(temas))
 		{return;}
-		this.atualiza(temas);
-		if(this.finaliza !== ""){
-			eval(this.finaliza);
+		i3GEO.arvoreDeCamadas.atualiza(temas);
+		if(i3GEO.arvoreDeCamadas.finaliza !== ""){
+			eval(i3GEO.arvoreDeCamadas.finaliza);
 		}
 	},
 	/*
@@ -1325,7 +1325,7 @@ i3GEO.arvoreDeCamadas = {
 			do{
 				ltema = camadas[i];
 				if(ltema.escondido !== "sim"){
-					temp = eval("ltema."+propriedade);
+					temp = ltema[propriedade];
 					if(operador === "igual"){
 						if(temp === valor)
 						{resultado.push(ltema);}
@@ -1365,7 +1365,7 @@ i3GEO.arvoreDeCamadas = {
 			do{
 				ltema = i3GEO.arvoreDeCamadas.CAMADAS[i];
 				if(ltema.name === camada){
-					eval("ltema."+propriedade+"='"+valor+"';");
+					ltema[propriedade] = valor;
 				}
 				i += 1;
 		}
