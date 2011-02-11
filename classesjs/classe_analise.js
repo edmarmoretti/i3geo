@@ -267,7 +267,7 @@ i3GEO.analise = {
 			if (!$i("mostradistancia")){
 				novoel = document.createElement("div");
 				novoel.id = "mostradistancia";
-				ins = '<div class="hd" >&nbsp;  <a class=ajuda_usuario target=_blank href="'+i3GEO.configura.locaplic+'/ajuda_usuario.php?idcategoria=6&idajuda=50" >&nbsp;&nbsp;&nbsp;</a></div>' +
+				ins = '<div class="hd" >&nbsp;Dist&acirc;ncia aproximada <a class=ajuda_usuario target=_blank href="'+i3GEO.configura.locaplic+'/ajuda_usuario.php?idcategoria=6&idajuda=50" >&nbsp;&nbsp;&nbsp;</a></div>' +
 				'<div class="bd" style="text-align:left;padding:3px;" >' +
 				'<div style="text-align:left;padding:3px;" id="mostradistancia_calculo" ></div>' +
 				'<div style="text-align:left;font-size:10px" >' +
@@ -529,7 +529,9 @@ i3GEO.analise = {
 				novoel = document.createElement("div");
 				novoel.id = "mostraarea";
 				ins = '<div class="hd" >&Aacute;rea aproximada <a class=ajuda_usuario target=_blank href="'+i3GEO.configura.locaplic+'"/ajuda_usuario.php?idcategoria=6&idajuda=51" >&nbsp;&nbsp;&nbsp;</a></div>' +
-				'<div class="bd" style="text-align:left;padding:3px;" >' +
+				'<div class="bd" style="text-align:left;padding:3px;font-size:10px" >' +
+				'Estilo: '+i3GEO.desenho.caixaEstilos()+'<br>' +
+
 				'<div style="text-align:left;padding:3px;font-size:10px" id="mostraarea_calculo" ></div>' +
 				'</div>';
 				novoel.innerHTML = ins;
