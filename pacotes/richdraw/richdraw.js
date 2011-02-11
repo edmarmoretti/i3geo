@@ -43,6 +43,8 @@ function RichDrawEditor(elem, renderer) {
   this.fillColor = '';
   this.lineColor = '';
   this.lineWidth = '';
+  this.circColor = '';
+  this.textColor = '';
   this.selected = null;
   this.selectedBounds = { x:0, y:0, width:0, height: 0 };
 
@@ -140,6 +142,12 @@ RichDrawEditor.prototype.editCommand = function(cmd, value)
     else if (cmd == 'linecolor') {
       this.lineColor = value;
     }
+    else if (cmd == 'textcolor') {
+      this.textColor = value;
+    }
+    else if (cmd == 'circcolor') {
+      this.circColor = value;
+    }
     else if (cmd == 'linewidth') {
       this.lineWidth = parseInt(value) + 'px';
     }
@@ -161,6 +169,12 @@ RichDrawEditor.prototype.queryCommand = function(cmd)
     }
     else if (cmd == 'linecolor') {
       return this.lineColor;
+    }
+    else if (cmd == 'textcolor') {
+      return this.textColor;
+    }
+    else if (cmd == 'circcolor') {
+      return this.circColor;
     }
     else if (cmd == 'linewidth') {
       return this.lineWidth;

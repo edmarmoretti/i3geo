@@ -276,6 +276,7 @@ i3GEO.analise = {
 				'<td>' +
 				'<input style="cursor:pointer" type="checkbox" id="parartextos" checked />' +
 				'</td><td>Textos<td>' +
+				'<td>&nbsp;Estilo:</td><td>'+i3GEO.desenho.caixaEstilos()+'</td>' +
 				'<td>&nbsp;<input id=i3GEObotaoPerfil size="22" type="button" value="perfil"></td>' +
 				'</tr></table></span>' +
 				'</div>' +

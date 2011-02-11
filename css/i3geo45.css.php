@@ -66,7 +66,7 @@ select
 .executar
 {cursor:pointer;color:white;text-align:left;background-color:gray;background-image:URL('../imagens/tic.png');background-repeat:no-repeat;border-style:outset;background-position: right;font-family: Verdana, Arial, Helvetica, sans-serif;font-size: 10px;}
 .inputsb
-{font-family: Verdana, Arial, Helvetica, sans-serif;font-size: 10px;color: #2F4632;background-color: #FFFFFF;padding: 0;border: 1px solid gray;text-align: center;cursor: text;}
+{font-family: Verdana, Arial, Helvetica, sans-serif;font-size: 10px;color: #2F4632;background-color: #FFFFFF;padding: 0;border: 0px solid gray;text-align: center;cursor: text;}
 .legendatemas
 {cursor:pointer;text-align:left;background-color:none;vertical-align: top;border: 0px solid gray;margin:0;padding:0;font-family: Verdana, Arial, Helvetica, sans-serif;}
 .legendatemas td

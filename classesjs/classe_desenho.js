@@ -59,6 +59,47 @@ i3GEO.desenho = {
 	*/
 	richdraw: "",
 	/*
+	Propriedade: estilos
+	
+	Estilos que podem ser utilizados para desenhar os elementos
+	*/
+	estilos: {
+		"normal":{
+			fillcolor: 'red',
+			linecolor: 'black',
+			linewidth: '1',
+			circcolor: 'white',
+			textcolor: 'white'
+		},
+		"palido":{
+			fillcolor: 'gray',
+			linecolor: 'gray',
+			linewidth: '1',
+			circcolor: 'gray',
+			textcolor: 'gray'
+		},
+		"vermelho":{
+			fillcolor: 'gray',
+			linecolor: 'red',
+			linewidth: '1',
+			circcolor: 'pink',
+			textcolor: 'brown'
+		},
+		"verde":{
+			fillcolor: 'gray',
+			linecolor: 'green',
+			linewidth: '1',
+			circcolor: 'DarkGreen',
+			textcolor: 'GreenYellow'
+		}
+	},
+	/*
+	Propriedade: estiloPadrao
+	
+	Estilo utilizado como padrão
+	*/
+	estiloPadrao: "normal",
+	/*
 	Function: criaContainerRichdraw
 
 	Cria os elementos 'dom' necessários ao uso das funções de desenho sobre o mapa.
@@ -111,9 +152,7 @@ i3GEO.desenho = {
 			//
 			//definição dos símbolos default para os elementos gráficos
 			//
-			i3GEO.desenho.richdraw.editCommand('fillcolor', 'red');
-			i3GEO.desenho.richdraw.editCommand('linecolor', 'gray');
-			i3GEO.desenho.richdraw.editCommand('linewidth', '1px');
+			i3GEO.desenho.definePadrao(i3GEO.desenho.estiloPadrao);
 			i3GEO.desenho.richdraw.editCommand('mode', 'line');
 			divgeo.style.display="block";
 			//
@@ -123,7 +162,7 @@ i3GEO.desenho = {
 			//
 			i3GEO.eventos.ativa(divgeo);
 		}
-		catch(men){alert("Erro ao tentar criar container richdraw");}
+		catch(men){alert("Erro ao tentar criar container richdraw "+men);}
 	},
 	/*
 	Function: criaDivContainer
@@ -182,9 +221,9 @@ i3GEO.desenho = {
 	texto {string} - texto que será inserido no tipo "insereTexto"
 	*/
 	aplica: function(tipo,objeto,n,texto){
-		var pos,r,elemento,elementos,dy,dx,w,i,nindice;
+		var pos,r,elemento,elementos,dy,dx,w,i,nindice,ix,iy,dm;
 		if(i3GEO.desenho.richdraw && $i(i3GEO.Interface.IDCORPO)){
-			pos = i3GEO.util.pegaPosicaoObjeto($i(i3GEO.Interface.IDCORPO));
+			//pos = i3GEO.util.pegaPosicaoObjeto($i(i3GEO.Interface.IDCORPO));
 			//
 			//faz o reposicionamento de linhas quando o mouse é movido e a linha está ativa
 			//
@@ -200,9 +239,11 @@ i3GEO.desenho = {
 				elementos = r.childNodes;
 				if(desenhoUltimaLinha !== "")
 				{r.removeChild(desenhoUltimaLinha);}
-				dy = objposicaocursor.imgy;
-				dx = objposicaocursor.imgx - (i3GEO.parametros.w/2);
-				i3GEO.desenho.richdraw.renderer.create(i3GEO.desenho.richdraw.mode, i3GEO.desenho.richdraw.fillColor, i3GEO.desenho.richdraw.lineColor, i3GEO.desenho.richdraw.lineWidth, (pontosdistobj.ximg[n-1])-(i3GEO.parametros.w/2),pontosdistobj.yimg[n-1],dx,dy);
+				dy = pontosdistobj.yimg[n];//objposicaocursor.imgy;
+				dx = pontosdistobj.ximg[n];//objposicaocursor.imgx - (i3GEO.parametros.w/2);
+				ix = (pontosdistobj.ximg[n-1])-(i3GEO.parametros.w/2);
+				iy = pontosdistobj.yimg[n-1];
+				i3GEO.desenho.richdraw.renderer.create(i3GEO.desenho.richdraw.mode, i3GEO.desenho.richdraw.fillColor, i3GEO.desenho.richdraw.lineColor, i3GEO.desenho.richdraw.lineWidth, ix,iy,dx,dy);
 				desenhoUltimaLinha = r.childNodes[$i(i3GEO.desenho.richdraw.container.id).childNodes.length - 1];
 			}
 			if((tipo==="resizePoligono") && navm){
@@ -226,7 +267,7 @@ i3GEO.desenho = {
 				w = Math.sqrt(dx + dy);
 				if (navn){
 					try{
-						i3GEO.desenho.richdraw.renderer.create('circ', '', 'rgb(250,250,250)', i3GEO.desenho.richdraw.lineWidth, pontosdistobj.ximg[n-1],pontosdistobj.yimg[n-1],w,w);
+						i3GEO.desenho.richdraw.renderer.create('circ', '', i3GEO.desenho.richdraw.circColor, i3GEO.desenho.richdraw.lineWidth, pontosdistobj.ximg[n-1],pontosdistobj.yimg[n-1],w,w);
 					}
 					catch(men){
 						if(typeof(console) !== 'undefined'){console.error(men);}
@@ -234,7 +275,7 @@ i3GEO.desenho = {
 				}
 				else{
 					try{
-						i3GEO.desenho.richdraw.renderer.create('circ', '', 'rgb(250,250,250)', i3GEO.desenho.richdraw.lineWidth, pontosdistobj.ximg[n-1]-w,pontosdistobj.yimg[n-1]-w,w*2,w*2);
+						i3GEO.desenho.richdraw.renderer.create('circ', '', i3GEO.desenho.richdraw.circColor, i3GEO.desenho.richdraw.lineWidth, pontosdistobj.ximg[n-1]-w,pontosdistobj.yimg[n-1]-w,w*2,w*2);
 					}
 					catch(men){
 						if(typeof(console) !== 'undefined'){console.error(men);}
@@ -243,13 +284,51 @@ i3GEO.desenho = {
 			}
 			if(tipo==="insereTexto"){
 				try{
-					i3GEO.desenho.richdraw.renderer.create('text', '', 'rgb(250,250,250)', i3GEO.desenho.richdraw.lineWidth, pontosdistobj.ximg[n-1],pontosdistobj.yimg[n-1],"","",texto);
+					i3GEO.desenho.richdraw.renderer.create('text', '', i3GEO.desenho.richdraw.textColor, i3GEO.desenho.richdraw.lineWidth, pontosdistobj.ximg[n-1],pontosdistobj.yimg[n-1],"","",texto);
 				}
 				catch(men){
 					if(typeof(console) !== 'undefined'){console.error(men);}
 				}
 			}
 		}
+	},
+	/*
+	Function: definePadrao
+	
+	Aplica um determinado padrao de estilos para os novos elementos que serão adicionados
+	
+	Parametro:
+	
+	padrao {string} - nome do estilo
+	*/
+	definePadrao: function(padrao){
+		padrao = i3GEO.desenho.estilos[padrao];
+		i3GEO.desenho.richdraw.editCommand('fillcolor', padrao.fillcolor);
+		i3GEO.desenho.richdraw.editCommand('linecolor', padrao.linecolor);
+		i3GEO.desenho.richdraw.editCommand('linewidth', padrao.linewidth);
+		i3GEO.desenho.richdraw.editCommand('circcolor', padrao.circcolor);
+		i3GEO.desenho.richdraw.editCommand('textcolor', padrao.textcolor);	
+	},
+	/*
+	Function: caixaEstilos
+	
+	Cria uma caixa de seleção para escolha do estilo a ser utilizado
+	*/
+	caixaEstilos: function(){
+		var lista = i3GEO.util.listaChaves(i3GEO.desenho.estilos),
+			n = lista.length,
+			i,
+			caixa,
+			sel;
+		caixa = "<select onchange='i3GEO.desenho.definePadrao(this.value)'>";
+		for(i=0;i<n;i+=1){
+			sel = ""
+			if(lista[i] === i3GEO.desenho.estiloPadrao)
+			{sel = "select";}
+			caixa += "<option value='"+lista[i]+"' sel >"+lista[i]+"</option>";
+		}
+		caixa += "</select>";
+		return caixa;
 	}
 };
 //YAHOO.log("carregou classe desenho", "Classes i3geo");
