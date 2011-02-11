@@ -69,7 +69,7 @@ i3GEO.desenho = {
 			linecolor: 'black',
 			linewidth: '1',
 			circcolor: 'white',
-			textcolor: 'white'
+			textcolor: 'gray'
 		},
 		"palido":{
 			fillcolor: 'gray',
@@ -265,22 +265,7 @@ i3GEO.desenho = {
 				dx = Math.pow(((pontosdistobj.xtela[n])*1) - ((pontosdistobj.xtela[n-1])*1),2);
 				dy = Math.pow(((pontosdistobj.ytela[n])*1) - ((pontosdistobj.ytela[n-1])*1),2);
 				w = Math.sqrt(dx + dy);
-				if (navn){
-					try{
-						i3GEO.desenho.richdraw.renderer.create('circ', '', i3GEO.desenho.richdraw.circColor, i3GEO.desenho.richdraw.lineWidth, pontosdistobj.ximg[n-1],pontosdistobj.yimg[n-1],w,w);
-					}
-					catch(men){
-						if(typeof(console) !== 'undefined'){console.error(men);}
-					}
-				}
-				else{
-					try{
-						i3GEO.desenho.richdraw.renderer.create('circ', '', i3GEO.desenho.richdraw.circColor, i3GEO.desenho.richdraw.lineWidth, pontosdistobj.ximg[n-1]-w,pontosdistobj.yimg[n-1]-w,w*2,w*2);
-					}
-					catch(men){
-						if(typeof(console) !== 'undefined'){console.error(men);}
-					}
-				}
+				i3GEO.desenho.insereCirculo(pontosdistobj.ximg[n-1],pontosdistobj.yimg[n-1],w);
 			}
 			if(tipo==="insereTexto"){
 				try{
@@ -291,6 +276,37 @@ i3GEO.desenho = {
 				}
 			}
 		}
+	},
+	/*
+	Function: insereCirculo
+	
+	Insere um circulo no container de elementos gráficos
+	
+	Parametros:
+	
+	x {numerico} - posição do ponto em coordenadas de imagem
+	
+	y {numerico} - posição do ponto em coordenadas de imagem
+	
+	w {numerico} - raio do círculo em pixels
+	*/
+	insereCirculo: function(x,y,w){
+		if (navn){
+			try{
+				i3GEO.desenho.richdraw.renderer.create('circ', '', i3GEO.desenho.richdraw.circColor, i3GEO.desenho.richdraw.lineWidth, x,y,w,w);
+			}
+			catch(men){
+				if(typeof(console) !== 'undefined'){console.error(men);}
+			}
+		}
+		else{
+			try{
+				i3GEO.desenho.richdraw.renderer.create('circ', '', i3GEO.desenho.richdraw.circColor, i3GEO.desenho.richdraw.lineWidth, x-w,y-w,w*2,w*2);
+			}
+			catch(men){
+				if(typeof(console) !== 'undefined'){console.error(men);}
+			}
+		}	
 	},
 	/*
 	Function: definePadrao
