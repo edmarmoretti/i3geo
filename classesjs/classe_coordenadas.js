@@ -344,20 +344,20 @@ i3GEO.coordenadas = {
 	{string} - html com a tabela
 	*/
 	criaMascaraDMS: function(prefixo,titulo,caixa){
-		var ins = "<table id="+prefixo+" style=display:block;text-align:center ><tr style='border-bottom:2px solid white' >" +
-				"<td style=width:120px;text-align:right >"+titulo+" X:&nbsp;</td>" +
-				"<td>"+$inputText("","315",prefixo+"xg","grau","3","-00")+"&nbsp;</td>" +
-				"<td>"+$inputText("","",prefixo+"xm","minuto","3","00")+"&nbsp;</td>" +
-				"<td>"+$inputText("","",prefixo+"xs","segundo","5","00.00")+"&nbsp;</td>" +
-				"<td>Y:"+$inputText("","",prefixo+"yg","grau","3","-00")+"&nbsp;</td>" +
-				"<td>"+$inputText("","",prefixo+"ym","minuto","3","00")+"&nbsp;</td>" +
-				"<td>"+$inputText("","",prefixo+"ys","segundo","5","00.00")+"</td>",
-			temp = 'var '+prefixo+'xxx = i3GEO.calculo.dms2dd($i("'+prefixo+'xg").value,$i("'+prefixo+'xm").value,$i("'+prefixo+'xs").value);' +
-				'var '+prefixo+'yyy = i3GEO.calculo.dms2dd($i("'+prefixo+'yg").value,$i("'+prefixo+'ym").value,$i("'+prefixo+'ys").value);' +
+		var ins = '<table id='+prefixo+' style=display:block;text-align:center ><tr style="border-bottom:2px solid white" >' +
+				'<td style=width:120px;text-align:right >'+titulo+' X:&nbsp;</td>' +
+				'<td>'+$inputText('','315',prefixo+'xg','grau','3','-00')+'&nbsp;</td>' +
+				'<td>'+$inputText('','',prefixo+'xm','minuto','3','00')+'&nbsp;</td>' +
+				'<td>'+$inputText('','',prefixo+'xs','segundo','5','00.00')+'&nbsp;</td>' +
+				'<td>Y:'+$inputText('','',prefixo+'yg','grau','3','-00')+'&nbsp;</td>' +
+				'<td>'+$inputText('','',prefixo+'ym','minuto','3','00')+'&nbsp;</td>' +
+				'<td>'+$inputText('','',prefixo+'ys','segundo','5','00.00')+'</td>',
+			temp = 'var '+prefixo+'xxx = i3GEO.calculo.dms2dd($i(\''+prefixo+'xg\').value,$i(\''+prefixo+'xm\').value,$i(\''+prefixo+'xs\').value);' +
+				'var '+prefixo+'yyy = i3GEO.calculo.dms2dd($i(\''+prefixo+'yg\').value,$i(\''+prefixo+'ym\').value,$i(\''+prefixo+'ys\').value);' +
 				'i3GEO.navega.zoomponto(i3GEO.configura.locaplic,i3GEO.configura.sid,'+prefixo+'xxx,'+prefixo+'yyy);';
-		ins += '<td><img  class=tic title=zoom onclick="'+temp+'" src="'+i3GEO.util.$im("branco.gif")+'" /></td>' +
-		"<td>"+caixa+"<td>" +
-		"</tr></table>";
+		ins += '<td><img class=tic title=zoom onclick="'+temp+'" src="'+i3GEO.util.$im("branco.gif")+'" /></td>' +
+			"<td>"+caixa+"</td>" +
+			"</tr></table>";
 		return ins;
 	},
 	/*
@@ -567,7 +567,7 @@ i3GEO.coordenadas = {
 			//
 			//cria a caixa de seleção
 			//			
-			for(i=0;i<n;i++){
+			for(i=0;i<n;i += 1){
 				temp = this.config[tipos[i]];
 				if(temp.ativo === true){
 					caixa += "<option value='"+tipos[i]+"'>"+temp.titulo+"</option>";
@@ -576,7 +576,7 @@ i3GEO.coordenadas = {
 			caixa += "</select>";
 			if(this.formato !== "bloco")
 			{caixa = "";}
-			for(i=0;i<n;i++){
+			for(i=0;i<n;i += 1){
 				temp = this.config[tipos[i]];
 				if(temp.ativo === true){
 					if(temp.tipo === "geo"){
@@ -630,7 +630,7 @@ i3GEO.coordenadas = {
 				if(temp && temp.style.display === "block")
 				{i3GEO.coordenadas.atualizaGeo(x,y,id);}
 			};
-			for(i=0;i<n;i++){
+			for(i=0;i<n;i += 1){
 				temp = i3GEO.coordenadas.config[tipos[i]];
 				if(temp.ativo === true){
 					if(temp.tipo === "geo"){
