@@ -99,7 +99,8 @@ i3GEO.mapa = {
 	codigo {string} - código da camada
 	*/
 	ativaTema: function(codigo){
-		i3GEO.util.defineValor("arrastar_"+i3GEO.temaAtivo,"style.color","");
+		if(i3GEO.temaAtivo !== "")
+		{i3GEO.util.defineValor("arrastar_"+i3GEO.temaAtivo,"style.color","");}
 		i3GEO.temaAtivo = codigo;
 		i3GEO.util.defineValor("arrastar_"+codigo,"style.color","brown");
 	},

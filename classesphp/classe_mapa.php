@@ -241,6 +241,12 @@ string - javascript com os parametros
 				$aplicaextensao = "nao";
 				if(strtoupper($oLayer->getmetadata("aplicaextensao")) == "SIM")
 				{$aplicaextensao = "sim";}
+				$wmsurl = "";
+				$wmsformat = "";
+				if($ct == 7 && strtoupper($oLayer->getmetadata("cache")) != "SIM"){
+					$wmsurl = ($oLayer->connection)."&layers=".($oLayer->getmetadata("wms_name"))."&style=".($oLayer->getmetadata("wms_style"));
+					$wmsformat = $oLayer->getmetadata("wms_format");
+				}
 				$temas[] = array(
 					"name"=>($oLayer->name),
 					"status"=>($oLayer->status),
@@ -264,7 +270,9 @@ string - javascript com os parametros
 					"permitecomentario"=>$permitecomentario,
 					"exttema"=>$exttema,
 					"aplicaextensao"=>$aplicaextensao,
-					"transitioneffect"=>$transitioneffect
+					"transitioneffect"=>$transitioneffect,
+					"wmsurl"=>$wmsurl,
+					"wmsformat"=>$wmsformat
 				);
 			}
 		}

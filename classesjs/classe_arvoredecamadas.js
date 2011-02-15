@@ -553,10 +553,9 @@ i3GEO.arvoreDeCamadas = {
 	*/
 	ativaDragDrop: function(){
 		if(typeof(console) !== 'undefined'){console.info("i3GEO.arvoreDeCamadas.ativaDragDrop()");}
-		var Dom,Event,DDM;
-		Dom = YAHOO.util.Dom;
-		Event = YAHOO.util.Event;
-		DDM = YAHOO.util.DragDropMgr;
+		var Dom = YAHOO.util.Dom,
+			Event = YAHOO.util.Event,
+			DDM = YAHOO.util.DragDropMgr;
 		YAHOO.example.DDList = "";
 		YAHOO.example.DDApp = {
 			init: function() 
@@ -578,14 +577,15 @@ i3GEO.arvoreDeCamadas = {
 		YAHOO.example.DDList = function(id, sGroup, config) {
 			YAHOO.example.DDList.superclass.constructor.call(this, id, sGroup, config);
 			this.logger = this.logger || YAHOO;
-			Dom.setStyle(this.getDragEl(), "opacity", 0.67); // The proxy is slightly transparent
+			YAHOO.util.Dom.setStyle(this.getDragEl(), "opacity", 0.67); // The proxy is slightly transparent
 			this.goingUp = false;
 			this.lastY = 0;
 		};
 		YAHOO.extend(
 			YAHOO.example.DDList, YAHOO.util.DDProxy, {
 				startDrag: function(x, y){
-					var dragEl,clickEl;
+					var dragEl,clickEl,
+						Dom = YAHOO.util.Dom; 
 					this.logger.log(this.id + " startDrag");
 					// make the proxy look like the source element
 					dragEl = this.getDragEl();
@@ -616,6 +616,7 @@ i3GEO.arvoreDeCamadas = {
 					// Hide the proxy and show the source element when finished with the animation
 					a.onComplete.subscribe(
 						function(){
+							var Dom = YAHOO.util.Dom;
 							Dom.setStyle(proxyid, "visibility", "hidden");
 							Dom.setStyle(thisid, "visibility", "");
 						}
@@ -624,7 +625,9 @@ i3GEO.arvoreDeCamadas = {
 					YAHOO.util.Dom.setStyle('i3geo_lixeira', 'border', '0px solid blue');
 				},
 				onDragDrop: function(e, id){
-					var pt,region,tema,destEl,els,lista,noid,temp;
+					var pt,region,tema,destEl,els,lista,noid,temp,
+						DDM = YAHOO.util.DragDropMgr,
+						Dom = YAHOO.util.Dom;
 					if (DDM.interactionInfo.drop.length === 1){
 						pt = DDM.interactionInfo.point; 
 						region = DDM.interactionInfo.sourceRegion; 
@@ -679,7 +682,7 @@ i3GEO.arvoreDeCamadas = {
 				onDragOver: function(e, id){
 					var srcEl,destEl;
 					srcEl = this.getEl();
-					destEl = Dom.get(id);
+					destEl = YAHOO.util.Dom.get(id);
 					// We are only concerned with list items, we ignore the dragover
 					// notifications for the list.
 					if ($i("i3geo_lixeira") && id === "i3geo_lixeira")
@@ -1275,7 +1278,8 @@ i3GEO.arvoreDeCamadas = {
 	*/
 	pegaTema: function(idtema){
 		if(typeof(console) !== 'undefined'){console.info("i3GEO.arvoreDeCamadas.pegaTema()");}
-		var i,v = "",
+		var i,
+			v = "",
 			c = i3GEO.arvoreDeCamadas.CAMADAS.length;
 		for (i=0; i<c; i += 1){
 			if(i3GEO.arvoreDeCamadas.CAMADAS[i].name === idtema){
