@@ -11,7 +11,7 @@ Licenca:
 
 GPL2
 
-I3Geo Interface Integrada de Ferramentas de Geoprocessamento para Internet
+i3Geo Interface Integrada de Ferramentas de Geoprocessamento para Internet
 
 Direitos Autorais Reservados (c) 2006 Ministério do Meio Ambiente Brasil
 Desenvolvedor: Edmar Moretti edmar.moretti@mma.gov.br
@@ -35,14 +35,14 @@ if(typeof(i3GEO) === 'undefined'){
 /*
 Classe: i3GEO.ajuda
 
-Manipulação das janelas de ajuda e outras coisas relacionadas.
+Manipulação das mensagens de ajuda.
 
 Permite definir a mensagem padrão da janela de mensagens. Abrir a janela e definir seu conteúdo.
 Controla também o letreiro móvel que mostra mensagens especiais definidas em cada layer adicionado ao mapa.
 
 Exemplos:
 
-	Se vc não quiser que a janela seja aberta, inclua em seu HTML ou javascript
+	Se vc não quiser que a janela de ajuda seja aberta, inclua em seu HTML ou javascript
 	
 	i3GEO.ajuda.ATIVAJANELA = false;
 	
@@ -150,24 +150,26 @@ i3GEO.ajuda = {
 	abreJanela: function(){
 		if(typeof(console) !== 'undefined'){console.info("i3GEO.ajuda.abreJanela()");}
 		try	{
-			var nx,ny,pos,corpo,texto,janela,largura=262;
-			if(i3GEO.ajuda.ATIVAJANELA === false){return;}
-			
-			if($i("contemFerramentas")){
-				largura = parseInt($i("contemFerramentas").style.width,10) - 3;
-			}			
+			var nx,ny,pos,corpo,texto,janela,temp,
+				largura=262,
+				YU = YAHOO.util;
+			if(this.ATIVAJANELA === false){return;}
+			temp = $i("contemFerramentas");
+			if(temp){
+				largura = parseInt(temp.style.width,10) - 3;
+			}
 			if(!$i("janelaMenTexto")){
 				corpo = $i(i3GEO.Interface.IDCORPO);
 				if(corpo){
-					pos = YAHOO.util.Dom.getXY(corpo);
+					pos = YU.Dom.getXY(corpo);
 					nx = pos[0] - largura - 3;
 					ny = i3GEO.parametros.h - 78;
 				}
 				texto = '<div id="janelaMenTexto" style="text-align:left;font-size:10px;color:rgb(80,80,80)">'+i3GEO.ajuda.MENSAGEMPADRAO+'</div>';
 				janela = i3GEO.janela.cria(largura,"auto","",nx,ny,"&nbsp;","i3geo_janelaMensagens",false,"hd","","",true);
 				janela[2].innerHTML = texto;
-				YAHOO.util.Event.addListener(janela[0].close, "click", i3GEO.ajuda.fechaJanela);
-				i3GEO.ajuda.ativaCookie();
+				YU.Event.addListener(janela[0].close, "click", i3GEO.ajuda.fechaJanela);
+				this.ativaCookie();
 			}
 		}
 		catch(e){
@@ -184,8 +186,9 @@ i3GEO.ajuda = {
 	Ativando-se o cookie, a janela de mensagens será aberta automaticamente a próxima vez que o i3geo for iniciado
 	*/
 	ativaCookie: function(){
-		i3GEO.util.insereCookie("g_janelaMen","sim");
-		i3GEO.util.insereCookie("botoesAjuda","sim");
+		var i = i3GEO.util.insereCookie;
+		i("g_janelaMen","sim");
+		i("botoesAjuda","sim");
 	},
 	/*
 	Function: ativaLetreiro
@@ -269,25 +272,26 @@ i3GEO.ajuda = {
 	*/
 	mostraJanela: function(texto){
 		if(typeof(console) !== 'undefined'){console.info("i3GEO.ajuda.mostraJanela()");}
-		var j = $i(i3GEO.ajuda.DIVAJUDA),
+		var j = $i(this.DIVAJUDA),
 			k = $i("janelaMenTexto"),
 			jm = $i("i3geo_janelaMensagens"),
-			h = parseInt(YAHOO.util.Dom.getStyle(jm,"height"),10),
+			Dom = YAHOO.util.Dom,
+			h = parseInt(Dom.getStyle(jm,"height"),10),
 			temp;
-	
 		if(j){
 			j.innerHTML = texto === "" ? "-" : texto;
 		}
 		else{
 			if(h)
-			{YAHOO.util.Dom.setY("i3geo_janelaMensagens",YAHOO.util.Dom.getY(jm) + h);}
-			if(k){k.innerHTML = texto;}
-			if(i3GEO.ajuda.TRANSICAOSUAVE){
-				temp = texto !== "" ? YAHOO.util.Dom.setStyle(jm,"opacity","1") : YAHOO.util.Dom.setStyle(jm,"opacity",(i3GEO.ajuda.OPACIDADE / 100));
+			{Dom.setY("i3geo_janelaMensagens",Dom.getY(jm) + h);}
+			if(k)
+			{k.innerHTML = texto;}
+			if(this.TRANSICAOSUAVE){
+				temp = texto !== "" ? Dom.setStyle(jm,"opacity","1") : Dom.setStyle(jm,"opacity",(this.OPACIDADE / 100));
 			}
-			h = parseInt(YAHOO.util.Dom.getStyle(jm,"height"),10);
+			h = parseInt(Dom.getStyle(jm,"height"),10);
 			if(h)
-			{YAHOO.util.Dom.setY(jm,YAHOO.util.Dom.getY(jm) - h);}
+			{Dom.setY(jm,Dom.getY(jm) - h);}
 		}
 	},
 	/*

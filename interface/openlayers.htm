@@ -221,35 +221,37 @@ i3GEO.arvoreDeCamadas.VERIFICAABRANGENCIATEMAS = true;
 //
 //esta é uma variável interna do OpenLayers que define o endereço do diretório onde estão as imagens usadas nos ícones
 //
-OpenLayers.ImgPath = "../pacotes/openlayers/img/"
+OpenLayers.ImgPath = "../pacotes/openlayers/img/";
 //
 //adiciona camadas que podem ser ativadas como fundo do mapa
 //
-var ims = new OpenLayers.Layer.ArcGIS93Rest( 
-	"ESRI Imagery World 2D",
-    "http://server.arcgisonline.com/ArcGIS/rest/services/ESRI_Imagery_World_2D/MapServer/export",
-	{},
-	{isBaseLayer:true,visibility:false}
-);
-var wsm = new OpenLayers.Layer.ArcGIS93Rest( 
-	"ESRI World Street Map",
-    "http://server.arcgisonline.com/ArcGIS/rest/services/ESRI_StreetMap_World_2D/MapServer/export",
-	{},
-	{isBaseLayer:true,visibility:false}
-);
-var bra = new OpenLayers.Layer.WMS( 
-	"Base carto MMA",
-    "http://mapas.mma.gov.br/cgi-bin/mapserv?map=/opt/www/html/webservices/baseraster.map",
-	{layers:"baseraster",srs:"EPSG:4291",format:"image/png",isBaseLayer:false},
-	{isBaseLayer:true,visibility:false}
-);
-var osm = new OpenLayers.Layer.WMS( 
-	"Open Street Map",
-    "http://full.wms.geofabrik.de/std/demo_key",
-	{layers:""},
-	{isBaseLayer:true,visibility:false}
-);
-i3GEO.Interface.openlayers.LAYERSADICIONAIS = [ims,wsm,bra,osm];
+(function(){
+	var ims = new OpenLayers.Layer.ArcGIS93Rest( 
+		"ESRI Imagery World 2D",
+		"http://server.arcgisonline.com/ArcGIS/rest/services/ESRI_Imagery_World_2D/MapServer/export",
+		{},
+		{isBaseLayer:true,visibility:false}
+	);
+	var wsm = new OpenLayers.Layer.ArcGIS93Rest( 
+		"ESRI World Street Map",
+		"http://server.arcgisonline.com/ArcGIS/rest/services/ESRI_StreetMap_World_2D/MapServer/export",
+		{},
+		{isBaseLayer:true,visibility:false}
+	);
+	var bra = new OpenLayers.Layer.WMS( 
+		"Base carto MMA",
+		"http://mapas.mma.gov.br/cgi-bin/mapserv?map=/opt/www/html/webservices/baseraster.map",
+		{layers:"baseraster",srs:"EPSG:4291",format:"image/png",isBaseLayer:false},
+		{isBaseLayer:true,visibility:false}
+	);
+	var osm = new OpenLayers.Layer.WMS( 
+		"Open Street Map",
+		"http://full.wms.geofabrik.de/std/demo_key",
+		{layers:""},
+		{isBaseLayer:true,visibility:false}
+	);
+	i3GEO.Interface.openlayers.LAYERSADICIONAIS = [ims,wsm,bra,osm];
+})();
 //
 //inicia o mapa
 //

@@ -148,6 +148,12 @@ i3GEO.janela = {
 	*/	
 	ULTIMOZINDEX : 0,
 	/*
+	Variavel: JANELASAGUARDE
+	
+	Guarda os ids das janelas 'aguarde' que foram abertos
+	*/
+	JANELASAGUARDE: [],
+	/*
 	Function: prepara
 	
 	Executa funções default antes de abrir a janela
@@ -204,9 +210,9 @@ i3GEO.janela = {
 	cria: function(wlargura,waltura,wsrc,nx,ny,texto,id,modal,classe,funcaoCabecalho,funcaoMinimiza){
 		if(typeof(console) !== 'undefined'){console.info("i3GEO.janela.cria()");}
 		var i,wlargurA ,ins,novoel,wdocaiframe,pos,temp,fix,underlay,ifr;
-		if(i3GEO.janela.ANTESCRIA){
-			for(i=0;i<i3GEO.janela.ANTESCRIA.length;i++)
-			{eval(i3GEO.janela.ANTESCRIA[i]);}
+		if(this.ANTESCRIA){
+			for(i=0;i<this.ANTESCRIA.length;i++)
+			{eval(this.ANTESCRIA[i]);}
 		}
 		//
 		//por default o id será 'wdoca'
@@ -253,7 +259,7 @@ i3GEO.janela = {
 		ins += texto;
 		if(funcaoMinimiza)
 		{ins += "<div id='"+id+"_minimizaCabecalho' class='container-minimiza'></div>";}
-		ins += '</div><div id="'+id+'_corpo" class="bd" style="'+i3GEO.janela.ESTILOBD+'">';
+		ins += '</div><div id="'+id+'_corpo" class="bd" style="'+this.ESTILOBD+'">';
 		if(wsrc !== "")
 		{ins += '<iframe name="'+id+'i" id="'+id+'i" valign="top" style="border:0px white solid"></iframe>';}
 		ins += '</div>';
@@ -262,7 +268,7 @@ i3GEO.janela = {
 		novoel.style.display="block";
 		novoel.style.border = "1px solid rgb(120 120 120)";
 		novoel.innerHTML = ins;
-		if(i3GEO.janela.TRANSICAOSUAVE){
+		if(this.TRANSICAOSUAVE){
 			novoel.onmouseover = function(){
 				YAHOO.util.Dom.setStyle(novoel,"opacity",1);
 			};
@@ -388,21 +394,18 @@ i3GEO.janela = {
 		//if($i("divGeometriasTemp"))
 		//{i3GEO.desenho.richdraw.fecha();}
 		//executa as funções de fechamento
-		if(i3GEO.janela.ANTESFECHA){
-			for(i=0;i<i3GEO.janela.ANTESFECHA.length;i++)
-			{eval(i3GEO.janela.ANTESFECHA[i]);}
+		if(this.ANTESFECHA){
+			for(i=0;i<this.ANTESFECHA.length;i++)
+			{eval(this.ANTESFECHA[i]);}
 		}
 		//YAHOO.janelaDoca.xp.panel.destroy();
 		if(this.id)
 		{id = this.id;}
 		else
 		{id = event.id;}
-		if($i(id+"_c"))
-		{document.body.removeChild($i(id+"_c"));}
-		if($i(id))
-		{document.body.removeChild($i(id));}
-		if($i(id+"_mask"))
-		{document.body.removeChild($i(id+"_mask"));}
+		i3GEO.util.removeChild(id+"_c");
+		i3GEO.util.removeChild(id);
+		i3GEO.util.removeChild(id+"_mask");
 		//
 		//remove script tag se houver
 		//
@@ -446,12 +449,10 @@ i3GEO.janela = {
 	*/
 	abreAguarde: function(id,texto){
 		if(typeof(console) !== 'undefined'){console.info("i3GEO.janela.abreAguarde()");}
-		var pos,index,contador;
+		var pos,index,contador,temp;
 		document.body.style.cursor = "wait";
-		if($i(id+"_mask"))
-		{document.body.removeChild($i(id+"_mask"));}
-		if($i(id+"_c"))
-		{document.body.removeChild($i(id+"_c"));}
+		i3GEO.util.removeChild(id+"_mask");
+		i3GEO.util.removeChild(id+"_c");
 		YAHOO.namespace("aguarde."+id);
 		pos = [0,0];
 		if($i(i3GEO.Interface.IDCORPO))
@@ -464,6 +465,7 @@ i3GEO.janela = {
 			contador = contador + ".";
 		}
 		eval('YAHOO.aguarde.'+id+' = new YAHOO.widget.Panel("'+id+'",{width:"240px",fixedcenter:false,underlay:"none",close:true,draggable:false,modal:'+i3GEO.janela.AGUARDEMODAL.toString()+',monitorresize:false})');
+		i3GEO.janela.JANELASAGUARDE.push(id);
 		if(i3GEO.janela.ESTILOAGUARDE === "normal" || i3GEO.janela.ESTILOAGUARDE === "reduzida"){
 			eval('YAHOO.aguarde.'+id+'.setBody(texto)');
 			eval('YAHOO.aguarde.'+id+'.body.style.padding="5px"');
@@ -478,9 +480,10 @@ i3GEO.janela = {
 		eval('YAHOO.aguarde.'+id+'.show()');
 		if($i(id+"_mask"))
 		{$i(id+"_mask").style.zIndex=25000;}
-		if($i(id+"_c")){
-			$i(id+"_c").style.zIndex=26000;
-			$i(id+"_c").style.backgroundColor = "";
+		temp = $i(id+"_c");
+		if(temp){
+			temp.style.zIndex=26000;
+			temp.style.backgroundColor = "";
 		}
 	},
 	/*
@@ -635,9 +638,8 @@ i3GEO.janela = {
 	id {String} - id da janela que será fechada. Se não for definido, tenta fechar as janelas principais.
 	*/
 	fechaAguarde: function(id){
-		if(typeof(console) !== 'undefined'){console.info("i3GEO.janela.fechaAguarde("+id+")");}
 		document.body.style.cursor = "default";
-		if(arguments.length > 0){
+		if(arguments.length > 0 && typeof(id) !== 'undefined'){
 			try{
 				if($i(id+"_c"))
 				{eval('YAHOO.aguarde.'+id+'.destroy()');}
@@ -652,30 +654,15 @@ i3GEO.janela = {
 		}
 		else{
 			try{
-				if($i("ajaxdestaca_c"))
-				{i3GEO.janela.fechaAguarde("ajaxdestaca");}
-				if($i("ajaxabrelente_c"))
-				{i3GEO.janela.fechaAguarde("ajaxabrelente");}
-				if($i("ajaxiniciaParametros_c"))
-				{i3GEO.janela.fechaAguarde("ajaxiniciaParametros");}
-				if($i("i3GEO.atualiza_c"))
-				{i3GEO.janela.fechaAguarde("i3GEO.atualiza");}
-				if($i("ajaxCorpoMapaEntorno_c"))
-				{i3GEO.janela.fechaAguarde("ajaxCorpoMapaEntorno");}
-				if($i("ajaxCorpoMapa_c"))
-				{i3GEO.janela.fechaAguarde("ajaxCorpoMapa");}
-				if($i("ajaxLegenda_c"))
-				{i3GEO.janela.fechaAguarde("ajaxLegenda");}
-				if($i("ajaxReferencia_c"))
-				{i3GEO.janela.fechaAguarde("ajaxReferencia");}
-				if($i("ajaxEscalaGrafica_c"))
-				{i3GEO.janela.fechaAguarde("ajaxEscalaGrafica");}
-				if($i("montaMapa_c"))
-				{i3GEO.janela.fechaAguarde("montaMapa");}
-				if($i("aguardedoc_c"))
-				{i3GEO.janela.fechaAguarde("aguardedoc");}
-				if($i("ajaxCorpoMapa1_c"))
-				{i3GEO.janela.fechaAguarde("ajaxCorpoMapa1");}
+				var id,i,n = this.JANELASAGUARDE.length;
+				for(i=0;i<n;i += 1){
+					id = this.JANELASAGUARDE[i];
+					if($i(id+"_c"))
+					{eval('YAHOO.aguarde.'+id+'.destroy()');}
+					i3GEO.util.removeChild(id+"_c");
+					i3GEO.util.removeChild(id+"_mask");			
+				}
+				this.JANELASAGUARDE = [];
 			}
 			catch(e){
 				if(typeof(console) !== 'undefined'){console.error(e);}

@@ -263,76 +263,79 @@ i3GEO = {
 		if(typeof("i3GEOmantemCompatibilidade") === 'function')
 		{i3GEOmantemCompatibilidade();}
 		montaMapa = function(retorno){
-			var tempo,titulo,temp,abreJM;
-			if(retorno === ""){
-				alert("Ocorreu um erro no mapa - montaMapa");
-				retorno = {data:{erro: "erro"}};
-			}
-			if(retorno.data.erro){
-				i3GEO.janela.fechaAguarde("montaMapa");
-				document.body.style.backgroundColor="white";
-				document.body.innerHTML = "<br>Para abrir o i3Geo utilize o link:<br><a href="+i3GEO.configura.locaplic+"/ms_criamapa.php >"+i3GEO.configura.locaplic+"/ms_criamapa.php</a>";
-				return("linkquebrado");
-			}
-			else{
-				if(retorno.data.variaveis){
-					i3GEO.parametros = retorno.data.variaveis;
-					//
-					//converte string em número
-					//
-					i3GEO.parametros.mapscale = i3GEO.parametros.mapscale*1;
-					i3GEO.parametros.mapres = i3GEO.parametros.mapres*1;
-					i3GEO.parametros.pixelsize = i3GEO.parametros.pixelsize*1;
-					i3GEO.parametros.w = i3GEO.parametros.w*1;
-					i3GEO.parametros.h = i3GEO.parametros.h*1;
-					//					
-					i3GEO.arvoreDeCamadas.CAMADAS = retorno.data.temas;
-					if(retorno.data.variaveis.navegacaoDir === "sim")
-					{i3GEO.arvoreDeTemas.OPCOESADICIONAIS.navegacaoDir = true;}
-					//
-					//na interface padrão é necessário executar a atualização pois a geração do mapa
-					//ainda não foi feita
-					//
-					if(i3GEO.Interface.ATUAL === "padrao")
-					{i3GEO.atualiza(retorno);}
-					//
-					//calcula (opcional) o tamanho correto da tabela onde fica o mapa
-					//se não for feito esse cálculo, o mapa fica ajustado à esquerda
-					//				
-					temp = 0;
-					if ($i("contemFerramentas")){temp = temp + parseInt($i("contemFerramentas").style.width,10);}
-					if ($i("ferramentas")){temp = temp + parseInt($i("ferramentas").style.width,10);}
-					if($i("mst"))
-					{$i("mst").style.width=i3GEO.parametros.w + temp + "px";}
-					
-					i3GEO.Interface.inicia();
+			try{
+				var tempo,titulo,temp,abreJM;
+				if(retorno === ""){
+					alert("Ocorreu um erro no mapa - montaMapa");
+					retorno = {data:{erro: "erro"}};
 				}
-				else
-				{alert("Erro. Impossivel criar o mapa "+retorno.data);return;}
-				//
-				//ativa a janela de mensagens se for o caso
-				//
-				if($i("ajuda")) //para efeitos de compatibilidade com as versões anteriores a 4.1
-				{i3GEO.ajuda.DIVAJUDA = "ajuda";}
-				abreJM = "sim";
-				if(i3GEO.util.pegaCookie("botoesAjuda")){
-					abreJM = i3GEO.util.pegaCookie("botoesAjuda");
-					i3GEO.barraDeBotoes.AJUDA = (abreJM === "sim") ? true : false;
-				}				
-				//if(i3GEO.util.pegaCookie("botoesAjuda") === "nao")
-				//{i3GEO.barraDeBotoes.AJUDA = false;}
-				abreJM = "sim";
-				if(i3GEO.util.pegaCookie("g_janelaMen")){
-					abreJM = i3GEO.util.pegaCookie("g_janelaMen");
-					i3GEO.configura.iniciaJanelaMensagens = (abreJM === "sim") ? true : false;
+				if(retorno.data.erro){
+					i3GEO.janela.fechaAguarde("montaMapa");
+					document.body.style.backgroundColor="white";
+					document.body.innerHTML = "<br>Para abrir o i3Geo utilize o link:<br><a href="+i3GEO.configura.locaplic+"/ms_criamapa.php >"+i3GEO.configura.locaplic+"/ms_criamapa.php</a>";
+					return("linkquebrado");
 				}
-				if(i3GEO.configura.iniciaJanelaMensagens === true)
-				{i3GEO.ajuda.abreJanela();}		
-				i3GEO.janela.fechaAguarde("montaMapa");
-				if (i3GEO.configura.liberaGuias === "sim")
-				{i3GEO.guias.libera();}
+				else{
+					if(retorno.data.variaveis){
+						i3GEO.parametros = retorno.data.variaveis;
+						//
+						//converte string em número
+						//
+						i3GEO.parametros.mapscale = i3GEO.parametros.mapscale*1;
+						i3GEO.parametros.mapres = i3GEO.parametros.mapres*1;
+						i3GEO.parametros.pixelsize = i3GEO.parametros.pixelsize*1;
+						i3GEO.parametros.w = i3GEO.parametros.w*1;
+						i3GEO.parametros.h = i3GEO.parametros.h*1;
+						//					
+						i3GEO.arvoreDeCamadas.CAMADAS = retorno.data.temas;
+						if(retorno.data.variaveis.navegacaoDir === "sim")
+						{i3GEO.arvoreDeTemas.OPCOESADICIONAIS.navegacaoDir = true;}
+						//
+						//na interface padrão é necessário executar a atualização pois a geração do mapa
+						//ainda não foi feita
+						//
+						if(i3GEO.Interface.ATUAL === "padrao")
+						{i3GEO.atualiza(retorno);}
+						//
+						//calcula (opcional) o tamanho correto da tabela onde fica o mapa
+						//se não for feito esse cálculo, o mapa fica ajustado à esquerda
+						//				
+						temp = 0;
+						if ($i("contemFerramentas")){temp = temp + parseInt($i("contemFerramentas").style.width,10);}
+						if ($i("ferramentas")){temp = temp + parseInt($i("ferramentas").style.width,10);}
+						if($i("mst"))
+						{$i("mst").style.width=i3GEO.parametros.w + temp + "px";}
+						
+						i3GEO.Interface.inicia();
+					}
+					else
+					{alert("Erro. Impossivel criar o mapa "+retorno.data);return;}
+					//
+					//ativa a janela de mensagens se for o caso
+					//
+					if($i("ajuda")) //para efeitos de compatibilidade com as versões anteriores a 4.1
+					{i3GEO.ajuda.DIVAJUDA = "ajuda";}
+					abreJM = "sim";
+					if(i3GEO.util.pegaCookie("botoesAjuda")){
+						abreJM = i3GEO.util.pegaCookie("botoesAjuda");
+						i3GEO.barraDeBotoes.AJUDA = (abreJM === "sim") ? true : false;
+					}				
+					//if(i3GEO.util.pegaCookie("botoesAjuda") === "nao")
+					//{i3GEO.barraDeBotoes.AJUDA = false;}
+					abreJM = "sim";
+					if(i3GEO.util.pegaCookie("g_janelaMen")){
+						abreJM = i3GEO.util.pegaCookie("g_janelaMen");
+						i3GEO.configura.iniciaJanelaMensagens = (abreJM === "sim") ? true : false;
+					}
+					if(i3GEO.configura.iniciaJanelaMensagens === true)
+					{i3GEO.ajuda.abreJanela();}		
+					i3GEO.janela.fechaAguarde("montaMapa");
+					if (i3GEO.configura.liberaGuias === "sim")
+					{i3GEO.guias.libera();}
+				}
+				if($i("mst")){$i("mst").style.visibility ="visible";}
 			}
-			if($i("mst")){$i("mst").style.visibility ="visible";}	
+			catch(e){alert(e);}
 		};
 		if (!$i("i3geo"))
 		{document.body.id = "i3geo";}

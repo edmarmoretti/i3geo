@@ -68,14 +68,12 @@ i3GEO.calculo = {
 	{Numeric} - Coordenada em décimos de grau.
 	*/
 	dms2dd: function(cd,cm,cs){
-		try
-		{
+		try{
 			//YAHOO.log("dms2dd", "i3geo");
 			//converte dms em dd
 			var sinal,spm,mpg,dd;
 			sinal = 'positivo';
-			if (cd < 0)
-			{
+			if (cd < 0){
 				cd = cd * -1;
 				sinal = 'negativo';
 			}
@@ -138,7 +136,6 @@ i3GEO.calculo = {
 			vx = (vx * 1) - (imgext[0] * 1);
 			vy = (vy * -1) + (imgext[3] * 1);
 			c = cellsize * 1;
-			//var xy = [];
 			return [(vx  / c) + pos[0],(vy / c) + pos[1]];
 		}
 		catch(e){return([]);}

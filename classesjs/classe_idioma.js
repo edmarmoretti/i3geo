@@ -114,7 +114,7 @@ i3GEO.idioma = {
 	*/
 	define: function(codigo) {
 		if(typeof(console) !== 'undefined'){console.info("i3GEO.idioma.define()");}
-		i3GEO.idioma.ATUAL = codigo;
+		this.ATUAL = codigo;
 		i3GEO.util.insereCookie("i3geolingua",codigo);
 	},
 	/*
@@ -126,7 +126,7 @@ i3GEO.idioma = {
 	{string} Código do idioma.
 	*/	
 	retornaAtual: function() {
-		return (i3GEO.idioma.ATUAL);
+		return (this.ATUAL);
 	},
 	/*
 	Function: defineDicionario
@@ -153,7 +153,7 @@ i3GEO.idioma = {
 	}
 	*/
 	defineDicionario: function(obj) {
-		i3GEO.idioma.DICIONARIO = obj;
+		this.DICIONARIO = obj;
 	},
 	/*
 	Function: alteraDicionario
@@ -168,7 +168,7 @@ i3GEO.idioma = {
      
 	*/
 	alteraDicionario: function(id,novo) {
-		i3GEO.idioma.DICIONARIO[id][0][i3GEO.idioma.ATUAL] = novo;
+		this.DICIONARIO[id][0][i3GEO.idioma.ATUAL] = novo;
 	},
 	/*
 	Function: traduzir
@@ -220,7 +220,7 @@ i3GEO.idioma = {
 		for (var k in novodic)
 		{
 			if(novodic.hasOwnProperty(k))
-			{i3GEO.idioma.DICIONARIO[k] = novodic[k];}
+			{this.DICIONARIO[k] = novodic[k];}
 		}
 	},
 	/*
@@ -231,8 +231,8 @@ i3GEO.idioma = {
 	mostraDicionario: function() {
 		var w,k;
 		w = window.open();
-		for (k in i3GEO.idioma.DICIONARIO){
-			if(i3GEO.idioma.DICIONARIO.hasOwnProperty(k))
+		for (k in this.DICIONARIO){
+			if(this.DICIONARIO.hasOwnProperty(k))
 			{w.document.write(k+" = "+i3GEO.idioma.traduzir(k)+"<br>");}
 		}
 	},
@@ -262,7 +262,7 @@ i3GEO.idioma = {
 	{Array} Array com os códigos de idioma disponíveis.
 	*/
 	listaIdiomas: function() {
-		for(var k in i3GEO.idioma.DICIONARIO){
+		for(var k in this.DICIONARIO){
 			if(i3GEO.idioma.DICIONARIO.hasOwnProperty(k))
 			{return (i3GEO.util.listaChaves(i3GEO.idioma.DICIONARIO[k][0]));}
 		}
@@ -277,29 +277,30 @@ i3GEO.idioma = {
 	*/
 	mostraSeletor: function(){
 		if(typeof(console) !== 'undefined'){console.info("i3GEO.idioma.mostraSeletor()");}
-		if(!i3GEO.idioma.MOSTRASELETOR){return;}
+		if(!this.MOSTRASELETOR){return;}
 		//
 		//monta o elemento HTML com as bandeiras
 		//
-		var ins,n,w,i,pos,novoel;
+		var ins,n,w,i,pos,novoel,temp;
 		ins = "";
-		n = i3GEO.idioma.SELETORES.length;
+		n = this.SELETORES.length;
 		if($i("i3geo") && i3GEO.parametros.w < 550)
 		{w = "width:12px;";}
 		else {w = "";}
 		for(i=0;i<n;i++){
-			ins += '<img  style="'+w+'padding:0 0px;top:-7px;padding-right:0px;border: 1px solid white;" src="'+i3GEO.util.$im("branco.gif")+'" onclick="i3GEO.idioma.trocaIdioma(\''+i3GEO.idioma.SELETORES[i]+'\')" ';
-			if(i3GEO.idioma.SELETORES[i] === "en")
+			temp = i3GEO.idioma.SELETORES[i];
+			ins += '<img  style="'+w+'padding:0 0px;top:-7px;padding-right:0px;border: 1px solid white;" src="'+i3GEO.util.$im("branco.gif")+'" onclick="i3GEO.idioma.trocaIdioma(\''+temp+'\')" ';
+			if(temp === "en")
 			{ins += 'alt="Ingles" id="uk" />';}
-			if(i3GEO.idioma.SELETORES[i] === "pt")
+			if(temp === "pt")
 			{ins += 'alt="Portugues" id="brasil" />';}
-			if(i3GEO.idioma.SELETORES[i] === "es")
+			if(temp === "es")
 			{ins += 'alt="Espanhol" id="espanhol" />';}
-			if(i3GEO.idioma.SELETORES[i] === "it")
+			if(temp === "it")
 			{ins += 'alt="Italiano" id="italiano" />';}
 		}
-		if(i3GEO.idioma.IDSELETOR !== "" && $i(i3GEO.idioma.IDSELETOR))
-		{$i(i3GEO.idioma.IDSELETOR).innerHTML = ins;}
+		if(this.IDSELETOR !== "" && $i(this.IDSELETOR))
+		{$i(this.IDSELETOR).innerHTML = ins;}
 		else{
 			pos = i3GEO.util.pegaPosicaoObjeto($i(i3GEO.Interface.IDCORPO));
 			if(!$i("i3geoseletoridiomas")){

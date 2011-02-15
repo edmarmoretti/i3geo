@@ -55,15 +55,15 @@ function RichDrawEditor(elem, renderer) {
   this.renderer.init(this.container);
   this.fecha = function()
   {
-  	pontosdistobj = new pontosdist();
+  	//pontosdistobj = new pontosdist();
   	elem.innerHTML = "";
   	elem.style.display="none";
-  	if(g_tipoacao == "mede")
-  	{mudaiconf("pan");}
-  	if(document.getElementById("mostradistancia"))
-  	{document.getElementById("mostradistancia").style.display="none";}
-	if(document.getElementById("mostraarea"))
-  	{document.getElementById("mostraarea").style.display="none";}	
+  	//if(g_tipoacao == "mede")
+  	//{mudaiconf("pan");}
+  	//if(document.getElementById("mostradistancia"))
+  	//{document.getElementById("mostradistancia").style.display="none";}
+	//if(document.getElementById("mostraarea"))
+  	//{document.getElementById("mostraarea").style.display="none";}	
   }
 
 /*

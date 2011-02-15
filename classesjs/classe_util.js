@@ -2076,6 +2076,7 @@ i3GEO.util = {
 		coordx = box1[0]*1;
 		coordy = box1[1]*1;
 		if(coordx >= box2[0]*1 && coordx <= box2[2]*1 && coordy >= box2[1]*1 && coordy <= box2[3]*1){
+			return true;
 			coordx = box1[0]*1;
 			coordy = box1[3]*1;
 		}
@@ -2096,6 +2097,7 @@ i3GEO.util = {
 		coordx = box1[0]*1;
 		coordy = box1[1]*1;
 		if(coordx >= box2[0]*1 && coordx <= box2[2]*1 && coordy >= box2[1]*1 && coordy <= box2[3]*1){
+			return true;
 			coordx = box1[0]*1;
 			coordy = box1[3]*1;
 		}
@@ -2247,6 +2249,26 @@ i3GEO.util = {
 		try
 		{eval("$i('"+id+"')."+prop+"='"+valor+"';");}
 		catch(e){}
+	},
+	/*
+	Function: in_array
+	
+	Procura a ocorrência de um elemento em um array
+	
+	Parametros:
+	
+	x - o que será procurado
+	
+	matriz - array
+	
+	Return:
+	
+	{boolean}
+	*/
+	in_array: function(x, matriz){
+		var txt = "¬" + matriz.join("¬") + "¬";
+		var er = new RegExp ("¬" + x + "¬", "gim");
+		return ( (txt.match (er)) ? true : false );
 	}
 };
 //++++++++++++++++++++++++++++++++++++

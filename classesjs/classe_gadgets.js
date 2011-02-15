@@ -132,9 +132,9 @@ i3GEO.gadgets = {
 	mostraVersao: function(id){
 		if(typeof(console) !== 'undefined'){console.info("i3GEO.gadgets.mostraVersão()");}
 		if(arguments.length === 0 || id === "")
-		{id = i3GEO.gadgets.PARAMETROS.mostraVersao.idhtml;}
+		{id = this.PARAMETROS.mostraVersao.idhtml;}
 		else
-		{i3GEO.gadgets.PARAMETROS.mostraVersao.idhtml = id;}
+		{this.PARAMETROS.mostraVersao.idhtml = id;}
 		i3GEO.util.defineValor(id,"innerHTML",i3GEO.parametros.mensageminicia);
 	},
 	/*
@@ -176,7 +176,7 @@ i3GEO.gadgets = {
 		if(typeof(console) !== 'undefined'){console.info("i3GEO.gadgets.mostraInserirKml()");}
 		var i,ins,temp;
 		if(arguments.length === 0)
-		{id = i3GEO.gadgets.PARAMETROS.mostraInserirKml.idhtml;}
+		{id = this.PARAMETROS.mostraInserirKml.idhtml;}
 		if($i(id)){
 			if(!$i("i3geo_urlkml")){
 				i = $inputText(id,"280","i3geo_urlkml","kml url","40","");
@@ -206,7 +206,7 @@ i3GEO.gadgets = {
 		if(typeof(console) !== 'undefined'){console.info("i3GEO.gadgets.mostraEscalaNumerica()");}
 		var i,ins,temp;
 		if(arguments.length === 0)
-		{id = i3GEO.gadgets.PARAMETROS.mostraEscalaNumerica.idhtml;}
+		{id = this.PARAMETROS.mostraEscalaNumerica.idhtml;}
 		if($i(id)){
 			$i(id).style.display = "block";
 			atualizaEscalaNumerica = function(escala){
@@ -257,7 +257,7 @@ i3GEO.gadgets = {
 	mostraEscalaGrafica: function(id){
 		if(typeof(console) !== 'undefined'){console.info("i3GEO.gadgets.mostraEscalaGrafica()");}
 		if(arguments.length === 0)
-		{id = i3GEO.gadgets.PARAMETROS.mostraEscalaGrafica.idhtml;}
+		{id = this.PARAMETROS.mostraEscalaGrafica.idhtml;}
 		var e,temp,ins;
 		if($i(id)){
 			atualizaEscalaGrafica = function(){
@@ -299,7 +299,7 @@ i3GEO.gadgets = {
 		if(typeof(console) !== 'undefined'){console.info("i3GEO.gadgets.mostraBuscaRapida()");}
 		var i,ins,temp;
 		if(arguments.length === 0)
-		{id = i3GEO.gadgets.PARAMETROS.mostraBuscaRapida.idhtml;}
+		{id = this.PARAMETROS.mostraBuscaRapida.idhtml;}
 		if($i(id)){
 			i3geo_buscaRapida = function(){
 				if ($i("valorBuscaRapida").value === "")
@@ -765,10 +765,11 @@ i3GEO.gadgets = {
 	mostraMenuSuspenso: function(id){
 		if(typeof(console) !== 'undefined'){console.info("i3GEO.gadgets.mostraMenuSuspenso()");}
 		if(arguments.length === 0)
-		{id = i3GEO.gadgets.PARAMETROS.mostraMenuSuspenso.idhtml;}
+		{id = this.PARAMETROS.mostraMenuSuspenso.idhtml;}
 		else
-		{i3GEO.gadgets.PARAMETROS.mostraMenuSuspenso.idhtml = id;}
-		var objid,ins,sobe,alinhamento,n,i,estilo,t,onMenuBarBeforeRender,temp,ifr;
+		{this.PARAMETROS.mostraMenuSuspenso.idhtml = id;}
+		var objid,ins,sobe,alinhamento,n,i,estilo,t,onMenuBarBeforeRender,temp,ifr,
+			MM = YAHOO.widget.MenuManager;
 		objid = $i(id);
 		if(objid){
 			objid.className="yuimenubar";
@@ -777,28 +778,28 @@ i3GEO.gadgets = {
 			}
 			//default dos cabeçalhos se a variável i3GEO.configura.oMenuData.menu não existir
 			if(!i3GEO.configura.oMenuData.menu){
-				ins = "";
-				ins += '<div class="bd" style="display:block;align:right;border: 0px solid white;z-index:6000;line-height:1.4" >';
-				ins += '<ul class="first-of-type" style="display:block;border:0px solid white;top:10px;">';
+				ins = '<div class="bd" style="display:block;align:right;border: 0px solid white;z-index:6000;line-height:1.4" >' +
+					'<ul class="first-of-type" style="display:block;border:0px solid white;top:10px;">';
 				sobe = "";
-				if(navn){sobe = "line-height:0px;";}
-				ins += '<li class="yuimenubaritem" style="padding-bottom:5px" ><a style="border: 0px solid white;" href="#" class="yuimenubaritemlabel" id="menuajuda" >&nbsp;&nbsp;'+$trad("s1")+'</a></li>';
-				ins += '<li class="yuimenubaritem" style="padding-bottom:5px"><a style="border: 0px solid white;" href="#" class="yuimenubaritemlabel" id="menuanalise" >&nbsp;&nbsp;'+$trad("s2")+'</a></li>';
-				ins += '<li class="yuimenubaritem" style="padding-bottom:5px"><a style="border: 0px solid white;" href="#" class="yuimenubaritemlabel" id="menujanelas" >&nbsp;&nbsp;'+$trad("s3")+'</a></li>';
-				ins += '<li class="yuimenubaritem" style="padding-bottom:5px"><a style="border: 0px solid white;" href="#" class="yuimenubaritemlabel" id="menuarquivos" >&nbsp;&nbsp;'+$trad("s4")+'</a></li>';
-				ins += '<li class="yuimenubaritem" style="padding-bottom:5px"><a style="border: 0px solid white;" href="#" class="yuimenubaritemlabel" id="menuinterface" >&nbsp;&nbsp;'+$trad("d27")+'</a></li>';
-				ins += '</ul>'; 
-				ins += '</div>';
+				if(navn)
+				{sobe = "line-height:0px;";}
+				ins += '<li class="yuimenubaritem" style="padding-bottom:5px" ><a style="border: 0px solid white;" href="#" class="yuimenubaritemlabel" id="menuajuda" >&nbsp;&nbsp;'+$trad("s1")+'</a></li>' +
+					'<li class="yuimenubaritem" style="padding-bottom:5px"><a style="border: 0px solid white;" href="#" class="yuimenubaritemlabel" id="menuanalise" >&nbsp;&nbsp;'+$trad("s2")+'</a></li>' +
+					'<li class="yuimenubaritem" style="padding-bottom:5px"><a style="border: 0px solid white;" href="#" class="yuimenubaritemlabel" id="menujanelas" >&nbsp;&nbsp;'+$trad("s3")+'</a></li>' +
+					'<li class="yuimenubaritem" style="padding-bottom:5px"><a style="border: 0px solid white;" href="#" class="yuimenubaritemlabel" id="menuarquivos" >&nbsp;&nbsp;'+$trad("s4")+'</a></li>' +
+					'<li class="yuimenubaritem" style="padding-bottom:5px"><a style="border: 0px solid white;" href="#" class="yuimenubaritemlabel" id="menuinterface" >&nbsp;&nbsp;'+$trad("d27")+'</a></li>' +
+					'</ul>' +
+					'</div>';
 				objid.innerHTML=ins;
 			}
 			else{
 				ins = "";
 				alinhamento = "";
-				if(i3GEO.gadgets.PARAMETROS.mostraMenuSuspenso.deslocaEsquerda){
-					alinhamento = "left:"+i3GEO.gadgets.PARAMETROS.mostraMenuSuspenso.deslocaEsquerda*-1+"px;";
+				if(this.PARAMETROS.mostraMenuSuspenso.deslocaEsquerda){
+					alinhamento = "left:"+this.PARAMETROS.mostraMenuSuspenso.deslocaEsquerda*-1+"px;";
 				}
-				ins += '<div class="bd" style="top:0px;'+alinhamento+'display:block;align:right;border: 0px solid white;z-index:6000;line-height:1.4" >';
-				ins += '<ul class="first-of-type" style="display:block;border:0px solid white;top:10px;">';
+				ins += '<div class="bd" style="top:0px;'+alinhamento+'display:block;align:right;border: 0px solid white;z-index:6000;line-height:1.4" >' +
+					'<ul class="first-of-type" style="display:block;border:0px solid white;top:10px;">';
 				n = i3GEO.configura.oMenuData.menu.length;
 				for(i = 0;i < n;i++){
 					if(i3GEO.parametros.w < 550){
@@ -842,7 +843,7 @@ i3GEO.gadgets = {
 			else
 			{ifr = false;}
 			i3GEOoMenuBar=new YAHOO.widget.MenuBar(id,{iframe:ifr,autosubmenudisplay: true, showdelay: 100, hidedelay: 500, lazyload: false});
-			YAHOO.widget.MenuManager.addMenu(i3GEOoMenuBar);
+			MM.addMenu(i3GEOoMenuBar);
 			i3GEOoMenuBar.beforeRenderEvent.subscribe(onMenuBarBeforeRender);
 			i3GEOoMenuBar.render();
 			//
@@ -850,19 +851,19 @@ i3GEO.gadgets = {
 			//
 			try{
 				if(i3GEO.Interface.ATUAL === "padrao" && $i("omenudataInterface1")){
-					YAHOO.widget.MenuManager.getMenuItem("omenudataInterface1").cfg.setProperty("checked", true);
+					MM.getMenuItem("omenudataInterface1").cfg.setProperty("checked", true);
 				}
 				if(i3GEO.Interface.ATUAL === "openlayers" && $i("omenudataInterface2")){
-					YAHOO.widget.MenuManager.getMenuItem("omenudataInterface2").cfg.setProperty("checked", true);
+					MM.getMenuItem("omenudataInterface2").cfg.setProperty("checked", true);
 				}
 				if(i3GEO.Interface.ATUAL === "flamingo" && $i("omenudataInterface3")){
-					YAHOO.widget.MenuManager.getMenuItem("omenudataInterface3").cfg.setProperty("checked", true);
+					MM.getMenuItem("omenudataInterface3").cfg.setProperty("checked", true);
 				}
 				if(i3GEO.Interface.ATUAL === "googlemaps" && $i("omenudataInterface4")){
-					YAHOO.widget.MenuManager.getMenuItem("omenudataInterface4").cfg.setProperty("checked", true);
+					MM.getMenuItem("omenudataInterface4").cfg.setProperty("checked", true);
 				}
 				if(i3GEO.Interface.ATUAL === "googleearth" && $i("omenudataInterface5")){
-					YAHOO.widget.MenuManager.getMenuItem("omenudataInterface5").cfg.setProperty("checked", true);
+					MM.getMenuItem("omenudataInterface5").cfg.setProperty("checked", true);
 				}
 			}catch(e){
 				if(typeof(console) !== 'undefined'){console.warning("i3GEO.gadgets.mostraMenuSuspenso() "+ e);}
@@ -871,10 +872,10 @@ i3GEO.gadgets = {
 			//desabilita opções em interfaces específicas
 			//
 			if(i3GEO.Interface.ATUAL !== "padrao" && $i("omenudataArquivos3")){
-				YAHOO.widget.MenuManager.getMenuItem("omenudataArquivos3").cfg.setProperty("disabled", true);
+				MM.getMenuItem("omenudataArquivos3").cfg.setProperty("disabled", true);
 			}
 			if(i3GEO.Interface.ATUAL === "googleearth" && $i("omenudataJanelas1")){
-				YAHOO.widget.MenuManager.getMenuItem("omenudataJanelas1").cfg.setProperty("disabled", true);
+				MM.getMenuItem("omenudataJanelas1").cfg.setProperty("disabled", true);
 			}			
 			//
 			//corrige problemas de estilo
