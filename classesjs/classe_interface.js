@@ -48,99 +48,99 @@ O HTML deve conter as definições da interface criada e deve estar armazenado em 
 i3GEO.Interface = {
 	/*
 	Propriedade: OUTPUTFORMAT
-	
+
 	Formato de geração da imagem.
-	
+
 	Os formatos devem estar definidos no mapfile geral1windows.map e geral1.map. A definição dessa variável não afeta a interface padrão, que utiliza a definição que estiver ativa nos mapfiles de inicialização.
-	
+
 	Tipo:
 	{MAPSERVER OUTPUTFORMAT}
-	
+
 	Default:
 	{"AGG_Q"}
 	*/
 	OUTPUTFORMAT: "AGG_Q",
 	/*
 	Propriedade: BARRABOTOESTOP
-	
+
 	Distância da barra de botões em ralação ao topo do mapa.
-	
+
 	Tipo:
 	{number}
-	
+
 	Default:
 	{12}
 	*/
 	BARRABOTOESTOP: 12,
 	/*
 	Propriedade: BARRABOTOESLEFT
-	
+
 	Distância da barra de botões em ralação ao lado esquerdo do mapa.
-	
+
 	Tipo:
 	{number}
-	
+
 	Default:
 	{3}
 	*/
-	BARRABOTOESLEFT: 3,	
+	BARRABOTOESLEFT: 3,
 	/*
 	Propriedade: BARRAZOOMTOP
-	
+
 	Distância da barra de zoom em ralação ao topo do mapa.
-	
+
 	Tipo:
 	{number}
-	
+
 	Default:
 	{12}
 	*/
 	BARRAZOOMTOP: 7,
 	/*
 	Propriedade: BARRAZOOMLEFT
-	
+
 	Distância da barra de zoom em ralação ao lado esquerdo do mapa.
-	
+
 	Tipo:
 	{number}
-	
+
 	Default:
 	{3}
 	*/
 	BARRAZOOMLEFT: 10,
 	/*
 	Propriedade: ATUAL
-	
+
 	Interface utilizada na criação e controle do mapa.
-	
+
 	Veja como usar nos arquivos de apresentação do mapa existentes no diretório i3geo/interface
-	
+
 	O i3Geo, além da interface própria, permite o uso de outras APIs
 	para a construção do mapa, como Google Maps ou Openlayers. Essa propriedade define qual interface será usada.
 	Não confundir com o nome do HTML que é utilizado para mostrar o mapa.
-	
+
 	Para definir a interface, utilize
-	
+
 	i3GEO.Interface.ATUAL = "<valor>"
-	
+
 	Tipo:
 	{string}
-	
+
 	Valores:
 	{geral|openlayers|flamingo|googlemaps|googleearth}
-	
+
 	Default:
 	{"padrao"}
 	*/
 	ATUAL: "padrao",
 	/*
 	Propriedade: IDCORPO
-	
+
 	ID do elemento HTML que receberá o corpo do mapa
-	
+
 	Tipo:
 	{string}
-	
+
 	Default:
 	{"corpoMapa"}
 	*/
@@ -159,21 +159,21 @@ i3GEO.Interface = {
 	ATIVAMENUCONTEXTO: false,
 	/*
 	Variavel: IDMAPA
-	
+
 	ID do elemento HTML criado para conter o mapa
-	
+
 	Esse elemento normalmente é criado dentro de IDCORPO dependendo da interface
 	*/
 	IDMAPA: "",
 	/*
 	Variavel: STATUS
-	
+
 	Indica o status atual do mapa.
-	
+
 	É utilizado para verificar o status do mapa e bloquear ou não determinadas funções.
-	
+
 	Por exemplo, na interface OpenLayers, identifica se as camadas estão sendo atualizadas
-	
+
 	STATUS = {
 		atualizando: new Array() //guarda os códigos dos layers que estão sendo redesenhados
 	}
@@ -183,7 +183,7 @@ i3GEO.Interface = {
 	},
 	/*
 	Function: redesenha
-	
+
 	Aplica o método redesenha da interface atual. Em alguns casos, a função de redesenho aplica os mesmos
 	processos da função de atualizar o mapa. Isso ocorre pq em alguns casos as funções são otimizadas para cada
 	situação
@@ -194,7 +194,7 @@ i3GEO.Interface = {
 	},
 	/*
 	Function: atualizaMapa
-	
+
 	Aplica o método atualizaMapa da interface atual. Em alguns casos, a função de redesenho aplica os mesmos
 	processos da função de atualizar o mapa. Isso ocorre pq em alguns casos as funções são otimizadas para cada
 	situação
@@ -211,16 +211,16 @@ i3GEO.Interface = {
 			default:
 				i3GEO.Interface[i3GEO.Interface.ATUAL].redesenha();
 		}
-	},	
+	},
 	/*
 	Function: atualizaTema
-	
+
 	Aplica o método atualizaTema da interface atual
-	
+
 	Parametros:
-	
+
 	retorno {JSON} - objeto JSON com os parâmetros obtidos da função PHP de redesenho do mapa
-	
+
 	tema {string} - código do tema
 	*/
 	atualizaTema: function(retorno,tema){
@@ -235,7 +235,7 @@ i3GEO.Interface = {
 	},
 	/*
 	Function: adicionaKml
-	
+
 	Aplica o método de adição de kml ao mapa conforme a interface atual
 	*/
 	adicionaKml: function(){
@@ -247,15 +247,15 @@ i3GEO.Interface = {
 	},
 	/*
 	Function: cria
-	
+
 	Cria ou altera os elementos HTML necessários para a interface
-	
+
 	Essa função é executada na inicialização do i3geo
-	
+
 	Parametros:
-	
+
 	w {Integer} - largura do corpo do mapa em pixels
-	
+
 	h {Integer} - altura do corpo do mapa em pixels
 	*/
 	cria: function(w,h){
@@ -264,7 +264,7 @@ i3GEO.Interface = {
 	},
 	/*
 	Function: inicia
-	
+
 	Inicia a interface
 	*/
 	inicia: function(w,h){
@@ -275,7 +275,7 @@ i3GEO.Interface = {
 		var temp = window.location.href.split("?")[0];
 		if($i("i3GEOcompartilhar"))
 		{i3GEO.social.compartilhar("i3GEOcompartilhar",temp,temp,"semtotal");}
-	
+
 		i3GEO.gadgets.quadros.inicia(10);
 		i3GEO.gadgets.quadros.grava("extensao",i3GEO.parametros.extentTotal);
 		i3GEO.gadgets.mostraBuscaRapida();
@@ -293,7 +293,7 @@ i3GEO.Interface = {
 		i3GEO.navega.autoRedesenho.ativa();
 		i3GEO.util.defineValor("i3geo_escalanum","value",i3GEO.parametros.mapscale);
 		if ((i3GEO.parametros.geoip === "nao") && ($i("ondeestou")))
-		{$i("ondeestou").style.display="none";}		
+		{$i("ondeestou").style.display="none";}
 		//
 		//inicialização específica de cada interface
 		//
@@ -301,7 +301,7 @@ i3GEO.Interface = {
 	},
 	/*
 	Function: alteraLayers
-	
+
 	Altera todos os layers do mapa modificando um determinado parâmetro
 	*/
 	alteraParametroLayers: function(parametro,valor){
@@ -320,7 +320,7 @@ i3GEO.Interface = {
 
 	/*
 	Function: ativaBotoes
-	
+
 	Ativa os botões de ferramentas
 	*/
 	ativaBotoes: function(){
@@ -329,22 +329,22 @@ i3GEO.Interface = {
 	},
 	/*
 	Classe: i3GEO.Interface.padrao
-	
+
 	Interface padrão com motor de navegação do próprio i3Geo
-	
+
 	Utilizado quando 
-	
+
 	i3GEO.Interface.ATUAL = "padrao"
 	*/
 	padrao:{
 		/*
 		Propriedade: TRANSICAO
-		
+
 		Ativa ou não o modo de transição suave das imagens quando o mapa é redesenhado. 
 
 		Default:
 		true
-		
+
 		Tipo:
 		{Boolean}
 		*/
@@ -409,7 +409,7 @@ i3GEO.Interface = {
 		},
 		/*
 		Function: ativaMenuContexto
-	
+
 		Ativa o menu de contexto acionado com o botão direito do mouse
 		*/
 		ativaMenuContexto: function(){
@@ -442,7 +442,7 @@ i3GEO.Interface = {
 				{$i(id).style.zIndex = 50000;}
 			};
 			oFieldContextMenu.subscribe("render", onFieldMenuRender);
-		},		
+		},
 		inicia:function(){
 			var i,estilo,
 				elemento = ($i("contemImg")) ? "contemImg" : "img";
@@ -511,11 +511,11 @@ i3GEO.Interface = {
 	},
 	/*
 	Classe: i3GEO.Interface.flamingo
-	
+
 	Interface com motor de navegação baseado no software Flamingo Map Components (flash)
-	
+
 	Utilizado quando 
-	
+
 	i3GEO.Interface.ATUAL = "flamingo"
 	*/
 	flamingo:{
@@ -524,7 +524,7 @@ i3GEO.Interface = {
 			//não se atualiza um tema único, mas o mapa todo
 			//
 			i3GEO.atualiza(retorno);
-		},	
+		},
 		redesenha: function(){
 			var w = parseInt($i("flamingo").style.width,10);
 			if (w === i3GEO.parametros.w)
@@ -570,50 +570,50 @@ i3GEO.Interface = {
 	},
 	/*
 	Classe: i3GEO.Interface.openlayers
-	
+
 	Interface com motor de navegação baseado na API OpenLayers
-	
+
 	Utilizado quando 
-	
+
 	i3GEO.Interface.ATUAL = "openlayers"
-	
+
 	Cria o objeto i3geoOL que pode receber os métodos da API do OpenLayers
-	
+
 	Para detalhes sobre a configuração da interface, veja i3geo/aplicmap/openlayers.htm
 	*/
 	openlayers:{
 		/*
 		Propriedade: TILES
-		
+
 		Indica se será utilizado o modo de navegação em tiles
-		
+
 		Tipo:
 		{boolean}
-		
+
 		Default:
 		{false}
 		*/
-		TILES: false,	
+		TILES: false,
 		/*
 		Propriedade: BUFFER
-		
+
 		Número de TILES na área não visível do mapa
-		
+
 		Tipo:
 		{integer}
-		
+
 		Default:
 		{0}
 		*/
 		BUFFER: 0,
 		/*
 		Propriedade: GADGETS
-		
+
 		Lista dos controles específicos da API do OpenLayers que serão inseridos ou não no mapa
-		
+
 		Tipo:
 		{object}
-		
+
 		Default:
 		{PanZoomBar:true,LayerSwitcher:true,ScaleLine:true,OverviewMap:true}
 		*/
@@ -622,40 +622,40 @@ i3GEO.Interface = {
 			PanZoom:false,
 			LayerSwitcher:true,
 			ScaleLine:true,
-			OverviewMap:false	
+			OverviewMap:false
 		},
 		/*
 		Propriedade: MINEXTENT
-		
+
 		Menor extensão geográfica que pode ser mostrada no mapa
-		
+
 		Tipo:
 		{array}
-		
+
 		Default:
 		{-0.001, -0.001, 0.001, 0.001]}
 		*/
 		MINEXTENT: [-0.001, -0.001, 0.001, 0.001],
 		/*
 		Propriedade: MAXEXTENT
-		
+
 		Maior extensão geográfica que pode ser mostrada no mapa
-		
+
 		Tipo:
 		{array}
-		
+
 		Default:
 		{[-180, -90, 180, 90]}
-		*/		
+		*/
 		MAXEXTENT: [-180, -90, 180, 90],
 		/*
 		Propriedades: LAYERSADICIONAIS
-		
+
 		Array com objetos do tipo LAYER que serão adicionados após a crioação de todos os layers default.
-		
+
 		Tipo:
 		{array}
-		
+
 		*/
 		LAYERSADICIONAIS: [],
 		redesenha: function(){
@@ -852,7 +852,7 @@ i3GEO.Interface = {
 				layer,
 				i,
 				camada;
-			
+
 			if(i3GEO.Interface.openlayers.TILES === true)
 			{i3GEO.Interface.openlayers.TILES = false;}
 			else
@@ -912,7 +912,7 @@ i3GEO.Interface = {
 			if(tipo === "sobe")
 			{i3geoOL.setLayerIndex(layer,indice + 1);}
 			else
-			{i3geoOL.setLayerIndex(layer,indice - 1);}			
+			{i3geoOL.setLayerIndex(layer,indice - 1);}
 		},
 		ligaDesliga:function(obj){
 			var layers = i3geoOL.getLayersByName(obj.value),
@@ -943,7 +943,7 @@ i3GEO.Interface = {
 				i;
 			for(i=0;i<nlayers;i++){
 				layers[i].mergeNewParams({r:Math.random()});
-				if(layers[i].visibility === true){	
+				if(layers[i].visibility === true){
 					layers[i].redraw();
 				}
 			}
@@ -1017,7 +1017,7 @@ i3GEO.Interface = {
 			var bounds = i3geoOL.getExtent().toBBOX().split(","),
 				escalaAtual = i3geoOL.getScale();
 			if (i3GEO.parametros.mapscale !== escalaAtual)
-			{i3GEO.arvoreDeCamadas.atualizaFarol(escalaAtual);}			
+			{i3GEO.arvoreDeCamadas.atualizaFarol(escalaAtual);}
 			i3GEO.parametros.mapexten = bounds[0]+" "+bounds[1]+" "+bounds[2]+" "+bounds[3];
 			i3GEO.parametros.mapscale = escalaAtual;
 			i3GEO.parametros.pixelsize = i3geoOL.getResolution();
@@ -1037,67 +1037,67 @@ i3GEO.Interface = {
 	},
 	/*
 	Classe: i3GEO.Interface.googlemaps
-	
+
 	Interface com motor de navegação baseado na API Google Maps
-	
+
 	Utilizado quando 
-	
+
 	i3GEO.Interface.ATUAL = "googlemaps"
-	
+
 	Cria o objeto i3GeoMap que pode receber os métodos da API.
 	Cria também o objeto i3GeoMapOverlay do tipo Overlay, utilizado para cálculos ou para receber elementos gráficos.
 	*/
 	googlemaps:{
 		/*
 		Propriedade: OPACIDADE
-		
+
 		Valor da opacidade da camada i3geo do mapa
-		
+
 		Varia de 0 a 1
-		
+
 		Default:
 		0.8
-		
+
 		Tipo:
 		{Numeric}
 		*/
 		OPACIDADE: 0.8,
 		/*
 		Propriedade: TIPOMAPA
-		
+
 		Tipo de mapa que será usado como default, conforme constantes definidas na API do Google Maps.
-		
+
 		Default:
 		"roadmap"
-		
+
 		Tipo:
 		{string - Google API constante "satellite"|"roadmap"|"hybrid"|"terrain"}
 		*/
 		TIPOMAPA: "terrain",
 		/*
 		Variable: ZOOMSCALE
-		
+
 		Array com a lista de escalas em cada nivel de zoom utilizado pelo Google
-		
+
 		Tipo:
 		{array}
-		
+
 		*/
 		ZOOMSCALE: [591657550,295828775,147914387,73957193,36978596,18489298,9244649,4622324,2311162,1155581,577790,288895,144447,72223,36111,18055,9027,4513,2256,1128],
 		/*
 		Variable: PARAMETROSLAYER
-		
+
 		Parâmetros adicionais que são inseridos na URL que define cada layer
-		
+
 		Tipo:
 		{string}
 		*/
 		PARAMETROSLAYER: "&TIPOIMAGEM="+i3GEO.configura.tipoimagem,
 		/*
 		Variable: posfixo
-		
+
 		String acrescentada à url de cada tile para garantir a remoção do cache local
-		
+
 		Type:
 		{string}
 		*/
@@ -1131,7 +1131,7 @@ i3GEO.Interface = {
 				camada = i3GEO.arvoreDeCamadas.CAMADAS[i];
 				indice = i3GEO.Interface.googlemaps.retornaIndiceLayer(camada.name);
 				//console.error(indice+" "+camada.name);
-				if(indice !== false){				
+				if(indice !== false){
 					try{
 						//console.error(indice+" "+camada.name);
 						i3GeoMap.overlayMapTypes.removeAt(indice);
@@ -1183,19 +1183,19 @@ i3GEO.Interface = {
 				//
 				js = i3GEO.configura.locaplic+"/pacotes/google/keydragzoom.js.php";
 				i3GEO.util.scriptTag(js,"i3GEO.Interface.googlemaps.ativaZoomBox()","keydragzoom_script");
-				
+
 				i3GeoMap.setMapTypeId(i3GEO.Interface.googlemaps.TIPOMAPA);
 				sw = new google.maps.LatLng(ret[1],ret[0]);
 				ne = new google.maps.LatLng(ret[3],ret[2]);
 				i3GeoMap.fitBounds(new google.maps.LatLngBounds(sw,ne));
-				
+
 				i3GeoMapOverlay = new google.maps.OverlayView();
 				i3GeoMapOverlay.draw = function() {};
-						
+
 				i3GEO.Interface.googlemaps.criaLayers();
 				i3GeoMapOverlay.setMap(i3GeoMap);
 				i3GEO.Interface.googlemaps.registraEventos();
-								
+
 				i3GEO.gadgets.mostraInserirKml();
 				i3GEO.Interface.googlemaps.ativaBotoes();
 				i3GEO.eventos.ativa($i(i3GEO.Interface.IDMAPA));
@@ -1227,7 +1227,7 @@ i3GEO.Interface = {
 			for (i=0;i<nlayers;i++){
 				camada = i3GEO.arvoreDeCamadas.CAMADAS[i];
 				indice = i3GEO.Interface.googlemaps.retornaIndiceLayer(camada.name);
-				if(!indice){				
+				if(!indice){
 					if(camada.status !== 0){
 						i3GEO.Interface.googlemaps.insereLayer(camada.name,0);
 					}
@@ -1412,9 +1412,9 @@ i3GEO.Interface = {
 				i3GEO.parametros.pixelsize = sw.lng() - ne.lng();
 				if(i3GEO.parametros.pixelsize < 0)
 				{i3GEO.parametros.pixelsize = i3GEO.parametros.pixelsize * -1;}
-				
+
 				if (i3GEO.parametros.mapscale !== escalaAtual && escalaAtual !== 0)
-				{i3GEO.arvoreDeCamadas.atualizaFarol(i3GEO.parametros.mapscale);}	
+				{i3GEO.arvoreDeCamadas.atualizaFarol(i3GEO.parametros.mapscale);}
 			}
 			catch(e){
 				i3GEO.parametros.mapexten = "0 0 0 0";
@@ -1452,21 +1452,21 @@ i3GEO.Interface = {
 		},
 		/*
 		Function: adicionaKml
-	
+
 		Insere no mapa uma camada KML com base na API do Google Maps
-	
+
 		As camadas adicionadas são acrescentadas na árvore de camadas
-	
+
 		A lista de nomes dos objetos geoXml criados é mantida em i3GEO.mapas.GEOXML
-	
+
 		Parametros:
-	
+
 		pan {Boolean} - define se o mapa será deslocado para encaixar o KML
-	
+
 		url {String} - URL do arquivo KML. Se não for definido, a URL será obtida do INPUT com id = i3geo_urlkml (veja i3GEO.gadgets.mostraInserirKml)
 
 		titulo {string} - titulo que aparecerá na árvore. Se não for definido, será calculado aleatoriamente.
-		
+
 		ativo {boolean} - indica se a camada estará ativa ou não. Se não for definido, será considerado como true
 		*/
 		adicionaKml: function(pan,url,titulo,ativo){
@@ -1506,21 +1506,21 @@ i3GEO.Interface = {
 		},
 		/*
 		Function: adicionaNoArvoreGoogle
-		
+
 		Acrescenta na árvore de camadas um novo tema no nó que mostra os arquivos KML inseridos no mapa
-		
+
 		Os temas são incluídos em um nó chamado "Google Maps".
-		
+
 		Para obter esse nó utilize var node = i3GEO.arvoreDeCamadas.ARVORE.getNodeByProperty("idkml","raiz");
-		
+
 		Parametros:
-		
+
 		url {string} - url do arquivo KML
-	
+
 		nomeOverlay {string} - título do tema
-		
+
 		ativo {boolean} - indica o estado do checkbox
-		
+
 		id {string} - nome do objeto GGeoXml
 		*/
 		adicionaNoArvoreGoogle: function(url,nomeOverlay,ativo,id){
@@ -1543,7 +1543,7 @@ i3GEO.Interface = {
 			{estilo = "cursor:default;vertical-align:35%;padding-top:0px;";}
 			else
 			{estilo = "cursor:default;vertical-align:top;";}
-			
+
 			html += "&nbsp;<span style='"+estilo+"'>"+nomeOverlay+"</span>";
 			d = {html:html};
 			nodekml = new YAHOO.widget.HTMLNode(d, node, true,true); 
@@ -1577,16 +1577,16 @@ i3GEO.Interface = {
 		},
 		/*
 		Function: ativaDesativaCamadaKml
-		
+
 		Ativa ou desativa uma camada do nó de layers KML
-			
+
 		Parametro:
-		
+
 		obj {object} - objeto do tipo checkbox que foi ativado/desativado
-		
+
 		url {string} - url do KML
 		*/
-		ativaDesativaCamadaKml: function(obj,url){	
+		ativaDesativaCamadaKml: function(obj,url){
 			if(!obj.checked)
 			{eval(obj.value+".setMap(null);");}
 			else{
@@ -1603,42 +1603,42 @@ i3GEO.Interface = {
 	},
 	/*
 	Classe: i3GEO.Interface.googleearth
-	
+
 	Interface com motor de navegação baseado na API Google Earth
-	
+
 	Utilizado quando 
-	
+
 	i3GEO.Interface.ATUAL = "googleearth"
-	
+
 	Cria o objeto i3GeoMap que pode receber os métodos da API do google Earth
 	*/
 	googleearth:{
 		/*
 		Variable: PARAMETROSLAYER
-		
+
 		Parâmetros adicionais que são inseridos na URL que define cada layer
-		
+
 		Tipo:
 		{string}
 		*/
 		PARAMETROSLAYER: "&TIPOIMAGEM="+i3GEO.configura.tipoimagem,
 		/*
 		Variable: posfixo
-		
+
 		String acrescentada à url de cada tile para garantir a remoção do cache local
-		
+
 		Type:
 		{string}
 		*/
 		posfixo: "",
 		/*
 		Propriedade: GADGETS
-		
+
 		Lista dos controles específicos da API do Google Earth que serão inseridos ou não no mapa
-		
+
 		Tipo:
 		{object}
-		
+
 		Default:
 		{}
 		*/
@@ -1673,7 +1673,7 @@ i3GEO.Interface = {
 			layer.setVisibility(obj.checked);
 			if(desligar !== "" || ligar !== "")
 			{i3GEO.php.ligatemas(temp,desligar,ligar);}
-		},		
+		},
 		atualizaTema:function(retorno,tema){
 			var layer = i3GEO.Interface.googleearth.retornaObjetoLayer(tema);
 			layer.getLink().setHref(layer.getLink().getHref()+"&");
@@ -1693,7 +1693,7 @@ i3GEO.Interface = {
 			for (i=0;i<nlayers;i++){
 				camada = i3GEO.arvoreDeCamadas.CAMADAS[i];
 				indice = i3GEO.Interface.googleearth.retornaObjetoLayer(camada.name);
-				if(indice !== false){				
+				if(indice !== false){
 					try{
 						i3GeoMap.getFeatures().removeChild(indice);
 					}
@@ -1711,7 +1711,7 @@ i3GEO.Interface = {
 			*/
 			i3GEO.configura.listaDePropriedadesDoMapa = {
 				"propriedades": [
-				{ text: "p2", url: "javascript:i3GEO.mapa.dialogo.tipoimagem()"},		
+				{ text: "p2", url: "javascript:i3GEO.mapa.dialogo.tipoimagem()"},
 				{ text: "p3", url: "javascript:i3GEO.mapa.dialogo.opcoesLegenda()"},
 				{ text: "p4", url: "javascript:i3GEO.mapa.dialogo.opcoesEscala()"},
 				{ text: "p8", url: "javascript:i3GEO.mapa.dialogo.queryMap()"},
@@ -1796,7 +1796,7 @@ i3GEO.Interface = {
 			texto += "> "+$trad("ge11");
 			i3GEO.configura.listaDePropriedadesDoMapa.propriedades.push({text: texto,url:""});
 			i3GEO.util.arvore("<b>"+$trad("p13")+"</b>","listaPropriedades",i3GEO.configura.listaDePropriedadesDoMapa);
-			
+
 			i3GEO.barraDeBotoes.INCLUIBOTAO.zoomli = false;
 			i3GEO.barraDeBotoes.INCLUIBOTAO.pan = false;
 			i3GEO.barraDeBotoes.INCLUIBOTAO.zoomtot = false;
@@ -1824,7 +1824,7 @@ i3GEO.Interface = {
 				i3GeoMap.getWindow().setVisibility(true);
 				i3GEO.Interface.googleearth.zoom2extent(i3GEO.parametros.mapexten);
 				i3GEO.Interface.googleearth.criaLayers();
-				
+
 				var options = i3GeoMap.getOptions(),
 					layerRoot = i3GeoMap.getLayerRoot(),
 					evento = function(e){
@@ -1839,14 +1839,14 @@ i3GEO.Interface = {
 				options.setScaleLegendVisibility(i3GEO.Interface.googleearth.GADGETS.setScaleLegendVisibility);
 				options.setAtmosphereVisibility(i3GEO.Interface.googleearth.GADGETS.setAtmosphereVisibility);
 				options.setGridVisibility(i3GEO.Interface.googleearth.GADGETS.setGridVisibility);
-				
+
 				layerRoot.enableLayerById(i3GeoMap.LAYER_BORDERS, i3GEO.Interface.googleearth.GADGETS.LAYER_BORDERS);
 				layerRoot.enableLayerById(i3GeoMap.LAYER_BUILDINGS, i3GEO.Interface.googleearth.GADGETS.LAYER_BUILDINGS);
 				layerRoot.enableLayerById(i3GeoMap.LAYER_ROADS, i3GEO.Interface.googleearth.GADGETS.LAYER_ROADS);
 				layerRoot.enableLayerById(i3GeoMap.LAYER_TERRAIN, i3GEO.Interface.googleearth.GADGETS.LAYER_TERRAIN);
 				i3GeoMap.getSun().setVisibility(i3GEO.Interface.googleearth.GADGETS.getSun);
 				i3GeoMap.getNavigationControl().setVisibility(i3GeoMap.VISIBILITY_SHOW);
-				
+
 				i3GEO.Interface.googleearth.POSICAOTELA = YAHOO.util.Dom.getXY($i(i3GEO.Interface.IDCORPO));
 				//
 				//i3GEO.arvoreDeCamadas.CAMADAS é definido na inicialização (classe_i3geo)
@@ -1870,7 +1870,7 @@ i3GEO.Interface = {
 				camada = i3GEO.arvoreDeCamadas.CAMADAS[i];
 				indice = i3GEO.Interface.googleearth.retornaIndiceLayer(camada.name);
 				layer = i3GEO.Interface.googleearth.retornaObjetoLayer(camada.name);
-				if(indice === false){				
+				if(indice === false){
 					layer = i3GEO.Interface.googleearth.insereLayer(camada.name);
 				}
 				try{
@@ -1899,7 +1899,7 @@ i3GEO.Interface = {
 			for(i=0;i<n;i++){
 				if(i3GeoMap.getFeatures().getChildNodes().item(i).getName() === nomeLayer)
 				{indice = i;}
-			}	
+			}
 			return indice;
 		},
 		retornaObjetoLayer: function(nomeLayer){
@@ -2052,12 +2052,12 @@ i3GEO.Interface = {
 			lineStringPlacemark.setGeometry(lineString);
 			lineString.getCoordinates().pushLatLngAlt(yi, xi, 0);
 			lineString.getCoordinates().pushLatLngAlt(yf, xf, 0);
-			
+
 			lineStringPlacemark.setStyleSelector(i3GeoMap.createStyle(''));
 			lineStringPlacemark.setSnippet(snippet);
 			lineStyle = lineStringPlacemark.getStyleSelector().getLineStyle();
 			lineStyle.setWidth(3);
-			
+
 			i3GeoMap.getFeatures().appendChild(lineStringPlacemark);
 		},
 		removePlacemark: function(nome){
@@ -2082,21 +2082,21 @@ i3GEO.Interface = {
 		},
 		/*
 		Function: adicionaKml
-	
+
 		Insere no mapa uma camada KML com base na API do Google Earth
-	
+
 		As camadas adicionadas são crescentadas na árvore de camadas
-	
+
 		A lista de nomes dos objetos geoXml criados é mantida em i3GEO.mapas.GEOXML
-	
+
 		Parametros:
-	
+
 		pan {Boolean} - define se o mapa será deslocado para encaixar o KML
-	
+
 		url {String} - URL do arquivo KML. Se não for definido, a URL será obtida do INPUT com id = i3geo_urlkml (veja i3GEO.gadgets.mostraInserirKml)
 
 		titulo {string} - titulo que aparecerá na árvore. Se não for definido, será calculado aleatoriamente.
-		
+
 		ativo {boolean} - indica se a camada estará ativa ou não. Se não for definido, será considerado como true
 		*/
 		adicionaKml: function(pan,url,titulo,ativo){
@@ -2143,21 +2143,21 @@ i3GEO.Interface = {
 		},
 		/*
 		Function: adicionaNoArvoreGoogle
-		
+
 		Acrescenta na árvore de camadas um novo tema no nó que mostra os arquivos KML inseridos no mapa
-		
+
 		Os temas são incluídos em um nó chamado "Google Earth".
-		
+
 		Para obter esse nó utilize var node = i3GEO.arvoreDeCamadas.ARVORE.getNodeByProperty("idkml","raiz");
-		
+
 		Parametros:
-		
+
 		url {string} - url do arquivo KML
-	
+
 		nomeOverlay {string} - título do tema
-		
+
 		ativo {boolean} - indica o estado do checkbox
-		
+
 		id {string} - nome do objeto GGeoXml
 		*/
 		adicionaNoArvoreGoogle: function(url,nomeOverlay,ativo,id){
@@ -2235,14 +2235,14 @@ i3GEO.Interface = {
 		},
 		/*
 		Function: ativaDesativaCamadaKml
-		
+
 		Ativa ou desativa uma camada do nó de layers KML
-			
+
 		Parametro:
-		
+
 		obj {object} - objeto do tipo checkbox que foi ativado/desativado
 		*/
-		ativaDesativaCamadaKml: function(obj){	
+		ativaDesativaCamadaKml: function(obj){
 			var url = eval(obj.value+".getLink().getHref()"),
 				existe = i3GEO.Interface.googleearth.existeLink(url);
 			if(!obj.checked){
@@ -2298,6 +2298,6 @@ i3GEO.Interface = {
 			i3GEO.Interface.googleearth.PARAMETROSLAYER = i3GEO.Interface.googleearth.PARAMETROSLAYER.replace(reg,"");
 			i3GEO.Interface.googleearth.PARAMETROSLAYER += "&"+parametro+"="+valor;
 			i3GEO.Interface.googleearth.redesenha();
-		}		
+		}
 	}
 };

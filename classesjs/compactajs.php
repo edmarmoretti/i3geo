@@ -322,6 +322,6 @@ function salvatudojs($jsfiles,$buffer,$final,$tipo)
 	//$buffer = str_replace("if(typeof(console)","//if(typeof(console)",$buffer);
 	$escreve = fwrite ($abre,$buffer);
 	$fecha = fclose ($abre);
-	chmod($final.".php",0777);	
+	chmod($final.".php",0777);
 }
 ?>

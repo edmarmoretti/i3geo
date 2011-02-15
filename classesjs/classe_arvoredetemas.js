@@ -40,56 +40,56 @@ Monta a árvore com os temas disponíveis para ser adicionados ao mapa.
 i3GEO.arvoreDeTemas = {
 	/*
 	Propriedade: OPCOESADICIONAIS
-	
+
 	Objeto com a definição das propriedades que serão utilizadas na inclusão dos ícones adicionais de adição de temas e no item de descrição de cada tema.
 
 	Example:
-	
+
 	var obj = {
-	
+
 		idonde: "",
-		
+
 		incluiArvore: true,
-		
+
 		uploaddbf: true,
-		
+
 		uploadlocal: true,
-		
+
 		downloadbase: true,
-		
+
 		conectarwms: true,
-		
+
 		conectarwmst: true,
-		
+
 		conectargeorss: true,
-		
+
 		nuvemTags: true,
-		
+
 		nuvemTagsFlash: true,
-		
+
 		navegacaoDir: false,
-		
+
 		incluibusca: true,
 
 		kml: true,
-		
+
 		qrcode: true,
-		
+
 		mini: true,
-		
+
 		estrelas:true,
-		
+
 		refresh: true,
-		
+
 		carousel: true,
-		
+
 		uploadgpx: true,
-		
+
 		comentarios: true,
-		
+
 		bookmark: true
 	}
-	
+
 	Tipo:
 	{Object}
 	*/
@@ -118,9 +118,9 @@ i3GEO.arvoreDeTemas = {
 	},
 	/*
 	Propriedade: FATORESTRELA
-	
+
 	Valor que será utilizado para dividir o valor bruto do número de acessos de cada tema.
-	
+
 	A divisão é utilizada para definir quantas estrelas serão mostradas na árvore de opções adicionais.<b> 
 
 	Tipo:
@@ -129,112 +129,112 @@ i3GEO.arvoreDeTemas = {
 	FATORESTRELA: "10",
 	/*
 	Propriedade: INCLUISISTEMAS
-	
+
 	Inclui na árvore a lista de sistemas adicionais definidos no i3geo?
-	
+
 	Tipo:
 	{Boolean}
 	*/
 	INCLUISISTEMAS: true,
 	/*
 	Propriedade: INCLUIWMS
-	
+
 	Inclui na árvore a lista de Web Services WMS?
-	
+
 	Tipo:
 	{Boolean}
 	*/
 	INCLUIWMS: true,
 	/*
 	Propriedade: INCLUIESTRELAS
-	
+
 	Inclui na árvore um nó com a lista de temas classificados conforme o número de estrelas que possuí
-	
+
 	Tipo:
 	{Boolean}
 	*/
-	INCLUIESTRELAS: true,	
+	INCLUIESTRELAS: true,
 	/*
 	Propriedade: FILTRADOWNLOAD
-	
+
 	Não mostra na árvore os nós que não possuem temas para download
-	
+
 	Tipo:
 	{Boolean}
 	*/
 	FILTRADOWNLOAD: false,
 	/*
 	Propriedade: FILTRAOGC
-	
+
 	Não mostra na árvore os nós que não permitem a geração de WMS
-	
+
 	Tipo:
 	{Boolean}
 	*/
 	FILTRAOGC: false,
 	/*
 	Propriedade: TIPOBOTAO
-	
+
 	Tipo de botao que sera usado para clicar no tema
-	
+
 	Tipo:
 	{String}
-	
+
 	Valores:
 	{checkbox|radio}
-	
+
 	Default:
 	{checkbox}
 	*/
 	TIPOBOTAO: "checkbox",
 	/*
 	Propriedade: ATIVATEMA
-	
+
 	Nome da função que será incluída no evento onclick do elemento checkbox adicionado no início do nome de um tema.
-	
+
 	Tipo:
 	{String}
 	*/
 	ATIVATEMA: "",
 	/*
 	Propriedade: ATIVATEMAIMEDIATO
-	
+
 	Adiciona ao mapa o tema clicado imediatamente, sem a definição de um temporizador ou necessidade de se clicar no botao "aplicar".
-	
+
 	Tipo:
 	{boolean}
-	
+
 	Default:
 	{false}
 	*/
-	ATIVATEMAIMEDIATO: false,	
+	ATIVATEMAIMEDIATO: false,
 	/*
 	Propriedade: IDSMENUS
-	
+
 	Array com a lista de ids que serão considerados na montagem da árvore. Por default é vazio, o que significa que todos os menus serão considerados.
-	
+
 	Tipo:
 	{Array}
 	*/
 	IDSMENUS: [],
 	/*
 	Propriedade: RETORNAGUIA
-	
+
 	Guia que será ativada após uma operação de adição de temas ter sido concluída.
-	
+
 	Se for vazia, a guia atual será mantida.
-	
+
 	A string corresponde ao nome da guia que deve estar definida em i3GEO.guias.CONFIGURA, por exemplo i3GEO.arvoreDeTemas.RETORNAGUIA = "temas"
-	
+
 	Tipo:
 	{String}
-	
+
 	Default: ""
 	*/
 	RETORNAGUIA: "",
 	/*
 	Variavel: IDHTML
-	
+
 	Armazena o ID do elemento HTML onde a árvore será incluida
 
 	Tipo:
@@ -243,7 +243,7 @@ i3GEO.arvoreDeTemas = {
 	IDHTML: null,
 	/*
 	Variavel: LOCAPLIC
-	
+
 	Endereço da aplicação i3geo. Utilizado para definir o caminho para a chamada em AJAX.
 
 	Tipo:
@@ -252,7 +252,7 @@ i3GEO.arvoreDeTemas = {
 	LOCAPLIC: null,
 	/*
 	Variavel: SID
-	
+
 	Código da seção aberta no servidor pelo i3Geo
 
 	Tipo:
@@ -261,7 +261,7 @@ i3GEO.arvoreDeTemas = {
 	SID: null,
 	/*
 	Variavel: ARVORE
-	
+
 	Objeto com a árvore criada com YAHOO.widget.TreeView
 
 	Tipo:
@@ -270,34 +270,34 @@ i3GEO.arvoreDeTemas = {
 	ARVORE: null,
 	/*
 	Variavel: DRIVES
-	
+
 	Objeto JSON com a lista de drives no servidor que podem ser abertos na opção de navegação pelos diretórios
-	
+
 	Tipo:
 	{JSON}
 	*/
 	DRIVES: null,
 	/*
 	Variavel: SISTEMAS
-	
+
 	Objeto JSON com a lista de sistemas existentes
-	
+
 	Tipo:
 	{JSON}
 	*/
 	SISTEMAS: null,
 	/*
 	Variavel: MENUS
-	
+
 	Armazena o objeto JSON com a lista de menus resultante da função listaMenus
-	
+
 	Tipo:
 	{JSON}
 	*/
 	MENUS: null,
 	/*
 	Variavel: GRUPOS
-	
+
 	Armazena o objeto JSON com a última lista de grupos obtida
 
 	Tipo:
@@ -306,7 +306,7 @@ i3GEO.arvoreDeTemas = {
 	GRUPOS: null,
 	/*
 	Variavel: SUBGRUPOS
-	
+
 	Armazena o objeto JSON com a última lista de sub-grupos obtida
 
 	Tipo:
@@ -315,7 +315,7 @@ i3GEO.arvoreDeTemas = {
 	SUBGRUPOS: null,
 	/*
 	Variavel: TEMAS
-	
+
 	Armazena o objeto JSON com a última lista de temas obtida
 
 	Tipo:
@@ -324,7 +324,7 @@ i3GEO.arvoreDeTemas = {
 	TEMAS: null,
 	/*
 	Function: listaWMS
-	
+
 	Lista os WMS cadastrados preenchendo o nó OGC-WMS
 	*/
 	listaWMS: function(){
@@ -354,7 +354,7 @@ i3GEO.arvoreDeTemas = {
 	},
 	/*
 	Function: listaLayersWMS
-	
+
 	Lista os layers de um WMS e preenche o nó OGC-WMS
 	*/
 	listaLayersWMS: function(node){
@@ -418,7 +418,7 @@ i3GEO.arvoreDeTemas = {
 	},
 	/*
 	Function: montaTextoTemaWMS
-	
+
 	Monta o texto que será mostrado ao lado de cada layer de um WMS, permitindo incluir o layer no mapa.
 	*/
 	montaTextoTemaWMS: function(servico,layer,estilo,titulo,proj,formatoinfo,versao,formatoimg,cor){
@@ -449,15 +449,15 @@ i3GEO.arvoreDeTemas = {
 	Function: listaMenus
 
 	Lista os menus disponíveis.
-	
+
 	Pesquisa no banco de dados administrativo ou na variável de configuração (veja ms_configura.php) a lista de menus disponíveis.
-	
+
 	O resultado é incluído em i3GEO.arvoreDeTemas.MENUS.
-	
+
 	A propriedade i3GEO.arvoreDetemas.IDSMENUS pode ser utilizada para filtrar alista de menus que será utilizada.
 
 	Parametros:
-	
+
 	g_sid - {String} Código da seção PHP criada ao abrir o i3Geo
 
 	g_locaplic - {String} Endereço da aplicação (i3geo) onde fica o diretório classesphp
@@ -488,17 +488,17 @@ i3GEO.arvoreDeTemas = {
 	},
 	/*
 	Function: listaGrupos
-	
+
 	Lista os grupos de um menu.
-	
+
 	O resultado é armazenado em i3GEO.arvoreDetemas.GRUPOS 
 
 	Parametros:
-	
+
 	g_sid - {String} Código da seção PHP criada ao abrir o i3Geo
 
 	g_locaplic - {String} Endereço da aplicação (i3geo) onde fica o diretório classesphp
-	
+
 	id_menu - {String} Id do menu que contem os grupos
 
 	funcao - {Function} função que será executada quando a lista for recebida. Se for "", não é chamada.
@@ -517,19 +517,19 @@ i3GEO.arvoreDeTemas = {
 	},
 	/*
 	Function: listaSubGrupos
-	
+
 	Lista os sub-grupos de um grupo.
-	
+
 	O resultado é armazenado emi3GEO.arvoreDetemas.SUBGRUPOS
 
 	Parametros:
-	
+
 	g_sid - {String} Código da seção PHP criada ao abrir o i3Geo
 
 	g_locaplic - {String} Endereço da aplicação (i3geo) onde fica o diretório classesphp
-	
+
 	id_menu - {String} Id do menu que contem os grupos
-	
+
 	id_grupo - {String} Id do grupo que contem os sub-grupos
 
 	funcao - {Function} função que será executada quando a lista for recebida. Se for "", não é chamada.
@@ -545,21 +545,21 @@ i3GEO.arvoreDeTemas = {
 	},
 	/*
 	Function: listaTemas
-	
+
 	Lista os temas de um sub-grupo.
-	
+
 	O resultado é armazenado em i3GEO.arvoreDeTemas.TEMAS
 
 	Parametros:
-	
+
 	g_sid - {String} Código da seção PHP criada ao abrir o i3Geo
 
 	g_locaplic - {String} Endereço da aplicação (i3geo) onde fica o diretório classesphp
-	
+
 	id_menu - {String} Id do menu que contem os grupos
-	
+
 	id_grupo - {String} Id do grupo que contem os sub-grupos
-	
+
 	id_subgrupo - {String} Id do sub-grupo que contem os temas
 
 	funcao - {Function} função que será executada quando a lista for recebida. Se for "", não é chamada.
@@ -575,13 +575,13 @@ i3GEO.arvoreDeTemas = {
 	},
 	/*
 	Function: listaSistemas
-	
+
 	Lista os sistemas especiais de adição de temas.
-	
+
 	O resultado é armazenado em i3GEO.arvoreDeTemas.SISTEMAS
 
 	Parametros:
-	
+
 	g_sid - {String} Código da seção PHP criada ao abrir o i3Geo
 
 	g_locaplic - {String} Endereço da aplicação (i3geo) onde fica o diretório classesphp
@@ -599,13 +599,13 @@ i3GEO.arvoreDeTemas = {
 	},
 	/*
 	Function: listaDrives
-	
+
 	Lista os endereços no servidor dos drives que podem ser abertos pela opção de navegação em arquivos no servidor.
-	
+
 	Alista de drives deve ser definida emi3geo/ms_configura.php
-	
+
 	Parametros:
-	
+
 	g_sid - {String} Código da seção PHP criada ao abrir o i3Geo
 
 	g_locaplic - {String} Endereço da aplicação (i3geo) onde fica o diretório classesphp
@@ -623,11 +623,11 @@ i3GEO.arvoreDeTemas = {
 	},
 	/*
 	Function: listaEstrelas
-	
+
 	Busca e insere na árvore de temas os temas que contém um certo nível de estrelas
-	
+
 	Parametros:
-	
+
 	node {objeto} - nó da árvore que foi expandido pelo usuário
 	*/
 	listaEstrelas: function(node){
@@ -690,26 +690,26 @@ i3GEO.arvoreDeTemas = {
 	},
 	/*
 	Function: cria
-	
+
 	Cria a árvore com os menus disponíveis.
-	
+
 	A árvore contém opcionalmente a opção de busca, os ícones adicionais e a lista de sistemas.
-	
+
 	Ao ser criada, os parâmetros utilizados são armazenados em variáveis que podem ser acessadas com
 	i3geo.arvoreDeTemas.[ATIVATEMA,OPCOESADICIONAIS,IDHTML,LOCAPLIC,SID]
 
 	Parametros:
-	
+
 	g_sid - {String} Código da seção PHP criada ao abrir o i3Geo
 
 	g_locaplic - {String} Endereço da aplicação (i3geo) onde fica o diretório classesphp
 
 	idhtml - {String} Id do elemento onde a árvore será inserida. Se for vazio, será utilizado o ID definido em IDHTML
-	
+
 	funcaoTema - {String} (opcional) Nome da função que será executada quando o usuário clicar no checkbox de um tema
 
 	objOpcoes - {Object} (opcional) Objeto com as opções necessárias para criação dos ícones com as opções adicionais de adição de temas
-	
+
 	tipoBotao - {String} (opcional) checkbox|radio tipo de botão que será mostrado para o usuário escolher o tema
 	*/
 	cria: function(g_sid,g_locaplic,idhtml,funcaoTema,objOpcoes,tipoBotao) {
@@ -731,7 +731,7 @@ i3GEO.arvoreDeTemas = {
 		{tipoBotao = "";}
 		if(tipoBotao !== "")
 		{this.TIPOBOTAO = tipoBotao;}
-		
+
 		this.LOCAPLIC = g_locaplic;
 		this.SID = g_sid;
 		if(this.IDHTML === ""){return;}
@@ -739,7 +739,7 @@ i3GEO.arvoreDeTemas = {
 	},
 	/*
 	Function: atualiza
-	
+
 	Refaz a árvore atual
 	*/
 	atualiza: function(){
@@ -749,7 +749,7 @@ i3GEO.arvoreDeTemas = {
 	},
 	/*
 	Function: montaArvore
-	
+
 	Monta a árvore incluindo os nós do primeiro nível. 
 
 	A opção de carga dinâmica dos nós filhos é definida para a montagem dos grupos.
@@ -884,7 +884,7 @@ i3GEO.arvoreDeTemas = {
 				ig -= 1;
 			}
 			while(ig > 0);
-		}		
+		}
 		//
 		//adiciona na árvore a raiz de cada menu
 		//
@@ -959,12 +959,12 @@ i3GEO.arvoreDeTemas = {
 	},
 	/*
 	Function: montaGrupos
-	
+
 	Monta a lista de grupos de um nó principal da árvore. 
 
 	A opção de carga dinâmica dos nós filhos é definida para a montagem dos sub-grupos.
 	*/
-	montaGrupos: function(node){		
+	montaGrupos: function(node){
 		if(typeof(console) !== 'undefined'){console.info("i3GEO.arvoreDeTemas.montaGrupos()");}
 		var temp=function(){
 			var grupos,c,raiz,nraiz,mostra,html,i,d,editor;
@@ -975,9 +975,9 @@ i3GEO.arvoreDeTemas = {
 			for (i=0;i<nraiz; i+=1){
 				mostra = true;
 				if(i3GEO.arvoreDeTemas.FILTRADOWNLOAD && raiz[i].download === "nao")
-				{mostra = false;}				
+				{mostra = false;}
 				if(i3GEO.arvoreDeTemas.FILTRAOGC && raiz[i].ogc === "nao")
-				{mostra = false;}				
+				{mostra = false;}
 				if(mostra){
 					tempNode = new YAHOO.widget.HTMLNode(
 						{isLeaf:false,enableHighlight:false,expanded:false,html:i3GEO.arvoreDeTemas.montaTextoTema("gray",raiz[i])},
@@ -1020,12 +1020,12 @@ i3GEO.arvoreDeTemas = {
 	},
 	/*
 	Function: montaSubGrupos
-	
+
 	Monta a lista de sub-grupos de um nó do tipo grupo. 
 
 	A opção de carga dinâmica dos nós filhos é definida para a montagem dos temas.
 	*/
-	montaSubGrupos: function(node){		
+	montaSubGrupos: function(node){
 		if(typeof(console) !== 'undefined'){console.info("i3GEO.arvoreDeTemas.montaSubGrupos()");}
 		var temp=function(){
 			var i,c,mostra,d,html,tempNode,nraiz,subgrupos,raiz;
@@ -1077,7 +1077,7 @@ i3GEO.arvoreDeTemas = {
 						if(subgrupos[i].publicado === "NAO"){
 							subgrupos[i].nome = "<span title='nao publicado' ><s>"+subgrupos[i].nome+"</s></span>";
 						}
-					}	
+					}
 					d = {html:subgrupos[i].nome+editor,idmenu:node.data.idmenu,idgrupo:node.data.idgrupo,idsubgrupo:i};
 					if(subgrupos[i].id_n2)
 					{d = {html:subgrupos[i].nome+editor,idmenu:node.data.idmenu,idgrupo:node.data.idgrupo,idsubgrupo:subgrupos[i].id_n2};}
@@ -1093,10 +1093,10 @@ i3GEO.arvoreDeTemas = {
 	},
 	/*
 	Function: montaTemas
-	
+
 	Monta a lista de temas de um nó. 
 	*/
-	montaTemas: function(node){		
+	montaTemas: function(node){
 		if(typeof(console) !== 'undefined'){console.info("i3GEO.arvoreDeTemas.montaTemas()");}
 		var temp=function(){
 			var i,cor,temas,c,mostra,tempNode;
@@ -1140,11 +1140,11 @@ i3GEO.arvoreDeTemas = {
 	},
 	/*
 	Function: montaDir
-	
+
 	Incluí na árvore o navegador de diretórios
-	
+
 	Parametro:
-	
+
 	node {node} - nó onde será criada a lista 
 	*/
 	montaDir: function(node){
@@ -1185,17 +1185,17 @@ i3GEO.arvoreDeTemas = {
 	},
 	/*
 	Function: montaTextoTema
-	
+
 	Monta o texto com o título do tema.
-	
+
 	Parametros:
-	
+
 	cor - {String} - cor que será utilizada no estilo "color"
-	
+
 	tema - {Object} - objeto JSON com as propriedades do tema
-	
+
 	Return:
-	
+
 	{String} - texto formatado
 	*/
 	montaTextoTema: function(cor,tema){
@@ -1220,14 +1220,14 @@ i3GEO.arvoreDeTemas = {
 	},
 	/*
 	Function: propTemas
-	
+
 	Monta o nó com informações adicionais sobre o tema.
-	
+
 	Parametro:
-	
+
 	node - {Object} - objeto com o nó que foi clicado
 	*/
-	propTemas: function(node){		
+	propTemas: function(node){
 		if(typeof(console) !== 'undefined'){console.info("i3GEO.arvoreDeTemas.propTemas()");}
 		var d,tempNode,html,lkmini,lkmini1,lkgrcode,lkgrcode1,n,ogc;
 		if(node.data.fonte !== "" && node.data.fonte !== " "){
@@ -1248,7 +1248,7 @@ i3GEO.arvoreDeTemas = {
 			if(this.OPCOESADICIONAIS.kml === true){
 				html = "<a href='#' title='' onclick='i3GEO.tema.dialogo.abreKml(\""+node.data.idtema+"\",\"kml\")' >Kml</a>";
 				if (node.data.kmz === "sim")
-				{html = "<a href='#' title='' onclick='i3GEO.tema.dialogo.abreKml(\""+node.data.idtema+"\",\"kmz\")' >Kml</a>";}		
+				{html = "<a href='#' title='' onclick='i3GEO.tema.dialogo.abreKml(\""+node.data.idtema+"\",\"kmz\")' >Kml</a>";}
 				tempNode = new YAHOO.widget.HTMLNode(
 					{isLeaf:true,enableHighlight:false,expanded:false,html:html},
 					node
@@ -1266,7 +1266,7 @@ i3GEO.arvoreDeTemas = {
 				{isLeaf:true,enableHighlight:false,expanded:false,html:html},
 				node
 			);
-		}			
+		}
 		if(this.OPCOESADICIONAIS.qrcode === true){
 			lkgrcode = this.LOCAPLIC+"/pacotes/qrcode/php/qr_html.php?d="+this.LOCAPLIC+"/mobile/index.php?temasa="+node.data.idtema;
 			lkgrcode1 = this.LOCAPLIC+"/pacotes/qrcode/php/qr_img.php?d="+this.LOCAPLIC+"/mobile/index.php?temasa="+node.data.idtema;
@@ -1284,16 +1284,16 @@ i3GEO.arvoreDeTemas = {
 		if(this.OPCOESADICIONAIS.bookmark === true){
 			html = i3GEO.social.bookmark(i3GEO.configura.locaplic+"/ms_criamapa.php?layers="+node.data.idtema);
 			tempNode = new YAHOO.widget.HTMLNode({isLeaf:true,enableHighlight:false,expanded:false,html:html}, node);
-		}		
+		}
 		node.loadComplete();
 	},
 	/*
 	Function: outrasOpcoesHTML
-	
+
 	Constrói o HTML com as opções adicionais de inclusão de temas (upload de shp, etc.).
-	
+
 	Return:
-	
+
 	{String} - html gerado
 	*/
 	outrasOpcoesHTML: function(){
@@ -1306,7 +1306,7 @@ i3GEO.arvoreDeTemas = {
 		if(this.OPCOESADICIONAIS.uploadgpx === true){
 			ins += "<td><img class='uploadgpx' onclick='i3GEO.arvoreDeTemas.dialogo.uploadgpx()' src='"+i3GEO.util.$im("branco.gif")+"' style='cursor:pointer;text-align:left'  title='upload GPX'/><td>";
 			t += 20;
-		}		
+		}
 		if(this.OPCOESADICIONAIS.uploaddbf === true){
 			ins += "<td><img class='uploaddbf' onclick='i3GEO.arvoreDeTemas.dialogo.uploaddbf()' src='"+i3GEO.util.$im("branco.gif")+"' style='cursor:pointer;text-align:left' title='"+$trad("a2b")+"'/><td>";
 			t += 20;
@@ -1347,7 +1347,7 @@ i3GEO.arvoreDeTemas = {
 	},
 	/*
 	Function: desativaCheckbox
-	
+
 	Desmarca todos os checkbox dos temas marcados na árvore.
 	*/
 	desativaCheckbox: function(){
@@ -1365,9 +1365,9 @@ i3GEO.arvoreDeTemas = {
 	},
 	/*
 	Function: listaTemasAtivos
-	
+
 	Lista os temas com checkbox marcados.
-	
+
 	Return:
 	{Array} - array com os códigos dos temas
 	*/
@@ -1389,11 +1389,11 @@ i3GEO.arvoreDeTemas = {
 	},
 	/*
 	Depreciado na versão 4.4
-	
+
 	Procura temas na árvore de temas (a busca é feita no servidor e não na árvore atual).
-	
+
 	Parametro:
-	
+
 	palavra {String}
 	*/
 	buscaTema: function(palavra){
@@ -1479,11 +1479,11 @@ i3GEO.arvoreDeTemas = {
 	},
 	/*
 	Function: buscaTema2
-	
+
 	Procura temas na árvore de temas (a busca é feita no servidor e não na árvore atual).
-	
+
 	Parametro:
-	
+
 	palavra {String}
 	*/
 	buscaTema2: function(palavra){
@@ -1543,7 +1543,7 @@ i3GEO.arvoreDeTemas = {
 			}
 			nodePalavra.loadComplete();
 		};
-		
+
 		//
 		//funcao que será executada para buscar os temas
 		//
@@ -1571,11 +1571,11 @@ i3GEO.arvoreDeTemas = {
 	},
 	/*
 	Function: adicionaTemas
-	
+
 	Adiciona ao mapa os temas selecionados na árvore
-	
+
 	Parametro:
-	
+
 	tsl {array} - (opcional) código do tema que será adicionado ao mapa. Se não for especificado, a lista de códigos será obtida da árvore de temas
 	*/
 	adicionaTemas: function(tsl){
@@ -1641,7 +1641,7 @@ i3GEO.arvoreDeTemas = {
 	Parametros:
 
 	locaplic {String} - endereço do i3geo
-	
+
 	funcaoOnchange {String} - nome da funcao que será executada quando o usuário escolhe um grupo
 
 	idDestino {String} - id do elemento HTML que receberá o combo
@@ -1679,7 +1679,7 @@ i3GEO.arvoreDeTemas = {
 	Parametros:
 
 	locaplic {String} - endereço do i3geo
-	
+
 	funcaoOnchange {String} - nome da funcao que será executada quando o usuário escolhe um grupo
 
 	idDestino {String} - id do elemento HTML que receberá o combo
@@ -1689,7 +1689,7 @@ i3GEO.arvoreDeTemas = {
 	largura {Numeric} - largura em pixels do combo
 
 	altura {Numeric} - altura do combo em linhas
-	
+
 	id_menu {Numeric} - id do menu que será utilizado para obter os dados
 	*/
 	comboGruposMenu: function(locaplic,funcaoOnchange,idDestino,idCombo,largura,altura,id_menu){
@@ -1711,7 +1711,7 @@ i3GEO.arvoreDeTemas = {
 	},
 	/*
 	Function: comboSubGruposMenu
-	
+
 	Monta um combo com a lista de subgrupos de um grupo do menu de temas do i3geo.
 
 	Ao escolher um subgrupo, a função de retorno receberá o id do grupo e o id do subgrupo.
@@ -1740,7 +1740,7 @@ i3GEO.arvoreDeTemas = {
 				ins = "<select id='"+idCombo+"' size="+altura+" style=width:"+largura+"px onchange='"+funcaoOnchange+"("+idGrupo+",this.value)' ><option value='' >Escolha um sub-grupo:</option>";
 				if (retorno.data.subgrupo){
 					sg = retorno.data.subgrupo;
-					for (ig=0;ig<sg.length; ig+=1){	
+					for (ig=0;ig<sg.length; ig+=1){
 						ins += "<option value="+sg[ig].id_n2+" >"+sg[ig].nome+"</option>";
 					}
 				}
@@ -1771,9 +1771,9 @@ i3GEO.arvoreDeTemas = {
 	largura - largura em pixels do combo
 
 	altura - altura do combo em linhas
-	
+
 	id_menu - id do menu escolhido
-	
+
 	temas - (opcional) objeto contendo a lista de temas
 	*/
 	comboTemasMenu: function(locaplic,funcaoOnchange,idDestino,idCombo,idGrupo,idSubGrupo,largura,altura,id_menu,temas){
@@ -1784,7 +1784,7 @@ i3GEO.arvoreDeTemas = {
 			if(typeof(retorno.data) !== 'undefined')
 			{retorno = retorno.data.temas;}
 			sg = retorno.length;
-			for (ig=0;ig<sg; ig+=1){	
+			for (ig=0;ig<sg; ig+=1){
 				ins += "<option value="+retorno[ig].tid+" >"+retorno[ig].nome+"</option>";
 			}
 			$i(idDestino).innerHTML = ins+"</select>";
@@ -1796,11 +1796,11 @@ i3GEO.arvoreDeTemas = {
 	},
 	/*
 	Classe: dialogo
-	
+
 	Abre as janelas de diálogo com as opções adicionais que permitem acrescentar temas ao mapa
-	
+
 	Por exemplo, para abrir a janela de upload de arquivos dbf, utilize
-	
+
 	i3GEO.arvoreDeTemas.dialogo.uploaddbf()
 	*/
 	dialogo:{
@@ -1824,7 +1824,7 @@ i3GEO.arvoreDeTemas = {
 		Function: nuvemTagsFlash
 
 		Mostra a nuvem de tags para escolha de temas baseado nos tags registrados nos menus de temas.
-		
+
 		Essa ferramenta é alternativa a ferramenta nuvemTags, mostrando tbm a nuvem com um aplicativo em flash
 		*/
 		nuvemTagsFlash: function()
@@ -1922,6 +1922,6 @@ i3GEO.arvoreDeTemas = {
 	abrejanelaIframe: function(w,h,s){
 		var janelaeditor = i3GEO.janela.cria(w,h,s,parseInt(Math.random()*100,10),10,s,"janela"+i3GEO.util.randomRGB(),false);
 		YAHOO.util.Event.addListener(janelaeditor[0].close, "click", i3GEO.arvoreDeTemas.atualiza,janelaeditor[0].panel,{id:janelaeditor[0].id},true);
-	}	
+	}
 };
 //YAHOO.log("carregou classe arvoredetemas", "Classes i3geo");

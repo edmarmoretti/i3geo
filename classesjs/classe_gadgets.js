@@ -41,26 +41,26 @@ Outras funcionalidades são definidas em botões. Veja <classe_configura.js>
 i3GEO.gadgets = {
 	/*
 	Propriedade: PARAMETROS
-	
+
 	Parametros de inicialização dos gadgets.
-	
+
 	Essa variável define os parâmetros individuais de cada gadget e o ID do elemento HTML onde
 	o gadget será incluído.
-	
+
 	Você pode acessar os parâmetros da seguinte forma:
-	
+
 	i3GEO.gadgets.PARAMETROS.mostraMenuSuspenso.deslocaEsquerda = 400;
-	
+
 	Para evitar o funcionamento de um gadget experimente utilizar o seguinte exemplo:
-	
+
 	i3GEO.gadgets.PARAMETROS.mostraInserirKml.idhtml = "";
-	
+
 	Default:
-	
+
 	i3GEO.gadgets.PARAMETROS = {
-	
+
 		"mostraInserirKml":
-		
+
 		{idhtml:"inserirKml"},
 
 		"mostraEscalaNumerica":
@@ -90,15 +90,15 @@ i3GEO.gadgets = {
 		"mostraMenuSuspenso":
 
 		{idhtml:"menus",deslocaEsquerda:0},
-		
+
 		"mostraVersao":
-		
+
 		{idhtml:"versaoi3geo"}
-	}	
-	
+	}
+
 	Tipo:
 	{JSON}
-	*/	
+	*/
 	PARAMETROS: {
 		"mostraInserirKml":
 		{idhtml:"inserirKml"},
@@ -121,11 +121,11 @@ i3GEO.gadgets = {
 	},
 	/*
 	Function: mostraVersao
-	
+
 	Mostra a versão atual do i3Geo armazenada na variável i3GEO.parametros.mensageminicial
 
 	Parametro:
-	
+
 	id {String} - id do elemento HTML que receberá o resultado. Esse id por default é obtido de
 	i3GEO.gadgets.PARAMETROS
 	*/
@@ -149,7 +149,7 @@ i3GEO.gadgets = {
 	},
 	/*
 	Function: mostraCoordenadasGEO (depreciado utilize i3GEO.coordenadas)
-	*/	
+	*/
 	mostraCoordenadasGEO: function(id){
 		try{
 			i3GEO.coordenadas.mostraCoordenadasGEO.idhtml = i3GEO.gadgets.mostraCoordenadasGEO.idhtml;
@@ -159,19 +159,19 @@ i3GEO.gadgets = {
 	},
 	/*
 	Function: mostraInserirKml
-	
+
 	Mostra no mapa a a opção para inserir kml.
-	
+
 	Essa opção só funciona com a API do Google carregada
-		
+
 	Se você não quer essa função no mapa, elimine o elemento HTML existente no mapa que contenha o 
 	id definido em i3GEO.gadgets.PARAMETROS.mostraInserirKml.idhtml
-	
+
 	Parametro:
-	
+
 	id {String} - id do elemento HTML que receberá o resultado. Esse id por default é obtido de
 	i3GEO.gadgets.PARAMETROS.mostraInserirKml.idhtml
-	*/		
+	*/
 	mostraInserirKml: function(id){
 		if(typeof(console) !== 'undefined'){console.info("i3GEO.gadgets.mostraInserirKml()");}
 		var i,ins,temp;
@@ -189,19 +189,19 @@ i3GEO.gadgets = {
 	},
 	/*
 	Function: mostraEscalaNumerica
-	
+
 	Mostra no mapa a escala numérica.
-	
+
 	A escala numérica pode ser alterada pelo usuário digitando-se a nova escala.
-		
+
 	Se você não quer essa função no mapa, elimine o elemento HTML existente no mapa que contenha o 
 	id definido em i3GEO.gadgets.PARAMETROS
-	
+
 	Parametro:
-	
+
 	id {String} - id do elemento HTML que receberá o resultado. Esse id por default é obtido de
 	i3GEO.gadgets.PARAMETROS
-	*/		
+	*/
 	mostraEscalaNumerica: function(id){
 		if(typeof(console) !== 'undefined'){console.info("i3GEO.gadgets.mostraEscalaNumerica()");}
 		var i,ins,temp;
@@ -235,7 +235,7 @@ i3GEO.gadgets = {
 				$i(id).innerHTML = ins;
 			}
 			if(i3GEO.eventos.NAVEGAMAPA.toString().search("atualizaEscalaNumerica()") < 0)
-			{i3GEO.eventos.NAVEGAMAPA.push("atualizaEscalaNumerica()");}		
+			{i3GEO.eventos.NAVEGAMAPA.push("atualizaEscalaNumerica()");}
 		}
 		else{
 			atualizaEscalaNumerica = function(){};
@@ -243,17 +243,17 @@ i3GEO.gadgets = {
 	},
 	/*
 	Function: mostraEscalaGrafica
-	
+
 	Mostra no mapa a escala grafica como um elemento fora do mapa.
-		
+
 	Se você não quer essa função no mapa, elimine o elemento HTML existente no mapa que contenha o 
 	id definido em i3GEO.gadgets.PARAMETROS(escala)
-	
+
 	Parametro:
-	
+
 	id {String} - id do elemento HTML que receberá o resultado. Esse id por default é obtido de
 	i3GEO.gadgets.PARAMETROS
-	*/		
+	*/
 	mostraEscalaGrafica: function(id){
 		if(typeof(console) !== 'undefined'){console.info("i3GEO.gadgets.mostraEscalaGrafica()");}
 		if(arguments.length === 0)
@@ -279,22 +279,22 @@ i3GEO.gadgets = {
 			}
 			atualizaEscalaGrafica();
 			if(i3GEO.eventos.NAVEGAMAPA.toString().search("atualizaEscalaGrafica()") < 0)
-			{i3GEO.eventos.NAVEGAMAPA.push("atualizaEscalaGrafica()");}		
+			{i3GEO.eventos.NAVEGAMAPA.push("atualizaEscalaGrafica()");}
 		}
 	},
 	/*
 	Function: mostraBuscaRapida
-	
+
 	Mostra a opção de busca rápida de lugares por palavra digitada.
-		
+
 	Se você não quer essa função no mapa, elimine o elemento HTML existente no mapa que contenha o 
 	id definido em i3GEO.gadgets.PARAMETROS (buscaRapida)
-	
+
 	Parametro:
-	
+
 	id {String} - id do elemento HTML que receberá o resultado. Esse id por default é obtido de
 	i3GEO.gadgets.PARAMETROS
-	*/	
+	*/
 	mostraBuscaRapida: function(id){
 		if(typeof(console) !== 'undefined'){console.info("i3GEO.gadgets.mostraBuscaRapida()");}
 		var i,ins,temp;
@@ -313,15 +313,15 @@ i3GEO.gadgets = {
 			if(temp){
 				temp.innerHTML = ins;
 			}
-		}	
+		}
 	},
 	/*
 	Function: mostraHistoricoZoom
-	
+
 	Mostra na barra de zoom os ícones que controlam a visualização do histórico da navegação sobre o mapa
-	
+
 	Parametro:
-	
+
 	id {String} - id do elemento HTML que receberá o resultado. Esse id por default é obtido de
 	i3GEO.gadgets.PARAMETROS
 	*/
@@ -364,26 +364,26 @@ i3GEO.gadgets = {
 	},
 	/*
 	Classe: i3GEO.gadgets.visual
-	
+
 	Gera os ícones e controla as opções de modificação do visual do mapa.
-	
+
 	O visual consiste na definição dos ícones utilizados no mapa. O visual pode
 	ser modificado na inicialização ou então escolhido pelo usuário.
-	
+
 	Os visuais disponíveis são definidos no servidor e consistem em diretórios localizados
 	em i3geo/imagens/visual. A lista de visuais disponíveis é obtida na inicialização do i3geo.
-	
+
 	Os ícones para mudança do visual são incluídos no elemento HTML definido em
 	i3geo.gadgets.PARAMETROS.visual
 	*/
 	visual: {
 		/*
 		Function: inicia
-		
+
 		Constrói os ícones de escolha do visual.
-		
+
 		Parametro:
-		
+
 		id {String} - id do elemento que receberá os ícones (opcional)
 		*/
 		inicia: function(id){
@@ -403,16 +403,16 @@ i3GEO.gadgets = {
 					$i(id).innerHTML = visuais;
 					$i(id).onmouseover = function(){i3GEO.ajuda.mostraJanela($trad("d26"));};
 					$i(id).onmouseout = function(){i3GEO.ajuda.mostraJanela("");};
-				}		
+				}
 			}
 		},
 		/*
 		Function: troca
-		
+
 		Troca o visual atual. A lista de visuais disponíveis é obtida em i3GEO.parametros.listavisual
-		
+
 		Parametro:
-		
+
 		visual {String} - nome do visual que será utilizado.
 		*/
 		troca: function(visual){
@@ -450,7 +450,7 @@ i3GEO.gadgets = {
 							}
 						}
 						while(j--);
-					}	
+					}
 					j = imgs.length-1;
 					if(j >= 0){
 						do{
@@ -486,54 +486,54 @@ i3GEO.gadgets = {
 	},
 	/*
 	Classe: i3GEO.gadgets.quadros
-	
+
 	Cria e controla o funcionamento dos quadros de animação.
-	
+
 	Os quadros são mostrados no mapa como uma sequência de quadros de um filme.
 	As imagens que são produzidas no mapa são armazenadas em cada quadro, permitindo sua recuperação.
-	
+
 	Os quadros armazenam também a extensão geográfica de cada imagem, permitindo sua recuperação.
 	*/
 	quadros: {
 		/*
 		Variavel: quadrosfilme
-		
+
 		Armazena cada quadro individualmente com as suas propriedades
-		
+
 		Tipo:
 		{Array}
 		*/
 		quadrosfilme: [],
 		/*
 		Variavel: quadroatual
-		
+
 		Valor do índice do quadro atual
-		
+
 		Tipo:
 		{Integer}
 		*/
 		quadroatual: 0,
 		/*
 		Propriedade: geraLegenda
-		
+
 		Gera ou não a legenda quando o mapa é redesenhado. Ativando essa opção, o i3Geo fica um pouco mais lento
-		
+
 		Type:
 		{boolean}
-		
+
 		Default:
 		{false}
 		*/
 		geraLegenda: false,
 		/*
 		Function: inicia
-		
+
 		Gera os quadros e inicializa os objetos para armazenar as imagens
-		
+
 		Parametros:
-		
+
 		qs {Integer} - número de quadros
-		
+
 		lugarquadros {String} - id do elemento HTML que receberá os quadros (opcional)
 		*/
 		inicia: function(qs,lugarquadros){
@@ -589,7 +589,7 @@ i3GEO.gadgets = {
 		Function: avanca
 
 		Avança um quadro na lista de quadros, mudando a imagem utilizada na sua representação.
-		*/		
+		*/
 		avanca: function(){
 			if(i3GEO.Interface.ATUAL !== "padrao")
 			{return;}
@@ -601,15 +601,15 @@ i3GEO.gadgets = {
 			}
 			catch(e){
 				if(typeof(console) !== 'undefined'){console.error(e);}
-			}		
+			}
 		},
 		/*
 		Function: zoom
-		
+
 		Aplica o zoom no mapa para a extensão geográfica armazenada em um quadro
-		
+
 		Parametro:
-		
+
 		quadro {String} - id do quadro que será utilizado
 		*/
 		zoom: function(quadro){
@@ -618,13 +618,13 @@ i3GEO.gadgets = {
 		},
 		/*
 		Function: trocaMapa
-		
+
 		Troca a imagem do mapa atual pela que estiver armazenada em quadro
-		
+
 		A imagem mostrada no mapa é um clone do mapa atual, preservando o mapa.
-		
+
 		Parametro:
-		
+
 		quadro {String} - id do quadro que terá a imagem recuperada
 		*/
 		trocaMapa: function(quadro){
@@ -659,11 +659,11 @@ i3GEO.gadgets = {
 		},
 		/*
 		Function: opcoes
-		
+
 		Abre a janela de opções que controla as características do quado e permite disparar a animação.
-		
+
 		Parametro:
-		
+
 		obj {Object} - objeto clicado
 		*/
 		opcoes: function(obj){
@@ -684,13 +684,13 @@ i3GEO.gadgets = {
 		},
 		/*
 		Function: anima
-		
+
 		Mostra as imagens armazenadas nos quadros em uma sequência animada
-		
+
 		Parametros:
-		
+
 		Qanima {Integer} - quadro atual na sequência de animação
-		
+
 		t {Numeric} - tempo em milisegundos entre cada quadro
 		*/
 		anima: function(Qanima,t){
@@ -712,7 +712,7 @@ i3GEO.gadgets = {
 		},
 		/*
 		Function: listaImagens
-		
+
 		Lista as imagens armazenadas em uma nova página no navegador
 		*/
 		listaImagens: function(){
@@ -750,15 +750,15 @@ i3GEO.gadgets = {
 	},
 	/*
 	Function: mostraMenuSuspenso
-	
+
 	Mostra o menu suspenso com opções extras de análise, ajuda, etc
-	
+
 	O objeto YAHOO.widget.MenuBar resultante pode ser obtido na variável i3GEOoMenuBar
 
 	O conteúdo do menu é baseado na variável i3GEO.configura.oMenuData
-	
+
 	Parametro:
-	
+
 	id {String} - id do elemento HTML que receberá o resultado. Esse id por default é obtido de
 	i3GEO.gadgets.PARAMETROS
 	*/
@@ -811,7 +811,7 @@ i3GEO.gadgets = {
 					t = "";
 					if(i3GEO.configura.oMenuData.menu[i].target)
 					{t = "target="+i3GEO.configura.oMenuData.menu[i].target;}
-					ins += '<li class="yuimenubaritem" style="padding-top:2px;"><a style="'+estilo+'" href="#" class="yuimenubaritemlabel" '+t+'id="menu'+i3GEO.configura.oMenuData.menu[i].id+'" >&nbsp;'+i3GEO.configura.oMenuData.menu[i].nome+'</a></li>';				
+					ins += '<li class="yuimenubaritem" style="padding-top:2px;"><a style="'+estilo+'" href="#" class="yuimenubaritemlabel" '+t+'id="menu'+i3GEO.configura.oMenuData.menu[i].id+'" >&nbsp;'+i3GEO.configura.oMenuData.menu[i].nome+'</a></li>';
 				}
 				ins += '</ul>'; 
 				ins += '</div>';
@@ -876,7 +876,7 @@ i3GEO.gadgets = {
 			}
 			if(i3GEO.Interface.ATUAL === "googleearth" && $i("omenudataJanelas1")){
 				MM.getMenuItem("omenudataJanelas1").cfg.setProperty("disabled", true);
-			}			
+			}
 			//
 			//corrige problemas de estilo
 			//

@@ -142,13 +142,13 @@ function i3geo_gl_configura(loc_i3geo,nomeseltema,temasa,link,grupo,subgrupo,tem
 	this.buscageo = buscageo;
 	/* 
 	Function: seltema
-	
+
 	Adiciona na lista de temas escolhidos pelo usuário um novo tema.
-	
+
 	Ativada quando um grupo ou subgrupo é escolhido.
-	
+
 	Parameters:
-	
+
 	idtema = identificador do tema conforme definido em menutemas/menutemas.xml
 	 */
 	this.seltema = function(idtema)
@@ -253,7 +253,7 @@ function i3geo_gl_configura(loc_i3geo,nomeseltema,temasa,link,grupo,subgrupo,tem
 	Parameters:
 
 	idMenu - id do menu que será pesquisado
-	*/	
+	*/
 	this.combogrupos = function(idMenu)
 	{
 		$i($i3geo_gl.grupo).innerHTML = "<span style=color:red >Aguarde...</span>";
@@ -267,7 +267,7 @@ function i3geo_gl_configura(loc_i3geo,nomeseltema,temasa,link,grupo,subgrupo,tem
 	Parameters:
 
 	idGrupo - id do grupo que será pesquisado
-	*/	
+	*/
 	this.combosubgrupos = function(idGrupo,dados)
 	{
 		$i3geo_gl.combotemas(idGrupo,$i3geo_gl.subgrupo,i3GEO.arvoreDeTemas.temasRaizGrupos[idGrupo]);
@@ -286,7 +286,7 @@ function i3geo_gl_configura(loc_i3geo,nomeseltema,temasa,link,grupo,subgrupo,tem
 	Parameters:
 
 	idGrupo - id que identifica o grupo escolhido.
-	
+
 	idSubGrupo - id do sibgrupo
 	*/
 	this.combotemas = function (idGrupo,idSubGrupo,temas)
@@ -298,7 +298,7 @@ function i3geo_gl_configura(loc_i3geo,nomeseltema,temasa,link,grupo,subgrupo,tem
 	}
 	/*
 	Function: preseltema
-	
+
 	Compatibiliza a chamada da função i3geo_combotemasMenu com a função this.seltema em termos de número de parâmetros
 	*/
 	this.preseltema = function(idgrupo,idsubgrupo,idtema)
@@ -460,12 +460,12 @@ Inicia a interface do gerador de links.
 Parameters:
 
 objeto_i3geo_gl_configura - objeto com os parâmentros de configuração criado pela função i3geo_gl_configura
-*/	
+*/
 function i3geo_gl_inicia(objeto_i3geo_gl_configura)
-{		
+{
 	/*
 	Propriedade: $i3geo_gl
-	
+
 	Contém o objeto $i3geo_gl com todas as propriedades e funções de controle da interface
 	*/
 	i3GEO.configura.sid = "";

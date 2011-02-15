@@ -69,7 +69,7 @@ i3GEO.tema = {
 		if(i3GEO.Interface.ATUAL === "googleearth"){
 			indice = i3GEO.Interface.googleearth.retornaObjetoLayer(tema);
 			i3GeoMap.getFeatures().removeChild(indice);
-		}		
+		}
 		i3GEO.php.excluitema(i3GEO.atualiza,tema);
 		i3GEO.mapa.ativaTema("");
 		if(i3GEO.Interface.ATUAL === "openlayers"){
@@ -269,9 +269,9 @@ i3GEO.tema = {
 	Parametros:
 
 	idtema - código do tema
-	
+
 	idclasse - id da classe
-	
+
 	rgb - nova cor (r,g,b)
 	*/
 	alteracorclasse: function(idtema,idclasse,rgb){
@@ -284,10 +284,10 @@ i3GEO.tema = {
 		};
 		i3GEO.janela.abreAguarde("i3GEO.atualiza",$trad("o1"));
 		i3GEO.php.aplicaCorClasseTema(temp,idtema,idclasse,rgb);
-	},	
+	},
 	/*
 	Function: mudanome
-	
+
 	Muda o nome de um tema
 
 	Parametros:
@@ -313,27 +313,27 @@ i3GEO.tema = {
 	},
 	/*
 	Function: mostralegendajanela
-	
+
 	Mostra a legenda de um tema em uma janela flutuante específica
-	
+
 	Na configuração padrão, essa função é disparada quando o usuário estaciona o ouse sobre o nome de um tema na árvore de camadas
-	
+
 	O uso normal seria nas opções onmouseover e onmouseout
-	
+
 	Exemplo:
-	
+
 	onmouseover = i3GEO.tema.mostralegendajanela(idtema,nome,"ativatimer")
-	
+
 	onmouseout = i3GEO.tema.mostralegendajanela(idtema,nome,"desaativatimer")
-	
+
 	onclick = i3GEO.tema.mostralegendajanela(idtema,nome,"abrejanela")
-	
+
 	Parametros:
-	
+
 	idtema {String} - código do tema
-	
+
 	nome {String} - nome completo do tema que será mostrado no cabeçalho da janela
-	
+
 	tipoOperacao {String} {ativatimer|desativatimer|abrejanela} - tipo de operação que será executada
 	*/
 	mostralegendajanela: function(idtema,nome,tipoOperacao){
@@ -365,11 +365,11 @@ i3GEO.tema = {
 	},
 	/*
 	Classe: i3GEO.tema.dialogo
-	
+
 	Abre as telas de diálogo das opções de manipulação de um tema
-	
+
 	Return:
-	
+
 	i3GEO.janela.cria
 	*/
 	dialogo:{
@@ -377,7 +377,7 @@ i3GEO.tema = {
 		Function: comentario
 
 		Abre a janela de diálogo para o usuário ver e inserir comentarios em um tema
-		
+
 		Parametros:
 
 		tema - código do tema escolhido
@@ -389,11 +389,11 @@ i3GEO.tema = {
 		Function: cortina
 
 		Abre a janela de diálogo da ferramenta cortina
-		
+
 		Parametros:
 
 		tema - código do tema escolhido
-		
+
 		*/
 		cortina: function(tema){
 			i3GEO.mapa.ativaTema(tema);
@@ -407,7 +407,7 @@ i3GEO.tema = {
 		Parametros:
 
 		tema - código do tema escolhido
-		
+
 		tipo - tipo de kml - kml|kmz , o tipo kmz permite acessar os dados via kml (por meio de um WMS) e via kml vetorial.
 		*/
 		abreKml: function(tema,tipo){
@@ -431,7 +431,7 @@ i3GEO.tema = {
 		salvaMapfile: function(idtema){
 			i3GEO.mapa.ativaTema(idtema);
 			i3GEO.util.dialogoFerramenta("i3GEO.tema.dialogo.salvamapfile()","salvamapfile","salvamapfile");
-		},		
+		},
 		/*
 		Function: graficotema
 
@@ -538,11 +538,11 @@ i3GEO.tema = {
 		},
 		/*
 		Function: sld
-		
+
 		Converte a legenda do tema para o formato SLD (utilizado em requisições de Web Services OGC)
-		
+
 		O SLD é mostrado em uma janela sobre o mapa
-		
+
 		Parametros:
 
 		idtema - id que identifica o tema no map file.
@@ -553,9 +553,9 @@ i3GEO.tema = {
 		},
 		/*
 		Function: aplicarsld
-		
+
 		Fax o upload de um arquivo SLD (xml) e aplica ao tema
-		
+
 		Parametros:
 
 		idtema - id que identifica o tema no map file.

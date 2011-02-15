@@ -44,103 +44,103 @@ i3Geo.maparef.inicia()
 i3GEO.maparef = {
 	/*
 	Propriedade: fatorZoomDinamico
-	
+
 	Define o fator de zoom inicial do mapa de referência quando o modo dinâmico for ativado
-	
+
 	Tipo:
 	{numeric}
-	
+
 	Default:
 	{-3}
 	*/
 	fatorZoomDinamico: -3,
 	/*
 	Propriedade: SELETORTIPO
-	
+
 	Inclui ou não o seletor de tipo de mapa de referência
-	
+
 	Tipo:
 	{Boolean}
-	
+
 	Default:
 	{true}
 	*/
 	SELETORTIPO:true,
 	/*
 	Propriedade: PERMITEFECHAR
-	
+
 	Mostra o botão para fechar a janela ou não.
-	
+
 	Tipo:
 	{boolean}
-	
+
 	Default:
 	{true}
 	*/
 	PERMITEFECHAR: true,
 	/*
 	Propriedade: PERMITEDESLOCAR
-	
+
 	Permite deslocar janela ou não.
-	
+
 	Tipo:
 	{boolean}
 	*/
 	PERMITEDESLOCAR: true,
 	/*
 	Propriedade: TRANSICAOSUAVE
-	
+
 	Altera a transparência quando o mouse sobrepõe ao mapa de referência e quando sai
-	
+
 	Essa opção como true não funciona bem no IE
-	
+
 	Tipo:
 	{boolean}
-	
+
 	Default:
 	{true}
 	*/
 	TRANSICAOSUAVE: true,
 	/*
 	Propriedade: OPACIDADE
-	
+
 	Valor da transparência mínima utilizada quando TRANSICAOSUAVE for igual a true.
-	
+
 	Varia de 0 a 100
-	
+
 	Tipo:
 	{numeric}
-	
+
 	Default:
 	{35}
 	*/
 	OPACIDADE: 55,
 	/*
 	Propriedade: TOP
-	
+
 	Posição da janela em relação ao topo do mapa
-	
+
 	Tipo:
 	{Numeric}
-	
+
 	Default:
 	{4}
 	*/
 	TOP: 4,
 	/*
 	Propriedade: RIGHT
-	
+
 	Posição da janela em relação ao lado direito do mapa
-	
+
 	{Numeric}
-	
+
 	Defau:
 	{0}
 	*/
 	RIGHT:0,
 	/*
 	Function: inicia
-	
+
 	Inicializa o mapa de referência
 	*/
 	inicia: function(){
@@ -224,15 +224,15 @@ i3GEO.maparef = {
 	},
 	/*
 	Function: atualiza
-	
+
 	Atualiza o mapa de referência.
 
 	Se o modo cgi estiver ativado, o mapa de referência é desenhado utilizando-se como src da imagem o programa cgi do Mapserver.
-	
+
 	No modo dinâmico, a imagem é gerada de forma diferenciada. Nesse caso, o modo cgi é desabilitado.
-	
+
 	O atualizaReferencia é sempre chamado após o mapa ser redesenhado.
-	
+
 	Se houve alteração na extensão, é preciso refazer o mapa de referência se não, a imagem atual é armazenada no quado de animação
 	*/
 	atualiza: function(forca){
@@ -281,11 +281,11 @@ i3GEO.maparef = {
 	},
 	/*
 	Function: processaImagem
-		
+
 	Substituí a imagem do mapa de referência pela última gerada.
 
 	Esta função processa os dados de uma chamada AJAX para atualizar o mapa de referência
-	
+
 	Parametro:
 
 	retorno - string no formato "var refimagem='nome da imagem'".
@@ -320,11 +320,11 @@ i3GEO.maparef = {
 	},
 	/*
 	Function: atualizaBox
-	
+
 	Atualiza o tamanho e a posição do box que indica a extensão geográfica do mapa atual
-	
+
 	O box é um div com id = "boxref".
-	
+
 	*/
 	atualizaBox: function(){
 		var box = i3GEO.maparef.criaBox(),
@@ -383,7 +383,7 @@ i3GEO.maparef = {
 	},
 	/*
 	Function: click
-	
+
 	Ocorre quando o usuário clica sobre o mapa de referência, deslocando o mapa principal
 	*/
 	click: function(){
@@ -400,6 +400,6 @@ i3GEO.maparef = {
 		catch(e){
 			i3GEO.janela.fechaAguarde("i3GEO.atualiza");
 			if(typeof(console) !== 'undefined'){console.error(e);}
-		}	
+		}
 	}
 };

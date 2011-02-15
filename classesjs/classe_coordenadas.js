@@ -43,55 +43,55 @@ Para adicionar novas projeções ou modificar as atuais, edit a variável i3GEO.coo
 i3GEO.coordenadas = {
 	/*
 	Propriedade: formato
-	
+
 	Formato de apresentação das coordenadas
-	
+
 	Type:
 	{string}
-	
+
 	Default:
 	"lista"
-	
+
 	Valores:
-	
+
 	bloco - mostra apenas um dos tipos e uma caixa de seleção
-	
+
 	separado - mostra todos os tipos em lugares diferentes conforme o valor de idhtml
-	
+
 	lista - mostra cada tipo em um lugar diferente conforme o valor de idhtml
-	
+
 	janela - cria uma janela flutuante para mostrar os dados
-	
+
 	*/
 	formato: "bloco", //bloco,separado,lista,janela
 	/*
 	Propriedade: padrao
-	
+
 	Indica qual tipo de coordenada é mostrado como padrão quando formato for igual a "bloco". Deve existir em i3GEO.coordenadas.config
-	
+
 	Default:
 	"geoProj"
 	*/
 	padrao: "geoProj", //so faz sentido se formato for bloco
 	/*
 	Propriedade: defOrigem
-	
+
 	CRS que define a projeção original das coordenadas capturadas na tela. Deve ser o mesmo
 	parâmetro definido no mapfile de inicialização do mapa (veja em i3geo/aplicmap/geral1.map ou geral1windows.map)
-	
+
 	Default:
 	"+proj=longlat +ellps=GRS67 +no_defs"
 	*/
 	defOrigem: "+proj=longlat +ellps=GRS67 +no_defs", //sad69 geo
 	/*
 	Propriedade: config
-	
+
 	Define as configurações de cada tipo de coordenada que será utilizada e/ou mostrada no mapa
-	
+
 	Para alterar os parâmetros ou acrescentar novas projeções, altere esse objeto
-	
+
 	Para mais detalhes, veja i3geo/classesjs/classe_coordenada.js
-	
+
 	Para desativar a apresentação de uma projeção altere o valor de "ativo".
 	*/
 	config: {
@@ -108,7 +108,7 @@ i3GEO.coordenadas = {
 			titulo: "Polic SAD-69",
 			ativo: true,
 			defepsg: "+proj=poly +lat_0=0 +lon_0=-54 +x_0=5000000 +y_0=10000000 +ellps=aust_SA +units=m +no_defs"
-		},		
+		},
 		"utmSad69Proj":{
 			idhtml: "localizarxy",
 			tipo: "utm",
@@ -128,9 +128,9 @@ i3GEO.coordenadas = {
 				"22S":"+proj=utm +zone=22 +south +ellps=aust_SA +units=m +no_defs",
 				"23S":"+proj=utm +zone=23 +south +ellps=aust_SA +units=m +no_defs",
 				"24S":"+proj=utm +zone=24 +south +ellps=aust_SA +units=m +no_defs",
-				"25S":"+proj=utm +zone=25 +south +ellps=aust_SA +units=m +no_defs"			
+				"25S":"+proj=utm +zone=25 +south +ellps=aust_SA +units=m +no_defs"
 			}
-		},		
+		},
 		"utmSirgas2000Proj":{
 			idhtml: "localizarxy",
 			tipo: "utm",
@@ -164,19 +164,19 @@ i3GEO.coordenadas = {
 	},
 	/*
 	Propriedade: PARAMETROS (depreciado)
-	
+
 	Parametros de inicialização dos componentes.
-	
+
 	Essa variável define os parâmetros individuais de cada componente que pode ser utilizado no mapa.
-	
+
 	Você pode acessar os parâmetros da seguinte forma:
-	
+
 	i3GEO.coordenadas.PARAMETROS.mostraCoordenadas.idhtml = "";
-	
+
 	Nas versões anteriores à 4.5 do i3Geo utilizava-se um 
-	
+
 	Default:
-	
+
 	i3GEO.coordenadas.PARAMETROS = {
 
 		"mostraCoordenadasUTM":
@@ -187,7 +187,7 @@ i3GEO.coordenadas = {
 
 		{idhtml:"localizarxy"}
 	}
-	
+
 	Tipo:
 	{objeto}
 	*/
@@ -195,31 +195,31 @@ i3GEO.coordenadas = {
 		"mostraCoordenadasUTM":
 		{idhtml:"localizarxy"},
 		"mostraCoordenadasGEO":
-		{idhtml:"localizarxy"}	
+		{idhtml:"localizarxy"}
 	},
 	/*
 	Function: mostraCoordenadasUTM
-	
+
 	Obtém e mostra as coordenadas UTM da posição do mouse sobre o mapa por meio de um cálculo realizado no servidor.
-	
+
 	Essa função deixou de ser utilizada na versão 4.5 do i3Geo.
-	
+
 	As coordenadas são obtidas por meio de uma chamada AJAX.
-	
+
 	Se você não quer essa função no mapa, elimine o elemento HTML existente no mapa que contenha o 
 	id definido em i3GEO.coordenadas.PARAMETROS (mostraCoordenadasUTM) ou altere a variável i3GEO.eventos.MOUSEPARADO
-	
+
 	Se i3GEO.coordenadas.mostraCoordenadasUTM.idhtml for igual a i3GEO.coordenadas.mostraCoordenadasGEO.idhtml
-	
+
 	os valores mostrados serão intercalados entre GEO e UTM
-	
+
 	Parametro:
-	
+
 	id {String} - id do elemento HTML que receberá o resultado. Esse id por default é obtido de
 	i3GEO.coordenadas.PARAMETROS
 
 	Return:
-	
+
 	{JSON} - objeto com x e y
 	*/
 	mostraCoordenadasUTM: function(id){
@@ -272,21 +272,21 @@ i3GEO.coordenadas = {
 			if(i3GEO.eventos.MOUSEPARADO.toString().search("atualizaCoordenadasUTM()") < 0)
 			{i3GEO.eventos.MOUSEPARADO.push("atualizaCoordenadasUTM()");}
 		}
-		catch(e){alert("mostraCoordenadasUtm: "+e.description);}			
+		catch(e){alert("mostraCoordenadasUtm: "+e.description);}
 	},
 	/*
 	Function: mostraCoordenadasGEO
-	
+
 	Obtém e mostra as coordenadas Geográficas da posição do mouse sobre o mapa.
-		
+
 	Se você não quer essa função no mapa, elimine o elemento HTML que contenha o 
 	id definido em i3GEO.coordenadas.PARAMETROS, por default é "localizarxy"
-	
+
 	Parametro:
-	
+
 	id {String} - id do elemento HTML que receberá o resultado. Esse id por default é obtido de
 	i3GEO.coordenadas.PARAMETROS
-	*/	
+	*/
 	mostraCoordenadasGEO: function(id){
 		if(typeof(console) !== 'undefined'){console.info("i3GEO.coordenadas.mostraCoordenadasGEO()");}
 		try{
@@ -312,15 +312,15 @@ i3GEO.coordenadas = {
 	},
 	/*
 	Function: geo2zonaUtm
-	
+
 	Determina qual é a zona UTM de um par de coordenadas geográficas
-	
+
 	Parametros:
-	
+
 	long - longitude em décimos de grau
-	
+
 	Return:
-	
+
 	{number} - zona UTM
 	*/
 	geo2zonaUtm: function(long){
@@ -330,17 +330,17 @@ i3GEO.coordenadas = {
 	},
 	/*
 	Function: criaMascaraDMS
-	
+
 	Cria uma tabela para mostrar as coordenadas no padrão grau minuto e segundo
-	
+
 	A tabela criada receberá o id = prefixo
-	
+
 	Parametro:
-	
+
 	prefixo {string} - prefixo para batizar os ids dos elementos que serão criados
-	
+
 	Retorno:
-	
+
 	{string} - html com a tabela
 	*/
 	criaMascaraDMS: function(prefixo,titulo,caixa){
@@ -362,17 +362,17 @@ i3GEO.coordenadas = {
 	},
 	/*
 	Function: atualizaGeo
-	
+
 	Atualiza os valores em uma tabela do tipo DMS
-	
+
 	Parametros:
-	
+
 	dmsx {string} - valors de longitude em "d m s"
 
 	dmsy {string} - valors de latitude em "d m s"
-	
+
 	prefixo {string} - prefixo da tabela (veja criaMascaraDMS)
-	
+
 	*/
 	atualizaGeo: function(dmsx,dmsy,prefixo){
 		var x = dmsx.split(" "),
@@ -386,19 +386,19 @@ i3GEO.coordenadas = {
 	},
 	/*
 	Function: criaMascaraMetrica
-	
+
 	Cria uma tabela para mostrar as coordenadas no padrão métrico (x e y)
-	
+
 	A tabela criada receberá o id prefixo+"tabela"
-	
+
 	Parametro:
-	
+
 	prefixo {string} - prefixo para batizar os ids dos elementos que serão criados
-	
+
 	cixa {string} - (opcional) caixa de seleção de tipos
-	
+
 	Retorno:
-	
+
 	{string} - html com a tabela
 	*/
 	criaMascaraMetrica: function(prefixo,titulo,caixa){
@@ -413,15 +413,15 @@ i3GEO.coordenadas = {
 	},
 	/*
 	Function: atualizaProj4
-	
+
 	Atualiza os valores em uma tabela do tipo x e y com base na biblioteca Proj4
-	
+
 	http://trac.osgeo.org/proj4js/wiki/UserGuide
-	
+
 	Parametros:
-	
+
 	configProj {string}
-	
+
 	*/
 	atualizaProj4: function(onde,configProj,x,y){
 		var destino,zona,temp,p;
@@ -429,7 +429,7 @@ i3GEO.coordenadas = {
 			if(!$i(onde+configProj+"ZN"))
 			{return;}
 		}
-		catch(e){return;}		
+		catch(e){return;}
 		temp = i3GEO.coordenadas.config[configProj];
 		try{
 			if($i(onde+configProj).style.display === "none")
@@ -442,7 +442,7 @@ i3GEO.coordenadas = {
 		if(typeof(x) === 'undefined')
 		{x = objposicaocursor.ddx;}
 		if(typeof(y) === 'undefined')
-		{y = objposicaocursor.ddy;}		
+		{y = objposicaocursor.ddy;}
 		if(temp.tipo === "utm"){
 			zona = i3GEO.coordenadas.geo2zonaUtm(x);
 			$i(onde+configProj+"ZN").value = zona;
@@ -455,28 +455,28 @@ i3GEO.coordenadas = {
 				i3GEO.util.defineValor(onde+configProj+"Y","value","?");
 				return;
 			}
-		}		
+		}
 		p = i3GEO.coordenadas.calculaProj4(i3GEO.coordenadas.defOrigem,destino,x,y);
 		i3GEO.util.defineValor(onde+configProj+"X","value",p.x);
 		i3GEO.util.defineValor(onde+configProj+"Y","value",p.y);
 	},
 	/*
 	Function: calculaProj4
-	
+
 	Faz a projeção de x e y da origem para o destino
-	
+
 	Parametros:
-	
+
 	origem {string} - CRS contendo o código da projeção de origem
-	
+
 	destino {string} - CRS contendo o código da projeção de destino
-	
+
 	x {numerico} - coordenada x ou longitude
-	
+
 	y {numerico} - coordenada y ou latitude
-	
+
 	Retorno:
-	
+
 	{Proj4js.transform}
 	*/
 	calculaProj4: function(origem,destino,x,y){
@@ -492,9 +492,9 @@ i3GEO.coordenadas = {
 	},
 	/*
 	Function: ativaBloco
-	
+
 	Mostra um tipo de coordenada e esconde os outros.
-	
+
 	Mostra o que estiver definido em i3GEO.coordenadas.padrao
 	*/
 	ativaBloco: function(prefixo){
@@ -517,13 +517,13 @@ i3GEO.coordenadas = {
 	},
 	/*
 	Function: mudaTipo
-	
+
 	Muda o tipo de coordenada que está sendo mostrada no formato "bloco".
-	
+
 	Parametro:
-	
+
 	tipo {string} - tipo de coordenada
-	*/	
+	*/
 	mudaTipo: function(obj,onde){
 		if(obj.value === "janela"){
 			this.formato = "janela";
@@ -536,13 +536,13 @@ i3GEO.coordenadas = {
 	},
 	/*
 	Function: mostraCoordenadas
-	
+
 	Constrói o conjunto de elementos HTML para mostrar as coordenadas e define as funções de atualização.
-	
+
 	Parametro:
-	
+
 	ativaMovimento {boolean} - (opcional) aplica ou não as funções ligadas à movimentação do mouse
-	
+
 	onde {string} - (opcional) id onde o resultado será mostrado (irá ignorar os ids definidos em coordenadas.config)
 	*/
 	mostraCoordenadas: function(ativaMovimento,onde,x,y){
@@ -566,7 +566,7 @@ i3GEO.coordenadas = {
 			caixa = "<select onchange='javascript:i3GEO.coordenadas.mudaTipo(this,\""+onde+"\");' style='margin-left:3px;font-size:10px;height:16px;width:50px;' ><option>---</option><option value='janela' >janela</option>";
 			//
 			//cria a caixa de seleção
-			//			
+			//
 			for(i=0;i<n;i += 1){
 				temp = this.config[tipos[i]];
 				if(temp.ativo === true){

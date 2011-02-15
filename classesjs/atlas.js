@@ -163,7 +163,7 @@ function pegaListaDeAtlas()
 			{
 				local.innerHTML = retorno.data.tituloinstituicao+"<br><p><b>Nenhum atlas encontrado";
 				return;
-			}	
+			}
 			atlasxml = retorno.data.atlasxml;
 			var i = 0;
 			do

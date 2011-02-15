@@ -70,7 +70,7 @@ g_traducao_ajuda = {
 			pt:"Um template define como os componentes de um mapa são organizados no navegador. O administrador do i3Geo pode criar templates diferentes conforme as necessidades do usuário, sendo que alguns templates são fornecidos com o próprio i3Geo.",
 			complemento:"A criação de templates é uma tarefa do administrador do i3Geo. Para abrir um template específico diretamente, utilize a URL que é mostrada no navegador quando um template é escolhido.",
 			tela:"ferramentas/template/exemplo.htm",
-			apijs:"i3GEO.mapa.dialogo.template()"			
+			apijs:"i3GEO.mapa.dialogo.template()"
 		},
 		"9": {
 			titulo: "Temporizador",
@@ -79,7 +79,7 @@ g_traducao_ajuda = {
 			pt:"O temporizador permite definir um intervalo de tempo em segundos que irá disparar o redesenho do mapa.",
 			complemento:"Quando o mapa é redesenhado, as camadas existentes são lidas novamente para compor o novo mapa. Essa opção é útil quando existirem camadas no mapa que sofrem atualizações frequentes, como por exemplo o deslocamento de aeronaves, carros ou navios.",
 			tela:"ferramentas/opcoes_autoredesenha/exemplo.htm",
-			apijs:"i3GEO.mapa.dialogo.autoredesenha()"			
+			apijs:"i3GEO.mapa.dialogo.autoredesenha()"
 		},
 		"10": {
 			titulo: "Salvar mapa",
@@ -88,7 +88,7 @@ g_traducao_ajuda = {
 			pt:"O mapa que o usuário está utilizando pode ser salvo localmente (na máquina do usuário) para ser aberto posteriormente. Isso permite que um trabalho seja continuado em outro momento, uma vez que o mapa em uso é sempre perdido quando o usuário fecha o navegador.",
 			complemento:"Os dados locais que foram criados não são salvos, sendo necessário o seu download quando desejado. Isso afeta as opções de inclusão de pontos ou conversão de elementos selecionados em camadas.",
 			tela:"ferramentas/salvamapa/exemplo.htm",
-			apijs:"i3GEO.mapa.dialogo.salvaMapa()"			
+			apijs:"i3GEO.mapa.dialogo.salvaMapa()"
 		},
 		"11": {
 			titulo: "Carregar mapa",

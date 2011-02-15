@@ -42,151 +42,151 @@ Veja também classe_interface.js (i3GEO.Interface) que possuí parâmetros que perm
 i3GEO.barraDeBotoes = {
 	/*
 	Propriedade: AJUDA
-	
+
 	Mostra um texto de ajuda colado ao ícone da ferramenta
-	
+
 	Tipo:
 	{boolean}
-	
+
 	Default:
 	{true}
 	*/
 	AJUDA: true,
 	/*
 	Propriedade: TIPOAJUDA
-	
+
 	Tipo do balão de ajuda que é mostrado colado ao ícone da ferramenta
-	
+
 	Tipo:
 	{string}
-	
+
 	Valores:
 	{"horizontal","vertical"}
 	Default:
 	{"horizontal"}
 	*/
-	TIPOAJUDA: "horizontal",	
+	TIPOAJUDA: "horizontal",
 	/*
 	Propriedade: SOICONES
-	
+
 	Esconde as bordas das barras e o fundo, mostrando apenas os ícones
-	
+
 	Default:
 	{false}
-	
+
 	Tipo:
 	{boolean}
 	*/
 	SOICONES: false,
 	/*
 	Propriedade: AUTOALTURA
-	
+
 	Ajusta automaticamente a altura das barras conforme a altura do mapa.
-	
+
 	Esta opção não tem efeito se a barra contiver a barra de zoom (isso ocorre em função de um bug do YIU, que causa erro na barra nessas condições)
-	
+
 	Tipo:
 	{boolean}
 	*/
 	AUTOALTURA: false,
 	/*
 	Propriedade: TRANSICAOSUAVE
-	
+
 	Altera a transparência das barras quando o mouse sobrepõe a barra e quando sai da barra
-	
+
 	Tipo:
 	{boolean}
-	
+
 	Default:
 	{true}
 	*/
 	TRANSICAOSUAVE: true,
 	/*
 	Propriedade: OPACIDADE
-	
+
 	Valor da opacidade miníma utilizada quando TRANSICAOSUAVE for igual a true.
-	
+
 	Varia de 0 a 100
-	
+
 	Tipo:
 	{numeric}
-	
+
 	Default:
 	{65}
 	*/
 	OPACIDADE: 65,
 	/*
 	Propriedade: PERMITEFECHAR
-	
+
 	Mostra o botão para fechar as barras ou não.
-	
+
 	Tipo:
 	{boolean}
 	*/
 	PERMITEFECHAR: true,
 	/*
 	Propriedade: PERMITEDESLOCAR
-	
+
 	Permite deslocar as barras ou não.
-	
+
 	Tipo:
 	{boolean}
 	*/
 	PERMITEDESLOCAR: true,
 	/*
 	Propriedade: ATIVAMENUCONTEXTO
-	
+
 	Indica se o menu de contexto deve ser ativado
-	
+
 	Tipo:
 	{Boolean}
-	
+
 	Default:
 	{true}
 	*/
 	ATIVAMENUCONTEXTO: false,
 	/*
 	Propriedade: AUTO
-	
+
 	Cria as barras de botões automaticamente, utilizando os botões padrão sem considerar a lista de botões definidas no HTML da interface.
-	
+
 	A lista de botões é definida em i3GEO.configura
-	
+
 	Tipo:
 	{Boolean}
-	
+
 	Default:
 	{false}
 	*/
-	AUTO: false,	
+	AUTO: false,
 	/*
 	Propriedade: LISTABOTOES
-	
+
 	Objeto com a lista de botões e suas propriedades, como por exemplo, a função a ser executada ao se clicar no botão.
-	
+
 	Essa lista não indica quais os botões que serão inseridos. Para definir os botões que serão inseridos, inclua no HTML da interface
 	os botões desejados (veja em i3geo/exemplos). Se vc utilizar a opção i3GEO.barraDeBotoes.AUTO = true , os botões serão inseridos
 	automaticamente. Nesse caso, utilize a opção i3GEO.barraDeBotoes.INCLUIRBOTOES para indicar os botões desejados.
-	
+
 	Por default utiliza os botoes definidos em i3GEO.configura.funcoesBotoes.botoes
-	
+
 	Tipo:
 	{JSON}
 	*/
 	LISTABOTOES: i3GEO.configura.funcoesBotoes.botoes,
 	/*
 	Propriedade: INCLUIBOTAO
-	
+
 	Objeto que indica quais os botões que serão inseridos na barra de botões 2.
-	
+
 	Essa opção só funciona se i3GEO.barraDeBotoes.AUTO = true
-	
+
 	Vc pode também alterar a ordem dos botoes.
-	
+
 	Default:
-	
+
 	INCLUIBOTAO: {
-	
+
 		zoomli: false,
 
 		pan: false,
@@ -194,44 +194,44 @@ i3GEO.barraDeBotoes = {
 		zoomtot:false,
 
 		identifica: true,
-		
+
 		identificaBalao: true,
-		
+
 		mede: true,
-		
+
 		area: true,
-		
+
 		imprimir: true,
-		
+
 		reinicia: true,
-		
+
 		exten: true,
-		
+
 		referencia: true,
-		
+
 		inserexy: true,
-		
+
 		textofid: true,
-		
+
 		selecao: true,
-		
+
 		google: true,
-		
+
 		buscafotos: true,
-		
+
 		wiki: true,
-		
+
 		metar: true,
-		
+
 		lentei: true,
-		
+
 		confluence: true,
-		
+
 		inseregrafico: true,
-		
+
 		v3d: true
-	}	
-	
+	}
+
 	Tipo:
 	{JSON}
 	*/
@@ -261,72 +261,72 @@ i3GEO.barraDeBotoes = {
 	},
 	/*
 	Propriedade: TEMPLATEBOTAO
-	
+
 	Template HTML que será utilizado na construção automática dos botões da barra 2.
-	
+
 	Utilize a string $$ para indicar onde será incluído o código do botão.
-	
+
 	Default:
-	
+
 	"<div style='display:inline;background-color:rgb(250,250,250);'><p style='font-size:2px;'>&nbsp;</p><img src='"+i3GEO.configura.locaplic+"/imagens/branco.gif' id='$$'/></div>"
-	
+
 	Tipo:
 	{string}
 	*/
 	TEMPLATEBOTAO: "",
 	/*
 	Propriedade: BOTAOPADRAO
-	
+
 	Botão que será ativado ao inicializar os botões com ativaBotoes.
-	
+
 	Correpsonde ao item iddiv de LISTABOTOES
-	
+
 	Tipo:
 	{String}
 	*/
 	BOTAOPADRAO: "pan",
 	/*
 	Propriedade: COMPORTAMENTO
-	
+
 	Define o comportamento dos botões quando é pressionado
-	
+
 	Tipo:
 	{String}
-	
+
 	Valores:
-	
+
 	"padrao" - comportamento padrão, com bordas da esquerda e inferiores ativadas
-	
+
 	"destacado" - destaca apenas o botão atualmente pressionado
-	
+
 	"vermelho" - destaca com fundo vermelho
-	
+
 	"laranja" - destaca com fundo laranja
-	
+
 	"cinza" - destaca com fundo cinza
-	
+
 	*/
-	COMPORTAMENTO: "padrao",	
+	COMPORTAMENTO: "padrao",
 	/*
 	Variavel: BARRAS
-	
+
 	Array com os objetos YAHOO.janelaBotoes.xp.panel criados
 	*/
 	BARRAS: [],
 	/*
 	Variavel: BOTAOCLICADO
-	
+
 	Último icone que foi clicado
-	
+
 	Tipo:
 	{String}
 	*/
 	BOTAOCLICADO: "",
 	/*
 	Function: ativaPadrao
-	
+
 	Ativa o botão definido como padrão, executando a função definida em onclick
-	
+
 	Utilizado para restaurar o status padrão da barra, principalmente por ferramentas que alteram ícones e outras propriedades do mapa
 	*/
 	ativaPadrao: function(){
@@ -337,14 +337,14 @@ i3GEO.barraDeBotoes = {
 	},
 	/*
 	Function: ativaIcone
-	
+
 	Altera as bordas de um ícone aplicando um efeito de ícone realçado.
-	
+
 	Todos os demais ícones definidos em LISTABOTOES e que tiverem o tipo = "dinamico"
 	serão processados para alterar as bordas dando o efeito de não ativo.
-	
+
 	Parametro:
-	
+
 	icone {String} - id do icone que será ativado. Esse id é o mesmo definido em LISTABOTOES
 	*/
 	ativaIcone: function(icone){
@@ -451,13 +451,13 @@ i3GEO.barraDeBotoes = {
 	},
 	/*
 	Function: ativaBotoes
-	
+
 	Ativa os botoes definidos em LISTABOTOES
-	
+
 	Os botoes são construídos e as funções definidas são embutidas no evento onclick
-	
+
 	Parametro:
-	
+
 	padrao (String} - botao que será mostrado como ativo (opcional).
 	Se não for definido, será utilizado o botão especificado em BOTAOPADRAO.
 	O nome do botao deve estar em LISTABOTOES na propriedade iddiv
@@ -496,36 +496,36 @@ i3GEO.barraDeBotoes = {
 	},
 	/*
 	Function: inicializaBarra
-	
+
 	Inicializa a barra de botões
-	
+
 	A barra de zoom é inserida automaticamente na barra de botoes 1
-	
+
 	Exemplo:
-	
+
 	if ($i("barraDeBotoes1"))
-	
+
 	i3GEO.barraDeBotoes.inicializaBarra("barraDeBotoes1","i3geo_barra1",true,x1,y1);
-	
+
 	if ($i("barraDeBotoes2"))
-	
+
 	i3GEO.barraDeBotoes.inicializaBarra("barraDeBotoes2","i3geo_barra2",false,x2,y2);
-	
+
 	Os objetos criados são armazenados no array BARRAS, dessa forma, para acessar uma barra utilize
 	por exemplo:
-	
+
 	i3GEO.barraDeBotoes.BARRAS[1].show();
-	
+
 	Parametros:
-	
+
 	idconteudo {String} - id do elemento existente no HTML e que contém as definições dos botões
-	
+
 	idconteudonovo {String} - id do elemento que será criado para adicionar os botoões
-	
+
 	barraZoom {boolean} - indica se a barra de zoom será incluída
-	
+
 	x {Numeric} - posição x (pixels) da barra em relação ao mapa
-	
+
 	y {Numeric} - posição y (pixels) da barra em relação ao mapa
 
 	onde {String} - (opcional) id do elemento HTML onde os botões serão inseridos
@@ -613,7 +613,7 @@ i3GEO.barraDeBotoes = {
 		novoel.onmouseout = function(){
 			if(i3GEO.barraDeBotoes.TRANSICAOSUAVE){
 				YAHOO.util.Dom.setStyle(novoel,"opacity",i3GEO.barraDeBotoes.OPACIDADE / 100);
-			}		
+			}
 		};
 		document.body.appendChild(novoel);
 		if(this.ATIVAMENUCONTEXTO)
@@ -652,7 +652,7 @@ i3GEO.barraDeBotoes = {
 					}catch(men){
 						if(typeof(console) !== 'undefined'){console.error(men);}
 					}
-				}		
+				}
 			}
 			if(elementos.length <= numerobotoes){
 				Dom.setStyle(["sobeferramentas","desceferramentas"],"display","none");
@@ -761,11 +761,11 @@ i3GEO.barraDeBotoes = {
 	},
 	/*
 	Function: ativaMenuContexto (depreciado na versão 4.5)
-	
+
 	Ativa o menu de contexto acionado com o botão direito do mouse
-	
+
 	Parametro:
-	
+
 	idbarra - {string} id da barra de botões onde o evento será ativado
 	*/
 	ativaMenuContexto: function(idbarra){
@@ -796,15 +796,15 @@ i3GEO.barraDeBotoes = {
 	},
 	/*
 	Function: reativa
-	
+
 	Reativa as barras de ferramentas já criadas
-	
+
 	Essa opção apenas aplica o método "show" aos objetos armazenados em i3GEO.barraDeBotoes.BARRAS
-	
+
 	Se a barra não existir previamente, nada irá contecer
-	
+
 	Parametro:
-	
+
 	indice {Integer} - índice do array BARRAS que guarda os objetos YAHOO com 
 	as barras Se não for definido, todas as barras serão reativadas
 	*/
@@ -827,11 +827,11 @@ i3GEO.barraDeBotoes = {
 	},
 	/*
 	Function: recria
-	
+
 	Recria uma barra de ferramentas já aberta aplicando os parâmetros de configuração definidos (variáveis)
-	
+
 	Parametro:
-	
+
 	id {String} - id da barra
 	*/
 	recria: function(id){
@@ -864,11 +864,11 @@ i3GEO.barraDeBotoes = {
 	},
 	/*
 	Function: fecha
-	
+
 	Fecha uma barra de ferramentas
-	
+
 	Parametro:
-	
+
 	id {String} - id que identifica a barra. Corresponde ao parâmetro idconteudonovo da função de inicialização das barras
 	*/
 	fecha: function(id){
@@ -878,7 +878,7 @@ i3GEO.barraDeBotoes = {
 			if(this.BARRAS[i].id === id){
 				$i(id+"_c").style.visibility = "hidden";
 			}
-		}	
+		}
 	},
 	mostraJanela: function(objeto,mensagem){
 		var divmensagem = $i("divMensagemBarraDeBotoes"),
@@ -915,7 +915,7 @@ i3GEO.barraDeBotoes = {
 			if(this.TIPOAJUDA === "vertical"){
 				divmensagem.style.left = (parseInt(YAHOO.util.Dom.getStyle(objeto,"width"),10)/2)+pos[0]-5+"px";
 				divmensagem.style.top = pos[1]+5+parseInt(YAHOO.util.Dom.getStyle(objeto,"height"),10)+"px";
-			}			
+			}
 			$i("divMensagemBarraDeBotoesCorpo").innerHTML = mensagem;
 			divmensagem.style.display="block";
 			try{clearTimeout(timeAjudaBotoes);}catch(e){}

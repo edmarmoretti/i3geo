@@ -43,20 +43,20 @@ i3GEO.mapa = {
 	/*
 	Variavel: GEOXML
 	Armazena o nome dos objetos geoXml adicionados ao mapa pela API do google maps
-	
+
 	Tipo:
 	{Array}
 	*/
 	GEOXML: [],
 	/*
 	Function: ajustaPosicao
-	
+
 	Ajusta o posicionamento do corpo do mapa
-	
+
 	Esse ajuste é necessário na inicialização, uma vez que o mapa utiliza style.position='absolute'
-	
+
 	Parameters:
-	
+
 	elemento {String} - id do elemento HTML que deverá ser ajustado e que contém o mapa
 	*/
 	ajustaPosicao: function(elemento){
@@ -74,7 +74,7 @@ i3GEO.mapa = {
 				dc = dc.offsetParent;
 				imagemxi += dc.offsetLeft;
 				imagemyi += dc.offsetTop;
-			}	
+			}
 			c = $i(i3GEO.Interface.IDCORPO);
 			if (c){
 				c.style.position="absolute";
@@ -89,13 +89,13 @@ i3GEO.mapa = {
 	},
 	/*
 	Function: ativaTema
-	
+
 	Altera a variável i3GEO.temaAtivo e atualiza a interface em função do novo tema que for ativado
-	
+
 	O tema anteriormente ativo tem sua cor alterada para a cor normal e o novo tema é destacado com uma cor diferente
-	
+
 	Parametros:
-	
+
 	codigo {string} - código da camada
 	*/
 	ativaTema: function(codigo){
@@ -117,11 +117,11 @@ i3GEO.mapa = {
 	},
 	/*
 	Function: verifica
-	
+
 	Verifica se ocorreu algum problema na atualização do corpo do mapa e inicia o processo de tentativa de recuperação
-	
+
 	Parametro:
-	
+
 	retorno {string} - objeto recebido da função PHP de atualização do mapa
 	*/
 	verifica:function(retorno){
@@ -153,32 +153,32 @@ i3GEO.mapa = {
 				if (this.recupera.TENTATIVA === 1){
 					this.recupera.TENTATIVA = 2;
 					i3GEO.php.reiniciaMapa(i3GEO.atualiza);
-				}		
+				}
 			}
 			if(typeof(console) !== 'undefined'){console.error(e);}
 		}
 	},
 	/*
 	Classe: i3GEO.mapa.recupera
-	
+
 	Tenta recuperar o mapa caso ocorra algum problema
-	
+
 	O i3Geo mantém sempre uma cópia do arquivo mapfile em uso. Essa função tenta
 	usar essa cópia para restaurar o funcionamento do mapa
 	*/
 	recupera:{
 		/*
 		Variavel: TENTATIVA
-		
+
 		Armazena a quantidade de tentativas de recuperação que foram feitas
-		
+
 		Tipo:
 		{Integer}
 		*/
 		TENTATIVA: 0,
 		/*
 		Function: inicia
-		
+
 		Inicia a tentativa de recuperação
 		*/
 		inicia: function(){
@@ -191,7 +191,7 @@ i3GEO.mapa = {
 		},
 		/*
 		Function: restaura
-		
+
 		Restaura o mapa para a cópia de segurança existente no servidor
 		*/
 		restaura: function(){
@@ -200,43 +200,43 @@ i3GEO.mapa = {
 	},
 	/*
 	Classe: i3GEO.mapa.legendaHTML
-	
+
 	Controla a obtenção da legenda do mapa formatada em HTML.
-	
+
 	Útil para mostrar a legenda na tela
 	*/
 	legendaHTML:{
 		/*
 		Propriedade: incluiBotaoLibera
-		
+
 		Define se na legenda será incluido o botão para liberar a legenda e incluí-la em uma janela flutuante
-		
+
 		Tipo:
 		{boolean}
-		
+
 		Default:
 		{true}
 		*/
 		incluiBotaoLibera: true,
 		/*
 		Variavel:  ID
-		
+
 		Armazena o id definido na criação da legenda
 		*/
 		ID: "",
 		/*
 		Function: cria
-		
+
 		Cria a legenda HTML
-		
+
 		A legenda é incluida no id definido. Se id for igual a "", será apenas definido o evento de atualização
 		permitindo que seja criada a janela flutuante apenas, por exemplo:
-		
+
 		i3GEO.mapa.legendaHTML.cria("");
 		i3GEO.mapa.legendaHTML.libera();
-		
+
 		Parametros:
-		
+
 		id {String} - id do elemento que receberá a legenda
 		*/
 		cria: function(id){
@@ -245,12 +245,12 @@ i3GEO.mapa = {
 			{id = "";}
 			this.legendaHTML.ID = id;
 			if(i3GEO.eventos.NAVEGAMAPA.toString().search("i3GEO.mapa.legendaHTML.atualiza()") < 0)
-			{i3GEO.eventos.NAVEGAMAPA.push("i3GEO.mapa.legendaHTML.atualiza()");}					
+			{i3GEO.eventos.NAVEGAMAPA.push("i3GEO.mapa.legendaHTML.atualiza()");}
 			i3GEO.mapa.legendaHTML.atualiza();
 		},
 		/*
 		Function: atualiza
-		
+
 		Atualiza o elemento HTML do mapa utilizado para mostrar a legenda
 		*/
 		atualiza: function(){
@@ -278,13 +278,13 @@ i3GEO.mapa = {
 		},
 		/*
 		Function: obtem
-		
+
 		Faz a chamada em AJAX que gera a legenda
-		
+
 		O resultado é processado pela função passada como parâmetro
-		
+
 		Parametro:
-		
+
 		funcao {function} - função que receberá o resultado da chamada AJAX. O objeto CPAINT é enviado como parâmetro.
 		*/
 		obtem: function(funcao){
@@ -293,11 +293,11 @@ i3GEO.mapa = {
 		},
 		/*
 		Function: ativaDesativaTema
-		
+
 		Liga ou desliga um único tema. Utilizado pela legenda HTML, permitindo que um tema seja processado diretamente na legenda.
-		
+
 		Parametro:
-		
+
 		inputbox {object) - objeto do tipo input checkbox com a propriedade value indicando o código do tema que será processado
 		*/
 		ativaDesativaTema: function(inputbox){
@@ -312,11 +312,11 @@ i3GEO.mapa = {
 			if(!inputbox.checked)
 			{i3GEO.php.ligatemas(temp,inputbox.value,"");}
 			else
-			{i3GEO.php.ligatemas(temp,"",inputbox.value);}		
+			{i3GEO.php.ligatemas(temp,"",inputbox.value);}
 		},
 		/*
 		Function: libera
-		
+
 		Libera a legenda criando uma janela flutuante sobre o mapa
 		*/
 		libera: function(){
@@ -349,22 +349,22 @@ i3GEO.mapa = {
 	},
 	/*
 	Classe: i3GEO.mapa.legendaIMAGEM
-	
+
 	Controla a obtenção da legenda do mapa na forma de uma imagem
-	
+
 	É utilizado principalmente para armazenar as imagens para a função de 
 	obtenção do histórico do mapa
 	*/
 	legendaIMAGEM:{
 		/*
 		Function: obtem
-		
+
 		Faz a chamada em AJAX que gera a legenda
-		
+
 		O resultado é processado pela função passada como parâmetro
-		
+
 		Parametro:
-		
+
 		funcao {function} - função que receberá o resultado da chamada AJAX. O objeto CPAINT é enviado como parâmetro.
 		*/
 		obtem: function(funcao){
@@ -374,7 +374,7 @@ i3GEO.mapa = {
 	},
 	/*
 	Classe: i3GEO.mapa.dialogo
-	
+
 	Abre as telas de diálogo das opções de manipulação do mapa atual
 	*/
 	dialogo:{
@@ -521,7 +521,7 @@ i3GEO.mapa = {
 		},
 		/*
 		Function: cliqueTexto
-		
+
 		Abre a janela de diálogo da ferramenta inseretxt
 		*/
 		cliqueTexto: function(){
@@ -529,7 +529,7 @@ i3GEO.mapa = {
 		},
 		/*
 		Function: selecao
-		
+
 		Abre a janela de diálogo da ferramenta selecao
 		*/
 		selecao: function(){
@@ -537,7 +537,7 @@ i3GEO.mapa = {
 		},
 		/*
 		Function: cliquePonto
-		
+
 		Abre a janela de diálogo da ferramenta inserexy2
 		*/
 		cliquePonto: function(){
@@ -545,7 +545,7 @@ i3GEO.mapa = {
 		},
 		/*
 		Function: cliqueGrafico
-		
+
 		Abre a janela de diálogo da ferramenta inseregrafico
 		*/
 		cliqueGrafico: function(){
@@ -553,8 +553,8 @@ i3GEO.mapa = {
 		},
 		/*
 		Function: cliqueIdentificaDefault
-		
-		Abre a janela de diálogo da ferramenta identifica		
+
+		Abre a janela de diálogo da ferramenta identifica
 		*/
 		cliqueIdentificaDefault: function(){
 			if(typeof(console) !== 'undefined'){console.info("i3GEO.mapa.dialogo.cliqueIdentificaDefault()");}
@@ -576,10 +576,10 @@ i3GEO.mapa = {
 		},
 		/*
 		Function: verificaTipDefault
-		
+
 		Mostra etiquetas no mapa com informações sobre os temas com etiquetas ativas
-		
-		Essa é a função padrão definida em i3GEO.configura		
+
+		Essa é a função padrão definida em i3GEO.configura
 		*/
 		verificaTipDefault: function(){
 			if(typeof(console) !== 'undefined'){console.info("i3GEO.mapa.dialogo.verificaTipDefault()");}
@@ -599,7 +599,7 @@ i3GEO.mapa = {
 				var temp,rfes,n,balloon,i,mostra,res,temas,ntemas,titulo,tips,j,ntips,ins,r,ds,nds,s;
 				i = $i("i3geo_rosa");
 				if(i)
-				{i.style.display="none";}			
+				{i.style.display="none";}
 				mostra = false;
 				try{
 					retorno = retorno.data;
@@ -658,7 +658,7 @@ i3GEO.mapa = {
 							if($i("tip"))
 							{$i("tip").style.display="none";}
 						}
-						else{		
+						else{
 							if(i3GEO.configura.tipotip !== "balao"){
 								n = i3GEO.janela.tip();
 								$i(n).style.textAlign="left";

@@ -44,31 +44,31 @@ As guias das ferramentas são configuradas nos scripts específicos de cada ferram
 i3GEO.guias = {
 	/*
 	Variavel: ATUAL
-	
+
 	Guia que está ativa
-	
+
 	O nome da guia é a definida na variável i3GEO.guias.CONFIGURA
-	
+
 	Tipo:
 	{string}
-	
+
 	Default:
 	{"temas"}
 	*/
 	ATUAL: "temas",
 	/*
 	Propriedade: CONFIGURA
-	
+
 	Define os parâmetros de cada guia que será mostrada no mapa, como título, conteúdo, etc.
 
 	Você pode modificar o nome de uma guia como no exemplo
-	
+
 	i3GEO.guias.CONFIGURA.legenda.titulo = "nome diferente";
-	
+
 	Por padrão são definidas as guias legenda, temas, adiciona e mapas (links)
-	
+
 	Exemplo
-	
+
 	i3GEO.guias.CONFIGURA.legenda = {
 			titulo:"Legenda do mapa",
 			id:"guia4",
@@ -77,8 +77,8 @@ i3GEO.guias = {
 				i3GEO.guias.mostra("legenda");//mostra a guia
 				i3GEO.mapa.legendaHTML.cria("guia4obj");
 			}
-		}	
-	
+		}
+
 	Tipo:
 	{JSON}
 	*/
@@ -163,64 +163,64 @@ i3GEO.guias = {
 	},
 	/*
 	Propriedade: ORDEM
-	
+
 	Ordem de inclusão das guias no mapa. Essa opção é mais útil no caso do tipo sanfona, pois
 	a primeira guia é sempre a que fica ativa. Se esse parâmetro for uma string vazia, a ordem
 	utilizada será a ordem existente em CONFIGURA
-	
+
 	Exemplo:
-	
+
 	i3GEO.guias.ORDEM = ["temas","adiciona","legenda"];
-	
+
 	Tipo:
 	{array}
-	
+
 	Default:
 	{""}
-	
+
 	Values:
-	
+
 	*/
 	ORDEM: "",
-	
+
 	/*
 	Propriedade: TIPO
-	
+
 	Tipo de guia
-	
+
 	Tipo:
 	{string}
-	
+
 	Default:
 	{"guia"}
-	
+
 	Values:
 	guia|sanfona
 	*/
 	TIPO: "guia",
 	/*
 	Propriedade: idguias
-	
+
 	ID do elemento DOM, criado pelo YUI, onde serão inseridas as guias
-	
+
 	Tipo:
 	{String}
-	
+
 	Default:
 	{"guiasYUI"}
 	*/
 	IDGUIAS: "guiasYUI",
 	/*
 	Function: cria
-	
+
 	Cria as guias com base na variável configura.
-	
+
 	As guias podem ser definidas no HTML do mapa, sem necessariamente estarem na variável configura.<b> 
 	As guias, nesse caso, devem ter como ID "guia'n'", por exemplo id="guia6". Para cada uma dessas guias
 	deve haver um DIV com o conteúdo. Esse DIV deve ter como ID "guia'n'obj", por exemplo id="guia6obj"
-	
+
 	Parametro:
-	
+
 	onde {String} - id do elemento que conterá as guias
 	*/
 	cria: function(onde){
@@ -366,13 +366,13 @@ i3GEO.guias = {
 		}
 		catch(e){
 			if(typeof(console) !== 'undefined'){console.error(e);}
-		}	
+		}
 		i3GEO.guias.mostra(i3GEO.guias.ATUAL);
 		i3GEO.guias.ativa(i3GEO.guias.ATUAL);
 	},
 	/*
 	Function: ajustaAltura
-	
+
 	Ajusta a altura das guias conforme a altura da imagem do mapa
 	*/
 	ajustaAltura: function(){
@@ -386,16 +386,16 @@ i3GEO.guias = {
 				guia.style.overflow="auto";
 				if(this.TIPO === "guia")
 				{guia.style.height = i3GEO.parametros.h;}
-			}	
+			}
 		}
 	},
 	/*
 	Function: mostra
-	
+
 	Mostra no mapa uma determinada guia
-	
+
 	Parametro:
-	
+
 	guia {String} - nome da guia
 	*/
 	mostra: function(guia){
@@ -428,11 +428,11 @@ i3GEO.guias = {
 	},
 	/*
 	Function: ativa
-	
+
 	Ativa uma determinada guia
-	
+
 	Parametro:
-	
+
 	guia {String} - guia que será ativada
 	*/
 	ativa: function(guia){
@@ -447,7 +447,7 @@ i3GEO.guias = {
 	},
 	/*
 	Function: libera
-	
+
 	Libera as guias do local atual, colocando-as em uma janela móvel sobre o mapa.
 	*/
 	libera: function(){
@@ -556,17 +556,17 @@ i3GEO.guias = {
 	},
 	/*
 	Function: mostraGuiaFerramenta
-	
+
 	Mostra uma determinada guia em uma janela do tipo ferramenta.
-	
+
 	As guias são construídas pelo construtor da ferramenta
-	
+
 	Parametros:
-	
+
 	guia {String} - O elemento html cujo id for igual a guia+"obj" terá seu estilo (display) definido como block, tornando-o visível
-	
+
 	namespace {String} - Todos os elementos html que tiverem como id o namespace, seguindo por um número e "obj", terão seu estilo alterado para none, tornando-se invisíveis
-	
+
 	*/
 	mostraGuiaFerramenta: function(guia,namespace){
 		if(typeof(console) !== 'undefined'){console.info("i3GEO.guias.mostraGuiaFerramenta()");}

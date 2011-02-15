@@ -67,7 +67,7 @@ function i3GEOmantemCompatibilidade(){
 			if(!$i("arvoreAdicionaTema"))
 			{i3GEO.arvoreDeTemas.IDHTML = objmapa.guiaMenu+"obj";}
 			else
-			{i3GEO.arvoreDeTemas.IDHTML = "arvoreAdicionaTema";}				
+			{i3GEO.arvoreDeTemas.IDHTML = "arvoreAdicionaTema";}
 		//}
 	}
 	catch(e){};
@@ -97,17 +97,17 @@ function i3GEOmantemCompatibilidade(){
 	}
 	catch(e){};
 	try {
-		if (g_nuvemTags == "nao")	
+		if (g_nuvemTags == "nao")
 		{i3GEO.arvoreDeTemas.OPCOESADICIONAIS.nuvemTags = false;}
 	}
 	catch(e){};
 	try {
-		if (g_kml == "nao")	
+		if (g_kml == "nao")
 		{i3GEO.arvoreDeTemas.OPCOESADICIONAIS.kml = false;}
 	}
 	catch(e){};
 	try {
-		if (g_qrcode == "nao")	
+		if (g_qrcode == "nao")
 		{i3GEO.arvoreDeTemas.OPCOESADICIONAIS.qrcode = false;}
 	}
 	catch(e){};
@@ -115,7 +115,7 @@ function i3GEOmantemCompatibilidade(){
 		if(g_tipoacao != "")
 		{i3GEO.barraDeBotoes.BOTAOPADRAO = g_tipoacao;}
 	}
-	catch(e){}			
+	catch(e){}
 	try {
 		if (g_listaPropriedades)
 		{i3GEO.configura.listaDePropriedadesDoMapa = g_listaPropriedades;}
@@ -316,7 +316,7 @@ function wdocafechaf(odoca)
  mostradicasf (depreciado)
 */
 function mostradicasf(objeto,dica,hlpt)
-{i3GEO.ajuda.mostraJanela(dica);alert("mostradicasf foi depreciado utilize i3GEO.ajuda");}	
+{i3GEO.ajuda.mostraJanela(dica);alert("mostradicasf foi depreciado utilize i3GEO.ajuda");}
 /*
  mudaboxnf (depreciado)
 */
@@ -620,17 +620,17 @@ function pegaCoordenadaUTM()
 {alert("pegaCoordenadaUTM foi depreciado utilize i3GEO.gadgets");i3GEO.gadgets.mostraCoordenadasUTM(g_locaplic,"mostraUTM");}
 /*
  ativaLocalizarxy (depreciado)
-*/	
+*/
 function ativaLocalizarxy(iddiv)
 {alert("ativaLocalizarxy foi depreciado utilize i3GEO.gadgets");i3GEO.gadgets.mostraCoordenadasGEO(iddiv);}
 /*
  ativaEscalaNumerica (depreciado)
-*/	
+*/
 function ativaEscalaNumerica(iddiv)
 {alert("ativaEscalaNumerica foi depreciado utilize i3GEO.gadgets");i3GEO.gadgets.mostraEscalaNumerica(iddiv);}
 /*
  ativaBuscaRapida (depreciado)
-*/	
+*/
 function ativaBuscaRapida(iddiv)
 {alert("ativaBuscaRapida foi depreciado utilize i3GEO.gadgets");i3GEO.gadgets.mostraBuscaRapida(iddiv);}
 /*
@@ -1468,7 +1468,7 @@ function cliqueInseregrafico()
 {}
 /*
  ativaHistoricoZoom (depreciado)
-*/	
+*/
 function ativaHistoricoZoom(iddiv)
 {}
 function ajaxhttp(){

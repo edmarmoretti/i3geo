@@ -51,31 +51,31 @@ i3GEO.social = {
 	},
 	/*
 	Function: compartilhar
-	
+
 	Cria os botões de publicar no Twitter e curtir/compartilhar no Facebook
-	
+
 	Gera o HTML contendo as tags IMG com os links
-	
+
 	Parametro:
-	
+
 	id {string} - id do elemento HTML que receberá os links
-	
+
 	urlcf {string} - url para o Facebook
-	
+
 	urlpt {string} - url para o Twitter
-	
+
 	tipo {string} - tipo de botão comtotal|semtotal
-	
-	
+
+
 	locaplic {string} - url onde está o i3Geo. Se não for especificada, será obtida de i3GEO.configura.locaplic
-	
+
 	Return:
-	
+
 	HTML com os botões
 	*/
 	compartilhar: function(id,urlcf,urlpt,tipo,locaplic){
 		if(!locaplic)
-		{locaplic = i3GEO.configura.locaplic;}		
+		{locaplic = i3GEO.configura.locaplic;}
 		if(!tipo)
 		{tipo = "comtotal";}
 		var onde = $i(id),
@@ -91,7 +91,7 @@ i3GEO.social = {
 			if(urlcf !== ""){
 				//tabela += "<td><img style='cursor:pointer' src='"+locaplic+"/imagens/facebook.gif' onclick='javascript:window.open(\"http://www.facebook.com/sharer.php?u="+urlcf+"\")' title='Compartilhar'/></td>";
 				tabela += "<td>"+i3GEO.social.curtirFacebook(urlcf,tipo)+"</td>";
-			}			
+			}
 			tabela += "</tr></table>";
 			if(id !== "")
 			{onde.innerHTML = tabela;}
@@ -102,19 +102,19 @@ i3GEO.social = {
 	},
 	/*
 	Function: bookmark
-	
+
 	Cria os botões de bookmark em redes sociais
-	
+
 	Gera o HTML contendo as tags IMG com os links
-	
+
 	Parametro:
-	
+
 	link {string} - link que será marcado
-	
+
 	locaplic {string} - url onde está o i3Geo. Se não for especificada, será obtida de i3GEO.configura.locaplic
-	
+
 	Return:
-	
+
 	HTML com os botões
 	*/
 	bookmark: function(link,locaplic){

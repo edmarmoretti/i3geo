@@ -47,76 +47,76 @@ são armazenados na variável i3GEO.parametros
 Nessa classe estão disponíveis variáveis internas utilizadas em várias funções, como i3GEO.temaAtivo
 */
 i3GEO = {
-	
+
 	/*
 	Propriedade: parametros
-	
+
 	Parâmetros obtidos do mapa atual. Os parâmetros são fornecidos pelos programas
 	PHP de redesenho e criação do mapa e atualizados sempre que o mapa é alterado.
-	
+
 	Exemplos:
-	
+
 	alert(i3GEO.parametros.mapexten);
 	i3GEO.parametros.mapscale = 25000;
-	
+
 	Parametros:
-	
+
 	mapexten {String} - extensão geográfica do mapa no formato xmin ymin xmax ymax
-	
+
 	mapscale {Numeric} - denominador da escala do mapa
-	
+
 	mapres {Numeric} - resolução da imagem do mapa em DPI
-	
+
 	pixelsize {Numeric} - tamanho em unidades de terreno dos pixels da imagem
-	
+
 	mapfile {String} - nome do mapfile atualmente em uso
-	
+
 	cgi {String} - endereço do executável do mapserver no servidor acessível pela URL
-	
+
 	extentTotal {String} - extensão do mapa na inicialização
-	
+
 	mapimagem {String} - URL da imagem que compõe o mapa
-	
+
 	geoip {sim|nao} - indica se o geoip está instalado
-	
+
 	listavisual {String} - lista de visuais disponíveis
-	
+
 	utilizacgi {sim|nao} - indica se o mapa atual está no modo CGI
-	
+
 	versaoms {String} - versão do Mapserver instalado no servidor (maior)
-	
+
 	versaomscompleta {String} - versão do Mapserver instalado no servidor (completa)
-	
+
 	mensagens {String} - mensagens para uso no letreiro
-	
+
 	w {Integer} - largura do mapa atual
-	
+
 	h {Integer} - altura do mapa atual
-	
+
 	locsistemas {String} - endereço do xml com a lista de sistemas adicionais
-	
+
 	locidentifica {String} - endereço do xml com a lista de sistemas de identificação
-	
+
 	r {sim|nao} - indica se o software R está instalado no servidor
-	
+
 	locmapas {String} - endereço do xml com a lista de mapas
-	
+
 	extentref {String} - extensão geográfica do mapa de referência
-	
+
 	celularef {Numeric} - tamanho do pixel do mapa de referência em unidades do terreno
-	
+
 	kmlurl {String} - url de um arquivo kml que será inserido no mapa. Válido apenas na interface Google Maps
 
 	mensagemInicia {String} - mensagem definida em ms_configura.php indicando a versão atual do i3Geo.
-	
+
 	interfacePadrao {String} - interface padrão definida em ms_configura
-	
+
 	embedLegenda {String} - sim|nao indica se na inicialização a legenda foi inserida no conteúdo do mapa ou não
-	
+
 	celularef {Numeric} - tamanho da célula do mapa de referência
-	
+
 	autenticadoopenid {sim|nao} - indica se o usuário foi autenticado em alguma rede social
-	
+
 	editor {sim|nao} - indica se o usuário atual é um editor (administrador)
 	*/
 	parametros: {
@@ -149,52 +149,52 @@ i3GEO = {
 	},
 	/*
 	Propriedade: finaliza
-	
+
 	Armazena o nome de uma função que será executada após a inicialização do mapa
-	
+
 	Tipo:
 	{string}
-	
+
 	Default:
 	{""}
 	*/
 	finaliza:"",
 	/*
 	Variavel: temaAtivo
-	
+
 	Indica o último tema que foi ativado no mapa
-	
+
 	Permite que ao se passar de uma ferramenta
 	para outra, os menus reflitam a última escolha.
-	
+
 	Tipo:
 	{string}
-	
+
 	Default:
 	{""}
 	*/
 	temaAtivo: "",
 	/*
 	Variavel: contadorAtualiza
-	
+
 	Essa variável é um contador utilizado para indicar quantos processos estão ativos e que
 	irão executar o redesenho do mapa. O mapa só é atualizado quando o contador for menor que 1.
 	Esse contador é utilizado no método i3GEO.atualiza 
 	O contador é necessário para evitar chamadas desnecessárias à função de redesenho do mapa.
-	
+
 	Tipo:
 	{string}
 	*/
 	contadorAtualiza:0,
 	/*
 	Function: cria
-	
+
 	Cria e configura a visualização do mapa, definindo posicionamentos, tamanho etc
-	
+
 	Após as definições básicas, é executado o programa <i3GEO.Interface.cria> que irá
 	realizar as operações conforme a interface atualmente em uso. A interface é definida
 	em <i3GEO.Interface.ATUAL>
-	
+
 	Veja <i3GEO.Interface>
 	*/
 	cria:function(){
@@ -223,7 +223,7 @@ i3GEO = {
 		try{i3GEO.configura.diminuixM = g_diminuixM;}catch(e){}
 		try{i3GEO.configura.diminuixN = g_diminuixN;}catch(e){}
 		try{i3GEO.configura.diminuiyM = g_diminuiyM;}catch(e){}
-		try{i3GEO.configura.diminuiyN = g_diminuiyN;}catch(e){}	
+		try{i3GEO.configura.diminuiyN = g_diminuiyN;}catch(e){}
 		*/
 		//
 		//tenta definir automaticamente a variável que indica a localização do i3geo
@@ -243,18 +243,18 @@ i3GEO = {
 	},
 	/*
 	Function: inicia
-	
+
 	Inicializa o mapa
-	
+
 	Verifica se o mapa apresenta algum problema no processamento no lado do servidor e
 	realiza as operações de tentativa de recuperação, se for o caso
-	
+
 	No início do processo é executada a função <i3GEOmantemCompatibilidade>
 	para realizar as operações necessárias de manutenção de compatibilidade da versão atual para as anteriores
-	
+
 	A inicialização é baseada em <i3GEO.php.inicia> cujo retorno é utilizado para definir a
 	variável <i3GEO.parametros>
-	
+
 	Após a inicialização é executado <i3GEO.Interface.inicia>
 	*/
 	inicia:function(retorno){
@@ -286,7 +286,7 @@ i3GEO = {
 						i3GEO.parametros.pixelsize = i3GEO.parametros.pixelsize*1;
 						i3GEO.parametros.w = i3GEO.parametros.w*1;
 						i3GEO.parametros.h = i3GEO.parametros.h*1;
-						//					
+						//
 						i3GEO.arvoreDeCamadas.CAMADAS = retorno.data.temas;
 						if(retorno.data.variaveis.navegacaoDir === "sim")
 						{i3GEO.arvoreDeTemas.OPCOESADICIONAIS.navegacaoDir = true;}
@@ -299,13 +299,13 @@ i3GEO = {
 						//
 						//calcula (opcional) o tamanho correto da tabela onde fica o mapa
 						//se não for feito esse cálculo, o mapa fica ajustado à esquerda
-						//				
+						//
 						temp = 0;
 						if ($i("contemFerramentas")){temp = temp + parseInt($i("contemFerramentas").style.width,10);}
 						if ($i("ferramentas")){temp = temp + parseInt($i("ferramentas").style.width,10);}
 						if($i("mst"))
 						{$i("mst").style.width=i3GEO.parametros.w + temp + "px";}
-						
+
 						i3GEO.Interface.inicia();
 					}
 					else
@@ -319,7 +319,7 @@ i3GEO = {
 					if(i3GEO.util.pegaCookie("botoesAjuda")){
 						abreJM = i3GEO.util.pegaCookie("botoesAjuda");
 						i3GEO.barraDeBotoes.AJUDA = (abreJM === "sim") ? true : false;
-					}				
+					}
 					//if(i3GEO.util.pegaCookie("botoesAjuda") === "nao")
 					//{i3GEO.barraDeBotoes.AJUDA = false;}
 					abreJM = "sim";
@@ -328,7 +328,7 @@ i3GEO = {
 						i3GEO.configura.iniciaJanelaMensagens = (abreJM === "sim") ? true : false;
 					}
 					if(i3GEO.configura.iniciaJanelaMensagens === true)
-					{i3GEO.ajuda.abreJanela();}		
+					{i3GEO.ajuda.abreJanela();}
 					i3GEO.janela.fechaAguarde("montaMapa");
 					if (i3GEO.configura.liberaGuias === "sim")
 					{i3GEO.guias.libera();}
@@ -370,23 +370,23 @@ i3GEO = {
 	},
 	/*
 	Function: atualiza
-	
+
 	Atualiza o mapa atual, altera a imagem do mapa os gadgets ativos e os parâmetros e
 	verifica a integridade do mapa em uso (arquivo mapfile)
-	
+
 	O processo executa também a função de atualização específica da interface atual em uso, veja
 	<i3GEO.Interface.redesenha>
-	
+
 	Os seguintes gadgets são processados
-	
+
 	<i3GEO.arvoreDeCamadas.atualiza>
-	
+
 	<i3GEO.arvoreDeCamadas.atualizaFarol>
-	
+
 	Os eventos definidos em <i3GEO.eventos.navegaMapa> são executados
-	
+
 	Parametro:
-	
+
 	retorno {String} - string com os parâmetros do novo mapa. Se retorno não
 	for especificado ou se for vazio, será feita uma chamada em ajax para sua obtenção. O resultado
 	dessa chamada é armazenada em i3GEO.parametros
@@ -463,7 +463,7 @@ i3GEO = {
 		//
 		if(arguments.length === 0 || retorno === "" || retorno.data.variaveis === undefined)
 		{erro.call();return;}
-		else{	
+		else{
 			//
 			//se deu tudo certo, pega os valores do retorno e seta as variáveis do mapa
 			//
@@ -474,9 +474,9 @@ i3GEO = {
 			{i3GEO.desenho.richdraw.clearWorkspace();}
 			mapscale = i3GEO.parametros.mapscale;
 			i3GEO.atualizaParametros(retorno.data.variaveis);
-			
+
 			if(retorno.data.variaveis.erro !== "")
-			{alert(retorno.data.variaveis.erro);}			
+			{alert(retorno.data.variaveis.erro);}
 			//
 			//o try aqui é necessário pois na interface googlemaps os parâmetros retorno.data.variaveis não são gerados completamente
 			//
@@ -497,7 +497,7 @@ i3GEO = {
 			{g_operacao = "";}
 			if ($i("mensagemt"))
 			{$i("mensagemt").value = i3GEO.parametros.mapexten;}
-			
+
 			i3GEO.eventos.navegaMapa();
 			if (i3GEO.configura.entorno === "sim"){
 				i3GEO.navega.entorno.geraURL();
@@ -510,13 +510,13 @@ i3GEO = {
 			temp = i3GEO.arvoreDeCamadas.verificaAplicaExtensao();
 			if(temp !== "")
 			{i3GEO.tema.zoom(temp);}
-		}	
+		}
 	},
 	/*
 	Function: calculaTamanho
-	
+
 	Calcula o tamanho do mapa atual e define alguns elementos HTML do mapa
-	
+
 	Return:
 	{array} - [w,h]
 	*/
@@ -529,11 +529,11 @@ i3GEO = {
 		if ($i("contemFerramentas"))
 		{menos += parseInt($i("contemFerramentas").style.width,10);}
 		if ($i("ferramentas"))
-		{menos += parseInt($i("ferramentas").style.width,10);}	
+		{menos += parseInt($i("ferramentas").style.width,10);}
 		if(i3GEO.configura.autotamanho === true){
 			//novow = parseInt(screen.availWidth,10) - diminuix - i3GEO.util.getScrollerWidth();
 			//novoh = parseInt(screen.availHeight,10) - diminuiy;
-			if (window.top === window.self){//nao se aplica em iframe		
+			if (window.top === window.self){//nao se aplica em iframe
 				window.resizeTo(screen.availWidth,screen.availHeight);
 				window.moveTo(0,0);
 			}
@@ -577,11 +577,11 @@ i3GEO = {
 	},
 	/*
 	Function: atualizaParametros
-	
+
 	Atualiza os valores da variável i3GEO.parametros
-	
+
 	Parametro:
-	
+
 	variaveis {obj} - objeto JSON com os valores. Tipicamente é obtido do servidor por meio de uma chamada AJAX
 	*/
 	atualizaParametros:function(variaveis){

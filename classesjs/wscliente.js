@@ -197,7 +197,7 @@ function i3geo_wscliente_configura(loc_i3geo,corpo,enderecows,enderecowms,rssws,
 	Ativa uma opção escolhida pelo usuário, mostrando o seu respectivo texto no navegador. É utilizado nas opções que apresentam textos explicativos. 
 
 	O conteúdo do div (id) é lido e incluído na div corpo
-	
+
 	Por padrão, os conteúdos devem ser incluídos em DIVS com os seguintes ids- oquews oqueogc oquecarto
 
 	Parâmetros:
@@ -235,7 +235,7 @@ function i3geo_wscliente_configura(loc_i3geo,corpo,enderecows,enderecowms,rssws,
 	Function: servicosws
 
 	Lista os web services existentes nos arquivos definidos na variável rssws.
-	
+
 	É feita a leitura dos arquivos RSS e montada uma lista clicável com os serviços encontrados.
 	*/
 	this.servicosws = function()
@@ -273,7 +273,7 @@ function i3geo_wscliente_configura(loc_i3geo,corpo,enderecows,enderecowms,rssws,
 			//cp.set_debug(2)
 			cp.set_response_type("JSON");
 			cp.call(p,"listaRSSwsARRAY",monta);
-		}	
+		}
 	}
 	/*
 	Function: servicoswms
@@ -297,7 +297,7 @@ function i3geo_wscliente_configura(loc_i3geo,corpo,enderecows,enderecowms,rssws,
 				}
 			}
 			catch(e){alert(e);}
-			
+
 			var canais = retorno.data.canais
 			var ncanais = canais.length
 			var ins = "<br>"+retorno.data.rss
@@ -334,7 +334,7 @@ function i3geo_wscliente_configura(loc_i3geo,corpo,enderecows,enderecowms,rssws,
 			$i($i3geo_wscliente.corpo).style.display="none"
 			$i("RSSws").style.display="none"
 			$i("RSSwms").style.display="block"
-		
+
 			aguardeTotal("none");
 		}
 		if ($i("RSSwms"))
@@ -400,7 +400,7 @@ function i3geo_wscliente_configura(loc_i3geo,corpo,enderecows,enderecowms,rssws,
 				function onPushButtonsMarkupReady()
 				{new YAHOO.widget.Button("botao3");}
 				YAHOO.util.Event.onContentReady("botao3", onPushButtonsMarkupReady);
-			}()		
+			}()
 		}
 		$i("RSSws").style.display="none"
 		$i("RSSwms").style.display="none"
@@ -503,7 +503,7 @@ function i3geo_wscliente_configura(loc_i3geo,corpo,enderecows,enderecowms,rssws,
 				function onPushButtonsMarkupReady()
 				{new YAHOO.widget.Button("botao4");}
 				YAHOO.util.Event.onContentReady("botao4", onPushButtonsMarkupReady);
-			}()		
+			}()
 			$i("RSSws").style.display="none"
 			$i("RSSwms").style.display="none"
 			$i($i3geo_wscliente.corpo).style.display="block"
@@ -613,12 +613,12 @@ Inicia a interface do cliente de web services.
 Parametros:
 
 objeto_i3geo_wscliente_configura - objeto com os parâmentros de configuração criado pela função i3geo_gl_configura
-*/	
+*/
 function i3geo_wscliente_inicia(objeto_i3geo_wscliente_configura)
-{		
+{
 	/*
 	Propriedade: $i3geo_wscliente
-	
+
 	Contém o objeto $i3geo_wscliente com todas as propriedades e funções de controle da interface
 	*/
 	$i3geo_wscliente = objeto_i3geo_wscliente_configura;

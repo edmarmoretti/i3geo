@@ -57,56 +57,56 @@ alert($trad("d22"))
 i3GEO.idioma = {
 	/*
 	Propriedade: MOSTRASELETOR
-	
+
 	Define se o i3Geo irá incluir no mapa as bandeiras de seleção de idiomas
-	
+
 	Tipo:
 	{Boolean}
-	
+
 	Default:
 	{true}
 	*/
 	MOSTRASELETOR: true,
 	/*
 	Propriedade: IDSELETOR
-	
+
 	Define o id do elemento HTML que receberá o seletor. Se não for definido, o seletor será
 	posicionado automaticamente pelo i3Geo
-	
+
 	Tipo:
 	{String}
-	
+
 	Default:
 	{""}
 	*/
 	IDSELETOR: "",
 	/*
 	Propriedade: SELETORES
-	
+
 	Lista os seletores (bandeiras) que serão incluídas no seletor
-	
+
 	Tipo:
 	{Array}
-	
+
 	Default:
 	{["pt","en","es","it"]}
 	*/
 	SELETORES: ["pt","en","es"], //,"it"],
 	/*
 	Propriedade: DICIONARIO
-	
+
 	Objeto contendo o dicionário utilizado
-	
+
 	Tipo:
 	{object} - veja <dicionario.js>
-	
+
 	Default:
 	{g_traducao}
 	*/
 	DICIONARIO: g_traducao,
 	/*
 	Function: define
-	
+
 	Define qual o idioma em uso. O default é "pt". 
    
 	Parametro:
@@ -119,37 +119,37 @@ i3GEO.idioma = {
 	},
 	/*
 	Function: retornaAtual
-	
+
 	Retorna o idioma atual. 
        
 	Returns:
 	{string} Código do idioma.
-	*/	
+	*/
 	retornaAtual: function() {
 		return (this.ATUAL);
 	},
 	/*
 	Function: defineDicionario
-	
+
 	Define o objeto com as traduções. O default é "g_traducao"
    
 	Parametro:
 	obj - {Object} Objeto com a tradução.
      
 	Example:
-	
+
 	g_traducao = {
-	
+
 	"p1": [{
-	
+
 		pt:"texto em portugues",
-		
+
 		en:"texto em ingles",
-		
+
 		es:"texto em espanhol"
-		
+
 		}]
-		
+
 	}
 	*/
 	defineDicionario: function(obj) {
@@ -157,13 +157,13 @@ i3GEO.idioma = {
 	},
 	/*
 	Function: alteraDicionario
-	
+
 	Altera um texto do dicionario ou acresecenta um novo texto para o idioma atual. 
    
 	Parametros:
-	
+
 	id - {String} Código do texto.
-	
+
 	novo - (String) Novo texto.
      
 	*/
@@ -172,15 +172,15 @@ i3GEO.idioma = {
 	},
 	/*
 	Function: traduzir
-	
+
 	Traduz um texto para o idioma escolhido
    
 	Parametro:
-	
+
 	id - {String} Código do texto.
      
 	Returns:
-	
+
 	{String} Texto traduzido.
 	*/
 	traduzir: function(id) {
@@ -193,27 +193,27 @@ i3GEO.idioma = {
 	},
 	/*
 	Function: adicionaDicionario
-	
+
 	Adiciona novos registros ao dicionário atual
    
 	Parametro:
-	
+
 	novodic - {Object} Objeto novo dicionário.
      
 	Example:
-	
+
 	var novodic ={ 	"pp": [{
-	
+
 		pt:"texto em portugues",
-		
+
 		en:"texto em ingles",
-		
+
 		es:"texto em espanhol"
-		
+
 		}]}
-		
+
 	i3GEO.idioma.adicionaDicionario(novodic)
-	
+
 	alert($trad("pp"))
 	*/
 	adicionaDicionario: function(novodic) {
@@ -225,7 +225,7 @@ i3GEO.idioma = {
 	},
 	/*
 	Function: mostraDicionario
-	
+
 	Abre uma nova janela do navegador com a lista de palavras do dicionário.
 	*/
 	mostraDicionario: function() {
@@ -239,13 +239,13 @@ i3GEO.idioma = {
 
 	/*
 	Function: trocaIdioma
-	
+
 	Troca o idioma atual por outro.
-	
+
 	A troca é baseada na definição de um cookie e reload da página.
    
 	Parametro:
-	
+
 	codigo - {String} Código do idioma (p.e. "en")
 	*/
 	trocaIdioma: function(codigo) {
@@ -255,7 +255,7 @@ i3GEO.idioma = {
 	},
 	/*
 	Function: listaIdiomas
-	
+
 	Lista os idiomas disponíveis no dicionário ativo
    
 	Returns:
@@ -269,9 +269,9 @@ i3GEO.idioma = {
 	},
 	/*
 	Function: mostraSeletor
-	
+
 	Inclui as bandeiras no mapa permitindo a seleção do idioma
-	
+
 	As imagens das bandeiras devem estar definidas no CSS do i3geo, recebendo como identificadores
 	os ids uk,brasil,italiano,espanhol
 	*/

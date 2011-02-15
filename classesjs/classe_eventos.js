@@ -57,22 +57,22 @@ Exemplos:
 	Para incluir uma função em um determinado evento utilize
 
 	if(i3GEO.eventos.NAVEGAMAPA.toString().search("atualizaEscalaNumerica()") < 0)
-	
-	{i3GEO.eventos.NAVEGAMAPA.push("atualizaEscalaNumerica()");}		
+
+	{i3GEO.eventos.NAVEGAMAPA.push("atualizaEscalaNumerica()");}
 
 	Para remover utilize
-	
+
 	i3GEO.eventos.NAVEGAMAPA.remove("atualizaEscalaNumerica()");
 */
 i3GEO.eventos = {
 	/*
 	Propriedade: NAVEGAMAPA
-	
+
 	Armazena as funções que serão executadas quando é feita uma operação de navegação sobre o mapa.
-	
+
 	Tipo:
 	{Array}
-	
+
 	Default:
 	{["atualizaEscalaNumerica()"]}
 	*/
@@ -82,10 +82,10 @@ i3GEO.eventos = {
 
 	Armazena as funções que serão executadas quando o usuário estaciona o mouse sobre o mapa 
 	por alguns instantes.
-	
+
 	Tipo:
 	{Array}
-	
+
 	Default:
 	{["i3GEO.navega.mostraRosaDosVentos()"]}
 	*/
@@ -94,10 +94,10 @@ i3GEO.eventos = {
 	Propriedade: MOUSEMOVE
 
 	Armazena as funções que serão executadas quando o usuário move o mouse sobre o mapa 
-	
+
 	Tipo:
 	{Array}
-	
+
 	Default:
 	{[]}
 	*/
@@ -106,7 +106,7 @@ i3GEO.eventos = {
 	Propriedade: MOUSEDOWN
 
 	Armazena as funções que serão executadas quando o usuário pressiona o botão do mouse sobre o mapa 
-	
+
 	Tipo:
 	{Array}
 
@@ -118,10 +118,10 @@ i3GEO.eventos = {
 	Propriedade: MOUSEUP
 
 	Armazena as funções que serão executadas quando o usuário solta o botão do mouse sobre o mapa 
-	
+
 	Tipo:
 	{Array}
-	
+
 	Default:
 	{[]}
 	*/
@@ -130,30 +130,30 @@ i3GEO.eventos = {
 	Propriedade: MOUSECLIQUE
 
 	Armazena as funções que serão executadas quando o usuário clica sobre o mapa 
-	
+
 	Tipo:
 	{Array}
-	
+
 	Default:
 	{["i3GEO.eventos.cliqueCapturaPt()"]}
 	*/
 	MOUSECLIQUE: ["i3GEO.eventos.cliqueCapturaPt()"],
 	/*
 	Variavel: TIMERPARADO
-	
+
 	Timer utilizado pelo contador do mouse parado
-	
+
 	Tipo:
 	{Timeout}
 	*/
 	TIMERPARADO: "",
 	/*
 	Function: mouseParado
-	
+
 	Executa as funções definidas em MOUSEPARADO quando é detectado que o mouse está estacionado.
-	
+
 	A execução desse evento é controlado por um timer definido no evento onmousemove (sobre o mapa).
-	
+
 	*/
 	mouseParado: function()	{
 		if(typeof(console) !== 'undefined'){console.info("i3GEO.eventos.mouseParado()");}
@@ -177,7 +177,7 @@ i3GEO.eventos = {
 	},
 	/*
 	Function: navegaMapa
-	
+
 	Executa as funções armazenadas em NAVEGAMAPA, ou seja, operações executadas quando o mapa tem sua extensão geográfica alterada.
 	*/
 	navegaMapa: function(){
@@ -186,7 +186,7 @@ i3GEO.eventos = {
 	},
 	/*
 	Function: mousemoveMapa
-	
+
 	Executa as funções armazenadas em MOUSEMOVE.
 	*/
 	mousemoveMapa: function(){
@@ -194,7 +194,7 @@ i3GEO.eventos = {
 	},
 	/*
 	Function: mousedownMapa
-	
+
 	Executa as funções armazenadas em MOUSEDOWN.
 	*/
 	mousedownMapa: function(){
@@ -203,7 +203,7 @@ i3GEO.eventos = {
 	},
 	/*
 	Function: mouseupMapa
-	
+
 	Executa as funções armazenadas em MOUSEUP.
 	*/
 	mouseupMapa: function(){
@@ -212,7 +212,7 @@ i3GEO.eventos = {
 	},
 	/*
 	Function: mousecliqueMapa
-	
+
 	Executa as funções armazenadas em MOUSECLIQUE.
 	*/
 	mousecliqueMapa: function(){
@@ -221,11 +221,11 @@ i3GEO.eventos = {
 	},
 	/*
 	Function: executaEventos
-	
+
 	Executa a pilha de nomes de funções armazenados em um array
-	
+
 	Parameter:
-	
+
 	eventos {array} - array com os nomes das funções
 	*/
 	executaEventos: function(eventos){
@@ -249,34 +249,34 @@ i3GEO.eventos = {
 	},
 	/*
 	Function posicaoMouseMapa
-	
+
 	Captura a posição do mouse sobre um mapa. O cálculo pode ser feito sobre o corpo do mapa principal ou sob o corpo do mapa de referência
-	
+
 	O resultado dos cálculos são armazenados no objeto objposicaocursor
 	esse objeto terá as seguintes propriedades:
-	
+
 			objposicaocursor.ddx valor de x em décimos de grau
-			
+
 			objposicaocursor.ddy valor de y em décimos de grau
-			
+
 			objposicaocursor.dmsx valor de x em dms
-			
+
 			objposicaocursor.dmsy valor de y em dms
-			
+
 			objposicaocursor.telax posicao x na tela em pixels
-			
+
 			objposicaocursor.telay posicao y na tela em pixels
-			
+
 			objposicaocursor.imgx posicao x no mapa em pixels
-			
+
 			objposicaocursor.imgy: posicao y no mapa em pixels
-			
+
 			objposicaocursor.refx: posicao x no mapa de referência em pixels
-			
+
 			objposicaocursor.refy: posicao x no mapa de referência em pixels
-	
+
 	Parameters:
-	
+
 	e {Event object} - objeto do tipo evento disparado sobre o objeto em foco
 	*/
 	posicaoMouseMapa: function(e){
@@ -305,7 +305,7 @@ i3GEO.eventos = {
 			if(i3GEO.util.in_array(i3GEO.Interface.ATUAL,["googlemaps","googleearth","openlayers"]))
 			{return;}
 		}
-		
+
 		//
 		//verifica sob qual objeto o mouse está se movendo
 		//
@@ -448,25 +448,25 @@ i3GEO.eventos = {
 	},
 	/*
 	Function: botaoDireita
-	
+
 	Retorna true se o botão da direita foi utilizado no evento do mouse
-	
+
 	Parametro:
-	
+
 	exy - evento
-	
+
 	Return:
 	{boolean}
 	*/
 	botaoDireita: function(exy){
 		try{
 			var k = (navm) ? event.button : exy.button;
-			if(k !== 2)				
+			if(k !== 2)
 			{return false;}
 			else
 			{return true;}
 		}
-		catch(e){return false;}	
+		catch(e){return false;}
 	},
 	/*
 	Function: cliqueCapturaPt

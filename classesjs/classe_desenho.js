@@ -51,16 +51,16 @@ http://starkravingfinkle.org/blog/2006/04/richdraw-simple-vmlsvg-editor/
 i3GEO.desenho = {
 	/*
 	Variavel: richdraw
-	
+
 	Objeto richdraw criado por criaContainerRichdraw
-	
+
 	Tipo:
 	{richdraw object}
 	*/
 	richdraw: "",
 	/*
 	Propriedade: estilos
-	
+
 	Estilos que podem ser utilizados para desenhar os elementos
 	*/
 	estilos: {
@@ -95,7 +95,7 @@ i3GEO.desenho = {
 	},
 	/*
 	Propriedade: estiloPadrao
-	
+
 	Estilo utilizado como padrão
 	*/
 	estiloPadrao: "normal",
@@ -109,12 +109,12 @@ i3GEO.desenho = {
 	Richdraw é uma biblioteca utilizada pelo i3geo para abstrair as diferenças entre as linguagens svg e vml.
 
 	Essa abstração é necessária devido às diferenças entre os navegadores.
-	
+
 	O container é criado dentro de um DIV chamado "divGeometriasTemp"
-	
+
 	Essa função cria também o objeto pontosdistobj que é utilizado para armazenar
 	os dados obtidos da movimentação do mouse sobre o mapa
-	
+
 	*/
 	criaContainerRichdraw: function(){
 		if(typeof(console) !== 'undefined'){console.info("i3GEO.desenho.criaContainerRichdraw()");}
@@ -166,14 +166,14 @@ i3GEO.desenho = {
 	},
 	/*
 	Function: criaDivContainer
-	
+
 	Cria o elemento DIV que será utilizado para renderizar os elementos gráficos.
 	Nesse DIV serão incluídos os elementos de desenho em SVG ou VML 
-	
+
 	O DIV recebe como ID "divGeometriasTemp"
-	
+
 	Return:
-	
+
 	DOM object
 	*/
 	criaDivContainer: function(){
@@ -217,7 +217,7 @@ i3GEO.desenho = {
 	objeto {object} - objeto gráfico existente no container richdraw
 
 	n {numeric} - índice do elemento no array pontosdistobj
-	
+
 	texto {string} - texto que será inserido no tipo "insereTexto"
 	*/
 	aplica: function(tipo,objeto,n,texto){
@@ -259,7 +259,7 @@ i3GEO.desenho = {
 				}
 				catch(men){
 					if(typeof(console) !== 'undefined'){console.error(men);}
-				}			
+				}
 			}
 			if(tipo==="insereCirculo"){
 				dx = Math.pow(((pontosdistobj.xtela[n])*1) - ((pontosdistobj.xtela[n-1])*1),2);
@@ -279,15 +279,15 @@ i3GEO.desenho = {
 	},
 	/*
 	Function: insereCirculo
-	
+
 	Insere um circulo no container de elementos gráficos
-	
+
 	Parametros:
-	
+
 	x {numerico} - posição do ponto em coordenadas de imagem
-	
+
 	y {numerico} - posição do ponto em coordenadas de imagem
-	
+
 	w {numerico} - raio do círculo em pixels
 	*/
 	insereCirculo: function(x,y,w){
@@ -306,15 +306,15 @@ i3GEO.desenho = {
 			catch(men){
 				if(typeof(console) !== 'undefined'){console.error(men);}
 			}
-		}	
+		}
 	},
 	/*
 	Function: definePadrao
-	
+
 	Aplica um determinado padrao de estilos para os novos elementos que serão adicionados
-	
+
 	Parametro:
-	
+
 	padrao {string} - nome do estilo
 	*/
 	definePadrao: function(padrao){
@@ -323,11 +323,11 @@ i3GEO.desenho = {
 		i3GEO.desenho.richdraw.editCommand('linecolor', padrao.linecolor);
 		i3GEO.desenho.richdraw.editCommand('linewidth', padrao.linewidth);
 		i3GEO.desenho.richdraw.editCommand('circcolor', padrao.circcolor);
-		i3GEO.desenho.richdraw.editCommand('textcolor', padrao.textcolor);	
+		i3GEO.desenho.richdraw.editCommand('textcolor', padrao.textcolor);
 	},
 	/*
 	Function: caixaEstilos
-	
+
 	Cria uma caixa de seleção para escolha do estilo a ser utilizado
 	*/
 	caixaEstilos: function(){
@@ -338,7 +338,7 @@ i3GEO.desenho = {
 			sel;
 		caixa = "<select onchange='i3GEO.desenho.definePadrao(this.value)'>";
 		for(i=0;i<n;i+=1){
-			sel = ""
+			sel = "";
 			if(lista[i] === i3GEO.desenho.estiloPadrao)
 			{sel = "select";}
 			caixa += "<option value='"+lista[i]+"' sel >"+lista[i]+"</option>";

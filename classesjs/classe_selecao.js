@@ -57,7 +57,7 @@ i3GEO.selecao = {
 					{window.parent.frames.wdocai.atualizaGrafico();}
 				}
 			}
-		}		
+		}
 	},
 	clique: function(){
 		if(typeof(console) !== 'undefined'){console.info("i3GEO.selecao.clique()");}
@@ -89,7 +89,7 @@ i3GEO.selecao = {
 			i.display="block";
 			i.left = objposicaocursor.imgx + adicionaxyBox[0];
 			i.top = objposicaocursor.imgy + adicionaxyBox[1];
-			
+
 			boxxini = objposicaocursor.imgx + adicionaxyBox[0];
 			boxyini = objposicaocursor.imgy + adicionaxyBox[1];
 			tamanhox = 0;
@@ -101,7 +101,7 @@ i3GEO.selecao = {
 		},
 		/*
 		 criaBox
-		
+
 		Cria o DIV que será utilizado para desenhar o box no mapa
 		*/
 		criaBox: function(){
@@ -157,7 +157,7 @@ i3GEO.selecao = {
 		},
 		/*
 		 desloca
-		
+
 		Desloca o box conforme o mouse é movimentado
 		*/
 		desloca: function(){
@@ -192,7 +192,7 @@ i3GEO.selecao = {
 		},
 		/*
 		 termina
-		
+
 		Para o desenho do box, captura seu tamanho e faz o zoom no mapa
 		*/
 		termina: function(){
@@ -240,13 +240,13 @@ i3GEO.selecao = {
 	},
 	/*
 	 i3GEO.selecao.poligono
-	
+
 	Realiza a seleção desenhando um polígono no mapa
 	*/
 	poligono:{
 		/*
 		 inicia
-		
+
 		Inicia o desenho do polígono
 		*/
 		inicia: function(){
@@ -269,7 +269,7 @@ i3GEO.selecao = {
 		},
 		/*
 		 move
-		
+
 		Modifica o polígono conforme o usuário cria vértices
 		*/
 		move: function(){
@@ -282,7 +282,7 @@ i3GEO.selecao = {
 		},
 		/*
 		 clique
-		
+
 		Inclui um novo vértice no polígono
 		*/
 		clique: function(){
@@ -300,7 +300,7 @@ i3GEO.selecao = {
 					if (navn)
 					{pontosdistobj.linhas[n] = i3GEO.desenho.richdraw.renderer.create(i3GEO.desenho.richdraw.mode, i3GEO.desenho.richdraw.fillColor, i3GEO.desenho.richdraw.lineColor, i3GEO.desenho.richdraw.lineWidth, (pontosdistobj.ximg[n]-1),(pontosdistobj.yimg[n]-1),(pontosdistobj.ximg[n]-1),(pontosdistobj.yimg[n]-1));}
 					else
-					{pontosdistobj.linhas[n] = i3GEO.desenho.richdraw.renderer.create(i3GEO.desenho.richdraw.mode, i3GEO.desenho.richdraw.fillColor, i3GEO.desenho.richdraw.lineColor, i3GEO.desenho.richdraw.lineWidth, (pontosdistobj.ximg[n])-(i3GEO.parametros.w/2),pontosdistobj.yimg[n],(pontosdistobj.ximg[n])-(i3GEO.parametros.w/2),pontosdistobj.yimg[n]);}				
+					{pontosdistobj.linhas[n] = i3GEO.desenho.richdraw.renderer.create(i3GEO.desenho.richdraw.mode, i3GEO.desenho.richdraw.fillColor, i3GEO.desenho.richdraw.lineColor, i3GEO.desenho.richdraw.lineWidth, (pontosdistobj.ximg[n])-(i3GEO.parametros.w/2),pontosdistobj.yimg[n],(pontosdistobj.ximg[n])-(i3GEO.parametros.w/2),pontosdistobj.yimg[n]);}
 				}
 				catch(e){
 					if(typeof(console) !== 'undefined'){console.error(e);}
@@ -313,7 +313,7 @@ i3GEO.selecao = {
 		},
 		/*
 		termina
-		
+
 		Termina o desenho do polígono e executa a operação de seleção
 		*/
 		termina: function(){
