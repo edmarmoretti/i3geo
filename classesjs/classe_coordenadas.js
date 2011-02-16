@@ -102,6 +102,13 @@ i3GEO.coordenadas = {
 			ativo: true,
 			defepsg: ""
 		},
+		"dd":{
+			idhtml: "localizarxy",
+			tipo: "metrica",
+			titulo: "Déc. de grau",
+			ativo: true,
+			defepsg: ""
+		},
 		"policonicaSad69":{
 			idhtml: "localizarxy",
 			tipo: "metrica",
@@ -456,7 +463,13 @@ i3GEO.coordenadas = {
 				return;
 			}
 		}
-		p = i3GEO.coordenadas.calculaProj4(i3GEO.coordenadas.defOrigem,destino,x,y);
+		//
+		//no caso de dd
+		//
+		if(temp.defepsg === "")
+		{p = {x:x,y:y};}
+		else
+		{p = i3GEO.coordenadas.calculaProj4(i3GEO.coordenadas.defOrigem,destino,x,y);}
 		i3GEO.util.defineValor(onde+configProj+"X","value",p.x);
 		i3GEO.util.defineValor(onde+configProj+"Y","value",p.y);
 	},
