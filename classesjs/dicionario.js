@@ -412,10 +412,17 @@ it:"Strati"
 }],
 "t2":[
 {
-pt:"arraste o tema aqui para excluir",
+pt:"Arraste o tema aqui para excluir",
 en:"Drag the layer here to remove",
 es:"Arrastre el tema aqui para excluirlo",
 it:"Trascina qui per rimuovere"
+}],
+"t2a":[
+{
+pt:"Filtra a lista de camadas",
+en:"filtra a lista de camadas",
+es:"filtra a lista de camadas",
+it:"filtra a lista de camadas"
 }],
 "t3":[
 {

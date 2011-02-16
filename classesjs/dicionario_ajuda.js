@@ -821,6 +821,15 @@ g_traducao_ajuda = {
 			complemento:"Os valores de Z podem ser obtidos de um tema ou de um serviço do tipo Google API",
 			tela:"",
 			apijs:"i3GEO.analise"
+		},
+		"97": {
+			titulo: "Filtro de camadas",
+			diretorio:"",
+			categoria:"7",
+			pt:"Filtra as camadas que são mostradas na árvore de camadas conforme as características de cada uma",
+			complemento:"",
+			tela:"",
+			apijs:"i3GEO.arvoreDeCamadas"
 		}
 	}
 };

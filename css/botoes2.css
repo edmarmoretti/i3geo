@@ -425,9 +425,9 @@
 {
 	background-image:URL('../imagens/visual/default/sprite.png');
 	background-repeat: no-repeat;
-	background-position: 0px -1075px;
-	width:22px;
-	height:22px;
+	background-position: 0px -1078px;
+	width:14px;
+	height:18px;
 }
 .upload
 {
@@ -713,6 +713,14 @@
 	width: 16px;
 	border: 1px solid #DCDCDC;
 	cursor:pointer;
+}
+#i3geo_filtro
+{
+	background-image:URL('../imagens/visual/default/sprite.png');
+	background-repeat: no-repeat;
+	background-position: 0px -2075px;
+	width:16px;
+	height:16px;
 }
 button{background:url(../imagens/tic2.png) 98% 50% no-repeat;}
 #encolheFerramentas
