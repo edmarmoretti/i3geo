@@ -205,6 +205,12 @@ i3GEO.coordenadas = {
 		{idhtml:"localizarxy"}
 	},
 	/*
+	Variavel: MODOTEXTO
+	
+	Representação das coordenadas no modo texto
+	*/
+	MODOTEXTO: "",
+	/*
 	Function: mostraCoordenadasUTM
 
 	Obtém e mostra as coordenadas UTM da posição do mouse sobre o mapa por meio de um cálculo realizado no servidor.
@@ -390,6 +396,7 @@ i3GEO.coordenadas = {
 		$i(prefixo+"yg").value = y[0];
 		$i(prefixo+"ym").value = y[1];
 		$i(prefixo+"ys").value = y[2];
+		i3GEO.coordenadas.MODOTEXTO += "DMS - Latitude: "+y[0]+" "+y[1]+" "+y[2]+" Longitude: "+x[0]+" "+x[1]+" "+x[2]+"<br>";
 	},
 	/*
 	Function: criaMascaraMetrica
@@ -466,12 +473,13 @@ i3GEO.coordenadas = {
 		//
 		//no caso de dd
 		//
-		if(temp.defepsg === "")
+		if(temp.defepsg === "" && temp.tipo === "metrica")
 		{p = {x:x,y:y};}
 		else
 		{p = i3GEO.coordenadas.calculaProj4(i3GEO.coordenadas.defOrigem,destino,x,y);}
 		i3GEO.util.defineValor(onde+configProj+"X","value",p.x);
 		i3GEO.util.defineValor(onde+configProj+"Y","value",p.y);
+		i3GEO.coordenadas.MODOTEXTO += temp.titulo+" - X: "+p.x+" Y: "+p.y+"<br>";
 	},
 	/*
 	Function: calculaProj4
@@ -567,6 +575,7 @@ i3GEO.coordenadas = {
 				i = 0,
 				caixa,
 				janela;
+			i3GEO.coordenadas.MODOTEXTO = "";
 			if(arguments.length === 0){
 				ativaMovimento = true;
 				onde = "";
@@ -608,7 +617,7 @@ i3GEO.coordenadas = {
 			if(this.formato === "janela"){
 				janela = i3GEO.janela.cria(
 					"450px",
-					"90px",
+					"120px",
 					"",
 					"",
 					"",
@@ -619,6 +628,7 @@ i3GEO.coordenadas = {
 					"",
 					""
 				);
+				YAHOO.util.Event.addListener(janela[0].close, "click", function(){i3GEO.coordenadas.formato = "bloco",i3GEO.coordenadas.mostraCoordenadas();});
 				temp = $i("i3GEOJanelaCoordenadas_corpo");
 				temp.style.backgroundColor = "white";
 				temp.style.textAlign = "left";
@@ -628,6 +638,9 @@ i3GEO.coordenadas = {
 				if($i(onde))
 				{$i(onde).innerHTML = "";}
 				onde = "i3GEOJanelaCoordenadas_corpo";
+				
+				ins += "<br><a href='#' style='cursor:pointer;color:blue' onclick='new YAHOO.util.KeyListener(document.body,{alt:true,keys:67},{fn: function(type, args, obj){alert(i3GEO.coordenadas.MODOTEXTO);}}).enable();' >" +
+					"Clique aqui para ativar Alt+C para poder capturar as coordenadas</a>";
 			}
 			if(onde !== "" && $i(onde))
 			{$i(onde).innerHTML = ins;}
@@ -666,9 +679,16 @@ i3GEO.coordenadas = {
 					}
 				}
 			}
+			if(ativaMovimento === true){
+				if(i3GEO.eventos.MOUSEMOVE.toString().search("i3GEO.coordenadas.limpaModoTexto()") < 0)
+				{i3GEO.eventos.MOUSEMOVE.push("i3GEO.coordenadas.limpaModoTexto()");}
+			}
 			if(this.formato === "bloco")
 			{i3GEO.coordenadas.ativaBloco(onde);}
 		}
 		catch(men){}
+	},
+	limpaModoTexto: function(){
+		i3GEO.coordenadas.MODOTEXTO = "";
 	}
 };

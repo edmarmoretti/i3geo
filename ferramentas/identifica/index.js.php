@@ -159,26 +159,9 @@ i3GEOF.identifica = {
 			$i("i3GEOidentificaguia5").onclick = function(){
 				i3GEO.guias.mostraGuiaFerramenta("i3GEOidentificaguia5","i3GEOidentificaguia");
 				var ins = "",retorna;
-					i3GEO.coordenadas.formato = "lista";
-					i3GEO.coordenadas.mostraCoordenadas(false,"i3GEOidentificacoord",i3GEOF.identifica.x,i3GEOF.identifica.y);				
-				/*
-				$i("i3GEOidentificacoord").innerHTML = "Aguarde...";
-				retorna = function(utm){
-					temp = i3GEO.calculo.dd2dms(i3GEOF.identifica.x,i3GEOF.identifica.y);
-					ins += "<br><p class=paragrafo >Grau, minuto e segundo (DMS)</p>";
-					ins += "<p class=paragrafo style=left:10px ><i>X (longitude): </i>"+temp[0]+"</p>";
-					ins += "<p class=paragrafo style=left:10px ><i>Y (latitude): </i>"+temp[1]+"</p>";				
-					ins += "<br><p class=paragrafo >UTM (metros)</p>";
-					ins += "<p class=paragrafo style=left:10px ><i>X (longitude): </i>"+utm.data.x+"</p>";
-					ins += "<p class=paragrafo style=left:10px ><i>Y (latitude): </i>"+utm.data.y+"</p>";
-					ins += "<p class=paragrafo style=left:10px ><i>Zona: </i>"+utm.data.zona+"</p>";					
-					ins += "<br><p class=paragrafo >Décimos de grau</p>";
-					ins += "<p class=paragrafo style=left:10px ><i>X (longitude): </i>"+i3GEOF.identifica.x+"</p>";
-					ins += "<p class=paragrafo style=left:10px ><i>Y (latitude): </i>"+i3GEOF.identifica.y+"</p>";
-					$i("i3GEOidentificacoord").innerHTML = ins;
-				};
-				i3GEO.php.geo2utm(retorna,i3GEOF.identifica.x,i3GEOF.identifica.y);
-				*/
+				i3GEO.coordenadas.formato = "lista";
+				i3GEO.coordenadas.mostraCoordenadas(false,"i3GEOidentificacoord",i3GEOF.identifica.x,i3GEOF.identifica.y);
+				$i("i3GEOidentificacoordtexto").innerHTML = i3GEO.coordenadas.MODOTEXTO+"</span>";
 			};
 			
 			i3GEOF.identifica.listaTemas("ligados");
@@ -327,7 +310,9 @@ i3GEOF.identifica = {
 		ins += '	</div>';
 		ins += '	<div class=guiaobj id="i3GEOidentificaguia5obj" style="left:1px;top:10px;display:none;font-size:12px;overflow:hidden" >';
 		ins += '		<b>Valores para o ponto indicado no mapa<br></b>';
-		ins += '		<div id=i3GEOidentificacoord ></div>';
+		ins += '		<div id=i3GEOidentificacoord ></div><br>';
+		ins += '		<div id=i3GEOidentificacoordtexto style=text-align:left ></div>';
+
 		ins += '	</div>';		
 		//ins += '</div>	';
 		return ins;
