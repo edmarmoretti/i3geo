@@ -674,15 +674,9 @@ i3GEO.arvoreDeCamadas = {
 							//exclui tema
 							if(DDM.getDDById(id).id === "i3geo_lixeira"){
 								if(i3GEO.arvoreDeCamadas.ARRASTARLIXEIRA === true){
+									(new YAHOO.util.Anim("i3geo_lixeira", { opacity: { from: 0, to: 1 } },3, YAHOO.util.Easing.easeOutStrong)).animate();
 									tema = (this.getEl()).id.split("arrastar_")[1];
 									i3GEO.tema.exclui(tema);
-									/*
-									i3GEO.janela.abreAguarde("ajaxCorpoMapa",$trad("o1"));
-									tema = (this.getEl()).id.split("arrastar_")[1];
-									i3GEO.contadorAtualiza++;
-									i3GEO.php.excluitema(i3GEO.atualiza,tema);
-									i3GEO.mapa.ativaTema("");
-									*/
 								}
 							}
 							//muda ordem de desenho do tema

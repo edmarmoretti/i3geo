@@ -487,6 +487,41 @@ i3GEO.janela = {
 		}
 	},
 	/*
+	Function: alerta
+
+	Abre uma janela com mensagem (windows.alert)
+
+	Parametros:
+
+	texto {String} - texto da mensagem
+	*/
+	ativaAlerta: function(){
+		YAHOO.namespace("dialogInfo");
+		YAHOO.dialogInfo = new YAHOO.widget.SimpleDialog("simpledialog1",
+		{
+			width: "300px",
+			fixedcenter: true,
+			visible: false,
+			draggable: false,
+			zIndex: 100000,
+			textAlign: "left",
+			close: true,
+			modal: true,
+			effect:{effect:YAHOO.widget.ContainerEffect.FADE,duration:0.25},
+			constraintoviewport: true,
+			buttons: [ { text:"fecha", handler: function(){this.hide();}, isDefault:true }],
+			icon: YAHOO.widget.SimpleDialog.ICON_WARN,
+			text: ""
+		});
+		//YAHOO.dialogInfo.cfg.setProperty("icon",YAHOO.widget.SimpleDialog.ICON_WARN);
+		YAHOO.dialogInfo.setHeader("Alerta");
+		YAHOO.dialogInfo.render(document.body);
+		window.alert = function(texto){
+			YAHOO.dialogInfo.cfg.setProperty("text",texto);
+			YAHOO.dialogInfo.show();
+		};
+	},
+	/*
 	Function: tip
 
 	Cria um DIV e posiciona sobre o mapa na posição do mouse.
