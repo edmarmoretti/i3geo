@@ -50,7 +50,9 @@ Cria o mapa do Google Maps e adiciona os botões especiais do i3Geo. Define os ev
 principal do i3Geo quando é feita a navegação.
 */ 
 function inicializa(){
-    counterClick = 0
+    window.parent.i3GEO.util.criaPin();
+	var box = window.parent.$i("boxpin");
+	counterClick = 0
     var m = document.getElementById("mapa")
 	if(window.parent.i3GEO){
     	m.style.width = window.parent.i3GEO.parametros.w / 2
@@ -103,6 +105,30 @@ function inicializa(){
 			}catch(x){if(typeof(console) !== 'undefined'){console.error(x);}}
 		}
    	});
+	GEvent.addListener(map, "mousemove", function(ponto) {
+		var teladms,tela;
+		teladms = window.parent.i3GEO.calculo.dd2dms(ponto.x,ponto.y);
+		//tela = map.getProjection().fromLatLngToPixel(ponto);
+		window.parent.objposicaocursor = {
+			ddx: ponto.x,
+			ddy: ponto.y,
+			dmsx: teladms[0],
+			dmsy: teladms[1],
+			imgx:0,
+			imgy:0,
+			telax: 0,
+			telay: 0
+		};
+		window.parent.i3GEO.eventos.mousemoveMapa();
+		if(window.parent.i3GEO.Interface.ATUAL === "googleearth")
+		{return;}
+	 	xy = window.parent.i3GEO.calculo.dd2tela(ponto.x,ponto.y,window.parent.document.getElementById(window.parent.i3GEO.Interface.IDMAPA),window.parent.i3GEO.parametros.mapexten,window.parent.i3GEO.parametros.pixelsize);
+		box.style.display = "block";
+		box.style.width = "21px";
+		box.style.height = "25px";
+		box.style.top = parseInt(xy[1],10)+"px";
+		box.style.left = parseInt(xy[0],10)+"px";		
+	});
 	function botaoI3geo() {}
     botaoI3geo.prototype = new GControl();
     botaoI3geo.prototype.initialize = function(map) {
