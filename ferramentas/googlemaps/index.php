@@ -50,8 +50,8 @@ Cria o mapa do Google Maps e adiciona os botões especiais do i3Geo. Define os ev
 principal do i3Geo quando é feita a navegação.
 */ 
 function inicializa(){
-    window.parent.i3GEO.util.criaPin();
-	var box = window.parent.$i("boxpin");
+    window.parent.i3GEO.util.criaPin("boxpingoogle",window.parent.i3GEO.configura.locaplic+'/imagens/dot1red.gif',"5px","5px");
+	var box = window.parent.$i("boxpingoogle");
 	counterClick = 0
     var m = document.getElementById("mapa")
 	if(window.parent.i3GEO){
@@ -124,8 +124,8 @@ function inicializa(){
 		{return;}
 	 	xy = window.parent.i3GEO.calculo.dd2tela(ponto.x,ponto.y,window.parent.document.getElementById(window.parent.i3GEO.Interface.IDMAPA),window.parent.i3GEO.parametros.mapexten,window.parent.i3GEO.parametros.pixelsize);
 		box.style.display = "block";
-		box.style.width = "21px";
-		box.style.height = "25px";
+		box.style.width = "5px";
+		box.style.height = "5px";
 		box.style.top = parseInt(xy[1],10)+"px";
 		box.style.left = parseInt(xy[0],10)+"px";		
 	});
