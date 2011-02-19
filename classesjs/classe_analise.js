@@ -407,15 +407,16 @@ i3GEO.analise = {
 		*/
 		movimento: function(){
 			var n,d,r,decimal,da,mostra,texto,
-				pontosdistobj = i3GEO.analise.medeDistancia.pontosdistobj;
+				pontosdistobj = i3GEO.analise.medeDistancia.pontosdistobj,
+				calculo = i3GEO.calculo;
 			if (g_tipoacao === "mede"){
 				YAHOO.util.Dom.setStyle("mostradistancia","display","block");
 				n = pontosdistobj.xpt.length;
 				try{
 					if (n > 0){
-						d = i3GEO.calculo.distancia(pontosdistobj.xpt[n-1],pontosdistobj.ypt[n-1],objposicaocursor.ddx,objposicaocursor.ddy);
-						r = i3GEO.calculo.direcao(pontosdistobj.xpt[n-1],pontosdistobj.ypt[n-1],objposicaocursor.ddx,objposicaocursor.ddy);
-						r = i3GEO.calculo.dd2dms(r,r);
+						d = calculo.distancia(pontosdistobj.xpt[n-1],pontosdistobj.ypt[n-1],objposicaocursor.ddx,objposicaocursor.ddy);
+						r = calculo.direcao(pontosdistobj.xpt[n-1],pontosdistobj.ypt[n-1],objposicaocursor.ddx,objposicaocursor.ddy);
+						r = calculo.dd2dms(r,r);
 						r = r[0];
 
 						d = d + "";
@@ -433,7 +434,7 @@ i3GEO.analise = {
 						mostra = $i("mostradistancia_calculo");
 						if (mostra){
 							texto = " Dist acum.= "+da+" km <br>atual= "+d+" km <br> Direção (DMS)= "+r;
-							texto += "<br>Método cálculo de distâncias: "+i3GEO.calculo.metododistancia;
+							texto += "<br>Método cálculo de distâncias: "+calculo.metododistancia;
 							mostra.innerHTML = texto;
 						}
 						if(i3GEO.Interface.ATUAL !== "googleearth")
@@ -476,13 +477,15 @@ i3GEO.analise = {
 		inicia: function(){
 			if(typeof(console) !== 'undefined'){console.info("i3GEO.analise.medeArea.inicia()");}
 			var temp,x,y,ll1,ll2,d,
+			calculo = i3GEO.calculo,
 				montacontainer = function(){
+					var desenho = i3GEO.desenho;
 					$i("mostraarea_calculo").innerHTML = "Clique no mapa para desenhar o poligono. Clique duas vezes para concluir";
 					i3GEO.barraDeBotoes.ativaIcone("area");
 					g_tipoacao = "area";
-					i3GEO.desenho.criaContainerRichdraw();
-					i3GEO.desenho.richdraw.lineColor = "green";
-					i3GEO.desenho.richdraw.lineWidth = "2px";
+					desenho.criaContainerRichdraw();
+					desenho.richdraw.lineColor = "green";
+					desenho.richdraw.lineWidth = "2px";
 				};
 			i3GEO.analise.medeArea.criaJanela();
 			if (g_tipoacao !== "area"){
@@ -513,9 +516,9 @@ i3GEO.analise = {
 				if(i3GEO.util.in_array(i3GEO.Interface.ATUAL,["openlayers","googlemaps"])){
 					x = parseInt(i3GEO.parametros.w / 2,10);
 					y = parseInt(i3GEO.parametros.h / 2,10);
-					ll1 = i3GEO.calculo.tela2dd(x,y,"","");
-					ll2 = i3GEO.calculo.tela2dd(x + 1,y,"","");
-					d = i3GEO.calculo.distancia(ll1[0],ll1[1],ll2[0],ll2[1]);
+					ll1 = calculo.tela2dd(x,y,"","");
+					ll2 = calculo.tela2dd(x + 1,y,"","");
+					d = calculo.distancia(ll1[0],ll1[1],ll2[0],ll2[1]);
 					d = d * 1000;
 					g_areapixel = d * d;
 					temp = g_areapixel < 0 ? alert("Nao e possivel calcular a area. Entre em contato com o administrador do sistema.") : montacontainer();

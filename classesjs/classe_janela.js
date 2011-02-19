@@ -163,8 +163,9 @@ i3GEO.janela = {
 		//
 		//esconde o box de zoom e outros objetos temporários se estiverem visíveis
 		//
-		i3GEO.util.escondePin();
-		i3GEO.util.escondeBox();
+		var iu = i3GEO.util;
+		iu.escondePin();
+		iu.escondeBox();
 	},
 	/*
 	Function: cria
@@ -386,10 +387,11 @@ i3GEO.janela = {
 	*/
 	fecha: function(event){
 		if(typeof(console) !== 'undefined'){console.info("i3GEO.janela.fecha()");}
-		var i,old,id;
+		var i,old,id,
+			iu = i3GEO.util;
 		//esconde elementos gráficos q a ferramenta pode ter aberto
-		i3GEO.util.escondePin();
-		i3GEO.util.escondeBox();
+		iu.escondePin();
+		iu.escondeBox();
 		//fecha o container de desenho de elementos na tela
 		//if($i("divGeometriasTemp"))
 		//{i3GEO.desenho.richdraw.fecha();}
@@ -403,13 +405,13 @@ i3GEO.janela = {
 		{id = this.id;}
 		else
 		{id = event.id;}
-		i3GEO.util.removeChild(id+"_c");
-		i3GEO.util.removeChild(id);
-		i3GEO.util.removeChild(id+"_mask");
+		iu.removeChild(id+"_c");
+		iu.removeChild(id);
+		iu.removeChild(id+"_mask");
 		//
 		//remove script tag se houver
 		//
-		i3GEO.util.removeScriptTag(id+"_script");
+		iu.removeScriptTag(id+"_script");
 	},
 	/*
 	Function: alteraTamanho
@@ -689,13 +691,15 @@ i3GEO.janela = {
 		}
 		else{
 			try{
-				var id,i,n = this.JANELASAGUARDE.length;
+				var id,i,
+					n = this.JANELASAGUARDE.length,
+					iu = i3GEO.util;
 				for(i=0;i<n;i += 1){
 					id = this.JANELASAGUARDE[i];
 					if($i(id+"_c"))
 					{eval('YAHOO.aguarde.'+id+'.destroy()');}
-					i3GEO.util.removeChild(id+"_c");
-					i3GEO.util.removeChild(id+"_mask");
+					iu.removeChild(id+"_c");
+					iu.removeChild(id+"_mask");
 				}
 				this.JANELASAGUARDE = [];
 			}

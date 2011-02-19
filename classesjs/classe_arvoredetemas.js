@@ -1298,49 +1298,51 @@ i3GEO.arvoreDeTemas = {
 	*/
 	outrasOpcoesHTML: function(){
 		if(typeof(console) !== 'undefined'){console.info("i3GEO.arvoreDeTemas.outrasOpcoesHTML()");}
-		var ins = "",t = 0;
+		var ins = "",
+			t = 0,
+			imb = i3GEO.util.$im("branco.gif");
 		if(this.OPCOESADICIONAIS.refresh === true){
-			ins += "<td><img class='refresh' onclick='i3GEO.arvoreDeTemas.atualiza()' src='"+i3GEO.util.$im("branco.gif")+"' style='cursor:pointer;text-align:left' title='Refresh'/><td>";
+			ins += "<td><img class='refresh' onclick='i3GEO.arvoreDeTemas.atualiza()' src='"+imb+"' style='cursor:pointer;text-align:left' title='Refresh'/><td>";
 			t += 20;
 		}
 		if(this.OPCOESADICIONAIS.uploadgpx === true){
-			ins += "<td><img class='uploadgpx' onclick='i3GEO.arvoreDeTemas.dialogo.uploadgpx()' src='"+i3GEO.util.$im("branco.gif")+"' style='cursor:pointer;text-align:left'  title='upload GPX'/><td>";
+			ins += "<td><img class='uploadgpx' onclick='i3GEO.arvoreDeTemas.dialogo.uploadgpx()' src='"+imb+"' style='cursor:pointer;text-align:left'  title='upload GPX'/><td>";
 			t += 20;
 		}
 		if(this.OPCOESADICIONAIS.uploaddbf === true){
-			ins += "<td><img class='uploaddbf' onclick='i3GEO.arvoreDeTemas.dialogo.uploaddbf()' src='"+i3GEO.util.$im("branco.gif")+"' style='cursor:pointer;text-align:left' title='"+$trad("a2b")+"'/><td>";
+			ins += "<td><img class='uploaddbf' onclick='i3GEO.arvoreDeTemas.dialogo.uploaddbf()' src='"+imb+"' style='cursor:pointer;text-align:left' title='"+$trad("a2b")+"'/><td>";
 			t += 20;
 		}
 		if(this.OPCOESADICIONAIS.uploadlocal === true){
-			ins += "<td><img class='upload' onclick='i3GEO.arvoreDeTemas.dialogo.upload()' src='"+i3GEO.util.$im("branco.gif")+"' style='cursor:pointer;text-align:left' title='"+$trad("a2")+"'/><td>";
+			ins += "<td><img class='upload' onclick='i3GEO.arvoreDeTemas.dialogo.upload()' src='"+imb+"' style='cursor:pointer;text-align:left' title='"+$trad("a2")+"'/><td>";
 			t += 20;
 		}
 		if(this.OPCOESADICIONAIS.downloadbase === true){
-			ins += "<td><img onclick='i3GEO.arvoreDeTemas.dialogo.downloadbase()' class='download' src='"+i3GEO.util.$im("branco.gif")+"' style='cursor:pointer;text-align:left'  title='"+$trad("a3")+"'/><td>";
+			ins += "<td><img onclick='i3GEO.arvoreDeTemas.dialogo.downloadbase()' class='download' src='"+imb+"' style='cursor:pointer;text-align:left'  title='"+$trad("a3")+"'/><td>";
 			t += 20;
 		}
 		if(this.OPCOESADICIONAIS.conectarwms === true){
-			ins += "<td><img class='conectarwms' onclick='i3GEO.arvoreDeTemas.dialogo.conectarwms()' src='"+i3GEO.util.$im("branco.gif")+"' style='cursor:pointer;text-align:left'  title='"+$trad("a4")+"'/><td>";
+			ins += "<td><img class='conectarwms' onclick='i3GEO.arvoreDeTemas.dialogo.conectarwms()' src='"+imb+"' style='cursor:pointer;text-align:left'  title='"+$trad("a4")+"'/><td>";
 			t += 20;
 		}
 		if(this.OPCOESADICIONAIS.conectarwmst === true){
-			ins += "<td><img class='conectarwmst' onclick='i3GEO.arvoreDeTemas.dialogo.conectarwmst()' src='"+i3GEO.util.$im("branco.gif")+"' style='cursor:pointer;text-align:left'  title='"+$trad("a4b")+"'/><td>";
+			ins += "<td><img class='conectarwmst' onclick='i3GEO.arvoreDeTemas.dialogo.conectarwmst()' src='"+imb+"' style='cursor:pointer;text-align:left'  title='"+$trad("a4b")+"'/><td>";
 			t += 20;
 		}
 		if(this.OPCOESADICIONAIS.conectargeorss === true){
-			ins += "<td><img class='conectargeorss' onclick='i3GEO.arvoreDeTemas.dialogo.conectargeorss()' src='"+i3GEO.util.$im("branco.gif")+"' style='cursor:pointer;text-align:left'  title='"+$trad("a5")+"'/><td>";
+			ins += "<td><img class='conectargeorss' onclick='i3GEO.arvoreDeTemas.dialogo.conectargeorss()' src='"+imb+"' style='cursor:pointer;text-align:left'  title='"+$trad("a5")+"'/><td>";
 			t += 20;
 		}
 		if(this.OPCOESADICIONAIS.nuvemTags === true){
-			ins += "<td><img class='nuvemtags' onclick='i3GEO.arvoreDeTemas.dialogo.nuvemTags()' src='"+i3GEO.util.$im("branco.gif")+"' style='cursor:pointer;text-align:left'  title='"+$trad("a5a")+"'/><td>";
+			ins += "<td><img class='nuvemtags' onclick='i3GEO.arvoreDeTemas.dialogo.nuvemTags()' src='"+imb+"' style='cursor:pointer;text-align:left'  title='"+$trad("a5a")+"'/><td>";
 			t += 20;
 		}
 		if(this.OPCOESADICIONAIS.nuvemTagsFlash === true){
-			ins += "<td><img class='nuvemtags' onclick='i3GEO.arvoreDeTemas.dialogo.nuvemTagsFlash()' src='"+i3GEO.util.$im("branco.gif")+"' style='cursor:pointer;text-align:left'  title='"+$trad("a5a")+"'/><td>";
+			ins += "<td><img class='nuvemtags' onclick='i3GEO.arvoreDeTemas.dialogo.nuvemTagsFlash()' src='"+imb+"' style='cursor:pointer;text-align:left'  title='"+$trad("a5a")+"'/><td>";
 			t += 20;
 		}
 		if(this.OPCOESADICIONAIS.carousel === true){
-			ins += "<td><img class='carouselTemas' onclick='i3GEO.arvoreDeTemas.dialogo.carouselTemas()' src='"+i3GEO.util.$im("branco.gif")+"' style='cursor:pointer;text-align:left'  title='Miniaturas'/><td>";
+			ins += "<td><img class='carouselTemas' onclick='i3GEO.arvoreDeTemas.dialogo.carouselTemas()' src='"+imb+"' style='cursor:pointer;text-align:left'  title='Miniaturas'/><td>";
 			t += 20;
 		}
 		return("<table width='"+t+"px' ><tr>"+ins+"</tr></table>");

@@ -438,7 +438,8 @@ i3GEO.coordenadas = {
 
 	*/
 	atualizaProj4: function(onde,configProj,x,y){
-		var destino,zona,temp,p;
+		var destino,zona,temp,p,
+			iu = i3GEO.util;
 		try{
 			if(!$i(onde+configProj+"ZN"))
 			{return;}
@@ -465,8 +466,8 @@ i3GEO.coordenadas = {
 			else
 			{destino = temp.zona[zona+"S"];}
 			if(typeof(destino) === 'undefined'){
-				i3GEO.util.defineValor(onde+configProj+"X","value","?");
-				i3GEO.util.defineValor(onde+configProj+"Y","value","?");
+				iu.defineValor(onde+configProj+"X","value","?");
+				iu.defineValor(onde+configProj+"Y","value","?");
 				return;
 			}
 		}
@@ -477,8 +478,8 @@ i3GEO.coordenadas = {
 		{p = {x:x,y:y};}
 		else
 		{p = i3GEO.coordenadas.calculaProj4(i3GEO.coordenadas.defOrigem,destino,x,y);}
-		i3GEO.util.defineValor(onde+configProj+"X","value",p.x);
-		i3GEO.util.defineValor(onde+configProj+"Y","value",p.y);
+		iu.defineValor(onde+configProj+"X","value",p.x);
+		iu.defineValor(onde+configProj+"Y","value",p.y);
 		i3GEO.coordenadas.MODOTEXTO += temp.titulo+" - X: "+p.x+" Y: "+p.y+"<br>";
 	},
 	/*

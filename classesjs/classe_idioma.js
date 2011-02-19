@@ -281,7 +281,8 @@ i3GEO.idioma = {
 		//
 		//monta o elemento HTML com as bandeiras
 		//
-		var ins,n,w,i,pos,novoel,temp;
+		var ins,n,w,i,pos,novoel,temp,
+			iu = i3GEO.util;
 		ins = "";
 		n = this.SELETORES.length;
 		if($i("i3geo") && i3GEO.parametros.w < 550)
@@ -289,7 +290,7 @@ i3GEO.idioma = {
 		else {w = "";}
 		for(i=0;i<n;i++){
 			temp = i3GEO.idioma.SELETORES[i];
-			ins += '<img  style="'+w+'padding:0 0px;top:-7px;padding-right:0px;border: 1px solid white;" src="'+i3GEO.util.$im("branco.gif")+'" onclick="i3GEO.idioma.trocaIdioma(\''+temp+'\')" ';
+			ins += '<img  style="'+w+'padding:0 0px;top:-7px;padding-right:0px;border: 1px solid white;" src="'+iu.$im("branco.gif")+'" onclick="i3GEO.idioma.trocaIdioma(\''+temp+'\')" ';
 			if(temp === "en")
 			{ins += 'alt="Ingles" id="uk" />';}
 			if(temp === "pt")

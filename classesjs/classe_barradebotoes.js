@@ -836,12 +836,13 @@ i3GEO.barraDeBotoes = {
 	*/
 	recria: function(id){
 		if(typeof(console) !== 'undefined'){console.info("i3GEO.barraDeBotoes.recria()");}
-		var n,temp,novoel,barraZoom,x,y;
+		var n,temp,novoel,barraZoom,x,y,
+			iu = i3GEO.util;
 		n = this.BARRAS.length;
 		for(i=0;i<n;i+=1){
 			if(this.BARRAS[i].id === id){
 				//remove o menu de contexto
-				i3GEO.util.removeChild("contexto_"+id);
+				iu.removeChild("contexto_"+id);
 				novoel = document.createElement("div");
 				novoel.id = "barraTemporaria"+i;
 				novoel.innerHTML = $i(this.BARRAS[i].id+"_").innerHTML;
