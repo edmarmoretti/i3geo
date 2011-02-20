@@ -1293,8 +1293,8 @@ i3GEO.util = {
 		if(!aguarde){aguarde = true;}
 		var head,script, tipojanela = i3GEO.janela.ESTILOAGUARDE;
 		if(!$i(id) || id === ""){
-			i3GEO.janela.ESTILOAGUARDE = "reduzida";
-			i3GEO.janela.abreAguarde(id+"aguarde","Carregando JS");
+			//i3GEO.janela.ESTILOAGUARDE = "reduzida";
+			//i3GEO.janela.abreAguarde(id+"aguarde","Carregando JS");
 			head= document.getElementsByTagName('head')[0];
 			script= document.createElement('script');
 			script.type= 'text/javascript';
@@ -2045,10 +2045,17 @@ i3GEO.util = {
 	*/
 	dialogoFerramenta: function(mensagem,dir,nome){
 		if(typeof(console) !== 'undefined'){console.info(mensagem);}
+		var js = i3GEO.configura.locaplic+"/ferramentas/"+dir+"/index.js.php";
 		if(!$i("i3GEOF."+nome+"_script")){
-			var js = i3GEO.configura.locaplic+"/ferramentas/"+dir+"/index.js.php";
-			i3GEO.util.scriptTag(js,"i3GEOF."+nome+".criaJanelaFlutuante()","i3GEOF."+nome+"_script");
+			i3GEO.janela.ESTILOAGUARDE = "reduzida";
+			i3GEO.util.multiStep(
+				[i3GEO.janela.abreAguarde,i3GEO.util.scriptTag],
+				[["i3GEOF."+nome+"_script"+"aguarde","Carregando JS"],[js,"i3GEOF."+nome+".criaJanelaFlutuante()","i3GEOF."+nome+"_script"]],
+				function(){}
+			);
 		}
+		else
+		{i3GEO.util.scriptTag(js,"i3GEOF."+nome+".criaJanelaFlutuante()","i3GEOF."+nome+"_script");}
 	},
 	/*
 	Function: intersectaBox
@@ -2269,7 +2276,50 @@ i3GEO.util = {
 		var txt = "¬" + matriz.join("¬") + "¬";
 		var er = new RegExp ("¬" + x + "¬", "gim");
 		return ( (txt.match (er)) ? true : false );
-	}
+	},
+	timedProcessArray: function(items,process,callback){
+		var todo = items.concat();
+		setTimeout(function() {
+			var start = +new Date();
+			do{
+				process(todo.shift());
+			} while (todo.length > 0 && (+new date() - start < 50));
+			if (todo.length > 0){
+				setTimeout(arguments.callee,25);
+			}
+			else{
+				callback(items);
+			}
+		},25);
+	},
+	/*
+	Function: multiStep
+	
+	Implementa a técnica de particionamento para execussão de funções no modo assíncrono
+	
+	Conforme página 144 do livro "Javascript de alto desempenho, Nicholas Zakas
+	
+	Parâmetros:
+	
+	steps {array} - funções que serão executadas
+	
+	args {array} - array de arrays com os argumentos de cada função
+	
+	callback {function} - função que será executada ao terminar os processos
+	*/
+	multiStep: function(steps,args,callback){
+		var tasks = steps.concat();//cria um clone
+		setTimeout(function(){
+			var task = tasks.shift(),
+				a = args.shift();
+			task.apply(null, a || []);
+			if(tasks.length > 0){
+				setTimeout(arguments.callee,25);
+			} else {
+				callback();
+			}
+		},25);
+	}	
 };
 //++++++++++++++++++++++++++++++++++++
 // YUI ACCORDION
@@ -2418,7 +2468,7 @@ try{
 				animation.animate();
 			}
 		}
-	};
+	}
 }
 catch(e){}
 //
