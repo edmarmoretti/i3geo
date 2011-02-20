@@ -114,7 +114,7 @@ i3GEO.idioma = {
 	*/
 	define: function(codigo) {
 		if(typeof(console) !== 'undefined'){console.info("i3GEO.idioma.define()");}
-		this.ATUAL = codigo;
+		i3GEO.idioma.ATUAL = codigo;
 		i3GEO.util.insereCookie("i3geolingua",codigo);
 	},
 	/*
@@ -126,7 +126,7 @@ i3GEO.idioma = {
 	{string} Código do idioma.
 	*/
 	retornaAtual: function() {
-		return (this.ATUAL);
+		return (i3GEO.idioma.ATUAL);
 	},
 	/*
 	Function: defineDicionario
@@ -153,7 +153,7 @@ i3GEO.idioma = {
 	}
 	*/
 	defineDicionario: function(obj) {
-		this.DICIONARIO = obj;
+		i3GEO.idioma.DICIONARIO = obj;
 	},
 	/*
 	Function: alteraDicionario
@@ -168,7 +168,7 @@ i3GEO.idioma = {
      
 	*/
 	alteraDicionario: function(id,novo) {
-		this.DICIONARIO[id][0][i3GEO.idioma.ATUAL] = novo;
+		i3GEO.idioma.DICIONARIO[id][0][i3GEO.idioma.ATUAL] = novo;
 	},
 	/*
 	Function: traduzir
@@ -220,7 +220,7 @@ i3GEO.idioma = {
 		for (var k in novodic)
 		{
 			if(novodic.hasOwnProperty(k))
-			{this.DICIONARIO[k] = novodic[k];}
+			{i3GEO.idioma.DICIONARIO[k] = novodic[k];}
 		}
 	},
 	/*
@@ -231,8 +231,8 @@ i3GEO.idioma = {
 	mostraDicionario: function() {
 		var w,k;
 		w = window.open();
-		for (k in this.DICIONARIO){
-			if(this.DICIONARIO.hasOwnProperty(k))
+		for (k in i3GEO.idioma.DICIONARIO){
+			if(i3GEO.idioma.DICIONARIO.hasOwnProperty(k))
 			{w.document.write(k+" = "+i3GEO.idioma.traduzir(k)+"<br>");}
 		}
 	},
@@ -262,7 +262,7 @@ i3GEO.idioma = {
 	{Array} Array com os códigos de idioma disponíveis.
 	*/
 	listaIdiomas: function() {
-		for(var k in this.DICIONARIO){
+		for(var k in i3GEO.idioma.DICIONARIO){
 			if(i3GEO.idioma.DICIONARIO.hasOwnProperty(k))
 			{return (i3GEO.util.listaChaves(i3GEO.idioma.DICIONARIO[k][0]));}
 		}
@@ -277,14 +277,14 @@ i3GEO.idioma = {
 	*/
 	mostraSeletor: function(){
 		if(typeof(console) !== 'undefined'){console.info("i3GEO.idioma.mostraSeletor()");}
-		if(!this.MOSTRASELETOR){return;}
+		if(!i3GEO.idioma.MOSTRASELETOR){return;}
 		//
 		//monta o elemento HTML com as bandeiras
 		//
 		var ins,n,w,i,pos,novoel,temp,
 			iu = i3GEO.util;
 		ins = "";
-		n = this.SELETORES.length;
+		n = i3GEO.idioma.SELETORES.length;
 		if($i("i3geo") && i3GEO.parametros.w < 550)
 		{w = "width:12px;";}
 		else {w = "";}
@@ -300,8 +300,8 @@ i3GEO.idioma = {
 			if(temp === "it")
 			{ins += 'alt="Italiano" id="italiano" />';}
 		}
-		if(this.IDSELETOR !== "" && $i(this.IDSELETOR))
-		{$i(this.IDSELETOR).innerHTML = ins;}
+		if(i3GEO.idioma.IDSELETOR !== "" && $i(i3GEO.idioma.IDSELETOR))
+		{$i(i3GEO.idioma.IDSELETOR).innerHTML = ins;}
 		else{
 			pos = i3GEO.util.pegaPosicaoObjeto($i(i3GEO.Interface.IDCORPO));
 			if(!$i("i3geoseletoridiomas")){

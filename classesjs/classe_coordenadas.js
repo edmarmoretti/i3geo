@@ -591,20 +591,20 @@ i3GEO.coordenadas = {
 			//cria a caixa de seleção
 			//
 			for(i=0;i<n;i += 1){
-				temp = this.config[tipos[i]];
+				temp = i3GEO.coordenadas.config[tipos[i]];
 				if(temp.ativo === true){
 					caixa += "<option value='"+tipos[i]+"'>"+temp.titulo+"</option>";
 				}
 			}
 			caixa += "</select>";
-			if(this.formato !== "bloco")
+			if(i3GEO.coordenadas.formato !== "bloco")
 			{caixa = "";}
 			for(i=0;i<n;i += 1){
-				temp = this.config[tipos[i]];
+				temp = i3GEO.coordenadas.config[tipos[i]];
 				if(temp.ativo === true){
 					if(temp.tipo === "geo"){
 						ins += i3GEO.coordenadas.criaMascaraDMS(onde+tipos[i],temp.titulo,caixa);
-						if(this.formato === "separado"){
+						if(i3GEO.coordenadas.formato === "separado"){
 							try{$i(temp.idhtml).innerHTML = ins;}
 							catch(e){}
 							ins = "";
@@ -684,7 +684,7 @@ i3GEO.coordenadas = {
 				if(i3GEO.eventos.MOUSEMOVE.toString().search("i3GEO.coordenadas.limpaModoTexto()") < 0)
 				{i3GEO.eventos.MOUSEMOVE.push("i3GEO.coordenadas.limpaModoTexto()");}
 			}
-			if(this.formato === "bloco")
+			if(i3GEO.coordenadas.formato === "bloco")
 			{i3GEO.coordenadas.ativaBloco(onde);}
 		}
 		catch(men){}
