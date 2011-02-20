@@ -741,7 +741,7 @@ i3GEO.arvoreDeCamadas = {
 	montaOpcoes: function(node){
 		if(typeof(console) !== 'undefined'){console.info("i3GEO.arvoreDeCamadas.montaOpcoes()");}
 		//YAHOO.log("Montando as opções da árvore de camadas", "i3geo");
-		var d,conteudo,opcoesNode,idtema,ltema,farol,mfarol,tnome,iconesNode
+		var d,conteudo,opcoesNode,idtema,ltema,farol,mfarol,tnome,iconesNode,
 			imb = i3GEO.util.$im("branco.gif");
 		idtema = node.data.id;
 		ltema = i3GEO.arvoreDeCamadas.pegaTema(idtema);
