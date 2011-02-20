@@ -100,9 +100,9 @@ i3GEO.mapa = {
 	*/
 	ativaTema: function(codigo){
 		if(i3GEO.temaAtivo !== "")
-		{i3GEO.util.defineValor("arrastar_"+i3GEO.temaAtivo,"style.color","");}
+		{i3GEO.util.defineValor("ArvoreTituloTema"+i3GEO.temaAtivo,"style.color","");}
 		i3GEO.temaAtivo = codigo;
-		i3GEO.util.defineValor("arrastar_"+codigo,"style.color","brown");
+		i3GEO.util.defineValor("ArvoreTituloTema"+codigo,"style.color","brown");
 	},
 	/*
 	Function: ativaLogo
