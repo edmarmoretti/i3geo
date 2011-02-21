@@ -386,7 +386,6 @@ if(isset($linhas))
 
 if(isset($poligonos))
 {inserePoligonosUrl();}
-
 if(isset($url_wms))
 {incluiTemaWms();}
 
