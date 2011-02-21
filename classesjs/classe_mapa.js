@@ -256,7 +256,8 @@ i3GEO.mapa = {
 		*/
 		atualiza: function(){
 			if(typeof(console) !== 'undefined'){console.info("i3GEO.mapa.legendaHTML.atualiza()");}
-			var temp = function(retorno){
+			var idleg,
+				temp = function(retorno){
 				var s,ins,elementos,i;
 				if(i3GEO.mapa.legendaHTML.ID !== "" && $i(i3GEO.mapa.legendaHTML.ID)){
 					if ((retorno.data !== "erro") && (retorno.data !== undefined)){
@@ -275,7 +276,13 @@ i3GEO.mapa = {
 					{elementos[i].style.display="none";}
 				}
 			};
-			if(i3GEO.mapa.legendaHTML.ID !== "" || $i("wlegenda"))
+			if(i3GEO.mapa.legendaHTML.ID !== ""){
+				idleg = $i(i3GEO.mapa.legendaHTML.ID);
+				if(idleg && idleg.style.display === "block")
+				{i3GEO.mapa.legendaHTML.obtem(temp);}
+			}
+			idleg = $i("wlegenda");
+			if (idleg && idleg.style.display === "block")
 			{i3GEO.mapa.legendaHTML.obtem(temp);}
 		},
 		/*

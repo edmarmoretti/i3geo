@@ -952,6 +952,28 @@ Liga e desliga temas no mapa atual.
 		$m->salva();
 	break;
 /*
+Valor: LIGATEMASBEACON
+
+Liga e desliga temas no mapa atual partindo de uma chamada via tag IMG
+
+Retorna um código de erro para indicar o fim do retorno.
+
+Veja no livro "Javascript de Alto Desempenho", de Nicholas C. Zakas pg. 162
+
+<Mapa->ligaDesligaTemas>
+*/		
+	case "LIGATEMASBEACON":
+  		include_once("classe_mapa.php");
+  		copiaSeguranca($map_file);
+		$m = new Mapa($map_file,$locaplic);
+		$retorno = $m->ligaDesligaTemas($ligar,$desligar,$adicionar);
+		$m->salva();
+		ob_start();
+		header("HTTP/1.1 204 Not Content");
+		header("Status: 204 Not Content");
+		ob_end_flush();
+	break;
+/*
 Valor: ADTEMA
 
 Adiciona um novo tema ao mapa.

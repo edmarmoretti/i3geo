@@ -949,7 +949,8 @@ i3GEO.Interface = {
 			var layers = i3geoOL.getLayersByName(obj.value),
 				temp = function(){i3GEO.mapa.legendaHTML.atualiza();},
 				desligar = "",
-				ligar = "";
+				ligar = "",
+				b;
 				if(layers.length > 0){
 				layers[0].setVisibility(obj.checked);
 				if(obj.checked)
@@ -962,8 +963,11 @@ i3GEO.Interface = {
 					desligar = obj.value;
 					i3GEO.arvoreDeCamadas.alteraPropCamadas("status","0",obj.value);
 				}
-				i3GEO.php.ligatemas(temp,desligar,ligar);
+				//i3GEO.php.ligatemas(temp,desligar,ligar);
 				//beacons pattern
+				b = new Image();
+				b.src = i3GEO.configura.locaplic+"/classesphp/mapa_controle.php?funcao=ligatemasbeacon&desligar="+desligar+"&ligar="+ligar+"&adicionar=nao&g_sid="+i3GEO.configura.sid;
+				b.onerror = function(){i3GEO.mapa.legendaHTML.atualiza();}
 			}
 		},
 		ativaFundo: function(id){
