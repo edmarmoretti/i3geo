@@ -351,7 +351,8 @@ i3GEO.mapa = {
 					temp[i].style.display = "none";
 				}
 				YAHOO.moveLegi.xp.panel.show();
-				$i("moveLegi_c").style.zIndex = 10000;
+				$i("moveLegi_c").style.zIndex = 100000;
+				$i("moveLegi").style.border = "1px solid gray";
 			};
 			i3GEO.mapa.legendaHTML.obtem(temp);
 		}
