@@ -537,20 +537,21 @@ i3GEO.barraDeBotoes = {
 		var falta,ticone,tipo,mostra,i,temp,elementos,e,wj,recuo,novoel,alturadisponivel,n,chaves,re,estilo,
 			numerobotoes = 0,
 			nelementos = 0,
-			Dom = YAHOO.util.Dom;
+			Dom = YAHOO.util.Dom,
+			branco = i3GEO.configura.locaplic+'/imagens/branco.gif';
 		if(this.AUTO === true){
 			if(idconteudo === "barraDeBotoes1"){
 				novoel = document.createElement("div");
 				novoel.id = "barraDeBotoes1";
 				temp = '<table style="width:100%"><tr><td style="background-color:rgb(250,250,250);"><div ID="historicozoom" ></div></td></tr><tr><td style=height:5px ></td></tr></table>' +
 					"<div style='display:inline;background-color:rgb(250,250,250);'>" +
-					'<img title="zoom" alt="zoom" src="'+i3GEO.configura.locaplic+'/imagens/branco.gif" id="zoomli"/>' +
+					'<img title="zoom" alt="zoom" src="'+branco+'" id="zoomli"/>' +
 					"</div>" +
 					"<div style='display:inline;background-color:rgb(250,250,250);'>" +
-					'<img title="desloca" alt="desloca" src="'+i3GEO.configura.locaplic+'/imagens/branco.gif" id="pan"/>' +
+					'<img title="desloca" alt="desloca" src="'+branco+'" id="pan"/>' +
 					"</div>" +
 					"<div style='display:inline;background-color:rgb(250,250,250);'>" +
-					'<img title="geral" alt="geral" src="'+i3GEO.configura.locaplic+'/imagens/branco.gif" id="zoomtot"/>' +
+					'<img title="geral" alt="geral" src="'+branco+'" id="zoomtot"/>' +
 					"</div>";
 				novoel.innerHTML = temp;
 				document.body.appendChild(novoel);
@@ -571,9 +572,9 @@ i3GEO.barraDeBotoes = {
 					if(this.SOICONES === true)
 					{estilo = "font-size:0px;";}
 					novoel.innerHTML = "<table style='width:100%'>"+
-						"<tr><td style='background-color:rgb(250,250,250);'><img title='' alt='sobe' src='"+i3GEO.configura.locaplic+"/imagens/branco.gif' id='sobeferramentas'/></td></tr>"+
+						"<tr><td style='background-color:rgb(250,250,250);'><img title='' alt='sobe' src='"+branco+"' id='sobeferramentas'/></td></tr>"+
 						"</table>" +temp+
-						"<table style='width:100%;'><tr><td style='background-color:rgb(250,250,250);'><img title='desce' alt='' src='"+i3GEO.configura.locaplic+"/imagens/branco.gif' id='desceferramentas'/></td></tr></table>";
+						"<table style='width:100%;'><tr><td style='background-color:rgb(250,250,250);'><img title='desce' alt='' src='"+branco+"' id='desceferramentas'/></td></tr></table>";
 					document.body.appendChild(novoel);
 				}
 				else{

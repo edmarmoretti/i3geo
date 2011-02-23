@@ -424,6 +424,13 @@ en:"filtra a lista de camadas",
 es:"filtra a lista de camadas",
 it:"filtra a lista de camadas"
 }],
+"t2b":[
+{
+pt:"Abre a legenda do mapa",
+en:"Abre a legenda do mapa",
+es:"Abre a legenda do mapa",
+it:"Abre a legenda do mapa"
+}],
 "t3":[
 {
 pt:"Clique para ligar ou desligar esse tema, mostrando-o ou n&atilde;o no mapa. Ap&oacute;s alterar o estado do tema, aguarde alguns instantes para o mapa ser redesenhado, ou clique no bot&atilde;o aplicar que ser&aacute; mostrado.",

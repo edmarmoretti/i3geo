@@ -157,6 +157,18 @@ i3GEO.arvoreDeCamadas = {
 	*/
 	FILTRAR: true,
 	/*
+	Propriedade: ABRELEGENDA
+
+	Mostra o ícone para abrir a legenda do mapa.
+
+	Default:
+	{true}
+
+	Type:
+	{boolean}
+	*/
+	ABRELEGENDA: true,
+	/*
 	Propriedade: EXPANDIDA
 
 	Indica se a árvore será montada de forma expandida ou não. Se true, os nós do primeiro nível serão abertos na inicialização da árvore.
@@ -445,6 +457,9 @@ i3GEO.arvoreDeCamadas = {
 		{titulo += "<img id='i3geo_lixeira' title='"+$trad("t2")+"'  src='"+i3GEO.util.$im("branco.gif")+"' />";}
 		if(this.FILTRAR === true)
 		{titulo += "<img onclick='i3GEO.arvoreDeCamadas.dialogo.filtro();' id='i3geo_filtro' title='"+$trad("t2a")+"'  src='"+i3GEO.util.$im("branco.gif")+"' />";}
+		if(this.ABRELEGENDA === true)
+		{titulo += "<img onclick='i3GEO.mapa.legendaHTML.libera();' id='soltaleg2' title='"+$trad("t2b")+"'  src='"+i3GEO.util.$im("branco.gif")+"' />";}
+
 		if(this.LIGARDESLIGARTODOS === true){
 			titulo += "&nbsp;<img onclick='i3GEO.arvoreDeCamadas.aplicaTemas(\"ligartodos\");' id='olhoAberto' title='"+$trad("t3a")+"'  src='"+i3GEO.util.$im("branco.gif")+"' />";
 			titulo += "&nbsp;<img onclick='i3GEO.arvoreDeCamadas.aplicaTemas(\"desligartodos\");' id='olhoFechado' title='"+$trad("t3b")+"'  src='"+i3GEO.util.$im("branco.gif")+"' />";
