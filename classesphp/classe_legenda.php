@@ -601,7 +601,12 @@ $opacidade - Opacidade
 			$cor->setRGB($nc[0],$nc[1],$nc[2]);
 		}
 		if ((isset($symbolname)) && ($symbolname != ""))
-		{$estilo->set("symbolname",$symbolname);}
+		{
+			if(is_numeric($symbolname))
+			{$estilo->set("symbol",$symbolname);}
+			else
+			{$estilo->set("symbolname",$symbolname);}
+		}
 		if ((isset ($size)) && ($size != "-1"))
 		{$estilo->set("size",$size);}
 		if(isset($opacidade))

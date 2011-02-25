@@ -1100,7 +1100,7 @@ i3GEOF.legenda = {
 				opacidade = $i("i3GEOlegendaopacidade").value,
 				p,cp,fim;
 			for (i=0;i<n;i++){
-				if(simbolos[i].title == symbolname)
+				if(simbolos[i].title == symbolname || symbolname == i)
 				{valido = "sim";}
 			}
 			if(valido === "nao"){
