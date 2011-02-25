@@ -24,7 +24,7 @@ $s = PHP_SHLIB_SUFFIX;
 if(!function_exists('curl_init'))
 {@dl( 'php_curl'.'.'.$s );}
 if(!function_exists('curl_init'))
-{echo "curl não instalado";}
+{echo "curl não instalado";return;}
 $curl = curl_init();
 curl_setopt ($curl, CURLOPT_URL, "http://search.twitter.com/search.json?geocode=".$_GET["y"].",".$_GET["x"].",".$km."km");
 //teste

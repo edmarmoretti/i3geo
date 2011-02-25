@@ -740,6 +740,15 @@
 	width:16px;
 	height:16px;
 }
+.importarwmc
+{
+	background-image:URL('../imagens/visual/default/sprite.png');
+	background-repeat: no-repeat;
+	background-position: 0px -2140px;
+	border: 1px solid #DCDCDC;
+	cursor:pointer;
+	width:16px;
+}
 button{background:url(../imagens/tic2.png) 98% 50% no-repeat;}
 #encolheFerramentas
 {background-image:URL('../imagens/encolhe.png');background-repeat: no-repeat;background-position:center;cursor:pointer;}

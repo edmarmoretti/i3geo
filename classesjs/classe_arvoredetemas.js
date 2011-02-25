@@ -5,7 +5,7 @@ Title: Árvore de temas
 
 Arquivo:
 
-i3geo/classesjs/classe_arvodetemas.js
+i3geo/classesjs/classe_arvoredetemas.js
 
 Licenca:
 
@@ -87,7 +87,9 @@ i3GEO.arvoreDeTemas = {
 
 		comentarios: true,
 
-		bookmark: true
+		bookmark: true,
+		
+		importarwmc: true
 	}
 
 	Tipo:
@@ -114,7 +116,8 @@ i3GEO.arvoreDeTemas = {
 		carousel: true,
 		uploadgpx: true,
 		comentarios: true,
-		bookmark: true
+		bookmark: true,
+		importarwmc: true
 	},
 	/*
 	Propriedade: FATORESTRELA
@@ -1300,48 +1303,53 @@ i3GEO.arvoreDeTemas = {
 		if(typeof(console) !== 'undefined'){console.info("i3GEO.arvoreDeTemas.outrasOpcoesHTML()");}
 		var ins = "",
 			t = 0,
-			imb = i3GEO.util.$im("branco.gif");
-		if(this.OPCOESADICIONAIS.refresh === true){
+			imb = i3GEO.util.$im("branco.gif"),
+			OPCOESADICIONAIS = i3GEO.arvoreDeTemas.OPCOESADICIONAIS;
+		if(OPCOESADICIONAIS.refresh === true){
 			ins += "<td><img class='refresh' onclick='i3GEO.arvoreDeTemas.atualiza()' src='"+imb+"' style='cursor:pointer;text-align:left' title='Refresh'/><td>";
 			t += 20;
 		}
-		if(this.OPCOESADICIONAIS.uploadgpx === true){
+		if(OPCOESADICIONAIS.uploadgpx === true){
 			ins += "<td><img class='uploadgpx' onclick='i3GEO.arvoreDeTemas.dialogo.uploadgpx()' src='"+imb+"' style='cursor:pointer;text-align:left'  title='upload GPX'/><td>";
 			t += 20;
 		}
-		if(this.OPCOESADICIONAIS.uploaddbf === true){
+		if(OPCOESADICIONAIS.uploaddbf === true){
 			ins += "<td><img class='uploaddbf' onclick='i3GEO.arvoreDeTemas.dialogo.uploaddbf()' src='"+imb+"' style='cursor:pointer;text-align:left' title='"+$trad("a2b")+"'/><td>";
 			t += 20;
 		}
-		if(this.OPCOESADICIONAIS.uploadlocal === true){
+		if(OPCOESADICIONAIS.uploadlocal === true){
 			ins += "<td><img class='upload' onclick='i3GEO.arvoreDeTemas.dialogo.upload()' src='"+imb+"' style='cursor:pointer;text-align:left' title='"+$trad("a2")+"'/><td>";
 			t += 20;
 		}
-		if(this.OPCOESADICIONAIS.downloadbase === true){
+		if(OPCOESADICIONAIS.downloadbase === true){
 			ins += "<td><img onclick='i3GEO.arvoreDeTemas.dialogo.downloadbase()' class='download' src='"+imb+"' style='cursor:pointer;text-align:left'  title='"+$trad("a3")+"'/><td>";
 			t += 20;
 		}
-		if(this.OPCOESADICIONAIS.conectarwms === true){
+		if(OPCOESADICIONAIS.importarwmc === true){
+			ins += "<td><img onclick='i3GEO.arvoreDeTemas.dialogo.importarwmc()' class='importarwmc' src='"+imb+"' style='cursor:pointer;text-align:left'  title='"+$trad("a3a")+"'/><td>";
+			t += 20;
+		}
+		if(OPCOESADICIONAIS.conectarwms === true){
 			ins += "<td><img class='conectarwms' onclick='i3GEO.arvoreDeTemas.dialogo.conectarwms()' src='"+imb+"' style='cursor:pointer;text-align:left'  title='"+$trad("a4")+"'/><td>";
 			t += 20;
 		}
-		if(this.OPCOESADICIONAIS.conectarwmst === true){
+		if(OPCOESADICIONAIS.conectarwmst === true){
 			ins += "<td><img class='conectarwmst' onclick='i3GEO.arvoreDeTemas.dialogo.conectarwmst()' src='"+imb+"' style='cursor:pointer;text-align:left'  title='"+$trad("a4b")+"'/><td>";
 			t += 20;
 		}
-		if(this.OPCOESADICIONAIS.conectargeorss === true){
+		if(OPCOESADICIONAIS.conectargeorss === true){
 			ins += "<td><img class='conectargeorss' onclick='i3GEO.arvoreDeTemas.dialogo.conectargeorss()' src='"+imb+"' style='cursor:pointer;text-align:left'  title='"+$trad("a5")+"'/><td>";
 			t += 20;
 		}
-		if(this.OPCOESADICIONAIS.nuvemTags === true){
+		if(OPCOESADICIONAIS.nuvemTags === true){
 			ins += "<td><img class='nuvemtags' onclick='i3GEO.arvoreDeTemas.dialogo.nuvemTags()' src='"+imb+"' style='cursor:pointer;text-align:left'  title='"+$trad("a5a")+"'/><td>";
 			t += 20;
 		}
-		if(this.OPCOESADICIONAIS.nuvemTagsFlash === true){
+		if(OPCOESADICIONAIS.nuvemTagsFlash === true){
 			ins += "<td><img class='nuvemtags' onclick='i3GEO.arvoreDeTemas.dialogo.nuvemTagsFlash()' src='"+imb+"' style='cursor:pointer;text-align:left'  title='"+$trad("a5a")+"'/><td>";
 			t += 20;
 		}
-		if(this.OPCOESADICIONAIS.carousel === true){
+		if(OPCOESADICIONAIS.carousel === true){
 			ins += "<td><img class='carouselTemas' onclick='i3GEO.arvoreDeTemas.dialogo.carouselTemas()' src='"+imb+"' style='cursor:pointer;text-align:left'  title='Miniaturas'/><td>";
 			t += 20;
 		}
@@ -1838,6 +1846,13 @@ i3GEO.arvoreDeTemas = {
 		*/
 		navegacaoDir: function()
 		{i3GEO.janela.cria("550px","350px",i3GEO.configura.locaplic+"/ferramentas/navegacaodir/index.htm","","","Diret&oacute;rios");},
+		/*
+		Function: importarwmc
+
+		Abre a janela para importar um arquivo WMC (Web Map Context)
+		*/
+		importarwmc: function()
+		{i3GEO.util.scriptTag(i3GEO.configura.locaplic+"/ferramentas/importarwmc/index.js.php","i3GEOF.importarwmc.criaJanelaFlutuante()","i3GEOF.importarwmc_script");},
 		/*
 		Function: conectarwms
 

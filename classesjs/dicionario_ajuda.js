@@ -830,6 +830,15 @@ g_traducao_ajuda = {
 			complemento:"",
 			tela:"",
 			apijs:"i3GEO.arvoreDeCamadas"
+		},
+		"98": {
+			titulo: "Importar WMC",
+			diretorio:"i3geo/ferramentas/importarwmc",
+			categoria:"4",
+			pt:"Adiciona ao mapa camadas definidas em um arquivo XML no padrão WMC 'Web Map Context'. O WMC permite que mapas sejam transferidos entre aplicações.",
+			complemento:"O arquivo XML pode estar em um servidor ou pode ser feito o upload para o servidor do i3Geo",
+			tela:"",
+			apijs:"i3GEO.arvoreDeTemas.dialogo.importarwmc()"
 		}
 	}
 };

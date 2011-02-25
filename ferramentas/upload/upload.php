@@ -82,7 +82,7 @@ if (isset($_FILES['i3GEOuploadshp']['name']))
 		}
 		if(isset($uploadEPSG) && $uploadEPSG != "")
 		{$novolayer->setProjection("init=epsg:".$uploadEPSG);}
-		$adiciona = ms_newLayerObj($mapa, $novolayer);
+		//$adiciona = ms_newLayerObj($mapa, $novolayer);
 		$salvo = $mapa->save($map_file);
 		//grava os templates de cada tema
 		echo "<p class='paragrafo' >Tema criado!!! Redesenhando o mapa.";

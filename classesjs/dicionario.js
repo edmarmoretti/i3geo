@@ -825,6 +825,13 @@ en:"Data download",
 es:"Download de datos",
 it:"Download dei dati"
 }],
+"a3a":[
+{
+pt:"Importar Web Map Context (WMC)",
+en:"Importar Web Map Context (WMC)",
+es:"Importar Web Map Context (WMC)",
+it:"Importar Web Map Context (WMC)"
+}],
 "a4":[
 {
 pt:"Conectar com servidor WMS",

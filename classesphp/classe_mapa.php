@@ -1332,40 +1332,46 @@ Endereço do WMC
 		$w = $this->mapa->web;
 		$w->set("template","");
 		// adiciona os parametros no nivel do mapa
-		$this->mapa->setmetadata("wms_title","I3Geo");
+		$this->mapa->setmetadata("wms_title","i3Geo");
 		$this->mapa->setmetadata("wms_onlineresource","http://".$h.$nomeurl);
 		$this->mapa->setmetadata("wms_srs","EPSG:4291");
 		$this->mapa->setmetadata("wms_getcontext_enabled","1");
 		foreach ($this->layers as $layer)
 		{
-			$n = pegaNome($layer);
-			$layer->setmetadata("wms_title",$n);
-			$codigo = $layer->getmetadata("nomeoriginal");
-			if($codigo == "")
-			{$codigo = $layer->name;}
-			$layer->setmetadata("wms_server_version","1.0.0");
-			$layer->setmetadata("wms_name",$codigo);
-			$layer->setmetadata("wms_srs","EPSG:4291 EPSG:4326");
-			//$layer->setmetadata("wms_getcontext_enabled","1");
-			$layer->setmetadata("WMS_INCLUDE_ITEMS","all");
-			$layer->setmetadata("wms_onlineresource","http://".$h.$nomeurl);
-			$layer->set("status","ON");
-			$layer->set("template","none.htm");
-			$layer->setmetadata("gml_include_items","all");
-			$layer->set("dump",MS_TRUE);
-			$c = $layer->getclass(0);
-			if ($c->name == "")
-			{$c->name = " ";}
-			if($layer->connectiontype != "WS_WMS" && $layer->getmetadata("permiteogc") == "" && $layer->getmetadata("TEMALOCAL") == ""){
-				if(ms_GetVersionInt() > 50201)
-				{$layer->setconnectiontype(MS_WMS);}
-				else
-				{$layer->set("connectiontype",MS_WMS);}
-				$data = $urli3geo."/ogc.php?tema=".$codigo;
-				$layer->set("connection",$data);
-				$layer->set("data","");
-				if(file_exists("../temas/".$codigo.".map"))
-				{$layer->setmetadata("wms_onlineresource",$data);}
+			if($layer->connectiontype != 7 && $layer->connectiontype != 9){
+				$n = pegaNome($layer);
+				$layer->setmetadata("wms_title",$n);
+				$codigo = $layer->getmetadata("nomeoriginal");
+				if($codigo == "")
+				{$codigo = $layer->name;}
+				$layer->setmetadata("wms_server_version","1.0.0");
+				$layer->setmetadata("wms_name",$codigo);
+				$layer->setmetadata("wms_srs","EPSG:4291 EPSG:4326");
+				$layer->setmetadata("WMS_INCLUDE_ITEMS","all");
+				$layer->setmetadata("wms_onlineresource","http://".$h.$nomeurl);
+				$layer->setmetadata("gml_include_items","all");
+				$layer->setmetadata("wms_format","image/png");
+				$layer->setmetadata("wms_formatlist","image/gif,image/png,image/png; mode=24bit,image/jpeg,image/wbmp,image/tiff");
+				$layer->set("dump",MS_TRUE);
+				$layer->set("status","ON");
+				$layer->set("template","none.htm");
+				$c = $layer->getclass(0);
+				if ($c->name == "")
+				{$c->name = " ";}
+				if($layer->connectiontype != "WS_WMS" && $layer->getmetadata("permiteogc") == "" && $layer->getmetadata("TEMALOCAL") == ""){
+					if(ms_GetVersionInt() > 50201)
+					{$layer->setconnectiontype(MS_WMS);}
+					else
+					{$layer->set("connectiontype",MS_WMS);}
+					$data = $urli3geo."/ogc.php?tema=".$codigo;
+					$layer->set("connection",$data);
+					$layer->set("data","");
+					if(file_exists("../temas/".$codigo.".map"))
+					{$layer->setmetadata("wms_onlineresource",$data);}
+				}
+			}
+			else{
+				$layer->setmetadata("wms_onlineresource",$layer->connection);
 			}
 		}
 		$eb = $this->mapa->scalebar;
