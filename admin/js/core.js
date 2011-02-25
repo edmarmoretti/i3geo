@@ -879,9 +879,10 @@ function core_geraLinhas(dados)
 			if(!p.size){p.size = "50";}
 			if(p.ajuda)
 			{
-				var temp = "$i('"+contaParam+"_ajuda').style.display='block' "
-				resultado += "<p><div onclick='core_geralinhasEscondeAjuda(\""+contaParam+"\")' style=cursor:pointer title='ajuda' ><img id='"+contaParam+"_imgajuda' src='../../imagens/desce.gif' >&nbsp;<b>"+p.titulo+"</b></div>"
-				resultado += "<div id='"+contaParam+"_ajuda' style=display:none >"+p.ajuda+"</div>"
+				var idajuda = p.id + contaParam;
+				//var temp = "$i('"+idajuda+"_ajuda').style.display='block' "
+				resultado += "<p><div onclick='core_geralinhasEscondeAjuda(\""+idajuda+"\")' style=cursor:pointer title='ajuda' ><img id='"+idajuda+"_imgajuda' src='../../imagens/desce.gif' >&nbsp;<b>"+p.titulo+"</b></div>"
+				resultado += "<div id='"+idajuda+"_ajuda' style=display:none >"+p.ajuda+"</div>"
 			}
 			else
 			resultado += "<p><b>"+p.titulo+"</b><br>";

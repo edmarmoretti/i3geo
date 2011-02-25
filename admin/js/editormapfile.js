@@ -1107,131 +1107,212 @@ function montaEditorConexao(dados)
 }
 function montaEditorMetadados(dados)
 {
+	var paramRaster = {
+		"linhas":[
+			{ajuda:"A palete é válida apenas para temas RASTER. Entre com o endereço do arquivo no servidor. Veja exemplo em i3geo/localhost/symbols/testepalete.txt",
+			titulo:"Arquivo com palete de cores (opcional e serve apenas para temas raster) (PALLETEFILE)",id:"palletefile",value:dados.palletefile,tipo:"text"},
+			{ajuda:"Quantas cores em cada nível da palete. Veja exemplo em i3geo/localhost/symbols/testepalete.txt",
+			titulo:"Passo (opcional e serve apenas para temas raster) (PALLETESTEP)",id:"palletestep",value:dados.palletestep,tipo:"text"}
+		]
+	};
+	var paramVetor = {
+		"linhas":[
+			{ajuda:"Indica se a extensão geográfica do mapa deve ser alterada quando o tema for adicionado ao mapa",
+			titulo:"Aplica extensao (APLICAEXTENSAO)",id:"",value:dados.aplicaextensao,tipo:"text",div:"<div id=cAplicaextensao ></div>"},
+			{ajuda:"Indica se o usuário pode abrir o editor de SQL para poder alterar o elemento DATA do Mapfile.",
+			titulo:"Permite editar SQL (EDITORSQL)",id:"",value:dados.editorsql,tipo:"text",div:"<div id=cEditorsql ></div>"},
+			{ajuda:"Formato das datas existentes na tabela de atributos p.e. iso8601",
+			titulo:"Linha do tempo: LTEMPOFORMATODATA",id:"ltempoformatodata",value:dados.ltempoformatodata,tipo:"text"},
+			{ajuda:"Item que indica a data de início de um evento",
+			titulo:"Linha do tempo: LTEMPOITEMINICIO",id:"ltempoiteminicio",value:dados.ltempoiteminicio,tipo:"text"},
+			{ajuda:"Item que indica a data final de um evento (opcional)",
+			titulo:"Linha do tempo: LTEMPOITEMFIM",id:"ltempoitemfim",value:dados.ltempoitemfim,tipo:"text"},
+			{ajuda:"Item que contém o título de cada evento",
+			titulo:"Linha do tempo: LTEMPOITEMTITULO",id:"ltempoitemtitulo",value:dados.ltempoitemtitulo,tipo:"text"},
+			{ajuda:"Item com a descrição do evento (opcional)",
+			titulo:"Linha do tempo: LTEMPOITEMDESCRICAO",id:"ltempoitemdescricao",value:dados.ltempoitemdescricao,tipo:"text"},
+			{ajuda:"Item para etiquetas do título (opcional)",
+			titulo:"Linha do tempo: LTEMPOITEMTIP",id:"ltempoitemtip",value:dados.ltempoitemtip,tipo:"text"},
+			{ajuda:"Item com o endereço de uma imagem que será incluída no menu popup, aberto quando o usuário clica em um evento (opcional)",
+			titulo:"Linha do tempo: LTEMPOITEMIMAGEM",id:"ltempoitemimagem",value:dados.ltempoitemimagem,tipo:"text"},
+			{ajuda:"Link para uma página que será incluído no menu popup",
+			titulo:"Linha do tempo: LTEMPOITEMLINK",id:"ltempoitemlink",value:dados.ltempoitemlink,tipo:"text"},
+			{ajuda:"Endereço da imagem do ícone que irá representar o evento (opcional)",
+			titulo:"Linha do tempo: LTEMPOITEMICONE",id:"ltempoitemicone",value:dados.ltempoitemicone,tipo:"text"}
+		]
+	};
+	var paramNaoOWS = {
+		"linhas":[
+			{ajuda:"Indica se o usuário pode fazer download do tema",
+			titulo:"Download (DOWNLOAD)",id:"",value:dados.download,tipo:"text",div:"<div id=cDownload ></div>"},
+			{ajuda:"Endereço de um arquivo para download dos dados (caminho completo no servidor). Se definido, o sistema irá usar esse arquivo ao invés de gerar os dados, quando o usuário clicar nas opções de download. Se não for definido, o arquivo de download é gerado diretamente do original, convertendo do banco ou copiando o arquivo definido em DATA.",
+			titulo:"Arquivo download (ARQUIVODOWNLOAD)",id:"arquivodownload",value:dados.arquivodownload,tipo:"text"},
+			{ajuda:"É possível a geração de classes automaticamente por meio da definição de colunas na tabela de atributos do tema que armazenam as informações sobre cor, tamanho, etc. Esse metadata é utilizado para definir qual a coluna da tabela que identifica unicamente cada classe. Para cada valor será criada uma classe.<br>O tema que utiliza a geração de classes de forma automática, deve ter definido apenas uma classe. Essa classe será utilizada como padrão para geração das demais.",
+			titulo:"Auto-legenda: id das classes (CLASSESITEM)",id:"classesitem",value:dados.classesitem,tipo:"text"},
+			{ajuda:"Nome da coluna que será utilizada para compor o nome das classes geradas automaticamente.",
+			titulo:"Auto-legenda: nome das classes (CLASSESNOME)",id:"classesnome",value:dados.classesnome,tipo:"text"},
+			{ajuda:"Nome da coluna que definirá a cor do símbolo utilizado em cada classe. As cores devem ser definidas em RGB.",
+			titulo:"Auto-legenda: cor da classe (CLASSESCOR)",id:"classescor",value:dados.classescor,tipo:"text"},
+			{ajuda:"Nome da coluna que definirá o símbolo utilizado em cada classe.",
+			titulo:"Auto-legenda: símbolo (CLASSESSIMBOLO)",id:"classessimbolo",value:dados.classessimbolo,tipo:"text"},
+			{ajuda:"Nome da coluna que definirá o tamanho de cada símbolo.",
+			titulo:"Auto-legenda: tamanho (CLASSESTAMANHO)",id:"classestamanho",value:dados.classestamanho,tipo:"text"}
+		]
+	};
 	var param = {
 		"linhas":[
-		{ajuda:"Nome que será utilizado na legenda do mapa e na guia 'Temas'",
-		titulo:"Tema (METADATA: TEMA)",id:"tema",value:dados.tema,tipo:"text"},
-		{ajuda:"Ícone que será mostrado na árvore de camadas. A imagem deve existir na web e deve ser incluído o caminho completo ou relativo em relação ao local da interface HTML do mapa.",
-		titulo:"Ícone (METADATA: ICONETEMA)",id:"iconetema",value:dados.iconetema,tipo:"text"},
-		{ajuda:"Denominador da escala da fonte dos dados utilizado pelo tema. É utilizado para apresentar a indicação de compatibilidade entre a escala do tema e a escala do mapa que está sendo visto.",
-		titulo:"Escala (ESCALA)",id:"escala",value:dados.escala,tipo:"text"},
-		{ajuda:"Extensão geográfica máxima do tema, no formato xmin ymin xmax ymax. É utilizado na opção de 'zoom para o tema'. Quando o tema é baseado em shapefile, esse metadata não é necessário, pois o mapserver consegue calcular a extensão. Já em outros tipos de dados, como Postgis, o parâmetro é necessário. Nesse caso, se não for indicado, o botão de zoom para o tema não será visível para o usuário",
-		titulo:"Extensao (EXTENSAO)",id:"extensao",value:dados.extensao,tipo:"text"},
-		{ajuda:"Ativa ou não a manutenção de um cache para armazenar as imagens geradas para montar o mapa. Essa opção afeta apenas as interfaces do i3Geo que utilizam o modo TILE (como a interface OpenLayers). O cache é mantido no diretório temporário utilizado pelo i3Geo, na pasta chamada cache. Para cada camada é criada uma sub-pasta. Para limpar o cache, utilize a opção existente junto ao nó principal desse mapfile",
-		titulo:"Cache de mapas. Camadas WMS são acessadas diretamente do servidor de origem quando o cache estiver inativo. (CACHE)",id:"",value:dados.cache,tipo:"text",div:"<div id=cCache ></div>"},
-		{ajuda:"Indica se a extensão geográfica do mapa deve ser alterada quando o tema for adicionado ao mapa",
-		titulo:"Aplica extensao (APLICAEXTENSAO)",id:"",value:dados.aplicaextensao,tipo:"text",div:"<div id=cAplicaextensao ></div>"},
-		{ajuda:"Indica se o usuário pode abrir o editor de SQL para poder alterar o elemento DATA do Mapfile.",
-		titulo:"Permite editar SQL (EDITORSQL)",id:"",value:dados.editorsql,tipo:"text",div:"<div id=cEditorsql ></div>"},
-		{ajuda:"Indica se o usuário pode fazer comentários no tema",
-		titulo:"Permite comentar (PERMITECOMENTARIO)",id:"",value:dados.permitecomentario,tipo:"text",div:"<div id=cPermitecomentario ></div>"},
-		{ajuda:"Indica se o usuário pode fazer download do tema",
-		titulo:"Download (DOWNLOAD)",id:"",value:dados.download,tipo:"text",div:"<div id=cDownload ></div>"},
-		{ajuda:"Endereço de um arquivo para download dos dados (caminho completo no servidor). Se definido, o sistema irá usar esse arquivo ao invés de gerar os dados, quando o usuário clicar nas opções de download. Se não for definido, o arquivo de download é gerado diretamente do original, convertendo do banco ou copiando o arquivo definido em DATA.",
-		titulo:"Arquivo download (ARQUIVODOWNLOAD)",id:"arquivodownload",value:dados.arquivodownload,tipo:"text"},
-		{ajuda:"A palete é válida apenas para temas RASTER. Entre com o endereço do arquivo no servidor. Veja exemplo em i3geo/localhost/symbols/testepalete.txt",
-		titulo:"Arquivo com palete de cores (opcional e serve apenas para temas raster) (PALLETEFILE)",id:"palletefile",value:dados.palletefile,tipo:"text"},
-		{ajuda:"Quantas cores em cada nível da palete. Veja exemplo em i3geo/localhost/symbols/testepalete.txt",
-		titulo:"Passo (opcional e serve apenas para temas raster) (PALLETESTEP)",id:"palletestep",value:dados.palletestep,tipo:"text"},
-		{ajuda:"Indica se as classes serão mostradas ou não na legenda. Por padrão é SIM. ",
-		titulo:"Classe (CLASSE)",id:"",value:dados.classe,tipo:"text",div:"<div id=cClasse ></div>"},
-		{ajuda:"Indica se o tema é mostrado no mapa mas não nas listas da legenda e na guia 'temas'",
-		titulo:"Escondido (ESCONDIDO)",id:"",value:dados.escondido,tipo:"text",div:"<div id=cEscondido ></div>"},
-		{ajuda:"Indica se o tema irá ser mostrado na ferramenta de identificação",
-		titulo:"Identifica (IDENTIFICA)",id:"",value:dados.identifica,tipo:"text",div:"<div id=cIdentifica ></div>"},
-		{ajuda:"Aplica efeitos de transição nas operações de zoom e pan na interface Openlayers",
-		titulo:"Efeitos de transição zoom (TRANSITIONEFFECT)",id:"",value:dados.transitioneffect,tipo:"text",div:"<div id=cTransitioneffect ></div>"},
-		{ajuda:"Nomes das colunas da tabela de atributos do tema, que serão mostradas na ferramenta de identificação. Se for vazio, todas as colunas serão mostradas. A lista de itens deve ser separada por ',' e grafada em caixa alta no caso de shapefile.",
-		titulo:"Itens (ITENS)",id:"itens",value:dados.itens,tipo:"text"},
-		{ajuda:"Lista com os 'alias', ou apelidos, para os nomes das colunas listados no metadata 'itens'. Os alias devem ser separados por ',' e seguir a ordem definida em ITENS.",
-		titulo:"Nomes dos itens (ITENSDESC)",id:"itensdesc",value:dados.itensdesc,tipo:"text"},
-		{ajuda:"Lista de links que serão incluídos em cada resultado de busca da ferramenta de identificação. A lista de links deve ser separada por ',', podendo-se incluir '' para indicar que o item não tem link. Exemplo de uso para inclusão de links para o site do IBGE quando um município é clicado no mapa:<br>ITENS 'codigo,nome2,uf'<br>ITENSDESC 'codigo do IBGE,nome do município,uf'<br>ITENSLLINK ',http://www.ibge.gov.br/munic2001/tabelas.php?codmun=[codigo]&descricao=[nome],'",
-		titulo:"Links dos itens (ITENSLINK)",id:"itenslink",value:dados.itenslink,tipo:"text"},
-		{ajuda:"Template utilizado no gerador de KML para definir o conteúdo dos balões de informação. O template utiliza o caractere '%' para iniciar e fechar o nome de uma coluna. O template pode usar também elementos HTML, por exemplo: <code>'<b>Nome do municipio</b>: %NOMEMUN%'</code>. Se o template não for especificado, o i3Geo irá utilizar o metadata ITENS e ITENSDESC. Se esses não forem especificados, será utilizado o nome original da coluna.",
-		titulo:"KML template (DESCRIPTION_TEMPLATE)",id:"description_template",value:dados.description_template,tipo:"text"},
-
-		{ajuda:"Lista de colunas que serão utilizadas na opção de inclusão de 'etiquetas'. As etiquetas são mostradas no mapa quando o usuário estaciona o mouse por alguns instantes sobre o mapa. Separe a lista com ','.",
-		titulo:"Etiqueta (TIP)",id:"tip",value:dados.tip,tipo:"text"},
-		{ajuda:"Mensagem que será mostrada no rodapé do mapa quando o tema estiver visível. É útil para apresentar ao usuário observações especiais sobre o uso daquele tema.",
-		titulo:"Mensagem (MENSAGEM)",id:"mensagem",value:dados.mensagem,tipo:"text"},
-		{ajuda:"É possível a geração de classes automaticamente por meio da definição de colunas na tabela de atributos do tema que armazenam as informações sobre cor, tamanho, etc. Esse metadata é utilizado para definir qual a coluna da tabela que identifica unicamente cada classe. Para cada valor será criada uma classe.<br>O tema que utiliza a geração de classes de forma automática, deve ter definido apenas uma classe. Essa classe será utilizada como padrão para geração das demais.",
-		titulo:"Auto-legenda: id das classes (CLASSESITEM)",id:"classesitem",value:dados.classesitem,tipo:"text"},
-		{ajuda:"Nome da coluna que será utilizada para compor o nome das classes geradas automaticamente.",
-		titulo:"Auto-legenda: nome das classes (CLASSESNOME)",id:"classesnome",value:dados.classesnome,tipo:"text"},
-		{ajuda:"Nome da coluna que definirá a cor do símbolo utilizado em cada classe. As cores devem ser definidas em RGB.",
-		titulo:"Auto-legenda: cor da classe (CLASSESCOR)",id:"classescor",value:dados.classescor,tipo:"text"},
-		{ajuda:"Nome da coluna que definirá o símbolo utilizado em cada classe.",
-		titulo:"Auto-legenda: símbolo (CLASSESSIMBOLO)",id:"classessimbolo",value:dados.classessimbolo,tipo:"text"},
-		{ajuda:"Nome da coluna que definirá o tamanho de cada símbolo.",
-		titulo:"Auto-legenda: tamanho (CLASSESTAMANHO)",id:"classestamanho",value:dados.classestamanho,tipo:"text"},
-		
-		{ajuda:"Formato das datas existentes na tabela de atributos p.e. iso8601",
-		titulo:"Linha do tempo: LTEMPOFORMATODATA",id:"ltempoformatodata",value:dados.ltempoformatodata,tipo:"text"},
-		{ajuda:"Item que indica a data de início de um evento",
-		titulo:"Linha do tempo: LTEMPOITEMINICIO",id:"ltempoiteminicio",value:dados.ltempoiteminicio,tipo:"text"},
-		{ajuda:"Item que indica a data final de um evento (opcional)",
-		titulo:"Linha do tempo: LTEMPOITEMFIM",id:"ltempoitemfim",value:dados.ltempoitemfim,tipo:"text"},
-		{ajuda:"Item que contém o título de cada evento",
-		titulo:"Linha do tempo: LTEMPOITEMTITULO",id:"ltempoitemtitulo",value:dados.ltempoitemtitulo,tipo:"text"},
-		{ajuda:"Item com a descrição do evento (opcional)",
-		titulo:"Linha do tempo: LTEMPOITEMDESCRICAO",id:"ltempoitemdescricao",value:dados.ltempoitemdescricao,tipo:"text"},
-		{ajuda:"Item para etiquetas do título (opcional)",
-		titulo:"Linha do tempo: LTEMPOITEMTIP",id:"ltempoitemtip",value:dados.ltempoitemtip,tipo:"text"},
-		{ajuda:"Item com o endereço de uma imagem que será incluída no menu popup, aberto quando o usuário clica em um evento (opcional)",
-		titulo:"Linha do tempo: LTEMPOITEMIMAGEM",id:"ltempoitemimagem",value:dados.ltempoitemimagem,tipo:"text"},
-		{ajuda:"Endereço da imagem do ícone que irá representar o evento (opcional)",
-		titulo:"Linha do tempo: LTEMPOITEMICONE",id:"ltempoitemicone",value:dados.ltempoitemicone,tipo:"text"},
-		{ajuda:"Link para uma página que será incluído no menu popup",
-		titulo:"Linha do tempo: LTEMPOITEMLINK",id:"ltempoitemlink",value:dados.ltempoitemlink,tipo:"text"}
+			{ajuda:"Nome que será utilizado na legenda do mapa e na guia 'Temas'",
+			titulo:"Tema (METADATA: TEMA)",id:"tema",value:dados.tema,tipo:"text"},
+			{ajuda:"Ícone que será mostrado na árvore de camadas. A imagem deve existir na web e deve ser incluído o caminho completo ou relativo em relação ao local da interface HTML do mapa.",
+			titulo:"Ícone (METADATA: ICONETEMA)",id:"iconetema",value:dados.iconetema,tipo:"text"},
+			{ajuda:"Denominador da escala da fonte dos dados utilizado pelo tema. É utilizado para apresentar a indicação de compatibilidade entre a escala do tema e a escala do mapa que está sendo visto.",
+			titulo:"Escala (ESCALA)",id:"escala",value:dados.escala,tipo:"text"},
+			{ajuda:"Extensão geográfica máxima do tema, no formato xmin ymin xmax ymax. É utilizado na opção de 'zoom para o tema'. Quando o tema é baseado em shapefile, esse metadata não é necessário, pois o mapserver consegue calcular a extensão. Já em outros tipos de dados, como Postgis, o parâmetro é necessário. Nesse caso, se não for indicado, o botão de zoom para o tema não será visível para o usuário",
+			titulo:"Extensao (EXTENSAO)",id:"extensao",value:dados.extensao,tipo:"text"},
+			{ajuda:"Ativa ou não a manutenção de um cache para armazenar as imagens geradas para montar o mapa. Essa opção afeta apenas as interfaces do i3Geo que utilizam o modo TILE (como a interface OpenLayers). O cache é mantido no diretório temporário utilizado pelo i3Geo, na pasta chamada cache. Para cada camada é criada uma sub-pasta. Para limpar o cache, utilize a opção existente junto ao nó principal desse mapfile",
+			titulo:"Cache de mapas. Camadas WMS são acessadas diretamente do servidor de origem quando o cache estiver inativo. (CACHE)",id:"",value:dados.cache,tipo:"text",div:"<div id=cCache ></div>"},
+			{ajuda:"Indica se o usuário pode incluir comentários no tema",
+			titulo:"Permite comentar (PERMITECOMENTARIO)",id:"",value:dados.permitecomentario,tipo:"text",div:"<div id=cPermitecomentario ></div>"},
+			{ajuda:"Indica se as classes serão mostradas ou não na legenda. Por padrão é SIM. ",
+			titulo:"Classe (CLASSE)",id:"",value:dados.classe,tipo:"text",div:"<div id=cClasse ></div>"},
+			{ajuda:"Indica se o tema é mostrado no mapa mas não nas listas da legenda e na guia 'temas'",
+			titulo:"Escondido (ESCONDIDO)",id:"",value:dados.escondido,tipo:"text",div:"<div id=cEscondido ></div>"},
+			{ajuda:"Indica se o tema irá ser mostrado na ferramenta de identificação",
+			titulo:"Identifica (IDENTIFICA)",id:"",value:dados.identifica,tipo:"text",div:"<div id=cIdentifica ></div>"},
+			{ajuda:"Aplica efeitos de transição nas operações de zoom e pan na interface Openlayers",
+			titulo:"Efeitos de transição zoom (TRANSITIONEFFECT)",id:"",value:dados.transitioneffect,tipo:"text",div:"<div id=cTransitioneffect ></div>"},
+			{ajuda:"Nomes das colunas da tabela de atributos do tema, que serão mostradas na ferramenta de identificação. Se for vazio, todas as colunas serão mostradas. A lista de itens deve ser separada por ',' e grafada em caixa alta no caso de shapefile.",
+			titulo:"Itens (ITENS)",id:"itens",value:dados.itens,tipo:"text"},
+			{ajuda:"Lista com os 'alias', ou apelidos, para os nomes das colunas listados no metadata 'itens'. Os alias devem ser separados por ',' e seguir a ordem definida em ITENS.",
+			titulo:"Nomes dos itens (ITENSDESC)",id:"itensdesc",value:dados.itensdesc,tipo:"text"},
+			{ajuda:"Lista de links que serão incluídos em cada resultado de busca da ferramenta de identificação. A lista de links deve ser separada por ',', podendo-se incluir '' para indicar que o item não tem link. Exemplo de uso para inclusão de links para o site do IBGE quando um município é clicado no mapa:<br>ITENS 'codigo,nome2,uf'<br>ITENSDESC 'codigo do IBGE,nome do município,uf'<br>ITENSLLINK ',http://www.ibge.gov.br/munic2001/tabelas.php?codmun=[codigo]&descricao=[nome],'",
+			titulo:"Links dos itens (ITENSLINK)",id:"itenslink",value:dados.itenslink,tipo:"text"},
+			{ajuda:"Template utilizado no gerador de KML para definir o conteúdo dos balões de informação. O template utiliza o caractere '%' para iniciar e fechar o nome de uma coluna. O template pode usar também elementos HTML, por exemplo: <code>'<b>Nome do municipio</b>: %NOMEMUN%'</code>. Se o template não for especificado, o i3Geo irá utilizar o metadata ITENS e ITENSDESC. Se esses não forem especificados, será utilizado o nome original da coluna.",
+			titulo:"KML template (DESCRIPTION_TEMPLATE)",id:"description_template",value:dados.description_template,tipo:"text"},
+			{ajuda:"Lista de colunas que serão utilizadas na opção de inclusão de 'etiquetas'. As etiquetas são mostradas no mapa quando o usuário estaciona o mouse por alguns instantes sobre o mapa. Separe a lista com ','.",
+			titulo:"Etiqueta (TIP)",id:"tip",value:dados.tip,tipo:"text"},
+			{ajuda:"Mensagem que será mostrada no rodapé do mapa quando o tema estiver visível. É útil para apresentar ao usuário observações especiais sobre o uso daquele tema.",
+			titulo:"Mensagem (MENSAGEM)",id:"mensagem",value:dados.mensagem,tipo:"text"}
 		]
-	}
-	var ins = "<input type=button title='Salvar' value='Salvar' id=salvarEditor />"
+	};
+	var paramOWS = {
+		"linhas":[
+			{ajuda:"space-delimited list of EPSG projection codes supported by the remote server. You normally get this from the server’s capabilities output. This value should be upper case (EPSG:4236.....not epsg:4236) to avoid problems with case sensitive platforms. The value is used to set the SRS WMS URL parameter",
+			titulo:"wms_srs",id:"wms_srs",value:dados.wms_srs,tipo:"text"},
+			{ajuda:"comma-separated list of layers to be fetched from the remote WMS server. This value is used to set the LAYERS and QUERY_LAYERS WMS URL parameters.",
+			titulo:"wms_name",id:"wms_name",value:dados.wms_name,tipo:"text"},
+			{ajuda:"the version of the WMS protocol supported by the remote WMS server and that will be used for issuing GetMap requests",
+			titulo:"wms_server_version",id:"wms_server_version",value:dados.wms_server_version,tipo:"text"},
+			{ajuda:"the image format to use in GetMap requests",
+			titulo:"wms_format",id:"wms_format",value:dados.wms_format,tipo:"text"},
+			{ajuda:"",
+			titulo:"wms_auth_username",id:"wms_auth_username",value:dados.wms_auth_username,tipo:"text"},
+			{ajuda:"msEncrypt-style authorization string. Empty strings are also accepted",
+			titulo:"wms_auth_password",id:"wms_auth_password",value:dados.wms_auth_password,tipo:"text"},
+			{ajuda:"the authorization type to use for a proxy connection. Supported types include: basic, digest, ntlm, any (the underlying http library picks the best among the opotions supported by the remote server), anysafe (the underlying http library picks only safe methods among the options supported by the remote server)",
+			titulo:"wms_auth_type",id:"wms_auth_type",value:dados.wms_auth_type,tipo:"text"},
+			{ajuda:"the maximum time to wait for a remote WMS layer to load, set in seconds (default is 30 seconds). This metadata can be added at the layer level so that it affects only that layer, or it can be added at the map level (in the web object) so that it affects all of the layers. Note that wms_connectiontimeout at the layer level has priority over the map level.",
+			titulo:"wms_connectiontimeout",id:"wms_connectiontimeout",value:dados.wms_connectiontimeout,tipo:"text"},
+			{ajuda:"the bounding box of this layer in geographic coordinates in the format “lon_min lat_min lon_max lat_max”. If it is set then MapServer will request the layer only when the map view overlaps that bounding box. You normally get this from the server’s capabilities output.",
+			titulo:"wms_latlonboundingbox",id:"wms_latlonboundingbox",value:dados.wms_latlonboundingbox,tipo:"text"},
+			{ajuda:"",
+			titulo:"wms_proxy_auth_type",id:"wms_proxy_auth_type",value:dados.wms_proxy_auth_type,tipo:"text"},
+			{ajuda:"",
+			titulo:"wms_proxy_host",id:"wms_proxy_host",value:dados.wms_proxy_host,tipo:"text"},
+			{ajuda:"",
+			titulo:"wms_proxy_port",id:"wms_proxy_port",value:dados.wms_proxy_port,tipo:"text"},
+			{ajuda:"the type of the proxy connection. Valid values are ‘http’ and ‘socks5’, which are case sensitive",
+			titulo:"wms_proxy_type",id:"wms_proxy_type",value:dados.wms_proxy_type,tipo:"text"},
+			{ajuda:"",
+			titulo:"wms_proxy_username",id:"wms_proxy_username",value:dados.wms_proxy_username,tipo:"text"},
+			{ajuda:"",
+			titulo:"wms_proxy_password",id:"wms_proxy_password",value:dados.wms_proxy_password,tipo:"text"},
+			{ajuda:"Can be used to specify an inline SLD document",
+			titulo:"wms_sld_body",id:"wms_sld_body",value:dados.wms_sld_body,tipo:"text"},
+			{ajuda:"can be used to specify a link to an SLD document",
+			titulo:"wms_sld_url",id:"wms_sld_url",value:dados.wms_sld_url,tipo:"text"},
+			{ajuda:"name of style to use for the STYLES parameter in GetMap requests for this layer.",
+			titulo:"wms_style",id:"wms_style",value:dados.wms_style,tipo:"text"},
+			{ajuda:"specifies the color to be used as the background of the map. The general format of BGCOLOR is a hexadecimal encoding of an RGB value where two hexadecimal characters are used for each of Red, Green, and Blue color values. The values can range between 00 and FF for each (0 and 255, base 10). The format is 0xRRGGBB; either upper or lower case characters are allowed for RR, GG, and BB values. The '0x' prefix shall have a lower case 'x'",
+			titulo:"wms_bgcolor",id:"wms_bgcolor",value:dados.wms_bgcolor,tipo:"text"},
+			{ajuda:"specifies whether the map background is to be made transparent or not. TRANSPARENT can take on two values, 'TRUE' or 'FALSE'. If not specified, MapServer sets default to 'TRUE'",
+			titulo:"wms_transparent",id:"wms_transparent",value:dados.wms_transparent,tipo:"text"},
+			{ajuda:"value to use for the TIME parameter in GetMap requests for this layer",
+			titulo:"wms_time",id:"wms_time",value:dados.wms_time,tipo:"text"}
+		]
+	};
+	var ins = "<input type=button title='Salvar' value='Salvar' id=salvarEditor />";
 	if(dados.colunas != "")
 	{
 		ins += "<p>O layer possuí as seguintes colunas na tabela de atributos: ";
 		ins += dados.colunas+"</p>"
 	}
 	ins += core_geraLinhas(param)
+	if(dados.type !== 3 && dados.type !== 4)
+	{ins += core_geraLinhas(paramVetor);}
+	if(dados.connectiontype !== 7 && dados.connectiontype !== 9)
+	{ins += core_geraLinhas(paramNaoOWS);}
+	if(dados.type === 3)
+	{ins += core_geraLinhas(paramRaster);}	
+	if(dados.connectiontype === 7 || dados.connectiontype === 9)
+	{ins += core_geraLinhas(paramOWS);}
 	ins += "<br><br><br>"
 	$i("editor_bd").innerHTML = ins
 	
-	temp = "<select id='aplicaextensao' >"
-	temp += core_combosimnao(dados.aplicaextensao)
-	temp += "</select>"
-	$i("cAplicaextensao").innerHTML = temp
-	temp = "<select id='cache' >"
-	temp += core_combosimnao(dados.cache)
-	temp += "</select>"
-	$i("cCache").innerHTML = temp
-	temp = "<select id='editorsql' >"
-	temp += core_combosimnao(dados.editorsql)
-	temp += "</select>"
-	$i("cEditorsql").innerHTML = temp
-	temp = "<select id='permitecomentario' >"
-	temp += core_combosimnao(dados.permitecomentario)
-	temp += "</select>"
-	$i("cPermitecomentario").innerHTML = temp	
-	temp = "<select id='download' >"
-	temp += core_combosimnao(dados.download)
-	temp += "</select>"
-	$i("cDownload").innerHTML = temp
-	temp = "<p><select id='classe' >"
-	temp += core_combosimnao(dados.classe)
-	temp += "</select>"
-	$i("cClasse").innerHTML = temp
-	temp = "<select id='escondido' >"
-	temp += core_combosimnao(dados.escondido)
-	temp += "</select>"
-	$i("cEscondido").innerHTML = temp
-	temp = "<select id='identifica' >"
-	temp += core_combosimnao(dados.identifica)
-	temp += "</select>"
-	$i("cIdentifica").innerHTML = temp
-	temp = "<select id='transitioneffect' >"
-	temp += core_combosimnao(dados.transitioneffect)
-	temp += "</select>"
-	$i("cTransitioneffect").innerHTML = temp
-
+	if($i("cAplicaextensao")){
+		temp = "<select id='aplicaextensao' >"
+		temp += core_combosimnao(dados.aplicaextensao)
+		temp += "</select>"
+		$i("cAplicaextensao").innerHTML = temp
+	}
+	if($i("cCache")){
+		temp = "<select id='cache' >"
+		temp += core_combosimnao(dados.cache)
+		temp += "</select>"
+		$i("cCache").innerHTML = temp
+	}
+	if($i("cEditorsql")){
+		temp = "<select id='editorsql' >"
+		temp += core_combosimnao(dados.editorsql)
+		temp += "</select>"
+		$i("cEditorsql").innerHTML = temp
+	}
+	if($i("cPermitecomentario")){
+		temp = "<select id='permitecomentario' >"
+		temp += core_combosimnao(dados.permitecomentario)
+		temp += "</select>"
+		$i("cPermitecomentario").innerHTML = temp
+	}
+	if($i("cDownload")){
+		temp = "<select id='download' >"
+		temp += core_combosimnao(dados.download)
+		temp += "</select>"
+		$i("cDownload").innerHTML = temp
+	}
+	if($i("cClasse")){
+		temp = "<p><select id='classe' >"
+		temp += core_combosimnao(dados.classe)
+		temp += "</select>"
+		$i("cClasse").innerHTML = temp
+	}
+	if($i("cEscondido")){
+		temp = "<select id='escondido' >"
+		temp += core_combosimnao(dados.escondido)
+		temp += "</select>"
+		$i("cEscondido").innerHTML = temp
+	}
+	if($i("cIdentifica")){
+		temp = "<select id='identifica' >"
+		temp += core_combosimnao(dados.identifica)
+		temp += "</select>"
+		$i("cIdentifica").innerHTML = temp
+	}
+	if($i("cTransitioneffect")){
+		temp = "<select id='transitioneffect' >"
+		temp += core_combosimnao(dados.transitioneffect)
+		temp += "</select>"
+		$i("cTransitioneffect").innerHTML = temp
+	}
 	var temp = function()
 	{salvarDadosEditor('metadados',dados.codigoMap,dados.codigoLayer)}
 	new YAHOO.widget.Button("salvarEditor",{ onclick: { fn: temp }});
@@ -1575,7 +1656,7 @@ function salvarDadosEditor(tipo,codigoMap,codigoLayer,indiceClasse,indiceEstilo,
 			else
 			{alert("Valor de escala incorreto");return;}
 		}
-		var campos = new Array("permitecomentario","cache","iconetema","ltempoformatodata","ltempoiteminicio","ltempoitemfim","ltempoitemtitulo","ltempoitemdescricao","ltempoitemtip","ltempoitemimagem","ltempoitemicone","ltempoitemlink","editorsql","description_template","palletefile","palletestep","arquivodownload","aplicaextensao","classestamanho","classessimbolo","classescor","classesnome","classesitem","mensagem","identifica","transitioneffect","extensao","escondido","download","escala","tema","classe","tip","itenslink","itens","itensdesc")
+		var campos = new Array("wms_srs","wms_name","wms_server_version","wms_format","wms_auth_username","wms_auth_password","wms_auth_type","wms_connectiontimeout","wms_latlonboundingbox","wms_proxy_auth_type","wms_proxy_host","wms_proxy_port","wms_proxy_type","wms_proxy_username","wms_proxy_password","wms_sld_body","wms_sld_url","wms_style","wms_bgcolor","wms_transparent","wms_time","permitecomentario","cache","iconetema","ltempoformatodata","ltempoiteminicio","ltempoitemfim","ltempoitemtitulo","ltempoitemdescricao","ltempoitemtip","ltempoitemimagem","ltempoitemicone","ltempoitemlink","editorsql","description_template","palletefile","palletestep","arquivodownload","aplicaextensao","classestamanho","classessimbolo","classescor","classesnome","classesitem","mensagem","identifica","transitioneffect","extensao","escondido","download","escala","tema","classe","tip","itenslink","itens","itensdesc")
 		var par = "&codigoMap="+codigoMap+"&codigoLayer="+codigoLayer
 		var prog = "../php/editormapfile.php?funcao=alterarMetadados"
 	}
@@ -1613,8 +1694,10 @@ function salvarDadosEditor(tipo,codigoMap,codigoLayer,indiceClasse,indiceEstilo,
 	}
 	prog += "&testar="+testar;
 	try{
-		for (i=0;i<campos.length;i++)
-		{par += "&"+campos[i]+"="+($i(campos[i]).value)}
+		for (i=0;i<campos.length;i++){
+			if($i(campos[i]))
+			{par += "&"+campos[i]+"="+($i(campos[i]).value);}
+		}
 	}catch(e){alert(e)}
 	core_carregando("ativa");
 	core_carregando(" gravando o registro do layer= "+codigoLayer);
