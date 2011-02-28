@@ -97,7 +97,7 @@ i3GEOF.uploaddbf = {
 		'<input type=hidden name=g_sid value="'+i3GEO.configura.sid+'" >' +
 		'<input type="hidden" name="MAX_FILE_SIZE" value="100000">' +
 		'</form>' +
-		'<br><iframe name=i3GEOuploaddbfiframe style="text-align:left;" width="98%" height="60px"></iframe>';
+		'<br><iframe name=i3GEOuploaddbfiframe style="text-align:left;border:1px solid gray;" width="98%" height="60px"></iframe>';
 		return ins;
 	},
 	/*

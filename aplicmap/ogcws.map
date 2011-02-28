@@ -8,6 +8,7 @@ MAP
  SIZE 450 450
  STATUS ON
  CONFIG "MS_NONSQUARE" "YES"
+ 
  OUTPUTFORMAT
    NAME "png"
    MIMETYPE "image/png"
@@ -19,7 +20,8 @@ MAP
    FORMATOPTION          "INTERLACE=OFF"
  END
  IMAGETYPE png
- DEBUG OFF
+ CONFIG MS_ERRORFILE "/ms4w/tmp/ms_error.txt"
+ DEBUG 5
  EXTENT -76.512593 -36.948432 -29.585185 7.046013
  SYMBOLSET ../symbols/simbolos.sym
  SHAPEPATH "/opt/www/html/geodados"

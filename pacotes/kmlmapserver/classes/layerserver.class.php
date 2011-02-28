@@ -44,15 +44,14 @@ define('TREAT_POLY_AS_LINE', false);
 
 /** Enable cache */
 define('ENABLE_CACHE', true);
-
-if (!extension_loaded('MapScript'))
-{
-    dl( 'php_mapscript.' . PHP_SHLIB_SUFFIX );
+if(function_exists("dl")){
+	if (!function_exists('ms_GetVersion'))
+	{dl( 'php_mapscript.'.PHP_SHLIB_SUFFIX );}
+	if (!extension_loaded('php_mbstring'))
+	{dl( 'php_mbstring.' . PHP_SHLIB_SUFFIX );}
 }
-if (!extension_loaded('php_mbstring'))
-{
-    dl( 'php_mbstring.' . PHP_SHLIB_SUFFIX );
-}
+if (!function_exists('ms_GetVersion'))
+{echo "Nao foi possivel carregar php_mapscript";}
 /**
 * Main server class
 */
@@ -244,7 +243,7 @@ class LayerServer {
     */
     function process_request(){
         // Get layer(s)
-        $layers = split(',', $this->typename);
+        $layers = explode(',', $this->typename);
         if($this->_networklink){
             foreach($layers as $layer){
                 $this->add_networklink($layer);
@@ -798,9 +797,6 @@ class LayerServer {
         //$icon =& $folder->addChild('Icon');
         $icon =& $this->simplexml_addChild($folder,'Icon');
         //$icon->addChild('href', $link . 'layers=' . $layer->name);
-        if($this->map->tileindex != "")
-        $this->simplexml_addChild($icon,'href', $link . 'layers=' . $layer->name);
-        else
         $this->simplexml_addChild($icon,'href', $link . 'layers=' . $layer->name);
         //$icon->addChild('viewRefreshMode', 'onStop');
         $this->simplexml_addChild($icon,'viewRefreshMode', 'onStop');

@@ -36,13 +36,12 @@ This file is part of KMLMAPSERVER.
     Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
 
 */
-
-
-if (!extension_loaded('MapScript'))
-{
-    dl( 'php_mapscript.' . PHP_SHLIB_SUFFIX );
+if(function_exists("dl")){
+	if (!function_exists('ms_GetVersion'))
+	{dl( 'php_mapscript.'.PHP_SHLIB_SUFFIX );}
 }
-
+if (!function_exists('ms_GetVersion'))
+{echo "Nao foi possivel carregar php_mapscript";}
 
 /**
 * Main server class, wraps real kml or icon servers

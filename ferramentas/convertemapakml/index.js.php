@@ -63,7 +63,7 @@ i3GEOF.converteMapaKml = {
 		'<p class="paragrafo" ><b>Kml baseado em um servico WMS: </b></p>' +
 		'<p class="paragrafo" > <textarea cols="65" rows="3" style=cursor:pointer onclick="javascript:this.select()">' + 
 		i3GEO.configura.locaplic + '/pacotes/kmlmapserver/kmlservice.php?map='+i3GEO.parametros.mapfile+'&typename='+tema+'&request=kml</textarea></p>';
-		ins += '<p class="paragrafo" >Voc&ecirc; pode também utilizar o link abaixo para mostrar a &aacute;rvore completa de temas no GoogleEarth' +
+		ins += '<p class="paragrafo" >Voc&ecirc; pode também utilizar o link abaixo para mostrar a &aacute;rvore completa de temas no GoogleEarth (incluindo dados vetoriais)' +
 		'<p class="paragrafo" ><textarea cols="65" rows="2" style=cursor:pointer onclick="javascript:this.select()">' + i3GEO.configura.locaplic + '/kml.php </textarea></p>';
 		$i(divid).innerHTML += ins;
 	},

@@ -4,7 +4,10 @@ Title: ogc.php
 
 Gera web services nos padrões OGC
 
-Licenca
+A lista de projeções mostradas na função getcapabilities é definida na variável $listaepsg. Edite essa variável
+se forem necessárias outras projeções além das existentes
+
+Licenca:
 
 I3Geo Interface Integrada de Ferramentas de Geoprocessamento para Internet
 
@@ -136,9 +139,12 @@ if((isset($tema)) && ($tema != "") && ($tipo=="metadados"))
 //parametros no nível maior
 //
 $oMap->setmetadata("ows_onlineresource",$or);
+$oMap->setmetadata("wms_onlineresource",$or);
 $oMap->setmetadata("wms_title",$tituloInstituicao." - i3geo");
 $oMap->setmetadata("wfs_title",$tituloInstituicao." - i3geo");
-$oMap->setmetadata("ows_srs",$listaepsg);
+//qd definido aqui, não funciona no qgis
+//$oMap->setmetadata("ows_srs",$listaepsg);
+//$oMap->setmetadata("wms_srs",$listaepsg);
 $oMap->setmetadata("wms_attribution_logourl_format","image/png");
 $oMap->setmetadata("wms_attribution_logourl_height","56");
 $oMap->setmetadata("wms_attribution_logourl_width","85");
@@ -287,7 +293,8 @@ else
 								$l->setmetadata("wms_extent",$extensao);
 
 								$l->setmetadata("ows_title",pegaNome($l));
-								$l->setmetadata("ows_srs","EPSG:4291 EPSG:4326");
+								$l->setmetadata("ows_srs",$listaepsg);
+								//$l->setmetadata("wms_srs","EPSG:4291 EPSG:4326");
 								$l->set("status",MS_OFF);
 								$l->setmetadata("gml_include_items","all");
 								$l->set("dump",MS_TRUE);
@@ -317,7 +324,9 @@ else
 ms_ioinstallstdouttobuffer();
 $oMap->owsdispatch($req);
 $contenttype = ms_iostripstdoutbuffercontenttype();
+//header("Content-type: application/xml");
 header("Content-type: $contenttype");
+
 ms_iogetStdoutBufferBytes();
 ms_ioresethandlers();
 //

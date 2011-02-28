@@ -87,7 +87,7 @@ i3GEOF.carregaMapa = {
 		ins += '<input type="hidden" name="MAX_FILE_SIZE" value="10000">';
 		ins += '<input type=hidden id=i3GEOcarregamapanomearq name=i3GEOcarregamapanomearq value="" >';
 		ins += '</form>';
-		ins += '<br><iframe name=i3GEOcarregamaiframe width="98%" height="70px"></iframe>';
+		ins += '<br><iframe name=i3GEOcarregamaiframe width="98%" height="70px" style="text-align:left;border:1px solid gray;" ></iframe>';
 		return ins;
 	},
 	/*

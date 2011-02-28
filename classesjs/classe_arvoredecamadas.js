@@ -964,7 +964,10 @@ i3GEO.arvoreDeCamadas = {
 				}
 			}
 		};
-		i3GEO.configura.templateLegenda = i3GEO.configura.templateLegenda !== "" ? i3GEO.php.criaLegendaHTML(retorna,idtema,i3GEO.configura.templateLegenda) : i3GEO.php.criaLegendaHTML(retorna,idtema);
+		if(i3GEO.configura.templateLegenda !== "")
+		{i3GEO.php.criaLegendaHTML(retorna,idtema,i3GEO.configura.templateLegenda);}
+		else
+		{i3GEO.php.criaLegendaHTML(retorna,idtema);}
 	},
 	/*
 	Function: atualizaLegenda

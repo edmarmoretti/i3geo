@@ -2,7 +2,8 @@ MAP
   FONTSET "c:\ms4w\apache\htdocs\i3geo/symbols/fontes.txt"
   SYMBOLSET "c:\ms4w\apache\htdocs\i3geo/symbols/simbolos.sym"
   LAYER
-    CONNECTION ""
+ 
+ CONNECTION ""
     DATA "c:\ms4w\apache\htdocs\i3geo\aplicmap\dados\biomas.shp"
     GROUP "Grupo 1"
     METADATA
@@ -29,8 +30,8 @@ MAP
       "identifica"	"NAO"
       "editorsql"	""
       "ltempoitemfim"	""
-	      "extensao" "-44 -23 -39 -21"
-    "aplicaextensao" "SIM"
+	  "extensao" "-44 -23 -39 -21"
+      "aplicaextensao" "SIM"
     END
     NAME "biomashp"
     STATUS OFF
