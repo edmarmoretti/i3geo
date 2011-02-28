@@ -49,16 +49,32 @@ File: Variáveis de inicialização ms_configura.php  (ms_configura.php)
 File: Testa a instalação do I3Geo  (testainstal.php)
 File: Testa um mapfile  (testamapfile.php)
 
+Group: Interface HTML  {
+
+   File: Flamingo  (interface\flamingo.htm)
+   File: Google Earth &lparen;experimental&rparen;  (interface\googleearth.phtml)
+   File: Google Maps  (interface\googlemaps.phtml)
+   File: Interface minima  (interface\minima.htm)
+   File: Interface normal  (interface\geral.htm)
+   File: Interface Openlayers  (interface\openlayers.htm)
+   File: Interface zerocal  (interface\zerocal.htm)
+   File: Interface zerocalol  (interface\zerocalol.htm)
+   }  # Group: Interface HTML
+
 Group: API javascript  {
 
    File: i3geo - carregador de javascripts  (classesjs\i3geo.js)
-   File: Gerador de links  (classesjs\geradordelinks.js)
-   File: Atlas  (classesjs\atlas.js)
-   File: Data download  (classesjs\datadownload.js)
-   File: Depreciados  (classesjs\depreciados.js)
+
+   Group: JS de aplicativos específicos  {
+
+      File: Gerador de links  (classesjs\geradordelinks.js)
+      File: Atlas  (classesjs\atlas.js)
+      File: Data download  (classesjs\datadownload.js)
+      }  # Group: JS de aplicativos específicos
 
    Group: Classes  {
 
+      File: Depreciados  (classesjs\depreciados.js)
       File: i3Geo  (classesjs\classe_i3geo.js)
       File: Árvore de camadas  (classesjs\classe_arvoredecamadas.js)
       File: Árvore de temas  (classesjs\classe_arvoredetemas.js)
@@ -82,23 +98,24 @@ Group: API javascript  {
       File: PHP  (classesjs\classe_php.js)
       File: Temas  (classesjs\classe_tema.js)
       File: Utilitários  (classesjs\classe_util.js)
+      File: Coordenadas  (classesjs\classe_coordenadas.js)
+      File: Social  (classesjs\classe_social.js)
       }  # Group: Classes
 
    }  # Group: API javascript
 
 Group: API PHP  {
 
-   File: atlas_controle.php  (classesphp\atlas_controle.php)
-   File: carrega_ext.php  (classesphp\carrega_ext.php)
-   File: funcoes_gerais.php  (classesphp\funcoes_gerais.php)
-   File: graficopizza.php  (classesphp\graficopizza.php)
-   File: graficos.php  (classesphp\graficos.php)
    File: mapa_controle.php  (classesphp\mapa_controle.php)
-   File: pega_variaveis.php  (classesphp\pega_variaveis.php)
-   File: wmswfs.php  (classesphp\wmswfs.php)
-   File: wscliente.php  (classesphp\wscliente.php)
 
-   Group: Interfaces  {
+   Group: Programas de uso geral  {
+
+      File: funcoes_gerais.php  (classesphp\funcoes_gerais.php)
+      File: carrega_ext.php  (classesphp\carrega_ext.php)
+      File: pega_variaveis.php  (classesphp\pega_variaveis.php)
+      }  # Group: Programas de uso geral
+
+   Group: Serviços de renderização das interfaces  {
 
       File: flamingo.inc  (classesphp\flamingo.inc)
       File: flamingoogc.php  (classesphp\flamingoogc.php)
@@ -107,9 +124,9 @@ Group: API PHP  {
       File: mapa_inicia.php  (classesphp\mapa_inicia.php)
       File: mapa_openlayers.php  (classesphp\mapa_openlayers.php)
       File: parse_cgi.php  (classesphp\parse_cgi.php)
-      }  # Group: Interfaces
+      }  # Group: Serviços de renderização das interfaces
 
-   Group: Classes  {
+   Group: Classes e funções  {
 
       File: class.palette.php  (classesphp\class.palette.php)
       File: classe_alteraclasse.php  (classesphp\classe_alteraclasse.php)
@@ -128,7 +145,16 @@ Group: API PHP  {
       File: classe_temas.php  (classesphp\classe_temas.php)
       File: classe_toponimia.php  (classesphp\classe_toponimia.php)
       File: classe_vermultilayer.php  (classesphp\classe_vermultilayer.php)
-      }  # Group: Classes
+      File: wmswfs.php  (classesphp\wmswfs.php)
+      File: graficopizza.php  (classesphp\graficopizza.php)
+      File: graficos.php  (classesphp\graficos.php)
+      }  # Group: Classes e funções
+
+   Group: Funções de aplicativos específicos  {
+
+      File: atlas_controle.php  (classesphp\atlas_controle.php)
+      File: wscliente.php  (classesphp\wscliente.php)
+      }  # Group: Funções de aplicativos específicos
 
    }  # Group: API PHP
 
@@ -140,12 +166,14 @@ Group: Ferramentas  {
       File: Agrupa elementos  (ferramentas\agrupaelementos\index.js.php)
       File: Análise de Geometrias  (ferramentas\analisageometrias\index.js.php)
       File: Buffer  (ferramentas\buffer\index.js.php)
+      File: Centro de massa  (ferramentas\centromassa\index.js.php)
       File: Centróide  (ferramentas\centroide\index.js.php)
       File: Dissolve elementos de um tema  (ferramentas\dissolve\index.js.php)
       File: Distância entre pontos  (ferramentas\distanciaptpt\index.js.php)
       File: Distribuição de pontos  (ferramentas\pontosdistri\index.js.php)
       File: Gráfico interativo  (ferramentas\graficointerativo\index.js.php)
       File: Número de pontos em polígonos  (ferramentas\nptpol\index.js.php)
+      File: Perfil  (ferramentas\perfil\index.js.php)
       File: Ponto em polígono  (ferramentas\pontoempoligono\index.js.php)
       File: Seleção  (ferramentas\selecao\index.js.php)
       }  # Group: Análise
@@ -204,7 +232,9 @@ Group: Ferramentas  {
       File: Cor da seleção  (ferramentas\opcoes_querymap\index.js.php)
       File: Cor do fundo do mapa  (ferramentas\opcoes_fundo\index.js.php)
       File: Cortina  (ferramentas\cortina\index.js.php)
+      File: Filtro da árvore de camadas  (ferramentas\filtroarvore\index.js.php)
       File: Formato de imagem  (ferramentas\outputformat\index.js.php)
+      File: Importar WMC  (ferramentas\importarwmc\index.js.php)
       File: Legenda gráfica do mapa  (ferramentas\opcoes_legenda\index.js.php)
 
       Group: Imprimir  {
@@ -217,12 +247,14 @@ Group: Ferramentas  {
 
       File: Opções de filtro de imagem  (ferramentas\tipoimagem\index.js.php)
       File: Quadros de animação  (ferramentas\opcoes_quadros\index.js.php)
+      File: Redes sociais  (ferramentas\redessociais\index.php)
       File: Salva mapa  (ferramentas\salvamapa\index.js.php)
       File: Tamanho do mapa  (ferramentas\opcoes_tamanho\index.js.php)
       }  # Group: Manipulação do mapa
 
    Group: Manipulação de tema  {
 
+      File: aplicarsld  (ferramentas\aplicarsld\index.js.php)
       File: Converte um tema em kml  (ferramentas\convertekml\index.js.php)
       File: Download de um tema  (ferramentas\download\index.js.php)
       File: Editor de legenda  (ferramentas\legenda\index.js.php)
@@ -230,6 +262,7 @@ Group: Ferramentas  {
       File: Etiqueta  (ferramentas\etiqueta\index.js.php)
       File: Filtra tema  (ferramentas\filtro\index.js.php)
       File: Gráfico tema  (ferramentas\graficotema\index.js.php)
+      File: Salva as definições de uma camada no arquivo mapfile correspondente  (ferramentas\salvamapfile\index.js.php)
       File: Tabela de atributos  (ferramentas\tabela\index.js.php)
       File: Toponímia de um tema  (ferramentas\toponimia\index.js.php)
       }  # Group: Manipulação de tema
@@ -281,27 +314,6 @@ Group: Aplicativos adicionais  {
       }  # Group: Mobile
 
    File: Mashups  (mashups\index.html)
-
-   Group: Ferramentas  {
-
-      File: aplicarsld  (ferramentas\aplicarsld\index.js.php)
-      File: Centro de massa  (ferramentas\centromassa\index.js.php)
-      File: Redes sociais  (ferramentas\redessociais\index.php)
-      File: Salva as definições de uma camada no arquivo mapfile correspondente  (ferramentas\salvamapfile\index.js.php)
-      }  # Group: Ferramentas
-
-   Group: Interface  {
-
-      File: Flamingo  (interface\flamingo.htm)
-      File: Google Earth &lparen;experimental&rparen;  (interface\googleearth.phtml)
-      File: Google Maps  (interface\googlemaps.phtml)
-      File: Interface minima  (interface\minima.htm)
-      File: Interface normal  (interface\geral.htm)
-      File: Interface Openlayers  (interface\openlayers.htm)
-      File: Interface zerocal  (interface\zerocal.htm)
-      File: Interface zerocalol  (interface\zerocalol.htm)
-      }  # Group: Interface
-
    File: twitter2geo.php  (twitter2geo.php)
    }  # Group: Aplicativos adicionais
 

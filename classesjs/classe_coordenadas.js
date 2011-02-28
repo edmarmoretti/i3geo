@@ -1,6 +1,6 @@
 /*jslint plusplus:false,white:false,undef: false, rhino: true, onevar: true, evil: false */
 /*
-Title: Coordenadas (apresentação de coordenadas no mapa)
+Title: Coordenadas
 
 Arquivo: i3geo/classesjs/classe_coordenadas.js
 
@@ -32,7 +32,7 @@ if(typeof(i3GEO) === 'undefined'){
 /*
 Classe: i3GEO.coordenadas
 
-Inclui elementos especiais no mapa para apresentação de coordenadas.
+Inclui elementos HTML especiais no mapa para apresentação de coordenadas.
 
 Contém funções que permitem a conversão de coordenadas, entre sistemas de projeção deiferentes, com base na biblioteca Proj4js.
 Cria também o bloco de apresentação de coordenadas com base na posição do mouse sobre o mapa.

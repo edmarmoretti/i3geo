@@ -2,11 +2,15 @@
 /*
 Title: Inicializa o i3Geo via URL ms_criamapa.php
 
-Cria os diretórios temporários para o i3Geo e o mapfile que será utilizado no mapa. Esse é o programa principal de inicialização, podendo ser chamado diretamente pelo navegador web.
+Esse é o programa principal de inicialização, podendo ser chamado diretamente pelo navegador web.
 
-Com o uso de parâmetros específicos é possível alterar o mapa padrão criado no processo de inicialização, como por exemplo, adicionando-se novas camadas ou modificando-se a abrangência espacial do mapa.
+Cria os diretórios temporários em ms_tmp, incluindo o mapfile (http://mapserver.org/mapfile/index.html#mapfile) que será a base para o funcionamento do mapa. 
 
-A inicialização padrão utiliza uma interface HTML com todas as funcionalidades existentes, porém, é possível escolher outro HTML para a apresentação do mapa, permitindo a criação de mapas com uma interface customizada.
+Com o uso de parâmetros é possível alterar o processo padrão de criação do mapa, como por exemplo, podem ser adicionadas novas camadas ou modificada a abrangência espacial do mapa.
+
+A inicialização padrão abrirá uma interface HTML com todas as funcionalidades disponíveis, porém é possível escolher qualquer outro HTML para a apresentação do mapa.
+
+No diretório i3geo/interface estão os arquivos HTML que formatam a apresentação do mapa. Além desses arquivos, podem ser criados outros, conforme a necessidade do usuário.
 
 Os parâmetros podem ser utilizados na chamada do i3geo via navegador, p.e.,
 
@@ -22,11 +26,15 @@ $temasa=bioma;
 
 include("ms_criamapa.php");
 
-Os cookies passados ao servidor são eliminados com a linha:
+Observações:
+
+Os cookies passados ao servidor são eliminados com a linha
 
 $_COOKIE = array();
 
 Se a sua aplicação precisa de cookies, comente essa linha do programa.
+
+A interface HTML padrão de abertura do mapa é definido em uma variável no arquivo ms_configura.php, podendo ser alterada se necessário.
 
 Link:
 
@@ -36,7 +44,7 @@ Licenca:
 
 GPL2
 
-I3Geo Interface Integrada de Ferramentas de Geoprocessamento para Internet
+i3Geo Interface Integrada de Ferramentas de Geoprocessamento para Internet
 
 Direitos Autorais Reservados (c) 2006 Ministério do Meio Ambiente Brasil
 Desenvolvedor: Edmar Moretti edmar.moretti@mma.gov.br
