@@ -778,7 +778,7 @@ $listaDeTemas - (opcional) Lista com os códigos dos temas que serão identificado
 				{
 					$l = $this->mapa->getlayerbyname($tema);
 					if($l->status == MS_DEFAULT)
-					$novalista[] = $tema;
+					{$novalista[] = $tema;}
 					$listatemas = $novalista;
 				}
 			}
@@ -1036,7 +1036,7 @@ $listaDeTemas - (opcional) Lista com os códigos dos temas que serão identificado
 				else
 				{
 					$descisarray = pegaItens($layer);
-					$itsarray = pegaItens($layer);
+					$itsarray = $descisarray;
 					$lksarray = array();
 				}
 			}
@@ -1213,7 +1213,7 @@ $listaDeTemas - (opcional) Lista com os códigos dos temas que serão identificado
 		{
 			$layer->set("toleranceunits",MS_PIXELS);
 			$layer->set("tolerance",$resolucao);
-			$ident = @$layer->queryByPoint($pt, 0, 0); //0.01);
+			$ident = @$layer->queryByPoint($pt, 0, 0); //0.01);	
 		}
 		//error_reporting(E_ALL);
 		if (($layer->type == MS_LAYER_POINT) || ($layer->type == MS_LAYER_LINE) || ($layer->type == MS_LAYER_CHART))
@@ -1238,6 +1238,7 @@ $listaDeTemas - (opcional) Lista com os códigos dos temas que serão identificado
 			$locimg = $layer->getmetadata("IMGLOC"); //indica o local onde estão os ícones
 			$tips = $layer->getmetadata("TIP");
 			$itensLayer = pegaItens($layer);
+			//var_dump($itensLayer);exit;
 			$nitens = count($itensLayer);
 			if($itens == "")
 			{$itens = $itensLayer;}

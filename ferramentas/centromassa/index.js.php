@@ -182,18 +182,20 @@ i3GEOF.centromassa = {
 		i3GEO.util.comboTemas(
 			"i3GEOFcentromassaPontos",
 			function(retorno){
-		 		$i("i3GEOcentromassaDivPontos").innerHTML = retorno.dados;
+				$i("i3GEOcentromassaDivPontos").innerHTML = retorno.dados;
+				var c = $i("i3GEOFcentromassaPontos");
 		 		$i("i3GEOcentromassaDivPontos").style.display = "block";
-		 		if ($i("i3GEOFcentromassaPontos")){
-		 			$i("i3GEOFcentromassaPontos").onchange = function(){
+		 		if (c){
+		 			c.onchange = function(){
 		 				$i("i3GEOondeItens").style.display = "block";
 						$i("i3GEOondeItens").innerHTML = "Aguarde...";
-						i3GEO.mapa.ativaTema($i("i3GEOcentromassaPontos").value);
+						i3GEO.mapa.ativaTema(c.value);
 						i3GEOF.centromassa.comboItens();
 		 			};
 				}
 				if(i3GEO.temaAtivo !== ""){
-					$i("i3GEOFcentromassaPontos").value = i3GEO.temaAtivo;
+					if(c)
+					{c.value = i3GEO.temaAtivo;}
 		 			$i("i3GEOondeItens").style.display = "block";
 					$i("i3GEOondeItens").innerHTML = "Aguarde...";
 					i3GEOF.centromassa.comboItens();					

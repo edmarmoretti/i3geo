@@ -98,7 +98,7 @@ $ext - Extensão geográfica do mapa
   		$this->mapa = ms_newMapObj($map_file);
   		$this->arquivo = $map_file;
   		if($tema != "" && @$this->mapa->getlayerbyname($tema))
- 		$this->layer = $this->mapa->getlayerbyname($tema);
+ 		{$this->layer = $this->mapa->getlayerbyname($tema);}
   		$this->nome = $tema;
   		$this->diretorio = dirname($this->arquivo);
 		if($ext && $ext != ""){
@@ -949,9 +949,9 @@ $locaplic - Localização do I3geo.
 	{
 		set_time_limit(180);
 		if(file_exists($this->locaplic."/pacotes/phpxbase/api_conversion.php"))
-		include_once($this->locaplic."/pacotes/phpxbase/api_conversion.php");
+		{include_once($this->locaplic."/pacotes/phpxbase/api_conversion.php");}
 		else	
-		include_once "../pacotes/phpxbase/api_conversion.php";
+		{include_once "../pacotes/phpxbase/api_conversion.php";}
 		$layerPt = $this->mapa->getlayerbyname($temaPt);
 		$layerPt->set("template","none.htm");
 		$layerPt->set("tolerance",0);
@@ -967,7 +967,6 @@ $locaplic - Localização do I3geo.
 			{
 				if($layerPt->getProjection() == "" )
 				{$layerPt->setProjection("init=epsg:4291");}
-				$layerPt->setProjection("init=epsg:4291");
 			}
 			$layerPt->queryByrect($this->mapa->extent);
 		}
@@ -976,17 +975,16 @@ $locaplic - Localização do I3geo.
 		//pega um shape especifico
 		$sopen = $layerPt->open();
 		if($sopen == MS_FAILURE){return "erro";}
+		$spts = array();
 		for ($i = 0; $i < $res_count; ++$i)
 		{
 			$result = $layerPt->getResult($i);
 			$shp_index  = $result->shapeindex;
 			$shape = $layerPt->getfeature($shp_index,-1);
-			$pontos[] = $shape;
+			$spts[] = $shape;
 		}
 		$layerPt->close();
 		//gera o novo arquivo shape file
-		// cria o shapefile
-		$novoshpf = ms_newShapefileObj($nomeshp, MS_SHP_POINT);
 		// cria o dbf
 		$def = array();
 		foreach ($itemspt as $ni)
@@ -994,16 +992,26 @@ $locaplic - Localização do I3geo.
 		//pega os itens dos temas poligonais
 		$layersPol = array();
 		$temas = explode(",",$temasPo);
-		foreach ($temas as $tema)
-		{
-			$l = $this->mapa->getlayerbyname($tema);
-			$layers[] = $l;
-		}
+		$layers = array();
 		$nomesitens = array(); //guarda os nomes dos temas e seus itens
 		$conta = 0;
-		foreach ($layers as $layer)
+		$listaItens = array();
+		foreach ($temas as $tema)
 		{
+			$layer = $this->mapa->getlayerbyname($tema);
+			$layer->set("template","none.htm");
+			$layer->set("status",MS_DEFAULT);
+			if($layer->type == MS_LAYER_RASTER)
+			{
+				$lineo = $spts[0]->line(0);
+				$pt = $lineo->point(0);
+				$layer->queryByPoint($pt, 0, 0);
+			}
+			$layers[] = $layer;
 			$items = pegaItens($layer);
+			if(!$items)
+			{return "erro ao obter a lista de itens do tema $layer->name";}
+			$listaItens[$layer->name] = $items;
 			foreach ($items as $ni)
 			{
 				$def[] = array("I".$conta,"C","254");
@@ -1011,22 +1019,21 @@ $locaplic - Localização do I3geo.
 				$conta = $conta + 1;
 			}
 		}
-		if(!function_exists(dbase_create))
+		if(!function_exists("dbase_create"))
 		{$db = xbase_create($nomeshp.".dbf", $def);xbase_close($db);}
 		else
 		{$db = dbase_create($nomeshp.".dbf", $def);dbase_close($db);}
 		//acrescenta os pontos no novo shapefile
 		$dbname = $nomeshp.".dbf";
-		$db=xbase_open($dbname,2);	
-		foreach($pontos as $ponto)
+		$db=xbase_open($dbname,2);
+		// cria o shapefile
+		$novoshpf = ms_newShapefileObj($nomeshp, MS_SHP_POINT);
+		foreach($spts as $spt)
 		{
-			$sopen = $layerPt->open();
-			if($sopen == MS_FAILURE){return "erro";}
 			foreach ($itemspt as $ni)
-			{$reg[] = $ponto->values[$ni];}
-			$layerPt->close();
-			$novoshpf->addShape($ponto);
-			$lineo = $ponto->line(0);
+			{$reg[] = $spt->values[$ni];}
+			$novoshpf->addShape($spt);
+			$lineo = $spt->line(0);
 			$pt = $lineo->point(0);
 			//faz a pesquisa
 			foreach ($layers as $layer)
@@ -1035,8 +1042,7 @@ $locaplic - Localização do I3geo.
 				$layer->set("toleranceunits",MS_PIXELS);
 				$layer->set("tolerance",1);
 				$ident = @$layer->queryByPoint($pt, 0, 0);
-				$itens = pegaItens($layer);
-				$res_count = $layer->getNumresults();
+				$itens = $listaItens[$layer->name];
 				$sopen = $layer->open();
 				if($sopen == MS_FAILURE){return "erro";}
 				if ($res_count > 0)

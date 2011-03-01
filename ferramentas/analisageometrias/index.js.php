@@ -138,7 +138,7 @@ i3GEOF.analisaGeometrias = {
 		ins += '<div id=i3GEOinseregraficoguiasYUI class="yui-navset" style="top:0px;cursor:pointer;left:0px;">';
 		ins += '	<ul class="yui-nav" style="border-width:0pt 0pt 0px;border-color:rgb(240,240,240);border-bottom-color:white;">';
 		ins += '		<li><a href="#ancora"><em><div id="i3GEOanalisageometrias1" style="text-align:center;left:0px;" >Capturar</div></em></a></li>';
-		ins += '		<li><a href="#ancora"><em><div id="i3GEOanalisageometrias2" style="text-align:center;left:0px;" >Listar</div></em></a></li>';
+		ins += '		<li><a href="#ancora"><em><div id="i3GEOanalisageometrias2" style="text-align:center;left:0px;" >Listar e escolher</div></em></a></li>';
 		ins += '		<li><a href="#ancora"><em><div id="i3GEOanalisageometrias3" style="text-align:center;left:0px;" >Analisar</div></em></a></li>';
 		ins += '	</ul>';
 		ins += '</div>';
@@ -168,7 +168,7 @@ i3GEOF.analisaGeometrias = {
 		ins += '				<option value="" selected >---</option>';
 		ins += '				<option value=area >&Aacute;rea</option>';
 		ins += '				<option value=perimetro >Per&iacute;metro</option>';
-		ins += '			</select><input id=i3GEOanalisageometriasbotaocalculo type=button value=" "/></p>';
+		ins += '			</select><input id=i3GEOanalisageometriasbotaocalculo type=button value="Aplicar"/></p>';
 		ins += '			<p class=paragrafo >Operações que criam novas geometrias a partir de duas ou mais geometrias:';
 		ins += '			<p class=paragrafo ><select id=i3GEOanalisageometriasselecaofuncoes style="position:relative;top:-3px;" >';
 		ins += '				<option value="" selected >---</option>';
@@ -177,13 +177,13 @@ i3GEOF.analisaGeometrias = {
 		ins += '				<option value=difference >Diferen&ccedil;a</option>';
 		ins += '				<option value=symdifference >Diferen&ccedil;a inversa</option>';
 		ins += '				<option value=convexhull >Convexo</option>';
-		ins += '			</select><input id=i3GEOanalisageometriasbotaofuncoes type=button value=" "/></p>';
+		ins += '			</select><input id=i3GEOanalisageometriasbotaofuncoes type=button value="Aplicar"/></p>';
 		ins += '			<p class=paragrafo >Operações que atuam sobre uma única geometria:';
 		ins += '			<p class=paragrafo ><select id=i3GEOanalisageometriasselecaofuncoes1 style="position:relative;top:-3px;" >';
 		ins += '				<option value="" selected >---</option>';
 		ins += '				<option value=convexhull >Convexo</option>';
 		ins += '				<option value=boundary >Entorno</option>';
-		ins += '			</select><input id=i3GEOanalisageometriasbotaofuncoes1 type=button value=" "/></p>';
+		ins += '			</select><input id=i3GEOanalisageometriasbotaofuncoes1 type=button value="Aplicar"/></p>';
 		ins += '		<div id=i3GEOanalisageometriasmen2 style="text-align:left;left:0px" >';
 		ins += '			<p class=paragrafo >As opera&ccedil;&otilde;es de an&aacute;lise s&atilde;o executadas sobre as geometrias selecionadas.';
 		ins += '			<p class=paragrafo >Para maiores informações, veja: <a href="http://www.opengeospatial.org/standards/sfs" target=blank >OGC</a>, <a href="http://postgis.refractions.net/docs/ch06.html" target=blank >PostGis, </a>e <a href="http://www.vividsolutions.com/jts/tests/index.html" target=blank >JTS</a>';
@@ -232,6 +232,7 @@ i3GEOF.analisaGeometrias = {
 		};
 		YAHOO.util.Event.addListener(janela[0].close, "click", temp);		
 		i3GEOF.analisaGeometrias.inicia(divid);
+		i3GEO.util.mudaCursor(i3GEO.configura.cursores,"pointer",i3GEO.Interface.IDMAPA,i3GEO.configura.locaplic);
 	},
 	/*
 	Function: ativaFoco

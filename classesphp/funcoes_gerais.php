@@ -1337,9 +1337,10 @@ function pegaItens($layer)
 {
 	$sopen = $layer->open();
 	if($sopen != MS_FAILURE)
-	$items = $layer->getItems();
+	{$items = $layer->getItems();}
 	else
-	$items = array();
+	{$items = array();}
+	$layer->close();
 	return $items;
 }
 /*
@@ -1359,7 +1360,8 @@ Retorno:
 */
 function buscaRapida($servico,$palavra)
 {
-	if (function_exists('ereg'))
+	//error_reporting(E_ALL);
+	if(!function_exists('preg_match'))
 	{
 		include_once('../pacotes/SOAPdepreciado/nusoap.php');
 		new Xsoapclient($servico."?wsdl","wsdl");
@@ -1369,7 +1371,6 @@ function buscaRapida($servico,$palavra)
 		include_once('../pacotes/SOAP/nusoap.php');
 		$soapclient = new nusoap_client($servico);
 	}
-	
 	$vv = "erro";
 	$vv = $soapclient->call("procurar",array("palavra"=>$palavra,"tipoBusca"=>"qualquer"));
 	if($vv == ""){$vv = "erro";}
