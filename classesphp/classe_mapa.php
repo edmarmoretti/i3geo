@@ -247,6 +247,9 @@ string - javascript com os parametros
 					$wmsurl = ($oLayer->connection)."&layers=".($oLayer->getmetadata("wms_name"))."&style=".($oLayer->getmetadata("wms_style"));
 					$wmsformat = $oLayer->getmetadata("wms_format");
 				}
+				$tiles = "";
+				if($oLayer->labelitem != "")
+				{$tiles = "nao";}
 				$temas[] = array(
 					"name"=>($oLayer->name),
 					"status"=>($oLayer->status),
@@ -272,7 +275,8 @@ string - javascript com os parametros
 					"aplicaextensao"=>$aplicaextensao,
 					"transitioneffect"=>$transitioneffect,
 					"wmsurl"=>$wmsurl,
-					"wmsformat"=>$wmsformat
+					"wmsformat"=>$wmsformat,
+					"tiles"=>$tiles
 				);
 			}
 		}

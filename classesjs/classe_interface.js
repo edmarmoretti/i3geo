@@ -858,7 +858,7 @@ i3GEO.Interface = {
 							layer = new OpenLayers.Layer.WMS(camada.name, urllayer,{format:camada.wmsformat,transparent:true},opcoes);
 						}
 						else{
-							if(camada.escondido === "sim" || camada.connectiontype === 10 || camada.type === 0 || camada.type === 4 || camada.type === 8 )
+							if(camada.tiles === "nao" || camada.escondido === "sim" || camada.connectiontype === 10 || camada.type === 0 || camada.type === 4 || camada.type === 8 )
 							{opcoes.singleTile = true;}
 							else{
 								temp = camada.type === 3 ? opcoes.singleTile = false : opcoes.singleTile = !(i3GEO.Interface.openlayers.TILES);
