@@ -72,7 +72,6 @@ if($qy)
 	foreach ($shp as $indx)
 	{$mapa->querybyindex($indxlayer,-1,$indx,MS_TRUE);}
 }
-
 $layersNames = $mapa->getalllayernames();
 $cache = false;
 foreach ($layersNames as $layerName)

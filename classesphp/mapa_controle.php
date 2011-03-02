@@ -783,14 +783,16 @@ Altera a cor do fundo do mapa.
 	case "CORFUNDO":
 		include_once("classe_mapa.php");
 		copiaSeguranca($map_file);
-		//no caso da interface openlayers, o mapfile é outro
-		$nomefundo = str_replace(".map","fundo.map",$map_file);
-		if(file_exists($nomefundo) && $interface == "openlayers")
-		{$m = new Mapa($nomefundo);}
-		else
-		{$m = new Mapa($map_file);}
+		$m = new Mapa($map_file);
 		$m->corfundo($cor);
 		$m->salva();
+		//no caso da interface openlayers, o mapfile é outro
+		$nomefundo = str_replace(".map","fundo.map",$map_file);
+		if(file_exists($nomefundo)){
+			$m = new Mapa($nomefundo);
+			$m->corfundo($cor);
+			$m->salva();
+		}
 		redesenhaMapa();
 	break;
 /*

@@ -1048,7 +1048,7 @@ i3GEO.php = {
 	<LISTAREGISTROS>
 	*/
 	listaValoresItensTema: function(funcao,tema,itemTema){
-		var p = i3GEO.configura.locaplic+"/classesphp/mapa_controle.php?g_sid="+i3GEO.configura.sid+"&funcao=listaregistros&unico=sim&tema="+tema+"&itemtema="+itemTema;
+		var p = i3GEO.configura.locaplic+"/classesphp/mapa_controle.php?g_sid="+i3GEO.configura.sid+"&funcao=listaregistros&unico=sim&tema="+tema+"&itemtema="+itemTema+"&ext="+i3GEO.parametros.mapexten;
 		cpJSON.call(p,"listaRegistros",funcao);
 	},
 	/*

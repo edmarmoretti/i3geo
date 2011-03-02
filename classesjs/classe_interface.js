@@ -722,11 +722,11 @@ i3GEO.Interface = {
 				);
 				openlayers.criaLayers();
 				if(openlayers.GADGETS.PanZoomBar === true){
-					pz = new OpenLayers.Control.PanZoomBar();
-					i3geoOL.addControl(pz);
-					pz.div.style.zIndex = 5000;
-					pz.div.style.top = i3GEO.Interface.BARRADEZOOMTOP+"px";
-					pz.div.style.left = i3GEO.Interface.BARRADEZOOMLEFT+"px";
+					OLpanzoombar = new OpenLayers.Control.PanZoomBar();
+					i3geoOL.addControl(OLpanzoombar);
+					OLpanzoombar.div.style.zIndex = 5000;
+					OLpanzoombar.div.style.top = i3GEO.Interface.BARRADEZOOMTOP+"px";
+					OLpanzoombar.div.style.left = i3GEO.Interface.BARRADEZOOMLEFT+"px";
 				}
 				if(openlayers.GADGETS.PanZoom === true){
 					pz = new OpenLayers.Control.PanZoom();
@@ -745,7 +745,7 @@ i3GEO.Interface = {
 					layers = i3geoOL.getLayersBy("isBaseLayer",true);
 					layersn = layers.length;
 					for(i=0;i<layersn;i++){
-						texto = "<input type=radio style='"+estilo+"' onclick='i3GEO.Interface.openlayers.ativaFundo(i3GEO.Interface.value)' name=i3GEObaseLayer value='"+layers[i].id+"' />"+layers[i].name;
+						texto = "<input type=radio style='"+estilo+"' onclick='i3GEO.Interface.openlayers.ativaFundo(this.value)' name=i3GEObaseLayer value='"+layers[i].id+"' />"+layers[i].name;
 						temp.propriedades.push({ text: texto, url: ""});
 					}
 					i3GEO.util.arvore("<b>"+$trad("p16")+"</b>","listaLayersBase",temp);
@@ -888,16 +888,31 @@ i3GEO.Interface = {
 			{i3GEO.Interface.openlayers.TILES = false;}
 			else
 			{i3GEO.Interface.openlayers.TILES = true;}
+			i3GEO.Interface.openlayers.removeTodosOsLayers();
+			i3GEO.Interface.openlayers.criaLayers();
+			/*
 			for(i=nlayers-1;i>=0;i--){
 				camada = i3GEO.arvoreDeCamadas.CAMADAS[i];
 				try{
 					layer = i3geoOL.getLayersByName(camada.name)[0];
-					if(camada.escondido !== "sim"){
-						layer.singleTile = !i3GEO.Interface.openlayers.TILES;
-					}
+					layer.singleTile = !i3GEO.Interface.openlayers.TILES;
+					if(camada.tiles === "nao" || camada.escondido === "sim" || camada.connectiontype === 10 || camada.type === 0 || camada.type === 4 || camada.type === 8 )
+					{layer.singleTile = true;}
 				}catch(e){}
 			}
 			i3GEO.Interface.openlayers.atualizaMapa();
+			*/
+		},
+		removeTodosOsLayers: function(){
+			var nlayers = i3GEO.arvoreDeCamadas.CAMADAS.length,
+				layer,
+				i,
+				camada;
+			for(i=nlayers-1;i>=0;i--){
+				camada = i3GEO.arvoreDeCamadas.CAMADAS[i];
+				layer = i3geoOL.getLayersByName(camada.name)[0];
+				i3geoOL.removeLayer(layer,false);
+			}				
 		},
 		alteraParametroLayers: function(parametro,valor){
 			var layers = i3geoOL.layers,
@@ -972,6 +987,8 @@ i3GEO.Interface = {
 		},
 		ativaFundo: function(id){
 			i3geoOL.setBaseLayer(i3geoOL.getLayer(id));
+			OLpanzoombar.div.style.top = i3GEO.Interface.BARRADEZOOMTOP+"px";
+			OLpanzoombar.div.style.left = i3GEO.Interface.BARRADEZOOMLEFT+"px";			
 		},
 		atualizaMapa:function(){
 			var layers = i3geoOL.layers,
@@ -1566,7 +1583,7 @@ i3GEO.Interface = {
 			{id = nomeOverlay;}
 			root = i3GEO.Interface.googlemaps.ARVORE.getRoot();
 			node = i3GEO.Interface.googlemaps.ARVORE.getNodeByProperty("idkml","raiz");
-			html = "<input onclick='i3GEO.Interface.googlemaps.ativaDesativaCamadaKml(i3GEO.Interface,\""+url+"\")' class=inputsb style='cursor:pointer;' type='checkbox' value='"+id+"'";
+			html = "<input onclick='i3GEO.Interface.googlemaps.ativaDesativaCamadaKml(this,\""+url+"\")' class=inputsb style='cursor:pointer;' type='checkbox' value='"+id+"'";
 			if(ativo === true)
 			{html += " checked ";}
 			html += "/>";
@@ -1753,49 +1770,49 @@ i3GEO.Interface = {
 			texto = "<input type=checkbox style='vertical-align:top;cursor:pointer' ";
 			if(i3GEO.Interface.googleearth.GADGETS.setMouseNavigationEnabled === true)
 			{texto += "CHECKED ";}
-			texto += " onclick='javascript:i3GeoMap.getOptions().setMouseNavigationEnabled(i3GEO.Interface.checked)'" ;
+			texto += " onclick='javascript:i3GeoMap.getOptions().setMouseNavigationEnabled(this.checked)'" ;
 			texto += "> "+$trad("ge1");
 			i3GEO.configura.listaDePropriedadesDoMapa.propriedades.push({text: texto,url:""});
 
 			texto = "<input type=checkbox style='vertical-align:top;cursor:pointer' ";
 			if(i3GEO.Interface.googleearth.GADGETS.setStatusBarVisibility === true)
 			{texto += "CHECKED ";}
-			texto += " onclick='javascript:i3GeoMap.getOptions().setStatusBarVisibility(i3GEO.Interface.checked)'" ;
+			texto += " onclick='javascript:i3GeoMap.getOptions().setStatusBarVisibility(this.checked)'" ;
 			texto += "> "+$trad("ge2");
 			i3GEO.configura.listaDePropriedadesDoMapa.propriedades.push({text: texto,url:""});
 
 			texto = "<input type=checkbox style='vertical-align:top;cursor:pointer' ";
 			if(i3GEO.Interface.googleearth.GADGETS.setOverviewMapVisibility === true)
 			{texto += "CHECKED ";}
-			texto += " onclick='javascript:i3GeoMap.getOptions().setOverviewMapVisibility(i3GEO.Interface.checked)'" ;
+			texto += " onclick='javascript:i3GeoMap.getOptions().setOverviewMapVisibility(this.checked)'" ;
 			texto += "> "+$trad("ge3");
 			i3GEO.configura.listaDePropriedadesDoMapa.propriedades.push({text: texto,url:""});
 
 			texto = "<input type=checkbox style='vertical-align:top;cursor:pointer' ";
 			if(i3GEO.Interface.googleearth.GADGETS.setScaleLegendVisibility === true)
 			{texto += "CHECKED ";}
-			texto += " onclick='javascript:i3GeoMap.getOptions().setScaleLegendVisibility(i3GEO.Interface.checked)'" ;
+			texto += " onclick='javascript:i3GeoMap.getOptions().setScaleLegendVisibility(this.checked)'" ;
 			texto += "> "+$trad("ge4");
 			i3GEO.configura.listaDePropriedadesDoMapa.propriedades.push({text: texto,url:""});
 
 			texto = "<input type=checkbox style='vertical-align:top;cursor:pointer' ";
 			if(i3GEO.Interface.googleearth.GADGETS.setAtmosphereVisibility === true)
 			{texto += "CHECKED ";}
-			texto += " onclick='javascript:i3GeoMap.getOptions().setAtmosphereVisibility(i3GEO.Interface.checked)'" ;
+			texto += " onclick='javascript:i3GeoMap.getOptions().setAtmosphereVisibility(this.checked)'" ;
 			texto += "> "+$trad("ge5");
 			i3GEO.configura.listaDePropriedadesDoMapa.propriedades.push({text: texto,url:""});
 
 			texto = "<input type=checkbox style='vertical-align:top;cursor:pointer' ";
 			if(i3GEO.Interface.googleearth.GADGETS.setGridVisibility === true)
 			{texto += "CHECKED ";}
-			texto += " onclick='javascript:i3GeoMap.getOptions().setGridVisibility(i3GEO.Interface.checked)'" ;
+			texto += " onclick='javascript:i3GeoMap.getOptions().setGridVisibility(this.checked)'" ;
 			texto += "> "+$trad("ge6");
 			i3GEO.configura.listaDePropriedadesDoMapa.propriedades.push({text: texto,url:""});
 
 			texto = "<input type=checkbox style='vertical-align:top;cursor:pointer' ";
 			if(i3GEO.Interface.googleearth.GADGETS.getSun === true)
 			{texto += "CHECKED ";}
-			texto += " onclick='javascript:i3GeoMap.getSun().setVisibility(i3GEO.Interface.checked)'" ;
+			texto += " onclick='javascript:i3GeoMap.getSun().setVisibility(this.checked)'" ;
 			texto += "> "+$trad("ge7");
 			i3GEO.configura.listaDePropriedadesDoMapa.propriedades.push({text: texto,url:""});
 
@@ -1832,7 +1849,7 @@ i3GEO.Interface = {
 			i3GEO.barraDeBotoes.INCLUIBOTAO.pan = false;
 			i3GEO.barraDeBotoes.INCLUIBOTAO.zoomtot = false;
 			i3GEO.Interface.IDMAPA = "i3GeoMap3d";
-			i3GEO.arvoreDeCamadas.ATIVATEMA = "i3GEO.Interface.googleearth.ligaDesliga(i3GEO.Interface)";
+			i3GEO.arvoreDeCamadas.ATIVATEMA = "i3GEO.Interface.googleearth.ligaDesliga(this)";
 			i = $i(i3GEO.Interface.IDCORPO);
 			if(i){
 				i3GeoMap3d = document.createElement("div");
@@ -2203,7 +2220,7 @@ i3GEO.Interface = {
 			{id = nomeOverlay;}
 			root = i3GEO.Interface.googleearth.ARVORE.getRoot();
 			node = i3GEO.Interface.googleearth.ARVORE.getNodeByProperty("idkml","raiz");
-			html = "<input onclick='i3GEO.Interface.googleearth.ativaDesativaCamadaKml(i3GEO.Interface)' class=inputsb style='cursor:pointer;' type='checkbox' value='"+id+"'";
+			html = "<input onclick='i3GEO.Interface.googleearth.ativaDesativaCamadaKml(this)' class=inputsb style='cursor:pointer;' type='checkbox' value='"+id+"'";
 			if(ativo === true)
 			{html += " checked ";}
 			html += "/>";

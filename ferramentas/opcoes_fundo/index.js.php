@@ -145,7 +145,7 @@ i3GEOF.opcoesFundo = {
 		var temp = function(){
 				i3GEOF.opcoesFundo.aguarde.visibility = "hidden";
 				if(i3GEO.Interface.ATUAL === "openlayers"){
-					var layer = i3geoOL.getLayersByName("Fundo")[0];
+					var layer = i3geoOL.getLayersByName("Nenhum")[0];
 					layer.mergeNewParams({"DESLIGACACHE":"sim"});
 					layer.mergeNewParams({r:Math.random()});
 				}
