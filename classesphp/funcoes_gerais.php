@@ -685,6 +685,7 @@ Retorno:
 */
 function substituiCon($map_file,$postgis_mapa)
 {
+	error_reporting(0);
 	if ((isset($postgis_mapa)) && (file_exists($map_file)))
 	{
 		if (($postgis_mapa != "") || ($postgis_mapa != " "))

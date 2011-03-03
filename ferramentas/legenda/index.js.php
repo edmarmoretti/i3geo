@@ -470,18 +470,20 @@ i3GEOF.legenda = {
 	Modifica a cor de uma classe
 	*/
 	modificaCor: function(id){
-		if(!$i("tempCor")){
+		var obj = $i("tempCorLegenda");
+		if(!obj){
 			var obj = document.createElement("input");
-			obj.id = "tempCor";
+			obj.id = "tempCorLegenda";
 			obj.style.display = "none";
 			obj.type = "text";
 			obj.value = "";
 			document.body.appendChild(obj);
+			obj.onchange = function(){
+				i3GEOF.legenda.aplicaNovaCor($i("tempCorLegenda").name);
+			};
 		}
-		$i("tempCor").onChange = function(){
-			eval('i3GEOF.legenda.aplicaNovaCor("'+id+'");');
-		}
-		i3GEO.util.abreCor("","tempCor");
+		obj.name = id;
+		i3GEO.util.abreCor("","tempCorLegenda");
 	},
 	aplicaNovaCor: function(id){
 		if(i3GEOF.legenda.aguarde.visibility === "visible")
@@ -494,7 +496,7 @@ i3GEOF.legenda = {
 			i3GEOF.legenda.aguarde.visibility = "hidden";
 			i3GEOF.legenda.mostralegenda();
 		};
-		i3GEO.php.aplicaCorClasseTema(retorna,i3GEOF.legenda.tema,id,$i("tempCor").value);
+		i3GEO.php.aplicaCorClasseTema(retorna,i3GEOF.legenda.tema,id,$i("tempCorLegenda").value);
 	},
 	/*
 	Function: mudaLegenda
