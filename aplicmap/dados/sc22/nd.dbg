@@ -1,0 +1,10 @@
+The system cannot find the file specified.The operation completed successfully.
+------------------- TRACEBACK -------------------------
+Module "Msw  " Message   0: file ".\msw.c   " line 493
+Module "TBut " Message  -1: file ".\tbut.c  " line 1067
+Module "Event" Message  -1: file ".\event.c " line 2594
+Module "Event" Message  -1: file ".\event.c " line 2594
+Module "Appl " Message  -1: file "..\appl\appl.c" line 1842
+Module "Err  " Message  -1: file ".\err.c   " line 2009
+-------------------------------------------------------
+FATAL ERROR     Failure during error recovery
