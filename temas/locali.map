@@ -5,22 +5,23 @@ MAP
     CONNECTION ""
     DATA "c:\ms4w\apache\htdocs\i3geo\aplicmap\dados\locali"
     METADATA
-      "cache"	""
-      "TIP"	"TIPO,ANOCRIA,NOMELOC"
       "LTEMPOITEMIMAGEM"	""
-      "CLASSE"	"SIM"
+      "TIP"	"TIPO,ANOCRIA,NOMELOC"
+      "cache"	""
       "LTEMPOITEMDESCRICAO"	"TIPO"
-      "LTEMPOITEMINICIO"	"ANOCRIA"
+      "CLASSE"	"SIM"
       "palletestep"	""
+      "LTEMPOITEMINICIO"	"ANOCRIA"
       "LTEMPOITEMTIP"	"ANOCRIA"
-      "iconetema"	""
-      "LTEMPOITEMTITULO"	"NOMELOC"
       "description_template"	""
+      "LTEMPOITEMTITULO"	"NOMELOC"
+      "iconetema"	""
       "LTEMPOITEMLINK"	""
       "palletefile"	""
+      "nomeoriginal"	"locali"
       "LTEMPOFORMATODATA"	"iso8601"
-      "permitecomentario"	""
       "LTEMPOITEMICONE"	""
+      "permitecomentario"	""
       "arquivodownload"	""
       "transitioneffect"	"NAO"
       "TEMA"	"Localidades"
@@ -28,7 +29,7 @@ MAP
       "LTEMPOITEMFIM"	""
     END
     NAME "locali"
-    STATUS OFF
+    STATUS DEFAULT
     TEMPLATE "none.htm"
     TYPE POINT
     UNITS METERS
@@ -37,7 +38,7 @@ MAP
       EXPRESSION ('[TIPO]'eq'Vila')
       STYLE
         ANGLE 360
-        COLOR 209 36 9
+        COLOR 250 193 4
         SIZE 4
         SYMBOL "ponto"
         WIDTH 1

@@ -374,12 +374,11 @@ $procurar - String que será procurada.
 		}
 		else
 		{
-				//$this->xml[] = simplexml_load_string(geraXmlMenutemas(implode(" ",$this->perfil),$menu["idmenu"],$tipo,$this->locaplic));	
-				include_once("../admin/php/classe_arvore.php");
-				$arvore = new Arvore($this->locaplic,$this->idioma);
-				$temas = $arvore->procuraTemas($procurar,$this->perfil);
-				unset($arvore);
-				return($temas);
+			include_once("../admin/php/classe_arvore.php");
+			$arvore = new Arvore($this->locaplic,$this->idioma);
+			$temas = $arvore->procuraTemas($procurar,$this->perfil);
+			unset($arvore);
+			return($temas);
 		}
 		$resultado = array();
 		$texto = array();
@@ -542,23 +541,17 @@ nrss - (opcional) número de registros no rss que serão considerados
 		$this->xml = array();
 		foreach($this->pegaListaDeMenus() as $menu)
 		{
-			if(!isset($menu["url"])){$menu["url"] = "";} //para efeitos de compatibilidade entre versões do i3geo
-			$ondexml = $menu["arquivo"];
-			if($menu["url"] != ""){$ondexml = $menu["url"];}
-			if($ondexml != "")
-			{$this->xml[] = simplexml_load_file($ondexml);}
-			else //pega o xml do sistema de administração
-			{
-				$this->xml[] = simplexml_load_string(geraXmlMenutemas(implode(" ",$this->perfil),$menu["idmenu"],$tipo,$this->locaplic));	
-			}
+			$x = geraXmlMenutemas(implode(" ",$this->perfil),$menu["idmenu"],$tipo,$this->locaplic);
+			$this->xml[] = $x;
 		}
-
 		$resultado = array();
 		$noticias = array();
 		foreach ($this->xml as $xml)
 		{
+			$xml = simplexml_load_string($xml);
 			foreach($xml->GRUPO as $grupo)
 			{
+				
 				$incluigrupo = TRUE;
 				$temp = $this->ixml($grupo,"PERFIL");
 				if ($temp != "")
@@ -570,8 +563,10 @@ nrss - (opcional) número de registros no rss que serão considerados
 				}
 				if ($incluigrupo == TRUE)
 				{
+					
 					foreach($grupo->SGRUPO as $sgrupo)
 					{
+						
 						$incluisgrupo = TRUE;
 						if ($this->perfil != "")
 						{
@@ -583,8 +578,10 @@ nrss - (opcional) número de registros no rss que serão considerados
 						}
 						if ($incluisgrupo == TRUE)
 						{
+							
 							foreach($sgrupo->TEMA as $tema)
 							{
+								
 								$inclui = TRUE;
 								if ($this->perfil != "")
 								{
@@ -595,12 +592,15 @@ nrss - (opcional) número de registros no rss que serão considerados
 								}
 								if ($inclui == TRUE)
 								{
+									
 									$tid = $this->ixml($tema,"TID");
 									$tags = explode(" ",$this->ixml($tema,"TAGS"));
 									foreach ($tags as $tag)
 									{
+										
 										if($tag != "")
 										{
+											
 											if(!isset($resultado[$tag]))
 											{
 												$resultado[$tag] = array($tid);
@@ -636,9 +636,9 @@ nrss - (opcional) número de registros no rss que serão considerados
 			}
 		}
 		ksort($resultado);
+		//var_dump($resultado);
 		foreach(array_keys($resultado) as $k)
 		{
-			
 			if(isset($noticias[$k]))
 			{$not = array($noticias[$k]);}
 			else

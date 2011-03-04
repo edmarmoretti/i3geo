@@ -3055,8 +3055,8 @@ function redesenhaMapa()
 		$res["mapscale"] = "";
 		$res["pixelsize"] = "";
 		$res["mapimagem"] = "";
-		$res["w"] = "";
-		$res["h"] = "";
+		$res["w"] = $m->mapa->width;
+		$res["h"] = $m->mapa->height;
 		$res["mappath"] = "";
 		$res["mapurl"] = "";		
 	}

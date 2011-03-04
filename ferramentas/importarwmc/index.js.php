@@ -100,7 +100,7 @@ i3GEOF.importarwmc = {
 		minimiza = function(){
 			i3GEO.janela.minimiza("i3GEOF.importarwmc");
 		};
-		titulo = "Upload de arquivo importarwmc <a class=ajuda_usuario target=_blank href='" + i3GEO.configura.locaplic + "/ajuda_usuario.php?idcategoria=4&idajuda=27' >&nbsp;&nbsp;&nbsp;</a>";
+		titulo = "Upload de WMC <a class=ajuda_usuario target=_blank href='" + i3GEO.configura.locaplic + "/ajuda_usuario.php?idcategoria=4&idajuda=27' >&nbsp;&nbsp;&nbsp;</a>";
 		janela = i3GEO.janela.cria(
 			"320px",
 			"280px",
