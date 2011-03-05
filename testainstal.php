@@ -211,7 +211,6 @@ for($i=0;$i<($maptemp->numlayers);$i++)
 	{$layern->set("data",$locaplic."/aplicmap/dados/estados.shp");}
 	ms_newLayerObj($mapa, $layern);
 }
-
 $imgo = $mapa->draw();
 $nome = ($imgo->imagepath)."teste1.png";
 echo "<p>Nome da imagem gerada: $nome </p>";

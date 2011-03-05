@@ -152,7 +152,7 @@ MAP
 	END
 	WEB
 		#edite o caminho se a aplicacao for movida de lugar
-		IMAGEPATH "/var/tmp/ms_tmp/"
+		IMAGEPATH "/tmp/ms_tmp/"
 		IMAGEURL "/ms_tmp/"
 		TEMPLATE "/var/www/i3geo/aplicmap/geral.htm"
 	END
