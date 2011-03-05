@@ -371,10 +371,16 @@ if (strtoupper(substr(PHP_OS, 0, 3) == 'WIN'))
 }
 else //se for linux
 {
+	if(file_exists("/opt/www/html/i3geo/ms_criamapa.php")){
+		$dir_tmp = "/var/tmp/ms_tmp";
+		$locaplic = "/opt/www/html/i3geo";	
+	}
+	else{
+		$dir_tmp = "/tmp";
+		$locaplic = "/var/www/i3geo";
+	}
 	$editores = array("127.0.0.1","localhost");
-	$dir_tmp = "/var/tmp/ms_tmp";
 	$locmapserv = "/cgi-bin/mapserv";
-	$locaplic = "/opt/www/html/i3geo";
 	$R_path = "R";//se vc não instalou o R no seu servidor, tente o endereço $R_path = $locaplic."/pacotes/r/linux/r";
 	$postgis_mapa = "";
 	$utilizacgi = "nao";

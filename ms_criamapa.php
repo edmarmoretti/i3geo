@@ -170,7 +170,7 @@ Cria os diretórios temporários que serão utilizados pelo i3geo para armazenar as
 */
 $diretorios = criaDirMapa($dir_tmp);
 if(!$diretorios)
-{echo "<p style=color:red ><b>N&atilde;o foi po&iacute;vel criar os diret&oacute;rios tempor&aacute;rios em $dir_tmp.</b></p>";exit;}
+{echo "<p style=color:red ><b>N&atilde;o foi poss&iacute;vel criar os diret&oacute;rios tempor&aacute;rios em $dir_tmp.</b></p>";exit;}
 criaIndex();
 $tmpfname = $diretorios[0];
 $protocolo = explode("/",$_SERVER['SERVER_PROTOCOL']);
