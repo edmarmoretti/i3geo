@@ -376,7 +376,7 @@ else //se for linux
 		$locaplic = "/opt/www/html/i3geo";	
 	}
 	else{
-		$dir_tmp = "/tmp";
+		$dir_tmp = "/tmp/ms_tmp";
 		$locaplic = "/var/www/i3geo";
 	}
 	$editores = array("127.0.0.1","localhost");
