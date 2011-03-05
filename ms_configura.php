@@ -378,6 +378,8 @@ else //se for linux
 	else{
 		$dir_tmp = "/tmp/ms_tmp";
 		$locaplic = "/var/www/i3geo";
+		$base = "geral1debian";
+		$estadosl = "estadosldebian";
 	}
 	$editores = array("127.0.0.1","localhost");
 	$locmapserv = "/cgi-bin/mapserv";

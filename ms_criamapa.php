@@ -278,16 +278,21 @@ Os arquivos .map padrão são armazenados em i3geo/aplicmap.
 O arquivo é lido conforma a característica do sistema operacional.
 
 */
-if (strtoupper(substr(PHP_OS, 0, 3) == 'WIN'))
+if(!isset($base) || $base == "")
 {
-	if (!isset($base) || $base == ""){$base = "geral1windows";}
-	$estadosl = "estadoslwindows";
+	if (strtoupper(substr(PHP_OS, 0, 3) == 'WIN'))
+	{
+		$base = "geral1windows";
+		$estadosl = "estadoslwindows";
+	}
+	else
+	{
+		$base = "geral1";}
+		$estadosl = "estadosl";
+	}
 }
-else
-{
-	if (!isset($base) || $base == ""){$base = "geral1";}
-	$estadosl = "estadosl";
-}
+if(!isset($estadosl))
+{$estadosl = "estadosl";}
 /*
  Cria os objetos map que serão processados
 

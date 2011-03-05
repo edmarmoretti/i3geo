@@ -1,0 +1,393 @@
+#Este mapfile é utilizado pelo i3geo na instalação em servidores linux
+#Toda vez que o i3geo é iniciado, esse mapfile é considerado como o mapa básico.
+#Se vc quer alterar a aparência do mapa inicial, edite esse arquivo para refletir
+#o mapa desejado.
+#
+#Se vc quer adicionar temas, dê preferência por editar o arquivo menutemas/menutemas.xml
+#assim, as camadas ficam disponíveis no menu de adição de temas do i3geo. Não se esqueça
+#de criar o arquivo mapfile no diretório i3geo/temas (veja a documentação no wiki da
+#comunidade i3geo no Portal do Software Público Brasileiro.
+#
+#Existem vários metadados que podem ser incluidos na definicao de cada LAYER e que sao especificos do i3geo,
+#Esses metadados possibilitam coisas como mostrar ou não a legenda de um tema no mapa,
+#mostrar ou não o tema na ferramenta de identificacao, etc.
+#A lista completa de metadados vc pode obter no wiki da comunidade
+#
+MAP
+	#
+	#edite os caminhos caso a aplicacao esteja instalada em um local diferente do default
+	#
+	FONTSET "/var/www/i3geo/symbols/fontes.txt"
+	SYMBOLSET "/var/www/i3geo/symbols/simbolos.sym"
+	SHAPEPATH "/var/www/geodados"
+	IMAGECOLOR 104 171 195
+	#
+	#Por default, o i3geo utiliza o tipo de imagem configurado em png2
+	#Esse tipo não é adequado para imagens raster, mas o i3geo muda automaticamente
+	#para png1 quando um arquivo raster é adicionado ao mapa
+	#
+	IMAGETYPE AGG_Q
+	EXTENT -76.5125927 -39.3925675209 -29.5851853 9.49014852081
+	SIZE 480 500
+	STATUS ON
+	UNITS DD
+	NAME "GERAL"
+	DEBUG OFF
+	#
+	#utilize o agg apenas com mapserver 5x
+
+	#png output, with number of colors reduced with quantization . ( Note: this functionality is not supported with RGBA images, that is outputformats with IMAGEMODE RGBA, or maps with TRANSPARENT ON ) :
+	OUTPUTFORMAT
+		NAME 'AGG_Q'
+ 		DRIVER AGG/PNG
+ 		IMAGEMODE RGB
+ 		FORMATOPTION "QUANTIZE_FORCE=ON"
+ 		FORMATOPTION "QUANTIZE_DITHER=OFF"
+ 		FORMATOPTION "QUANTIZE_COLORS=256"
+		FORMATOPTION "INTERLACE=OFF"
+	END
+  
+	OUTPUTFORMAT
+  		NAME jpeg
+  		DRIVER GD/JPEG
+  		MIMETYPE image/jpeg
+  		IMAGEMODE RGB
+  		#TRANSPARENT FALSE
+  		EXTENSION jpg
+  		FORMATOPTION "INTERLACE=OFF"
+	END
+	OUTPUTFORMAT
+    		NAME svg
+    		MIMETYPE "image/svg+xml"
+    		DRIVER svg
+    		#FORMATOPTION  "COMPRESSED_OUTPUT=TRUE"
+    		#FORMATOPTION  "FULL_RESOLUTION=TRUE"
+  	END
+	OUTPUTFORMAT
+		NAME png1
+		MIMETYPE image/png
+		DRIVER GD/PNG
+		EXTENSION png
+		IMAGEMODE RGB
+		TRANSPARENT FALSE
+		FORMATOPTION "INTERLACE=OFF"
+	END
+	OUTPUTFORMAT
+		#utilizado quando é incluido um layer do tipo raster
+		NAME png2
+		MIMETYPE image/png
+		DRIVER GD/PNG
+		EXTENSION png
+		IMAGEMODE PC256
+		TRANSPARENT TRUE
+		FORMATOPTION "INTERLACE=OFF"
+	END
+	
+
+	PROJECTION
+		"init=epsg:4291"
+	END
+	LEGEND
+		IMAGECOLOR 255 255 255
+		KEYSIZE 12 10
+		KEYSPACING 5 5
+		LABEL
+			SIZE 7
+			FONT "verdana"
+			TYPE truetype
+			BUFFER 0
+			COLOR 0 0 0
+			FORCE FALSE
+			MINDISTANCE -1
+			MINFEATURESIZE -1
+			OFFSET 0 -2
+			PARTIALS TRUE
+		END
+		POSITION LL
+		STATUS off
+		#edite o caminho se a aplicacao for movida de lugar
+		#TEMPLATE "/var/www/i3geo/aplicmap/legenda.htm"
+	END
+	QUERYMAP
+		#OUTLINECOLOR 255 0 0
+		COLOR 0 255 255
+		SIZE 480 500
+		STATUS on
+		STYLE hilite
+	END
+	REFERENCE
+		COLOR -1 -1 -1
+		EXTENT -75.5728 -37.4751 -30.525 7.57273#-79.8713331401 -41.7736536401 -26.2264448599 11.8712346401 
+		#edite o caminho se a aplicacao for movida de lugar
+		IMAGE "/var/www/i3geo/imagens/referencia1.png"
+		OUTLINECOLOR -1 -1 -1
+		SIZE 150 150
+		STATUS off
+		MARKER "ref"
+		MARKERSIZE 8
+		MINBOXSIZE 8
+		MAXBOXSIZE 145
+	END
+	SCALEBAR
+		BACKGROUNDCOLOR 200 200 200
+		COLOR 0 0 0
+		INTERVALS 5
+		LABEL
+			SIZE TINY
+			TYPE BITMAP
+			BUFFER 0
+			COLOR 0 0 0
+			FORCE FALSE
+			MINDISTANCE -1
+			MINFEATURESIZE -1
+			OFFSET 0 0
+			PARTIALS TRUE
+		END
+		POSITION LR
+		SIZE 200 2
+		STATUS embed
+		STYLE 1
+		TRANSPARENT FALSE
+		UNITS KILOMETERS
+	END
+	WEB
+		#edite o caminho se a aplicacao for movida de lugar
+		IMAGEPATH "/var/tmp/ms_tmp/"
+		IMAGEURL "/ms_tmp/"
+		TEMPLATE "/var/www/i3geo/aplicmap/geral.htm"
+	END
+	LAYER
+		DATA "/var/www/i3geo/aplicmap/dados/zee"
+		TEMPLATE "none.htm"
+		METADATA
+			"CLASSE"	"SIM" #o simbolo nao sera mostrado na legenda
+			"TEMA"	"Zona Econômica Exclusiva Marinha" #o tema nao sera mostrado na legenda
+			"IDENTIFICA" "nao"
+			"cache" "sim"
+		END
+		NAME "zee"
+		SIZEUNITS PIXELS
+		STATUS DEFAULT
+		TOLERANCE 0
+		TOLERANCEUNITS PIXELS
+		TYPE POLYGON
+		CLASS
+		    NAME " "
+			COLOR 137 201 255
+		END
+	END
+	LAYER
+		DATA "/var/www/i3geo/aplicmap/dados/mundo"
+		GROUP "mundo"
+		METADATA
+			"CLASSE"	"SIM" #o simbolo sera mostrado na legenda
+			"ITENS"	"FIPS_CNTRY,GMI_CNTRY,LONG_NAME,CNTRY_NAME" #itens que serao mostrados na opcao de identificacao
+			"ITENSDESC"	"FIPS,GMI,Nome,Wikipedia" #descricao dos nomes dos itens
+			"ITENSLINK" ",,,http://pt.wikipedia.org/wiki/[CNTRY_NAME]"
+			"TEMA"	"Países do mundo" #nome que sera mostrado na legenda
+			"TITULO"       "Países do mundo" #nome alternativo que e mostrado nos combos para escolha do tema
+			"TIP" "FIPS_CNTRY,GMI_CNTRY,CNTRY_NAME"
+			"cache" "sim"
+		END
+		NAME "mundo"
+		SIZEUNITS PIXELS
+		STATUS DEFAULT
+		TEMPLATE "none.htm"
+		TOLERANCE 0
+		TOLERANCEUNITS PIXELS
+		TRANSPARENCY 100
+		TYPE POLYGON
+		UNITS METERS
+		CLASS
+			NAME "" #vazio indica que nao sera incluido o nome ao lado do simbolo
+			STYLE
+				COLOR 230 230 230
+				SIZE 1
+				SYMBOL 0
+			END
+		END
+	END
+	LAYER
+		DATA "/var/www/i3geo/aplicmap/dados/mundo"
+		GROUP "mundo"
+		METADATA
+			"CLASSE"	"NAO"
+			"TEMA"	"NAO"
+			"ESCONDIDO" "SIM"
+		END
+		NAME "mundo2"
+		SIZEUNITS PIXELS
+		STATUS DEFAULT
+		TOLERANCE 0
+		TOLERANCEUNITS PIXELS
+		TRANSPARENCY 100
+		TYPE LINE
+		UNITS METERS
+		CLASS
+			STYLE
+				COLOR 255 255 255
+				SIZE 3
+				SYMBOL "linha"
+			END
+		END
+	END
+	LAYER
+		DATA "/var/www/i3geo/aplicmap/dados/estados"
+		METADATA
+			"CLASSE"	"SIM"
+			"TEMA"	"Brasil"
+			"ESCALA" "250000" #escala utilizada nas marcas ao lado do tema na legenda
+			"IDENTIFICA" "nao"
+			"cache" "sim"
+			"EXTENSAO" "-97.911949 -39.413578 -8.185829 9.511159"
+		END
+		NAME "estados"
+		SIZEUNITS PIXELS
+		STATUS DEFAULT
+		TOLERANCE 0
+		TOLERANCEUNITS PIXELS
+		TRANSPARENCY 100
+		TYPE POLYGON
+		UNITS METERS
+		CLASS
+			NAME " "
+			STYLE
+				COLOR 232 220 201
+				MAXSIZE 100
+				MINSIZE 1
+				SIZE 1
+				SYMBOL 0
+			END
+		END
+	END
+	
+  LAYER
+    CONNECTION "http://mapas.mma.gov.br/cgi-bin/mapserv?map=/var/www/webservices/baseraster.map"
+    CONNECTIONTYPE WMS
+    METADATA
+      "wms_srs"	"EPSG:4291"
+      "tipooriginal"	""
+      "wms_exceptions_format"	"application/vnd.ogc.se_xml"
+      "CLASSE"	"SIM"
+      "wfs"	"nao"
+      "TEXTO"	"NAO"
+      "wms_name"	"baseraster"
+      "nomeoriginal"	"cartobase"
+      "wms_format"	"image/png"
+      "wms_formatlist"	"image/gif,image/png,image/png; mode=24bit,image/jpeg,image/wbmp,image/tiff"
+      "wms_connectiontimeout"	"30"
+      "TEMA"	"Base cartográfica"
+      "wms_server_version"	"1.1.1"
+      "wms_style"	"default"
+	  "MENSAGEM" "As cartas RASTER são mostradas apenas em determinadas escalas. Aproxime o mapa até a escala 1:250.000 para que os dados sejam mostrados."
+	  "cache" "sim"
+    END
+    NAME "baserasterwms"
+    OFFSITE 255 255 255
+    STATUS OFF
+    TOLERANCE 0
+    TRANSFORM FALSE
+    TYPE RASTER
+    CLASS
+      NAME " "
+      STYLE
+        ANGLE 360
+        COLOR 200 50 0
+        OUTLINECOLOR 0 0 0
+        SYMBOL 0
+      END
+    END
+  END
+
+LAYER
+      NAME osm
+      TYPE RASTER
+      METADATA
+         "wms_title"           "Open Street Map"
+         #"wms_group_title"     "Roads & Highways"
+         "wms_format"          "image/png"
+         "wms_srs"             "EPSG:4326"
+         "wms_name"            ""
+         "wms_server_version"  "1.1.1"
+         "wms_transparent"     "true"
+		 "cache" "sim"
+      "CLASSE"	"SIM"
+      "palletestep"	""
+      "permitekmz"	"nao"
+      "description_template"	""
+      "palletefile"	""
+      "permitedownload"	"nao"
+      "download"	"NAO"
+      "permiteogc"	"nao"
+      "permitekml"	"nao"
+      "TEMA"	"Open Street Map - Rodovias"
+      END
+      STATUS OFF
+      CONNECTIONTYPE WMS
+      CONNECTION "http://full.wms.geofabrik.de/std/demo_key?"
+      #PROJECTION
+      #   "init=epsg:4326"
+      #END
+   END  
+  
+	LAYER
+		METADATA
+			#"TEMA"	"NAO"
+			"ESCONDIDO" "SIM"
+			"cache" "sim"
+		END
+		NAME "copyright"
+		SIZEUNITS PIXELS
+		STATUS default
+		TOLERANCE 0
+		TOLERANCEUNITS PIXELS
+		TRANSFORM FALSE
+		TYPE ANNOTATION
+		UNITS METERS
+		CLASS
+			LABEL
+				SIZE TINY
+				TYPE BITMAP
+				BUFFER 0
+				COLOR 50 50 50
+				FORCE FALSE
+				MINDISTANCE -1
+				MINFEATURESIZE -1
+				OFFSET 0 0
+				PARTIALS TRUE
+				POSITION CC
+			END
+		END
+		FEATURE
+			POINTS
+				10 5
+			END
+			TEXT "-    i3Geo"
+		END
+	END
+	LAYER
+		METADATA
+			"TEMA"	"Rosa dos ventos"
+			"IDENTIFICA" "nao"
+			"TABELA" "nao"
+
+		END
+		NAME "rosadosventos"
+		SIZEUNITS PIXELS
+		STATUS DEFAULT
+		TOLERANCE 0
+		TOLERANCEUNITS PIXELS
+		TRANSFORM lr
+		TYPE POINT
+		UNITS pixels
+		CLASS
+			SYMBOL 'rosa200'
+			SIZE 90
+		END
+		FEATURE
+			POINTS
+				-70 -70
+			END
+		END
+	END
+END
