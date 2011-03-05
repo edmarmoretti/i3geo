@@ -168,7 +168,7 @@ if (strtoupper(substr(PHP_OS, 0, 3) == 'WIN'))
 {$mapa = ms_newMapObj($locaplic."/aplicmap/geral1windows.map");}
 else
 {$mapa = ms_newMapObj($locaplic."/aplicmap/geral1.map");}
-echo "<b>E agora..desenhando o mapa (se o mapa n&atilde;o aparecer &eacute; um problema...\nverifique os caminhos no ms_configura.php e no geral1.map ou geral1windows.map):</b>\n";
+echo "<b>E agora..desenhando o mapa (se o mapa n&atilde;o aparecer &eacute; um problema...\nverifique os caminhos no ms_configura.php e no geral1.map, geral1debian.map ou geral1windows.map):</b>\n";
 $imgo = $mapa->draw();
 $nome = ($imgo->imagepath)."teste.png";
 echo "<p>Nome da imagem gerada: $nome </p>";
@@ -179,11 +179,15 @@ echo "<p><img src=$nome /></p>";
 echo " \n";
 $error = "";
 ms_ResetErrorList();
-echo "Carregando o map_file geral1... e acrescentando o estadosl.map \n";
-if (strtoupper(substr(PHP_OS, 0, 3) == 'WIN'))
-{$maptemp = ms_newMapObj($locaplic."/aplicmap/estadoslwindows.map");}
-else
-{$maptemp = ms_newMapObj($locaplic."/aplicmap/estadosl.map");}
+echo "Carregando o map_file geral1... e acrescentando os limites estaduais (aplicmap/estadosl...) \n";
+if(isset($estadosl))
+{$maptemp = ms_newMapObj($locaplic."/aplicmap/".$estadosl);}
+else{
+	if (strtoupper(substr(PHP_OS, 0, 3) == 'WIN'))
+	{$maptemp = ms_newMapObj($locaplic."/aplicmap/estadoslwindows.map");}
+	else
+	{$maptemp = ms_newMapObj($locaplic."/aplicmap/estadosl.map");}
+}
 while($error && $error->code != MS_NOERR)
 {
 	printf("<br>Error in %s: %s<br>\n", $error->routine, $error->message);
