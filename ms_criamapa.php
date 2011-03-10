@@ -287,7 +287,7 @@ if(!isset($base) || $base == "")
 	}
 	else
 	{
-		$base = "geral1";}
+		$base = "geral1";
 		$estadosl = "estadosl";
 	}
 }
