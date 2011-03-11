@@ -159,7 +159,7 @@ echo "Voc&ecirc; pode testar o CGI clicando <a href='".$enderecocgi."' target='_
 echo "<br>Escrevendo no diret&oacute;rio tempor&aacute;rio...";
 $f = @fopen($dir_tmp."/teste.txt",w);
 @fclose($f);
-if (file_exists($dir_tmp."/teste.txt")) echo "ok\n"; else saindo("N&atilde;o foi poss&iacute;vel gravar no diret&oacute;rio tempor&aacute;rio");
+if (file_exists($dir_tmp."/teste.txt")) echo "ok\n"; else saindo("\nN&atilde;o foi poss&iacute;vel gravar no diret&oacute;rio tempor&aacute;rio");
 echo "Existe o geral1.map? ";
 if(file_exists("$locaplic/aplicmap/geral1.map")) echo "Sim\n"; else {echo "Nao";saindo("geral1.map n&atilde;o encontrado");}
 echo " \n";
@@ -202,6 +202,7 @@ echo "<b>E agora..desenhando o mapa (se o mapa n&atilde;o aparecer &eacute; um p
 echo "Um problema bastante comum &eacute; o n&atilde;o reconhecimento do diret&oacute;rio ms_tmp pelo Apache. \nO diretório ms_tmp é utilizado pelo Mapserver e pelo i3geo para armazenar dados temporários. \nÉ nesse diretório que ficam as imagens do mapa.\n";
 echo "Quando o Apache n&atilde;o consegue utilizar esse diret&oacute;rio, a imagem n&atilde;o ser&aacute; mostrada,\n apesar de ser gerada dentro do ms_tmp (vc pode verificar se as imagens do \nmapa estão sendo criadas no ms_tmp após rodar o testainstal.php).\n";
 echo "Para solucionar esse problema, vc pode criar um link simb&oacute;lico (nos sistemas linux),\n no mesmo local onde está instalado o i3geo, apontando para o local \nfísico onde está o ms_tmp.\n";
+echo "<b>O nome do link simbólico deve ser o mesmo que estiver definido em aplicmap/geral1.map ou geral1debian.map na linha IMAGEURL. Esse nome por default é definido como ms_tmp.\n";
 echo "No wiki do portal do software p&uacute;blico vc poder&aacute; encontrar mais detalhes sobre isso.\n";
 
 for($i=0;$i<($maptemp->numlayers);$i++)

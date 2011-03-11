@@ -373,6 +373,7 @@ i3GEO.eventos = {
 		//if(typeof(console) !== 'undefined'){console.error(xfig);}
 		teladd = i3GEO.calculo.tela2dd(xfig,yfig,c,ex,targ.id);
 		teladms = i3GEO.calculo.dd2dms(teladd[0],teladd[1]);
+
 		objposicaocursor = {
 			ddx: teladd[0],
 			ddy: teladd[1],

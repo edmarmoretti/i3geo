@@ -138,7 +138,12 @@ i3GEOF.identifica = {
 			{i3GEOF.identifica.mostraSistemasAdicionais == true;}
 			i3GEO.guias.mostraGuiaFerramenta("i3GEOidentificaguia1","i3GEOidentificaguia");
 			//eventos das guias
-			$i("i3GEOidentificaguia1").onclick = function(){i3GEOF.identifica.listaTemas("ligados");i3GEO.guias.mostraGuiaFerramenta("i3GEOidentificaguia1","i3GEOidentificaguia");};
+			$i("i3GEOidentificaguia1").onclick = function(){
+				i3GEOF.identifica.listaTemas("ligados");
+				i3GEO.guias.mostraGuiaFerramenta("i3GEOidentificaguia1","i3GEOidentificaguia");
+				if(i3GEO.temaAtivo === "")
+				{$i("i3GEOidentificaocorrencia").innerHTML = "Escolha um tema da lista";}
+			};
 			$i("i3GEOidentificaguia2").onclick = function(){i3GEOF.identifica.listaTemas("todos");i3GEO.guias.mostraGuiaFerramenta("i3GEOidentificaguia1","i3GEOidentificaguia");};
 			$i("i3GEOidentificaguia3").onclick = function(){i3GEO.guias.mostraGuiaFerramenta("i3GEOidentificaguia3","i3GEOidentificaguia");};
 			$i("i3GEOidentificaguia4").onclick = function(){
@@ -153,7 +158,7 @@ i3GEOF.identifica = {
 						$i("i3GEOidentificaocorrencia").innerHTML = "";
 					}
 					else
-					{alert("Nenhum tema definido");}
+					{$i("i3GEOidentificaocorrencia").innerHTML = "Escolha um tema da lista";}
 				}}});
 			};
 			$i("i3GEOidentificaguia5").onclick = function(){
@@ -369,7 +374,7 @@ i3GEOF.identifica = {
 		//
 		//monta a lista de temas
 		//	
-		linhas += "Clique no tema para ver os dados";
+		linhas += "<span style=color:gray; >Clique no tema para ver os dados</span>";
 		linhas1 = "";
 		for (l=0;l<lista.length;l++)
 		{
@@ -657,6 +662,8 @@ i3GEOF.identifica = {
 		ins += "<td>Mostra a ocorrência: </td>";
 		ins += "<td> "+select+"</td>";
 		ins += "</tr></table>";
+		if(nres == 1)
+		{ins = "";}
 		return ins;
 	}
 };

@@ -303,7 +303,7 @@ i3GEO.analise = {
 				"i3GEObotaoPerfil",
 				{onclick:{fn: function(){
 					var js = i3GEO.configura.locaplic+"/ferramentas/perfil/index.js.php";
-					i3GEO.util.scriptTag(js,"i3GEOF.perfil.criaJanelaFlutuante(i3GEO.analise.medeDistancia.pontosdistobj)","i3GEOF.perfil_script");
+					i3GEO.util.scriptTag(js,"i3GEOF.perfil.criaJanelaFlutuante(pontosdistobj)","i3GEOF.perfil_script");
 				}}}
 			);
 		},
@@ -330,8 +330,8 @@ i3GEO.analise = {
 		Adiciona uma marca na tela e realiza o cálculo de distância dos pontos inseridos
 		*/
 		clique: function(){
-			var n,d,decimal,dd,dV,
-				pontosdistobj = i3GEO.analise.medeDistancia.pontosdistobj;
+			var n,d,decimal,dd,dV;
+				//pontosdistobj = i3GEO.analise.medeDistancia.pontosdistobj;
 			if (g_tipoacao === "mede"){
 				n = pontosdistobj.xpt.length;
 				pontosdistobj.xpt[n] = objposicaocursor.ddx;
@@ -407,7 +407,7 @@ i3GEO.analise = {
 		*/
 		movimento: function(){
 			var n,d,r,decimal,da,mostra,texto,
-				pontosdistobj = i3GEO.analise.medeDistancia.pontosdistobj,
+				//pontosdistobj = i3GEO.analise.medeDistancia.pontosdistobj,
 				calculo = i3GEO.calculo;
 			if (g_tipoacao === "mede"){
 				YAHOO.util.Dom.setStyle("mostradistancia","display","block");

@@ -1259,7 +1259,7 @@ i3GEO.arvoreDeTemas = {
 			}
 			ogc = i3GEO.arvoreDeTemas.LOCAPLIC+"/ogc.php?tema="+node.data.idtema+"&service=wms&request=getcapabilities";
 			tempNode = new YAHOO.widget.HTMLNode(
-				{isLeaf:true,enableHighlight:false,expanded:false,html:"<a title='' href='"+ogc+"' target='blank' >WMS - OGC</a>"},
+				{isLeaf:true,enableHighlight:false,expanded:false,html:"<a title='getcapabilities' href='"+ogc+"' target='blank' >WMS - OGC</a>"},
 				node
 			);
 		}

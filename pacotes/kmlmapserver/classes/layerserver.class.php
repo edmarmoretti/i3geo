@@ -146,7 +146,8 @@ class LayerServer {
             $cache_file = $this->get_cache_file_name();
             if(file_exists($cache_file)){
                 // Check if is not expired
-                $layer = $this->map_object->getLayerByName($this->typename);
+                /*
+				$layer = $this->map_object->getLayerByName($this->typename);
                 if(filectime($cache_file) + $layer->getMetadata('KML_CACHE') < (time())) {
                     error_log('removing cache ' . $cache_file);
                     //error_log('ctime : ' . filectime($cache_file) . ' , ' . time() . ' lm ' .  $layer->getMetadata('KML_CACHE'));
@@ -157,6 +158,11 @@ class LayerServer {
                     readfile($cache_file);
                     exit;
                 }
+				*/
+				$this->send_header();
+				error_log('sending cache ' . $cache_file);
+				readfile($cache_file);
+				exit;
             }
         }
         // If not layer are requested, send all as networklinks
@@ -273,7 +279,7 @@ class LayerServer {
     * @return boolean false on error
     */
     function process_layer_request(&$layer_name){
-//error_reporting(E_ALL);
+		error_reporting(0);
         $layer = @$this->map_object->getLayerByName($layer_name);
 
         if(!$layer){
@@ -416,8 +422,9 @@ class LayerServer {
         if(!isset($style_id)){
             // Get first class
             $class_keys = array_keys($class_list);
-            $nome = $layer->getclass($shape->classindex);
-            $nome= $nome->name;
+			$indice = $shape->classindex;
+            $classe = $layer->getclass($indice);
+            $nome= $classe->name;
             $style_id = preg_replace('/[^A-z0-9]/', '_', $layer->name . $nome);
         }
         // Add the feature

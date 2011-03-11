@@ -72,11 +72,14 @@ if($qy)
 	foreach ($shp as $indx)
 	{$mapa->querybyindex($indxlayer,-1,$indx,MS_TRUE);}
 }
-$layersNames = $mapa->getalllayernames();
+$numlayers = $mapa->numlayers;
+//$layersNames = $mapa->getalllayernames();
 $cache = false;
-foreach ($layersNames as $layerName)
+//foreach ($layersNames as $layerName)
+for($i = 0;$i < $numlayers;$i++)
 {
-	$l = $mapa->getLayerByname($layerName);
+	$l = $mapa->getLayer($i);
+	$layerName = $l->name;
 	if ($l->getmetadata("classesnome") != "")
 	{
 		include_once("funcoes_gerais.php");
@@ -114,7 +117,6 @@ foreach ($layersNames as $layerName)
 	}
 	$l->set("template","none.htm");
 }
-
 if($qy || $_GET["HEIGHT"] != 256 )
 {$cache = false;}
 if($_GET["layer"] == "")
@@ -222,9 +224,9 @@ function carregaCacheImagem($bbox,$layer,$map,$w,$h){
 		if (!function_exists('imagepng'))
 		{
 			$s = PHP_SHLIB_SUFFIX;
-			@dl( 'php_gd.'.$s );
+			@dl( 'php_gd2.'.$s );
 			if (!function_exists('imagepng'))
-			{@dl( 'php_gd2.'.$s );}
+			@dl( 'php_gd.'.$s );
 		}
 		@$img = imagecreatefrompng($nome);
 		if(!$img)
@@ -250,7 +252,7 @@ function carregaCacheImagem($bbox,$layer,$map,$w,$h){
 		error_reporting(0);
 		echo header("Content-type: image/png \n\n");
 		imagepng($img);
-		imagedestroy($img);
+		//imagedestroy($img);
 		exit;
 	}
 }

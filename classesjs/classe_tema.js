@@ -418,6 +418,8 @@ i3GEO.tema = {
 				var js = i3GEO.configura.locaplic+"/ferramentas/convertekml/index.js.php";
 				i3GEO.util.scriptTag(js,"i3GEOF.converteKml.criaJanelaFlutuante('"+tema+"','"+tipo+"')","i3GEOF.converteKml_script");
 			}
+			else
+			{i3GEOF.converteKml.criaJanelaFlutuante(tema,tipo);}
 		},
 		/*
 		Function: salvaMapfile

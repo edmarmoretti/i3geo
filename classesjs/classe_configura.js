@@ -875,7 +875,7 @@ i3GEO.configura = {
 					//
 					if(i3GEO.util.verificaScriptTag("i3GEOF") === true)
 					{return;}
-					if(g_operacao !== "identifica" || i3GEOF.identifica){return;}
+					//if(g_operacao !== "identifica" || i3GEOF.identifica){return;}
 					if($i("marcaIdentifica")){return;}
 					//funcao default para pegar os dados
 					if (g_operacao === "identifica"){

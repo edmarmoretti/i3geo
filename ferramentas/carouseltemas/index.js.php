@@ -137,7 +137,7 @@ i3GEOF.carouseltemas = {
 	String com o código html
 	*/
 	html:function(){
-		var ins = "<div id=i3GEOcarouseltemasImagens ></div><p class=paragrafo >Clique na imagem para adicionar o tema ao mapa.";
+		var ins = "<div id=i3GEOcarouseltemasImagens ></div><p class=paragrafo style='width:180px' >Clique na imagem para adicionar o tema ao mapa.";
 		if(i3GEOF.carouseltemas.incluiAmpliacao === true)
 		{ins += "<div style='text-align:left;' id=i3GEOcarouseltemasImagemmaior ></div>";}
 		return ins;
@@ -157,7 +157,7 @@ i3GEOF.carouseltemas = {
 		titulo = "Miniaturas <a class=ajuda_usuario target=_blank href='" + i3GEO.configura.locaplic + "/ajuda_usuario.php?idcategoria=6&idajuda=85' >&nbsp;&nbsp;&nbsp;</a>";
 		janela = i3GEO.janela.cria(
 			"210px",
-			"340px",
+			"380px",
 			"",
 			"",
 			"",

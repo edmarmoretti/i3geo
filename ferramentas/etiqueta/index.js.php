@@ -87,7 +87,7 @@ i3GEOF.etiqueta = {
 		ins += '<div id=i3GEOetiquetalistai class=digitar style="text-align:left;left:0px;top:0px;330px;height:80px;overflow:auto;display:block;"></div>';
 		ins += '<br><br>';
 		ins += '<p class="paragrafo" >';
-		ins += '<input id=i3GEOetiquetabotao1 size=35  type=button value="Ativar" />';
+		ins += '<input id=i3GEOetiquetabotao1 size=35  type=button value="Aplicar" />';
 		ins += '<input id=i3GEOetiquetabotao2 size=35  type=button value="Desativar todas as etiquetas" />';
 		return ins;
 	},
