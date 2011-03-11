@@ -302,6 +302,7 @@ i3GEOF.selecao = {
 			if($i("i3GEOselecaotemasLigados").value === "")
 			{alert("Escolha um tema");return;}
 			i3GEOF.selecao.aguarde.visibility = "visible";
+			i3GEO.temaAtivo = $i("i3GEOselecaotemasLigados").value;
 			var tema = i3GEO.temaAtivo,
 				fim = function(retorno){
 					i3GEOF.selecao.aguarde.visibility = "hidden";

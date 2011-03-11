@@ -214,17 +214,6 @@ i3GEO.analise = {
 	Para mostrar o resultado do cálculo, é incluído um div específico.
 	*/
 	medeDistancia:{
-		pontosdistobj: {
-			xpt: [],
-			ypt: [],
-			dist: [],
-			distV: [],
-			xtela: [],
-			ytela: [],
-			ximg: [],
-			yimg: [],
-			linhas: []
-		},
 		/*
 		Function: inicia
 
@@ -234,6 +223,18 @@ i3GEO.analise = {
 		*/
 		inicia: function(){
 			if(typeof(console) !== 'undefined'){console.info("i3GEO.analise.medeDistancia.inicia()");}
+			pontosdistobj = {
+				xpt: [],
+				ypt: [],
+				dist: [],
+				distV: [],
+				xtela: [],
+				ytela: [],
+				ximg: [],
+				yimg: [],
+				linhas: [],
+				linhastemp: []
+			};
 			i3GEO.analise.medeDistancia.criaJanela();
 			if (g_tipoacao !== "mede"){
 				if(i3GEO.eventos.MOUSECLIQUE.toString().search("i3GEO.analise.medeDistancia.clique()") < 0)
@@ -457,16 +458,6 @@ i3GEO.analise = {
 	Para mostrar o resultado do cálculo, é incluído um div específico.
 	*/
 	medeArea:{
-		pontosdistobj: {
-			xpt: [],
-			ypt: [],
-			dist: [],
-			xtela: [],
-			ytela: [],
-			ximg: [],
-			yimg: [],
-			linhas: []
-		},
 		/*
 		Function: inicia
 
@@ -476,6 +467,18 @@ i3GEO.analise = {
 		*/
 		inicia: function(){
 			if(typeof(console) !== 'undefined'){console.info("i3GEO.analise.medeArea.inicia()");}
+			pontosdistobj = {
+				xpt: [],
+				ypt: [],
+				dist: [],
+				distV: [],
+				xtela: [],
+				ytela: [],
+				ximg: [],
+				yimg: [],
+				linhas: [],
+				linhastemp: []
+			};
 			var temp,x,y,ll1,ll2,d,
 			calculo = i3GEO.calculo,
 				montacontainer = function(){
@@ -574,8 +577,8 @@ i3GEO.analise = {
 		Adiciona uma marca na tela e realiza o cálculo de distância dos pontos inseridos
 		*/
 		clique: function(){
-			var n,m,
-				pontosdistobj = i3GEO.analise.medeArea.pontosdistobj;
+			var n,m;
+				//pontosdistobj = i3GEO.analise.medeArea.pontosdistobj;
 			if (g_tipoacao === "area"){
 				n = pontosdistobj.xpt.length;
 				pontosdistobj.xpt[n] = objposicaocursor.ddx;
@@ -633,8 +636,8 @@ i3GEO.analise = {
 		Realiza o desenho do poligono conforme o usuário movimenta o mouse
 		*/
 		movimento: function(){
-			var n,d,decimal,da,m,
-				pontosdistobj = i3GEO.analise.medeArea.pontosdistobj;
+			var n,d,decimal,da,m;
+				//pontosdistobj = i3GEO.analise.medeArea.pontosdistobj;
 			if (g_tipoacao === "area"){
 				n = pontosdistobj.xpt.length;
 				if (n > 0){
