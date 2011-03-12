@@ -92,7 +92,7 @@ function inicializa(){
 				map.removeOverlay(wmsmap);
 				wmsmap = new GGroundOverlay(criaWMS(), map.getBounds());
 				map.addOverlay(wmsmap);
-   			}catch(x){if(typeof(console) !== 'undefined'){console.error(x);}}
+   			}catch(x){}
 		}
    	}); 	
    	GEvent.addListener(map, "dragend", function() {

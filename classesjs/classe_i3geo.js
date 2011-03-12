@@ -270,7 +270,7 @@ i3GEO = {
 					retorno = {data:{erro: "erro"}};
 				}
 				if(retorno.data.erro){
-					i3GEO.janela.fechaAguarde("montaMapa");
+					//i3GEO.janela.fechaAguarde("montaMapa");
 					document.body.style.backgroundColor="white";
 					document.body.innerHTML = "<br>Para abrir o i3Geo utilize o link:<br><a href="+i3GEO.configura.locaplic+"/ms_criamapa.php >"+i3GEO.configura.locaplic+"/ms_criamapa.php</a>";
 					return("linkquebrado");
@@ -329,7 +329,7 @@ i3GEO = {
 					}
 					if(i3GEO.configura.iniciaJanelaMensagens === true)
 					{i3GEO.ajuda.abreJanela();}
-					i3GEO.janela.fechaAguarde("montaMapa");
+					//i3GEO.janela.fechaAguarde("montaMapa");
 					if (i3GEO.configura.liberaGuias === "sim")
 					{i3GEO.guias.libera();}
 				}
@@ -356,7 +356,7 @@ i3GEO = {
 		}
 		else{
 			//YAHOO.log("Chamada AJAX para obter o mapa inicial", "i3geo");
-			i3GEO.janela.abreAguarde("montaMapa",$trad("o5"));
+			//i3GEO.janela.abreAguarde("montaMapa",$trad("o5"));
 			if(i3GEO.parametros.w === "" || i3GEO.parametros.h === ""){
 				tamanho = i3GEO.calculaTamanho();
 				i3GEO.parametros.w = tamanho[0];

@@ -207,7 +207,7 @@ h1 {padding:.25em .5em;background-color:#ccc;}
 #lente
 {z-index:101;top:10px;position: absolute;}
 #boxlente
-{display:none;z-index: 200;border: 2px solid #ff0000;top:10px;position:absolute;width: 80px;height: 80px;}
+{display:none;z-index: 200;border: 2px solid #ff0000;top:10px;position:absolute;width: 240px;height: 240px;}
 #aguarde
 {top:0px;position:absolute;visibility: hidden;}
 #mensagem

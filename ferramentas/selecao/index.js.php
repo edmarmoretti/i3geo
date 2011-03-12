@@ -68,6 +68,9 @@ i3GEOF.selecao = {
 				i3GEO.guias.mostraGuiaFerramenta("i3GEOselecaoguia1","i3GEOselecaoguia");
 			};
 			$i("i3GEOselecaoguia2").onclick = function(){
+				if($i("i3GEOselecaotemasLigados").value === "")
+				{alert("Selecione um tema primeiro");return;}
+				i3GEO.mapa.ativaTema($i("i3GEOselecaotemasLigados").value);
 				i3GEO.guias.mostraGuiaFerramenta("i3GEOselecaoguia2","i3GEOselecaoguia");
 				try
 				{$i("i3GEOselecaoparametros").innerHTML = "";}
@@ -302,7 +305,7 @@ i3GEOF.selecao = {
 			if($i("i3GEOselecaotemasLigados").value === "")
 			{alert("Escolha um tema");return;}
 			i3GEOF.selecao.aguarde.visibility = "visible";
-			i3GEO.temaAtivo = $i("i3GEOselecaotemasLigados").value;
+			i3GEO.mapa.ativaTema($i("i3GEOselecaotemasLigados").value);
 			var tema = i3GEO.temaAtivo,
 				fim = function(retorno){
 					i3GEOF.selecao.aguarde.visibility = "hidden";
@@ -379,7 +382,7 @@ i3GEOF.selecao = {
 		*/
 		inicia: function(){
 			if($i("i3GEOselecaotemasLigados").value === "")
-			{alert("Escolha um tema");return;}	
+			{alert("Escolha um tema");return;}
 			if(g_tipoacao !== 'selecaobox')
 			{return;}
 			i3geoOL.removeControl(OLpanel);
@@ -718,7 +721,7 @@ i3GEOF.selecao = {
 					i3GEOF.selecao.aguarde.visibility = "hidden";
 					i3GEO.atualiza();
 				};
-			i3GEO.php.criatemaSel(fim,i3GEO.temaAtivo);
+			i3GEO.php.criatemaSel(fim,$i("i3GEOselecaotemasLigados").value);
 		}
 		catch(e){alert("Erro: "+e);i3GEOF.selecao.aguarde.visibility = "hidden";}
 	},
@@ -751,9 +754,8 @@ i3GEOF.selecao = {
 			interrogacao.title='mostra valores';
 			interrogacao.style.cursor="pointer";
 			interrogacao.onclick = function(){
-				var obj, itemTema;
-				obj = (this.parentNode.getElementsByTagName("input"))[0];
-				itemTema = (this.parentNode.parentNode.getElementsByTagName("select"))[0].value;
+				var obj = (this.parentNode.parentNode.getElementsByTagName("input"))[0],
+					itemTema = (this.parentNode.parentNode.getElementsByTagName("select"))[0].value;
 				i3GEO.util.comboValoresItem(
 					"i3GEOselecaocbitens",
 					i3GEO.temaAtivo,

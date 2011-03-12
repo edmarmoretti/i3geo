@@ -169,7 +169,7 @@ i3GEO.maparef = {
 				ins += "</div>";
 			}
 			ins += '<div class="bd" style="text-align:left;padding:3px;height: 150px;" id="mapaReferencia" onmouseover="this.onmousemove=function(exy){i3GEO.eventos.posicaoMouseMapa(exy)}"  >';
-			ins += '<img style="cursor:pointer;" id="imagemReferencia" src="" onclick="javascript:i3GEO.maparef.click()">';
+			ins += '<img style="cursor:pointer;display:none" onload="javascript:this.style.display = \'block\'" id="imagemReferencia" src="" onclick="javascript:i3GEO.maparef.click()">';
 			ins += '</div>';
 			novoel.innerHTML = ins;
 			document.body.appendChild(novoel);

@@ -1046,11 +1046,11 @@ i3GEO.navega = {
 					{pos = i3GEO.util.pegaPosicaoObjeto($i(i3GEO.Interface.IDMAPA));}
 					esq = (objposicaocursor.telax - pos[0]) * 2.25;
 					topo = (objposicaocursor.telay - pos[1]) * 2.25;
-					clipt = "rect("+ (topo - 40) + " " + (esq + 40) + " " + (topo + 40) + " " + (esq - 40) +")";
+					clipt = "rect("+ (topo - 120) + " " + (esq + 120) + " " + (topo + 120) + " " + (esq - 120) +")";
 					i = $i("lente").style;
 					i.clip = clipt;
-					i.top = pos[1] - (topo - 40);
-					i.left = pos[0] - (esq - 40);
+					i.top = pos[1] - (topo - 120);
+					i.left = pos[0] - (esq - 120);
 					//eval("i." + g_tipotop + "= (pos[1] - (topo - 40))");
 					//eval("i." + g_tipoleft +  "= (pos[0] - (esq - 40)");
 				}
