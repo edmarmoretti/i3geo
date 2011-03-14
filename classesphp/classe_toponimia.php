@@ -104,6 +104,7 @@ function: criaToponimia
 Cria a toponímia de um tema
 
 parameter:
+
 $item Item que será utilizado.
 
 $position Posição da âncora do texto.
@@ -212,9 +213,10 @@ Retorno:
 		$label->set("angle",$angulo);
 		if ($angulo == "AUTO")
 		{$label->set("autoangle",MS_TRUE);}
-		if ($angulo == "CURVO")
+		if (strtoupper($angulo) == "CURVO" || strtoupper($angulo) == "FOLLOW")
 		{
-			$label->set("angle",MS_FOLLOW);
+			//$label->set("angle","FOLLOW");
+			$label->set("autofollow",1);
 		}
 		corE($label,$fundo,"backgroundcolor");
 		corE($label,$sombra,"backgroundshadowcolor");
