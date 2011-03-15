@@ -305,7 +305,6 @@ i3GEO = {
 						if ($i("ferramentas")){temp = temp + parseInt($i("ferramentas").style.width,10);}
 						if($i("mst"))
 						{$i("mst").style.width=i3GEO.parametros.w + temp + "px";}
-
 						i3GEO.Interface.inicia();
 					}
 					else
@@ -563,9 +562,12 @@ i3GEO = {
 				if (temp.style.width){
 					w = parseInt(temp.style.width,10);
 					h = parseInt(temp.style.width,10);
+					i3GEO.parametros.w = w;
 				}
-				if (temp.style.height)
-				{h = parseInt(temp.style.height,10);}
+				if (temp.style.height){
+					h = parseInt(temp.style.height,10);
+					i3GEO.parametros.h = h;
+				}
 			}
 		}
 		temp = $i("contemImg");
