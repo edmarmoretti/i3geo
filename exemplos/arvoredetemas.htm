@@ -55,6 +55,13 @@ i3GEO.cria();
 	Inclui ícone para acessar o sistema de download de dados
 </p>
 <p class=paragrafo >
+	<select name="OPCOESADICIONAIS.importarwmc">
+		<option value=true selected >true</option>
+		<option value=false >false</option>
+	</select>
+	Inclui ícone para importar WMC
+</p>
+<p class=paragrafo >
 	<select name="OPCOESADICIONAIS.conectarwms">
 		<option value=true selected >true</option>
 		<option value=false >false</option>
@@ -122,7 +129,7 @@ i3GEO.cria();
 		<option value=true selected >true</option>
 		<option value=false >false</option>
 	</select>
-	Nas opções de cada tema, inclui a opção de obtenção dimagem miniatura
+	Nas opções de cada tema, inclui a opção de obtenção da imagem miniatura
 </p>
 <p class=paragrafo >
 	<select name="OPCOESADICIONAIS.estrelas">
@@ -132,11 +139,32 @@ i3GEO.cria();
 	Nas opções de cada tema, inclui a pontuação em estrelas (baseado no número de acessos)
 </p>
 <p class=paragrafo >
+	<select name="OPCOESADICIONAIS.comentarios">
+		<option value=true selected >true</option>
+		<option value=false >false</option>
+	</select>
+	Nas opções de cada tema, inclui a opção de comentários
+</p>
+<p class=paragrafo >
+	<select name="OPCOESADICIONAIS.bookmark">
+		<option value=true selected >true</option>
+		<option value=false >false</option>
+	</select>
+	Nas opções de cada tema, inclui a opção de bookmark
+</p>
+<p class=paragrafo >
 	<select name="OPCOESADICIONAIS.refresh">
 		<option value=true selected >true</option>
 		<option value=false >false</option>
 	</select>
 	Inclui o ícone de "refresh" da árvore
+</p>
+<p class=paragrafo >
+	<select name="INCLUIESTRELAS">
+		<option value=true selected >true</option>
+		<option value=false >false</option>
+	</select>
+	Inclui um nó na árvore com os temas classificados pelo número de estrelas
 </p>
 <p class=paragrafo >
 	<select name="INCLUISISTEMAS">
@@ -165,6 +193,13 @@ i3GEO.cria();
 		<option value=false selected >false</option>
 	</select>
 	Não mostra na árvore os nós que não permitem a geração de WMS
+</p>
+<p class=paragrafo >
+	<select name="TIPOBOTAO">
+		<option value="'checkbox'" >checkbox</option>
+		<option value="'radio'" selected >radio</option>
+	</select>
+	Tipo de botao para adicionar tema
 </p>
 </div>
 <p class=paragrafo ><b>Código:</b></p>

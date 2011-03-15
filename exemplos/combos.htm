@@ -2,7 +2,7 @@
 <html>
 <head>
 <META HTTP-EQUIV="Content-Type" CONTENT="text/html; charset=ISO-8859-1">
-<script type="text/javascript" src="../pacotes/yui270/build/json/json-min.js"></script>
+
 <script type="text/javascript" src="../classesjs/i3geonaocompacto.js"></script>
 
 </head>
@@ -19,6 +19,9 @@ Para ver o código javascript utilizado, utilize a opção de visualização do códig
 </p>
 <p class=paragrafo >
 Para mais informações, veja i3geo/classesjs/classe_util.js função comboTemas
+</p>
+<p class=paragrafo >
+<input class=aplicar type="button" value="Cria combos de opções" onclick="montaCombos()" />
 </p>
 <p class=paragrafo ><b>Objeto JSON com os dados das camadas armazenado em i3GEO.arvoreDeCamadas.CAMADAS</b></p>
 <div class=paragrafo id="objJSON" ></div>
@@ -49,7 +52,6 @@ Para mais informações, veja i3geo/classesjs/classe_util.js função comboTemas
 </div>
 <script type="text/javascript">
 i3GEO.configura.locaplic = i3GEO.util.protocolo()+"://"+window.location.host+"/i3geo";
-
 i3GEO.ajuda.ATIVAJANELA = false
 function montaCombos(){
 	$i("objJSON").innerHTML = YAHOO.lang.dump(i3GEO.arvoreDeCamadas.CAMADAS);
@@ -257,7 +259,6 @@ function montaCombosItens(tema){
 		"CMBitens"
 	);
 }
-i3GEO.arvoreDeCamadas.finaliza = "montaCombos()";
 i3GEO.cria();
 i3GEO.inicia();
 

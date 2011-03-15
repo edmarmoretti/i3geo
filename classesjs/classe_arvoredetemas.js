@@ -243,7 +243,7 @@ i3GEO.arvoreDeTemas = {
 	Tipo:
 	{String}
 	*/
-	IDHTML: null,
+	IDHTML: "arvoreAdicionaTema",
 	/*
 	Variavel: LOCAPLIC
 
@@ -762,7 +762,7 @@ i3GEO.arvoreDeTemas = {
 		var newVal,currentIconMode,d,tempNode,tempNode1,retorno,nomeSis,root,insp,outrasOpcoes,dados,c,i,j,conteudo,editor;
 		(function(){
 			function changeIconMode(){
-				newVal = parseInt(i3GEO.arvoreDeTemas.value,10);
+				newVal = parseInt(this.value,10);
 				if (newVal !== currentIconMode)
 				{currentIconMode = newVal;}
 				buildTree();
@@ -1668,7 +1668,7 @@ i3GEO.arvoreDeTemas = {
 		var combo = function (retorno){
 			var ob,ins,ig;
 			ob = retorno.data;
-			ins = "<select id='"+idCombo+"' SIZE="+altura+" style=width:"+largura+"px onchange='"+funcaoOnchange+"(i3GEO.arvoreDeTemas.value)' ><option value='' >Escolha um menu:</option>";
+			ins = "<select id='"+idCombo+"' SIZE="+altura+" style=width:"+largura+"px onchange='"+funcaoOnchange+"(this.value)' ><option value='' >Escolha um menu:</option>";
 			for (ig=0;ig<ob.length; ig+=1){
 				if(ob[ig].publicado !== "nao" && ob[ig].publicado !== "NAO"){
 					if(ob[ig].nomemenu)
@@ -1709,7 +1709,7 @@ i3GEO.arvoreDeTemas = {
 		var combo = function (retorno){
 			var ins,ig,
 				obGrupos = retorno.data;
-			ins = "<select id='"+idCombo+"' SIZE="+altura+" style=width:"+largura+"px onchange='"+funcaoOnchange+"(i3GEO.arvoreDeTemas.value)' ><option value='' >Escolha um grupo:</option>";
+			ins = "<select id='"+idCombo+"' SIZE="+altura+" style=width:"+largura+"px onchange='"+funcaoOnchange+"(this.value)' ><option value='' >Escolha um grupo:</option>";
 			for (ig=0;ig<obGrupos.grupos.length; ig+=1){
 				if(obGrupos.grupos[ig].nome)
 				{ins += "<option value="+obGrupos.grupos[ig].id_n1+" >"+obGrupos.grupos[ig].nome+"</option>";}
@@ -1747,7 +1747,7 @@ i3GEO.arvoreDeTemas = {
 		if(idGrupo !== ""){
 			var combo = function(retorno){
 				var ins,sg,ig;
-				ins = "<select id='"+idCombo+"' size="+altura+" style=width:"+largura+"px onchange='"+funcaoOnchange+"("+idGrupo+",i3GEO.arvoreDeTemas.value)' ><option value='' >Escolha um sub-grupo:</option>";
+				ins = "<select id='"+idCombo+"' size="+altura+" style=width:"+largura+"px onchange='"+funcaoOnchange+"(\""+idGrupo+"\",this.value)' ><option value='' >Escolha um sub-grupo:</option>";
 				if (retorno.data.subgrupo){
 					sg = retorno.data.subgrupo;
 					for (ig=0;ig<sg.length; ig+=1){
@@ -1790,7 +1790,11 @@ i3GEO.arvoreDeTemas = {
 		if(typeof(console) !== 'undefined'){console.info("i3GEO.arvoreDeTemas.comboTemasMenu()");}
 		var combo = function(retorno){
 			var ins,sg,ig,temas;
-			ins = "<select id='"+idCombo+"' size="+altura+" style=width:"+largura+"px onchange='"+funcaoOnchange+"("+idGrupo+","+idSubGrupo+",i3GEO.arvoreDeTemas.value)' ><option value='' >Escolha um tema:</option>";
+			if(idSubGrupo != "")
+			{ins = "<select id='"+idCombo+"' size="+altura+" style=width:"+largura+"px onchange='"+funcaoOnchange+"("+idGrupo+","+idSubGrupo+",this.value)' ><option value='' >Escolha um tema:</option>";}
+			else
+			{ins = "<select id='"+idCombo+"' size="+altura+" style=width:"+largura+"px onchange='"+funcaoOnchange+"("+idGrupo+",\"\",this.value)' ><option value='' >Escolha um tema:</option>";}
+			
 			if(typeof(retorno.data) !== 'undefined')
 			{retorno = retorno.data.temas;}
 			sg = retorno.length;
@@ -1799,7 +1803,7 @@ i3GEO.arvoreDeTemas = {
 			}
 			$i(idDestino).innerHTML = ins+"</select>";
 		};
-		if(typeof(temas) === 'undefined')
+		if(typeof(temas) === 'undefined' || temas === "")
 		{i3GEO.php.pegalistadetemas(combo,id_menu,idGrupo,idSubGrupo);}
 		else
 		{combo(temas);}

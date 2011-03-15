@@ -5,7 +5,7 @@
 <meta name="description" content="OGC"> 
 <meta name="keywords" content="WMS OGC mapa sig gis webmapping geo geoprocessamento interativo meio ambiente MMA cartografia geografia"> 
 <meta name="robots" content="index,follow">
-<script type="text/javascript" src="classesjs/i3geonaocompacto.js"></script>
+<script type="text/javascript" src="classesjs/i3geo.js"></script>
 <style>
 P 
 {padding-top:12px;COLOR: #2F4632;text-align: left;font-size: 12px;font-family: Verdana, Arial, Helvetica, sans-serif;}
@@ -124,7 +124,7 @@ function ogc_endereco(tema)
 	};
 	YAHOO.datadownloadLista.panel.setBody(ins);
 	YAHOO.datadownloadLista.panel.show();
-	$i("bm").innerHTML = i3GEO.util.bookmark(servico);
+	$i("bm").innerHTML = i3GEO.social.bookmark(servico);
 	//document.getElementById("corpo").innerHTML = ins
 }
 </script>

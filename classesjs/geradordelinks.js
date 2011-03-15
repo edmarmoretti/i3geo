@@ -270,7 +270,8 @@ function i3geo_gl_configura(loc_i3geo,nomeseltema,temasa,link,grupo,subgrupo,tem
 	*/
 	this.combosubgrupos = function(idGrupo,dados)
 	{
-		$i3geo_gl.combotemas(idGrupo,$i3geo_gl.subgrupo,i3GEO.arvoreDeTemas.temasRaizGrupos[idGrupo]);
+		//alert($i3geo_gl.subgrupo);
+		$i3geo_gl.combotemas(idGrupo,"",i3GEO.arvoreDeTemas.temasRaizGrupos[idGrupo]);
 		//if(dados != undefined)
 		//{$i3geo_gl.combotemas(idGrupo,$i3geo_gl.subgrupo,dados.temasgrupo);}
 		$i($i3geo_gl.subgrupo).innerHTML = "<span style=color:red >Aguarde...</span>";
