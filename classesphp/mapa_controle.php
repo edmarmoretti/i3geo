@@ -427,14 +427,7 @@ Salva o mapa acrescentando um novo layer com o resultado.
 		include_once("classe_analise.php");
 		copiaSeguranca($map_file);
 		$m = new Analise($map_file,$tema,$locaplic,$ext);
-		if($interface == "googlemaps")
-		{
-			$projMapa = $m->mapa->getProjection();
-			$m->mapa->setProjection("init=epsg:4291");
-		}	
 		$retorno = $m->nptPol($temaPt,$temaPo,$locaplic);
-		if($interface == "googlemaps")
-		{$m->mapa->setProjection($projMapa);}
 		$m->salva();
 	break;
 /*
@@ -470,15 +463,8 @@ São considerados apenas os pontos próximos definidos por um buffer.
 		include_once("classe_analise.php");
 		copiaSeguranca($map_file);
 		$m = new Analise($map_file,$temaorigem,$locaplic,$ext);
-		if($interface == "googlemaps")
-		{
-			$projMapa = $m->mapa->getProjection();
-			$m->mapa->setProjection("init=epsg:4291");
-		}			
 		$temaoverlay = $m->criaBuffer($distancia,$locaplic);
 		$retorno = $m->distanciaptpt($temaorigem,$temadestino,$temaoverlay,$locaplic,$itemorigem,$itemdestino);
-		if($interface == "googlemaps")
-		{$m->mapa->setProjection($projMapa);}
 		$m->salva();
 	break;
 /*

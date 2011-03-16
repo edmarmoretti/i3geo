@@ -1132,13 +1132,19 @@ function distanciaptpt($temaorigem,$temadestino,$temaoverlay,$locaplic,$itemorig
 	$layerorigem->close();
 	$layeroverlay->set("tolerance",0);
 	$layerdestino->set("tolerance",0);
-	if($layeroverlay->getProjection() == "" )
-	{$layeroverlay->setProjection("init=epsg:4291");}	
+
+	//if($layeroverlay->getProjection() == "" )
+	//{$layeroverlay->setProjection("init=epsg:4291");}
+	//if($layerdestino->getProjection() == "" )
+	//{$layerdestino->setProjection("init=epsg:4291");}
+	
 	$layeroverlay->queryByrect($this->mapa->extent);
 	$layerdestino->queryByFeatures($layeroverlay->index);
+	
 	$sopen = $layerdestino->open();
 	if($sopen == MS_FAILURE){return "erro";}
 	$res_count = $layerdestino->getNumresults();
+
 	for ($i = 0; $i < $res_count; ++$i)
 	{
 		$result = $layerdestino->getResult($i);
@@ -1937,10 +1943,10 @@ $locaplic - Localização do I3geo
 		else
 		{$db = dbase_create($nomeshp.".dbf", $def);dbase_close($db);}
 
-		if($layerPo->getProjection() == "" )
-		{$layerPo->setProjection("init=epsg:4291");}		
-		if($layerPt->getProjection() == "" )
-		{$layerPt->setProjection("init=epsg:4291");}		
+		//if($layerPo->getProjection() == "" )
+		//{$layerPo->setProjection("init=epsg:4291");}		
+		//if($layerPt->getProjection() == "" )
+		//{$layerPt->setProjection("init=epsg:4291");}		
 
 		//acrescenta os pontos no novo shapefile
 		$dbname = $nomeshp.".dbf";
