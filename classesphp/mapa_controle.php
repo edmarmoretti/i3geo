@@ -403,15 +403,8 @@ Salva o mapa acrescentando um novo layer com o resultado.
 	case "PONTOEMPOLIGONO":
 		include_once("classe_analise.php");
 		copiaSeguranca($map_file);	
-		$m = new Analise($map_file,$temaPt,$locaplic,$ext);
-		if($interface == "googlemaps")
-		{
-			$projMapa = $m->mapa->getProjection();
-			$m->mapa->setProjection("init=epsg:4291");
-		}			
+		$m = new Analise($map_file,$temaPt,$locaplic,$ext);		
 		$retorno = $m->pontoEmPoligono($temaPt,$temasPo,$locaplic);
-		if($interface == "googlemaps")
-		{$m->mapa->setProjection($projMapa);}
 		$m->salva();
 	break;
 /*
@@ -480,14 +473,16 @@ Salva o mapa acrescentando um novo layer com os pontos.
 		include_once("classe_analise.php");
 		copiaSeguranca($map_file);
 		$m = new Analise($map_file,$tema,$locaplic,$ext);
+		/*
 		if($interface == "googlemaps")
 		{
 			$projMapa = $m->mapa->getProjection();
 			$m->mapa->setProjection("init=epsg:4291");
-		}			
+		}
+		*/
 		$retorno = $m->criaCentroide($locaplic);
-		if($interface == "googlemaps")
-		{$m->mapa->setProjection($projMapa);}
+		//if($interface == "googlemaps")
+		//{$m->mapa->setProjection($projMapa);}
 		$m->salva();
 	break;
 /*
@@ -502,15 +497,8 @@ Salva o mapa acrescentando um novo layer com o ponto.
 	case "CENTROMASSA":
 		include_once("classe_analise.php");
 		copiaSeguranca($map_file);
-		$m = new Analise($map_file,$tema,$locaplic,$ext);
-		if($interface == "googlemaps")
-		{
-			$projMapa = $m->mapa->getProjection();
-			$m->mapa->setProjection("init=epsg:4291");
-		}			
+		$m = new Analise($map_file,$tema,$locaplic,$ext);		
 		$retorno = $m->centroMassa($item);
-		if($interface == "googlemaps")
-		{$m->mapa->setProjection($projMapa);}
 		$m->salva();
 	break;
 /*
@@ -529,15 +517,8 @@ Executa script R para gerar a imagem.
 		{$tema2 = "";}
 		if(!isset($limitepontos))
 		{$limitepontos = "";}	
-		$m = new Analise($map_file,$tema,$locaplic,$ext);
-		if($interface == "googlemaps")
-		{
-			$projMapa = $m->mapa->getProjection();
-			$m->mapa->setProjection("init=epsg:4291");
-		}			
+		$m = new Analise($map_file,$tema,$locaplic,$ext);		
 		$retorno = $m->analiseDistriPt($locaplic,$dir_tmp,$R_path,$numclasses,$tipo,$cori,$corf,$tmpurl,$sigma,$limitepontos,$tema2,$extendelimite);
-		if($interface == "googlemaps")
-		{$m->mapa->setProjection($projMapa);}
 		$m->salva();
 	break;
 /*
@@ -1251,14 +1232,7 @@ Muda a extensão geográfica do mapa de acordo com a abrangência de um tema.
 		include_once("classe_temas.php");
 		copiaSeguranca($map_file);
 		$m = new Temas($map_file,$tema);
-		if($interface == "googlemaps")
-		{
-			$projMapa = $m->mapa->getProjection();
-			$m->mapa->setProjection("init=epsg:4291");
-		}	
 		$m->zoomTema();
-		if($interface == "googlemaps")
-		{$m->mapa->setProjection($projMapa);}
 		$m->salva();
 		redesenhaMapa();
 	break;
@@ -1272,15 +1246,8 @@ Muda a extensão geográfica do mapa de acordo com a abrangência dos elementos sel
 	case "ZOOMSEL":
 		include_once("classe_temas.php");
 		copiaSeguranca($map_file);
-		$m = new Temas($map_file,$tema);
-		if($interface == "googlemaps")
-		{
-			$projMapa = $m->mapa->getProjection();
-			$m->mapa->setProjection("init=epsg:4291");
-		}	
+		$m = new Temas($map_file,$tema);	
 		$m->zoomSel();
-		if($interface == "googlemaps")
-		{$m->mapa->setProjection($projMapa);}
 		$m->salva();
 		redesenhaMapa();
 	break;

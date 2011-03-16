@@ -1396,16 +1396,16 @@ i3GEO.arvoreDeCamadas = {
 				if(ltema.escondido !== "sim"){
 					temp = ltema[propriedade];
 					if(operador === "igual"){
-						if(temp === valor)
+						if(temp == valor) //não usar === aqui
 						{resultado.push(ltema);}
 					}
 					if(operador === "diferente"){
-						if(temp !== valor)
+						if(temp != valor)
 						{resultado.push(ltema);}
 					}
 				}
 				i += 1;
-		}
+			}
 			while(i < nelementos);
 		}
 		return resultado;

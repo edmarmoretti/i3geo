@@ -947,7 +947,7 @@ $locaplic - Localização do I3geo.
 */
 	function pontoEmPoligono($temaPt,$temasPo,$locaplic)
 	{
-		set_time_limit(180);
+		set_time_limit(3000);
 		if(file_exists($this->locaplic."/pacotes/phpxbase/api_conversion.php"))
 		{include_once($this->locaplic."/pacotes/phpxbase/api_conversion.php");}
 		else	
@@ -962,14 +962,7 @@ $locaplic - Localização do I3geo.
 		$itemspt = pegaItens($layerPt);
 		$existesel = carregaquery($this->arquivo,&$this->layer,&$this->mapa);
 		if ($existesel == "nao")
-		{
-			if($layerPt->getProjection() == "" )
-			{
-				if($layerPt->getProjection() == "" )
-				{$layerPt->setProjection("init=epsg:4291");}
-			}
-			$layerPt->queryByrect($this->mapa->extent);
-		}
+		{$layerPt->queryByrect($this->mapa->extent);}
 		$res_count = $layerPt->getNumresults();
 		$pontos = array();
 		//pega um shape especifico
@@ -1036,27 +1029,31 @@ $locaplic - Localização do I3geo.
 			$lineo = $spt->line(0);
 			$pt = $lineo->point(0);
 			//faz a pesquisa
+			//error_reporting(E_ALL);
 			foreach ($layers as $layer)
 			{
 				$layer->set("template","none.htm");
 				$layer->set("toleranceunits",MS_PIXELS);
 				$layer->set("tolerance",1);
 				$ident = @$layer->queryByPoint($pt, 0, 0);
-				$itens = $listaItens[$layer->name];
-				$sopen = $layer->open();
-				if($sopen == MS_FAILURE){return "erro";}
-				if ($res_count > 0)
-				{
-					$result = $layer->getResult(0);
-					$shp_index  = $result->shapeindex;
-					$shape = $layer->getfeature($shp_index,-1);
-					foreach ($itens as $item)
-					{$reg[] = $shape->values[$item];}
-				}
-				else
-				{
-					foreach ($itens as $item)
-					{$reg[] = "???";}
+				if($ident == "MS_SUCCESS"){
+					$itens = $listaItens[$layer->name];
+					$sopen = $layer->open();
+					if($sopen == MS_FAILURE){return "erro";}
+					if ($res_count > 0 && $layer->getResult(0) !== FALSE)
+					{
+						$result = $layer->getResult(0);
+						$shp_index  = $result->shapeindex;
+						
+						$shape = $layer->getfeature($shp_index,-1);
+						foreach ($itens as $item)
+						{$reg[] = $shape->values[$item];}
+					}
+					else
+					{
+						foreach ($itens as $item)
+						{$reg[] = "???";}
+					}
 				}
 				$layer->close();
 			}
@@ -1065,14 +1062,18 @@ $locaplic - Localização do I3geo.
 		}
 		$novoshpf->free();
 		xbase_close($db);
+		
 		$novolayer = ms_newLayerObj($this->mapa, $layerPt);
 		$novolayer->set("data",$nomeshp.".shp");
 		$novolayer->set("name",$nomefinal);
 		$novolayer->setmetadata("TEMA","Cruzamento (".$nomefinal.")");
 		$novolayer->setmetadata("TEMALOCAL","SIM");
 		$novolayer->setmetadata("DOWNLOAD","SIM");
-		$novolayer->setmetadata("ITENS"," ");
-		$novolayer->setmetadata("ITENSDESC"," ");
+		$novolayer->setmetadata("ITENS","");
+		$novolayer->setmetadata("ITENSDESC","");				
+		//$novolayer->removeMetaData("ITENS");
+		//$novolayer->removeMetaData("ITENSDESC");
+
 		if(ms_GetVersionInt() > 50201)
 		{$novolayer->setconnectiontype(MS_SHAPEFILE);}
 		else
@@ -2479,8 +2480,8 @@ function gravaCoordenadasPt($tema,$limitepontos="TRUE",$extendelimite)
 		$existesel = carregaquery($this->arquivo,&$this->layer,&$this->mapa);
 		if ($existesel == "nao")
 		{
-			if($layerPt->getProjection() == "" )
-			{$layerPt->setProjection("init=epsg:4291");}
+			//if($layerPt->getProjection() == "" )
+			//{$layerPt->setProjection("init=epsg:4291");}
 			$layerPt->queryByrect($this->mapa->extent);
 		}
 		$res_count = $layerPt->getNumresults();

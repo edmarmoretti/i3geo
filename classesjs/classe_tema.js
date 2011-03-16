@@ -64,7 +64,8 @@ i3GEO.tema = {
 		//i3GEO.contadorAtualiza++;
 		if(i3GEO.Interface.ATUAL === "googlemaps"){
 			indice = i3GEO.Interface.googlemaps.retornaIndiceLayer(tema);
-			i3GeoMap.overlayMapTypes.removeAt(indice);
+			if(indice !== false)
+			{i3GeoMap.overlayMapTypes.removeAt(indice);}
 		}
 		if(i3GEO.Interface.ATUAL === "googleearth"){
 			indice = i3GEO.Interface.googleearth.retornaObjetoLayer(tema);
