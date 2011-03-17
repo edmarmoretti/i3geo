@@ -663,9 +663,9 @@ i3GEOF.inserexy = {
 				mostra = function(retorno){
 					i3GEOF.inserexy.aguarde.visibility = "hidden";
 					if (retorno.data !== undefined){
-						var ins = retorno.data[0]+"<br>";
-						ins += retorno.data[1]+"<br>";
-						ins += retorno.data[2]+"<br>";
+						var ins = "<textarea style=width:480px;height:80px >"+retorno.data[0]+"</textarea><br>";
+						ins += "<textarea style=width:480px;height:80px >"+retorno.data[1]+"</textarea><br>";
+						ins += "<textarea style=width:480px;height:80px >"+retorno.data[2]+"</textarea><br>";
 						$i("i3GEOinserexywktres").innerHTML = "<p class=paragrafo >"+ins+"</p>";
 					}
 					else
