@@ -151,7 +151,8 @@ if($_GET["DESLIGACACHE"] == "sim")
 
 if(trim($_GET["TIPOIMAGEM"]) != "" && trim($_GET["TIPOIMAGEM"]) != "nenhum")
 {$cache = false;}
-
+if($qy)
+{$cache = false;}
 if($cache == true)
 {carregaCacheImagem($_GET["BBOX"],$nomecache,$_GET["map"],$_GET["WIDTH"],$_GET["HEIGHT"]);}
 
@@ -184,7 +185,6 @@ else
 	$qm->set("height",$map_size[1]);
 	$img = $mapa->drawQuery();
 }
-
 if (!function_exists('imagepng'))
 {
 	$s = PHP_SHLIB_SUFFIX;

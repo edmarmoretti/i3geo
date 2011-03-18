@@ -1149,7 +1149,7 @@ i3GEO.Interface = {
 		Type:
 		{string}
 		*/
-		posfixo: "",
+		posfixo: 0,
 		atualizaTema:function(retorno,tema){
 			//
 			//não se atualiza um tema único, mas o mapa todo
@@ -1157,7 +1157,7 @@ i3GEO.Interface = {
 			//i3GEO.atualiza(retorno);
 			var indice = i3GEO.Interface.googlemaps.retornaIndiceLayer(tema);
 			i3GeoMap.overlayMapTypes.removeAt(indice);
-			i3GEO.Interface.googlemaps.posfixo += "&";
+			i3GEO.Interface.googlemaps.posfixo += 1;
 			i3GEO.Interface.googlemaps.insereLayer(tema,indice);
 			i3GEO.Interface.googlemaps.recalcPar();
 			try
@@ -1170,7 +1170,7 @@ i3GEO.Interface = {
 			//
 			//remove todos os layers
 			//
-			i3GEO.Interface.googlemaps.posfixo += "&";
+			i3GEO.Interface.googlemaps.posfixo += 1;
 			var nlayers = i3GEO.arvoreDeCamadas.CAMADAS.length,
 				i,
 				camada,
@@ -1193,7 +1193,7 @@ i3GEO.Interface = {
 		},
 		cria: function(w,h){
 			var i,f,ins,js;
-			posfixo = "&";
+			posfixo = "&nd=0";
 			i = $i(i3GEO.Interface.IDCORPO);
 			if(i){
 				f = $i("googlemapsdiv");
@@ -1288,7 +1288,7 @@ i3GEO.Interface = {
 					"getTileUrl: function(coord, zoom) {" +
 					"	var url = '" + i3GEO.configura.locaplic +"/classesphp/mapa_googlemaps.php?map=" + i3GEO.parametros.mapfile +
 					"&Z=' + zoom + '&X=' + coord.x + '&Y=' + coord.y + '&layer=" + nomeLayer + i3GEO.Interface.googlemaps.PARAMETROSLAYER +"';" +
-					"	return url+i3GEO.Interface.googlemaps.posfixo; " +
+					"	return url+'&nd='+i3GEO.Interface.googlemaps.posfixo; " +
 					"}, "+
 					"tileSize: new google.maps.Size(256, 256)," +
 					"isPng: true," +

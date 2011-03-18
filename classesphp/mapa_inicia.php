@@ -125,8 +125,8 @@ function iniciaMapa()
 				if($layer->opacity == "");
 				{$layer->set("opacity",50);}
 			}
-			if($layer->getProjection() == "" )
-			{$layer->setProjection("init=epsg:4291");}
+			//if($layer->getProjection() == "" )
+			//{$layer->setProjection("init=epsg:4291");}
 			if($layer->name == "rosadosventos" || $layer->name == "copyright")
 			{
 				$layer->set("status",MS_DELETE);

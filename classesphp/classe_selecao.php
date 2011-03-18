@@ -533,7 +533,6 @@ $tipo - Tipo de operação adiciona|retira|inverte|limpa|novo
 		$shp_atual = array();
 		if($this->qyfileTema != "" && file_exists($this->qyfileTema))
 		{$shp_atual = $this->unserializeQ($this->qyfileTema);}
-		
 		$shpi = array();
 		$c = explode(" ",$xy);
 		$pt = ms_newPointObj();
