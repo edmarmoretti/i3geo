@@ -71,8 +71,8 @@ if (isset($_FILES['i3GEOuploadgpx']['name']))
 			// le os itens
 			$novolayer->set("status",MS_DEFAULT);
 			$novolayer->set("template","none.htm");
-			if(isset($uploadEPSG) && $uploadEPSG != "")
-			{$novolayer->setProjection("init=epsg:".$uploadEPSG);}
+			if(isset($uploadgpxEPSG) && $uploadgpxEPSG != "")
+			{$novolayer->setProjection("init=epsg:".$uploadgpxEPSG);}
 			//$adiciona = ms_newLayerObj($mapa, $novolayer);
 		}
 		$salvo = $mapa->save($map_file);

@@ -1215,6 +1215,7 @@ Include:
 		}
 		else {$epsg = $proj;}
 		if ($e4291 == "sim"){$epsg = "EPSG:4291";}
+		$epsg = trim($epsg);
 		$layer->setmetadata("wms_srs",$epsg);
 		$layer->setmetadata("wms_name",$tema);
 		$layer->setmetadata("wms_server_version",$versao);

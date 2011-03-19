@@ -68,7 +68,6 @@ require_once("classesphp/carrega_ext.php");
 include("ms_configura.php");
 include("classesphp/pega_variaveis.php");
 include("classesphp/classe_menutemas.php");
-error_reporting(0);
 //
 //pega os endereços para compor a url de chamada do gerador de web services
 //ogc.php

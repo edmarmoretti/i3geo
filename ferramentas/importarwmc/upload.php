@@ -53,6 +53,7 @@ paraAguarde();
 function incluiWMC(){
 	global $map_file,$arquivo;
 	$mapa = ms_newMapObj($map_file);
+	$proj = $mapa->getprojection();
 	$mapa->loadMapContext($arquivo,"MS_TRUE");
 	$layers = $mapa->getalllayernames();
 	foreach($layers as $nome){
@@ -65,6 +66,7 @@ function incluiWMC(){
 			{$l->setmetadata("tema",$l->getmetadata("wms_name"));}
 		}
 	}
+	$mapa->setprojection($proj);
 	$mapa->save($map_file);
 	echo "Arquivo carregado com sucesso!";
 }

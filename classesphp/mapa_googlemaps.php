@@ -69,7 +69,6 @@ $poPoint2->project($projInObj, $projOutObj);
 
 $_GET["BBOX"] = $poPoint1->x." ".$poPoint1->y." ".$poPoint2->x." ".$poPoint2->y;
 
-//echo $_GET["BBOX"];
 $_GET["mapext"] = str_replace(","," ",$_GET["BBOX"]);
 $_GET["map_size"] = "256 256";
 $_GET["WIDTH"] = "256";
@@ -128,7 +127,7 @@ foreach ($layersNames as $layerName)
 			}
 		}
 		if($l->getProjection() == "" )
-		{$l->setProjection("init=epsg:4291");}
+		{$l->setProjection("proj=latlong");}
 	}
 	if($layerName == $_GET["layer"])
 	{

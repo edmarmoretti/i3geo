@@ -873,7 +873,8 @@ i3GEO.Interface = {
 				}
 				else
 				{layer = i3geoOL.getLayersByName(camada.name)[0];}
-				temp = camada.status === 0 ? layer.setVisibility(false) : layer.setVisibility(true);
+				//não use ===
+				temp = camada.status == 0 ? layer.setVisibility(false) : layer.setVisibility(true);
 			}
 			try
 			{i3geoOL.addLayers(i3GEO.Interface.openlayers.LAYERSADICIONAIS);}
@@ -1276,7 +1277,8 @@ i3GEO.Interface = {
 				camada = i3GEO.arvoreDeCamadas.CAMADAS[i];
 				indice = i3GEO.Interface.googlemaps.retornaIndiceLayer(camada.name);
 				if(!indice){
-					if(camada.status !== 0){
+					//nao utilize !== aqui
+					if(camada.status != 0){
 						i3GEO.Interface.googlemaps.insereLayer(camada.name,0);
 					}
 				}
@@ -1379,15 +1381,16 @@ i3GEO.Interface = {
 				ndivs;
 			try{
 				i3GeoMap.overlayMapTypes.forEach(
+					//não use ===
 					function(elemento, number){
-						if(elemento.name === nomeLayer){
+						if(elemento.name == nomeLayer){
 							divlayer = divmapa.firstChild;
 							divlayer = divlayer.firstChild;
 							divlayer = divlayer.firstChild;
 							divs = divlayer.getElementsByTagName("div");
 							ndivs = divs.length;
 							for(j=0;j<ndivs;j++){
-								if(divs[j].style.zIndex === number)
+								if(divs[j].style.zIndex == number)
 								{i = divs[j];}
 							}
 						}
@@ -1412,8 +1415,8 @@ i3GEO.Interface = {
 			else{
 				if(indice !== false){
 					desligar = obj.value;
-					i3GeoMap.overlayMapTypes.removeAt(indice);
 					i3GEO.arvoreDeCamadas.alteraPropCamadas("status","0",obj.value);
+					i3GeoMap.overlayMapTypes.removeAt(indice);
 				}
 			}
 			if(desligar !== "" || ligar !== "")

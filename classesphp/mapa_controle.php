@@ -992,7 +992,7 @@ Acrescenta um novo tema em um arquivo map file tendo como fonte um WMS.
 		copiaSeguranca($map_file);
 		$m = new Mapa($map_file);
 	 	$m->adicionatemawms($tema,$servico,$nome,$proj,$formato,$locaplic,$tipo,$versao,$nomecamada,$dir_tmp,$imgdir,$imgurl,$tiporep,$suportasld,$formatosinfo,$time);
-		$teste = testaMapa($map_file,$postgis_mapa);
+		$teste = "ok";//testaMapa($map_file,$postgis_mapa);
 		if ($teste == "ok")
 		{$retorno = "ok";}
 		else
