@@ -2291,7 +2291,7 @@ Aplica uma resolução nova ao mapa atual e gera uma imagem para a lente.
 		$m = new Navegacao($map_file);
 		if(!isset($ext))
 		{$ext = "";}
-		$ext = projetaExt($map_file,$ext);
+		//$ext = projetaExt($map_file,$ext);
 		$m->aplicaResolucao($resolucao,$ext);
 		$retorno = ($m->mapa->width).",".($m->mapa->height).",".$m->gravaImagemCorpo();
 	break;

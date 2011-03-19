@@ -152,7 +152,7 @@ i3GEOF.buscaFotos = {
 		//cria a janela flutuante
 		titulo = "Fotos <a class=ajuda_usuario target=_blank href='" + i3GEO.configura.locaplic + "/ajuda_usuario.php?idcategoria=8&idajuda=74' >&nbsp;&nbsp;&nbsp;</a>";
 		janela = i3GEO.janela.cria(
-			"350px",
+			"430px",
 			"250px",
 			"",
 			"",

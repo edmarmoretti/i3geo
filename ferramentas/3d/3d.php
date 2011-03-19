@@ -45,8 +45,8 @@ if ($temaz=="")
 	if ($maptemp == ""){echo "Arquivo com o relevo não foi encontrado";return;}
 }
 $mapa = ms_newMapObj($map_file);
-if($interface == "googlemaps")
-{$mapa->setProjection("init=epsg:4291");}
+//if($interface == "googlemaps")
+//{$mapa->setProjection("init=epsg:4291");}
 if(isset($ext) && $ext != "")
 {
 	$e = explode(" ",$ext);
