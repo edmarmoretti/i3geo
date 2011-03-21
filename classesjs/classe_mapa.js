@@ -336,12 +336,12 @@ i3GEO.mapa = {
 					novoel = document.createElement("div");
 					novoel.id = "moveLegi";
 					novoel.style.display="block";
-					temp = '<div class="hd">Legenda</div>';
+					temp = '<div class="hd" style=background:white >Legenda</div>';
 					temp += '<div id="wlegenda" style="display:block;text-align:left;background-color:white;height:300px;width:300px;overflow:auto" ></div>';
 					novoel.innerHTML = temp;
 					document.body.appendChild(novoel);
 					YAHOO.namespace("moveLegi.xp");
-					YAHOO.moveLegi.xp.panel = new YAHOO.widget.ResizePanel("moveLegi", {width:"300px", fixedcenter: true, constraintoviewport: false, underlay:"none", close:true, visible:true, draggable:true, modal:false,iframe:false } );
+					YAHOO.moveLegi.xp.panel = new YAHOO.widget.ResizePanel("moveLegi", {width:"300px", fixedcenter: true, constraintoviewport: false, underlay:"none", close:true, visible:true, draggable:true, modal:false,iframe:true } );
 					YAHOO.moveLegi.xp.panel.render();
 				}
 				$i("wlegenda").innerHTML = retorno.data.legenda;

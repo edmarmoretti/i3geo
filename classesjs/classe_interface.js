@@ -1726,8 +1726,10 @@ i3GEO.Interface = {
 			{i3GEO.php.ligatemas(temp,desligar,ligar);}
 		},
 		atualizaTema:function(retorno,tema){
-			var layer = i3GEO.Interface.googleearth.retornaObjetoLayer(tema);
-			layer.getLink().setHref(layer.getLink().getHref()+"&");
+			var layer = i3GEO.Interface.googleearth.retornaObjetoLayer(tema),
+				hr = layer.getLink().getHref();
+			hr = hr.replace("&&&&&","");
+			layer.getLink().setHref(hr+"&");
 			i3GEO.Interface.googleearth.recalcPar();
 			try
 			{i3GEO.arvoreDeCamadas.atualiza(retorno.data.temas);}
@@ -1863,8 +1865,8 @@ i3GEO.Interface = {
 				i3GeoMap3d.style.zIndex = 0;
 				i.appendChild(i3GeoMap3d);
 			}
-			google.load("earth", "1");
 			i3GeoMap = null;
+			google.load("earth", "1");
 		},
 		inicia: function(){
 			google.earth.createInstance("i3GeoMap3d", i3GEO.Interface.googleearth.iniciaGE, i3GEO.Interface.googleearth.falha);
@@ -1925,7 +1927,7 @@ i3GEO.Interface = {
 					layer = i3GEO.Interface.googleearth.insereLayer(camada.name);
 				}
 				try{
-					if(camada.status !== 0)
+					if(camada.status != 0)
 					{layer.setVisibility(true);}
 					else
 					{layer.setVisibility(false);}
@@ -2010,7 +2012,7 @@ i3GEO.Interface = {
 		falha: function()
 		{alert("Falhou. Vc precisa do plugin instalado");},
 		ativaBotoes: function(){
-			var cabecalho = function(){},
+			var cabecalho = function(){i3GEO.barraDeBotoes.ativaIcone("");},
 				minimiza = function(){
 					i3GEO.janela.minimiza("i3GEOF.ferramentasGE");
 				},

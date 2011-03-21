@@ -823,7 +823,7 @@ i3GEO.configura = {
 				i3GEO.barraDeBotoes.ativaIcone("identifica");
 				g_tipoacao='identifica';
 				g_operacao='identifica';
-				i3GEO.barraDeBotoes.BOTAOPADRAO = "identifica";
+				//i3GEO.barraDeBotoes.BOTAOPADRAO = "identifica";
 				cliqueIdentifica = function(){
 					if (g_operacao === "identifica" || i3GEO.barraDeBotoes.BOTAOPADRAO === "identifica"){
 						g_operacao = "identifica";
@@ -868,7 +868,7 @@ i3GEO.configura = {
 				i3GEO.barraDeBotoes.ativaIcone("identificaBalao");
 				g_tipoacao='identifica';
 				g_operacao='identifica';
-				i3GEO.barraDeBotoes.BOTAOPADRAO = "identificaBalao";
+				//i3GEO.barraDeBotoes.BOTAOPADRAO = "identificaBalao";
 				verificaTip = function(){
 					//
 					//cancela se existir alguma ferramenta ativa

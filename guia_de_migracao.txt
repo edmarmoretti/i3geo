@@ -43,6 +43,9 @@ Para a versão 4.5
 		g_postpx
 		g_tipotop
 		g_tipoleft
+		
+	A inicialização da interface Google Earth (interface/googleearth.phtml) foi incluida na tag "body": 
+		<body id="i3geo" onload='i3GEO.inicia();'>
 
 -------------------------------------------------------------------------------------------------
 Para a versão 4.4

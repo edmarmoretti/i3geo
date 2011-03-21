@@ -18,7 +18,7 @@ include_once("../ms_configura.php");
 <script type="text/javascript" src="http://www.google.com/jsapi?key=<?php echo $googleApiKey; ?>"></script>
 <script type="text/javascript" src="../classesjs/i3geo.js"></script>
 </head>
-<body id="i3geo" >
+<body id="i3geo" onload='i3GEO.inicia();'>
 <center>
 <table id='mst' summary="" style='display:none' width=100% cellspacing='0'>
 <tr style="border:0px">
@@ -102,7 +102,7 @@ include_once("../ms_configura.php");
 </tr>
 <tr>
 	<td><center>
-		<script type="text/javascript" src="http://www.ohloh.net/p/150688/widgets/project_users.js?style=red"></script>
+		<!---<script type="text/javascript" src="http://www.ohloh.net/p/150688/widgets/project_users.js?style=red"></script>-->
 	</td>
 </tr>
 </table>
@@ -128,10 +128,6 @@ http://localhost/i3geo/ms_criamapa.php?interface=googleearth.phtml
 */
 //i3GEO.configura.locaplic = i3GEO.util.protocolo()+"://"+window.location.host+"/i3geo";
 i3GEO.configura.locaplic = i3GEO.util.protocolo()+"://"+window.location.host+"/i3geo";
-g_mapaRefDisplay = "none"
-g_janelaMen = "nao";
-g_mostraRosa = "nao"
-g_opcoesTemas = "sim";
 i3GEO.barraDeBotoes.COMPORTAMENTO = "laranja"
 i3GEO.Interface.ATUAL = "googleearth";
 i3GEO.Interface.IDCORPO = "contemImg";
@@ -164,8 +160,8 @@ i3GEO.barraDeBotoes.AJUDA = true;
 i3GEO.mapa.legendaHTML.incluiBotaoLibera = false;
 
 i3GEO.cria();
-i3GEO.inicia();
-
+//veja tag body 
+//i3GEO.inicia();
 </script>
 
 </body>

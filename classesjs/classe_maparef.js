@@ -112,9 +112,9 @@ i3GEO.maparef = {
 	{numeric}
 
 	Default:
-	{35}
+	{85}
 	*/
-	OPACIDADE: 55,
+	OPACIDADE: 85,
 	/*
 	Propriedade: TOP
 
@@ -179,7 +179,7 @@ i3GEO.maparef = {
 					YAHOO.util.Dom.setStyle(novoel,"opacity",1);
 				};
 				novoel.onmouseout = function(){
-					YAHOO.util.Dom.setStyle(novoel,"opacity",i3GEO.janela.OPACIDADE / 100);
+					YAHOO.util.Dom.setStyle(novoel,"opacity",i3GEO.maparef.OPACIDADE / 100);
 				};
 			}
 		}

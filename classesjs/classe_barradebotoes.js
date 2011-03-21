@@ -331,9 +331,9 @@ i3GEO.barraDeBotoes = {
 	*/
 	ativaPadrao: function(){
 		try{
-			$i(this.BOTAOPADRAO).onclick.apply(); //call não funciona no IE
+			$i(i3GEO.barraDeBotoes.BOTAOPADRAO).onclick.apply(); //call não funciona no IE
 		}
-		catch(e){alert(e)}
+		catch(e){}
 	},
 	/*
 	Function: ativaIcone
