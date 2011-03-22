@@ -367,7 +367,7 @@ if (strtoupper(substr(PHP_OS, 0, 3) == 'WIN'))
 	 Tipo:
 	 {string}
 	*/
-	$interfacePadrao = "googleearth.phtml";
+	$interfacePadrao = "openlayers.htm";
 }
 else //se for linux
 {
