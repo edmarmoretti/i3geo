@@ -119,7 +119,7 @@ i3GEOF.gradeDePoligonos = {
 	{
 		var ins = "<p class='paragrafo' >A grade &eacute; formada por pol&iacute;gonos espa&ccedil;ados conforme os par&acirc;metros de dx e dy.";
 		ins += "<p class='paragrafo'>A grade criada &eacute; adicionada como um novo tema no mapa, podendo ser utilizada em opera&ccedil;&otilde;es como o cruzamento entre pontos e pol&iacute;gonos.";
-		ins += "<p class='paragrafo'>O ponto inicial da grade deve ser definido pelo usu&aacute;rio e o ponto final (inferior direito) &eacute; definido em fun&ccedil;&atilde;o da abran&ecirc;ncia do mapa ou quantidade de c&eacute;lulas.";
+		ins += "<p class='paragrafo'>O ponto inicial da grade deve ser definido pelo usu&aacute;rio e o ponto final (inferior direito) &eacute; definido em fun&ccedil;&atilde;o da abrang&ecirc;ncia do mapa ou quantidade de c&eacute;lulas.";
 		i3GEO.util.proximoAnterior("","i3GEOF.gradeDePoligonos.t1()",ins,"i3GEOFgradeDePoligonost0","i3GEOgradedepoligonosresultado");
 	},
 	t1: function(){
