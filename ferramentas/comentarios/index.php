@@ -114,5 +114,5 @@ function converte($texto){
 <script>
 i3GEO.configura = {"locaplic": "<?php echo $_SESSION["locaplic"];?>"};
 if(document.getElementById("bm"))
-{document.getElementById("bm").innerHTML = i3GEO.social.bookmark("<?php echo $_SESSION["locaplic"]."/ms_criamapa.php?layers=".$_SESSION["tema"];?>");}
+{document.getElementById("bm").innerHTML = window.parent.i3GEO.social.bookmark("<?php echo $_SESSION["locaplic"]."/ms_criamapa.php?layers=".$_SESSION["tema"];?>");}
 </script>
