@@ -67,8 +67,8 @@ i3GEOF.cortina = {
 	iddiv {String} - id do div que receberá o conteudo HTML da ferramenta
 	*/
 	inicia: function(iddiv){
-		if(navm)
-		{alert("Esta ferramenta nao funciona adequadamente no Internet Explorer. Experimente usar o Firefox");}
+		//if(navm)
+		//{alert("Esta ferramenta nao funciona adequadamente no Internet Explorer. Experimente usar o Firefox");}
 		try{
 			$i(iddiv).innerHTML = i3GEOF.cortina.html();
 		}
@@ -85,9 +85,16 @@ i3GEOF.cortina = {
 	String com o código html
 	*/
 	html:function(){
-		var ins = '<div id="slider-bg" class="yui-h-slider" style="background: url('+i3GEO.configura.locaplic+'/pacotes/yui270/build/slider/assets/bg-h.gif) no-repeat 5px 0;height: 28px;width: 210px;" tabindex="-1" title="Slider">' +
+		if(navm){
+			var ins = '<div id="slider-bg" class="yui-h-slider" style="background: url('+i3GEO.configura.locaplic+'/pacotes/yui270/build/slider/assets/bg-h.gif) no-repeat -108px 0;height: 28px;width: 210px;" tabindex="-1" title="Slider">' +
 				'<div id="slider-thumb" class="yui-slider-thumb"><img src="'+i3GEO.configura.locaplic+'/pacotes/yui270/build/slider/assets/thumb-n.gif"></div>' +
 				'</div>';
+		}
+		else{
+			var ins = '<div id="slider-bg" class="yui-h-slider" style="background: url('+i3GEO.configura.locaplic+'/pacotes/yui270/build/slider/assets/bg-h.gif) no-repeat 5px 0;height: 28px;width: 210px;" tabindex="-1" title="Slider">' +
+				'<div id="slider-thumb" class="yui-slider-thumb"><img src="'+i3GEO.configura.locaplic+'/pacotes/yui270/build/slider/assets/thumb-n.gif"></div>' +
+				'</div>';
+		}
 		return ins;
 	},
 	/*
@@ -172,6 +179,10 @@ i3GEOF.cortina = {
 			l = l + (offsetFromStart * escala);
 			estilo.clip = "rect("+t+"px,"+r+"px,"+b+"px,"+l+"px)";
 		});
+		if(navm){
+			$i("slider-bg").style.left = "-100px";
+			$i("i3GEOF.cortina_corpo").style.background = "url("+i3GEO.configura.locaplic+"/pacotes/yui270/build/slider/assets/bg-h.gif) white no-repeat 10px 0px";
+		}
 	}
 };
 <?php error_reporting(0);if(extension_loaded('zlib')){ob_end_flush();}?>
