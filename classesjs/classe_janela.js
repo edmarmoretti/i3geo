@@ -112,7 +112,7 @@ i3GEO.janela = {
 	/*
 	Propriedade: TRANSICAOSUAVE
 
-	Altera a transparência das barras quando o mouse sobrepõe a janela e quando sai da barra
+	Altera a transparência das janelas quando o mouse sobrepõe e quando sai (não é ativado no navegador IE)
 
 	Tipo:
 	{boolean}
@@ -211,6 +211,8 @@ i3GEO.janela = {
 	cria: function(wlargura,waltura,wsrc,nx,ny,texto,id,modal,classe,funcaoCabecalho,funcaoMinimiza){
 		if(typeof(console) !== 'undefined'){console.info("i3GEO.janela.cria()");}
 		var i,wlargurA ,ins,novoel,wdocaiframe,pos,temp,fix,underlay,ifr;
+		if(navm && !chro)
+		{this.TRANSICAOSUAVE = false;}
 		if(this.ANTESCRIA){
 			for(i=0;i<this.ANTESCRIA.length;i++)
 			{eval(this.ANTESCRIA[i]);}
@@ -276,8 +278,8 @@ i3GEO.janela = {
 			novoel.onmouseout = function(){
 				YAHOO.util.Dom.setStyle(novoel,"opacity",i3GEO.janela.OPACIDADE / 100);
 			};
+			YAHOO.util.Dom.setStyle(novoel,"opacity",1);
 		}
-		YAHOO.util.Dom.setStyle(novoel,"opacity",1);
 		document.body.appendChild(novoel);
 		wdocaiframe = $i(id+"i");
 		if(wdocaiframe){

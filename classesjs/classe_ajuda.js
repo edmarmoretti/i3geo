@@ -156,7 +156,7 @@ i3GEO.ajuda = {
 			if(this.ATIVAJANELA === false){return;}
 			temp = $i("contemFerramentas");
 			if(temp){
-				largura = parseInt(temp.style.width,10) - 3;
+				largura = parseInt(temp.style.width,10) - 5;
 			}
 			if(!$i("janelaMenTexto")){
 				corpo = $i(i3GEO.Interface.IDCORPO);
@@ -166,7 +166,7 @@ i3GEO.ajuda = {
 					ny = i3GEO.parametros.h - 78;
 				}
 				texto = '<div id="janelaMenTexto" style="text-align:left;font-size:10px;color:rgb(80,80,80)">'+i3GEO.ajuda.MENSAGEMPADRAO+'</div>';
-				janela = i3GEO.janela.cria(largura,"auto","",nx,ny,"&nbsp;","i3geo_janelaMensagens",false,"hd","","",true);
+				janela = i3GEO.janela.cria(largura - 3,"auto","",nx,ny,"&nbsp;","i3geo_janelaMensagens",false,"hd","","",true);
 				janela[2].innerHTML = texto;
 				YU.Event.addListener(janela[0].close, "click", i3GEO.ajuda.fechaJanela);
 				this.ativaCookie();

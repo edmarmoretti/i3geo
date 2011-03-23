@@ -121,7 +121,7 @@ i3GEOF.centromassa = {
 		var ins = "<p class='paragrafo' >Tema contendo os pontos:<br>";
 		ins += "<div style='text-align:left;' id='i3GEOcentromassaDivPontos' ></div><br>";
 		ins += "<p class='paragrafo' >Utilizar o seguinte item para ponderar os valores:<br>";
-		ins += "<div id=i3GEOondeItens style='text-align:left;display:block' ></div>"
+		ins += "<div id=i3GEOondeItens style='text-align:left;display:block' ></div>";
 		i3GEO.util.proximoAnterior("i3GEOF.centromassa.t0()","i3GEOF.centromassa.t2()",ins,"i3GEOF.centromassa.t1","i3GEOcentromassaresultado");
 		i3GEOF.centromassa.comboTemasPontos();
 	},
@@ -227,6 +227,6 @@ i3GEOF.centromassa = {
 			},
 			"i3GEOondeItens"
 		);
-	},
+	}
 };
 <?php error_reporting(0);if(extension_loaded('zlib')){ob_end_flush();}?>

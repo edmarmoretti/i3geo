@@ -94,19 +94,19 @@ i3GEOF.busca = {
 		ins += '<p class="paragrafo" ><input id=i3GEObuscabotao1 size=20  type=button value="Procurar" />';
 		ins += '<br><br><table summary="Lista de opcoes" class=lista3 width="250px">';
 		ins += '	<tr>';
-		ins += '		<td><input style="cursor:pointer" type=radio id=i3GEObuscaqualquer name=i3GEObuscatipo checked /></td>';
+		ins += '		<td><input style="cursor:pointer;border:0px solid white;" type=radio id=i3GEObuscaqualquer name=i3GEObuscatipo checked /></td>';
 		ins += '		<td>qualquer lugar do item, ou</td>';
 		ins += '	</tr>';
 		ins += '	<tr>';
-		ins += '		<td><input style="cursor:pointer" type=radio id=i3GEObuscaexata name=i3GEObuscatipo /></td>';
+		ins += '		<td><input style="cursor:pointer;border:0px solid white;" type=radio id=i3GEObuscaexata name=i3GEObuscatipo /></td>';
 		ins += '		<td>a frase exata</td>';
 		ins += '	</tr><tr><td></td><td>&nbsp;</td></tr>';
 		ins += '	<tr>';
-		ins += '		<td><input style="cursor:pointer" type=radio id=i3GEObuscamapa name=i3GEObuscaonde checked /></td>';
+		ins += '		<td><input style="cursor:pointer;border:0px solid white;" type=radio id=i3GEObuscamapa name=i3GEObuscaonde checked /></td>';
 		ins += '		<td>procurar no mapa todo, ou</td>';
 		ins += '	</tr>';
 		ins += '	<tr>';
-		ins += '		<td><input style="cursor:pointer" type=radio id=i3GEObuscaregiao name=i3GEObuscaonde /></td>';
+		ins += '		<td><input style="cursor:pointer;border:0px solid white;" type=radio id=i3GEObuscaregiao name=i3GEObuscaonde /></td>';
 		ins += '		<td>na regi&atilde;o atual</td>';
 		ins += '	</tr>';
 		ins += '</table>';
@@ -176,7 +176,7 @@ i3GEOF.busca = {
 			ins += ("<table class=lista >");
 			n = retorno.data.valores.length;
 			for (i=0;i<n; i++){
-				ins += "<tr><td><input size=2 style='cursor:pointer' name='"+retorno.data.valores[i].item+";"+retorno.data.valores[i].tema+"' type=checkbox /></td>";
+				ins += "<tr><td><input size=2 style='cursor:pointer;border:0px solid white;' name='"+retorno.data.valores[i].item+";"+retorno.data.valores[i].tema+"' type=checkbox /></td>";
 				ins += "<td>&nbsp;"+retorno.data.valores[i].item+" - "+retorno.data.valores[i].tema+"</td></tr>";
 			}
 			ins += "</table>";

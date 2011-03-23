@@ -118,22 +118,27 @@ i3GEOF.legenda = {
 				"i3GEOlegendabotao1",
 				{onclick:{fn: i3GEOF.legenda.mudaLegenda}}
 			);
+			$i("i3GEOlegendabotao1-button").style.width = "0px";
 			new YAHOO.widget.Button(
 				"i3GEOlegendabotao2",
 				{onclick:{fn: i3GEOF.legenda.adicionaClasse}}
 			);
+			$i("i3GEOlegendabotao2-button").style.width = "0px";
 			new YAHOO.widget.Button(
 				"i3GEOlegendabotao3",
 				{onclick:{fn: i3GEOF.legenda.adicionaConta}}
 			);
+			$i("i3GEOlegendabotao3-button").style.width = "0px";
 			new YAHOO.widget.Button(
 				"i3GEOlegendabotao15",
 				{onclick:{fn: i3GEOF.legenda.adicionaOpacidade}}
-			);			
+			);
+			$i("i3GEOlegendabotao15-button").style.width = "0px";
 			new YAHOO.widget.Button(
 				"i3GEOlegendabotao4",
 				{onclick:{fn: i3GEOF.legenda.paleta}}
 			);
+			$i("i3GEOlegendabotao4-button").style.width = "0px";
 			new YAHOO.widget.Button(
 				"i3GEOlegendabotao5",
 				{onclick:{fn: i3GEOF.legenda.simbU}}
@@ -179,6 +184,7 @@ i3GEOF.legenda = {
 					i3GEO.util.abreColourRamp("","listaColourRamp",ncores);
 				}}}
 			);
+			$i("i3GEOlegendabotaoRamp-button").style.width = "0px";
 			i3GEOF.legenda.ativaFoco();
 			i3GEOF.legenda.mostralegenda();
 			i3GEO.util.comboItens(
@@ -217,9 +223,9 @@ i3GEOF.legenda = {
 		'	</ul>'+
 		'</div><br>'+
 		'<div id=i3GEOlegendaguia1obj style="width:99%;text-align:left;">'+
-		'	<p class=paragrafo ><input type=checkbox onclick="" checked id=i3GEOFlegendamostra style="cursor:pointer;" /> <span style="cursor:pointer;position:relative;top:-2px;">Mostra as classes desse tema na legenda do mapa</span>' +
+		'	<p class=paragrafo ><input type=checkbox onclick="" checked id=i3GEOFlegendamostra style="cursor:pointer;border:0px solid white;" /> <span style="cursor:pointer;position:relative;top:-2px;">Mostra as classes desse tema na legenda do mapa</span>' +
 		'	<table summary="" class=lista5 ><tr>' +
-		'	<td><input id=i3GEOlegendabotao1 size="22" type="button" value="Aplicar alterações"></td>'+
+		'	<td><input id=i3GEOlegendabotao1 size="22" type="button" value="Aplicar alterações" ></td>'+
 		'	<td><input id=i3GEOlegendabotao2 size="22" type="button" value="+ classe" title="adicionar uma nova classe na legenda" ></td>' +
 		'	<td><input id=i3GEOlegendabotao3 size="25" type="button" value="+ contagem" title="incluir o número de ocorrências no nome de cada classe"></td>' +
 		'	<td><input id=i3GEOlegendabotao15 size="25" type="button" value="Opacidade variável" title="aplicar opacidade nas classes existente, variando de 10 até 100"></td>' +

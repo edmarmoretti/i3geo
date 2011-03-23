@@ -138,8 +138,13 @@ Extende os métodos de um objeto Array, permitindo remover um elemento.
 */
 Array.prototype.remove=function(s){
 	try{
-		var i = this.indexOf(s);
-		if(i !== -1){this.splice(i, 1);}
+		//var i = this.indexOf(s);
+		//if(i !== -1){this.splice(i, 1);}
+		var n = this.length,i;
+		for(i=0;i<n;i++){
+			if(this[i] == s)
+			{this.splice(i, 1);}
+		}
 	}catch(e){}
 };
 

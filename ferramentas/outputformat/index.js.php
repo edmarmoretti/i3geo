@@ -77,17 +77,17 @@ i3GEOF.outputformat = {
 		var ins = '<p class=paragrafo >Escolha o tipo de imagem para a geração do mapa. Para mais detalhes veja <a href="http://mapserver.org/mapfile/outputformat.html" target=_blank >outputformat</a></p>' +
 			'<table class=lista4 width="250px">' +
 			'	<tr>' +
-			'		<td><input onclick="i3GEOF.outputformat.aplicar(\'AGG_Q\')" style="cursor:pointer" type=radio name=i3GEOoutputformattipo value=nenhum ></td>' +
+			'		<td><input onclick="i3GEOF.outputformat.aplicar(\'AGG_Q\')" style="cursor:pointer;border:0px solid white;" type=radio name=i3GEOoutputformattipo value=nenhum ></td>' +
 			'		<td>AGG_Q</td>' +
 			'		<td>Formato PNG com 256 cores gerado com a tecnologia AGG. Utilizado como default na versão 4.3 e posteriores do i3Geo</td>' +
 			'	</tr>' +
 			'	<tr>' +
-			'		<td><input onclick="i3GEOF.outputformat.aplicar(\'png1\')" style="cursor:pointer" type=radio name=i3GEOoutputformattipo value=nenhum ></td>' +
+			'		<td><input onclick="i3GEOF.outputformat.aplicar(\'png1\')" style="cursor:pointer;border:0px solid white;" type=radio name=i3GEOoutputformattipo value=nenhum ></td>' +
 			'		<td>png1</td>' +
 			'		<td>Formato PNG com 256 cores gerado com o driver GD</td>' +
 			'	</tr>' +
 			'	<tr>' +
-			'		<td><input onclick="i3GEOF.outputformat.aplicar(\'jpeg\')" style="cursor:pointer" type=radio name=i3GEOoutputformattipo value=nenhum ></td>' +
+			'		<td><input onclick="i3GEOF.outputformat.aplicar(\'jpeg\')" style="cursor:pointer;border:0px solid white;" type=radio name=i3GEOoutputformattipo value=nenhum ></td>' +
 			'		<td>jpeg</td>' +
 			'		<td>Formato JPEG com 256 cores gerado com o driver GD</td>' +
 			'	</tr>' +
