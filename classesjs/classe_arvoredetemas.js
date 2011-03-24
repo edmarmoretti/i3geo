@@ -829,7 +829,7 @@ i3GEO.arvoreDeTemas = {
 		//
 		//opções para abrir o sistema de administração
 		//
-		if(i3GEO.arvoreDeTemas.OPCOESADICIONAIS.navegacaoDir === true){
+		if(i3GEO.parametros.editor === "sim"){
 			tempNode = new YAHOO.widget.HTMLNode(
 				{
 					html:"<a style='color:red' title='opção visível apenas para editores' href='../admin' target=blank >Sistema de administração</a>",

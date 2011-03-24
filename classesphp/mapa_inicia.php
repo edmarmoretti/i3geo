@@ -235,7 +235,7 @@ function iniciaMapa()
 	{$nomer = ($imgo->imageurl).basename($nomer);}
 	$iref = $m->mapa->reference;
 	$irefH = $iref->height;
-	 $res["editor"] = $editor;
+	$res["editor"] = $editor;
 	$res["mapexten"] = $ext;
 	$res["mapscale"] = $escalaMapa;
 	$res["mapres"] = $m->mapa->resolution;
