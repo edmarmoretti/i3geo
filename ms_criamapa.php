@@ -123,6 +123,10 @@ srs_wms - código da projeção
 image_wms - tipo de imagem disponível
 
 versao_wms - Versão do WMS (necessário quando da inclusão de uma camada WMS diretamente pela URL)
+
+gvsiggvp - endereço no servidor do arquivo de projeto gvSig (gvp) que será utilizado para construir o mapa (experimental)
+
+gvsigview - nome da view do projeto gvSig
 */
 
 /*
@@ -183,8 +187,8 @@ if (!isset($mapext)){$mapext="";}
 $dir_tmp_ = $dir_tmp;
 $locmapserv_ = $locmapserv;
 $locaplic_ = $locaplic;
-$locsistemas_ = $locsistemas;
-$locidentifica_ = $locidentifica;
+//$locsistemas_ = $locsistemas;
+//$locidentifica_ = $locidentifica;
 $R_path_ = $R_path;
 $mapext_ = $mapext;
 $locmapas_ = $locmapas;
@@ -192,7 +196,7 @@ $debug_ = $debug;
 $ler_extensoes_ = $ler_extensoes;
 $postgis_mapa_ = $postgis_mapa;
 $tituloInstituicao_ = $tituloInstituicao;
-$atlasxml_ = $atlasxml;
+//$atlasxml_ = $atlasxml;
 $expoeMapfile_ = $expoeMapfile;
 $googleApiKey_ = $googleApiKey;
 $mensagemInicia_ = $mensagemInicia;
@@ -235,8 +239,8 @@ isso pq algumas aplicações podem ser prejudicadas caso o aguarde seja mostrado
 $_SESSION["dir_tmp"] = $dir_tmp_;
 $_SESSION["locmapserv"] = $locmapserv_;
 $_SESSION["locaplic"] = $locaplic_;
-$_SESSION["locsistemas"] = $locsistemas_;
-$_SESSION["locidentifica"] = $locidentifica_;
+//$_SESSION["locsistemas"] = $locsistemas_;
+//$_SESSION["locidentifica"] = $locidentifica_;
 $_SESSION["R_path"] = $R_path_;
 $_SESSION["mapext"] = $mapext_;
 $_SESSION["locmapas"] = $locmapas_;
@@ -247,7 +251,7 @@ $_SESSION["perfil"] = $perfil_;
 $_SESSION["navegadoresLocais"] = $navegadoresLocais_;
 $_SESSION["utilizacgi"] = $utilizacgi_;
 $_SESSION["tituloInstituicao"] = $tituloInstituicao_;
-$_SESSION["atlasxml"] = $atlasxml;
+//$_SESSION["atlasxml"] = $atlasxml;
 $_SESSION["expoeMapfile"] = $expoeMapfile;
 $_SESSION["googleApiKey"] = $googleApiKey_;
 $_SESSION["mensagemInicia"] = $mensagemInicia_;
@@ -307,6 +311,16 @@ else
 {
 	$map = ms_newMapObj($locaplic."/aplicmap/".$base.".map");
 	$mapn = ms_newMapObj($locaplic."/aplicmap/".$base.".map");
+}
+/*
+Utiliza um projeto gvSig para compor o mapa
+*/
+if(isset($gvsiggvp) && $gvsiggvp != ""){
+	if(isset($gvsigview) && $gvsigview != ""){
+		incluiMapaGvsig($gvsiggvp,$gvsigview);
+	}
+	else
+	{echo "Nenhuma vista foi definida &gvsigview";}
 }
 /*
  Parâmetros adicionais.
@@ -999,6 +1013,25 @@ function incluiTemaWms()
 	$salvo = $m->salva($tmpfname);
 	//echo $tmpfname;exit;
 	erroCriacao();
+}
+/*
+Projeto gvsig
+*/
+function incluiMapaGvsig($gvsiggvp,$gvsigview){
+	global $mapn,$locaplic;
+	include_once($locaplic."/pacotes/gvsig/class.gvsig2mapfile.php");
+	$gm = new gvsig2mapfile($gvsiggvp);
+	$dataView = $gm->getViewData($gvsigview);
+	//var_dump($dataView);
+	$lnames = $mapn->getalllayernames();
+	foreach($lnames as $name){
+		$layer = $mapn->getlayerbyname($name);
+		$layer->set("status",MS_DELETE);
+	}
+	$next = $dataView["extent"];
+	$ext = $mapn->extent;
+	$ext->setextent($next[0],$next[1],$next[2],$next[3]);
+	$mapn = $gm->addLayers($mapn,$gvsigview,$dataView["layerNames"]);
 }
 /*
 Captura e mostra os erros de processamento do mapserver

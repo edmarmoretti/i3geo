@@ -118,27 +118,32 @@ i3GEOF.legenda = {
 				"i3GEOlegendabotao1",
 				{onclick:{fn: i3GEOF.legenda.mudaLegenda}}
 			);
-			$i("i3GEOlegendabotao1-button").style.width = "0px";
+			if(navm)
+			{$i("i3GEOlegendabotao1-button").style.width = "0px";}
 			new YAHOO.widget.Button(
 				"i3GEOlegendabotao2",
 				{onclick:{fn: i3GEOF.legenda.adicionaClasse}}
 			);
-			$i("i3GEOlegendabotao2-button").style.width = "0px";
+			if(navm)
+			{$i("i3GEOlegendabotao2-button").style.width = "0px";}
 			new YAHOO.widget.Button(
 				"i3GEOlegendabotao3",
 				{onclick:{fn: i3GEOF.legenda.adicionaConta}}
 			);
-			$i("i3GEOlegendabotao3-button").style.width = "0px";
+			if(navm)
+			{$i("i3GEOlegendabotao3-button").style.width = "0px";}
 			new YAHOO.widget.Button(
 				"i3GEOlegendabotao15",
 				{onclick:{fn: i3GEOF.legenda.adicionaOpacidade}}
 			);
-			$i("i3GEOlegendabotao15-button").style.width = "0px";
+			if(navm)
+			{$i("i3GEOlegendabotao15-button").style.width = "0px";}
 			new YAHOO.widget.Button(
 				"i3GEOlegendabotao4",
 				{onclick:{fn: i3GEOF.legenda.paleta}}
 			);
-			$i("i3GEOlegendabotao4-button").style.width = "0px";
+			if(navm)
+			{$i("i3GEOlegendabotao4-button").style.width = "0px";}
 			new YAHOO.widget.Button(
 				"i3GEOlegendabotao5",
 				{onclick:{fn: i3GEOF.legenda.simbU}}
@@ -184,7 +189,8 @@ i3GEOF.legenda = {
 					i3GEO.util.abreColourRamp("","listaColourRamp",ncores);
 				}}}
 			);
-			$i("i3GEOlegendabotaoRamp-button").style.width = "0px";
+			if(navm)
+			{$i("i3GEOlegendabotaoRamp-button").style.width = "0px";}
 			i3GEOF.legenda.ativaFoco();
 			i3GEOF.legenda.mostralegenda();
 			i3GEO.util.comboItens(

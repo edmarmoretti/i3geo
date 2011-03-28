@@ -6,9 +6,9 @@
     <property key="creationDate" value="Mar 25, 2011"/>
     <property key="numExtents" value="0"/>
     <property key="numCameras" value="0"/>
-    <property key="data-source-count" value="13"/>
+    <property key="data-source-count" value="25"/>
     <property key="numDocuments" value="2"/>
-    <property key="modificationDate" value="Mar 25, 2011"/>
+    <property key="modificationDate" value="Mar 28, 2011"/>
     <property key="name" value="projetoteste.gvp"/>
     <property key="owner" value="Dono do projeto"/>
     <property key="selectionColor" value="255,255,0,255"/>
@@ -16,38 +16,32 @@
     <property key="followHeaderEncoding" value="true"/>
     <xml-tag>
         <property key="type" value="otherDriverFile"/>
-        <property key="gdbmsname" value="gdbms760b52d1_12eee43d099__7ff9"/>
-        <property key="file" value="C:\ms4w\Apache\htdocs\i3geo\aplicmap\dados\sc22\ferrovia.dbf"/>
+        <property key="gdbmsname" value="gdbms_3efbdd4f_12efe5773d1__7ff1"/>
+        <property key="file" value="C:\ms4w\Apache\htdocs\i3geo\aplicmap\dados\sc22\RIO_INTERMITENTE.dbf"/>
         <property key="driverName" value="gdbms dbf driver"/>
     </xml-tag>
     <xml-tag>
         <property key="type" value="otherDriverFile"/>
-        <property key="gdbmsname" value="gdbms760b52d1_12eee43d099__7ff5"/>
-        <property key="file" value="C:\ms4w\Apache\htdocs\i3geo\aplicmap\dados\sc22\MASSA_DAGUA_PERMANENTE.dbf"/>
+        <property key="gdbmsname" value="gdbms_3efbdd4f_12efe5773d1__7ff0"/>
+        <property key="file" value="C:\ms4w\Apache\htdocs\i3geo\aplicmap\dados\sc22\AREA_PARQUE.dbf"/>
         <property key="driverName" value="gdbms dbf driver"/>
     </xml-tag>
     <xml-tag>
         <property key="type" value="otherDriverFile"/>
-        <property key="gdbmsname" value="gdbms760b52d1_12eee43d099__7ff6"/>
-        <property key="file" value="C:\ms4w\Apache\htdocs\i3geo\aplicmap\dados\sc22\MASSA_DAGUA_PERMANENTE.dbf"/>
+        <property key="gdbmsname" value="gdbms_3efbdd4f_12efe5773d1__7ff3"/>
+        <property key="file" value="C:\ms4w\Apache\htdocs\i3geo\aplicmap\dados\estados.dbf"/>
         <property key="driverName" value="gdbms dbf driver"/>
     </xml-tag>
     <xml-tag>
         <property key="type" value="otherDriverFile"/>
-        <property key="gdbmsname" value="gdbms760b52d1_12eee43d099__7ff7"/>
-        <property key="file" value="C:\ms4w\Apache\htdocs\i3geo\aplicmap\dados\sc22\MASSA_DAGUA_INTERMITENTE.dbf"/>
+        <property key="gdbmsname" value="gdbms_3efbdd4f_12efe5773d1__7ff2"/>
+        <property key="file" value="C:\ms4w\Apache\htdocs\i3geo\aplicmap\dados\estados.dbf"/>
         <property key="driverName" value="gdbms dbf driver"/>
     </xml-tag>
     <xml-tag>
         <property key="type" value="otherDriverFile"/>
-        <property key="gdbmsname" value="gdbms760b52d1_12eee43d099__7ff8"/>
-        <property key="file" value="C:\ms4w\Apache\htdocs\i3geo\aplicmap\dados\sc22\LINHA_DE_LIMITE.dbf"/>
-        <property key="driverName" value="gdbms dbf driver"/>
-    </xml-tag>
-    <xml-tag>
-        <property key="type" value="otherDriverFile"/>
-        <property key="gdbmsname" value="ORA_EPSG"/>
-        <property key="file" value="C:/Program Files (x86)/gvsig-oade-2010-1.0.0/bin/gvSIG/extensiones/com.iver.cit.gvsig.oracle_spatial/dbf/ORA_EPSG.DBF"/>
+        <property key="gdbmsname" value="gdbms1cc05f5b_12efd076fd8__7ff4"/>
+        <property key="file" value="C:\ms4w\Apache\htdocs\i3geo\aplicmap\dados\sc22\AEROPORTO_CAMPO_DE_POUSO.dbf"/>
         <property key="driverName" value="gdbms dbf driver"/>
     </xml-tag>
     <xml-tag>
@@ -88,8 +82,86 @@
     </xml-tag>
     <xml-tag>
         <property key="type" value="otherDriverFile"/>
+        <property key="gdbmsname" value="gdbms1cc05f5b_12efd076fd8__7ff5"/>
+        <property key="file" value="C:\ms4w\Apache\htdocs\i3geo\aplicmap\dados\sc22\AEROPORTO_CAMPO_DE_POUSO.dbf"/>
+        <property key="driverName" value="gdbms dbf driver"/>
+    </xml-tag>
+    <xml-tag>
+        <property key="type" value="otherDriverFile"/>
         <property key="gdbmsname" value="gdbms760b52d1_12eee43d099__7ffb"/>
         <property key="file" value="C:\ms4w\Apache\htdocs\i3geo\aplicmap\dados\sc22\CURVA_NIVEL_INTERMEDIARIA_300.dbf"/>
+        <property key="driverName" value="gdbms dbf driver"/>
+    </xml-tag>
+    <xml-tag>
+        <property key="type" value="otherDriverFile"/>
+        <property key="gdbmsname" value="gdbms760b52d1_12eee43d099__7ff9"/>
+        <property key="file" value="C:\ms4w\Apache\htdocs\i3geo\aplicmap\dados\sc22\ferrovia.dbf"/>
+        <property key="driverName" value="gdbms dbf driver"/>
+    </xml-tag>
+    <xml-tag>
+        <property key="type" value="otherDriverFile"/>
+        <property key="gdbmsname" value="gdbms760b52d1_12eee43d099__7ff5"/>
+        <property key="file" value="C:\ms4w\Apache\htdocs\i3geo\aplicmap\dados\sc22\MASSA_DAGUA_PERMANENTE.dbf"/>
+        <property key="driverName" value="gdbms dbf driver"/>
+    </xml-tag>
+    <xml-tag>
+        <property key="type" value="otherDriverFile"/>
+        <property key="gdbmsname" value="gdbms760b52d1_12eee43d099__7ff6"/>
+        <property key="file" value="C:\ms4w\Apache\htdocs\i3geo\aplicmap\dados\sc22\MASSA_DAGUA_PERMANENTE.dbf"/>
+        <property key="driverName" value="gdbms dbf driver"/>
+    </xml-tag>
+    <xml-tag>
+        <property key="type" value="otherDriverFile"/>
+        <property key="gdbmsname" value="gdbms760b52d1_12eee43d099__7ff7"/>
+        <property key="file" value="C:\ms4w\Apache\htdocs\i3geo\aplicmap\dados\sc22\MASSA_DAGUA_INTERMITENTE.dbf"/>
+        <property key="driverName" value="gdbms dbf driver"/>
+    </xml-tag>
+    <xml-tag>
+        <property key="type" value="otherDriverFile"/>
+        <property key="gdbmsname" value="gdbms760b52d1_12eee43d099__7ff8"/>
+        <property key="file" value="C:\ms4w\Apache\htdocs\i3geo\aplicmap\dados\sc22\LINHA_DE_LIMITE.dbf"/>
+        <property key="driverName" value="gdbms dbf driver"/>
+    </xml-tag>
+    <xml-tag>
+        <property key="type" value="otherDriverFile"/>
+        <property key="gdbmsname" value="gdbms5b5095ef_12efe69a531__7ff4"/>
+        <property key="file" value="C:\ms4w\Apache\htdocs\i3geo\aplicmap\dados\sc22\AREA_PARQUE.dbf"/>
+        <property key="driverName" value="gdbms dbf driver"/>
+    </xml-tag>
+    <xml-tag>
+        <property key="type" value="otherDriverFile"/>
+        <property key="gdbmsname" value="ORA_EPSG"/>
+        <property key="file" value="C:/Program Files (x86)/gvsig-oade-2010-1.0.0/bin/gvSIG/extensiones/com.iver.cit.gvsig.oracle_spatial/dbf/ORA_EPSG.DBF"/>
+        <property key="driverName" value="gdbms dbf driver"/>
+    </xml-tag>
+    <xml-tag>
+        <property key="type" value="otherDriverFile"/>
+        <property key="gdbmsname" value="gdbms5b5095ef_12efe69a531__7ff3"/>
+        <property key="file" value="C:\ms4w\Apache\htdocs\i3geo\aplicmap\dados\sc22\AREA_PARQUE.dbf"/>
+        <property key="driverName" value="gdbms dbf driver"/>
+    </xml-tag>
+    <xml-tag>
+        <property key="type" value="otherDriverFile"/>
+        <property key="gdbmsname" value="gdbms5b5095ef_12efe69a531__7ff2"/>
+        <property key="file" value="C:\ms4w\Apache\htdocs\i3geo\aplicmap\dados\sc22\AREA_PARQUE.dbf"/>
+        <property key="driverName" value="gdbms dbf driver"/>
+    </xml-tag>
+    <xml-tag>
+        <property key="type" value="otherDriverFile"/>
+        <property key="gdbmsname" value="gdbms5b5095ef_12efe69a531__7ff1"/>
+        <property key="file" value="C:\ms4w\Apache\htdocs\i3geo\aplicmap\dados\sc22\AREA_PARQUE.dbf"/>
+        <property key="driverName" value="gdbms dbf driver"/>
+    </xml-tag>
+    <xml-tag>
+        <property key="type" value="otherDriverFile"/>
+        <property key="gdbmsname" value="gdbms_3efbdd4f_12efe5773d1__7ff4"/>
+        <property key="file" value="C:\ms4w\Apache\htdocs\i3geo\aplicmap\dados\sc22\AREA_PARQUE.dbf"/>
+        <property key="driverName" value="gdbms dbf driver"/>
+    </xml-tag>
+    <xml-tag>
+        <property key="type" value="otherDriverFile"/>
+        <property key="gdbmsname" value="gdbms_3efbdd4f_12efe5773d1__7ff5"/>
+        <property key="file" value="C:\ms4w\Apache\htdocs\i3geo\aplicmap\dados\sc22\RIO_PERMANENTE.dbf"/>
         <property key="driverName" value="gdbms dbf driver"/>
     </xml-tag>
     <xml-tag>
@@ -104,48 +176,68 @@
             <property key="className" value="com.iver.cit.gvsig.fmap.MapContext"/>
             <xml-tag>
                 <property key="className" value="com.iver.cit.gvsig.fmap.ViewPort"/>
-                <property key="adjustedExtentX" value="-54.0"/>
-                <property key="adjustedExtentY" value="-12.786352676569605"/>
-                <property key="adjustedExtentW" value="5.999999959123286"/>
-                <property key="adjustedExtentH" value="5.5727002587702925"/>
+                <property key="adjustedExtentX" value="-51.90943376137458"/>
+                <property key="adjustedExtentY" value="-11.25304171250298"/>
+                <property key="adjustedExtentW" value="2.6466687325602045"/>
+                <property key="adjustedExtentH" value="1.9368478730191256"/>
                 <property key="backColor" value="255,255,255,255"/>
-                <property key="dist1pixel" value="0.017804153263568878"/>
-                <property key="dist3pixel" value="0.053412459790706635"/>
+                <property key="dist1pixel" value="0.003566938918083906"/>
+                <property key="dist3pixel" value="0.010700816288590431"/>
                 <property key="distanceUnits" value="1"/>
-                <property key="extentX" value="-54.0"/>
-                <property key="extentY" value="-12.000005852234406"/>
-                <property key="extentW" value="5.999999959123286"/>
-                <property key="extentH" value="4.000006610099897"/>
+                <property key="extentX" value="-51.72729379915035"/>
+                <property key="extentY" value="-11.25304171250298"/>
+                <property key="extentW" value="2.2823888081117403"/>
+                <property key="extentH" value="1.9368478730191256"/>
                 <property key="mapUnits" value="8"/>
                 <property key="offsetX" value="0.0"/>
                 <property key="offsetY" value="0.0"/>
                 <property key="proj" value="EPSG:4291"/>
-                <property key="scale" value="56.16666704931813"/>
+                <property key="scale" value="280.35242600317434"/>
                 <xml-tag>
                     <property key="className" value="com.iver.cit.gvsig.fmap.ExtentHistory"/>
-                    <property key="num" value="1"/>
+                    <property key="num" value="6"/>
                     <property key="numrec" value="10"/>
                     <property key="extent0X" value="-53.85799930550584"/>
                     <property key="extent0Y" value="-11.988579396154162"/>
                     <property key="extent0W" value="5.783577948479461"/>
                     <property key="extent0H" value="3.9723261645352785"/>
+                    <property key="extent1X" value="-54.0"/>
+                    <property key="extent1Y" value="-12.000005852234406"/>
+                    <property key="extent1W" value="5.999999959123286"/>
+                    <property key="extent1H" value="4.000006610099897"/>
+                    <property key="extent2X" value="-51.49118129345605"/>
+                    <property key="extent2Y" value="-11.402989940279198"/>
+                    <property key="extent2W" value="2.2306685437599185"/>
+                    <property key="extent2H" value="1.877886413968202"/>
+                    <property key="extent3X" value="-52.71225815173992"/>
+                    <property key="extent3Y" value="-12.429839634755705"/>
+                    <property key="extent3W" value="4.461337087519837"/>
+                    <property key="extent3H" value="3.755772827936404"/>
+                    <property key="extent4X" value="-55.15441186830765"/>
+                    <property key="extent4Y" value="-14.483539023708719"/>
+                    <property key="extent4W" value="8.922674175039674"/>
+                    <property key="extent4H" value="7.511545655872808"/>
+                    <property key="extent5X" value="-54.2551985348279"/>
+                    <property key="extent5Y" value="-12.32282304128669"/>
+                    <property key="extent5W" value="6.747141416808411"/>
+                    <property key="extent5H" value="4.494696925698654"/>
                 </xml-tag>
             </xml-tag>
             <xml-tag>
                 <property key="className" value="com.iver.cit.gvsig.fmap.layers.FLayers"/>
                 <property key="active" value="false"/>
-                <property key="name"/>
+                <property key="name" value="root layer"/>
                 <property key="minScale" value="-1.0"/>
                 <property key="maxScale" value="-1.0"/>
                 <property key="visible" value="true"/>
                 <property key="transparency" value="255"/>
                 <property key="isInTOC" value="true"/>
-                <property key="numLayers" value="4"/>
-                <property key="LayerNames" value="AEROPORTO_CAMPO_DE_POUSO.shp ,AREA_PARQUE.shp ,RIO_INTERMITENTE.shp ,RIO_PERMANENTE.shp"/>
+                <property key="numLayers" value="5"/>
+                <property key="LayerNames" value="estados.shp ,AREA_PARQUE.shp ,RIO_INTERMITENTE.shp ,RIO_PERMANENTE.shp ,Aeroportos"/>
                 <xml-tag>
                     <property key="className" value="com.iver.cit.gvsig.fmap.layers.FLyrVect"/>
                     <property key="active" value="false"/>
-                    <property key="name" value="AEROPORTO_CAMPO_DE_POUSO.shp"/>
+                    <property key="name" value="estados.shp"/>
                     <property key="minScale" value="-1.0"/>
                     <property key="maxScale" value="-1.0"/>
                     <property key="visible" value="true"/>
@@ -153,60 +245,31 @@
                     <property key="transparency" value="255"/>
                     <property key="isInTOC" value="true"/>
                     <property key="type" value="vectorial"/>
-                    <property key="file" value="C:\ms4w\Apache\htdocs\i3geo\aplicmap\dados\sc22\AEROPORTO_CAMPO_DE_POUSO.shp"/>
-                    <property key="recordset-name" value="gdbms760b52d1_12eee43d099__8000"/>
+                    <property key="file" value="C:\ms4w\Apache\htdocs\i3geo\aplicmap\dados\estados.shp"/>
+                    <property key="recordset-name" value="gdbms_3efbdd4f_12efe5773d1__7ff3"/>
                     <property key="driverName" value="gvSIG shp driver"/>
                     <property key="isLabeled" value="false"/>
                     <xml-tag>
-                        <property key="className" value="com.iver.cit.gvsig.fmap.rendering.SingleSymbolLegend"/>
+                        <property key="childName" value="properties"/>
                         <xml-tag>
-                            <property key="className" value="com.iver.cit.gvsig.fmap.core.symbols.SimpleMarkerSymbol"/>
-                            <property key="desc"/>
-                            <property key="isShapeVisible" value="true"/>
-                            <property key="color" value="118,118,119,255"/>
-                            <property key="rotation" value="0.0"/>
-                            <property key="offsetX" value="0.0"/>
-                            <property key="offsetY" value="0.0"/>
-                            <property key="size" value="4.0"/>
-                            <property key="outline" value="false"/>
-                            <property key="unit" value="-1"/>
-                            <property key="referenceSystem" value="0"/>
-                            <property key="markerStyle" value="0"/>
+                            <property key="className" value="org.gvsig.hyperlink.config.LayerLinkConfig"/>
+                            <property key="enabled" value="false"/>
+                            <property key="layerPropertyName" value="org.gvsig.hyperlink.config"/>
+                            <xml-tag>
+                                <property key="className" value="org.gvsig.hyperlink.config.LinkConfig"/>
+                                <property key="actionCode" value="Txt_format"/>
+                                <property key="fieldName" value="ESTADO"/>
+                                <property key="extension" value=""/>
+                            </xml-tag>
                         </xml-tag>
                     </xml-tag>
-                    <xml-tag>
-                        <property key="className" value="com.iver.cit.gvsig.fmap.layers.SelectionSupport"/>
-                        <property key="numBitSet" value="0"/>
-                    </xml-tag>
-                    <xml-tag>
-                        <property key="typeChild" value="linkProperties"/>
-                        <property key="extName"/>
-                        <property key="fieldName"/>
-                        <property key="typeLink" value="0"/>
-                    </xml-tag>
-                </xml-tag>
-                <xml-tag>
-                    <property key="className" value="com.iver.cit.gvsig.fmap.layers.FLyrVect"/>
-                    <property key="active" value="false"/>
-                    <property key="name" value="AREA_PARQUE.shp"/>
-                    <property key="minScale" value="-1.0"/>
-                    <property key="maxScale" value="-1.0"/>
-                    <property key="visible" value="true"/>
-                    <property key="proj" value="EPSG:4291"/>
-                    <property key="transparency" value="255"/>
-                    <property key="isInTOC" value="true"/>
-                    <property key="type" value="vectorial"/>
-                    <property key="file" value="C:\ms4w\Apache\htdocs\i3geo\aplicmap\dados\sc22\AREA_PARQUE.shp"/>
-                    <property key="recordset-name" value="gdbms760b52d1_12eee43d099__7fff"/>
-                    <property key="driverName" value="gvSIG shp driver"/>
-                    <property key="isLabeled" value="false"/>
                     <xml-tag>
                         <property key="className" value="com.iver.cit.gvsig.fmap.rendering.SingleSymbolLegend"/>
                         <xml-tag>
                             <property key="className" value="com.iver.cit.gvsig.fmap.core.symbols.SimpleFillSymbol"/>
-                            <property key="color" value="135,125,142,255"/>
+                            <property key="color" value="249,233,179,255"/>
                             <property key="hasFill" value="true"/>
-                            <property key="desc"/>
+                            <property key="desc" value=""/>
                             <property key="isShapeVisible" value="true"/>
                             <property key="referenceSystem" value="0"/>
                             <property key="unit" value="-1"/>
@@ -237,6 +300,20 @@
                         <property key="numBitSet" value="0"/>
                     </xml-tag>
                     <xml-tag>
+                        <property key="className" value="com.iver.cit.gvsig.fmap.rendering.styling.labeling.AttrInTableLabelingStrategy"/>
+                        <property key="labelingStrategy" value="labelingStrategy"/>
+                        <property key="TextField" value="ESTADO"/>
+                        <property key="fontSize" value="8"/>
+                        <property key="fontName" value="Segoe UI"/>
+                        <property key="fontStyle" value="0"/>
+                        <property key="useFixedSize" value="true"/>
+                        <property key="useFixedColor" value="true"/>
+                        <property key="fixedColor" value="0,0,0,255"/>
+                        <property key="fixedSize" value="10.0"/>
+                        <property key="Unit" value="1"/>
+                        <property key="referenceSystem" value="0"/>
+                    </xml-tag>
+                    <xml-tag>
                         <property key="typeChild" value="linkProperties"/>
                         <property key="extName"/>
                         <property key="fieldName"/>
@@ -246,10 +323,97 @@
                 <xml-tag>
                     <property key="className" value="com.iver.cit.gvsig.fmap.layers.FLyrVect"/>
                     <property key="active" value="true"/>
+                    <property key="name" value="AREA_PARQUE.shp"/>
+                    <property key="minScale" value="-1.0"/>
+                    <property key="maxScale" value="-1.0"/>
+                    <property key="visible" value="true"/>
+                    <property key="proj" value="EPSG:4291"/>
+                    <property key="transparency" value="255"/>
+                    <property key="isInTOC" value="true"/>
+                    <property key="type" value="vectorial"/>
+                    <property key="file" value="C:\ms4w\Apache\htdocs\i3geo\aplicmap\dados\sc22\AREA_PARQUE.shp"/>
+                    <property key="recordset-name" value="gdbms760b52d1_12eee43d099__7fff"/>
+                    <property key="driverName" value="gvSIG shp driver"/>
+                    <property key="isLabeled" value="false"/>
+                    <xml-tag>
+                        <property key="childName" value="properties"/>
+                        <xml-tag>
+                            <property key="className" value="org.gvsig.hyperlink.config.LayerLinkConfig"/>
+                            <property key="enabled" value="false"/>
+                            <property key="layerPropertyName" value="org.gvsig.hyperlink.config"/>
+                            <xml-tag>
+                                <property key="className" value="org.gvsig.hyperlink.config.LinkConfig"/>
+                                <property key="actionCode" value="Txt_format"/>
+                                <property key="fieldName" value="NM_NOME"/>
+                                <property key="extension" value=""/>
+                            </xml-tag>
+                        </xml-tag>
+                    </xml-tag>
+                    <xml-tag>
+                        <property key="className" value="com.iver.cit.gvsig.fmap.rendering.SingleSymbolLegend"/>
+                        <xml-tag>
+                            <property key="className" value="com.iver.cit.gvsig.fmap.core.symbols.SimpleFillSymbol"/>
+                            <property key="color" value="102,255,51,255"/>
+                            <property key="hasFill" value="true"/>
+                            <property key="desc" value=""/>
+                            <property key="isShapeVisible" value="true"/>
+                            <property key="referenceSystem" value="0"/>
+                            <property key="unit" value="-1"/>
+                            <property key="hasOutline" value="true"/>
+                            <xml-tag>
+                                <property key="className" value="com.iver.cit.gvsig.fmap.core.symbols.SimpleLineSymbol"/>
+                                <property key="isShapeVisible" value="true"/>
+                                <property key="desc"/>
+                                <property key="unit" value="-1"/>
+                                <property key="referenceSystem" value="0"/>
+                                <property key="color" value="128,128,128,255"/>
+                                <xml-tag>
+                                    <property key="className" value="com.iver.cit.gvsig.fmap.core.styles.SimpleLineStyle"/>
+                                    <property key="desc"/>
+                                    <property key="lineWidth" value="1.0"/>
+                                    <property key="dashPhase" value="0.0"/>
+                                    <property key="endCap" value="0"/>
+                                    <property key="lineJoin" value="2"/>
+                                    <property key="miterLimit" value="10.0"/>
+                                    <property key="offset" value="0.0"/>
+                                    <property key="unit" value="0"/>
+                                </xml-tag>
+                            </xml-tag>
+                        </xml-tag>
+                    </xml-tag>
+                    <xml-tag>
+                        <property key="className" value="com.iver.cit.gvsig.fmap.layers.SelectionSupport"/>
+                        <property key="numBitSet" value="0"/>
+                    </xml-tag>
+                    <xml-tag>
+                        <property key="className" value="com.iver.cit.gvsig.fmap.rendering.styling.labeling.AttrInTableLabelingStrategy"/>
+                        <property key="labelingStrategy" value="labelingStrategy"/>
+                        <property key="HeightField" value="MD_AR_POLI"/>
+                        <property key="TextField" value="NM_NOME"/>
+                        <property key="fontSize" value="8"/>
+                        <property key="fontName" value="Segoe UI"/>
+                        <property key="fontStyle" value="0"/>
+                        <property key="useFixedSize" value="false"/>
+                        <property key="useFixedColor" value="true"/>
+                        <property key="fixedColor" value="0,0,0,255"/>
+                        <property key="fixedSize" value="10.0"/>
+                        <property key="Unit" value="1"/>
+                        <property key="referenceSystem" value="0"/>
+                    </xml-tag>
+                    <xml-tag>
+                        <property key="typeChild" value="linkProperties"/>
+                        <property key="extName"/>
+                        <property key="fieldName"/>
+                        <property key="typeLink" value="0"/>
+                    </xml-tag>
+                </xml-tag>
+                <xml-tag>
+                    <property key="className" value="com.iver.cit.gvsig.fmap.layers.FLyrVect"/>
+                    <property key="active" value="false"/>
                     <property key="name" value="RIO_INTERMITENTE.shp"/>
                     <property key="minScale" value="-1.0"/>
                     <property key="maxScale" value="-1.0"/>
-                    <property key="visible" value="false"/>
+                    <property key="visible" value="true"/>
                     <property key="proj" value="EPSG:4291"/>
                     <property key="transparency" value="255"/>
                     <property key="isInTOC" value="true"/>
@@ -259,14 +423,28 @@
                     <property key="driverName" value="gvSIG shp driver"/>
                     <property key="isLabeled" value="false"/>
                     <xml-tag>
+                        <property key="childName" value="properties"/>
+                        <xml-tag>
+                            <property key="className" value="org.gvsig.hyperlink.config.LayerLinkConfig"/>
+                            <property key="enabled" value="false"/>
+                            <property key="layerPropertyName" value="org.gvsig.hyperlink.config"/>
+                            <xml-tag>
+                                <property key="className" value="org.gvsig.hyperlink.config.LinkConfig"/>
+                                <property key="actionCode" value="Txt_format"/>
+                                <property key="fieldName" value="NM_NOME"/>
+                                <property key="extension" value=""/>
+                            </xml-tag>
+                        </xml-tag>
+                    </xml-tag>
+                    <xml-tag>
                         <property key="className" value="com.iver.cit.gvsig.fmap.rendering.SingleSymbolLegend"/>
                         <xml-tag>
                             <property key="className" value="com.iver.cit.gvsig.fmap.core.symbols.SimpleLineSymbol"/>
                             <property key="isShapeVisible" value="true"/>
-                            <property key="desc"/>
+                            <property key="desc" value=""/>
                             <property key="unit" value="-1"/>
                             <property key="referenceSystem" value="0"/>
-                            <property key="color" value="228,230,237,255"/>
+                            <property key="color" value="102,204,255,255"/>
                             <xml-tag>
                                 <property key="className" value="com.iver.cit.gvsig.fmap.core.styles.SimpleLineStyle"/>
                                 <property key="desc"/>
@@ -283,6 +461,21 @@
                     <xml-tag>
                         <property key="className" value="com.iver.cit.gvsig.fmap.layers.SelectionSupport"/>
                         <property key="numBitSet" value="0"/>
+                    </xml-tag>
+                    <xml-tag>
+                        <property key="className" value="com.iver.cit.gvsig.fmap.rendering.styling.labeling.AttrInTableLabelingStrategy"/>
+                        <property key="labelingStrategy" value="labelingStrategy"/>
+                        <property key="HeightField" value="MD_EXTENSA"/>
+                        <property key="TextField" value="MD_EXTENSA"/>
+                        <property key="fontSize" value="8"/>
+                        <property key="fontName" value="Segoe UI"/>
+                        <property key="fontStyle" value="0"/>
+                        <property key="useFixedSize" value="false"/>
+                        <property key="useFixedColor" value="true"/>
+                        <property key="fixedColor" value="0,0,0,255"/>
+                        <property key="fixedSize" value="10.0"/>
+                        <property key="Unit" value="1"/>
+                        <property key="referenceSystem" value="0"/>
                     </xml-tag>
                     <xml-tag>
                         <property key="typeChild" value="linkProperties"/>
@@ -307,14 +500,28 @@
                     <property key="driverName" value="gvSIG shp driver"/>
                     <property key="isLabeled" value="false"/>
                     <xml-tag>
+                        <property key="childName" value="properties"/>
+                        <xml-tag>
+                            <property key="className" value="org.gvsig.hyperlink.config.LayerLinkConfig"/>
+                            <property key="enabled" value="false"/>
+                            <property key="layerPropertyName" value="org.gvsig.hyperlink.config"/>
+                            <xml-tag>
+                                <property key="className" value="org.gvsig.hyperlink.config.LinkConfig"/>
+                                <property key="actionCode" value="Txt_format"/>
+                                <property key="fieldName" value="NM_NOME"/>
+                                <property key="extension" value=""/>
+                            </xml-tag>
+                        </xml-tag>
+                    </xml-tag>
+                    <xml-tag>
                         <property key="className" value="com.iver.cit.gvsig.fmap.rendering.SingleSymbolLegend"/>
                         <xml-tag>
                             <property key="className" value="com.iver.cit.gvsig.fmap.core.symbols.SimpleLineSymbol"/>
                             <property key="isShapeVisible" value="true"/>
-                            <property key="desc"/>
+                            <property key="desc" value=""/>
                             <property key="unit" value="-1"/>
                             <property key="referenceSystem" value="0"/>
-                            <property key="color" value="161,134,182,255"/>
+                            <property key="color" value="51,204,255,255"/>
                             <xml-tag>
                                 <property key="className" value="com.iver.cit.gvsig.fmap.core.styles.SimpleLineStyle"/>
                                 <property key="desc"/>
@@ -333,6 +540,163 @@
                         <property key="numBitSet" value="0"/>
                     </xml-tag>
                     <xml-tag>
+                        <property key="className" value="com.iver.cit.gvsig.fmap.rendering.styling.labeling.AttrInTableLabelingStrategy"/>
+                        <property key="labelingStrategy" value="labelingStrategy"/>
+                        <property key="HeightField" value="MD_EXTENSA"/>
+                        <property key="TextField" value="MD_EXTENSA"/>
+                        <property key="fontSize" value="8"/>
+                        <property key="fontName" value="Segoe UI"/>
+                        <property key="fontStyle" value="0"/>
+                        <property key="useFixedSize" value="false"/>
+                        <property key="useFixedColor" value="true"/>
+                        <property key="fixedColor" value="0,0,0,255"/>
+                        <property key="fixedSize" value="10.0"/>
+                        <property key="Unit" value="1"/>
+                        <property key="referenceSystem" value="0"/>
+                    </xml-tag>
+                    <xml-tag>
+                        <property key="typeChild" value="linkProperties"/>
+                        <property key="extName"/>
+                        <property key="fieldName"/>
+                        <property key="typeLink" value="0"/>
+                    </xml-tag>
+                </xml-tag>
+                <xml-tag>
+                    <property key="className" value="com.iver.cit.gvsig.fmap.layers.FLyrVect"/>
+                    <property key="active" value="false"/>
+                    <property key="name" value="Aeroportos"/>
+                    <property key="minScale" value="-1.0"/>
+                    <property key="maxScale" value="-1.0"/>
+                    <property key="visible" value="true"/>
+                    <property key="proj" value="EPSG:4291"/>
+                    <property key="transparency" value="255"/>
+                    <property key="isInTOC" value="true"/>
+                    <property key="type" value="vectorial"/>
+                    <property key="file" value="C:\ms4w\Apache\htdocs\i3geo\aplicmap\dados\sc22\AEROPORTO_CAMPO_DE_POUSO.shp"/>
+                    <property key="recordset-name" value="gdbms760b52d1_12eee43d099__8000"/>
+                    <property key="driverName" value="gvSIG shp driver"/>
+                    <property key="isLabeled" value="false"/>
+                    <xml-tag>
+                        <property key="childName" value="properties"/>
+                        <xml-tag>
+                            <property key="className" value="org.gvsig.hyperlink.config.LayerLinkConfig"/>
+                            <property key="enabled" value="false"/>
+                            <property key="layerPropertyName" value="org.gvsig.hyperlink.config"/>
+                            <xml-tag>
+                                <property key="className" value="org.gvsig.hyperlink.config.LinkConfig"/>
+                                <property key="actionCode" value="Txt_format"/>
+                                <property key="fieldName" value="MD_LONGITU"/>
+                                <property key="extension" value=""/>
+                            </xml-tag>
+                        </xml-tag>
+                    </xml-tag>
+                    <xml-tag>
+                        <property key="className" value="com.iver.cit.gvsig.fmap.rendering.VectorialUniqueValueLegend"/>
+                        <property key="fieldNames" value="CD_UTIL_AE"/>
+                        <property key="fieldTypes" value="12"/>
+                        <property key="ownOrder" value="false"/>
+                        <property key="orders" value=""/>
+                        <property key="colorScheme" value="0\,0\,0\,255 ,0\,84\,0\,255 ,0\,84\,0\,255 ,0\,168\,0\,255 ,0\,168\,0\,255 ,0\,255\,0\,255 ,0\,255\,0\,255 ,0\,255\,84\,255 ,0\,255\,84\,255 ,0\,255\,168\,255 ,0\,255\,168\,255 ,0\,255\,255\,255 ,0\,255\,255\,255 ,0\,0\,255\,255 ,0\,0\,255\,255 ,128\,0\,255\,255 ,128\,0\,255\,255 ,255\,0\,220\,255 ,255\,0\,220\,255 ,255\,0\,180\,255 ,255\,0\,180\,255 ,255\,0\,128\,255 ,255\,0\,128\,255 ,255\,0\,64\,255 ,255\,0\,64\,255 ,255\,0\,0\,255 ,255\,0\,0\,255 ,220\,190\,190\,255 ,223\,190\,190\,255 ,220\,220\,220\,255 ,220\,220\,220\,255 ,255\,255\,255\,255 ,255\,255\,255\,255"/>
+                        <property key="labelfield"/>
+                        <property key="labelFieldHeight"/>
+                        <property key="labelFieldRotation"/>
+                        <property key="useDefaultSymbol" value="false"/>
+                        <property key="numKeys" value="4"/>
+                        <property key="tipoValueKeys" value="com.hardcode.gdbms.engine.values.NullValue"/>
+                        <property key="keys" value="NIND ,PRIV ,PRIV/PUB ,PUB"/>
+                        <property key="values" value="NIND ,PRIV ,PRIV/PUB ,PUB"/>
+                        <property key="typeKeys" value="-1 ,-1 ,-1 ,-1"/>
+                        <property key="typeValues" value="-1 ,-1 ,-1 ,-1"/>
+                        <xml-tag>
+                            <property key="className" value="com.iver.cit.gvsig.fmap.core.symbols.SimpleMarkerSymbol"/>
+                            <property key="desc"/>
+                            <property key="isShapeVisible" value="true"/>
+                            <property key="color" value="128,128,128,255"/>
+                            <property key="rotation" value="0.0"/>
+                            <property key="offsetX" value="0.0"/>
+                            <property key="offsetY" value="0.0"/>
+                            <property key="size" value="4.0"/>
+                            <property key="outline" value="false"/>
+                            <property key="unit" value="-1"/>
+                            <property key="referenceSystem" value="0"/>
+                            <property key="markerStyle" value="0"/>
+                        </xml-tag>
+                        <xml-tag>
+                            <property key="className" value="com.iver.cit.gvsig.fmap.core.symbols.SimpleMarkerSymbol"/>
+                            <property key="desc" value="NIND teste"/>
+                            <property key="isShapeVisible" value="true"/>
+                            <property key="color" value="220,220,220,255"/>
+                            <property key="rotation" value="0.0"/>
+                            <property key="offsetX" value="0.0"/>
+                            <property key="offsetY" value="0.0"/>
+                            <property key="size" value="4.0"/>
+                            <property key="outline" value="false"/>
+                            <property key="unit" value="-1"/>
+                            <property key="referenceSystem" value="0"/>
+                            <property key="markerStyle" value="0"/>
+                        </xml-tag>
+                        <xml-tag>
+                            <property key="className" value="com.iver.cit.gvsig.fmap.core.symbols.SimpleMarkerSymbol"/>
+                            <property key="desc" value="PRIV"/>
+                            <property key="isShapeVisible" value="true"/>
+                            <property key="color" value="0,255,255,255"/>
+                            <property key="rotation" value="0.0"/>
+                            <property key="offsetX" value="0.0"/>
+                            <property key="offsetY" value="0.0"/>
+                            <property key="size" value="4.0"/>
+                            <property key="outline" value="false"/>
+                            <property key="unit" value="-1"/>
+                            <property key="referenceSystem" value="0"/>
+                            <property key="markerStyle" value="0"/>
+                        </xml-tag>
+                        <xml-tag>
+                            <property key="className" value="com.iver.cit.gvsig.fmap.core.symbols.SimpleMarkerSymbol"/>
+                            <property key="desc" value="PRIV/PUB"/>
+                            <property key="isShapeVisible" value="true"/>
+                            <property key="color" value="255,0,64,255"/>
+                            <property key="rotation" value="0.0"/>
+                            <property key="offsetX" value="0.0"/>
+                            <property key="offsetY" value="0.0"/>
+                            <property key="size" value="4.0"/>
+                            <property key="outline" value="false"/>
+                            <property key="unit" value="-1"/>
+                            <property key="referenceSystem" value="0"/>
+                            <property key="markerStyle" value="0"/>
+                        </xml-tag>
+                        <xml-tag>
+                            <property key="className" value="com.iver.cit.gvsig.fmap.core.symbols.SimpleMarkerSymbol"/>
+                            <property key="desc" value="PUB"/>
+                            <property key="isShapeVisible" value="true"/>
+                            <property key="color" value="128,0,255,255"/>
+                            <property key="rotation" value="0.0"/>
+                            <property key="offsetX" value="0.0"/>
+                            <property key="offsetY" value="0.0"/>
+                            <property key="size" value="4.0"/>
+                            <property key="outline" value="false"/>
+                            <property key="unit" value="-1"/>
+                            <property key="referenceSystem" value="0"/>
+                            <property key="markerStyle" value="0"/>
+                        </xml-tag>
+                    </xml-tag>
+                    <xml-tag>
+                        <property key="className" value="com.iver.cit.gvsig.fmap.layers.SelectionSupport"/>
+                        <property key="numBitSet" value="0"/>
+                    </xml-tag>
+                    <xml-tag>
+                        <property key="className" value="com.iver.cit.gvsig.fmap.rendering.styling.labeling.AttrInTableLabelingStrategy"/>
+                        <property key="labelingStrategy" value="labelingStrategy"/>
+                        <property key="TextField" value="MD_LONGITU"/>
+                        <property key="fontSize" value="8"/>
+                        <property key="fontName" value="Segoe UI"/>
+                        <property key="fontStyle" value="0"/>
+                        <property key="useFixedSize" value="true"/>
+                        <property key="useFixedColor" value="true"/>
+                        <property key="fixedColor" value="0,0,0,255"/>
+                        <property key="fixedSize" value="10.0"/>
+                        <property key="Unit" value="1"/>
+                        <property key="referenceSystem" value="0"/>
+                    </xml-tag>
+                    <xml-tag>
                         <property key="typeChild" value="linkProperties"/>
                         <property key="extName"/>
                         <property key="fieldName"/>
@@ -345,6 +709,7 @@
             <property key="className" value="com.iver.cit.gvsig.fmap.MapContext"/>
             <xml-tag>
                 <property key="className" value="com.iver.cit.gvsig.fmap.ViewPort"/>
+                <property key="backColor" value="255,255,255,255"/>
                 <property key="dist1pixel" value="0.0"/>
                 <property key="dist3pixel" value="0.0"/>
                 <property key="distanceUnits" value="1"/>
@@ -362,7 +727,7 @@
             <xml-tag>
                 <property key="className" value="com.iver.cit.gvsig.fmap.layers.FLayers"/>
                 <property key="active" value="false"/>
-                <property key="name"/>
+                <property key="name" value="root layer"/>
                 <property key="minScale" value="-1.0"/>
                 <property key="maxScale" value="-1.0"/>
                 <property key="visible" value="true"/>
@@ -401,7 +766,7 @@
                 <property key="offsetX" value="0.0"/>
                 <property key="offsetY" value="0.0"/>
                 <property key="proj" value="EPSG:4291"/>
-                <property key="scale" value="64.00000244384798"/>
+                <property key="scale" value="0.0"/>
                 <xml-tag>
                     <property key="className" value="com.iver.cit.gvsig.fmap.ExtentHistory"/>
                     <property key="num" value="1"/>
@@ -415,7 +780,7 @@
             <xml-tag>
                 <property key="className" value="com.iver.cit.gvsig.fmap.layers.FLayers"/>
                 <property key="active" value="false"/>
-                <property key="name"/>
+                <property key="name" value="root layer"/>
                 <property key="minScale" value="-1.0"/>
                 <property key="maxScale" value="-1.0"/>
                 <property key="visible" value="true"/>
@@ -809,6 +1174,7 @@
             <property key="className" value="com.iver.cit.gvsig.fmap.MapContext"/>
             <xml-tag>
                 <property key="className" value="com.iver.cit.gvsig.fmap.ViewPort"/>
+                <property key="backColor" value="255,255,255,255"/>
                 <property key="dist1pixel" value="0.0"/>
                 <property key="dist3pixel" value="0.0"/>
                 <property key="distanceUnits" value="1"/>
@@ -826,7 +1192,7 @@
             <xml-tag>
                 <property key="className" value="com.iver.cit.gvsig.fmap.layers.FLayers"/>
                 <property key="active" value="false"/>
-                <property key="name"/>
+                <property key="name" value="root layer"/>
                 <property key="minScale" value="-1.0"/>
                 <property key="maxScale" value="-1.0"/>
                 <property key="visible" value="true"/>
@@ -859,10 +1225,10 @@
         </xml-tag>
         <xml-tag>
             <property key="name" value="ViewInfoProperties"/>
-            <property key="X" value="-1"/>
-            <property key="Y" value="-1"/>
-            <property key="Width" value="737"/>
-            <property key="Height" value="521"/>
+            <property key="X" value="0"/>
+            <property key="Y" value="0"/>
+            <property key="Width" value="1073"/>
+            <property key="Height" value="569"/>
             <property key="isVisible" value="true"/>
             <property key="isResizable" value="true"/>
             <property key="isMaximizable" value="true"/>
@@ -871,32 +1237,37 @@
             <property key="isClosed" value="false"/>
             <property key="isNotClosable" value="false"/>
             <property key="AdditionalInfo"/>
+            <property key="isMaximized" value="true"/>
+            <property key="normalX" value="-1"/>
+            <property key="normalY" value="-1"/>
+            <property key="normalWidth" value="500"/>
+            <property key="normalHeight" value="340"/>
             <property key="documentType" value="ProjectView"/>
-            <property key="documentName" value="Teste vistra 2"/>
+            <property key="documentName" value="teste 1"/>
             <property key="zPosition" value="0"/>
             <xml-tag>
                 <property key="name" value="windowData"/>
                 <property key="GraphicLocator.isPalette" value="false"/>
-                <property key="GraphicLocator.Height" value="263"/>
+                <property key="GraphicLocator.Height" value="226"/>
                 <property key="MainDivider.Y" value="0"/>
                 <property key="MainDivider.X" value="0"/>
-                <property key="MapControl.Height" value="494"/>
-                <property key="TOCDivider.Location" value="223"/>
-                <property key="TOC.Height" value="222"/>
+                <property key="MapControl.Height" value="543"/>
+                <property key="TOCDivider.Location" value="309"/>
+                <property key="TOC.Height" value="308"/>
                 <property key="TOCDivider.Y" value="1"/>
                 <property key="TOCDivider.X" value="1"/>
-                <property key="MainDivider.Location" value="343"/>
-                <property key="MainDivider.Width" value="735"/>
+                <property key="MainDivider.Location" value="322"/>
+                <property key="MainDivider.Width" value="1072"/>
                 <property key="MainWindow.X" value="0"/>
-                <property key="TOCDivider.Height" value="494"/>
-                <property key="TOC.Width" value="340"/>
-                <property key="MainWindow.Width" value="735"/>
-                <property key="TOCDivider.Width" value="342"/>
+                <property key="TOCDivider.Height" value="543"/>
+                <property key="TOC.Width" value="319"/>
+                <property key="MainWindow.Width" value="1072"/>
+                <property key="TOCDivider.Width" value="321"/>
                 <property key="MainWindow.Y" value="0"/>
-                <property key="MapControl.Width" value="384"/>
-                <property key="GraphicLocator.Width" value="340"/>
-                <property key="MainWindow.Height" value="496"/>
-                <property key="MainDivider.Height" value="496"/>
+                <property key="MapControl.Width" value="742"/>
+                <property key="GraphicLocator.Width" value="319"/>
+                <property key="MainWindow.Height" value="545"/>
+                <property key="MainDivider.Height" value="545"/>
             </xml-tag>
         </xml-tag>
     </xml-tag>
