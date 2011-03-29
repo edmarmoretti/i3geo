@@ -165,7 +165,7 @@ i3GEOF.inseretxt = {
 		$inputText("","","i3GEOinseretxttamanho_i","",2,"8") +
 		'			</td></tr>' +
 		'			<tr><td>Largura do conector:</td><td>' +
-		$inputText("","","i3GEOinseretxttamanho_c","",2,"8") +
+		$inputText("","","i3GEOinseretxttamanho_c","",2,"2") +
 		'			</td></tr>' +
 
 		'			<tr><td>&nbsp;</td><td></td></tr>' +

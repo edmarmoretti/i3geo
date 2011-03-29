@@ -464,26 +464,15 @@ i3GEOF.selecao = {
 			{return;}
 			ppx = objposicaocursor.imgx + adicionaxyBox[0];
 			py = objposicaocursor.imgy + adicionaxyBox[1];
-			if (navn){
-				if ((ppx > boxxini) && ((ppx - boxxini - 2) > 0))
-				{bxs.width = ppx - boxxini - 2;}
-				if ((py > boxyini) && ((py - boxyini - 2) > 0))
-				{bxs.height = py - boxyini - 2;}
-				if (ppx < boxxini)
-				{bxs.left = ppx;bxs.width = boxxini - ppx + 2;}
-				if (py < boxyini)
-				{bxs.top = py;bxs.height = boxyini - py + 2;}
-			}
-			else{
-				if (ppx > boxxini)
-				{bxs.width = ppx - boxxini + "px";}
-				if (py > boxyini)
-				{bxs.height = py - boxyini + "px";}
-				if (ppx < boxxini)
-				{bxs.left = ppx + "px";bxs.width = boxxini - ppx + "px";}
-				if (py < boxyini)
-				{bxs.top = py + "px";bxs.height = boxyini - py + "px";}
-			}
+			
+			if ((ppx > boxxini) && ((ppx - boxxini - 2) > 0))
+			{bxs.width = ppx - boxxini - 2;}
+			if ((py > boxyini) && ((py - boxyini - 2) > 0))
+			{bxs.height = py - boxyini - 2;}
+			if (ppx < boxxini)
+			{bxs.left = ppx;bxs.width = boxxini - ppx + 2;}
+			if (py < boxyini)
+			{bxs.top = py;bxs.height = boxyini - py + 2;}
 		},
 		/*
 		Function: termina

@@ -174,15 +174,19 @@ i3GEOF.identifica = {
 			//verifica se existem sistemas para identificar
 			//
 			i3GEOF.identifica.atualizaSistemas();
-			if (i3GEO.temaAtivo !== "")
-			{i3GEOF.identifica.buscaDadosTema(i3GEO.temaAtivo);}
+			if(i3GEO.temaAtivo !== ""){
+				//verifica se o tema ativo pode ser identificado
+				temp = i3GEO.arvoreDeCamadas.pegaTema(i3GEO.temaAtivo);
+				if(temp.identifica.toLowerCase() !== "nao")
+				{i3GEOF.identifica.buscaDadosTema(i3GEO.temaAtivo);}
+			}
 		}
 		catch(erro){alert(erro);}
 
-    var Dom = YAHOO.util.Dom,
-        Event = YAHOO.util.Event,
-        col1 = null
-        col2 = null;
+		var Dom = YAHOO.util.Dom,
+			Event = YAHOO.util.Event,
+			col1 = null,
+			col2 = null;
 
         col1 = Dom.get('i3GEOidentificatemaativo');
         col2 = Dom.get('i3GEOidentificaocorrencia');
