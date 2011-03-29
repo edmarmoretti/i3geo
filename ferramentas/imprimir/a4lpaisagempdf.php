@@ -82,16 +82,13 @@ removeLinha("classeNula",$temp);
 $map = ms_newMapObj($temp);
 
 $o = $map->outputformat;
-if($interface == "openlayers" || $interface == "googlemaps" || $interface == "googleearth"){
-	if($mapexten != ""){
-		$ext = explode(" ",$mapexten);
-		$extatual = $map->extent;
-		$extatual->setextent($ext[0],$ext[1],$ext[2],$ext[3]);
-	}
-	//$legenda = $map->legend;
-	//$legenda->set("status",MS_EMBED);
-	$o->set("imagemode",MS_IMAGEMODE_RGB);
+if($mapexten != ""){
+	$ext = explode(" ",$mapexten);
+	$extatual = $map->extent;
+	$extatual->setextent($ext[0],$ext[1],$ext[2],$ext[3]);
 }
+//$legenda = $map->legend;
+//$legenda->set("status",MS_EMBED);
 $o->set("imagemode",MS_IMAGEMODE_RGB);
 $o->set("transparent","false");
 $imgo = $map->draw();

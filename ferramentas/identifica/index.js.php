@@ -198,6 +198,10 @@ i3GEOF.identifica = {
 			var dif = parseInt((w1 * 40) / 150,10);
 			Dom.setStyle(col2, 'width', 40 - dif + 60 + '%');
 			Dom.setStyle(col2, 'left', w1 + 15 + 'px');
+			if(navm){
+				$i("yui-gen6").style.height = "250px";
+				$i("yui-gen6").style.width = "5px";
+			}			
         });
         resize.resize(null, null, null, 0, 0, true);
 	},

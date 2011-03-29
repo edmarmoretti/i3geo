@@ -92,12 +92,10 @@ $map->save($temp);
 removeLinha("classeNula",$temp);
 $map = ms_newMapObj($temp);
 $o = $map->outputformat;
-if($interface == "openlayers" || $interface == "googlemaps" || $interface == "googleearth"){
-	if($mapexten != ""){
-		$ext = explode(" ",$mapexten);
-		$extatual = $map->extent;
-		$extatual->setextent($ext[0],$ext[1],$ext[2],$ext[3]);
-	}
+if($mapexten != ""){
+	$ext = explode(" ",$mapexten);
+	$extatual = $map->extent;
+	$extatual->setextent($ext[0],$ext[1],$ext[2],$ext[3]);
 }
 $map->selectOutputFormat("svg");
 //$of = $map->outputformat;
