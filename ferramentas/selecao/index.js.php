@@ -162,14 +162,14 @@ i3GEOF.selecao = {
 		'<div class=guiaobj id="i3GEOselecaoguia2obj" style="left:1px;display:none;">' +
 		'	<p class=paragrafo ><input id=i3GEOselecaobotao1 size=18  type="button" value="Selecionar" /></p>'+
 		'	<table summary="" id="i3GEOselecaoparametros" style="width:330px" >'+
-		'		<tr><td></td><td></td>'+
+		'		<tbody><tr><td></td><td></td>'+
 		'			<td style=background-color:yellow >Item</td>'+
 		'			<td style=background-color:yellow >Operador</td>'+
 		'			<td style=background-color:yellow >Valor</td>'+
 		'			<td style=background-color:yellow ></td>'+
 		'			<td style=background-color:yellow >Conector</td>'+
 		'		</tr>'+
-		'		<tr><td>&nbsp;</td><td></td><td></td><td></td><td></td><td></td></tr>'+
+		'		<tr><td>&nbsp;</td><td></td><td></td><td></td><td></td><td></td></tr></tbody>'+
 		'	</table>'+
 		'	<div id=i3GEOselecaoresultado style="position:relative;top:5px;left:0px">'+
 		'	</div>'+
@@ -780,7 +780,6 @@ i3GEOF.selecao = {
 			valor.value = "";
 			valor.size = "15";
 			
-			ntb = document.createElement("tbody");
 			ntr = document.createElement("tr");
 			ntad = document.createElement("td");
 			ntad.appendChild(add);
@@ -816,10 +815,13 @@ i3GEOF.selecao = {
 			ntd5.innerHTML = conector;
 			ntr.appendChild(ntd5);
 			
-			ntb.appendChild(ntr);
-			
-			tabela = $i("i3GEOselecaoparametros");
-			tabela.appendChild(ntb);
+			//ntb = document.createElement("tbody");
+			//ntb.appendChild(ntr);
+			if(navm)
+			{tabela = $i("i3GEOselecaoparametros").getElementsByTagName("tbody")[0];}
+			else
+			{tabela = $i("i3GEOselecaoparametros");}
+			tabela.appendChild(ntr);
 		}
 		catch(e){alert("Erro: "+e);}
 	},
@@ -836,12 +838,14 @@ i3GEOF.selecao = {
 		try{
 			i3GEOF.selecao.aguarde.visibility = "visible";
 			var filtro = "",
-				re,g,ipt,i,nos,s,itemsel,valor,operador,conector,temp;
-
+				re,g,ipt,i,ii,nos,s,itemsel,valor,operador,conector,temp;
+			if(navm){ii = 2;}
+			else
+			{ii = 0;}
 			g = $i("i3GEOselecaoparametros");
 			ipt = g.getElementsByTagName("tr");
 			if (ipt.length > 0){
-				for (i=0;i<ipt.length; i++){
+				for (i=ii;i<ipt.length; i++){
 					nos = ipt[i].childNodes;
 					s = nos[2].getElementsByTagName("select");
 					itemsel = s[0].value;

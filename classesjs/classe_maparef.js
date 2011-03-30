@@ -146,6 +146,8 @@ i3GEO.maparef = {
 	inicia: function(){
 		if(typeof(console) !== 'undefined'){console.info("i3GEO.maparef.inicia()");}
 		var r,pos,novoel,ins,temp,moveX,moveY,escondeRef;
+		if(navm)
+		{i3GEO.maparef.TRANSICAOSUAVE = false;}
 		if (!$i("i3geo_winRef")){
 			novoel = document.createElement("div");
 			novoel.id = "i3geo_winRef";
@@ -354,6 +356,7 @@ i3GEO.maparef = {
 			novoel.style.cursor = "move";
 			novoel.style.backgroundColor = "RGB(120,220,220)";
 			novoel.style.borderWidth = "3px";
+			//YAHOO.util.Dom.setStyle(novoel,"opacity",40);
 			if (navm){novoel.style.filter='alpha(opacity=40)';}
 			else{novoel.style.opacity= 0.4;}
 			$i("mapaReferencia").appendChild(novoel);

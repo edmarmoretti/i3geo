@@ -55,8 +55,8 @@ function inicializa(){
 	counterClick = 0
     var m = document.getElementById("mapa")
 	if(window.parent.i3GEO){
-    	m.style.width = window.parent.i3GEO.parametros.w / 2
-    	m.style.height = window.parent.i3GEO.parametros.h / 2
+    	m.style.width = (window.parent.i3GEO.parametros.w / 2) - 20;
+    	m.style.height = (window.parent.i3GEO.parametros.h / 2) -20;
 		i3geoOverlay = false;
 		if(window.parent.document.getElementById("boxg"))
 		window.parent.document.getElementById("boxg").style.zIndex = 0

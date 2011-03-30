@@ -539,6 +539,8 @@ i3GEO.barraDeBotoes = {
 			nelementos = 0,
 			Dom = YAHOO.util.Dom,
 			branco = i3GEO.configura.locaplic+'/imagens/branco.gif';
+		if(navm)
+		{i3GEO.barraDeBotoes.TRANSICAOSUAVE = false;}
 		if(this.AUTO === true){
 			if(idconteudo === "barraDeBotoes1"){
 				novoel = document.createElement("div");
@@ -599,7 +601,8 @@ i3GEO.barraDeBotoes = {
 		}
 		else
 		{novoel.style.border="0px solid white";}
-		Dom.setStyle(novoel,"opacity",this.OPACIDADE / 100);
+		if(i3GEO.barraDeBotoes.TRANSICAOSUAVE)
+		{Dom.setStyle(novoel,"opacity",this.OPACIDADE / 100);}
 		temp = "";
 		if (barraZoom === true)
 		{temp += i3GEO.navega.barraDeZoom.cria();}

@@ -85,7 +85,7 @@ i3GEO.Interface = {
 	*/
 	BARRABOTOESLEFT: 3,
 	/*
-	Propriedade: BARRAZOOMTOP
+	Propriedade: BARRADEZOOMTOP
 
 	Distância da barra de zoom em ralação ao topo do mapa.
 
@@ -95,9 +95,9 @@ i3GEO.Interface = {
 	Default:
 	{12}
 	*/
-	BARRAZOOMTOP: 7,
+	BARRADEZOOMTOP: 7,
 	/*
-	Propriedade: BARRAZOOMLEFT
+	Propriedade: BARRADEZOOMLEFT
 
 	Distância da barra de zoom em ralação ao lado esquerdo do mapa.
 
@@ -107,7 +107,7 @@ i3GEO.Interface = {
 	Default:
 	{3}
 	*/
-	BARRAZOOMLEFT: 10,
+	BARRADEZOOMLEFT: 10,
 	/*
 	Propriedade: ATUAL
 
