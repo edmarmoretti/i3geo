@@ -57,6 +57,21 @@ i3GEO.guias = {
 	*/
 	ATUAL: "temas",
 	/*
+	Propriedade: ALTURACORPOGUIAS
+	
+	Altura em pixels que será aplicado em cada guia
+	
+	Por default, a altura é calculada automaticamente, mas em alguns casos, pode ser necessário especificar o valor para permitir um melhor ajuste do layout do mapa
+	
+	Mantenha como 0 para que o cálculo seja automático
+	
+	Tipo:
+	{numeric}
+	
+	Default: 0
+	*/
+	ALTURACORPOGUIAS: 0,
+	/*
 	Propriedade: CONFIGURA
 
 	Define os parâmetros de cada guia que será mostrada no mapa, como título, conteúdo, etc.
@@ -313,6 +328,7 @@ i3GEO.guias = {
 				}
 				else
 				{nguiasreal = i3GEO.guias.ORDEM.length;}
+				
 				if(navn)
 				{altura = i3GEO.parametros.h - (nguiasreal * 25) - 1;}
 				else
@@ -356,8 +372,12 @@ i3GEO.guias = {
 					temp = $i(guia.idconteudo);
 					if(temp){
 						temp.style.overflow="auto";
-						if(i3GEO.guias.TIPO === "guia")
-						{temp.style.height = i3GEO.parametros.h;}
+						if(i3GEO.guias.TIPO === "guia"){
+							if(i3GEO.guias.ALTURACORPOGUIAS === 0)
+							{temp.style.height = i3GEO.parametros.h;}
+							else
+							{temp.style.height = i3GEO.guias.ALTURACORPOGUIAS;}
+						}
 						else
 						{temp.style.height = onde.style.height;}
 					}
@@ -377,7 +397,10 @@ i3GEO.guias = {
 	*/
 	ajustaAltura: function(){
 		if(typeof(console) !== 'undefined'){console.info("i3GEO.guias.ajustaAltura()");}
-		var guia,guias,nguias;
+		var guia,guias,nguias,
+			altura=0;
+		if(i3GEO.guias.ALTURACORPOGUIAS != 0)
+		{altura = i3GEO.guias.ALTURACORPOGUIAS;}
 		guias = i3GEO.util.listaChaves(i3GEO.guias.CONFIGURA);
 		nguias = guias.length;
 		for(g=0;g<nguias;g++){
@@ -385,7 +408,7 @@ i3GEO.guias = {
 			if(guia){
 				guia.style.overflow="auto";
 				if(this.TIPO === "guia")
-				{guia.style.height = i3GEO.parametros.h;}
+				{guia.style.height = altura;}
 			}
 		}
 	},

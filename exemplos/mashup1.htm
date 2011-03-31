@@ -5,7 +5,7 @@
 <META HTTP-EQUIV="Content-Type" CONTENT="text/html; charset=ISO-8859-1">
 <title>MMA - Mapa interativo</title>
 <script type="text/javascript" src="../classesjs/i3geonaocompacto.js"></script>
-
+<script src="../pacotes/openlayers/OpenLayers29.js.php"></script>
 </head>
 <body style="background-color:rgb(200,200,200);z-index:0;" class=yui-skin-sam >
 <div style=position:absolute;left:10px;top:50px;width:200px; >
@@ -61,7 +61,7 @@
   <table width="100%" style="vertical-align:top;border-width:0px">
    <tr><td  class=verdeclaro id=contemImg >
    <!-- define o tamanho do mapa -->
-    <div id=corpoMapa style="background-image:url('../imagens/i3geo1bw.jpg');width:320px;height:300px"></div>
+    <div id=corpoMapa style="background-image:url('../imagens/i3geo1bw.jpg');width:450px;height:350px"></div>
    </td></tr>
   </table>
  </td>
@@ -89,10 +89,22 @@
 i3GEO.configura.locaplic = "http://"+window.location.host+"/i3geo";
 i3GEO.configura.mapaRefDisplay = "none"
 i3GEO.configura.iniciaJanelaMensagens = false
-i3GEO.idioma.MOSTRASELETOR = false
 i3GEO.barraDeBotoes.COMPORTAMENTO = "laranja"
-i3GEO.configura.mashuppar = "&mapext=-53 -26 -42 -18";
-i3GEO.janela.ESTILOAGUARDE = "minima";
+i3GEO.idioma.MOSTRASELETOR = false
+i3GEO.configura.autotamanho = false;
+i3GEO.Interface.ATUAL = "openlayers";
+i3GEO.Interface.IDCORPO = "contemImg";
+i3GEO.guias.ALTURACORPOGUIAS = 325;
+i3GEO.barraDeBotoes.AJUDA = false;
+i3GEO.barraDeBotoes.TIPOAJUDA = "";
+i3GEO.Interface.openlayers.GADGETS = {
+		PanZoomBar:true,
+		PanZoom:false,
+		LayerSwitcher:true,
+		ScaleLine:true,
+		OverviewMap:false	
+	};
+i3GEO.Interface.openlayers.TILES = true;
 i3GEO.cria()
 i3GEO.inicia();
 </script>

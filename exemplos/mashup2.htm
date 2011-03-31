@@ -5,6 +5,7 @@
 <META HTTP-EQUIV="Content-Type" CONTENT="text/html; charset=ISO-8859-1">
 <title>MMA - Mapa interativo</title>
 <script type="text/javascript" src="../classesjs/i3geo.js"></script>
+<script src="../pacotes/openlayers/OpenLayers29.js.php"></script>
 </head>
 <body style="background-color:rgb(200,200,200);z-index:0;" class=yui-skin-sam >
 <div style=position:absolute;left:10px;top:50px;width:200px; >
@@ -41,7 +42,6 @@
  <td class=tdbranca id=contemFerramentas style="vertical-align:top;width:300px;text-align:left;">
   <table width=100% cellspacing=0 cellpadding=0 >
    <tr>
-   <td title="libera guias" class=tdclaro ></td>
    <td style="border-bottom:3px solid rgb(200,200,200)">
     <div class=verdeescuro style="top:0px;cursor:pointer;">
 	 <div id=guia1 class=guia value="Mostra os temas atualmente inseridos no mapa e que podem estar visíveis ou não." >&nbsp;Temas&nbsp;</div>
@@ -59,27 +59,14 @@
   <table width="100%" style="vertical-align:top;border-width:0px">
    <tr><td  class=verdeclaro id=contemImg >
 <!-- define o tamanho do mapa -->
-    <div id=corpoMapa style="background-image:url('../imagens/i3geo1bw.jpg');width:320px;height:300px"></div>
+    <div id=corpoMapa style="background-image:url('../imagens/i3geo1bw.jpg');width:420px;height:350px"></div>
    </td></tr>
   </table>
  </td>
  </tr>
-<tr>
- <td class=tdbranca >
- 	<div id=escala ></div>
- 	<div id=tempoRedesenho style=color:green;background-color:black;width:50px;display:none ></div>
- </td>
- <td class=tdbranca >
-  <table width=100% ><tr>
-  <td class=tdbranca ></td>
-  <td class=tdbranca ><div id=localizarxy >Aguarde...</div></td>
-  <td class=tdbranca ></td>
-  </tr></table>
- </td>
-</tr>
-<tr style="border:0px"><td colspan=3 style="background-image:url('../imagens/visual/default/rodape.png');height:10px"></td></tr>
+<tr style="border:0px"><td colspan=2 style="background-image:url('../imagens/visual/default/rodape.png');height:10px"></td></tr>
 </table>
-<a style=text-align:center;color:white href="mailto:edmar.moretti@mma.gov.br">Cr&iacute;ticas e sugest&otilde;es</a>
+
 </center>
 </div>
 <script type="text/javascript">
@@ -88,7 +75,20 @@ i3GEO.configura.mapaRefDisplay = "none"
 i3GEO.configura.iniciaJanelaMensagens = false
 i3GEO.barraDeBotoes.COMPORTAMENTO = "laranja"
 i3GEO.idioma.MOSTRASELETOR = false
-
+i3GEO.configura.autotamanho = false;
+i3GEO.Interface.ATUAL = "openlayers";
+i3GEO.Interface.IDCORPO = "contemImg";
+i3GEO.guias.ALTURACORPOGUIAS = 325;
+i3GEO.barraDeBotoes.AJUDA = false;
+i3GEO.barraDeBotoes.TIPOAJUDA = "";
+i3GEO.Interface.openlayers.GADGETS = {
+		PanZoomBar:true,
+		PanZoom:false,
+		LayerSwitcher:true,
+		ScaleLine:true,
+		OverviewMap:false	
+	};
+i3GEO.Interface.openlayers.TILES = true;
 i3GEO.cria()
 i3GEO.inicia();
 </script>
