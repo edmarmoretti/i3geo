@@ -408,7 +408,7 @@ function i3geo_wscliente_configura(loc_i3geo,corpo,enderecows,enderecowms,rssws,
 		if(WCservico == "")
 		{$i(this.corpo).innerHTML = "<p>Nenhum serviço foi escolhido.</p>"}
 		aguardeTotal("block");
-		var p = this.loc_i3geo+"/classesphp/mapa_controle.php?map_file=''&funcao=temaswms&servico="+WCservico+"&g_sid="
+		var p = this.loc_i3geo+"/classesphp/mapa_controle.php?map_file=&funcao=temaswms&servico="+WCservico+"&g_sid="
 		var cp = new cpaint();
 		//cp.set_debug(2)
 		cp.set_response_type("JSON");

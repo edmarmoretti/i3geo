@@ -310,6 +310,8 @@ function temaswms()
 	//$wms_service_request = "c://temp//teste.xml";
 	include_once("../admin/php/admin.php");
 	include_once("../admin/php/webservices.php");
+	
+	//error_reporting(E_ALL);
 	if($wms_service_request == "erro") {
 		# Cannot download the capabilities file.
 		//registra a tentativa de acesso

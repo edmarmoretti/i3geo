@@ -4,15 +4,17 @@ Para a versão 4.5
 
 	Os arquivos com as interfaces HTML dos diferentes mapas do i3Geo foram movidos do diretório
 	i3geo/aplicmap para o diretório i3geo/interface. Caso existam links apontando diretamente para
-	esses arquivos, vc pode simplesmente copiar os arquivos existentes na nova pasta para a antiga.
+	esses arquivos, vc pode simplesmente copiar os arquivos existentes na nova pasta (i3geo/interface) 
+	para a antiga (i3geo/aplicmap).
 
-	As variáveis de configuração $temasdir e $temasaplic foram removidas. Em seu lugar, utilize $locaplic e o local fixo
-	dos arquivos, por exemplo $locaplic."/temas" e $locaplic."/aplicmap"
+	As variáveis de configuração $temasdir e $temasaplic foram removidas. Se vc desenvolveu programas em PHP,
+	no lugar dessas variáveis utilize $locaplic e o local fixo dos arquivos, por exemplo $locaplic."/temas" 
+	e $locaplic."/aplicmap"
 	
-	A opção de administração com base em arquivos XML em disco foi removido. Deve-se sempre utilizar o banco de dados
-	de admnistração
+	A opção de administração com base em arquivos XML em disco foi removida. Agora, deve-se sempre utilizar o banco de dados
+	de admnistração.
 	
-	O "alias" para a interface zerocal foi removido, utilize em seu lugar:
+	O "alias" para a interface "zerocal" foi removido, utilize em seu lugar:
 	http://localhost/i3geo/ms_criamapa.php?interface=zerocal.htm ou
 	http://localhost/i3geo/interface/zerocal.htm
 	
@@ -21,8 +23,8 @@ Para a versão 4.5
 	Opção de comentários em temas
 		Foram acrescentadas novas variáveis em ms_configura.php. Veja esse arquivo para editar as variáveis e registrar
 		as APIs das redes sociais como Twitter e Facebook
-		Por default, todos os temas podem receber comentários. Para bloquear comentários em temas específicos,
-		utilize o editor de mapfiles do sistema de admnistração
+		Por default, todos os temas agora podem receber comentários. Para bloquear comentários em temas específicos,
+		utilize o editor de mapfiles do sistema de admnistração para bloquear essa opção em cada tema
 		Os comentários são armazenados em uma tabela no banco de dados de administração. Essa tabela precisa ser criada no banco.
 		Para criar a tabela veja o item "Outras opções" em http://localhost/i3geo/admin
 		

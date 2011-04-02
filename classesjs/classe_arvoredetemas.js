@@ -618,9 +618,14 @@ i3GEO.arvoreDeTemas = {
 	listaDrives: function(g_sid,g_locaplic,funcao) {
 		if(typeof(console) !== 'undefined'){console.info("i3GEO.arvoreDeTemas.listaDrives()");}
 		var retorno = function(retorno) {
-			i3GEO.arvoreDeTemas.DRIVES = retorno.data[0];
-			if(funcao !== "")
-			{funcao.call();}
+			try{
+				i3GEO.arvoreDeTemas.DRIVES = retorno.data[0];
+				if(i3GEO.arvoreDeTemas.DRIVES == "")
+				{return;}
+				if(funcao !== "")
+				{funcao.call();}
+			}
+			catch(e){i3GEO.arvoreDeTemas.DRIVES = "";}
 		};
 		i3GEO.php.listadrives(retorno);
 	},

@@ -193,7 +193,7 @@ if (strtoupper(substr(PHP_OS, 0, 3) == 'WIN'))
 	Tipo:
 	{array}
 	*/
-	$navegadoresLocais = "";array(
+	$navegadoresLocais = array(
 							array(
 							"ip"=>"127.0.0.1",
 							"drives"=>array(
@@ -275,6 +275,10 @@ if (strtoupper(substr(PHP_OS, 0, 3) == 'WIN'))
 	Variable: postgis_mapa
 	
 	String de conexão para acesso aos dados (opcional).
+	
+	Prefira usar o esquema de criptografia nativo do Mapserver, veja em:
+	
+	http://mapserver.org/utilities/msencrypt.html
 	
 	Com o uso opcional dessa variável é possível esconder a string de conexão com o banco de dados. O Mapserver
 	não permite esconder essa string, por isso, no i3geo, foi implementado um esquema de substituição.
@@ -367,10 +371,11 @@ if (strtoupper(substr(PHP_OS, 0, 3) == 'WIN'))
 	 Tipo:
 	 {string}
 	*/
-	$interfacePadrao = "openlayers.htm";
+	$interfacePadrao = "googlemaps.phtml";
 }
 else //se for linux
 {
+	//verifica se está sendo utilizado o diretório "opt" ou "var"
 	if(file_exists("/opt/www/html/i3geo/ms_criamapa.php")){
 		$dir_tmp = "/var/tmp/ms_tmp";
 		$locaplic = "/opt/www/html/i3geo";	
@@ -382,6 +387,7 @@ else //se for linux
 		$estadosl = "estadosldebian";
 	}
 	$editores = array("127.0.0.1","localhost");
+	$navegadoresLocais = "";
 	$locmapserv = "/cgi-bin/mapserv";
 	$R_path = "R";//se vc não instalou o R no seu servidor, tente o endereço $R_path = $locaplic."/pacotes/r/linux/r";
 	$postgis_mapa = "";

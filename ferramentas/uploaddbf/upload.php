@@ -119,6 +119,7 @@ if (isset($_FILES['i3GEOuploaddbffile']['name']))
 			$novolayer->set("type",MS_LAYER_POINT);
 			$novolayer->setfilter("");
 			$classe = ms_newClassObj($novolayer);
+			$classe->set("name","");
 			$estilo = ms_newStyleObj($classe);
 			$estilo->color->setrgb(200,50,0);
 			$estilo->outlinecolor->setrgb(0,0,0);

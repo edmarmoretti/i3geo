@@ -60,6 +60,7 @@ if (isset($_FILES['i3GEOuploadgpx']['name']))
 			$novolayer->setmetadata("TEMALOCAL","SIM");
 			$novolayer->setfilter("");
 			$classe = ms_newClassObj($novolayer);
+			$classe->set("name","");
 			$estilo = ms_newStyleObj($classe);
 			if($tipo == "waypoints" || $tipo == "route_points" ||$tipo == "track_points")
 			{

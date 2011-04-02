@@ -1373,26 +1373,24 @@ i3GEO.Interface = {
 			}
 		},
 		retornaDivLayer: function(nomeLayer){
-			var i = false,
-				divmapa = $i("googlemapsdiv"),
-				divlayer,
-				divs,
-				j,
-				ndivs;
 			try{
 				i3GeoMap.overlayMapTypes.forEach(
 					//não use ===
 					function(elemento, number){
+						var i = false,
+							divmapa = $i("googlemapsdiv"),
+							divlayer,
+							divs,
+							j,
+							ndivs;
 						if(elemento.name == nomeLayer){
 							divlayer = divmapa.firstChild;
 							divlayer = divlayer.firstChild;
 							divlayer = divlayer.firstChild;
-							divs = divlayer.getElementsByTagName("div");
-							ndivs = divs.length;
-							for(j=0;j<ndivs;j++){
-								if(divs[j].style.zIndex == number)
-								{i = divs[j];}
-							}
+							divlayer = divlayer.firstChild;
+							temp = i3GEO.Interface.googlemaps.retornaIndiceLayer(nomeLayer)
+							i = divlayer.childNodes[temp];
+							return i;
 						}
 					}
 				);

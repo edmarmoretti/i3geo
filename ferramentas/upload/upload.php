@@ -59,8 +59,9 @@ if (isset($_FILES['i3GEOuploadshp']['name']))
 		$novolayer->setmetadata("TEXTO","NAO");
 		//if (($tipo != 3) and ($tipo != 8 )){$novolayer->set("type",0);}
 		$novolayer->setfilter("");
-			$classe = ms_newClassObj($novolayer);
-			$estilo = ms_newStyleObj($classe);
+		$classe = ms_newClassObj($novolayer);
+		$classe->set("name","");
+		$estilo = ms_newStyleObj($classe);
 		if ($tipo == 1)
 		{
 			$estilo->set("symbolname","ponto");

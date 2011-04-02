@@ -510,6 +510,7 @@ i3GEOF.analisaGeometrias = {
 			p = i3GEO.configura.locaplic+"/classesphp/mapa_controle.php?g_sid="+i3GEO.configura.sid+"&funcao=calculaGeometrias&operacao="+obj.value+"&lista="+lista;
 			temp = function(){
 				i3GEOF.analisaGeometrias.aguarde.visibility = "hidden";
+				$i("i3GEOanalisageometrias2").onclick.call();
 			};
 			cp.set_response_type("JSON");
 			cp.call(p,"analisaGeometrias",temp);
@@ -547,6 +548,7 @@ i3GEOF.analisaGeometrias = {
 			
 			temp = function(){
 				i3GEOF.analisaGeometrias.aguarde.visibility = "hidden";
+				$i("i3GEOanalisageometrias2").onclick.call();
 			};
 			cp.set_response_type("JSON");
 			cp.call(p,"funcoesGeometrias",temp);
@@ -583,6 +585,7 @@ i3GEOF.analisaGeometrias = {
 
 			temp = function(retorno){
 				i3GEOF.analisaGeometrias.aguarde.visibility = "hidden";
+				$i("i3GEOanalisageometrias2").onclick.call();
 			};
 			cp.set_response_type("JSON");
 			cp.call(p,"funcoesGeometrias",temp);

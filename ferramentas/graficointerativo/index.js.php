@@ -233,34 +233,34 @@ i3GEOF.graficointerativo = {
 		'<div class=guiaobj id="i3GEOgraficointerativoguia1obj" style="left:1px;display:none;">' +
 		'	<p class=paragrafo >Escolha o tipo de gráfico: </p>' +
 		'	<table class=lista6 >' +
-		'		<tr><td><input type=radio onclick="i3GEOF.graficointerativo.ativaTipo(this)" value="pizza2d" name="tipoGrafico" style=cursor:pointer > </td><td>pizza 2d</td></tr>' +
+		'		<tr><td><input type=radio onclick="i3GEOF.graficointerativo.ativaTipo(this)" value="pizza2d" name="tipoGrafico" style="border:0px solid white;cursor:pointer" > </td><td>pizza 2d</td></tr>' +
 		'		<tr><td>&nbsp;</td></tr>' +
-		'		<tr><td><input type=radio onclick="i3GEOF.graficointerativo.ativaTipo(this)" value="area" name="tipoGrafico" style=cursor:pointer > </td><td>área 2d</td></tr>' +
+		'		<tr><td><input type=radio onclick="i3GEOF.graficointerativo.ativaTipo(this)" value="area" name="tipoGrafico" style="border:0px solid white;cursor:pointer" > </td><td>área 2d</td></tr>' +
 		'		<tr><td>&nbsp;</td></tr>' +
-		'		<tr><td><input type=radio onclick="i3GEOF.graficointerativo.ativaTipo(this)" value="scatter" name="tipoGrafico" style=cursor:pointer > </td><td>distribuição de pontos</td></tr>' +
+		'		<tr><td><input type=radio onclick="i3GEOF.graficointerativo.ativaTipo(this)" value="scatter" name="tipoGrafico" style="border:0px solid white;cursor:pointer" > </td><td>distribuição de pontos</td></tr>' +
 		'		<tr><td>&nbsp;</td></tr>' +
-		'		<tr><td><input type=radio onclick="i3GEOF.graficointerativo.ativaTipo(this)" value="line" name="tipoGrafico" style=cursor:pointer > </td><td>linha</td></tr>' +
+		'		<tr><td><input type=radio onclick="i3GEOF.graficointerativo.ativaTipo(this)" value="line" name="tipoGrafico" style="border:0px solid white;cursor:pointer" > </td><td>linha</td></tr>' +
 		'		<tr><td>&nbsp;</td></tr>' +
-		'		<tr><td><input type=radio onclick="i3GEOF.graficointerativo.ativaTipo(this)" value="radar" name="tipoGrafico" style=cursor:pointer > </td><td>radar</td></tr>' +
+		'		<tr><td><input type=radio onclick="i3GEOF.graficointerativo.ativaTipo(this)" value="radar" name="tipoGrafico" style="border:0px solid white;cursor:pointer" > </td><td>radar</td></tr>' +
 		'		<tr><td>&nbsp;</td></tr>' +
-		'		<tr><td><input type=radio onclick="i3GEOF.graficointerativo.ativaTipo(this)" value="bar_filled" name="tipoGrafico" style=cursor:pointer > </td><td>barras simples</td></tr>' +
+		'		<tr><td><input type=radio onclick="i3GEOF.graficointerativo.ativaTipo(this)" value="bar_filled" name="tipoGrafico" style="border:0px solid white;cursor:pointer" > </td><td>barras simples</td></tr>' +
 		'		<tr><td>&nbsp;</td></tr>' +
-		'		<tr><td><input type=radio onclick="i3GEOF.graficointerativo.ativaTipo(this)" value="bar_glass" name="tipoGrafico" style=cursor:pointer > </td><td>barras 2 cores</td></tr>' +
+		'		<tr><td><input type=radio onclick="i3GEOF.graficointerativo.ativaTipo(this)" value="bar_glass" name="tipoGrafico" style="border:0px solid white;cursor:pointer" > </td><td>barras 2 cores</td></tr>' +
 		'		<tr><td>&nbsp;</td></tr>' +
-		'		<tr><td><input type=radio onclick="i3GEOF.graficointerativo.ativaTipo(this)" value="bar_3d" name="tipoGrafico" style=cursor:pointer > </td><td>barras 3d</td></tr>' +
+		'		<tr><td><input type=radio onclick="i3GEOF.graficointerativo.ativaTipo(this)" value="bar_3d" name="tipoGrafico" style="border:0px solid white;cursor:pointer" > </td><td>barras 3d</td></tr>' +
 		'		<tr><td>&nbsp;</td></tr>' +
 
-		'		<tr><td><input type=radio onclick="i3GEOF.graficointerativo.ativaTipo(this)" value="bar_sketch" name="tipoGrafico" style=cursor:pointer > </td><td>barras rascunho</td></tr>' +
+		'		<tr><td><input type=radio onclick="i3GEOF.graficointerativo.ativaTipo(this)" value="bar_sketch" name="tipoGrafico" style="border:0px solid white;cursor:pointer" > </td><td>barras rascunho</td></tr>' +
 		'		<tr><td>&nbsp;</td></tr>' +
-		'		<tr><td><input type=radio onclick="i3GEOF.graficointerativo.ativaTipo(this)" value="bar_cylinder" name="tipoGrafico" style=cursor:pointer > </td><td>barras cilindro</td></tr>' +
+		'		<tr><td><input type=radio onclick="i3GEOF.graficointerativo.ativaTipo(this)" value="bar_cylinder" name="tipoGrafico" style="border:0px solid white;cursor:pointer" > </td><td>barras cilindro</td></tr>' +
 		'		<tr><td>&nbsp;</td></tr>' +
-		'		<tr><td><input type=radio onclick="i3GEOF.graficointerativo.ativaTipo(this)" value="bar_cylinder_outline" name="tipoGrafico" style=cursor:pointer > </td><td>barras cilindro com contorno</td></tr>' +
+		'		<tr><td><input type=radio onclick="i3GEOF.graficointerativo.ativaTipo(this)" value="bar_cylinder_outline" name="tipoGrafico" style="border:0px solid white;cursor:pointer" > </td><td>barras cilindro com contorno</td></tr>' +
 		'		<tr><td>&nbsp;</td></tr>' +
-		'		<tr><td><input type=radio onclick="i3GEOF.graficointerativo.ativaTipo(this)" value="bar_round_glass" name="tipoGrafico" style=cursor:pointer > </td><td>barras cúpula</td></tr>' +
+		'		<tr><td><input type=radio onclick="i3GEOF.graficointerativo.ativaTipo(this)" value="bar_round_glass" name="tipoGrafico" style="border:0px solid white;cursor:pointer" > </td><td>barras cúpula</td></tr>' +
 		'		<tr><td>&nbsp;</td></tr>' +
-		'		<tr><td><input type=radio onclick="i3GEOF.graficointerativo.ativaTipo(this)" value="bar_round" name="tipoGrafico" style=cursor:pointer > </td><td>barras pílula</td></tr>' +
+		'		<tr><td><input type=radio onclick="i3GEOF.graficointerativo.ativaTipo(this)" value="bar_round" name="tipoGrafico" style="border:0px solid white;cursor:pointer" > </td><td>barras pílula</td></tr>' +
 		'		<tr><td>&nbsp;</td></tr>' +
-		'		<tr><td><input type=radio onclick="i3GEOF.graficointerativo.ativaTipo(this)" value="hbar" name="tipoGrafico" style=cursor:pointer > </td><td>barras horizontais</td></tr>' +
+		'		<tr><td><input type=radio onclick="i3GEOF.graficointerativo.ativaTipo(this)" value="hbar" name="tipoGrafico" style="border:0px solid white;cursor:pointer" > </td><td>barras horizontais</td></tr>' +
 
 		'	</table>' +
 		'</div> ' +
