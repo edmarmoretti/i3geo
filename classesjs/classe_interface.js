@@ -1373,6 +1373,21 @@ i3GEO.Interface = {
 			}
 		},
 		retornaDivLayer: function(nomeLayer){
+			var i = false,
+				divmapa = $i("googlemapsdiv"),
+				divlayer = divmapa.firstChild.firstChild.firstChild.getElementsByTagName("div"),
+				divs,
+				divimg,
+				j,
+				ndivs = divlayer.length;
+			for(j=0;j<ndivs;j++){
+				divimg = divlayer[j].getElementsByTagName("img");
+				if(divimg.length > 0){
+					if(divimg[0].src.search("&layer="+nomeLayer+"&") > 0)
+					{return divimg[0].parentNode.parentNode.parentNode;}
+				}
+			}
+			/*
 			try{
 				i3GeoMap.overlayMapTypes.forEach(
 					//não use ===
@@ -1388,17 +1403,23 @@ i3GEO.Interface = {
 							divlayer = divlayer.firstChild;
 							divlayer = divlayer.firstChild;
 							divlayer = divlayer.firstChild;
-							temp = i3GEO.Interface.googlemaps.retornaIndiceLayer(nomeLayer)
-							i = divlayer.childNodes[temp];
-							return i;
+							divlayer = divlayer.getElementsByTagName("img");
+							if(divlayer.length > 0){
+								if(divlayer[0].src.search("&layer="+nomeLayer) > 0)
+								{return divlayer.parentNode.parentNode.parentNode.parentNode;}
+							}
+							//temp = i3GEO.Interface.googlemaps.retornaIndiceLayer(nomeLayer)
+							//i = divlayer.childNodes[temp];
+							
 						}
 					}
 				);
-				return i;
+				return false;
 			}
 			catch(e){
 				return false;
 			}
+			*/
 		},
 		ligaDesliga:function(obj){
 			var indice = i3GEO.Interface.googlemaps.retornaIndiceLayer(obj.value),
@@ -1619,7 +1640,7 @@ i3GEO.Interface = {
 			}
 			i3GEO.Interface.googlemaps.ARVORE = new YAHOO.widget.TreeView("arvoreCamadasKml");
 			root = i3GEO.Interface.googlemaps.ARVORE.getRoot();
-			titulo = "<table><tr><td><b>Google Maps</b></td></tr></table>";
+			titulo = "<table><tr><td><b>Kml</b></td></tr></table>";
 			d = {html:titulo,idkml:"raiz"};
 			node = new YAHOO.widget.HTMLNode(d, root, true,true);
 			node.enableHighlight = false;
