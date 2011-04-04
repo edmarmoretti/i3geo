@@ -269,12 +269,12 @@ i3GEO.analise = {
 			if (!$i("mostradistancia")){
 				novoel = document.createElement("div");
 				novoel.id = "mostradistancia";
-				ins = '<div class="hd" >&nbsp;Dist&acirc;ncia aproximada <a class=ajuda_usuario target=_blank href="'+i3GEO.configura.locaplic+'/ajuda_usuario.php?idcategoria=6&idajuda=50" >&nbsp;&nbsp;&nbsp;</a></div>' +
+				ins = '<div class="hd" style="font-size:11px">&nbsp;Dist&acirc;ncia aproximada <a class=ajuda_usuario target=_blank href="'+i3GEO.configura.locaplic+'/ajuda_usuario.php?idcategoria=6&idajuda=50" >&nbsp;&nbsp;&nbsp;</a></div>' +
 				'<div class="bd" style="text-align:left;padding:3px;" >' +
 				'<div style="text-align:left;padding:3px;" id="mostradistancia_calculo" ></div>' +
 				'<div style="text-align:left;font-size:10px" >' +
 				'<span style="color:navy;cursor:pointer;text-align:left;" >' +
-				'<table><tr><td><input style="cursor:pointer" type="checkbox" id="pararraios" checked /></td><td>Raios</td><td>&nbsp;</td>' +
+				'<table class=lista7 ><tr><td><input style="cursor:pointer" type="checkbox" id="pararraios" checked /></td><td>Raios</td><td>&nbsp;</td>' +
 				'<td>' +
 				'<input style="cursor:pointer" type="checkbox" id="parartextos" checked />' +
 				'</td><td>Textos<td>' +
@@ -291,7 +291,7 @@ i3GEO.analise = {
 				i3GEO.util.defineValor("mostradistancia_calculo","innerHTML","");
 			}
 			YAHOO.namespace("janelaDocamede.xp");
-			YAHOO.janelaDocamede.xp.panel = new YAHOO.widget.Panel("mostradistancia", {width:300,fixedcenter: false, constraintoviewport: true, underlay:"none", close:true, visible:true, draggable:true, modal:false } );
+			YAHOO.janelaDocamede.xp.panel = new YAHOO.widget.Panel("mostradistancia", {width:330,fixedcenter: false, constraintoviewport: true, underlay:"none", close:true, visible:true, draggable:true, modal:false } );
 			YAHOO.janelaDocamede.xp.panel.render();
 			imagemxy = i3GEO.util.pegaPosicaoObjeto($i(i3GEO.Interface.IDCORPO));
 			YAHOO.janelaDocamede.xp.panel.moveTo(imagemxy[0]+150,imagemxy[1]);
@@ -438,7 +438,7 @@ i3GEO.analise = {
 							texto += "<br>Método cálculo de distâncias: "+calculo.metododistancia;
 							mostra.innerHTML = texto;
 						}
-						if(i3GEO.Interface.ATUAL !== "googleearth")
+						if(i3GEO.Interface.ATUAL !== "googleearth" && navn)
 						{i3GEO.desenho.aplica("resizeLinha",pontosdistobj.linhas[n-1],n);}
 					}
 				}

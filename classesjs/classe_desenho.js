@@ -243,15 +243,6 @@ i3GEO.desenho = {
 				dx = objposicaocursor.imgx - (i3GEO.parametros.w/2);
 				i3GEO.desenho.richdraw.renderer.create(i3GEO.desenho.richdraw.mode, i3GEO.desenho.richdraw.fillColor, i3GEO.desenho.richdraw.lineColor, i3GEO.desenho.richdraw.lineWidth, (pontosdistobj.ximg[n-1])-(i3GEO.parametros.w/2),pontosdistobj.yimg[n-1],dx,dy);				
 				desenhoUltimaLinha = r.childNodes[$i(i3GEO.desenho.richdraw.container.id).childNodes.length - 1];
-				
-				/*
-				dy = pontosdistobj.yimg[n];//objposicaocursor.imgy;
-				dx = pontosdistobj.ximg[n];//objposicaocursor.imgx - (i3GEO.parametros.w/2);
-				ix = (pontosdistobj.ximg[n-1])-(i3GEO.parametros.w/2);
-				iy = pontosdistobj.yimg[n-1];
-				i3GEO.desenho.richdraw.renderer.create(i3GEO.desenho.richdraw.mode, i3GEO.desenho.richdraw.fillColor, i3GEO.desenho.richdraw.lineColor, i3GEO.desenho.richdraw.lineWidth, ix,iy,dx,dy);
-				desenhoUltimaLinha = r.childNodes[$i(i3GEO.desenho.richdraw.container.id).childNodes.length - 1];
-				*/
 			}
 			if((tipo==="resizePoligono") && navm){
 				try{

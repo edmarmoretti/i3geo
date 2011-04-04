@@ -1,0 +1,35 @@
+MAP
+  FONTSET "c:\ms4w\apache\htdocs\i3geo/symbols/fontes.txt"
+  SYMBOLSET "c:\ms4w\apache\htdocs\i3geo/symbols/simbolos.sym"
+  LAYER
+    #http://ams.xoomcode.com/geoserver/wms?LAYERS=sf%3Abugsites&STYLES=&FORMAT=image%2Fpng&VALUE_COLUMN=cat&SIMPLIFY_METHOD=3&SIMPLIFY_SIZE=90&INTERVALS%5B%5D=10%2C20%2C45%2C70%2C100&INTERVALS_COLORS%5B%5D=0xffffffcc%2C0xffcc%2C0xff00cc%2C0xffff00cc%2C0xff0000cc&RENDERER_TYPE=2&INTERPOLATION_STRATEGY=2&RADIUS=40&SERVICE=AMS&VERSION=1.1.1&REQUEST=GetMap&EXCEPTIONS=application%2Fvnd.ogc.se_inimage&SRS=EPSG%3A26713&BBOX=582635.72005652,4911438.0767765,616050.17867886,4923193.6965477&WIDTH=938&HEIGHT=330
+	#CONNECTION "http://ams.xoomcode.com/geoserver/wms?VALUE_COLUMN=cat&SIMPLIFY_METHOD=3&SIMPLIFY_SIZE=90&INTERVALS%5B%5D=10%2C20%2C45%2C70%2C100&INTERVALS_COLORS%5B%5D=0xffffffcc%2C0xffcc%2C0xff00cc%2C0xffff00cc%2C0xff0000cc&RENDERER_TYPE=2&INTERPOLATION_STRATEGY=2&RADIUS=40&SERVICE=AMS"
+    CONNECTION "http://localhost:8080/geoserver/wms?SERVICE=AMS&VERSION=1.1.1&REQUEST=GetMap&SRS=EPSG:4326&FORMAT=image/png&EXCEPTIONS=application/vnd.ogc.se_inimage&TILED=true&TRANSPARENT=FALSE&VALUE_COLUMN=value&SIMPLIFY_METHOD=1&SIMPLIFY_SIZE=400&INTERVALS[]=10,20,45,70,100&INTERVALS_COLORS[]=0xffffff00,0xffb2,0xff00b2,0xffff00b2,0xff0000b2&RENDERER_TYPE=2&INTERPOLATION_STRATEGY=2&RADIUS=32"
+	CONNECTIONTYPE WMS
+    METADATA
+      "wms_srs"	"EPSG:4326"
+      "tipooriginal"	""
+      "wms_exceptions_format"	"application/vnd.ogc.se_xml"
+      "CLASSE"	"SIM"
+      "wfs"	"nao"
+      "wms_force_separate_request"	"1"
+      "TEXTO"	"NAO"
+      #"legendawms"	"http://localhost:8080/geoserver/wms&service=wms&request=getlegendgraphic&version=1.1.1&service=wms&layer=i3geo:locali&format=image/png"
+      "formatosinfo"	"text/plain,application/vnd.ogc.gml,text/html"
+      "wms_name"	"i3geo:locali"
+      "nomeoriginal"	"i3geo:locali"
+      "wms_format"	"image/png"
+      "wms_formatlist"	"image/png,application/atom xml,application/atom xml,application/openlayers,application/pdf,application/rss xml,application/rss xml,application/vnd.google-earth.kml,application/vnd.google-earth.kml xml,application/vnd.google-earth.kml xml,application/vnd.google-earth.kmz,application/vnd.google-earth.kmz xml,application/vnd.google-earth.kmz xml,atom,image/geotiff,image/geotiff8,image/gif,image/jpeg,image/png8,image/svg,image/svg xml,image/svg xml,image/tiff,image/tiff8,kml,kmz,openlayers,rss"
+      #"wms_connectiontimeout"	"30"
+      "tema"	"i3geo:locali"
+      "wms_server_version"	"1.1.1"
+      "wms_style"	""
+    END
+    NAME "acidmap"
+    OFFSITE 255 255 255
+    STATUS OFF
+    TYPE RASTER
+    UNITS METERS
+  END
+
+END
