@@ -718,7 +718,7 @@ i3GEO.arvoreDeTemas = {
 
 	objOpcoes - {Object} (opcional) Objeto com as opções necessárias para criação dos ícones com as opções adicionais de adição de temas
 
-	tipoBotao - {String} (opcional) checkbox|radio tipo de botão que será mostrado para o usuário escolher o tema
+	tipoBotao - {String} (opcional) checkbox|radio|download tipo de botão que será mostrado para o usuário escolher o tema
 	*/
 	cria: function(g_sid,g_locaplic,idhtml,funcaoTema,objOpcoes,tipoBotao) {
 		if(typeof(console) !== 'undefined'){console.info("i3GEO.arvoreDeTemas.cria()");}
@@ -1212,7 +1212,11 @@ i3GEO.arvoreDeTemas = {
 			clique;
 		if(navm)
 		{estilo = "padding-top:1px;";}
-		html = "<td style='"+estilo+"'><span><input style='width:12px;height:12px;cursor:pointer;border:solid 0 white;' ";
+		html = "<td style='"+estilo+"'><span>";
+		if(i3GEO.arvoreDeTemas.TIPOBOTAO !== "download")
+		{html += "<input style='width:12px;height:12px;cursor:pointer;border:solid 0 white;' ";}
+		else
+		{html += "<img src='"+$im("down1.gif")+"'";}
 		if(i3GEO.arvoreDeTemas.ATIVATEMA !== "")
 		{clique = "onclick=\""+i3GEO.arvoreDeTemas.ATIVATEMA+"\"";}
 		else{
@@ -1221,7 +1225,12 @@ i3GEO.arvoreDeTemas = {
 			else
 			{clique = "onclick='i3GEO.arvoreDeTemas.adicionaTemas([\""+tema.tid+"\"])'";}
 		}
-		html += clique + " type='"+i3GEO.arvoreDeTemas.TIPOBOTAO+"' value='"+tema.tid+"' /></td><td onmouseout='javascript:this.style.color=\""+cor+"\";' onmouseover='javascript:this.style.color=\"blue\";' style='cursor:pointer;font-size:11px;text-align:left;color:"+cor+";padding-left:0px;' "+clique+">";
+		html += clique;
+		if(i3GEO.arvoreDeTemas.TIPOBOTAO !== "download")
+		{html += " type='"+i3GEO.arvoreDeTemas.TIPOBOTAO+"' value='"+tema.tid+"' />";}
+		else
+		{html += " /> ";}
+		html += "</td><td onmouseout='javascript:this.style.color=\""+cor+"\";' onmouseover='javascript:this.style.color=\"blue\";' style='cursor:pointer;font-size:11px;text-align:left;color:"+cor+";padding-left:0px;' "+clique+">";
 		html += tema.nome;
 		html += "</td></span>";
 		return(html);
