@@ -106,7 +106,8 @@ function inicializa(){
 		}
    	});
 	GEvent.addListener(map, "mousemove", function(ponto) {
-		var teladms,tela;
+		var teladms,tela,temp,
+			mapexten = window.parent.i3GEO.parametros.mapexten;
 		teladms = window.parent.i3GEO.calculo.dd2dms(ponto.x,ponto.y);
 		//tela = map.getProjection().fromLatLngToPixel(ponto);
 		window.parent.objposicaocursor = {
@@ -122,12 +123,15 @@ function inicializa(){
 		window.parent.i3GEO.eventos.mousemoveMapa();
 		if(window.parent.i3GEO.Interface.ATUAL === "googleearth")
 		{return;}
-	 	xy = window.parent.i3GEO.calculo.dd2tela(ponto.x,ponto.y,window.parent.document.getElementById(window.parent.i3GEO.Interface.IDMAPA),window.parent.i3GEO.parametros.mapexten,window.parent.i3GEO.parametros.pixelsize);
-		box.style.display = "block";
-		box.style.width = "5px";
-		box.style.height = "5px";
-		box.style.top = parseInt(xy[1],10)+"px";
-		box.style.left = parseInt(xy[0],10)+"px";		
+	 	temp = mapexten.split(" ");
+		if(ponto.x < temp[2] && ponto.y < temp[3]){
+			xy = window.parent.i3GEO.calculo.dd2tela(ponto.x,ponto.y,window.parent.document.getElementById(window.parent.i3GEO.Interface.IDMAPA),mapexten,window.parent.i3GEO.parametros.pixelsize);
+			box.style.display = "block";
+			box.style.width = "5px";
+			box.style.height = "5px";
+			box.style.top = (parseInt(xy[1],10) + 2.5) +"px";
+			box.style.left = (parseInt(xy[0],10) - 2.5) +"px";
+		}
 	});
 	function botaoI3geo() {}
     botaoI3geo.prototype = new GControl();
@@ -208,7 +212,7 @@ function ondegoogle()
 	var h = xyMin[1]-xyMax[1]
 	box.style.display = "block"
 	box.style.width = w
-	box.style.height = h
+	box.style.height = h+3
 	box.style.top = xyMax[1]+"px"
 	box.style.left = xyMin[0]+"px"
 	box.style.display="block"

@@ -220,16 +220,16 @@ i3GEOF.metar = {
 	mostraxy: function(x,y){
 		if(i3GEO.Interface.ATUAL === "googleearth")
 		{return;}
-		i3GEO.util.criaBox("boxpin");
+		i3GEO.util.criaPin("pinmetar",i3GEO.configura.locaplic+'/imagens/google/metar.png');
 		xy = i3GEO.calculo.dd2tela(x*1,y*1,$i(i3GEO.Interface.IDCORPO),i3GEO.parametros.mapexten,i3GEO.parametros.pixelsize);
-		var box = $i("boxpin");
+		var box = $i("pinmetar");
 		box.style.display = "block";
-		box.style.width = "5px";
-		box.style.height = "5px";
-		box.style.top = parseInt(xy[1],10)-5+"px";
-		box.style.left = parseInt(xy[0],10)-5+"px";
+		box.style.width = "27px";
+		box.style.height = "27px";
+		box.style.top = parseInt(xy[1],10)-27+"px";
+		box.style.left = parseInt(xy[0],10)-13+"px";
 		box.style.position = "absolute";
-		box.style.border = "solid 2px red"
+		box.style.border = "solid 0px red"
 		box.style.zIndex = 5000
 	}
 };

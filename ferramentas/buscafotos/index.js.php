@@ -179,7 +179,7 @@ i3GEOF.buscaFotos = {
 	*/
 	ativaFoco: function(){
 		g_operacao = "navega";
-		i3GEO.util.criaPin();
+		i3GEO.util.criaPin("pinfoto",i3GEO.configura.locaplic+'/imagens/google/foto.png');
 		if(!$i("i3GEOF.buscaFotos_c"))
 		{return;}
 		var i = $i("i3GEOF.buscaFotos_c").style;
@@ -264,8 +264,8 @@ i3GEOF.buscaFotos = {
 	Esconde a imagem de localização da foto no mapa
 	*/
 	escondexy: function(){
-		if($i("boxpin")){
-			var box = $i("boxpin");
+		if($i("pinfoto")){
+			var box = $i("pinfoto");
 			box.style.display = "none";
 			box.style.top = "0px";
 			box.style.left = "0px";
@@ -281,12 +281,12 @@ i3GEOF.buscaFotos = {
 		{return;}
 		xy = xy.split(",");
 	 	xy = i3GEO.calculo.dd2tela(xy[1]*1,xy[0]*1,$i(i3GEO.Interface.IDMAPA),i3GEO.parametros.mapexten,i3GEO.parametros.pixelsize);
-		var box = $i("boxpin");
+		var box = $i("pinfoto");
 		box.style.display = "block";
-		box.style.width = "21px";
-		box.style.height = "25px";
-		box.style.top = parseInt(xy[1],10)+"px";
-		box.style.left = parseInt(xy[0],10)+"px";
+		box.style.width = "27px";
+		box.style.height = "27px";
+		box.style.top = parseInt(xy[1],10) - 27 + "px";
+		box.style.left = parseInt(xy[0],10) - 13 +"px";
 	},
 	/*
 	Function: listafotospanoramio

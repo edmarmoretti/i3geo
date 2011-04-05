@@ -250,6 +250,8 @@ i3GEO.janela = {
 			classe = "hd";
 			i3GEO.janela.TRANSICAOSUAVE = false;
 		}
+		if(navm && i3GEO.Interface.ATUAL === "googleearth")
+		{funcaoMinimiza = null;}
 		wlargurA = parseInt(wlargura,10)+2+"px";
 		if($i(id))
 		{YAHOO.janelaDoca.xp.panel.destroy();}

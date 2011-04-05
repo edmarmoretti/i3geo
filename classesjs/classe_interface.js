@@ -2037,7 +2037,7 @@ i3GEO.Interface = {
 				},
 				janela = i3GEO.janela.cria(
 					"230px",
-					"100px",
+					"110px",
 					"",
 					"",
 					"",
