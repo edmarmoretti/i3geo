@@ -126,8 +126,8 @@ class gvsig2mapfile{
 			$classe["size"] = $this->getValue($path,"size",$c);
 			$classe["outline"] = $this->getValue($path,"outline",$c);
 			$classe["markerStyle"] = $this->getValue($path,"markerStyle",$c);
-			$classe["hasFill"] = $this->getValue($path1,"hasFill",$c);
-			$classe["hasOutline"] = $this->getValue($path1,"hasOutline",$c);
+			$classe["hasFill"] = $this->getValue($path,"hasFill",$c);
+			$classe["hasOutline"] = $this->getValue($path,"hasOutline",$c);
 			$classe["exp"] = false;
 			if($classe["hasOutline"] == "true"){
 				$classe["outline"] = $this->getValue($path."/tag:xml-tag","color");
@@ -154,7 +154,7 @@ class gvsig2mapfile{
 		return $objMap;
 	}
 	function data2layer($oLayer,$dataLayer){
-		$oLayer->set("name",nomeRandomico());
+		$oLayer->set("name",$this->nomeRandomico());
 		$oLayer->set("data",$dataLayer["file"]);
 		$oLayer->set("status",MS_DEFAULT);
 		if($dataLayer["visible"] == "false")
@@ -191,6 +191,15 @@ class gvsig2mapfile{
 			}
 		}
 		return $return;
-	} 	
+	}
+	function nomeRandomico($n=10)
+	{
+		$nomes = "";
+		$a = 'azertyuiopqsdfghjklmwxcvbnABCDEFGHIJKLMNOPQRSTUVWXYZ';
+		$max = 51;
+		for($i=0; $i < $n; ++$i)
+		{$nomes .= $a{mt_rand(0, $max)};}
+		return $nomes;
+	}	
 }
 ?>
