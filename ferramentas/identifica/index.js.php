@@ -165,7 +165,7 @@ i3GEOF.identifica = {
 				i3GEO.guias.mostraGuiaFerramenta("i3GEOidentificaguia5","i3GEOidentificaguia");
 				var ins = "",retorna;
 				i3GEO.coordenadas.formato = "lista";
-				i3GEO.coordenadas.mostraCoordenadas(false,"i3GEOidentificacoord",i3GEOF.identifica.x,i3GEOF.identifica.y);
+				i3GEO.coordenadas.mostraCoordenadas(false,"i3GEOidentificacoordtexto",i3GEOF.identifica.x,i3GEOF.identifica.y);
 				$i("i3GEOidentificacoordtexto").innerHTML = i3GEO.coordenadas.MODOTEXTO+"</span>";
 			};
 			
