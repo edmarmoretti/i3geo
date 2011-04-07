@@ -1019,7 +1019,7 @@ Projeto gvsig
 */
 function incluiMapaGvsig($gvsiggvp,$gvsigview){
 	global $mapn,$locaplic;
-	include_once($locaplic."/pacotes/gvsig/class.gvsig2mapfile.php");
+	include_once($locaplic."/pacotes/gvsig/gvsig2mapfile/class.gvsig2mapfile.php");
 	$gm = new gvsig2mapfile($gvsiggvp);
 	$dataView = $gm->getViewData($gvsigview);
 	//var_dump($dataView);

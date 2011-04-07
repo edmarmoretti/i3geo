@@ -17,7 +17,9 @@
 <form id=i3GEOupload target="i3GEOuploadiframe" action="upload.php" method="post" ENCTYPE="multipart/form-data">
 	<p class="paragrafo" >Arquivo de projeto gvSig (.gvp). Será utilizada a primeira "view" existente no projeto.<br>
 	A conversão ainda é experimental, caso ocorra algum erro, envie o seu projeto para o e-mail: edmar.moretti@gmail.com<br>
-	Não há garantias de sigilo em relação ao arquivo enviado ao servidor. Evite utilizar dados restritos, como endereços e senhas.<br><br>
+	Não há garantias de sigilo em relação ao arquivo enviado ao servidor. Evite utilizar dados restritos, como endereços e senhas.<br>
+	No caso de camadas baseadas em conexões com banco de dados, a senha colocada em CONNECTION é igual ao nome do usuário, uma vez
+	que não é armazenada no arquivo .gvp<br><br>
 	<input type="file" size=42 name="i3GEOuploadfile" style="top:0px;left:0px;cursor:pointer;"></p>
 	<input type="submit" value="Upload" size=12 name="submit">
 	<input type="hidden" name="MAX_FILE_SIZE" value="100000">

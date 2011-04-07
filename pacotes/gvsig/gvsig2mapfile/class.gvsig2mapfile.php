@@ -66,7 +66,25 @@ class gvsig2mapfile{
 		$result = $this->xml->xpath($path1);
 		if($result != FALSE)
 		{$classes = $this->SingleSymbolLegend($result,$path1);}
-		
+		//
+		//obtem a conexão
+		//a senha não pode ser obtida, então, é usado o mesmo nome de usuário em seu lugar. No i3Geo deve-se prever isso na variável de substituição de string.
+		$driverName = $this->getValue($path,"driverName");
+		if($driverName == "gvSIG shp driver"){
+			$data = $this->getValue($path,"file");
+			$connection = "";
+			$connectiontype = "";
+		}
+		if($driverName == "PostGIS JDBC Driver"){
+			$path1 = $path."/tag:xml-tag/tag:property[@value='org.postgresql.Driver']/parent::*";
+			$tabela = "";
+			if($this->getValue($path1,"schema") != "")
+			{$tabela = $this->getValue($path1,"schema").".";}
+			$tabela .= $this->getValue($path1,"tablename");
+			$data = $this->getValue($path1,"THE_GEOM")." FROM (select ".$this->getValue($path1,"THE_GEOM").",".$this->getValue($path1,"fields")." FROM ".$tabela.") as foo USING UNIQUE ".$this->getValue($path1,"FID")." USING SRID=".$this->getValue($path1,"SRID");
+			$connection = "user=".$this->getValue($path1,"username")." password=".$this->getValue($path1,"username")." dbname=".$this->getValue($path1,"dbName")." host=".$this->getValue($path1,"host")." port=".$this->getValue($path1,"port");
+			$connectiontype = MS_POSTGIS;
+		}
 		return array(
 			"minScale"=>$this->getValue($path,"minScale"),
 			"maxScale"=>$this->getValue($path,"maxScale"),
@@ -74,7 +92,9 @@ class gvsig2mapfile{
 			"proj"=>$this->getValue($path,"proj"),
 			"transparency"=>$this->getValue($path,"transparency"),
 			"type"=>$this->getValue($path,"type"),
-			"file"=>$this->getValue($path,"file"),
+			"data"=>$data,
+			"connection"=>$connection,
+			"connectiontype"=>$connectiontype,
 			"driverName"=>$this->getValue($path,"driverName"),
 			"isLabeled"=>$this->getValue($path,"isLabeled"),
 			"legenda"=>array(
@@ -155,10 +175,21 @@ class gvsig2mapfile{
 	}
 	function data2layer($oLayer,$dataLayer){
 		$oLayer->set("name",$this->nomeRandomico());
-		$oLayer->set("data",$dataLayer["file"]);
+		$oLayer->set("data",$dataLayer["data"]);
+		if($dataLayer["connectiontype"] != "")
+		{$oLayer->setConnectionType($dataLayer["connectiontype"]);}
+		if($dataLayer["connection"] != "")
+		{$oLayer->set("connection",$dataLayer["connection"]);}		
 		$oLayer->set("status",MS_DEFAULT);
 		if($dataLayer["visible"] == "false")
 		{$oLayer->set("status",MS_OFF);}
+		$opacidade = ($dataLayer["transparency"] * 100) / 255;
+		$oLayer->set("opacity",$opacidade);
+		if($dataLayer["minScale"] > 0)
+		{$oLayer->set("minscaledenom",$dataLayer["minScale"]);}
+		if($dataLayer["maxScale"] > 0)
+		{$oLayer->set("maxscaledenom",$dataLayer["maxScale"]);}
+		
 		$tipo = $dataLayer["legenda"]["classes"][0]["className"];
 		$oLayer->set("type",1);
 		if($tipo == "com.iver.cit.gvsig.fmap.core.symbols.SimpleMarkerSymbol")
@@ -172,7 +203,10 @@ class gvsig2mapfile{
 				$estilo->set("symbolname","ponto");
 			}
 			$ncor = explode(",",$data["color"]);
-			$cor = $estilo->color;
+			if($data["hasFill"] == "true")
+			{$cor = $estilo->color;}
+			else
+			{$cor = $estilo->outlinecolor;}
 			$cor->setrgb($ncor[0],$ncor[1],$ncor[2]);
 			if($data["size"] != false)
 			{$estilo->set("size",$data["size"]);}

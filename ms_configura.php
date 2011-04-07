@@ -301,7 +301,10 @@ if (strtoupper(substr(PHP_OS, 0, 3) == 'WIN'))
 	Tipo:
 	{array ou  string}
 	*/
-	$postgis_mapa = array("teste"=>"user=postgres password=postgres dbname=pgutf8 host=localhost port=5432 options='-c client_encoding=LATIN1'"); //"user=geodados password=geodados dbname=geodados host=10.1.1.36 port=5432";
+	$postgis_mapa = array(
+		"teste"=>"user=postgres password=postgres dbname=pgutf8 host=localhost port=5432 options='-c client_encoding=LATIN1'",
+		"postgres"=>"user=postgres password=postgres dbname=postgis host=localhost port=5432'",
+	); //"user=geodados password=geodados dbname=geodados host=10.1.1.36 port=5432";
 	/*
 	Variable: utilizacgi
 	
