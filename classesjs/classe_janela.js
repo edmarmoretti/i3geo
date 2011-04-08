@@ -250,8 +250,8 @@ i3GEO.janela = {
 			classe = "hd";
 			i3GEO.janela.TRANSICAOSUAVE = false;
 		}
-		if(navm && i3GEO.Interface.ATUAL === "googleearth")
-		{funcaoMinimiza = null;}
+		//if((navm) && i3GEO.Interface.ATUAL === "googleearth")
+		//{funcaoMinimiza = null;}
 		wlargurA = parseInt(wlargura,10)+2+"px";
 		if($i(id))
 		{YAHOO.janelaDoca.xp.panel.destroy();}
@@ -351,10 +351,14 @@ i3GEO.janela = {
 	minimiza: function(id){
 		var temp = $i(id+"_corpo"),n,i;
 		if(temp){
-			if(temp.style.display === "block")
-			{temp.style.display = "none";}
-			else
-			{temp.style.display = "block";}
+			if(temp.style.display === "block"){
+				temp.style.display = "none";
+				YAHOO.janelaDoca.xp.manager.find(id).hideIframe;
+			}
+			else{
+				temp.style.display = "block";
+				YAHOO.janelaDoca.xp.manager.find(id).showIframe;
+			}
 		}
 		temp = $i(id+"_resizehandle");
 		if(temp){
@@ -414,6 +418,7 @@ i3GEO.janela = {
 		//remove script tag se houver
 		//
 		iu.removeScriptTag(id+"_script");
+		YAHOO.janelaDoca.xp.manager.remove(YAHOO.janelaDoca.xp.manager.find(id));
 	},
 	/*
 	Function: alteraTamanho
