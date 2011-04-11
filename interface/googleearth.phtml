@@ -152,6 +152,11 @@ i3GEO.barraDeBotoes.INCLUIBOTAO = {
 	inseregrafico: true,
 	v3d: true
 };
+//
+//se for IE não mostra o botão de cálculo de distancias
+//
+if(navm)
+{i3GEO.barraDeBotoes.INCLUIBOTAO.mede = false;}
 i3GEO.barraDeBotoes.BOTAOPADRAO = "";
 i3GEO.barraDeBotoes.AUTO = true
 i3GEO.arvoreDeTemas.TIPOBOTAO = "radio";

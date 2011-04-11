@@ -212,9 +212,11 @@ i3GEO.maparef = {
 			};
 			YAHOO.util.Event.addListener(YAHOO.janelaRef.xp.panel.close, "click", escondeRef);
 			i3GEO.util.insereCookie("i3GEO.configura.mapaRefDisplay","block");
-			if(typeof(atualizaLocalizarxy) === "function"){
-				if($i(i3GEO.coordenadas.PARAMETROS.mostraCoordenadasGEO.idhtml))
-				{YAHOO.util.Event.addListener($i("imagemReferencia"),"mousemove", atualizaLocalizarxy);}
+			if($i("localizarxygeoProjxg")){
+				var temp = function(){
+					i3GEO.coordenadas.atualizaGeo(objposicaocursor.dmsx,objposicaocursor.dmsy,"localizarxygeoProj");
+				};
+				YAHOO.util.Event.addListener($i("imagemReferencia"),"mousemove", temp);
 			}
 		}
 		if(i3GEO.eventos.NAVEGAMAPA.toString().search("i3GEO.maparef.atualiza()") < 0)

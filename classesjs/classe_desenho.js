@@ -161,6 +161,12 @@ i3GEO.desenho = {
 			//para funcionarem sobre o container
 			//
 			i3GEO.eventos.ativa(divgeo);
+			if($i("localizarxygeoProjxg")){
+				var temp = function(){
+					i3GEO.coordenadas.atualizaGeo(objposicaocursor.dmsx,objposicaocursor.dmsy,"localizarxygeoProj");
+				};
+				YAHOO.util.Event.addListener(divgeo,"mousemove", temp);
+			}
 		}
 		catch(men){alert("Erro ao tentar criar container richdraw "+men);}
 	},

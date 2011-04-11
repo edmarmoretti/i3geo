@@ -291,10 +291,14 @@ i3GEO.analise = {
 				i3GEO.util.defineValor("mostradistancia_calculo","innerHTML","");
 			}
 			YAHOO.namespace("janelaDocamede.xp");
-			YAHOO.janelaDocamede.xp.panel = new YAHOO.widget.Panel("mostradistancia", {width:330,fixedcenter: false, constraintoviewport: true, underlay:"none", close:true, visible:true, draggable:true, modal:false } );
+			YAHOO.janelaDocamede.xp.panel = new YAHOO.widget.Panel("mostradistancia", {iframe:true,width:330,fixedcenter: false, constraintoviewport: true, underlay:"none", close:true, visible:true, draggable:true, modal:false } );
 			YAHOO.janelaDocamede.xp.panel.render();
 			imagemxy = i3GEO.util.pegaPosicaoObjeto($i(i3GEO.Interface.IDCORPO));
 			YAHOO.janelaDocamede.xp.panel.moveTo(imagemxy[0]+150,imagemxy[1]);
+			if(navm && i3GEO.Interface.ATUAL === "googleearth" ){
+				YAHOO.janelaDocamede.xp.panel.moveTo(0,0);
+				alert("Essa opção não funciona bem no Internet Explorer");
+			}
 			YAHOO.util.Event.addListener(YAHOO.janelaDocamede.xp.panel.close, "click", i3GEO.analise.medeDistancia.fechaJanela);
 			//
 			//botao que abre a ferramenta de cálculo de perfis.
