@@ -443,8 +443,8 @@ i3GEO.barraDeBotoes = {
 					estilo.borderColor='black';
 					estilo.borderWidth="1px";
 				}
-				else
-				{estilo.border = "0px solid white";}
+				//else
+				//{estilo.border = "0px solid white";}
 				estilo.backgroundColor = cor;
 			}
 		}

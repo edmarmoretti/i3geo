@@ -243,9 +243,11 @@ string - javascript com os parametros
 				{$aplicaextensao = "sim";}
 				$wmsurl = "";
 				$wmsformat = "";
+				$wmssrs = "";
 				if($ct == 7 && strtoupper($oLayer->getmetadata("cache")) != "SIM"){
 					$wmsurl = ($oLayer->connection)."&layers=".($oLayer->getmetadata("wms_name"))."&style=".($oLayer->getmetadata("wms_style"));
 					$wmsformat = $oLayer->getmetadata("wms_format");
+					$wmssrs = $oLayer->getmetadata("wms_srs");
 				}
 				$tiles = "";
 				if($oLayer->labelitem != "")
@@ -276,6 +278,7 @@ string - javascript com os parametros
 					"transitioneffect"=>$transitioneffect,
 					"wmsurl"=>$wmsurl,
 					"wmsformat"=>$wmsformat,
+					"wmssrs"=>$wmssrs,
 					"tiles"=>$tiles
 				);
 			}
