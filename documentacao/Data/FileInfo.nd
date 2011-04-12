@@ -12,10 +12,10 @@ C:\ms4w\Apache\htdocs\i3geo\admin\html\incluimap.html	1290446236	1	Ajuste de map
 C:\ms4w\Apache\htdocs\i3geo\index.htm	1272586010	1	Redirecionador para o ms_criamapa.php com extensão HTM
 C:\ms4w\Apache\htdocs\i3geo\mobile\adicionatema.php	1290446578	1	adicionatema.php
 C:\ms4w\Apache\htdocs\i3geo\ferramentas\conectargeorss\index.js	1292241710	1	Conexão com georss
-C:\ms4w\Apache\htdocs\i3geo\ferramentas\metar\index.js.php	1295486548	1	i3GEOF.metar
+C:\ms4w\Apache\htdocs\i3geo\ferramentas\metar\index.js.php	1302131555	1	i3GEOF.metar
 C:\ms4w\Apache\htdocs\i3geo\ferramentas\scielo\index.js	1276529822	0	Licença
 C:\ms4w\Apache\htdocs\i3geo\ferramentas\wmstime\index.js	1290446602	1	WMS Time
-C:\ms4w\Apache\htdocs\i3geo\datadownload.htm	1300236186	1	datadownload.htm
+C:\ms4w\Apache\htdocs\i3geo\datadownload.htm	1302131556	1	datadownload.htm
 C:\ms4w\Apache\htdocs\i3geo\ferramentas\identifica\twitter.php	1298767454	0	C:\ms4w\Apache\htdocs\i3geo\ferramentas\identifica\twitter.php
 C:\ms4w\Apache\htdocs\i3geo\ferramentas\scielo\funcoes.php	1294948620	0	C:\ms4w\Apache\htdocs\i3geo\ferramentas\scielo\funcoes.php
 C:\ms4w\Apache\htdocs\i3geo\mobile\qrcode.htm	1290446672	1	qrcode.htm
@@ -26,11 +26,11 @@ C:\ms4w\Apache\htdocs\i3geo\ferramentas\gradehex\exemplo.htm	1272076742	0	C:\ms4
 C:\ms4w\Apache\htdocs\i3geo\mobile\identifica.php	1292327788	1	identifica.php
 C:\ms4w\Apache\htdocs\i3geo\aplicmap\legendaseminput.htm	1268057298	0	C:\ms4w\Apache\htdocs\i3geo\aplicmap\legendaseminput.htm
 C:\ms4w\Apache\htdocs\i3geo\wscliente.htm	1292530268	1	wscliente.htm
-C:\ms4w\Apache\htdocs\i3geo\ms_configura.php	1299543262	1	Variáveis de inicialização ms_configura.php
-C:\ms4w\Apache\htdocs\i3geo\ferramentas\tipoimagem\index.js.php	1295369396	1	Opções de filtro de imagem
+C:\ms4w\Apache\htdocs\i3geo\ms_configura.php	1302487276	1	Variáveis de inicialização ms_configura.php
+C:\ms4w\Apache\htdocs\i3geo\ferramentas\tipoimagem\index.js.php	1301016374	1	Opções de filtro de imagem
 C:\ms4w\Apache\htdocs\i3geo\ferramentas\opcoes_tamanho\index.js.php	1299110488	1	Tamanho do mapa
-C:\ms4w\Apache\htdocs\i3geo\classesjs\classe_arvoredecamadas.js	1300236185	1	Árvore de camadas
-C:\ms4w\Apache\htdocs\i3geo\ferramentas\imprimir\geotif.php	1290446576	1	Licença
+C:\ms4w\Apache\htdocs\i3geo\classesjs\classe_arvoredecamadas.js	1301016372	1	Árvore de camadas
+C:\ms4w\Apache\htdocs\i3geo\ferramentas\imprimir\geotif.php	1301369130	1	Licença
 C:\ms4w\Apache\htdocs\i3geo\ferramentas\inseretxt\exemplo.htm	1277383300	0	C:\ms4w\Apache\htdocs\i3geo\ferramentas\inseretxt\exemplo.htm
 C:\ms4w\Apache\htdocs\i3geo\admin\php\identifica.php	1292239206	1	identifica.php
 C:\ms4w\Apache\htdocs\i3geo\ferramentas\googlemaps\index.htm	1251159536	0	C:\ms4w\Apache\htdocs\i3geo\ferramentas\googlemaps\index.htm
@@ -38,7 +38,7 @@ C:\ms4w\Apache\htdocs\i3geo\ferramentas\uploadgpx\index.js.php	1298939494	1	GPX
 C:\ms4w\Apache\htdocs\i3geo\ferramentas\opcoes_escala\index.js.php	1295369394	1	Barra de escala
 C:\ms4w\Apache\htdocs\i3geo\classesphp\classe_imagem.php	1290446572	1	classe_imagem.php
 C:\ms4w\Apache\htdocs\i3geo\ferramentas\sibea\pesquisa.htm	1290446672	1	SIBEA-MMA (JavaScript)
-C:\ms4w\Apache\htdocs\i3geo\ferramentas\outputformat\index.js.php	1295369396	1	Formato de imagem
+C:\ms4w\Apache\htdocs\i3geo\ferramentas\outputformat\index.js.php	1301016374	1	Formato de imagem
 C:\ms4w\Apache\htdocs\i3geo\ferramentas\imprimir\swf.php	1286806938	0	C:\ms4w\Apache\htdocs\i3geo\ferramentas\imprimir\swf.php
 C:\ms4w\Apache\htdocs\i3geo\ferramentas\3d\index.js.php	1299961396	1	3d
 C:\ms4w\Apache\htdocs\i3geo\ferramentas\3d\exemplo.htm	1281497786	0	C:\ms4w\Apache\htdocs\i3geo\ferramentas\3d\exemplo.htm
@@ -57,15 +57,15 @@ C:\ms4w\Apache\htdocs\i3geo\ferramentas\especies\pesquisa.php	1294948712	1	Espéc
 C:\ms4w\Apache\htdocs\i3geo\classesphp\classe_alteraclasse.php	1292979310	1	classe_alteraclasse.php
 C:\ms4w\Apache\htdocs\i3geo\ferramentas\imprimir\propriedades.htm	1292327838	0	C:\ms4w\Apache\htdocs\i3geo\ferramentas\imprimir\propriedades.htm
 C:\ms4w\Apache\htdocs\i3geo\aplicmap\index.html	1289254016	0	Redirecionador para o ms_criamapa.php com extensão HTML
-C:\ms4w\Apache\htdocs\i3geo\ferramentas\busca\index.js.php	1295486546	1	Busca de dados nos atributos de um tema
+C:\ms4w\Apache\htdocs\i3geo\ferramentas\busca\index.js.php	1301016374	1	Busca de dados nos atributos de um tema
 C:\ms4w\Apache\htdocs\i3geo\ferramentas\testeq.html	1189442126	0	C:\ms4w\Apache\htdocs\i3geo\ferramentas\testeq.html
 C:\ms4w\Apache\htdocs\i3geo\ferramentas\imprimir\propriedades.js	1213967378	0	C:\ms4w\Apache\htdocs\i3geo\ferramentas\imprimir\propriedades.js
-C:\ms4w\Apache\htdocs\i3geo\classesjs\i3geo_tudo_compacto45.js.php	1300236185	0	C:\ms4w\Apache\htdocs\i3geo\classesjs\i3geo_tudo_compacto45.js.php
+C:\ms4w\Apache\htdocs\i3geo\classesjs\i3geo_tudo_compacto45.js.php	1302628128	0	C:\ms4w\Apache\htdocs\i3geo\classesjs\i3geo_tudo_compacto45.js.php
 C:\ms4w\Apache\htdocs\i3geo\ferramentas\dissolve\exemplo.htm	1272076718	0	C:\ms4w\Apache\htdocs\i3geo\ferramentas\dissolve\exemplo.htm
 C:\ms4w\Apache\htdocs\i3geo\classesphp\mapa_openlayers.php	1299802155	1	mapa_openlayers.php
 C:\ms4w\Apache\htdocs\i3geo\ferramentas\buffer\exemplo.htm	1272076664	0	C:\ms4w\Apache\htdocs\i3geo\ferramentas\buffer\exemplo.htm
 C:\ms4w\Apache\htdocs\i3geo\classesphp\classe_estatistica.php	1290446572	1	classe_estatistica.php
-C:\ms4w\Apache\htdocs\i3geo\ferramentas\identifica\index.js.php	1299802156	1	Identifica
+C:\ms4w\Apache\htdocs\i3geo\ferramentas\identifica\index.js.php	1302138462	1	Identifica
 C:\ms4w\Apache\htdocs\i3geo\ferramentas\centroide\index.js.php	1295369394	1	Centróide
 C:\ms4w\Apache\htdocs\i3geo\sobearquivo.php	1189442128	0	C:\ms4w\Apache\htdocs\i3geo\sobearquivo.php
 C:\ms4w\Apache\htdocs\i3geo\ferramentas\perfil\index.js.php	1297193850	1	Perfil
@@ -77,7 +77,7 @@ C:\ms4w\Apache\htdocs\i3geo\ogc_iso19115_exemplo.xml	1283350274	0	C:\ms4w\Apache
 C:\ms4w\Apache\htdocs\i3geo\classesphp\classe_shp.php	1290446572	1	classe_shp.php
 C:\ms4w\Apache\htdocs\i3geo\ferramentas\uploaddbf\exemplo.htm	1272076860	0	C:\ms4w\Apache\htdocs\i3geo\ferramentas\uploaddbf\exemplo.htm
 C:\ms4w\Apache\htdocs\i3geo\ferramentas\sibea\pesquisa.php	1294948558	1	SIBEA-MMA (PHP)
-C:\ms4w\Apache\htdocs\i3geo\ferramentas\analisageometrias\index.js.php	1299027683	1	Análise de Geometrias
+C:\ms4w\Apache\htdocs\i3geo\ferramentas\analisageometrias\index.js.php	1301867954	1	Análise de Geometrias
 C:\ms4w\Apache\htdocs\i3geo\mobile\index.html	1265326392	1	index.html
 C:\ms4w\Apache\htdocs\i3geo\ferramentas\graficotema\exemplo.htm	1272076764	0	C:\ms4w\Apache\htdocs\i3geo\ferramentas\graficotema\exemplo.htm
 C:\ms4w\Apache\htdocs\i3geo\admin\js\admin.js	1284575514	0	Admin
@@ -92,10 +92,10 @@ C:\ms4w\Apache\htdocs\i3geo\ferramentas\googlemaps\endereco.php	1292327844	0	C:\
 C:\ms4w\Apache\htdocs\i3geo\ferramentas\inseregrafico\index.js.php	1295486548	1	Insere gráfico interativo
 C:\ms4w\Apache\htdocs\i3geo\ferramentas\toponimia\exemplo.htm	1272076854	0	C:\ms4w\Apache\htdocs\i3geo\ferramentas\toponimia\exemplo.htm
 C:\ms4w\Apache\htdocs\i3geo\ferramentas\tabela\relatorio.php	1289924584	0	C:\ms4w\Apache\htdocs\i3geo\ferramentas\tabela\relatorio.php
-C:\ms4w\Apache\htdocs\i3geo\classesphp\mapa_controle.php	1299543262	1	mapa_controle.php
-C:\ms4w\Apache\htdocs\i3geo\classesjs\classe_ajuda.js	1297784198	1	Ajuda
+C:\ms4w\Apache\htdocs\i3geo\classesphp\mapa_controle.php	1300755256	1	mapa_controle.php
+C:\ms4w\Apache\htdocs\i3geo\classesjs\classe_ajuda.js	1301016372	1	Ajuda
 C:\ms4w\Apache\htdocs\i3geo\ferramentas\tipoimagem\exemplo.htm	1272076846	0	C:\ms4w\Apache\htdocs\i3geo\ferramentas\tipoimagem\exemplo.htm
-C:\ms4w\Apache\htdocs\i3geo\classesphp\classe_atributos.php	1299027682	1	classe_atributos
+C:\ms4w\Apache\htdocs\i3geo\classesphp\classe_atributos.php	1300755256	1	classe_atributos
 C:\ms4w\Apache\htdocs\i3geo\ferramentas\download\index.js.php	1295369394	1	Download de um tema
 C:\ms4w\Apache\htdocs\i3geo\ferramentas\salvamapa\index.js.php	1290446578	1	Salva mapa
 C:\ms4w\Apache\htdocs\i3geo\admin\rsssubgrupos.php	1290446572	1	rsssubgrupos
@@ -103,17 +103,17 @@ C:\ms4w\Apache\htdocs\i3geo\admin\js\ms_configura.js	1290446598	1	ms_configura.j
 C:\ms4w\Apache\htdocs\i3geo\classesjs\zerocal\i3geo.js	1288918018	0	i3geo.js
 C:\ms4w\Apache\htdocs\i3geo\admin\rssgrupos.php	1290446572	1	rssgrupos
 C:\ms4w\Apache\htdocs\i3geo\ferramentas\gradepol\exemplo.htm	1272076746	0	C:\ms4w\Apache\htdocs\i3geo\ferramentas\gradepol\exemplo.htm
-C:\ms4w\Apache\htdocs\i3geo\classesphp\classe_mapa.php	1298943125	1	classe_mapa.php
+C:\ms4w\Apache\htdocs\i3geo\classesphp\classe_mapa.php	1302628129	1	classe_mapa.php
 C:\ms4w\Apache\htdocs\i3geo\ferramentas\wmstime\index.htm	1294942828	0	C:\ms4w\Apache\htdocs\i3geo\ferramentas\wmstime\index.htm
 C:\ms4w\Apache\htdocs\i3geo\ferramentas\opcoes_querymap\index.js.php	1295369396	1	Cor da seleção
 C:\ms4w\Apache\htdocs\i3geo\ferramentas\imprimir\a4l.htm	1251159694	0	C:\ms4w\Apache\htdocs\i3geo\ferramentas\imprimir\a4l.htm
 C:\ms4w\Apache\htdocs\i3geo\classesjs\geradordelinks.js	1300236185	1	Gerador de links
 C:\ms4w\Apache\htdocs\i3geo\admin\js\mapas.js	1290446598	1	mapas.js
-C:\ms4w\Apache\htdocs\i3geo\classesjs\classe_guias.js	1297784174	1	Guias
+C:\ms4w\Apache\htdocs\i3geo\classesjs\classe_guias.js	1301867937	1	Guias
 C:\ms4w\Apache\htdocs\i3geo\admin\xmlkmlrss.php	1290446572	1	xmlkmlrss
 C:\ms4w\Apache\htdocs\i3geo\classesphp\wscliente.php	1292203040	1	wscliente.php
 C:\ms4w\Apache\htdocs\i3geo\mobile\legenda.php	1290446580	1	legenda.php
-C:\ms4w\Apache\htdocs\i3geo\classesphp\mapa_googlemaps.php	1290446574	1	mapa_googlemaps.php
+C:\ms4w\Apache\htdocs\i3geo\classesphp\mapa_googlemaps.php	1300755256	1	mapa_googlemaps.php
 C:\ms4w\Apache\htdocs\i3geo\admin\php\upgradebanco44_45.php	1296577018	1	upgradebanco44_45.php
 C:\ms4w\Apache\htdocs\i3geo\admin\rsstemaskml.php	1290446572	1	rsstemaskml
 C:\ms4w\Apache\htdocs\i3geo\ferramentas\cores.htm	1251159612	0	C:\ms4w\Apache\htdocs\i3geo\ferramentas\cores.htm
@@ -123,16 +123,16 @@ C:\ms4w\Apache\htdocs\i3geo\ferramentas\colourramp\index.php	1292979122	0	C:\ms4
 C:\ms4w\Apache\htdocs\i3geo\ferramentas\upload\exemplo.htm	1272076856	0	C:\ms4w\Apache\htdocs\i3geo\ferramentas\upload\exemplo.htm
 C:\ms4w\Apache\htdocs\i3geo\ferramentas\analisageometrias\exemplo.htm	1272076604	0	C:\ms4w\Apache\htdocs\i3geo\ferramentas\analisageometrias\exemplo.htm
 C:\ms4w\Apache\htdocs\i3geo\ferramentas\planosmanejoflorestal\pesquisa.htm	1277240930	0	C:\ms4w\Apache\htdocs\i3geo\ferramentas\planosmanejoflorestal\pesquisa.htm
-C:\ms4w\Apache\htdocs\i3geo\ferramentas\comentarios\index.php	1295280268	0	C:\ms4w\Apache\htdocs\i3geo\ferramentas\comentarios\index.php
+C:\ms4w\Apache\htdocs\i3geo\ferramentas\comentarios\index.php	1301016374	0	C:\ms4w\Apache\htdocs\i3geo\ferramentas\comentarios\index.php
 C:\ms4w\Apache\htdocs\i3geo\ferramentas\upload\index.js.php	1298939492	1	Upload de arquivo shapefile
 C:\ms4w\Apache\htdocs\i3geo\mobile\localizarxy.php	1290446580	1	localizarxy.php
 C:\ms4w\Apache\htdocs\i3geo\classesjs\classe_idioma.js	1298205882	1	Idioma
-C:\ms4w\Apache\htdocs\i3geo\classesjs\classe_gadgets.js	1298471766	1	Gadgets (objetos marginais do mapa)
+C:\ms4w\Apache\htdocs\i3geo\classesjs\classe_gadgets.js	1301867937	1	Gadgets (objetos marginais do mapa)
 C:\ms4w\Apache\htdocs\i3geo\admin\xmlmenutemas.php	1227564310	0	C:\ms4w\Apache\htdocs\i3geo\admin\xmlmenutemas.php
-C:\ms4w\Apache\htdocs\i3geo\classesjs\classe_arvoredetemas.js	1300236185	1	Árvore de temas
+C:\ms4w\Apache\htdocs\i3geo\classesjs\classe_arvoredetemas.js	1302131419	1	Árvore de temas
 C:\ms4w\Apache\htdocs\i3geo\admin\php\sqlite.php	1290980282	1	sqlite.php
 C:\ms4w\Apache\htdocs\i3geo\ferramentas\googlemaps\exemplo.htm	1272076734	0	C:\ms4w\Apache\htdocs\i3geo\ferramentas\googlemaps\exemplo.htm
-C:\ms4w\Apache\htdocs\i3geo\ms_criamapa.php	1299802157	1	Inicializa o i3Geo via URL ms_criamapa.php
+C:\ms4w\Apache\htdocs\i3geo\ms_criamapa.php	1302487275	1	Inicializa o i3Geo via URL ms_criamapa.php
 C:\ms4w\Apache\htdocs\i3geo\ferramentas\conectarwms\index.htm	1296144376	0	C:\ms4w\Apache\htdocs\i3geo\ferramentas\conectarwms\index.htm
 C:\ms4w\Apache\htdocs\i3geo\classesphp\graficopizza.php	1290446572	1	graficopizza.php
 C:\ms4w\Apache\htdocs\i3geo\ferramentas\salvamapa\exemplo.htm	1272076836	0	C:\ms4w\Apache\htdocs\i3geo\ferramentas\salvamapa\exemplo.htm
@@ -143,22 +143,22 @@ C:\ms4w\Apache\htdocs\i3geo\admin\html\webservices.html	1290446236	1	Web Service
 C:\ms4w\Apache\htdocs\i3geo\admin\xmlsistemas.php	1290446572	1	xmlsistemas
 C:\ms4w\Apache\htdocs\i3geo\classesphp\carrega_ext.php	1290446572	1	carrega_ext.php
 C:\ms4w\Apache\htdocs\i3geo\ferramentas\colorpicker\index.htm	1292976050	0	C:\ms4w\Apache\htdocs\i3geo\ferramentas\colorpicker\index.htm
-C:\ms4w\Apache\htdocs\i3geo\ferramentas\imprimir\svg.php	1290446576	1	Licença
+C:\ms4w\Apache\htdocs\i3geo\ferramentas\imprimir\svg.php	1301369194	1	Licença
 C:\ms4w\Apache\htdocs\i3geo\admin\html\menus.html	1292272758	1	Editor da lista de menus
 C:\ms4w\Apache\htdocs\i3geo\mashups\openlayers.php	1292530008	0	C:\ms4w\Apache\htdocs\i3geo\mashups\openlayers.php
-C:\ms4w\Apache\htdocs\i3geo\classesphp\classe_selecao.php	1294656998	1	classe_selecao.php
+C:\ms4w\Apache\htdocs\i3geo\classesphp\classe_selecao.php	1300755256	1	classe_selecao.php
 C:\ms4w\Apache\htdocs\i3geo\ferramentas\convertemapakml\index.js.php	1298939492	1	Converte um mapa em kml
 C:\ms4w\Apache\htdocs\i3geo\admin\hiperbolica.php	1290446570	1	hiperbolica
-C:\ms4w\Apache\htdocs\i3geo\ferramentas\importarwmc\upload.php	1298767454	0	C:\ms4w\Apache\htdocs\i3geo\ferramentas\importarwmc\upload.php
+C:\ms4w\Apache\htdocs\i3geo\ferramentas\importarwmc\upload.php	1300755249	0	C:\ms4w\Apache\htdocs\i3geo\ferramentas\importarwmc\upload.php
 C:\ms4w\Apache\htdocs\i3geo\admin\js\importar.js	1290446598	1	importar.js
 C:\ms4w\Apache\htdocs\i3geo\classesjs\classe_i3geo.js	1300157908	1	i3Geo
 C:\ms4w\Apache\htdocs\i3geo\ferramentas\carregamapa\upload.php	1283363134	0	C:\ms4w\Apache\htdocs\i3geo\ferramentas\carregamapa\upload.php
 C:\ms4w\Apache\htdocs\i3geo\mobile\mobile.php	1290446580	1	mobile.php
-C:\ms4w\Apache\htdocs\i3geo\classesjs\datadownload.js	1297272232	1	Data download
+C:\ms4w\Apache\htdocs\i3geo\classesjs\datadownload.js	1302131419	1	Data download
 C:\ms4w\Apache\htdocs\i3geo\mobile\index.php	1290446578	1	index.php
-C:\ms4w\Apache\htdocs\i3geo\ferramentas\selecao\index.js.php	1299889460	1	Seleção
+C:\ms4w\Apache\htdocs\i3geo\ferramentas\selecao\index.js.php	1301867956	1	Seleção
 C:\ms4w\Apache\htdocs\i3geo\classesjs\compactajs.php	1297784176	1	Compactador de javascript
-C:\ms4w\Apache\htdocs\i3geo\classesjs\classe_util.js	1298161632	1	Utilitários
+C:\ms4w\Apache\htdocs\i3geo\classesjs\classe_util.js	1301016372	1	Utilitários
 C:\ms4w\Apache\htdocs\i3geo\classesjs\dicionario.js	1298767449	0	C:\ms4w\Apache\htdocs\i3geo\classesjs\dicionario.js
 C:\ms4w\Apache\htdocs\i3geo\ferramentas\template\index.htm	1292327812	0	C:\ms4w\Apache\htdocs\i3geo\ferramentas\template\index.htm
 C:\ms4w\Apache\htdocs\i3geo\admin\xmlmapas.php	1290446572	1	xmlmapas
@@ -166,44 +166,44 @@ C:\ms4w\Apache\htdocs\i3geo\ferramentas\gradepontos\exemplo.htm	1272076752	0	C:\
 C:\ms4w\Apache\htdocs\i3geo\ferramentas\filtro\index.js.php	1290446576	1	Filtra tema
 C:\ms4w\Apache\htdocs\i3geo\ferramentas\toponimia\index.js.php	1290446578	1	Toponímia de um tema
 C:\ms4w\Apache\htdocs\i3geo\ferramentas\buffer\index.js.php	1295369394	1	Buffer
-C:\ms4w\Apache\htdocs\i3geo\ferramentas\confluence\index.js.php	1295486546	1	Confluencias
+C:\ms4w\Apache\htdocs\i3geo\ferramentas\confluence\index.js.php	1302131554	1	Confluencias
 C:\ms4w\Apache\htdocs\i3geo\ferramentas\distanciaptpt\index.js.php	1295369394	1	Distância entre pontos
-C:\ms4w\Apache\htdocs\i3geo\ferramentas\upload\upload.php	1298767453	0	C:\ms4w\Apache\htdocs\i3geo\ferramentas\upload\upload.php
-C:\ms4w\Apache\htdocs\i3geo\ferramentas\gradepol\index.js.php	1295369394	1	Grade de polígonos
+C:\ms4w\Apache\htdocs\i3geo\ferramentas\upload\upload.php	1301867945	0	C:\ms4w\Apache\htdocs\i3geo\ferramentas\upload\upload.php
+C:\ms4w\Apache\htdocs\i3geo\ferramentas\gradepol\index.js.php	1300843376	1	Grade de polígonos
 C:\ms4w\Apache\htdocs\i3geo\classesjs\i3geo.js	1297557706	1	i3geo - carregador de javascripts
 C:\ms4w\Apache\htdocs\i3geo\admin\php\sistemas.php	1290446572	1	sistemas.php
-C:\ms4w\Apache\htdocs\i3geo\ferramentas\cortina\index.js.php	1299199286	1	Cortina
+C:\ms4w\Apache\htdocs\i3geo\ferramentas\cortina\index.js.php	1301016374	1	Cortina
 C:\ms4w\Apache\htdocs\i3geo\ferramentas\editorsql\index.js.php	1290446576	1	Editor de SQL
-C:\ms4w\Apache\htdocs\i3geo\interface\flamingo.htm	1298939469	1	Flamingo
-C:\ms4w\Apache\htdocs\i3geo\classesjs\wscliente.js	1297784188	1	Cliente de web services
-C:\ms4w\Apache\htdocs\i3geo\classesjs\classe_tema.js	1299802154	1	Temas
+C:\ms4w\Apache\htdocs\i3geo\interface\flamingo.htm	1302628129	1	Flamingo
+C:\ms4w\Apache\htdocs\i3geo\classesjs\wscliente.js	1301867937	1	Cliente de web services
+C:\ms4w\Apache\htdocs\i3geo\classesjs\classe_tema.js	1300318474	1	Temas
 C:\ms4w\Apache\htdocs\i3geo\ferramentas\salvamapfile\index.js.php	1295369396	1	Salva as definições de uma camada no arquivo mapfile correspondente
 C:\ms4w\Apache\htdocs\i3geo\admin\php\arvore.php	1290446570	1	arvore.php
 C:\ms4w\Apache\htdocs\i3geo\classesphp\classe_vermultilayer.php	1290446572	1	classe_vermultilayer.php
 C:\ms4w\Apache\htdocs\i3geo\admin\php\criabanco.php	1291056790	1	criabanco.php
-C:\ms4w\Apache\htdocs\i3geo\classesjs\i3geo_tudo_compacto45.js	1300236185	0	C:\ms4w\Apache\htdocs\i3geo\classesjs\i3geo_tudo_compacto45.js
+C:\ms4w\Apache\htdocs\i3geo\classesjs\i3geo_tudo_compacto45.js	1302628128	0	C:\ms4w\Apache\htdocs\i3geo\classesjs\i3geo_tudo_compacto45.js
 C:\ms4w\Apache\htdocs\i3geo\ferramentas\etiqueta\index.js.php	1299802156	1	Etiqueta
 C:\ms4w\Apache\htdocs\i3geo\classesphp\atlas_controle.php	1290446572	1	atlas_controle.php
 C:\ms4w\Apache\htdocs\i3geo\ferramentas\buscafotos\funcoes.php	1248201698	0	C:\ms4w\Apache\htdocs\i3geo\ferramentas\buscafotos\funcoes.php
 C:\ms4w\Apache\htdocs\i3geo\ferramentas\pontoempoligono\exemplo.htm	1272076830	0	C:\ms4w\Apache\htdocs\i3geo\ferramentas\pontoempoligono\exemplo.htm
 C:\ms4w\Apache\htdocs\i3geo\aplicmap\legenda2.htm	1298939491	0	C:\ms4w\Apache\htdocs\i3geo\aplicmap\legenda2.htm
-C:\ms4w\Apache\htdocs\i3geo\classesjs\classe_janela.js	1298118079	1	Janelas
-C:\ms4w\Apache\htdocs\i3geo\ferramentas\graficointerativo\index.js.php	1299199287	1	Gráfico interativo
+C:\ms4w\Apache\htdocs\i3geo\classesjs\classe_janela.js	1302487272	1	Janelas
+C:\ms4w\Apache\htdocs\i3geo\ferramentas\graficointerativo\index.js.php	1301867953	1	Gráfico interativo
 C:\ms4w\Apache\htdocs\i3geo\admin\php\atlas.php	1290446570	1	atlas.php
 C:\ms4w\Apache\htdocs\i3geo\ferramentas\buscarapida\gadget.php	1251159606	0	C:\ms4w\Apache\htdocs\i3geo\ferramentas\buscarapida\gadget.php
 C:\ms4w\Apache\htdocs\i3geo\ferramentas\busca\exemplo.htm	1272076672	0	C:\ms4w\Apache\htdocs\i3geo\ferramentas\busca\exemplo.htm
 C:\ms4w\Apache\htdocs\i3geo\ferramentas\conectarwms\index.js	1296144430	1	Conexão com WMS
-C:\ms4w\Apache\htdocs\i3geo\ferramentas\uploadgpx\upload.php	1298767455	0	C:\ms4w\Apache\htdocs\i3geo\ferramentas\uploadgpx\upload.php
+C:\ms4w\Apache\htdocs\i3geo\ferramentas\uploadgpx\upload.php	1301867955	0	C:\ms4w\Apache\htdocs\i3geo\ferramentas\uploadgpx\upload.php
 C:\ms4w\Apache\htdocs\i3geo\leiame.txt	1261484778	0	C:\ms4w\Apache\htdocs\i3geo\leiame.txt
 C:\ms4w\Apache\htdocs\i3geo\admin\js\grupos.js	1290446598	1	grupos.js
-C:\ms4w\Apache\htdocs\i3geo\classesjs\classe_navega.js	1299959463	1	Navegação sobre o mapa
+C:\ms4w\Apache\htdocs\i3geo\classesjs\classe_navega.js	1301867937	1	Navegação sobre o mapa
 C:\ms4w\Apache\htdocs\i3geo\ferramentas\carregamapa\index.js.php	1298939493	1	Carrega mapa salvo
 C:\ms4w\Apache\htdocs\i3geo\admin\js\menutemas.js	1290035636	0	Menutemas
-C:\ms4w\Apache\htdocs\i3geo\classesjs\classe_mapa.js	1298471766	1	Mapa
+C:\ms4w\Apache\htdocs\i3geo\classesjs\classe_mapa.js	1300755253	1	Mapa
 C:\ms4w\Apache\htdocs\i3geo\admin\js\sistemas.js	1290446598	1	sistemas.js
 C:\ms4w\Apache\htdocs\i3geo\ferramentas\opcoes_autoredesenha\exemplo.htm	1272076800	0	C:\ms4w\Apache\htdocs\i3geo\ferramentas\opcoes_autoredesenha\exemplo.htm
 C:\ms4w\Apache\htdocs\i3geo\admin\html\ms_configura.html	1290446236	1	Editor do ms_configura
-C:\ms4w\Apache\htdocs\i3geo\ferramentas\inseretxt\index.js.php	1297094082	1	Insere textos
+C:\ms4w\Apache\htdocs\i3geo\ferramentas\inseretxt\index.js.php	1301867953	1	Insere textos
 C:\ms4w\Apache\htdocs\i3geo\admin\html\mapas.html	1290446236	1	Mapas
 C:\ms4w\Apache\htdocs\i3geo\ferramentas\i3geo_tudo_compacto.js	1276717602	0	PHP
 C:\ms4w\Apache\htdocs\i3geo\interface\zerocal.htm	1298939469	1	Interface zerocal
@@ -216,10 +216,10 @@ C:\ms4w\Apache\htdocs\i3geo\ferramentas\opcoes_escala\exemplo.htm	1272076814	0	C
 C:\ms4w\Apache\htdocs\i3geo\ferramentas\imprimir\a4lpdf.php	1195579936	0	C:\ms4w\Apache\htdocs\i3geo\ferramentas\imprimir\a4lpdf.php
 C:\ms4w\Apache\htdocs\i3geo\ferramentas\convertekml\exemplo.htm	1272076712	0	C:\ms4w\Apache\htdocs\i3geo\ferramentas\convertekml\exemplo.htm
 C:\ms4w\Apache\htdocs\i3geo\classesjs\redesenho.js	1232966496	0	C:\ms4w\Apache\htdocs\i3geo\classesjs\redesenho.js
-C:\ms4w\Apache\htdocs\i3geo\ferramentas\buscafotos\index.js.php	1295486546	1	Busca fotos
+C:\ms4w\Apache\htdocs\i3geo\ferramentas\buscafotos\index.js.php	1302131555	1	Busca fotos
 C:\ms4w\Apache\htdocs\i3geo\ferramentas\template\index.js	1277383116	0	Licença
 C:\ms4w\Apache\htdocs\i3geo\admin\php\xml.php	1299543259	1	xml.php
-C:\ms4w\Apache\htdocs\i3geo\classesjs\classe_configura.js	1299802154	1	Configurações gerais
+C:\ms4w\Apache\htdocs\i3geo\classesjs\classe_configura.js	1300755253	1	Configurações gerais
 C:\ms4w\Apache\htdocs\i3geo\classesjs\atlas.js	1297784174	1	Atlas
 C:\ms4w\Apache\htdocs\i3geo\mobile\desligar.php	1290446578	1	desligar.php
 C:\ms4w\Apache\htdocs\i3geo\ferramentas\wiki\funcoes.php	1296059458	0	funcoes.php
@@ -227,22 +227,22 @@ C:\ms4w\Apache\htdocs\i3geo\aplicmap\legendagrupos.htm	1268057286	0	C:\ms4w\Apac
 C:\ms4w\Apache\htdocs\i3geo\ferramentas\mostraexten\exemplo.htm	1282702492	0	C:\ms4w\Apache\htdocs\i3geo\ferramentas\mostraexten\exemplo.htm
 C:\ms4w\Apache\htdocs\i3geo\admin\php\conexaopostgresql.php	1263249166	0	C:\ms4w\Apache\htdocs\i3geo\admin\php\conexaopostgresql.php
 C:\ms4w\Apache\htdocs\i3geo\ferramentas\imprimir\exemplo.htm	1272076770	0	C:\ms4w\Apache\htdocs\i3geo\ferramentas\imprimir\exemplo.htm
-C:\ms4w\Apache\htdocs\i3geo\guia_de_migracao.txt	1297353838	0	C:\ms4w\Apache\htdocs\i3geo\guia_de_migracao.txt
+C:\ms4w\Apache\htdocs\i3geo\guia_de_migracao.txt	1301867969	0	C:\ms4w\Apache\htdocs\i3geo\guia_de_migracao.txt
 C:\ms4w\Apache\htdocs\i3geo\ferramentas\conectarwms\exemplo.htm	1272076706	0	C:\ms4w\Apache\htdocs\i3geo\ferramentas\conectarwms\exemplo.htm
 C:\ms4w\Apache\htdocs\i3geo\admin\php\menutemas.php	1292281452	1	menutemas.php
 C:\ms4w\Apache\htdocs\i3geo\admin\php\estatisticas.php	1296579058	1	Estatísticas do banco de dados de administração
 C:\ms4w\Apache\htdocs\i3geo\ferramentas\redessociais\index.php	1290446578	1	Redes sociais
-C:\ms4w\Apache\htdocs\i3geo\classesjs\classe_analise.js	1299859051	1	Análise geográfica
+C:\ms4w\Apache\htdocs\i3geo\classesjs\classe_analise.js	1302628128	1	Análise geográfica
 C:\ms4w\Apache\htdocs\i3geo\ferramentas\graficotema\index.js.php	1290446576	1	Gráfico tema
-C:\ms4w\Apache\htdocs\i3geo\classesjs\classe_desenho.js	1297784396	1	Desenho de elementos gráficos
+C:\ms4w\Apache\htdocs\i3geo\classesjs\classe_desenho.js	1302628128	1	Desenho de elementos gráficos
 C:\ms4w\Apache\htdocs\i3geo\ferramentas\planosmanejoflorestal\pesquisa.php	1277240952	0	C:\ms4w\Apache\htdocs\i3geo\ferramentas\planosmanejoflorestal\pesquisa.php
 C:\ms4w\Apache\htdocs\i3geo\ferramentas\legenda\exemplo.htm	1272076778	0	C:\ms4w\Apache\htdocs\i3geo\ferramentas\legenda\exemplo.htm
 C:\ms4w\Apache\htdocs\i3geo\admin\js\perfis.js	1290446598	1	perfis.js
 C:\ms4w\Apache\htdocs\i3geo\mobile\index.htm	1265326378	1	index.htm
 C:\ms4w\Apache\htdocs\i3geo\classesjs\classe_calculo.js	1297784184	1	Cálculos
-C:\ms4w\Apache\htdocs\i3geo\ferramentas\imprimir\aggpng.php	1290446576	1	Licença
+C:\ms4w\Apache\htdocs\i3geo\ferramentas\imprimir\aggpng.php	1301369027	1	Licença
 C:\ms4w\Apache\htdocs\i3geo\classesjs\classe_selecao.js	1297784194	0	Seleção de elementos (depreciado)
-C:\ms4w\Apache\htdocs\i3geo\ferramentas\googlemaps\index.php	1299902592	1	Google Maps
+C:\ms4w\Apache\htdocs\i3geo\ferramentas\googlemaps\index.php	1302131555	1	Google Maps
 C:\ms4w\Apache\htdocs\i3geo\ferramentas\gradecoord\exemplo.htm	1272076738	0	C:\ms4w\Apache\htdocs\i3geo\ferramentas\gradecoord\exemplo.htm
 C:\ms4w\Apache\htdocs\i3geo\classesphp\funcoes_gerais.php	1299199286	1	funcoes_gerais.php
 C:\ms4w\Apache\htdocs\i3geo\mobile\ligar.php	1290446580	1	ligar.php
@@ -256,7 +256,7 @@ C:\ms4w\Apache\htdocs\i3geo\twitter2geo.php	1290446586	1	twitter2geo.php
 C:\ms4w\Apache\htdocs\i3geo\classesphp\mapa_googleearth.php	1290446574	1	mapa_googleearth.php
 C:\ms4w\Apache\htdocs\i3geo\admin\html\editormapfile.html	1290446236	1	Editor de mapfiles
 C:\ms4w\Apache\htdocs\i3geo\admin\php\classe_arvore.php	1296582720	1	classe_arvore.php
-C:\ms4w\Apache\htdocs\i3geo\ferramentas\imprimir\a4lpaisagempdf.php	1288016682	0	C:\ms4w\Apache\htdocs\i3geo\ferramentas\imprimir\a4lpaisagempdf.php
+C:\ms4w\Apache\htdocs\i3geo\ferramentas\imprimir\a4lpaisagempdf.php	1301369086	0	C:\ms4w\Apache\htdocs\i3geo\ferramentas\imprimir\a4lpaisagempdf.php
 C:\ms4w\Apache\htdocs\i3geo\admin\html\mapfiles.html	1290446236	1	Editor de mapfiles de inicialização
 C:\ms4w\Apache\htdocs\i3geo\aplicmap\index.htm	1289254032	0	Redirecionador para o ms_criamapa.php com extensão HTM
 C:\ms4w\Apache\htdocs\i3geo\ferramentas\pontosdistri\exemplo.htm	1272076832	0	C:\ms4w\Apache\htdocs\i3geo\ferramentas\pontosdistri\exemplo.htm
@@ -274,20 +274,20 @@ C:\ms4w\Apache\htdocs\i3geo\ferramentas\imprimir\a4lpaisagempdf.htm	1267710110	0
 C:\ms4w\Apache\htdocs\i3geo\ferramentas\buscarapida\exemplo.htm	1272076686	0	C:\ms4w\Apache\htdocs\i3geo\ferramentas\buscarapida\exemplo.htm
 C:\ms4w\Apache\htdocs\i3geo\admin\php\incluiMAP.php	1290446572	1	incluiMAP.php
 C:\ms4w\Apache\htdocs\i3geo\admin\php\mapfiles.php	1290446572	1	mapfiles.php
-C:\ms4w\Apache\htdocs\i3geo\ferramentas\inserexy2\index.js.php	1297368468	1	Insere ponto
+C:\ms4w\Apache\htdocs\i3geo\ferramentas\inserexy2\index.js.php	1301867949	1	Insere ponto
 C:\ms4w\Apache\htdocs\i3geo\ferramentas\uploaddbf\novotema.htm	1294942828	0	C:\ms4w\Apache\htdocs\i3geo\ferramentas\uploaddbf\novotema.htm
 C:\ms4w\Apache\htdocs\i3geo\ferramentas\epsg.txt	1296817122	0	C:\ms4w\Apache\htdocs\i3geo\ferramentas\epsg.txt
-C:\ms4w\Apache\htdocs\i3geo\ogc.php	1298939496	1	ogc.php
+C:\ms4w\Apache\htdocs\i3geo\ogc.php	1300755256	1	ogc.php
 C:\ms4w\Apache\htdocs\i3geo\ferramentas\gradehex\index.js.php	1295369394	1	Grade de hexágonos
-C:\ms4w\Apache\htdocs\i3geo\classesjs\classe_barradebotoes.js	1300158744	1	Barra de botões
+C:\ms4w\Apache\htdocs\i3geo\classesjs\classe_barradebotoes.js	1302628128	1	Barra de botões
 C:\ms4w\Apache\htdocs\i3geo\mashups\index.html	1292531452	1	Mashups
-C:\ms4w\Apache\htdocs\i3geo\versao.php	1298857205	0	C:\ms4w\Apache\htdocs\i3geo\versao.php
+C:\ms4w\Apache\htdocs\i3geo\versao.php	1302131556	0	C:\ms4w\Apache\htdocs\i3geo\versao.php
 C:\ms4w\Apache\htdocs\i3geo\classesphp\classe_menutemas.php	1299543262	1	classe_menutemas.php
 C:\ms4w\Apache\htdocs\i3geo\ferramentas\imprimir\janelas.js	1235568642	0	C:\ms4w\Apache\htdocs\i3geo\ferramentas\imprimir\janelas.js
 C:\ms4w\Apache\htdocs\i3geo\ferramentas\buscafotos\exemplo.htm	1272076680	0	C:\ms4w\Apache\htdocs\i3geo\ferramentas\buscafotos\exemplo.htm
 C:\ms4w\Apache\htdocs\i3geo\ferramentas\nuvemtags\exemplo.htm	1272076792	0	C:\ms4w\Apache\htdocs\i3geo\ferramentas\nuvemtags\exemplo.htm
 C:\ms4w\Apache\htdocs\i3geo\mobile\inicia.php	1290446580	1	inicia.php
-C:\ms4w\Apache\htdocs\i3geo\ferramentas\opcoes_autoredesenha\index.js.php	1295369394	1	Auto redesenho
+C:\ms4w\Apache\htdocs\i3geo\ferramentas\opcoes_autoredesenha\index.js.php	1300755249	1	Auto redesenho
 C:\ms4w\Apache\htdocs\i3geo\ferramentas\linhadotempo\exemplo.htm	1272076780	0	C:\ms4w\Apache\htdocs\i3geo\ferramentas\linhadotempo\exemplo.htm
 C:\ms4w\Apache\htdocs\i3geo\ferramentas\graficointerativo\exemplo.htm	1272076758	0	C:\ms4w\Apache\htdocs\i3geo\ferramentas\graficointerativo\exemplo.htm
 C:\ms4w\Apache\htdocs\i3geo\ferramentas\confluence\exemplo.htm	1272076708	0	C:\ms4w\Apache\htdocs\i3geo\ferramentas\confluence\exemplo.htm
@@ -304,8 +304,8 @@ C:\ms4w\Apache\htdocs\i3geo\admin\xmlidentifica.php	1290446572	1	xmlidentifica
 C:\ms4w\Apache\htdocs\i3geo\ferramentas\opcoes_quadros\index.js.php	1295369394	1	Quadros de animação
 C:\ms4w\Apache\htdocs\i3geo\ferramentas\template\exemplo.htm	1272076844	0	C:\ms4w\Apache\htdocs\i3geo\ferramentas\template\exemplo.htm
 C:\ms4w\Apache\htdocs\i3geo\admin\js\subgrupos.js	1290446598	1	subgrupos.js
-C:\ms4w\Apache\htdocs\i3geo\interface\googleearth.phtml	1298939469	1	Google Earth (experimental)
-C:\ms4w\Apache\htdocs\i3geo\admin\index.html	1292271686	1	Menu principal
+C:\ms4w\Apache\htdocs\i3geo\interface\googleearth.phtml	1302628129	1	Google Earth (experimental)
+C:\ms4w\Apache\htdocs\i3geo\admin\index.html	1301867938	1	Menu principal
 C:\ms4w\Apache\htdocs\i3geo\classesjs\classe_coordenadas.js	1298854651	1	Coordenadas
 C:\ms4w\Apache\htdocs\i3geo\admin\rsstemas.php	1291157978	1	rsstemas
 C:\ms4w\Apache\htdocs\i3geo\admin\index.htm	1284390076	0	Redirecionador para o index.html
@@ -324,16 +324,16 @@ C:\ms4w\Apache\htdocs\i3geo\ferramentas\conectargeorss\exemplo.htm	1272076702	0	
 C:\ms4w\Apache\htdocs\i3geo\admin\js\menu.js	1292281496	1	menu.js
 C:\ms4w\Apache\htdocs\i3geo\ferramentas\gradepontos\index.js.php	1295369394	1	Grade de pontos
 C:\ms4w\Apache\htdocs\i3geo\admin\php\admin.php	1296575750	1	Funções de uso geral
-C:\ms4w\Apache\htdocs\i3geo\classesjs\classe_interface.js	1299110487	1	Interface
+C:\ms4w\Apache\htdocs\i3geo\classesjs\classe_interface.js	1302628128	1	Interface
 C:\ms4w\Apache\htdocs\i3geo\ferramentas\metar\metarproxima.php	1290446576	1	metarproxima
 C:\ms4w\Apache\htdocs\i3geo\admin\js\core.js	1298767452	1	core.js
-C:\ms4w\Apache\htdocs\i3geo\interface\googlemaps.phtml	1298939469	1	Google Maps
+C:\ms4w\Apache\htdocs\i3geo\interface\googlemaps.phtml	1301867966	1	Google Maps
 C:\ms4w\Apache\htdocs\i3geo\ferramentas\navegacaodir_depreciado\index.htm	1251159650	0	C:\ms4w\Apache\htdocs\i3geo\ferramentas\navegacaodir_depreciado\index.htm
 C:\ms4w\Apache\htdocs\i3geo\ferramentas\distanciaptpt\exemplo.htm	1272076722	0	C:\ms4w\Apache\htdocs\i3geo\ferramentas\distanciaptpt\exemplo.htm
 C:\ms4w\Apache\htdocs\i3geo\classesjs\classe_eventos.js	1299802154	1	Eventos
-C:\ms4w\Apache\htdocs\i3geo\principal.htm	1289693184	1	Página principal com a lista de aplicativos do i3geo
+C:\ms4w\Apache\htdocs\i3geo\principal.htm	1302487276	1	Página principal com a lista de aplicativos do i3geo
 C:\ms4w\Apache\htdocs\i3geo\ferramentas\imprimir\a4p.htm	1251159614	0	C:\ms4w\Apache\htdocs\i3geo\ferramentas\imprimir\a4p.htm
-C:\ms4w\Apache\htdocs\i3geo\ferramentas\3d\3d.php	1289865914	0	Licença
+C:\ms4w\Apache\htdocs\i3geo\ferramentas\3d\3d.php	1300755250	0	Licença
 C:\ms4w\Apache\htdocs\i3geo\admin\html\arvore.html	1292287056	1	Editor da árvore de menus
 C:\ms4w\Apache\htdocs\i3geo\classesjs\classe_social.js	1297784188	1	Social
 C:\ms4w\Apache\htdocs\i3geo\ferramentas\opcoes_querymap\exemplo.htm	1272076824	0	C:\ms4w\Apache\htdocs\i3geo\ferramentas\opcoes_querymap\exemplo.htm
@@ -342,12 +342,12 @@ C:\ms4w\Apache\htdocs\i3geo\admin\html\identifica.html	1292272818	1	Opções da fe
 C:\ms4w\Apache\htdocs\i3geo\classesjs\dicionario_ajuda.js	1298767449	0	C:\ms4w\Apache\htdocs\i3geo\classesjs\dicionario_ajuda.js
 C:\ms4w\Apache\htdocs\i3geo\ferramentas\tabela\exemplo.htm	1272076842	0	C:\ms4w\Apache\htdocs\i3geo\ferramentas\tabela\exemplo.htm
 C:\ms4w\Apache\htdocs\i3geo\admin.htm	1189442128	0	C:\ms4w\Apache\htdocs\i3geo\admin.htm
-C:\ms4w\Apache\htdocs\i3geo\interface\openlayers.htm	1298939469	1	Interface Openlayers
-C:\ms4w\Apache\htdocs\i3geo\classesjs\classe_maparef.js	1299899750	1	Mapa de referência
+C:\ms4w\Apache\htdocs\i3geo\interface\openlayers.htm	1302628129	1	Interface Openlayers
+C:\ms4w\Apache\htdocs\i3geo\classesjs\classe_maparef.js	1302628128	1	Mapa de referência
 C:\ms4w\Apache\htdocs\i3geo\kml.php	1290446578	1	kml.php
 C:\ms4w\Apache\htdocs\i3geo\mobile\localizar.php	1290446580	1	localizar.php
-C:\ms4w\Apache\htdocs\i3geo\classesphp\classe_analise.php	1299027682	1	classe_analise.php
-C:\ms4w\Apache\htdocs\i3geo\ferramentas\uploaddbf\upload.php	1298767454	0	C:\ms4w\Apache\htdocs\i3geo\ferramentas\uploaddbf\upload.php
+C:\ms4w\Apache\htdocs\i3geo\classesphp\classe_analise.php	1300318475	1	classe_analise.php
+C:\ms4w\Apache\htdocs\i3geo\ferramentas\uploaddbf\upload.php	1301867951	0	C:\ms4w\Apache\htdocs\i3geo\ferramentas\uploaddbf\upload.php
 C:\ms4w\Apache\htdocs\i3geo\ferramentas\i3geo_tudo_compacto.js.php	1276717602	0	PHP
 C:\ms4w\Apache\htdocs\i3geo\ferramentas\minhaferramenta\index.htm	1294942826	0	C:\ms4w\Apache\htdocs\i3geo\ferramentas\minhaferramenta\index.htm
 C:\ms4w\Apache\htdocs\i3geo\admin\xmlgeorss.php	1290446572	1	xmlgeorss
@@ -384,16 +384,16 @@ C:\ms4w\Apache\htdocs\i3geo\ferramentas\wiki\index.js.php	1296059608	1	Wikipédia
 C:\ms4w\Apache\htdocs\i3geo\ferramentas\tabela\index.js.php	1295486548	1	Tabela de atributos
 C:\ms4w\Apache\htdocs\i3geo\ferramentas\pontosdistri\index.js.php	1295486548	1	Distribuição de pontos
 C:\ms4w\Apache\htdocs\i3geo\ferramentas\carouseltemas\index.js.php	1299802156	1	Carrosel de temas
-C:\ms4w\Apache\htdocs\i3geo\classesphp\wmswfs.php	1290446574	1	wmswfs.php
+C:\ms4w\Apache\htdocs\i3geo\classesphp\wmswfs.php	1301867967	1	wmswfs.php
 C:\ms4w\Apache\htdocs\i3geo\mashups\openlayers.js.php	1292531340	0	C:\ms4w\Apache\htdocs\i3geo\mashups\openlayers.js.php
 C:\ms4w\Apache\htdocs\i3geo\ferramentas\navegacaodir_depreciado\index.js	1232964994	0	C:\ms4w\Apache\htdocs\i3geo\ferramentas\navegacaodir_depreciado\index.js
-C:\ms4w\Apache\htdocs\i3geo\ferramentas\legenda\index.js.php	1299199287	1	Editor de legenda
+C:\ms4w\Apache\htdocs\i3geo\ferramentas\legenda\index.js.php	1301360004	1	Editor de legenda
 C:\ms4w\Apache\htdocs\i3geo\ferramentas\convertews\index.js.php	1295369394	1	Converte um mapa em WMS
 C:\ms4w\Apache\htdocs\i3geo\ferramentas\nptpol\exemplo.htm	1272076788	0	C:\ms4w\Apache\htdocs\i3geo\ferramentas\nptpol\exemplo.htm
 C:\ms4w\Apache\htdocs\i3geo\ferramentas\imprimir\geraimagens.php	1267709934	0	C:\ms4w\Apache\htdocs\i3geo\ferramentas\imprimir\geraimagens.php
 C:\ms4w\Apache\htdocs\i3geo\classesjs\classe_php.js	1299110487	1	PHP
 C:\ms4w\Apache\htdocs\i3geo\admin\js\atlas.js	1290446598	1	atlas.js
-C:\ms4w\Apache\htdocs\i3geo\ferramentas\centromassa\index.js.php	1299027683	1	Centro de massa
-C:\ms4w\Apache\htdocs\i3geo\classesphp\mapa_inicia.php	1297771000	1	mapa_inicia.php
+C:\ms4w\Apache\htdocs\i3geo\ferramentas\centromassa\index.js.php	1301016375	1	Centro de massa
+C:\ms4w\Apache\htdocs\i3geo\classesphp\mapa_inicia.php	1301016372	1	mapa_inicia.php
 C:\ms4w\Apache\htdocs\i3geo\admin\php\mapas.php	1290446572	1	mapas.php
 C:\ms4w\Apache\htdocs\i3geo\admin\rsstemasdownload.php	1290446572	1	rsstemasdownload
