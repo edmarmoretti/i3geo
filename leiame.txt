@@ -41,7 +41,7 @@ Assim vc não precisará alterar os arquivos de configuração.
 
 ---------
 
-Se vc não seguiu essa últma dica, terá de editar alguns arquivos, como:
+Se vc não seguiu essa última dica, pode ser necessário editar alguns arquivos, como:
 
 ms_configura.php
 aplicmap/geral1.map
@@ -49,24 +49,25 @@ aplicmap/ogcws.map
 
 ---------
 
-A interface padrão utilizada pelo i3geo utiliza o html aplicmap/geral.htm.
+A interface padrão utilizada pelo i3geo utiliza o html interface/openlayers.htm.
 Para customizar essa interface, edite o arquivo html conforme a documentação
 existente no próprio arquivo.
-É uma boa prática fazer suas alterações em uma cópia do geral.htm. Para utilizar a sua
+É uma boa prática fazer suas alterações em uma cópia do openlayers.htm. Para utilizar a sua
 interface, inicie o i3geo da seguinte forma:
 
-http://hostname/i3geo/ms_criamapa.php?interface=minhainterface.htm
+http://hostname/i3geo/interface/minhainterface.htm
 
 ---------
 
 Para configurar a ferramenta google, registre seu servidor e edite o arquivo
-ms_configura.php para colocar a chave correta
+ms_configura.php para colocar a chave correta. Da mesma forma, se vc quiser usar
+as opções de integração com redes sociais, vc deve registrar sua instalação
+do i3geo no Facebook e Twitter.
 
 ---------
 
 Se vc for colocar o i3geo em um servidor web, verifique as configurações de segurança
-para possibilitar o uso de chamadas a web services e leitura de arquivos xml em servidores
-externos.
+para possibilitar o uso de chamadas a web services.
 
 ---------
 
@@ -75,9 +76,5 @@ o fórum da comunidade i3geo.
 
 ---------
 
-A versão 4.1 trouxe várias modificações no modelo de programação em javascript.
-Veja o documento guia_de_migracao.txt para maiores informações.
-
----------
-
-Edite o arquivo aplicmap/ogcws.map para incluir os dados da sua instituição que serão mostrados nos web services automáticos gerados com i3geo/ogc.php
+Edite o arquivo aplicmap/ogcws.map para incluir os dados da sua instituição que serão mostrados 
+nos web services automáticos gerados com i3geo/ogc.php
