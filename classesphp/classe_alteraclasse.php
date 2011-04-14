@@ -220,6 +220,7 @@ $exps - lista com as novas expressões
 				$e = str_replace("\\","'",$e);
 				$e = str_replace('"',"'",$e);
 				$e = str_replace("''","'",$e);
+				$e = str_replace("##","'",$e);
 				$classe->setexpression($e);
 			}
 		}		

@@ -534,7 +534,9 @@ i3GEOF.legenda = {
 				n,
 				p,
 				cp,
-				temp;
+				temp,
+				expn,
+				re = new RegExp('"', "g");;
 			for (t=0;t<trs.length;t++){
 				if(trs[t].childNodes){
 					nn = trs[t].childNodes;
@@ -547,8 +549,10 @@ i3GEOF.legenda = {
 									temp = (isn[0].id).split("i3GEOlegendaid_");
 									ids.push(temp[1]);
 								}
-								if(isn[0].name == "expressao")
-								{exps.push(isn[0].value);}
+								if(isn[0].name == "expressao"){
+									expn = (isn[0].value).replace(re,'##');
+									exps.push(expn);
+								}
 							}
 						}
 					}
@@ -558,7 +562,8 @@ i3GEOF.legenda = {
 			nomes = nomes.join(";");
 			exps = exps.join(";");
 			temp = function(){
- 				i3GEOF.legenda.mostralegenda();
+ 				i3GEOF.legenda.aguarde.visibility = "hidden";
+				i3GEOF.legenda.mostralegenda();
 				i3GEO.atualiza();
 				i3GEO.Interface.atualizaTema("",i3GEOF.legenda.tema);
  				i3GEO.arvoreDeCamadas.atualizaLegenda(i3GEOF.legenda.tema);
