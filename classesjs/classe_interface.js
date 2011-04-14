@@ -849,12 +849,12 @@ i3GEO.Interface = {
 			for(i=nlayers-1;i>=0;i--){
 				camada = i3GEO.arvoreDeCamadas.CAMADAS[i];
 				if(i3geoOL.getLayersByName(camada.name).length === 0){
-					urllayer = url+"&layer="+camada.name;
+					urllayer = url+"&layer="+camada.name+"&r="+Math.random();
 					try{
 						temp = camada.type === 0 ? opcoes.gutter = 20 : opcoes.gutter = 0;
 						temp = camada.transitioneffect === "nao" ? opcoes.transitionEffect = "null" : opcoes.transitionEffect = "resize";
 						if(camada.connectiontype === 7 && camada.wmsurl !== ""){
-							urllayer = camada.wmsurl;
+							urllayer = camada.wmsurl+"&r="+Math.random();
 							layer = new OpenLayers.Layer.WMS(camada.name, urllayer,{format:camada.wmsformat,transparent:true},opcoes);
 							if(camada.wmssrs != "")
 							{layer.url = layer.url+"&SRS="+camada.wmssrs;}
@@ -1007,6 +1007,8 @@ i3GEO.Interface = {
 		atualizaTema:function(retorno,tema){
 			var layer = i3geoOL.getLayersByName(tema)[0];
 			layer.mergeNewParams({r:Math.random()});
+			layer.url = layer.url.replace("&&&&&&&&&&&&&&","");
+			layer.url = layer.url+"&&";
 			layer.redraw();
 			i3GEO.Interface.openlayers.recalcPar();
 			try
@@ -1291,7 +1293,7 @@ i3GEO.Interface = {
 			s = "i3GEOTileO = new google.maps.ImageMapType({ "+
 					"getTileUrl: function(coord, zoom) {" +
 					"	var url = '" + i3GEO.configura.locaplic +"/classesphp/mapa_googlemaps.php?map=" + i3GEO.parametros.mapfile +
-					"&Z=' + zoom + '&X=' + coord.x + '&Y=' + coord.y + '&layer=" + nomeLayer + i3GEO.Interface.googlemaps.PARAMETROSLAYER +"';" +
+					"&Z=' + zoom + '&X=' + coord.x + '&Y=' + coord.y + '&layer=" + nomeLayer + i3GEO.Interface.googlemaps.PARAMETROSLAYER +'&r='+Math.random()+"';" +
 					"	return url+'&nd='+i3GEO.Interface.googlemaps.posfixo; " +
 					"}, "+
 					"tileSize: new google.maps.Size(256, 256)," +
@@ -1957,7 +1959,7 @@ i3GEO.Interface = {
 			}
 		},
 		insereLayer: function(nomeLayer){
-			var kmlUrl = i3GEO.configura.locaplic+"/classesphp/mapa_googleearth.php?REQUEST=GetKml&map="+i3GEO.parametros.mapfile+"&layer="+nomeLayer+i3GEO.Interface.googleearth.PARAMETROSLAYER,
+			var kmlUrl = i3GEO.configura.locaplic+"/classesphp/mapa_googleearth.php?REQUEST=GetKml&map="+i3GEO.parametros.mapfile+"&layer="+nomeLayer+i3GEO.Interface.googleearth.PARAMETROSLAYER+"&r="+Math.random(),
 				linki3geo = i3GeoMap.createLink('');
 			linki3geo.setHref(kmlUrl+i3GEO.Interface.googleearth.posfixo);
 			nl = i3GeoMap.createNetworkLink('');

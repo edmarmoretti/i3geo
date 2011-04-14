@@ -90,9 +90,9 @@ $linkedinoauth = "";
 	{array}
 */
 $facebookoauth = array(
-		"consumerkey" => "136279263094148",
-		"consumersecret" => "679fc4a007b1d289377fa8af8f7086b6"
-	);
+	"consumerkey" => "136279263094148",
+	"consumersecret" => "679fc4a007b1d289377fa8af8f7086b6"
+);
 /*
 	Variavel: twitteroauth
 	
@@ -126,12 +126,12 @@ $facebookoauth = array(
 	{array}
 */
 $twitteroauth = array(
-		"consumerkey" => "vUvBcsOULjS0ewxuSvbS6w",
-		"consumersecret" => "0Hj6uCyycDCeNOgzTUF1bBSel75KtfbnCS4bxWVqaxk",
-		"requesttokenurl" => "https://twitter.com/oauth/request_token",
-		"accesstokenurl" => "https://twitter.com/oauth/access_token",
-		"authorizeurl" => "https://twitter.com/oauth/authorize"
-	);
+	"consumerkey" => "vUvBcsOULjS0ewxuSvbS6w",
+	"consumersecret" => "0Hj6uCyycDCeNOgzTUF1bBSel75KtfbnCS4bxWVqaxk",
+	"requesttokenurl" => "https://twitter.com/oauth/request_token",
+	"accesstokenurl" => "https://twitter.com/oauth/access_token",
+	"authorizeurl" => "https://twitter.com/oauth/authorize"
+);	
 /*
 	Variavel: mensagemInicia
 	
