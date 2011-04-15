@@ -294,7 +294,13 @@ i3GEOOL = {
 		var layers = [i3GEOOL.layerAtivo()];
 	    var u = layers[0].url+"&request=getfeature&service=wfs&version=1.0.0";
 	    u += "&OUTPUTFORMAT=gml2&typename="+layers[0].params.LAYERS;
-	    u += "&filter=<Filter><Intersect><PropertyName>Geometry</PropertyName><gml:Point><gml:coordinates>"+lonlat+"</gml:coordinates></gml:Point></Intersect></Filter>";
+	    //u += "&filter=<Filter><Intersect><PropertyName>Geometry</PropertyName><gml:Point><gml:coordinates>"+lonlat+"</gml:coordinates></gml:Point></Intersect></Filter>";
+		var xy = lonlat.split(",");
+		xy[0] = xy[0] * 1;
+		xy[1] = xy[1] * 1;
+		var poligono = (xy[0]-0.1)+","+(xy[1]+0.1) + " "+(xy[0]+0.1)+","+(xy[1]+0.1)+" " + (xy[0]+0.1)+","+(xy[1]-0.1)+" " + (xy[0]-0.1)+","+(xy[1]-0.1)+" "+(xy[0]-0.1)+","+(xy[1]+0.1);
+		u += "&filter=<Filter><Intersect><PropertyName>Geometry</PropertyName><gml:Polygon><gml:outerBoundaryIs><gml:LinearRing><gml:posList>"+poligono+"</gml:posList></gml:LinearRing></gml:outerBoundaryIs></gml:Polygon></Intersect></Filter>";
+		
 		document.body.style.cursor="wait";
 		document.getElementById("i3geoMapa").style.cursor = "wait";
 		OpenLayers.Request.issue({
