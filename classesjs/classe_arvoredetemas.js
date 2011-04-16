@@ -89,7 +89,9 @@ i3GEO.arvoreDeTemas = {
 
 		bookmark: true,
 		
-		importarwmc: true
+		importarwmc: true,
+		
+		googleearth: true
 	}
 
 	Tipo:
@@ -117,7 +119,8 @@ i3GEO.arvoreDeTemas = {
 		uploadgpx: true,
 		comentarios: true,
 		bookmark: true,
-		importarwmc: true
+		importarwmc: true,
+		googleearth: true
 	},
 	/*
 	Propriedade: FATORESTRELA
@@ -852,6 +855,18 @@ i3GEO.arvoreDeTemas = {
 			tempNode = new YAHOO.widget.HTMLNode(
 				{
 					html:"<span style='color:red;cursor:pointer' title='opção visível apenas para editores' onclick='i3GEO.arvoreDeTemas.abrejanelaIframe(\"900\",\"500\",\""+i3GEO.configura.locaplic+"/admin/html/menus.html\")' target=blank >Editar menus</span>",
+					idmenu:"",enableHighlight:false,expanded:false
+				},
+				root
+			);
+		}
+		//
+		//abrir no google earth
+		//
+		if(i3GEO.arvoreDeTemas.OPCOESADICIONAIS.googleearth === true){
+			tempNode = new YAHOO.widget.HTMLNode(
+				{
+					html:"<a href='"+i3GEO.configura.locaplic+"/kml.php' target=blank > <img src='"+i3GEO.configura.locaplic+"/imagens/visual/default/branco.gif' class='googleearth'> "+$trad("a13")+"</a>",
 					idmenu:"",enableHighlight:false,expanded:false
 				},
 				root

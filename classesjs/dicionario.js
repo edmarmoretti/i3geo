@@ -909,6 +909,13 @@ en:"Open system",
 es:"Abrir sistema",
 it:"Aprire il sistema"
 }],
+"a13":[
+{
+pt:"Abrir no Google Earth",
+en:"Open in Google Earth",
+es:"Abrir no Google Earth",
+it:"Abrir no Google Earth"
+}],
 //guias principais
 "g1":[
 {
