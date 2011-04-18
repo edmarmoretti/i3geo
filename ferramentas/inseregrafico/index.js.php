@@ -159,8 +159,12 @@ i3GEOF.insereGrafico = {
 		{i3GEO.eventos.MOUSECLIQUE.push("i3GEOF.insereGrafico.insere()");}
 		temp = function(){
 			i3GEO.eventos.MOUSECLIQUE.remove("i3GEOF.insereGrafico.insere()");
+			if(i3GEO.eventos.ATUALIZAARVORECAMADAS.toString().search("i3GEOF.insereGrafico.comboTemas()") > 0)
+			{i3GEO.eventos.ATUALIZAARVORECAMADAS.remove("i3GEOF.insereGrafico.comboTemas()");}
 		};
-		YAHOO.util.Event.addListener(janela[0].close, "click", temp);				
+		YAHOO.util.Event.addListener(janela[0].close, "click", temp);
+		if(i3GEO.eventos.ATUALIZAARVORECAMADAS.toString().search("i3GEOF.insereGrafico.comboTemas()") < 0)
+		{i3GEO.eventos.ATUALIZAARVORECAMADAS.push("i3GEOF.insereGrafico.comboTemas()");}		
 		i3GEOF.insereGrafico.inicia(divid);
 	},
 	/*

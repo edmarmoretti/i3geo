@@ -93,6 +93,8 @@ i3GEO.mapa = {
 	Altera a variável i3GEO.temaAtivo e atualiza a interface em função do novo tema que for ativado
 
 	O tema anteriormente ativo tem sua cor alterada para a cor normal e o novo tema é destacado com uma cor diferente
+	
+	Executa também as funções armazenadas em i3GEO.eventos.ATIVATEMA
 
 	Parametros:
 

@@ -475,7 +475,7 @@ i3GEO.arvoreDeCamadas = {
 			}
 			function buildTree(){
 				i3GEO.arvoreDeCamadas.ARVORE = new YAHOO.widget.TreeView(i3GEO.arvoreDeCamadas.IDHTML);
-				root = i3GEO.arvoreDeCamadas.ARVORE.getRoot();
+				//root = i3GEO.arvoreDeCamadas.ARVORE.getRoot();
 			}
 			buildTree();
 		})();
@@ -585,11 +585,12 @@ i3GEO.arvoreDeCamadas = {
 		}
 		document.getElementById(i3GEO.arvoreDeCamadas.IDHTML).style.textAlign="left";
 		i3GEO.arvoreDeCamadas.ARVORE.draw();
-		if(this.ARRASTARORDEM === true || this.ARRASTARLIXEIRA === true)
-		{this.ativaDragDrop();}
+		if(i3GEO.arvoreDeCamadas.ARRASTARORDEM === true || i3GEO.arvoreDeCamadas.ARRASTARLIXEIRA === true)
+		{i3GEO.arvoreDeCamadas.ativaDragDrop();}
 		//
 		//verifica se a ferramenta identifica está ativa para atualizar a lista de temas
 		//
+		/*
 		try{
 			if($i("i3GEOidentificalistaTemas")){
 				i3GEOF.identifica.listaTemas();
@@ -599,10 +600,12 @@ i3GEO.arvoreDeCamadas = {
 		catch(r){
 			if(typeof(console) !== 'undefined'){console.error(r);}
 		}
+		*/
 		i3GEO.mapa.ativaTema(i3GEO.temaAtivo);
 		i3GEO.arvoreDeCamadas.verificaAbrangenciaTemas();
-		if(this.VERIFICAABRANGENCIATEMAS === true && i3GEO.eventos.NAVEGAMAPA.toString().search("i3GEO.arvoreDeCamadas.verificaAbrangenciaTemas()") < 0)
+		if(i3GEO.arvoreDeCamadas.VERIFICAABRANGENCIATEMAS === true && i3GEO.eventos.NAVEGAMAPA.toString().search("i3GEO.arvoreDeCamadas.verificaAbrangenciaTemas()") < 0)
 		{i3GEO.eventos.NAVEGAMAPA.push("i3GEO.arvoreDeCamadas.verificaAbrangenciaTemas()");}
+		i3GEO.eventos.executaEventos(i3GEO.eventos.ATUALIZAARVORECAMADAS);
 	},
 	/*
 	Function: ligaDesligaTemas

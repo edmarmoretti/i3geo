@@ -90,18 +90,7 @@ i3GEOF.selecao = {
 					"naolinearSelecionados"
 				);
 			};
-			i3GEO.util.comboTemas(
-				"i3GEOselecaotemasLigados",
-				function(retorno){
-			 		$i("i3GEOselecaoComboTemas").innerHTML = retorno.dados;
-			 		$i("i3GEOselecaotemasLigados").value = i3GEO.temaAtivo;
-			 		$i("i3GEOselecaotemasLigados").onchange = function(){i3GEOF.selecao.pegaTemasSel();};
-				},
-				"i3GEOselecaoComboTemas",
-				"",
-				true,
-				"ligados"
-			);
+			i3GEOF.selecao.criaCombosTemas();
 
 			i3GEO.util.mensagemAjuda("i3GEOselecaomen1",$i("i3GEOselecaomen1").innerHTML);
 			i3GEO.util.mensagemAjuda("i3GEOselecaomen2",$i("i3GEOselecaomen2").innerHTML);
@@ -217,10 +206,15 @@ i3GEOF.selecao = {
 		i3GEOF.selecao.aguarde = $i("i3GEOF.selecao_imagemCabecalho").style;
 		$i("i3GEOF.selecao_corpo").style.backgroundColor = "white";
 		i3GEOF.selecao.inicia(divid);
-		
+
+		if(i3GEO.eventos.ATUALIZAARVORECAMADAS.toString().search("i3GEOF.selecao.criaCombosTemas()") < 0)
+		{i3GEO.eventos.ATUALIZAARVORECAMADAS.push("i3GEOF.selecao.criaCombosTemas()");}		
 		if(i3GEO.eventos.MOUSECLIQUE.toString().search("i3GEOF.selecao.clique()") < 0)
 		{i3GEO.eventos.MOUSECLIQUE.push("i3GEOF.selecao.clique()");}
+		
 		temp = function(){
+			if(i3GEO.eventos.ATUALIZAARVORECAMADAS.toString().search("i3GEOF.selecao.criaCombosTemas()") > 0)
+			{i3GEO.eventos.ATUALIZAARVORECAMADAS.remove("i3GEOF.selecao.criaCombosTemas()");}
 			i3GEO.barraDeBotoes.ativaPadrao();
 			i3GEO.eventos.MOUSECLIQUE.remove("i3GEOF.selecao.clique()");
 			try{
@@ -253,6 +247,25 @@ i3GEOF.selecao = {
 		{i3GEO.Interface.googlemaps.recalcPar();}
 		if(i3GEO.Interface.ATUAL == "googleearth")
 		{i3GEO.Interface.googleearth.recalcPar();}		
+	},
+	/*
+	Function: criaCombosTemas
+	
+	Cria os combos de seleção de temas
+	*/
+	criaCombosTemas: function(){
+		i3GEO.util.comboTemas(
+			"i3GEOselecaotemasLigados",
+			function(retorno){
+				$i("i3GEOselecaoComboTemas").innerHTML = retorno.dados;
+				$i("i3GEOselecaotemasLigados").value = i3GEO.temaAtivo;
+				$i("i3GEOselecaotemasLigados").onchange = function(){i3GEOF.selecao.pegaTemasSel();};
+			},
+			"i3GEOselecaoComboTemas",
+			"",
+			true,
+			"ligados"
+		);	
 	},
 	/*
 	Function: mudaicone

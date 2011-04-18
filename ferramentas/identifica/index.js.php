@@ -168,7 +168,6 @@ i3GEOF.identifica = {
 				i3GEO.coordenadas.mostraCoordenadas(false,"i3GEOidentificacoordtexto",i3GEOF.identifica.x,i3GEOF.identifica.y);
 				$i("i3GEOidentificacoordtexto").innerHTML = i3GEO.coordenadas.MODOTEXTO+"</span>";
 			};
-			
 			i3GEOF.identifica.listaTemas("ligados");
 			//
 			//verifica se existem sistemas para identificar
@@ -257,11 +256,15 @@ i3GEOF.identifica = {
 				i3GEOF.identifica.limpaMarca();
 				if(i3GEO.eventos.NAVEGAMAPA.toString().search("i3GEOF.identifica") > 0)
 				{i3GEO.eventos.NAVEGAMAPA.remove("i3GEOF.identifica.limpaMarca()");}
+				if(i3GEO.eventos.ATUALIZAARVORECAMADAS.toString().search("i3GEOF.identifica.listaTemas()") > 0)
+				{i3GEO.eventos.ATUALIZAARVORECAMADAS.remove("i3GEOF.identifica.listaTemas()");}
 			};
 			YAHOO.util.Event.addListener(janela[0].close, "click", temp);
 		}
 		if(i3GEO.eventos.NAVEGAMAPA.toString().search("cliqueIdentifica()") < 0)
 		{i3GEO.eventos.NAVEGAMAPA.push("i3GEOF.identifica.limpaMarca()");}
+		if(i3GEO.eventos.ATUALIZAARVORECAMADAS.toString().search("i3GEOF.identifica.listaTemas()") < 0)
+		{i3GEO.eventos.ATUALIZAARVORECAMADAS.push("i3GEOF.identifica.listaTemas()");}
 	},
 	limpaMarca: function(){
 		try{

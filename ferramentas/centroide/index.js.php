@@ -17,7 +17,7 @@ Licenca:
 
 GPL2
 
-I3Geo Interface Integrada de Ferramentas de Geoprocessamento para Internet
+i3Geo Interface Integrada de Ferramentas de Geoprocessamento para Internet
 
 Direitos Autorais Reservados (c) 2006 Ministério do Meio Ambiente Brasil
 Desenvolvedor: Edmar Moretti edmar.moretti@mma.gov.br
@@ -110,6 +110,13 @@ i3GEOF.centroide = {
 		divid = janela[2].id;
 		i3GEOF.centroide.aguarde = $i("i3GEOF.centroide_imagemCabecalho").style;
 		i3GEOF.centroide.inicia(divid);
+		temp = function(){
+			if(i3GEO.eventos.ATUALIZAARVORECAMADAS.toString().search("i3GEOF.centroide.t0()") > 0)
+			{i3GEO.eventos.ATUALIZAARVORECAMADAS.remove("i3GEOF.centroide.t0()");}
+		};
+		YAHOO.util.Event.addListener(janela[0].close, "click", temp);
+		if(i3GEO.eventos.ATUALIZAARVORECAMADAS.toString().search("i3GEOF.centroide.t0()") < 0)
+		{i3GEO.eventos.ATUALIZAARVORECAMADAS.push("i3GEOF.centroide.t0()");}
 	},
 	t0: function()
 	{

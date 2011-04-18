@@ -177,27 +177,7 @@ i3GEOF.graficointerativo = {
 				t.style.top = "-15px";
 			};
 			i3GEOF.graficointerativo.ativaFoco();
-			i3GEO.util.comboTemas(
-				"i3GEOgraficointerativoComboTemasId",
-				function(retorno){
-			 		$i("i3GEOgraficointerativoComboTemas").innerHTML = retorno.dados;
-			 		$i("i3GEOgraficointerativoComboTemas").style.display = "block";
-			 		if ($i("i3GEOgraficointerativoComboTemasId")){
-			 			$i("i3GEOgraficointerativoComboTemasId").onchange = function(){
-			 				i3GEO.mapa.ativaTema($i("i3GEOgraficointerativoComboTemasId").value);
-			 				i3GEOF.graficointerativo.comboItensSel();
-			 			};
-					}
-					if(i3GEO.temaAtivo !== ""){
-						$i("i3GEOgraficointerativoComboTemasId").value = i3GEO.temaAtivo;
-						$i("i3GEOgraficointerativoComboTemasId").onchange.call();
-					}
-				},
-				"i3GEOgraficointerativoComboTemas",
-				"",
-				false,
-				"ligados"
-			);
+			i3GEOF.graficointerativo.comboTemas();
 			new YAHOO.widget.Button(
 				"i3GEOgraficointerativobotao1",
 				{onclick:{fn: i3GEOF.graficointerativo.obterDados}}
@@ -344,8 +324,12 @@ i3GEOF.graficointerativo = {
 			if(i3GEO.Interface.ATUAL === "googleearth"){
    				google.earth.removeEventListener(graficointerativoDragend);
 			}
+			if(i3GEO.eventos.ATUALIZAARVORECAMADAS.toString().search("i3GEOF.graficointerativo.comboTemas()") > 0)
+			{i3GEO.eventos.ATUALIZAARVORECAMADAS.remove("i3GEOF.graficointerativo.comboTemas()");}			
 		};
 		YAHOO.util.Event.addListener(janela[0].close, "click", temp);
+		if(i3GEO.eventos.ATUALIZAARVORECAMADAS.toString().search("i3GEOF.graficointerativo.comboTemas()") < 0)
+		{i3GEO.eventos.ATUALIZAARVORECAMADAS.push("i3GEOF.graficointerativo.comboTemas()");}
 	},
 	/*
 	Function: ativaFoco
@@ -357,6 +341,34 @@ i3GEOF.graficointerativo = {
 		var i = $i("i3GEOF.graficointerativo_c").style;
 		i3GEO.janela.ULTIMOZINDEX++;
 		i.zIndex = i3GEO.janela.ULTIMOZINDEX;
+	},
+	/*
+	Function: comboTemas
+	
+	Monta o combo para escolha do tema que será utilizado no gráfico
+	*/
+	comboTemas: function(){
+		i3GEO.util.comboTemas(
+			"i3GEOgraficointerativoComboTemasId",
+			function(retorno){
+				$i("i3GEOgraficointerativoComboTemas").innerHTML = retorno.dados;
+				$i("i3GEOgraficointerativoComboTemas").style.display = "block";
+				if ($i("i3GEOgraficointerativoComboTemasId")){
+					$i("i3GEOgraficointerativoComboTemasId").onchange = function(){
+						i3GEO.mapa.ativaTema($i("i3GEOgraficointerativoComboTemasId").value);
+						i3GEOF.graficointerativo.comboItensSel();
+					};
+				}
+				if(i3GEO.temaAtivo !== ""){
+					$i("i3GEOgraficointerativoComboTemasId").value = i3GEO.temaAtivo;
+					$i("i3GEOgraficointerativoComboTemasId").onchange.call();
+				}
+			},
+			"i3GEOgraficointerativoComboTemas",
+			"",
+			false,
+			"ligados"
+		);	
 	},
 	/*
 	Function: ativaTipo

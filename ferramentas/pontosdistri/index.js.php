@@ -189,6 +189,13 @@ i3GEOF.pontosDistri = {
 		$i("i3GEOF.pontosDistri_corpo").style.backgroundColor = "white";
 		i3GEOF.pontosDistri.aguarde = $i("i3GEOF.pontosDistri_imagemCabecalho").style;
 		i3GEOF.pontosDistri.inicia(divid);
+		if(i3GEO.eventos.ATUALIZAARVORECAMADAS.toString().search("i3GEOF.pontosDistri.ativaFoco()") < 0)
+		{i3GEO.eventos.ATUALIZAARVORECAMADAS.push("i3GEOF.pontosDistri.ativaFoco()");}
+		temp = function(){
+			if(i3GEO.eventos.ATUALIZAARVORECAMADAS.toString().search("i3GEOF.pontosDistri.ativaFoco()") > 0)
+			{i3GEO.eventos.ATUALIZAARVORECAMADAS.remove("i3GEOF.pontosDistri.ativaFoco()");}
+		};
+		YAHOO.util.Event.addListener(janela[0].close, "click", temp);
 	},
 	/*
 	Function: ativaFoco

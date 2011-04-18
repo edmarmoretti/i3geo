@@ -66,15 +66,30 @@ Exemplos:
 */
 i3GEO.eventos = {
 	/*
+	Propriedade: ATUALIZAARVORECAMADAS
+
+	Armazena as funções (eventos) que serão executadas quando a árvore de camadas for atualizada.
+
+	Tipo:
+	{Array}
+	*/
+	ATUALIZAARVORECAMADAS: [],
+	/*
+	Propriedade: ATIVATEMA
+
+	Armazena as funções (eventos) que serão executadas quando um tema da árvore de camadas é ativado.
+
+	Tipo:
+	{Array}
+	*/
+	ATIVATEMA: [],
+	/*
 	Propriedade: NAVEGAMAPA
 
 	Armazena as funções que serão executadas quando é feita uma operação de navegação sobre o mapa.
 
 	Tipo:
 	{Array}
-
-	Default:
-	{["atualizaEscalaNumerica()"]}
 	*/
 	NAVEGAMAPA: [],
 	/*
@@ -391,7 +406,7 @@ i3GEO.eventos = {
 	/*
 	Function: ativa
 
-	Ativa os eventos sobre o mapa
+	Ativa os eventos relacionados ao mapa (movimentação do mouse sobre o mapa)
 
 	Define o que será executado quando o mouse é clicado ou movido sobre o mapa.
 

@@ -113,6 +113,13 @@ i3GEOF.buffer = {
 		divid = janela[2].id;
 		i3GEOF.buffer.aguarde = $i("i3GEOF.buffer_imagemCabecalho").style;
 		i3GEOF.buffer.inicia(divid);
+		temp = function(){
+			if(i3GEO.eventos.ATUALIZAARVORECAMADAS.toString().search("i3GEOF.buffer.t0()") > 0)
+			{i3GEO.eventos.ATUALIZAARVORECAMADAS.remove("i3GEOF.buffer.t0()");}
+		};
+		YAHOO.util.Event.addListener(janela[0].close, "click", temp);
+		if(i3GEO.eventos.ATUALIZAARVORECAMADAS.toString().search("i3GEOF.buffer.t0()") < 0)
+		{i3GEO.eventos.ATUALIZAARVORECAMADAS.push("i3GEOF.buffer.t0()");}
 	},
 	t0: function()
 	{
