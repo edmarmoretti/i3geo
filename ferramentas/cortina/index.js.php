@@ -56,7 +56,16 @@ i3GEOF.cortina = {
 	
 	Código do tema definido na inicialização da janela e que será alvo da cortina.
 	*/
-	tema: "",	
+	tema: "",
+	/*
+	Variavel: janela
+	
+	Janela flutuante criada
+	
+	Type:
+	{YAHOO.panel}
+	*/
+	janela: "",
 	/*
 	Function: inicia
 	
@@ -107,14 +116,19 @@ i3GEOF.cortina = {
 	Parametro:
 	
 	tema {string} - codigo do tema
+	
+	mx {numero} - (opcional) posição em x para onde a janela será movida após ser criada
+	
+	my {numero} - (opcional) posição em y para onde a janela será movida após ser criada
 	*/
-	criaJanelaFlutuante: function(tema){
-		if(arguments.length === 0)
+	criaJanelaFlutuante: function(tema,mx,my){
+		if(tema == undefined)
 		{tema = i3GEO.temaAtivo;}
 		else
-		{i3GEO.ativaTema(tema);}
+		{i3GEO.mapa.ativaTema(tema);}
 		minimiza = function(){
 			i3GEO.janela.minimiza("i3GEOF.cortina");
+			i3GEOF.cortina.slider.setValue(0,false);
 		};		
 		var janela,divid,temp,titulo;
 		i3GEOF.cortina.tema = tema;
@@ -134,6 +148,9 @@ i3GEOF.cortina = {
 			minimiza
 		);
 		divid = janela[2].id;
+		i3GEOF.cortina.janela = janela[0];
+		if(mx != undefined)
+		{janela[0].moveTo(mx,my);}
 		$i("i3GEOF.cortina_corpo").style.backgroundColor = "white";
 		$i("i3GEOF.cortina_corpo").style.textAlign = "left";
 		i3GEOF.cortina.aguarde = $i("i3GEOF.cortina_imagemCabecalho").style;
@@ -141,13 +158,16 @@ i3GEOF.cortina = {
 			var layer,estilo;
 			if(i3GEO.Interface.ATUAL === "openlayers"){
 				layer = i3geoOL.getLayersByName(i3GEO.temaAtivo)[0];
-				estilo = layer.div.style;
+				if(layer)
+				{estilo = layer.div.style;}
 			}
 			if(i3GEO.Interface.ATUAL === "googlemaps"){
 				layer = i3GEO.Interface.googlemaps.retornaDivLayer(i3GEO.temaAtivo);
-				estilo = layer.style;
+				if(layer)
+				{estilo = layer.style;}
 			}
-			estilo.clip = "rect(0px,"+i3GEO.parametros.w+"px,"+i3GEO.parametros.h+"px,0px)";
+			if(layer)
+			{estilo.clip = "rect(0px,"+i3GEO.parametros.w+"px,"+i3GEO.parametros.h+"px,0px)";}
 			if(i3GEO.eventos.ATUALIZAARVORECAMADAS.toString().search("i3GEOF.cortina.comboTemas()") > 0)
 			{i3GEO.eventos.ATUALIZAARVORECAMADAS.remove("i3GEOF.cortina.comboTemas()");}
 			i3GEOF.cortina.slider = null;
@@ -165,15 +185,17 @@ i3GEOF.cortina = {
 	criaslide: function(){
 		i3GEOF.cortina.slider = YAHOO.widget.Slider.getHorizSlider($i("slider-bg"),$i("slider-thumb"), 0, 200, 0);
 		var	layer;
-		if(i3GEO.Interface.ATUAL === "openlayers"){
-			layer = i3geoOL.getLayersByName(i3GEOF.cortina.tema)[0];
-			i3GEOF.cortina.estilo = layer.div.style;
+		if(i3GEOF.cortina.tema !== ""){
+			if(i3GEO.Interface.ATUAL === "openlayers"){
+				layer = i3geoOL.getLayersByName(i3GEOF.cortina.tema)[0];
+				i3GEOF.cortina.estilo = layer.div.style;
+			}
+			if(i3GEO.Interface.ATUAL === "googlemaps"){
+				layer = i3GEO.Interface.googlemaps.retornaDivLayer(i3GEOF.cortina.tema);
+				i3GEOF.cortina.estilo = layer.style;
+			}
+			i3GEOF.cortina.estilo.clip = "rect(0px,"+i3GEO.parametros.w+"px,"+i3GEO.parametros.h+"px,0px)";
 		}
-		if(i3GEO.Interface.ATUAL === "googlemaps"){
-			layer = i3GEO.Interface.googlemaps.retornaDivLayer(i3GEOF.cortina.tema);
-			i3GEOF.cortina.estilo = layer.style;
-		}
-		i3GEOF.cortina.estilo.clip = "rect(0px,"+i3GEO.parametros.w+"px,"+i3GEO.parametros.h+"px,0px)";
 		i3GEOF.cortina.slider.setValue(0,false);
 		i3GEOF.cortina.slider.subscribe("change", function(offsetFromStart) {
 			var t=0,
@@ -199,11 +221,13 @@ i3GEOF.cortina = {
 		i3GEOF.cortina.slider.setValue(0,false);
 		if(i3GEO.Interface.ATUAL === "openlayers"){
 			layer = i3geoOL.getLayersByName(i3GEOF.cortina.tema)[0];
-			i3GEOF.cortina.estilo = layer.div.style;
+			if(layer)
+			{i3GEOF.cortina.estilo = layer.div.style;}
 		}
 		if(i3GEO.Interface.ATUAL === "googlemaps"){
 			layer = i3GEO.Interface.googlemaps.retornaDivLayer(i3GEOF.cortina.tema);
-			i3GEOF.cortina.estilo = layer.style;
+			if(layer)
+			{i3GEOF.cortina.estilo = layer.style;}
 		}
 		i3GEOF.cortina.slider.subscribe("change", function(offsetFromStart) {
 			var t=0,
@@ -232,7 +256,8 @@ i3GEOF.cortina = {
 		 		$i("i3GEOcortinaTemasDiv").style.display = "block";
 		 		if ($i("i3GEOcortinatemas")){
 		 			$i("i3GEOcortinatemas").onchange = function(){
-						i3GEOF.cortina.estilo.clip = "rect(0px,"+i3GEO.parametros.w+"px,"+i3GEO.parametros.h+"px,0px)";
+						if(i3GEOF.cortina.estilo)
+						{i3GEOF.cortina.estilo.clip = "rect(0px,"+i3GEO.parametros.w+"px,"+i3GEO.parametros.h+"px,0px)";}
 						var t = $i("i3GEOcortinatemas").value;
 						i3GEO.mapa.ativaTema(t);
 						i3GEOF.cortina.tema = t;

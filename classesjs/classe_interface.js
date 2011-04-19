@@ -779,7 +779,7 @@ i3GEO.Interface = {
 				}
 
 			};
-			i3GEO.arvoreDeCamadas.ATIVATEMA = "i3GEO.Interface.openlayers.ligaDesliga(this)";
+			i3GEO.arvoreDeCamadas.ATIVATEMA = "i3GEO.Interface.openlayers.ligaDesliga(this);i3GEO.eventos.executaEventos(i3GEO.eventos.ATUALIZAARVORECAMADAS);";
 			i3GEO.util.multiStep([
 					i3GEO.coordenadas.mostraCoordenadas,
 					montaMapa,
