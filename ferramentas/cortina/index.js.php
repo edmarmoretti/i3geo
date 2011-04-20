@@ -128,7 +128,7 @@ i3GEOF.cortina = {
 		{i3GEO.mapa.ativaTema(tema);}
 		minimiza = function(){
 			i3GEO.janela.minimiza("i3GEOF.cortina");
-			i3GEOF.cortina.slider.setValue(0,false);
+			//i3GEOF.cortina.slider.setValue(0,false);
 		};		
 		var janela,divid,temp,titulo;
 		i3GEOF.cortina.tema = tema;

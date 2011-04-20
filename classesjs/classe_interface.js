@@ -999,6 +999,8 @@ i3GEO.Interface = {
 				i;
 			for(i=0;i<nlayers;i++){
 				layers[i].mergeNewParams({r:Math.random()});
+				layers[i].url = layers[i].url.replace("&&&&&&&&&&&&&&","");
+				layers[i].url = layers[i].url+"&&";				
 				if(layers[i].visibility === true){
 					layers[i].redraw();
 				}

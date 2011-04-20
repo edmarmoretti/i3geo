@@ -10,7 +10,7 @@ FreeSans FreeSans.ttf
 FreeSansBold FreeSansBold.ttf
 FreeSansBoldOblique FreeSansBoldOblique.ttf
 FreeSansOblique FreeSansOblique.ttf
-arial                          FreeSans.ttf
-arial-bold                       FreeSansBold.ttf
-arial-italic                    FreeSansOblique.ttf
-verdana                         FreeMono.ttf
+arial FreeSans.ttf
+arial-bold FreeSansBold.ttf
+arial-italic FreeSansOblique.ttf
+verdana FreeMono.ttf
