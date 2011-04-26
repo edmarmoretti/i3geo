@@ -589,6 +589,20 @@ i3GEO.Interface = {
 	*/
 	openlayers:{
 		/*
+		Propriedade: FUNDOTEMA
+
+		Estilo "background" do nome dotema enquanto o mesmo está sendo carregado.
+		
+		Permite destacar o nome do tema que está em processo de carregamento
+
+		Tipo:
+		{background style}
+
+		Default:
+		{yellow}
+		*/
+		FUNDOTEMA: "yellow",
+		/*
 		Propriedade: TILES
 
 		Indica se será utilizado o modo de navegação em tiles
@@ -933,7 +947,7 @@ i3GEO.Interface = {
 		},
 		loadStartLayer: function(event){
 			i3GEO.Interface.STATUS.atualizando.push(event.object.name);
-			YAHOO.util.Dom.setStyle("ArvoreTituloTema"+event.object.name,"background","RGB(240,240,240)");
+			YAHOO.util.Dom.setStyle("ArvoreTituloTema"+event.object.name,"background",i3GEO.Interface.openlayers.FUNDOTEMA);
 		},
 		loadStopLayer: function(event){
 			i3GEO.Interface.STATUS.atualizando.remove(event.object.name);
@@ -1008,10 +1022,12 @@ i3GEO.Interface = {
 		},
 		atualizaTema:function(retorno,tema){
 			var layer = i3geoOL.getLayersByName(tema)[0];
-			layer.mergeNewParams({r:Math.random()});
-			layer.url = layer.url.replace("&&&&&&&&&&&&&&","");
-			layer.url = layer.url+"&&";
-			layer.redraw();
+			if(layer && layer != undefined){
+				layer.mergeNewParams({r:Math.random()});
+				layer.url = layer.url.replace("&&&&&&&&&&&&&&","");
+				layer.url = layer.url+"&&";
+				layer.redraw();
+			}
 			i3GEO.Interface.openlayers.recalcPar();
 			try
 			{i3GEO.arvoreDeCamadas.atualiza(retorno.data.temas);}
