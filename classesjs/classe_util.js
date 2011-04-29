@@ -2324,7 +2324,46 @@ i3GEO.util = {
 				callback();
 			}
 		},25);
-	}	
+	},
+	/*
+	Function: stopProp
+	
+	Para a propagação de eventos em um elemento do DOM
+	
+	Crossbrowser
+	
+	http://javascript.about.com/library/bldom21.htm
+	
+	Parametro:
+	
+	event - evento
+	*/
+	stopProp: function(event) {
+		//alert(e.id);
+		if (event && event.stopPropogation)
+		event.stopPropogation;
+		else 
+		event.cancelBubble = true;
+	},
+	/*
+	Function: stopDef
+	
+	Anula o evento default de um elemento do DOM
+	
+	Crossbrowser
+	
+	http://javascript.about.com/library/bldom21.htm
+	
+	Parametro:
+	
+	event - evento
+	*/	
+	stopDef: function(event) {
+		if (event && event.preventDefault)
+		event.preventDefault();
+		else
+		window.eventReturnValue = false;
+	} 	
 };
 //++++++++++++++++++++++++++++++++++++
 // YUI ACCORDION
