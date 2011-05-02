@@ -211,7 +211,9 @@ i3GEO.util = {
 	*/
 	insereCookie: function(nome,valor) {
 		if(typeof(console) !== 'undefined'){console.info("i3GEO.util.insereCookie()");}
-		document.cookie = nome+"="+valor+";path=/";
+		var exdate=new Date();
+		exdate.setDate(exdate.getDate() + 10);
+		document.cookie = nome+"="+valor+"; expires="+exdate.toUTCString()+";path=/";
 	},
 	/*
 	Function: pegaCookie
