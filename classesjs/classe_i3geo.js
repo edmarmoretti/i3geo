@@ -525,10 +525,13 @@ i3GEO = {
 		diminuix = (navm) ? i3GEO.configura.diminuixM : i3GEO.configura.diminuixN;
 		diminuiy = (navm) ? i3GEO.configura.diminuiyM : i3GEO.configura.diminuiyN;
 		menos = 0;
-		if ($i("contemFerramentas"))
+		temp = $i("contemFerramentas");
+		if (temp && temp.style && temp.style.width)
 		{menos += parseInt($i("contemFerramentas").style.width,10);}
-		if ($i("ferramentas"))
+		temp = $i("ferramentas");
+		if (temp && temp.style && temp.style.width)
 		{menos += parseInt($i("ferramentas").style.width,10);}
+
 		if(i3GEO.configura.autotamanho === true){
 			//novow = parseInt(screen.availWidth,10) - diminuix - i3GEO.util.getScrollerWidth();
 			//novoh = parseInt(screen.availHeight,10) - diminuiy;
