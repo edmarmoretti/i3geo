@@ -357,7 +357,7 @@ i3GEO.coordenadas = {
 	{string} - html com a tabela
 	*/
 	criaMascaraDMS: function(prefixo,titulo,caixa){
-		var ins = '<table id='+prefixo+' style=display:block;text-align:center ><tr style="border-bottom:2px solid white" >' +
+		var ins = '<table id='+prefixo+' style=display:block;text-align:center;width:410px ><tr style="border-bottom:2px solid white" >' +
 				'<td style=width:120px;text-align:right >'+titulo+' X:&nbsp;</td>' +
 				'<td>'+$inputText('','315',prefixo+'xg','grau','3','-00')+'&nbsp;</td>' +
 				'<td>'+$inputText('','',prefixo+'xm','minuto','2','00')+'&nbsp;</td>' +
@@ -416,7 +416,7 @@ i3GEO.coordenadas = {
 	{string} - html com a tabela
 	*/
 	criaMascaraMetrica: function(prefixo,titulo,caixa){
-		var ins = "<table id="+prefixo+" style=display:block;text-align:center ><tr style='border-bottom:2px solid white' >" +
+		var ins = "<table id="+prefixo+" style=display:block;text-align:center;;width:410px ><tr style='border-bottom:2px solid white' >" +
 		"<td style=width:120px;text-align:right >"+titulo+" X:&nbsp;</td>" +
 		"<td>"+$inputText("","",prefixo+"X","X","12","00")+"&nbsp;</td>" +
 		"<td>Y:"+$inputText("","",prefixo+"Y","Y","12","00")+"&nbsp;</td>" +
