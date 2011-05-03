@@ -19,9 +19,9 @@
 }
 </style>
 </head>
-<body id="i3geo">
+<body id="i3geo" style=width:100% >
 
-<table id='mst' summary="" style='display:none;' width=100% cellspacing='0'>
+<table id='mst' summary="" style='display:none;' cellspacing='0'>
 	<tr style="border:0px">
 		<td id="barraSuperior" style="background-image:url('../imagens/visual/default/cabeca.png');height:10px"></td>
 	</tr>
@@ -217,6 +217,10 @@ OpenLayers.ImgPath = "../pacotes/openlayers/img/";
 //inicia o mapa
 //
 i3GEO.inicia();
+window.onresize = function(){
+	i3GEO.reCalculaTamanho();
+	i3GEO.barraDeBotoes.recria("i3geo_barra2");
+}
 </script>
 </body>
 </html>

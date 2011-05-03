@@ -506,19 +506,19 @@ utiliza botões antigos até a versão 4.4 do i3geo
 {
 	background-image:URL('../imagens/visual/default/sprite.png');
 	background-repeat: no-repeat;
-	background-position: 0px -1450px;
+	background-position: 0px -1455px;
 	cursor:pointer;
 	width:22px;
-	height:10px;
+	height:20px;
 }
 #sobeferramentas
 {
 	background-image:URL('../imagens/visual/default/sprite.png');
 	background-repeat: no-repeat;
-	background-position: 0px -1475px;
+	background-position: 0px -1480px;
 	cursor:pointer;
 	width:22px;
-	height:10px;
+	height:20px;
 }
 /*marcador de lista das propriedades do mapa*/
 .ticPropriedades

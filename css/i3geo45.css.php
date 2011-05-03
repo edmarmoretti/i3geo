@@ -741,7 +741,7 @@ h1 {padding:.25em .5em;background-color:#ccc;}
 	background-position: 0px -1450px;
 	cursor:pointer;
 	width:22px;
-	height:10px;
+	height:20px;
 	margin: 2px;
 }
 #sobeferramentas
@@ -751,7 +751,7 @@ h1 {padding:.25em .5em;background-color:#ccc;}
 	background-position: 0px -1475px;
 	cursor:pointer;
 	width:22px;
-	height:10px;
+	height:20px;
 	margin: 2px;
 }
 /*marcador de lista das propriedades do mapa*/

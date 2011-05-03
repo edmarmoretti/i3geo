@@ -515,7 +515,7 @@ i3GEO = {
 	Function: calculaTamanho
 
 	Calcula o tamanho do mapa atual e define alguns elementos HTML do mapa
-
+	
 	Return:
 	{array} - [w,h]
 	*/
@@ -533,8 +533,6 @@ i3GEO = {
 		{menos += parseInt($i("ferramentas").style.width,10);}
 
 		if(i3GEO.configura.autotamanho === true){
-			//novow = parseInt(screen.availWidth,10) - diminuix - i3GEO.util.getScrollerWidth();
-			//novoh = parseInt(screen.availHeight,10) - diminuiy;
 			if (window.top === window.self){//nao se aplica em iframe
 				window.resizeTo(screen.availWidth,screen.availHeight);
 				window.moveTo(0,0);
@@ -580,6 +578,55 @@ i3GEO = {
 			temp.style.height=h + "px";
 			temp.style.width=w + "px";
 		}
+		return [w,h];
+	},
+	/*
+	Function: reCalculaTamanho
+
+	Recalcula o tamanho do mapa com base nas configurações do navegador
+	
+	Return:
+	{array} - [w,h]
+	*/
+	reCalculaTamanho: function(){
+		var diminuix,diminuiy,menos,novow,novoh,w,h,temp;
+		diminuix = (navm) ? i3GEO.configura.diminuixM : i3GEO.configura.diminuixN;
+		diminuiy = (navm) ? i3GEO.configura.diminuiyM : i3GEO.configura.diminuiyN;
+		menos = 0;
+		temp = $i("contemFerramentas");
+		if (temp && temp.style && temp.style.width)
+		{menos += parseInt($i("contemFerramentas").style.width,10);}
+		temp = $i("ferramentas");
+		if (temp && temp.style && temp.style.width)
+		{menos += parseInt($i("ferramentas").style.width,10);}
+		document.body.style.width = "100%";
+		temp = i3GEO.util.tamanhoBrowser();
+		novow = temp[0];
+		novoh = temp[1];
+		
+		document.body.style.height = novoh;
+
+		w = novow - menos - diminuix;
+		h = novoh - diminuiy;
+
+		temp = $i(i3GEO.Interface.IDMAPA);
+		if(temp){
+			temp.style.height=h + "px";
+			temp.style.width=w + "px";
+		}
+		temp = $i(i3GEO.Interface.IDCORPO);
+		if(temp){
+			temp.style.height=h + "px";
+			temp.style.width=w + "px";
+		}
+		temp = $i("mst");
+		if(temp){
+			temp.style.width="100%";
+		}
+		i3GEO.parametros.w = w;
+		i3GEO.parametros.h = h;
+		//i3GEO.Interface.atualizaMapa();
+		i3GEO.navega.zoomExt("","","",i3GEO.parametros.mapexten);
 		return [w,h];
 	},
 	/*

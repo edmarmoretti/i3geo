@@ -626,7 +626,7 @@ i3GEO.barraDeBotoes = {
 		{i3GEO.util.mudaCursor(i3GEO.configura.cursores,"contexto",idconteudonovo,i3GEO.configura.locaplic);}
 		//copia os botoes do HTML para a janela
 		ticone = 28;
-		alturadisponivel = i3GEO.parametros.h - i3GEO.Interface.BARRABOTOESTOP - ticone - 28 - 28;
+		alturadisponivel = i3GEO.parametros.h - i3GEO.Interface.BARRABOTOESTOP - ticone - 38 - 38;
 		if(this.AUTOALTURA === true)
 		{alturadisponivel += 28;}
 		numerobotoes = parseInt(alturadisponivel / ticone,10);
@@ -843,16 +843,22 @@ i3GEO.barraDeBotoes = {
 	recria: function(id){
 		if(typeof(console) !== 'undefined'){console.info("i3GEO.barraDeBotoes.recria()");}
 		var n,temp,novoel,barraZoom,x,y,
+			BARRAS = i3GEO.barraDeBotoes.BARRAS, 
 			iu = i3GEO.util;
-		n = this.BARRAS.length;
+		i3GEO.barraDeBotoes.BARRAS = [];
+		n = BARRAS.length;
 		for(i=0;i<n;i+=1){
-			if(this.BARRAS[i].id === id){
+			if(BARRAS[i].id === id){
 				//remove o menu de contexto
 				iu.removeChild("contexto_"+id);
-				novoel = document.createElement("div");
-				novoel.id = "barraTemporaria"+i;
-				novoel.innerHTML = $i(this.BARRAS[i].id+"_").innerHTML;
-				document.body.appendChild(novoel);
+				if(!$i("barraTemporaria"+i)){
+					novoel = document.createElement("div");
+					novoel.id = "barraTemporaria"+i;
+					document.body.appendChild(novoel);
+				}
+				novoel = $i("barraTemporaria"+i);
+				novoel.innerHTML = $i(BARRAS[i].id+"_").innerHTML;
+				
 				//verifica se tem o slide de zoom
 				barraZoom = false;
 				temp = $i("vertMaisZoom");
@@ -861,10 +867,12 @@ i3GEO.barraDeBotoes = {
 					if(temp.id === id)
 					{barraZoom = true;}
 				}
-				x = parseInt($i(this.BARRAS[i].id+"_c").style.left,10);
-				y = parseInt($i(i3GEO.Interface.IDCORPO).style.top,10)+10;
-				this.BARRAS[i].destroy();
-				i3GEO.barraDeBotoes.inicializaBarra(novoel.id,this.BARRAS[i].id+"x",barraZoom,x,y);
+				x = parseInt($i(BARRAS[i].id+"_c").style.left,10);
+				y = parseInt($i(BARRAS[i].id+"_c").style.top,10);
+				if(i3GEO.barraDeBotoes.PERMITEFECHAR === true)
+				{y = y-10;}
+				BARRAS[i].destroy();
+				i3GEO.barraDeBotoes.inicializaBarra(novoel.id,BARRAS[i].id,barraZoom,x,y);
 			}
 		}
 		i3GEO.barraDeBotoes.ativaBotoes();
