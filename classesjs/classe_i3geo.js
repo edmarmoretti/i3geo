@@ -543,6 +543,7 @@ i3GEO = {
 		novow = YAHOO.util.Dom.getDocumentWidth() - i3GEO.util.getScrollerWidth();
 		novoh = YAHOO.util.Dom.getDocumentHeight();
 		//o try aqui é necessário por conta do uso possível do i3geo em um iframe
+		/*
 		try{
 			if (novow < 800){
 				novow = 800;
@@ -552,6 +553,7 @@ i3GEO = {
 		catch(e){
 			if(typeof(console) !== 'undefined'){console.error(e);}
 		}
+		*/
 		//novoh = 500
 		document.body.style.width = novow;
 		document.body.style.height = novoh;

@@ -349,15 +349,20 @@ i3GEO.janela = {
 	id {string} - prefixo utilizado na composição do id da janela
 	*/
 	minimiza: function(id){
-		var temp = $i(id+"_corpo"),n,i;
+		var temp = $i(id+"_corpo"),
+			n,
+			i,
+			m = YAHOO.janelaDoca.xp.manager.find(id);
 		if(temp){
 			if(temp.style.display === "block"){
 				temp.style.display = "none";
-				YAHOO.janelaDoca.xp.manager.find(id).hideIframe;
+				if(m)
+				{m.hideIframe;}
 			}
 			else{
 				temp.style.display = "block";
-				YAHOO.janelaDoca.xp.manager.find(id).showIframe;
+				if(m)
+				{m.showIframe;}
 			}
 		}
 		temp = $i(id+"_resizehandle");

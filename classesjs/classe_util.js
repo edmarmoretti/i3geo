@@ -338,7 +338,7 @@ i3GEO.util = {
 	/*
 	Function: arvore
 
-	Cria uma árvore com base em um objeto contendo aspropriedades.
+	Cria uma árvore com base em um objeto contendo as propriedades.
 
 	No objeto com as propriedades, se "url" for igual a "", será incluído o texto original definido em "text".
 
@@ -363,7 +363,6 @@ i3GEO.util = {
 	*/
 	arvore: function(titulo,onde,obj){
 		if(typeof(console) !== 'undefined'){console.info("i3GEO.util.arvore()");}
-		//YAHOO.log("arvore", "i3geo");
 		var arvore,root,tempNode,currentIconMode,d,c,i,linha,conteudo;
 		if(!$i(onde)){return;}
 		try{

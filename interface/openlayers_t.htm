@@ -1,0 +1,222 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+<head>
+<meta http-equiv="Category" content="i3Geo Mapa interativo MMA geoprocessamento sig mobile">
+<META HTTP-EQUIV="Content-Type" CONTENT="text/html; charset=ISO-8859-1">
+<title>i3GEO - OpenLayers</title>
+<style>
+.listaMenuTitulo{
+	font-size: 13px;
+	text-align: left;
+	margin-left: 5px;
+	margin-top: 6px;
+}
+.listaMenuItem{
+	font-size:11px;
+	text-align: left;
+	margin-left:15px;
+	margin-top: 6px;
+}
+</style>
+</head>
+<body id="i3geo">
+
+<table id='mst' summary="" style='display:none;' width=100% cellspacing='0'>
+	<tr style="border:0px">
+		<td id="barraSuperior" style="background-image:url('../imagens/visual/default/cabeca.png');height:10px"></td>
+	</tr>
+	<tr>
+		<td style=text-align:center; >
+			<div style="top:0px;cursor:pointer;border-bottom: 1px solid #A3A3A3">
+				<div id=guia1 class=guia ></div>
+				<div id=guia2 class=guia ></div>
+				<div id=guia4 class=guia ></div>
+				<div id=guia6 class=guia >+</div>
+			</div>
+		</td> 
+	</tr>
+	<tr>
+		<td style="vertical-align:top;border-width:0px;">
+			<table width="100%" style="vertical-align:top;border-width:0px">
+				<tr>
+					<td  class=verdeclaro id=contemImg >
+						<div id=corpoMapa style="background-image:url('../imagens/i3geo1bw.jpg');"></div>
+					</td>
+				</tr>
+			</table>
+		</td>
+	</tr>
+	<tr>
+		<td style=text-align:center;padding-top:2px; >
+			<div id=localizarxy style="text-align:center;font-size:10px;display:inline-table;">Aguarde...</div>
+			<div id=escala style="text-align:right;width:100px;display:inline-table;" ></div>  
+
+		</td>
+	</tr>
+	<tr style="border:0px">
+		<td id="barraInferior" style="background-image:url('../imagens/visual/default/rodape.png');height:10px"></td>
+	</tr>
+	<tr style="border:0px">
+		<td style=background-color:black ><input style="border:0px none; background-color:black;color:white;font-size:12pt;" type="text" size="1" id="i3geo_letreiro" ></td>
+	</tr>
+	<tr style="border:0px">
+		<td style=background-color:black;color:white >geoprocessamento@mma.gov.br </td>
+	</tr>
+</table>
+
+<div id='guia1obj' style=padding-left:2px;display:none;position:absolute;top:34px;left:100px;background-color:white;width:300px; >
+	<div style='left:5px;top:10px;' id=buscaRapida ></div>
+	<div id=listaPropriedades style='top:15px;' ></div>
+	<div id=listaLayersBase style='top:15px;'></div>
+	<div id=listaTemas style='top:15px;'></div>
+</div>
+<div id='guia2obj' style=padding-left:2px;display:none;position:absolute;top:34px;left:100px;background-color:white;width:300px; >Aguarde...<img alt="" src="../imagens/branco.gif" width=248 /></div>
+<div id='guia4obj' style=padding-left:2px;display:none;position:absolute;top:34px;left:100px;background-color:white;width:300px; >
+	<div id='legenda' style='text-align:left'></div>
+</div>
+<div id='guia6obj' style=padding-left:2px;display:none;position:absolute;top:34px;left:100px;background-color:white;width:300px; >
+	<div id=i3GEOcompartilhar style="text-align:center;border-top:0px solid rgb(250,250,250);padding-top:1px;" ></div>
+	<div id=menuLista style='text-align:left'></div>
+</div>
+
+<div id=seletorIdiomas style="position:absolute;top:15px;left:5px;z-index:20000" ></div>
+
+<center>
+<br><br>
+<table>
+<tr>
+	<td><center><h1 style="font-size:10px;font-family: Verdana, Arial, Helvetica, sans-serif;"><div id=versaoi3geo ></div><h2 style="font-size:10px;font-family: Verdana, Arial, Helvetica, sans-serif;">i3Geo - Software livre para criação de mapas interativos e geoprocessamento<h3 style="font-size:10px;font-family: Verdana, Arial, Helvetica, sans-serif;">Baseado no Mapserver, é licenciado sob GPL e integra o Portal do Software Público Brasileiro</h3></h2></h1></td>
+</tr>
+<tr>
+	<td style="padding:10px;"><center><img alt="logomarca" src='../imagens/logo_inicio.png'></td>
+</tr>
+<tr>
+	<td><center>
+		<!--
+		<script id="ohloh" type="text/javascript" src="http://www.ohloh.net/p/150688/widgets/project_users.js?style=red"></script>
+		-->
+	</td>
+</tr>
+</table>
+<script src="../classesjs/i3geonaocompacto.js"></script>
+<script src="../pacotes/openlayers/OpenLayers29.js.php"></script>
+<script>
+/*
+Title: Interface Openlayers para tablets
+
+Abre o i3geo com todas as suas funcionalidades e interface de navegação controlada pela API Openlayers adaptada para dispositivos do tipo tablet.
+
+File: i3geo/interface/openlayers_m.htm
+
+Exemplo:
+
+http://<host>/i3geo/ms_criamapa.php
+
+http://<host>/i3geo/interface/openlayers_m.htm
+
+http://<host>/i3geo
+
+Para definir quais botões das barras de ferramentas serão incluídos no mapa, veja: <classe_barradebotoes.js> i3GEO.barraDeBotoes.INCLUIBOTAO
+
+*/
+/*
+	Indica a localização correta do i3geo.
+	
+	É utilizada para identificar o local correto onde estão os programas em php que são utilizados.
+	
+	Se não for definida, o i3Geo tentará encontrar o local automaticamente com base na tag javascript 
+*/
+//i3GEO.configura.locaplic = i3GEO.util.protocolo()+"://"+window.location.host+"/i3geo";
+/*
+Para outras configurações, veja i3geo/classesjs/classe_configura.js
+
+exemplo
+
+i3GEO.configura.autotamanho = true;
+*/
+i3GEO.configura.locaplic = i3GEO.util.protocolo()+"://"+window.location.host+"/i3geo";
+i3GEO.configura.autotamanho = false;
+i3GEO.Interface.ATUAL = "openlayers";
+i3GEO.Interface.IDCORPO = "contemImg";
+
+i3GEO.Interface.openlayers.GADGETS = {
+	PanZoomBar:true,
+	PanZoom:false,
+	LayerSwitcher:true,
+	ScaleLine:false,
+	OverviewMap:false	
+};
+i3GEO.Interface.openlayers.TILES = true;
+/*
+Após a criação, é criado o objeto i3geoOL que corresponde ao objeto map da API do OpenLayers.
+Vc pode usar i3geoOL para aplicar os métodos e verificar as propriedades da API do OpenLayers
+*/
+i3GEO.cria();
+/*
+	Inicializa o mapa
+*/
+i3GEO.guias.TIPO = "tablet";
+i3GEO.barraDeBotoes.AUTOALTURA = true;
+i3GEO.barraDeBotoes.ATIVAMENUCONTEXTO = false;
+i3GEO.barraDeBotoes.PERMITEFECHAR = false;
+i3GEO.barraDeBotoes.PERMITEDESLOCAR = false;
+i3GEO.barraDeBotoes.AUTO = true;
+i3GEO.barraDeBotoes.COMPORTAMENTO = "laranja";
+
+i3GEO.Interface.BARRABOTOESLEFT = 5;
+i3GEO.Interface.BARRABOTOESTOP = 10;
+i3GEO.Interface.BARRADEZOOMTOP = 2;
+i3GEO.Interface.BARRADEZOOMLEFT = 50;
+
+i3GEO.idioma.IDSELETOR = "seletorIdiomas";
+i3GEO.Interface.ATIVAMENUCONTEXTO = false;
+i3GEO.arvoreDeTemas.TIPOBOTAO = "radio";
+i3GEO.arvoreDeTemas.ATIVATEMAIMEDIATO = true;
+i3GEO.arvoreDeTemas.OPCOESADICIONAIS.comentarios = true;
+i3GEO.arvoreDeCamadas.VERIFICAABRANGENCIATEMAS = true;
+i3GEO.configura.mapaRefDisplay = "none";
+//
+//esta é uma variável interna do OpenLayers que define o endereço do diretório onde estão as imagens usadas nos ícones
+//
+OpenLayers.ImgPath = "../pacotes/openlayers/img/";
+//
+//adiciona camadas que podem ser ativadas como fundo do mapa
+//
+(function(){
+	var ims = new OpenLayers.Layer.ArcGIS93Rest( 
+		"ESRI Imagery World 2D",
+		"http://server.arcgisonline.com/ArcGIS/rest/services/ESRI_Imagery_World_2D/MapServer/export",
+		{},
+		{isBaseLayer:true,visibility:false}
+	);
+	var wsm = new OpenLayers.Layer.ArcGIS93Rest( 
+		"ESRI World Street Map",
+		"http://server.arcgisonline.com/ArcGIS/rest/services/ESRI_StreetMap_World_2D/MapServer/export",
+		{},
+		{isBaseLayer:true,visibility:false}
+	);
+	var bra = new OpenLayers.Layer.WMS( 
+		"Base carto MMA",
+		"http://mapas.mma.gov.br/cgi-bin/mapserv?map=/opt/www/html/webservices/baseraster.map",
+		{layers:"baseraster",srs:"EPSG:4291",format:"image/png",isBaseLayer:false},
+		{isBaseLayer:true,visibility:false}
+	);
+	var osm = new OpenLayers.Layer.WMS( 
+		"Open Street Map",
+		"http://full.wms.geofabrik.de/std/demo_key",
+		{layers:""},
+		{isBaseLayer:true,visibility:false}
+	);
+	i3GEO.Interface.openlayers.LAYERSADICIONAIS = [ims,wsm,bra,osm];
+})();
+//
+//substitui a janela de alerta normal do navegador por uma janela estilizada. Pode ser comentado sem problemas. No Safari apresentou problemas.
+//
+//i3GEO.janela.ativaAlerta();
+//
+//inicia o mapa
+//
+i3GEO.inicia();
+</script>
+</body>
+</html>

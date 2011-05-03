@@ -90,6 +90,10 @@ i3GEO.gadgets = {
 		"mostraMenuSuspenso":
 
 		{idhtml:"menus",deslocaEsquerda:0},
+		
+		"mostraMenuLista":
+		
+		{idhtml:"menuLista"},
 
 		"mostraVersao":
 
@@ -116,6 +120,8 @@ i3GEO.gadgets = {
 		{idhtml:"historicozoom"},
 		"mostraMenuSuspenso":
 		{idhtml:"menus",deslocaEsquerda:0},
+		"mostraMenuLista":
+		{idhtml:"menuLista"},
 		"mostraVersao":
 		{idhtml:"versaoi3geo"}
 	},
@@ -204,11 +210,14 @@ i3GEO.gadgets = {
 	*/
 	mostraEscalaNumerica: function(id){
 		if(typeof(console) !== 'undefined'){console.info("i3GEO.gadgets.mostraEscalaNumerica()");}
-		var i,ins,temp;
+		var i,ins,temp,
+			onde;
 		if(arguments.length === 0)
 		{id = i3GEO.gadgets.PARAMETROS.mostraEscalaNumerica.idhtml;}
-		if($i(id)){
-			$i(id).style.display = "block";
+		onde = $i(id);
+		if(onde){
+			if(onde.style.display == "none")
+			{onde.style.display = "block";}
 			atualizaEscalaNumerica = function(escala){
 				var e = $i("i3geo_escalanum");  
 				if(!e){
@@ -227,12 +236,12 @@ i3GEO.gadgets = {
 				}
 			};
 			if(!$i("i3geo_escalanum")){
-				i = $inputText(id,"155","i3geo_escalanum",$trad("d10"),"9",parseInt(i3GEO.parametros.mapscale,10));
-				ins = "<table><tr><td>1:"+i;
+				i = $inputText(id,"100","i3geo_escalanum",$trad("d10"),"9",parseInt(i3GEO.parametros.mapscale,10));
+				ins = "<table><tr><td><span style=background-color:none >1:</span>"+i;
 				temp = 'var nova = document.getElementById("i3geo_escalanum").value;';
 				temp += 'i3GEO.navega.aplicaEscala(i3GEO.configura.locaplic,i3GEO.configura.sid,nova);';
 				ins += "</td><td><img src='"+i3GEO.util.$im("branco.gif")+"' class='tic' onclick='"+temp+"' /></td></tr></table>";
-				$i(id).innerHTML = ins;
+				onde.innerHTML = ins;
 			}
 			if(i3GEO.eventos.NAVEGAMAPA.toString().search("atualizaEscalaNumerica()") < 0)
 			{i3GEO.eventos.NAVEGAMAPA.push("atualizaEscalaNumerica()");}
@@ -782,25 +791,6 @@ i3GEO.gadgets = {
 			if(temp){
 				temp.className="yui-navset";
 			}
-			//default dos cabeçalhos se a variável i3GEO.configura.oMenuData.menu não existir
-			/*
-			if(!confm.menu){
-				ins = '<div class="bd" style="display:block;align:right;border: 0px solid white;z-index:6000;line-height:1.4" >' +
-					'<ul class="first-of-type" style="display:block;border:0px solid white;top:10px;">';
-				sobe = "";
-				if(navn)
-				{sobe = "line-height:0px;";}
-				ins += '<li class="yuimenubaritem" style="padding-bottom:5px" ><a style="border: 0px solid white;" href="#" class="yuimenubaritemlabel" id="menuajuda" >&nbsp;&nbsp;'+$trad("s1")+'</a></li>' +
-					'<li class="yuimenubaritem" style="padding-bottom:5px"><a style="border: 0px solid white;" href="#" class="yuimenubaritemlabel" id="menuanalise" >&nbsp;&nbsp;'+$trad("s2")+'</a></li>' +
-					'<li class="yuimenubaritem" style="padding-bottom:5px"><a style="border: 0px solid white;" href="#" class="yuimenubaritemlabel" id="menujanelas" >&nbsp;&nbsp;'+$trad("s3")+'</a></li>' +
-					'<li class="yuimenubaritem" style="padding-bottom:5px"><a style="border: 0px solid white;" href="#" class="yuimenubaritemlabel" id="menuarquivos" >&nbsp;&nbsp;'+$trad("s4")+'</a></li>' +
-					'<li class="yuimenubaritem" style="padding-bottom:5px"><a style="border: 0px solid white;" href="#" class="yuimenubaritemlabel" id="menuinterface" >&nbsp;&nbsp;'+$trad("d27")+'</a></li>' +
-					'</ul>' +
-					'</div>';
-				objid.innerHTML=ins;
-			}
-			else{
-			*/
 			if(ms.deslocaEsquerda){
 				alinhamento = "left:"+ms.deslocaEsquerda*-1+"px;";
 			}
@@ -817,7 +807,6 @@ i3GEO.gadgets = {
 			ins += '</ul>'; 
 			ins += '</div>';
 			objid.innerHTML=ins;
-			//}
 			onMenuBarBeforeRender = function (p_sType, p_sArgs){
 				var conta,nomeMenu,nomeSub,
 					subs = i3GEO.configura.oMenuData.submenus,
@@ -889,6 +878,49 @@ i3GEO.gadgets = {
 			{temp.border = "1px dotted white";}
 			if(navm && i3GEO.Interface.ATUAL === "googlemaps")
 			{temp.border = "2px dotted white";}
+		}
+	},
+	/*
+	Function: mostraMenuLista
+	
+	Mostra as opções existentes no menu suspenso porém na forma de uma lista de opções
+
+	O conteúdo do menu é baseado na variável i3GEO.configura.oMenuData
+
+	Parametro:
+
+	id {String} - id do elemento HTML que receberá o resultado. Esse id por default é obtido de
+	i3GEO.gadgets.PARAMETROS
+	*/
+	mostraMenuLista: function(id){
+		var objid,n,i,estilo,t,temp,nomeMenu,sub,
+			ms = i3GEO.gadgets.PARAMETROS.mostraMenuLista,
+			confm = i3GEO.configura.oMenuData,
+			ins = "",
+			subs = i3GEO.configura.oMenuData.submenus;
+		if(arguments.length === 0)
+		{id = ms.idhtml;}
+		else
+		{ms.idhtml = id;}
+
+		objid = $i(id);
+		if(objid){
+			n = confm.menu.length;
+			for(i = 0;i < n;i += 1){
+				ins += '<div class="listaMenuTitulo" id=menulista_'+confm.menu[i].id+'>'+confm.menu[i].nome+'</div>';
+			}
+			objid.innerHTML=ins;
+			for(nomeMenu in subs){
+				if($i("menulista_"+nomeMenu)){
+					sub = subs[nomeMenu];
+					n = sub.length;
+					ins = "";
+					for(i=0;i<n;i++){
+						ins += "<p class='listaMenuItem' ><a href='"+sub[i].url+"' target='_blank'>"+sub[i].text+"</a>";
+					}
+					$i("menulista_"+nomeMenu).innerHTML += ins;
+				}
+			}
 		}
 	}
 };

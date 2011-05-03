@@ -210,7 +210,7 @@ i3GEO.guias = {
 	{"guia"}
 
 	Values:
-	guia|sanfona
+	guia|sanfona|tablet
 	*/
 	TIPO: "guia",
 	/*
@@ -291,16 +291,21 @@ i3GEO.guias = {
 			//
 			//constroi as TAGs para as guias
 			//
-			if(i3GEO.guias.TIPO === "guia"){
-				ins = '<ul class="yui-nav" style="border-width:0pt 0pt 0px;border-color:rgb(240,240,240);border-bottom-color:white;">';
+			if(i3GEO.guias.TIPO === "guia" || i3GEO.guias.TIPO === "tablet"){
+				ins = '<ul class="yui-nav" style="border-width:0pt 0pt 0px;border-color:rgb(240,240,240);border-bottom-color:white;text-align:center;">';
+				if(i3GEO.guias.TIPO === "tablet"){
+					ins += '<li><a href="#"><em><div onclick=i3GEO.guias.escondeGuias(); >^</div></em></a></li>';
+				}
 				for(ng=0;ng<nguias;ng++){
 					if($i(i3GEO.guias.CONFIGURA[guias[ng]].id)){
 						if($i(i3GEO.guias.CONFIGURA[guias[ng]].idconteudo))
 						{ins += '<li><a href="#"><em><div id="'+i3GEO.guias.CONFIGURA[guias[ng]].id+'" >'+i3GEO.guias.CONFIGURA[guias[ng]].titulo+'</div></em></a></li>';}
 					}
 				}
+				//adiciona uma guia que permite esconder todas as outras guias se for do tipo tablet
 				ins += "</ul>";
 				onde.innerHTML = ins;
+				
 				onf = function(){
 					var bcg,cor;
 					bcg = this.parentNode.parentNode.style;
@@ -387,8 +392,12 @@ i3GEO.guias = {
 		catch(e){
 			if(typeof(console) !== 'undefined'){console.error(e);}
 		}
-		i3GEO.guias.mostra(i3GEO.guias.ATUAL);
-		i3GEO.guias.ativa(i3GEO.guias.ATUAL);
+		if(i3GEO.guias.TIPO !== "tablet"){
+			i3GEO.guias.mostra(i3GEO.guias.ATUAL);
+			i3GEO.guias.ativa(i3GEO.guias.ATUAL);
+		}
+		else
+		{i3GEO.guias.escondeGuias();}
 	},
 	/*
 	Function: ajustaAltura
@@ -413,6 +422,22 @@ i3GEO.guias = {
 		}
 	},
 	/*
+	Function: escondeGuias
+	
+	Esconde todas as guias
+	*/
+	escondeGuias: function(){
+		var guias,nguias,g;
+		guias = i3GEO.util.listaChaves(i3GEO.guias.CONFIGURA);
+		nguias = guias.length;
+		for(g=0;g<nguias;g++){
+			if($i(this.CONFIGURA[guias[g]].idconteudo))
+			{$i(this.CONFIGURA[guias[g]].idconteudo).style.display="none";}
+			if($i(this.CONFIGURA[guias[g]].id))
+			{$i(this.CONFIGURA[guias[g]].id).parentNode.parentNode.style.background="transparent";}
+		}	
+	},
+	/*
 	Function: mostra
 
 	Mostra no mapa uma determinada guia
@@ -423,7 +448,7 @@ i3GEO.guias = {
 	*/
 	mostra: function(guia){
 		if(typeof(console) !== 'undefined'){console.info("i3GEO.guias.mostra()");}
-		var guias,nguias,g;
+		var guias,nguias,g,temp;
 		guias = i3GEO.util.listaChaves(i3GEO.guias.CONFIGURA);
 		nguias = guias.length;
 		for(g=0;g<nguias;g++){
@@ -442,11 +467,16 @@ i3GEO.guias = {
 			}
 		}
 		if(this.CONFIGURA[guia]){
-			if($i(this.CONFIGURA[guia].idconteudo)){
-				$i(this.CONFIGURA[guia].idconteudo).style.display="block";
+			temp = $i(this.CONFIGURA[guia].idconteudo);
+			if(temp){
+				temp.style.display="block";
 				$i(this.CONFIGURA[guia].id).parentNode.parentNode.style.background="white";
 				this.ATUAL = guia;
 			}
+		}
+		if(i3GEO.guias.TIPO === "tablet"){
+			temp.style.left = (i3GEO.parametros.w / 2) - 150 + "px";
+			temp.style.height = i3GEO.parametros.h - 10 + "px";
 		}
 	},
 	/*
@@ -481,9 +511,10 @@ i3GEO.guias = {
 			if($i(this.IDGUIAS))
 			{$i(this.IDGUIAS).style.display="none";}
 			i = $i("contemFerramentas");
-			if(i)
-			{i.style.display = "none";}
+			//if(i)
+			//{i.style.display = "none";}
 			w = parseInt($i("contemFerramentas").style.width,10);
+			$i("contemFerramentas").style.width = "0px";
 			i = $i("visual");
 			if (i)
 			{i.style.width="0px";i.innerHTML="";}
@@ -494,12 +525,12 @@ i3GEO.guias = {
 			i3GEO.parametros.w = l;
 			if (navm)
 			{pos = "";}
-			i = $i("img");
+			i = $i(i3GEO.Interface.IDCORPO);
 			if(i){
 				i.style.width= l+pos;
 				i.style.height= a+pos;
 			}
-			i = $i("corpoMapa");
+			i = $i(i3GEO.Interface.IDMAPA);
 			if(i){
 				i.style.width= l+pos;
 				i.style.height= a+pos;
@@ -508,11 +539,7 @@ i3GEO.guias = {
 			i = $i("mst");
 			if(i)
 			{i.style.width = l + 1 + pos;}
-			i = $i("contemImg");
-			if(i){
-				i.style.height= a+pos;
-				i.style.width= l+pos;
-			}
+
 			if (i3GEO.configura.entorno === "sim"){
 				letras=["L","O"];
 				for (l=0;l<2; l++){
@@ -542,26 +569,29 @@ i3GEO.guias = {
 				novoel = document.createElement("div");
 				novoel.id = "janelaguias";
 				novoel.style.display="block";
-				novoel.innerHTML = '<div class="hd">Guias</div><div class="bd" id="conteudojanelaguias"></div>';
+				novoel.innerHTML = '<div class="hd">Guias <div onclick ="i3GEO.janela.minimiza(\'conteudojanelaguias\')" id="janelaguias_minimizaCabecalho" class="container-minimiza" ></div></div><div class="bd" id="conteudojanelaguias_corpo" style=padding:0px ></div>';
 				temp = $i("i3geo") ? $i("i3geo").appendChild(novoel) : document.body.appendChild(novoel);
 				YAHOO.namespace("janelaguias.xp");
-				YAHOO.janelaguias.xp.panel = new YAHOO.widget.Panel("janelaguias", {width:"270px", fixedcenter: true, constraintoviewport: false, underlay:"none", close:true, visible:true, draggable:true, modal:false,iframe:false } );
+				YAHOO.janelaguias.xp.panel = new YAHOO.widget.Panel("janelaguias", {width:"270px", fixedcenter: true, constraintoviewport: false, underlay:"none", close:false, visible:true, draggable:true, modal:false,iframe:true } );
 				YAHOO.janelaguias.xp.panel.render();
+				YAHOO.janelaguias.xp.panel.cfg.setProperty("y", 0);
+				YAHOO.janelaDoca.xp.manager.register(YAHOO.janelaDoca.xp.panel);
 				i = $i(i3GEO.guias.IDGUIAS);
-				$i("janelaguias").appendChild(i);
+				$i("conteudojanelaguias_corpo").appendChild(i);
 				i.style.borderLeft="1px solid black";
 				i.style.borderRight="1px solid black";
 				guias = i3GEO.util.listaChaves(i3GEO.guias.CONFIGURA);
 				nguias = guias.length;
 				for(g=0;g<nguias;g++){
 					if($i(i3GEO.guias.CONFIGURA[guias[g]].idconteudo)){
-						$i("janelaguias").appendChild($i(i3GEO.guias.CONFIGURA[guias[g]].idconteudo));
+						$i("conteudojanelaguias_corpo").appendChild($i(i3GEO.guias.CONFIGURA[guias[g]].idconteudo));
 						temp = $i(i3GEO.guias.CONFIGURA[guias[g]].idconteudo).style;
 						temp.background="white";
 						temp.border="1px solid black";
 						temp.borderTop="0px solid black";
 						temp.width="270px";
 						temp.left="-1px";
+						temp.height = i3GEO.parametros.h - 90;
 					}
 				}
 				i3GEO.atualiza("");
