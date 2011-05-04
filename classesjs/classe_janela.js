@@ -316,6 +316,11 @@ i3GEO.janela = {
 			YAHOO.janelaDoca.xp.panel.moveTo(nx,ny + 50);
 		}
 		YAHOO.janelaDoca.xp.manager.register(YAHOO.janelaDoca.xp.panel);
+		if(this.TRANSICAOSUAVE ){
+			YAHOO.janelaDoca.xp.panel.cfg.setProperty("effect",[
+					{effect:YAHOO.widget.ContainerEffect.FADE,duration:0.5}
+			]);
+		}
 		YAHOO.janelaDoca.xp.panel.render();
 		if(navm && id !== "i3geo_janelaMensagens" && i3GEO.Interface.ATUAL === "googleearth")
 		{YAHOO.janelaDoca.xp.panel.moveTo(0,0);}

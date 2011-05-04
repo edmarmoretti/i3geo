@@ -2340,11 +2340,10 @@ i3GEO.util = {
 	event - evento
 	*/
 	stopProp: function(event) {
-		//alert(e.id);
 		if (event && event.stopPropogation)
-		event.stopPropogation;
+		{event.stopPropogation;}
 		else 
-		event.cancelBubble = true;
+		{event.cancelBubble = true;}
 	},
 	/*
 	Function: stopDef
@@ -2361,9 +2360,9 @@ i3GEO.util = {
 	*/	
 	stopDef: function(event) {
 		if (event && event.preventDefault)
-		event.preventDefault();
+		{event.preventDefault();}
 		else
-		window.eventReturnValue = false;
+		{window.eventReturnValue = false;}
 	},
 	/*
 	Function: tamanhoBrowser

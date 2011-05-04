@@ -147,6 +147,31 @@ i3GEO.Interface.openlayers.GADGETS = {
 	OverviewMap:false	
 };
 i3GEO.Interface.openlayers.TILES = true;
+
+i3GEO.barraDeBotoes.INCLUIBOTAO = {
+	zoomli: true,
+	pan: true,
+	zoomtot:false,
+	identifica: true,
+	identificaBalao: true,
+	mede: true,
+	area: true,
+	imprimir: true,
+	reinicia: false,
+	exten: true,
+	referencia: true,
+	inserexy: true,
+	textofid: true,
+	selecao: true,
+	google: true,
+	buscafotos: true,
+	wiki: false,
+	metar: false,
+	lentei: false,
+	confluence: false,
+	inseregrafico: true,
+	v3d: false
+};
 /*
 Após a criação, é criado o objeto i3geoOL que corresponde ao objeto map da API do OpenLayers.
 Vc pode usar i3geoOL para aplicar os métodos e verificar as propriedades da API do OpenLayers
@@ -162,11 +187,13 @@ i3GEO.barraDeBotoes.PERMITEFECHAR = false;
 i3GEO.barraDeBotoes.PERMITEDESLOCAR = false;
 i3GEO.barraDeBotoes.AUTO = true;
 i3GEO.barraDeBotoes.COMPORTAMENTO = "laranja";
+i3GEO.barraDeBotoes.ORIENTACAO = "horizontal";
+i3GEO.barraDeBotoes.AJUDA = false;
 
 i3GEO.Interface.BARRABOTOESLEFT = 5;
-i3GEO.Interface.BARRABOTOESTOP = 10;
+i3GEO.Interface.BARRABOTOESTOP = 0;
 i3GEO.Interface.BARRADEZOOMTOP = 2;
-i3GEO.Interface.BARRADEZOOMLEFT = 50;
+i3GEO.Interface.BARRADEZOOMLEFT = 5;
 
 i3GEO.idioma.IDSELETOR = "seletorIdiomas";
 i3GEO.Interface.ATIVAMENUCONTEXTO = false;
@@ -217,10 +244,22 @@ OpenLayers.ImgPath = "../pacotes/openlayers/img/";
 //inicia o mapa
 //
 i3GEO.inicia();
-window.onresize = function(){
-	i3GEO.reCalculaTamanho();
-	i3GEO.barraDeBotoes.recria("i3geo_barra2");
-}
+(function(){
+	i3GEOmapaResize = true;
+	window.onresize = function(){
+		timeResize = setTimeout(function(){
+			if(i3GEOmapaResize === true){
+				try{
+					i3GEO.reCalculaTamanho();
+					i3GEO.barraDeBotoes.recria("i3geo_barra2");
+					clearTimeOut(timeResize);
+				}
+				catch(e){i3GEOmapaResize = false;}
+			}
+			i3GEOmapaResize = false;
+		},2000);
+	};
+})();
 </script>
 </body>
 </html>

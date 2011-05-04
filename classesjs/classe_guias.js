@@ -294,30 +294,32 @@ i3GEO.guias = {
 			if(i3GEO.guias.TIPO === "guia" || i3GEO.guias.TIPO === "tablet"){
 				ins = '<ul class="yui-nav" style="border-width:0pt 0pt 0px;border-color:rgb(240,240,240);border-bottom-color:white;text-align:center;">';
 				if(i3GEO.guias.TIPO === "tablet"){
-					ins += '<li><a href="#"><em><div onclick=i3GEO.guias.escondeGuias(); >^</div></em></a></li>';
+					ins += '<li><a alt="" title=""><em><div id="i3GEOguiaEsconde" onclick=i3GEO.guias.escondeGuias();  >x</div></em></a></li>';
 				}
 				for(ng=0;ng<nguias;ng++){
 					if($i(i3GEO.guias.CONFIGURA[guias[ng]].id)){
 						if($i(i3GEO.guias.CONFIGURA[guias[ng]].idconteudo))
-						{ins += '<li><a href="#"><em><div id="'+i3GEO.guias.CONFIGURA[guias[ng]].id+'" >'+i3GEO.guias.CONFIGURA[guias[ng]].titulo+'</div></em></a></li>';}
+						{ins += '<li><a alt="" title=""><em><div id="'+i3GEO.guias.CONFIGURA[guias[ng]].id+'" >'+i3GEO.guias.CONFIGURA[guias[ng]].titulo+'</div></em></a></li>';}
 					}
 				}
 				//adiciona uma guia que permite esconder todas as outras guias se for do tipo tablet
 				ins += "</ul>";
 				onde.innerHTML = ins;
 				
-				onf = function(){
+				onf = function(event){
 					var bcg,cor;
+					i3GEO.util.stopDef(event);
 					bcg = this.parentNode.parentNode.style;
 					cor = bcg.background.split(" ")[0];
-					if(cor !== "white")
+					if(cor !== "white" && bcg.backgroundColor !== "white")
 					{bcg.background = "#bfdaff";}
 				};
-				outf = function(){
+				outf = function(event){
 					var bcg,cor;
+					i3GEO.util.stopDef(event);
 					bcg = this.parentNode.parentNode.style;
 					cor = bcg.background.split(" ")[0];
-					if(cor !== "white")
+					if(cor !== "white" && bcg.backgroundColor !== "white")
 					{bcg.background = "transparent";}
 				};
 			}
@@ -369,7 +371,7 @@ i3GEO.guias = {
 				guiaconteudo = $i(id);
 				if(guiaconteudo){
 					if(guia.click === "" || guia.click === undefined)
-					{eval('$i("'+id+'").onclick = function(){i3GEO.guias.mostra("'+guias[g]+'");}');}
+					{eval('$i("'+id+'").onclick = function(event){i3GEO.guias.mostra("'+guias[g]+'");i3GEO.util.stopDef(event);}');}
 					else
 					{guiaconteudo.onclick = guia.click;}
 					guiaconteudo.onmouseover = onf;
@@ -427,12 +429,36 @@ i3GEO.guias = {
 	Esconde todas as guias
 	*/
 	escondeGuias: function(){
-		var guias,nguias,g;
+		var guias,nguias,g,temp,attributes,anim;
 		guias = i3GEO.util.listaChaves(i3GEO.guias.CONFIGURA);
 		nguias = guias.length;
+		temp = $i("i3GEOguiaEsconde");
+		if(temp){
+			if(!navm){
+				temp.style.height = "0px";	
+				temp.style.visibility = "hidden";
+			}
+			temp.parentNode.parentNode.style.background="transparent";
+		}
 		for(g=0;g<nguias;g++){
-			if($i(this.CONFIGURA[guias[g]].idconteudo))
-			{$i(this.CONFIGURA[guias[g]].idconteudo).style.display="none";}
+			temp = $i(this.CONFIGURA[guias[g]].idconteudo);
+			if(temp){
+				if(i3GEO.guias.TIPO === "tablet" && temp.style.display == "block"){
+					temp.style.overflow = "hidden";
+					attributes = {
+						height: { to: 0 }
+					};
+					anim = new YAHOO.util.Anim(temp, attributes, 1, YAHOO.util.Easing.easeNone);				
+					anim.onComplete.subscribe(function(){
+						temp.style.overflow = "auto";
+						temp.style.display="none";
+						i3GEO.barraDeBotoes.BARRAS[0].show();
+					});
+					anim.animate();				
+				}
+				else
+				{temp.style.display="none";}
+			}
 			if($i(this.CONFIGURA[guias[g]].id))
 			{$i(this.CONFIGURA[guias[g]].id).parentNode.parentNode.style.background="transparent";}
 		}	
@@ -448,7 +474,7 @@ i3GEO.guias = {
 	*/
 	mostra: function(guia){
 		if(typeof(console) !== 'undefined'){console.info("i3GEO.guias.mostra()");}
-		var guias,nguias,g,temp;
+		var guias,nguias,g,temp,temp1,attributes,anim;
 		guias = i3GEO.util.listaChaves(i3GEO.guias.CONFIGURA);
 		nguias = guias.length;
 		for(g=0;g<nguias;g++){
@@ -469,14 +495,33 @@ i3GEO.guias = {
 		if(this.CONFIGURA[guia]){
 			temp = $i(this.CONFIGURA[guia].idconteudo);
 			if(temp){
-				temp.style.display="block";
-				$i(this.CONFIGURA[guia].id).parentNode.parentNode.style.background="white";
+				if(i3GEO.guias.TIPO === "tablet"){
+					i3GEO.barraDeBotoes.BARRAS[0].hide();
+					temp.style.left = (i3GEO.parametros.w / 2) - 150 + "px";
+					temp.style.height = 0;//i3GEO.parametros.h - 10 + "px";
+					temp.style.display = "block";
+					temp.style.overflow = "hidden";
+					temp1 = $i("i3GEOguiaEsconde");
+					if(!navm){
+						temp1.style.height = "15px";
+						temp1.style.visibility = "visible";
+					}
+					temp1.parentNode.parentNode.style.background="transparent";
+					attributes = {
+						height: { to: i3GEO.parametros.h - 10 }
+					};
+					anim = new YAHOO.util.Anim(temp, attributes, 1, YAHOO.util.Easing.easeNone);				
+					anim.onComplete.subscribe(function(){
+						temp.style.overflow = "auto";
+						temp.style.display = "block";
+					});
+					anim.animate();
+				}
+				else
+				{temp.style.display="block";}
+				$i(this.CONFIGURA[guia].id).parentNode.parentNode.style.backgroundColor="white";
 				this.ATUAL = guia;
 			}
-		}
-		if(i3GEO.guias.TIPO === "tablet"){
-			temp.style.left = (i3GEO.parametros.w / 2) - 150 + "px";
-			temp.style.height = i3GEO.parametros.h - 10 + "px";
 		}
 	},
 	/*
