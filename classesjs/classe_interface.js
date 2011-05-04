@@ -47,6 +47,18 @@ O HTML deve conter as definições da interface criada e deve estar armazenado em 
 */
 i3GEO.Interface = {
 	/*
+	Propriedade: TABLET
+	
+	A interface a ser utilizada deve ser adaptada para uso em tablets
+	
+	Type:
+	{boolean}
+	
+	Default:
+	{false}
+	*/
+	TABLET: false,
+	/*
 	Propriedade: OUTPUTFORMAT
 
 	Formato de geração da imagem.

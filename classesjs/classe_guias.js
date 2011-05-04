@@ -375,6 +375,7 @@ i3GEO.guias = {
 					else
 					{guiaconteudo.onclick = guia.click;}
 					YAHOO.util.Event.addListener($i(id), "click", YAHOO.util.Event.preventDefault);
+					YAHOO.util.Event.addListener($i(id), "click", YAHOO.util.Event.stopPropagation);
 					YAHOO.util.Event.addFocusListener($i(id), YAHOO.util.Event.preventDefault);
 					guiaconteudo.onmouseover = onf;
 					guiaconteudo.onmouseout = outf;
@@ -399,6 +400,12 @@ i3GEO.guias = {
 		if(i3GEO.guias.TIPO !== "tablet"){
 			i3GEO.guias.mostra(i3GEO.guias.ATUAL);
 			i3GEO.guias.ativa(i3GEO.guias.ATUAL);
+			temp = $i("i3GEOguiaEsconde");
+			YAHOO.util.Event.addListener(temp, "click", YAHOO.util.Event.preventDefault);
+			YAHOO.util.Event.addListener(temp, "click", YAHOO.util.Event.stopPropagation);
+			YAHOO.util.Event.addFocusListener(temp, YAHOO.util.Event.preventDefault);
+			temp.onmouseover = onf;
+			temp.onmouseout = outf;
 		}
 		else
 		{i3GEO.guias.escondeGuias();}

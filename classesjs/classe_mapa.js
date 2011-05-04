@@ -41,6 +41,18 @@ como cor de fundo, tipo de imagem, legenda etc.
 */
 i3GEO.mapa = {
 	/*
+	Propriedade: AUTORESIZE
+	
+	Indica se o tamanho do mapa será ajustado toda vez que o navegador for redimensionado
+	
+	Type:
+	{boolean}
+	
+	Default:
+	{false}
+	*/
+	AUTORESIZE: false,
+	/*
 	Variavel: GEOXML
 	Armazena o nome dos objetos geoXml adicionados ao mapa pela API do google maps
 
@@ -48,6 +60,22 @@ i3GEO.mapa = {
 	{Array}
 	*/
 	GEOXML: [],
+	/*
+	Function: ativaAutoResize
+	
+	Ativa o redimensionamento automático do mapa sempre que o navegador for redimensionado
+	
+	É definido como um evento do elemento window
+	*/
+	ativaAutoResize: function(){
+		window.onresize = function(){
+			var temp = setTimeout(function(){
+				i3GEO.reCalculaTamanho();
+				i3GEO.barraDeBotoes.recria("i3geo_barra2");
+				i3GEO.guias.escondeGuias();
+			},2000);
+		};
+	},
 	/*
 	Function: ajustaPosicao
 

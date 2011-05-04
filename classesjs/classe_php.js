@@ -530,6 +530,7 @@ i3GEO.php = {
 		{atualiza = true;}
 		if(ext === undefined)
 		{alert("extensao nao definida");return;}
+		
 		retorno = function(retorno){
 			switch(i3GEO.Interface.ATUAL)
 			{

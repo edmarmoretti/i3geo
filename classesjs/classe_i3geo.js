@@ -350,6 +350,8 @@ i3GEO = {
 		}
 		if(i3GEO.eventos.NAVEGAMAPA.toString().search("i3GEO.janela.fechaAguarde()") < 0)
 		{i3GEO.eventos.NAVEGAMAPA.push("i3GEO.janela.fechaAguarde()");}
+		if(i3GEO.mapa.AUTORESIZE === true)
+		{i3GEO.mapa.ativaAutoResize();}
 		eval(i3GEO.finaliza);
 	},
 	/*
@@ -614,8 +616,19 @@ i3GEO = {
 		}
 		i3GEO.parametros.w = w;
 		i3GEO.parametros.h = h;
-		//i3GEO.Interface.atualizaMapa();
-		i3GEO.navega.zoomExt("","","",i3GEO.parametros.mapexten);
+		i3GEO.php.mudatamanho(i3GEO.atualiza,h,w);
+		switch(i3GEO.Interface.ATUAL)
+		{
+			case "googlemaps":
+				i3GEO.Interface.googlemaps.zoom2extent(i3GEO.parametros.mapexten);
+				break;
+			case "googleearth":
+				i3GEO.Interface.googleearth.zoom2extent(i3GEO.parametros.mapexten);
+				break;
+			case "openlayers":
+				i3GEO.Interface.openlayers.zoom2ext(i3GEO.parametros.mapexten);
+				break;
+		}
 		return [w,h];
 	},
 	/*
