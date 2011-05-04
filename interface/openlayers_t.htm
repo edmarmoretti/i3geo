@@ -19,7 +19,7 @@
 }
 </style>
 </head>
-<body id="i3geo" style=width:100% ontouchstart="YAHOO.util.Event.preventDefault(event)" ontouchmove="YAHOO.util.Event.preventDefault(event)" ontouchend="YAHOO.util.Event.preventDefault(event)">
+<body id="i3geo" style=width:100% >
 
 <table id='mst' summary="" style='display:none;' cellspacing='0'>
 	<tr style="border:0px">
@@ -40,7 +40,7 @@
 			<table width="100%" style="vertical-align:top;border-width:0px">
 				<tr>
 					<td  class=verdeclaro id=contemImg >
-						<div id=corpoMapa style="background-image:url('../imagens/i3geo1bw.jpg');"></div>
+						<div ontouchstart="YAHOO.util.Event.preventDefault(event)" ontouchmove="YAHOO.util.Event.preventDefault(event)" ontouchend="YAHOO.util.Event.preventDefault(event)" id=corpoMapa style="background-image:url('../imagens/i3geo1bw.jpg');"></div>
 					</td>
 				</tr>
 			</table>
@@ -50,7 +50,6 @@
 		<td style=text-align:center;padding-top:2px; >
 			<div id=localizarxy style="text-align:center;font-size:10px;display:inline-table;">Aguarde...</div>
 			<div id=escala style="text-align:right;width:100px;display:inline-table;" ></div>  
-
 		</td>
 	</tr>
 	<tr style="border:0px">
