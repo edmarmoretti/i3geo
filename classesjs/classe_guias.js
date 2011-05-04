@@ -308,7 +308,7 @@ i3GEO.guias = {
 				
 				onf = function(event){
 					var bcg,cor;
-					i3GEO.util.stopDef(event);
+					YAHOO.util.Event.stopEvent(event);
 					bcg = this.parentNode.parentNode.style;
 					cor = bcg.background.split(" ")[0];
 					if(cor !== "white" && bcg.backgroundColor !== "white")
@@ -316,7 +316,7 @@ i3GEO.guias = {
 				};
 				outf = function(event){
 					var bcg,cor;
-					i3GEO.util.stopDef(event);
+					YAHOO.util.Event.stopEvent(event);
 					bcg = this.parentNode.parentNode.style;
 					cor = bcg.background.split(" ")[0];
 					if(cor !== "white" && bcg.backgroundColor !== "white")
@@ -371,7 +371,7 @@ i3GEO.guias = {
 				guiaconteudo = $i(id);
 				if(guiaconteudo){
 					if(guia.click === "" || guia.click === undefined)
-					{eval('$i("'+id+'").onclick = function(event){i3GEO.guias.mostra("'+guias[g]+'");i3GEO.util.stopDef(event);}');}
+					{eval('$i("'+id+'").onclick = function(event){i3GEO.guias.mostra("'+guias[g]+'");YAHOO.util.Event.stopEvent(event);}');}
 					else
 					{guiaconteudo.onclick = guia.click;}
 					guiaconteudo.onmouseover = onf;

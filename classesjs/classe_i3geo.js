@@ -211,21 +211,6 @@ i3GEO = {
 		else
 		{i3GEO.configura.sid = "";}
 		//
-		//para efeitos de compatibilidade (depreciado)
-		//
-		/*
-		g_panM = "nao";
-		g_sid = i3GEO.configura.sid;
-		try {i3GEO.configura.locaplic = g_locaplic;}
-		catch(e){
-			g_locaplic = i3GEO.configura.locaplic;
-		}
-		try{i3GEO.configura.diminuixM = g_diminuixM;}catch(e){}
-		try{i3GEO.configura.diminuixN = g_diminuixN;}catch(e){}
-		try{i3GEO.configura.diminuiyM = g_diminuiyM;}catch(e){}
-		try{i3GEO.configura.diminuiyN = g_diminuiyN;}catch(e){}
-		*/
-		//
 		//tenta definir automaticamente a variável que indica a localização do i3geo
 		//
 		if(!i3GEO.configura.locaplic || i3GEO.configura.locaplic === ""){
@@ -613,11 +598,13 @@ i3GEO = {
 		if(temp){
 			temp.style.height=h + "px";
 			temp.style.width=w + "px";
+			YAHOO.util.Event.addListener(temp, "click", YAHOO.util.Event.stopEvent);
 		}
 		temp = $i(i3GEO.Interface.IDCORPO);
 		if(temp){
 			temp.style.height=h + "px";
 			temp.style.width=w + "px";
+			YAHOO.util.Event.addListener(temp, "click", YAHOO.util.Event.stopEvent);
 		}
 		temp = $i("mst");
 		if(temp){
