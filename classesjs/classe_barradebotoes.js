@@ -505,6 +505,7 @@ i3GEO.barraDeBotoes = {
 					{eval(l[b].constroiconteudo);}
 				}
 				YAHOO.util.Event.addListener($i(l[b].iddiv), "click", YAHOO.util.Event.stopEvent);
+				YAHOO.util.Event.addFocusListener($i(l[b].iddiv), YAHOO.util.Event.stopEvent);
 				//$i("i3geo_barra2").onclick = function(){alert("oi");}
 			}
 			while (b--);

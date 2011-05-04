@@ -371,9 +371,11 @@ i3GEO.guias = {
 				guiaconteudo = $i(id);
 				if(guiaconteudo){
 					if(guia.click === "" || guia.click === undefined)
-					{eval('$i("'+id+'").onclick = function(event){i3GEO.guias.mostra("'+guias[g]+'");YAHOO.util.Event.stopEvent(event);}');}
+					{eval('$i("'+id+'").onclick = function(event){i3GEO.guias.mostra("'+guias[g]+'");}');}
 					else
 					{guiaconteudo.onclick = guia.click;}
+					YAHOO.util.Event.addListener($i(id), "click", YAHOO.util.Event.stopEvent);
+					YAHOO.util.Event.addFocusListener($i(id), YAHOO.util.Event.stopEvent);
 					guiaconteudo.onmouseover = onf;
 					guiaconteudo.onmouseout = outf;
 					temp = $i(guia.idconteudo);
