@@ -599,14 +599,14 @@ i3GEO = {
 			temp.style.height=h + "px";
 			temp.style.width=w + "px";
 			YAHOO.util.Event.addListener(temp, "click", YAHOO.util.Event.stopEvent);
-			YAHOO.util.Event.addFocusListener(temp, YAHOO.util.Event.stopEvent);
+			YAHOO.util.Event.addFocusListener(temp, YAHOO.util.Event.preventDefault);
 		}
 		temp = $i(i3GEO.Interface.IDCORPO);
 		if(temp){
 			temp.style.height=h + "px";
 			temp.style.width=w + "px";
 			YAHOO.util.Event.addListener(temp, "click", YAHOO.util.Event.stopEvent);
-			YAHOO.util.Event.addFocusListener(temp, YAHOO.util.Event.stopEvent);
+			YAHOO.util.Event.addFocusListener(temp, YAHOO.util.Event.preventDefault);
 		}
 		temp = $i("mst");
 		if(temp){

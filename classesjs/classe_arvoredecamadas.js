@@ -525,8 +525,8 @@ i3GEO.arvoreDeCamadas = {
 								}
 							}
 						}
-						YAHOO.util.Event.addListener($i("arrastar_"+ltema), "click", YAHOO.util.Event.stopEvent);
-						YAHOO.util.Event.addFocusListener($i("arrastar_"+ltema), YAHOO.util.Event.stopEvent);
+						YAHOO.util.Event.addListener($i("arrastar_"+ltema), "click", YAHOO.util.Event.preventDefault);
+						YAHOO.util.Event.addFocusListener($i("arrastar_"+ltema), YAHOO.util.Event.preventDefault);
 					}
 				}
 				catch(e){
@@ -563,8 +563,8 @@ i3GEO.arvoreDeCamadas = {
 								else
 								{temaNode = new YAHOO.widget.HTMLNode(d, tempNode);}
 								temaNode.setDynamicLoad(i3GEO.arvoreDeCamadas.montaOpcoes, 1);
-								YAHOO.util.Event.addListener($i("arrastar_"+ltema), "click", YAHOO.util.Event.stopEvent);
-								YAHOO.util.Event.addFocusListener($i("arrastar_"+ltema), YAHOO.util.Event.stopEvent);
+								YAHOO.util.Event.addListener($i("arrastar_"+ltema), "click", YAHOO.util.Event.preventDefault);
+								YAHOO.util.Event.addFocusListener($i("arrastar_"+ltema), YAHOO.util.Event.preventDefault);
 								incluidos.push(ltema.name);
 							}
 						}
@@ -584,8 +584,8 @@ i3GEO.arvoreDeCamadas = {
 				if (n === false){
 					temaNode = new YAHOO.widget.HTMLNode({enableHighlight:false,expanded:false,html:i3GEO.arvoreDeCamadas.montaTextoTema(ltema),id:ltema.name,tipo:"tema"}, grupoNode, i3GEO.arvoreDeCamadas.EXPANDIDA,true);
 					temaNode.setDynamicLoad(i3GEO.arvoreDeCamadas.montaOpcoes, 1);
-					YAHOO.util.Event.addListener($i("arrastar_"+ltema), "click", YAHOO.util.Event.stopEvent);
-					YAHOO.util.Event.addFocusListener($i("arrastar_"+ltema), YAHOO.util.Event.stopEvent);
+					YAHOO.util.Event.addListener($i("arrastar_"+ltema), "click", YAHOO.util.Event.preventDefault);
+					YAHOO.util.Event.addFocusListener($i("arrastar_"+ltema), YAHOO.util.Event.preventDefault);
 				}
 			}
 		}
