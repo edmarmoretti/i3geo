@@ -564,8 +564,11 @@ i3GEO.barraDeBotoes = {
 	*/
 	inicializaBarra:function(idconteudo,idconteudonovo,barraZoom,x,y,onde){
 		if(typeof(console) !== 'undefined'){console.info("i3GEO.barraDeBotoes.inicializaBarra()");}
-		if(this.TEMPLATEBOTAO === "")
+		if(this.TEMPLATEBOTAO === "" && i3GEO.Interface.TABLET === false)
 		{this.TEMPLATEBOTAO = "<div style='display:inline;background-color:rgb(250,250,250);'><img style='border:0px solid white;' src='"+i3GEO.configura.locaplic+"/imagens/branco.gif' id='$$'/></div>";}
+		if(this.TEMPLATEBOTAO === "" && i3GEO.Interface.TABLET === true)
+		{this.TEMPLATEBOTAO = "<div style='display:inline;background-color:rgb(250,250,250);'><img style='margin:4px;border:0px solid white;' src='"+i3GEO.configura.locaplic+"/imagens/branco.gif' id='$$'/></div>";}
+
 		var ticone,tipo,mostra,i,temp,elementos,e,wj,recuo,novoel,alturadisponivel,n,chaves,re,estilo,
 			numerobotoes = 0,
 			nelementos = 0,
@@ -706,7 +709,7 @@ i3GEO.barraDeBotoes = {
 		}
 		YAHOO.namespace("janelaBotoes.xp");
 		if(i3GEO.barraDeBotoes.ORIENTACAO === "horizontal"){
-			YAHOO.janelaBotoes.xp.panel = new YAHOO.widget.Panel(idconteudonovo, {zIndex:20000,width:i3GEO.barraDeBotoes.HORIZONTALW, fixedcenter: false, constraintoviewport: false, underlay:"none", close:i3GEO.barraDeBotoes.PERMITEFECHAR, visible:true, draggable:i3GEO.barraDeBotoes.PERMITEDESLOCAR, modal:false,iframe:false } );
+			YAHOO.janelaBotoes.xp.panel = new YAHOO.widget.Panel(idconteudonovo, {zIndex:20000,height:40,width:i3GEO.barraDeBotoes.HORIZONTALW, fixedcenter: false, constraintoviewport: false, underlay:"none", close:i3GEO.barraDeBotoes.PERMITEFECHAR, visible:true, draggable:i3GEO.barraDeBotoes.PERMITEDESLOCAR, modal:false,iframe:false } );
 		}
 		else{
 			if(this.AUTOALTURA === false || barraZoom === true || (elementos.length > numerobotoes))

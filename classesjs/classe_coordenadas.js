@@ -364,12 +364,12 @@ i3GEO.coordenadas = {
 	*/
 	criaMascaraDMS: function(prefixo,titulo,caixa){
 		var ins = '<table id='+prefixo+' style=display:block;text-align:center;width:410px ><tr style="border-bottom:2px solid white" >' +
-				'<td style=width:120px;text-align:right >'+titulo+' X:&nbsp;</td>' +
-				'<td>'+$inputText('','315',prefixo+'xg','grau','3','-00')+'&nbsp;</td>' +
-				'<td>'+$inputText('','',prefixo+'xm','minuto','2','00')+'&nbsp;</td>' +
-				'<td>'+$inputText('','',prefixo+'xs','segundo','5','00.00')+'&nbsp;</td>' +
-				'<td>Y:'+$inputText('','',prefixo+'yg','grau','3','-00')+'&nbsp;</td>' +
-				'<td>'+$inputText('','',prefixo+'ym','minuto','2','00')+'&nbsp;</td>' +
+				'<td style=width:120px;text-align:right >'+titulo+' X:</td>' +
+				'<td>'+$inputText('','',prefixo+'xg','grau','3','-00')+'</td>' +
+				'<td>'+$inputText('','',prefixo+'xm','minuto','2','00')+'</td>' +
+				'<td>'+$inputText('','',prefixo+'xs','segundo','5','00.00')+'</td>' +
+				'<td>Y:'+$inputText('','',prefixo+'yg','grau','3','-00')+'</td>' +
+				'<td>'+$inputText('','',prefixo+'ym','minuto','2','00')+'</td>' +
 				'<td>'+$inputText('','',prefixo+'ys','segundo','5','00.00')+'</td>',
 			temp = 'var '+prefixo+'xxx = i3GEO.calculo.dms2dd($i(\''+prefixo+'xg\').value,$i(\''+prefixo+'xm\').value,$i(\''+prefixo+'xs\').value);' +
 				'var '+prefixo+'yyy = i3GEO.calculo.dms2dd($i(\''+prefixo+'yg\').value,$i(\''+prefixo+'ym\').value,$i(\''+prefixo+'ys\').value);' +
@@ -592,7 +592,7 @@ i3GEO.coordenadas = {
 			//
 			if(onde === "")
 			{onde = i3GEO.coordenadas.config[tipos[0]].idhtml;}
-			caixa = "<select onchange='javascript:i3GEO.coordenadas.mudaTipo(this,\""+onde+"\");' style='margin-left:3px;font-size:10px;height:16px;width:50px;' ><option>---</option><option value='janela' >janela</option>";
+			caixa = "<select onchange='javascript:i3GEO.coordenadas.mudaTipo(this,\""+onde+"\");' style='margin-left:3px;font-size:10px;height:16px;width:40px;' ><option>---</option><option value='janela' >janela</option>";
 			//
 			//cria a caixa de seleção
 			//
