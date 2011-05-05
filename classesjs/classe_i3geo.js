@@ -576,7 +576,8 @@ i3GEO = {
 	{array} - [w,h]
 	*/
 	reCalculaTamanho: function(){
-		var diminuix,diminuiy,menos,novow,novoh,w,h,temp;
+		var diminuix,diminuiy,menos,novow,novoh,w,h,temp,
+			antigoh = i3GEO.parametros.h;
 		diminuix = (navm) ? i3GEO.configura.diminuixM : i3GEO.configura.diminuixN;
 		diminuiy = (navm) ? i3GEO.configura.diminuiyM : i3GEO.configura.diminuiyN;
 		menos = 0;
@@ -590,9 +591,11 @@ i3GEO = {
 		temp = i3GEO.util.tamanhoBrowser();
 		novow = temp[0];
 		novoh = temp[1];
+		temp = antigoh - (novoh - diminuiy);
+		if(temp > -100 && temp < 100)
+		{return}
 		
 		document.body.style.height = novoh;
-
 		w = novow - menos - diminuix;
 		h = novoh - diminuiy;
 
