@@ -719,9 +719,6 @@ i3GEO.Interface = {
 				f.style.height = h;
 			}
 			i3GEO.Interface.IDMAPA = "openlayers";
-			bb.INCLUIBOTAO.zoomli = true;
-			bb.INCLUIBOTAO.pan = true;
-			bb.INCLUIBOTAO.zoomtot = true;
 			if(i3GEO.Interface.TABLET === true){
 				i3geoOL = new OpenLayers.Map({
 					div: "openlayers",
@@ -739,6 +736,9 @@ i3GEO.Interface = {
 				});			
 			}
 			else{
+				bb.INCLUIBOTAO.zoomli = true;
+				bb.INCLUIBOTAO.pan = true;
+				bb.INCLUIBOTAO.zoomtot = true;
 				i3geoOL = new OpenLayers.Map('openlayers', {
 					controls: [],
 					fractionalZoom: true,

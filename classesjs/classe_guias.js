@@ -293,9 +293,6 @@ i3GEO.guias = {
 			//
 			if(i3GEO.guias.TIPO === "guia" || i3GEO.guias.TIPO === "tablet"){
 				ins = '<ul class="yui-nav" style="border-width:0pt 0pt 0px;border-color:rgb(240,240,240);border-bottom-color:white;text-align:center;">';
-				if(i3GEO.guias.TIPO === "tablet"){
-					ins += '<li><a alt="" title=""><em><div id="i3GEOguiaEsconde" onclick=i3GEO.guias.escondeGuias();  >x</div></em></a></li>';
-				}
 				for(ng=0;ng<nguias;ng++){
 					if($i(i3GEO.guias.CONFIGURA[guias[ng]].id)){
 						if($i(i3GEO.guias.CONFIGURA[guias[ng]].idconteudo))
@@ -400,12 +397,6 @@ i3GEO.guias = {
 		if(i3GEO.guias.TIPO !== "tablet"){
 			i3GEO.guias.mostra(i3GEO.guias.ATUAL);
 			i3GEO.guias.ativa(i3GEO.guias.ATUAL);
-			temp = $i("i3GEOguiaEsconde");
-			YAHOO.util.Event.addListener(temp, "click", YAHOO.util.Event.preventDefault);
-			YAHOO.util.Event.addListener(temp, "click", YAHOO.util.Event.stopPropagation);
-			YAHOO.util.Event.addFocusListener(temp, YAHOO.util.Event.preventDefault);
-			temp.onmouseover = onf;
-			temp.onmouseout = outf;
 		}
 		else
 		{i3GEO.guias.escondeGuias();}
@@ -441,14 +432,6 @@ i3GEO.guias = {
 		var guias,nguias,g,temp,attributes,anim;
 		guias = i3GEO.util.listaChaves(i3GEO.guias.CONFIGURA);
 		nguias = guias.length;
-		temp = $i("i3GEOguiaEsconde");
-		if(temp){
-			if(!navm){
-				temp.style.height = "0px";	
-				temp.style.visibility = "hidden";
-			}
-			temp.parentNode.parentNode.style.background="transparent";
-		}
 		for(g=0;g<nguias;g++){
 			temp = $i(this.CONFIGURA[guias[g]].idconteudo);
 			if(temp){
@@ -486,6 +469,13 @@ i3GEO.guias = {
 		var guias,nguias,g,temp,temp1,attributes,anim;
 		guias = i3GEO.util.listaChaves(i3GEO.guias.CONFIGURA);
 		nguias = guias.length;
+		//
+		//se a guia clicada já estiver aberta na interface com TABLET
+		//
+		if($i(this.CONFIGURA[guia].idconteudo).style.display === "block" && i3GEO.guias.TIPO === "tablet"){
+			i3GEO.guias.escondeGuias();
+			return;
+		}
 		for(g=0;g<nguias;g++){
 			if($i(this.CONFIGURA[guias[g]].idconteudo))
 			{$i(this.CONFIGURA[guias[g]].idconteudo).style.display="none";}
@@ -511,12 +501,6 @@ i3GEO.guias = {
 					temp.style.display = "block";
 					temp.style.zIndex = 9000;
 					temp.style.overflow = "hidden";
-					temp1 = $i("i3GEOguiaEsconde");
-					if(!navm){
-						temp1.style.height = "15px";
-						temp1.style.visibility = "visible";
-					}
-					temp1.parentNode.parentNode.style.background="transparent";
 					attributes = {
 						height: { to: i3GEO.parametros.h - 10 }
 					};

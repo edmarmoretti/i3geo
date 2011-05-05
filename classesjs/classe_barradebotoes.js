@@ -68,6 +68,18 @@ i3GEO.barraDeBotoes = {
 	*/
 	ORIENTACAO: "vertical",
 	/*
+	Propriedade: HORIZONTALW
+
+	Largura da barra quando ORIENTACAO = "horizontal"
+
+	Tipo:
+	{numeric}
+	
+	Default:
+	{350}
+	*/
+	HORIZONTALW: 350,	
+	/*
 	Propriedade: TIPOAJUDA
 
 	Tipo do balão de ajuda que é mostrado colado ao ícone da ferramenta
@@ -252,9 +264,9 @@ i3GEO.barraDeBotoes = {
 	{JSON}
 	*/
 	INCLUIBOTAO: {
-		zoomli: false,
-		pan: false,
-		zoomtot:false,
+		zoomli: true,
+		pan: true,
+		zoomtot:true,
 		identifica: true,
 		identificaBalao: true,
 		mede: true,
@@ -583,8 +595,8 @@ i3GEO.barraDeBotoes = {
 				chaves = i3GEO.util.listaChaves(i3GEO.barraDeBotoes.INCLUIBOTAO);
 				n = chaves.length;
 				for(i=0;i<n;i+=1){
-					if(this.INCLUIBOTAO[chaves[i]] === true){
-						temp += this.TEMPLATEBOTAO.replace("$$",chaves[i]);
+					if(i3GEO.barraDeBotoes.INCLUIBOTAO[chaves[i]] === true){
+						temp += i3GEO.barraDeBotoes.TEMPLATEBOTAO.replace("$$",chaves[i]);
 					}
 				}
 				if(typeof(onde) === 'undefined'){
@@ -694,7 +706,7 @@ i3GEO.barraDeBotoes = {
 		}
 		YAHOO.namespace("janelaBotoes.xp");
 		if(i3GEO.barraDeBotoes.ORIENTACAO === "horizontal"){
-			YAHOO.janelaBotoes.xp.panel = new YAHOO.widget.Panel(idconteudonovo, {zIndex:20000,width:300, fixedcenter: false, constraintoviewport: false, underlay:"none", close:i3GEO.barraDeBotoes.PERMITEFECHAR, visible:true, draggable:i3GEO.barraDeBotoes.PERMITEDESLOCAR, modal:false,iframe:false } );
+			YAHOO.janelaBotoes.xp.panel = new YAHOO.widget.Panel(idconteudonovo, {zIndex:20000,width:i3GEO.barraDeBotoes.HORIZONTALW, fixedcenter: false, constraintoviewport: false, underlay:"none", close:i3GEO.barraDeBotoes.PERMITEFECHAR, visible:true, draggable:i3GEO.barraDeBotoes.PERMITEDESLOCAR, modal:false,iframe:false } );
 		}
 		else{
 			if(this.AUTOALTURA === false || barraZoom === true || (elementos.length > numerobotoes))
@@ -790,7 +802,7 @@ i3GEO.barraDeBotoes = {
 		this.BARRAS.push(YAHOO.janelaBotoes.xp.panel);
 		YAHOO.janelaBotoes.xp.panel.show();
 		if(i3GEO.Interface.TABLET === true){
-			YAHOO.janelaBotoes.xp.panel.moveTo((i3GEO.parametros.w / 2) - 150,"");
+			YAHOO.janelaBotoes.xp.panel.moveTo((i3GEO.parametros.w / 2) - (i3GEO.barraDeBotoes.HORIZONTALW / 2),"");
 		}
 		//
 		//menu de contexto
