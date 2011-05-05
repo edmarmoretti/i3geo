@@ -3,6 +3,8 @@
 <head>
 <meta http-equiv="Category" content="i3Geo Mapa interativo MMA geoprocessamento sig mobile">
 <META HTTP-EQUIV="Content-Type" CONTENT="text/html; charset=ISO-8859-1">
+<meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0;">
+<meta name="apple-mobile-web-app-capable" content="yes">
 <title>i3GEO - OpenLayers</title>
 <style>
 .listaMenuTitulo{
@@ -19,8 +21,7 @@
 }
 </style>
 </head>
-<body id="i3geo" style=width:100% >
-
+<body id="i3geo" >
 <table id='mst' summary="" style='display:none;' cellspacing='0'>
 	<tr style="border:0px">
 		<td id="barraSuperior" style="background-image:url('../imagens/visual/default/cabeca.png');height:10px"></td>
@@ -40,7 +41,7 @@
 			<table width="100%" style="vertical-align:top;border-width:0px">
 				<tr>
 					<td  class=verdeclaro id=contemImg >
-						<div ontouchstart="YAHOO.util.Event.preventDefault(event)" ontouchmove="YAHOO.util.Event.preventDefault(event)" ontouchend="YAHOO.util.Event.preventDefault(event)" id=corpoMapa style="background-image:url('../imagens/i3geo1bw.jpg');"></div>
+						<div  id=corpoMapa style="background-image:url('../imagens/i3geo1bw.jpg');"></div>
 					</td>
 				</tr>
 			</table>
@@ -98,7 +99,8 @@
 </tr>
 </table>
 <script src="../classesjs/i3geonaocompacto.js"></script>
-<script src="../pacotes/openlayers/OpenLayers29.js.php"></script>
+<!--<script src="../pacotes/openlayers/OpenLayers29.js.php"></script>-->
+<script src="../pacotes/openlayers/openlayersmobile.js"></script>
 <script>
 /*
 Title: Interface Openlayers para tablets
@@ -139,9 +141,9 @@ i3GEO.Interface.ATUAL = "openlayers";
 i3GEO.Interface.IDCORPO = "contemImg";
 
 i3GEO.Interface.openlayers.GADGETS = {
-	PanZoomBar:true,
+	PanZoomBar:false,
 	PanZoom:false,
-	LayerSwitcher:true,
+	LayerSwitcher:false,
 	ScaleLine:false,
 	OverviewMap:false	
 };
@@ -171,6 +173,7 @@ i3GEO.barraDeBotoes.INCLUIBOTAO = {
 	inseregrafico: true,
 	v3d: false
 };
+i3GEO.Interface.TABLET = true;
 /*
 Após a criação, é criado o objeto i3geoOL que corresponde ao objeto map da API do OpenLayers.
 Vc pode usar i3geoOL para aplicar os métodos e verificar as propriedades da API do OpenLayers
@@ -188,7 +191,7 @@ i3GEO.barraDeBotoes.COMPORTAMENTO = "laranja";
 i3GEO.barraDeBotoes.ORIENTACAO = "horizontal";
 i3GEO.barraDeBotoes.AJUDA = false;
 
-i3GEO.Interface.TABLET = true;
+
 i3GEO.Interface.BARRABOTOESLEFT = 5;
 i3GEO.Interface.BARRABOTOESTOP = 0;
 i3GEO.Interface.BARRADEZOOMTOP = 2;
@@ -211,19 +214,8 @@ OpenLayers.ImgPath = "../pacotes/openlayers/img/";
 //
 //adiciona camadas que podem ser ativadas como fundo do mapa
 //
+
 (function(){
-	var ims = new OpenLayers.Layer.ArcGIS93Rest( 
-		"ESRI Imagery World 2D",
-		"http://server.arcgisonline.com/ArcGIS/rest/services/ESRI_Imagery_World_2D/MapServer/export",
-		{},
-		{isBaseLayer:true,visibility:false}
-	);
-	var wsm = new OpenLayers.Layer.ArcGIS93Rest( 
-		"ESRI World Street Map",
-		"http://server.arcgisonline.com/ArcGIS/rest/services/ESRI_StreetMap_World_2D/MapServer/export",
-		{},
-		{isBaseLayer:true,visibility:false}
-	);
 	var bra = new OpenLayers.Layer.WMS( 
 		"Base carto MMA",
 		"http://mapas.mma.gov.br/cgi-bin/mapserv?map=/opt/www/html/webservices/baseraster.map",
@@ -236,8 +228,9 @@ OpenLayers.ImgPath = "../pacotes/openlayers/img/";
 		{layers:""},
 		{isBaseLayer:true,visibility:false}
 	);
-	i3GEO.Interface.openlayers.LAYERSADICIONAIS = [ims,wsm,bra,osm];
+	i3GEO.Interface.openlayers.LAYERSADICIONAIS = [bra,osm];
 })();
+
 //
 //substitui a janela de alerta normal do navegador por uma janela estilizada. Pode ser comentado sem problemas. No Safari apresentou problemas.
 //
@@ -246,9 +239,10 @@ OpenLayers.ImgPath = "../pacotes/openlayers/img/";
 //inicia o mapa
 //
 i3GEO.inicia();
-
+/*
 YAHOO.util.Event.addListener(document.body, "click", YAHOO.util.Event.preventDefault);
 YAHOO.util.Event.addFocusListener(document.body, YAHOO.util.Event.preventDefault);
+*/
 </script>
 </body>
 </html>

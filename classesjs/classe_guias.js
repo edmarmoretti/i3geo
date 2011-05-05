@@ -452,7 +452,7 @@ i3GEO.guias = {
 		for(g=0;g<nguias;g++){
 			temp = $i(this.CONFIGURA[guias[g]].idconteudo);
 			if(temp){
-				if(i3GEO.guias.TIPO === "tablet" && temp.style.display == "block"){
+				if(i3GEO.guias.TIPO === "tablet" && temp.style.display === "block"){
 					temp.style.overflow = "hidden";
 					attributes = {
 						height: { to: 0 }
@@ -509,6 +509,7 @@ i3GEO.guias = {
 					temp.style.left = (i3GEO.parametros.w / 2) - 150 + "px";
 					temp.style.height = 0;//i3GEO.parametros.h - 10 + "px";
 					temp.style.display = "block";
+					temp.style.zIndex = 9000;
 					temp.style.overflow = "hidden";
 					temp1 = $i("i3GEOguiaEsconde");
 					if(!navm){

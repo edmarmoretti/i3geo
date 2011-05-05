@@ -722,14 +722,32 @@ i3GEO.Interface = {
 			bb.INCLUIBOTAO.zoomli = true;
 			bb.INCLUIBOTAO.pan = true;
 			bb.INCLUIBOTAO.zoomtot = true;
-			i3geoOL = new OpenLayers.Map('openlayers', {
-				controls: [],
-				fractionalZoom: true,
-				minResolution: "auto",
-				minExtent: new OpenLayers.Bounds(mi[0],mi[1],mi[2],mi[3]),
-				maxResolution: "auto",
-				maxExtent: new OpenLayers.Bounds(ma[0],ma[1],ma[2],ma[3])
-			});
+			if(i3GEO.Interface.TABLET === true){
+				i3geoOL = new OpenLayers.Map({
+					div: "openlayers",
+					theme: null,
+					controls: [
+						new OpenLayers.Control.Attribution(),
+						new OpenLayers.Control.TouchNavigation({
+							dragPanOptions: {
+								interval: 100,
+								enableKinetic: true
+							}
+						}),
+						new OpenLayers.Control.ZoomPanel()
+					] 		
+				});			
+			}
+			else{
+				i3geoOL = new OpenLayers.Map('openlayers', {
+					controls: [],
+					fractionalZoom: true,
+					minResolution: "auto",
+					minExtent: new OpenLayers.Bounds(mi[0],mi[1],mi[2],mi[3]),
+					maxResolution: "auto",
+					maxExtent: new OpenLayers.Bounds(ma[0],ma[1],ma[2],ma[3])
+				});
+			}
 		},
 		inicia: function(){
 			//
@@ -792,11 +810,13 @@ i3GEO.Interface = {
 				//
 				//estes controles ficam invisíveis e são usados quando os ícones default do i3geo são ativados
 				//
-				OLpan = new OpenLayers.Control.Navigation();
-				OLzoom = new OpenLayers.Control.ZoomBox();
-				OLpanel = new OpenLayers.Control.Panel();
-				OLpanel.addControls([OLpan,OLzoom]);
-				i3geoOL.addControl(OLpanel);
+				if(i3GEO.Interface.TABLET === false){
+					OLpan = new OpenLayers.Control.Navigation();
+					OLzoom = new OpenLayers.Control.ZoomBox();
+					OLpanel = new OpenLayers.Control.Panel();
+					OLpanel.addControls([OLpan,OLzoom]);
+					i3geoOL.addControl(OLpanel);
+				}
 				openlayers.ativaBotoes();
 				if (i3GEO.configura.mapaRefDisplay !== "none"){
 					if (i3GEO.util.pegaCookie("i3GEO.configura.mapaRefDisplay"))

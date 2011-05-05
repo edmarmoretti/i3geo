@@ -683,7 +683,8 @@ i3GEO.configura = {
 				}
 				marcadorZoom = "";
 				if(i3GEO.Interface.ATUAL==="openlayers"){
-					OLpanel.activateControl(OLpan);
+					if(i3GEO.Interface.TABLET === false)
+					{OLpanel.activateControl(OLpan);}
 					return;
 				}
 				panMapaInicia = function(exy){
