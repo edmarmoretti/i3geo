@@ -49,7 +49,9 @@ i3GEO.Interface = {
 	/*
 	Propriedade: TABLET
 	
-	A interface a ser utilizada deve ser adaptada para uso em tablets
+	Aplica configurações especiais para uso em tablets.
+	
+	Altera o posicionamento da barra de botões e comportamento das guias. Veja o exemplo interface/openlayers_t.htm.
 	
 	Type:
 	{boolean}
@@ -58,6 +60,22 @@ i3GEO.Interface = {
 	{false}
 	*/
 	TABLET: false,
+	/*
+	Propriedade: ALTTABLET
+	
+	Nome do arquivo HTML com a interface alternativa utilizada quando o i3Geo detecta o uso de um dispositivo móvel
+	
+	A detecção é aplicada automaticamente quando essa variável for definida
+	
+	Para não aplicar a detecção, use i3GEO.Interface.ALTTABLET = ""
+	
+	Type:
+	{string}
+	
+	Default:
+	{openlayers_t.htm}
+	*/
+	ALTTABLET: "openlayers_t.htm",	
 	/*
 	Propriedade: OUTPUTFORMAT
 

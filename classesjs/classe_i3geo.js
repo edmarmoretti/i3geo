@@ -210,6 +210,9 @@ i3GEO = {
 		}
 		else
 		{i3GEO.configura.sid = "";}
+		if(i3GEO.Interface.ALTTABLET != ""){
+			i3GEO.util.detectaTablet();
+		}
 		//
 		//tenta definir automaticamente a variável que indica a localização do i3geo
 		//

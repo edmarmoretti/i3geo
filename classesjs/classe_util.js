@@ -2362,6 +2362,25 @@ i3GEO.util = {
 		}
 		viewportwidth = viewportwidth- i3GEO.util.getScrollerWidth();
 		return [viewportwidth,viewportheight]
+	},
+	/*
+	Function: detectaTablet
+	
+	Verifica se está em uso um dispositivo do tipo móvel
+	
+	Se for detectado, utiliza a interface alternativa definida em i3GEO.Interface.ALTTABLET
+	
+	A detecção é feita com base em i3geo/pacotes/mobileesp/mdetect.js
+	*/
+	detectaTablet: function(){
+		var p,
+			c = DetectaMobile();
+		if(c === false)
+		{return;}
+		p = confirm("Direciona para a versão adaptada para tablets?");
+		if(p){
+			window.location = i3GEO.configura.locaplic+'/interface/'+i3GEO.Interface.ALTTABLET+'?'+i3GEO.configura.sid;
+		}
 	}
 };
 //++++++++++++++++++++++++++++++++++++

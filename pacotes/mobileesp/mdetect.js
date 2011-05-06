@@ -1,4 +1,5 @@
-
+//foi tudo incluido em uma função para evitar variáveis globais
+function DetectaMobile(){
 /* *******************************************
 // Copyright 2010-2011, Anthony Hand
 //
@@ -158,7 +159,6 @@ var disUpdate = "update"; //pda vs. update
 
 //Initialize our user agent string.
 var uagent = navigator.userAgent.toLowerCase();
-
 
 //**************************
 // Detects if the current device is an iPhone.
@@ -692,6 +692,7 @@ function DetectMobileQuick()
 // Detects in a more comprehensive way if the current device is a mobile device.
 function DetectMobileLong()
 {
+
    if (DetectMobileQuick())
       return true;
    if (DetectGameConsole())
@@ -823,3 +824,5 @@ function DetectTierOtherPhones()
     else
       return false;
 };
+return DetectMobileLong();
+}
