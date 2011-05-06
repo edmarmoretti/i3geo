@@ -14,6 +14,7 @@
 	}
 	var allScriptTags = "";
 	var jsfiles = new Array(
+	"../pacotes/mobileesp/mdetect.js",
 	"../pacotes/proj4js/lib/proj4js-compressed.js",
 	"../pacotes/yui270/build/yahoo/yahoo-min.js",
 	"../pacotes/yui270/build/yahoo-dom-event/yahoo-dom-event.js",

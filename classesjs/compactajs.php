@@ -54,6 +54,7 @@ salvatudojs($jsfiles,$buffer,"../pacotes/richdraw/richdraw_tudo_compacto.js","js
 //compacta os arquivos do i3geo
 //gera um arquivo compactado para cada um
 //
+packer("../pacotes/mobileesp/mdetect.js","../pacotes/mobileesp/mdetect_compacto.js","None");
 packer("depreciados.js","compactados/depreciados_compacto.js","None");
 packer("classe_arvoredecamadas.js","compactados/classe_arvoredecamadas_compacto.js","Normal");
 packer("classe_arvoredetemas.js","compactados/classe_arvoredetemas_compacto.js","Normal");
@@ -96,6 +97,7 @@ packer("../pacotes/balloon-tooltips/htdocs/js/balloon.js","../pacotes/balloon-to
 //gera um único js para a inicialização do I3Geo
 //
 $jsfiles = array(
+"../pacotes/mobileesp/mdetect_compacto.js",
 "../pacotes/proj4js/lib/proj4js-compressed.js",
 "../pacotes/cpaint/cpaint2_compacto.inc.js",
 "../pacotes/yui270/build/yahoo/yahoo-min.js",

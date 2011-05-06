@@ -365,12 +365,12 @@ i3GEO.coordenadas = {
 	criaMascaraDMS: function(prefixo,titulo,caixa){
 		var ins = '<table id='+prefixo+' style=display:block;text-align:center;width:410px ><tr style="border-bottom:2px solid white" >' +
 				'<td style=width:120px;text-align:right >'+titulo+' X:</td>' +
-				'<td>'+$inputText('','',prefixo+'xg','grau','3','-00')+'</td>' +
+				'<td>'+$inputText('','',prefixo+'xg','grau','2','-00')+'</td>' +
 				'<td>'+$inputText('','',prefixo+'xm','minuto','2','00')+'</td>' +
-				'<td>'+$inputText('','',prefixo+'xs','segundo','5','00.00')+'</td>' +
-				'<td>Y:'+$inputText('','',prefixo+'yg','grau','3','-00')+'</td>' +
+				'<td>'+$inputText('','',prefixo+'xs','segundo','4','00.00')+'</td>' +
+				'<td>Y:'+$inputText('','',prefixo+'yg','grau','2','-00')+'</td>' +
 				'<td>'+$inputText('','',prefixo+'ym','minuto','2','00')+'</td>' +
-				'<td>'+$inputText('','',prefixo+'ys','segundo','5','00.00')+'</td>',
+				'<td>'+$inputText('','',prefixo+'ys','segundo','4','00.00')+'</td>',
 			temp = 'var '+prefixo+'xxx = i3GEO.calculo.dms2dd($i(\''+prefixo+'xg\').value,$i(\''+prefixo+'xm\').value,$i(\''+prefixo+'xs\').value);' +
 				'var '+prefixo+'yyy = i3GEO.calculo.dms2dd($i(\''+prefixo+'yg\').value,$i(\''+prefixo+'ym\').value,$i(\''+prefixo+'ys\').value);' +
 				'i3GEO.navega.zoomponto(i3GEO.configura.locaplic,i3GEO.configura.sid,'+prefixo+'xxx,'+prefixo+'yyy);';
