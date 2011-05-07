@@ -924,7 +924,7 @@ i3GEO.Interface = {
 							urllayer = camada.wmsurl+"&r="+Math.random();
 							layer = new OpenLayers.Layer.WMS(camada.name, urllayer,{format:camada.wmsformat,transparent:true},opcoes);
 							if(camada.wmssrs != "")
-							{layer.url = layer.url+"&SRS="+camada.wmssrs;}
+							{layer.url = layer.url+"&SRS="+camada.wmssrs+"&CRS="+camada.wmssrs;}
 						}
 						else{
 							if(camada.tiles === "nao" || camada.escondido === "sim" || camada.connectiontype === 10 || camada.type === 0 || camada.type === 4 || camada.type === 8 )

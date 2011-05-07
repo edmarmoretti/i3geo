@@ -1204,6 +1204,7 @@ Include:
 		
 		$epsg = "EPSG:4291";
 		$e4291 = "nao";
+		$ecrs = "nao";
 		$pos = explode(",",$proj);
 		if (count($pos) > 1)
 		{
@@ -1214,12 +1215,16 @@ Include:
 				{$epsg = "EPSG:4326";}
 				if ($p[1] == "4291")
 				{$epsg = "EPSG:4291";$e4291="sim";}
+				if ($p[1] == "84")
+				{$ecrs = "CRS:84";}
 			}
 		}
 		else {$epsg = $proj;}
 		if ($e4291 == "sim"){$epsg = "EPSG:4291";}
+		if ($ecrs !== "sim"){$epsg = $ecrs;}
 		$epsg = trim($epsg);
 		$layer->setmetadata("wms_srs",$epsg);
+		$layer->setmetadata("wms_crs",$epsg);
 		$layer->setmetadata("wms_name",$tema);
 		$layer->setmetadata("wms_server_version",$versao);
 		$layer->setmetadata("wms_formatlist",$formato);

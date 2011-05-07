@@ -59,13 +59,17 @@ function gravaCacheWMS($servico)
 	error_reporting(0);
 	try{
 		$teste = explode("=",$servico);
-		if ( count($teste) > 1 ){$servico = $servico."&";}
+		if ( count($teste) > 1 )
+		{$servico = $servico."&";}
 		else
 		{
 			$teste = explode("?",$servico);
 			if ( count($teste) == 1 ){$servico = $servico."?";}
 		}
-		$wms_service_request = $servico . "REQUEST=GetCapabilities&SERVICE=WMS&VERSION=1.1.1";
+		$wms_service_request = $servico . "REQUEST=GetCapabilities&SERVICE=WMS";
+		$teste = explode("version",strtolower($wms_service_request));
+		if(count($teste) == 1)
+		{$wms_service_request .= "&VERSION=1.1.1";}
 		$nome = $dir_tmp."/wms".md5($servico).".xml";
 		if(!file_exists($nome))
 		{
@@ -193,7 +197,10 @@ function getcapabilities2()
 	global $servico;
 	$teste = explode("=",$servico);
 	if ( count($teste) > 1 ){$servico = $servico."&";}
-	$wms_service_request = $servico . "REQUEST=GetCapabilities&SERVICE=WMS&version=1.1.0";
+	$wms_service_request = $servico . "REQUEST=GetCapabilities&SERVICE=WMS";
+	$teste = explode("version",strtolower($wms_service_request));
+	if(count($teste) == 1)
+	{$wms_service_request .= "&VERSION=1.1.1";}
 	# -------------------------------------------------------------
 	# Test that the capabilites file has successfully downloaded.
 	#
@@ -209,30 +216,47 @@ function getcapabilities2()
 	$retorno = "";
 	$query = '//WMT_MS_Capabilities/Service/Name';
 	$entries = $xpath->query($query);
+	if($entries == FALSE || $entries->length == 0){
+		$rn = $xpath->registerNamespace("tag", "http://www.opengis.net/wms");
+		$entries = $xpath->query('/tag:WMS_Capabilities/tag:Service/tag:Name');
+	}	
+	
 	$temp = "";
 	foreach ($entries as $entry){$temp .= $entry->nodeValue;}
 	$retorno .= "<b>Nome: </b>".$temp;
 
 	$query = '//WMT_MS_Capabilities/Service/Title';
 	$entries = $xpath->query($query);
+	if($entries == FALSE || $entries->length == 0){
+		$entries = $xpath->query('/tag:WMS_Capabilities/tag:Service/tag:Title');
+	}	
 	$temp = "";
 	foreach ($entries as $entry){$temp .= $entry->nodeValue;}
 	$retorno .= "<br><br><b>T&iacute;tulo: </b>".$temp;
 
 	$query = '//WMT_MS_Capabilities/Service/Abstract';
 	$entries = $xpath->query($query);
+	if($entries == FALSE || $entries->length == 0){
+		$entries = $xpath->query('/tag:WMS_Capabilities/tag:Service/tag:Abstract');
+	}	
 	$temp = "";
 	foreach ($entries as $entry){$temp .= $entry->nodeValue;}
 	$retorno .= "<br><br><b>Resumo: </b>".$temp;
 
 	$query = '//WMT_MS_Capabilities/Service/KeywordList';
 	$entries = $xpath->query($query);
+	if($entries == FALSE || $entries->length == 0){
+		$entries = $xpath->query('/tag:WMS_Capabilities/tag:Service/tag:KeywordList');
+	}	
 	$temp = "";
 	foreach ($entries as $entry){$temp .= $entry->nodeValue.".";}
 	$retorno .= "<br><br><b>Palavras-chave: </b>".$temp;
 
 	$query = '//WMT_MS_Capabilities/Service/ContactInformation';
 	$entries = $xpath->query($query);
+	if($entries == FALSE || $entries->length == 0){
+		$entries = $xpath->query('/tag:WMS_Capabilities/tag:Service/tag:ContactInformation');
+	}	
 	$temp = "";
 	foreach ($entries as $entry){$temp .= $entry->nodeValue.".";}
 	$retorno .= "<br><br><b>Contato: </b>".$temp;
@@ -330,28 +354,47 @@ function temaswms()
 	$handle = fopen ($wms_service_request, "r");
 	$wms_capabilities = fread($handle, filesize($wms_service_request));
 	fclose ($handle); 
-	
+
 	$dom = new DomDocument();
 	$dom->loadXML($wms_capabilities);
-	$layers = wms_layers($dom);
+
+	//var_dump($dom);exit;
+	//$layers = wms_layers($dom);
 	$xpath = new DOMXPath($dom);
 	//verifica sld
+	$suporta = "nao";
 	$query = '//WMT_MS_Capabilities/Capability/UserDefinedSymbolization';
 	$entries = $xpath->query($query);
-	foreach($entries as $e)
-	{$n = $e->getAttribute("SupportSLD");}
-	$suporta = "nao";
-	if ($n == 1){$suporta = "sim";}
+	if($entries->length == 0){
+		$suporta = "sim";	
+	}
+	else{
+		foreach($entries as $e)
+		{$n = $e->getAttribute("SupportSLD");}
+		if ($n == 1){$suporta = "sim";}
+	}
 	$xpath = new DOMXPath($dom);
+	//var_dump($xpath);exit;
 	$q = '//WMT_MS_Capabilities/Capability';
 	$query = $q.'/Layer';
 	$layers = $xpath->query($query);
+	if($layers == FALSE || $layers->length == 0){
+		$teste = $xpath->registerNamespace("tag", "http://www.opengis.net/wms");
+		$q = '/tag:WMS_Capabilities/tag:Capability';
+		$query = $q.'/tag:Layer';
+		$layers = $xpath->query($query);
+	}
+	//var_dump($layers);exit;
 	$retorna = array();
 	foreach ($layers as $layer)
 	{
-		$r = pegaTag($layer);
-		$retorna = imprimeTag($r,$retorna);
-		$layers1 = $xpath->query('Layer',$layer);
+		$layers1 = $xpath->query('/Layer',$layer);
+		if($layers1->length == 0) //v 1.3.0
+		{$layers1 = $layers;}
+		else{
+			$r = pegaTag($layer);
+			$retorna = imprimeTag($r,$retorna);		
+		}
 		foreach ($layers1 as $layer1)
 		{
 			$layers2 = $xpath->query('Layer',$layer1);
@@ -734,6 +777,11 @@ function wms_formats ( $dom )
 	$xpath = new DOMXPath($dom);
 	$query = '//WMT_MS_Capabilities/Capability/Request/GetMap/Format';
 	$entries = $xpath->query($query);
+	if($entries == FALSE || $entries->length == 0){
+		$teste = $xpath->registerNamespace("tag", "http://www.opengis.net/wms");
+		$q = '/tag:WMS_Capabilities/tag:Capability/tag:Request/tag:GetMap/tag:Format';
+		$entries = $xpath->query($q);
+	}	
 	$arr = array();
 	foreach ($entries as $entry)
 	{
@@ -751,6 +799,11 @@ function wms_formatsinfo ( $dom )
 	$xpath = new DOMXPath($dom);
 	$query = '//WMT_MS_Capabilities/Capability/Request/GetFeatureInfo/Format';
 	$entries = $xpath->query($query);
+	if($entries == FALSE || $entries->length == 0){
+		$teste = $xpath->registerNamespace("tag", "http://www.opengis.net/wms");
+		$q = '/tag:WMS_Capabilities/tag:Capability/tag:Request/tag:GetCapabilities/tag:Format';
+		$entries = $xpath->query($q);
+	}	
 	$arr = array();
 	foreach ($entries as $entry)
 	{
@@ -861,12 +914,20 @@ function wms_srs( $dom )
 	$xpath = new DOMXPath($dom);
 	$query = '//WMT_MS_Capabilities/Capability/Layer/SRS';
 	$entries = $xpath->query($query);
+	if($entries == FALSE || $entries->length == 0){
+		$teste = $xpath->registerNamespace("tag", "http://www.opengis.net/wms");
+		$q = '/tag:WMS_Capabilities/tag:Capability/tag:Layer/tag:CRS';
+		$entries = $xpath->query($q);
+	}
+
 	$srs = "";
 	//utiliza apenas os epsg do Brasil
 	$single = array();
 	foreach ($entries as $entry)
 	{
 		$arr[] = $entry->nodeValue;
+		if ($entry->nodeValue == "CRS:84")
+		{$single[] = "CRS:84";}
 		if ($entry->nodeValue == "EPSG:4326")
 		{$single[] = "EPSG:4326";}
 		if ($entry->nodeValue == "EPSG:4291")
@@ -1004,4 +1065,5 @@ function wms_layer4html( $layer ) {
 	}
 	return $html;
 }
+
 ?>
