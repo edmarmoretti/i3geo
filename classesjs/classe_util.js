@@ -2376,10 +2376,11 @@ i3GEO.util = {
 		var p,
 			c = DetectaMobile("DetectMobileLong");
 		if(c === false)
-		{return;}
+		{return false;}
 		p = confirm("Direciona para a versão adaptada para tablets?");
 		if(p){
 			window.location = i3GEO.configura.locaplic+'/interface/'+i3GEO.Interface.ALTTABLET+'?'+i3GEO.configura.sid;
+			return true;
 		}
 	}
 };
