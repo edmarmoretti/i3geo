@@ -829,4 +829,6 @@ if(funcao == "DetectMobileLong")
 {return DetectMobileLong();}
 if(funcao == "DetectAndroidTablet")
 {return DetectAndroidTablet();}
+if(funcao == "DetectAndroid")
+{return DetectAndroid();}
 }

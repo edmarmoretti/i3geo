@@ -513,8 +513,10 @@ i3GEO.guias = {
 						temp.style.overflow = "auto";
 						temp.style.display = "block";
 					});
-					if(DetectaMobile("DetectAndroidTablet") === true)
-					{temp.style.height = "";temp.style.overflow = "auto";}					
+					if(DetectaMobile("DetectAndroid") === true){
+						temp.style.height = "";
+						temp.style.overflow = "auto";
+					}					
 					else
 					{anim.animate();}
 				}
