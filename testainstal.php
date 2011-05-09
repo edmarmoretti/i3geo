@@ -18,7 +18,7 @@ catch(ee)
 </script>
 <?php
 /*
-Title: Testa a instalação do I3Geo
+Title: Testa a instalação do i3Geo
 
 Executa testes e aponta erros na instalação.
 
@@ -62,8 +62,14 @@ $exts = get_loaded_extensions();
 echo "Obs: MapServer (a vers&atilde;o deve ser &gt;= 5.2 para que a sobreposi&ccedil;&atilde;o de temas funcione na interface Google Maps): <br>";
 echo ms_GetVersion()."<br><br>";
 if(!function_exists("ms_GetVersion"))
-{echo "O MAPSERVER PARECE NAO ESTAR INSTALADO<br><br>";}
-echo "---";
+{echo "<span style=color:red >O MAPSERVER PARECE NAO ESTAR INSTALADO!!!<br><br>";}
+echo "---<br>";
+if (get_cfg_var("allow_call_time_pass_reference") != 1){
+	echo "<span style=color:red >Problema: allow_call_time_pass_reference no php.ini deveria estar como 'On'. O i3Geo n&atilde;o ir&aacute; funcionar!!!<br></span>";
+}
+if (get_cfg_var("safe_mode") == 1){
+	echo "<span style=color:red >Problema: safe_mode no php.ini deveria estar como 'Off'. O i3Geo n&atilde;o ir&aacute; funcionar!!!<br></span>";
+}
 echo "<br><pre>Extens&otilde;es:<br>";
 if (!extension_loaded("libxml")){echo "<span style=color:red >Problema: n&atilde;o est&aacute; instalado a libxml<br></span>";}
 if (!extension_loaded( "PDO")){echo "<span style=color:red >Problema: n&atilde;o est&aacute; instalado a PDO<br></span>";}
