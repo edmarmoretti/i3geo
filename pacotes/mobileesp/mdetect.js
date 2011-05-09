@@ -1,5 +1,5 @@
 //foi tudo incluido em uma função para evitar variáveis globais
-function DetectaMobile(){
+function DetectaMobile(funcao){
 /* *******************************************
 // Copyright 2010-2011, Anthony Hand
 //
@@ -824,5 +824,9 @@ function DetectTierOtherPhones()
     else
       return false;
 };
-return DetectMobileLong();
+//executa
+if(funcao == "DetectMobileLong")
+{return DetectMobileLong();}
+if(funcao == "DetectAndroidTablet")
+{return DetectAndroidTablet();}
 }

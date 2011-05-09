@@ -598,8 +598,10 @@ i3GEO.configura = {
 
 	As funcionalidades apenas são incluídas se o elemento HTML indicado em iddiv existir. Por isso, caso uma função não seja desejada, basta excluir o div do HTML utilizado no mapa.
 
+	A lista de funções é incluída em i3GEO.configura.funcoesBotoes.botoes
+	
 	Tipo:
-	{JSON}
+	{Object}
 
 	*/
 	funcoesBotoes: {

@@ -2374,7 +2374,7 @@ i3GEO.util = {
 	*/
 	detectaTablet: function(){
 		var p,
-			c = DetectaMobile();
+			c = DetectaMobile("DetectMobileLong");
 		if(c === false)
 		{return;}
 		p = confirm("Direciona para a versão adaptada para tablets?");

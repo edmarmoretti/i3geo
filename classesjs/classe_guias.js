@@ -244,7 +244,9 @@ i3GEO.guias = {
 		//obtém outras guias que podem existir no mapa
 		//
 		var nguiasreal = 0,onf,outf,guiaconteudo,id,guia,guias,nguias,g,re,ng,tituloguia,i,ins,largura,altura;
-		guias = i3GEO.util.listaChaves(i3GEO.guias.CONFIGURA);
+		CONFIGURA = i3GEO.guias.CONFIGURA,
+		guias = i3GEO.util.listaChaves(CONFIGURA);
+		
 		try{
 			nguias = guias.length;
 			for(g=0;g<12;g++){
@@ -254,7 +256,7 @@ i3GEO.guias = {
 					re = new RegExp("&nbsp;", "g");
 					tituloguia = tituloguia.replace(re,'');
 					for(ng=0;ng<nguias;ng++){
-						if(i3GEO.guias.CONFIGURA[guias[ng]].id === "guia"+g){
+						if(CONFIGURA[guias[ng]].id === "guia"+g){
 							tituloguia = "";
 						}
 					}
@@ -270,7 +272,7 @@ i3GEO.guias = {
 				}
 			}
 			if(i3GEO.guias.ORDEM === "")
-			{guias = i3GEO.util.listaChaves(i3GEO.guias.CONFIGURA);}
+			{guias = i3GEO.util.listaChaves(CONFIGURA);}
 			else
 			{guias = i3GEO.guias.ORDEM;}
 			nguias = guias.length;
@@ -438,10 +440,12 @@ i3GEO.guias = {
 				if(i3GEO.guias.TIPO === "tablet" && temp.style.display === "block"){
 					temp.style.overflow = "hidden";
 					attributes = {
-						height: { to: 0 }
+						height: { to: 0 },
+						id: this.CONFIGURA[guias[g]].idconteudo
 					};
 					anim = new YAHOO.util.Anim(temp, attributes, 1, YAHOO.util.Easing.easeNone);				
 					anim.onComplete.subscribe(function(){
+						var temp = $i(anim.attributes.id);
 						temp.style.overflow = "auto";
 						temp.style.display="none";
 						i3GEO.barraDeBotoes.BARRAS[0].show();
@@ -509,7 +513,10 @@ i3GEO.guias = {
 						temp.style.overflow = "auto";
 						temp.style.display = "block";
 					});
-					anim.animate();
+					if(DetectaMobile("DetectAndroidTablet") === true)
+					{temp.style.height = "";temp.style.overflow = "auto";}					
+					else
+					{anim.animate();}
 				}
 				else
 				{temp.style.display="block";}
