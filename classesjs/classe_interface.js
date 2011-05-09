@@ -829,10 +829,10 @@ i3GEO.Interface = {
 				//estes controles ficam invisíveis e são usados quando os ícones default do i3geo são ativados
 				//
 				if(i3GEO.Interface.TABLET === false){
-					OLpan = new OpenLayers.Control.Navigation();
+					i3GEO.Interface.openlayers.OLpan = new OpenLayers.Control.Navigation();
 					OLzoom = new OpenLayers.Control.ZoomBox();
 					OLpanel = new OpenLayers.Control.Panel();
-					OLpanel.addControls([OLpan,OLzoom]);
+					OLpanel.addControls([i3GEO.Interface.openlayers.OLpan,OLzoom]);
 					i3geoOL.addControl(OLpanel);
 				}
 				openlayers.ativaBotoes();
@@ -1106,6 +1106,8 @@ i3GEO.Interface = {
 				p = e.xy;
 				//altera o indicador de localizacao
 				lonlat = i3geoOL.getLonLatFromPixel(p);
+				if(!lonlat)
+				{return;}
 				d = i3GEO.calculo.dd2dms(lonlat.lon,lonlat.lat);
 				try{
 					objposicaocursor.ddx = lonlat.lon;

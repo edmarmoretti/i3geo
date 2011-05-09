@@ -398,7 +398,7 @@ i3GEOF.selecao = {
 			{alert("Escolha um tema");return;}
 			if(g_tipoacao !== 'selecaobox')
 			{return;}
-			i3geoOL.removeControl(OLpanel);
+			i3geoOL.removeControl(i3GEO.Interface.openlayers.OLpan);
 			i3GEOF.selecao.box.criaBox();
 			adicionaxyBox = i3GEO.util.pegaPosicaoObjeto($i(i3GEO.Interface.IDCORPO));
 			var i = $i("i3geoboxSel").style;

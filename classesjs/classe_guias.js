@@ -243,9 +243,9 @@ i3GEO.guias = {
 		//
 		//obtém outras guias que podem existir no mapa
 		//
-		var nguiasreal = 0,onf,outf,guiaconteudo,id,guia,guias,nguias,g,re,ng,tituloguia,i,ins,largura,altura;
-		CONFIGURA = i3GEO.guias.CONFIGURA,
-		guias = i3GEO.util.listaChaves(CONFIGURA);
+		var nguiasreal = 0,onf,outf,guiaconteudo,id,guia,guias,nguias,g,re,ng,tituloguia,i,ins,largura,altura,
+			CONFIGURA = i3GEO.guias.CONFIGURA,
+			guias = i3GEO.util.listaChaves(CONFIGURA);
 		
 		try{
 			nguias = guias.length;
