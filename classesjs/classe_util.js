@@ -80,9 +80,8 @@ Default:
 {false}
 */
 opera = navigator.userAgent.toLowerCase().indexOf('opera') > -1;
-var app = navigator.appName.substring(0,1);
-if (app==='N'){navn=true;}
-if (app==='M'){navm=true;}
+if (navigator.appName.substring(0,1) === 'N'){navn=true;}
+if (navigator.appName.substring(0,1) === 'M'){navm=true;}
 if(opera === true)
 {navn = true;}
 /*
@@ -363,7 +362,7 @@ i3GEO.util = {
 	*/
 	arvore: function(titulo,onde,obj){
 		if(typeof(console) !== 'undefined'){console.info("i3GEO.util.arvore()");}
-		var arvore,root,tempNode,currentIconMode,d,c,i,linha,conteudo;
+		var arvore,root,tempNode,currentIconMode,d,c,i,linha,conteudo,j,temaNode;
 		if(!$i(onde)){return;}
 		try{
 			arvore = new YAHOO.widget.TreeView(onde);

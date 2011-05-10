@@ -382,7 +382,7 @@ i3GEO.barraDeBotoes = {
 		//
 		if(i3GEO.Interface.ATUAL==="openlayers"){
 			try
-			{OLzoom.deactivate();}
+			{i3GEO.Interface.openlayers.OLzoom.deactivate();}
 			catch(e){}
 		}
 		var estilo,temp,ist,cor,ko;

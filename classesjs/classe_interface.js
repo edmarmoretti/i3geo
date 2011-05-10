@@ -772,7 +772,7 @@ i3GEO.Interface = {
 			//monta o mapa após receber o resultado da criação do mapfile temporário
 			//
 			var montaMapa = function(){
-				var pz,pos,temp,propriedades,layers,nlayers,i,texto,estilo,
+				var pz,pos,temp,propriedades,layers,nlayers,i,texto,estilo,layersn,
 				openlayers = i3GEO.Interface.openlayers;
 				i3GEO.util.multiStep([
 						openlayers.registraEventos,
@@ -785,11 +785,11 @@ i3GEO.Interface = {
 				);
 				openlayers.criaLayers();
 				if(openlayers.GADGETS.PanZoomBar === true){
-					OLpanzoombar = new OpenLayers.Control.PanZoomBar();
-					i3geoOL.addControl(OLpanzoombar);
-					OLpanzoombar.div.style.zIndex = 5000;
-					OLpanzoombar.div.style.top = i3GEO.Interface.BARRADEZOOMTOP+"px";
-					OLpanzoombar.div.style.left = i3GEO.Interface.BARRADEZOOMLEFT+"px";
+					i3GEO.Interface.openlayers.OLpanzoombar = new OpenLayers.Control.PanZoomBar();
+					i3geoOL.addControl(i3GEO.Interface.openlayers.OLpanzoombar);
+					i3GEO.Interface.openlayers.OLpanzoombar.div.style.zIndex = 5000;
+					i3GEO.Interface.openlayers.OLpanzoombar.div.style.top = i3GEO.Interface.BARRADEZOOMTOP+"px";
+					i3GEO.Interface.openlayers.OLpanzoombar.div.style.left = i3GEO.Interface.BARRADEZOOMLEFT+"px";
 				}
 				if(openlayers.GADGETS.PanZoom === true){
 					pz = new OpenLayers.Control.PanZoom();
@@ -830,10 +830,10 @@ i3GEO.Interface = {
 				//
 				if(i3GEO.Interface.TABLET === false){
 					i3GEO.Interface.openlayers.OLpan = new OpenLayers.Control.Navigation();
-					OLzoom = new OpenLayers.Control.ZoomBox();
-					OLpanel = new OpenLayers.Control.Panel();
-					OLpanel.addControls([i3GEO.Interface.openlayers.OLpan,OLzoom]);
-					i3geoOL.addControl(OLpanel);
+					i3GEO.Interface.openlayers.OLzoom = new OpenLayers.Control.ZoomBox();
+					i3GEO.Interface.openlayers.OLpanel = new OpenLayers.Control.Panel();
+					i3GEO.Interface.openlayers.OLpanel.addControls([i3GEO.Interface.openlayers.OLpan,i3GEO.Interface.openlayers.OLzoom]);
+					i3geoOL.addControl(i3GEO.Interface.openlayers.OLpanel);
 				}
 				openlayers.ativaBotoes();
 				if (i3GEO.configura.mapaRefDisplay !== "none"){
@@ -1057,8 +1057,8 @@ i3GEO.Interface = {
 		},
 		ativaFundo: function(id){
 			i3geoOL.setBaseLayer(i3geoOL.getLayer(id));
-			OLpanzoombar.div.style.top = i3GEO.Interface.BARRADEZOOMTOP+"px";
-			OLpanzoombar.div.style.left = i3GEO.Interface.BARRADEZOOMLEFT+"px";			
+			i3GEO.Interface.openlayers.OLpanzoombar.div.style.top = i3GEO.Interface.BARRADEZOOMTOP+"px";
+			i3GEO.Interface.openlayers.OLpanzoombar.div.style.left = i3GEO.Interface.BARRADEZOOMLEFT+"px";			
 		},
 		atualizaMapa:function(){
 			var layers = i3geoOL.layers,
