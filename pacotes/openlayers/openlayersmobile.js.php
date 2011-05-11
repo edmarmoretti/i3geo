@@ -1,3 +1,5 @@
+<?php error_reporting(0);if(extension_loaded('zlib')){ob_start('ob_gzhandler');} header("Content-type: text/javascript"); ?>$i = function(id){return document.getElementById(id);};
+
 /*
 
   OpenLayers.js -- OpenLayers Map Viewer Library
@@ -812,3 +814,4 @@ OpenLayers.Control.TouchNavigation=OpenLayers.Class(OpenLayers.Control,{dragPan:
 arguments)},activate:function(){if(OpenLayers.Control.prototype.activate.apply(this,arguments)){this.dragPan.activate();this.handlers.click.activate();this.pinchZoom.activate();return true}return false},deactivate:function(){if(OpenLayers.Control.prototype.deactivate.apply(this,arguments)){this.dragPan.deactivate();this.handlers.click.deactivate();this.pinchZoom.deactivate();return true}return false},draw:function(){var a={click:this.defaultClick,dblclick:this.defaultDblClick},b=OpenLayers.Util.extend({"double":true,
 stopDouble:true,pixelTolerance:2},this.clickHandlerOptions);this.handlers.click=new OpenLayers.Handler.Click(this,a,b);this.dragPan=new OpenLayers.Control.DragPan(OpenLayers.Util.extend({map:this.map,documentDrag:this.documentDrag},this.dragPanOptions));this.dragPan.draw();this.pinchZoom=new OpenLayers.Control.PinchZoom(OpenLayers.Util.extend({map:this.map},this.pinchZoomOptions))},defaultClick:function(a){a.lastTouches&&a.lastTouches.length==2&&this.map.zoomOut()},defaultDblClick:function(a){this.map.setCenter(this.map.getLonLatFromViewPortPx(a.xy),
 this.map.zoom+1)},CLASS_NAME:"OpenLayers.Control.TouchNavigation"});OpenLayers.Protocol.WFS.v1_0_0=OpenLayers.Class(OpenLayers.Protocol.WFS.v1,{version:"1.0.0",CLASS_NAME:"OpenLayers.Protocol.WFS.v1_0_0"});
+<?php if(extension_loaded('zlib')){ob_end_flush();}?>
