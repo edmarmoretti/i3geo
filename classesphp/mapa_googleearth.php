@@ -42,18 +42,38 @@ if (!function_exists('ms_GetVersion'))
 	@dl( 'php_mapscript.'.$s );
 	$ler_extensoes[] = 'php_mapscript';	
 }
-include_once("../ms_configura.php");
+//verificação de segurança
+session_name("i3GeoPHP");
+if(@$_GET["g_sid"])
+{session_id($_GET["g_sid"]);}
+else
+{ilegal();}
+session_start();
+/*
+essa verificação não funciona
+if(@$_SESSION["fingerprint"])
+{
+	if (md5('I3GEOSEC' . $_SERVER['HTTP_USER_AGENT'] . session_id()) != $_SESSION["fingerprint"])
+	{ilegal();}
+}
+else
+{ilegal();}
+*/
+//
+$map_file = $_SESSION["map_file"];
+$postgis_mapa = $_SESSION["postgis_mapa"];
+
 if($_GET["REQUEST"] == "GetKml")
 {retornaKml();}
 else
-{retornaWms();}
+{retornaWms($map_file,$postgis_mapa);}
 return;
 function retornaKml(){
 	$protocolo = explode("/",$_SERVER['SERVER_PROTOCOL']);
 	//$servidor = strtolower($protocolo[0])."://".$_SERVER['HTTP_HOST'];
 	//$url = $servidor.'http://localhost:80/cgi-bin/mapserv.exe?map=c:/ms4w/tmp/ms_tmp/rPzBHuOtQa/rPzBHuOtQa.map&amp;width=1500&amp;height=1500&amp;VERSION=1.1.1&amp;REQUEST=GetMap&amp;SRS=EPSG:4291&amp;STYLES=&amp;FORMAT=image/jpeg&amp;TRANSPARENT=TRUE&amp;layers=estadosl';
 	$serv = strtolower($protocolo[0]) . '://'.$_SERVER['SERVER_NAME'] . ($_SERVER['SERVER_PORT'] ? ':'.$_SERVER['SERVER_PORT'] : '') . $_SERVER['PHP_SELF'];
-	$url = $serv."?map=".$_GET["map"]."&amp;WIDTH=1500&amp;HEIGHT=1500&amp;VERSION=1.1.1&amp;REQUEST=GetMap&amp;STYLES=&amp;FORMAT=image/png&amp;TRANSPARENT=TRUE&amp;layer=".$_GET["layer"]."&amp;TIPOIMAGEM=".$_GET["TIPOIMAGEM"];
+	$url = $serv."?g_sid=".$_GET["g_sid"]."&amp;WIDTH=1500&amp;HEIGHT=1500&amp;VERSION=1.1.1&amp;REQUEST=GetMap&amp;STYLES=&amp;FORMAT=image/png&amp;TRANSPARENT=TRUE&amp;layer=".$_GET["layer"]."&amp;TIPOIMAGEM=".$_GET["TIPOIMAGEM"];
 	$kml = '
 		<kml xmlns="http://earth.google.com/kml/2.0">
 		  <Document>
@@ -76,7 +96,7 @@ function retornaKml(){
 	echo header("Content-type: application/xml");
 	echo $kml;
 }
-function retornaWms(){
+function retornaWms($map_file,$postgis_mapa){
 	error_reporting(0);
 	if(isset($_GET["bbox"]))
 	{$_GET["BBOX"] = $_GET["bbox"];}
@@ -91,7 +111,7 @@ function retornaWms(){
 		$_GET["HEIGHT"] = ($_GET["WIDTH"] / $dx) * $dy;
 		//$_GET["map_size"] = $_GET["WIDTH"]." ".$_GET["HEIGHT"];
 	}
-	$mapa = ms_newMapObj($_GET["map"]);
+	$mapa = ms_newMapObj($map_file);
 	$mapa->setProjection("init=epsg:4326");
 	/*
 	$qyfile = str_replace(".map",".qy",$_GET["map"]);
@@ -102,7 +122,7 @@ function retornaWms(){
 	//
 	//resolve o problema da seleção na versão nova do mapserver
 	//
-	$qyfile = dirname($_GET["map"])."/".$_GET["layer"].".php";
+	$qyfile = dirname($map_file)."/".$_GET["layer"].".php";
 	$qy = file_exists($qyfile);
 	if($qy)
 	{
@@ -129,7 +149,6 @@ function retornaWms(){
 		if($layerName == $_GET["layer"] || $l->group == $_GET["layer"] && $l->group != "")
 		{
 			$l->set("status",MS_DEFAULT);
-			
 			if (isset($postgis_mapa) && ($postgis_mapa != "") && ($postgis_mapa != " "))
 			{
 				if ($l->connectiontype == MS_POSTGIS)
@@ -149,8 +168,10 @@ function retornaWms(){
 		$l->set("template","none.htm");
 	}
 	$mapa->setsize($_GET["WIDTH"],$_GET["HEIGHT"]);
-	$mapext = explode(" ",$_GET["mapext"]);
-	$mapa->setExtent($mapext[0],$mapext[1],$mapext[2],$mapext[3]);
+	if(isset($_GET["mapext"])){
+		$mapext = explode(" ",$_GET["mapext"]);
+		$mapa->setExtent($mapext[0],$mapext[1],$mapext[2],$mapext[3]);
+	}
 	$o = $mapa->outputformat;
 	$o->set("imagemode",MS_IMAGEMODE_RGBA);
 	$legenda = $mapa->legend;
@@ -250,5 +271,12 @@ function filtraImagem($nomer,$tipoimagem){
 		if ($tipoimagem == "pixelate")
 		{imagepng($m->pixelate(),str_replace("\\","/",$nomer));}
 	}
+}
+function ilegal(){
+	$img = imagecreatefrompng("../imagens/ilegal.png");
+	ob_clean();
+	echo header("Content-type: image/png \n\n");
+	imagepng($img);
+	exit;
 }
 ?>

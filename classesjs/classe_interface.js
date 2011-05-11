@@ -871,8 +871,8 @@ i3GEO.Interface = {
 		},
 		criaLayers: function(){
 			var configura = i3GEO.configura,
-				url = configura.locaplic+"/classesphp/mapa_openlayers.php?map="+i3GEO.parametros.mapfile+"&TIPOIMAGEM="+configura.tipoimagem,
-				urlfundo = configura.locaplic+"/classesphp/mapa_openlayers.php?layer=&tipolayer=fundo&map="+i3GEO.parametros.mapfile.replace(".map","fundo.map")+"&TIPOIMAGEM="+configura.tipoimagem,
+				url = configura.locaplic+"/classesphp/mapa_openlayers.php?g_sid="+i3GEO.configura.sid+"&TIPOIMAGEM="+configura.tipoimagem,
+				urlfundo = configura.locaplic+"/classesphp/mapa_openlayers.php?g_sid="+i3GEO.configura.sid+"&layer=&tipolayer=fundo&TIPOIMAGEM="+configura.tipoimagem,
 				nlayers = i3GEO.arvoreDeCamadas.CAMADAS.length,
 				layer,
 				camada,
@@ -1052,7 +1052,7 @@ i3GEO.Interface = {
 				//beacons pattern
 				b = new Image();
 				b.src = i3GEO.configura.locaplic+"/classesphp/mapa_controle.php?funcao=ligatemasbeacon&desligar="+desligar+"&ligar="+ligar+"&adicionar=nao&g_sid="+i3GEO.configura.sid;
-				b.onerror = function(){i3GEO.mapa.legendaHTML.atualiza();}
+				b.onerror = function(){i3GEO.mapa.legendaHTML.atualiza();};
 			}
 		},
 		ativaFundo: function(id){
@@ -1366,7 +1366,7 @@ i3GEO.Interface = {
 			var i3GEOTileO,s;
 			s = "i3GEOTileO = new google.maps.ImageMapType({ "+
 					"getTileUrl: function(coord, zoom) {" +
-					"	var url = '" + i3GEO.configura.locaplic +"/classesphp/mapa_googlemaps.php?map=" + i3GEO.parametros.mapfile +
+					"	var url = '" + i3GEO.configura.locaplic +"/classesphp/mapa_googlemaps.php?g_sid=" + i3GEO.configura.sid +
 					"&Z=' + zoom + '&X=' + coord.x + '&Y=' + coord.y + '&layer=" + nomeLayer + i3GEO.Interface.googlemaps.PARAMETROSLAYER +'&r='+Math.random()+"';" +
 					"	return url+'&nd='+i3GEO.Interface.googlemaps.posfixo; " +
 					"}, "+
@@ -1854,11 +1854,6 @@ i3GEO.Interface = {
 		},
 		cria: function(w,h){
 			var i,i3GeoMap3d,i3GeoMap,texto;
-			/*
-			i3GEO.configura.listaDePropriedadesDoMapa = {
-				"propriedades": []
-			};
-			*/
 			i3GEO.configura.listaDePropriedadesDoMapa = {
 				"propriedades": [
 				{ text: "p2", url: "javascript:i3GEO.mapa.dialogo.tipoimagem()"},
@@ -2034,10 +2029,10 @@ i3GEO.Interface = {
 			}
 		},
 		insereLayer: function(nomeLayer){
-			var kmlUrl = i3GEO.configura.locaplic+"/classesphp/mapa_googleearth.php?REQUEST=GetKml&map="+i3GEO.parametros.mapfile+"&layer="+nomeLayer+i3GEO.Interface.googleearth.PARAMETROSLAYER+"&r="+Math.random(),
-				linki3geo = i3GeoMap.createLink('');
+			var kmlUrl = i3GEO.configura.locaplic+"/classesphp/mapa_googleearth.php?REQUEST=GetKml&g_sid="+i3GEO.configura.sid+"&layer="+nomeLayer+i3GEO.Interface.googleearth.PARAMETROSLAYER+"&r="+Math.random(),
+				linki3geo = i3GeoMap.createLink(''),
+				nl = i3GeoMap.createNetworkLink('');
 			linki3geo.setHref(kmlUrl+i3GEO.Interface.googleearth.posfixo);
-			nl = i3GeoMap.createNetworkLink('');
 			nl.setLink(linki3geo);
 			nl.setFlyToView(false);
 			nl.setName(nomeLayer);

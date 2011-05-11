@@ -97,6 +97,7 @@ perfil - nome do perfil para controlar os temas que serão visíveis na lista de t
 mapdir - localização, no servidor, do diretório com o mapfile temporário do mapa atual.
 imgdir - localização, no servidor, das imagens temporárias do mapa atual. 
 debug - (pode ser definido como "sim" indica se o erro_reporting deve ser definido como E_ALL
+contadorsalva - indica quantas vezes o mapa já foi salvo. Permite que uma aplicação verifique se o mapa foi alterado ou não.
 */
 error_reporting(0);
 
@@ -125,8 +126,14 @@ if ($funcao != "criaMapa")
 	$postgis_mapa = $_SESSION["postgis_mapa"];
 	if(isset($fingerprint))
 	{
-		if (md5('I3GEOSEC' . $_SERVER['HTTP_USER_AGENT'] . session_id()) != $fingerprint)
-		{exit;}
+		//if (md5('I3GEOSEC' . $_SERVER['HTTP_USER_AGENT'] . session_id()) != $fingerprint)
+		$f = explode(",",$fingerprint);
+		if($f[0] != md5('I3GEOSEC' . $_SERVER['HTTP_USER_AGENT'] . session_id()))
+		{
+			include_once("funcoes_gerais.php");
+			cpjson(". Tentativa de acesso nao permitida. Inicie um novo mapa.");
+			return;
+		}
 	}
 }
 //
@@ -179,7 +186,8 @@ if (!isset($map_file))
 	//nesse caso é necessário criar o diretório temporário e iniciar o mapa
 	//$cp->set_data(array("erro"=>"linkquebrado"));
 	//$cp->return_data();
-	cpjson(array("erro"=>"linkquebrado"));
+	//cpjson(array("erro"=>"linkquebrado"));
+	ilegal();
 	exit;
 }
 include_once("classe_vermultilayer.php");
@@ -298,6 +306,7 @@ O mapfile é alterado e salvo novamente com os novos layers.
 		include_once("classe_analise.php");
 		$m = new Analise($map_file,"");
 		$retorno = $m->incmapageometrias($dir_tmp,$imgdir,$lista);
+		$_SESSION["contadorsalva"]++;
 	break;
 /*
 Valor: FUNCOESGEOMETRIAS
@@ -373,6 +382,7 @@ Salva o mapa acrescentando um novo layer com o resultado.
 		$m = new Analise($map_file,$tema);
 		$retorno = $m->dissolvePoligono($item,$locaplic);
 		$m->salva();
+		$_SESSION["contadorsalva"]++;
 	break;
 /*
 Valor: AGRUPAELEMENTOS
@@ -390,6 +400,7 @@ Salva o mapa acrescentando um novo layer com o resultado.
 		$m = new Analise($map_file,$tema);
 		$retorno = $m->agrupaElementos($item,$locaplic);
 		$m->salva();
+		$_SESSION["contadorsalva"]++;
 	break;
 /*
 Valor: PONTOEMPOLIGONO
@@ -406,6 +417,7 @@ Salva o mapa acrescentando um novo layer com o resultado.
 		$m = new Analise($map_file,$temaPt,$locaplic,$ext);		
 		$retorno = $m->pontoEmPoligono($temaPt,$temasPo,$locaplic);
 		$m->salva();
+		$_SESSION["contadorsalva"]++;
 	break;
 /*
 Valor: NPTPOL
@@ -422,6 +434,7 @@ Salva o mapa acrescentando um novo layer com o resultado.
 		$m = new Analise($map_file,$tema,$locaplic,$ext);
 		$retorno = $m->nptPol($temaPt,$temaPo,$locaplic);
 		$m->salva();
+		$_SESSION["contadorsalva"]++;
 	break;
 /*
 Valor: CRIABUFFER
@@ -438,6 +451,7 @@ Salva o mapa acrescentando um novo layer com o buffer.
 		$m = new Analise($map_file,$tema,$locaplic,$ext);
 		$retorno = $m->criaBuffer($distancia,$locaplic,$unir);
 		$m->salva();
+		$_SESSION["contadorsalva"]++;
 		//limpa selecao
 		$qyfile = str_replace(".map",".qy",$map_file);
 		if (file_exists($qyfile))
@@ -459,6 +473,7 @@ São considerados apenas os pontos próximos definidos por um buffer.
 		$temaoverlay = $m->criaBuffer($distancia,$locaplic);
 		$retorno = $m->distanciaptpt($temaorigem,$temadestino,$temaoverlay,$locaplic,$itemorigem,$itemdestino);
 		$m->salva();
+		$_SESSION["contadorsalva"]++;
 	break;
 /*
 Valor: CRIACENTROIDE
@@ -484,6 +499,7 @@ Salva o mapa acrescentando um novo layer com os pontos.
 		//if($interface == "googlemaps")
 		//{$m->mapa->setProjection($projMapa);}
 		$m->salva();
+		$_SESSION["contadorsalva"]++;
 	break;
 /*
 Valor: CENTROMASSA
@@ -500,6 +516,7 @@ Salva o mapa acrescentando um novo layer com o ponto.
 		$m = new Analise($map_file,$tema,$locaplic,$ext);		
 		$retorno = $m->centroMassa($item);
 		$m->salva();
+		$_SESSION["contadorsalva"]++;
 	break;
 /*
 Valor: ANALISEDISTRIPT
@@ -520,6 +537,7 @@ Executa script R para gerar a imagem.
 		$m = new Analise($map_file,$tema,$locaplic,$ext);		
 		$retorno = $m->analiseDistriPt($locaplic,$dir_tmp,$R_path,$numclasses,$tipo,$cori,$corf,$tmpurl,$sigma,$limitepontos,$tema2,$extendelimite);
 		$m->salva();
+		$_SESSION["contadorsalva"]++;
 	break;
 /*
 Valor: GRADEDEPONTOS
@@ -537,6 +555,7 @@ Salva o mapa acrescentando um novo layer com a grade de coordenadas.
 		$m = new Analise($map_file,$tema);
 		$retorno = $m->gradeDePontos($xdd,$ydd,$px,$py,$locaplic,$nptx,$npty);
 		$m->salva();
+		$_SESSION["contadorsalva"]++;
 	break;
 /*
 Valor: GRADEDEPOL
@@ -554,6 +573,7 @@ Salva o mapa acrescentando um novo layer com a grade.
 		$m = new Analise($map_file,$tema);
 		$retorno = $m->gradeDePol($xdd,$ydd,$px,$py,$locaplic,$nptx,$npty);
 		$m->salva();
+		$_SESSION["contadorsalva"]++;
 	break;
 /*
 Valor: GRADEDEHEX
@@ -571,12 +591,27 @@ Salva o mapa acrescentando um novo layer com a grade.
 		if(!isset($tema)){$tema = "";}
 		$retorno = $m->gradeDeHex($xdd,$ydd,$px,$py,$locaplic,$nptx,$npty);
 		$m->salva();
+		$_SESSION["contadorsalva"]++;
 	break;
 /*
 Section: Mapa
 
 <classe_mapa.php>
 */
+/*
+Valor: TELAREMOTA
+
+Registra um ID para permitir o acesso ao mapa atual por outro navegador.
+
+O ID é adicionado à string $_SESSION["fingerprint"] separado por ','
+
+<Mapa->telaRemota>
+*/
+	case "TELAREMOTA":
+		$codigo = nomeRandomico();
+		$_SESSION["fingerprint"] .= ",".$codigo;
+		$retorno = $codigo;
+	break;
 /*
 Valor: PEGAMENSAGENS
 
@@ -601,6 +636,7 @@ Reinicia um mapa restaurando a cópia de segurança.
 		unlink($map_file);
 		copy(str_replace(".map","reinc.map",$map_file),$map_file);
 		$retorno = "ok";
+		$_SESSION["contadorsalva"]++;
 	break;
 /*
 Valor: RECUPERAMAPA
@@ -621,6 +657,7 @@ Recupera o mapfile de segurança.
 			copy($nmf,$map_file);
 		}
 		$retorno = "ok";
+		$_SESSION["contadorsalva"]++;
 	break;
 /*
 Valor: ATIVALOGO
@@ -635,6 +672,7 @@ Ativa ou desativa a marca de logo no mapa.
 		$m = new Mapa($map_file);
 		$m->ativalogo();
 		$m->salva();
+		$_SESSION["contadorsalva"]++;
 		redesenhaMapa();
 	break;
 /*
@@ -650,6 +688,7 @@ Ativa ou desativa a legenda inserida no mapa.
 		$m = new Mapa($map_file);
 		$m->ativalegenda();
 		$m->salva();
+		$_SESSION["contadorsalva"]++;
 		redesenhaMapa();
 	break;
 /*
@@ -669,6 +708,7 @@ Muda o tamanho da imagem do mapa atual.
 		$m = new Mapa($map_file);
 		$m->mudaQS($largura,$altura);
 		$retorno = "ok";
+		$_SESSION["contadorsalva"]++;
 	break;
 /*
 Valor: GRADECOORD
@@ -683,6 +723,7 @@ Inclui um tema com a grade de coordenadas.
 		$m = new Mapa($map_file);
 		$m->gradeCoord($intervalo,$corlinha,$larguralinha,$tipolinha,$tamanhotexto,$fonte,$cortexto,$incluitexto,$mascara,$shadowcolor,$shadowsizex,$shadowsizey);
 		$m->salva();
+		$_SESSION["contadorsalva"]++;
 		redesenhaMapa();
 	break;
 /*
@@ -726,6 +767,7 @@ Altera a cor de seleção.
 		$m = new Mapa($map_file);
 		$m->corQM($cor);
 		$m->salva();
+		$_SESSION["contadorsalva"]++;
 		redesenhaMapa();
 	break;
 /*
@@ -760,6 +802,7 @@ Altera a cor do fundo do mapa.
 			$m->corfundo($cor);
 			$m->salva();
 		}
+		$_SESSION["contadorsalva"]++;
 		redesenhaMapa();
 	break;
 /*
@@ -812,7 +855,7 @@ Adiciona um tema baseado em um RSS.
 		$m = new Mapa($map_file);
 		$retorno = $m->adicionaTemaGeoRSS($servico,$dir_tmp,$locaplic,$canal);
 		if ($retorno != "erro")
-		{$m->salva();redesenhaMapa();}
+		{$m->salva();$_SESSION["contadorsalva"]++;redesenhaMapa();}
 		else
 		{
 			$retorno = "erro.Nenhum dado espacializado foi encontrado.";
@@ -831,7 +874,7 @@ Adiciona um tema baseado em um arquivo shape file.
 		$m = new Mapa($map_file);
 		$retorno = $m->adicionaTemaSHP($arq);
 		if ($retorno != "erro")
-		{$m->salva();redesenhaMapa();}
+		{$m->salva();$_SESSION["contadorsalva"]++;redesenhaMapa();}
 		else
 		{
 			$retorno = "erro.Nenhum dado espacializado foi encontrado.";
@@ -850,7 +893,7 @@ Adiciona um tema baseado em um arquivo de imagem.
 		$m = new Mapa($map_file);
 		$retorno = $m->adicionaTemaIMG($arq);
 		if ($retorno != "erro")
-		{$m->salva();redesenhaMapa();}
+		{$m->salva();$_SESSION["contadorsalva"]++;redesenhaMapa();}
 		else
 		{
 			$retorno = "erro.Nenhum dado espacializado foi encontrado.";
@@ -919,6 +962,7 @@ Liga e desliga temas no mapa atual.
 		$m = new Mapa($map_file,$locaplic);
 		$retorno = $m->ligaDesligaTemas($ligar,$desligar,$adicionar);
 		$m->salva();
+		$_SESSION["contadorsalva"]++;
 	break;
 /*
 Valor: LIGATEMASBEACON
@@ -937,6 +981,7 @@ Veja no livro "Javascript de Alto Desempenho", de Nicholas C. Zakas pg. 162
 		$m = new Mapa($map_file,$locaplic);
 		$retorno = $m->ligaDesligaTemas($ligar,$desligar,$adicionar);
 		$m->salva();
+		$_SESSION["contadorsalva"]++;
 		ob_start();
 		header("HTTP/1.1 204 Not Content");
 		header("Status: 204 Not Content");
@@ -955,12 +1000,15 @@ Adiciona um novo tema ao mapa.
 		$m = new Mapa($map_file);
 		$salvar = $m->adicionaTema($temas,$locaplic);
 		if($salvar)
-		{$m->salva();}
+		{
+			$m->salva();
+			$_SESSION["contadorsalva"]++;
+		}
 		$retorno = "ok";
 		if($interface != "openlayers"){
 			$teste = testaMapa($map_file,$postgis_mapa);
 			if ($teste == "ok")
-			{$retorno = "ok";}
+			{$retorno = "ok";$_SESSION["contadorsalva"]++;}
 			else
 			{$retorno = array("erro"=>"A camada nao pode ser adicionada. ".$teste);}
 		}
@@ -978,6 +1026,7 @@ Exclui um tema do mapa.
 		$m = new Mapa($map_file);
 		$m->excluiTemas($temas);
 		$m->salva();
+		$_SESSION["contadorsalva"]++;
 		redesenhaMapa();
 	break;
 /*
@@ -994,7 +1043,7 @@ Acrescenta um novo tema em um arquivo map file tendo como fonte um WMS.
 	 	$m->adicionatemawms($tema,$servico,$nome,$proj,$formato,$locaplic,$tipo,$versao,$nomecamada,$dir_tmp,$imgdir,$imgurl,$tiporep,$suportasld,$formatosinfo,$time);
 		$teste = "ok";//testaMapa($map_file,$postgis_mapa);
 		if ($teste == "ok")
-		{$retorno = "ok";}
+		{$retorno = "ok";$_SESSION["contadorsalva"]++;}
 		else
 		{$retorno = array("erro"=>"A camada nao pode ser adicionada. ".$teste);}
 	break;
@@ -1035,7 +1084,7 @@ Muda o OUTPUTFORMAT.
 		$m = new Mapa($map_file);
 	 	$res = $m->mudaoutputformat($tipo);
 		if($res != 1)
-		{$m->salva();}
+		{$m->salva();$_SESSION["contadorsalva"]++;}
 		else
 		{$res = "erro";}
 		$retorno = $res;
@@ -1083,6 +1132,7 @@ Altera o valor definido no elemento DATA de um LAYER.
 		$m = new Temas($map_file,$tema);
 		$retorno = $m->alteradata($novodata);
 		$m->salva();
+		$_SESSION["contadorsalva"]++;
 	break;
 /*
 Valor: REMOVERGEOMETRIAS
@@ -1112,6 +1162,7 @@ Altera o tipo de representação cartográfica do tema.
 		$m = new Temas($map_file,$tema);
 		$m->alteraRepresentacao();
 		$m->salva();
+		$_SESSION["contadorsalva"]++;
 		redesenhaMapa();
 	break;
 /*
@@ -1162,6 +1213,7 @@ Insere elemento gráfico em um tema.
 		if(!isset($marca)){$marca="";}
 		$m->insereFeature($marca,$tipo,$xy,$texto,$position,$partials,$offsetx,$offsety,$minfeaturesize,$mindistance,$force,$shadowcolor,$shadowsizex,$shadowsizey,$outlinecolor,$cor,$sombray,$sombrax,$sombra,$fundo,$angulo,$tamanho,$fonte,$wrap);
 		$m->salva();
+		$_SESSION["contadorsalva"]++;
 		redesenhaMapa();
 	break;
 /*
@@ -1177,6 +1229,7 @@ Sobe um tema na ordem de desenho.
 		$m = new Temas($map_file,$tema);
 		$m->sobeTema();
 		$m->salva();
+		$_SESSION["contadorsalva"]++;
 		redesenhaMapa();
 	break;
 /*
@@ -1192,6 +1245,7 @@ Desce um tema na ordem de desenho.
 		$m = new Temas($map_file,$tema);
 		$m->desceTema();
 		$m->salva();
+		$_SESSION["contadorsalva"]++;
 		redesenhaMapa();
 	break;
 /*
@@ -1219,6 +1273,7 @@ Reordena os temas baseados na localização de um segundo tema no mapa.
 		$m = new Temas($map_file);
 		$m->reordenatemas($lista);
 		$m->salva();
+		$_SESSION["contadorsalva"]++;
 		redesenhaMapa();
 	break;
 /*
@@ -1234,6 +1289,7 @@ Muda a extensão geográfica do mapa de acordo com a abrangência de um tema.
 		$m = new Temas($map_file,$tema);
 		$m->zoomTema();
 		$m->salva();
+		$_SESSION["contadorsalva"]++;
 		redesenhaMapa();
 	break;
 /*
@@ -1249,6 +1305,7 @@ Muda a extensão geográfica do mapa de acordo com a abrangência dos elementos sel
 		$m = new Temas($map_file,$tema);	
 		$m->zoomSel();
 		$m->salva();
+		$_SESSION["contadorsalva"]++;
 		redesenhaMapa();
 	break;
 /*
@@ -1267,6 +1324,7 @@ Inclui um filtro no tema.
 		if($testa != "sim")
 		{
 			$m->salva();
+			$_SESSION["contadorsalva"]++;
 			redesenhaMapa();
 		}
 	break;
@@ -1295,6 +1353,7 @@ Aplica processos em um tema do tipo imagem
 		$m = new Temas($map_file,$tema);
 		$m->aplicaProcessos($lista);
 		$m->salva();
+		$_SESSION["contadorsalva"]++;
 		redesenhaMapa();
 	break;
 /*
@@ -1310,6 +1369,7 @@ Inverte o metadata CLASSE
 		$m = new Temas($map_file,$tema);
 		$m->inverteStatusLegenda();
 		$m->salva();
+		$_SESSION["contadorsalva"]++;
 		redesenhaMapa();
 	break;	
 /*
@@ -1325,6 +1385,7 @@ Altera a transparência de um tema
 		$m = new Temas($map_file,$tema);
 		$m->mudaTransparencia($valor);
 		$m->salva();
+		$_SESSION["contadorsalva"]++;
 		redesenhaMapa();
 	break;
 /*
@@ -1340,6 +1401,7 @@ Altera o nome do tema
 		$m = new Temas($map_file,$tema);
 		$m->mudaNome($valor);
 		$m->salva();
+		$_SESSION["contadorsalva"]++;
 		redesenhaMapa();
 	break;
 /*
@@ -1377,6 +1439,7 @@ Gera graficos automaticamente para os elementos de um tema
 		if($interface == "googlemaps")
 		{$m->mapa->setProjection($projMapa);}
 		$m->salva();
+		$_SESSION["contadorsalva"]++;
 		redesenhaMapa();
 	break;
 /*
@@ -1438,6 +1501,7 @@ Altera uma classe de um tema, aplicando uma nova classificação ou modificando pa
 		if($interface == "googlemaps")
 		{$m->mapa->setProjection($projMapa);}		
 		$salvo = $m->salva();
+		$_SESSION["contadorsalva"]++;
 	break;
 /*
 Valor: INVERTECORESCLASSES
@@ -1452,6 +1516,7 @@ Inverte a ordem das cores das classes de um tema.
 		$m = new Alteraclasse($map_file,$tema);
 		$m->inverteCoresClasses();
 		$m->salva();
+		$_SESSION["contadorsalva"]++;
 		redesenhaMapa();
 	break;
 /*
@@ -1467,6 +1532,7 @@ Calcula o tamanho dos estilos das classes, alterando o tamanho do símbolo.
 		$m = new Alteraclasse($map_file,$tema);
 		$retorno = $m->calculaTamanhoClasses();
 		$m->salva();
+		$_SESSION["contadorsalva"]++;
 	break;
 /*
 Valor: ALTERACORESCLASSES
@@ -1481,6 +1547,7 @@ Altera as cores das classes de um tema conforme uma cor inicial e uma final.
 		$m = new Alteraclasse($map_file,$tema);
 		$retorno = $m->alteraCoresClasses($cori,$corf);
 		$m->salva();
+		$_SESSION["contadorsalva"]++;
 	break;
 /*
 Valor: INVERTESTATUSCLASSE
@@ -1495,6 +1562,7 @@ Altera o status de desenho de uma classe, tornando-a vi´sivel ou não.
 		$m = new Alteraclasse($map_file,$tema);
 		$retorno = $m->statusClasse($classe);
 		$m->salva();
+		$_SESSION["contadorsalva"]++;
 	break;	
 /*
 Valor: VERPALETA
@@ -1536,6 +1604,7 @@ Acrescenta um novo tema ao mapa.
 		$m = new SHP($map_file,$tema,$locaplic,$ext);
 		$retorno = $m->shpPT2shp($locaplic,$para);
 		$m->salva();
+		$_SESSION["contadorsalva"]++;
 	break;
 /*
 Valor: LISTAPONTOSSHAPE
@@ -1563,6 +1632,7 @@ Cria um shapefile vazio e acrescenta como tema ao mapa.
 		{$tituloTema = "";}
 		$retorno = $m->criaSHPvazio($tituloTema);
 		$m->salva();
+		$_SESSION["contadorsalva"]++;
 	break;
 /*
 Valor: INSERESHP
@@ -1577,6 +1647,7 @@ Insere um ponto em um shape file existente.
 		$m = new SHP($map_file,$tema);
 		if (!isset($projecao)){$projecao = "";}
 		$m->insereSHP($xy,$projecao,$item,$valor);
+		$_SESSION["contadorsalva"]++;
 		redesenhaMapa();
 	break;
 /*
@@ -1616,7 +1687,8 @@ Os valores para o gráfico são obtidos do tema indicado na classe. Para cada novo
 		{
 			$m->mapa->setProjection($projMapa);
 			$m->salva();
-		}		
+		}
+		$_SESSION["contadorsalva"]++;
 	break;
 /*
 Valor: MOSTRAWKT
@@ -2216,6 +2288,7 @@ Muda a extensão geográfica do mapa.
 		{$ext = projetaExt($map_file,$ext);}
 		$m->mudaExtensao($ext);
 		$m->salva();
+		$_SESSION["contadorsalva"]++;
 		redesenhaMapa();
 	break;
 /*
@@ -2231,6 +2304,7 @@ Muda a escala do mapa.
 		$m = new Navegacao($map_file);
 		$m->mudaEscala($escala);
 		$m->salva();
+		$_SESSION["contadorsalva"]++;
 		redesenhaMapa();
 	break;
 /*
@@ -2247,6 +2321,7 @@ Desloca a visualização de um mapa (pan).
 		if(!isset($tipo)){$tipo = "";}
 		$m->pan($x,$y,$escala,$tipo);
 		$m->salva();
+		$_SESSION["contadorsalva"]++;
 		redesenhaMapa();
 	break;
 /*
@@ -2262,6 +2337,7 @@ Aproxima a visualização de um mapa (zoom in)
 		$m = new Navegacao($map_file);
 		$m->aproxima($nivel);
 		$m->salva();
+		$_SESSION["contadorsalva"]++;
 		redesenhaMapa();
 	break;
 /*
@@ -2277,6 +2353,7 @@ Afasta a visualização de um mapa (zoom out)
 		$m = new Navegacao($map_file);
 		$m->afasta($nivel);
 		$m->salva();
+		$_SESSION["contadorsalva"]++;
 		redesenhaMapa();
 	break;
 /*
@@ -2331,7 +2408,8 @@ Desloca o centro do mapa para um ponto específico.
 		if(!isset($marca))
 		{$marca = "ponto";}
 		$m->insereFeature($marca,"POINT",$xy,$texto,$position,$partials,$offsetx,$offsety,$minfeaturesize,$mindistance,$force,$shadowcolor,$shadowsizex,$shadowsizey,$outlinecolor,$cor,$sombray,$sombrax,$sombra,$fundo,$angulo,$tamanho,$fonte);
-		$m->salva();	
+		$m->salva();
+		$_SESSION["contadorsalva"]++;		
 		redesenhaMapa();
 	break;
 /*
@@ -2390,6 +2468,7 @@ Define as características de simbologia de uma classe, cria, adiciona e exclui e
 		{$retorno = $m->listaSimbolos($tipo,$dir_tmp,$imgdir,$onclick);}
 		if ($opcao == "pegaparametros")
 		{$retorno = $m->pegaParametros($classe);}
+		$_SESSION["contadorsalva"]++;
 	break;
 /*
 Valor: EDITALEGENDA
@@ -2493,6 +2572,7 @@ Aplica um parâmetro em um estilo de uma classe.
 		$m = new Legenda($map_file);
 		$retorno = $m->aplicaParametrosLegImg($fonte,$imagecolor,$position,$status,$outlinecolor,$keyspacingy,$keyspacingx,$keysizey,$keysizex,$height,$width,$labelsize);
 		$m->salva();
+		$_SESSION["contadorsalva"]++;
 	break;
 /*
 Section: Escala gráfica
@@ -2549,6 +2629,7 @@ Aplica novos parâmetros na barra de escala atual.
 		copiaSeguranca($map_file);
 		$m = new Escala($map_file);
 		$retorno = $m->mudaEscalaGrafica($w,$h,$estilo,$intervalos,$unidade,$cor,$bcor,$ocor);
+		$_SESSION["contadorsalva"]++;
 	break;
 /*
 Section: Seleção
@@ -2580,6 +2661,7 @@ Seleciona elementos utilizando um ponto.
 			}
 			$ok[] = $m->selecaoPT($xy,$tipo,$tolerancia);
 		}
+		$_SESSION["contadorsalva"]++;
 		redesenhaMapa();
 	break;
 /*
@@ -2604,6 +2686,7 @@ Seleciona elementos utilizando a extensão do mapa.
 			$ok[] = $m->selecaoEXT($tipo);
 		}
 		//$retorno = implode(",",$ok);
+		$_SESSION["contadorsalva"]++;
 		redesenhaMapa();
 	break;
 /*
@@ -2627,6 +2710,7 @@ Seleciona elementos utilizando um retângulo.
 			}			
 			$ok[] = $m->selecaoBOX($tipo,$ext);
 		}
+		$_SESSION["contadorsalva"]++;
 		redesenhaMapa();		
 	break;
 
@@ -2642,6 +2726,7 @@ Seleciona elementos com base nos atributos.
 		copiaSeguranca($map_file);
 		$m = new Selecao($map_file,$tema,$ext);
 		$retorno = $m->selecaoAtributos($tipo,$item,$operador,$valor);
+		$_SESSION["contadorsalva"]++;
 		redesenhaMapa();
 	break;
 /*
@@ -2656,6 +2741,7 @@ Seleciona elementos com base nos atributos utilizando sintaxe complexa.
 		copiaSeguranca($map_file);
 		$m = new Selecao($map_file,$tema,$ext);
 		$retorno = $m->selecaoAtributos2($filtro,$tipo);
+		$_SESSION["contadorsalva"]++;
 		redesenhaMapa();
 	break;
 /*
@@ -2680,6 +2766,7 @@ Sleciona elementos de um tema com base em outro tema.
 			$ok[] = $m->selecaoTema($temao,$tipo);
 		}
 		$retorno = implode(",",$ok);
+		$_SESSION["contadorsalva"]++;
 		redesenhaMapa();
 	break;
 /*
@@ -2694,6 +2781,7 @@ Seleção por poligono (chamado via POST).
 		//por isso precisa ser executada com start
 		copiaSeguranca($map_file);
 		$retorno = selecaoPoli($xs,$ys,$tema,$tipo);
+		$_SESSION["contadorsalva"]++;
 		redesenhaMapa();
 		//restauraCon($map_file,$postgis_mapa);
 	break;
@@ -2711,6 +2799,7 @@ Limpa a seleção existente em um tema.
 		//
 		//é necessário obter os parâmetros do mapa para remontar a árvore de camadas 
 		//
+		$_SESSION["contadorsalva"]++;
 		redesenhaMapa();		
 	break;
 /*
@@ -2727,6 +2816,7 @@ Incluí elementos em uma seleção.
 		//
 		//é necessário obter os parâmetros do mapa para remontar a árvore de camadas 
 		//
+		$_SESSION["contadorsalva"]++;
 		redesenhaMapa();
 	break;
 /*
@@ -2742,6 +2832,7 @@ Cria um novo tema com a seleção atual.
 		$m = new Selecao($map_file,$tema);
 		$retorno = $m->selecao2tema($locaplic,$dir_tmp);
 		$m->salva();
+		$_SESSION["contadorsalva"]++;
 	break;
 /*
 Section: Toponímia
@@ -2764,7 +2855,7 @@ Cria um novo tema com a toponímia do tema atual.
 		if(!isset($tipo)){$tipo="";}
 		$retorno = $m->criaToponimia($item,$position,$partials,$offsetx,$offsety,$minfeaturesize,$mindistance,$force,$shadowcolor,$shadowsizex,$shadowsizey,$outlinecolor,$cor,$sombray,$sombrax,$sombra,$fundo,$angulo,$tamanho,$fonte,$tipo,$wrap);
 		if ($tipo != "teste")
-		{$m->salva();}
+		{$m->salva();$_SESSION["contadorsalva"]++;}
 	break;
 /*
 Valor: ATIVAETIQUETAS
@@ -2779,6 +2870,7 @@ Ativa as etiquetas de um tema.
 		$m = new Toponimia($map_file,$tema);
 		$retorno = $m->ativaEtiquetas($item);
 		$m->salva();
+		$_SESSION["contadorsalva"]++;
 	break;
 /*
 Valor: REMOVEETIQUETAS
@@ -2793,6 +2885,7 @@ Desativa as etiquetas de um tema.
 		$m = new Toponimia($map_file,$tema);
 		$retorno = $m->removeEtiquetas();
 		$m->salva();
+		$_SESSION["contadorsalva"]++;
 	break;
 /*
 Section: Outros
@@ -2938,6 +3031,7 @@ function alteraclassesPost($ids,$nomes,$exps)
 	$m = new Alteraclasse($map_file,$tema);
 	$m->alteraclasses($ids,$nomes,$exps);
 	$m->salva();
+	$_SESSION["contadorsalva"]++;
 }
 /*
 Function: selecaoPoli
@@ -2964,6 +3058,7 @@ function selecaoPoli($xs,$ys,$tema,$tipo)
 		if($interface == "googlemaps")
 		{$m->mapa->setProjection($projMapa);}
 		$m->salva();
+		$_SESSION["contadorsalva"]++;
 	}
 	return implode(",",$ok);
 }

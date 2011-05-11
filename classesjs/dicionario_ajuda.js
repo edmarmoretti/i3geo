@@ -839,6 +839,15 @@ g_traducao_ajuda = {
 			complemento:"O arquivo XML pode estar em um servidor ou pode ser feito o upload para o servidor do i3Geo",
 			tela:"",
 			apijs:"i3GEO.arvoreDeTemas.dialogo.importarwmc()"
+		},
+		"99": {
+			titulo: "Tela remota",
+			diretorio:"i3geo/ferramentas/telaremota",
+			categoria:"7",
+			pt:"Cria um link que permite abrir o mapa atual em outro computador ou navegador. O mapa clonado é atualizado conforme o original for sendo modificado.",
+			complemento:"Essa funcionalidade permite que um mapa seja mostrado em uma tela remota com uma interface diferente da original. Útil para projeção em telões e salas de situação.",
+			tela:"",
+			apijs:"i3GEO.mapa.dialogo.telaRemota()"
 		}
 	}
 };

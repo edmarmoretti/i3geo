@@ -419,6 +419,14 @@ i3GEO.mapa = {
 	*/
 	dialogo:{
 		/*
+		Function: telaRemota
+
+		Abre a janela de diálogo da ferramenta de configuração de uma tela remota
+		*/
+		telaRemota: function(){
+			i3GEO.util.dialogoFerramenta("i3GEO.mapa.dialogo.telaremota()","telaremota","telaremota");
+		},
+		/*
 		Function: t3d
 
 		Abre a janela de diálogo da ferramenta de geração da visualização em 3d

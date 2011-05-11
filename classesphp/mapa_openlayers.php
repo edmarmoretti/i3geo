@@ -7,6 +7,7 @@ das variáveis de conexão com banco e outras operações específicas do i3Geo.
 
 É utilizado especificamente nas interfaces que utilizam a biblioteca OpenLayers em LAYERS do tipo WMS.
 
+Precisa do código da "section" PHP aberta pelo i3Geo ou o código para acesso especial indicado no parâmetro telaR (veja a ferramenta TELAREMOTA).
 
 Licenca:
 
@@ -42,24 +43,36 @@ if (!function_exists('ms_GetVersion'))
 	@dl( 'php_mapscript.'.$s );
 	$ler_extensoes[] = 'php_mapscript';	
 }
-include_once("../ms_configura.php");
-
+//verificação de segurança
+session_name("i3GeoPHP");
+if(@$_GET["g_sid"])
+{session_id($_GET["g_sid"]);}
+else
+{ilegal();}
+session_start();
+if(@$_SESSION["fingerprint"])
+{
+	$f = explode(",",$_SESSION["fingerprint"]);
+	if (md5('I3GEOSEC' . $_SERVER['HTTP_USER_AGENT'] . session_id()) != $f[0] && !in_array($_GET["telaR"],$f) )
+	{ilegal();}
+}
+else
+{ilegal();}
+//
+$map_file = $_SESSION["map_file"];
+$postgis_mapa = $_SESSION["postgis_mapa"];
+if($_GET["tipolayer"] == "fundo")
+{$map_file = str_replace(".map","fundo.map",$map_file);}
 if(isset($_GET["BBOX"]))
 {
 	$_GET["mapext"] = str_replace(","," ",$_GET["BBOX"]);
 	$_GET["map_size"] = $_GET["WIDTH"]." ".$_GET["HEIGHT"];
 }
-$mapa = ms_newMapObj($_GET["map"]);
-/*
-$qyfile = str_replace(".map",".qy",$_GET["map"]);
-$qy = file_exists($qyfile);
-if($qy)
-{$mapa->loadquery($qyfile);}
-*/
+$mapa = ms_newMapObj($map_file); //map_file vem de section
 //
 //resolve o problema da seleção na versão nova do mapserver
 //
-$qyfile = dirname($_GET["map"])."/".$_GET["layer"].".php";
+$qyfile = dirname($map_file)."/".$_GET["layer"].".php";
 $qy = file_exists($qyfile);
 if($qy)
 {
@@ -72,50 +85,50 @@ if($qy)
 	foreach ($shp as $indx)
 	{$mapa->querybyindex($indxlayer,-1,$indx,MS_TRUE);}
 }
-$numlayers = $mapa->numlayers;
-//$layersNames = $mapa->getalllayernames();
-$cache = false;
-//foreach ($layersNames as $layerName)
-for($i = 0;$i < $numlayers;$i++)
-{
-	$l = $mapa->getLayer($i);
-	$layerName = $l->name;
-	if ($l->getmetadata("classesnome") != "")
+if(!isset($_GET["telaR"])){//no caso de projecoes remotas, o mapfile nao´e alterado
+	$numlayers = $mapa->numlayers;
+	$cache = false;
+	for($i = 0;$i < $numlayers;$i++)
 	{
-		include_once("funcoes_gerais.php");
-		autoClasses(&$l,$mapa);
-	}
-	if($layerName != $_GET["layer"])
-	{$l->set("status",MS_OFF);}
-	if($layerName == $_GET["layer"] || $l->group == $_GET["layer"] && $l->group != "")
-	{
-		$l->set("status",MS_DEFAULT);
-		if (($postgis_mapa != "") && ($postgis_mapa != " "))
+		$l = $mapa->getLayer($i);
+		$layerName = $l->name;
+		if ($l->getmetadata("classesnome") != "")
 		{
-			if ($l->connectiontype == MS_POSTGIS)
+			include_once("funcoes_gerais.php");
+			autoClasses(&$l,$mapa);
+		}
+		if($layerName != $_GET["layer"])
+		{$l->set("status",MS_OFF);}
+		if($layerName == $_GET["layer"] || $l->group == $_GET["layer"] && $l->group != "")
+		{
+			$l->set("status",MS_DEFAULT);
+			if (($postgis_mapa != "") && ($postgis_mapa != " "))
 			{
-				$lcon = $l->connection;
-				if (($lcon == " ") || ($lcon == "") || (in_array($lcon,array_keys($postgis_mapa))))
+				if ($l->connectiontype == MS_POSTGIS)
 				{
-					if(($lcon == " ") || ($lcon == ""))
-					{$l->set("connection",$postgis_mapa);}
-					else
-					{$l->set("connection",$postgis_mapa[$lcon]);}					
+					$lcon = $l->connection;
+					if (($lcon == " ") || ($lcon == "") || (in_array($lcon,array_keys($postgis_mapa))))
+					{
+						if(($lcon == " ") || ($lcon == ""))
+						{$l->set("connection",$postgis_mapa);}
+						else
+						{$l->set("connection",$postgis_mapa[$lcon]);}					
+					}
 				}
 			}
 		}
-	}
-	if($layerName == $_GET["layer"])
-	{
-		if(strtolower($l->getmetadata("cache")) == "sim")
+		if($layerName == $_GET["layer"])
 		{
-			$cache = true;
-			$nomecache = $l->getmetadata("nomeoriginal");
-			if($nomecache == "")
-			{$nomecache = $layerName;}
+			if(strtolower($l->getmetadata("cache")) == "sim")
+			{
+				$cache = true;
+				$nomecache = $l->getmetadata("nomeoriginal");
+				if($nomecache == "")
+				{$nomecache = $layerName;}
+			}
 		}
+		$l->set("template","none.htm");
 	}
-	$l->set("template","none.htm");
 }
 if($qy || $_GET["HEIGHT"] != 256 )
 {$cache = false;}
@@ -129,7 +142,7 @@ if(trim($_GET["TIPOIMAGEM"]) != "" && trim($_GET["TIPOIMAGEM"]) != "nenhum")
 {$cache = false;}
 
 if($cache == true)
-{carregaCacheImagem($_GET["BBOX"],$nomecache,$_GET["map"],$_GET["WIDTH"],$_GET["HEIGHT"]);}
+{carregaCacheImagem($_GET["BBOX"],$nomecache,$map_file,$_GET["WIDTH"],$_GET["HEIGHT"]);}
 
 $map_size = explode(" ",$_GET["map_size"]);
 $mapa->setsize($map_size[0],$map_size[1]);
@@ -184,7 +197,7 @@ if(trim($_GET["TIPOIMAGEM"]) != "" && trim($_GET["TIPOIMAGEM"]) != "nenhum")
 }
 else{
 	if($cache == true)
-	{salvaCacheImagem($_GET["BBOX"],$nomecache,$_GET["map"],$_GET["WIDTH"],$_GET["HEIGHT"]);}
+	{salvaCacheImagem($_GET["BBOX"],$nomecache,$map_file,$_GET["WIDTH"],$_GET["HEIGHT"]);}
 	ob_clean();
 	$nomer = ($img->imagepath)."imgtemp".nomeRandomico();
 	$img->saveImage($nomer);
@@ -291,5 +304,12 @@ function filtraImagem($nomer,$tipoimagem){
 		if ($tipoimagem == "pixelate")
 		{imagepng($m->pixelate(),str_replace("\\","/",$nomer));}
 	}
+}
+function ilegal(){
+	$img = imagecreatefrompng("../imagens/ilegal.png");
+	ob_clean();
+	echo header("Content-type: image/png \n\n");
+	imagepng($img);
+	exit;
 }
 ?>

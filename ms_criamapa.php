@@ -265,6 +265,7 @@ $fingerprint = 'I3GEOSEC' . $_SERVER['HTTP_USER_AGENT'];
 $_SESSION['fingerprint'] = md5($fingerprint . session_id());
 $_SESSION["mapdir"] = $diretorios[1];
 $_SESSION["imgdir"] = $diretorios[2];
+$_SESSION["contadorsalva"] = 0;//essa variavel e utilizada pela ferramenta telaremota. Toda vez que o mapa e salvo, acrescenta 1 (veja classesphp/mapa_controle.php)
 //
 //pega todas as variáveis da sessão, mesmo as que foram definidas anteriormente
 //

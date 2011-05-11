@@ -866,7 +866,7 @@ i3GEO.arvoreDeTemas = {
 		if(i3GEO.arvoreDeTemas.OPCOESADICIONAIS.googleearth === true){
 			tempNode = new YAHOO.widget.HTMLNode(
 				{
-					html:"<a href='"+i3GEO.configura.locaplic+"/kml.php' target=blank > <img src='"+i3GEO.configura.locaplic+"/imagens/visual/default/branco.gif' class='googleearth'> "+$trad("a13")+"</a>",
+					html:"<a href='"+i3GEO.configura.locaplic+"/kml.php' target=blank > <img src='"+i3GEO.configura.locaplic+"/imagens/visual/default/branco.gif' class='abregoogleearth'> "+$trad("a13")+"</a>",
 					idmenu:"",enableHighlight:false,expanded:false
 				},
 				root

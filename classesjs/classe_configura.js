@@ -171,7 +171,8 @@ i3GEO.configura = {
 			{ id:"omenudataInterface6",text: $trad("u21"), url: "javascript:var w = window.open(i3GEO.configura.locaplic+'/geradordelinks.htm')" },
 			{ id:"omenudataInterface7",text: "Serviços WMS", url: "javascript:var w = window.open(i3GEO.configura.locaplic+'/ogc.htm')" },
 			{ id:"omenudataInterface8",text: "Hiperbólica", url: "javascript:var w = window.open(i3GEO.configura.locaplic+'/hiperbolica.html')" },
-			{ id:"omenudataInterface9",text: "Download de dados", url: "javascript:var w = window.open(i3GEO.configura.locaplic+'/datadownload.htm')" }
+			{ id:"omenudataInterface9",text: "Download de dados", url: "javascript:var w = window.open(i3GEO.configura.locaplic+'/datadownload.htm')" },
+			{ id:"omenudataInterface11",text: $trad("p20"), url: "javascript:i3GEO.mapa.dialogo.telaRemota()" }
 			]
 		}
 	},

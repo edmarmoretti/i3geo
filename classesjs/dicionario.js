@@ -134,6 +134,13 @@ en:"Ativa ou desativa a legenda de um tema na opção de impressão do mapa",
 es:"Ativa ou desativa a legenda de um tema na opção de impressão do mapa",
 it:"Ativa ou desativa a legenda de um tema na opção de impressão do mapa"
 }],
+"p20": [
+{
+pt: "Tela remota",
+en:"Tela remota",
+es:"Tela remota",
+it:"Tela remota"
+}],
 //itens do menu suspenso
 "s1": [
 {
