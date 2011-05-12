@@ -7,7 +7,29 @@ das variáveis de conexão com banco e outras operações específicas do i3Geo.
 
 É utilizado especificamente nas interfaces que utilizam a biblioteca OpenLayers em LAYERS do tipo WMS.
 
-Precisa do código da "section" PHP aberta pelo i3Geo ou o código para acesso especial indicado no parâmetro telaR (veja a ferramenta TELAREMOTA).
+Precisa do código da "section" PHP aberta pelo i3Geo ou o código para acesso especial indicado no parâmetro telaR 
+(veja a ferramenta TELAREMOTA).
+
+Parametros:
+
+g_sid {string} - código da "section" PHP
+
+telaR {string} - (opcional) utilizado para autorizar o uso do mapfile aberto (deve estar registrado em $fingerprint (variável de seção)
+
+tipolayer {fundo|} - (opcional) indica que a imagem a ser produzida compõe o fundo do mapa
+
+BBOX {xmin xmax ymin ymax} - extensão geográfica a ser utilizada no desenho do mapa
+
+WIDTH {numeric} - largura do mapa
+
+HEIGHT {numeric} - altura do mapa
+
+layer {string} - código do layer existente no mapa que será desenhado (ignorado quando telaR for definido)
+
+DESLIGACACHE {sim|nao} - força a não usar o cache de imagens qd definido como "sim", do contrário, o uso ou não do cache será definido automaticamente
+
+TIPOIMAGEM {cinza|sepiaclara|sepianormal|negativo|detectaBordas|embassa|gaussian_blur|selective_blur|mean_removal|pixelate
+} - filtro de imagem que será aplicado na imagem
 
 Licenca:
 

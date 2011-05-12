@@ -122,6 +122,11 @@ i3GEOF.telaremota = {
 		if(i3GEO.eventos.NAVEGAMAPA.toString().search("gravaExtent()") < 0)
 		{i3GEO.eventos.NAVEGAMAPA.push("i3GEOF.telaremota.gravaExtent()");}
 	},
+	/*
+	Function: gravaExtent
+	
+	Grava a extensão geográfica do mapa atual na section PHP aberta pelo mapa atual.
+	*/
 	gravaExtent: function(){
 		var p,cp,temp;
 		temp = function(){};
