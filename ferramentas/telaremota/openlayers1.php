@@ -12,7 +12,7 @@
 <body onload="inicia()">
 <div id=openlayers style="width:100%;height:100%;"></div>
 <script>
-<<<<<<< .mine
+
 /*
 Title: Interface OpenLayers para a ferramenta tela remota
 
@@ -52,7 +52,7 @@ GNU junto com este programa; se não, escreva para a
 Free Software Foundation, Inc., no endereço
 59 Temple Street, Suite 330, Boston, MA 02111-1307 USA.
 */
-=======
+
 /*
 Title: Tela remota - OpenLayers
 
@@ -94,7 +94,7 @@ GNU junto com este programa; se não, escreva para a
 Free Software Foundation, Inc., no endereço
 59 Temple Street, Suite 330, Boston, MA 02111-1307 USA.
 */
->>>>>>> .r2067
+
 function inicia(){
 	extentAnterior = "";
 	contadorSalva = 0;
