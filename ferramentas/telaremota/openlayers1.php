@@ -12,6 +12,47 @@
 <body onload="inicia()">
 <div id=openlayers style="width:100%;height:100%;"></div>
 <script>
+<<<<<<< .mine
+/*
+Title: Interface OpenLayers para a ferramenta tela remota
+
+Clone de um mapa aberto no i3Geo.
+
+O clone monitora as mudanças no mapa original e aplica a extensão geográfica e recarrega o mapfile utilizado no original.
+
+A abertura de um clone só é possível tendo-se o código de abertura, gerado pela ferramenta Tela Remota do i3Geo
+
+Veja:
+
+<i3GEO.tema.dialogo.telaremota>
+
+Arquivo:
+
+i3geo/ferramentas/telaremota/openlayers1.php
+
+Licenca:
+
+GPL2
+
+i3Geo Interface Integrada de Ferramentas de Geoprocessamento para Internet
+
+Direitos Autorais Reservados (c) 2006 Ministério do Meio Ambiente Brasil
+Desenvolvedor: Edmar Moretti edmar.moretti@mma.gov.br
+
+Este programa é software livre; você pode redistribuí-lo
+e/ou modificá-lo sob os termos da Licença Pública Geral
+GNU conforme publicada pela Free Software Foundation;
+
+Este programa é distribuído na expectativa de que seja útil,
+porém, SEM NENHUMA GARANTIA; nem mesmo a garantia implícita
+de COMERCIABILIDADE OU ADEQUAÇÃO A UMA FINALIDADE ESPECÍFICA.
+Consulte a Licença Pública Geral do GNU para mais detalhes.
+Você deve ter recebido uma cópia da Licença Pública Geral do
+GNU junto com este programa; se não, escreva para a
+Free Software Foundation, Inc., no endereço
+59 Temple Street, Suite 330, Boston, MA 02111-1307 USA.
+*/
+=======
 /*
 Title: Tela remota - OpenLayers
 
@@ -53,6 +94,7 @@ GNU junto com este programa; se não, escreva para a
 Free Software Foundation, Inc., no endereço
 59 Temple Street, Suite 330, Boston, MA 02111-1307 USA.
 */
+>>>>>>> .r2067
 function inicia(){
 	extentAnterior = "";
 	contadorSalva = 0;

@@ -1,3 +1,6 @@
+<?php
+include("../../ms_configura.php");
+?>
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
 <html>
 <head>
@@ -6,15 +9,14 @@
 <meta name="HandheldFriendly" content="yes" />
 <meta name="MobileOptimized" content="width" />
 <meta name="apple-mobile-web-app-capable" content="yes">
-<script type="text/javascript" src="http://maps.google.com/maps/api/js?sensor=false"></script>
+<script type="text/javascript" src="http://www.google.com/jsapi?key=<?php echo $googleApiKey; ?>"></script>
 <script type="text/javascript" src="../../pacotes/cpaint/cpaint2_compacto.inc.js"></script>
 </head>
 <body onload="inicia()">
-<div id=googlemapsdiv style="width:100%;height:100%;"></div>
+<div id=googleearthdiv style="width:100%;height:100%;z-index:0"></div>
 <script>
-<<<<<<< .mine
 /*
-Title: Interface GoogleMaps para a ferramenta tela remota
+Title: Interface GoogleEarth para a ferramenta tela remota
 
 Clone de um mapa aberto no i3Geo.
 
@@ -28,7 +30,7 @@ Veja:
 
 Arquivo:
 
-i3geo/ferramentas/telaremota/googlemaps1.php
+i3geo/ferramentas/telaremota/googleearth1.php
 
 Licenca:
 
@@ -52,49 +54,9 @@ GNU junto com este programa; se não, escreva para a
 Free Software Foundation, Inc., no endereço
 59 Temple Street, Suite 330, Boston, MA 02111-1307 USA.
 */
-=======
-/*
-Title: Tela remota - Google Maps
-
-Interface baseada na API Google Maps utilizada na apresentação remota do mapa em uso.
-
-Parametros:
-
-g_sid {string} - código da "section" PHP aberta na criação do mapa em uso
-
-telaR {string} - código especial que autoriza o uso do mapa atual em um navegador diferente daquele utilizado na criação do mapa em uso
-
-Veja:
-
-<i3GEO.tema.dialogo.telaremota>
-
-Arquivo:
-
-i3geo/ferramentas/telaremota/index.js.php
-
-Licenca:
-
-GPL2
-
-i3Geo Interface Integrada de Ferramentas de Geoprocessamento para Internet
-
-Direitos Autorais Reservados (c) 2006 Ministério do Meio Ambiente Brasil
-Desenvolvedor: Edmar Moretti edmar.moretti@mma.gov.br
-
-Este programa é software livre; você pode redistribuí-lo
-e/ou modificá-lo sob os termos da Licença Pública Geral
-GNU conforme publicada pela Free Software Foundation;
-
-Este programa é distribuído na expectativa de que seja útil,
-porém, SEM NENHUMA GARANTIA; nem mesmo a garantia implícita
-de COMERCIABILIDADE OU ADEQUAÇÃO A UMA FINALIDADE ESPECÍFICA.
-Consulte a Licença Pública Geral do GNU para mais detalhes.
-Você deve ter recebido uma cópia da Licença Pública Geral do
-GNU junto com este programa; se não, escreva para a
-Free Software Foundation, Inc., no endereço
-59 Temple Street, Suite 330, Boston, MA 02111-1307 USA.
-*/
->>>>>>> .r2067
+google.load("earth", "1");
+mapaRemoto = null;
+remoto = null;
 function inicia(){
 	extentAnterior = "";
 	contadorSalva = 0;
@@ -106,36 +68,79 @@ function inicia(){
 	var app = navigator.appName.substring(0,1);
 	if (app==='N'){navn=true;}else{navm=true;}
 	
-	mapaRemoto = new google.maps.Map($i("googlemapsdiv"),{scaleControl:true});
-	mapaRemoto.setMapTypeId("terrain");
-	
-	i3GeoMapOverlay = new google.maps.OverlayView();
-	i3GeoMapOverlay.draw = function() {};
-	criaLayer();
-	i3GeoMapOverlay.setMap(mapaRemoto);
-	recuperaMapa();
+	google.earth.createInstance("googleearthdiv", 
+		function(objeto){
+			mapaRemoto = objeto;
+			mapaRemoto.getWindow().setVisibility(true);
+			mapaRemoto.getNavigationControl().setVisibility(true);
+			layerRoot = mapaRemoto.getLayerRoot();
+			layerRoot.enableLayerById(mapaRemoto.LAYER_TERRAIN, true);
+			var options = mapaRemoto.getOptions();
+			options.setMouseNavigationEnabled(true);
+			options.setStatusBarVisibility(true);
+			options.setOverviewMapVisibility(true);
+			options.setScaleLegendVisibility(true);
+			options.setAtmosphereVisibility(true);
+			options.setGridVisibility(false);
+			remoto = criaLayer();
+			recuperaMapa();
+		}, 
+		function(){
+			alert("Falhou. Vc precisa do plugin instalado");
+		}
+	);
 }
 function criaLayer(){
-	i3GEOTileO = new google.maps.ImageMapType({
-		getTileUrl: function(coord, zoom) {
-			var url = "../../classesphp/mapa_googlemaps.php?DESLIGACACHE=sim&g_sid=<?php echo $_GET["g_sid"];?>" +
-				"&Z="+ zoom + "&X=" + coord.x + "&Y=" + coord.y + "&layer=&telaR=<?php echo $_GET["telaR"];?>&r="+Math.random();
-			return url;
-		},
-		tileSize: new google.maps.Size(256, 256),
-		isPng: true,
-		name: "Remoto"
-	});	
-	mapaRemoto.overlayMapTypes.insertAt(0, i3GEOTileO);
+	var caminho = window.location.protocol+"//"+window.location.host+window.location.pathname,
+		kmlUrl = caminho.replace("/ferramentas/telaremota/googleearth1.php","")+"/classesphp/mapa_googleearth.php?g_sid=<?php echo $_GET["g_sid"];?>&telaR=<?php echo $_GET["telaR"];?>&REQUEST=GetKml&r="+Math.random(),
+			linki3geo = mapaRemoto.createLink(''),
+			nl = mapaRemoto.createNetworkLink('');
+	linki3geo.setHref(kmlUrl);
+	nl.setLink(linki3geo);
+	nl.setFlyToView(false);
+	nl.setName("Remoto");
+	nl.setVisibility(true);
+	mapaRemoto.getFeatures().appendChild(nl);
+	return nl;
 }
 function zoom2ext(ext){
-	var ret = ext.split(" ");
-	sw = new google.maps.LatLng(ret[1],ret[0]);
-	ne = new google.maps.LatLng(ret[3],ret[2]);
-	mapaRemoto.fitBounds(new google.maps.LatLngBounds(sw,ne));	
+	var r = 6378700,
+		lng2,
+		lng1,
+		lat1,
+		lat2,
+		ret = ext.split(" "),
+		fov = 32,
+		camera = mapaRemoto.getView().copyAsCamera(mapaRemoto.ALTITUDE_RELATIVE_TO_GROUND),
+		dy,
+		dx,
+		d,
+		dist,
+		alt;
+	lng2 = (ret[0]*1);
+	lng1 = (ret[2]*1);
+	lat1 = (ret[1]*1);
+	lat2 = (ret[3]*1);
+	camera.setLatitude((lat1 + lat2) / 2.0); 
+	camera.setLongitude((lng1 + lng2) / 2.0); 
+	camera.setHeading(0.0); 
+	camera.setTilt(0.0); 
+	// determine if the rectangle is portrait or landscape
+	dy = Math.max(lat1, lat2) - Math.min(lat1, lat2); 
+	dx = Math.max(lng1, lng2) - Math.min(lng1, lng2); 
+	// find the longest side
+	d = Math.max(dy, dx); 
+	// convert the longest side degrees to radians
+	d = d * Math.PI/180.0; 
+	// find half the chord length
+	dist = r * Math.tan(d / 2); 
+	// get the altitude using the chord length
+	alt = dist/(Math.tan(fov * Math.PI / 180.0)); 
+	camera.setAltitude(alt); 
+	mapaRemoto.getView().setAbstractView(camera);	
 }
 function atualizaMapa(){
-	mapaRemoto.overlayMapTypes.removeAt(0);
+	mapaRemoto.getFeatures().removeChild(mapaRemoto.getFeatures().getChildNodes().item(0));
 	criaLayer();
 }
 function recuperaMapa(){

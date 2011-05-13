@@ -74,6 +74,9 @@ function retornaKml(){
 	//$url = $servidor.'http://localhost:80/cgi-bin/mapserv.exe?map=c:/ms4w/tmp/ms_tmp/rPzBHuOtQa/rPzBHuOtQa.map&amp;width=1500&amp;height=1500&amp;VERSION=1.1.1&amp;REQUEST=GetMap&amp;SRS=EPSG:4291&amp;STYLES=&amp;FORMAT=image/jpeg&amp;TRANSPARENT=TRUE&amp;layers=estadosl';
 	$serv = strtolower($protocolo[0]) . '://'.$_SERVER['SERVER_NAME'] . ($_SERVER['SERVER_PORT'] ? ':'.$_SERVER['SERVER_PORT'] : '') . $_SERVER['PHP_SELF'];
 	$url = $serv."?g_sid=".$_GET["g_sid"]."&amp;WIDTH=1500&amp;HEIGHT=1500&amp;VERSION=1.1.1&amp;REQUEST=GetMap&amp;STYLES=&amp;FORMAT=image/png&amp;TRANSPARENT=TRUE&amp;layer=".$_GET["layer"]."&amp;TIPOIMAGEM=".$_GET["TIPOIMAGEM"];
+	if(isset($_GET["telaR"])){
+		$url .= "&amp;telaR=".$_GET["telaR"];
+	}
 	$kml = '
 		<kml xmlns="http://earth.google.com/kml/2.0">
 		  <Document>
@@ -136,44 +139,54 @@ function retornaWms($map_file,$postgis_mapa){
 		{$mapa->querybyindex($indxlayer,-1,$indx,MS_TRUE);}
 	}	
 	$layersNames = $mapa->getalllayernames();
-	foreach ($layersNames as $layerName)
-	{
-		$l = $mapa->getLayerByname($layerName);
-		if ($l->getmetadata("classesnome") != "")
+	$o = $mapa->outputformat;
+	$o->set("imagemode",MS_IMAGEMODE_RGBA);	
+	if(!isset($_GET["telaR"])){//no caso de projecoes remotas, o mapfile nao´e alterado
+		foreach ($layersNames as $layerName)
 		{
-			include_once("funcoes_gerais.php");
-			autoClasses(&$l,$mapa);
-		}
-		if($layerName != $_GET["layer"])
-		{$l->set("status",MS_OFF);}
-		if($layerName == $_GET["layer"] || $l->group == $_GET["layer"] && $l->group != "")
-		{
-			$l->set("status",MS_DEFAULT);
-			if (isset($postgis_mapa) && ($postgis_mapa != "") && ($postgis_mapa != " "))
+			$l = $mapa->getLayerByname($layerName);
+			if ($l->getmetadata("classesnome") != "")
 			{
-				if ($l->connectiontype == MS_POSTGIS)
-				{
-					$lcon = $l->connection;
-					if (($lcon == " ") || ($lcon == "") || (in_array($lcon,array_keys($postgis_mapa))))
-					{
-						if(($lcon == " ") || ($lcon == ""))
-						{$l->set("connection",$postgis_mapa);}
-						else
-						{$l->set("connection",$postgis_mapa[$lcon]);}					
-					}
-				}
-
+				include_once("funcoes_gerais.php");
+				autoClasses(&$l,$mapa);
 			}
+			if($layerName != $_GET["layer"])
+			{$l->set("status",MS_OFF);}
+			if($layerName == $_GET["layer"] || $l->group == $_GET["layer"] && $l->group != "")
+			{
+				$l->set("status",MS_DEFAULT);
+				if (isset($postgis_mapa) && ($postgis_mapa != "") && ($postgis_mapa != " "))
+				{
+					if ($l->connectiontype == MS_POSTGIS)
+					{
+						$lcon = $l->connection;
+						if (($lcon == " ") || ($lcon == "") || (in_array($lcon,array_keys($postgis_mapa))))
+						{
+							if(($lcon == " ") || ($lcon == ""))
+							{$l->set("connection",$postgis_mapa);}
+							else
+							{$l->set("connection",$postgis_mapa[$lcon]);}					
+						}
+					}
+
+				}
+			}
+			$l->set("template","none.htm");
 		}
-		$l->set("template","none.htm");
+	}
+	else{
+		$mapa->selectOutputFormat("jpeg");
+		$of = $mapa->outputformat;
+		$of->set("imagemode",MS_IMAGEMODE_RGBA);
+		$of->set("driver","AGG/PNG");
+		$of->set("transparent",MS_ON);		
 	}
 	$mapa->setsize($_GET["WIDTH"],$_GET["HEIGHT"]);
 	if(isset($_GET["mapext"])){
 		$mapext = explode(" ",$_GET["mapext"]);
 		$mapa->setExtent($mapext[0],$mapext[1],$mapext[2],$mapext[3]);
 	}
-	$o = $mapa->outputformat;
-	$o->set("imagemode",MS_IMAGEMODE_RGBA);
+
 	$legenda = $mapa->legend;
 	$legenda->set("status",MS_OFF);
 	$escala = $mapa->scalebar;

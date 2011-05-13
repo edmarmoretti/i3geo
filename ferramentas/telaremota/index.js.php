@@ -70,6 +70,9 @@ i3GEOF.telaremota = {
 			var url2 = i3GEO.configura.locaplic+"/ferramentas/telaremota/googlemaps1.php"+url1;
 			ins += "<br><br><p style='font-size:13px;text-align:left' >Google Maps:</p><br>";
 			ins += "<a href="+url2+" target=_blank >"+url2+"</a>";
+			var url2 = i3GEO.configura.locaplic+"/ferramentas/telaremota/googleearth1.php"+url1;
+			ins += "<br><br><p style='font-size:13px;text-align:left' >Google Earth:</p><br>";
+			ins += "<a href="+url2+" target=_blank >"+url2+"</a>";
 			$i("i3GEOtelaremotaResultado").innerHTML = ins;
 			i3GEOF.telaremota.aguarde.visibility = "hidden";
 		}
