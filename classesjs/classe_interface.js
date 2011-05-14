@@ -434,8 +434,8 @@ i3GEO.Interface = {
 			i.src=i3GEO.parametros.mapimagem;
 		},
 		cria:function(){
-			var ins = "<input style='position:relative;top:0px;left:0px'' type=image src='' id='img' />";
-			i3GEO.util.defineValor(i3GEO.Interface.IDCORPO,"innerHTML",ins);
+			var ins = "<input style='position:relative;top:0px;left:0px;' type=image src='' id='img' />";
+			$i(i3GEO.Interface.IDCORPO).innerHTML = ins;
 			i3GEO.Interface.IDMAPA = "img";
 		},
 		/*

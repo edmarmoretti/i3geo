@@ -297,7 +297,7 @@ i3GEO.util = {
 			novoel,xy;
 		//tempoBotaoAplicar = eval("setTimeout('"+nomeFuncao+"\(\)',(i3GEO.configura.tempoAplicar))");
 		tempoBotaoAplicar = setTimeout(executar,(i3GEO.configura.tempoAplicar));
-		autoRedesenho("reinicia");
+		//autoRedesenho("reinicia");
 		if(arguments.length === 1)
 		{titulo = "Aplicar";}
 		if(arguments.length === 1 || arguments.length === 2)
