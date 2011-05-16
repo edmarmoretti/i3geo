@@ -51,9 +51,9 @@ i3GEO.arvoreDeTemas = {
 
 		incluiArvore: true,
 
-		uploaddbf: true,
+		uploaddbf: false,
 
-		uploadlocal: true,
+		uploadlocal: false,
 
 		downloadbase: true,
 
@@ -83,7 +83,7 @@ i3GEO.arvoreDeTemas = {
 
 		carousel: true,
 
-		uploadgpx: true,
+		uploadgpx: false,
 
 		comentarios: true,
 
@@ -91,7 +91,9 @@ i3GEO.arvoreDeTemas = {
 		
 		importarwmc: true,
 		
-		googleearth: true
+		googleearth: true,
+		
+		uploadarquivo: true //upload de GPX, SHAPEFILE, DBF, CSV e KML
 	}
 
 	Tipo:
@@ -100,8 +102,9 @@ i3GEO.arvoreDeTemas = {
 	OPCOESADICIONAIS: {
 		idonde: "",
 		incluiArvore: true,
-		uploaddbf: true,
-		uploadlocal: true,
+		uploaddbf: false,
+		uploadlocal: false,
+		uploadarquivo:true,
 		downloadbase: true,
 		conectarwms: true,
 		conectarwmst: true,
@@ -116,7 +119,7 @@ i3GEO.arvoreDeTemas = {
 		estrelas: true,
 		refresh: true,
 		carousel: true,
-		uploadgpx: true,
+		uploadgpx: false,
 		comentarios: true,
 		bookmark: true,
 		importarwmc: true,
@@ -1350,6 +1353,10 @@ i3GEO.arvoreDeTemas = {
 			ins += "<td><img class='upload' onclick='i3GEO.arvoreDeTemas.dialogo.upload()' src='"+imb+"' style='cursor:pointer;text-align:left' title='"+$trad("a2")+"'/><td>";
 			t += 20;
 		}
+		if(OPCOESADICIONAIS.uploadarquivo === true){
+			ins += "<td><img class='upload' onclick='i3GEO.arvoreDeTemas.dialogo.uploadarquivo()' src='"+imb+"' style='cursor:pointer;text-align:left' title='"+$trad("a14")+"'/><td>";
+			t += 20;
+		}
 		if(OPCOESADICIONAIS.downloadbase === true){
 			ins += "<td><img onclick='i3GEO.arvoreDeTemas.dialogo.downloadbase()' class='download' src='"+imb+"' style='cursor:pointer;text-align:left'  title='"+$trad("a3")+"'/><td>";
 			t += 20;
@@ -1847,6 +1854,50 @@ i3GEO.arvoreDeTemas = {
 	i3GEO.arvoreDeTemas.dialogo.uploaddbf()
 	*/
 	dialogo:{
+		/*
+		Function: uploadarquivo
+
+		Abre uma janela flutunate que permite abrir outras ferramentas para o upload de arquivos de determinados tipos
+		*/
+		uploadarquivo: function(){
+			var janela,ins,temp,titulo,cabecalho,minimiza;
+			cabecalho = function(){};
+			minimiza = function(){
+				i3GEO.janela.minimiza("i3GEOFuploadarquivo");
+			};
+			titulo = "Upload de arquivo</a>";
+			janela = i3GEO.janela.cria(
+				"250px",
+				"150px",
+				"",
+				"",
+				"",
+				titulo,
+				"i3GEOFuploadarquivo",
+				false,
+				"hd",
+				cabecalho,
+				minimiza
+			);
+			$i("i3GEOFuploadarquivo_corpo").style.backgroundColor = "white";
+			ins = "" +
+			"	<p class=paragrafo style='width:90%' ><b>Tipo de arquivo</b><br><br>" +
+			"	<table class=lista6 style=left:20px;position:relative >" +
+			"		<tr>" +
+			"			<td><input type=radio style=cursor:pointer name=i3GEOFtipoArquivo onclick='i3GEO.arvoreDeTemas.dialogo.upload()' /></td>" +
+			"			<td>Shape file</td>" +
+			"		</tr>" +
+			"		<tr>" +
+			"			<td><input type=radio style=cursor:pointer name=i3GEOFtipoArquivo onclick='i3GEO.arvoreDeTemas.dialogo.uploaddbf()' /></td>" +
+			"			<td>DBF ou CSV</td>" +
+			"		</tr>" +
+			"		<tr>" +
+			"			<td><input type=radio style=cursor:pointer name=i3GEOFtipoArquivo onclick='i3GEO.arvoreDeTemas.dialogo.uploadgpx()' /></td>" +
+			"			<td>GPX</td>" +
+			"		</tr>" +
+			"	</table>";			
+			$i(janela[2].id).innerHTML = ins;;
+		},
 		/*
 		Function: carouselTemas
 

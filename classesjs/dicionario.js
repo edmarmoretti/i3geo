@@ -923,6 +923,13 @@ en:"Open in Google Earth",
 es:"Abrir no Google Earth",
 it:"Abrir no Google Earth"
 }],
+"a14":[
+{
+pt:"Upload SHP, CSV, DBF, GPX, KML",
+en:"Upload SHP, CSV, DBF, GPX, KML",
+es:"Upload SHP, CSV, DBF, GPX, KML",
+it:"Upload SHP, CSV, DBF, GPX, KML"
+}],
 //guias principais
 "g1":[
 {
