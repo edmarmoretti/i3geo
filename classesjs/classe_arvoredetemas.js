@@ -1895,6 +1895,11 @@ i3GEO.arvoreDeTemas = {
 			"			<td><input type=radio style=cursor:pointer name=i3GEOFtipoArquivo onclick='i3GEO.arvoreDeTemas.dialogo.uploadgpx()' /></td>" +
 			"			<td>GPX</td>" +
 			"		</tr>" +
+			"		<tr>" +
+			"			<td><input type=radio style=cursor:pointer name=i3GEOFtipoArquivo onclick='i3GEO.arvoreDeTemas.dialogo.uploadkml()' /></td>" +
+			"			<td>KML ou KMZ</td>" +
+			"		</tr>" +
+
 			"	</table>";			
 			$i(janela[2].id).innerHTML = ins;;
 		},
@@ -2005,6 +2010,14 @@ i3GEO.arvoreDeTemas = {
 		*/
 		uploadgpx: function(){
 			i3GEO.util.scriptTag(i3GEO.configura.locaplic+"/ferramentas/uploadgpx/index.js.php","i3GEOF.uploadgpx.criaJanelaFlutuante()","i3GEOF.uploadgpx_script");
+		},
+		/*
+		Function: uploadkml
+
+		Abre a janela para o upload de um arquivo kml
+		*/
+		uploadkml: function(){
+			i3GEO.util.scriptTag(i3GEO.configura.locaplic+"/ferramentas/uploadkml/index.js.php","i3GEOF.uploadkml.criaJanelaFlutuante()","i3GEOF.uploadkml_script");
 		}
 	},
 	/*

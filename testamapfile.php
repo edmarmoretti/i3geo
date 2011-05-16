@@ -142,7 +142,13 @@ function verifica($map,$solegenda)
 		if (strtoupper(substr(PHP_OS, 0, 3) == 'WIN'))
 		{$mapa = ms_newMapObj("aplicmap/geral1windows.map");}
 		else
-		{$mapa = ms_newMapObj("aplicmap/geral1.map");}
+		{
+			if(file_exists('/var/www/i3geo/aplicmap/geral1debian.map')){
+				$mapa = ms_newMapObj("aplicmap/geral1debian.map");
+			}
+			else
+			{$mapa = ms_newMapObj("aplicmap/geral1.map");}
+		}
 		if(@ms_newMapObj($tema))
 		{
 			$nmapa = ms_newMapObj($tema);

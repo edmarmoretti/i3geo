@@ -848,6 +848,15 @@ g_traducao_ajuda = {
 			complemento:"Essa funcionalidade permite que um mapa seja mostrado em uma tela remota com uma interface diferente da original. Útil para projeção em telões e salas de situação.",
 			tela:"",
 			apijs:"i3GEO.mapa.dialogo.telaRemota()"
+		},
+		"100": {
+			titulo: "Upload KML",
+			diretorio:"i3geo/ferramentas/uploadkml",
+			categoria:"4",
+			pt:"Permite que o usuário faça o upload de um arquivo KML ou KMZ para o servidor para que seja acrescentado como uma camada ao mapa.",
+			complemento:"O arquivo é armazenado no servidor temporariamente. É necessário que o usuário saiba qual o tipo de elementos existentes no arquivo KML e qual o nome do folder que será utilizado.",
+			tela:"",
+			apijs:"i3GEO.arvoreDeTemas.dialogo.uploadkml()"
 		}
 	}
 };

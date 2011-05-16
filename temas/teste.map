@@ -2,22 +2,21 @@ MAP
 SYMBOLSET ../symbols/simbolos.sym
 FONTSET   "../symbols/fontes.txt"
 LAYER
-  NAME "teste"
-  TYPE RASTER
-  STATUS ON
-  CONNECTION "http://172.30.24.8:8080/geoserver/wms?"
+   NAME "teste"
+   TYPE POINT
+   STATUS DEFAULT
+   CONNECTIONTYPE OGR
+   CONNECTION "/var/www/i3geo/aplicmap/dados/teste.kml"
+   DATA "Trovit"
+   CLASS
+     NAME "Meus lugares"
+     STYLE
+       COLOR 250 0 0
+       OUTLINECOLOR 255 255 255
+       SYMBOL 'ponto'
+       SIZE 6
+     END
 
-  CONNECTIONTYPE WMS
-  METADATA
-    "TEMA"          "Campo Quadra"
-    "extensao" "-44 -23 -39 -21"
-    "aplicaextensao" "SIM" 
-    "wms_srs"             "EPSG:4326"
-    "wms_name"            "IBGE:REBIO_campo_quadra"
-    "wms_server_version"  "1.1.1"
-    "wms_format"          "image/png"
-    "legendawms"          "http://172.30.24.8:8080/geoserver/wms?service=WMS&service=wms&request=getlegendgraphic&version=1.1.1&service=wms&layer=IBGE:REBIO_campo_quadra&format=image/png"
- "wms_feature_info_type" "text/html"
-   END
- END
+  END
+END
 END
