@@ -299,6 +299,9 @@ i3GEO.analise = {
 				YAHOO.janelaDocamede.xp.panel.moveTo(0,0);
 				alert("Essa opção não funciona bem no Internet Explorer");
 			}
+			temp = $i("mostradistancia_c").style;
+			i3GEO.janela.ULTIMOZINDEX++;
+			temp.zIndex = 21000 + i3GEO.janela.ULTIMOZINDEX;			
 			YAHOO.util.Event.addListener(YAHOO.janelaDocamede.xp.panel.close, "click", i3GEO.analise.medeDistancia.fechaJanela);
 			//
 			//botao que abre a ferramenta de cálculo de perfis.
@@ -539,7 +542,7 @@ i3GEO.analise = {
 		Cria a janela para mostrar os resultados da medição
 		*/
 		criaJanela: function(){
-			var novoel,ins,imagemxy;
+			var novoel,ins,imagemxy,temp;
 			if (!$i("mostraarea")){
 				novoel = document.createElement("div");
 				novoel.id = "mostraarea";
@@ -559,6 +562,9 @@ i3GEO.analise = {
 			imagemxy = i3GEO.util.pegaPosicaoObjeto($i(i3GEO.Interface.IDCORPO));
 			YAHOO.janelaDocaarea.xp.panel.moveTo(imagemxy[0]+150,imagemxy[1]);
 			YAHOO.util.Event.addListener(YAHOO.janelaDocaarea.xp.panel.close, "click", i3GEO.analise.medeArea.fechaJanela);
+			temp = $i("mostraarea_c").style;
+			i3GEO.janela.ULTIMOZINDEX++;
+			temp.zIndex = 21000 + i3GEO.janela.ULTIMOZINDEX;			
 		},
 		/*
 		Function: fechaJanela
