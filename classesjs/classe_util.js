@@ -1507,8 +1507,12 @@ i3GEO.util = {
 					comboTemas += "</select>";
 					temp = {dados:comboTemas,tipo:"dados"};
 				}
-				else
-				{temp = {dados:'<div class=alerta >Nenhum tema encontrado.</div>',tipo:"mensagem"};}
+				else{
+					if(tipoCombo === "poligonosSelecionados" || tipoCombo === "selecionados" || tipoCombo ==="pontosSelecionados")
+					{temp = {dados:'<div class=alerta >Nenhum tema encontrado. <span style=cursor:pointer;color:blue onclick="i3GEO.mapa.dialogo.selecao()" > Selecionar...</span></div>',tipo:"mensagem"};}
+					else
+					{temp = {dados:'<div class=alerta >Nenhum tema encontrado. </div>',tipo:"mensagem"};}
+				}
 			}
 			else
 			{temp = {dados:"<p style=color:red >Ocorreu um erro<br>",tipo:"erro"};}

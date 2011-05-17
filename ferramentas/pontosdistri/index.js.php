@@ -207,7 +207,7 @@ i3GEOF.pontosDistri = {
 			"i3GEOpontosDistritemasComSel",
 			function(retorno){
 		 		if(retorno.tipo !== "dados"){
-		 			$i("i3GEOpontosDistriTemas").innerHTML = "<p class=paragrafo style=color:red >Nenhum tema de pontos com seleção foi encontrado</p>";
+		 			$i("i3GEOpontosDistriTemas").innerHTML = "<p class=paragrafo style=color:red >Nenhum tema de pontos com seleção<span style=cursor:pointer;color:blue onclick='i3GEO.mapa.dialogo.selecao()' > Selecionar...</span></p>";
 		 			return;
 		 		}
 		 		$i("i3GEOpontosDistriTemas").innerHTML = "<p class=paragrafo >"+retorno.dados + "</p>";
