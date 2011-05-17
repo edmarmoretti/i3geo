@@ -447,7 +447,7 @@ function core_comboMapfiles(onde,id,marcar,funcao)
 		if (funcao != "")
 		{var funcao = "onchange='"+funcao+"'";}
 		ins = "<select  id='"+id+"' "+funcao+" >"
-		ins += core_comboObjeto($mapfiles,"","",marcar)
+		ins += core_comboObjeto($mapfiles,"codigo","codigo",marcar)
 		ins += "</select></p>"
 		$i(onde).innerHTML = ins;
 	}
