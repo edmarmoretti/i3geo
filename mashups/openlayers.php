@@ -13,30 +13,10 @@ if(!isset($largura))
 if(!isset($altura))
 {$altura = 400;}
 //
-//define o nível de zoom
-//
-if(!isset ($numzoomlevels))
-{$numzoomlevels = "6";}
-//
-//define a extensão geográfica que será aplicada
-//
-if(!isset($maxextent))
-{$maxextent = "-76.5125927 -39.3925675209 -29.5851853 9.49014852081";}
-$maxextent = str_replace(" ",",",$maxextent);
-//
 //define quais controles serão mostrados no mapa
 //
 $objControles = array();
-if(!isset($controles)){
-	$objControles[] = "new OpenLayers.Control.Navigation()";
-	$objControles[] = "new OpenLayers.Control.PanZoomBar()";
-	$objControles[] = "new OpenLayers.Control.LayerSwitcher({'ascending':false})";
-	$objControles[] = "new OpenLayers.Control.ScaleLine()";
-	$objControles[] = "new OpenLayers.Control.MousePosition({'separator':' '})";
-	$objControles[] = "new OpenLayers.Control.OverviewMap()";
-	$objControles[] = "new OpenLayers.Control.KeyboardDefaults()";
-}
-else{
+if(isset($controles)){
 	$controles = str_replace(" ",",",$controles);
 	$controles = strtolower($controles);
 	$controles = explode(",",$controles);
@@ -59,23 +39,7 @@ else{
 //define quais botoes serão mostrados no mapa
 //
 $objBotoes = array();
-if(!isset($botoes)){
-	$objBotoes[] = "'pan':true";
-	$objBotoes[] = "'zoombox':true";
-	$objBotoes[] = "'zoomtot':true";
-	$objBotoes[] = "'legenda':true";
-	$objBotoes[] = "'distancia':true";
-	$objBotoes[] = "'area':true";
-	$objBotoes[] = "'identifica':true";
-	$objBotoes[] = "'linha':true";
-	$objBotoes[] = "'ponto':true";
-	$objBotoes[] = "'poligono':true";
-	$objBotoes[] = "'edita':true";
-	$objBotoes[] = "'apaga':true";
-	$objBotoes[] = "'procura':true";
-	$objBotoes[] = "'salva':true";
-}
-else{
+if(isset($botoes)){
 	$botoes = str_replace(" ",",",$botoes);
 	$botoes = strtolower($botoes);
 	$botoes = explode(",",$botoes);
@@ -107,8 +71,9 @@ else{
 	{$objBotoes[] = "'procura':false";}
 	if(in_array("salva",$botoes))
 	{$objBotoes[] = "'salva':false";}
+	$botoes = "{".implode(",",$objBotoes)."}";
 }
-$botoes = "{".implode(",",$objBotoes)."}";
+
 //
 //define a lista de layers do tipo baselayers
 //$fundo é um array com a lista dos nomes possíveis ou passados pela url
@@ -117,9 +82,6 @@ $botoes = "{".implode(",",$objBotoes)."}";
 if(isset($fundo) && $fundo != ""){
 	$fundo = str_replace(","," ",$fundo);
 	$fundo = explode(" ",$fundo);
-}
-else{
-	$fundo = array("est_wms","ol_mma","ol_wms","jpl_wms","osm_wms","top_wms");
 }
 //
 //define quais os layers que comporão o mapa
@@ -147,10 +109,8 @@ if($temas != "")
 					$layers[] = $layern->name;
 				}
 				$ebase = "false";
-				if(in_array($tema,$fundo))
-				{
-					$ebase = "true";
-				}
+				if(isset($fundo) && in_array($tema,$fundo))
+				{$ebase = "true";}
 				$objOpenLayers[] = 'new OpenLayers.Layer.WMS( "'.($layern->getmetadata("tema")).'", "../ogc.php?tema='.$tema.'&",{layers:"'.implode(",",$layers).'",transparent: "true", format: "image/png"},{isBaseLayer:'.$ebase.'})';
 			}
 			else
@@ -231,6 +191,7 @@ Parâmetros:
 <script type="text/javascript" src="../pacotes/yui270/build/container/container-min.js"></script>
 <script type="text/javascript" src="../classesjs/compactados/classe_calculo_compacto.js"></script>
 <script type="text/javascript" src="../pacotes/openlayers/OpenLayers.js.php"></script>
+<script type="text/javascript" src="openlayers.js.php"></script>
 <link rel="stylesheet" href="theme/default/style.css" type="text/css" />
 <link rel="stylesheet" href="openlayers.css" type="text/css" />
 </head>
@@ -238,7 +199,44 @@ Parâmetros:
 <div id=i3geoMapa style="width:<?php echo $largura;?>px;height:<?php echo $altura;?>px;"></div>
 <div id=i3geoSelTemaAtivo style="height:15em;z-index:3000" class=" yui-skin-sam"></div>
 <script>
-<?php include("openlayers.js.php");?>
+i3GEOOL.layersIniciais = [<?php
+	if(isset($objOpenLayers) && $objOpenLayers != "")
+	{echo implode(",",$objOpenLayers);}
+	else
+	{echo "''";}
+?>];
+<?php if(isset($botoes)){
+	echo "i3GEOOL.botoes = $botoes ;";
+}
+?>
+i3GEOOL.pontos = [<?php
+	if(isset($pontos)){
+		$pontos = str_replace(" ",",",$pontos);
+		echo $pontos;
+	}
+?>];
+i3GEOOL.marca = "<?php
+	if(isset($marca)){echo $marca;}
+	else
+	{echo "../pacotes/openlayers/img/marker-gold.png";}
+?>";
+<?php if(isset($fundo)){
+	echo "i3GEOOL.fundo = '".implode(",",$fundo)."';";
+}
+?>
+<?php if(isset($controles)){
+	echo "i3GEOOL.controle = [".implode(",",$objControles)."];";
+}
+?>
+<?php if(isset($numzoomlevels)){
+	echo "i3GEOOL.numzoom = ".$numzoomlevels.";";
+}
+?>
+<?php if(isset($maxextent)){
+	echo "i3GEOOL.maxext = new OpenLayers.Bounds(".$maxextent.");";
+}
+?>
+i3GEOOL.mapa = new OpenLayers.Map('i3geoMapa',{controls:[]})
 i3GEOOL.inicia();
 </script>
 </body>

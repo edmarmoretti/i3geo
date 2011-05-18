@@ -21,7 +21,6 @@ i3GEOOL = {
 		{layers: 'basic'}
 	),
 	jpl_wms: new OpenLayers.Layer.WMS( "NASA Global Mosaic", "http://wms.jpl.nasa.gov/wms.cgi", {layers: "modis,global_mosaic"},{singleTile:true}),
-	
 	osm_wms: new OpenLayers.Layer.WMS(
 		"Open Street Map",
 		"http://full.wms.geofabrik.de/std/demo_key?",
@@ -36,45 +35,63 @@ i3GEOOL = {
 		"Estados do Brasil",
 		"http://mapas.mma.gov.br/i3geo/ogc.php?tema=estadosl&",
 		{layers: "estadosl",FORMAT:'image/png'}
-	),	
+	),
+	fundo: "ol_mma,ol_wms,jpl_wms,osm_wms,top_wms,est_wms",
 	layergrafico: new OpenLayers.Layer.Vector("Edição",{displayInLayerSwitcher:true,visibility:true}),
-	layersIniciais: [<?php
-						if(isset($objOpenLayers) && $objOpenLayers != "")
-						{echo implode(",",$objOpenLayers);}
-						else
-						{echo "''";}
-					?>],
-	botoes: <?php echo $botoes; ?>,
-	pontos: [<?php
-				if(isset($pontos)){
-					$pontos = str_replace(" ",",",$pontos);
-					echo $pontos;
-				}
-			?>],
-	marca: "<?php
-				if(isset($marca)){echo $marca;}
-				else
-				{echo "../pacotes/openlayers/img/marker-gold.png";}
-			?>",
-	mapa: new OpenLayers.Map('i3geoMapa', {
-		controls: [
-			<?php echo implode(",",$objControles); ?>
-		],
-		numZoomLevels: <?php echo $numzoomlevels;?>,
-		maxExtent: new OpenLayers.Bounds(<?php echo $maxextent;?>)
-	}),
+	layersIniciais: [],
+	botoes: {
+		'pan':true,
+		'zoombox':true,
+		'zoomtot':true,
+		'legenda':true,
+		'distancia':true,
+		'area':true,
+		'identifica':true,
+		'linha':true,
+		'ponto':true,
+		'poligono':true,
+		'edita':true,
+		'apaga':true,
+		'procura':true,
+		'salva':true
+	},
+	pontos: [],
+	marca: "../pacotes/openlayers/img/marker-gold.png",
+	controles: [
+		new OpenLayers.Control.Navigation(),
+		new OpenLayers.Control.PanZoomBar(),
+		new OpenLayers.Control.LayerSwitcher({'ascending':false}),
+		new OpenLayers.Control.ScaleLine(),
+		new OpenLayers.Control.MousePosition({'separator':' '}),
+		new OpenLayers.Control.OverviewMap(),
+		new OpenLayers.Control.KeyboardDefaults()	
+	],
+	numzoom: 12,
+	maxext: new OpenLayers.Bounds(-76.5125927,-39.3925675209,-29.5851853,9.49014852081),
+	mapa: "",
 	inicia: function(){
-		var alayers = [];
-		<?php
-		foreach($fundo as $f){
-			echo "try{";
-			echo "i3GEOOL.".$f.".transitionEffect = 'resize';";
-			echo "i3GEOOL.".$f.".setVisibility(false);";
-			echo "alayers.push(i3GEOOL.".$f.");";
-			echo "}catch(e){}";
+		var alayers = [],
+			fundo = (i3GEOOL.fundo).split(","),
+			nfundo = fundo.length,
+			ncontroles = i3GEOOL.controles.length,
+			i;
+		if(i3GEOOL.mapa === "")
+		{alert("O objeto i3GEOOL.mapa precisa ser criado com new OpenLayers.Map()");return;}
+		i3GEOOL.mapa.setOptions({
+			numZoomLevels: i3GEOOL.numzoom,
+			maxExtent: i3GEOOL.maxext
+		});
+		for(i=0;i<ncontroles;i++){
+			i3GEOOL.mapa.addControl(i3GEOOL.controles[i]);
 		}
-		echo "try{alayers[0].setVisibility(true);}catch(e){}";
-		?>
+		for(i=nfundo-1;i>=0;i--){
+			try{
+				eval("i3GEOOL."+fundo[i]+".transitionEffect = 'resize';");
+				eval("i3GEOOL."+fundo[i]+".setVisibility(false);");
+				eval("alayers.push(i3GEOOL."+fundo[i]+");");
+			}
+			catch(e){alayers[0].setVisibility(true);}
+		}
 		i3GEOOL.mapa.addLayers(alayers);
 		
 		if(i3GEOOL.layersIniciais != ""){
