@@ -992,6 +992,76 @@ i3GEO.barraDeBotoes = {
 		try
 		{clearTimeout(timeAjudaBotoes);}
 		catch(e){}
+	},
+	editor:{
+		inicia: function(){
+			//var idjanela = i3GEO.barraDeBotoes.editor.criaJanela();
+			i3GEO.barraDeBotoes.editor.carregaJs();
+		},
+		carregaJs: function(idjanela){
+			i3GEO.util.scriptTag(
+				i3GEO.configura.locaplic+"/mashups/openlayers.js.php",
+				"i3GEO.barraDeBotoes.editor.ativaPainel('"+idjanela+"')",
+				"openlayers.js.php",
+				true
+			);
+		},
+		criaJanela: function(){
+			if($i("i3GEOjanelaEditor"))
+			{return "i3GEOjanelaEditor";}
+			var janela,divid,temp,titulo,cabecalho,minimiza;
+			cabecalho = function(){};
+			minimiza = function(){
+				i3GEO.janela.minimiza("i3GEOjanelaEditor");
+			};
+			//cria a janela flutuante
+			titulo = "Editor vetorial";
+			janela = i3GEO.janela.cria(
+				"300px",
+				"200px",
+				"",
+				"",
+				"",
+				titulo,
+				"i3GEOjanelaEditor",
+				false,
+				"hd",
+				cabecalho,
+				minimiza
+			);
+			divid = janela[2].id;
+			$i("i3GEOjanelaEditor_corpo").style.backgroundColor = "white";
+			$i("i3GEOjanelaEditor_corpo").style.textAlign = "left";
+			return divid;
+		},
+		ativaPainel: function(idjanela){
+			OpenLayers.ImgPath = i3GEO.configura.locaplic+"/pacotes/openlayers/img/";
+			i3GEOOL.fundo = "";//i3GEOOL é criado pelo script carregado
+			i3GEOOL.mapa = i3geoOL;
+			i3GEOOL.maxext = "";
+			i3GEOOL.controles = [];
+			i3GEOOL.botoes = {
+				'pan':false,
+				'zoombox':false,
+				'zoomtot':false,
+				'legenda':false,
+				'distancia':false,
+				'area':false,
+				'identifica':true,
+				'linha':true,
+				'ponto':true,
+				'poligono':true,
+				'edita':true,
+				'apaga':true,
+				'procura':false,
+				'salva':true
+			}
+			i3GEOOL.layergrafico = new OpenLayers.Layer.Vector("Edição",{displayInLayerSwitcher:false,visibility:true});
+			i3GEOOL.mapa.addLayers([i3GEOOL.layergrafico]);			
+			i3GEOOL.criaBotoes(i3GEOOL.botoes);
+			i3GEOOL.criaJanelaAtivaTema();
+			//i3GEOOL.inicia();
+		}
 	}
 };
 //YAHOO.log("carregou classe barradebotoes", "Classes i3geo");

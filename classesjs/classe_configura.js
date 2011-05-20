@@ -152,7 +152,8 @@ i3GEO.configura = {
 			],
 			"janelas": [
 			{ id:"omenudataJanelas1",text: $trad("u15"), url: "javascript:i3GEO.barraDeBotoes.reativa(0);i3GEO.barraDeBotoes.reativa(1)" },
-			{ id:"omenudataJanelas2",text: $trad("u16"), url: "javascript:i3GEO.ajuda.abreJanela()" }
+			{ id:"omenudataJanelas2",text: $trad("u16"), url: "javascript:i3GEO.ajuda.abreJanela()" },
+			{ id:"omenudataJanelas3",text: $trad("u29"), url: "javascript:i3GEO.barraDeBotoes.editor.inicia()" }		  
 			],
 			"arquivos": [
 			{ id:"omenudataArquivos1",text: $trad("u17"), url: "javascript:i3GEO.mapa.dialogo.salvaMapa()" },

@@ -409,6 +409,13 @@ en:"Centro médio",
 es:"Centro médio",
 it:"Centro médio"
 }],
+"u29": [
+{
+pt: "Editor vetorial",
+en:"Editor vetorial",
+es:"Editor vetorial",
+it:"Editor vetorial"
+}],
 //arvore com a lista de temas
 "t1": [
 {

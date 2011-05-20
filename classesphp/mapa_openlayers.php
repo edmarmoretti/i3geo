@@ -107,7 +107,7 @@ if($qy)
 	foreach ($shp as $indx)
 	{$mapa->querybyindex($indxlayer,-1,$indx,MS_TRUE);}
 }
-if(!isset($_GET["telaR"])){//no caso de projecoes remotas, o mapfile nao´e alterado
+if(!isset($_GET["telaR"])){//no caso de projecoes remotas, o mapfile nao e alterado
 	$numlayers = $mapa->numlayers;
 	$cache = false;
 	for($i = 0;$i < $numlayers;$i++)
@@ -150,6 +150,12 @@ if(!isset($_GET["telaR"])){//no caso de projecoes remotas, o mapfile nao´e alter
 			}
 		}
 		$l->set("template","none.htm");
+		if($_GET["REQUEST"] == "GetFeatureInfo" || $_GET["request"] == "getfeature"){
+			$l->setmetadata("gml_include_items","all");
+			$l->setmetadata("WMS_INCLUDE_ITEMS","all");
+			$l->setmetadata("WFS_INCLUDE_ITEMS","all");
+			$l->set("dump",MS_TRUE);
+		}
 	}
 }
 if($qy || $_GET["HEIGHT"] != 256 )
@@ -168,10 +174,32 @@ if($cache == true)
 
 $map_size = explode(" ",$_GET["map_size"]);
 $mapa->setsize($map_size[0],$map_size[1]);
+if(isset($_GET["mapext"])){
+	$mapext = explode(" ",$_GET["mapext"]);
+	$mapa->setExtent($mapext[0],$mapext[1],$mapext[2],$mapext[3]);
+}
+//
+//qd a cahamda e para um WMS, redireciona para ogc.php
+//
+if($_GET["REQUEST"] == "GetFeatureInfo" || $_GET["request"] == "getfeature"){
+	$req = ms_newowsrequestobj();
+	$_GET = array_merge($_GET,$_POST);
+	foreach ($_GET as $k=>$v){
+		$req->setParameter($k, $v);
+	}
+	$proto = "http" . ((isset($_SERVER['HTTPS']) && $_SERVER['HTTPS'] == "on") ? "s" : "") . "://";
+	$server = isset($_SERVER['HTTP_HOST']) ? $_SERVER['HTTP_HOST'] : $_SERVER['SERVER_NAME'];
+	$or = $proto.$server.$_SERVER['PHP_SELF'];
+	$mapa->setmetadata("wfs_onlineresource",$or."?".$_SERVER["QUERY_STRING"]);
 
-$mapext = explode(" ",$_GET["mapext"]);
-$mapa->setExtent($mapext[0],$mapext[1],$mapext[2],$mapext[3]);
-
+	ms_ioinstallstdouttobuffer();
+	$mapa->owsdispatch($req);
+	$contenttype = ms_iostripstdoutbuffercontenttype();
+	header("Content-type: $contenttype");
+	ms_iogetStdoutBufferBytes();
+	ms_ioresethandlers();
+	exit;
+}
 $o = $mapa->outputformat;
 $o->set("imagemode",MS_IMAGEMODE_RGBA);
 $legenda = $mapa->legend;

@@ -867,6 +867,9 @@ i3GEO.gadgets = {
 			if(i3GEO.Interface.ATUAL === "googleearth" && $i("omenudataJanelas1")){
 				MM.getMenuItem("omenudataJanelas1").cfg.setProperty("disabled", true);
 			}
+			if(i3GEO.Interface.ATUAL !== "openlayers" && $i("omenudataJanelas3")){
+				MM.getMenuItem("omenudataJanelas3").cfg.setProperty("disabled", true);
+			}			
 			//
 			//corrige problemas de estilo
 			//

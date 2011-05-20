@@ -922,7 +922,7 @@ i3GEO.Interface = {
 						temp = camada.transitioneffect === "nao" ? opcoes.transitionEffect = "null" : opcoes.transitionEffect = "resize";
 						if(camada.connectiontype === 7 && camada.wmsurl !== ""){
 							urllayer = camada.wmsurl+"&r="+Math.random();
-							layer = new OpenLayers.Layer.WMS(camada.name, urllayer,{format:camada.wmsformat,transparent:true},opcoes);
+							layer = new OpenLayers.Layer.WMS(camada.name, urllayer,{LAYERS:camada.name,format:camada.wmsformat,transparent:true},opcoes);
 							if(camada.wmssrs != "")
 							{layer.url = layer.url+"&SRS="+camada.wmssrs+"&CRS="+camada.wmssrs;}
 						}
@@ -932,7 +932,7 @@ i3GEO.Interface = {
 							else{
 								temp = camada.type === 3 ? opcoes.singleTile = false : opcoes.singleTile = !(i3GEO.Interface.openlayers.TILES);
 							}
-							layer = new OpenLayers.Layer.WMS(camada.name, urllayer,{map_imagetype:i3GEO.Interface.OUTPUTFORMAT},opcoes);
+							layer = new OpenLayers.Layer.WMS(camada.name, urllayer,{LAYERS:camada.name,map_imagetype:i3GEO.Interface.OUTPUTFORMAT},opcoes);
 						}
 					}
 					catch(e){}	

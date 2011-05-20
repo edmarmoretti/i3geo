@@ -170,7 +170,8 @@ $cssfiles = array(
 "../pacotes/yui270/build/carousel/assets/skins/sam/carousel.css",
 "../pacotes/yui270/build/slider/assets/skins/sam/slider.css",
 "../pacotes/yui270/build/resize/assets/skins/sam/resize.css",
-"../css/corrigeyui_geral.css"
+"../css/corrigeyui_geral.css",
+"../mashups/openlayers.css"
 ); 
 
 $buffer = "";

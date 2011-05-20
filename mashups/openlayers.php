@@ -86,6 +86,7 @@ if(isset($fundo) && $fundo != ""){
 //
 //define quais os layers que comporão o mapa
 //
+
 if($temas != "")
 {
 	$temas = str_replace(" ",",",$temas);
@@ -119,6 +120,7 @@ if($temas != "")
 		}
 	}
 }
+
 function ajuda(){
 	echo "
 <pre><b>

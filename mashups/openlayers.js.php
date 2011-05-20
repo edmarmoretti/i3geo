@@ -77,23 +77,26 @@ i3GEOOL = {
 			i;
 		if(i3GEOOL.mapa === "")
 		{alert("O objeto i3GEOOL.mapa precisa ser criado com new OpenLayers.Map()");return;}
-		i3GEOOL.mapa.setOptions({
-			numZoomLevels: i3GEOOL.numzoom,
-			maxExtent: i3GEOOL.maxext
-		});
+		if(i3GEOOL.maxext != ""){
+			i3GEOOL.mapa.setOptions({
+				numZoomLevels: i3GEOOL.numzoom,
+				maxExtent: i3GEOOL.maxext
+			});
+		}
 		for(i=0;i<ncontroles;i++){
 			i3GEOOL.mapa.addControl(i3GEOOL.controles[i]);
 		}
-		for(i=nfundo-1;i>=0;i--){
-			try{
-				eval("i3GEOOL."+fundo[i]+".transitionEffect = 'resize';");
-				eval("i3GEOOL."+fundo[i]+".setVisibility(false);");
-				eval("alayers.push(i3GEOOL."+fundo[i]+");");
+		if(i3GEOOL.fundo != ""){
+			for(i=nfundo-1;i>=0;i--){
+				try{
+					eval("i3GEOOL."+fundo[i]+".transitionEffect = 'resize';");
+					eval("i3GEOOL."+fundo[i]+".setVisibility(false);");
+					eval("alayers.push(i3GEOOL."+fundo[i]+");");
+				}
+				catch(e){alayers[0].setVisibility(true);}
 			}
-			catch(e){alayers[0].setVisibility(true);}
 		}
 		i3GEOOL.mapa.addLayers(alayers);
-		
 		if(i3GEOOL.layersIniciais != ""){
 			var n = i3GEOOL.layersIniciais.length;
 			for(i=0;i<n;i++)
@@ -103,7 +106,8 @@ i3GEOOL = {
 			i3GEOOL.mapa.addLayers([i3GEOOL.layergrafico]);
 		}
 		i3GEOOL.adicionaMarcas();
-		i3GEOOL.mapa.zoomToMaxExtent();
+		if(i3GEOOL.maxext != "")
+		{i3GEOOL.mapa.zoomToMaxExtent();}
 		i3GEOOL.coordenadas();	
 		i3GEOOL.criaJanelaBusca();
 		i3GEOOL.criaJanelaAtivaTema();
@@ -115,7 +119,7 @@ i3GEOOL = {
 		var nlayers = layers.length;
 		var ins = new Array();
 		for(i=0;i<nlayers;i++){
-			if(layers[i].isBaseLayer == false){
+			if(layers[i].isBaseLayer == false && layers[i].visibility == true){
 				ins.push(layers[i]);
 			}
 		}
@@ -211,7 +215,11 @@ i3GEOOL = {
 		document.getElementById("i3GEOOLlistaTemasAtivos").value = id;
 	},
 	layerAtivo: function(){
-		var id = document.getElementById("i3GEOOLlistaTemasAtivos").value;
+		var id = document.getElementById("i3GEOOLlistaTemasAtivos");
+		if(id)
+		{id = id.value;}
+		else
+		{id = i3GEO.temaAtivo;}
 		return i3GEOOL.layersLigados()[id];
 	},
 	listaItens: function(layer,idonde,idobj){
@@ -319,13 +327,15 @@ i3GEOOL = {
 		u += "&filter=<Filter><Intersect><PropertyName>Geometry</PropertyName><gml:Polygon><gml:outerBoundaryIs><gml:LinearRing><gml:posList>"+poligono+"</gml:posList></gml:LinearRing></gml:outerBoundaryIs></gml:Polygon></Intersect></Filter>";
 		
 		document.body.style.cursor="wait";
-		document.getElementById("i3geoMapa").style.cursor = "wait";
+		if(document.getElementById("i3geoMapa"))
+		{document.getElementById("i3geoMapa").style.cursor = "wait";}
 		OpenLayers.Request.issue({
 			method: "GET",
 			url: u,
 			callback: function(retorno){
 				document.body.style.cursor="default";
-				document.getElementById("i3geoMapa").style.cursor = "default";
+				if(document.getElementById("i3geoMapa"))
+				{document.getElementById("i3geoMapa").style.cursor = "default";}
 				var fromgml = new OpenLayers.Format.GML({
 					geometryName: "msGeometry"
 				});
@@ -334,7 +344,8 @@ i3GEOOL = {
 			},
 			failure: function(){
 				document.body.style.cursor="default";
-				document.getElementById("i3geoMapa").style.cursor = "default";
+				if(document.getElementById("i3geoMapa"))
+				{document.getElementById("i3geoMapa").style.cursor = "default";}
 				alert("Erro");
 			}
 		})
@@ -426,8 +437,8 @@ i3GEOOL = {
 				trigger: function(){YAHOO.procura.container.panel.show();},
 				title: "Procurar"
 			});
-	    	controles.push(button);
-	    	var adiciona = true;
+			controles.push(button);
+			var adiciona = true;
 		}
 		if(botoes.pan==true){
 			controles.push(new OpenLayers.Control.Navigation({title: "Deslocar",displayClass:"pan"}));
@@ -496,31 +507,32 @@ i3GEOOL = {
 			var adiciona = true;
 		}
 		if(botoes.identifica==true){
-	    	botaoIdentifica = new OpenLayers.Control.WMSGetFeatureInfo({
-	           	maxFeatures:1,
-	           	infoFormat:'text/plain', //'application/vnd.ogc.gml',
-	           	layers: [i3GEOOL.layerAtivo()],
-	           	queryVisible: true,
-	           	title: "Identificar",
-	           	displayClass: "identifica",
-	            eventListeners: {
-	                getfeatureinfo: function(event) {
+			botaoIdentifica = new OpenLayers.Control.WMSGetFeatureInfo({
+				maxFeatures:1,
+				infoFormat:'text/plain', //'application/vnd.ogc.gml',
+				layers: [i3GEOOL.layerAtivo()],
+				queryVisible: true,
+				title: "Identificar",
+				displayClass: "identifica",
+				eventListeners: {
+					getfeatureinfo: function(event) {
 						var lonlat = i3GEOOL.mapa.getLonLatFromPixel(event.xy);
-	                    var lonlattexto = "<hr><pre><span style=color:blue;cursor:pointer onclick='i3GEOOL.captura(\""+lonlat.lon+","+lonlat.lat+"\")'>captura</span></pre>";
-	                    i3GEOOL.mapa.addPopup(new OpenLayers.Popup.FramedCloud(
-	                        "chicken", 
-	                        i3GEOOL.mapa.getLonLatFromPixel(event.xy),
-	                        null,
-	                        lonlattexto+"<pre>"+event.text+"</pre>",
-	                        null,
-	                        true
-	                    ));
-	                },
+						var lonlattexto = "<hr><pre><span style=color:blue;cursor:pointer onclick='i3GEOOL.captura(\""+lonlat.lon+","+lonlat.lat+"\")'>captura</span></pre>";
+						i3GEOOL.mapa.addPopup(new OpenLayers.Popup.FramedCloud(
+							"chicken", 
+							i3GEOOL.mapa.getLonLatFromPixel(event.xy),
+							null,
+							lonlattexto+"<pre>"+event.text+"</pre>",
+							null,
+							true
+						));
+					},
 					activate: function(){
-						YAHOO.temaativo.container.panel.show();
+						try{YAHOO.temaativo.container.panel.show();}
+						catch(e){}
 					}
-	            }
-	       	});
+				}
+			});
 			//button.events.register("getfeatureinfo", this, showInfo);
 			controles.push(botaoIdentifica);
 			var adiciona = true;
@@ -528,11 +540,11 @@ i3GEOOL = {
 		if(botoes.linha==true){
 			button = new OpenLayers.Control.DrawFeature(
 				i3GEOOL.layergrafico,
-	            OpenLayers.Handler.Path,
-	            {
-	            	displayClass: "linha",
-	            	title: "digitalizar linha"
-	            }
+				OpenLayers.Handler.Path,
+				{
+					displayClass: "linha",
+					title: "digitalizar linha"
+				}
 			);
 			controles.push(button);
 			var adiciona = true;
@@ -540,11 +552,11 @@ i3GEOOL = {
 		if(botoes.ponto==true){
 			button = new OpenLayers.Control.DrawFeature(
 				i3GEOOL.layergrafico,
-	            OpenLayers.Handler.Point,
-	            {
-	            	displayClass: "ponto",
-	            	title: "digitalizar ponto"
-	            }
+				OpenLayers.Handler.Point,
+				{
+					displayClass: "ponto",
+					title: "digitalizar ponto"
+				}
 			);
 			controles.push(button);
 			var adiciona = true;
@@ -552,11 +564,11 @@ i3GEOOL = {
 		if(botoes.poligono==true){
 			button = new OpenLayers.Control.DrawFeature(
 				i3GEOOL.layergrafico,
-	            OpenLayers.Handler.Polygon,
-	            {
-	            	displayClass: "poligono",
-	            	title: "digitalizar polígono"
-	            }
+				OpenLayers.Handler.Polygon,
+				{
+					displayClass: "poligono",
+					title: "digitalizar polígono"
+				}
 			);
 			controles.push(button);
 			var adiciona = true;
@@ -564,10 +576,10 @@ i3GEOOL = {
 		if(botoes.edita==true){
 			button = new OpenLayers.Control.ModifyFeature(
 				i3GEOOL.layergrafico,
-	            {
-	            	displayClass: "edita",
-	            	title: "edita elemento"
-	            }
+				{
+					displayClass: "edita",
+					title: "edita elemento"
+				}
 			);
 			controles.push(button);
 			var adiciona = true;
@@ -576,17 +588,17 @@ i3GEOOL = {
 		if(botoes.apaga==true){
 			button = new OpenLayers.Control.SelectFeature(
 				i3GEOOL.layergrafico,
-	            {
-	            	displayClass: "selecao",
-	            	title: "seleciona elemento",
-	                clickout: true,
-	                toggle: true,
-	                multiple: false,
-	                hover: false,
-	                toggleKey: "ctrlKey", // ctrl key removes from selection
-	                multipleKey: "shiftKey", // shift key adds to selection
-	                box: false
-	            }
+				{
+					displayClass: "selecao",
+					title: "seleciona elemento",
+					clickout: true,
+					toggle: true,
+					multiple: false,
+					hover: false,
+					toggleKey: "ctrlKey", // ctrl key removes from selection
+					multipleKey: "shiftKey", // shift key adds to selection
+					box: false
+				}
 			);
 			controles.push(button);
 			var adiciona = true;

@@ -1287,7 +1287,7 @@ i3GEO.util = {
 
 	js {String} - endereco do JS
 
-	ini - funcao do JS que será executada ao ser carregado o script (pode ser "")
+	ini {String} - funcao que será executada ao ser carregado o script (pode ser "")
 
 	id - id do elemento script que será criado
 
