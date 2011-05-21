@@ -94,6 +94,12 @@ background-position:-435px 0;
 .olControlEditingToolbar1 .salvaItemActive {
 background-position:-435px -28px;
 }
+.olControlEditingToolbar1 .fechaItemInactive {
+background-position:-464px 0;
+}
+.olControlEditingToolbar1 .fechaItemActive {
+background-position:-464px -28px;
+}
 .olControlEditingToolbar1 {
 	width:500px;
 	float:right;

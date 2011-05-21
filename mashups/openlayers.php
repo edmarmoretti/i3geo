@@ -71,6 +71,8 @@ if(isset($botoes)){
 	{$objBotoes[] = "'procura':false";}
 	if(in_array("salva",$botoes))
 	{$objBotoes[] = "'salva':false";}
+	if(in_array("fecha",$botoes))
+	{$objBotoes[] = "'fecha':false";}
 	$botoes = "{".implode(",",$objBotoes)."}";
 }
 
@@ -170,6 +172,7 @@ Parâmetros:
 		captura
 		procura
 		salva
+		fecha
 
 	Para ver a lista de códigos de temas, que podem ser utilizados no parâmetro 'temas', acesse: 
 	<a href='../ogc.php?lista=temas' >lista de temas</a>. Os códigos são mostrados em vermelho.

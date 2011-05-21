@@ -53,7 +53,8 @@ i3GEOOL = {
 		'edita':true,
 		'apaga':true,
 		'procura':true,
-		'salva':true
+		'salva':true,
+		'fecha':false
 	},
 	pontos: [],
 	marca: "../pacotes/openlayers/img/marker-gold.png",
@@ -112,7 +113,6 @@ i3GEOOL = {
 		i3GEOOL.criaJanelaBusca();
 		i3GEOOL.criaJanelaAtivaTema();
 		i3GEOOL.criaBotoes(i3GEOOL.botoes);
-		
 	},
 	layersLigados: function(){
 		var layers = i3GEOOL.mapa.layers;
@@ -195,21 +195,28 @@ i3GEOOL = {
 			combo += "<option value='"+i+"' >"+layers[i].name+"</option>";
 		}
 		combo += "</select>";
-		try{
+		if(!document.getElementById("paneltemaativo")){
 			YAHOO.namespace("temaativo.container");
-			YAHOO.temaativo.container.panel = new YAHOO.widget.Panel("paneltemaativo", {zIndex:2000, iframe:false, width:"250px", visible:false, draggable:true, close:true } );
-			YAHOO.temaativo.container.panel.setHeader("Tema ativo");
+			YAHOO.temaativo.container.panel = new YAHOO.widget.Panel("paneltemaativo", {zIndex:20000, iframe:true, width:"250px", visible:false, draggable:true, close:true } );
 			YAHOO.temaativo.container.panel.setBody(combo);
+			YAHOO.temaativo.container.panel.setHeader("Tema ativo");
 			YAHOO.temaativo.container.panel.setFooter("");
 			YAHOO.temaativo.container.panel.render(document.body);
 			YAHOO.temaativo.container.panel.center();
-			document.getElementById("i3GEOOLlistaTemasAtivos").onchange = function(){
-				if(botaoIdentifica){
-					botaoIdentifica.layers = [i3GEOOL.layersLigados()[this.value]];
-				} 
-			};
+			YAHOO.util.Event.addListener(YAHOO.temaativo.container.panel.close, "click", function(){
+				i3GEOpanelEditor.deactivate();
+				i3GEOpanelEditor.activate();
+			}); 
 		}
-		catch(e){}
+		else{	
+			YAHOO.temaativo.container.panel.render(document.body);
+			YAHOO.temaativo.container.panel.show();
+		}
+		document.getElementById("i3GEOOLlistaTemasAtivos").onchange = function(){
+			if(botaoIdentifica){
+				botaoIdentifica.layers = [i3GEOOL.layersLigados()[this.value]];
+			} 
+		};
 	},
 	ativaTema: function(id){
 		document.getElementById("i3GEOOLlistaTemasAtivos").value = id;
@@ -428,7 +435,7 @@ i3GEOOL = {
 		var styleMap = new OpenLayers.StyleMap({"default": style});
 		var adiciona = false;
 		var controles = new Array();
-		var panel = new OpenLayers.Control.Panel({
+		i3GEOpanelEditor = new OpenLayers.Control.Panel({
 			displayClass: "olControlEditingToolbar1 noprint"
 		});
 		if(botoes.procura==true){
@@ -528,8 +535,7 @@ i3GEOOL = {
 						));
 					},
 					activate: function(){
-						try{YAHOO.temaativo.container.panel.show();}
-						catch(e){}
+						i3GEOOL.criaJanelaAtivaTema();
 					}
 				}
 			});
@@ -629,12 +635,24 @@ i3GEOOL = {
 			controles.push(button);
 			var adiciona = true;
 		}
+		if(botoes.fecha==true){
+			var button = new OpenLayers.Control.Button({
+				displayClass: "fecha", 
+				trigger: function(){
+					i3GEOpanelEditor.destroy();
+					YAHOO.temaativo.container.panel.destroy();
+				},
+				title: "Fechar editor"
+			});
+			controles.push(button);
+			var adiciona = true;
+		}		
 		//
 		//adiciona o painel ao mapa se alguma op��o foi inserida
 		//
 		if(adiciona == true){
-			panel.addControls(controles);
-			i3GEOOL.mapa.addControl(panel);
+			i3GEOpanelEditor.addControls(controles);
+			i3GEOOL.mapa.addControl(i3GEOpanelEditor);
 		}
 	},
 	adicionaMarcas: function(){

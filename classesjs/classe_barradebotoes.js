@@ -1054,7 +1054,8 @@ i3GEO.barraDeBotoes = {
 				'edita':true,
 				'apaga':true,
 				'procura':false,
-				'salva':true
+				'salva':true,
+				'fecha':true
 			}
 			i3GEOOL.layergrafico = new OpenLayers.Layer.Vector("Edição",{displayInLayerSwitcher:false,visibility:true});
 			i3GEOOL.mapa.addLayers([i3GEOOL.layergrafico]);			
