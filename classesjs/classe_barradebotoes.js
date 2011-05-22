@@ -1036,11 +1036,11 @@ i3GEO.barraDeBotoes = {
 		},
 		ativaPainel: function(idjanela){
 			OpenLayers.ImgPath = i3GEO.configura.locaplic+"/pacotes/openlayers/img/";
-			i3GEOOL.fundo = "";//i3GEOOL é criado pelo script carregado
-			i3GEOOL.mapa = i3geoOL;
-			i3GEOOL.maxext = "";
-			i3GEOOL.controles = [];
-			i3GEOOL.botoes = {
+			i3GEO.editorOL.fundo = "";//i3GEO.editorOL é criado pelo script carregado
+			i3GEO.editorOL.mapa = i3geoOL;
+			i3GEO.editorOL.maxext = "";
+			i3GEO.editorOL.controles = [];
+			i3GEO.editorOL.botoes = {
 				'pan':false,
 				'zoombox':false,
 				'zoomtot':false,
@@ -1054,13 +1054,15 @@ i3GEO.barraDeBotoes = {
 				'edita':true,
 				'apaga':true,
 				'procura':false,
+				'propriedades':true,
 				'salva':true,
+				'ajuda':true,
 				'fecha':true
 			}
-			i3GEOOL.layergrafico = new OpenLayers.Layer.Vector("Edição",{displayInLayerSwitcher:false,visibility:true});
-			i3GEOOL.mapa.addLayers([i3GEOOL.layergrafico]);			
-			i3GEOOL.criaBotoes(i3GEOOL.botoes);
-			i3GEOOL.criaJanelaAtivaTema();
+			i3GEO.editorOL.layergrafico = new OpenLayers.Layer.Vector("Edição",{displayInLayerSwitcher:false,visibility:true});
+			i3GEO.editorOL.mapa.addLayers([i3GEO.editorOL.layergrafico]);			
+			i3GEO.editorOL.criaBotoes(i3GEO.editorOL.botoes);
+			i3GEO.editorOL.criaJanelaAtivaTema();
 			//i3GEOOL.inicia();
 		}
 	}

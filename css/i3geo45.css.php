@@ -1295,5 +1295,137 @@ width:16px;
 }
 .yui-resize .yui-resize-handle{position:absolute;z-index:1;font-size:0;margin:0;padding:0;zoom:1;height:250px;width:5px;}
 
+.olControlEditingToolbar1 .panItemInactive {
+background-position:-0px 0;
+}
+.olControlEditingToolbar1 .panItemActive {
+background-position:-0px -28px;
+}
+.olControlEditingToolbar1 .zoomboxItemInactive {
+background-position:-29px 0;
+}
+.olControlEditingToolbar1 .zoomboxItemActive {
+background-position:-29px -28px;
+}
+.olControlEditingToolbar1 .zoomtotItemInactive {
+background-position:-58px 0;
+}
+.olControlEditingToolbar1 .zoomtotItemActive {
+background-position:-58px -28px;
+}
+.olControlEditingToolbar1 .legendaItemInactive {
+background-position:-87px 0;
+}
+.olControlEditingToolbar1 .legendaItemActive {
+background-position:-87px -28px;
+}
+.olControlEditingToolbar1 .distanciaItemInactive {
+background-position:-116px 0;
+}
+.olControlEditingToolbar1 .distanciaItemActive {
+background-position:-116px -28px;
+}
+.olControlEditingToolbar1 .areaItemInactive {
+background-position:-145px 0;
+}
+.olControlEditingToolbar1 .areaItemActive {
+background-position:-145px -28px;
+}
+.olControlEditingToolbar1 .identificaItemInactive {
+background-position:-174px 0;
+}
+.olControlEditingToolbar1 .identificaItemActive {
+background-position:-174px -28px;
+}
+.olControlEditingToolbar1 .linhaItemInactive {
+background-position:-203px 0;
+}
+.olControlEditingToolbar1 .linhaItemActive {
+background-position:-203px -28px;
+}
+.olControlEditingToolbar1 .pontoItemInactive {
+background-position:-232px 0;
+}
+.olControlEditingToolbar1 .pontoItemActive {
+background-position:-232px -28px;
+}
+.olControlEditingToolbar1 .poligonoItemInactive {
+background-position:-261px 0;
+}
+.olControlEditingToolbar1 .poligonoItemActive {
+background-position:-261px -28px;
+}
+.olControlEditingToolbar1 .editaItemInactive {
+background-position:-290px 0;
+}
+.olControlEditingToolbar1 .editaItemActive {
+background-position:-290px -28px;
+}
+.olControlEditingToolbar1 .apagaItemInactive {
+background-position:-319px 0;
+}
+.olControlEditingToolbar1 .apagaItemActive {
+background-position:-319px -28px;
+}
+.olControlEditingToolbar1 .selecaoItemInactive {
+background-position:-348px 0;
+}
+.olControlEditingToolbar1 .selecaoItemActive {
+background-position:-348px -28px;
+}
+.olControlEditingToolbar1 .capturaItemInactive {
+background-position:-377px 0;
+}
+.olControlEditingToolbar1 .capturaItemActive {
+background-position:-377px -28px;
+}
+.olControlEditingToolbar1 .procuraItemInactive {
+background-position:-406px 0;
+}
+.olControlEditingToolbar1 .procuraItemActive {
+background-position:-406px -28px;
+}
+.olControlEditingToolbar1 .salvaItemInactive {
+background-position:-435px 0;
+}
+.olControlEditingToolbar1 .salvaItemActive {
+background-position:-435px -28px;
+}
+.olControlEditingToolbar1 .fechaItemInactive {
+background-position:-464px 0;
+}
+.olControlEditingToolbar1 .fechaItemActive {
+background-position:-464px -28px;
+}
+.olControlEditingToolbar1 .ajudaItemInactive {
+background-position:-493px 0;
+}
+.olControlEditingToolbar1 .ajudaItemActive {
+background-position:-493px -28px;
+}
+.olControlEditingToolbar1 .propriedadesItemInactive {
+background-position:-522px 0;
+}
+.olControlEditingToolbar1 .propriedadesItemActive {
+background-position:-522px -28px;
+}
+.olControlEditingToolbar1 {
+	width:600px;
+	float:right;
+	right: 0px;
+}
+.olControlEditingToolbar1 div {
+	background-image:url(openlayers.png);
+	background-repeat:no-repeat;
+	float:right;
+	right: 0px;	
+	height:29px;
+	margin:2px;
+	width:29px;
+}
+pre{
+	font-family: Verdana, Arial, Helvetica, sans-serif;
+	font-size: 9px;	
+}
 
 <?php if(extension_loaded('zlib')){ob_end_flush();}?>

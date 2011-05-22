@@ -100,8 +100,20 @@ background-position:-464px 0;
 .olControlEditingToolbar1 .fechaItemActive {
 background-position:-464px -28px;
 }
+.olControlEditingToolbar1 .ajudaItemInactive {
+background-position:-493px 0;
+}
+.olControlEditingToolbar1 .ajudaItemActive {
+background-position:-493px -28px;
+}
+.olControlEditingToolbar1 .propriedadesItemInactive {
+background-position:-522px 0;
+}
+.olControlEditingToolbar1 .propriedadesItemActive {
+background-position:-522px -28px;
+}
 .olControlEditingToolbar1 {
-	width:500px;
+	width:600px;
 	float:right;
 	right: 0px;
 }

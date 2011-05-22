@@ -68,11 +68,15 @@ if(isset($botoes)){
 	if(in_array("apaga",$botoes))
 	{$objBotoes[] = "'apaga':true";}
 	if(in_array("procura",$botoes))
-	{$objBotoes[] = "'procura':false";}
+	{$objBotoes[] = "'procura':true";}
 	if(in_array("salva",$botoes))
-	{$objBotoes[] = "'salva':false";}
+	{$objBotoes[] = "'salva':true";}
+	if(in_array("ajuda",$botoes))
+	{$objBotoes[] = "'ajuda':true";}	
 	if(in_array("fecha",$botoes))
-	{$objBotoes[] = "'fecha':false";}
+	{$objBotoes[] = "'fecha':true";}
+	if(in_array("propriedades",$botoes))
+	{$objBotoes[] = "'propriedades':true";}	
 	$botoes = "{".implode(",",$objBotoes)."}";
 }
 
@@ -171,7 +175,9 @@ Parâmetros:
 		apaga
 		captura
 		procura
+		propriedades
 		salva
+		ajuda
 		fecha
 
 	Para ver a lista de códigos de temas, que podem ser utilizados no parâmetro 'temas', acesse: 
@@ -204,45 +210,45 @@ Parâmetros:
 <div id=i3geoMapa style="width:<?php echo $largura;?>px;height:<?php echo $altura;?>px;"></div>
 <div id=i3geoSelTemaAtivo style="height:15em;z-index:3000" class=" yui-skin-sam"></div>
 <script>
-i3GEOOL.layersIniciais = [<?php
+i3GEO.editorOL.layersIniciais = [<?php
 	if(isset($objOpenLayers) && $objOpenLayers != "")
 	{echo implode(",",$objOpenLayers);}
 	else
 	{echo "''";}
 ?>];
 <?php if(isset($botoes)){
-	echo "i3GEOOL.botoes = $botoes ;";
+	echo "i3GEO.editorOL.botoes = $botoes ;";
 }
 ?>
-i3GEOOL.pontos = [<?php
+i3GEO.editorOL.pontos = [<?php
 	if(isset($pontos)){
 		$pontos = str_replace(" ",",",$pontos);
 		echo $pontos;
 	}
 ?>];
-i3GEOOL.marca = "<?php
+i3GEO.editorOL.marca = "<?php
 	if(isset($marca)){echo $marca;}
 	else
 	{echo "../pacotes/openlayers/img/marker-gold.png";}
 ?>";
 <?php if(isset($fundo)){
-	echo "i3GEOOL.fundo = '".implode(",",$fundo)."';";
+	echo "i3GEO.editorOL.fundo = '".implode(",",$fundo)."';";
 }
 ?>
 <?php if(isset($controles)){
-	echo "i3GEOOL.controle = [".implode(",",$objControles)."];";
+	echo "i3GEO.editorOL.controle = [".implode(",",$objControles)."];";
 }
 ?>
 <?php if(isset($numzoomlevels)){
-	echo "i3GEOOL.numzoom = ".$numzoomlevels.";";
+	echo "i3GEO.editorOL.numzoom = ".$numzoomlevels.";";
 }
 ?>
 <?php if(isset($maxextent)){
-	echo "i3GEOOL.maxext = new OpenLayers.Bounds(".$maxextent.");";
+	echo "i3GEO.editorOL.maxext = new OpenLayers.Bounds(".$maxextent.");";
 }
 ?>
-i3GEOOL.mapa = new OpenLayers.Map('i3geoMapa',{controls:[]})
-i3GEOOL.inicia();
+i3GEO.editorOL.mapa = new OpenLayers.Map('i3geoMapa',{controls:[]})
+i3GEO.editorOL.inicia();
 </script>
 </body>
 </html>
