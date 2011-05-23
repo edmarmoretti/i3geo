@@ -973,6 +973,7 @@ i3GEO.barraDeBotoes = {
 			{divmensagem.innerHTML = "<table style='z-index:20000' ><tr><td id='imgMensagemBarraDeBotoes' style='background:none;padding-top:2px;padding-right:3px;vertical-align:top'><img src='"+$im("top.png")+"' ></td><td style='text-align:left;border-left:1px solid rgb(210,210,210)'><span style='text-align:right;cursor:pointer;color:blue;' onclick='javascript:i3GEO.util.insereCookie(\"botoesAjuda\",\"nao\");i3GEO.barraDeBotoes.AJUDA = false;'>fecha</span><br><div style='vertical-align:middle;text-align:left;width:250px;border: 0px solid black;border-left:1px;' id='divMensagemBarraDeBotoesCorpo'></div></td></tr></table>";}
 		}
 		if(mensagem !== ""){
+			YAHOO.util.Dom.setStyle("divMensagemBarraDeBotoes","display","none");
 			if(this.TIPOAJUDA === "horizontal"){
 				divmensagem.style.left = parseInt(YAHOO.util.Dom.getStyle(objeto,"width"),10)+pos[0]+10+"px";
 				divmensagem.style.top = pos[1]-2+(parseInt(YAHOO.util.Dom.getStyle(objeto,"height"),10) / 2)+"px";
@@ -981,11 +982,15 @@ i3GEO.barraDeBotoes = {
 				divmensagem.style.left = (parseInt(YAHOO.util.Dom.getStyle(objeto,"width"),10)/2)+pos[0]-5+"px";
 				divmensagem.style.top = pos[1]+5+parseInt(YAHOO.util.Dom.getStyle(objeto,"height"),10)+"px";
 			}
-			$i("divMensagemBarraDeBotoesCorpo").innerHTML = mensagem;
-			divmensagem.style.display="block";
 			try{clearTimeout(timeAjudaBotoes);}catch(e){}
-			timeAjudaBotoes = setTimeout(function(){i3GEO.barraDeBotoes.escondeJanelaAjuda();},3000);
+			timeAjudaBotoes = setTimeout("i3GEO.barraDeBotoes.mostraJanelaAjuda('"+mensagem+"');",5000);
 		}
+	},
+	mostraJanelaAjuda:function(mensagem){
+		$i("divMensagemBarraDeBotoesCorpo").innerHTML = mensagem;
+		YAHOO.util.Dom.setStyle("divMensagemBarraDeBotoes","display","block");
+		try{clearTimeout(timeAjudaBotoes);}catch(e){}
+		timeAjudaBotoes = setTimeout(function(){i3GEO.barraDeBotoes.escondeJanelaAjuda();},3000);
 	},
 	escondeJanelaAjuda:function(){
 		YAHOO.util.Dom.setStyle("divMensagemBarraDeBotoes","display","none");

@@ -680,7 +680,11 @@ i3GEO.editorOL = {
 			controles.push(button);
 			var adiciona = true;
 		}
-		
+		//
+		//controle que permite o snap
+		//
+        i3GEOOLsnap = new OpenLayers.Control.Snapping({layer: i3GEO.editorOL.layergrafico});
+		//controles.push(i3GEOOLsnap);   		
 		//
 		//adiciona o painel ao mapa se alguma op��o foi inserida
 		//
@@ -688,6 +692,13 @@ i3GEO.editorOL = {
 			i3GEOpanelEditor.addControls(controles);
 			i3GEO.editorOL.mapa.addControl(i3GEOpanelEditor);
 		}
+		var target = i3GEOOLsnap.targets[0];
+		target["vertex"] = true;
+		target["node"] = true;
+		target["edge"] = true;
+		target["vertexTolerance"] = 15;
+		target["edgeTolerance"] = 15;
+		i3GEOOLsnap.activate();
 	},
 	adicionaMarcas: function(){
 		if(i3GEO.editorOL.pontos.length == 0)
