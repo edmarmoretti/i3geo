@@ -684,7 +684,16 @@ i3GEO.editorOL = {
 		//controle que permite o snap
 		//
         i3GEOOLsnap = new OpenLayers.Control.Snapping({layer: i3GEO.editorOL.layergrafico});
-		//controles.push(i3GEOOLsnap);   		
+		i3GEOOLsplit = new OpenLayers.Control.Split({
+			layer: i3GEO.editorOL.layergrafico,
+			source: i3GEO.editorOL.layergrafico,
+			tolerance: 0.0001,
+			eventListeners: {
+				aftersplit: function(event) {
+					i3GEO.editorOL.flashFeatures(event.features);
+				}
+			}
+		});	
 		//
 		//adiciona o painel ao mapa se alguma opï¿½ï¿½o foi inserida
 		//
@@ -692,13 +701,6 @@ i3GEO.editorOL = {
 			i3GEOpanelEditor.addControls(controles);
 			i3GEO.editorOL.mapa.addControl(i3GEOpanelEditor);
 		}
-		var target = i3GEOOLsnap.targets[0];
-		target["vertex"] = true;
-		target["node"] = true;
-		target["edge"] = true;
-		target["vertexTolerance"] = 15;
-		target["edgeTolerance"] = 15;
-		i3GEOOLsnap.activate();
 	},
 	adicionaMarcas: function(){
 		if(i3GEO.editorOL.pontos.length == 0)
@@ -744,6 +746,86 @@ i3GEO.editorOL = {
 		layer.addFeatures(features);
 		i3GEO.editorOL.mapa.addLayer(layer);
 	},
+	//obtido de openlayers.org
 	propriedades: function(){
+		if(!document.getElementById("panelpropriedadesEditor")){
+			YAHOO.namespace("editorOL.container");
+			YAHOO.editorOL.container.panel = new YAHOO.widget.Panel("panelpropriedadesEditor", {zIndex:20000, iframe:true, width:"350px", visible:false, draggable:true, close:true } );
+			var ins = "" +
+			'<p class=paragrafo >Ajusta nó em edição para o(a):</p>' +
+			'<table class=lista7 >' +
+			'	<tr>' +
+			'		<td></td><td>nó</td><td></td><td>vértice</td><td></td><td>borda</td>' +
+			'	</tr>' +
+			'	<tr>' +
+			'		<td><input style=cursor:pointer onclick="i3GEO.editorOL.snap()" type="checkbox" id="target_node" /></td><td><input onchange="i3GEO.editorOL.snap()" id="target_nodeTolerance" type="text" size="3" value=15 /></td>' +
+			'		<td><input style=cursor:pointer onclick="i3GEO.editorOL.snap()" type="checkbox" id="target_vertex" /></td><td><input onchange="i3GEO.editorOL.snap()" id="target_vertexTolerance" type="text" size="3" value=15 /></td>' +
+			'		<td><input style=cursor:pointer onclick="i3GEO.editorOL.snap()" type="checkbox" id="target_edge" /></td><td><input onchange="i3GEO.editorOL.snap()" id="target_edgeTolerance" type="text" size="3" value=15 /></td>' +
+			'	</tr>' +
+			'</table>' +
+			'<br />' +
+			'<p class=paragrafo >Divide intersecção ao digitalizar</p>' +
+			'<table class=lista7 >' +
+			'	<tr>' +
+			'		<td><input style=cursor:pointer onclick="i3GEO.editorOL.split()" type="checkbox" id="edge_split_toggle" /></td><td>borda</td>' +
+			'	</tr>' +
+			'</table>';
+			YAHOO.editorOL.container.panel.setBody(ins);
+			YAHOO.editorOL.container.panel.setHeader("Propriedades");
+			YAHOO.editorOL.container.panel.setFooter("");
+			YAHOO.editorOL.container.panel.render(document.body);
+			YAHOO.editorOL.container.panel.center();
+			YAHOO.util.Event.addListener(YAHOO.editorOL.container.panel.close, "click", function(){
+			});
+			if(i3GEO.eventos.ATUALIZAARVORECAMADAS.toString().search("i3GEO.editorOL.criaJanelaAtivaTema()") < 0)
+			{i3GEO.eventos.ATUALIZAARVORECAMADAS.push("i3GEO.editorOL.criaJanelaAtivaTema()");}			
+		}
+		else{	
+			YAHOO.editorOL.container.panel.render(document.body);
+		}
+		YAHOO.editorOL.container.panel.show();
+	},
+	snap: function(){
+		var target = i3GEOOLsnap.targets[0],
+			tipos = ["node","vertex","edge"],
+			ntipos = tipos.length,
+			i,
+			temp,
+			ativa = false;
+		i3GEOOLsnap.deactivate();
+		for(i=0;i<ntipos;i++){		
+			temp = $i("target_"+tipos[i]);
+			target[tipos[i]] = temp.checked;
+			if(temp.checked === true)
+			{ativa = true;}
+			temp = $i("target_"+tipos[i]+"Tolerance");
+			target[tipos[i]+"Tolerance"] = temp.value;
+		}
+		if(ativa === true)
+		{i3GEOOLsnap.activate();}	
+	},
+	split: function(){
+		i3GEOOLsplit.deactivate();
+		var temp = $i("edge_split_toggle");
+		if(temp.checked === true)
+		{i3GEOOLsplit.activate();}
+	},
+	flashFeatures: function(features, index) {
+		if(!index) {
+			index = 0;
+		}
+		var current = features[index];
+		if(current && current.layer === i3GEO.editorOL.layergrafico) {
+			i3GEO.editorOL.layergrafico.drawFeature(features[index], "select");
+		}
+		var prev = features[index-1];
+		if(prev && prev.layer === i3GEO.editorOL.layergrafico) {
+			i3GEO.editorOL.layergrafico.drawFeature(prev, "default");
+		}
+		++index;
+		if(index <= features.length) {
+			window.setTimeout(function() {i3GEO.editorOL.flashFeatures(features, index)}, 75);
+		}
 	}
+	
 };
