@@ -1063,7 +1063,7 @@ i3GEO.barraDeBotoes = {
 				'salva':true,
 				'ajuda':true,
 				'fecha':true
-			}
+			};
 			i3GEO.editorOL.layergrafico = new OpenLayers.Layer.Vector("Edição",{displayInLayerSwitcher:false,visibility:true});
 			i3GEO.editorOL.mapa.addLayers([i3GEO.editorOL.layergrafico]);			
 			i3GEO.editorOL.criaBotoes(i3GEO.editorOL.botoes);
