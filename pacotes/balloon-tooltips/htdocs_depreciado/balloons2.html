@@ -1,0 +1,313 @@
+<html>
+<head>
+ <title>Balloon and box tooltips demonstration</title>
+ <script type="text/javascript" src="/js/balloon.config.js"></script>
+ <script type="text/javascript" src="/js/balloon.js"></script>
+ <script type="text/javascript" src="/js/box.js"></script>
+ <script type="text/javascript" src="/js/yahoo-dom-event.js"></script> 
+ <script type="text/javascript" src="/js/toggle.js"></script>
+ <style>
+  .tt {
+    background-color:lightsteelblue;
+    color:blue;
+    text-decoration:none;
+    cursor:pointer;
+  }
+  .hidden {
+    display:none;
+  }
+  pre {
+    background-color:gainsboro;
+    padding:10px;
+    margin-left:20px;
+    margin-right:20px;
+    font-family:courier;
+    font-size:90%;
+  }
+  b.y { background-color:yellow }
+ </style>
+ <script type="text/javascript">
+   // white balloon with default configuration
+   // (see http://www.wormbase.org/wiki/index.php/Balloon_Tooltips)
+   var whiteBalloon    = new Balloon;
+
+   // stemless,shadowless blue balloon
+   var blueBalloon  = new Balloon;
+   blueBalloon.balloonTextSize  = '90%';
+   blueBalloon.images           = '/images/balloons';
+   blueBalloon.balloonImage     = 'blue_balloon.png';
+   blueBalloon.vOffset          = 15;
+   blueBalloon.shadow           = 0;
+   blueBalloon.stem             = false;
+   blueBalloon.ieImage          = null;
+
+   // a plainer popup box
+   var box         = new Box;
+   box.bgcolor     = 'ivory';
+   box.fontColor   = 'green';
+   box.borderStyle = '4px ridge blue';
+
+   // a box that fades in/out
+   var fadeBox     = new Box;
+   fadeBox.bgColor     = 'black';
+   fadeBox.fontColor   = 'white';
+   fadeBox.borderStyle = 'none';
+   fadeBox.delayTime   = 200;
+   fadeBox.allowFade   = true;
+   fadeBox.fadeIn      = 750;
+   fadeBox.fadeOut     = 200;
+
+ </script>
+</head>
+<body>
+<div style="border:1px solid blue;background:azure;padding:10px;font-family:arial, sans-serif">
+<center><img src="/images/sample.png"></a>
+</center>
+</span>
+<span id="sheldon" style="display:none">
+<center>
+<img src="/images/sheldon.jpg">
+<br>mckays@cshl.edu
+</center>
+</span>
+<br>
+This page is a demonstration of balloon.js, written by <a href="http://www.gmod.org/wiki/index.php/Popup_Balloons" 
+    onmouseover="whiteBalloon.showTooltip(event,'load:sheldon')">Sheldon McKay</a>.
+<p>
+The balloon.js package is written in object-oriented JavaScript and allows you to add configurable balloon tooltips 
+(AKA popup balloons, bubbles, rollover tooltips etc., etc.) to your website.  It was written for scientific web applications, such as 
+<a href="http://gmod.org/wiki/Gbrowse" target="_blank">GBrowse</a> and <a href="http://www.wormbase.org" target="_blank">WormBase</a>, 
+but is generic and portable to most websites. 
+<br>
+The balloons are dynamically sized in both the vertical and horizontal dimensions and the left/right/up/down orientation
+is calculated automatically based on the position of the cursor. Balloon contents can be provided locally in your own HTML or remotely via AJAX.
+This package is open source and free to all as long as the copyright notice is retained.  See below for demonstrations and documentation.
+<p>
+Please feel free to <a href="mailto:mckays@cshl.edu">contact the author
+<a> for help with installation and usage.
+</p>
+</p>
+<div style="border:1px solid black;width:90%;margin:auto">
+<table cellpadding=3 style="width:100%">
+<tr>
+<th width=10% align=left rowspan=2>Demonstration:</th>
+<th width=30% class="tt" onmouseover="whiteBalloon.showTooltip(event,'Your message goes here',0,200)">plain hover</th>
+<th width=30% class="tt">
+<span onmouseover="whiteBalloon.showTooltip(event,'Your are hovering, I said click me!')"
+      onclick="whiteBalloon.showTooltip(event,'Your sticky message goes here.',1)">click me</span>
+</th>
+<th width=30% class="tt"><span onmouseover="blueBalloon.showTooltip(event,'This is a stemless balloon.<br>Your message goes here!')">blue balloon</span></th>
+</tr>
+<tr>
+<th  class="tt"><span onmouseover="box.showTooltip(event,'Your message goes here!')">popup  box</span></th>
+<th  class="tt"><span onmouseover="fadeBox.showTooltip(event,'Your message goes here!')">fading box</span></th>
+<th  class="tt"><span onmouseover="box.showTooltip(event,'Your sticky message goes here!<br><a href=\'http://www.google.com\'>Your link goes here...</a>',1,275)">
+sticky box</span></th>
+</tr>
+<tr>
+<th align=left>Documentation:</th>
+<th colspan=3 align=left class=tt>
+<a class=tt href="http://gmod.org/wiki/Popup_Balloons" 
+   onmouseover="whiteBalloon.showTooltip(event,'Click this link to go to documentation on the GMOD Wiki')">
+http://gmod.org/wiki/Popup_Balloons
+</th>
+</tr>
+<tr>
+<th align=left>Download:</th>
+<th colspan=3 align=left class=tt>
+<a class=tt href="http://gmod.cvs.sourceforge.net/*checkout*/gmod/balloon-tooltips/download/balloons.tar.gz"
+   onmouseover="box.showTooltip(event,'click to download the whole package, with all required scripts, images, etc',0,300)">
+balloons.tar.gz
+</th>
+</tr>
+</table>
+</div>
+<br>
+<div class="switch" id="source_code" title="source code for the above examples">
+<pre>
+&lt;head&gt;
+ &lt;title&gt;Balloon tooltip demonstration&lt;/title&gt;
+ &lt;script type="text/javascript" src="/js/balloon.config.js"&gt;&lt;/script&gt;
+ &lt;script type="text/javascript" src="/js/balloon.js"&gt;&lt;/script&gt;
+ &lt;script type="text/javascript" src="/js/box.js"&gt;&lt;/script&gt;
+ &lt;script type="text/javascript" src="/js/yahoo-dom-event.js"&gt;&lt;/script&gt;
+ &lt;script type="text/javascript"&gt;
+   // white balloon with default configuration
+   var whiteBalloon       = new Balloon;
+
+   // Stemless blue balloon
+   var blueBalloon              = new Balloon;
+   blueBalloon.balloonTextSize  = '90%';
+   blueBalloon.images           = '/images/balloons';
+   blueBalloon.balloonImage     = 'blue_balloon.png';
+   blueBalloon.vOffset          = 15;
+   blueBalloon.shadow           = 0;
+   blueBalloon.stem             = false;
+   blueBalloon.ieImage          = null;
+
+   // a plainer popup box
+   var box         = new Box;
+   box.bgcolor     = 'ivory';
+   box.fontColor   = 'blue';
+   box.borderStyle = '4px ridge blue';
+
+   // a box that fades in/out
+   var fadeBox     = new Box;
+   fadeBox.bgColor     = 'black';
+   fadeBox.fontColor   = 'white';
+   fadeBox.borderStyle = 'none';
+   fadeBox.delayTime   = 200;
+   fadeBox.allowFade   = true;
+   fadeBox.fadeIn      = 750;
+   fadeBox.fadeOut     = 200;
+
+ &lt;/script&gt;
+&lt;/head&gt; 
+
+&lt;body&gt;
+
+&lt;table cellpadding=3&gt;
+&lt;tr&gt;
+&lt;th align=left rowspan=2&gt;Demonstration:&lt;/th&gt;
+&lt;th  class="tt" onmouseover="whiteBalloon.showTooltip(event,'Your message goes here')"&gt;plain hover&lt;/th&gt;
+&lt;th  class="tt"&gt;
+&lt;span onmouseover="whiteBalloon.showTooltip(event,'Your are hovering, I said click me!')"
+      onclick="whiteBalloon.showTooltip(event,'Your sticky message goes here.',1)"&gt;click me&lt;/span&gt;
+&lt;/th&gt;
+&lt;th  class="tt"&gt;&lt;span onmouseover="blueBalloon.showTooltip(event,'This is a stemless balloon. Your message goes here!')"&gt;
+blue balloon
+&lt;/span&gt;&lt;/th&gt;
+&lt;th rowspan=4&gt;
+&lt;a href="http://www.gmod.org/wiki/index.php/Popup_Balloons" target="_blank"
+   onmouseover="whiteBalloon.showTooltip(event,'Want to do this with your website? Click for documentation!')"&gt;
+&lt;img src="/images/sample_balloon.png" style="border:2px solid black" /&gt;&lt;/a&gt;
+&lt;/th&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;th  class="tt"&gt;&lt;span onmouseover="box.showTooltip(event,'Your message goes here!')"&gt;popup  box&lt;/span&gt;&lt;/th&gt;
+&lt;th  class="tt"&gt;&lt;span onmouseover="fadeBox.showTooltip(event,'Your message goes here!')"&gt;fading box&lt;/span&gt;&lt;/th&gt;
+&lt;th	 class="tt"&gt;&lt;span onmouseover="box.showTooltip(event,'Your sticky message goes here!',1,275)"&gt;sticky box&lt;/span&gt;&lt;/th&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;th align=left&gt;Documentation:&lt;/th&gt;
+&lt;th colspan=3 align=left class=tt&gt;
+&lt;a class=tt href="http://gmod.org/wiki/Popup_Balloons"
+   onmouseover="whiteBalloon.showTooltip(event,'Click this link to go to documentation on the GMOD Wiki')"&gt;
+http://gmod.org/wiki/Popup_Balloons
+&lt;/th&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;th align=left&gt;Download:&lt;/th&gt;
+&lt;th colspan=3 align=left class=tt&gt;
+&lt;a class=tt href="http://gmod.cvs.sourceforge.net/*checkout*/gmod/balloon-tooltips/download/balloons.tar.gz"
+   onmouseover="box.showTooltip(event,'click to download the whole package, with all required scripts, images, etc',0,300)"&gt;
+balloons.tar.gz
+&lt;/th&gt;
+&lt;/tr&gt;
+&lt;/table&gt;
+</pre>
+</div>
+</div>
+<div id="lorem1" class="hidden">
+Lorem ipsum dolor sit amet, <b><i>consectetuer adipiscing elit</b></i>. Vestibulum iaculis,
+ligula quis fringilla volutpat, metus mi molestie lorem, <span style="color:red">quis accumsan pede
+turpis nec metus.</span> Lorem ipsum dolor sit amet, consectetuer adipiscing elit.'
+</div>
+
+<div id="lorem2" class="hidden">
+<a href="http://www.lipsum.com" target="_new" style="color:blue">What is <i>Lorem ipsum...</i>?</a>
+Lorem ipsum dolor sit amet, <b><i>consectetuer adipiscing elit</b></i>. Vestibulum iaculis
+, ligula quis fringilla volutpat, metus mi molestie lorem, quis accumsan pede
+turpis nec metus. Lorem ipsum dolor sit amet, consectetuer adipiscing elit.
+</div>
+
+<p>
+This is an example of a simple balloon <a href="javascript:void(0)" class=tt 
+onmouseover="whiteBalloon.showTooltip(event,'I am a simple message...')">message</a>
+
+<pre>
+ &lt;a href="javascript:void(0)" onmouseover="<b class=y>whiteBalloon</b>.showTooltip(event,'I am a simple message...')"&gt;message&lt;/a&gt;
+</pre>
+
+This is an example of the same message with a different balloon <a href="javascript:void(0)" class=tt
+onmouseover="blueBalloon.showTooltip(event,'I am a simple message...')">style</a>
+
+<pre>
+ onmouseover="<b class=y>blueBalloon</b>.showTooltip(event,'I am a simple message...')"&gt;message&lt;/a&gt;
+</pre>
+
+This is an example of the same message with a box <a href="javascript:void(0)" class=tt
+onmouseover="box.showTooltip(event,'I am a simple message...')">style</a>
+
+<pre>
+ onmouseover="<b class=y>box</b>.showTooltip(event,'I am a simple message...')"&gt;message&lt;/a&gt;
+</pre>
+
+</p>
+
+<p>
+Roll over <a href="javascript:void(0)" class=tt onmouseover="whiteBalloon.showTooltip(event,'load:lorem1')">
+this text</a> for an example of HTML-formatted text loaded from a hidden &lt;div&gt; element.
+<pre>
+ onmouseover="whiteBalloon.showTooltip(event,<b class=y>'load:lorem1'</b>)"
+ ...
+ &lt;div id="lorem1" style="display:none"&gt;
+   Lorem ipsum dolor sit amet, &lt;b&gt;&lt;i&gt;consectetuer adipiscing elit&lt;/b&gt;&lt;/i&gt;. Vestibulum iaculis,
+   ligula quis fringilla volutpat, metus mi molestie lorem, &lt;span style=&#34color:red&#34;&gt;quis accumsan pede
+    turpis nec metus.&lt;/span&gt; Lorem ipsum dolor sit amet, consectetuer adipiscing elit.'
+ &lt;/div&gt;
+
+</pre>
+
+<span id=sticky>
+Adding a third argument makes the tooltip <a href="javascript:void(0)" class=tt
+onmouseover="whiteBalloon.showTooltip(event,'load:lorem2',1)">sticky</a>.</span>
+<pre>
+ onmouseover="whiteBalloon.showTooltip(event,'load:lorem2',<b class=y>1</b>)"
+</pre>
+
+A fourth argument will set the width (Example:<a href="javascript:void(0)" class=tt 
+onmouseover="whiteBalloon.showTooltip(event,'load:lorem2',1,300)">
+300px sticky balloon</a>)
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Try a <a href="javascript:void(0)" class=tt
+onmouseover="blueBalloon.showTooltip(event,'load:lorem2',1,300)">blue version</a>
+
+<pre>
+ onmouseover="whiteBalloon.showTooltip(event,'load:lorem2',1,<b class=y>300</b>)"
+</pre>
+
+Now let's try that with a <a href="javascript:void(0)" class=tt
+onmouseover="box.showTooltip(event,'load:lorem2',1,300)">
+sticky box</a>.
+
+<pre>
+ onmouseover="box.showTooltip(event,'load:lorem2',1,<b class=y>300</b>)"
+</pre>
+
+</p>
+
+<p>
+Here is an example of a tooltip balloon that is populated by an
+<a href="javascript:void(0)" class=tt
+onmouseover="whiteBalloon.showTooltip(event,'<img height=150 src=/images/balloons.png>')">
+image</a>.
+<pre>
+ onmouseover="whiteBalloon.showTooltip(event,'&lt;img src=/images/balloons.png&gt;')"
+</pre>
+</p>
+
+<p>
+This link will create a sticky balloon whose contents are from a remote URL.
+<a href="javascript:void(0)" class=tt 
+onmouseover="whiteBalloon.showTooltip(event,'<iframe style=\'width:300;height:300;padding-right:16px\' frameborder=0 src=\'http://www.nypost.com/avantgo/avantnews/avantnews.htm\'></iframe>',1)">
+What's new?</a><br>This requires an embedded iframe.
+<pre>
+ onmouseover="whiteBalloon.showTooltip(event,'\
+ &lt;iframe style=\'width:300;height:300;border:0;padding-right:16px\' \
+ src=\'http://www.nypost.com/avantgo/avantnews/avantnews.htm\'&gt;&lt;/iframe&gt;',1)"
+</pre>
+<br>
+Ajax methods are <a href="http://gmod.org/wiki/Popup_Balloons#Using_AJAX_to_get_balloon_contents">also available</a>.
+</p>
+</body>
+</html>
