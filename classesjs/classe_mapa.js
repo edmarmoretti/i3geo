@@ -644,7 +644,7 @@ i3GEO.mapa = {
 			if(i3GEO.Interface.ATUAL === "googleearth")
 			{i3GEO.Interface.googleearth.aguarde.visibility = "visible";}
 			retorna = function(retorno){
-				var temp,rfes,n,balloon,i,mostra,res,temas,ntemas,titulo,tips,j,ntips,ins,r,ds,nds,s,
+				var pos,temp,rfes,n,i,mostra,res,temas,ntemas,titulo,tips,j,ntips,ins,r,ds,nds,s,
 					configura = i3GEO.configura,
 					tipotip = configura.tipotip;
 				i = $i("i3geo_rosa");
@@ -723,15 +723,15 @@ i3GEO.mapa = {
 								else{
 									i3GEO.util.criaPin('marcaIdentifica',configura.locaplic+"/imagens/grabber.gif","12px","12px");
 									i3GEO.janela.TIPS.push('marcaIdentifica');
-									i3GEO.util.posicionaImagemNoMapa("marcaIdentifica");
+									pos = i3GEO.util.posicionaImagemNoMapa("marcaIdentifica");
 									balloon = new Balloon();
 									BalloonConfig(balloon,'GBox');
 									balloon.delayTime = 0;
 									res = "<div style=text-align:left;overflow:auto;height:"+configura.alturatip+";width:"+configura.larguratip+"; >"+res+"</div>";
 									temp = $i('marcaIdentifica');
 									if(temp){
-						
-										balloon.showTooltip(temp,res);
+										balloon.showTooltip(temp,res,null,null,null,pos[1],pos[0]);
+										balloon.addCloseButton();
 										temp.onclick = function(e){
 											if (!e){e = window.event;}
 											document.body.removeChild(balloon.getEventTarget(e));

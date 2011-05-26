@@ -662,6 +662,10 @@ i3GEO.util = {
 	Parametros:
 
 	id {string} - id do elemento que será posicionado
+	
+	Return:
+	
+	array[top,left] - valores em pixel da posição calculada da imagem
 	*/
 	posicionaImagemNoMapa: function(id){
 		if(typeof(console) !== 'undefined'){console.info("i3GEO.util.posicionaImagemNoMapa()");}
@@ -672,6 +676,7 @@ i3GEO.util = {
 		i.style.position = "absolute";
 		i.style.top = objposicaocursor.telay - my;
 		i.style.left = objposicaocursor.telax - mx;
+		return [objposicaocursor.telay - my,objposicaocursor.telax - mx];
 	},
 	/*
 	Function: escondePin

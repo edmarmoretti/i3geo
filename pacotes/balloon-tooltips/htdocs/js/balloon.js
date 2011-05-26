@@ -77,7 +77,7 @@ var Balloon = function () {
 // This is the method that is called on mouseover.  It has a built-in   //
 // delay time to avoid balloons popping up on rapid mouseover events    //
 //////////////////////////////////////////////////////////////////////////
-Balloon.prototype.showTooltip = function(evt,caption,sticky,width,height) {
+Balloon.prototype.showTooltip = function(evt,caption,sticky,width,height,x,y) {
 	// If the objext is not configured by now, fall back to default
 	if (!this.configured) {
 		BalloonConfig(this,'GBubble');
@@ -202,6 +202,9 @@ Balloon.prototype.showTooltip = function(evt,caption,sticky,width,height) {
 		this.width  = width;
 		this.height = height;
 		this.actualWidth = null;
+		//edmar
+		this.x = x;
+		this.y = y;
 		
 		// make sure old balloons are removed
 		this.hideTooltip();
@@ -283,6 +286,7 @@ Balloon.prototype.showTooltip = function(evt,caption,sticky,width,height) {
 		// Make delay time short for onmousedown
 		//var delay = mouseOver ? this.delayTime : 1;
 		//this.timeoutTooltip = window.setTimeout(this.doShowTooltip,delay);
+		balloon.setActiveCoordinates([]);
 		this.doShowTooltip();
 		this.pending = true;
 }
@@ -368,7 +372,7 @@ Balloon.prototype.doShowTooltip = function() {
 	
 	// close control for balloon or box
 	if (balloonIsSticky) {
-		self.addCloseButton();
+ 		self.addCloseButton();
 	}
 	
 	balloonIsVisible = true;
@@ -379,6 +383,7 @@ Balloon.prototype.doShowTooltip = function() {
 	
 	self.startX = self.activeLeft;
 	self.startY = self.activeTop;
+
 	self.fade(0,self.opacity,self.fadeIn);
 }
 
@@ -396,6 +401,9 @@ Balloon.prototype.addCloseButton = function () {
 		closeButton.setAttribute('src',self.closeButton);
 		closeButton.onclick = function() {
 			Balloon.prototype.nukeTooltip();
+			var temp = $i('marcaIdentifica');
+			if(temp)
+			{temp.parentNode.removeChild(temp);}			
 		};
 		self.setStyle(closeButton,'position','absolute');
 		document.body.appendChild(closeButton);
@@ -520,6 +528,7 @@ Balloon.prototype.setBalloonStyle = function(vOrient,hOrient,pageWidth,pageLeft)
 	
 	if (this.stem) {
 		var stem = document.createElement('img');
+		stem.style.zIndex = 50000;
 		self.setStyle(stem,'position','absolute');
 		balloon.appendChild(stem);
 		
@@ -747,7 +756,7 @@ Balloon.prototype.hideTooltip = function(override) {
 // Garbage collection
 Balloon.prototype.cleanup = function() {
 	var self = currentBalloonClass;
-	var body;
+	var body;	
 	if (self) {
 		body = self.parent   ? self.parent 
 		: self.parentID ? document.getElementById(self.parentID) || document.body
@@ -756,13 +765,13 @@ Balloon.prototype.cleanup = function() {
 	else {
 		body = document.body;
 	}
-	
 	var bubble = document.getElementById('visibleBalloonElement');
 	var close  = document.getElementById('closeButton');
 	var cont   = document.getElementById('balloonPreloadContainer');
 	if (bubble) { body.removeChild(bubble) } 
 	if (close)  { body.removeChild(close)  }
 	if (cont)   { body.removeChild(cont)   }
+	//edmar
 }
 
 
@@ -789,10 +798,6 @@ Balloon.prototype.setActiveCoordinates = function(evt) {
 	if (!evt) {
 		return true;
 	}
-	//
-	//modificado por edmar
-	//
-
 	self.currentEvent = {};
 	for (var i in evt) {
 		self.currentEvent[i] = evt[i];
@@ -806,7 +811,8 @@ Balloon.prototype.setActiveCoordinates = function(evt) {
 	var scrollTop  = 0;
 	var scrollLeft = 0;
 	
-	var XY = self.eventXY(evt);
+	//var XY = self.eventXY(evt);
+	var XY = [self.x,self.y];
 	adjustment   = self.hOffset < 20 ? 10 : 0;
 	self.activeTop    = scrollTop  + XY[1] - adjustment - self.vOffset - self.stemHeight;
 	self.activeLeft   = scrollLeft + XY[0] - adjustment - self.hOffset;
@@ -854,7 +860,6 @@ Balloon.prototype.setActiveCoordinates = function(evt) {
 				}
 			}
 	}
-	
 	return true;
 }
 
