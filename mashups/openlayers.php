@@ -205,6 +205,20 @@ Parâmetros:
 <script type="text/javascript" src="openlayers.js.php"></script>
 <link rel="stylesheet" href="theme/default/style.css" type="text/css" />
 <link rel="stylesheet" href="openlayers.css" type="text/css" />
+<style>
+.yui-skin-sam .container-minimiza {
+	background:transparent url(../pacotes/yui270/build/assets/skins/sam/sprite.png) no-repeat scroll 0 -450px;
+	cursor:pointer;
+	height:15px;
+	position:absolute;
+	right:30px;
+	top:1px;
+	width:25px;
+	z-index:2001;
+	opacity:.8;
+	filter:alpha(opacity=80);
+}
+</style>
 </head>
 <body class=" yui-skin-sam">
 <div id=i3geoMapa style="width:<?php echo $largura;?>px;height:<?php echo $altura;?>px;"></div>

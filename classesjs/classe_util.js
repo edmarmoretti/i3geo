@@ -678,7 +678,7 @@ i3GEO.util = {
 
 	Esconde os PINS com IDs registrados em i3GEO.util.PINS
 
-	Os ids são criado pela função criaPin
+	Os ids são criados pela função criaPin
 	*/
 	escondePin: function(){
 		if(typeof(console) !== 'undefined'){console.info("i3GEO.util.escondePin()");}

@@ -382,7 +382,7 @@ i3GEO.janela = {
 			temp = temp.getElementsByTagName("div");
 			n = temp.length;
 			for(i=0;i<n;i++){
-				if(temp[i].className === "underlay"){
+				if(temp[i].className === "underlay" || temp[i].className === "bd"){
 					if(temp[i].style.display === "none")
 					{temp[i].style.display = "block";}
 					else
