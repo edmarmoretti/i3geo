@@ -644,7 +644,7 @@ i3GEO.mapa = {
 			if(i3GEO.Interface.ATUAL === "googleearth")
 			{i3GEO.Interface.googleearth.aguarde.visibility = "visible";}
 			retorna = function(retorno){
-				var pos,temp,rfes,n,i,mostra,res,temas,ntemas,titulo,tips,j,ntips,ins,r,ds,nds,s,
+				var pos,temp,rfes,n,i,mostra,res,temas,ntemas,titulo,tips,j,ntips,ins,r,ds,nds,s,balloon,
 					configura = i3GEO.configura,
 					tipotip = configura.tipotip;
 				i = $i("i3geo_rosa");

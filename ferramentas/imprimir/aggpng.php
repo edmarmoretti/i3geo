@@ -94,6 +94,7 @@ foreach ($temas as $tema)
 $map->save($temp);
 removeLinha("classeNula",$temp);
 $map = ms_newMapObj($temp);
+
 $o = $map->outputformat;
 if($mapexten != ""){
 	$ext = explode(" ",$mapexten);

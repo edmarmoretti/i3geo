@@ -88,12 +88,12 @@ i3GEO.barraDeBotoes = {
 	{string}
 
 	Valores:
-	{"horizontal","vertical"}
+	{"horizontal","vertical","balao"}
 	
 	Default:
 	{"horizontal"}
 	*/
-	TIPOAJUDA: "horizontal",
+	TIPOAJUDA: "balao",
 	/*
 	Propriedade: SOICONES
 
@@ -946,7 +946,7 @@ i3GEO.barraDeBotoes = {
 		}
 	},
 	mostraJanela: function(objeto,mensagem){
-		var divmensagem = $i("divMensagemBarraDeBotoes"),
+		var divmensagem = $i("divMensagemBarraDeBotoes"),balloonAjuda,
 			pos = YAHOO.util.Dom.getXY(objeto);
 		if(this.AJUDA === false || $i("janelaMenTexto")){
 			i3GEO.ajuda.mostraJanela(mensagem);
@@ -957,7 +957,7 @@ i3GEO.barraDeBotoes = {
 			objeto.title = mensagem;
 			return;
 		}
-		if(!divmensagem){
+		if(!divmensagem && this.TIPOAJUDA !== "balao"){
 			divmensagem = document.createElement("div");
 			divmensagem.id = "divMensagemBarraDeBotoes";
 			divmensagem.style.border = "0px solid rgb(120 120 120)";
@@ -973,17 +973,39 @@ i3GEO.barraDeBotoes = {
 			{divmensagem.innerHTML = "<table style='z-index:20000' ><tr><td id='imgMensagemBarraDeBotoes' style='background:none;padding-top:2px;padding-right:3px;vertical-align:top'><img src='"+$im("top.png")+"' ></td><td style='text-align:left;border-left:1px solid rgb(210,210,210)'><span style='text-align:right;cursor:pointer;color:blue;' onclick='javascript:i3GEO.util.insereCookie(\"botoesAjuda\",\"nao\");i3GEO.barraDeBotoes.AJUDA = false;'>fecha</span><br><div style='vertical-align:middle;text-align:left;width:250px;border: 0px solid black;border-left:1px;' id='divMensagemBarraDeBotoesCorpo'></div></td></tr></table>";}
 		}
 		if(mensagem !== ""){
-			YAHOO.util.Dom.setStyle("divMensagemBarraDeBotoes","display","none");
-			if(this.TIPOAJUDA === "horizontal"){
-				divmensagem.style.left = parseInt(YAHOO.util.Dom.getStyle(objeto,"width"),10)+pos[0]+10+"px";
-				divmensagem.style.top = pos[1]-2+(parseInt(YAHOO.util.Dom.getStyle(objeto,"height"),10) / 2)+"px";
+			if(this.TIPOAJUDA !== "balao"){
+				YAHOO.util.Dom.setStyle("divMensagemBarraDeBotoes","display","none");
+				if(this.TIPOAJUDA === "horizontal"){
+					divmensagem.style.left = parseInt(YAHOO.util.Dom.getStyle(objeto,"width"),10)+pos[0]+10+"px";
+					divmensagem.style.top = pos[1]-2+(parseInt(YAHOO.util.Dom.getStyle(objeto,"height"),10) / 2)+"px";
+				}
+				if(this.TIPOAJUDA === "vertical"){
+					divmensagem.style.left = (parseInt(YAHOO.util.Dom.getStyle(objeto,"width"),10)/2)+pos[0]-5+"px";
+					divmensagem.style.top = pos[1]+5+parseInt(YAHOO.util.Dom.getStyle(objeto,"height"),10)+"px";
+				}
+				try{clearTimeout(timeAjudaBotoes);}catch(e){}
+				timeAjudaBotoes = setTimeout("i3GEO.barraDeBotoes.mostraJanelaAjuda('"+mensagem+"');",5000);
 			}
-			if(this.TIPOAJUDA === "vertical"){
-				divmensagem.style.left = (parseInt(YAHOO.util.Dom.getStyle(objeto,"width"),10)/2)+pos[0]-5+"px";
-				divmensagem.style.top = pos[1]+5+parseInt(YAHOO.util.Dom.getStyle(objeto,"height"),10)+"px";
+			else{
+				hideAllTooltips();
+				balloonAjuda = new Balloon();
+				BalloonConfig(balloonAjuda,'GBubble');
+				balloonAjuda.delayTime = 0;
+				balloonAjuda.stem = false;
+				balloonAjuda.stemHeight = 0;
+				balloonAjuda.vOffset = -24;
+				balloonAjuda.images = i3GEO.configura.locaplic+'/pacotes/balloon-tooltips/htdocs/images/GBubblec';
+				mensagem = "<table style='z-index:20000' ><tr><td style='text-align:left;'><span style='text-align:right;cursor:pointer;color:blue;' onclick='javascript:i3GEO.util.insereCookie(\"botoesAjuda\",\"nao\");i3GEO.barraDeBotoes.AJUDA = false;'>fecha</span><br><div style='vertical-align:middle;text-align:left;width:250px;border: 0px solid black;border-left:1px;' id='divMensagemBarraDeBotoesCorpo'>"+mensagem+"</div></td></tr></table>";
+				try{clearTimeout(timeAjudaBotoes);}catch(e){}
+				
+				timeAjudaBotoes = setTimeout(function(){
+					balloonAjuda.cleanup();
+					balloonIsVisible = false;
+					balloonAjuda.showTooltip(objeto,mensagem,null,null,null,pos[0]+12,pos[1]);
+					try{clearTimeout(timeAjudaBotoes);}catch(e){};
+					timeAjudaBotoes = setTimeout(function(){balloonAjuda.cleanup();},4000);
+				},4000);
 			}
-			try{clearTimeout(timeAjudaBotoes);}catch(e){}
-			timeAjudaBotoes = setTimeout("i3GEO.barraDeBotoes.mostraJanelaAjuda('"+mensagem+"');",5000);
 		}
 	},
 	mostraJanelaAjuda:function(mensagem){
@@ -993,10 +1015,12 @@ i3GEO.barraDeBotoes = {
 		timeAjudaBotoes = setTimeout(function(){i3GEO.barraDeBotoes.escondeJanelaAjuda();},3000);
 	},
 	escondeJanelaAjuda:function(){
-		YAHOO.util.Dom.setStyle("divMensagemBarraDeBotoes","display","none");
-		try
-		{clearTimeout(timeAjudaBotoes);}
+		try{
+			clearTimeout(timeAjudaBotoes);
+		}
 		catch(e){}
+		if($i("divMensagemBarraDeBotoes"))
+		{YAHOO.util.Dom.setStyle("divMensagemBarraDeBotoes","display","none");}
 	},
 	editor:{
 		inicia: function(){

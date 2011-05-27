@@ -286,7 +286,7 @@ Balloon.prototype.showTooltip = function(evt,caption,sticky,width,height,x,y) {
 		// Make delay time short for onmousedown
 		//var delay = mouseOver ? this.delayTime : 1;
 		//this.timeoutTooltip = window.setTimeout(this.doShowTooltip,delay);
-		balloon.setActiveCoordinates([]);
+		this.setActiveCoordinates([]);
 		this.doShowTooltip();
 		this.pending = true;
 }
@@ -1039,6 +1039,7 @@ Balloon.prototype.isSameElement = function(el1,el2) {
 // for disallowed elements.
 //////////////////////////////////////////////////////
 Balloon.prototype.getAndCheckContents = function(caption) {
+	/*
 	var originalCaption = caption;
 	var notAllowed = 'are not allowed in popup balloons in this web site.  \
 	Please contact the site administrator for assistance.';
@@ -1093,7 +1094,7 @@ Balloon.prototype.getAndCheckContents = function(caption) {
 		alert('Sorry: <script> elements '+notAllowed);
 		return null;
 	}
-	
+	*/
 	// request the contents
 	this.currentHelpText = this.getContents(caption);
 	this.loadedFromElement = false;
