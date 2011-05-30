@@ -2493,6 +2493,9 @@ Retorno:
 */
 function criaDirMapa($dir_tmp)
 {
+	if(!file_exists($dir_tmp)){
+		@mkdir ($dir_tmp,0777);
+	}
 	if(file_exists($dir_tmp))
 	{
 		$tmpdirname = nomeRandomico();
