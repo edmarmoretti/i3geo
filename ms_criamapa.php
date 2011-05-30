@@ -159,6 +159,7 @@ include_once ($caminho."classesphp/pega_variaveis.php");
 include_once ($caminho."classesphp/funcoes_gerais.php");
 if(!isset($dir_tmp))
 {include_once ($caminho."ms_configura.php");}
+
 if (!isset($debug))
 {error_reporting(0);$debug="nao";}
 else

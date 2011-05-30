@@ -1081,12 +1081,14 @@ i3GEO.barraDeBotoes = {
 				'ponto':true,
 				'poligono':true,
 				'edita':true,
+				'selecao':true,
 				'apaga':true,
 				'procura':false,
 				'propriedades':true,
 				'salva':true,
 				'ajuda':true,
-				'fecha':true
+				'fecha':true,
+				'uniao':true
 			};
 			i3GEO.editorOL.layergrafico = new OpenLayers.Layer.Vector("Edição",{displayInLayerSwitcher:false,visibility:true});
 			i3GEO.editorOL.mapa.addLayers([i3GEO.editorOL.layergrafico]);			

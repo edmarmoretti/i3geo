@@ -65,6 +65,8 @@ if(isset($botoes)){
 	{$objBotoes[] = "'poligono':true";}
 	if(in_array("edita",$botoes))
 	{$objBotoes[] = "'edita':true";}
+	if(in_array("uniao",$botoes))
+	{$objBotoes[] = "'uniao':true";}
 	if(in_array("apaga",$botoes))
 	{$objBotoes[] = "'apaga':true";}
 	if(in_array("procura",$botoes))
@@ -172,6 +174,7 @@ Parâmetros:
 		linha
 		poligono
 		edita
+		uniao
 		apaga
 		captura
 		procura
