@@ -469,7 +469,7 @@ i3GEO.editorOL = {
 		});
 		if(botoes.procura===true){
 			button = new OpenLayers.Control.Button({
-				displayClass: "procura", 
+				displayClass: "editorOLprocura", 
 				trigger: function(){YAHOO.procura.container.panel.show();},
 				title: "Procurar"
 			});
@@ -477,16 +477,16 @@ i3GEO.editorOL = {
 			adiciona = true;
 		}
 		if(botoes.pan===true){
-			controles.push(new OpenLayers.Control.Navigation({title: "Deslocar",displayClass:"pan"}));
+			controles.push(new OpenLayers.Control.Navigation({title: "Deslocar",displayClass:"editorOLpan"}));
 			adiciona = true;
 		}
 		if(botoes.zoombox===true){
-			controles.push(new OpenLayers.Control.ZoomBox({displayClass: "zoombox",title: "Zoom"}));
+			controles.push(new OpenLayers.Control.ZoomBox({displayClass: "zoombox",title: "editorOLZoom"}));
 			adiciona = true;
 		}
 		if(botoes.zoomtot===true){
 			button = new OpenLayers.Control.Button({
-				displayClass: "zoomtot", 
+				displayClass: "editorOLzoomtot", 
 				trigger: function(){i3GEO.editorOL.mapa.zoomToMaxExtent();},
 				title: "Ajusta extens&atilde;o"
 			});
@@ -495,7 +495,7 @@ i3GEO.editorOL = {
 		}
 		if(botoes.legenda===true){
 			button = new OpenLayers.Control.Button({
-				displayClass: "legenda", 
+				displayClass: "editorOLlegenda", 
 				trigger: function(){i3GEO.editorOL.mostraLegenda();},
 				title: "Legenda"
 			});
@@ -508,7 +508,7 @@ i3GEO.editorOL = {
 				{
 					handlerOptions: {layerOptions: {styleMap: styleMap}},
 					persist: true,
-					displayClass: "distancia", 
+					displayClass: "editorOLdistancia", 
 					title: "Distância"
 				}
 			);
@@ -528,7 +528,7 @@ i3GEO.editorOL = {
 				{
 					handlerOptions: {layerOptions: {styleMap: styleMap}},
 					persist: true,
-					displayClass: "area", 
+					displayClass: "editorOLarea", 
 					title: "Área"
 				}
 			);
@@ -549,7 +549,7 @@ i3GEO.editorOL = {
 				layers: [i3GEO.editorOL.layerAtivo()],
 				queryVisible: true,
 				title: "Identificar",
-				displayClass: "identifica",
+				displayClass: "editorOLidentifica",
 				eventListeners: {
 					getfeatureinfo: function(event) {
 						var lonlat = i3GEO.editorOL.mapa.getLonLatFromPixel(event.xy);
@@ -577,7 +577,7 @@ i3GEO.editorOL = {
 				i3GEO.editorOL.layergrafico,
 				OpenLayers.Handler.Path,
 				{
-					displayClass: "linha",
+					displayClass: "editorOLlinha",
 					title: "digitalizar linha"
 				}
 			);
@@ -589,7 +589,7 @@ i3GEO.editorOL = {
 				i3GEO.editorOL.layergrafico,
 				OpenLayers.Handler.Point,
 				{
-					displayClass: "ponto",
+					displayClass: "editorOLponto",
 					title: "digitalizar ponto"
 				}
 			);
@@ -601,7 +601,7 @@ i3GEO.editorOL = {
 				i3GEO.editorOL.layergrafico,
 				OpenLayers.Handler.Polygon,
 				{
-					displayClass: "poligono",
+					displayClass: "editorOLpoligono",
 					title: "digitalizar polígono"
 				}
 			);
@@ -612,18 +612,20 @@ i3GEO.editorOL = {
 			button = new OpenLayers.Control.ModifyFeature(
 				i3GEO.editorOL.layergrafico,
 				{
-					displayClass: "edita",
+					displayClass: "editorOLedita",
 					title: "edita elemento"
 				}
 			);
 			controles.push(button);
 			adiciona = true;
 		}
-		if(botoes.uniao===true){
+		//só funciona dentro do i3geo
+		if(botoes.uniao===true && i3GEO.php){
 			button = new OpenLayers.Control.Button({
-				displayClass: "uniao", 
+				displayClass: "editorOLuniao", 
 				trigger: function(){
-					i3GEO.editorOL.carregajts("i3GEO.editorOL.uniao()");
+					//i3GEO.editorOL.carregajts("i3GEO.editorOL.uniao()");
+					i3GEO.editorOL.uniao();
 				},
 				title: "Une geometrias"
 			});
@@ -635,7 +637,7 @@ i3GEO.editorOL = {
 			button = new OpenLayers.Control.SelectFeature(
 				i3GEO.editorOL.layergrafico,
 				{
-					displayClass: "selecao",
+					displayClass: "editorOLselecao",
 					title: "seleciona elemento",
 					clickout: true,
 					toggle: true,
@@ -651,7 +653,7 @@ i3GEO.editorOL = {
 		}
 		if(botoes.apaga===true){
 			button = new OpenLayers.Control.Button({
-				displayClass: "apaga", 
+				displayClass: "editorOLapaga", 
 				trigger: function(){
 					if(i3GEO.editorOL.layergrafico.selectedFeatures.length > 0){
 						var x = window.confirm("Exclui os elementos selecionados?");
@@ -668,7 +670,7 @@ i3GEO.editorOL = {
 		}
 		if(botoes.propriedades===true){
 			button = new OpenLayers.Control.Button({
-				displayClass: "propriedades", 
+				displayClass: "editorOLpropriedades", 
 				trigger: function(){i3GEO.editorOL.propriedades();},
 				title: "Propriedades"
 			});
@@ -677,7 +679,7 @@ i3GEO.editorOL = {
 		}
 		if(botoes.salva===true){
 			button = new OpenLayers.Control.Button({
-				displayClass: "salva", 
+				displayClass: "editorOLsalva", 
 				trigger: function(){i3GEO.editorOL.salvaGeometrias();},
 				title: "Salvar"
 			});
@@ -686,7 +688,7 @@ i3GEO.editorOL = {
 		}
 		if(botoes.ajuda===true){
 			button = new OpenLayers.Control.Button({
-				displayClass: "ajuda", 
+				displayClass: "editorOLajuda", 
 				trigger: function(){
 					try
 					{window.open(i3GEO.configura.locaplic+"/mashups/openlayers_ajuda.php");}
@@ -700,7 +702,7 @@ i3GEO.editorOL = {
 		}
 		if(botoes.fecha===true){
 			button = new OpenLayers.Control.Button({
-				displayClass: "fecha", 
+				displayClass: "editorOLfecha", 
 				trigger: function(){
 					if(window.confirm("A edição será perdida. Continua?")){
 						i3GEOpanelEditor.destroy();
@@ -854,23 +856,47 @@ i3GEO.editorOL = {
 	},
 	uniao: function(){
 		var geosel = i3GEO.editorOL.layergrafico.selectedFeatures,
-			polis,linhas,pontos,uniaopolis,uniaolinhas,uniaopontos;
+			fwkt = new OpenLayers.Format.WKT(),
+			polis,linhas,pontos,uniaopolis,uniaolinhas,uniaopontos,n,i,temp;
 		if(geosel.length > 1){
 			polis = i3GEO.editorOL.retornaGeometriasTipo(geosel,"OpenLayers.Geometry.Polygon");
 			linhas = i3GEO.editorOL.retornaGeometriasTipo(geosel,"OpenLayers.Geometry.LineString");
 			pontos = i3GEO.editorOL.retornaGeometriasTipo(geosel,"OpenLayers.Geometry.Point");
+			temp = function(retorno){
+				i3GEO.janela.fechaAguarde("i3GEO.editorPoli");
+				i3GEO.janela.fechaAguarde("i3GEO.editorLinhas");
+				i3GEO.janela.fechaAguarde("i3GEO.editorPontos");
+				if(retorno.data)
+				{i3GEO.editorOL.substituiFeaturesSel(retorno.data);}
+			}
+			if(polis){
+				i3GEO.janela.abreAguarde("i3GEO.editorPoli","Poligonos");
+				i3GEO.php.funcoesGeometriasWkt(temp,polis.join("|"),"union");				
+			}
+			if(linhas){
+				i3GEO.janela.abreAguarde("i3GEO.editorLinhas","Linhas");
+				i3GEO.php.funcoesGeometriasWkt(temp,linhas.join("|"),"union");				
+			}
+			if(pontos){
+				i3GEO.janela.abreAguarde("i3GEO.editorPontos","Pontos");
+				i3GEO.php.funcoesGeometriasWkt(temp,pontos.join("|"),"union");				
+			}
+			return;
+			/*
 			if(polis)
 			{uniaopolis = i3GEO.editorOL.uniaojts(polis);}
 			if(linhas)
 			{uniaolinhas = i3GEO.editorOL.uniaojts(linhas);}
 			if(pontos)
 			{uniaopontos = i3GEO.editorOL.uniaojts(pontos);}
+
 			if(uniaopolis)
 			{i3GEO.editorOL.layergrafico.addFeatures(uniaopolis);}
 			if(uniaolinhas)
 			{i3GEO.editorOL.layergrafico.addFeatures(uniaolinhas);}
 			if(uniaopontos)
 			{i3GEO.editorOL.layergrafico.addFeatures(uniaopontos);}
+			*/
 		}
 		else
 		{alert("Selecione pelo menos dois elementos");}	
@@ -880,17 +906,14 @@ i3GEO.editorOL = {
 				rwkt = new jsts.io.WKTReader(),
 				wwkt = new jsts.io.WKTWriter(),
 				fwkt = new OpenLayers.Format.WKT(),
-				wkt,
 				g,
 				i,uniao;
 		if(n > 1){
-			wkt = fwkt.write(geoms[0]);
-			alert(wkt)
-			uniao = rwkt.read(wkt);
+			uniao = (fwkt.read(geoms[0]).geometry).toString();
+			uniao = rwkt.read(uniao);
 			for(i=1;i <= n;i++){
-				wkt = fwkt.write(geoms[i]);
-				g = readerwkt.read(wkt);				
-				uniao = uniao.union(g);
+				g = (fwkt.read(geoms[i]).geometry).toString();				
+				uniao = uniao.union(rwkt.read(g));
 			}
 			uniao = wwkt.write(uniao);
 			return [fwkt.read(uniao)];
@@ -908,6 +931,11 @@ i3GEO.editorOL = {
 			{lista.push(temp);}
 		}
 		return lista;
+	},
+	substituiFeaturesSel: function(wkt){
+		var fwkt = new OpenLayers.Format.WKT();
+		i3GEO.editorOL.layergrafico.removeFeatures(i3GEO.editorOL.layergrafico.selectedFeatures);
+		i3GEO.editorOL.layergrafico.addFeatures([fwkt.read(wkt)]);
 	},
 	flashFeatures: function(features, index) {
 		if(!index) {

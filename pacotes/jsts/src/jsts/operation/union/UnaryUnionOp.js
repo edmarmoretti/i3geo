@@ -45,7 +45,10 @@
  * @constructor
  */
 jsts.operation.union.UnaryUnionOp = function(geoms, gemFact) {
-  this.geomFact = geomFact;
+  if(gemFact)
+  this.geomFact = gemFact;
+  //else
+  //this.geomFact = geoms.getFactory();
   this.extract(geoms);
 };
 

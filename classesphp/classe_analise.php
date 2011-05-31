@@ -2207,6 +2207,48 @@ $locaplic - Localização do I3geo
 
 		return("ok");
 	}
+	/*
+	Function aplicaFuncaoListaWKT
+	
+	Aplica uma função do Mapserver à uma lista de geometrias no formato WKT
+	
+	Parametros:
+	
+	$geometrias {Array} - lista de WKT
+	
+	$operacao {String} - operação suportada pelo Mapserver, por exemplo, union, intersects, etc
+	
+	Return:
+	
+	{string wkt}
+	*/
+	function aplicaFuncaoListaWKT($geometrias,$operacao){
+		$geos = array();
+		foreach ($geometrias as $geo){
+			$geos[] = ms_shapeObjFromWkt($geo);
+		}
+		
+		$n = count($geos);
+		if ($n == 1)
+		{
+			eval("\$nShape = \$geos[0]->".$operacao."();");
+			return $nShape->toWkt();
+		}		
+		if ($n == 2)
+		{
+			eval("\$nShape = \$geos[0]->".$operacao."(\$geos[1]);");
+			return $nShape->toWkt();
+		}
+		if ($n > 2)
+		{
+			$geoc = $geos[0];
+			for($i=1;$i<$n;++$i)
+			{
+				eval("\$geoc = \$geoc->".$operacao."(\$geos[\$i]);");
+			}
+			return $geoc->toWkt();
+		}
+	}
 /*
 function: funcoesGeometrias
 
@@ -2217,7 +2259,7 @@ $dir_tmp - Diretório temporário do mapserver
 
 $imgdir - Diretório das imagens do mapa atual
 
-$lista - Arquivos com as geometrias
+$lista - String com a lista de nomes dos arquivos serializados que contém as geometrias
 
 $operacao - Tipo de análise.
 */
@@ -2231,32 +2273,13 @@ $operacao - Tipo de análise.
 		foreach ($lista as $l)
 		{
 			$geos = &$this->unserializeGeo($dir.$l);
-			//pega todas as geometrias
 			foreach ($geos["dados"] as $geo)
 			{
-				$geometrias[] = ms_shapeObjFromWkt($geo["wkt"]);
+				$geometrias[] = $geo["wkt"];
 				$valoresoriginais = array_merge($valoresoriginais,$geo["valores"]);
 			}
 		}	
-		if (count($geometrias) == 1)
-		{
-			eval("\$nShape = \$geometrias[0]->".$operacao."();");
-			$calculo[]["gwkt"] = $nShape->toWkt();
-		}		
-		if (count($geometrias) == 2)
-		{
-			eval("\$nShape = \$geometrias[0]->".$operacao."(\$geometrias[1]);");
-			$calculo[]["gwkt"] = $nShape->toWkt();
-		}
-		if (count($geometrias) > 2)
-		{
-			$geoc = $geometrias[0];
-			for($i=1;$i<count($geometrias);++$i)
-			{
-				eval("\$geoc = \$geoc->".$operacao."(\$geometrias[\$i]);");
-			}
-			$calculo[]["gwkt"] = $geoc->toWkt();
-		}
+		$calculo[]["gwkt"] = $this->aplicaFuncaoListaWKT($geometrias,$operacao);
 		$nomegeo = "";
 		if (count($calculo)>0)
 		{

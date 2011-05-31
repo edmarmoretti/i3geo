@@ -51,7 +51,8 @@ jsts.geom.util.GeometryExtractor.prototype.comps = null;
 jsts.geom.util.GeometryExtractor.extract = function(geom, clz, list) {
   list = list || [];
   if (geom instanceof clz) {
-    list.add(geom);
+    //list.add(geom);
+	list.push(geom);
   }
   else if (geom instanceof jsts.geom.GeometryCollection) {
     geom.apply(new jsts.geom.util.GeometryExtractor(clz, list));

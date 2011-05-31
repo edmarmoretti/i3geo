@@ -1121,5 +1121,19 @@ i3GEO.php = {
 		cp.set_transfer_mode('POST');
 		cp.set_response_type("JSON");
 		cp.call(p,"foo",funcao,"&pontos="+pontos+"&amostragem="+amostragem);
+	},
+	/*
+	Function: funcoesGeometriasWkt
+
+	<FUNCOESGEOMETRIASWKT>
+	*/
+	funcoesGeometriasWkt: function(funcao,listaWkt,operacao){
+		i3GEO.php.verifica();
+		var p = i3GEO.configura.locaplic+"/classesphp/mapa_controle.php?g_sid="+i3GEO.configura.sid+"&funcao=funcoesGeometriasWkt&operacao="+operacao,
+		cp = new cpaint();
+		cp.set_transfer_mode('POST');
+		cp.set_response_type("JSON");
+		cp.call(p,"foo",funcao,"&geometrias="+listaWkt);
 	}
+	
 };

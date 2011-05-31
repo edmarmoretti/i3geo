@@ -1295,119 +1295,125 @@ width:16px;
 }
 .yui-resize .yui-resize-handle{position:absolute;z-index:1;font-size:0;margin:0;padding:0;zoom:1;height:250px;width:5px;}
 
-.olControlEditingToolbar1 .panItemInactive {
+.olControlEditingToolbar1 .editorOLpanItemInactive {
 background-position:-0px 0;
 }
-.olControlEditingToolbar1 .panItemActive {
+.olControlEditingToolbar1 .editorOLpanItemActive {
 background-position:-0px -28px;
 }
-.olControlEditingToolbar1 .zoomboxItemInactive {
+.olControlEditingToolbar1 .editorOLzoomboxItemInactive {
 background-position:-29px 0;
 }
-.olControlEditingToolbar1 .zoomboxItemActive {
+.olControlEditingToolbar1 .editorOLzoomboxItemActive {
 background-position:-29px -28px;
 }
-.olControlEditingToolbar1 .zoomtotItemInactive {
+.olControlEditingToolbar1 .editorOLzoomtotItemInactive {
 background-position:-58px 0;
 }
-.olControlEditingToolbar1 .zoomtotItemActive {
+.olControlEditingToolbar1 .editorOLzoomtotItemActive {
 background-position:-58px -28px;
 }
-.olControlEditingToolbar1 .legendaItemInactive {
+.olControlEditingToolbar1 .editorOLlegendaItemInactive {
 background-position:-87px 0;
 }
-.olControlEditingToolbar1 .legendaItemActive {
+.olControlEditingToolbar1 .editorOLlegendaItemActive {
 background-position:-87px -28px;
 }
-.olControlEditingToolbar1 .distanciaItemInactive {
+.olControlEditingToolbar1 .editorOLdistanciaItemInactive {
 background-position:-116px 0;
 }
-.olControlEditingToolbar1 .distanciaItemActive {
+.olControlEditingToolbar1 .editorOLdistanciaItemActive {
 background-position:-116px -28px;
 }
-.olControlEditingToolbar1 .areaItemInactive {
+.olControlEditingToolbar1 .editorOLareaItemInactive {
 background-position:-145px 0;
 }
-.olControlEditingToolbar1 .areaItemActive {
+.olControlEditingToolbar1 .editorOLareaItemActive {
 background-position:-145px -28px;
 }
-.olControlEditingToolbar1 .identificaItemInactive {
+.olControlEditingToolbar1 .editorOLidentificaItemInactive {
 background-position:-174px 0;
 }
-.olControlEditingToolbar1 .identificaItemActive {
+.olControlEditingToolbar1 .editorOLidentificaItemActive {
 background-position:-174px -28px;
 }
-.olControlEditingToolbar1 .linhaItemInactive {
+.olControlEditingToolbar1 .editorOLlinhaItemInactive {
 background-position:-203px 0;
 }
-.olControlEditingToolbar1 .linhaItemActive {
+.olControlEditingToolbar1 .editorOLlinhaItemActive {
 background-position:-203px -28px;
 }
-.olControlEditingToolbar1 .pontoItemInactive {
+.olControlEditingToolbar1 .editorOLpontoItemInactive {
 background-position:-232px 0;
 }
-.olControlEditingToolbar1 .pontoItemActive {
+.olControlEditingToolbar1 .editorOLpontoItemActive {
 background-position:-232px -28px;
 }
-.olControlEditingToolbar1 .poligonoItemInactive {
+.olControlEditingToolbar1 .editorOLpoligonoItemInactive {
 background-position:-261px 0;
 }
-.olControlEditingToolbar1 .poligonoItemActive {
+.olControlEditingToolbar1 .editorOLpoligonoItemActive {
 background-position:-261px -28px;
 }
-.olControlEditingToolbar1 .editaItemInactive {
+.olControlEditingToolbar1 .editorOLeditaItemInactive {
 background-position:-290px 0;
 }
-.olControlEditingToolbar1 .editaItemActive {
+.olControlEditingToolbar1 .editorOLeditaItemActive {
 background-position:-290px -28px;
 }
-.olControlEditingToolbar1 .apagaItemInactive {
+.olControlEditingToolbar1 .editorOLapagaItemInactive {
 background-position:-319px 0;
 }
-.olControlEditingToolbar1 .apagaItemActive {
+.olControlEditingToolbar1 .editorOLapagaItemActive {
 background-position:-319px -28px;
 }
-.olControlEditingToolbar1 .selecaoItemInactive {
+.olControlEditingToolbar1 .editorOLselecaoItemInactive {
 background-position:-348px 0;
 }
-.olControlEditingToolbar1 .selecaoItemActive {
+.olControlEditingToolbar1 .editorOLselecaoItemActive {
 background-position:-348px -28px;
 }
-.olControlEditingToolbar1 .capturaItemInactive {
+.olControlEditingToolbar1 .editorOLcapturaItemInactive {
 background-position:-377px 0;
 }
-.olControlEditingToolbar1 .capturaItemActive {
+.olControlEditingToolbar1 .editorOLcapturaItemActive {
 background-position:-377px -28px;
 }
-.olControlEditingToolbar1 .procuraItemInactive {
+.olControlEditingToolbar1 .editorOLprocuraItemInactive {
 background-position:-406px 0;
 }
-.olControlEditingToolbar1 .procuraItemActive {
+.olControlEditingToolbar1 .editorOLprocuraItemActive {
 background-position:-406px -28px;
 }
-.olControlEditingToolbar1 .salvaItemInactive {
+.olControlEditingToolbar1 .editorOLsalvaItemInactive {
 background-position:-435px 0;
 }
-.olControlEditingToolbar1 .salvaItemActive {
+.olControlEditingToolbar1 .editorOLsalvaItemActive {
 background-position:-435px -28px;
 }
-.olControlEditingToolbar1 .fechaItemInactive {
+.olControlEditingToolbar1 .editorOLfechaItemInactive {
 background-position:-464px 0;
 }
-.olControlEditingToolbar1 .fechaItemActive {
+.olControlEditingToolbar1 .editorOLfechaItemActive {
 background-position:-464px -28px;
 }
-.olControlEditingToolbar1 .ajudaItemInactive {
+.olControlEditingToolbar1 .editorOLajudaItemInactive {
 background-position:-493px 0;
 }
-.olControlEditingToolbar1 .ajudaItemActive {
+.olControlEditingToolbar1 .editorOLajudaItemActive {
 background-position:-493px -28px;
 }
-.olControlEditingToolbar1 .propriedadesItemInactive {
+.olControlEditingToolbar1 .editorOLpropriedadesItemInactive {
 background-position:-522px 0;
 }
-.olControlEditingToolbar1 .propriedadesItemActive {
+.olControlEditingToolbar1 .editorOLpropriedadesItemActive {
 background-position:-522px -28px;
+}
+.olControlEditingToolbar1 .editorOLuniaoItemInactive {
+	background-position:-551px 0;
+}
+.olControlEditingToolbar1 .editorOLuniaoItemActive {
+	background-position:-551px -28px;
 }
 .olControlEditingToolbar1 {
 	width:600px;

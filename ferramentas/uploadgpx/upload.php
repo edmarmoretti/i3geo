@@ -38,9 +38,10 @@ if (isset($_FILES['i3GEOuploadgpx']['name']))
 	if($status == 1)
 	{
 		echo "<p class='paragrafo' >Arquivo enviado. Adicionando tema...</p>";
-		$novolayer = ms_newLayerObj($mapa);
+		
 		$tipos = array("waypoints","routes","tracks","route_points","track_points");
 		foreach($tipos as $tipo){
+			$novolayer = ms_newLayerObj($mapa);
 			$novolayer->set("connection",$dirmap."/".$_FILES['i3GEOuploadgpx']['name']);
 			if(ms_GetVersionInt() > 50201)
 			{$novolayer->setconnectiontype(MS_OGR);}

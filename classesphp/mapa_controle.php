@@ -311,7 +311,7 @@ O mapfile é alterado e salvo novamente com os novos layers.
 /*
 Valor: FUNCOESGEOMETRIAS
 
-Processa geometrias, armazenadas no formato I3Geo, gerando uma nova geometria.
+Processa geometrias, armazenadas no formato i3Geo, gerando uma nova geometria.
 União, intersecção, etc.
 
 <Analise->funcoesGeometrias>
@@ -325,6 +325,21 @@ União, intersecção, etc.
 			$m->calculaGeometrias($dir_tmp,$imgdir,basename($retorno),"perimetro");
 		}
 	break;
+/*
+Valor: FUNCOESGEOMETRIASWKT
+
+Processa geometrias recebidas como WKT gerando uma nova geometria.
+União, intersecção, etc.
+
+A lista de WKTs deve usar o separador |
+
+<Analise->funcoesGeometriasWKT>
+*/
+	case "FUNCOESGEOMETRIASWKT":
+		include_once("classe_analise.php");
+		$m = new Analise($map_file,"");
+		$retorno = $m->aplicaFuncaoListaWKT(explode("|",$geometrias),$operacao);
+	break;	
 /*
 Valor: CALCULAGEOMETRIAS
 
