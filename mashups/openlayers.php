@@ -65,8 +65,6 @@ if(isset($botoes)){
 	{$objBotoes[] = "'poligono':true";}
 	if(in_array("edita",$botoes))
 	{$objBotoes[] = "'edita':true";}
-	if(in_array("uniao",$botoes))
-	{$objBotoes[] = "'uniao':true";}
 	if(in_array("apaga",$botoes))
 	{$objBotoes[] = "'apaga':true";}
 	if(in_array("procura",$botoes))
@@ -77,6 +75,10 @@ if(isset($botoes)){
 	{$objBotoes[] = "'ajuda':true";}	
 	if(in_array("fecha",$botoes))
 	{$objBotoes[] = "'fecha':true";}
+	if(in_array("tools",$botoes))
+	{$objBotoes[] = "'tools':true";}
+	if(in_array("undo",$botoes))
+	{$objBotoes[] = "'undo':true";}
 	if(in_array("propriedades",$botoes))
 	{$objBotoes[] = "'propriedades':true";}	
 	$botoes = "{".implode(",",$objBotoes)."}";
@@ -179,6 +181,8 @@ Parâmetros:
 		captura
 		procura
 		propriedades
+		tools
+		undo
 		salva
 		ajuda
 		fecha

@@ -1205,7 +1205,8 @@ Include:
 		$epsg = "EPSG:4291";
 		$e4291 = "nao";
 		$ecrs = "nao";
-		$pos = explode(",",$proj);
+		$pos = str_replace(" ",",",$proj);
+		$pos = explode(",",$pos);
 		if (count($pos) > 1)
 		{
 			foreach ($pos as $p)
@@ -1216,12 +1217,12 @@ Include:
 				if ($p[1] == "4291")
 				{$epsg = "EPSG:4291";$e4291="sim";}
 				if ($p[1] == "84")
-				{$ecrs = "CRS:84";}
+				{$ecrs = "CRS:84";$ecrs = "sim";}
 			}
 		}
 		else {$epsg = $proj;}
 		if ($e4291 == "sim"){$epsg = "EPSG:4291";}
-		if ($ecrs !== "sim"){$epsg = $ecrs;}
+		if ($ecrs == "sim"){$epsg = $ecrs;}
 		$epsg = trim($epsg);
 		$layer->setmetadata("wms_srs",$epsg);
 		$layer->setmetadata("wms_crs",$epsg);
