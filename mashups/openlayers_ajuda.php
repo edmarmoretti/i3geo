@@ -35,71 +35,79 @@ p,td
 </div> 
 <table class="olControlEditingToolbar1" >
 	<tr>
-		<td style=width:20px ><div class="procuraItemInactive"></div></td>
+		<td style=width:20px ><div class="editorOLprocuraItemInactive"></div></td>
 		<td>Procure um elemento no tema que estiver ativo</td>
 	</tr>
 	<tr>
-		<td style=width:20px ><div class="panItemInactive"></div></td>
+		<td style=width:20px ><div class="editorOLpanItemInactive"></div></td>
 		<td>Clique e arraste um ponto no mapa para deslocar a região visível</td>
 	</tr>
 	<tr>
-		<td style=width:20px ><div class="zoomboxItemInactive"></div></td>
+		<td style=width:20px ><div class="editorOLzoomboxItemInactive"></div></td>
 		<td>Desenhe um retângulo no mapa para alterar a região visível</td>
 	</tr>
 	<tr>
-		<td style=width:20px ><div class="zoomtotItemInactive"></div></td>
+		<td style=width:20px ><div class="editorOLzoomtotItemInactive"></div></td>
 		<td>Altere a abrangência do mapa para que a região toda fique visível</td>
 	</tr>
 	<tr>
-		<td style=width:20px ><div class="legendaItemInactive"></div></td>
+		<td style=width:20px ><div class="editorOLlegendaItemInactive"></div></td>
 		<td>Veja a legenda do mapa</td>
 	</tr>
 	<tr>
-		<td style=width:20px ><div class="distanciaItemInactive"></div></td>
+		<td style=width:20px ><div class="editorOLdistanciaItemInactive"></div></td>
 		<td>Calcule a distância entre pontos indicados no mapa. Clique em vários lugares, traçando uma linha. Para terminar, clique duas vezes sobre o mesmo ponto.</td>
 	</tr>
 	<tr>
-		<td style=width:20px ><div class="areaItemInactive"></div></td>
+		<td style=width:20px ><div class="editorOLareaItemInactive"></div></td>
 		<td>Calcule a área de uma região do mapa. Clique em vários pontos, traçando uma figura. Para terminar, clique duas vezes sobre o mesmo ponto.</td>
 	</tr>
 	<tr>
-		<td style=width:20px ><div class="identificaItemInactive"></div></td>
+		<td style=width:20px ><div class="editorOLidentificaItemInactive"></div></td>
 		<td>Clique em um lugar no mapa para ver as informações descritivas. Ao ativar essa função, se aberta uma telka com a lista de camadas, escolha qual camada do mapa será utilizada para obter os dados. No cabeçalho dos resultados, aparecerá a opção 'capturar'. Clique nela para obter a geometria encontrada. Essa geometria poderá então ser editada.</td>
 	</tr>
 	<tr>
-		<td style=width:20px ><div class="linhaItemInactive"></div></td>
-		<td>Digitalize uma nova linha</td>
+		<td style=width:20px ><div class="editorOLlinhaItemInactive"></div></td>
+		<td>Digitalize uma nova linha. Clique em um nó inicial e nos vértices posteriores. Termine com um duplo clique.</td>
 	</tr>
 	<tr>
-		<td style=width:20px ><div class="pontoItemInactive"></div></td>
+		<td style=width:20px ><div class="editorOLpontoItemInactive"></div></td>
 		<td>Digitalize um novo ponto</td>
 	</tr>
 	<tr>
-		<td style=width:20px ><div class="poligonoItemInactive"></div></td>
-		<td>Digitalize um novo polígono</td>
+		<td style=width:20px ><div class="editorOLpoligonoItemInactive"></div></td>
+		<td>Digitalize um novo polígono. Clique em um nó inicial e nos vértices posteriores. Termine com um duplo clique.</td>
 	</tr>
 	<tr>
-		<td style=width:20px ><div class="editaItemInactive"></div></td>
-		<td>Edite uma geometria selecionada. Após ativar essa opção, clique na geometria desejada para que as opções de edição fiquem ativas. Clique e arraste o ponto ou vértice destacado ou pressione 'del' para apagar um ponto indicado.</td>
+		<td style=width:20px ><div class="editorOLeditaItemInactive"></div></td>
+		<td>Edite uma geometria selecionada. Após ativar essa opção, clique na geometria desejada para que as opções de edição fiquem ativas. Clique e arraste o ponto ou vértice destacado ou pressione 'del' para apagar um ponto ou vértice indicado.</td>
 	</tr>
 	<tr>
-		<td style=width:20px ><div class="selecaoItemInactive"></div></td>
+		<td style=width:20px ><div class="editorOLtoolsItemInactive"></div></td>
+		<td>Modifique as geometrias aplicando operações como união, intersecção, etc.</td>
+	</tr>	
+	<tr>
+		<td style=width:20px ><div class="editorOLselecaoItemInactive"></div></td>
 		<td>Clique sobre uma geometria para selecioná-la. Utilize a tecla 'shift' para adicionar ou remover geometrias de um conjunto selecionado.</td>
 	</tr>
 	<tr>
-		<td style=width:20px ><div class="apagaItemInactive"></div></td>
+		<td style=width:20px ><div class="editorOLapagaItemInactive"></div></td>
 		<td>Clique para apagar as geometrias selecionadas.</td>
 	</tr>
 	<tr>
-		<td style=width:20px ><div class="salvaItemInactive"></div></td>
+		<td style=width:20px ><div class="editorOLundoItemInactive"></div></td>
+		<td>Recupere a última geometria apagada ou modificada.</td>
+	</tr>		
+	<tr>
+		<td style=width:20px ><div class="editorOLsalvaItemInactive"></div></td>
 		<td>Salve ou obtenha as coordenadas das geometrias selecionadas.</td>
 	</tr>
 	<tr>
-		<td style=width:20px ><div class="propriedadesItemInactive"></div></td>
-		<td>Defina as propriedades de edição, como a distância de aproximação eoutros comportamentos das operações</td>
+		<td style=width:20px ><div class="editorOLpropriedadesItemInactive"></div></td>
+		<td>Defina as propriedades de edição, como a distância de aproximação e outros comportamentos das operações. Defina também o comportamento da ferramenta de edição, permitindo alterar uma figura ou rotacioná-la, movê-la ou redimensionar.</td>
 	</tr>	
 	<tr>
-		<td style=width:20px ><div class="ajudaItemInactive"></div></td>
+		<td style=width:20px ><div class="editorOLajudaItemInactive"></div></td>
 		<td>Abre essa página de ajuda.</td>
 	</tr>	
 </table>

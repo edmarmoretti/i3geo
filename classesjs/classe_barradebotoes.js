@@ -1002,7 +1002,7 @@ i3GEO.barraDeBotoes = {
 					balloonAjuda.cleanup();
 					balloonIsVisible = false;
 					balloonAjuda.showTooltip(objeto,mensagem,null,null,null,pos[0]+12,pos[1]);
-					try{clearTimeout(timeAjudaBotoes);}catch(e){};
+					try{clearTimeout(timeAjudaBotoes);}catch(e){}
 					timeAjudaBotoes = setTimeout(function(){balloonAjuda.cleanup();},4000);
 				},4000);
 			}

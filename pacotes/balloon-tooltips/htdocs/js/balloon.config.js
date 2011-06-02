@@ -1,3 +1,4 @@
+/*jslint white:false,undef: false, rhino: true, onevar: true, evil: false */
 /* 
 
 This file contains the default configuration options for balloon tooltips.
@@ -96,5 +97,5 @@ BalloonConfig = function(balloon, set) {
       balloon.faedOut     = 200;
       break;
   }
-}
+};
 

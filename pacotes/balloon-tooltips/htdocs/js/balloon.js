@@ -1,3 +1,4 @@
+/*jslint white:false,undef: false, rhino: true, onevar: true, evil: false */
 /*
  * balloon.js -- a DHTML library for balloon tooltips
  * 
@@ -55,7 +56,7 @@ var Balloon = function () {
 	
 	// scrolling aborts visible balloons
 	var myObject = this.isIE() ? window : document;
-	myObject.onscroll  = function(){Balloon.prototype.nukeTooltip()};
+	myObject.onscroll  = function(){Balloon.prototype.nukeTooltip();};
 	
 	// make balloons go away if the page is unloading or waiting
 	// to unload.
@@ -71,7 +72,7 @@ var Balloon = function () {
 	}
 	
 	return this;
-}
+};
 
 //////////////////////////////////////////////////////////////////////////
 // This is the method that is called on mouseover.  It has a built-in   //
@@ -180,9 +181,9 @@ Balloon.prototype.showTooltip = function(evt,caption,sticky,width,height,x,y) {
 				if (mouseoutFunc) {
 					mouseoutFunc();
 				}
-			}
+			};
 			if (!mouseOver) {
-				el.onmouseup  = function() {return false};
+				el.onmouseup  = function() {return false;};
 			}
 			//el.onmouseout = closeBalloon;
 		}  
@@ -256,7 +257,7 @@ Balloon.prototype.showTooltip = function(evt,caption,sticky,width,height,x,y) {
 		
 		// preload balloon images 
 		if (!this.preloadedImages) {
-			var images = new Array(this.balloonImage, this.closeButton);
+			var images = [this.balloonImage, this.closeButton];
 			if (this.ieImage) {
 				images.push(this.ieImage);
 			}
@@ -289,7 +290,7 @@ Balloon.prototype.showTooltip = function(evt,caption,sticky,width,height,x,y) {
 		this.setActiveCoordinates([]);
 		this.doShowTooltip();
 		this.pending = true;
-}
+};
 
 // Preload the balloon background images
 Balloon.prototype.preload = function(src) {
@@ -302,7 +303,7 @@ Balloon.prototype.preload = function(src) {
 	this.setStyle(i,'top',-8000);
 	document.body.appendChild(i);
 	document.body.removeChild(i);
-}
+};
 
 
 /////////////////////////////////////////////////////////////////////
@@ -385,7 +386,7 @@ Balloon.prototype.doShowTooltip = function() {
 	self.startY = self.activeTop;
 
 	self.fade(0,self.opacity,self.fadeIn);
-}
+};
 
 Balloon.prototype.addCloseButton = function () {
 	var self         = currentBalloonClass;
@@ -419,7 +420,7 @@ Balloon.prototype.addCloseButton = function () {
 	self.setStyle(closeButton,'display','inline');
 	self.setStyle(closeButton,'cursor','pointer');
 	self.setStyle(closeButton,'z-index',999999999);
-}
+};
 
 // use a fresh object every time to make sure style 
 // is not polluted
@@ -451,7 +452,7 @@ Balloon.prototype.makeBalloon = function() {
 		self.timeoutAutoClose = window.setTimeout(this.hideTooltip,self.displayTime);
 	}
 	return balloon;
-}
+};
 
 Balloon.prototype.setBalloonStyle = function(vOrient,hOrient,pageWidth,pageLeft) {
 	var self = currentBalloonClass;
@@ -672,7 +673,7 @@ Balloon.prototype.setBalloonStyle = function(vOrient,hOrient,pageWidth,pageLeft)
 	
 	self.hOrient = hOrient;
 	self.vOrient = vOrient;
-}
+};
 
 
 // Fade method adapted from an example on 
@@ -692,7 +693,7 @@ Balloon.prototype.fade = function(opacStart, opacEnd, millisec) {
 		self.timeoutFade = setTimeout('Balloon.prototype.setOpacity('+o+')',(timer*speed));
 	timer++;
 	}
-}
+};
 
 Balloon.prototype.setOpacity = function(opc) {
 	var self = currentBalloonClass;
@@ -707,7 +708,7 @@ Balloon.prototype.setOpacity = function(opc) {
 			      for (var i=0;i<len;i++) {
 				      self.doOpacity(o,opc,parts[i]);
 			      }
-}
+};
 
 Balloon.prototype.doOpacity = function(op,opc,el) {
 	var self = currentBalloonClass;
@@ -724,11 +725,11 @@ Balloon.prototype.doOpacity = function(op,opc,el) {
 	
 	// old Safari
 	self.setStyle(el,'KhtmlOpacity',op);
-}
+};
 
 Balloon.prototype.nukeTooltip = function() {
 	this.hideTooltip(1);
-}
+};
 
 Balloon.prototype.hideTooltip = function(override) { 
 	// some browsers pass the event object == we don't want it
@@ -751,7 +752,7 @@ Balloon.prototype.hideTooltip = function(override) {
 	
 	balloonIsVisible = false;
 	balloonIsSticky  = false;
-}
+};
 
 // Garbage collection
 Balloon.prototype.cleanup = function() {
@@ -772,7 +773,7 @@ Balloon.prototype.cleanup = function() {
 	if (close)  { body.removeChild(close)  }
 	if (cont)   { body.removeChild(cont)   }
 	//edmar
-}
+};
 
 
 // this function is meant to be called externally to clear
@@ -785,7 +786,7 @@ hideAllTooltips = function() {
 					      balloonIsVisible    = false;
 	balloonIsSticky     = false;
 	currentBalloonClass = null;
-}
+};
 
 
 // Track the active mouseover coordinates
@@ -861,7 +862,7 @@ Balloon.prototype.setActiveCoordinates = function(evt) {
 			}
 	}
 	return true;
-}
+};
 
 ////
 // event XY and getEventTarget Functions based on examples by Peter-Paul
@@ -882,7 +883,7 @@ Balloon.prototype.eventXY = function(event) {
 		XY[1] = e.clientY + document.body.scrollTop  + document.documentElement.scrollTop;
 		return XY;
 	}
-}
+};
 
 Balloon.prototype.getEventTarget = function(event) {
 	var targ;
@@ -891,7 +892,7 @@ Balloon.prototype.getEventTarget = function(event) {
 					 else if (e.srcElement) targ = e.srcElement;
 					 if (targ.nodeType == 3) targ = targ.parentNode; // Safari
   return targ;
-}
+};
 ////
 
 
@@ -930,7 +931,7 @@ Balloon.prototype.setStyle = function(el,att,val) {
 		
 		YAHOO.util.Dom.setStyle(el,att,val);
 	}
-}
+};
 
 // Uses YAHOO's region class for element coordinates
 Balloon.prototype.getLoc = function(el,request) {
@@ -947,7 +948,7 @@ Balloon.prototype.getLoc = function(el,request) {
 	}
 	
 	return region;
-}
+};
 
 // We don't know if numbers are overridden with strings
 // so play it safe
@@ -962,7 +963,7 @@ Balloon.prototype.parseIntAll = function() {
 	this.maxWidth    = parseInt(this.maxWidth);
 	this.minWidth    = parseInt(this.minWidth);
 	this.fadeIn      = parseInt(this.fadeIn) || 1000;
-}
+};
 
 
 // show/hide select elements in older IE
@@ -1008,7 +1009,7 @@ Balloon.prototype.showHide = function(visible) {
 				      }
 			      }
 		      }
-}
+};
 
 // Try to find overlap
 Balloon.prototype.isOverlap = function(el1,el2) {
@@ -1022,7 +1023,7 @@ Balloon.prototype.isOverlap = function(el1,el2) {
 		intersect = new Array((intersect.right - intersect.left),(intersect.bottom - intersect.top));
 	}
 	return intersect;
-}
+};
 
 // Coordinate-based test for the same element
 Balloon.prototype.isSameElement = function(el1,el2) {
@@ -1031,7 +1032,7 @@ Balloon.prototype.isSameElement = function(el1,el2) {
 	var R2 = this.getLoc(el2,'region');
 	var same = R1.contains(R2) && R2.contains(R1);
 	return same ? true : false;
-}
+};
 
 
 ///////////////////////////////////////////////////////
@@ -1100,7 +1101,7 @@ Balloon.prototype.getAndCheckContents = function(caption) {
 	this.loadedFromElement = false;
 	
 	return this.currentHelpText;;
-}
+};
 
 
 ///////////////////////////////////////////////////////
@@ -1146,27 +1147,27 @@ Balloon.prototype.getContents = function(section) {
 	else {
 		return section;
 	}
-}
+};
 
 
 // test for internet explorer
 Balloon.prototype.isIE = function() {
 	return document.all && !window.opera;
-}
+};
 
 // test for internet explorer (but not IE7)
 Balloon.prototype.isOldIE = function() {
 	if (navigator.appVersion.indexOf("MSIE") == -1) return false;
 	    var temp=navigator.appVersion.split("MSIE");
 	return parseFloat(temp[1]) < 7;
-}
+};
 
 // test for Konqueror
 Balloon.prototype.isKonqueror = function() {
 	return navigator.userAgent.toLowerCase().indexOf( 'konqueror' ) != -1;
-}
+};
 
 // and Google chrome
 Balloon.prototype.isChrome = function() {
 	return navigator.userAgent.toLowerCase().indexOf('chrome') > -1;
-}
+};
