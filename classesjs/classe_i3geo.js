@@ -581,7 +581,8 @@ i3GEO = {
 	*/
 	reCalculaTamanho: function(){
 		var diminuix,diminuiy,menos,novow,novoh,w,h,temp,
-			antigoh = i3GEO.parametros.h;
+			antigoh = i3GEO.parametros.h,
+			antigow = i3GEO.parametros.w;
 		diminuix = (navm) ? i3GEO.configura.diminuixM : i3GEO.configura.diminuixN;
 		diminuiy = (navm) ? i3GEO.configura.diminuiyM : i3GEO.configura.diminuiyN;
 		menos = 0;
@@ -595,8 +596,8 @@ i3GEO = {
 		temp = i3GEO.util.tamanhoBrowser();
 		novow = temp[0];
 		novoh = temp[1];
-		temp = antigoh - (novoh - diminuiy);
-		if(temp > -100 && temp < 100)
+		temp = (antigoh - (novoh - diminuiy)) + (antigow - (novow - diminuix));
+		if(temp > -150 && temp < 150)
 		{return}
 		
 		document.body.style.height = novoh;
@@ -634,8 +635,10 @@ i3GEO = {
 				break;
 			case "openlayers":
 				i3GEO.Interface.openlayers.zoom2ext(i3GEO.parametros.mapexten);
+				i3geoOL.updateSize();
 				break;
 		}
+		i3GEO.guias.ALTURACORPOGUIAS = h;
 		return [w,h];
 	},
 	/*

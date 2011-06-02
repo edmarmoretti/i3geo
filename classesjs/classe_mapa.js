@@ -72,7 +72,10 @@ i3GEO.mapa = {
 			var temp = setTimeout(function(){
 				i3GEO.reCalculaTamanho();
 				i3GEO.barraDeBotoes.recria("i3geo_barra2");
-				i3GEO.guias.escondeGuias();
+				if(i3GEO.Interface.TABLET === true)
+				{i3GEO.guias.escondeGuias();}
+				else
+				{i3GEO.guias.ajustaAltura();}
 			},2000);
 		};
 	},

@@ -1024,7 +1024,8 @@ i3GEO.barraDeBotoes = {
 	},
 	editor:{
 		inicia: function(){
-			//var idjanela = i3GEO.barraDeBotoes.editor.criaJanela();
+			if(navm)
+			{alert("O editor não funciona corretamente nesse navegador.");}
 			i3GEO.barraDeBotoes.editor.carregaJs();
 		},
 		carregaJs: function(idjanela){

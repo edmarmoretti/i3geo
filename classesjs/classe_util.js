@@ -2347,7 +2347,7 @@ i3GEO.util = {
 		// the more standards compliant browsers (mozilla/netscape/opera/IE7) use window.innerWidth and window.innerHeight
 		if (typeof window.innerWidth != 'undefined')
 		{
-			viewportwidth = window.innerWidth;
+			viewportwidth = window.innerWidth,
 			viewportheight = window.innerHeight;
 		}
 
@@ -2357,7 +2357,7 @@ i3GEO.util = {
 		&& typeof document.documentElement.clientWidth !=
 		'undefined' && document.documentElement.clientWidth != 0)
 		{
-			viewportwidth = document.documentElement.clientWidth;
+			viewportwidth = document.documentElement.clientWidth,
 			viewportheight = document.documentElement.clientHeight;
 		}
 
@@ -2365,7 +2365,7 @@ i3GEO.util = {
 
 		else
 		{
-			viewportwidth = document.getElementsByTagName('body')[0].clientWidth;
+			viewportwidth = document.getElementsByTagName('body')[0].clientWidth,
 			viewportheight = document.getElementsByTagName('body')[0].clientHeight;
 		}
 		viewportwidth = viewportwidth- i3GEO.util.getScrollerWidth();
