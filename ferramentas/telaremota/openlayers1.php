@@ -108,17 +108,18 @@ function inicia(){
 	OpenLayers.ImgPath = "../../pacotes/openlayers/img/"
 	OpenLayers.Lang.setCode("pt-BR");
 	var urlLayer = "../../classesphp/mapa_openlayers.php?DESLIGACACHE=sim&g_sid=<?php echo $_GET["g_sid"];?>&telaR=<?php echo $_GET["telaR"];?>";
+	
 	var remoto = new OpenLayers.Layer.WMS(
 		"Remoto",
 		urlLayer,
 		{transparent: "false", format: "image/png"},
-		{isBaseLayer:false,singleTile:true}
+		{isBaseLayer:false,singleTile:true,buffer:0,gutter:0,ratio:1}
 	);
 	var remotoFundo = new OpenLayers.Layer.WMS(
 		"Fundo",
 		urlLayer+"&tipolayer=fundo",
 		{transparent: "false", format: "image/png"},
-		{isBaseLayer:true,singleTile:true,visibility:true}
+		{isBaseLayer:true,singleTile:true,visibility:true,buffer:0,gutter:0,ratio:1}
 	);
 	var bra = new OpenLayers.Layer.WMS( 
 		"Base carto MMA",
@@ -137,7 +138,8 @@ function inicia(){
 		controls: [
 			new OpenLayers.Control.Attribution(),
 			new OpenLayers.Control.LayerSwitcher(),
-			new OpenLayers.Control.ScaleLine()
+			new OpenLayers.Control.ScaleLine(),
+			new OpenLayers.Control.Navigation()
 		] 		
 	});	
 	mapaRemoto.addLayers([remotoFundo,bra,osm,remoto]);

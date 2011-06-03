@@ -202,11 +202,12 @@ if($_GET["REQUEST"] == "GetFeatureInfo" || $_GET["request"] == "getfeature"){
 }
 $o = $mapa->outputformat;
 $o->set("imagemode",MS_IMAGEMODE_RGBA);
-$legenda = $mapa->legend;
-$legenda->set("status",MS_OFF);
-$escala = $mapa->scalebar;
-$escala->set("status",MS_OFF);
-
+if(!isset($_GET["telaR"])){
+	$legenda = $mapa->legend;
+	$legenda->set("status",MS_OFF);
+	$escala = $mapa->scalebar;
+	$escala->set("status",MS_OFF);
+}
 //
 //se o layer não for do tipo fundo
 //

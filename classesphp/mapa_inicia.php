@@ -213,6 +213,12 @@ function iniciaMapa()
 	$nomefundo = str_replace(".map","fundo.map",$map_file);
 	$m->mapa->save($nomefundo);
 	$mf = ms_newMapObj($nomefundo);
+	$numlayers = $mf->numlayers;
+	for($i = 0;$i < $numlayers;$i++)
+	{
+		$l = $mf->getLayer($i);
+		$l->set("status",MS_DELETE);
+	}
 	$of = $mf->outputformat;
 	$of->set("driver","GD/PNG");
 	$temp = $mf->scalebar;
