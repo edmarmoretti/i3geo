@@ -44,6 +44,8 @@ i3GEO.social = {
 		{return "<iframe src='http://www.facebook.com/plugins/like.php?href="+url+"&amp;layout=button_count&amp;show_faces=false&amp;action=like&amp;colorscheme=light&amp;height=21' scrolling='no' frameborder='0' style='border:none; overflow:hidden; width:100px; height:21px;' allowTransparency='true'></iframe>";}
 	},
 	publicarTwitter: function(url,tipo){
+		var re = new RegExp("=","g");
+		url = url.replace(re,'%3d');
 		if(tipo === "comtotal")
 		{return '<iframe allowtransparency="true" frameborder="0" scrolling="no" src="http://platform.twitter.com/widgets/tweet_button.html?count=horizontal&via=i3geo&url='+url+'" style="width:100px; height:21px;"></iframe>';}
 		if(tipo === "semtotal")

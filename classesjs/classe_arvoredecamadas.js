@@ -836,7 +836,7 @@ i3GEO.arvoreDeCamadas = {
 			iconesNode = new YAHOO.widget.HTMLNode({html:tnome,enableHighlight: false,isLeaf:true,expanded:false}, node);
 			if(funcoes.compartilhar === true && ltema.permitecomentario.toLowerCase() !== "nao")
 			{
-				temp = i3GEO.configura.locaplic+"/ms_criamapa.php?layers="+ltema.name;
+				temp = i3GEO.configura.locaplic+"/ms_criamapa.php?layers="+ltema.name+"&amp;temasa="+ltema.name;				
 				tnome = i3GEO.social.compartilhar("",temp,temp,"semtotal");
 				iconesNode = new YAHOO.widget.HTMLNode({html:tnome,enableHighlight:false,isLeaf:true,expanded:false},node);
 			}
