@@ -172,6 +172,8 @@ function: criaLegenda
 
 Gera a legenda processando o template HTML definido na construção da classe.
 
+Se o tema for um WMS ou se o metadata legendaimg estiver definido, executa $this->tabelaLegenda
+
 Return:
 
 string com a legenda HTML
@@ -182,9 +184,9 @@ string com a legenda HTML
 		$numlayers = $this->mapa->numlayers;
 		if($this->nome != "")
 		{
-			//verifica se é wms
+			//verifica se é wms ou se o metadata legendaimg está definido
 			$c = $this->layer->connectiontype;
-			if (($c == 7))
+			if ($c == 7 || $this->layer->getmetadata("legendaimg") != "")
 			{
 				return($this->tabelaLegenda());
 			}
@@ -281,17 +283,22 @@ array
 			//verifica se é wms ou wfs
 			$c = $layer->connectiontype;
 			$s = $layer->getmetadata("wms_sld_url");
-			if (($c == 7))
+			$im = $layer->getmetadata("legendaimg");
+			if ($c == 7 || $im != "")
 			{
-				$con = $layer->connection;
-				$ver = $layer->getmetadata("wms_server_version");
-				$lwms = $layer->getmetadata("wms_name");
-				$f = $layer->getmetadata("wms_formatlist");
-				$f = explode(",",$f);
-				$f = $f[0];
-				$imgLeg = $con."&request=GetLegendGraphic&version=".$ver."&service=wms&layer=".$lwms."&format=".$f."&SLD=".$s;
-				if ($layer->getmetadata("legendawms") != "")
-				{$imgLeg = $layer->getmetadata("legendawms");}
+				if($c == 7){
+					$con = $layer->connection;
+					$ver = $layer->getmetadata("wms_server_version");
+					$lwms = $layer->getmetadata("wms_name");
+					$f = $layer->getmetadata("wms_formatlist");
+					$f = explode(",",$f);
+					$f = $f[0];
+					$imgLeg = $con."&request=GetLegendGraphic&version=".$ver."&service=wms&layer=".$lwms."&format=".$f."&SLD=".$s;
+					if ($layer->getmetadata("legendawms") != "")
+					{$imgLeg = $layer->getmetadata("legendawms");}
+				}
+				else
+				{$imgLeg = $im;}
 				$linhas[] = array("tema"=>$l,"idclasse"=>"","nomeclasse"=>"","expressao"=>"","expressao"=>"","imagem"=>$imgLeg);
 			}
 			else

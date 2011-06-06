@@ -1,0 +1,46 @@
+MAP
+  FONTSET "../symbols/fontes.txt"
+  SYMBOLSET "../symbols/simbolos.sym"
+  LAYER
+    CONNECTION ""
+    DATA "c:\ms4w\apache\htdocs\i3geo\aplicmap\dados\sc22\povoado.shp"
+    METADATA
+      "ltempoitemimagem"	""
+      "cache"	""
+      "ltempoitemdescricao"	""
+      "CLASSE"	"SIM"
+      "ltempoiteminicio"	""
+      "palletestep"	""
+      "ltempoitemtip"	""
+      "iconetema"	""
+      "ltempoitemtitulo"	""
+      "description_template"	""
+      "ltempoitemlink"	""
+      "palletefile"	""
+      "ltempoformatodata"	""
+      "permitecomentario"	""
+      "ltempoitemicone"	""
+      "arquivodownload"	""
+      "TEMA"	"Povoado"
+      "editorsql"	""
+      "legendaimg"	"http://www.rockingsmileys.com/wp-content/uploads/2011/03/Happy_eyebrowes_smileys-150x150.png"
+      "ltempoitemfim"	""
+    END
+    NAME "povoado"
+    STATUS OFF
+    TYPE POINT
+    UNITS METERS
+    CLASS
+      NAME ""
+      STYLE
+        ANGLE 360
+        COLOR 0 0 0
+        SIZE 5
+        SYMBOL "ponto"
+        WIDTH 1
+      END
+    END
+  END
+
+END
+
