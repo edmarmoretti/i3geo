@@ -1634,6 +1634,18 @@ Lista os pontos dos elementos de um arquivo shp.
 		$retorno = $m->listaPontosShape();
 	break;
 /*
+Valor: LISTAPONTOSSHAPESEL
+
+Lista os pontos dos elementos selecionados de um layer 
+
+<SHP->listaPontosShapeSel>
+*/
+	case "LISTAPONTOSSHAPESEL":
+		include_once("classe_shp.php");
+		$m = new SHP($map_file,$tema);
+		$retorno = $m->listaPontosShapeSel();
+	break;
+/*
 Valor: CRIASHPVAZIO
 
 Cria um shapefile vazio e acrescenta como tema ao mapa.

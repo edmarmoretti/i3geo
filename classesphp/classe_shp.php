@@ -302,10 +302,13 @@ Include:
 /*
 function: listaPontosShape
 
-Lista as coordenadas dos pontos de um shapefile
+Lista as coordenadas dos pontos de um layer
+
+Funciona apenas com elementos do tipo ponto
 
 return:
-string - xy
+
+array - xy
 */
 	function listaPontosShape()
 	{
@@ -332,6 +335,46 @@ string - xy
 		$this->layer->close();
 		return $xy;
 	}
+/*
+function: listaPontosShapeSel
+
+Lista as coordenadas dos elementos selecionados de um layer
+
+Funciona com elementos pontuais ou lineares
+
+return:
+
+array - xy
+*/
+	function listaPontosShapeSel()
+	{
+		//error_reporting(E_ALL);
+		if(!$this->layer){return "erro";}
+		$this->layer->set("template","none.htm");
+		$this->layer->setfilter("");
+		$existesel = carregaquery($this->arquivo,&$this->layer,&$this->mapa);
+		$sopen = $this->layer->open();
+		if($sopen == MS_FAILURE){return "erro";}
+		$res_count = $this->layer->getNumresults();
+		$xy = array();
+		for ($i = 0; $i < $res_count; ++$i)
+		{
+			$result = $this->layer->getResult($i);
+			$shp_index  = $result->shapeindex;
+			$shape = $this->layer->getfeature($shp_index,-1);
+			$nlinhas = $shape->numlines;
+			for($j = 0;$j < $nlinhas; ++$j){
+				$lin = $shape->line($j);
+				$npontos = $lin->numpoints;
+				for($k = 0;$k < $npontos; ++$k){
+					$pt = $lin->point($k);
+					$xy[] = array("x"=>$pt->x,"y"=>$pt->y);
+				}
+			}
+		}
+		$fechou = $this->layer->close();
+		return $xy;
+	}	
 /*
 function: ultimoXY
 

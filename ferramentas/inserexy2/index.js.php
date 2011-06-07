@@ -18,7 +18,7 @@ Licenca:
 
 GPL2
 
-I3Geo Interface Integrada de Ferramentas de Geoprocessamento para Internet
+i3Geo Interface Integrada de Ferramentas de Geoprocessamento para Internet
 
 Direitos Autorais Reservados (c) 2006 Ministério do Meio Ambiente Brasil
 Desenvolvedor: Edmar Moretti edmar.moretti@mma.gov.br
@@ -101,6 +101,11 @@ i3GEOF.inserexy = {
 				{onclick:{fn: i3GEOF.inserexy.criatemaeditavel}}
 			);
 			new YAHOO.widget.Button(
+				"i3GEOinserexybotaoperfil",
+				{onclick:{fn: i3GEOF.inserexy.graficoPerfil}}
+			);
+			
+			new YAHOO.widget.Button(
 				"i3GEOinserexybotao2",
 				{onclick:{fn: i3GEOF.inserexy.inserir}}
 			);
@@ -163,6 +168,7 @@ i3GEOF.inserexy = {
 		'	<div id=i3GEOinserexyshapefile style="left:0px;text-align:left;">' +
 		'	</div><br>' +
 	 	'	<p class=paragrafo ><input id=i3GEOinserexybotaocriatema type="button" size=18 value="Criar um tema editável" />' +
+	 	'	<input id=i3GEOinserexybotaoperfil type="button" size=18 value="Gráfico de perfil" /></p>' +
 
 		'	<div id=i3GEOinserexyopcitens style=display:none;left:0px;text-align:left; >' +
 		'		<p class=paragrafo >Se vc quiser, escolha um item existente no tema e o valor que ser&aacute; inclu&iacute;do quando o ponto for adicionado. Vc pode mudar o valor quando desejar:</p>' +
@@ -326,8 +332,11 @@ i3GEOF.inserexy = {
 		 			};
 				}
 				if(i3GEO.temaAtivo !== ""){
-					$i("i3GEOinserexytemasLocais").value = i3GEO.temaAtivo;
-					$i("i3GEOinserexytemasLocais").onchange.call();
+					var temp = $i("i3GEOinserexytemasLocais");
+					if(temp){
+						temp.value = i3GEO.temaAtivo;
+						temp.onchange.call();
+					}
 				}
 			},
 			"i3GEOinserexyshapefile",
@@ -678,6 +687,36 @@ i3GEOF.inserexy = {
 			cp.call(i3GEO.configura.locaplic+"/classesphp/mapa_controle.php?g_sid="+i3GEO.configura.sid+"&funcao=mostrawkt&xy="+xy,"xy2wkt",mostra);
 		}
 		catch(e){alert("Erro: "+e);i3GEOF.inserexy.aguarde.visibility = "hidden";}
+	},
+	/*
+	Function: graficoPerfil
+	
+	Cria um gráfico de perfil com base nos dados inseridos
+	*/
+	graficoPerfil: function(){
+		try{
+			var divs = $i("i3GEOinserexyguia6obj").getElementsByTagName("div"),
+				js = i3GEO.configura.locaplic+"/ferramentas/perfil/index.js.php",
+				n = divs.length,
+				x = [],
+				y = [],
+				xy,
+				i;
+			for (i=0;i<n;i++){
+				xy = divs[i].innerHTML.split(" ");
+				x.push(xy[0]);
+				y.push(xy[1]);
+			}
+			if(x.length == 0)
+			{alert("Nenhum ponto encontrado");return;}
+			pontosdistobj = {
+				xpt: x,
+				ypt: y
+			};
+			i3GEO.util.scriptTag(js,"i3GEOF.perfil.criaJanelaFlutuante(pontosdistobj)","i3GEOF.perfil_script");
+
+		}
+		catch(e){alert("Erro: "+e);}		
 	}
 };
 <?php error_reporting(0);if(extension_loaded('zlib')){ob_end_flush();}?>

@@ -132,6 +132,8 @@ i3GEOF.selecao = {
 		if(i3GEO.Interface.ATUAL != "googlemaps" && i3GEO.Interface.ATUAL != "googleearth")
 		{ins += '	<img id=i3GEOselecaobox onclick="i3GEOF.selecao.tiposel(this)" src="'+i3GEO.configura.locaplic+'/imagens/gisicons/region.png" title="Desenhe um retangulo no mapa para selecionar" style="cursor:pointer;border:1px solid RGB(230,230,230);" />';}
 		ins += '	<img onclick="i3GEOF.selecao.grafico()" src="'+i3GEO.configura.locaplic+'/imagens/gisicons/layer-vector-chart-add.png" title="Grafico" style="cursor:pointer;border:1px solid RGB(230,230,230);" />' +
+		'	<img onclick="i3GEOF.selecao.graficoPerfil()" src="'+i3GEO.configura.locaplic+'/imagens/gisicons/grafico-perfil.png" title="Perfil" style="cursor:pointer;border:1px solid RGB(230,230,230);" />' +
+
 		'	<img onclick="i3GEOF.selecao.operacao(\'inverte\')" src="'+i3GEO.configura.locaplic+'/imagens/gisicons/undo.png" title="Inverte a selecao" style="cursor:pointer;border:1px solid RGB(230,230,230);" />' +
 		'	<img onclick="i3GEOF.selecao.operacao(\'limpa\')" src="'+i3GEO.configura.locaplic+'/imagens/gisicons/erase.png" title="Limpa a selecao" style="cursor:pointer;border:1px solid RGB(230,230,230);" />' +
 		'	<img onclick="i3GEOF.selecao.criatema()" src="'+i3GEO.configura.locaplic+'/imagens/gisicons/save1.png" title="Salva a selecao como um novo tema" style="cursor:pointer;border:1px solid RGB(230,230,230);" />' +
@@ -904,8 +906,11 @@ i3GEOF.selecao = {
 	aplicaselecaoTema: function(){
 		if(i3GEOF.selecao.aguarde.visibility === "visible")
 		{return;}
-		if($i("i3GEOselecaotemasLigados").value === "")
-		{alert("Escolha um tema");return;}
+		if($i("i3GEOselecaotemasLigados").value === ""){
+			alert("Escolha um tema");
+			i3GEOF.selecao.aguarde.visibility = "hidden";
+			return;
+		}
 		try{
 			i3GEOF.selecao.aguarde.visibility = "visible";
 	 		var temp = function(retorno){
@@ -929,6 +934,50 @@ i3GEOF.selecao = {
 	*/
 	grafico: function(){
 		i3GEO.analise.dialogo.graficoInterativo();
+	},
+	/*
+	Function: graficoPerfil
+	
+	Abre uma janela flutuante para criar gráficos de perfil
+	*/
+	graficoPerfil: function(){
+		var cp,p,temp;
+		if(i3GEOF.selecao.aguarde.visibility === "visible")
+		{return;}
+		if($i("i3GEOselecaotemasLigados").value === "")
+		{alert("Escolha um tema");return;}
+		try{
+			i3GEOF.selecao.aguarde.visibility = "visible";
+	 		var temp = function(retorno){
+		 		i3GEOF.selecao.aguarde.visibility = "hidden";
+				if (retorno.data != undefined){
+					var x = [],
+						y = [],
+						i,
+						n = retorno.data.length,
+						js = i3GEO.configura.locaplic+"/ferramentas/perfil/index.js.php";
+					for (i=0;i<n; i++){
+						x.push(retorno.data[i].x);
+						y.push(retorno.data[i].y);
+					}
+					if(x.length == 0)
+					{alert("Nenhum ponto encontrado");return;}
+					pontosdistobj = {
+						xpt: x,
+						ypt: y
+					};
+					i3GEO.util.scriptTag(js,"i3GEOF.perfil.criaJanelaFlutuante(pontosdistobj)","i3GEOF.perfil_script");
+				}		
+		 	};
+			cp = new cpaint();
+			cp.set_response_type("JSON");
+			p = i3GEO.configura.locaplic+"/classesphp/mapa_controle.php?g_sid="+i3GEO.configura.sid+"&funcao=listaPontosShapeSel&tema="+i3GEO.temaAtivo;
+			cp.call(p,"listaPontosShape",temp);
+		}
+		catch(e){
+			alert("Erro: "+e);
+			i3GEOF.selecao.aguarde.visibility = "hidden";
+		}
 	}
 
 };

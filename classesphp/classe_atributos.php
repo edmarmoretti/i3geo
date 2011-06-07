@@ -276,6 +276,7 @@ Pega todos os valores dos itens de uma tabela de um tema.
 O range de busca pode ser limitado.
 
 parameters:
+
 $itemtema - Tema que será processado.
 
 $tipo - Tipo de abrangência espacial (brasil ou mapa).
