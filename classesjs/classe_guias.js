@@ -588,7 +588,7 @@ i3GEO.guias = {
 			if(i)
 			{i.style.width = l + 1 + pos;}
 
-			if (i3GEO.configura.entorno === "sim"){
+			if (i3GEO.configura.entorno.toLowerCase() === "sim"){
 				letras=["L","O"];
 				for (l=0;l<2; l++){
 					if ($i("img"+letras[l])){

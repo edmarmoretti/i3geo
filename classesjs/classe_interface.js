@@ -317,7 +317,7 @@ i3GEO.Interface = {
 		//
 		if($i("mst"))
 		{$i("mst").style.display="block";}
-		if (i3GEO.configura.entorno === "sim"){
+		if (i3GEO.configura.entorno.toLowerCase() === "sim"){
 			i3GEO.configura.entorno = "nao";
 			i3GEO.navega.entorno.ativaDesativa();
 		}
@@ -927,7 +927,7 @@ i3GEO.Interface = {
 							{layer.url = layer.url+"&SRS="+camada.wmssrs+"&CRS="+camada.wmssrs;}
 						}
 						else{
-							if(camada.tiles === "nao" || camada.escondido === "sim" || camada.connectiontype === 10 || camada.type === 0 || camada.type === 4 || camada.type === 8 )
+							if(camada.tiles === "nao" || camada.escondido.toLowerCase() === "sim" || camada.connectiontype === 10 || camada.type === 0 || camada.type === 4 || camada.type === 8 )
 							{opcoes.singleTile = true;}
 							else{
 								temp = camada.type === 3 ? opcoes.singleTile = false : opcoes.singleTile = !(i3GEO.Interface.openlayers.TILES);
@@ -936,7 +936,7 @@ i3GEO.Interface = {
 						}
 					}
 					catch(e){}	
-					if(camada.escondido === "sim")
+					if(camada.escondido.toLowerCase() === "sim")
 					{layer.transitionEffect = "null";}
 					i3geoOL.addLayer(layer);
 				}

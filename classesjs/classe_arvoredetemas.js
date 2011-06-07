@@ -1075,6 +1075,7 @@ i3GEO.arvoreDeTemas = {
 							ogc:raiz[i].ogc,
 							kmz:raiz[i].kmz,
 							permitecomentario:raiz[i].permitecomentario,
+							download:raiz[i].download,
 							expanded:false,
 							enableHighlight:false,
 							isLeaf:false
@@ -1149,6 +1150,8 @@ i3GEO.arvoreDeTemas = {
 							fonte:temas[i].link,
 							ogc:temas[i].ogc,
 							kmz:temas[i].kmz,
+							download:temas[i].download,
+							permitecomentario:temas[i].permitecomentario,
 							bookmark:"sim",
 							expanded:false,
 							isLeaf:false,
@@ -1265,7 +1268,7 @@ i3GEO.arvoreDeTemas = {
 	propTemas: function(node){
 		if(typeof(console) !== 'undefined'){console.info("i3GEO.arvoreDeTemas.propTemas()");}
 		var d,tempNode,html,lkmini,lkmini1,lkgrcode,lkgrcode1,n,ogc;
-		if(node.data.fonte !== "" && node.data.fonte !== " "){
+		if(node.data.fonte && node.data.fonte !== "" && node.data.fonte !== " "){
 			tempNode = new YAHOO.widget.HTMLNode(
 				{isLeaf:true,enableHighlight:false,expanded:false,html:"<a title='' href='"+node.data.fonte+"' target='_blank' >Fonte</a>"},
 				node
@@ -1279,10 +1282,10 @@ i3GEO.arvoreDeTemas = {
 				node
 			);
 		}
-		if (node.data.ogc !== "nao"){
+		if (node.data.ogc && node.data.ogc !== "nao"){
 			if(i3GEO.arvoreDeTemas.OPCOESADICIONAIS.kml === true){
 				html = "<a href='#' title='' onclick='i3GEO.tema.dialogo.abreKml(\""+node.data.idtema+"\",\"kml\")' >Kml</a>";
-				if (node.data.kmz === "sim")
+				if (node.data.kmz.toLowerCase() === "sim")
 				{html = "<a href='#' title='' onclick='i3GEO.tema.dialogo.abreKml(\""+node.data.idtema+"\",\"kmz\")' >Kml</a>";}
 				tempNode = new YAHOO.widget.HTMLNode(
 					{isLeaf:true,enableHighlight:false,expanded:false,html:html},
@@ -1295,7 +1298,14 @@ i3GEO.arvoreDeTemas = {
 				node
 			);
 		}
-		if (node.data.permitecomentario !== "nao" && i3GEO.arvoreDeTemas.OPCOESADICIONAIS.comentarios === true){
+		if(node.data.download && node.data.download.toLowerCase() !== "nao" && i3GEO.arvoreDeTemas.TIPOBOTAO !== "download"){
+			html = "<a href='"+i3GEO.configura.locaplic+"/datadownload.htm?"+node.data.idtema+"' target='_blank'>Download</a>";
+			tempNode = new YAHOO.widget.HTMLNode(
+				{isLeaf:true,enableHighlight:false,expanded:false,html:html},
+				node
+			);
+		}		
+		if (node.data.permitecomentario && node.data.permitecomentario !== "nao" && i3GEO.arvoreDeTemas.OPCOESADICIONAIS.comentarios === true){
 			html = "<a href='#' title='' onclick='i3GEO.tema.dialogo.comentario(\""+node.data.idtema+"\",\"comentario\")' >Comentário</a>";
 			tempNode = new YAHOO.widget.HTMLNode(
 				{isLeaf:true,enableHighlight:false,expanded:false,html:html},

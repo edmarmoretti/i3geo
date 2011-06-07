@@ -164,7 +164,7 @@ if($_GET["layer"] == "")
 {$cache = true;}
 if($_GET == false)
 {$cache = false;}
-if($_GET["DESLIGACACHE"] == "sim")
+if(strtolower($_GET["DESLIGACACHE"]) == "sim")
 {$cache = false;}
 if(trim($_GET["TIPOIMAGEM"]) != "" && trim($_GET["TIPOIMAGEM"]) != "nenhum")
 {$cache = false;}

@@ -277,7 +277,7 @@ i3GEO = {
 						i3GEO.parametros.h = i3GEO.parametros.h*1;
 						//
 						i3GEO.arvoreDeCamadas.CAMADAS = retorno.data.temas;
-						if(retorno.data.variaveis.navegacaoDir === "sim")
+						if(retorno.data.variaveis.navegacaoDir.toLowerCase() === "sim")
 						{i3GEO.arvoreDeTemas.OPCOESADICIONAIS.navegacaoDir = true;}
 						//
 						//na interface padrão é necessário executar a atualização pois a geração do mapa
@@ -318,7 +318,7 @@ i3GEO = {
 					if(i3GEO.configura.iniciaJanelaMensagens === true)
 					{i3GEO.ajuda.abreJanela();}
 					//i3GEO.janela.fechaAguarde("montaMapa");
-					if (i3GEO.configura.liberaGuias === "sim")
+					if (i3GEO.configura.liberaGuias.toLowerCase() === "sim")
 					{i3GEO.guias.libera();}
 				}
 				if($i("mst")){$i("mst").style.visibility ="visible";}
@@ -489,7 +489,7 @@ i3GEO = {
 			{$i("mensagemt").value = i3GEO.parametros.mapexten;}
 
 			i3GEO.eventos.navegaMapa();
-			if (i3GEO.configura.entorno === "sim"){
+			if (i3GEO.configura.entorno.toLowerCase() === "sim"){
 				i3GEO.navega.entorno.geraURL();
 				i3GEO.navega.entorno.ajustaPosicao();
 			}

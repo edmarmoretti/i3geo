@@ -311,7 +311,7 @@ if(!isset($maparef)){$maparef = "";}
 <br>
 <a href=# tabindex=12 onclick="maparef()">Ativar/desativar mapa de referência</a>
 <?php
-if ((isset($maparef)) && ($maparef == "sim"))
+if ((isset($maparef)) && (strtolower($maparef) == "sim"))
 {
 	//$ref = $mapa->reference;
 	$imgo = $mapa->drawreferencemap();

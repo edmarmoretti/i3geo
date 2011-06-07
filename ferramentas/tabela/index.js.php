@@ -183,7 +183,7 @@ i3GEOF.tabela = {
 
 			i3GEO.util.mensagemAjuda("i3GEOtabelamen1",$i("i3GEOtabelamen1").innerHTML);
 
-			if (i3GEO.parametros.r !== "sim")
+			if (i3GEO.parametros.r.toLowerCase() !== "sim")
 			{$i("i3GEOtabelaguia4obj").innerHTML = "Opção não disponível";}
 			i3GEOF.tabela.pegaRegistros();
 		}

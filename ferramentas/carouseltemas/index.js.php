@@ -96,7 +96,7 @@ i3GEOF.carouseltemas = {
 					ntemasg = grupo.temas.length;
 					for(k=0;k<ntemasg;k++){
 						tema = grupo.temas[k];
-						if(tema.miniatura === "sim"){
+						if(tema.miniatura.toLowerCase() === "sim"){
 							min = i3GEO.configura.locaplic+"/temas/miniaturas/"+tema.tid+".map.mini.png";
 							max = i3GEO.configura.locaplic+"/temas/miniaturas/"+tema.tid+".map.grande.png";
 							ins += "<li><img onmouseover='i3GEOF.carouseltemas.amplia(\""+max+"\")' onclick='i3GEOF.carouseltemas.insereTema(\""+tema.tid+"\")' title='"+tema.nome+"' src='"+min+"' ></li>";
@@ -108,7 +108,7 @@ i3GEOF.carouseltemas = {
 						ntemas = sub.temas.length;
 						for(k=0;k<ntemas;k++){
 							tema = sub.temas[k];
-							if(tema.miniatura === "sim"){
+							if(tema.miniatura.toLowerCase() === "sim"){
 								min = i3GEO.configura.locaplic+"/temas/miniaturas/"+tema.tid+".map.mini.png";
 								max = i3GEO.configura.locaplic+"/temas/miniaturas/"+tema.tid+".map.grande.png";
 								ins += "<li><img onmouseover='i3GEOF.carouseltemas.amplia(\""+max+"\")' onclick='i3GEOF.carouseltemas.insereTema(\""+tema.tid+"\")' title='"+tema.nome+"' src='"+min+"' ></li>";

@@ -124,7 +124,7 @@ $oMap = ms_newMapobj("aplicmap/ogcws.map");
 //
 //altera os caminhos das imagens
 //
-if((isset($legenda)) && ($legenda == "sim"))
+if((isset($legenda)) && (strtolower($legenda) == "sim"))
 {
 	$leg = $oMap->legend;
 	$leg->set("status",MS_EMBED);
@@ -248,16 +248,16 @@ else
 		$grupos = $m->pegaListaDeGrupos($menu["idmenu"],$listasistemas="nao",$listasgrupos="sim");
 		foreach($grupos as $grupo)
 		{
-			if($grupo["ogc"] == "sim")
+			if(strtolower($grupo["ogc"]) == "sim")
 			{
 				foreach($grupo["subgrupos"] as $sgrupo)
 				{
-					if($sgrupo["ogc"] == "sim")
+					if(strtolower($sgrupo["ogc"]) == "sim")
 					{
 						$temas = $m->pegaListaDeTemas($grupo["id_n1"],$sgrupo["id_n2"],$menu["idmenu"]);
 						foreach($temas as $tema)
 						{
-							if($tema["ogc"] == "sim")
+							if(strtolower($tema["ogc"]) == "sim")
 							{
 								$codigosTema[] = array("tema"=>$tema["tid"],"fonte"=>$tema["link"]);
 							}
@@ -365,18 +365,18 @@ function ogc_imprimeListaDeTemas()
 		$grupos = $m->pegaListaDeGrupos($menu["idmenu"],$listasistemas="nao",$listasgrupos="sim");
 		foreach($grupos as $grupo)
 		{
-			if($grupo["ogc"] == "sim")
+			if(strtolower($grupo["ogc"]) == "sim")
 			{
 				$imprimegrupo = "<i>".$grupo["nome"]."</i>";
 				foreach($grupo["subgrupos"] as $sgrupo)
 				{
-					if($sgrupo["ogc"] == "sim")
+					if(strtolower($sgrupo["ogc"]) == "sim")
 					{
 						$imprimesubgrupo = $sgrupo["nome"];
 						$temas = $m->pegaListaDeTemas($grupo["id_n1"],$sgrupo["id_n2"],$menu["idmenu"]);
 						foreach($temas as $tema)
 						{
-							if($tema["ogc"] == "sim")
+							if(strtolower($tema["ogc"]) == "sim")
 							{
 								$imprimir .= $imprimegrupo."->".$imprimesubgrupo."<br>";
 								$imprimir .= "&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;";

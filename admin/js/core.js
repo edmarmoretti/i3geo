@@ -879,7 +879,11 @@ function core_geraLinhas(dados)
 			if(!p.size){p.size = "50";}
 			if(p.ajuda)
 			{
-				var idajuda = p.id + contaParam;
+				if(p.id !== "")
+				{var idajuda = p.id + contaParam;}
+				else{
+					var idajuda = "a"+parseInt(255*(Math.random()),10);
+				}
 				//var temp = "$i('"+idajuda+"_ajuda').style.display='block' "
 				resultado += "<p><div onclick='core_geralinhasEscondeAjuda(\""+idajuda+"\")' style=cursor:pointer title='ajuda' ><img id='"+idajuda+"_imgajuda' src='../../imagens/desce.gif' >&nbsp;<b>"+p.titulo+"</b></div>"
 				resultado += "<div id='"+idajuda+"_ajuda' style=display:none >"+p.ajuda+"</div>"

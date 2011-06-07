@@ -194,10 +194,10 @@ function montaDiv_M(i)
 	if (i.publicado_menu == ""){ins += "selected";}
 	ins += ">---</option>"
 	ins += "<option value='SIM' "
-	if (i.publicado_menu == "SIM"){ins += "selected";}
+	if ((i.publicado_menu).toLowerCase() == "sim"){ins += "selected";}
 	ins += " >sim</option>"
 	ins += "<option value='NAO' "
-	if (i.publicado_menu == "NAO"){ins += "selected";}
+	if ((i.publicado_menu).toLowerCase() == "nao"){ins += "selected";}
 	ins += " >não</option>"
 	ins += "</select></p>"
 	ins += "<p>Aberto?<br>"
@@ -206,10 +206,10 @@ function montaDiv_M(i)
 	if (i.aberto == ""){ins += "selected";}
 	ins += ">---</option>"
 	ins += "<option value='SIM' "
-	if (i.aberto == "SIM"){ins += "selected";}
+	if ((i.aberto).toLowerCase() == "sim"){ins += "selected";}
 	ins += " >sim</option>"
 	ins += "<option value='NAO' "
-	if (i.aberto == "NAO"){ins += "selected";}
+	if ((i.aberto).toLowerCase() == "nao"){ins += "selected";}
 	ins += " >não</option>"
 	ins += "</select></p>"
 	return(ins)

@@ -382,7 +382,7 @@ i3GEOF.filtro = {
 			cp = new cpaint();
 			cp.set_response_type("JSON");
 			cp.set_transfer_mode('POST');
-			if (testa === "sim"){
+			if (testa.toLowerCase() === "sim"){
 			 	temp = function(retorno){
 			 		$i("i3GEOfiltroguia3obj").innerHTML = "<img src="+retorno.data+" />";
 			 		i3GEOF.filtro.aguarde.visibility = "hidden";

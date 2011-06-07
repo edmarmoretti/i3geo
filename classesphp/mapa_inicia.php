@@ -173,11 +173,11 @@ function iniciaMapa()
 	//
 	$m->salva();
 	//prepara a legenda para incluir no mapa, preenchendo os nomes das classes em branco
-	if ($embedLegenda == "sim")
+	if (strtolower($embedLegenda) == "sim")
 	{
 		foreach ($m->layers as $l)
 		{
-			if (($l->data != "") && (strtoupper($l->getmetadata("escondido")) != "SIM") && ($l->getmetadata("tema") != "NAO"))
+			if (($l->data != "") && (strtoupper($l->getmetadata("escondido")) != "SIM") && (strtolower($l->getmetadata("tema")) != "nao"))
 			{
 				if ($l->numclasses > 0)
 				{

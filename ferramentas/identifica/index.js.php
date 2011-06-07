@@ -134,7 +134,7 @@ i3GEOF.identifica = {
 			i3GEOF.identifica.mostraLinkGeohack = mostraLinkGeohack;
 			i3GEOF.identifica.mostraSistemasAdicionais = mostraSistemasAdicionais;
 			//se o usuário for editor, força mostrar a lista de sistemas
-			if(i3GEO.parametros.editor == "sim")
+			if(i3GEO.parametros.editor.toLowerCase() == "sim")
 			{i3GEOF.identifica.mostraSistemasAdicionais == true;}
 			i3GEO.guias.mostraGuiaFerramenta("i3GEOidentificaguia1","i3GEOidentificaguia");
 			//eventos das guias
@@ -489,7 +489,7 @@ i3GEOF.identifica = {
 					
 				}
 				if(divins){
-					if(i3GEO.parametros.editor == "sim"){
+					if(i3GEO.parametros.editor.toLowerCase() == "sim"){
 						temp = "<p class=paragrafo ><a href='#' title='Opção visível apenas para quem é editor' style=color:red onclick=\"i3GEOF.identifica.abrejanelaIframe('1050','500','"+i3GEO.configura.locaplic+"/admin/html/webservices.html');\" >Editar a lista de sistemas adicionais</a></p>";
 					}
 					else
@@ -623,7 +623,7 @@ i3GEOF.identifica = {
 						nitens = resultados[j].length;
 						for(k=0;k<nitens;k++){
 							tip = "&nbsp;&nbsp;";
-							if(resultados[j][k].tip == "sim"){
+							if(resultados[j][k].tip.toLowerCase() == "sim"){
 								tip = "<img style='margin-right:2px;position:relative;top:3px;width:12px;' src='"+i3GEO.configura.locaplic+"/imagens/tips.png' title='Etiqueta ativa' />";
 							}
 							else{

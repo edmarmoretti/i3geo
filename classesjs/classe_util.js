@@ -1506,7 +1506,7 @@ i3GEO.util = {
 							nome = retorno[i].tema;
 							tema = retorno[i].name;
 						}
-						if(retorno[i].escondido !== "sim")
+						if(retorno[i].escondido.toLowerCase() !== "sim")
 						{comboTemas += "<option value="+tema+" >"+nome+"</option>";}
 					}
 					comboTemas += "</select>";
@@ -1866,7 +1866,7 @@ i3GEO.util = {
 		if(typeof(console) !== 'undefined'){console.info("i3GEO.util.comboSimNao()");}
 		var combo = "<select name="+id+" id="+id+" >";
 		combo+= "<option value='' >---</option>";
-		if(selecionado === "sim")
+		if(selecionado.toLowerCase() === "sim")
 		{combo+= "<option value=TRUE selected >sim</option>";}
 		else
 		{combo+= "<option value=TRUE >sim</option>";}

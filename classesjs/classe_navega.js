@@ -822,7 +822,7 @@ i3GEO.navega = {
 			var letras,l;
 			if(i3GEO.parametros.mapfile === "")
 			{alert("Essa opcao nao pode ser ativada. Consulte o administrador do sistema. Mapfile nao esta exposto.");return;}
-			if (i3GEO.configura.entorno === "sim"){
+			if (i3GEO.configura.entorno.toLowerCase() === "sim"){
 				letras=["L","O","N","S"];
 				for (l=0;l<4; l++){
 					if ($i("img"+letras[l])){
@@ -847,7 +847,7 @@ i3GEO.navega = {
 						$i("img"+letras[l]).style.display = "block";
 					}
 				}
-				i3GEO.configura.entorno = "sim";
+				i3GEO.configura.entorno.toLowerCase() = "sim";
 				i3GEO.navega.entorno.ajustaPosicao();
 				alert("Entorno ativado. o desenho do mapa pode demorar mais.");
 			}

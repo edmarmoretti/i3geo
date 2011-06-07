@@ -677,7 +677,7 @@ i3GEO.gadgets = {
 		*/
 		opcoes: function(obj){
 			var js,volta;
-			if (i3GEO.parametros.utilizacgi === "sim"){
+			if (i3GEO.parametros.utilizacgi.toLowerCase() === "sim"){
 				i3GEO.parametros.utilizacgi = "nao";
 				volta = function(){
 					alert("Armazenamento de imagens ativado. As proximas imagens ficarao disponiveis");
@@ -726,7 +726,7 @@ i3GEO.gadgets = {
 		*/
 		listaImagens: function(){
 			var volta,wi,mensagem,i;
-			if (i3GEO.parametros.utilizacgi === "sim"){
+			if (i3GEO.parametros.utilizacgi.toLowerCase() === "sim"){
 				i3GEO.parametros.utilizacgi = "nao";
 				volta = function()
 				{alert("Armazenamento de imagens ativado. As proximas imagens ficarao disponiveis");};

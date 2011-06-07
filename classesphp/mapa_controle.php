@@ -145,7 +145,7 @@ $interface = $interfaceTemp;
 //
 //verifica se deve ativar o debug
 //
-if (isset($debug) && $debug == "sim")
+if (isset($debug) && strtolower($debug) == "sim")
 {error_reporting(E_ALL);}
 //
 //teste de timeout
@@ -193,7 +193,7 @@ if (!isset($map_file))
 include_once("classe_vermultilayer.php");
 include_once("classe_estatistica.php");
 
-if (isset($debug) && $debug == "sim")
+if (isset($debug) && strtolower($debug) == "sim")
 {error_reporting(E_ALL);}
 //
 //identifica qual a url do i3geo
@@ -1336,7 +1336,7 @@ Inclui um filtro no tema.
 		$m = new Temas($map_file,$tema);
 		if(!isset($testa)){$testa="";}
 		{$retorno = $m->insereFiltro($filtro,$testa);}
-		if($testa != "sim")
+		if(strtolower($testa) != "sim")
 		{
 			$m->salva();
 			$_SESSION["contadorsalva"]++;

@@ -67,7 +67,7 @@ $tabelas = array(
 if($conexaoadmin == "")
 {
 	if(file_exists("../../admin/admin.db"))
-	{echo "Arquivo admin/admin.db ja existe";exit;}
+	{echo "Arquivo admin/admin.db ja existe. Vc deve apagá-lo para poder criar novamente";exit;}
 	$banco = sqlite_open("../../admin/admin.db",0666);
 	$banco = null;
 	$dbhw = new PDO('sqlite:../../admin/admin.db');

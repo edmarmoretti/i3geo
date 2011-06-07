@@ -256,7 +256,7 @@ i3GEO.maparef = {
 				//
 				//no modo cgi ativado, a obtenção da imagem é feita de forma diferente do modo normal do mapa
 				//
-				if($i("imagemReferencia").src === "" || i3GEO.parametros.utilizacgi !== "sim"){
+				if($i("imagemReferencia").src === "" || i3GEO.parametros.utilizacgi.toLowerCase() !== "sim"){
 					//
 					//se o valor do tamanho da celula já existir, não é necessário redesenhar a imagem
 					//

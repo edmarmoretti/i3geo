@@ -145,22 +145,7 @@ class LayerServer {
         if(ENABLE_CACHE){
             $cache_file = $this->get_cache_file_name();
             if(file_exists($cache_file)){
-                // Check if is not expired
-                /*
-				$layer = $this->map_object->getLayerByName($this->typename);
-                if(filectime($cache_file) + $layer->getMetadata('KML_CACHE') < (time())) {
-                    error_log('removing cache ' . $cache_file);
-                    //error_log('ctime : ' . filectime($cache_file) . ' , ' . time() . ' lm ' .  $layer->getMetadata('KML_CACHE'));
-                    @unlink($cache_file);
-                } else {
-                    $this->send_header();
-                    error_log('sending cache ' . $cache_file);
-                    readfile($cache_file);
-                    exit;
-                }
-				*/
 				$this->send_header();
-				error_log('sending cache ' . $cache_file);
 				readfile($cache_file);
 				exit;
             }
@@ -210,11 +195,9 @@ class LayerServer {
         $this->typename     = $this->load_parm('typename');
         $this->encoding     = $this->load_parm('encoding', 'ISO-8859-1');
         $this->request      = $this->load_parm('request', 'kml');
-
         if($this->request == 'kmz') {
             $this->_zipped = true;
         }
-
         if(!$this->map){
             $this->set_error('No mapfile specified');
         }
@@ -1008,7 +991,12 @@ class LayerServer {
     * Calculate cache file name
     */
     function get_cache_file_name(){
-        include("../../ms_configura.php");
+        //obtem o arquivo do metadata do layer se existir
+		$k = $this->map_object->getlayerbyname($this->typename)->getmetadata("arquivokmz");
+		if($k != ""){
+			return $k;
+		}
+		include("../../ms_configura.php");
         return  $dir_tmp.'/'. md5($_SERVER['QUERY_STRING']) . ($this->_zipped ? '.kmz' : '.kml');
     }
 
@@ -1016,7 +1004,7 @@ class LayerServer {
     * Send stream
     */
     function send_stream($data){
-        $this->send_header();
+		$this->send_header();
         // Compress data
         if($this->_zipped){
             include("zip.class.php");

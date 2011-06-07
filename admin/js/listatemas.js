@@ -139,13 +139,13 @@ function gravaDadosTema(id)
 {
 	//validacao
 	if($i("kml_tema") && $i("ogc_tema")){
-		if($i("ogc_tema").value == "SIM")
+		if(($i("ogc_tema").value).toLowerCase() == "sim")
 		{$i("kml_tema").value = "SIM";}		
 	}
 	if($i("kml_tema") && $i("kmz_tema")){
-		if($i("kmz_tema").value == "SIM")
+		if(($i("kmz_tema").value).toLowerCase() == "sim")
 		{$i("kml_tema").value = "SIM";}
-		if($i("kml_tema").value == "NAO")
+		if(($i("kml_tema").value).toLowerCase() == "nao")
 		{$i("kmz_tema").value = "NAO";}
 	}
 	var campos = new Array("nome","desc","link","tags","tipo","ogc","download","kml","codigo","kmz")

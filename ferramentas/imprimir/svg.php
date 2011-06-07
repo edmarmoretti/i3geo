@@ -66,7 +66,7 @@ $temas = $map->getalllayernames();
 foreach ($temas as $tema)
 {
 	$layer = $map->getlayerbyname($tema);
-	if (($layer->data != "") && ($layer->getmetadata("escondido") != "SIM") && ($layer->getmetadata("tema") != "NAO"))
+	if (($layer->data != "") && (strtolower($layer->getmetadata("escondido")) != "sim") && (strtolower($layer->getmetadata("tema")) != "sim"))
 	{
 		if ($layer->numclasses > 0)
 		{

@@ -236,7 +236,7 @@ string - javascript com os parametros
 				{$transitioneffect = "nao";}
 				//
 				$permitecomentario = "nao";
-				if($oLayer->getmetadata("nomeoriginal") != "" && strtoupper($oLayer->getmetadata("pemitecomentario")) != "NAO")
+				if($oLayer->getmetadata("nomeoriginal") != "" && strtoupper($oLayer->getmetadata("permitecomentario")) != "NAO")
 				{$permitecomentario = "sim";}
 				$aplicaextensao = "nao";
 				if(strtoupper($oLayer->getmetadata("aplicaextensao")) == "SIM")

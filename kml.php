@@ -216,7 +216,7 @@ function kml_tema($tema)
 	$tipoa = "";
 	if($tema->TIPOA)
 	$tipoa = kml_converteTexto($tema->TIPOA);
-	$ogc = sim;
+	//$ogc = sim;
 	if($tema->TID)
 	{$kmli = kml_converteTexto($tema->KML);}
 	if(strtolower($kmli) != "nao" && strtolower($tipoa) != "wms")
