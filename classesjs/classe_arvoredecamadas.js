@@ -280,7 +280,8 @@ i3GEO.arvoreDeCamadas = {
 		destacar:true,
 		cortina:true,
 		sql:true,
-		comentar:true
+		comentar:true,
+		temporizador:true
 	},
 	/*
 	Variavel: CAMADAS
@@ -872,6 +873,13 @@ i3GEO.arvoreDeCamadas = {
 			{tnome = "<span onmouseover=\"javascript:i3GEO.ajuda.mostraJanela('"+$trad("t19")+"','')\" onmouseout=\"javascript:i3GEO.ajuda.mostraJanela('')\" >"+$trad("t20")+"</span> <a class=ajuda_usuario target=_blank href='"+i3GEO.configura.locaplic+"/ajuda_usuario.php?idcategoria=5&idajuda=42' >&nbsp;&nbsp;&nbsp;</a>"+$inputText("","","tr"+ltema.name,"","3",ltema.transparency)+"&nbsp;<a  class='tic' onclick='i3GEO.tema.mudatransp(\""+ltema.name+"\")' href='#' /a>";}
 			else
 			{tnome = "<span onmouseover=\"javascript:i3GEO.ajuda.mostraJanela('"+$trad("t19")+"','')\" onmouseout=\"javascript:i3GEO.ajuda.mostraJanela('')\" >"+$trad("t20")+"</span> <a class=ajuda_usuario target=_blank href='"+i3GEO.configura.locaplic+"/ajuda_usuario.php?idcategoria=5&idajuda=42' >&nbsp;&nbsp;&nbsp;</a>"+$inputText("","","tr"+ltema.name,"","3",ltema.transparency)+"<img  class='tic' style='position:relative;top:3px;' onclick='i3GEO.tema.mudatransp(\""+ltema.name+"\")' src='"+i3GEO.util.$im("branco.gif")+"' />";}
+			n = new YAHOO.widget.HTMLNode({expanded:false,enableHighlight:false,isLeaf:true,html:tnome}, node);
+		}
+		if(funcoes.temporizador === true){
+			if(navm)
+			{tnome = "<span onmouseover=\"javascript:i3GEO.ajuda.mostraJanela('"+$trad("t47")+"','')\" onmouseout=\"javascript:i3GEO.ajuda.mostraJanela('')\" >"+$trad("t48")+"</span> <a class=ajuda_usuario target=_blank href='"+i3GEO.configura.locaplic+"/ajuda_usuario.php?idcategoria=5&idajuda=101' >&nbsp;&nbsp;&nbsp;</a>"+$inputText("","","temporizador"+ltema.name,"","3",ltema.temporizador)+"&nbsp;<a  class='tic' onclick='i3GEO.tema.temporizador(\""+ltema.name+"\")' href='#' /a>";}
+			else
+			{tnome = "<span onmouseover=\"javascript:i3GEO.ajuda.mostraJanela('"+$trad("t47")+"','')\" onmouseout=\"javascript:i3GEO.ajuda.mostraJanela('')\" >"+$trad("t48")+"</span> <a class=ajuda_usuario target=_blank href='"+i3GEO.configura.locaplic+"/ajuda_usuario.php?idcategoria=5&idajuda=101' >&nbsp;&nbsp;&nbsp;</a>"+$inputText("","","temporizador"+ltema.name,"","3",ltema.temporizador)+"<img  class='tic' style='position:relative;top:3px;' onclick='i3GEO.tema.temporizador(\""+ltema.name+"\")' src='"+i3GEO.util.$im("branco.gif")+"' />";}
 			n = new YAHOO.widget.HTMLNode({expanded:false,enableHighlight:false,isLeaf:true,html:tnome}, node);
 		}
 		if(funcoes.mudanome === true){

@@ -1165,6 +1165,8 @@ function montaEditorMetadados(dados)
 		"linhas":[
 			{ajuda:"Nome que será utilizado na legenda do mapa e na guia 'Temas'",
 			titulo:"Tema (METADATA: TEMA)",id:"tema",value:dados.tema,tipo:"text"},
+			{ajuda:"Temporizador (em segundos) para atualização automática da camada. A camada será redesenhada continuamente a cada intervalo de tempo definido",
+			titulo:"Temporizador em segundos (METADATA: TEMPORIZADOR)",id:"temporizador",value:dados.temporizador,tipo:"text"},
 			{ajuda:"Ícone que será mostrado na árvore de camadas. A imagem deve existir na web e deve ser incluído o caminho completo ou relativo em relação ao local da interface HTML do mapa.",
 			titulo:"Ícone (METADATA: ICONETEMA)",id:"iconetema",value:dados.iconetema,tipo:"text"},
 			{ajuda:"Denominador da escala da fonte dos dados utilizado pelo tema. É utilizado para apresentar a indicação de compatibilidade entre a escala do tema e a escala do mapa que está sendo visto.",
@@ -1660,7 +1662,7 @@ function salvarDadosEditor(tipo,codigoMap,codigoLayer,indiceClasse,indiceEstilo,
 			else
 			{alert("Valor de escala incorreto");return;}
 		}
-		var campos = new Array("legendaimg","wms_srs","wms_name","wms_server_version","wms_format","wms_auth_username","wms_auth_password","wms_auth_type","wms_connectiontimeout","wms_latlonboundingbox","wms_proxy_auth_type","wms_proxy_host","wms_proxy_port","wms_proxy_type","wms_proxy_username","wms_proxy_password","wms_sld_body","wms_sld_url","wms_style","wms_bgcolor","wms_transparent","wms_time","permitecomentario","cache","iconetema","ltempoformatodata","ltempoiteminicio","ltempoitemfim","ltempoitemtitulo","ltempoitemdescricao","ltempoitemtip","ltempoitemimagem","ltempoitemicone","ltempoitemlink","editorsql","description_template","palletefile","palletestep","arquivokmz","arquivodownload","aplicaextensao","classestamanho","classessimbolo","classescor","classesnome","classesitem","mensagem","identifica","transitioneffect","extensao","escondido","download","escala","tema","classe","tip","itenslink","itens","itensdesc")
+		var campos = new Array("legendaimg","wms_srs","wms_name","wms_server_version","wms_format","wms_auth_username","wms_auth_password","wms_auth_type","wms_connectiontimeout","wms_latlonboundingbox","wms_proxy_auth_type","wms_proxy_host","wms_proxy_port","wms_proxy_type","wms_proxy_username","wms_proxy_password","wms_sld_body","wms_sld_url","wms_style","wms_bgcolor","wms_transparent","wms_time","permitecomentario","cache","iconetema","ltempoformatodata","ltempoiteminicio","ltempoitemfim","ltempoitemtitulo","ltempoitemdescricao","ltempoitemtip","ltempoitemimagem","ltempoitemicone","ltempoitemlink","editorsql","description_template","palletefile","palletestep","arquivokmz","temporizador","arquivodownload","aplicaextensao","classestamanho","classessimbolo","classescor","classesnome","classesitem","mensagem","identifica","transitioneffect","extensao","escondido","download","escala","tema","classe","tip","itenslink","itens","itensdesc")
 		var par = "&codigoMap="+codigoMap+"&codigoLayer="+codigoLayer
 		var prog = "../php/editormapfile.php?funcao=alterarMetadados"
 	}

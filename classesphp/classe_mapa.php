@@ -279,7 +279,8 @@ string - javascript com os parametros
 					"wmsurl"=>$wmsurl,
 					"wmsformat"=>$wmsformat,
 					"wmssrs"=>$wmssrs,
-					"tiles"=>$tiles
+					"tiles"=>$tiles,
+					"temporizador"=>($oLayer->getmetadata("temporizador"))
 				);
 			}
 		}

@@ -810,6 +810,20 @@ en:"Mais populares",
 es:"Mais populares",
 it:"Mais populares"
 }],
+"t47": [
+{
+pt: "Intervalo em segundos após o qual a camada será atualizada. Para ignorar, deixe em branco",
+en:"Intervalo em segundos após o qual a camada será atualizada. Para ignorar, deixe em branco",
+es:"Intervalo em segundos após o qual a camada será atualizada. Para ignorar, deixe em branco",
+it:"Intervalo em segundos após o qual a camada será atualizada. Para ignorar, deixe em branco"
+}],
+"t48": [
+{
+pt: "Temporizador",
+en:"Temporizador",
+es:"Temporizador",
+it:"Temporizador"
+}],
 //guia adiciona
 "a1":[
 {

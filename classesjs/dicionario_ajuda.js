@@ -857,6 +857,15 @@ g_traducao_ajuda = {
 			complemento:"O arquivo é armazenado no servidor temporariamente. É necessário que o usuário saiba qual o tipo de elementos existentes no arquivo KML e qual o nome do folder que será utilizado.",
 			tela:"",
 			apijs:"i3GEO.arvoreDeTemas.dialogo.uploadkml()"
+		},
+		"101": {
+			titulo: "Temporizador",
+			diretorio:"",
+			categoria:"5",
+			pt:"Aplica um temporizador que atualiza uma determinada camada após um intervalo de tempo e de forma contínua.",
+			complemento:"",
+			tela:"",
+			apijs:"i3GEO.tema.temporizador()"
 		}
 	}
 };

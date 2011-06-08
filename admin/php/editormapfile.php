@@ -1320,6 +1320,7 @@ function pegaMetadados()
 	$dados["classestamanho"] = $layer->getmetadata("classestamanho");
 	$dados["aplicaextensao"] = $layer->getmetadata("aplicaextensao");
 	$dados["arquivodownload"] = $layer->getmetadata("arquivodownload");
+	$dados["temporizador"] = $layer->getmetadata("temporizador");
 	$dados["arquivokmz"] = $layer->getmetadata("arquivokmz");
 	$dados["palletefile"] = $layer->getmetadata("palletefile");
 	$dados["palletestep"] = $layer->getmetadata("palletestep");
@@ -1368,7 +1369,7 @@ function pegaMetadados()
 }
 function alterarMetadados()
 {
-	global $legendaimg,$wms_srs,$wms_name,$wms_server_version,$wms_format,$wms_auth_username,$wms_auth_password,$wms_auth_type,$wms_connectiontimeout,$wms_latlonboundingbox,$wms_proxy_auth_type,$wms_proxy_host,$wms_proxy_port,$wms_proxy_type,$wms_proxy_username,$wms_proxy_password,$wms_sld_body,$wms_sld_url,$wms_style,$wms_bgcolor,$wms_transparent,$wms_time,$permitecomentario,$iconetema,$ltempoformatodata,$ltempoiteminicio,$ltempoitemfim,$ltempoitemtitulo,$ltempoitemdescricao,$ltempoitemtip,$ltempoitemimagem,$ltempoitemicone,$ltempoitemlink,$description_template,$palletestep,$palletefile,$arquivodownload,$arquivokmz,$codigoMap,$codigoLayer,$locaplic,$aplicaextensao,$classestamanho,$classessimbolo,$classescor,$classesnome,$classesitem,$mensagem,$identifica,$transitioneffect,$extensao,$escondido,$download,$escala,$tema,$classe,$tip,$itenslink,$itens,$itensdesc,$editorsql,$cache;
+	global $legendaimg,$wms_srs,$wms_name,$wms_server_version,$wms_format,$wms_auth_username,$wms_auth_password,$wms_auth_type,$wms_connectiontimeout,$wms_latlonboundingbox,$wms_proxy_auth_type,$wms_proxy_host,$wms_proxy_port,$wms_proxy_type,$wms_proxy_username,$wms_proxy_password,$wms_sld_body,$wms_sld_url,$wms_style,$wms_bgcolor,$wms_transparent,$wms_time,$permitecomentario,$iconetema,$ltempoformatodata,$ltempoiteminicio,$ltempoitemfim,$ltempoitemtitulo,$ltempoitemdescricao,$ltempoitemtip,$ltempoitemimagem,$ltempoitemicone,$ltempoitemlink,$description_template,$palletestep,$palletefile,$arquivodownload,$temporizador,$arquivokmz,$codigoMap,$codigoLayer,$locaplic,$aplicaextensao,$classestamanho,$classessimbolo,$classescor,$classesnome,$classesitem,$mensagem,$identifica,$transitioneffect,$extensao,$escondido,$download,$escala,$tema,$classe,$tip,$itenslink,$itens,$itensdesc,$editorsql,$cache;
 	$dados = array();
 	$mapfile = $locaplic."/temas/".$codigoMap.".map";
 	$mapa = ms_newMapObj($mapfile);
@@ -1393,6 +1394,7 @@ function alterarMetadados()
 	$layer->setmetadata("classestamanho",$classestamanho);
 	$layer->setmetadata("aplicaextensao",$aplicaextensao);
 	$layer->setmetadata("arquivodownload",$arquivodownload);
+	$layer->setmetadata("temporizador",$temporizador);
 	$layer->setmetadata("arquivokmz",$arquivokmz);
 	$layer->setmetadata("palletefile",$palletefile);
 	$layer->setmetadata("palletestep",$palletestep);

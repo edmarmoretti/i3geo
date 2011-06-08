@@ -36,6 +36,15 @@ Em i3GEO.tema.dialogo estão as funções de abertura dos diálogos para alteração d
 */
 i3GEO.tema = {
 	/*
+	Variable: TEMPORIZADORESID
+	
+	Objeto que contém os identificadores dos temporizadores (setInterval) estabelecidos para cada camada
+	
+	Type:
+	{objeto} - {idtema:{idtemporizador:,tempo:}}
+	*/
+	TEMPORIZADORESID: {},
+	/*
 	Function: exclui
 
 	Exclui um tema do mapa
@@ -579,7 +588,35 @@ i3GEO.tema = {
 		editorsql: function(idtema){
 			i3GEO.mapa.ativaTema(idtema);
 			i3GEO.util.dialogoFerramenta("i3GEO.tema.dialogo.editorsql()","editorsql","editorsql");
-		}
+		},
+		/*
+		Function: temporizador
+
+		Aplica um temporizador para que a camada seja redesenhada em determinado intervalo de tempo.
+
+		O campo com o valor de tempo (em segundos) é composto por "temporizador"+idtema
+
+		Parametros:
+
+		idtema - id que identifica o tema no map file.
+		*/
+		temporizador: function(idtema){
+			i3GEO.mapa.ativaTema(idtema);
+			var tempo = $i("temporizador"+idtema).value,
+				tpz = i3GEO.tema.TEMPORIZADORESID.idtema;
+			if(tempo != "" && parseInt(tempo,10) > 0){
+				i3GEO.tema.TEMPORIZADORESID.idtema = {
+					tempo: tempo,
+					idtemporizador: setInterval()
+				}
+			}
+			else{
+				if(tpz != undefined){
+					clearInterval(tpz.idtemporizador);
+					delete(i3GEO.tema.TEMPORIZADORESID.idtema);
+				}
+			}
+		}		
 	}
 };
 //YAHOO.log("carregou classe tema", "Classes i3geo");
