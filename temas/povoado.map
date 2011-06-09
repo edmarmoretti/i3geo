@@ -5,7 +5,8 @@ MAP
     CONNECTION ""
     DATA "c:\ms4w\apache\htdocs\i3geo\aplicmap\dados\sc22\povoado.shp"
     METADATA
-      "cache"	""
+      "temporizador" "5"
+	  "cache"	""
       "ltempoitemimagem"	""
       "CLASSE"	"SIM"
       "ltempoitemdescricao"	""

@@ -249,7 +249,7 @@ i3GEO.Interface = {
 
 	Parametros:
 
-	retorno {JSON} - objeto JSON com os parâmetros obtidos da função PHP de redesenho do mapa
+	retorno {JSON} - objeto JSON com os parâmetros obtidos da função PHP de redesenho do mapa. Quando igual a "", é feita apenas a atualização da camada, sem que a árvore de camadas seja atualizada.
 
 	tema {string} - código do tema
 	*/
@@ -1081,6 +1081,8 @@ i3GEO.Interface = {
 				layer.url = layer.url+"&&";
 				layer.redraw();
 			}
+			if(retorno === "")
+			{return;}
 			i3GEO.Interface.openlayers.recalcPar();
 			try
 			{i3GEO.arvoreDeCamadas.atualiza(retorno.data.temas);}
@@ -1237,6 +1239,8 @@ i3GEO.Interface = {
 			i3GeoMap.overlayMapTypes.removeAt(indice);
 			i3GEO.Interface.googlemaps.posfixo += 1;
 			i3GEO.Interface.googlemaps.insereLayer(tema,indice);
+			if(retorno === "")
+			{return;}
 			i3GEO.Interface.googlemaps.recalcPar();
 			try
 			{i3GEO.arvoreDeCamadas.atualiza(retorno.data.temas);}
@@ -1827,6 +1831,8 @@ i3GEO.Interface = {
 				hr = layer.getLink().getHref();
 			hr = hr.replace("&&&&&","");
 			layer.getLink().setHref(hr+"&");
+			if(retorno === "")
+			{return;}
 			i3GEO.Interface.googleearth.recalcPar();
 			try
 			{i3GEO.arvoreDeCamadas.atualiza(retorno.data.temas);}

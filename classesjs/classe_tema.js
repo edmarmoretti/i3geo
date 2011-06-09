@@ -374,6 +374,31 @@ i3GEO.tema = {
 		}
 	},
 	/*
+	Function: temporizador
+
+	Aplica um temporizador para que a camada seja redesenhada em determinado intervalo de tempo.
+
+	O campo com o valor de tempo (em segundos) é composto por "temporizador"+idtema
+
+	Parametros:
+
+	idtema - id que identifica o tema no map file.
+	*/
+	temporizador: function(idtema,tempo){
+		if(!tempo)
+		{tempo = $i("temporizador"+idtema).value;}
+		if(tempo != "" && parseInt(tempo,10) > 0){
+			eval('i3GEO.tema.TEMPORIZADORESID.'+idtema+' = {tempo: '+tempo+',idtemporizador: setInterval(function('+idtema+'){if(!$i("arrastar_'+idtema+'")){delete(i3GEO.tema.TEMPORIZADORESID.'+idtema+');return;}i3GEO.Interface.atualizaTema("",idtema);},parseInt('+tempo+',10)*1000)};');
+		}
+		else{
+			try{
+				window.clearInterval(i3GEO.tema.TEMPORIZADORESID[idtema].idtemporizador);
+				delete(i3GEO.tema.TEMPORIZADORESID[idtema]);
+			}
+			catch(e){}
+		}
+	},		
+	/*
 	Classe: i3GEO.tema.dialogo
 
 	Abre as telas de diálogo das opções de manipulação de um tema
@@ -588,35 +613,7 @@ i3GEO.tema = {
 		editorsql: function(idtema){
 			i3GEO.mapa.ativaTema(idtema);
 			i3GEO.util.dialogoFerramenta("i3GEO.tema.dialogo.editorsql()","editorsql","editorsql");
-		},
-		/*
-		Function: temporizador
-
-		Aplica um temporizador para que a camada seja redesenhada em determinado intervalo de tempo.
-
-		O campo com o valor de tempo (em segundos) é composto por "temporizador"+idtema
-
-		Parametros:
-
-		idtema - id que identifica o tema no map file.
-		*/
-		temporizador: function(idtema){
-			i3GEO.mapa.ativaTema(idtema);
-			var tempo = $i("temporizador"+idtema).value,
-				tpz = i3GEO.tema.TEMPORIZADORESID.idtema;
-			if(tempo != "" && parseInt(tempo,10) > 0){
-				i3GEO.tema.TEMPORIZADORESID.idtema = {
-					tempo: tempo,
-					idtemporizador: setInterval()
-				}
-			}
-			else{
-				if(tpz != undefined){
-					clearInterval(tpz.idtemporizador);
-					delete(i3GEO.tema.TEMPORIZADORESID.idtema);
-				}
-			}
-		}		
+		}
 	}
 };
 //YAHOO.log("carregou classe tema", "Classes i3geo");
