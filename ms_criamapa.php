@@ -463,12 +463,10 @@ Redireciona para o HTML definido em $interface, abrindo o mapa
 function abreInterface(){
 	global $interface,$caminho,$tempo;
 	$nomeInterface = explode(".",basename($interface));
-
 	$_SESSION["interface"] = $nomeInterface[0];
-	
 	if (count(explode(".php",$interface)) > 1)
 	{
-		if (file_exists($caminho."interface/".$interface))
+		if(file_exists($caminho."interface/".$interface))
 		{include_once($caminho."interface/".$interface);}
 		else 
 		{include_once($interface);}
@@ -476,7 +474,7 @@ function abreInterface(){
 	}
 	else
 	{
-		if (file_exists($caminho."interface/".$interface))
+		if(file_exists($caminho."interface/".$interface))
 		{$urln = $caminho."interface/".$interface."?".session_id();}
 		else 
 		{$urln = $interface."?".session_id();}

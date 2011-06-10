@@ -595,7 +595,7 @@ it:"Clicca per regolare la mappa per visualizzare tutto lo strato"
 }],
 "t18a":[
 {
-pt:"Op&ccedil;&otilde;es",
+pt:"Op&ccedil;&otilde;es e propriedades",
 en:"Options",
 es:"Opciones",
 it:"Opzioni"
@@ -644,7 +644,7 @@ it:"Trova gli elementi nel tema secondo i suoi attributi descrittivi."
 }],
 "t23":[
 {
-pt:"Procurar...",
+pt:"Procurar",
 en:"Search...",
 es:"Buscar...",
 it:"Cerca..."
@@ -658,7 +658,7 @@ it:"Creare un nuovo strato sulla mappa per visualizzare testi descrittivi sul te
 }],
 "t25":[
 {
-pt:"Texto...",
+pt:"Texto (nomes ou valores)",
 en:"Label...",
 es:"Texto...",
 it:"Testo..."
@@ -672,7 +672,7 @@ it:"Definire le etichette da visualizzare quando il mouse si ferma su un element
 }],
 "t27":[
 {
-pt:"Etiquetas...",
+pt:"Ativar etiquetas",
 en:"Tooltip...",
 es:"Etiquetas...",
 it:"Descrizioni..."
@@ -686,7 +686,7 @@ it:"Inserisci un filtro in questo tema per mostrare solo determinate informazion
 }],
 "t29":[
 {
-pt:"Filtro...",
+pt:"Filtrar",
 en:"Filter...",
 es:"Filtro...",
 it:"Filtro..."
@@ -700,7 +700,7 @@ it:"Vedi la tabella degli attributi di questo tema."
 }],
 "t31":[
 {
-pt:"Tabela...",
+pt:"Tabela com os dados",
 en:"Table...",
 es:"Tabla...",
 it:"Tabella..."
@@ -714,7 +714,7 @@ it:"Aprire l'editor di legenda, che consente la modifica della forma di rapprese
 }],
 "t33":[
 {
-pt:"Editar legenda...",
+pt:"Editar legenda",
 en:"Legend edit...",
 es:"Editar subtítulo...",
 it:"Modifica la legenda"
@@ -728,7 +728,7 @@ it:"Mostra i dati di questo tema in una finestra che accompagna il mouse."
 }],
 "t35":[
 {
-pt:"Mostra em janela...",
+pt:"Mostra em janela",
 en:"Show in window",
 es:"Muestra en la ventana...",
 it: "Mostra nella finestra..."
@@ -756,7 +756,7 @@ it:"Exporta a legenda para o padrão SLD."
 }],
 "t39":[
 {
-pt:"Exportar SLD...",
+pt:"Exportar SLD",
 en:"SLD...",
 es:"SLD...",
 it:"SLD..."
@@ -770,21 +770,21 @@ it:"Abre a ferramenta que permite alterar o SQL de acesso aos dados"
 }],
 "t41":[
 {
-pt:"Editar SQL...",
+pt:"Editar SQL",
 en:"SQL...",
 es:"SQL...",
 it:"SQL..."
 }],
 "t42":[
 {
-pt:"Cortina...",
+pt:"Efeito cortina",
 en:"Curtain...",
 es:"Cortina...",
 it:"Tenda..."
 }],
 "t43":[
 {
-pt:"Aplicar SLD...",
+pt:"Aplicar SLD",
 en:"Aplicar SLD...",
 es:"Aplicar SLD...",
 it:"Aplicar SLD..."

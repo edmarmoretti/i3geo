@@ -281,7 +281,8 @@ i3GEO.arvoreDeCamadas = {
 		cortina:true,
 		sql:true,
 		comentar:true,
-		temporizador:true
+		temporizador:true,
+		wms: true
 	},
 	/*
 	Variavel: CAMADAS
@@ -920,8 +921,12 @@ i3GEO.arvoreDeCamadas = {
 		{i3GEO.arvoreDeCamadas.adicionaOpcaoTema($trad("t40"),$trad("t41"),'i3GEO.tema.dialogo.editorsql(\"'+ltema.name+'\")',node);}
 		if(funcoes.comentar === true && ltema.permitecomentario.toLowerCase() !== "nao" && i3GEO.arvoreDeTemas.OPCOESADICIONAIS.comentarios === true)
 		{i3GEO.arvoreDeCamadas.adicionaOpcaoTema($trad("t45"),$trad("t45"),'i3GEO.tema.dialogo.comentario(\"'+ltema.name+'\")',node);}
+		if(funcoes.wms === true && ltema.permiteogc.toLowerCase() !== "nao"){
+			i3GEO.arvoreDeCamadas.adicionaOpcaoTema("Getcapabilities",'WMS-OGC','i3GEO.tema.dialogo.mostraWms(\"'+ltema.name+'\")',node);
+		}
 		if(i3GEO.parametros.editor.toLowerCase() === "sim")
 		{i3GEO.arvoreDeCamadas.adicionaOpcaoTema($trad("t44"),"<span style=color:red title='Apenas usuários editores podem ver essa opção' >"+$trad("t44")+"</span>",'i3GEO.tema.dialogo.salvaMapfile(\"'+ltema.name+'\")',node);}
+
 		node.loadComplete();
 	},
 	/*

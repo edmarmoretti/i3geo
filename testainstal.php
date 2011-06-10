@@ -55,7 +55,7 @@ echo "<pre>\n";
 echo "<b>TESTE DE INSTALACAO DO i3Geo</b><br>\n";
 echo getcwd();
 //echo "<br>SERVER_SOFTWARE: ".$SERVER_SOFTWARE."<br>";
-echo "<br><br>PHP (a vers&atilde;o deve ser a 5x e menor que 5.3): ";
+echo "<br><br>PHP (a vers&atilde;o deve ser a 5x): ";
 echo "<br>".phpversion()."<br>\n";
 include("classesphp/carrega_ext.php");
 $exts = get_loaded_extensions();

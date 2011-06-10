@@ -41,14 +41,12 @@ P
 <p><div style=text-align:left id=curtir ></div>
 <div style="background-color:white"><p><img src="imagens/i3geo1bw.jpg" /></div>
 </div>
-</body>
+
 <script>
 /*
 Title: ogc.htm
 
 Monta uma árvore de temas permitindo que o usuário clique em um deles e veja o endereço para acesso aos dados via WMS.
-
-A lista de dados pode vir do arquivo menutemas.xml ou de um diretório no servidor.
 
 File: i3geo/ogc.htm
 About: Licença
@@ -71,26 +69,6 @@ GNU junto com este programa; se não, escreva para a
 Free Software Foundation, Inc., no endereço
 59 Temple Street, Suite 330, Boston, MA 02111-1307 USA.
 */
-var loc = window.location.href;
-
-g_locaplic = loc.split("/ogc.htm");
-g_locaplic = g_locaplic[0]
-i3GEO.configura.locaplic = g_locaplic
-
-$i("bm1").innerHTML = i3GEO.social.bookmark(loc);
-i3GEO.social.compartilhar("curtir",loc,loc,"comtotal");
-
-g_arvoreClicks = ""
-i3GEO.idioma.IDSELETOR = "bandeiras";
-i3GEO.idioma.mostraSeletor();
-i3GEO.arvoreDeTemas.INCLUISISTEMAS = false
-i3GEO.arvoreDeTemas.FILTRAOGC = true
-i3GEO.arvoreDeTemas.INCLUIWMS = false
-i3GEO.arvoreDeTemas.OPCOESADICIONAIS.incluiArvore = false
-i3GEO.arvoreDeTemas.OPCOESADICIONAIS.incluibusca = false
-i3GEO.arvoreDeTemas.TIPOBOTAO = "radio";
-
-i3GEO.arvoreDeTemas.cria("",g_locaplic,"arvoreTemas","ogc_endereco\(this\)");
 /*
 Function: endereco
 
@@ -127,5 +105,30 @@ function ogc_endereco(tema)
 	$i("bm").innerHTML = i3GEO.social.bookmark(servico);
 	//document.getElementById("corpo").innerHTML = ins
 }
+
+
+
+var loc = window.location.href;
+
+var temp = loc.split("/ogc.htm");
+g_locaplic = temp[0]
+i3GEO.configura.locaplic = g_locaplic;
+
+$i("bm1").innerHTML = i3GEO.social.bookmark(loc);
+i3GEO.social.compartilhar("curtir",loc,loc,"comtotal");
+
+g_arvoreClicks = ""
+i3GEO.idioma.IDSELETOR = "bandeiras";
+i3GEO.idioma.mostraSeletor();
+i3GEO.arvoreDeTemas.INCLUISISTEMAS = false
+i3GEO.arvoreDeTemas.FILTRAOGC = true
+i3GEO.arvoreDeTemas.INCLUIWMS = false
+i3GEO.arvoreDeTemas.OPCOESADICIONAIS.incluiArvore = false
+i3GEO.arvoreDeTemas.OPCOESADICIONAIS.incluibusca = false
+i3GEO.arvoreDeTemas.TIPOBOTAO = "radio";
+
+i3GEO.arvoreDeTemas.cria("",g_locaplic,"arvoreTemas","ogc_endereco\(this\)");
+
 </script>
+</body>
 </html>

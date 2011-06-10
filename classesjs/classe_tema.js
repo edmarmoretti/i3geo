@@ -409,6 +409,18 @@ i3GEO.tema = {
 	*/
 	dialogo:{
 		/*
+		Function: mostraWms
+
+		Mostra a url que dá acesso ao WMS de um tema
+
+		Parametros:
+
+		tema - código do tema escolhido
+		*/
+		mostraWms: function(tema){
+			i3GEO.janela.mensagemSimples(i3GEO.configura.locaplic+"/ogc.php?tema="+tema,"Endereço do WMS");
+		},
+		/*
 		Function: comentario
 
 		Abre a janela de diálogo para o usuário ver e inserir comentarios em um tema

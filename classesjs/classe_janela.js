@@ -511,9 +511,9 @@ i3GEO.janela = {
 		}
 	},
 	/*
-	Function: alerta
+	Function: ativaAlerta
 
-	Abre uma janela com mensagem (windows.alert)
+	Substitui a janelça de alerta padrão do sistema operacional por uma outra customizada
 
 	Parametros:
 
@@ -545,6 +545,38 @@ i3GEO.janela = {
 			YAHOO.dialogInfo.show();
 		};
 	},
+	/*
+	Function: mensagemSimples
+
+	Mostra uma janela simples com uma mensagem
+
+	Parametros:
+
+	texto {String} - texto da mensagem
+	*/
+	mensagemSimples: function(texto,cabecalho){
+		if(!$i("mensagemSimples1")){
+			YAHOO.namespace("mensagemSimples");
+			YAHOO.mensagemSimples = new YAHOO.widget.SimpleDialog("mensagemSimples1",
+			{
+				width: "300px",
+				fixedcenter: true,
+				visible: true,
+				draggable: true,
+				zIndex: 100000,
+				textAlign: "left",
+				close: true,
+				modal: false,
+				effect:{effect:YAHOO.widget.ContainerEffect.FADE,duration:0.25},
+				constraintoviewport: true,
+				text: ""
+			});
+		}
+		YAHOO.mensagemSimples.setHeader(cabecalho);
+		YAHOO.mensagemSimples.render(document.body);
+		YAHOO.mensagemSimples.cfg.setProperty("text",texto);
+		YAHOO.mensagemSimples.show();
+	},	
 	/*
 	Function: tip
 
