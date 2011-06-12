@@ -568,8 +568,8 @@ i3GEO.editorOL = {
 				displayClass: "editorOLidentifica",
 				eventListeners: {
 					getfeatureinfo: function(event) {
-						var lonlat = i3GEO.editorOL.mapa.getLonLatFromPixel(event.xy);
-						var lonlattexto = "<hr><pre><span style=color:blue;cursor:pointer onclick='i3GEO.editorOL.captura(\""+lonlat.lon+","+lonlat.lat+"\")'>captura</span></pre>";
+						var lonlat = i3GEO.editorOL.mapa.getLonLatFromPixel(event.xy),
+							lonlattexto = "<hr><pre><span style=color:blue;cursor:pointer onclick='i3GEO.editorOL.captura(\""+lonlat.lon+","+lonlat.lat+"\")'>captura</span></pre>";
 						i3GEO.editorOL.mapa.addPopup(new OpenLayers.Popup.FramedCloud(
 							"chicken", 
 							i3GEO.editorOL.mapa.getLonLatFromPixel(event.xy),

@@ -255,9 +255,14 @@ i3GEO.arvoreDeCamadas = {
 	*/
 	ICONETEMA: true,
 	/*
-	Propriedade: FUNCOESTEMA
+	Propriedade: FUNCOES
 
-	Indicação de quais funções serão incluídas em cada tema mostrado na árvore
+	Indicação de quais funções serão incluídas em cada tema mostrado na árvore quando o usuário aciona o item "opções"
+	
+	Além de definir o item como false ou true, algumas funções apenas são mostradas em conformidade com o tipo de camada.
+	No sistema de administração, pode-se também controlar algumas das funções, como por exemplo "sql", "wms" e "temporizador"
+	
+	Exemplo de como alterar um valor diretamente no javascript da interface do mapa i3GEO.arvoreDeCamadas.FUNCOES.excluir = false
 
 	*/
 	FUNCOES: {

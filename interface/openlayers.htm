@@ -206,6 +206,13 @@ i3GEO.Interface.openlayers.GADGETS = {
 		OverviewMap:false	
 	};
 i3GEO.Interface.openlayers.TILES = true;
+
+//
+//desabilita o aplicativo default do menu suspenso
+//
+i3GEO.gadgets.PARAMETROS.mostraMenuSuspenso.finaliza = 'i3GEOoMenuBar.getMenuItem("omenudataInterface1").cfg.setProperty("text", " ");'
+
+
 /*
 Após a criação, é criado o objeto i3geoOL que corresponde ao objeto map da API do OpenLayers.
 Vc pode usar i3geoOL para aplicar os métodos e verificar as propriedades da API do OpenLayers
@@ -277,7 +284,6 @@ OpenLayers.ImgPath = "../pacotes/openlayers/img/";
 //
 //inicia o mapa
 //
-
 i3GEO.inicia();
 </script>
 </body>

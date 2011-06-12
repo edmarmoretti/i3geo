@@ -89,7 +89,7 @@ i3GEO.gadgets = {
 
 		"mostraMenuSuspenso":
 
-		{idhtml:"menus",deslocaEsquerda:0},
+		{idhtml:"menus",deslocaEsquerda:0,finaliza:""},
 		
 		"mostraMenuLista":
 		
@@ -763,6 +763,15 @@ i3GEO.gadgets = {
 	Mostra o menu suspenso com opções extras de análise, ajuda, etc
 
 	O objeto YAHOO.widget.MenuBar resultante pode ser obtido na variável i3GEOoMenuBar
+	
+	
+	i3GEOoMenuBar pode ser manipulado com os métodos da biblioteca YUI, por exemplo,
+	i3GEOoMenuBar.getMenuItem("omenudataInterface1").cfg.setProperty("text", " ");
+	
+	Para executar uma operação após o menu ser montado, utilize a propriedade
+	i3GEO.gadgets.PARAMETROS.mostraMenuSuspenso.finaliza, por exemplo (a string é executada por meio da função eval do javascript)
+	
+	i3GEO.gadgets.PARAMETROS.mostraMenuSuspenso.finaliza = 'i3GEOoMenuBar.getMenuItem("omenudataInterface1").cfg.setProperty("text", " ");'
 
 	O conteúdo do menu é baseado na variável i3GEO.configura.oMenuData
 
@@ -773,12 +782,12 @@ i3GEO.gadgets = {
 	*/
 	mostraMenuSuspenso: function(id){
 		if(typeof(console) !== 'undefined'){console.info("i3GEO.gadgets.mostraMenuSuspenso()");}
-		var objid,sobe,n,i,estilo,t,onMenuBarBeforeRender,temp,ifr,
-			MM = YAHOO.widget.MenuManager,
+		var objid,sobe,n,i,estilo,t,onMenuBarBeforeRender,temp,ifr,i3GEOoMenuBarLocal,
 			ms = i3GEO.gadgets.PARAMETROS.mostraMenuSuspenso,
 			confm = i3GEO.configura.oMenuData,
 			ins = "",
 			alinhamento = "";
+		i3GEOoMenuBar = YAHOO.widget.MenuManager;
 		if(arguments.length === 0)
 		{id = ms.idhtml;}
 		else
@@ -816,7 +825,7 @@ i3GEO.gadgets = {
 					if($i("menu"+nomeMenu)){
 						nomeSub = subs[nomeMenu];
 						if(nomeSub !== ""){
-							i3GEOoMenuBar.getItem(conta).cfg.setProperty(
+							i3GEOoMenuBarLocal.getItem(conta).cfg.setProperty(
 								'submenu',
 								{
 									id:nomeMenu,
@@ -832,28 +841,28 @@ i3GEO.gadgets = {
 			{ifr = true;}
 			else
 			{ifr = false;}
-			i3GEOoMenuBar=new YAHOO.widget.MenuBar(id,{iframe:ifr,autosubmenudisplay: true, showdelay: 100, hidedelay: 500, lazyload: false});
-			MM.addMenu(i3GEOoMenuBar);
-			i3GEOoMenuBar.beforeRenderEvent.subscribe(onMenuBarBeforeRender);
-			i3GEOoMenuBar.render();
+			i3GEOoMenuBarLocal = new YAHOO.widget.MenuBar(id,{iframe:ifr,autosubmenudisplay: true, showdelay: 100, hidedelay: 500, lazyload: false});
+			i3GEOoMenuBar.addMenu(i3GEOoMenuBarLocal);
+			i3GEOoMenuBarLocal.beforeRenderEvent.subscribe(onMenuBarBeforeRender);
+			i3GEOoMenuBarLocal.render();
 			//
 			//marca o tipo de interface em uso
 			//
 			try{
 				if(i3GEO.Interface.ATUAL === "padrao"){
-					MM.getMenuItem("omenudataInterface1").cfg.setProperty("checked", true);
+					i3GEOoMenuBar.getMenuItem("omenudataInterface1").cfg.setProperty("checked", true);
 				}
 				if(i3GEO.Interface.ATUAL === "openlayers"){
-					MM.getMenuItem("omenudataInterface2").cfg.setProperty("checked", true);
+					i3GEOoMenuBar.getMenuItem("omenudataInterface2").cfg.setProperty("checked", true);
 				}
 				if(i3GEO.Interface.ATUAL === "flamingo"){
-					MM.getMenuItem("omenudataInterface3").cfg.setProperty("checked", true);
+					i3GEOoMenuBar.getMenuItem("omenudataInterface3").cfg.setProperty("checked", true);
 				}
 				if(i3GEO.Interface.ATUAL === "googlemaps"){
-					MM.getMenuItem("omenudataInterface4").cfg.setProperty("checked", true);
+					i3GEOoMenuBar.getMenuItem("omenudataInterface4").cfg.setProperty("checked", true);
 				}
 				if(i3GEO.Interface.ATUAL === "googleearth"){
-					MM.getMenuItem("omenudataInterface5").cfg.setProperty("checked", true);
+					i3GEOoMenuBar.getMenuItem("omenudataInterface5").cfg.setProperty("checked", true);
 				}
 			}catch(e){
 				if(typeof(console) !== 'undefined'){console.warning("i3GEO.gadgets.mostraMenuSuspenso() "+ e);}
@@ -862,13 +871,13 @@ i3GEO.gadgets = {
 			//desabilita opções em interfaces específicas
 			//
 			if(i3GEO.Interface.ATUAL !== "padrao" && $i("omenudataArquivos3")){
-				MM.getMenuItem("omenudataArquivos3").cfg.setProperty("disabled", true);
+				i3GEOoMenuBar.getMenuItem("omenudataArquivos3").cfg.setProperty("disabled", true);
 			}
 			if(i3GEO.Interface.ATUAL === "googleearth" && $i("omenudataJanelas1")){
-				MM.getMenuItem("omenudataJanelas1").cfg.setProperty("disabled", true);
+				i3GEOoMenuBar.getMenuItem("omenudataJanelas1").cfg.setProperty("disabled", true);
 			}
 			if(i3GEO.Interface.ATUAL !== "openlayers" && $i("omenudataJanelas3")){
-				MM.getMenuItem("omenudataJanelas3").cfg.setProperty("disabled", true);
+				i3GEOoMenuBar.getMenuItem("omenudataJanelas3").cfg.setProperty("disabled", true);
 			}			
 			//
 			//corrige problemas de estilo
@@ -881,6 +890,9 @@ i3GEO.gadgets = {
 			{temp.border = "1px dotted white";}
 			if(navm && i3GEO.Interface.ATUAL === "googlemaps")
 			{temp.border = "2px dotted white";}
+			if(ms.finaliza && ms.finaliza != ""){
+				eval(ms.finaliza);
+			}
 		}
 	},
 	/*

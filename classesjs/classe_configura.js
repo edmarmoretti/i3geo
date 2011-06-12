@@ -100,7 +100,7 @@ i3GEO.configura = {
 
 			{ text: $trad("u1"), url: "http://www.softwarepublico.gov.br/spb/ver-comunidade?community_id=1444332" },
 
-			{ text: $trad("u2"), url: "javascript:i3GEO.ajuda.abreDoc()" }
+			{ text: $trad("u2"), url: "javascript:i3GEO.ajuda.abreDoc()", target: "_blank" }
 
 			]
 
