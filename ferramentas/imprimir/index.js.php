@@ -86,15 +86,15 @@ i3GEOF.imprimir = {
 			'		<td>A4 com margens pdf</td>' +
 			'	</tr>' +
 			'	<tr>' +
-			'		<td><input style="border:0px solid white;cursor:pointer" onclick=i3GEOF.imprimir.abreI(this) type=radio value="geotif.php" name=cmodelo /></td>' +
+			'		<td><input style="border:0px solid white;cursor:pointer" onclick=i3GEOF.imprimir.abreI(this,"interna") type=radio value="geotif.php" name=cmodelo /></td>' +
 			'		<td>Geo Tiff</td>' +
 			'	</tr>' +
 			'	<tr>' +
-			'		<td><input style="border:0px solid white;cursor:pointer" onclick=i3GEOF.imprimir.abreI(this) type=radio value="aggpng.php" name=cmodelo /></td>' +
+			'		<td><input style="border:0px solid white;cursor:pointer" onclick=i3GEOF.imprimir.abreI(this,"interna") type=radio value="aggpng.php" name=cmodelo /></td>' +
 			'		<td>Agg/Png alta qualidade</td>' +
 			'	</tr>' +
 			'	<tr>' +
-			'		<td><input style="border:0px solid white;cursor:pointer" onclick=i3GEOF.imprimir.abreI(this) type=radio value="svg.php" name=cmodelo /></td>' +
+			'		<td><input style="border:0px solid white;cursor:pointer" onclick=i3GEOF.imprimir.abreI(this,"interna") type=radio value="svg.php" name=cmodelo /></td>' +
 			'		<td>Svg - vetorial</td>' +
 			'	</tr>' +
 			'</table>';
@@ -136,9 +136,22 @@ i3GEOF.imprimir = {
 	Function: abreI
 	
 	Abre uma nova janela com o resultado da impressão.
+	
+	Parameters:
+	
+	obj {objeto INPUT}
+	
+	tipoAbertura {string} - (opcional) se for "interna" abre em uma janela interna do mapa
 	*/
-	abreI: function(obj){
-		window.open(i3GEO.configura.locaplic+"/ferramentas/imprimir/"+obj.value+"?g_sid="+i3GEO.configura.sid+"&interface="+i3GEO.Interface.ATUAL+"&mapexten="+i3GEO.parametros.mapexten);
+	abreI: function(obj,tipoAbertura){
+		var url = i3GEO.configura.locaplic+"/ferramentas/imprimir/"+obj.value+"?g_sid="+i3GEO.configura.sid+"&interface="+i3GEO.Interface.ATUAL+"&mapexten="+i3GEO.parametros.mapexten;
+		var id = "imprimir"+Math.random();
+		if(tipoAbertura){
+			i3GEO.janela.cria("350px","350px",url,"","","Arquivos",id);
+		}
+		else{
+			window.open(url);
+		}
 	}
 };
 <?php error_reporting(0);if(extension_loaded('zlib')){ob_end_flush();}?>

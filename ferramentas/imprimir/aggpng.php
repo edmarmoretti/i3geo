@@ -1,3 +1,12 @@
+<style>
+body
+{margin:20px;font-family: Verdana, Arial, Helvetica, sans-serif;font-size: 14px;width:300px}
+A
+{text-align:left;font-family: Verdana, Arial, Helvetica, sans-serif;color: #2F4632;}
+A:hover 
+{color: #4142ff;font-weight: normal;font-family: Verdana, Arial, Helvetica, sans-serif;}
+</style>
+<body>
 <?php
 /*
 About: Licença
@@ -102,11 +111,36 @@ if($mapexten != ""){
 	$extatual->setextent($ext[0],$ext[1],$ext[2],$ext[3]);
 }
 $o->set("imagemode",MS_IMAGEMODE_RGB);
+$protocolo = explode("/",$_SERVER['SERVER_PROTOCOL']);
+//mapa
 $imgo = $map->draw();
 $nomer = ($imgo->imagepath)."mapa".$nomes.".png";
 $imgo->saveImage($nomer);
-$protocolo = explode("/",$_SERVER['SERVER_PROTOCOL']);
 $nomemapa = strtolower($protocolo[0])."://".$_SERVER['HTTP_HOST'].($imgo->imageurl).basename($nomer);
-echo "<p>Utilize a opção de alteração das propriedades do mapa para ajustar a legenda, tamanho e outras características</p>";
-echo "<a style=font-family:Verdana,Arial,Helvetica,sans-serif; href='$nomemapa' >Arquivo gerado! Clique para ver.</a>";
+//legenda
+$imgo = $map->drawlegend();
+$nomer = ($imgo->imagepath)."legenda".$nomes.".png";
+$imgo->saveImage($nomer);
+$nomelegenda = strtolower($protocolo[0])."://".$_SERVER['HTTP_HOST'].($imgo->imageurl).basename($nomer);
+//escala
+$imgo = $map->drawscalebar();
+$nomer = ($imgo->imagepath)."escala".$nomes.".png";
+$imgo->saveImage($nomer);
+$nomeescala = strtolower($protocolo[0])."://".$_SERVER['HTTP_HOST'].($imgo->imageurl).basename($nomer);
+//referência
+$o = $map->reference->outlinecolor;
+$o->setrgb(255,0,0);
+$map->preparequery();
+$imgo = $map->drawreferencemap();
+$nomer = ($imgo->imagepath)."ref".$nomes.".png";
+$imgo->saveImage($nomer);
+$nomeref = strtolower($protocolo[0])."://".$_SERVER['HTTP_HOST'].($imgo->imageurl).basename($nomer);
+
+
+echo "<p>Utilize a opção de alteração das propriedades do mapa para ajustar a legenda, tamanho e outras características antes de gerar os arquivos.</p>";
+echo "<p>Arquivos gerados:</p>";
+echo "<a style=font-family:Verdana,Arial,Helvetica,sans-serif; href='$nomemapa' target=_blank >Mapa</a><br><br>";
+echo "<a style=font-family:Verdana,Arial,Helvetica,sans-serif; href='$nomeescala' target=_blank >Barra de escala</a><br><br>";
+echo "<a style=font-family:Verdana,Arial,Helvetica,sans-serif; href='$nomeref' target=_blank >Mapa de referência</a><br><br>";
+echo "<a style=font-family:Verdana,Arial,Helvetica,sans-serif; href='$nomelegenda' target=_blank >Legenda</a><br>";
 ?>

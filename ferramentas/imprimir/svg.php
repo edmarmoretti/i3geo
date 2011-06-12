@@ -1,3 +1,12 @@
+<style>
+body
+{margin:20px;font-family: Verdana, Arial, Helvetica, sans-serif;font-size: 14px;width:300px}
+A
+{text-align:left;font-family: Verdana, Arial, Helvetica, sans-serif;color: #2F4632;}
+A:hover 
+{color: #4142ff;font-weight: normal;font-family: Verdana, Arial, Helvetica, sans-serif;}
+</style>
+<body>
 <?php
 /*
 About: Licença
@@ -98,17 +107,17 @@ if($mapexten != ""){
 	$extatual->setextent($ext[0],$ext[1],$ext[2],$ext[3]);
 }
 $map->selectOutputFormat("svg");
-//$of = $map->outputformat;
-//$of->set("driver","svg");
-//$of->set("mimetype","image/svg+xml");
-//$of->set("formatoption","COMPRESSED_OUTPUT=TRUE");
-//$of->set("formatoption","FULL_RESOLUTION=TRUE");
-//$of->set("imagemode","RGB");
 
+$protocolo = explode("/",$_SERVER['SERVER_PROTOCOL']);
+//mapa
 $imgo = $map->draw();
 $nomer = ($imgo->imagepath)."mapa".$nomes.".svg";
 $imgo->saveImage($nomer);
-$protocolo = explode("/",$_SERVER['SERVER_PROTOCOL']);
 $nomemapa = strtolower($protocolo[0])."://".$_SERVER['HTTP_HOST'].($imgo->imageurl).basename($nomer);
-echo "<a style=font-family:Verdana,Arial,Helvetica,sans-serif; href='$nomemapa' >Arquivo gerado! Clique para ver.</a>";
+
+
+
+echo "<p>Utilize a opção de alteração das propriedades do mapa para ajustar a legenda, tamanho e outras características antes de gerar os arquivos.</p>";
+echo "<p>Arquivos gerados:</p>";
+echo "<a style=font-family:Verdana,Arial,Helvetica,sans-serif; href='$nomemapa' target=_blank >Mapa</a><br><br>";
 ?>
