@@ -5,6 +5,7 @@
   	<title></title>
   </head>
 <body name="ancora" class="yui-skin-sam;" style="overflow:auto;">
+<div style="top:5px;left:1px;display:block;width:90%;"  id="resultadoTemas" >Aguarde...</div>
 <div style="top:5px;left:1px;display:block;width:90%;"  id="resultado" >Aguarde...</div>
 
 <script src="../i3geo_tudo_compacto.js.php" type="text/javascript"></script>
@@ -12,7 +13,10 @@
 <script type="text/javascript">
 i3GEObuscaRapida.inicia(
    	window.parent.document.getElementById("valorBuscaRapida").value,
-   	window.parent.i3GEO.configura.locaplic
+   	window.parent.i3GEO.configura.locaplic,
+	i3GEObuscaRapida.montaResultado,
+	window.parent.i3GEO.gadgets.PARAMETROS.mostraBuscaRapida.servicosexternos,
+	window.parent.i3GEO.gadgets.PARAMETROS.mostraBuscaRapida.temasmapa
 )
 </script>
 </body>

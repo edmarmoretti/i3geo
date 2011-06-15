@@ -696,6 +696,8 @@ switch (strtoupper($funcao))
 	
 	permitecomentario
 	
+	itembuscarapida
+	
 	Retorno:
 	
 	{JSON}
@@ -1341,6 +1343,7 @@ function pegaMetadados()
 	$dados["ltempoitemlink"] = $layer->getmetadata("ltempoitemlink");
 	$dados["iconetema"] = $layer->getmetadata("iconetema");
 	$dados["permitecomentario"] = $layer->getmetadata("permitecomentario");
+	$dados["itembuscarapida"] = $layer->getmetadata("itembuscarapida");
 	$dados["legendaimg"] = $layer->getmetadata("legendaimg");
 	if($layer->connectiontype == 7 || $layer->connectiontype== 9){
 		$dados["wms_srs"] = $layer->getmetadata("wms_srs");
@@ -1369,7 +1372,7 @@ function pegaMetadados()
 }
 function alterarMetadados()
 {
-	global $legendaimg,$wms_srs,$wms_name,$wms_server_version,$wms_format,$wms_auth_username,$wms_auth_password,$wms_auth_type,$wms_connectiontimeout,$wms_latlonboundingbox,$wms_proxy_auth_type,$wms_proxy_host,$wms_proxy_port,$wms_proxy_type,$wms_proxy_username,$wms_proxy_password,$wms_sld_body,$wms_sld_url,$wms_style,$wms_bgcolor,$wms_transparent,$wms_time,$permitecomentario,$iconetema,$ltempoformatodata,$ltempoiteminicio,$ltempoitemfim,$ltempoitemtitulo,$ltempoitemdescricao,$ltempoitemtip,$ltempoitemimagem,$ltempoitemicone,$ltempoitemlink,$description_template,$palletestep,$palletefile,$arquivodownload,$temporizador,$arquivokmz,$codigoMap,$codigoLayer,$locaplic,$aplicaextensao,$classestamanho,$classessimbolo,$classescor,$classesnome,$classesitem,$mensagem,$identifica,$transitioneffect,$extensao,$escondido,$download,$escala,$tema,$classe,$tip,$itenslink,$itens,$itensdesc,$editorsql,$cache;
+	global $legendaimg,$wms_srs,$wms_name,$wms_server_version,$wms_format,$wms_auth_username,$wms_auth_password,$wms_auth_type,$wms_connectiontimeout,$wms_latlonboundingbox,$wms_proxy_auth_type,$wms_proxy_host,$wms_proxy_port,$wms_proxy_type,$wms_proxy_username,$wms_proxy_password,$wms_sld_body,$wms_sld_url,$wms_style,$wms_bgcolor,$wms_transparent,$wms_time,$permitecomentario,$itembuscarapida,$iconetema,$ltempoformatodata,$ltempoiteminicio,$ltempoitemfim,$ltempoitemtitulo,$ltempoitemdescricao,$ltempoitemtip,$ltempoitemimagem,$ltempoitemicone,$ltempoitemlink,$description_template,$palletestep,$palletefile,$arquivodownload,$temporizador,$arquivokmz,$codigoMap,$codigoLayer,$locaplic,$aplicaextensao,$classestamanho,$classessimbolo,$classescor,$classesnome,$classesitem,$mensagem,$identifica,$transitioneffect,$extensao,$escondido,$download,$escala,$tema,$classe,$tip,$itenslink,$itens,$itensdesc,$editorsql,$cache;
 	$dados = array();
 	$mapfile = $locaplic."/temas/".$codigoMap.".map";
 	$mapa = ms_newMapObj($mapfile);
@@ -1413,6 +1416,7 @@ function alterarMetadados()
 	$layer->setmetadata("ltempoitemlink",$ltempoitemlink);
 	$layer->setmetadata("iconetema",$iconetema);
 	$layer->setmetadata("permitecomentario",$permitecomentario);
+	$layer->setmetadata("itembuscarapida",$itembuscarapida);
 	$layer->setmetadata("legendaimg",$legendaimg);
 	if($layer->connectiontype == 7 || $layer->connectiontype== 9){
 		$layer->setmetadata("wms_srs",$wms_srs);

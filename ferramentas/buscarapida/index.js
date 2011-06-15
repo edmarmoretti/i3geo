@@ -139,19 +139,56 @@ i3GEObuscaRapida = {
 	
 	locaplic {String} - url onde o i3geo está instalado, pe, http://localhost/i3geo
 	
-	resultado {Function} (opcional) - função que será executada para processar o resultado da busca default é i3GEObuscaRapida.montaResultado
+	resultado {Function} - função que será executada para processar o resultado da busca no servico definido em i3GEObuscaRapida.servicowms. O default é i3GEObuscaRapida.montaResultado
+	
+	servicosexternos {boolean} - indica se a busca será feita nos serviços de busca externos
+	
+	temasmapa {boolean} - indica se a busca será feita nos temas existentes no mapa
 	*/
-	inicia: function(palavra,locaplic,resultado){
-		if(arguments.length == 2)
-		{var resultado = i3GEObuscaRapida.montaResultado;}
-		aguarde("block")
-		$i("resultado").innerHTML = "Aguarde..."
+	inicia: function(palavra,locaplic,resultado,servicosexternos,temasmapa){
 		$i(i3GEObuscaRapida.idresultado).style.display = "none";
 		var palavra = i3GEO.util.removeAcentos(palavra);
 		i3GEObuscaRapida.palavra = palavra;
 		i3GEObuscaRapida.locaplic = locaplic;
-		i3GEO.php.buscaRapida(resultado,locaplic,i3GEObuscaRapida.servico,palavra);
+		if(servicosexternos === true){
+			aguarde("block")
+			$i("resultado").innerHTML = "Aguarde..."
+			i3GEO.php.buscaRapida(resultado,locaplic,i3GEObuscaRapida.servico,palavra);
+		}
+		if(temasmapa === true){
+			aguarde("block")
+			$i("resultadoTemas").innerHTML = "Aguarde..."
+			i3GEO.php.buscaRapida(i3GEObuscaRapida.montaResultadoTemas,locaplic,"temas",palavra);
+		}		
 	},
+	/*
+	Function: montaResultadoTemas
+	
+	Mostra o resultado da busca nos atributos dos temas existentes no mapa
+
+	Parametro:
+	
+	retorno {JSON} - resultado da função i3GEO.php.buscaRapida
+	*/
+	montaResultadoTemas: function(retorno){
+		var ins = "Nada encontrado nos temas ou nenhum tema permite busca.<br>";
+		try{
+			if(retorno.data){
+				ins = "<table >";
+				for (i=0;i<retorno.data.length; i++){
+					ins += "<tr><td style='text-align:left'>"
+					ins += retorno.data[i].valor;
+					var ext = retorno.data[i].box;
+					ins += "</td><td onclick='i3GEObuscaRapida.zoomExt(\""+ext+"\")' onmouseover=\"i3GEObuscaRapida.mostraxy('"+ext+"','extent')\" onmouseout='i3GEObuscaRapida.escondexy()' style='color:blue;cursor:pointer'><img title='localizar' src='../../imagens/branco.gif' class='tic' /></td></tr>"
+				}
+				ins += "</table>"
+			}
+		}
+		catch(e){var ins = "Nada encontrado nos temas ou nenhum tema permite busca.<br>";}
+		$i("resultadoTemas").style.display = "block";
+		$i("resultadoTemas").innerHTML = ins;
+		aguarde("none");
+	},	
 	/*
 	Function: montaResultado
 	
@@ -164,7 +201,7 @@ i3GEObuscaRapida = {
 	retorno {JSON} - resultado da função i3GEO.php.buscaRapida
 	*/
 	montaResultado: function(retorno){
-		var ins = "Nada encontrado em "+i3GEObuscaRapida.servico+"<br>";
+		var ins = "Nada encontrado em "+i3GEObuscaRapida.servicowms+"<br>";
 		try{
 			if(retorno.data){
 				if (retorno.data.geonames){
@@ -180,7 +217,7 @@ i3GEObuscaRapida = {
 							var wkt = retorno.data.geonames[i].lugares[j].limite
 							ins += " "+retorno.data.geonames[i].lugares[j].centroide;
 							var gid = retorno.data.geonames[i].lugares[j].gid
-							ins += "</td><td onclick=\""+i3GEObuscaRapida.funcaozoom+"('"+wkt+"','"+layer+"','"+gid+"','"+nm+"')\" onmouseover=\"i3GEObuscaRapida.mostraxy('"+wkt+"')\" onmouseout='i3GEObuscaRapida.escondexy()' style='color:blue;cursor:pointer'><img title='localizar' src='../../imagens/branco.gif' class='tic' /></td></tr>"
+							ins += "</td><td onclick=\""+i3GEObuscaRapida.funcaozoom+"('"+wkt+"','"+layer+"','"+gid+"','"+nm+"')\" onmouseover=\"i3GEObuscaRapida.mostraxy('"+wkt+"','wkt')\" onmouseout='i3GEObuscaRapida.escondexy()' style='color:blue;cursor:pointer'><img title='localizar' src='../../imagens/branco.gif' class='tic' /></td></tr>"
 						}
 					}
 				}
@@ -257,20 +294,23 @@ i3GEObuscaRapida = {
     	var adicionaCamada = function(layer,gid,nm,ext){
 	 		var s = i3GEObuscaRapida.servicowms+"?gid="+gid+"&";
 			i3GEO.php.adicionaTemaWMS(window.parent.i3GEO.atualiza,s,layer,"default","EPSG:4291","image/png","1.1.0",nm+" - "+layer,"","nao","",i3GEObuscaRapida.locaplic,window.parent.i3GEO.configura.sid);
-			if(window.parent.i3GEO.Interface.ATUAL == "googlemaps"){
-				window.parent.i3GEO.Interface.googlemaps.zoom2extent(ext);
-			}
-			if(window.parent.i3GEO.Interface.ATUAL == "googleearth"){
-				window.parent.i3GEO.Interface.googleearth.zoom2extent(ext);
-			}			
-			if(window.parent.i3GEO.Interface.ATUAL == "openlayers"){
-				window.parent.i3GEO.Interface.openlayers.zoom2ext(ext);
-			}
+			i3GEObuscaRapida.zoomExt(ext);
 		};
 		var ext = i3GEO.util.wkt2ext(wkt,"polygon");
 		if(ext == false){alert("wkt invalido");return;}
-		try{window.parent.objaguarde.abre("i3GEO.atualiza","Aguarde...");}catch(e){if(typeof(console) !== 'undefined'){console.error(e);}}
+		try{window.parent.i3GEO.janela.abreAguarde("i3GEO.atualiza","Aguarde...");}catch(e){if(typeof(console) !== 'undefined'){console.error(e);}}
 		i3GEO.php.mudaext(adicionaCamada(layer,gid,nm,ext),window.parent.i3GEO.configura.tipoimagem,ext,i3GEObuscaRapida.locaplic,window.parent.i3GEO.configura.sid);
+	},
+	zoomExt: function(ext){
+		if(window.parent.i3GEO.Interface.ATUAL == "googlemaps"){
+			window.parent.i3GEO.Interface.googlemaps.zoom2extent(ext);
+		}
+		if(window.parent.i3GEO.Interface.ATUAL == "googleearth"){
+			window.parent.i3GEO.Interface.googleearth.zoom2extent(ext);
+		}			
+		if(window.parent.i3GEO.Interface.ATUAL == "openlayers"){
+			window.parent.i3GEO.Interface.openlayers.zoom2ext(ext);
+		}	
 	},
 	/*
 	Function: adicionatema
@@ -290,7 +330,7 @@ i3GEObuscaRapida = {
 	adicionatema:function(obj){
 		if (obj.checked)
 		{
-			window.parent.objaguarde.abre("i3GEO.atualiza","Aguarde...");
+			window.parent.i3GEO.janela.abreAguarde("i3GEO.atualiza","Aguarde...");
 			var temp = function()
 			{window.parent.i3GEO.atualiza("");}
 			i3GEO.php.adtema(temp,obj.value,i3GEObuscaRapida.locaplic,window.parent.i3GEO.configura.sid);
@@ -305,9 +345,11 @@ i3GEObuscaRapida = {
 	
 	Parameters:
 	
-	wkt {String} - coordenadas em wkt do tipo polígono representando a extensão geográfica do elemento
+	texto {String} - coordenadas representando a extensão geográfica do elemento
+	
+	tipo {string} - wkt|extent
 	*/
-	mostraxy:function mostraxy(wkt){
+	mostraxy:function mostraxy(texto,tipo){
 		try{
 			if(!window.parent){return;}
 			if(!window.parent.i3GEO){return;}
@@ -316,8 +358,11 @@ i3GEObuscaRapida = {
 			{return;}
 		}
 		catch(e){if(typeof(console) !== 'undefined'){console.error(e);};return;}
-		var ext = i3GEO.util.wkt2ext(wkt,"polygon");
-		if(ext == false){alert("wkt invalido");return;}	
+		if(tipo === "wkt")
+		{var ext = i3GEO.util.wkt2ext(texto,"polygon");}
+		else
+		{var ext = texto;}
+		if(ext == false){alert("texto invalido");return;}	
 		var ext = ext.split(" ");
 		var xMin = ext[0];
 		var xMax = ext[2];

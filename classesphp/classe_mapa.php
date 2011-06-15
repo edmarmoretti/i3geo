@@ -104,6 +104,29 @@ Salva o mapfile atual
 	  	$this->mapa->save($this->arquivo);
 	}
 /*
+Method: listaTemasBuscaRapida
+
+Elabora uma lista de temas e seus respectivos itens para uso no método buscaRegistros da classe classe_atributos
+
+<Atributos->buscaRegistros>
+
+A lista contém apenas os temas que estão visíveis e que possuem o metadata "itembuscarapida"
+
+Retorno:
+
+{string} - Lista de busca no formato item;tema,item;tema
+*/
+	function listaTemasBuscaRapida(){
+		$lista = array();
+		foreach($this->layers as $l)
+		{
+			$metadata = $l->getmetadata("itembuscarapida");
+			if($l->status == MS_DEFAULT && $metadata != "")
+			{$lista[] = $metadata.";".$l->name;}
+		}
+		return implode(",",$lista);
+	}
+/*
 Method: mudaoutputformat
 
 Muda o OUTPUTFORMAT

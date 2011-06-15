@@ -190,6 +190,7 @@ MAP
 			"TITULO"       "Países do mundo" #nome alternativo que e mostrado nos combos para escolha do tema
 			"TIP" "FIPS_CNTRY,GMI_CNTRY,CNTRY_NAME"
 			"cache" "sim"
+			"itembuscarapida" "LONG_NAME"
 		END
 		NAME "mundo"
 		SIZEUNITS PIXELS

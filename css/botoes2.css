@@ -185,6 +185,15 @@
 	background-image:URL('../imagens/visual/default/sprite2.png');
 	background-repeat: no-repeat;
 	background-position: 0px -576px;
+
+}
+.ticPropriedades2
+{
+	background-image:URL('../imagens/visual/default/sprite2.png');
+	background-repeat: no-repeat;
+    background-position: -5px -603px;
+    height: 15px;
+    width: 15px;
 }
 #ondeestou
 {
@@ -754,6 +763,7 @@
 	cursor:pointer;
 	width:16px;
 }
+
 button{background:url(../imagens/tic2.png) 98% 50% no-repeat;}
 #encolheFerramentas
 {background-image:URL('../imagens/encolhe.png');background-repeat: no-repeat;background-position:center;cursor:pointer;}

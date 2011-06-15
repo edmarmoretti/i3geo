@@ -395,6 +395,7 @@ function: buscaRegistros
 Procura valores em uma tabela que aderem a uma palavra de busca.
 
 parameters:
+
 $palavra - Palavra que será procurada.
 
 $lista - Lista de busca no formato item;tema,item;tema.
@@ -405,6 +406,7 @@ $onde - Tipo de abrangência espacial (brasil ou mapa)
 */
 	function buscaRegistros($palavra,$lista,$tipo,$onde)
 	{
+		//error_reporting(E_ALL);
 		if ($onde == "mapa")
 		{$this->mapa = extPadrao($this->mapa);}
 		$ptvs = explode(",",$lista);
@@ -442,7 +444,7 @@ $onde - Tipo de abrangência espacial (brasil ou mapa)
 			$buscas = "ÁÃÓÕÔáàãâóòôõúûíéêç";
 			$buscaUTF = $this->converte($buscas);
 			$trocas = "AAOOOaaaaoooouuieecAAOOOaaaaoooouuieec";
-			$buscas = $buscas.$buscasUTF;
+			$buscas = $buscas.$buscaUTF;
 			$sopen = $l->open();
 			if($sopen == MS_FAILURE){return "erro";}
 			$l->whichShapes($this->mapa->extent);

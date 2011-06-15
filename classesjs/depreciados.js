@@ -285,13 +285,12 @@ function pCookie(nome)
  wdocaf (depreciado)
 */
 function wdocaf(wlargura,waltura,wsrc,nx,ny,texto)
-{alert("funcao depreciada");var janela = i3GEO.janela.cria(wlargura,waltura,wsrc,nx,ny,texto);}
+{var janela = i3GEO.janela.cria(wlargura,waltura,wsrc,nx,ny,texto);}
 /*
  wdocaf2 (depreciado)
 */
 function wdocaf2(wlargura,waltura,wsrc,nx,ny,texto)
 {
-	alert("funcao depreciada");
 	var id = YAHOO.util.Dom.generateId();
 	i3GEO.janela.cria(wlargura,waltura,wsrc,nx,ny,texto,id,true);
 }

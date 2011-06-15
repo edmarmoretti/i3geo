@@ -2099,12 +2099,35 @@ Processa os atributos da tabela associada ao tema.
 /*
 Valor: BUSCARAPIDA
 
-Acessa dados de um serviço de geonames.
+Acessa dados de um serviço de geonames ou busca dados nos temas existentes no mapa.
+
+A pesquisa em temas é feita apenas quando existir o metadata itembuscarapida
 
 <buscaRapida>
 */
 	case "BUSCARAPIDA":
-		$retorno = buscaRapida($servico,$palavra);
+		if($servico != "temas")
+		{$retorno = buscaRapida($servico,$palavra);}
+		else{
+			include_once("classe_mapa.php");
+			$m = New Mapa($map_file);
+			$lista = $m->listaTemasBuscaRapida();
+			if($lista != ""){
+				include_once("classe_atributos.php");
+				$m = new Atributos($map_file);
+				if($interface == "googlemaps")
+				{$m->mapa->setProjection("init=epsg:4291");}			
+				$dados = $m->buscaRegistros($palavra,$lista,"qualquer","mapa");
+				foreach($dados as $tema){
+					$rs = $tema["resultado"];
+					foreach($rs as $r){
+						$retorno[] = array("box"=>$r["box"],"valor"=>$r["valores"][0]["valor"]);
+					}
+				}
+			}
+			else
+			{$retorno = "erro";}
+		}
 	break;
 /*
 Valor: LISTAITENS

@@ -73,7 +73,7 @@ i3GEO.gadgets = {
 
 		"mostraBuscaRapida":
 
-		{idhtml:"buscaRapida"},
+		{idhtml:"buscaRapida",servicosexternos:true,temasmapa:false},
 
 		"mostraVisual":
 
@@ -111,7 +111,7 @@ i3GEO.gadgets = {
 		"mostraEscalaGrafica":
 		{idhtml:"escalaGrafica"},
 		"mostraBuscaRapida":
-		{idhtml:"buscaRapida"},
+		{idhtml:"buscaRapida",servicosexternos:true,temasmapa:false},
 		"mostraVisual":
 		{idhtml:"visual"},
 		"mostraQuadros":
@@ -298,6 +298,10 @@ i3GEO.gadgets = {
 
 	Se você não quer essa função no mapa, elimine o elemento HTML existente no mapa que contenha o 
 	id definido em i3GEO.gadgets.PARAMETROS (buscaRapida)
+	
+	Onde a busca será feita é controlado pela variável i3GEO.gadgets.PARAMETROS.mostraBuscaRapida
+	
+	Veja: ferramentas/<buscarapida>
 
 	Parametro:
 
@@ -310,18 +314,44 @@ i3GEO.gadgets = {
 		if(arguments.length === 0)
 		{id = i3GEO.gadgets.PARAMETROS.mostraBuscaRapida.idhtml;}
 		if($i(id)){
+			//depreciado na versão 4.5
 			i3geo_buscaRapida = function(){
-				if ($i("valorBuscaRapida").value === "")
-				{alert("Digite uma palavra para busca!");return;}
-				wdocaf("300px","280px",i3GEO.configura.locaplic+"/ferramentas/buscarapida/index.htm","","","Busca rapida");
+				alert("i3geo_buscaRapida foi depreciada");
 			};
-			i = $inputText(id,"210","valorBuscaRapida","Município, cidade, UC, endereço...","30",$trad("o2"));
-			ins = "<table><tr><td><a class=ajuda_usuario target=_blank href='"+i3GEO.configura.locaplic+"/ajuda_usuario.php?idcategoria=8&idajuda=71' >&nbsp;&nbsp;&nbsp;</a></td><td>"+i;
-			ins += "</td><td><img src='"+i3GEO.util.$im("branco.gif")+"' class='tic' onclick='i3geo_buscaRapida()' /></td></tr></table>";
+			i = $inputText(id,"225","valorBuscaRapida","Município, cidade, UC, endereço...","30",$trad("o2"));
+			ins = "<table><tr><td><a class=ajuda_usuario target=_blank href='"+i3GEO.configura.locaplic+"/ajuda_usuario.php?idcategoria=8&idajuda=71' >&nbsp;&nbsp;&nbsp;</a></td><td>"+i+"</td>";
+			ins += "<td><img src='"+i3GEO.util.$im("branco.gif")+"' title='"+$trad("p13")+"' class='ticPropriedades2' id=i3GEObotaoPropriedadesBuscaRapida /></td>";
+			ins += "<td><img src='"+i3GEO.util.$im("branco.gif")+"' class='tic' id=i3GEObotaoBuscaRapida /></td></tr></table>";
 			temp = $i(id);
 			if(temp){
 				temp.innerHTML = ins;
+				$i("i3GEObotaoBuscaRapida").onclick = function(){
+					if(i3GEO.gadgets.PARAMETROS.mostraBuscaRapida.servicosexternos === false && i3GEO.gadgets.PARAMETROS.mostraBuscaRapida.temasmapa === false)
+					{alert("Escolha um tipo de busca nas propriedades");return;}
+
+					if ($i("valorBuscaRapida").value === "")
+					{alert("Digite uma palavra para busca!");return;}
+					i3GEO.janela.cria("300px","280px",i3GEO.configura.locaplic+"/ferramentas/buscarapida/index.htm","","","Busca rapida");				
+				};
+				$i("i3GEObotaoPropriedadesBuscaRapida").onclick = function(){
+					var ins,
+						interno = "",
+						externo = "";
+					i3GEO.janela.cria("300px","150px","","","","Propriedades","i3GEOpropriedadesBuscaRapida");
+					if(i3GEO.gadgets.PARAMETROS.mostraBuscaRapida.servicosexternos)
+					{externo = "checked";}
+					if(i3GEO.gadgets.PARAMETROS.mostraBuscaRapida.temasmapa)
+					{interno = "checked";}
+					ins = "<p class=paragrafo >Onde será feita a busca:</p>" +
+						"<table class=lista3 >" +
+						"<tr><td><input style=cursor:pointer onclick='i3GEO.gadgets.PARAMETROS.mostraBuscaRapida.servicosexternos = this.checked' type=checkbox "+externo+" ></td><td>Serviços de busca externos (Google e MMA)</td></tr>" +
+						"<tr><td><input style=cursor:pointer onclick='i3GEO.gadgets.PARAMETROS.mostraBuscaRapida.temasmapa = this.checked' type=checkbox "+interno+" ></td><td>Temas existentes no mapa</td></tr>" +
+						"</table><br>" +
+						"<p class=paragrafo >Apenas os temas especialmente configurados pelo administrador do i3Geo podem receber operações de busca.</p>";
+					$i("i3GEOpropriedadesBuscaRapida_corpo").innerHTML = ins;
+				};	
 			}
+			
 		}
 	},
 	/*
