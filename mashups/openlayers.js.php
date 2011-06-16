@@ -477,10 +477,11 @@ i3GEO.editorOL = {
 					i3GEO.editorOL.ModifyFeature.deactivate();
 				}
 				catch(e){}
-				if(!c.type)
+				if(!c.trigger)
 				{c.activate();}
-				else
-				{c.trigger.call();}
+				else{
+					c.trigger.call();
+				}
 			}
 		});
 		if(botoes.procura===true){
@@ -497,7 +498,7 @@ i3GEO.editorOL = {
 			adiciona = true;
 		}
 		if(botoes.zoombox===true){
-			controles.push(new OpenLayers.Control.ZoomBox({displayClass: "zoombox",title: "editorOLZoom"}));
+			controles.push(new OpenLayers.Control.ZoomBox({title: "zoombox",displayClass: "editorOLzoombox"}));
 			adiciona = true;
 		}
 		if(botoes.zoomtot===true){
@@ -594,7 +595,7 @@ i3GEO.editorOL = {
 				OpenLayers.Handler.Path,
 				{
 					displayClass: "editorOLlinha",
-					title: "digitalizar linha"
+					title: "digitalizar linha",
 				}
 			);
 			controles.push(button);
@@ -770,6 +771,15 @@ i3GEO.editorOL = {
 			i3GEO.editorOL.mapa.addControl(i3GEOpanelEditor);
 		}
 	},
+	mudaSimbolo: function(estilo,id){
+		var valor = $i(id).value;
+		if(valor === "")
+		{return;}
+		if(estilo === "strokeWidth")
+		{i3GEO.editorOL.layergrafico.styleMap.styles.default.defaultStyle[estilo] = valor;}
+		else
+		{i3GEO.editorOL.layergrafico.styleMap.styles.default.defaultStyle[estilo] = "rgb("+valor+")";}
+	},
 	adicionaMarcas: function(){
 		if(i3GEO.editorOL.pontos.length === 0)
 		{return;}
@@ -818,8 +828,29 @@ i3GEO.editorOL = {
 	propriedades: function(){
 		if(!document.getElementById("panelpropriedadesEditor")){
 			YAHOO.namespace("editorOL.container");
-			YAHOO.editorOL.container.panel = new YAHOO.widget.Panel("panelpropriedadesEditor", {zIndex:20000, iframe:true, width:"350px", visible:false, draggable:true, close:true } );
+			YAHOO.editorOL.container.panel = new YAHOO.widget.Panel("panelpropriedadesEditor", {zIndex:20000, iframe:true, width:"350px", height:"250px",visible:false, draggable:true, close:true } );
 			var ins = "" +
+			'<p class=paragrafo ><b>Estilos (utilize a cor no formato r,g,b):</b></p>' +
+			'<table class=lista7 >' +
+			'	<tr>' +
+			'		<td>Cor do contorno</td><td><input onchange="i3GEO.editorOL.mudaSimbolo(\'strokeColor\',\'i3GEOEditorOLcorContorno\')" type="text" style="cursor:text" id="i3GEOEditorOLcorContorno" size="12" value="" /></td><td>';
+			if(i3GEO.configura)
+			{ins += '<img alt="aquarela.gif" style=cursor:pointer src="'+i3GEO.configura.locaplic+'/imagens/aquarela.gif" onclick="i3GEO.util.abreCor(\'\',\'i3GEOEditorOLcorContorno\');" />';}
+			ins += "" +
+			'		</td>' +
+			'	</tr>' +
+			'	<tr>' +
+			'		<td>Cor do preenchimento</td><td><input onchange="i3GEO.editorOL.mudaSimbolo(\'fillColor\',\'i3GEOEditorOLcorPre\')" type="text" style="cursor:text" id="i3GEOEditorOLcorPre" size="12" value="" /></td><td>';
+			if(i3GEO.configura)
+			{ins += '<img alt="aquarela.gif" style=cursor:pointer src="'+i3GEO.configura.locaplic+'/imagens/aquarela.gif" onclick="i3GEO.util.abreCor(\'\',\'i3GEOEditorOLcorPre\');" />';}
+			ins += "" +
+			'		</td>' +
+			'	</tr>' +
+			'	<tr>' +
+			'		<td>Largura da linha/contorno</td><td><input onchange="i3GEO.editorOL.mudaSimbolo(\'strokeWidth\',\'i3GEOEditorOLlarguraLinha\')" type="text" style="cursor:text" id="i3GEOEditorOLlarguraLinha" size="2" value="" /></td><td></td>' +
+			'	</tr>' +
+			'</table>' +
+			'<br />' +
 			'<p class=paragrafo ><b>Ajusta nó em edição para o(a):</b></p>' +
 			'<table class=lista7 >' +
 			'	<tr>' +
@@ -849,31 +880,30 @@ i3GEO.editorOL = {
 			'		<td><input style=cursor:pointer onclick="i3GEO.editorOL.ModifyFeature.mode = OpenLayers.Control.ModifyFeature.ROTATE;" type="radio" name=i3geoOLtipoEdita /></td><td>rotaciona</td>' +
 			'		<td><input style=cursor:pointer onclick="i3GEO.editorOL.ModifyFeature.mode = OpenLayers.Control.ModifyFeature.DRAG;" type="radio" name=i3geoOLtipoEdita /></td><td>desloca</td>' +
 			'	</tr>' +
-
-			'</table>';			
+			'</table>';		
 			YAHOO.editorOL.container.panel.setBody(ins);
 			if(typeof i3GEO != undefined && i3GEO != "")
 			{YAHOO.editorOL.container.panel.setHeader("Propriedades<div id='panelpropriedadesEditor_minimizaCabecalho' class='container-minimiza'></div>");}
 			else
 			{YAHOO.editorOL.container.panel.setHeader("Propriedades");}
-
+			
 			YAHOO.editorOL.container.panel.setFooter("");
 			YAHOO.editorOL.container.panel.render(document.body);
+			
 			YAHOO.editorOL.container.panel.center();
-			YAHOO.util.Event.addListener(YAHOO.editorOL.container.panel.close, "click", function(){
-			});
-			if(i3GEO.eventos.ATUALIZAARVORECAMADAS.toString().search("i3GEO.editorOL.criaJanelaAtivaTema()") < 0)
+			YAHOO.util.Event.addListener(YAHOO.editorOL.container.panel.close, "click", function(){});
+			if(i3GEO.eventos && i3GEO.eventos.ATUALIZAARVORECAMADAS.toString().search("i3GEO.editorOL.criaJanelaAtivaTema()") < 0)
 			{i3GEO.eventos.ATUALIZAARVORECAMADAS.push("i3GEO.editorOL.criaJanelaAtivaTema()");}			
 			temp = $i("panelpropriedadesEditor_minimizaCabecalho");
 			if(temp){
 				temp.onclick = function(){i3GEO.janela.minimiza("panelpropriedadesEditor");}
 			}
-
-		}
-		else{	
-			YAHOO.editorOL.container.panel.render(document.body);
 		}
 		YAHOO.editorOL.container.panel.show();
+		if(i3GEO.configura)
+		{$i("panelpropriedadesEditor").getElementsByTagName("div")[2].style.overflow = "auto";}
+		else
+		{$i("panelpropriedadesEditor").getElementsByTagName("div")[1].style.overflow = "auto";}
 	},
 	ferramentas: function(){
 		if(!document.getElementById("panelferramentasEditor")){

@@ -933,7 +933,8 @@ i3GEO.util = {
 	*/
 	abreCor: function(janela,elemento,tipo){
 		if(typeof(console) !== 'undefined'){console.info("i3GEO.util.abreCor()");}
-		//i3GEO.janela.cria("400","240",i3GEO.configura.locaplic+"/ferramentas/colorpicker/index.htm?doc="+janela+"&elemento="+elemento,"","","Cor","i3geo_janelaCor",true);
+		if(!i3GEO.configura)
+		{i3GEO.configura = {locaplic: "../"};}
 		if(arguments.length === 2)
 		{tipo = "rgb";}
 		var ins,

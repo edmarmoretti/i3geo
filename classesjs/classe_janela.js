@@ -391,10 +391,12 @@ i3GEO.janela = {
 			}
 		}
 		temp = $i(id+"_corpo");
-		if(temp.style.display === "none")
-		{temp.style.display = "block";}
-		else
-		{temp.style.display = "none";}		
+		if(temp){
+			if(temp.style.display === "none")
+			{temp.style.display = "block";}
+			else
+			{temp.style.display = "none";}
+		}
 	},
 	/*
 	Function: fecha
