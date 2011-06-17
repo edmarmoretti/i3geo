@@ -1093,7 +1093,8 @@ i3GEO.barraDeBotoes = {
 				'ajuda':true,
 				'fecha':true,
 				'tools':true,
-				'undo':true
+				'undo':true,
+				'frente':true
 			};
 			i3GEO.editorOL.layergrafico = new OpenLayers.Layer.Vector("Edição",{displayInLayerSwitcher:false,visibility:true});
 			i3GEO.editorOL.mapa.addLayers([i3GEO.editorOL.layergrafico]);			

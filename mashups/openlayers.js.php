@@ -62,7 +62,8 @@ i3GEO.editorOL = {
 		'propriedades':true,
 		'fecha':false,
 		'tools':false,
-		'undo':false
+		'undo':false,
+		'frente':true
 	},
 	pontos: [],
 	marca: "../pacotes/openlayers/img/marker-gold.png",
@@ -651,6 +652,15 @@ i3GEO.editorOL = {
 			controles.push(i3GEO.editorOL.ModifyFeature);
 			adiciona = true;
 		}
+		if(botoes.frente===true){
+			button = new OpenLayers.Control.Button({
+				displayClass: "editorOLfrente", 
+				trigger: function(){i3GEO.editorOL.trazParaFrente();},
+				title: "traz para frente"
+			});
+			controles.push(button);
+			adiciona = true;
+		}		
 		//só funciona dentro do i3geo
 		if(botoes.tools===true && i3GEO.php){
 			button = new OpenLayers.Control.Button({
@@ -1096,5 +1106,17 @@ i3GEO.editorOL = {
 	},
 	carregajts: function(funcao){
 		i3GEO.util.scriptTag(i3GEO.configura.locaplic+"/pacotes/jsts/jstsi3geo.js",funcao,"i3GEOjts",true);
+	},
+	trazParaFrente: function(){
+		var features = i3GEO.editorOL.layergrafico.selectedFeatures;
+		if(features.length > 0){
+			i3GEO.editorOL.backup = new OpenLayers.Layer.Vector("Backup",{displayInLayerSwitcher:false,visibility:false})
+			i3GEO.editorOL.backup.addFeatures(features);
+			i3GEO.editorOL.unselTodos();
+			i3GEO.editorOL.layergrafico.removeFeatures(features);
+			i3GEO.editorOL.layergrafico.addFeatures(i3GEO.editorOL.backup.features);
+		}
+		else
+		{alert("Selecione pelo menos um elemento");}	
 	}
 };

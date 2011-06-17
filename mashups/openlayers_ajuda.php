@@ -100,8 +100,12 @@ p,td
 	</tr>		
 	<tr>
 		<td style=width:20px ><div class="editorOLsalvaItemInactive"></div></td>
-		<td>Salve ou obtenha as coordenadas das geometrias selecionadas.</td>
+		<td>Converta para shapefile, salve ou obtenha as coordenadas das geometrias selecionadas.</td>
 	</tr>
+	<tr>
+		<td style=width:20px ><div class="editorOLfrenteItemInactive"></div></td>
+		<td>Traz a figura selecionada para a frente das demais.</td>
+	</tr>	
 	<tr>
 		<td style=width:20px ><div class="editorOLpropriedadesItemInactive"></div></td>
 		<td>Defina as propriedades de edição, como a distância de aproximação e outros comportamentos das operações. Defina também o comportamento da ferramenta de edição, permitindo alterar uma figura ou rotacioná-la, movê-la ou redimensionar.</td>

@@ -80,7 +80,9 @@ if(isset($botoes)){
 	if(in_array("undo",$botoes))
 	{$objBotoes[] = "'undo':true";}
 	if(in_array("propriedades",$botoes))
-	{$objBotoes[] = "'propriedades':true";}	
+	{$objBotoes[] = "'propriedades':true";}
+	if(in_array("frente",$botoes))
+	{$objBotoes[] = "'frente':true";}	
 	$botoes = "{".implode(",",$objBotoes)."}";
 }
 
@@ -180,6 +182,7 @@ Parâmetros:
 		apaga
 		captura
 		procura
+		frente
 		propriedades
 		tools
 		undo
