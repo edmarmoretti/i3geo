@@ -797,9 +797,13 @@ i3GEO.editorOL = {
 		if(valor === "")
 		{return;}
 		if(estilo === "strokeWidth")
-		{i3GEO.editorOL.layergrafico.styleMap.styles.default.defaultStyle[estilo] = valor;}
-		else
-		{i3GEO.editorOL.layergrafico.styleMap.styles.default.defaultStyle[estilo] = "rgb("+valor+")";}
+		{i3GEO.editorOL.layergrafico.styleMap.styles.default.defaultStyle[estilo] = valor;return;}
+		if(estilo === "opacidade"){
+			i3GEO.editorOL.layergrafico.styleMap.styles.default.defaultStyle["fillOpacity"] = valor;
+			i3GEO.editorOL.layergrafico.styleMap.styles.default.defaultStyle["strokeOpacity"] = valor;
+			return;
+		}
+		i3GEO.editorOL.layergrafico.styleMap.styles.default.defaultStyle[estilo] = "rgb("+valor+")";
 	},
 	adicionaMarcas: function(){
 		if(i3GEO.editorOL.pontos.length === 0)
@@ -866,6 +870,9 @@ i3GEO.editorOL = {
 			{ins += '<img alt="aquarela.gif" style=cursor:pointer src="'+i3GEO.configura.locaplic+'/imagens/aquarela.gif" onclick="i3GEO.util.abreCor(\'\',\'i3GEOEditorOLcorPre\');" />';}
 			ins += "" +
 			'		</td>' +
+			'	</tr>' +
+			'	<tr>' +
+			'		<td>Opacidade (de 0 a 1)</td><td><input onchange="i3GEO.editorOL.mudaSimbolo(\'opacidade\',\'i3GEOEditorOLopacidade\')" type="text" style="cursor:text" id="i3GEOEditorOLopacidade" size="3" value="" /></td><td></td>' +
 			'	</tr>' +
 			'	<tr>' +
 			'		<td>Largura da linha/contorno</td><td><input onchange="i3GEO.editorOL.mudaSimbolo(\'strokeWidth\',\'i3GEOEditorOLlarguraLinha\')" type="text" style="cursor:text" id="i3GEOEditorOLlarguraLinha" size="2" value="" /></td><td></td>' +

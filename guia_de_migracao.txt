@@ -14,6 +14,10 @@ Para a versão 4.5
 	A opção de administração com base em arquivos XML em disco foi removida. Agora, deve-se sempre utilizar o banco de dados
 	de admnistração.
 	
+	O banco de dados de administração sofreu alterações. Veja em "Outras opções", no sistema de admnistração.
+	
+	O arquivo admin.db (banco de dados de admnistração default) foi movido de i3geo/menutemas para i3geo/admin
+	
 	O "alias" para a interface "zerocal" foi removido, utilize em seu lugar:
 	http://localhost/i3geo/ms_criamapa.php?interface=zerocal.htm ou
 	http://localhost/i3geo/interface/zerocal.htm
@@ -56,7 +60,7 @@ Para a versão 4.4
 	(dependendo da versão do PHP, esse parâmetro é definido como "Off" por default):
 	allow_call_time_pass_reference = On
 	
-	Foi acrescentado um novo LAYER em i3geo/aplicmpa/geral1.map e geral1windows.map com dados do Open Street Map. Caso vc não
+	Foi acrescentado um novo LAYER em i3geo/aplicmp/geral1.map e geral1windows.map com dados do Open Street Map. Caso vc não
 	queira que essa camada nova apareça, basta removê-las desses arquivos.
 	
 	Foi incluida a remoção de cookies no ms_criamapa.php, que inicializa o i3geo ($_COOKIE = array();). Se vc precisa definir cookies,

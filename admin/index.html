@@ -24,7 +24,7 @@ O cadastramento de usuários é feito pelo número IP. Veja a variável $editores no
 &aacute;rvores de adi&ccedil;&atilde;o de camadas, listagens de endere&ccedil;os, lista de mapas, etc.  
 Com a nova estrutura de administra&ccedil;&atilde;o, esses arquivos foram substitu&iacute;dos por registros em bancos de dados.</p>
 <p>Para possibilitar a distribui&ccedil;&atilde;o do i3geo de forma independente de banco de dados, optou-se pelo uso do gerenciador 
-SQLITE, cujo arquivo com os dados fica armazenado em i3geo/menutemas/admin.db. Os programas em PHP que gerenciam esse banco 
+SQLITE, cujo arquivo com os dados fica armazenado em i3geo/admin/admin.db. Os programas em PHP que gerenciam esse banco 
 utilizam o pacote PDO, possibilitando que seja utilizado outro gerenciador, como o POSTGRESQL, entre outros.</p>
 <p>Para modificar a configura&ccedil;&atilde;o do PDO, e utilizar outro gerenciador, deve-se editar o arquivo i3geo/admin/conexao.php 
 ou ent&atilde;o alterar a vari&aacute;vel de configura&ccedil;&atilde;o, definida no ms_configura.php, chamada $conexaoadmin. Essa vari&aacute;vel indica o nome de um 
