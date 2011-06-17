@@ -1098,7 +1098,7 @@ i3GEO.barraDeBotoes = {
 			i3GEO.editorOL.layergrafico = new OpenLayers.Layer.Vector("Edição",{displayInLayerSwitcher:false,visibility:true});
 			i3GEO.editorOL.mapa.addLayers([i3GEO.editorOL.layergrafico]);			
 			i3GEO.editorOL.criaBotoes(i3GEO.editorOL.botoes);
-			i3GEO.editorOL.criaJanelaAtivaTema();
+			//i3GEO.editorOL.criaJanelaAtivaTema();
 			//i3GEOOL.inicia();
 		}
 	}

@@ -2216,18 +2216,26 @@ $locaplic - Localização do I3geo
 	
 	$geometrias {Array} - lista de WKT
 	
-	$operacao {String} - operação suportada pelo Mapserver, por exemplo, union, intersects, etc
+	$operacao {String} - operação suportada pelo Mapserver, por exemplo, union, intersects, etc. converteSHP irá converter as geometrias em um tema e adicioná-lo ao mapa
+
+	$dir_tmp - Diretório temporário do mapserver. Utilizado apenas se $operacao = "converteSHP"
+
+	$imgdir - Diretório das imagens do mapa atual. Utilizado apenas se $operacao = "converteSHP"
 	
 	Return:
 	
 	{string wkt}
 	*/
-	function aplicaFuncaoListaWKT($geometrias,$operacao){
+	function aplicaFuncaoListaWKT($geometrias,$operacao,$dir_tmp="",$imgdir=""){
+		if($operacao === "converteSHP"){
+			$this->incmapageometrias($dir_tmp,$imgdir,$geometrias,$tipoLista="arraywkt");
+			return "ok";
+		}
+		
 		$geos = array();
 		foreach ($geometrias as $geo){
 			$geos[] = ms_shapeObjFromWkt($geo);
 		}
-		
 		$n = count($geos);
 		if ($n == 1)
 		{
@@ -2397,25 +2405,36 @@ $dir_tmp - Diretório temporário do mapserver
 $imgdir - Diretório das imagens do mapa atual
 
 $lista - Nomes, sem o caminho, dos arquivos com as geometrias, separados por vírgula.
+
+$tipoLista - tipo de valores que são passados em $lista stringArquivos|arraywkt. O default é stringArquivos
 */
-	function incmapageometrias($dir_tmp,$imgdir,$lista)
+	function incmapageometrias($dir_tmp,$imgdir,$lista,$tipoLista="stringArquivos")
 	{
-		$lista = explode(",",$lista);
 		$dir = $dir_tmp."/".$imgdir."/";
-		$shapes = array();
-		$valoresoriginais = array();
-		foreach ($lista as $l)
-		{
-			$geos = &$this->unserializeGeo($dir.$l);
-			//pega todas as geometrias
-			foreach ($geos["dados"] as $geo)
+		if($tipoLista == "stringArquivos"){
+			$lista = explode(",",$lista);
+			$shapes = array();
+			$valoresoriginais = array();
+			foreach ($lista as $l)
 			{
-				//echo $geo["wkt"]."<br>";
-				$shapes[] = ms_shapeObjFromWkt(str_replace("'","",$geo["wkt"]));
-				foreach ($geo["valores"] as $v)
-				{$valorestemp[] = $v["item"]."=".$v["valor"];}
-				$valoresoriginais[] = implode(" ",$valorestemp);
+				$geos = &$this->unserializeGeo($dir.$l);
+				//pega todas as geometrias
+				foreach ($geos["dados"] as $geo)
+				{
+					//echo $geo["wkt"]."<br>";
+					$shapes[] = ms_shapeObjFromWkt(str_replace("'","",$geo["wkt"]));
+					foreach ($geo["valores"] as $v)
+					{$valorestemp[] = $v["item"]."=".$v["valor"];}
+					$valoresoriginais[] = implode(" ",$valorestemp);
+				}
 			}
+		}
+		if($tipoLista == "arraywkt"){
+			$shapes = array();
+			$valoresoriginais = array();
+			foreach ($lista as $l){
+				$shapes[] = ms_shapeObjFromWkt($l);
+			}			
 		}
 		//verifica o tipo
 		if (count($shapes) == 0){return("erro.");}

@@ -338,7 +338,7 @@ A lista de WKTs deve usar o separador |
 	case "FUNCOESGEOMETRIASWKT":
 		include_once("classe_analise.php");
 		$m = new Analise($map_file,"");
-		$retorno = $m->aplicaFuncaoListaWKT(explode("|",$geometrias),$operacao);
+		$retorno = $m->aplicaFuncaoListaWKT(explode("|",$geometrias),$operacao,$dir_tmp,$imgdir);
 	break;	
 /*
 Valor: CALCULAGEOMETRIAS

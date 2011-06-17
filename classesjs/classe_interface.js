@@ -719,6 +719,7 @@ i3GEO.Interface = {
 			openlayers.ordenaLayers();
 			openlayers.recalcPar();
 			i3GEO.janela.fechaAguarde();
+			openlayers.sobeLayersGraficos();
 		},
 		cria: function(w,h){
 			var f,ins,
@@ -875,6 +876,7 @@ i3GEO.Interface = {
 				urlfundo = configura.locaplic+"/classesphp/mapa_openlayers.php?g_sid="+i3GEO.configura.sid+"&layer=&tipolayer=fundo&TIPOIMAGEM="+configura.tipoimagem,
 				nlayers = i3GEO.arvoreDeCamadas.CAMADAS.length,
 				layer,
+				layers,
 				camada,
 				urllayer,
 				opcoes,
@@ -948,6 +950,19 @@ i3GEO.Interface = {
 			try
 			{i3geoOL.addLayers(i3GEO.Interface.openlayers.LAYERSADICIONAIS);}
 			catch(e){}
+			//
+			//sobe o nível das camadas gráficas
+			//
+		},
+		sobeLayersGraficos: function(){
+			var nlayers = i3geoOL.getNumLayers(),
+				layers = i3geoOL.layers,
+				i;
+			for(i=0;i<nlayers;i++){
+				if(layers[i].CLASS_NAME == 	"OpenLayers.Layer.Vector"){
+					i3geoOL.raiseLayer(i3geoOL.layers[i],nlayers);
+				}
+			}
 		},
 		inverteModoTile: function(){
 			var nlayers = i3GEO.arvoreDeCamadas.CAMADAS.length,
