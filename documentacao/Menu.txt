@@ -46,7 +46,7 @@ Don't Index: Properties
 File: Página principal com a lista de aplicativos do i3geo  (principal.htm)
 File: Inicializa o i3Geo via URL ms_criamapa.php  (ms_criamapa.php)
 File: Variáveis de inicialização ms_configura.php  (ms_configura.php)
-File: Testa a instalação do I3Geo  (testainstal.php)
+File: Testa a instalação do i3Geo  (testainstal.php)
 File: Testa um mapfile  (testamapfile.php)
 
 Group: Interface HTML  {
@@ -57,6 +57,7 @@ Group: Interface HTML  {
    File: Interface minima  (interface\minima.htm)
    File: Interface normal  (interface\geral.htm)
    File: Interface Openlayers  (interface\openlayers.htm)
+   File: Interface Openlayers para tablets  (interface\openlayers_t.htm)
    File: Interface zerocal  (interface\zerocal.htm)
    File: Interface zerocalol  (interface\zerocalol.htm)
    }  # Group: Interface HTML
@@ -315,6 +316,16 @@ Group: Aplicativos adicionais  {
 
    File: Mashups  (mashups\index.html)
    File: twitter2geo.php  (twitter2geo.php)
+
+   Group: Ferramentas  {
+
+      File: Interface GoogleEarth para a ferramenta tela remota  (ferramentas\telaremota\googleearth1.php)
+      File: Interface GoogleMaps para a ferramenta tela remota  (ferramentas\telaremota\googlemaps1.php)
+      File: Interface OpenLayers para a ferramenta tela remota  (ferramentas\telaremota\openlayers1.php)
+      File: Monotor remoto  (ferramentas\telaremota\recuperamapa.php)
+      File: Tela remota  (ferramentas\telaremota\index.js.php)
+      }  # Group: Ferramentas
+
    }  # Group: Aplicativos adicionais
 
 Group: Administração  {
