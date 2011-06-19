@@ -1437,6 +1437,18 @@ background-position:-522px -28px;
 .olControlEditingToolbar1 .editorOLundoItemActive {
 	background-position:-609px -28px;
 }
+.olControlEditingToolbar1 .editorOLfrenteItemInactive {
+	background-position:-638px 0;
+}
+.olControlEditingToolbar1 .editorOLfrenteItemActive {
+	background-position:-638px -28px;
+}
+.olControlEditingToolbar1 .editorOLtextoItemInactive {
+	background-position:-667px 0;
+}
+.olControlEditingToolbar1 .editorOLtextoItemActive {
+	background-position:-667px -28px;
+}
 .olControlEditingToolbar1 {
 	width:600px;
 	float:right;

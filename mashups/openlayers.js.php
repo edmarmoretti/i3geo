@@ -10,6 +10,17 @@ if (app==='N'){navn=true;}else{navm=true;}
 OpenLayers.ImgPath = "../pacotes/openlayers/img/";
 OpenLayers.Lang.setCode("pt-BR");
 i3GEO.editorOL = {
+	simbologia: {
+		opacidade: 0.8,
+		texto: "",
+		fillColor: "250,180,15",
+		strokeWidth: 2,
+		strokeColor: "250,150,0",
+		pointRadius: 4,
+		graphicName: "circle",
+		fontSize: "12px",
+		fontColor: "0,0,0"
+	},
 	backup: new OpenLayers.Layer.Vector("Backup",{displayInLayerSwitcher:false,visibility:false}),
 	nomeFuncaoSalvar: "i3GEO.editorOL.testeSalvar()", 
 	ol_mma: new OpenLayers.Layer.WMS(
@@ -39,7 +50,7 @@ i3GEO.editorOL = {
 		{layers: "estadosl",FORMAT:'image/png'}
 	),
 	fundo: "ol_mma,ol_wms,jpl_wms,osm_wms,top_wms,est_wms",
-	layergrafico: new OpenLayers.Layer.Vector("Edição",{displayInLayerSwitcher:true,visibility:true}),
+	
 	layersIniciais: [],
 	botoes: {
 		'pan':true,
@@ -52,8 +63,8 @@ i3GEO.editorOL = {
 		'linha':true,
 		'ponto':true,
 		'poligono':true,
+		'texto':true,
 		'edita':true,
-		'uniao':true,
 		'apaga':true,
 		'procura':true,
 		'selecao':true,
@@ -63,7 +74,7 @@ i3GEO.editorOL = {
 		'fecha':false,
 		'tools':false,
 		'undo':false,
-		'frente':true
+		'frente':false
 	},
 	pontos: [],
 	marca: "../pacotes/openlayers/img/marker-gold.png",
@@ -85,7 +96,50 @@ i3GEO.editorOL = {
 			nfundo = fundo.length,
 			ncontroles = i3GEO.editorOL.controles.length,
 			i,
-			n;
+			n,
+			sketchSymbolizers = {
+					"Point": {
+						fillColor: "rgb(${fillColor})",
+						fillOpacity: "${opacidade}",
+						strokeWidth: "${strokeWidth}",
+						strokeOpacity: "${opacidade}",
+						strokeColor: "rgb(${strokeColor})",
+						label: "${texto}",
+						pointRadius: "${pointRadius}",
+						graphicName: "${graphicName}",
+						fontSize: "${fontSize}",
+						fontColor: "rgb(${fontColor})",
+						fontFamily: "Arial",
+						fontWeight: "normal",
+						labelAlign: "lb",
+						labelXOffset: "3",
+						labelYOffset: "3"						
+					},
+					"Line": {
+						strokeWidth: "${strokeWidth}",
+						strokeOpacity: "${opacidade}",
+						strokeColor: "rgb(${strokeColor})"
+					},
+					"Polygon": {
+						strokeWidth: "${strokeWidth}",
+						strokeOpacity: "${opacidade}",
+						strokeColor: "rgb(${strokeColor})",
+						fillColor: "rgb(${fillColor})",
+						fillOpacity: "${opacidade}"
+					}
+				},
+			style = new OpenLayers.Style(),
+			styleMap1 = new OpenLayers.StyleMap({"default": style});
+
+		style.addRules([
+			new OpenLayers.Rule({symbolizer: sketchSymbolizers})
+		]);				
+		i3GEO.editorOL.layergrafico = new OpenLayers.Layer.Vector("Edição",{
+				styleMap: styleMap1,
+				displayInLayerSwitcher:true,
+				visibility:true
+			}
+		);		
 		if(i3GEO.editorOL.mapa === "")
 		{alert("O objeto i3GEO.editorOL.mapa precisa ser criado com new OpenLayers.Map()");return;}
 		if(i3GEO.editorOL.maxext !== ""){
@@ -455,7 +509,7 @@ i3GEO.editorOL = {
 		        fillOpacity: 1,
 		        strokeWidth: 1,
 		        strokeOpacity: 1,
-		        strokeColor: "#333333"
+		        strokeColor: "#333333"	
 		    },
 		    "Line": {
 		        strokeWidth: 3,
@@ -476,10 +530,10 @@ i3GEO.editorOL = {
 		adiciona = false,
 		button,
 		controles = [];
-		
 		style.addRules([
 		    new OpenLayers.Rule({symbolizer: sketchSymbolizers})
-		]);		
+		]);
+		
 		i3GEOpanelEditor = new OpenLayers.Control.Panel({
 			displayClass: "olControlEditingToolbar1 noprint",
 			saveState: true,
@@ -609,6 +663,21 @@ i3GEO.editorOL = {
 				{
 					displayClass: "editorOLlinha",
 					title: "digitalizar linha",
+					callbacks:{
+						done: function(feature){
+							var f = new OpenLayers.Feature.Vector(feature);
+							f["attributes"] = {
+								opacidade: i3GEO.editorOL.simbologia.opacidade,
+								texto: i3GEO.editorOL.simbologia.texto,
+								fillColor: i3GEO.editorOL.simbologia.fillColor,
+								strokeWidth: i3GEO.editorOL.simbologia.strokeWidth,
+								strokeColor: i3GEO.editorOL.simbologia.strokeColor,
+								pointRadius: i3GEO.editorOL.simbologia.pointRadius,
+								graphicName: i3GEO.editorOL.simbologia.graphicName
+							};
+							i3GEO.editorOL.layergrafico.addFeatures([f]);
+						}
+					}
 				}
 			);
 			controles.push(button);
@@ -620,7 +689,22 @@ i3GEO.editorOL = {
 				OpenLayers.Handler.Point,
 				{
 					displayClass: "editorOLponto",
-					title: "digitalizar ponto"
+					title: "digitalizar ponto",
+					callbacks:{
+						done: function(feature){
+							var f = new OpenLayers.Feature.Vector(feature);
+							f["attributes"] = {
+								opacidade: i3GEO.editorOL.simbologia.opacidade,
+								texto: i3GEO.editorOL.simbologia.texto,
+								fillColor: i3GEO.editorOL.simbologia.fillColor,
+								strokeWidth: i3GEO.editorOL.simbologia.strokeWidth,
+								strokeColor: i3GEO.editorOL.simbologia.strokeColor,
+								pointRadius: i3GEO.editorOL.simbologia.pointRadius,
+								graphicName: i3GEO.editorOL.simbologia.graphicName
+							};
+							i3GEO.editorOL.layergrafico.addFeatures([f]);
+						}
+					}					
 				}
 			);
 			controles.push(button);
@@ -632,12 +716,62 @@ i3GEO.editorOL = {
 				OpenLayers.Handler.Polygon,
 				{
 					displayClass: "editorOLpoligono",
-					title: "digitalizar polígono"
+					title: "digitalizar polígono",
+					//handlerOptions: {holeModifier: "altKey"},
+					callbacks:{
+						done: function(feature){
+							var f = new OpenLayers.Feature.Vector(feature);
+							f["attributes"] = {
+								opacidade: i3GEO.editorOL.simbologia.opacidade,
+								texto: i3GEO.editorOL.simbologia.texto,
+								fillColor: i3GEO.editorOL.simbologia.fillColor,
+								strokeWidth: i3GEO.editorOL.simbologia.strokeWidth,
+								strokeColor: i3GEO.editorOL.simbologia.strokeColor,
+								pointRadius: i3GEO.editorOL.simbologia.pointRadius,
+								graphicName: i3GEO.editorOL.simbologia.graphicName
+							};
+							i3GEO.editorOL.layergrafico.addFeatures([f]);
+						}
+					}
 				}
 			);
 			controles.push(button);
 			adiciona = true;
 		}
+		if(botoes.texto===true){
+			button = new OpenLayers.Control.DrawFeature(
+				i3GEO.editorOL.layergrafico,
+				OpenLayers.Handler.Point,
+				{
+					displayClass: "editorOLtexto",
+					title: "incluir texto",
+					persist: true,
+					callbacks:{
+						done: function(feature){
+							var texto = window.prompt("Texto",""),
+								label = new OpenLayers.Feature.Vector(feature);
+							label["attributes"] = {
+								opacidade: 0.1,
+								fillColor: "white",
+								strokeWidth: i3GEO.editorOL.simbologia.strokeWidth,
+								texto: texto,
+								pointRadius: 2,
+								graphicName: "square",
+								strokeColor: "black",
+								fontColor: i3GEO.editorOL.simbologia.fontColor,
+								fontSize: i3GEO.editorOL.simbologia.fontSize,
+								fontFamily: "Arial",
+								fontWeight: "bold",
+								labelAlign: "rt"
+							};
+							i3GEO.editorOL.layergrafico.addFeatures([label]);
+						}
+					}
+				}
+			);
+			controles.push(button);
+			adiciona = true;
+		}		
 		if(botoes.edita===true){
 			i3GEO.editorOL.ModifyFeature = new OpenLayers.Control.ModifyFeature(
 				i3GEO.editorOL.layergrafico,
@@ -797,13 +931,10 @@ i3GEO.editorOL = {
 		if(valor === "")
 		{return;}
 		if(estilo === "strokeWidth")
-		{i3GEO.editorOL.layergrafico.styleMap.styles.default.defaultStyle[estilo] = valor;return;}
-		if(estilo === "opacidade"){
-			i3GEO.editorOL.layergrafico.styleMap.styles.default.defaultStyle["fillOpacity"] = valor;
-			i3GEO.editorOL.layergrafico.styleMap.styles.default.defaultStyle["strokeOpacity"] = valor;
-			return;
-		}
-		i3GEO.editorOL.layergrafico.styleMap.styles.default.defaultStyle[estilo] = "rgb("+valor+")";
+		{i3GEO.editorOL.simbologia.strokeWidth = valor;return;}
+		if(estilo === "opacidade")
+		{i3GEO.editorOL.simbologia.opacidade = valor;return;}
+		i3GEO.editorOL.simbologia[estilo] = valor;
 	},
 	adicionaMarcas: function(){
 		if(i3GEO.editorOL.pontos.length === 0)
@@ -858,24 +989,34 @@ i3GEO.editorOL = {
 			'<p class=paragrafo ><b>Estilos (utilize a cor no formato r,g,b):</b></p>' +
 			'<table class=lista7 >' +
 			'	<tr>' +
-			'		<td>Cor do contorno</td><td><input onchange="i3GEO.editorOL.mudaSimbolo(\'strokeColor\',\'i3GEOEditorOLcorContorno\')" type="text" style="cursor:text" id="i3GEOEditorOLcorContorno" size="12" value="" /></td><td>';
+			'		<td>Cor do contorno</td><td><input onchange="i3GEO.editorOL.mudaSimbolo(\'strokeColor\',\'i3GEOEditorOLcorContorno\')" type="text" style="cursor:text" id="i3GEOEditorOLcorContorno" size="12" value="'+i3GEO.editorOL.simbologia.strokeColor+'" /></td><td>';
 			if(i3GEO.configura)
 			{ins += '<img alt="aquarela.gif" style=cursor:pointer src="'+i3GEO.configura.locaplic+'/imagens/aquarela.gif" onclick="i3GEO.util.abreCor(\'\',\'i3GEOEditorOLcorContorno\');" />';}
 			ins += "" +
 			'		</td>' +
 			'	</tr>' +
 			'	<tr>' +
-			'		<td>Cor do preenchimento</td><td><input onchange="i3GEO.editorOL.mudaSimbolo(\'fillColor\',\'i3GEOEditorOLcorPre\')" type="text" style="cursor:text" id="i3GEOEditorOLcorPre" size="12" value="" /></td><td>';
+			'		<td>Cor do preenchimento</td><td><input onchange="i3GEO.editorOL.mudaSimbolo(\'fillColor\',\'i3GEOEditorOLcorPre\')" type="text" style="cursor:text" id="i3GEOEditorOLcorPre" size="12" value="'+i3GEO.editorOL.simbologia.fillColor+'" /></td><td>';
 			if(i3GEO.configura)
 			{ins += '<img alt="aquarela.gif" style=cursor:pointer src="'+i3GEO.configura.locaplic+'/imagens/aquarela.gif" onclick="i3GEO.util.abreCor(\'\',\'i3GEOEditorOLcorPre\');" />';}
 			ins += "" +
 			'		</td>' +
 			'	</tr>' +
 			'	<tr>' +
-			'		<td>Opacidade (de 0 a 1)</td><td><input onchange="i3GEO.editorOL.mudaSimbolo(\'opacidade\',\'i3GEOEditorOLopacidade\')" type="text" style="cursor:text" id="i3GEOEditorOLopacidade" size="3" value="" /></td><td></td>' +
+			'		<td>Cor da fonte</td><td><input onchange="i3GEO.editorOL.mudaSimbolo(\'fontColor\',\'i3GEOEditorOLcorFonte\')" type="text" style="cursor:text" id="i3GEOEditorOLcorFonte" size="12" value="'+i3GEO.editorOL.simbologia.fontColor+'" /></td><td>';
+			if(i3GEO.configura)
+			{ins += '<img alt="aquarela.gif" style=cursor:pointer src="'+i3GEO.configura.locaplic+'/imagens/aquarela.gif" onclick="i3GEO.util.abreCor(\'\',\'i3GEOEditorOLcorFonte\');" />';}
+			ins += "" +
+			'		</td>' +
 			'	</tr>' +
 			'	<tr>' +
-			'		<td>Largura da linha/contorno</td><td><input onchange="i3GEO.editorOL.mudaSimbolo(\'strokeWidth\',\'i3GEOEditorOLlarguraLinha\')" type="text" style="cursor:text" id="i3GEOEditorOLlarguraLinha" size="2" value="" /></td><td></td>' +
+			'		<td>Tamanho da fonte</td><td><input onchange="i3GEO.editorOL.mudaSimbolo(\'fontSize\',\'i3GEOEditorOLfontsize\')" type="text" style="cursor:text" id="i3GEOEditorOLfontsize" size="3" value="'+i3GEO.editorOL.simbologia.fontSize+'" /></td><td></td>' +
+			'	</tr>' +			
+			'	<tr>' +
+			'		<td>Opacidade (de 0 a 1)</td><td><input onchange="i3GEO.editorOL.mudaSimbolo(\'opacidade\',\'i3GEOEditorOLopacidade\')" type="text" style="cursor:text" id="i3GEOEditorOLopacidade" size="3" value="'+i3GEO.editorOL.simbologia.opacidade+'" /></td><td></td>' +
+			'	</tr>' +
+			'	<tr>' +
+			'		<td>Largura da linha/contorno</td><td><input onchange="i3GEO.editorOL.mudaSimbolo(\'strokeWidth\',\'i3GEOEditorOLlarguraLinha\')" type="text" style="cursor:text" id="i3GEOEditorOLlarguraLinha" size="2" value="'+i3GEO.editorOL.simbologia.strokeWidth+'" /></td><td></td>' +
 			'	</tr>' +
 			'</table>' +
 			'<br />' +

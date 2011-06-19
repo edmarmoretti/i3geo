@@ -1084,6 +1084,7 @@ i3GEO.barraDeBotoes = {
 				'linha':true,
 				'ponto':true,
 				'poligono':true,
+				'texto':true,
 				'edita':true,
 				'selecao':true,
 				'apaga':true,
@@ -1096,11 +1097,47 @@ i3GEO.barraDeBotoes = {
 				'undo':true,
 				'frente':true
 			};
-			i3GEO.editorOL.layergrafico = new OpenLayers.Layer.Vector("Edição",{displayInLayerSwitcher:false,visibility:true});
+
+			var sketchSymbolizers = {
+					"Point": {
+						fillColor: "rgb(${fillColor})",
+						fillOpacity: "${opacidade}",
+						strokeWidth: "${strokeWidth}",
+						strokeOpacity: "${opacidade}",
+						strokeColor: "rgb(${strokeColor})",
+						label: "${texto}",
+						pointRadius: "${pointRadius}",
+						graphicName: "${graphicName}",
+						fontSize: "${fontSize}",
+						fontColor: "rgb(${fontColor})",
+						fontFamily: "Arial",
+						fontWeight: "normal",
+						labelAlign: "lb",
+						labelXOffset: "3",
+						labelYOffset: "3"						
+					},
+					"Line": {
+						strokeWidth: "${strokeWidth}",
+						strokeOpacity: "${opacidade}",
+						strokeColor: "rgb(${strokeColor})"
+					},
+					"Polygon": {
+						strokeWidth: "${strokeWidth}",
+						strokeOpacity: "${opacidade}",
+						strokeColor: "rgb(${strokeColor})",
+						fillColor: "rgb(${fillColor})",
+						fillOpacity: "${opacidade}"
+					}
+				},
+				style = new OpenLayers.Style(),
+				styleMap1 = new OpenLayers.StyleMap({"default": style});
+
+			style.addRules([
+				new OpenLayers.Rule({symbolizer: sketchSymbolizers})
+			]);
+			i3GEO.editorOL.layergrafico = new OpenLayers.Layer.Vector("Edição",{styleMap:styleMap1,displayInLayerSwitcher:false,visibility:true});
 			i3GEO.editorOL.mapa.addLayers([i3GEO.editorOL.layergrafico]);			
 			i3GEO.editorOL.criaBotoes(i3GEO.editorOL.botoes);
-			//i3GEO.editorOL.criaJanelaAtivaTema();
-			//i3GEOOL.inicia();
 		}
 	}
 };

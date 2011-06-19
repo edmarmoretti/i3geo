@@ -1650,7 +1650,7 @@ i3GEO.arvoreDeTemas = {
 		//
 		if(arguments.length !== 1)
 		{tsl = i3GEO.arvoreDeTemas.listaTemasAtivos();}
-		i3GEO.arvoreDeTemas.desativaCheckbox();
+		//i3GEO.arvoreDeTemas.desativaCheckbox();
 		//
 		//se forem encontrados temas ativos na árvore de menus, o mapa é redesenhado com a adição de novos temas
 		//

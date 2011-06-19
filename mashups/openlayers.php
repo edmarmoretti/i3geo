@@ -82,7 +82,9 @@ if(isset($botoes)){
 	if(in_array("propriedades",$botoes))
 	{$objBotoes[] = "'propriedades':true";}
 	if(in_array("frente",$botoes))
-	{$objBotoes[] = "'frente':true";}	
+	{$objBotoes[] = "'frente':true";}
+	if(in_array("texto",$botoes))
+	{$objBotoes[] = "'texto':true";}
 	$botoes = "{".implode(",",$objBotoes)."}";
 }
 
@@ -177,8 +179,8 @@ Parâmetros:
 		ponto
 		linha
 		poligono
+		texto
 		edita
-		uniao
 		apaga
 		captura
 		procura

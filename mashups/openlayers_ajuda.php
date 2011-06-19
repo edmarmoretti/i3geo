@@ -76,7 +76,7 @@ p,td
 	</tr>
 	<tr>
 		<td style=width:20px ><div class="editorOLpoligonoItemInactive"></div></td>
-		<td>Digitalize um novo polígono. Clique em um nó inicial e nos vértices posteriores. Termine com um duplo clique.</td>
+		<td>Digitalize um novo polígono. Clique em um nó inicial e nos vértices posteriores. Termine com um duplo clique. Pressione "shift" para desenhar com a mão livre.</td>
 	</tr>
 	<tr>
 		<td style=width:20px ><div class="editorOLeditaItemInactive"></div></td>
