@@ -156,9 +156,17 @@ i3GEObuscaRapida = {
 			i3GEO.php.buscaRapida(resultado,locaplic,i3GEObuscaRapida.servico,palavra);
 		}
 		if(temasmapa === true){
-			aguarde("block")
-			$i("resultadoTemas").innerHTML = "Aguarde..."
-			i3GEO.php.buscaRapida(i3GEObuscaRapida.montaResultadoTemas,locaplic,"temas",palavra);
+			try{
+				var verificaTema = window.parent.i3GEO.arvoreDeCamadas.filtraCamadas("itembuscarapida","","diferente",window.parent.i3GEO.arvoreDeCamadas.CAMADAS);
+				if(verificaTema.length === 0){
+					alert("Nenhum tema configurado para busca");
+					return;
+				}
+				aguarde("block")
+				$i("resultadoTemas").innerHTML = "Aguarde..."
+				i3GEO.php.buscaRapida(i3GEObuscaRapida.montaResultadoTemas,locaplic,"temas",palavra);
+			}
+			catch(e){}
 		}		
 	},
 	/*

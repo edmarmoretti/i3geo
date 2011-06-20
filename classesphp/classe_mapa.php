@@ -304,7 +304,8 @@ string - javascript com os parametros
 					"wmssrs"=>$wmssrs,
 					"tiles"=>$tiles,
 					"temporizador"=>($oLayer->getmetadata("temporizador")),
-					"permiteogc"=>($oLayer->getmetadata("permiteogc"))
+					"permiteogc"=>($oLayer->getmetadata("permiteogc")),
+					"itembuscarapida"=>($oLayer->getmetadata("itembuscarapida"))
 				);
 			}
 		}
