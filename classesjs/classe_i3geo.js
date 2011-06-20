@@ -637,7 +637,12 @@ i3GEO = {
 				i3geoOL.updateSize();
 				break;
 		}
-		i3GEO.guias.ALTURACORPOGUIAS = h;
+		if(i3GEO.guias.TIPO === "sanfona"){
+			i3GEO.guias.ALTURACORPOGUIAS = h - (antigoh - i3GEO.guias.ALTURACORPOGUIAS);
+			//alert(i3GEO.guias.ALTURACORPOGUIAS)
+		}
+		else
+		{i3GEO.guias.ALTURACORPOGUIAS = h;}
 		return [w,h];
 	},
 	/*

@@ -362,6 +362,7 @@ i3GEO.guias = {
 				onf = function(){};
 				outf = function(){};
 				YAHOO.lutsr.accordion.init(true,5,false,"sanfona"+onde.id,altura);
+				i3GEO.guias.ALTURACORPOGUIAS = altura;
 			}
 			for(g=0;g<nguias;g++)
 			{
@@ -410,7 +411,7 @@ i3GEO.guias = {
 	*/
 	ajustaAltura: function(){
 		if(typeof(console) !== 'undefined'){console.info("i3GEO.guias.ajustaAltura()");}
-		var guia,guias,nguias,
+		var guia,guias,nguias,temp,temps,n,i,
 			altura=0;
 		if(i3GEO.guias.ALTURACORPOGUIAS != 0)
 		{altura = i3GEO.guias.ALTURACORPOGUIAS;}
@@ -422,6 +423,20 @@ i3GEO.guias = {
 				guia.style.overflow="auto";
 				if(this.TIPO === "guia")
 				{guia.style.height = altura;}
+				if(this.TIPO === "sanfona"){
+					guia.style.height = altura;
+					temp = $i("guiasYUI");
+					if(temp){
+						temp.style.height = altura;
+						temps = temp.getElementsByTagName("dd");
+						n = temps.length;
+						for(i=0;i<n;i++){
+							if(temps[i].style.visibility == "visible")
+							{temps[i].style.height = altura;}
+						}
+					}
+					YAHOO.lutsr.accordion.properties.altura = altura;
+				}
 			}
 		}
 	},
