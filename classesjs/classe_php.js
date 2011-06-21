@@ -1040,7 +1040,7 @@ i3GEO.php = {
 	<LISTAITENS>
 	*/
 	listaItensTema: function(funcao,tema){
-		var p = i3GEO.configura.locaplic+"/classesphp/mapa_controle.php?g_sid="+i3GEO.configura.sid+"&funcao=listaitens&tema="+tema;
+		var p = i3GEO.configura.locaplic+"/classesphp/mapa_controle.php?g_sid="+i3GEO.configura.sid+"&funcao=listaitens&tema="+tema+"&ext="+i3GEO.parametros.mapexten;
 		cpJSON.call(p,"listaItensTema",funcao);
 	},
 	/*
@@ -1114,13 +1114,13 @@ i3GEO.php = {
 
 	<DADOSPERFILRELEVO>
 	*/
-	dadosPerfilRelevo: function(funcao,opcao,pontos,amostragem){
+	dadosPerfilRelevo: function(funcao,opcao,pontos,amostragem,item){
 		i3GEO.php.verifica();
 		var p = i3GEO.configura.locaplic+"/classesphp/mapa_controle.php?g_sid="+i3GEO.configura.sid+"&funcao=dadosPerfilRelevo&opcao="+opcao,
 		cp = new cpaint();
 		cp.set_transfer_mode('POST');
 		cp.set_response_type("JSON");
-		cp.call(p,"foo",funcao,"&pontos="+pontos+"&amostragem="+amostragem);
+		cp.call(p,"foo",funcao,"&pontos="+pontos+"&amostragem="+amostragem+"&item="+item);
 	},
 	/*
 	Function: funcoesGeometriasWkt

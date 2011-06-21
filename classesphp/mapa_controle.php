@@ -1864,7 +1864,7 @@ Pega os dados para elaboração de gráfico de perfil do relevo
 		include_once("graficos.php");
 		if(!isset($ext))
 		{$ext = "";}
-		$retorno = dadosPerfilRelevo($pontos,$opcao,$amostragem);
+		$retorno = dadosPerfilRelevo($pontos,$opcao,$amostragem,$item,$map_file);
 	break;
 /*
 Section: Menu de temas
@@ -2138,7 +2138,7 @@ Lista os itens de um tema.
 */
 	case "LISTAITENS":
 		include_once("classe_atributos.php");
-		$m = new Atributos($map_file,$tema);
+		$m = new Atributos($map_file,$tema,"",$ext);
 		$retorno = $m->listaItens();
 	break;
 /*

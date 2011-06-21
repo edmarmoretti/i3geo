@@ -180,6 +180,7 @@ i3GEOF.opcoesTamanho = {
 			}
 			temp = function(){
 				i3GEO.atualiza();
+				i3GEO.guias.ALTURACORPOGUIAS = a;
 				i3GEO.guias.ajustaAltura();
 				i3GEOF.opcoesTamanho.aguarde.visibility = "hidden";
 			};

@@ -200,7 +200,7 @@ i3GEO.desenho = {
 			ne = novoel.style;
 			ne.cursor="crosshair";
 			ne.zIndex=0;
-			if(i3GEO.Interface.TABLET = true)
+			if(i3GEO.Interface.TABLET === true)
 			{ne.zIndex=5000;}
 			ne.position="absolute";
 			ne.width=i3GEO.parametros.w;

@@ -84,29 +84,31 @@ $locaplic - (opcional) endereço do i3geo
 
 $ext - (opcional) extensão geográfica que será aplicada ao mapa
 */
-	function __construct($map_file,$tema="",$locaplic="",$ext="")
+	function __construct($map_file="",$tema="",$locaplic="",$ext="")
 	{
   		//error_reporting(E_ALL);
   		if (!function_exists('ms_newMapObj')) {return false;}
   		if(file_exists($locaplic."/funcoes_gerais.php"))
   		include_once($locaplic."/funcoes_gerais.php");
   		else
-  		include_once("funcoes_gerais.php");		
-		$this->qyfile = str_replace(".map",".qy",$map_file);
-  		$this->locaplic = $locaplic;
-  		$this->mapa = ms_newMapObj($map_file);
-  		$this->arquivo = $map_file;
-  		if($tema != "" && @$this->mapa->getlayerbyname($tema))
-		{
-			$this->layer = $this->mapa->getlayerbyname($tema);
-			//if($this->layer->getProjection() == "" )
-			//{$this->layer->setProjection("init=epsg:4291");}		
-			$this->nome = $tema;
-		}
-		if($ext && $ext != ""){
-			$e = explode(" ",$ext);
-			$extatual = $this->mapa->extent;
-			$extatual->setextent((min($e[0],$e[2])),(min($e[1],$e[3])),(max($e[0],$e[2])),(max($e[1],$e[3])));
+  		include_once("funcoes_gerais.php");
+		if($map_file != ""){
+			$this->qyfile = str_replace(".map",".qy",$map_file);
+			$this->locaplic = $locaplic;
+			$this->mapa = ms_newMapObj($map_file);
+			$this->arquivo = $map_file;
+			if($tema != "" && @$this->mapa->getlayerbyname($tema))
+			{
+				$this->layer = $this->mapa->getlayerbyname($tema);
+				//if($this->layer->getProjection() == "" )
+				//{$this->layer->setProjection("init=epsg:4291");}		
+				$this->nome = $tema;
+			}
+			if($ext && $ext != ""){
+				$e = explode(" ",$ext);
+				$extatual = $this->mapa->extent;
+				$extatual->setextent((min($e[0],$e[2])),(min($e[1],$e[3])),(max($e[0],$e[2])),(max($e[1],$e[3])));
+			}
 		}
 	}
 /*
@@ -218,7 +220,7 @@ Lista os itens de um tema.
 			$nomestemas[] = $nometmp;
 			if ($layer->data != "")
 			{
-					$items = pegaItens($layer);
+					$items = pegaItens($layer,$this->mapa);
 					foreach ($items as $item)
 					{
 				 		$lista[] = array("item"=>$item,"nome"=>$nometmp,"tema"=>$tema);
@@ -1107,31 +1109,37 @@ $listaDeTemas - (opcional) Lista com os códigos dos temas que serão identificado
 
 	parameters:
 
-	$tema - Tema que será identificado
+	$tema - Tema que será identificado (se for vazio, será utilizado o objeto mapa definido no construtor da classe)
 
 	$x - Coordenada X.
 
 	$y - Coordenada Y.
 
-	$map_file - Arquivo map file.
+	$map_file - Arquivo map file (se for vazio, será utilizado o objeto mapa definido no construtor da classe).
 
 	$resolucao - Resolução de busca.
 
 	$item - Item único que será identificado.
 
-	$tiporetorno - Tipo de retorno dos dados. Se for vazio, o retorno é formatado como string, se for shape, retorna o objeto shape 
+	$tiporetorno - Tipo de retorno dos dados. Se for vazio, o retorno é formatado como string, se for shape, retorna o objeto shape, googlerelevo retorna no padrão da API do google para relevo
 
 	$etip  {booblean} - indica se a solicitação é para obtenção dos dados do tipo etiqueta
 	*/
-	function identificaQBP2($tema,$x,$y,$map_file,$resolucao,$item="",$tiporetorno="",$etip=false,$ext="")
+	function identificaQBP2($tema="",$x=0,$y=0,$map_file="",$resolucao=0,$item="",$tiporetorno="",$etip=false,$ext="")
 	{
-		$mapa = ms_newMapObj($map_file);
+		if($map_file == "")
+		{$mapa = $this->mapa;}
+		else
+		{$mapa = ms_newMapObj($map_file);}
 		if($ext != ""){
 			$extmapa = $mapa->extent;
 			$e = explode(" ",$ext);
 			$extmapa->setextent((min($e[0],$e[2])),(min($e[1],$e[3])),(max($e[0],$e[2])),(max($e[1],$e[3])));
 		}
-		$layer = $mapa->getLayerByName($tema);
+		if($tema == "")
+		{$layer = $this->layer;}
+		else
+		{$layer = $mapa->getLayerByName($tema);}
 		$layer->set("status",MS_DEFAULT);
 		$layer->set("template","none.htm");
 		$pt = ms_newPointObj();
@@ -1231,7 +1239,6 @@ $listaDeTemas - (opcional) Lista com os códigos dos temas que serão identificado
 			$layer->set("tolerance",$resolucao);
 			$ident = @$layer->queryByPoint($pt, 1, -1);
 		}
-
 		if ($ident == MS_SUCCESS)
 		{
 			$itens = $layer->getmetadata("ITENS"); // itens
@@ -1300,45 +1307,68 @@ $listaDeTemas - (opcional) Lista com os códigos dos temas que serão identificado
 				$shp_index  = $result->shapeindex;
 				$shape = $layer->getfeature($shp_index,-1);
 				$conta = 0;
-				foreach ($itens as $it)
-				{
-					$val = $shape->values[$it];
-					$link = $lks[$conta];
-					foreach($itens as $t)
-					{
-						$valtemp = $shape->values[$t];
-						$busca = '['.$t.']';
-						$link = str_replace($busca,$valtemp,$link);
+				//var_dump($itens);exit;
+				if($tiporetorno == "shape" || $tiporetorno == "googlerelevo"){
+					if($tiporetorno == "shape")
+					{$resultado[] = $shape;}
+					if($tiporetorno == "googlerelevo"){
+						$lin = $shape->line(0);
+						$p = $lin->point(0);
+						$resultado = array(
+							"elevation"=>$shape->values[$item],
+							"location"=>array(
+								"lat"=>$p->x,
+								"lng"=>$p->y
+							)
+						);
 					}
-					$img = "";
-					if($locimg[$conta] != "" && $itemimg[$conta] != "")
-					{$img = "<img src='".$locimg[$conta]."//".$shape->values[$itemimg[$conta]]."' //>";}
-					else
-					if($itemimg[$conta] != "")
-					{$img = "<img src='".$shape->values[$itemimg[$conta]]."' //>";}					
-					//indica se o item é tbm uma etiqueta
-					$etiqueta = "nao";
-					if(in_array($it,$tips))
-					{$etiqueta = "sim";}
-					$arraytemp = array(
-						"alias"=>$this->converte($itensdesc[$conta]),
-						"valor"=>$this->converte($val),
-						"link"=>$link,
-						"img"=>$img,
-						"tip"=>$etiqueta
-					);
-					if($etip==false)
-					{$valori[] = $arraytemp;}
-					else
-					{$valori[$it] = $arraytemp;}
-					$conta = $conta + 1;
 				}
-				$resultado[] = $valori;
+				else{
+					if($etip == false && $item != "")
+					{$resultado[] = $shape->values[$item];}
+					else{
+						foreach ($itens as $it)
+						{
+							$val = $shape->values[$it];
+							$link = $lks[$conta];
+							foreach($itens as $t)
+							{
+								$valtemp = $shape->values[$t];
+								$busca = '['.$t.']';
+								$link = str_replace($busca,$valtemp,$link);
+							}
+							$img = "";
+							if($locimg[$conta] != "" && $itemimg[$conta] != "")
+							{$img = "<img src='".$locimg[$conta]."//".$shape->values[$itemimg[$conta]]."' //>";}
+							else
+							if($itemimg[$conta] != "")
+							{$img = "<img src='".$shape->values[$itemimg[$conta]]."' //>";}					
+							//indica se o item é tbm uma etiqueta
+							$etiqueta = "nao";
+							if(in_array($it,$tips))
+							{$etiqueta = "sim";}
+							$arraytemp = array(
+								"alias"=>$this->converte($itensdesc[$conta]),
+								"valor"=>$this->converte($val),
+								"link"=>$link,
+								"img"=>$img,
+								"tip"=>$etiqueta
+							);
+							if($etip==false)
+							{$valori[] = $arraytemp;}
+							else
+							{$valori[$it] = $arraytemp;}
+							$conta = $conta + 1;
+						}
+						$resultado[] = $valori;
+					}
+				}
 			}
 			$layer->close();
 		}
 		else
 		{$resultado[] = " ";}
+		//exit;
 		return $resultado;
 	}
 	/*

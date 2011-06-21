@@ -1334,8 +1334,13 @@ Retorno:
 
 {array}
 */
-function pegaItens($layer)
+function pegaItens($layer,$mapa="")
 {
+	if($layer->type == MS_LAYER_RASTER && $mapa != ""){
+		$pt = ms_newPointObj();
+		$pt->setXY($mapa->extent->minx,$mapa->extent->miny);
+		$layer->queryByPoint($pt,0,0);
+	}
 	$sopen = $layer->open();
 	if($sopen != MS_FAILURE)
 	{$items = $layer->getItems();}

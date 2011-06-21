@@ -520,18 +520,31 @@ function dadosLinhaDoTempo($map_file,$tema,$ext="")
 		"events"=>$eventos
 	);
 }
-function dadosPerfilRelevo($pontos,$opcao,$amostragem){
-	if($opcao == "google"){
-		$urlGoogle = "http://maps.google.com/maps/api/elevation/json?sensor=false&path=";
-		$pontos = str_replace(",","|",$pontos);
-		$pontos = str_replace(" ",",",$pontos);
-		$urlGoogle .= $pontos."&samples=".$amostragem;
-		$curl = curl_init();
-		curl_setopt ($curl, CURLOPT_URL, $urlGoogle);
-		curl_setopt($curl, CURLOPT_RETURNTRANSFER, 1);
-		$result = curl_exec($curl);
-		curl_close ($curl);
-		$result = json_decode( $result, true );
+//
+//opcao pode ser "google" ou o código de um tema. Nesse último caso, deve-se definir $item
+//
+function dadosPerfilRelevo($pontos,$opcao,$amostragem,$item="",$map_file=""){
+	$urlGoogle = "http://maps.google.com/maps/api/elevation/json?sensor=false&path=";
+	$pontos = str_replace(",","|",$pontos);
+	$pontos = str_replace(" ",",",$pontos);
+	$urlGoogle .= $pontos."&samples=".$amostragem;
+	$curl = curl_init();
+	curl_setopt ($curl, CURLOPT_URL, $urlGoogle);
+	curl_setopt($curl, CURLOPT_RETURNTRANSFER, 1);
+	$result = curl_exec($curl);
+	curl_close ($curl);
+	$result = json_decode( $result, true );
+	$pontos = array();
+	
+	if($opcao != "google"){
+		include_once("classe_atributos.php");
+		$m = New Atributos($map_file,$opcao);
+		$rs = array();
+		foreach($result["results"] as $r){
+			$l = $r["location"];
+			$rs[] = $m->identificaQBP2("",$l["lng"],$l["lat"],"",5,$item,"googlerelevo",$etip=false,$ext="");
+		}
+		$result = array("results"=>$rs,"status"=>"OK");
 	}
 	return $result;
 }

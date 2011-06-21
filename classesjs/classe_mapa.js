@@ -75,7 +75,9 @@ i3GEO.mapa = {
 				if(i3GEO.Interface.TABLET === true)
 				{i3GEO.guias.escondeGuias();}
 				else
-				{i3GEO.guias.ajustaAltura();}
+				{
+					i3GEO.guias.ajustaAltura();
+				}
 			},2000);
 		};
 	},

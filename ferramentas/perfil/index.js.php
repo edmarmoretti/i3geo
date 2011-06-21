@@ -73,6 +73,7 @@ i3GEOF.perfil = {
 	inicia: function(iddiv){
 		try{
 			$i(iddiv).innerHTML += i3GEOF.perfil.html();
+			i3GEOF.perfil.comboTemas();
 			new YAHOO.widget.Button(
 				"i3GEOperfilbotao1",
 				{onclick:{fn: i3GEOF.perfil.criaPerfil}}
@@ -91,7 +92,10 @@ i3GEOF.perfil = {
 	*/
 	html:function(){
 		var ins = "<p class='paragrafo' >Escolha qual será a fonte dos dados de Z:";
-		ins += "<p class='paragrafo' ><input style=cursor:pointer checked type=radio name=i3GEOFperfilFonte id=i3GEOFperfilFonteGoogle /> Google";
+		ins += "<p class='paragrafo' ><input onclick='if(this.checked == true){$i(\"i3GEOFperfilTemasSel\").value = \"\";$i(\"i3GEOFperfilDivComboItens\").innerHTML = \"\";}' style=cursor:pointer checked type=radio name=i3GEOFperfilFonte id=i3GEOFperfilFonteGoogle /> Google ou";
+		ins += "<p class='paragrafo' >um tema do mapa: <div style=text-align:left; id=i3GEOFperfilTemas ></div>";
+		ins += "<div style=text-align:left; id=i3GEOFperfilDivComboItens ></div><br>";
+		
 		ins += "<p class='paragrafo' ><input type=text id=i3GEOFperfilAmostragem value=20 size=3 /> Número de pontos que serão obtidos ao longo da linha";
 		ins += "<br><br><input id=i3GEOperfilbotao1 type='buttom' value='Criar gráfico' />";
 		ins += "<br><br><div style=text-align:left id=i3GEOperfilfim ></div>";
@@ -119,7 +123,7 @@ i3GEOF.perfil = {
 		};
 		janela = i3GEO.janela.cria(
 			"400px",
-			"200px",
+			"250px",
 			"",
 			"",
 			"",
@@ -147,10 +151,9 @@ i3GEOF.perfil = {
 		try{
 			if(i3GEOF.perfil.aguarde.visibility === "visible")
 			{return;}
-			var p,
+			var temp,
+				p,
 				cp;
-
-			i3GEOF.perfil.aguarde.visibility = "visible";
 			fim = function(retorno){
 				i3GEOF.perfil.aguarde.visibility = "hidden";
 				if (retorno.data === undefined )
@@ -165,8 +168,21 @@ i3GEOF.perfil = {
 					}
 				}
 			};
-			var pontos = i3GEOF.perfil.listaPontos();
-			i3GEO.php.dadosPerfilRelevo(fim,"google",pontos,$i("i3GEOFperfilAmostragem").value);
+			if($i("i3GEOFperfilFonteGoogle").checked === true){
+				i3GEOF.perfil.aguarde.visibility = "visible";
+				var pontos = i3GEOF.perfil.listaPontos(false);
+				i3GEO.php.dadosPerfilRelevo(fim,"google",pontos,$i("i3GEOFperfilAmostragem").value,"");
+			}
+			else{
+				var pontos = i3GEOF.perfil.listaPontos(false);
+				if($i("i3GEOFperfilTemasSel").value === "")
+				{alert("Selecione um tema");return;}
+				if($i("i3GEOFperfilComboItens").value === "")
+				{alert("Selecione um item");return;}
+				i3GEOF.perfil.aguarde.visibility = "visible";
+				i3GEO.php.dadosPerfilRelevo(fim,$i("i3GEOFperfilTemasSel").value,pontos,$i("i3GEOFperfilAmostragem").value,$i("i3GEOFperfilComboItens").value);
+			}
+			
 		}
 		catch(e){$i("i3GEOperfilfim").innerHTML = "<p class='paragrafo' >Erro. "+e;i3GEO.janela.fechaAguarde();i3GEOF.perfil.aguarde.visibility = "hidden";}
 	},
@@ -185,15 +201,23 @@ i3GEOF.perfil = {
 	
 	Converte o objeto i3GEOF.perfil.pontos em uma string com a lista de pontos
 	
+	Parametro:
+	
+	normal {booblean} - quando true, retorna x e y, quando falso, retorna y e x
+	
 	Retorno:
-	{string} - x y,x y,x y
+	{string}
 	*/
-	listaPontos: function(){
+	listaPontos: function(normal){
 		var n = i3GEOF.perfil.pontos.xpt.length,
 			i = 0,
 			lista = [],
 			xs = i3GEOF.perfil.pontos.xpt,
 			ys = i3GEOF.perfil.pontos.ypt;
+		if(normal === true){
+			xs = i3GEOF.perfil.pontos.ypt;
+			ys = i3GEOF.perfil.pontos.xpt;
+		}
 		for(i=0;i<n;i++){
 			lista.push(ys[i]+" "+xs[i])
 		}
@@ -220,6 +244,50 @@ i3GEOF.perfil = {
 		}
 		i3GEOF.perfil.dadosGrafico = dados;
 		return dados;
-	}
+	},
+	/*
+	Function: comboTemas
+	
+	Cria um combo com a lista de temas
+	
+	Veja:
+	
+	<i3GEO.util.comboTemas>
+	*/
+	comboTemas: function(){
+		i3GEO.util.comboTemas(
+			"i3GEOFperfilTemasSel",
+			function(retorno){
+		 		$i("i3GEOFperfilTemas").innerHTML = retorno.dados;
+		 		$i("i3GEOFperfilTemas").style.display = "block";
+		 		if ($i("i3GEOFperfilTemasSel")){
+		 			$i("i3GEOFperfilTemasSel").onchange = function(){
+		 				i3GEO.mapa.ativaTema($i("i3GEOFperfilTemasSel").value);
+						$i("i3GEOFperfilFonteGoogle").checked = false;
+						//combodeitens
+						if(i3GEO.temaAtivo !== ""){
+							i3GEO.util.comboItens(
+								"i3GEOFperfilComboItens",
+								i3GEO.temaAtivo,
+								function(retorno){
+									$i("i3GEOFperfilDivComboItens").innerHTML = "<p class=paragrafo >Item com os valores: <br>"+retorno.dados+"</p>";
+								}
+							);
+						}
+						else
+						{$i("i3GEOFperfilDivComboItens").innerHTML = "";}
+		 			};
+				}
+				if(i3GEO.temaAtivo !== ""){
+					$i("i3GEOFperfilTemasSel").value = i3GEO.temaAtivo;
+					$i("i3GEOFperfilTemasSel").onchange.call();
+				}
+			},
+			"i3GEOFperfilTemas",
+			"",
+			false,
+			"ligados"
+		);	
+	}	
 };
 <?php error_reporting(0);if(extension_loaded('zlib')){ob_end_flush();}?>
