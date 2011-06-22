@@ -391,6 +391,9 @@ function iniciaDadosGrafico($map_file,$tema,$exclui,$itemclasses,$itemvalores,$t
 	if ($exclui == ""){$exclui = "nulo";}
 	$valores = pegaValoresM($map,$layer,array($itemclasses,$itemvalores),$exclui,$selecionados);
 	$dados = agrupaValores($valores,0,1,$tipo);
+	foreach($valores as $valor){
+		$cores[$valor[0]] = $valor["cores"];
+	}
 	//calcula os parametros para o grafico	
 	$nval = count($dados);
 	$max = max($dados);
@@ -405,9 +408,9 @@ function iniciaDadosGrafico($map_file,$tema,$exclui,$itemclasses,$itemvalores,$t
 			{
 				$pp = ($dados[$tempm[$i]] * 100) / $soma;
 				if ($percentual == "TRUE")
-				{$nnval[] = "'".$tempm[$i]." (".round($pp,0)."%)';".$dados[$tempm[$i]];}
+				{$nnval[] = "'".$tempm[$i]." (".round($pp,0)."%)';".$dados[$tempm[$i]].";".$cores[$tempm[$i]];}
 				else
-				{$nnval[] = "'".$tempm[$i]."';".$dados[$tempm[$i]];}
+				{$nnval[] = "'".$tempm[$i]."';".$dados[$tempm[$i]].";".$cores[$tempm[$i]];}
 			}
 		}
 	}
@@ -416,7 +419,7 @@ function iniciaDadosGrafico($map_file,$tema,$exclui,$itemclasses,$itemvalores,$t
 		$nnval[] = "x;y";
 		foreach ($valores as $v)
 		{
-			$nnval[] = $v[0].";".$v[1];
+			$nnval[] = $v[0].";".$v[1].";".$cores[$v[0]];
 		}	
 	}
 	return array("dados"=>$nnval,"ndados"=>$nval,"max"=>$max);

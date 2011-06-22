@@ -259,11 +259,12 @@ i3GEOF.graficointerativo = {
 		'	</div>' +
 		'	<p class=paragrafo >Excluir o seguinte valor: ' +
 		$inputText("","","i3GEOgraficointerativoexcluir","",3,"") +
-		'	<p class=paragrafo ><input type=checkbox style=cursor:pointer id=i3GEOgraficointerativoCoresA /> gera cores aleatórias</p>' +
+		'	<p class=paragrafo ><input type=checkbox style="cursor:pointer;top:3px;position:relative;" id=i3GEOgraficointerativoCoresA /> gera cores aleatórias</p>' +
 		'	<p class=paragrafo ><input id=i3GEOgraficointerativobotao1 type="buttom" value="Obter dados" /></p>'+
 		'	<div id=i3GEOgraficointerativoDados ></div>'+
 		'</div>' +
 		'<div class=guiaobj id="i3GEOgraficointerativoguia3obj" style="left:1px;display:none;top:-5px">' +
+		'	<p class=paragrafo ><input style=cursor:pointer type=checkbox id=i3GEOgraficointerativoAdLinhas checked /> Adiciona as linhas em gráficos de barras</p>' +
 		'	<p class=paragrafo ><input style=cursor:pointer type=checkbox id=i3GEOgraficointerativoAcumula /> Utiliza valores acumulados</p>' +
 		'	<p class=paragrafo ><input style=cursor:pointer type=checkbox id=i3GEOgraficointerativoRelativa /> Utiliza valores relativos (%)</p>' +
 		'	<p class=paragrafo ><input style=cursor:pointer type=checkbox id=i3GEOgraficointerativoDadosPuros /> Não processa os valores ao obter os dados (mantém os dados como estão na tabela de atributos) - essa opção é útil nos gráficos de distribuição de pontos</p>' +
@@ -295,7 +296,7 @@ i3GEOF.graficointerativo = {
 		titulo = "Gráficos interativos <a class=ajuda_usuario target=_blank href='" + i3GEO.configura.locaplic + "/ajuda_usuario.php?idcategoria=3&idajuda=84' >&nbsp;&nbsp;&nbsp;</a>";
 		janela = i3GEO.janela.cria(
 			"380px",
-			"240px",
+			"260px",
 			"",
 			"",
 			"",
@@ -523,7 +524,7 @@ i3GEOF.graficointerativo = {
 			}
 			//verifica se no objeto com os dados existe um terceiro valor com as cores
 			if(v[2]){
-				cor = v[2];
+				cor = i3GEO.util.rgb2hex(v[2]);
 			}
 			ins.push($inputText("","",id+"_cor","",12,cor,"cor"));
 			ins.push("</td><td>");
@@ -549,12 +550,15 @@ i3GEOF.graficointerativo = {
 			valores = [],
 			valoresS = [],
 			acumulado = [],
+			acum,
 			nomes = [],
 			cores = [],
 			indice = $i("i3GEOgraficointerativoComboTemasId").options.selectedIndex,
 			titulo = $i("i3GEOgraficointerativoComboTemasId").options[indice].text,
 			par = [],
+			parcor = [],
 			soma = 0,
+			total = 0,
 			menor = inputs[1].value * 1,
 			maior = 0,
 			menorNome = inputs[0].value * 1,
@@ -573,7 +577,7 @@ i3GEOF.graficointerativo = {
 			legendaX = "",
 			legendaY = "",
 			fill = "#C4B86A",
-			pointSize = 2;
+			pointSize = 4;
 		if(i3GEOF.graficointerativo.titulo != "")
 		{titulo = i3GEOF.graficointerativo.titulo}
 		if($i("i3GEOgraficointerativoComboXid"))
@@ -581,12 +585,17 @@ i3GEOF.graficointerativo = {
 		if($i("i3GEOgraficointerativoComboYid"))
 		{legendaY = $i("i3GEOgraficointerativoComboYid").value;}
 		for(i=0;i<ninputs;i = i + 3){
+			temp = inputs[i+1].value * 1;
+			total += temp;
+		}
+		for(i=0;i<ninputs;i = i + 3){
 			nomes.push(inputs[i].value+" ");
 			cores.push(inputs[i+2].value);
 			temp = inputs[i+1].value * 1;
 			valores.push(temp);
 			valoresS.push(temp+" ");
-			acumulado.push(ultimo + temp);
+			acum = ultimo + temp;
+			acumulado.push(acum);
 			ultimo = ultimo + temp;
 			soma += temp;
 			if(temp > maior)
@@ -599,6 +608,13 @@ i3GEOF.graficointerativo = {
 			if(temp < menorNome)
 			{menorNome = temp;}	
 			par.push({"value":inputs[i+1].value * 1,"label":inputs[i].value+" "});
+			
+			temp = inputs[i+1].value * 1;
+			if($i("i3GEOgraficointerativoAcumula").checked)
+			{temp = acum;}
+			if($i("i3GEOgraficointerativoRelativa").checked)
+			{temp = (temp * 100) / total;}
+			parcor.push({"colour":inputs[i+2].value,"value":temp,"label":inputs[i].value+" "});
 		}
 		if($i("i3GEOgraficointerativoAcumula").checked){
 			valores = acumulado;
@@ -637,8 +653,12 @@ i3GEOF.graficointerativo = {
 			};
 		}
 		if(i3GEOF.graficointerativo.tipo === "line" || i3GEOF.graficointerativo.tipo === "scatter" || i3GEOF.graficointerativo.tipo === "hbar" || i3GEOF.graficointerativo.tipo === "area" || i3GEOF.graficointerativo.tipo === "bar_round" || i3GEOF.graficointerativo.tipo === "bar_round_glass" || i3GEOF.graficointerativo.tipo === "bar_filled" || i3GEOF.graficointerativo.tipo === "bar_glass" || i3GEOF.graficointerativo.tipo === "bar_3d" || i3GEOF.graficointerativo.tipo === "bar_sketch" || i3GEOF.graficointerativo.tipo === "bar_cylinder" || i3GEOF.graficointerativo.tipo === "bar_cylinder_outline"){
+			temp = valores;
+			if(i3GEOF.graficointerativo.tipo === "line" || i3GEOF.graficointerativo.tipo === "scatter" || i3GEOF.graficointerativo.tipo === "area")
+			{temp = parcor;}
 			parametros = {
-				"elements":[{
+				"elements":[
+				{
 					"type":      i3GEOF.graficointerativo.tipo,
 					"start-angle": 180,
 					"colour":   corunica,
@@ -646,13 +666,14 @@ i3GEOF.graficointerativo = {
 					"alpha":     alpha,
 					"stroke":    stroke,
 					"animate":   1,
-					"values" :   valores,
+					"values" :   temp,
 					"tip": "#val#",
 					"gradient-fill": gradient,
 					"fill": fill,
 					"fill-alpha": alpha,
-					"dot-style": { "type": "anchor", "colour": "#9C0E57", "dot-size": pointSize }
-				}],
+					"dot-style": { "type": "solid-dot", "colour": "#9C0E57", "dot-size": pointSize }
+				}
+				],
 				"x_axis": {
 					"colour": "#A2ACBA",
 					"grid-colour": corGrid,
@@ -683,6 +704,19 @@ i3GEOF.graficointerativo = {
 					"style": "{font-size: "+tituloSize+"; color:"+tituloCor+"; text-align: "+tituloAlinhamento+";}"
 	  			}  			
 			};
+			if($i("i3GEOgraficointerativoAdLinhas").checked){
+				parametros.elements.push({
+					"type":      "line",
+					"colour":	"#FFFFFF",
+					"start-angle": 180,
+					"alpha":     0,
+					"stroke":    0,
+					"width": 0,
+					"animate":   1,
+					"values" :   parcor,
+					"dot-style": { "type": "solid-dot", "colour": "#9C0E57", "dot-size": pointSize }
+				});
+			}
 			if(i3GEOF.graficointerativo.tipo === "hbar"){
 				n = valores.length;
 				temp = [];
@@ -733,7 +767,7 @@ i3GEOF.graficointerativo = {
 					"fill": "#45909F",
 					"fill-alpha": 0.4,
 					"loop": true,
-					"values": valores
+					"values": parcor
 				}],
 				"radar_axis": {
 					"max": maior,

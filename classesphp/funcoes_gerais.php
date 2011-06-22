@@ -1178,6 +1178,7 @@ function pegaValoresM($mapa,$layer,$itens,$exclui="nulo",$selecionados="nao",$ch
 	$prjTema = $layer->getProjection();
 	$layer->set("template","none.htm");
 	$layer->setfilter("");
+	
 	$indicesel = array();
 	//pega os valores dos indices dos elementos selecionados para comparacao posterior
 	if ($selecionados == "sim")
@@ -1193,11 +1194,14 @@ function pegaValoresM($mapa,$layer,$itens,$exclui="nulo",$selecionados="nao",$ch
 		$layer->close();
 	}
 	$valores = array();
+	$nclasses = $layer->numclasses;
 	if (@$layer->queryByrect($mapa->extent) == MS_SUCCESS)
 	{
+		$layer->draw();
 		$sopen = $layer->open();
 		if($sopen == MS_FAILURE){return "erro";}
 		$res_count = $layer->getNumresults();
+		
 		for ($i=0;$i<$res_count;++$i)
 		{
 			$result = $layer->getResult($i);
@@ -1221,16 +1225,21 @@ function pegaValoresM($mapa,$layer,$itens,$exclui="nulo",$selecionados="nao",$ch
 					{$v[] = $shape->values[$item];}
 					else
 					{$v[$item] = $shape->values[$item];}
-					if($centroide == true){
-						$c = $shape->getCentroid();
-						if (($prjTema != "") && ($prjMapa != $prjTema))
-						{
-							$projOutObj = ms_newprojectionobj($prjTema);
-							$projInObj = ms_newprojectionobj($prjMapa);
-							$c->project($projInObj, $projOutObj);
-						}
-						$v["centroide"] = "POINT(".$c->x." ".$c->y.")";
+				}
+				if($centroide == true){
+					$c = $shape->getCentroid();
+					if (($prjTema != "") && ($prjMapa != $prjTema))
+					{
+						$projOutObj = ms_newprojectionobj($prjTema);
+						$projInObj = ms_newprojectionobj($prjMapa);
+						$c->project($projInObj, $projOutObj);
 					}
+					$v["centroide"] = "POINT(".$c->x." ".$c->y.")";
+				}
+				if($nclasses > 0){
+					$classe = $layer->getclass($shape->classindex);
+					$cor = $classe->getstyle(0)->color;
+					$v["cores"] = $cor->red." ".$cor->green." ".$cor->blue;
 				}
 				if (count($v) == 1)
 				{$valores[] = $v[0];}
