@@ -74,15 +74,22 @@ i3GEOF.filtroarvore = {
 	*/
 	html:function(){
 		var ins = '<p class=paragrafo >Escolha o tipo de filtro ou "nenhum" para não filtrar<br><br>' +
-			'<select onchange="i3GEO.arvoreDeCamadas.ARVORE = null;i3GEO.arvoreDeCamadas.FILTRO = this.value;i3GEO.arvoreDeCamadas.atualiza(i3GEO.arvoreDeCamadas.CAMADAS,true)"><option value="">Nenhum</option>' +
+			'<select onchange="i3GEO.arvoreDeCamadas.ARVORE = null;i3GEO.arvoreDeCamadas.FILTRO = this.value;i3GEO.arvoreDeCamadas.atualiza(i3GEO.arvoreDeCamadas.CAMADAS,true)">' +
+			'<option value="">Nenhum</option>' +
 			'<option value="ligados">ligados</option>' +
 			'<option value="desligados">desligados</option>' +
 			'<option value="selecionados">com seleção</option>' +
 			'<option value="download">permitem download</option>' +
 			'<option value="wms">são do tipo WMS</option>' +
 			'<option value="raster">são do tipo raster</option>' +
-			'<option value="toponimia">contem apenas texto</option>';
-		return ins+"</select>";
+			'<option value="toponimia">contem apenas texto</option>' +
+			'</select><br><br>' +
+			'Operação<br><br>' +
+			'<select onchange="i3GEOF.filtroarvore.lote(this)" >' +
+			'<option value="">---</option>' +
+			'<option value="excluir">excluir</option>' +
+			'</select>';
+		return ins;
 	},
 	/*
 	Function: criaJanelaFlutuante
@@ -99,7 +106,7 @@ i3GEOF.filtroarvore = {
 		titulo = "Filtro <a class=ajuda_usuario target=_blank href='" + i3GEO.configura.locaplic + "/ajuda_usuario.php?idcategoria=1&idajuda=4' >&nbsp;&nbsp;&nbsp;</a>";
 		janela = i3GEO.janela.cria(
 			"220px",
-			"90px",
+			"140px",
 			"",
 			"",
 			"",
@@ -117,15 +124,21 @@ i3GEOF.filtroarvore = {
 		i3GEOF.filtroarvore.inicia(divid);
 	},
 	/*
-	Function: executa
+	Function: lote
 	
-	Altera o tamanho do mapa
+	Executa uma operação em lote sobre as camadas mostradas no mapa
 	
-	Veja:
-	
-	<MUDATAMANHO>
 	*/
-	executa: function(){
+	lote: function(objeto){
+		var operacao = objeto.value,
+			lista = i3GEO.arvoreDeCamadas.listaLigadosDesligados(),
+			temp;
+		if(operacao === "excluir"){
+			if(window.confirm("Remove todos do mapa?")){
+				i3GEO.php.excluitema(i3GEO.atualiza,lista[2]);
+			}
+		}
+		objeto.value = "";
 	}
 };
 <?php error_reporting(0);if(extension_loaded('zlib')){ob_end_flush();}?>

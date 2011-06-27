@@ -140,18 +140,21 @@ i3GEO.php = {
 
 	<EXCLUITEMA>
 	*/
-	excluitema: function(funcao,tema){
-		var layer,retorno,p;
+	excluitema: function(funcao,temas){
+		var layer,retorno,p,n,i;
 		i3GEO.php.verifica();
 		retorno = function(retorno){
 			if(i3GEO.Interface.ATUAL === "openlayers"){
-				layers = i3geoOL.getLayersByName(tema);
-				if(layers.length > 0)
-				{i3geoOL.removeLayer(layers[0]);}
+				n = temas.length;
+				for(i=0;i<n;i++){
+					layer = i3geoOL.getLayersByName(temas[i]);
+					if(layer.length > 0)
+					{i3geoOL.removeLayer(layer[0]);}
+				}
 			}
 			funcao.call(retorno);
 		};
-		p = i3GEO.arvoreDeCamadas.LOCAPLIC+"/classesphp/mapa_controle.php?funcao=excluitema&temas="+tema+"&g_sid="+i3GEO.arvoreDeCamadas.SID;
+		p = i3GEO.arvoreDeCamadas.LOCAPLIC+"/classesphp/mapa_controle.php?funcao=excluitema&temas="+temas+"&g_sid="+i3GEO.arvoreDeCamadas.SID;
 		cpJSON.call(p,"excluitema",retorno);
 	},
 	/*

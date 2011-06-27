@@ -1654,6 +1654,12 @@ i3GEO.arvoreDeTemas = {
 		//
 		//se forem encontrados temas ativos na árvore de menus, o mapa é redesenhado com a adição de novos temas
 		//
+		//verifica se o tema já existe no mapa
+		//
+		if(tsl.length === 1 && i3GEO.arvoreDeCamadas.pegaTema(tsl[0]) !== ""){
+			temp = window.confirm("O tema já existe no mapa. Adiciona novamente?");
+			if(!temp){return;}
+		}
 		if(tsl.length > 0){
 			i3GEO.janela.abreAguarde("i3GEO.atualiza",$trad("o1"));
 			temp = function(retorno){
