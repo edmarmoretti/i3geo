@@ -1733,7 +1733,7 @@ i3GEO.Interface = {
 				if(a){
 					a.parentNode.appendChild(d);
 				}
-				else{alert("Arvore de camadas nao encontrada. Nao e possivel adicionar a arvore de KML");return;}
+				else{return;}
 			}
 			i3GEO.Interface.googlemaps.ARVORE = new YAHOO.widget.TreeView("arvoreCamadasKml");
 			root = i3GEO.Interface.googlemaps.ARVORE.getRoot();
@@ -2363,7 +2363,7 @@ i3GEO.Interface = {
 				if(a){
 					a.parentNode.appendChild(d);
 				}
-				else{alert("Arvore de camadas nao encontrada. Nao e possivel adicionar a arvore de KML");return;}
+				else{return;}
 			}
 			i3GEO.Interface.googleearth.ARVORE = new YAHOO.widget.TreeView("arvoreCamadasKml");
 			root = i3GEO.Interface.googleearth.ARVORE.getRoot();

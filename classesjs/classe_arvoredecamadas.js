@@ -403,7 +403,7 @@ i3GEO.arvoreDeCamadas = {
 
 	onde {String} - ID do elemento DOM onde a árvore será inserida. Se for definido como "" o id será buscado da variável IDHTML.
 
-	temas {JSON} - Objeto JSON com as camadas e propriedades
+	temas {JSON} - Objeto JSON com as camadas e propriedades. Se não for definido ou for vazio, será utilizado i3GEO.arvoreDeCamadas.CAMADAS
 
 	g_sid {String} -  Código da seção PHP criada ao abrir o i3Geo
 
@@ -422,8 +422,8 @@ i3GEO.arvoreDeCamadas = {
 		{return;}
 		if(!$i(i3GEO.arvoreDeCamadas.IDHTML))
 		{return;}
-		if(YAHOO.lang.isUndefined(temas))
-		{return;}
+		if(YAHOO.lang.isUndefined(temas) || temas === "")
+		{temas = i3GEO.arvoreDeCamadas.CAMADAS;}
 		i3GEO.arvoreDeCamadas.atualiza(temas);
 		if(i3GEO.arvoreDeCamadas.finaliza !== ""){
 			eval(i3GEO.arvoreDeCamadas.finaliza);
