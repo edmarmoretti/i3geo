@@ -1226,14 +1226,17 @@ $locaplic - Localização do I3geo.
 
 $unir - sim|nao indica se os elementos selecionados deverão ser unidos em um só antes do buffer ser criado
 
+$wkt - (opcional) elemento no formato wkt para o qual o buffer será gerado. Só de ve ser definido se $this->nome for vazio, ou seja
+se o parâmetro "tema" não tiver sido fornecido ao construtor da classe
+
 return:
 
 nome do layer criado com o buffer.
 */
-	function criaBuffer($distancia,$locaplic,$unir="nao")
+	function criaBuffer($distancia,$locaplic,$unir="nao",$wkt="")
 	{
-		if(!$this->layer){return "erro";}
 		set_time_limit(180);
+		//error_reporting(E_ALL);
 		//para manipular dbf
 		if(file_exists($this->locaplic."/pacotes/phpxbase/api_conversion.php"))
 		include_once($this->locaplic."/pacotes/phpxbase/api_conversion.php");
@@ -1241,20 +1244,32 @@ nome do layer criado com o buffer.
 		include_once "../pacotes/phpxbase/api_conversion.php";
 		$nomebuffer = nomeRandomico();
 		$nomeshp = $this->diretorio."/".$nomebuffer;
-		//pega os shapes selecionados
-		carregaquery($this->arquivo,&$this->layer,&$this->mapa);
-		$sopen = $this->layer->open();
-		if($sopen == MS_FAILURE){return "erro";}
-		$items = pegaItens($this->layer);
-		$this->layer->open();
-		$res_count = $this->layer->getNumresults();
-		$buffers = array();
-		//pega um shape especifico
-		for ($i = 0; $i < $res_count; ++$i)
-		{
-			$result = $this->layer->getResult($i);
-			$shp_index  = $result->shapeindex;
-			$shape = $this->layer->getfeature($shp_index,-1);
+		$listaShapes = array();
+		if($this->nome != ""){
+			//pega os shapes selecionados
+			carregaquery($this->arquivo,&$this->layer,&$this->mapa);
+			$sopen = $this->layer->open();
+			if($sopen == MS_FAILURE){return "erro";}
+			$items = pegaItens($this->layer);
+			$this->layer->open();
+			$res_count = $this->layer->getNumresults();
+			$buffers = array();
+			//pega um shape especifico
+			for ($i = 0; $i < $res_count; ++$i)
+			{
+				$result = $this->layer->getResult($i);
+				$shp_index  = $result->shapeindex;
+				$listaShapes[] = $this->layer->getfeature($shp_index,-1);
+			}
+			$fechou = $this->layer->close();
+		}
+		else{
+			$s = ms_shapeObjFromWkt($wkt);
+			$s->values["ID"] = 0;
+			$items[] = "ID";
+			$listaShapes[] = $s;
+		}
+		foreach($listaShapes as $shape){
 			//calcula a extensão geografica
 			$rect = $shape->bounds;
 			$projInObj = ms_newprojectionobj("proj=latlong");
@@ -1283,11 +1298,9 @@ nome do layer criado com o buffer.
 			$buffers = array($ns);
 			$shapes = array($shapes[0]);
 		}		
-		$fechou = $this->layer->close();
 		//gera o novo arquivo shape file
 		// cria o shapefile
 		$novoshpf = ms_newShapefileObj($nomeshp, MS_SHP_POLYGON);
-		$items = pegaItens($this->layer);
 		// cria o dbf
 		$def = array();
 		$def[] = array("i3geo","C","254");

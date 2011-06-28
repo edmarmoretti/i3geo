@@ -163,6 +163,14 @@ i3GEOF.identifica = {
 			};
 			$i("i3GEOidentificaguia5").onclick = function(){
 				i3GEO.guias.mostraGuiaFerramenta("i3GEOidentificaguia5","i3GEOidentificaguia");
+				new YAHOO.widget.Button("i3GEOidentificabotao2",{
+					onclick:{
+						fn: function(){
+							var js = i3GEO.configura.locaplic+"/ferramentas/bufferpt/index.js.php";
+							i3GEO.util.scriptTag(js,"i3GEOF.bufferpt.criaJanelaFlutuante("+i3GEOF.identifica.x+","+i3GEOF.identifica.y+")","i3GEOF.bufferpt_script");
+						}
+					}
+				});				
 				var ins = "",retorna;
 				i3GEO.coordenadas.formato = "lista";
 				i3GEO.coordenadas.mostraCoordenadas(false,"i3GEOidentificacoordtexto",i3GEOF.identifica.x,i3GEOF.identifica.y);
@@ -303,7 +311,7 @@ i3GEOF.identifica = {
 		ins += '		<li><a href="#ancora"><em><div id="i3GEOidentificaguia1" style="text-align:center;left:0px;" >Temas vis&iacute;veis</div></em></a></li>';
 		ins += '		<li><a href="#ancora"><em><div id="i3GEOidentificaguia2" style="text-align:center;left:0px;" >Todos</div></em></a></li>';
 		ins += '		<li><a href="#ancora"><em><div id="i3GEOidentificaguia4" style="text-align:center;left:0px;" >Etiquetas</div></em></a></li>';
-		ins += '		<li><a href="#ancora"><em><div id="i3GEOidentificaguia5" style="text-align:center;left:0px;" >XY</div></em></a></li>';
+		ins += '		<li><a href="#ancora"><em><div id="i3GEOidentificaguia5" style="text-align:center;left:0px;" >XY/buffer</div></em></a></li>';
 		ins += '		<li><a href="#ancora"><em><div id="i3GEOidentificaguia3" style="text-align:center;left:0px;" >Propriedades</div></em></a></li>';
 		ins += '	</ul>';
 		ins += '</div>';
@@ -328,7 +336,7 @@ i3GEOF.identifica = {
 		ins += '		<b>Valores para o ponto indicado no mapa<br></b>';
 		ins += '		<div id=i3GEOidentificacoord ></div><br>';
 		ins += '		<div id=i3GEOidentificacoordtexto style=text-align:left ></div>';
-
+		ins += '		<br><br><input id=i3GEOidentificabotao2 size=20  type=button value="Criar entorno (buffer)" />';
 		ins += '	</div>';		
 		//ins += '</div>	';
 		return ins;

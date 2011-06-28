@@ -210,7 +210,7 @@ g_traducao_ajuda = {
 			diretorio:"i3geo/ferramentas/buffer",
 			categoria:"3",
 			pt:"O entorno, ou buffer, &eacute; um pol&iacute;gono que circunda um elemento geogr&aacute;fico em uma dist&acirc;ncia fixa. Para o cálculo de distância o i3Geo utiliza a projeção policônica. Os atributos do tema alvo são copiados para os polígonos resultantes e uma nova camada é adicionada ao mapa. Opcionalmente, os polígonos resultantes podem ser unidos como um único.",
-			complemento:"Para gerar o entorno, voc&ecirc; precisa selecionar alguns elementos de um tema. Utilize para isso a op&ccedil;&atilde;o de sele&ccedil;&atilde;o ou a tabela de atributos do tema desejado.",
+			complemento:"Para gerar o entorno, voc&ecirc; precisa selecionar alguns elementos de um tema. Utilize para isso a op&ccedil;&atilde;o de sele&ccedil;&atilde;o ou a tabela de atributos do tema desejado. O buffer pode ser gerado também por meio da ferramenta de identificação.",
 			tela:"ferramentas/buffer/exemplo.htm",
 			apijs:"i3GEO.analise.dialogo.buffer()"
 		},
