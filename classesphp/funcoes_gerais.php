@@ -1884,9 +1884,15 @@ function criaSHP($tema,$map_file,$locaplic,$dir_tmp,$nomeRand=TRUE)
 			//
 			//verifica a quantidade de registros no final
 			//
+			if(function_exists("dbase_open"))
 			$db = dbase_open($nomeshp.".dbf", 0);
+			else
+			$db = xbase_open($nomeshp.".dbf", 0);
 			$record_numbers = dbase_numrecords($db);
+			if(function_exists("dbase_close"))
 			dbase_close($db);
+			else
+			xbase_close($db);
 			if($record_numbers != $res_count){
 				if(file_exists($nomeshp.".dbf"))
 				{unlink($nomeshp.".dbf");}
@@ -1955,7 +1961,11 @@ function downloadTema2($map_file,$tema,$locaplic,$dir_tmp,$postgis_mapa)
 		if (strtoupper(substr(PHP_OS, 0, 3) == 'WIN'))
 		{$map_tmp = ms_newMapObj($locaplic."/aplicmap/geral1windows.map");}
 		else
-		{$map_tmp = ms_newMapObj($locaplic."/aplicmap/geral1.map");}
+		{
+			$map_tmp = @ms_newMapObj($locaplic."/aplicmap/geral1.map");
+			if(!$map_tmp)
+			$map_tmp = @ms_newMapObj($locaplic."/aplicmap/geral1debian.map");
+		}
 		$map_file = $dir_tmp."/".nomerandomico(20).".map";
 		$map_tmp->save($map_file);
 		$nomeRand = false;
@@ -2123,8 +2133,14 @@ function downloadTema2($map_file,$tema,$locaplic,$dir_tmp,$postgis_mapa)
 	$nreg = "";
 	if(count($resultado) == 3){
 		$arq = $radtmp."/".$resultado[2];
-		$db = dbase_open($arq, 0);
-		if($db){$nreg = dbase_numrecords($db);}
+		if(function_exists("dbase_open")){	
+			$db = dbase_open($arq, 0);
+			if($db){$nreg = dbase_numrecords($db);}
+		}
+		else{
+			$db = xbase_open($arq, 0);
+			if($db){$nreg = xbase_numrecords($db);}
+		}
 	}
 	return array("arquivos"=>implode(",",$resultado),"nreg"=>$nreg);
 }
@@ -2143,9 +2159,15 @@ Return:
 {boolean} - true indica que não está vazio
 */
 function verificaDBF($arq){
+	if(function_exists("dbase_open"))
 	$db = dbase_open($arq, 0);
+	else
+	$db = xbase_open($arq, 0);
 	if ($db) {
+	  if(function_exists("dbase_numrecords"))
 	  $record_numbers = dbase_numrecords($db);
+	  else
+	  $record_numbers = xbase_numrecords($db);
 	  if ($record_numbers > 0)
 	  {return true;}
 	  else
