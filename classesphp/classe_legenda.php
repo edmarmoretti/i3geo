@@ -482,6 +482,7 @@ String no formato HTML com as imagens dos símbolos
 		{$dir = $dir_tmp;}
 		else
 		{$dir = $dir_tmp."/".$imgdir;}
+		
 		if (!file_exists($dir."/simbolos".$tipo.".inc"))
 		{
 			$f = fopen($dir."/simbolos".$tipo.".inc","w");
@@ -568,6 +569,7 @@ function: aplicaParametro
 Aplica um parâmetro em um estilo de uma classe.
 
 parameters:
+
 $classe - Índice da classe.
 
 $estilo - Índice do estilo que será alterado.

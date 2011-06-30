@@ -1123,9 +1123,9 @@ i3GEOF.legenda = {
 				{valido = "sim";}
 			}
 			if(valido === "nao"){
-				alert("Nome do simbolo nao encontrado");
-				i3GEOF.legenda.aguarde.visibility = "hidden";
-				return;
+				//alert("Nome do simbolo nao encontrado");
+				//i3GEOF.legenda.aguarde.visibility = "hidden";
+				//return;
 			}
 			p = i3GEO.configura.locaplic+"/classesphp/mapa_controle.php?g_sid="+i3GEO.configura.sid+"&funcao=editasimbolo&opcao=aplica&tema="+i3GEOF.legenda.tema+"&classe="+i3GEOF.legenda.classe+"&estilo="+i3GEOF.legenda.estilo+"&outlinecolor="+outlinecolor+"&backgroundcolor="+backgroundcolor+"&color="+color+"&symbolname="+symbolname+"&size="+size+"&opacidade="+opacidade;
 			cp = new cpaint();

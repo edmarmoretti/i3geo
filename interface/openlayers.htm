@@ -251,6 +251,12 @@ OpenLayers.ImgPath = "../pacotes/openlayers/img/";
 //adiciona camadas que podem ser ativadas como fundo do mapa
 //
 (function(){
+	var oce = new OpenLayers.Layer.ArcGIS93Rest( 
+		"ESRI Ocean Basemap",
+		"http://server.arcgisonline.com/ArcGIS/rest/services/Ocean_Basemap/MapServer/export",
+		{format:"jpg"},
+		{isBaseLayer:true,visibility:false}
+	);
 	var ims = new OpenLayers.Layer.ArcGIS93Rest( 
 		"ESRI Imagery World 2D",
 		"http://server.arcgisonline.com/ArcGIS/rest/services/ESRI_Imagery_World_2D/MapServer/export",
@@ -276,7 +282,7 @@ OpenLayers.ImgPath = "../pacotes/openlayers/img/";
 		{isBaseLayer:true,visibility:false}
 	);
 	
-	i3GEO.Interface.openlayers.LAYERSADICIONAIS = [ims,wsm,bra,osm];
+	i3GEO.Interface.openlayers.LAYERSADICIONAIS = [oce,ims,wsm,bra,osm];
 })();
 //
 //substitui a janela de alerta normal do navegador por uma janela estilizada. Pode ser comentado sem problemas. No Safari apresentou problemas.
