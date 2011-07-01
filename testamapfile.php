@@ -196,6 +196,20 @@ function verifica($map,$solegenda)
 			}
 			
 			autoClasses(&$layern,$nmapa);
+			if($layern->classitem != "" && $layern->connectiontype == 7 && $layern->numclasses > 0 && $layern->getmetadata("wms_sld_body") == ""){
+				$tipotemp = $layern->type;
+				$tiporep = $layern->getmetadata("tipooriginal");
+				$layern->set("type",MS_LAYER_POLYGON);
+				if ($tiporep == "linear")
+				{$layern->set("type",MS_LAYER_LINE);}
+				if ($tiporep == "pontual")
+				{$layern->set("type",MS_LAYER_POINT);}
+				$sld = $layern->generateSLD();
+				if($sld != "")
+				$layern->setmetadata("wms_sld_body",str_replace('"',"'",$sld));
+				$layern->set("type",$tipotemp);
+			}
+			
 			ms_newLayerObj($mapa, $layern);
 			if ($layern->data == "")
 			$dados = $layern->connection;

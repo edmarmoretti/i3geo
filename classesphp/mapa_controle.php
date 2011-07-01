@@ -1020,6 +1020,7 @@ Adiciona um novo tema ao mapa.
 			$_SESSION["contadorsalva"]++;
 		}
 		$retorno = "ok";
+		/*
 		if($interface != "openlayers"){
 			$teste = testaMapa($map_file,$postgis_mapa);
 			if ($teste == "ok")
@@ -1027,6 +1028,7 @@ Adiciona um novo tema ao mapa.
 			else
 			{$retorno = array("erro"=>"A camada nao pode ser adicionada. ".$teste);}
 		}
+		*/
 	break;
 /*
 Valor: EXCLUITEMA

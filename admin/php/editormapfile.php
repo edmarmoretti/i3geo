@@ -1356,6 +1356,7 @@ function pegaMetadados()
 		$dados["wms_connectiontimeout"] = $layer->getmetadata("wms_connectiontimeout");
 		$dados["wms_latlonboundingbox"] = $layer->getmetadata("wms_latlonboundingbox");
 		$dados["wms_proxy_auth_type"] = $layer->getmetadata("wms_proxy_auth_type");
+
 		$dados["wms_proxy_host"] = $layer->getmetadata("wms_proxy_host");
 		$dados["wms_proxy_port"] = $layer->getmetadata("wms_proxy_port");
 		$dados["wms_proxy_type"] = $layer->getmetadata("wms_proxy_type");
@@ -1367,12 +1368,13 @@ function pegaMetadados()
 		$dados["wms_bgcolor"] = $layer->getmetadata("wms_bgcolor");
 		$dados["wms_transparent"] = $layer->getmetadata("wms_transparent");
 		$dados["wms_time"] = $layer->getmetadata("wms_time");
+		$dados["tipooriginal"] = $layer->getmetadata("tipooriginal");
 	}
 	return $dados;
 }
 function alterarMetadados()
 {
-	global $legendaimg,$wms_srs,$wms_name,$wms_server_version,$wms_format,$wms_auth_username,$wms_auth_password,$wms_auth_type,$wms_connectiontimeout,$wms_latlonboundingbox,$wms_proxy_auth_type,$wms_proxy_host,$wms_proxy_port,$wms_proxy_type,$wms_proxy_username,$wms_proxy_password,$wms_sld_body,$wms_sld_url,$wms_style,$wms_bgcolor,$wms_transparent,$wms_time,$permitecomentario,$itembuscarapida,$iconetema,$ltempoformatodata,$ltempoiteminicio,$ltempoitemfim,$ltempoitemtitulo,$ltempoitemdescricao,$ltempoitemtip,$ltempoitemimagem,$ltempoitemicone,$ltempoitemlink,$description_template,$palletestep,$palletefile,$arquivodownload,$temporizador,$arquivokmz,$codigoMap,$codigoLayer,$locaplic,$aplicaextensao,$classestamanho,$classessimbolo,$classescor,$classesnome,$classesitem,$mensagem,$identifica,$transitioneffect,$extensao,$escondido,$download,$escala,$tema,$classe,$tip,$itenslink,$itens,$itensdesc,$editorsql,$cache;
+	global $tipooriginal,$legendaimg,$wms_srs,$wms_name,$wms_server_version,$wms_format,$wms_auth_username,$wms_auth_password,$wms_auth_type,$wms_connectiontimeout,$wms_latlonboundingbox,$wms_proxy_auth_type,$wms_proxy_host,$wms_proxy_port,$wms_proxy_type,$wms_proxy_username,$wms_proxy_password,$wms_sld_body,$wms_sld_url,$wms_style,$wms_bgcolor,$wms_transparent,$wms_time,$permitecomentario,$itembuscarapida,$iconetema,$ltempoformatodata,$ltempoiteminicio,$ltempoitemfim,$ltempoitemtitulo,$ltempoitemdescricao,$ltempoitemtip,$ltempoitemimagem,$ltempoitemicone,$ltempoitemlink,$description_template,$palletestep,$palletefile,$arquivodownload,$temporizador,$arquivokmz,$codigoMap,$codigoLayer,$locaplic,$aplicaextensao,$classestamanho,$classessimbolo,$classescor,$classesnome,$classesitem,$mensagem,$identifica,$transitioneffect,$extensao,$escondido,$download,$escala,$tema,$classe,$tip,$itenslink,$itens,$itensdesc,$editorsql,$cache;
 	$dados = array();
 	$mapfile = $locaplic."/temas/".$codigoMap.".map";
 	$mapa = ms_newMapObj($mapfile);
@@ -1423,23 +1425,34 @@ function alterarMetadados()
 		$layer->setmetadata("wms_name",$wms_name);
 		$layer->setmetadata("wms_server_version",$wms_server_version);
 		$layer->setmetadata("wms_format",$wms_format);
-		$layer->setmetadata("wms_auth_username",$wms_auth_username);
-		$layer->setmetadata("wms_auth_password",$wms_auth_password);
-		$layer->setmetadata("wms_auth_type",$wms_auth_type);
+		if($wms_auth_username != ""){
+			$layer->setmetadata("wms_auth_username",$wms_auth_username);
+			$layer->setmetadata("wms_auth_password",$wms_auth_password);
+			$layer->setmetadata("wms_auth_type",$wms_auth_type);
+		}
 		$layer->setmetadata("wms_connectiontimeout",$wms_connectiontimeout);
-		$layer->setmetadata("wms_latlonboundingbox",$wms_latlonboundingbox);
-		$layer->setmetadata("wms_proxy_auth_type",$wms_proxy_auth_type);
-		$layer->setmetadata("wms_proxy_host",$wms_proxy_host);
-		$layer->setmetadata("wms_proxy_port",$wms_proxy_port);
-		$layer->setmetadata("wms_proxy_type",$wms_proxy_type);
-		$layer->setmetadata("wms_proxy_username",$wms_proxy_username);
-		$layer->setmetadata("wms_proxy_password",$wms_proxy_password);
-		$layer->setmetadata("wms_sld_body",$wms_sld_body);
-		$layer->setmetadata("wms_sld_url",$wms_sld_url);
+		if($wms_latlonboundingbox != "")
+		{$layer->setmetadata("wms_latlonboundingbox",$wms_latlonboundingbox);}
+		if($wms_proxy_host != ""){
+			$layer->setmetadata("wms_proxy_auth_type",$wms_proxy_auth_type);
+			$layer->setmetadata("wms_proxy_host",$wms_proxy_host);
+			$layer->setmetadata("wms_proxy_port",$wms_proxy_port);
+			$layer->setmetadata("wms_proxy_type",$wms_proxy_type);
+			$layer->setmetadata("wms_proxy_username",$wms_proxy_username);
+			$layer->setmetadata("wms_proxy_password",$wms_proxy_password);
+		}
+		if($wms_sld_body != "")
+		{$layer->setmetadata("wms_sld_body",$wms_sld_body);}
+		if($wms_sld_url != "")
+		{$layer->setmetadata("wms_sld_url",$wms_sld_url);}
 		$layer->setmetadata("wms_style",$wms_style);
+		if($wms_bgcolor != "")
 		$layer->setmetadata("wms_bgcolor",$wms_bgcolor);
+		if($wms_transparent != "")
 		$layer->setmetadata("wms_transparent",$wms_transparent);
+		if($wms_time != "")
 		$layer->setmetadata("wms_time",$wms_time);
+		$layer->setmetadata("tipooriginal",$tipooriginal);
 	}	
 	$mapa->save($mapfile);
 	removeCabecalho($mapfile);

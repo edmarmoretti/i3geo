@@ -303,7 +303,7 @@ i3GEOF.legenda = {
 		'<div id=i3GEOlegendaguia4obj style="width:99%;text-align:left;">'+
 		'</div>'+
 		'<div id=i3GEOlegendaguia5obj style="width:99%;text-align:left;">'+
-		'	<p class=paragrafo >Gera um arquivo XML, no padrão SLD, contendo a legenda atual da camada. Para maiores informações, veja <a href="http://mapserver.org/ogc/sld.html#sld" target=_blank >Mapserver SLD</a>'+
+		'	<p class=paragrafo >Gera um arquivo XML, no padrão SLD, contendo a legenda atual da camada. Para maiores informações, veja <a href="http://mapserver.org/ogc/sld.html#sld" target=_blank >Mapserver SLD</a> (O SLD só é gerado ou aplicado corretamente em camadas que utilizam expressões simples e o elemento CLASSITEM)'+
 		'	<p class=paragrafo ><input id=i3GEOlegendabotaoSLDe size="25" type="button" value="Exportar SLD"></p>'+
 		'	<p class=paragrafo >Aplica um arquivo SLD à camada ativa' +
 		'	<p class=paragrafo ><input id=i3GEOlegendabotaoSLDi size="25" type="button" value="Aplicar SLD"></p>'+		

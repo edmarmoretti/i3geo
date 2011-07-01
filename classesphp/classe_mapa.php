@@ -979,6 +979,26 @@ $random - indica se os nomes dos novos layers serão modificados ou nao
 							if($nomeunico[$lr])
 							$nlayer->set("group",$nomeunico[$lr]);
 						}
+						//
+						//verifica se é um WMS e se existem classes definidas
+						//se existirem as classes, é criado um SLD para ser aplicado ao layer
+						//O SLD só funciona se CLASSITEM estiver definido
+						//
+
+						if($nlayer->classitem != "" && $nlayer->connectiontype == 7 && $nlayer->numclasses > 0 && $nlayer->getmetadata("wms_sld_body") == ""){
+							$tipotemp = $nlayer->type;
+							$tiporep = $nlayer->getmetadata("tipooriginal");
+							$nlayer->set("type",MS_LAYER_POLYGON);
+							if ($tiporep == "linear")
+							{$nlayer->set("type",MS_LAYER_LINE);}
+							if ($tiporep == "pontual")
+							{$nlayer->set("type",MS_LAYER_POINT);}
+							$sld = $nlayer->generateSLD();
+							if($sld != "")
+							$nlayer->setmetadata("wms_sld_body",str_replace('"',"'",$sld));
+							$nlayer->set("type",$tipotemp);
+						}						
+						
 						ms_newLayerObj($this->mapa, $nlayer);
 						$l = $this->mapa->getlayerbyname($nlayer->name);
 						//
@@ -1182,7 +1202,7 @@ $nomecamada - nome da camada do WMS
 $dir_tmp - diretório temporário do I3Geo
 $imgdir - diretório temporário das imagens
 $imgurl - url do imgdir
-$tiporep - tipo de representação das feições do mapa
+$tiporep - tipo de representação das feições do mapa. Quando definido, é criado um sld para ser aplicado ao layer. poligonal|linear|pontual
 $suportasld - Suporta SLD sim|nao.
 $formatosinfo - lista de formatos da requisição de atributos para a função getfeatureinfo (default text/plain)
 $time - específico para WMS-T (parâmentro wms_time)
@@ -1269,7 +1289,7 @@ Include:
 		$layer->setmetadata("wms_force_separate_request","1");
 		if($time != "")
 		$layer->setmetadata("wms_time",$time);
-		//pega o timpo de formato de imagem que deve ser requisitado
+		//pega o tipo de formato de imagem que deve ser requisitado
 		//a preferência é png, mas se não for possível, pega o primeiro da lista de formatos
 		//disponíveis no formato
 		if (stristr($formato,"png"))

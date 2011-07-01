@@ -126,6 +126,11 @@ objalignment = [
 	{texto:"MS_ALIGN_CENTER",valor:"1"},
 	{texto:"MS_ALIGN_RIGHT",valor:"2"}
 ];
+objtipooriginal = [
+	{texto:"poligonal",valor:"poligonal"},
+	{texto:"linear",valor:"linear"},
+	{texto:"pontual",valor:"pontual"}
+];
 
 YAHOO.namespace("example.container");
 /*
@@ -1206,6 +1211,8 @@ function montaEditorMetadados(dados)
 	};
 	var paramOWS = {
 		"linhas":[
+			{ajuda:"Tipo de representação das feições mostradas da camada. É importante definir esse parâmetro para que as funções de geração de SLD funcionem corretamente.",
+			titulo:"Tipo de representação (tipooriginal)",id:"",value:dados.tipooriginal,tipo:"text",div:"<div id=cTipooriginal ></div>"},
 			{ajuda:"space-delimited list of EPSG projection codes supported by the remote server. You normally get this from the server’s capabilities output. This value should be upper case (EPSG:4236.....not epsg:4236) to avoid problems with case sensitive platforms. The value is used to set the SRS WMS URL parameter",
 			titulo:"wms_srs",id:"wms_srs",value:dados.wms_srs,tipo:"text"},
 			{ajuda:"comma-separated list of layers to be fetched from the remote WMS server. This value is used to set the LAYERS and QUERY_LAYERS WMS URL parameters.",
@@ -1292,6 +1299,13 @@ function montaEditorMetadados(dados)
 		temp += "</select>"
 		$i("cPermitecomentario").innerHTML = temp
 	}
+	if($i("cTipooriginal")){
+		temp = "<select id='tipooriginal' >"
+		temp += core_comboObjeto(objtipooriginal,"valor","texto",dados.tipooriginal)
+		temp += "</select>"
+		$i("cTipooriginal").innerHTML = temp
+	}
+
 	if($i("cDownload")){
 		temp = "<select id='download' >"
 		temp += core_combosimnao(dados.download)

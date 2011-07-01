@@ -415,6 +415,7 @@ if(isset($linhas))
 
 if(isset($poligonos))
 {inserePoligonosUrl();}
+
 if(isset($url_wms))
 {incluiTemaWms();}
 
@@ -586,6 +587,7 @@ function incluiTemasIniciais()
 				$maptemp = @ms_newMapObj($arqtemp);
 				for($i=0;$i<($maptemp->numlayers);++$i)
 				{
+					//error_reporting(E_ALL);
 					$layern = $maptemp->getLayer($i);
 					if($layern->type == MS_LAYER_RASTER)
 					{$existeraster = true;}
@@ -597,6 +599,23 @@ function incluiTemasIniciais()
 					//necessário para não alterar a extensão do mapa por esse parâmetro
 					//
 					$layern->setmetadata("aplicaextensao","");
+					//cria e aplica sld se for wms e existirem classes
+					if($layern->classitem != "" && $layern->connectiontype == 7 && $layern->numclasses > 0 && $layern->getmetadata("wms_sld_body") == ""){
+						$tipotemp = $layern->type;
+						$statustemp = $layern->status;
+						$tiporep = $layern->getmetadata("tipooriginal");
+						$layern->set("type",MS_LAYER_POLYGON);
+						if ($tiporep == "linear")
+						{$layern->set("type",MS_LAYER_LINE);}
+						if ($tiporep == "pontual")
+						{$layern->set("type",MS_LAYER_POINT);}
+						$layern->set("status",MS_DEFAULT);
+						$sld = $layern->generateSLD();
+						if($sld != "")
+						$layern->setmetadata("wms_sld_body",str_replace('"',"'",$sld));
+						$layern->set("type",$tipotemp);
+						$layern->set("status",statustemp);
+					}
 					ms_newLayerObj(&$mapn, $layern);
 				}
 			}	
