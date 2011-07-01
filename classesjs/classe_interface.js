@@ -922,7 +922,7 @@ i3GEO.Interface = {
 					try{
 						temp = camada.type === 0 ? opcoes.gutter = 20 : opcoes.gutter = 0;
 						temp = camada.transitioneffect === "nao" ? opcoes.transitionEffect = "null" : opcoes.transitionEffect = "resize";
-						if(camada.connectiontype === 7 && camada.wmsurl !== ""){
+						if(camada.connectiontype === 7 && camada.wmsurl !== "" && camada.usasld.toLowerCase() != "sim"){
 							urllayer = camada.wmsurl+"&r="+Math.random();
 							layer = new OpenLayers.Layer.WMS(camada.name, urllayer,{LAYERS:camada.name,format:camada.wmsformat,transparent:true},opcoes);
 							if(camada.wmssrs != "")

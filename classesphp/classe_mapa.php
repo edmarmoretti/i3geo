@@ -218,6 +218,12 @@ string - javascript com os parametros
 				//
 				$wfs = $oLayer->getmetadata("wfs");
 				//
+				//verifica se o tema utiliza SLD
+				//
+				$usasld = "nao";
+				if($oLayer->getmetadata("wms_sld_body") !== "" || $oLayer->getmetadata("wms_sld_url") !== "")
+				{$usasld = "sim";}				
+				//
 				//verifica se o tema pode receber a operação de zoom para o tema
 				//
 				if (($ct != 1) && ($oLayer->getmetadata("extensao") == ""))
@@ -305,7 +311,8 @@ string - javascript com os parametros
 					"tiles"=>$tiles,
 					"temporizador"=>($oLayer->getmetadata("temporizador")),
 					"permiteogc"=>($oLayer->getmetadata("permiteogc")),
-					"itembuscarapida"=>($oLayer->getmetadata("itembuscarapida"))
+					"itembuscarapida"=>($oLayer->getmetadata("itembuscarapida")),
+					"usasld"=>$usasld
 				);
 			}
 		}
