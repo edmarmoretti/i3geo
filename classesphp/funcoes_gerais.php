@@ -1345,17 +1345,43 @@ Retorno:
 */
 function pegaItens($layer,$mapa="")
 {
-	if($layer->type == MS_LAYER_RASTER && $mapa != ""){
-		$pt = ms_newPointObj();
-		$pt->setXY($mapa->extent->minx,$mapa->extent->miny);
-		$layer->queryByPoint($pt,0,0);
+	//
+	//no caso de WMS ou WFS
+	//
+
+	if($layer->connectiontype == 7){
+		$url = $layer->connection;
+		$temp = explode("?",$url);
+		if(count($temp) == 1)
+		{$url .= "?";}
+		$url = $url."&SERVICE=wfs&VERSION=1.1.0&REQUEST=DescribeFeatureType&TYPENAME=".$layer->getmetadata("wms_name");
+		//$url = "http://ogi.state.ok.us/geoserver/wfs?VERSION=1.1.0&REQUEST=DescribeFeatureType&TYPENAME=okcounties";
+		$xml = simplexml_load_file($url);
+		$dom = new DOMDocument();
+		$dom->loadXML($xml->asxml());
+		$items = array();
+		$sequences = $dom->getElementsByTagName("sequence");
+		
+		foreach ($sequences as $sq){
+			$services = $sq->getElementsByTagName("element");
+			foreach ($services as $s){
+				$items[] = $s->getAttribute("name");
+			}
+		}
 	}
-	$sopen = $layer->open();
-	if($sopen != MS_FAILURE)
-	{$items = $layer->getItems();}
-	else
-	{$items = array();}
-	$layer->close();
+	else{
+		if($layer->type == MS_LAYER_RASTER && $mapa != ""){
+			$pt = ms_newPointObj();
+			$pt->setXY($mapa->extent->minx,$mapa->extent->miny);
+			$layer->queryByPoint($pt,0,0);
+		}
+		$sopen = $layer->open();
+		if($sopen != MS_FAILURE)
+		{$items = $layer->getItems();}
+		else
+		{$items = array();}
+		$layer->close();
+	}
 	return $items;
 }
 /*

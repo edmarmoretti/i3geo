@@ -447,7 +447,7 @@ i3GEOF.legenda = {
 			{$i("i3GEOlegendaresultado").innerHTML = "<p style=color:red >Ocorreu um erro<br>";}
 			i3GEOF.legenda.aguarde.visibility = "hidden";
 		}
-		catch(e){alert("Erro: "+ e);i3GEOF.legenda.aguarde.visibility = "hidden";}
+		catch(e){alert("Não é possível editar a legenda desse tema");i3GEOF.legenda.aguarde.visibility = "hidden";}
 	},
 	aplicaColourRamp: function(){
 		if($i("listaColourRamp").value != ""){

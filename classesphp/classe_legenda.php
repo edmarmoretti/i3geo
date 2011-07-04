@@ -164,7 +164,30 @@ Salva o mapfile atual
  	function salva()
  	{
 	  	if (connection_aborted()){exit();}
-	  	$this->mapa->save($this->arquivo);
+	  	$this->recalculaSLD();
+		$this->mapa->save($this->arquivo);
+	}
+/*
+function: recalculaSLD
+
+Constrói o SLD que é aplicado ao metadata wms_sld_body. O SLD resultante é baseado nas definições das classes existentes no layer
+*/
+	function recalculaSLD(){
+		if($this->layer->classitem != "" && $this->layer->connectiontype == 7 && $this->layer->numclasses > 0){
+			$tipotemp = $this->layer->type;
+			$tiporep = $this->layer->getmetadata("tipooriginal");
+			$this->layer->set("type",MS_LAYER_POLYGON);
+			if ($tiporep == "linear")
+			{$this->layer->set("type",MS_LAYER_LINE);}
+			if ($tiporep == "pontual")
+			{$this->layer->set("type",MS_LAYER_POINT);}
+			$this->layer->set("status",MS_DEFAULT);
+			$this->layer->setmetadata("wms_sld_body","");
+			$sld = $this->layer->generateSLD();
+			if($sld != "")
+			{$this->layer->setmetadata("wms_sld_body",str_replace('"',"'",$sld));}
+			$this->layer->set("type",$tipotemp);
+		}	
 	}
 
 /*
@@ -284,7 +307,23 @@ array
 			$c = $layer->connectiontype;
 			$s = $layer->getmetadata("wms_sld_url");
 			$im = $layer->getmetadata("legendaimg");
-			if ($c == 7 || $im != "")
+			$nc = $layer->numclasses;
+			//
+			//se for wms e tiver classes define o tipo de layer para poder gerar a legenda corretamente
+			//
+			if($c == 7 && $nc > 0){
+				$tipotemp = $layer->type;
+				$tiporep = $layer->getmetadata("tipooriginal");
+				$layer->set("type",MS_LAYER_POLYGON);
+				if($tiporep == "linear")
+				{$layer->set("type",MS_LAYER_LINE);}
+				if ($tiporep == "pontual")
+				{$layer->set("type",MS_LAYER_POINT);}						
+			}
+			//
+			//se for WMS e não tiver classes, tenta pegar a legenda via requisição WMS
+			//
+			if ($nc == 0 && ($c == 7 || $im != ""))
 			{
 				if($c == 7){
 					$con = $layer->connection;
@@ -303,7 +342,6 @@ array
 			}
 			else
 			{
-				$nc = $layer->numclasses;
 				for ($c = 0;$c < $nc;$c++)
 				{
 					$classe = $layer->getclass($c);

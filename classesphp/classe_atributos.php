@@ -218,7 +218,7 @@ Lista os itens de um tema.
 			//pega o nome correto do tema
 			$nometmp = pegaNome($layer,"UTF-8");
 			$nomestemas[] = $nometmp;
-			if ($layer->data != "")
+			if($layer->data != "" || $layer->connectiontype == 7)
 			{
 					$items = pegaItens($layer,$this->mapa);
 					foreach ($items as $item)
