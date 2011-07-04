@@ -11,7 +11,7 @@ Licenca:
 GPL2
 
 
-I3Geo Interface Integrada de Ferramentas de Geoprocessamento para Internet
+i3Geo Interface Integrada de Ferramentas de Geoprocessamento para Internet
 
 Direitos Autorais Reservados (c) 2006 Ministério do Meio Ambiente Brasil
 Desenvolvedor: Edmar Moretti edmar.moretti@mma.gov.br
@@ -68,10 +68,18 @@ class Selecao
 	Nome do arquivo de seleção (.qy)
 	*/
 	public $qyfile;
+	/*
+	Variavel: $projO
+	
+	Objeto projection original do mapa. Obtido apenas na interface Googlemaps
+	*/
+	public $projO;	
 /*
 Function: __construct
 
 Cria um objeto Selecao 
+
+O tipo de interface usada pelo mapa é obtido do metadata "interface". Se for a interface Googlemaps, é feita a alteração temporária da projeção do mapa.
 
 parameters:
 
@@ -105,6 +113,10 @@ $ext - extensão geográfica do mapa
 			$extatual = $this->mapa->extent;
 			$extatual->setextent((min($e[0],$e[2])),(min($e[1],$e[3])),(max($e[0],$e[2])),(max($e[1],$e[3])));
 		}
+		if($this->mapa->getmetadata("interface") == "googlemaps"){
+			$this->projO = $this->mapa->getProjection();
+			$this->mapa->setProjection("init=epsg:4291");
+		}		
 	}
 /*
 function: salva
@@ -114,6 +126,8 @@ Salva o mapfile atual
  	function salva()
  	{
 	  	if (connection_aborted()){exit();}
+	  	if($this->mapa->getmetadata("interface") == "googlemaps")
+		{$this->mapa->setProjection($this->projO);}		
 	  	$this->mapa->save($this->arquivo);
 	}
 /*

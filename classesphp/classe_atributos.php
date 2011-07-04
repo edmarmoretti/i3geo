@@ -69,10 +69,18 @@ class Atributos
 	Nome do arquivo de seleção (.qy)
 	*/
 	public $qyfile;
+	/*
+	Variavel: $projO
+	
+	Objeto projection original do mapa. Obtido apenas na interface Googlemaps
+	*/
+	public $projO;	
 /*
 Function: __construct
 
-Cria um objeto Atributos 
+Cria um objeto Atributos.
+
+O tipo de interface usada pelo mapa é obtido do metadata "interface". Se for a interface Googlemaps, é feita a alteração temporária da projeção do mapa.
 
 parameters:
 
@@ -100,8 +108,6 @@ $ext - (opcional) extensão geográfica que será aplicada ao mapa
 			if($tema != "" && @$this->mapa->getlayerbyname($tema))
 			{
 				$this->layer = $this->mapa->getlayerbyname($tema);
-				//if($this->layer->getProjection() == "" )
-				//{$this->layer->setProjection("init=epsg:4291");}		
 				$this->nome = $tema;
 			}
 			if($ext && $ext != ""){
@@ -109,6 +115,10 @@ $ext - (opcional) extensão geográfica que será aplicada ao mapa
 				$extatual = $this->mapa->extent;
 				$extatual->setextent((min($e[0],$e[2])),(min($e[1],$e[3])),(max($e[0],$e[2])),(max($e[1],$e[3])));
 			}
+			if($this->mapa->getmetadata("interface") == "googlemaps"){
+				$this->projO = $this->mapa->getProjection();
+				$this->mapa->setProjection("init=epsg:4291");
+			}			
 		}
 	}
 /*
@@ -120,7 +130,9 @@ Salva o mapfile atual
  	function salva()
  	{
 	  	if (connection_aborted()){exit();}
-	  	$this->mapa->save($this->arquivo);
+	  	if($this->mapa->getmetadata("interface") == "googlemaps")
+		{$this->mapa->setProjection($this->projO);}
+		$this->mapa->save($this->arquivo);
 	}
 
 /*
@@ -764,14 +776,14 @@ $listaDeTemas - (opcional) Lista com os códigos dos temas que serão identificado
 			}
 			foreach ($listatemas as $tema)
 			{
-				$resultados[$tema] = $this->identificaQBP2($tema,$xyarray[0],$xyarray[1],$this->arquivo,$resolucao,"","",false,$ext);
+				$resultados[$tema] = $this->identificaQBP2($tema,$xyarray[0],$xyarray[1],"",$resolucao,"","",false,$ext);
 			}
 		}
 		//pesquisa todos os temas acrescentados no mapa
 		if ($opcao == "todos")
 		{
 			foreach ($listatemas as $tema)
-			{$resultados[$tema] = $this->identificaQBP2($tema,$xyarray[0],$xyarray[1],$this->arquivo,$resolucao,"","",false,$ext);}
+			{$resultados[$tema] = $this->identificaQBP2($tema,$xyarray[0],$xyarray[1],"",$resolucao,"","",false,$ext);}
 		}
 		//pesquisa apenas os temas visiveis
 		if ($opcao == "ligados" || $opcao == "lista")
@@ -790,7 +802,7 @@ $listaDeTemas - (opcional) Lista com os códigos dos temas que serão identificado
 			foreach ($listatemas as $tema)
 			{
 				$l = $this->mapa->getlayerbyname($tema);
-				$resultados[$tema] = $this->identificaQBP2($tema,$xyarray[0],$xyarray[1],$this->arquivo,$resolucao,"","",false,$ext);
+				$resultados[$tema] = $this->identificaQBP2($tema,$xyarray[0],$xyarray[1],"",$resolucao,"","",false,$ext);
 			}
 			//var_dump($resultados);
 		}
@@ -806,7 +818,7 @@ $listaDeTemas - (opcional) Lista com os códigos dos temas que serão identificado
 				{
 					if ($tl->status == MS_DEFAULT || $listaDeTemas != "")
 					{
-						$resultados[$tema] = array("tips"=>$itemtip,"dados"=>$this->identificaQBP2($tema,$xyarray[0],$xyarray[1],$this->arquivo,$resolucao,$itemtip,"",true,$ext));
+						$resultados[$tema] = array("tips"=>$itemtip,"dados"=>$this->identificaQBP2($tema,$xyarray[0],$xyarray[1],"",$resolucao,$itemtip,"",true,$ext));
 						$ltemp[] = $tema;
 					}
 				}
@@ -1144,6 +1156,7 @@ $listaDeTemas - (opcional) Lista com os códigos dos temas que serão identificado
 		$layer->set("template","none.htm");
 		$pt = ms_newPointObj();
 		$pt->setXY($x, $y);
+
 		//
 		//operação especial para o caso de wms
 		//

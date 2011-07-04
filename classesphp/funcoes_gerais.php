@@ -1348,7 +1348,6 @@ function pegaItens($layer,$mapa="")
 	//
 	//no caso de WMS ou WFS
 	//
-
 	if($layer->connectiontype == 7){
 		$url = $layer->connection;
 		$temp = explode("?",$url);

@@ -140,8 +140,10 @@ if ($funcao != "criaMapa")
 //isso é necessário pois a variável "interface" pode ser utilizada como parâmetro em algumas funções ajax
 //nesses casos, é necessário recuperar o valor correto e não da sessão
 //
-$_SESSION["interface"] = $interfaceTemp;
-$interface = $interfaceTemp;
+if(isset($interfaceTemp) && $interfaceTemp != ""){
+	$_SESSION["interface"] = $interfaceTemp;
+	$interface = $interfaceTemp;
+}
 //
 //verifica se deve ativar o debug
 //
@@ -503,16 +505,7 @@ Salva o mapa acrescentando um novo layer com os pontos.
 		include_once("classe_analise.php");
 		copiaSeguranca($map_file);
 		$m = new Analise($map_file,$tema,$locaplic,$ext);
-		/*
-		if($interface == "googlemaps")
-		{
-			$projMapa = $m->mapa->getProjection();
-			$m->mapa->setProjection("init=epsg:4291");
-		}
-		*/
 		$retorno = $m->criaCentroide($locaplic);
-		//if($interface == "googlemaps")
-		//{$m->mapa->setProjection($projMapa);}
 		$m->salva();
 		$_SESSION["contadorsalva"]++;
 	break;
@@ -1447,14 +1440,7 @@ Gera graficos automaticamente para os elementos de um tema
 		include_once("classe_temas.php");
 		copiaSeguranca($map_file);
 		$m = new Temas($map_file,$tema,$locaplic);
-		if($interface == "googlemaps")
-		{
-			$projMapa = $m->mapa->getProjection();
-			$m->mapa->setProjection("init=epsg:4291");
-		}
 		$m->graficotema($lista,$tamanho,$tipo,$outlinecolor,$offset);
-		if($interface == "googlemaps")
-		{$m->mapa->setProjection($projMapa);}
 		$m->salva();
 		$_SESSION["contadorsalva"]++;
 		redesenhaMapa();
@@ -1475,11 +1461,6 @@ Altera uma classe de um tema, aplicando uma nova classificação ou modificando pa
 		include_once("classe_alteraclasse.php");
 		copiaSeguranca($map_file);
 		$m = new Alteraclasse($map_file,$tema,"",$ext);
-		if($interface == "googlemaps")
-		{
-			$projMapa = $m->mapa->getProjection();
-			$m->mapa->setProjection("init=epsg:4291");
-		}
 		if ($opcao == "aplicacoresrgb")
 		{
 			$cores = str_replace("rgb","",$cores);
@@ -1515,8 +1496,6 @@ Altera uma classe de um tema, aplicando uma nova classificação ou modificando pa
 		}
 		if ($opcao == "simbolounico")
 		{$retorno = $m->simbolounico();}
-		if($interface == "googlemaps")
-		{$m->mapa->setProjection($projMapa);}		
 		$salvo = $m->salva();
 		$_SESSION["contadorsalva"]++;
 	break;
@@ -1705,18 +1684,7 @@ Os valores para o gráfico são obtidos do tema indicado na classe. Para cada novo
 		include_once("classe_shp.php");
 		copiaSeguranca($map_file);
 		$m = new SHP($map_file,$tema,$locaplic);
-		if($interface == "googlemaps")
-		{
-			$projMapa = $m->mapa->getProjection();
-			$m->mapa->setProjection("init=epsg:4291");
-			$m->salva();
-		}		
 		$retorno = $m->insereSHPgrafico($x,$y,$itens,$width,$inclinacao,$shadow_height);
-		if($interface == "googlemaps")
-		{
-			$m->mapa->setProjection($projMapa);
-			$m->salva();
-		}
 		$_SESSION["contadorsalva"]++;
 	break;
 /*
@@ -2117,8 +2085,6 @@ A pesquisa em temas é feita apenas quando existir o metadata itembuscarapida
 			if($lista != ""){
 				include_once("classe_atributos.php");
 				$m = new Atributos($map_file);
-				if($interface == "googlemaps")
-				{$m->mapa->setProjection("init=epsg:4291");}			
 				$dados = $m->buscaRegistros($palavra,$lista,"qualquer","mapa");
 				foreach($dados as $tema){
 					$rs = $tema["resultado"];
@@ -2154,8 +2120,6 @@ Procura valores em uma tabela que aderem a uma palavra de busca.
 		include_once("classe_atributos.php");
 		if(!isset($tema)){$tema = "";}
 		$m = new Atributos($map_file,$tema,"",$ext);
-		if($interface == "googlemaps")
-		{$m->mapa->setProjection("init=epsg:4291");}			
 		$retorno = $m->buscaRegistros($palavra,$lista,$tipo,$onde);
 	break;
 /*
@@ -2171,19 +2135,8 @@ Identifica elementos no mapa.
 		if (!isset($tema)){$tema = "";}
 		if (!isset($resolucao)){$resolucao = 5;}
 		include_once("classe_atributos.php");
-		$m = new Atributos($map_file,$tema);	
-		if($interface == "googlemaps")
-		{
-			$projMapa = $m->mapa->getProjection();
-			$m->mapa->setProjection("init=epsg:4291");
-			$m->salva();
-		}		
+		$m = new Atributos($map_file,$tema);		
 		$retorno = $m->identifica($opcao,$xy,$resolucao);
-		if($interface == "googlemaps")
-		{
-			$m->mapa->setProjection($projMapa);
-			$m->salva();
-		}
 	break;
 /*
 Valor: IDENTIFICA2
@@ -2199,18 +2152,7 @@ Identifica elementos no mapa.
 		if(!isset($ext))
 		{$ext = "";}
 		$m = new Atributos($map_file,$tema,"",$ext);
-		if($interface == "googlemaps")
-		{
-			$projMapa = $m->mapa->getProjection();
-			$m->mapa->setProjection("init=epsg:4291");
-			$m->salva();
-		}		
 		$retorno = $m->identifica2($opcao,$xy,$resolucao,$ext,$listaDeTemas);
-		if($interface == "googlemaps")
-		{
-			$m->mapa->setProjection($projMapa);
-			$m->salva();
-		}
 	break;
 /*
 Valor: IDENTIFICAUNICO
@@ -2225,19 +2167,8 @@ Identifica elementos no mapa retornando apenas o valor de um único item.
 		if(!isset($ext))
 		{$ext = "";}		
 		$m = new Atributos($map_file,$tema,"",$ext);
-		if($interface == "googlemaps")
-		{
-			$projMapa = $m->mapa->getProjection();
-			$m->mapa->setProjection("init=epsg:4291");
-			$m->salva();
-		}		
 		$xy = explode(",",$xy);
 		$retorno = $m->identificaQBP($tema,$xy[0],$xy[1],$map_file,$resolucao,$item,$tiporetorno="unico");
-		if($interface == "googlemaps")
-		{
-			$m->mapa->setProjection($projMapa);
-			$m->salva();
-		}		
 	break;
 /*
 Valor: ESTATISTICA
@@ -2272,8 +2203,6 @@ Pega todos os valores dos itens de uma tabela de um tema.
 */	
 	case "LISTAREGISTROS":
 		include_once("classe_atributos.php");
-		if(isset($ext) && $ext != "" && $interface == "googlemaps" && $geo == false)
-		{$ext = projetaExt($map_file,$ext);}		
 		$m = new Atributos($map_file,$tema,"",$ext);
 		if(!isset($tipo)){$tipo = "";}
 		if(!isset($inicio)){$inicio = 0;}
@@ -2336,8 +2265,6 @@ Muda a extensão geográfica do mapa.
 		if(!isset($geo))
 		{$geo = false;}
 		$m = new Navegacao($map_file);
-		if(isset($ext) && $ext != "" && $interface == "googlemaps" && $geo == false)
-		{$ext = projetaExt($map_file,$ext);}
 		$m->mudaExtensao($ext);
 		$m->salva();
 		$_SESSION["contadorsalva"]++;
@@ -2706,11 +2633,6 @@ Seleciona elementos utilizando um ponto.
 		foreach($temas as $tema)
 		{
 			$m = new Selecao($map_file,$tema,$ext);
-			if($interface == "googlemaps")
-			{
-				$projMapa = $m->mapa->getProjection();
-				$m->mapa->setProjection("init=epsg:4291");
-			}
 			$ok[] = $m->selecaoPT($xy,$tipo,$tolerancia);
 		}
 		$_SESSION["contadorsalva"]++;
@@ -2730,11 +2652,6 @@ Seleciona elementos utilizando a extensão do mapa.
 		foreach($temas as $tema)
 		{
 			$m = new Selecao($map_file,$tema,$ext);
-			if($interface == "googlemaps")
-			{
-				$projMapa = $m->mapa->getProjection();
-				$m->mapa->setProjection("init=epsg:4291");
-			}
 			$ok[] = $m->selecaoEXT($tipo);
 		}
 		//$retorno = implode(",",$ok);
@@ -2754,12 +2671,7 @@ Seleciona elementos utilizando um retângulo.
 		$temas = explode(",",$tema);
 		foreach($temas as $tema)
 		{
-			$m = new Selecao($map_file,$tema,$ext);
-			if($interface == "googlemaps")
-			{
-				$projMapa = $m->mapa->getProjection();
-				$m->mapa->setProjection("init=epsg:4291");
-			}			
+			$m = new Selecao($map_file,$tema,$ext);	
 			$ok[] = $m->selecaoBOX($tipo,$ext);
 		}
 		$_SESSION["contadorsalva"]++;
@@ -2809,12 +2721,7 @@ Sleciona elementos de um tema com base em outro tema.
 		$temas = explode(",",$tema);
 		foreach($temas as $tema)
 		{
-			$m = new Selecao($map_file,$tema);
-			if($interface == "googlemaps")
-			{
-				$projMapa = $m->mapa->getProjection();
-				$m->mapa->setProjection("init=epsg:4291");
-			}			
+			$m = new Selecao($map_file,$tema);		
 			$ok[] = $m->selecaoTema($temao,$tipo);
 		}
 		$retorno = implode(",",$ok);
@@ -3101,14 +3008,7 @@ function selecaoPoli($xs,$ys,$tema,$tipo)
 	foreach($temas as $tema)
 	{
 		$m = new Selecao($map_file,$tema);
-		if($interface == "googlemaps")
-		{
-			$projMapa = $m->mapa->getProjection();
-			$m->mapa->setProjection("init=epsg:4291");
-		}		
 		$ok[] = $m->selecaoPorPoligono($tipo,$xs,$ys);
-		if($interface == "googlemaps")
-		{$m->mapa->setProjection($projMapa);}
 		$m->salva();
 		$_SESSION["contadorsalva"]++;
 	}
@@ -3144,8 +3044,9 @@ function redesenhaMapa()
 	//
 	//na interface googlemaps não é necessário gerar a imagem
 	//
-	if (isset($interface) && ($interface == "googlemaps" || $interface == "openlayers" || $interface == "googleearth"))
-	{
+	if (isset($interface) && ($interface == "padrao" || $interface == "flamingo"))
+	{$res = $m->redesenhaCorpo($tipoimagem,$utilizacgi,$locmapserv);}
+	else{
 		$e = $m->mapa->extent;
 		$ext = $e->minx." ".$e->miny." ".$e->maxx." ".$e->maxy;
 		$res["mapimagem"] = "";
@@ -3159,9 +3060,6 @@ function redesenhaMapa()
 		$res["h"] = $m->mapa->height;
 		$res["mappath"] = "";
 		$res["mapurl"] = "";		
-	}
-	else{
-		$res = $m->redesenhaCorpo($tipoimagem,$utilizacgi,$locmapserv);
 	}
 	$res["mensagens"] = $m->pegaMensagens();
 	$res["tempo"] = microtime(1) - $tempo;

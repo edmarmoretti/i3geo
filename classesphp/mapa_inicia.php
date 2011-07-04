@@ -5,14 +5,14 @@ Title: mapa_inicia.php
 Inicia um novo mapa.
 
 Gera as imagens necessárias para abrir o mapa e calcula um conjunto de variáveis necessárias
-ao funcionamento do i3Geo.
+ao funcionamento do i3Geo. Os dados são devolvidos como um objeto json. Conforme a interface
+que será utilizada pelo mapa, são feitos ajustes específicos.
 
 Licenca:
 
 GPL2
 
-
-I3Geo Interface Integrada de Ferramentas de Geoprocessamento para Internet
+i3Geo Interface Integrada de Ferramentas de Geoprocessamento para Internet
 
 Direitos Autorais Reservados (c) 2006 Ministério do Meio Ambiente Brasil
 Desenvolvedor: Edmar Moretti edmar.moretti@mma.gov.br
@@ -41,6 +41,8 @@ Function: iniciaMapa
 Inicia um mapa e obtém os parâmetros necessários para o funcionamento da interface HTML.
 
 Globais:
+
+$interface - nome da interface que será utilizada pelo mapa padrao|openlayers|googlemaps|googleearth|flamingo . O valor de $interface é também armazenado no metadata "interface" do objeto Map, podendo ser utilizada em outros programas do i3Geo.
 
 $openid - indica se o usuário foi ou não autenticado em alguma rede social (veja i3geo/pacotes/openid)
 
@@ -230,6 +232,7 @@ function iniciaMapa()
 	$of->set("imagemode",MS_IMAGEMODE_RGBA);
 	$of->setOption("QUANTIZE_FORCE","OFF");
 	$of->set("driver","AGG/PNG");		
+	$m->mapa->setmetadata("interface",$interface);
 	$m->salva();
 
 	$nomes = nomeRandomico(12);

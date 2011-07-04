@@ -378,6 +378,10 @@ Calcula a extensão geográfica de um tema e ajusta o mapa para essa extensão.
 	function zoomTema()
 	{
 		if(!$this->layer){return "erro";}
+		if($this->mapa->getmetadata("interface") == "googlemaps"){
+			$projO = $this->mapa->getProjection();
+			$this->mapa->setProjection("init=epsg:4291");
+		}		
 		$prjMapa = "";
 		$prjTema = "";
 		if($this->layer->type != MS_LAYER_RASTER)
@@ -411,6 +415,8 @@ Calcula a extensão geográfica de um tema e ajusta o mapa para essa extensão.
 			$extatual->setextent($ret[0],$ret[1],$ret[2],$ret[3]);
 			//echo "oi";exit;
 		}
+	  	if($this->mapa->getmetadata("interface") == "googlemaps")
+		{$this->mapa->setProjection($projO);}		
 		return("ok");
 	}
 /*
@@ -987,9 +993,13 @@ Calcula a extensão geográfica dos elementos selecionados de um tema e ajusta o m
 	function zoomSel()
 	{
 		if(!$this->layer){return "erro";}
+		if($this->mapa->getmetadata("interface") == "googlemaps"){
+			$projO = $this->mapa->getProjection();
+			$this->mapa->setProjection("init=epsg:4291");
+		}		
 		$extatual = $this->mapa->extent;
-		$prjMapa = "";
-		$prjTema = "";
+		$prjMapa = $this->mapa->getProjection();
+		$prjTema = $this->layer->getProjection();
 		carregaquery($this->arquivo,&$this->layer,&$this->mapa);
 		$sopen = $this->layer->open();
 		if($sopen == MS_FAILURE){return "erro";}
@@ -1026,6 +1036,8 @@ Calcula a extensão geográfica dos elementos selecionados de um tema e ajusta o m
 			}
 			$extatual->setextent($ret->minx,$ret->miny,$ret->maxx,$ret->maxy);
 		}
+	  	if($this->mapa->getmetadata("interface") == "googlemaps")
+		{$this->mapa->setProjection($projO);}		
 		return("ok");
 	}
 /*
