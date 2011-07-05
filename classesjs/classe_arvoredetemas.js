@@ -66,6 +66,8 @@ i3GEO.arvoreDeTemas = {
 		nuvemTags: true,
 
 		nuvemTagsFlash: true,
+		
+		carregaKml: true,
 
 		navegacaoDir: false,
 
@@ -123,7 +125,8 @@ i3GEO.arvoreDeTemas = {
 		comentarios: true,
 		bookmark: true,
 		importarwmc: true,
-		googleearth: true
+		googleearth: true,
+		carregaKml: true
 	},
 	/*
 	Propriedade: FATORESTRELA
@@ -1399,6 +1402,10 @@ i3GEO.arvoreDeTemas = {
 			ins += "<td><img class='carouselTemas' onclick='i3GEO.arvoreDeTemas.dialogo.carouselTemas()' src='"+imb+"' style='cursor:pointer;text-align:left'  title='Miniaturas'/><td>";
 			t += 20;
 		}
+		if(OPCOESADICIONAIS.carregaKml === true){
+			ins += "<td><img class='carregarKml' onclick='i3GEO.arvoreDeTemas.dialogo.carregaKml()' src='"+imb+"' style='cursor:pointer;text-align:left'  title='Kml'/><td>";
+			t += 20;
+		}		
 		return("<table width='"+t+"px' ><tr>"+ins+"</tr></table>");
 	},
 	/*
@@ -1920,9 +1927,17 @@ i3GEO.arvoreDeTemas = {
 			$i(janela[2].id).innerHTML = ins;;
 		},
 		/*
+		Function: carregaKml
+
+		Abre a janela flutuante para o usuário adicionar temas baseado em arquivos KML
+		*/
+		carregaKml: function(){
+			i3GEO.util.scriptTag(i3GEO.configura.locaplic+"/ferramentas/carregakml/index.js.php","i3GEOF.carregakml.criaJanelaFlutuante()","i3GEOF.carregakml_script");
+		},
+		/*
 		Function: carouselTemas
 
-		abre a janela flutuante para o usuário adicionar temas baseado nas imagens miniatura
+		Abre a janela flutuante para o usuário adicionar temas baseado nas imagens miniatura
 		*/
 		carouselTemas: function(){
 			i3GEO.util.scriptTag(i3GEO.configura.locaplic+"/ferramentas/carouseltemas/index.js.php","i3GEOF.carouseltemas.criaJanelaFlutuante()","i3GEOF.carouseltemas_script");

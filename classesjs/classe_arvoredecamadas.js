@@ -47,6 +47,18 @@ Exemplos:
 */
 i3GEO.arvoreDeCamadas = {
 	/*
+	Propriedade: MOSTRALISTAKML
+
+	Mostra na árvore a lista de endereços de arquivos KML cadastrados no sistema de administração
+
+	Default:
+	{true}
+	 
+	Type:
+	{boolean}
+	*/
+	MOSTRALISTAKML: true,
+	/*
 	Propriedade: FILTRO
 
 	Filtro que será aplicado para restringir os tipos de camadas mostradas na árvore

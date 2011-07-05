@@ -395,6 +395,14 @@ h1 {padding:.25em .5em;background-color:#ccc;}
     height: 15px;
     width: 15px;
 }
+.carregarKml
+{
+	background-image:URL('../imagens/visual/default/sprite2.png');
+	background-repeat: no-repeat;
+	background-position: 0px -624px;
+	width:16px;
+	border: 1px solid #DCDCDC;
+}
 #ondeestou
 {
 	background-image:URL('../imagens/visual/default/sprite.png');
