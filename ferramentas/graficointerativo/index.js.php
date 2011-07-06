@@ -496,7 +496,7 @@ i3GEOF.graficointerativo = {
 			ins = [],
 			i,
 			id,
-			cor = "#d01f3c";
+			cor = "#C11515";
 		if(!retorno.dados && retorno.data != undefined)
 		{dados = retorno.data.dados;}
 		else
@@ -569,7 +569,7 @@ i3GEOF.graficointerativo = {
 			tituloSize = "15px",
 			tituloCor = "#000000",
 			tituloAlinhamento = "center",
-			corunica = "#E2D66A",
+			corunica = "#C11515",
 			outlinecolor = "#577261",
 			corGrid = "#D7E4A3",
 			divisoesY = 10,

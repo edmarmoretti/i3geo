@@ -50,7 +50,7 @@ Cria o mapa do Google Maps e adiciona os botões especiais do i3Geo. Define os ev
 principal do i3Geo quando é feita a navegação.
 */ 
 function inicializa(){
-    window.parent.i3GEO.util.criaPin("boxpingoogle",window.parent.i3GEO.configura.locaplic+'/imagens/dot1red.gif',"5px","5px");
+	window.parent.i3GEO.util.criaPin("boxpingoogle",window.parent.i3GEO.configura.locaplic+'/imagens/dot1red.gif',"5px","5px");
 	var box = window.parent.$i("boxpingoogle");
 	counterClick = 0
     var m = document.getElementById("mapa")
@@ -70,6 +70,10 @@ function inicializa(){
     	pt1 = (( (ret[0] * -1) - (ret[2] * -1) ) / 2) + ret[0] *1
     	pt2 = (((ret[1] - ret[3]) / 2)* -1) + ret[1] *1
     	pt = pt1+","+pt2
+		try{
+			var coordenadas = window.parent.i3GEO.navega.dialogo.google.coordenadas;
+		}
+		catch(e){}
 	}
 	else{
 		var pt1 = -54;
@@ -82,6 +86,8 @@ function inicializa(){
     map.addControl(new GMapTypeControl());
     map.addControl(new GScaleControl());
     map.setCenter(new GLatLng(pt2,pt1), 8);
+	if(coordenadas)
+	{adicionaMarcasMapa(coordenadas);}
     GEvent.addListener(map, "moveend", function() {
     	ondegoogle(map);
     });
@@ -102,7 +108,7 @@ function inicializa(){
 				map.removeOverlay(wmsmap);
    				wmsmap = new GGroundOverlay(criaWMS(), map.getBounds());
 				map.addOverlay(wmsmap);
-			}catch(x){if(typeof(console) !== 'undefined'){console.error(x);}}
+			}catch(x){}
 		}
    	});
 	GEvent.addListener(map, "mousemove", function(ponto) {
@@ -182,6 +188,8 @@ function inicializa(){
 		map.addControl(new botaoI3geo());
 		ondegoogle(map);
     }
+	if(coordenadas)
+	{adicionaMarcasMapa(coordenadas);}
 }
 function moveMapa(bd)
 {
@@ -340,16 +348,6 @@ function constroiRota()
 			point = new GLatLng(place.Point.coordinates[1],place.Point.coordinates[0]);
 			marker = new GMarker(point);
 			map.addOverlay(marker);
-			/*
-			marker.openInfoWindowHtml(
-				'<b>orig latlng:</b>' + response.name + '<br/>' + 
-				'<b>latlng:</b>' + place.Point.coordinates[0] + "," + place.Point.coordinates[1] + '<br>' +
-				'<b>Status Code:</b>' + response.Status.code + '<br>' +
-				'<b>Status Request:</b>' + response.Status.request + '<br>' +
-				'<b>Address:</b>' + place.address + '<br>' +
-				'<b>Accuracy:</b>' + place.AddressDetails.Accuracy + '<br>' +
-				'<b>Country code:</b> ' + place.AddressDetails.Country.CountryNameCode);
-			*/
 			endereco2 = place.address;
 			endereco2 = window.prompt("Endereco do final",endereco2)
 			if (endereco2!=null && endereco2!="")
@@ -443,6 +441,24 @@ function montaRota()
 		var p = window.parent.i3GEO.configura.locaplic+"/classesphp/mapa_controle.php?g_sid="+window.parent.i3GEO.configura.sid;
 		cp.call(p,"criaSHPvazio",ativanovotema,"&funcao=criashpvazio");
 	});
+}
+/*
+Function: adicionaMarcasMapa
+
+Adiciona marcas no mapa conforme um array de coordenadas
+
+Parametro:
+
+coordenadas {array} - array de pares separados por ' ' contendo x e y
+*/
+function adicionaMarcasMapa(coordenadas){
+	var n = coordenadas.length,i,pt,point,marker;
+	for(i=0;i<n;i++){
+		pt = coordenadas[i].split(" ");
+		point = new GLatLng(pt[1],pt[0]);
+		marker = new GMarker(point);
+		map.addOverlay(marker);
+	}
 }
 function cursor(c){
 	var d = document.getElementById("mapa");

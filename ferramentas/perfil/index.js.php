@@ -77,7 +77,7 @@ i3GEOF.perfil = {
 			new YAHOO.widget.Button(
 				"i3GEOperfilbotao1",
 				{onclick:{fn: i3GEOF.perfil.criaPerfil}}
-			);			
+			);		
 		}
 		catch(erro){alert(erro);}
 	},
@@ -166,6 +166,10 @@ i3GEOF.perfil = {
 						var js = i3GEO.configura.locaplic+"/ferramentas/graficointerativo/index.js.php";
 						i3GEO.util.scriptTag(js,"i3GEOF.perfil.iniciaGrafico()","i3GEOF.graficointerativo_script");
 					}
+					//é obrigado mostrar o mapa do google quando o perfil usa o google
+					if($i("i3GEOFperfilFonteGoogle").checked === true){
+						i3GEO.navega.dialogo.google(i3GEOF.perfil.listaPontos(true).split(","));
+					}	
 				}
 			};
 			if($i("i3GEOFperfilFonteGoogle").checked === true){
@@ -239,7 +243,7 @@ i3GEOF.perfil = {
 		var n = google.length,
 			i = 0,
 			dados = ["n;x"];
-		for (i==0; i<n;i++){
+		for (i=0; i<n;i++){
 			dados.push(i+";"+google[i].elevation);
 		}
 		i3GEOF.perfil.dadosGrafico = dados;
