@@ -50,7 +50,7 @@ i3GEO.editorOL = {
 		{layers: "estadosl",FORMAT:'image/png'}
 	),
 	fundo: "ol_mma,ol_wms,jpl_wms,osm_wms,top_wms,est_wms",
-	
+	kml: [],
 	layersIniciais: [],
 	botoes: {
 		'pan':true,
@@ -170,6 +170,7 @@ i3GEO.editorOL = {
 		if(i3GEO.editorOL.layergrafico !== ""){
 			i3GEO.editorOL.mapa.addLayers([i3GEO.editorOL.layergrafico]);
 		}
+		i3GEO.editorOL.adicionaKml();
 		i3GEO.editorOL.adicionaMarcas();
 		if(i3GEO.editorOL.maxext !== "")
 		{i3GEO.editorOL.mapa.zoomToMaxExtent();}
@@ -979,6 +980,51 @@ i3GEO.editorOL = {
 		}
 		layer.addFeatures(features);
 		i3GEO.editorOL.mapa.addLayer(layer);
+	},
+	adicionaKml: function(){
+		var temp,n,i,id,url;
+		n = i3GEO.editorOL.kml.length;
+		for(i=0;i<n;i++){
+			id = "kml"+i;
+			url = i3GEO.editorOL.kml[i];
+			eval(id+" = new OpenLayers.Layer.Vector('"+id+"', {displayOutsideMaxExtent:true,displayInLayerSwitcher:false,visibility:true, strategies: [new OpenLayers.Strategy.Fixed()],protocol: new OpenLayers.Protocol.HTTP({url: '"+url+"',format: new OpenLayers.Format.KML({extractStyles: true,extractAttributes: true,maxDepth: 5})})})");
+			eval("i3GEO.editorOL.mapa.addLayer("+id+");");
+			eval("temp = "+id+".div;");
+			temp.onclick = function(e){
+				var targ,id,temp,features,n,i,j,g,html="";
+				if (!e){e = window.event;}
+				if (e.target)
+				{targ = e.target;}
+				else
+				if (e.srcElement)
+				{targ = e.srcElement;}
+				
+				temp = targ.id.split("_");
+				if(temp[0] === "OpenLayers.Geometry.Point"){
+					id = targ.id;
+					temp = i3GEO.editorOL.mapa.getLayer(this.id);
+					features = temp.features;
+					n = features.length;
+					for(i=0;i<n;i++){
+						if(features[i].geometry.id === id){
+							for (j in features[i].attributes) {
+								html += j+": "+features[i].attributes[j];
+							}
+							g = features[i].geometry;
+							i3GEO.editorOL.mapa.addPopup(new OpenLayers.Popup.FramedCloud(
+								"kml", 
+								new OpenLayers.LonLat(g.x,g.y),
+								null,
+								html,
+								null,
+								true
+							));
+
+						}
+					}
+				}
+			};
+		}
 	},
 	//obtido de openlayers.org
 	propriedades: function(){

@@ -140,7 +140,8 @@ function ajuda(){
 <pre><b>
 Mashup OpenLayers
 Parâmetros:
-	servidor - endereco do servidor OGC utilizado. Por default é ../ogc.php o que força o uso do i3geo local
+	kml - lista de endereços (url) de um arquivos kml que serão adicionados ao mapa. Separado por ','
+	servidor - por default é ../ogc.php o que força o uso do i3geo local. Esse é o programa que será utilizado em conjunto com a lista definida no parâmetro 'temas'
 	temas - lista com os temas (mapfiles) do i3Geo que serão incluídos no mapa
 	numzoomlevels - número de níveis de zoom, default=6
 	maxextent - extensão geográfica do mapa (xmin,ymin,xmax,ymax)
@@ -250,6 +251,13 @@ i3GEO.editorOL.pontos = [<?php
 	if(isset($pontos)){
 		$pontos = str_replace(" ",",",$pontos);
 		echo $pontos;
+	}
+?>];
+i3GEO.editorOL.kml = [<?php
+	if(isset($kml)){
+		$kml = str_replace(" ",",",$kml);
+		$kml = explode(",",$kml);
+		echo "'".implode("','",$kml)."'";
 	}
 ?>];
 i3GEO.editorOL.marca = "<?php
