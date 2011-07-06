@@ -167,7 +167,7 @@ i3GEOF.perfil = {
 						i3GEO.util.scriptTag(js,"i3GEOF.perfil.iniciaGrafico()","i3GEOF.graficointerativo_script");
 					}
 					//é obrigado mostrar o mapa do google quando o perfil usa o google
-					if($i("i3GEOFperfilFonteGoogle").checked === true){
+					if($i("i3GEOFperfilFonteGoogle").checked === true && i3GEO.Interface.ATUAL !== "googlemaps"){
 						i3GEO.navega.dialogo.google(i3GEOF.perfil.listaPontos(true).split(","));
 					}	
 				}
