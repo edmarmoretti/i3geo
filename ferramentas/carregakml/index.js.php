@@ -59,6 +59,8 @@ i3GEOF.carregakml = {
 	iddiv {String} - id do div que receberá o conteudo HTML da ferramenta
 	*/
 	inicia: function(iddiv){
+		if(navm)
+		{alert("Não funciona coretamente no Internet Explorer. Use o Firefox ou outro navegador");}
 		try{
 			$i(iddiv).innerHTML = i3GEOF.carregakml.html();
 			var monta = function(retorno){

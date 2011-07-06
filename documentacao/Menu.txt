@@ -326,6 +326,8 @@ Group: Aplicativos adicionais  {
       File: Tela remota  (ferramentas\telaremota\index.js.php)
       }  # Group: Ferramentas
 
+   File: Adiciona um tema ao mapa com base em um arquivo KML existente na Web  (ferramentas\carregakml\index.js.php)
+   File: Buffer &lparen;entorno&rparen; em um ponto  (ferramentas\bufferpt\index.js.php)
    }  # Group: Aplicativos adicionais
 
 Group: Administração  {
@@ -375,6 +377,7 @@ Group: Administração  {
       File: mapfiles.js  (admin\js\mapfiles.js)
       File: menu.js  (admin\js\menu.js)
       File: ms_configura.js  (admin\js\ms_configura.js)
+      File: ogcws.js  (admin\js\ogcws.js)
       File: perfis.js  (admin\js\perfis.js)
       File: sistemas.js  (admin\js\sistemas.js)
       File: subgrupos.js  (admin\js\subgrupos.js)
@@ -397,6 +400,7 @@ Group: Administração  {
       File: mapfiles.php  (admin\php\mapfiles.php)
       File: menutemas.php  (admin\php\menutemas.php)
       File: ms_configura.php  (admin\php\ms_configura.php)
+      File: ogcws.php  (admin\php\ogcws.php)
       File: sistemas.php  (admin\php\sistemas.php)
       File: upgradebanco44_45.php  (admin\php\upgradebanco44_45.php)
       File: webservices.php  (admin\php\webservices.php)
@@ -412,6 +416,7 @@ Group: Administração  {
       File: Editor de mapfiles  (admin\html\editormapfile.html)
       File: Editor de mapfiles de inicialização  (admin\html\mapfiles.html)
       File: Editor do ms_configura  (admin\html\ms_configura.html)
+      File: Editor do ogcws.map  (admin\html\ogcws.html)
       File: Mapas  (admin\html\mapas.html)
       File: Opções da ferramenta identifica  (admin\html\identifica.html)
       File: Perfis  (admin\html\perfis.html)

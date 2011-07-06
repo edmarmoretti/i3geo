@@ -1001,6 +1001,7 @@ i3GEO.Interface = {
 							for (j in features[i].attributes) {
 								html += j+": "+features[i].attributes[j];
 							}
+							/*
 							balloon = new Balloon();
 							BalloonConfig(balloon,'GBox');
 							balloon.delayTime = 0;
@@ -1013,6 +1014,17 @@ i3GEO.Interface = {
 								temp.style.position = "relative";
 								temp.style.top = "5px";
 							}
+							*/
+							g = features[i].geometry;
+							i3geoOL.addPopup(new OpenLayers.Popup.FramedCloud(
+								"kml", 
+								new OpenLayers.LonLat(g.x,g.y),
+								null,
+								html,
+								null,
+								true
+							));
+							
 						}
 					}
 				}
