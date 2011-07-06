@@ -209,7 +209,7 @@ i3GEO.barraDeBotoes = {
 
 	Essa opção só funciona se i3GEO.barraDeBotoes.AUTO = true
 
-	Vc pode também alterar a ordem dos botoes.
+	Vc pode também alterar a ordem dos botoes ou adicionar novos
 
 	Default:
 

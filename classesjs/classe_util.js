@@ -506,6 +506,8 @@ i3GEO.util = {
 
 	Os cursores disponíveis são definidos por default em classe_configura.js
 
+	Exemplo i3GEO.util.mudaCursor("","crosshair")
+	
 	Parametros:
 
 	cursores {i3GEO.configura.cursores} - objeto JSON com as URIs de cada cursor (veja i3GEO.configura.cursores)

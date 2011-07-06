@@ -1,0 +1,254 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+<head>
+<meta http-equiv="Category" content="i3Geo Mapa interativo MMA geoprocessamento sig mobile">
+<META HTTP-EQUIV="Content-Type" CONTENT="text/html; charset=ISO-8859-1">
+<title>i3GEO - OpenLayers</title>
+</head>
+<body id="i3geo">
+<table id='mst' summary="" style='display:none;' width=100% cellspacing='0'>
+<tr style="border:0px">
+	<td colspan=2 id="barraSuperior" style="background-image:url('../imagens/visual/default/cabeca.png');height:10px"></td>
+</tr>
+<tr>
+<td>
+  <table width=100% cellspacing=0 cellpadding=0 >
+   <tr>
+   <td></td>
+   <td>
+    <div class=verdeescuro style="top:0px;cursor:pointer;">
+	 <div id=guia1 class=guia ></div>
+	 <div id=guia2 class=guia ></div>
+	 <div id=guia4 class=guia ></div>
+	 <div id=guia5 class=guia ></div>
+    </div>
+   </td>
+   </tr>
+  </table>
+</td>
+<td id="contemMenu" style="text-align:right;height:0px;border-width:0pt 0pt 1px;border-color:rgb(240,240,240)">
+	<div id="menus" ></div>
+</td>
+</tr>
+<tr>
+ <td class=tdbranca id=contemFerramentas style="vertical-align:top;width:300px;text-align:left;">
+  <div id='guia1obj' >
+	<div style='left:5px;top:10px;' id=buscaRapida ></div>
+  	<div id=listaPropriedades style='top:15px;' ></div>
+  	<div id=listaLayersBase style='top:15px;'></div>
+  	<div id=listaTemas style='top:15px;'></div>
+  </div>
+  <div id='guia2obj' style='display:none;'>Aguarde...<img alt="" src="../imagens/branco.gif" width=248 /></div>
+  <div id='guia4obj' style='display:none;text-align:left'><div id='legenda' style='text-align:left'></div></div>
+  <div id='guia5obj' style='display:none;text-align:left'><div id='banners' style='overflow:auto;text-align:left'>Aguarde...</div></div>
+ </td>
+ <td style="vertical-align:top;border-width:0px;">
+  <table width="100%" style="vertical-align:top;border-width:0px">
+    <tr><td  class=verdeclaro id=contemImg >
+    <div id=corpoMapa style="background-image:url('../imagens/i3geo1bw.jpg');"></div>
+   </td></tr>
+  </table>
+ </td>
+ </tr>
+
+<tr>
+
+ <td class=tdbranca >
+	<div id=i3GEOcompartilhar style="text-align:left;border-top:1px solid rgb(250,250,250);padding-top:1px" ></div>
+ 	<div id=tempoRedesenho style=color:green;background-color:black;width:50px;display:none ></div>
+ </td>
+ <td class=tdbranca >
+  <table width=100% >
+  <tr>
+	  <td class=tdbranca >
+		<div id=escala style="text-align:right;" ></div>
+	  </td>
+	  <td class=tdbranca  >
+		<div id=localizarxy style="text-align:left;font-size:10px;display:inline-table">Aguarde...</div>
+	  </td>
+	  <td class=tdbranca  ><div id=seletorIdiomas ></div></td>
+	  <td class=tdbranca  ><div id=ondeestou ></div></td>
+  </tr>
+  </table>
+ </td>
+</tr>
+<tr style="border:0px"><td colspan=3 id="barraInferior" style="background-image:url('../imagens/visual/default/rodape.png');height:10px"></td></tr>
+<tr style="border:0px"><td colspan=3 style=background-color:black ><input style="border:0px none; background-color:black;color:white;font-size:12pt;" type="text" size="1" id="i3geo_letreiro" ></td></tr>
+<tr style="border:0px"><td colspan=3 style=background-color:black;color:white >geoprocessamento@mma.gov.br </td></tr>
+
+</table>
+<center>
+<br><br>
+<table>
+<tr>
+	<td><center><h1 style="font-size:10px;font-family: Verdana, Arial, Helvetica, sans-serif;"><div id=versaoi3geo ></div><h2 style="font-size:10px;font-family: Verdana, Arial, Helvetica, sans-serif;">i3Geo - Software livre para criação de mapas interativos e geoprocessamento<h3 style="font-size:10px;font-family: Verdana, Arial, Helvetica, sans-serif;">Baseado no Mapserver, é licenciado sob GPL e integra o Portal do Software Público Brasileiro</h3></h2></h1></td>
+</tr>
+<tr>
+	<td style="padding:10px;"><center><img alt="logomarca" src='../imagens/logo_inicio.png'></td>
+</tr>
+</table>
+<script src="../classesjs/i3geo.js"></script>
+<script src="../pacotes/openlayers/OpenLayers29.js.php"></script>
+<style>
+.olControlEditingToolbar1 div {
+	background-image:url(../mashups/openlayers.png);
+	background-repeat:no-repeat;
+	float:right;
+	right: 0px;	
+	height:29px;
+	margin:2px;
+	width:29px;
+	cursor:pointer;
+}
+</style>
+<script>
+i3GEO.configura.locaplic = i3GEO.util.protocolo()+"://"+window.location.host+"/i3geo";
+i3GEO.configura.autotamanho = false;
+i3GEO.Interface.ATUAL = "openlayers";
+i3GEO.Interface.IDCORPO = "contemImg";
+i3GEO.Interface.openlayers.GADGETS = {
+		PanZoomBar:true,
+		PanZoom:false,
+		LayerSwitcher:true,
+		ScaleLine:true,
+		OverviewMap:false	
+	};
+i3GEO.Interface.openlayers.TILES = true;
+i3GEO.gadgets.PARAMETROS.mostraMenuSuspenso.finaliza = 'i3GEOoMenuBar.getMenuItem("omenudataInterface1").cfg.setProperty("text", " ");'
+i3GEO.cria();
+i3GEO.configura.mapaRefDisplay = "none";
+i3GEO.barraDeBotoes.AUTOALTURA = true;
+i3GEO.barraDeBotoes.ATIVAMENUCONTEXTO = false;
+i3GEO.barraDeBotoes.PERMITEFECHAR = false;
+i3GEO.barraDeBotoes.PERMITEDESLOCAR = false;
+i3GEO.barraDeBotoes.AUTO = true;
+i3GEO.barraDeBotoes.COMPORTAMENTO = "laranja";
+i3GEO.Interface.BARRABOTOESLEFT = 0;
+i3GEO.Interface.BARRABOTOESTOP = 2;
+i3GEO.Interface.BARRADEZOOMTOP = 10;
+i3GEO.Interface.BARRADEZOOMLEFT = 40;
+i3GEO.idioma.IDSELETOR = "seletorIdiomas";
+i3GEO.Interface.ATIVAMENUCONTEXTO = false;
+i3GEO.arvoreDeTemas.TIPOBOTAO = "radio";
+i3GEO.arvoreDeTemas.ATIVATEMAIMEDIATO = true;
+i3GEO.arvoreDeTemas.OPCOESADICIONAIS.comentarios = true;
+i3GEO.arvoreDeCamadas.VERIFICAABRANGENCIATEMAS = true;
+i3GEO.arvoreDeCamadas.MOSTRALISTAKML = false;
+i3GEO.mapa.AUTORESIZE = true;
+OpenLayers.ImgPath = "../pacotes/openlayers/img/";
+(function(){
+	var oce = new OpenLayers.Layer.ArcGIS93Rest( 
+		"ESRI Ocean Basemap",
+		"http://server.arcgisonline.com/ArcGIS/rest/services/Ocean_Basemap/MapServer/export",
+		{format:"jpg"},
+		{isBaseLayer:true,visibility:false}
+	);
+	var ims = new OpenLayers.Layer.ArcGIS93Rest( 
+		"ESRI Imagery World 2D",
+		"http://server.arcgisonline.com/ArcGIS/rest/services/ESRI_Imagery_World_2D/MapServer/export",
+		{},
+		{isBaseLayer:true,visibility:false}
+	);
+	var wsm = new OpenLayers.Layer.ArcGIS93Rest( 
+		"ESRI World Street Map",
+		"http://server.arcgisonline.com/ArcGIS/rest/services/ESRI_StreetMap_World_2D/MapServer/export",
+		{},
+		{isBaseLayer:true,visibility:false}
+	);
+	var bra = new OpenLayers.Layer.WMS( 
+		"Base carto MMA",
+		"http://mapas.mma.gov.br/cgi-bin/mapserv?map=/opt/www/html/webservices/baseraster.map",
+		{layers:"baseraster",srs:"EPSG:4291",format:"image/png",isBaseLayer:false},
+		{isBaseLayer:true,visibility:false}
+	);
+	var osm = new OpenLayers.Layer.WMS( 
+		"Open Street Map",
+		"http://full.wms.geofabrik.de/std/demo_key",
+		{layers:""},
+		{isBaseLayer:true,visibility:false}
+	);	
+	i3GEO.Interface.openlayers.LAYERSADICIONAIS = [oce,ims,wsm,bra,osm];
+})();
+</script>
+<style>
+#meuBotao
+{
+	background-image:URL('http://upload.wikimedia.org/wikipedia/commons/2/26/Smile.png');
+	background-repeat: no-repeat;
+	background-position: 0 0;
+	width: 24px;
+	heigth:24px;
+}
+#meuBotao1
+{
+	background-image:URL('http://upload.wikimedia.org/wikipedia/commons/2/26/Smile.png');
+	background-repeat: no-repeat;
+	background-position: 0 0;
+	width: 24px;
+	heigth:24px;
+}
+</style>
+<script>
+/*
+Adiciona um novo botao na barra de botoes
+*/
+//insere "meuBotao" e "meuBotao1" no objeto com a lista de botoes. Veja estilo acima.
+//
+i3GEO.barraDeBotoes.INCLUIBOTAO = {
+	meuBotao: true,
+	meuBotao1: true,
+	zoomli: true,
+	pan: true,
+	zoomtot:true,
+	identifica: true,
+	identificaBalao: true,
+	mede: true,
+	area: true,
+	imprimir: true,
+	reinicia: true,
+	exten: true,
+	referencia: true,
+	inserexy: true,
+	textofid: true,
+	selecao: true,
+	google: true,
+	buscafotos: true,
+	wiki: true,
+	metar: true,
+	lentei: true,
+	confluence: true,
+	inseregrafico: true,
+	v3d: true
+};
+//
+//adiciona funcionalidade aos botões
+//
+i3GEO.configura.funcoesBotoes.botoes.push({
+	iddiv:"meuBotao",
+	tipo:"",
+	dica:"Meu novo botão",
+	funcaoonclick:function(){
+		alert("oi vc clicou no meu botão novo");
+	}
+});
+i3GEO.configura.funcoesBotoes.botoes.push({
+	iddiv:"meuBotao1",
+	tipo:"dinamico",
+	dica:"Meu novo botão",
+	funcaoonclick:function(){
+		alert("Clique no mapa");
+		i3GEO.util.mudaCursor("","crosshair");
+		i3GEO.barraDeBotoes.ativaIcone("meuBotao1");
+		cliqueMeuBotaoMapa = function(){
+			if (i3GEO.barraDeBotoes.BOTAOCLICADO === "meuBotao1"){
+				alert("Vc clicou no mapa: x= "+objposicaocursor.ddx+" y= "+objposicaocursor.ddy);
+			}
+		};
+		if(i3GEO.eventos.MOUSECLIQUE.toString().search("cliqueMeuBotaoMapa()") < 0)
+		{i3GEO.eventos.MOUSECLIQUE.push("cliqueMeuBotaoMapa()");}
+	}
+});
+i3GEO.inicia();
+</script>
+</body>
+</html>
