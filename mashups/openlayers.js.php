@@ -17,7 +17,7 @@ i3GEO.editorOL = {
 		strokeWidth: 2,
 		strokeColor: "250,150,0",
 		pointRadius: 4,
-		graphicName: "circle",
+		graphicName: "square",
 		fontSize: "12px",
 		fontColor: "0,0,0"
 	},

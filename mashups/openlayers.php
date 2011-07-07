@@ -214,7 +214,7 @@ Parâmetros:
 <script type="text/javascript" src="../pacotes/yui270/build/dragdrop/dragdrop-min.js"></script>
 <script type="text/javascript" src="../pacotes/yui270/build/container/container-min.js"></script>
 <script type="text/javascript" src="../classesjs/compactados/classe_calculo_compacto.js"></script>
-<script type="text/javascript" src="../pacotes/openlayers/OpenLayers.js.php"></script>
+<script type="text/javascript" src="../pacotes/openlayers/OpenLayers29.js.php"></script>
 <script type="text/javascript" src="openlayers.js.php"></script>
 <link rel="stylesheet" href="theme/default/style.css" type="text/css" />
 <link rel="stylesheet" href="openlayers.css" type="text/css" />
