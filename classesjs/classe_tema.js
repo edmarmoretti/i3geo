@@ -70,22 +70,8 @@ i3GEO.tema = {
 		}
 		catch(e){}
 		i3GEO.janela.abreAguarde("i3GEO.atualiza",$trad("o1"));
-		//i3GEO.contadorAtualiza++;
-		if(i3GEO.Interface.ATUAL === "googlemaps"){
-			indice = i3GEO.Interface.googlemaps.retornaIndiceLayer(tema);
-			if(indice !== false)
-			{i3GeoMap.overlayMapTypes.removeAt(indice);}
-		}
-		if(i3GEO.Interface.ATUAL === "googleearth"){
-			indice = i3GEO.Interface.googleearth.retornaObjetoLayer(tema);
-			i3GeoMap.getFeatures().removeChild(indice);
-		}
-		i3GEO.php.excluitema(i3GEO.atualiza,tema);
+		i3GEO.php.excluitema(i3GEO.atualiza,[tema]);
 		i3GEO.mapa.ativaTema("");
-		if(i3GEO.Interface.ATUAL === "openlayers"){
-			layer = i3geoOL.getLayersByName(tema)[0];
-			i3geoOL.removeLayer(layer);
-		}
 	},
 	/*
 	Function: fonte

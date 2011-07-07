@@ -143,13 +143,22 @@ i3GEO.php = {
 	excluitema: function(funcao,temas){
 		var layer,retorno,p,n,i;
 		i3GEO.php.verifica();
-		retorno = function(retorno){
-			if(i3GEO.Interface.ATUAL === "openlayers"){
-				n = temas.length;
-				for(i=0;i<n;i++){
+		retorno = function(retorno){		
+			n = temas.length;
+			for(i=0;i<n;i++){
+				if(i3GEO.Interface.ATUAL === "openlayers"){
 					layer = i3geoOL.getLayersByName(temas[i]);
 					if(layer.length > 0)
 					{i3geoOL.removeLayer(layer[0]);}
+				}
+				if(i3GEO.Interface.ATUAL === "googlemaps"){
+					indice = i3GEO.Interface.googlemaps.retornaIndiceLayer(temas[i]);
+					if(indice !== false)
+					{i3GeoMap.overlayMapTypes.removeAt(indice);}
+				}
+				if(i3GEO.Interface.ATUAL === "googleearth"){
+					indice = i3GEO.Interface.googleearth.retornaObjetoLayer(temas[i]);
+					i3GeoMap.getFeatures().removeChild(indice);
 				}
 			}
 			funcao.call(retorno);

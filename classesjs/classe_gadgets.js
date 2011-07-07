@@ -914,10 +914,10 @@ i3GEO.gadgets = {
 			//
 			temp = objid.style;
 			temp.backgroundPosition = "0px -1px";
-			if(navn)
-			{temp.border = "0px solid white";}
-			else
-			{temp.border = "1px dotted white";}
+			temp.border = "0px solid white";
+
+			if(navm)
+			{temp.borderBottom = "2px solid white";}
 			if(navm && i3GEO.Interface.ATUAL === "googlemaps")
 			{temp.border = "2px dotted white";}
 			if(ms.finaliza && ms.finaliza != ""){

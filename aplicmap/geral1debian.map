@@ -32,8 +32,8 @@ MAP
 	STATUS ON
 	UNITS DD
 	NAME "GERAL"
-	DEBUG 5
-	CONFIG "MS_ERRORFILE" "/tmp/ms_tmp/ms_error.txt"
+	DEBUG OFF
+	#CONFIG "MS_ERRORFILE" "/tmp/ms_tmp/ms_error.txt"
 	#
 	#utilize o agg apenas com mapserver 5x
 
@@ -217,6 +217,7 @@ MAP
 			"CLASSE"	"NAO"
 			"TEMA"	"NAO"
 			"ESCONDIDO" "SIM"
+			"cache" "sim"
 		END
 		NAME "mundo2"
 		SIZEUNITS PIXELS

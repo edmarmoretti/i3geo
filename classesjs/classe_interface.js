@@ -856,7 +856,7 @@ i3GEO.Interface = {
 					i3GEO.idioma.mostraSeletor,
 					i3GEO.gadgets.mostraEscalaNumerica,
 					i3GEO.util.arvore,
-					i3GEO.gadgets.mostraMenuLista,
+					i3GEO.gadgets.mostraMenuLista
 				],[
 					null,
 					null,

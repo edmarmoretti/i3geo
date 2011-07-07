@@ -8,14 +8,14 @@ LAYER
 	DATA "c:\ms4w\apache\htdocs\i3geo\aplicmap\dados\estados.shp"
 	TEMPLATE "estados.htm"
 	METADATA
-		ITENS "ESTADO"
-		TIP "ESTADO"
-		ITENSDESC "Estado"
-	    ITEMIMG "ESTADO"
-	    IMGLOC "../imagens/bandeiras"
-		TEMA "Limite Estadual"
-		ESCALA "250000"
-		CLASSE "SIM"
+		"ITENS" "ESTADO"
+		"TIP" "ESTADO"
+		"ITENSDESC" "Estado"
+	    "ITEMIMG" "ESTADO"
+	    "IMGLOC" "../imagens/bandeiras"
+		"TEMA" "Limite Estadual"
+		"ESCALA" "250000"
+		"CLASSE" "SIM"
 		"cache" "sim"
 	END
 	TRANSPARENCY 100

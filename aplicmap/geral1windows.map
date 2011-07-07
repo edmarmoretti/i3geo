@@ -19,9 +19,9 @@ MAP
 	#
 	FONTSET "c:\ms4w\apache\htdocs\i3geo/symbols/fontes.txt"
 	SYMBOLSET "c:\ms4w\apache\htdocs\i3geo/symbols/simbolos.sym"
-	#DEBUG OFF
-	DEBUG 5
-	CONFIG "MS_ERRORFILE" "/ms4w/tmp/ms_error.txt"
+	DEBUG OFF
+	#DEBUG 5
+	#CONFIG "MS_ERRORFILE" "/ms4w/tmp/ms_error.txt"
 
 	SHAPEPATH "c:\ms4w\apache\htdocs\geodados"
 	IMAGECOLOR 104 171 195
@@ -214,6 +214,7 @@ MAP
 			"TEMA" "linha"
 			"TEMA"	"NAO"
 			"ESCONDIDO" "SIM"
+			"cache" "sim"
 		END
 		NAME "mundo2"
 		SIZEUNITS PIXELS
@@ -371,6 +372,7 @@ LAYER
 			"IDENTIFICA" "nao"
 			"TABELA" "nao"
 			"CLASSE" "NAO"
+			#"cache" "sim"
 		END
 		NAME "rosadosventos"
 		SIZEUNITS PIXELS

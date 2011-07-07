@@ -215,6 +215,7 @@ MAP
 			"CLASSE"	"NAO"
 			"TEMA"	"NAO"
 			"ESCONDIDO" "SIM"
+			"cache" "sim"
 		END
 		NAME "mundo2"
 		SIZEUNITS PIXELS
