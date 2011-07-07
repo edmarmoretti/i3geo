@@ -57,7 +57,7 @@ i3GEO.arvoreDeCamadas = {
 	Type:
 	{boolean}
 	*/
-	MOSTRALISTAKML: true,
+	MOSTRALISTAKML: false,
 	/*
 	Propriedade: FILTRO
 

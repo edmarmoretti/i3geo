@@ -121,7 +121,7 @@ Retorno:
 		foreach($this->layers as $l)
 		{
 			$metadata = $l->getmetadata("itembuscarapida");
-			if($l->status == MS_DEFAULT && $metadata != "")
+			if($metadata != "")
 			{$lista[] = $metadata.";".$l->name;}
 		}
 		return implode(",",$lista);
