@@ -156,6 +156,15 @@ else
 */
 $tituloInstituicao = "i3Geo";
 /*
+	Variable: emailInstituicao
+	
+	Endereço de e-mail que pode ser mostrado na interface do mapa
+	
+	Tipo:
+	{string}
+*/
+$emailInstituicao = "geoprocessamento@mma.gov.br";
+/*
 	Variable: googleApiKey
 	
 	Chave utilizada pela API do Google maps.

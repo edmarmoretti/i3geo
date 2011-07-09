@@ -186,6 +186,7 @@ As variáveis vêm do arquivo ms_configura.php e são armazenadas em uma seção com 
 */
 if (!isset($mapext)){$mapext="";}
 $dir_tmp_ = $dir_tmp;
+$emailInstituicao_ = $emailInstituicao;
 $locmapserv_ = $locmapserv;
 $locaplic_ = $locaplic;
 //$locsistemas_ = $locsistemas;
@@ -238,6 +239,7 @@ Aqui é necessário verificar se $executa está definido
 isso pq algumas aplicações podem ser prejudicadas caso o aguarde seja mostrado
 */
 $_SESSION["dir_tmp"] = $dir_tmp_;
+$_SESSION["emailInstituicao"] = $emailInstituicao_;
 $_SESSION["locmapserv"] = $locmapserv_;
 $_SESSION["locaplic"] = $locaplic_;
 //$_SESSION["locsistemas"] = $locsistemas_;

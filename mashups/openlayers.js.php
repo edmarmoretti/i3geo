@@ -437,10 +437,24 @@ i3GEO.editorOL = {
 				document.body.style.cursor="default";
 				if(document.getElementById("i3geoMapa"))
 				{document.getElementById("i3geoMapa").style.cursor = "default";}
-				var fromgml = new OpenLayers.Format.GML({
-					geometryName: "msGeometry"
-				});
-				var gml = fromgml.read(retorno.responseText);
+				var i,n,f,
+					fromgml = new OpenLayers.Format.GML({
+						geometryName: "msGeometry"
+					}),
+					gml = fromgml.read(retorno.responseText);
+				n = gml.length;
+				for(i=0;i<n;i++){
+					f = gml[i];
+					f["attributes"] = {
+						opacidade: i3GEO.editorOL.simbologia.opacidade,
+						texto: i3GEO.editorOL.simbologia.texto,
+						fillColor: i3GEO.editorOL.simbologia.fillColor,
+						strokeWidth: i3GEO.editorOL.simbologia.strokeWidth,
+						strokeColor: i3GEO.editorOL.simbologia.strokeColor,
+						pointRadius: i3GEO.editorOL.simbologia.pointRadius,
+						graphicName: i3GEO.editorOL.simbologia.graphicName
+					};				
+				}
 				i3GEO.editorOL.layergrafico.addFeatures(gml);
 			},
 			failure: function(){

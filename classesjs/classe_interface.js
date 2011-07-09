@@ -313,6 +313,7 @@ i3GEO.Interface = {
 		gadgets.quadros.grava("extensao",i3GEO.parametros.extentTotal);
 		gadgets.mostraBuscaRapida();
 		gadgets.mostraVersao();
+		gadgets.mostraEmail();
 		i3GEO.guias.cria();
 		//
 		//esse id é utilizado apenas para manter o mapa não visível até que tudo seja montado
@@ -1001,20 +1002,6 @@ i3GEO.Interface = {
 							for (j in features[i].attributes) {
 								html += j+": "+features[i].attributes[j];
 							}
-							/*
-							balloon = new Balloon();
-							BalloonConfig(balloon,'GBox');
-							balloon.delayTime = 0;
-							balloon.showTooltip(targ,html,null,"","",objposicaocursor.telax,objposicaocursor.telay);
-							balloon.addCloseButton();
-							temp = $i("contentWrapper");
-							if(temp){
-								temp.style.overflow = "auto";
-								temp.style.textAlign = "left";
-								temp.style.position = "relative";
-								temp.style.top = "5px";
-							}
-							*/
 							g = features[i].geometry;
 							i3geoOL.addPopup(new OpenLayers.Popup.FramedCloud(
 								"kml", 
@@ -1028,9 +1015,7 @@ i3GEO.Interface = {
 						}
 					}
 				}
-				//console.info(this.id)
 			};
-			//eval(id+'.events.register("featureadded", '+id+', temp);');			
 		},
 		ativaDesativaCamadaKml: function(obj,url){
 			if(!obj.checked)

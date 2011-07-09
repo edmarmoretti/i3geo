@@ -97,7 +97,11 @@ i3GEO.gadgets = {
 
 		"mostraVersao":
 
-		{idhtml:"versaoi3geo"}
+		{idhtml:"versaoi3geo"},
+		
+		"mostraEmail":
+		
+		{idhtml:"emailInstituicao"}
 	}
 
 	Tipo:
@@ -123,8 +127,28 @@ i3GEO.gadgets = {
 		"mostraMenuLista":
 		{idhtml:"menuLista"},
 		"mostraVersao":
-		{idhtml:"versaoi3geo"}
+		{idhtml:"versaoi3geo"},
+		"mostraEmail":
+		{idhtml:"emailInstituicao"}		
 	},
+	/*
+	Function: mostraEmail
+
+	Mostra o e-mail armazenado na variável i3GEO.parametros.emailInstituicao
+
+	Parametro:
+
+	id {String} - id do elemento HTML que receberá o resultado. Esse id por default é obtido de
+	i3GEO.gadgets.PARAMETROS
+	*/
+	mostraEmail: function(id){
+		if(typeof(console) !== 'undefined'){console.info("i3GEO.gadgets.mostraEmail()");}
+		if(arguments.length === 0 || id === "")
+		{id = i3GEO.gadgets.PARAMETROS.mostraEmail.idhtml;}
+		else
+		{i3GEO.gadgets.PARAMETROS.mostraEmail.idhtml = id;}
+		i3GEO.util.defineValor(id,"innerHTML",i3GEO.parametros.emailInstituicao);
+	},	
 	/*
 	Function: mostraVersao
 

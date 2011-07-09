@@ -107,6 +107,8 @@ i3GEOF.tabela = {
 			$i(iddiv).innerHTML += i3GEOF.tabela.html();
 			i3GEO.guias.mostraGuiaFerramenta("i3GEOtabelaguia1","i3GEOtabelaguia");
 			//eventos das guias
+			$i("i3GEOtabelaguia6").onclick = function()
+			{i3GEO.guias.mostraGuiaFerramenta("i3GEOtabelaguia6","i3GEOtabelaguia");};			
 			$i("i3GEOtabelaguia1").onclick = function()
 			{i3GEO.guias.mostraGuiaFerramenta("i3GEOtabelaguia1","i3GEOtabelaguia");};
 			$i("i3GEOtabelaguia3").onclick = function(){
@@ -202,14 +204,15 @@ i3GEOF.tabela = {
 		var ins = '';//<p class="paragrafo" >
 		ins += '<div id=guiasYUI class="yui-navset" style="top:0px;cursor:pointer;left:0px;">';
 		ins += '<ul class="yui-nav" style="border-width:0pt 0pt 0px;border-color:rgb(240,240,240);border-bottom-color:white;">';
-		ins += '	<li><a href="#ancora"><em><div id="i3GEOtabelaguia1" style="text-align:center;left:0px;" >Todos os registros</div></em></a></li>';
+		ins += '	<li><a href="#ancora"><em><div id="i3GEOtabelaguia6" style="text-align:center;left:0px;" ><img class="ticPropriedades2" style="height:14px" title="Propriedades" src="'+i3GEO.configura.locaplic+'/imagens/visual/default/branco.gif"></div></em></a></li>';
+		ins += '	<li><a href="#ancora"><em><div id="i3GEOtabelaguia1" style="text-align:center;left:0px;" >Registros</div></em></a></li>';
 		ins += '	<li><a href="#ancora"><em><div id="i3GEOtabelaguia3" style="text-align:center;left:0px;" >Estat&iacute;sticas</div></em></a></li>';
 		ins += '	<li><a href="#ancora"><em><div id="i3GEOtabelaguia4" style="text-align:center;left:0px;" >Gr&aacute;ficos</div></em></a></li>';
 		ins += '	<li><a href="#ancora"><em><div id="i3GEOtabelaguia5" style="text-align:center;left:0px;" >Relat&oacute;rios</div></em></a></li>';
 		ins += '</ul>';
 		ins += '</div><br>';
 		ins += '	<div id=i3GEOtabelaresultadotab style="background-color:#F2F2F2;position:relative;top:5px;left:0px"></div>';
-		ins += '	<div id=i3GEOtabelaguia1obj style="width:99%">';
+		ins += '	<div id=i3GEOtabelaguia6obj style="width:99%">';
 		ins += '		<table summary="" class=lista2 >';
 		ins += '		<tr>';
 		ins += '			<td><input style="cursor:pointer;border:0px solid white;" onclick="i3GEOF.tabela.pegaRegistros()" type=checkbox id=i3GEOtabelatiporeg CHECKED /></td>';
@@ -224,6 +227,8 @@ i3GEOF.tabela = {
 		ins += '			<td>Mostrar na listagem apenas os selecionados</td>';
 		ins += '		</tr>';
 		ins += '		</table>';
+		ins += '		</div>';
+		ins += '	<div id=i3GEOtabelaguia1obj style="width:99%">';
 		ins += '		<div id=i3GEOtabelacombot style="position:relative;top:5px;left:0px;">';
 		ins += '		</div>';		
 		ins += '		<br><p class="paragrafo" ><input title="Seleciona no mapa as linhas marcadas" id=i3GEOtabelabotao2 size=25 type=button value="Ativa a sele&ccedil;&atilde;o" />';

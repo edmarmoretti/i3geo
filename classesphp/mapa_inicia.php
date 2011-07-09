@@ -100,7 +100,7 @@ Retorno:
 */
 function iniciaMapa()
 {
-	global $openid,$interfacePadrao,$mensagemInicia,$kmlurl,$tituloInstituicao,$tempo,$navegadoresLocais,$editor,$locaplic,$embedLegenda,$map_file,$mapext,$w,$h,$R_path,$locmapserv,$utilizacgi,$expoeMapfile,$interface;
+	global $emailInstituicao,$openid,$interfacePadrao,$mensagemInicia,$kmlurl,$tituloInstituicao,$tempo,$navegadoresLocais,$editor,$locaplic,$embedLegenda,$map_file,$mapext,$w,$h,$R_path,$locmapserv,$utilizacgi,$expoeMapfile,$interface;
 	if(!isset($editor) || empty($editor))
 	{$editor = "nao";}
 	if(!isset($kmlurl))
@@ -285,7 +285,7 @@ function iniciaMapa()
 	{$res["autenticadoopenid"] = "sim";}
 	else
 	{$res["autenticadoopenid"] = "nao";}
-
+	$res["emailInstituicao"] = $emailInstituicao;
 	copy($map_file,(str_replace(".map","reinc.map",$map_file)));
 	copy($map_file,(str_replace(".map","seguranca.map",$map_file)));
 	cpjson(array("variaveis"=>$res,"temas"=>$temas));

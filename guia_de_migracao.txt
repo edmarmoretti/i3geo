@@ -52,6 +52,10 @@ Para a versão 4.5
 		
 	A inicialização da interface Google Earth (interface/googleearth.phtml) foi incluida na tag "body": 
 		<body id="i3geo" onload='i3GEO.inicia();'>
+		
+	e-mail institucional (incluido no arquivo de correções SP7)
+		em ms_configura.php pode ser definido um e-mail padrão que é utilizado nas interfaces dos mapas
+		Para que o e-mail definido seja mostrado, é necessário adicionar um elemento HTML com id=emailInstituicao no mapa
 
 -------------------------------------------------------------------------------------------------
 Para a versão 4.4
