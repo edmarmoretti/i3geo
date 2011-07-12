@@ -1,0 +1,188 @@
+<html>
+</head>
+<title>euDock 2.0 examples</title>
+<link type="image/x-icon" href="iconsEuDock/euDock.ico" rel="shortcut icon">
+
+<script language="JavaScript1.3" src="js/euDock.2.0.js"></script>
+<script language="JavaScript1.3" src="js/euDock.Image.js"></script>
+</head>
+<body>
+<center>
+<table cellpadding=3 style='border:1px solid #8899bb;'>
+<tr><td style="border:1px solid #8899bb;">
+<center><b>Simple euDock 2.0</b></center>
+</td></tr>
+<tr><td style="border:1px solid #8899bb;">
+<center><b>To make this possible you must write inside your page:</b></center>
+<br>Place inside your &lt;HEAD&gt;&lt;/HEAD&gt; HTML tag:
+<pre>
+&lt;HEAD&gt;
+   &lt;script language="JavaScript1.3" src="js/euDock.2.0.js"&gt;&lt;/script&gt;
+   &lt;script language="JavaScript1.3" src="js/euDock.Image.js"&gt;&lt;/script&gt;
+&lt;/HEAD&gt;
+</pre>
+And everywhere:
+<pre>
+&lt;script&gt;
+   euEnv.imageBasePath="js/";
+
+   var dock = new euDock();
+   
+   dock.setBar({
+        left      :{euImage:{image:"barImages/dockBg-l.png"}},
+        horizontal:{euImage:{image:"barImages/dockBg-c-o.gif"}},
+        right     :{euImage:{image:"barImages/dockBg-r.png"}}
+   	});
+   
+   dock.setIconsOffset(2);
+   		
+   dock.addIcon(new Array({euImage:{image:"iconsEuDock/cube.png"}}),
+                {link:"http://eudock.jules.it"});
+   dock.addIcon(new Array({euImage:{image:"iconsEuDock/cube.png"}}),
+                {link:"http://eudock.jules.it"});
+   dock.addIcon(new Array({euImage:{image:"iconsEuDock/cube.png"}}),
+                {link:"http://eudock.jules.it"});
+   dock.addIcon(new Array({euImage:{image:"iconsEuDock/cube.png"}}),
+                {link:"http://eudock.jules.it"});
+   dock.addIcon(new Array({euImage:{image:"iconsEuDock/cube.png"}}),
+                {link:"http://eudock.jules.it"});
+   dock.addIcon(new Array({euImage:{image:"iconsEuDock/cube.png"}}),
+                {link:"http://eudock.jules.it"});
+   dock.addIcon(new Array({euImage:{image:"iconsEuDock/cube.png"}}),
+                {link:"http://eudock.jules.it"});
+   dock.addIcon(new Array({euImage:{image:"iconsEuDock/cube.png"}}),
+                {link:"http://eudock.jules.it"});
+   dock.addIcon(new Array({euImage:{image:"iconsEuDock/cube.png"}}),
+                {link:"http://eudock.jules.it"});
+   dock.addIcon(new Array({euImage:{image:"iconsEuDock/cube.png"}}),
+                {link:"http://eudock.jules.it"});
+   dock.addIcon(new Array({euImage:{image:"iconsEuDock/cube.png"}}),
+                {link:"http://eudock.jules.it"});
+&lt;/script&gt;
+</pre>
+I suggest to download the tutorial/demos and take a look to all the features.<br>
+I can't explain all here.
+</td></tr>
+<tr><td style="border:1px solid #8899bb;">
+
+<center><b>MMMMM... It's a better idea to explain these functions:</b></center>
+<pre>
+&lt;script&gt;
+      /*
+       * This is useful for Internet Explorer PNG compatibility
+       * "js/" is the euDock javascript basePath
+       */<b>
+   euEnv.imageBasePath="js/";</b>
+   
+      //In variable (dock) now there is an euDock object<b>
+   var dock = new euDock();</b>
+   
+      /*
+       * To define (unnecessary) the background Dock Bar:
+       *
+       * (euDock object).setBar({
+       *      	left      :[-(object definition for left background bar icon)-],
+       *      	horizontal:[-(object definition for center horizontal background bar icon)-],
+       *      	right     :[-(object definition for right background bar icon)-]
+       *      });                                                      
+       *
+       * euImage is the euImage Object inside the "euDock.Image.js" script
+       * the common constructor is:
+       *
+       *    {euImage:{image:[-(image name)-]}}
+       */<b>
+   dock.setBar({
+        left      :{euImage:{image:"barImages/dockBg-l.png"}},
+        horizontal:{euImage:{image:"barImages/dockBg-c-o.gif"}},
+        right     :{euImage:{image:"barImages/dockBg-r.png"}}
+   	});</b>
+
+      /*
+       * (unnecessary)
+       *
+       * (euDock object).setIconsOffset(offset);
+       *
+       * offset:the distance between base align bar and the base align icons
+       * default is 0
+       */<b>
+   dock.setIconsOffset(2);</b>
+
+      /*
+       * (unnecessary)(if you want to see nothing of course)
+       *
+       * (euDock object).addIcon(arrayOfObjects,iconParameters);
+       *
+       * arrayOfObjects : in this case there is an euImage array of 1 element
+       * iconParameters : "link" is the url where you want to go
+       */<b>
+   dock.addIcon(new Array({euImage:{image:"iconsEuDock/cube.png"}}),
+                {link:"http://eudock.jules.it"});</b>
+   
+      /*
+       * Repeat the last command if you want more icons
+       */
+&lt;/script&gt;
+</pre>
+</td></tr>
+<tr><td style="border:1px solid #8899bb;">
+<center><b>REMEMBER</b><br>Don't forget to put in your page:
+<table cellpadding=5>
+<tr><td style='border:1px solid #8899bb;'>
+<pre><b>&lt;a href='http://eudock.jules.it'&gt;
+&lt;img src='http://eudock.jules.it/littlEuDock.jpg' border=0&gt;&lt;/a&gt;</b></pre>
+</td><td>
+<a href='http://eudock.jules.it'><img src='littlEuDock.jpg' border=0>
+</td></tr>
+</table>
+!!!If you don't like (of course) a personal Macumba!!!
+</center>
+</td></tr>
+</table>
+<a href='index.html'><b>RETURN TO INDEX</b></a>
+</center>
+<a href='http://eudock.jules.it'>
+<img src='littlEuDock.jpg' border=0></a>
+</body>
+</html>
+
+
+
+<script>
+   euEnv.imageBasePath="js/";
+
+   var dock = new euDock();
+   
+   dock.setBar({
+        left      :{euImage:{image:"barImages/dockBg-l.png"}},
+        horizontal:{euImage:{image:"barImages/dockBg-c-o.gif"}},
+        right     :{euImage:{image:"barImages/dockBg-r.png"}}
+   	});
+   
+   dock.setIconsOffset(2);
+   		
+   dock.addIcon(new Array({euImage:{image:"iconsEuDock/cube.png"}}),
+                {link:"http://eudock.jules.it"});
+   dock.addIcon(new Array({euImage:{image:"iconsEuDock/cube.png"}}),
+                {link:"http://eudock.jules.it"});
+   dock.addIcon(new Array({euImage:{image:"iconsEuDock/cube.png"}}),
+                {link:"http://eudock.jules.it"});
+   dock.addIcon(new Array({euImage:{image:"iconsEuDock/cube.png"}}),
+                {link:"http://eudock.jules.it"});
+   dock.addIcon(new Array({euImage:{image:"iconsEuDock/cube.png"}}),
+                {link:"http://eudock.jules.it"});
+   dock.addIcon(new Array({euImage:{image:"iconsEuDock/cube.png"}}),
+                {link:"http://eudock.jules.it"});
+   dock.addIcon(new Array({euImage:{image:"iconsEuDock/cube.png"}}),
+                {link:"http://eudock.jules.it"});
+   dock.addIcon(new Array({euImage:{image:"iconsEuDock/cube.png"}}),
+                {link:"http://eudock.jules.it"});
+   dock.addIcon(new Array({euImage:{image:"iconsEuDock/cube.png"}}),
+                {link:"http://eudock.jules.it"});
+   dock.addIcon(new Array({euImage:{image:"iconsEuDock/cube.png"}}),
+                {link:"http://eudock.jules.it"});
+   dock.addIcon(new Array({euImage:{image:"iconsEuDock/cube.png"}}),
+                {link:"http://eudock.jules.it"});
+</script>
+
+
+

@@ -1,0 +1,237 @@
+<html>
+</head>
+<title>euDock 2.0 examples</title>
+<link type="image/x-icon" href="iconsEuDock/euDock.ico" rel="shortcut icon">
+<script language="JavaScript1.3" src="js/euDock.2.0.js"></script>
+<script language="JavaScript1.3" src="js/euDock.Image.js"></script>
+</head>
+<body>
+<center>
+<br><br><br><br>
+<table id='tableAlign' cellspacing=5 style='width:300;height:200;border:1px solid #8899bb;'>
+<tr><td id='cellAlign' style="border:1px solid #8899bb;"><center><br><br><br>This is a cell</center>
+</td></tr>
+</table>
+<br>
+<table cellpadding=3 style='border:1px solid #8899bb;'>
+<tr><td style="border:1px solid #8899bb;">
+<center><b>Align Tutorial euDock 2.0</b></center>
+</td></tr>
+<tr><td style="border:1px solid #8899bb;">
+<center><b>Align Functions:</b></center>
+I gues that euDock creation is not a problem (is explained in the previous tutorial).<br><br>
+After the creation of an euDock object, you can align it to the screen or<br>
+to an HTML object or to a fixed position (a little example is on the top left of this page)
+</td></tr>
+<tr><td style="border:1px solid #8899bb;"><b>Align to screen:</b>
+<br>Place inside your &lt;HEAD&gt;&lt;/HEAD&gt; HTML tag:
+<pre>
+&lt;HEAD&gt;
+   &lt;script language="JavaScript1.3" src="js/euDock.2.0.js"&gt;&lt;/script&gt;
+   &lt;script language="JavaScript1.3" src="js/euDock.Image.js"&gt;&lt;/script&gt;
+&lt;/HEAD&gt;
+<pre>
+&lt;script&gt;
+      // Instance your euDock object<b>
+   var dock = new euDock();</b>
+   
+      /*
+       * (euDock object).setScreenAlign(align,offset)
+       *
+       * align euDock to the screen borders
+       * align  : (euUP,euDOWN,euLEFT,euRIGHT)
+       * offset : the distance between screen border and euDock
+       */<b>   
+   dock.setScreenAlign(euRIGHT,3);</b>
+&lt;/script&gt;
+</pre>
+</td></tr>
+<tr><td style="border:1px solid #8899bb;">
+<b>Align an HTML object:</b>
+<pre>
+&lt;script&gt;
+      // Instance your euDock object<b>
+   var dock = new euDock();</b>
+   
+      /*
+       * (euDock object).setObjectAlign(objectID,objectAlign,offset,euDockPosition)
+       *
+       * align euDock to an HTML object
+       * objectID    : the id of the object to be retrieve with the javascript function
+       *             : document.getElementById(objectID);
+       *
+       * objectAlign : (euUP,euDOWN,euLEFT,euRIGHT,euCENTER)
+       *             : Align to the middle (TOP,DOWN,LEFT,RIGHT,CENTER) of the object
+       *             : (In the euCENTER case, offset will move the bar  
+       *             :  up    [horizontal bar] or
+       *             :  right [vertical bar] )
+       *
+       * offset      : The distance from HTML object
+       *
+       * euDockPosition : (euUP,euDOWN,euLEFT,euRIGHT,euHORIZONTAL,euVERTICAL)
+       *             : put euDock on the (TOP,DOWN,LEFT,RIGHT,centerHORIZONTAL,centerVERTICAL)
+       *             : of the middle edge position of the object
+       *             : (If you don't understand see the sources)
+       */<b>   
+   dock.setObjectAlign('tableAlign',euLEFT,10,euLEFT);</b>
+&lt;/script&gt;
+</pre>
+</td></tr>
+<tr><td style="border:1px solid #8899bb;">
+<b>Align to a fixed position:</b>
+<pre>
+&lt;script&gt;
+      // Instance your euDock object<b>
+   var dock = new euDock();</b>
+   
+      /*
+       * (euDock object).setPointAlign(x,y,euDockPosition)
+       *
+       * align euDock to a fixed position
+       * [x,y]  : obvious
+       * euDockPosition : (euUP,euDOWN,euLEFT,euRIGHT,euHORIZONTAL,euVERTICAL)
+       *        : put euDock on the (TOP,DOWN,LEFT,RIGHT,centerHORIZONTAL,centerVERTICAL)
+       *        : of the x,y point
+       */<b>   
+   dock.setPointAlign(150,50,euDOWN);</b>
+&lt;/script&gt;
+</pre>
+</td></tr>
+<tr><td style="border:1px solid #8899bb;">
+<center><b>REMEMBER</b><br>Don't forget to put in your page:
+<table cellpadding=5>
+<tr><td style='border:1px solid #8899bb;'>
+<pre><b>&lt;a href='http://eudock.jules.it'&gt;
+&lt;img src='http://eudock.jules.it/littlEuDock.jpg' border=0&gt;&lt;/a&gt;</b></pre>
+</td><td>
+<a href='http://eudock.jules.it'><img src='littlEuDock.jpg' border=0>
+</td></tr>
+</table>
+!!!If you don't like (of course) a personal Macumba!!!
+</center>
+</td></tr>
+</table>
+<a href='index.html'><b>RETURN TO INDEX</b></a>
+</center>
+<a href='http://eudock.jules.it'>
+<img src='littlEuDock.jpg' border=0></a>
+</body>
+</html>
+
+
+
+<script>
+   euEnv.imageBasePath="js/";
+
+   var dock_1 = new euDock();
+   dock_1.setScreenAlign(euLEFT,0);
+   dock_1.setBar({top:{euImage:{image:"barImages/dockBg-u.png"}},vertical:{euImage:{image:"barImages/dockBg-c-v.gif"}},bottom:{euImage:{image:"barImages/dockBg-d.png"}}});
+   dock_1.setIconsOffset(2);   		
+   dock_1.addIcon(new Array({euImage:{image:"iconsEuDock/cube.png"}}),{link:"http://eudock.jules.it"});
+   dock_1.addIcon(new Array({euImage:{image:"iconsEuDock/cube.png"}}),{link:"http://eudock.jules.it"});
+   dock_1.addIcon(new Array({euImage:{image:"iconsEuDock/cube.png"}}),{link:"http://eudock.jules.it"});
+                
+   var dock_2 = new euDock();
+   dock_2.setScreenAlign(euRIGHT,3);
+   dock_2.setBar({top:{euImage:{image:"barImages/dockBg-u.png"}},vertical:{euImage:{image:"barImages/dockBg-c-v.gif"}},bottom:{euImage:{image:"barImages/dockBg-d.png"}}});
+   dock_2.setIconsOffset(2);
+   dock_2.addIcon(new Array({euImage:{image:"iconsEuDock/cube.png"}}),{link:"http://eudock.jules.it"});
+   dock_2.addIcon(new Array({euImage:{image:"iconsEuDock/cube.png"}}),{link:"http://eudock.jules.it"});
+   dock_2.addIcon(new Array({euImage:{image:"iconsEuDock/cube.png"}}),{link:"http://eudock.jules.it"});
+                
+   var dock_3 = new euDock();
+   dock_3.setScreenAlign(euUP,0);
+   dock_3.setBar({left:{euImage:{image:"barImages/dockBg-l.png"}},horizontal:{euImage:{image:"barImages/dockBg-c-o.gif"}},right:{euImage:{image:"barImages/dockBg-r.png"}}});
+   dock_3.setIconsOffset(2);
+   dock_3.addIcon(new Array({euImage:{image:"iconsEuDock/cube.png"}}),{link:"http://eudock.jules.it"});
+   dock_3.addIcon(new Array({euImage:{image:"iconsEuDock/cube.png"}}),{link:"http://eudock.jules.it"});
+   dock_3.addIcon(new Array({euImage:{image:"iconsEuDock/cube.png"}}),{link:"http://eudock.jules.it"});
+                
+   var dock_4 = new euDock();   
+   dock_4.setScreenAlign(euDOWN,0);   
+   dock_4.setBar({left:{euImage:{image:"barImages/dockBg-l.png"}},horizontal:{euImage:{image:"barImages/dockBg-c-o.gif"}},right:{euImage:{image:"barImages/dockBg-r.png"}}});   
+   dock_4.setIconsOffset(2);   		
+   dock_4.addIcon(new Array({euImage:{image:"iconsEuDock/cube.png"}}),{link:"http://eudock.jules.it"});
+   dock_4.addIcon(new Array({euImage:{image:"iconsEuDock/cube.png"}}),{link:"http://eudock.jules.it"});
+   dock_4.addIcon(new Array({euImage:{image:"iconsEuDock/cube.png"}}),{link:"http://eudock.jules.it"});
+   
+   var dock_5 = new euDock();   
+   dock_5.setObjectAlign('cellAlign',euDOWN,0,euUP);   
+   dock_5.setBar({left:{euImage:{image:"barImages/dockBg-l.png"}},horizontal:{euImage:{image:"barImages/dockBg-c-o.gif"}},right:{euImage:{image:"barImages/dockBg-r.png"}}});   
+   dock_5.setIconsOffset(2);   		
+   dock_5.addIcon(new Array({euImage:{image:"iconsEuDock/cube.png"}}),{link:"http://eudock.jules.it"});
+   dock_5.addIcon(new Array({euImage:{image:"iconsEuDock/cube.png"}}),{link:"http://eudock.jules.it"});
+   dock_5.addIcon(new Array({euImage:{image:"iconsEuDock/cube.png"}}),{link:"http://eudock.jules.it"});
+   
+   var dock_6 = new euDock();   
+   dock_6.setObjectAlign('tableAlign',euRIGHT,0,euRIGHT);   
+   dock_6.setBar({top:{euImage:{image:"barImages/dockBg-u.png"}},vertical:{euImage:{image:"barImages/dockBg-c-v.gif"}},bottom:{euImage:{image:"barImages/dockBg-d.png"}}});
+   dock_6.setIconsOffset(2);   		
+   dock_6.addIcon(new Array({euImage:{image:"iconsEuDock/cube.png"}}),{link:"http://eudock.jules.it"});
+   dock_6.addIcon(new Array({euImage:{image:"iconsEuDock/cube.png"}}),{link:"http://eudock.jules.it"});
+   dock_6.addIcon(new Array({euImage:{image:"iconsEuDock/cube.png"}}),{link:"http://eudock.jules.it"});
+   
+   var dock_7 = new euDock();   
+   dock_7.setObjectAlign('tableAlign',euLEFT,10,euLEFT);   
+   dock_7.setBar({top:{euImage:{image:"barImages/dockBg-u.png"}},vertical:{euImage:{image:"barImages/dockBg-c-v.gif"}},bottom:{euImage:{image:"barImages/dockBg-d.png"}}});
+   dock_7.setIconsOffset(2);   		
+   dock_7.addIcon(new Array({euImage:{image:"iconsEuDock/cube.png"}}),{link:"http://eudock.jules.it"});
+   dock_7.addIcon(new Array({euImage:{image:"iconsEuDock/cube.png"}}),{link:"http://eudock.jules.it"});
+   dock_7.addIcon(new Array({euImage:{image:"iconsEuDock/cube.png"}}),{link:"http://eudock.jules.it"});      
+   
+   var dock_8 = new euDock();   
+   dock_8.setPointAlign(150,50,euDOWN);   
+   dock_8.setBar({left:{euImage:{image:"barImages/dockBg-l.png"}},horizontal:{euImage:{image:"barImages/dockBg-c-o.gif"}},right:{euImage:{image:"barImages/dockBg-r.png"}}});   
+   dock_8.setIconsOffset(2);   		
+   dock_8.addIcon(new Array({euImage:{image:"iconsEuDock/cube.png"}}),{link:"http://eudock.jules.it"});
+   dock_8.addIcon(new Array({euImage:{image:"iconsEuDock/cube.png"}}),{link:"http://eudock.jules.it"});
+   dock_8.addIcon(new Array({euImage:{image:"iconsEuDock/cube.png"}}),{link:"http://eudock.jules.it"});   
+   
+   var dock_9 = new euDock();
+   dock_9.setAnimation(euMOUSE,0.3);
+   dock_9.setPointAlign(200,150,euHORIZONTAL);   
+   dock_9.setBar({left:{euImage:{image:"barImages/dockBg-l.png"}},horizontal:{euImage:{image:"barImages/dockBg-c-o.gif"}},right:{euImage:{image:"barImages/dockBg-r.png"}}});   
+   dock_9.setIconsOffset(0);
+   dock_9.addIcon(new Array({euImage:{image:"iconsEuDock/cube.png"}}),{link:"http://eudock.jules.it"});
+   dock_9.addIcon(new Array({euImage:{image:"iconsEuDock/cube.png"}}),{link:"http://eudock.jules.it"});
+   dock_9.addIcon(new Array({euImage:{image:"iconsEuDock/cube.png"}}),{link:"http://eudock.jules.it"});
+   dock_9.addIcon(new Array({euImage:{image:"iconsEuDock/cube.png"}}),{link:"http://eudock.jules.it"}); 
+   dock_9.addIcon(new Array({euImage:{image:"iconsEuDock/cube.png"}}),{link:"http://eudock.jules.it"});    
+   dock_9.addIcon(new Array({euImage:{image:"iconsEuDock/cube.png"}}),{link:"http://eudock.jules.it"}); 
+   dock_9.addIcon(new Array({euImage:{image:"iconsEuDock/cube.png"}}),{link:"http://eudock.jules.it"});
+   
+   var dock_A = new euDock();   
+   dock_A.setPointAlign(100,350,euVERTICAL);   
+   dock_A.setBar({top:{euImage:{image:"barImages/dockBg-u.png"}},vertical:{euImage:{image:"barImages/dockBg-c-v.gif"}},bottom:{euImage:{image:"barImages/dockBg-d.png"}}});
+   dock_A.setIconsOffset(0);
+   dock_A.addIcon(new Array({euImage:{image:"iconsEuDock/cube.png"}}),{link:"http://eudock.jules.it"});
+   dock_A.addIcon(new Array({euImage:{image:"iconsEuDock/cube.png"}}),{link:"http://eudock.jules.it"});
+   dock_A.addIcon(new Array({euImage:{image:"iconsEuDock/cube.png"}}),{link:"http://eudock.jules.it"});
+   dock_A.addIcon(new Array({euImage:{image:"iconsEuDock/cube.png"}}),{link:"http://eudock.jules.it"}); 
+   dock_A.addIcon(new Array({euImage:{image:"iconsEuDock/cube.png"}}),{link:"http://eudock.jules.it"});    
+   dock_A.addIcon(new Array({euImage:{image:"iconsEuDock/cube.png"}}),{link:"http://eudock.jules.it"}); 
+   dock_A.addIcon(new Array({euImage:{image:"iconsEuDock/cube.png"}}),{link:"http://eudock.jules.it"});
+   
+   var dock_B = new euDock();   
+   dock_B.setObjectAlign('tableAlign',euUP,16,euHORIZONTAL);   
+   dock_B.setBar({left:{euImage:{image:"barImages/dockBg-l.png"}},horizontal:{euImage:{image:"barImages/dockBg-c-o.gif"}},right:{euImage:{image:"barImages/dockBg-r.png"}}});   
+   dock_B.setIconsOffset(0);
+   dock_B.addIcon(new Array({euImage:{image:"iconsEuDock/cube.png"}}),{link:"http://eudock.jules.it"});
+   dock_B.addIcon(new Array({euImage:{image:"iconsEuDock/cube.png"}}),{link:"http://eudock.jules.it"});
+   dock_B.addIcon(new Array({euImage:{image:"iconsEuDock/cube.png"}}),{link:"http://eudock.jules.it"});
+   dock_B.addIcon(new Array({euImage:{image:"iconsEuDock/cube.png"}}),{link:"http://eudock.jules.it"}); 
+   dock_B.addIcon(new Array({euImage:{image:"iconsEuDock/cube.png"}}),{link:"http://eudock.jules.it"});    
+   dock_B.addIcon(new Array({euImage:{image:"iconsEuDock/cube.png"}}),{link:"http://eudock.jules.it"}); 
+   dock_B.addIcon(new Array({euImage:{image:"iconsEuDock/cube.png"}}),{link:"http://eudock.jules.it"});
+   
+   var dock_C = new euDock();   
+   dock_C.setObjectAlign('tableAlign',euCENTER,0,euHORIZONTAL);   
+   dock_C.setBar({left:{euImage:{image:"barImages/dockBg-l.png"}},horizontal:{euImage:{image:"barImages/dockBg-c-o.gif"}},right:{euImage:{image:"barImages/dockBg-r.png"}}});   
+   dock_C.setIconsOffset(0);
+   dock_C.addIcon(new Array({euImage:{image:"iconsEuDock/cube.png"}}),{link:"http://eudock.jules.it"});
+   dock_C.addIcon(new Array({euImage:{image:"iconsEuDock/cube.png"}}),{link:"http://eudock.jules.it"});
+   dock_C.addIcon(new Array({euImage:{image:"iconsEuDock/cube.png"}}),{link:"http://eudock.jules.it"});
+</script>
+
+
+

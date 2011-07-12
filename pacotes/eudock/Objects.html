@@ -1,0 +1,361 @@
+<html>
+</head>
+<title>euDock 2.0 examples</title>
+<link type="image/x-icon" href="iconsEuDock/euDock.ico" rel="shortcut icon">
+
+<script language="JavaScript1.3" src="js/euDock.2.0.js"></script>
+<script language="JavaScript1.3" src="js/euDock.Image.js"></script>
+<script language="JavaScript1.3" src="js/euDock.Ghost.js"></script>
+<script language="JavaScript1.3" src="js/euDock.Blank.js"></script>
+<script language="JavaScript1.3" src="js/euDock.Label.js"></script>
+
+</head>
+<body>
+<center>
+<table cellpadding=3 style='border:1px solid #8899bb;'>
+<tr><td style="border:1px solid #8899bb;">
+<center><b>euDock 2.0 Objects Tutorial</b></center>
+</td></tr>
+<tr><td style="border:1px solid #8899bb;">
+<center><b>euImage Object:</b></center>
+</td></tr>
+<tr><td style="border:1px solid #8899bb;">
+<br>Add inside your &lt;HEAD&gt;&lt;/HEAD&gt; HTML tag:
+<pre>
+&lt;HEAD&gt;
+   ...
+   &lt;script language="JavaScript1.3" src="js/euDock.Image.js"&gt;&lt;/script&gt;
+   ...
+&lt;/HEAD&gt;
+</pre>
+Object Definition:
+<pre>
+      /*
+       * euImage is the euImage Object inside the "euDock.Image.js" script
+       * the common constructor is:
+       *
+       *    {euImage:{image    : [-(image name)-],
+       *              PngObjIE : [-(NoFadingIE_PNG object)-]}}
+       *
+       *   image    : image name
+       *   PngObjIE : (unnecessary)
+       *            : This parameter is useful if you use a PNG image in Internet
+       *            : Explorer and you are sure that this image will not fade to another.
+       *            : For example the PNG images applied to the dock bar
+       *            : or the PNG images used in icons with only 1 image
+       *            : or the first PNG image in the icons with (fadingType:euFIXED)
+       *            : parameter set.
+       *            : It may be complex but the performances are improved 
+       *            : with PNGs on Internet Explorer
+       *            :
+       *            : euImageNoFadingIE_PNG : is the object used in this case
+       *            :
+       *            : (unnecessary) with gif,jpg,(PNGs without alpha) images 
+       *            :  or with fading images
+       */<b>
+   {euImage : {image    : "iconsEuDock/euDock-red.png",
+               PngObjIE : euImageNoFadingIE_PNG}}</b>
+</pre>
+</td></tr>
+
+<tr><td style="border:1px solid #8899bb;">
+<center><b>euBlank Object:</b></center>
+</td></tr>
+<tr><td style="border:1px solid #8899bb;">
+<br>Add inside your &lt;HEAD&gt;&lt;/HEAD&gt; HTML tag:
+<pre>
+&lt;HEAD&gt;
+   ...
+   &lt;script language="JavaScript1.3" src="js/euDock.Blank.js"&gt;&lt;/script&gt;
+   ...
+&lt;/HEAD&gt;
+</pre>
+Object Definition:
+<pre>
+      /*
+       * euBlank is the euBlank Object inside the "euDock.Blank.js" script
+       * the common constructor is:
+       *
+       *    {euBlank:{width  : [-width-],
+       *              height : [-height-]}}
+       *
+       * width,height : obvious
+       *
+       *    instead to use blank gif images, you can use this
+       *    object to improve performances
+       *    (the browser doesn't consider his hidden dimension)
+       */<b>
+   {euBlank:{width:100,height:100}</b>
+</pre>
+</td></tr>
+
+<tr><td style="border:1px solid #8899bb;">
+<center><b>euGhost Object:</b></center>
+</td></tr>
+<tr><td style="border:1px solid #8899bb;">
+<br>Add inside your &lt;HEAD&gt;&lt;/HEAD&gt; HTML tag:
+<pre>
+&lt;HEAD&gt;
+   ...
+   &lt;script language="JavaScript1.3" src="js/euDock.Image.js"&gt;&lt;/script&gt;
+   &lt;script language="JavaScript1.3" src="js/euDock.Ghost.js"&gt;&lt;/script&gt;
+   ...
+&lt;/HEAD&gt;
+</pre>
+euGhost need euImage object (inside "euDock.Image.js" script) render engine<br><br>
+Object Definition:
+<pre>
+      /*
+       * euGhost is the euGhost Object inside the "euDock.Ghost.js" script
+       * the common constructor is:
+       *
+       *   {euGhost:{
+       *             ghost     : [-Ghost Image Name-],
+       *             eyeball   : [-Eyeball Image Name-],
+       *             eyespot_1 : [-Left  Spot Image Name-],
+       *             eyespot_2 : [-Right Spot Image Name-],
+       *             shadow    : [-Shadow Image Name-],
+       *             shadowPos : {x:[-X Pos-],y:[-Y Pos-]},
+       *             spotCoord1: {x:[-X Pos-],y:[-Y Pos-],rad:[-Radius-]},
+       *             spotCoord2: {x:[-X Pos-],y:[-Y Pos-],rad:[-Radius-]},
+       *             PngObjIE  : [-(NoFadingIE_PNG object)-]
+       *         }}
+       *
+       * ghost , eyeball , eyespot_1 , eyespot_2 , shadow
+       *            : these are the images of the ghost object
+       *
+       * shadowPos  : x and y relative position of the shadow (eyeShadow)
+       *      (shadow and shadowPos are not necessary)
+       *      (if euGhost doesn't fading, the
+       *        eye shadow can be unuseful)
+       *
+       * spotCoord1 : x and y relative position of the center of 
+       * spotCoord2 : left and right eyeball
+       *            : rad is the radius in pixel from the center
+       *
+       * PngObjIE   : euGhost use euImage render Engine and can support
+       *            : this parameter descripted before.
+       *            : (in this page there is an euGhost [not fading] object in the bar)
+       *
+       *   euGhost doesn't completely disappear
+       *   eyeball, shadow and eyespot(1-2) are always visible
+       *   these are euImage objects with:
+       *      (PngObjIE  : euImageNoFadingIE_PNG)
+       *   parameter set.
+       */<b>
+   {euGhost:{
+             ghost     : "ghostImages/ghost_red-1.png",
+             eyeball   : "ghostImages/eyes.png",
+             eyespot_1 : "ghostImages/eye-spot-1.png",
+             eyespot_2 : "ghostImages/eye-spot-2.png",
+             shadow    : "ghostImages/eyes-shadow.png",
+             shadowPos : {x:5,y:10},
+             spotCoord1: {x:36,y:36,rad:13},
+             spotCoord2: {x:72,y:38,rad:7},
+             PngObjIE  : euImageNoFadingIE_PNG
+         }}</b>
+</pre>
+</td></tr>
+
+<tr><td style="border:1px solid #8899bb;">
+<center><b>euLabel Object:</b></center>
+</td></tr>
+<tr><td style="border:1px solid #8899bb;">
+<br>Add inside your &lt;HEAD&gt;&lt;/HEAD&gt; HTML tag:
+<pre>
+&lt;HEAD&gt;
+   ...
+   &lt;script language="JavaScript1.3" src="js/euDock.Label.js"&gt;&lt;/script&gt;
+   ...
+&lt;/HEAD&gt;
+</pre>
+Object Definition:
+<pre>
+      /*
+       * euLabel is the euLabel Object inside the "euDock.Label.js" script
+       * the common constructor is:
+       *
+       *       {euLabel:{
+       *             object :[-The object you want inside the euLabel-],
+       *             txt    :[-Label text-];
+       *             style  :[-CSS Style of the label-],
+       *             anchor :[-Hooking Position-],
+       *             offsetX:[-X Offset-],
+       *             offsetY:[-Y Offset-]}}
+       *
+       * object : can be every euDock object with his parameters (see the examples)
+       * txt    : The text you want inside the label
+       * style  : (unnecessary) CSS style of the label 
+       *        : (the text is inside a SPAN element)
+       * anchor : (euUP,euDOWN,euLEFT,euRIGHT,euCENTER)
+       *        : Align to the middle (TOP,DOWN,LEFT,RIGHT,CENTER) of the Icon
+       * offsetX: X and Y offset from
+       * offsetY: the previous anchor
+       */<b>
+   {euLabel:{
+             object : {euGhost:{	
+                              ghost     : "ghostImages/ghost_purple-1.png",
+                              eyeball   : "ghostImages/eyes.png",
+                              eyespot_1 : "ghostImages/eye-spot-1.png",
+                              eyespot_2 : "ghostImages/eye-spot-2.png",
+                              shadow    : "ghostImages/eyes-shadow.png",
+                              shadowPos : {x:5,y:10},
+                              spotCoord1: {x:36,y:36,rad:13},
+                              spotCoord2: {x:72,y:38,rad:7}
+                    }},
+             txt     : "HI I'M a &lt;b&gt;GHOST&lt;/b&gt;",
+             style   : "border : 1px solid #9Fb6b6;",
+             anchor  : euDOWN,
+             offsetX : 0,
+             offsetY : -120}}</b>
+   
+Another example<b>
+                               
+   {euLabel:{
+             object  : {euImage:{image:"iconsEuDock/euDock-purple.png"}},
+             txt     : "HI I'M a &lt;b&gt;LABEL&lt;/b&gt;&lt;br&gt;I'm the other line";
+             style   : "text-align : center; border : 5px dashed #9Fb6b6;",
+             anchor  : euDOWN,
+             offsetX : 0,
+             offsetY : -120}}</b>
+</pre>
+</td></tr>
+
+<tr><td style="border:1px solid #8899bb;">
+<center>
+<b>euDock 2.0 can be complex to use</b><br>
+<b>(For Developers) I suggest to see all the tutorial sources</b><br>
+</center>
+</td></tr>
+<tr><td style="border:1px solid #8899bb;">
+<center><b>REMEMBER</b><br>Don't forget to put in your page:
+<table cellpadding=5>
+<tr><td style='border:1px solid #8899bb;'>
+<pre><b>&lt;a href='http://eudock.jules.it'&gt;
+&lt;img src='http://eudock.jules.it/littlEuDock.jpg' border=0&gt;&lt;/a&gt;</b></pre>
+</td><td>
+<a href='http://eudock.jules.it'><img src='littlEuDock.jpg' border=0>
+</td></tr>
+</table>
+!!!If you don't like (of course) a personal Macumba!!!
+</center>
+</td></tr>
+</table>
+<a href='index.html'><b>RETURN TO INDEX</b></a>
+</center>
+<a href='http://eudock.jules.it'>
+<img src='littlEuDock.jpg' border=0></a>
+</body>
+</html>
+
+
+
+<script>
+   euEnv.imageBasePath="js/";
+
+   var dock = new euDock();
+   
+   dock.setScreenAlign(euDOWN,0);
+   
+   dock.setAnimation(euMOUSE,0.3);
+   
+   dock.animFading = euRELATIVE;    
+   
+   dock.setBar({
+		left      :{euGhost:{		ghost     : "barImages/bar-dockBg-l.png",
+						 			eyeball   : "barImages/bar-eyes.png",
+						 			eyespot_1 : "barImages/bar-eye-spot.png",
+						 			eyespot_2 : "barImages/bar-eye-spot.png",
+						 			spotCoord1: {x:17,y:16,rad:7},
+						 			spotCoord2: {x:33,y:17,rad:5},
+						 			PngObjIE  : euImageNoFadingIE_PNG
+						 			}},
+        horizontal:{euImage:{image:"barImages/dockBg-c-o.gif"}},
+        right     :{euImage:{image:"barImages/dockBg-r.png"}}
+   	});
+ 
+   dock.setIconsOffset(2);
+   		
+   dock.addIcon(new Array({euImage  : {image:"iconsEuDock/euDock-red.png",
+                                       PngObjIE : euImageNoFadingIE_PNG}}),
+                {link:"http://eudock.jules.it"});
+                
+   dock.addIcon(new Array({euBlank:{width:100,height:100}},
+						  {euImage:{image:"iconsEuDock/euDock-red.png"}}),
+                {link:"http://eudock.jules.it"});
+						  
+   dock.addIcon(new Array({euBlank:{width:100,height:100}},
+						 {euGhost:{	
+							 		ghost     : "ghostImages/ghost_red-1.png",
+						 			eyeball   : "ghostImages/eyes.png",
+						 			eyespot_1 : "ghostImages/eye-spot-1.png",
+						 			eyespot_2 : "ghostImages/eye-spot-2.png",
+						 			shadow    : "ghostImages/eyes-shadow.png",
+						 			shadowPos : {x:5,y:10},
+						 			spotCoord1: {x:36,y:36,rad:13},
+						 			spotCoord2: {x:72,y:38,rad:7}
+						 			}}),
+                {link:"http://eudock.jules.it"});     
+						   						 			           
+   dock.addIcon(new Array({euLabel:{
+								object:{euImage:{image:"iconsEuDock/euDock-purple.png"}},
+								txt   :"&nbsp;&nbsp;HI...&nbsp;I'M&nbsp;a&nbsp;<b>LABEL</b>&nbsp;&nbsp;",
+								style :"background:#eeefff;border-style:solid;border-color:#9Fb6b6;border-width:3px;",
+								anchor:euDOWN,
+								offsetX:0,
+								offsetY:-120}}),   
+                {link:"http://eudock.jules.it"});
+
+   dock.addIcon(new Array({euImage  : {image:"iconsEuDock/euDock-red.png",
+                           PngObjIE : euImageNoFadingIE_PNG}}),
+                {link:"http://eudock.jules.it"});
+                                
+   dock.addIcon(new Array({euImage:{image:"iconsEuDock/euDock-red.png"}},
+                          {euLabel:{
+								object:{euGhost:{	
+							 		ghost     : "ghostImages/ghost_purple-1.png",
+						 			eyeball   : "ghostImages/eyes.png",
+						 			eyespot_1 : "ghostImages/eye-spot-1.png",
+						 			eyespot_2 : "ghostImages/eye-spot-2.png",
+						 			shadow    : "ghostImages/eyes-shadow.png",
+						 			shadowPos : {x:5,y:10},
+						 			spotCoord1: {x:36,y:36,rad:13},
+						 			spotCoord2: {x:72,y:38,rad:7}
+						 			}},
+								txt   :"&nbsp;&nbsp;HI...&nbsp;I'M&nbsp;a&nbsp;<b>GHOST</b>&nbsp;&nbsp;",
+								style :"background:#eeefff;border-style:solid;border-color:#9Fb6b6;border-width:3px;",
+								anchor:euDOWN,
+								offsetX:0,
+								offsetY:-120}}),   
+                {link:"http://eudock.jules.it"});
+                                
+   dock.addIcon(new Array({euImage  : {image:"iconsEuDock/euDock-red.png",
+                           PngObjIE : euImageNoFadingIE_PNG}}),
+                {link:"http://eudock.jules.it"});
+                
+   dock.addIcon(new Array({euImage:{image:"iconsEuDock/euDock-gold.png"}},
+                          {euLabel:{
+								object:{euBlank:{width:100,height:100}},
+								txt   :"&nbsp;&nbsp;HI...&nbsp;I'M&nbsp;a&nbsp;<b>LABEL</b>&nbsp;&nbsp;<br>&nbsp;&nbsp;WITH&nbsp;a&nbsp;<b>blankObject</b>&nbsp;inside&nbsp;&nbsp;",
+								style :"text-align:center;background:#ffff88;border:5px dashed #9Fb6b6;",
+								anchor:euDOWN,
+								offsetX:0,
+								offsetY:-120}}),   
+                {link:"http://eudock.jules.it"});
+
+   dock.addIcon(new Array({euImage  : {image:"iconsEuDock/euDock-red.png",
+                           PngObjIE : euImageNoFadingIE_PNG}}),
+                {link:"http://eudock.jules.it"});
+   dock.addIcon(new Array({euImage  : {image:"iconsEuDock/euDock-red.png",
+                           PngObjIE : euImageNoFadingIE_PNG}}),
+                {link:"http://eudock.jules.it"});
+   dock.addIcon(new Array({euImage  : {image:"iconsEuDock/euDock-red.png",
+                           PngObjIE : euImageNoFadingIE_PNG}}),
+                {link:"http://eudock.jules.it"});
+   dock.addIcon(new Array({euImage  : {image:"iconsEuDock/euDock-red.png",
+                           PngObjIE : euImageNoFadingIE_PNG}}),
+                {link:"http://eudock.jules.it"});
+</script>
+
+
+

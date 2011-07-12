@@ -1,0 +1,152 @@
+<html>
+</head>
+<title>euDock 2.0 examples</title>
+<link type="image/x-icon" href="iconsEuDock/euDock.ico" rel="shortcut icon">
+
+<script language="JavaScript1.3" src="js/euDock.2.0.js"></script>
+<script language="JavaScript1.3" src="js/euDock.Image.js"></script>
+<script language="JavaScript1.3" src="js/euDock.Ghost.js"></script>
+<script language="JavaScript1.3" src="js/euDock.Blank.js"></script>
+<script language="JavaScript1.3" src="js/euDock.Label.js"></script>
+
+</head>
+<body>
+<center>
+<b>
+<a href="javascript:dock.delIcon(pippo);">&nbsp;&nbsp;&nbsp;&nbsp;pippo&nbsp;&nbsp;&nbsp;&nbsp;</a>
+<a href="javascript:dock.delIcon(pluto);">&nbsp;&nbsp;&nbsp;&nbsp;pluto&nbsp;&nbsp;&nbsp;&nbsp;</a>
+<a href="javascript:dock.delIcon(paperino);">&nbsp;&nbsp;&nbsp;&nbsp;paperino&nbsp;&nbsp;&nbsp;&nbsp;</a>
+</b>
+
+<table cellpadding=3 style='border:1px solid #8899bb;'>
+<tr><td style="border:1px solid #8899bb;">
+<center><b>Execute External Functions</b></center>
+</td></tr>
+<tr><td style="border:1px solid #8899bb;">
+
+You can delete Icons (If you want)...<br>
+<center><b>!!!!WOOOOOOOOOOOOOOOOOOOOOOOO!!!<br><br>
+HOW CAN IT IS POSSIBLE?</b></center><br>
+</td></tr>
+<tr><td style="border:1px solid #8899bb;">
+<br>In (for Example) var pippo, I put inside an Icon;
+<pre><b>
+   var pippo = dock.addIcon(new Array({euImage:{image:"iconsEuDock/cube.png"}}),
+                                {link:"http://eudock.jules.it"});
+</b></pre>
+<br>After, with a simple euDock command:
+<pre><b>
+   dock.delIcon(pippo);                
+</b></pre>
+<br>
+I can delete it...
+(Try links on the top of this page)
+</td></tr>
+<tr><td style="border:1px solid #8899bb;">
+<b>SIMPLE, ISN'T IT?</b>
+</td></tr>
+<tr><td style="border:1px solid #8899bb;">
+<center><b>REMEMBER</b><br>Don't forget to put in your page:
+<table cellpadding=5>
+<tr><td style='border:1px solid #8899bb;'>
+<pre><b>&lt;a href='http://eudock.jules.it'&gt;
+&lt;img src='http://eudock.jules.it/littlEuDock.jpg' border=0&gt;&lt;/a&gt;</b></pre>
+</td><td>
+<a href='http://eudock.jules.it'><img src='littlEuDock.jpg' border=0>
+</td></tr>
+</table>
+!!!If you don't like (of course) a personal Macumba!!!
+</center>
+</td></tr>
+</table>
+<a href='index.html'><b>RETURN TO INDEX</b></a>
+</center>
+<a href='http://eudock.jules.it'>
+<img src='littlEuDock.jpg' border=0></a>
+</body>
+</html>
+
+
+
+<script>
+   euEnv.imageBasePath="js/";
+
+   var dock = new euDock();
+   
+   dock.setBar({
+        left      :{euImage:{image:"barImages/dockBg-l.png"}},
+        horizontal:{euImage:{image:"barImages/dockBg-c-o.gif"}},
+        right     :{euImage:{image:"barImages/dockBg-r.png"}}
+   	});
+   
+   dock.setIconsOffset(2);
+
+   
+   dock.addIcon(new Array({euBlank:{width:100,height:100}},
+						 {euGhost:{	
+							 		ghost     : "ghostImages/ghost_red-1.png",
+						 			eyeball   : "ghostImages/eyes.png",
+						 			eyespot_1 : "ghostImages/eye-spot-1.png",
+						 			eyespot_2 : "ghostImages/eye-spot-2.png",
+						 			shadow    : "ghostImages/eyes-shadow.png",
+						 			shadowPos : {x:5,y:10},
+						 			spotCoord1: {x:36,y:36,rad:13},
+						 			spotCoord2: {x:72,y:38,rad:7}
+						 			}}),
+                {link:"http://eudock.jules.it"});   		
+   dock.addIcon(new Array({euImage:{image:"iconsEuDock/cube.png"}}),
+                {link:"http://eudock.jules.it"});
+   dock.addIcon(new Array({euImage:{image:"iconsEuDock/cube.png"}}),
+                {link:"http://eudock.jules.it"});
+   dock.addIcon(new Array({euImage:{image:"iconsEuDock/cube.png"}}),
+                {link:"http://eudock.jules.it"});
+   dock.addIcon(new Array({euImage:{image:"iconsEuDock/euDock-green.png"}}),
+                {link:"http://eudock.jules.it"});
+   var pippo = dock.addIcon(new Array({euImage:{image:"iconsEuDock/euDock-blue.png"}}),
+                {link:"http://eudock.jules.it"});
+   var pluto = dock.addIcon(new Array({euBlank:{width:100,height:100}},
+						 {euGhost:{	
+							 		ghost     : "ghostImages/ghost_red-1.png",
+						 			eyeball   : "ghostImages/eyes.png",
+						 			eyespot_1 : "ghostImages/eye-spot-1.png",
+						 			eyespot_2 : "ghostImages/eye-spot-2.png",
+						 			shadow    : "ghostImages/eyes-shadow.png",
+						 			shadowPos : {x:5,y:10},
+						 			spotCoord1: {x:36,y:36,rad:13},
+						 			spotCoord2: {x:72,y:38,rad:7}
+						 			}}),
+                {link:"http://eudock.jules.it"});  
+   var paperino = dock.addIcon(new Array({euLabel:{
+								object:{euBlank:{width:100,height:100}},
+								txt   :"&nbsp;&nbsp;HI...&nbsp;I'M&nbsp;a&nbsp;<b>LABEL</b>&nbsp;&nbsp;",
+								style :"background:#eeefff;border-style:solid;border-color:#9Fb6b6;border-width:3px;",
+								anchor:euDOWN,
+								offsetX:0,
+								offsetY:-120}},
+						 {euGhost:{	
+							 		ghost     : "ghostImages/ghost_red-1.png",
+						 			eyeball   : "ghostImages/eyes.png",
+						 			eyespot_1 : "ghostImages/eye-spot-1.png",
+						 			eyespot_2 : "ghostImages/eye-spot-2.png",
+						 			shadow    : "ghostImages/eyes-shadow.png",
+						 			shadowPos : {x:5,y:10},
+						 			spotCoord1: {x:36,y:36,rad:13},
+						 			spotCoord2: {x:72,y:38,rad:7}
+						 			}}),
+                {link:"http://eudock.jules.it"});
+   dock.addIcon(new Array({euImage:{image:"iconsEuDock/euDock-purple.png"}}),
+                {link:"http://eudock.jules.it"});
+   dock.addIcon(new Array({euImage:{image:"iconsEuDock/cube.png"}}),
+                {link:"http://eudock.jules.it"});
+   dock.addIcon(new Array({euImage:{image:"iconsEuDock/cube.png"}}),
+                {link:"http://eudock.jules.it"});
+   dock.addIcon(new Array({euImage:{image:"iconsEuDock/cube.png"}}),
+                {link:"http://eudock.jules.it"});
+   dock.addIcon(new Array({euImage:{image:"iconsEuDock/cube.png"}}),
+                {link:"http://eudock.jules.it"});
+   dock.addIcon(new Array({euImage:{image:"iconsEuDock/cube.png"}}),
+                {link:"http://eudock.jules.it"});
+</script>
+
+
+
