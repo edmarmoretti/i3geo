@@ -92,6 +92,8 @@ packer("../pacotes/yui270/build/resize/resize-min.js","../pacotes/yui270/build/r
 packer("../pacotes/cpaint/cpaint2.inc.js","../pacotes/cpaint/cpaint2_compacto.inc.js","Normal");
 packer("../pacotes/balloon-tooltips/htdocs/js/balloon.config.js","../pacotes/balloon-tooltips/htdocs/js/balloon_compacto.config.js","Normal");
 packer("../pacotes/balloon-tooltips/htdocs/js/balloon.js","../pacotes/balloon-tooltips/htdocs/js/balloon_compacto.js","Normal");
+packer("../pacotes/eudock/js/euDock.2.0.js","../pacotes/eudock/js/euDock.2.0_compacto.js","Normal");
+packer("../pacotes/eudock/js/euDock.Image.js","../pacotes/eudock/js/euDock.Image_compacto.js","Normal");
 
 //
 //gera um único js para a inicialização do I3Geo
@@ -120,6 +122,8 @@ $jsfiles = array(
 "../pacotes/yui270/build/resize/resize_compacto.js",
 "../pacotes/balloon-tooltips/htdocs/js/balloon_compacto.config.js",
 "../pacotes/balloon-tooltips/htdocs/js/balloon_compacto.js",
+"../pacotes/eudock/js/euDock.2.0_compacto.js",
+"../pacotes/eudock/js/euDock.Image_compacto.js",
 "compactados/classe_i3geo_compacto.js",
 "compactados/classe_util_compacto.js",
 "compactados/dicionario_compacto.js",

@@ -2373,7 +2373,7 @@ i3GEO.util = {
 			viewportwidth = document.getElementsByTagName('body')[0].clientWidth,
 			viewportheight = document.getElementsByTagName('body')[0].clientHeight;
 		}
-		viewportwidth = viewportwidth- i3GEO.util.getScrollerWidth();
+		viewportwidth = viewportwidth - i3GEO.util.getScrollerWidth();
 		return [viewportwidth,viewportheight];
 	},
 	/*

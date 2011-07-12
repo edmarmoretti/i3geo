@@ -36,6 +36,8 @@
 	"../pacotes/yui270/build/resize/resize-min.js",
 	"../pacotes/balloon-tooltips/htdocs/js/balloon.config.js",
 	"../pacotes/balloon-tooltips/htdocs/js/balloon.js",
+	"../pacotes/eudock/js/euDock.2.0.js",
+    "../pacotes/eudock/js/euDock.Image.js",	
 	"classe_i3geo.js",
 	"classe_util.js",
 	"dicionario.js",

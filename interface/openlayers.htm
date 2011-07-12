@@ -126,7 +126,7 @@
 <!-- aqui são mostradas imagens obtidas do metadata mensagem que pode existir em cada layer -->
 <tr style="border:0px"><td colspan=3 style=background-color:black ><input style="border:0px none; background-color:black;color:white;font-size:12pt;" type="text" size="1" id="i3geo_letreiro" ></td></tr>
 <!-- esse elemento é preenchido automaticamente pelo i3Geo, conforme definido em ms_configura.php -->
-<tr style="border:0px"><td colspan=3 style=background-color:black;color:white id="emailInstituicao"></td></tr>
+<tr style="border:0px"><td colspan=3 style=background-color:black;color:white id="emailInstituicao">@</td></tr>
 
 </table>
 <center>
@@ -226,6 +226,11 @@ i3GEO.cria();
 */
 i3GEO.configura.mapaRefDisplay = "none";
 
+i3GEO.barraDeBotoes.TIPO = "olhodepeixe";
+i3GEO.barraDeBotoes.OFFSET = -220;
+//barra de botoes normal. descomente para usar
+/*
+i3GEO.barraDeBotoes.TIPO = "yui";
 i3GEO.barraDeBotoes.AUTOALTURA = true;
 i3GEO.barraDeBotoes.ATIVAMENUCONTEXTO = false;
 i3GEO.barraDeBotoes.PERMITEFECHAR = false;
@@ -237,7 +242,7 @@ i3GEO.Interface.BARRABOTOESLEFT = 0;
 i3GEO.Interface.BARRABOTOESTOP = 2;
 i3GEO.Interface.BARRADEZOOMTOP = 10;
 i3GEO.Interface.BARRADEZOOMLEFT = 40;
-
+*/
 i3GEO.idioma.IDSELETOR = "seletorIdiomas";
 i3GEO.Interface.ATIVAMENUCONTEXTO = false;
 i3GEO.arvoreDeTemas.TIPOBOTAO = "radio";

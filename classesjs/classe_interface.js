@@ -359,7 +359,11 @@ i3GEO.Interface = {
 	*/
 	ativaBotoes: function(){
 		if(typeof(console) !== 'undefined'){console.info("i3GEO.Interface.ativaBotoes()");}
-		i3GEO.Interface[i3GEO.Interface.ATUAL].ativaBotoes();
+		if(i3GEO.barraDeBotoes.TIPO === "olhodepeixe"){
+			i3GEO.barraDeBotoes.inicializaBarra();
+		}
+		else
+		{i3GEO.Interface[i3GEO.Interface.ATUAL].ativaBotoes();}
 	},
 	/*
 	Classe: i3GEO.Interface.padrao
@@ -508,7 +512,7 @@ i3GEO.Interface = {
 			i3GEO.arvoreDeCamadas.cria("",i3GEO.arvoreDeCamadas.CAMADAS,configura.sid,configura.locaplic);
 
 			i3GEO.ajuda.ativaLetreiro(parametros.mensagens);
-			i3GEO.Interface.padrao.ativaBotoes();
+			i3GEO.Interface.ativaBotoes();
 			i3GEO.idioma.mostraSeletor();
 			if (configura.mapaRefDisplay !== "none"){
 				if (iu.pegaCookie("i3GEO.configura.mapaRefDisplay"))
@@ -537,12 +541,9 @@ i3GEO.Interface = {
 			{barraDeBotoes.inicializaBarra("barraDeBotoes1","i3geo_barra1",true,x1,y1);}
 			if ($i("barraDeBotoes2") || barraDeBotoes.AUTO === true)
 			{barraDeBotoes.inicializaBarra("barraDeBotoes2","i3geo_barra2",false,x2,y2);}
+			
 			//ativa as funções dos botões
 			barraDeBotoes.ativaBotoes();
-			if (document.getElementById("botao3d")){
-				if (i3GEO.configura.map3d === "")
-				{document.getElementById("botao3d").style.display="none";}
-			}
 			if(i3GEO.Interface.ATIVAMENUCONTEXTO)
 			{i3GEO.Interface.padrao.ativaMenuContexto();}
 			if(i3GEO.configura.visual !== "default")
@@ -839,14 +840,16 @@ i3GEO.Interface = {
 					i3GEO.Interface.openlayers.OLpanel.addControls([i3GEO.Interface.openlayers.OLpan,i3GEO.Interface.openlayers.OLzoom]);
 					i3geoOL.addControl(i3GEO.Interface.openlayers.OLpanel);
 				}
-				openlayers.ativaBotoes();
+				
 				if (i3GEO.configura.mapaRefDisplay !== "none"){
 					if (i3GEO.util.pegaCookie("i3GEO.configura.mapaRefDisplay"))
 					{i3GEO.configura.mapaRefDisplay = i3GEO.util.pegaCookie("i3GEO.configura.mapaRefDisplay");}
 					if (i3GEO.configura.mapaRefDisplay === "block")
 					{i3GEO.maparef.inicia();}
 				}
-
+				//é necessário ativar nesse momento pois a barra de botoes já foi criada
+				if(i3GEO.Interface.TABLET === false)
+				{i3GEO.Interface.openlayers.OLpanel.activateControl(i3GEO.Interface.openlayers.OLpan);}
 			};
 			i3GEO.arvoreDeCamadas.ATIVATEMA = "i3GEO.Interface.openlayers.ligaDesliga(this);i3GEO.eventos.executaEventos(i3GEO.eventos.ATUALIZAARVORECAMADAS);";
 			i3GEO.util.multiStep([
@@ -857,7 +860,8 @@ i3GEO.Interface = {
 					i3GEO.idioma.mostraSeletor,
 					i3GEO.gadgets.mostraEscalaNumerica,
 					i3GEO.util.arvore,
-					i3GEO.gadgets.mostraMenuLista
+					i3GEO.gadgets.mostraMenuLista,
+					i3GEO.Interface.ativaBotoes				
 				],[
 					null,
 					null,
@@ -866,6 +870,7 @@ i3GEO.Interface = {
 					null,
 					null,
 					["<b>"+$trad("p13")+"</b>","listaPropriedades",i3GEO.configura.listaDePropriedadesDoMapa],
+					null,
 					null
 				],
 				function(){}
@@ -1488,7 +1493,7 @@ i3GEO.Interface = {
 				i3GEO.Interface.googlemaps.registraEventos();
 
 				i3GEO.gadgets.mostraInserirKml();
-				i3GEO.Interface.googlemaps.ativaBotoes();
+				i3GEO.Interface.ativaBotoes();
 				i3GEO.eventos.ativa($i(i3GEO.Interface.IDMAPA));
 				i3GEO.coordenadas.mostraCoordenadas();
 				i3GEO.gadgets.mostraEscalaNumerica();
