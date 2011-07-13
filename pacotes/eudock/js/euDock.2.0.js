@@ -497,6 +497,7 @@ var euOPAQUE      = 16;
 				var venusWidth;
 				var venusHeight;
 				var overIcon;
+				var temp;
 				if (this.position==euUP || this.position==euDOWN || this.position==euHORIZONTAL){
 					venusWidth = this.getVenusWidth();
 					for (var i in this.iconsArray) if (this.iconsArray[i].id)
@@ -507,6 +508,12 @@ var euOPAQUE      = 16;
 								mouseRelX  = this.iconsArray[i].posX+border;
 								border=0;
 							}
+							try{
+								temp = $i(this.iconsArray[i].elementsArray[0].id);
+								if(temp)
+								{i3GEO.barraDeBotoes.mostraJanela(temp,this.iconsArray[i].dica);}
+							}
+							catch(e){}
 						}
 					for (var i in this.iconsArray) if (this.iconsArray[i].id){
 						mediana = this.iconsArray[i].posX+this.iconsArray[i].getWidth()/2;
@@ -580,22 +587,26 @@ var euOPAQUE      = 16;
 			};
 			
 			this.kernelMouseOut = function(){
+				//i3GEO.barraDeBotoes.mostraJanela("","");
 				var ret=false;
-				for (var i in this.iconsArray) if (this.iconsArray[i].id)
+				for (var i in this.iconsArray){
+					if (this.iconsArray[i].id)
 					ret|=this.iconsArray[i].setAllFrameTo(0);	
-				if (ret)
-					this.updateDims();				
+					if (ret){
+						this.updateDims();
+					}
+				}
 				return ret;	
 			};			
 			
 			this.mouseOut = function(){
 				this.isInside=false;
-				euEnv.exeThreadWhiteLoop=5;				
+				euEnv.exeThreadWhiteLoop=5;
 			};
 			
 			this.mouseOver = function(){
 				this.isInside=true;
-				euEnv.exeThreadWhiteLoop=5;				
+				euEnv.exeThreadWhiteLoop=5;
 			};			
 			
 			this.mouseMove = function(x,y){
@@ -912,7 +923,7 @@ var euOPAQUE      = 16;
 						}else
 							document.location.href=this.link;
 					else if (this.mouseInsideClick)
-						this.mouseInsideClick(x,y,this.id);						
+						this.mouseInsideClick(x,y,this.id,this.getAbsolutePosX(),this.getAbsolutePosY());						
 				}
 			};
 			

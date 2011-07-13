@@ -72,6 +72,20 @@ i3GEO.barraDeBotoes = {
 	*/	
 	OFFSET: -205,
 	/*
+	Propriedade: MAXBOTOES
+
+	Número de botões iniciais (válido apenas para o tipo "olhodepeixe")
+	
+	Se for 0, todos os botões serão mostrados
+
+	Tipo:
+	{numeric}
+
+	Default:
+	{10}
+	*/	
+	MAXBOTOES: 10,
+	/*
 	Propriedade: AJUDA
 
 	Mostra um texto de ajuda colado ao ícone da ferramenta
@@ -86,7 +100,7 @@ i3GEO.barraDeBotoes = {
 	/*
 	Propriedade: ORIENTACAO
 
-	Orientação vertical ou horizontal da barra
+	Orientação vertical ou horizontal da barra (não se aplica ao tipo "olhodepeixe"
 
 	Tipo:
 	{string}
@@ -297,7 +311,7 @@ i3GEO.barraDeBotoes = {
 	}
 
 	Tipo:
-	{JSON}
+	{obj}
 	*/
 	INCLUIBOTAO: {
 		zoomli: true,
@@ -308,13 +322,13 @@ i3GEO.barraDeBotoes = {
 		mede: true,
 		area: true,
 		imprimir: true,
-		reinicia: true,
-		exten: true,
-		referencia: true,
-		inserexy: true,
-		textofid: true,
 		selecao: true,
 		google: true,
+		referencia: true,
+		exten: true,
+		inserexy: true,
+		textofid: true,
+		reinicia: true,
 		buscafotos: true,
 		wiki: true,
 		metar: true,
@@ -323,6 +337,67 @@ i3GEO.barraDeBotoes = {
 		inseregrafico: true,
 		v3d: true
 	},
+	/*
+	Propriedade: ICONEBOTAO
+	
+	Ícones utilizados em cada um dos botões da barra.
+	
+	Esses ícones são utilizados apenas se i3GEO.barraDeBotoes.TIPO = "olhodepeixe". Para cada elemento existente em
+	i3GEO.barraDeBotoes.INCLUIBOTAO deve existir um elemento nesse objeto. A chave de cada elemento é a mesma do objeto INCLUIBOTAO.
+	O endereço da imagem será complementado pelo i3geo, adicionando no início da string o valor da variável i3GEO.configura.locaplic
+	
+	Default:
+	
+	ICONEBOTAO: {
+	
+		zoomli: "/imagens/gisicons/eudock/zoom-region.png",
+		
+		pan: "/imagens/gisicons/eudock/pan.png",
+		
+		zoomtot: "/imagens/gisicons/eudock/zoom-extent.png",
+		
+		identifica: "/imagens/gisicons/eudock/identify.png",
+		
+		identificaBalao: "/imagens/gisicons/eudock/tips.png",
+		
+		mede: "/imagens/gisicons/eudock/length-measure.png",
+		
+		area: "/imagens/gisicons/eudock/area-measure.png",
+		
+		imprimir: "/imagens/gisicons/eudock/print.png",
+		
+		reinicia: "/imagens/gisicons/eudock/redraw.png",
+		
+		exten: "/imagens/gisicons/eudock/map-extent-info.png",
+		
+		referencia: "/imagens/gisicons/eudock/map-reference.png",
+		
+		inserexy: "/imagens/gisicons/eudock/point-create.png",
+		
+		textofid: "/imagens/gisicons/eudock/text-add.png",
+		
+		selecao: "/imagens/gisicons/eudock/select.png",
+		
+		google: "/imagens/gisicons/eudock/google-map.png",
+		
+		buscafotos: "/imagens/gisicons/eudock/fotos.png",
+		
+		wiki: "/imagens/gisicons/eudock/wiki.png",
+		
+		metar: "/imagens/gisicons/eudock/metar.png",
+		
+		lentei: "/imagens/gisicons/eudock/lente.png",
+		
+		confluence: "/imagens/gisicons/eudock/confluence.png",
+		
+		inseregrafico: "/imagens/gisicons/eudock/grafico.png",
+		
+		v3d: "/imagens/gisicons/eudock/v3d.png"
+	}	
+	
+	Type:
+	{obj}
+	*/
 	ICONEBOTAO: {
 		zoomli: "/imagens/gisicons/eudock/zoom-region.png",
 		pan: "/imagens/gisicons/eudock/pan.png",
@@ -585,39 +660,79 @@ i3GEO.barraDeBotoes = {
 		if(padrao === "")
 		{this.ativaIcone("");}
 	},
-	execBotao: function(id,x,y){
-		var l,b,d,temp,n = 38;
+	/*
+	Function: execBotao
+	
+	Com base no código de um botão (iddiv), obtém a função armazenada em i3GEO.barraDeBotoes.LISTABOTOES e executa.
+	
+	Parametros:
+	
+	id {string} - identificador do botão, conforme definido no elemento iddiv de i3GEO.barraDeBotoes.LISTABOTOES
+	
+	x {numeric} - (opcional) posição em pixels da tela onde foi feito o clique do mouse
+	
+	y {numeric} - (opcional) posição em pixels da tela onde foi feito o clique do mouse
+	*/
+	execBotao: function(id,x,y,posX,posY){
+		var temp,
+			n = 38,
+			botao = i3GEO.barraDeBotoes.defBotao(id);
 		i3GEO.barraDeBotoes.BOTAOCLICADO = id;
+		if(botao === false)
+		{return;}
+		try{
+			if(botao.tipo === "dinamico" && x){
+				i3GEO.util.criaPin("i3geoMarcaIcone",i3GEO.configura.locaplic+"/imagens/gisicons/eudock/sobe1.png","10px","10px");
+				temp = $i("i3geoMarcaIcone");
+				temp.style.display = "block"
+				temp.style.top = posY + 43;//(parseInt(y / n,10) * n) + 40;
+				temp.style.left = posX + 18;//(parseInt(x / n,10) * n) + 6;
+			}
+			if(botao.funcaoonclick){
+				botao.funcaoonclick.call();
+			}
+		}
+		catch(e){
+			if(typeof(console) !== 'undefined'){console.error("Erro no botao "+id+" "+e);}
+		}
+	},
+	/*
+	Function: defBotao
+	
+	Obtém as definições de um botão conforme o seu código (iddiv)
+	
+	Retorno:
+	
+	{objeto} - ver i3GEO.barraDeBotoes.LISTABOTOES
+	*/
+	defBotao: function(iddiv){
+		var l,b,d,temp;
 		l = i3GEO.barraDeBotoes.LISTABOTOES;
 		b = l.length-1;
 		if (b >= 0){
 			do{
 				temp = l[b].iddiv;
-				if (temp === id){
-					try{
-						if(l[b].tipo === "dinamico"){
-							i3GEO.util.criaPin("i3geoMarcaIcone",i3GEO.configura.locaplic+"/imagens/gisicons/eudock/sobe1.png","10px","10px");
-							temp = $i("i3geoMarcaIcone");
-							temp.style.display = "block"
-							temp.style.top = (parseInt(y / n,10) * n) + 40;
-							temp.style.left = (parseInt(x / n,10) * n) + 25;
-						}
-						if(l[b].funcaoonclick){
-							l[b].funcaoonclick.call();
-							return;
-						}
-					}
-					catch(e){
-						if(typeof(console) !== 'undefined'){console.error("Erro no botao "+id+" "+e);}
-					}
+				if (l[b].iddiv === iddiv){
+					return l[b];
 				}
 			}
 			while (b--);
 		}
-	},
+		return false;
+	},	
+	/*
+	Function: inicializaBarraOP
+	
+	Inicializa a barra de botões quando for do tipo "olhodepeixe"
+	
+	O objeto euEnv armazena todas as características da barra 
+	 
+	*/
 	inicializaBarraOP: function(){
+		i3GEO.barraDeBotoes.AJUDA = false;
 		euEnv.imageBasePath=i3GEO.configura.locaplic+"/pacotes/eudock/";
-		var i,
+		var botao,
+			i,
 			dock = new euDock(),
 			temp = "",
 			chaves = i3GEO.util.listaChaves(i3GEO.barraDeBotoes.INCLUIBOTAO),
@@ -628,17 +743,61 @@ i3GEO.barraDeBotoes = {
 			horizontal:{euImage:{image:i3GEO.configura.locaplic+"/pacotes/eudock/barImages/dockBg-c-o.gif"}},
 			right:{euImage:{image:i3GEO.configura.locaplic+"/pacotes/eudock/barImages/dockBg-r.png"}}
 		});   
-		dock.setIconsOffset(5); 
+		dock.setIconsOffset(7); 
+		if(i3GEO.barraDeBotoes.MAXBOTOES > 0)
+		{n = i3GEO.barraDeBotoes.MAXBOTOES;}
 		for(i=0;i<n;i+=1){
-			if(i3GEO.barraDeBotoes.INCLUIBOTAO[chaves[i]] === true){
-				dock.addIcon(new Array({euImage:{image:i3GEO.configura.locaplic+i3GEO.barraDeBotoes.ICONEBOTAO[chaves[i]]}}),
-					{mouseInsideClick : function(x,y,id){
-						//alert(euEnv.euDockArray[id].idBotao)
-						i3GEO.barraDeBotoes.execBotao(euEnv.euDockArray[id].idBotao,x,y);
-					},idBotao:chaves[i]});
+			if(i3GEO.barraDeBotoes.INCLUIBOTAO[chaves[i]] && i3GEO.barraDeBotoes.INCLUIBOTAO[chaves[i]] === true){
+				botao = i3GEO.barraDeBotoes.defBotao(chaves[i]);
+				if(botao === false)
+				{temp = "";}
+				else{
+					if(botao.dica)
+					{temp = botao.dica;}
+					else
+					{temp = "";}
+				}
+				dock.addIcon(new Array({euImage:{image:i3GEO.configura.locaplic+i3GEO.barraDeBotoes.ICONEBOTAO[chaves[i]]}}),{
+					mouseInsideClick : function(x,y,id,posX,posY){
+						i3GEO.barraDeBotoes.execBotao(euEnv.euDockArray[id].idBotao,x,y,posX,posY );
+					},
+					idBotao:chaves[i],
+					dica: temp
+				});
 			}
 		}
-
+		$i(euEnv.euDockArray.euDock_0.bar.elementsArray.left.id).onclick = function(){
+			i3GEO.ajuda.abreJanela();
+		};
+		$i(euEnv.euDockArray.euDock_0.bar.elementsArray.right.id).onclick = function(){
+			var temp = "",
+				chaves = i3GEO.util.listaChaves(i3GEO.barraDeBotoes.INCLUIBOTAO),
+				n = chaves.length,
+				nb = euEnv.euDockArray.euDock_0.iconsArray.length,
+				i;
+			if(i3GEO.barraDeBotoes.MAXBOTOES > 0 && n > nb){
+				for(i=nb;i<n;i+=1){
+					if(i3GEO.barraDeBotoes.INCLUIBOTAO[chaves[i]] && i3GEO.barraDeBotoes.INCLUIBOTAO[chaves[i]] === true){
+						botao = i3GEO.barraDeBotoes.defBotao(chaves[i]);
+						if(botao === false)
+						{temp = "";}
+						else{
+							if(botao.dica)
+							{temp = botao.dica;}
+							else
+							{temp = "";}
+						}
+						dock.addIcon(new Array({euImage:{image:i3GEO.configura.locaplic+i3GEO.barraDeBotoes.ICONEBOTAO[chaves[i]]}}),{
+							mouseInsideClick : function(x,y,id,posX){
+								i3GEO.barraDeBotoes.execBotao(euEnv.euDockArray[id].idBotao,x,y,posX);
+							},
+							idBotao:chaves[i],
+							dica: temp
+						});
+					}
+				}			
+			}
+		};
 	},
 	/*
 	Function: inicializaBarra
@@ -1016,6 +1175,18 @@ i3GEO.barraDeBotoes = {
 	*/
 	recria: function(id){
 		if(typeof(console) !== 'undefined'){console.info("i3GEO.barraDeBotoes.recria()");}
+		if(i3GEO.barraDeBotoes.TIPO === "olhodepeixe"){
+			euEnv.euDockArray = [];
+			//euEnv.Kost = [];
+			euEnv.Kost.num = 0;
+			if($i("euDock_0_bar")){
+				document.body.removeChild($i("euDock_0_bar").parentNode);
+			}
+			i3GEO.barraDeBotoes.inicializaBarra();
+			$i("i3geoMarcaIcone").style.display = "none";
+			return;
+		}
+		
 		var n,temp,novoel,barraZoom,x,y,
 			BARRAS = i3GEO.barraDeBotoes.BARRAS, 
 			iu = i3GEO.util;
@@ -1070,8 +1241,11 @@ i3GEO.barraDeBotoes = {
 		}
 	},
 	mostraJanela: function(objeto,mensagem,evt){
-		if(mensagem === "")
-		{try{clearTimeout(timeMostraAjudaBotoes);}catch(e){};return;}
+		if(mensagem === ""){
+			try{clearTimeout(timeMostraAjudaBotoes);}catch(e){}
+			try{clearTimeout(timeAjudaBotoes);}catch(e){}
+			return;
+		}
 		var divmensagem = $i("divMensagemBarraDeBotoes"),balloonAjuda,
 			pos = YAHOO.util.Dom.getXY(objeto);
 		if(this.AJUDA === false || $i("janelaMenTexto")){
@@ -1123,12 +1297,14 @@ i3GEO.barraDeBotoes = {
 				balloonAjuda.images = i3GEO.configura.locaplic+'/pacotes/balloon-tooltips/htdocs/images/GBubblec';
 				mensagem = "<table style='z-index:20000' ><tr><td style='text-align:left;'><span style='text-align:right;cursor:pointer;color:blue;' onclick='javascript:i3GEO.util.insereCookie(\"botoesAjuda\",\"nao\");i3GEO.barraDeBotoes.AJUDA = false;'>fecha</span><br><div style='vertical-align:middle;text-align:left;width:250px;border: 0px solid black;border-left:1px;' id='divMensagemBarraDeBotoesCorpo'>"+mensagem+"</div></td></tr></table>";
 				try{clearTimeout(timeAjudaBotoes);}catch(e){}
-				
 				timeMostraAjudaBotoes = setTimeout(function(){
 					balloonAjuda.cleanup();
 					balloonIsVisible = false;
 					//alert(mensagem);
-					balloonAjuda.showTooltip(objeto,mensagem,null,null,null,pos[0]+12,pos[1]);
+					if(i3GEO.barraDeBotoes.TIPO === "olhodepeixe")
+					{balloonAjuda.showTooltip(objeto,mensagem,null,null,null,pos[0],pos[1]-40);}
+					else
+					{balloonAjuda.showTooltip(objeto,mensagem,null,null,null,pos[0]+12,pos[1]);}
 					try{clearTimeout(timeMostraAjudaBotoes);}catch(e){}
 					timeAjudaBotoes = setTimeout(function(){balloonAjuda.cleanup();},4000);
 				},4000);
