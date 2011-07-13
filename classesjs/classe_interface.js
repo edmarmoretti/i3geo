@@ -850,6 +850,7 @@ i3GEO.Interface = {
 				//é necessário ativar nesse momento pois a barra de botoes já foi criada
 				if(i3GEO.Interface.TABLET === false)
 				{i3GEO.Interface.openlayers.OLpanel.activateControl(i3GEO.Interface.openlayers.OLpan);}
+				i3GEO.Interface.ativaBotoes();
 			};
 			i3GEO.arvoreDeCamadas.ATIVATEMA = "i3GEO.Interface.openlayers.ligaDesliga(this);i3GEO.eventos.executaEventos(i3GEO.eventos.ATUALIZAARVORECAMADAS);";
 			i3GEO.util.multiStep([
@@ -860,8 +861,7 @@ i3GEO.Interface = {
 					i3GEO.idioma.mostraSeletor,
 					i3GEO.gadgets.mostraEscalaNumerica,
 					i3GEO.util.arvore,
-					i3GEO.gadgets.mostraMenuLista,
-					i3GEO.Interface.ativaBotoes				
+					i3GEO.gadgets.mostraMenuLista
 				],[
 					null,
 					null,
@@ -870,7 +870,6 @@ i3GEO.Interface = {
 					null,
 					null,
 					["<b>"+$trad("p13")+"</b>","listaPropriedades",i3GEO.configura.listaDePropriedadesDoMapa],
-					null,
 					null
 				],
 				function(){}

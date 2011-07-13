@@ -684,9 +684,11 @@ i3GEO.barraDeBotoes = {
 			if(botao.tipo === "dinamico" && x){
 				i3GEO.util.criaPin("i3geoMarcaIcone",i3GEO.configura.locaplic+"/imagens/gisicons/eudock/sobe1.png","10px","10px");
 				temp = $i("i3geoMarcaIcone");
-				temp.style.display = "block"
-				temp.style.top = posY + 43;//(parseInt(y / n,10) * n) + 40;
-				temp.style.left = posX + 18;//(parseInt(x / n,10) * n) + 6;
+				if(temp){
+					temp.style.display = "block";
+					temp.style.top = posY + 43;//(parseInt(y / n,10) * n) + 40;
+					temp.style.left = posX + 18;//(parseInt(x / n,10) * n) + 6;
+				}
 			}
 			if(botao.funcaoonclick){
 				botao.funcaoonclick.call();
@@ -775,6 +777,8 @@ i3GEO.barraDeBotoes = {
 				n = chaves.length,
 				nb = euEnv.euDockArray.euDock_0.iconsArray.length,
 				i;
+			if($i("i3geoMarcaIcone"))
+			{$i("i3geoMarcaIcone").style.display = "none";}
 			if(i3GEO.barraDeBotoes.MAXBOTOES > 0 && n > nb){
 				for(i=nb;i<n;i+=1){
 					if(i3GEO.barraDeBotoes.INCLUIBOTAO[chaves[i]] && i3GEO.barraDeBotoes.INCLUIBOTAO[chaves[i]] === true){
@@ -1183,7 +1187,8 @@ i3GEO.barraDeBotoes = {
 				document.body.removeChild($i("euDock_0_bar").parentNode);
 			}
 			i3GEO.barraDeBotoes.inicializaBarra();
-			$i("i3geoMarcaIcone").style.display = "none";
+			if($i("i3geoMarcaIcone"))
+			{$i("i3geoMarcaIcone").style.display = "none";}
 			return;
 		}
 		

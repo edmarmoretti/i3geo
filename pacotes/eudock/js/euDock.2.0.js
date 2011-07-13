@@ -10,7 +10,7 @@
  *
  *                   Mario Zaizar to suggest and help me for Pointer icon patch and Target function
  *                  
- *                   Jérémie 'ahFeel' BORDIER to suggest and help me for DeleteIcon feature
+ *                   J?r?mie 'ahFeel' BORDIER to suggest and help me for DeleteIcon feature
  *
  *
  *
@@ -99,7 +99,9 @@ var euOPAQUE      = 16;
 		    var ret = euObj.offsetLeft;
 		    while ((euObj = euObj.offsetParent)!=null)
 		        ret += euObj.offsetLeft;
-		    return ret;
+		    
+			
+			return ret;
 		};
 		
 		function isEuInside(euObj,x,y){
@@ -273,10 +275,19 @@ var euOPAQUE      = 16;
 			};
 			
 			this.setObjectCoord = function(){
-				if (this.objectAlign==euDOWN)
+				var tempx,tempy;
+				if (this.objectAlign==euDOWN){
+					tempx = euIdObjLeft(this.idObjectHook) + (this.idObjectHook.offsetWidth/2);
+					tempy = euIdObjTop(this.idObjectHook)  + this.idObjectHook.offsetHeight + this.offset
+					if(navm){
+						tempx = ((i3GEO.barraDeBotoes.MAXBOTOES * 30) / 2);
+						tempy = euIdObjTop(this.idObjectHook)  + this.idObjectHook.offsetHeight + this.offset + 38;
+					}
 					this.setCenterPos(
-						euIdObjLeft(this.idObjectHook) + (this.idObjectHook.offsetWidth/2),
-						euIdObjTop(this.idObjectHook)  + this.idObjectHook.offsetHeight + this.offset);
+						tempx,
+						tempy
+					);
+				}
 				else if (this.objectAlign==euUP)
 					this.setCenterPos(
 						euIdObjLeft(this.idObjectHook) + (this.idObjectHook.offsetWidth/2),
@@ -1137,3 +1148,4 @@ document.onclick      = on_MouseClick;
 euDimensioni();
 offsEut();
 euThread();
+

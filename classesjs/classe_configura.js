@@ -639,8 +639,17 @@ i3GEO.configura = {
 			tipo:"dinamico",
 			dica:$trad("d3"),
 			funcaoonclick:function(){
-				if(i3GEO.Interface.ATUAL === "googlemaps")
-				{alert("Pressione a tecla CTRL junto com o botão esquerdo do mouse");return;}
+				if(i3GEO.Interface.ATUAL === "googlemaps"){
+					//alert("Pressione a tecla CTRL junto com o botão esquerdo do mouse");
+					i3GEO.janela.mensagemSimples("Pressione a tecla CTRL junto com o botão esquerdo do mouse e arraste para definir a área de zoom","?");
+					g_tipoacao='pan';
+					g_operacao='navega';
+					i3GEO.barraDeBotoes.ativaIcone("pan");
+					i3GEO.barraDeBotoes.BOTAOPADRAO = "pan";
+					i3GeoMap.setOptions({draggable:true});
+					i3GEO.util.mudaCursor(i3GEO.configura.cursores,"pan",i3GEO.Interface.IDMAPA,i3GEO.configura.locaplic);
+					return;
+				}
 				var temp;
 				temp = "zoom";
 				if(i3GEO.Interface.ATIVAMENUCONTEXTO && i3GEO.Interface.ATUAL === "padrao")
