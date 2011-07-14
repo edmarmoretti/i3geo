@@ -1635,48 +1635,27 @@ i3GEO.Interface = {
 					{return divimg[0].parentNode.parentNode.parentNode;}
 				}
 			}
-			/*
-			try{
-				i3GeoMap.overlayMapTypes.forEach(
-					//não use ===
-					function(elemento, number){
-						var i = false,
-							divmapa = $i("googlemapsdiv"),
-							divlayer,
-							divs,
-							j,
-							ndivs;
-						if(elemento.name == nomeLayer){
-							divlayer = divmapa.firstChild;
-							divlayer = divlayer.firstChild;
-							divlayer = divlayer.firstChild;
-							divlayer = divlayer.firstChild;
-							divlayer = divlayer.getElementsByTagName("img");
-							if(divlayer.length > 0){
-								if(divlayer[0].src.search("&layer="+nomeLayer) > 0)
-								{return divlayer.parentNode.parentNode.parentNode.parentNode;}
-							}
-							//temp = i3GEO.Interface.googlemaps.retornaIndiceLayer(nomeLayer)
-							//i = divlayer.childNodes[temp];
-							
-						}
-					}
-				);
-				return false;
-			}
-			catch(e){
-				return false;
-			}
-			*/
 		},
 		ligaDesliga:function(obj){
 			var indice = i3GEO.Interface.googlemaps.retornaIndiceLayer(obj.value),
 				temp = function(){i3GEO.mapa.legendaHTML.atualiza();},
 				desligar = "",
-				ligar = "";
+				ligar = "",
+				n,
+				i,
+				lista;
 			if(obj.checked && !indice){
 				ligar = obj.value;
-				i3GEO.Interface.googlemaps.insereLayer(obj.value,0);
+				//verifica qual o indice correto da camada
+				lista = i3GEO.arvoreDeCamadas.listaLigadosDesligados()[0];
+				n = lista.length;
+				indice = 0;
+				for(i=0;i<n;i++){
+					if(lista[i] == obj.value){
+						indice = n - 1 - i;
+					}
+				}
+				i3GEO.Interface.googlemaps.insereLayer(obj.value,indice);
 				i3GEO.arvoreDeCamadas.alteraPropCamadas("status","2",obj.value);
 			}
 			else{
