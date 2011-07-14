@@ -992,6 +992,17 @@ function refazerLayer()
 		$layeroriginal->set("status",MS_DELETE);
 		$nl = ms_newLayerObj($mapatema,$layernovo);
 		$nl->set("name",$codigomap);
+		$nl->setmetadata("nomeoriginal","");
+		$nl->setmetadata("cache","");
+		$numclasses = $nl->numclasses;
+		if ($numclasses > 0)
+		{
+			for ($i=0; $i < $numclasses; $i++)
+			{
+				$classe = $nl->getClass($i);
+				$classe->set("title","");
+			}
+		}
 		$mapatema->save($arqtema);
 		removeCabecalho($arqtema);
 		return array("data"=>"ok");		
