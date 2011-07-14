@@ -272,7 +272,7 @@ function editar(tipo,id)
 					core_montaEditor("gravaDados('tema','"+id+"')")
 					$i("editor_bd").innerHTML = montaDivTema(dados)
 					core_carregando("desativa");
-					core_comboMapfiles("comboTemaIni","Ecodigo_tema",dados.codigo_tema,"",id)
+					core_comboMapfiles("comboTemaIni","Ecodigo_tema",dados.codigo_tema,"",true)
 				}
 				core_carregando("desativa");
 			}

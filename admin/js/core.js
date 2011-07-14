@@ -433,12 +433,16 @@ id - id do combo que será criado
 marcar - valor que será marcado como selecionado
 
 funcao - string com o nome da função que será executada no evento onchange
+
+recarrega {booblean} - força recarregar o combo de mapfiles
 */
-function core_comboMapfiles(onde,id,marcar,funcao)
+function core_comboMapfiles(onde,id,marcar,funcao,recarrega)
 {
 	if(arguments.length == 3)
 	{var funcao = "";}
-	if($mapfiles == "")
+	if(!recarrega)
+	{recarrega = false;}
+	if($mapfiles == "" || recarrega === true)
 	{
 		core_pegaMapfiles("core_comboMapfiles('"+onde+"','"+id+"','"+marcar+"','"+funcao+"')")
 	}
