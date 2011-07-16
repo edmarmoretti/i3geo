@@ -58,7 +58,6 @@ Arquivo:
 i3geo/classesphp/mapa_openlayers.php
 
 */
-//error_reporting(E_ALL);
 if (!function_exists('ms_GetVersion'))
 {
 	$s = PHP_SHLIB_SUFFIX;
@@ -72,6 +71,7 @@ if(@$_GET["g_sid"])
 else
 {ilegal();}
 session_start();
+
 if(@$_SESSION["fingerprint"])
 {
 	$f = explode(",",$_SESSION["fingerprint"]);
@@ -83,7 +83,7 @@ else
 //
 $map_file = $_SESSION["map_file"];
 $postgis_mapa = $_SESSION["postgis_mapa"];
-if($_GET["tipolayer"] == "fundo")
+if(isset($_GET["tipolayer"]) && $_GET["tipolayer"] == "fundo")
 {$map_file = str_replace(".map","fundo.map",$map_file);}
 if(isset($_GET["BBOX"]))
 {
@@ -233,7 +233,6 @@ if (!function_exists('imagepng'))
 	if (!function_exists('imagepng'))
 	{$_GET["TIPOIMAGEM"] = "";}
 }
-
 if(trim($_GET["TIPOIMAGEM"]) != "" && trim($_GET["TIPOIMAGEM"]) != "nenhum")
 {
 	$nomer = ($img->imagepath)."filtroimgtemp".nomeRandomico();
@@ -256,8 +255,10 @@ else{
 	imagealphablending($img, false);
 	imagesavealpha($img, true);
 	ob_clean();
+
 	echo header("Content-type: image/png \n\n");
 	imagepng($img);
+		
 }
 function salvaCacheImagem($bbox,$layer,$map,$w,$h){
 	global $img,$map_size;

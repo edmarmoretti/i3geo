@@ -1534,6 +1534,7 @@ i3GEO.Interface = {
 		},
 		criaImageMap: function(nomeLayer){
 			var i3GEOTileO,s;
+		
 			s = "i3GEOTileO = new google.maps.ImageMapType({ "+
 					"getTileUrl: function(coord, zoom) {" +
 					"	var url = '" + i3GEO.configura.locaplic +"/classesphp/mapa_googlemaps.php?g_sid=" + i3GEO.configura.sid +
@@ -1544,6 +1545,20 @@ i3GEO.Interface = {
 					"isPng: true," +
 					"name: '" + nomeLayer + "'" +
 				"});";
+			
+/*
+			s = "i3GEOTileO = new google.maps.ImageMapType({ "+
+					"getTileUrl: function(coord, zoom) {" +
+					"	var url = '" + i3GEO.configura.locaplic +"/classesphp/mapa_googlemaps.php?g_sid=" + i3GEO.configura.sid +
+					"&WIDTH=512&HEIGHT=512&BBOX=' + i3GEO.Interface.googlemaps.bbox() + '"+
+					"&Z=' + zoom + '&X=' + (coord.x) + '&Y=' + (coord.y) + '&layer=" + nomeLayer + i3GEO.Interface.googlemaps.PARAMETROSLAYER + '&r='+Math.random()+"';" +
+					"	return url+'&nd='+i3GEO.Interface.googlemaps.posfixo; " +
+					"}, "+
+					"tileSize: new google.maps.Size(512,512)," +
+					"isPng: true," +
+					"name: '" + nomeLayer + "'" +
+				"});";
+*/
 			eval(s);
 			return i3GEOTileO;
 		},

@@ -88,31 +88,33 @@ $postgis_mapa = $_SESSION["postgis_mapa"];
 //converte a requisição do tile em coordenadas geo
 //http://wiki.openstreetmap.org/wiki/Slippy_map_tilenames#tile_numbers_to_lon.2Flat_2
 //
-$x = $_GET["X"];
-$y = $_GET["Y"];
-$n = pow(2, $_GET["Z"]);
-$lon1 = $x / $n * 360.0 - 180.0;
-$lat2 = rad2deg(atan(sinh(pi() * (1 - 2 * $y / $n))));
-$x++;
-$y++;
-$lon2 = $x / $n * 360.0 - 180.0;
-$lat1 = rad2deg(atan(sinh(pi() * (1 - 2 * $y / $n))));
+	$x = $_GET["X"];
+	$y = $_GET["Y"];
+	$n = pow(2, $_GET["Z"]);
+	$lon1 = $x / $n * 360.0 - 180.0;
+	$lat2 = rad2deg(atan(sinh(pi() * (1 - 2 * $y / $n))));
+	$x++;
+	$y++;
+	$lon2 = $x / $n * 360.0 - 180.0;
+	$lat1 = rad2deg(atan(sinh(pi() * (1 - 2 * $y / $n))));
 
 $projInObj = ms_newprojectionobj("proj=latlong");
 $projOutObj = ms_newprojectionobj("proj=merc,a=6378137,b=6378137,lat_ts=0.0,lon_0=0.0,x_0=0.0,y_0=0,k=1.0,units=m");
+
 $poPoint1 = ms_newpointobj();
 $poPoint1->setXY($lon1, $lat1);
 $poPoint1->project($projInObj, $projOutObj);
 $poPoint2 = ms_newpointobj();
 $poPoint2->setXY($lon2, $lat2);
 $poPoint2->project($projInObj, $projOutObj);
-
 $_GET["BBOX"] = $poPoint1->x." ".$poPoint1->y." ".$poPoint2->x." ".$poPoint2->y;
-
 $_GET["mapext"] = str_replace(","," ",$_GET["BBOX"]);
-$_GET["map_size"] = "256 256";
-$_GET["WIDTH"] = "256";
-$_GET["HEIGHT"] = "256";
+
+if(!isset($_GET["WIDTH"]))
+{$_GET["WIDTH"] = "256";}
+if(!isset($_GET["HEIGHT"]))
+{$_GET["HEIGHT"] = "256";}
+$_GET["map_size"] = $_GET["WIDTH"]." ".$_GET["HEIGHT"];
 
 $mapa = ms_newMapObj($map_file);
 /*

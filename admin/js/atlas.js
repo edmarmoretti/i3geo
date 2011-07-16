@@ -136,6 +136,10 @@ function montaArvore(dados)
    	adicionaNosAtlas(dados)
    	tree.draw();
 }
+function testarMapfile(codigoMap)
+{
+	window.open("../../testamapfile.php?map="+codigoMap+".map")
+}
 function adicionaNosTemas(no,dados,redesenha)
 {
 	if(!redesenha)
@@ -150,6 +154,7 @@ function adicionaNosTemas(no,dados,redesenha)
 		var conteudo = "&nbsp;<img style=\"position:relative;cursor:pointer;top:0px\" onclick=\"sobeDesce('sobe','tema','"+dados[i].id_tema+"')\" title=sobe src=\"../imagens/34.png\" />"
 		conteudo += "&nbsp;<img style=\"position:relative;cursor:pointer;top:0px\" onclick=\"sobeDesce('desce','tema','"+dados[i].id_tema+"')\" title=desce src=\"../imagens/33.png\" />"
 		conteudo += "&nbsp;<img style=\"position:relative;cursor:pointer;top:0px\" onclick=\"excluir('tema','"+dados[i].id_tema+"')\" title=excluir width='10px' heigth='10px' src=\"../imagens/01.png\" />"
+		conteudo += "&nbsp;<img style=\"position:relative;cursor:pointer;top:0px\" onclick=\"testarMapfile('"+dados[i].codigo_tema+"')\" title=testar width='10px' heigth='10px' src=\"../imagens/41.png\" />"
 		conteudo += "&nbsp;<img style=\"position:relative;cursor:pointer;top:0px\" onclick=\"editar('tema','"+dados[i].id_tema+"')\" title=editar width='10px' heigth='10px' src=\"../imagens/06.png\" />&nbsp;<span>"+dados[i].codigo_tema+"</span>"
 		var d = {html:conteudo,id_tema:dados[i].id_tema,tipo:"tema"}
 		var tempNode = new YAHOO.widget.HTMLNode(d, no, false,true);

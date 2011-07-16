@@ -1198,7 +1198,7 @@ function listaClasses()
 	for($i=0;$i<$nclasses;++$i)
 	{
 		$classe = $layer->getclass($i);
-		$dados[] = array("indice"=>$i,"nome"=>($classe->name));
+		$dados[] = array("indice"=>$i,"nome"=>(mb_convert_encoding($classe->name,"UTF-8","ISO-8859-1")));
 	}
 	return $dados;
 }
@@ -1314,10 +1314,10 @@ function pegaMetadados()
 	$dados["type"] = $layer->type;
 	$dados["connectiontype"] = $layer->connectiontype;
 	$dados["itens"] = $layer->getmetadata("itens");
-	$dados["itensdesc"] = $layer->getmetadata("itensdesc");
+	$dados["itensdesc"] = mb_convert_encoding($layer->getmetadata("itensdesc"),"UTF-8","ISO-8859-1"); //$layer->getmetadata("itensdesc");
 	$dados["itenslink"] = $layer->getmetadata("itenslink");
 	$dados["tip"] = $layer->getmetadata("tip");
-	$dados["tema"] = $layer->getmetadata("tema");
+	$dados["tema"] = mb_convert_encoding($layer->getmetadata("tema"),"UTF-8","ISO-8859-1");//$layer->getmetadata("tema");
 	$dados["classe"] = $layer->getmetadata("classe");
 	$dados["escala"] = $layer->getmetadata("escala");
 	$dados["download"] = $layer->getmetadata("download");
@@ -1325,7 +1325,7 @@ function pegaMetadados()
 	$dados["extensao"] = $layer->getmetadata("extensao");
 	$dados["identifica"] = $layer->getmetadata("identifica");
 	$dados["transitioneffect"] = $layer->getmetadata("transitioneffect");
-	$dados["mensagem"] = $layer->getmetadata("mensagem");
+	$dados["mensagem"] = mb_convert_encoding($layer->getmetadata("mensagem"),"UTF-8","ISO-8859-1");//$layer->getmetadata("mensagem");
 	$dados["classesitem"] = $layer->getmetadata("classesitem");
 	$dados["classesnome"] = $layer->getmetadata("classesnome");
 	$dados["classescor"] = $layer->getmetadata("classescor");

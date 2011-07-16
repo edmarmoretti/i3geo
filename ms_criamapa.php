@@ -155,6 +155,7 @@ Include dos arquivos PHP.
 
 Inclui os programas php com funções utilizadas pelo ms_criamapa.php
 */
+
 include_once ($caminho."classesphp/pega_variaveis.php");
 include_once ($caminho."classesphp/funcoes_gerais.php");
 if(!isset($dir_tmp))
@@ -465,8 +466,9 @@ Redireciona para o HTML definido em $interface, abrindo o mapa
 */
 function abreInterface(){
 	global $interface,$caminho,$tempo;
+
 	$nomeInterface = explode(".",basename($interface));
-	$_SESSION["interface"] = $nomeInterface[0];
+	//$_SESSION["interface"] = $nomeInterface[0];
 	if (count(explode(".php",$interface)) > 1)
 	{
 		if(file_exists($caminho."interface/".$interface))
