@@ -512,7 +512,8 @@ function novoGrupo(id_menu)
 			tempNode.isLeaf = false;
 			tempNode.setDynamicLoad(loadSubgruposData, temaIconMode, id_menu);
 			tree.draw();
-			core_carregando("desativa");			
+			core_carregando("desativa");
+			editar('grupo',dados.id_n1);
 		},
   		failure:core_handleFailure,
   		argument: { foo:"foo", bar:"bar" }
@@ -546,6 +547,7 @@ function novoSubGrupo(id_menu,id_n1)
 			tempNode.setDynamicLoad(loadSubgruposData, temaIconMode, id_menu);
 			tree.draw();
 			core_carregando("desativa");
+			editar("subgrupo",dados.id_n2);
 		},
   		failure:core_handleFailure,
   		argument: { foo:"foo", bar:"bar" }
@@ -578,6 +580,7 @@ function novoTema(id_menu,id_n2)
 			tempNode.isLeaf = true;
 			tree.draw();
 			core_carregando("desativa");
+			editar('tema',dados.id_n3);
 		},
   		failure:core_handleFailure,
   		argument: { foo:"foo", bar:"bar" }

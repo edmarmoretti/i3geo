@@ -586,6 +586,7 @@ function adicionaNovoLayer(codigoMap)
 					tempNode.setDynamicLoad(loadLayerData, iconMode);
 					tempNode.isLeaf = false;
 					tree.draw();
+					editorGeral(codigoMap,dados.layers[0]);
 					core_carregando("desativa");
 				}
 			}

@@ -1,8 +1,6 @@
 MAP
-
-
-SYMBOLSET ../symbols/simbolos.sym
-FONTSET   "../symbols/fontes.txt"
+  FONTSET "../symbols/fontes.txt"
+  SYMBOLSET "../symbols/simbolos.sym"
   LAYER
     CONNECTION "http://mapas.mma.gov.br/i3geo/ogc.php?tema=bioma"
     CONNECTIONTYPE WMS
@@ -29,7 +27,8 @@ FONTSET   "../symbols/fontes.txt"
     UNITS METERS
     CLASS
       NAME "testevvvvv"
-      KEYIMAGE ""
     END
   END
+
 END
+

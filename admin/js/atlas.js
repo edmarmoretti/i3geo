@@ -54,7 +54,9 @@ function ativaBotaoAdicionaAtlas(sUrl,idBotao)
   			{
   				try
   				{
-  					adicionaNosAtlas(YAHOO.lang.JSON.parse(o.responseText),true);
+  					var j = YAHOO.lang.JSON.parse(o.responseText);
+					adicionaNosAtlas(j,true);
+					editar("atlas",j[j.length-1].id_atlas);
   					core_carregando("desativa");
   				}
   				catch(e){core_handleFailure(e,o.responseText);}
@@ -151,11 +153,17 @@ function adicionaNosTemas(no,dados,redesenha)
 	}
 	for (var i=0, j=dados.length; i<j; i++)
 	{
+		if(dados[i].nome_tema == "null" || !dados[i].nome_tema || dados[i].codigo_tema == "")
+		{dados[i].nome_tema = "";}
 		var conteudo = "&nbsp;<img style=\"position:relative;cursor:pointer;top:0px\" onclick=\"sobeDesce('sobe','tema','"+dados[i].id_tema+"')\" title=sobe src=\"../imagens/34.png\" />"
 		conteudo += "&nbsp;<img style=\"position:relative;cursor:pointer;top:0px\" onclick=\"sobeDesce('desce','tema','"+dados[i].id_tema+"')\" title=desce src=\"../imagens/33.png\" />"
 		conteudo += "&nbsp;<img style=\"position:relative;cursor:pointer;top:0px\" onclick=\"excluir('tema','"+dados[i].id_tema+"')\" title=excluir width='10px' heigth='10px' src=\"../imagens/01.png\" />"
 		conteudo += "&nbsp;<img style=\"position:relative;cursor:pointer;top:0px\" onclick=\"testarMapfile('"+dados[i].codigo_tema+"')\" title=testar width='10px' heigth='10px' src=\"../imagens/41.png\" />"
-		conteudo += "&nbsp;<img style=\"position:relative;cursor:pointer;top:0px\" onclick=\"editar('tema','"+dados[i].id_tema+"')\" title=editar width='10px' heigth='10px' src=\"../imagens/06.png\" />&nbsp;<span>"+dados[i].codigo_tema+"</span>"
+		conteudo += "&nbsp;<img style=\"position:relative;cursor:pointer;top:0px\" onclick=\"editar('tema','"+dados[i].id_tema+"')\" title=editar width='10px' heigth='10px' src=\"../imagens/06.png\" />"
+		if(dados[i].codigo_tema != "")
+		{conteudo += "&nbsp;<span>"+dados[i].codigo_tema+" - </span><span style=color:gray >"+dados[i].nome_tema+"</span>"}
+		else
+		{conteudo += "&nbsp;<span style=color:red >Edite para definir o tema!!!</span>"}
 		var d = {html:conteudo,id_tema:dados[i].id_tema,tipo:"tema"}
 		var tempNode = new YAHOO.widget.HTMLNode(d, no, false,true);
 		tempNode.isLeaf = true;
@@ -213,7 +221,11 @@ function adicionaNosPranchas(no,dados,redesenha)
 		var conteudo = "&nbsp;<img style=\"position:relative;cursor:pointer;top:0px\" onclick=\"sobeDesce('sobe','prancha','"+dados[i].id_prancha+"')\" title=sobe src=\"../imagens/34.png\" />"
 		conteudo += "&nbsp;<img style=\"position:relative;cursor:pointer;top:0px\" onclick=\"sobeDesce('desce','prancha','"+dados[i].id_prancha+"')\" title=desce src=\"../imagens/33.png\" />"
 		conteudo += "&nbsp;<img style=\"position:relative;cursor:pointer;top:0px\" onclick=\"excluir('prancha','"+dados[i].id_prancha+"')\" title=excluir width='10px' heigth='10px' src=\"../imagens/01.png\" />"
-		conteudo += "&nbsp;<img style=\"position:relative;cursor:pointer;top:0px\" onclick=\"editar('prancha','"+dados[i].id_prancha+"')\" title=editar width='10px' heigth='10px' src=\"../imagens/06.png\" />&nbsp;<span>"+dados[i].titulo_prancha+"</span>"
+		conteudo += "&nbsp;<img style=\"position:relative;cursor:pointer;top:0px\" onclick=\"editar('prancha','"+dados[i].id_prancha+"')\" title=editar width='10px' heigth='10px' src=\"../imagens/06.png\" />"
+		if(dados[i].titulo_prancha != "")
+		{conteudo += "&nbsp;<span>"+dados[i].titulo_prancha+"</span>"}
+		else
+		{conteudo += "&nbsp;<span style=color:red >Edite para definir a prancha!!!</span>"}
 		var d = {html:conteudo,id_prancha:dados[i].id_prancha,tipo:"prancha"}
 		var tempNode = new YAHOO.widget.HTMLNode(d, no, false,true);
 		//tempNode.isLeaf = true;
@@ -229,7 +241,11 @@ function adicionaNosAtlas(dados,redesenha)
 		var conteudo = "&nbsp;<img style=\"position:relative;cursor:pointer;top:0px\" onclick=\"sobeDesce('sobe','atlas','"+dados[i].id_atlas+"')\" title=sobe src=\"../imagens/34.png\" />"
 		conteudo += "&nbsp;<img style=\"position:relative;cursor:pointer;top:0px\" onclick=\"sobeDesce('desce','atlas','"+dados[i].id_atlas+"')\" title=desce src=\"../imagens/33.png\" />"
 		conteudo += "&nbsp;<img style=\"position:relative;cursor:pointer;top:2px\" onclick=\"excluir('atlas','"+dados[i].id_atlas+"')\" title=excluir src=\"../imagens/01.png\" />"
-		conteudo += "&nbsp;<img style=\"position:relative;cursor:pointer;top:2px\" onclick=\"editar('atlas','"+dados[i].id_atlas+"')\" title=editar src=\"../imagens/06.png\" /><b>&nbsp;<span>"+dados[i].titulo_atlas+"</span>"
+		conteudo += "&nbsp;<img style=\"position:relative;cursor:pointer;top:2px\" onclick=\"editar('atlas','"+dados[i].id_atlas+"')\" title=editar src=\"../imagens/06.png\" /><b>"
+		if(dados[i].titulo_atlas != "")
+		{conteudo += "&nbsp;<span>"+dados[i].titulo_atlas+"</span>"}
+		else
+		{conteudo += "&nbsp;<span style=color:red >Edite para definir o Atlas!!!</span>"}
 		var d = {html:conteudo,id_atlas:dados[i].id_atlas,tipo:"atlas"};
 		var tempNode = new YAHOO.widget.HTMLNode(d, root, false,true);
 	}
@@ -445,8 +461,9 @@ function adicionarTema(id)
 	{
     	success: function(oResponse)
 		{
-			var dados = YAHOO.lang.JSON.parse(oResponse.responseText)
+			var dados = YAHOO.lang.JSON.parse(oResponse.responseText);
 			adicionaNosTemas(no,dados,true)
+			editar('tema',dados[dados.length-1].id_tema);
 		},
   		failure:core_handleFailure,
   		argument: { foo:"foo", bar:"bar" }
@@ -471,6 +488,7 @@ function adicionarPrancha(id)
 		{
 			var dados = YAHOO.lang.JSON.parse(oResponse.responseText)
 			adicionaNosPranchas(no,dados,true)
+			editar('prancha',dados[dados.length-1].id_prancha);
 		},
   		failure:core_handleFailure,
   		argument: { foo:"foo", bar:"bar" }
@@ -530,18 +548,21 @@ function gravaDados(tipo,id)
   					{
   						var no = tree.getNodeByProperty("id_atlas",id)
   						no.getContentEl().getElementsByTagName("span")[0].innerHTML = document.getElementById("Etitulo_atlas").value
+						no.getContentEl().getElementsByTagName("span")[0].style.color = "";
   						no.html = no.getContentEl().innerHTML;
   					}
   					if(tipo == "prancha")
   					{
   						var no = tree.getNodeByProperty("id_prancha",id)
   						no.getContentEl().getElementsByTagName("span")[0].innerHTML = document.getElementById("Etitulo_prancha").value
+						no.getContentEl().getElementsByTagName("span")[0].style.color = "";
   						no.html = no.getContentEl().innerHTML;
   					}
   					if(tipo == "tema")
   					{
   						var no = tree.getNodeByProperty("id_tema",id)
   						no.getContentEl().getElementsByTagName("span")[0].innerHTML = document.getElementById("Ecodigo_tema").value
+						no.getContentEl().getElementsByTagName("span")[0].style.color = "";
   						no.html = no.getContentEl().innerHTML;
   					}
   					core_carregando("desativa");
