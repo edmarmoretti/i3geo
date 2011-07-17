@@ -104,7 +104,7 @@ i3geo/admin/html/editormapfile.html
 
 <script>
 YAHOO.util.Event.addListener(window, "load", initMenu);
-var letras = "A B C D E F G H I J K L M N O P Q R S T U V X Y Z _ 1 2 3 4 5 6 7 8 9".split(" "),
+var letras = "Todos A B C D E F G H I J K L M N O P Q R S T U V X Y Z _ 1 2 3 4 5 6 7 8 9".split(" "),
 	nletras = letras.length,
 	i,
 	ins = "<p>";
@@ -115,6 +115,8 @@ document.getElementById("letras").innerHTML = ins+ "  <input onclick='filtraLetr
 
 function filtraLetra(letra){
 	document.getElementById("tabela").innerHTML = "<span style=color:red >Aguarde...</span>";
+	if(letra == "Todos")
+	{letra = "";}
 	core_pegaMapfiles("montaArvore()",letra)
 }
 

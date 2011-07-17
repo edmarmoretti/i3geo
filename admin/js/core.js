@@ -1192,39 +1192,33 @@ function core_montaEditor(funcaoOK,w,h,funcaoClose)
 		var w = "400px";
 		var h = w;
 	}
-	if(funcaoOK != "")
-	{
-		function on_editorCheckBoxChange(p_oEvent)
-		{
-			var ins = "";
-			if(p_oEvent.newValue.get("value") == "OK")
-			{
-				eval(funcaoOK);
-			}
-			else
-			{
-				YAHOO.example.container.panelEditor.destroy();
-				YAHOO.example.container.panelEditor = null;
-			}
-		};
-	}
 	if(!YAHOO.example.container.panelEditor)
 	{
 		var novoel = document.createElement("div");
 		novoel.id =  "janela_editor";
 		var ins = '<div class="hd">Editor</div>';
 		ins += "<div class='bd' style='height:354px;overflow:auto'>";
-		ins += "<div id='okcancel_checkbox'></div><div id='editor_bd'></div>";
+		ins += "<div id='okcancel_checkbox'></div>";
+		ins += "<div id='editor_bd'></div>";
 		novoel.innerHTML = ins;
 		document.body.appendChild(novoel);
 		if(funcaoOK != "")
 		{
-			var editorBotoes = new YAHOO.widget.ButtonGroup({id:"okcancel_checkbox_id", name:  "okcancel_checkbox_id", container:  "okcancel_checkbox" });
-			editorBotoes.addButtons([
-            	{ label: "Salva", value: "OK", checked: false},
-            	{ label: "Cancela", value: "CANCEL", checked: false }
-        	]);
-			editorBotoes.on("checkedButtonChange", on_editorCheckBoxChange);	
+			var lb = $i("okcancel_checkbox");
+			lb.innerHTML = "<input id=okcancel_checkboxOK type='buttom' value='Salva' /><input id=okcancel_checkboxCANCEL type='buttom' value='Cancela' />";
+			new YAHOO.widget.Button(
+				"okcancel_checkboxOK",
+				{onclick:{fn: function(){
+					eval(funcaoOK);
+				}}}
+			);
+			new YAHOO.widget.Button(
+				"okcancel_checkboxCANCEL",
+				{onclick:{fn: function(){
+					YAHOO.example.container.panelEditor.destroy();
+					YAHOO.example.container.panelEditor = null;
+				}}}
+			);
 		}
 		YAHOO.example.container.panelEditor = new YAHOO.widget.Panel("janela_editor", { fixedcenter:true,close:true,width:w, overflow:"auto",modal: true,visible:false,constraintoviewport:true } );
 		YAHOO.example.container.panelEditor.render();
