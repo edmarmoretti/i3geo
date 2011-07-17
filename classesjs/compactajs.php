@@ -258,22 +258,30 @@ function packer($src,$out,$tipo="None")
 function salvatudojs($jsfiles,$buffer,$final,$tipo)
 {
 	//junta todos os js em um unico
+	
 	foreach ($jsfiles as $f)
 	{
 		echo $f;
+/*
 		$abre = fopen($f, "r");
 		while (!feof($abre))
 		{
-			$linha = fgets($abre);
-			//$linha = str_replace("\n","",$linha);
+			$linha = fgets($abre,FILE_IGNORE_NEW_LINES);
+			if($linha != "\r\n")
 			$buffer .= $linha;
 		}
 		fclose($abre);
-		//$buffer .= "\n";
+*/
+		$linhas = file($f);
+		foreach($linhas as $linha){
+			$buffer .= $linha;
+		}
 	}
 	$abre = fopen($final, "wt");
 	$escreve = fwrite ($abre,$buffer);
 	$fecha = fclose ($abre);
+	
+
 	chmod($final,0777);
 	//gzip
 	$abre = fopen($final, "r");

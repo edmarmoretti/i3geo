@@ -239,7 +239,7 @@ function montaNosRaiz(redesenha)
 		conteudo += "&nbsp;<img style=\"position:relative;cursor:pointer;top:2px\" onclick=\"clonarMapfile('"+$mapfiles[i].codigo+"')\" title='cria uma cópia' src=\"../imagens/clonar.png\" />"
 		conteudo += "&nbsp;<img style=\"position:relative;cursor:pointer;top:2px\" onclick=\"limparCacheMapfile('"+$mapfiles[i].codigo+"')\" title='limpa o chache de imagens se houver' src=\"../imagens/limparcache.png\" />"
 		conteudo += "&nbsp;<img style=\"position:relative;cursor:pointer;top:2px\" onclick=\"editorTemaMapfile('"+$mapfiles[i].codigo+"')\" title='editar tema associado' src=\"../imagens/06.png\" />"
-		conteudo += "&nbsp;<img style=\"position:relative;cursor:pointer;top:2px\" onclick=\"testarMapfile('"+$mapfiles[i].codigo+"')\" title='testar!' src=\"../imagens/41.png\" /><b>&nbsp;<span>"+$mapfiles[i].codigo+" <span style=color:gray >"+$mapfiles[i].nome+"</span></span>"
+		conteudo += "&nbsp;<img style=\"position:relative;cursor:pointer;top:2px\" onclick=\"testarMapfile('"+$mapfiles[i].codigo+"')\" title='testar!' src=\"../imagens/41.png\" /><a href='../php/editortexto.php?mapfile="+$mapfiles[i].codigo+"' target=_self ><b>&nbsp;<span>"+$mapfiles[i].codigo+" <span style=color:gray >"+$mapfiles[i].nome+"</span></span></a>"
 		if($mapfiles[i].imagem != "" && $i("mostraMini").checked == true){
 			conteudo += "</b><br><img src='../../temas/miniaturas/"+$mapfiles[i].imagem+"'/>";
 		}
