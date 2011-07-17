@@ -12,7 +12,17 @@
 	</style>
 </head>
 <body>
+<a href="http://mapserver.org/mapfile/index.html#mapfile" target="_new" >Documentação do Mapserver</a><br><br>
+<form action="editortexto.php?mapfile=<?php echo $_GET["mapfile"];?>" method=post > 
+
+<input type=submit value="Salvar"/><input type=button value="Testar" onclick="testar()" /> (Salve antes de testar)<br><br>
+Edite:<br>
 <?php
+//evita erros removendo caracteres PHP
+if(isset($_POST["texto"])){
+	$gravarTexto = $_POST["texto"];
+	$_POST["texto"] = "";
+}
 include_once("admin.php");
 error_reporting(0);
 if(verificaEditores($editores) == "nao")
@@ -21,10 +31,19 @@ $mapfile = "../../temas/".$_GET["mapfile"].".map";
 if(!file_exists($mapfile))
 {echo "Arquivo $mapfile não existe.";exit;}
 if($_POST["tipo"] == "gravar"){
-
-exit;
+	$fp = fopen($mapfile,"w");
+	fwrite($fp,$gravarTexto);
+	fclose($fp);
 }
+
 echo "<TEXTAREA name=texto cols=100 rows=20 >";
 echo file_get_contents($mapfile);
 echo "</TEXTAREA>";
+echo "<input type=hidden name=tipo value=gravar />";
 ?>
+</form>
+<script>
+function testar(){
+	window.open("../../testamapfile.php?map=<?php echo $_GET["mapfile"]; ?>");
+}
+</script>

@@ -80,7 +80,7 @@ MAP
       END
     END
     CLASS
-      NAME "AMAZONIA"
+      NAME "AMAZÔNIA"
       EXPRESSION ('[ID]'eq'1.00')
       STYLE
         ANGLE 360
@@ -90,7 +90,7 @@ MAP
       END
     END
     CLASS
-      NAME "MATA ATLANTICA"
+      NAME "MATA ATLÂNTICA"
       EXPRESSION ('[ID]'eq'4.00')
       STYLE
         ANGLE 360
