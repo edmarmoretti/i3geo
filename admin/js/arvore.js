@@ -544,7 +544,7 @@ function novoSubGrupo(id_menu,id_n1)
 			var d = {idmenu:id_menu,html:conteudo,id_n2:dados.id_n2,tipo:"subgrupo"}
 			var tempNode = new YAHOO.widget.HTMLNode(d, no, false,true);
 			tempNode.isLeaf = false;
-			tempNode.setDynamicLoad(loadSubgruposData, temaIconMode, id_menu);
+			tempNode.setDynamicLoad(loadTemasData, temaIconMode, id_menu);
 			tree.draw();
 			core_carregando("desativa");
 			editar("subgrupo",dados.id_n2);

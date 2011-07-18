@@ -673,8 +673,10 @@ function classesAuto(codigoMap,codigoLayer)
   					{
 						var dados = YAHOO.lang.JSON.parse(o.responseText)				
 						var nos = tree.getNodesByProperty("classes",codigoMap+"_"+codigoLayer)
-						for (var i=0, j=nos.length; i<j; i++)
-						{tree.removeNode(nos[i],false)}
+						if(nos){
+							for (var i=0, j=nos.length; i<j; i++)
+							{tree.removeNode(nos[i],false)}
+						}
 						var no = tree.getNodeByProperty("etiquetaClasses",codigoMap+"_"+codigoLayer)
 						montaParametrosTemas(no,dados)
   						core_carregando("desativa");
@@ -1630,7 +1632,11 @@ function montaEditorEstilo(dados)
   		{
   			try
   			{
-				$i("listaSimbolos").innerHTML = o.responseText;
+				var re = new RegExp("ms_tmp", "g");
+				var t = o.responseText.replace(re,"../../../ms_tmp/");
+				var re = new RegExp("\\\\", "g");
+				var t = t.replace(re,"");
+				$i("listaSimbolos").innerHTML = t;
   			}
   			catch(e){}
   		},

@@ -95,8 +95,13 @@ switch (strtoupper($funcao))
 		include_once("$locaplic/classesphp/classe_legenda.php");
 		if (strtoupper(substr(PHP_OS, 0, 3) == 'WIN'))
 		{$map_file = $locaplic."/aplicmap/geral1windows.map";}
-		else
-		{$map_file = $locaplic."/aplicmap/geral1.map";}
+		else{
+			if(file_exists('/var/www/i3geo/aplicmap/geral1debian.map')){
+				$map_file = ms_newMapObj("aplicmap/geral1debian.map");
+			}
+			else
+			{$map_file = ms_newMapObj("aplicmap/geral1.map");}		
+		}
 		$m = new Legenda($map_file,$locaplic);
 		retornaJSON($m->listaSimbolos($tipo,$dir_tmp,"",$onclick));
 		exit;

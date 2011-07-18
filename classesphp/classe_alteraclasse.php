@@ -396,14 +396,10 @@ $itemNome - item que será usado para definir os nomes das classes (por default s
 		$nomes = array();
 		foreach($temp as $t)
 		{$nomes[] = $t;}
-		//$valoresu = array_unique($v);
-		// processa array com os valores
-		//rsort($valoresu);
-		//reset($valoresu);
 		$nclassexist = $this->layer->numclasses;
 		if ($nclassexist > count($valores))
 		{$nclassexist = count($valores);}
-		if($nclassexist == 0)
+		if($this->layer->numclasses == 0)
 		{
 			$temp = ms_newClassObj($this->layer);
 			ms_newStyleObj($temp);

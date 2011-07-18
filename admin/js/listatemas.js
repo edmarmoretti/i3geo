@@ -63,7 +63,7 @@ function montaDivTemas(i)
 {
 	var param = {
 		"linhas":[
-		{titulo:"Nome que será mostrado na árvore de menus (português):",id:"nome_tema",size:"50",value:i.nome_tema,tipo:"text",div:""},
+		{titulo:"Nome que será mostrado na árvore de menus (português) - altera também o metadata TEMA, existente no mapfile, usado como título na árvore de camadas:",id:"nome_tema",size:"50",value:i.nome_tema,tipo:"text",div:""},
 		{titulo:"Inglês:",id:"en",size:"50",value:i.en,tipo:"text",div:""},
 		{titulo:"Espanhol:",id:"es",size:"50",value:i.es,tipo:"text",div:""},
 		{titulo:"Italiano:",id:"it",size:"50",value:i.it,tipo:"text",div:""}

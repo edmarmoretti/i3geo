@@ -72,11 +72,11 @@ i3GEOF.salvamapfile = {
 					var nome = retorno.data.nomeoriginal;
 					if(nome == "")
 					{
-						$i(iddiv).innerHTML = "<p class=paragrafo >Não existe um arquivo mapfile em i3geo/temas já criado para essa camada. Utilize o sistema de admnistração para <a href='"+i3GEO.configura.locaplic+"/admin/html/editormapfile.html' target=_blank >criar um</a>"
+						$i(iddiv).innerHTML = "<p class=paragrafo >Não existe um arquivo mapfile em i3geo/temas já criado para essa camada. Utilize o sistema de administração para <a href='"+i3GEO.configura.locaplic+"/admin/html/editormapfile.html' target=_blank >criar um</a>"
 					}
 					else
 					{
-						var ins = "<p class=paragrafo >O tema ativo possui um mapfile já criado. Ao salvar, as definições originais  de legenda, filtros e outras, serão substituídas pelas atuais</p>" +
+						var ins = "<p class=paragrafo >O tema ("+nome+") ativo possui um mapfile já criado. Ao salvar, as definições originais  de legenda, filtros e outras, serão substituídas pelas atuais</p>" +
 						'<br><br><p class=paragrafo ><input size=20 id=i3GEOsalvamapfilebotao1 type=button value="Salvar"  />&nbsp;&nbsp;<input size=20 id=i3GEOsalvamapfilebotao2 type=button value="Testar"  />';
 						$i(iddiv).innerHTML = ins;
 						new YAHOO.widget.Button(

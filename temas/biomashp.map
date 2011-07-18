@@ -2,36 +2,35 @@ MAP
   FONTSET "c:\ms4w\apache\htdocs\i3geo/symbols/fontes.txt"
   SYMBOLSET "c:\ms4w\apache\htdocs\i3geo/symbols/simbolos.sym"
   LAYER
- 
- CONNECTION ""
+    CONNECTION ""
     DATA "c:\ms4w\apache\htdocs\i3geo\aplicmap\dados\biomas.shp"
     GROUP "Grupo 1"
     METADATA
-      "ltempoitemimagem"	""
       "cache"	""
-      "CLASSE"	"SIM"
+      "ltempoitemimagem"	""
       "ltempoitemdescricao"	""
-      "palletestep"	""
+      "CLASSE"	"SIM"
       "ltempoiteminicio"	""
-      "permitekmz"	"sim"
+      "palletestep"	""
       "ltempoitemtip"	""
-      "iconetema"	"http://www.gpsdrive.de/development/map-icons/square.small/leisure/park.png"
-      "description_template"	""
+      "permitekmz"	"sim"
       "ltempoitemtitulo"	""
+      "description_template"	""
+      "iconetema"	"http://www.gpsdrive.de/development/map-icons/square.small/leisure/park.png"
       "ltempoitemlink"	""
+      "extensao"	"-44 -23 -39 -21"
       "palletefile"	""
-      "permitedownload"	"sim"
       "ltempoformatodata"	""
+      "permitedownload"	"sim"
       "ltempoitemicone"	""
       "download"	"SIM"
-      "permitekml"	"sim"
       "permiteogc"	""
-      "TEMA"	"Biomas shapefile x"
-      "identifica"	"NAO"
+      "permitekml"	"sim"
+      "TEMA"	"biomashp"
+      "aplicaextensao"	"SIM"
       "editorsql"	""
+      "identifica"	"NAO"
       "ltempoitemfim"	""
-	  "extensao" "-44 -23 -39 -21"
-      "aplicaextensao" "SIM"
     END
     NAME "biomashp"
     STATUS OFF
@@ -41,62 +40,62 @@ MAP
     UNITS METERS
     CLASS
       NAME "CAATINGA"
-      EXPRESSION ('[ID]'eq'2.00')
+      EXPRESSION ('[CD_LEGENDA]'eq'CAATINGA')
       STYLE
         ANGLE 360
-        COLOR 138 134 150
-        OPACITY 100
+        COLOR 21 44 114
         SYMBOL 0
+        WIDTH 1
       END
     END
     CLASS
       NAME "PAMPA"
-      EXPRESSION ('[ID]'eq'5.00')
+      EXPRESSION ('[CD_LEGENDA]'eq'PAMPA')
       STYLE
         ANGLE 360
-        COLOR 105 219 217
-        OPACITY 100
+        COLOR 225 189 199
         SYMBOL 0
+        WIDTH 1
       END
     END
     CLASS
       NAME "CERRADO"
-      EXPRESSION ('[ID]'eq'3.00')
+      EXPRESSION ('[CD_LEGENDA]'eq'CERRADO')
       STYLE
         ANGLE 360
-        COLOR 186 52 176
-        OPACITY 100
+        COLOR 17 235 39
         SYMBOL 0
+        WIDTH 1
       END
     END
     CLASS
       NAME "PANTANAL"
-      EXPRESSION ('[ID]'eq'6.00')
+      EXPRESSION ('[CD_LEGENDA]'eq'PANTANAL')
       STYLE
         ANGLE 360
-        COLOR 125 128 2
-        OPACITY 100
+        COLOR 242 192 145
         SYMBOL 0
+        WIDTH 1
       END
     END
     CLASS
-      NAME "AMAZÔNIA"
-      EXPRESSION ('[ID]'eq'1.00')
+      NAME "AMAZONIA"
+      EXPRESSION ('[CD_LEGENDA]'eq'AMAZONIA')
       STYLE
         ANGLE 360
-        COLOR 129 234 3
-        OPACITY 100
+        COLOR 149 120 37
         SYMBOL 0
+        WIDTH 1
       END
     END
     CLASS
-      NAME "MATA ATLÂNTICA"
-      EXPRESSION ('[ID]'eq'4.00')
+      NAME "MATA ATLANTICA"
+      EXPRESSION ('[CD_LEGENDA]'eq'MATA ATLANTICA')
       STYLE
         ANGLE 360
-        COLOR 159 226 219
-        OPACITY 100
+        COLOR 208 160 125
         SYMBOL 0
+        WIDTH 1
       END
     END
   END

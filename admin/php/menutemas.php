@@ -1003,7 +1003,7 @@ Altera o registro de um tema. Se id for vazio acrescenta o registro
 */
 function alteraTemas()
 {
-	global $nome,$desc,$id,$codigo,$tipoa,$download,$ogc,$kml,$link,$tags,$kmz,$locaplic;
+	global $nome,$desc,$id,$codigo,$tipoa,$download,$ogc,$kml,$link,$tags,$kmz,$locaplic,$es,$it,$en;
 	//error_reporting(E_ALL);
 	try 
 	{
@@ -1018,9 +1018,9 @@ function alteraTemas()
     	if($id != "")
     	{
 	    	if(!isset($kmz))
-	    	$dbhw->query("UPDATE i3geoadmin_temas SET tags_tema='$tags', link_tema='$link', nome_tema ='$nome',desc_tema='$desc',codigo_tema='$codigo',tipoa_tema='$tipoa',download_tema='$download',ogc_tema='$ogc',kml_tema='$kml' WHERE id_tema = $id");
+	    	$dbhw->query("UPDATE i3geoadmin_temas SET es='$es', it='$it', en='$en', tags_tema='$tags', link_tema='$link', nome_tema ='$nome',desc_tema='$desc',codigo_tema='$codigo',tipoa_tema='$tipoa',download_tema='$download',ogc_tema='$ogc',kml_tema='$kml' WHERE id_tema = $id");
     		else
-	    	$dbhw->query("UPDATE i3geoadmin_temas SET tags_tema='$tags', link_tema='$link', nome_tema ='$nome',desc_tema='$desc',codigo_tema='$codigo',tipoa_tema='$tipoa',download_tema='$download',ogc_tema='$ogc',kml_tema='$kml',kmz_tema='$kmz' WHERE id_tema = $id");    		
+	    	$dbhw->query("UPDATE i3geoadmin_temas SET es='$es', it='$it', en='$en',tags_tema='$tags', link_tema='$link', nome_tema ='$nome',desc_tema='$desc',codigo_tema='$codigo',tipoa_tema='$tipoa',download_tema='$download',ogc_tema='$ogc',kml_tema='$kml',kmz_tema='$kmz' WHERE id_tema = $id");    		
     		$retorna = $id;
     		if(!isset($kmz)){$kmz = "nao";}
  			$sql = "SELECT * from i3geoadmin_temas where id_tema = '$id'";
@@ -1033,13 +1033,15 @@ function alteraTemas()
 			{
 				$mapa = ms_newMapObj($mapfile);
 				$nomes = $mapa->getalllayernames();
-				foreach($nomes as $nome)
+				foreach($nomes as $n)
 				{
-					$layer = $mapa->getlayerbyname($nome);
+					$layer = $mapa->getlayerbyname($n);
 					$layer->setmetadata("permitedownload",strtolower($download));
 					$layer->setmetadata("permiteogc",strtolower($ogc));
 					$layer->setmetadata("permitekml",strtolower($kml));
 					$layer->setmetadata("permitekmz",strtolower($kmz));
+					if(count($nomes) == 1)
+					{$layer->setmetadata("tema",$nome);}
 				}
 				$mapa->save($mapfile);
 				removeCabecalho($mapfile);
