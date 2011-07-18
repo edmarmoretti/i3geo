@@ -733,9 +733,11 @@ i3GEO.util = {
 
 	valor {String} - valor do input
 
-	nome {String - name do input
+	nome {String} - name do input
+	
+	onch {String} - (opcional) string que será inserida no evento "onchange"
 	*/
-	$inputText: function(idPai,larguraIdPai,idInput,titulo,digitos,valor,nome) {
+	$inputText: function(idPai,larguraIdPai,idInput,titulo,digitos,valor,nome,onch) {
 		if(arguments.length === 6)
 		{nome = "";}
 		if(idPai !== ""){
@@ -748,7 +750,9 @@ i3GEO.util = {
 			$i(idPai).onmouseout = function()
 			{this.className = "";};
 		}
-		return "<input tabindex='0' onmouseover='javascript:this.className=\"digitarOver\";' onmouseout='javascript:this.className=\"digitar\";' onclick='javascript:this.select();this.className=\"digitarMouseclick\";' id='"+idInput+"' title='"+titulo+"' type='text' size='"+digitos+"' class='digitar' value='"+valor+"' name='"+nome+"' />";
+		if(!onch)
+		{onch = "";}
+		return "<input onchange=\""+onch+"\" tabindex='0' onmouseover='javascript:this.className=\"digitarOver\";' onmouseout='javascript:this.className=\"digitar\";' onclick='javascript:this.select();this.className=\"digitarMouseclick\";' id='"+idInput+"' title='"+titulo+"' type='text' size='"+digitos+"' class='digitar' value='"+valor+"' name='"+nome+"' />";
 	},
 	$inputTextMudaCor: function(obj){
 		var n = obj.value.split(" ");
@@ -2553,10 +2557,10 @@ catch(e){}
 $im = function(g){
 	return i3GEO.util.$im(g);
 };
-$inputText = function(idPai,larguraIdPai,idInput,titulo,digitos,valor,nome){
+$inputText = function(idPai,larguraIdPai,idInput,titulo,digitos,valor,nome,onch){
 	if(arguments.length === 6)
 	{nome = "";}
-	return i3GEO.util.$inputText(idPai,larguraIdPai,idInput,titulo,digitos,valor,nome);
+	return i3GEO.util.$inputText(idPai,larguraIdPai,idInput,titulo,digitos,valor,nome,onch);
 };
 $top = function(id,valor){
 	i3GEO.util.$top(id,valor);

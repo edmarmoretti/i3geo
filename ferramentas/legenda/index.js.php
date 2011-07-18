@@ -45,6 +45,15 @@ Classe: i3GEOF.legenda
 */
 i3GEOF.legenda = {
 	/*
+	Variavel: aviso
+	
+	Indica que uma alteração ainda não foi salva
+	
+	Type:
+	{boolean}
+	*/
+	aviso: false,
+	/*
 	Variavel: tema
 	
 	Tema que será utilizado
@@ -385,6 +394,7 @@ i3GEOF.legenda = {
 	retorno - objeto contendo os dados para formatação da legenda
 	*/
 	montaLegenda: function(retorno){
+		i3GEOF.legenda.aviso = false;
 		try{
 			if (retorno.data != undefined){
 				var ins = [],
@@ -402,9 +412,9 @@ i3GEOF.legenda = {
 						ins.push("<tr><td><img style='cursor:pointer' title='clique para excluir' onclick='i3GEOF.legenda.excluilinhaf(this)' src='" + i3GEO.configura.locaplic + "/imagens/x.gif' title='excluir' /></td><td><img style='cursor:pointer' title='clique para alterar' src='"+retorno.data[i].imagem+"' onclick=i3GEOF.legenda.editaSimbolo('i3GEOlegendaid_"+id+"') /></td>");
 						ins.push("<td><img onclick=i3GEOF.legenda.modificaCor('"+retorno.data[i].idclasse+"') title='alterar a cor' style='cursor:pointer' src='" + i3GEO.configura.locaplic + "/imagens/aquarela.gif' /></td>");
 						ins.push("<td>");
-						ins.push($inputText("","","i3GEOlegendaid_"+id,"digite o novo nome",30,retorno.data[i].nomeclasse,"nome"));
+						ins.push($inputText("","","i3GEOlegendaid_"+id,"digite o novo nome",30,retorno.data[i].nomeclasse,"nome","javascript:i3GEOF.legenda.aviso()"));
 						ins.push("</td><td>");
-						ins.push($inputText("","","i3GEOlegendaid_"+id,"digite a nova express&atilde;o",30,exp,"expressao"));
+						ins.push($inputText("","","i3GEOlegendaid_"+id,"digite a nova express&atilde;o",30,exp,"expressao",,"javascript:i3GEOF.legenda.aviso()"));
 						ins.push("</td></tr>");
 					}
 					ins.push("</table><br>");
@@ -449,6 +459,24 @@ i3GEOF.legenda = {
 		}
 		catch(e){alert("Não é possível editar a legenda desse tema");i3GEOF.legenda.aguarde.visibility = "hidden";}
 	},
+	/*
+	Function: aviso
+	
+	Mostra um alerta ao usuário quando um campo da tabela que contém os dados da legenda é alterado
+	
+	O aviso é mostrado apenas uma vez
+	*/
+	aviso: function(){
+		if(i3GEOF.legenda.aviso == true){
+			alert("Clique em 'Aplicar' para que as alteraçõpes sejam salvas");
+			i3GEOF.legenda.aviso == false;
+		}
+	},
+	/*
+	Function: aplicaColourRamp
+	
+	Aplica às classes da legenda as cores escolhidas no seletor de cores
+	*/
 	aplicaColourRamp: function(){
 		if($i("listaColourRamp").value != ""){
 			if(i3GEOF.legenda.aguarde.visibility === "visible")
@@ -520,6 +548,7 @@ i3GEOF.legenda = {
 	<ALTERACLASSE>
 	*/
 	mudaLegenda: function(){
+		i3GEOF.legenda.aviso = false;
 		if(i3GEOF.legenda.aguarde.visibility === "visible")
 		{return;}
 		i3GEOF.legenda.aguarde.visibility = "visible";
