@@ -57,15 +57,19 @@ if (!function_exists('ms_GetVersion'))
 	else
 	{dl('php_mapscript.so');}
 }
+include("ms_configura.php");
+include("classesphp/funcoes_gerais.php");
+require_once("classesphp/pega_variaveis.php");
+include_once ("classesphp/carrega_ext.php");
 //
 //no caso do programa ser utilizado via URL
 //
 if(!isset($tipo))
 {$tipo = "";}
-if($tipo == "mini" || $tipo == "todos" || $tipo == "grande")
+if($tipo == "mini" || $tipo == "todos" || $tipo == "grande" || $tipo == "")
 {
 	ms_ResetErrorList();
-	if (!isset($tipo))
+	if (!isset($tipo) || $tipo == "")
 	{
 		echo "Utilize geraminiatura.php?tipo=mini ou grande ou todos. As imagens são armazenadas no diretório temporário.";
 		echo "<br>Após geradas as imagens, copie os arquivos para o diretório i3geo/temas/miniaturas.";
@@ -76,10 +80,8 @@ if($tipo == "mini" || $tipo == "todos" || $tipo == "grande")
 		exit;
 	}
 
-	include("ms_configura.php");
-	include("classesphp/funcoes_gerais.php");
-	require_once("classesphp/pega_variaveis.php");
-	include_once ("classesphp/carrega_ext.php");
+
+	error_reporting(E_ALL);
 	$arqs = listaArquivos("temas");
 	foreach ($arqs["arquivos"] as $arq)
 	{
