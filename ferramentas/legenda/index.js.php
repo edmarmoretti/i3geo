@@ -414,7 +414,7 @@ i3GEOF.legenda = {
 						ins.push("<td>");
 						ins.push($inputText("","","i3GEOlegendaid_"+id,"digite o novo nome",30,retorno.data[i].nomeclasse,"nome","javascript:i3GEOF.legenda.aviso()"));
 						ins.push("</td><td>");
-						ins.push($inputText("","","i3GEOlegendaid_"+id,"digite a nova express&atilde;o",30,exp,"expressao",,"javascript:i3GEOF.legenda.aviso()"));
+						ins.push($inputText("","","i3GEOlegendaid_"+id,"digite a nova express&atilde;o",30,exp,"expressao","javascript:i3GEOF.legenda.aviso()"));
 						ins.push("</td></tr>");
 					}
 					ins.push("</table><br>");
