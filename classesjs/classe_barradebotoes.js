@@ -826,9 +826,9 @@ i3GEO.barraDeBotoes = {
 		temp.style.color = "gray";
 		temp.style.textAlign = "center";
 		temp.style.fontSize = "10px";
-		temp.innerHTML = ""
+		temp.innerHTML = "";
 		temp.id = "euDockMensagem";
-		euEnv.euDockArray.euDock_0.div.appendChild(temp)
+		euEnv.euDockArray.euDock_0.div.appendChild(temp);
 	},
 	/*
 	Function: inicializaBarra
