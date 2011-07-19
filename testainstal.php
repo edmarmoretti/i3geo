@@ -65,7 +65,7 @@ if(!function_exists("ms_GetVersion"))
 {echo "<span style=color:red >O MAPSERVER PARECE NAO ESTAR INSTALADO!!!<br><br>";}
 echo "---<br>";
 if (get_cfg_var("allow_call_time_pass_reference") != 1){
-	echo "<span style=color:red >Problema: allow_call_time_pass_reference no php.ini deveria estar como 'On'. O i3Geo n&atilde;o ir&aacute; funcionar!!!<br></span>";
+	echo "<span style=color:red >Problema: allow_call_time_pass_reference no php.ini deveria estar como 'On'. O i3Geo pode n&atilde;o funcionar!!!<br></span>";
 }
 if (get_cfg_var("safe_mode") == 1){
 	echo "<span style=color:red >Problema: safe_mode no php.ini deveria estar como 'Off'. O i3Geo n&atilde;o ir&aacute; funcionar!!!<br></span>";

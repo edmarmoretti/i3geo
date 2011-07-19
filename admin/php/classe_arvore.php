@@ -458,7 +458,15 @@ Return:
 */
 	function pegaTema($id_tema)
 	{
-		return $this->execSQL($this->sql_temas." and id_tema = '$id_tema' ");
+		$q =  $this->execSQL($this->sql_temas." and id_tema = '$id_tema' ");
+		if($q)
+		{return $q;}
+		else{
+			//caso de banco de dados antigo
+			$sql = "select kmz_tema,'0' as nacessos,id_tema,kml_tema,ogc_tema,download_tema,tags_tema,tipoa_tema,link_tema,desc_tema,nome_tema,codigo_tema  from i3geoadmin_temas	";	
+			$q = $this->execSQL($sql." where id_tema = '$id_tema' ");
+			return $q;
+		}
 	}
 /*
 Function: pegaTemasSubGrupo
@@ -695,7 +703,10 @@ Return:
     	//echo "<br>".$sql;
 		//error_reporting(E_ALL);
 		$q = $this->dbh->query($sql,PDO::FETCH_ASSOC);
-    	return $q->fetchAll();
+		if($q)
+    	{return $q->fetchAll();}
+		else
+		{return false;}
 	}
 /*
 Verifica se uma string ocorre em um array

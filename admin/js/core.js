@@ -1220,7 +1220,7 @@ function core_montaEditor(funcaoOK,w,h,funcaoClose)
 				}}}
 			);
 		}
-		YAHOO.example.container.panelEditor = new YAHOO.widget.Panel("janela_editor", { fixedcenter:true,close:true,width:w, overflow:"auto",modal: true,visible:false,constraintoviewport:true } );
+		YAHOO.example.container.panelEditor = new YAHOO.widget.Panel("janela_editor", { fixedcenter:true,close:true,width:w, overflow:"auto",modal: false,visible:false,constraintoviewport:true } );
 		YAHOO.example.container.panelEditor.render();
 	}
 	else
