@@ -734,6 +734,8 @@ i3GEO.barraDeBotoes = {
 		i3GEO.barraDeBotoes.AJUDA = false;
 		euEnv.imageBasePath=i3GEO.configura.locaplic+"/pacotes/eudock/";
 		var botao,
+			dica,
+			titulo,
 			i,
 			dock = new euDock(),
 			temp = "",
@@ -751,20 +753,27 @@ i3GEO.barraDeBotoes = {
 		for(i=0;i<n;i+=1){
 			if(i3GEO.barraDeBotoes.INCLUIBOTAO[chaves[i]] && i3GEO.barraDeBotoes.INCLUIBOTAO[chaves[i]] === true){
 				botao = i3GEO.barraDeBotoes.defBotao(chaves[i]);
-				if(botao === false)
-				{temp = "";}
+				if(botao === false){
+					dica = "";
+					titulo = "";
+				}
 				else{
 					if(botao.dica)
-					{temp = botao.dica;}
+					{dica = botao.dica;}
 					else
-					{temp = "";}
+					{dica = "";}
+					if(botao.titulo != undefined)
+					{titulo = botao.titulo;}
+					else
+					{titulo = "";}							
 				}
 				dock.addIcon(new Array({euImage:{image:i3GEO.configura.locaplic+i3GEO.barraDeBotoes.ICONEBOTAO[chaves[i]]}}),{
 					mouseInsideClick : function(x,y,id,posX,posY){
 						i3GEO.barraDeBotoes.execBotao(euEnv.euDockArray[id].idBotao,x,y,posX,posY );
 					},
 					idBotao:chaves[i],
-					dica: temp
+					dica: dica,
+					titulo: titulo
 				});
 			}
 		}
@@ -773,6 +782,8 @@ i3GEO.barraDeBotoes = {
 		};
 		$i(euEnv.euDockArray.euDock_0.bar.elementsArray.right.id).onclick = function(){
 			var temp = "",
+				dica,
+				titulo,
 				chaves = i3GEO.util.listaChaves(i3GEO.barraDeBotoes.INCLUIBOTAO),
 				n = chaves.length,
 				nb = euEnv.euDockArray.euDock_0.iconsArray.length,
@@ -783,25 +794,41 @@ i3GEO.barraDeBotoes = {
 				for(i=nb;i<n;i+=1){
 					if(i3GEO.barraDeBotoes.INCLUIBOTAO[chaves[i]] && i3GEO.barraDeBotoes.INCLUIBOTAO[chaves[i]] === true){
 						botao = i3GEO.barraDeBotoes.defBotao(chaves[i]);
-						if(botao === false)
-						{temp = "";}
+						if(botao === false){
+							dica = "";
+							titulo = "";
+						}
 						else{
 							if(botao.dica)
-							{temp = botao.dica;}
+							{dica = botao.dica;}
 							else
-							{temp = "";}
+							{dica = "";}
+							if(botao.titulo != undefined)
+							{titulo = botao.titulo;}
+							else
+							{titulo = "";}							
 						}
 						dock.addIcon(new Array({euImage:{image:i3GEO.configura.locaplic+i3GEO.barraDeBotoes.ICONEBOTAO[chaves[i]]}}),{
 							mouseInsideClick : function(x,y,id,posX){
 								i3GEO.barraDeBotoes.execBotao(euEnv.euDockArray[id].idBotao,x,y,posX);
 							},
 							idBotao:chaves[i],
-							dica: temp
+							dica: dica,
+							titulo: titulo
 						});
 					}
 				}			
 			}
 		};
+		//div que mostra o título do botão
+		var temp = novoel = document.createElement("div");
+		temp.style.top = "38px";
+		temp.style.color = "gray";
+		temp.style.textAlign = "center";
+		temp.style.fontSize = "10px";
+		temp.innerHTML = ""
+		temp.id = "euDockMensagem";
+		euEnv.euDockArray.euDock_0.div.appendChild(temp)
 	},
 	/*
 	Function: inicializaBarra

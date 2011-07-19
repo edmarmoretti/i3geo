@@ -602,6 +602,8 @@ i3GEO.configura = {
 
 	A lista de funções é incluída em i3GEO.configura.funcoesBotoes.botoes
 	
+	O elemento 'titulo' é usado na barra de botões do tipo olho de peixe
+	
 	Tipo:
 	{Object}
 
@@ -612,7 +614,7 @@ i3GEO.configura = {
 			//Insere a opção de zoom anterior e posterior.
 			iddiv:"historicozoom",
 			tipo:"",
-			dica:$trad("d1"),
+			dica:"",
 			constroiconteudo:'i3GEO.gadgets.mostraHistoricoZoom()'
 		},
 		{
@@ -620,6 +622,7 @@ i3GEO.configura = {
 			iddiv:"zoomtot",
 			tipo:"",
 			dica:$trad("d2"),
+			titulo: $trad("d2t"),
 			funcaoonclick:function(){
 				if(i3GEO.Interface.ATUAL === "openlayers"){
 					i3GEO.Interface.openlayers.zoom2ext(i3GEO.parametros.extentTotal);
@@ -638,6 +641,7 @@ i3GEO.configura = {
 			iddiv:"zoomli",
 			tipo:"dinamico",
 			dica:$trad("d3"),
+			titulo:$trad("d3t"),
 			funcaoonclick:function(){
 				if(i3GEO.Interface.ATUAL === "googlemaps"){
 					//alert("Pressione a tecla CTRL junto com o botão esquerdo do mouse");
@@ -677,6 +681,7 @@ i3GEO.configura = {
 			iddiv:"pan",
 			tipo:"dinamico",
 			dica:$trad("d4"),
+			titulo:$trad("d4t"),
 			funcaoonclick:function(){
 				var temp;
 				g_tipoacao='pan';
@@ -805,6 +810,7 @@ i3GEO.configura = {
 			iddiv:"zoomiauto",
 			tipo:"",
 			dica:$trad("d5"),
+			titulo:$trad("d5t"),
 			funcaoonclick:function(){
 				i3GEO.navega.zoomin(i3GEO.configura.locaplic,i3GEO.configura.sid);
 				marcadorZoom = '';
@@ -815,6 +821,7 @@ i3GEO.configura = {
 			iddiv:"zoomoauto",
 			tipo:"",
 			dica:$trad("d6"),
+			titulo:$trad("d6t"),
 			funcaoonclick:function(){
 				i3GEO.navega.zoomout(i3GEO.configura.locaplic,i3GEO.configura.sid);
 				marcadorZoom = "";
@@ -825,6 +832,7 @@ i3GEO.configura = {
 			iddiv:"identifica",
 			tipo:"dinamico",
 			dica:$trad("d7"),
+			titulo:$trad("d7t"),
 			funcaoonclick:function()
 			{
 				var temp;
@@ -868,6 +876,7 @@ i3GEO.configura = {
 			iddiv:"identificaBalao",
 			tipo:"dinamico",
 			dica:$trad("d7a"),
+			titulo:$trad("d7at"),
 			funcaoonclick:function()
 			{
 				if(i3GEO.arvoreDeCamadas.filtraCamadas("etiquetas","","diferente",i3GEO.arvoreDeCamadas.CAMADAS) === "")
@@ -910,6 +919,7 @@ i3GEO.configura = {
 			iddiv:"exten",
 			tipo:"",
 			dica:$trad("d8"),
+			titulo:$trad("d8t"),
 			funcaoonclick:function()
 			{i3GEO.mapa.dialogo.mostraExten();}
 		},
@@ -918,6 +928,7 @@ i3GEO.configura = {
 			iddiv:"referencia",
 			tipo:"",
 			dica:$trad("d9"),
+			titulo:$trad("d9t"),
 			funcaoonclick:function()
 			{i3GEO.maparef.inicia();}
 		},
@@ -926,6 +937,7 @@ i3GEO.configura = {
 			iddiv:"wiki",
 			tipo:"",
 			dica:$trad("d11"),
+			titulo:$trad("d11t"),
 			funcaoonclick:function()
 			{i3GEO.navega.dialogo.wiki();}
 		},
@@ -934,6 +946,7 @@ i3GEO.configura = {
 			iddiv:"metar",
 			tipo:"",
 			dica:$trad("d29"),
+			titulo:$trad("d29"),
 			funcaoonclick:function()
 			{i3GEO.navega.dialogo.metar();}
 		},
@@ -942,6 +955,7 @@ i3GEO.configura = {
 			iddiv:"buscafotos",
 			tipo:"",
 			dica:"Fotos",
+			titulo:"fotos",
 			funcaoonclick:function()
 			{i3GEO.navega.dialogo.buscaFotos();}
 		},
@@ -950,6 +964,7 @@ i3GEO.configura = {
 			iddiv:"imprimir",
 			tipo:"",
 			dica:$trad("d12"),
+			titulo:$trad("d12"),
 			funcaoonclick:function()
 			{i3GEO.mapa.dialogo.imprimir();}
 		},
@@ -966,6 +981,7 @@ i3GEO.configura = {
 			iddiv:"v3d",
 			tipo:"",
 			dica:$trad("d14"),
+			titulo:$trad("d14"),
 			funcaoonclick:function()
 			{i3GEO.mapa.dialogo.t3d();}
 		},
@@ -973,6 +989,7 @@ i3GEO.configura = {
 			iddiv:"google",
 			tipo:"",
 			dica:$trad("d15"),
+			titulo:$trad("d15t"),
 			funcaoonclick:function()
 			{i3GEO.navega.dialogo.google();}
 		},
@@ -982,6 +999,7 @@ i3GEO.configura = {
 			iddiv:"scielo",
 			tipo:"",
 			dica:$trad("d16"),
+			titulo:$trad("d16t"),
 			funcaoonclick:function(){
 				scieloAtivo = false;//esta variável é utilizada pela ferramenta durante a navegação no mapa. Se estiver true significa que a ferramenta está sendo atualizada durante um processo de navegação no mapa
 				g_operacao = "navega";
@@ -1016,6 +1034,7 @@ i3GEO.configura = {
 			iddiv:"confluence",
 			tipo:"",
 			dica:$trad("d17"),
+			titulo:$trad("d17t"),
 			funcaoonclick:function()
 			{i3GEO.navega.dialogo.confluence();}
 		},
@@ -1024,6 +1043,7 @@ i3GEO.configura = {
 			iddiv:"lentei",
 			tipo:"",
 			dica:$trad("d18"),
+			titulo:$trad("d18t"),
 			funcaoonclick:function(){
 				if (i3GEO.navega.lente.ESTAATIVA === "nao")
 				{i3GEO.navega.lente.inicia();}
@@ -1044,6 +1064,7 @@ i3GEO.configura = {
 			iddiv:"reinicia",
 			tipo:"",
 			dica:$trad("d20"),
+			titulo:$trad("d20t"),
 			funcaoonclick:function(){
 				i3GEO.janela.abreAguarde("i3GEO.atualiza",$trad("o1"));
 				var temp = function(){
@@ -1058,6 +1079,7 @@ i3GEO.configura = {
 			iddiv:"mede",
 			tipo:"dinamico",
 			dica:$trad("d21"),
+			titulo:$trad("d21t"),
 			funcaoonclick:function(){
 				i3GEO.barraDeBotoes.ativaIcone("mede");
 				if($i(i3GEO.Interface.IDMAPA)){
@@ -1074,6 +1096,7 @@ i3GEO.configura = {
 			iddiv:"area",
 			tipo:"dinamico",
 			dica:$trad("d21a"),
+			titulo:$trad("d21at"),
 			funcaoonclick:function(){
 				i3GEO.barraDeBotoes.ativaIcone("area");
 				if($i(i3GEO.Interface.IDMAPA)){
@@ -1090,6 +1113,7 @@ i3GEO.configura = {
 			iddiv:"inserexy",
 			tipo:"dinamico",
 			dica:$trad("d22"),
+			titulo:$trad("d22t"),
 			funcaoonclick:function(){
 				i3GEO.barraDeBotoes.ativaIcone("inserexy");
 				g_tipoacao = "";
@@ -1112,6 +1136,7 @@ i3GEO.configura = {
 			iddiv:"selecao",
 			tipo:"dinamico",
 			dica:$trad("d24"),
+			titulo:$trad("d24t"),
 			funcaoonclick:function(){
 				i3GEO.barraDeBotoes.ativaIcone("selecao");
 				i3GEO.mapa.dialogo.selecao();
@@ -1122,6 +1147,7 @@ i3GEO.configura = {
 			iddiv:"textofid",
 			tipo:"dinamico",
 			dica:$trad("d25"),
+			titulo:$trad("d25t"),
 			funcaoonclick:function(){
 				i3GEO.barraDeBotoes.ativaIcone("textofid");
 				g_tipoacao = "";
@@ -1133,6 +1159,7 @@ i3GEO.configura = {
 			iddiv:"rota",
 			tipo:"",
 			dica:"Rota",
+			titulo:"roteamento",
 			funcaoonclick:function(){
 				if(i3GEO.Interface.ATUAL !== "googlemaps")
 				{alert("Operacao disponivel apenas na interface Google Maps");return;}

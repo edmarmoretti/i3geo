@@ -523,6 +523,8 @@ var euOPAQUE      = 16;
 								temp = $i(this.iconsArray[i].elementsArray[0].id);
 								if(temp)
 								{i3GEO.barraDeBotoes.mostraJanela(temp,this.iconsArray[i].dica);}
+								//euDockMensagem é um div criado pelo i3Geo logo abaixo da barra de botões
+								$i("euDockMensagem").innerHTML = this.iconsArray[i].titulo;
 							}
 							catch(e){}
 						}
@@ -611,6 +613,7 @@ var euOPAQUE      = 16;
 			};			
 			
 			this.mouseOut = function(){
+				$i("euDockMensagem").innerHTML = "";
 				this.isInside=false;
 				euEnv.exeThreadWhiteLoop=5;
 			};

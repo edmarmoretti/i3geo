@@ -1052,12 +1052,26 @@ en:"Change the scale of the map adjusting it to show the same initial geographic
 es:"Modifica la escala del mapa ajust&aacute;ndola para mostrar la misma &aacute;rea geogr&aacute;fica inicial",
 it:"Modificare la scala della mappa adeguandola per mostrare la stessa copertura geografica sin dall'inizializzazione"
 }],
+"d2t":[
+{
+pt:"enquadramento inicial",
+en:"enquadramento inicial",
+es:"enquadramento inicial",
+it:"enquadramento inicial"
+}],
 "d3":[
 {
 pt:"Amplia o mapa - desloca o ponto clicado para centro da tela ou amplia a regi&atilde;o indicada por um ret&acirc;ngulo. Ap&oacute;s ativada, clique e arraste o mouse sobre o mapa na &aacute;rea de zoom desejada.",
 en:"Extends the map - place the clicked point in the center of the screen or extends the region indicated by a rectangular.After enabled, click and drag the mouse over the map in the area of zoom desired.",
 es:"Ampl&iacute;a el mapa - coloca el punto donde se hizo clic en el centro de la pantalla o ampl&iacute;a la regi&oacute;n indicada por un rect&aacute;ngulo. Despu&eacute;s de activarla, haga clic y arrastre el rat&oacute;n sobre el mapa en el &aacute;rea de zoom deseada",
 it:"Ampliare la mappa - pone il punto cliccato nel centro dello schermo o ingrandisce la regione indicata con un rettangolo. Dopo aver attivata, cliccare e trascinare il mouse sopra la mappa nell’area di zoom desiderata."
+}],
+"d3t":[
+{
+pt:"clique e arraste para ampliar",
+en:"clique e arraste para ampliar",
+es:"clique e arraste para ampliar",
+it:"clique e arraste para ampliar"
 }],
 "d4":[
 {
@@ -1066,12 +1080,26 @@ en:"Shifts the region visible on the map. Once activated, click and drag the mou
 es:"Desloca la regi&oacute;n visible en el mapa",
 it:"Sposta la regione visibile sulla mappa. Dopo averla attivata, cliccare e trascinare il mouse sulla mappa per spostare la regione visibile "
 }],
+"d4t":[
+{
+pt:"clique e arraste para deslocar",
+en:"clique e arraste para deslocar",
+es:"clique e arraste para deslocar",
+it:"clique e arraste para deslocar"
+}],
 "d5":[
 {
 pt:"Amplia o mapa tendo como refer&ecirc;ncia o centro atual.",
 en:"Magnify the map with the reference the current center.",
 es:"Ampl&iacute;a el mapa teniendo como referencia el centro actual",
 it:"Estendi la mappa tenendo come riferimento il centro corrente."
+}],
+"d5t":[
+{
+pt:"aproximar",
+en:"aproximar",
+es:"aproximar",
+it:"aproximar"
 }],
 "d6":[
 {
@@ -1080,12 +1108,26 @@ en:"Reduces the map as having reference the current center.",
 es:"Reduce el mapa teniendo como referencia el centro actual",
 it:"Riduci la mappa tenendo come referimento il centro corrente"
 }],
+"d6t":[
+{
+pt:"afastar",
+en:"afastar",
+es:"afastar",
+it:"afastar"
+}],
 "d7":[
 {
 pt:"Mostra informa&ccedil;&otilde;es sobre um ponto no mapa. Ap&oacute;s ativada, clique sobre o mapa.",
 en:"Displays information about a point on the map. Once activated, click on it.",
 es:"Muestra informaci&oacute;n sobre un punto en el mapa. Despu&eacute;s de activarla haga clic sobre el mismo.",
 it:"Mostra gli informazioni su un punto sulla mappa. Dopo averla attivata, fare clic su di esso."
+}],
+"d7t":[
+{
+pt:"clique para identificar",
+en:"clique para identificar",
+es:"clique para identificar",
+it:"clique para identificar"
 }],
 "d7a":[
 {
@@ -1094,6 +1136,13 @@ en:"Displays information about a point on the map. Once activated, stop the mous
 es:"Muestra informaci&oacute;n sobre un punto en el mapa. Despu&eacute;s de activarla, pare el rat&oacute;n por algunos instantes en el punto deseado o haga clic sobre el mismo.",
 it:"Mostra gli informazioni su un punto sulla mappa. Dopo averla attivata, fermare il mouse per qualche istante nel punto desiderato o fare clic su di esso."
 }],
+"d7at":[
+{
+pt:"etiqueta",
+en:"etiqueta",
+es:"etiqueta",
+it:"etiqueta"
+}],
 "d8":[
 {
 pt:"Mostra a extens&atilde;o geogr&aacute;fica atual em coordenadas geogr&aacute;ficas",
@@ -1101,12 +1150,26 @@ en:"It shows the extent of current geographic coordinates",
 es:"Muestra la extensi&oacute;n geográfica actual en coordenadas geogr&aacute;ficas",
 it:"Mostra la estensione geografica corrente in coordinate geografiche"
 }],
+"d8t":[
+{
+pt:"extensão atual",
+en:"extensão atual",
+es:"extensão atual",
+it:"extensão atual"
+}],
 "d9":[
 {
 pt:"Abre/fecha o mapa de refer&ecirc;ncia",
 en:"Open/close the reference map ",
 es:"Abre/cierra el mapa de referencia",
 it:"Apertura/chiusura della mappa di riferimento"
+}],
+"d9t":[
+{
+pt:"mapa de referência",
+en:"mapa de referência",
+es:"mapa de referência",
+it:"mapa de referência"
 }],
 "d10":[
 {
@@ -1121,6 +1184,13 @@ pt:"Busca dados na Wikipedia na abrang&ecirc;ncia atual do mapa. Fa&ccedil;a um 
 en:"Search data on Wikipedia in the current scope of the map. Make a zoom on the map before opening this option. Regions very extensive can make a very long search ",
 es:"Busca datos en Wikipedia en el alcance actual del mapa. Haga zoom en el mapa antes de abrir esta opci&oacute;n. Regiones muy extensas pueden ocasionar una b&uacute;squeda muy lenta",
 it:"Ricerca dati su Wikipedia nell'ambito corrente della mappa. Fare uno zoom sulla mappa prima dell’apertura di questa opzione. Regioni molto ampie potrebbero causare una ricerca troppo lenta."
+}],
+"d11t":[
+{
+pt:"buscar na Wikipédia",
+en:"buscar na Wikipédia",
+es:"buscar na Wikipédia",
+it:"buscar na Wikipédia"
 }],
 "d12":[
 {
@@ -1150,12 +1220,26 @@ en:"Open Google Maps, showing a satellite image of the region's main views on th
 es:"Abre Google Maps, mostrando una imagen de sat&eacute;lite de la regi&oacute;n en el mapa principal",
 it:"Apri Google Maps, mostrando un'immagine satellitare della regione vista sulla mappa principale."
 }],
+"d15t":[
+{
+pt:"Google Maps",
+en:"Google Maps",
+es:"Google Maps",
+it:"Google Maps"
+}],
 "d16":[
 {
 pt:"Pesquisa documentos na base de dados Scielo (dados preliminares)",
 en:"Search documents in the database Scielo (preliminary data)",
 es:"Busca documentos en la base de datos Scielo (datos preliminares)",
 it:"Ricerca dei documenti nella base di dati Scielo (dati preliminari)"
+}],
+"d16t":[
+{
+pt:"Scielo",
+en:"Scielo",
+es:"Scielo",
+it:"Scielo"
 }],
 "d17":[
 {
@@ -1164,12 +1248,26 @@ en:"Confluence Project. Points of intersection of coordinates observed in field"
 es:"Proyecto Confluence. Puntos de intersecci&oacute;n de coordenadas observadas en campo",
 it:"Progetto di confluenza. Punti di intersezione delle coordinate osservate in campo"
 }],
+"d17t":[
+{
+pt:"confluências",
+en:"confluências",
+es:"confluências",
+it:"confluências"
+}],
 "d18":[
 {
 pt:"Abre lente de amplia&ccedil;&atilde;o",
 en:"Opens lens to expansion",
 es:"Abre lente de ampliaci&oacute;n",
 it:"Apri lente di ingrandimento"
+}],
+"d18t":[
+{
+pt:"lente",
+en:"lente",
+es:"lente",
+it:"lente"
 }],
 "d19":[
 {
@@ -1185,12 +1283,26 @@ en:"Reload the map with the initial configurations.",
 es:"Redise&ntilde;a el mapa con las configuraciones iniciales",
 it:"Ricarica la mappa con la configurazione iniziale."
 }],
+"d20t":[
+{
+pt:"reinicia",
+en:"reinicia",
+es:"reinicia",
+it:"reinicia"
+}],
 "d21":[
 {
 pt:"Mede a dist&acirc;ncia entre dois ou mais pontos clicados no mapa (menor dist&acirc;ncia). O c&aacute;lculo de dist&acirc;ncia &eacute; aproximado e sua precis&atilde;o depende da escala do mapa.",
 en:"It measures the distance between two or more clicked points on the map (less distance). The calculation of distance is approximate and their accuracy depends on the scale of the map.",
 es:"Mide la distancia entre dos o m&aacute;s puntos marcados en el mapa (menor distancia). El c&aacute;lculo de distancia es aproximado y su precisi&oacute;n depende de la escala del mapa",
 it:"Misura la distanza tra due o più punti cliccati sulla mappa (minore distanza). Il calcolo della distanza è approssimativo e la sua precisione dipende dalla scala della mappa."
+}],
+"d21t":[
+{
+pt:"distância",
+en:"distância",
+es:"distância",
+it:"distância"
 }],
 "d21a":[
 {
@@ -1199,12 +1311,26 @@ en:"It measures the area on the map. The calculation of area is approximate and 
 es:"Mede a &aacute;rea de um pol&iacute;gono desenhado na tela. O c&aacute;lculo de &aacute;rea &eacute; aproximado e sua precis&atilde;o depende da escala do mapa.",
 it:"Misura l'area di un poligono tracciato sullo schermo. Il calcolo della superficie è approssimativo e la sua precisione dipende dalla scala della mappa."
 }],
+"d21at":[
+{
+pt:"área",
+en:"área",
+es:"área",
+it:"área"
+}],
 "d22":[
 {
 pt:"Insere pontos no mapa em coordenadas geogr&aacute;ficas. Ospontos inclu&iacute;dos podem ser transformados em linhas ou pol&iacute;gonos. Os pontos s&atilde;o armazenados em um tema tempor&aacute;rio, podendo-se fazer o download do arquivo shapefile.",
 en:"Insert points on the map in geographical coordinates. Items included can be converted into lines or polygons. Items are stored in a temporary layer, can be to download shapefile.",
 es:"Inserte puntos en el mapa en coordenadas geogr&aacute;ficas. Los puntos incluidos pueden transformarse en l&iacute;neas o pol&iacute;gonos. Los puntos se almacenan en un tema temporal, pudiendo hacerse el download del archivo shapefile.",
 it:"Inserire punti sulla mappa in coordinate geografiche. I punti inseriti possono essere trasformati in linee o poligoni. I punti vengono memorizzati in un tema temporaneo, con la possibilità di effettuare il download del file Shapefile." 
+}],
+"d22t":[
+{
+pt:"inserir pontos",
+en:"inserir pontos",
+es:"inserir pontos",
+it:"inserir pontos"
 }],
 "d23":[
 {
@@ -1220,12 +1346,26 @@ en:"Opens the tools to select elements of a layer. The elements selected can be 
 es:"Abre las herramientas para selecci&oacute;n de elementos de un tema. Los elementos seleccionados pueden utilizarse en otras ",
 it:"Aprire gli strumenti per selezionare gli elementi di un tema. Gli elementi selezionati possono essere utilizzati in altre operazioni, come ad esempio buffer e selezione per tema."
 }],
+"d24t":[
+{
+pt:"selecionar",
+en:"selecionar",
+es:"selecionar",
+it:"selecionar"
+}],
 "d25":[
 {
 pt:"Insere texto no mapa clicando em um ponto. Utilize essa op&ccedil;&atilde;o para adicionar informa&ccedil;&ocirc;es ao mapa.",
 en:"Insert text on the map by clicking on a point. Use this option to add information on the map.",
 es:"Inserte texto en el mapa haciendo clic en un punto. Utilice esta opci&oacute;n para agregar informaci&oacute;n al mapa",
 it:"Inserisci il testo sulla mappa cliccando su un punto. Utilizzare questa opzione per aggiungere informazioni alla mappa."
+}],
+"d25t":[
+{
+pt:"inserir texto",
+en:"inserir texto",
+es:"inserir texto",
+it:"inserir texto"
 }],
 "d26":[
 {
