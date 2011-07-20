@@ -236,6 +236,8 @@ function abrePrancha(id)
 		{
 			wdocaf(retorno.data.w+"px",retorno.data.h+"px",retorno.data.link,"center","","Info");
 		}
+		if(i3GEO.Interface.ATUAL == "googlemaps")
+		{i3GEO.Interface.googlemaps.removeTodosLayers();}
 		if(retorno.data.mapexten != "")
 		{i3GEO.navega.zoomExt(i3GEO.configura.locaplic,i3GEO.configura.sid,"nenhum",retorno.data.mapexten);}
 		i3GEO.atualiza();

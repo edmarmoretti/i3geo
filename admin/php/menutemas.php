@@ -1009,6 +1009,7 @@ function alteraTemas()
 	{
 		$retorna = "ok";
     	include("conexao.php");
+		$nomeo = $nome;
     	if($convUTF)
 		{
 			$nome = utf8_encode($nome);
@@ -1041,7 +1042,7 @@ function alteraTemas()
 					$layer->setmetadata("permitekml",strtolower($kml));
 					$layer->setmetadata("permitekmz",strtolower($kmz));
 					if(count($nomes) == 1)
-					{$layer->setmetadata("tema",$nome);}
+					{$layer->setmetadata("tema",$nomeo);}
 				}
 				$mapa->save($mapfile);
 				removeCabecalho($mapfile);

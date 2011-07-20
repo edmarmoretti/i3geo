@@ -1413,11 +1413,7 @@ i3GEO.Interface = {
 			{i3GEO.arvoreDeCamadas.atualiza();}
 			i3GEO.janela.fechaAguarde();
 		},
-		redesenha: function(){
-			//
-			//remove todos os layers
-			//
-			i3GEO.Interface.googlemaps.posfixo += 1;
+		removeTodosLayers: function(){
 			var nlayers = i3GEO.arvoreDeCamadas.CAMADAS.length,
 				i,
 				camada,
@@ -1425,17 +1421,19 @@ i3GEO.Interface = {
 			for (i=0;i<nlayers;i++){
 				camada = i3GEO.arvoreDeCamadas.CAMADAS[i];
 				indice = i3GEO.Interface.googlemaps.retornaIndiceLayer(camada.name);
-				//console.error(indice+" "+camada.name);
 				if(indice !== false){
 					try{
-						//console.error(indice+" "+camada.name);
 						i3GeoMap.overlayMapTypes.removeAt(indice);
 					}
 					catch(e){
 						if(typeof(console) !== 'undefined'){console.error(e+" "+camada.name);}
 					}
 				}
-			}
+			}		
+		},
+		redesenha: function(){
+			i3GEO.Interface.googlemaps.posfixo += 1;
+			i3GEO.Interface.googlemaps.removeTodosLayers();
 			i3GEO.Interface.googlemaps.criaLayers();
 		},
 		cria: function(w,h){
@@ -1657,12 +1655,22 @@ i3GEO.Interface = {
 				desligar = "",
 				ligar = "",
 				n,
+				listac,
 				i,
-				lista;
+				lista = [],
+				listatemp;
 			if(obj.checked && !indice){
 				ligar = obj.value;
 				//verifica qual o indice correto da camada
-				lista = i3GEO.arvoreDeCamadas.listaLigadosDesligados()[0];
+				listatemp = i3GEO.arvoreDeCamadas.listaLigadosDesligados()[0];
+				//reordena a lista. Necessário nas interfaces que utilizam grupos na árvore de camadas
+				n = i3GEO.arvoreDeCamadas.CAMADAS.length;
+				for(i=0;i<n;i++){
+					if(i3GEO.util.in_array(i3GEO.arvoreDeCamadas.CAMADAS[i],listatemp)){
+						lista.push(i3GEO.arvoreDeCamadas.CAMADAS[i]);
+					}
+				}
+				//
 				n = lista.length;
 				indice = 0;
 				for(i=0;i<n;i++){
@@ -1682,6 +1690,7 @@ i3GEO.Interface = {
 			}
 			if(desligar !== "" || ligar !== "")
 			{i3GEO.php.ligatemas(temp,desligar,ligar);}
+
 		},
 		bbox: function(){
 			var bd,so,ne,bbox;
