@@ -126,11 +126,9 @@ Pega a lista de grupos, subgrupos e sistemas adicionais.
 
 O perfil do usuário é armazenado na seção na inicialização do I3Geo.
 
-Os grupos e subgrupos são definidos no xml menutemas/menutemas.xml e os sistemas em menutemas/sistemas.xml.
-
 Parametros:
 
-idmenu - id que identifica o xml que será utilizado (definido na variável $menutemas em ms_configura.php)
+idmenu - id que identifica o menu
 
 listasistemas - sim|nao pega a lista de sistemas para montar a árvore de sistemas
 
@@ -167,13 +165,11 @@ Pega a lista de sub-grupos.
 
 O perfil do usuário é armazenado na seção na inicialização do I3Geo.
 
-Os grupos e subgrupos são definidos no xml menutemas/menutemas.xml e os sistemas em menutemas/sistemas.xml.
-
 Parametros:
 
-idmenu - id que identifica o xml que será utilizado (definido na variável $menutemas em ms_configura.php)
+codgrupo - código do grupo
 
-grupo - código do grupo
+idmenu - id que identifica o menu
 
 return:
 
@@ -201,9 +197,10 @@ array
 /*
 function: pegaListaDeTemas
 
-Le o arquivo xml com os temas e retorna um array com a lista de temas de um subgrupo.
+Lista de temas de um subgrupo
 
 parameters:
+
 $grupo - Id do grupo.
 
 $subgrupo - Id do subgrupo
@@ -222,7 +219,7 @@ array
 /*
 function: pegaListaDeMapas
 
-Le o arquivo xml com a lista de mapas existente no xml $locmapas.
+Lista de mapas cadastrados
 
 O perfil do usuário é armazenado na seção na inicialização do I3Geo.
 

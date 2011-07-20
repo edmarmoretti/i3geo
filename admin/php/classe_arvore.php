@@ -617,7 +617,7 @@ Return:
 					}
 				}
 				if(count($listaT) > 0)
-				$subgrupos[] = array("publicado"=>($sgrupo["publicado"]),"id_n2"=>($sgrupo["id_n2"]),"nome"=>$this->converte($sgrupo["nome_subgrupo"]),"download"=>$down,"ogc"=>$ogc);
+				{$subgrupos[] = array("publicado"=>($sgrupo["publicado"]),"id_n2"=>($sgrupo["id_n2"]),"nome"=>$this->converte($sgrupo["nome_subgrupo"]),"download"=>$down,"ogc"=>$ogc,"temas"=>$listaT);}
 			}
 		}
 		return (array("subgrupo"=>$subgrupos,"temasgrupo"=>$temasraiz));
