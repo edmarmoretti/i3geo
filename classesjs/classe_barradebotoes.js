@@ -84,7 +84,7 @@ i3GEO.barraDeBotoes = {
 	Default:
 	{10}
 	*/	
-	MAXBOTOES: 10,
+	MAXBOTOES: 11,
 	/*
 	Propriedade: AJUDA
 
@@ -292,6 +292,8 @@ i3GEO.barraDeBotoes = {
 		textofid: true,
 
 		selecao: true,
+		
+		barraedicao: false,
 
 		google: true,
 
@@ -323,6 +325,7 @@ i3GEO.barraDeBotoes = {
 		area: true,
 		imprimir: true,
 		selecao: true,
+		barraedicao: true,
 		google: true,
 		referencia: true,
 		exten: true,
@@ -392,7 +395,9 @@ i3GEO.barraDeBotoes = {
 		
 		inseregrafico: "/imagens/gisicons/eudock/grafico.png",
 		
-		v3d: "/imagens/gisicons/eudock/v3d.png"
+		v3d: "/imagens/gisicons/eudock/v3d.png",
+		
+		barraedicao: "/imagens/gisicons/eudock/editopen.png"
 	}	
 	
 	Type:
@@ -420,7 +425,8 @@ i3GEO.barraDeBotoes = {
 		lentei: "/imagens/gisicons/eudock/lente.png",
 		confluence: "/imagens/gisicons/eudock/confluence.png",
 		inseregrafico: "/imagens/gisicons/eudock/grafico.png",
-		v3d: "/imagens/gisicons/eudock/v3d.png"
+		v3d: "/imagens/gisicons/eudock/v3d.png",
+		barraedicao: "/imagens/gisicons/eudock/editopen.png"
 	},	
 	/*
 	Propriedade: TEMPLATEBOTAO

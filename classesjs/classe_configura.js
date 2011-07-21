@@ -1109,6 +1109,16 @@ i3GEO.configura = {
 			}
 		},
 		{
+			//barra de edição
+			iddiv:"barraedicao",
+			tipo:"",
+			dica:$trad("u29"),
+			titulo:$trad("u29"),
+			funcaoonclick:function(){
+				i3GEO.barraDeBotoes.editor.inicia();
+			}
+		},		
+		{
 			//botão de digitalização
 			iddiv:"inserexy",
 			tipo:"dinamico",
