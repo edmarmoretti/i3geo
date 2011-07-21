@@ -211,10 +211,9 @@ i3GEO.Interface.openlayers.GADGETS = {
 i3GEO.Interface.openlayers.TILES = true;
 
 //
-//desabilita o aplicativo default do menu suspenso
+//desabilita o item que abre a interface "default" do menu suspenso
 //
 i3GEO.gadgets.PARAMETROS.mostraMenuSuspenso.finaliza = 'i3GEOoMenuBar.getMenuItem("omenudataInterface1").cfg.setProperty("text", " ");'
-
 
 /*
 Após a criação, é criado o objeto i3geoOL que corresponde ao objeto map da API do OpenLayers.
@@ -229,6 +228,7 @@ i3GEO.configura.mapaRefDisplay = "none";
 i3GEO.barraDeBotoes.TIPO = "olhodepeixe";
 i3GEO.barraDeBotoes.OFFSET = -220;
 i3GEO.barraDeBotoes.MAXBOTOES = 10;
+i3GEO.configura.oMenuData["submenus"]["janelas"] = [];
 //barra de botoes normal. descomente para usar
 /*
 i3GEO.barraDeBotoes.TIPO = "yui";

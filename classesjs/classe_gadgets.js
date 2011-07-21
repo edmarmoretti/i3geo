@@ -865,7 +865,8 @@ i3GEO.gadgets = {
 				t = "";
 				if(confm.menu[i].target)
 				{t = "target="+confm.menu[i].target;}
-				ins += '<li class="yuimenubaritem" style="padding-top:2px;"><a style="'+estilo+'" href="#" class="yuimenubaritemlabel" '+t+'id="menu'+confm.menu[i].id+'" >&nbsp;'+confm.menu[i].nome+'</a></li>';
+				if(confm.submenus[confm.menu[i].id].length > 0)
+				{ins += '<li class="yuimenubaritem" style="padding-top:2px;"><a style="'+estilo+'" href="#" class="yuimenubaritemlabel" '+t+'id="menu'+confm.menu[i].id+'" >&nbsp;'+confm.menu[i].nome+'</a></li>';}
 			}
 			ins += '</ul>'; 
 			ins += '</div>';

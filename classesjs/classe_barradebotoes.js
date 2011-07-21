@@ -790,6 +790,10 @@ i3GEO.barraDeBotoes = {
 				i;
 			if($i("i3geoMarcaIcone"))
 			{$i("i3geoMarcaIcone").style.display = "none";}
+			//a barra já foi expandida
+			if(nb !== i3GEO.barraDeBotoes.MAXBOTOES){
+				i3GEO.barraDeBotoes.recria();
+			}
 			if(i3GEO.barraDeBotoes.MAXBOTOES > 0 && n > nb){
 				for(i=nb;i<n;i+=1){
 					if(i3GEO.barraDeBotoes.INCLUIBOTAO[chaves[i]] && i3GEO.barraDeBotoes.INCLUIBOTAO[chaves[i]] === true){
@@ -1218,7 +1222,6 @@ i3GEO.barraDeBotoes = {
 			{$i("i3geoMarcaIcone").style.display = "none";}
 			return;
 		}
-		
 		var n,temp,novoel,barraZoom,x,y,
 			BARRAS = i3GEO.barraDeBotoes.BARRAS, 
 			iu = i3GEO.util;
