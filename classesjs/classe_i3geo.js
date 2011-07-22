@@ -338,6 +338,8 @@ i3GEO = {
 				{i3GEO.finaliza.call();}
 				else
 				{eval(i3GEO.finaliza);}
+				if(i3GEO.guias.TIPO === "movel")
+				{i3GEO.guias.guiaMovel();}
 			}
 			catch(e){alert(e);}
 		};

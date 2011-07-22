@@ -202,6 +202,9 @@ i3GEO.guias = {
 	Propriedade: TIPO
 
 	Tipo de guia
+	
+	Quando TIPO = "movel", a inicialização da guia é feita em i3GEO.inicia
+	Isso é ne cessário pq a guia móvel só pode ser criada após o posicionamento do corpo do mapa
 
 	Tipo:
 	{string}
@@ -210,7 +213,7 @@ i3GEO.guias = {
 	{"guia"}
 
 	Values:
-	guia|sanfona|tablet
+	guia|sanfona|tablet|movel
 	*/
 	TIPO: "guia",
 	/*
@@ -698,15 +701,19 @@ i3GEO.guias = {
 		var molde = document.createElement("div"),
 			posMapa = i3GEO.util.pegaPosicaoObjeto($i(i3GEO.Interface.IDMAPA)),
 			larguraPuxador = 50;
-			alturaGuiaMovel = i3GEO.parametros.h / 2,
+			alturaGuiaMovel = i3GEO.parametros.h / 1.5,
 			ins = "";
+		if(i3GEO.guias.ALTURACORPOGUIAS > 0)
+		{alturaGuiaMovel = i3GEO.guias.ALTURACORPOGUIAS;}
 		molde.id = "i3GEOguiaMovelMolde";
 		molde.style.position = "absolute";
 		molde.style.display = "block";
-		molde.style.heigth = i3GEO.parametros.h / 2;
-		molde.style.left = posMapa[0] + i3GEO.parametros.w - larguraPuxador;
-		molde.style.top = posMapa[1] + alturaGuiaMovel - (alturaGuiaMovel / 2);
-		ins += "<img width='"+larguraPuxador+"' src='"+i3GEO.configura.locaplic+"/imagens/openbars.png' >";
+		molde.style.height = alturaGuiaMovel;
+		molde.style.border = "1px solid white";
+		molde.style.left = posMapa[0] + i3GEO.parametros.w - larguraPuxador - 2;
+		molde.style.top = posMapa[1] + (i3GEO.parametros.h / 2) - (alturaGuiaMovel / 2) + 2;
+		ins += "<img  style=top:0px width='"+larguraPuxador+"' src='"+i3GEO.configura.locaplic+"/imagens/openbars.png' >";
+		
 		molde.innerHTML = ins;
 		document.body.appendChild(molde);
 		
