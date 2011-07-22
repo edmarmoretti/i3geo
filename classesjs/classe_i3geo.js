@@ -38,7 +38,7 @@ utilize i3GEO.janela.cria()
 
 Para inicializar o mapa, utilize i3GEO.inicia() e para atualizar o mapa, utilize i3GEO.atualiza().
 Após terminado o processo de inicialização, pode-se executar uma função de ajuste. Essa função
-deve ser definida em i3GEO.finaliza, por exemplo i3GEO.finaliza = "funcaoDeAjuste()"
+deve ser definida em i3GEO.finaliza, por exemplo i3GEO.finaliza = "funcaoDeAjuste()" ou i3GEO.finaliza = function(){}
 
 Ao inicializar ou atualizar o i3Geo, é feita uma chamada em AJAX 
 para a obtenção dos parâmetros necessários ao funcionamento do mapa. Esses parâmetros
@@ -148,9 +148,24 @@ i3GEO = {
 		autenticadoopenid:"nao"
 	},
 	/*
+	Propriedade: scrollerWidth
+	
+	Largura da barra de rolagem do navegador. Se for igual a "", a largura será calculada automaticamente.
+	
+	O valor "scrollerWidth" será utilizado no calculo da largura do mapa. Se vc não quer diminuir o tamanho do mapa,
+	subtraindo a largura da barra de rolagem, defina scrollerWidth = 0
+	
+	Tipo:
+	{numérico}
+	
+	Default:
+	{""}
+	*/
+	scrollerWidth: "",
+	/*
 	Propriedade: finaliza
 
-	Armazena o nome de uma função que será executada após a inicialização do mapa
+	Função que será executada após a inicialização do mapa. Pode ser uma string também, que será avaliada com "eval". 
 
 	Tipo:
 	{string}
@@ -308,8 +323,6 @@ i3GEO = {
 						abreJM = i3GEO.util.pegaCookie("botoesAjuda");
 						i3GEO.barraDeBotoes.AJUDA = (abreJM === "sim") ? true : false;
 					}
-					//if(i3GEO.util.pegaCookie("botoesAjuda") === "nao")
-					//{i3GEO.barraDeBotoes.AJUDA = false;}
 					abreJM = "sim";
 					if(i3GEO.util.pegaCookie("g_janelaMen")){
 						abreJM = i3GEO.util.pegaCookie("g_janelaMen");
@@ -317,12 +330,14 @@ i3GEO = {
 					}
 					if(i3GEO.configura.iniciaJanelaMensagens === true)
 					{i3GEO.ajuda.abreJanela();}
-					//i3GEO.janela.fechaAguarde("montaMapa");
 					if (i3GEO.configura.liberaGuias.toLowerCase() === "sim")
 					{i3GEO.guias.libera();}
-					//alert(i3GEO.util.pegaPosicaoObjeto($i(i3GEO.Interface.IDMAPA))[0]+ " " + i3GEO.parametros.w)
 				}
 				if($i("mst")){$i("mst").style.visibility ="visible";}
+				if(YAHOO.lang.isFunction(i3GEO.finaliza))
+				{i3GEO.finaliza.call();}
+				else
+				{eval(i3GEO.finaliza);}
 			}
 			catch(e){alert(e);}
 		};
@@ -357,7 +372,7 @@ i3GEO = {
 		{i3GEO.eventos.NAVEGAMAPA.push("i3GEO.janela.fechaAguarde()");}
 		if(i3GEO.mapa.AUTORESIZE === true)
 		{i3GEO.mapa.ativaAutoResize();}
-		eval(i3GEO.finaliza);
+		//eval(i3GEO.finaliza);
 	},
 	/*
 	Function: atualiza
@@ -530,21 +545,10 @@ i3GEO = {
 				window.moveTo(0,0);
 			}
 		}
-		novow = YAHOO.util.Dom.getDocumentWidth() - i3GEO.util.getScrollerWidth();
+		if(i3GEO.scrollerWidth != "")
+		{i3GEO.scrollerWidth = i3GEO.util.getScrollerWidth();}
+		novow = YAHOO.util.Dom.getDocumentWidth() - i3GEO.scrollerWidth;
 		novoh = YAHOO.util.Dom.getDocumentHeight();
-		//o try aqui é necessário por conta do uso possível do i3geo em um iframe
-		/*
-		try{
-			if (novow < 800){
-				novow = 800;
-				novoh = 600;
-			}
-		}
-		catch(e){
-			if(typeof(console) !== 'undefined'){console.error(e);}
-		}
-		*/
-		//novoh = 500
 		document.body.style.width = novow;
 		document.body.style.height = novoh;
 

@@ -124,9 +124,9 @@
 </tr>
 <tr style="border:0px"><td colspan=3 id="barraInferior" style="background-image:url('../imagens/visual/default/rodape.png');height:10px"></td></tr>
 <!-- aqui são mostradas imagens obtidas do metadata mensagem que pode existir em cada layer -->
-<!--<tr style="border:0px"><td colspan=3 style=background-color:black ><input style="border:0px none; background-color:black;color:white;font-size:12pt;" type="text" size="1" id="i3geo_letreiro" ></td></tr>-->
+<tr style="border:0px"><td colspan=3 style=background-color:black ><input style="border:0px none; background-color:black;color:white;font-size:12pt;" type="text" size="1" id="i3geo_letreiro" ></td></tr>
 <!-- esse elemento é preenchido automaticamente pelo i3Geo, conforme definido em ms_configura.php -->
-<!--<tr style="border:0px"><td colspan=3 style=background-color:black;color:white id="emailInstituicao">@</td></tr>-->
+<tr style="border:0px"><td colspan=3 style=background-color:black;color:white id="emailInstituicao">@</td></tr>
 
 </table>
 <center>
@@ -145,7 +145,8 @@
 	</td>
 </tr>
 </table>
-<script src="../classesjs/i3geonaocompacto.js"></script>
+
+<script src="../classesjs/i3geo.js"></script>
 <script src="../pacotes/openlayers/OpenLayers29.js.php"></script>
 <!-- estilo necessário para a ferramenta de edição -->
 <style>
@@ -224,8 +225,7 @@ i3GEO.cria();
 i3GEO.configura.mapaRefDisplay = "none";
 
 i3GEO.barraDeBotoes.TIPO = "olhodepeixe";
-i3GEO.barraDeBotoes.OFFSET = 0;
-i3GEO.scrollerWidth = 0; //permite ajustar o mapa até a borda do navegador
+i3GEO.barraDeBotoes.OFFSET = -220;
 //i3GEO.barraDeBotoes.MAXBOTOES = 10;
 i3GEO.configura.oMenuData["submenus"]["janelas"] = [];
 //barra de botoes normal. descomente para usar
@@ -298,10 +298,6 @@ OpenLayers.ImgPath = "../pacotes/openlayers/img/";
 //
 //inicia o mapa
 //
-i3GEO.finaliza = function(){
-	$i("i3GEOlogoMarca").style.display = "none";
-	i3GEO.guias.guiaMovel()
-}
 i3GEO.inicia();
 </script>
 </body>
