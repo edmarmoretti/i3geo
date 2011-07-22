@@ -693,5 +693,22 @@ i3GEO.guias = {
 			Dom.setStyle(namespace+g+"obj","display","none");
 		}
 		Dom.setStyle(guia+"obj","display","block");
+	},
+	guiaMovel: function(){
+		var molde = document.createElement("div"),
+			posMapa = i3GEO.util.pegaPosicaoObjeto($i(i3GEO.Interface.IDMAPA)),
+			larguraPuxador = 50;
+			alturaGuiaMovel = i3GEO.parametros.h / 2,
+			ins = "";
+		molde.id = "i3GEOguiaMovelMolde";
+		molde.style.position = "absolute";
+		molde.style.display = "block";
+		molde.style.heigth = i3GEO.parametros.h / 2;
+		molde.style.left = posMapa[0] + i3GEO.parametros.w - larguraPuxador;
+		molde.style.top = posMapa[1] + alturaGuiaMovel - (alturaGuiaMovel / 2);
+		ins += "<img width='"+larguraPuxador+"' src='"+i3GEO.configura.locaplic+"/imagens/openbars.png' >";
+		molde.innerHTML = ins;
+		document.body.appendChild(molde);
+		
 	}
 };

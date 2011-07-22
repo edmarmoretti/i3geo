@@ -320,6 +320,7 @@ i3GEO = {
 					//i3GEO.janela.fechaAguarde("montaMapa");
 					if (i3GEO.configura.liberaGuias.toLowerCase() === "sim")
 					{i3GEO.guias.libera();}
+					//alert(i3GEO.util.pegaPosicaoObjeto($i(i3GEO.Interface.IDMAPA))[0]+ " " + i3GEO.parametros.w)
 				}
 				if($i("mst")){$i("mst").style.visibility ="visible";}
 			}
