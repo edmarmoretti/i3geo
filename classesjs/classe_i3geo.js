@@ -339,7 +339,7 @@ i3GEO = {
 				else
 				{eval(i3GEO.finaliza);}
 				if(i3GEO.guias.TIPO === "movel")
-				{i3GEO.guias.guiaMovel();}
+				{i3GEO.guias.guiaMovel.inicia();}
 			}
 			catch(e){alert(e);}
 		};
