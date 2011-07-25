@@ -705,13 +705,14 @@ i3GEO.guias = {
 			alturaGuiaMovel: 0,
 			larguraGuiaMovel: 300
 		},
+		left: 0,
 		inicia: function(){
 			var molde = document.createElement("div"),
 				moldeS = molde.style,
 				posMapa = i3GEO.util.pegaPosicaoObjeto($i(i3GEO.Interface.IDMAPA)),
 				ins = "";
 			if(i3GEO.guias.ALTURACORPOGUIAS === 0 && i3GEO.guias.guiaMovel.config.alturaGuiaMovel === 0)
-			{i3GEO.guias.guiaMovel.config.alturaGuiaMovel = i3GEO.parametros.h / 1.5;}
+			{i3GEO.guias.guiaMovel.config.alturaGuiaMovel = i3GEO.parametros.h - 100;}
 			else
 			{i3GEO.guias.guiaMovel.config.alturaGuiaMovel = i3GEO.guias.ALTURACORPOGUIAS;}
 			molde.id = "i3GEOguiaMovelMolde";
@@ -720,16 +721,22 @@ i3GEO.guias = {
 			moldeS.height = i3GEO.guias.guiaMovel.config.alturaGuiaMovel;
 			moldeS.border = "0px solid white";
 			moldeS.textAlign = "left";
+			moldeS.zIndex = 1000;
 			moldeS.left = posMapa[0] + i3GEO.parametros.w - i3GEO.guias.guiaMovel.config.larguraPuxador;
+			i3GEO.guias.guiaMovel.left = parseInt(moldeS.left,10);
 			moldeS.top = posMapa[1] + (i3GEO.parametros.h / 2) - (i3GEO.guias.guiaMovel.config.alturaGuiaMovel / 2);
-			ins += "<img onclick='i3GEO.guias.guiaMovel.abreFecha()' style='z-index:2;border:solid 0px white;left:0px;position:relative;top:"+ ((i3GEO.guias.guiaMovel.config.alturaGuiaMovel / 2) - (i3GEO.guias.guiaMovel.config.alturaPuxador / 2)) +"px' width='"+i3GEO.guias.guiaMovel.config.larguraPuxador+"' src='"+i3GEO.configura.locaplic+"/"+i3GEO.guias.guiaMovel.config.imgPuxador+"' >";
-			ins += "<div id='i3GEOguiaMovelConteudo' style='border-color:gray;border-width:0px 0 0px 0px;left:"+(i3GEO.guias.guiaMovel.config.larguraPuxador - 4) +"px;top:0px;width:0px;position:inherit;display:none;height:"+i3GEO.guias.guiaMovel.config.alturaGuiaMovel+"px;background-color:black' >&nbsp;</div>"
-			ins += "<div id='i3GEOguiaMovelIcones' style='left:"+(i3GEO.guias.guiaMovel.config.larguraPuxador + 4)+";display:none;position:inherit;top:5px;text-align:center;height:50px;width:"+(i3GEO.guias.guiaMovel.config.larguraGuiaMovel - 8) +"px;border:solid 0px white;background-color:white' ></div>";
+			ins += "<img id='i3GEOguiaMovelPuxador' onclick='i3GEO.guias.guiaMovel.abreFecha()' style='z-index:2;border:solid 0px white;left:0px;position:relative;top:"+ ((i3GEO.guias.guiaMovel.config.alturaGuiaMovel / 2) - (i3GEO.guias.guiaMovel.config.alturaPuxador / 2)) +"px' width='"+i3GEO.guias.guiaMovel.config.larguraPuxador+"' src='"+i3GEO.configura.locaplic+"/"+i3GEO.guias.guiaMovel.config.imgPuxador+"' >";
+			ins += "<div id='i3GEOguiaMovelConteudo' style='display:none;position:absolute;border-color:gray;border-width:0px 0 0px 0px;left:"+(i3GEO.guias.guiaMovel.config.larguraPuxador - 4) +"px;top:0px;height:"+i3GEO.guias.guiaMovel.config.alturaGuiaMovel+"px;background-color:black' >&nbsp;</div>"
+			ins += "<div id='i3GEOguiaMovelIcones' style='left:"+(i3GEO.guias.guiaMovel.config.larguraPuxador + 4)+";display:none;position:absolute;top:6px;text-align:center;height:50px;width:"+(i3GEO.guias.guiaMovel.config.larguraGuiaMovel - 8) +"px;border:solid 0px white;background-color:white' ></div>";
 			molde.innerHTML = ins;
-			
 			document.body.appendChild(molde);
 			YAHOO.util.Dom.setStyle("i3GEOguiaMovelConteudo", "opacity", 0.20);
 			YAHOO.util.Dom.setStyle("i3GEOguiaMovelIcones", "opacity", 0.40);
+		},
+		reposiciona: function(){
+			var obj = $i("i3GEOguiaMovelMolde");
+			obj.parentNode.removeChild(obj);
+			i3GEO.guias.guiaMovel.inicia();
 		},
 		abreFecha: function(){
 			var molde = $i("i3GEOguiaMovelMolde"),
@@ -739,14 +746,10 @@ i3GEO.guias = {
 				moldeS = molde.style,
 				anim,
 				anim1;
-			if(parseInt(conteudoS.width,10) !== 0){//esconde
-				//conteudoS.width = "0px";
-				//conteudoS.display = "none";
-				//moldeS.left = parseInt(moldeS.left,10) + i3GEO.guias.guiaMovel.config.larguraGuiaMovel  + "px";
-				//moldeS.width = i3GEO.guias.guiaMovel.config.larguraPuxador + "px";
+			if(conteudoS.display === "block"){//esconde
 				$i("i3GEOguiaMovelIcones").style.display = "none";
 				attributes = {
-					left: { to: parseInt(moldeS.left,10) + i3GEO.guias.guiaMovel.config.larguraGuiaMovel },
+					left: { to: i3GEO.guias.guiaMovel.left - 1 },
 					id: "i3GEOguiaMovelMolde"
 				};
 				anim = new YAHOO.util.Anim(molde, attributes, 1, YAHOO.util.Easing.easeNone);
@@ -756,12 +759,13 @@ i3GEO.guias = {
 				};
 				anim1 = new YAHOO.util.Anim(conteudo, attributes, 1, YAHOO.util.Easing.easeNone);					
 				anim.animate();
-				anim1.animate();				
+				anim1.animate();
+				anim1.onComplete.subscribe(function(){
+					conteudoS.display = "none";
+				});				
 			}
 			else{
 				conteudoS.display = "block";	
-				//moldeS.width = i3GEO.guias.guiaMovel.config.larguraGuiaMovel + i3GEO.guias.guiaMovel.config.larguraPuxador + "px";
-				//moldeS.left = parseInt(moldeS.left,10) - i3GEO.guias.guiaMovel.config.larguraGuiaMovel  + "px";
 				attributes = {
 					left: { to: parseInt(moldeS.left,10) - i3GEO.guias.guiaMovel.config.larguraGuiaMovel },
 					id: "i3GEOguiaMovelMolde"

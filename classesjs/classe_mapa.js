@@ -73,11 +73,11 @@ i3GEO.mapa = {
 				i3GEO.reCalculaTamanho();
 				i3GEO.barraDeBotoes.recria("i3geo_barra2");
 				if(i3GEO.Interface.TABLET === true)
-				{i3GEO.guias.escondeGuias();}
+				{i3GEO.guias.escondeGuias();return;}
+				if(i3GEO.guias.TIPO === "movel")
+				{i3GEO.guias.guiaMovel.reposiciona();}
 				else
-				{
-					i3GEO.guias.ajustaAltura();
-				}
+				{i3GEO.guias.ajustaAltura();}
 			},2000);
 		};
 	},

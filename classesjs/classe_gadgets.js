@@ -857,6 +857,13 @@ i3GEO.gadgets = {
 			if(ms.deslocaEsquerda){
 				alinhamento = "left:"+ms.deslocaEsquerda*-1+"px;";
 			}
+			//ajusta a altura caso não tenha sido especificado no HTML
+			if(!objid.style.height || parseInt(objid.style.height,10) === 0)
+			{objid.style.height = "21px";}
+			else{
+				if(!temp.style.height || parseInt(temp.style.height) === 0)
+				{temp.style.height = "21px";}
+			}
 			ins += '<div class="bd" style="top:0px;'+alinhamento+'display:block;align:right;border: 0px solid white;z-index:6000;line-height:1.4" >' +
 				'<ul class="first-of-type" style="display:block;border:0px solid white;top:10px;">';
 			n = confm.menu.length;
@@ -875,7 +882,6 @@ i3GEO.gadgets = {
 				var conta,nomeMenu,nomeSub,
 					subs = i3GEO.configura.oMenuData.submenus,
 					conta = 0;
-
 				for(nomeMenu in subs){
 					if($i("menu"+nomeMenu)){
 						nomeSub = subs[nomeMenu];
@@ -940,11 +946,10 @@ i3GEO.gadgets = {
 			temp = objid.style;
 			temp.backgroundPosition = "0px -1px";
 			temp.border = "0px solid white";
-
-			if(navm)
-			{temp.borderBottom = "2px solid white";}
-			if(navm && i3GEO.Interface.ATUAL === "googlemaps")
-			{temp.border = "2px dotted white";}
+			//if(navm)
+			//{temp.borderBottom = "2px solid white";}
+			//if(navm && i3GEO.Interface.ATUAL === "googlemaps")
+			//{temp.border = "2px dotted white";}
 			if(ms.finaliza && ms.finaliza != ""){
 				eval(ms.finaliza);
 			}

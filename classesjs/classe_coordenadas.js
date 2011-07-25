@@ -363,7 +363,7 @@ i3GEO.coordenadas = {
 	{string} - html com a tabela
 	*/
 	criaMascaraDMS: function(prefixo,titulo,caixa){
-		var ins = '<table id='+prefixo+' style=display:block;text-align:center;width:410px ><tr style="border-bottom:2px solid white" >' +
+		var ins = '<table id='+prefixo+' style=display:block;text-align:center;width:280px ><tr style="border-bottom:2px solid white" >' +
 				'<td style=width:10px;text-align:right > X:</td>' +
 				'<td>'+$inputText('','',prefixo+'xg','grau','2','-00')+'</td>' +
 				'<td>'+$inputText('','',prefixo+'xm','minuto','2','00')+'</td>' +

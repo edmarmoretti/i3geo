@@ -294,7 +294,7 @@ i3GEO.configura = {
 	Default:
 	{106}
 	*/
-	diminuiyM: 100,
+	diminuiyM: 70,
 	/*
 	Propriedade: diminuiyN
 

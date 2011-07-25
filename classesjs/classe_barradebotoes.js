@@ -746,7 +746,10 @@ i3GEO.barraDeBotoes = {
 			dock = new euDock(),
 			temp = "",
 			chaves = i3GEO.util.listaChaves(i3GEO.barraDeBotoes.INCLUIBOTAO),
-			n = chaves.length;
+			n = chaves.length,
+			preload;
+		preload = new Image();
+		preload.src = i3GEO.configura.locaplic+"/imagens/gisicons/eudock/sobe1.png";
 		dock.setObjectAlign(i3GEO.Interface.IDCORPO,euDOWN,(parseInt(document.body.style.height,10))*-1 + i3GEO.barraDeBotoes.OFFSET,euUP);   
 		dock.setBar({
 			left:{euImage:{image:i3GEO.configura.locaplic+"/pacotes/eudock/barImages/dockBg-l.png"}},
@@ -1218,7 +1221,6 @@ i3GEO.barraDeBotoes = {
 		if(typeof(console) !== 'undefined'){console.info("i3GEO.barraDeBotoes.recria()");}
 		if(i3GEO.barraDeBotoes.TIPO === "olhodepeixe"){
 			euEnv.euDockArray = [];
-			//euEnv.Kost = [];
 			euEnv.Kost.num = 0;
 			if($i("euDock_0_bar")){
 				document.body.removeChild($i("euDock_0_bar").parentNode);
