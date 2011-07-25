@@ -150,9 +150,10 @@ i3GEO.ajuda = {
 	abreJanela: function(){
 		if(typeof(console) !== 'undefined'){console.info("i3GEO.ajuda.abreJanela()");}
 		try	{
-			var nx,ny,pos,corpo,texto,janela,temp,
+			var nx,ny,corpo,texto,janela,temp,
 				largura=262,
-				YU = YAHOO.util;
+				YU = YAHOO.util,
+				pos = [20,i3GEO.parametros.h / 2];
 			if(this.ATIVAJANELA === false){return;}
 			temp = $i("contemFerramentas");
 			if(temp){
@@ -160,16 +161,21 @@ i3GEO.ajuda = {
 			}
 			if(!$i("janelaMenTexto")){
 				corpo = $i(i3GEO.Interface.IDCORPO);
-				if(corpo){
-					pos = YU.Dom.getXY(corpo);
-					nx = pos[0] - largura - 3;
-					ny = i3GEO.parametros.h - 78;
+				if(corpo){pos = YU.Dom.getXY(corpo);}
+				else{
+					corpo = $i(i3GEO.Interface.IDMAPA);
+					if(corpo){pos = YU.Dom.getXY(corpo);}				
 				}
+				nx = pos[0] - largura - 3;
+				ny = i3GEO.parametros.h - 78;				
 				texto = '<div id="janelaMenTexto" style="text-align:left;font-size:10px;color:rgb(80,80,80)">'+i3GEO.ajuda.MENSAGEMPADRAO+'</div>';
+				if(nx < 0)
+				{nx = 10;ny = ny - 50;}
 				janela = i3GEO.janela.cria(largura - 3,"auto","",nx,ny,"&nbsp;","i3geo_janelaMensagens",false,"hd","","",true);
 				janela[2].innerHTML = texto;
 				YU.Event.addListener(janela[0].close, "click", i3GEO.ajuda.fechaJanela);
 				this.ativaCookie();
+				
 			}
 		}
 		catch(e){
