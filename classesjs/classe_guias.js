@@ -99,12 +99,14 @@ i3GEO.guias = {
 	*/
 	CONFIGURA: {
 		"temas":{
+			icone:"imagens/gisicons/show-layers.png",
 			titulo:$trad("g4a"),
 			id:"guia1",
 			idconteudo:"guia1obj",
 			click:""
 		},
 		"adiciona":{
+			icone:"imagens/gisicons/show-catalog.png",
 			titulo:$trad("g1a"),
 			id:"guia2",
 			idconteudo:"guia2obj",
@@ -127,6 +129,7 @@ i3GEO.guias = {
 			}
 		},
 		"legenda":{
+			icone:"imagens/gisicons/show-legend.png",
 			titulo:$trad("g3"),
 			id:"guia4",
 			idconteudo:"guia4obj",
@@ -136,6 +139,7 @@ i3GEO.guias = {
 			}
 		},
 		"mapas":{
+			icone:"imagens/gisicons/show-links.png",
 			titulo:"Links",
 			id:"guia5",
 			idconteudo:"guia5obj",
@@ -181,7 +185,7 @@ i3GEO.guias = {
 
 	Ordem de inclusão das guias no mapa. Essa opção é mais útil no caso do tipo sanfona, pois
 	a primeira guia é sempre a que fica ativa. Se esse parâmetro for uma string vazia, a ordem
-	utilizada será a ordem existente em CONFIGURA
+	utilizada será a ordem existente em i3GEO.guias.CONFIGURA
 
 	Exemplo:
 
@@ -231,11 +235,13 @@ i3GEO.guias = {
 	/*
 	Function: cria
 
-	Cria as guias com base na variável configura.
+	Cria as guias com base na variável i3GEO.guias.CONFIGURA
 
 	As guias podem ser definidas no HTML do mapa, sem necessariamente estarem na variável configura.<b> 
 	As guias, nesse caso, devem ter como ID "guia'n'", por exemplo id="guia6". Para cada uma dessas guias
-	deve haver um DIV com o conteúdo. Esse DIV deve ter como ID "guia'n'obj", por exemplo id="guia6obj"
+	deve haver um DIV com o conteúdo. Esse DIV deve ter como ID "guia'n'obj", por exemplo id="guia6obj".
+	No caso de ser utilizado a guia móvel, com i3GEO.guias.TIPO = "movel" , "guia'n" não é necessário, uma vez que são
+	utilizados os ícones definidos em i3GEO.guias.CONFIGURA
 
 	Parametro:
 
@@ -246,12 +252,32 @@ i3GEO.guias = {
 		//
 		//obtém outras guias que podem existir no mapa
 		//
-		var nguiasreal = 0,onf,outf,guiaconteudo,id,guia,guias,nguias,g,re,ng,tituloguia,i,ins,largura,altura,temp,
+		var nguiasreal = 0,onf,outf,guiaconteudo,id,guia,guias,g,re,ng,tituloguia,i,ins,largura,altura,temp,preload,
 			CONFIGURA = i3GEO.guias.CONFIGURA,
-			guias = i3GEO.util.listaChaves(CONFIGURA);
-		
-		try{
+			guias = i3GEO.util.listaChaves(CONFIGURA),
 			nguias = guias.length;
+		//
+		//no caso de TIPO === "movel", as guias não são construídas de imediato, apenas é criado um objeto
+		//com os parâmetros necessários para a criação das guias
+		//
+		if(i3GEO.guias.TIPO === "movel"){
+			i3GEO.guias.IDGUIAS = "i3GEOguiaMovelConteudo";
+			for(ng=0;ng<nguias;ng++){
+				if($i(i3GEO.guias.CONFIGURA[guias[ng]].idconteudo)){
+					i3GEO.guias.guiaMovel.config.guias.ids.push(i3GEO.guias.CONFIGURA[guias[ng]].id);
+					i3GEO.guias.guiaMovel.config.guias.idsconteudos.push(i3GEO.guias.CONFIGURA[guias[ng]].idconteudo);
+					if(i3GEO.guias.CONFIGURA[guias[ng]].icone !== undefined)
+					{i3GEO.guias.guiaMovel.config.guias.icones.push(i3GEO.guias.CONFIGURA[guias[ng]].icone);}
+					else
+					{i3GEO.guias.guiaMovel.config.guias.icones.push("imagens/gisicons/open1.png");}
+					i3GEO.guias.guiaMovel.config.guias.titulos.push(i3GEO.guias.CONFIGURA[guias[ng]].titulo);
+					i3GEO.guias.guiaMovel.config.guias.chaves.push(guias[ng]);
+				}
+			}
+			return;
+		}
+		try{
+			
 			for(g=0;g<12;g++){
 				tituloguia = "";
 				if($i("guia"+g)){
@@ -494,27 +520,29 @@ i3GEO.guias = {
 		//
 		//se a guia clicada já estiver aberta na interface com TABLET
 		//
-		if($i(this.CONFIGURA[guia].idconteudo).style.display === "block" && i3GEO.guias.TIPO === "tablet"){
+		if($i(i3GEO.guias.CONFIGURA[guia].idconteudo).style.display === "block" && i3GEO.guias.TIPO === "tablet"){
 			i3GEO.guias.escondeGuias();
 			return;
 		}
-		for(g=0;g<nguias;g++){
-			if($i(this.CONFIGURA[guias[g]].idconteudo))
-			{$i(this.CONFIGURA[guias[g]].idconteudo).style.display="none";}
-			if($i(this.CONFIGURA[guias[g]].id))
-			{$i(this.CONFIGURA[guias[g]].id).parentNode.parentNode.style.background="transparent";}
+		if(i3GEO.guias.TIPO !== "movel"){
+			for(g=0;g<nguias;g++){
+				if($i(i3GEO.guias.CONFIGURA[guias[g]].idconteudo))
+				{$i(i3GEO.guias.CONFIGURA[guias[g]].idconteudo).style.display="none";}
+				if($i(i3GEO.guias.CONFIGURA[guias[g]].id))
+				{$i(i3GEO.guias.CONFIGURA[guias[g]].id).parentNode.parentNode.style.background="transparent";}
+			}
 		}
 		//
 		//verifica se o nome da guia passado como parametro está correto ou é o id da guia
 		//
-		if(this.CONFIGURA.toString().search(guia) < 0){
+		if(i3GEO.guias.CONFIGURA.toString().search(guia) < 0){
 			for(g=0;g<nguias;g++){
-				if(this.CONFIGURA[guias[g]].id === guia)
+				if(i3GEO.guias.CONFIGURA[guias[g]].id === guia)
 				{guia = guias[g];}
 			}
 		}
-		if(this.CONFIGURA[guia]){
-			temp = $i(this.CONFIGURA[guia].idconteudo);
+		if(i3GEO.guias.CONFIGURA[guia]){
+			temp = $i(i3GEO.guias.CONFIGURA[guia].idconteudo);
 			if(temp){
 				if(i3GEO.guias.TIPO === "tablet"){
 					i3GEO.barraDeBotoes.BARRAS[0].hide();
@@ -540,8 +568,9 @@ i3GEO.guias = {
 				}
 				else
 				{temp.style.display="block";}
-				$i(this.CONFIGURA[guia].id).parentNode.parentNode.style.backgroundColor="white";
-				this.ATUAL = guia;
+				if(i3GEO.guias.TIPO !== "movel")
+				{$i(i3GEO.guias.CONFIGURA[guia].id).parentNode.parentNode.style.backgroundColor="white";}
+				i3GEO.guias.ATUAL = guia;
 			}
 		}
 	},
@@ -701,85 +730,157 @@ i3GEO.guias = {
 		config: {
 			larguraPuxador: 50,
 			alturaPuxador: 319,
-			imgPuxador: '/imagens/openbars.png',
 			alturaGuiaMovel: 0,
-			larguraGuiaMovel: 300
+			larguraGuiaMovel: 320,
+			guias: {
+				icones: [],
+				ids: [],
+				idsconteudos: [],
+				titulos: [],
+				chaves: []
+			}
 		},
 		left: 0,
 		inicia: function(){
-			var molde = document.createElement("div"),
-				moldeS = molde.style,
-				posMapa = i3GEO.util.pegaPosicaoObjeto($i(i3GEO.Interface.IDMAPA)),
-				ins = "";
-			if(i3GEO.guias.ALTURACORPOGUIAS === 0 && i3GEO.guias.guiaMovel.config.alturaGuiaMovel === 0)
+			var posMapa = i3GEO.util.pegaPosicaoObjeto($i(i3GEO.Interface.IDMAPA)),
+				centroY = posMapa[1] + (i3GEO.parametros.h / 2),
+				config = i3GEO.guias.guiaMovel.config,
+				ins = "",
+				temp;
+			
+			if(i3GEO.guias.ALTURACORPOGUIAS === 0 && config.alturaGuiaMovel === 0)
 			{i3GEO.guias.guiaMovel.config.alturaGuiaMovel = i3GEO.parametros.h - 100;}
 			else
 			{i3GEO.guias.guiaMovel.config.alturaGuiaMovel = i3GEO.guias.ALTURACORPOGUIAS;}
-			molde.id = "i3GEOguiaMovelMolde";
-			moldeS.position = "absolute";
-			moldeS.display = "block";
-			moldeS.height = i3GEO.guias.guiaMovel.config.alturaGuiaMovel;
-			moldeS.border = "0px solid white";
-			moldeS.textAlign = "left";
-			moldeS.zIndex = 1000;
-			moldeS.left = posMapa[0] + i3GEO.parametros.w - i3GEO.guias.guiaMovel.config.larguraPuxador;
-			i3GEO.guias.guiaMovel.left = parseInt(moldeS.left,10);
-			moldeS.top = posMapa[1] + (i3GEO.parametros.h / 2) - (i3GEO.guias.guiaMovel.config.alturaGuiaMovel / 2);
-			ins += "<img id='i3GEOguiaMovelPuxador' onclick='i3GEO.guias.guiaMovel.abreFecha()' style='z-index:2;border:solid 0px white;left:0px;position:relative;top:"+ ((i3GEO.guias.guiaMovel.config.alturaGuiaMovel / 2) - (i3GEO.guias.guiaMovel.config.alturaPuxador / 2)) +"px' width='"+i3GEO.guias.guiaMovel.config.larguraPuxador+"' src='"+i3GEO.configura.locaplic+"/"+i3GEO.guias.guiaMovel.config.imgPuxador+"' >";
-			ins += "<div id='i3GEOguiaMovelConteudo' style='display:none;position:absolute;border-color:gray;border-width:0px 0 0px 0px;left:"+(i3GEO.guias.guiaMovel.config.larguraPuxador - 4) +"px;top:0px;height:"+i3GEO.guias.guiaMovel.config.alturaGuiaMovel+"px;background-color:black' >&nbsp;</div>"
-			ins += "<div id='i3GEOguiaMovelIcones' style='left:"+(i3GEO.guias.guiaMovel.config.larguraPuxador + 4)+";display:none;position:absolute;top:6px;text-align:center;height:50px;width:"+(i3GEO.guias.guiaMovel.config.larguraGuiaMovel - 8) +"px;border:solid 0px white;background-color:white' ></div>";
-			molde.innerHTML = ins;
-			document.body.appendChild(molde);
-			YAHOO.util.Dom.setStyle("i3GEOguiaMovelConteudo", "opacity", 0.20);
-			YAHOO.util.Dom.setStyle("i3GEOguiaMovelIcones", "opacity", 0.40);
+			config = i3GEO.guias.guiaMovel.config;
+			
+			temp = $i("i3GEOguiaMovel").style;
+			temp.height = config.alturaGuiaMovel + "px";
+			temp.left = (posMapa[0] + i3GEO.parametros.w - config.larguraPuxador) + "px";
+			//aberta temp.left = (posMapa[0] + i3GEO.parametros.w - config.larguraPuxador - config.larguraGuiaMovel) + "px";
+			i3GEO.guias.guiaMovel.left = parseInt(temp.left,10);
+			temp.top = (centroY - ((config.alturaGuiaMovel - 50) / 2)) + "px";
+			temp.width = config.larguraPuxador + "px";
+			//aberta temp.width = config.larguraPuxador + config.larguraGuiaMovel + "px";
+
+			temp = $i("i3GEOguiaMovelMolde").style;
+			temp.top = "0px";
+			temp.left = config.larguraPuxador + "px";
+			temp.width = "0px"; //config.larguraGuiaMovel + "px";
+			temp.height = config.alturaGuiaMovel + "px";		
+			
+			temp = $i("i3GEOguiaMovelPuxador").style;
+			temp.top = ((config.alturaGuiaMovel  - config.alturaPuxador) / 2 ) + "px";
+			temp.left = "0px";
+			temp.width = config.larguraPuxador + "px";
+			temp.height = config.alturaPuxador + "px";
+			
+			temp = $i("i3GEOguiaMovelIcones").style;
+			temp.left = "3px";
+			temp.top = "3px";
+			temp.width = (config.larguraGuiaMovel - 3) + "px";
+			temp.height = "30px";
+			
+			temp = $i("i3GEOguiaMovelConteudo").style;
+			temp.left = "3px";
+			temp.top = "33px";
+			temp.height = (config.alturaGuiaMovel - 36) +"px";
+			temp.width = (config.larguraGuiaMovel - 3) + "px";
+
+			YAHOO.util.Dom.setStyle("i3GEOguiaMovelConteudo", "opacity", 0.90);
+			YAHOO.util.Dom.setStyle("i3GEOguiaMovelIcones", "opacity", 0.90);
+			YAHOO.util.Dom.setStyle("i3GEOguiaMovelMolde", "opacity", 0.10);
+
+			$i("i3GEOguiaMovelMolde").onmouseover = function(){
+				if($i("i3GEOguiaMovelConteudo").style.display === "block")
+				{YAHOO.util.Dom.setStyle("i3GEOguiaMovelMolde", "opacity", 0.8);}
+			};
+			$i("i3GEOguiaMovelMolde").onmouseout = function(){
+				YAHOO.util.Dom.setStyle("i3GEOguiaMovelMolde", "opacity", 0.20);
+			};
+			i3GEO.guias.guiaMovel.ativa(i3GEO.guias.ATUAL);			
+		},
+		mostraIcones: function(){
+			if($i("i3GEOguiaMovelIcones").innerHTML != "")
+			{return;}
+			var n = i3GEO.guias.guiaMovel.config.guias.icones.length,
+				i,
+				temp = i3GEO.guias.guiaMovel.config.guias,
+				ins = "";
+			for(i=0;i<n;i++){
+				ins += "<img onclick='i3GEO.guias.guiaMovel.ativa(\""+temp.chaves[i]+"\")' id='"+temp.ids[i]+"' src='"+i3GEO.configura.locaplic+"/"+temp.icones[i]+"' title='"+temp.titulos[i]+"' style='cursor:pointer;margin-left:5px;border:solid 0px white;' />";
+			}
+			$i("i3GEOguiaMovelIcones").innerHTML = ins;
+		},
+		ativa: function(chave){
+			if(i3GEO.guias.CONFIGURA[chave].click)
+			{i3GEO.guias.CONFIGURA[chave].click.call();}
+			i3GEO.guias.escondeGuias();
+			i3GEO.guias.mostra(chave);
+			i3GEO.guias.ATUAL = chave;
 		},
 		reposiciona: function(){
-			var obj = $i("i3GEOguiaMovelMolde");
-			obj.parentNode.removeChild(obj);
+			i3GEO.guias.guiaMovel.config.guias.icones = [];
+			i3GEO.guias.guiaMovel.config.guias.ids = [];
+			i3GEO.guias.guiaMovel.config.guias.idsconteudos = [];
+			i3GEO.guias.guiaMovel.config.guias.titulos = [];
+			i3GEO.guias.guiaMovel.config.guias.chaves = [];
+			i3GEO.guias.guiaMovel.config.alturaGuiaMovel = 0;
+			i3GEO.guias.ALTURACORPOGUIAS = 0;
+			$i("i3GEOguiaMovelIcones").style.display = "none";
+			$i("i3GEOguiaMovelConteudo").style.display = "none";
+			$i("i3GEOguiaMovelMolde").style.display = "none";			
+			i3GEO.guias.escondeGuias();
 			i3GEO.guias.guiaMovel.inicia();
 		},
 		abreFecha: function(){
-			var molde = $i("i3GEOguiaMovelMolde"),
-				conteudo = $i("i3GEOguiaMovelConteudo"),
-				conteudoS = conteudo.style,
+			var conteudo = $i("i3GEOguiaMovelConteudo"),
+				molde = $i("i3GEOguiaMovelMolde"),
+				guia = $i("i3GEOguiaMovel"),
 				attributes,
-				moldeS = molde.style,
 				anim,
 				anim1;
-			if(conteudoS.display === "block"){//esconde
+			if(molde.style.display === "block"){//esconde
 				$i("i3GEOguiaMovelIcones").style.display = "none";
+				$i("i3GEOguiaMovelConteudo").style.display = "none";
 				attributes = {
-					left: { to: i3GEO.guias.guiaMovel.left - 1 },
-					id: "i3GEOguiaMovelMolde"
+					left: { to: i3GEO.guias.guiaMovel.left },
+					id: "i3GEOguiaMovel"
 				};
-				anim = new YAHOO.util.Anim(molde, attributes, 1, YAHOO.util.Easing.easeNone);
+				anim = new YAHOO.util.Anim(guia, attributes, 1, YAHOO.util.Easing.easeNone);
 				attributes = {
 					width: { to: 0 },
-					id: "i3GEOguiaMovelConteudo"
+					id: "i3GEOguiaMovelMolde"
 				};
-				anim1 = new YAHOO.util.Anim(conteudo, attributes, 1, YAHOO.util.Easing.easeNone);					
+				anim1 = new YAHOO.util.Anim(molde, attributes, 1, YAHOO.util.Easing.easeNone);					
 				anim.animate();
 				anim1.animate();
 				anim1.onComplete.subscribe(function(){
-					conteudoS.display = "none";
+					molde.style.display = "none";
 				});				
 			}
 			else{
-				conteudoS.display = "block";	
+				//conteudo.style.display = "block";
+				molde.style.display	= "block";		
 				attributes = {
-					left: { to: parseInt(moldeS.left,10) - i3GEO.guias.guiaMovel.config.larguraGuiaMovel },
+					left: { to: parseInt(guia.style.left,10) - i3GEO.guias.guiaMovel.config.larguraGuiaMovel },
+					id: "i3GEOguiaMovel"
+				};
+				anim = new YAHOO.util.Anim(guia, attributes, 1, YAHOO.util.Easing.easeNone);
+				
+				attributes = {
+					width: { to: i3GEO.guias.guiaMovel.config.larguraGuiaMovel },
 					id: "i3GEOguiaMovelMolde"
 				};
-				anim = new YAHOO.util.Anim(molde, attributes, 1, YAHOO.util.Easing.easeNone);
-				attributes = {
-					width: { to: i3GEO.guias.guiaMovel.config.larguraGuiaMovel + 4 },
-					id: "i3GEOguiaMovelConteudo"
-				};
-				anim1 = new YAHOO.util.Anim(conteudo, attributes, 1, YAHOO.util.Easing.easeNone);					
+				anim1 = new YAHOO.util.Anim(molde, attributes, 1, YAHOO.util.Easing.easeNone);					
+				
 				anim.animate();
 				anim1.animate();
 				anim1.onComplete.subscribe(function(){
 					$i("i3GEOguiaMovelIcones").style.display = "block";
+					$i("i3GEOguiaMovelConteudo").style.display = "block";
+					i3GEO.guias.guiaMovel.mostraIcones();
+					//YAHOO.util.Dom.setStyle("i3GEOguiaMovelMolde", "opacity", 0.8);
 				});
 			}
 		}

@@ -79,22 +79,29 @@
 	</tr>
 </table>
 
-  <div id='guia1obj' style='display:none;' >
-	<!-- Esta div acrescenta a opção de busca rápida, caso vc queira colocá-la em um lugar específico -->
-	<div style='left:5px;top:10px;' id=buscaRapida ></div>
-	<!--	Esta div acrescenta a lista de propriedades do mapa -->	
-  	<div id=listaPropriedades style='top:15px;' ></div>
-	<!--	Esta div acrescenta a lista de de camadas do tipo 'baselayers' específicas da interface Openlayers. Veja também a opção i3GEO.Interface.openlayers.GADGETS.LayerSwitcher -->
-  	<div id=listaLayersBase style='top:15px;'></div>
-	<!--	Esta div acrescenta a lista de de camadas disponíveis no mapa atual -->
-  	<div id=listaTemas style='top:15px;'></div>
-  </div>
-  <div id='guia2obj' style='display:none;'>Aguarde...<img alt="" src="../imagens/branco.gif" width=248 /></div>
-  <div id='guia4obj' style='display:none;text-align:left'><div id='legenda' style='text-align:left'></div></div>
-  <div id='guia5obj' style='display:none;text-align:left'><div id='banners' style='overflow:auto;text-align:left'>Aguarde...</div></div>
+<div id="i3GEOguiaMovel" style="position:absolute;display:block;border:0px solid white;text-align:left;z-index:1000;background-color:none">
+	<img id='i3GEOguiaMovelPuxador' onclick='i3GEO.guias.guiaMovel.abreFecha()' style='z-index:2;border:solid 0px white;left:0px;position:absolute;top:0px' width='0px' src='../imagens/openbars.png' >
+	<div id="i3GEOguiaMovelMolde" style="position:absolute;display:none;border:0px solid white;text-align:left;z-index:1000;background-color:black">
+		<div id='i3GEOguiaMovelIcones' style='overflow:none;left:0px;display:none;position:absolute;top:0px;text-align:center;height:0px;width:0px;border:solid 0px white;background-color:white' ></div>
+		<div id='i3GEOguiaMovelConteudo' style='overflow:auto;display:none;position:absolute;border-color:gray;border-width:0px 0 0px 0px;left:0px;height:0px;background-color:white'>
+			<div id='guia1obj' style='display:none;' >
+				<!-- Esta div acrescenta a opção de busca rápida, caso vc queira colocá-la em um lugar específico -->
+				<div style='left:5px;top:10px;' id=buscaRapida ></div>
+				<!--	Esta div acrescenta a lista de propriedades do mapa -->	
+				<div id=listaPropriedades style='top:15px;' ></div>
+				<!--	Esta div acrescenta a lista de de camadas do tipo 'baselayers' específicas da interface Openlayers. Veja também a opção i3GEO.Interface.openlayers.GADGETS.LayerSwitcher -->
+				<div id=listaLayersBase style='top:15px;'></div>
+				<!--	Esta div acrescenta a lista de de camadas disponíveis no mapa atual -->
+				<div id=listaTemas style='top:15px;'></div>
+			</div>
+			<div id='guia2obj' style='display:none;'>Aguarde...<img alt="" src="../imagens/branco.gif" width=248 /></div>
+			<div id='guia4obj' style='display:none;text-align:left'><div id='legenda' style='text-align:left'></div></div>
+			<div id='guia5obj' style='display:none;text-align:left'><div id='banners' style='overflow:auto;text-align:left'>Aguarde...</div></div>
+		</div>
+	</div>
+</div>
 
-
-<script src="../classesjs/i3geonaocompacto.js"></script>
+<script src="../classesjs/i3geo.js"></script>
 <script src="../pacotes/openlayers/OpenLayers29.js.php"></script>
 <!-- estilo necessário para a ferramenta de edição -->
 <style>
@@ -170,13 +177,22 @@ i3GEO.cria();
 /*
 	Inicializa o mapa
 */
+//não mostra o mapa de referência
 i3GEO.configura.mapaRefDisplay = "none";
-
+//tipo de barra de botões
 i3GEO.barraDeBotoes.TIPO = "olhodepeixe";
+//ajusta o deslocamento da barra de botões
 i3GEO.barraDeBotoes.OFFSET = -3;
-i3GEO.scrollerWidth = 0; //permite ajustar o mapa até a borda do navegador
+//ajusta a posição da barra de botões no IE
+if(navm)
+{i3GEO.barraDeBotoes.OFFSET = -45;}
+//permite ajustar o mapa até a borda do navegador
+i3GEO.scrollerWidth = 0;
+//número máximo de botões na barra de botões inicial
 //i3GEO.barraDeBotoes.MAXBOTOES = 10;
+//remove itens dos menus que não são necessários, já que estão como ícones na barra de botões
 i3GEO.configura.oMenuData["submenus"]["janelas"] = [];
+//
 //barra de botoes normal. descomente para usar
 /*
 i3GEO.barraDeBotoes.TIPO = "yui";
@@ -248,6 +264,7 @@ OpenLayers.ImgPath = "../pacotes/openlayers/img/";
 //
 //inicia o mapa
 //
+//esconde a logomarca ao finalizar o mapa
 i3GEO.finaliza = function(){
 	$i("i3GEOlogoMarca").style.display = "none";
 }
