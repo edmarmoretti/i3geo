@@ -35,11 +35,10 @@ if(typeof(i3GEO) === 'undefined'){
 /*
 Classe: i3GEO.guias
 
-Cria e controla as guias de opções mostradas no mapa principal e as guias das ferramentas
+Cria e controla os blocos de opções ativados por meio de guias ou botões 
 
 Para configurar as guias do mapa principal utilize i3GEO.guias.configura = ...
 
-As guias das ferramentas são configuradas nos scripts específicos de cada ferramenta
 */
 i3GEO.guias = {
 	/*
@@ -183,9 +182,11 @@ i3GEO.guias = {
 	/*
 	Propriedade: ORDEM
 
-	Ordem de inclusão das guias no mapa. Essa opção é mais útil no caso do tipo sanfona, pois
+	Ordem de inclusão das guias no mapa. Essa opção é mais útil no caso do tipo sanfona, pois nesse caso,
 	a primeira guia é sempre a que fica ativa. Se esse parâmetro for uma string vazia, a ordem
-	utilizada será a ordem existente em i3GEO.guias.CONFIGURA
+	utilizada será a ordem existente em i3GEO.guias.CONFIGURA.
+	
+	Ao ser definida, apenas as guias indicadas no array serão incluídas
 
 	Exemplo:
 
@@ -196,12 +197,8 @@ i3GEO.guias = {
 
 	Default:
 	{""}
-
-	Values:
-
 	*/
 	ORDEM: "",
-
 	/*
 	Propriedade: TIPO
 
@@ -726,7 +723,26 @@ i3GEO.guias = {
 		}
 		Dom.setStyle(guia+"obj","display","block");
 	},
+	/*
+	Function: guiaMovel
+	
+	Controla as guias do tipo "movel", que apresenta uma janela retrátil onde as opções são mostradas
+	*/
 	guiaMovel: {
+		/*
+		Propriedade: ABERTA
+		
+		Indica se a guia inicializará aberta
+		
+		Type:
+		{boolean}
+		*/
+		ABERTA: false,
+		/*
+		Propriedade: config
+		
+		Define os valores de posicionamento dos elementos que compõem a guia
+		*/
 		config: {
 			larguraPuxador: 50,
 			alturaPuxador: 319,
@@ -740,7 +756,17 @@ i3GEO.guias = {
 				chaves: []
 			}
 		},
+		/*
+		Variavel: left
+		
+		Valor de posicionamento à esquerda, calculado na inicialização
+		*/
 		left: 0,
+		/*
+		Function: inicia
+		
+		Inicializa a guia móvel
+		*/
 		inicia: function(){
 			var posMapa = i3GEO.util.pegaPosicaoObjeto($i(i3GEO.Interface.IDMAPA)),
 				centroY = posMapa[1] + (i3GEO.parametros.h / 2),
@@ -785,7 +811,8 @@ i3GEO.guias = {
 			temp.left = "3px";
 			temp.top = "33px";
 			temp.height = (config.alturaGuiaMovel - 36) +"px";
-			temp.width = (config.larguraGuiaMovel - 3) + "px";
+			temp.width = (config.larguraGuiaMovel - 7) + "px";
+			temp.paddingLeft = "4px";
 
 			YAHOO.util.Dom.setStyle("i3GEOguiaMovelConteudo", "opacity", 0.90);
 			YAHOO.util.Dom.setStyle("i3GEOguiaMovelIcones", "opacity", 0.90);
@@ -798,8 +825,15 @@ i3GEO.guias = {
 			$i("i3GEOguiaMovelMolde").onmouseout = function(){
 				YAHOO.util.Dom.setStyle("i3GEOguiaMovelMolde", "opacity", 0.20);
 			};
-			i3GEO.guias.guiaMovel.ativa(i3GEO.guias.ATUAL);			
+			i3GEO.guias.guiaMovel.ativa(i3GEO.guias.ATUAL);
+			if(i3GEO.guias.guiaMovel.ABERTA === true)
+			{i3GEO.guias.guiaMovel.abreFecha();}
 		},
+		/*
+		Function: mostraIcones
+		
+		Mostra os ícones que acionam cada guia
+		*/
 		mostraIcones: function(){
 			if($i("i3GEOguiaMovelIcones").innerHTML != "")
 			{return;}
@@ -807,11 +841,23 @@ i3GEO.guias = {
 				i,
 				temp = i3GEO.guias.guiaMovel.config.guias,
 				ins = "";
+			if(i3GEO.guias.ORDEM !== "")
+			{temp.chaves = i3GEO.guias.ORDEM;}
 			for(i=0;i<n;i++){
-				ins += "<button onclick='i3GEO.guias.guiaMovel.ativa(\""+temp.chaves[i]+"\")' style='background-image:none;margin-left:8px;'><img id='"+temp.ids[i]+"' src='"+i3GEO.configura.locaplic+"/"+temp.icones[i]+"' title='"+temp.titulos[i]+"' style='cursor:pointer;border:solid 0px white;' /></button>";
+				if(temp.chaves[i])
+				{ins += "<button onclick='i3GEO.guias.guiaMovel.ativa(\""+temp.chaves[i]+"\")' style='background-image:none;margin-left:8px;'><img id='"+temp.ids[i]+"' src='"+i3GEO.configura.locaplic+"/"+temp.icones[i]+"' title='"+temp.titulos[i]+"' style='cursor:pointer;border:solid 0px white;' /></button>";}
 			}
 			$i("i3GEOguiaMovelIcones").innerHTML = ins;
 		},
+		/*
+		Function: ativa
+		
+		Ativa o conteúdo de determinada guia
+		
+		Parametro:
+		
+		chave {string} - código da guia, definido em i3GEO.guias.CONFIGURA
+		*/
 		ativa: function(chave){
 			if(i3GEO.guias.CONFIGURA[chave].click)
 			{i3GEO.guias.CONFIGURA[chave].click.call();}
@@ -819,6 +865,11 @@ i3GEO.guias = {
 			i3GEO.guias.mostra(chave);
 			i3GEO.guias.ATUAL = chave;
 		},
+		/*
+		Function: reposiciona
+		
+		Reposiciona a guia móvel quando o mapa muda de tamanho
+		*/
 		reposiciona: function(){
 			i3GEO.guias.guiaMovel.config.guias.icones = [];
 			i3GEO.guias.guiaMovel.config.guias.ids = [];
@@ -833,6 +884,11 @@ i3GEO.guias = {
 			i3GEO.guias.escondeGuias();
 			i3GEO.guias.guiaMovel.inicia();
 		},
+		/*
+		Function: abreFecha
+		
+		Abre ou fecha a guia móvel
+		*/
 		abreFecha: function(){
 			var conteudo = $i("i3GEOguiaMovelConteudo"),
 				molde = $i("i3GEOguiaMovelMolde"),
