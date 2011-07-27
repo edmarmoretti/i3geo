@@ -221,7 +221,7 @@ if (strtoupper(substr(PHP_OS, 0, 3) == 'WIN'))
 	Tipo:
 	{array}
 	*/
-	$editores = array("127.0.0.1","localhost");
+	$editores = "";//array("127.0.0.1","localhost");
 	/*
 	Variable: dir_tmp
 	
