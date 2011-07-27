@@ -160,12 +160,18 @@ i3GEOF.tabela = {
 				"i3GEOtabelabotao6",
 				{onclick:{fn: i3GEOF.tabela.criaNovoTema}}
 			);
+			new YAHOO.widget.Button(
+				"i3GEOtabelabotaoLista",
+				{onclick:{fn: i3GEOF.tabela.pegaRegistros}}
+			);
 			$i("i3GEOtabelabotao2-button").style.minHeight = "1em";
 			$i("i3GEOtabelabotao2-button").style.padding = "0px 15px";
 			$i("i3GEOtabelabotao3-button").style.minHeight = "1em";
 			$i("i3GEOtabelabotao3-button").style.padding = "0px 15px";
 			$i("i3GEOtabelabotao6-button").style.minHeight = "1em";
 			$i("i3GEOtabelabotao6-button").style.padding = "0px 15px";
+			$i("i3GEOtabelabotaoLista-button").style.minHeight = "1em";
+			$i("i3GEOtabelabotaoLista-button").style.padding = "0px 15px";
 						
 			new YAHOO.widget.Button(
 				"i3GEOtabelabotao4",
@@ -240,21 +246,21 @@ i3GEOF.tabela = {
 		ins += '			at&eacute;';
 		ins += $inputText("","","i3GEOtabelafim","",5,"20");
 		ins += '			<img style=cursor:pointer onclick="i3GEOF.tabela.mais()" src="'+i3GEO.configura.locaplic+'/imagens/plus.gif" />';
-		ins += '			<span style=cursor:pointer onclick="i3GEOF.tabela.pegaRegistros()" ><img title="listar dados"  src="'+i3GEO.configura.locaplic+'/imagens/tic.png" /> Listar</span>';
+		ins += '			<input title="Atualiza a lista de registros" id=i3GEOtabelabotaoLista size=25  type=button value="Listar"/>';
 		ins += '		</div>';
 		ins += '		<div id=i3GEOtabelaregistros style="position:relative;top:20px;left:0px;text-align:left;">';
 		ins += '		</div>';
 		ins += '	</div>';
 		ins += '	<div id=i3GEOtabelaguia3obj style="display:none;width:99%;left:0px" >';
-		ins += '		<p class="paragrafo" >Item: <span id=i3GEOtabelaitensGuia3 ></span>';
-		ins += '		Excluir dos cálculos o valor:';
+		ins += '		<p class="paragrafo" >Item para aplicar os cálculos: <span id=i3GEOtabelaitensGuia3 ></span>';
+		ins += '		<p class="paragrafo" >Excluir dos cálculos o valor:';
 		ins += $inputText("","","i3GEOtabelafiltro1","",5,"");
 		ins += '		<p class="paragrafo" ><input id=i3GEOtabelabotao4 size=30  type=button value="Calcular"/>';
 		ins += '		<div id="i3GEOtabelaoperacoes" class=digitar style="text-align:left;position:relative;top:15px;left:0px;"  >';
 		ins += '		</div><br>';
 		ins += '		<div id=i3GEOtabelamen1 style="position:relative;top:25px;left:0px;width:100%" >';
-		ins += '			<p class="paragrafo" >Para que as opera&ccedil;&otilde;es atuem apenas sobre os elementos selecionados, ';
-		ins += '			ative a sele&ccedil;&atilde;o no mapa, para isso utilize, na guia "todos os registros"';
+		ins += '			<p class="paragrafo" >Para que as opera&ccedil;&otilde;es atuem apenas sobre os elementos selecionados ';
+		ins += '			ative a sele&ccedil;&atilde;o no mapa, para isso utilize, na guia "Registros"';
 		ins += '			a op&ccedil;&atilde;o "Ativa a sele&ccedil;&atilde;o"';
 		ins += '		</div>';
 		ins += '	</div>';
@@ -428,7 +434,7 @@ i3GEOF.tabela = {
 			ins += "<tr><td></td><td></td><td></td>";
 			n = retorno.data[0].itens.length;
 			for (i=0;i<n;i++)
-			{ins += "<td style='background-color:yellow' ><img style=cursor:pointer onclick='i3GEOF.tabela.excluiColuna(this,"+(i * 1 + 3)+")' src='"+i3GEO.configura.locaplic+"/imagens/x.gif' title='excluir' />&nbsp;<img style=cursor:pointer onclick='i3GEOF.tabela.ordenaColuna(this,"+(i * 1 + 3)+")' src='"+i3GEO.configura.locaplic+"/imagens/ordena1.gif' title='ordena' /> "+retorno.data[0].itens[i]+"</td>";}
+			{ins += "<td style='background-color:yellow' ><img style=cursor:pointer onclick='i3GEOF.tabela.excluiColuna(this,"+(i * 1 + 3)+")' src='"+i3GEO.configura.locaplic+"/imagens/x.gif' title='excluir' />&nbsp;<img style=cursor:pointer onclick='i3GEOF.tabela.ordenaColuna(this,"+(i * 1 + 3)+")' src='"+i3GEO.configura.locaplic+"/imagens/ordena1.gif' title='ordena' /><br> "+retorno.data[0].itens[i]+"</td>";}
 			ins += "</tr>";
 			cor = "linha";
 			n = retorno.data[1].registros.length;
