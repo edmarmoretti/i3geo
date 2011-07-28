@@ -239,9 +239,9 @@ Inicia o mapa, pegando os parâmetros necessários para a montagem inicial.
 	case "INICIA":
 		include_once("mapa_inicia.php");
 		//
-		//a variável $editores vem do ms_configura.php
+		//a variável $editores vem da session
 		//
-		$editor = verificaEditores($editores);
+		$editor = verificaEditores($_SESSION["editores"]);
 		iniciaMapa();
 	break;
 /*

@@ -364,7 +364,7 @@ function montaConteudoNo(id,publicado,nome,tipo){
 	if(publicado == "NAO")
 	{var cor = "style='color:red'";}
 	if(nome)
-	conteudo += "<span "+cor+" >"+nome+"</span>"
+	conteudo += "<span "+cor+" >"+nome+"<span style='color:gray'> id: "+id+"</span></span>"
 	else
 	conteudo += "<span "+cor+" > ??? vc precisa editar esse nó</span>"
 	return conteudo;

@@ -186,6 +186,7 @@ $protocolo = explode("/",$_SERVER['SERVER_PROTOCOL']);
 As variáveis vêm do arquivo ms_configura.php e são armazenadas em uma seção com nome específico para o i3geo.
 */
 if (!isset($mapext)){$mapext="";}
+$editores_ = $editores;
 $dir_tmp_ = $dir_tmp;
 $emailInstituicao_ = $emailInstituicao;
 $locmapserv_ = $locmapserv;
@@ -239,6 +240,7 @@ Monta a apresentação do aguarde.
 Aqui é necessário verificar se $executa está definido
 isso pq algumas aplicações podem ser prejudicadas caso o aguarde seja mostrado
 */
+$_SESSION["editores"] = $editores_;
 $_SESSION["dir_tmp"] = $dir_tmp_;
 $_SESSION["emailInstituicao"] = $emailInstituicao_;
 $_SESSION["locmapserv"] = $locmapserv_;

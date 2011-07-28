@@ -312,7 +312,7 @@ i3GEOF.tabela = {
 			i3GEO.janela.minimiza("i3GEOF.tabela");
 		};
 		//cria a janela flutuante
-		titulo = "Tabela <a class=ajuda_usuario target=_blank href='" + i3GEO.configura.locaplic + "/ajuda_usuario.php?idcategoria=5&idajuda=39' >&nbsp;&nbsp;&nbsp;</a>";
+		titulo = "<div style='position:absolute' id='i3GEOFtabelaComboCabeca' >------</div>&nbsp;&nbsp;&nbsp;Tabela <a class=ajuda_usuario target=_blank href='" + i3GEO.configura.locaplic + "/ajuda_usuario.php?idcategoria=5&idajuda=39' >&nbsp;&nbsp;&nbsp;</a>";
 		janela = i3GEO.janela.cria(
 			"500px",
 			"400px",
