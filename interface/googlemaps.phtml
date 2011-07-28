@@ -84,7 +84,7 @@ include_once("../ms_configura.php");
 
 <div id="i3GEOguiaMovel" style="position:absolute;display:block;border:0px solid white;text-align:left;z-index:1000;background-color:none">
 	<img id='i3GEOguiaMovelPuxador' onclick='i3GEO.guias.guiaMovel.abreFecha()' style='z-index:2;border:solid 0px white;left:0px;position:absolute;top:0px' width='0px' src='../imagens/openbars.png' >
-	<div id="i3GEOguiaMovelMolde" style="position:absolute;display:none;border:0px solid white;text-align:left;z-index:1000;background-color:black">
+	<div id="i3GEOguiaMovelMolde" style="position:absolute;display:none;border:0px solid white;text-align:left;z-index:1000;background-color:gray">
 		<div id='i3GEOguiaMovelIcones' style='overflow:none;left:0px;display:none;position:absolute;top:0px;text-align:center;height:0px;width:0px;border:solid 0px white;background-color:white' ></div>
 		<div id='i3GEOguiaMovelConteudo' style='overflow:auto;display:none;position:absolute;border-color:gray;border-width:0px 0 0px 0px;left:0px;height:0px;background-color:white'>
 			<div id='guia1obj' style='display:none;' >
@@ -143,7 +143,7 @@ i3GEO.configura.mapaRefDisplay = "none";
 //tipo de barra de botões
 i3GEO.barraDeBotoes.TIPO = "olhodepeixe";
 //ajusta o deslocamento da barra de botões
-i3GEO.barraDeBotoes.OFFSET = -3;
+i3GEO.barraDeBotoes.OFFSET = -10;
 //ajusta a posição da barra de botões no IE
 if(navm)
 {i3GEO.barraDeBotoes.OFFSET = -45;}
@@ -175,6 +175,7 @@ i3GEO.arvoreDeTemas.OPCOESADICIONAIS.comentario = true;
 i3GEO.mapa.AUTORESIZE = true;
 i3GEO.arvoreDeCamadas.MOSTRALISTAKML = false;
 i3GEO.guias.TIPO = "movel";
+i3GEO.ajuda.ATIVAJANELA = false;
 //
 //substitui a janela de alerta normal do navegador por uma janela estilizada. Pode ser comentado sem problemas.
 //

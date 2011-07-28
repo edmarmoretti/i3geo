@@ -787,6 +787,7 @@ i3GEO.barraDeBotoes = {
 			}
 		}
 		$i(euEnv.euDockArray.euDock_0.bar.elementsArray.left.id).onclick = function(){
+			i3GEO.ajuda.ATIVAJANELA = true;
 			i3GEO.ajuda.abreJanela();
 		};
 		$i(euEnv.euDockArray.euDock_0.bar.elementsArray.right.id).onclick = function(){
