@@ -1288,9 +1288,19 @@ i3GEO.editorOL = {
 	substituiFeaturesSel: function(wkt){
 		i3GEO.editorOL.guardaBackup();
 		try{
-			var fwkt = new OpenLayers.Format.WKT();
+			var f,fwkt = new OpenLayers.Format.WKT();
 			i3GEO.editorOL.layergrafico.removeFeatures(i3GEO.editorOL.layergrafico.selectedFeatures);
-			i3GEO.editorOL.layergrafico.addFeatures([fwkt.read(wkt)]);
+			f = fwkt.read(wkt);
+			f["attributes"] = {
+				opacidade: i3GEO.editorOL.simbologia.opacidade,
+				texto: i3GEO.editorOL.simbologia.texto,
+				fillColor: i3GEO.editorOL.simbologia.fillColor,
+				strokeWidth: i3GEO.editorOL.simbologia.strokeWidth,
+				strokeColor: i3GEO.editorOL.simbologia.strokeColor,
+				pointRadius: i3GEO.editorOL.simbologia.pointRadius,
+				graphicName: i3GEO.editorOL.simbologia.graphicName
+			};			
+			i3GEO.editorOL.layergrafico.addFeatures([f]);
 		}
 		catch(e)
 		{i3GEO.editorOL.restauraBackup();}
