@@ -68,8 +68,22 @@ i3GEO.mapa = {
 	É definido como um evento do elemento window
 	*/
 	ativaAutoResize: function(){
+
 		window.onresize = function(){
-			var temp = setTimeout(function(){
+			var temp,Dw,Dh, r = false;
+			Dw = YAHOO.util.Dom.getViewportWidth();
+			Dh = YAHOO.util.Dom.getViewportHeight();
+			if(typeof(console) !== 'undefined'){console.info(Dw+" "+Dh+" "+i3GEO.tamanhodoc);}
+			if(Math.abs(Dw - i3GEO.tamanhodoc[0]) > 50){
+				r = true;
+			}
+			if(Math.abs(Dh - i3GEO.tamanhodoc[1]) > 50){
+				r = true;
+			}			
+			if(r === false)
+			{return;}
+			i3GEO.tamanhodoc = [Dw,Dh];
+			temp = setTimeout(function(){
 				i3GEO.reCalculaTamanho();
 				i3GEO.barraDeBotoes.recria("i3geo_barra2");
 				if(i3GEO.Interface.TABLET === true)

@@ -125,18 +125,18 @@ i3GEOF.selecao = {
 		'	</ul>' +
 		'</div><br>' +
 		'<div class=guiaobj id="i3GEOselecaoguia1obj" style="left:1px;display:none;top:-5px">' +
-		'	<p class=paragrafo ><img id=i3GEOselecaopt onclick="i3GEOF.selecao.tiposel(this)" src="'+i3GEO.configura.locaplic+'/imagens/gisicons/point.png" title="Clique no mapa para selecionar" style="cursor:pointer;border:1px solid gray" />';
+		'	<p class=paragrafo ><button title="Clique no mapa para selecionar" style="background:none;background-color:#F5F5F5" value="i3GEOselecaopt" onclick="i3GEOF.selecao.tiposel(this)"><img id=i3GEOselecaopt src="'+i3GEO.configura.locaplic+'/imagens/gisicons/select-one.png" /></button>';
 		if(i3GEO.Interface.ATUAL != "googlemaps" && i3GEO.Interface.ATUAL != "googleearth")
-		{ins += '	<img id=i3GEOselecaopoli onclick="i3GEOF.selecao.tiposel(this)" src="'+i3GEO.configura.locaplic+'/imagens/gisicons/polygon.png" title="Desenhe um poligono no mapa para selecionar" style="cursor:pointer;border:1px solid RGB(230,230,230);" />'}
-		ins += '	<img id=i3GEOselecaoext onclick="i3GEOF.selecao.tiposel(this)" src="'+i3GEO.configura.locaplic+'/imagens/gisicons/map.png" title="Seleciona o que estiver visivel no mapa" style="cursor:pointer;border:1px solid RGB(230,230,230);" />';
+		{ins += '	<button title="Desenhe um poligono no mapa para selecionar" style="background:none;background-color:#F5F5F5" onclick="i3GEOF.selecao.tiposel(this)" value="i3GEOselecaopoli"><img id=i3GEOselecaopoli src="'+i3GEO.configura.locaplic+'/imagens/gisicons/select-polygon.png" /></button>'}
+		ins += '	<button title="Seleciona o que estiver visivel no mapa" style="background:none;background-color:#F5F5F5" onclick="i3GEOF.selecao.tiposel(this)" value="i3GEOselecaoext" ><img id=i3GEOselecaoext src="'+i3GEO.configura.locaplic+'/imagens/gisicons/map.png" /></button>';
 		if(i3GEO.Interface.ATUAL != "googlemaps" && i3GEO.Interface.ATUAL != "googleearth")
-		{ins += '	<img id=i3GEOselecaobox onclick="i3GEOF.selecao.tiposel(this)" src="'+i3GEO.configura.locaplic+'/imagens/gisicons/region.png" title="Desenhe um retangulo no mapa para selecionar" style="cursor:pointer;border:1px solid RGB(230,230,230);" />';}
-		ins += '	<img onclick="i3GEOF.selecao.grafico()" src="'+i3GEO.configura.locaplic+'/imagens/gisicons/layer-vector-chart-add.png" title="Grafico" style="cursor:pointer;border:1px solid RGB(230,230,230);" />' +
-		'	<img onclick="i3GEOF.selecao.graficoPerfil()" src="'+i3GEO.configura.locaplic+'/imagens/gisicons/grafico-perfil.png" title="Perfil" style="cursor:pointer;border:1px solid RGB(230,230,230);" />' +
+		{ins += '	<button title="Desenhe um retangulo no mapa para selecionar" style="background:none;background-color:#F5F5F5" onclick="i3GEOF.selecao.tiposel(this)" value="i3GEOselecaobox" ><img id=i3GEOselecaobox src="'+i3GEO.configura.locaplic+'/imagens/gisicons/select-rectangle.png" /></button>';}
+		ins += '	<button title="Inverte a selecao" style="background:none;background-color:#F5F5F5" onclick="i3GEOF.selecao.operacao(\'inverte\')"><img src="'+i3GEO.configura.locaplic+'/imagens/gisicons/selection-invert.png" /></button>' +
+		'	<button title="Limpa a selecao" style="background:none;background-color:#F5F5F5" onclick="i3GEOF.selecao.operacao(\'limpa\')"><img src="'+i3GEO.configura.locaplic+'/imagens/gisicons/selected-delete.png" /></button>' +
+		'	<button title="Salva a selecao como um novo tema" style="background:none;background-color:#F5F5F5" onclick="i3GEOF.selecao.criatema()"><img src="'+i3GEO.configura.locaplic+'/imagens/gisicons/save1.png" /></button>' +
+		'	<button title="Grafico" style="background:none;background-color:#F5F5F5" onclick="i3GEOF.selecao.grafico()"><img src="'+i3GEO.configura.locaplic+'/imagens/gisicons/layer-vector-chart-add.png" /></button>' +
+		'	<button title="Perfil"  style="background:none;background-color:#F5F5F5" onclick="i3GEOF.selecao.graficoPerfil()"><img src="'+i3GEO.configura.locaplic+'/imagens/gisicons/grafico-perfil.png" /></button>' +
 
-		'	<img onclick="i3GEOF.selecao.operacao(\'inverte\')" src="'+i3GEO.configura.locaplic+'/imagens/gisicons/undo.png" title="Inverte a selecao" style="cursor:pointer;border:1px solid RGB(230,230,230);" />' +
-		'	<img onclick="i3GEOF.selecao.operacao(\'limpa\')" src="'+i3GEO.configura.locaplic+'/imagens/gisicons/erase.png" title="Limpa a selecao" style="cursor:pointer;border:1px solid RGB(230,230,230);" />' +
-		'	<img onclick="i3GEOF.selecao.criatema()" src="'+i3GEO.configura.locaplic+'/imagens/gisicons/save1.png" title="Salva a selecao como um novo tema" style="cursor:pointer;border:1px solid RGB(230,230,230);" />' +
 		'	<br><select title="Tipo de operacao" style=position:relative;top:6px; id=i3GEOselecaotipoOperacao >' +
 		'	<option value="adiciona" >Adicionar à seleção</option>' +
 		'	<option value="novo" >Nova seleção</option>' +		
@@ -192,8 +192,8 @@ i3GEOF.selecao = {
 		};
 		titulo = "Seleção <a class=ajuda_usuario target=_blank href='" + i3GEO.configura.locaplic + "/ajuda_usuario.php?idcategoria=5&idajuda=48a' >&nbsp;&nbsp;&nbsp;</a>";
 		janela = i3GEO.janela.cria(
-			"380px",
-			"210px",
+			"400px",
+			"260px",
 			"",
 			"",
 			"",
@@ -275,12 +275,12 @@ i3GEOF.selecao = {
 	Altera as bordas dos ícones
 	*/
 	mudaicone: function(){
-		$i("i3GEOselecaopt").style.border = "1px solid RGB(230,230,230)"
-		$i("i3GEOselecaoext").style.border = "1px solid RGB(230,230,230)"
+		$i("i3GEOselecaopt").parentNode.style.backgroundColor = "#F5F5F5";
+		$i("i3GEOselecaoext").parentNode.style.backgroundColor = "#F5F5F5";
 		if($i("i3GEOselecaobox"))
-		{$i("i3GEOselecaobox").style.border = "1px solid RGB(230,230,230)";}
+		{$i("i3GEOselecaobox").parentNode.style.backgroundColor = "#F5F5F5";}
 		if($i("i3GEOselecaopoli"))
-		{$i("i3GEOselecaopoli").style.border = "1px solid RGB(230,230,230)";}
+		{$i("i3GEOselecaopoli").parentNode.style.backgroundColor = "#F5F5F5";}
 		i3GEO.desenho.richdraw.fecha;
 	},
 	/*
@@ -339,7 +339,7 @@ i3GEOF.selecao = {
 	
 	Parameter:
 	
-	obj {objeto dom) - objeto que foi clicado para disparar a operação. O id identifica o tipo de operação
+	obj {objeto dom) - objeto que foi clicado para disparar a operação. O valor identifica o tipo de operação
 	*/
 	tiposel: function(obj){
 		if(i3GEOF.selecao.aguarde.visibility === "visible")
@@ -356,28 +356,28 @@ i3GEOF.selecao = {
 					i3GEO.Interface.atualizaTema(retorno,tema);
 				},
 				tema = i3GEOF.selecao.pegaTemasSel();
-			if (obj.id == "i3GEOselecaoext"){
+			if (obj.value == "i3GEOselecaoext"){
 				i3GEOF.selecao.aguarde.visibility = "visible";
 				i3GEO.php.selecaobox(fim,tema,$i("i3GEOselecaotipoOperacao").value,i3GEO.parametros.mapexten);
 			}
-			if (obj.id == "i3GEOselecaobox"){
+			if (obj.value == "i3GEOselecaobox"){
 				i3GEOF.selecao.mudaicone();
-				obj.style.border = "1px solid black";
+				obj.style.backgroundColor = "beige";
 				g_tipoacao = "selecaobox";
 				i3GEOF.selecao.box.criaBox();
 				if(i3GEO.eventos.MOUSEDOWN.toString().search("i3GEOF.selecao.box.inicia()") < 0)
 				{i3GEO.eventos.MOUSEDOWN.push("i3GEOF.selecao.box.inicia()");}
 			}
-			if (obj.id == "i3GEOselecaopt"){
+			if (obj.value == "i3GEOselecaopt"){
 				i3GEOF.selecao.mudaicone();
-				obj.style.border = "1px solid black";
+				obj.style.backgroundColor = "beige";
 				g_tipoacao = "selecao";
 				if(i3GEO.eventos.MOUSECLIQUE.toString().search("i3GEOF.selecao.clique()") < 0)
 				{i3GEO.eventos.MOUSECLIQUE.push("i3GEOF.selecao.clique()");}	
 			}
-			if (obj.id == "i3GEOselecaopoli"){
+			if (obj.value == "i3GEOselecaopoli"){
 				i3GEOF.selecao.mudaicone();
-				obj.style.border = "1px solid black";
+				obj.style.backgroundColor = "beige";
 				g_tipoacao = "selecaopoli";
 				i3GEOF.selecao.poligono.inicia()
 			}

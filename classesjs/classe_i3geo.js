@@ -175,6 +175,17 @@ i3GEO = {
 	*/
 	finaliza:"",
 	/*
+	Variavel: tamanhodoc
+	
+	Largura e altura do navegador após a inicialização do mapa
+	
+	É utilizado como um parâmetro para verificar se o mapa foi ou não redimensionado pelo usuário de forma consistente
+	
+	Type:
+	{array}
+	*/
+	tamanhodoc: [],
+	/*
 	Variavel: temaAtivo
 
 	Indica o último tema que foi ativado no mapa
@@ -530,7 +541,7 @@ i3GEO = {
 	*/
 	calculaTamanho: function(){
 		if(typeof(console) !== 'undefined'){console.info("i3GEO.calculaTamanho()");}
-		var diminuix,diminuiy,menos,novow,novoh,w,h,temp;
+		var diminuix,diminuiy,menos,novow,novoh,w,h,temp,Dw,Dh;
 		diminuix = (navm) ? i3GEO.configura.diminuixM : i3GEO.configura.diminuixN;
 		diminuiy = (navm) ? i3GEO.configura.diminuiyM : i3GEO.configura.diminuiyN;
 		menos = 0;
@@ -547,10 +558,13 @@ i3GEO = {
 				window.moveTo(0,0);
 			}
 		}
-		if(i3GEO.scrollerWidth != "")
+		if(i3GEO.scrollerWidth === "")
 		{i3GEO.scrollerWidth = i3GEO.util.getScrollerWidth();}
-		novow = YAHOO.util.Dom.getDocumentWidth() - i3GEO.scrollerWidth;
-		novoh = YAHOO.util.Dom.getDocumentHeight();
+		i3GEO.tamanhodoc = [YAHOO.util.Dom.getViewportWidth(),YAHOO.util.Dom.getViewportHeight()];
+		Dw = YAHOO.util.Dom.getDocumentWidth();
+		Dh = YAHOO.util.Dom.getDocumentHeight();
+		novow = Dw - i3GEO.scrollerWidth;
+		novoh = Dh;
 		document.body.style.width = novow;
 		document.body.style.height = novoh;
 

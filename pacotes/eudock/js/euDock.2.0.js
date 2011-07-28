@@ -281,7 +281,7 @@ var euOPAQUE      = 16;
 					tempy = euIdObjTop(this.idObjectHook)  + this.idObjectHook.offsetHeight + this.offset
 					if(navm){
 						tempx = ((i3GEO.barraDeBotoes.MAXBOTOES * 38) / 2) - 88;
-						tempy = euIdObjTop(this.idObjectHook)  + this.idObjectHook.offsetHeight + this.offset + 38;
+						tempy = euIdObjTop(this.idObjectHook)  + this.idObjectHook.offsetHeight + this.offset;
 					}
 					this.setCenterPos(
 						tempx,
