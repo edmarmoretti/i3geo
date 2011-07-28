@@ -248,8 +248,9 @@ class LayerServer {
     */
     function add_networklink(&$layer_name){
         $nl =& $this->_xml->Document->addChild('NetworkLink');
-
         $layer = @$this->map_object->getLayerByName($layer_name);
+		if(!$layer)
+		{$layer = $this->map_object->getlayer(0);}
         $nl->addChild('name', $this->get_layer_description($layer));
         $nl->addChild('visibility', 0);
         $link =& $nl->addChild('Link');
@@ -264,7 +265,8 @@ class LayerServer {
     function process_layer_request(&$layer_name){
 		error_reporting(0);
         $layer = @$this->map_object->getLayerByName($layer_name);
-
+		if(!$layer)
+		{$layer = $this->map_object->getlayer(0);}
         if(!$layer){
             $this->set_error('Nenhum layer com esse nome foi encontrado no mapfile ' . $layer_name, $layer_name);
             return false;
@@ -992,7 +994,10 @@ class LayerServer {
     */
     function get_cache_file_name(){
         //obtem o arquivo do metadata do layer se existir
-		$k = $this->map_object->getlayerbyname($this->typename)->getmetadata("arquivokmz");
+        $layer = @$this->map_object->getlayerbyname($this->typename);
+		if(!$layer)
+		{$layer = $this->map_object->getlayer(0);}
+		$k = $layer->getmetadata("arquivokmz");
 		if($k != ""){
 			return $k;
 		}
