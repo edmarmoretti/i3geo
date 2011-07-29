@@ -19,7 +19,7 @@ Licenca:
 
 GPL2
 
-I3Geo Interface Integrada de Ferramentas de Geoprocessamento para Internet
+i3Geo Interface Integrada de Ferramentas de Geoprocessamento para Internet
 
 Direitos Autorais Reservados (c) 2006 Ministério do Meio Ambiente Brasil
 Desenvolvedor: Edmar Moretti edmar.moretti@mma.gov.br
@@ -103,6 +103,11 @@ i3GEOF.tabela = {
 	iddiv {String} - id do div que receberá o conteudo HTML da ferramenta
 	*/
 	inicia: function(iddiv){
+		if(i3GEO.temaAtivo === ""){
+			i3GEOF.tabela.comboCabecalho();
+			$i(iddiv).innerHTML = "Escolha um tema na lista mostrada no cabeçalho";
+			return;
+		}
 		try{
 			$i(iddiv).innerHTML += i3GEOF.tabela.html();
 			i3GEO.guias.mostraGuiaFerramenta("i3GEOtabelaguia1","i3GEOtabelaguia");
@@ -194,6 +199,7 @@ i3GEOF.tabela = {
 			if (i3GEO.parametros.r.toLowerCase() !== "sim")
 			{$i("i3GEOtabelaguia4obj").innerHTML = "Opção não disponível";}
 			i3GEOF.tabela.pegaRegistros();
+			i3GEOF.tabela.comboCabecalho();		
 		}
 		catch(erro){alert(erro);}
 	},
@@ -312,7 +318,7 @@ i3GEOF.tabela = {
 			i3GEO.janela.minimiza("i3GEOF.tabela");
 		};
 		//cria a janela flutuante
-		titulo = "<div style='position:absolute' id='i3GEOFtabelaComboCabeca' >------</div>&nbsp;&nbsp;&nbsp;Tabela <a class=ajuda_usuario target=_blank href='" + i3GEO.configura.locaplic + "/ajuda_usuario.php?idcategoria=5&idajuda=39' >&nbsp;&nbsp;&nbsp;</a>";
+		titulo = "<div style='z-index:1;position:absolute' id='i3GEOFtabelaComboCabeca' >------</div>&nbsp;&nbsp;&nbsp;Tabela <a class=ajuda_usuario target=_blank href='" + i3GEO.configura.locaplic + "/ajuda_usuario.php?idcategoria=5&idajuda=39' >&nbsp;&nbsp;&nbsp;</a>";
 		janela = i3GEO.janela.cria(
 			"500px",
 			"400px",
@@ -341,6 +347,8 @@ i3GEOF.tabela = {
 			if(i3GEO.Interface.ATUAL === "googleearth"){
 				google.earth.removeEventListener(tabelaDragend);
 			}
+			if(i3GEO.eventos.ATUALIZAARVORECAMADAS.toString().search("i3GEOF.tabela.comboCabecalho()") > 0)
+			{i3GEO.eventos.ATUALIZAARVORECAMADAS.remove("i3GEOF.tabela.comboCabecalho()");}			
 		};
 		YAHOO.util.Event.addListener(janela[0].close, "click", temp);
 	},
@@ -350,11 +358,61 @@ i3GEOF.tabela = {
 	Refaz a interface da ferramenta quando a janela flutuante tem seu foco ativado
 	*/
 	ativaFoco: function(){
-		if(i3GEO.arvoreDeCamadas.pegaTema(i3GEOF.tabela.tema) === "")
+		if(i3GEOF.tabela.tema !== "" && i3GEO.arvoreDeCamadas.pegaTema(i3GEOF.tabela.tema) === "")
 		{alert("O tema ja nao existe mais no mapa");}
 		var i = $i("i3GEOF.tabela_c").style;
 		i3GEO.janela.ULTIMOZINDEX++;
 		i.zIndex = 21000 + i3GEO.janela.ULTIMOZINDEX;
+	},
+	/*
+	Function: comboCabecalho
+	
+	Cria o combo de seleção de temas localizado no cabeçalho da janela
+	*/
+	comboCabecalho: function(){
+		var idDiv = "i3GEOFtabelaComboCabeca",
+			idCombo = "i3GEOFtabelaComboCabecaSel",
+			ferramenta = "tabela",
+			temp = $i(idDiv);
+		if(temp){
+			temp.innerHTML = "";
+			i3GEO.util.comboTemas(
+				temp.id+"Sel",
+				function(retorno){
+					$i(idDiv).innerHTML = retorno.dados;
+					var c = $i(idCombo);
+					c.style.width = "150px";
+					c.style.border = "solid #B4B4B4 1px";
+					c.style.top = "1px";
+					c.style.position = "relative";
+					c.style.fontSize = "10px";
+					c.style.color = "#B4B4B4";
+					c.value = i3GEOF.tabela.tema;
+					if(c.value === ""){
+						i3GEOF.tabela.tema = "";
+						$i("i3GEOF."+ferramenta+"_corpo").innerHTML = "";
+					}
+					c.onchange = function(){
+						var valor = $i(idCombo).value;
+						if(valor !== ""){
+						
+							i3GEO.mapa.ativaTema(valor);	
+							i3GEOF.tabela.tema = valor;
+							
+							$i("i3GEOF."+ferramenta+"_corpo").innerHTML = "";
+							eval("i3GEOF."+ferramenta+".inicia('i3GEOF."+ferramenta+"_corpo');");
+							
+						}
+					};
+				},
+				temp.id,
+				"",
+				false,
+				"ligados"
+			);				
+		}
+		if(i3GEO.eventos.ATUALIZAARVORECAMADAS.toString().search("i3GEOF.tabela.comboCabecalho()") < 0)
+		{i3GEO.eventos.ATUALIZAARVORECAMADAS.push("i3GEOF.tabela.comboCabecalho()");}		
 	},
 	/*
 	Function: ativaAutoAtualiza
