@@ -477,6 +477,7 @@ i3GEO.arvoreDeCamadas = {
 			if(temp.innerHTML !== ""){
 				if(i3GEO.arvoreDeCamadas.comparaTemas(temas,i3GEO.arvoreDeCamadas.CAMADAS)){
 					if(typeof(console) !== 'undefined'){console.info("Nao é necessario atualizar arvoreDeCamadas - return");}
+					i3GEO.arvoreDeCamadas.CAMADAS = temas;
 					return;
 				}
 			}
@@ -1435,19 +1436,23 @@ i3GEO.arvoreDeCamadas = {
 	Parametro:
 
 	idtema - {String} ID do tema que será procurado
+	
+	camadas - {Objeto} - objeto com a lista de temas
 
 	Return:
 
 	{JSON}
 	*/
-	pegaTema: function(idtema){
+	pegaTema: function(idtema,camadas){
 		if(typeof(console) !== 'undefined'){console.info("i3GEO.arvoreDeCamadas.pegaTema()");}
-		var i,
-			v = "",
-			c = i3GEO.arvoreDeCamadas.CAMADAS.length;
+		var i,c
+			v = "";
+		if(!camadas)
+		{camadas = i3GEO.arvoreDeCamadas.CAMADAS;}
+		c = camadas.length;			
 		for (i=0; i<c; i += 1){
-			if(i3GEO.arvoreDeCamadas.CAMADAS[i].name === idtema){
-				v = i3GEO.arvoreDeCamadas.CAMADAS[i];
+			if(camadas[i].name === idtema){
+				v = camadas[i];
 			}
 		}
 		return v;

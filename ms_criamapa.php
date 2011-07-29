@@ -645,17 +645,17 @@ function criaIndex()
 	global $dir_tmp,$diretorios;
 	if (!file_exists($dir_tmp."/index.htm"))
 	{
-		$f = fopen($dir_tmp."/index.htm",x);
+		$f = fopen($dir_tmp."/index.htm","x");
 		fclose($f);
-		$f = fopen($dir_tmp."/index.html",x);
+		$f = fopen($dir_tmp."/index.html","x");
 		fclose($f);
-		$f = fopen($dir_tmp."/".$diretorios[1]."/index.html",x);
+		$f = fopen($dir_tmp."/".$diretorios[1]."/index.html","x");
 		fclose($f);
-		$f = fopen($dir_tmp."/".$diretorios[1]."/index.htm",x);
+		$f = fopen($dir_tmp."/".$diretorios[1]."/index.htm","x");
 		fclose($f);
-		$f = fopen($dir_tmp."/".$diretorios[2]."/index.html",x);
+		$f = fopen($dir_tmp."/".$diretorios[2]."/index.html","x");
 		fclose($f);
-		$f = fopen($dir_tmp."/".$diretorios[2]."/index.htm",x);
+		$f = fopen($dir_tmp."/".$diretorios[2]."/index.htm","x");
 		fclose($f);
 	}
 	if (!file_exists($dir_tmp."/index.htm"))

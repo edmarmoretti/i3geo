@@ -131,6 +131,14 @@ Salva o mapfile atual
 	  	$this->mapa->save($this->arquivo);
 	}
 /*
+function: nSel
+
+Retorna o número de elementos selecionados 
+*/	
+	function nSel(){
+		return $this->layer->getNumresults();
+	}
+/*
 function: selecaoPorPoligono
 
 Seleciona os elementos de um tema baseado em um conjunto de pontos que formarão um polígono.
@@ -193,6 +201,7 @@ $ys - lista de coordenadas y separadas por virgula
 			$result = $this->layer->getResult($i);
 			$shpi[]  = $result->shapeindex;
 		}
+		$this->layer->set("status",MS_DEFAULT);
 		if (($tipo == "adiciona") && (count($shpi) > 0))
 		{return($this->selecaoAdiciona($shpi,$shp_atual));}
 		if (($tipo == "retira") && (count ($shp_atual) > 0))

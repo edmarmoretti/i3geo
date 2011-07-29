@@ -196,8 +196,16 @@ string - javascript com os parametros
 		foreach ($this->layers as $oLayer)
 		{
 			$sel = "nao";
-			if(file_exists($dir."/".$oLayer->name.".php"))
-			{$sel = "sim";$existesel = true;}
+			$nSel = 0;
+			$arqS = $dir."/".$oLayer->name.".php";
+			if(file_exists($arqS)){
+				$sel = "sim";
+				$existesel = true;
+				$handle = fopen ($arqS, "r");
+				$conteudo = fread ($handle, filesize ($arqS));
+				fclose ($handle);
+				$nSel = count(unserialize($conteudo)); 
+			}
 			$escondido = $oLayer->getmetadata("escondido");
 			if($escondido == "")
 			{$escondido = "nao";}
@@ -288,6 +296,7 @@ string - javascript com os parametros
 					"transparency"=>($oLayer->opacity),
 					"type"=>($oLayer->type),
 					"sel"=>$sel,
+					"nsel"=>$nSel,
 					"escala"=>$escala,
 					"download"=>$down,
 					"features"=>$f,
