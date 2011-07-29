@@ -981,7 +981,7 @@ $locaplic - Localização do I3geo.
 		// cria o dbf
 		$def = array();
 		foreach ($itemspt as $ni)
-		{$def[] = array($ni,"C","254");}
+		{$def[] = array(substr($ni, 0, 10),"C","254");}
 		//pega os itens dos temas poligonais
 		$layersPol = array();
 		$temas = explode(",",$temasPo);
@@ -1305,7 +1305,7 @@ nome do layer criado com o buffer.
 		$def = array();
 		$def[] = array("i3geo","C","254");
 		foreach ($items as $ni)
-		{$def[] = array($ni,"C","254");}
+		{$def[] = array(substr($ni, 0, 10),"C","254");}
 		if(!function_exists(dbase_create))
 		{$db = xbase_create($nomeshp.".dbf", $def);xbase_close($db);}
 		else
@@ -1475,7 +1475,7 @@ $locaplic - Localização do I3geo.
 		// cria o dbf
 		$def = array();
 		foreach ($items as $ni)
-		{$def[] = array($ni,"C","254");}
+		{$def[] = array(substr($ni, 0, 10),"C","254");}
 		if(!function_exists(dbase_create))
 		{$db = xbase_create($nomeshp.".dbf", $def);xbase_close($db);}
 		else
@@ -1950,7 +1950,7 @@ $locaplic - Localização do I3geo
 		// cria o dbf
 		$def = array();
 		foreach ($itenspo as $ni)
-		{$def[] = array($ni,"C","254");}
+		{$def[] = array(substr($ni, 0, 10),"C","254");}
 		$def[] = array("npontos","N","10","0");
 		if(!function_exists(dbase_create))
 		{$db = xbase_create($nomeshp.".dbf", $def);xbase_close($db);}
