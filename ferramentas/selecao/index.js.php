@@ -362,7 +362,7 @@ i3GEOF.selecao = {
 			}
 			if (obj.value == "i3GEOselecaobox"){
 				i3GEOF.selecao.mudaicone();
-				obj.style.backgroundColor = "beige";
+				obj.style.backgroundColor = "yellow";
 				g_tipoacao = "selecaobox";
 				i3GEOF.selecao.box.criaBox();
 				if(i3GEO.eventos.MOUSEDOWN.toString().search("i3GEOF.selecao.box.inicia()") < 0)
@@ -370,14 +370,14 @@ i3GEOF.selecao = {
 			}
 			if (obj.value == "i3GEOselecaopt"){
 				i3GEOF.selecao.mudaicone();
-				obj.style.backgroundColor = "beige";
+				obj.style.backgroundColor = "yellow";
 				g_tipoacao = "selecao";
 				if(i3GEO.eventos.MOUSECLIQUE.toString().search("i3GEOF.selecao.clique()") < 0)
 				{i3GEO.eventos.MOUSECLIQUE.push("i3GEOF.selecao.clique()");}	
 			}
 			if (obj.value == "i3GEOselecaopoli"){
 				i3GEOF.selecao.mudaicone();
-				obj.style.backgroundColor = "beige";
+				obj.style.backgroundColor = "yellow";
 				g_tipoacao = "selecaopoli";
 				i3GEOF.selecao.poligono.inicia()
 			}
