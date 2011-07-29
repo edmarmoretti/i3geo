@@ -420,7 +420,7 @@ h1 {padding:.25em .5em;background-color:#ccc;}
 {
 	background-image:URL('../imagens/visual/default/sprite.png');
 	background-repeat: no-repeat;
-	background-position: 3px -1775px;
+	background-position: 3px -550px;
 	width:52px;
 	height:15px;
 }
@@ -446,6 +446,14 @@ h1 {padding:.25em .5em;background-color:#ccc;}
 	background-repeat: no-repeat;
 	background-position: 3px -550px;
 	width:52px;
+	height:15px;
+}
+#menuferramentas
+{
+	background-image:URL('../imagens/visual/default/sprite.png');
+	background-repeat: no-repeat;
+	background-position: 3px -2157px;
+	width:65px;
 	height:15px;
 }
 #menuarquivos
@@ -1295,7 +1303,7 @@ width:16px;
 .yui-skin-sam .yui-navset .yui-nav a,.yui-skin-sam .yui-navset .yui-navset-top .yui-nav a
 {background:#d8d8d8 url(../pacotes/yui270/build/assets/skins/sam/sprite.png) repeat-x;border:solid #a3a3a3;border-width:0 1px;color:#000;position:relative;text-decoration:none;}
 .yui-skin-sam .yui-navset .yui-nav .selected a,.yui-skin-sam .yui-navset .yui-nav .selected a:focus,.yui-skin-sam .yui-navset .yui-nav .selected a:hover
-{background:#2647a0 url(../pacotes/yui270/build/assets/skins/sam/sprite.png) repeat-x left -1400px;color:white;}
+{background:white url(../pacotes/yui270/build/assets/skins/sam/sprite.png) repeat-x left -1400px;color:white;}
 .yui-skin-sam .yui-navset .yui-nav a:hover,.yui-skin-sam .yui-navset .yui-nav a:focus{
 	background-color:white;
 }

@@ -221,7 +221,7 @@
 {
 	background-image:URL('../imagens/visual/default/sprite.png');
 	background-repeat: no-repeat;
-	background-position: 3px -1775px;
+	background-position: 3px -550px;
 	width:52px;
 	height:15px;
 }
@@ -247,6 +247,14 @@
 	background-repeat: no-repeat;
 	background-position: 3px -550px;
 	width:52px;
+	height:15px;
+}
+#menuferramentas
+{
+	background-image:URL('../imagens/visual/default/sprite.png');
+	background-repeat: no-repeat;
+	background-position: 3px -2157px;
+	width:65px;
 	height:15px;
 }
 #menuarquivos
