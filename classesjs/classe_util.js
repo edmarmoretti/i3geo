@@ -1539,6 +1539,14 @@ i3GEO.util = {
 			else
 			{i3GEO.php.listaTemas(monta,"ligados",i3GEO.configura.locaplic,i3GEO.configura.sid);}
 		}
+		if(tipoCombo === "ligadosComTabela"){
+			if(i3GEO.arvoreDeCamadas.CAMADAS !== ""){
+				temp(i3GEO.arvoreDeCamadas.filtraCamadas("status",2,"igual",i3GEO.arvoreDeCamadas.CAMADAS));
+				monta(i3GEO.arvoreDeCamadas.filtraCamadas("type",3,"menor",temp));				
+			}
+			else
+			{i3GEO.php.listaTemas(monta,"ligados",i3GEO.configura.locaplic,i3GEO.configura.sid);}
+		}
 		if(tipoCombo === "editaveis"){
 			i3GEO.php.listaTemasEditaveis(monta,i3GEO.configura.locaplic,i3GEO.configura.sid);
 		}

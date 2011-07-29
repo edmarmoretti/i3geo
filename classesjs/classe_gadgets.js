@@ -816,8 +816,11 @@ i3GEO.gadgets = {
 
 	Mostra o menu suspenso com opções extras de análise, ajuda, etc
 
-	O objeto YAHOO.widget.MenuBar resultante pode ser obtido na variável i3GEOoMenuBar
+	Paradefinir os ícones existentes nos elementos principais do menu, edite o arquivo i3geo/css/botoes2.css e acrescente
+	o estilo desejado. Utilize # para se referenciar ao elemento, cujo identificador é composto por "menu"+chave, exemplo #menuinterface
+	ou #menuajuda
 	
+	O objeto YAHOO.widget.MenuBar resultante pode ser obtido na variável i3GEOoMenuBar
 	
 	i3GEOoMenuBar pode ser manipulado com os métodos da biblioteca YUI, por exemplo,
 	i3GEOoMenuBar.getMenuItem("omenudataInterface1").cfg.setProperty("text", " ");

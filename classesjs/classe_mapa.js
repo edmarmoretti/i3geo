@@ -148,10 +148,14 @@ i3GEO.mapa = {
 	codigo {string} - código da camada
 	*/
 	ativaTema: function(codigo){
-		if(i3GEO.temaAtivo !== "")
-		{i3GEO.util.defineValor("ArvoreTituloTema"+i3GEO.temaAtivo,"style.color","");}
-		i3GEO.temaAtivo = codigo;
-		i3GEO.util.defineValor("ArvoreTituloTema"+codigo,"style.color","brown");
+		if(codigo){
+			if(codigo === "")
+			{return;}
+			if(i3GEO.temaAtivo !== "")
+			{i3GEO.util.defineValor("ArvoreTituloTema"+i3GEO.temaAtivo,"style.color","");}
+			i3GEO.temaAtivo = codigo;
+			i3GEO.util.defineValor("ArvoreTituloTema"+codigo,"style.color","brown");
+		}
 	},
 	/*
 	Function: ativaLogo

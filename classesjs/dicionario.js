@@ -311,6 +311,13 @@ en:"Toolbars",
 es:"Barras de herramientas",
 it:"Barre Strumenti"
 }],
+"u15a": [
+{
+pt: "Ferramentas",
+en:"Tools",
+es:"Herramientas",
+it:"Strumenti"
+}],
 "u16": [
 {
 pt: "Janela de mensagens",

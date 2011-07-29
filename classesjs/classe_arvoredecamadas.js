@@ -1463,7 +1463,7 @@ i3GEO.arvoreDeCamadas = {
 
 	valor - valor do filtro
 
-	operador {string} - operador entre propriedade e valor igual|diferente
+	operador {string} - operador entre propriedade e valor igual|diferente|menor
 
 	camadas {array} - array do tipo i3GEO.arvoreDeCamadas.CAMADAS
 
@@ -1488,6 +1488,10 @@ i3GEO.arvoreDeCamadas = {
 					}
 					if(operador === "diferente"){
 						if(temp != valor)
+						{resultado.push(ltema);}
+					}
+					if(operador === "menor"){
+						if(temp < valor)
 						{resultado.push(ltema);}
 					}
 				}

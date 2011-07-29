@@ -83,6 +83,8 @@ i3GEO.configura = {
 	Propriedade: oMenuData
 
 	Itens incluídos no menu suspenso. Define os parâmetros para o gadget menu suspenso
+	
+	Mais informações em <classe_gadgets.js> função <mostraMenuSuspenso>
 
 	Exemplo:
 
@@ -117,7 +119,8 @@ i3GEO.configura = {
 			{nome:$trad("s2"),id:"analise"},
 			{nome:$trad("s3"),id:"janelas"},
 			{nome:$trad("s4"),id:"arquivos"},
-			{nome:$trad("d32"),id:"interface"}
+			{nome:$trad("d32"),id:"interface"},
+			{nome:$trad("u15a"),id:"ferramentas"}
 		],
 		submenus:{
 			"ajudaMenu": [ 
@@ -154,7 +157,7 @@ i3GEO.configura = {
 			{ id:"omenudataJanelas1",text: $trad("u15"), url: "javascript:i3GEO.barraDeBotoes.reativa(0);i3GEO.barraDeBotoes.reativa(1)" },
 			{ id:"omenudataJanelas2",text: $trad("u16"), url: "javascript:i3GEO.ajuda.abreJanela()" },
 			{ id:"omenudataJanelas3",text: $trad("u29"), url: "javascript:i3GEO.barraDeBotoes.editor.inicia()" }		  
-			],
+			],			
 			"arquivos": [
 			{ id:"omenudataArquivos1",text: $trad("u17"), url: "javascript:i3GEO.mapa.dialogo.salvaMapa()" },
 			{ id:"omenudataArquivos2",text: $trad("u18"), url: "javascript:i3GEO.mapa.dialogo.carregaMapa()" },
@@ -174,6 +177,10 @@ i3GEO.configura = {
 			{ id:"omenudataInterface8",text: "Hiperbólica", url: "javascript:var w = window.open(i3GEO.configura.locaplic+'/hiperbolica.html')" },
 			{ id:"omenudataInterface9",text: "Download de dados", url: "javascript:var w = window.open(i3GEO.configura.locaplic+'/datadownload.htm')" },
 			{ id:"omenudataInterface11",text: $trad("p20"), url: "javascript:i3GEO.mapa.dialogo.telaRemota()" }
+			],
+			"ferramentas": [
+			{ id:"omenudataFerramentas1",text: '<span style=color:gray;text-decoration:underline; ><b>'+$trad("a7")+'</b></span>',url: "#"}, 
+			{ id:"omenudataFerramentas2",text: $trad("t31"), url: "javascript:i3GEO.tema.dialogo.tabela()"}
 			]
 		}
 	},
