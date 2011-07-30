@@ -108,6 +108,46 @@ $ext - Extensão geográfica do mapa
 		}
 	}
 /*
+Method: criaDefDb
+
+Cria um array contendo as definições das colunas que serão criadas em uma tabela DBF conforme as exigências de arquivos dbf
+
+parameters:
+
+$itens - array com os nomes originais das colunas
+
+return:
+{array}
+*/
+	function criaDefDb($itens){
+		$c = 0;
+		$def = array();
+		foreach ($items as $ni){
+			$ni = strtoupper($ni);
+			$def[] = array(substr($ni, 0, 8).$c,"C","254");
+			$c = $c + 1;
+		}
+		return $def;
+	}
+/*
+Method: truncaS
+
+Trunca o comprimento de uma string em 255 caracteres
+
+parameters:
+
+$s - string
+
+return
+{string}
+*/	
+	function truncaS($s){
+		if(strlen($s) > 255){
+			$s = substr($s,0,255);
+		}
+		return $s;
+	}
+/*
 Method: salva
 
 Salva o mapfile atual 
@@ -979,9 +1019,7 @@ $locaplic - Localização do I3geo.
 		$layerPt->close();
 		//gera o novo arquivo shape file
 		// cria o dbf
-		$def = array();
-		foreach ($itemspt as $ni)
-		{$def[] = array(substr($ni, 0, 10),"C","254");}
+		$def = $this->criaDefDb($itemspt);
 		//pega os itens dos temas poligonais
 		$layersPol = array();
 		$temas = explode(",",$temasPo);
@@ -1024,7 +1062,7 @@ $locaplic - Localização do I3geo.
 		foreach($spts as $spt)
 		{
 			foreach ($itemspt as $ni)
-			{$reg[] = $spt->values[$ni];}
+			{$reg[] = $this->truncaS($spt->values[$ni]);}
 			$novoshpf->addShape($spt);
 			$lineo = $spt->line(0);
 			$pt = $lineo->point(0);
@@ -1047,7 +1085,7 @@ $locaplic - Localização do I3geo.
 						
 						$shape = $layer->getfeature($shp_index,-1);
 						foreach ($itens as $item)
-						{$reg[] = $shape->values[$item];}
+						{$reg[] = $this->truncaS($shape->values[$item]);}
 					}
 					else
 					{
@@ -1302,10 +1340,8 @@ nome do layer criado com o buffer.
 		// cria o shapefile
 		$novoshpf = ms_newShapefileObj($nomeshp, MS_SHP_POLYGON);
 		// cria o dbf
-		$def = array();
+		$def = $this->criaDefDb($items);
 		$def[] = array("i3geo","C","254");
-		foreach ($items as $ni)
-		{$def[] = array(substr($ni, 0, 10),"C","254");}
 		if(!function_exists(dbase_create))
 		{$db = xbase_create($nomeshp.".dbf", $def);xbase_close($db);}
 		else
@@ -1315,9 +1351,9 @@ nome do layer criado com o buffer.
 		$db=xbase_open($dbname,2);
 		for($i = 0;$i < count($buffers);++$i)
 		{
-			$reg[] = $i;
 			foreach ($items as $ni)
-			{$reg[] = $shapes[$i]->values[$ni];}
+			{$reg[] = $this->truncaS($shapes[$i]->values[$ni]);}
+			$reg[] = $i;
 			$novoshpf->addShape($buffers[$i]);
 			xbase_add_record($db,$reg);
 			$reg = array();
@@ -1473,9 +1509,7 @@ $locaplic - Localização do I3geo.
 		$novoshpf = ms_newShapefileObj($nomeshp, MS_SHP_POINT);
 		$items = pegaItens($this->layer);
 		// cria o dbf
-		$def = array();
-		foreach ($items as $ni)
-		{$def[] = array(substr($ni, 0, 10),"C","254");}
+		$def = $this->criaDefDb($items);
 		if(!function_exists(dbase_create))
 		{$db = xbase_create($nomeshp.".dbf", $def);xbase_close($db);}
 		else
@@ -1486,7 +1520,7 @@ $locaplic - Localização do I3geo.
 		for($i = 0;$i < count($centroides);++$i)
 		{
 			foreach ($items as $ni)
-			{$reg[] = $shapes[$i]->values[$ni];}
+			{$reg[] = $this->truncaS($shapes[$i]->values[$ni]);}
 			$novoshpf->addShape($centroides[$i]);
 			xbase_add_record($db,$reg);
 			$reg = array();

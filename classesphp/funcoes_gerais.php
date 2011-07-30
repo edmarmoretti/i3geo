@@ -1854,14 +1854,16 @@ function criaSHP($tema,$map_file,$locaplic,$dir_tmp,$nomeRand=TRUE)
 		$items = pegaItens($layer);
 		// cria o dbf
 		$def = array();
+		$cni = 0;
 		foreach ($items as $ni)
 		{
 			$temp = strtoupper($ni);
-			$temp = substr($temp,0,9);
+			$temp = substr($temp,0,8).$cni;
 			//
 			//nao tem como descobrir o tamanho e tipo do campo
 			//
 			$def[] = array($temp,"C","254");
+			$cni = $cni + 1;
 		}
 		if(!function_exists("dbase_create"))
 		{$db = xbase_create($nomeshp.".dbf", $def);}
