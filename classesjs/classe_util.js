@@ -1541,7 +1541,7 @@ i3GEO.util = {
 		}
 		if(tipoCombo === "ligadosComTabela"){
 			if(i3GEO.arvoreDeCamadas.CAMADAS !== ""){
-				temp(i3GEO.arvoreDeCamadas.filtraCamadas("status",2,"igual",i3GEO.arvoreDeCamadas.CAMADAS));
+				temp = i3GEO.arvoreDeCamadas.filtraCamadas("status",2,"igual",i3GEO.arvoreDeCamadas.CAMADAS);
 				monta(i3GEO.arvoreDeCamadas.filtraCamadas("type",3,"menor",temp));				
 			}
 			else

@@ -567,8 +567,9 @@ i3GEO.arvoreDeCamadas = {
 				d = this.EXPANDIDA;
 				if(grupoLayers[i].expandido && grupoLayers[i].expandido === true)
 				{d = true;}
-				grupoNode = new YAHOO.widget.HTMLNode({enableHighlight:false,html:temp,expanded:d}, tempNode);
 				n = grupoLayers[i].layers.length;
+				if(n > 0)
+				{grupoNode = new YAHOO.widget.HTMLNode({enableHighlight:false,html:temp,expanded:d}, tempNode);}			
 				//layers de um grupo
 				for(j=0;j<n; j += 1){
 					//busca na lista de temas

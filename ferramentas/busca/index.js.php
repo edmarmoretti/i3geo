@@ -68,6 +68,11 @@ i3GEOF.busca = {
 	iddiv {String} - id do div que receberá o conteudo HTML da ferramenta
 	*/
 	inicia: function(iddiv){
+		i3GEO.janela.comboCabecalhoTemas("i3GEOFbuscaComboCabeca","i3GEOFbuscaComboCabecaSel","busca","ligadosComTabela");
+		if(i3GEO.temaAtivo === ""){
+			$i(iddiv).innerHTML = "Escolha um tema na lista mostrada no cabeçalho";
+			return;
+		}
 		try{
 			$i(iddiv).innerHTML += i3GEOF.busca.html();
 			i3GEO.php.listaItensTema(i3GEOF.busca.montaListaItens,i3GEOF.busca.tema);
@@ -75,6 +80,7 @@ i3GEOF.busca = {
 				"i3GEObuscabotao1",
 				{onclick:{fn: i3GEOF.busca.procurar}}
 			);
+		i3GEO.janela.comboCabecalhoTemas("i3GEOFbuscaComboCabeca","i3GEOFbuscaComboCabecaSel","busca","ligadosComTabela");		
 		}
 		catch(erro){alert(erro);}
 	},
@@ -122,6 +128,11 @@ i3GEOF.busca = {
 	*/	
 	criaJanelaFlutuante: function(){
 		var minimiza,cabecalho,janela,divid,temp,titulo;
+		if($i("i3GEOF.busca")){
+			i3GEOF.busca.tema = i3GEO.temaAtivo;
+			i3GEOF.busca.inicia("i3GEOF.busca_corpo");
+			return;
+		}
 		//funcao que sera executada ao ser clicado no cabeçalho da janela
 		cabecalho = function(){
 			i3GEOF.busca.ativaFoco();
@@ -130,7 +141,7 @@ i3GEOF.busca = {
 			i3GEO.janela.minimiza("i3GEOF.busca");
 		};
 		//cria a janela flutuante
-		titulo = "Procurar <a class=ajuda_usuario target=_blank href='" + i3GEO.configura.locaplic + "/ajuda_usuario.php?idcategoria=5&idajuda=35' >&nbsp;&nbsp;&nbsp;</a>";
+		titulo = "<div style='z-index:1;position:absolute' id='i3GEOFbuscaComboCabeca' >------</div>&nbsp;Buscar <a class=ajuda_usuario target=_blank href='" + i3GEO.configura.locaplic + "/ajuda_usuario.php?idcategoria=5&idajuda=35' >&nbsp;&nbsp;&nbsp;</a>";
 		janela = i3GEO.janela.cria(
 			"290px",
 			"330px",
@@ -148,6 +159,11 @@ i3GEOF.busca = {
 		i3GEOF.busca.aguarde = $i("i3GEOF.busca_imagemCabecalho").style;
 		//i3GEOF.analisaGeometrias.aguarde.visibility = "visible";
 		i3GEOF.busca.inicia(divid);
+		temp = function(){
+			if(i3GEO.eventos.ATUALIZAARVORECAMADAS.toString().search('i3GEO.janela.comboCabecalhoTemas("i3GEOFbuscaComboCabeca","i3GEOFbuscaComboCabecaSel","busca","ligadosComTabela")') > 0)
+			{i3GEO.eventos.ATUALIZAARVORECAMADAS.remove('i3GEO.janela.comboCabecalhoTemas("i3GEOFbuscaComboCabeca","i3GEOFbuscaComboCabecaSel","busca","ligadosComTabela")');}			
+		};
+		YAHOO.util.Event.addListener(janela[0].close, "click", temp);		
 	},
 	/*
 	Function: ativaFoco
@@ -155,7 +171,7 @@ i3GEOF.busca = {
 	Refaz a interface da ferramenta quando a janela flutuante tem seu foco ativado
 	*/
 	ativaFoco: function(){
-		if(i3GEO.arvoreDeCamadas.pegaTema(i3GEOF.busca.tema) === "")
+		if(i3GEOF.busca.tema !== "" && i3GEO.arvoreDeCamadas.pegaTema(i3GEOF.busca.tema) === "")
 		{alert("O tema ja nao existe mais no mapa");}
 		var i = $i("i3GEOF.busca_c").style;
 		i3GEO.janela.ULTIMOZINDEX++;

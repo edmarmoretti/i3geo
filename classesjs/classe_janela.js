@@ -763,7 +763,65 @@ i3GEO.janela = {
 				if(typeof(console) !== 'undefined'){console.error(e);}
 			}
 		}
-	}
+	},
+	/*
+	Function: comboCabecalhoTemas
+	
+	Adiciona no cabeçalho da janela um combo com a lista de temas para janelas abertas por ferramentas
+	
+	Essa função é utilizada pelas ferramentas que operam sobre um determinado tema. O combo permite que o usuário
+	selecione um tema e ative a ferramenta para funcionar com esse tema
+	
+	Parametros:
+	
+	idDiv {string} - id do elemento HTML que receberá o combo
+	
+	idCombo {string} - id do combo que será criado
+	
+	ferramenta {string} - nome da ferramenta (namespace da classe, por exemplo "tabela" para a classe i3GEOF.tabela
+	
+	tipo {string} - tipo de combo
+	*/
+	comboCabecalhoTemas: function(idDiv,idCombo,ferramenta,tipo){
+		var temp = $i(idDiv);
+		if(temp){
+			temp.innerHTML = "";
+			i3GEO.util.comboTemas(
+				temp.id+"Sel",
+				function(retorno){
+					$i(idDiv).innerHTML = retorno.dados;
+					var c = $i(idCombo);
+					c.style.width = "150px";
+					c.style.border = "solid #B4B4B4 1px";
+					c.style.top = "1px";
+					c.style.position = "relative";
+					c.style.fontSize = "10px";
+					c.style.color = "#B4B4B4";
+					c.value = i3GEOF[ferramenta].tema;
+					if(c.value === ""){
+						i3GEOF[ferramenta].tema = "";
+						$i("i3GEOF."+ferramenta+"_corpo").innerHTML = "";
+					}
+					c.onchange = function(){
+						var valor = $i(idCombo).value;
+						if(valor !== ""){
+							i3GEO.mapa.ativaTema(valor);	
+							i3GEOF[ferramenta].tema = valor;
+							$i("i3GEOF."+ferramenta+"_corpo").innerHTML = "";
+							eval("i3GEOF."+ferramenta+".inicia('i3GEOF."+ferramenta+"_corpo');");							
+						}
+					};
+				},
+				temp.id,
+				"",
+				false,
+				tipo
+			);				
+		}
+		temp = "i3GEO.janela.comboCabecalhoTemas('"+idDiv+"','"+idCombo+"','"+ferramenta+"')";
+		if(i3GEO.eventos.ATUALIZAARVORECAMADAS.toString().search(temp) < 0)
+		{i3GEO.eventos.ATUALIZAARVORECAMADAS.push(temp);}		
+	}	
 };
 try{
 	//controle dos painéis que podem ser redimensionados

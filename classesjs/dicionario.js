@@ -1369,10 +1369,10 @@ it:"Inserisci il testo sulla mappa cliccando su un punto. Utilizzare questa opzi
 }],
 "d25t":[
 {
-pt:"inserir texto",
-en:"inserir texto",
-es:"inserir texto",
-it:"inserir texto"
+pt:"Inserir texto",
+en:"Inserir texto",
+es:"Inserir texto",
+it:"Inserir texto"
 }],
 "d26":[
 {

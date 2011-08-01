@@ -19,7 +19,7 @@ Licenca:
 
 GPL2
 
-I3Geo Interface Integrada de Ferramentas de Geoprocessamento para Internet
+i3Geo Interface Integrada de Ferramentas de Geoprocessamento para Internet
 
 Direitos Autorais Reservados (c) 2006 Ministério do Meio Ambiente Brasil
 Desenvolvedor: Edmar Moretti edmar.moretti@mma.gov.br
@@ -62,6 +62,11 @@ i3GEOF.toponimia = {
 	iddiv {String} - id do div que receberá o conteudo HTML da ferramenta
 	*/
 	inicia: function(iddiv){
+		i3GEO.janela.comboCabecalhoTemas("i3GEOFtoponimiaComboCabeca","i3GEOFtoponimiaComboCabecaSel","toponimia","ligadosComTabela");
+		if(i3GEO.temaAtivo === ""){
+			$i(iddiv).innerHTML = "Escolha um tema na lista mostrada no cabeçalho";
+			return;
+		}
 		try{
 			$i(iddiv).innerHTML += i3GEOF.toponimia.html();
 			i3GEO.guias.mostraGuiaFerramenta("i3GEOtoponimiaguia1","i3GEOtoponimiaguia");
@@ -234,11 +239,16 @@ i3GEOF.toponimia = {
 	*/	
 	criaJanelaFlutuante: function(){
 		var minimiza,cabecalho,janela,divid,temp,titulo;
+		if($i("i3GEOF.toponimia")){
+			i3GEOF.toponimia.tema = i3GEO.temaAtivo;
+			i3GEOF.toponimia.inicia("i3GEOF.toponimia_corpo");
+			return;
+		}
 		//cria a janela flutuante
-		titulo = "Topon&iacute;mia <a class=ajuda_usuario target=_blank href='" + i3GEO.configura.locaplic + "/ajuda_usuario.php?idcategoria=5&idajuda=36' >&nbsp;&nbsp;&nbsp;</a>";
+		titulo = "<div style='z-index:1;position:absolute' id='i3GEOFtoponimiaComboCabeca' >------</div>&nbsp;&nbsp;&nbsp;Topon&iacute;mia <a class=ajuda_usuario target=_blank href='" + i3GEO.configura.locaplic + "/ajuda_usuario.php?idcategoria=5&idajuda=36' >&nbsp;&nbsp;&nbsp;</a>";
 		janela = i3GEO.janela.cria(
-			"350px",
-			"250px",
+			"390px",
+			"180px",
 			"",
 			"",
 			"",
@@ -251,6 +261,11 @@ i3GEOF.toponimia = {
 		i3GEOF.toponimia.aguarde = $i("i3GEOF.toponimia_imagemCabecalho").style;
 		$i("i3GEOF.toponimia_corpo").style.backgroundColor = "white";
 		i3GEOF.toponimia.inicia(divid);
+		temp = function(){
+			if(i3GEO.eventos.ATUALIZAARVORECAMADAS.toString().search('i3GEO.janela.comboCabecalhoTemas("i3GEOFtoponimiaComboCabeca","i3GEOFtoponimiaComboCabecaSel","toponimia","ligadosComTabela")') > 0)
+			{i3GEO.eventos.ATUALIZAARVORECAMADAS.remove('i3GEO.janela.comboCabecalhoTemas("i3GEOFtoponimiaComboCabeca","i3GEOFtoponimiaComboCabecaSel","toponimia","ligadosComTabela")');}			
+		};
+		YAHOO.util.Event.addListener(janela[0].close, "click", temp);		
 	},
 	/*
 	Function: corj
