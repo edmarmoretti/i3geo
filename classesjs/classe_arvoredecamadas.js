@@ -1446,7 +1446,7 @@ i3GEO.arvoreDeCamadas = {
 	*/
 	pegaTema: function(idtema,camadas){
 		if(typeof(console) !== 'undefined'){console.info("i3GEO.arvoreDeCamadas.pegaTema()");}
-		var i,c
+		var i,c,
 			v = "";
 		if(!camadas)
 		{camadas = i3GEO.arvoreDeCamadas.CAMADAS;}
