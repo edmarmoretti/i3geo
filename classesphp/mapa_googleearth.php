@@ -60,13 +60,13 @@ else
 {ilegal();}
 */
 //
-$map_file = $_SESSION["map_file"];
+$map_fileX = $_SESSION["map_file"];
 $postgis_mapa = $_SESSION["postgis_mapa"];
 
 if($_GET["REQUEST"] == "GetKml")
 {retornaKml();}
 else
-{retornaWms($map_file,$postgis_mapa);}
+{retornaWms($map_fileX,$postgis_mapa);}
 return;
 function retornaKml(){
 	$protocolo = explode("/",$_SERVER['SERVER_PROTOCOL']);
@@ -99,7 +99,7 @@ function retornaKml(){
 	echo header("Content-type: application/xml");
 	echo $kml;
 }
-function retornaWms($map_file,$postgis_mapa){
+function retornaWms($map_fileX,$postgis_mapa){
 	error_reporting(0);
 	if(isset($_GET["bbox"]))
 	{$_GET["BBOX"] = $_GET["bbox"];}
@@ -114,7 +114,7 @@ function retornaWms($map_file,$postgis_mapa){
 		$_GET["HEIGHT"] = ($_GET["WIDTH"] / $dx) * $dy;
 		//$_GET["map_size"] = $_GET["WIDTH"]." ".$_GET["HEIGHT"];
 	}
-	$mapa = ms_newMapObj($map_file);
+	$mapa = ms_newMapObj($map_fileX);
 	$mapa->setProjection("init=epsg:4326");
 	/*
 	$qyfile = str_replace(".map",".qy",$_GET["map"]);
@@ -125,7 +125,7 @@ function retornaWms($map_file,$postgis_mapa){
 	//
 	//resolve o problema da seleção na versão nova do mapserver
 	//
-	$qyfile = dirname($map_file)."/".$_GET["layer"].".php";
+	$qyfile = dirname($map_fileX)."/".$_GET["layer"].".php";
 	$qy = file_exists($qyfile);
 	if($qy)
 	{

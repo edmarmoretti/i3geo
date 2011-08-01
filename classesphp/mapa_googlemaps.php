@@ -82,7 +82,7 @@ if(@$_SESSION["fingerprint"])
 else
 {ilegal();}
 //
-$map_file = $_SESSION["map_file"];
+$map_fileX = $_SESSION["map_file"];
 $postgis_mapa = $_SESSION["postgis_mapa"];
 //
 //converte a requisição do tile em coordenadas geo
@@ -116,7 +116,7 @@ if(!isset($_GET["HEIGHT"]))
 {$_GET["HEIGHT"] = "256";}
 $_GET["map_size"] = $_GET["WIDTH"]." ".$_GET["HEIGHT"];
 
-$mapa = ms_newMapObj($map_file);
+$mapa = ms_newMapObj($map_fileX);
 /*
 $qyfile = str_replace(".map",".qy",$_GET["map"]);
 $qy = file_exists($qyfile);
@@ -126,7 +126,7 @@ if($qy)
 //
 //resolve o problema da seleção na versão nova do mapserver
 //
-$qyfile = dirname($map_file)."/".$_GET["layer"].".php";
+$qyfile = dirname($map_fileX)."/".$_GET["layer"].".php";
 $qy = file_exists($qyfile);
 if($qy)
 {
@@ -205,7 +205,7 @@ if(trim($_GET["TIPOIMAGEM"]) != "" && trim($_GET["TIPOIMAGEM"]) != "nenhum")
 if($qy)
 {$cache = false;}
 if($cache == true)
-{carregaCacheImagem($_GET["BBOX"],$nomecache,$map_file,$_GET["WIDTH"],$_GET["HEIGHT"]);}
+{carregaCacheImagem($_GET["BBOX"],$nomecache,$map_fileX,$_GET["WIDTH"],$_GET["HEIGHT"]);}
 
 $map_size = explode(" ",$_GET["map_size"]);
 $mapa->setsize($map_size[0],$map_size[1]);
@@ -260,7 +260,7 @@ if(trim($_GET["TIPOIMAGEM"]) != "" && trim($_GET["TIPOIMAGEM"]) != "nenhum")
 }
 else{
 	if($cache == true)
-	{salvaCacheImagem($_GET["BBOX"],$nomecache,$map_file,$_GET["WIDTH"],$_GET["HEIGHT"]);}
+	{salvaCacheImagem($_GET["BBOX"],$nomecache,$map_fileX,$_GET["WIDTH"],$_GET["HEIGHT"]);}
 	ob_clean();
 	$nomer = ($img->imagepath)."imgtemp".nomeRandomico();
 	$img->saveImage($nomer);
