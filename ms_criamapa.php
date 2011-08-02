@@ -138,6 +138,7 @@ $caminho é sempre colocada antes do nome dos arquivos que serão incluídos, p.e.,
 require_once ($caminho."classesphp/carrega_ext.php");
 */
 //$_COOKIE = array();
+unset($GLOBALS);
 if (!isset($caminho)){$caminho = "";}
 if (!file_exists($caminho."classesphp/carrega_ext.php"))
 {echo "<b> Nao foi possivel localizar o diretório classephp. Provavelmente vc precisara definir a variavel $camino";exit;}
