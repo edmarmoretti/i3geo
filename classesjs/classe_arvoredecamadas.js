@@ -463,7 +463,7 @@ i3GEO.arvoreDeCamadas = {
 			i3GEO.arvoreDeCamadas.CAMADAS = "";
 			forca = false;
 		}
-		var estilo,temp,currentIconMode,newVal,root,tempNode,titulo,d,c,ltema,temaNode,grupoNode,i,j,n,nk,k,
+		var estilo,temp,currentIconMode,newVal,root,tempNode,titulo,d,c,ltema,temaNode,grupoNode,i,j,n,nk,k,noGrupo,
 			incluidos=[],
 			grupoLayers = i3GEO.configura.grupoLayers,
 			textoTema = "";
@@ -559,23 +559,26 @@ i3GEO.arvoreDeCamadas = {
 			c = grupoLayers.length;
 			//grupos
 			for(i=0;i<c; i += 1){
-				temp = "";
+				noGrupo = "";
 				if(grupoLayers[i].icone && grupoLayers[i].icone === true){
-					temp += "<p style="+estilo+" ><input class=inputsb style=cursor:pointer onclick='i3GEO.arvoreDeCamadas.ligaDesligaTemas(\""+i3GEO.configura.grupoLayers[i].layers+"\",this.checked)' type=checkbox title='Ligar/desligar temas do grupo' />&nbsp;";
+					noGrupo += "<p style="+estilo+" ><input class=inputsb style=cursor:pointer onclick='i3GEO.arvoreDeCamadas.ligaDesligaTemas(\""+i3GEO.configura.grupoLayers[i].layers+"\",this.checked)' type=checkbox title='Ligar/desligar temas do grupo' />&nbsp;";
 				}
-				temp += "<span style="+estilo+";vertical-align:top ><b>"+grupoLayers[i].nome+"</b></span></p>";
+				noGrupo += "<span style="+estilo+";vertical-align:top ><b>"+grupoLayers[i].nome+"</b></span></p>";
 				d = this.EXPANDIDA;
 				if(grupoLayers[i].expandido && grupoLayers[i].expandido === true)
 				{d = true;}
 				n = grupoLayers[i].layers.length;
-				if(n > 0)
-				{grupoNode = new YAHOO.widget.HTMLNode({enableHighlight:false,html:temp,expanded:d}, tempNode);}			
+							
 				//layers de um grupo
 				for(j=0;j<n; j += 1){
 					//busca na lista de temas
 					for(k=0;k<nk; k += 1){
 						ltema = temas[k];
 						if(ltema.name === grupoLayers[i].layers[j]  && ltema.escondido === "nao"){
+							if(noGrupo !== ""){
+								grupoNode = new YAHOO.widget.HTMLNode({enableHighlight:false,html:noGrupo,expanded:d}, tempNode);
+								noGrupo = "";
+							}
 							textoTema = i3GEO.arvoreDeCamadas.montaTextoTema(ltema);
 							if(textoTema !== ""){
 								d = {enableHighlight:false,expanded:i3GEO.arvoreDeCamadas.EXPANDIDA,html:textoTema,id:ltema.name,tipo:"tema"};
