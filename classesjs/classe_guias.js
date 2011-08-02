@@ -802,16 +802,16 @@ i3GEO.guias = {
 			temp.height = config.alturaPuxador + "px";
 			
 			temp = $i("i3GEOguiaMovelIcones").style;
-			temp.left = "3px";
-			temp.top = "3px";
-			temp.width = (config.larguraGuiaMovel - 3) + "px";
+			temp.left = "1px";
+			temp.top = "1px";
+			temp.width = (config.larguraGuiaMovel - 1) + "px";
 			temp.height = "30px";
 			
 			temp = $i("i3GEOguiaMovelConteudo").style;
-			temp.left = "3px";
-			temp.top = "33px";
-			temp.height = (config.alturaGuiaMovel - 36) +"px";
-			temp.width = (config.larguraGuiaMovel - 7) + "px";
+			temp.left = "1px";
+			temp.top = "31px";
+			temp.height = (config.alturaGuiaMovel - 32) +"px";
+			temp.width = (config.larguraGuiaMovel - 5) + "px";
 			temp.paddingLeft = "4px";
 
 			YAHOO.util.Dom.setStyle("i3GEOguiaMovelConteudo", "opacity", 0.90);

@@ -162,6 +162,7 @@ include_once("funcoes_gerais.php");
 
 if ($funcao == "criaMapa")
 {
+	unset($GLOBALS);
 	session_destroy();
 	//
 	//primeiro é necessário carregar o ms_configura.php para pegar a variável $locaplic

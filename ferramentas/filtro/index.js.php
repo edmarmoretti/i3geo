@@ -68,6 +68,11 @@ i3GEOF.filtro = {
 	iddiv {String} - id do div que receberá o conteudo HTML da ferramenta
 	*/
 	inicia: function(iddiv){
+		i3GEO.janela.comboCabecalhoTemas("i3GEOFfiltroComboCabeca","i3GEOFfiltroComboCabecaSel","filtro","ligadosComTabela");
+		if(i3GEO.temaAtivo === ""){
+			$i(iddiv).innerHTML = "Escolha um tema na lista mostrada no cabeçalho";
+			return;
+		}
 		try{
 			$i(iddiv).innerHTML += i3GEOF.filtro.html();
 			i3GEO.guias.mostraGuiaFerramenta("i3GEOfiltroguia1","i3GEOfiltroguia");
@@ -160,8 +165,12 @@ i3GEOF.filtro = {
 	*/	
 	criaJanelaFlutuante: function(){
 		var janela,divid,temp,titulo;
+		if($i("i3GEOF.filtro")){
+			i3GEOF.filtro.inicia("i3GEOF.tabela_corpo");
+			return;
+		}		
 		//cria a janela flutuante
-		titulo = "Filtro <a class=ajuda_usuario target=_blank href='" + i3GEO.configura.locaplic + "/ajuda_usuario.php?idcategoria=5&idajuda=38' >&nbsp;&nbsp;&nbsp;</a>";
+		titulo = "<div style='z-index:1;position:absolute' id='i3GEOFfiltroComboCabeca' >------</div>&nbsp;&nbsp;&nbsp;Filtro <a class=ajuda_usuario target=_blank href='" + i3GEO.configura.locaplic + "/ajuda_usuario.php?idcategoria=5&idajuda=38' >&nbsp;&nbsp;&nbsp;</a>";
 		janela = i3GEO.janela.cria(
 			"480px",
 			"250px",
@@ -177,6 +186,11 @@ i3GEOF.filtro = {
 		i3GEOF.filtro.aguarde = $i("i3GEOF.filtro_imagemCabecalho").style;
 		$i("i3GEOF.filtro_corpo").style.backgroundColor = "white";
 		i3GEOF.filtro.inicia(divid);
+		temp = function(){
+			if(i3GEO.eventos.ATUALIZAARVORECAMADAS.toString().search('i3GEO.janela.comboCabecalhoTemas("i3GEOFfiltroComboCabeca","i3GEOFfiltroComboCabecaSel","filtro","ligadosComTabela")') > 0)
+			{i3GEO.eventos.ATUALIZAARVORECAMADAS.remove('i3GEO.janela.comboCabecalhoTemas("i3GEOFfiltroComboCabeca","i3GEOFfiltroComboCabecaSel","filtro","ligadosComTabela")');}			
+		};
+		YAHOO.util.Event.addListener(janela[0].close, "click", temp);
 	},
 	/*
 	Function: adicionaLinhaFiltro

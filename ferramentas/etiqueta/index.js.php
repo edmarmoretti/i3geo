@@ -58,6 +58,11 @@ i3GEOF.etiqueta = {
 	iddiv {String} - id do div que receberá o conteudo HTML da ferramenta
 	*/
 	inicia: function(iddiv){
+		i3GEO.janela.comboCabecalhoTemas("i3GEOFetiquetaComboCabeca","i3GEOFetiquetaComboCabecaSel","etiqueta","ligadosComTabela");
+		if(i3GEO.temaAtivo === ""){
+			$i(iddiv).innerHTML = "Escolha um tema na lista mostrada no cabeçalho";
+			return;
+		}
 		try{
 			$i(iddiv).innerHTML += i3GEOF.etiqueta.html();
 			new YAHOO.widget.Button(
@@ -85,7 +90,7 @@ i3GEOF.etiqueta = {
 		var ins = '';
 		ins += '<p class="paragrafo" >Escolha o item que ser&aacute; utilizado como fonte de dados para incluir a etiqueta:<br>';	
 		ins += '<div id=i3GEOetiquetalistai class=digitar style="text-align:left;left:0px;top:0px;330px;height:80px;overflow:auto;display:block;"></div>';
-		ins += '<br><br>';
+		ins += '<br>';
 		ins += '<p class="paragrafo" >';
 		ins += '<input id=i3GEOetiquetabotao1 size=35  type=button value="Aplicar" />';
 		ins += '<input id=i3GEOetiquetabotao2 size=35  type=button value="Desativar todas as etiquetas" />';
@@ -98,6 +103,10 @@ i3GEOF.etiqueta = {
 	*/	
 	criaJanelaFlutuante: function(){
 		var minimiza,cabecalho,janela,divid,temp,titulo,cabecalho,minimiza;
+		if($i("i3GEOF.etiqueta")){
+			i3GEOF.etiqueta.inicia("i3GEOF.etiqueta_corpo");
+			return;
+		}
 		cabecalho = function(){
 			i3GEOF.etiqueta.ativaFoco();
 		};
@@ -105,10 +114,10 @@ i3GEOF.etiqueta = {
 			i3GEO.janela.minimiza("i3GEOF.etiqueta");
 		};
 		//cria a janela flutuante
-		titulo = "Etiquetas <a class=ajuda_usuario target=_blank href='" + i3GEO.configura.locaplic + "/ajuda_usuario.php?idcategoria=5&idajuda=37' >&nbsp;&nbsp;&nbsp;</a>";
+		titulo = "<div style='z-index:1;position:absolute' id='i3GEOFetiquetaComboCabeca' >------</div>&nbsp;&nbsp;&nbsp;Etiquetas <a class=ajuda_usuario target=_blank href='" + i3GEO.configura.locaplic + "/ajuda_usuario.php?idcategoria=5&idajuda=37' >&nbsp;&nbsp;&nbsp;</a>";
 		janela = i3GEO.janela.cria(
-			"300px",
-			"210px",
+			"380px",
+			"165px",
 			"",
 			"",
 			"",
@@ -123,6 +132,11 @@ i3GEOF.etiqueta = {
 		i3GEOF.etiqueta.aguarde = $i("i3GEOF.etiqueta_imagemCabecalho").style;
 		$i("i3GEOF.etiqueta_corpo").style.backgroundColor = "white";
 		i3GEOF.etiqueta.inicia(divid);
+		temp = function(){
+			if(i3GEO.eventos.ATUALIZAARVORECAMADAS.toString().search('i3GEO.janela.comboCabecalhoTemas("i3GEOFetiquetaComboCabeca","i3GEOFetiquetaComboCabecaSel","etiqueta","ligadosComTabela")') > 0)
+			{i3GEO.eventos.ATUALIZAARVORECAMADAS.remove('i3GEO.janela.comboCabecalhoTemas("i3GEOFetiquetaComboCabeca","i3GEOFetiquetaComboCabecaSel","etiqueta","ligadosComTabela")');}			
+		};
+		YAHOO.util.Event.addListener(janela[0].close, "click", temp);
 	},
 	/*
 	Function: ativaFoco

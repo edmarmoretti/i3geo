@@ -784,7 +784,8 @@ i3GEO.editorOL = {
 								fontWeight: "bold",
 								labelAlign: "rt"
 							};
-							i3GEO.editorOL.layergrafico.addFeatures([label]);
+							if(texto && texto !== "")
+							{i3GEO.editorOL.layergrafico.addFeatures([label]);}
 						}
 					}
 				}
