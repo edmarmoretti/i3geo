@@ -749,8 +749,8 @@ function alteraMenus()
     	include("conexao.php");
 		if($convUTF)
 		{
-			$nome = utf8_encode($nome);
-			$desc = utf8_encode($desc);
+			$nome_menu = utf8_encode($nome_menu);
+			$desc_menu = utf8_encode($desc_menu);
 		}
     	if($id_menu != "")
     	{
