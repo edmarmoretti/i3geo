@@ -141,8 +141,8 @@ require_once ($caminho."classesphp/carrega_ext.php");
 //
 //quando $funcao existe, é pq o ms_criamapa.php está sendo utilizado como um include em classesphp/mapa_controle.php
 //
-//if(!isset($funcao))
-//{unset($GLOBALS);}
+if(!isset($funcao))
+{ob_clean();}
 if (!isset($caminho)){$caminho = "";}
 if (!file_exists($caminho."classesphp/carrega_ext.php"))
 {echo "<b> Nao foi possivel localizar o diretório classephp. Provavelmente vc precisara definir a variavel $camino";exit;}
