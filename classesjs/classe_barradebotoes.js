@@ -1286,8 +1286,8 @@ i3GEO.barraDeBotoes = {
 	},
 	mostraJanela: function(objeto,mensagem,evt){
 		if(mensagem === ""){
-			try{clearTimeout(timeMostraAjudaBotoes);}catch(e){}
-			try{clearTimeout(timeAjudaBotoes);}catch(e){}
+			try{clearTimeout(i3GEO.barraDeBotoes.timeMostraAjudaBotoes);}catch(e){}
+			try{clearTimeout(i3GEO.barraDeBotoes.timeAjudaBotoes);}catch(e){}
 			return;
 		}
 		var divmensagem = $i("divMensagemBarraDeBotoes"),balloonAjuda,
@@ -1327,8 +1327,8 @@ i3GEO.barraDeBotoes = {
 					divmensagem.style.left = (parseInt(YAHOO.util.Dom.getStyle(objeto,"width"),10)/2)+pos[0]-5+"px";
 					divmensagem.style.top = pos[1]+5+parseInt(YAHOO.util.Dom.getStyle(objeto,"height"),10)+"px";
 				}
-				try{clearTimeout(timeAjudaBotoes);}catch(e){}
-				timeMostraAjudaBotoes = setTimeout("i3GEO.barraDeBotoes.mostraJanelaAjuda('"+mensagem+"');",5000);
+				try{clearTimeout(i3GEO.barraDeBotoes.timeAjudaBotoes);}catch(e){}
+				i3GEO.barraDeBotoes.timeMostraAjudaBotoes = setTimeout("i3GEO.barraDeBotoes.mostraJanelaAjuda('"+mensagem+"');",5000);
 			}
 			else{
 				hideAllTooltips();
@@ -1340,8 +1340,8 @@ i3GEO.barraDeBotoes = {
 				balloonAjuda.vOffset = -24;
 				balloonAjuda.images = i3GEO.configura.locaplic+'/pacotes/balloon-tooltips/htdocs/images/GBubblec';
 				mensagem = "<table style='z-index:20000' ><tr><td style='text-align:left;'><span style='text-align:right;cursor:pointer;color:blue;' onclick='javascript:i3GEO.util.insereCookie(\"botoesAjuda\",\"nao\");i3GEO.barraDeBotoes.AJUDA = false;'>fecha</span><br><div style='vertical-align:middle;text-align:left;width:250px;border: 0px solid black;border-left:1px;' id='divMensagemBarraDeBotoesCorpo'>"+mensagem+"</div></td></tr></table>";
-				try{clearTimeout(timeAjudaBotoes);}catch(e){}
-				timeMostraAjudaBotoes = setTimeout(function(){
+				try{clearTimeout(i3GEO.barraDeBotoes.timeAjudaBotoes);}catch(e){}
+				i3GEO.barraDeBotoes.timeMostraAjudaBotoes = setTimeout(function(){
 					balloonAjuda.cleanup();
 					balloonIsVisible = false;
 					//alert(mensagem);
@@ -1350,7 +1350,7 @@ i3GEO.barraDeBotoes = {
 					else
 					{balloonAjuda.showTooltip(objeto,mensagem,null,null,null,pos[0]+12,pos[1]);}
 					try{clearTimeout(timeMostraAjudaBotoes);}catch(e){}
-					timeAjudaBotoes = setTimeout(function(){balloonAjuda.cleanup();},4000);
+					i3GEO.barraDeBotoes.timeAjudaBotoes = setTimeout(function(){balloonAjuda.cleanup();},4000);
 				},4000);
 			}
 		}
@@ -1358,12 +1358,13 @@ i3GEO.barraDeBotoes = {
 	mostraJanelaAjuda:function(mensagem){
 		$i("divMensagemBarraDeBotoesCorpo").innerHTML = mensagem;
 		YAHOO.util.Dom.setStyle("divMensagemBarraDeBotoes","display","block");
-		try{clearTimeout(timeMostraAjudaBotoes);}catch(e){}
-		timeAjudaBotoes = setTimeout(function(){i3GEO.barraDeBotoes.escondeJanelaAjuda();},3000);
+		try{clearTimeout(i3GEO.barraDeBotoes.timeMostraAjudaBotoes);}catch(e){}
+		i3GEO.barraDeBotoes.timeAjudaBotoes = setTimeout(function(){i3GEO.barraDeBotoes.escondeJanelaAjuda();},3000);
 	},
 	escondeJanelaAjuda:function(){
 		try{
-			clearTimeout(timeAjudaBotoes);
+			if(i3GEO.barraDeBotoes.timeAjudaBotoes)
+			{clearTimeout(i3GEO.barraDeBotoes.timeAjudaBotoes);}
 		}
 		catch(e){}
 		if($i("divMensagemBarraDeBotoes"))

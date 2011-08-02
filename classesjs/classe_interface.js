@@ -1314,9 +1314,7 @@ i3GEO.Interface = {
 			i3GEO.parametros.mapexten = bounds[0]+" "+bounds[1]+" "+bounds[2]+" "+bounds[3];
 			i3GEO.parametros.mapscale = escalaAtual;
 			i3GEO.parametros.pixelsize = i3geoOL.getResolution();
-			try{
-				atualizaEscalaNumerica(parseInt(escalaAtual,10));
-			}catch(e){}
+			i3GEO.gadgets.atualizaEscalaNumerica(parseInt(escalaAtual,10));
 		},
 		zoom2ext: function(ext){
 			var m,b;

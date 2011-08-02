@@ -242,23 +242,6 @@ i3GEO.gadgets = {
 		if(onde){
 			if(onde.style.display == "none")
 			{onde.style.display = "block";}
-			atualizaEscalaNumerica = function(escala){
-				var e = $i("i3geo_escalanum");  
-				if(!e){
-					i3GEO.eventos.NAVEGAMAPA.remove("atualizaEscalaNumerica()");
-					return;
-				}
-				if(arguments.length === 1)
-				{e.value = escala;}
-				else{
-					if(i3GEO.parametros.mapscale !== ""){
-						e.value = parseInt(i3GEO.parametros.mapscale,10);
-					}
-					else{
-						e.value = 0;
-					}
-				}
-			};
 			if(!$i("i3geo_escalanum")){
 				i = $inputText(id,"100","i3geo_escalanum",$trad("d10"),"9",parseInt(i3GEO.parametros.mapscale,10));
 				ins = "<table><tr><td>"+i;
@@ -267,13 +250,28 @@ i3GEO.gadgets = {
 				ins += "</td><td><img src='"+i3GEO.util.$im("branco.gif")+"' class='tic' onclick='"+temp+"' /></td></tr></table>";
 				onde.innerHTML = ins;
 			}
-			if(i3GEO.eventos.NAVEGAMAPA.toString().search("atualizaEscalaNumerica()") < 0)
-			{i3GEO.eventos.NAVEGAMAPA.push("atualizaEscalaNumerica()");}
-		}
-		else{
-			atualizaEscalaNumerica = function(){};
+			if(i3GEO.eventos.NAVEGAMAPA.toString().search("i3GEO.gadgets.atualizaEscalaNumerica()") < 0)
+			{i3GEO.eventos.NAVEGAMAPA.push("i3GEO.gadgets.atualizaEscalaNumerica()");}
 		}
 	},
+	atualizaEscalaNumerica: function(escala){
+		var e = $i("i3geo_escalanum");  
+		if(!e){
+			i3GEO.eventos.NAVEGAMAPA.remove("i3GEO.gadgets.atualizaEscalaNumerica()");
+			return;
+		}
+		if(arguments.length === 1)
+		{e.value = escala;}
+		else{
+			if(i3GEO.parametros.mapscale !== ""){
+				e.value = parseInt(i3GEO.parametros.mapscale,10);
+			}
+			else{
+				e.value = 0;
+			}
+		}
+	},
+	
 	/*
 	Function: mostraEscalaGrafica
 

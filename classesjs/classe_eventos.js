@@ -56,13 +56,13 @@ Exemplos:
 
 	Para incluir uma função em um determinado evento utilize
 
-	if(i3GEO.eventos.NAVEGAMAPA.toString().search("atualizaEscalaNumerica()") < 0)
+	if(i3GEO.eventos.NAVEGAMAPA.toString().search("i3GEO.gadgets.atualizaEscalaNumerica()") < 0)
 
-	{i3GEO.eventos.NAVEGAMAPA.push("atualizaEscalaNumerica()");}
+	{i3GEO.eventos.NAVEGAMAPA.push("i3GEO.gadgets.atualizaEscalaNumerica()");}
 
 	Para remover utilize
 
-	i3GEO.eventos.NAVEGAMAPA.remove("atualizaEscalaNumerica()");
+	i3GEO.eventos.NAVEGAMAPA.remove("i3GEO.gadgets.atualizaEscalaNumerica()");
 */
 i3GEO.eventos = {
 	/*

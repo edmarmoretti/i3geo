@@ -33,7 +33,12 @@ i3GEO.editorOL = {
 		"http://labs.metacarta.com/wms/vmap0",
 		{layers: 'basic'}
 	),
-	jpl_wms: new OpenLayers.Layer.WMS( "NASA Global Mosaic", "http://wms.jpl.nasa.gov/wms.cgi", {layers: "modis,global_mosaic"},{singleTile:true}),
+	jpl_wms: new OpenLayers.Layer.WMS(
+		"NASA Global Mosaic",
+		"http://wms.jpl.nasa.gov/wms.cgi",
+		{layers: "modis,global_mosaic"},
+		{singleTile:true}
+	),
 	osm_wms: new OpenLayers.Layer.WMS(
 		"Open Street Map",
 		"http://full.wms.geofabrik.de/std/demo_key?",
@@ -907,8 +912,15 @@ i3GEO.editorOL = {
 				trigger: function(){
 					if(window.confirm("A edição será perdida. Continua?")){
 						i3GEOpanelEditor.destroy();
-						YAHOO.temaativo.container.panel.destroy();
-						i3GEO.editorOL.mapa.removeLayer(i3GEO.editorOL.layergrafico);
+						if(YAHOO.temaativo && YAHOO.temaativo.container.panel)
+						{YAHOO.temaativo.container.panel.destroy();}
+						try{
+							if(i3GEO.editorOL.layergrafico)
+							{i3GEO.editorOL.mapa.removeLayer(i3GEO.editorOL.layergrafico);}
+							if(i3GEO.editorOL.backup)
+							{i3GEO.editorOL.mapa.removeLayer(i3GEO.editorOL.backup);}
+						}
+						catch(e){}
 					}
 				},
 				title: "fecha editor"
