@@ -1915,7 +1915,12 @@ function criaSHP($tema,$map_file,$locaplic,$dir_tmp,$nomeRand=TRUE)
 			$db = dbase_open($nomeshp.".dbf", 0);
 			else
 			$db = xbase_open($nomeshp.".dbf", 0);
+			
+			if(function_exists("dbase_numrecords"))
 			$record_numbers = dbase_numrecords($db);
+			else
+			$record_numbers = xbase_numrecords($db);
+			
 			if(function_exists("dbase_close"))
 			dbase_close($db);
 			else
@@ -2185,183 +2190,6 @@ function downloadTema2($map_file,$tema,$locaplic,$dir_tmp,$postgis_mapa)
 	}
 	return array("arquivos"=>implode(",",$resultado),"nreg"=>$nreg);
 
-
-
-
-
-	//
-	//verifica se o tema existe no mapfile
-	//se não existir, tenta inserir com base no mapfile existente no diretório temas
-	//o tema pode existir se a função estiver sendo chamada da árvore de temas de um mapa já aberto
-	//
-	$temasdir = $locaplic."/temas";
-	$map = ms_newMapObj($map_file);
-	$teste = @$map->getlayerbyname($tema);
-	if ($teste == "")
-	{
-		$maptemp = ms_newMapObj($temasdir."/".$tema.".map");
-		$temastemp = $maptemp->getalllayernames();
-		foreach ($temastemp as $tt)
-		{
-			$ll = $maptemp->getlayerbyname($tt);
-			$permite = $ll->getmetadata("permitedownload");
-			if($permite != "nao")			
-			{ms_newLayerObj($map, $ll);}
-		}
-		$teste = @$map->getlayerbyname($tema);
-		if ($teste == "")
-		{return "erro";}
-	}
-	else
-	{
-		//remove o metadata com um nome de arquivo opcional, pois a função de download pode estar sendo executada da árvore de camadas
-		$teste = $map->getlayerbyname($tema);
-		$teste->setmetadata("arquivodownload","");
-	}
-	//
-	//salva o mapfile com um outro nome para evitar que o mapa atual, se estiver aberto, seja modificado
-	//
-	$map_file = str_replace(".map","tmp.map",$map_file);
-	$map->save($map_file);
-	substituiCon($map_file,$postgis_mapa);
-	$map = ms_newMapObj($map_file);
-	//
-	//verifica se existe mais de um tema (grupo) montando o array com os temas
-	//os grupos podem ter o nome do layer em GROUP ao invés de NAME
-	//
-	$multilayer = 0;
-	$grupos = $map->getAllGroupNames();
-	foreach ($grupos as $grupo)
-	{
-		if ($grupo == $tema)
-		{$multilayer = 1;}
-	}
-	if ($multilayer == 1)
-	{
-		$temasnx = $map->getAllLayerNames();
-		foreach ($temasnx as $l)
-		{
-			$gl = $map->getlayerbyname($l);
-			$g = $gl->group;
-			if (($g == $tema) || ($l == $tema))
-			{$temas[] = $l;}
-		}
-	}
-	if ($multilayer == 0)
-	{$temas[] = $tema;}
-	$radtmp = dirname($dir_tmp);
-	foreach ($temas as $tema)
-	{
-		$l = $map->getlayerbyname($tema);
-		$novonomelayer = $tema;
-		$nomeshp = $dir_tmp."/".$novonomelayer;
-		if(file_exists($nomeshp.".dbf")){
-			//
-			//verifica se o arquivo está vazio ou não
-			//
-			$verificaDBF = verificaDBF($nomeshp.".dbf");
-			if($verificaDBF == false){
-				unlink($nomeshp.".dbf");
-				unlink($nomeshp.".shp");
-				unlink($nomeshp.".shx");
-			}
-		}
-		//
-		//se existir um arquivo já pronto, definido no metadata arquivodownload, irá ser utilizado
-		//
-		$meta = $l->getmetadata("arquivodownload");
-		if($meta != "")
-		{
-			//
-			//se o arquivo não tiver sido copiado
-			//
-			$nomecopia = $dir_tmp."/".basename($meta);
-			if(file_exists($meta))
-			{
-				if(!file_exists($nomecopia))
-				{copy($meta,$nomecopia);}
-			}
-			$resultado[] = basename($dir_tmp)."/".basename($nomecopia);
-		}
-		else //se não existir arquivo definido
-		{
-			$dados = $l->data;
-			//
-			//se for imagem, copia o arquivo
-			//
-			if($l->type == MS_LAYER_RASTER)
-			{
-				if (file_exists($dados))
-				{
-					$dir = dirname($dados);
-					$arq = explode(".",basename($dados));
-					$nomecopia = $dir_tmp."/".$arq[0];
-					$exts = array("jpg","jpw","tif","tifw","tfw","png","pngw","jpgw","wld","img");
-					foreach($exts as $ext)
-					{
-						$copia = $nomecopia.".".$ext;
-						if(!file_exists($copia) && file_exists($dir."/".$arq[0].".".$ext))
-						{copy($dir."/".$arq[0].".".$ext,$copia);}
-						if(file_exists($copia))
-						$resultado[] = basename($dir_tmp)."/".basename($copia);	
-					}
-				}
-				else
-				{return "erro";}
-			}
-			else //se for vetorial, extrai o arquivo
-			{
-				//define o nome correto do arquivo final
-				$sp = $map->shapepath;
-				$arq = "";			
-				if (file_exists($dados))
-				{$arq = $dados;}
-				if (file_exists($dados.".shp"))
-				{$arq = $dados.".shp";}
-				if (file_exists($sp.$dados.".shp"))
-				{$arq = $sp.$dados.".shp";}
-				if (file_exists($sp.$dados))
-				{$arq = $sp.$dados;}
-				//
-				//se o tema usa um arquivo shapefile, apenas faz a cópia
-				//
-				/*
-				if ($arq != "")
-				{
-					$arq = explode(".shp",$arq);
-					if(!file_exists($nomeshp.".shp"))
-					{
-						copy($arq[0].".shp",$nomeshp.".shp");
-						copy($arq[0].".shx",$nomeshp.".shx");
-						copy($arq[0].".dbf",$nomeshp.".dbf");
-					}
-					$resultado[] = basename($dir_tmp)."/".$novonomelayer.".shp";
-					$resultado[] = basename($dir_tmp)."/".$novonomelayer.".dbf";
-					$resultado[] = basename($dir_tmp)."/".$novonomelayer.".shx";
-				}
-				*/
-				$nomeshp = criaSHP($tema,$map_file,$locaplic,$dir_tmp,$nomeRand);
-				if($nomeshp == false)
-				{return array("arquivos"=>"<span style=color:red >Ocorreu um erro, tente novamente","nreg"=>0);}
-				$resultado[] = str_replace($radtmp."/","",$nomeshp).".shp";
-				$resultado[] = str_replace($radtmp."/","",$nomeshp).".shx";
-				$resultado[] = str_replace($radtmp."/","",$nomeshp).".dbf"; 
-			}
-		}
-	}
-	$nreg = "";
-	if(count($resultado) == 3){
-		$arq = $radtmp."/".$resultado[2];
-		if(function_exists("dbase_open")){	
-			$db = dbase_open($arq, 0);
-			if($db){$nreg = dbase_numrecords($db);}
-		}
-		else{
-			$db = xbase_open($arq, 0);
-			if($db){$nreg = xbase_numrecords($db);}
-		}
-	}
-	return array("arquivos"=>implode(",",$resultado),"nreg"=>$nreg);
 }
 
 /*

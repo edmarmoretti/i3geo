@@ -696,7 +696,7 @@ function movimentaNo()
 		if ($ordematual > 1)
 		{
 			$menos = $ordematual - 1;
-			echo "UPDATE i3geoadmin_$tabela SET 'ordem' = $ordematual where $where and ordem = '$menos'";
+			//echo "UPDATE i3geoadmin_$tabela SET 'ordem' = $ordematual where $where and ordem = '$menos'";
 			$dbhw->query("UPDATE i3geoadmin_$tabela SET ordem = $ordematual where $where and ordem = '$menos'");
 			$dbhw->query("UPDATE i3geoadmin_$tabela SET ordem = $menos where id_$posfixo = '$id'");
 		}
