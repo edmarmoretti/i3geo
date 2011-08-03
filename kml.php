@@ -37,6 +37,8 @@ Arquivo: i3geo/kml.php
 Parametro:
 
 perfil - perfis separados por espaços. Ao usar um perfil, serão mostrados apenas os temas disponíveis para o perfil indicado.
+
+tipoxml - (opcional) se for "kml" insere o cabeçalho de tipo kml no xml, permitindo abrir o xml diretamente na aplicação Google Earth
 */
 error_reporting(0);
 include_once ("classesphp/carrega_ext.php");
@@ -48,8 +50,10 @@ if($convUTF == true)
 {$encoding = "UTF-8";}
 if(!isset($idioma))
 {$idioma = "pt";}
-
-echo header("Content-type: application/xml");
+if(isset($_GET["tipoxml"]) && $_GET["tipoxml"] == "kml")
+{echo header("Content-type: application/kml");}
+else
+{echo header("Content-type: application/xml");}
 echo '<?xml version="1.0" encoding="'.$encoding.'"?>';
 echo "<kml xmlns='http://earth.google.com/kml/2.2'>\n";
 
