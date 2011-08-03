@@ -8,8 +8,8 @@ MAP
   SIZE 450 450
   STATUS ON
   UNITS METERS
-  CONFIG MS_NONSQUARE "YES"
-  CONFIG MS_ERRORFILE "/ms4w/tmp/ms_error.txt"
+  #CONFIG MS_NONSQUARE "YES"
+  #CONFIG MS_ERRORFILE "/ms4w/tmp/ms_error.txt"
   NAME "i3geoogc"
 
   DEBUG 5
