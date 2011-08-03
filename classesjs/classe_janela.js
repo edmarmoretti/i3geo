@@ -818,7 +818,7 @@ i3GEO.janela = {
 				tipo
 			);				
 		}
-		temp = "i3GEO.janela.comboCabecalhoTemas('"+idDiv+"','"+idCombo+"','"+ferramenta+"')";
+		temp = "i3GEO.janela.comboCabecalhoTemas('"+idDiv+"','"+idCombo+"','"+ferramenta+"','"+tipo+"')";
 		if(i3GEO.eventos.ATUALIZAARVORECAMADAS.toString().search(temp) < 0)
 		{i3GEO.eventos.ATUALIZAARVORECAMADAS.push(temp);}		
 	}	

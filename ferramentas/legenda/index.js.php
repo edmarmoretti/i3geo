@@ -102,6 +102,11 @@ i3GEOF.legenda = {
 	iddiv {String} - id do div que receberá o conteudo HTML da ferramenta
 	*/
 	inicia: function(iddiv){
+		i3GEO.janela.comboCabecalhoTemas("i3GEOFlegendaComboCabeca","i3GEOFlegendaComboCabecaSel","legenda","ligadosComTabela");
+		if(i3GEO.temaAtivo === ""){
+			$i(iddiv).innerHTML = "Escolha um tema na lista mostrada no cabeçalho";
+			return;
+		}
 		try{
 			$i(iddiv).innerHTML += i3GEOF.legenda.html();
 			i3GEO.guias.mostraGuiaFerramenta("i3GEOlegendaguia1","i3GEOlegendaguia");
@@ -327,6 +332,11 @@ i3GEOF.legenda = {
 	*/	
 	criaJanelaFlutuante: function(){
 		var minimiza,cabecalho,janela,divid,temp,titulo,cabecalho,minimiza;
+		if($i("i3GEOF.legenda")){
+			i3GEOF.legenda.tema = i3GEO.temaAtivo;
+			i3GEOF.legenda.inicia("i3GEOF.legenda_corpo");
+			return;
+		}
 		cabecalho = function(){
 			i3GEOF.legenda.ativaFoco();
 		};
@@ -334,7 +344,7 @@ i3GEOF.legenda = {
 			i3GEO.janela.minimiza("i3GEOF.legenda");
 		};
 		//cria a janela flutuante
-		titulo = "Editor de legenda <a class=ajuda_usuario target=_blank href='" + i3GEO.configura.locaplic + "/ajuda_usuario.php?idcategoria=5&idajuda=41' >&nbsp;&nbsp;&nbsp;</a>";
+		titulo = "<div style='z-index:1;position:absolute' id='i3GEOFlegendaComboCabeca' >------</div>&nbsp;&nbsp;&nbsp;Editor de legenda <a class=ajuda_usuario target=_blank href='" + i3GEO.configura.locaplic + "/ajuda_usuario.php?idcategoria=5&idajuda=41' >&nbsp;&nbsp;&nbsp;</a>";
 		janela = i3GEO.janela.cria(
 			"490px",
 			"340px",
@@ -352,6 +362,11 @@ i3GEOF.legenda = {
 		i3GEOF.legenda.aguarde = $i("i3GEOF.legenda_imagemCabecalho").style;
 		$i("i3GEOF.legenda_corpo").style.backgroundColor = "white";
 		i3GEOF.legenda.inicia(divid);
+		temp = function(){
+			if(i3GEO.eventos.ATUALIZAARVORECAMADAS.toString().search('i3GEO.janela.comboCabecalhoTemas("i3GEOFlegendaComboCabeca","i3GEOFlegendaComboCabecaSel","legenda","ligadosComTabela")') > 0)
+			{i3GEO.eventos.ATUALIZAARVORECAMADAS.remove('i3GEO.janela.comboCabecalhoTemas("i3GEOFlegendaComboCabeca","i3GEOFlegendaComboCabecaSel","legenda","ligadosComTabela")');}			
+		};
+		YAHOO.util.Event.addListener(janela[0].close, "click", temp);
 	},
 	/*
 	Function: ativaFoco
@@ -359,7 +374,7 @@ i3GEOF.legenda = {
 	Refaz a interface da ferramenta quando a janela flutuante tem seu foco ativado
 	*/
 	ativaFoco: function(){
-		if(i3GEO.arvoreDeCamadas.pegaTema(i3GEOF.legenda.tema) === "")
+		if(i3GEOF.legenda.tema !== "" && i3GEO.arvoreDeCamadas.pegaTema(i3GEOF.legenda.tema) === "")
 		{alert("O tema ja nao existe mais no mapa");}
 		var i = $i("i3GEOF.legenda_c").style;
 		i3GEO.janela.ULTIMOZINDEX++;

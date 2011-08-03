@@ -184,7 +184,9 @@ i3GEO.configura = {
 			{ id:"omenudataFerramentas3",text: $trad("t23"), url: "javascript:i3GEO.tema.dialogo.procuraratrib()"},
 			{ id:"omenudataFerramentas4",text: $trad("t25"), url: "javascript:i3GEO.tema.dialogo.toponimia()"},
 			{ id:"omenudataFerramentas5",text: $trad("t27"), url: "javascript:i3GEO.tema.dialogo.etiquetas()"},
-			{ id:"omenudataFerramentas6",text: $trad("t29"), url: "javascript:i3GEO.tema.dialogo.filtro()"}
+			{ id:"omenudataFerramentas6",text: $trad("t29"), url: "javascript:i3GEO.tema.dialogo.filtro()"},
+			{ id:"omenudataFerramentas7",text: $trad("t33"), url: "javascript:i3GEO.tema.dialogo.editaLegenda()"},
+			{ id:"omenudataFerramentas8",text: $trad("t42"), url: "javascript:i3GEO.tema.dialogo.cortina()"}
 			]
 		}
 	},
