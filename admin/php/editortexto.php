@@ -13,7 +13,7 @@
 </head>
 <body>
 <a href="http://mapserver.org/mapfile/index.html#mapfile" target="_new" >Documentação do Mapserver</a><br><br>
-<a href="../html/editormapfile.html" target="_new" >Voltar</a><br><br>
+<a href="../html/editormapfile.html" target="_self" >Voltar</a><br><br>
 <form action="editortexto.php?mapfile=<?php echo $_GET["mapfile"];?>" method=post > 
 
 <input type=submit value="Salvar"/><input type=button value="Testar" onclick="testar()" /> (Salve antes de testar)<br><br>

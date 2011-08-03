@@ -6,10 +6,14 @@ function montaEditorTema(dados)
 {
 	function on_editorCheckBoxChange(p_oEvent)
 	{
-		var ins = "";
+		var ins = "",temp;
 		if(p_oEvent.newValue.get("value") == "OK")
 		{
 			gravaDadosTema(dados[0].id_tema);
+			temp = $i("idNome_"+dados[0].codigo_tema);
+			if(temp){
+				temp.innerHTML = $i("nome_tema").value;
+			}
 		}
 		else
 		{
