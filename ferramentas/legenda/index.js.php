@@ -433,7 +433,7 @@ i3GEOF.legenda = {
 						id = retorno.data[i].tema+"-"+retorno.data[i].idclasse; //layer+indice da classe
 						re = new RegExp("'", "g");
 						exp = (retorno.data[i].expressao).replace(re,'"');
-						ins.push("<tr><td><img style='cursor:pointer' title='clique para excluir' onclick='i3GEOF.legenda.excluilinhaf(this)' src='" + i3GEO.configura.locaplic + "/imagens/x.gif' title='excluir' /></td><td><img style='cursor:pointer' title='clique para alterar' src='"+retorno.data[i].imagem+"' onclick=i3GEOF.legenda.editaSimbolo('i3GEOlegendaid_"+id+"') /></td>");
+						ins.push("<tr><td><img style='cursor:pointer' title='clique para excluir' onclick='i3GEOF.legenda.excluilinhaf(this)' src='" + i3GEO.configura.locaplic + "/imagens/x.gif' title='excluir' /></td><td><img width='30px' height='15px' style='cursor:pointer' title='clique para alterar' src='"+retorno.data[i].imagem+"' onclick=i3GEOF.legenda.editaSimbolo('i3GEOlegendaid_"+id+"') /></td>");
 						ins.push("<td><img onclick=i3GEOF.legenda.modificaCor('"+retorno.data[i].idclasse+"') title='alterar a cor' style='cursor:pointer' src='" + i3GEO.configura.locaplic + "/imagens/aquarela.gif' /></td>");
 						ins.push("<td>");
 						ins.push($inputText("","","i3GEOlegendaid_"+id,"digite o novo nome",30,retorno.data[i].nomeclasse,"nome","javascript:i3GEOF.legenda.aviso()"));
@@ -832,7 +832,7 @@ i3GEOF.legenda = {
 			cp = new cpaint(),
 			temp = function(){
 				i3GEOF.legenda.aguarde.visibility = "hidden";
-				i3GEOF.legenda.mudaLegenda();
+				i3GEOF.legenda.mostralegenda();
 			};
 		cp.set_response_type("JSON");
 		cp.call(p,"foo",temp);
@@ -850,7 +850,7 @@ i3GEOF.legenda = {
 			cp = new cpaint(),
 			temp = function(){
 				i3GEOF.legenda.aguarde.visibility = "hidden";
-				i3GEOF.legenda.mudaLegenda();
+				i3GEOF.legenda.mostralegenda();
 			};;
 		cp.set_response_type("JSON");
 		cp.call(p,"foo",temp);
