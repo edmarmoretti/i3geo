@@ -452,11 +452,39 @@ A nova classe será uma cópia da classe 0.
 		if(!$this->layer){return "erro";}
 		$classe = $this->layer->getclass(0);
 		$c = ms_newClassObj($this->layer, $classe);
-		//$classe = $this->layer->getclass(0);
-		//$nova = $classe->clone;
 		$this->layer->setMetaData("cache","");
 		return("ok");
 	}
+/*
+function: sobeclasse
+
+Sobe uma classe na ordem de desenho
+
+Parametro:
+
+$idclasse {numerico} - id da classe (índice)
+*/
+	function sobeclasse($idclasse)
+	{
+		if(!$this->layer){return "erro";}
+		$this->layer->moveclassup($idclasse);
+		return("ok");
+	}
+/*
+function: desceclasse
+
+Desce uma classe na ordem de desenho
+
+Parametro:
+
+$idclasse {numerico} - id da classe (índice)
+*/
+	function desceclasse($idclasse)
+	{
+		if(!$this->layer){return "erro";}
+		$this->layer->moveclassdown($idclasse);
+		return("ok");
+	}	
 /*
 function: adicionaopacidade
 
@@ -488,6 +516,11 @@ function: alteracor
 
 Aplica uma nova cor aos estilos de uma classe
 
+Parametros:
+
+$idclasse {numerico} - id da classe (índice)
+
+$cor {string} - cor rgb
 */
 	function alteracor($idclasse,$cor)
 	{
@@ -512,6 +545,9 @@ function: alterageometria
 
 Altera a geometria de representação de todos os estilos de todas as classes de um layer
 
+Parametro:
+
+$tipo {string} - tipo de representação
 */
 	function alterageometria($tipo)
 	{
@@ -538,6 +574,7 @@ function: alteraCoresClasses
 Altera as cores das classes existentes em um objeto layer gerando uma paleta de cores de acordo com um valor inicial e final.
 
 Parametros:
+
 $cori - cor inicial.
 
 $corf - cor final.

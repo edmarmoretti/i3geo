@@ -1468,7 +1468,11 @@ Altera uma classe de um tema, aplicando uma nova classificação ou modificando pa
 			$cores = str_replace(")","",$cores);
 			$cores = str_replace("(","",$cores);
 			$retorno = $m->aplicacoresrgb(explode(";",$cores));
-		}			
+		}
+		if ($opcao == "sobeclasse")
+		{$retorno = $m->sobeclasse($idclasse);}
+		if ($opcao == "desceclasse")
+		{$retorno = $m->desceclasse($idclasse);}		
 		if ($opcao == "alteracor")
 		{$retorno = $m->alteracor($idclasse,$cor);}		
 		if ($opcao == "adicionaopacidade")
