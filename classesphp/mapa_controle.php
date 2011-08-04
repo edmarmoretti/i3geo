@@ -1426,6 +1426,7 @@ Mostra na tela o SLD de um tema
 		include_once("classe_temas.php");
 		$m = new Temas($map_file,$tema);
 		$sld = $m->sld();
+		echo header('Content-Disposition: attachment; filename="'.$tema.'.sld"');
 		echo header("Content-type: application/xml");
 		echo $m->sld();
 		exit;

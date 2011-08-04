@@ -50,8 +50,10 @@ if($convUTF == true)
 {$encoding = "UTF-8";}
 if(!isset($idioma))
 {$idioma = "pt";}
-if(isset($_GET["tipoxml"]) && $_GET["tipoxml"] == "kml")
-{echo header("Content-type: application/kml");}
+if(isset($_GET["tipoxml"]) && $_GET["tipoxml"] == "kml"){
+	echo header('Content-type: application/vnd.google-earth.kml+xml');
+	echo header('Content-Disposition: attachment; filename="i3geo.kml"');
+}
 else
 {echo header("Content-type: application/xml");}
 echo '<?xml version="1.0" encoding="'.$encoding.'"?>';
