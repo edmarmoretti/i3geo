@@ -311,14 +311,16 @@ i3GEO.mapa = {
 			if(typeof(console) !== 'undefined'){console.info("i3GEO.mapa.legendaHTML.atualiza()");}
 			var idleg,
 				temp = function(retorno){
-					var s,ins,elementos,i;
+					var s,ins,elementos,i,temp;
 					if(i3GEO.mapa.legendaHTML.ID !== "" && $i(i3GEO.mapa.legendaHTML.ID)){
 						if ((retorno.data !== "erro") && (retorno.data !== undefined)){
 							s = i3GEO.configura.locaplic+"/imagens/branco.gif";
 							ins = "";
 							if(i3GEO.mapa.legendaHTML.incluiBotaoLibera === true)
 							{ins += '<div style="cursor: pointer; text-align: left; font-size: 10px; display: block; height: 35px;" onclick="i3GEO.mapa.legendaHTML.libera()"><img id="soltaLeg" src="../imagens/branco.gif" title="clique para liberar" style="margin: 5px; position: relative;"> <p style="position: relative; left: -30px; top: -22px;">Mostra a legenda em uma janela</p></div>';}
-							ins += "<div id='corpoLegi' >"+ retorno.data.legenda + "</div>";
+							temp = retorno.data.legenda;
+							temp = temp.replace("<img src='' />","");
+							ins += "<div id='corpoLegi' >"+ temp + "</div>";
 							$i(i3GEO.mapa.legendaHTML.ID).innerHTML = ins;
 						}
 					}
