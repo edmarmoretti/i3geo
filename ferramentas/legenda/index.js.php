@@ -111,6 +111,8 @@ i3GEOF.legenda = {
 			$i(iddiv).innerHTML += i3GEOF.legenda.html();
 			i3GEO.guias.mostraGuiaFerramenta("i3GEOlegendaguia1","i3GEOlegendaguia");
 			//eventos das guias
+			$i("i3GEOlegendaguia6").onclick = function()
+			{i3GEO.guias.mostraGuiaFerramenta("i3GEOlegendaguia6","i3GEOlegendaguia");};			
 			$i("i3GEOlegendaguia1").onclick = function(){
 				i3GEOF.legenda.mostralegenda();
 				i3GEO.guias.mostraGuiaFerramenta("i3GEOlegendaguia1","i3GEOlegendaguia");
@@ -235,6 +237,7 @@ i3GEOF.legenda = {
 		var ins = '' +
 		'<div id=guiasYUI class="yui-navset" style="top:0px;cursor:pointer;left:0px;">'+
 		'	<ul class="yui-nav" style="border-width:0pt 0pt 0px;border-color:rgb(240,240,240);border-bottom-color:white;">'+
+		'		<li><a href="#ancora"><em><div id="i3GEOlegendaguia6" style="text-align:center;left:0px;" ><img class="ticPropriedades2" style="height:14px" title="Propriedades" src="'+i3GEO.configura.locaplic+'/imagens/visual/default/branco.gif"></div></em></a></li>'+
 		'		<li><a href="#ancora"><em><div id="i3GEOlegendaguia1" style="text-align:center;left:0px;" >Legenda</div></em></a></li>'+
 		'		<li><a href="#ancora"><em><div id="i3GEOlegendaguia2" style="text-align:center;left:0px;" >Classes</div></em></a></li>'+
 		'		<li><a href="#ancora"><em><div id="i3GEOlegendaguia3" style="text-align:center;left:0px;" >Editor</div></em></a></li>'+
@@ -242,11 +245,9 @@ i3GEOF.legenda = {
 		'		<li><a href="#ancora"><em><div id="i3GEOlegendaguia5" style="text-align:center;left:0px;" >Importar/exportar SLD</div></em></a></li>'+
 		'	</ul>'+
 		'</div><br>'+
-		'<div id=i3GEOlegendaguia1obj style="width:99%;text-align:left;">'+
+		'<div id=i3GEOlegendaguia6obj style="width:99%;text-align:left;">'+
 		'	<p class=paragrafo ><input type=checkbox onclick="" checked id=i3GEOFlegendamostra style="cursor:pointer;border:0px solid white;" /> <span style="cursor:pointer;position:relative;top:-2px;">Mostra as classes desse tema na legenda do mapa</span>' +
 		'	<table summary="" class=lista5 ><tr>' +
-		'	<td><input id=i3GEOlegendabotao1 size="22" type="button" value="Aplicar alterações" ></td>'+
-		'	<td><input id=i3GEOlegendabotao2 size="22" type="button" value="+ classe" title="adicionar uma nova classe na legenda" ></td>' +
 		'	<td><input id=i3GEOlegendabotao3 size="25" type="button" value="+ contagem" title="incluir o número de ocorrências no nome de cada classe"></td>' +
 		'	<td><input id=i3GEOlegendabotao15 size="25" type="button" value="Opacidade variável" title="aplicar opacidade nas classes existente, variando de 10 até 100"></td>' +
 		'	</tr></table>' +
@@ -265,6 +266,12 @@ i3GEOF.legenda = {
 		'			<td><input id=i3GEOlegendabotaoRamp type="button" size=15 value="escolher" title="escolher e aplicar as variações de cores, entre dois extremos, nas classes existentes"></td>' +
 		'		</tr>' +
 		'	</table>' +
+		'</div>' +
+		'<div id=i3GEOlegendaguia1obj style="width:99%;text-align:left;">'+
+		'	<table summary="" class=lista5 ><tr>' +
+		'	<td><input id=i3GEOlegendabotao1 size="22" type="button" value="Aplicar alterações" ></td>'+
+		'	<td><input id=i3GEOlegendabotao2 size="22" type="button" value="+ classe" title="adicionar uma nova classe na legenda" ></td>' +
+		'	</tr></table>' +
 		
 		'	<div id="i3GEOlegendaresultado" style="text-align:left;width:100%;display:block;left:0px">' +
 		'	</div>'+
