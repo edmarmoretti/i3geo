@@ -364,6 +364,7 @@ i3GEO.coordenadas = {
 	*/
 	criaMascaraDMS: function(prefixo,titulo,caixa){
 		var ins = '<table id='+prefixo+' style=display:block;text-align:center;width:290px ><tr style="border-bottom:2px solid white" >' +
+				"<td>"+caixa+"&nbsp;</td>" +
 				'<td style=width:10px;text-align:right > X:</td>' +
 				'<td>'+$inputText('','',prefixo+'xg','grau','2','-00')+'</td>' +
 				'<td>'+$inputText('','',prefixo+'xm','minuto','2','00')+'</td>' +
@@ -375,7 +376,6 @@ i3GEO.coordenadas = {
 				'var '+prefixo+'yyy = i3GEO.calculo.dms2dd($i(\''+prefixo+'yg\').value,$i(\''+prefixo+'ym\').value,$i(\''+prefixo+'ys\').value);' +
 				'i3GEO.navega.zoomponto(i3GEO.configura.locaplic,i3GEO.configura.sid,'+prefixo+'xxx,'+prefixo+'yyy);';
 		ins += '<td><img class=tic title=zoom onclick="'+temp+'" src="'+i3GEO.util.$im("branco.gif")+'" /></td>' +
-			"<td>"+caixa+"</td>" +
 			"</tr></table>";
 		return ins;
 	},
@@ -423,11 +423,12 @@ i3GEO.coordenadas = {
 	*/
 	criaMascaraMetrica: function(prefixo,titulo,caixa){
 		var ins = "<table id="+prefixo+" style=display:block;text-align:center;;width:410px ><tr style='border-bottom:2px solid white' >" +
-		"<td style=width:120px;text-align:right >"+titulo+" X:&nbsp;</td>" +
+		"<td>"+caixa+"&nbsp;<td>" +
+		"<td style=width:100px;text-align:right >"+titulo+" X:&nbsp;</td>" +
 		"<td>"+$inputText("","",prefixo+"X","X","12","00")+"&nbsp;</td>" +
 		"<td>Y:"+$inputText("","",prefixo+"Y","Y","12","00")+"&nbsp;</td>" +
 		"<td>Zn:"+$inputText("","",prefixo+"ZN","Zona","2","--")+"&nbsp;</td>" +
-		"<td>"+caixa+"<td>" +
+		
 		"</tr></table>";
 		return ins;
 	},
@@ -592,7 +593,7 @@ i3GEO.coordenadas = {
 			//
 			if(onde === "")
 			{onde = i3GEO.coordenadas.config[tipos[0]].idhtml;}
-			caixa = "<select onchange='javascript:i3GEO.coordenadas.mudaTipo(this,\""+onde+"\");' style='margin-left:3px;font-size:10px;height:16px;width:40px;' ><option>---</option><option value='janela' >janela</option>";
+			caixa = "<select onchange='javascript:i3GEO.coordenadas.mudaTipo(this,\""+onde+"\");' style='border: 1px solid #B4B4B4;color: #B4B4B4;margin-left:3px;font-size:10px;height:16px;width:40px;' ><option>---</option><option value='janela' >janela</option>";
 			//
 			//cria a caixa de seleção
 			//

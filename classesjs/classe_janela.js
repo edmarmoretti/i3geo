@@ -796,7 +796,7 @@ i3GEO.janela = {
 					c.style.top = "1px";
 					c.style.position = "relative";
 					c.style.fontSize = "10px";
-					c.style.color = "#B4B4B4";
+					c.style.color = "#686868";
 					c.value = i3GEOF[ferramenta].tema;
 					if(c.value === ""){
 						i3GEOF[ferramenta].tema = "";
