@@ -311,7 +311,8 @@ i3GEO.mapa = {
 			if(typeof(console) !== 'undefined'){console.info("i3GEO.mapa.legendaHTML.atualiza()");}
 			var idleg,
 				temp = function(retorno){
-					var s,ins,elementos,i,temp;
+					var s,ins,elementos,i,temp,re;
+					re = new RegExp("<img src='' />", "g");
 					if(i3GEO.mapa.legendaHTML.ID !== "" && $i(i3GEO.mapa.legendaHTML.ID)){
 						if ((retorno.data !== "erro") && (retorno.data !== undefined)){
 							s = i3GEO.configura.locaplic+"/imagens/branco.gif";
@@ -319,7 +320,7 @@ i3GEO.mapa = {
 							if(i3GEO.mapa.legendaHTML.incluiBotaoLibera === true)
 							{ins += '<div style="cursor: pointer; text-align: left; font-size: 10px; display: block; height: 35px;" onclick="i3GEO.mapa.legendaHTML.libera()"><img id="soltaLeg" src="../imagens/branco.gif" title="clique para liberar" style="margin: 5px; position: relative;"> <p style="position: relative; left: -30px; top: -22px;">Mostra a legenda em uma janela</p></div>';}
 							temp = retorno.data.legenda;
-							temp = temp.replace("<img src='' />","");
+							temp = temp.replace(re,"");
 							ins += "<div id='corpoLegi' >"+ temp + "</div>";
 							$i(i3GEO.mapa.legendaHTML.ID).innerHTML = ins;
 						}
@@ -391,13 +392,22 @@ i3GEO.mapa = {
 					novoel = document.createElement("div");
 					novoel.id = "moveLegi";
 					novoel.style.display="block";
-					temp = '<div class="hd" style=background:white >Legenda</div>';
+					temp = '<div class="hd"  >Legenda</div>';
 					temp += '<div id="wlegenda" style="display:block;text-align:left;background-color:white;height:300px;width:300px;overflow:auto" ></div>';
 					novoel.innerHTML = temp;
 					document.body.appendChild(novoel);
 					YAHOO.namespace("moveLegi.xp");
 					YAHOO.moveLegi.xp.panel = new YAHOO.widget.ResizePanel("moveLegi", {width:"300px", fixedcenter: true, constraintoviewport: false, underlay:"none", close:true, visible:true, draggable:true, modal:false,iframe:true } );
 					YAHOO.moveLegi.xp.panel.render();
+					
+					novoel.onmouseover = function(){
+						if($i("moveLegi").style.display === "block")
+						{YAHOO.util.Dom.setStyle("moveLegi", "opacity", 0.8);}
+					};
+					novoel.onmouseout = function(){
+						YAHOO.util.Dom.setStyle("moveLegi", "opacity", 0.20);
+					};					
+					
 				}
 				$i("wlegenda").innerHTML = retorno.data.legenda;
 				temp = $i("wlegenda").getElementsByTagName("input");
