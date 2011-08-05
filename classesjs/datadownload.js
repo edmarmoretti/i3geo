@@ -326,7 +326,7 @@ function mostraDownload(retorno)
 		{var ins = "<p style=color:red >Ocorreu um erro. O tema não foi encontrado. Pode ser que o código do tema não existe na definição do mapfile. Informe o administrador do sistema.<br>";}
 		else
 		{
-			var ins = "<b>Clique nos links para pegar os arquivos. Para obter os metadados, veja o link na árvore ao lado (o link é mostrado ao expandir o nó correspondente ao tema).</b><br><br>"
+			var ins = "<b>Clique nos links para pegar os arquivos.</b><br><br>"
 			for (var arq=0;arq<n;arq++)
 			{
 				ins += "<a href='"+window.location.protocol+"//"+window.location.host+"/"+arqs[arq]+"'>"+arqs[arq]+"</a><br>"
