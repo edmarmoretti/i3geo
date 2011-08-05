@@ -65,6 +65,36 @@ Variable: $perfis
 Armazena o objeto com a lista de perfis
 */
 var $perfis = "";
+function cabecalhoGeral(id,excluir){
+	var i,n,temp,
+		ins = "<fieldset><legend>Opções principais</legend>",
+		botoes = [
+			{id:"principal",titulo:"Principal",link:"../index.html"},
+			{id:"menus",titulo:"Menus",link:"menus.html"},			
+			{id:"arvore",titulo:"Árvore de temas",link:"arvore.html"},
+			{id:"editormapfile",titulo:"Mapfiles",link:"editormapfile.html"},
+			{id:"atlas",titulo:"Atlas",link:"atlas.html"}
+		];
+	n = botoes.length;
+	for(i=0;i<n;i++){
+		if(botoes[i].id !== excluir){
+			ins += '<input type=button id="'+botoes[i].id+'" value="'+botoes[i].titulo+'" />';
+		}
+	}
+	ins += "</fieldset>";
+	temp = $i(id);
+	temp.innerHTML = ins;
+	for(i=0;i<n;i++){
+		if(excluir === "principal")
+		{botoes[i].link = "html/"+botoes[i].link;}	
+		if(botoes[i].id !== excluir){
+			new YAHOO.widget.Button(botoes[i].id);
+			eval('$i("'+botoes[i].id+'-button'+'").onclick = function(){window.location = \''+botoes[i].link+'\';}');
+		}
+	}
+	//temp.style.border = "solid 1px gray";
+	//temp.style.padding = "10px";
+}
 /*
 Function: core_movimentaNo
 
