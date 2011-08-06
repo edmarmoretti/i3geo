@@ -623,7 +623,7 @@ it:"Modifica la trasparenza del tema, consentendo che gli strati più bassi siano
 }],
 "t20":[
 {
-pt:"Opacidade:",
+pt:"Opacidade",
 en:"Opacity",
 es:"Opacidad",
 it:"Opacità"

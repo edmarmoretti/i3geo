@@ -454,6 +454,14 @@ i3GEO.mapa = {
 	*/
 	dialogo:{
 		/*
+		Function: opacidade
+
+		Abre a janela de diálogo da ferramenta de definição da transparência das camadas principais do mapa
+		*/
+		opacidade: function(){
+			i3GEO.util.dialogoFerramenta("i3GEO.mapa.dialogo.opacidade()","opacidademapa","opacidademapa");
+		},
+		/*
 		Function: telaRemota
 
 		Abre a janela de diálogo da ferramenta de configuração de uma tela remota

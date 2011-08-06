@@ -866,6 +866,15 @@ g_traducao_ajuda = {
 			complemento:"",
 			tela:"",
 			apijs:"i3GEO.tema.temporizador()"
+		},
+		"102": {
+			titulo: "Opacidade interativa",
+			diretorio:"i3geo/ferramentas/opacidademapa",
+			categoria:"7",
+			pt:"Altera a opacidade do mapa de forma interativa. Aplica-se aos temas que não estão definidos como 'fundo'. A alteração é feita diretamente no objeto HTML, sendo que o efeito é imediato.",
+			complemento:"",
+			tela:"",
+			apijs:"i3GEO.mapa.dialogo.opacidade()"
 		}
 	}
 };

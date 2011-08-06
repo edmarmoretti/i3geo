@@ -145,6 +145,15 @@ i3GEO.arvoreDeCamadas = {
 	*/
 	ARRASTARLIXEIRA: true,
 	/*
+	Propriedade: ALTERAOPACIDADE
+	
+	Mostra ou não a opção que permite alterar a transparência das camadas existentes no mapa
+	
+	Type:
+	{boolean}
+	*/
+	ALTERAOPACIDADE: true,
+	/*
 	Propriedade: LIGARDESLIGARTODOS
 
 	Mostra os ícones de desligar/ligar todos os temas.
@@ -507,6 +516,8 @@ i3GEO.arvoreDeCamadas = {
 		{titulo += "<img onclick='i3GEO.arvoreDeCamadas.dialogo.filtro();' id='i3geo_filtro' title='"+$trad("t2a")+"'  src='"+i3GEO.util.$im("branco.gif")+"' />";}
 		if(this.ABRELEGENDA === true)
 		{titulo += "<img onclick='i3GEO.mapa.legendaHTML.libera();' id='soltaleg2' title='"+$trad("t2b")+"'  src='"+i3GEO.util.$im("branco.gif")+"' />";}
+		if(this.ALTERAOPACIDADE === true)
+		{titulo += "<img onclick='i3GEO.mapa.dialogo.opacidade();' id='opacidadeMapa' title='"+$trad("t20")+"'  src='"+i3GEO.util.$im("branco.gif")+"' />";}
 
 		if(this.LIGARDESLIGARTODOS === true){
 			titulo += "&nbsp;<img onclick='i3GEO.arvoreDeCamadas.aplicaTemas(\"ligartodos\");' id='olhoAberto' title='"+$trad("t3a")+"'  src='"+i3GEO.util.$im("branco.gif")+"' />";

@@ -975,6 +975,15 @@ h1 {padding:.25em .5em;background-color:#ccc;}
 	width:16px;
 	height:16px;
 }
+#opacidadeMapa
+{
+	background-image:URL('../imagens/visual/default/sprite.png');
+	background-repeat: no-repeat;
+	background-position: 0px -2175px;
+	cursor:pointer;
+	width:16px;
+	height:16px;
+}
 .importarwmc
 {
 	background-image:URL('../imagens/visual/default/sprite.png');
