@@ -223,6 +223,25 @@ i3GEO.Interface = {
 		i3GEO.Interface[i3GEO.Interface.ATUAL].redesenha();
 	},
 	/*
+	Function: aplicaOpacidade
+
+	Aplica um fator de opacidade a todos os layers do mapa
+	
+	Parametro:
+	
+	opacidade {numerico} - 0 a 1
+	*/
+	aplicaOpacidade: function(opacidade){
+		if(typeof(console) !== 'undefined'){console.info("i3GEO.Interface.atualizaMapa()");}
+		switch(i3GEO.Interface.ATUAL){
+			case "padrao":
+				alert("Opção não disponível");
+				break;
+			default:
+				i3GEO.Interface[i3GEO.Interface.ATUAL].aplicaOpacidade(opacidade);
+		}
+	},
+	/*
 	Function: atualizaMapa
 
 	Aplica o método atualizaMapa da interface atual. Em alguns casos, a função de redesenho aplica os mesmos
@@ -880,6 +899,18 @@ i3GEO.Interface = {
 			if(i3GEO.parametros.kmlurl !== "")
 			{i3GEO.Interface.openlayers.adicionaKml(true,i3GEO.parametros.kmlurl);}			
 		},
+		aplicaOpacidade: function(opacidade){		
+			var nlayers = i3GEO.arvoreDeCamadas.CAMADAS.length,
+				layer,
+				i,
+				camada;
+			for(i=nlayers-1;i>=0;i--){
+				camada = i3GEO.arvoreDeCamadas.CAMADAS[i];
+				layer = i3geoOL.getLayersByName(camada.name)[0];
+				if(layer.isBaseLayer === false)
+				{layer.setOpacity(opacidade);}
+			}
+		},
 		adicionaListaKml: function(){
 			var monta = function(retorno){
 				var raiz,nraiz,i;
@@ -1342,7 +1373,7 @@ i3GEO.Interface = {
 		/*
 		Propriedade: OPACIDADE
 
-		Valor da opacidade da camada i3geo do mapa
+		Valor da opacidade das camadas i3geo do mapa
 
 		Varia de 0 a 1
 
@@ -1711,9 +1742,20 @@ i3GEO.Interface = {
 			if(i3GEO.configura.visual !== "default")
 			{i3GEO.gadgets.visual.troca(i3GEO.configura.visual);}
 			i3GEO.barraDeBotoes.ativaBotoes();
+		},	
+		aplicaOpacidade: function(opacidade){		
+			var nlayers = i3GEO.arvoreDeCamadas.CAMADAS.length,
+				i,
+				camada,
+				div;
+			for (i=0;i<nlayers;i++){
+				camada = i3GEO.arvoreDeCamadas.CAMADAS[i];
+				div = i3GEO.Interface.googlemaps.retornaDivLayer(camada.name);
+				YAHOO.util.Dom.setStyle(div, "opacity", opacidade);
+			}
 		},
 		mudaOpacidade: function(valor){
-			i3GEO.Interface.googlemaps.OPACIDADE = valor / 200;
+			i3GEO.Interface.googlemaps.OPACIDADE = valor;
 			i3GEO.Interface.googlemaps.redesenha();
 		},
 		recalcPar: function(){
@@ -2235,6 +2277,14 @@ i3GEO.Interface = {
 			}
 			return indice;
 		},
+		aplicaOpacidade: function(opacidade){		
+			var n = i3GeoMap.getFeatures().getChildNodes().getLength(),
+				indice = false,
+				i;
+			for(i=0;i<n;i++){
+				i3GeoMap.getFeatures().getChildNodes().item(i).setOpacity(opacidade);
+			}
+		},		
 		retornaObjetoLayer: function(nomeLayer){
 			var n = i3GeoMap.getFeatures().getChildNodes().getLength(),
 				indice = false,

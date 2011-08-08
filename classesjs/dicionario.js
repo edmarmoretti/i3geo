@@ -958,6 +958,13 @@ en:"Upload SHP, CSV, DBF, GPX, KML",
 es:"Upload SHP, CSV, DBF, GPX, KML",
 it:"Upload SHP, CSV, DBF, GPX, KML"
 }],
+"a15":[
+{
+pt:"Conexões",
+en:"Conections",
+es:"Conexões",
+it:"Conexões"
+}],
 //guias principais
 "g1":[
 {

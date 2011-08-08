@@ -120,7 +120,7 @@ i3GEOF.opacidademapa = {
 		titulo = "Opacidade <a class=ajuda_usuario target=_blank href='" + i3GEO.configura.locaplic + "/ajuda_usuario.php?idcategoria=5&idajuda=102' >&nbsp;&nbsp;&nbsp;</a>";
 		janela = i3GEO.janela.cria(
 			"230px",
-			"60px",
+			"40px",
 			"",
 			"",
 			"",
@@ -147,57 +147,14 @@ i3GEOF.opacidademapa = {
 	*/
 	criaslide: function(){
 		i3GEOF.opacidademapa.slider = YAHOO.widget.Slider.getHorizSlider($i("slider-bg"),$i("slider-thumb"), 0, 200, 0);
-		var	layer;
-		if(i3GEOF.opacidademapa.tema !== ""){
-			if(i3GEO.Interface.ATUAL === "openlayers"){
-				layer = i3geoOL.getLayersByName(i3GEOF.opacidademapa.tema)[0];
-				i3GEOF.opacidademapa.estilo = layer.div.style;
-			}
-			if(i3GEO.Interface.ATUAL === "googlemaps"){
-				layer = i3GEO.Interface.googlemaps.retornaDivLayer(i3GEOF.opacidademapa.tema);
-				i3GEOF.opacidademapa.estilo = layer.style;
-			}
-		}
-		i3GEOF.opacidademapa.slider.setValue(0,false);
+		i3GEOF.opacidademapa.slider.setValue(200,false);
 		i3GEOF.opacidademapa.slider.subscribe("change", function(offsetFromStart) {
-			var t=0,
-				r=i3GEO.parametros.w,
-				b=i3GEO.parametros.h,
-				l=0,
-				escala = r / 200;
-			l = l + (offsetFromStart * escala);
+			i3GEO.Interface.aplicaOpacidade(offsetFromStart / 200);
 		});
 		if(navm){
 			$i("slider-bg").style.left = "-100px";
 			$i("i3GEOF.opacidademapa_corpo").style.background = "url("+i3GEO.configura.locaplic+"/pacotes/yui270/build/slider/assets/bg-h.gif) white no-repeat 10px 0px";
 		}
-	},
-	/*
-	Function: reiniciaSlide
-	
-	Zera a barra do slide
-	*/
-	reiniciaSlide: function(){
-		var divlayer,layer;
-		i3GEOF.opacidademapa.slider.setValue(0,false);
-		if(i3GEO.Interface.ATUAL === "openlayers"){
-			layer = i3geoOL.getLayersByName(i3GEOF.opacidademapa.tema)[0];
-			if(layer)
-			{i3GEOF.opacidademapa.estilo = layer.div.style;}
-		}
-		if(i3GEO.Interface.ATUAL === "googlemaps"){
-			layer = i3GEO.Interface.googlemaps.retornaDivLayer(i3GEOF.opacidademapa.tema);
-			if(layer)
-			{i3GEOF.opacidademapa.estilo = layer.style;}
-		}
-		i3GEOF.opacidademapa.slider.subscribe("change", function(offsetFromStart) {
-			var t=0,
-				r=i3GEO.parametros.w,
-				b=i3GEO.parametros.h,
-				l=0,
-				escala = r / 200;
-			l = l + (offsetFromStart * escala);
-		});
 	}
 };
 <?php error_reporting(0);if(extension_loaded('zlib')){ob_end_flush();}?>
