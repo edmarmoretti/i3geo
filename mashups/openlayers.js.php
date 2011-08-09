@@ -414,10 +414,30 @@ i3GEO.editorOL = {
 				ins += "<img src='"+url+"' /><br>";
 			}
 			catch(e){}
-			}
-		var w = window.open();
-		w.document.write(ins);
-		w.document.close();
+		}
+		//var w = window.open();
+		//w.document.write(ins);
+		//w.document.close();
+		var temp;
+		if(!document.getElementById("panellegendaeditorOL")){
+			YAHOO.namespace("legendaeditorOL.container");
+			YAHOO.legendaeditorOL.container.panel = new YAHOO.widget.Panel("panellegendaeditorOL", {zIndex:20000, iframe:true, width:"250px", visible:false, draggable:true, close:true } );
+			YAHOO.legendaeditorOL.container.panel.setBody(ins);
+			YAHOO.legendaeditorOL.container.panel.setHeader("Legenda");
+			YAHOO.legendaeditorOL.container.panel.setFooter("");
+			YAHOO.legendaeditorOL.container.panel.render(document.body);
+			YAHOO.legendaeditorOL.container.panel.show();
+			YAHOO.legendaeditorOL.container.panel.center();
+			
+			YAHOO.util.Event.addListener(YAHOO.legendaeditorOL.container.panel.close, "click", function(){
+				//i3GEOpanelEditor.deactivate();
+				//i3GEOpanelEditor.activate();
+			});
+		}
+		else{	
+			YAHOO.legendaeditorOL.container.panel.setBody(ins);
+			YAHOO.legendaeditorOL.container.panel.show();
+		}		
 	},
 	captura: function(lonlat){
 		var layers = [i3GEO.editorOL.layerAtivo()],
