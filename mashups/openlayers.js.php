@@ -657,7 +657,10 @@ i3GEO.editorOL = {
 				eventListeners: {
 					getfeatureinfo: function(event) {
 						var lonlat = i3GEO.editorOL.mapa.getLonLatFromPixel(event.xy),
-							lonlattexto = "<hr><pre><span style=color:blue;cursor:pointer onclick='i3GEO.editorOL.captura(\""+lonlat.lon+","+lonlat.lat+"\")'>captura</span></pre>";
+							lonlattexto = "<hr>";
+						if(	botoes.linha === true || botoes.ponto === true || botoes.poligono === true || botoes.edita === true){
+							lonlattexto += "<pre><span style=color:blue;cursor:pointer onclick='i3GEO.editorOL.captura(\""+lonlat.lon+","+lonlat.lat+"\")'>captura</span></pre>";
+						}
 						i3GEO.editorOL.mapa.addPopup(new OpenLayers.Popup.FramedCloud(
 							"chicken", 
 							i3GEO.editorOL.mapa.getLonLatFromPixel(event.xy),
@@ -666,6 +669,12 @@ i3GEO.editorOL = {
 							null,
 							true
 						));
+					},
+					beforegetfeatureinfo: function(event){
+						var ativo = [i3GEO.editorOL.layerAtivo()];
+						event.object.layers = ativo;
+						botaoIdentifica.layers = ativo;
+						botaoIdentifica.url = ativo[0].url;
 					},
 					activate: function(){
 						i3GEO.editorOL.criaJanelaAtivaTema();
