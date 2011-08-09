@@ -298,7 +298,7 @@ i3GEO.editorOL = {
 			YAHOO.util.Event.addListener(YAHOO.temaativo.container.panel.close, "click", function(){
 				i3GEOpanelEditor.deactivate();
 				i3GEOpanelEditor.activate();
-				if(i3GEO.eventos.ATUALIZAARVORECAMADAS.toString().search("i3GEO.editorOL.atualizaJanelaAtivaTema()") > 0)
+				if(i3GEO.eventos && i3GEO.eventos.ATUALIZAARVORECAMADAS.toString().search("i3GEO.editorOL.atualizaJanelaAtivaTema()") > 0)
 				{i3GEO.eventos.ATUALIZAARVORECAMADAS.remove("i3GEO.editorOL.atualizaJanelaAtivaTema()");}				
 			});
 			if(typeof i3GEO != undefined && i3GEO != ""){

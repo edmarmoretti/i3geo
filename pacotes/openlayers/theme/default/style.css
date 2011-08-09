@@ -280,7 +280,8 @@ div.olControlMousePosition {
 .olControlZoomPanel {
     top: 71px;
     left: 14px;
-} 
+}
+
 
 .olControlZoomPanel div {
     background-image: url(img/zoom-panel.png);

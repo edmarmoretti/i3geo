@@ -1483,6 +1483,13 @@ background-position:-522px -28px;
 	margin:2px;
 	width:29px;
 }
+
+@media print {
+	.olControlPanZoomBar {display:none !important;}
+	.maximizeDiv {display:none !important;}
+	.olControlOverviewMapMaximizeButton {display:none !important;}
+}
+
 pre{
 	font-family: Verdana, Arial, Helvetica, sans-serif;
 	font-size: 9px;	
