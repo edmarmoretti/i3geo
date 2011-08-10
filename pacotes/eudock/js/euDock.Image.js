@@ -108,7 +108,7 @@ if (!euEnv.imageBasePath)
        			document.getElementById(this.id).style.filter = "alpha(opacity="+(fad)+");";
 			};
 			//alert(id)
-			this.container.innerHTML+="<img onLoad='"+onLoadFunc+";' id='"+this.id+"' src='"+args.image+"' style='position:absolute;visibility:hidden;'>";
+			this.container.innerHTML+="<img onLoad='"+onLoadFunc+";' id='"+this.id+"' src='"+args.image+"' style='position:absolute;visibility:hidden;' class='noprint' >";
 			
 			this.destroy = function(){
 				this.container.removeChild(document.getElementById(this.id));				

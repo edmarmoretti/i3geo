@@ -805,13 +805,20 @@ i3GEO.guias = {
 			temp.left = "1px";
 			temp.top = "1px";
 			temp.width = (config.larguraGuiaMovel - 1) + "px";
-			temp.height = "30px";
+			temp.height = "35px";
+			if(navm)
+			{temp.height = "37px";}
+			temp.zIndex = 5;
+			temp.paddingTop = "2px";
 			
 			temp = $i("i3GEOguiaMovelConteudo").style;
 			temp.left = "1px";
-			temp.top = "31px";
-			temp.height = (config.alturaGuiaMovel - 32) +"px";
-			temp.width = (config.larguraGuiaMovel - 5) + "px";
+			temp.top = "38px";
+			temp.height = (config.alturaGuiaMovel - 39) +"px";
+			if(navm)
+			{temp.width = (config.larguraGuiaMovel - 1) + "px";}
+			else
+			{temp.width = (config.larguraGuiaMovel - 5) + "px";}
 			temp.paddingLeft = "4px";
 
 			YAHOO.util.Dom.setStyle("i3GEOguiaMovelConteudo", "opacity", 0.90);

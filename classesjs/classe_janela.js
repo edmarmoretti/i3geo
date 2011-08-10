@@ -789,11 +789,19 @@ i3GEO.janela = {
 			i3GEO.util.comboTemas(
 				temp.id+"Sel",
 				function(retorno){
-					$i(idDiv).innerHTML = retorno.dados;
-					var c = $i(idCombo);
+					var container = $i(idDiv),
+						c;
+					container.innerHTML = retorno.dados;
+					container.style.left = "0px";
+					container.styletextAlign = "left";
+					c = $i(idCombo);
 					c.style.width = "150px";
 					c.style.border = "solid #B4B4B4 1px";
 					c.style.top = "1px";
+					if(navm){
+						c.style.top = "-4px";
+					}
+					c.style.left = "2px";
 					c.style.position = "relative";
 					c.style.fontSize = "10px";
 					c.style.color = "#686868";
