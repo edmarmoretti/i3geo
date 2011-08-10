@@ -40,10 +40,13 @@
 		arquivo i3geo/ms_configura.php
 		<p>Apenas os mapfiles que forem vinculados a um tema poderão ser vistos na janela de inclusão de temas na árvore de temas.
 		Se você criou um mapfile manualmente, utilize a opção de edição (ícone apresentado ao lado de cada mapfile) para fazer essa associação.
+		<p>A opção "Verifica temas sem mapfiles" possibilita resolver problemas decorrentes da eliminação manual de um arquivo mapfile do servidor.
+		Nesses casos, o registro no banco de dados permanece. Com essa opção é possível apagar os registros ou recriar o mapfile perdido.
 	</div>
 	<div class="ft"></div>
 </div>
 <input onclick="adicionaLinha()" type=button id=adiciona value="Criar um novo mapfile" />
+<input onclick="adicionaLinha()" type=button id=semmapfiles value="Verificar temas sem mapfiles" />
 <br><br>
 Além de criar os mapfiles, é necessário definir as características de cada LAYER nas opções abaixo.
 <br>

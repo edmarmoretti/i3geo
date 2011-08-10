@@ -6,30 +6,30 @@ MAP
     DATA "c:\ms4w\apache\htdocs\i3geo\aplicmap\dados\biomas.shp"
     GROUP "Grupo 1"
     METADATA
-      "cache"	""
       "ltempoitemimagem"	""
-      "ltempoitemdescricao"	""
+      "cache"	""
       "CLASSE"	"SIM"
-      "ltempoiteminicio"	""
+      "ltempoitemdescricao"	""
       "palletestep"	""
-      "ltempoitemtip"	""
+      "ltempoiteminicio"	""
       "permitekmz"	"sim"
-      "ltempoitemtitulo"	""
-      "description_template"	""
+      "ltempoitemtip"	""
       "iconetema"	"http://www.gpsdrive.de/development/map-icons/square.small/leisure/park.png"
+      "description_template"	""
+      "ltempoitemtitulo"	""
       "ltempoitemlink"	""
-      "extensao"	"-44 -23 -39 -21"
       "palletefile"	""
-      "ltempoformatodata"	""
+      "extensao"	"-44 -23 -39 -21"
       "permitedownload"	"sim"
+      "ltempoformatodata"	""
       "ltempoitemicone"	""
       "download"	"SIM"
-      "permiteogc"	""
       "permitekml"	"sim"
+      "permiteogc"	""
       "TEMA"	"biomashp"
-      "aplicaextensao"	"SIM"
-      "editorsql"	""
       "identifica"	"NAO"
+      "editorsql"	""
+      "aplicaextensao"	"SIM"
       "ltempoitemfim"	""
     END
     NAME "biomashp"
@@ -44,7 +44,6 @@ MAP
       STYLE
         ANGLE 360
         COLOR 21 44 114
-        SYMBOL 0
         WIDTH 1
       END
     END

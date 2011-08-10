@@ -69,7 +69,7 @@ function cabecalhoGeral(id,excluir){
 	var i,n,temp,
 		ins = "<fieldset><legend>Opções principais</legend>",
 		botoes = [
-			{id:"principal",titulo:"Principal",link:"../index.html"},
+			{id:"principal",titulo:"Início",link:"../index.html"},
 			{id:"menus",titulo:"Menus",link:"menus.html"},			
 			{id:"arvore",titulo:"Árvore de temas",link:"arvore.html"},
 			{id:"editormapfile",titulo:"Mapfiles",link:"editormapfile.html"},
@@ -248,6 +248,8 @@ function core_carregando(tipo)
 		YAHOO.example.container.wait.setBody("<img src=\"../../imagens/aguarde.gif\"/>");		
 		YAHOO.example.container.wait.render(document.body);
 	}
+	else
+	{YAHOO.example.container.wait.show();}
 	YAHOO.example.container.wait.setBody("<img src=\"../../imagens/aguarde.gif\"/>");		
 	if(tipo == "ativa")
 	{YAHOO.example.container.wait.show();}
@@ -1018,14 +1020,13 @@ function core_pegaDados(mensagem,sUrl,funcaoRetorno)
   			try
   			{
   				if(funcaoRetorno != "")
-  				eval(funcaoRetorno+"(YAHOO.lang.JSON.parse(o.responseText))");
-  				else
+  				{eval(funcaoRetorno+"(YAHOO.lang.JSON.parse(o.responseText))");}
   				core_carregando("desativa");
   			}
   			catch(e)
   			{
   				if("mensagem" != "")
-  				core_carregando("desativa");
+  				{core_carregando("desativa");}
   				core_handleFailure(o,o.responseText);
   			}
   		},
@@ -1176,9 +1177,11 @@ function core_excluiNoTree(sUrl,no,mensagem)
   					}
   					else
   					{
-						tree.removeNode(no);
-						tree.draw();
-  						core_carregando("desativa");
+						if(no){
+							tree.removeNode(no);
+							tree.draw();
+  						}
+						core_carregando("desativa");
   					}
   				}
   				catch(e){core_handleFailure(o,o.responseText);}
@@ -1222,7 +1225,7 @@ function core_montaEditor(funcaoOK,w,h,funcaoClose)
 		var w = "400px";
 		var h = w;
 	}
-	if(!YAHOO.example.container.panelEditor)
+	if(!$i("janela_editor"))
 	{
 		var novoel = document.createElement("div");
 		novoel.id =  "janela_editor";
@@ -1256,7 +1259,7 @@ function core_montaEditor(funcaoOK,w,h,funcaoClose)
 	else
 	{
 		if($i("editor_bd"))
-		$i("editor_bd").innerHTML == ""
+		{$i("editor_bd").innerHTML == "";}
 	}
 	var fecha = function()
 	{

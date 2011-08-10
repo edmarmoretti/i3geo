@@ -558,6 +558,19 @@ switch (strtoupper($funcao))
 		retornaJSON(listaMapsTemas());
 		exit;
 	break;
+	/*
+	Valor: VERIFICAORFAOS
+	
+	Verifica se existem temas sem o correspondente mapfile
+	
+	Retorno:
+	
+	{JSON}
+	*/
+	case "VERIFICAORFAOS":
+		retornaJSON(verificaOrfaos());
+		exit;
+	break;	
 }
 function excluiPerfil($id)
 {
@@ -1131,7 +1144,31 @@ function listaMapsTemas()
 	}
  	return $lista;
 }
+/*
+Retorna a lista de temas sem mapfiles
 
+*/
+function verificaOrfaos()
+{
+ 	global $cp,$locaplic;
+ 	$arquivos = array();
+	//
+	//pega o nome de cada tema
+	//
+	$sql = "select nome_tema,codigo_tema,id_tema from i3geoadmin_temas ";
+	$dbh = "";
+	include($locaplic."/admin/php/conexao.php");
+	$q = $dbh->query($sql,PDO::FETCH_ASSOC);
+	$regs = $q->fetchAll();	
+	$nomes = array();
+	foreach($regs as $reg){
+		if(!file_exists($locaplic."/temas/".$reg["codigo_tema"].".map") && !file_exists($locaplic."/temas/".$reg["codigo_tema"].".php")){
+			$nomes[] = array("nome_tema"=>$reg["nome_tema"],"codigo_tema"=>$reg["codigo_tema"],"id_tema"=>$reg["id_tema"]);
+		}
+	}
+	sort($nomes);
+ 	return $nomes;
+}
 function removeCabecalho($arq,$symbolset=true)
 {
 	$handle = fopen($arq, "r");

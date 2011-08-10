@@ -304,6 +304,7 @@ switch (strtoupper($funcao))
 		retornaJSON(excluirLayer());
 		exit;
 	break;
+
 	/*
 	Valor: LISTACLASSES
 	
@@ -1312,6 +1313,7 @@ function alterarConexao()
 function pegaMetadados()
 {
 	global $codigoMap,$codigoLayer,$locaplic,$postgis_mapa;
+	//error_reporting(E_ALL);
 	$dados = array();
 	$mapfile = $locaplic."/temas/".$codigoMap.".map";
 	$mapa = ms_newMapObj($mapfile);
@@ -1361,7 +1363,7 @@ function pegaMetadados()
 	$dados["permitecomentario"] = $layer->getmetadata("permitecomentario");
 	$dados["itembuscarapida"] = $layer->getmetadata("itembuscarapida");
 	$dados["legendaimg"] = $layer->getmetadata("legendaimg");
-	if($layer->connectiontype == 7 || $layer->connectiontype== 9){
+	if($layer->connectiontype == 7 || $layer->connectiontype == 9){
 		$dados["wms_srs"] = $layer->getmetadata("wms_srs");
 		$dados["wms_name"] = $layer->getmetadata("wms_name");
 		$dados["wms_server_version"] = $layer->getmetadata("wms_server_version");

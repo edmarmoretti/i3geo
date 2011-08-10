@@ -24,7 +24,7 @@ function montaEditorTema(dados)
 	if(!YAHOO.example.container.panelEditorTema)
 	{
 		var novoel = document.createElement("div");
-		novoel.id =  "janela_editor";
+		novoel.id =  "janela_editor_tema";
 		var ins = '<div class="hd">Editor</div>';
 		ins += "<div class='bd' style='height:354px;overflow:auto'>";
 		ins += "<div id='okcancel_checkbox'></div><div id='editor_bd'></div>";
@@ -36,7 +36,7 @@ function montaEditorTema(dados)
             { label: "Cancela", value: "CANCEL", checked: false }
         ]);
 		editorBotoes.on("checkedButtonChange", on_editorCheckBoxChange);	
-		YAHOO.example.container.panelEditorTema = new YAHOO.widget.Panel("janela_editor", { fixedcenter:true,close:true,width:"400px", height:"400px",overflow:"auto", visible:false,constraintoviewport:true } );
+		YAHOO.example.container.panelEditorTema = new YAHOO.widget.Panel("janela_editor_tema", { fixedcenter:true,close:true,width:"400px", height:"400px",overflow:"auto", visible:false,constraintoviewport:true } );
 		YAHOO.example.container.panelEditorTema.render();
 		var fecha = function()
 		{

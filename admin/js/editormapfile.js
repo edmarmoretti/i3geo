@@ -140,11 +140,22 @@ Inicializa a árvore de edição
 */
 function initMenu()
 {
-	ativaBotaoAdicionaMapfile("adiciona")
+	ativaBotaoAdicionaMapfile("adiciona");
+	ativaBotaoVerificarOrfaos("semmapfiles");
+
 	core_carregando("ativa");
 	core_carregando("buscando temas...");
 	core_ativaPainelAjuda("ajuda","botaoAjuda");
 	core_pegaMapfiles("montaArvore()")
+}
+function ativaBotaoVerificarOrfaos(idBotao)
+{
+	var temp = function(){
+		core_montaEditor("","450px","660px");
+		verificaOrfaos();
+	};
+	//cria o botão de adição de um novo menu
+	var verifica = new YAHOO.widget.Button(idBotao,{ onclick: { fn: temp } });
 }
 function ativaBotaoAdicionaMapfile(idBotao)
 {
@@ -518,6 +529,58 @@ function editorDeTexto(codigoMap)
 	core_makeRequest(sUrl,callback)
 }
 /*
+Function: verificaOrfaos
+
+Verifica se existem temas cadastrados no banco de dados e que não possuem mapfile associado.
+
+É mostrada ujma lista dos casos e opção para apagar o registro do banco ou criar novamente o mapfile
+
+<VERIFICAORFAOS>
+*/
+function verificaOrfaos()
+{
+	sUrl = "../php/menutemas.php?funcao=verificaOrfaos";
+	core_carregando("ativa");
+	core_carregando(" verificando");
+
+	var callback =
+	{
+		success:function(o)
+		{
+			try
+			{
+				if(YAHOO.lang.JSON.parse(o.responseText) == "erro")
+				{
+					core_carregando("<span style=color:red >Erro</span>");
+					setTimeout("core_carregando('desativa')",3000)
+				}
+				else
+				{
+					core_carregando("desativa");
+					var ins = "<p>Os temas listados a seguir não possuem mapfiles criados. Você pode excluir o registro do tema (remoção do banco de dados) clicando na opção 'excluir' ou criar o mapfile na opção existente no formulário principal.",
+						d = YAHOO.lang.JSON.parse(o.responseText),
+						n = d.length,
+						i,ima;
+					for(i=0;i<n;i++){
+						ima = '<img src="../imagens/01.png" title="excluir" onclick="excluirOrfao(\''+d[i].codigo_tema+'\')" style="position:relative;cursor:pointer;top:4px;left:-2px">';
+						ins += "<p>"+ima+d[i].nome_tema+" <span style=color:gray >"+d[i].codigo_tema+" id: "+d[i].id_tema+"</span>";
+					}
+					$i("editor_bd").innerHTML = ins;
+				}
+			}
+			catch(e){core_handleFailure(e,o.responseText);}
+		},
+		failure:core_handleFailure,
+		argument: { foo:"foo", bar:"bar" }
+	}; 
+	core_makeRequest(sUrl,callback)
+}
+function excluirOrfao(codigo_tema){
+	excluirMapfile(codigo_tema);
+	YAHOO.example.container.panelEditor.destroy();
+	YAHOO.example.container.panelEditor = null;			
+}
+/*
 Function: adicionaNovoMapfile
 
 Adiciona um novo mapfile
@@ -701,7 +764,7 @@ function classesAuto(codigoMap,codigoLayer)
 	if(!YAHOO.example.container.panelEditorAutoClasses)
 	{
 		var novoel = document.createElement("div");
-		novoel.id =  "janela_editor";
+		novoel.id =  "janela_editor_auto";
 		var ins = '<div class="hd">Editor</div>';
 		ins += "<div class='bd' style='height:354px;overflow:auto'>";
 		ins += "<div id='okcancel_checkbox'></div><div id='editor_bd'></div>";
@@ -713,7 +776,7 @@ function classesAuto(codigoMap,codigoLayer)
             { label: "Cancela", value: "CANCEL", checked: false }
         ]);
 		editorBotoes.on("checkedButtonChange", on_editorCheckBoxChange);	
-		YAHOO.example.container.panelEditorAutoClasses = new YAHOO.widget.Panel("janela_editor", { fixedcenter:true,close:true,width:"400px", height:"400px",overflow:"auto", visible:false,constraintoviewport:true } );
+		YAHOO.example.container.panelEditorAutoClasses = new YAHOO.widget.Panel("janela_editor_auto", { fixedcenter:true,close:true,width:"400px", height:"400px",overflow:"auto", visible:false,constraintoviewport:true } );
 		YAHOO.example.container.panelEditorAutoClasses.render();
 		var sUrl = "../php/editormapfile.php?funcao=pegaItensLayer&codigoMap="+codigoMap+"&codigoLayer="+codigoLayer;
 		var callback =
@@ -831,7 +894,7 @@ function excluirMapfile(codigoMap)
 	var mensagem = " excluindo "+codigoMap;
 	var no = tree.getNodeByProperty("id",codigoMap)
 	var sUrl = "../php/editormapfile.php?funcao=excluirMapfile&codigoMap="+codigoMap;
-	core_excluiNoTree(sUrl,no,mensagem)	
+	core_excluiNoTree(sUrl,no,mensagem)
 }
 /*
 Function: clonarMapfile
