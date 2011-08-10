@@ -1,5 +1,10 @@
 GUIA DE UPDATES
 -------------------------------------------------------------------------------------------------
+Para a versão 4.5 + SP8
+
+	As interfaces Openlayers e Googlemaps por default passaram a utilizar as guias na forma "retrátil"
+	As interfaces com a guia lateral anterior foram renomeadas para i3geo/interface/openlayers1.htm e googlemaps1.phtml
+
 Para a versão 4.5
 
 	Os arquivos com as interfaces HTML dos diferentes mapas do i3Geo foram movidos do diretório
