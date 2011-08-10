@@ -54,10 +54,12 @@ Group: Interface HTML  {
    File: Flamingo  (interface\flamingo.htm)
    File: Google Earth &lparen;experimental&rparen;  (interface\googleearth.phtml)
    File: Google Maps  (interface\googlemaps.phtml)
+   File: Google Maps versão com guias à esquerda  (interface\googlemaps1.phtml)
    File: Interface minima  (interface\minima.htm)
    File: Interface normal  (interface\geral.htm)
    File: Interface Openlayers  (interface\openlayers.htm)
    File: Interface Openlayers para tablets  (interface\openlayers_t.htm)
+   File: Interface Openlayers versão com guias à esquerda  (interface\openlayers1.htm)
    File: Interface zerocal  (interface\zerocal.htm)
    File: Interface zerocalol  (interface\zerocalol.htm)
    }  # Group: Interface HTML
@@ -319,15 +321,20 @@ Group: Aplicativos adicionais  {
 
    Group: Ferramentas  {
 
-      File: Interface GoogleEarth para a ferramenta tela remota  (ferramentas\telaremota\googleearth1.php)
-      File: Interface GoogleMaps para a ferramenta tela remota  (ferramentas\telaremota\googlemaps1.php)
-      File: Interface OpenLayers para a ferramenta tela remota  (ferramentas\telaremota\openlayers1.php)
-      File: Monotor remoto  (ferramentas\telaremota\recuperamapa.php)
-      File: Tela remota  (ferramentas\telaremota\index.js.php)
+      Group: telaremota  {
+
+         File: Interface GoogleEarth para a ferramenta tela remota  (ferramentas\telaremota\googleearth1.php)
+         File: Interface GoogleMaps para a ferramenta tela remota  (ferramentas\telaremota\googlemaps1.php)
+         File: Interface OpenLayers para a ferramenta tela remota  (ferramentas\telaremota\openlayers1.php)
+         File: Monotor remoto  (ferramentas\telaremota\recuperamapa.php)
+         File: Tela remota  (ferramentas\telaremota\index.js.php)
+         }  # Group: telaremota
+
+      File: Adiciona um tema ao mapa com base em um arquivo KML existente na Web  (ferramentas\carregakml\index.js.php)
+      File: Buffer &lparen;entorno&rparen; em um ponto  (ferramentas\bufferpt\index.js.php)
+      File: opacidademapa  (ferramentas\opacidademapa\index.js.php)
       }  # Group: Ferramentas
 
-   File: Adiciona um tema ao mapa com base em um arquivo KML existente na Web  (ferramentas\carregakml\index.js.php)
-   File: Buffer &lparen;entorno&rparen; em um ponto  (ferramentas\bufferpt\index.js.php)
    }  # Group: Aplicativos adicionais
 
 Group: Administração  {
