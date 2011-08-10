@@ -1547,6 +1547,7 @@ if (!euEnv.imageBasePath)
 			//edmar
 			//if(args.id !== undefined)
 			//{this.id = args.id;}
+			container.className = "noprint";
 			this.container = container;
 						
 			euPreloadImage(args.image);	

@@ -195,6 +195,14 @@ h1 {padding:.25em .5em;background-color:#ccc;}
 /*hack opera */
 @media all and (-webkit-min-device-pixel-ratio:10000), not all and (-webkit-min-device-pixel-ratio:0) 
 { .inputsb {border:1px solid black} }
+/* esconde na impressao */
+@media print {
+	.noprint {display:none !important;}
+	.yuimenubar  {display:none !important;}
+	#i3GEOcompartilhar {display:none !important;}
+	#i3GEOguiaMovel {display:none !important;}
+	#localizarxy {display:none !important;}
+}
 
 
 #barraedicao,#abregoogleearth,#uploadgpx,#metar,#carouselTemas,#identificaBalao,#rota,#buscafotos,#area,#confluence,#scielo,#wiki,#inseregrafico,#realca,#reinicia,#google,#zoomtot,#pan,#zoomli,#zoomlo,#zoomiauto,#zoomoauto,#identifica,#lentei,#reinicia,#exten,#selecao,#inserexy,#textofid,#mede,#perfil,#cruza,#tamanho,#imprimir,#salva,#carrega,#referencia,#pegaimagens,#v3d
