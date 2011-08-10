@@ -303,36 +303,6 @@ MAP
     END
   END
 
-LAYER
-      NAME osm
-      TYPE RASTER
-      METADATA
-         "wms_title"           "Open Street Map"
-         #"wms_group_title"     "Roads & Highways"
-         "wms_format"          "image/png"
-         "wms_srs"             "EPSG:4326"
-         "wms_name"            ""
-         "wms_server_version"  "1.1.1"
-         "wms_transparent"     "true"
-		 "cache" "sim"
-      "CLASSE"	"SIM"
-      "palletestep"	""
-      "permitekmz"	"nao"
-      "description_template"	""
-      "palletefile"	""
-      "permitedownload"	"nao"
-      "download"	"NAO"
-      "permiteogc"	"nao"
-      "permitekml"	"nao"
-      "TEMA"	"Open Street Map - Rodovias"
-      END
-      STATUS OFF
-      CONNECTIONTYPE WMS
-      CONNECTION "http://full.wms.geofabrik.de/std/demo_key?"
-      #PROJECTION
-      #   "init=epsg:4326"
-      #END
-   END  
   
 	LAYER
 		METADATA

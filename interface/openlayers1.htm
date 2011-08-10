@@ -284,13 +284,15 @@ OpenLayers.ImgPath = "../pacotes/openlayers/img/";
 		{layers:"baseraster",srs:"EPSG:4291",format:"image/png",isBaseLayer:false},
 		{isBaseLayer:true,visibility:false}
 	);
+	/*
 	var osm = new OpenLayers.Layer.WMS( 
 		"Open Street Map",
 		"http://full.wms.geofabrik.de/std/demo_key",
 		{layers:""},
 		{isBaseLayer:true,visibility:false}
-	);	
-	i3GEO.Interface.openlayers.LAYERSADICIONAIS = [oce,ims,wsm,bra,osm];
+	);
+	*/	
+	i3GEO.Interface.openlayers.LAYERSADICIONAIS = [oce,ims,wsm,bra];
 })();
 //
 //substitui a janela de alerta normal do navegador por uma janela estilizada. Pode ser comentado sem problemas. No Safari apresentou problemas.
