@@ -335,31 +335,32 @@ i3GEO.gadgets = {
 		var i,ins,temp;
 		if(arguments.length === 0)
 		{id = i3GEO.gadgets.PARAMETROS.mostraBuscaRapida.idhtml;}
+		i3GEO.gadgets.mostraBuscaRapida.id = id;
 		if($i(id)){
 			//depreciado na versão 4.5
 			i3geo_buscaRapida = function(){
 				alert("i3geo_buscaRapida foi depreciada");
 			};
-			i = $inputText(id,"225","valorBuscaRapida","Município, cidade, UC, endereço...","30",$trad("o2"));
+			i = $inputText(id,"225","valorBuscaRapida"+id,"Município, cidade, UC, endereço...","30",$trad("o2"));
 			ins = "<table><tr><td><a class=ajuda_usuario target=_blank href='"+i3GEO.configura.locaplic+"/ajuda_usuario.php?idcategoria=8&idajuda=71' >&nbsp;&nbsp;&nbsp;</a></td><td>"+i+"</td>";
-			ins += "<td><img src='"+i3GEO.util.$im("branco.gif")+"' title='"+$trad("p13")+"' class='ticPropriedades2' id=i3GEObotaoPropriedadesBuscaRapida /></td>";
-			ins += "<td><img src='"+i3GEO.util.$im("branco.gif")+"' class='tic' id=i3GEObotaoBuscaRapida /></td></tr></table>";
+			ins += "<td><img src='"+i3GEO.util.$im("branco.gif")+"' title='"+$trad("p13")+"' class='ticPropriedades2' id=i3GEObotaoPropriedadesBuscaRapida"+id+" /></td>";
+			ins += "<td><img src='"+i3GEO.util.$im("branco.gif")+"' class='tic' id=i3GEObotaoBuscaRapida"+id+" /></td></tr></table>";
 			temp = $i(id);
 			if(temp){
 				temp.innerHTML = ins;
-				$i("i3GEObotaoBuscaRapida").onclick = function(){
+				$i("i3GEObotaoBuscaRapida"+id).onclick = function(){
 					if(i3GEO.gadgets.PARAMETROS.mostraBuscaRapida.servicosexternos === false && i3GEO.gadgets.PARAMETROS.mostraBuscaRapida.temasmapa === false)
 					{alert("Escolha um tipo de busca nas propriedades");return;}
 
-					if ($i("valorBuscaRapida").value === "")
+					if ($i("valorBuscaRapida"+id).value === "")
 					{alert("Digite uma palavra para busca!");return;}
 					i3GEO.janela.cria("300px","280px",i3GEO.configura.locaplic+"/ferramentas/buscarapida/index.htm","","","Busca rapida");				
 				};
-				$i("i3GEObotaoPropriedadesBuscaRapida").onclick = function(){
+				$i("i3GEObotaoPropriedadesBuscaRapida"+id).onclick = function(){
 					var ins,
 						interno = "",
 						externo = "";
-					i3GEO.janela.cria("300px","150px","","","","Propriedades","i3GEOpropriedadesBuscaRapida");
+					i3GEO.janela.cria("300px","150px","","","","Propriedades","i3GEOpropriedadesBuscaRapida"+id);
 					if(i3GEO.gadgets.PARAMETROS.mostraBuscaRapida.servicosexternos)
 					{externo = "checked";}
 					if(i3GEO.gadgets.PARAMETROS.mostraBuscaRapida.temasmapa)
@@ -370,10 +371,9 @@ i3GEO.gadgets = {
 						"<tr><td><input style=cursor:pointer onclick='i3GEO.gadgets.PARAMETROS.mostraBuscaRapida.temasmapa = this.checked' type=checkbox "+interno+" ></td><td>Temas existentes no mapa</td></tr>" +
 						"</table><br>" +
 						"<p class=paragrafo >Apenas os temas especialmente configurados pelo administrador do i3Geo podem receber operações de busca.</p>";
-					$i("i3GEOpropriedadesBuscaRapida_corpo").innerHTML = ins;
+					$i("i3GEOpropriedadesBuscaRapida"+id+"_corpo").innerHTML = ins;
 				};	
 			}
-			
 		}
 	},
 	/*

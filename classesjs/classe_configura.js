@@ -661,6 +661,32 @@ i3GEO.configura = {
 			}
 		},
 		{
+			//Ativa o botão que realiza a operação de busca rápida
+			iddiv:"localizar",
+			tipo:"",
+			dica:$trad("o2"),
+			titulo: $trad("o2"),
+			funcaoonclick:function(){
+				if(!$i("janelaBuscaRapida")){
+					var janela = i3GEO.janela.cria(
+						"230px",
+						"20px",
+						"",
+						"",
+						"",
+						"Busca rápida",
+						"janelaBuscaRapida",
+						false,
+						"hd",
+						"",
+						""
+					);
+					$i("janelaBuscaRapida_corpo").style.backgroundColor = "white";
+				}
+				i3GEO.gadgets.mostraBuscaRapida(janela[2].id);
+			}
+		},		
+		{
 			//Ativa o botão que realiza a operação de zoom interativo.
 			iddiv:"zoomli",
 			tipo:"dinamico",

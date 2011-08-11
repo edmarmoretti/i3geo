@@ -1018,10 +1018,10 @@ it:"Attendere..."
 }],
 "o2":[
 {
-pt:"Busca r&aacute;pida...",
-en:"Quick search...",
-es:"B&uacute;squeda r&aacute;pida...",
-it:"Ricerca rapida ..."
+pt:"Busca r&aacute;pida",
+en:"Quick search",
+es:"B&uacute;squeda r&aacute;pida",
+it:"Ricerca rapida"
 }],
 "o3":[
 {
