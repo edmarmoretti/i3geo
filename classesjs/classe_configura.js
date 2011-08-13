@@ -192,12 +192,10 @@ i3GEO.configura = {
 			{ id:"omenudataFerramentas0c",text: '<span style=color:gray;text-decoration:underline; ><b>'+$trad("a15")+'</b></span>',url: "#"},
 			{ id:"omenudataFerramentas1c",text: "WMS-T", url: "javascript:i3GEO.arvoreDeTemas.dialogo.conectarwmst()"},
 			{ id:"omenudataFerramentas2c",text: "GeoRSS", url: "javascript:i3GEO.arvoreDeTemas.dialogo.conectargeorss()"},
-			{ id:"omenudataFerramentas3c",text: "WMS", url: "javascript:i3GEO.arvoreDeTemas.dialogo.conectarwms()"},			
+			{ id:"omenudataFerramentas3c",text: "WMS", url: "javascript:i3GEO.arvoreDeTemas.dialogo.conectarwms()"},
+			{ id:"omenudataFerramentas4c",text: "KML", url: "javascript:i3GEO.arvoreDeTemas.dialogo.carregaKml()"},			
 			{ id:"omenudataFerramentas0d",text: '<span style=color:gray;text-decoration:underline; ><b>Upload</b></span>',url: "#"},
-			{ id:"omenudataFerramentas1d",text: "GPX", url: "javascript:i3GEO.arvoreDeTemas.dialogo.uploadgpx()"},
-			{ id:"omenudataFerramentas2d",text: "DBF", url: "javascript:i3GEO.arvoreDeTemas.dialogo.uploaddbf()"},
-			{ id:"omenudataFerramentas3d",text: "CSV/TXT", url: "javascript:i3GEO.arvoreDeTemas.dialogo.uploadarquivo()"},
-			{ id:"omenudataFerramentas4d",text: "Shapefile", url: "javascript:i3GEO.arvoreDeTemas.dialogo.upload()"}
+			{ id:"omenudataFerramentas3d",text: "Vetor (shp,dbf,csv,gpx,kml)", url: "javascript:i3GEO.arvoreDeTemas.dialogo.uploadarquivo()"}
 			]
 		}
 	},

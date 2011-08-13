@@ -875,6 +875,24 @@ g_traducao_ajuda = {
 			complemento:"",
 			tela:"",
 			apijs:"i3GEO.mapa.dialogo.opacidade()"
+		},
+		"103": {
+			titulo: "Upload de GPX",
+			diretorio:"i3geo/ferramentas/uploadgpx",
+			categoria:"4",
+			pt:"Permite que um arquivo do tipo GPX, normalmente gerado por programas que utilizam GPS, seja enviado ao servidor e incluído no mapa como uma nova camada. O arquivo GPX será armazenado no servidor onde o i3geo está instalado e permanecerá lá até que os arquivos temporários sejam apagados.",
+			complemento:"Não utilize essa opção se existir alguma restrição ao uso do arquivo e se a política de acesso aos dados, definidas pela entidade que hospeda o i3geo, não for compatívelcom essas restri&ccedil;&otilde;es.",
+			tela:"",
+			apijs:"i3GEO.arvoreDeTemas.dialogo.uploadgpx()"
+		},
+		"104": {
+			titulo: "Upload de KML",
+			diretorio:"i3geo/ferramentas/uploadkml",
+			categoria:"4",
+			pt:"Permite que um arquivo do tipo KML, seja enviado ao servidor e incluído no mapa como uma nova camada. O arquivo GPX será armazenado no servidor onde o i3geo está instalado e permanecerá lá até que os arquivos temporários sejam apagados.",
+			complemento:"Não utilize essa opção se existir alguma restrição ao uso do arquivo e se a política de acesso aos dados, definidas pela entidade que hospeda o i3geo, não for compatívelcom essas restri&ccedil;&otilde;es.",
+			tela:"",
+			apijs:"i3GEO.arvoreDeTemas.dialogo.uploadkml()"
 		}
 	}
 };

@@ -1,0 +1,28 @@
+MAP
+SYMBOLSET ../symbols/simbolos.sym
+FONTSET   "../symbols/fontes.txt"
+LAYER
+  NAME geojs_ogr1 # ok
+  TYPE point
+  STATUS DEFAULT
+  CONNECTIONTYPE OGR
+   CONNECTION "http://127.0.0.1:8080/geojsp/GenerateGeoJSON?type=3&MDXQuery=SELECT%20[Age].[6-11]%20ON%20COLUMNS%2C{Filter%20%28[GeospatialDimension.Geo].Children%2C%0A%28[Age].[0-5]%29%20%3E%2040000%29}ON%20ROWS%20FROM%20[Refugees]"
+  TEMPLATE "none.htm"
+  METADATA
+  	  TEMA "OGR GEOJSON"
+	  ESCALA "250000"
+  	  CLASSE "SIM"
+  END
+  TRANSPARENCY 100
+  PROCESSING "ATTRIBUTES_SKIP=NO"
+  CLASS
+	  NAME " "
+	  STYLE
+          COLOR 255 255 0
+          OUTLINECOLOR 0 0 0
+		  SIZE 12
+		  SYMBOL ponto
+	  END
+  END  # CLASS
+END  # LAYER
+END

@@ -123,12 +123,50 @@
 <tr>
  <td class=tdbranca id=contemFerramentas style="vertical-align:top;width:300px;text-align:left;">
     <div class=verdeescuro style="top:0px;cursor:pointer;">
-	 <div id=guia1 class=guia >Temas</div>
+	 <div id=guia6 class=guia ></div>
+	 <div id=guia7 class=guia ></div>
+	<div id=guia1 class=guia >Temas</div>
 	 <div id=guia2 class=guia >Adiciona</div>
-	 <div id=guia4 class=guia >Legenda</div>
-    </div>
+	 <div id=guia4 class=guia >Legenda</div>    </div>
 
-  <div id='guia1obj' >
+
+  <div id='guia6obj' style='display:none;text-align:left'><div id='sfbProcurar' style='text-align:left'></div></div>
+  <!-- infos sobre o atlas --->
+  <div id='guia7obj' style='display:none;text-align:left;cursor:default;'>
+	<a href="http://www.mma.gov.br/index.php?ido=conteudo.monta&idEstrutura=95&idMenu=5108" target="_blank" >
+		<img src="atlas_br163.png" />
+	</a>
+	<br><br>
+	<p class=paragrafo >
+		<a href="#" onclick='javascript:i3GEO.janela.cria("400px","400px","sobreoatlasbr163.htm","","","Sobre o Atlas","sobreAtlas");'><span>Sobre o Atlas</span></a>
+	</p>
+	<p class=paragrafo >
+		<a href="http://www.mma.gov.br/index.php?ido=conteudo.monta&idEstrutura=95&idMenu=10816&idConteudo=10331" target="_blank" ><span>O que é o SNIF?</span></a>
+	</p>	
+	<p class=paragrafo >
+		<a href="http://www.mma.gov.br/index.php?ido=conteudo.monta&idEstrutura=95&idMenu=5108" target="_blank" ><span>Distrito Florestal Sustentável</span></a>
+	</p>	
+	<p class=paragrafo >
+		<a href="#" onclick='javascript:i3GEO.janela.cria("400px","400px","tecnologia.htm","","","Tecnologia","tecnologiaAtlas");'><span>Tecnologia</span></a>
+	</p><br>
+	<p class=paragrafo style=cursor:default >
+		<b>&nbsp;Créditos</b><br>
+		<p class=paragrafo style=cursor:default >&nbsp;República Federativa do Brasil
+		<p class=paragrafo style='font-size: 12px;cursor:default' >&nbsp;Ministério do Meio Ambiente
+		<p class=paragrafo style='font-size: 11px;cursor:default' >&nbsp;Serviço Florestal Brasileiro
+		<p class=paragrafo style='font-size: 10px;cursor:default' >&nbsp;Gerência de Informações
+		<br><br>
+		<p class=paragrafo style=cursor:default >&nbsp;info@florestal.gov.br
+		<br><br>
+		<p class=paragrafo style=cursor:default ><b> Utilize a guia "Mapa" para ligar e desligar as camadas de cada prancha. Na guia "Catálogo" encontram-se outras camadas que também podem ser adicionadas ao mapa.</b>
+	</p>	
+
+  </div>
+
+
+
+
+	<div id='guia1obj' >
   	<div style='left:5px;top:10px;' id=buscaRapida ></div>
   	<div id=listaPropriedadesSanfona style='top:15px;' ></div>
   	<div id=listaTemasSanfona style='top:15px;'></div>
@@ -218,6 +256,7 @@ i3GEO.guias.CONFIGURA.adiciona.titulo = "Mais temas";
 //as barras de botoes serão construidas automaticamente, sem precisar de eleemntos HTML
 i3GEO.barraDeBotoes.AUTO = true
 i3GEO.configura.iniciaJanelaMensagens = false
+
 i3GEO.guias.CONFIGURA.temas.click = function(){
 	if($i("listaTemasSanfona").innerHTML === ""){
 		i3GEO.arvoreDeCamadas.cria("listaTemasSanfona");
@@ -227,6 +266,27 @@ i3GEO.guias.CONFIGURA.temas.click = function(){
 	{$i("guia1obj").style.display = "block";}
 }
 
+
+i3GEO.guias.CONFIGURA.guiaDeBusca = {
+	titulo:"Procurar",
+	id:"guia6",
+	idconteudo:"guia6obj",
+	click:""
+};
+
+
+i3GEO.guias.CONFIGURA.guiaSobre = {
+	titulo:"Atlas",
+	id:"guia7",
+	idconteudo:"guia7obj",
+	click:""
+};
+i3GEO.guias.CONFIGURA.guiaSobre.click = function(){
+	$i("guia7obj").style.display = "block";
+}
+
+i3GEO.guias.ORDEM = ["guiaSobre","temas","legenda","adiciona","guiaDeBusca"];
+i3GEO.guias.ATUAL = "guiaSobre";
 i3GEO.guias.TIPO = "sanfona";
 i3GEO.inicia();
 </script>

@@ -1,23 +1,23 @@
 <?php error_reporting(0);if(extension_loaded('zlib')){ob_start('ob_gzhandler');} header("Content-type: text/javascript"); ?>
 /*jslint plusplus:false,white:false,undef: false, rhino: true, onevar: true, evil: true */
 /*
-Title: GPX
+Title: Upload KML
 
 Envia para o servidor um arquivo no formato GPX local e insere como novas camadas no mapa.
 
 Veja:
 
-<i3GEO.arvoreDeTemas.dialogo.uploadgpx>
+<i3GEO.arvoreDeTemas.dialogo.uploadkml>
 
 Arquivo:
 
-i3geo/ferramentas/uploadgpx/index.js.php
+i3geo/ferramentas/uploadkml/index.js.php
 
 Licenca:
 
 GPL2
 
-I3Geo Interface Integrada de Ferramentas de Geoprocessamento para Internet
+i3Geo Interface Integrada de Ferramentas de Geoprocessamento para Internet
 
 Direitos Autorais Reservados (c) 2006 Ministério do Meio Ambiente Brasil
 Desenvolvedor: Edmar Moretti edmar.moretti@mma.gov.br
@@ -41,9 +41,9 @@ if(typeof(i3GEOF) === 'undefined'){
 	i3GEOF = [];
 }
 /*
-Classe: i3GEOF.uploadgpx
+Classe: i3GEOF.uploadkml
 */
-i3GEOF.uploadgpx = {
+i3GEOF.uploadkml = {
 	/*
 	Variavel: aguarde
 	
@@ -61,16 +61,16 @@ i3GEOF.uploadgpx = {
 	*/
 	inicia: function(iddiv){
 		try{
-			$i(iddiv).innerHTML += i3GEOF.uploadgpx.html();
+			$i(iddiv).innerHTML += i3GEOF.uploadkml.html();
 			new YAHOO.widget.Button(
-				"i3GEOuploadgpxbotao1",
-				{onclick:{fn: i3GEOF.uploadgpx.submete}}
+				"i3GEOuploadkmlbotao1",
+				{onclick:{fn: i3GEOF.uploadkml.submete}}
 			);
 			i3GEO.util.radioEpsg(
 				function(retorno)
-				{$i("i3GEOuploadgpxListaepsg").innerHTML = retorno.dados;},
-				"i3GEOuploadgpxListaepsg",
-				"uploadgpx"
+				{$i("i3GEOuploadkmlListaepsg").innerHTML = retorno.dados;},
+				"i3GEOuploadkmlListaepsg",
+				"uploadkml"
 			);
 		}
 		catch(erro){alert(erro);}
@@ -85,15 +85,15 @@ i3GEOF.uploadgpx = {
 	String com o código html
 	*/
 	html:function(){
-		var ins = '<form id=i3GEOuploadgpxf target="i3GEOuploadgpxiframe" action="'+i3GEO.configura.locaplic+'/ferramentas/uploadgpx/upload.php" method="post" ENCTYPE="multipart/form-data">' +
-		'<p class="paragrafo" >Arquivo gpx: <br><input class=digitar type="file" size=42 name="i3GEOuploadgpx" style="top:0px;left:0px;cursor:pointer;"></p>' +
+		var ins = '<form id=i3GEOuploadkmlf target="i3GEOuploadkmliframe" action="'+i3GEO.configura.locaplic+'/ferramentas/uploadkml/upload.php" method="post" ENCTYPE="multipart/form-data">' +
+		'<p class="paragrafo" >Arquivo kml: <br><input class=digitar type="file" size=42 name="i3GEOuploadkml" style="top:0px;left:0px;cursor:pointer;"></p>' +
 		'<p class=paragrafo >Proje&ccedil;&atilde;o:</p>' +
-		'<div id=i3GEOuploadgpxListaepsg width="98%" style="text-align:left;border:1px solid gray;left:0px;overflow:auto;height:60px"></div>' +
-		'<br><p class="paragrafo" ><input id=i3GEOuploadgpxbotao1 type="button" value="Criar camada" size=12 name="submit">' +
+		'<div id=i3GEOuploadkmlListaepsg width="98%" style="text-align:left;border:1px solid gray;left:0px;overflow:auto;height:60px"></div>' +
+		'<br><p class="paragrafo" ><input id=i3GEOuploadkmlbotao1 type="button" value="Criar camada" size=12 name="submit">' +
 		'<input type=hidden name=g_sid value="'+i3GEO.configura.sid+'" >' +
 		'<input type="hidden" name="MAX_FILE_SIZE" value="100000">' +
 		'</form>' +
-		'<br><iframe name=i3GEOuploadgpxiframe style="text-align:left;border:1px solid gray;" width="98%" height="60px"></iframe>';
+		'<br><iframe name=i3GEOuploadkmliframe style="text-align:left;border:1px solid gray;" width="98%" height="60px"></iframe>';
 		return ins;
 	},
 	/*
@@ -105,9 +105,9 @@ i3GEOF.uploadgpx = {
 		var janela,divid,temp,titulo,cabecalho,minimiza;
 		cabecalho = function(){};
 		minimiza = function(){
-			i3GEO.janela.minimiza("i3GEOF.uploadgpx");
+			i3GEO.janela.minimiza("i3GEOF.uploadkml");
 		};
-		titulo = "Upload de arquivo GPX <a class=ajuda_usuario target=_blank href='" + i3GEO.configura.locaplic + "/ajuda_usuario.php?idcategoria=4&idajuda=103' >&nbsp;&nbsp;&nbsp;</a>";
+		titulo = "Upload de arquivo KML <a class=ajuda_usuario target=_blank href='" + i3GEO.configura.locaplic + "/ajuda_usuario.php?idcategoria=4&idajuda=104' >&nbsp;&nbsp;&nbsp;</a>";
 		janela = i3GEO.janela.cria(
 			"320px",
 			"280px",
@@ -115,16 +115,16 @@ i3GEOF.uploadgpx = {
 			"",
 			"",
 			titulo,
-			"i3GEOF.uploadgpx",
+			"i3GEOF.uploadkml",
 			false,
 			"hd",
 			cabecalho,
 			minimiza
 		);
 		divid = janela[2].id;
-		$i("i3GEOF.uploadgpx_corpo").style.backgroundColor = "white";
-		i3GEOF.uploadgpx.aguarde = $i("i3GEOF.uploadgpx_imagemCabecalho").style;
-		i3GEOF.uploadgpx.inicia(divid);
+		$i("i3GEOF.uploadkml_corpo").style.backgroundColor = "white";
+		i3GEOF.uploadkml.aguarde = $i("i3GEOF.uploadkml_imagemCabecalho").style;
+		i3GEOF.uploadkml.inicia(divid);
 	},
 	/*
 	Function: submete
@@ -132,10 +132,10 @@ i3GEOF.uploadgpx = {
 	Submete o arquivo ao servidor.
 	*/
 	submete: function(){
-		if(i3GEOF.uploadgpx.aguarde.visibility==="visible")
+		if(i3GEOF.uploadkml.aguarde.visibility==="visible")
 		{return;}
-		i3GEOF.uploadgpx.aguarde.visibility="visible";
-		$i("i3GEOuploadgpxf").submit();
+		i3GEOF.uploadkml.aguarde.visibility="visible";
+		$i("i3GEOuploadkmlf").submit();
 	}
 };
 <?php error_reporting(0);if(extension_loaded('zlib')){ob_end_flush();}?>

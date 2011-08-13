@@ -603,8 +603,8 @@ i3GEOF.identifica = {
 		if($i("i3GEOFidentificaNocorrencias"))
 		{atualN = $i("i3GEOFidentificaNocorrencias").value;}
 		$i("i3GEOF.identifica_corpo").scrollTop = 0;
-		if(retorno == "")
-		{$i("i3GEOidentificaocorrencia").innerHTML="Nada encontrado";}
+		if(retorno == undefined || retorno == "")
+		{$i("i3GEOidentificaocorrencia").innerHTML="Nada encontrado";return;}
 		var i = $i("i3GEOmarcaIdentifica");
 		if(i)
 		{i.style.display = "block";}		

@@ -1922,7 +1922,6 @@ i3GEO.arvoreDeTemas = {
 			"			<td><input type=radio style=cursor:pointer name=i3GEOFtipoArquivo onclick='i3GEO.arvoreDeTemas.dialogo.uploadkml()' /></td>" +
 			"			<td>KML ou KMZ</td>" +
 			"		</tr>" +
-
 			"	</table>";			
 			$i(janela[2].id).innerHTML = ins;;
 		},
