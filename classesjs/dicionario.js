@@ -965,6 +965,13 @@ en:"Conections",
 es:"Conexões",
 it:"Conexões"
 }],
+"a16":[
+{
+pt:"Serviços",
+en:"Services",
+es:"Servicios",
+it:"Servers"
+}],
 //guias principais
 "g1":[
 {
