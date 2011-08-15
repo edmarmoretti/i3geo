@@ -39,31 +39,35 @@ if (isset($_FILES['i3GEOuploadkml']['name']))
 	{
 		echo "<p class='paragrafo' >Arquivo enviado. Adicionando tema...</p>";
 		
-		$tipos = array("waypoints","routes","tracks","route_points","track_points");
+		$tipos = array("pontos","linhas","poligonos");
 		foreach($tipos as $tipo){
 			$novolayer = ms_newLayerObj($mapa);
 			$novolayer->set("connection",$dirmap."/".$_FILES['i3GEOuploadkml']['name']);
 			if(ms_GetVersionInt() > 50201)
 			{$novolayer->setconnectiontype(MS_OGR);}
 			else
-			{$novolayer->set("connectiontype",MS_OGR);}			
+			{$novolayer->set("connectiontype",MS_OGR);}
+			
 			$nome = str_replace(".","",$_FILES['i3GEOuploadkml']['name']);
 			$novolayer->set("name",$nome.$tipo);
 			$novolayer->setmetadata("TEMA",$_FILES['i3GEOuploadkml']['name']." ".$tipo);
 			$novolayer->setmetadata("DOWNLOAD","SIM");
 			$novolayer->setmetadata("CLASSE","SIM");
 			$novolayer->setmetadata("TEXTO","NAO");
-			if($tipo == "waypoints" || $tipo == "route_points" ||$tipo == "track_points")
+			if($tipo == "pontos")
 			{$novolayer->set("type",MS_LAYER_POINT);}
-			else
+			if($tipo == "linhas")
 			{$novolayer->set("type",MS_LAYER_LINE);}
-			$novolayer->set("data",$tipo);
+			if($tipo == "poligonos")
+			{$novolayer->set("type",MS_LAYER_POLYGON);}
+			$novolayer->set("type",$tipo);
+			$novolayer->set("data",$layerkml);
 			$novolayer->setmetadata("TEMALOCAL","SIM");
 			$novolayer->setfilter("");
 			$classe = ms_newClassObj($novolayer);
 			$classe->set("name","");
 			$estilo = ms_newStyleObj($classe);
-			if($tipo == "waypoints" || $tipo == "route_points" ||$tipo == "track_points")
+			if($tipo == "pontos")
 			{
 				$estilo->set("symbolname","ponto");
 				$estilo->set("size",6);

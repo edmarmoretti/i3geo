@@ -1,0 +1,32 @@
+MAP
+  FONTSET "c:\ms4w\apache\htdocs\i3geo/symbols/fontes.txt"
+  SYMBOLSET "c:\ms4w\apache\htdocs\i3geo/symbols/simbolos.sym"
+  LAYER
+    CONNECTION "c:\ms4w\apache\htdocs\i3geo\aplicmap\dados\teste.kml"
+    CONNECTIONTYPE OGR
+    DATA "Trovit"
+    METADATA
+      "CLASSE"	"SIM"
+      "TEXTO"	"NAO"
+      "TEMALOCAL"	"SIM"
+      "DOWNLOAD"	"SIM"
+      "TEMA"	"teste"
+    END
+    NAME "kml"
+    STATUS DEFAULT
+    TEMPLATE "none.htm"
+    TYPE POINT
+    UNITS METERS
+    CLASS
+      NAME ""
+      STYLE
+        ANGLE 360
+        COLOR 200 50 0
+        OUTLINECOLOR 0 0 0
+        SIZE 6
+        SYMBOL "ponto"
+        WIDTH 1
+      END
+    END
+  END
+  END
