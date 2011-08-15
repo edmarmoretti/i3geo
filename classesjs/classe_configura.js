@@ -193,7 +193,8 @@ i3GEO.configura = {
 			{ id:"omenudataFerramentas1c",text: "WMS-T", url: "javascript:i3GEO.arvoreDeTemas.dialogo.conectarwmst()"},
 			{ id:"omenudataFerramentas2c",text: "GeoRSS", url: "javascript:i3GEO.arvoreDeTemas.dialogo.conectargeorss()"},
 			{ id:"omenudataFerramentas3c",text: "WMS", url: "javascript:i3GEO.arvoreDeTemas.dialogo.conectarwms()"},
-			{ id:"omenudataFerramentas4c",text: "KML", url: "javascript:i3GEO.arvoreDeTemas.dialogo.carregaKml()"},			
+			{ id:"omenudataFerramentas4c",text: "KML", url: "javascript:i3GEO.arvoreDeTemas.dialogo.carregaKml()"},
+			{ id:"omenudataFerramentas5c",text: "GeoJson", url: "javascript:i3GEO.arvoreDeTemas.dialogo.conectargeojson()"},
 			{ id:"omenudataFerramentas0d",text: '<span style=color:gray;text-decoration:underline; ><b>Upload</b></span>',url: "#"},
 			{ id:"omenudataFerramentas3d",text: "Vetor (shp,dbf,csv,gpx,kml)", url: "javascript:i3GEO.arvoreDeTemas.dialogo.uploadarquivo()"}
 			]

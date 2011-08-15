@@ -1456,13 +1456,66 @@ Endereço do WMC
 		return($nomeurl."&service=WMS&request=GetContext&version=1.1.0");
 	}	
 /*
+Method: adicionaTemaGeoJson
+
+Adiciona um canal GeoRSS como um tema no mapa.
+
+Parametros:
+
+$servico - Endereço (url)  do GeoJson.
+$dir_tmp - Diretório onde o arquivo será criado.
+$locaplic - Localização do I3geo
+
+*/
+	function adicionaTemaGeoJson($servico,$dir_tmp,$locaplic){
+		$servico = str_replace("|","?",$servico);
+		$servico = str_replace("#","&",$servico);
+		$tipos = array("pontos","linhas","poligonos");
+		foreach($tipos as $tipo){
+			$novolayer = ms_newLayerObj($this->mapa);
+			$novolayer->set("connection",$servico);
+			if(ms_GetVersionInt() > 50201)
+			{$novolayer->setconnectiontype(MS_OGR);}
+			else
+			{$novolayer->set("connectiontype",MS_OGR);}
+			$nome = nomeRandomico(10)."geoJson";
+			$novolayer->set("name",$nome.$tipo);
+			$novolayer->setmetadata("TEMA","GeoJson ".$nome." ".$tipo);
+			$novolayer->setmetadata("DOWNLOAD","SIM");
+			$novolayer->setmetadata("CLASSE","SIM");
+			if($tipo == "pontos")
+			{$novolayer->set("type",MS_LAYER_POINT);}
+			if($tipo == "linhas")
+			{$novolayer->set("type",MS_LAYER_LINE);}
+			if($tipo == "poligonos")
+			{$novolayer->set("type",MS_LAYER_POLYGON);}
+			$novolayer->set("type",$tipo);
+			$novolayer->set("data","OGRGeoJSON");
+			$novolayer->setfilter("");
+			$classe = ms_newClassObj($novolayer);
+			$classe->set("name","");
+			$estilo = ms_newStyleObj($classe);
+			if($tipo == "pontos")
+			{
+				$estilo->set("symbolname","ponto");
+				$estilo->set("size",10);
+			}
+			$estilo->color->setrgb(200,50,0);
+			$estilo->outlinecolor->setrgb(0,0,0);
+			// le os itens
+			$novolayer->set("status",MS_DEFAULT);
+			$novolayer->set("template","none.htm");
+		}
+		return "ok";
+	}
+/*
 Method: adicionaTemaGeoRSS
 
 Adiciona um canal GeoRSS como um tema no mapa.
 
 Parametros:
 
-$servico - Endereço do RSS.
+$servico - Endereço (url) do RSS.
 $dir_tmp - Diretório onde o arquivo será criado.
 $locaplic - Localização do I3geo
 $canal - Identificador do canal (ordem em que está no RSS)

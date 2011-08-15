@@ -871,6 +871,25 @@ Adiciona um tema baseado em um RSS.
 		}
 	break;
 /*
+Valor: ADICIONATEMAGEOJSON
+
+Adiciona um tema baseado em uma URL GeoJson.
+
+<Mapa->adicionaTemaGeoJson>
+*/
+	case "ADICIONATEMAGEOJSON":
+		include_once("classe_mapa.php");
+		copiaSeguranca($map_file);
+		$m = new Mapa($map_file);
+		$retorno = $m->adicionaTemaGeoJson($servico,$dir_tmp,$locaplic);
+		if ($retorno != "erro")
+		{$m->salva();$_SESSION["contadorsalva"]++;redesenhaMapa();}
+		else
+		{
+			$retorno = "erro.";
+		}
+	break;
+/*
 Valor: ADICIONATEMASHP
 
 Adiciona um tema baseado em um arquivo shape file.

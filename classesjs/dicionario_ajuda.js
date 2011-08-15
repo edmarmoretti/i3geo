@@ -899,10 +899,19 @@ g_traducao_ajuda = {
 			diretorio:"i3geo/ferramentas/carregakml",
 			categoria:"4",
 			pt:"Cria um novo layer com base no endereço (url) de um arquivo KML. O layer é baseado em uma conexão OGR.",
-			complemento:"São criados 3 novas camadas no mapa, uma para pontos, uma para linhas e outra para os polígonos. Não necessariamente existirão elementos nas três camadas.",
+			complemento:"São criadas 3 novas camadas no mapa, uma para pontos, uma para linhas e outra para os polígonos. Não necessariamente existirão elementos nas três camadas.",
 			tela:"",
 			apijs:"i3GEO.arvoreDeTemas.carregakml()"
-		}	
+		},
+		"106": {
+			titulo: "Conexão GeoJson",
+			diretorio:"i3geo/ferramentas/conectargeojson",
+			categoria:"4",
+			pt:"Cria um novo layer com base no endereço (url) de um arquivo no formato GeoJson. O layer é baseado em uma conexão OGR.",
+			complemento:"São criadas 3 novas camadas no mapa, uma para pontos, uma para linhas e outra para os polígonos. Não necessariamente existirão elementos nas três camadas.",
+			tela:"",
+			apijs:"i3GEO.arvoreDeTemas.conectargeojson()"
+		}		
 	}
 };
 

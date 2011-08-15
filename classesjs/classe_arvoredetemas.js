@@ -2004,6 +2004,14 @@ i3GEO.arvoreDeTemas = {
 		conectarwfs: function()
 		{i3GEO.janela.cria("400px","300px",i3GEO.configura.locaplic+"/ferramentas/conectarwfs/index.htm","","","WFS");},
 		/*
+		Function: conectargeojson
+
+		Abre a janela para adicionar temas tendo como fonte uma url no formato geojson
+		*/
+		conectargeojson: function(){
+			i3GEO.util.scriptTag(i3GEO.configura.locaplic+"/ferramentas/conectargeojson/index.js.php","i3GEOF.conectargeojson.criaJanelaFlutuante()","i3GEOF.conectargeojson_script");
+		},
+		/*
 		Function: conectargeorss
 
 		Abre a janela para adicionar temas tendo como fonte um georss

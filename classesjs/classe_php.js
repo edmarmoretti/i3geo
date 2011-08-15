@@ -1129,7 +1129,7 @@ i3GEO.php = {
 	dadosPerfilRelevo: function(funcao,opcao,pontos,amostragem,item){
 		i3GEO.php.verifica();
 		var p = i3GEO.configura.locaplic+"/classesphp/mapa_controle.php?g_sid="+i3GEO.configura.sid+"&funcao=dadosPerfilRelevo&opcao="+opcao,
-		cp = new cpaint();
+			cp = new cpaint();
 		cp.set_transfer_mode('POST');
 		cp.set_response_type("JSON");
 		cp.call(p,"foo",funcao,"&pontos="+pontos+"&amostragem="+amostragem+"&item="+item);
