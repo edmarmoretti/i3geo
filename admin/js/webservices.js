@@ -222,6 +222,10 @@ function montaDiv(i)
 	ins += "<option value='DOWNLOAD' "
 	if (i.tipo_ws == "DOWNLOAD"){ins += "selected";}
 	ins += " >DOWNLOAD</option>"
+	ins += "<option value='GEOJSON' "
+	if (i.tipo_ws == "GEOJSON"){ins += "selected";}
+	ins += " >GEOJSON</option>"
+
 	ins += "</select></p>"
 	return(ins)
 }

@@ -3,7 +3,7 @@
 /*
 Title: Upload KML
 
-Envia para o servidor um arquivo no formato GPX local e insere como novas camadas no mapa.
+Envia para o servidor um arquivo no formato KML local e insere como novas camadas no mapa.
 
 Veja:
 

@@ -7,6 +7,7 @@ LAYER
   STATUS DEFAULT
   CONNECTIONTYPE OGR
    CONNECTION "http://127.0.0.1:8080/geojsp/GenerateGeoJSON?type=3&MDXQuery=SELECT%20[Age].[6-11]%20ON%20COLUMNS%2C{Filter%20%28[GeospatialDimension.Geo].Children%2C%0A%28[Age].[0-5]%29%20%3E%2040000%29}ON%20ROWS%20FROM%20[Refugees]"
+  DATA "OGRGeoJSON"
   TEMPLATE "none.htm"
   METADATA
   	  TEMA "OGR GEOJSON"

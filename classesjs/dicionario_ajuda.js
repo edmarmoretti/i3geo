@@ -893,7 +893,16 @@ g_traducao_ajuda = {
 			complemento:"Não utilize essa opção se existir alguma restrição ao uso do arquivo e se a política de acesso aos dados, definidas pela entidade que hospeda o i3geo, não for compatívelcom essas restri&ccedil;&otilde;es.",
 			tela:"",
 			apijs:"i3GEO.arvoreDeTemas.dialogo.uploadkml()"
-		}
+		},
+		"105": {
+			titulo: "Conexão KML",
+			diretorio:"i3geo/ferramentas/carregakml",
+			categoria:"4",
+			pt:"Cria um novo layer com base no endereço (url) de um arquivo KML. O layer é baseado em uma conexão OGR.",
+			complemento:"São criados 3 novas camadas no mapa, uma para pontos, uma para linhas e outra para os polígonos. Não necessariamente existirão elementos nas três camadas.",
+			tela:"",
+			apijs:"i3GEO.arvoreDeTemas.carregakml()"
+		}	
 	}
 };
 
