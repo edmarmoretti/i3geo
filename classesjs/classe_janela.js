@@ -805,7 +805,10 @@ i3GEO.janela = {
 					c.style.position = "relative";
 					c.style.fontSize = "10px";
 					c.style.color = "#686868";
-					c.value = i3GEOF[ferramenta].tema;
+					if(i3GEO.temaAtivo !== "")
+					{c.value = i3GEO.temaAtivo;}
+					if(i3GEOF[ferramenta].tema)
+					{c.value = i3GEOF[ferramenta].tema;}
 					if(c.value === ""){
 						i3GEOF[ferramenta].tema = "";
 						$i("i3GEOF."+ferramenta+"_corpo").innerHTML = "";

@@ -73,7 +73,7 @@ i3GEO.mapa = {
 			var temp,Dw,Dh, r = false;
 			Dw = YAHOO.util.Dom.getViewportWidth();
 			Dh = YAHOO.util.Dom.getViewportHeight();
-			if(typeof(console) !== 'undefined'){console.info(Dw+" "+Dh+" "+i3GEO.tamanhodoc);}
+			
 			if(Math.abs(Dw - i3GEO.tamanhodoc[0]) > 50){
 				r = true;
 			}

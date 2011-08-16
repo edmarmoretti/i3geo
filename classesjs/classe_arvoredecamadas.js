@@ -938,7 +938,7 @@ i3GEO.arvoreDeCamadas = {
 				i3GEO.arvoreDeCamadas.adicionaOpcaoTema($trad("t37"),$trad("t37"),'i3GEO.tema.dialogo.graficotema(\"'+ltema.name+'\")',node);
 			}
 		}
-		if (ltema.type < 4 && funcoes.editorlegenda === true){
+		if ((ltema.type < 4 || ltema.type === 8) && funcoes.editorlegenda === true){
 			i3GEO.arvoreDeCamadas.adicionaOpcaoTema($trad("t32"),$trad("t33"),'i3GEO.tema.dialogo.editaLegenda(\"'+ltema.name+'\")',node);
 		}
 		if(funcoes.destacar === true && i3GEO.Interface.ATUAL !== "googlemaps" && i3GEO.Interface.ATUAL !== "googleearth" && i3GEO.Interface.ATUAL !== "flamingo"){
@@ -1429,6 +1429,7 @@ i3GEO.arvoreDeCamadas = {
 			var novon = novo.length,i;
 			if(novon !== atual.length)
 			{return (false);}
+			
 			for (i=0;i<novon;i += 1){
 				if(novo[i].name !== atual[i].name)
 				{return (false);}
@@ -1460,17 +1461,17 @@ i3GEO.arvoreDeCamadas = {
 	*/
 	pegaTema: function(idtema,camadas){
 		if(typeof(console) !== 'undefined'){console.info("i3GEO.arvoreDeCamadas.pegaTema()");}
-		var i,c,
-			v = "";
+		var i;
 		if(!camadas)
 		{camadas = i3GEO.arvoreDeCamadas.CAMADAS;}
-		c = camadas.length;			
-		for (i=0; i<c; i += 1){
+		i = camadas.length;			
+		while(i > 0){
+			i -= 1;
 			if(camadas[i].name === idtema){
-				v = camadas[i];
+				return camadas[i];
 			}
-		}
-		return v;
+		}	
+		return false;
 	},
 	/*
 	Function: filtraCamadas

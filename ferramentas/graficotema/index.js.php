@@ -59,6 +59,11 @@ i3GEOF.graficoTema = {
 	iddiv {String} - id do div que receberá o conteudo HTML da ferramenta
 	*/
 	inicia: function(iddiv){
+		i3GEO.janela.comboCabecalhoTemas("i3GEOFgraficotemaComboCabeca","i3GEOFgraficotemaComboCabecaSel","graficoTema","ligadosComTabela");
+		if(i3GEO.temaAtivo === ""){
+			$i(iddiv).innerHTML = "Escolha um tema na lista mostrada no cabeçalho";
+			return;
+		}
 		try{
 			$i(iddiv).innerHTML += i3GEOF.graficoTema.html();
 			i3GEO.guias.mostraGuiaFerramenta("i3GEOgraficotemaguia1","i3GEOgraficotemaguia");
@@ -148,8 +153,12 @@ i3GEOF.graficoTema = {
 	*/	
 	criaJanelaFlutuante: function(){
 		var minimiza,cabecalho,janela,divid,temp,titulo;
+		if($i("i3GEOF.graficoTema")){
+			i3GEOF.graficoTema.inicia("i3GEOF.graficoTema_corpo");
+			return;
+		}
 		//cria a janela flutuante
-		titulo = "Graficos <a class=ajuda_usuario target=_blank href='" + i3GEO.configura.locaplic + "/ajuda_usuario.php?idcategoria=8&idajuda=40' >&nbsp;&nbsp;&nbsp;</a>";
+		titulo = "<div style='z-index:1;position:absolute' id='i3GEOFgraficotemaComboCabeca' >------</div>&nbsp;&nbsp;&nbsp;Graficos <a class=ajuda_usuario target=_blank href='" + i3GEO.configura.locaplic + "/ajuda_usuario.php?idcategoria=8&idajuda=40' >&nbsp;&nbsp;&nbsp;</a>";
 		janela = i3GEO.janela.cria(
 			"400px",
 			"320px",
@@ -165,6 +174,11 @@ i3GEOF.graficoTema = {
 		i3GEOF.graficoTema.aguarde = $i("i3GEOF.graficoTema_imagemCabecalho").style;
 		$i("i3GEOF.graficoTema_corpo").style.backgroundColor = "white";
 		i3GEOF.graficoTema.inicia(divid);
+		temp = function(){
+			if(i3GEO.eventos.ATUALIZAARVORECAMADAS.toString().search('i3GEO.janela.comboCabecalhoTemas("i3GEOFgraficotemaComboCabeca","i3GEOFgraficotemaComboCabecaSel","tabela","ligadosComTabela")') > 0)
+			{i3GEO.eventos.ATUALIZAARVORECAMADAS.remove('i3GEO.janela.comboCabecalhoTemas("i3GEOFgraficotemaComboCabeca","i3GEOFgraficotemaComboCabecaSel","tabela","ligadosComTabela")');}			
+		};
+		YAHOO.util.Event.addListener(janela[0].close, "click", temp);
 	},
 	/*
 	Function: montaListaItens

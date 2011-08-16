@@ -512,20 +512,22 @@ i3GEO.eventos = {
 		if (g_tipoacao !== "capturaponto"){return;}
 		else{
 			try{
-				x = objposicaocursor.dmsx.split(" ");
-				y = objposicaocursor.dmsy.split(" ");
-				if (doc.getElementById(ixg))
-				{doc.getElementById(ixg).value = x[0];}
-				if (doc.getElementById(ixm))
-				{doc.getElementById(ixm).value = x[1];}
-				if (doc.getElementById(ixs))
-				{doc.getElementById(ixs).value = x[2];}
-				if (doc.getElementById(iyg))
-				{doc.getElementById(iyg).value = y[0];}
-				if (doc.getElementById(iym))
-				{doc.getElementById(iym).value = y[1];}
-				if (doc.getElementById(iys))
-				{doc.getElementById(iys).value = y[2];}
+				if(doc){
+					x = objposicaocursor.dmsx.split(" ");
+					y = objposicaocursor.dmsy.split(" ");
+					if (doc.getElementById(ixg))
+					{doc.getElementById(ixg).value = x[0];}
+					if (doc.getElementById(ixm))
+					{doc.getElementById(ixm).value = x[1];}
+					if (doc.getElementById(ixs))
+					{doc.getElementById(ixs).value = x[2];}
+					if (doc.getElementById(iyg))
+					{doc.getElementById(iyg).value = y[0];}
+					if (doc.getElementById(iym))
+					{doc.getElementById(iym).value = y[1];}
+					if (doc.getElementById(iys))
+					{doc.getElementById(iys).value = y[2];}
+				}
 			}
 			catch(m){
 				if(typeof(console) !== 'undefined'){console.error(m);}

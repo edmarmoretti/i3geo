@@ -892,7 +892,7 @@ lista - lista de item e cores de cada parte do grafico
 		$novolayer = ms_newLayerObj($this->mapa, $this->layer);
 		$nomer = nomeRandomico();
 		$novolayer->set("name",$nomer);
-		//$novolayer->set("group",$nomer);
+		$novolayer->set("group","");
 		$novolayer->set("type",MS_LAYER_CHART);
 		$novolayer->setprocessing("CHART_TYPE=$tipo");
 		$novolayer->setprocessing("CHART_SIZE=$tamanho");

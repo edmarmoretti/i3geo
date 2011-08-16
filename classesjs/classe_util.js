@@ -1491,7 +1491,7 @@ i3GEO.util = {
 		{nome = "";}
 		if (arguments.length < 5)
 		{multiplo = false;}
-		var monta, lista, temp;
+		var monta, lista, temp, temp1, temp2;
 		monta = function(retorno){
 			var i,comboTemas,temp,n,nome;
 			if (retorno !== undefined)
@@ -1542,7 +1542,9 @@ i3GEO.util = {
 		if(tipoCombo === "ligadosComTabela"){
 			if(i3GEO.arvoreDeCamadas.CAMADAS !== ""){
 				temp = i3GEO.arvoreDeCamadas.filtraCamadas("status",2,"igual",i3GEO.arvoreDeCamadas.CAMADAS);
-				monta(i3GEO.arvoreDeCamadas.filtraCamadas("type",3,"menor",temp));				
+				temp1 = i3GEO.arvoreDeCamadas.filtraCamadas("type",3,"menor",temp);
+				temp2 = i3GEO.arvoreDeCamadas.filtraCamadas("type",8,"igual",temp);
+				monta(temp1.concat(temp2));				
 			}
 			else
 			{i3GEO.php.listaTemas(monta,"ligados",i3GEO.configura.locaplic,i3GEO.configura.sid);}
