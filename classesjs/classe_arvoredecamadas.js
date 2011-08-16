@@ -1471,7 +1471,7 @@ i3GEO.arvoreDeCamadas = {
 				return camadas[i];
 			}
 		}	
-		return false;
+		return "";
 	},
 	/*
 	Function: filtraCamadas
