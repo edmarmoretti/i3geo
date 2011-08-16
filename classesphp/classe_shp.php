@@ -60,6 +60,13 @@ class SHP
 	Nome do layer
 	*/
 	protected $nome;
+	/*
+	Variavel: $dbaseExiste
+	
+	Indica se a biblioteca dbase está carregada
+	*/
+	protected $dbaseExiste;
+	
 /*
 function: __construct
 
@@ -75,7 +82,11 @@ $ext - extensao geográfica que será aplicada ao mapa
 */
 	function __construct($map_file,$tema="",$locaplic="",$ext="")
 	{
-  		//error_reporting(E_ALL);
+		//error_reporting(E_ALL);
+		$this->dbaseExiste = false;
+		if(function_exists("dbase_create"))
+		{$this->dbaseExiste = true;}
+		
   		$this->locaplic = $locaplic;
   		$this->mapa = ms_newMapObj($map_file);
   		$this->arquivo = $map_file;
@@ -119,7 +130,7 @@ Nome do tema criado.
 		$novonomelayer = nomeRandomico();
 		$nomeshp = $diretorio."/".$novonomelayer;
 		$def[] = array("ID","C","50");
-		if(!function_exists("dbase_create")){
+		if($this->dbaseExiste == false){
 			if(file_exists($this->locaplic."/pacotes/phpxbase/api_conversion.php"))
 			{include_once($this->locaplic."/pacotes/phpxbase/api_conversion.php");}
 			else	
@@ -168,17 +179,24 @@ $projecao - código epsg da projeção das coordenadas
 	function insereSHP($xy,$projecao,$item="",$valor="")
 	{
 		if(!$this->layer){return "erro";}
-		if(file_exists($this->locaplic."/pacotes/phpxbase/api_conversion.php"))
-		include_once($this->locaplic."/pacotes/phpxbase/api_conversion.php");
-		else	
-		include_once "../pacotes/phpxbase/api_conversion.php";
+		if($this->dbaseExiste == false){
+			if(file_exists($this->locaplic."/pacotes/phpxbase/api_conversion.php"))
+			include_once($this->locaplic."/pacotes/phpxbase/api_conversion.php");
+			else	
+			include_once "../pacotes/phpxbase/api_conversion.php";
+		}
 		$xy = explode(" ",$xy);
 		$data = $this->layer->data;
 		$data = explode(".shp",$data);
 		$data = $data[0];
 		$items = pegaItens($this->layer);
 		$dbname = $data.".dbf";
+		
+		if($this->dbaseExiste == false)
 		$db=xbase_open($dbname,2);
+		else
+		$db=dbase_open($dbname,2);
+		
 		for($i=0;$i<(count($xy) / 2);++$i)
 		{
 			$reg = array();
@@ -190,9 +208,15 @@ $projecao - código epsg da projeção das coordenadas
 				else
 				$reg[] = "-";
 			}
+			if($this->dbaseExiste == false)
 			xbase_add_record($db,$reg);
+			else
+			dbase_add_record($db,$reg);
 		}
+		if($this->dbaseExiste == false)
 		xbase_close($db);
+		else
+		dbase_close($db);
 		if (@$shapefileObj = ms_newShapefileObj($data,-2))
 		{
 			for($i=0;$i<(count($xy));$i=$i+2)
@@ -446,7 +470,7 @@ $para - linha|poligono
 			$def[] = array($temp,"C","254");
 		}
 		//para manipular dbf
-		if(!function_exists("dbase_create"))
+		if($this->dbaseExiste == false)
 		{
 			if(file_exists($this->locaplic."/pacotes/phpxbase/api_conversion.php"))
 			{include_once($this->locaplic."/pacotes/phpxbase/api_conversion.php");}
@@ -495,7 +519,7 @@ $para - linha|poligono
 		foreach ($items as $ni)
 		{$reg[] = "-";}
 		$novoshpf->addShape($shape);
-		if(!function_exists("dbase_create"))
+		if($this->dbaseExiste == false)
 		{
 			xbase_add_record($db,$reg);
 			xbase_close($db);

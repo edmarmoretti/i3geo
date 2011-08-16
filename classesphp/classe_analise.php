@@ -73,6 +73,12 @@ class Analise
 	Nome do arquivo de seleção (.qy)
 	*/
 	public $qyfile;
+	/*
+	Variavel: $dbaseExiste
+	
+	Indica se a biblioteca dbase está carregada
+	*/
+	protected $dbaseExiste;
 /*
 Function: __construct
 
@@ -94,6 +100,9 @@ $ext - Extensão geográfica do mapa
   		include_once($locaplic."/funcoes_gerais.php");
   		else
   		include_once("funcoes_gerais.php");
+		$this->dbaseExiste = false;
+		if(function_exists("dbase_create"))
+		{$this->dbaseExiste = true;}		
   		$this->locaplic = $locaplic;
   		$this->mapa = ms_newMapObj($map_file);
   		$this->arquivo = $map_file;
@@ -710,10 +719,12 @@ $locaplic - diretório da aplicação i3geo
 	{
 		if (file_exists($nomearq))
 		{
-  			if(file_exists($this->locaplic."/pacotes/phpxbase/api_conversion.php"))
-  			include_once($this->locaplic."/pacotes/phpxbase/api_conversion.php");
-  			else	
-			include_once "../pacotes/phpxbase/api_conversion.php";
+  			if($this->dbaseExiste == false){
+				if(file_exists($this->locaplic."/pacotes/phpxbase/api_conversion.php"))
+				include_once($this->locaplic."/pacotes/phpxbase/api_conversion.php");
+				else	
+				include_once "../pacotes/phpxbase/api_conversion.php";
+			}
 			//define o nome do novo shapefile que será criado
 			$nomefinal = nomeRandomico();
 			$nomeshp = $this->diretorio."/".$nomefinal;
@@ -726,7 +737,7 @@ $locaplic - diretório da aplicação i3geo
 			$def[] = array("y2","N","12","5");
 			$def[] = array("ind1","N","5","0");
 			$def[] = array("ind2","N","5","0");
-			if(!function_exists(dbase_create))
+			if($this->dbaseExiste == false)
 			{$db = xbase_create($nomeshp.".dbf", $def);}
 			else
 			{$db = dbase_create($nomeshp.".dbf", $def);}				
@@ -759,7 +770,7 @@ $locaplic - diretório da aplicação i3geo
 					$ShapeObj->add($linha);	
 					$novoshpf->addShape($ShapeObj);
 					$registro = array($i1,$i2,$i3,$i4,$i5,$i6);
-					if(!function_exists(dbase_create))
+					if($this->dbaseExiste == false)
 					xbase_add_record($db,$registro);
 					else
 					dbase_add_record($db,$registro);
@@ -768,7 +779,7 @@ $locaplic - diretório da aplicação i3geo
 				}
 			}
 			$novoshpf->free();
-			if(!function_exists(dbase_create))
+			if($this->dbaseExiste == false)
 			xbase_close($db);
 			else
 			dbase_close($db);
@@ -805,10 +816,12 @@ $locaplic - diretório da aplicação i3geo
 	{
 		if (file_exists($nomearq))
 		{
-  			if(file_exists($this->locaplic."/pacotes/phpxbase/api_conversion.php"))
-  			include_once($this->locaplic."/pacotes/phpxbase/api_conversion.php");
-  			else	
-			include_once "../pacotes/phpxbase/api_conversion.php";
+  			if($this->dbaseExiste == false){
+				if(file_exists($this->locaplic."/pacotes/phpxbase/api_conversion.php"))
+				include_once($this->locaplic."/pacotes/phpxbase/api_conversion.php");
+				else	
+				include_once "../pacotes/phpxbase/api_conversion.php";
+			}
 			//
 			//define os nomes dos novos shapefiles que serão criados
 			//
@@ -830,7 +843,7 @@ $locaplic - diretório da aplicação i3geo
 			$def[] = array("ind2","N","5","0");
 			$def[] = array("b1","C","6");
 			$def[] = array("b2","C","6");
-			if(!function_exists(dbase_create))
+			if($this->dbaseExiste == false)
 			{$dbLinhas = xbase_create($nomeshpLinhas.".dbf", $def);}
 			else
 			{$dbLinhas = dbase_create($nomeshpLinhas.".dbf", $def);}				
@@ -840,7 +853,7 @@ $locaplic - diretório da aplicação i3geo
 			//
 			$def = array();
 			$def[] = array("area","N","12","5");
-			if(!function_exists(dbase_create))
+			if($this->dbaseExiste == false)
 			{$dbPoligonos = xbase_create($nomeshpPoligonos.".dbf", $def);}
 			else
 			{$dbPoligonos = dbase_create($nomeshpPoligonos.".dbf", $def);}				
@@ -891,7 +904,7 @@ $locaplic - diretório da aplicação i3geo
 					$ShapeObj->add($linha);
 					$novoshpLinhas->addShape($ShapeObj);
 					$registro = array($i1,$i2,$i3,$i4,$i5,$i6,$i[7],$i[8]);
-					if(!function_exists(dbase_create))
+					if($this->dbaseExiste == false)
 					xbase_add_record($dbLinhas,$registro);
 					else
 					dbase_add_record($dbLinhas,$registro);
@@ -909,14 +922,14 @@ $locaplic - diretório da aplicação i3geo
 				$ns = $ShapeObjp->convexhull();
 				$novoshpPoligonos->addShape($ns);
 				$registro = array($ns->getArea());
-				if(!function_exists(dbase_create))
+				if($this->dbaseExiste == false)
 				xbase_add_record($dbPoligonos,$registro);
 				else
 				dbase_add_record($dbPoligonos,$registro);
 				$ShapeObjp->free();	
 			}
 			$novoshpPoligonos->free();
-			if(!function_exists(dbase_create))
+			if($this->dbaseExiste == false)
 			xbase_close($dbPoligonos);
 			else
 			dbase_close($dbPoligonos);
@@ -945,7 +958,7 @@ $locaplic - diretório da aplicação i3geo
 				$ShapeObj->add($linha);
 				$novoshpLinhas->addShape($ShapeObj->convexhull());
 				$registro = array(0,0,0,0,0,0,0,0);
-				if(!function_exists(dbase_create))
+				if($this->dbaseExiste == false)
 				xbase_add_record($dbLinhas,$registro);
 				else
 				dbase_add_record($dbLinhas,$registro);
@@ -953,7 +966,7 @@ $locaplic - diretório da aplicação i3geo
 				$ShapeObj->free();				
 			}
 			$novoshpLinhas->free();
-			if(!function_exists(dbase_create))
+			if($this->dbaseExiste == false)
 			xbase_close($dbLinhas);
 			else
 			dbase_close($dbLinhas);
@@ -988,10 +1001,12 @@ $locaplic - Localização do I3geo.
 	function pontoEmPoligono($temaPt,$temasPo,$locaplic)
 	{
 		set_time_limit(3000);
-		if(file_exists($this->locaplic."/pacotes/phpxbase/api_conversion.php"))
-		{include_once($this->locaplic."/pacotes/phpxbase/api_conversion.php");}
-		else	
-		{include_once "../pacotes/phpxbase/api_conversion.php";}
+		if($this->dbaseExiste == false){
+			if(file_exists($this->locaplic."/pacotes/phpxbase/api_conversion.php"))
+			{include_once($this->locaplic."/pacotes/phpxbase/api_conversion.php");}
+			else	
+			{include_once "../pacotes/phpxbase/api_conversion.php";}
+		}
 		$layerPt = $this->mapa->getlayerbyname($temaPt);
 		$layerPt->set("template","none.htm");
 		$layerPt->set("tolerance",0);
@@ -1050,13 +1065,16 @@ $locaplic - Localização do I3geo.
 				$conta = $conta + 1;
 			}
 		}
-		if(!function_exists("dbase_create"))
+		if($this->dbaseExiste == false)
 		{$db = xbase_create($nomeshp.".dbf", $def);xbase_close($db);}
 		else
 		{$db = dbase_create($nomeshp.".dbf", $def);dbase_close($db);}
 		//acrescenta os pontos no novo shapefile
 		$dbname = $nomeshp.".dbf";
+		if($this->dbaseExiste == false)
 		$db=xbase_open($dbname,2);
+		else
+		$db=dbase_open($dbname,2);
 		// cria o shapefile
 		$novoshpf = ms_newShapefileObj($nomeshp, MS_SHP_POINT);
 		foreach($spts as $spt)
@@ -1095,11 +1113,17 @@ $locaplic - Localização do I3geo.
 				}
 				$layer->close();
 			}
+			if($this->dbaseExiste == false)
 			xbase_add_record($db,$reg);
+			else
+			dbase_add_record($db,$reg);
 			$reg = array();
 		}
 		$novoshpf->free();
+		if($this->dbaseExiste == false)
 		xbase_close($db);
+		else
+		dbase_close($db);
 		
 		$novolayer = ms_newLayerObj($this->mapa, $layerPt);
 		$novolayer->set("data",$nomeshp.".shp");
@@ -1146,10 +1170,12 @@ function distanciaptpt($temaorigem,$temadestino,$temaoverlay,$locaplic,$itemorig
 {
 	set_time_limit(180);
 	//para manipular dbf
-	if(file_exists($this->locaplic."/pacotes/phpxbase/api_conversion.php"))
-	include_once($this->locaplic."/pacotes/phpxbase/api_conversion.php");
-	else	
-	include_once "../pacotes/phpxbase/api_conversion.php";
+	if($this->dbaseExiste == false){
+		if(file_exists($this->locaplic."/pacotes/phpxbase/api_conversion.php"))
+		include_once($this->locaplic."/pacotes/phpxbase/api_conversion.php");
+		else	
+		include_once "../pacotes/phpxbase/api_conversion.php";
+	}
 	//define o nome do novo shapefile que será criado
 	$nomefinal = nomeRandomico();
 	$nomeshp = $this->diretorio."/".$nomefinal;
@@ -1204,13 +1230,16 @@ function distanciaptpt($temaorigem,$temadestino,$temaoverlay,$locaplic,$itemorig
 	$def[] = array("dist_m","N","10","2");
 	$def[] = array("origem","C","255");
 	$def[] = array("destino","C","255");
-	if(!function_exists(dbase_create))
+	if($this->dbaseExiste == false)
 	{$db = xbase_create($nomeshp.".dbf", $def);xbase_close($db);}
 	else
 	{$db = dbase_create($nomeshp.".dbf", $def);dbase_close($db);}
 	//acrescenta os pontos no novo shapefile
 	$dbname = $nomeshp.".dbf";
+	if($this->dbaseExiste == false)
 	$db=xbase_open($dbname,2);
+	else
+	$db=dbase_open($dbname,2);
 	foreach ($shapesorigem as $sorigem)
 	{
 		$valororigem = $sorigem->values[$itemorigem];
@@ -1226,13 +1255,19 @@ function distanciaptpt($temaorigem,$temadestino,$temaoverlay,$locaplic,$itemorig
 			$ShapeObj->project($projInObj, $projOutObj);
 			$distancia = $ShapeObj->getLength();
 			$registro = array($distancia,$valororigem,$valordestino);
+			if($this->dbaseExiste == false)
 			xbase_add_record($db,$registro);
+			else
+			dbase_add_record($db,$registro);
 			$linha->free();
 			$ShapeObj->free();
 		}
 	}
 	$novoshpf->free();
+	if($this->dbaseExiste == false)
 	xbase_close($db);
+	else
+	dbase_close($db);
 	//adiciona no mapa atual o novo tema
 	$novolayer = criaLayer($this->mapa,MS_LAYER_LINE,MS_DEFAULT,("Distancias (".$nomefinal.")"),$metaClasse="SIM");
 	$novolayer->set("data",$nomeshp.".shp");
@@ -1276,10 +1311,12 @@ nome do layer criado com o buffer.
 		set_time_limit(180);
 		//error_reporting(E_ALL);
 		//para manipular dbf
-		if(file_exists($this->locaplic."/pacotes/phpxbase/api_conversion.php"))
-		include_once($this->locaplic."/pacotes/phpxbase/api_conversion.php");
-		else	
-		include_once "../pacotes/phpxbase/api_conversion.php";
+		if($this->dbaseExiste == false){
+			if(file_exists($this->locaplic."/pacotes/phpxbase/api_conversion.php"))
+			include_once($this->locaplic."/pacotes/phpxbase/api_conversion.php");
+			else	
+			include_once "../pacotes/phpxbase/api_conversion.php";
+		}
 		$nomebuffer = nomeRandomico();
 		$nomeshp = $this->diretorio."/".$nomebuffer;
 		$listaShapes = array();
@@ -1342,24 +1379,33 @@ nome do layer criado com o buffer.
 		// cria o dbf
 		$def = $this->criaDefDb($items);
 		$def[] = array("i3geo","C","254");
-		if(!function_exists(dbase_create))
+		if($this->dbaseExiste == false)
 		{$db = xbase_create($nomeshp.".dbf", $def);xbase_close($db);}
 		else
 		{$db = dbase_create($nomeshp.".dbf", $def);dbase_close($db);}
 		//acrescenta os pontos no novo shapefile
 		$dbname = $nomeshp.".dbf";
+		if($this->dbaseExiste == false)
 		$db=xbase_open($dbname,2);
+		else
+		$db=dbase_open($dbname,2);
 		for($i = 0;$i < count($buffers);++$i)
 		{
 			foreach ($items as $ni)
 			{$reg[] = $this->truncaS($shapes[$i]->values[$ni]);}
 			$reg[] = $i;
 			$novoshpf->addShape($buffers[$i]);
+			if($this->dbaseExiste == false)
 			xbase_add_record($db,$reg);
+			else
+			dbase_add_record($db,$reg);
 			$reg = array();
 		}
 		$novoshpf->free();
+		if($this->dbaseExiste == false)
 		xbase_close($db);
+		else
+		dbase_close($db);
 		//adiciona no mapa atual o novo tema
 		$novolayer = criaLayer($this->mapa,MS_LAYER_POLYGON,MS_DEFAULT,("Buffer (".$nomebuffer.")"),$metaClasse="SIM");
 		$novolayer->set("data",$nomeshp.".shp");
@@ -1391,10 +1437,12 @@ $item {string} - (opcional) Item q será utilizado para ponderar os valores.
 		if(!$this->layer){return "erro";}
 		set_time_limit(180);
 		//para manipular dbf
-		if(file_exists($this->locaplic."/pacotes/phpxbase/api_conversion.php"))
-		include_once($this->locaplic."/pacotes/phpxbase/api_conversion.php");
-		else	
-		include_once "../pacotes/phpxbase/api_conversion.php";
+		if($this->dbaseExiste == false){
+			if(file_exists($this->locaplic."/pacotes/phpxbase/api_conversion.php"))
+			include_once($this->locaplic."/pacotes/phpxbase/api_conversion.php");
+			else	
+			include_once "../pacotes/phpxbase/api_conversion.php";
+		}
 		error_reporting(E_ALL);
 		$nomeCentro = nomeRandomico();
 		$nomeshp = $this->diretorio."/".$nomeCentro;
@@ -1427,13 +1475,16 @@ $item {string} - (opcional) Item q será utilizado para ponderar os valores.
 		$novoshpf = ms_newShapefileObj($nomeshp, MS_SHP_POINT);
 		// cria o dbf
 		$def[] = array("id","C","254");
-		if(!function_exists("dbase_create"))
+		if($this->dbaseExiste == false)
 		{$db = xbase_create($nomeshp.".dbf", $def);xbase_close($db);}
 		else
 		{$db = dbase_create($nomeshp.".dbf", $def);dbase_close($db);}
 		//acrescenta os pontos no novo shapefile
 		$dbname = $nomeshp.".dbf";
+		if($this->dbaseExiste == false)
 		$db=xbase_open($dbname,2);
+		else
+		$db=dbase_open($dbname,2);
 		$reg[] = "";
 		
 		$shp = ms_newShapeObj(MS_SHP_POINT);
@@ -1441,10 +1492,15 @@ $item {string} - (opcional) Item q será utilizado para ponderar os valores.
 		$linha->addXY(($xs / $res_count),($ys / $res_count));
 		$shp->add($linha);
 		$novoshpf->addShape($shp);
-		
+		if($this->dbaseExiste == false)
 		xbase_add_record($db,$reg);
+		else
+		dbase_add_record($db,$reg);
 		$novoshpf->free();
+		if($this->dbaseExiste == false)
 		xbase_close($db);
+		else
+		dbase_close($db);
 		//adiciona no mapa atual o novo tema
 		$novolayer = criaLayer($this->mapa,MS_LAYER_POINT,MS_DEFAULT,("Centróide (".$nomeCentro.")"),$metaClasse="SIM");
 		$novolayer->set("data",$nomeshp.".shp");
@@ -1475,10 +1531,12 @@ $locaplic - Localização do I3geo.
 		if(!$this->layer){return "erro";}
 		set_time_limit(180);
 		//para manipular dbf
-		if(file_exists($this->locaplic."/pacotes/phpxbase/api_conversion.php"))
-		include_once($this->locaplic."/pacotes/phpxbase/api_conversion.php");
-		else	
-		include_once "../pacotes/phpxbase/api_conversion.php";
+		if($this->dbaseExiste == false){
+			if(file_exists($this->locaplic."/pacotes/phpxbase/api_conversion.php"))
+			include_once($this->locaplic."/pacotes/phpxbase/api_conversion.php");
+			else	
+			include_once "../pacotes/phpxbase/api_conversion.php";
+		}
 		$nomeCentroides = nomeRandomico();
 		$nomeshp = $this->diretorio."/".$nomeCentroides;
 		//pega os shapes selecionados
@@ -1510,23 +1568,32 @@ $locaplic - Localização do I3geo.
 		$items = pegaItens($this->layer);
 		// cria o dbf
 		$def = $this->criaDefDb($items);
-		if(!function_exists(dbase_create))
+		if($this->dbaseExiste == false)
 		{$db = xbase_create($nomeshp.".dbf", $def);xbase_close($db);}
 		else
 		{$db = dbase_create($nomeshp.".dbf", $def);dbase_close($db);}
 		//acrescenta os pontos no novo shapefile
 		$dbname = $nomeshp.".dbf";
+		if($this->dbaseExiste == false)
 		$db=xbase_open($dbname,2);
+		else
+		$db=dbase_open($dbname,2);
 		for($i = 0;$i < count($centroides);++$i)
 		{
 			foreach ($items as $ni)
 			{$reg[] = $this->truncaS($shapes[$i]->values[$ni]);}
 			$novoshpf->addShape($centroides[$i]);
+			if($this->dbaseExiste == false)
 			xbase_add_record($db,$reg);
+			else
+			dbase_add_record($db,$reg);
 			$reg = array();
 		}
 		$novoshpf->free();
+		if($this->dbaseExiste == false)
 		xbase_close($db);
+		else
+		dbase_close($db);
 		//adiciona no mapa atual o novo tema
 		$novolayer = criaLayer($this->mapa,MS_LAYER_POINT,MS_DEFAULT,("Centróide (".$nomeCentroides.")"),$metaClasse="SIM");
 		$novolayer->set("data",$nomeshp.".shp");
@@ -1564,10 +1631,12 @@ $npty - Número de pontos em Y (opcional)
 	{
 		set_time_limit(180);
 		//para manipular dbf
-		if(file_exists($this->locaplic."/pacotes/phpxbase/api_conversion.php"))
-		include_once($this->locaplic."/pacotes/phpxbase/api_conversion.php");
-		else	
-		include_once "../pacotes/phpxbase/api_conversion.php";
+		if($this->dbaseExiste == false){
+			if(file_exists($this->locaplic."/pacotes/phpxbase/api_conversion.php"))
+			include_once($this->locaplic."/pacotes/phpxbase/api_conversion.php");
+			else	
+			include_once "../pacotes/phpxbase/api_conversion.php";
+		}
 		$nomegrade = nomeRandomico();
 		$nomeshp = $this->diretorio."/".$nomegrade;
 		$this->mapa->preparequery();
@@ -1588,13 +1657,16 @@ $npty - Número de pontos em Y (opcional)
 		$def = array();
 		$def[] = array("x","C","20");
 		$def[] = array("y","C","20");
-		if(!function_exists(dbase_create))
+		if($this->dbaseExiste == false)
 		{$db = xbase_create($nomeshp.".dbf", $def);xbase_close($db);}
 		else
 		{$db = dbase_create($nomeshp.".dbf", $def);dbase_close($db);}
 		//acrescenta os pontos no novo shapefile
 		$dbname = $nomeshp.".dbf";
+		if($this->dbaseExiste == false)
 		$db=xbase_open($dbname,2);
+		else
+		$db=dbase_open($dbname,2);
 		$reg = array();
 		$w = $this->mapa->width;
 		$h = $this->mapa->height;
@@ -1614,7 +1686,10 @@ $npty - Número de pontos em Y (opcional)
 					$novoshpf->addpoint($poPoint);
 					$reg[] = $x;
 					$reg[] = $y;
+					if($this->dbaseExiste == false)
 					xbase_add_record($db,$reg);
+					else
+					dbase_add_record($db,$reg);
 					$reg = array();
 				}
 				$valorlinha = $valorlinha - $ydd;
@@ -1636,14 +1711,20 @@ $npty - Número de pontos em Y (opcional)
 					$novoshpf->addpoint($poPoint);
 					$reg[] = $x;
 					$reg[] = $y;
+					if($this->dbaseExiste == false)
 					xbase_add_record($db,$reg);
+					else
+					dbase_add_record($db,$reg);
 					$reg = array();
 				}
 				$valorcoluna = $valorcoluna + $xdd;
 			}
 		}
 		$novoshpf->free();
+		if($this->dbaseExiste == false)
 		xbase_close($db);
+		else
+		dbase_close($db);
 		//adiciona o novo tema no mapa
 		$novolayer = criaLayer($this->mapa,MS_LAYER_POINT,MS_DEFAULT,("Grade (".$nomegrade.")"),$metaClasse="SIM");
 		$novolayer->set("data",$nomeshp.".shp");
@@ -1680,10 +1761,12 @@ $npty - Número de pontos em Y (opcional)
 	{
 		set_time_limit(180);
 		//para manipular dbf
-		if(file_exists($this->locaplic."/pacotes/phpxbase/api_conversion.php"))
-		include_once($this->locaplic."/pacotes/phpxbase/api_conversion.php");
-		else	
-		include_once "../pacotes/phpxbase/api_conversion.php";
+		if($this->dbaseExiste == false){
+			if(file_exists($this->locaplic."/pacotes/phpxbase/api_conversion.php"))
+			include_once($this->locaplic."/pacotes/phpxbase/api_conversion.php");
+			else	
+			include_once "../pacotes/phpxbase/api_conversion.php";
+		}
 		$nomegrade = nomeRandomico();
 		$nomeshp = $this->diretorio."/".$nomegrade;
 		//pega a extensão geográfica do mapa
@@ -1704,13 +1787,16 @@ $npty - Número de pontos em Y (opcional)
 		$novoshpf = ms_newShapefileObj($nomeshp, MS_SHP_POLYGON);
 		$def = array();
 		$def[] = array("id","C","20");
-		if(!function_exists(dbase_create))
+		if($this->dbaseExiste == false)
 		{$db = xbase_create($nomeshp.".dbf", $def);xbase_close($db);}
 		else
 		{$db = dbase_create($nomeshp.".dbf", $def);dbase_close($db);}
 		//acrescenta os pontos no novo shapefile
 		$dbname = $nomeshp.".dbf";
+		if($this->dbaseExiste == false)
 		$db=xbase_open($dbname,2);
+		else
+		$db=dbase_open($dbname,2);
 		$reg = array();
 		$w = $this->mapa->width;
 		$h = $this->mapa->height;
@@ -1743,7 +1829,10 @@ $npty - Número de pontos em Y (opcional)
 					$shapen->add($linhas);
 					$novoshpf->addShape($shapen);
 					$reg[] = $linha."-".$coluna;
+					if($this->dbaseExiste == false)
 					xbase_add_record($db,$reg);
+					else
+					dbase_add_record($db,$reg);
 					$reg = array();
 				}
 				$valorlinha = $valorlinha - $ydd;
@@ -1778,14 +1867,20 @@ $npty - Número de pontos em Y (opcional)
 					$shapen->add($linhas);
 					$novoshpf->addShape($shapen);
 					$reg[] = $linha."-".$coluna;
+					if($this->dbaseExiste == false)
 					xbase_add_record($db,$reg);
+					else
+					dbase_add_record($db,$reg);
 					$reg = array();
 				}
 			$valorcoluna = $valorcoluna + $xdd;
 			}
 		}
 		$novoshpf->free();
+		if($this->dbaseExiste == false)
 		xbase_close($db);
+		else
+		dbase_close($db);
 		//adiciona o novo tema no mapa
 		$novolayer = criaLayer($this->mapa,MS_LAYER_POLYGON,MS_DEFAULT,("Grade (".$nomegrade.")"),$metaClasse="SIM");
 		$novolayer->set("data",$nomeshp.".shp");
@@ -1822,10 +1917,12 @@ $npty - Número de pontos em Y (opcional)
 	{
 		set_time_limit(180);
 		//para manipular dbf
-		if(file_exists($this->locaplic."/pacotes/phpxbase/api_conversion.php"))
-		include_once($this->locaplic."/pacotes/phpxbase/api_conversion.php");
-		else	
-		include_once "../pacotes/phpxbase/api_conversion.php";
+		if($this->dbaseExiste == false){
+			if(file_exists($this->locaplic."/pacotes/phpxbase/api_conversion.php"))
+			include_once($this->locaplic."/pacotes/phpxbase/api_conversion.php");
+			else	
+			include_once "../pacotes/phpxbase/api_conversion.php";
+		}
 		$nomegrade = nomeRandomico();
 		$nomeshp = $this->diretorio."/".$nomegrade;
 		//pega a extensão geográfica do mapa
@@ -1846,13 +1943,16 @@ $npty - Número de pontos em Y (opcional)
 		$novoshpf = ms_newShapefileObj($nomeshp, MS_SHP_POLYGON);
 		$def = array();
 		$def[] = array("id","C","20");
-		if(!function_exists(dbase_create))
+		if($this->dbaseExiste == false)
 		{$db = xbase_create($nomeshp.".dbf", $def);xbase_close($db);}
 		else
 		{$db = dbase_create($nomeshp.".dbf", $def);dbase_close($db);}
 		//acrescenta os pontos no novo shapefile
 		$dbname = $nomeshp.".dbf";
+		if($this->dbaseExiste == false)
 		$db=xbase_open($dbname,2);
+		else
+		$db=dbase_open($dbname,2);
 		$reg = array();
 		$w = $this->mapa->width;
 		$h = $this->mapa->height;
@@ -1885,7 +1985,10 @@ $npty - Número de pontos em Y (opcional)
 					$shapen->add($linhas);
 					$novoshpf->addShape($shapen);
 					$reg[] = $linha."-".$coluna;
+					if($this->dbaseExiste == false)
 					xbase_add_record($db,$reg);
+					else
+					dbase_add_record($db,$reg);
 					$reg = array();
 				}
 				$valorlinha = $valorlinha - $ydd;
@@ -1927,7 +2030,10 @@ $npty - Número de pontos em Y (opcional)
 					$shapen->add($linhas);
 					$novoshpf->addShape($shapen);
 					$reg[] = $linha."-".$coluna;
+					if($this->dbaseExiste == false)
 					xbase_add_record($db,$reg);
+					else
+					dbase_add_record($db,$reg);
 					$reg = array();
 					if ($par)
 					{$x=$x+($xdd/2);$par=false;}
@@ -1938,7 +2044,10 @@ $npty - Número de pontos em Y (opcional)
 			}
 		}
 		$novoshpf->free();
+		if($this->dbaseExiste == false)
 		xbase_close($db);
+		else
+		dbase_close($db);
 		//adiciona o novo tema no mapa
 		$novolayer = criaLayer($this->mapa,MS_LAYER_POLYGON,MS_DEFAULT,("Grade (".$nomegrade.")"),$metaClasse="SIM");
 		$novolayer->set("data",$nomeshp.".shp");
@@ -1967,10 +2076,12 @@ $locaplic - Localização do I3geo
 	{
 		set_time_limit(180);
 		//para manipular dbf
-		if(file_exists($this->locaplic."/pacotes/phpxbase/api_conversion.php"))
-		include_once($this->locaplic."/pacotes/phpxbase/api_conversion.php");
-		else	
-		include_once "../pacotes/phpxbase/api_conversion.php";
+		if($this->dbaseExiste == false){
+			if(file_exists($this->locaplic."/pacotes/phpxbase/api_conversion.php"))
+			include_once($this->locaplic."/pacotes/phpxbase/api_conversion.php");
+			else	
+			include_once "../pacotes/phpxbase/api_conversion.php";
+		}
 		$layerPt = $this->mapa->getlayerbyname($temaPt);
 		$layerPt->set("template","none.htm");
 		$layerPt->set("tolerance",0);
@@ -1986,7 +2097,7 @@ $locaplic - Localização do I3geo
 		foreach ($itenspo as $ni)
 		{$def[] = array(substr($ni, 0, 10),"C","254");}
 		$def[] = array("npontos","N","10","0");
-		if(!function_exists(dbase_create))
+		if($this->dbaseExiste == false)
 		{$db = xbase_create($nomeshp.".dbf", $def);xbase_close($db);}
 		else
 		{$db = dbase_create($nomeshp.".dbf", $def);dbase_close($db);}
@@ -1998,7 +2109,10 @@ $locaplic - Localização do I3geo
 
 		//acrescenta os pontos no novo shapefile
 		$dbname = $nomeshp.".dbf";
+		if($this->dbaseExiste == false)
 		$db=xbase_open($dbname,2);
+		else
+		$db=dbase_open($dbname,2);
 		$sopen = $layerPo->open();
 		if($sopen == MS_FAILURE){return "erro";}
 				
@@ -2017,11 +2131,17 @@ $locaplic - Localização do I3geo
 			//echo $layerPt->getNumresults();
 			$novoreg[] = $layerPt->getNumresults();
 			$novoshpf->addShape($shape);
+			if($this->dbaseExiste == false)
 			xbase_add_record($db,$novoreg);
+			else
+			dbase_add_record($db,$novoreg);
 		}
 		$fechou = $layerPo->close();
 		$novoshpf->free();
+		if($this->dbaseExiste == false)
 		xbase_close($db);
+		else
+		dbase_close($db);
 		//adiciona o novo tema no mapa
 		$novolayer = criaLayer($this->mapa,MS_LAYER_POLYGON,MS_DEFAULT,"N pontos",$metaClasse="SIM");
 		$novolayer->set("data",$nomeshp.".shp");
@@ -2045,10 +2165,12 @@ Salva o mapa acrescentando um novo layer com o resultado.
 		set_time_limit(180);
 		//para manipular dbf
 		if(!isset($item)){$item="";}
-		if(file_exists($this->locaplic."/pacotes/phpxbase/api_conversion.php"))
-		include_once($this->locaplic."/pacotes/phpxbase/api_conversion.php");
-		else	
-		include_once "../pacotes/phpxbase/api_conversion.php";
+		if($this->dbaseExiste == false){
+			if(file_exists($this->locaplic."/pacotes/phpxbase/api_conversion.php"))
+			include_once($this->locaplic."/pacotes/phpxbase/api_conversion.php");
+			else	
+			include_once "../pacotes/phpxbase/api_conversion.php";
+		}
 		//define o nome do novo shapefile que será criado
 		carregaquery($this->arquivo,&$this->layer,&$this->mapa);
 		$sopen = $this->layer->open();
@@ -2118,21 +2240,30 @@ Salva o mapa acrescentando um novo layer com o resultado.
 		$def = array();
 		if($item==""){$item="nenhum";}
 		$def[] = array($item,"C","254");
-		if(!function_exists(dbase_create))
+		if($this->dbaseExiste == false)
 		{$db = xbase_create($nomeshp.".dbf", $def);xbase_close($db);}
 		else
 		{$db = dbase_create($nomeshp.".dbf", $def);dbase_close($db);}
 		//acrescenta os pontos no novo shapefile
 		$dbname = $nomeshp.".dbf";
+		if($this->dbaseExiste == false)
 		$db=xbase_open($dbname,2);
+		else
+		$db=dbase_open($dbname,2);
 		$classes = array_keys($dissolve);
 		foreach ($classes as $classe)
 		{
 			$novoshpf->addShape($dissolve[$classe]->convexhull());
+			if($this->dbaseExiste == false)
 			xbase_add_record($db,array($classe));
+			else
+			dbase_add_record($db,array($classe));
 		}
 		$novoshpf->free();
+		if($this->dbaseExiste == false)
 		xbase_close($db);
+		else
+		dbase_close($db);
 		//
 		//adiciona o novo layer no mapa
 		//	
@@ -2164,10 +2295,12 @@ $locaplic - Localização do I3geo
 		set_time_limit(180);
 		//para manipular dbf
 		if(!isset($item)){$item="";}
-		if(file_exists($this->locaplic."/pacotes/phpxbase/api_conversion.php"))
-		include_once($this->locaplic."/pacotes/phpxbase/api_conversion.php");
-		else	
-		include_once "../pacotes/phpxbase/api_conversion.php";
+		if($this->dbaseExiste == false){
+			if(file_exists($this->locaplic."/pacotes/phpxbase/api_conversion.php"))
+			include_once($this->locaplic."/pacotes/phpxbase/api_conversion.php");
+			else	
+			include_once "../pacotes/phpxbase/api_conversion.php";
+		}
 		//define o nome do novo shapefile que será criado
 		carregaquery($this->arquivo,&$this->layer,&$this->mapa);
 		$sopen = $this->layer->open();
@@ -2226,21 +2359,30 @@ $locaplic - Localização do I3geo
 		$def = array();
 		if($item==""){$item="nenhum";}
 		$def[] = array($item,"C","254");
-		if(!function_exists(dbase_create))
+		if($this->dbaseExiste == false)
 		{$db = xbase_create($nomeshp.".dbf", $def);xbase_close($db);}
 		else
 		{$db = dbase_create($nomeshp.".dbf", $def);dbase_close($db);}
 		//acrescenta os pontos no novo shapefile
 		$dbname = $nomeshp.".dbf";
+		if($this->dbaseExiste == false)
 		$db=xbase_open($dbname,2);
+		else
+		$db=dbase_open($dbname,2);
 		$classes = array_keys($dissolve);
 		foreach ($classes as $classe)
 		{
 			$novoshpf->addShape($dissolve[$classe]);
+			if($this->dbaseExiste == false)
 			xbase_add_record($db,array($classe));
+			else
+			dbase_add_record($db,array($classe));
 		}
 		$novoshpf->free();
+		if($this->dbaseExiste == false)
 		xbase_close($db);
+		else
+		dbase_close($db);
 		//
 		//adiciona o novo layer no mapa
 		//	
@@ -2490,33 +2632,44 @@ $tipoLista - tipo de valores que são passados em $lista stringArquivos|arraywkt.
 		if ($tiposhape == 0){$tiposhapefile = MS_SHP_MULTIPOINT;}
 		if ($tiposhape == 1){$tiposhapefile = MS_SHP_ARC;}
 		//cria o shapefile
-		if(file_exists($this->locaplic."/pacotes/phpxbase/api_conversion.php"))
-		include_once($this->locaplic."/pacotes/phpxbase/api_conversion.php");
-		else	
-		include_once "../pacotes/phpxbase/api_conversion.php";
+		if($this->dbaseExiste == false){
+			if(file_exists($this->locaplic."/pacotes/phpxbase/api_conversion.php"))
+			include_once($this->locaplic."/pacotes/phpxbase/api_conversion.php");
+			else	
+			include_once "../pacotes/phpxbase/api_conversion.php";
+		}
 		$diretorio = dirname($this->arquivo);
 		$novonomelayer = nomeRandomico();
 		$nomeshp = $diretorio."/".$novonomelayer;
 		$l = criaLayer($this->mapa,$tiposhape,MS_DEFAULT,"Ins","SIM");
 		$novoshpf = ms_newShapefileObj($nomeshp, $tiposhapefile);
 		$def[] = array("ID","C","250");
-		if(!function_exists(dbase_create))
+		if($this->dbaseExiste == false)
 		{$db = xbase_create($nomeshp.".dbf", $def);xbase_close($db);}
 		else
 		{$db = dbase_create($nomeshp.".dbf", $def);dbase_close($db);}
 		//acrescenta os pontos no novo shapefile
 		$dbname = $nomeshp.".dbf";
+		if($this->dbaseExiste == false)
 		$db=xbase_open($dbname,2);
+		else
+		$db=dbase_open($dbname,2);
 		$conta = 0;
 		foreach ($shapes as $s)
 		{
 			$reg = array();
 			$reg[] = $valoresoriginais[$conta];
+			if($this->dbaseExiste == false)
 			xbase_add_record($db,$reg);
+			else
+			dbase_add_record($db,$reg);
 			$novoshpf->addshape($s);
 			$conta = $conta + 1;
 		}
+		if($this->dbaseExiste == false)
 		xbase_close($db);
+		else
+		dbase_close($db);
 		$novoshpf->free();
 		$l->setmetadata("tema",$novonomelayer." geometria");
 		$l->setmetadata("TEMALOCAL","SIM");
