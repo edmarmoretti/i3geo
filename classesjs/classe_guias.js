@@ -827,7 +827,7 @@ i3GEO.guias = {
 
 			$i("i3GEOguiaMovelMolde").onmouseover = function(){
 				if($i("i3GEOguiaMovelConteudo").style.display === "block")
-				{YAHOO.util.Dom.setStyle("i3GEOguiaMovelMolde", "opacity", 0.8);}
+				{YAHOO.util.Dom.setStyle("i3GEOguiaMovelMolde", "opacity", 0.9);}
 			};
 			$i("i3GEOguiaMovelMolde").onmouseout = function(){
 				YAHOO.util.Dom.setStyle("i3GEOguiaMovelMolde", "opacity", 0.20);

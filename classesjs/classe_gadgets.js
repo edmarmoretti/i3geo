@@ -911,19 +911,19 @@ i3GEO.gadgets = {
 			//marca o tipo de interface em uso
 			//
 			try{
-				if(i3GEO.Interface.ATUAL === "padrao"){
+				if(i3GEO.Interface.ATUAL === "padrao" && $i("omenudataInterface1")){
 					i3GEOoMenuBar.getMenuItem("omenudataInterface1").cfg.setProperty("checked", true);
 				}
-				if(i3GEO.Interface.ATUAL === "openlayers"){
+				if(i3GEO.Interface.ATUAL === "openlayers" && $i("omenudataInterface2")){
 					i3GEOoMenuBar.getMenuItem("omenudataInterface2").cfg.setProperty("checked", true);
 				}
-				if(i3GEO.Interface.ATUAL === "flamingo"){
+				if(i3GEO.Interface.ATUAL === "flamingo" && $i("omenudataInterface3")){
 					i3GEOoMenuBar.getMenuItem("omenudataInterface3").cfg.setProperty("checked", true);
 				}
-				if(i3GEO.Interface.ATUAL === "googlemaps"){
+				if(i3GEO.Interface.ATUAL === "googlemaps" && $i("omenudataInterface4")){
 					i3GEOoMenuBar.getMenuItem("omenudataInterface4").cfg.setProperty("checked", true);
 				}
-				if(i3GEO.Interface.ATUAL === "googleearth"){
+				if(i3GEO.Interface.ATUAL === "googleearth" && $i("omenudataInterface5")){
 					i3GEOoMenuBar.getMenuItem("omenudataInterface5").cfg.setProperty("checked", true);
 				}
 			}catch(e){
