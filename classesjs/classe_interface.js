@@ -205,11 +205,13 @@ i3GEO.Interface = {
 	Por exemplo, na interface OpenLayers, identifica se as camadas estão sendo atualizadas
 
 	STATUS = {
-		atualizando: new Array() //guarda os códigos dos layers que estão sendo redesenhados
+		atualizando: new Array(), //guarda os códigos dos layers que estão sendo redesenhados
+		trocando: false //indica se o mapa está na fase de troca de interface
 	}
 	*/
 	STATUS: {
-		atualizando: []
+		atualizando: [],
+		trocando: false
 	},
 	/*
 	Function: redesenha
@@ -319,7 +321,7 @@ i3GEO.Interface = {
 	Inicia a interface
 	*/
 	inicia: function(w,h){
-		if(typeof(console) !== 'undefined'){console.info("i3GEO.Interface.inicia()");}
+		if(typeof(console) !== 'undefined'){console.warn("i3GEO.Interface.inicia()");}
 		//
 		//inicialização  que afeta todas as interfaces
 		//
@@ -1503,9 +1505,10 @@ i3GEO.Interface = {
 				//
 				//carrega o javascript que permite fazer o zoom por box
 				//
-				js = i3GEO.configura.locaplic+"/pacotes/google/keydragzoom.js.php";
-				i3GEO.util.scriptTag(js,"i3GEO.Interface.googlemaps.ativaZoomBox()","keydragzoom_script");
-
+				if(!$i("keydragzoom_script")){
+					js = i3GEO.configura.locaplic+"/pacotes/google/keydragzoom.js.php";
+					i3GEO.util.scriptTag(js,"i3GEO.Interface.googlemaps.ativaZoomBox()","keydragzoom_script");
+				}
 				i3GeoMap.setMapTypeId(i3GEO.Interface.googlemaps.TIPOMAPA);
 				sw = new google.maps.LatLng(ret[1],ret[0]);
 				ne = new google.maps.LatLng(ret[3],ret[2]);
@@ -1517,25 +1520,26 @@ i3GEO.Interface = {
 				i3GEO.Interface.googlemaps.criaLayers();
 				i3GeoMapOverlay.setMap(i3GeoMap);
 				i3GEO.Interface.googlemaps.registraEventos();
-
-				i3GEO.gadgets.mostraInserirKml();
-				i3GEO.Interface.ativaBotoes();
+				//se o mapa está no modo de troca de interface, alguns elementos não precisam ser inseridos novamente
+				if(i3GEO.Interface.STATUS.trocando === false){
+					i3GEO.gadgets.mostraInserirKml();
+					i3GEO.Interface.ativaBotoes();
+				}
 				i3GEO.eventos.ativa($i(i3GEO.Interface.IDMAPA));
-				i3GEO.coordenadas.mostraCoordenadas();
-				i3GEO.gadgets.mostraEscalaNumerica();
-				i3GEO.gadgets.mostraMenuSuspenso();
-				i3GEO.gadgets.mostraMenuLista();
-				i3GEO.idioma.mostraSeletor();
+				if(i3GEO.Interface.STATUS.trocando === false){
+					i3GEO.coordenadas.mostraCoordenadas();
+					i3GEO.gadgets.mostraEscalaNumerica();
+					i3GEO.gadgets.mostraMenuSuspenso();
+					i3GEO.gadgets.mostraMenuLista();
+					i3GEO.idioma.mostraSeletor();
+				}
 				g_operacao = "";
 				g_tipoacao = "";
-				//i3GEO.parametros.mapscale = i3GEO.Interface.googlemaps.calcescala();
-				//atualizaEscalaNumerica(parseInt(i3GEO.parametros.mapscale,10));
-				//
-				//i3GEO.arvoreDeCamadas.CAMADAS é definido na inicialização (classe_i3geo)
-				//
-				i3GEO.arvoreDeCamadas.ATIVATEMA = "i3GEO.Interface.googlemaps.ligaDesliga(this)";
-				i3GEO.arvoreDeCamadas.cria("",i3GEO.arvoreDeCamadas.CAMADAS,i3GEO.configura.sid,i3GEO.configura.locaplic);
-				i3GEO.util.arvore("<b>"+$trad("p13")+"</b>","listaPropriedades",i3GEO.configura.listaDePropriedadesDoMapa);
+				if(i3GEO.Interface.STATUS.trocando === false){
+					i3GEO.arvoreDeCamadas.ATIVATEMA = "i3GEO.Interface.googlemaps.ligaDesliga(this)";
+					i3GEO.arvoreDeCamadas.cria("",i3GEO.arvoreDeCamadas.CAMADAS,i3GEO.configura.sid,i3GEO.configura.locaplic);
+					i3GEO.util.arvore("<b>"+$trad("p13")+"</b>","listaPropriedades",i3GEO.configura.listaDePropriedadesDoMapa);
+				}
 				if(i3GEO.arvoreDeCamadas.MOSTRALISTAKML === true)
 				{i3GEO.Interface.googlemaps.adicionaListaKml();}
 				if(i3GEO.parametros.kmlurl !== "")

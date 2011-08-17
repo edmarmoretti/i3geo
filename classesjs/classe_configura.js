@@ -166,12 +166,14 @@ i3GEO.configura = {
 			{ id:"omenudataArquivos5",text: $trad("u20a"), url: "javascript:i3GEO.mapa.dialogo.convertekml()" }
 			],
 			"interface": [
+			{ id:"omenudataInterface0a",text: '<span style=color:gray;text-decoration:underline; ><b>'+$trad("d27")+'</b></span>',url: "#"},
 			{ id:"omenudataInterface1",text: "Interface normal", url: "javascript:window.location = i3GEO.configura.locaplic+'/interface/geral.htm?'+i3GEO.configura.sid" },
 			{ id:"omenudataInterface2",text: "OpenLayers", url: "javascript:window.location = i3GEO.configura.locaplic+'/interface/openlayers.htm?'+i3GEO.configura.sid" },
 			{ id:"omenudataInterface10",text: "OpenLayers tablet", url: "javascript:window.location = i3GEO.configura.locaplic+'/interface/openlayers_t.htm?'+i3GEO.configura.sid" },
 			{ id:"omenudataInterface3",text: "Flash", url: "javascript:window.location = i3GEO.configura.locaplic+'/interface/flamingo.htm?'+i3GEO.configura.sid" },
 			{ id:"omenudataInterface4",text: "Google Maps", url: "javascript:window.location = i3GEO.configura.locaplic+'/interface/googlemaps.phtml?'+i3GEO.configura.sid" },
 			{ id:"omenudataInterface5",text: "Google Earth", url: "javascript:window.location = i3GEO.configura.locaplic+'/interface/googleearth.phtml?'+i3GEO.configura.sid" },
+			{ id:"omenudataInterface0b",text: '<span style=color:gray;text-decoration:underline; ><b>'+$trad("u27")+'</b></span>',url: "#"},
 			{ id:"omenudataInterface6",text: $trad("u21"), url: "javascript:var w = window.open(i3GEO.configura.locaplic+'/geradordelinks.htm')" },
 			{ id:"omenudataInterface7",text: "Serviços WMS", url: "javascript:var w = window.open(i3GEO.configura.locaplic+'/ogc.htm')" },
 			{ id:"omenudataInterface8",text: "Hiperbólica", url: "javascript:var w = window.open(i3GEO.configura.locaplic+'/hiperbolica.html')" },

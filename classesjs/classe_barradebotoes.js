@@ -841,14 +841,16 @@ i3GEO.barraDeBotoes = {
 			}
 		};
 		//div que mostra o título do botão
-		var temp = novoel = document.createElement("div");
-		temp.style.top = "38px";
-		temp.style.color = "gray";
-		temp.style.textAlign = "center";
-		temp.style.fontSize = "10px";
-		temp.innerHTML = "";
-		temp.id = "euDockMensagem";
-		euEnv.euDockArray.euDock_0.div.appendChild(temp);
+		if(!$i("euDockMensagem")){
+			var temp = novoel = document.createElement("div");
+			temp.style.top = "38px";
+			temp.style.color = "gray";
+			temp.style.textAlign = "center";
+			temp.style.fontSize = "10px";
+			temp.innerHTML = "";
+			temp.id = "euDockMensagem";
+			euEnv.euDockArray.euDock_0.div.appendChild(temp);
+		}
 	},
 	/*
 	Function: inicializaBarra

@@ -465,7 +465,7 @@ i3GEO.janela = {
 	/*
 	Function: abreAguarde
 
-	Abre uma janela com a mensagem de agurde e bloqueia cliques nomapa
+	Abre uma janela com a mensagem de aguarde
 
 	Parametros:
 
@@ -485,7 +485,8 @@ i3GEO.janela = {
 		{pos = YAHOO.util.Dom.getXY($i(i3GEO.Interface.IDCORPO));}
 		else if ($i("contemImg"))
 		{pos = YAHOO.util.Dom.getXY($i("contemImg"));}
-		texto += "<br><span style='color:navy;cursor:pointer;font-size:9px;' onclick='javascript:if(i3GEO.janela.AGUARDEMODAL == true){i3GEO.janela.AGUARDEMODAL = false;}else{i3GEO.janela.AGUARDEMODAL = true;}'>bloquear/desbloquear</span>";
+		if(i3GEO.janela.AGUARDEMODAL == true)
+		{texto += "<br><span style='color:navy;cursor:pointer;font-size:9px;' onclick='javascript:if(i3GEO.janela.AGUARDEMODAL == true){i3GEO.janela.AGUARDEMODAL = false;}else{i3GEO.janela.AGUARDEMODAL = true;}'>bloquear/desbloquear</span>";}
 		contador = "";
 		for(index=0; index<i3GEO.contadorAtualiza; index++) {
 			contador = contador + ".";
