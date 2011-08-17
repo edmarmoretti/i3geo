@@ -2017,6 +2017,9 @@ function downloadTema2($map_file,$tema,$locaplic,$dir_tmp,$postgis_mapa)
 	//$tema pode ser diferente do nome do mapfile
 	//
 	$teste = @$map->getlayerbyname($tema);
+	//caso o usuario tenha usado caixa alta no nome do layer
+	if ($teste == "")
+	{$teste = @$map->getlayerbyname(strtoupper($tema));}
 	if ($teste == "")
 	{
 		$maptemp = ms_newMapObj($temasdir."/".$tema.".map");
@@ -2209,18 +2212,22 @@ Return:
 */
 function verificaDBF($arq){
 	if(function_exists("dbase_open"))
-	$db = dbase_open($arq, 0);
+		$db = dbase_open($arq, 0);
 	else
-	$db = xbase_open($arq, 0);
+		$db = xbase_open($arq, 0);
 	if ($db) {
-	  if(function_exists("dbase_numrecords"))
-	  $record_numbers = dbase_numrecords($db);
-	  else
-	  $record_numbers = xbase_numrecords($db);
-	  if ($record_numbers > 0)
-	  {return true;}
-	  else
-	  {return false;}
+		if(function_exists("dbase_numrecords")){
+			$record_numbers = dbase_numrecords($db);
+			dbase_close($db);
+		}
+		else{
+			$record_numbers = xbase_numrecords($db);
+			xbase_close($db);
+		}
+		if ($record_numbers > 0)
+		{return true;}
+		else
+		{return false;}
 	}
 	else {return false;}	
 }

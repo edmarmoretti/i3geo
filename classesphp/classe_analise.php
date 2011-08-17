@@ -131,7 +131,7 @@ return:
 	function criaDefDb($itens){
 		$c = 0;
 		$def = array();
-		foreach ($items as $ni){
+		foreach ($itens as $ni){
 			$ni = strtoupper($ni);
 			$def[] = array(substr($ni, 0, 8).$c,"C","254");
 			$c = $c + 1;

@@ -214,6 +214,39 @@ i3GEO.Interface = {
 		trocando: false
 	},
 	/*
+	Function: atual2gm
+
+	Troca o renderizador do mapa passando a usar a API do Google Maps
+	*/
+	atual2gm: {
+		inicia: function(){
+			i3GEO.Interface.STATUS.trocando = true;
+			i3GEO.janela.ESTILOAGUARDE = "normal";
+			i3GEO.janela.abreAguarde("googleMapsAguarde","Carregando GoogleMaps...");
+			try{
+				if(google)
+				{i3GEO.Interface.atual2gm.initemp();}
+			}
+			catch(e){
+				i3GEO.util.scriptTag("http://www.google.com/jsapi?callback=i3GEO.Interface.atual2gm.loadMaps","","",true);
+			}
+		},
+		loadMaps: function(){
+			//AJAX API is loaded successfully. Now lets load the maps api
+			google.load("maps", "3", {callback:"i3GEO.Interface.atual2gm.initemp",other_params: "sensor=false"});
+		},
+		initemp: function(){
+			$i(i3GEO.Interface.IDCORPO).innerHTML = "";
+			i3GEO.Interface.ATUAL = "googlemaps";
+			i3GEO.Interface.cria(i3GEO.parametros.w,i3GEO.parametros.h);
+			i3GEO.Interface.googlemaps.cria();
+			i3GEO.Interface.googlemaps.inicia();
+			i3GEO.janela.fechaAguarde("googleMapsAguarde");
+			i3GEO.arvoreDeCamadas.CAMADAS = [];
+			i3GEO.atualiza();
+		}
+	},	
+	/*
 	Function: redesenha
 
 	Aplica o método redesenha da interface atual. Em alguns casos, a função de redesenho aplica os mesmos
