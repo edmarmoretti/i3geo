@@ -1230,12 +1230,28 @@ i3GEO.Interface = {
 			}
 		},
 		loadStartLayer: function(event){
+			var p = $i("i3GEOprogressoDiv");
 			i3GEO.Interface.STATUS.atualizando.push(event.object.name);
 			YAHOO.util.Dom.setStyle("ArvoreTituloTema"+event.object.name,"background",i3GEO.Interface.openlayers.FUNDOTEMA);
+			if(p){
+				p.style.display = "block";
+				i3GEO.arvoreDeCamadas.progressBar.set('maxValue',i3GEO.Interface.STATUS.atualizando.length);
+				i3GEO.arvoreDeCamadas.progressBar.set('value',i3GEO.arvoreDeCamadas.progressBar.get('value') - 1);
+			}
 		},
 		loadStopLayer: function(event){
+			var p = $i("i3GEOprogressoDiv");
 			i3GEO.Interface.STATUS.atualizando.remove(event.object.name);
 			YAHOO.util.Dom.setStyle("ArvoreTituloTema"+event.object.name,"background","");
+			if(p){
+				p.style.display = "block";
+				if(i3GEO.Interface.STATUS.atualizando.length > 0)
+				{i3GEO.arvoreDeCamadas.progressBar.set('value',i3GEO.arvoreDeCamadas.progressBar.get('value') + 1);}
+				else{
+					i3GEO.arvoreDeCamadas.progressBar.set('value',0);
+					p.style.display = "none";
+				}
+			}
 		},
 		ordenaLayers:function(){
 			var ordem = i3GEO.arvoreDeCamadas.CAMADAS,

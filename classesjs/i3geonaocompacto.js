@@ -34,6 +34,7 @@
 	"../pacotes/yui270/build/button/button-min.js",
 	"../pacotes/yui270/build/json/json-min.js",
 	"../pacotes/yui270/build/resize/resize-min.js",
+	"../pacotes/yui270/build/progressbar/progressbar-min.js",
 	"../pacotes/balloon-tooltips/htdocs/js/balloon.config.js",
 	"../pacotes/balloon-tooltips/htdocs/js/balloon.js",
 	"../pacotes/eudock/js/euDock.2.0.js",
@@ -89,6 +90,7 @@
 	"../pacotes/yui270/build/button/assets/skins/sam/button.css",
 	"../pacotes/yui270/build/slider/assets/skins/sam/slider.css",
 	"../pacotes/yui270/build/resize/assets/skins/sam/resize.css",
+	"../pacotes/yui270/build/progressbar/assets/skins/sam/progressbar.css",
 	"../css/corrigeyui_geral.css",
 	"../mashups/openlayers.css"
 	);

@@ -47,6 +47,20 @@ Exemplos:
 */
 i3GEO.arvoreDeCamadas = {
 	/*
+	Propriedade: BARRAPROGRESSO
+
+	Mostra uma barra com o progresso do desenho das camadas do mapa
+	
+	Não funciona em todas as interfaces
+
+	Default:
+	{true}
+	 
+	Type:
+	{boolean}
+	*/
+	BARRAPROGRESSO: true,
+	/*
 	Propriedade: MOSTRALISTAKML
 
 	Mostra na árvore a lista de endereços de arquivos KML cadastrados no sistema de administração
@@ -434,6 +448,27 @@ i3GEO.arvoreDeCamadas = {
 		if(typeof(console) !== 'undefined'){console.info("i3GEO.arvoreDeCamadas.cria()");}
 		if(!YAHOO.lang.isUndefined(funcaoTema)){
 			i3GEO.arvoreDeCamadas.ATIVATEMA = funcaoTema;
+		}
+		var novoel;
+		//inclui o div para a barra de progresso
+		if(i3GEO.arvoreDeCamadas.BARRAPROGRESSO === true && i3GEO.Interface.ATUAL === "openlayers"){
+			if(!$i("i3GEOprogressoDiv")){
+				novoel = document.createElement("div");
+				novoel.id = "i3GEOprogressoDiv";
+				novoel.style.position = "absolute";
+				novoel.style.top = "0px";
+				novoel.style.zIndex = "50000";
+				novoel.style.left = (i3GEO.parametros.w / 2) - 75;
+				//novoel.style.display = "none";
+				$i(i3GEO.Interface.IDMAPA).appendChild(novoel);
+				i3GEO.arvoreDeCamadas.progressBar = new YAHOO.widget.ProgressBar({
+					height: 5,
+					width: 150,
+					minValue: 1,
+					maxValue: 0,
+					value: 0	
+				}).render("i3GEOprogressoDiv");
+			}
 		}
 		i3GEO.arvoreDeCamadas.SID = typeof(g_sid) !== 'undefined' ? g_sid : i3GEO.configura.sid;
 		i3GEO.arvoreDeCamadas.LOCAPLIC = typeof(g_locaplic) !== 'undefined' ? g_locaplic : i3GEO.configura.locaplic;
