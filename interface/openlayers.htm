@@ -270,16 +270,7 @@ i3GEO.finaliza = function(){
 }
 i3GEO.inicia();
 
-				novoel = document.createElement("img");
-				novoel.src = "../imagens/dobragooglemaps.png";
-				novoel.id = "i3GEOdobraPagina";
-				novoel.onclick = function(){i3GEO.Interface.atual2gm.inicia();};
-				novoel.style.cursor = "pointer";
-				novoel.style.position = "absolute";
-				novoel.style.top = i3GEO.parametros.h - 35;
-				novoel.style.zIndex = "50000";
-				novoel.style.left = i3GEO.parametros.w - 35;
-				$i(i3GEO.Interface.IDMAPA).appendChild(novoel);
+i3GEO.mapa.insereDobraPagina("googlemaps","../imagens/dobragooglemaps.png");
 </script>
 </body>
 </html>

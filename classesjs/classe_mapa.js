@@ -61,6 +61,30 @@ i3GEO.mapa = {
 	*/
 	GEOXML: [],
 	/*
+	Function: insereDobraPagina
+	
+	Insere o ícone do tipo "dobra de´página" que permite alterar o renderizador do mapa
+	
+	Parametros:
+	
+	tipo {string} - tipo de ícone googlemaps|
+	
+	imagem {string} - endereço da imagem que será utilizada no ícone
+	*/
+	insereDobraPagina: function(tipo,imagem){
+		var novoel = document.createElement("img");
+		novoel.src = imagem;
+		novoel.id = "i3GEOdobraPagina";
+		if(tipo === "googlemaps")
+		{novoel.onclick = function(){i3GEO.Interface.atual2gm.inicia();};}
+		novoel.style.cursor = "pointer";
+		novoel.style.position = "absolute";
+		novoel.style.top = i3GEO.parametros.h - 35;
+		novoel.style.zIndex = "50000";
+		novoel.style.left = i3GEO.parametros.w - 35;
+		$i(i3GEO.Interface.IDMAPA).appendChild(novoel);
+	},
+	/*
 	Function: ativaAutoResize
 	
 	Ativa o redimensionamento automático do mapa sempre que o navegador for redimensionado
