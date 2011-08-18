@@ -141,6 +141,13 @@ en:"Tela remota",
 es:"Tela remota",
 it:"Tela remota"
 }],
+"p21": [
+{
+pt: "Animação",
+en:"Animation",
+es:"Animación",
+it:"Animation"
+}],
 //itens do menu suspenso
 "s1": [
 {

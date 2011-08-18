@@ -911,6 +911,15 @@ g_traducao_ajuda = {
 			complemento:"São criadas 3 novas camadas no mapa, uma para pontos, uma para linhas e outra para os polígonos. Não necessariamente existirão elementos nas três camadas.",
 			tela:"",
 			apijs:"i3GEO.arvoreDeTemas.conectargeojson()"
+		},
+		"107": {
+			titulo: "Animação",
+			diretorio:"i3geo/ferramentas/animacao",
+			categoria:"1",
+			pt:"",
+			complemento:"",
+			tela:"",
+			apijs:"i3GEO.mapa.dialogo.animacao()"
 		}		
 	}
 };

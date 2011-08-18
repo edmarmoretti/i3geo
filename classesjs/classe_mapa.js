@@ -478,6 +478,14 @@ i3GEO.mapa = {
 	*/
 	dialogo:{
 		/*
+		Function: animacao
+
+		Abre a janela de diálogo da ferramenta que permite animar o mapa atual
+		*/
+		animacao: function(){
+			i3GEO.util.dialogoFerramenta("i3GEO.mapa.dialogo.animacao()","animacao","animacao");
+		},
+		/*
 		Function: opacidade
 
 		Abre a janela de diálogo da ferramenta de definição da transparência das camadas principais do mapa
