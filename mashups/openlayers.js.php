@@ -70,6 +70,7 @@ i3GEO.editorOL = {
 		'poligono':true,
 		'texto':true,
 		'edita':true,
+		'corta': true,
 		'apaga':true,
 		'procura':true,
 		'selecao':true,
@@ -820,6 +821,43 @@ i3GEO.editorOL = {
 				}
 			);
 			controles.push(button);
+			adiciona = true;
+		}
+		if(botoes.corta===true && i3GEO.php){
+			i3GEO.editorOL.CortaFeature = new OpenLayers.Control.DrawFeature(
+				i3GEO.editorOL.layergrafico,
+				OpenLayers.Handler.Polygon,
+				{
+					displayClass: "editorOLcorta",
+					title: "corta figura",
+					clickout: true,
+					toggle: true,
+					trigger: function(){
+						if(i3GEO.editorOL.layergrafico.selectedFeatures.length != 1){
+							alert("Selecione primeiro um elemento para ser cortado");
+							i3GEO.editorOL.CortaFeature.deactivate();
+						}
+						else{
+							i3GEO.editorOL.CortaFeature.activate();
+						}
+					},
+					callbacks:{
+						done: function(feature){
+							var temp,
+								sel = i3GEO.editorOL.layergrafico.selectedFeatures[0].geometry,
+								corta = feature;
+							temp = function(retorno){
+								i3GEO.janela.fechaAguarde("i3GEO.cortador");
+								if(retorno != "" && retorno.data && retorno.data != "")
+								{i3GEO.editorOL.substituiFeaturesSel(retorno.data);}
+							};
+							i3GEO.janela.abreAguarde("i3GEO.cortador","Cortando");
+							i3GEO.php.funcoesGeometriasWkt(temp,sel+"|"+corta,"difference");							
+						}
+					}					
+				}
+			);
+			controles.push(i3GEO.editorOL.CortaFeature);
 			adiciona = true;
 		}		
 		if(botoes.edita===true){

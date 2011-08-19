@@ -1438,6 +1438,7 @@ i3GEO.barraDeBotoes = {
 				'ponto':true,
 				'poligono':true,
 				'texto':true,
+				'corta':true,
 				'edita':true,
 				'selecao':true,
 				'apaga':true,

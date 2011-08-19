@@ -65,6 +65,8 @@ if(isset($botoes)){
 	{$objBotoes[] = "'poligono':true";}
 	if(in_array("edita",$botoes))
 	{$objBotoes[] = "'edita':true";}
+	if(in_array("corta",$botoes))
+	{$objBotoes[] = "'corta':true";}
 	if(in_array("apaga",$botoes))
 	{$objBotoes[] = "'apaga':true";}
 	if(in_array("procura",$botoes))
@@ -192,6 +194,7 @@ Parâmetros:
 		salva
 		ajuda
 		fecha
+		corta
 
 	Para ver a lista de códigos de temas, que podem ser utilizados no parâmetro 'temas', acesse: 
 	<a href='../ogc.php?lista=temas' >lista de temas</a>. Os códigos são mostrados em vermelho.
