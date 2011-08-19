@@ -842,118 +842,161 @@ i3GEO.gadgets = {
 			confm = i3GEO.configura.oMenuData,
 			ins = "",
 			alinhamento = "";
-		i3GEOoMenuBar = YAHOO.widget.MenuManager;
+
 		if(arguments.length === 0)
 		{id = ms.idhtml;}
 		else
 		{ms.idhtml = id;}
-
 		objid = $i(id);
-		if(objid){
-			objid.className="yuimenubar";
-			temp = $i("contemMenu");
-			if(temp){
-				temp.className="yui-navset";
-			}
-			if(ms.deslocaEsquerda){
-				alinhamento = "left:"+ms.deslocaEsquerda*-1+"px;";
-			}
-			//ajusta a altura caso não tenha sido especificado no HTML
-			if(!objid.style.height || parseInt(objid.style.height,10) === 0)
-			{objid.style.height = "21px";}
-			else{
-				if(!temp.style.height || parseInt(temp.style.height) === 0)
-				{temp.style.height = "21px";}
-			}
-			ins += '<div class="bd" style="top:0px;'+alinhamento+'display:block;align:right;border: 0px solid white;z-index:6000;line-height:1.4" >' +
-				'<ul class="first-of-type" style="display:block;border:0px solid white;top:10px;">';
-			n = confm.menu.length;
-			estilo = "padding-bottom:3px;top:0px;border: 0px solid white;";
-			for(i = 0;i < n;i += 1){
-				t = "";
-				if(confm.menu[i].target)
-				{t = "target="+confm.menu[i].target;}
-				if(confm.submenus[confm.menu[i].id].length > 0)
-				{ins += '<li class="yuimenubaritem" style="padding-top:2px;"><a style="'+estilo+'" href="#" class="yuimenubaritemlabel" '+t+'id="menu'+confm.menu[i].id+'" >&nbsp;'+confm.menu[i].nome+'</a></li>';}
-			}
-			ins += '</ul>'; 
-			ins += '</div>';
-			objid.innerHTML=ins;
-			onMenuBarBeforeRender = function (p_sType, p_sArgs){
-				var conta,nomeMenu,nomeSub,
-					subs = i3GEO.configura.oMenuData.submenus,
-					conta = 0;
-				for(nomeMenu in subs){
-					if($i("menu"+nomeMenu)){
-						nomeSub = subs[nomeMenu];
-						if(nomeSub !== ""){
-							i3GEOoMenuBarLocal.getItem(conta).cfg.setProperty(
-								'submenu',
-								{
-									id:nomeMenu,
-									itemdata: nomeSub
-								}
-							);
+		//cria o menu se ainda não existir
+		if(objid && objid.innerHTML === ""){
+			i3GEOoMenuBar = YAHOO.widget.MenuManager;
+			if(objid){
+				objid.className="yuimenubar";
+				temp = $i("contemMenu");
+				if(temp){
+					temp.className="yui-navset";
+				}
+				if(ms.deslocaEsquerda){
+					alinhamento = "left:"+ms.deslocaEsquerda*-1+"px;";
+				}
+				//ajusta a altura caso não tenha sido especificado no HTML
+				if(!objid.style.height || parseInt(objid.style.height,10) === 0)
+				{objid.style.height = "21px";}
+				else{
+					if(!temp.style.height || parseInt(temp.style.height) === 0)
+					{temp.style.height = "21px";}
+				}
+				ins += '<div class="bd" style="top:0px;'+alinhamento+'display:block;align:right;border: 0px solid white;z-index:6000;line-height:1.4" >' +
+					'<ul class="first-of-type" style="display:block;border:0px solid white;top:10px;">';
+				n = confm.menu.length;
+				estilo = "padding-bottom:3px;top:0px;border: 0px solid white;";
+				for(i = 0;i < n;i += 1){
+					t = "";
+					if(confm.menu[i].target)
+					{t = "target="+confm.menu[i].target;}
+					if(confm.submenus[confm.menu[i].id].length > 0)
+					{ins += '<li class="yuimenubaritem" style="padding-top:2px;"><a style="'+estilo+'" href="#" class="yuimenubaritemlabel" '+t+'id="menu'+confm.menu[i].id+'" >&nbsp;'+confm.menu[i].nome+'</a></li>';}
+				}
+				ins += '</ul>'; 
+				ins += '</div>';
+				objid.innerHTML=ins;
+				onMenuBarBeforeRender = function (p_sType, p_sArgs){
+					var conta,nomeMenu,nomeSub,
+						subs = i3GEO.configura.oMenuData.submenus,
+						conta = 0;
+					for(nomeMenu in subs){
+						if($i("menu"+nomeMenu)){
+							nomeSub = subs[nomeMenu];
+							if(nomeSub !== ""){
+								i3GEOoMenuBarLocal.getItem(conta).cfg.setProperty(
+									'submenu',
+									{
+										id:nomeMenu,
+										itemdata: nomeSub
+									}
+								);
+							}
+							conta += 1;
 						}
-						conta += 1;
 					}
-				}
-			};
-			if(i3GEO.Interface.ATUAL === "googleearth" || i3GEO.Interface.ATUAL === "flamingo")
-			{ifr = true;}
-			else
-			{ifr = false;}
-			i3GEOoMenuBarLocal = new YAHOO.widget.MenuBar(id,{iframe:ifr,autosubmenudisplay: true, showdelay: 100, hidedelay: 500, lazyload: false});
-			i3GEOoMenuBar.addMenu(i3GEOoMenuBarLocal);
-			i3GEOoMenuBarLocal.beforeRenderEvent.subscribe(onMenuBarBeforeRender);
-			i3GEOoMenuBarLocal.render();
-			//
-			//marca o tipo de interface em uso
-			//
-			try{
-				if(i3GEO.Interface.ATUAL === "padrao" && $i("omenudataInterface1")){
-					i3GEOoMenuBar.getMenuItem("omenudataInterface1").cfg.setProperty("checked", true);
-				}
-				if(i3GEO.Interface.ATUAL === "openlayers" && $i("omenudataInterface2")){
-					i3GEOoMenuBar.getMenuItem("omenudataInterface2").cfg.setProperty("checked", true);
-				}
-				if(i3GEO.Interface.ATUAL === "flamingo" && $i("omenudataInterface3")){
-					i3GEOoMenuBar.getMenuItem("omenudataInterface3").cfg.setProperty("checked", true);
-				}
-				if(i3GEO.Interface.ATUAL === "googlemaps" && $i("omenudataInterface4")){
-					i3GEOoMenuBar.getMenuItem("omenudataInterface4").cfg.setProperty("checked", true);
-				}
-				if(i3GEO.Interface.ATUAL === "googleearth" && $i("omenudataInterface5")){
-					i3GEOoMenuBar.getMenuItem("omenudataInterface5").cfg.setProperty("checked", true);
-				}
-			}catch(e){
-				if(typeof(console) !== 'undefined'){console.warning("i3GEO.gadgets.mostraMenuSuspenso() "+ e);}
+				};
+				if(i3GEO.Interface.ATUAL === "googleearth" || i3GEO.Interface.ATUAL === "flamingo")
+				{ifr = true;}
+				else
+				{ifr = false;}
+				i3GEOoMenuBarLocal = new YAHOO.widget.MenuBar(id,{iframe:ifr,autosubmenudisplay: true, showdelay: 100, hidedelay: 500, lazyload: false});
+				i3GEOoMenuBar.addMenu(i3GEOoMenuBarLocal);
+				i3GEOoMenuBarLocal.beforeRenderEvent.subscribe(onMenuBarBeforeRender);
+				i3GEOoMenuBarLocal.render();
 			}
-			//
-			//desabilita opções em interfaces específicas
-			//
-			if(i3GEO.Interface.ATUAL !== "padrao" && $i("omenudataArquivos3")){
-				i3GEOoMenuBar.getMenuItem("omenudataArquivos3").cfg.setProperty("disabled", true);
+		}
+		//
+		//marca o tipo de interface em uso
+		//
+		temp = ["omenudataInterface1","omenudataInterface2","omenudataInterface3","omenudataInterface4","omenudataInterface5"];
+		n = temp.length;
+		while(n > 0){
+			n -= 1;
+			i3GEOoMenuBar.getMenuItem(temp[n]).cfg.setProperty("checked", false);
+		}
+		try{
+			temp = "";
+			switch(i3GEO.Interface.ATUAL){
+				case "openlayers":
+					temp = "omenudataInterface2";
+					break;
+				case "padrao":
+					temp = "omenudataInterface1";
+					break;
+				case "googlemaps":
+					temp = "omenudataInterface4";
+					break;
+				case "googleearth":
+					temp = "omenudataInterface5";
+					break;
+				case "flamingo":
+					temp = "omenudataInterface3";
+					break;
 			}
-			if(i3GEO.Interface.ATUAL === "googleearth" && $i("omenudataJanelas1")){
-				i3GEOoMenuBar.getMenuItem("omenudataJanelas1").cfg.setProperty("disabled", true);
-			}
-			if(i3GEO.Interface.ATUAL !== "openlayers" && $i("omenudataJanelas3")){
-				i3GEOoMenuBar.getMenuItem("omenudataJanelas3").cfg.setProperty("disabled", true);
+			if(temp != "" && $i(temp)){
+				i3GEOoMenuBar.getMenuItem(temp).cfg.setProperty("checked", true);
 			}			
-			//
-			//corrige problemas de estilo
-			//
-			temp = objid.style;
-			temp.backgroundPosition = "0px -1px";
-			temp.border = "0px solid white";
-			//if(navm)
-			//{temp.borderBottom = "2px solid white";}
-			//if(navm && i3GEO.Interface.ATUAL === "googlemaps")
-			//{temp.border = "2px dotted white";}
-			if(ms.finaliza && ms.finaliza != ""){
-				eval(ms.finaliza);
+		}
+		catch(e){
+			if(typeof(console) !== 'undefined'){console.warning("i3GEO.gadgets.mostraMenuSuspenso() "+ e);}
+		}
+		//
+		//desabilita opções em interfaces específicas
+		//
+		temp = ["omenudataFerramentas7b","omenudataArquivos3","omenudataJanelas1","omenudataJanelas3","omenudataFerramentas2a"];
+		n = temp.length;
+		while(n > 0){
+			n -= 1;
+			i = i3GEOoMenuBar.getMenuItem(temp[n]);
+			if(i)
+			{i.cfg.setProperty("disabled", false);}
+		}
+		try{
+			temp = [];
+			switch(i3GEO.Interface.ATUAL){
+				case "openlayers":
+					temp = ["omenudataArquivos3","omenudataJanelas1"];
+					break;
+				case "padrao":
+					temp = ["omenudataJanelas1","omenudataJanelas3","omenudataFerramentas2a"];
+					break;
+				case "googlemaps":
+					temp = ["omenudataArquivos3","omenudataJanelas1","omenudataJanelas3","omenudataFerramentas2a"];
+					break;
+				case "googleearth":
+					temp = ["omenudataFerramentas7b","omenudataArquivos3","omenudataJanelas3","omenudataFerramentas2a"];
+					break;
+				case "flamingo":
+					temp = ["omenudataArquivos3","omenudataJanelas1","omenudataJanelas3","omenudataFerramentas2a"];
+					break;
 			}
+			n = temp.length;
+			while(n > 0){
+				n -= 1;
+				i = i3GEOoMenuBar.getMenuItem(temp[n]);
+				if(i)
+				{i.cfg.setProperty("disabled", true);}
+			}
+		}
+		catch(e){}
+		//
+		//corrige problemas de estilo
+		//
+		temp = objid.style;
+		temp.backgroundPosition = "0px -1px";
+		temp.border = "0px solid white";
+		//if(navm)
+		//{temp.borderBottom = "2px solid white";}
+		//if(navm && i3GEO.Interface.ATUAL === "googlemaps")
+		//{temp.border = "2px dotted white";}
+		if(ms.finaliza && ms.finaliza != ""){
+			eval(ms.finaliza);
 		}
 	},
 	/*

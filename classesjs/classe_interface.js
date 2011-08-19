@@ -1578,10 +1578,10 @@ i3GEO.Interface = {
 				if(i3GEO.Interface.STATUS.trocando === false){
 					i3GEO.coordenadas.mostraCoordenadas();
 					i3GEO.gadgets.mostraEscalaNumerica();
-					i3GEO.gadgets.mostraMenuSuspenso();
 					i3GEO.gadgets.mostraMenuLista();
 					i3GEO.idioma.mostraSeletor();
 				}
+				i3GEO.gadgets.mostraMenuSuspenso();
 				g_operacao = "";
 				g_tipoacao = "";
 				if(i3GEO.Interface.STATUS.trocando === false){
