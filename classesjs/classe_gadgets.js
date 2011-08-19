@@ -967,7 +967,7 @@ i3GEO.gadgets = {
 					temp = ["omenudataJanelas1","omenudataJanelas3","omenudataFerramentas2a"];
 					break;
 				case "googlemaps":
-					temp = ["omenudataArquivos3","omenudataJanelas1","omenudataJanelas3","omenudataFerramentas2a"];
+					temp = ["omenudataArquivos3","omenudataJanelas1","omenudataJanelas3"];
 					break;
 				case "googleearth":
 					temp = ["omenudataFerramentas7b","omenudataArquivos3","omenudataJanelas3","omenudataFerramentas2a"];
@@ -975,7 +975,7 @@ i3GEO.gadgets = {
 				case "flamingo":
 					temp = ["omenudataArquivos3","omenudataJanelas1","omenudataJanelas3","omenudataFerramentas2a"];
 					break;
-			}
+			};
 			n = temp.length;
 			while(n > 0){
 				n -= 1;

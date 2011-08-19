@@ -1730,6 +1730,7 @@ i3GEO.Interface = {
 					{return divimg[0].parentNode.parentNode.parentNode;}
 				}
 			}
+			return false;
 		},
 		ligaDesliga:function(obj){
 			var indice = i3GEO.Interface.googlemaps.retornaIndiceLayer(obj.value),

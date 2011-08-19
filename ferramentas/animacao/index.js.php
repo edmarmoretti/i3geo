@@ -49,7 +49,7 @@ i3GEOF.animacao = {
 	Estilo do objeto DOM com a imagem de aguarde existente no cabeçalho da janela.
 	*/
 	aguarde: "",
-	tempo: 0,
+	tempo: 1000,
 	/*
 	Function: inicia
 	
@@ -157,6 +157,12 @@ i3GEOF.animacao = {
 		i3GEOF.animacao.retornaCoresInicial();
 		i3GEOF.animacao.anima(i3GEOF.animacao.codigos.length - 1);
 	},
+	maisrapido: function(){
+		i3GEOF.animacao.tempo -= 100;
+	},
+	maislento: function(){
+		i3GEOF.animacao.tempo += 100;
+	},	
 	anima: function(c){
 		if(i3GEOF.animacao.codigos.length === 0)
 		{return;}
@@ -168,7 +174,7 @@ i3GEOF.animacao = {
 		else{
 			$i("i3GEOanima"+i3GEOF.animacao.codigos[c]).style.backgroundColor = "yellow";
 			i3GEOF.animacao.ligaDesliga(i3GEOF.animacao.codigos[c],'troca');
-			setTimeout("i3GEOF.animacao.anima("+(c - 1)+");",1000);
+			setTimeout("i3GEOF.animacao.anima("+(c - 1)+");",i3GEOF.animacao.tempo);
 		}
 	},
 	desligaTodos: function(codigos){
@@ -179,7 +185,7 @@ i3GEOF.animacao = {
 		}
 	},
 	ligaDesliga: function(codigoTema,tipo){
-		var layer;
+		var layer,estilo;
 		switch(i3GEO.Interface.ATUAL){
 			case "openlayers":
 				layer = i3geoOL.getLayersByName(codigoTema)[0];
@@ -188,7 +194,23 @@ i3GEOF.animacao = {
 				if(tipo === "liga")
 				{layer.setVisibility(true);}
 				if(tipo === "desliga")
-				{layer.setVisibility(false);}				
+				{layer.setVisibility(false);}
+				break;
+			case "googlemaps":
+				layer = i3GEO.Interface.googlemaps.retornaDivLayer(codigoTema);
+				if(!layer){return;}
+				estilo = layer.style.visibility;
+				if(tipo === "troca"){
+					if(estilo === "visible" || estilo === "")
+					{layer.style.visibility = "hidden";}
+					else
+					{layer.style.visibility = "visible";}
+				}
+				if(tipo === "liga")
+				{layer.style.visibility = "visible";}
+				if(tipo === "desliga")
+				{layer.style.visibility = "hidden";}
+				break;				
 		};	
 	},
 	termina: function(){
