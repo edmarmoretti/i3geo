@@ -1001,6 +1001,16 @@ h1 {padding:.25em .5em;background-color:#ccc;}
 	width:16px;
 	height:16px;
 }
+#animaMapa
+{
+	background-image:URL('../imagens/visual/default/sprite.png');
+	background-repeat: no-repeat;
+	background-position: 0px -2190px;
+	cursor:pointer;
+	width:16px;
+	height:16px;
+}
+
 .importarwmc
 {
 	background-image:URL('../imagens/visual/default/sprite.png');
