@@ -107,22 +107,43 @@ i3geo/admin/html/editormapfile.html
 </script>
 
 <script>
-YAHOO.util.Event.addListener(window, "load", initMenu);
+
 var letras = "Todos A B C D E F G H I J K L M N O P Q R S T U V X Y Z _ 1 2 3 4 5 6 7 8 9".split(" "),
 	nletras = letras.length,
+	letraAtual = "Todos",
 	i,
-	ins = "<p>";
+	ins = "";
+	
+ins += "<br>Filtrar: " +
+	"<select id='selFiltro' onchange='filtraLetra(\""+letraAtual+"\")' >" +
+	"<option value='' >----</option>"+
+	"<option value='link_tema,=,' >Sem fonte</option>"+
+	"<option value='download_tema,=,nao' >Não permite download</option>"+	
+	"<option value='download_tema,=,sim' >Permite download</option>"+
+	"<option value='download_tema,=,nao' >Não permite download</option>"+
+	"<option value='ogc_tema,=,sim' >Permite WMS</option>"+
+	"<option value='ogc_tema,=,nao' >Não permite WMS</option>"+
+	"<option value='kml_tema,=,sim' >Permite KML</option>"+
+	"<option value='kml_tema,=,nao' >Não permite KML</option>"+
+	"<option value='kmz_tema,=,sim' >Permite KMZ</option>"+
+	"<option value='kmz_tema,=,nao' >Não permite KMZ</option>"+
+	"</select>";
+ins += "<br><input onclick='filtraLetra(\""+letraAtual+"\")' type=checkbox id=mostraMini />Mostra a miniatura se houver"
+
+ins += "<p>";
 for(i=0;i<nletras;i++){
 	ins += "<span onclick='filtraLetra(\""+letras[i]+"\")' style='color:blue;cursor:pointer'>"+letras[i]+" </span>";
-}
-document.getElementById("letras").innerHTML = ins+ "  <input onclick='filtraLetra(\"\")' type=checkbox id=mostraMini />Mostra a miniatura se houver";
+}	
+document.getElementById("letras").innerHTML = ins;
 
 function filtraLetra(letra){
+	letraAtual = letra;
 	document.getElementById("tabela").innerHTML = "<span style=color:red >Aguarde...</span>";
 	if(letra == "Todos")
 	{letra = "";}
-	core_pegaMapfiles("montaArvore()",letra)
+	core_pegaMapfiles("montaArvore()",letra,document.getElementById("selFiltro").value);
 }
 cabecalhoGeral("cabecalhoPrincipal","editormapfile");
+YAHOO.util.Event.addListener(window, "load", initMenu);
 </script>
 </body>

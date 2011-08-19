@@ -423,17 +423,24 @@ Parameters:
 funcao - (opcional) nome da funcao que será executada ao terminar a busca pelos dados
 
 letra - (opcional) letra inicial utilizada para filtrar a lista
+
+filtro - (opcional) string com o filtro, por exemplo, "'download_tema' = 'SIM'"
 */
-function core_pegaMapfiles(funcaoM,letra)
+function core_pegaMapfiles(funcaoM,letra,filtro)
 {
 	if(arguments.length == 0){
 		var funcao = "";
 		var letra = "";
+		var filtro = "";
 	}
 	if(arguments.length == 1){
 		var letra = "";
+		var filtro = "";
 	}
-	var sUrl = "../php/menutemas.php?funcao=listaMapsTemas&letra="+letra;
+	if(arguments.length == 2){
+		var filtro = "";
+	}
+	var sUrl = "../php/menutemas.php?funcao=listaMapsTemas&letra="+letra+"&filtro="+filtro;
 	var callbackM =
 	{
   		success:function(o)

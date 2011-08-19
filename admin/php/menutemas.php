@@ -1094,7 +1094,7 @@ Retorna a lista de mapfiles do diretorio i3geo/temas
 */
 function listaMapsTemas()
 {
- 	global $cp,$locaplic,$letra;
+ 	global $cp,$locaplic,$letra,$filtro;
  	$arquivos = array();
 	if (is_dir($locaplic."/temas"))
 	{
@@ -1122,14 +1122,24 @@ function listaMapsTemas()
 	//
 	//pega o nome de cada tema
 	//
-	$sql = "select nome_tema,codigo_tema from i3geoadmin_temas ";
+	$sql = "select * from i3geoadmin_temas ";
+	if(isset($filtro) && $filtro != "")
+	{
+		$filtro = explode(",",$filtro);
+		$filtro = $filtro[0]." ".$filtro[1]." '".$filtro[2]."' or ".$filtro[0]." ".$filtro[1]." '".strtoupper($filtro[2])."'";
+		$sql .= "where $filtro";
+	}
+
 	$dbh = "";
 	include($locaplic."/admin/php/conexao.php");
 	$q = $dbh->query($sql,PDO::FETCH_ASSOC);
 	$regs = $q->fetchAll();	
+	//echo $sql;exit;
 	$nomes = array();
-	foreach($regs as $reg)
-	{$nomes[$reg["codigo_tema"]] = $reg["nome_tema"];}
+	foreach($regs as $reg){
+		$nomes[$reg["codigo_tema"]] = $reg["nome_tema"];
+		//$outros[$reg["codigo_tema"]] = array("kmz"=>$reg["kmz_tema"],"kml"=>$reg["kml_tema"],"ogc"=>$reg["ogc_tema"],"download"=>$reg["download_tema"],"link"=>$reg["link_tema"]);
+	}
 	$lista = array();
 	foreach($arquivos as $arq)
 	{
@@ -1140,7 +1150,10 @@ function listaMapsTemas()
 		$imagem = "";
 		if(file_exists($locaplic."/temas/miniaturas/".$arq.".map.mini.png"))
 		{$imagem = $arq.".map.mini.png";}
-		$lista[] = array("nome"=>$n,"codigo"=>$arq,"imagem"=>$imagem);
+		if(isset($filtro) && $filtro != "" && $n != "")
+		{$lista[] = array("nome"=>$n,"codigo"=>$arq,"imagem"=>$imagem);}
+		if(!isset($filtro) || $filtro == "")
+		{$lista[] = array("nome"=>$n,"codigo"=>$arq,"imagem"=>$imagem);}
 	}
  	return $lista;
 }
