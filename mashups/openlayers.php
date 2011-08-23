@@ -65,6 +65,8 @@ if(isset($botoes)){
 	{$objBotoes[] = "'poligono':true";}
 	if(in_array("edita",$botoes))
 	{$objBotoes[] = "'edita':true";}
+	if(in_array("listag",$botoes))
+	{$objBotoes[] = "'listag':true";}
 	if(in_array("corta",$botoes))
 	{$objBotoes[] = "'corta':true";}
 	if(in_array("apaga",$botoes))
@@ -102,7 +104,10 @@ if(isset($fundo) && $fundo != ""){
 //
 //define quais os layers que comporão o mapa
 //
-
+if(isset($temas)){
+	$layers = array();
+	$objOpenLayers = array();
+}
 if($temas != "")
 {
 	$temas = str_replace(" ",",",$temas);
@@ -136,7 +141,6 @@ if($temas != "")
 		}
 	}
 }
-
 function ajuda(){
 	echo "
 <pre><b>
@@ -184,6 +188,7 @@ Parâmetros:
 		poligono
 		texto
 		edita
+		listag (lista geometrias)
 		apaga
 		captura
 		procura

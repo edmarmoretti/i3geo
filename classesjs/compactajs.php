@@ -36,6 +36,7 @@ i3geo/classesjs/compactajs.php
 //
 //compacta os arquivos do richdraw
 //
+echo "<pre>";
 packer("../pacotes/richdraw/richdraw.js","../pacotes/richdraw/richdraw_compacto.js","Normal");
 packer("../pacotes/richdraw/svgrenderer.js","../pacotes/richdraw/svgrenderer_compacto.js","Normal");
 packer("../pacotes/richdraw/vmlrenderer.js","../pacotes/richdraw/vmlrenderer_compacto.js","Normal");
@@ -200,6 +201,7 @@ foreach ($cssfiles as $f)
 	fclose($abre);
 	$buffer .= "\n";
 }
+
 $abre = fopen("../css/i3geo_ferramentas45.css", "wt");
 $escreve = fwrite ($abre,$buffer);
 $fecha = fclose ($abre);
@@ -246,6 +248,8 @@ return $code;
 }
 function packer($src,$out,$tipo="None")
 {
+	if(file_exists($out))
+	{unlink($out);}
 	require_once '../pacotes/packer/class.JavaScriptPacker.php';
 	$script = file_get_contents($src);
 	$script = str_replace("if(typeof(console)","//if(typeof(console)",$script);
@@ -261,7 +265,11 @@ function packer($src,$out,$tipo="None")
 function salvatudojs($jsfiles,$buffer,$final,$tipo)
 {
 	//junta todos os js em um unico
-	
+	if(file_exists($final))
+	{unlink($final);}	
+	if(file_exists($final.".php"))
+	{unlink($final.".php");}	
+
 	foreach ($jsfiles as $f)
 	{
 		echo $f;
@@ -280,6 +288,7 @@ function salvatudojs($jsfiles,$buffer,$final,$tipo)
 			$buffer .= $linha;
 		}
 	}
+
 	$abre = fopen($final, "wt");
 	$escreve = fwrite ($abre,$buffer);
 	$fecha = fclose ($abre);

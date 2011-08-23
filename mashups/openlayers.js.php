@@ -70,6 +70,7 @@ i3GEO.editorOL = {
 		'poligono':true,
 		'texto':true,
 		'edita':true,
+		'listag':true,
 		'corta': true,
 		'apaga':true,
 		'procura':true,
@@ -726,6 +727,8 @@ i3GEO.editorOL = {
 								graphicName: i3GEO.editorOL.simbologia.graphicName
 							};
 							i3GEO.editorOL.layergrafico.addFeatures([f]);
+							if(document.getElementById("panellistagEditor"))
+							{i3GEO.editorOL.listaGeometrias();}
 						}
 					}
 				}
@@ -753,6 +756,8 @@ i3GEO.editorOL = {
 								graphicName: i3GEO.editorOL.simbologia.graphicName
 							};
 							i3GEO.editorOL.layergrafico.addFeatures([f]);
+							if(document.getElementById("panellistagEditor"))
+							{i3GEO.editorOL.listaGeometrias();}
 						}
 					}					
 				}
@@ -781,6 +786,8 @@ i3GEO.editorOL = {
 								graphicName: i3GEO.editorOL.simbologia.graphicName
 							};
 							i3GEO.editorOL.layergrafico.addFeatures([f]);
+							if(document.getElementById("panellistagEditor"))
+							{i3GEO.editorOL.listaGeometrias();}
 						}
 					}
 				}
@@ -823,7 +830,7 @@ i3GEO.editorOL = {
 			controles.push(button);
 			adiciona = true;
 		}
-		if(botoes.corta===true && i3GEO.php){
+		if(botoes.edita===true && botoes.corta===true && i3GEO.php){
 			i3GEO.editorOL.CortaFeature = new OpenLayers.Control.DrawFeature(
 				i3GEO.editorOL.layergrafico,
 				OpenLayers.Handler.Polygon,
@@ -874,10 +881,25 @@ i3GEO.editorOL = {
 			controles.push(i3GEO.editorOL.ModifyFeature);
 			adiciona = true;
 		}
+		if(botoes.edita===true && botoes.listag===true){
+			button = new OpenLayers.Control.Button({
+				displayClass: "editorOLlistag", 
+				trigger: function(){
+					i3GEO.editorOL.listaGeometrias();
+				},
+				title: "lista geometrias"
+			});
+			controles.push(button);
+			adiciona = true;
+		}			
 		if(botoes.frente===true){
 			button = new OpenLayers.Control.Button({
 				displayClass: "editorOLfrente", 
-				trigger: function(){i3GEO.editorOL.trazParaFrente();},
+				trigger: function(){
+					i3GEO.editorOL.trazParaFrente();
+					if(document.getElementById("panellistagEditor"))
+					{i3GEO.editorOL.listaGeometrias();}				
+				},
 				title: "traz para frente"
 			});
 			controles.push(button);
@@ -897,7 +919,7 @@ i3GEO.editorOL = {
 		}		
 		//botao de seleção
 		if(botoes.selecao===true){
-			button = new OpenLayers.Control.SelectFeature(
+			i3GEO.editorOL.selbutton = new OpenLayers.Control.SelectFeature(
 				i3GEO.editorOL.layergrafico,
 				{
 					displayClass: "editorOLselecao",
@@ -911,7 +933,7 @@ i3GEO.editorOL = {
 					box: false
 				}
 			);
-			controles.push(button);
+			controles.push(i3GEO.editorOL.selbutton);
 			adiciona = true;
 		}
 		if(botoes.apaga===true){
@@ -923,6 +945,8 @@ i3GEO.editorOL = {
 						if(x){
 							i3GEO.editorOL.guardaBackup();
 							i3GEO.editorOL.layergrafico.removeFeatures(i3GEO.editorOL.layergrafico.selectedFeatures);
+							if(document.getElementById("panellistagEditor"))
+							{i3GEO.editorOL.listaGeometrias();}
 						}
 					}
 					else
@@ -933,6 +957,8 @@ i3GEO.editorOL = {
 			controles.push(button);
 			adiciona = true;
 		}
+		//não disponível ainda
+		/*
 		if(botoes.undo===true){
 			button = new OpenLayers.Control.Button({
 				displayClass: "editorOLundo", 
@@ -942,6 +968,7 @@ i3GEO.editorOL = {
 			controles.push(button);
 			adiciona = true;
 		}
+		*/
 		if(botoes.propriedades===true){
 			button = new OpenLayers.Control.Button({
 				displayClass: "editorOLpropriedades", 
@@ -978,10 +1005,17 @@ i3GEO.editorOL = {
 			button = new OpenLayers.Control.Button({
 				displayClass: "editorOLfecha", 
 				trigger: function(){
-					if(window.confirm("A edição será perdida. Continua?")){
-						i3GEOpanelEditor.destroy();
-						if(YAHOO.temaativo && YAHOO.temaativo.container.panel)
-						{YAHOO.temaativo.container.panel.destroy();}
+					var temp = window.confirm("Remove a edição?");
+					i3GEOpanelEditor.destroy();
+					if(YAHOO.temaativo && YAHOO.temaativo.container.panel)
+					{YAHOO.temaativo.container.panel.destroy();}
+					if(YAHOO.procura.container.panel)
+					{YAHOO.procura.container.panel.destroy();}
+					if(YAHOO.editorOL.container.panel)
+					{YAHOO.editorOL.container.panel.destroy();}
+					if(YAHOO.editorOL.listaGeometrias.panel)
+					{YAHOO.editorOL.listaGeometrias.panel.destroy();}
+					if(temp === true){
 						try{
 							if(i3GEO.editorOL.layergrafico)
 							{i3GEO.editorOL.mapa.removeLayer(i3GEO.editorOL.layergrafico);}
@@ -999,7 +1033,7 @@ i3GEO.editorOL = {
 		//
 		//controle que permite o snap
 		//
-        i3GEOOLsnap = new OpenLayers.Control.Snapping({
+		i3GEOOLsnap = new OpenLayers.Control.Snapping({
 			layer: i3GEO.editorOL.layergrafico
 		});
 		i3GEOOLsplit = new OpenLayers.Control.Split({
@@ -1010,6 +1044,8 @@ i3GEO.editorOL = {
 				beforesplit: function(event){i3GEO.editorOL.guardaBackup();},
 				aftersplit: function(event) {
 					i3GEO.editorOL.flashFeatures(event.features);
+					if(document.getElementById("panellistagEditor"))
+					{i3GEO.editorOL.listaGeometrias();}
 				}
 			}
 		});	
@@ -1092,7 +1128,6 @@ i3GEO.editorOL = {
 				else
 				if (e.srcElement)
 				{targ = e.srcElement;}
-				
 				temp = targ.id.split("_");
 				if(temp[0] === "OpenLayers.Geometry.Point"){
 					id = targ.id;
@@ -1113,7 +1148,6 @@ i3GEO.editorOL = {
 								null,
 								true
 							));
-
 						}
 					}
 				}
@@ -1212,6 +1246,47 @@ i3GEO.editorOL = {
 		else
 		{$i("panelpropriedadesEditor").getElementsByTagName("div")[1].style.overflow = "auto";}
 	},
+	listaGeometrias: function(){
+		if(!document.getElementById("panellistagEditor")){
+			YAHOO.namespace("editorOL.listaGeometrias");
+			YAHOO.editorOL.listaGeometrias.panel = new YAHOO.widget.Panel("panellistagEditor", {zIndex:20000, iframe:true, width:"320px", visible:false, draggable:true, close:true } );
+			if(typeof i3GEO != undefined && i3GEO != "")
+			{YAHOO.editorOL.listaGeometrias.panel.setHeader("Geometrias <div id='panellistagEditor_minimizaCabecalho' class='container-minimiza'></div>");}
+			else
+			{YAHOO.editorOL.listaGeometrias.panel.setHeader("Geometrias");}
+			YAHOO.editorOL.listaGeometrias.panel.setFooter("");
+			YAHOO.editorOL.listaGeometrias.panel.render(document.body);
+			YAHOO.editorOL.listaGeometrias.panel.center();
+			YAHOO.util.Event.addListener(YAHOO.editorOL.listaGeometrias.panel.close, "click", function(){
+				YAHOO.editorOL.listaGeometrias.panel.destroy();
+			});
+			temp = $i("panellistagEditor_minimizaCabecalho");
+			if(temp){
+				temp.onclick = function(){i3GEO.janela.minimiza("panellistagEditor");}
+			}
+		}
+		else{	
+			YAHOO.editorOL.listaGeometrias.panel.render(document.body);
+		}
+		var g,temp,
+		geos = i3GEO.editorOL.layergrafico.features,
+		n = geos.length,
+		ins = "<table class=lista4 >";
+		while(n > 0){
+			n -= 1;
+			g = geos[n].geometry;
+			ins += "<tr><td>"+g.CLASS_NAME+"</td><td style='cursor:pointer;color:blue' onclick='javascript:i3GEO.editorOL.selFeature("+n+")'>seleciona</td><td style='cursor:pointer;color:blue' onclick='javascript:i3GEO.editorOL.unselFeature("+n+")'>limpa</td><td style='cursor:pointer;color:blue' onclick='javascript:i3GEO.editorOL.flashFeaturesI("+n+")'>brilha</td></tr>";
+		}
+		ins += "</table>";
+		YAHOO.editorOL.listaGeometrias.panel.show();
+		if(i3GEO.configura)
+		{temp = $i("panellistagEditor").getElementsByTagName("div")[2];}
+		else
+		{temp = $i("panellistagEditor").getElementsByTagName("div")[1];}
+		temp.style.overflow = "auto";
+		temp.style.height = "100px";
+		temp.innerHTML = ins;
+	},
 	ferramentas: function(){
 		if(!document.getElementById("panelferramentasEditor")){
 			YAHOO.namespace("editorOL.ferramentas");
@@ -1228,7 +1303,6 @@ i3GEO.editorOL = {
 			'	<option value=symdifference >Diferença simétrica</option>' +								
 			'</select>'+
 			'<br><br><a class=paragrafo href=# onclick="i3GEO.editorOL.layergrafico.destroyFeatures()" >Apaga tudo</a>';
-			'<br><br><a class=paragrafo href=# onclick="i3GEO.editorOL.layergrafico.removeFeatures(i3GEO.editorOL.layergrafico.features)" >Seleciona tudo</a>';
 
 			YAHOO.editorOL.ferramentas.panel.setBody(ins);
 			if(typeof i3GEO != undefined && i3GEO != "")
@@ -1245,7 +1319,6 @@ i3GEO.editorOL = {
 			if(temp){
 				temp.onclick = function(){i3GEO.janela.minimiza("panelferramentasEditor");}
 			}
-
 		}
 		else{	
 			YAHOO.editorOL.ferramentas.panel.render(document.body);
@@ -1346,16 +1419,27 @@ i3GEO.editorOL = {
 		return lista;
 	},
 	guardaBackup: function(){
-		i3GEO.editorOL.backup = new OpenLayers.Layer.Vector("Backup",{displayInLayerSwitcher:false,visibility:false})
-		//i3GEO.editorOL.backup.removeFeatures(i3GEO.editorOL.backup.features);
+		return;
+		if(!i3GEO.editorOL.backup)
+		{i3GEO.editorOL.backup = new OpenLayers.Layer.Vector("Backup",{displayInLayerSwitcher:false,visibility:false})}
+		else
+		{i3GEO.editorOL.backup.removeFeatures(i3GEO.editorOL.backup.features);}
 		i3GEO.editorOL.backup.addFeatures(i3GEO.editorOL.layergrafico.features);
-		i3GEO.editorOL.unselTodos();
 	},
 	unselTodos:function(){
+		var n,i,temp;
+		n = i3GEO.editorOL.layergrafico.features.length;
+		for(i=0;i<n;i++){
+			i3GEO.editorOL.layergrafico.features[i].renderIntent = "default";
+			i3GEO.editorOL.selbutton.unselect(i3GEO.editorOL.layergrafico.features[i]);
+		}	
+	},	
+	unselTodosBackup:function(){
 		var n,i,temp;
 		n = i3GEO.editorOL.backup.features.length;
 		for(i=0;i<n;i++){
 			i3GEO.editorOL.backup.features[i].renderIntent = "default";
+			i3GEO.editorOL.selbutton.unselect(i3GEO.editorOL.backup.features[i]);
 		}	
 	},
 	restauraBackup: function(){
@@ -1363,6 +1447,8 @@ i3GEO.editorOL = {
 			i3GEO.editorOL.layergrafico.removeFeatures(i3GEO.editorOL.layergrafico.features);
 			i3GEO.editorOL.layergrafico.addFeatures(i3GEO.editorOL.backup.features);
 		}
+		if(document.getElementById("panellistagEditor"))
+		{i3GEO.editorOL.listaGeometrias();}
 		//i3GEO.editorOL.backup.removeFeatures(i3GEO.editorOL.backup.features);
 	},	
 	substituiFeaturesSel: function(wkt){
@@ -1381,9 +1467,14 @@ i3GEO.editorOL = {
 				graphicName: i3GEO.editorOL.simbologia.graphicName
 			};			
 			i3GEO.editorOL.layergrafico.addFeatures([f]);
+			if(document.getElementById("panellistagEditor"))
+			{i3GEO.editorOL.listaGeometrias();}
 		}
 		catch(e)
 		{i3GEO.editorOL.restauraBackup();}
+	},
+	flashFeaturesI: function(index){
+		i3GEO.editorOL.flashFeatures([i3GEO.editorOL.layergrafico.features[index]],0);
 	},
 	flashFeatures: function(features, index) {
 		if(!index) {
@@ -1402,6 +1493,12 @@ i3GEO.editorOL = {
 			window.setTimeout(function() {i3GEO.editorOL.flashFeatures(features, index);}, 75);
 		}
 	},
+	selFeature: function(index) {
+		i3GEO.editorOL.selbutton.select(i3GEO.editorOL.layergrafico.features[index]);
+	},
+	unselFeature: function(index) {
+		i3GEO.editorOL.selbutton.unselect(i3GEO.editorOL.layergrafico.features[index]);
+	},
 	carregajts: function(funcao){
 		i3GEO.util.scriptTag(i3GEO.configura.locaplic+"/pacotes/jsts/jstsi3geo.js",funcao,"i3GEOjts",true);
 	},
@@ -1410,9 +1507,11 @@ i3GEO.editorOL = {
 		if(features.length > 0){
 			i3GEO.editorOL.backup = new OpenLayers.Layer.Vector("Backup",{displayInLayerSwitcher:false,visibility:false})
 			i3GEO.editorOL.backup.addFeatures(features);
-			i3GEO.editorOL.unselTodos();
+			i3GEO.editorOL.unselTodosBackup();
 			i3GEO.editorOL.layergrafico.removeFeatures(features);
 			i3GEO.editorOL.layergrafico.addFeatures(i3GEO.editorOL.backup.features);
+			if(document.getElementById("panellistagEditor"))
+			{i3GEO.editorOL.listaGeometrias();}
 		}
 		else
 		{alert("Selecione pelo menos um elemento");}	

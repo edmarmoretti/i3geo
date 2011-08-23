@@ -1440,6 +1440,7 @@ i3GEO.barraDeBotoes = {
 				'texto':true,
 				'corta':true,
 				'edita':true,
+				'listag':true,
 				'selecao':true,
 				'apaga':true,
 				'procura':false,
