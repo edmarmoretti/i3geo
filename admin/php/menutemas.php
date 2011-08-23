@@ -200,7 +200,10 @@ switch (strtoupper($funcao))
 		if(verificaEditores($editores) == "nao")
 		{echo "Vc nao e um editor cadastrado. Apenas os editores definidos em i3geo/ms_configura.php podem acessar o sistema de administracao.";exit;}
 		alteraMenus();
-		retornaJSON(pegaDados("SELECT * from i3geoadmin_menus where id_menu = $id_menu order by nome_menu"));
+		if(isset($id_menu) && $id_menu != "")
+		{retornaJSON(pegaDados("SELECT * from i3geoadmin_menus where id_menu = $id_menu order by nome_menu"));}
+		else
+		{retornaJSON("ok");}
 		exit;
 	break;
 	/*
@@ -765,17 +768,17 @@ function alteraMenus()
 			$nome_menu = utf8_encode($nome_menu);
 			$desc_menu = utf8_encode($desc_menu);
 		}
-    	if($id_menu != "")
-    	{
-    		$dbhw->query("UPDATE i3geoadmin_menus SET en = '$en', es = '$es', it = '$it', publicado_menu = '$publicado_menu',aberto = '$aberto', nome_menu = '$nome_menu', desc_menu = '$desc_menu', perfil_menu = '$perfil_mennu' WHERE id_menu = $id_menu");
-    	}
-    	else
-    	{
-    		$dbhw->query("INSERT INTO i3geoadmin_menus (it,es,en,publicado_menu, nome_menu, desc_menu, aberto, perfil_menu) VALUES ('','','','','', '','SIM','')");
-    	}
-    	$dbhw = null;
-    	$dbh = null;
-    	return "ok";
+		if($id_menu != "")
+		{
+			$dbhw->query("UPDATE i3geoadmin_menus SET en = '$en', es = '$es', it = '$it', publicado_menu = '$publicado_menu',aberto = '$aberto', nome_menu = '$nome_menu', desc_menu = '$desc_menu', perfil_menu = '$perfil_mennu' WHERE id_menu = $id_menu");
+		}
+		else
+		{
+			$dbhw->query("INSERT INTO i3geoadmin_menus (it,es,en,publicado_menu, nome_menu, desc_menu, aberto, perfil_menu) VALUES ('','','','','', '','SIM','')");
+		}
+		$dbhw = null;
+		$dbh = null;
+		return "ok";
 	}
 	catch (PDOException $e)
 	{return "Error!: " . $e->getMessage();}

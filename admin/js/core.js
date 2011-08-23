@@ -1270,10 +1270,14 @@ function core_montaEditor(funcaoOK,w,h,funcaoClose)
 	}
 	var fecha = function()
 	{
-		YAHOO.example.container.panelEditor.destroy();
-		YAHOO.example.container.panelEditor = null;
 		try{
-		eval(funcaoClose+"()");}
+			YAHOO.example.container.panelEditor.destroy();
+			YAHOO.example.container.panelEditor = null;
+		}
+		catch(e){}
+		try{
+			eval(funcaoClose+"()");
+		}
 		catch(e){};
 	}
 	YAHOO.util.Event.addListener(YAHOO.example.container.panelEditor.close, "click", fecha);

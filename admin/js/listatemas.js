@@ -67,23 +67,23 @@ function montaDivTemas(i)
 {
 	var param = {
 		"linhas":[
-		{titulo:"Nome que será mostrado na árvore de menus (português) - altera também o metadata TEMA, existente no mapfile, usado como título na árvore de camadas:",id:"nome_tema",size:"50",value:i.nome_tema,tipo:"text",div:""},
-		{titulo:"Inglês:",id:"en",size:"50",value:i.en,tipo:"text",div:""},
-		{titulo:"Espanhol:",id:"es",size:"50",value:i.es,tipo:"text",div:""},
-		{titulo:"Italiano:",id:"it",size:"50",value:i.it,tipo:"text",div:""}
+		{titulo:"Nome que será mostrado na árvore de menus (português) - altera também o metadata TEMA, existente no mapfile, usado como título na árvore de camadas:",id:"nome_tema",size:"40",value:i.nome_tema,tipo:"text",div:""},
+		{titulo:"Inglês (opcional):",id:"en",size:"40",value:i.en,tipo:"text",div:""},
+		{titulo:"Espanhol (opcional):",id:"es",size:"40",value:i.es,tipo:"text",div:""},
+		{titulo:"Italiano (opcional):",id:"it",size:"40",value:i.it,tipo:"text",div:""}
 		]
 	}
 	var ins = ""
 	ins += core_geraLinhas(param)	
 	
-	ins += "<p>Descrição:<br>";
-	ins += "<input size=50 type=text id=desc_tema value='"+i.desc_tema+"' /></p>"
+	ins += "<p>Descrição (opcional):<br>";
+	ins += "<input size=40 type=text id=desc_tema value='"+i.desc_tema+"' /></p>"
 	
-	ins += "<p>Link para a fonte:<br>";
-	ins += "<input size=50 type=text id=link_tema value='"+i.link_tema+"' /></p>"
+	ins += "<p>Link para a fonte (opcional):<br>";
+	ins += "<input size=40 type=text id=link_tema value='"+i.link_tema+"' /></p>"
 	
-	ins += "<p>Tags (separe com espaço). Você pode digitar novos tags ou pegar da lista abaixo:"
-	ins += "<input type=text size=50 value='"+i.tags_tema+"' id='tags_tema' ><br>"
+	ins += "<p>Tags (separe com espaço). Você pode digitar novos tags ou pegar da lista abaixo (opcional):"
+	ins += "<input type=text size=40 value='"+i.tags_tema+"' id='tags_tema' ><br>"
 	ins += "<div id=comboTags >Buscando...</div>";
 	
 	ins += "<p>Tipo (preencha apenas se for do tipo WMS):<br>"
@@ -115,7 +115,7 @@ function montaDivTemas(i)
 	ins += core_combosimnao(i.kmz_tema)
 	ins += "</select></p>"
 	
-	ins += "<p><span onclick='atualizaMiniatura()' style='color:blue;cursor:pointer' >Atualiza ou cria a miniatura</span><br>";
+	ins += "<p><span onclick='atualizaMiniatura()' style='color:blue;cursor:pointer' >Atualiza ou cria a miniatura.</span> Cada tema pode ter uma imagem miniatura que é mostrada em algumas funcionalidades do i3Geo. Utilize essa opção para criar a miniatura para o tema em edição.<br>";
 	ins += "<img id='imagemMiniatura' src='../../temas/miniaturas/"+i.imagem+"' /></p><br><br>";
 
 	

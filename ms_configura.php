@@ -405,7 +405,7 @@ else //se for linux
 	$postgis_mapa = "";
 	$utilizacgi = "nao";
 	$expoeMapfile = "sim";
-	$conexaoadmin = "";
+	$conexaoadmin = "";//$locaplic."/admin/php/conexaopostgresql.php";
 	$interfacePadrao = "openlayers.htm";
 }
 ?>

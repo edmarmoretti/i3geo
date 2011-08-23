@@ -71,14 +71,14 @@ function initMenu()
 	{
 		if($i("editor_bd")){return;}
 		core_montaEditor("","600px","500px")
-		$i("editor_bd").innerHTML = '<input type=button id=adicionaNovoGrupo value="Adicionar um novo grupo" style="left:-5px;" /><p><br><div id="tabela" style="left:-5px;"> </div>'
+		$i("editor_bd").innerHTML = '<p class=paragrafo >Clique nas células da tabela para editar a característica de cada item. Finalize com "enter". Após editar, salve o item.</p><p class=paragrafo ><input type=button id=adicionaNovoGrupo value="Adicionar um novo grupo" style="left:-5px;" /></p><p><br><div id="tabela" style="left:-5px;"> </div>'
 		initEditorGrupos()
 	};
 	var editorDeSubGrupos = function()
 	{
 		if($i("editor_bd")){return;}
 		core_montaEditor("","600px","500px")
-		$i("editor_bd").innerHTML = '<input type=button id=adicionaNovoSubGrupo value="Adicionar um novo sub-grupo" style="left:-5px;" /><p>Antes de fechar o formulário, salve as alterações feitas. Clique na célula para editar.<br><div id="tabela" style="left:-5px;"> </div>'
+		$i("editor_bd").innerHTML = '<p class=paragrafo >Clique nas células da tabela para editar a característica de cada item. Finalize com "enter". Após editar, salve o item.</p><p class=paragrafo ><input type=button id=adicionaNovoSubGrupo value="Adicionar um novo sub-grupo" style="left:-5px;" /></p><br><div id="tabela" style="left:-5px;"> </div>'
 		initEditorSubGrupos()
 	};
 

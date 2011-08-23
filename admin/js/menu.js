@@ -79,13 +79,13 @@ function montaTabela_M(dados)
             {key:"excluir",label:"excluir",formatter:formatExclui},
 			{key:"mais",label:"editar",formatter:formatMais},
             {label:"id",key:"id_menu", formatter:formatTexto},
-			{label:"nome",resizeable:true,key:"nome_menu", formatter:formatTexto,editor:new YAHOO.widget.TextboxCellEditor({disableBtns:true})},
-			{label:"en",resizeable:true,key:"en", formatter:formatTexto,editor:new YAHOO.widget.TextboxCellEditor({disableBtns:true})},
-			{label:"es",resizeable:true,key:"es", formatter:formatTexto,editor:new YAHOO.widget.TextboxCellEditor({disableBtns:true})},
-			{label:"it",resizeable:true,key:"it", formatter:formatTexto,editor:new YAHOO.widget.TextboxCellEditor({disableBtns:true})},
-			{label:"publicado?",key:"publicado_menu",editor:"radio" ,editorOptions:{radioOptions:["SIM","NAO"],disableBtns:false,LABEL_SAVE:"OK"}},
+			{label:"nome padrão do menu",resizeable:true,key:"nome_menu", formatter:formatTexto,editor:new YAHOO.widget.TextboxCellEditor({disableBtns:true})},
+			{label:"nome em inglês (opcional)",resizeable:true,key:"en", formatter:formatTexto,editor:new YAHOO.widget.TextboxCellEditor({disableBtns:true})},
+			{label:"nome em espanhol (opcional)",resizeable:true,key:"es", formatter:formatTexto,editor:new YAHOO.widget.TextboxCellEditor({disableBtns:true})},
+			{label:"nome em italiano (opcional)",resizeable:true,key:"it", formatter:formatTexto,editor:new YAHOO.widget.TextboxCellEditor({disableBtns:true})},
+			{label:"publicado para todos verem?",key:"publicado_menu",editor:"radio" ,editorOptions:{radioOptions:["SIM","NAO"],disableBtns:false,LABEL_SAVE:"OK"}},
 			{label:"perfis",resizeable:true,key:"perfil_menu", formatter:formatTexto,editor:"textbox",editorOptions:{LABEL_SAVE:"OK"}},
-			{label:"aberto?",key:"aberto", editor:"radio" ,editorOptions:{radioOptions:["SIM","NAO"],disableBtns:false,LABEL_SAVE:"OK"}},
+			{label:"inicia aberto?",key:"aberto", editor:"radio" ,editorOptions:{radioOptions:["SIM","NAO"],disableBtns:false,LABEL_SAVE:"OK"}},
 			{label:"descrição",resizeable:true,key:"desc_menu", formatter:formatTexto,editor:new YAHOO.widget.TextboxCellEditor({disableBtns:true})}
         ];
 		//YAHOO.widget.CellEditor.LABEL_SAVE = "Aplicar";
@@ -146,11 +146,8 @@ function montaEditor_M(dados,id,recordid)
 		{
 			gravaDados_M(id,recordid);
 		}
-		else
-		{
-			YAHOO.example.container.panelEditor.destroy();
-			YAHOO.example.container.panelEditor = null;
-		}
+		YAHOO.example.container.panelEditor2.destroy();
+		YAHOO.example.container.panelEditor2 = null;
 	};
 	if(!$i("janela_editor2"))
 	{
@@ -167,10 +164,10 @@ function montaEditor_M(dados,id,recordid)
             { label: "Cancela", value: "CANCEL", checked: false }
         ]);
 		editorBotoes.on("checkedButtonChange", on_editorCheckBoxChange);	
-		YAHOO.example.container.panelEditor = new YAHOO.widget.Panel("janela_editor2", { fixedcenter:true,close:false,width:"400px", height:"480px",overflow:"auto", visible:false,constraintoviewport:true } );
-		YAHOO.example.container.panelEditor.render();
+		YAHOO.example.container.panelEditor2 = new YAHOO.widget.Panel("janela_editor2", { fixedcenter:true,close:false,width:"400px", height:"480px",overflow:"auto", visible:false,constraintoviewport:true } );
+		YAHOO.example.container.panelEditor2.render();
 	}
-	YAHOO.example.container.panelEditor.show();
+	YAHOO.example.container.panelEditor2.show();
 	$i("editor_bd2").innerHTML = montaDiv_M(dados[0])
 	core_carregando("desativa");
 }
@@ -178,17 +175,17 @@ function montaDiv_M(i)
 {
 	var param = {
 		"linhas":[
-			{titulo:"Nome:",id:"Enome_menu",size:"50",value:i.nome_menu,tipo:"text",div:""},
-			{titulo:"Descricao:",id:"Edesc_menu",size:"50",value:i.desc_menu,tipo:"text",div:""},
-			{titulo:"Inglês:",id:"Een",size:"50",value:i.en,tipo:"text",div:""},
-			{titulo:"Espanhol:",id:"Ees",size:"50",value:i.es,tipo:"text",div:""},
-			{titulo:"Italiano:",id:"Eit",size:"50",value:i.it,tipo:"text",div:""},
-			{titulo:"Perfis:",id:"Eperfil_menu",size:"50",value:i.perfil_menu,tipo:"text",div:""}
+			{titulo:"Nome padrão:",id:"Enome_menu",size:"50",value:i.nome_menu,tipo:"text",div:""},
+			{titulo:"Descricao (opcional):",id:"Edesc_menu",size:"50",value:i.desc_menu,tipo:"text",div:""},
+			{titulo:"Nome em inglês (opcional):",id:"Een",size:"50",value:i.en,tipo:"text",div:""},
+			{titulo:"Espanhol (opcional):",id:"Ees",size:"50",value:i.es,tipo:"text",div:""},
+			{titulo:"Italiano (opcional):",id:"Eit",size:"50",value:i.it,tipo:"text",div:""},
+			{titulo:"Perfis (opcional):",id:"Eperfil_menu",size:"50",value:i.perfil_menu,tipo:"text",div:""}
 		]
 	};
 	var ins = ""
 	ins += core_geraLinhas(param)	
-	ins += "<p>Publicado?<br>"
+	ins += "<p>Publicado para todos verem?<br>"
 	ins += "<select  id='Epublicado_menu' />"
 	ins += "<option value='' "
 	if (i.publicado_menu == ""){ins += "selected";}
@@ -200,7 +197,7 @@ function montaDiv_M(i)
 	if ((i.publicado_menu).toLowerCase() == "nao"){ins += "selected";}
 	ins += " >não</option>"
 	ins += "</select></p>"
-	ins += "<p>Aberto?<br>"
+	ins += "<p>Inicia aberto na árvore?<br>"
 	ins += "<select  id='Eaberto' />"
 	ins += "<option value='' "
 	if (i.aberto == ""){ins += "selected";}
@@ -250,8 +247,8 @@ function gravaDados_M(id,recordid)
   					myDataTable.updateRow(rec,YAHOO.lang.JSON.parse(o.responseText)[0])
   					core_carregando("desativa");
   				}
-				YAHOO.example.container.panelEditor.destroy();
-				YAHOO.example.container.panelEditor = null;
+				//YAHOO.example.container.panelEditor.destroy();
+				//YAHOO.example.container.panelEditor = null;
   			}
   			catch(e){core_handleFailure(e,o.responseText);}
   		},
