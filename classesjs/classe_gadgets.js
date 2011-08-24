@@ -848,6 +848,8 @@ i3GEO.gadgets = {
 		else
 		{ms.idhtml = id;}
 		objid = $i(id);
+		if(!objid)
+		{return;}
 		//cria o menu se ainda não existir
 		if(objid && objid.innerHTML === ""){
 			i3GEOoMenuBar = YAHOO.widget.MenuManager;
@@ -918,7 +920,9 @@ i3GEO.gadgets = {
 		n = temp.length;
 		while(n > 0){
 			n -= 1;
-			i3GEOoMenuBar.getMenuItem(temp[n]).cfg.setProperty("checked", false);
+			i = i3GEOoMenuBar.getMenuItem(temp[n]);
+			if(i)
+			{i.cfg.setProperty("checked", false);}
 		}
 		try{
 			temp = "";

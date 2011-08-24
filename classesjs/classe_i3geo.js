@@ -352,7 +352,9 @@ i3GEO = {
 				if(i3GEO.guias.TIPO === "movel")
 				{i3GEO.guias.guiaMovel.inicia();}
 			}
-			catch(e){alert(e);}
+			catch(e){
+				if(typeof(console) !== 'undefined'){console.warn(e);}
+			}
 		};
 		if (!$i("i3geo"))
 		{document.body.id = "i3geo";}
