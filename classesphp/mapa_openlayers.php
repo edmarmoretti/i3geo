@@ -275,6 +275,7 @@ function salvaCacheImagem($bbox,$layer,$map,$w,$h){
 	if(!file_exists($nome))
 	{
 		$img->saveImage($nome);
+		chmod($nome,0777);
 	}
 }
 function carregaCacheImagem($bbox,$layer,$map,$w,$h){
