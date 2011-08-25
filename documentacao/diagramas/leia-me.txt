@@ -1,0 +1,2 @@
+Diagramas feitos com DIA
+http://live.gnome.org/Dia
