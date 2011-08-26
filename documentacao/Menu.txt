@@ -67,7 +67,7 @@ Group: Diagramas  {
 
    }  # Group: Diagramas
 
-Group: Interface HTML  {
+Group: Interfaces  {
 
    File: Flamingo  (interface\flamingo.htm)
    File: Google Earth &lparen;experimental&rparen;  (interface\googleearth.phtml)
@@ -80,9 +80,9 @@ Group: Interface HTML  {
    File: Interface Openlayers versão com guias à esquerda  (interface\openlayers1.htm)
    File: Interface zerocal  (interface\zerocal.htm)
    File: Interface zerocalol  (interface\zerocalol.htm)
-   }  # Group: Interface HTML
+   }  # Group: Interfaces
 
-Group: API javascript  {
+Group: Javascript  {
 
    File: i3geo - carregador de javascripts  (classesjs\i3geo.js)
 
@@ -123,9 +123,9 @@ Group: API javascript  {
       File: Social  (classesjs\classe_social.js)
       }  # Group: Classes
 
-   }  # Group: API javascript
+   }  # Group: Javascript
 
-Group: API PHP  {
+Group: PHP  {
 
    File: mapa_controle.php  (classesphp\mapa_controle.php)
 
@@ -177,7 +177,7 @@ Group: API PHP  {
       File: wscliente.php  (classesphp\wscliente.php)
       }  # Group: Funções de aplicativos específicos
 
-   }  # Group: API PHP
+   }  # Group: PHP
 
 Group: Ferramentas  {
 
@@ -187,6 +187,7 @@ Group: Ferramentas  {
       File: Agrupa elementos  (ferramentas\agrupaelementos\index.js.php)
       File: Análise de Geometrias  (ferramentas\analisageometrias\index.js.php)
       File: Buffer  (ferramentas\buffer\index.js.php)
+      File: Buffer em um ponto  (no auto-title, ferramentas\bufferpt\index.js.php)
       File: Centro de massa  (ferramentas\centromassa\index.js.php)
       File: Centróide  (ferramentas\centroide\index.js.php)
       File: Dissolve elementos de um tema  (ferramentas\dissolve\index.js.php)
@@ -201,6 +202,8 @@ Group: Ferramentas  {
 
    Group: Adição de dados  {
 
+      File: Adiciona um tema ao mapa com base em um arquivo KML existente na Web  (ferramentas\carregakml\index.js.php)
+      File: Adiciona um tema ao mapa com base em um arquivo GeoJson existente na Web  (ferramentas\conectargeojson\index.js.php)
       File: Carrosel de temas  (ferramentas\carouseltemas\index.js.php)
       File: Conexão com georss  (ferramentas\conectargeorss\index.js)
       File: Conexão com WMS  (ferramentas\conectarwms\index.js)
@@ -216,6 +219,7 @@ Group: Ferramentas  {
       File: Nuvem de tags  (ferramentas\nuvemtags\index.js.php)
       File: Upload de arquivo dbf  (ferramentas\uploaddbf\index.js.php)
       File: Upload de arquivo shapefile  (ferramentas\upload\index.js.php)
+      File: Upload KML  (ferramentas\uploadkml\index.js.php)
       File: WMS Time  (ferramentas\wmstime\index.js)
       }  # Group: Adição de dados
 
@@ -238,6 +242,16 @@ Group: Ferramentas  {
          }  # Group: Metar
 
       File: Mostra extensão  (ferramentas\mostraexten\index.js.php)
+
+      Group: Telaremota  {
+
+         File: Interface GoogleEarth para a ferramenta tela remota  (ferramentas\telaremota\googleearth1.php)
+         File: Interface GoogleMaps para a ferramenta tela remota  (ferramentas\telaremota\googlemaps1.php)
+         File: Interface OpenLayers para a ferramenta tela remota  (ferramentas\telaremota\openlayers1.php)
+         File: Monotor remoto  (ferramentas\telaremota\recuperamapa.php)
+         File: Tela remota  (ferramentas\telaremota\index.js.php)
+         }  # Group: Telaremota
+
       File: SIBEA-MMA &lparen;JavaScript&rparen;  (ferramentas\sibea\pesquisa.htm)
       File: SIBEA-MMA &lparen;PHP&rparen;  (ferramentas\sibea\pesquisa.php)
       File: Wikipédia  (ferramentas\wiki\index.js.php)
@@ -245,6 +259,7 @@ Group: Ferramentas  {
 
    Group: Manipulação do mapa  {
 
+      File: Animação  (ferramentas\animacao\index.js.php)
       File: Auto redesenho  (ferramentas\opcoes_autoredesenha\index.js.php)
       File: Barra de escala  (ferramentas\opcoes_escala\index.js.php)
       File: Carrega mapa salvo  (ferramentas\carregamapa\index.js.php)
@@ -256,7 +271,6 @@ Group: Ferramentas  {
       File: Filtro da árvore de camadas  (ferramentas\filtroarvore\index.js.php)
       File: Formato de imagem  (ferramentas\outputformat\index.js.php)
       File: Importar WMC  (ferramentas\importarwmc\index.js.php)
-      File: Legenda gráfica do mapa  (ferramentas\opcoes_legenda\index.js.php)
 
       Group: Imprimir  {
 
@@ -266,6 +280,8 @@ Group: Ferramentas  {
          File: Licença  (ferramentas\imprimir\svg.php)
          }  # Group: Imprimir
 
+      File: Legenda gráfica do mapa  (ferramentas\opcoes_legenda\index.js.php)
+      File: opacidademapa  (ferramentas\opacidademapa\index.js.php)
       File: Opções de filtro de imagem  (ferramentas\tipoimagem\index.js.php)
       File: Quadros de animação  (ferramentas\opcoes_quadros\index.js.php)
       File: Redes sociais  (ferramentas\redessociais\index.php)
@@ -336,33 +352,9 @@ Group: Aplicativos adicionais  {
 
    File: Mashups  (mashups\index.html)
    File: twitter2geo.php  (twitter2geo.php)
-
-   Group: Ferramentas  {
-
-      Group: telaremota  {
-
-         File: Interface GoogleEarth para a ferramenta tela remota  (ferramentas\telaremota\googleearth1.php)
-         File: Interface GoogleMaps para a ferramenta tela remota  (ferramentas\telaremota\googlemaps1.php)
-         File: Interface OpenLayers para a ferramenta tela remota  (ferramentas\telaremota\openlayers1.php)
-         File: Monotor remoto  (ferramentas\telaremota\recuperamapa.php)
-         File: Tela remota  (ferramentas\telaremota\index.js.php)
-         }  # Group: telaremota
-
-      File: Adiciona um tema ao mapa com base em um arquivo KML existente na Web  (ferramentas\carregakml\index.js.php)
-      File: Buffer &lparen;entorno&rparen; em um ponto  (ferramentas\bufferpt\index.js.php)
-      File: opacidademapa  (ferramentas\opacidademapa\index.js.php)
-      }  # Group: Ferramentas
-
-   Group: Ferramentas  {
-
-      File: Adiciona um tema ao mapa com base em um arquivo GeoJson existente na Web  (ferramentas\conectargeojson\index.js.php)
-      File: Animação  (ferramentas\animacao\index.js.php)
-      File: Upload KML  (ferramentas\uploadkml\index.js.php)
-      }  # Group: Ferramentas
-
    }  # Group: Aplicativos adicionais
 
-Group: Administração  {
+Group: Sistema de Administração  {
 
    File: Menu principal  (admin\index.html)
 
@@ -457,7 +449,7 @@ Group: Administração  {
       File: Web Services  (admin\html\webservices.html)
       }  # Group: Html
 
-   }  # Group: Administração
+   }  # Group: Sistema de Administração
 
 Group: Index  {
 
