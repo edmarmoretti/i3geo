@@ -163,6 +163,7 @@ Inclui os programas php com funções utilizadas pelo ms_criamapa.php
 
 include_once ($caminho."classesphp/pega_variaveis.php");
 include_once ($caminho."classesphp/funcoes_gerais.php");
+
 if(!isset($dir_tmp))
 {include_once ($caminho."ms_configura.php");}
 
@@ -200,7 +201,7 @@ $locaplic_ = $locaplic;
 //$locidentifica_ = $locidentifica;
 $R_path_ = $R_path;
 $mapext_ = $mapext;
-$locmapas_ = $locmapas;
+
 $debug_ = $debug;
 $ler_extensoes_ = $ler_extensoes;
 $postgis_mapa_ = $postgis_mapa;
@@ -234,9 +235,11 @@ Se já houver uma seção aberta, em função de outro browser estar ativo, cria uma 
 */
 session_name("i3GeoPHP");
 session_start();
+//echo $_SESSION["map_file"];exit;
 if (!isset($g_sid)){$g_sid="";}
-if(isset($_SESSION["map_file"]) || $g_sid!="")
-{session_regenerate_id();}
+if(isset($_SESSION["map_file"]) || $g_sid != "")
+{session_regenerate_id();$_SESSION = array();}
+
 /*
  Aguarde
 
@@ -254,7 +257,7 @@ $_SESSION["locaplic"] = $locaplic_;
 //$_SESSION["locidentifica"] = $locidentifica_;
 $_SESSION["R_path"] = $R_path_;
 $_SESSION["mapext"] = $mapext_;
-$_SESSION["locmapas"] = $locmapas_;
+
 $_SESSION["debug"] = $debug_;
 $_SESSION["ler_extensoes"] = $ler_extensoes_;
 $_SESSION["postgis_mapa"] = $postgis_mapa_;
@@ -280,6 +283,7 @@ $_SESSION["contadorsalva"] = 0;//essa variavel e utilizada pela ferramenta telar
 //
 //pega todas as variáveis da sessão, mesmo as que foram definidas anteriormente
 //
+
 foreach(array_keys($_SESSION) as $k)
 {eval("\$".$k."='".$_SESSION[$k]."';");}
 $postgis_mapa = $postgis_mapa_;
