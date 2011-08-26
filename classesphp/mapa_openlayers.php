@@ -1,4 +1,5 @@
 <?php
+
 /*
 Title: mapa_openlayers.php
 
@@ -7,7 +8,7 @@ das variáveis de conexão com banco e outras operações específicas do i3Geo.
 
 É utilizado especificamente nas interfaces que utilizam a biblioteca OpenLayers em LAYERS do tipo WMS.
 
-Precisa do código da "section" PHP aberta pelo i3Geo ou o código para acesso especial indicado no parâmetro telaR 
+Precisa do código da "section" PHP aberta pelo i3Geo ou o código para acesso especial indicado no parâmetro telaR
 (veja a ferramenta TELAREMOTA).
 
 Parametros:
@@ -62,7 +63,7 @@ if (!function_exists('ms_GetVersion'))
 {
 	$s = PHP_SHLIB_SUFFIX;
 	@dl( 'php_mapscript.'.$s );
-	$ler_extensoes[] = 'php_mapscript';	
+	$ler_extensoes[] = 'php_mapscript';
 }
 //verificação de segurança
 session_name("i3GeoPHP");
@@ -79,7 +80,10 @@ if(@$_SESSION["fingerprint"])
 	{ilegal();}
 }
 else
-{ilegal();}
+{exit;}
+if(!isset($_SESSION["map_file"]))
+{exit;}
+
 //
 //map_fileX é necessário caso register_globals = On no PHP.INI
 $map_fileX = $_SESSION["map_file"];
@@ -104,7 +108,7 @@ if($qy)
 	$handle = fopen ($qyfile, "r");
 	$conteudo = fread ($handle, filesize ($qyfile));
 	fclose ($handle);
-	$shp = unserialize($conteudo);	
+	$shp = unserialize($conteudo);
 	foreach ($shp as $indx)
 	{$mapa->querybyindex($indxlayer,-1,$indx,MS_TRUE);}
 }
@@ -135,7 +139,7 @@ if(!isset($_GET["telaR"])){//no caso de projecoes remotas, o mapfile nao e alter
 						if(($lcon == " ") || ($lcon == ""))
 						{$l->set("connection",$postgis_mapa);}
 						else
-						{$l->set("connection",$postgis_mapa[$lcon]);}					
+						{$l->set("connection",$postgis_mapa[$lcon]);}
 					}
 				}
 			}
@@ -259,7 +263,7 @@ else{
 
 	echo header("Content-type: image/png \n\n");
 	imagepng($img);
-		
+
 }
 function salvaCacheImagem($bbox,$layer,$map,$w,$h){
 	global $img,$map_size;
@@ -268,7 +272,7 @@ function salvaCacheImagem($bbox,$layer,$map,$w,$h){
 	{$bbox = "";}
 	if($layer == "")
 	{$layer = "fundo";}
-	
+
 	$nomedir = dirname(dirname($map))."/cache/".$layer;
 	@mkdir($nomedir,0777);
 	$nome = $nomedir."/".$w.$h.$bbox;
@@ -283,7 +287,7 @@ function carregaCacheImagem($bbox,$layer,$map,$w,$h){
 	{$bbox = "";}
 	if($layer == "")
 	{$layer = "fundo";}
-	
+
 	$nome = $w.$h.$bbox;
 	$nome = dirname(dirname($map))."/cache/".$layer."/".$nome;
 	if(file_exists($nome))
@@ -302,10 +306,10 @@ function carregaCacheImagem($bbox,$layer,$map,$w,$h){
 			$img  = imagecreatetruecolor($w, $h);
 			imagealphablending($img, false);
 			imagesavealpha($img, true);
-			
+
 			$bgc = imagecolorallocatealpha($img, 255, 255, 255,127);
 			$tc  = imagecolorallocate($img, 255, 0, 0);
-			
+
 			imagefilledrectangle($img, 0, 0, $w, $h, $bgc);
 			/* Output an error message */
 			imagestring($img, 3, 5, 5, 'Erro ao ler ' . $nome, $tc);
@@ -361,6 +365,8 @@ function filtraImagem($nomer,$tipoimagem){
 }
 function ilegal(){
 	$img = imagecreatefrompng("../imagens/ilegal.png");
+	imagealphablending($img, false);
+	imagesavealpha($img, true);
 	ob_clean();
 	echo header("Content-type: image/png \n\n");
 	imagepng($img);

@@ -40,25 +40,17 @@ if (!function_exists('ms_GetVersion'))
 {
 	$s = PHP_SHLIB_SUFFIX;
 	@dl( 'php_mapscript.'.$s );
-	$ler_extensoes[] = 'php_mapscript';	
+	$ler_extensoes[] = 'php_mapscript';
 }
 //verificação de segurança
 session_name("i3GeoPHP");
 if(@$_GET["g_sid"])
 {session_id($_GET["g_sid"]);}
 else
-{ilegal();}
+{exit;}
 session_start();
-/*
-essa verificação não funciona
-if(@$_SESSION["fingerprint"])
-{
-	if (md5('I3GEOSEC' . $_SERVER['HTTP_USER_AGENT'] . session_id()) != $_SESSION["fingerprint"])
-	{ilegal();}
-}
-else
-{ilegal();}
-*/
+if(!isset($_SESSION["map_file"]))
+{exit;}
 //
 $map_fileX = $_SESSION["map_file"];
 $postgis_mapa = $_SESSION["postgis_mapa"];
@@ -134,13 +126,13 @@ function retornaWms($map_fileX,$postgis_mapa){
 		$handle = fopen ($qyfile, "r");
 		$conteudo = fread ($handle, filesize ($qyfile));
 		fclose ($handle);
-		$shp = unserialize($conteudo);	
+		$shp = unserialize($conteudo);
 		foreach ($shp as $indx)
 		{$mapa->querybyindex($indxlayer,-1,$indx,MS_TRUE);}
-	}	
+	}
 	$layersNames = $mapa->getalllayernames();
 	$o = $mapa->outputformat;
-	$o->set("imagemode",MS_IMAGEMODE_RGBA);	
+	$o->set("imagemode",MS_IMAGEMODE_RGBA);
 	if(!isset($_GET["telaR"])){//no caso de projecoes remotas, o mapfile nao´e alterado
 		foreach ($layersNames as $layerName)
 		{
@@ -165,7 +157,7 @@ function retornaWms($map_fileX,$postgis_mapa){
 							if(($lcon == " ") || ($lcon == ""))
 							{$l->set("connection",$postgis_mapa);}
 							else
-							{$l->set("connection",$postgis_mapa[$lcon]);}					
+							{$l->set("connection",$postgis_mapa[$lcon]);}
 						}
 					}
 
@@ -179,7 +171,7 @@ function retornaWms($map_fileX,$postgis_mapa){
 		$of = $mapa->outputformat;
 		$of->set("imagemode",MS_IMAGEMODE_RGBA);
 		$of->set("driver","AGG/PNG");
-		$of->set("transparent",MS_ON);		
+		$of->set("transparent",MS_ON);
 	}
 	$mapa->setsize($_GET["WIDTH"],$_GET["HEIGHT"]);
 	if(isset($_GET["mapext"])){
@@ -288,6 +280,8 @@ function filtraImagem($nomer,$tipoimagem){
 }
 function ilegal(){
 	$img = imagecreatefrompng("../imagens/ilegal.png");
+	imagealphablending($img, false);
+	imagesavealpha($img, true);
 	ob_clean();
 	echo header("Content-type: image/png \n\n");
 	imagepng($img);
