@@ -43,6 +43,7 @@ if (!function_exists('ms_GetVersion'))
 	$ler_extensoes[] = 'php_mapscript';
 }
 //verificação de segurança
+$_SESSION = array();
 session_name("i3GeoPHP");
 if(@$_GET["g_sid"])
 {session_id($_GET["g_sid"]);}
