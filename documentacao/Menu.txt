@@ -4,7 +4,9 @@ Format: Development Release 02-10-2007 (1.35 base)
 Title: i3Geo
 SubTitle: Documentação dos códigos
 
-Footer: Para mais informações veja http://softwarepublico.gov.br
+# You can add a footer to your documentation like this:
+# Footer: [text]
+# If you want to add a copyright notice, this would be the place to do it.
 Timestamp: Gerado em day month, year
 #   m     - One or two digit month.  January is "1"
 #   mm    - Always two digit month.  January is "01"
@@ -43,11 +45,27 @@ Don't Index: Properties
 # --------------------------------------------------------------------------
 
 
+Link: Portal do Software Público  (http://softwarepublico.gov.br)
 File: Página principal com a lista de aplicativos do i3geo  (principal.htm)
 File: Inicializa o i3Geo via URL ms_criamapa.php  (ms_criamapa.php)
 File: Variáveis de inicialização ms_configura.php  (ms_configura.php)
 File: Testa a instalação do i3Geo  (testainstal.php)
 File: Testa um mapfile  (testamapfile.php)
+
+Group: Diagramas  {
+
+   Group: Abrir figuras  {
+
+      Link: MER do banco de dados  (../diagramas/mer_banco_de_dados_de_administracao.png)
+      }  # Group: Abrir figuras
+
+   Group: Arquivos originais  {
+
+      Link: Baixe o software DIA  (http://dia-installer.de/)
+      Link: MER do banco de dados  (../diagramas/mer_banco_de_dados_de_administracao.dia)
+      }  # Group: Arquivos originais
+
+   }  # Group: Diagramas
 
 Group: Interface HTML  {
 
@@ -333,6 +351,13 @@ Group: Aplicativos adicionais  {
       File: Adiciona um tema ao mapa com base em um arquivo KML existente na Web  (ferramentas\carregakml\index.js.php)
       File: Buffer &lparen;entorno&rparen; em um ponto  (ferramentas\bufferpt\index.js.php)
       File: opacidademapa  (ferramentas\opacidademapa\index.js.php)
+      }  # Group: Ferramentas
+
+   Group: Ferramentas  {
+
+      File: Adiciona um tema ao mapa com base em um arquivo GeoJson existente na Web  (ferramentas\conectargeojson\index.js.php)
+      File: Animação  (ferramentas\animacao\index.js.php)
+      File: Upload KML  (ferramentas\uploadkml\index.js.php)
       }  # Group: Ferramentas
 
    }  # Group: Aplicativos adicionais
