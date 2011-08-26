@@ -59,6 +59,7 @@ Arquivo:
 i3geo/classesphp/mapa_openlayers.php
 
 */
+$_COOKIE = array();
 if (!function_exists('ms_GetVersion'))
 {
 	$s = PHP_SHLIB_SUFFIX;
@@ -73,7 +74,7 @@ if(@$_GET["g_sid"])
 else
 {ilegal();}
 session_start();
-
+//var_dump($_SESSION);exit;
 if(@$_SESSION["fingerprint"])
 {
 	$f = explode(",",$_SESSION["fingerprint"]);
