@@ -51,9 +51,15 @@ Function: iniciaAtlas
 Inicializa o Atlas.
 
 Pega o título e monta as pranchas
+
+Parametros:
+
+combow {numerico} - largura do combo. Para escapar, utilize 0
 */
-function iniciaAtlas()
+function iniciaAtlas(combow)
 {
+	if(!combow)
+	{combow = 0;}
 	document.body.style.width = "100%";
 	document.body.style.height = parseInt(document.body.style.height)+20;
 	cpObjAtlas = new cpaint();
@@ -79,7 +85,10 @@ function iniciaAtlas()
 		if (retorno.data.tipoguias == "combo")
 		{
 			pai.style.textAlign="left"
-			ins = "Escolha a prancha: <select onchange='abrePrancha(this.value)'>"
+			ins = "Escolha a prancha: <select onchange='abrePrancha(this.value)' ";
+			if(combow > 0)
+			{ins += "style=width:"+combow+"px ";}
+			ins += ">";
 			ins += "<option value=''>---</option>"
 		}
 		if (pai)
