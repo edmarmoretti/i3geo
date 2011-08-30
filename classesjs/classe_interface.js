@@ -1527,8 +1527,10 @@ i3GEO.Interface = {
 					i.innerHTML = ins;
 				}
 				f = $i("googlemapsdiv");
-				f.style.width = w;
-				f.style.height = h;
+				if(w){
+					f.style.width = w;
+					f.style.height = h;
+				}
 			}
 			i3GeoMap = "";
 			i3GEO.Interface.IDMAPA = "googlemapsdiv";
