@@ -57,12 +57,18 @@ Group: Diagramas  {
    Group: Abrir figuras  {
 
       Link: MER do banco de dados  (../diagramas/mer_banco_de_dados_de_administracao.png)
+	  Link: Arquitetura  (../diagramas/arquitetura.png)
+	  Link: Caso de uso geral  (../diagramas/caso_de_uso_geral.png)
+	  Link: Atividade abrir mapa interativo  (../diagramas/atividade_abrir_mapa_interativo.png)
       }  # Group: Abrir figuras
 
    Group: Arquivos originais  {
 
       Link: Baixe o software DIA  (http://dia-installer.de/)
       Link: MER do banco de dados  (../diagramas/mer_banco_de_dados_de_administracao.dia)
+	  Link: Arquitetura  (../diagramas/arquitetura.dia)
+	  Link: Caso de uso geral  (../diagramas/caso_de_uso_geral.dia)
+	  Link: Atividade abrir mapa interativo  (../diagramas/atividade_abrir_mapa_interativo.dia)
       }  # Group: Arquivos originais
 
    }  # Group: Diagramas

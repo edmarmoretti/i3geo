@@ -150,7 +150,8 @@ Parâmetros:
 	servidor - por default é ../ogc.php o que força o uso do i3geo local. Esse é o programa que será utilizado em conjunto com a lista definida no parâmetro 'temas'
 	temas - lista com os temas (mapfiles) do i3Geo que serão incluídos no mapa
 	numzoomlevels - número de níveis de zoom, default=6
-	maxextent - extensão geográfica do mapa (xmin,ymin,xmax,ymax)
+	maxextent - extensão geográfica máxima do mapa (xmin,ymin,xmax,ymax)
+	mapext - extensão geográfica inicial do mapa (xmin,ymin,xmax,ymax)
 	largura - lagura do mapa em pixels
 	altura - altura do mapa em pixels
 	pontos - lista de coordenadas x e y que serão incluídas como marcas no mapa
@@ -286,7 +287,13 @@ i3GEO.editorOL.marca = "<?php
 }
 ?>
 <?php if(isset($maxextent)){
+	$maxextent = str_replace(" ",",",$maxextent);
 	echo "i3GEO.editorOL.maxext = new OpenLayers.Bounds(".$maxextent.");";
+}
+?>
+<?php if(isset($mapext)){
+	$mapext = str_replace(" ",",",$mapext);
+	echo "i3GEO.editorOL.mapext = new OpenLayers.Bounds(".$mapext.");";
 }
 ?>
 i3GEO.editorOL.mapa = new OpenLayers.Map('i3geoMapa',{controls:[]})

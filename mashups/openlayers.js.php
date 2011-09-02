@@ -95,7 +95,8 @@ i3GEO.editorOL = {
 		new OpenLayers.Control.KeyboardDefaults()	
 	],
 	numzoom: 12,
-	maxext: new OpenLayers.Bounds(-76.5125927,-39.3925675209,-29.5851853,9.49014852081),
+	maxext: "",
+	mapext: new OpenLayers.Bounds(-76.5125927,-39.3925675209,-29.5851853,9.49014852081),
 	mapa: "",
 	inicia: function(){
 		var alayers = [],
@@ -151,10 +152,14 @@ i3GEO.editorOL = {
 		{alert("O objeto i3GEO.editorOL.mapa precisa ser criado com new OpenLayers.Map()");return;}
 		if(i3GEO.editorOL.maxext !== ""){
 			i3GEO.editorOL.mapa.setOptions({
-				numZoomLevels: i3GEO.editorOL.numzoom,
 				maxExtent: i3GEO.editorOL.maxext
 			});
 		}
+		if(i3GEO.editorOL.numzoom !== ""){
+			i3GEO.editorOL.mapa.setOptions({
+				numZoomLevels: i3GEO.editorOL.numzoom
+			});
+		}		
 		for(i=0;i<ncontroles;i++){
 			i3GEO.editorOL.mapa.addControl(i3GEO.editorOL.controles[i]);
 		}
@@ -181,6 +186,8 @@ i3GEO.editorOL = {
 		i3GEO.editorOL.adicionaMarcas();
 		if(i3GEO.editorOL.maxext !== "")
 		{i3GEO.editorOL.mapa.zoomToMaxExtent();}
+		else
+		{i3GEO.editorOL.mapa.zoomToExtent(i3GEO.editorOL.mapext);}
 		i3GEO.editorOL.coordenadas();	
 		i3GEO.editorOL.criaJanelaBusca();
 		i3GEO.editorOL.criaBotoes(i3GEO.editorOL.botoes);
