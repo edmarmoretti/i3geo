@@ -59,8 +59,10 @@ if (isset($_GET))
 {
 	foreach(array_keys($_GET) as $k)
 	{
-		if ($_GET[$k] != "''")
-		eval("\$".$k."='".(strip_tags($_GET[$k]))."';");
+		if ($_GET[$k] != "''"){
+			$v = strip_tags($_GET[$k]);
+			eval("\$".$k."='".($v)."';");
+		}
 	}
 }
 //var_dump($_GET);exit;

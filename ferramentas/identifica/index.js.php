@@ -600,6 +600,7 @@ i3GEOF.identifica = {
 	*/
 	mostraDadosTema: function(retorno){
 		var res="",div0,ntemas,i,resultados,nres,cor,j,itens,nitens,k,atualN = "todas",inicio=0,numResultados,tip;
+		
 		if($i("i3GEOFidentificaNocorrencias"))
 		{atualN = $i("i3GEOFidentificaNocorrencias").value;}
 		$i("i3GEOF.identifica_corpo").scrollTop = 0;
@@ -631,7 +632,7 @@ i3GEOF.identifica = {
 						nitens = resultados[j].length;
 						for(k=0;k<nitens;k++){
 							tip = "&nbsp;&nbsp;";
-							if(resultados[j][k].tip.toLowerCase() == "sim"){
+							if(resultados[j][k].tip && resultados[j][k].tip.toLowerCase() == "sim"){
 								tip = "<img style='margin-right:2px;position:relative;top:3px;width:12px;' src='"+i3GEO.configura.locaplic+"/imagens/tips.png' title='Etiqueta ativa' />";
 							}
 							else{

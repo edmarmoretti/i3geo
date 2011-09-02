@@ -1140,9 +1140,13 @@ $listaDeTemas - (opcional) Lista com os códigos dos temas que serão identificado
 	function identificaQBP2($tema="",$x=0,$y=0,$map_file="",$resolucao=0,$item="",$tiporetorno="",$etip=false,$ext="")
 	{
 		if($map_file == "")
-		{$mapa = $this->mapa;}
+		{
+			$mapa = $this->mapa;
+			$map_file = $this->arquivo;
+		}
 		else
 		{$mapa = ms_newMapObj($map_file);}
+
 		if($ext != ""){
 			$extmapa = $mapa->extent;
 			$e = explode(" ",$ext);
@@ -1165,6 +1169,7 @@ $listaDeTemas - (opcional) Lista com os códigos dos temas que serão identificado
 			$layer->set("toleranceunits",MS_PIXELS);
 			$layer->set("tolerance",$resolucao);
 			$ptimg = xy2imagem($map_file,array($x,$y));
+			//var_dump($ptimg);exit;
 			$mapa = desligatemas($mapa);
 			$mapa = desligamargem($mapa);
 			$imgo = $mapa->draw();
@@ -1192,6 +1197,10 @@ $listaDeTemas - (opcional) Lista com os códigos dos temas que serão identificado
 			$res = str_replace("INFOFORMAT","INFO_FORMAT",$res);
 			$res2 = $layer->getWMSFeatureInfoURL($ptimg->x, $ptimg->y, 1,"MIME");
 			$res2 = str_replace("INFOFORMAT","INFO_FORMAT",$res2);
+			
+			//echo $ptimg->x;exit;
+			
+			
 			$resposta = file($res);
 			$n = array();
 			if(strtoupper($formatoinfo) == "TEXT/HTML")
