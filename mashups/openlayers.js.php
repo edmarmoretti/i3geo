@@ -81,7 +81,8 @@ i3GEO.editorOL = {
 		'fecha':false,
 		'tools':false,
 		'undo':false,
-		'frente':false
+		'frente':false,
+		'legenda':true
 	},
 	pontos: [],
 	marca: "../pacotes/openlayers/img/marker-gold.png",
