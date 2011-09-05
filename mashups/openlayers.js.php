@@ -687,15 +687,24 @@ i3GEO.editorOL = {
 				eventListeners: {
 					getfeatureinfo: function(event) {
 						var lonlat = i3GEO.editorOL.mapa.getLonLatFromPixel(event.xy),
-							lonlattexto = "<hr>";
+							lonlattexto = "<hr>",
+							formata;
 						if(	botoes.linha === true || botoes.ponto === true || botoes.poligono === true || botoes.edita === true){
 							lonlattexto += "<pre><span style=color:blue;cursor:pointer onclick='i3GEO.editorOL.captura(\""+lonlat.lon+","+lonlat.lat+"\")'>captura</span></pre>";
 						}
+						formata = function(texto){
+							var textoN = texto.split(":");
+							if(textoN.length > 0){
+								textoN[0] = "";
+								texto = textoN.join("");
+							}
+							return texto;
+						};
 						i3GEO.editorOL.mapa.addPopup(new OpenLayers.Popup.FramedCloud(
 							"chicken", 
 							i3GEO.editorOL.mapa.getLonLatFromPixel(event.xy),
 							null,
-							lonlattexto+"<pre>"+event.text+"</pre>",
+							lonlattexto+"<pre>"+formata(event.text)+"</pre>",
 							null,
 							true
 						));

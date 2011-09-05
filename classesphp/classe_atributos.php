@@ -1198,9 +1198,6 @@ $listaDeTemas - (opcional) Lista com os códigos dos temas que serão identificado
 			$res2 = $layer->getWMSFeatureInfoURL($ptimg->x, $ptimg->y, 1,"MIME");
 			$res2 = str_replace("INFOFORMAT","INFO_FORMAT",$res2);
 			
-			//echo $ptimg->x;exit;
-			
-			
 			$resposta = file($res);
 			$n = array();
 			if(strtoupper($formatoinfo) == "TEXT/HTML")

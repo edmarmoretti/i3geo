@@ -34,7 +34,9 @@ MAP
     END
     NAME "biomashp"
     STATUS OFF
-    TEMPLATE "none.htm"
+    TEMPLATE "teste.htm"
+	HEADER "teste.htm"
+	FOOTER "teste.htm"
     OPACITY 50
     TYPE POLYGON
     UNITS METERS
