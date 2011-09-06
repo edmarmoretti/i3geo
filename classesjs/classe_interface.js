@@ -1586,11 +1586,14 @@ i3GEO.Interface = {
 				i3GEO.gadgets.mostraMenuSuspenso();
 				g_operacao = "";
 				g_tipoacao = "";
+				if(i3GEO.Interface.STATUS.trocando === true){
+					$i(i3GEO.arvoreDeCamadas.IDHTML).innerHTML = "";
+				}
 				if(i3GEO.Interface.STATUS.trocando === false){
-					i3GEO.arvoreDeCamadas.ATIVATEMA = "i3GEO.Interface.googlemaps.ligaDesliga(this)";
-					i3GEO.arvoreDeCamadas.cria("",i3GEO.arvoreDeCamadas.CAMADAS,i3GEO.configura.sid,i3GEO.configura.locaplic);
 					i3GEO.util.arvore("<b>"+$trad("p13")+"</b>","listaPropriedades",i3GEO.configura.listaDePropriedadesDoMapa);
 				}
+				i3GEO.arvoreDeCamadas.ATIVATEMA = "i3GEO.Interface.googlemaps.ligaDesliga(this)";
+				i3GEO.arvoreDeCamadas.cria("",i3GEO.arvoreDeCamadas.CAMADAS,i3GEO.configura.sid,i3GEO.configura.locaplic);
 				if(i3GEO.arvoreDeCamadas.MOSTRALISTAKML === true)
 				{i3GEO.Interface.googlemaps.adicionaListaKml();}
 				if(i3GEO.parametros.kmlurl !== "")
