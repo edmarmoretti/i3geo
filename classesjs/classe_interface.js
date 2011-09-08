@@ -239,11 +239,42 @@ i3GEO.Interface = {
 			$i(i3GEO.Interface.IDCORPO).innerHTML = "";
 			i3GEO.Interface.ATUAL = "googlemaps";
 			i3GEO.Interface.cria(i3GEO.parametros.w,i3GEO.parametros.h);
-			i3GEO.Interface.googlemaps.cria();
+			//i3GEO.Interface.googlemaps.cria();
 			i3GEO.Interface.googlemaps.inicia();
 			i3GEO.janela.fechaAguarde("googleMapsAguarde");
 			i3GEO.arvoreDeCamadas.CAMADAS = [];
 			i3GEO.atualiza();
+			i3GEO.mapa.insereDobraPagina("openlayers",i3GEO.configura.locaplic+"/imagens/dobraopenlayers.png");
+		}
+	},
+	/*
+	Function: atual2ol
+
+	Troca o renderizador do mapa passando a usar a API do Open Layers
+	*/
+	atual2ol: {
+		inicia: function(){
+			i3GEO.Interface.STATUS.trocando = true;
+			i3GEO.janela.ESTILOAGUARDE = "normal";
+			i3GEO.janela.abreAguarde("OpenLayersAguarde","Carregando OpenLayers...");
+			try{
+				if(OpenLayers)
+				{i3GEO.Interface.atual2ol.initemp();}
+			}
+			catch(e){
+				i3GEO.util.scriptTag(i3GEO.configura.locaplic+"/pacotes/openlayers/OpenLayers29.js.php","i3GEO.Interface.atual2ol.initemp()","",true);
+			}
+		},
+		initemp: function(){
+			$i(i3GEO.Interface.IDCORPO).innerHTML = "";
+			i3GEO.Interface.ATUAL = "openlayers";
+			i3GEO.Interface.cria(i3GEO.parametros.w,i3GEO.parametros.h);
+			//i3GEO.Interface.openlayers.cria();
+			i3GEO.Interface.openlayers.inicia();
+			i3GEO.janela.fechaAguarde("OpenLayersAguarde");
+			i3GEO.arvoreDeCamadas.CAMADAS = [];
+			i3GEO.atualiza();
+			i3GEO.mapa.insereDobraPagina("googlemaps",i3GEO.configura.locaplic+"/imagens/dobragooglemaps.png");
 		}
 	},	
 	/*
@@ -1548,11 +1579,14 @@ i3GEO.Interface = {
 			pol = i3GEO.parametros.mapexten;
 			ret = pol.split(" ");
 			function montaMapa(retorno){
-				var pos, sw,ne,z,myMapType;
+				var pos, sw,ne,z,myMapType,
+				dobra = $i("i3GEOdobraPagina");
 				try{
 					i3GeoMap = new google.maps.Map($i(i3GEO.Interface.IDMAPA),{scaleControl:true});
 				}
 				catch(e){alert(e);return;}
+				if(dobra)
+				{$i(i3GEO.Interface.IDMAPA).appendChild(dobra);}
 				//
 				//carrega o javascript que permite fazer o zoom por box
 				//

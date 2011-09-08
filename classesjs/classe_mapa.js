@@ -67,16 +67,21 @@ i3GEO.mapa = {
 	
 	Parametros:
 	
-	tipo {string} - tipo de ícone googlemaps|
+	tipo {string} - tipo de ícone googlemaps|openlayers
 	
 	imagem {string} - endereço da imagem que será utilizada no ícone
 	*/
 	insereDobraPagina: function(tipo,imagem){
-		var novoel = document.createElement("img");
+		var novoel = $i("i3GEOdobraPagina");
+		if(!novoel){
+			novoel = document.createElement("img");
+		}
 		novoel.src = imagem;
 		novoel.id = "i3GEOdobraPagina";
 		if(tipo === "googlemaps")
 		{novoel.onclick = function(){i3GEO.Interface.atual2gm.inicia();};}
+		if(tipo === "openlayers")
+		{novoel.onclick = function(){i3GEO.Interface.atual2ol.inicia();};}
 		novoel.style.cursor = "pointer";
 		novoel.style.position = "absolute";
 		novoel.style.top = i3GEO.parametros.h - 35;

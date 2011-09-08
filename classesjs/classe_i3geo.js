@@ -347,8 +347,10 @@ i3GEO = {
 				if($i("mst")){$i("mst").style.visibility ="visible";}
 				if(YAHOO.lang.isFunction(i3GEO.finaliza))
 				{i3GEO.finaliza.call();}
-				else
-				{eval(i3GEO.finaliza);}
+				else{
+					if(i3GEO.finaliza != "")
+					{eval(i3GEO.finaliza);}
+				}
 				if(i3GEO.guias.TIPO === "movel")
 				{i3GEO.guias.guiaMovel.inicia();}
 			}
