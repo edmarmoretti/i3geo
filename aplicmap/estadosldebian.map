@@ -1,5 +1,5 @@
 MAP
-SYMBOLSET ../symbols/simbolos.sym
+SYMBOLSET ../symbols/simbolosv6.sym
 FONTSET   "../symbols/fontes.txt"
 LAYER
   NAME estadosl # ok

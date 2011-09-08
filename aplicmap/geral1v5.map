@@ -17,21 +17,26 @@ MAP
 	#
 	#edite os caminhos caso a aplicacao esteja instalada em um local diferente do default
 	#
-	FONTSET "c:\ms4w\apache\htdocs\i3geo/symbols/fontes.txt"
-	SYMBOLSET "c:\ms4w\apache\htdocs\i3geo/symbols/simbolosv5.sym"
-	DEBUG OFF
-	#DEBUG 5
-	#CONFIG "MS_ERRORFILE" "/ms4w/tmp/ms_error.txt"
-
-	SHAPEPATH "c:\ms4w\apache\htdocs\geodados"
+	FONTSET "/opt/www/html/i3geo/symbols/fontes.txt"
+	SYMBOLSET "/opt/www/html/i3geo/symbols/simbolos.sym"
+	SHAPEPATH "/opt/www/html/geodados"
 	IMAGECOLOR 104 171 195
+	#
+	#Por default, o i3geo utiliza o tipo de imagem configurado em png2
+	#Esse tipo não é adequado para imagens raster, mas o i3geo muda automaticamente
+	#para png1 quando um arquivo raster é adicionado ao mapa
+	#
 	IMAGETYPE AGG_Q
 	EXTENT -76.5125927 -39.3925675209 -29.5851853 9.49014852081
 	SIZE 480 500
 	STATUS ON
 	UNITS DD
 	NAME "GERAL"
-		
+	DEBUG OFF
+	#
+	#utilize o agg apenas com mapserver 5x
+
+	#png output, with number of colors reduced with quantization . ( Note: this functionality is not supported with RGBA images, that is outputformats with IMAGEMODE RGBA, or maps with TRANSPARENT ON ) :
 	OUTPUTFORMAT
 		NAME 'AGG_Q'
  		DRIVER AGG/PNG
@@ -41,23 +46,23 @@ MAP
  		FORMATOPTION "QUANTIZE_COLORS=256"
 		FORMATOPTION "INTERLACE=OFF"
 	END
-	
-	OUTPUTFORMAT
-    	NAME svg
-    	MIMETYPE "image/svg+xml"
-    	DRIVER svg
-    	#FORMATOPTION  "COMPRESSED_OUTPUT=TRUE"
-    	#FORMATOPTION  "FULL_RESOLUTION=TRUE"
-  	END
+  
 	OUTPUTFORMAT
   		NAME jpeg
-  		DRIVER "GD/JPEG"
-  		MIMETYPE "image/jpeg"
+  		DRIVER GD/JPEG
+  		MIMETYPE image/jpeg
   		IMAGEMODE RGB
+  		#TRANSPARENT FALSE
   		EXTENSION jpg
   		FORMATOPTION "INTERLACE=OFF"
 	END
-
+	OUTPUTFORMAT
+    		NAME svg
+    		MIMETYPE "image/svg+xml"
+    		DRIVER svg
+    		#FORMATOPTION  "COMPRESSED_OUTPUT=TRUE"
+    		#FORMATOPTION  "FULL_RESOLUTION=TRUE"
+  	END
 	OUTPUTFORMAT
 		NAME png1
 		MIMETYPE image/png
@@ -67,8 +72,8 @@ MAP
 		TRANSPARENT FALSE
 		FORMATOPTION "INTERLACE=OFF"
 	END
-	
 	OUTPUTFORMAT
+		#utilizado quando é incluido um layer do tipo raster
 		NAME png2
 		MIMETYPE image/png
 		DRIVER GD/PNG
@@ -78,6 +83,7 @@ MAP
 		FORMATOPTION "INTERLACE=OFF"
 	END
 	
+
 	PROJECTION
 		"init=epsg:4291"
 	END
@@ -98,9 +104,9 @@ MAP
 			PARTIALS TRUE
 		END
 		POSITION LL
-		STATUS OFF
+		STATUS off
 		#edite o caminho se a aplicacao for movida de lugar
-		#TEMPLATE "c:\ms4w\apache\htdocs\i3geo/aplicmap/legenda.htm"
+		#TEMPLATE "/opt/www/html/i3geo/aplicmap/legenda.htm"
 	END
 	QUERYMAP
 		#OUTLINECOLOR 255 0 0
@@ -113,7 +119,7 @@ MAP
 		COLOR -1 -1 -1
 		EXTENT -75.5728 -37.4751 -30.525 7.57273#-79.8713331401 -41.7736536401 -26.2264448599 11.8712346401 
 		#edite o caminho se a aplicacao for movida de lugar
-		IMAGE "c:/ms4w/apache/htdocs/i3geo/imagens/referencia1.png"
+		IMAGE "/opt/www/html/i3geo/imagens/referencia1.png"
 		OUTLINECOLOR -1 -1 -1
 		SIZE 150 150
 		STATUS off
@@ -146,20 +152,18 @@ MAP
 	END
 	WEB
 		#edite o caminho se a aplicacao for movida de lugar
-		IMAGEPATH "c:\ms4w\tmp\ms_tmp\"
+		IMAGEPATH "/var/tmp/ms_tmp/"
 		IMAGEURL "/ms_tmp/"
-		TEMPLATE "c:\ms4w\apache\htdocs\i3geo/aplicmap/geral.htm"
+		TEMPLATE "/opt/www/html/i3geo/aplicmap/geral.htm"
 	END
-
 	LAYER
-		DATA "c:\ms4w\apache\htdocs\i3geo/aplicmap/dados/zee"
+		DATA "/opt/www/html/i3geo/aplicmap/dados/zee"
 		TEMPLATE "none.htm"
 		METADATA
 			"CLASSE"	"SIM" #o simbolo nao sera mostrado na legenda
-			"TEMA" "Zona Econômica Exclusiva Marinha" #o tema nao sera mostrado na legenda
+			"TEMA"	"Zona Econômica Exclusiva Marinha" #o tema nao sera mostrado na legenda
 			"IDENTIFICA" "nao"
 			"cache" "sim"
-			#"MENSAGEM" "Isto é um teste de mensagem"
 		END
 		NAME "zee"
 		SIZEUNITS PIXELS
@@ -172,9 +176,8 @@ MAP
 			COLOR 137 201 255
 		END
 	END
-	
 	LAYER
-		DATA "c:\ms4w\apache\htdocs\i3geo/aplicmap/dados/mundo"
+		DATA "/opt/www/html/i3geo/aplicmap/dados/mundo"
 		GROUP "mundo"
 		METADATA
 			"CLASSE"	"SIM" #o simbolo sera mostrado na legenda
@@ -184,7 +187,6 @@ MAP
 			"TEMA"	"Países do mundo" #nome que sera mostrado na legenda
 			"TITULO"       "Países do mundo" #nome alternativo que e mostrado nos combos para escolha do tema
 			"TIP" "FIPS_CNTRY,GMI_CNTRY,CNTRY_NAME"
-			#"ESCONDIDO" "sim"
 			"cache" "sim"
 			"itembuscarapida" "LONG_NAME"
 		END
@@ -198,7 +200,7 @@ MAP
 		TYPE POLYGON
 		UNITS METERS
 		CLASS
-			NAME " " #vazio indica que nao sera incluido o nome ao lado do simbolo
+			NAME "" #vazio indica que nao sera incluido o nome ao lado do simbolo
 			STYLE
 				COLOR 230 230 230
 				SIZE 1
@@ -207,11 +209,10 @@ MAP
 		END
 	END
 	LAYER
-		DATA "c:\ms4w\apache\htdocs\i3geo/aplicmap/dados/mundo"
+		DATA "/opt/www/html/i3geo/aplicmap/dados/mundo"
 		GROUP "mundo"
 		METADATA
 			"CLASSE"	"NAO"
-			"TEMA" "linha"
 			"TEMA"	"NAO"
 			"ESCONDIDO" "SIM"
 			"cache" "sim"
@@ -232,17 +233,15 @@ MAP
 			END
 		END
 	END
-	
 	LAYER
-		DATA "c:\ms4w\apache\htdocs\i3geo/aplicmap/dados/estados"
+		DATA "/opt/www/html/i3geo/aplicmap/dados/estados"
 		METADATA
 			"CLASSE"	"SIM"
 			"TEMA"	"Brasil"
 			"ESCALA" "250000" #escala utilizada nas marcas ao lado do tema na legenda
 			"IDENTIFICA" "nao"
-			#"ESCONDIDO" "sim"
-			"EXTENSAO" "-97.912 -39.41 -8.19 9.52"
 			"cache" "sim"
+			"EXTENSAO" "-97.911949 -39.413578 -8.185829 9.511159"
 		END
 		NAME "estados"
 		SIZEUNITS PIXELS
@@ -263,6 +262,7 @@ MAP
 			END
 		END
 	END
+	
   LAYER
     CONNECTION "http://mapas.mma.gov.br/cgi-bin/mapserv?map=/opt/www/html/webservices/baseraster.map"
     CONNECTIONTYPE WMS
@@ -281,12 +281,12 @@ MAP
       "TEMA"	"Base cartográfica"
       "wms_server_version"	"1.1.1"
       "wms_style"	"default"
+	  "MENSAGEM" "As cartas RASTER são mostradas apenas em determinadas escalas. Aproxime o mapa até a escala 1:250.000 para que os dados sejam mostrados."
 	  "cache" "sim"
-	  #"MENSAGEM" "As cartas RASTER são mostradas apenas em determinadas escalas. Aproxime o mapa até a escala 1:250.000 para que os dados sejam mostrados."
     END
     NAME "baserasterwms"
     OFFSITE 255 255 255
-    STATUS off
+    STATUS OFF
     TOLERANCE 0
     TRANSFORM FALSE
     TYPE RASTER
@@ -300,7 +300,7 @@ MAP
       END
     END
   END
-	
+  
 	LAYER
 		METADATA
 			#"TEMA"	"NAO"
@@ -309,7 +309,7 @@ MAP
 		END
 		NAME "copyright"
 		SIZEUNITS PIXELS
-		STATUS DEFAULT
+		STATUS default
 		TOLERANCE 0
 		TOLERANCEUNITS PIXELS
 		TRANSFORM FALSE
@@ -341,8 +341,7 @@ MAP
 			"TEMA"	"Rosa dos ventos"
 			"IDENTIFICA" "nao"
 			"TABELA" "nao"
-			"CLASSE" "NAO"
-			#"cache" "sim"
+
 		END
 		NAME "rosadosventos"
 		SIZEUNITS PIXELS
@@ -362,5 +361,4 @@ MAP
 			END
 		END
 	END
-
 END

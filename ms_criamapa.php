@@ -298,16 +298,18 @@ Os arquivos .map padrão são armazenados em i3geo/aplicmap.
 O arquivo é lido conforma a característica do sistema operacional.
 
 */
+$versao = versao();
+$versao = $versao["principal"];
 if(!isset($base) || $base == "")
 {
 	if (strtoupper(substr(PHP_OS, 0, 3) == 'WIN'))
 	{
-		$base = "geral1windows";
+		$base = "geral1windowsv".$versao;
 		$estadosl = "estadoslwindows";
 	}
 	else
 	{
-		$base = "geral1";
+		$base = "geral1v".$versao;
 		$estadosl = "estadosl";
 	}
 }

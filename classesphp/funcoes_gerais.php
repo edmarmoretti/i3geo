@@ -2589,6 +2589,7 @@ function criaDirMapa($dir_tmp)
 		$tmpimgname = "img".$tmpdirname;
 		@mkdir($dir_tmp."/comum",0777);
 		@mkdir($dir_tmp."/cache",0777);
+		@mkdir($dir_tmp."/cache/googlemaps",0777);
 		if(file_exists($dir_tmp."/".$tmpdirname))
 		return array($mapfile,$tmpdirname,$tmpimgname);
 		else

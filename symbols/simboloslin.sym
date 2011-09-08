@@ -6,7 +6,7 @@ Symbol
     1 1
   END
   FILLED TRUE
-  STYLE
+  PATTERN
     4 2 4 2
   END
   Transparent 0
@@ -22,7 +22,7 @@ Symbol
     0 0
   END
   FILLED TRUE
-  STYLE
+  PATTERN
     5 13 5 13
   END
 END
@@ -34,7 +34,7 @@ END
     1 1
     1 1
     END
-  STYLE
+  PATTERN
     1 13 1 13
   END
   END
@@ -44,7 +44,7 @@ END
     TYPE ELLIPSE
     POINTS 1 1 END
     FILLED true
-  STYLE
+  PATTERN
     1 13 1 13
   END
   END
@@ -54,7 +54,7 @@ END
     Type ELLIPSE
     POINTS 1 1 END
     Transparent 0
-  STYLE
+  PATTERN
     1 13 1 13
   END
   END
@@ -71,7 +71,7 @@ END
     Type ELLIPSE
     POINTS 1 1 END
     Transparent 0
-  STYLE
+  PATTERN
     10 20 10 20
   END
   END
@@ -83,7 +83,7 @@ END
 	POINTS 
 		1 1 
 		END 
-	STYLE 
+	PATTERN 
 		8 3 
 	END 
   END
@@ -95,7 +95,7 @@ END
 	POINTS 
 		1 1 
 		END 
-	STYLE 
+	PATTERN 
 		8 8 1 8 
 	END 
   END 
@@ -113,7 +113,7 @@ END
     Name "setal"
     Type PIXMAP
     Image "seta.png"
-  STYLE
+  PATTERN
     1 13 1 13
   END
   END
@@ -123,7 +123,7 @@ END
     Type PIXMAP
     Image "sede.png"
     Transparent 1
-  STYLE
+  PATTERN
     1 13 1 13
   END
 
@@ -139,7 +139,7 @@ END
     1 1
     1 1
     END
-  STYLE
+  PATTERN
     1 13 1 13
   END
 
@@ -156,7 +156,7 @@ END
 		1 1 
 		0 1 
 		END 
-  STYLE
+  PATTERN
     1 13 1 13
   END
 
@@ -179,7 +179,7 @@ END
 		131 48
 		81 48
   	END 
-  STYLE
+  PATTERN
     1 13 1 13
   END
 
@@ -195,7 +195,7 @@ END
 		1 1 
 		0 1 
 		END 
-  STYLE
+  PATTERN
     1 13 1 13
   END
 
@@ -211,7 +211,7 @@ Symbol
 	POINTS 
 		1 1 
 		END 
-  STYLE
+  PATTERN
     1 13 1 13
   END
 

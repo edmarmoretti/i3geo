@@ -142,11 +142,11 @@ function iniciaMapa()
 		{
 			$m->selectOutputFormat("jpeg");
 			$of = $m->outputformat;
-			$of->set("imagemode",MS_IMAGEMODE_RGBA);
 			$of->set("driver","AGG/PNG");
 		}
 		else
 		{$of = $m->outputformat;}
+		$of->set("imagemode",MS_IMAGEMODE_RGBA);
 		$of->set("transparent",MS_ON);
 		$m->save($map_file);
 	}
@@ -174,6 +174,7 @@ function iniciaMapa()
 	//salva as alterações feitas
 	//
 	$m->salva();
+
 	//prepara a legenda para incluir no mapa, preenchendo os nomes das classes em branco
 	if (strtolower($embedLegenda) == "sim")
 	{
@@ -222,7 +223,13 @@ function iniciaMapa()
 		$l->set("status",MS_DELETE);
 	}
 	$of = $mf->outputformat;
-	$of->set("driver","GD/PNG");
+	$versao = versao();
+	if($versao["principal"] == 6)
+	{$of->set("driver","GD/PNG");}
+	else
+	{$of->set("driver","AGG/PNG");}
+	
+
 	$temp = $mf->scalebar;
 	$temp->set("status",MS_OFF);
 	$mf->save($nomefundo);
@@ -262,7 +269,7 @@ function iniciaMapa()
 	$res["geoip"] = $geoip;
 	$res["listavisual"] = (file_exists($locaplic."/imagens/visual")) ? implode(",",listaDiretorios($locaplic."/imagens/visual")) : "";					
 	$res["utilizacgi"] = $utilizacgi;					
-	$versao = versao();
+	
 	$res["versaoms"] = $versao["principal"];
 	$res["versaomscompleta"] = $versao["completa"];
 	$res["mensagens"] = $m->pegaMensagens();
@@ -288,6 +295,7 @@ function iniciaMapa()
 	$res["emailInstituicao"] = $emailInstituicao;
 	copy($map_file,(str_replace(".map","reinc.map",$map_file)));
 	copy($map_file,(str_replace(".map","seguranca.map",$map_file)));
+	ob_clean();
 	cpjson(array("variaveis"=>$res,"temas"=>$temas));
 }
 ?>

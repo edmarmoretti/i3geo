@@ -242,7 +242,7 @@ if (!function_exists('imagepng'))
 }
 if(trim($_GET["TIPOIMAGEM"]) != "" && trim($_GET["TIPOIMAGEM"]) != "nenhum")
 {
-	$nomer = ($img->imagepath)."filtroimgtemp".nomeRandomico();
+	$nomer = ($img->imagepath)."filtroimgtemp".nomeRandomico().".png";
 	$img->saveImage($nomer);
 	filtraImagem($nomer,$_GET["TIPOIMAGEM"]);
 	$img = imagecreatefrompng($nomer);
@@ -251,12 +251,13 @@ if(trim($_GET["TIPOIMAGEM"]) != "" && trim($_GET["TIPOIMAGEM"]) != "nenhum")
 	ob_clean();
 	echo header("Content-type: image/png \n\n");
 	imagepng($img);
+	imagedestroy($img);
 }
 else{
 	if($cache == true)
 	{salvaCacheImagem($_GET["BBOX"],$nomecache,$map_fileX,$_GET["WIDTH"],$_GET["HEIGHT"]);}
 	ob_clean();
-	$nomer = ($img->imagepath)."imgtemp".nomeRandomico();
+	$nomer = ($img->imagepath)."imgtemp".nomeRandomico().".png";
 	$img->saveImage($nomer);
 	$img = imagecreatefrompng($nomer);
 	imagealphablending($img, false);
@@ -265,7 +266,7 @@ else{
 
 	echo header("Content-type: image/png \n\n");
 	imagepng($img);
-
+	imagedestroy($img);
 }
 function salvaCacheImagem($bbox,$layer,$map,$w,$h){
 	global $img,$map_size;
@@ -277,7 +278,7 @@ function salvaCacheImagem($bbox,$layer,$map,$w,$h){
 
 	$nomedir = dirname(dirname($map))."/cache/".$layer;
 	@mkdir($nomedir,0777);
-	$nome = $nomedir."/".$w.$h.$bbox;
+	$nome = $nomedir."/".$w.$h.$bbox.".png";
 	if(!file_exists($nome))
 	{
 		$img->saveImage($nome);
@@ -290,7 +291,7 @@ function carregaCacheImagem($bbox,$layer,$map,$w,$h){
 	if($layer == "")
 	{$layer = "fundo";}
 
-	$nome = $w.$h.$bbox;
+	$nome = $w.$h.$bbox.".png";
 	$nome = dirname(dirname($map))."/cache/".$layer."/".$nome;
 	if(file_exists($nome))
 	{
@@ -325,7 +326,7 @@ function carregaCacheImagem($bbox,$layer,$map,$w,$h){
 		error_reporting(0);
 		echo header("Content-type: image/png \n\n");
 		imagepng($img);
-		//imagedestroy($img);
+		imagedestroy($img);
 		exit;
 	}
 }

@@ -1,5 +1,40 @@
 GUIA DE UPDATES
 -------------------------------------------------------------------------------------------------
+Para a versão 4.5 + SP11
+
+	Mudanças que foram feitas para uso da versão 6 do Mapserver:
+		
+		Os mapfiles de inicialização geral1.map, geral1debian.map e geral1windows.map, existentes em i3geo/aplicmap,
+		foram mantidos para efeitos de compatibilidade. Os novos mapfiles de inicialização agora são:
+			geral1v5.map
+			geral1v6.map
+			geral1debianv5.map
+			geral1debianv6.map
+			geral1windowsv5.map
+			gral1windowsv6.map
+		"vX" indica a versão do Mapserver
+		
+		Caso o i3Geo seja inicializado com um mapfile diferente dos que são padrão, existentes em i3geo/aplicmap, é 
+		necessário alterar esse mapfile para compatibilizá-lo com a versão 6 do Mapserver.
+		Utilize o arquivo i3geo/aplicmap/geral1.map ou geral1windows.map para copiar
+		os elementos iniciais (de MAP até o primeiro LAYER) para o mapfile de inicialização desejado.
+
+		Arquivos de definição de símbolos:
+			i3geo/symbols/simbolos.sym não deve mais ser usado, continua a existir apenas para compatibilidade
+			novos símbolos devem ser inseridos em i3geo/symbols/simbolosv5.sym ou em i3geo/symbols/simbolosv6.sym,
+			conforme a versão do Mapserver em uso
+			
+			Nos mapfiles existentes em i3geo/temas, deve-se substituir a linha
+			SYMBOLSET ../symbols/simbolos.sym
+			por
+			SYMBOLSET ../symbols/simbolosv6.sym
+			ou
+			SYMBOLSET ../symbols/simbolosv5.sym
+			conforme a versão do Mapserver em uso
+			Sem essa mudança, o i3Geo continuará a funcionar, mas se forem criados novos símbolos em um arquivo
+			simbolosv5.sym ou simbolosv6.sym, deve-se fazer o mesmo em simbolos.sym
+			
+			
 Para a versão 4.5 + SP8
 
 	As interfaces Openlayers e Googlemaps por default passaram a utilizar as guias na forma "retrátil"

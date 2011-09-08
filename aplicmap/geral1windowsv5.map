@@ -18,7 +18,7 @@ MAP
 	#edite os caminhos caso a aplicacao esteja instalada em um local diferente do default
 	#
 	FONTSET "c:\ms4w\apache\htdocs\i3geo/symbols/fontes.txt"
-	SYMBOLSET "c:\ms4w\apache\htdocs\i3geo/symbols/simbolosv5.sym"
+	SYMBOLSET "c:\ms4w\apache\htdocs\i3geo/symbols/simbolos.sym"
 	DEBUG OFF
 	#DEBUG 5
 	#CONFIG "MS_ERRORFILE" "/ms4w/tmp/ms_error.txt"

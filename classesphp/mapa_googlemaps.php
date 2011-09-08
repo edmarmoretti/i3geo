@@ -251,7 +251,7 @@ if (!function_exists('imagepng'))
 }
 if(trim($_GET["TIPOIMAGEM"]) != "" && trim($_GET["TIPOIMAGEM"]) != "nenhum")
 {
-	$nomer = ($img->imagepath)."filtroimgtemp".nomeRandomico();
+	$nomer = ($img->imagepath)."filtroimgtemp".nomeRandomico().".png";
 	$img->saveImage($nomer);
 	filtraImagem($nomer,trim($_GET["TIPOIMAGEM"]));
 	$img = imagecreatefrompng($nomer);
@@ -265,7 +265,7 @@ else{
 	if($cache == true)
 	{salvaCacheImagem($_GET["BBOX"],$nomecache,$map_fileX,$_GET["WIDTH"],$_GET["HEIGHT"]);}
 	ob_clean();
-	$nomer = ($img->imagepath)."imgtemp".nomeRandomico();
+	$nomer = ($img->imagepath)."imgtemp".nomeRandomico().".png";
 	$img->saveImage($nomer);
 	$img = imagecreatefrompng($nomer);
 	imagealphablending($img, false);
@@ -274,7 +274,6 @@ else{
 	echo header("Content-type: image/png \n\n");
 	imagepng($img);
 }
-
 function salvaCacheImagem($bbox,$layer,$map,$w,$h){
 	global $img,$map_size;
 	//layers que são sempre iguais
@@ -282,22 +281,19 @@ function salvaCacheImagem($bbox,$layer,$map,$w,$h){
 	{$bbox = "";}
 	if($layer == "")
 	{$layer = "fundo";}
-
-	$nomedir = dirname(dirname($map))."/cache/".$layer;
+	$nomedir = dirname(dirname($map))."/cache/googlemaps/".$layer;
 	@mkdir($nomedir,0777);
-	$nome = $nomedir."/".$w.$h.$bbox;
+	$nome = $nomedir."/".$w.$h.$bbox.".png";
 	if(!file_exists($nome))
-	{
-		$img->saveImage($nome);
-	}
+	{$img->saveImage($nome);}
 }
 function carregaCacheImagem($bbox,$layer,$map,$w,$h){
 	if($layer == "copyright" || $layer == "")
 	{$bbox = "";}
 	if($layer == "")
 	{$layer = "fundo";}
-	$nome = $w.$h.$bbox;
-	$nome = dirname(dirname($map))."/cache/".$layer."/".$nome;
+	$nome = $w.$h.$bbox.".png";
+	$nome = dirname(dirname($map))."/cache/googlemaps/".$layer."/".$nome;
 	if(file_exists($nome))
 	{
 		if (!function_exists('imagepng'))
@@ -314,10 +310,8 @@ function carregaCacheImagem($bbox,$layer,$map,$w,$h){
 			$img  = imagecreatetruecolor($w, $h);
 			imagealphablending($img, false);
 			imagesavealpha($img, true);
-
 			$bgc = imagecolorallocatealpha($img, 255, 255, 255,127);
 			$tc  = imagecolorallocate($img, 255, 0, 0);
-
 			imagefilledrectangle($img, 0, 0, $w, $h, $bgc);
 			/* Output an error message */
 			imagestring($img, 3, 5, 5, 'Erro ao ler ' . $nome, $tc);

@@ -58,6 +58,7 @@ echo getcwd();
 echo "<br><br>PHP (a vers&atilde;o deve ser a 5x): ";
 echo "<br>".phpversion()."<br>\n";
 include("classesphp/carrega_ext.php");
+include("classesphp/funcoes_gerais.php");
 $exts = get_loaded_extensions();
 echo "Obs: MapServer (a vers&atilde;o deve ser &gt;= 5.2 para que a sobreposi&ccedil;&atilde;o de temas funcione na interface Google Maps): <br>";
 echo ms_GetVersion()."<br><br>";
@@ -170,14 +171,16 @@ echo "Existe o geral1.map? ";
 if(file_exists("$locaplic/aplicmap/geral1.map")) echo "Sim\n"; else {echo "Nao";saindo("geral1.map n&atilde;o encontrado");}
 echo " \n";
 echo "Carregando o map_file geral1...\n";
+$versao = versao();
+$versao = $versao["principal"];
 if(isset($base))
 {$mapa = ms_newMapObj($locaplic."/aplicmap/".$base.".map");}
 else
 {
 	if (strtoupper(substr(PHP_OS, 0, 3) == 'WIN'))
-	{$mapa = ms_newMapObj($locaplic."/aplicmap/geral1windows.map");}
+	{$mapa = ms_newMapObj($locaplic."/aplicmap/geral1windowsv".$versao.".map");}
 	else
-	{$mapa = ms_newMapObj($locaplic."/aplicmap/geral1.map");}
+	{$mapa = ms_newMapObj($locaplic."/aplicmap/geral1v".$versao.".map");}
 }
 echo "<b>E agora..desenhando o mapa (se o mapa n&atilde;o aparecer &eacute; um problema...\nverifique os caminhos no ms_configura.php e no geral1.map, geral1debian.map ou geral1windows.map):</b>\n";
 $imgo = $mapa->draw();

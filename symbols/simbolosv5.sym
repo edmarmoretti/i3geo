@@ -1,7 +1,8 @@
 SYMBOLSET
 #
-#este arquivo está aqui para efeitos de compatibilidade
-#arquivos .map dentro de i3geo/temas podem ainda estar usando esse arquivo
+#este arquivo contem TAGS que não funcionam na versão 6 do Mapserver
+#está aqui para efeitos de compatibilidade
+#pois é utilizao em aplicmap/geral1.map e outros
 #
 	Symbol 
 		NAME 'p0' 
@@ -463,7 +464,7 @@ Symbol
     1 1
   END
   FILLED TRUE
-  #PATTERN 1 13 1 13 END
+  PATTERN 1 13 1 13 END
 END
 Symbol
   Name 'ferrovia-line2'
@@ -475,7 +476,9 @@ Symbol
     0 0
   END
   FILLED TRUE
-  #PATTERN 5 13 5 13  END
+  PATTERN
+    5 13 5 13
+  END
 END
   Symbol
     Name "pt1l"
@@ -485,7 +488,9 @@ END
     1 1
     1 1
     END
-  #PATTERN     1 13 1 13   END
+  PATTERN
+    1 13 1 13
+  END
   END
 	
   Symbol 
@@ -493,7 +498,9 @@ END
     TYPE ELLIPSE
     POINTS 1 1 END
     FILLED true
-  #PATTERN   1 13 1 13   END
+  PATTERN
+    1 13 1 13
+  END
   END
 
   Symbol
@@ -501,7 +508,9 @@ END
     Type ELLIPSE
     POINTS 1 1 END
     Transparent 0
-  #PATTERN    1 13 1 13  END
+  PATTERN
+    1 13 1 13
+  END
   END
 	
   Symbol
@@ -515,9 +524,11 @@ END
     Name "linha1"
     Type ELLIPSE
     POINTS 1 1 END
-    #PATTERN 1 4 1 END
+    PATTERN 1 4 1 END
     Transparent 0
-  #PATTERN    10 20 10 20  END
+  PATTERN
+    10 20 10 20
+  END
   END
 
 	Symbol 
@@ -527,7 +538,9 @@ END
 	POINTS 
 		1 1 
 		END 
-	#PATTERN 8 3	END 
+	PATTERN 
+		8 3 
+	END 
   END
 
 	Symbol 
@@ -537,7 +550,9 @@ END
 	POINTS 
 		1 1 
 		END 
-	#PATTERN 8 8 1 8 	END 
+	PATTERN 
+		8 8 1 8 
+	END 
   END 
 
 	Symbol 
@@ -553,7 +568,9 @@ END
     Name "setal"
     Type PIXMAP
     Image "seta.png"
-  #PATTERN    1 13 1 13  END
+  PATTERN
+    1 13 1 13
+  END
   END
 
   Symbol
@@ -561,7 +578,9 @@ END
     Type PIXMAP
     Image "sede.png"
     Transparent 1
-  #PATTERN    1 13 1 13  END
+  PATTERN
+    1 13 1 13
+  END
 
   END
 		
@@ -575,7 +594,9 @@ END
     1 1
     1 1
     END
-  #PATTERN    1 13 1 13  END
+  PATTERN
+    1 13 1 13
+  END
 
   END
  
@@ -590,7 +611,9 @@ END
 		1 1 
 		0 1 
 		END 
-  #PATTERN    1 13 1 13  END
+  PATTERN
+    1 13 1 13
+  END
 
 	END
 
@@ -611,7 +634,9 @@ END
 		131 48
 		81 48
   	END 
-  #PATTERN    1 13 1 13  END
+  PATTERN
+    1 13 1 13
+  END
 
 	END
 
@@ -625,7 +650,9 @@ END
 		1 1 
 		0 1 
 		END 
-  #PATTERN    1 13 1 13  END
+  PATTERN
+    1 13 1 13
+  END
 
 	END
 
@@ -636,6 +663,8 @@ Symbol
 	POINTS 
 		1 1 
 		END 
-  #PATTERN    1 13 1 13  END
+  PATTERN
+    1 13 1 13
+  END
 
 END

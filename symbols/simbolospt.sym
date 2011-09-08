@@ -57,7 +57,7 @@ Symbol
     0 0
   END
   FILLED TRUE
-  STYLE
+  PATTERN
     5 13 5 13
   END
 END
@@ -175,7 +175,7 @@ END
     Name "linha1"
     Type ELLIPSE
     POINTS 1 1 END
-    STYLE 1 4 1 END
+    PATTERN 1 4 1 END
     Transparent 0
   END
 
@@ -186,7 +186,7 @@ END
 	POINTS 
 		1 1 
 		END 
-	STYLE 
+	PATTERN 
 		8 3 
 	END 
   END
@@ -198,7 +198,7 @@ END
 	POINTS 
 		1 1 
 		END 
-	STYLE 
+	PATTERN 
 		8 8 1 8 
 	END 
   END 

@@ -17,11 +17,11 @@ MAP
 	#
 	#edite os caminhos caso a aplicacao esteja instalada em um local diferente do default
 	#
-	FONTSET "c:\ms4w\apache\htdocs\i3geo/symbols/fontes.txt"
-	SYMBOLSET "c:\ms4w\apache\htdocs\i3geo/symbols/simbolosv5.sym"
-	DEBUG OFF
-	#DEBUG 5
-	#CONFIG "MS_ERRORFILE" "/ms4w/tmp/ms_error.txt"
+	FONTSET "c:\ms4w\apache\htdocs\i3geo\symbols\fontes.txt"
+	SYMBOLSET "c:\ms4w\apache\htdocs\i3geo\symbols\simbolosv6.sym"
+	DEBUG ON
+	DEBUG 5
+	CONFIG "MS_ERRORFILE" "c:\ms4w\tmp\ms_error.txt"
 
 	SHAPEPATH "c:\ms4w\apache\htdocs\geodados"
 	IMAGECOLOR 104 171 195
@@ -45,13 +45,13 @@ MAP
 	OUTPUTFORMAT
     	NAME svg
     	MIMETYPE "image/svg+xml"
-    	DRIVER svg
+    	DRIVER cairo/svg
     	#FORMATOPTION  "COMPRESSED_OUTPUT=TRUE"
     	#FORMATOPTION  "FULL_RESOLUTION=TRUE"
   	END
 	OUTPUTFORMAT
   		NAME jpeg
-  		DRIVER "GD/JPEG"
+  		DRIVER "AGG/JPEG"
   		MIMETYPE "image/jpeg"
   		IMAGEMODE RGB
   		EXTENSION jpg
@@ -61,7 +61,7 @@ MAP
 	OUTPUTFORMAT
 		NAME png1
 		MIMETYPE image/png
-		DRIVER GD/PNG
+		DRIVER AGG/PNG
 		EXTENSION png
 		IMAGEMODE RGB
 		TRANSPARENT FALSE
@@ -71,7 +71,7 @@ MAP
 	OUTPUTFORMAT
 		NAME png2
 		MIMETYPE image/png
-		DRIVER GD/PNG
+		DRIVER AGG/PNG
 		EXTENSION png
 		IMAGEMODE PC256
 		TRANSPARENT TRUE
@@ -146,9 +146,9 @@ MAP
 	END
 	WEB
 		#edite o caminho se a aplicacao for movida de lugar
-		IMAGEPATH "c:\ms4w\tmp\ms_tmp\"
+		IMAGEPATH "c:/ms4w/tmp/ms_tmp/"
 		IMAGEURL "/ms_tmp/"
-		TEMPLATE "c:\ms4w\apache\htdocs\i3geo/aplicmap/geral.htm"
+		TEMPLATE "c:\ms4w\apache\htdocs\i3geo\aplicmap\geral.htm"
 	END
 
 	LAYER

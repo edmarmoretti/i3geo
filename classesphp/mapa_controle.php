@@ -195,7 +195,6 @@ if (!isset($map_file))
 }
 include_once("classe_vermultilayer.php");
 include_once("classe_estatistica.php");
-
 if (isset($debug) && strtolower($debug) == "sim")
 {error_reporting(E_ALL);}
 //
@@ -217,12 +216,11 @@ if($funcao != "recuperamapa")
 		return;
 	}
 }
-//set_time_limit(240);
-
 //
 //faz a busca da função que deve ser executada
 //
 $retorno = ""; //string que será retornada ao browser via JSON
+
 switch (strtoupper($funcao))
 {
 /*

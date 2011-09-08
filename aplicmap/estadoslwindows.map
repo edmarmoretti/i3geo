@@ -1,6 +1,6 @@
 MAP
 FONTSET "c:\ms4w\apache\htdocs\i3geo\symbols\fontes.txt"
-SYMBOLSET "c:\ms4w\apache\htdocs\i3geo\symbols\simbolos.sym"
+SYMBOLSET "c:\ms4w\apache\htdocs\i3geo\symbols\simbolosv6.sym"
 LAYER
 	NAME estadosl # ok
 	TYPE line
