@@ -459,7 +459,7 @@ Include:
 		{
 			$nomer = $locmapserv."?map=".$this->arquivo."&mode=map&".nomeRandomico();
 		}
-		$res["mapscale"] = $this->mapa->scale;
+		$res["mapscale"] = $this->mapa->scaledenom;
 		$res["mapres"] = $this->mapa->resolution;
 		$res["pixelsize"] = $this->mapa->cellsize;
 		$res["mapexten"] = $ext;

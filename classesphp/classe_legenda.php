@@ -121,7 +121,6 @@ $template - nome do template para processar a legenda
 		{return;}		
 		$this->mapa = ms_newMapObj($map_file);
   		$this->arquivo = $map_file;
-
    		if($tema != "" && @$this->mapa->getlayerbyname($tema))
   		{
   			$this->layer = $this->mapa->getlayerbyname($tema);

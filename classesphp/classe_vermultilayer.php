@@ -88,7 +88,7 @@ class vermultilayer
 	{
 		$map = ms_newMapObj($mapfile);
 		$map->preparequery();
-		$escala = $map->scale;
+		$escala = $map->scaledenom ;
 		$todoslayers = $map->getAlllayernames();
 		$multilayer = 0;
 		$temas = array();
