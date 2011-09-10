@@ -122,7 +122,7 @@ if(isset($tema) && $tipo != "metadados")
 {$tipo = "";}
 if(!isset($version))
 {$req->setParameter("VeRsIoN","1.1.0");}
-$oMap = ms_newMapobj("aplicmap/ogcwsv".$versao.".map");
+$oMap = ms_newMapobj($locaplic."/aplicmap/ogcwsv".$versao.".map");
 //
 //altera os caminhos das imagens
 //
@@ -170,7 +170,7 @@ if ($tipo == "" || $tipo == "metadados")
 	$tema = explode(" ",$tema);
 	foreach ($tema as $tx)
 	{
-		$nmap = ms_newMapobj("temas/".$tx.".map");
+		$nmap = ms_newMapobj($locaplic."/temas/".$tx.".map");
 		$ts = $nmap->getalllayernames();
 		foreach ($ts as $t)
 		{
@@ -272,11 +272,11 @@ else
 	foreach($codigosTema as $c)
 	{
 		$codigoTema = $c["tema"];
-		if(file_exists("temas/".$codigoTema.".map"))
+		if(file_exists($locaplic."temas/".$codigoTema.".map"))
 		{
-			if (@ms_newMapobj("temas/".$codigoTema.".map"))
+			if (@ms_newMapobj($locaplic."temas/".$codigoTema.".map"))
 			{
-				$nmap = ms_newMapobj("temas/".$codigoTema.".map");
+				$nmap = ms_newMapobj($locaplic."temas/".$codigoTema.".map");
 				$ts = $nmap->getalllayernames();
 				if (count($ts) == 1)
 				{ 
