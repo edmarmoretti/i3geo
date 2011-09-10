@@ -61,6 +61,8 @@ include("ms_configura.php");
 include("classesphp/funcoes_gerais.php");
 require_once("classesphp/pega_variaveis.php");
 include_once ("classesphp/carrega_ext.php");
+$versao = versao();
+$versao = $versao["principal"];
 //
 //no caso do programa ser utilizado via URL
 //
@@ -100,7 +102,7 @@ if($tipo == "mini" || $tipo == "todos" || $tipo == "grande" || $tipo == "")
 //
 function verificaMiniatura($map,$tipo,$admin=false)
 {
-	global $locaplic;
+	global $locaplic,$versao;
 	ms_ResetErrorList();
 	error_reporting(E_ALL);
 	$tema = "";
@@ -113,9 +115,9 @@ function verificaMiniatura($map,$tipo,$admin=false)
 	if ($tema != "")
 	{
 		if (strtoupper(substr(PHP_OS, 0, 3) == 'WIN'))
-		{$mapa = ms_newMapObj("$locaplic/aplicmap/geral1windows.map");}
+		{$mapa = ms_newMapObj("$locaplic/aplicmap/geral1windowsv".$versao.".map");}
 		else
-		{$mapa = ms_newMapObj("$locaplic/aplicmap/geral1.map");}
+		{$mapa = ms_newMapObj("$locaplic/aplicmap/geral1v".$versao.".map");}
 		if(@ms_newMapObj($tema))
 		{$nmapa = ms_newMapObj($tema);}
 		else
