@@ -163,7 +163,8 @@ Inclui os programas php com funções utilizadas pelo ms_criamapa.php
 
 include_once ($caminho."classesphp/pega_variaveis.php");
 include_once ($caminho."classesphp/funcoes_gerais.php");
-
+$versao = versao();
+$versao = $versao["principal"];
 if(!isset($dir_tmp))
 {include_once ($caminho."ms_configura.php");}
 
@@ -309,7 +310,11 @@ if(!isset($base) || $base == "")
 	}
 	else
 	{
+<<<<<<< .mine
+		$base = "geral1v".versao;
+=======
 		$base = "geral1v".$versao;
+>>>>>>> .r2359
 		$estadosl = "estadosl";
 	}
 }
