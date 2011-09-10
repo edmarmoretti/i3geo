@@ -97,6 +97,8 @@ if($lista == "temas")
 //cria o web service
 //
 include("classesphp/funcoes_gerais.php");
+$versao = versao();
+$versao = $versao["principal"];
 $req = ms_newowsrequestobj();
 $tipo = "";
 $_GET = array_merge($_GET,$_POST);
@@ -120,7 +122,7 @@ if(isset($tema) && $tipo != "metadados")
 {$tipo = "";}
 if(!isset($version))
 {$req->setParameter("VeRsIoN","1.1.0");}
-$oMap = ms_newMapobj("aplicmap/ogcws.map");
+$oMap = ms_newMapobj("aplicmap/ogcwsv".$versao.".map");
 //
 //altera os caminhos das imagens
 //
