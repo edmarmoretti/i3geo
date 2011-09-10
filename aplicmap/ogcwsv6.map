@@ -1,0 +1,113 @@
+MAP
+  EXTENT -76.512593 -36.948432 -29.585185 7.046013
+  FONTSET "../symbols/fontes.txt"
+  IMAGECOLOR 255 255 255
+  IMAGETYPE png
+  SYMBOLSET "../symbols/simbolosv6.sym"
+  SHAPEPATH "/opt/www/html/geodados"
+  SIZE 450 450
+  STATUS ON
+  UNITS METERS
+  #CONFIG MS_NONSQUARE "YES"
+  #CONFIG MS_ERRORFILE "/ms4w/tmp/ms_error.txt"
+  NAME "i3geoogc"
+  DEBUG OFF
+  #DEBUG 5
+  OUTPUTFORMAT
+    NAME "png"
+    MIMETYPE "image/png"
+    DRIVER "AGG/PNG"
+    EXTENSION "png"
+    IMAGEMODE "RGBA"
+    TRANSPARENT TRUE
+    FORMATOPTION "INTERLACE=OFF"
+  END
+
+  PROJECTION
+    "init=epsg:4291"
+  END
+  LEGEND
+    IMAGECOLOR 255 255 255
+    KEYSIZE 10 10
+    KEYSPACING 5 5
+    LABEL
+      ANGLE 0.000000
+      ANTIALIAS TRUE
+      FONT "verdana"
+      MAXSIZE 256
+      MINSIZE 4
+      SIZE 10
+      TYPE TRUETYPE
+      BUFFER 0
+      COLOR 0 0 0
+      FORCE FALSE
+      MINDISTANCE -1
+      MINFEATURESIZE -1
+      OFFSET 0 0
+      PARTIALS FALSE
+    END
+    POSITION UL
+    STATUS ON
+  END
+
+  QUERYMAP
+    COLOR 255 255 0
+    SIZE -1 -1
+    STATUS OFF
+    STYLE HILITE
+  END
+
+  SCALEBAR
+    ALIGN CENTER
+    COLOR 0 0 0
+    IMAGECOLOR 255 255 255
+    INTERVALS 4
+    LABEL
+      SIZE MEDIUM
+      TYPE BITMAP
+      BUFFER 0
+      COLOR 0 0 0
+      FORCE FALSE
+      MINDISTANCE -1
+      MINFEATURESIZE -1
+      OFFSET 0 0
+      PARTIALS TRUE
+    END
+    POSITION LL
+    SIZE 200 3
+    STATUS OFF
+    STYLE 0
+    UNITS MILES
+  END
+
+  WEB
+    IMAGEPATH "/var/tmp/ms_tmp/"
+    IMAGEURL "/ms_tmp/"
+    METADATA
+      "ows_country"	"Brasil"
+      "ows_keywordlist"	"i3Geo"
+      "ows_context_fid"	"i3geo"
+      "ows_city"	"Brasilia"
+      "ows_contactperson"	"Web Master"
+      "ows_addresstype"	"uri"
+      "ows_context_version"	"1.0.0"
+      "ows_abstract"	"Web services gerados da base de dados do i3Geo. Para chamar um tema especificamente, veja o sistema de ajuda, digitando no navegador web ogc.php?ajuda=, para uma lista compacta de todos os servicos, digite ogc.php?lista=temas"
+      "ows_contactposition"	"Administrador do sítio web"
+      "ows_stateorprovince"	"DF"
+      "ows_contactorganization"	"Coordenação Geral de TI"
+      "ows_name"	"i3geoogc"
+      "ows_accessconstraints"	"vedado o uso comercial"
+      "ows_fees"	"none"
+      "ows_contactelectronicmailaddress"	"geoprocessamento@mma.gov.br"
+      "ows_getcontext_enabled"	"1"
+      "ows_namespace_uri"	"http://www.omsug.ca/osgis2004"
+      "ows_address"	"http://www.mma.gov.br"
+      "ows_postcode"	""
+    END
+    QUERYFORMAT text/html
+    LEGENDFORMAT text/html
+    BROWSEFORMAT text/html
+    TEMPLATE "none.htm"
+  END
+
+END
