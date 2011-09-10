@@ -1,0 +1,26 @@
+MAP
+SYMBOLSET ../symbols/simbolospolv5.sym
+FONTSET   "../symbols/fontes.txt"
+LAYER
+      METADATA
+      END
+    NAME "p0"
+    SIZEUNITS PIXELS
+    STATUS OFF
+    TOLERANCE 0
+    TOLERANCEUNITS PIXELS
+    TYPE POLYGON
+    UNITS METERS
+    CLASS
+      NAME ""
+      METADATA
+      END
+      STYLE
+          COLOR 0 0 0
+        MAXSIZE 500
+        MINSIZE 1
+        SYMBOL "p0"
+      END
+    END
+  END
+END
