@@ -223,16 +223,18 @@ function iniciaMapa()
 		$l->set("status",MS_DELETE);
 	}
 	$of = $mf->outputformat;
+	$of->set("driver","GD/PNG");
+	/*
 	$versao = versao();
 	if($versao["principal"] == 6)
 	{$of->set("driver","GD/PNG");}
 	else
 	{$of->set("driver","AGG/PNG");}
-	
-
+	*/
 	$temp = $mf->scalebar;
 	$temp->set("status",MS_OFF);
 	$mf->save($nomefundo);
+	//
 	$temp = $m->mapa->scalebar;
 	$temp->set("status",MS_OFF);		
 	$of = $m->mapa->outputformat;

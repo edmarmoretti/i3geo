@@ -66,6 +66,12 @@ class SHP
 	Indica se a biblioteca dbase está carregada
 	*/
 	protected $dbaseExiste;
+	/*
+	Variavel: $v
+	
+	Versão atual do Mapserver (primeiro dígito)
+	*/
+	public $v;
 	
 /*
 function: __construct
@@ -82,7 +88,13 @@ $ext - extensao geográfica que será aplicada ao mapa
 */
 	function __construct($map_file,$tema="",$locaplic="",$ext="")
 	{
-		//error_reporting(E_ALL);
+  		if (!function_exists('ms_newMapObj')) {return false;}
+  		if(file_exists($locaplic."/funcoes_gerais.php"))
+  		include_once($locaplic."/funcoes_gerais.php");
+  		else
+  		include_once("funcoes_gerais.php");
+		$this->v = versao();
+		$this->v = $this->v["principal"];
 		$this->dbaseExiste = false;
 		if(function_exists("dbase_create"))
 		{$this->dbaseExiste = true;}
@@ -383,9 +395,13 @@ array - xy
 		$xy = array();
 		for ($i = 0; $i < $res_count; ++$i)
 		{
-			$result = $this->layer->getResult($i);
-			$shp_index  = $result->shapeindex;
-			$shape = $this->layer->getfeature($shp_index,-1);
+			if($this->v == 6)
+			{$shape = $this->layer->getShape($this->layer->getResult($i));}
+			else{
+				$result = $this->layer->getResult($i);
+				$shp_index  = $result->shapeindex;
+				$shape = $this->layer->getfeature($shp_index,-1);			
+			}			
 			$nlinhas = $shape->numlines;
 			for($j = 0;$j < $nlinhas; ++$j){
 				$lin = $shape->line($j);
@@ -415,10 +431,13 @@ array("layerprj"=>$xylayer,"mapprj"=>$xymapa)
 		$sopen = $this->layer->open();
 		if($sopen == MS_FAILURE){return "erro";}
 		$xy = array();
-
-		$result = $this->layer->getResult($res_count - 1);
-		$shp_index  = $result->shapeindex;
-		$shape = $this->layer->getfeature($shp_index,-1);
+		if($this->v == 6)
+		{$shape = $this->layer->getShape($this->layer->getshape(new resultObj($res_count - 1)));}
+		else{
+			$result = $this->layer->getResult($res_count - 1);
+			$shp_index  = $result->shapeindex;
+			$shape = $this->layer->getfeature($shp_index,-1);
+		}
 		$lin = $shape->line(0);
 		$pt = $lin->point(0);
 		$this->layer->close();

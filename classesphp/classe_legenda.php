@@ -513,20 +513,21 @@ String no formato HTML com as imagens dos símbolos
 */
 	function listaSimbolos($tipo,$dir_tmp,$imgdir,$onclick,$tamanho=8,$width=1)
 	{
+		$versao = versao();
+		$versao = $versao["principal"];
 		//error_reporting(E_ALL);
 		if ($tipo == 3){$tipo = 2;} //tipo raster
 		if($imgdir == "")
 		{$dir = $dir_tmp;}
 		else
 		{$dir = $dir_tmp."/".$imgdir;}
-		
 		if (!file_exists($dir."/simbolos".$tipo.".inc"))
 		{
 			$f = fopen($dir."/simbolos".$tipo.".inc","w");
-			if ($tipo == 2){$t="simpol.map";}
-			if ($tipo == 0){$t="simpt.map";}
+			if ($tipo == 2){$t="simpolv".$versao.".map";}
+			if ($tipo == 0){$t="simptv".$versao.".map";}
 			if ($tipo == 1){
-				$t="simlin.map";
+				$t="simlinv".$versao.".map";
 				$tamanho = $tamanho / 4;
 			}
 			if (strtoupper(substr(PHP_OS, 0, 3) == 'WIN'))
@@ -534,19 +535,22 @@ String no formato HTML com as imagens dos símbolos
 			else
 			{$mapatemp = ms_newMapObj($this->localaplicacao."/aplicmap/".$t);}
 			$ins = "";
-			$ns = $mapatemp->getnumsymbols();
+			
 			$l = $mapatemp->getlayer(0);
-			$novoss = dirname($this->mapa->symbolsetfilename)."/".basename($mapatemp->symbolsetfilename);
+			$novoss = dirname($this->mapa->symbolsetfilename)."\\".basename($mapatemp->symbolsetfilename);
 			$this->mapa->setsymbolset($novoss);
+			$ns = $this->mapa->getnumsymbols();
 			for ($i=0;$i < $ns;++$i)
 			{
 				$oSymbol = $this->mapa->getSymbolObjectById($i);
 				$nomes = $oSymbol->name;
+				if($nomes == "")
+				{$nomes = $i;}
 				$adiciona = ms_newLayerObj($this->mapa, $l);
 				$nomel = $l->name;
 				$tematemp= $this->mapa->getlayerbyname($nomel);
 				$c = $tematemp->getClass(0);
-				$e = $c->getstyle(0);
+				$e = $c->getstyle(0);				
 				$e->set("symbolname",$nomes);
 				$e->set("size",$tamanho);
 				$e->set("width",$width);

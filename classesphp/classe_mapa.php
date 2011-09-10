@@ -59,7 +59,12 @@ class Mapa
 	Nome do arquivo de seleção (.qy)
 	*/
 	public $qyfile;	
+	/*
+	Variavel: $v
 	
+	Versão atual do Mapserver (primeiro dígito)
+	*/
+	public $v;	
 /*
 Function: __construct
 
@@ -77,6 +82,8 @@ $map_file - Endereço do mapfile no servidor.
   		include_once($locaplic."/funcoes_gerais.php");
   		else
   		include_once("funcoes_gerais.php");
+		$this->v = versao();
+		$this->v = $this->v["principal"];		
 		$this->qyfile = str_replace(".map",".qy",$map_file);
   		$this->locaplic = $locaplic;
   		if(!file_exists($map_file))
@@ -1677,7 +1684,10 @@ $arq - Nome do shape file.
 		if (file_exists($arq))
 		{
 			$s = ms_newShapefileObj($arq,-1);
-			$shape = $s->getShape(0);
+			if($this->v == 6)
+			{$shape = $s->getshape(new resultObj(0));}
+			else
+			{$shape = $s->getshape(0);}
 			$t = $shape->type;
 			$tipo = MS_LAYER_POLYGON;
 			if ($t == 0)

@@ -74,7 +74,13 @@ class Atributos
 	
 	Objeto projection original do mapa. Obtido apenas na interface Googlemaps
 	*/
-	public $projO;	
+	public $projO;
+	/*
+	Variavel: $v
+	
+	Versão atual do Mapserver (primeiro dígito)
+	*/
+	public $v;		
 /*
 Function: __construct
 
@@ -100,6 +106,8 @@ $ext - (opcional) extensão geográfica que será aplicada ao mapa
   		include_once($locaplic."/funcoes_gerais.php");
   		else
   		include_once("funcoes_gerais.php");
+		$this->v = versao();
+		$this->v = $this->v["principal"];
 		if($map_file != ""){
 			$this->qyfile = str_replace(".map",".qy",$map_file);
 			$this->locaplic = $locaplic;
@@ -195,17 +203,20 @@ $registro - Índice do registro que será consultado.
 		$this->layer->setfilter("");
 		$ext = "";
 		//procura o registro e pega a extensão geográfica
-		if (@$this->layer->open() == MS_SUCCESS)
-		{
-			$items = pegaItens($this->layer);
-			if (@$this->layer->queryByrect($this->mapa->extent) == MS_SUCCESS)
+		if($this->v == 6)
+		{$shape = $this->layer->getShape(new resultObj($registro));}		
+		else{
+			if (@$this->layer->open() == MS_SUCCESS)
 			{
-				$this->layer->open();
-				$shape = $this->layer->getfeature($registro,-1);
-				$fechou = $this->layer->close();
-				$ext = $this->extensaoShape($shape);
-			}
+				if (@$this->layer->queryByrect($this->mapa->extent) == MS_SUCCESS)
+				{
+					$this->layer->open();
+					$shape = $this->layer->getfeature($registro,-1);
+					$fechou = $this->layer->close();
+				}
+			}		
 		}
+		$ext = $this->extensaoShape($shape);
 		return($ext);
 	}
 /*
@@ -268,11 +279,15 @@ $tipo - Tipo de busca brasil|null
 		for ($i = 0; $i < $res_count; ++$i)
 		{
 			$valitem = array();
-			foreach ($items as $item)
-			{
+			if($this->v == 6)
+			{$shape = $this->layer->getShape($this->layer->getResult($i));}
+			else{
 				$result = $this->layer->getResult($i);
 				$shp_index  = $result->shapeindex;
-				$shape = $this->layer->getfeature($shp_index,-1);
+				$shape = $this->layer->getfeature($shp_index,-1);			
+			}
+			foreach ($items as $item)
+			{
 				$v = trim($shape->values[$item]);
 				$v = $this->converte($v);
 				$valitem[] = $v;
@@ -341,16 +356,22 @@ $tipolista - Indica se serão mostrados todos os registros ou apenas os seleciona
 			for ($i = $inicio; $i < $res_count; ++$i)
 			{
 				$valitem = array();
+				if($this->v == 6){
+					$shape = $this->layer->getShape($this->layer->getResult($i));
+					$indx = $shape->index;
+				}
+				else{
+					$result = $this->layer->getResult($i);
+					$indx  = $result->shapeindex;
+					$shape = $this->layer->getfeature($indx,-1);
+				}				
 				foreach ($items as $item)
 				{
-					$result = $this->layer->getResult($i);
-					$shp_index  = $result->shapeindex;
-					$shape = $this->layer->getfeature($shp_index,-1);
 					$valori = trim($shape->values[$item]);
 					$valori = $this->converte($valori);
 					$valitem[] = array("item"=>$item,"valor"=>$valori);
 				}
-				$registros[] = array("indice"=>$shp_index,"valores"=>$valitem,"status"=>$chk);
+				$registros[] = array("indice"=>$indx,"valores"=>$valitem,"status"=>$chk);
 			}
 			$resultadoFinal[] = array("registros"=>$registros);	 	
 		}
@@ -378,11 +399,17 @@ $tipolista - Indica se serão mostrados todos os registros ou apenas os seleciona
 				for ($i = $inicio; $i < $res_count; ++$i)
 				{
 					$valitem = array();
-					foreach ($items as $item)
-					{
+					if($this->v == 6){
+						$shape = $this->layer->getShape($this->layer->getResult($i));
+						$indx = $shape->index;
+					}
+					else{
 						$result = $this->layer->getResult($i);
-						$shp_index  = $result->shapeindex;
-						$shape = $this->layer->getfeature($shp_index,-1);
+						$indx  = $result->shapeindex;
+						$shape = $this->layer->getfeature($indx,-1);						
+					}						
+					foreach ($items as $item)
+					{						
 						$valori = "";
 						if(@$shape->values[$item])
 						{
@@ -392,9 +419,9 @@ $tipolista - Indica se serão mostrados todos os registros ou apenas os seleciona
 						$valitem[] = array("item"=>$item,"valor"=>$valori);
 					}
 					//if (in_array($shp_index,$shp_atual))
-					if(isset($shp_atual[$shp_index]))
+					if(isset($shp_atual[$indx]))
 					{$chk = "CHECKED";}
-					$registros[] = array("indice"=>$shp_index,"valores"=>$valitem,"status"=>$chk);
+					$registros[] = array("indice"=>$indx,"valores"=>$valitem,"status"=>$chk);
 					$chk = "";
 				}
 				$this->layer->close();
@@ -533,9 +560,13 @@ Include:
 		//pega os valores
 		for ($i = 0; $i < $res_count; ++$i)
 		{
-			$result = $this->layer->getResult($i);
-			$shp_index  = $result->shapeindex;
-			$shape = $this->layer->getfeature($shp_index,-1);
+			if($this->v == 6)
+			{$shape = $this->layer->getShape($this->layer->getResult($i));}
+			else{
+				$result = $this->layer->getResult($i);
+				$shp_index  = $result->shapeindex;
+				$shape = $this->layer->getfeature($shp_index,-1);
+			}
 			$v = $shape->values[$item];
 			$valores[] = $v;
 		}
@@ -1063,9 +1094,8 @@ $listaDeTemas - (opcional) Lista com os códigos dos temas que serão identificado
 			for ($i = 0; $i < $res_count; ++$i)
 			{
 				$valori = array();
-				$result = $layer->getResult($i);
-				$shp_index  = $result->shapeindex;
-				$shape = $layer->getfeature($shp_index,-1);
+				$shape = $layer->getShape($layer->getResult($i));
+				
 				if ($tiporetorno == "shape")
 				{
 					$layer->close();
@@ -1322,9 +1352,13 @@ $listaDeTemas - (opcional) Lista com os códigos dos temas que serão identificado
 			for ($i = 0; $i < $res_count; ++$i)
 			{
 				$valori = array();
-				$result = $layer->getResult($i);
-				$shp_index  = $result->shapeindex;
-				$shape = $layer->getfeature($shp_index,-1);
+				if($this->v == 6)
+				{$shape = $layer->getShape($layer->getResult($i));}
+				else{
+					$result = $layer->getResult($i);
+					$shp_index  = $result->shapeindex;
+					$shape = $layer->getfeature($shp_index,-1);								
+				}
 				$conta = 0;
 				//var_dump($itens);exit;
 				if($tiporetorno == "shape" || $tiporetorno == "googlerelevo"){

@@ -86,6 +86,12 @@ class Temas
 	Nome do arquivo de seleção (.qy)
 	*/
 	public $qyfile;
+	/*
+	Variavel: $v
+	
+	Versão atual do Mapserver (primeiro dígito)
+	*/
+	public $v;
 /*
 function __construct
 
@@ -109,6 +115,8 @@ $ext - (opcional) extensão geográfica que será aplicada ao mapa
   		include_once($locaplic."/funcoes_gerais.php");
   		else
   		include_once("funcoes_gerais.php");
+		$this->v = versao();
+		$this->v = $this->v["principal"];		
   		$this->locaplic = $locaplic;
   		if($map_file != "")
 		{
@@ -783,9 +791,13 @@ $nome - nome que será dado a geometria
 		for ($i = 0; $i < $res_count; ++$i)
 		{
 			$valitem = array();
-			$result = $this->layer->getResult($i);
-			$shp_index  = $result->shapeindex;
-			$shape = $this->layer->getfeature($shp_index,-1);		
+			if($this->v == 6)
+			{$shape = $this->layer->getShape($this->layer->getResult($i));}
+			else{
+				$result = $this->layer->getResult($i);
+				$shp_index  = $result->shapeindex;
+				$shape = $this->layer->getfeature($shp_index,-1);			
+			}
 			foreach ($items as $item)
 			{
 				$v = trim($shape->values[$item]);
@@ -1006,28 +1018,38 @@ Calcula a extensão geográfica dos elementos selecionados de um tema e ajusta o m
 		$res_count = $this->layer->getNumresults();
 		if($res_count > 0)
 		{
-			$xmin = array();
-			$xmax = array();
-			$ymin = array();
-			$ymax = array();
-			for ($i = 0; $i < $res_count; ++$i)
-			{
-				$valitem = array();
-				$result = $this->layer->getResult($i);
-				$shp_index  = $result->shapeindex;
-				$shape = $this->layer->getfeature($shp_index,-1);				
-				$bound = $shape->bounds;
-				$xmin[] = $bound->minx;
-				$xmax[] = $bound->maxx;
-				$ymin[] = $bound->miny;
-				$ymax[] = $bound->maxy;
+			$versao = versao();
+			if($versao["principal"] == 6){
+				$ret = $this->layer->getResultsBounds();
+			}
+			else{
+				$xmin = array();
+				$xmax = array();
+				$ymin = array();
+				$ymax = array();
+				for ($i = 0; $i < $res_count; ++$i)
+				{
+					$valitem = array();
+					if($this->v == 6)
+					{$shape = $this->layer->getShape($this->layer->getResult($i));}
+					else{
+						$result = $this->layer->getResult($i);
+						$shp_index  = $result->shapeindex;
+						$shape = $this->layer->getfeature($shp_index,-1);			
+					}					
+					$bound = $shape->bounds;
+					$xmin[] = $bound->minx;
+					$xmax[] = $bound->maxx;
+					$ymin[] = $bound->miny;
+					$ymax[] = $bound->maxy;
+				}
+				$ret = ms_newRectObj();
+				$ret->set("minx",min($xmin));
+				$ret->set("miny",min($ymin));
+				$ret->set("maxx",max($xmax));
+				$ret->set("maxy",max($ymax));
 			}
 			$this->layer->close();
-			$ret = ms_newRectObj();
-			$ret->set("minx",min($xmin));
-			$ret->set("miny",min($ymin));
-			$ret->set("maxx",max($xmax));
-			$ret->set("maxy",max($ymax));
 			if (($prjTema != "") && ($prjMapa != $prjTema))
 			{
 				$projInObj = ms_newprojectionobj($prjTema);

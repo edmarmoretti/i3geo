@@ -255,15 +255,16 @@ if(trim($_GET["TIPOIMAGEM"]) != "" && trim($_GET["TIPOIMAGEM"]) != "nenhum")
 }
 else{
 	if($cache == true)
-	{salvaCacheImagem($_GET["BBOX"],$nomecache,$map_fileX,$_GET["WIDTH"],$_GET["HEIGHT"]);}
+	{$nomer = salvaCacheImagem($_GET["BBOX"],$nomecache,$map_fileX,$_GET["WIDTH"],$_GET["HEIGHT"]);}
+	else{
+		$nomer = ($img->imagepath)."imgtemp".nomeRandomico().".png";
+		$img->saveImage($nomer);
+	}
 	ob_clean();
-	$nomer = ($img->imagepath)."imgtemp".nomeRandomico().".png";
-	$img->saveImage($nomer);
 	$img = imagecreatefrompng($nomer);
 	imagealphablending($img, false);
 	imagesavealpha($img, true);
 	ob_clean();
-
 	echo header("Content-type: image/png \n\n");
 	imagepng($img);
 	imagedestroy($img);
@@ -284,6 +285,7 @@ function salvaCacheImagem($bbox,$layer,$map,$w,$h){
 		$img->saveImage($nome);
 		chmod($nome,0777);
 	}
+	return $nome;
 }
 function carregaCacheImagem($bbox,$layer,$map,$w,$h){
 	if($layer == "copyright" || $layer == "")

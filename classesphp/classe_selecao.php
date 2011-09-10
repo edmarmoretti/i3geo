@@ -73,7 +73,13 @@ class Selecao
 	
 	Objeto projection original do mapa. Obtido apenas na interface Googlemaps
 	*/
-	public $projO;	
+	public $projO;
+	/*
+	Variavel: $v
+	
+	Versão atual do Mapserver (primeiro dígito)
+	*/
+	public $v;
 /*
 Function: __construct
 
@@ -92,6 +98,12 @@ $ext - extensão geográfica do mapa
 
 	function __construct($map_file,$tema="",$ext="")
 	{
+  		if(file_exists($locaplic."/funcoes_gerais.php"))
+  		include_once($locaplic."/funcoes_gerais.php");
+  		else
+  		include_once("funcoes_gerais.php");
+		$this->v = versao();
+		$this->v = $this->v["principal"];
 		$this->qyfile = str_replace(".map",".qy",$map_file);
   		if($tema != "")
 		{$this->qyfileTema = dirname($map_file)."/".$tema.".php";}
@@ -271,9 +283,13 @@ $tipo - Tipo de operação adiciona|retira|inverte|limpa|novo
 			$res_count = $layero->getNumresults();
 			for ($i = 0; $i < $res_count; ++$i)
 			{
-				$result = $layero->getResult($i);
-				$s  = $result->shapeindex;
-				$sh = $layero->getfeature($s,-1);
+				if($this->v == 6)
+				{$sh = $layero->getShape($layero->getResult($i));}
+				else{
+					$result = $layero->getResult($i);
+					$s  = $result->shapeindex;
+					$sh = $layero->getfeature($s,-1);				
+				}
 				$tiposh = $sh->type;
 				if ($tiposh == 2)
 				{$ident = @$this->layer->querybyshape($sh);}
@@ -326,9 +342,11 @@ $tipo - Tipo de operação adiciona|retira|inverte|limpa|novo
 			$conta = $layero->getNumresults();
 			for ($k = 0; $k < $conta; $k++)
 			{
-				if (@$layero->getfeature($k,-1))
-				{
-					$s = $layero->getfeature($k,-1);
+				if($this->v == 6)
+				{$s = @$layero->getShape($layero->getResult($k));}
+				else
+				{$s = @$layero->getfeature($k,-1);}
+				if($s){
 					if ($s->type == 2)
 					{
 						$this->layer->querybyshape($s);

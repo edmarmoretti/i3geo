@@ -1105,6 +1105,8 @@ function pegaValores($mapa,$layer,$item,$numerico=false,$ignorar="")
 {
 	$layer->set("template","none.htm");
 	$layer->setfilter("");
+	$versao = versao();
+	$versao = $versao["principal"];
 	if (@$layer->queryByrect($mapa->extent) == MS_SUCCESS)
 	{
 		$sopen = $layer->open();
@@ -1113,9 +1115,13 @@ function pegaValores($mapa,$layer,$item,$numerico=false,$ignorar="")
 		$valitem = array();
 		for ($i=0;$i<$res_count;++$i)
 		{
-			$result = $layer->getResult($i);
-			$shp_index  = $result->shapeindex;
-			$shape = $layer->getfeature($shp_index,-1);
+			if($versao == 6)
+			{$shape = $layer->getShape($layer->getResult($i));}
+			else{
+				$result = $layer->getResult($i);
+				$shp_index  = $result->shapeindex;
+				$shape = $layer->getfeature($shp_index,-1);			
+			}
 			$v = trim($shape->values[$item]);
 			if ($numerico)
 			{
@@ -1173,7 +1179,8 @@ Retorno:
 */
 function pegaValoresM($mapa,$layer,$itens,$exclui="nulo",$selecionados="nao",$chaves=false,$centroide=false)
 {
-	//error_reporting(E_ALL);
+	$versao = versao();
+	$versao = $versao["principal"];
 	$prjMapa = $mapa->getProjection();
 	$prjTema = $layer->getProjection();
 	$layer->set("template","none.htm");
@@ -1204,12 +1211,18 @@ function pegaValoresM($mapa,$layer,$itens,$exclui="nulo",$selecionados="nao",$ch
 		
 		for ($i=0;$i<$res_count;++$i)
 		{
-			$result = $layer->getResult($i);
-			$shp_index = $result->shapeindex;
+			if($versao == 6){
+				$shape = $layer->getShape($layer->getResult($i));
+				$shp_index = $shape->index;
+			}
+			else{
+				$result = $layer->getResult($i);
+				$shp_index  = $result->shapeindex;
+				$shape = $layer->getfeature($shp_index,-1);			
+			}
 			if (($selecionados == "sim") && (array_search($shp_index,$indicesel) === FALSE))
 			{continue;}
 			$considera = "sim";
-			$shape = $layer->getfeature($shp_index,-1);
 			//verifica se no registro deve ser considerado
 			if ($exclui != "nulo")
 			{
@@ -1804,6 +1817,8 @@ Retorno:
 */
 function criaSHP($tema,$map_file,$locaplic,$dir_tmp,$nomeRand=TRUE)
 {
+	$versao = versao();
+	$versao = $versao["principal"];
 	//para manipular dbf
 	if(file_exists($locaplic."/pacotes/phpxbase/api_conversion.php"))
 	include_once($locaplic."/pacotes/phpxbase/api_conversion.php");
@@ -1842,10 +1857,14 @@ function criaSHP($tema,$map_file,$locaplic,$dir_tmp,$nomeRand=TRUE)
 			dbase_add_record($db,$reg);
 			dbase_close($db);
 		}
-		$s = $layer->getfeature(0,-1);
-		$result = $layer->getResult(0);
-		$shpi  = $result->shapeindex;
-		$shape = $layer->getfeature($shpi,-1);
+		if($versao == 6)
+		{$shape = $layer->getshape(new resultObj(0));}
+		else{
+			$s = $layer->getfeature(0,-1);
+			$result = $layer->getResult(0);
+			$shpi  = $result->shapeindex;
+			$shape = $layer->getfeature($shpi,-1);
+		}
 		$novoshpf = ms_newShapefileObj($nomeshp.".shp", -2);
 		$novoshpf->addShape($shape);
 		$novoshpf->free();
@@ -1886,9 +1905,13 @@ function criaSHP($tema,$map_file,$locaplic,$dir_tmp,$nomeRand=TRUE)
 			if($sopen == MS_FAILURE){return "erro";}
 			for ($i = 0; $i < $res_count; ++$i)
 			{
-				$result = $layer->getResult($i);
-				$shp_index  = $result->shapeindex;
-				$shape = $layer->getfeature($shp_index,-1);
+				if($versao == 6)
+				{$shape = $layer->getShape($layer->getResult($i));}
+				else{
+					$result = $layer->getResult($i);
+					$shp_index  = $result->shapeindex;
+					$shape = $layer->getfeature($shp_index,-1);				
+				}
 				foreach ($items as $ni)
 				{
 					$vreg = $shape->values[$ni];

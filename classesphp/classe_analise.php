@@ -74,6 +74,12 @@ class Analise
 	*/
 	public $qyfile;
 	/*
+	Variavel: $v
+	
+	Versão atual do Mapserver (primeiro dígito)
+	*/
+	public $v;	
+	/*
 	Variavel: $dbaseExiste
 	
 	Indica se a biblioteca dbase está carregada
@@ -100,6 +106,8 @@ $ext - Extensão geográfica do mapa
   		include_once($locaplic."/funcoes_gerais.php");
   		else
   		include_once("funcoes_gerais.php");
+		$this->v = versao();
+		$this->v = $this->v["principal"];		
 		$this->dbaseExiste = false;
 		if(function_exists("dbase_create"))
 		{$this->dbaseExiste = true;}		
@@ -1026,9 +1034,13 @@ $locaplic - Localização do I3geo.
 		$spts = array();
 		for ($i = 0; $i < $res_count; ++$i)
 		{
-			$result = $layerPt->getResult($i);
-			$shp_index  = $result->shapeindex;
-			$shape = $layerPt->getfeature($shp_index,-1);
+			if($this->v == 6)
+			{$shape = $layerPt->getShape($layerPt->getResult($i));}
+			else{
+				$result = $layerPt->getResult($i);
+				$shp_index  = $result->shapeindex;
+				$shape = $layerPt->getfeature($shp_index,-1);			
+			}
 			$spts[] = $shape;
 		}
 		$layerPt->close();
@@ -1098,10 +1110,13 @@ $locaplic - Localização do I3geo.
 					if($sopen == MS_FAILURE){return "erro";}
 					if ($res_count > 0 && $layer->getResult(0) !== FALSE)
 					{
-						$result = $layer->getResult(0);
-						$shp_index  = $result->shapeindex;
-						
-						$shape = $layer->getfeature($shp_index,-1);
+						if($this->v == 6)
+						{$shape = $layer->getShape($layer->getResult(0));}
+						else{
+							$result = $layer->getResult(0);
+							$shp_index  = $result->shapeindex;					
+							$shape = $layer->getfeature($shp_index,-1);						
+						}
 						foreach ($itens as $item)
 						{$reg[] = $this->truncaS($shape->values[$item]);}
 					}
@@ -1190,9 +1205,13 @@ function distanciaptpt($temaorigem,$temadestino,$temaoverlay,$locaplic,$itemorig
 	$res_count = $layerorigem->getNumresults();
 	for ($i = 0; $i < $res_count; ++$i)
 	{
-		$result = $layerorigem->getResult($i);
-		$shp_index  = $result->shapeindex;
-		$shapesorigem[] = $layerorigem->getshape(-1, $shp_index);
+		if($this->v == 6)
+		{$shapesorigem[] = $layerorigem->getShape($layerorigem->getResult($i));}
+		else{
+			$result = $layerorigem->getResult($i);
+			$shp_index  = $result->shapeindex;
+			$shapesorigem[] = $layerorigem->getshape(-1, $shp_index);	
+		}
 	}
 	$layerorigem->close();
 	$layeroverlay->set("tolerance",0);
@@ -1212,9 +1231,13 @@ function distanciaptpt($temaorigem,$temadestino,$temaoverlay,$locaplic,$itemorig
 
 	for ($i = 0; $i < $res_count; ++$i)
 	{
-		$result = $layerdestino->getResult($i);
-		$shp_index  = $result->shapeindex;
-		$shapesdestino[] = $layerdestino->getshape(-1, $shp_index);
+		if($this->v == 6)
+		{$shapesdestino[] = $layerdestino->getShape($layerdestino->getResult($i));}
+		else{
+			$result = $layerdestino->getResult($i);
+			$shp_index  = $result->shapeindex;
+			$shapesdestino[] = $layerdestino->getshape(-1, $shp_index);		
+		}
 	}
 	$layerdestino->close();
 	$rect = $this->mapa->extent;
@@ -1332,9 +1355,13 @@ nome do layer criado com o buffer.
 			//pega um shape especifico
 			for ($i = 0; $i < $res_count; ++$i)
 			{
-				$result = $this->layer->getResult($i);
-				$shp_index  = $result->shapeindex;
-				$listaShapes[] = $this->layer->getfeature($shp_index,-1);
+				if($this->v == 6)
+				{$listaShapes[] = $this->layer->getShape($this->layer->getResult($i));}
+				else{
+					$result = $this->layer->getResult($i);
+					$shp_index  = $result->shapeindex;
+					$listaShapes[] = $this->layer->getfeature($shp_index,-1);				
+				}
 			}
 			$fechou = $this->layer->close();
 		}
@@ -1369,7 +1396,7 @@ nome do layer criado com o buffer.
 		{
 			$ns = $buffers[0];
 			for($s=1;$s < count($buffers);$s++)
-			{$ns = $ns->union_geos($buffers[$s]);}
+			{$ns = $ns->union($buffers[$s]);}
 			$buffers = array($ns);
 			$shapes = array($shapes[0]);
 		}		
@@ -1460,9 +1487,13 @@ $item {string} - (opcional) Item q será utilizado para ponderar os valores.
 		$ys = 0;
 		for ($i = 0; $i < $res_count; ++$i)
 		{
-			$result = $this->layer->getResult($i);
-			$shp_index  = $result->shapeindex;
-			$shape = $this->layer->getfeature($shp_index,-1);
+			if($this->v == 6)
+			{$shape = $this->layer->getShape($this->layer->getResult($i));}
+			else{
+				$result = $this->layer->getResult($i);
+				$shp_index  = $result->shapeindex;
+				$shape = $this->layer->getfeature($shp_index,-1);			
+			}
 			if($item != "")
 			{$pondera = $shape->values[$item];}
 			$pt = $shape->line(0)->point(0);
@@ -1551,9 +1582,13 @@ $locaplic - Localização do I3geo.
 		//pega um shape especifico
 		for ($i = 0; $i < $res_count; ++$i)
 		{
-			$result = $this->layer->getResult($i);
-			$shp_index  = $result->shapeindex;
-			$shape = $this->layer->getfeature($shp_index,-1);
+			if($this->v == 6)
+			{$shape = $this->layer->getShape($this->layer->getResult($i));}
+			else{
+				$result = $this->layer->getResult($i);
+				$shp_index  = $result->shapeindex;
+				$shape = $this->layer->getfeature($shp_index,-1);			
+			}
 			$LineObj = ms_newLineObj();
 			$LineObj->add($shape->getCentroid());
 			$ShapeObj = ms_newShapeObj(MS_SHAPE_POINT);
@@ -2121,9 +2156,13 @@ $locaplic - Localização do I3geo
 		$res_count = $layerPo->getNumresults();
 		for ($i = 0; $i < $res_count; ++$i)
 		{
-			$result = $layerPo->getResult($i);
-			$shp_index  = $result->shapeindex;
-			$shape = $layerPo->getfeature($shp_index,-1);
+			if($this->v == 6)
+			{$shape = $layerPo->getShape($layerPo->getResult($i));}
+			else{
+				$result = $layerPo->getResult($i);
+				$shp_index  = $result->shapeindex;
+				$shape = $layerPo->getfeature($shp_index,-1);			
+			}
 			$novoreg = array();
 			foreach($itenspo as $ipo)
 			{$novoreg[] = $shape->values[$ipo];}
@@ -2182,9 +2221,15 @@ Salva o mapa acrescentando um novo layer com o resultado.
 		$indices = array();
 		for ($i = 0; $i < $res_count; ++$i)
 		{
-			$result = $this->layer->getResult($i);
-			$shp_index  = $result->shapeindex;
-			$shape = $this->layer->getfeature($shp_index,-1);
+			if($this->v == 6){
+				$shape = $this->layer->getShape($this->layer->getResult($i));
+				$shp_index = $shape->index;
+			}
+			else{
+				$result = $this->layer->getResult($i);
+				$shp_index  = $result->shapeindex;
+				$shape = $this->layer->getfeature($shp_index,-1);			
+			}
 			if($item != "")
 			$valor = $shape->values[$item];
 			else
@@ -2202,7 +2247,10 @@ Salva o mapa acrescentando um novo layer com o resultado.
 		{
 			foreach ($i as $indice)
 			{
-				$shape = $this->layer->getfeature($indice,-1);
+				if($this->v == 6)
+				{$shape = $this->layer->getShape($this->layer->getResult($indice));}
+				else
+				{$shape = $this->layer->getfeature($indice,-1);}
 				if($item != "")
 				$valor = $shape->values[$item];
 				else
@@ -2224,7 +2272,7 @@ Salva o mapa acrescentando um novo layer com o resultado.
 					}
 					else
 					{
-						$dissolve[$valor] = $shape->union_geos($dissolve[$valor]);
+						$dissolve[$valor] = $shape->union($dissolve[$valor]);
 					}
 				}
 			}
@@ -2312,19 +2360,23 @@ $locaplic - Localização do I3geo
 		$indices = array();
 		for ($i = 0; $i < $res_count; ++$i)
 		{
-			$result = $this->layer->getResult($i);
-			$shp_index  = $result->shapeindex;
-			$shape = $this->layer->getfeature($shp_index,-1);
+			if($this->v == 6)
+			{$shape = $this->layer->getShape($this->layer->getResult($i));}
+			else{
+				$result = $this->layer->getResult($i);
+				$shp_index  = $result->shapeindex;
+				$shape = $this->layer->getfeature($shp_index,-1);			
+			}
 			if($item != "")
 			$valor = $shape->values[$item];
 			else
 			$valor = "nenhum";
 			if(!isset($indices[$valor]))
 			{
-				$indices[$valor] = array($shp_index);
+				$indices[$valor] = array($i);
 			}
 			else
-			$indices[$valor] = array_merge($indices[$valor],array($shp_index));
+			$indices[$valor] = array_merge($indices[$valor],array($i));
 		}
 		//var_dump($indices);
 		//
@@ -2335,7 +2387,10 @@ $locaplic - Localização do I3geo
 		{
 			foreach ($i as $indice)
 			{
-				$shape = $this->layer->getfeature($indice,-1);
+				if($this->v == 6)
+				{$shape = $this->layer->getShape($this->layer->getResult($indice));}
+				else
+				{$shape = $this->layer->getfeature($indice,-1);}
 				if($item != "")
 				$valor = $shape->values[$item];
 				else
@@ -2344,7 +2399,7 @@ $locaplic - Localização do I3geo
 				{$dissolve[$valor] = $shape;}
 				else
 				{
-					$dissolve[$valor] = $shape->union_geos($dissolve[$valor]);
+					$dissolve[$valor] = $shape->union($dissolve[$valor]);
 				}
 			}
 		}
@@ -2739,9 +2794,13 @@ function gravaCoordenadasPt($tema,$limitepontos="TRUE",$extendelimite)
 		}
 		for ($i = 0; $i < $res_count; ++$i)
 		{
-			$result = $layerPt->getResult($i);
-			$shp_index  = $result->shapeindex;
-			$shape = $layerPt->getfeature($shp_index,-1);
+			if($this->v == 6)
+			{$shape = $layerPt->getShape($layerPt->getResult($i));}
+			else{
+				$result = $layerPt->getResult($i);
+				$shp_index  = $result->shapeindex;
+				$shape = $layerPt->getfeature($shp_index,-1);			
+			}
 			$lineo = $shape->line(0);
 			$pt = $lineo->point(0);
 			if (($prjTema != "") && ($prjMapa != $prjTema))
