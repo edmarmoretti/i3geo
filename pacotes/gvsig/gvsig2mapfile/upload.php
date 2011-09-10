@@ -1,11 +1,23 @@
 <?php
 require_once("../../../classesphp/pega_variaveis.php");
+require_once("../../../classesphp/funcoes_gerais.php");
+$versao = versao();
+$versao = $versao["principal"];
 error_reporting(E_ALL);
 if (isset($_FILES['i3GEOuploadfile']['name']))
 {
 	require_once ("../../../ms_configura.php");
 	include_once("class.gvsig2mapfile.php");
-	$mapn = ms_newMapObj("../../../aplicmap/geral1windows.map");
+	if (strtoupper(substr(PHP_OS, 0, 3) == 'WIN'))
+	{$mapn = ms_newMapObj($locaplic."/aplicmap/geral1windowsv".$versao.".map");}
+	else
+	{
+		if(file_exists('/var/www/i3geo/aplicmap/geral1debianv'.$versao.'.map')){
+			$mapn = ms_newMapObj("/var/www/i3geo/aplicmap/geral1debianv".$versao.".map");
+		}
+		else
+		{$mapn = ms_newMapObj($locaplic."/aplicmap/geral1v".$versao.".map");}
+	}	
 	//echo "<p>Carregando o arquivo...</p>";
 	//verifica nomes
 	verificaNome($_FILES['i3GEOuploadfile']['name']);

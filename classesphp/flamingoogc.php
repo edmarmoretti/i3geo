@@ -63,7 +63,7 @@ foreach ($_GET as $k=>$v)
 }
 
 $req->setParameter("VeRsIoN","1.1.0");
-$oMap = ms_newMapobj("../aplicmap/ogcws.map");
+$oMap = ms_newMapobj($locaplic."/aplicmap/ogcws.map");
 $protocolo = explode("/",$_SERVER['SERVER_PROTOCOL']);
 $proto = $protocolo[0] . ((isset($_SERVER['HTTPS']) && $_SERVER['HTTPS'] == "on") ? "s" : "") . "://";
 $server = isset($_SERVER['HTTP_HOST']) ? $_SERVER['HTTP_HOST'] : $_SERVER['SERVER_NAME'];

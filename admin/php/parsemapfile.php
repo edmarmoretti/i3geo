@@ -65,7 +65,7 @@ $objlayertypes[7] = "MS_LAYER_TILEINDEX";
 $objlayertypes[8] = "MS_LAYER_CHART";
 
 $codigoLayer = $id;
-$mapfile = "../../temas/".$codigoLayer.".map";
+$mapfile = $locaplic."/temas/".$codigoLayer.".map";
 $mapa = ms_newMapObj($mapfile);
 if(!isset($tipoparse) || $tipoparse=="")
 {mapfile();exit;}

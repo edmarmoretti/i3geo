@@ -142,18 +142,18 @@ function verifica($map,$solegenda)
 	if ($tema != "")
 	{
 		if (strtoupper(substr(PHP_OS, 0, 3) == 'WIN'))
-		{$mapa = ms_newMapObj("aplicmap/geral1windowsv".$versao.".map");}
+		{$mapa = ms_newMapObj($locaplic."/aplicmap/geral1windowsv".$versao.".map");}
 		else
 		{
 			if(file_exists('/var/www/i3geo/aplicmap/geral1debianv'.$versao.'.map')){
-				$mapa = ms_newMapObj("aplicmap/geral1debianv".$versao.".map");
+				$mapa = ms_newMapObj("/var/www/i3geo/aplicmap/geral1debianv".$versao.".map");
 			}
 			else
-			{$mapa = ms_newMapObj("aplicmap/geral1v".$versao.".map");}
+			{$mapa = ms_newMapObj($locaplic."/aplicmap/geral1v".$versao.".map");}
 		}
-		if(@ms_newMapObj($tema))
+		if(@ms_newMapObj($locaplic."/".$tema))
 		{
-			$nmapa = ms_newMapObj($tema);
+			$nmapa = ms_newMapObj($locaplic."/".$tema);
 		}
 		else
 		{
