@@ -264,6 +264,18 @@ class LayerServer {
     */
     function process_layer_request(&$layer_name){
 		error_reporting(0);
+
+		$v = "5.0.0";
+		$vs = explode(" ",ms_GetVersion());
+		$cvs = count($vs);
+		for ($i=0;$i<$cvs;++$i)
+		{
+			if(trim(strtolower($vs[$i])) == "version")
+			{$v = $vs[$i+1];}
+		}
+		$v = explode(".",$v);
+		$versao = $v[0];
+
         $layer = @$this->map_object->getLayerByName($layer_name);
 		if(!$layer)
 		{$layer = $this->map_object->getlayer(0);}
@@ -355,8 +367,12 @@ class LayerServer {
                         for ($j=0; $j < $layer->getNumResults(); $j++)
                         {
                             // get next shape row
-                            $result = $layer->getResult($j);
-                            $shape  = $layer->getShape($result->tileindex, $result->shapeindex);
+							if($versao == 6)
+							{$shape  =  $layer->getShape($layer->getResult($j));}
+							else{
+								$result = $layer->getResult($j);
+								$shape  = $layer->getFeature($result->shapeindex,$result->tileindex);
+							}
                             $this->process_shape($layer, $shape, $class_list, $folder, $namecol);
                         // end for loop
                         }
@@ -372,8 +388,12 @@ class LayerServer {
                     for ($j=0; $j < $n; $j++)
                     {
                         // get next shape row
-                        $result = $layer->getResult($j);
-                        $shape  = $layer->getShape($result->tileindex, $result->shapeindex);
+						if($versao == 6)
+						{$shape  =  $layer->getShape($layer->getResult($j));}
+						else{
+							$result = $layer->getResult($j);
+							$shape  = $layer->getFeature($result->shapeindex,$result->tileindex);
+						}
                         $shape->classindex = $result->classindex;
                         $this->process_shape($layer, $shape, $class_list, $folder, $namecol);
                     }

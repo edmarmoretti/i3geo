@@ -200,7 +200,9 @@ class SymbolServer {
     function send_icon(){
         header('Content-type:image/png');
         // Set transparency (needs imageformat RBGA in the mapfile too)
-        $this->map_object->set('transparent', 'on');
+		$o = $this->map_object->outputformat;
+		$o->set("transparent",MS_ON);		
+        //$this->map_object->set('transparent', 'on');
         $img = $this->map_object->draw();
         $this->iconpoint->draw($this->map_object, $this->icon_layer, $img, $this->classindex, '');
         $img->saveImage('');
