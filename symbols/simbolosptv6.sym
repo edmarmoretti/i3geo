@@ -1,9 +1,10 @@
 SYMBOLSET
-#
-#este arquivo contem TAGS que não funcionam na versão 6 do Mapserver
-#está aqui para efeitos de compatibilidade
-#pois é utilizao em aplicmap/geral1.map e outros
-#
+  Symbol
+    Name "rosa200"
+    Type PIXMAP
+    Image "rosa200.png"
+  END 
+
 	Symbol 
 		NAME 'p0' 
 		TYPE VECTOR 
@@ -37,6 +38,26 @@ SYMBOLSET
     END
   END
 
+Symbol
+  Name 'ferrovia-line1'
+  Type ELLIPSE
+  Points
+    1 1
+  END
+  FILLED TRUE
+END
+
+Symbol
+  Name 'ferrovia-line2'
+  Type VECTOR
+  Points
+    0 0
+    1 0
+    1 0
+    0 0
+  END
+  FILLED TRUE
+END
   Symbol
     Name "p3"
     Type VECTOR
@@ -85,7 +106,7 @@ SYMBOLSET
     TRANSPARENT 0
     Points
     0 1
-	1 1
+		1 1
     1 0
     END
   END
@@ -140,18 +161,52 @@ SYMBOLSET
     Transparent 0
   END
 	
+  Symbol
+    Name "linha"
+    Type ELLIPSE
+    POINTS 1 1 END
+    Transparent 0
+  END
+
+  Symbol
+    Name "linha1"
+    Type ELLIPSE
+    POINTS 1 1 END
+    Transparent 0
+  END
+
+	Symbol 
+	name "dashed" 
+	Type ELLIPSE 
+	FILLED true 
+	POINTS 
+		1 1 
+		END 
+  END
+
+	Symbol 
+	name "dashed1" 
+	Type ELLIPSE 
+	FILLED true 
+	POINTS 
+		1 1 
+		END 
+  END 
+
+	Symbol 
+	name "dashed2" 
+	Type ELLIPSE 
+	FILLED true 
+	POINTS 
+    2 0
+		END 
+  END 	
 	
   Symbol
     Name "aviao"
     Type PIXMAP
     Image "aviao.png"
   END
-  
-  Symbol
-    Name "rosa200"
-    Type PIXMAP
-    Image "rosa200.png"
-  END  
 	
   Symbol
     Name "seta"
@@ -457,214 +512,14 @@ Symbol
 		1 1 
 		END 
 END
-Symbol
-  Name 'ferrovia-line1'
-  Type ELLIPSE
-  Points
-    1 1
-  END
-  FILLED TRUE
-  STYLE 1 13 1 13 END
+SYMBOL
+NAME "T"
+TYPE TRUETYPE
+FONT "arial"
+CHARACTER "#"
+ANTIALIAS TRUE
+GAP 10
 END
-Symbol
-  Name 'ferrovia-line2'
-  Type VECTOR
-  Points
-    0 0
-    1 0
-    1 0
-    0 0
-  END
-  FILLED TRUE
-  STYLE
-    5 13 5 13
-  END
-END
-  Symbol
-    Name "pt1l"
-    Type VECTOR
-    TRANSPARENT 0
-    Points
-    1 1
-    1 1
-    END
-  STYLE
-    1 13 1 13
-  END
-  END
-	
-  Symbol 
-	  name "pt2l" 
-    TYPE ELLIPSE
-    POINTS 1 1 END
-    FILLED true
-  STYLE
-    1 13 1 13
-  END
-  END
 
-  Symbol
-    Name "pt3l"
-    Type ELLIPSE
-    POINTS 1 1 END
-    Transparent 0
-  STYLE
-    1 13 1 13
-  END
-  END
-	
-  Symbol
-    Name "linha"
-    Type ELLIPSE
-    POINTS 1 1 END
-    Transparent 0
-  END
 
-  Symbol
-    Name "linha1"
-    Type ELLIPSE
-    POINTS 1 1 END
-    STYLE 1 4 1 END
-    Transparent 0
-  STYLE
-    10 20 10 20
-  END
-  END
 
-	Symbol 
-	name "dashed" 
-	Type ELLIPSE 
-	FILLED true 
-	POINTS 
-		1 1 
-		END 
-	STYLE 
-		8 3 
-	END 
-  END
-
-	Symbol 
-	name "dashed1" 
-	Type ELLIPSE 
-	FILLED true 
-	POINTS 
-		1 1 
-		END 
-	STYLE 
-		8 8 1 8 
-	END 
-  END 
-
-	Symbol 
-	name "dashed2" 
-	Type ELLIPSE 
-	FILLED true 
-	POINTS 
-    2 0
-		END 
-  END 	
-
-  Symbol
-    Name "setal"
-    Type PIXMAP
-    Image "seta.png"
-  STYLE
-    1 13 1 13
-  END
-  END
-
-  Symbol
-    Name "sedel"
-    Type PIXMAP
-    Image "sede.png"
-    Transparent 1
-  STYLE
-    1 13 1 13
-  END
-
-  END
-		
-	
-  Symbol
-    Name "pontol"
-    Type ELLIPSE
-		FILLED true
-    TRANSPARENT 0
-    Points
-    1 1
-    1 1
-    END
-  STYLE
-    1 13 1 13
-  END
-
-  END
- 
-	Symbol 
-		NAME 'quadradol' 
-		TYPE VECTOR 
-		FILLED TRUE 
-		POINTS 
-		0 1 
-		0 0 
-		1 0 
-		1 1 
-		0 1 
-		END 
-  STYLE
-    1 13 1 13
-  END
-
-	END
-
-	SYMBOL 
-  	NAME "estrelal"
-  	TYPE vector
-  	FILLED TRUE
-  	POINTS
-		81 48
-		66 0
-		50 48
-		0 48
-		41 77
-		25 125
-		66 96
-		106 125
-		91 77
-		131 48
-		81 48
-  	END 
-  STYLE
-    1 13 1 13
-  END
-
-	END
-
-  SYMBOL 
-    NAME 'triangulol' 
-		TYPE VECTOR 
-		FILLED TRUE 
-		POINTS 
-		0 1 
-		.5 0 
-		1 1 
-		0 1 
-		END 
-  STYLE
-    1 13 1 13
-  END
-
-	END
-
-Symbol 
-	name "circlel" 
-	Type ELLIPSE 
-	Filled true 
-	POINTS 
-		1 1 
-		END 
-  STYLE
-    1 13 1 13
-  END
-
-END

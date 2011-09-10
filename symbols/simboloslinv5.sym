@@ -1,0 +1,218 @@
+SYMBOLSET
+Symbol
+  Name 'ferrovia-line1'
+  Type ELLIPSE
+  Points
+    1 1
+  END
+  FILLED TRUE
+  PATTERN
+    4 2 4 2
+  END
+  Transparent 0
+
+END
+Symbol
+  Name 'ferrovia-line2'
+  Type VECTOR
+  Points
+    0 0
+    1 0
+    1 0
+    0 0
+  END
+  FILLED TRUE
+  PATTERN
+    5 13 5 13
+  END
+END
+  Symbol
+    Name "pt1l"
+    Type VECTOR
+    TRANSPARENT 0
+    Points
+    1 1
+    1 1
+    END
+  PATTERN
+    1 13 1 13
+  END
+  END
+	
+  Symbol 
+	  name "pt2l" 
+    TYPE ELLIPSE
+    POINTS 1 1 END
+    FILLED true
+  PATTERN
+    1 13 1 13
+  END
+  END
+
+  Symbol
+    Name "pt3l"
+    Type ELLIPSE
+    POINTS 1 1 END
+    Transparent 0
+  PATTERN
+    1 13 1 13
+  END
+  END
+	
+  Symbol
+    Name "linha"
+    Type ELLIPSE
+    POINTS 1 1 END
+    Transparent 0
+  END
+
+  Symbol
+    Name "linha1"
+    Type ELLIPSE
+    POINTS 1 1 END
+    Transparent 0
+  PATTERN
+    10 20 10 20
+  END
+  END
+
+	Symbol 
+	name "dashed" 
+	Type ELLIPSE 
+	FILLED true 
+	POINTS 
+		1 1 
+		END 
+	PATTERN 
+		8 3 
+	END 
+  END
+
+	Symbol 
+	name "dashed1" 
+	Type ELLIPSE 
+	FILLED true 
+	POINTS 
+		1 1 
+		END 
+	PATTERN 
+		8 8 1 8 
+	END 
+  END 
+
+	Symbol 
+	name "dashed2" 
+	Type ELLIPSE 
+	FILLED true 
+	POINTS 
+    2 0
+		END 
+  END 	
+
+  Symbol
+    Name "setal"
+    Type PIXMAP
+    Image "seta.png"
+  PATTERN
+    1 13 1 13
+  END
+  END
+
+  Symbol
+    Name "sedel"
+    Type PIXMAP
+    Image "sede.png"
+    Transparent 1
+  PATTERN
+    1 13 1 13
+  END
+
+  END
+		
+	
+  Symbol
+    Name "pontol"
+    Type ELLIPSE
+		FILLED true
+    TRANSPARENT 0
+    Points
+    1 1
+    1 1
+    END
+  PATTERN
+    1 13 1 13
+  END
+
+  END
+ 
+	Symbol 
+		NAME 'quadradol' 
+		TYPE VECTOR 
+		FILLED TRUE 
+		POINTS 
+		0 1 
+		0 0 
+		1 0 
+		1 1 
+		0 1 
+		END 
+  PATTERN
+    1 13 1 13
+  END
+
+	END
+
+	SYMBOL 
+  	NAME "estrelal"
+  	TYPE vector
+  	FILLED TRUE
+  	POINTS
+		81 48
+		66 0
+		50 48
+		0 48
+		41 77
+		25 125
+		66 96
+		106 125
+		91 77
+		131 48
+		81 48
+  	END 
+  PATTERN
+    1 13 1 13
+  END
+
+	END
+
+  SYMBOL 
+    NAME 'triangulol' 
+		TYPE VECTOR 
+		FILLED TRUE 
+		POINTS 
+		0 1 
+		.5 0 
+		1 1 
+		0 1 
+		END 
+  PATTERN
+    1 13 1 13
+  END
+
+	END
+
+	
+	
+
+Symbol 
+	name "circlel" 
+	Type ELLIPSE 
+	Filled true 
+	POINTS 
+		1 1 
+		END 
+  PATTERN
+    1 13 1 13
+  END
+
+END
