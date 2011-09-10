@@ -50,6 +50,9 @@ i3geo/testainstal.php
 
 */
 error_reporting(E_ALL);
+include_once ("classesphp/funcoes_gerais.php");
+$versao = versao();
+$versao = $versao["principal"];
 echo "<html><body>";
 echo "<pre>\n";
 echo "<b>TESTE DE INSTALACAO DO i3Geo</b><br>\n";
