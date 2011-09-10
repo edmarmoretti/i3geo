@@ -41,7 +41,9 @@ include_once("admin.php");
 if(verificaEditores($editores) == "nao")
 {echo "Vc nao e um editor cadastrado. Apenas os editores definidos em i3geo/ms_configura.php podem acessar o sistema de administracao.";exit;}
 //error_reporting(E_ALL);
-$map_file = $locaplic."/aplicmap/ogcws.map";
+$versao = versao();
+$map_file = $locaplic."/aplicmap/ogcwsv".$versao["principal"].".map";
+
 $mapa = ms_newMapObj($map_file);
 $web = $mapa->web;
 //faz a busca da função que deve ser executada
