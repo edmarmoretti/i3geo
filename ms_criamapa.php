@@ -310,11 +310,7 @@ if(!isset($base) || $base == "")
 	}
 	else
 	{
-<<<<<<< .mine
-		$base = "geral1v".versao;
-=======
 		$base = "geral1v".$versao;
->>>>>>> .r2359
 		$estadosl = "estadosl";
 	}
 }
