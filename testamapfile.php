@@ -67,6 +67,8 @@ if (!function_exists('ms_GetVersion'))
 	else
 	{dl('php_mapscript.so');}
 }
+$versao = versao();
+$versao = $versao["principal"];
 ms_ResetErrorList();
 if(!isset($tipo))
 {$tipo = "";}
@@ -107,7 +109,7 @@ if (isset($map) && $map != "")
 }
 function verifica($map,$solegenda)
 {
-	global $tipo,$locaplic,$postgis_mapa;
+	global $tipo,$locaplic,$postgis_mapa,$versao;
 	if ($tipo == "mini" && file_exists('temas/miniaturas/'.$map.".mini.png"))
 	{
 		Header("Content-type: image/png");
@@ -140,14 +142,14 @@ function verifica($map,$solegenda)
 	if ($tema != "")
 	{
 		if (strtoupper(substr(PHP_OS, 0, 3) == 'WIN'))
-		{$mapa = ms_newMapObj("aplicmap/geral1windows.map");}
+		{$mapa = ms_newMapObj("aplicmap/geral1windowsv".$versao.".map");}
 		else
 		{
-			if(file_exists('/var/www/i3geo/aplicmap/geral1debian.map')){
-				$mapa = ms_newMapObj("aplicmap/geral1debian.map");
+			if(file_exists('/var/www/i3geo/aplicmap/geral1debianv'.$versao.'.map')){
+				$mapa = ms_newMapObj("aplicmap/geral1debianv".$versao.".map");
 			}
 			else
-			{$mapa = ms_newMapObj("aplicmap/geral1.map");}
+			{$mapa = ms_newMapObj("aplicmap/geral1v".$versao.".map");}
 		}
 		if(@ms_newMapObj($tema))
 		{
