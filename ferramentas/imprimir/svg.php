@@ -68,8 +68,12 @@ substituiCon($temp,$postgis_mapa);
 $map = ms_newMapObj($temp);
 if($interface == "googlemaps")
 {$map->setProjection("init=epsg:4291");}
-//$legenda =$map->legend;
-//$legenda->set("status",MS_EMBED);
+$eb = $map->scalebar;
+$leb = $eb->label;
+if($leb->type == "MS_BITMAP"){
+	$leb->set("type",MS_TRUETYPE);
+	$leb->set("font","Arial");
+}
 //altera o nome das classes vazias
 $temas = $map->getalllayernames();
 foreach ($temas as $tema)
@@ -95,11 +99,25 @@ foreach ($temas as $tema)
 				$classe->set("name","classeNula");
 			}
 		}
-	}	
+	}
+	$nclasses = $layer->numclasses;
+	if ($nclasses > 0)
+	{
+		for($i=0;$i<$nclasses;$i++)
+		{
+			$classe = $layer->getclass($i);
+			$leb = $classe->label;
+			if($leb->type == MS_BITMAP){
+				$leb->set("type",MS_TRUETYPE);
+				$leb->set("font","Arial");
+			}
+		}
+	}
 }
 $map->save($temp);
 removeLinha("classeNula",$temp);
 $map = ms_newMapObj($temp);
+
 $o = $map->outputformat;
 if($mapexten != ""){
 	$ext = explode(" ",$mapexten);
@@ -107,16 +125,12 @@ if($mapexten != ""){
 	$extatual->setextent($ext[0],$ext[1],$ext[2],$ext[3]);
 }
 $map->selectOutputFormat("svg");
-
 $protocolo = explode("/",$_SERVER['SERVER_PROTOCOL']);
 //mapa
 $imgo = $map->draw();
 $nomer = ($imgo->imagepath)."mapa".$nomes.".svg";
 $imgo->saveImage($nomer);
 $nomemapa = strtolower($protocolo[0])."://".$_SERVER['HTTP_HOST'].($imgo->imageurl).basename($nomer);
-
-
-
 echo "<p>Utilize a opção de alteração das propriedades do mapa para ajustar a legenda, tamanho e outras características antes de gerar os arquivos.</p>";
 echo "<p>Arquivos gerados:</p>";
 echo "<a style=font-family:Verdana,Arial,Helvetica,sans-serif; href='$nomemapa' target=_blank >Mapa</a><br><br>";

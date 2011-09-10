@@ -172,7 +172,7 @@ i3GEOF.analisaGeometrias = {
 		ins += '			<p class=paragrafo >Operações que criam novas geometrias a partir de duas ou mais geometrias:';
 		ins += '			<p class=paragrafo ><select id=i3GEOanalisageometriasselecaofuncoes style="position:relative;top:-3px;" >';
 		ins += '				<option value="" selected >---</option>';
-		ins += '				<option value=union_geos >Uni&atilde;o</option>';
+		ins += '				<option value=union >Uni&atilde;o</option>';
 		ins += '				<option value=intersection >Intersec&ccedil;&atilde;o</option>';
 		ins += '				<option value=difference >Diferen&ccedil;a</option>';
 		ins += '				<option value=symdifference >Diferen&ccedil;a inversa</option>';

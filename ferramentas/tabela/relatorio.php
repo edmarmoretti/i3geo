@@ -11,7 +11,8 @@ foreach(array_keys($_SESSION) as $k)
 $postgis_mapa = $_SESSION["postgis_mapa"];
 include("../../classesphp/carrega_ext.php");
 include("../../classesphp/funcoes_gerais.php");
-
+$versao = versao();
+$versao = versao["principal"];
 substituiCon($map_file,$postgis_mapa);
 $temp = explode(",",$nomesrel);
 $colunas = array();
@@ -56,9 +57,9 @@ $res_count = $layer->getNumresults();
 for ($i = 0; $i < $res_count; $i++)
 {
 	$valitem = array();
-	$result = $layer->getResult($i);
-	$shp_index  = $result->shapeindex;
-	$shape = $layer->getshape(-1, $shp_index);
+	if($versao == 6)
+	{$shape = $layer->getShape($layer->getResult($i));}
+	else{$shape = $layer->getFeature($layer->getResult($i)->shapeindex);}	
 	$grupo = "";
 	foreach ($itensrel as $item)
 	{
