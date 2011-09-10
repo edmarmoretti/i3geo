@@ -1,9 +1,10 @@
 MAP
   EXTENT -76.512593 -36.948432 -29.585185 7.046013
   FONTSET "../symbols/fontes.txt"
+  SYMBOLSET "../symbols/simbolosv6.sym" 
   IMAGECOLOR 255 255 255
   IMAGETYPE png
-  SYMBOLSET "../symbols/simbolosv6.sym"
+  
   SHAPEPATH "/opt/www/html/geodados"
   SIZE 450 450
   STATUS ON
@@ -20,7 +21,7 @@ MAP
     EXTENSION "png"
     IMAGEMODE "RGBA"
     TRANSPARENT TRUE
-    FORMATOPTION "INTERLACE=OFF"
+    #FORMATOPTION "INTERLACE=OFF"
   END
 
   PROJECTION

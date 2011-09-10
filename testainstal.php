@@ -50,9 +50,6 @@ i3geo/testainstal.php
 
 */
 error_reporting(E_ALL);
-include_once ("classesphp/funcoes_gerais.php");
-$versao = versao();
-$versao = $versao["principal"];
 echo "<html><body>";
 echo "<pre>\n";
 echo "<b>TESTE DE INSTALACAO DO i3Geo</b><br>\n";
@@ -62,6 +59,8 @@ echo "<br><br>PHP (a vers&atilde;o deve ser a 5x): ";
 echo "<br>".phpversion()."<br>\n";
 include("classesphp/carrega_ext.php");
 include("classesphp/funcoes_gerais.php");
+$versao = versao();
+$versao = $versao["principal"];
 $exts = get_loaded_extensions();
 echo "Obs: MapServer (a vers&atilde;o deve ser &gt;= 5.2 para que a sobreposi&ccedil;&atilde;o de temas funcione na interface Google Maps): <br>";
 echo ms_GetVersion()."<br><br>";
