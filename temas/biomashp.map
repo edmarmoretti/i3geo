@@ -1,10 +1,10 @@
 MAP
-  FONTSET "c:\ms4w\apache\htdocs\i3geo/symbols/fontes.txt"
-  SYMBOLSET "c:\ms4w\apache\htdocs\i3geo/symbols/simbolos.sym"
+  FONTSET "c:\ms4w\apache\htdocs\i3geo\symbols\fontes.txt"
+  SYMBOLSET "c:\ms4w\apache\htdocs\i3geo\symbols\simbolos.sym"
   LAYER
     CONNECTION ""
     DATA "c:\ms4w\apache\htdocs\i3geo\aplicmap\dados\biomas.shp"
-    GROUP "Grupo 1"
+    GROUP "biomashp"
     METADATA
       "ltempoitemimagem"	""
       "cache"	""
