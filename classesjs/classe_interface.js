@@ -1176,6 +1176,7 @@ i3GEO.Interface = {
 			};
 			for(i=nlayers-1;i>=0;i--){
 				camada = i3GEO.arvoreDeCamadas.CAMADAS[i];
+				opcoes.singleTile = !(i3GEO.Interface.openlayers.TILES);
 				if(i3geoOL.getLayersByName(camada.name).length === 0){
 					urllayer = url+"&layer="+camada.name+"&r="+Math.random();
 					try{
