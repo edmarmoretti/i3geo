@@ -222,6 +222,11 @@ i3GEO.configura.oMenuData.submenus.testeMenu = [
 		{ text: "Opção 2", url: "javascript:alert('opcao 2')" }        
 ]
 
+i3GEO.gadgets.PARAMETROS.mostraMenuSuspenso.finaliza = '' +
+'i3GEOoMenuBar.getMenuItem("omenudataInterface1").destroy();' +
+'i3GEOoMenuBar.getMenuItem("omenudataInterface3").cfg.setProperty("text", "xxxxx");' +
+'i3GEOoMenuBar.getMenuItem("omenudataInterface4").cfg.setProperty("url", "javascript:alert(\'oi\');")';
+
 //
 //vc pode usar também esse exemplo
 //desabilita o aplicativo default do menu suspenso

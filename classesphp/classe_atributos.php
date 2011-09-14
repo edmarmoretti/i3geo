@@ -797,6 +797,8 @@ $listaDeTemas - (opcional) Lista com os códigos dos temas que serão identificado
 				{
 					if (($layerteste->data != "") && ($layerteste->connectiontype != MS_WMS) || ($layerteste->tileindex != ""))
 					{$listatemas[] = $t;}
+					if($layerteste->connectiontype == MS_OGR)
+					{$listatemas[] = $t;}
 				}
 			}
 			$layerteste = $this->layer;
@@ -1190,7 +1192,6 @@ $listaDeTemas - (opcional) Lista com os códigos dos temas que serão identificado
 		$layer->set("template","none.htm");
 		$pt = ms_newPointObj();
 		$pt->setXY($x, $y);
-
 		//
 		//operação especial para o caso de wms
 		//

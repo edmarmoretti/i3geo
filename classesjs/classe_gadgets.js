@@ -821,7 +821,8 @@ i3GEO.gadgets = {
 	O objeto YAHOO.widget.MenuBar resultante pode ser obtido na variável i3GEOoMenuBar
 	
 	i3GEOoMenuBar pode ser manipulado com os métodos da biblioteca YUI, por exemplo,
-	i3GEOoMenuBar.getMenuItem("omenudataInterface1").cfg.setProperty("text", " ");
+	i3GEOoMenuBar.getMenuItem("omenudataInterface1").cfg.setProperty("text", "zzzzzz");
+	i3GEOoMenuBar.getMenuItem("omenudataInterface1").destroy();
 	
 	Para executar uma operação após o menu ser montado, utilize a propriedade
 	i3GEO.gadgets.PARAMETROS.mostraMenuSuspenso.finaliza, por exemplo (a string é executada por meio da função eval do javascript)
