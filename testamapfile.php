@@ -197,7 +197,7 @@ function verifica($map,$solegenda)
 				}
 			}
 			
-			autoClasses(&$layern,$nmapa);
+			autoClasses($layern,$nmapa);
 			if($layern->classitem != "" && $layern->connectiontype == 7 && $layern->numclasses > 0 && $layern->getmetadata("wms_sld_body") == ""){
 				$tipotemp = $layern->type;
 				$tiporep = $layern->getmetadata("tipooriginal");
@@ -219,7 +219,7 @@ function verifica($map,$solegenda)
 			$dados = $layern->data;
 			$pegarext = $teman;	
 		}
-		zoomTema($pegarext,&$mapa);
+		zoomTema($pegarext,$mapa);
 		if ($tipo == "mini")
 		{
 		 	 $mapa->setsize(50,50);

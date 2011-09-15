@@ -12,7 +12,7 @@ $postgis_mapa = $_SESSION["postgis_mapa"];
 include("../../classesphp/carrega_ext.php");
 include("../../classesphp/funcoes_gerais.php");
 $versao = versao();
-$versao = versao["principal"];
+$versao = $versao["principal"];
 substituiCon($map_file,$postgis_mapa);
 $temp = explode(",",$nomesrel);
 $colunas = array();
@@ -32,14 +32,12 @@ foreach($temp as $t)
 }
 if($itemagruparel != ""  && !in_array($itemagruparel,$itensrel))
 {$itensrel[] = $itemagruparel;}
-
 $mapa = ms_newMapObj($map_file);
 if($ext && $ext != ""){
 	$e = explode(" ",$ext);
 	$extatual = $mapa->extent;
 	$extatual->setextent((min($e[0],$e[2])),(min($e[1],$e[3])),(max($e[0],$e[2])),(max($e[1],$e[3])));
 }
-
 $layer = $mapa->getlayerbyname($temarel);
 $layer->set("template","none.html");
 $existesel = "nao";
@@ -47,7 +45,7 @@ $existesel = "nao";
 if (file_exists($map_file."qy"))
 {$mapa->loadquery($map_file."qy");}
 */
-carregaquery($map_file,&$layer,&$mapa);
+carregaquery2($map_file,$layer,$mapa);
 if ($layer->getNumresults() > 0){$existesel = "sim";}
 if ($existesel == "nao")
 {$layer->querybyrect($mapa->extent);}

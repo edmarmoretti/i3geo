@@ -367,7 +367,7 @@ Include:
 			foreach($this->layers as $l)
 			{
 				$l->set("template","none.htm");
-				carregaquery($this->arquivo,&$l,&$this->mapa);
+				carregaquery2($this->arquivo,$l,$this->mapa);
 			}
 		}
 		$legenda = $this->mapa->legend;
@@ -971,7 +971,7 @@ $random - indica se os nomes dos novos layers serão modificados ou nao
 					{
 						$nlayer = $nmap->getlayerbyname($n);
 						if(function_exists("autoClasses"))
-						autoClasses(&$nlayer,$this->mapa);
+						autoClasses($nlayer,$this->mapa);
 						//
 						//cria as classes com base em atributos
 						//

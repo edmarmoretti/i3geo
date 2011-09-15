@@ -132,7 +132,7 @@ function verificaMiniatura($map,$tipo,$admin=false)
 			$layern = $nmapa->getLayerByName($teman);
 			$layern->set("status",MS_DEFAULT);
 			ms_newLayerObj($mapa, $layern);
-			autoClasses(&$layern,$mapa,$locaplic);
+			autoClasses($layern,$mapa,$locaplic);
 			if ($layern->data == "")
 			$dados = $layern->connection;
 			else
@@ -157,7 +157,7 @@ function verificaMiniatura($map,$tipo,$admin=false)
 				}
 			}
 		}
-		zoomTemaMiniatura($pegarext,&$mapa);
+		zoomTemaMiniatura($pegarext,$mapa);
 		if ($tipo == "mini"  || $tipo == "todos")
 		{
 		 	$mapa->setsize(50,50);

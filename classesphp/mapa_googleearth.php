@@ -140,8 +140,9 @@ function retornaWms($map_fileX,$postgis_mapa){
 			$l = $mapa->getLayerByname($layerName);
 			if ($l->getmetadata("classesnome") != "")
 			{
-				include_once("funcoes_gerais.php");
-				autoClasses(&$l,$mapa);
+				if(!function_exists("autoClasses"))
+				{include_once("funcoes_gerais.php");}
+				autoClasses($l,$mapa);
 			}
 			if($layerName != $_GET["layer"])
 			{$l->set("status",MS_OFF);}

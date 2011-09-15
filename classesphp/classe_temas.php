@@ -780,7 +780,7 @@ $nome - nome que será dado a geometria
 		$ext = $this->mapa->extent;
 		$sb = $this->mapa->scalebar;
 		$sb->set("status",MS_OFF);
-		carregaquery($this->arquivo,&$this->layer,&$this->mapa);
+		carregaquery2($this->arquivo,$this->layer,$this->mapa);
 		$items = pegaItens($this->layer);
 		$sopen = $this->layer->open();
 		if($sopen == MS_FAILURE){return "erro";}
@@ -1012,7 +1012,7 @@ Calcula a extensão geográfica dos elementos selecionados de um tema e ajusta o m
 		$extatual = $this->mapa->extent;
 		$prjMapa = $this->mapa->getProjection();
 		$prjTema = $this->layer->getProjection();
-		carregaquery($this->arquivo,&$this->layer,&$this->mapa);
+		carregaquery2($this->arquivo,$this->layer,$this->mapa);
 		$sopen = $this->layer->open();
 		if($sopen == MS_FAILURE){return "erro";}
 		$res_count = $this->layer->getNumresults();

@@ -1023,7 +1023,7 @@ $locaplic - Localização do I3geo.
 		$nomeshp = $this->diretorio."/".$nomefinal;
 		//pega os shapes selecionados
 		$itemspt = pegaItens($layerPt);
-		$existesel = carregaquery($this->arquivo,&$this->layer,&$this->mapa);
+		$existesel = carregaquery2($this->arquivo,$this->layer,$this->mapa);
 		if ($existesel == "nao")
 		{$layerPt->queryByrect($this->mapa->extent);}
 		$res_count = $layerPt->getNumresults();
@@ -1194,7 +1194,7 @@ function distanciaptpt($temaorigem,$temadestino,$temaoverlay,$locaplic,$itemorig
 	//define o nome do novo shapefile que será criado
 	$nomefinal = nomeRandomico();
 	$nomeshp = $this->diretorio."/".$nomefinal;
-	$existesel = carregaquery($this->arquivo,&$this->layer,&$this->mapa);
+	$existesel = carregaquery2($this->arquivo,$this->layer,$this->mapa);
 	if ($existesel == "nao")
 	{return "errox";}
 	$layerorigem = $this->mapa->getlayerbyname($temaorigem);
@@ -1345,7 +1345,7 @@ nome do layer criado com o buffer.
 		$listaShapes = array();
 		if($this->nome != ""){
 			//pega os shapes selecionados
-			carregaquery($this->arquivo,&$this->layer,&$this->mapa);
+			carregaquery2($this->arquivo,$this->layer,$this->mapa);
 			$sopen = $this->layer->open();
 			if($sopen == MS_FAILURE){return "erro";}
 			$items = pegaItens($this->layer);
@@ -1474,7 +1474,7 @@ $item {string} - (opcional) Item q será utilizado para ponderar os valores.
 		$nomeCentro = nomeRandomico();
 		$nomeshp = $this->diretorio."/".$nomeCentro;
 		//pega os shapes selecionados
-		carregaquery($this->arquivo,&$this->layer,&$this->mapa);
+		carregaquery2($this->arquivo,$this->layer,$this->mapa);
 		if($this->layer->getNumresults() == 0)
 		{$this->layer->querybyrect($this->mapa->extent);}
 		$sopen = $this->layer->open();
@@ -1571,7 +1571,7 @@ $locaplic - Localização do I3geo.
 		$nomeCentroides = nomeRandomico();
 		$nomeshp = $this->diretorio."/".$nomeCentroides;
 		//pega os shapes selecionados
-		carregaquery($this->arquivo,&$this->layer,&$this->mapa);
+		carregaquery2($this->arquivo,$this->layer,$this->mapa);
 		$sopen = $this->layer->open();
 		if($sopen == MS_FAILURE){return "erro";}
 		$items = pegaItens($this->layer);
@@ -2211,7 +2211,7 @@ Salva o mapa acrescentando um novo layer com o resultado.
 			include_once "../pacotes/phpxbase/api_conversion.php";
 		}
 		//define o nome do novo shapefile que será criado
-		carregaquery($this->arquivo,&$this->layer,&$this->mapa);
+		carregaquery2($this->arquivo,$this->layer,$this->mapa);
 		$sopen = $this->layer->open();
 		if($sopen == MS_FAILURE){return "erro";}
 		$res_count = $this->layer->getNumresults();
@@ -2350,7 +2350,7 @@ $locaplic - Localização do I3geo
 			include_once "../pacotes/phpxbase/api_conversion.php";
 		}
 		//define o nome do novo shapefile que será criado
-		carregaquery($this->arquivo,&$this->layer,&$this->mapa);
+		carregaquery2($this->arquivo,$this->layer,$this->mapa);
 		$sopen = $this->layer->open();
 		if($sopen == MS_FAILURE){return "erro";}
 		$res_count = $this->layer->getNumresults();
@@ -2524,7 +2524,7 @@ $operacao - Tipo de análise.
 		$calculo = array();
 		foreach ($lista as $l)
 		{
-			$geos = &$this->unserializeGeo($dir.$l);
+			$geos = $this->unserializeGeo($dir.$l);
 			foreach ($geos["dados"] as $geo)
 			{
 				$geometrias[] = $geo["wkt"];
@@ -2594,7 +2594,7 @@ $operacao - Tipo de análise.
 		$dir = $dir_tmp."/".$imgdir."/";
 		foreach ($lista as $l)
 		{
-			$geos = &$this->unserializeGeo($dir.$l);
+			$geos = $this->unserializeGeo($dir.$l);
 			//
 			//verifica a versão do mapserver
 			//se for anterior a 5, utiliza a conexão com o postgis para fazer o processamento dos daods
@@ -2661,7 +2661,7 @@ $tipoLista - tipo de valores que são passados em $lista stringArquivos|arraywkt.
 			$valoresoriginais = array();
 			foreach ($lista as $l)
 			{
-				$geos = &$this->unserializeGeo($dir.$l);
+				$geos = $this->unserializeGeo($dir.$l);
 				//pega todas as geometrias
 				foreach ($geos["dados"] as $geo)
 				{
@@ -2774,7 +2774,7 @@ function gravaCoordenadasPt($tema,$limitepontos="TRUE",$extendelimite)
 		$nomefinal = nomeRandomico();
 		$nomearq = $this->diretorio."/".$nomefinal;
 		$itemspt = pegaItens($layerPt);
-		$existesel = carregaquery($this->arquivo,&$this->layer,&$this->mapa);
+		$existesel = carregaquery2($this->arquivo,$this->layer,$this->mapa);
 		if ($existesel == "nao")
 		{
 			//if($layerPt->getProjection() == "" )

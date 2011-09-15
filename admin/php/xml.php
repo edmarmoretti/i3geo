@@ -94,7 +94,7 @@ function geraXmlSistemas($perfil,$locaplic,$editores)
 			$xml .= " <PERFIL>".$row["perfil_sistema"]."</PERFIL>\n";
 			$xml .= " <PUBLICADO>".$row["publicado_sistema"]."</PUBLICADO>\n";
 			$xml .= " <NOMESIS>".xmlTexto_prepara($row["nome_sistema"])."</NOMESIS>\n";
-			geraXmlSistemas_pegafuncoes($perfil,&$xml,$row["id_sistema"],$dbh);
+			geraXmlSistemas_pegafuncoes($perfil,$xml,$row["id_sistema"],$dbh);
 			$xml .= "</SISTEMA>\n";
 		}
 	}

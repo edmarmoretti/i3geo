@@ -612,7 +612,7 @@ function incluiTemasIniciais()
 					if ($layern->name == "estadosl")
 					{$layern->set("data",$locaplic."/aplicmap/dados/estados.shp");}
 					$layern->setmetadata("NOMEORIGINAL",$layern->name);
-					autoClasses(&$layern,$mapn);
+					autoClasses($layern,$mapn);
 					//
 					//necessário para não alterar a extensão do mapa por esse parâmetro
 					//
@@ -634,7 +634,7 @@ function incluiTemasIniciais()
 						$layern->set("type",$tipotemp);
 						$layern->set("status",statustemp);
 					}
-					ms_newLayerObj(&$mapn, $layern);
+					ms_newLayerObj($mapn, $layern);
 				}
 			}	
 		}
@@ -644,7 +644,7 @@ function incluiTemasIniciais()
 	//
 	if($existeraster)
 	{
-		$of = &$mapn->outputformat;
+		$of = $mapn->outputformat;
 		$of->set("imagemode",MS_IMAGEMODE_RGB);
 	}
 	erroCriacao();
@@ -1059,7 +1059,7 @@ function incluiMapaGvsig($gvsiggvp,$gvsigview){
 	include_once($locaplic."/pacotes/gvsig/gvsig2mapfile/class.gvsig2mapfile.php");
 	$gm = new gvsig2mapfile($gvsiggvp);
 	$dataView = $gm->getViewData($gvsigview);
-	//var_dump($dataView);
+	//var_dump($dataView);exit;
 	$lnames = $mapn->getalllayernames();
 	foreach($lnames as $name){
 		$layer = $mapn->getlayerbyname($name);

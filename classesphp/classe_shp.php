@@ -388,7 +388,7 @@ array - xy
 		if(!$this->layer){return "erro";}
 		$this->layer->set("template","none.htm");
 		$this->layer->setfilter("");
-		$existesel = carregaquery($this->arquivo,&$this->layer,&$this->mapa);
+		$existesel = carregaquery2($this->arquivo,$this->layer,$this->mapa);
 		$sopen = $this->layer->open();
 		if($sopen == MS_FAILURE){return "erro";}
 		$res_count = $this->layer->getNumresults();

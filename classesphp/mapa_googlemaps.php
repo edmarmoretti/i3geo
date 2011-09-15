@@ -150,8 +150,9 @@ if(!isset($_GET["telaR"])){//no caso de projecoes remotas, o mapfile nao´e alter
 		$l = $mapa->getLayerByname($layerName);
 		if ($l->getmetadata("classesnome") != "")
 		{
-			include_once("funcoes_gerais.php");
-			autoClasses(&$l,$mapa);
+			if(!function_exists("autoClasses"))
+			{include_once("funcoes_gerais.php");}
+			autoClasses($l,$mapa);
 		}
 		if($layerName != $_GET["layer"])
 		{$l->set("status",MS_OFF);}
@@ -251,9 +252,9 @@ if (!function_exists('imagepng'))
 }
 if(trim($_GET["TIPOIMAGEM"]) != "" && trim($_GET["TIPOIMAGEM"]) != "nenhum")
 {
-	$nomer = ($img->imagepath)."filtroimgtemp".nomeRandomico().".png";
+	$nomer = ($img->imagepath)."filtroimgtemp".nomeRand().".png";
 	$img->saveImage($nomer);
-	filtraImagem($nomer,trim($_GET["TIPOIMAGEM"]));
+	filtraImg($nomer,trim($_GET["TIPOIMAGEM"]));
 	$img = imagecreatefrompng($nomer);
 	imagealphablending($img, false);
 	imagesavealpha($img, true);
@@ -265,7 +266,7 @@ else{
 	if($cache == true)
 	{$nomer = salvaCacheImagem($_GET["BBOX"],$nomecache,$map_fileX,$_GET["WIDTH"],$_GET["HEIGHT"]);}
 	else{
-		$nomer = ($img->imagepath)."imgtemp".nomeRandomico().".png";
+		$nomer = ($img->imagepath)."imgtemp".nomeRand().".png";
 		$img->saveImage($nomer);
 	}
 	ob_clean();
@@ -332,7 +333,7 @@ function carregaCacheImagem($bbox,$layer,$map,$w,$h){
 		exit;
 	}
 }
-function nomeRandomico($n=10)
+function nomeRand($n=10)
 {
 	$nomes = "";
 	$a = 'azertyuiopqsdfghjklmwxcvbnABCDEFGHIJKLMNOPQRSTUVWXYZ';
@@ -341,7 +342,7 @@ function nomeRandomico($n=10)
 	{$nomes .= $a{mt_rand(0, $max)};}
 	return $nomes;
 }
-function filtraImagem($nomer,$tipoimagem){
+function filtraImg($nomer,$tipoimagem){
 	include_once("classe_imagem.php");
 	$tiposImagem = explode(" ",$tipoimagem);
 	foreach ($tiposImagem as $tipoimagem){

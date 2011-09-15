@@ -85,7 +85,7 @@ foreach ($layersNames as $layerName)
 {
 	$layer = $map->getLayerByname($layerName);
 	if ($layer->getmetadata("classesnome") != "")
-	{autoClasses(&$layer,$map);}
+	{autoClasses($layer,$map);}
 	if($layer->type == MS_LAYER_POLYGON)
 	{
 		$nclasses = $layer->numclasses;

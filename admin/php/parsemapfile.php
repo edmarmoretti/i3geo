@@ -396,7 +396,7 @@ function mapfile()
 			$xml .= "<sizeunits>$layer->sizeunits</sizeunits>\n";
 			$xml .= "<projection>$layer->getProjection</projection>\n";
 			$xml .= "<classes>\n";
-			$xml .= pegaClasses(&$xml);
+			$xml = pegaClasses($xml);
 			$xml .= "</classes>\n";
 		}
 		$xml .= "</layer>";
@@ -421,12 +421,13 @@ function pegaClasses($xml)
 		$xml .= "<symbolname>$classe->symbolname</symbolname>\n";
 		$xml .= "<type>$classe->type</type>\n";
 		$xml .= "<estilos>\n";
-		pegaEstilos($xml,$classe);
+		$xml = pegaEstilos($xml,$classe);
 		$xml .= "</estilos>\n";
 		$xml .= "</classe>\n";
 	}
+	return $xml;
 }
-function pegaEstilos(&$xml,$classe)
+function pegaEstilos($xml,$classe)
 {
 	$numestilos = $classe->numstyles;
 	$estilos = array();
@@ -441,6 +442,7 @@ function pegaEstilos(&$xml,$classe)
 		$xml .= "<outlinecolor>".$estilo->outlinecolor->red.",".$estilo->outlinecolor->green.",".$estilo->outlinecolor->blue."</outlinecolor>\n";
 		$xml .= "</estilo>\n";
 	}
+	return $xml;
 }
 
 ?>

@@ -1894,7 +1894,7 @@ function criaSHP($tema,$map_file,$locaplic,$dir_tmp,$nomeRand=TRUE)
 		$reg = array();
 		$novoshpf = ms_newShapefileObj($nomeshp.".shp", -2);
 		//le o arquivo de query se existir e checa se existe sele&ccedil;&atilde;o para o tema
-		$existesel = carregaquery($map_file,&$layer,&$map);
+		$existesel = carregaquery2($map_file,$layer,$map);
 		if ($existesel == "nao")
 		{@$layer->queryByrect($map->extent);}
 		//pega cada registro
@@ -2735,8 +2735,28 @@ function removeLinha($texto,$mapfile)
 	foreach($novoarray as $linha)
 	{$escreve = fwrite ($abre,$linha);}
 	$fecha = fclose ($abre);
-}	
+}
+//
+//depreciado para incluir &$ para compatibilizar com PHP 5.x
+//utilize carregaquery2
+//
 function carregaquery($mapfile,$objlayer,$objmapa)
+{
+	$qyfile = dirname($mapfile)."/".$objlayer->name.".php";
+	if(file_exists($qyfile))
+	{
+		$indxlayer = $objlayer->index;
+		$handle = fopen ($qyfile, "r");
+		$conteudo = fread ($handle, filesize ($qyfile));
+		fclose ($handle);
+		$shp = unserialize($conteudo);	
+		foreach ($shp as $indx)
+		{$objmapa->querybyindex($indxlayer,-1,$indx,MS_TRUE);}
+		return "sim";
+	}
+	return "nao";
+}
+function carregaquery2($mapfile,&$objlayer,&$objmapa)
 {
 	$qyfile = dirname($mapfile)."/".$objlayer->name.".php";
 	if(file_exists($qyfile))

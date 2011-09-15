@@ -269,7 +269,7 @@ $tipo - Tipo de busca brasil|null
 		$this->layer->setfilter("");
 		//le o arquivo de query se existir e checa se existe seleção para o tema
 		$items = pegaItens($this->layer);
-		$existesel = carregaquery($this->arquivo,&$this->layer,&$this->mapa);
+		$existesel = carregaquery2($this->arquivo,$this->layer,$this->mapa);
 		if ($existesel == "nao")
 		{$this->layer->querybyrect($this->mapa->extent);}
 		$sopen = $this->layer->open();
@@ -338,7 +338,7 @@ $tipolista - Indica se serão mostrados todos os registros ou apenas os seleciona
 		else
 		{$items[] = $itemtema;}
 		$resultadoFinal[] = array("itens"=>$items);
-		carregaquery($this->arquivo,&$this->layer,&$this->mapa);
+		carregaquery2($this->arquivo,$this->layer,$this->mapa);
 		$indxlayer = $this->layer->index;
 		$sopen = $this->layer->open();
 		if($sopen == MS_FAILURE){return "erro";}
@@ -551,7 +551,7 @@ Include:
 		$filtro = $this->layer->getfilterstring();
 		if ($filtro != ""){$this->layer->setfilter("");}
 		//le o arquivo de query se existir e checa se existe sele&ccedil;&atilde;o para o tema
-		$existesel = carregaquery($this->arquivo,&$this->layer,&$this->mapa);
+		$existesel = carregaquery2($this->arquivo,$this->layer,$this->mapa);
 		if ($existesel == "nao")
 		{$this->layer->queryByrect($this->mapa->extent);}
 		$sopen = $this->layer->open();
