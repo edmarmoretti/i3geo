@@ -352,7 +352,7 @@ class ThematicMap
                     . "    </Style>" . PHP_EOL;  // End of shared style
 
         $kmlFolder = "    <Folder>" . PHP_EOL
-                   . "      <name>Years</name>" . PHP_EOL
+                   . "      <name>Colunas</name>" . PHP_EOL
                    . "      <open>1</open>" . PHP_EOL;
 
         if ($this->timeType == 'series') {
@@ -597,7 +597,7 @@ class ThematicMap
 
         // Add title
         $kml .= "    <ScreenOverlay>" . PHP_EOL
-              . "      <name>Title</name>" . PHP_EOL
+              . "      <name>Título</name>" . PHP_EOL
               . "      <Icon>" . PHP_EOL
               . "        <href>files/brand.png</href>" . PHP_EOL
               . "      </Icon>" . PHP_EOL
@@ -609,7 +609,7 @@ class ThematicMap
         // Add legend
         if ($this->showLegend && $this->colourType == 'scale') {
             $kml .= "    <ScreenOverlay>" . PHP_EOL
-                  . "      <name>Legend</name>" . PHP_EOL
+                  . "      <name>Legenda</name>" . PHP_EOL
                   . "      <Icon>" . PHP_EOL
                   . "        <href>files/legend.png</href>" . PHP_EOL
                   . "      </Icon>" . PHP_EOL
