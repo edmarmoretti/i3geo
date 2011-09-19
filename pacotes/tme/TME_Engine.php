@@ -90,7 +90,7 @@ class ThematicMap
 		$this->mapType     = $paramArray['mapType'];   // Mapping technique
 		$this->indicatorID = $paramArray['indicator']; // Main indicator
 		$this->year        = $paramArray['year'];      // Year
-
+		$this->dirtmp        = $paramArray['dirtmp'];
         // Extract indicator metadata and values from dataStore
         $this->indicator = $this->dataStore['indicators'][$this->indicatorID];
         $this->minValue  = $this->indicator['min'];
@@ -157,11 +157,11 @@ class ThematicMap
     // Function
     // @access protected
     //
-    public function getKML()
+    public function getKML($url)
     {
 
         // Create KMZ archieve
-        $file = "tmp/tme". time(). ".kmz";
+        $file = $this->dirtmp."/tme". time(). ".kmz";
         $zip = new ZipArchive();
         if ($zip->open($file, ZIPARCHIVE::CREATE)!==TRUE) {
             exit("cannot open <$file>\n");
@@ -651,7 +651,7 @@ class ThematicMap
 
         $zip->close();
 
-        return $file;
+        return $url.basename($file);
     }
 
 
@@ -888,7 +888,7 @@ class ThematicMap
         imagestringup($legend, 3, 0, ($height/2)+(strlen($this->mapTitle)/2)*7, $this->mapTitle, $white);
 
         // Save legend
-        $file = 'tmp/files/legend'. time() .'.png';
+        $file = $this->dirtmp.'/legend'. time() .'.png';
         imagepng($legend, $file);
 
         return $file;
@@ -992,13 +992,11 @@ class ThematicMap
         }
 
         // Save legend
-        $file = 'tmp/files/logo'. time() .'.png';
+        $file = $this->dirtmp.'/logo'. time() .'.png';
         imagepng($legend, $file);
 
         return $file;
     }
-
-
 } // class ThematicMap
 
 

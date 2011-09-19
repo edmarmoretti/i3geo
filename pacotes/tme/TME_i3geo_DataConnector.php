@@ -35,6 +35,7 @@ class DataConnector
     public $valuesTable = 'indicator_values';
 	public $map_file;
 	public $postgis_mapa;
+	public $url;
     private $dbc;
 
     // Constructor
@@ -68,6 +69,7 @@ class DataConnector
 		{exit;}
 		$this->map_file = $_SESSION["map_file"];
 		$this->postgis_mapa = $_SESSION["postgis_mapa"];
+		$this->url = $_SESSION["tmpurl"];
     }
     // Fetch all indicators
     function getIndicators(){
@@ -175,8 +177,8 @@ class DataConnector
 		$dataStore['indicators']['valores']['years'] = $indicatorYears;
 		$dataStore['indicators']['valores']['max'] = max($todosV);
 		$dataStore['indicators']['valores']['min'] = min($todosV);
-		echo "<pre>";
-		var_dump($dataStore);
+		//echo "<pre>";
+		//var_dump($dataStore);
 		return $dataStore;
         /*
 		$sqlregion = '';

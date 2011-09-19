@@ -41,19 +41,24 @@ if(count($colunas) == 1){
 	$ano = $colunas[0];
 	$tipo = "year";
 }
-
+if(!isset($dir_tmp)){
+	include("../../ms_configura.php");
+}
 $parameters = array( 'mapType'        => 'bar',
    			  	     'indicator'      => 'valores',
 				     'year'           => $ano,
 				     'classification' => 'equal',
 					 'mapTitle' => 'Título do Mapa',
-					 'timeType' => $tipo //para mais de um ano, escolha slider ou series
+					 'timeType' => $tipo, //para mais de um ano, escolha slider ou series
+					 'dirtmp' => $dir_tmp
                    );
 
 // Create thematic map object
 $map = new ThematicMap($dataStore, $parameters);
-$file = $map->getKML();
-
-echo "<p><a href='$file'>$file</a>";
+$file = $map->getKML($dataConnector->url);
+if(!function_exists("cpjson"))
+{require("../../classesphp/funcoes_gerais.php");}
+cpjson(array('url' => $file));
+//echo "<p><a href='$file'>$file</a>";
 
 ?>
