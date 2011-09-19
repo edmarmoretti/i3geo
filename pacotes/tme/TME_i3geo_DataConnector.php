@@ -70,6 +70,7 @@ class DataConnector
 		$this->map_file = $_SESSION["map_file"];
 		$this->postgis_mapa = $_SESSION["postgis_mapa"];
 		$this->url = $_SESSION["tmpurl"];
+		$this->ext = $_SESSION["mapext"];
     }
     // Fetch all indicators
     function getIndicators(){
@@ -108,17 +109,20 @@ class DataConnector
     }
 
     // Make data store
-    function getDataStore($nomelayer,$colunasvalor,$colunanomeregiao,$ext,$titulo,$descricao){ //$indicatorID, $year, $region){
+    function getDataStore($nomelayer,$colunasvalor,$colunanomeregiao,$titulo,$descricao,$ext=""){ //$indicatorID, $year, $region){
 		include("../../classesphp/funcoes_gerais.php");
 		$versao = versao();
 		$versao = $versao["principal"];			
 		$mapa = ms_newMapObj($this->map_file);
-		$layer = $mapa->getlayerbyname($nomelayer);
-		if($ext && $ext != ""){
+		if($ext == "")
+		{$mapa = extPadrao($mapa);}
+		else{
+			$e = str_replace(","," ",$ext);
 			$e = explode(" ",$ext);
 			$extatual = $mapa->extent;
-			$extatual->setextent((min($e[0],$e[2])),(min($e[1],$e[3])),(max($e[0],$e[2])),(max($e[1],$e[3])));
+			$extatual->setextent((min($e[0],$e[2])),(min($e[1],$e[3])),(max($e[0],$e[2])),(max($e[1],$e[3])));		
 		}
+		$layer = $mapa->getlayerbyname($nomelayer);
 		$layer->set("template","none.html");
 		$existesel = "nao";
 		if (($this->postgis_mapa != "") && ($this->postgis_mapa != " "))

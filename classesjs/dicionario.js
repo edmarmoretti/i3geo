@@ -838,6 +838,13 @@ en:"Temporizador",
 es:"Temporizador",
 it:"Temporizador"
 }],
+"t49": [
+{
+pt: "Mapa temático 3d",
+en:"Mapa temático 3d",
+es:"Mapa temático 3d",
+it:"Mapa temático 3d"
+}],
 //guia adiciona
 "a1":[
 {

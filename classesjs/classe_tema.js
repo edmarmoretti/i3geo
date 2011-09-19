@@ -395,6 +395,19 @@ i3GEO.tema = {
 	*/
 	dialogo:{
 		/*
+		Function: tme
+
+		Abre a ferramenta TME
+
+		Parametros:
+
+		tema - código do tema escolhido
+		*/
+		tme: function(tema){
+			i3GEO.mapa.ativaTema(tema);
+			i3GEO.util.dialogoFerramenta("i3GEO.tema.dialogo.tme()","tme","tme");
+		},
+		/*
 		Function: mostraWms
 
 		Mostra a url que dá acesso ao WMS de um tema

@@ -331,7 +331,8 @@ i3GEO.arvoreDeCamadas = {
 		sql:true,
 		comentar:true,
 		temporizador:true,
-		wms: true
+		wms: true,
+		tme: true
 	},
 	/*
 	Variavel: CAMADAS
@@ -1005,7 +1006,8 @@ i3GEO.arvoreDeCamadas = {
 		}
 		if(i3GEO.parametros.editor.toLowerCase() === "sim")
 		{i3GEO.arvoreDeCamadas.adicionaOpcaoTema($trad("t44"),"<span style=color:red title='Apenas usuários editores podem ver essa opção' >"+$trad("t44")+"</span>",'i3GEO.tema.dialogo.salvaMapfile(\"'+ltema.name+'\")',node);}
-
+		if(funcoes.tme === true)
+		{i3GEO.arvoreDeCamadas.adicionaOpcaoTema($trad("t49"),$trad("t49"),'i3GEO.tema.dialogo.tme(\"'+ltema.name+'\")',node);}		
 		node.loadComplete();
 	},
 	/*

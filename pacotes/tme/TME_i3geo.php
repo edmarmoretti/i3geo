@@ -33,7 +33,7 @@ if(!isset($_GET["sid"]))
 $dataConnector = new DataConnector($_GET["sid"]);
 $colunas = str_replace(","," ",$_GET["colunasvalor"]);
 $colunas = explode(" ",$colunas);
-$dataStore = $dataConnector->getDataStore($_GET["nomelayer"],$colunas,$_GET["colunanomeregiao"],$_GET["ext"],$_GET["titulo"],$_GET["descricao"]);
+$dataStore = $dataConnector->getDataStore($_GET["nomelayer"],$colunas,$_GET["colunanomeregiao"],$_GET["titulo"],$_GET["descricao"],"");
 //choropleth,prism,bar,symbol
 $ano = "";
 $tipo = "slider";
@@ -48,7 +48,7 @@ $parameters = array( 'mapType'        => 'bar',
    			  	     'indicator'      => 'valores',
 				     'year'           => $ano,
 				     'classification' => 'equal',
-					 'mapTitle' => 'Título do Mapa',
+					 'mapTitle' => $_GET["titulo"],
 					 'timeType' => $tipo, //para mais de um ano, escolha slider ou series
 					 'dirtmp' => $dir_tmp
                    );

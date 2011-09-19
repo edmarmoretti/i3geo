@@ -916,10 +916,19 @@ g_traducao_ajuda = {
 			titulo: "Animação",
 			diretorio:"i3geo/ferramentas/animacao",
 			categoria:"1",
-			pt:"",
+			pt:"Mostra camadas em uma sequência definida pelo usuário e em um determinado intervalo de tempo. As camadas são automaticamente desligadas e ligadas, formando uma sequência que proporciona um efeito de animação",
 			complemento:"",
 			tela:"",
 			apijs:"i3GEO.mapa.dialogo.animacao()"
+		},
+		"108": {
+			titulo: "Mapa temático 3d",
+			diretorio:"i3geo/ferramentas/tme",
+			categoria:"5",
+			pt:"Cria um arquivo no formato KML, representando os dados de uma coluna da tabela de atributos como elementos em 3d. Mais detalhes em http://thematicmapping.org/",
+			complemento:"",
+			tela:"",
+			apijs:"i3GEO.mapa.dialogo.tme()"
 		}		
 	}
 };
