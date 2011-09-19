@@ -117,7 +117,7 @@ i3GEOF.etiqueta = {
 		titulo = "<div style='z-index:1;position:absolute' id='i3GEOFetiquetaComboCabeca' >------</div>&nbsp;&nbsp;&nbsp;Etiquetas <a class=ajuda_usuario target=_blank href='" + i3GEO.configura.locaplic + "/ajuda_usuario.php?idcategoria=5&idajuda=37' >&nbsp;&nbsp;&nbsp;</a>";
 		janela = i3GEO.janela.cria(
 			"380px",
-			"165px",
+			"175px",
 			"",
 			"",
 			"",
