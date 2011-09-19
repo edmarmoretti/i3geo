@@ -58,6 +58,7 @@ $map = new ThematicMap($dataStore, $parameters);
 $file = $map->getKML($dataConnector->url);
 if(!function_exists("cpjson"))
 {require("../../classesphp/funcoes_gerais.php");}
+
 cpjson(array('url' => $file));
 //echo "<p><a href='$file'>$file</a>";
 

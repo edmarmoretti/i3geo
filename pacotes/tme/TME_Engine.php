@@ -388,7 +388,8 @@ class ThematicMap
 
             // Add timespan if time animation
             if ($this->timeType == 'slider') {
-                $end = '';
+                
+				$end = '';
                 // Check if there is more years
                 if (array_key_exists($key+1, $this->yearArray)) {
                     $end = '<end>' . intval($this->yearArray[$key+1]-1) . '-12-31</end>';
@@ -396,12 +397,16 @@ class ThematicMap
                 $kmlFolder .= "        <TimeSpan>" . PHP_EOL
                             . "          <begin>$year-01-01</begin>$end" . PHP_EOL
                             . "        </TimeSpan>" . PHP_EOL;
+							
             }
 
             // Loop thorough all features (values without features will not be shown)
             foreach ($this->dataStore['features'] as $featureID => $feature)
             {
     			$name = $feature['name'];
+				//if (!mb_detect_encoding($name,"UTF-8",true))
+				//{$name = mb_convert_encoding($name,"UTF-8","ISO-8859-1");}				
+				$name = "<![CDATA[ ".$name." ]]>";
                 $value = ''; // use null?
                 $valueText = 'no data';
                 $valueLabel = '';

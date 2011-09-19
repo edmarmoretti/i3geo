@@ -171,10 +171,16 @@ class DataConnector
 			);
 			//[0] é o ano
 			foreach($colunasvalor as $colunavalor){
-				$valor = number_format($shape->values[$colunavalor], 2, '.', '');
-				$dataStore['indicators']['valores']['values'][$colunavalor][$i] = $valor;
-				$indicatorYears[$colunavalor] = $colunavalor;
-				$todosV[] = $valor;
+				$valor = $shape->values[$colunavalor];
+				
+				settype($valor,"float");
+				//echo $valor;
+				if(is_numeric($valor)){
+					$valor = number_format($valor, 2, '.', '');
+					$dataStore['indicators']['valores']['values'][$colunavalor][$i] = $valor;
+					$indicatorYears[$colunavalor] = $colunavalor;
+					$todosV[] = $valor;
+				}
 			}
 		}
 		$fechou = $layer->close();
