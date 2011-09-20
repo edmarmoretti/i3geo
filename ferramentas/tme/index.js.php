@@ -103,6 +103,7 @@ i3GEOF.tme = {
 	*/
 	html:function(){
 		var ins = '' +
+		'<div style="text-align:left;" id=i3GEOTMEresultado ></div>' +
 		'<p class="paragrafo" >' +
 		'Título que será mostrado no mapa';
 		ins += $inputText("","","i3GEOTMEtitulo","",68,"") +
@@ -241,7 +242,10 @@ i3GEOF.tme = {
 			i3GEOF.tme.aguarde.visibility = "visible";
 			temp = function(retorno){
 				i3GEOF.tme.aguarde.visibility = "hidden";
-				window.open(retorno.data.url);
+				var ins = "<p class=paragrafo >Clique no arquivo para fazer o download:<br><a href='"+retorno.data.url+"' target=new >"+retorno.data.url+"</a><br>";
+				ins += "<br>Ou clique para abrir no i3Geo:<br><a href='"+i3GEO.configura.locaplic+"/ms_criamapa.php?interface=googleearth.phtml&kmlurl="+retorno.data.url+"' target='new' >interface Google Earth</a><br>";
+				$i("i3GEOTMEresultado").innerHTML = ins;
+				
 			};
 			p = i3GEO.configura.locaplic+"/pacotes/tme/TME_i3geo.php?sid="+i3GEO.configura.sid+"&nomelayer="+i3GEO.temaAtivo+"&colunasvalor="+lista.toString(",")+"&colunanomeregiao="+colunanomeregiao+"&titulo="+$i("i3GEOTMEtitulo").value+"&descricao="+$i("i3GEOTMEdesc").value;
 			cp.set_response_type("JSON");

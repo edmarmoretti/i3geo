@@ -2326,6 +2326,10 @@ i3GEO.Interface = {
 				if(i3GEO.arvoreDeCamadas.MOSTRALISTAKML === true)
 				{i3GEO.Interface.googleearth.adicionaListaKml();}
 				i3GEO.Interface.googleearth.registraEventos();
+
+				if(i3GEO.parametros.kmlurl !== "")
+				{i3GEO.Interface.googleearth.adicionaKml(true,i3GEO.parametros.kmlurl,i3GEO.parametros.kmlurl,false);}
+				
 			}
 			i3GEO.php.googleearth(montaMapa);
 		},
