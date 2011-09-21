@@ -2015,14 +2015,25 @@ function downloadTema2($map_file,$tema,$locaplic,$dir_tmp,$postgis_mapa)
 	$nomeRand = true;
 	if (($map_file == "") || (!@ms_newMapObj($map_file))) //a funcao foi chamada do aplicativo datadownload
 	{
+
+		$f = "";
 		if (strtoupper(substr(PHP_OS, 0, 3) == 'WIN'))
-		{$map_tmp = ms_newMapObj($locaplic."/aplicmap/geral1windows.map");}
+		{$f = $locaplic."/aplicmap/geral1windowsv".$versao.".map";}
 		else
 		{
-			$map_tmp = @ms_newMapObj($locaplic."/aplicmap/geral1.map");
-			if(!$map_tmp)
-			$map_tmp = @ms_newMapObj($locaplic."/aplicmap/geral1debian.map");
+			if($f == "" && file_exists('/var/www/i3geo/aplicmap/geral1debianv'.$versao.'.map')){
+				$f = "/var/www/i3geo/aplicmap/geral1debianv".$versao.".map";
+			}
+			if($f == "" && file_exists('/var/www/html/i3geo/aplicmap/geral1fedorav'.$versao.'.map')){
+				$f = "/var/www/i3geo/aplicmap/geral1fedorav".$versao.".map";
+			}
+			if($f == "" && file_exists('/opt/www/html/i3geo/aplicmap/geral1fedorav'.$versao.'.map')){
+				$f = "/opt/www/i3geo/aplicmap/geral1v".$versao.".map";
+			}
+			if($f == "")
+			{$f = $locaplic."/aplicmap/geral1v".$versao.".map";}
 		}
+		$map_tmp = @ms_newMapObj($f);	
 		$map_file = $dir_tmp."/".nomerandomico(20).".map";
 		$map_tmp->save($map_file);
 		$nomeRand = false;
@@ -2803,5 +2814,4 @@ function verificaEditores($editores)
 	}
 	return $editor;
 }
-
 ?>

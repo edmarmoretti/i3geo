@@ -141,16 +141,25 @@ function verifica($map,$solegenda)
 	if(!file_exists($tema)){echo "Arquivo ".$map." não encontrado.";exit;}
 	if ($tema != "")
 	{
+		$f = "";
 		if (strtoupper(substr(PHP_OS, 0, 3) == 'WIN'))
-		{$mapa = ms_newMapObj($locaplic."/aplicmap/geral1windowsv".$versao.".map");}
+		{$f = $locaplic."/aplicmap/geral1windowsv".$versao.".map";}
 		else
 		{
-			if(file_exists('/var/www/i3geo/aplicmap/geral1debianv'.$versao.'.map')){
-				$mapa = ms_newMapObj("/var/www/i3geo/aplicmap/geral1debianv".$versao.".map");
+			if($f == "" && file_exists('/var/www/i3geo/aplicmap/geral1debianv'.$versao.'.map')){
+				$f = "/var/www/i3geo/aplicmap/geral1debianv".$versao.".map";
 			}
-			else
-			{$mapa = ms_newMapObj($locaplic."/aplicmap/geral1v".$versao.".map");}
+			if($f == "" && file_exists('/var/www/html/i3geo/aplicmap/geral1fedorav'.$versao.'.map')){
+				$f = "/var/www/i3geo/aplicmap/geral1fedorav".$versao.".map";
+			}
+			if($f == "" && file_exists('/opt/www/html/i3geo/aplicmap/geral1fedorav'.$versao.'.map')){
+				$f = "/opt/www/i3geo/aplicmap/geral1v".$versao.".map";
+			}
+			if($f == "")
+			{$f = $locaplic."/aplicmap/geral1v".$versao.".map";}
 		}
+		$mapa = ms_newMapObj($f);
+		
 		if(@ms_newMapObj($locaplic."/".$tema))
 		{
 			$nmapa = ms_newMapObj($locaplic."/".$tema);

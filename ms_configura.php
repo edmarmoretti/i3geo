@@ -392,11 +392,13 @@ else //se for linux
 		$dir_tmp = "/var/tmp/ms_tmp";
 		$locaplic = "/opt/www/html/i3geo";	
 	}
-	else{
+	if(file_exists("/var/www/i3geo/ms_criamapa.php")){
 		$dir_tmp = "/tmp/ms_tmp";
 		$locaplic = "/var/www/i3geo";
-		$base = "geral1debian";
-		$estadosl = "estadosldebian";
+	}
+	if(file_exists("/var/www/html/i3geo/ms_criamapa.php")){
+		$dir_tmp = "/tmp/ms_tmp";
+		$locaplic = "/var/www/html/i3geo";
 	}
 	$editores = array("127.0.0.1","localhost");
 	$navegadoresLocais = "";

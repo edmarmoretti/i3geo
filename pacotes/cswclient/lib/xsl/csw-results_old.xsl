@@ -81,7 +81,7 @@
     <xsl:attribute name="start">
       <xsl:value-of select="$start"/>
     </xsl:attribute>
-    <xsl:for-each select="./*[local-name()='MD_Metadata']|./*[local-name()='identificationInfo']|./*[local-name()='MD_DataIdentification']|/*[local-name()='citation']|./*[local-name()='CI_Citation']|./*[local-name()='title']/*[local-name()='CharacterString']">
+    <xsl:for-each select="./*[local-name()='SummaryRecord']|./*[local-name()='BriefRecord']|./*[local-name()='Record']">
      <li>
       <strong><xsl:text>Title: </xsl:text></strong>
       <a>
@@ -91,8 +91,14 @@
         <xsl:value-of select="./dc:identifier"/>
         <xsl:text>'))</xsl:text> 
       </xsl:attribute>
-	  <xsl:value-of select="."/>
-
+      <xsl:choose>
+        <xsl:when test="./dc:title">
+    	  <xsl:apply-templates select="./dc:title"/>
+        </xsl:when>
+        <xsl:otherwise>
+    	  <xsl:text> ...</xsl:text>
+        </xsl:otherwise>
+      </xsl:choose>
       </a>
       <br/>
       <xsl:apply-templates select="./dct:abstract"/>
@@ -111,13 +117,13 @@
 </div>
 </xsl:template>
 
-<xsl:template match="dc:CharacterString">
+<xsl:template match="dc:title">
   <xsl:choose>
     <xsl:when test=".!=''">
       <xsl:value-of select="."/>
     </xsl:when>
     <xsl:otherwise>
-      <xsl:text> x</xsl:text>
+      <xsl:text> ...</xsl:text>
     </xsl:otherwise>
   </xsl:choose>
 </xsl:template>

@@ -1,19 +1,17 @@
 <div id="cswclient" class="clearfix" style="padding: 0 1em 4px 1em">
-
      <div id="query-container">
        <div class="csw-main">
          <div class="csw-content">
 	       <div class="captioneddiv">
-             <h3>Simple CSW Client</h3>
              <form name="theForm" method="POST" action="javascript:void(csw_client.getRecords())">
                <select name="queryable">
-				 <option value="anytext">AnyText</option>
-				 <option value="title">Title</option>
-				 <option value="subject">Subject</option>
+				 <option value="anytext">Qualquer lugar</option>
+				 <option value="title">Título</option>
+				 <option value="subject">Descri&ccedil;&atilde;o</option>
                </select>
                <select name="operator">
-				 <option value="contains">contains</option>
-				 <option value="equals">equals</option>
+				 <option value="contains">cont&eacute;m</option>
+				 <option value="equals">igual</option>
                </select>
                <input type="text" name="query" value="" size="24"/>
                <p/>
@@ -27,15 +25,15 @@
 				 <option value="xml">XML</option>
                </select>
 		<select id="sortby" name="sortby">
-				 <option value="none">No Sort</option>
-				 <option value="title">Title</option>
+				 <option value="none">N&atilde;o ordena</option>
+				 <option value="title">Ordena pelo t&iacute;tulo</option>
                </select>
                <p/>
                <!--input type="hidden" name="schema" value="http://www.opengis.net/cat/csw/2.0.2"/-->
                <!--input type="hidden" name="schema" value="http://www.isotc211.org/2005/gmd"/-->
                <!--input type="hidden" name="displaymode" value="html"/-->
-               <input type="button" value="clear" onClick="javascript:void(csw_client.clearPage())"/>
-               <input type="button" value="submit" onClick="javascript:void(csw_client.getRecords())"/>
+               <input type="button" value="limpar" onClick="javascript:void(csw_client.clearPage())"/>
+               <input type="button" value="pesquisar" onClick="javascript:void(csw_client.getRecords())"/>
 			 </form>
 	       </div>
 		   

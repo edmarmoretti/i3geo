@@ -81,11 +81,9 @@
 
 
 .csw-main {
-	border: 1px solid #2e4a6b;
+	border: 0px solid #2e4a6b;
 	clear: both;
-	/*background: #E6ECF6;*/
-	background: #eef4f9;
- 	padding-top: 2em;
+ 	padding-top: 0px;
 }
 
 .csw-main2 {
@@ -96,12 +94,8 @@
 }
 
 .csw-content {
-    border: 1px solid #eee;
-    padding-left: 2em;
-    padding-right: 2em;
-    padding-bottom: 2em;
-    background: #eee url("images/diagonal.gif");
-    height: 1%;
+    border: 0px solid #eee;
+
 }
 
 .csw-content2 {
@@ -141,21 +135,7 @@ li { margin-bottom: 0.3em; }
 
 /*   ********* captioneddiv************* */
 
-.captioneddiv
-  { margin: 2em 0em 0em 0em;
-    padding: 1em;
-    height:100px;
-    border: solid #2e4a6b 1px;
-    background: #ffffff;
-  }
 
-html>body .captioneddiv
-  { margin: 2em 0em 0em 0em;
-    padding: 1em;
-    height:auto;
-    border: solid #2e4a6b 1px;
-    background: #ffffff;
-  }
 
 .captioneddiv h3
   { position: relative;

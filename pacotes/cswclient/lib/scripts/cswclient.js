@@ -38,8 +38,9 @@ CSWClient.prototype.useProxy = function(tf)
 
 CSWClient.prototype.writeClient = function(divId)
 {
+/*   
    var client_xml = this.loadDocument("lib/xml/cswclient.xml");
-   /* if no default cswhost has been defined we provide the user with optional csw hosts */
+
    if (this.cswhost == null) {
      var cswhosts_xml = this.loadDocument("lib/xml/csw-hosts.xml");
  	 var span = client_xml.selectSingleNode("//span[@id='csw-hosts']");
@@ -51,6 +52,7 @@ CSWClient.prototype.writeClient = function(divId)
    //alert (output);
    var div = document.getElementById(divId);
    div.innerHTML = output;
+*/   
 }
 
 CSWClient.prototype.handleCSWResponse = function(request, xml)

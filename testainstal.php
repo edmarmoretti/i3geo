@@ -67,9 +67,7 @@ echo ms_GetVersion()."<br><br>";
 if(!function_exists("ms_GetVersion"))
 {echo "<span style=color:red >O MAPSERVER PARECE NAO ESTAR INSTALADO!!!<br><br>";}
 echo "---<br>";
-if (get_cfg_var("allow_call_time_pass_reference") != 1){
-	echo "<span style=color:red >Problema: allow_call_time_pass_reference no php.ini deveria estar como 'On'. O i3Geo pode n&atilde;o funcionar!!!<br></span>";
-}
+
 if (get_cfg_var("safe_mode") == 1){
 	echo "<span style=color:red >Problema: safe_mode no php.ini deveria estar como 'Off'. O i3Geo n&atilde;o ir&aacute; funcionar!!!<br></span>";
 }
@@ -77,7 +75,7 @@ echo "<br><pre>Extens&otilde;es:<br>";
 if (!extension_loaded("libxml")){echo "<span style=color:red >Problema: n&atilde;o est&aacute; instalado a libxml<br></span>";}
 if (!extension_loaded( "PDO")){echo "<span style=color:red >Problema: n&atilde;o est&aacute; instalado a PDO<br></span>";}
 if (!extension_loaded( "pdo_sqlite")){echo "<span style=color:red >Problema: n&atilde;o est&aacute; instalado a pdo_sqlite<br></span>";}
-if (!extension_loaded( "SQLite")){echo "<span style=color:red >Problema: n&atilde;o est&aacute; instalado a SQLite<br></span>";}
+if (!extension_loaded( "SQLite") && !extension_loaded( "sqlite3")){echo "<span style=color:red >Problema: n&atilde;o est&aacute; instalado a SQLite<br></span>";}
 if (!extension_loaded( "SimpleXML")){echo "<span style=color:red >Problema: n&atilde;o est&aacute; instalado a SimpleXML<br></span>";}
 if (!extension_loaded( "dom")){echo "<span style=color:red >Problema: n&atilde;o est&aacute; instalado a dom<br></span>";}
 if (!extension_loaded( "xml")){echo "<span style=color:red >Problema: n&atilde;o est&aacute; instalado a xml<br></span>";}
@@ -176,15 +174,30 @@ echo "Carregando o map_file geral1...\n";
 $versao = versao();
 $versao = $versao["principal"];
 if(isset($base))
-{$mapa = ms_newMapObj($locaplic."/aplicmap/".$base.".map");}
+{$f = $locaplic."/aplicmap/".$base.".map";}
 else
 {
+	$f = "";
 	if (strtoupper(substr(PHP_OS, 0, 3) == 'WIN'))
-	{$mapa = ms_newMapObj($locaplic."/aplicmap/geral1windowsv".$versao.".map");}
+	{$f = $locaplic."/aplicmap/geral1windowsv".$versao.".map";}
 	else
-	{$mapa = ms_newMapObj($locaplic."/aplicmap/geral1v".$versao.".map");}
+	{
+		if($f == "" && file_exists('/var/www/i3geo/aplicmap/geral1debianv'.$versao.'.map')){
+			$f = "/var/www/i3geo/aplicmap/geral1debianv".$versao.".map";
+		}
+		if($f == "" && file_exists('/var/www/html/i3geo/aplicmap/geral1fedorav'.$versao.'.map')){
+			$f = "/var/www/i3geo/aplicmap/geral1fedorav".$versao.".map";
+		}
+		if($f == "" && file_exists('/opt/www/html/i3geo/aplicmap/geral1fedorav'.$versao.'.map')){
+			$f = "/opt/www/i3geo/aplicmap/geral1v".$versao.".map";
+		}
+		if($f == "")
+		{$f = $locaplic."/aplicmap/geral1v".$versao.".map";}
+	}
 }
-echo "<b>E agora..desenhando o mapa (se o mapa n&atilde;o aparecer &eacute; um problema...\nverifique os caminhos no ms_configura.php e no geral1.map, geral1debian.map ou geral1windows.map):</b>\n";
+$mapa = ms_newMapObj($f);
+echo "<br>O arquivo mapfile de inicilização é: $f<br>\n";
+echo "<b>E agora..desenhando o mapa (se o mapa n&atilde;o aparecer &eacute; um problema...\nverifique os caminhos no ms_configura.php e no $f):</b>\n";
 $imgo = $mapa->draw();
 $nome = ($imgo->imagepath)."teste.png";
 echo "<p>Nome da imagem gerada: $nome </p>";

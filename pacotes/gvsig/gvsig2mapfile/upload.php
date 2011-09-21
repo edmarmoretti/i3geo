@@ -15,8 +15,12 @@ if (isset($_FILES['i3GEOuploadfile']['name']))
 		if(file_exists('/var/www/i3geo/aplicmap/geral1debianv'.$versao.'.map')){
 			$mapn = ms_newMapObj("/var/www/i3geo/aplicmap/geral1debianv".$versao.".map");
 		}
-		else
-		{$mapn = ms_newMapObj($locaplic."/aplicmap/geral1v".$versao.".map");}
+		if(file_exists('/var/www/html/i3geo/aplicmap/geral1fedorav'.$versao.'.map')){
+			$mapn = ms_newMapObj("/var/www/i3geo/aplicmap/geral1fedorav".$versao.".map");
+		}
+		if(file_exists('/opt/www/html/i3geo/aplicmap/geral1fedorav'.$versao.'.map')){
+			$mapn = ms_newMapObj("/opt/www/i3geo/aplicmap/geral1v".$versao.".map");
+		}
 	}	
 	//echo "<p>Carregando o arquivo...</p>";
 	//verifica nomes
