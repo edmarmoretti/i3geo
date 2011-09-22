@@ -155,7 +155,8 @@ Parâmetros:
 	largura - lagura do mapa em pixels
 	altura - altura do mapa em pixels
 	pontos - lista de coordenadas x e y que serão incluídas como marcas no mapa
-	marca - nome do arquivo que contém a imagem que será utilizada para mostrar as coordenadas	
+	marca - nome do arquivo que contém a imagem que será utilizada para mostrar as coordenadas
+	tiles (true|false) - indica se o modo tile será usado ou não (true por default). O modo tile pode tornar o mashup mais lento em algumas situações.
 	
 	fundo - lista com os nomes, separados por ',' dos layers que serão usados como fundo para o mapa. Se não for definido,
 			será usado o default. O primeiro da lista será o fundo ativo. Se na lista de temas de fundo estiver algum
@@ -273,6 +274,11 @@ i3GEO.editorOL.marca = "<?php
 	if(isset($marca)){echo $marca;}
 	else
 	{echo "../pacotes/openlayers/img/marker-gold.png";}
+?>";
+i3GEO.editorOL.tiles = "<?php
+	if(isset($tiles)){echo $tiles;}
+	else
+	{echo "true";}
 ?>";
 <?php if(isset($fundo)){
 	echo "i3GEO.editorOL.fundo = '".implode(",",$fundo)."';";

@@ -95,12 +95,14 @@ i3GEO.editorOL = {
 		new OpenLayers.Control.OverviewMap(),
 		new OpenLayers.Control.KeyboardDefaults()	
 	],
+	tiles: true,
 	numzoom: 12,
 	maxext: "",
 	mapext: new OpenLayers.Bounds(-76.5125927,-39.3925675209,-29.5851853,9.49014852081),
 	mapa: "",
 	inicia: function(){
-		var alayers = [],
+		var single = false,
+			alayers = [],
 			fundo = (i3GEO.editorOL.fundo).split(","),
 			nfundo = fundo.length,
 			ncontroles = i3GEO.editorOL.controles.length,
@@ -177,8 +179,13 @@ i3GEO.editorOL = {
 		i3GEO.editorOL.mapa.addLayers(alayers);
 		if(i3GEO.editorOL.layersIniciais !== ""){
 			n = i3GEO.editorOL.layersIniciais.length;
-			for(i=0;i<n;i++)
-			{i3GEO.editorOL.mapa.addLayer(i3GEO.editorOL.layersIniciais[i]);}
+			if(i3GEO.editorOL.tiles === false || i3GEO.editorOL.tiles === "false"){
+				single = true;
+			}			
+			for(i=0;i<n;i++){
+				i3GEO.editorOL.layersIniciais[i].singleTile = single;
+				i3GEO.editorOL.mapa.addLayer(i3GEO.editorOL.layersIniciais[i]);
+			}
 		}
 		if(i3GEO.editorOL.layergrafico !== ""){
 			i3GEO.editorOL.mapa.addLayers([i3GEO.editorOL.layergrafico]);
