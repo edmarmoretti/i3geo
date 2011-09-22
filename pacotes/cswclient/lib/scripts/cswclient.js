@@ -234,7 +234,8 @@ CSWClient.prototype.clearPage = function()
 
 CSWClient.prototype.overlayDiv = function(div)
 {
-    while (div.tagName !="DIV") {
+    div = document.getElementById("popup2");
+	while (div.tagName !="DIV") {
     div = div.parentNode
     }
  
@@ -300,7 +301,8 @@ CSWClient.prototype.positionPopUp = function(div1, div2)
 
 CSWClient.prototype.findPosX = function(obj)
 {
-    var curleft = 0;
+    return 0;
+	var curleft = 0;
     if(obj.offsetParent)
         while(1) {
           curleft += obj.offsetLeft;
@@ -315,7 +317,8 @@ CSWClient.prototype.findPosX = function(obj)
 
 CSWClient.prototype.findPosY = function(obj)
 {
-    var curtop = 0;
+    return 0;
+	var curtop = 0;
     if(obj.offsetParent)
         while(1) {
           curtop += obj.offsetTop;

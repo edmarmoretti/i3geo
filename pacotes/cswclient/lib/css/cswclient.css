@@ -112,15 +112,18 @@
 
 .meta-param
   { vertical-align: top;
-    color: #004393
+    color: #004393;
+	font-size: 13px;
+	width:100px;
   }
 
 .meta-value
   { vertical-align: top;
+  font-size:13px;
   }
 
 h3 {
-   font-size: 1.1em;
+   font-size: 13px;
    color: #21507B;
    margin-top: 0.6em;
 }
