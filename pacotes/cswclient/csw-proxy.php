@@ -99,8 +99,9 @@ curl_setopt($session, CURLOPT_RETURNTRANSFER, true);
 
 
 // Make the call
-//$xml = curl_exec($session);
+$xml = curl_exec($session);
 // The web service returns XML. Set the Content-Type appropriately
+/*
 if(file_exists("c:/temp/csw.xml")){
 	$fp = fopen("c:/temp/csw.xml","r");
 	$xml = fread($fp,filesize("c:/temp/csw.xml"));
@@ -108,7 +109,7 @@ if(file_exists("c:/temp/csw.xml")){
 }
 else
 {$xml = curl_exec($session);}
-
+*/
 header("Content-Type: text/xml");
 
 if ($logging) {

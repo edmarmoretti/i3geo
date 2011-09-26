@@ -115,12 +115,13 @@
 			<td class="meta-value">
 				<a>
 				<xsl:attribute name="href">
-				<xsl:text>javascript:csw_client.getRecordById</xsl:text>
+				<xsl:text>javascript:csw_client.abreINDE</xsl:text>
 				<xsl:text>('</xsl:text> 
 				<xsl:value-of select="./gmd:fileIdentifier/gco:CharacterString"/>
 				<xsl:text>')</xsl:text> 
 				</xsl:attribute>
 				<xsl:value-of select="./gmd:fileIdentifier/gco:CharacterString"/>
+				<xsl:text> (abre em nova janela)</xsl:text>
 				</a>
 			</td>
 		</tr>		  		  

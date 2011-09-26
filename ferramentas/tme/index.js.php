@@ -116,7 +116,7 @@ i3GEOF.tme = {
 		'<div id=i3GEOtmelistai class=digitar style="text-align:left;left:0px;top:0px;330px;height:80px;overflow:auto;display:block;"></div>' +
 		'<br>' +
 		'<input id=i3GEOtmebotao1 size=35  type=button value="Aplicar" />' +
-		'<div id=i3GEOtmemen1 style=top:15px;left:0px; ><p class=paragrafo >Será criado um arquivo KML que pode ser aberto com o Google Earth. A coluna com os nomes das regiões define o nome que será mostrado para cada elemento mapeado.</div>';
+		'<div id=i3GEOtmemen1 style=top:15px;left:0px; ><p class=paragrafo >Será criado um arquivo KML que pode ser aberto com o Google Earth. A coluna com os nomes das regiões define o nome que será mostrado para cada elemento mapeado. Quando os nomes das colunas com os valores corresponderem a um determinado ano, será mostrado um botão do tipo slide no Google Earth, mas isso só ocorre se o nome da coluna for o mesmo nome do ano, exemplo, para o ano de 1980 o nome da coluna deverá ser 1980</div>';
 		return ins;
 	},
 	/*

@@ -25,7 +25,10 @@ CSWClient = function(cswhost, host){
   this.defaults_xml = this.loadDocument("lib/xml/defaults.xml");
   this.defaultschema = this.defaults_xml.selectSingleNode("/defaults/outputschema/text()").nodeValue;
 }
-
+CSWClient.prototype.abreINDE = function(id)
+{
+   window.open("http://www.metadados.inde.gov.br/geonetwork/srv/br/main.home?uuid="+id,"new");
+}
 CSWClient.prototype.setCSWHost = function(host)
 {
    this.cswhost = host;
@@ -77,11 +80,13 @@ CSWClient.prototype.handleCSWResponse = function(request, xml)
 
  var outputDiv = document.getElementById("csw-output");
  if (request == "getrecordbyid"){
-   outputDiv = document.getElementById("metadata");
+   
+   //outputDiv = window.open().document.body;//document.getElementById("metadata");
+   //output = '<head><link rel="stylesheet" type="text/css" href="http://localhost/i3geo/pacotes/cswclient/lib/css/cswclient.css"/></head>' + output;
    //this.positionDiv(document.getElementById('popup'), document.getElementById('results'))
    //this.positionPopUp(document.getElementById('popup'), document.getElementById('results'))
-   this.positionPopUp(document.getElementById('popup'), document.getElementById('cswclient'))
-   this.showDiv(document.getElementById('popup'));
+   //this.positionPopUp(document.getElementById('popup'), document.getElementById('cswclient'))
+   //this.showDiv(document.getElementById('popup'));
    }
  outputDiv.innerHTML = output; 
 }

@@ -101,7 +101,7 @@ $postgis_mapa = $_SESSION["postgis_mapa"];
 	$lon2 = $x / $n * 360.0 - 180.0;
 	$lat1 = rad2deg(atan(sinh(pi() * (1 - 2 * $y / $n))));
 
-$projInObj = ms_newprojectionobj("proj=latlong");
+$projInObj = ms_newprojectionobj("proj=latlong,a=6378137,b=6378137");
 $projOutObj = ms_newprojectionobj("proj=merc,a=6378137,b=6378137,lat_ts=0.0,lon_0=0.0,x_0=0.0,y_0=0,k=1.0,units=m");
 
 $poPoint1 = ms_newpointobj();
@@ -174,7 +174,7 @@ if(!isset($_GET["telaR"])){//no caso de projecoes remotas, o mapfile nao´e alter
 				}
 			}
 			if($l->getProjection() == "" )
-			{$l->setProjection("proj=latlong");}
+			{$l->setProjection("proj=latlong,a=6378137,b=6378137");}
 		}
 		if($layerName == $_GET["layer"])
 		{
@@ -194,7 +194,7 @@ else{
 	foreach ($layersNames as $layerName){
 		$l = $mapa->getLayerByname($layerName);
 		if($l->getProjection() == "" )
-		{$l->setProjection("proj=latlong");}
+		{$l->setProjection("proj=latlong,a=6378137,b=6378137");}
 	}
 }
 

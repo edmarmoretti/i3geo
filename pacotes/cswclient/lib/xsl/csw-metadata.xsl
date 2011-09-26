@@ -17,7 +17,7 @@
 </xsl:template>
 
 <xsl:template match="/*[local-name()='GetRecordByIdResponse']">
-    <xsl:apply-templates select="cat:FullRecord"/>
+	<xsl:apply-templates select="cat:FullRecord"/>
     <xsl:apply-templates select="*[local-name()='Record']"/>
     <xsl:apply-templates select="*[local-name()='SummaryRecord']"/>
     <xsl:apply-templates select="*[local-name()='BriefRecord']"/>
