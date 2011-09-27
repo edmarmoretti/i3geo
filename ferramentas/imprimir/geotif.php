@@ -115,6 +115,8 @@ $o->set("imagemode",MS_IMAGEMODE_RGB);
 $protocolo = explode("/",$_SERVER['SERVER_PROTOCOL']);
 //mapa
 $imgo = $map->draw();
+if($imgo->imagepath == "")
+{echo "Erro IMAGEPATH vazio";exit;}
 $nomer = ($imgo->imagepath)."mapa".$nomes.".tif";
 $imgo->saveImage($nomer);
 $nomemapa = strtolower($protocolo[0])."://".$_SERVER['HTTP_HOST'].($imgo->imageurl).basename($nomer);

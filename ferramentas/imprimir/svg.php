@@ -128,6 +128,8 @@ $map->selectOutputFormat("svg");
 $protocolo = explode("/",$_SERVER['SERVER_PROTOCOL']);
 //mapa
 $imgo = $map->draw();
+if($imgo->imagepath == "")
+{echo "Erro IMAGEPATH vazio";exit;}
 $nomer = ($imgo->imagepath)."mapa".$nomes.".svg";
 $imgo->saveImage($nomer);
 $nomemapa = strtolower($protocolo[0])."://".$_SERVER['HTTP_HOST'].($imgo->imageurl).basename($nomer);

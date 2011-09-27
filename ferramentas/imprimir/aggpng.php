@@ -39,6 +39,7 @@ foreach(array_keys($_SESSION) as $k)
 {
 	eval("\$".$k."='".$_SESSION[$k]."';");
 }
+
 $postgis_mapa = $_SESSION["postgis_mapa"];
 //
 //se as extensões já estiverem carregadas no PHP, vc pode comentar essa linha para que o processamento fique mais rápido
@@ -114,6 +115,8 @@ $o->set("imagemode",MS_IMAGEMODE_RGB);
 $protocolo = explode("/",$_SERVER['SERVER_PROTOCOL']);
 //mapa
 $imgo = $map->draw();
+if($imgo->imagepath == "")
+{echo "Erro IMAGEPATH vazio";exit;}
 $nomer = ($imgo->imagepath)."mapa".$nomes.".png";
 $imgo->saveImage($nomer);
 $nomemapa = strtolower($protocolo[0])."://".$_SERVER['HTTP_HOST'].($imgo->imageurl).basename($nomer);

@@ -70,6 +70,8 @@ $of->set("imagemode","PC256");
 $of->setoption("OUTPUT_MOVIE","SINGLE");
 
 $imgo = $map->draw();
+if($imgo->imagepath == "")
+{echo "Erro IMAGEPATH vazio";exit;}
 $nomer = ($imgo->imagepath)."mapa".$nomes.".swf";
 $imgo->saveImage($nomer);
 $protocolo = explode("/",$_SERVER['SERVER_PROTOCOL']);

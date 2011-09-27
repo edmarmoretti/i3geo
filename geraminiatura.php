@@ -182,6 +182,8 @@ function verificaMiniatura($map,$tipo,$admin=false)
 		}
 		if($tipo=="mini" || $tipo == "todos")
 		{
+			if($objImagemM->imagepath == "")
+			{echo "Erro IMAGEPATH vazio";exit;}			
 			$nomecM = ($objImagemM->imagepath).$map.".mini.png";
 			$objImagemM->saveImage($nomecM);
 		}

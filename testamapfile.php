@@ -261,6 +261,8 @@ function verifica($map,$solegenda)
 			}
 			return;
 		}
+		if($objImagem->imagepath == "")
+		{echo "Erro IMAGEPATH vazio";}
 		$nomec = ($objImagem->imagepath).nomeRandomico()."teste.png";
 		$objImagem->saveImage($nomec);
 		$nomer = ($objImagem->imageurl).basename($nomec);

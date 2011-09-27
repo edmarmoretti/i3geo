@@ -60,6 +60,8 @@ if ($mapa->width > 500)
 $of = $mapa->outputformat;
 $of->set("imagemode",MS_IMAGEMODE_RGB);
 $imgo = $mapa->draw();
+if($imgo->imagepath == "")
+{echo "Erro IMAGEPATH vazio";exit;}
 $nome = ($imgo->imagepath).nomeRandomico().".png";
 $nomefinal = ($imgo->imagepath).nomeRandomico().".wrl";
 $imgo->saveImage($nome);

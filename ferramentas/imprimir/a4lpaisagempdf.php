@@ -92,6 +92,8 @@ if($mapexten != ""){
 $o->set("imagemode",MS_IMAGEMODE_RGB);
 $o->set("transparent","false");
 $imgo = $map->draw();
+if($imgo->imagepath == "")
+{echo "Erro IMAGEPATH vazio";exit;}
 $nomer = ($imgo->imagepath)."mapa".$nomes.".png";
 $imgo->saveImage($nomer);
 $protocolo = explode("/",$_SERVER['SERVER_PROTOCOL']);

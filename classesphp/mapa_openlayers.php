@@ -243,6 +243,8 @@ if (!function_exists('imagepng'))
 }
 if(trim($_GET["TIPOIMAGEM"]) != "" && trim($_GET["TIPOIMAGEM"]) != "nenhum")
 {
+	if($img->imagepath == "")
+	{echo "Erro IMAGEPATH vazio";exit;}	
 	$nomer = ($img->imagepath)."filtroimgtemp".nomeRand().".png";
 	$img->saveImage($nomer);
 	filtraImg($nomer,$_GET["TIPOIMAGEM"]);
@@ -258,6 +260,8 @@ else{
 	if($cache == true)
 	{$nomer = salvaCacheImagem($_GET["BBOX"],$nomecache,$map_fileX,$_GET["WIDTH"],$_GET["HEIGHT"]);}
 	else{
+		if($img->imagepath == "")
+		{echo "Erro IMAGEPATH vazio";exit;}
 		$nomer = ($img->imagepath)."imgtemp".nomeRand().".png";
 		$img->saveImage($nomer);
 	}

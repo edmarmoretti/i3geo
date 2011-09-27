@@ -277,6 +277,8 @@ string de variaveis no formato javascript que permitem montar a legenda.
 		}
 		$nomeImagem = nomeRandomico();
 		$imgo = $this->mapa->drawlegend();
+		if($imgo->imagepath == "")
+		{echo "Erro IMAGEPATH vazio";exit;}		
 		$nomer = ($imgo->imagepath)."leg".$nomeImagem.".png";
 		$imgo->saveImage($nomer);
 		$nomer = ($imgo->imageurl).basename($nomer);

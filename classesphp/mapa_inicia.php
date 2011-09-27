@@ -245,6 +245,8 @@ function iniciaMapa()
 	$m->salva();
 
 	$nomes = nomeRandomico(12);
+	if($imgo->imagepath == "")
+	{echo "Erro IMAGEPATH vazio";exit;}	
 	$nomer = ($imgo->imagepath)."mapa".$nomes.".png";
 	$imgo->saveImage($nomer);
 	if (isset($utilizacgi) && strtolower($utilizacgi) == "sim")

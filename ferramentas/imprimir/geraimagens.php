@@ -63,6 +63,8 @@ if($interface == "openlayers"){
 }
 
 $imgo = $map->draw();
+if($imgo->imagepath == "")
+{echo "Erro IMAGEPATH vazio";exit;}
 $nomer = ($imgo->imagepath)."mapa".$nomes.".png";
 $imgo->saveImage($nomer);
 $protocolo = explode("/",$_SERVER['SERVER_PROTOCOL']);

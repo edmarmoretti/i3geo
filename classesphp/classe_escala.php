@@ -104,6 +104,8 @@ string com variáveis javascript.
 	function retornaBarraEscala()
 	{
 		$objImagem = $this->mapa->drawscalebar();
+		if($objImagem->imagepath == "")
+		{echo "Erro IMAGEPATH vazio";exit;}		
 		$nomer = ($objImagem->imagepath)."sca".$this->nomeImagem.".png";
 		$objImagem->saveImage($nomer);
 		$nomer = ($objImagem->imageurl).basename($nomer);

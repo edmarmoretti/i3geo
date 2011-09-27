@@ -212,6 +212,8 @@ function retornaWms($map_fileX,$postgis_mapa){
 
 	if(isset($_GET["TIPOIMAGEM"]) && trim($_GET["TIPOIMAGEM"]) != "" && trim($_GET["TIPOIMAGEM"]) != "nenhum")
 	{
+		if($img->imagepath == "")
+		{echo "Erro IMAGEPATH vazio";exit;}
 		$nomer = ($img->imagepath)."filtroimgtemp".nomeRandomico();
 		$img->saveImage($nomer);
 		filtraImagem($nomer,$_GET["TIPOIMAGEM"]);
@@ -224,6 +226,8 @@ function retornaWms($map_fileX,$postgis_mapa){
 	}
 	else{
 		ob_clean();
+		if($img->imagepath == "")
+		{echo "Erro IMAGEPATH vazio";exit;}
 		$nomer = ($img->imagepath)."imgtemp".nomeRandomico();
 		$img->saveImage($nomer);
 		$img = imagecreatefrompng($nomer);
