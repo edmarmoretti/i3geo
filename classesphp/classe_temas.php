@@ -388,7 +388,7 @@ Calcula a extensão geográfica de um tema e ajusta o mapa para essa extensão.
 		if(!$this->layer){return "erro";}
 		if($this->mapa->getmetadata("interface") == "googlemaps"){
 			$projO = $this->mapa->getProjection();
-			$this->mapa->setProjection("init=epsg:4291");
+			$this->mapa->setProjection("init=epsg:4291,a=6378137,b=6378137");
 		}		
 		$prjMapa = "";
 		$prjTema = "";

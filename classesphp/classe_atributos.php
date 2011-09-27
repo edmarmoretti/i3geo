@@ -125,7 +125,7 @@ $ext - (opcional) extensão geográfica que será aplicada ao mapa
 			}
 			if($this->mapa->getmetadata("interface") == "googlemaps"){
 				$this->projO = $this->mapa->getProjection();
-				$this->mapa->setProjection("init=epsg:4291");
+				$this->mapa->setProjection("init=epsg:4291,a=6378137,b=6378137");
 			}			
 		}
 	}
