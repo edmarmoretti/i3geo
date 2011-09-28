@@ -109,6 +109,16 @@ CSWClient.prototype.getRecords = function(start)
  
  var operator = document.theForm.operator.value;
  var query = trim(document.theForm.query.value);
+ var bbox = document.theForm.bbox.value;
+ if (bbox == ""){
+	var lowerCorner = "";
+	var upperCorner = ""
+ }
+ else{
+	bbox = bbox.split(" ");
+	var lowerCorner = bbox[1]+" "+bbox[0];
+	var upperCorner = bbox[3]+" "+bbox[2];	
+ }
  if (operator == "contains" & query != "") {query = "%" + query + "%";}
  
  var schema = "http://www.opengis.net/cat/csw/2.0.2"; // force outputSchema  always  to csw:Record for GetRecords requests
@@ -119,13 +129,16 @@ CSWClient.prototype.getRecords = function(start)
  this.setXpathValue(this.defaults_xml, "/defaults/startposition", start + '');
  var sortby = document.theForm.sortby.value;
  this.setXpathValue(this.defaults_xml, "/defaults/sortby", sortby + '');
-
+ if (bbox != ""){
+	this.setXpathValue(this.defaults_xml, "/defaults/lowerCorner", lowerCorner + '');
+	this.setXpathValue(this.defaults_xml, "/defaults/upperCorner", upperCorner + '');
+}
  var processor = new XSLTProcessor();
  processor.importStylesheet(this.getrecords_xsl);
 
  var request_xml = processor.transformToDocument(this.defaults_xml);
  var request = new XMLSerializer().serializeToString(request_xml);
-
+ //alert(request);return;
  csw_response = this.sendCSWRequest(request);
  var results = "<results><request start=\"" + start + "\"";
  results += " maxrecords=\"";
@@ -227,7 +240,12 @@ CSWClient.prototype.setXpathValue = function(_a,_b,_c)
  return false;
  }
 };
-
+CSWClient.prototype.clearResposta = function()
+{
+  var outputDiv = document.getElementById("csw-output");
+  outputDiv.innerHTML = "Aguarde...";
+  this.hideDiv(document.getElementById('popup'))
+}
 
 CSWClient.prototype.clearPage = function()
 {

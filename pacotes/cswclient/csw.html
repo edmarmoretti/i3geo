@@ -28,6 +28,8 @@
                </select>
                <input type="text" name="query" value="" size="24"/>
                <p/>
+			   Região (xmin ymin xmax ymax): <input type="text" name="bbox" value="-180 -90 180 90" size="24"/>
+			   <p/>
                <span id="csw-hosts"></span>
 		<select id="schema" name="schema">
 				 <option value="http://www.opengis.net/cat/csw/2.0.2">csw:Record</option>
@@ -46,7 +48,7 @@
                <!--input type="hidden" name="schema" value="http://www.isotc211.org/2005/gmd"/-->
                <!--input type="hidden" name="displaymode" value="html"/-->
                <input type="button" value="limpar" onClick="javascript:void(csw_client.clearPage())"/>
-               <input type="button" value="pesquisar" onClick="javascript:void(csw_client.getRecords())"/>
+               <input type="button" value="pesquisar" onClick="javascript:void(csw_client.clearResposta());void(csw_client.getRecords())"/>
 			 </form>
 	       </div>
 		   
