@@ -173,7 +173,10 @@ i3GEO.editorOL = {
 					eval("i3GEO.editorOL."+fundo[i]+".setVisibility(false);");
 					eval("alayers.push(i3GEO.editorOL."+fundo[i]+");");
 				}
-				catch(e){alayers[0].setVisibility(true);}
+				catch(e){
+					if(alayers[0])
+					alayers[0].setVisibility(true);
+				}
 			}
 		}
 		i3GEO.editorOL.mapa.addLayers(alayers);
@@ -629,7 +632,7 @@ i3GEO.editorOL = {
 			button = new OpenLayers.Control.Button({
 				displayClass: "editorOLzoomtot", 
 				trigger: function(){i3GEO.editorOL.mapa.zoomToMaxExtent();},
-				title: "ajusta extens&atilde;o"
+				title: "ajusta extensão"
 			});
 			controles.push(button);
 			adiciona = true;

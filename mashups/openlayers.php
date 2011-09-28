@@ -292,10 +292,13 @@ i3GEO.editorOL.tiles = "<?php
 	echo "i3GEO.editorOL.numzoom = ".$numzoomlevels.";";
 }
 ?>
-<?php if(isset($maxextent)){
+<?php
+if(isset($maxextent)){
 	$maxextent = str_replace(" ",",",$maxextent);
 	echo "i3GEO.editorOL.maxext = new OpenLayers.Bounds(".$maxextent.");";
 }
+else
+{echo "i3GEO.editorOL.maxext = new OpenLayers.Bounds(-76.5125927,-39.3925675209,-29.5851853,9.49014852081);";}
 ?>
 <?php if(isset($mapext)){
 	$mapext = str_replace(" ",",",$mapext);
