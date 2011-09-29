@@ -775,7 +775,7 @@ i3GEO.Interface = {
 		Default:
 		{-0.001, -0.001, 0.001, 0.001]}
 		*/
-		MINEXTENT: [-0.001, -0.001, 0.001, 0.001],
+		MINEXTENT: [-0.0005, -0.0005, 0.0005, 0.0005],
 		/*
 		Propriedade: MAXEXTENT
 

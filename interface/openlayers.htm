@@ -162,7 +162,11 @@ i3GEO.Interface.openlayers.GADGETS = {
 		OverviewMap:false	
 	};
 i3GEO.Interface.openlayers.TILES = true;
-
+//
+//controla o tamanho da barra de zoom
+//
+//i3GEO.Interface.openlayers.MINEXTENT = [-0.001, -0.001, 0.001, 0.001]
+//
 //
 //desabilita o item que abre a interface "default" do menu suspenso
 //
@@ -172,6 +176,7 @@ i3GEO.gadgets.PARAMETROS.mostraMenuSuspenso.finaliza = 'if($i("omenudataInterfac
 Após a criação, é criado o objeto i3geoOL que corresponde ao objeto map da API do OpenLayers.
 Vc pode usar i3geoOL para aplicar os métodos e verificar as propriedades da API do OpenLayers
 */
+
 i3GEO.cria();
 /*
 	Inicializa o mapa
@@ -269,9 +274,9 @@ i3GEO.finaliza = function(){
 	$i("i3GEOlogoMarca").style.display = "none";
 	i3GEO.mapa.insereDobraPagina("googlemaps","../imagens/dobragooglemaps.png");
 }
+i3GEO.arvoreDeTemas.OPCOESADICIONAIS.navegacaoDir = true;
+//OpenLayers.DOTS_PER_INCH = 96
 i3GEO.inicia();
-
-
 </script>
 </body>
 </html>
