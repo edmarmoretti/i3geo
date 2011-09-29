@@ -2411,6 +2411,28 @@ i3GEO.util = {
 			window.location = i3GEO.configura.locaplic+'/interface/'+i3GEO.Interface.ALTTABLET+'?'+i3GEO.configura.sid;
 			return true;
 		}
+	},
+	/*
+	Function: calculaDPI
+	
+	Calcula o valor de DPI do monitor.
+	
+	O valor é aproximado e utilizado principalmente na interface OpenLayers
+	*/
+	calculaDPI: function(){
+		var novoel = document.createElement("div"),
+			valor = 72;
+		//novoel.id = 'testeCalculaDPI';
+		novoel.style.height = "1in";
+		novoel.style.left = "-100%";
+		novoel.style.position = "absolute";
+		novoel.style.top = "-100%";
+		novoel.style.width = "1in";
+		document.body.appendChild(novoel);
+		if(novoel.offsetHeight)
+		{valor = novoel.offsetHeight;}
+		document.body.removeChild(novoel);
+		return valor;
 	}
 };
 //++++++++++++++++++++++++++++++++++++

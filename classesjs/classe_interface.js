@@ -816,6 +816,7 @@ i3GEO.Interface = {
 				ma = i3GEO.Interface.openlayers.MAXEXTENT,
 				i = $i(i3GEO.Interface.IDCORPO),
 				bb = i3GEO.barraDeBotoes;
+			OpenLayers.DOTS_PER_INCH = i3GEO.util.calculaDPI();
 			if(i){
 				f = $i("openlayers");
 				if(!f){
