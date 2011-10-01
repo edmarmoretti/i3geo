@@ -883,7 +883,7 @@ function core_comboObjeto(obj,valor,texto,marcar,texto2)
 		
 		ins += "<option value='"+v+"' "
 		if (marcar == v){ins += "selected"}
-		ins += ">"+t+"</option>";
+		ins += " title='"+t+"'  >"+t+"</option>";
 	}
 	return(ins)
 }
