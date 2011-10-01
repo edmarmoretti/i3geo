@@ -1,5 +1,5 @@
-<?php error_reporting(0);if(extension_loaded('zlib')){ob_start('ob_gzhandler');} header("Content-type: text/html"); ?>
 <?php
+error_reporting(0);if(extension_loaded('zlib')){ob_start('ob_gzhandler');} header("Content-type: text/html");
 include_once("../classesphp/pega_variaveis.php");
 include_once("../classesphp/carrega_ext.php");
 error_reporting(0);
@@ -218,16 +218,22 @@ Parâmetros:
 <html>
 <head>
 <META HTTP-EQUIV="Content-Type" CONTENT="text/html; charset=ISO-8859-1">
+<!--
 <link rel="stylesheet" type="text/css" href="../pacotes/yui270/build/fonts/fonts-min.css" />
 <link rel="stylesheet" type="text/css" href="../pacotes/yui270/build/container/assets/skins/sam/container.css" />
 <script type="text/javascript" src="../pacotes/yui270/build/yahoo-dom-event/yahoo-dom-event.js"></script>
 <script type="text/javascript" src="../pacotes/yui270/build/dragdrop/dragdrop-min.js"></script>
 <script type="text/javascript" src="../pacotes/yui270/build/container/container-min.js"></script>
 <script type="text/javascript" src="../classesjs/compactados/classe_calculo_compacto.js"></script>
-<script type="text/javascript" src="../pacotes/openlayers/OpenLayers29.js.php"></script>
+<script type="text/javascript" src="../pacotes/openlayers/OpenLayers29.js"></script>
 <script type="text/javascript" src="openlayers.js.php"></script>
+-->
+<script type="text/javascript" src="openlayers_compacto.js.php"></script>
+<link rel="stylesheet" href="openlayers_compacto.css" type="text/css" />
+<!--
 <link rel="stylesheet" href="theme/default/style.css" type="text/css" />
 <link rel="stylesheet" href="openlayers.css" type="text/css" />
+-->
 <style>
 .yui-skin-sam .container-minimiza {
 	background:transparent url(../pacotes/yui270/build/assets/skins/sam/sprite.png) no-repeat scroll 0 -450px;

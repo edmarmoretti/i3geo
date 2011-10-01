@@ -201,12 +201,31 @@ foreach ($cssfiles as $f)
 	fclose($abre);
 	$buffer .= "\n";
 }
-
 $abre = fopen("../css/i3geo_ferramentas45.css", "wt");
 $escreve = fwrite ($abre,$buffer);
 $fecha = fclose ($abre);
 chmod("../css/i3geo_ferramentas45.css",0777);
-
+//
+//compacta os códigos para o Mashup do OpenLayers
+//
+$jsfiles = array(
+"../pacotes/yui270/build/yahoo-dom-event/yahoo-dom-event.js",
+"../pacotes/yui270/build/dragdrop/dragdrop-min.js",
+"../pacotes/yui270/build/container/container-min.js",
+"../classesjs/compactados/classe_calculo_compacto.js",
+"../pacotes/openlayers/OpenLayers29.js",
+"../mashups/openlayers.js.php"
+);
+$buffer = "";
+salvatudojs($jsfiles,$buffer,"../mashups/openlayers_compacto.js","js");
+$jsfiles = array(
+"../pacotes/yui270/build/fonts/fonts-min.css",
+"../pacotes/yui270/build/container/assets/skins/sam/container.css",
+"../mashups/theme/default/style.css",
+"../mashups/openlayers.css",
+);
+$buffer = "";
+salvatudojs($jsfiles,$buffer,"../mashups/openlayers_compacto.css","css");
 
 function inicia($arquivo)
 {

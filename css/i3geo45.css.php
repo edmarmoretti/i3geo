@@ -1539,5 +1539,17 @@ background-position:-522px -28px;
 pre{
 	font-family: Verdana, Arial, Helvetica, sans-serif;
 	font-size: 9px;	
+}
+.yui-skin-sam .container-close {
+background:transparent url(../pacotes/yui270/build/assets/skins/sam/sprite.png) no-repeat scroll 0 -300px;
+cursor:pointer;
+height:15px;
+position:absolute;
+right:1px;
+top:1px;
+width:25px;
+z-index:2001;
+opacity:.80;
+filter:alpha(opacity=80);
 }
 <?php if(extension_loaded('zlib')){ob_end_flush();}?>

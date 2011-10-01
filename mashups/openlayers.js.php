@@ -141,7 +141,9 @@ i3GEO.editorOL = {
 				},
 			style = new OpenLayers.Style(),
 			styleMap1 = new OpenLayers.StyleMap({"default": style});
-
+		if(i3GEO.editorOL.tiles === false || i3GEO.editorOL.tiles === "false"){
+			single = true;
+		}
 		style.addRules([
 			new OpenLayers.Rule({symbolizer: sketchSymbolizers})
 		]);				
@@ -171,20 +173,18 @@ i3GEO.editorOL = {
 				try{
 					eval("i3GEO.editorOL."+fundo[i]+".transitionEffect = 'resize';");
 					eval("i3GEO.editorOL."+fundo[i]+".setVisibility(false);");
+					eval("i3GEO.editorOL."+fundo[i]+".singleTile = single;");
 					eval("alayers.push(i3GEO.editorOL."+fundo[i]+");");
 				}
 				catch(e){
 					if(alayers[0])
-					alayers[0].setVisibility(true);
+					{alayers[0].setVisibility(true);}
 				}
 			}
 		}
 		i3GEO.editorOL.mapa.addLayers(alayers);
 		if(i3GEO.editorOL.layersIniciais !== ""){
-			n = i3GEO.editorOL.layersIniciais.length;
-			if(i3GEO.editorOL.tiles === false || i3GEO.editorOL.tiles === "false"){
-				single = true;
-			}			
+			n = i3GEO.editorOL.layersIniciais.length;			
 			for(i=0;i<n;i++){
 				i3GEO.editorOL.layersIniciais[i].singleTile = single;
 				i3GEO.editorOL.mapa.addLayer(i3GEO.editorOL.layersIniciais[i]);
