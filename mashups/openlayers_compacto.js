@@ -2382,7 +2382,7 @@ i3GEO.editorOL = {
 		i3GEO.editorOL.adicionaMarcas();
 		if(i3GEO.editorOL.maxext !== "")
 		{i3GEO.editorOL.mapa.zoomToMaxExtent();}
-		else
+		if(i3GEO.editorOL.mapext != "")
 		{i3GEO.editorOL.mapa.zoomToExtent(i3GEO.editorOL.mapext);}
 		i3GEO.editorOL.coordenadas();	
 		i3GEO.editorOL.criaJanelaBusca();

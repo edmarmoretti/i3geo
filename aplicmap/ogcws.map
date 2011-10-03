@@ -11,8 +11,7 @@ MAP
   #CONFIG MS_NONSQUARE "YES"
   #CONFIG MS_ERRORFILE "/ms4w/tmp/ms_error.txt"
   NAME "i3geoogc"
-
-  DEBUG 5
+  #DEBUG 5
   OUTPUTFORMAT
     NAME "png"
     MIMETYPE "image/png"
