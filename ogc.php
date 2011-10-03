@@ -78,7 +78,7 @@ if(!isset($temas) && isset($tema))
 //
 if(isset($format) && strtolower($format) == "application/openlayers"){
 	if(!isset($layers))
-	{$layers = $temas;}
+	{$layers = $tema;}
 	$urln = "mashups/openlayers.php?temas=".$layers."&layers=".$layers."&mapext=".$bbox."&botoes=pan,zoombox,zoomtot,identifica";
 	if(!headers_sent())
 	{header("Location:".$urln);}
