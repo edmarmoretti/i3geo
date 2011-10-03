@@ -43,6 +43,9 @@ legenda - mostra a legenda no corpo do mapa sim|nao
 
 perfil - perfil utilizado para escolher os menus
 
+format - (opcional) pode ser utilizado a opção &format=application/openlayers para abrir o mashup do OpenLayers com as camadas definida em temas, exemplo
+		http://localhost/i3geo/ogc.php?temas=biomashp&format=application/openlayers&bbox=-54,-14,-50,-10
+
 Exemplos:
 
 ogc.php?lista=temas
@@ -68,6 +71,20 @@ require_once("classesphp/carrega_ext.php");
 include("ms_configura.php");
 include("classesphp/pega_variaveis.php");
 include("classesphp/classe_menutemas.php");
+if(!isset($temas) && isset($tema))
+{$temas = $tema;}
+//
+//para operar como o Geoserver
+//
+if(isset($format) && strtolower($format) == "application/openlayers"){
+	if(!isset($layers))
+	{$layers = $temas;}
+	$urln = "mashups/openlayers.php?temas=".$layers."&layers=".$layers."&mapext=".$bbox."&botoes=pan,zoombox,zoomtot,identifica";
+	if(!headers_sent())
+	{header("Location:".$urln);}
+	else
+	{echo "<meta http-equiv='refresh' content='0;url=$urln'>";}	
+}
 //
 //pega os endereços para compor a url de chamada do gerador de web services
 //ogc.php
@@ -321,10 +338,11 @@ else
 		}
 	}
 }
-
 ms_ioinstallstdouttobuffer();
 $oMap->owsdispatch($req);
 $contenttype = ms_iostripstdoutbuffercontenttype();
+if(strtolower($request) == "getcapabilities")
+{header('Content-Disposition: attachment; filename=getcapabilities.xml"');}
 //header("Content-type: application/xml");
 header("Content-type: $contenttype");
 
