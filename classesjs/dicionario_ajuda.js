@@ -929,6 +929,15 @@ g_traducao_ajuda = {
 			complemento:"",
 			tela:"",
 			apijs:"i3GEO.mapa.dialogo.tme()"
+		},
+		"109": {
+			titulo: "Busca de metadados na INDE",
+			diretorio:"i3geo/ferramentas/buscainde",
+			categoria:"8",
+			pt:"Busca metadados no banco de dados da Infraestrutura Nacional de Dados Espaciais (INDE) do Brasil.",
+			complemento:"A busca ainda é experimental, permitindo apenas a localização dos registros, sem que o tema possa ser adicionado diretamente ao mapa.",
+			tela:"",
+			apijs:"i3GEO.arvoreDeTemas.dialogo.buscainde()"
 		}		
 	}
 };

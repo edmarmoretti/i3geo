@@ -90,7 +90,7 @@ i3GEOF.buscainde = {
 			i3GEO.janela.minimiza("i3GEOF.buscainde");
 		};
 		//cria a janela flutuante
-		titulo = "Barra de escala <a class=ajuda_usuario target=_blank href='" + i3GEO.configura.locaplic + "/ajuda_usuario.php?idcategoria=1&idajuda=3' >&nbsp;&nbsp;&nbsp;</a>";
+		titulo = "Barra de escala <a class=ajuda_usuario target=_blank href='" + i3GEO.configura.locaplic + "/ajuda_usuario.php?idcategoria=109&idajuda=8' >&nbsp;&nbsp;&nbsp;</a>";
 		janela = i3GEO.janela.cria(
 			"550px",
 			"350px",
