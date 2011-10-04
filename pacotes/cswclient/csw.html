@@ -28,7 +28,7 @@
                </select>
                <input type="text" name="query" value="" size="24"/>
                <p/>
-			   Região (xmin ymin xmax ymax): <input type="text" name="bbox" value="-180 -90 180 90" size="24"/>
+			   Região (xmin ymin xmax ymax): <input disabled type="text" name="bbox" value="-180 -90 180 90" size="24"/>
 			   <p/>
                <span id="csw-hosts"></span>
 		<select id="schema" name="schema">
@@ -64,6 +64,7 @@
        </div><!-- main -->
      </div><!-- query-container -->	  
      <p/>
+	 <!-- 
 	 <div id="popup">
 	   <div class="close">
 	     <a href="javascript:void(csw_client.hideDiv(document.getElementById('popup')))">[close]</a>
@@ -73,7 +74,7 @@
 	       <div id="metadata"></div>
 	     </div>
        </div>
-     </div><!-- popup -->		 
+     </div>popup -->		 
      <div id="overlay" style="visibility:hidden"></div>
      <script type="text/javascript">
        //var cswhost = "http://geomatics.nlr.nl/excat/csw";//default host

@@ -88,6 +88,8 @@ i3GEO.arvoreDeTemas = {
 		refresh: true,
 
 		carousel: true,
+		
+		inde: true,
 
 		uploadgpx: false,
 
@@ -126,6 +128,7 @@ i3GEO.arvoreDeTemas = {
 		estrelas: true,
 		refresh: true,
 		carousel: true,
+		inde: true,
 		uploadgpx: true,
 		comentarios: true,
 		bookmark: true,
@@ -1426,6 +1429,10 @@ i3GEO.arvoreDeTemas = {
 			ins += "<td><img class='carouselTemas' onclick='i3GEO.arvoreDeTemas.dialogo.carouselTemas()' src='"+imb+"' style='cursor:pointer;text-align:left'  title='Miniaturas'/><td>";
 			t += 20;
 		}
+		if(OPCOESADICIONAIS.inde === true){
+			ins += "<td><img class='buscaInde' onclick='i3GEO.arvoreDeTemas.dialogo.buscaInde()' src='"+imb+"' style='cursor:pointer;text-align:left'  title='Pesquisa na INDE'/><td>";
+			t += 20;
+		}
 		return("<table width='"+t+"px' ><tr>"+ins+"</tr></table>");
 	},
 	/*
@@ -2035,6 +2042,14 @@ i3GEO.arvoreDeTemas = {
 		carouselTemas: function(){
 			i3GEO.util.scriptTag(i3GEO.configura.locaplic+"/ferramentas/carouseltemas/index.js.php","i3GEOF.carouseltemas.criaJanelaFlutuante()","i3GEOF.carouseltemas_script");
 		},
+		/*
+		Function: buscaInde
+
+		Abre a janela flutuante para o usuário procurar metadados na INDE
+		*/
+		buscaInde: function(){
+			i3GEO.util.scriptTag(i3GEO.configura.locaplic+"/ferramentas/buscainde/index.js.php","i3GEOF.buscainde.criaJanelaFlutuante()","i3GEOF.buscainde_script");
+		},	
 		/*
 		Function: nuvemTags
 

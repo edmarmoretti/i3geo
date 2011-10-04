@@ -41,7 +41,7 @@
 	  <xsl:if test="./literal !=''">
         <csw:Constraint version="1.1.0">
           <ogc:Filter xmlns:ogc="http://www.opengis.net/ogc" xmlns="http://www.opengis.net/ogc" xmlns:gml="http://www.opengis.net/gml">
-            <ogc:And>
+             <!--<ogc:And>
 			<xsl:if test="./lowerCorner !=''">
 			<ogc:Intersects>
 			<ogc:PropertyName>iso:BoundingBox</ogc:PropertyName>
@@ -54,7 +54,7 @@
 			</gml:upperCorner>
 			</gml:Envelope>
 			</ogc:Intersects>		
-			</xsl:if>
+			</xsl:if>-->
 			<ogc:PropertyIsLike escape="\" singleChar="_" wildCard="%">
               <ogc:PropertyName>
 			  <xsl:value-of select="./propertyname"/>
@@ -63,7 +63,7 @@
               <xsl:value-of select="./literal"/>
               </ogc:Literal>
             </ogc:PropertyIsLike>
-			</ogc:And>
+			 <!--</ogc:And>-->
           </ogc:Filter>
         </csw:Constraint>
 	  </xsl:if>

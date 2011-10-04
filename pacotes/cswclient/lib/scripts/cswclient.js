@@ -292,8 +292,10 @@ CSWClient.prototype.removeDiv = function(div)
 
 CSWClient.prototype.hideDiv = function(div)
 {
-	 document.getElementById('overlay').style.visibility="hidden";
-     div.style.visibility="hidden";
+	 if(div){
+		document.getElementById('overlay').style.visibility="hidden";
+		div.style.visibility="hidden";
+	}
 }
  
 CSWClient.prototype.showDiv = function(div)

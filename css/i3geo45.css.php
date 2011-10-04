@@ -413,6 +413,14 @@ h1 {padding:.25em .5em;background-color:#ccc;}
 	width:16px;
 	border: 1px solid #DCDCDC;
 }
+.buscaInde
+{
+	background-image:URL('../imagens/visual/default/sprite2.png');
+	background-repeat: no-repeat;
+	background-position: 0px -700px;
+	width:16px;
+	border: 1px solid #DCDCDC;
+}
 #barraedicao
 {
 	background-image:URL('../imagens/visual/default/sprite2.png');
