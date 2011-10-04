@@ -819,31 +819,6 @@ i3GEO.arvoreDeTemas = {
 				{html:outrasOpcoes+"&nbsp;<br>",isLeaf:true,enableHighlight:false,expanded:false,hasIcon:false},
 				root
 			);
-			if(i3GEO.arvoreDeTemas.OPCOESADICIONAIS.navegacaoDir === true){
-				retorno = function(){
-					var drives,iglt,ig,drive;
-					tempNode = new YAHOO.widget.HTMLNode(
-						{
-							html:"&nbsp;"+$trad("a6")+" <a class=ajuda_usuario target=_blank href='"+i3GEO.configura.locaplic+"/ajuda_usuario.php?idcategoria=4&idajuda=32' >&nbsp;&nbsp;&nbsp;</a>",
-							enableHighlight:false,expanded:false
-						},
-						root
-					);
-					drives = i3GEO.arvoreDeTemas.DRIVES;
-					iglt = drives.length;
-					ig=0;
-					do{
-						drive = new YAHOO.widget.HTMLNode(
-							{html:drives[ig].nome,caminho:drives[ig].caminho,enableHighlight:false,expanded:false},
-							tempNode
-						);
-						drive.setDynamicLoad(i3GEO.arvoreDeTemas.montaDir, 1);
-						ig+=1;
-					}
-					while(ig<iglt);
-				};
-				i3GEO.arvoreDeTemas.listaDrives(i3GEO.arvoreDeTemas.SID,i3GEO.arvoreDeTemas.LOCAPLIC,retorno);
-			}
 		}
 		//
 		//opções para abrir o sistema de administração
@@ -983,13 +958,48 @@ i3GEO.arvoreDeTemas = {
 					ig+=1;
 				}
 				while(ig<iglt);
-				i3GEO.arvoreDeTemas.ARVORE.draw();
+				if(i3GEO.arvoreDeTemas.OPCOESADICIONAIS.navegacaoDir === false)
+				{i3GEO.arvoreDeTemas.ARVORE.draw();}
+				else
+				{i3GEO.arvoreDeTemas.adicionaNoNavegacaoDir();}
 			};
 			i3GEO.arvoreDeTemas.listaSistemas(i3GEO.arvoreDeTemas.SID,i3GEO.arvoreDeTemas.LOCAPLIC,retorno);
 		}
 		document.getElementById(i3GEO.arvoreDeTemas.IDHTML).style.textAlign="left";
-		if(!i3GEO.arvoreDeTemas.INCLUISISTEMAS)
-		{i3GEO.arvoreDeTemas.ARVORE.draw();}
+		if(!i3GEO.arvoreDeTemas.INCLUISISTEMAS){
+			if(i3GEO.arvoreDeTemas.OPCOESADICIONAIS.navegacaoDir === false)
+			{i3GEO.arvoreDeTemas.ARVORE.draw();}
+			else
+			{i3GEO.arvoreDeTemas.adicionaNoNavegacaoDir();}
+		}
+	},
+	adicionaNoNavegacaoDir: function(){
+		if(i3GEO.arvoreDeTemas.OPCOESADICIONAIS.navegacaoDir === true){
+			var retorno = function(){
+				var drives,iglt,ig,drive,tempNode;
+				tempNode = new YAHOO.widget.HTMLNode(
+					{
+						html:"&nbsp;"+$trad("a6")+" <a class=ajuda_usuario target=_blank href='"+i3GEO.configura.locaplic+"/ajuda_usuario.php?idcategoria=4&idajuda=32' >&nbsp;&nbsp;&nbsp;</a>",
+						enableHighlight:false,expanded:false
+					},
+					i3GEO.arvoreDeTemas.ARVORE.getRoot()
+				);
+				drives = i3GEO.arvoreDeTemas.DRIVES;
+				iglt = drives.length;
+				ig=0;
+				do{
+					drive = new YAHOO.widget.HTMLNode(
+						{html:drives[ig].nome,caminho:drives[ig].caminho,enableHighlight:false,expanded:false},
+						tempNode
+					);
+					drive.setDynamicLoad(i3GEO.arvoreDeTemas.montaDir, 1);
+					ig+=1;
+				}
+				while(ig<iglt);
+				i3GEO.arvoreDeTemas.ARVORE.draw();
+			};
+			i3GEO.arvoreDeTemas.listaDrives(i3GEO.arvoreDeTemas.SID,i3GEO.arvoreDeTemas.LOCAPLIC,retorno);
+		}	
 	},
 	/*
 	Function: montaGrupos
