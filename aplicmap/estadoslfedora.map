@@ -13,6 +13,7 @@ LAYER
 		"ITENSDESC" "Estado"
 	    "ITEMIMG" "ESTADO"
 	    "IMGLOC" "../imagens/bandeiras"
+		#"ITENSLINK" ",'../ferramentas/identifica/testelink.php?sid='+i3GEO.configura.sid"
 		"TEMA" "Limite Estadual"
 		"ESCALA" "250000"
 		"CLASSE" "SIM"

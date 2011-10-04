@@ -599,7 +599,7 @@ i3GEOF.identifica = {
 	retorno {JSON} - objeto JSON com os dados <i3GEO.php.identifica2>
 	*/
 	mostraDadosTema: function(retorno){
-		var res="",div0,ntemas,i,resultados,nres,cor,j,itens,nitens,k,atualN = "todas",inicio=0,numResultados,tip;
+		var res="",div0,ntemas,i,resultados,nres,cor,j,itens,nitens,k,atualN = "todas",inicio=0,numResultados,tip,link;
 		
 		if($i("i3GEOFidentificaNocorrencias"))
 		{atualN = $i("i3GEOFidentificaNocorrencias").value;}
@@ -640,8 +640,13 @@ i3GEOF.identifica = {
 							}							
 							if(resultados[j][k].link === "")
 							{res +=  "<div style='width:100%;text-align:left;background-color:"+cor+"' >"+tip+resultados[j][k].alias+":&nbsp;"+resultados[j][k].valor+"</div>";}
-							else
-							{res +=  "<div style='width:100%;text-align:left;background-color:"+cor+"' >"+tip+resultados[j][k].alias+":&nbsp;<a href='"+resultados[j][k].link+"' target=_blank >"+resultados[j][k].valor+"</a></div>";}
+							else{
+								try{
+									link = eval(resultados[j][k].link);
+								}
+								catch(e){link = resultados[j][k].link;}
+								res +=  "<div style='width:100%;text-align:left;background-color:"+cor+"' >"+tip+resultados[j][k].alias+":&nbsp;<a href='"+link+"' target=_blank >"+resultados[j][k].valor+"</a></div>";
+							}
 							if(resultados[j][k].img !== "")
 							{res +=  "<div style='width:100%;text-align:left;background-color:"+cor+"' >"+resultados[j][k].img+"</div>";}
 							if (cor === "RGB(250,250,250)"){cor = "beige";}
