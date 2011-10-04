@@ -985,13 +985,18 @@ function core_ativaBotaoAdicionaLinha(sUrl,idBotao,nomeFuncao)
 		{
   			success:function(o)
   			{
-  				try
+  				var texto = "";
+				try
   				{
   					core_carregando("desativa");
   					if(nomeFuncao != "")
-  					eval(nomeFuncao+"()");
-  					else	
-  					myDataTable.addRow(YAHOO.lang.JSON.parse(o.responseText)[0],0);
+  					{eval(nomeFuncao+"()");}
+  					else{
+						texto = YAHOO.lang.JSON.parse(o.responseText)[0];
+						if(texto === "")
+						{texto = "Clique para editar";}
+						myDataTable.addRow(texto,0);
+					}
   				}
   				catch(e){core_handleFailure(e,o.responseText);}
   			},

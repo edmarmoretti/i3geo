@@ -60,7 +60,10 @@ function montaTabela_G(dados)
         // Custom formatter for "address" column to preserve line breaks
         var formatTexto = function(elCell, oRecord, oColumn, oData)
         {
-            elCell.innerHTML = "<p style=width:250px;cursor:pointer title='clique para editar'>" + oData + "</p>";
+            if(oData === ""){
+				oData = "<span style='color:gray' >Clique para editar, tecle enter e depois salve</span>";
+			}
+			elCell.innerHTML = "<p style=width:250px;cursor:pointer title='clique para editar'>" + oData + "</p>";
         };
         var formatTextoId = function(elCell, oRecord, oColumn, oData)
         {
