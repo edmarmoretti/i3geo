@@ -109,7 +109,7 @@ i3GEOF.pontosDistri = {
 		ins += '	</ul>';
 		ins += '</div><br>';
 		ins += '<div class="guiaobj" id="i3GEOpontosDistriguia1obj" style="left:1px;display:none;">';
-		ins += '	<p class="paragrafo" >Escolha o tema de pontos que ser&aacute; utilizado:</p>';
+		ins += '	<p class="paragrafo" >Escolha o tema que ser&aacute; utilizado (no caso de linhas ou polígonos, será calculado o centróide):</p>';
 		ins += '	<div id=i3GEOpontosDistriTemas ></div>';
 		ins += '	<p class="paragrafo">Restringe a análise aos limites de abrang&ecirc;ncia dos pontos?';
 		ins += i3GEO.util.comboSimNao("i3GEOpontosDistrilimitePontos","sim");
@@ -221,7 +221,7 @@ i3GEOF.pontosDistri = {
 			"i3GEOpontosDistriTemas",
 			"",
 			false,
-			"pontosSelecionados"
+			"selecionados"
 		);
 		var i = $i("i3GEOF.pontosDistri_c").style;
 		i3GEO.janela.ULTIMOZINDEX++;

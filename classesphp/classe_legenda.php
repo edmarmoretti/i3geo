@@ -306,9 +306,11 @@ array
 			$layer = $this->mapa->getlayerbyname($l);
 			//verifica se é wms ou wfs
 			$c = $layer->connectiontype;
+			
 			$s = $layer->getmetadata("wms_sld_url");
 			$im = $layer->getmetadata("legendaimg");
 			$nc = $layer->numclasses;
+								
 			//
 			//se for wms e tiver classes define o tipo de layer para poder gerar a legenda corretamente
 			//

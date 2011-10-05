@@ -2801,8 +2801,9 @@ function gravaCoordenadasPt($tema,$limitepontos="TRUE",$extendelimite)
 				$shp_index  = $result->shapeindex;
 				$shape = $layerPt->getfeature($shp_index,-1);			
 			}
-			$lineo = $shape->line(0);
-			$pt = $lineo->point(0);
+			//$lineo = $shape->line(0);
+			//$pt = $lineo->point(0);
+			$pt = $shape->getCentroid();
 			if (($prjTema != "") && ($prjMapa != $prjTema))
 			{
 				$pt->project($projInObj, $projOutObj);
