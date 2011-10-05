@@ -550,7 +550,7 @@ i3GEO.configura = {
 	Default:
 	{3500}
 	*/
-	tempoMouseParado: 2500,
+	tempoMouseParado: 1800,
 	/*
 	Propriedade: iniciaJanelaMensagens
 
@@ -923,6 +923,7 @@ i3GEO.configura = {
 		},
 		{
 			//botão que abre a função de identificação do tipo balao.
+			//veja tempoMouseParado
 			iddiv:"identificaBalao",
 			tipo:"dinamico",
 			dica:$trad("d7a"),
