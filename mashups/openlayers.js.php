@@ -1034,14 +1034,17 @@ i3GEO.editorOL = {
 				trigger: function(){
 					var temp = window.confirm("Remove a edição?");
 					i3GEOpanelEditor.destroy();
-					if(YAHOO.temaativo && YAHOO.temaativo.container.panel)
-					{YAHOO.temaativo.container.panel.destroy();}
-					if(YAHOO.procura.container.panel)
-					{YAHOO.procura.container.panel.destroy();}
-					if(YAHOO.editorOL.container.panel)
-					{YAHOO.editorOL.container.panel.destroy();}
-					if(YAHOO.editorOL.listaGeometrias.panel)
-					{YAHOO.editorOL.listaGeometrias.panel.destroy();}
+					try{
+						if(YAHOO.temaativo && YAHOO.temaativo.container.panel)
+						{YAHOO.temaativo.container.panel.destroy();}
+						if(YAHOO.procura && YAHOO.procura.container.panel)
+						{YAHOO.procura.container.panel.destroy();}
+						if(YAHOO.editorOL && YAHOO.editorOL.container.panel)
+						{YAHOO.editorOL.container.panel.destroy();}
+						if(YAHOO.editorOL && YAHOO.editorOL.listaGeometrias.panel)
+						{YAHOO.editorOL.listaGeometrias.panel.destroy();}
+					}
+					catch(e){}
 					if(temp === true){
 						try{
 							if(i3GEO.editorOL.layergrafico)

@@ -304,7 +304,7 @@ $versao = $versao["principal"];
 if(!isset($base) || $base == "")
 {
 	if (strtoupper(substr(PHP_OS, 0, 3) == 'WIN'))
-	{$f = $locaplic."/aplicmap/geral1windowsv".$versao.".map";}
+	{$base = $locaplic."/aplicmap/geral1windowsv".$versao.".map";}
 	else
 	{
 		if($base == "" && file_exists('/var/www/i3geo/aplicmap/geral1debianv'.$versao.'.map')){
