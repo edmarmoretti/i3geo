@@ -228,8 +228,10 @@ Parâmetros:
 <script type="text/javascript" src="../pacotes/openlayers/OpenLayers29.js"></script>
 <script type="text/javascript" src="openlayers.js.php"></script>
 -->
+
 <script type="text/javascript" src="openlayers_compacto.js.php"></script>
 <link rel="stylesheet" href="openlayers_compacto.css" type="text/css" />
+
 <!--
 <link rel="stylesheet" href="theme/default/style.css" type="text/css" />
 <link rel="stylesheet" href="openlayers.css" type="text/css" />
