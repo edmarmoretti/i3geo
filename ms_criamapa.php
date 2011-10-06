@@ -304,14 +304,20 @@ $versao = $versao["principal"];
 if(!isset($base) || $base == "")
 {
 	if (strtoupper(substr(PHP_OS, 0, 3) == 'WIN'))
-	{
-		$base = "geral1windowsv".$versao;
-		$estadosl = "estadoslwindows";
-	}
+	{$f = $locaplic."/aplicmap/geral1windowsv".$versao.".map";}
 	else
 	{
-		$base = "geral1v".$versao;
-		$estadosl = "estadosl";
+		if($base == "" && file_exists('/var/www/i3geo/aplicmap/geral1debianv'.$versao.'.map')){
+			$base = "/var/www/i3geo/aplicmap/geral1debianv".$versao.".map";
+		}
+		if($base == "" && file_exists('/var/www/html/i3geo/aplicmap/geral1fedorav'.$versao.'.map')){
+			$base = "/var/www/html/i3geo/aplicmap/geral1fedorav".$versao.".map";
+		}
+		if($base == "" && file_exists('/opt/www/html/i3geo/aplicmap/geral1fedorav'.$versao.'.map')){
+			$base = "/opt/www/html/i3geo/aplicmap/geral1v".$versao.".map";
+		}
+		if($base == "")
+		{$base = $locaplic."/aplicmap/geral1v".$versao.".map";}
 	}
 }
 if(!isset($estadosl))
@@ -324,13 +330,14 @@ O arquivo definido em $base é lido como um objeto map. Esse objeto será processa
 if (file_exists($base))
 {
 	$map = ms_newMapObj($base);
-	$mapn = ms_newMapObj($base);	
+	$mapn = ms_newMapObj($base);
 }
 else
 {
 	$map = ms_newMapObj($locaplic."/aplicmap/".$base.".map");
 	$mapn = ms_newMapObj($locaplic."/aplicmap/".$base.".map");
 }
+
 /*
 Utiliza um projeto gvSig para compor o mapa
 */
@@ -368,7 +375,6 @@ if(isset($layers))
 {ligaTemas();}
 if(isset($desligar))
 {desligaTemasIniciais();}
-
 if (isset($map_reference_image))
 {$mapn->reference->set("image",$map_reference_image);}
 $extr = $mapn->reference->extent;
@@ -401,11 +407,13 @@ Configura os endereços corretos no mapfile.
 
 Altera as propriedades imagepath e imageurl corrigindo os caminhos padrão conforme o diretório criado para armazenar o mapa de trabalho.
 */
+
 $w = $mapn->web;
 $atual = $w->imagepath;
 $w->set("imagepath",$atual.$diretorios[2]."/");
 $atual = $w->imageurl;
 $w->set("imageurl",$atual.$diretorios[2]."/");
+
 $salvo = $mapn->save($tmpfname);
 
 $_SESSION["imgurl"] = strtolower($protocolo[0])."://".$_SERVER['HTTP_HOST'].$atual.$diretorios[2]."/";
@@ -420,7 +428,6 @@ if (isset($executa))
 	if (function_exists($executa))
 	{eval($executa."();");}
 }
-
 if(isset($wkt))
 {insereWKTUrl();}
 
@@ -480,7 +487,6 @@ Redireciona para o HTML definido em $interface, abrindo o mapa
 */
 function abreInterface(){
 	global $interface,$caminho,$tempo;
-
 	$nomeInterface = explode(".",basename($interface));
 	//$_SESSION["interface"] = $nomeInterface[0];
 	if (count(explode(".php",$interface)) > 1)
@@ -632,7 +638,7 @@ function incluiTemasIniciais()
 						if($sld != "")
 						$layern->setmetadata("wms_sld_body",str_replace('"',"'",$sld));
 						$layern->set("type",$tipotemp);
-						$layern->set("status",statustemp);
+						$layern->set("status",$statustemp);
 					}
 					ms_newLayerObj($mapn, $layern);
 				}

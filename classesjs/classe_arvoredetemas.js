@@ -978,8 +978,14 @@ i3GEO.arvoreDeTemas = {
 	},
 	adicionaNoNavegacaoDir: function(){
 		if(i3GEO.arvoreDeTemas.OPCOESADICIONAIS.navegacaoDir === true){
-			var retorno = function(){
+			var temp = function(){
 				var drives,iglt,ig,drive,tempNode;
+				drives = i3GEO.arvoreDeTemas.DRIVES;
+				if(drives == undefined || drives == "" || drives.length === 0){
+					i3GEO.arvoreDeTemas.ARVORE.draw();
+					return;
+				}
+				iglt = drives.length;
 				tempNode = new YAHOO.widget.HTMLNode(
 					{
 						html:"&nbsp;"+$trad("a6")+" <a class=ajuda_usuario target=_blank href='"+i3GEO.configura.locaplic+"/ajuda_usuario.php?idcategoria=4&idajuda=32' >&nbsp;&nbsp;&nbsp;</a>",
@@ -987,8 +993,6 @@ i3GEO.arvoreDeTemas = {
 					},
 					i3GEO.arvoreDeTemas.ARVORE.getRoot()
 				);
-				drives = i3GEO.arvoreDeTemas.DRIVES;
-				iglt = drives.length;
 				ig=0;
 				do{
 					drive = new YAHOO.widget.HTMLNode(
@@ -1001,7 +1005,7 @@ i3GEO.arvoreDeTemas = {
 				while(ig<iglt);
 				i3GEO.arvoreDeTemas.ARVORE.draw();
 			};
-			i3GEO.arvoreDeTemas.listaDrives(i3GEO.arvoreDeTemas.SID,i3GEO.arvoreDeTemas.LOCAPLIC,retorno);
+			i3GEO.arvoreDeTemas.listaDrives(i3GEO.arvoreDeTemas.SID,i3GEO.arvoreDeTemas.LOCAPLIC,temp);
 		}	
 	},
 	/*

@@ -47,7 +47,7 @@ Arquivo: ms_configura.php
 	
 	Parâmetros registrados no Linkedin para permitir que o i3Geo faça autenticação com base na conta do usuário
 	
-	O Linkedin exige que cada site seja registrado para permitir que a API de autenticação funcione
+	O Lin$basekedin exige que cada site seja registrado para permitir que a API de autenticação funcione
 	
 	Veja o site para maiores informações: http://developer.linkedin.com/docs/DOC-1008
 
@@ -401,7 +401,15 @@ else //se for linux
 		$locaplic = "/var/www/html/i3geo";
 	}
 	$editores = array("127.0.0.1","localhost");
-	$navegadoresLocais = "";
+	//$navegadoresLocais = "";
+	$navegadoresLocais = array(
+							array(
+							"ip"=>"127.0.0.1",
+							"drives"=>array(
+										array("caminho"=>"/home","nome"=>"home")
+										)
+							)
+						);
 	$locmapserv = "/cgi-bin/mapserv";
 	$R_path = "R";//se vc não instalou o R no seu servidor, tente o endereço $R_path = $locaplic."/pacotes/r/linux/r";
 	$postgis_mapa = "";

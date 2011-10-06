@@ -186,10 +186,10 @@ else
 			$f = "/var/www/i3geo/aplicmap/geral1debianv".$versao.".map";
 		}
 		if($f == "" && file_exists('/var/www/html/i3geo/aplicmap/geral1fedorav'.$versao.'.map')){
-			$f = "/var/www/i3geo/aplicmap/geral1fedorav".$versao.".map";
+			$f = "/var/www/html/i3geo/aplicmap/geral1fedorav".$versao.".map";
 		}
 		if($f == "" && file_exists('/opt/www/html/i3geo/aplicmap/geral1fedorav'.$versao.'.map')){
-			$f = "/opt/www/i3geo/aplicmap/geral1v".$versao.".map";
+			$f = "/opt/www/html/i3geo/aplicmap/geral1v".$versao.".map";
 		}
 		if($f == "")
 		{$f = $locaplic."/aplicmap/geral1v".$versao.".map";}
