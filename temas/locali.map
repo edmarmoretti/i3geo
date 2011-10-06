@@ -7,7 +7,7 @@ MAP
     METADATA
       "LTEMPOITEMIMAGEM"	""
       "TIP"	"TIPO,ANOCRIA,NOMELOC"
-      "cache"	""
+      "cache"	"sim"
       "LTEMPOITEMDESCRICAO"	"TIPO"
       "CLASSE"	"SIM"
       "palletestep"	""

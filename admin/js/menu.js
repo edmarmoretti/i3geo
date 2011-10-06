@@ -62,7 +62,7 @@ function montaTabela_M(dados)
         var formatTexto = function(elCell, oRecord, oColumn, oData)
         {
             if(oData === ""){
-				oData = "<span style='color:gray' >Clique para editar, tecle enter e depois salve</span>";
+				oData = "<span style='color:gray' ></span>";
 			}
 			elCell.innerHTML = "<pre ><p style=cursor:pointer title='clique para editar'>" + oData + "</pre>";
         };

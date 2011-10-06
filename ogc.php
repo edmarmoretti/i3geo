@@ -57,6 +57,7 @@ ogc.php?intervalo=0,50
 //
 //validações e includes
 //
+$cache = true;
 if (!function_exists('ms_GetVersion'))
 {
 	if (strtoupper(substr(PHP_OS, 0, 3) == 'WIN'))
@@ -119,22 +120,29 @@ $versao = $versao["principal"];
 $req = ms_newowsrequestobj();
 $tipo = "";
 $_GET = array_merge($_GET,$_POST);
+if(isset($_GET["sld"]) || isset($_GET["filter"]))
+{$cache = false;}
 foreach ($_GET as $k=>$v)
 {
 	$req->setParameter($k, $v);
-	if(strtolower($v) == "getcapabilities")
-	{$tipo = "metadados";}
+	if(strtolower($v) == "getcapabilities"){
+		$tipo = "metadados";
+		$cache = false;
+	}
 	if(strtolower($k) == "layers")
 	{$tema = $v;}
 	if(strtolower($k) == "layer")
 	{$tema = $v;}
 }
 $listaepsg = $srs." EPSG:4291 EPSG:4326 EPSG:22521 EPSG:22522 EPSG:22523 EPSG:22524 EPSG:22525 EPSG:29101 EPSG:29119 EPSG:29120 EPSG:29121 EPSG:29122 EPSG:29177 EPSG:29178 EPSG:29179 EPSG:29180 EPSG:29181 EPSG:29182 EPSG:29183 EPSG:29184 EPSG:29185";
+
 if(count($_GET) == 0){
 	$tipo="intervalo";
 	$req->setParameter("REQUEST", "getCapabilities");
 	$req->setParameter("SERVICE", "WMS");
+	$cache = false;
 }
+
 if(isset($tema) && $tipo != "metadados")
 {$tipo = "";}
 if(!isset($version))
@@ -160,9 +168,6 @@ $oMap->setmetadata("ows_onlineresource",$or);
 $oMap->setmetadata("wms_onlineresource",$or);
 $oMap->setmetadata("wms_title",$tituloInstituicao." - i3geo");
 $oMap->setmetadata("wfs_title",$tituloInstituicao." - i3geo");
-//qd definido aqui, não funciona no qgis
-//$oMap->setmetadata("ows_srs",$listaepsg);
-//$oMap->setmetadata("wms_srs",$listaepsg);
 $oMap->setmetadata("wms_attribution_logourl_format","image/png");
 $oMap->setmetadata("wms_attribution_logourl_height","56");
 $oMap->setmetadata("wms_attribution_logourl_width","85");
@@ -198,6 +203,9 @@ if ($tipo == "" || $tipo == "metadados")
 			if(count($ts)==1)
 			{
 				$l->set("name",$tx);
+				if($cache == true && strtolower($l->getmetadata("cache")) == "sim"){
+					carregaCacheImagem($_GET["BBOX"],$t,$_GET["WIDTH"],$_GET["HEIGHT"]);
+				}
 			}
 			$l->setmetadata("gml_include_items","all");
 			$l->set("dump",MS_TRUE);
@@ -312,12 +320,12 @@ else
 
 								$l->setmetadata("ows_title",pegaNome($l));
 								$l->setmetadata("ows_srs",$listaepsg);
-								//$l->setmetadata("wms_srs","EPSG:4291 EPSG:4326");
 								$l->set("status",MS_OFF);
 								$l->setmetadata("gml_include_items","all");
 								$l->set("dump",MS_TRUE);
 								$l->setmetadata("WMS_INCLUDE_ITEMS","all");
 								$l->setmetadata("WFS_INCLUDE_ITEMS","all");
+								
 								$l->setmetadata("ows_metadataurl_href",$c["fonte"]);
 								$l->setmetadata("ows_metadataurl_type","TC211");
 								$l->setmetadata("ows_metadataurl_format","text/html");
@@ -328,7 +336,7 @@ else
 									$l->setmetadata("wms_attribution_logourl_height","50");
 									$l->setmetadata("wms_attribution_logourl_width","50");
 									$l->setmetadata("wms_attribution_logourl_href",$mini);
-								}
+								}								
 								ms_newLayerObj($oMap, $l);
 							}
 						}
@@ -346,7 +354,7 @@ if(strtolower($request) == "getcapabilities")
 //header("Content-type: application/xml");
 header("Content-type: $contenttype");
 
-ms_iogetStdoutBufferBytes();
+$buffer = ms_iogetStdoutBufferBytes();
 ms_ioresethandlers();
 //
 //funções
@@ -416,6 +424,49 @@ function ogc_imprimeListaDeTemas()
 	}
 	echo $imprimir."</body></html>";
 }
+function carregaCacheImagem($bbox,$layer,$w,$h){
+	global $dir_tmp;
+
+	$nome = $w.$h.$bbox.".png";
+	$nome = $dir_tmp."/cache/".$layer."/".$nome;
+	if(file_exists($nome))
+	{
+		if (!function_exists('imagepng'))
+		{
+			$s = PHP_SHLIB_SUFFIX;
+			@dl( 'php_gd2.'.$s );
+			if (!function_exists('imagepng'))
+			@dl( 'php_gd.'.$s );
+		}
+		@$img = imagecreatefrompng($nome);
+		if(!$img)
+		{
+			/* Create a blank image */
+			$img  = imagecreatetruecolor($w, $h);
+			imagealphablending($img, false);
+			imagesavealpha($img, true);
+
+			$bgc = imagecolorallocatealpha($img, 255, 255, 255,127);
+			$tc  = imagecolorallocate($img, 255, 0, 0);
+
+			imagefilledrectangle($img, 0, 0, $w, $h, $bgc);
+			/* Output an error message */
+			imagestring($img, 3, 5, 5, 'Erro ao ler ' . $nome, $tc);
+		}
+		else
+		{
+			imagealphablending($img, false);
+			imagesavealpha($img, true);
+		}
+		ob_clean();
+		error_reporting(0);
+		echo header("Content-type: image/png \n\n");
+		imagepng($img);
+		imagedestroy($img);
+		exit;
+	}
+}
+
 ?>
 
 

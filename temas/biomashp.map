@@ -7,7 +7,7 @@ MAP
     GROUP "biomashp"
     METADATA
       "ltempoitemimagem"	""
-      "cache"	""
+      "cache"	"sim"
       "CLASSE"	"SIM"
       "ltempoitemdescricao"	""
       "palletestep"	""
