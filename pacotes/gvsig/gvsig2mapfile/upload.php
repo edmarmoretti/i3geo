@@ -8,20 +8,30 @@ if (isset($_FILES['i3GEOuploadfile']['name']))
 {
 	require_once ("../../../ms_configura.php");
 	include_once("class.gvsig2mapfile.php");
-	if (strtoupper(substr(PHP_OS, 0, 3) == 'WIN'))
-	{$mapn = ms_newMapObj($locaplic."/aplicmap/geral1windowsv".$versao.".map");}
-	else
-	{
-		if(file_exists('/var/www/i3geo/aplicmap/geral1debianv'.$versao.'.map')){
-			$mapn = ms_newMapObj("/var/www/i3geo/aplicmap/geral1debianv".$versao.".map");
+	if($base == "" or !isset($base)){
+		$base = "";
+		if (strtoupper(substr(PHP_OS, 0, 3) == 'WIN'))
+		{$base = $locaplic."/aplicmap/geral1windowsv".$versao.".map";}
+		else
+		{
+			if($base == "" && file_exists('/var/www/i3geo/aplicmap/geral1debianv'.$versao.'.map')){
+				$base = "/var/www/i3geo/aplicmap/geral1debianv".$versao.".map";
+			}
+			if($f == "" && file_exists('/var/www/html/i3geo/aplicmap/geral1fedorav'.$versao.'.map')){
+				$base = "/var/www/html/i3geo/aplicmap/geral1fedorav".$versao.".map";
+			}
+			if($f == "" && file_exists('/opt/www/html/i3geo/aplicmap/geral1fedorav'.$versao.'.map')){
+				$base = "/opt/www/html/i3geo/aplicmap/geral1v".$versao.".map";
+			}
+			if($f == "")
+			{$base = $locaplic."/aplicmap/geral1v".$versao.".map";}
 		}
-		if(file_exists('/var/www/html/i3geo/aplicmap/geral1fedorav'.$versao.'.map')){
-			$mapn = ms_newMapObj("/var/www/i3geo/aplicmap/geral1fedorav".$versao.".map");
-		}
-		if(file_exists('/opt/www/html/i3geo/aplicmap/geral1fedorav'.$versao.'.map')){
-			$mapn = ms_newMapObj("/opt/www/i3geo/aplicmap/geral1v".$versao.".map");
-		}
-	}	
+	}
+	else{
+		if(!file_exists($base))
+		{$base = $locaplic."/aplicmap/".$base;}
+	}
+	$mapn = ms_newMapObj($base);
 	//echo "<p>Carregando o arquivo...</p>";
 	//verifica nomes
 	verificaNome($_FILES['i3GEOuploadfile']['name']);

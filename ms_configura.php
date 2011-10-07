@@ -47,7 +47,7 @@ Arquivo: ms_configura.php
 	
 	Parâmetros registrados no Linkedin para permitir que o i3Geo faça autenticação com base na conta do usuário
 	
-	O Lin$basekedin exige que cada site seja registrado para permitir que a API de autenticação funcione
+	O Linkedin exige que cada site seja registrado para permitir que a API de autenticação funcione
 	
 	Veja o site para maiores informações: http://developer.linkedin.com/docs/DOC-1008
 
@@ -384,6 +384,20 @@ if (strtoupper(substr(PHP_OS, 0, 3) == 'WIN'))
 	 {string}
 	*/
 	$interfacePadrao = "openlayers.htm";
+	/*
+	Variable: base
+	
+	Enderço do arquivo mapfile que será utilizado como base para a criação do mapa
+	
+	Se vc não usar o caminho completo, o arquivo será procurado em i3geo/aplicmap
+	
+	Quando não for definido, o i3Geo tentará escolher o mapfile mais adequado, conforme o que existir em i3geo/aplicmap
+	
+	A escolha depende do sistema operacional e da versão do Mapserver.
+	
+	Vc pode usar essa variável para customizar a inicialização do mapa.
+	*/
+	$base = "";
 }
 else //se for linux
 {
@@ -417,5 +431,6 @@ else //se for linux
 	$expoeMapfile = "sim";
 	$conexaoadmin = "";//$locaplic."/admin/php/conexaopostgresql.php";
 	$interfacePadrao = "openlayers.htm";
+	$base = "";
 }
 ?>

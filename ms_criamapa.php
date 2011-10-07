@@ -66,7 +66,8 @@ Arquivo: i3geo/ms_criamapa.php
 
 Parametros:
 
-base - arquivo mapfile que servirá de base para a criação do mapa.Por default, são utilizados os arquivos aplicmap/geral1.map (para linux) ou aplicmap/geral1windows.map (para windows).
+base - arquivo mapfile que servirá de base para a criação do mapa.Por default, são utilizados os arquivos existentes em i3geo/aplicmap (geral1windows, geral1,...)
+	Essa variável pode ser definida em ms_configura também. Se não estiver definida em nenhum lugar, o i3Geo tentará descobrir o arquivo adequado a ser utilizado.
 
 temasa - lista, separada por espaços, com os nomes dos arquivos map que serão adicionados ao mapa. Se o arquivo map não estiver no diretório i3geo/temas, o nome deve incluir o caminho completo no servidor. O arquivo map pode conter mais de um layer pois todos os existentes serão adicionados ao mapa. Por default, todos os layers encontrados nos mapfiles são adicionados ao mapa com o status de desenho em OFF.
 
@@ -165,8 +166,16 @@ include_once ($caminho."classesphp/pega_variaveis.php");
 include_once ($caminho."classesphp/funcoes_gerais.php");
 $versao = versao();
 $versao = $versao["principal"];
+//
+//a variável $base pode ser definida em ms_configura, mas a preferência é pela definição já existente
+//por isso, $base é guardada em uma variável e retomada após o include de ms_configura.php
+//
+if(isset($base))
+{$tempBaseX = $base;}
 if(!isset($dir_tmp))
 {include_once ($caminho."ms_configura.php");}
+if(isset($tempBaseX) && $tempBaseX != "")
+{$base = $tempBaseX;}
 
 if (!isset($debug))
 {error_reporting(0);$debug="nao";}
@@ -293,7 +302,7 @@ $postgis_mapa = $postgis_mapa_;
 
 Seleciona os arquivos mapfile que serão carregados como base conforme o tipo de sistema operacional.
 
-A variável $base pode ser definida como um parâmetro na inicialização, caso contrário, é utilizado o padrão.
+A variável $base pode ser definida como um parâmetro na inicialização, caso contrário será utilizado o valor definido em ms_configura.php ou o i3Geo tentará descobrir o melhor arquivo a ser usado, conforme o que existir em i3geo/aplicmap.
 
 Os arquivos .map padrão são armazenados em i3geo/aplicmap.
 O arquivo é lido conforma a característica do sistema operacional.

@@ -2015,25 +2015,30 @@ function downloadTema2($map_file,$tema,$locaplic,$dir_tmp,$postgis_mapa)
 	$nomeRand = true;
 	if (($map_file == "") || (!@ms_newMapObj($map_file))) //a funcao foi chamada do aplicativo datadownload
 	{
-
-		$f = "";
-		if (strtoupper(substr(PHP_OS, 0, 3) == 'WIN'))
-		{$f = $locaplic."/aplicmap/geral1windowsv".$versao.".map";}
-		else
-		{
-			if($f == "" && file_exists('/var/www/i3geo/aplicmap/geral1debianv'.$versao.'.map')){
-				$f = "/var/www/i3geo/aplicmap/geral1debianv".$versao.".map";
+		if($base == "" or !isset($base)){
+			$base = "";
+			if (strtoupper(substr(PHP_OS, 0, 3) == 'WIN'))
+			{$base = $locaplic."/aplicmap/geral1windowsv".$versao.".map";}
+			else
+			{
+				if($base == "" && file_exists('/var/www/i3geo/aplicmap/geral1debianv'.$versao.'.map')){
+					$base = "/var/www/i3geo/aplicmap/geral1debianv".$versao.".map";
+				}
+				if($f == "" && file_exists('/var/www/html/i3geo/aplicmap/geral1fedorav'.$versao.'.map')){
+					$base = "/var/www/html/i3geo/aplicmap/geral1fedorav".$versao.".map";
+				}
+				if($f == "" && file_exists('/opt/www/html/i3geo/aplicmap/geral1fedorav'.$versao.'.map')){
+					$base = "/opt/www/html/i3geo/aplicmap/geral1v".$versao.".map";
+				}
+				if($f == "")
+				{$base = $locaplic."/aplicmap/geral1v".$versao.".map";}
 			}
-			if($f == "" && file_exists('/var/www/html/i3geo/aplicmap/geral1fedorav'.$versao.'.map')){
-				$f = "/var/www/html/i3geo/aplicmap/geral1fedorav".$versao.".map";
-			}
-			if($f == "" && file_exists('/opt/www/html/i3geo/aplicmap/geral1fedorav'.$versao.'.map')){
-				$f = "/opt/www/html/i3geo/aplicmap/geral1v".$versao.".map";
-			}
-			if($f == "")
-			{$f = $locaplic."/aplicmap/geral1v".$versao.".map";}
 		}
-		$map_tmp = @ms_newMapObj($f);	
+		else{
+			if(!file_exists($base))
+			{$base = $locaplic."/aplicmap/".$base;}
+		}
+		$map_tmp = ms_newMapObj($base);
 		$map_file = $dir_tmp."/".nomerandomico(20).".map";
 		$map_tmp->save($map_file);
 		$nomeRand = false;

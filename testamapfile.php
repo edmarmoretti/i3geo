@@ -109,7 +109,7 @@ if (isset($map) && $map != "")
 }
 function verifica($map,$solegenda)
 {
-	global $tipo,$locaplic,$postgis_mapa,$versao;
+	global $tipo,$locaplic,$postgis_mapa,$versao,$base;
 	if ($tipo == "mini" && file_exists('temas/miniaturas/'.$map.".mini.png"))
 	{
 		Header("Content-type: image/png");
@@ -141,24 +141,30 @@ function verifica($map,$solegenda)
 	if(!file_exists($tema)){echo "Arquivo ".$map." não encontrado.";exit;}
 	if ($tema != "")
 	{
-		$f = "";
-		if (strtoupper(substr(PHP_OS, 0, 3) == 'WIN'))
-		{$f = $locaplic."/aplicmap/geral1windowsv".$versao.".map";}
-		else
-		{
-			if($f == "" && file_exists('/var/www/i3geo/aplicmap/geral1debianv'.$versao.'.map')){
-				$f = "/var/www/i3geo/aplicmap/geral1debianv".$versao.".map";
+		if($base == "" or !isset($base)){
+			$base = "";
+			if (strtoupper(substr(PHP_OS, 0, 3) == 'WIN'))
+			{$base = $locaplic."/aplicmap/geral1windowsv".$versao.".map";}
+			else
+			{
+				if($base == "" && file_exists('/var/www/i3geo/aplicmap/geral1debianv'.$versao.'.map')){
+					$base = "/var/www/i3geo/aplicmap/geral1debianv".$versao.".map";
+				}
+				if($f == "" && file_exists('/var/www/html/i3geo/aplicmap/geral1fedorav'.$versao.'.map')){
+					$base = "/var/www/html/i3geo/aplicmap/geral1fedorav".$versao.".map";
+				}
+				if($f == "" && file_exists('/opt/www/html/i3geo/aplicmap/geral1fedorav'.$versao.'.map')){
+					$base = "/opt/www/html/i3geo/aplicmap/geral1v".$versao.".map";
+				}
+				if($f == "")
+				{$base = $locaplic."/aplicmap/geral1v".$versao.".map";}
 			}
-			if($f == "" && file_exists('/var/www/html/i3geo/aplicmap/geral1fedorav'.$versao.'.map')){
-				$f = "/var/www/html/i3geo/aplicmap/geral1fedorav".$versao.".map";
-			}
-			if($f == "" && file_exists('/opt/www/html/i3geo/aplicmap/geral1fedorav'.$versao.'.map')){
-				$f = "/opt/www/html/i3geo/aplicmap/geral1v".$versao.".map";
-			}
-			if($f == "")
-			{$f = $locaplic."/aplicmap/geral1v".$versao.".map";}
 		}
-		$mapa = ms_newMapObj($f);
+		else{
+			if(!file_exists($base))
+			{$base = $locaplic."/aplicmap/".$base;}
+		}
+		$mapa = ms_newMapObj($base);
 		
 		if(@ms_newMapObj($locaplic."/".$tema))
 		{

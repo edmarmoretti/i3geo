@@ -170,11 +170,19 @@ if (file_exists($dir_tmp."/teste.txt")) echo "ok\n"; else saindo("\nN&atilde;o f
 echo "Existe o geral1.map? ";
 if(file_exists("$locaplic/aplicmap/geral1.map")) echo "Sim\n"; else {echo "Nao";saindo("geral1.map n&atilde;o encontrado");}
 echo " \n";
-echo "Carregando o map_file geral1...\n";
+echo "Carregando o map_file base...\n";
 $versao = versao();
 $versao = $versao["principal"];
-if(isset($base))
-{$f = $locaplic."/aplicmap/".$base.".map";}
+if(isset($base) && $base != ""){
+	if(!file_exists($base))
+	{$f = $base;}
+	else
+	{$f = $locaplic."/aplicmap/".$base.".map";}
+	if(!file_exists($base)){
+		echo "<span style=color:red >ARQUIVO $base NÂO FOI ENCONTRADO. CORRIJA ISSO EM ms_configura.php";
+		exit;
+	}
+}
 else
 {
 	$f = "";

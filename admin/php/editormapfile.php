@@ -93,25 +93,30 @@ switch (strtoupper($funcao))
 	*/	
 	case "EDITASIMBOLO":
 		include_once("$locaplic/classesphp/classe_legenda.php");
-
-		$f = "";
-		if (strtoupper(substr(PHP_OS, 0, 3) == 'WIN'))
-		{$f = $locaplic."/aplicmap/geral1windowsv".$versao.".map";}
-		else
-		{
-			if($f == "" && file_exists('/var/www/i3geo/aplicmap/geral1debianv'.$versao.'.map')){
-				$f = "/var/www/i3geo/aplicmap/geral1debianv".$versao.".map";
+		if($base == "" or !isset($base)){
+			$base = "";
+			if (strtoupper(substr(PHP_OS, 0, 3) == 'WIN'))
+			{$base = $locaplic."/aplicmap/geral1windowsv".$versao.".map";}
+			else
+			{
+				if($base == "" && file_exists('/var/www/i3geo/aplicmap/geral1debianv'.$versao.'.map')){
+					$base = "/var/www/i3geo/aplicmap/geral1debianv".$versao.".map";
+				}
+				if($f == "" && file_exists('/var/www/html/i3geo/aplicmap/geral1fedorav'.$versao.'.map')){
+					$base = "/var/www/html/i3geo/aplicmap/geral1fedorav".$versao.".map";
+				}
+				if($f == "" && file_exists('/opt/www/html/i3geo/aplicmap/geral1fedorav'.$versao.'.map')){
+					$base = "/opt/www/html/i3geo/aplicmap/geral1v".$versao.".map";
+				}
+				if($f == "")
+				{$base = $locaplic."/aplicmap/geral1v".$versao.".map";}
 			}
-			if($f == "" && file_exists('/var/www/html/i3geo/aplicmap/geral1fedorav'.$versao.'.map')){
-				$f = "/var/www/i3geo/aplicmap/geral1fedorav".$versao.".map";
-			}
-			if($f == "" && file_exists('/opt/www/html/i3geo/aplicmap/geral1fedorav'.$versao.'.map')){
-				$f = "/opt/www/i3geo/aplicmap/geral1v".$versao.".map";
-			}
-			if($f == "")
-			{$f = $locaplic."/aplicmap/geral1v".$versao.".map";}
 		}
-		$m = new Legenda($f,$locaplic);
+		else{
+			if(!file_exists($base))
+			{$base = $locaplic."/aplicmap/".$base;}
+		}
+		$m = new Legenda($base,$locaplic);
 		retornaJSON($m->listaSimbolos($tipo,$dir_tmp,"",$onclick));
 		exit;
 	break;	
