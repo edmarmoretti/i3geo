@@ -100,7 +100,7 @@ Cria um objeto map e seta a variavel tema
 parameters:
 $map_file - Endereço do mapfile no servidor. 
 
-$tema - nome do tema que será processado
+$tema - nome do tema que será processado. (Pode ser uma lista separada por ',' mas só funciona nas funções que trabalham sobre os índices dos layers)
 
 $locaplic - (opcional) endereço do i3geo
 
@@ -124,20 +124,24 @@ $ext - (opcional) extensão geográfica que será aplicada ao mapa
 			$this->arquivo = $map_file;
 			if($tema != "" && @$this->mapa->getlayerbyname($tema))
 			{
-				$this->layer = $this->mapa->getlayerbyname($tema);
-				$this->nome = $tema;
-				$vermultilayer = new vermultilayer();
-				$vermultilayer->verifica($map_file,$tema);
-				if ($vermultilayer->resultado == 1) // o tema e multi layer
-				{$ls = $vermultilayer->temas;}
-				else
-				{$ls[] = $tema;}
-				$this->grupo = $ls;
-				$this->visiveis = $vermultilayer->temasvisiveis;
-				foreach ($ls as $l)
-				{
-					$t = $this->mapa->getlayerbyname($l);
-					$this->indices[] = $t->index;
+				$listaTemas = str_replace(" ",",",$tema);
+				$listaTemas = explode(",",$tema);
+				foreach ($listaTemas as $tema){
+					$this->layer = $this->mapa->getlayerbyname($tema);
+					$this->nome = $tema;
+					$vermultilayer = new vermultilayer();
+					$vermultilayer->verifica($map_file,$tema);
+					if ($vermultilayer->resultado == 1) // o tema e multi layer
+					{$ls = $vermultilayer->temas;}
+					else
+					{$ls[] = $tema;}
+					$this->grupo = $ls;
+					$this->visiveis = $vermultilayer->temasvisiveis;
+					foreach ($ls as $l)
+					{
+						$t = $this->mapa->getlayerbyname($l);
+						$this->indices[] = $t->index;
+					}
 				}
 			}
 			if($ext && $ext != ""){
@@ -458,45 +462,58 @@ $testa - Testa o filtro e retorna uma imagem.
 */
 	function insereFiltro($filtro,$testa="")
 	{
-		if(!$this->layer){return "erro";}
-		$this->layer->setmetadata("cache","");
-		$fil = $this->layer->getFilterString();
-		$filtro = str_replace("|","'",$filtro);
-		if ($this->layer->connectiontype == MS_POSTGIS)
-		{
-			$filtro = str_replace("'[","",$filtro);
-			$filtro = str_replace("[","",$filtro);
-			$filtro = str_replace("]'","",$filtro);
-			$filtro = str_replace("]","",$filtro);
-			$filtro = str_replace("("," ",$filtro);
-			$filtro = str_replace(")"," ",$filtro);
-		}
-        if ($filtro == "")       
-        {$this->layer->setfilter($filtro);}
-        else
-        {
-            $this->layer->setfilter($filtro);
-            $v = versao();
-			//corrige bug do mapserver
-            if (($v["completa"] == "4.10.0") && ($this->layer->connectiontype == MS_POSTGIS))
-            {$this->layer->setfilter("\"".$filtro."\"");}
-        }        
-		if ($testa == "")
-		{
-			$img = $this->mapa->prepareimage();
-			if ($this->layer->draw($img) == 0)
+		foreach($this->indices as $indice){
+			$layer = $this->mapa->getlayer($indice);
+			if(!$layer){return "erro";}
+			$layer->setmetadata("cache","");
+			$fil = $layer->getFilterString();
+			$filtro = str_replace("|","'",$filtro);
+			if ($layer->connectiontype == MS_POSTGIS)
 			{
-				$this->layer->setMetaData("cache","");
-				return ("ok");
+				$filtro = str_replace("'[","",$filtro);
+				$filtro = str_replace("[","",$filtro);
+				$filtro = str_replace("]'","",$filtro);
+				$filtro = str_replace("]","",$filtro);
+				$filtro = str_replace("("," ",$filtro);
+				$filtro = str_replace(")"," ",$filtro);
 			}
+			if ($filtro == "")       
+			{$layer->setfilter($filtro);}
 			else
-			{return ("erro. Problemas com o filtro."." ".$filtro);}
+			{
+				$layer->setfilter($filtro);
+				$v = versao();
+				//corrige bug do mapserver
+				if (($v["completa"] == "4.10.0") && ($layer->connectiontype == MS_POSTGIS))
+				{$layer->setfilter("\"".$filtro."\"");}
+			}        
+			if ($testa == "")
+			{
+				$layer->setMetaData("cache","");
+				/*
+				$img = $this->mapa->prepareimage();
+				if ($this->layer->draw($img) == 0)
+				{
+					$this->layer->setMetaData("cache","");
+					return ("ok");
+				}
+				else
+				{return ("erro. Problemas com o filtro."." ".$filtro);}
+				*/
+			}
+			/*
+			else
+			{
+				$i = gravaImagemMapa($this->mapa);
+				return ($i["url"]);
+			}
+			*/
 		}
-		else
-		{
+		if ($testa != ""){
 			$i = gravaImagemMapa($this->mapa);
 			return ($i["url"]);
 		}
+		return "ok";
 	}
 /*
 function: mudaTransparencia
