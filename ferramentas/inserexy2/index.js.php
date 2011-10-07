@@ -178,9 +178,9 @@ i3GEOF.inserexy = {
 		$inputText("","","i3GEOinserexyvalorItem","",20,"") +
 		'	<br></div>' +
 		'	<div id=i3GEOinserexymen1 style="display:block;left:0px;">' +
+		'		<p class=paragrafo >Ap&oacute;s selecionar ou criar um tema, clique no mapa para inserir os pontos ou use as op&ccedil;&otilde;es das guias acima.</p>' +
 		'		<p class=paragrafo >Para inserir pontos, &eacute; necess&aacute;rio a exist&ecirc;ncia de um tema edit&aacute;vel dispon&iacute;vel no mapa.</p>' +
 		'		<p class=paragrafo >Utilize o bot&atilde;o "criar um novo" se n&atilde;o existir nenhum tema desse tipo no mapa.</p>' +
-		'		<p class=paragrafo >Ap&oacute;s selecionar ou criar um tema, clique no mapa para inserir os pontos ou use as op&ccedil;&otilde;es das guias acima.</p>' +
 		'	</div>' +
 		'</div>' +
 

@@ -4,6 +4,46 @@ SYMBOLSET
 #está aqui para efeitos de compatibilidade
 #pois é utilizao em aplicmap/geral1.map e outros
 #
+  SYMBOL 
+    NAME 'google1' 
+		TYPE VECTOR
+		FILLED TRUE 
+		POINTS 
+			90	-363
+			140	-363
+			165	-347
+			177	-335
+			188	-323
+			201	-311
+			213	-287
+			213	-192
+			199	-169
+			188	-154
+			175	-144
+			163	-132
+			152	-106
+			141	-82
+			126	-46
+			117	50
+			97	50
+			85	-46
+			74	-82
+			61	-106
+			50	-132
+			38	-144
+			25	-154
+			12	-169
+			0	-192
+			0	-287
+			14	-311
+			25	-323
+			38	-335
+			51	-347
+			73	-363
+			120	-363
+		END 
+	END
+
 	Symbol 
 		NAME 'p0' 
 		TYPE VECTOR 
