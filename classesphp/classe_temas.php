@@ -122,7 +122,7 @@ $ext - (opcional) extensão geográfica que será aplicada ao mapa
 		{
 			$this->mapa = ms_newMapObj($map_file);
 			$this->arquivo = $map_file;
-			if($tema != "" && @$this->mapa->getlayerbyname($tema))
+			if($tema != "")
 			{
 				$listaTemas = str_replace(" ",",",$tema);
 				$listaTemas = explode(",",$tema);
