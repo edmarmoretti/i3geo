@@ -96,6 +96,7 @@ i3GEO.editorOL = {
 		new OpenLayers.Control.KeyboardDefaults()	
 	],
 	tiles: true,
+	incluilayergrafico: true,
 	numzoom: 12,
 	maxext: "",
 	mapext: new OpenLayers.Bounds(-76.5125927,-39.3925675209,-29.5851853,9.49014852081),
@@ -144,15 +145,41 @@ i3GEO.editorOL = {
 		if(i3GEO.editorOL.tiles === false || i3GEO.editorOL.tiles === "false"){
 			single = true;
 		}
+		if(i3GEO.editorOL.incluilayergrafico === "false"){
+			i3GEO.editorOL.incluilayergrafico = false;
+		}
+		if(i3GEO.editorOL.incluilayergrafico === "true"){
+			i3GEO.editorOL.incluilayergrafico = true;
+		}
 		style.addRules([
 			new OpenLayers.Rule({symbolizer: sketchSymbolizers})
-		]);				
-		i3GEO.editorOL.layergrafico = new OpenLayers.Layer.Vector("Edição",{
-				styleMap: styleMap1,
-				displayInLayerSwitcher:true,
-				visibility:true
-			}
-		);		
+		]);
+		if(i3GEO.editorOL.incluilayergrafico === true){
+			i3GEO.editorOL.layergrafico = new OpenLayers.Layer.Vector("Edição",{
+					styleMap: styleMap1,
+					displayInLayerSwitcher:true,
+					visibility:true
+				}
+			);
+		}
+		else{
+			i3GEO.editorOL.layergrafico = "";
+			i3GEO.editorOL.botoes.linha=false;
+			i3GEO.editorOL.botoes.ponto=false;
+			i3GEO.editorOL.botoes.poligono=false;
+			i3GEO.editorOL.botoes.texto=false;
+			i3GEO.editorOL.botoes.edita=false;
+			i3GEO.editorOL.botoes.listag=false;
+			i3GEO.editorOL.botoes.corta= false;
+			i3GEO.editorOL.botoes.apaga=false;
+			i3GEO.editorOL.botoes.selecao=false;
+			i3GEO.editorOL.botoes.salva=false;
+			i3GEO.editorOL.botoes.propriedades=false;
+			i3GEO.editorOL.botoes.fecha=false;
+			i3GEO.editorOL.botoes.tools=false;
+			i3GEO.editorOL.botoes.undo=false;
+			i3GEO.editorOL.botoes.frente=false;
+		}
 		if(i3GEO.editorOL.mapa === "")
 		{alert("O objeto i3GEO.editorOL.mapa precisa ser criado com new OpenLayers.Map()");return;}
 		if(i3GEO.editorOL.maxext !== ""){
@@ -460,6 +487,7 @@ i3GEO.editorOL = {
 		}		
 	},
 	captura: function(lonlat){
+		if(i3GEO.editorOL.layergrafico !== ""){return;}
 		var layers = [i3GEO.editorOL.layerAtivo()],
 			xy = lonlat.split(","),
 			u = layers[0].url+"&request=getfeature&service=wfs&version=1.0.0";
@@ -511,6 +539,7 @@ i3GEO.editorOL = {
 		});
 	},
 	salvaGeometrias: function(){
+		if(i3GEO.editorOL.layergrafico !== ""){return;}
 		var geos = i3GEO.editorOL.layergrafico.selectedFeatures;
 		var n = geos.length;
 		var ins = "";
@@ -539,6 +568,7 @@ i3GEO.editorOL = {
 		i3GEO.editorOL.processageo("converteSHP");
 	},	
 	listaGeometriasSel: function(){
+		if(i3GEO.editorOL.layergrafico !== ""){return;}
 		var geos = i3GEO.editorOL.layergrafico.selectedFeatures;
 		var n = geos.length;
 		var ins = "";

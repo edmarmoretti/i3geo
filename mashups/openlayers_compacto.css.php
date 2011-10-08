@@ -360,7 +360,7 @@ div.olControlMousePosition {
  */
 .olControlLayerSwitcher {
     position: absolute;
-    top: 25px;
+    top: 35px;
     right: 0px;
     width: 20em;
     font-family: sans-serif;
