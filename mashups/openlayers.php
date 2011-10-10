@@ -158,6 +158,7 @@ Parâmetros:
 	marca - nome do arquivo que contém a imagem que será utilizada para mostrar as coordenadas
 	tiles (true|false) - indica se o modo tile será usado ou não (true por default). O modo tile pode tornar o mashup mais lento em algumas situações.
 	incluilayergrafico (true|false) - indica se o layer que recebe elementos gráficos será adicionado ou não ao mapa
+	ativalayerswicther (true|false) - inicia o mapa com a caixa de escolha das camadas (layerSwitcher) aberta ou não. Por default, inicia fechada
 	
 	fundo - lista com os nomes, separados por ',' dos layers que serão usados como fundo para o mapa. Se não for definido,
 			será usado o default. O primeiro da lista será o fundo ativo. Se na lista de temas de fundo estiver algum
@@ -293,6 +294,11 @@ i3GEO.editorOL.incluilayergrafico = "<?php
 	if(isset($incluilayergrafico)){echo $incluilayergrafico;}
 	else
 	{echo "true";}
+?>";
+i3GEO.editorOL.ativalayerswitcher = "<?php
+	if(isset($ativalayerswitcher)){echo $ativalayerswitcher;}
+	else
+	{echo "false";}
 ?>";
 <?php if(isset($fundo)){
 	echo "i3GEO.editorOL.fundo = '".implode(",",$fundo)."';";

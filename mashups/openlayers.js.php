@@ -97,6 +97,7 @@ i3GEO.editorOL = {
 	],
 	tiles: true,
 	incluilayergrafico: true,
+	ativalayerswitcher: false,
 	numzoom: 12,
 	maxext: "",
 	mapext: new OpenLayers.Bounds(-76.5125927,-39.3925675209,-29.5851853,9.49014852081),
@@ -145,6 +146,12 @@ i3GEO.editorOL = {
 		if(i3GEO.editorOL.tiles === false || i3GEO.editorOL.tiles === "false"){
 			single = true;
 		}
+		if(i3GEO.editorOL.ativalayerswitcher === "false"){
+			i3GEO.editorOL.ativalayerswitcher = false;
+		}
+		if(i3GEO.editorOL.ativalayerswitcher === "true"){
+			i3GEO.editorOL.ativalayerswitcher = true;
+		}		
 		if(i3GEO.editorOL.incluilayergrafico === "false"){
 			i3GEO.editorOL.incluilayergrafico = false;
 		}
@@ -229,6 +236,8 @@ i3GEO.editorOL = {
 		i3GEO.editorOL.coordenadas();	
 		i3GEO.editorOL.criaJanelaBusca();
 		i3GEO.editorOL.criaBotoes(i3GEO.editorOL.botoes);
+		if(i3GEO.editorOL.ativalayerswitcher === true)
+		{i3GEO.editorOL.ativaLayerSwitcher();}
 	},
 	layersLigados: function(){
 		var layers = i3GEO.editorOL.mapa.layers,
@@ -1575,5 +1584,20 @@ i3GEO.editorOL = {
 		}
 		else
 		{alert("Selecione pelo menos um elemento");}	
+	},
+	pegaControle: function(classe){
+		var n = i3GEO.editorOL.controles.length,
+			i;
+		for(i=0;i<n;i++){
+			if(i3GEO.editorOL.controles[i].CLASS_NAME === classe)
+			{return i3GEO.editorOL.controles[i];}
+		}
+		return false;
+	},
+	ativaLayerSwitcher: function(){
+		var ls = i3GEO.editorOL.pegaControle("OpenLayers.Control.LayerSwitcher");
+		if(ls){
+			ls.maximizeDiv.click();
+		}
 	}
 };
