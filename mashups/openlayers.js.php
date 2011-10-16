@@ -79,7 +79,7 @@ i3GEO.editorOL = {
 		'ajuda':true,
 		'propriedades':true,
 		'fecha':false,
-		'tools':false,
+		'tools':true,
 		'undo':false,
 		'frente':false,
 		'legenda':true
@@ -971,12 +971,16 @@ i3GEO.editorOL = {
 			controles.push(button);
 			adiciona = true;
 		}		
-		//só funciona dentro do i3geo
 		if(botoes.tools===true && i3GEO.php){
 			button = new OpenLayers.Control.Button({
 				displayClass: "editorOLtools", 
 				trigger: function(){
-					i3GEO.editorOL.ferramentas();
+					//fora do i3geo, usa o jsts
+					if(i3GEO.php)
+					{i3GEO.editorOL.ferramentas();}
+					else
+					{i3GEO.editorOL.carregajts("i3GEO.editorOL.ferramentas()");}
+					
 				},
 				title: "ferramentas"
 			});
@@ -1341,12 +1345,16 @@ i3GEO.editorOL = {
 		geos = i3GEO.editorOL.layergrafico.features,
 		n = geos.length,
 		ins = "<table class=lista4 >";
+		ins += "<tr><td><i>Geometrias</i></td><td><i>Opções</i></td><td></td><td></td></tr>";
+
 		while(n > 0){
 			n -= 1;
 			g = geos[n].geometry;
 			ins += "<tr><td>"+g.CLASS_NAME+"</td><td style='cursor:pointer;color:blue' onclick='javascript:i3GEO.editorOL.selFeature("+n+")'>seleciona</td><td style='cursor:pointer;color:blue' onclick='javascript:i3GEO.editorOL.unselFeature("+n+")'>limpa</td><td style='cursor:pointer;color:blue' onclick='javascript:i3GEO.editorOL.flashFeaturesI("+n+")'>brilha</td></tr>";
 		}
 		ins += "</table>";
+		if(geos.length === 0)
+		{ins = "Nenhum elemento gráfico encontrado. Utilize as opções de criação de geometrias.";}
 		YAHOO.editorOL.listaGeometrias.panel.show();
 		if(i3GEO.configura)
 		{temp = $i("panellistagEditor").getElementsByTagName("div")[2];}
@@ -1364,13 +1372,15 @@ i3GEO.editorOL = {
 			'<p class=paragrafo >Operações sobre as figuras selecionadas:</p>' +
 			'<select onchange="i3GEO.editorOL.processageo(this.value);this.value = \'\'" >' +
 			'	<option value="">---</option>' +
-			'	<option value=union >União</option>' +
-			'	<option value=intersection >Intersecção</option>' +	
-			'	<option value=convexhull >Convex hull</option>' +				
-			'	<option value=boundary >Bordas</option>' +				
-			'	<option value=difference >Diferença</option>' +				
-			'	<option value=symdifference >Diferença simétrica</option>' +								
-			'</select>'+
+			'	<option value=union >União</option>';
+			if(i3GEO.php){
+				ins += '	<option value=intersection >Intersecção</option>' +	
+				'	<option value=convexhull >Convex hull</option>' +				
+				'	<option value=boundary >Bordas</option>' +				
+				'	<option value=difference >Diferença</option>' +				
+				'	<option value=symdifference >Diferença simétrica</option>';
+			}
+			ins += '</select>'+
 			'<br><br><a class=paragrafo href=# onclick="i3GEO.editorOL.layergrafico.destroyFeatures()" >Apaga tudo</a>';
 
 			YAHOO.editorOL.ferramentas.panel.setBody(ins);
@@ -1429,9 +1439,11 @@ i3GEO.editorOL = {
 			linhas = i3GEO.editorOL.retornaGeometriasTipo(geosel,"OpenLayers.Geometry.LineString");
 			pontos = i3GEO.editorOL.retornaGeometriasTipo(geosel,"OpenLayers.Geometry.Point");
 			temp = function(retorno){
-				i3GEO.janela.fechaAguarde("i3GEO.editorPoli");
-				i3GEO.janela.fechaAguarde("i3GEO.editorLinhas");
-				i3GEO.janela.fechaAguarde("i3GEO.editorPontos");
+				if(i3GEO.janela){
+					i3GEO.janela.fechaAguarde("i3GEO.editorPoli");
+					i3GEO.janela.fechaAguarde("i3GEO.editorLinhas");
+					i3GEO.janela.fechaAguarde("i3GEO.editorPontos");
+				}
 				if(retorno != "" && retorno.data && retorno.data != "" && operacao != "converteSHP")
 				{i3GEO.editorOL.substituiFeaturesSel(retorno.data);}
 				if(operacao === "converteSHP"){
@@ -1439,17 +1451,33 @@ i3GEO.editorOL = {
 					i3GEO.janela.minimiza("paneltemaativo");
 				}
 			}
-			if(polis.length > 0){
-				i3GEO.janela.abreAguarde("i3GEO.editorPoli","Poligonos");
-				i3GEO.php.funcoesGeometriasWkt(temp,polis.join("|"),operacao);				
+			if(operacao === "union" && !i3GEO.php ){
+				if(polis.length > 0){
+					temp = i3GEO.editorOL.uniaojts(polis);
+					i3GEO.editorOL.substituiFeaturesSel(temp);				
+				}
+				if(linhas.length > 0){
+					temp = i3GEO.editorOL.uniaojts(linhas);
+					i3GEO.editorOL.substituiFeaturesSel(temp);
+				}
+				if(pontos.length > 0){
+					temp = i3GEO.editorOL.uniaojts(p);
+					i3GEO.editorOL.substituiFeaturesSel(temp);
+				}			
 			}
-			if(linhas.length > 0){
-				i3GEO.janela.abreAguarde("i3GEO.editorLinhas","Linhas");
-				i3GEO.php.funcoesGeometriasWkt(temp,linhas.join("|"),operacao);				
-			}
-			if(pontos.length > 0){
-				i3GEO.janela.abreAguarde("i3GEO.editorPontos","Pontos");
-				i3GEO.php.funcoesGeometriasWkt(temp,pontos.join("|"),operacao);				
+			else{
+				if(polis.length > 0){
+					i3GEO.janela.abreAguarde("i3GEO.editorPoli","Poligonos");
+					i3GEO.php.funcoesGeometriasWkt(temp,polis.join("|"),operacao);				
+				}
+				if(linhas.length > 0){
+					i3GEO.janela.abreAguarde("i3GEO.editorLinhas","Linhas");
+					i3GEO.php.funcoesGeometriasWkt(temp,linhas.join("|"),operacao);				
+				}
+				if(pontos.length > 0){
+					i3GEO.janela.abreAguarde("i3GEO.editorPontos","Pontos");
+					i3GEO.php.funcoesGeometriasWkt(temp,pontos.join("|"),operacao);				
+				}
 			}
 			return;
 		}
@@ -1569,7 +1597,10 @@ i3GEO.editorOL = {
 		i3GEO.editorOL.selbutton.unselect(i3GEO.editorOL.layergrafico.features[index]);
 	},
 	carregajts: function(funcao){
-		i3GEO.util.scriptTag(i3GEO.configura.locaplic+"/pacotes/jsts/jstsi3geo.js",funcao,"i3GEOjts",true);
+		if(i3GEO.configura)
+		{i3GEO.util.scriptTag(i3GEO.configura.locaplic+"/pacotes/jsts/lib/jsts.js",funcao,"i3GEOjts",true);}
+		else
+		{i3GEO.util.scriptTag("../pacotes/jsts/lib/jsts.js",funcao,"i3GEOjts",true);}
 	},
 	trazParaFrente: function(){
 		var features = i3GEO.editorOL.layergrafico.selectedFeatures;

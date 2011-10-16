@@ -1524,7 +1524,7 @@ background-position:-522px -28px;
 	background-position:-725px -28px;
 }
 .olControlEditingToolbar1 {
-	width:650px;
+	width:750px;
 	float:right;
 	right: 0px;
 }
@@ -1549,15 +1549,23 @@ pre{
 	font-size: 9px;	
 }
 .yui-skin-sam .container-close {
-background:transparent url(../pacotes/yui270/build/assets/skins/sam/sprite.png) no-repeat scroll 0 -300px;
-cursor:pointer;
-height:15px;
-position:absolute;
-right:1px;
-top:1px;
-width:25px;
-z-index:2001;
-opacity:.80;
-filter:alpha(opacity=80);
+	background:transparent url(../pacotes/yui270/build/assets/skins/sam/sprite.png) no-repeat scroll 0 -300px;
+	cursor:pointer;
+	height:15px;
+	position:absolute;
+	right:1px;
+	top:1px;
+	width:25px;
+	z-index:2001;
+	opacity:.80;
+	filter:alpha(opacity=80);
+}
+.yui-skin-sam .yui-panel .hd {
+    background: url("../pacotes/yui270/build/assets/skins/sam/sprite.png") repeat-x scroll 0 -200px transparent;
+    color: #000000;
+    font-size: 93%;
+    font-weight: bold;
+    line-height: 2;
+    padding: 0 10px;
 }
 <?php if(extension_loaded('zlib')){ob_end_flush();}?>

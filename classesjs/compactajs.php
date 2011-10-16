@@ -213,6 +213,7 @@ $jsfiles = array(
 "../pacotes/yui270/build/dragdrop/dragdrop-min.js",
 "../pacotes/yui270/build/container/container-min.js",
 "../classesjs/compactados/classe_calculo_compacto.js",
+"../classesjs/compactados/classe_util_compacto.js",
 "../pacotes/openlayers/OpenLayers29.js",
 "../mashups/openlayers.js.php"
 );

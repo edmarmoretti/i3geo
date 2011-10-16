@@ -1308,7 +1308,9 @@ i3GEO.util = {
 	scriptTag: function(js,ini,id,aguarde){
 		if(typeof(console) !== 'undefined'){console.info("i3GEO.util.scriptTag()");}
 		if(!aguarde){aguarde = true;}
-		var head,script, tipojanela = i3GEO.janela.ESTILOAGUARDE;
+		var head,script, tipojanela = "";
+		if(i3GEO.janela)
+		{tipojanela = i3GEO.janela.ESTILOAGUARDE;}
 		if(!$i(id) || id === ""){
 			//i3GEO.janela.ESTILOAGUARDE = "reduzida";
 			//i3GEO.janela.abreAguarde(id+"aguarde","Carregando JS");
@@ -1320,16 +1322,20 @@ i3GEO.util = {
 					script.onreadystatechange = function(){
 						if(this.readyState === 'loaded' || this.readyState === 'complete')
 						{
-							i3GEO.janela.fechaAguarde(id+"aguarde");
-							i3GEO.janela.ESTILOAGUARDE = tipojanela;
+							if(i3GEO.janela){
+								i3GEO.janela.fechaAguarde(id+"aguarde");
+								i3GEO.janela.ESTILOAGUARDE = tipojanela;
+							}
 							eval(ini);
 						}
 					};
 				}
 				else{
 					script.onload=function(){
-						i3GEO.janela.fechaAguarde(id+"aguarde");
-						i3GEO.janela.ESTILOAGUARDE = tipojanela;
+						if(i3GEO.janela){
+							i3GEO.janela.fechaAguarde(id+"aguarde");
+							i3GEO.janela.ESTILOAGUARDE = tipojanela;
+						}
 						eval(ini);
 					};
 				}
