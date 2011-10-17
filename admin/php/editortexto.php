@@ -16,7 +16,7 @@
 <a href="../html/editormapfile.html" target="_self" >Voltar</a><br><br>
 <form action="editortexto.php?mapfile=<?php echo $_GET["mapfile"];?>" method=post > 
 
-<input type=submit value="Salvar"/><input type=button value="Testar" onclick="testar()" /> (Salve antes de testar)<br><br>
+<input type=submit value="Salvar"/><input type=button value="Testar" onclick="testar()" /><input type=button value="Testar no i3Geo" onclick="abrirI3geo()" /> (Salve antes de testar)<br><br>
 Edite:<br>
 <?php
 //evita erros removendo caracteres PHP
@@ -46,5 +46,8 @@ echo "<input type=hidden name=tipo value=gravar />";
 <script>
 function testar(){
 	window.open("../../testamapfile.php?map=<?php echo $_GET["mapfile"]; ?>");
+}
+function abrirI3geo(){
+	window.open("../../ms_criamapa.php?layers=<?php echo $_GET["mapfile"]; ?>");
 }
 </script>
