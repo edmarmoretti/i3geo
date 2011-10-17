@@ -76,8 +76,9 @@ i3GEOF.salvamapfile = {
 					}
 					else
 					{
-						var ins = "<p class=paragrafo >O tema ("+nome+") ativo possui um mapfile já criado. Ao salvar, as definições originais  de legenda, filtros e outras, serão substituídas pelas atuais</p>" +
-						'<br><br><p class=paragrafo ><input size=20 id=i3GEOsalvamapfilebotao1 type=button value="Salvar"  />&nbsp;&nbsp;<input size=20 id=i3GEOsalvamapfilebotao2 type=button value="Testar"  />';
+						var ins = "<p class=paragrafo >O tema ("+nome+") ativo possui um mapfile já criado. Ao salvar, as definições originais  de legenda, filtros e outras, serão substituídas pelas atuais" +
+						'<span id="i3GEOsalvamapconcluido" style=display:none;color:red  > Concluído!</span></p>' +
+						'<br><p class=paragrafo ><input size=20 id=i3GEOsalvamapfilebotao1 type=button value="Salvar"  />&nbsp;&nbsp;<input size=20 id=i3GEOsalvamapfilebotao2 type=button value="Testar"  />';
 						$i(iddiv).innerHTML = ins;
 						new YAHOO.widget.Button(
 							"i3GEOsalvamapfilebotao1",
@@ -106,10 +107,10 @@ i3GEOF.salvamapfile = {
 			i3GEO.janela.minimiza("i3GEOF.salvamapfile");
 		};
 		//cria a janela flutuante
-		titulo = "Salva o tema "+i3GEO.temaAtivo+" <a class=ajuda_usuario target=_blank href='" + i3GEO.configura.locaplic + "/ajuda_usuario.php?idcategoria=5&idajuda=92' >&nbsp;&nbsp;&nbsp;</a>";
+		titulo = "Salva o tema <i>"+i3GEO.temaAtivo+"</i> <a class=ajuda_usuario target=_blank href='" + i3GEO.configura.locaplic + "/ajuda_usuario.php?idcategoria=5&idajuda=92' >&nbsp;&nbsp;&nbsp;</a>";
 		janela = i3GEO.janela.cria(
-			"300px",
-			"150px",
+			"330px",
+			"120px",
 			"",
 			"",
 			"",
@@ -137,6 +138,7 @@ i3GEOF.salvamapfile = {
 		i3GEOF.salvamapfile.aguarde.visibility = "visible";
 		var temp = function(){
 				i3GEOF.salvamapfile.aguarde.visibility = "hidden";
+				$i("i3GEOsalvamapconcluido").style.display = "block";
 			},
 			p = i3GEO.configura.locaplic+"/admin/php/editormapfile.php?funcao=REFAZERLAYER&codigomap="+nome+"&maporigem="+mapfile+"&nomelayer="+nomelayer,
 			cp = new cpaint();
