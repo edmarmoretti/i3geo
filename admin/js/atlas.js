@@ -242,6 +242,7 @@ function adicionaNosAtlas(dados,redesenha)
 		conteudo += "&nbsp;<img style=\"position:relative;cursor:pointer;top:0px\" onclick=\"sobeDesce('desce','atlas','"+dados[i].id_atlas+"')\" title=desce src=\"../imagens/33.png\" />"
 		conteudo += "&nbsp;<img style=\"position:relative;cursor:pointer;top:2px\" onclick=\"excluir('atlas','"+dados[i].id_atlas+"')\" title=excluir src=\"../imagens/01.png\" />"
 		conteudo += "&nbsp;<img style=\"position:relative;cursor:pointer;top:2px\" onclick=\"editar('atlas','"+dados[i].id_atlas+"')\" title=editar src=\"../imagens/06.png\" /><b>"
+		conteudo += "&nbsp;<img style=\"width:25px;position:relative;cursor:pointer;top:2px\" onclick=\"abreAtlas('"+dados[i].id_atlas+"')\" title=editar src=\"../../imagens/i3geo2.jpg\" /><b>"
 		if(dados[i].titulo_atlas != "")
 		{conteudo += "&nbsp;<span>"+dados[i].titulo_atlas+"</span>"}
 		else
@@ -576,5 +577,13 @@ function gravaDados(tipo,id)
   		argument: { foo:"foo", bar:"bar" }
 	}; 
 	core_makeRequest(sUrl,callback,'POST')
+}
+/*
+Function: abreAtlas
+
+Abre o Atlas para teste
+*/
+function abreAtlas(id){
+	window.open("../../classesphp/atlas_controle.php?atlasId_="+id+"&funcao=criaAtlas","blank");
 }
 YAHOO.util.Event.addListener(window, "load", initMenu);

@@ -4,10 +4,12 @@ MAP
   LAYER
     CONNECTION ""
     DATA "c:\ms4w\apache\htdocs\i3geo\aplicmap\dados\biomas.shp"
+    FOOTER "teste.htm"
     GROUP "biomashp"
+    HEADER "teste.htm"
     METADATA
       "ltempoitemimagem"	""
-      "cache"	"sim"
+      "cache"	""
       "CLASSE"	"SIM"
       "ltempoitemdescricao"	""
       "palletestep"	""
@@ -20,6 +22,7 @@ MAP
       "ltempoitemlink"	""
       "palletefile"	""
       "extensao"	"-44 -23 -39 -21"
+      "NOMEORIGINAL"	""
       "permitedownload"	"sim"
       "ltempoformatodata"	""
       "ltempoitemicone"	""
@@ -29,14 +32,11 @@ MAP
       "TEMA"	"biomashp"
       "identifica"	"NAO"
       "editorsql"	""
-      "aplicaextensao"	"SIM"
       "ltempoitemfim"	""
     END
     NAME "biomashp"
     STATUS OFF
-    TEMPLATE "teste.htm"
-	HEADER "teste.htm"
-	FOOTER "teste.htm"
+    TEMPLATE "none.htm"
     OPACITY 50
     TYPE POLYGON
     UNITS METERS
@@ -46,8 +46,10 @@ MAP
       STYLE
         ANGLE 360
         COLOR 21 44 114
+        SYMBOL 0
         WIDTH 1
       END
+      TITLE ""
     END
     CLASS
       NAME "PAMPA"
@@ -58,6 +60,7 @@ MAP
         SYMBOL 0
         WIDTH 1
       END
+      TITLE ""
     END
     CLASS
       NAME "CERRADO"
@@ -68,6 +71,7 @@ MAP
         SYMBOL 0
         WIDTH 1
       END
+      TITLE ""
     END
     CLASS
       NAME "PANTANAL"
@@ -78,6 +82,7 @@ MAP
         SYMBOL 0
         WIDTH 1
       END
+      TITLE ""
     END
     CLASS
       NAME "AMAZONIA"
@@ -88,6 +93,7 @@ MAP
         SYMBOL 0
         WIDTH 1
       END
+      TITLE ""
     END
     CLASS
       NAME "MATA ATLANTICA"
@@ -98,6 +104,7 @@ MAP
         SYMBOL 0
         WIDTH 1
       END
+      TITLE ""
     END
   END
 

@@ -114,7 +114,7 @@ var letras = "Todos A B C D E F G H I J K L M N O P Q R S T U V X Y Z _ 1 2 3 4 
 	i,
 	ins = "";
 	
-ins += "<br>Filtrar: " +
+ins += "<p>Filtrar: " +
 	"<select id='selFiltro' onchange='filtraLetra(\""+letraAtual+"\")' >" +
 	"<option value='' >----</option>"+
 	"<option value='link_tema,=,' >Sem fonte</option>"+	
@@ -127,11 +127,11 @@ ins += "<br>Filtrar: " +
 	"<option value='kmz_tema,=,sim' >Permite KMZ</option>"+
 	"<option value='kmz_tema,=,nao' >Não permite KMZ</option>"+
 	"</select>";
-ins += "<br><input onclick='filtraLetra(\""+letraAtual+"\")' type=checkbox id=mostraMini />Mostra a miniatura se houver"
+ins += "&nbsp;<input onclick='filtraLetra(\""+letraAtual+"\")' type=checkbox id=mostraMini style=position:relative;top:2px; />Mostra a miniatura se houver"
 
 ins += "<p>";
 for(i=0;i<nletras;i++){
-	ins += "<span onclick='filtraLetra(\""+letras[i]+"\")' style='color:blue;cursor:pointer'>"+letras[i]+" </span>";
+	ins += "<span onclick='filtraLetra(\""+letras[i]+"\")' style='color:blue;cursor:pointer;padding:1px;border: 1px solid #C8C8FA'>"+letras[i]+"</span>&nbsp;";
 }	
 document.getElementById("letras").innerHTML = ins;
 
