@@ -156,7 +156,7 @@ $jsfiles = array(
 );
 
 $buffer .= "\$i = function(id){return document.getElementById(id);};\n";
-salvatudojs($jsfiles,$buffer,"i3geo_tudo_compacto45.js","js");
+salvatudojs($jsfiles,$buffer,"i3geo_tudo_compacto46.js","js");
 //
 //gera um único css
 //
@@ -179,11 +179,12 @@ $cssfiles = array(
 "../pacotes/yui270/build/resize/assets/skins/sam/resize.css",
 "../pacotes/yui270/build/progressbar/assets/skins/sam/progressbar.css",
 "../css/corrigeyui_geral.css",
+"../mashups/theme/default/style.css",
 "../mashups/openlayers.css"
 ); 
 
 $buffer = "";
-salvatudojs($cssfiles,$buffer,"../css/i3geo45.css","css");
+salvatudojs($cssfiles,$buffer,"../css/i3geo46.css","css");
 //css das ferramentas
 $cssfiles = array(
 "../css/button.css",
@@ -201,10 +202,10 @@ foreach ($cssfiles as $f)
 	fclose($abre);
 	$buffer .= "\n";
 }
-$abre = fopen("../css/i3geo_ferramentas45.css", "wt");
+$abre = fopen("../css/i3geo_ferramentas46.css", "wt");
 $escreve = fwrite ($abre,$buffer);
 $fecha = fclose ($abre);
-chmod("../css/i3geo_ferramentas45.css",0777);
+chmod("../css/i3geo_ferramentas46.css",0777);
 //
 //compacta os códigos para o Mashup do OpenLayers
 //
@@ -214,7 +215,7 @@ $jsfiles = array(
 "../pacotes/yui270/build/container/container-min.js",
 "../classesjs/compactados/classe_calculo_compacto.js",
 "../classesjs/compactados/classe_util_compacto.js",
-"../pacotes/openlayers/OpenLayers29.js",
+"../pacotes/openlayers/OpenLayers211.js",
 "../mashups/openlayers.js.php"
 );
 $buffer = "";
@@ -305,7 +306,9 @@ function salvatudojs($jsfiles,$buffer,$final,$tipo)
 */
 		$linhas = file($f);
 		foreach($linhas as $linha){
-			$buffer .= $linha;
+			$linha = trim(preg_replace('#[\r\n]#', '', $linha)); 
+			if($linha != "")
+			{$buffer .= $linha."\n";}
 		}
 	}
 

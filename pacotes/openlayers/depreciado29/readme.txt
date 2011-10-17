@@ -1,8 +1,6 @@
 OpenLayers
 -=-=-=-=-=-
-
-Copyright (c) 2005-2011 OpenLayers Contributors. See authors.txt for
-more details.
+Copyright (c) 2005-2008 MetaCarta, Inc.
 
 OpenLayers is a JavaScript library for building map applications
 on the web. OpenLayers is made available under a BSD-license.
@@ -31,7 +29,7 @@ To include the OpenLayers library in your web page from the root of the site, us
 
 As an example, using bash (with the release files in ~/openlayers ):
 $ cd /var/www/html
-$ cp ~/openlayers/OpenLayers.js ./
+$ cp ~/openlayers/build/OpenLayers.js ./
 $ cp -R ~/openlayers/theme ./
 $ cp -R ~/openlayers/img ./
 
