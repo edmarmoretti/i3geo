@@ -52,7 +52,7 @@ i3GEO.janela = {
 	Default:
 	{display:block;padding:5px 0px 5px 2px}
 	*/
-	ESTILOBD: "display:block;padding:5px 0px 5px 2px;",
+	ESTILOBD: "display:block;padding:5px 2px 5px 2px;",
 	/*
 	Propriedade: ESTILOAGUARDE
 
@@ -271,7 +271,7 @@ i3GEO.janela = {
 		novoel = document.createElement("div");
 		novoel.id = id;
 		novoel.style.display="block";
-		novoel.style.border = "1px solid rgb(120 120 120)";
+		//novoel.style.border = "1px solid rgb(120 120 120)";
 		novoel.innerHTML = ins;
 		if(this.TRANSICAOSUAVE ){
 			novoel.onmouseover = function(){
@@ -295,8 +295,8 @@ i3GEO.janela = {
 			if(waltura !== "auto")
 			{$i(id+'_corpo').style.height=parseInt(waltura,10);}
 			$i(id+'_corpo').style.width=parseInt(wlargura,10);
-			//if(navm)
-			//{$i(id+'_corpo').style.width=parseInt(wlargura,10)-2;}
+			if(navm)
+			{$i(id+'_corpo').style.width=parseInt(wlargura,10)+2;}
 		}
 		fix = false;
 		if(nx === "" || nx === "center")

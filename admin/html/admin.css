@@ -120,5 +120,6 @@ fieldset
 {
 	text-align:left;
 	padding: 10px;
-	border: 1px solid gray
+	border: 1px solid gray;
+	border-radius: 5px 5px 5px 5px;
 }
