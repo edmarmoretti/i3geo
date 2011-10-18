@@ -71,59 +71,61 @@ function iniciaAtlas(combow)
 		if(retorno.data.tipoguias == "")
 		retorno.data.tipoguias = "combo"
 		var pai = document.getElementById("guiasAtlas");
-		var ins = '<ul class="yui-nav" style="border-width:0pt 0pt 2px;border-color:rgb(240,240,240)">';
-		//coloca as guias com barra de rolagem
-		if (retorno.data.tipoguias == "expandida")
-		{
-			var ins = '<ul class="yui-nav" style="width:2000px;border-width:0pt 0pt 2px;border-color:rgb(240,240,240)">';
-			pai.style.width=i3GEO.parametros.w;
-			pai.style.height="35px";
-			//pai.style.overflow="";
-		}
-		var texto = "";
-		var pranchas = retorno.data.pranchas;
-		if (retorno.data.tipoguias == "combo")
-		{
-			pai.style.textAlign="left"
-			ins = "Escolha a prancha: <select onchange='abrePrancha(this.value)' ";
-			if(combow > 0)
-			{ins += "style=width:"+combow+"px ";}
-			ins += ">";
-			ins += "<option value=''>---</option>"
-		}
-		if (pai)
-		{
-			if(pai.className == "")
-			{pai.className = "yui-navset";}
-			var i = 0;
-			do
+		if(pai){
+			var ins = '<ul class="yui-nav" style="border-width:0pt 0pt 2px;border-color:rgb(240,240,240)">';
+			//coloca as guias com barra de rolagem
+			if (retorno.data.tipoguias == "expandida")
 			{
-				if (pranchas[i])
-				{
-					//monta as guias das pranchas
-					if (retorno.data.tipoguias == "combo")
-					{
-						ins += "<option value='"+pranchas[i].id+"'>"+pranchas[i].titulo+"</option>"
-					}
-					else
-					{
-						ins += '<li><a href="#"><em><div onclick="abrePrancha(\''+pranchas[i].id+'\')" id=guiaAtlas'+i+' style=text-align:center;font-size:10px;left:0px; >';
-						var icone = i3GEO.configura.locaplic+"/imagens/branco.gif";
-						if(pranchas[i].icone != "")
-						{
-							var icone = pranchas[i].icone;
-						}
-						ins += "<img src='"+icone+"'/>&nbsp;";
-						ins += pranchas[i].titulo+'</div></em></a></li>';
-					}
-				}
-				var i = i + 1;
+				var ins = '<ul class="yui-nav" style="width:2000px;border-width:0pt 0pt 2px;border-color:rgb(240,240,240)">';
+				pai.style.width=i3GEO.parametros.w;
+				pai.style.height="35px";
+				//pai.style.overflow="";
 			}
-			while(pranchas[i])
-			if (retorno.data.tipoguias == "combo"){ins += "</select>"}
-			else
-			ins += "</ul>";
-			pai.innerHTML = ins;
+			var texto = "";
+			var pranchas = retorno.data.pranchas;
+			if (retorno.data.tipoguias == "combo")
+			{
+				pai.style.textAlign="left"
+				ins = "Escolha a prancha: <select onchange='abrePrancha(this.value)' ";
+				if(combow > 0)
+				{ins += "style=width:"+combow+"px ";}
+				ins += ">";
+				ins += "<option value=''>---</option>"
+			}
+			if (pai)
+			{
+				if(pai.className == "")
+				{pai.className = "yui-navset";}
+				var i = 0;
+				do
+				{
+					if (pranchas[i])
+					{
+						//monta as guias das pranchas
+						if (retorno.data.tipoguias == "combo")
+						{
+							ins += "<option value='"+pranchas[i].id+"'>"+pranchas[i].titulo+"</option>"
+						}
+						else
+						{
+							ins += '<li><a href="#"><em><div onclick="abrePrancha(\''+pranchas[i].id+'\')" id=guiaAtlas'+i+' style=text-align:center;font-size:10px;left:0px; >';
+							var icone = i3GEO.configura.locaplic+"/imagens/branco.gif";
+							if(pranchas[i].icone != "")
+							{
+								var icone = pranchas[i].icone;
+							}
+							ins += "<img src='"+icone+"'/>&nbsp;";
+							ins += pranchas[i].titulo+'</div></em></a></li>';
+						}
+					}
+					var i = i + 1;
+				}
+				while(pranchas[i])
+				if (retorno.data.tipoguias == "combo"){ins += "</select>"}
+				else
+				ins += "</ul>";
+				pai.innerHTML = ins;
+			}
 		}
 		if (localTitulo)
 		{
