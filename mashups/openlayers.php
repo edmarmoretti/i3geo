@@ -113,6 +113,13 @@ if($temas != "")
 	$temas = str_replace(" ",",",$temas);
 	$temas = strtolower($temas);
 	$temas = explode(",",$temas);
+	if(!isset($visiveis))
+	{$visiveis = $temas;}
+	else{
+		$visiveis = str_replace(" ",",",$visiveis);
+		$visiveis = strtolower($visiveis);
+		$visiveis = explode(",",$visiveis);	
+	}
 	$layers = array();
 	$objOpenLayers = array();
 	if(isset($servidor) && $servidor != "../ogc.php"){
@@ -133,7 +140,10 @@ if($temas != "")
 				$ebase = "false";
 				if(isset($fundo) && in_array($tema,$fundo))
 				{$ebase = "true";}
-				$objOpenLayers[] = 'new OpenLayers.Layer.WMS( "'.($layern->getmetadata("tema")).'", "../ogc.php?tema='.$tema.'&",{layers:"'.implode(",",$layers).'",transparent: "true", format: "image/png"},{isBaseLayer:'.$ebase.'})';
+				$visivel = "false";
+				if(in_array($tema,$visiveis))
+				{$visivel = "true";}
+				$objOpenLayers[] = 'new OpenLayers.Layer.WMS( "'.($layern->getmetadata("tema")).'", "../ogc.php?tema='.$tema.'&",{layers:"'.implode(",",$layers).'",transparent: "true", format: "image/png"},{visibility:'.$visivel.',isBaseLayer:'.$ebase.'})';
 			}
 			else
 			{echo $tema." não foi encontrado.<br>";}
@@ -149,6 +159,7 @@ Parâmetros:
 	kml - lista de endereços (url) de um arquivos kml que serão adicionados ao mapa. Separado por ','
 	servidor - por default é ../ogc.php o que força o uso do i3geo local. Esse é o programa que será utilizado em conjunto com a lista definida no parâmetro 'temas'
 	temas - lista com os temas (mapfiles) do i3Geo que serão incluídos no mapa
+	visiveis - lista de temas (mesmos nomes do parâmetro temas) que iniciarão como visíveis no mapa. Se não for definido, todos os temas serão visíveis.
 	numzoomlevels - número de níveis de zoom, default=6
 	maxextent - extensão geográfica máxima do mapa (xmin,ymin,xmax,ymax)
 	mapext - extensão geográfica inicial do mapa (xmin,ymin,xmax,ymax)
