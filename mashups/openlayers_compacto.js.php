@@ -1332,6 +1332,7 @@ var width=style.graphicWidth||style.graphicHeight;
 var height=style.graphicHeight||style.graphicWidth;
 width=width?width:style.pointRadius*2;
 height=height?height:style.pointRadius*2;
+//alert("oi");
 var xOffset=(style.graphicXOffset!=undefined)?style.graphicXOffset:-(0.5*width);
 var yOffset=(style.graphicYOffset!=undefined)?style.graphicYOffset:-(0.5*height);
 var opacity=style.graphicOpacity||style.fillOpacity;
@@ -1969,6 +1970,7 @@ var height=style.graphicHeight||style.graphicWidth;
 width=width?width:style.pointRadius*2;
 height=height?height:style.pointRadius*2;
 width*=resolution;height*=resolution;
+//alert(width);
 var xOffset=(style.graphicXOffset!=undefined)?style.graphicXOffset*resolution:-(0.5*width);
 var yOffset=(style.graphicYOffset!=undefined)?style.graphicYOffset*resolution:-(0.5*height);
 var opacity=style.graphicOpacity||style.fillOpacity;
@@ -1983,6 +1985,7 @@ else if(this.isComplexSymbol(style.graphicName)){
 //modificado por edmar
 style.label = " ";
 style.pointRadius = 5;
+//alert("oi");
 var offset=style.pointRadius*3*resolution;var size=offset*2;var src=this.importSymbol(style.graphicName);widthFactor=this.symbolMetrics[src.id].size*3/size*resolution;var parent=node.parentNode;var nextSibling=node.nextSibling;if(parent){parent.removeChild(node);}
 node.firstChild&&node.removeChild(node.firstChild);node.appendChild(src.firstChild.cloneNode(true));node.setAttributeNS(null,"viewBox",src.getAttributeNS(null,"viewBox"));node.setAttributeNS(null,"width",size);node.setAttributeNS(null,"height",size);node.setAttributeNS(null,"x",node._x-offset);node.setAttributeNS(null,"y",node._y-offset);if(nextSibling){parent.insertBefore(node,nextSibling);}else if(parent){parent.appendChild(node);}}else{node.setAttributeNS(null,"r",style.pointRadius*resolution);}
 var rotation=style.rotation;if(rotation!==undefined||node._rotation!==undefined){node._rotation=rotation;rotation|=0;if(node.nodeName!=="svg"){node.setAttributeNS(null,"transform",["rotate(",rotation,node._x,node._y,")"].join(" "));}else{var metrics=this.symbolMetrics[src.id];node.firstChild.setAttributeNS(null,"transform",["rotate(",rotation,metrics.x,metrics.y,")"].join(" "));}}}
@@ -2151,7 +2154,14 @@ this.root.setAttributeNS(null,"transform",transformString);this.translationParam
 break;case"OpenLayers.Geometry.Rectangle":nodeType="rect";break;case"OpenLayers.Geometry.LineString":nodeType="polyline";break;case"OpenLayers.Geometry.LinearRing":nodeType="polygon";break;case"OpenLayers.Geometry.Polygon":case"OpenLayers.Geometry.Curve":case"OpenLayers.Geometry.Surface":nodeType="path";break;default:break;}
 return nodeType;},setStyle:function(node,style,options){style=style||node._style;options=options||node._options;var r=parseFloat(node.getAttributeNS(null,"r"));var widthFactor=1;var pos;if(node._geometryClass=="OpenLayers.Geometry.Point"&&r){node.style.visibility="";if(style.graphic===false){node.style.visibility="hidden";}else if(style.externalGraphic){pos=this.getPosition(node);if(style.graphicTitle){node.setAttributeNS(null,"title",style.graphicTitle);var label=this.nodeFactory(null,"title");label.textContent=style.graphicTitle;node.appendChild(label);}
 if(style.graphicWidth&&style.graphicHeight){node.setAttributeNS(null,"preserveAspectRatio","none");}
-var width=style.graphicWidth||style.graphicHeight;var height=style.graphicHeight||style.graphicWidth;width=width?width:style.pointRadius*2;height=height?height:style.pointRadius*2;var xOffset=(style.graphicXOffset!=undefined)?style.graphicXOffset:-(0.5*width);var yOffset=(style.graphicYOffset!=undefined)?style.graphicYOffset:-(0.5*height);var opacity=style.graphicOpacity||style.fillOpacity;node.setAttributeNS(null,"x",(pos.x+xOffset).toFixed());node.setAttributeNS(null,"y",(pos.y+yOffset).toFixed());node.setAttributeNS(null,"width",width);node.setAttributeNS(null,"height",height);node.setAttributeNS(this.xlinkns,"href",style.externalGraphic);node.setAttributeNS(null,"style","opacity: "+opacity);node.onclick=OpenLayers.Renderer.SVG.preventDefault;}else if(this.isComplexSymbol(style.graphicName)){var offset=style.pointRadius*3;var size=offset*2;var src=this.importSymbol(style.graphicName);pos=this.getPosition(node);widthFactor=this.symbolMetrics[src.id][0]*3/size;var parent=node.parentNode;var nextSibling=node.nextSibling;if(parent){parent.removeChild(node);}
+var width=style.graphicWidth||style.graphicHeight;var height=style.graphicHeight||style.graphicWidth;width=width?width:style.pointRadius*2;height=height?height:style.pointRadius*2;var xOffset=(style.graphicXOffset!=undefined)?style.graphicXOffset:-(0.5*width);var yOffset=(style.graphicYOffset!=undefined)?style.graphicYOffset:-(0.5*height);var opacity=style.graphicOpacity||style.fillOpacity;node.setAttributeNS(null,"x",(pos.x+xOffset).toFixed());node.setAttributeNS(null,"y",(pos.y+yOffset).toFixed());node.setAttributeNS(null,"width",width);node.setAttributeNS(null,"height",height);node.setAttributeNS(this.xlinkns,"href",style.externalGraphic);node.setAttributeNS(null,"style","opacity: "+opacity);node.onclick=OpenLayers.Renderer.SVG.preventDefault;}else if(this.isComplexSymbol(style.graphicName)){
+//modificado por edmar
+style.label = " ";
+style.pointRadius = 5;
+var offset=style.pointRadius*3;var size=offset*2;
+var src=this.importSymbol(style.graphicName);pos=this.getPosition(node);
+widthFactor=this.symbolMetrics[src.id][0]*3/size;
+var parent=node.parentNode;var nextSibling=node.nextSibling;if(parent){parent.removeChild(node);}
 node.firstChild&&node.removeChild(node.firstChild);node.appendChild(src.firstChild.cloneNode(true));node.setAttributeNS(null,"viewBox",src.getAttributeNS(null,"viewBox"));node.setAttributeNS(null,"width",size);node.setAttributeNS(null,"height",size);node.setAttributeNS(null,"x",pos.x-offset);node.setAttributeNS(null,"y",pos.y-offset);if(nextSibling){parent.insertBefore(node,nextSibling);}else if(parent){parent.appendChild(node);}}else{node.setAttributeNS(null,"r",style.pointRadius);}
 var rotation=style.rotation;if((rotation!==undefined||node._rotation!==undefined)&&pos){node._rotation=rotation;rotation|=0;if(node.nodeName!=="svg"){node.setAttributeNS(null,"transform","rotate("+rotation+" "+pos.x+" "+
 pos.y+")");}else{var metrics=this.symbolMetrics[src.id];node.firstChild.setAttributeNS(null,"transform","rotate("
@@ -2168,21 +2178,35 @@ d+=" z";if(draw){node.setAttributeNS(null,"d",d);node.setAttributeNS(null,"fill-
 d="M "+component;}else if((i%3)==1){var component=this.getShortString(geometry.components[i]);if(!component){draw=false;}
 d+=" C "+component;}else{var component=this.getShortString(geometry.components[i]);if(!component){draw=false;}
 d+=" "+component;}}
-d+=" Z";if(draw){node.setAttributeNS(null,"d",d);return node;}else{return false;}},drawText:function(featureId,style,location){var resolution=this.getResolution();var x=(location.x/resolution+this.left);var y=(location.y/resolution-this.top);var label=this.nodeFactory(featureId+this.LABEL_ID_SUFFIX,"text");label.setAttributeNS(null,"x",x);label.setAttributeNS(null,"y",-y);if(style.fontColor){label.setAttributeNS(null,"fill",style.fontColor);}
+d+=" Z";if(draw){node.setAttributeNS(null,"d",d);return node;}else{return false;}},
+drawText:function(featureId,style,location){var resolution=this.getResolution();var x=(location.x/resolution+this.left);var y=(location.y/resolution-this.top);
+var label=this.nodeFactory(featureId+this.LABEL_ID_SUFFIX,"text");
+label.setAttributeNS(null,"x",x);
+label.setAttributeNS(null,"y",-y);
+if(style.fontColor){label.setAttributeNS(null,"fill",style.fontColor);}
 if(style.fontOpacity){label.setAttributeNS(null,"opacity",style.fontOpacity);}
 if(style.fontFamily){label.setAttributeNS(null,"font-family",style.fontFamily);}
 if(style.fontSize){label.setAttributeNS(null,"font-size",style.fontSize);}
 if(style.fontWeight){label.setAttributeNS(null,"font-weight",style.fontWeight);}
 if(style.fontStyle){label.setAttributeNS(null,"font-style",style.fontStyle);}
-if(style.labelSelect===true){label.setAttributeNS(null,"pointer-events","visible");label._featureId=featureId;}else{label.setAttributeNS(null,"pointer-events","none");}
+if(style.labelSelect===true){label.setAttributeNS(null,"pointer-events","visible");
+label._featureId=featureId;}else{label.setAttributeNS(null,"pointer-events","none");}
 var align=style.labelAlign||"cm";label.setAttributeNS(null,"text-anchor",OpenLayers.Renderer.SVG.LABEL_ALIGN[align[0]]||"middle");if(OpenLayers.IS_GECKO===true){label.setAttributeNS(null,"dominant-baseline",OpenLayers.Renderer.SVG.LABEL_ALIGN[align[1]]||"central");}
 var labelRows=style.label.split('\n');var numRows=labelRows.length;while(label.childNodes.length>numRows){label.removeChild(label.lastChild);}
-for(var i=0;i<numRows;i++){var tspan=this.nodeFactory(featureId+this.LABEL_ID_SUFFIX+"_tspan_"+i,"tspan");if(style.labelSelect===true){tspan._featureId=featureId;tspan._geometry=location;tspan._geometryClass=location.CLASS_NAME;}
-if(OpenLayers.IS_GECKO===false){tspan.setAttributeNS(null,"baseline-shift",OpenLayers.Renderer.SVG.LABEL_VSHIFT[align[1]]||"-35%");}
+for(var i=0;i<numRows;i++){
+var tspan=this.nodeFactory(featureId+this.LABEL_ID_SUFFIX+"_tspan_"+i,"tspan");
+if(style.labelSelect===true){tspan._featureId=featureId;
+tspan._geometry=location;tspan._geometryClass=location.CLASS_NAME;}
+if(OpenLayers.IS_GECKO===false){
+tspan.setAttributeNS(null,"baseline-shift",OpenLayers.Renderer.SVG.LABEL_VSHIFT[align[1]]||"-35%");}
 tspan.setAttribute("x",x);if(i==0){var vfactor=OpenLayers.Renderer.SVG.LABEL_VFACTOR[align[1]];if(vfactor==null){vfactor=-.5;}
 tspan.setAttribute("dy",(vfactor*(numRows-1))+"em");}else{tspan.setAttribute("dy","1em");}
-tspan.textContent=(labelRows[i]==='')?' ':labelRows[i];if(!tspan.parentNode){label.appendChild(tspan);}}
-if(!label.parentNode){this.textRoot.appendChild(label);}},getComponentsString:function(components,separator){var renderCmp=[];var complete=true;var len=components.length;var strings=[];var str,component;for(var i=0;i<len;i++){component=components[i];renderCmp.push(component);str=this.getShortString(component);if(str){strings.push(str);}else{if(i>0){if(this.getShortString(components[i-1])){strings.push(this.clipLine(components[i],components[i-1]));}}
+tspan.textContent=(labelRows[i]==='')?' ':labelRows[i];
+if(tspan.textContent == undefined || tspan.textContent == 'undefined')
+{tspan.textContent = "";}
+if(!tspan.parentNode){label.appendChild(tspan);}}
+if(!label.parentNode){this.textRoot.appendChild(label);}},
+getComponentsString:function(components,separator){var renderCmp=[];var complete=true;var len=components.length;var strings=[];var str,component;for(var i=0;i<len;i++){component=components[i];renderCmp.push(component);str=this.getShortString(component);if(str){strings.push(str);}else{if(i>0){if(this.getShortString(components[i-1])){strings.push(this.clipLine(components[i],components[i-1]));}}
 if(i<len-1){if(this.getShortString(components[i+1])){strings.push(this.clipLine(components[i],components[i+1]));}}
 complete=false;}}
 return{path:strings.join(separator||","),complete:complete};},clipLine:function(badComponent,goodComponent){if(goodComponent.equals(badComponent)){return"";}
@@ -2733,6 +2757,7 @@ else{
 var symbol=OpenLayers.Renderer.symbol[graphicName];
 if(!symbol){throw new Error(graphicName+' is not a valid symbol name');return;}
 }
+//alert("oi");
 var symbolExtent=new OpenLayers.Bounds(Number.MAX_VALUE,Number.MAX_VALUE,0,0);var pathitems=["m"];for(var i=0;i<symbol.length;i=i+2){var x=symbol[i];var y=symbol[i+1];symbolExtent.left=Math.min(symbolExtent.left,x);symbolExtent.bottom=Math.min(symbolExtent.bottom,y);symbolExtent.right=Math.max(symbolExtent.right,x);symbolExtent.top=Math.max(symbolExtent.top,y);pathitems.push(x);pathitems.push(y);if(i==0){pathitems.push("l");}}
 pathitems.push("x e");var path=pathitems.join(" ");var diff=(symbolExtent.getWidth()-symbolExtent.getHeight())/2;if(diff>0){symbolExtent.bottom=symbolExtent.bottom-diff;symbolExtent.top=symbolExtent.top+diff;}else{symbolExtent.left=symbolExtent.left+diff;symbolExtent.right=symbolExtent.right-diff;}
 cache={path:path,size:symbolExtent.getWidth(),left:symbolExtent.left,bottom:symbolExtent.bottom};this.symbolCache[id]=cache;return cache;},CLASS_NAME:"OpenLayers.Renderer.VML"});OpenLayers.Renderer.VML.LABEL_SHIFT={"l":0,"c":.5,"r":1,"t":0,"m":.5,"b":1};OpenLayers.Layer.MultiMap=OpenLayers.Class(OpenLayers.Layer.EventPane,OpenLayers.Layer.FixedZoomLevels,{MIN_ZOOM_LEVEL:1,MAX_ZOOM_LEVEL:17,RESOLUTIONS:[9,1.40625,0.703125,0.3515625,0.17578125,0.087890625,0.0439453125,0.02197265625,0.010986328125,0.0054931640625,0.00274658203125,0.001373291015625,0.0006866455078125,0.00034332275390625,0.000171661376953125,0.0000858306884765625,0.00004291534423828125],type:null,initialize:function(name,options){OpenLayers.Layer.EventPane.prototype.initialize.apply(this,arguments);OpenLayers.Layer.FixedZoomLevels.prototype.initialize.apply(this,arguments);if(this.sphericalMercator){OpenLayers.Util.extend(this,OpenLayers.Layer.SphericalMercator);this.initMercatorParameters();this.RESOLUTIONS.unshift(10);}},loadMapObject:function(){try{this.mapObject=new MultimapViewer(this.div);}catch(e){}},getWarningHTML:function(){return OpenLayers.i18n("getLayerWarning",{'layerType':"MM",'layerLib':"MultiMap"});},setMapObjectCenter:function(center,zoom){this.mapObject.goToPosition(center,zoom);},getMapObjectCenter:function(){return this.mapObject.getCurrentPosition();},getMapObjectZoom:function(){return this.mapObject.getZoomFactor();},getMapObjectLonLatFromMapObjectPixel:function(moPixel){moPixel.x=moPixel.x-(this.map.getSize().w/2);moPixel.y=moPixel.y-(this.map.getSize().h/2);return this.mapObject.getMapPositionAt(moPixel);},getMapObjectPixelFromMapObjectLonLat:function(moLonLat){return this.mapObject.geoPosToContainerPixels(moLonLat);},getLongitudeFromMapObjectLonLat:function(moLonLat){return this.sphericalMercator?this.forwardMercator(moLonLat.lon,moLonLat.lat).lon:moLonLat.lon;},getLatitudeFromMapObjectLonLat:function(moLonLat){return this.sphericalMercator?this.forwardMercator(moLonLat.lon,moLonLat.lat).lat:moLonLat.lat;},getMapObjectLonLatFromLonLat:function(lon,lat){var mmLatLon;if(this.sphericalMercator){var lonlat=this.inverseMercator(lon,lat);mmLatLon=new MMLatLon(lonlat.lat,lonlat.lon);}else{mmLatLon=new MMLatLon(lat,lon);}
@@ -3615,7 +3640,7 @@ new OpenLayers.Rule({symbolizer: sketchSymbolizers})
 ]);
 i3GEOpanelEditor = new OpenLayers.Control.Panel({
 displayClass: "olControlEditingToolbar1 noprint",
-saveState: true,
+saveState: false,
 activateControl: function(c){
 this.deactivate();
 this.activate();
@@ -3625,33 +3650,42 @@ i3GEO.editorOL.ModifyFeature.deactivate();
 catch(e){}
 if(!c.trigger)
 {c.activate();}
-else{
-c.trigger.call();
-}
+else
+{c.trigger.call();}
 }
 });
 if(botoes.procura===true){
 button = new OpenLayers.Control.Button({
 displayClass: "editorOLprocura",
 trigger: function(){YAHOO.procura.container.panel.show();},
-title: "procura"
+title: "procura",
+type: OpenLayers.Control.TYPE_BUTTON
 });
 controles.push(button);
 adiciona = true;
 }
 if(botoes.pan===true){
-controles.push(new OpenLayers.Control.Navigation({title: "deslocar",displayClass:"editorOLpan"}));
+controles.push(new OpenLayers.Control.Navigation({
+title: "deslocar",
+displayClass:"editorOLpan",
+type: OpenLayers.Control.TYPE_TOOL
+}));
 adiciona = true;
 }
 if(botoes.zoombox===true){
-controles.push(new OpenLayers.Control.ZoomBox({title: "zoombox",displayClass: "editorOLzoombox"}));
+controles.push(new OpenLayers.Control.ZoomBox({
+title: "zoombox",
+displayClass: "editorOLzoombox",
+type: OpenLayers.Control.TYPE_TOOL
+}));
 adiciona = true;
 }
 if(botoes.zoomtot===true){
 button = new OpenLayers.Control.Button({
 displayClass: "editorOLzoomtot",
 trigger: function(){i3GEO.editorOL.mapa.zoomToMaxExtent();},
-title: "ajusta extensão"
+title: "ajusta extensão",
+type: OpenLayers.Control.TYPE_BUTTON
 });
 controles.push(button);
 adiciona = true;
@@ -3660,7 +3694,8 @@ if(botoes.legenda===true){
 button = new OpenLayers.Control.Button({
 displayClass: "editorOLlegenda",
 trigger: function(){i3GEO.editorOL.mostraLegenda();},
-title: "legenda"
+title: "legenda",
+type: OpenLayers.Control.TYPE_BUTTON
 });
 controles.push(button);
 adiciona = true;
@@ -3672,7 +3707,8 @@ OpenLayers.Handler.Path,
 handlerOptions: {layerOptions: {styleMap: styleMap}},
 persist: true,
 displayClass: "editorOLdistancia",
-title: "distância"
+title: "distância",
+type: OpenLayers.Control.TYPE_TOOL
 }
 );
 button.events.on({
@@ -3692,7 +3728,8 @@ OpenLayers.Handler.Polygon,
 handlerOptions: {layerOptions: {styleMap: styleMap}},
 persist: true,
 displayClass: "editorOLarea",
-title: "área"
+title: "área",
+type: OpenLayers.Control.TYPE_TOOL
 }
 );
 button.events.on({
@@ -3712,6 +3749,7 @@ infoFormat:'text/plain', //'application/vnd.ogc.gml',
 layers: [i3GEO.editorOL.layerAtivo()],
 queryVisible: true,
 title: "identifica",
+type: OpenLayers.Control.TYPE_TOOL,
 displayClass: "editorOLidentifica",
 eventListeners: {
 getfeatureinfo: function(event) {
@@ -3760,6 +3798,7 @@ OpenLayers.Handler.Path,
 {
 displayClass: "editorOLlinha",
 title: "digitalizar linha",
+type: OpenLayers.Control.TYPE_TOOL,
 callbacks:{
 done: function(feature){
 var f = new OpenLayers.Feature.Vector(feature);
@@ -3789,6 +3828,7 @@ OpenLayers.Handler.Point,
 {
 displayClass: "editorOLponto",
 title: "digitalizar ponto",
+type: OpenLayers.Control.TYPE_TOOL,
 callbacks:{
 done: function(feature){
 var f = new OpenLayers.Feature.Vector(feature);
@@ -3818,6 +3858,7 @@ OpenLayers.Handler.Polygon,
 {
 displayClass: "editorOLpoligono",
 title: "digitalizar polígono",
+type: OpenLayers.Control.TYPE_TOOL,
 //handlerOptions: {holeModifier: "altKey"},
 callbacks:{
 done: function(feature){
@@ -3848,6 +3889,7 @@ OpenLayers.Handler.Point,
 {
 displayClass: "editorOLtexto",
 title: "incluir texto",
+type: OpenLayers.Control.TYPE_TOOL,
 persist: true,
 callbacks:{
 done: function(feature){
@@ -3883,6 +3925,7 @@ OpenLayers.Handler.Polygon,
 {
 displayClass: "editorOLcorta",
 title: "corta figura",
+type: OpenLayers.Control.TYPE_TOOL,
 clickout: true,
 toggle: true,
 trigger: function(){
@@ -3919,6 +3962,7 @@ i3GEO.editorOL.layergrafico,
 {
 displayClass: "editorOLedita",
 title: "modifica figura",
+type: OpenLayers.Control.TYPE_TOOL,
 clickout: true,
 toggle: true,
 mode: OpenLayers.Control.ModifyFeature.RESHAPE
@@ -3933,7 +3977,8 @@ displayClass: "editorOLlistag",
 trigger: function(){
 i3GEO.editorOL.listaGeometrias();
 },
-title: "lista geometrias"
+title: "lista geometrias",
+type: OpenLayers.Control.TYPE_BUTTON
 });
 controles.push(button);
 adiciona = true;
@@ -3946,7 +3991,8 @@ i3GEO.editorOL.trazParaFrente();
 if(document.getElementById("panellistagEditor"))
 {i3GEO.editorOL.listaGeometrias();}
 },
-title: "traz para frente"
+title: "traz para frente",
+type: OpenLayers.Control.TYPE_BUTTON
 });
 controles.push(button);
 adiciona = true;
@@ -3961,7 +4007,8 @@ if(i3GEO.php)
 else
 {i3GEO.editorOL.carregajts("i3GEO.editorOL.ferramentas()");}
 },
-title: "ferramentas"
+title: "ferramentas",
+type: OpenLayers.Control.TYPE_BUTTON
 });
 controles.push(button);
 adiciona = true;
@@ -3973,6 +4020,7 @@ i3GEO.editorOL.layergrafico,
 {
 displayClass: "editorOLselecao",
 title: "seleciona elemento",
+type: OpenLayers.Control.TYPE_TOOL,
 clickout: true,
 toggle: true,
 multiple: false,
@@ -4001,7 +4049,8 @@ if(document.getElementById("panellistagEditor"))
 else
 {alert("Selecione pelo menos um elemento");}
 },
-title: "apaga selecionados"
+title: "apaga selecionados",
+type: OpenLayers.Control.TYPE_BUTTON
 });
 controles.push(button);
 adiciona = true;
@@ -4022,7 +4071,8 @@ if(botoes.propriedades===true){
 button = new OpenLayers.Control.Button({
 displayClass: "editorOLpropriedades",
 trigger: function(){i3GEO.editorOL.propriedades();},
-title: "propriedades"
+title: "propriedades",
+type: OpenLayers.Control.TYPE_BUTTON
 });
 controles.push(button);
 adiciona = true;
@@ -4031,7 +4081,8 @@ if(botoes.salva===true){
 button = new OpenLayers.Control.Button({
 displayClass: "editorOLsalva",
 trigger: function(){i3GEO.editorOL.salvaGeometrias();},
-title: "salva"
+title: "salva",
+type: OpenLayers.Control.TYPE_BUTTON
 });
 controles.push(button);
 adiciona = true;
@@ -4045,7 +4096,8 @@ try
 catch(e)
 {window.open("openlayers_ajuda.php");}
 },
-title: "ajuda"
+title: "ajuda",
+type: OpenLayers.Control.TYPE_BUTTON
 });
 controles.push(button);
 adiciona = true;
@@ -4077,7 +4129,8 @@ if(i3GEO.editorOL.backup)
 catch(e){}
 }
 },
-title: "fecha editor"
+title: "fecha editor",
+type: OpenLayers.Control.TYPE_BUTTON
 });
 controles.push(button);
 adiciona = true;

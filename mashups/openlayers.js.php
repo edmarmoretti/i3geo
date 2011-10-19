@@ -635,7 +635,7 @@ i3GEO.editorOL = {
 		
 		i3GEOpanelEditor = new OpenLayers.Control.Panel({
 			displayClass: "olControlEditingToolbar1 noprint",
-			saveState: true,
+			saveState: false,
 			activateControl: function(c){
 				this.deactivate();
 				this.activate();
@@ -645,33 +645,42 @@ i3GEO.editorOL = {
 				catch(e){}
 				if(!c.trigger)
 				{c.activate();}
-				else{
-					c.trigger.call();
-				}
+				else
+				{c.trigger.call();}
 			}
 		});
 		if(botoes.procura===true){
 			button = new OpenLayers.Control.Button({
 				displayClass: "editorOLprocura", 
 				trigger: function(){YAHOO.procura.container.panel.show();},
-				title: "procura"
+				title: "procura",
+				type: OpenLayers.Control.TYPE_BUTTON
 			});
 			controles.push(button);
 			adiciona = true;
 		}
 		if(botoes.pan===true){
-			controles.push(new OpenLayers.Control.Navigation({title: "deslocar",displayClass:"editorOLpan"}));
+			controles.push(new OpenLayers.Control.Navigation({
+				title: "deslocar",
+				displayClass:"editorOLpan",
+				type: OpenLayers.Control.TYPE_TOOL
+			}));
 			adiciona = true;
 		}
 		if(botoes.zoombox===true){
-			controles.push(new OpenLayers.Control.ZoomBox({title: "zoombox",displayClass: "editorOLzoombox"}));
+			controles.push(new OpenLayers.Control.ZoomBox({
+				title: "zoombox",
+				displayClass: "editorOLzoombox",
+				type: OpenLayers.Control.TYPE_TOOL
+			}));
 			adiciona = true;
 		}
 		if(botoes.zoomtot===true){
 			button = new OpenLayers.Control.Button({
 				displayClass: "editorOLzoomtot", 
 				trigger: function(){i3GEO.editorOL.mapa.zoomToMaxExtent();},
-				title: "ajusta extensão"
+				title: "ajusta extensão",
+				type: OpenLayers.Control.TYPE_BUTTON
 			});
 			controles.push(button);
 			adiciona = true;
@@ -680,7 +689,8 @@ i3GEO.editorOL = {
 			button = new OpenLayers.Control.Button({
 				displayClass: "editorOLlegenda", 
 				trigger: function(){i3GEO.editorOL.mostraLegenda();},
-				title: "legenda"
+				title: "legenda",
+				type: OpenLayers.Control.TYPE_BUTTON
 			});
 			controles.push(button);
 			adiciona = true;
@@ -692,7 +702,8 @@ i3GEO.editorOL = {
 					handlerOptions: {layerOptions: {styleMap: styleMap}},
 					persist: true,
 					displayClass: "editorOLdistancia", 
-					title: "distância"
+					title: "distância",
+					type: OpenLayers.Control.TYPE_TOOL
 				}
 			);
 			button.events.on({
@@ -712,7 +723,8 @@ i3GEO.editorOL = {
 					handlerOptions: {layerOptions: {styleMap: styleMap}},
 					persist: true,
 					displayClass: "editorOLarea", 
-					title: "área"
+					title: "área",
+					type: OpenLayers.Control.TYPE_TOOL
 				}
 			);
 			button.events.on({
@@ -732,6 +744,7 @@ i3GEO.editorOL = {
 				layers: [i3GEO.editorOL.layerAtivo()],
 				queryVisible: true,
 				title: "identifica",
+				type: OpenLayers.Control.TYPE_TOOL,
 				displayClass: "editorOLidentifica",
 				eventListeners: {
 					getfeatureinfo: function(event) {
@@ -780,6 +793,7 @@ i3GEO.editorOL = {
 				{
 					displayClass: "editorOLlinha",
 					title: "digitalizar linha",
+					type: OpenLayers.Control.TYPE_TOOL,
 					callbacks:{
 						done: function(feature){
 							var f = new OpenLayers.Feature.Vector(feature);
@@ -809,6 +823,7 @@ i3GEO.editorOL = {
 				{
 					displayClass: "editorOLponto",
 					title: "digitalizar ponto",
+					type: OpenLayers.Control.TYPE_TOOL,
 					callbacks:{
 						done: function(feature){
 							var f = new OpenLayers.Feature.Vector(feature);
@@ -838,6 +853,7 @@ i3GEO.editorOL = {
 				{
 					displayClass: "editorOLpoligono",
 					title: "digitalizar polígono",
+					type: OpenLayers.Control.TYPE_TOOL,
 					//handlerOptions: {holeModifier: "altKey"},
 					callbacks:{
 						done: function(feature){
@@ -868,6 +884,7 @@ i3GEO.editorOL = {
 				{
 					displayClass: "editorOLtexto",
 					title: "incluir texto",
+					type: OpenLayers.Control.TYPE_TOOL,
 					persist: true,
 					callbacks:{
 						done: function(feature){
@@ -903,6 +920,7 @@ i3GEO.editorOL = {
 				{
 					displayClass: "editorOLcorta",
 					title: "corta figura",
+					type: OpenLayers.Control.TYPE_TOOL,
 					clickout: true,
 					toggle: true,
 					trigger: function(){
@@ -939,6 +957,7 @@ i3GEO.editorOL = {
 				{
 					displayClass: "editorOLedita",
 					title: "modifica figura",
+					type: OpenLayers.Control.TYPE_TOOL,
 					clickout: true,
 					toggle: true,
 					mode: OpenLayers.Control.ModifyFeature.RESHAPE
@@ -953,7 +972,8 @@ i3GEO.editorOL = {
 				trigger: function(){
 					i3GEO.editorOL.listaGeometrias();
 				},
-				title: "lista geometrias"
+				title: "lista geometrias",
+				type: OpenLayers.Control.TYPE_BUTTON
 			});
 			controles.push(button);
 			adiciona = true;
@@ -966,7 +986,8 @@ i3GEO.editorOL = {
 					if(document.getElementById("panellistagEditor"))
 					{i3GEO.editorOL.listaGeometrias();}				
 				},
-				title: "traz para frente"
+				title: "traz para frente",
+				type: OpenLayers.Control.TYPE_BUTTON
 			});
 			controles.push(button);
 			adiciona = true;
@@ -982,7 +1003,8 @@ i3GEO.editorOL = {
 					{i3GEO.editorOL.carregajts("i3GEO.editorOL.ferramentas()");}
 					
 				},
-				title: "ferramentas"
+				title: "ferramentas",
+				type: OpenLayers.Control.TYPE_BUTTON
 			});
 			controles.push(button);
 			adiciona = true;
@@ -994,6 +1016,7 @@ i3GEO.editorOL = {
 				{
 					displayClass: "editorOLselecao",
 					title: "seleciona elemento",
+					type: OpenLayers.Control.TYPE_TOOL,
 					clickout: true,
 					toggle: true,
 					multiple: false,
@@ -1022,7 +1045,8 @@ i3GEO.editorOL = {
 					else
 					{alert("Selecione pelo menos um elemento");}
 				},
-				title: "apaga selecionados"
+				title: "apaga selecionados",
+				type: OpenLayers.Control.TYPE_BUTTON
 			});
 			controles.push(button);
 			adiciona = true;
@@ -1043,7 +1067,8 @@ i3GEO.editorOL = {
 			button = new OpenLayers.Control.Button({
 				displayClass: "editorOLpropriedades", 
 				trigger: function(){i3GEO.editorOL.propriedades();},
-				title: "propriedades"
+				title: "propriedades",
+				type: OpenLayers.Control.TYPE_BUTTON
 			});
 			controles.push(button);
 			adiciona = true;
@@ -1052,7 +1077,8 @@ i3GEO.editorOL = {
 			button = new OpenLayers.Control.Button({
 				displayClass: "editorOLsalva", 
 				trigger: function(){i3GEO.editorOL.salvaGeometrias();},
-				title: "salva"
+				title: "salva",
+				type: OpenLayers.Control.TYPE_BUTTON
 			});
 			controles.push(button);
 			adiciona = true;
@@ -1066,7 +1092,8 @@ i3GEO.editorOL = {
 					catch(e)
 					{window.open("openlayers_ajuda.php");}
 				},
-				title: "ajuda"
+				title: "ajuda",
+				type: OpenLayers.Control.TYPE_BUTTON
 			});
 			controles.push(button);
 			adiciona = true;
@@ -1098,7 +1125,8 @@ i3GEO.editorOL = {
 						catch(e){}
 					}
 				},
-				title: "fecha editor"
+				title: "fecha editor",
+				type: OpenLayers.Control.TYPE_BUTTON
 			});
 			controles.push(button);
 			adiciona = true;
