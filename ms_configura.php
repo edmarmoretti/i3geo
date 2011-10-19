@@ -418,10 +418,11 @@ else //se for linux
 	//$navegadoresLocais = "";
 	$navegadoresLocais = array(
 							array(
-							"ip"=>"127.0.0.1",
-							"drives"=>array(
-										array("caminho"=>"/home","nome"=>"home")
-										)
+								"ip"=>"127.0.0.1",
+								"drives"=>array(
+									array("caminho"=>"/home","nome"=>"home"),
+									array("caminho"=>"/tmp","nome"=>"tmp")
+								)
 							)
 						);
 	$locmapserv = "/cgi-bin/mapserv";

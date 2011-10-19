@@ -1417,8 +1417,8 @@ function montaEditorGeral(dados)
 {
 	var param = {
 		"linhas":[
-		{ajuda:"Layer name",
-		titulo:"Name",id:"name",value:dados.name,tipo:"text"},
+		{ajuda:"Elemento 'NAME'. Não confunda com o nome que aparece no mapa ou  na árvore de temas. Normalmente o código recebe o mesmo nome do arquivo mapfile, sem a extensão '.map'",
+		titulo:"Código do layer",id:"name",value:dados.name,tipo:"text"},
 		{ajuda:"Name of a group that this layer belongs to. The group name can then be reference as a regular layer name in the template files, allowing to do things like turning on and off a group of layers at once.",
 		titulo:"Group",id:"group",value:dados.group,tipo:"text"},
 		{ajuda:"Projeção",
