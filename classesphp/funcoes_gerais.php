@@ -2009,16 +2009,20 @@ function downloadTema2($map_file,$tema,$locaplic,$dir_tmp,$postgis_mapa)
 	include_once($locaplic."/ms_configura.php");
 	else	
 	include_once("../ms_configura.php");
+	$versao = versao();
+	$versao = $versao["principal"];
 	//
 	//cria o arquivo mapfile, caso ele não exista, que servirá de base para obtenção dos dados
 	//
 	$nomeRand = true;
+	//echo $versao;exit;
 	if (($map_file == "") || (!@ms_newMapObj($map_file))) //a funcao foi chamada do aplicativo datadownload
 	{
 		if($base == "" or !isset($base)){
 			$base = "";
 			if (strtoupper(substr(PHP_OS, 0, 3) == 'WIN'))
 			{$base = $locaplic."/aplicmap/geral1windowsv".$versao.".map";}
+			
 			else
 			{
 				if($base == "" && file_exists('/var/www/i3geo/aplicmap/geral1debianv'.$versao.'.map')){
