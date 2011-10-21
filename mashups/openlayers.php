@@ -8,10 +8,10 @@ error_reporting(0);
 //
 if(!isset($temas))
 {ajuda();}
-if(!isset($largura))
-{$largura = 400;}
-if(!isset($altura))
-{$altura = 400;}
+if(isset($largura) && !isset($altura))
+{$altura = $largura;}
+if(isset($altura) && !isset($largura))
+{$largura = $altura;}
 //
 //define quais controles serão mostrados no mapa
 //
@@ -265,7 +265,13 @@ Parâmetros:
 </style>
 </head>
 <body class=" yui-skin-sam">
-<div id=i3geoMapa style="width:<?php echo $largura;?>px;height:<?php echo $altura;?>px;"></div>
+<?php
+if(isset($largura) && $largura != "")
+{echo '<div id=i3geoMapa style="width:'.$largura.'px;height:'.$altura.'px;"></div>';}
+else
+{echo '<div id=i3geoMapa style="width:100%;height:100%"></div>';}
+
+?>
 <div id=i3geoSelTemaAtivo style="height:15em;z-index:3000" class=" yui-skin-sam"></div>
 <script>
 i3GEO.editorOL.layersIniciais = [<?php
