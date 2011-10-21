@@ -356,13 +356,28 @@ function montaParametrosTemas(no,dados,redesenha)
 	var codigoLayer = no.data.codigoLayer;
 	var id = codigoMap+"_"+codigoLayer;
 	var conteudo = "";
-    if(!tree.getNodeByProperty("etiquetaConexao",id))
+    if(!tree.getNodeByProperty("etiquetaDados",id))
     {
-		conteudo = "<span style=cursor:pointer; onclick=\"editorConexao('"+codigoMap+"','"+codigoLayer+"')\" ><img width='10px' heigth='10px' style=\"position:relative;top:0px\" title='edita conexão' src=\"../imagens/06.png\" /> Editar fonte dos dados</span>"
-		var d = {tipo:"etiquetaConexao",etiquetaConexao:id,html:conteudo}
+		conteudo = "<span style=cursor:pointer; onclick=\"editorDados('"+codigoMap+"','"+codigoLayer+"')\" ><img width='10px' heigth='10px' style=\"position:relative;top:0px\" title='' src=\"../imagens/06.png\" /> Conexão com os dados</span>"
+		var d = {tipo:"etiquetaDados",etiquetaDados:id,html:conteudo}
 		var tempNode = new YAHOO.widget.HTMLNode(d, no, false,true);
 		tempNode.isLeaf = true;
 	}
+    if(!tree.getNodeByProperty("etiquetaTitulo",id))
+    {
+		conteudo = "<span style=cursor:pointer; onclick=\"editorTitulo('"+codigoMap+"','"+codigoLayer+"')\" ><img width='10px' heigth='10px' style=\"position:relative;top:0px\" title='' src=\"../imagens/06.png\" /> Título, escala, extensão</span>"
+		var d = {tipo:"etiquetaTitulo",etiquetaTitulo:id,html:conteudo}
+		var tempNode = new YAHOO.widget.HTMLNode(d, no, false,true);
+		tempNode.isLeaf = true;
+	}
+    if(!tree.getNodeByProperty("etiquetaDispo",id))
+    {
+		conteudo = "<span style=cursor:pointer; onclick=\"editorDispo('"+codigoMap+"','"+codigoLayer+"')\" ><img width='10px' heigth='10px' style=\"position:relative;top:0px\" title='' src=\"../imagens/06.png\" /> Disponibilidade (download, wms,...)</span>"
+		var d = {tipo:"etiquetaDispo",etiquetaDispo:id,html:conteudo}
+		var tempNode = new YAHOO.widget.HTMLNode(d, no, false,true);
+		tempNode.isLeaf = true;
+	}		
+//rever
     if(!tree.getNodeByProperty("etiquetaMetadados",id))
     {
 		conteudo = "<span style=cursor:pointer; onclick=\"editorMetadados('"+codigoMap+"','"+codigoLayer+"')\" ><img width='10px' heigth='10px' style=\"position:relative;top:0px\" title='edita metadados' src=\"../imagens/06.png\" /> Editar metaparâmetros</span>"
@@ -1034,18 +1049,47 @@ function excluirEstilo(codigoMap,codigoLayer,indiceClasse,indiceEstilo)
 	core_dialogoContinua(handleYes,handleNo,mensagem,largura)
 }
 /*
-Function: editorConexao
+Function: editorDados
 
-Abre o editor de conexões
+Abre o editor de conexão com a fonte dos dados de um layer
 
 <PEGACONEXAO>
 */
-function editorConexao(codigoMap,codigoLayer)
+function editorDados(codigoMap,codigoLayer)
 {
 	core_montaEditor("","450px","650px")
 	var sUrl = "../php/editormapfile.php?funcao=pegaConexao&codigoMap="+codigoMap+"&codigoLayer="+codigoLayer;
-	core_pegaDados("Obtendo dados...",sUrl,"montaEditorConexao")
+	core_pegaDados("Obtendo dados...",sUrl,"montaEditorDados")
 }
+/*
+Function: editorTitulo
+
+Abre o editor de título e descrição
+
+<PEGACONEXAO>
+*/
+function editorTitulo(codigoMap,codigoLayer)
+{
+	core_montaEditor("","450px","650px")
+	var sUrl = "../php/editormapfile.php?funcao=pegaTitulo&codigoMap="+codigoMap+"&codigoLayer="+codigoLayer;
+	core_pegaDados("Obtendo dados...",sUrl,"montaEditorTitulo")
+}
+/*
+Function: editorDispo
+
+Abre o editor que define a disponibilidade dos dados
+
+<PEGADISPO>
+*/
+function editorDispo(codigoMap,codigoLayer)
+{
+	core_montaEditor("","450px","650px")
+	var sUrl = "../php/editormapfile.php?funcao=pegaDispo&codigoMap="+codigoMap+"&codigoLayer="+codigoLayer;
+	core_pegaDados("Obtendo dados...",sUrl,"montaEditorDispo")
+}
+//depreciado
+function editorConexao(codigoMap,codigoLayer)
+{editorDados(codigoMap,codigoLayer);}
 /*
 Function: editorMetadados
 
@@ -1111,9 +1155,64 @@ function editorEstilo(codigoMap,codigoLayer,indiceClasse,indiceEstilo)
 	var sUrl = "../php/editormapfile.php?funcao=pegaEstilo&codigoMap="+codigoMap+"&codigoLayer="+codigoLayer+"&indiceClasse="+indiceClasse+"&indiceEstilo="+indiceEstilo;
 	core_pegaDados("Obtendo dados...",sUrl,"montaEditorEstilo")
 }
-function montaEditorConexao(dados)
+
+function montaEditorTitulo(dados)
 {
-	var idsForms = ["connection","data","tileitem","tileindex","type"];
+	var param = {
+		"linhas":[
+			{ajuda:"Elemento 'NAME'. Não confunda com o nome que aparece no mapa ou  na árvore de temas. Normalmente o código recebe o mesmo nome do arquivo mapfile, sem a extensão '.map'",
+			titulo:"Código do layer",id:"name",value:dados.name,tipo:"text"},
+			{ajuda:"Nome que será utilizado na legenda do mapa e na guia 'Temas'",
+			titulo:"Título (METADATA: TEMA)",id:"tema",value:dados.tema,tipo:"text"},
+			{ajuda:"Ícone que será mostrado na árvore de camadas. A imagem deve existir na web e deve ser incluído o caminho completo ou relativo em relação ao local da interface HTML do mapa.",
+			titulo:"Ícone (METADATA: ICONETEMA)",id:"iconetema",value:dados.iconetema,tipo:"text"},
+			{ajuda:"Mensagem que será mostrada no rodapé do mapa quando o tema estiver visível. É útil para apresentar ao usuário observações especiais sobre o uso daquele tema.",
+			titulo:"Mensagem (MENSAGEM)",id:"mensagem",value:dados.mensagem,tipo:"text"},
+			{ajuda:"Denominador da escala da fonte dos dados utilizado pelo tema. É utilizado para apresentar a indicação de compatibilidade entre a escala do tema e a escala do mapa que está sendo visto.",
+			titulo:"Escala (ESCALA)",id:"escala",value:dados.escala,tipo:"text"},
+			{ajuda:"Extensão geográfica máxima do tema, no formato xmin ymin xmax ymax. É utilizado na opção de 'zoom para o tema'. Quando o tema é baseado em shapefile, esse metadata não é necessário, pois o mapserver consegue calcular a extensão. Já em outros tipos de dados, como Postgis, o parâmetro é necessário. Nesse caso, se não for indicado, o botão de zoom para o tema não será visível para o usuário",
+			titulo:"Extensao (EXTENSAO)",id:"extensao",value:dados.extensao,tipo:"text"}		
+		]
+	}
+	var ins = "<input type=button title='Salvar' value='Salvar' id=salvarEditor />"
+	ins += core_geraLinhas(param)
+	ins += "<br><br><br>"
+	$i("editor_bd").innerHTML = ins
+		
+	var temp = function()
+	{salvarDadosEditor('titulo',dados.codigoMap,dados.codigoLayer,false)}
+	new YAHOO.widget.Button("salvarEditor",{ onclick: { fn: temp }});
+}
+function montaEditorDispo(dados)
+{
+	var param = {
+		"linhas":[
+			{ajuda:"Indica se o usuário pode fazer download do tema. Se sim, o ícone de download será mostrado na árvore de camadas disponíveis no mapa.",
+			titulo:"Ícone de download (METADATA: DOWNLOAD)",id:"",value:dados.download,tipo:"text",div:"<div id=cDownload ></div>"},
+			{ajuda:"Endereço de um arquivo pré-existente para download dos dados (caminho completo no servidor). Se definido, o sistema irá usar esse arquivo ao invés de gerar os dados, quando o usuário clicar nas opções de download. Se não for definido, o arquivo de download é gerado diretamente do original, convertendo do banco ou copiando o arquivo definido em DATA.",
+			titulo:"Arquivo download (ARQUIVODOWNLOAD)",id:"arquivodownload",value:dados.arquivodownload,tipo:"text"},
+			{ajuda:"Endereço de um arquivo KMZ ou KML pré-existente para download dos dados (caminho completo no servidor). Se definido, o sistema irá usar esse arquivo ao invés de gerar os dados, quando o usuário clicar nas opções de visualização de KML ou KMZ. Se não for definido, o arquivo é gerado diretamente do original.",
+			titulo:"Arquivo KML ou KMZ (ARQUIVOKMZ)",id:"arquivokmz",value:dados.arquivokmz,tipo:"text"}
+		]
+	}
+	var ins = "<input type=button title='Salvar' value='Salvar' id=salvarEditor />"
+	ins += core_geraLinhas(param)
+	ins += "<br><br><br>"
+	$i("editor_bd").innerHTML = ins
+	if($i("cDownload")){
+		temp = "<select id='download' >"
+		temp += core_combosimnao(dados.download)
+		temp += "</select>"
+		$i("cDownload").innerHTML = temp
+	}		
+	var temp = function()
+	{salvarDadosEditor('dispo',dados.codigoMap,dados.codigoLayer,false)}
+	new YAHOO.widget.Button("salvarEditor",{ onclick: { fn: temp }});
+}
+
+function montaEditorDados(dados)
+{
+	var idsForms = ["connection","data","tileitem","tileindex","type","tipooriginal"];
 	var param = {
 		"linhas":[
 		{ajuda:"Type of connection. Default is local.",
@@ -1124,10 +1223,18 @@ function montaEditorConexao(dados)
 		titulo:"Data",id:"data",value:dados.data,tipo:"text"},
 		{ajuda:"Specifies how the data should be drawn. Need not be the same as the shapefile type. For example, a polygon shapefile may be drawn as a point layer, but a point shapefile may not be drawn as a polygon layer. Common sense rules. Annotation means that a label point will be calculated for the features, but the feature itself will not be drawn although a marker symbol can be optionally drawn. this allows for advanced labeling like numbered highway shields. Points are labeled at that point. Polygons are labeled first using a centroid, and if that doesn't fall in the polygon a scanline approach is used to guarantee the label falls within the feature. Lines are labeled at the middle of the longest arc in the visible portion of the line. Query only means the layer can be queried but not drawn.In order to differentiate between POLYGONs and POLYLINEs (which do not exist as a type), simply respectively use or ommit the COLOR keyword when classifying. If you use it, it's a polygon with a fill color, otherwise it's a polyline with only an OUTLINECOLOR.For CHART layers, see the Dynamic Charting howto.A circle must be defined by a a minimum bounding rectangle. That is, 2 points that define the smallest square that can contain it. These 2 points are the two opposite corners of said box",
 		titulo:"Type",id:"",value:dados.type,tipo:"text",div:"<div id=cType ></div>"},
+		{ajuda:"Projeção",
+		titulo:"Projection",id:"projection",value:dados.projection,tipo:"text"},		
+		{ajuda:"This parameter allows for data specific attribute filtering that is done at the same time spatial filtering is done, but before any CLASS expressions are evaluated. For OGR and shapefiles the string is simply a mapserver regular expression. For spatial databases the string is a SQL WHERE clause that is valid with respect to the underlying database.For example: FILTER type='road' and size <2",
+		titulo:"Filter",id:"filter",value:dados.filter,tipo:"text"},
+		{ajuda:"Item to use with simple FILTER expressions. OGR and shapefiles only.",
+		titulo:"Filteritem",id:"filteritem",value:dados.filteritem,tipo:"text"},
 		{ajuda:"Item that contains the location of an individual tile, default is 'location'.",
 		titulo:"tileitem",id:"tileitem",value:dados.tileitem,tipo:"text"},
 		{ajuda:"Name of the tileindex file or layer. A tileindex is similar to an ArcInfo library index. The tileindex contains polygon features for each tile. The item that contains the location of the tiled data is given using the TILEITEM parameter. When a file is used as the tileindex for shapefile or raster layers, the tileindex should be a shapefile. For CONNECTIONTYPE OGR layers, any OGR supported datasource can be a tileindex. Normally the location should contain the path to the tile file relative to the shapepath, not relative to the tileindex itself. If the DATA parameter contains a value then it is added to the end of the location. When a tileindex layer is used, it works similarly to directly referring to a file, but any supported feature source can be used (ie. postgres, oracle).NOTE: All files in the tileindex should have the same coordinate system, and for vector files the same set of attributes in the same order.",
-		titulo:"tileindex",id:"tileindex",value:dados.tileindex,tipo:"text"}
+		titulo:"tileindex",id:"tileindex",value:dados.tileindex,tipo:"text"},
+		{ajuda:"Tipo de representação das feições mostradas da camada. É importante definir esse parâmetro para que as funções de geração de SLD funcionem corretamente.",
+		titulo:"Tipo de representação (tipooriginal) - para temas do tipo WMS",id:"",value:dados.tipooriginal,tipo:"text",div:"<div id=cTipooriginal ></div>"}
 		]
 	}
 	var ins = "<input type=button title='Salvar' value='Salvar' id=salvarEditor />"
@@ -1135,13 +1242,25 @@ function montaEditorConexao(dados)
 
 	if(dados.postgis_mapa.length > 0)
 	{
-		ins += "<p>Os seguintes 'alias' estão definidos no metadata 'ITENS': ";
+		ins += "<p>Os seguintes 'alias' estão definidos em ms_configura como nomes de conexões: ";
 		ins += dados.postgis_mapa;
-		ins += "<br>Os campos em cores não são compatíveis com o tipo de conexão.</p>";
+		ins += "<br>Os campos em cores não são compatíveis com o tipo de conexão.</p><br>";
 	}
+	if(dados.colunas != "" && dados.colunas != undefined)
+	{
+		ins += "<p>O layer possuí as seguintes colunas na tabela de atributos: ";
+		ins += dados.colunas+"</p><br>"
+	}	
 	ins += core_geraLinhas(param)
 	ins += "<br><br><br>"
 	$i("editor_bd").innerHTML = ins
+
+	if($i("cTipooriginal")){
+		temp = "<select id='tipooriginal' >"
+		temp += core_comboObjeto(objtipooriginal,"valor","texto",dados.tipooriginal)
+		temp += "</select>"
+		$i("cTipooriginal").innerHTML = temp
+	}	
 	
 	temp = "<select id='connectiontype' >"
 	temp += core_comboObjeto(objcontype,"valor","texto",dados.connectiontype)
@@ -1161,6 +1280,7 @@ function montaEditorConexao(dados)
 	var temp = function()
 	{salvarDadosEditor('conexao',dados.codigoMap,dados.codigoLayer,"","",true)}
 	new YAHOO.widget.Button("testarEditor",{ onclick: { fn: temp }});
+	
 	core_desativaforms(idsForms);
 	$i("connectiontype").onchange = function(){
 		core_desativaforms(idsForms);
@@ -1178,7 +1298,7 @@ function montaEditorConexao(dados)
 		if(valor == 5)
 		{d = ["connection","tileitem","tileindex","type"];}
 		if(valor == 7 || valor == 9)
-		{d = ["connection","type"];}
+		{d = ["connection","type","tipooriginal"];}
 		core_ativaforms(d);
 	};
 	$i("connectiontype").onchange.call();
@@ -1190,7 +1310,9 @@ function montaEditorMetadados(dados)
 			{ajuda:"A palete é válida apenas para temas RASTER. Entre com o endereço do arquivo no servidor. Veja exemplo em i3geo/localhost/symbols/testepalete.txt",
 			titulo:"Arquivo com palete de cores (opcional e serve apenas para temas raster) (PALLETEFILE)",id:"palletefile",value:dados.palletefile,tipo:"text"},
 			{ajuda:"Quantas cores em cada nível da palete. Veja exemplo em i3geo/localhost/symbols/testepalete.txt",
-			titulo:"Passo (opcional e serve apenas para temas raster) (PALLETESTEP)",id:"palletestep",value:dados.palletestep,tipo:"text"}
+			titulo:"Passo (opcional e serve apenas para temas raster) (PALLETESTEP)",id:"palletestep",value:dados.palletestep,tipo:"text"},
+			{ajuda:"Indica se o usuário pode incluir comentários no tema",
+			titulo:"Permite comentar (PERMITECOMENTARIO)",id:"",value:dados.permitecomentario,tipo:"text",div:"<div id=cPermitecomentario ></div>"},			
 		]
 	};
 	var paramVetor = {
@@ -1221,12 +1343,6 @@ function montaEditorMetadados(dados)
 	};
 	var paramNaoOWS = {
 		"linhas":[
-			{ajuda:"Indica se o usuário pode fazer download do tema. Se sim, o ícone de download será mostrado na árvore de camadas disponíveis no mapa.",
-			titulo:"Download (METADATA: DOWNLOAD)",id:"",value:dados.download,tipo:"text",div:"<div id=cDownload ></div>"},
-			{ajuda:"Endereço de um arquivo pré-existente para download dos dados (caminho completo no servidor). Se definido, o sistema irá usar esse arquivo ao invés de gerar os dados, quando o usuário clicar nas opções de download. Se não for definido, o arquivo de download é gerado diretamente do original, convertendo do banco ou copiando o arquivo definido em DATA.",
-			titulo:"Arquivo download (ARQUIVODOWNLOAD)",id:"arquivodownload",value:dados.arquivodownload,tipo:"text"},
-			{ajuda:"Endereço de um arquivo KMZ ou KML pré-existente para download dos dados (caminho completo no servidor). Se definido, o sistema irá usar esse arquivo ao invés de gerar os dados, quando o usuário clicar nas opções de visualização de KML ou KMZ. Se não for definido, o arquivo é gerado diretamente do original.",
-			titulo:"Arquivo KML ou KMZ (ARQUIVOKMZ)",id:"arquivokmz",value:dados.arquivokmz,tipo:"text"},
 			{ajuda:"É possível a geração de classes automaticamente por meio da definição de colunas na tabela de atributos do tema que armazenam as informações sobre cor, tamanho, etc. Esse metadata é utilizado para definir qual a coluna da tabela que identifica unicamente cada classe. Para cada valor será criada uma classe.<br>O tema que utiliza a geração de classes de forma automática, deve ter definido apenas uma classe. Essa classe será utilizada como padrão para geração das demais.",
 			titulo:"Auto-legenda: id das classes (CLASSESITEM)",id:"classesitem",value:dados.classesitem,tipo:"text"},
 			{ajuda:"Nome da coluna que será utilizada para compor o nome das classes geradas automaticamente.",
@@ -1241,23 +1357,12 @@ function montaEditorMetadados(dados)
 	};
 	var param = {
 		"linhas":[
-			{ajuda:"Nome que será utilizado na legenda do mapa e na guia 'Temas'",
-			titulo:"Tema (METADATA: TEMA)",id:"tema",value:dados.tema,tipo:"text"},
 			{ajuda:"Temporizador (em segundos) para atualização automática da camada. A camada será redesenhada continuamente a cada intervalo de tempo definido",
 			titulo:"Temporizador em segundos (METADATA: TEMPORIZADOR)",id:"temporizador",value:dados.temporizador,tipo:"text"},
-			{ajuda:"Ícone que será mostrado na árvore de camadas. A imagem deve existir na web e deve ser incluído o caminho completo ou relativo em relação ao local da interface HTML do mapa.",
-			titulo:"Ícone (METADATA: ICONETEMA)",id:"iconetema",value:dados.iconetema,tipo:"text"},
-			{ajuda:"Denominador da escala da fonte dos dados utilizado pelo tema. É utilizado para apresentar a indicação de compatibilidade entre a escala do tema e a escala do mapa que está sendo visto.",
-			titulo:"Escala (ESCALA)",id:"escala",value:dados.escala,tipo:"text"},
-			{ajuda:"Extensão geográfica máxima do tema, no formato xmin ymin xmax ymax. É utilizado na opção de 'zoom para o tema'. Quando o tema é baseado em shapefile, esse metadata não é necessário, pois o mapserver consegue calcular a extensão. Já em outros tipos de dados, como Postgis, o parâmetro é necessário. Nesse caso, se não for indicado, o botão de zoom para o tema não será visível para o usuário",
-			titulo:"Extensao (EXTENSAO)",id:"extensao",value:dados.extensao,tipo:"text"},
 			{ajuda:"Ativa ou não a manutenção de um cache para armazenar as imagens geradas para montar o mapa. Essa opção afeta apenas as interfaces do i3Geo que utilizam o modo TILE (como a interface OpenLayers). O cache é mantido no diretório temporário utilizado pelo i3Geo, na pasta chamada cache. Para cada camada é criada uma sub-pasta. Para limpar o cache, utilize a opção existente junto ao nó principal desse mapfile",
 			titulo:"Cache de mapas. Camadas WMS são acessadas diretamente do servidor de origem quando o cache estiver inativo. (CACHE)",id:"",value:dados.cache,tipo:"text",div:"<div id=cCache ></div>"},
 			{ajuda:"Nome da coluna da tabela de atributos do tema que será utilizado na ferramenta busca rápida. Entre apenas uma coluna",
 			titulo:"Item utilizado no busca rápida (itembuscarapida)",id:"itembuscarapida",value:dados.itembuscarapida,tipo:"text"},
-
-			{ajuda:"Indica se o usuário pode incluir comentários no tema",
-			titulo:"Permite comentar (PERMITECOMENTARIO)",id:"",value:dados.permitecomentario,tipo:"text",div:"<div id=cPermitecomentario ></div>"},
 			{ajuda:"Indica se as classes serão mostradas ou não na legenda. Por padrão é SIM. ",
 			titulo:"Classe (CLASSE)",id:"",value:dados.classe,tipo:"text",div:"<div id=cClasse ></div>"},
 			{ajuda:"URL de uma imagem que será utilizada em substituição à geração normal da legenda ",
@@ -1277,15 +1382,12 @@ function montaEditorMetadados(dados)
 			{ajuda:"Template utilizado no gerador de KML para definir o conteúdo dos balões de informação. O template utiliza o caractere '%' para iniciar e fechar o nome de uma coluna. O template pode usar também elementos HTML, por exemplo: <code>'<b>Nome do municipio</b>: %NOMEMUN%'</code>. Se o template não for especificado, o i3Geo irá utilizar o metadata ITENS e ITENSDESC. Se esses não forem especificados, será utilizado o nome original da coluna.",
 			titulo:"KML template (DESCRIPTION_TEMPLATE)",id:"description_template",value:dados.description_template,tipo:"text"},
 			{ajuda:"Lista de colunas que serão utilizadas na opção de inclusão de 'etiquetas'. As etiquetas são mostradas no mapa quando o usuário estaciona o mouse por alguns instantes sobre o mapa. Separe a lista com ','.",
-			titulo:"Etiqueta (TIP)",id:"tip",value:dados.tip,tipo:"text"},
-			{ajuda:"Mensagem que será mostrada no rodapé do mapa quando o tema estiver visível. É útil para apresentar ao usuário observações especiais sobre o uso daquele tema.",
-			titulo:"Mensagem (MENSAGEM)",id:"mensagem",value:dados.mensagem,tipo:"text"}
+			titulo:"Etiqueta (TIP)",id:"tip",value:dados.tip,tipo:"text"}
 		]
 	};
+	
 	var paramOWS = {
 		"linhas":[
-			{ajuda:"Tipo de representação das feições mostradas da camada. É importante definir esse parâmetro para que as funções de geração de SLD funcionem corretamente.",
-			titulo:"Tipo de representação (tipooriginal)",id:"",value:dados.tipooriginal,tipo:"text",div:"<div id=cTipooriginal ></div>"},
 			{ajuda:"space-delimited list of EPSG projection codes supported by the remote server. You normally get this from the server’s capabilities output. This value should be upper case (EPSG:4236.....not epsg:4236) to avoid problems with case sensitive platforms. The value is used to set the SRS WMS URL parameter",
 			titulo:"wms_srs",id:"wms_srs",value:dados.wms_srs,tipo:"text"},
 			{ajuda:"comma-separated list of layers to be fetched from the remote WMS server. This value is used to set the LAYERS and QUERY_LAYERS WMS URL parameters.",
@@ -1372,19 +1474,6 @@ function montaEditorMetadados(dados)
 		temp += "</select>"
 		$i("cPermitecomentario").innerHTML = temp
 	}
-	if($i("cTipooriginal")){
-		temp = "<select id='tipooriginal' >"
-		temp += core_comboObjeto(objtipooriginal,"valor","texto",dados.tipooriginal)
-		temp += "</select>"
-		$i("cTipooriginal").innerHTML = temp
-	}
-
-	if($i("cDownload")){
-		temp = "<select id='download' >"
-		temp += core_combosimnao(dados.download)
-		temp += "</select>"
-		$i("cDownload").innerHTML = temp
-	}
 	if($i("cClasse")){
 		temp = "<p><select id='classe' >"
 		temp += core_combosimnao(dados.classe)
@@ -1417,16 +1506,10 @@ function montaEditorGeral(dados)
 {
 	var param = {
 		"linhas":[
-		{ajuda:"Elemento 'NAME'. Não confunda com o nome que aparece no mapa ou  na árvore de temas. Normalmente o código recebe o mesmo nome do arquivo mapfile, sem a extensão '.map'",
-		titulo:"Código do layer",id:"name",value:dados.name,tipo:"text"},
 		{ajuda:"Name of a group that this layer belongs to. The group name can then be reference as a regular layer name in the template files, allowing to do things like turning on and off a group of layers at once.",
 		titulo:"Group",id:"group",value:dados.group,tipo:"text"},
-		{ajuda:"Projeção",
-		titulo:"Projection",id:"projection",value:dados.projection,tipo:"text"},		
 		{ajuda:"Sets the current status of the layer. Often modified by MapServer itself. Default turns the layer on permanently",
 		titulo:"Status",id:"",value:dados.status,tipo:"text",div:"<div id=cStatus ></div>"},		
-		{ajuda:"Specifies how the data should be drawn. Need not be the same as the shapefile type. For example, a polygon shapefile may be drawn as a point layer, but a point shapefile may not be drawn as a polygon layer. Common sense rules. Annotation means that a label point will be calculated for the features, but the feature itself will not be drawn although a marker symbol can be optionally drawn. this allows for advanced labeling like numbered highway shields. Points are labeled at that point. Polygons are labeled first using a centroid, and if that doesn't fall in the polygon a scanline approach is used to guarantee the label falls within the feature. Lines are labeled at the middle of the longest arc in the visible portion of the line. Query only means the layer can be queried but not drawn.In order to differentiate between POLYGONs and POLYLINEs (which do not exist as a type), simply respectively use or ommit the COLOR keyword when classifying. If you use it, it's a polygon with a fill color, otherwise it's a polyline with only an OUTLINECOLOR.For CHART layers, see the Dynamic Charting howto.A circle must be defined by a a minimum bounding rectangle. That is, 2 points that define the smallest square that can contain it. These 2 points are the two opposite corners of said box",
-		titulo:"Type",id:"",value:dados.type,tipo:"text",div:"<div id=cType ></div>"},		
 		{ajuda:"Sets the color index to treat as transparent for raster layers.",
 		titulo:"Offsite (R,G,B) (utilize -1,-1,-1 para anular o valor)",id:"offsite",value:dados.offsite,tipo:"text"},
 		{ajuda:"Sets the opacity level (or the inability to see through the layer) of all classed pixels for a given layer. The value can either be an integer in the range (0-100) or the named symbol 'ALPHA'. A value of 100 is opaque and 0 is fully transparent. Implemented in MapServer 5.0, to replace the deprecated TRANSPARENCY parameter.The 'ALPHA' symbol directs the MapServer rendering code to honor the indexed or alpha transparency of pixmap symbols used to style a layer. This is only needed in the case of RGB output formats, and should be used only when necessary as it is expensive to render transparent pixmap symbols onto an RGB map image.",
@@ -1435,10 +1518,6 @@ function montaEditorGeral(dados)
 		titulo:"Maxscale (utilize -1 para anular o valor)",id:"maxscale",value:dados.maxscale,tipo:"text"},
 		{ajuda:"Minimum scale at which this LAYER is drawn. Scale is given as the denominator of the actual scale fraction, for example for a map at a scale of 1:24,000 use 24000.",
 		titulo:"Minscale (utilize -1 para anular o valor)",id:"minscale",value:dados.minscale,tipo:"text"},
-		{ajuda:"This parameter allows for data specific attribute filtering that is done at the same time spatial filtering is done, but before any CLASS expressions are evaluated. For OGR and shapefiles the string is simply a mapserver regular expression. For spatial databases the string is a SQL WHERE clause that is valid with respect to the underlying database.For example: FILTER type='road' and size <2",
-		titulo:"Filter",id:"filter",value:dados.filter,tipo:"text"},
-		{ajuda:"Item to use with simple FILTER expressions. OGR and shapefiles only.",
-		titulo:"Filteritem",id:"filteritem",value:dados.filteritem,tipo:"text"},
 		{ajuda:"Item name in attribute table to use for class annotation (i.e. labeling).",
 		titulo:"Labelitem",id:"labelitem",value:dados.labelitem,tipo:"text"},
 		{ajuda:"Maximum scale at which this LAYER is labeled. Scale is given as the denominator of the actual scale fraction, for example for a map at a scale of 1:24,000 use 24000.",
@@ -1472,11 +1551,6 @@ function montaEditorGeral(dados)
 	temp += "</select>"
 	$i("cStatus").innerHTML = temp	
 	
-	temp = "<select id='type' >"
-	temp += core_comboObjeto(objlayertypes,"valor","texto",dados.type)
-	temp += "</select>"
-	$i("cType").innerHTML = temp
-	
 	temp = "<select id='sizeunits' >"
 	temp += core_comboObjeto(objmapunits,"valor","texto",dados.sizeunits)
 	temp += "</select>"
@@ -1493,7 +1567,6 @@ function montaEditorGeral(dados)
 	var temp = function()
 	{salvarDadosEditor('geral',dados.codigoMap,dados.codigoLayer,"","",true)}
 	new YAHOO.widget.Button("testarEditor",{ onclick: { fn: temp }});
-
 }
 function montaEditorClasseGeral(dados)
 {
@@ -1728,13 +1801,13 @@ Altera um mapfile conforme o editor específico de uma característica
 function salvarDadosEditor(tipo,codigoMap,codigoLayer,indiceClasse,indiceEstilo,testar)
 {
 	if(arguments.length < 6){var testar = false;}
-	if(tipo == "conexao")
+	if(tipo == "dispo")
 	{
-		var campos = new Array("type","connection","data","connectiontype","tileitem","tileindex")
-		var par = "&codigoMap="+codigoMap+"&codigoLayer="+codigoLayer
-		var prog = "../php/editormapfile.php?funcao=alterarConexao"
+		var campos = new Array("download","arquivodownload","arquivokmz");
+		var par = "&codigoMap="+codigoMap+"&codigoLayer="+codigoLayer;
+		var prog = "../php/editormapfile.php?funcao=alterarDispo";
 	}
-	if(tipo == "metadados")
+	if(tipo == "titulo")
 	{
 		//
 		//validação
@@ -1756,13 +1829,26 @@ function salvarDadosEditor(tipo,codigoMap,codigoLayer,indiceClasse,indiceEstilo,
 			else
 			{alert("Valor de escala incorreto");return;}
 		}
-		var campos = new Array("legendaimg","wms_srs","wms_name","wms_server_version","wms_format","wms_auth_username","wms_auth_password","wms_auth_type","wms_connectiontimeout","wms_latlonboundingbox","wms_proxy_auth_type","wms_proxy_host","wms_proxy_port","wms_proxy_type","wms_proxy_username","wms_proxy_password","wms_sld_body","wms_sld_url","wms_style","wms_bgcolor","wms_transparent","wms_time","permitecomentario","itembuscarapida","cache","iconetema","ltempoformatodata","ltempoiteminicio","ltempoitemfim","ltempoitemtitulo","ltempoitemdescricao","ltempoitemtip","ltempoitemimagem","ltempoitemicone","ltempoitemlink","editorsql","description_template","palletefile","palletestep","arquivokmz","temporizador","arquivodownload","aplicaextensao","classestamanho","classessimbolo","classescor","classesnome","classesitem","mensagem","identifica","transitioneffect","extensao","escondido","download","escala","tema","classe","tip","itenslink","itens","itensdesc")
+
+		var campos = new Array("name","tema","iconetema","mensagem","escala","extensao");
+		var par = "&codigoMap="+codigoMap+"&codigoLayer="+codigoLayer;
+		var prog = "../php/editormapfile.php?funcao=alterarTitulo"
+	}
+	if(tipo == "conexao")
+	{
+		var campos = new Array("projection","type","connection","data","connectiontype","tileitem","tileindex","filteritem","filter","tipooriginal")
+		var par = "&codigoMap="+codigoMap+"&codigoLayer="+codigoLayer
+		var prog = "../php/editormapfile.php?funcao=alterarConexao"
+	}
+	if(tipo == "metadados")
+	{
+		var campos = new Array("legendaimg","wms_srs","wms_name","wms_server_version","wms_format","wms_auth_username","wms_auth_password","wms_auth_type","wms_connectiontimeout","wms_latlonboundingbox","wms_proxy_auth_type","wms_proxy_host","wms_proxy_port","wms_proxy_type","wms_proxy_username","wms_proxy_password","wms_sld_body","wms_sld_url","wms_style","wms_bgcolor","wms_transparent","wms_time","permitecomentario","itembuscarapida","cache","ltempoformatodata","ltempoiteminicio","ltempoitemfim","ltempoitemtitulo","ltempoitemdescricao","ltempoitemtip","ltempoitemimagem","ltempoitemicone","ltempoitemlink","editorsql","description_template","palletefile","palletestep","temporizador","aplicaextensao","classestamanho","classessimbolo","classescor","classesnome","classesitem","identifica","transitioneffect","extensao","escondido","classe","tip","itenslink","itens","itensdesc")
 		var par = "&codigoMap="+codigoMap+"&codigoLayer="+codigoLayer
 		var prog = "../php/editormapfile.php?funcao=alterarMetadados"
 	}
 	if(tipo == "geral")
 	{
-		var campos = new Array("name","projection","sizeunits","status","toleranceunits","tolerance","symbolscale","opacity","offsite","minscale","maxscale","labelminscale","labelmaxscale","labelitem","group","filteritem","type","filter")
+		var campos = new Array("sizeunits","status","toleranceunits","tolerance","symbolscale","opacity","offsite","minscale","maxscale","labelminscale","labelmaxscale","labelitem","group")
 		var par = "&codigoMap="+codigoMap+"&codigoLayer="+codigoLayer
 		var prog = "../php/editormapfile.php?funcao=alterarGeral"
 	}
