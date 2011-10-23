@@ -174,7 +174,7 @@ echo "Carregando o map_file base...\n";
 $versao = versao();
 $versao = $versao["principal"];
 if(isset($base) && $base != ""){
-	if(!file_exists($base))
+	if(file_exists($base))
 	{$f = $base;}
 	else
 	{$f = $locaplic."/aplicmap/".$base.".map";}
