@@ -670,6 +670,18 @@ switch (strtoupper($funcao))
 		retornaJSON(pegaDispo());
 		exit;
 	break;
+	case "PEGACOMPORT":
+		retornaJSON(pegaComport());
+		exit;
+	break;
+	case "ALTERARCOMPORT":
+		if(verificaEditores($editores) == "nao")
+		{echo "Vc nao e um editor cadastrado. Apenas os editores definidos em i3geo/ms_configura.php podem acessar o sistema de administracao.";exit;}
+		alterarComport();
+		retornaJSON(pegaComport());
+		exit;
+	break;
+
 	/*
 	Valor: ALTERARMETADADOS
 	
@@ -1310,6 +1322,79 @@ function excluirEstilo()
 	removeCabecalho($mapfile);
 	return "ok";
 }
+function pegaComport()
+{
+	global $codigoMap,$codigoLayer,$locaplic,$postgis_mapa;
+	$dados = array();
+	$mapfile = $locaplic."/temas/".$codigoMap.".map";
+	$mapa = ms_newMapObj($mapfile);
+	$layer = $mapa->getlayerbyname($codigoLayer);
+	$v = versao();
+	$dados["aplicaextensao"] = $layer->getmetadata("aplicaextensao");
+	$dados["permitecomentario"] = $layer->getmetadata("permitecomentario");
+	$dados["temporizador"] = $layer->getmetadata("temporizador");
+	$dados["classe"] = $layer->getmetadata("classe");
+	$dados["legendaimg"] = $layer->getmetadata("legendaimg");
+	$dados["escondido"] = $layer->getmetadata("escondido");
+	$dados["identifica"] = $layer->getmetadata("identifica");
+	$dados["transitioneffect"] = $layer->getmetadata("transitioneffect");
+	$dados["status"] = $layer->status;
+	$dados["offsite"] = $layer->offsite->red.",".$layer->offsite->green.",".$layer->offsite->blue;
+	$v["principal"] == "4" ? $dados["opacity"] = $layer->transparency : $dados["opacity"] = $layer->opacity;
+	$dados["maxscale"] = $layer->maxscaledenom;
+	$dados["minscale"] = $layer->minscaledenom;
+	$dados["labelitem"] = $layer->labelitem;
+	$dados["labelmaxscale"] = $layer->labelmaxscaledenom;
+	$dados["labelminscale"] = $layer->labelminscaledenom;
+	$dados["symbolscale"] = $layer->symbolscaledenom;
+	$dados["tolerance"] = $layer->tolerance;
+	$dados["toleranceunits"] = $layer->toleranceunits;
+	$dados["sizeunits"] = $layer->sizeunits;
+
+	$dados["codigoMap"] = $codigoMap;
+	$dados["codigoLayer"] = $codigoLayer;	
+	return $dados;
+}
+function alterarComport()
+{
+	global $dir_tmp,$codigoMap,$codigoLayer,$locaplic,$aplicaextensao,$permitecomentario,$temporizador,$classe,$legendaimg,$escondido,$identifica,$transitioneffect,$status,$offsite,$opacity,$maxscale,$minscale,$labelitem,$labelmaxscale,$labelminscale,$symbolscale,$tolerance,$toleranceunits,$sizeunits;
+	$v = versao();
+	$mapfile = $locaplic."/temas/".$codigoMap.".map";
+	$mapa = ms_newMapObj($mapfile);
+	$layer = $mapa->getlayerbyname($codigoLayer);
+	$layer->setmetadata("aplicaextensao",$aplicaextensao);
+	$layer->setmetadata("permitecomentario",$permitecomentario);
+	$layer->setmetadata("temporizador",$temporizador);
+	$layer->setmetadata("classe",$classe);
+	$layer->setmetadata("legendaimg",$legendaimg);
+	$layer->setmetadata("escondido",$escondido);
+	$layer->setmetadata("identifica",$identifica);
+	$layer->setmetadata("transitioneffect",$transitioneffect);
+	$layer->set("status",$status);
+	if($offsite == -1 || $offsite == "null")
+	{$offsite = "-1,-1,-1";}
+	$cor = $layer->offsite;
+	$c = explode(",",$offsite);
+	if(count($c) < 3)
+	$c = explode(" ",$offsite);
+	$cor->setrgb($c[0],$c[1],$c[2]);
+	$layer->offsite->red.",".$layer->offsite->green.",".$layer->offsite->blue;
+	$v["principal"] == "4" ? $layer->set("transparency",$opacity) : $layer->set("opacity",$opacity);
+	$layer->set("maxscaledenom",$maxscale);
+	$layer->set("minscaledenom",$minscale);
+	$layer->set("labelitem",$labelitem);
+	$layer->set("labelmaxscaledenom",$labelmaxscale);
+	$layer->set("labelminscaledenom",$labelminscale);
+	$layer->set("symbolscaledenom",$symbolscale);
+	$layer->set("tolerance",$tolerance);
+	$layer->set("toleranceunits",$toleranceunits);
+	$layer->set("sizeunits",$sizeunits);
+
+	$mapa->save($mapfile);
+	removeCabecalho($mapfile);
+	return "ok";
+}
+
 function pegaTitulo()
 {
 	global $codigoMap,$codigoLayer,$locaplic,$postgis_mapa;
@@ -1323,6 +1408,7 @@ function pegaTitulo()
 	$dados["mensagem"] = mb_convert_encoding($layer->getmetadata("mensagem"),"UTF-8","ISO-8859-1");//$layer->getmetadata("mensagem");
 	$dados["escala"] = $layer->getmetadata("escala");
 	$dados["extensao"] = $layer->getmetadata("extensao");
+	$dados["group"] = $layer->group;
 	$dados["codigoMap"] = $codigoMap;
 	$dados["codigoLayer"] = $codigoLayer;	
 	return $dados;
@@ -1339,11 +1425,11 @@ function alterarTitulo()
 	$layer->setmetadata("mensagem",$mensagem);
 	$layer->setmetadata("escala",$escala);
 	$layer->setmetadata("extensao",$extensao);
+	$layer->set("group",$group);
 	$mapa->save($mapfile);
 	removeCabecalho($mapfile);
 	return "ok";
 }
-
 function pegaDispo()
 {
 	global $codigoMap,$codigoLayer,$locaplic,$postgis_mapa;
@@ -1371,7 +1457,6 @@ function alterarDispo()
 	removeCabecalho($mapfile);
 	return "ok";
 }
-
 function pegaConexao()
 {
 	global $codigoMap,$codigoLayer,$locaplic,$postgis_mapa;
@@ -1384,6 +1469,7 @@ function pegaConexao()
 	$dados["data"] = $layer->data;
 	$dados["tileindex"] = $layer->tileindex;
 	$dados["tileitem"] = $layer->tileitem;
+	$dados["cache"] = $layer->getmetadata("cache");
 	if($dados["tileindex"] == ""){$dados["tileitem"] = "";}
 	if(is_array($postgis_mapa))
 	$dados["postgis_mapa"] = array_keys($postgis_mapa);
@@ -1396,6 +1482,10 @@ function pegaConexao()
 	if($dados["filter"]== ""){$dados["filter"] = "";}
 	$dados["filteritem"] = $layer->filteritem;
 	$dados["projection"] = $layer->getProjection();
+	if($dados["projection"] == "null")
+	{$dados["projection"] = "";}
+	$dados["projection"] = str_replace("+i","i",$dados["projection"]);
+
 	$dados["colunas"] = implode(" ,",pegaItens($layer));
 	if($layer->connectiontype == 7 || $layer->connectiontype == 9){
 		$dados["tipooriginal"] = $layer->getmetadata("tipooriginal");
@@ -1404,7 +1494,7 @@ function pegaConexao()
 }
 function alterarConexao()
 {
-	global $tipooriginal,$filteritem,$filter,$projection,$type,$dir_tmp,$testar,$codigoMap,$codigoLayer,$locaplic,$connection,$connectiontype,$data,$tileitem,$tileindex;
+	global $cache,$tipooriginal,$filteritem,$filter,$projection,$type,$dir_tmp,$testar,$codigoMap,$codigoLayer,$locaplic,$connection,$connectiontype,$data,$tileitem,$tileindex;
 	$mapfile = $locaplic."/temas/".$codigoMap.".map";
 	$mapa = ms_newMapObj($mapfile);
 	$layer = $mapa->getlayerbyname($codigoLayer);
@@ -1426,6 +1516,7 @@ function alterarConexao()
 	if($layer->connectiontype == 7 || $layer->connectiontype== 9){
 		$layer->setmetadata("tipooriginal",$tipooriginal);
 	}
+	$layer->setmetadata("cache",$cache);	
 	if($testar == "true")
 	{
 		$nome = $dir_tmp."/".$codigoMap.".map";
@@ -1454,29 +1545,15 @@ function pegaMetadados()
 	$dados["itensdesc"] = mb_convert_encoding($layer->getmetadata("itensdesc"),"UTF-8","ISO-8859-1"); //$layer->getmetadata("itensdesc");
 	$dados["itenslink"] = $layer->getmetadata("itenslink");
 	$dados["tip"] = $layer->getmetadata("tip");
-	
-	$dados["classe"] = $layer->getmetadata("classe");
-	
-	
-	$dados["escondido"] = $layer->getmetadata("escondido");
-	
-	$dados["identifica"] = $layer->getmetadata("identifica");
-	$dados["transitioneffect"] = $layer->getmetadata("transitioneffect");
-	
 	$dados["classesitem"] = $layer->getmetadata("classesitem");
 	$dados["classesnome"] = $layer->getmetadata("classesnome");
 	$dados["classescor"] = $layer->getmetadata("classescor");
 	$dados["classessimbolo"] = $layer->getmetadata("classessimbolo");
 	$dados["classestamanho"] = $layer->getmetadata("classestamanho");
-	$dados["aplicaextensao"] = $layer->getmetadata("aplicaextensao");
-	
-	$dados["temporizador"] = $layer->getmetadata("temporizador");
-	
 	$dados["palletefile"] = $layer->getmetadata("palletefile");
 	$dados["palletestep"] = $layer->getmetadata("palletestep");
 	$dados["description_template"] = $layer->getmetadata("description_template");
 	$dados["editorsql"] = $layer->getmetadata("editorsql");
-	$dados["cache"] = $layer->getmetadata("cache");
 	$dados["codigoMap"] = $codigoMap;
 	$dados["codigoLayer"] = $codigoLayer;
 	$dados["colunas"] = implode(" ,",pegaItens($layer));
@@ -1490,9 +1567,7 @@ function pegaMetadados()
 	$dados["ltempoitemicone"] = $layer->getmetadata("ltempoitemicone");
 	$dados["ltempoitemlink"] = $layer->getmetadata("ltempoitemlink");
 	
-	$dados["permitecomentario"] = $layer->getmetadata("permitecomentario");
 	$dados["itembuscarapida"] = $layer->getmetadata("itembuscarapida");
-	$dados["legendaimg"] = $layer->getmetadata("legendaimg");
 	if($layer->connectiontype == 7 || $layer->connectiontype == 9){
 		$dados["wms_srs"] = $layer->getmetadata("wms_srs");
 		$dados["wms_name"] = $layer->getmetadata("wms_name");
@@ -1521,7 +1596,7 @@ function pegaMetadados()
 }
 function alterarMetadados()
 {
-	global $tipooriginal,$legendaimg,$wms_srs,$wms_name,$wms_server_version,$wms_format,$wms_auth_username,$wms_auth_password,$wms_auth_type,$wms_connectiontimeout,$wms_latlonboundingbox,$wms_proxy_auth_type,$wms_proxy_host,$wms_proxy_port,$wms_proxy_type,$wms_proxy_username,$wms_proxy_password,$wms_sld_body,$wms_sld_url,$wms_style,$wms_bgcolor,$wms_transparent,$wms_time,$permitecomentario,$itembuscarapida,$iconetema,$ltempoformatodata,$ltempoiteminicio,$ltempoitemfim,$ltempoitemtitulo,$ltempoitemdescricao,$ltempoitemtip,$ltempoitemimagem,$ltempoitemicone,$ltempoitemlink,$description_template,$palletestep,$palletefile,$temporizador,$codigoMap,$codigoLayer,$locaplic,$aplicaextensao,$classestamanho,$classessimbolo,$classescor,$classesnome,$classesitem,$mensagem,$identifica,$transitioneffect,$extensao,$escondido,$classe,$tip,$itenslink,$itens,$itensdesc,$editorsql,$cache;
+	global $tipooriginal,$wms_srs,$wms_name,$wms_server_version,$wms_format,$wms_auth_username,$wms_auth_password,$wms_auth_type,$wms_connectiontimeout,$wms_latlonboundingbox,$wms_proxy_auth_type,$wms_proxy_host,$wms_proxy_port,$wms_proxy_type,$wms_proxy_username,$wms_proxy_password,$wms_sld_body,$wms_sld_url,$wms_style,$wms_bgcolor,$wms_transparent,$wms_time,$itembuscarapida,$iconetema,$ltempoformatodata,$ltempoiteminicio,$ltempoitemfim,$ltempoitemtitulo,$ltempoitemdescricao,$ltempoitemtip,$ltempoitemimagem,$ltempoitemicone,$ltempoitemlink,$description_template,$palletestep,$palletefile,$codigoMap,$codigoLayer,$locaplic,$classestamanho,$classessimbolo,$classescor,$classesnome,$classesitem,$mensagem,$extensao,$tip,$itenslink,$itens,$itensdesc,$editorsql;
 	$dados = array();
 	$mapfile = $locaplic."/temas/".$codigoMap.".map";
 	$mapa = ms_newMapObj($mapfile);
@@ -1530,30 +1605,15 @@ function alterarMetadados()
 	$layer->setmetadata("itensdesc",$itensdesc);
 	$layer->setmetadata("itenslink",$itenslink);
 	$layer->setmetadata("tip",$tip);
-	
-	$layer->setmetadata("classe",$classe);
-	
-	
-	$layer->setmetadata("escondido",$escondido);
-	
-	$layer->setmetadata("identifica",$identifica);
-	$layer->setmetadata("transitioneffect",$transitioneffect);
-	
 	$layer->setmetadata("classesitem",$classesitem);
 	$layer->setmetadata("classesnome",$classesnome);
 	$layer->setmetadata("classescor",$classescor);
 	$layer->setmetadata("classessimbolo",$classessimbolo);
 	$layer->setmetadata("classestamanho",$classestamanho);
-	$layer->setmetadata("aplicaextensao",$aplicaextensao);
-	
-	$layer->setmetadata("temporizador",$temporizador);
-	
 	$layer->setmetadata("palletefile",$palletefile);
 	$layer->setmetadata("palletestep",$palletestep);
 	$layer->setmetadata("description_template",$description_template);
 	$layer->setmetadata("editorsql",$editorsql);
-	$layer->setmetadata("cache",$cache);
-
 	$layer->setmetadata("ltempoformatodata",$ltempoformatodata);
 	$layer->setmetadata("ltempoiteminicio",$ltempoiteminicio);
 	$layer->setmetadata("ltempoitemfim",$ltempoitemfim);
@@ -1564,9 +1624,7 @@ function alterarMetadados()
 	$layer->setmetadata("ltempoitemicone",$ltempoitemicone);
 	$layer->setmetadata("ltempoitemlink",$ltempoitemlink);
 	
-	$layer->setmetadata("permitecomentario",$permitecomentario);
 	$layer->setmetadata("itembuscarapida",$itembuscarapida);
-	$layer->setmetadata("legendaimg",$legendaimg);
 	if($layer->connectiontype == 7 || $layer->connectiontype== 9){
 		$layer->setmetadata("wms_srs",$wms_srs);
 		$layer->setmetadata("wms_name",$wms_name);
@@ -1604,91 +1662,6 @@ function alterarMetadados()
 	$mapa->save($mapfile);
 	removeCabecalho($mapfile);
 	return "ok";
-}
-function pegaGeral()
-{
-	global $codigoMap,$codigoLayer,$locaplic;
-	$v = versao();
-	$dados = array();
-	$mapfile = $locaplic."/temas/".$codigoMap.".map";
-	$mapa = ms_newMapObj($mapfile);
-	$layer = $mapa->getlayerbyname($codigoLayer);
-	$dados["group"] = $layer->group;
-	//$dados["labelangleitem"] = $layer->labelangleitem;
-	$dados["labelitem"] = $layer->labelitem;
-	$dados["labelmaxscale"] = $layer->labelmaxscaledenom;
-	$dados["labelmaxscale"] = $layer->labelmaxscaledenom;
-	$dados["labelminscale"] = $layer->labelminscaledenom;
-	//$dados["labelsizeitem"] = $layer->labelsizeitem;
-	$dados["maxscale"] = $layer->maxscaledenom;
-	$dados["minscale"] = $layer->minscaledenom;
-	$dados["offsite"] = $layer->offsite->red.",".$layer->offsite->green.",".$layer->offsite->blue;
-	$v["principal"] == "4" ? $dados["opacity"] = $layer->transparency : $dados["opacity"] = $layer->opacity;
-	$dados["symbolscale"] = $layer->symbolscaledenom;
-	$dados["tolerance"] = $layer->tolerance;
-	$dados["toleranceunits"] = $layer->toleranceunits;
-	$dados["status"] = $layer->status;
-	$dados["sizeunits"] = $layer->sizeunits;
-	
-	if($dados["projection"] == "null")
-	{$dados["projection"] = "";}
-	$dados["projection"] = str_replace("+i","i",$dados["projection"]);
-	$dados["codigoMap"] = $codigoMap;
-	$dados["codigoLayer"] = $codigoLayer;
-	$dados["colunas"] = implode(" ,",pegaItens($layer));
-	return $dados;	
-}
-function alterarGeral()
-{
-	global $dir_tmp,$testar,$codigoMap,$codigoLayer,$locaplic,$sizeunits,$status,$toleranceunits,$tolerance,$symbolscale,$opacity,$offsite,$minscale,$maxscale,$labelsizeitem,$labelminscale,$labelmaxscale,$labelitem,$group;
-	error_reporting(0);
-	$v = versao();
-	$dados = array();
-	
-	$mapfile = $locaplic."/temas/".$codigoMap.".map";
-	$mapa = ms_newMapObj($mapfile);
-	$layer = $mapa->getlayerbyname($codigoLayer);
-	
-	if($offsite == -1 || $offsite == "null")
-	{$offsite = "-1,-1,-1";}
-	
-
-
-	$layer->set("group",$group);
-	//$layer->set("labelangleitem",$labelangleitem);
-	$layer->set("labelitem",$labelitem);
-	$layer->set("labelmaxscaledenom",$labelmaxscale);
-	$layer->set("labelminscaledenom",$labelminscale);
-	//$layer->set("labelsizeitem",$labelsizeitem);
-	$layer->set("maxscaledenom",$maxscale);
-	$layer->set("minscaledenom",$minscale);
-	$cor = $layer->offsite;
-	$c = explode(",",$offsite);
-	if(count($c) < 3)
-	$c = explode(" ",$offsite);
-	$cor->setrgb($c[0],$c[1],$c[2]);
-	$layer->offsite->red.",".$layer->offsite->green.",".$layer->offsite->blue;
-	$v["principal"] == "4" ? $layer->set("transparency",$opacity) : $layer->set("opacity",$opacity);
-
-	$layer->set("symbolscaledenom",$symbolscale);
-	$layer->set("tolerance",$tolerance);
-	$layer->set("toleranceunits",$toleranceunits);
-	$layer->set("status",$status);
-	$layer->set("sizeunits",$sizeunits);
-
-	if($testar == "true")
-	{
-		$nome = $dir_tmp."/".$codigoMap.".map";
-		$mapa->save($nome);
-		removeCabecalho($nome,false);
-		return $nome;
-	}
-	else
-	{
-		$mapa->save($mapfile);
-		removeCabecalho($mapfile);
-		return "ok";	
-	}
 }
 function pegaClasseGeral()
 {

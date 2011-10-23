@@ -370,6 +370,14 @@ function montaParametrosTemas(no,dados,redesenha)
 		var tempNode = new YAHOO.widget.HTMLNode(d, no, false,true);
 		tempNode.isLeaf = true;
 	}
+    if(!tree.getNodeByProperty("etiquetaComport",id))
+    {
+		conteudo = "<span style=cursor:pointer; onclick=\"editorComport('"+codigoMap+"','"+codigoLayer+"')\" ><img width='10px' heigth='10px' style=\"position:relative;top:0px\" title='' src=\"../imagens/06.png\" /> Comportamento no mapa</span>"
+		var d = {tipo:"etiquetaComport",etiquetaComport:id,html:conteudo}
+		var tempNode = new YAHOO.widget.HTMLNode(d, no, false,true);
+		tempNode.isLeaf = true;
+	}		
+	
     if(!tree.getNodeByProperty("etiquetaDispo",id))
     {
 		conteudo = "<span style=cursor:pointer; onclick=\"editorDispo('"+codigoMap+"','"+codigoLayer+"')\" ><img width='10px' heigth='10px' style=\"position:relative;top:0px\" title='' src=\"../imagens/06.png\" /> Disponibilidade (download, wms,...)</span>"
@@ -380,15 +388,8 @@ function montaParametrosTemas(no,dados,redesenha)
 //rever
     if(!tree.getNodeByProperty("etiquetaMetadados",id))
     {
-		conteudo = "<span style=cursor:pointer; onclick=\"editorMetadados('"+codigoMap+"','"+codigoLayer+"')\" ><img width='10px' heigth='10px' style=\"position:relative;top:0px\" title='edita metadados' src=\"../imagens/06.png\" /> Editar metaparâmetros</span>"
+		conteudo = "<span style=cursor:pointer; onclick=\"editorMetadados('"+codigoMap+"','"+codigoLayer+"')\" ><img width='10px' heigth='10px' style=\"position:relative;top:0px\" title='edita metadados' src=\"../imagens/06.png\" /> Miscelânea</span>"
 		var d = {tipo:"etiquetaMetadados",etiquetaMetadados:id,html:conteudo}
-		var tempNode = new YAHOO.widget.HTMLNode(d, no, false,true);
-		tempNode.isLeaf = true;
-	}
-    if(!tree.getNodeByProperty("etiquetaGeral",id))
-    {
-		conteudo = "<span style=cursor:pointer; onclick=\"editorGeral('"+codigoMap+"','"+codigoLayer+"')\" ><img width='10px' heigth='10px' style=\"position:relative;top:0px\" title='parâmetros gerais' src=\"../imagens/06.png\" /> Editar características gerais</span>"
-		var d = {tipo:"etiquetaGeral",etiquetaGeral:id,html:conteudo}
 		var tempNode = new YAHOO.widget.HTMLNode(d, no, false,true);
 		tempNode.isLeaf = true;
 	}
@@ -1062,6 +1063,20 @@ function editorDados(codigoMap,codigoLayer)
 	core_pegaDados("Obtendo dados...",sUrl,"montaEditorDados")
 }
 /*
+Function: editorComport
+
+Abre o editor das opções que controlam o comportamento do layer no mapa
+
+<PEGACOMPORT>
+*/
+function editorComport(codigoMap,codigoLayer)
+{
+	core_montaEditor("","450px","650px")
+	var sUrl = "../php/editormapfile.php?funcao=pegaComport&codigoMap="+codigoMap+"&codigoLayer="+codigoLayer;
+	core_pegaDados("Obtendo dados...",sUrl,"montaEditorComport")
+}
+
+/*
 Function: editorTitulo
 
 Abre o editor de título e descrição
@@ -1155,6 +1170,111 @@ function editorEstilo(codigoMap,codigoLayer,indiceClasse,indiceEstilo)
 	var sUrl = "../php/editormapfile.php?funcao=pegaEstilo&codigoMap="+codigoMap+"&codigoLayer="+codigoLayer+"&indiceClasse="+indiceClasse+"&indiceEstilo="+indiceEstilo;
 	core_pegaDados("Obtendo dados...",sUrl,"montaEditorEstilo")
 }
+function montaEditorComport(dados)
+{
+	var param = {
+		"linhas":[
+			{ajuda:"Sets the current status of the layer. Often modified by MapServer itself. Default turns the layer on permanently",
+			titulo:"Status",id:"",value:dados.status,tipo:"text",div:"<div id=cStatus ></div>"},		
+			{ajuda:"Indica se o tema irá ser mostrado na ferramenta de identificação",
+			titulo:"Identifica (IDENTIFICA)",id:"",value:dados.identifica,tipo:"text",div:"<div id=cIdentifica ></div>"},
+			{ajuda:"Sets the opacity level (or the inability to see through the layer) of all classed pixels for a given layer. The value can either be an integer in the range (0-100) or the named symbol 'ALPHA'. A value of 100 is opaque and 0 is fully transparent. Implemented in MapServer 5.0, to replace the deprecated TRANSPARENCY parameter.The 'ALPHA' symbol directs the MapServer rendering code to honor the indexed or alpha transparency of pixmap symbols used to style a layer. This is only needed in the case of RGB output formats, and should be used only when necessary as it is expensive to render transparent pixmap symbols onto an RGB map image.",
+			titulo:"Opacity",id:"opacity",value:dados.opacity,tipo:"text"},
+			{ajuda:"Indica se a extensão geográfica do mapa deve ser alterada quando o tema for adicionado ao mapa",
+			titulo:"Aplica extensao (APLICAEXTENSAO)",id:"",value:dados.aplicaextensao,tipo:"text",div:"<div id=cAplicaextensao ></div>"},
+			{ajuda:"Indica se o usuário pode incluir comentários no tema",
+			titulo:"Permite comentar (PERMITECOMENTARIO)",id:"",value:dados.permitecomentario,tipo:"text",div:"<div id=cPermitecomentario ></div>"},
+			{ajuda:"Temporizador (em segundos) para atualização automática da camada. A camada será redesenhada continuamente a cada intervalo de tempo definido",
+			titulo:"Temporizador em segundos (METADATA: TEMPORIZADOR)",id:"temporizador",value:dados.temporizador,tipo:"text"},
+			{ajuda:"Indica se as classes serão mostradas ou não na legenda. Por padrão é SIM. ",
+			titulo:"Classe (CLASSE)",id:"",value:dados.classe,tipo:"text",div:"<div id=cClasse ></div>"},
+			{ajuda:"URL de uma imagem que será utilizada em substituição à geração normal da legenda ",
+			titulo:"URL da legenda (opcional) (LEGENDAIMG)",id:"legendaimg",value:dados.legendaimg,tipo:"text"},
+			{ajuda:"Indica se o tema é mostrado no mapa mas não nas listas da legenda e na guia 'temas'",
+			titulo:"Escondido (ESCONDIDO)",id:"",value:dados.escondido,tipo:"text",div:"<div id=cEscondido ></div>"},
+			{ajuda:"Aplica efeitos de transição nas operações de zoom e pan na interface Openlayers",
+			titulo:"Efeitos de transição zoom (TRANSITIONEFFECT)",id:"",value:dados.transitioneffect,tipo:"text",div:"<div id=cTransitioneffect ></div>"},		
+			{ajuda:"Sets the color index to treat as transparent for raster layers.",
+			titulo:"Offsite (R,G,B) (utilize -1,-1,-1 para anular o valor)",id:"offsite",value:dados.offsite,tipo:"text"},
+			{ajuda:"Maximum scale at which this LAYER is drawn. Scale is given as the denominator of the actual scale fraction, for example for a map at a scale of 1:24,000 use 24000.",
+			titulo:"Maxscale (utilize -1 para anular o valor)",id:"maxscale",value:dados.maxscale,tipo:"text"},
+			{ajuda:"Minimum scale at which this LAYER is drawn. Scale is given as the denominator of the actual scale fraction, for example for a map at a scale of 1:24,000 use 24000.",
+			titulo:"Minscale (utilize -1 para anular o valor)",id:"minscale",value:dados.minscale,tipo:"text"},
+			{ajuda:"Item name in attribute table to use for class annotation (i.e. labeling).",
+			titulo:"Labelitem",id:"labelitem",value:dados.labelitem,tipo:"text"},
+			{ajuda:"Maximum scale at which this LAYER is labeled. Scale is given as the denominator of the actual scale fraction, for example for a map at a scale of 1:24,000 use 24000.",
+			titulo:"Labelmaxscale (utilize -1 para anular o valor)",id:"labelmaxscale",value:dados.labelmaxscale,tipo:"text"},
+			{ajuda:"Minimum scale at which this LAYER is labeled. Scale is given as the denominator of the actual scale fraction, for example for a map at a scale of 1:24,000 use 24000.",
+			titulo:"Labelminscale (utilize -1 para anular o valor)",id:"labelminscale",value:dados.labelminscale,tipo:"text"},
+			{ajuda:"The scale at which symbols and/or text appear full size. This allows for dynamic scaling of objects based on the scale of the map. If not set then this layer will always appear at the same size. Scaling only takes place within the limits of MINSIZE and MAXSIZE as described above. Scale is given as the denominator of the actual scale fraction, for example for a map at a scale of 1:24,000 use 24000.",
+			titulo:"Symbolscale (utilize -1 para anular o valor)",id:"symbolscale",value:dados.symbolscale,tipo:"text"},
+			{ajuda:"Sensitivity for point based queries (i.e. via mouse and/or map coordinates). Given in TOLERANCEUNITS. If the layer is a POINT or a LINE, the default is 3. For all other layer types, the default is 0. To restrict polygon searches so that the point must occur in the polygon set the tolerance to zero.",
+			titulo:"Tolerance",id:"tolerance",value:dados.tolerance,tipo:"text"},			
+			{ajuda:" ",
+			titulo:"Tolerance units",id:"",value:dados.toleranceunits,tipo:"text",div:"<div id=cToleranceunits ></div>"},			
+			{ajuda:"Sets the unit of CLASS object SIZE values (default is pixels). Useful for simulating buffering",
+			titulo:"Sizeunits",id:"",value:dados.sizeunits,tipo:"text",div:"<div id=cSizeunits ></div>"}		
+		]
+	}
+	var ins = "<input type=button title='Salvar' value='Salvar' id=salvarEditor />"
+	ins += core_geraLinhas(param)
+	ins += "<br><br><br>"
+	$i("editor_bd").innerHTML = ins
+
+	if($i("cAplicaextensao")){
+		temp = "<select id='aplicaextensao' >"
+		temp += core_combosimnao(dados.aplicaextensao)
+		temp += "</select>"
+		$i("cAplicaextensao").innerHTML = temp
+	}
+	if($i("cPermitecomentario")){
+		temp = "<select id='permitecomentario' >"
+		temp += core_combosimnao(dados.permitecomentario)
+		temp += "</select>"
+		$i("cPermitecomentario").innerHTML = temp
+	}
+	if($i("cClasse")){
+		temp = "<p><select id='classe' >"
+		temp += core_combosimnao(dados.classe)
+		temp += "</select>"
+		$i("cClasse").innerHTML = temp
+	}
+	if($i("cEscondido")){
+		temp = "<select id='escondido' >"
+		temp += core_combosimnao(dados.escondido)
+		temp += "</select>"
+		$i("cEscondido").innerHTML = temp
+	}
+	if($i("cIdentifica")){
+		temp = "<select id='identifica' >"
+		temp += core_combosimnao(dados.identifica)
+		temp += "</select>"
+		$i("cIdentifica").innerHTML = temp
+	}
+	if($i("cTransitioneffect")){
+		temp = "<select id='transitioneffect' >"
+		temp += core_combosimnao(dados.transitioneffect)
+		temp += "</select>"
+		$i("cTransitioneffect").innerHTML = temp
+	}
+	temp = "<select id='status' >"
+	temp += core_comboObjeto(objstatus,"valor","texto",dados.status)
+	temp += "</select>"
+	$i("cStatus").innerHTML = temp	
+	
+	temp = "<select id='sizeunits' >"
+	temp += core_comboObjeto(objmapunits,"valor","texto",dados.sizeunits)
+	temp += "</select>"
+	$i("cSizeunits").innerHTML = temp
+	temp = "<select id='toleranceunits' >"
+	temp += core_comboObjeto(objmapunits,"valor","texto",dados.toleranceunits)
+	temp += "</select>"
+	$i("cToleranceunits").innerHTML = temp
+
+	var temp = function()
+	{salvarDadosEditor('comport',dados.codigoMap,dados.codigoLayer,false)}
+	new YAHOO.widget.Button("salvarEditor",{ onclick: { fn: temp }});
+}
 
 function montaEditorTitulo(dados)
 {
@@ -1162,16 +1282,18 @@ function montaEditorTitulo(dados)
 		"linhas":[
 			{ajuda:"Elemento 'NAME'. Não confunda com o nome que aparece no mapa ou  na árvore de temas. Normalmente o código recebe o mesmo nome do arquivo mapfile, sem a extensão '.map'",
 			titulo:"Código do layer",id:"name",value:dados.name,tipo:"text"},
+			{ajuda:"Name of a group that this layer belongs to. The group name can then be reference as a regular layer name in the template files, allowing to do things like turning on and off a group of layers at once.",
+			titulo:"Group",id:"group",value:dados.group,tipo:"text"},
 			{ajuda:"Nome que será utilizado na legenda do mapa e na guia 'Temas'",
 			titulo:"Título (METADATA: TEMA)",id:"tema",value:dados.tema,tipo:"text"},
-			{ajuda:"Ícone que será mostrado na árvore de camadas. A imagem deve existir na web e deve ser incluído o caminho completo ou relativo em relação ao local da interface HTML do mapa.",
-			titulo:"Ícone (METADATA: ICONETEMA)",id:"iconetema",value:dados.iconetema,tipo:"text"},
-			{ajuda:"Mensagem que será mostrada no rodapé do mapa quando o tema estiver visível. É útil para apresentar ao usuário observações especiais sobre o uso daquele tema.",
-			titulo:"Mensagem (MENSAGEM)",id:"mensagem",value:dados.mensagem,tipo:"text"},
 			{ajuda:"Denominador da escala da fonte dos dados utilizado pelo tema. É utilizado para apresentar a indicação de compatibilidade entre a escala do tema e a escala do mapa que está sendo visto.",
 			titulo:"Escala (ESCALA)",id:"escala",value:dados.escala,tipo:"text"},
 			{ajuda:"Extensão geográfica máxima do tema, no formato xmin ymin xmax ymax. É utilizado na opção de 'zoom para o tema'. Quando o tema é baseado em shapefile, esse metadata não é necessário, pois o mapserver consegue calcular a extensão. Já em outros tipos de dados, como Postgis, o parâmetro é necessário. Nesse caso, se não for indicado, o botão de zoom para o tema não será visível para o usuário",
-			titulo:"Extensao (EXTENSAO)",id:"extensao",value:dados.extensao,tipo:"text"}		
+			titulo:"Extensao (EXTENSAO)",id:"extensao",value:dados.extensao,tipo:"text"},
+			{ajuda:"Ícone que será mostrado na árvore de camadas. A imagem deve existir na web e deve ser incluído o caminho completo ou relativo em relação ao local da interface HTML do mapa.",
+			titulo:"Ícone (METADATA: ICONETEMA)",id:"iconetema",value:dados.iconetema,tipo:"text"},
+			{ajuda:"Mensagem que será mostrada no rodapé do mapa quando o tema estiver visível. É útil para apresentar ao usuário observações especiais sobre o uso daquele tema.",
+			titulo:"Mensagem (MENSAGEM)",id:"mensagem",value:dados.mensagem,tipo:"text"}
 		]
 	}
 	var ins = "<input type=button title='Salvar' value='Salvar' id=salvarEditor />"
@@ -1223,6 +1345,8 @@ function montaEditorDados(dados)
 		titulo:"Data",id:"data",value:dados.data,tipo:"text"},
 		{ajuda:"Specifies how the data should be drawn. Need not be the same as the shapefile type. For example, a polygon shapefile may be drawn as a point layer, but a point shapefile may not be drawn as a polygon layer. Common sense rules. Annotation means that a label point will be calculated for the features, but the feature itself will not be drawn although a marker symbol can be optionally drawn. this allows for advanced labeling like numbered highway shields. Points are labeled at that point. Polygons are labeled first using a centroid, and if that doesn't fall in the polygon a scanline approach is used to guarantee the label falls within the feature. Lines are labeled at the middle of the longest arc in the visible portion of the line. Query only means the layer can be queried but not drawn.In order to differentiate between POLYGONs and POLYLINEs (which do not exist as a type), simply respectively use or ommit the COLOR keyword when classifying. If you use it, it's a polygon with a fill color, otherwise it's a polyline with only an OUTLINECOLOR.For CHART layers, see the Dynamic Charting howto.A circle must be defined by a a minimum bounding rectangle. That is, 2 points that define the smallest square that can contain it. These 2 points are the two opposite corners of said box",
 		titulo:"Type",id:"",value:dados.type,tipo:"text",div:"<div id=cType ></div>"},
+		{ajuda:"Ativa ou não a manutenção de um cache para armazenar as imagens geradas para montar o mapa. Essa opção afeta apenas as interfaces do i3Geo que utilizam o modo TILE (como a interface OpenLayers). O cache é mantido no diretório temporário utilizado pelo i3Geo, na pasta chamada cache. Para cada camada é criada uma sub-pasta. Para limpar o cache, utilize a opção existente junto ao nó principal desse mapfile",
+		titulo:"Cache de mapas. Camadas WMS são acessadas diretamente do servidor de origem quando o cache estiver inativo. (CACHE)",id:"",value:dados.cache,tipo:"text",div:"<div id=cCache ></div>"},
 		{ajuda:"Projeção",
 		titulo:"Projection",id:"projection",value:dados.projection,tipo:"text"},		
 		{ajuda:"This parameter allows for data specific attribute filtering that is done at the same time spatial filtering is done, but before any CLASS expressions are evaluated. For OGR and shapefiles the string is simply a mapserver regular expression. For spatial databases the string is a SQL WHERE clause that is valid with respect to the underlying database.For example: FILTER type='road' and size <2",
@@ -1254,7 +1378,12 @@ function montaEditorDados(dados)
 	ins += core_geraLinhas(param)
 	ins += "<br><br><br>"
 	$i("editor_bd").innerHTML = ins
-
+	if($i("cCache")){
+		temp = "<select id='cache' >"
+		temp += core_combosimnao(dados.cache)
+		temp += "</select>"
+		$i("cCache").innerHTML = temp
+	}
 	if($i("cTipooriginal")){
 		temp = "<select id='tipooriginal' >"
 		temp += core_comboObjeto(objtipooriginal,"valor","texto",dados.tipooriginal)
@@ -1303,6 +1432,7 @@ function montaEditorDados(dados)
 	};
 	$i("connectiontype").onchange.call();
 }
+
 function montaEditorMetadados(dados)
 {
 	var paramRaster = {
@@ -1310,15 +1440,11 @@ function montaEditorMetadados(dados)
 			{ajuda:"A palete é válida apenas para temas RASTER. Entre com o endereço do arquivo no servidor. Veja exemplo em i3geo/localhost/symbols/testepalete.txt",
 			titulo:"Arquivo com palete de cores (opcional e serve apenas para temas raster) (PALLETEFILE)",id:"palletefile",value:dados.palletefile,tipo:"text"},
 			{ajuda:"Quantas cores em cada nível da palete. Veja exemplo em i3geo/localhost/symbols/testepalete.txt",
-			titulo:"Passo (opcional e serve apenas para temas raster) (PALLETESTEP)",id:"palletestep",value:dados.palletestep,tipo:"text"},
-			{ajuda:"Indica se o usuário pode incluir comentários no tema",
-			titulo:"Permite comentar (PERMITECOMENTARIO)",id:"",value:dados.permitecomentario,tipo:"text",div:"<div id=cPermitecomentario ></div>"},			
+			titulo:"Passo (opcional e serve apenas para temas raster) (PALLETESTEP)",id:"palletestep",value:dados.palletestep,tipo:"text"}
 		]
 	};
 	var paramVetor = {
 		"linhas":[
-			{ajuda:"Indica se a extensão geográfica do mapa deve ser alterada quando o tema for adicionado ao mapa",
-			titulo:"Aplica extensao (APLICAEXTENSAO)",id:"",value:dados.aplicaextensao,tipo:"text",div:"<div id=cAplicaextensao ></div>"},
 			{ajuda:"Indica se o usuário pode abrir o editor de SQL para poder alterar o elemento DATA do Mapfile.",
 			titulo:"Permite editar SQL (EDITORSQL)",id:"",value:dados.editorsql,tipo:"text",div:"<div id=cEditorsql ></div>"},
 			{ajuda:"Formato das datas existentes na tabela de atributos p.e. iso8601",
@@ -1357,22 +1483,8 @@ function montaEditorMetadados(dados)
 	};
 	var param = {
 		"linhas":[
-			{ajuda:"Temporizador (em segundos) para atualização automática da camada. A camada será redesenhada continuamente a cada intervalo de tempo definido",
-			titulo:"Temporizador em segundos (METADATA: TEMPORIZADOR)",id:"temporizador",value:dados.temporizador,tipo:"text"},
-			{ajuda:"Ativa ou não a manutenção de um cache para armazenar as imagens geradas para montar o mapa. Essa opção afeta apenas as interfaces do i3Geo que utilizam o modo TILE (como a interface OpenLayers). O cache é mantido no diretório temporário utilizado pelo i3Geo, na pasta chamada cache. Para cada camada é criada uma sub-pasta. Para limpar o cache, utilize a opção existente junto ao nó principal desse mapfile",
-			titulo:"Cache de mapas. Camadas WMS são acessadas diretamente do servidor de origem quando o cache estiver inativo. (CACHE)",id:"",value:dados.cache,tipo:"text",div:"<div id=cCache ></div>"},
 			{ajuda:"Nome da coluna da tabela de atributos do tema que será utilizado na ferramenta busca rápida. Entre apenas uma coluna",
 			titulo:"Item utilizado no busca rápida (itembuscarapida)",id:"itembuscarapida",value:dados.itembuscarapida,tipo:"text"},
-			{ajuda:"Indica se as classes serão mostradas ou não na legenda. Por padrão é SIM. ",
-			titulo:"Classe (CLASSE)",id:"",value:dados.classe,tipo:"text",div:"<div id=cClasse ></div>"},
-			{ajuda:"URL de uma imagem que será utilizada em substituição à geração normal da legenda ",
-			titulo:"URL da legenda (opcional) (LEGENDAIMG)",id:"legendaimg",value:dados.legendaimg,tipo:"text"},
-			{ajuda:"Indica se o tema é mostrado no mapa mas não nas listas da legenda e na guia 'temas'",
-			titulo:"Escondido (ESCONDIDO)",id:"",value:dados.escondido,tipo:"text",div:"<div id=cEscondido ></div>"},
-			{ajuda:"Indica se o tema irá ser mostrado na ferramenta de identificação",
-			titulo:"Identifica (IDENTIFICA)",id:"",value:dados.identifica,tipo:"text",div:"<div id=cIdentifica ></div>"},
-			{ajuda:"Aplica efeitos de transição nas operações de zoom e pan na interface Openlayers",
-			titulo:"Efeitos de transição zoom (TRANSITIONEFFECT)",id:"",value:dados.transitioneffect,tipo:"text",div:"<div id=cTransitioneffect ></div>"},
 			{ajuda:"Nomes das colunas da tabela de atributos do tema, que serão mostradas na ferramenta de identificação. Se for vazio, todas as colunas serão mostradas. A lista de itens deve ser separada por ',' e grafada em caixa alta no caso de shapefile.",
 			titulo:"Itens (ITENS)",id:"itens",value:dados.itens,tipo:"text"},
 			{ajuda:"Lista com os 'alias', ou apelidos, para os nomes das colunas listados no metadata 'itens'. Os alias devem ser separados por ',' e seguir a ordem definida em ITENS.",
@@ -1450,124 +1562,18 @@ function montaEditorMetadados(dados)
 	ins += "<br><br><br>"
 	$i("editor_bd").innerHTML = ins
 	
-	if($i("cAplicaextensao")){
-		temp = "<select id='aplicaextensao' >"
-		temp += core_combosimnao(dados.aplicaextensao)
-		temp += "</select>"
-		$i("cAplicaextensao").innerHTML = temp
-	}
-	if($i("cCache")){
-		temp = "<select id='cache' >"
-		temp += core_combosimnao(dados.cache)
-		temp += "</select>"
-		$i("cCache").innerHTML = temp
-	}
 	if($i("cEditorsql")){
 		temp = "<select id='editorsql' >"
 		temp += core_combosimnao(dados.editorsql)
 		temp += "</select>"
 		$i("cEditorsql").innerHTML = temp
 	}
-	if($i("cPermitecomentario")){
-		temp = "<select id='permitecomentario' >"
-		temp += core_combosimnao(dados.permitecomentario)
-		temp += "</select>"
-		$i("cPermitecomentario").innerHTML = temp
-	}
-	if($i("cClasse")){
-		temp = "<p><select id='classe' >"
-		temp += core_combosimnao(dados.classe)
-		temp += "</select>"
-		$i("cClasse").innerHTML = temp
-	}
-	if($i("cEscondido")){
-		temp = "<select id='escondido' >"
-		temp += core_combosimnao(dados.escondido)
-		temp += "</select>"
-		$i("cEscondido").innerHTML = temp
-	}
-	if($i("cIdentifica")){
-		temp = "<select id='identifica' >"
-		temp += core_combosimnao(dados.identifica)
-		temp += "</select>"
-		$i("cIdentifica").innerHTML = temp
-	}
-	if($i("cTransitioneffect")){
-		temp = "<select id='transitioneffect' >"
-		temp += core_combosimnao(dados.transitioneffect)
-		temp += "</select>"
-		$i("cTransitioneffect").innerHTML = temp
-	}
 	var temp = function()
 	{salvarDadosEditor('metadados',dados.codigoMap,dados.codigoLayer)}
 	new YAHOO.widget.Button("salvarEditor",{ onclick: { fn: temp }});
 }
-function montaEditorGeral(dados)
-{
-	var param = {
-		"linhas":[
-		{ajuda:"Name of a group that this layer belongs to. The group name can then be reference as a regular layer name in the template files, allowing to do things like turning on and off a group of layers at once.",
-		titulo:"Group",id:"group",value:dados.group,tipo:"text"},
-		{ajuda:"Sets the current status of the layer. Often modified by MapServer itself. Default turns the layer on permanently",
-		titulo:"Status",id:"",value:dados.status,tipo:"text",div:"<div id=cStatus ></div>"},		
-		{ajuda:"Sets the color index to treat as transparent for raster layers.",
-		titulo:"Offsite (R,G,B) (utilize -1,-1,-1 para anular o valor)",id:"offsite",value:dados.offsite,tipo:"text"},
-		{ajuda:"Sets the opacity level (or the inability to see through the layer) of all classed pixels for a given layer. The value can either be an integer in the range (0-100) or the named symbol 'ALPHA'. A value of 100 is opaque and 0 is fully transparent. Implemented in MapServer 5.0, to replace the deprecated TRANSPARENCY parameter.The 'ALPHA' symbol directs the MapServer rendering code to honor the indexed or alpha transparency of pixmap symbols used to style a layer. This is only needed in the case of RGB output formats, and should be used only when necessary as it is expensive to render transparent pixmap symbols onto an RGB map image.",
-		titulo:"Opacity",id:"opacity",value:dados.opacity,tipo:"text"},
-		{ajuda:"Maximum scale at which this LAYER is drawn. Scale is given as the denominator of the actual scale fraction, for example for a map at a scale of 1:24,000 use 24000.",
-		titulo:"Maxscale (utilize -1 para anular o valor)",id:"maxscale",value:dados.maxscale,tipo:"text"},
-		{ajuda:"Minimum scale at which this LAYER is drawn. Scale is given as the denominator of the actual scale fraction, for example for a map at a scale of 1:24,000 use 24000.",
-		titulo:"Minscale (utilize -1 para anular o valor)",id:"minscale",value:dados.minscale,tipo:"text"},
-		{ajuda:"Item name in attribute table to use for class annotation (i.e. labeling).",
-		titulo:"Labelitem",id:"labelitem",value:dados.labelitem,tipo:"text"},
-		{ajuda:"Maximum scale at which this LAYER is labeled. Scale is given as the denominator of the actual scale fraction, for example for a map at a scale of 1:24,000 use 24000.",
-		titulo:"Labelmaxscale (utilize -1 para anular o valor)",id:"labelmaxscale",value:dados.labelmaxscale,tipo:"text"},
-		{ajuda:"Minimum scale at which this LAYER is labeled. Scale is given as the denominator of the actual scale fraction, for example for a map at a scale of 1:24,000 use 24000.",
-		titulo:"Labelminscale (utilize -1 para anular o valor)",id:"labelminscale",value:dados.labelminscale,tipo:"text"},
-		{ajuda:"The scale at which symbols and/or text appear full size. This allows for dynamic scaling of objects based on the scale of the map. If not set then this layer will always appear at the same size. Scaling only takes place within the limits of MINSIZE and MAXSIZE as described above. Scale is given as the denominator of the actual scale fraction, for example for a map at a scale of 1:24,000 use 24000.",
-		titulo:"Symbolscale (utilize -1 para anular o valor)",id:"symbolscale",value:dados.symbolscale,tipo:"text"},
-		{ajuda:"Sensitivity for point based queries (i.e. via mouse and/or map coordinates). Given in TOLERANCEUNITS. If the layer is a POINT or a LINE, the default is 3. For all other layer types, the default is 0. To restrict polygon searches so that the point must occur in the polygon set the tolerance to zero.",
-		titulo:"Tolerance",id:"tolerance",value:dados.tolerance,tipo:"text"},			
-		{ajuda:" ",
-		titulo:"Tolerance units",id:"",value:dados.toleranceunits,tipo:"text",div:"<div id=cToleranceunits ></div>"},			
-		{ajuda:"Sets the unit of CLASS object SIZE values (default is pixels). Useful for simulating buffering",
-		titulo:"Sizeunits",id:"",value:dados.sizeunits,tipo:"text",div:"<div id=cSizeunits ></div>"}		
-		]
-	}
-	var ins = "<input type=button title='Salvar' value='Salvar' id=salvarEditor />"
-	ins += "<input type=button title='Testar' value='Testar' id=testarEditor />"
-	if(dados.colunas != "")
-	{
-		ins += "<p>O layer possuí as seguintes colunas na tabela de atributos: ";
-		ins += dados.colunas+"</p>"
-	}
-	
-	ins += core_geraLinhas(param)
-	ins += "<br><br><br>"
-	$i("editor_bd").innerHTML = ins
-		
-	temp = "<select id='status' >"
-	temp += core_comboObjeto(objstatus,"valor","texto",dados.status)
-	temp += "</select>"
-	$i("cStatus").innerHTML = temp	
-	
-	temp = "<select id='sizeunits' >"
-	temp += core_comboObjeto(objmapunits,"valor","texto",dados.sizeunits)
-	temp += "</select>"
-	$i("cSizeunits").innerHTML = temp
-	temp = "<select id='toleranceunits' >"
-	temp += core_comboObjeto(objmapunits,"valor","texto",dados.toleranceunits)
-	temp += "</select>"
-	$i("cToleranceunits").innerHTML = temp
 
-	var temp = function()
-	{salvarDadosEditor('geral',dados.codigoMap,dados.codigoLayer,false)}
-	new YAHOO.widget.Button("salvarEditor",{ onclick: { fn: temp }});
-	
-	var temp = function()
-	{salvarDadosEditor('geral',dados.codigoMap,dados.codigoLayer,"","",true)}
-	new YAHOO.widget.Button("testarEditor",{ onclick: { fn: temp }});
-}
+
 function montaEditorClasseGeral(dados)
 {
 	var re = /C_/g;
@@ -1801,6 +1807,12 @@ Altera um mapfile conforme o editor específico de uma característica
 function salvarDadosEditor(tipo,codigoMap,codigoLayer,indiceClasse,indiceEstilo,testar)
 {
 	if(arguments.length < 6){var testar = false;}
+	if(tipo == "comport")
+	{
+		var campos = new Array("aplicaextensao","permitecomentario","temporizador","classe","legendaimg","escondido","identifica","transitioneffect","status","offsite","opacity","maxscale","minscale","labelitem","labelmaxscale","labelminscale","symbolscale","tolerance","toleranceunits","sizeunits");
+		var par = "&codigoMap="+codigoMap+"&codigoLayer="+codigoLayer;
+		var prog = "../php/editormapfile.php?funcao=alterarComport";
+	}
 	if(tipo == "dispo")
 	{
 		var campos = new Array("download","arquivodownload","arquivokmz");
@@ -1830,27 +1842,21 @@ function salvarDadosEditor(tipo,codigoMap,codigoLayer,indiceClasse,indiceEstilo,
 			{alert("Valor de escala incorreto");return;}
 		}
 
-		var campos = new Array("name","tema","iconetema","mensagem","escala","extensao");
+		var campos = new Array("name","tema","iconetema","mensagem","escala","extensao","group");
 		var par = "&codigoMap="+codigoMap+"&codigoLayer="+codigoLayer;
 		var prog = "../php/editormapfile.php?funcao=alterarTitulo"
 	}
 	if(tipo == "conexao")
 	{
-		var campos = new Array("projection","type","connection","data","connectiontype","tileitem","tileindex","filteritem","filter","tipooriginal")
+		var campos = new Array("cache","projection","type","connection","data","connectiontype","tileitem","tileindex","filteritem","filter","tipooriginal")
 		var par = "&codigoMap="+codigoMap+"&codigoLayer="+codigoLayer
 		var prog = "../php/editormapfile.php?funcao=alterarConexao"
 	}
 	if(tipo == "metadados")
 	{
-		var campos = new Array("legendaimg","wms_srs","wms_name","wms_server_version","wms_format","wms_auth_username","wms_auth_password","wms_auth_type","wms_connectiontimeout","wms_latlonboundingbox","wms_proxy_auth_type","wms_proxy_host","wms_proxy_port","wms_proxy_type","wms_proxy_username","wms_proxy_password","wms_sld_body","wms_sld_url","wms_style","wms_bgcolor","wms_transparent","wms_time","permitecomentario","itembuscarapida","cache","ltempoformatodata","ltempoiteminicio","ltempoitemfim","ltempoitemtitulo","ltempoitemdescricao","ltempoitemtip","ltempoitemimagem","ltempoitemicone","ltempoitemlink","editorsql","description_template","palletefile","palletestep","temporizador","aplicaextensao","classestamanho","classessimbolo","classescor","classesnome","classesitem","identifica","transitioneffect","extensao","escondido","classe","tip","itenslink","itens","itensdesc")
+		var campos = new Array("legendaimg","wms_srs","wms_name","wms_server_version","wms_format","wms_auth_username","wms_auth_password","wms_auth_type","wms_connectiontimeout","wms_latlonboundingbox","wms_proxy_auth_type","wms_proxy_host","wms_proxy_port","wms_proxy_type","wms_proxy_username","wms_proxy_password","wms_sld_body","wms_sld_url","wms_style","wms_bgcolor","wms_transparent","wms_time","itembuscarapida","ltempoformatodata","ltempoiteminicio","ltempoitemfim","ltempoitemtitulo","ltempoitemdescricao","ltempoitemtip","ltempoitemimagem","ltempoitemicone","ltempoitemlink","editorsql","description_template","palletefile","palletestep","classestamanho","classessimbolo","classescor","classesnome","classesitem","identifica","transitioneffect","extensao","escondido","classe","tip","itenslink","itens","itensdesc")
 		var par = "&codigoMap="+codigoMap+"&codigoLayer="+codigoLayer
 		var prog = "../php/editormapfile.php?funcao=alterarMetadados"
-	}
-	if(tipo == "geral")
-	{
-		var campos = new Array("sizeunits","status","toleranceunits","tolerance","symbolscale","opacity","offsite","minscale","maxscale","labelminscale","labelmaxscale","labelitem","group")
-		var par = "&codigoMap="+codigoMap+"&codigoLayer="+codigoLayer
-		var prog = "../php/editormapfile.php?funcao=alterarGeral"
 	}
 	if(tipo == "classeGeral")
 	{
