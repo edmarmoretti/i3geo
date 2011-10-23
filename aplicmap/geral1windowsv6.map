@@ -228,8 +228,7 @@ MAP
 		CLASS
 			STYLE
 				COLOR 255 255 255
-				SIZE 3
-				SYMBOL "linha"
+				WIDTH 3
 			END
 		END
 	END

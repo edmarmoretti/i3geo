@@ -1,5 +1,17 @@
 GUIA DE UPDATES
 -------------------------------------------------------------------------------------------------
+Para a versão 4.6
+
+	Simbologia
+	
+		Verifique o uso de símbolos lineares.
+			Utilize WIDTH no lugar de SIZE
+			No símbolo chamado "linhas", utilize um símbolo simples, exemplo:
+				STYLE
+					WIDTH 3
+					COLOR 255 0 0
+				END
+-------------------------------------------------------------------------------------------------
 Para a versão 4.5 + SP11
 
 	Mudanças que foram feitas para uso da versão 6 do Mapserver:
