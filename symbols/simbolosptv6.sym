@@ -1,5 +1,16 @@
 SYMBOLSET
   SYMBOL 
+    NAME 'cruzeta'
+		TYPE VECTOR
+		POINTS
+    0.5 0
+    0.5 1
+    -99 -99
+    0 0.5
+    1 0.5
+		END
+	END
+  SYMBOL 
     NAME 'google1' 
 		TYPE VECTOR
 		FILLED TRUE 
