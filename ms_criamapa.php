@@ -155,6 +155,7 @@ if (isset($_GET["caminho"]))
 Carrega as extensões utilizadas no programa de inicialização. 
 A carga das extensões geralmente é necessária nas instalações windows (ms4w) ou quando as mesmas não são carregadas pela própria inicialização do PHP.
 */
+
 include_once ($caminho."classesphp/carrega_ext.php");
 /*
 Include dos arquivos PHP.
@@ -166,6 +167,7 @@ include_once ($caminho."classesphp/pega_variaveis.php");
 include_once ($caminho."classesphp/funcoes_gerais.php");
 $versao = versao();
 $versao = $versao["principal"];
+
 //
 //a variável $base pode ser definida em ms_configura, mas a preferência é pela definição já existente
 //por isso, $base é guardada em uma variável e retomada após o include de ms_configura.php

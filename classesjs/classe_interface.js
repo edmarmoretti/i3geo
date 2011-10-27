@@ -1165,6 +1165,7 @@ i3GEO.Interface = {
 				isBaseLayer:false,
 				displayInLayerSwitcher:false,
 				opacity: 1,
+				visibility:false,
 				singleTile:!(i3GEO.Interface.openlayers.TILES),
 				ratio:1,
 				buffer:i3GEO.Interface.openlayers.BUFFER,
