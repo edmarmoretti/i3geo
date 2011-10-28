@@ -18,7 +18,7 @@ MAP
 		NAME 'png'
 		MIMETYPE "image/png"
  		DRIVER AGG/PNG
- 		IMAGEMODE RGB
+ 		IMAGEMODE RGBA
  		FORMATOPTION "QUANTIZE_FORCE=ON"
  		FORMATOPTION "QUANTIZE_DITHER=OFF"
  		FORMATOPTION "QUANTIZE_COLORS=256"
@@ -105,6 +105,7 @@ MAP
       "ows_namespace_uri"	"http://www.omsug.ca/osgis2004"
       "ows_address"	"http://www.mma.gov.br"
       "ows_postcode"	""
+	  "ows_enable_request" "*"
     END
     QUERYFORMAT text/html
     LEGENDFORMAT text/html

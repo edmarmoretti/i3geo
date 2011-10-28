@@ -102,6 +102,7 @@ MAP
       "ows_namespace_uri"	"http://www.omsug.ca/osgis2004"
       "ows_address"	"http://www.mma.gov.br"
       "ows_postcode"	""
+	  "ows_enable_request" "*"
     END
     QUERYFORMAT text/html
     LEGENDFORMAT text/html

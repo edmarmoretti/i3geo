@@ -1909,7 +1909,13 @@ function salvarDadosEditor(tipo,codigoMap,codigoLayer,indiceClasse,indiceEstilo,
   				{
   					if(testar == false){
   						if(tipo=="conexao")
-  						{montaEditorConexao(YAHOO.lang.JSON.parse(o.responseText));}
+  						{montaEditorDados(YAHOO.lang.JSON.parse(o.responseText));}
+  						if(tipo=="comport")
+  						{montaEditorComport(YAHOO.lang.JSON.parse(o.responseText));}
+  						if(tipo=="dispo")
+  						{montaEditorDispo(YAHOO.lang.JSON.parse(o.responseText));}
+  						if(tipo=="titulo")
+  						{montaEditorTitulo(YAHOO.lang.JSON.parse(o.responseText));}						
   						if(tipo=="metadados")
   						{montaEditorMetadados(YAHOO.lang.JSON.parse(o.responseText));}
   						if(tipo=="geral")
