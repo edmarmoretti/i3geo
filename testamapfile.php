@@ -54,6 +54,7 @@ include("ms_configura.php");
 include("classesphp/funcoes_gerais.php");
 require_once("classesphp/pega_variaveis.php");
 include_once ("classesphp/carrega_ext.php");
+error_reporting(0);
 //
 //carrega o phpmapscript
 //

@@ -59,6 +59,7 @@ Arquivo:
 i3geo/classesphp/mapa_openlayers.php
 
 */
+error_reporting(0);
 $_COOKIE = array();
 if (!function_exists('ms_GetVersion'))
 {

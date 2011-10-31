@@ -60,6 +60,7 @@ i3geo/classesphp/mapa_googlemaps.php
 
 */
 //error_reporting(E_ALL);
+error_reporting(0);
 if (!function_exists('ms_GetVersion'))
 {
 	$s = PHP_SHLIB_SUFFIX;
