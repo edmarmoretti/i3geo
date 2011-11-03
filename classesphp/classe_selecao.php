@@ -494,6 +494,7 @@ $valor - Valor.
 	*/	
 	function selecaoAtributos2($filtro,$tipo)
 	{
+		$items = pegaItens($this->layer);
 		if ($tipo == "novo")
 		{
 			$this->selecaoLimpa();
@@ -518,12 +519,13 @@ $valor - Valor.
 		}
 		$this->mapa->freequery($indxlayer);
 		*/
+		
 		$shp_atual = array();
 		if($this->qyfileTema != "" && file_exists($this->qyfileTema))
 		{$shp_atual = $this->unserializeQ($this->qyfileTema);}
 		
 		$shpi = array();
-		$items = pegaItens($this->layer);
+		
 		$filtro = str_replace("|","'",$filtro);
 		if ($this->layer->connectiontype == MS_POSTGIS)
 		{
@@ -666,10 +668,11 @@ Inverte seleção do tema.
 	function selecaoInverte()
 	{
 		if(!$this->layer){return "erro";}
+		$items = pegaItens($this->layer);
 		if (file_exists($this->qyfile))
 		{$this->mapa->loadquery($this->qyfile);}
 		$indxlayer = $this->layer->index;
-		$items = pegaItens($this->layer);
+		
 		/*
 		$res_count = $this->layer->getNumresults();
 		$shp_atual = array();

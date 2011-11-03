@@ -1059,6 +1059,7 @@ $locaplic - Localização do I3geo.
 			$layer = $this->mapa->getlayerbyname($tema);
 			$layer->set("template","none.htm");
 			$layer->set("status",MS_DEFAULT);
+			$items = pegaItens($layer);
 			if($layer->type == MS_LAYER_RASTER)
 			{
 				$lineo = $spts[0]->line(0);
@@ -1066,7 +1067,7 @@ $locaplic - Localização do I3geo.
 				$layer->queryByPoint($pt, 0, 0);
 			}
 			$layers[] = $layer;
-			$items = pegaItens($layer);
+			
 			if(!$items)
 			{return "erro ao obter a lista de itens do tema $layer->name";}
 			$listaItens[$layer->name] = $items;
@@ -1332,6 +1333,7 @@ nome do layer criado com o buffer.
 	function criaBuffer($distancia,$locaplic,$unir="nao",$wkt="")
 	{
 		set_time_limit(180);
+		$items = pegaItens($this->layer);
 		//error_reporting(E_ALL);
 		//para manipular dbf
 		if($this->dbaseExiste == false){
@@ -1348,7 +1350,7 @@ nome do layer criado com o buffer.
 			carregaquery2($this->arquivo,$this->layer,$this->mapa);
 			$sopen = $this->layer->open();
 			if($sopen == MS_FAILURE){return "erro";}
-			$items = pegaItens($this->layer);
+			
 			$this->layer->open();
 			$res_count = $this->layer->getNumresults();
 			$buffers = array();
@@ -1560,6 +1562,7 @@ $locaplic - Localização do I3geo.
 	function criaCentroide($locaplic)
 	{
 		if(!$this->layer){return "erro";}
+		$items = pegaItens($this->layer);
 		set_time_limit(180);
 		//para manipular dbf
 		if($this->dbaseExiste == false){
@@ -1574,7 +1577,7 @@ $locaplic - Localização do I3geo.
 		carregaquery2($this->arquivo,$this->layer,$this->mapa);
 		$sopen = $this->layer->open();
 		if($sopen == MS_FAILURE){return "erro";}
-		$items = pegaItens($this->layer);
+		
 		$this->layer->open();
 		$res_count = $this->layer->getNumresults();
 		$centroides = array();
@@ -1600,7 +1603,6 @@ $locaplic - Localização do I3geo.
 		//gera o novo arquivo shape file
 		// cria o shapefile
 		$novoshpf = ms_newShapefileObj($nomeshp, MS_SHP_POINT);
-		$items = pegaItens($this->layer);
 		// cria o dbf
 		$def = $this->criaDefDb($items);
 		if($this->dbaseExiste == false)

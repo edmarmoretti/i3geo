@@ -100,7 +100,7 @@ $ext - (opcional) extensão geográfica que será aplicada ao mapa
 */
 	function __construct($map_file="",$tema="",$locaplic="",$ext="")
 	{
-  		//error_reporting(E_ALL);
+  		error_reporting(0);
   		if (!function_exists('ms_newMapObj')) {return false;}
   		if(file_exists($locaplic."/funcoes_gerais.php"))
   		include_once($locaplic."/funcoes_gerais.php");
@@ -1270,13 +1270,68 @@ $listaDeTemas - (opcional) Lista com os códigos dos temas que serão identificado
 			$n[] = array("alias"=>"Link WMS","valor"=>"getfeatureinfo padr&atilde;o do servi&ccedil;o","link"=>$res2,"img"=>"");
 			return array($n);
 		}
+		
+		$itens = $layer->getmetadata("ITENS"); // itens
+		$itensdesc = $layer->getmetadata("ITENSDESC"); // descri&ccedil;&atilde;o dos itens
+		$lks = $layer->getmetadata("ITENSLINK"); // link dos itens
+		$itemimg = $layer->getmetadata("ITEMIMG"); //indica um item que será utilizado para colocar um ícone
+		$locimg = $layer->getmetadata("IMGLOC"); //indica o local onde estão os ícones
+		$tips = $layer->getmetadata("TIP");
+		$itensLayer = pegaItens($layer);
+		$nitens = count($itensLayer);
+		if($itens == "")
+		{$itens = $itensLayer;}
+		else
+		{$itens = explode(",",$itens);}
+		
+		if($itensdesc == "")
+		{$itensdesc = $itensLayer;}//array_fill(0, $nitens-1,'');}
+		else
+		{$itensdesc = explode(",",$itensdesc);}
+		
+		if($lks == "")
+		{$lks = array_fill(0, $nitens-1,'');}
+		else
+		{$lks = explode(",",$lks);}
+				
+		if($itemimg == "")
+		{$itemimg = array_fill(0, $nitens-1,'');}
+		else
+		{$itemimg = explode(",",$itemimg);}	
+			
+		if($locimg == "")
+		{$locimg = array_fill(0, $nitens-1,'');}
+		else
+		{$locimg = explode(",",$locimg);}
+		$tips = str_replace(" ",",",$tips);
+		$tips = explode(",",$tips);
+		//o retorno deve ser do tipo TIP
+		if($etip == true)
+		{
+			$temp = array_combine($itens,$itensdesc);
+			$templ = array_combine($itens,$lks);
+			$tempimg = array_combine($itens,$itemimg);
+			$temploc = array_combine($itens,$locimg);
+			$itensdesc = array();
+			$itens = array();
+			$lks = array();
+			$itemimg = array();
+			$locimg = array();
+			foreach($tips as $t)
+			{
+				$itens[] = $t;
+				if($temp[$t] != ""){$itensdesc[] = $temp[$t];}else{$itensdesc[] = $t;}
+				if($templ[$t] != ""){$lks[] = $templ[$t];}else{$lks[] = "";}
+				if($tempimg[$t] != ""){$itemimg[] = $tempimg[$t];}else{$itemimg[] = "";}
+				if($temploc[$t] != ""){$locimg[] = $temploc[$t];}else{$locimg[] = "";}
+			}
+		}
 		if(($layer->connectiontype != MS_WMS) && ($layer->type == MS_LAYER_RASTER))
 		{
 			$layer->set("toleranceunits",MS_PIXELS);
 			$layer->set("tolerance",$resolucao);
 			$ident = @$layer->queryByPoint($pt, 0, 0); //0.01);	
 		}
-		//error_reporting(E_ALL);
 		if (($layer->type == MS_LAYER_POINT) || ($layer->type == MS_LAYER_LINE) || ($layer->type == MS_LAYER_CHART))
 		{
 			$layer->set("toleranceunits",MS_PIXELS);
@@ -1291,64 +1346,9 @@ $listaDeTemas - (opcional) Lista com os códigos dos temas que serão identificado
 		}
 		if ($ident == MS_SUCCESS)
 		{
-			$itens = $layer->getmetadata("ITENS"); // itens
-			$itensdesc = $layer->getmetadata("ITENSDESC"); // descri&ccedil;&atilde;o dos itens
-			$lks = $layer->getmetadata("ITENSLINK"); // link dos itens
-			$itemimg = $layer->getmetadata("ITEMIMG"); //indica um item que será utilizado para colocar um ícone
-			$locimg = $layer->getmetadata("IMGLOC"); //indica o local onde estão os ícones
-			$tips = $layer->getmetadata("TIP");
-			$itensLayer = pegaItens($layer);
-			//var_dump($itensLayer);exit;
-			$nitens = count($itensLayer);
-			if($itens == "")
-			{$itens = $itensLayer;}
-			else
-			{$itens = explode(",",$itens);}
-			
-			if($itensdesc == "")
-			{$itensdesc = $itensLayer;}//array_fill(0, $nitens-1,'');}
-			else
-			{$itensdesc = explode(",",$itensdesc);}
-			
-			if($lks == "")
-			{$lks = array_fill(0, $nitens-1,'');}
-			else
-			{$lks = explode(",",$lks);}
-					
-			if($itemimg == "")
-			{$itemimg = array_fill(0, $nitens-1,'');}
-			else
-			{$itemimg = explode(",",$itemimg);}	
-				
-			if($locimg == "")
-			{$locimg = array_fill(0, $nitens-1,'');}
-			else
-			{$locimg = explode(",",$locimg);}
-			$tips = str_replace(" ",",",$tips);
-			$tips = explode(",",$tips);
-			//o retorno deve ser do tipo TIP
-			if($etip == true)
-			{
-				$temp = array_combine($itens,$itensdesc);
-				$templ = array_combine($itens,$lks);
-				$tempimg = array_combine($itens,$itemimg);
-				$temploc = array_combine($itens,$locimg);
-				$itensdesc = array();
-				$itens = array();
-				$lks = array();
-				$itemimg = array();
-				$locimg = array();
-				foreach($tips as $t)
-				{
-					$itens[] = $t;
-					if($temp[$t] != ""){$itensdesc[] = $temp[$t];}else{$itensdesc[] = $t;}
-					if($templ[$t] != ""){$lks[] = $templ[$t];}else{$lks[] = "";}
-					if($tempimg[$t] != ""){$itemimg[] = $tempimg[$t];}else{$itemimg[] = "";}
-					if($temploc[$t] != ""){$locimg[] = $temploc[$t];}else{$locimg[] = "";}
-				}
-			}
-			$res_count = $layer->getNumresults();
+			$ident = @$layer->queryByPoint($pt, 1, -1);
 			$sopen = $layer->open();
+			$res_count = $layer->getNumresults();
 			if($sopen == MS_FAILURE){return "erro";}
 			for ($i = 0; $i < $res_count; ++$i)
 			{

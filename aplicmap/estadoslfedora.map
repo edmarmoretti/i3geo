@@ -23,7 +23,7 @@ LAYER
   CLASS
 	  NAME " "
 	  STYLE
-		  WIDTH 2
+		  WIDTH 3
           COLOR 255 255 0
           OUTLINECOLOR -1 -1 -1
 	  END
