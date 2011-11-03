@@ -775,7 +775,7 @@ i3GEO.guias = {
 				temp;
 			
 			if(i3GEO.guias.ALTURACORPOGUIAS === 0 && config.alturaGuiaMovel === 0)
-			{i3GEO.guias.guiaMovel.config.alturaGuiaMovel = i3GEO.parametros.h - 100;}
+			{i3GEO.guias.guiaMovel.config.alturaGuiaMovel = i3GEO.parametros.h;}
 			else
 			{i3GEO.guias.guiaMovel.config.alturaGuiaMovel = i3GEO.guias.ALTURACORPOGUIAS;}
 			config = i3GEO.guias.guiaMovel.config;
@@ -785,7 +785,7 @@ i3GEO.guias = {
 			temp.left = (posMapa[0] + i3GEO.parametros.w - config.larguraPuxador) + "px";
 			//aberta temp.left = (posMapa[0] + i3GEO.parametros.w - config.larguraPuxador - config.larguraGuiaMovel) + "px";
 			i3GEO.guias.guiaMovel.left = parseInt(temp.left,10);
-			temp.top = (centroY - ((config.alturaGuiaMovel - 50) / 2)) + "px";
+			temp.top = (centroY - ((config.alturaGuiaMovel - 42) / 2)) + "px";
 			temp.width = config.larguraPuxador + "px";
 			//aberta temp.width = config.larguraPuxador + config.larguraGuiaMovel + "px";
 
