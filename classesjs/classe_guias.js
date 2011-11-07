@@ -748,6 +748,7 @@ i3GEO.guias = {
 			alturaPuxador: 319,
 			alturaGuiaMovel: 0,
 			larguraGuiaMovel: 320,
+			topGuiaMovel:0,
 			guias: {
 				icones: [],
 				ids: [],
@@ -785,7 +786,10 @@ i3GEO.guias = {
 			temp.left = (posMapa[0] + i3GEO.parametros.w - config.larguraPuxador) + "px";
 			//aberta temp.left = (posMapa[0] + i3GEO.parametros.w - config.larguraPuxador - config.larguraGuiaMovel) + "px";
 			i3GEO.guias.guiaMovel.left = parseInt(temp.left,10);
-			temp.top = (centroY - ((config.alturaGuiaMovel - 42) / 2)) + "px";
+			if(config.topGuiaMovel === 0)
+			{temp.top = (centroY - ((config.alturaGuiaMovel - 42) / 2)) + "px";}
+			else
+			{temp.top = config.topGuiaMovel;}
 			temp.width = config.larguraPuxador + "px";
 			//aberta temp.width = config.larguraPuxador + config.larguraGuiaMovel + "px";
 
