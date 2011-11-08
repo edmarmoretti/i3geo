@@ -43,7 +43,7 @@ function graficoPizza()
 	$dir = dirname(dirname($map_file));
 	if($nome == "")
 	{
-		$temp = iniciaDadosGrafico($map_file,$tema,$exclui,$itemclasses,$itemvalores,$tipo,$percentual);
+		$temp = iniciaDadosGrafico($map_file,$tema,$exclui,$itemclasses,$itemvalores,$tipo,$percentual,"",false);
 		$nnval = $temp["dados"];
 		$nome = $dir."/".nomeRandomico(20);
 		gravaDados($nnval,$nome);
@@ -78,7 +78,7 @@ function graficoBarras()
 	$dir = dirname(dirname($map_file));
 	if($nome == "")
 	{
-		$temp = iniciaDadosGrafico($map_file,$tema,$exclui,$itemclasses,$itemvalores,$tipo,$percentual);
+		$temp = iniciaDadosGrafico($map_file,$tema,$exclui,$itemclasses,$itemvalores,$tipo,$percentual,"",false);
 		$nnval = $temp["dados"];
 		$nome = $dir."/".nomeRandomico(20);
 		gravaDados($nnval,$nome);
@@ -128,7 +128,7 @@ function graficoHist()
 	if($nome == "")
 	{
 		$itemvalores = $itemclasses;
-		$temp = iniciaDadosGrafico($map_file,$tema,$exclui,$itemclasses,$itemvalores,$tipo,$percentual);
+		$temp = iniciaDadosGrafico($map_file,$tema,$exclui,$itemclasses,$itemvalores,$tipo,$percentual,"",false);
 		$nnval = $temp["dados"];
 		$nome = $dir."/".nomeRandomico(20);
 		gravaDados($nnval,$nome);
@@ -177,7 +177,7 @@ function graficoLinhas()
 	$dir = dirname(dirname($map_file));
 	if($nome == "")
 	{
-		$temp = iniciaDadosGrafico($map_file,$tema,$exclui,$itemclasses,$itemvalores,$tipo,$percentual);
+		$temp = iniciaDadosGrafico($map_file,$tema,$exclui,$itemclasses,$itemvalores,$tipo,$percentual,"",false);
 		$nnval = $temp["dados"];
 		$nome = $dir."/".nomeRandomico(20);
 		gravaDados($nnval,$nome);
@@ -223,7 +223,7 @@ function graficoScatter()
 	$dir = dirname(dirname($map_file));
 	if($nome == "")
 	{
-		$temp = iniciaDadosGrafico($map_file,$tema,$exclui,$itemclasses,$itemvalores,"xy",$percentual);
+		$temp = iniciaDadosGrafico($map_file,$tema,$exclui,$itemclasses,$itemvalores,"xy",$percentual,"",false);
 		$nnval = $temp["dados"];
 		$nome = $dir."/".nomeRandomico(20);
 		gravaDados($nnval,$nome);
@@ -255,7 +255,7 @@ function graficoScatterBins()
 	$dir = dirname(dirname($map_file));
 	if($nome == "")
 	{
-		$temp = iniciaDadosGrafico($map_file,$tema,$exclui,$itemclasses,$itemvalores,"xy",$percentual);
+		$temp = iniciaDadosGrafico($map_file,$tema,$exclui,$itemclasses,$itemvalores,"xy",$percentual,"",false);
 		$nnval = $temp["dados"];
 		$nome = $dir."/".nomeRandomico(20);
 		gravaDados($nnval,$nome);
@@ -371,7 +371,7 @@ function iniciaParGrafico($gw,$gh,$res,$dir_tmp,$gfile_name,$margem,$margemexter
 	$rcode[] = 'screen(1, new=FALSE)';
 	return $rcode;	
 }
-function iniciaDadosGrafico($map_file,$tema,$exclui,$itemclasses,$itemvalores,$tipo,$percentual,$ext="")
+function iniciaDadosGrafico($map_file,$tema,$exclui,$itemclasses,$itemvalores,$tipo,$percentual,$ext="",$incluicores=true)
 {
 	global $interface;
 	//pega os valores
@@ -408,9 +408,19 @@ function iniciaDadosGrafico($map_file,$tema,$exclui,$itemclasses,$itemvalores,$t
 			{
 				$pp = ($dados[$tempm[$i]] * 100) / $soma;
 				if ($percentual == "TRUE")
-				{$nnval[] = "'".$tempm[$i]." (".round($pp,0)."%)';".$dados[$tempm[$i]].";".$cores[$tempm[$i]];}
+				{
+					
+					$temp = "'".$tempm[$i]." (".round($pp,0)."%)';".$dados[$tempm[$i]];
+					if($incluicores == true)
+					{$temp = $temp.";".$cores[$tempm[$i]];}
+				}		
 				else
-				{$nnval[] = "'".$tempm[$i]."';".$dados[$tempm[$i]].";".$cores[$tempm[$i]];}
+				{
+					$temp = "'".$tempm[$i]."';".$dados[$tempm[$i]];
+					if($incluicores == true)
+					{$temp = $temp.";".$cores[$tempm[$i]];}
+				}
+				$nnval[] = $temp;
 			}
 		}
 	}
@@ -419,7 +429,10 @@ function iniciaDadosGrafico($map_file,$tema,$exclui,$itemclasses,$itemvalores,$t
 		$nnval[] = "x;y";
 		foreach ($valores as $v)
 		{
-			$nnval[] = $v[0].";".$v[1].";".$cores[$v[0]];
+			 $temp = $v[0].";".$v[1];
+			 if($incluicores == true)
+			 {$temp = $temp.";".$cores[$v[0]];}
+			 $nnval[] = $temp;
 		}	
 	}
 	return array("dados"=>$nnval,"ndados"=>$nval,"max"=>$max);
