@@ -54,7 +54,7 @@ include("ms_configura.php");
 include("classesphp/funcoes_gerais.php");
 require_once("classesphp/pega_variaveis.php");
 include_once ("classesphp/carrega_ext.php");
-error_reporting(0);
+
 //
 //carrega o phpmapscript
 //
@@ -195,6 +195,7 @@ function verifica($map,$solegenda)
 					if ($layern->connectiontype == MS_POSTGIS)
 					{
 						$lcon = $layern->connection;
+						error_reporting(0);						
 						if (($lcon == " ") || ($lcon == "") || (in_array($lcon,array_keys($postgis_mapa))))
 						{
 							//
@@ -212,7 +213,7 @@ function verifica($map,$solegenda)
 					}
 				}
 			}
-			
+			error_reporting(E_ALL);
 			autoClasses($layern,$nmapa);
 			if($layern->classitem != "" && $layern->connectiontype == 7 && $layern->numclasses > 0 && $layern->getmetadata("wms_sld_body") == ""){
 				$tipotemp = $layern->type;
@@ -310,6 +311,8 @@ function verifica($map,$solegenda)
 function zoomTema($nomelayer,&$mapa)
 {
 	$layer = $mapa->getlayerbyname($nomelayer);
+	if($layer->data == "" && $layer->connection == "")
+	{return;}	
 	$prjMapa = $mapa->getProjection();
 	$prjTema = $layer->getProjection();
 	$extatual = $mapa->extent;

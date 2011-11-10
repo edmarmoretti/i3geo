@@ -41,9 +41,10 @@ Parametro:
 
 tipo - tipo de retorno mini|grande|todos
 */
+//clearstatcache();
 error_reporting(E_ALL);
-set_time_limit(300);
-ini_set('max_execution_time', 300);
+//set_time_limit(300);
+//ini_set('max_execution_time', 300);
 //
 //carrega o phpmapscript
 //
@@ -85,16 +86,23 @@ if($tipo == "mini" || $tipo == "todos" || $tipo == "grande" || $tipo == "")
 
 	error_reporting(E_ALL);
 	$arqs = listaArquivos("temas");
+	ob_start();
 	foreach ($arqs["arquivos"] as $arq)
 	{
 		$temp = explode(".",$arq);
 		if($temp[(count($temp) - 1)] == "map")
 		{
+			//if(file_exists($locaplic.'/temas/miniaturas/'.$arq.'.mini.png') == false)
+			//echo $locaplic.'/temas/miniaturas/'.$arq.'.mini.png<br>';
 			if($tipo == "mini" || $tipo == "todos")
-			{if(!file_exists('temas/miniaturas/'.$arq.'.mini.png')){echo "<br>".$arq."<br>";verificaMiniatura($arq,"mini");}}
+			{if(!file_exists($locaplic.'/temas/miniaturas/'.$arq.'.mini.png')){echo "<br>".$arq."<br>";verificaMiniatura($arq,"mini");}}
 			if($tipo == "grande"  || $tipo == "todos")
-			{if(!file_exists('temas/miniaturas/'.$arq.'.grande.png')){echo "<br>".$arq."<br>";verificaMiniatura($arq,"grande");}}
+			{if(!file_exists($locaplic.'/temas/miniaturas/'.$arq.'.grande.png')){echo "<br>".$arq."<br>";verificaMiniatura($arq,"grande");}}
 		}
+		ob_end_flush();
+		ob_flush();
+		flush();
+		ob_start(); 
 	}
 }
 //
@@ -103,8 +111,8 @@ if($tipo == "mini" || $tipo == "todos" || $tipo == "grande" || $tipo == "")
 function verificaMiniatura($map,$tipo,$admin=false)
 {
 	global $locaplic,$versao;
+	//echo $map."<br>";return;
 	ms_ResetErrorList();
-	error_reporting(E_ALL);
 	$tema = "";
 	$map = str_replace("\\","/",$map);
 	$map = basename($map);
@@ -157,15 +165,19 @@ function verificaMiniatura($map,$tipo,$admin=false)
 				}
 			}
 		}
+		
 		zoomTemaMiniatura($pegarext,$mapa);
 		if ($tipo == "mini"  || $tipo == "todos")
 		{
-		 	$mapa->setsize(50,50);
+		 	
+			$mapa->setsize(50,50);
 			$sca = $mapa->scalebar;
 			$sca->set("status",MS_OFF);
 			$objImagemM = @$mapa->draw();
-			if (!$objImagemM)
+			
+			if ($objImagemM == "" || $objImagemM == MS_FAILURE)
 			{echo "Problemas ao gerar o mapa<br>";return;}
+
 			$weboM = $mapa->web;
 			$urlM = $weboM->imageurl."/".$map;
 		}
@@ -175,7 +187,7 @@ function verificaMiniatura($map,$tipo,$admin=false)
 			$sca = $mapa->scalebar;
 			$sca->set("status",MS_OFF);
 			$objImagemG = @$mapa->draw();
-			if (!$objImagemG)
+			if ($objImagemG == "" || $objImagemG == MS_FAILURE)
 			{echo "Problemas ao gerar o mapa<br>";return;}
 			$weboG = $mapa->web;
 			$urlG = $weboG->imageurl."/".$map;
@@ -183,12 +195,14 @@ function verificaMiniatura($map,$tipo,$admin=false)
 		if($tipo=="mini" || $tipo == "todos")
 		{
 			if($objImagemM->imagepath == "")
-			{echo "Erro IMAGEPATH vazio";exit;}			
+			{echo "Erro IMAGEPATH vazio";return;}			
 			$nomecM = ($objImagemM->imagepath).$map.".mini.png";
 			$objImagemM->saveImage($nomecM);
 		}
 		if($tipo=="grande" || $tipo == "todos")
 		{
+			if($objImagemG->imagepath == "")
+			{echo "Erro IMAGEPATH vazio";return;}			
 			$nomecG = ($objImagemG->imagepath).$map.".grande.png";
 			$objImagemG->saveImage($nomecG);
 		}
@@ -220,6 +234,8 @@ function verificaMiniatura($map,$tipo,$admin=false)
 function zoomTemaMiniatura($nomelayer,&$mapa)
 {
 	$layer = $mapa->getlayerbyname($nomelayer);
+	if($layer->data == "" && $layer->connection == "")
+	{return;}
 	if($layer->type > 2)
 	{return;}
 	$prjMapa = $mapa->getProjection();
@@ -232,6 +248,7 @@ function zoomTemaMiniatura($nomelayer,&$mapa)
 	if ($ret == "")
 	{
 		$ret = $layer->getextent();
+		if(!$ret){return;}
 		//reprojeta o retangulo
 		if (($prjTema != "") && ($prjMapa != $prjTema))
 		{
