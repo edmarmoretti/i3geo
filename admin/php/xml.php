@@ -399,6 +399,7 @@ RSS
 */
 function geraXmlRSS($locaplic,$sql,$descricao)
 {
+	//var_dump($_SERVER);exit;
 	$dbh = "";
 	include($locaplic."/admin/php/conexao.php");
 	if($convUTF)
@@ -421,7 +422,7 @@ function geraXmlRSS($locaplic,$sql,$descricao)
 		$xml .= "<category/>\n";
 		$xml .= "<title>".entity_decode($row["nome_ws"])."</title>\n";
 		$xml .= "<description>".entity_decode($row["desc_ws"])."</description>\n";
-		$xml .= "<link>".xmlTexto_prepara($row["link_ws"])."</link>\n";
+		$xml .= "<link>http://".$_SERVER["HTTP_HOST"].dirname($_SERVER["REQUEST_URI"])."/".xmlTexto_prepara($row["link_ws"])."</link>\n";
 		$xml .= "<pubDate/>\n";
 		$xml .= "<author>".xmlTexto_prepara($row["autor_ws"])."</author>\n";
 		$xml .= "<nacessos></nacessos>\n";

@@ -114,6 +114,8 @@ if($qy)
 	$shp = unserialize($conteudo);
 	foreach ($shp as $indx)
 	{$mapa->querybyindex($indxlayer,-1,$indx,MS_TRUE);}
+	
+	//$mapa->loadquery(str_replace(".map",".qy",$map_fileX);
 }
 if(!isset($_GET["telaR"])){//no caso de projecoes remotas, o mapfile nao e alterado
 	$numlayers = $mapa->numlayers;
