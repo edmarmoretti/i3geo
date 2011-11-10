@@ -107,15 +107,30 @@ $qy = file_exists($qyfile);
 if($qy)
 {
 	$l = $mapa->getLayerByname($_GET["layer"]);
+	if (($postgis_mapa != "") && ($postgis_mapa != " "))
+	{
+		if ($l->connectiontype == MS_POSTGIS)
+		{
+			$lcon = $l->connection;
+			if (($lcon == " ") || ($lcon == "") || (in_array($lcon,array_keys($postgis_mapa))))
+			{
+				if(($lcon == " ") || ($lcon == ""))
+				{$l->set("connection",$postgis_mapa);}
+				else
+				{$l->set("connection",$postgis_mapa[$lcon]);}
+			}
+		}
+	}
 	$indxlayer = $l->index;
 	$handle = fopen ($qyfile, "r");
 	$conteudo = fread ($handle, filesize ($qyfile));
 	fclose ($handle);
 	$shp = unserialize($conteudo);
+	//$l->set("tileitem","");
 	foreach ($shp as $indx)
 	{$mapa->querybyindex($indxlayer,-1,$indx,MS_TRUE);}
-	
-	//$mapa->loadquery(str_replace(".map",".qy",$map_fileX);
+	//$mapa->loadquery(str_replace(".map",".qy",$map_fileX));
+	//echo str_replace(".map",".qy",$map_fileX);exit;
 }
 if(!isset($_GET["telaR"])){//no caso de projecoes remotas, o mapfile nao e alterado
 	$numlayers = $mapa->numlayers;
