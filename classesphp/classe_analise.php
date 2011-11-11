@@ -1577,7 +1577,6 @@ $locaplic - Localização do I3geo.
 		carregaquery2($this->arquivo,$this->layer,$this->mapa);
 		$sopen = $this->layer->open();
 		if($sopen == MS_FAILURE){return "erro";}
-		
 		$this->layer->open();
 		$res_count = $this->layer->getNumresults();
 		$centroides = array();

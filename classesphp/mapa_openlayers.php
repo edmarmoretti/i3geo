@@ -104,34 +104,7 @@ $mapa = ms_newMapObj($map_fileX); //map_file vem de section
 //
 $qyfile = dirname($map_fileX)."/".$_GET["layer"].".php";
 $qy = file_exists($qyfile);
-if($qy)
-{
-	$l = $mapa->getLayerByname($_GET["layer"]);
-	if (($postgis_mapa != "") && ($postgis_mapa != " "))
-	{
-		if ($l->connectiontype == MS_POSTGIS)
-		{
-			$lcon = $l->connection;
-			if (($lcon == " ") || ($lcon == "") || (in_array($lcon,array_keys($postgis_mapa))))
-			{
-				if(($lcon == " ") || ($lcon == ""))
-				{$l->set("connection",$postgis_mapa);}
-				else
-				{$l->set("connection",$postgis_mapa[$lcon]);}
-			}
-		}
-	}
-	$indxlayer = $l->index;
-	$handle = fopen ($qyfile, "r");
-	$conteudo = fread ($handle, filesize ($qyfile));
-	fclose ($handle);
-	$shp = unserialize($conteudo);
-	//$l->set("tileitem","");
-	foreach ($shp as $indx)
-	{$mapa->querybyindex($indxlayer,-1,$indx,MS_TRUE);}
-	//$mapa->loadquery(str_replace(".map",".qy",$map_fileX));
-	//echo str_replace(".map",".qy",$map_fileX);exit;
-}
+
 if(!isset($_GET["telaR"])){//no caso de projecoes remotas, o mapfile nao e alterado
 	$numlayers = $mapa->numlayers;
 	$cache = false;
@@ -194,9 +167,20 @@ if(strtolower($_GET["DESLIGACACHE"]) == "sim")
 {$cache = false;}
 if(trim($_GET["TIPOIMAGEM"]) != "" && trim($_GET["TIPOIMAGEM"]) != "nenhum")
 {$cache = false;}
-
 if($cache == true)
 {carregaCacheImagem($_GET["BBOX"],$nomecache,$map_fileX,$_GET["WIDTH"],$_GET["HEIGHT"]);}
+
+if($qy)
+{
+	$l = $mapa->getLayerByname($_GET["layer"]);
+	$indxlayer = $l->index;
+	$handle = fopen ($qyfile, "r");
+	$conteudo = fread ($handle, filesize ($qyfile));
+	fclose ($handle);
+	$shp = unserialize($conteudo);
+	foreach ($shp as $indx)
+	{$mapa->querybyindex($indxlayer,-1,$indx,MS_TRUE);}
+}
 
 $map_size = explode(" ",$_GET["map_size"]);
 $mapa->setsize($map_size[0],$map_size[1]);

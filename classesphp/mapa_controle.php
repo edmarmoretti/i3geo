@@ -204,6 +204,15 @@ $protocolo = explode("/",$_SERVER['SERVER_PROTOCOL']);
 $protocolo = strtolower($protocolo[0]) . '://'.$_SERVER['HTTP_HOST'];//$_SERVER['SERVER_NAME'] .":". $_SERVER['SERVER_PORT'];
 $urli3geo = str_replace("/classesphp/mapa_controle.php","",$protocolo.$_SERVER["PHP_SELF"]);
 //
+//inserido na versão 4.6
+//
+if(!isset($locaplic)){
+	$d = "";
+	if(!file_exists("ms_configura.php"))
+	$d = "../";
+	include_once($d."ms_configura.php");
+}
+//
 //substitui a string de conexão
 //
 if($funcao != "recuperamapa")
@@ -3062,7 +3071,7 @@ function redesenhaMapa()
 		$m->salva();
 	}
 	include_once("classe_mapa.php");
-	$m = New Mapa($map_file,$locaplic);
+	$m = New Mapa($map_file);
 	$par = $m->parametrosTemas();
 	//
 	//na interface googlemaps não é necessário gerar a imagem

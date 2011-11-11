@@ -224,6 +224,7 @@ function iniciaMapa()
 	}
 	$of = $mf->outputformat;
 	$of->set("driver","GD/PNG");
+	$versao = versao();
 	/*
 	$versao = versao();
 	if($versao["principal"] == 6)

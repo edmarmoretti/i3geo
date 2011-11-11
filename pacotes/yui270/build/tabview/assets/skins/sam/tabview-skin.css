@@ -54,7 +54,6 @@ version: 2.7.0
 
 .yui-skin-sam .yui-navset .yui-nav a:hover,
 .yui-skin-sam .yui-navset .yui-nav a:focus {
-    background:#bfdaff url(../../../../assets/skins/sam/sprite.png) repeat-x left -1300px; /* selected tab background */
     outline:0;
 }
 
