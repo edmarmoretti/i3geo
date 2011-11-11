@@ -142,8 +142,30 @@ RSS
 */
 function geraRSStemas($locaplic,$id_n2)
 {
-	$sql = "select t.nome_tema as nome_ws,'' as desc_ws,'php/parsemapfile.php?id='||t.codigo_tema as link_ws,t.link_tema as autor_ws from i3geoadmin_n3 as n3,i3geoadmin_temas as t where t.id_tema = n3.id_tema and n3.id_n2 = '$id_n2' and n3.n3_perfil = '' order by nome_ws"; 
+	$sql = "select t.codigo_tema as id_ws,t.nome_tema as nome_ws,'' as desc_ws,'php/parsemapfile.php?id='||t.codigo_tema as link_ws,t.link_tema as autor_ws from i3geoadmin_n3 as n3,i3geoadmin_temas as t where t.id_tema = n3.id_tema and n3.id_n2 = '$id_n2' and n3.n3_perfil = '' order by nome_ws"; 
 	return geraXmlRSS($locaplic,$sql,"Lista de temas");
+}
+/*
+Function: geraRSStemasRaiz
+
+RSS com os temas localizados na raiz de um nível
+
+Parametros:
+
+locaplic {string} - localização do i3Geo no sistema de arquivos
+
+id {string} - código do nó
+
+nivel {string} - nível do nó
+
+Retorno:
+
+RSS
+*/
+function geraRSStemasRaiz($locaplic,$id,$nivel)
+{
+	$sql = "select t.codigo_tema as id_ws,t.nome_tema as nome_ws,'' as desc_ws,'php/parsemapfile.php?id='||t.codigo_tema as link_ws,t.link_tema as autor_ws from i3geoadmin_raiz as r,i3geoadmin_temas as t where t.id_tema = r.id_tema and r.nivel = '$nivel' and r.id_nivel = '$id' order by nome_ws"; 
+	return geraXmlRSS($locaplic,$sql,"Temas na raiz");
 }
 /*
 Function: geraRSSsubgrupos
@@ -162,7 +184,7 @@ RSS
 */
 function geraRSSsubgrupos($locaplic,$id_n1)
 {
-	$sql = "select g.nome_subgrupo as nome_ws,'' as desc_ws,'rsstemas.php?id='||n2.id_n2 as link_ws,'' as autor_ws from i3geoadmin_n2 as n2,i3geoadmin_subgrupos as g where g.id_subgrupo = n2.id_subgrupo and n2.id_n1 = '$id_n1' and n2.n2_perfil = '' order by nome_ws"; 
+	$sql = "select n2.id_n2 as id_ws,g.nome_subgrupo as nome_ws,'' as desc_ws,'rsstemas.php?id='||n2.id_n2 as link_ws,'' as autor_ws from i3geoadmin_n2 as n2,i3geoadmin_subgrupos as g where g.id_subgrupo = n2.id_subgrupo and n2.id_n1 = '$id_n1' and n2.n2_perfil = '' order by nome_ws"; 
 	return geraXmlRSS($locaplic,$sql,"Lista de sub-grupos");
 }
 /*
@@ -180,7 +202,7 @@ RSS
 */
 function geraRSSgrupos($locaplic)
 {
-	$sql = "select g.nome_grupo as nome_ws,'' as desc_ws,'rsssubgrupos.php?id='||n1.id_n1 as link_ws,'' as autor_ws "; 
+	$sql = "select n1.id_n1 as id_ws, g.nome_grupo as nome_ws,'rsstemasraiz.php?nivel=1&id='||n1.id_n1 as desc_ws,'rsssubgrupos.php?id='||n1.id_n1 as link_ws,'' as autor_ws "; 
 	$sql .= "from i3geoadmin_n1 as n1,i3geoadmin_grupos as g ";
 	$sql .= "where g.id_grupo = n1.id_grupo and n1.n1_perfil = '' group by nome_ws,desc_ws,link_ws,autor_ws order by nome_ws";
 	return geraXmlRSS($locaplic,$sql,"Lista de grupos");
@@ -421,7 +443,7 @@ function geraXmlRSS($locaplic,$sql,$descricao)
 		$xml .= "<item>\n";
 		$xml .= "<category/>\n";
 		$xml .= "<title>".entity_decode($row["nome_ws"])."</title>\n";
-		$xml .= "<description>".entity_decode($row["desc_ws"])."</description>\n";
+		$xml .= "<description>".xmlTexto_prepara(entity_decode($row["desc_ws"]))."</description>\n";
 		$xml .= "<link>http://".$_SERVER["HTTP_HOST"].dirname($_SERVER["REQUEST_URI"])."/".xmlTexto_prepara($row["link_ws"])."</link>\n";
 		$xml .= "<pubDate/>\n";
 		$xml .= "<author>".xmlTexto_prepara($row["autor_ws"])."</author>\n";
