@@ -166,7 +166,7 @@ echo "Voc&ecirc; pode testar o CGI clicando <a href='".$enderecocgi."' target='_
 echo "<br>Escrevendo no diret&oacute;rio tempor&aacute;rio...";
 $f = @fopen($dir_tmp."/teste.txt",w);
 @fclose($f);
-if (file_exists($dir_tmp."/teste.txt")) echo "ok\n"; else saindo("\nN&atilde;o foi poss&iacute;vel gravar no diret&oacute;rio tempor&aacute;rio");
+if (file_exists($dir_tmp."/teste.txt")) echo "ok\n"; else saindo("\nN&atilde;o foi poss&iacute;vel gravar no diret&oacute;rio tempor&aacute;rio $dir_tmp");
 echo "Existe o geral1.map? ";
 if(file_exists("$locaplic/aplicmap/geral1.map")) echo "Sim\n"; else {echo "Nao";saindo("geral1.map n&atilde;o encontrado");}
 echo " \n";

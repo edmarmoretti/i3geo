@@ -221,7 +221,7 @@ i3GEOF.selecao = {
 			i3GEO.barraDeBotoes.ativaPadrao();
 			i3GEO.eventos.MOUSECLIQUE.remove("i3GEOF.selecao.clique()");
 			try{
-				i3GEO.desenho.richdraw.fecha;
+				i3GEO.desenho.richdraw.fecha();
 			}
 			catch(e){
 				if(typeof(console) !== 'undefined'){console.error(e);}
@@ -290,7 +290,8 @@ i3GEOF.selecao = {
 		{$i("i3GEOselecaobox").parentNode.style.backgroundColor = "#F5F5F5";}
 		if($i("i3GEOselecaopoli"))
 		{$i("i3GEOselecaopoli").parentNode.style.backgroundColor = "#F5F5F5";}
-		i3GEO.desenho.richdraw.fecha;
+		try{i3GEO.desenho.richdraw.fecha();}
+		catch(e){}
 	},
 	/*
 	Function: pegaTemasSel
@@ -421,6 +422,7 @@ i3GEOF.selecao = {
 			{alert("Escolha um tema");return;}
 			if(g_tipoacao !== 'selecaobox')
 			{return;}
+			i3GEO.Interface.openlayers.OLpan.deactivate();
 			i3geoOL.removeControl(i3GEO.Interface.openlayers.OLpan);
 			i3GEOF.selecao.box.criaBox();
 			adicionaxyBox = i3GEO.util.pegaPosicaoObjeto($i(i3GEO.Interface.IDCORPO));
@@ -444,15 +446,13 @@ i3GEOF.selecao = {
 		Cria o DIV que será utilizado para desenhar o box no mapa
 		*/
 		criaBox: function(){
-			if(i3GEO.Interface.ATUAL !== "openlayers"){
-				try{i3GEO.desenho.richdraw.fecha;}
-				catch(e){
-					if(typeof(console) !== 'undefined'){console.error(e);}
-				}
-				i3GEO.desenho.criaContainerRichdraw();
-				i3GEO.desenho.richdraw.lineColor = "red";
-				i3GEO.desenho.richdraw.lineWidth = "2px";
+			try{i3GEO.desenho.richdraw.fecha();}
+			catch(e){
+				if(typeof(console) !== 'undefined'){console.error(e);}
 			}
+			i3GEO.desenho.criaContainerRichdraw();
+			i3GEO.desenho.richdraw.lineColor = "red";
+			i3GEO.desenho.richdraw.lineWidth = "2px";
 			var novoel,temp;
 			if(!$i("i3geoboxSel")){
 				novoel = document.createElement("div");
@@ -633,7 +633,7 @@ i3GEOF.selecao = {
 		*/
 		inicia: function(){
 			try
-			{i3GEO.desenho.richdraw.fecha;}
+			{i3GEO.desenho.richdraw.fecha();}
 			catch(e)
 			{if(typeof(console) !== 'undefined'){console.error(e);}}
 			pontosdistobj = [];
