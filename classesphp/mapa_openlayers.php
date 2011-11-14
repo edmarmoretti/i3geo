@@ -60,6 +60,7 @@ i3geo/classesphp/mapa_openlayers.php
 
 */
 error_reporting(0);
+clearstatcache();
 $_COOKIE = array();
 if (!function_exists('ms_GetVersion'))
 {
@@ -170,18 +171,6 @@ if(trim($_GET["TIPOIMAGEM"]) != "" && trim($_GET["TIPOIMAGEM"]) != "nenhum")
 if($cache == true)
 {carregaCacheImagem($_GET["BBOX"],$nomecache,$map_fileX,$_GET["WIDTH"],$_GET["HEIGHT"]);}
 
-if($qy)
-{
-	$l = $mapa->getLayerByname($_GET["layer"]);
-	$indxlayer = $l->index;
-	$handle = fopen ($qyfile, "r");
-	$conteudo = fread ($handle, filesize ($qyfile));
-	fclose ($handle);
-	$shp = unserialize($conteudo);
-	foreach ($shp as $indx)
-	{$mapa->querybyindex($indxlayer,-1,$indx,MS_TRUE);}
-}
-
 $map_size = explode(" ",$_GET["map_size"]);
 $mapa->setsize($map_size[0],$map_size[1]);
 if(isset($_GET["mapext"])){
@@ -224,11 +213,19 @@ if(!isset($_GET["telaR"])){
 if($_GET["tipolayer"] != "fundo")
 {$o->set("transparent",MS_TRUE);}
 
-if(!$qy)
+if($qy != true)
 {$img = $mapa->draw();}
 else
 {
+	$handle = fopen ($qyfile, "r");
+	$conteudo = fread ($handle, filesize ($qyfile));
+	fclose ($handle);
+	$shp = unserialize($conteudo);
+	$l = $mapa->getLayerByname($_GET["layer"]);
 	if ($l->connectiontype != MS_POSTGIS){
+		$indxlayer = $l->index;
+		foreach ($shp as $indx)
+		{$mapa->querybyindex($indxlayer,-1,$indx,MS_TRUE);}
 		$qm = $mapa->querymap;
 		$qm->set("width",$map_size[0]);
 		$qm->set("height",$map_size[1]);
@@ -237,7 +234,6 @@ else
 	else{
 		$img = $mapa->draw();
 		$c = $mapa->querymap->color;
-		$l = $mapa->getLayerByname($_GET["layer"]);
 		$numclasses = $l->numclasses;
 		if ($numclasses > 0)
 		{
@@ -254,7 +250,6 @@ else
 		$cor->setrgb($c->red,$c->green,$c->blue);
 		$cor = $classe0->getstyle(0)->outlinecolor;
 		$cor->setrgb($c->red,$c->green,$c->blue);	
-		$shp = unserialize($conteudo);
 		$status = $l->open();
 		$status = $l->whichShapes($mapa->extent);
 		while ($shape = $l->nextShape())

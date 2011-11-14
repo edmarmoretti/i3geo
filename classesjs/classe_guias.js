@@ -782,7 +782,7 @@ i3GEO.guias = {
 			config = i3GEO.guias.guiaMovel.config;
 			
 			temp = $i("i3GEOguiaMovel").style;
-			temp.height = config.alturaGuiaMovel + "px";
+			//temp.height = config.alturaGuiaMovel + "px";
 			temp.left = (posMapa[0] + i3GEO.parametros.w - config.larguraPuxador) + "px";
 			//aberta temp.left = (posMapa[0] + i3GEO.parametros.w - config.larguraPuxador - config.larguraGuiaMovel) + "px";
 			i3GEO.guias.guiaMovel.left = parseInt(temp.left,10);

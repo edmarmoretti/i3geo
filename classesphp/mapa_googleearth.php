@@ -37,6 +37,7 @@ i3geo/classesphp/mapa_googleearth.php
 */
 //error_reporting(E_ALL);
 error_reporting(0);
+clearstatcache();
 if (!function_exists('ms_GetVersion'))
 {
 	$s = PHP_SHLIB_SUFFIX;
@@ -110,28 +111,11 @@ function retornaWms($map_fileX,$postgis_mapa){
 	}
 	$mapa = ms_newMapObj($map_fileX);
 	$mapa->setProjection("init=epsg:4326");
-	/*
-	$qyfile = str_replace(".map",".qy",$_GET["map"]);
-	$qy = file_exists($qyfile);
-	if($qy)
-	{$mapa->loadquery($qyfile);}
-	*/
 	//
 	//resolve o problema da seleção na versão nova do mapserver
 	//
 	$qyfile = dirname($map_fileX)."/".$_GET["layer"].".php";
 	$qy = file_exists($qyfile);
-	if($qy)
-	{
-		$l = $mapa->getLayerByname($_GET["layer"]);
-		$indxlayer = $l->index;
-		$handle = fopen ($qyfile, "r");
-		$conteudo = fread ($handle, filesize ($qyfile));
-		fclose ($handle);
-		$shp = unserialize($conteudo);
-		foreach ($shp as $indx)
-		{$mapa->querybyindex($indxlayer,-1,$indx,MS_TRUE);}
-	}
 	$layersNames = $mapa->getalllayernames();
 	$o = $mapa->outputformat;
 	$o->set("imagemode",MS_IMAGEMODE_RGBA);
@@ -192,15 +176,56 @@ function retornaWms($map_fileX,$postgis_mapa){
 	//
 	if(isset($_GET["tipolayer"]) && $_GET["tipolayer"] != "fundo")
 	{$o->set("transparent",MS_TRUE);}
-	if(!$qy)
+
+	if($qy != true)
 	{$img = $mapa->draw();}
 	else
 	{
-		$qm = $mapa->querymap;
-		$qm->set("width",$_GET["WIDTH"]);
-		$qm->set("height",$_GET["HEIGHT"]);
-		$img = $mapa->drawQuery();
+		$handle = fopen ($qyfile, "r");
+		$conteudo = fread ($handle, filesize ($qyfile));
+		fclose ($handle);
+		$shp = unserialize($conteudo);
+		$l = $mapa->getLayerByname($_GET["layer"]);
+		if ($l->connectiontype != MS_POSTGIS){
+			$indxlayer = $l->index;
+			foreach ($shp as $indx)
+			{$mapa->querybyindex($indxlayer,-1,$indx,MS_TRUE);}
+			$qm = $mapa->querymap;
+			$qm->set("width",$map_size[0]);
+			$qm->set("height",$map_size[1]);
+			$img = $mapa->drawQuery();
+		}
+		else{
+			$img = $mapa->draw();
+			$c = $mapa->querymap->color;
+			$numclasses = $l->numclasses;
+			if ($numclasses > 0)
+			{
+				$classe0 = $l->getClass(0);
+				$classe0->setexpression("");
+				$classe0->set("name"," ");
+				for ($i=1; $i < $numclasses; ++$i)
+				{
+					$classe = $l->getClass($i);
+					$classe->set("status",MS_DELETE);
+				}
+			}
+			$cor = $classe0->getstyle(0)->color;
+			$cor->setrgb($c->red,$c->green,$c->blue);
+			$cor = $classe0->getstyle(0)->outlinecolor;
+			$cor->setrgb($c->red,$c->green,$c->blue);	
+			$status = $l->open();
+			$status = $l->whichShapes($mapa->extent);
+			while ($shape = $l->nextShape())
+			{
+			  if(in_array($shape->index,$shp))
+			  $shape->draw($mapa,$l,$img);
+			}
+			$l->close();
+		}
 	}
+
+
 	if (!function_exists('imagepng'))
 	{
 		$s = PHP_SHLIB_SUFFIX;

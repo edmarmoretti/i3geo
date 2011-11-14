@@ -223,9 +223,7 @@ i3GEOF.selecao = {
 			try{
 				i3GEO.desenho.richdraw.fecha();
 			}
-			catch(e){
-				if(typeof(console) !== 'undefined'){console.error(e);}
-			}
+			catch(e){}
 			if($i("pontosins")){document.body.removeChild($i("pontosins"));}
 		};
 		YAHOO.util.Event.addListener(janela[0].close, "click", temp);

@@ -61,6 +61,7 @@ i3geo/classesphp/mapa_googlemaps.php
 */
 //error_reporting(E_ALL);
 error_reporting(0);
+clearstatcache();
 if (!function_exists('ms_GetVersion'))
 {
 	$s = PHP_SHLIB_SUFFIX;
@@ -121,28 +122,10 @@ if(!isset($_GET["HEIGHT"]))
 $_GET["map_size"] = $_GET["WIDTH"]." ".$_GET["HEIGHT"];
 
 $mapa = ms_newMapObj($map_fileX);
-/*
-$qyfile = str_replace(".map",".qy",$_GET["map"]);
-$qy = file_exists($qyfile);
-if($qy)
-{$mapa->loadquery($qyfile);}
-*/
-//
-//resolve o problema da seleção na versão nova do mapserver
-//
+$ret = $mapa->extent;
 $qyfile = dirname($map_fileX)."/".$_GET["layer"].".php";
 $qy = file_exists($qyfile);
-if($qy)
-{
-	$l = $mapa->getLayerByname($_GET["layer"]);
-	$indxlayer = $l->index;
-	$handle = fopen ($qyfile, "r");
-	$conteudo = fread ($handle, filesize ($qyfile));
-	fclose ($handle);
-	$shp = unserialize($conteudo);
-	foreach ($shp as $indx)
-	{$mapa->querybyindex($indxlayer,-1,$indx,MS_TRUE);}
-}
+
 $layersNames = $mapa->getalllayernames();
 $cache = false;
 if(!isset($_GET["telaR"])){//no caso de projecoes remotas, o mapfile nao´e alterado
@@ -198,7 +181,6 @@ else{
 		{$l->setProjection("proj=latlong,a=6378137,b=6378137");}
 	}
 }
-
 if($_GET["layer"] == "")
 {$cache = true;}
 if($_GET == false)
@@ -233,10 +215,18 @@ if($_GET["tipolayer"] != "fundo")
 {$o->set("transparent",MS_TRUE);}
 if(trim($_GET["TIPOIMAGEM"]) != "" && trim($_GET["TIPOIMAGEM"]) != "nenhum")
 {$o->setOption("QUANTIZE_FORCE","OFF");}
-if(!$qy)
+if($qy != true)
 {$img = $mapa->draw();}
 else
 {
+	$handle = fopen ($qyfile, "r");
+	$conteudo = fread ($handle, filesize ($qyfile));
+	fclose ($handle);
+	$shp = unserialize($conteudo);
+	$l = $mapa->getLayerByname($_GET["layer"]);
+	$indxlayer = $l->index;
+	foreach ($shp as $indx)
+	{$mapa->querybyindex($indxlayer,-1,$indx,MS_TRUE);}
 	$qm = $mapa->querymap;
 	$qm->set("width",$map_size[0]);
 	$qm->set("height",$map_size[1]);
