@@ -62,6 +62,7 @@ Pega os parâmetros do mapfiles.php
 */
 function pegaParametros(retorno)
 {
+	$i("mapfilebase").innerHTML = retorno.mapfile;
 	var ins = ""
 	for (i=0;i<$parametros.simples.length;i++)
 	{

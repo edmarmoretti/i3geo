@@ -72,7 +72,7 @@ switch (strtoupper($funcao))
 		$par = array();
 		foreach ($vs as $v)
 		{
-			$handle = fopen ($locaplic."/aplicmap/".$mapfile.".map", "r");
+			$handle = fopen ($mapfile, "r");
 			while (!feof ($handle)) {
 				$buffer = fgets($handle);
 				if(!(stristr($buffer, $v) === FALSE))
@@ -88,18 +88,9 @@ switch (strtoupper($funcao))
 				}    		
 			}
 		}
+		$par["mapfile"] = $mapfile;
 		retornaJSON($par);
 		exit;
-	break;
-	//depreciado
-	case "RESTAURACONFIGURA":
-		if(verificaEditores($editores) == "nao")
-		{echo "Vc nao e um editor cadastrado. Apenas os editores definidos em i3geo/ms_configura.php podem acessar o sistema de administracao.";exit;}
-		$cp->register('restauraConfigura');
-		unlink($locaplic."/aplicmap/".$mapfile.".map");
-		copy ($locaplic."/aplicmap/".$mapfile.".default",$locaplic."/aplicmap/".$mapfile.".map");
-		$cp->set_data("ok");
-		$cp->return_data();
 	break;
 	/*
 	Valor: SALVACONFIGURA
@@ -129,7 +120,7 @@ Salva um novo valor de uma variável no ms_configura.php
 */
 function salvaConfigura($variavel,$valor,$mapfile,$locaplic)
 {
-	$handle = fopen ($locaplic."/aplicmap/".$mapfile.".map", "r");
+	$handle = fopen ($mapfile, "r");
 	$linhas = array();
 	$valor = str_replace("\\\"",'"',$valor);
 	while (!feof ($handle)) {
@@ -151,8 +142,8 @@ function salvaConfigura($variavel,$valor,$mapfile,$locaplic)
 		$linhas[] = $buffer;
 	}
 	fclose ($handle);
-	unlink($locaplic."/aplicmap/".$mapfile.".map");
-	$handle = fopen ($locaplic."/aplicmap/".$mapfile.".map", "w");
+	unlink($mapfile);
+	$handle = fopen ($mapfile, "w");
 	foreach ($linhas as $linha)
 	{
 		fwrite($handle, $linha);

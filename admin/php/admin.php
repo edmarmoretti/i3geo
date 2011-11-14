@@ -59,14 +59,7 @@ error_reporting(0);
 include_once ($locaplic."/classesphp/carrega_ext.php");
 include_once ($locaplic."/classesphp/funcoes_gerais.php");
 
-//
-//verifica se o cliente pode editar
-//se funcao for verificaEditores vai para case específico
-//
-if (strtoupper(substr(PHP_OS, 0, 3) == 'WIN'))
-{$mapfile = "geral1windows";}
-else
-{$mapfile = "geral1";}
+$mapfile = mapfilebase($base,$locaplic);
 /*
 Function: retornaJSON
 
@@ -341,5 +334,36 @@ function resolveAcentos($palavra,$tipo)
 	if($tipo == "palno")
 	$palavra = urldecode($palavra);
 	return $palavra;
+}
+function mapfilebase($base,$locaplic){
+	$versao = versao();
+	$versao = $versao["principal"];
+	if(isset($base) && $base != ""){
+		if(file_exists($base))
+		{$f = $base;}
+		else
+		{$f = $locaplic."/aplicmap/".$base.".map";}
+	}
+	else
+	{
+		$f = "";
+		if (strtoupper(substr(PHP_OS, 0, 3) == 'WIN'))
+		{$f = $locaplic."/aplicmap/geral1windowsv".$versao.".map";}
+		else
+		{
+			if($f == "" && file_exists('/var/www/i3geo/aplicmap/geral1debianv'.$versao.'.map')){
+				$f = "/var/www/i3geo/aplicmap/geral1debianv".$versao.".map";
+			}
+			if($f == "" && file_exists('/var/www/html/i3geo/aplicmap/geral1fedorav'.$versao.'.map')){
+				$f = "/var/www/html/i3geo/aplicmap/geral1fedorav".$versao.".map";
+			}
+			if($f == "" && file_exists('/opt/www/html/i3geo/aplicmap/geral1fedorav'.$versao.'.map')){
+				$f = "/opt/www/html/i3geo/aplicmap/geral1v".$versao.".map";
+			}
+			if($f == "")
+			{$f = $locaplic."/aplicmap/geral1v".$versao.".map";}
+		}
+	}
+	return $f;
 }
 ?>
