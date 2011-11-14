@@ -225,12 +225,41 @@ else
 	$shp = unserialize($conteudo);
 	$l = $mapa->getLayerByname($_GET["layer"]);
 	$indxlayer = $l->index;
-	foreach ($shp as $indx)
-	{$mapa->querybyindex($indxlayer,-1,$indx,MS_TRUE);}
-	$qm = $mapa->querymap;
-	$qm->set("width",$map_size[0]);
-	$qm->set("height",$map_size[1]);
-	$img = $mapa->drawQuery();
+	if ($l->connectiontype != MS_POSTGIS){
+		foreach ($shp as $indx)
+		{$mapa->querybyindex($indxlayer,-1,$indx,MS_TRUE);}
+		$qm = $mapa->querymap;
+		$qm->set("width",$map_size[0]);
+		$qm->set("height",$map_size[1]);
+		$img = $mapa->drawQuery();
+	}
+	else{
+		$img = $mapa->draw();
+		$c = $mapa->querymap->color;
+		$numclasses = $l->numclasses;
+		if ($numclasses > 0)
+		{
+			$classe0 = $l->getClass(0);
+			$classe0->setexpression("");
+			$classe0->set("name"," ");
+			for ($i=1; $i < $numclasses; ++$i)
+			{
+				$classe = $l->getClass($i);
+				$classe->set("status",MS_DELETE);
+			}
+		}
+		$cor = $classe0->getstyle(0)->color;
+		$cor->setrgb($c->red,$c->green,$c->blue);
+		$cor = $classe0->getstyle(0)->outlinecolor;
+		$cor->setrgb($c->red,$c->green,$c->blue);
+		$l->open();
+		foreach ($shp as $indx){
+			$shape = $l->getfeature($indx,-1);
+			$shape->draw($mapa,$l,$img);
+		}
+		$l->close();
+	}
+	
 }
 if (!function_exists('imagepng'))
 {

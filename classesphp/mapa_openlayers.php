@@ -105,7 +105,6 @@ $mapa = ms_newMapObj($map_fileX); //map_file vem de section
 //
 $qyfile = dirname($map_fileX)."/".$_GET["layer"].".php";
 $qy = file_exists($qyfile);
-
 if(!isset($_GET["telaR"])){//no caso de projecoes remotas, o mapfile nao e alterado
 	$numlayers = $mapa->numlayers;
 	$cache = false;
