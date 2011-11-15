@@ -93,7 +93,7 @@ i3GEOF.carregakml = {
 	html:function(){
 		var ins = '' +
 		'<p class="paragrafo" >Endereço (URL) do KML (ou escolha da lista):<br><br>' +	
-		$inputText("","","i3GEOcarregakmlurl","",60,"") +
+		$inputText("","","i3GEOcarregakmlurl","",40,"") +
 		'<br><br>' +
 		'<div id="i3GEOcarregakmlCombo" style="left:1px;display:block;width:315px;text-align:left;">Aguarde...' +
 		'</div>' +
@@ -115,7 +115,7 @@ i3GEOF.carregakml = {
 		};
 		titulo = "Kml <a class=ajuda_usuario target=_blank href='" + i3GEO.configura.locaplic + "/ajuda_usuario.php?idcategoria=4&idajuda=105' >&nbsp;&nbsp;&nbsp;</a>";
 		janela = i3GEO.janela.cria(
-			"360px",
+			"320px",
 			"150px",
 			"",
 			"",

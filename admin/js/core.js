@@ -408,7 +408,6 @@ function core_pegaPerfis(funcao)
   		failure:core_handleFailure,
   		argument: { foo:"foo", bar:"bar" }
 	};
-	core_carregando("buscando perfis...");
 	core_makeRequest(sUrl,callback)
 }
 /*
