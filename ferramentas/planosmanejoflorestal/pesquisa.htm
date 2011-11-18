@@ -95,7 +95,7 @@ Planos de manejo florestal cadastrados no IBAMA. <a href="http://www.mma.gov.br/
 </form>
 <DIV id=ResultadoPesquisa></DIV>
 <script type="text/javascript" >
-g_sid = window.parent.g_sid
+g_sid = window.parent.i3GEO.configura.sid
 function executa()
 {
 	parametros = "&uf="+document.frmPlanoDeManejo.cboEstado[document.frmPlanoDeManejo.cboEstado.selectedIndex].value; 
@@ -117,7 +117,7 @@ function listaretornof(retorno)
 	if (retorno.data != "erro")
 	{
 		document.getElementById("ResultadoPesquisa").innerHTML = "<b>Mapa criado!"
-		window.parent.remapaf()
+		window.parent.i3GEO.atualiza();
 	}
 	else
 	{document.getElementById("ResultadoPesquisa").innerHTML = "<b>Erro. O mapa não pode ser criado!"}

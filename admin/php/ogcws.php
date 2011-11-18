@@ -86,6 +86,7 @@ switch (strtoupper($funcao))
 		{
 			$par[$v] = utf8_encode($web->metadata->get($v));
 		}
+		$par["mapfile"] = $map_file;
 		retornaJSON($par);
 		exit;
 	break;

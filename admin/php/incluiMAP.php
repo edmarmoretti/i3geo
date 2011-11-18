@@ -56,6 +56,7 @@ if (is_dir($locaplic."/temas"))
 echo "Arquivos convertidos: <br>";
 foreach($arquivos as $arquivo)
 {
+	$mapExiste = false;
 	$arq = $locaplic."/temas/".$arquivo;
 	$abre = fopen($arq, "r");
 	$maparray = array();
@@ -69,19 +70,26 @@ foreach($arquivos as $arquivo)
 		{
 			$maparray[] = $buffer;
 		}
+		else
+		{$mapExiste = true;}
 	}
 	fclose($abre);
 	//echo "<pre>";
 	//var_dump($maparray);
 	//exit;
-	$abre = fopen($arq, "wt");
-	foreach($maparray as $linha)
-	{
-		fwrite ($abre,$linha);
-		fwrite ($abre,"\n");
+	if($mapExiste == true){
+		echo "MAP já existe em ".$arquivo."<br>";
 	}
-	$fecha = fclose ($abre);
-	echo $arquivo."<br>";
+	else{
+		$abre = fopen($arq, "wt");
+		foreach($maparray as $linha)
+		{
+			fwrite ($abre,$linha);
+			fwrite ($abre,"\n");
+		}
+		$fecha = fclose ($abre);
+		echo $arquivo."<br>";
+	}
 }
 
 ?>

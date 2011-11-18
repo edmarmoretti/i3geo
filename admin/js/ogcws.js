@@ -124,6 +124,7 @@ function initMenu()
 }
 function pegaParametros(retorno)
 {
+	$i("mapfile").innerHTML = retorno.mapfile;
 	var ins = ""
 	for (i=0;i<$parametros.simples.length;i++)
 	{
