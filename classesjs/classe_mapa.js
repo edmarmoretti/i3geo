@@ -90,6 +90,19 @@ i3GEO.mapa = {
 		$i(i3GEO.Interface.IDMAPA).appendChild(novoel);
 	},
 	/*
+	Function: reposicionaDobraPagina
+	
+	Reposiciona o ícone do tipo "dobra de´página"
+	*/
+	reposicionaDobraPagina: function(){
+		var novoel = $i("i3GEOdobraPagina");
+		if(!novoel){
+			return;
+		}
+		novoel.style.top = i3GEO.parametros.h - 35;
+		novoel.style.left = i3GEO.parametros.w - 35;
+	},	
+	/*
 	Function: ativaAutoResize
 	
 	Ativa o redimensionamento automático do mapa sempre que o navegador for redimensionado
@@ -121,6 +134,7 @@ i3GEO.mapa = {
 				{i3GEO.guias.guiaMovel.reposiciona();}
 				else
 				{i3GEO.guias.ajustaAltura();}
+				i3GEO.mapa.reposicionaDobraPagina();
 			},2000);
 		};
 	},
