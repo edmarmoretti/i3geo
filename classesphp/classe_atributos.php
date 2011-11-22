@@ -269,23 +269,15 @@ $tipo - Tipo de busca brasil|null
 		$this->layer->setfilter("");
 		//le o arquivo de query se existir e checa se existe seleção para o tema
 		$items = pegaItens($this->layer);
-		$existesel = carregaquery2($this->arquivo,$this->layer,$this->mapa);
-		if ($existesel == "nao")
-		{$this->layer->querybyrect($this->mapa->extent);}
-		$sopen = $this->layer->open();
-		if($sopen == MS_FAILURE){return "erro";}
+		
+		$shapes = retornaShapesSelecionados($this->layer,$this->arquivo,$this->mapa);
+		if(count($shapes) == 0){
+			$shapes = retornaShapesMapext($this->layer,$this->mapa);
+		}
 		$registros[] = array();
-		$res_count = $this->layer->getNumresults();
-		for ($i = 0; $i < $res_count; ++$i)
+		foreach($shapes as $shape)
 		{
 			$valitem = array();
-			if($this->v == 6)
-			{$shape = $this->layer->getShape($this->layer->getResult($i));}
-			else{
-				$result = $this->layer->getResult($i);
-				$shp_index  = $result->shapeindex;
-				$shape = $this->layer->getfeature($shp_index,-1);			
-			}
 			foreach ($items as $item)
 			{
 				$v = trim($shape->values[$item]);
@@ -338,11 +330,8 @@ $tipolista - Indica se serão mostrados todos os registros ou apenas os seleciona
 		else
 		{$items[] = $itemtema;}
 		$resultadoFinal[] = array("itens"=>$items);
-		carregaquery2($this->arquivo,$this->layer,$this->mapa);
-		$indxlayer = $this->layer->index;
-		$sopen = $this->layer->open();
-		if($sopen == MS_FAILURE){return "erro";}
-		$res_count = $this->layer->getNumresults();
+		$shapes = retornaShapesSelecionados($layerPt,$this->arquivo,$this->mapa);
+		$res_count = count($shapes);
 		$registros = array();
 		//lista apenas os selecionados
 		if ($tipolista == "selecionados")
@@ -356,15 +345,7 @@ $tipolista - Indica se serão mostrados todos os registros ou apenas os seleciona
 			for ($i = $inicio; $i < $res_count; ++$i)
 			{
 				$valitem = array();
-				if($this->v == 6){
-					$shape = $this->layer->getShape($this->layer->getResult($i));
-					$indx = $shape->index;
-				}
-				else{
-					$result = $this->layer->getResult($i);
-					$indx  = $result->shapeindex;
-					$shape = $this->layer->getfeature($indx,-1);
-				}				
+				$shape = $shapes[$i];
 				foreach ($items as $item)
 				{
 					$valori = trim($shape->values[$item]);
@@ -381,10 +362,8 @@ $tipolista - Indica se serão mostrados todos os registros ou apenas os seleciona
 			$shp_atual = array();
 			for ($i = 0; $i < $res_count;++$i)
 			{
-				$rc = $this->layer->getResult($i);
-				$shp_atual[$rc->shapeindex] = $rc->shapeindex;
+				$shp_atual[$i] = $shapes[$i];;
 			}
-			$this->layer->close();
 			$chk = "";
 			if (@$this->layer->queryByrect($this->mapa->extent) == MS_SUCCESS)
 			{
@@ -551,22 +530,13 @@ Include:
 		$filtro = $this->layer->getfilterstring();
 		if ($filtro != ""){$this->layer->setfilter("");}
 		//le o arquivo de query se existir e checa se existe sele&ccedil;&atilde;o para o tema
-		$existesel = carregaquery2($this->arquivo,$this->layer,$this->mapa);
-		if ($existesel == "nao")
-		{$this->layer->queryByrect($this->mapa->extent);}
-		$sopen = $this->layer->open();
-		if($sopen == MS_FAILURE){return "erro";}
-		$res_count = $this->layer->getNumresults();
+		$shapes = retornaShapesSelecionados($layerPt,$this->arquivo,$this->mapa);
+		if(count($shapes) == 0){
+			$shapes = retornaShapesMapext($layerPt,$this->mapa);
+		}		
 		//pega os valores
-		for ($i = 0; $i < $res_count; ++$i)
+		foreach($shapes as $shape)
 		{
-			if($this->v == 6)
-			{$shape = $this->layer->getShape($this->layer->getResult($i));}
-			else{
-				$result = $this->layer->getResult($i);
-				$shp_index  = $result->shapeindex;
-				$shape = $this->layer->getfeature($shp_index,-1);
-			}
 			$v = $shape->values[$item];
 			$valores[] = $v;
 		}

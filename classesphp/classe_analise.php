@@ -1021,29 +1021,13 @@ $locaplic - Localização do I3geo.
 		//define o nome do novo shapefile que será criado
 		$nomefinal = nomeRandomico();
 		$nomeshp = $this->diretorio."/".$nomefinal;
-		//pega os shapes selecionados
-		$itemspt = pegaItens($layerPt);
-		$existesel = carregaquery2($this->arquivo,$this->layer,$this->mapa);
-		if ($existesel == "nao")
-		{$layerPt->queryByrect($this->mapa->extent);}
-		$res_count = $layerPt->getNumresults();
-		$pontos = array();
-		//pega um shape especifico
-		$sopen = $layerPt->open();
-		if($sopen == MS_FAILURE){return "erro";}
-		$spts = array();
-		for ($i = 0; $i < $res_count; ++$i)
-		{
-			if($this->v == 6)
-			{$shape = $layerPt->getShape($layerPt->getResult($i));}
-			else{
-				$result = $layerPt->getResult($i);
-				$shp_index  = $result->shapeindex;
-				$shape = $layerPt->getfeature($shp_index,-1);			
-			}
-			$spts[] = $shape;
+		//
+		$spts = retornaShapesSelecionados($layerPt,$this->arquivo,$this->mapa);
+		if(count($spts) == 0){
+			$spts = retornaShapesMapext($layerPt,$this->mapa);
 		}
-		$layerPt->close();
+		//
+		$itemspt = pegaItens($layerPt);
 		//gera o novo arquivo shape file
 		// cria o dbf
 		$def = $this->criaDefDb($itemspt);
@@ -1098,7 +1082,7 @@ $locaplic - Localização do I3geo.
 			$lineo = $spt->line(0);
 			$pt = $lineo->point(0);
 			//faz a pesquisa
-			//error_reporting(E_ALL);
+			error_reporting(E_ALL);
 			foreach ($layers as $layer)
 			{
 				$layer->set("template","none.htm");
@@ -1109,7 +1093,7 @@ $locaplic - Localização do I3geo.
 					$itens = $listaItens[$layer->name];
 					$sopen = $layer->open();
 					if($sopen == MS_FAILURE){return "erro";}
-					if ($res_count > 0 && $layer->getResult(0) !== FALSE)
+					if ($layer->getResult(0) !== FALSE)
 					{
 						if($this->v == 6)
 						{$shape = $layer->getShape($layer->getResult(0));}
@@ -1139,8 +1123,7 @@ $locaplic - Localização do I3geo.
 		if($this->dbaseExiste == false)
 		xbase_close($db);
 		else
-		dbase_close($db);
-		
+		dbase_close($db);	
 		$novolayer = ms_newLayerObj($this->mapa, $layerPt);
 		$novolayer->set("data",$nomeshp.".shp");
 		$novolayer->set("name",$nomefinal);
@@ -1149,9 +1132,6 @@ $locaplic - Localização do I3geo.
 		$novolayer->setmetadata("DOWNLOAD","SIM");
 		$novolayer->setmetadata("ITENS","");
 		$novolayer->setmetadata("ITENSDESC","");				
-		//$novolayer->removeMetaData("ITENS");
-		//$novolayer->removeMetaData("ITENSDESC");
-
 		if(ms_GetVersionInt() > 50201)
 		{$novolayer->setconnectiontype(MS_SHAPEFILE);}
 		else
@@ -1171,7 +1151,7 @@ parameters:
 
 temaorigem - nome do layer com o ponto de origem
 
-temadestino - nome od tema com os pontos de destino
+temadestino - nome do tema com os pontos de destino
 
 temaoverlay - tema que será utilizado para selecionar o tema de destino
 
@@ -1182,8 +1162,9 @@ itemorigem - nome do item na tabela de atributos do tema de origem que será acre
 itemdestino - nome do item na tabela de atributos do tema de origem que será acrescentado ao tema que será criado
 
 */
-function distanciaptpt($temaorigem,$temadestino,$temaoverlay,$locaplic,$itemorigem,$itemdestino)
+function distanciaptpt($temaorigem,$temadestino,$temaoverlay,$locaplic,$itemorigem="",$itemdestino="")
 {
+	error_reporting(E_ALL);
 	set_time_limit(180);
 	//para manipular dbf
 	if($this->dbaseExiste == false){
@@ -1195,34 +1176,21 @@ function distanciaptpt($temaorigem,$temadestino,$temaoverlay,$locaplic,$itemorig
 	//define o nome do novo shapefile que será criado
 	$nomefinal = nomeRandomico();
 	$nomeshp = $this->diretorio."/".$nomefinal;
+
 	$existesel = carregaquery2($this->arquivo,$this->layer,$this->mapa);
 	if ($existesel == "nao")
 	{return "errox";}
+
 	$layerorigem = $this->mapa->getlayerbyname($temaorigem);
 	$layerdestino = $this->mapa->getlayerbyname($temadestino);
 	$layeroverlay = $this->mapa->getlayerbyname($temaoverlay);
-	$sopen = $layerorigem->open();
-	if($sopen == MS_FAILURE){return "erro";}
-	$res_count = $layerorigem->getNumresults();
-	for ($i = 0; $i < $res_count; ++$i)
-	{
-		if($this->v == 6)
-		{$shapesorigem[] = $layerorigem->getShape($layerorigem->getResult($i));}
-		else{
-			$result = $layerorigem->getResult($i);
-			$shp_index  = $result->shapeindex;
-			$shapesorigem[] = $layerorigem->getshape(-1, $shp_index);	
-		}
+
+	$shapesorigem = retornaShapesSelecionados($layerorigem,$this->arquivo,$this->mapa);
+	if(count($shapesorigem) == 0){
+		return "erro";
 	}
-	$layerorigem->close();
 	$layeroverlay->set("tolerance",0);
 	$layerdestino->set("tolerance",0);
-
-	//if($layeroverlay->getProjection() == "" )
-	//{$layeroverlay->setProjection("init=epsg:4291");}
-	//if($layerdestino->getProjection() == "" )
-	//{$layerdestino->setProjection("init=epsg:4291");}
-	
 	$layeroverlay->queryByrect($this->mapa->extent);
 	$layerdestino->queryByFeatures($layeroverlay->index);
 	
@@ -1266,13 +1234,19 @@ function distanciaptpt($temaorigem,$temadestino,$temaoverlay,$locaplic,$itemorig
 	$db=dbase_open($dbname,2);
 	foreach ($shapesorigem as $sorigem)
 	{
-		$valororigem = $sorigem->values[$itemorigem];
+		if($itemorigem != "")
+		{$valororigem = $sorigem->values[$itemorigem];}
+		else
+		{$valororigem = "";}
 		foreach ($shapesdestino as $sdestino)
 		{
 			$linha = ms_newLineObj();
 			$linha->add($sorigem->getCentroid());
 			$linha->add($sdestino->getCentroid());
-			$valordestino = $sdestino->values[$itemdestino];
+			if($itemdestino != "")
+			{$valordestino = $sdestino->values[$itemdestino];}
+			else
+			{$valordestino = "";}
 			$ShapeObj = ms_newShapeObj(MS_SHAPE_LINE);
 			$ShapeObj->add($linha);
 			$novoshpf->addShape($ShapeObj);
@@ -1283,8 +1257,6 @@ function distanciaptpt($temaorigem,$temadestino,$temaoverlay,$locaplic,$itemorig
 			xbase_add_record($db,$registro);
 			else
 			dbase_add_record($db,$registro);
-			$linha->free();
-			$ShapeObj->free();
 		}
 	}
 	$novoshpf->free();
@@ -1344,28 +1316,10 @@ nome do layer criado com o buffer.
 		}
 		$nomebuffer = nomeRandomico();
 		$nomeshp = $this->diretorio."/".$nomebuffer;
+
 		$listaShapes = array();
 		if($this->nome != ""){
-			//pega os shapes selecionados
-			carregaquery2($this->arquivo,$this->layer,$this->mapa);
-			$sopen = $this->layer->open();
-			if($sopen == MS_FAILURE){return "erro";}
-			
-			$this->layer->open();
-			$res_count = $this->layer->getNumresults();
-			$buffers = array();
-			//pega um shape especifico
-			for ($i = 0; $i < $res_count; ++$i)
-			{
-				if($this->v == 6)
-				{$listaShapes[] = $this->layer->getShape($this->layer->getResult($i));}
-				else{
-					$result = $this->layer->getResult($i);
-					$shp_index  = $result->shapeindex;
-					$listaShapes[] = $this->layer->getfeature($shp_index,-1);				
-				}
-			}
-			$fechou = $this->layer->close();
+			$listaShapes = retornaShapesSelecionados($this->layer,$this->arquivo,$this->mapa);
 		}
 		else{
 			$s = ms_shapeObjFromWkt($wkt);
@@ -1436,7 +1390,7 @@ nome do layer criado com o buffer.
 		else
 		dbase_close($db);
 		//adiciona no mapa atual o novo tema
-		$novolayer = criaLayer($this->mapa,MS_LAYER_POLYGON,MS_DEFAULT,("Buffer (".$nomebuffer.")"),$metaClasse="SIM");
+		$novolayer = criaLayer($this->mapa,MS_LAYER_POLYGON,MS_DEFAULT,("Buffer (".$nomebuffer.")"),$metaClasse="SIM",false);
 		$novolayer->set("data",$nomeshp.".shp");
 		$novolayer->setmetadata("DOWNLOAD","SIM");
 		$novolayer->set("template","none.htm");
@@ -1476,33 +1430,21 @@ $item {string} - (opcional) Item q será utilizado para ponderar os valores.
 		$nomeCentro = nomeRandomico();
 		$nomeshp = $this->diretorio."/".$nomeCentro;
 		//pega os shapes selecionados
-		carregaquery2($this->arquivo,$this->layer,$this->mapa);
-		if($this->layer->getNumresults() == 0)
-		{$this->layer->querybyrect($this->mapa->extent);}
-		$sopen = $this->layer->open();
-		if($sopen == MS_FAILURE){return "erro";}
-		$this->layer->open();
-		$res_count = $this->layer->getNumresults();
-		$shapes = array();
+		$lshapes = retornaShapesSelecionados($this->layer,$this->arquivo,$this->mapa);
+		if(count($lshapes) == 0){
+			$lshapes = retornaShapesMapext($this->layer,$this->mapa);
+		}
 		$pondera = 1;
 		$xs = 0;
 		$ys = 0;
-		for ($i = 0; $i < $res_count; ++$i)
-		{
-			if($this->v == 6)
-			{$shape = $this->layer->getShape($this->layer->getResult($i));}
-			else{
-				$result = $this->layer->getResult($i);
-				$shp_index  = $result->shapeindex;
-				$shape = $this->layer->getfeature($shp_index,-1);			
-			}
+		foreach($lshapes as $shape){
 			if($item != "")
 			{$pondera = $shape->values[$item];}
 			$pt = $shape->line(0)->point(0);
 			$xs += ($pt->x * $pondera);
 			$ys += ($pt->y * $pondera);
+		
 		}
-		$fechou = $this->layer->close();
 		//gera o novo arquivo shape file
 		// cria o shapefile
 		$novoshpf = ms_newShapefileObj($nomeshp, MS_SHP_POINT);
@@ -1573,32 +1515,14 @@ $locaplic - Localização do I3geo.
 		}
 		$nomeCentroides = nomeRandomico();
 		$nomeshp = $this->diretorio."/".$nomeCentroides;
-		//pega os shapes selecionados
-		carregaquery2($this->arquivo,$this->layer,$this->mapa);
-		$sopen = $this->layer->open();
-		if($sopen == MS_FAILURE){return "erro";}
-		$this->layer->open();
-		$res_count = $this->layer->getNumresults();
-		$centroides = array();
-		$shapes = array();
-		//pega um shape especifico
-		for ($i = 0; $i < $res_count; ++$i)
-		{
-			if($this->v == 6)
-			{$shape = $this->layer->getShape($this->layer->getResult($i));}
-			else{
-				$result = $this->layer->getResult($i);
-				$shp_index  = $result->shapeindex;
-				$shape = $this->layer->getfeature($shp_index,-1);			
-			}
+		$shapes = retornaShapesSelecionados($this->layer,$this->arquivo,$this->mapa);
+		foreach($shapes as $shape){
 			$LineObj = ms_newLineObj();
 			$LineObj->add($shape->getCentroid());
 			$ShapeObj = ms_newShapeObj(MS_SHAPE_POINT);
 			$ShapeObj->add($LineObj);
-			$centroides[] = $ShapeObj;
-			$shapes[] = $shape;
+			$centroides[] = $ShapeObj;	
 		}
-		$fechou = $this->layer->close();
 		//gera o novo arquivo shape file
 		// cria o shapefile
 		$novoshpf = ms_newShapefileObj($nomeshp, MS_SHP_POINT);
@@ -2110,6 +2034,7 @@ $locaplic - Localização do I3geo
 */
 	function nptPol($temaPt,$temaPo,$locaplic)
 	{
+		//error_reporting(E_ALL);
 		set_time_limit(180);
 		//para manipular dbf
 		if($this->dbaseExiste == false){
@@ -2137,38 +2062,19 @@ $locaplic - Localização do I3geo
 		{$db = xbase_create($nomeshp.".dbf", $def);xbase_close($db);}
 		else
 		{$db = dbase_create($nomeshp.".dbf", $def);dbase_close($db);}
-
-		//if($layerPo->getProjection() == "" )
-		//{$layerPo->setProjection("init=epsg:4291");}		
-		//if($layerPt->getProjection() == "" )
-		//{$layerPt->setProjection("init=epsg:4291");}		
-
 		//acrescenta os pontos no novo shapefile
 		$dbname = $nomeshp.".dbf";
 		if($this->dbaseExiste == false)
 		$db=xbase_open($dbname,2);
 		else
-		$db=dbase_open($dbname,2);
-		$sopen = $layerPo->open();
-		if($sopen == MS_FAILURE){return "erro";}
-				
-		$layerPo->querybyrect($this->mapa->extent);
-		$sopen = $layerPo->open();
-		$res_count = $layerPo->getNumresults();
-		for ($i = 0; $i < $res_count; ++$i)
+		$db=dbase_open($dbname,2);	
+		$shapes = retornaShapesMapext($layerPo,$this->mapa);
+		foreach($shapes as $shape)
 		{
-			if($this->v == 6)
-			{$shape = $layerPo->getShape($layerPo->getResult($i));}
-			else{
-				$result = $layerPo->getResult($i);
-				$shp_index  = $result->shapeindex;
-				$shape = $layerPo->getfeature($shp_index,-1);			
-			}
 			$novoreg = array();
 			foreach($itenspo as $ipo)
 			{$novoreg[] = $shape->values[$ipo];}
 			$layerPt->querybyshape($shape);
-			//echo $layerPt->getNumresults();
 			$novoreg[] = $layerPt->getNumresults();
 			$novoshpf->addShape($shape);
 			if($this->dbaseExiste == false)
@@ -2176,14 +2082,13 @@ $locaplic - Localização do I3geo
 			else
 			dbase_add_record($db,$novoreg);
 		}
-		$fechou = $layerPo->close();
 		$novoshpf->free();
 		if($this->dbaseExiste == false)
 		xbase_close($db);
 		else
 		dbase_close($db);
 		//adiciona o novo tema no mapa
-		$novolayer = criaLayer($this->mapa,MS_LAYER_POLYGON,MS_DEFAULT,"N pontos",$metaClasse="SIM");
+		$novolayer = criaLayer($this->mapa,MS_LAYER_POLYGON,MS_DEFAULT,"N pontos",$metaClasse="SIM",false);
 		$novolayer->set("data",$nomeshp.".shp");
 		$novolayer->setmetadata("DOWNLOAD","SIM");
 		$novolayer->setmetadata("TEMALOCAL","SIM");
@@ -2211,47 +2116,23 @@ Salva o mapa acrescentando um novo layer com o resultado.
 			else	
 			include_once "../pacotes/phpxbase/api_conversion.php";
 		}
-		//define o nome do novo shapefile que será criado
-		carregaquery2($this->arquivo,$this->layer,$this->mapa);
-		$sopen = $this->layer->open();
-		if($sopen == MS_FAILURE){return "erro";}
-		$res_count = $this->layer->getNumresults();
-		//
-		//pega os indices dos poligonos por classe de atributo
-		//
+		$shapes =retornaShapesSelecionados($this->layer,$this->arquivo,$this->mapa);
 		$indices = array();
-		for ($i = 0; $i < $res_count; ++$i)
-		{
-			if($this->v == 6){
-				$shape = $this->layer->getShape($this->layer->getResult($i));
-				$shp_index = $shape->index;
-			}
-			else{
-				$result = $this->layer->getResult($i);
-				$shp_index  = $result->shapeindex;
-				$shape = $this->layer->getfeature($shp_index,-1);			
-			}
+		foreach($shapes as $shape){
 			if($item != "")
-			$valor = $shape->values[$item];
+			{$valor = $shape->values[$item];}
 			else
-			$valor = "nenhum";
-			if(!isset($indices[$valor]))
-			{
-				$indices[$valor] = array($shp_index);
+			{$valor = "nenhum";}
+			if(!isset($indices[$valor])){
+				$indices[$valor] = array($shape);
 			}
 			else
-			$indices[$valor] = array_merge($indices[$valor],array($shp_index));
+			$indices[$valor] = array_merge($indices[$valor],array($shape));
 		}
-
 		$dissolve=array();
-		foreach($indices as $i)
+		foreach($indices as $shapes)
 		{
-			foreach ($i as $indice)
-			{
-				if($this->v == 6)
-				{$shape = $this->layer->getShape($this->layer->getResult($indice));}
-				else
-				{$shape = $this->layer->getfeature($indice,-1);}
+			foreach($shapes as $shape){
 				if($item != "")
 				$valor = $shape->values[$item];
 				else
@@ -2260,7 +2141,7 @@ Salva o mapa acrescentando um novo layer com o resultado.
 				{$dissolve[$valor] = $shape;}
 				else
 				{
-					$tipo = $shape1->type;
+					$tipo = $shape->type;
 					if($tipo==2)
 					{
 						for($l=0;$l<($shape->numlines);$l++)
@@ -2278,7 +2159,6 @@ Salva o mapa acrescentando um novo layer com o resultado.
 				}
 			}
 		}
-		$this->layer->close();
 		//
 		//cria o novo shapefile
 		//
@@ -2317,13 +2197,10 @@ Salva o mapa acrescentando um novo layer com o resultado.
 		//adiciona o novo layer no mapa
 		//	
 		$n = pegaNome($this->layer);	
-		$novolayer = criaLayer($this->mapa,MS_LAYER_POLYGON,MS_DEFAULT,("Agrupamento de ".$n),$metaClasse="SIM");
+		$novolayer = criaLayer($this->mapa,MS_LAYER_POLYGON,MS_DEFAULT,("Agrupamento de ".$n),$metaClasse="SIM",false);
 		$novolayer->set("data",$nomeshp.".shp");
 		$novolayer->setmetadata("DOWNLOAD","SIM");
 		$novolayer->setmetadata("TEMALOCAL","SIM");
-		if (file_exists($this->qyfile))
-		{unlink ($this->qyfile);}
-
 		return("ok");
 	}
 	
@@ -2350,48 +2227,23 @@ $locaplic - Localização do I3geo
 			else	
 			include_once "../pacotes/phpxbase/api_conversion.php";
 		}
-		//define o nome do novo shapefile que será criado
-		carregaquery2($this->arquivo,$this->layer,$this->mapa);
-		$sopen = $this->layer->open();
-		if($sopen == MS_FAILURE){return "erro";}
-		$res_count = $this->layer->getNumresults();
-		//
-		//pega os indices dos poligonos por classe de atributo
-		//
+		$shapes = retornaShapesSelecionados($this->layer,$this->arquivo,$this->mapa);
 		$indices = array();
-		for ($i = 0; $i < $res_count; ++$i)
-		{
-			if($this->v == 6)
-			{$shape = $this->layer->getShape($this->layer->getResult($i));}
-			else{
-				$result = $this->layer->getResult($i);
-				$shp_index  = $result->shapeindex;
-				$shape = $this->layer->getfeature($shp_index,-1);			
-			}
+		foreach($shapes as $shape){
 			if($item != "")
-			$valor = $shape->values[$item];
+			{$valor = $shape->values[$item];}
 			else
-			$valor = "nenhum";
-			if(!isset($indices[$valor]))
-			{
-				$indices[$valor] = array($i);
+			{$valor = "nenhum";}
+			if(!isset($indices[$valor])){
+				$indices[$valor] = array($shape);
 			}
 			else
-			$indices[$valor] = array_merge($indices[$valor],array($i));
+			$indices[$valor] = array_merge($indices[$valor],array($shape));
 		}
-		//var_dump($indices);
-		//
-		//faz o dissolve dos poligonos
-		//
 		$dissolve=array();
-		foreach($indices as $i)
+		foreach($indices as $shapes)
 		{
-			foreach ($i as $indice)
-			{
-				if($this->v == 6)
-				{$shape = $this->layer->getShape($this->layer->getResult($indice));}
-				else
-				{$shape = $this->layer->getfeature($indice,-1);}
+			foreach($shapes as $shape){
 				if($item != "")
 				$valor = $shape->values[$item];
 				else
@@ -2400,11 +2252,23 @@ $locaplic - Localização do I3geo
 				{$dissolve[$valor] = $shape;}
 				else
 				{
-					$dissolve[$valor] = $shape->union($dissolve[$valor]);
+					if($shape->type != MS_SHAPE_POLYGON)
+					{
+						for($l=0;$l<($shape->numlines);$l++)
+						{
+							$shape1 = $dissolve[$valor];
+							$linha = $shape->line($l);
+							$shape1->add($linha);
+						}
+						$dissolve[$valor] = $shape1;
+					}
+					else
+					{
+						$dissolve[$valor] = $shape->union($dissolve[$valor]);
+					}
 				}
 			}
 		}
-		$this->layer->close();
 		//
 		//cria o novo shapefile
 		//
@@ -2476,7 +2340,6 @@ $locaplic - Localização do I3geo
 			$this->incmapageometrias($dir_tmp,$imgdir,$geometrias,$tipoLista="arraywkt");
 			return "ok";
 		}
-		
 		$geos = array();
 		foreach ($geometrias as $geo){
 			$geos[] = ms_shapeObjFromWkt($geo);
@@ -2775,35 +2638,18 @@ function gravaCoordenadasPt($tema,$limitepontos="TRUE",$extendelimite)
 		$nomefinal = nomeRandomico();
 		$nomearq = $this->diretorio."/".$nomefinal;
 		$itemspt = pegaItens($layerPt);
-		$existesel = carregaquery2($this->arquivo,$this->layer,$this->mapa);
-		if ($existesel == "nao")
-		{
-			//if($layerPt->getProjection() == "" )
-			//{$layerPt->setProjection("init=epsg:4291");}
-			$layerPt->queryByrect($this->mapa->extent);
+		$shapes = retornaShapesSelecionados($layerPt,$this->arquivo,$this->mapa);
+		if(count($shapes) == 0){
+			$shapes = retornaShapesMapext($layerPt,$this->mapa);
 		}
-		$res_count = $layerPt->getNumresults();
 		$pontos = array();
-		//pega um shape especifico
-		$sopen = $layerPt->open();
-		if($sopen == MS_FAILURE){return "erro";}
-
 		if (($prjTema != "") && ($prjMapa != $prjTema))
 		{
 			$projInObj = ms_newprojectionobj($prjTema);
 			$projOutObj = ms_newprojectionobj($prjMapa);		
 		}
-		for ($i = 0; $i < $res_count; ++$i)
+		foreach($shapes as $shape)
 		{
-			if($this->v == 6)
-			{$shape = $layerPt->getShape($layerPt->getResult($i));}
-			else{
-				$result = $layerPt->getResult($i);
-				$shp_index  = $result->shapeindex;
-				$shape = $layerPt->getfeature($shp_index,-1);			
-			}
-			//$lineo = $shape->line(0);
-			//$pt = $lineo->point(0);
 			$pt = $shape->getCentroid();
 			if (($prjTema != "") && ($prjMapa != $prjTema))
 			{
@@ -2853,7 +2699,7 @@ function gravaCoordenadasPt($tema,$limitepontos="TRUE",$extendelimite)
 		$dimx = "c(".$xi.",".$xf.")";
 		$dimy = "c(".$yi.",".$yf.")";
 		return array("dimx"=>$dimx,"dimy"=>$dimy,"arqx"=>($nomearq."x"),"arqy"=>($nomearq."y"),"prefixoarquivo"=>$nomearq);
-}		
+}
 /*
 function unserializeGeo
 

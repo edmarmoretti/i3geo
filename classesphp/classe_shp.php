@@ -388,20 +388,10 @@ array - xy
 		if(!$this->layer){return "erro";}
 		$this->layer->set("template","none.htm");
 		$this->layer->setfilter("");
-		$existesel = carregaquery2($this->arquivo,$this->layer,$this->mapa);
-		$sopen = $this->layer->open();
-		if($sopen == MS_FAILURE){return "erro";}
-		$res_count = $this->layer->getNumresults();
+		$shapes = retornaShapesSelecionados($this->layer,$this->arquivo,$this->mapa);
 		$xy = array();
-		for ($i = 0; $i < $res_count; ++$i)
+		foreach($shapes as $shape)
 		{
-			if($this->v == 6)
-			{$shape = $this->layer->getShape($this->layer->getResult($i));}
-			else{
-				$result = $this->layer->getResult($i);
-				$shp_index  = $result->shapeindex;
-				$shape = $this->layer->getfeature($shp_index,-1);			
-			}			
 			$nlinhas = $shape->numlines;
 			for($j = 0;$j < $nlinhas; ++$j){
 				$lin = $shape->line($j);

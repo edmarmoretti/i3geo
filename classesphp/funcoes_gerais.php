@@ -1747,11 +1747,13 @@ $metaTema {string} - nome do tema que será incluído no metadata TEMA
 
 $metaClasse {string} - SIM|NAO indica se a classe é visível ou não na legenda
 
+$reposiciona {boolean} - reordena ou não o novo layer
+
 Retorno:
 
 {layer}
 */
-function criaLayer($oMapa,$ms_tipo,$ms_status,$metaTema,$metaClasse="SIM")
+function criaLayer($oMapa,$ms_tipo,$ms_status,$metaTema,$metaClasse="SIM",$reposiciona=true)
 {
 	$l = ms_newLayerObj($oMapa);
 	$l->set("type",$ms_tipo);
@@ -1773,23 +1775,25 @@ function criaLayer($oMapa,$ms_tipo,$ms_status,$metaTema,$metaClasse="SIM")
 		$estilo->set("symbolname","ponto");
 	}
 	//reposiciona o layer na pilha
-	$ltipo = $l->type;
-	if (($ltipo == 2) || ($ltipo == 3))
-	{
-		$indicel = $l->index;
-		$numlayers = $oMapa->numlayers;
-		$nummove = 0;
-		for ($i = $numlayers-1;$i > 0;$i--)
+	if($reposiciona == true){
+		$ltipo = $l->type;
+		if (($ltipo == 2) || ($ltipo == 3))
 		{
-			$layerAbaixo = $oMapa->getlayer($i);
-			$tipo = $layerAbaixo->type;
-			if (($tipo != 2) && ($tipo != 3))
-			{$nummove++;}
-		}
-		if ($nummove > 2)
-		{
-			for ($i=0;$i<=($nummove - 3);++$i)
-			{$oMapa->movelayerup($indicel);}
+			$indicel = $l->index;
+			$numlayers = $oMapa->numlayers;
+			$nummove = 0;
+			for ($i = $numlayers-1;$i > 0;$i--)
+			{
+				$layerAbaixo = $oMapa->getlayer($i);
+				$tipo = $layerAbaixo->type;
+				if (($tipo != 2) && ($tipo != 3))
+				{$nummove++;}
+			}
+			if ($nummove > 2)
+			{
+				for ($i=0;$i<=($nummove - 3);++$i)
+				{$oMapa->movelayerup($indicel);}
+			}
 		}
 	}
 	return $l;
@@ -2776,6 +2780,21 @@ function carregaquery($mapfile,$objlayer,$objmapa)
 	}
 	return "nao";
 }
+/*
+Function: carregaquery2
+
+Le um arquivo PHP, serializado com a lista de índices de objetos SHAPE selecionados em um LAYER, e aplica ao LAYER a seleção desses SHAPES usando querybyindex
+
+Atenção: na versão 6 do Mapserver, não funciona com layers do tipo Postgis
+
+Parametros:
+
+$mapfile
+
+$objlayer
+
+$objmapa
+*/
 function carregaquery2($mapfile,&$objlayer,&$objmapa)
 {
 	$qyfile = dirname($mapfile)."/".$objlayer->name.".php";
@@ -2823,4 +2842,64 @@ function verificaEditores($editores)
 	}
 	return $editor;
 }
+function retornaShapesMapext($objLayer,$objMapa){
+	$shapes = array();
+	$status = $objLayer->open();
+	$status = $objLayer->whichShapes($objMapa->extent);
+	while ($shape = $objLayer->nextShape())
+	{$shapes[] = $shape;}
+	$objLayer->close();			
+	return $shapes;
+}
+function retornaShapesSelecionados($objLayer,$map_file,$objMapa){
+	$shapes = array();
+	$qyfile = dirname($map_file)."/".$objLayer->name.".php";
+	$handle = fopen ($qyfile, "r");
+	$conteudo = fread ($handle, filesize ($qyfile));
+	fclose ($handle);
+	$listaDeIndices = unserialize($conteudo);
+	if(count($listaDeIndices) == 0)
+	{return $shapes;}
+	if ($objLayer->connectiontype != MS_POSTGIS){
+		//pega os shapes selecionados
+		carregaquery2($map_file,$objLayer,$objMapa);
+		$sopen = $objLayer->open();
+		if($sopen == MS_FAILURE){return "erro";}
+		$objLayer->open();
+		$res_count = $objLayer->getNumresults();
+		$centroides = array();
+		$shapes = array();
+		//pega um shape especifico
+		for ($i = 0; $i < $res_count; ++$i)
+		{
+			if($this->v == 6)
+			{$shape = $objLayer->getShape($objLayer->getResult($i));}
+			else{
+				$result = $objLayer->getResult($i);
+				$shp_index  = $result->shapeindex;
+				$shape = $objLayer->getfeature($shp_index,-1);			
+			}
+			$shapes[] = $shape;
+		}
+		$fechou = $objLayer->close();
+	}
+	else{
+		$rect = ms_newRectObj();
+		$rect->set("minx",-180);
+		$rect->set("miny",-90);
+		$rect->set("maxx",180);
+		$rect->set("maxy",90);
+		$status = $objLayer->open();
+		$status = $objLayer->whichShapes($rect);
+		while ($shape = $objLayer->nextShape())
+		{
+			if(in_array($shape->index,$listaDeIndices)){
+				$shapes[] = $shape;			  
+			}
+		}
+		$objLayer->close();			
+	}
+	return $shapes;
+}	
+
 ?>

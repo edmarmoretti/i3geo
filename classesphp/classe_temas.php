@@ -796,26 +796,14 @@ $nome - nome que será dado a geometria
 		$this->mapa->setsize(30,30);
 		$ext = $this->mapa->extent;
 		$sb = $this->mapa->scalebar;
-		$sb->set("status",MS_OFF);
-		
+		$sb->set("status",MS_OFF);		
 		$items = pegaItens($this->layer);
-		carregaquery2($this->arquivo,$this->layer,$this->mapa);
-		$sopen = $this->layer->open();
-		if($sopen == MS_FAILURE){return "erro";}
-
-		$res_count = $this->layer->getNumresults();
 		$final["layer"] = pegaNome($this->layer);
+		$shapes = retornaShapesSelecionados($this->layer,$this->arquivo,$this->mapa);
 		$registros = array();
-		for ($i = 0; $i < $res_count; ++$i)
+		foreach($shapes as $shape)
 		{
 			$valitem = array();
-			if($this->v == 6)
-			{$shape = $this->layer->getShape($this->layer->getResult($i));}
-			else{
-				$result = $this->layer->getResult($i);
-				$shp_index  = $result->shapeindex;
-				$shape = $this->layer->getfeature($shp_index,-1);			
-			}
 			foreach ($items as $item)
 			{
 				$v = trim($shape->values[$item]);
@@ -1030,52 +1018,31 @@ Calcula a extensão geográfica dos elementos selecionados de um tema e ajusta o m
 		$extatual = $this->mapa->extent;
 		$prjMapa = $this->mapa->getProjection();
 		$prjTema = $this->layer->getProjection();
-		carregaquery2($this->arquivo,$this->layer,$this->mapa);
-		$sopen = $this->layer->open();
-		if($sopen == MS_FAILURE){return "erro";}
-		$res_count = $this->layer->getNumresults();
-		if($res_count > 0)
+		$shapes = retornaShapesSelecionados($this->layer,$this->arquivo,$this->mapa);
+		$xmin = array();
+		$xmax = array();
+		$ymin = array();
+		$ymax = array();
+		foreach($shapes as $shape)
 		{
-			$versao = versao();
-			if($versao["principal"] == 6){
-				$ret = $this->layer->getResultsBounds();
-			}
-			else{
-				$xmin = array();
-				$xmax = array();
-				$ymin = array();
-				$ymax = array();
-				for ($i = 0; $i < $res_count; ++$i)
-				{
-					$valitem = array();
-					if($this->v == 6)
-					{$shape = $this->layer->getShape($this->layer->getResult($i));}
-					else{
-						$result = $this->layer->getResult($i);
-						$shp_index  = $result->shapeindex;
-						$shape = $this->layer->getfeature($shp_index,-1);			
-					}					
-					$bound = $shape->bounds;
-					$xmin[] = $bound->minx;
-					$xmax[] = $bound->maxx;
-					$ymin[] = $bound->miny;
-					$ymax[] = $bound->maxy;
-				}
-				$ret = ms_newRectObj();
-				$ret->set("minx",min($xmin));
-				$ret->set("miny",min($ymin));
-				$ret->set("maxx",max($xmax));
-				$ret->set("maxy",max($ymax));
-			}
-			$this->layer->close();
-			if (($prjTema != "") && ($prjMapa != $prjTema))
-			{
-				$projInObj = ms_newprojectionobj($prjTema);
-				$projOutObj = ms_newprojectionobj($prjMapa);
-				$ret->project($projInObj, $projOutObj);
-			}
-			$extatual->setextent($ret->minx,$ret->miny,$ret->maxx,$ret->maxy);
+			$bound = $shape->bounds;
+			$xmin[] = $bound->minx;
+			$xmax[] = $bound->maxx;
+			$ymin[] = $bound->miny;
+			$ymax[] = $bound->maxy;
 		}
+		$ret = ms_newRectObj();
+		$ret->set("minx",min($xmin));
+		$ret->set("miny",min($ymin));
+		$ret->set("maxx",max($xmax));
+		$ret->set("maxy",max($ymax));
+		if (($prjTema != "") && ($prjMapa != $prjTema))
+		{
+			$projInObj = ms_newprojectionobj($prjTema);
+			$projOutObj = ms_newprojectionobj($prjMapa);
+			$ret->project($projInObj, $projOutObj);
+		}
+		$extatual->setextent($ret->minx,$ret->miny,$ret->maxx,$ret->maxy);
 	  	if($this->mapa->getmetadata("interface") == "googlemaps")
 		{$this->mapa->setProjection($projO);}		
 		return("ok");
