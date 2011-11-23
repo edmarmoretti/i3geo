@@ -134,10 +134,10 @@ i3GEO.maparef = {
 
 	{Numeric}
 
-	Defau:
+	Defaul:
 	{0}
 	*/
-	RIGHT:0,
+	RIGHT:20,
 	/*
 	Function: inicia
 
@@ -170,7 +170,7 @@ i3GEO.maparef = {
 				}
 				ins += "</div>";
 			}
-			ins += '<div class="bd" style="text-align:left;padding:3px;height: 150px;" id="mapaReferencia" onmouseover="this.onmousemove=function(exy){i3GEO.eventos.posicaoMouseMapa(exy)}"  >';
+			ins += '<div class="bd" style="border:1px solid black;text-align:left;padding:3px;height: 150px;" id="mapaReferencia" onmouseover="this.onmousemove=function(exy){i3GEO.eventos.posicaoMouseMapa(exy)}"  >';
 			ins += '<img style="cursor:pointer;display:none" onload="javascript:this.style.display = \'block\'" id="imagemReferencia" src="" onclick="javascript:i3GEO.maparef.click()">';
 			ins += '</div>';
 			novoel.innerHTML = ins;
@@ -193,7 +193,7 @@ i3GEO.maparef = {
 			YAHOO.janelaRef.xp.panel.render();
 			r = $i("i3geo_winRef_c");
 			if(r){
-				r.style.clip = "rect(0px, 160px, 182px, 0px)";
+				r.style.clip = "rect(0px, 160px, 185px, 0px)";
 				r.style.position = "absolute";
 			}
 			pos = i3GEO.util.pegaPosicaoObjeto($i(i3GEO.Interface.IDCORPO));
