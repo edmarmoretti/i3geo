@@ -433,7 +433,7 @@ function i3geo_gl_configura(loc_i3geo,nomeseltema,temasa,link,grupo,subgrupo,tem
 		$i("OpenLayers_Control_PanZoom_panleft").style.display="none"
 		$i("OpenLayers_Control_PanZoom_panright").style.display="none"
 		*/
-		$i("OpenLayers.Control.NavToolbar_70").style.display="none"
+		$i("OpenLayers.Control.NavToolbar_36").style.display="none"
 		zb.div.style.left="0px"
 		$i3geo_gl.OL.capturageo = function()
 		{

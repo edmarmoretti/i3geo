@@ -127,7 +127,7 @@ versao_wms - Versão do WMS (necessário quando da inclusão de uma camada WMS dire
 
 gvsiggvp - endereço no servidor do arquivo de projeto gvSig (gvp) que será utilizado para construir o mapa (experimental)
 
-gvsigview - nome da view do projeto gvSig
+gvsigview - nome da view do projeto gvSig (http://localhost/i3geo/ms_criamapa.php?gvsiggvp=c:\temp\teste.gvp&gvsigview=Untitled - 0)
 */
 
 /*

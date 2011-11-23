@@ -227,8 +227,6 @@ cursor: se-resize;
 {background-image:URL('../imagens/amp.gif');}
 #cruza
 {background-image:URL('../imagens/cruzapt.png');}
-#perfil
-{background-image:URL('../imagens/perfil.gif');}
 #pegaimagens
 {background-image:URL('../imagens/legend.gif');}
 #realca
