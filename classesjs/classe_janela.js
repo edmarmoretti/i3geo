@@ -136,6 +136,20 @@ i3GEO.janela = {
 	*/
 	OPACIDADE: 65,
 	/*
+	Propriedade: OPACIDADEAGUARDE
+
+	Valor da opacidade da janela de aguarde.
+
+	Varia de 0 a 100
+
+	Tipo:
+	{numeric}
+
+	Default:
+	{50}
+	*/
+	OPACIDADEAGUARDE: 50,	
+	/*
 	Variavel: TIPS
 
 	Lista os tips inseridos no mapa, possibilitando sua remoção em lote
@@ -512,6 +526,7 @@ i3GEO.janela = {
 			temp.style.zIndex=26000;
 			temp.style.backgroundColor = "";
 		}
+		YAHOO.util.Dom.setStyle(temp,"opacity",i3GEO.janela.OPACIDADEAGUARDE / 100);
 	},
 	/*
 	Function: ativaAlerta
