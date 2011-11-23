@@ -164,14 +164,14 @@ function montaDiv(i)
 	var param = {
 		"linhas":[
 		{titulo:"Nome:",id:"Enome_i",size:"50",value:i.nome_i,tipo:"text",div:""},
-		{titulo:"Programa:",id:"Eabrir_i",size:"50",value:i.abrir_i,tipo:"text",div:""},
-		{titulo:"Abrir como:",id:"Etarget_i",size:"50",value:i.target_i,tipo:"text",div:""}
+		{titulo:"Programa: o i3Geo irá adicionar automaticamente os parâmetros &x e &y no final do endereço",id:"Eabrir_i",size:"50",value:i.abrir_i,tipo:"text",div:""},
+		{titulo:"Abrir como: escreva 'self' para abrir na mesma janela ou 'blank' para abrir em uma nova aba",id:"Etarget_i",size:"50",value:i.target_i,tipo:"text",div:""}
 		]
 	}
 	var ins = ""
 	ins += core_geraLinhas(param)	
 
-	ins += "<p>Publicado?<br>"
+	ins += "<p><b>Publicado?</b><br>"
 	ins += "<select  id='Epublicado_i' />"
 	ins += "<option value='' "
 	if (i.publicado_i == ""){ins += "selected";}
