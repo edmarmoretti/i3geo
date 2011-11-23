@@ -810,6 +810,7 @@ i3GEO.guias = {
 			temp.top = "1px";
 			temp.width = (config.larguraGuiaMovel - 1) + "px";
 			temp.height = "35px";
+			
 			if(navm)
 			{temp.height = "37px";}
 			temp.zIndex = 5;
@@ -856,7 +857,7 @@ i3GEO.guias = {
 			{temp.chaves = i3GEO.guias.ORDEM;}
 			for(i=0;i<n;i++){
 				if(temp.chaves[i])
-				{ins += "<button title='"+temp.titulos[i]+"' onclick='i3GEO.guias.guiaMovel.ativa(\""+temp.chaves[i]+"\")' style='background-image:none;margin-left:8px;'><img id='"+temp.ids[i]+"' src='"+i3GEO.configura.locaplic+"/"+temp.icones[i]+"' style='cursor:pointer;border:solid 0px white;' /></button>";}
+				{ins += "<button title='"+temp.titulos[i]+"' onclick='i3GEO.guias.guiaMovel.ativa(\""+temp.chaves[i]+"\")' style='border-radius:5px 5px 5px 5px;background-image:none;margin-left:8px;'><img id='"+temp.ids[i]+"' src='"+i3GEO.configura.locaplic+"/"+temp.icones[i]+"' style='cursor:pointer;border:solid 0px white;' /></button>";}
 			}
 			$i("i3GEOguiaMovelIcones").innerHTML = ins;
 		},
@@ -920,6 +921,8 @@ i3GEO.guias = {
 					id: "i3GEOguiaMovelMolde"
 				};
 				anim1 = new YAHOO.util.Anim(molde, attributes, 1, YAHOO.util.Easing.easeNone);					
+				anim.duration = 0.5;
+				anim1.duration = 0.5;
 				anim.animate();
 				anim1.animate();
 				anim1.onComplete.subscribe(function(){
@@ -940,7 +943,8 @@ i3GEO.guias = {
 					id: "i3GEOguiaMovelMolde"
 				};
 				anim1 = new YAHOO.util.Anim(molde, attributes, 1, YAHOO.util.Easing.easeNone);					
-				
+				anim.duration = 0.5;
+				anim1.duration = 0.5;
 				anim.animate();
 				anim1.animate();
 				anim1.onComplete.subscribe(function(){
