@@ -593,7 +593,7 @@ i3GEO.guias = {
 	/*
 	Function: libera
 
-	Libera as guias do local atual, colocando-as em uma janela móvel sobre o mapa.
+	Libera as guias do local atual, colocando-as em uma janela flutuante sobre o mapa.
 	*/
 	libera: function(){
 		if(typeof(console) !== 'undefined'){console.info("i3GEO.guias.libera()");}
