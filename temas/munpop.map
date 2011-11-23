@@ -1,13 +1,13 @@
 MAP
+
+
   FONTSET "../symbols/fontes.txt"
   SYMBOLSET "../symbols/simbolos.sym"
   LAYER
 	CONNECTION "user=postgres dbname=dbspo host=localhost port=5432 password=postgres"
     CONNECTIONTYPE POSTGIS
     DATA "the_geom from (SELECT * from public.tb_ibge) as foo using unique gid using srid=23030"
- 
     METADATA
-
       "ltempoitemimagem"	""
       "CLASSE"	"SIM"
       "ltempoitemdescricao"	""
@@ -51,6 +51,4 @@ MAP
       END
     END
   END
-
 END
-

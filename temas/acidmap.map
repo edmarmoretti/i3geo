@@ -1,4 +1,6 @@
 MAP
+
+
   FONTSET "c:\ms4w\apache\htdocs\i3geo/symbols/fontes.txt"
   SYMBOLSET "c:\ms4w\apache\htdocs\i3geo/symbols/simbolos.sym"
   LAYER
@@ -31,6 +33,4 @@ MAP
     TYPE RASTER
     UNITS METERS
   END
-
 END
-

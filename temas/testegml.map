@@ -1,11 +1,13 @@
 MAP
+
+
   FONTSET "../symbols/fontes.txt"
   SYMBOLSET "../symbols/simbolos.sym"
   LAYER
     #CONNECTION "http://mapas.mma.gov.br/i3geo/ogc.php?tema=ucsfi"
     #CONNECTIONTYPE WMS
 	CONNECTIONTYPE OGR
-	CONNECTION "c:/ms4w/apache/htdocs/i3geo/aplicmap/dados/ucsfi.gml"	
+	CONNECTION "c:/ms4w/apache/htdocs/i3geo/aplicmap/dados/ucsfi.gml"
     METADATA
       #"wms_srs"	"EPSG:4291"
       #"wms_exceptions_format"	"application/vnd.ogc.se_xml"
@@ -46,4 +48,3 @@ MAP
 	  END
   END
 END
-

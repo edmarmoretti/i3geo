@@ -14,7 +14,33 @@ você pode editá-los individulamente ou rodar o programa i3geo/admin/php/incluiMA
 <p>
 Antes de fazer isso, faça um backup do seu diretório i3geo/temas
 <p>
-<a href="../php/incluiMAP.php" >Executar o ajuste dos mapfiles</a>
+<a href="../php/incluiMAP.php" >Ajuste dos mapfiles - inclusão da palavra "MAP" no início dos arquivos; substituição de vários elementos depreciados</a>
+<p>
+Lista de substituições:
+<pre>
+	$search = array(
+		"transparency ",
+		"LABELANGLEITEM ",
+		"LABELMAXSCALE ",
+		"LABELMINSCALE ",
+		"LABELMINSCALE ",
+		"LABELSIZEITEM ",
+		"MAXSCALE ",
+		"MINSCALE ",
+		"SYMBOLSCALE "
+	);
+	$replace = array(
+		"OPACITY ",
+		"#LABELANGLEITEM ",
+		"LABELMAXSCALEDENOM ",
+		"LABELMINSCALEDENOM ",
+		"LABELMINSCALEDENOM ",
+		"#LABELSIZEITEM ",
+		"MAXSCALEDENOM ",
+		"MINSCALEDENOM ",
+		"SYMBOLSCALEDENOM "
+	);
+
 <script>
 /*
 Title: Ajuste de mapfiles

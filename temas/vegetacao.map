@@ -1,4 +1,6 @@
 MAP
+
+
   LAYER
     DATA "c:\ms4w\apache\htdocs\geodados\brasil\vegetacao\vegetacao.shp"
     METADATA
@@ -139,6 +141,4 @@ MAP
       END
     END
   END
-
 END
-

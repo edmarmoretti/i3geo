@@ -67,29 +67,42 @@ foreach($arquivos as $arquivo)
 		$buffer = fgets($abre);
 		$buffer = str_replace(PHP_EOL,"",rtrim($buffer));
 		if(trim($buffer) != "MAP" && $buffer != "")
-		{
-			$maparray[] = $buffer;
-		}
+		{$maparray[] = $buffer;}
 		else
 		{$mapExiste = true;}
 	}
 	fclose($abre);
-	//echo "<pre>";
-	//var_dump($maparray);
-	//exit;
-	if($mapExiste == true){
-		echo "MAP já existe em ".$arquivo."<br>";
+	$search = array(
+		"transparency ",
+		"LABELANGLEITEM ",
+		"LABELMAXSCALE ",
+		"LABELMINSCALE ",
+		"LABELMINSCALE ",
+		"LABELSIZEITEM ",
+		"MAXSCALE ",
+		"MINSCALE ",
+		"SYMBOLSCALE "
+	);
+	$replace = array(
+		"OPACITY ",
+		"#LABELANGLEITEM ",
+		"LABELMAXSCALEDENOM ",
+		"LABELMINSCALEDENOM ",
+		"LABELMINSCALEDENOM ",
+		"#LABELSIZEITEM ",
+		"MAXSCALEDENOM ",
+		"MINSCALEDENOM ",
+		"SYMBOLSCALEDENOM "
+	);
+	str_ireplace($search,$replace,$maparray);
+	$abre = fopen($arq, "wt");
+	foreach($maparray as $linha)
+	{
+		fwrite ($abre,$linha);
+		fwrite ($abre,"\n");
 	}
-	else{
-		$abre = fopen($arq, "wt");
-		foreach($maparray as $linha)
-		{
-			fwrite ($abre,$linha);
-			fwrite ($abre,"\n");
-		}
-		$fecha = fclose ($abre);
-		echo $arquivo."<br>";
-	}
+	$fecha = fclose ($abre);
+	echo $arquivo."<br>";
 }
 
 ?>

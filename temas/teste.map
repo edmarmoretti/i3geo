@@ -1,4 +1,6 @@
 MAP
+
+
 SYMBOLSET ../symbols/simbolos.sym
 FONTSET   "../symbols/fontes.txt"
 LAYER
@@ -16,7 +18,6 @@ LAYER
        SYMBOL 'ponto'
        SIZE 6
      END
-
   END
 END
 END

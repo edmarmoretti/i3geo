@@ -1,4 +1,6 @@
 MAP
+
+
   LAYER
     CONNECTION "http://www2.sipam.gov.br:80/geoserver/wms?SERVICE=WMS"
     CONNECTIONTYPE WMS
@@ -34,6 +36,4 @@ MAP
       NAME " "
     END
   END
-
 END
-

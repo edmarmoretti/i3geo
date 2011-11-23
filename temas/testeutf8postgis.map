@@ -1,7 +1,8 @@
 MAP
+
+
   FONTSET "../symbols/fontes.txt"
   SYMBOLSET "../symbols/simbolos.sym"
-
   LAYER
     CONNECTION "teste"
     CONNECTIONTYPE POSTGIS
@@ -30,6 +31,4 @@ MAP
       END
     END
   END
-
 END
-

@@ -1,4 +1,6 @@
 MAP
+
+
   LAYER
     CONNECTION ""
     DATA "C:\ms4w\Apache\htdocs\geodados\utm21.shp"
@@ -27,6 +29,4 @@ MAP
       END
     END
   END
-
 END
-

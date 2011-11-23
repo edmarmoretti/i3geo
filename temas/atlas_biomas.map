@@ -1,4 +1,6 @@
 MAP
+
+
   FONTSET "../symbols/fontes.txt"
   SYMBOLSET "../symbols/simbolos.sym"
   LAYER
@@ -33,6 +35,4 @@ MAP
       NAME "testevvvvv"
     END
   END
-
 END
-

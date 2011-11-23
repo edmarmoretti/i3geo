@@ -1,7 +1,8 @@
 MAP
+
+
   FONTSET "../symbols/fontes.txt"
   SYMBOLSET "../symbols/simbolos.sym"
-
   LAYER
     CONNECTION "user=postgres password=postgres dbname=pgutf8 host=localhost port=5432 options='-c client_encoding=LATIN1'"
     CONNECTIONTYPE POSTGIS
@@ -58,7 +59,5 @@ MAP
         SYMBOL 0
       END
     END
-
   END
 END
-
