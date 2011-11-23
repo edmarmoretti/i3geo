@@ -83,7 +83,8 @@ i3GEOF.upload = {
 		'<p class="paragrafo" >shp: <br><input class=digitar type="file" size=42 name="i3GEOuploadshp" style="top:0px;left:0px;cursor:pointer;"></p>' +
 		'<p class="paragrafo" >shx: <br><input class=digitar type="file" size=42 name="i3GEOuploadshx" style="top:0px;left:0px;cursor:pointer;"></p>' +
 		'<p class="paragrafo" >dbf: <br><input class=digitar type="file" size=42 name="i3GEOuploaddbf" style="top:0px;left:0px;cursor:pointer;"></p>' +
-		'<p class="paragrafo" >Tipo: ' +
+		'<p class="paragrafo" >pasta no servidor<br>onde os dados serão armazenados:<br><input class=digitar type="text" size=50 name="dirDestino" style="top:0px;left:0px;cursor:pointer;"></p>' +		
+		'<p class="paragrafo" >Tipo de geometria: ' +
 		'	<select id=tipo name=tipo >' +
 		'	<option value="">não conhecido</option>' +
 		'	<option value="1">pontual</option>' +
@@ -113,8 +114,8 @@ i3GEOF.upload = {
 		};
 		titulo = "Upload de shapefile <a class=ajuda_usuario target=_blank href='" + i3GEO.configura.locaplic + "/ajuda_usuario.php?idcategoria=4&idajuda=27' >&nbsp;&nbsp;&nbsp;</a>";
 		janela = i3GEO.janela.cria(
-			"320px",
-			"400px",
+			"350px",
+			"450px",
 			"",
 			"",
 			"",
