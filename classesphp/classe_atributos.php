@@ -330,7 +330,7 @@ $tipolista - Indica se serão mostrados todos os registros ou apenas os seleciona
 		else
 		{$items[] = $itemtema;}
 		$resultadoFinal[] = array("itens"=>$items);
-		$shapes = retornaShapesSelecionados($layerPt,$this->arquivo,$this->mapa);
+		$shapes = retornaShapesSelecionados($this->layer,$this->arquivo,$this->mapa);
 		$res_count = count($shapes);
 		$registros = array();
 		//lista apenas os selecionados
