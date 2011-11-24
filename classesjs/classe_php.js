@@ -1088,7 +1088,7 @@ i3GEO.php = {
 	<LISTAEPSG>
 	*/
 	listaEpsg: function(funcao){
-		var p = i3GEO.configura.locaplic+"/classesphp/mapa_controle.php?g_sid="+i3GEO.configura.sid+"&funcao=listaEpsg";
+		var p = i3GEO.configura.locaplic+"/classesphp/mapa_controle.php?g_sid="+i3GEO.configura.sid+"&funcao=listaEpsg&map_file=";
 		cpJSON.call(p,"listaEpsg",funcao);
 	},
 	/*
