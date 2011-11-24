@@ -8,7 +8,7 @@ require_once("../../classesphp/funcoes_gerais.php");
 include_once ("../../classesphp/carrega_ext.php");
 error_reporting(E_ALL);
 session_name("i3GeoPHP");
-if (isset($g_sid)){
+if(isset($g_sid) && $g_sid != ""){
 	session_id($g_sid);
 	session_start();
 	foreach(array_keys($_SESSION) as $k)
@@ -17,6 +17,7 @@ if (isset($g_sid)){
 ?>
 <html>
 <head>
+<META HTTP-EQUIV="Content-Type" CONTENT="text/html; charset=ISO-8859-1">
 <link rel="stylesheet" type="text/css" href="../../css/geral.css" />
 <title></title>
 </head>
@@ -32,8 +33,10 @@ if (isset($_FILES['i3GEOuploadshp']['name']))
 		$dirmap = dirname($map_file);
 	}
 	if(isset($dirDestino)){
+		if(!isset($editores))
+		{echo "<p class='paragrafo' >Lista de editores não disponível. Não pode gravar fora do diretório temporário";paraAguarde();exit;}
 		$dirmap = $dirDestino;
-		if(verificaEditores() == "nao")
+		if(verificaEditores($editores) == "nao")
 		{echo "<p class='paragrafo' >Você não é um editor cadastrado. Não pode gravar fora do diretório temporário";paraAguarde();exit;}
 		if(!file_exists($dirmap))
 		{echo "<p class='paragrafo' >Pasta não existe no servidor";paraAguarde();exit;}
@@ -46,7 +49,7 @@ if (isset($_FILES['i3GEOuploadshp']['name']))
 	$nomePrefixo = str_replace(" ","_",removeAcentos(str_replace(".shp","",$_FILES['i3GEOuploadshp']['name'])));
 	//sobe arquivo
 	$Arquivo = $_FILES['i3GEOuploadshp']['tmp_name'];
-	if(!file_exists($dirmap."/".$nomePrefixo.".shp"))
+	if(file_exists($dirmap."/".$nomePrefixo.".shp"))
 	{echo "<p class='paragrafo' >Já existe um SHP com o nome ".$dirmap."/".$nomePrefixo;paraAguarde();exit;}	
 	$status =  move_uploaded_file($Arquivo,$dirmap."/".$nomePrefixo.".shp");
 	if($status != 1)

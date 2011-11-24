@@ -82,9 +82,10 @@ i3GEOF.upload = {
 		var ins = '<form id=i3GEOuploadf target="i3GEOuploadiframe" action="'+i3GEO.configura.locaplic+'/ferramentas/upload/upload.php" method="post" ENCTYPE="multipart/form-data">' +
 		'<p class="paragrafo" >shp: <br><input class=digitar type="file" size=42 name="i3GEOuploadshp" style="top:0px;left:0px;cursor:pointer;"></p>' +
 		'<p class="paragrafo" >shx: <br><input class=digitar type="file" size=42 name="i3GEOuploadshx" style="top:0px;left:0px;cursor:pointer;"></p>' +
-		'<p class="paragrafo" >dbf: <br><input class=digitar type="file" size=42 name="i3GEOuploaddbf" style="top:0px;left:0px;cursor:pointer;"></p>' +
-		'<p class="paragrafo" >pasta no servidor<br>onde os dados serão armazenados:<br><input class=digitar type="text" size=50 name="dirDestino" style="top:0px;left:0px;cursor:pointer;"></p>' +		
-		'<p class="paragrafo" >Tipo de geometria: ' +
+		'<p class="paragrafo" >dbf: <br><input class=digitar type="file" size=42 name="i3GEOuploaddbf" style="top:0px;left:0px;cursor:pointer;"></p>';
+		if(i3GEO.parametros.editor === "sim")
+		{ins += '<p class="paragrafo" >pasta no servidor onde os dados<br>serão armazenados (opcional):<br><input class=digitar type="text" size=45 name="dirDestino" style="top:0px;left:0px;cursor:pointer;"></p>';}		
+		ins += '<p class="paragrafo" >Tipo de geometria: ' +
 		'	<select id=tipo name=tipo >' +
 		'	<option value="">não conhecido</option>' +
 		'	<option value="1">pontual</option>' +
@@ -94,9 +95,9 @@ i3GEOF.upload = {
 		'</p>' +
 		'<p class=paragrafo >Proje&ccedil;&atilde;o:</p>' +
 		'<div id=i3GEOuploadListaepsg width="98%" style="text-align:left;border:1px solid gray;left:0px;overflow:auto;height:60px"></div>' +
-		'<br><p class="paragrafo" ><input id=i3GEOuploadbotao1 type="button" value="Criar camada" size=12 name="submit">' +
+		'<br><p class="paragrafo" ><input id=i3GEOuploadbotao1 type="button" value="Enviar" size=12 name="submit">' +
 		'<input type=hidden name=g_sid value="'+i3GEO.configura.sid+'" >' +
-		'<input type="hidden" name="MAX_FILE_SIZE" value="100000">' +
+		'<input type="hidden" name="MAX_FILE_SIZE" value="1000000">' +
 		'</form>' +
 		'<br><iframe name=i3GEOuploadiframe style="text-align:left;border:1px solid gray;" width="98%" height="60px"></iframe>';
 		return ins;
@@ -114,7 +115,7 @@ i3GEOF.upload = {
 		};
 		titulo = "Upload de shapefile <a class=ajuda_usuario target=_blank href='" + i3GEO.configura.locaplic + "/ajuda_usuario.php?idcategoria=4&idajuda=27' >&nbsp;&nbsp;&nbsp;</a>";
 		janela = i3GEO.janela.cria(
-			"350px",
+			"355px",
 			"450px",
 			"",
 			"",
