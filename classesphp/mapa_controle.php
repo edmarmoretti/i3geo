@@ -111,8 +111,9 @@ include_once("pega_variaveis.php");
 $interfaceTemp = $interface;
 //
 //inicializa a sessão
+//TEMA2SLD é usado por datadownload.htm
 //
-if ($funcao != "criaMapa")
+if ($funcao != "criaMapa" && $funcao != "TEMA2SLD")
 {
 	session_name("i3GeoPHP");
 	if (isset($g_sid) && $g_sid != "")
@@ -215,7 +216,7 @@ if(!isset($locaplic)){
 //
 //substitui a string de conexão
 //
-if($funcao != "recuperamapa")
+if($funcao != "recuperamapa" && $funcao != "TEMA2SLD")
 {
 	if(!substituiCon($map_file,$postgis_mapa))
 	{
@@ -229,7 +230,6 @@ if($funcao != "recuperamapa")
 //faz a busca da função que deve ser executada
 //
 $retorno = ""; //string que será retornada ao browser via JSON
-
 switch (strtoupper($funcao))
 {
 /*

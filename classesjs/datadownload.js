@@ -327,6 +327,9 @@ function mostraDownload(retorno)
 		else
 		{
 			var ins = "<b>Clique nos links para pegar os arquivos.</b><br><br>"
+			ins += "<a href='"+window.location.protocol+"//"+window.location.host+"/"+retorno.mapfileurl+"' target=blank >Arquivo de configuração Mapfile</a><br>";
+			ins += "<a href='"+g_locaplic+"/classesphp/mapa_controle.php?funcao=TEMA2SLD&tema="+retorno.tema+"&map_file="+retorno.mapfile+"' target=blank >Arquivo de legenda SLD</a><br><br>";
+
 			for (var arq=0;arq<n;arq++)
 			{
 				ins += "<a href='"+window.location.protocol+"//"+window.location.host+"/"+arqs[arq]+"'>"+arqs[arq]+"</a><br>"
@@ -334,7 +337,6 @@ function mostraDownload(retorno)
 			ins += "<br><a href='"+g_locaplic+"/fontetema.php?tema="+temaEscolhidoDownload+"' target=blank >Fonte</a>";
 			if(retorno.nreg)
 			{ins += "<br><br>N&uacute;mero de registros ="+retorno.nreg;}
-			
 		}
 	}
 	else

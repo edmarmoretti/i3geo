@@ -2026,7 +2026,6 @@ function downloadTema2($map_file,$tema,$locaplic,$dir_tmp,$postgis_mapa)
 			$base = "";
 			if (strtoupper(substr(PHP_OS, 0, 3) == 'WIN'))
 			{$base = $locaplic."/aplicmap/geral1windowsv".$versao.".map";}
-			
 			else
 			{
 				if($base == "" && file_exists('/var/www/i3geo/aplicmap/geral1debianv'.$versao.'.map')){
@@ -2059,6 +2058,7 @@ function downloadTema2($map_file,$tema,$locaplic,$dir_tmp,$postgis_mapa)
 	//
 	$temasdir = $locaplic."/temas";
 	$map = ms_newMapObj($map_file);
+	$rectextent = $map->extent;
 	//
 	//problema aqui
 	//$tema pode ser diferente do nome do mapfile
@@ -2201,24 +2201,7 @@ function downloadTema2($map_file,$tema,$locaplic,$dir_tmp,$postgis_mapa)
 				{$arq = $sp.$dados.".shp";}
 				if (file_exists($sp.$dados))
 				{$arq = $sp.$dados;}
-				//
-				//se o tema usa um arquivo shapefile, apenas faz a cópia
-				//
-				/*
-				if ($arq != "")
-				{
-					$arq = explode(".shp",$arq);
-					if(!file_exists($nomeshp.".shp"))
-					{
-						copy($arq[0].".shp",$nomeshp.".shp");
-						copy($arq[0].".shx",$nomeshp.".shx");
-						copy($arq[0].".dbf",$nomeshp.".dbf");
-					}
-					$resultado[] = basename($dir_tmp)."/".$novonomelayer.".shp";
-					$resultado[] = basename($dir_tmp)."/".$novonomelayer.".dbf";
-					$resultado[] = basename($dir_tmp)."/".$novonomelayer.".shx";
-				}
-				*/
+
 				$nomeshp = criaSHP($tema,$map_file,$locaplic,$dir_tmp,$nomeRand);
 				if($nomeshp == false)
 				{return array("arquivos"=>"<span style=color:red >Ocorreu um erro, tente novamente","nreg"=>0);}
@@ -2240,8 +2223,23 @@ function downloadTema2($map_file,$tema,$locaplic,$dir_tmp,$postgis_mapa)
 			if($db){$nreg = xbase_numrecords($db);}
 		}
 	}
-	return array("arquivos"=>implode(",",$resultado),"nreg"=>$nreg);
-
+	//
+	//gera um mapfile para download
+	//
+	$maptemp = ms_newMapObj($temasdir."/".$tema.".map");
+	$temas = $maptemp->getAllLayerNames();
+	foreach ($temas as $l)
+	{
+		$gl = $maptemp->getlayerbyname($l);
+		$gl->set("data","");
+		$gl->set("connection","");
+	}
+	$nomemapfile = $dir_tmp."/".nomerandomico(20)."download.map";
+	$ext = $maptemp->extent;
+	$ext->setextent($rectextent->minx,$rectextent->miny,$rectextent->maxx,$rectextent->maxy);
+	$maptemp->save($nomemapfile);
+	$nomemapfileurl = str_replace($radtmp."/","",$nomemapfile);
+	return array("tema"=>$tema,"mapfile"=>$nomemapfile,"mapfileurl"=>$nomemapfileurl,"arquivos"=>implode(",",$resultado),"nreg"=>$nreg);
 }
 
 /*
