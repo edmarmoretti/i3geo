@@ -75,7 +75,8 @@ i3GEOF.filtroarvore = {
 	html:function(){
 		var ins = '<p class=paragrafo >Escolha o tipo de filtro ou "nenhum" para não filtrar<br><br>' +
 			'<select onchange="i3GEO.arvoreDeCamadas.ARVORE = null;i3GEO.arvoreDeCamadas.FILTRO = this.value;i3GEO.arvoreDeCamadas.atualiza(i3GEO.arvoreDeCamadas.CAMADAS,true)">' +
-			'<option value="">Nenhum</option>' +
+			'<option value="naofaznada">---</option>' +
+			'<option value="">remover filtro</option>' +
 			'<option value="ligados">ligados</option>' +
 			'<option value="desligados">desligados</option>' +
 			'<option value="selecionados">com seleção</option>' +

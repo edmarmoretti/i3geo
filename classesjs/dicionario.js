@@ -440,9 +440,9 @@ it:"Strati"
 }],
 "t2":[
 {
-pt:"Arraste o tema aqui para excluir",
+pt:"Arraste o tema aqui ou clique para excluir",
 en:"Drag the layer here to remove",
-es:"Arrastre el tema aqui para excluirlo",
+es:"Arrastre el tema aqui ó haga clic para excluir",
 it:"Trascina qui per rimuovere"
 }],
 "t2a":[

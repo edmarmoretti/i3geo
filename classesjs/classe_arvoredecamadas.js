@@ -385,9 +385,18 @@ i3GEO.arvoreDeCamadas = {
 	]
 
 	Tipo:
-	{JSON}
+	{OBJETO}
 	*/
 	CAMADAS: "",
+	/*
+	Variavel: CAMADASINICIAIS
+
+	O mesmo que CAMADAS mas guarda de forma permanente as camadas que iniciaram no mapa
+
+	Tipo:
+	{OBJETO}
+	*/
+	CAMADASINICIAIS: "",	
 	/*
 	Variavel: ARVORE
 
@@ -540,6 +549,8 @@ i3GEO.arvoreDeCamadas = {
 		{return;}
 		i3GEO.util.defineValor(i3GEO.arvoreDeCamadas.IDHTML,"innerHTML","");
 		i3GEO.arvoreDeCamadas.CAMADAS = temas;
+		if(i3GEO.arvoreDeCamadas.CAMADASINICIAIS === "")
+		{i3GEO.arvoreDeCamadas.CAMADASINICIAIS = temas;}
 		(function(){
 			function changeIconMode(){
 				newVal = parseInt(this.value,10);
@@ -556,7 +567,7 @@ i3GEO.arvoreDeCamadas = {
 		root = i3GEO.arvoreDeCamadas.ARVORE.getRoot();
 		titulo = "<table><tr><td><b>"+$trad("a7")+"</b></td><td>";
 		if(this.ARRASTARLIXEIRA === true)
-		{titulo += "<img id='i3geo_lixeira' title='"+$trad("t2")+"'  src='"+i3GEO.util.$im("branco.gif")+"' />";}
+		{titulo += "<img onclick='i3GEO.arvoreDeCamadas.dialogo.excluir();' id='i3geo_lixeira' title='"+$trad("t2")+"'  src='"+i3GEO.util.$im("branco.gif")+"' />";}
 		if(this.FILTRAR === true)
 		{titulo += "<img onclick='i3GEO.arvoreDeCamadas.dialogo.filtro();' id='i3geo_filtro' title='"+$trad("t2a")+"'  src='"+i3GEO.util.$im("branco.gif")+"' />";}
 		if(this.ABRELEGENDA === true)
@@ -1681,6 +1692,14 @@ i3GEO.arvoreDeCamadas = {
 		*/
 		filtro: function(){
 			i3GEO.util.dialogoFerramenta("i3GEO.arvoreDeCamadas.dialogo.filtro()","filtroarvore","filtroarvore");
+		},
+		/*
+		Function: excluir
+		
+		Abre a janela de diálogo para o usuário escolher os temas que serão excluídos da árvore
+		*/
+		excluir: function(){
+			i3GEO.util.dialogoFerramenta("i3GEO.arvoreDeCamadas.dialogo.excluir()","excluirarvore","excluirarvore");
 		}
 	}
 };

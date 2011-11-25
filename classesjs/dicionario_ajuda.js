@@ -938,7 +938,16 @@ g_traducao_ajuda = {
 			complemento:"A busca ainda é experimental, permitindo apenas a localização dos registros, sem que o tema possa ser adicionado diretamente ao mapa.",
 			tela:"",
 			apijs:"i3GEO.arvoreDeTemas.dialogo.buscainde()"
-		}		
+		},
+		"110": {
+			titulo: "Remove camadas em lote",
+			diretorio:"i3geo/ferramentas/excluirarvore",
+			categoria:"6",
+			pt:"Lista as camadas que estão no mapa para que o usuário escolha quais deseja remover. As camadas utilizadas no início do mapa aparecem desmarcadas na lista.",
+			complemento:"",
+			tela:"",
+			apijs:"i3GEO.arvoreDeCamadas.dialogo.excluir()"
+		}			
 	}
 };
 
