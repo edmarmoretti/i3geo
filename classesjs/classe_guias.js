@@ -245,6 +245,7 @@ i3GEO.guias = {
 	onde {String} - id do elemento que conterá as guias
 	*/
 	cria: function(onde){
+		
 		if(typeof(console) !== 'undefined'){console.info("i3GEO.guias.cria()");}
 		//
 		//obtém outras guias que podem existir no mapa
@@ -274,7 +275,6 @@ i3GEO.guias = {
 			return;
 		}
 		try{
-			
 			for(g=0;g<12;g++){
 				tituloguia = "";
 				if($i("guia"+g)){
@@ -945,14 +945,14 @@ i3GEO.guias = {
 				anim1 = new YAHOO.util.Anim(molde, attributes, 1, YAHOO.util.Easing.easeNone);					
 				anim.duration = 0.5;
 				anim1.duration = 0.5;
-				anim.animate();
-				anim1.animate();
 				anim1.onComplete.subscribe(function(){
 					$i("i3GEOguiaMovelIcones").style.display = "block";
 					$i("i3GEOguiaMovelConteudo").style.display = "block";
 					i3GEO.guias.guiaMovel.mostraIcones();
 					//YAHOO.util.Dom.setStyle("i3GEOguiaMovelMolde", "opacity", 0.8);
 				});
+				anim.animate();
+				anim1.animate();
 			}
 		}
 	}

@@ -82,6 +82,8 @@ if ($tipo == "")
 }
 if (isset($map) && $map != "")
 {
+	if(!stristr($map, '.php') === FALSE)
+	{echo "<br>Arquivo <i>$map</i> não é válido. Não é possível testar programas em PHP<br>";}
 	if(!isset($solegenda)){$solegenda = "nao";}
 	if ($map == "todos")
 	{
@@ -136,6 +138,8 @@ function verifica($map,$solegenda)
 		{$tema = 'temas/'.$map;}
 		if (file_exists('temas/'.$map.'.map'))
 		{$tema = 'temas/'.$map.".map";}
+		if (file_exists('temas/'.$map.'.php'))
+		{$tema = 'temas/'.$map.".php";}
 	}
 	if(($tipo == "") || ($tipo == "todos"))
 	echo "<hr><br><br><span style='color:red' ><b>Testando: $tema </span><pre></b>";

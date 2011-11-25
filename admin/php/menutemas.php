@@ -1103,20 +1103,23 @@ function listaMapsTemas()
 	{
    		if ($dh = opendir($locaplic."/temas")) 
 		{
-       		while (($file = readdir($dh)) !== false) 
+       		$extensao = "";
+			while (($file = readdir($dh)) !== false) 
 			{
-				if(!stristr($file, '.map') === FALSE || !stristr($file, ".php")===FALSE)
+				if(!stristr($file, '.map') === FALSE){$extensao = "map";}
+				if(!stristr($file, '.php') === FALSE){$extensao = "php";}
+				if($extensao != "")
 				{
-					$file = str_replace(".map","",$file);
-					$file = str_replace(".php","",$file);
+					$file = str_replace(".".$extensao,"",$file);
 					if(isset($letra) && $letra != "")
 					{
 						if(strtolower(substr(basename($file),0,1)) == strtolower($letra))
-						{$arquivos[] = $file;}
+						{$arquivos[] = array("nome"=>$file,"extensao"=>$extensao);}
 					}
 					else
-					{$arquivos[] = $file;}
+					{$arquivos[] = array("nome"=>$file,"extensao"=>$extensao);}
 				}
+				$extensao = "";
 			}
        	}
        	closedir($dh);
@@ -1146,6 +1149,8 @@ function listaMapsTemas()
 	$lista = array();
 	foreach($arquivos as $arq)
 	{
+		$extensao = $arq["extensao"];
+		$arq = $arq["nome"];
 		$n = explode(".",$arq);
 		$n = $nomes[$n[0]];
 		if(!$n)
@@ -1154,9 +1159,9 @@ function listaMapsTemas()
 		if(file_exists($locaplic."/temas/miniaturas/".$arq.".map.mini.png"))
 		{$imagem = $arq.".map.mini.png";}
 		if(isset($filtro) && $filtro != "" && $n != "")
-		{$lista[] = array("nome"=>$n,"codigo"=>$arq,"imagem"=>$imagem);}
+		{$lista[] = array("nome"=>$n,"codigo"=>$arq,"imagem"=>$imagem,"extensao"=>$extensao);}
 		if(!isset($filtro) || $filtro == "")
-		{$lista[] = array("nome"=>$n,"codigo"=>$arq,"imagem"=>$imagem);}
+		{$lista[] = array("nome"=>$n,"codigo"=>$arq,"imagem"=>$imagem,"extensao"=>$extensao);}
 	}
  	return $lista;
 }

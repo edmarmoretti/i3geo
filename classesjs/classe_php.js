@@ -1013,7 +1013,6 @@ i3GEO.php = {
 			cp = new cpaint();
 		cp.set_response_type("JSON");
 		cp.set_async(false);
-		cp.call(p,"criaMapa",funcao);
 		cp.call(p,"iniciaMapa",funcao);
 	},
 	/*

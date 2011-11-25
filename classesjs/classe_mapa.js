@@ -110,7 +110,6 @@ i3GEO.mapa = {
 	É definido como um evento do elemento window
 	*/
 	ativaAutoResize: function(){
-
 		window.onresize = function(){
 			var temp,Dw,Dh, r = false;
 			Dw = YAHOO.util.Dom.getViewportWidth();
