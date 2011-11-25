@@ -996,8 +996,11 @@ i3GEO.php = {
 	<CRIAMAPA>
 	*/
 	criamapa: function(funcao,parametros){
-		var p = i3GEO.configura.locaplic+"/classesphp/mapa_controle.php?funcao=criaMapa&"+parametros;
-		cpJSON.call(p,"criaMapa",funcao);
+		var p = i3GEO.configura.locaplic+"/classesphp/mapa_controle.php?funcao=criaMapa&"+parametros,
+			cp = new cpaint();
+		cp.set_response_type("JSON");
+		cp.set_async(false);
+		cp.call(p,"criaMapa",funcao);
 	},
 	/*
 	Function: inicia
@@ -1005,9 +1008,13 @@ i3GEO.php = {
 	<INICIA>
 	*/
 	inicia: function(funcao,embedLegenda,w,h){
-		i3GEO.php.verifica();
-		var p = i3GEO.configura.locaplic+"/classesphp/mapa_controle.php?funcao=inicia&embedLegenda="+embedLegenda+"&w="+w+"&h="+h+"&g_sid="+i3GEO.configura.sid+"&interface="+i3GEO.Interface.ATUAL;
-		cpJSON.call(p,"iniciaMapa",funcao);
+		//i3GEO.php.verifica();
+		var p = i3GEO.configura.locaplic+"/classesphp/mapa_controle.php?funcao=inicia&embedLegenda="+embedLegenda+"&w="+w+"&h="+h+"&g_sid="+i3GEO.configura.sid+"&interface="+i3GEO.Interface.ATUAL,
+			cp = new cpaint();
+		cp.set_response_type("JSON");
+		cp.set_async(false);
+		cp.call(p,"criaMapa",funcao);
+		cp.call(p,"iniciaMapa",funcao);
 	},
 	/*
 	Function: chaveGoogle

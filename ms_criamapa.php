@@ -162,7 +162,6 @@ Include dos arquivos PHP.
 
 Inclui os programas php com funções utilizadas pelo ms_criamapa.php
 */
-
 include_once ($caminho."classesphp/pega_variaveis.php");
 include_once ($caminho."classesphp/funcoes_gerais.php");
 $versao = versao();
