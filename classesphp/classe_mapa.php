@@ -8,7 +8,7 @@ Licenca:
 
 GPL2
 
-I3Geo Interface Integrada de Ferramentas de Geoprocessamento para Internet
+i3Geo Interface Integrada de Ferramentas de Geoprocessamento para Internet
 
 Direitos Autorais Reservados (c) 2006 Ministério do Meio Ambiente Brasil
 Desenvolvedor: Edmar Moretti edmar.moretti@mma.gov.br
@@ -944,8 +944,12 @@ $random - indica se os nomes dos novos layers serão modificados ou nao
 			//
 			//verifica se o tema é um arquivo php
 			//
-			if ((file_exists($locaplic."/temas/".$nome.".php")) || (file_exists($nome.".php")))
-			{include_once($locaplic."/temas/".$nome.".php");}
+			if ((file_exists($locaplic."/temas/".$nome.".php")) || (file_exists($nome.".php"))){
+				include_once($locaplic."/temas/".$nome.".php");
+				if(function_exists($nome)){
+					eval($nome."(\$this->mapa);");	
+				}
+			}
 			else
 			{
 				if (file_exists($locaplic."/temas/".$nome.".map"))
@@ -1000,7 +1004,6 @@ $random - indica se os nomes dos novos layers serão modificados ou nao
 						//se existirem as classes, é criado um SLD para ser aplicado ao layer
 						//O SLD só funciona se CLASSITEM estiver definido
 						//
-
 						if($nlayer->classitem != "" && $nlayer->connectiontype == 7 && $nlayer->numclasses > 0 && $nlayer->getmetadata("wms_sld_body") == ""){
 							$tipotemp = $nlayer->type;
 							$tiporep = $nlayer->getmetadata("tipooriginal");
@@ -1014,7 +1017,6 @@ $random - indica se os nomes dos novos layers serão modificados ou nao
 							$nlayer->setmetadata("wms_sld_body",str_replace('"',"'",$sld));
 							$nlayer->set("type",$tipotemp);
 						}						
-						
 						ms_newLayerObj($this->mapa, $nlayer);
 						$l = $this->mapa->getlayerbyname($nlayer->name);
 						//
@@ -1049,23 +1051,6 @@ $random - indica se os nomes dos novos layers serão modificados ou nao
 				}
 			}
 		}
-		//
-		//faz o zoom para o tema se for o caso
-		//essa função foi desabilitada
-		/*
-		if($zoomlayer != "")
-		{
-			$this->salva();
-			include_once("classe_temas.php");
-			$mz = new Temas($this->arquivo,$zoomlayer);
-			$mz->zoomTema();
-			$mz->salva();
-			//
-			//marca como falso para não salvar o mapa novamente
-			//
-			return(false);
-		}
-		*/
 		return(true);
 	}
 /*

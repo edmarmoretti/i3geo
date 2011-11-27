@@ -14,7 +14,7 @@ Licenca:
 
 GPL2
 
-I3Geo Interface Integrada de Ferramentas de Geoprocessamento para Internet
+i3Geo Interface Integrada de Ferramentas de Geoprocessamento para Internet
 
 Direitos Autorais Reservados (c) 2006 Ministério do Meio Ambiente Brasil
 Desenvolvedor: Edmar Moretti edmar.moretti@mma.gov.br
@@ -82,8 +82,6 @@ if ($tipo == "")
 }
 if (isset($map) && $map != "")
 {
-	if(!stristr($map, '.php') === FALSE)
-	{echo "<br>Arquivo <i>$map</i> não é válido. Não é possível testar programas em PHP<br>";}
 	if(!isset($solegenda)){$solegenda = "nao";}
 	if ($map == "todos")
 	{
@@ -142,8 +140,9 @@ function verifica($map,$solegenda)
 		{$tema = 'temas/'.$map.".php";}
 	}
 	if(($tipo == "") || ($tipo == "todos"))
-	echo "<hr><br><br><span style='color:red' ><b>Testando: $tema </span><pre></b>";
-	if(!file_exists($tema)){echo "Arquivo ".$map." não encontrado.";exit;}
+	{echo "<hr><br><br><span style='color:red' ><b>Testando: $tema </span><pre></b>";}
+	if(!file_exists($tema))
+	{echo "Arquivo ".$map." não encontrado.";exit;}
 	if ($tema != "")
 	{
 		if($base == "" or !isset($base)){
@@ -170,75 +169,85 @@ function verifica($map,$solegenda)
 			{$base = $locaplic."/aplicmap/".$base;}
 		}
 		$mapa = ms_newMapObj($base);
-		
-		if(@ms_newMapObj($locaplic."/".$tema))
-		{
-			$nmapa = ms_newMapObj($locaplic."/".$tema);
+		if(!stristr($tema, '.php') === FALSE){
+			echo "<br>Arquivo <i>$tema</i> é um programa PHP. O teste pode não funcionar.<br>";
+			include_once($locaplic."/".$tema);
+			//
+			//$pegarext deve guardar o nome da camada para ser usado mais abaixo
+			//
+			$pegarext = str_replace(".php","",$tema);
+			$pegarext = str_replace("temas/","",$pegarext);
+			eval($pegarext."(\$mapa);");
 		}
-		else
-		{
-			echo "erro no arquivo $map <br>";
-			$error = ms_GetErrorObj();
-			while($error && $error->code != MS_NOERR)
+		else{
+			if(@ms_newMapObj($locaplic."/".$tema))
 			{
-				printf("<br>Error in %s: %s<br>\n", $error->routine, $error->message);
-				$error = $error->next();
+				$nmapa = ms_newMapObj($locaplic."/".$tema);
 			}
-			return;
-		}
-		$temasn = $nmapa->getAllLayerNames();
-		$dados = "";
-		foreach ($temasn as $teman)
-		{
-			$layern = $nmapa->getLayerByName($teman);
-			$layern->set("status",MS_DEFAULT);
-			if (isset($postgis_mapa))
+			else
 			{
-				if (($postgis_mapa != "") || ($postgis_mapa != " "))
+				echo "erro no arquivo $map <br>";
+				$error = ms_GetErrorObj();
+				while($error && $error->code != MS_NOERR)
 				{
-					if ($layern->connectiontype == MS_POSTGIS)
+					printf("<br>Error in %s: %s<br>\n", $error->routine, $error->message);
+					$error = $error->next();
+				}
+				return;
+			}
+			$temasn = $nmapa->getAllLayerNames();
+			$dados = "";
+			foreach ($temasn as $teman)
+			{
+				$layern = $nmapa->getLayerByName($teman);
+				$layern->set("status",MS_DEFAULT);
+				if (isset($postgis_mapa))
+				{
+					if (($postgis_mapa != "") || ($postgis_mapa != " "))
 					{
-						$lcon = $layern->connection;
-						error_reporting(0);						
-						if (($lcon == " ") || ($lcon == "") || (in_array($lcon,array_keys($postgis_mapa))))
+						if ($layern->connectiontype == MS_POSTGIS)
 						{
-							//
-							//o metadata CONEXAOORIGINAL guarda o valor original para posterior substituição
-							//				
-							if(($lcon == " ") || ($lcon == ""))
+							$lcon = $layern->connection;
+							error_reporting(0);						
+							if (($lcon == " ") || ($lcon == "") || (in_array($lcon,array_keys($postgis_mapa))))
 							{
-								$layern->set("connection",$postgis_mapa);
+								//
+								//o metadata CONEXAOORIGINAL guarda o valor original para posterior substituição
+								//				
+								if(($lcon == " ") || ($lcon == ""))
+								{
+									$layern->set("connection",$postgis_mapa);
+								}
+								else
+								{
+									$layern->set("connection",$postgis_mapa[$lcon]);
+								}					
 							}
-							else
-							{
-								$layern->set("connection",$postgis_mapa[$lcon]);
-							}					
 						}
 					}
 				}
+				error_reporting(E_ALL);
+				autoClasses($layern,$nmapa);
+				if($layern->classitem != "" && $layern->connectiontype == 7 && $layern->numclasses > 0 && $layern->getmetadata("wms_sld_body") == ""){
+					$tipotemp = $layern->type;
+					$tiporep = $layern->getmetadata("tipooriginal");
+					$layern->set("type",MS_LAYER_POLYGON);
+					if ($tiporep == "linear")
+					{$layern->set("type",MS_LAYER_LINE);}
+					if ($tiporep == "pontual")
+					{$layern->set("type",MS_LAYER_POINT);}
+					$sld = $layern->generateSLD();
+					if($sld != "")
+					$layern->setmetadata("wms_sld_body",str_replace('"',"'",$sld));
+					$layern->set("type",$tipotemp);
+				}
+				ms_newLayerObj($mapa, $layern);
+				if ($layern->data == "")
+				$dados = $layern->connection;
+				else
+				$dados = $layern->data;
+				$pegarext = $teman;	
 			}
-			error_reporting(E_ALL);
-			autoClasses($layern,$nmapa);
-			if($layern->classitem != "" && $layern->connectiontype == 7 && $layern->numclasses > 0 && $layern->getmetadata("wms_sld_body") == ""){
-				$tipotemp = $layern->type;
-				$tiporep = $layern->getmetadata("tipooriginal");
-				$layern->set("type",MS_LAYER_POLYGON);
-				if ($tiporep == "linear")
-				{$layern->set("type",MS_LAYER_LINE);}
-				if ($tiporep == "pontual")
-				{$layern->set("type",MS_LAYER_POINT);}
-				$sld = $layern->generateSLD();
-				if($sld != "")
-				$layern->setmetadata("wms_sld_body",str_replace('"',"'",$sld));
-				$layern->set("type",$tipotemp);
-			}
-			
-			ms_newLayerObj($mapa, $layern);
-			if ($layern->data == "")
-			$dados = $layern->connection;
-			else
-			$dados = $layern->data;
-			$pegarext = $teman;	
 		}
 		zoomTema($pegarext,$mapa);
 		if ($tipo == "mini")

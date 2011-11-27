@@ -9,7 +9,7 @@ se forem necessárias outras projeções além das existentes
 
 Licenca:
 
-I3Geo Interface Integrada de Ferramentas de Geoprocessamento para Internet
+i3Geo Interface Integrada de Ferramentas de Geoprocessamento para Internet
 
 Direitos Autorais Reservados (c) 2006 Ministério do Meio Ambiente Brasil
 Desenvolvedor: Edmar Moretti edmar.moretti@mma.gov.br
@@ -192,74 +192,84 @@ if ($tipo == "" || $tipo == "metadados")
 	$tema = explode(" ",$tema);
 	foreach ($tema as $tx)
 	{
-		$nmap = ms_newMapobj($locaplic."/temas/".$tx.".map");
-		$ts = $nmap->getalllayernames();
-		foreach ($ts as $t)
-		{
-			$l = $nmap->getlayerbyname($t);
-			$l->setmetadata("ows_title",pegaNome($l));
-			$l->setmetadata("ows_srs",$listaepsg);
-			//essa linha é necessária pq as vezes no mapfile não tem nenhum layer com o nome igual ao nome do mapfile
-			if(count($ts)==1)
+		$extensao = ".map";
+		if(file_exists($locaplic."/temas/".$tx.".php")){
+			$extensao = ".php";
+		}
+		if($extensao == ".map"){
+			$nmap = ms_newMapobj($locaplic."/temas/".$tx.".map");
+			$ts = $nmap->getalllayernames();
+			foreach ($ts as $t)
 			{
-				$l->set("name",$tx);
-				if($cache == true && strtolower($l->getmetadata("cache")) == "sim"){
-					carregaCacheImagem($_GET["BBOX"],$t,$_GET["WIDTH"],$_GET["HEIGHT"]);
+				$l = $nmap->getlayerbyname($t);
+				$l->setmetadata("ows_title",pegaNome($l));
+				$l->setmetadata("ows_srs",$listaepsg);
+				//essa linha é necessária pq as vezes no mapfile não tem nenhum layer com o nome igual ao nome do mapfile
+				if(count($ts)==1)
+				{
+					$l->set("name",$tx);
+					if($cache == true && strtolower($l->getmetadata("cache")) == "sim"){
+						carregaCacheImagem($_GET["BBOX"],$t,$_GET["WIDTH"],$_GET["HEIGHT"]);
+					}
 				}
-			}
-			$l->setmetadata("gml_include_items","all");
-			$l->set("dump",MS_TRUE);
-			$l->setmetadata("WMS_INCLUDE_ITEMS","all");
-			$l->setmetadata("WFS_INCLUDE_ITEMS","all");
-			if(file_exists($locaplic."/temas/miniaturas/".$t.".map.mini.png"))
-			{
-				$mini = $proto.$server.dirname($_SERVER['PHP_SELF'])."/temas/miniaturas/".$t.".map.mini.png";
-				$l->setmetadata("wms_attribution_logourl_format","image/png");
-				$l->setmetadata("wms_attribution_logourl_height","50");
-				$l->setmetadata("wms_attribution_logourl_width","50");
-				$l->setmetadata("wms_attribution_logourl_href",$mini);
-			}
-			if($l->type == MS_LAYER_RASTER)
-			{
-				$c = $l->getclass(0);
-				if ($c->name == "")
-				{$c->name = " ";}
-			}
-			//inclui extensao geografica
-			$extensao = $l->getmetadata("EXTENSAO");
-			if($extensao == "")
-			{$extensao = $extensaoMap;}
-			$l->setmetadata("wms_extent",$extensao);
-			if (isset($postgis_mapa))
-			{			
-				if ($postgis_mapa != "")
-				{				
-					if ($l->connectiontype == MS_POSTGIS)
-					{
-						$lcon = $l->connection;
-						if (($lcon == " ") || ($lcon == "") || (in_array($lcon,array_keys($postgis_mapa))))
+				$l->setmetadata("gml_include_items","all");
+				$l->set("dump",MS_TRUE);
+				$l->setmetadata("WMS_INCLUDE_ITEMS","all");
+				$l->setmetadata("WFS_INCLUDE_ITEMS","all");
+				if(file_exists($locaplic."/temas/miniaturas/".$t.".map.mini.png"))
+				{
+					$mini = $proto.$server.dirname($_SERVER['PHP_SELF'])."/temas/miniaturas/".$t.".map.mini.png";
+					$l->setmetadata("wms_attribution_logourl_format","image/png");
+					$l->setmetadata("wms_attribution_logourl_height","50");
+					$l->setmetadata("wms_attribution_logourl_width","50");
+					$l->setmetadata("wms_attribution_logourl_href",$mini);
+				}
+				if($l->type == MS_LAYER_RASTER)
+				{
+					$c = $l->getclass(0);
+					if ($c->name == "")
+					{$c->name = " ";}
+				}
+				//inclui extensao geografica
+				$extensao = $l->getmetadata("EXTENSAO");
+				if($extensao == "")
+				{$extensao = $extensaoMap;}
+				$l->setmetadata("wms_extent",$extensao);
+				if (isset($postgis_mapa))
+				{			
+					if ($postgis_mapa != "")
+					{				
+						if ($l->connectiontype == MS_POSTGIS)
 						{
-							//
-							//o metadata CONEXAOORIGINAL guarda o valor original para posterior substituição
-							//				
-							if(($lcon == " ") || ($lcon == ""))
+							$lcon = $l->connection;
+							if (($lcon == " ") || ($lcon == "") || (in_array($lcon,array_keys($postgis_mapa))))
 							{
-								$l->set("connection",$postgis_mapa);
-								$l->setmetadata("CONEXAOORIGINAL",$lcon);
+								//
+								//o metadata CONEXAOORIGINAL guarda o valor original para posterior substituição
+								//				
+								if(($lcon == " ") || ($lcon == ""))
+								{
+									$l->set("connection",$postgis_mapa);
+									$l->setmetadata("CONEXAOORIGINAL",$lcon);
+								}
+								else
+								{
+									$l->set("connection",$postgis_mapa[$lcon]);
+									$l->setmetadata("CONEXAOORIGINAL",$lcon);
+								}					
 							}
-							else
-							{
-								$l->set("connection",$postgis_mapa[$lcon]);
-								$l->setmetadata("CONEXAOORIGINAL",$lcon);
-							}					
 						}
 					}
 				}
+				autoClasses($l,$oMap);
+				$permite = $l->getmetadata("permiteogc");
+				if($permite != "nao")
+				ms_newLayerObj($oMap, $l);
 			}
-			autoClasses($l,$oMap);
-			$permite = $l->getmetadata("permiteogc");
-			if($permite != "nao")
-			ms_newLayerObj($oMap, $l);
+		}
+		else{
+			include_once($locaplic."/temas/".$tx.".php");
+			eval($tx."(\$oMap);");
 		}
 	}
 }

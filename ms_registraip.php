@@ -45,7 +45,7 @@ COMMENT ON TABLE visitantes_i3geo IS 'Registra as coordenadas dos usuários que a
 
 Licenca:
 
-I3Geo Interface Integrada de Ferramentas de Geoprocessamento para Internet
+i3Geo Interface Integrada de Ferramentas de Geoprocessamento para Internet
 
 Direitos Autorais Reservados (c) 2006 Ministério do Meio Ambiente Brasil
 Desenvolvedor: Edmar Moretti edmar.moretti@mma.gov.br

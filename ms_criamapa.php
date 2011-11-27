@@ -602,55 +602,67 @@ function incluiTemasIniciais()
 		{continue;}
 		if (file_exists($arqt))
 		{$arqtemp = $arqt;}
-		if ((strtoupper(substr(PHP_OS, 0, 3) == 'WIN')) && (file_exists($locaplic."\\aplicmap\\".$arqt.".map")))
-		{$arqtemp = $locaplic."\\aplicmap\\".$arqt.".map";}
-		elseif (file_exists($locaplic."/aplicmap/".$arqt.".map"))
-		{$arqtemp = $locaplic."/aplicmap/".$arqt.".map";}
-		if ((strtoupper(substr(PHP_OS, 0, 3) == 'WIN')) && (file_exists($temasdir."\\".$arqt.".map")))
-		{$arqtemp = $temasdir."\\".$arqt.".map";}
-		elseif (file_exists($temasdir."/".$arqt.".map"))
-		{$arqtemp = $temasdir."/".$arqt.".map";}
-		if ($arqtemp == "")
+		$extensao = ".map";
+		if ((strtoupper(substr(PHP_OS, 0, 3) == 'WIN')) && (file_exists($temasdir."\\".$arqt."php")))
+		{$extensao = ".php";}
+		elseif (file_exists($temasdir."/".$arqt.".php"))
+		{$extensao = ".php";}
+
+		if ((strtoupper(substr(PHP_OS, 0, 3) == 'WIN')) && (file_exists($locaplic."\\aplicmap\\".$arqt.$extensao)))
+		{$arqtemp = $locaplic."\\aplicmap\\".$arqt.$extensao;}
+		elseif (file_exists($locaplic."/aplicmap/".$arqt.$extensao))
+		{$arqtemp = $locaplic."/aplicmap/".$arqt.$extensao;}
+		if ((strtoupper(substr(PHP_OS, 0, 3) == 'WIN')) && (file_exists($temasdir."\\".$arqt.$extensao)))
+		{$arqtemp = $temasdir."\\".$arqt.$extensao;}
+		elseif (file_exists($temasdir."/".$arqt.$extensao))
+		{$arqtemp = $temasdir."/".$arqt.$extensao;}
+		if($arqtemp == "")
 		{echo "<br>Imposs&iacute;vel acessar tema $arqtemp";}
 		else
 		{
-			if (!@ms_newMapObj($arqtemp))
+			if ($extensao == ".map" && !@ms_newMapObj($arqtemp))
 			{echo "<br>Problemas com a camada $arqtemp<br>";}
 			else
 			{
-				$maptemp = @ms_newMapObj($arqtemp);
-				for($i=0;$i<($maptemp->numlayers);++$i)
-				{
-					//error_reporting(E_ALL);
-					$layern = $maptemp->getLayer($i);
-					if($layern->type == MS_LAYER_RASTER)
-					{$existeraster = true;}
-					if ($layern->name == "estadosl")
-					{$layern->set("data",$locaplic."/aplicmap/dados/estados.shp");}
-					$layern->setmetadata("NOMEORIGINAL",$layern->name);
-					autoClasses($layern,$mapn);
-					//
-					//necessário para não alterar a extensão do mapa por esse parâmetro
-					//
-					$layern->setmetadata("aplicaextensao","");
-					//cria e aplica sld se for wms e existirem classes
-					if($layern->classitem != "" && $layern->connectiontype == 7 && $layern->numclasses > 0 && $layern->getmetadata("wms_sld_body") == ""){
-						$tipotemp = $layern->type;
-						$statustemp = $layern->status;
-						$tiporep = $layern->getmetadata("tipooriginal");
-						$layern->set("type",MS_LAYER_POLYGON);
-						if ($tiporep == "linear")
-						{$layern->set("type",MS_LAYER_LINE);}
-						if ($tiporep == "pontual")
-						{$layern->set("type",MS_LAYER_POINT);}
-						$layern->set("status",MS_DEFAULT);
-						$sld = $layern->generateSLD();
-						if($sld != "")
-						$layern->setmetadata("wms_sld_body",str_replace('"',"'",$sld));
-						$layern->set("type",$tipotemp);
-						$layern->set("status",$statustemp);
+				if($extensao == ".map"){
+					$maptemp = @ms_newMapObj($arqtemp);
+					for($i=0;$i<($maptemp->numlayers);++$i)
+					{
+						//error_reporting(E_ALL);
+						$layern = $maptemp->getLayer($i);
+						if($layern->type == MS_LAYER_RASTER)
+						{$existeraster = true;}
+						if ($layern->name == "estadosl")
+						{$layern->set("data",$locaplic."/aplicmap/dados/estados.shp");}
+						$layern->setmetadata("NOMEORIGINAL",$layern->name);
+						autoClasses($layern,$mapn);
+						//
+						//necessário para não alterar a extensão do mapa por esse parâmetro
+						//
+						$layern->setmetadata("aplicaextensao","");
+						//cria e aplica sld se for wms e existirem classes
+						if($layern->classitem != "" && $layern->connectiontype == 7 && $layern->numclasses > 0 && $layern->getmetadata("wms_sld_body") == ""){
+							$tipotemp = $layern->type;
+							$statustemp = $layern->status;
+							$tiporep = $layern->getmetadata("tipooriginal");
+							$layern->set("type",MS_LAYER_POLYGON);
+							if ($tiporep == "linear")
+							{$layern->set("type",MS_LAYER_LINE);}
+							if ($tiporep == "pontual")
+							{$layern->set("type",MS_LAYER_POINT);}
+							$layern->set("status",MS_DEFAULT);
+							$sld = $layern->generateSLD();
+							if($sld != "")
+							$layern->setmetadata("wms_sld_body",str_replace('"',"'",$sld));
+							$layern->set("type",$tipotemp);
+							$layern->set("status",$statustemp);
+						}
+						ms_newLayerObj($mapn, $layern);
 					}
-					ms_newLayerObj($mapn, $layern);
+				}
+				else{
+					include_once($arqtemp);
+					eval($arqt."(\$mapn);");
 				}
 			}	
 		}
