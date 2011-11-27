@@ -312,6 +312,7 @@ $tipolista - Indica se serão mostrados todos os registros ou apenas os seleciona
 */
 	function listaRegistros($itemtema,$tipo,$unico,$inicio,$fim,$tipolista)
 	{
+		error_reporting(0);
 		if(!$this->layer){return "erro";}
 		$resultadoFinal = array();
 		if ((!isset($tipolista)) || ($tipolista=="")){$tipolista = "tudo";}

@@ -2852,6 +2852,8 @@ function retornaShapesMapext($objLayer,$objMapa){
 function retornaShapesSelecionados($objLayer,$map_file,$objMapa){
 	$shapes = array();
 	$qyfile = dirname($map_file)."/".$objLayer->name.".php";
+	if(!file_exists($qyfile))
+	{return $shapes;}
 	$handle = fopen ($qyfile, "r");
 	$conteudo = fread ($handle, filesize ($qyfile));
 	fclose ($handle);
