@@ -1521,7 +1521,7 @@ function alterarConexao()
 	{
 		$nome = $dir_tmp."/".$codigoMap.".map";
 		$mapa->save($nome);
-		removeCabecalho($nome,false);
+		removeCabecalho($nome,true);
 		return $nome;
 	}
 	else
