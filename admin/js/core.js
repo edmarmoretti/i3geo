@@ -214,6 +214,8 @@ Parameters:
 sUrl - url que será executada
 
 callback - função que processará o retorno
+
+tipo - GET ou POST
 */
 function core_makeRequest(sUrl,callback,tipo)
 {
