@@ -736,6 +736,7 @@ i3GEO.util = {
 	nome {String} - name do input
 	
 	onch {String} - (opcional) string que será inserida no evento "onchange"
+
 	*/
 	$inputText: function(idPai,larguraIdPai,idInput,titulo,digitos,valor,nome,onch) {
 		if(arguments.length === 6)

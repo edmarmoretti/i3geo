@@ -234,8 +234,7 @@ i3GEO.gadgets = {
 	*/
 	mostraEscalaNumerica: function(id){
 		if(typeof(console) !== 'undefined'){console.info("i3GEO.gadgets.mostraEscalaNumerica()");}
-		var i,ins,temp,
-			onde;
+		var i,ins,temp,onde,fsubmit;
 		if(arguments.length === 0)
 		{id = i3GEO.gadgets.PARAMETROS.mostraEscalaNumerica.idhtml;}
 		onde = $i(id);
@@ -243,12 +242,16 @@ i3GEO.gadgets = {
 			if(onde.style.display == "none")
 			{onde.style.display = "block";}
 			if(!$i("i3geo_escalanum")){
-				i = $inputText(id,"100","i3geo_escalanum",$trad("d10"),"9",parseInt(i3GEO.parametros.mapscale,10));
+				i = "<form id='i3GEOescalanumForm' >"+$inputText(id,"100","i3geo_escalanum",$trad("d10"),"9",parseInt(i3GEO.parametros.mapscale,10))+"</form>";
 				ins = "<table><tr><td>"+i;
 				temp = 'var nova = document.getElementById("i3geo_escalanum").value;';
 				temp += 'i3GEO.navega.aplicaEscala(i3GEO.configura.locaplic,i3GEO.configura.sid,nova);';
 				ins += "</td><td><img src='"+i3GEO.util.$im("branco.gif")+"' class='tic' onclick='"+temp+"' /></td></tr></table>";
 				onde.innerHTML = ins;
+				$i("i3GEOescalanumForm").onsubmit = function(){
+					i3GEO.navega.aplicaEscala(i3GEO.configura.locaplic,i3GEO.configura.sid,document.getElementById("i3geo_escalanum").value);
+					return false;				
+				};
 			}
 			if(i3GEO.eventos.NAVEGAMAPA.toString().search("i3GEO.gadgets.atualizaEscalaNumerica()") < 0)
 			{i3GEO.eventos.NAVEGAMAPA.push("i3GEO.gadgets.atualizaEscalaNumerica()");}
@@ -332,7 +335,7 @@ i3GEO.gadgets = {
 	*/
 	mostraBuscaRapida: function(id){
 		if(typeof(console) !== 'undefined'){console.info("i3GEO.gadgets.mostraBuscaRapida()");}
-		var i,ins,temp;
+		var i,ins,temp,fbusca;
 		if(arguments.length === 0)
 		{id = i3GEO.gadgets.PARAMETROS.mostraBuscaRapida.idhtml;}
 		i3GEO.gadgets.mostraBuscaRapida.id = id;
@@ -341,21 +344,23 @@ i3GEO.gadgets = {
 			i3geo_buscaRapida = function(){
 				alert("i3geo_buscaRapida foi depreciada");
 			};
-			i = $inputText(id,"225","valorBuscaRapida"+id,"Município, cidade, UC, endereço...","30",$trad("o2"));
+			i = "<form id=i3GEObotaoFormBuscaRapida"+id+" >"+$inputText(id,"225","valorBuscaRapida"+id,"Município, cidade, UC, endereço...","30",$trad("o2"))+"</form>";
 			ins = "<table><tr><td><a class=ajuda_usuario target=_blank href='"+i3GEO.configura.locaplic+"/ajuda_usuario.php?idcategoria=8&idajuda=71' >&nbsp;&nbsp;&nbsp;</a></td><td>"+i+"</td>";
 			ins += "<td><img src='"+i3GEO.util.$im("branco.gif")+"' title='"+$trad("p13")+"' class='ticPropriedades2' id=i3GEObotaoPropriedadesBuscaRapida"+id+" /></td>";
 			ins += "<td><img src='"+i3GEO.util.$im("branco.gif")+"' class='tic' id=i3GEObotaoBuscaRapida"+id+" /></td></tr></table>";
 			temp = $i(id);
 			if(temp){
-				temp.innerHTML = ins;
-				$i("i3GEObotaoBuscaRapida"+id).onclick = function(){
+				fbusca = function(){
 					if(i3GEO.gadgets.PARAMETROS.mostraBuscaRapida.servicosexternos === false && i3GEO.gadgets.PARAMETROS.mostraBuscaRapida.temasmapa === false)
 					{alert("Escolha um tipo de busca nas propriedades");return;}
-
 					if ($i("valorBuscaRapida"+id).value === "")
 					{alert("Digite uma palavra para busca!");return;}
-					i3GEO.janela.cria("300px","280px",i3GEO.configura.locaplic+"/ferramentas/buscarapida/index.htm","","","Busca rapida");				
+					i3GEO.janela.cria("300px","280px",i3GEO.configura.locaplic+"/ferramentas/buscarapida/index.htm","","","Busca rapida");
+					return false;
 				};
+				temp.innerHTML = ins;
+				$i("i3GEObotaoBuscaRapida"+id).onclick = fbusca;
+				$i("i3GEObotaoFormBuscaRapida"+id).onsubmit = fbusca;
 				$i("i3GEObotaoPropriedadesBuscaRapida"+id).onclick = function(){
 					var ins,
 						interno = "",
