@@ -98,7 +98,7 @@ $urli3geo = str_replace("/ogc.php","",$protocolo.$_SERVER["PHP_SELF"]);
 //
 //imprime na tela a ajuda
 //
-if (isset($ajuda))
+if(isset($ajuda))
 {
 	ogc_imprimeAjuda();
 	exit;
@@ -106,7 +106,7 @@ if (isset($ajuda))
 //
 //imprime na tela a lista de temas disponíveis
 //
-if($lista == "temas")
+if(isset($lista) && $lista == "temas")
 {
 	ogc_imprimeListaDeTemas();
 	exit;
@@ -142,7 +142,6 @@ if(count($_GET) == 0){
 	$req->setParameter("SERVICE", "WMS");
 	$cache = false;
 }
-
 if(isset($tema) && $tipo != "metadados")
 {$tipo = "";}
 if(!isset($version))
