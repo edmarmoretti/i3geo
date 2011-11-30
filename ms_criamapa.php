@@ -144,9 +144,10 @@ require_once ($caminho."classesphp/carrega_ext.php");
 //
 if(!isset($funcao))
 {ob_clean();}
-if (!isset($caminho)){$caminho = "";}
+if (!isset($caminho))
+{$caminho = "";}
 if (!file_exists($caminho."classesphp/carrega_ext.php"))
-{echo "<b> Nao foi possivel localizar o diretório classephp. Provavelmente vc precisara definir a variavel $camino";exit;}
+{echo "<b> Nao foi possivel localizar o diretório classephp. Provavelmente vc precisara definir a variavel $caminho";exit;}
 if (isset($_GET["caminho"]))
 {$caminho = $_GET["caminho"];}
 /*
@@ -155,7 +156,6 @@ if (isset($_GET["caminho"]))
 Carrega as extensões utilizadas no programa de inicialização. 
 A carga das extensões geralmente é necessária nas instalações windows (ms4w) ou quando as mesmas não são carregadas pela própria inicialização do PHP.
 */
-
 include_once ($caminho."classesphp/carrega_ext.php");
 /*
 Include dos arquivos PHP.
@@ -187,7 +187,7 @@ else
 Define o cookie para o idioma da interface
 */
 if(isset($idioma) && $idioma != "")
-setcookie("i3geolingua", $idioma);
+{setcookie("i3geolingua", $idioma);}
 /*
 Cria os diretórios temporários que serão utilizados pelo i3geo para armazenar as imagens e outros dados. 
 */
@@ -248,7 +248,7 @@ session_name("i3GeoPHP");
 session_start();
 //echo $_SESSION["map_file"];exit;
 if (!isset($g_sid)){$g_sid="";}
-if(isset($_SESSION["map_file"]) || $g_sid != "")
+if(isset($_SESSION["map_file"]) || $g_sid != "" || $g_sid == "undefined")
 {session_regenerate_id();$_SESSION = array();}
 
 /*

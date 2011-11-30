@@ -165,12 +165,13 @@ if ($funcao == "criaMapa")
 {
 	unset($GLOBALS);
 	session_destroy();
+	$_COOKIE = array();
 	//
 	//primeiro é necessário carregar o ms_configura.php para pegar a variável $locaplic
 	//
 	$d = "";
 	if(!file_exists("ms_configura.php"))
-	$d = "../";
+	{$d = "../";}
 	include_once($d."ms_configura.php");
 	//
 	//é necessário mudar o diretório em função dos includes que são feitos pelo ms_criamapa.php
@@ -179,8 +180,6 @@ if ($funcao == "criaMapa")
 	$interfaceTemp = $interface;
 	$interface = "mashup";
 	include_once("ms_criamapa.php");
-	//$cp->set_data(session_id());
-	//$cp->return_data();
 	$_SESSION["interface"] = $interfaceTemp;
 	cpjson(session_id());
 	return;
