@@ -170,6 +170,7 @@ Parâmetros:
 	tiles (true|false) - indica se o modo tile será usado ou não (true por default). O modo tile pode tornar o mashup mais lento em algumas situações.
 	incluilayergrafico (true|false) - indica se o layer que recebe elementos gráficos será adicionado ou não ao mapa
 	ativalayerswicther (true|false) - inicia o mapa com a caixa de escolha das camadas (layerSwitcher) aberta ou não. Por default, inicia fechada
+	ativarodadomouse (true|false) - ativa ou não o zoom com base na roda do mouse (default é true)
 	
 	fundo - lista com os nomes, separados por ',' dos layers que serão usados como fundo para o mapa. Se não for definido,
 			será usado o default. O primeiro da lista será o fundo ativo. Se na lista de temas de fundo estiver algum
@@ -316,6 +317,11 @@ i3GEO.editorOL.ativalayerswitcher = "<?php
 	if(isset($ativalayerswitcher)){echo $ativalayerswitcher;}
 	else
 	{echo "false";}
+?>";
+i3GEO.editorOL.ativarodadomouse = "<?php
+	if(isset($ativarodadomouse)){echo $ativarodadomouse;}
+	else
+	{echo "true";}
 ?>";
 <?php if(isset($fundo)){
 	echo "i3GEO.editorOL.fundo = '".implode(",",$fundo)."';";

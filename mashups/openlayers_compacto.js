@@ -3093,7 +3093,8 @@ botoes: {
 'tools':true,
 'undo':false,
 'frente':false,
-'legenda':true
+'legenda':true,
+'rodadomouse':true
 },
 pontos: [],
 marca: "../pacotes/openlayers/img/marker-gold.png",
@@ -3109,6 +3110,7 @@ new OpenLayers.Control.KeyboardDefaults()
 tiles: true,
 incluilayergrafico: true,
 ativalayerswitcher: false,
+ativarodadomouse: true,
 numzoom: 12,
 maxext: "",
 mapext: new OpenLayers.Bounds(-76.5125927,-39.3925675209,-29.5851853,9.49014852081),
@@ -3162,6 +3164,12 @@ i3GEO.editorOL.ativalayerswitcher = false;
 }
 if(i3GEO.editorOL.ativalayerswitcher === "true"){
 i3GEO.editorOL.ativalayerswitcher = true;
+}
+if(i3GEO.editorOL.ativarodadomouse === "false"){
+i3GEO.editorOL.ativarodadomouse = false;
+}
+if(i3GEO.editorOL.ativarodadomouse === "true"){
+i3GEO.editorOL.ativarodadomouse = true;
 }
 if(i3GEO.editorOL.incluilayergrafico === "false"){
 i3GEO.editorOL.incluilayergrafico = false;
@@ -3249,6 +3257,8 @@ i3GEO.editorOL.criaJanelaBusca();
 i3GEO.editorOL.criaBotoes(i3GEO.editorOL.botoes);
 if(i3GEO.editorOL.ativalayerswitcher === true)
 {i3GEO.editorOL.ativaLayerSwitcher();}
+if(i3GEO.editorOL.ativarodadomouse === false)
+{i3GEO.editorOL.desativaRodaDoMouse();}
 },
 layersLigados: function(){
 var layers = i3GEO.editorOL.mapa.layers,
@@ -4657,5 +4667,9 @@ var ls = i3GEO.editorOL.pegaControle("OpenLayers.Control.LayerSwitcher");
 if(ls){
 ls.maximizeDiv.click();
 }
+},
+desativaRodaDoMouse: function(){
+var controls = i3GEO.editorOL.mapa.getControlsByClass('OpenLayers.Control.Navigation');
+for(var i = 0; i<controls.length; ++i){controls[i].disableZoomWheel();}
 }
 };
