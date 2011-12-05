@@ -495,8 +495,13 @@ function dadosLinhaDoTempo($map_file,$tema,$ext="")
 		$itemlink = $layer->getmetadata("ltempoitemlink");
 		$itens[] = $itemlink;
 	}
+	$converteE = "sim";
+	if($layer->getmetadata("ltempoconvencode") != ""){
+		$converteE = $layer->getmetadata("ltempoconvencode");
+	}
 	$dados = pegaValoresM($map,$layer,$itens,$exclui,$selecionados,true,true);
 	$eventos = array();
+	$anos = array();
 	foreach($dados as $dado){
 		if($itemi == "")
 		{$image = '';}
@@ -512,7 +517,7 @@ function dadosLinhaDoTempo($map_file,$tema,$ext="")
 		else {$link = $dado[$link];}
 		$titulo = $dado[$itemtitulo];
 		$desc = $dado[$itemdescricao];
-		if (function_exists("mb_convert_encoding")){
+		if(function_exists("mb_convert_encoding") && $converteE == "sim"){
 			$titulo = mb_convert_encoding($titulo,"UTF-8","ISO-8859-1");
 			$desc = mb_convert_encoding($desc,"UTF-8","ISO-8859-1");
 		}
@@ -526,6 +531,8 @@ function dadosLinhaDoTempo($map_file,$tema,$ext="")
 				'image'=>$image,
 				'link'=>$link
 			);
+			$anos[] = $fim;
+			$anos[] = $dado[$iteminicio];
 		}
 	}
 	//echo "<pre>";
@@ -533,7 +540,9 @@ function dadosLinhaDoTempo($map_file,$tema,$ext="")
 		"dateTimeFormat"=>$layer->getmetadata("ltempoformatodata"),
 		"wikiURL"=>"",
 		"wikiSection"=>"",		
-		"events"=>$eventos
+		"events"=>$eventos,
+		"menorano"=>min($anos),
+		"maiorano"=>max($anos)
 	);
 }
 //
