@@ -1,42 +1,41 @@
 MAP
-
-
   FONTSET "c:\ms4w\apache\htdocs\i3geo/symbols/fontes.txt"
   SYMBOLSET "c:\ms4w\apache\htdocs\i3geo/symbols/simbolos.sym"
   LAYER
     CONNECTION ""
     DATA "c:\ms4w\apache\htdocs\i3geo\aplicmap\dados\locali"
     METADATA
-      "LTEMPOITEMIMAGEM"	""
-      "TIP"	"TIPO,ANOCRIA,NOMELOC"
       "cache"	"sim"
-      "LTEMPOITEMDESCRICAO"	"TIPO"
+      "TIP"	"TIPO,ANOCRIA,NOMELOC"
+      "LTEMPOITEMIMAGEM"	""
       "CLASSE"	"SIM"
-      "palletestep"	""
+      "LTEMPOITEMDESCRICAO"	"TIPO"
       "LTEMPOITEMINICIO"	"ANOCRIA"
-      "temporizador"	""
-      "LTEMPOITEMTIP"	"ANOCRIA"
+      "palletestep"	""
       "permitekmz"	"sim"
-      "description_template"	""
-      "LTEMPOITEMTITULO"	"NOMELOC"
+      "LTEMPOITEMTIP"	"ANOCRIA"
+      "temporizador"	""
       "iconetema"	""
+      "LTEMPOITEMTITULO"	"NOMELOC"
+      "description_template"	""
       "LTEMPOITEMLINK"	""
       "palletefile"	""
       "nomeoriginal"	"locali"
-      "LTEMPOFORMATODATA"	"iso8601"
       "permitedownload"	""
-      "LTEMPOITEMICONE"	""
+      "LTEMPOFORMATODATA"	"iso8601"
       "permitecomentario"	""
+      "LTEMPOITEMICONE"	""
       "itembuscarapida"	"NOMELOC"
-      "arquivokmz"	""
       "arquivodownload"	""
-      "transitioneffect"	"NAO"
-      "permiteogc"	""
+      "arquivokmz"	""
       "permitekml"	"sim"
+      "permiteogc"	""
+      "transitioneffect"	"NAO"
       "TEMA"	"Localidades"
       "editorsql"	""
-      "legendaimg"	""
+      "LTEMPOCONVENCODE"	"SIM"
       "LTEMPOITEMFIM"	""
+      "legendaimg"	""
     END
     NAME "locali"
     STATUS DEFAULT
@@ -77,4 +76,6 @@ MAP
       END
     END
   END
+
 END
+

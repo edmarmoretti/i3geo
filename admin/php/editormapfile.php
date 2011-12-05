@@ -1562,6 +1562,7 @@ function pegaMetadados()
 	$dados["ltempoitemfim"] = $layer->getmetadata("ltempoitemfim");
 	$dados["ltempoitemtitulo"] = $layer->getmetadata("ltempoitemtitulo");
 	$dados["ltempoitemdescricao"] = $layer->getmetadata("ltempoitemdescricao");
+	$dados["ltempoconvencode"] = $layer->getmetadata("ltempoconvencode");
 	$dados["ltempoitemtip"] = $layer->getmetadata("ltempoitemtip");
 	$dados["ltempoitemimagem"] = $layer->getmetadata("ltempoitemimagem");
 	$dados["ltempoitemicone"] = $layer->getmetadata("ltempoitemicone");
@@ -1596,7 +1597,7 @@ function pegaMetadados()
 }
 function alterarMetadados()
 {
-	global $tipooriginal,$wms_srs,$wms_name,$wms_server_version,$wms_format,$wms_auth_username,$wms_auth_password,$wms_auth_type,$wms_connectiontimeout,$wms_latlonboundingbox,$wms_proxy_auth_type,$wms_proxy_host,$wms_proxy_port,$wms_proxy_type,$wms_proxy_username,$wms_proxy_password,$wms_sld_body,$wms_sld_url,$wms_style,$wms_bgcolor,$wms_transparent,$wms_time,$itembuscarapida,$iconetema,$ltempoformatodata,$ltempoiteminicio,$ltempoitemfim,$ltempoitemtitulo,$ltempoitemdescricao,$ltempoitemtip,$ltempoitemimagem,$ltempoitemicone,$ltempoitemlink,$description_template,$palletestep,$palletefile,$codigoMap,$codigoLayer,$locaplic,$classestamanho,$classessimbolo,$classescor,$classesnome,$classesitem,$mensagem,$extensao,$tip,$itenslink,$itens,$itensdesc,$editorsql;
+	global $tipooriginal,$wms_srs,$wms_name,$wms_server_version,$wms_format,$wms_auth_username,$wms_auth_password,$wms_auth_type,$wms_connectiontimeout,$wms_latlonboundingbox,$wms_proxy_auth_type,$wms_proxy_host,$wms_proxy_port,$wms_proxy_type,$wms_proxy_username,$wms_proxy_password,$wms_sld_body,$wms_sld_url,$wms_style,$wms_bgcolor,$wms_transparent,$wms_time,$itembuscarapida,$iconetema,$ltempoformatodata,$ltempoconvencode,$ltempoiteminicio,$ltempoitemfim,$ltempoitemtitulo,$ltempoitemdescricao,$ltempoitemtip,$ltempoitemimagem,$ltempoitemicone,$ltempoitemlink,$description_template,$palletestep,$palletefile,$codigoMap,$codigoLayer,$locaplic,$classestamanho,$classessimbolo,$classescor,$classesnome,$classesitem,$mensagem,$extensao,$tip,$itenslink,$itens,$itensdesc,$editorsql;
 	$dados = array();
 	$mapfile = $locaplic."/temas/".$codigoMap.".map";
 	$mapa = ms_newMapObj($mapfile);
@@ -1618,6 +1619,7 @@ function alterarMetadados()
 	$layer->setmetadata("ltempoiteminicio",$ltempoiteminicio);
 	$layer->setmetadata("ltempoitemfim",$ltempoitemfim);
 	$layer->setmetadata("ltempoitemtitulo",$ltempoitemtitulo);
+	$layer->setmetadata("ltempoconvencode",$ltempoconvencode);
 	$layer->setmetadata("ltempoitemdescricao",$ltempoitemdescricao);
 	$layer->setmetadata("ltempoitemtip",$ltempoitemtip);
 	$layer->setmetadata("ltempoitemimagem",$ltempoitemimagem);

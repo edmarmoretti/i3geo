@@ -1474,7 +1474,9 @@ function montaEditorMetadados(dados)
 			{ajuda:"Link para uma página que será incluído no menu popup",
 			titulo:"Linha do tempo: LTEMPOITEMLINK",id:"ltempoitemlink",value:dados.ltempoitemlink,tipo:"text"},
 			{ajuda:"Endereço da imagem do ícone que irá representar o evento (opcional)",
-			titulo:"Linha do tempo: LTEMPOITEMICONE",id:"ltempoitemicone",value:dados.ltempoitemicone,tipo:"text"}
+			titulo:"Linha do tempo: LTEMPOITEMICONE",id:"ltempoitemicone",value:dados.ltempoitemicone,tipo:"text"},
+			{ajuda:"Aplica conversão do código de caracteres? Pode ser necessário para corrigir problemas de acentuação",
+			titulo:"Linha do tempo: LTEMPOCONVENCODE",id:"",value:dados.ltempoconvencode,tipo:"text",div:"<div id=cLtempoconvencode ></div>"},
 		]
 	};
 	var paramNaoOWS = {
@@ -1578,6 +1580,12 @@ function montaEditorMetadados(dados)
 		temp += "</select>"
 		$i("cEditorsql").innerHTML = temp
 	}
+	if($i("cLtempoconvencode")){
+		temp = "<select id='ltempoconvencode' >"
+		temp += core_combosimnao(dados.ltempoconvencode)
+		temp += "</select>"
+		$i("cLtempoconvencode").innerHTML = temp
+	}	
 	var temp = function()
 	{salvarDadosEditor('metadados',dados.codigoMap,dados.codigoLayer)}
 	new YAHOO.widget.Button("salvarEditor",{ onclick: { fn: temp }});
@@ -1864,7 +1872,7 @@ function salvarDadosEditor(tipo,codigoMap,codigoLayer,indiceClasse,indiceEstilo,
 	}
 	if(tipo == "metadados")
 	{
-		var campos = new Array("legendaimg","wms_srs","wms_name","wms_server_version","wms_format","wms_auth_username","wms_auth_password","wms_auth_type","wms_connectiontimeout","wms_latlonboundingbox","wms_proxy_auth_type","wms_proxy_host","wms_proxy_port","wms_proxy_type","wms_proxy_username","wms_proxy_password","wms_sld_body","wms_sld_url","wms_style","wms_bgcolor","wms_transparent","wms_time","itembuscarapida","ltempoformatodata","ltempoiteminicio","ltempoitemfim","ltempoitemtitulo","ltempoitemdescricao","ltempoitemtip","ltempoitemimagem","ltempoitemicone","ltempoitemlink","editorsql","description_template","palletefile","palletestep","classestamanho","classessimbolo","classescor","classesnome","classesitem","identifica","transitioneffect","extensao","escondido","classe","tip","itenslink","itens","itensdesc")
+		var campos = new Array("legendaimg","wms_srs","wms_name","wms_server_version","wms_format","wms_auth_username","wms_auth_password","wms_auth_type","wms_connectiontimeout","wms_latlonboundingbox","wms_proxy_auth_type","wms_proxy_host","wms_proxy_port","wms_proxy_type","wms_proxy_username","wms_proxy_password","wms_sld_body","wms_sld_url","wms_style","wms_bgcolor","wms_transparent","wms_time","itembuscarapida","ltempoformatodata","ltempoiteminicio","ltempoitemfim","ltempoitemtitulo","ltempoitemdescricao","ltempoitemtip","ltempoitemimagem","ltempoitemicone","ltempoitemlink","editorsql","ltempoconvencode","description_template","palletefile","palletestep","classestamanho","classessimbolo","classescor","classesnome","classesitem","identifica","transitioneffect","extensao","escondido","classe","tip","itenslink","itens","itensdesc")
 		var par = "&codigoMap="+codigoMap+"&codigoLayer="+codigoLayer
 		var prog = "../php/editormapfile.php?funcao=alterarMetadados"
 	}
