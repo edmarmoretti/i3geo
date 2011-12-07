@@ -152,7 +152,7 @@ MAP
 		#edite o caminho se a aplicacao for movida de lugar
 		IMAGEPATH "/var/tmp/ms_tmp/"
 		IMAGEURL "/ms_tmp/"
-		TEMPLATE "/opt/www/html/i3geo/aplicmap/geral.htm"
+		TEMPLATE ""
 	END
 	LAYER
 		DATA "/opt/www/html/i3geo/aplicmap/dados/zee"

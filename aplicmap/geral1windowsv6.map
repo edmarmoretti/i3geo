@@ -149,7 +149,7 @@ MAP
 		#edite o caminho se a aplicacao for movida de lugar
 		IMAGEPATH "c:/ms4w/tmp/ms_tmp/"
 		IMAGEURL "/ms_tmp/"
-		TEMPLATE "c:\ms4w\apache\htdocs\i3geo\aplicmap\geral.htm"
+		TEMPLATE ""
 	END
 
 	LAYER
