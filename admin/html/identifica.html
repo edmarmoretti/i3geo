@@ -16,34 +16,37 @@
 	</style>
 	<script type="text/javascript" src="../js/core.js"></script>
 	<script type="text/javascript" src="../js/identifica.js"></script>
+	<link rel="stylesheet" type="text/css" href="admin.css">
 </head>
-<body class=" yui-skin-sam">
-<div style="margin:20px">
-<div style=width:80%;text-align:center;>
-<h1>Administração do i3geo - sistemas de identificação </h1>
+<body class=" yui-skin-sam fundoPonto">
+<center>
+<div class="bordaSuperior"  >&nbsp;</div>
+<div class="mascaraPrincipal" id="divGeral">
+	<div id=cabecalhoPrincipal ></div>
+	<h1>Administração do i3geo - sistemas de identificação </h1>
 
-</div>
-<div id="ajuda">
-	<div class="hd">Ajuda</div>
-	<div class="bd" style="height:144px;overflow:auto">
-		Este programa permite editar a lista de sistemas de identificação.<br><br>
-		A ferramenta de identificação utilizada no i3geo, lista os dados do ponto clicado no mapa pelo usuário,
-		com base nas camadas existentes no mapa. Os sistemas de identificação adicionam outras opções na janela de identificação,
-		permitindo, por exemplo, o uso de programas especiais de busca de dados.<br><br>
-		Os sistemas são baseados no banco admin.db e os usuários que não são editores podem 
-		ver apenas os sistemas publicados.<br><br>
-		A lista de IPs dos usuários que podem administrar o i3geo é definida no
-		arquivo i3geo/ms_configura.php	
+	<div id="ajuda">
+		<div class="hd">Ajuda</div>
+		<div class="bd" style="height:144px;overflow:auto">
+			Este programa permite editar a lista de sistemas de identificação.<br><br>
+			A ferramenta de identificação utilizada no i3geo, lista os dados do ponto clicado no mapa pelo usuário,
+			com base nas camadas existentes no mapa. Os sistemas de identificação adicionam outras opções na janela de identificação,
+			permitindo, por exemplo, o uso de programas especiais de busca de dados.<br><br>
+			Os sistemas são baseados no banco admin.db e os usuários que não são editores podem 
+			ver apenas os sistemas publicados.<br><br>
+			A lista de IPs dos usuários que podem administrar o i3geo é definida no
+			arquivo i3geo/ms_configura.php	
+		</div>
+		<div class="ft"></div>
 	</div>
-	<div class="ft"></div>
+	<input onclick="adicionaLinha()" type=button id=adiciona value="Adicionar um novo sistema" />
+	<br>
+	<p></p>
+	<div id="tabela" style="left:-5px;"></div>
+	</div>
+	<div id=logajax style="display:block" ></div>
+	<div id=dialogoContinua style="display:block" ></div>
 </div>
-<input onclick="adicionaLinha()" type=button id=adiciona value="Adicionar um novo sistema" />
-<br>
-<p></p>
-<div id="tabela" style="left:-5px;"></div>
-</div>
-<div id=logajax style="display:block" ></div>
-<div id=dialogoContinua style="display:block" ></div>
 <script>
 /*
 Title: Opções da ferramenta identifica
@@ -82,6 +85,9 @@ Arquivo:
 
 i3geo/admin/html/identifica.html
 */
+if(screen.availWidth > 700)
+{document.getElementById("divGeral").style.width = "1100px";}
+cabecalhoGeral("cabecalhoPrincipal","");
 </script>
 
 </body>

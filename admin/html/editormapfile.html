@@ -20,44 +20,46 @@
 	<script src="../js/editormapfile.js" type="text/javascript"></script>
 	<script src="../../classesjs/classe_util.js" type="text/javascript"></script>
 	<script src="../../classesjs/classe_janela.js" type="text/javascript"></script>
+	<link rel="stylesheet" type="text/css" href="admin.css">
+	
 </head>
-<body class=" yui-skin-sam">
-<div style="margin:20px">
-<div id=cabecalhoPrincipal style=width:80%;text-align:left;>
-</div>
-<div style=width:80%;text-align:center;>
-<h1>Administração do i3geo - mapfiles dos temas <img src="../imagens/04.png" style="cursor:pointer" id=botaoAjuda /></h1>
-</div>
-<div id="ajuda" style=display:none >
-	<div class="hd">Ajuda</div>
-	<div class="bd" style="height:144px;overflow:auto">
-		<p>Este formulário permite criar ou editar os arquivos mapfile que compõem temas no i3geo.
-		<p>Os arquivo .map são armazenados no diretório i3geo/temas e podem também ser editados manualmente.
-		<p>Cada arquivo contém layers definidos conforme a sintaxe utilizada pelo Mapserver. Esses arquivos são as
-		estruturas básicas utilizadas pelo i3geo na apresentação de dados e montagem das camadas que são vistas no mapa.
-		<p>Após criados os mapfiles, deve-se ainda definir as características de cada LAYER.
-		<p>A lista de IPs dos usuários que podem administrar o i3geo é definida no
-		arquivo i3geo/ms_configura.php
-		<p>Apenas os mapfiles que forem vinculados a um tema poderão ser vistos na janela de inclusão de temas na árvore de temas.
-		Se você criou um mapfile manualmente, utilize a opção de edição (ícone apresentado ao lado de cada mapfile) para fazer essa associação.
-		<p>A opção "Verifica temas sem mapfiles" possibilita resolver problemas decorrentes da eliminação manual de um arquivo mapfile do servidor.
-		Nesses casos, o registro no banco de dados permanece. Com essa opção é possível apagar os registros ou recriar o mapfile perdido.
+<body class=" yui-skin-sam fundoPonto">
+<center>
+<div class="bordaSuperior"  >&nbsp;</div>
+<div class="mascaraPrincipal" id="divGeral">
+	<div id=cabecalhoPrincipal ></div>
+	<h1>Administração do i3geo - mapfiles dos temas <img src="../imagens/04.png" style="cursor:pointer" id=botaoAjuda /></h1>
+	<div id="ajuda" style=display:none >
+		<div class="hd">Ajuda</div>
+		<div class="bd" style="height:144px;overflow:auto">
+			<p>Este formulário permite criar ou editar os arquivos mapfile que compõem temas no i3geo.
+			<p>Os arquivo .map são armazenados no diretório i3geo/temas e podem também ser editados manualmente.
+			<p>Cada arquivo contém layers definidos conforme a sintaxe utilizada pelo Mapserver. Esses arquivos são as
+			estruturas básicas utilizadas pelo i3geo na apresentação de dados e montagem das camadas que são vistas no mapa.
+			<p>Após criados os mapfiles, deve-se ainda definir as características de cada LAYER.
+			<p>A lista de IPs dos usuários que podem administrar o i3geo é definida no
+			arquivo i3geo/ms_configura.php
+			<p>Apenas os mapfiles que forem vinculados a um tema poderão ser vistos na janela de inclusão de temas na árvore de temas.
+			Se você criou um mapfile manualmente, utilize a opção de edição (ícone apresentado ao lado de cada mapfile) para fazer essa associação.
+			<p>A opção "Verifica temas sem mapfiles" possibilita resolver problemas decorrentes da eliminação manual de um arquivo mapfile do servidor.
+			Nesses casos, o registro no banco de dados permanece. Com essa opção é possível apagar os registros ou recriar o mapfile perdido.
+		</div>
+		<div class="ft"></div>
 	</div>
-	<div class="ft"></div>
-</div>
-<input onclick="adicionaLinha()" type=button id=adiciona value="Criar um novo mapfile" />
-<input onclick="adicionaLinha()" type=button id=semmapfiles value="Verificar temas sem mapfiles" />
-<br><br>
-Além de criar os mapfiles, é necessário definir as características de cada LAYER nas opções abaixo.
-<br>
-Para incluir o tema nos menus, <a href='arvore.html' >edite a árvore de temas </a>
-<br>
-<div id="letras" ></div>
-<p>Mapfiles (arquivos .map existentes no diretório i3geo/temas):</p>
-<div id="tabela" style="left:-5px;"></div>
+	<input onclick="adicionaLinha()" type=button id=adiciona value="Criar um novo mapfile" />
+	<input onclick="adicionaLinha()" type=button id=semmapfiles value="Verificar temas sem mapfiles" />
+	<br><br>
+	Além de criar os mapfiles, é necessário definir as características de cada LAYER nas opções abaixo.
+	<br>
+	Para incluir o tema nos menus, <a href='arvore.html' >edite a árvore de temas </a>
+	<br>
+	<div id="letras" ></div>
+	<p>Mapfiles (arquivos .map existentes no diretório i3geo/temas):</p>
+	<div id="tabela" style="left:-5px;"></div>
 </div>
 <div id=logajax style="display:block" ></div>
 <div id=dialogoContinua style="display:block" ></div>
+
 <script>
 /*
 Title: Editor de mapfiles
@@ -107,7 +109,8 @@ i3geo/admin/html/editormapfile.html
 </script>
 
 <script>
-
+if(screen.availWidth > 700)
+{document.getElementById("divGeral").style.width = "700px";}
 var letras = "Todos A B C D E F G H I J K L M N O P Q R S T U V X Y Z _ 1 2 3 4 5 6 7 8 9".split(" "),
 	nletras = letras.length,
 	letraAtual = "Todos",

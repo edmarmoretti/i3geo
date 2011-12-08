@@ -17,14 +17,16 @@
 	<script type="text/javascript" src="../../classesjs/i3geo.js"></script>
 	<script type="text/javascript" src="../../ferramentas/upload/index.js.php"></script>
 	<script type="text/javascript" src="../js/core.js"></script>
-
+	<link rel="stylesheet" type="text/css" href="admin.css">
 </head>
-<body class=" yui-skin-sam" style="background:white;margin:20px">
-<div id=cabecalhoPrincipal style=width:80%;text-align:left;>
+<body class=" yui-skin-sam fundoPonto">
+<center>
+<div class="bordaSuperior"  >&nbsp;</div>
+<div class="mascaraPrincipal" id="divGeral">
+	<div id=cabecalhoPrincipal ></div>
+	<div id="conteudo" style="width:500px" ></div>
 </div>
-<br><br>
-<div id="conteudo" style="width:500px" >
-</div>
+<br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br>
 <script>
 /*
 Title: Subir shapefile
@@ -57,6 +59,8 @@ Arquivo:
 
 i3geo/admin/html/subirshapefile.html
 */
+if(screen.availWidth > 700)
+{document.getElementById("divGeral").style.width = "700px";}
 i3GEO.configura.locaplic = "../..";
 i3GEO.parametros.editor = "sim";
 i3GEO.configura.sid = "";

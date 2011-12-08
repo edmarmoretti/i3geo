@@ -19,47 +19,48 @@
 	<script type="text/javascript" src="../js/menu.js"></script>
 	<script type="text/javascript" src="../js/grupos.js"></script>
 	<script type="text/javascript" src="../js/subgrupos.js"></script>
+	<link rel="stylesheet" type="text/css" href="admin.css">
 </head>
-<body class=" yui-skin-sam">
-<div style="margin:20px">
-<div id=cabecalhoPrincipal style=width:80%;text-align:left;>
-</div>
-<div style=width:80%;text-align:center;>
-<h1>Administração do i3geo - Árvore de temas <img src="../imagens/04.png" style="cursor:pointer" id=botaoAjuda /></h1>
-</div>
-<div id="ajuda" style=display:none >
-	<div class="hd">Ajuda</div>
-	<div class="bd" style="height:144px;overflow:auto">
-		<p>Este formulário permite editar árvore de temas que será utilizada pelo i3Geo.
-		<p>A árvore é composta de menus, grupos, sub-grupos e temas. Vc deve criar os menus,
-		a lista de grupos e a lista de sub-grupos. Ao criar um menu, esse é mostrado imediatamente na árvore.
-		<p>Menus ou nós da árvore marcados como não publicados são mostrados em vermelho e aparecem apenas para os administradores.
-		<p>Em cada nó da árvore podem ser associados os temas, mesmo na raiz de um dos níveis.
-		Os temas são arquivos mapfiles armazenados em i3geo/temas e registrados no sistema de administração.
-		<p>A criação de mapfiles e a vinculação tema-mapfile é feita por meio do editor de mapfiles, e consiste 
-		na determinação de um nome para cada mapfile. Esse nome é listado ao ser adicionado um tema na árvore.
+<body class=" yui-skin-sam fundoPonto">
+<center>
+<div class="bordaSuperior"  >&nbsp;</div>
+<div class="mascaraPrincipal" id="divGeral">
+	<div id=cabecalhoPrincipal ></div>
+	<h1>Administração do i3geo - Árvore de temas <img src="../imagens/04.png" style="cursor:pointer" id=botaoAjuda /></h1>
+	<div id="ajuda" style=display:none >
+		<div class="hd">Ajuda</div>
+		<div class="bd" style="height:144px;overflow:auto">
+			<p>Este formulário permite editar árvore de temas que será utilizada pelo i3Geo.
+			<p>A árvore é composta de menus, grupos, sub-grupos e temas. Vc deve criar os menus,
+			a lista de grupos e a lista de sub-grupos. Ao criar um menu, esse é mostrado imediatamente na árvore.
+			<p>Menus ou nós da árvore marcados como não publicados são mostrados em vermelho e aparecem apenas para os administradores.
+			<p>Em cada nó da árvore podem ser associados os temas, mesmo na raiz de um dos níveis.
+			Os temas são arquivos mapfiles armazenados em i3geo/temas e registrados no sistema de administração.
+			<p>A criação de mapfiles e a vinculação tema-mapfile é feita por meio do editor de mapfiles, e consiste 
+			na determinação de um nome para cada mapfile. Esse nome é listado ao ser adicionado um tema na árvore.
+		</div>
+		<div class="ft"></div>
 	</div>
-	<div class="ft"></div>
-</div>
-<br>
-<p class=paragrafo >
-	Idioma:
-	<select id="idioma" onchange="initMenu()">
-		<option value="pt" selected >Português</option>
-		<option value="en" >Inglês</option>
-		<option value="es" >Espanhol</option>
-		<option value="it" >Italiano</option>
-	</select>
-</p>
-<p class=paragrafo >Utilize os botões para criar novos nomes de menus, grupos ou sub-grupos, formando listas de itens.<br>Os itens criados podem ser reaproveitados em vários nós da árvore.</p>
-<p class=paragrafo ><input id="botaoEditorMenu" type=button value="Editar lista de menus" style="left:-5px;"/>
-<input id="botaoEditorGrupo" type=button value="Editar lista de grupos" />
-<input id="botaoEditorSubGrupo" type=button value="Editar lista de sub-grupos" /></p>
+	<br>
+	<p class=paragrafo >
+		Idioma:
+		<select id="idioma" onchange="initMenu()">
+			<option value="pt" selected >Português</option>
+			<option value="en" >Inglês</option>
+			<option value="es" >Espanhol</option>
+			<option value="it" >Italiano</option>
+		</select>
+	</p>
+	<p class=paragrafo >Utilize os botões para criar novos nomes de menus, grupos ou sub-grupos, formando listas de itens.<br>Os itens criados podem ser reaproveitados em vários nós da árvore.</p>
+	<p class=paragrafo ><input id="botaoEditorMenu" type=button value="Editar lista de menus" style="left:-5px;"/>
+	<input id="botaoEditorGrupo" type=button value="Editar lista de grupos" />
+	<input id="botaoEditorSubGrupo" type=button value="Editar lista de sub-grupos" /></p>
 
-<p>Árvore do catálogo:</p>
-<div id="arvoreMenus" style="left:-5px;"></div>
+	<p>Árvore do catálogo:</p>
+	<div id="arvoreMenus" style="left:-5px;"></div>
+	</div>
+	<div id=logajax style="display:block" ></div>
 </div>
-<div id=logajax style="display:block" ></div>
 <script>
 /*
 Title: Editor da árvore de menus
@@ -104,6 +105,8 @@ Arquivo:
 
 i3geo/admin/html/arvore.html
 */
+if(screen.availWidth > 700)
+{document.getElementById("divGeral").style.width = "700px";}
 cabecalhoGeral("cabecalhoPrincipal","arvore");
 </script>
 </body>

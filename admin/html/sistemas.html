@@ -16,34 +16,36 @@
 	</style>
 	<script type="text/javascript" src="../js/core.js"></script>
 	<script type="text/javascript" src="../js/sistemas.js"></script>
+	<link rel="stylesheet" type="text/css" href="admin.css">
 </head>
-<body class=" yui-skin-sam">
-<div style="margin:20px">
-<div style=width:80%;text-align:center;>
-<h1>Administração do i3geo - sistemas especiais </h1>
-
-</div>
-<div id="ajuda">
-	<div class="hd">Ajuda</div>
-	<div class="bd" style="height:144px;overflow:auto">
-		Este programa permite editar a lista de sistemas especiais.<br><br>
-		Sistemas especiais são utilizados para incluir camadas no i3geo tendo como base
-		programas que interagem com o usuário de alguma forma específica.<br><br>
-		Cada sistema pode ter um objetivo específico e uma interface própria. Normalmente são utilizados
-		para realizar consultas a bancos de dados ou Web Services e gerar a camada para acrescentar ao mapa.<br><br>
-		Esses sistemas podem por exemplo, consultar bancos de dados estatísticos para gerar cartogramas.<br><br>
-		A lista de sistemas é baseada no banco admin.db.<br><br>
-		A lista de IPs dos usuários que podem administrar o i3geo é definida no
-		arquivo i3geo/ms_configura.php	
+<body class=" yui-skin-sam fundoPonto">
+<center>
+<div class="bordaSuperior"  >&nbsp;</div>
+<div class="mascaraPrincipal" id="divGeral">
+	<div id=cabecalhoPrincipal ></div>
+	<h1>Administração do i3geo - sistemas especiais </h1>
+	<div id="ajuda">
+		<div class="hd">Ajuda</div>
+		<div class="bd" style="height:144px;overflow:auto">
+			Este programa permite editar a lista de sistemas especiais.<br><br>
+			Sistemas especiais são utilizados para incluir camadas no i3geo tendo como base
+			programas que interagem com o usuário de alguma forma específica.<br><br>
+			Cada sistema pode ter um objetivo específico e uma interface própria. Normalmente são utilizados
+			para realizar consultas a bancos de dados ou Web Services e gerar a camada para acrescentar ao mapa.<br><br>
+			Esses sistemas podem por exemplo, consultar bancos de dados estatísticos para gerar cartogramas.<br><br>
+			A lista de sistemas é baseada no banco admin.db.<br><br>
+			A lista de IPs dos usuários que podem administrar o i3geo é definida no
+			arquivo i3geo/ms_configura.php	
+		</div>
+		<div class="ft"></div>
 	</div>
-	<div class="ft"></div>
+	<input onclick="adicionaLinha()" type=button id=adiciona value="Adicionar um novo sistema" />
+	<br>
+	<p>Sistemas existentes:</p>
+	<div id="tabela" style="left:-5px;"></div>
+	</div>
+	<div id=logajax style="display:block" ></div>
 </div>
-<input onclick="adicionaLinha()" type=button id=adiciona value="Adicionar um novo sistema" />
-<br>
-<p>Sistemas existentes:</p>
-<div id="tabela" style="left:-5px;"></div>
-</div>
-<div id=logajax style="display:block" ></div>
 <script>
 /*
 Title: Sistemas de adição de temas
@@ -82,6 +84,9 @@ Arquivo:
 
 i3geo/admin/html/sistemas.html
 */
+if(screen.availWidth > 700)
+{document.getElementById("divGeral").style.width = "700px";}
+cabecalhoGeral("cabecalhoPrincipal","");
 </script>
 
 </body>

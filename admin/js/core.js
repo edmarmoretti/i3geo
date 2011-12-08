@@ -67,7 +67,7 @@ Armazena o objeto com a lista de perfis
 var $perfis = "";
 function cabecalhoGeral(id,excluir){
 	var i,n,temp,
-		ins = "<fieldset><legend>Opções principais</legend>",
+		ins = "<fieldset class='cabecalhoGeral'><legend>Opções principais</legend>",
 		botoes = [
 			{id:"principal",titulo:"Início",link:"../index.html"},
 			{id:"menus",titulo:"Menus",link:"menus.html"},			

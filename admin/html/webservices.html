@@ -16,33 +16,36 @@
 	</style>
 	<script type="text/javascript" src="../js/core.js"></script>
 	<script type="text/javascript" src="../js/webservices.js"></script>
+	<link rel="stylesheet" type="text/css" href="admin.css">
 </head>
-<body class=" yui-skin-sam">
-<div style="margin:20px">
-<div style=width:80%;text-align:center;>
-<h1>Administração do i3geo - web Services </h1>
+<body class=" yui-skin-sam fundoPonto">
+<center>
+<div class="bordaSuperior"  >&nbsp;</div>
+<div class="mascaraPrincipal" id="divGeral">
+	<div id=cabecalhoPrincipal ></div>
+	<h1>Administração do i3geo - web Services </h1>
 
-</div>
-<div id="ajuda">
-	<div class="hd">Ajuda</div>
-	<div class="bd" style="height:144px;overflow:auto">
-		Este programa permite editar o cadastro de Web Services.<br><br>
-		O i3Geo acessa Web Services e serviços para obtenção de dados nos padrões WMS, RSS, GEORSS e endereços de sistemas de download de dados.
-		Todos os endereços são cadastrados e organizados por tipos. A lista de WMS e GEORSS é utilizada na guia de adição de temas já os 
-		Web Services convencionais, são utilizados no aplicativo WSCLIENTE. Pode-se ainda cadastrar endereços para
-		sítios na internet que possibilitam o download de dados, esse cadastro é utilizado no aplicativo DATADOWNLOAD.<br><br>
-		A lista de Web Services é baseada no banco admin.db.<br><br>
-		A lista de IPs dos usuários que podem administrar o i3geo é definida no
-		arquivo i3geo/ms_configura.php	
+	<div id="ajuda">
+		<div class="hd">Ajuda</div>
+		<div class="bd" style="height:144px;overflow:auto">
+			Este programa permite editar o cadastro de Web Services.<br><br>
+			O i3Geo acessa Web Services e serviços para obtenção de dados nos padrões WMS, RSS, GEORSS e endereços de sistemas de download de dados.
+			Todos os endereços são cadastrados e organizados por tipos. A lista de WMS e GEORSS é utilizada na guia de adição de temas já os 
+			Web Services convencionais, são utilizados no aplicativo WSCLIENTE. Pode-se ainda cadastrar endereços para
+			sítios na internet que possibilitam o download de dados, esse cadastro é utilizado no aplicativo DATADOWNLOAD.<br><br>
+			A lista de Web Services é baseada no banco admin.db.<br><br>
+			A lista de IPs dos usuários que podem administrar o i3geo é definida no
+			arquivo i3geo/ms_configura.php	
+		</div>
+		<div class="ft"></div>
 	</div>
-	<div class="ft"></div>
+	<input onclick="adicionaLinha()" type=button id=adiciona value="Adicionar um novo endereço" />
+	<br>
+	<p>Temas existentes:</p>
+	<div id="tabela" style="left:-5px;"></div>
+	</div>
+	<div id=logajax style="display:block" ></div>
 </div>
-<input onclick="adicionaLinha()" type=button id=adiciona value="Adicionar um novo endereço" />
-<br>
-<p>Temas existentes:</p>
-<div id="tabela" style="left:-5px;"></div>
-</div>
-<div id=logajax style="display:block" ></div>
 <script>
 /*
 Title: Web Services
@@ -81,5 +84,8 @@ Arquivo:
 
 i3geo/admin/html/webservices.html
 */
+if(screen.availWidth > 700)
+{document.getElementById("divGeral").style.width = "700px";}
+cabecalhoGeral("cabecalhoPrincipal","");
 </script>
 </body>

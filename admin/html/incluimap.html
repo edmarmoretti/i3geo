@@ -2,45 +2,50 @@
 <html>
 <head>
     <meta http-equiv="content-type" content="text/html; charset=ISO-8859-1">
+	<script type="text/javascript" src="../js/core.js"></script>
     <link rel="stylesheet" type="text/css" href="admin.css">
 </head>
-<body>
-<p>
-As versões novas do Mapserver exigem que os arquivos mapfile iniciem com a palavra "MAP"
-</p>
-<p>
-Os mapfiles utilizados pelo i3geo, até a versão 4.1, e armazenados no diretório i3Geo/temas não iniciam com "MAP". Para ajustar os mapfiles 
-você pode editá-los individulamente ou rodar o programa i3geo/admin/php/incluiMAP.php
-<p>
-Antes de fazer isso, faça um backup do seu diretório i3geo/temas
-<p>
-<a href="../php/incluiMAP.php" >Ajuste dos mapfiles - inclusão da palavra "MAP" no início dos arquivos; substituição de vários elementos depreciados</a>
-<p>
-Lista de substituições:
-<pre>
-	$search = array(
-		"transparency ",
-		"LABELANGLEITEM ",
-		"LABELMAXSCALE ",
-		"LABELMINSCALE ",
-		"LABELMINSCALE ",
-		"LABELSIZEITEM ",
-		"MAXSCALE ",
-		"MINSCALE ",
-		"SYMBOLSCALE "
-	);
-	$replace = array(
-		"OPACITY ",
-		"#LABELANGLEITEM ",
-		"LABELMAXSCALEDENOM ",
-		"LABELMINSCALEDENOM ",
-		"LABELMINSCALEDENOM ",
-		"#LABELSIZEITEM ",
-		"MAXSCALEDENOM ",
-		"MINSCALEDENOM ",
-		"SYMBOLSCALEDENOM "
-	);
-
+<body class=" yui-skin-sam fundoPonto">
+<center>
+<div class="bordaSuperior"  >&nbsp;</div>
+<div class="mascaraPrincipal" id="divGeral">
+	<div id=cabecalhoPrincipal ></div>
+	<p>
+	As versões novas do Mapserver exigem que os arquivos mapfile iniciem com a palavra "MAP"
+	</p>
+	<p>
+	Os mapfiles utilizados pelo i3geo, até a versão 4.1, e armazenados no diretório i3Geo/temas não iniciam com "MAP". Para ajustar os mapfiles 
+	você pode editá-los individulamente ou rodar o programa i3geo/admin/php/incluiMAP.php
+	<p>
+	Antes de fazer isso, faça um backup do seu diretório i3geo/temas
+	<p>
+	<a href="../php/incluiMAP.php" >Clique para ajustar os mapfiles - inclusão da palavra "MAP" no início dos arquivos; substituição de vários elementos depreciados</a>
+	<p>
+	Lista de substituições:
+	<pre>
+		$search = array(
+			"transparency ",
+			"LABELANGLEITEM ",
+			"LABELMAXSCALE ",
+			"LABELMINSCALE ",
+			"LABELMINSCALE ",
+			"LABELSIZEITEM ",
+			"MAXSCALE ",
+			"MINSCALE ",
+			"SYMBOLSCALE "
+		);
+		$replace = array(
+			"OPACITY ",
+			"#LABELANGLEITEM ",
+			"LABELMAXSCALEDENOM ",
+			"LABELMINSCALEDENOM ",
+			"LABELMINSCALEDENOM ",
+			"#LABELSIZEITEM ",
+			"MAXSCALEDENOM ",
+			"MINSCALEDENOM ",
+			"SYMBOLSCALEDENOM "
+		);
+</div>
 <script>
 /*
 Title: Ajuste de mapfiles
@@ -77,6 +82,9 @@ Arquivo:
 
 i3geo/admin/html/incluimap.html
 */
+if(screen.availWidth > 700)
+{document.getElementById("divGeral").style.width = "700px";}
+cabecalhoGeral("cabecalhoPrincipal","");
 </script>
 
 </body>

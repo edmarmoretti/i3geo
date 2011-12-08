@@ -16,35 +16,35 @@
 	</style>
 	<script type="text/javascript" src="../js/core.js"></script>
 	<script type="text/javascript" src="../js/atlas.js"></script>
+	<link rel="stylesheet" type="text/css" href="admin.css">
 </head>
-<body class=" yui-skin-sam">
-<div style="margin:20px">
-<div id=cabecalhoPrincipal style=width:80%;text-align:left;>
-</div>
-<div style=width:80%;text-align:center;>
-<h1>Administração do i3geo - Atlas <img src="../imagens/04.png" style="cursor:pointer" id=botaoAjuda /></h1>
-
-</div>
-<div id="ajuda">
-	<div class="hd">Ajuda</div>
-	<div class="bd" style="height:144px;overflow:auto">
-		<p>O cadastro de Atlas é utilizado na interface "Atlas" do i3geo. Essa interface
-		pode ser vista em http://localhost/i3geo/atlas
-		<p>Cada Atlas possuí uma lista de pranchas e cada prancha uma lista de temas e outros
-		parâmetros.
-		<p>A montagem de cada Atlas é feito definindo-se os parâmetros de cada nível hierárquico, 
-		editando-se uma árvore cuja raiz é cada Atlas, seguido pelas pranchas e temas.
-		<p>Para cada Atlas e cada prancha pode ser definido um texto explicativo que será aberto ao iniciar 
-		o Atlas ou a prancha.
+<body class=" yui-skin-sam fundoPonto">
+<center>
+<div class="bordaSuperior"  >&nbsp;</div>
+<div class="mascaraPrincipal" id="divGeral">
+	<div id=cabecalhoPrincipal ></div>
+	<h1>Administração do i3geo - Atlas <img src="../imagens/04.png" style="cursor:pointer" id=botaoAjuda /></h1>
+	<div id="ajuda">
+		<div class="hd">Ajuda</div>
+		<div class="bd" style="height:144px;overflow:auto">
+			<p>O cadastro de Atlas é utilizado na interface "Atlas" do i3geo. Essa interface
+			pode ser vista em http://localhost/i3geo/atlas
+			<p>Cada Atlas possuí uma lista de pranchas e cada prancha uma lista de temas e outros
+			parâmetros.
+			<p>A montagem de cada Atlas é feito definindo-se os parâmetros de cada nível hierárquico, 
+			editando-se uma árvore cuja raiz é cada Atlas, seguido pelas pranchas e temas.
+			<p>Para cada Atlas e cada prancha pode ser definido um texto explicativo que será aberto ao iniciar 
+			o Atlas ou a prancha.
+		</div>
+		<div class="ft"></div>
 	</div>
-	<div class="ft"></div>
+	<input onclick="adicionaLinha()" type=button id=adiciona value="Criar um novo atlas" />
+	<br>
+	<p>Atlas existentes:</p>
+	<div id="tabela" style="left:-5px;"></div>
+	</div>
+	<div id=logajax style="display:block" ></div>
 </div>
-<input onclick="adicionaLinha()" type=button id=adiciona value="Criar um novo atlas" />
-<br>
-<p>Atlas existentes:</p>
-<div id="tabela" style="left:-5px;"></div>
-</div>
-<div id=logajax style="display:block" ></div>
 <script>
 /*
 Title: Editor da interface Atlas
@@ -83,6 +83,8 @@ Arquivo:
 
 i3geo/admin/html/atlas.html
 */
+if(screen.availWidth > 700)
+{document.getElementById("divGeral").style.width = "700px";}
 cabecalhoGeral("cabecalhoPrincipal","atlas");
 </script>
 </body>
