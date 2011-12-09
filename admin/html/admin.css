@@ -146,6 +146,7 @@ fieldset
 .fundoPonto {
 	background:url("../../imagens/fundo_ponto.jpg") repeat-x scroll left transparent;
 	margin:0px;
+	font-family: Verdana, Arial, Helvetica, sans-serif;
 }
 .cabecalhoGeral{
 	margin: 0px;

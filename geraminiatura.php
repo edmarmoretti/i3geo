@@ -1,3 +1,24 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
+<html>
+<head>
+<META HTTP-EQUIV="Content-Type" CONTENT="text/html; charset=ISO-8859-1">
+<style>
+div {left: 0px;}
+body 
+{COLOR: #2F4632;text-align: justify;font-size: 12px;font-family: Verdana, Arial, Helvetica, sans-serif;}
+</style>
+<link rel="stylesheet" type="text/css" href="admin/html/admin.css">
+
+<title></title>
+</head>
+<body class=" yui-skin-sam fundoPonto" style="overflow:auto" >
+<center>
+<div class="bordaSuperior"  >&nbsp;</div>
+<div class="mascaraPrincipal" id="divGeral">
+<script>
+if(screen.availWidth > 700)
+{document.getElementById("divGeral").style.width = "700px";}
+</script>
 <?php
 /*
 Title: geraminiatura.php
@@ -80,10 +101,9 @@ if($tipo == "mini" || $tipo == "todos" || $tipo == "grande" || $tipo == "")
 		echo "<br><a href='geraminiatura.php?tipo=todos' >Gerar todas as miniaturas</a>";
 		echo "<br><a href='geraminiatura.php?tipo=mini' >Gerar apenas as pequenas</a>";
 		echo "<br><a href='geraminiatura.php?tipo=grande' >Gerar apenas as grandes</a>";
+		echo "</div></body></html>";
 		exit;
 	}
-
-
 	error_reporting(E_ALL);
 	$arqs = listaArquivos("temas");
 	ob_start();
@@ -264,5 +284,5 @@ function zoomTemaMiniatura($nomelayer,&$mapa)
 		$extatual->setextent($ret[0],$ret[1],$ret[2],$ret[3]);
 	}
 }
-
 ?>
+</div></body></html>

@@ -3,6 +3,7 @@
 <head>
 <title>i3Geo</title>
 </head>
+<link rel="stylesheet" type="text/css" href="../admin/html/admin.css">
 <style>
 body,td
 {
@@ -11,73 +12,77 @@ body,td
 	font-family: Verdana, Arial, Helvetica, sans-serif;
 	position:relative;
 	font-size:10pt;
-	padding:10px;
+	padding-bottom:10px;
 }
 
 </style>
-<body >
-<img src='../imagens/i3geo1.jpg' /><br>
-<h1>Exemplos de configuração da interface do i3geo</h1>
-<h2>Interface OpenLayers</h2>							
-<p>A interface OpenLayers passou a ser o padrão do i3Geo com a versão 4.4. O Modo TILE permite que o mapa seja construído em pequenas partes (TILES) 
-apresentando uma navegabilidade contínua quando se desloca o mapa (pan). No modo normal, é desenhada apenas uma imagem para cada camada do mapa. 
-Esse último modo pode apresentar uma performance melhor em sistemas baseados no Windows (MS4W). O uso de "TILES" ou não é controlado pela variável <i>i3GEO.Interface.openlayers.TILES = false|true</i>
-<p><a href="openlayers1.htm" target="_blank" >i3GEO.Interface.openlayers.TILES = false</a></p>
-<p><a href="openlayers2.htm" target="_blank" >i3GEO.Interface.openlayers.TILES = true</a></p>
-<p>A interface OpenLayers cria um objeto chamado <i>i3geoOL</i> com base na API do OpenLayers. Esse objeto pode receber os métodos dessa 
-API, permitindo modificar o mapa. Alguns parâmetros são controlados por variáveis específicas do i3Geo.</p>
-<p><a href="openlayers3.htm" target="_blank" >Modo TILE com uma área de entorno maior</a> <i>i3GEO.Interface.openlayers.BUFFER = 1;</i></p>
-<p><a href="openlayers4.htm" target="_blank" >Ativação de um layer de fundo</a></p>
-<p><a href="openlayers5.htm" target="_blank" >Modifica a extensão geográfica máxima de apresentação</a> <i>i3GEO.Interface.openlayers.MAXEXTENT = [-63.712484, -20.765721, -42.385294, -9.136698];</i></p>
-<p><b>Guias, janelas, barras de botões</b></p>
-<p><a href="guias3.htm" target="_blank" >Modificação na guia que mostra o catálogo de dados. Uso de combo ao invés de árvore</a></p>
-<p><a href="guias2.htm" target="_blank" >Guias do tipo sanfona</a></p>
-<p><a href="guias1.htm" target="_blank" >Retorna à guia padrão após adicionar um tema</a></p>
-<p><a href="botoes1.htm" target="_blank" >Barra apenas com os ícones</a></p>
-<p><a href="botoeshtm.htm" target="_blank" >Barra com botões criados via HTML</a></p>
-<p><a href="botoes5.htm" target="_blank" >Como inserir botões na barra de botões</a></p>
-<p><a href="botoes2.htm" target="_blank" >Construção das barras de botões via javascript, sem necessidade de definir elementos no HTML</a></p>
-<p><a href="botoes3.htm" target="_blank" >Construção das barras de botões via javascript, com escolha dos botões que irão ser incluídos</a></p>
-<p><a href="botoes4.htm" target="_blank" >Construção das barras de botões via javascript, com escolha dos botões que irão ser incluídos e estilo diferente</a></p>
-<p><a href="menus1.htm" target="_blank" >Modifica o menu suspenso</a></p>
-<p><a href="fotos1.htm" target="_blank" >Guias do tipo sanfona e diferentes do original. É adicionada uma guia nova que inicia aberta</a></p>
-<p><b>Legenda</b></p>
-<p><a href="legenda1.htm" target="_blank" >Legenda com grupos</a></p>
-<p><b>Customização de ferramentas existentes</b></p>
-<p><a href="mashup8.htm" target="_blank" >Mapa com a ferramenta "carousel" posicionada início do mapa</a></p>
+<body class=" yui-skin-sam fundoPonto">
+<center>
+<div class="bordaSuperior"  >&nbsp;</div>
+<div class="mascaraPrincipal" id="divGeral" style='width:700px;height:2000px'  >
 
-<h2>Interface Google Maps</h2>
-<p><a href="googlemapssanfona.phtml" target="_blank" >Guias do tipo sanfona</a></p>
+	<img src='../imagens/i3geo1.jpg' /><br>
+	<h1>Exemplos de configuração da interface do i3geo</h1>
+	<h2>Interface OpenLayers</h2>							
+	<p>A interface OpenLayers passou a ser o padrão do i3Geo com a versão 4.4. O Modo TILE permite que o mapa seja construído em pequenas partes (TILES) 
+	apresentando uma navegabilidade contínua quando se desloca o mapa (pan). No modo normal, é desenhada apenas uma imagem para cada camada do mapa. 
+	Esse último modo pode apresentar uma performance melhor em sistemas baseados no Windows (MS4W). O uso de "TILES" ou não é controlado pela variável <i>i3GEO.Interface.openlayers.TILES = false|true</i>
+	<p><a href="openlayers1.htm" target="_blank" >i3GEO.Interface.openlayers.TILES = false</a></p>
+	<p><a href="openlayers2.htm" target="_blank" >i3GEO.Interface.openlayers.TILES = true</a></p>
+	<p>A interface OpenLayers cria um objeto chamado <i>i3geoOL</i> com base na API do OpenLayers. Esse objeto pode receber os métodos dessa 
+	API, permitindo modificar o mapa. Alguns parâmetros são controlados por variáveis específicas do i3Geo.</p>
+	<p><a href="openlayers3.htm" target="_blank" >Modo TILE com uma área de entorno maior</a> <i>i3GEO.Interface.openlayers.BUFFER = 1;</i></p>
+	<p><a href="openlayers4.htm" target="_blank" >Ativação de um layer de fundo</a></p>
+	<p><a href="openlayers5.htm" target="_blank" >Modifica a extensão geográfica máxima de apresentação</a> <i>i3GEO.Interface.openlayers.MAXEXTENT = [-63.712484, -20.765721, -42.385294, -9.136698];</i></p>
+	<p><b>Guias, janelas, barras de botões</b></p>
+	<p><a href="guias3.htm" target="_blank" >Modificação na guia que mostra o catálogo de dados. Uso de combo ao invés de árvore</a></p>
+	<p><a href="guias2.htm" target="_blank" >Guias do tipo sanfona</a></p>
+	<p><a href="guias1.htm" target="_blank" >Retorna à guia padrão após adicionar um tema</a></p>
+	<p><a href="botoes1.htm" target="_blank" >Barra apenas com os ícones</a></p>
+	<p><a href="botoeshtm.htm" target="_blank" >Barra com botões criados via HTML</a></p>
+	<p><a href="botoes5.htm" target="_blank" >Como inserir botões na barra de botões</a></p>
+	<p><a href="botoes2.htm" target="_blank" >Construção das barras de botões via javascript, sem necessidade de definir elementos no HTML</a></p>
+	<p><a href="botoes3.htm" target="_blank" >Construção das barras de botões via javascript, com escolha dos botões que irão ser incluídos</a></p>
+	<p><a href="botoes4.htm" target="_blank" >Construção das barras de botões via javascript, com escolha dos botões que irão ser incluídos e estilo diferente</a></p>
+	<p><a href="menus1.htm" target="_blank" >Modifica o menu suspenso</a></p>
+	<p><a href="fotos1.htm" target="_blank" >Guias do tipo sanfona e diferentes do original. É adicionada uma guia nova que inicia aberta</a></p>
+	<p><b>Legenda</b></p>
+	<p><a href="legenda1.htm" target="_blank" >Legenda com grupos</a></p>
+	<p><b>Customização de ferramentas existentes</b></p>
+	<p><a href="mashup8.htm" target="_blank" >Mapa com a ferramenta "carousel" posicionada início do mapa</a></p>
+
+	<h2>Interface Google Maps</h2>
+	<p><a href="googlemapssanfona.phtml" target="_blank" >Guias do tipo sanfona</a></p>
 
 
-<h2>Interface normal</h2>
-<p><b>Inclusão de um mapa dentro de uma página usando DIV</b></p>							
-<p><a href="mashup1.htm" target="_blank" >Exemplo 1 </a>- Botões com destaque laranja, em dois grupos na parte superior e mapa com zoom</p>
-<p><a href="mashup2.htm" target="_blank" >Exemplo 2 </a>- Botões com destaque laranja, em um único grupo na parte superior e mapa sem zoom</p>
-<p><a href="mashup3.htm" target="_blank" >Exemplo 3 </a>- Sem as guias, com os botões na parte superior e a legenda em um outro local da página</p>
-<p><a href="mashup4.htm" target="_blank" >Exemplo 4 </a>- Sem as guias, com os botões na parte superior e a legenda em uma janela flutuante</p>
-<p><a href="mashup5.htm" target="_blank" >Exemplo 5 </a>- Sem as guias e apenas com os botões de naveção em uma janela flutuante</p>
-<p><a href="mashup6.htm" target="_blank" >Exemplo 6 </a>- Mapa posicionado no canto superior esquerdo, sem as guias e apenas com os botões de naveção em uma janela flutuante</p>
-<p><b>Inclusão de um mapa dentro de uma página em um IFRAME</b></p>
-<p><a href="iframe1.htm" target="_blank" >Exemplo 1</a> - Sem controle de tamanho</p>
-<p><a href="iframe2.htm" target="_blank" >Exemplo 2</a> - Com tamanho controlado</p>
-<p><b>Aplicativos customizados</b></p>
-<p><a href="fotos.htm" target="_blank" >Lista de fotos em uma guia</a></p>
-<p><a href="aplic1.htm" target="_blank" >Busca rápida</a></p>
-<p><a href="aplic2.htm" target="_blank" >Adiciona uma camada extra via javascript</a></p>
-<h2>Configuração de janelas, árvores de camadas e adição de temas</h2>
-<p><a href="janelas.htm" target="_blank" >Opções de criação de janelas flutuantes</a></p>
-<p><a href="arvoredetemas.htm" target="_blank" >Construtor de opções da árvore de adição de temas</a></p>
-<p><a href="arvoredecamadas.htm" target="_blank" >Construtor de opções da árvore de camadas</a></p>			
-<p><a href="combos.htm" target="_blank" >Criação de combos baseados na árvore de camadas e lista de colunas de um tema</a></p>
-<p><a href="camadas1.htm" target="_blank" >Árvore expandida</a></p>
-<p><a href="camadas2.htm" target="_blank" >Legenda expandida</a></p>
-<p><a href="camadas3.htm" target="_blank" >Árvore simplificada</a></p>
-<p><a href="camadas4.htm" target="_blank" >Opção "mais temas" na guia de camadas</a></p>
-<p><a href="legenda2.htm" target="_blank" >Árvore com grupos</a></p>
-<h2>Cálculos</h2>
-<p><a href="calculo1.htm" target="_blank" >Distâncias</a></p>
-
+	<h2>Interface normal</h2>
+	<p><b>Inclusão de um mapa dentro de uma página usando DIV</b></p>							
+	<p><a href="mashup1.htm" target="_blank" >Exemplo 1 </a>- Botões com destaque laranja, em dois grupos na parte superior e mapa com zoom</p>
+	<p><a href="mashup2.htm" target="_blank" >Exemplo 2 </a>- Botões com destaque laranja, em um único grupo na parte superior e mapa sem zoom</p>
+	<p><a href="mashup3.htm" target="_blank" >Exemplo 3 </a>- Sem as guias, com os botões na parte superior e a legenda em um outro local da página</p>
+	<p><a href="mashup4.htm" target="_blank" >Exemplo 4 </a>- Sem as guias, com os botões na parte superior e a legenda em uma janela flutuante</p>
+	<p><a href="mashup5.htm" target="_blank" >Exemplo 5 </a>- Sem as guias e apenas com os botões de naveção em uma janela flutuante</p>
+	<p><a href="mashup6.htm" target="_blank" >Exemplo 6 </a>- Mapa posicionado no canto superior esquerdo, sem as guias e apenas com os botões de naveção em uma janela flutuante</p>
+	<p><b>Inclusão de um mapa dentro de uma página em um IFRAME</b></p>
+	<p><a href="iframe1.htm" target="_blank" >Exemplo 1</a> - Sem controle de tamanho</p>
+	<p><a href="iframe2.htm" target="_blank" >Exemplo 2</a> - Com tamanho controlado</p>
+	<p><b>Aplicativos customizados</b></p>
+	<p><a href="fotos.htm" target="_blank" >Lista de fotos em uma guia</a></p>
+	<p><a href="aplic1.htm" target="_blank" >Busca rápida</a></p>
+	<p><a href="aplic2.htm" target="_blank" >Adiciona uma camada extra via javascript</a></p>
+	<h2>Configuração de janelas, árvores de camadas e adição de temas</h2>
+	<p><a href="janelas.htm" target="_blank" >Opções de criação de janelas flutuantes</a></p>
+	<p><a href="arvoredetemas.htm" target="_blank" >Construtor de opções da árvore de adição de temas</a></p>
+	<p><a href="arvoredecamadas.htm" target="_blank" >Construtor de opções da árvore de camadas</a></p>			
+	<p><a href="combos.htm" target="_blank" >Criação de combos baseados na árvore de camadas e lista de colunas de um tema</a></p>
+	<p><a href="camadas1.htm" target="_blank" >Árvore expandida</a></p>
+	<p><a href="camadas2.htm" target="_blank" >Legenda expandida</a></p>
+	<p><a href="camadas3.htm" target="_blank" >Árvore simplificada</a></p>
+	<p><a href="camadas4.htm" target="_blank" >Opção "mais temas" na guia de camadas</a></p>
+	<p><a href="legenda2.htm" target="_blank" >Árvore com grupos</a></p>
+	<h2>Cálculos</h2>
+	<p><a href="calculo1.htm" target="_blank" >Distâncias</a></p>
+</div>
 
 </body>
 <script>

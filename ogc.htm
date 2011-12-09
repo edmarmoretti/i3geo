@@ -10,39 +10,37 @@
 <style>
 P 
 {padding-top:12px;COLOR: #2F4632;text-align: left;font-size: 12px;font-family: Verdana, Arial, Helvetica, sans-serif;}
-#banner
-{position:absolute;top:0px;left:0px;}
 #arvoreTemas
 {width:280px;}
 #corpo
-{text-align:left;font-size:12px;width:425px;position:absolute;top:30px;left:295px;background:rgb(250,250,250);}
+{text-align:left;font-size:12px;width:450px;position:absolute;top:0px;left:295px;background:rgb(250,250,250);}
 #bandeiras
 {width:80px;text-align:left;}
 </style>
+<link rel="stylesheet" type="text/css" href="admin/html/admin.css">
 </head>
-<body class="yui-skin-sam" style="background-color:white">
-<div id=banner ><img src="imagens/barrasuperior_geradordelinks_2006.jpg" width="765" ></div>
-<div style=position:absolute;left:10px;top:30px; >
-<div id="bandeiras" ></div>
-<br>
-<div id=arvoreTemas >
-<p>Carregando árvore...
+<body class=" yui-skin-sam fundoPonto">
+<center>
+<div class="bordaSuperior"  >&nbsp;</div>
+<div class="mascaraPrincipal" id="divGeral" style='width:700px;height:2000px'  >
+	<div id="bandeiras" ></div>
+	<br>
+	<div id=arvoreTemas >
+		<p>Carregando árvore...
+	</div>
+	<!-- aqui vai o corpo da aplicação -->
+	<div id=corpo style="background-color:rgb(250,250,250)">
+		<H1>Web services OGC</H1>
+		<p>Navegue pela &aacute;rvore ao lado para localizar o tema desejado.
+		<p>Clicando-se em um tema, é mostrado o endereço do serviço OGC.
+		<p>Os serviços são Web Wervices que possibilitam o acesso aos dados disponíveis nessa instalação do i3Geo.
+		<p>A lista de temas baseia-se nas configurações específicas de cada servidor onde o i3Geo está instalado. Para obter uma lista de outros Web Services, acesse o <a href="wscliente.htm" >cliente de webservices.</a>
+		<p>Você pode usar um Web Service para acessar os dados configurados nesse servidor por meio de outros softwares de geoprocessamento, como o <a href="http://www.gvsig.gva.es/index.php?id=gvsig&L=0" >gvSIG.</a>
+		<p>Para maiores informações sobre o uso de web services, veja <a href='http://www.opengeospatial.org/standards' target=blank >http://www.opengeospatial.org/standards</a>
+		<p>Bookmark: <span id=bm1 ></span>
+		<p><div style=text-align:left id=curtir ></div>
+	</div>
 </div>
-</div>
-<!-- aqui vai o corpo da aplicação -->
-<div id=corpo style="background-color:rgb(250,250,250)">
-<H1>Web services OGC</H1>
-<p>Navegue pela &aacute;rvore ao lado para localizar o tema desejado.
-<p>Clicando-se em um tema, é mostrado o endereço do serviço OGC.
-<p>Os serviços são Web Wervices que possibilitam o acesso aos dados disponíveis nessa instalação do i3Geo.
-<p>A lista de temas baseia-se nas configurações específicas de cada servidor onde o i3Geo está instalado. Para obter uma lista de outros Web Services, acesse o <a href="wscliente.htm" >cliente de webservices.</a>
-<p>Você pode usar um Web Service para acessar os dados configurados nesse servidor por meio de outros softwares de geoprocessamento, como o <a href="http://www.gvsig.gva.es/index.php?id=gvsig&L=0" >gvSIG.</a>
-<p>Para maiores informações sobre o uso de web services, veja <a href='http://www.opengeospatial.org/standards' target=blank >http://www.opengeospatial.org/standards</a>
-<p>Bookmark: <span id=bm1 ></span>
-<p><div style=text-align:left id=curtir ></div>
-<div style="background-color:white"><p><img src="imagens/i3geo1bw.jpg" /></div>
-</div>
-
 <script>
 /*
 Title: ogc.htm

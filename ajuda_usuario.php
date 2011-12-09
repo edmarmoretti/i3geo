@@ -39,36 +39,46 @@ idajuda {string} - (opcional) id da funcionalidade. Lista apenas uma funcionalid
 include("classesphp/pega_variaveis.php");
 include("ms_configura.php");
 ?>
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
 <html>
 <head>
 <META HTTP-EQUIV="Content-Type" CONTENT="text/html; charset=ISO-8859-1">
 <link rel="stylesheet" type="text/css" href="css/i3geo_ferramentas45.css">
+<style>
+div {left: 0px;}
+</style>
+<link rel="stylesheet" type="text/css" href="admin/html/admin.css">
+
 <title></title>
 </head>
-<body style=overflow:auto; >
-<div style=text-align:center;width:600px >
-<p><img src="imagens/i3geo1.jpg" />
-<p style='font-size:16px'>Documentação do usuário. 
-<p><?php echo $mensagemInicia;?></p>
-<?php
-if (isset($idcategoria))
-{
-	echo "<p>Para ver toda a documentação, ";
-	echo "clique <a href='ajuda_usuario.php' >aqui</a>";
-}
-else
-{
-	echo "<p style='padding-left:10px;text-align:left;color:blue;cursor:pointer' onclick='expandirtudo()'>expandir tudo</p>";
-}
-?>
-</div>
-<div id=resultado style='width:600px;'>
+<body class=" yui-skin-sam fundoPonto" style="overflow:auto" >
+<center>
+<div class="bordaSuperior"  >&nbsp;</div>
+<div class="mascaraPrincipal" id="divGeral">
+	<img src="imagens/i3geo1.jpg" />
+	<p style='font-size:16px'>Documentação do usuário.</p>
+	<p><?php echo $mensagemInicia;?></p>
+	<?php
+	if (isset($idcategoria))
+	{
+		echo "<p>Para ver toda a documentação, ";
+		echo "clique <a href='ajuda_usuario.php' >aqui</a></p>";
+	}
+	else
+	{
+		echo "<p style='padding-left:10px;text-align:left;color:blue;cursor:pointer' onclick='expandirtudo()'>expandir tudo</p>";
+	}
+	?>
+
+	<div id=resultado style='margin:10px;'>
+	</div>
 </div>
 <script language="JavaScript" type="text/javascript" src="classesjs/dicionario_ajuda.js"></script>
 <script>
 var idcategoria = "<?php echo $idcategoria;?>"
 var idajuda = "<?php echo $idajuda;?>"
-
+if(screen.availWidth > 700)
+{document.getElementById("divGeral").style.width = "700px";}
 function pegaAjuda(tipo,categoria){
 	eval("var obj = g_traducao_ajuda."+tipo)
 	for(var k in obj){

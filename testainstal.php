@@ -1,6 +1,8 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
 <html>
 <head>
 <META HTTP-EQUIV="Content-Type" CONTENT="text/html; charset=ISO-8859-1">
+<link rel="stylesheet" type="text/css" href="admin/html/admin.css">
 </head>
 <script>
 try
@@ -15,7 +17,12 @@ catch(ee)
 		{document.write("<H1>Seu navegador não aceita AJAX. O mapa nao vai funcionar!!!</H1><br>");}
 	}
 }
+
 </script>
+<body class="fundoPonto">
+<center>
+<div class="bordaSuperior"  >&nbsp;</div>
+<div class="mascaraPrincipal" id="divGeral" style=text-align:left >
 <?php
 /*
 Title: Testa a instalação do i3Geo
@@ -50,8 +57,8 @@ i3geo/testainstal.php
 
 */
 error_reporting(E_ALL);
-echo "<html><body>";
-echo "<pre>\n";
+
+//echo "<pre>\n";
 echo "<b>TESTE DE INSTALACAO DO i3Geo</b><br>\n";
 echo getcwd();
 //echo "<br>SERVER_SOFTWARE: ".$SERVER_SOFTWARE."<br>";
@@ -62,7 +69,7 @@ include("classesphp/funcoes_gerais.php");
 $versao = versao();
 $versao = $versao["principal"];
 $exts = get_loaded_extensions();
-echo "Obs: MapServer (a vers&atilde;o deve ser &gt;= 5.2 para que a sobreposi&ccedil;&atilde;o de temas funcione na interface Google Maps): <br>";
+echo "MapServer (a vers&atilde;o deve ser &gt;= 5.2 para que a sobreposi&ccedil;&atilde;o de temas funcione na interface Google Maps): <br>";
 echo ms_GetVersion()."<br><br>";
 if(!function_exists("ms_GetVersion"))
 {echo "<span style=color:red >O MAPSERVER PARECE NAO ESTAR INSTALADO!!!<br><br>";}
@@ -86,7 +93,7 @@ if (!extension_loaded( "mbstring")){echo "<span style=color:red >Obs: n&atilde;o
 
 var_dump( $exts );
 
-echo "Existe o ms_configura.php? <br>";
+echo "</pre>Existe o ms_configura.php? <br>";
 if(file_exists("ms_configura.php")) echo "Sim\n"; else {echo "Nao";saindo(" ms_configura não encontrado");}
 echo "Incluindo...\n<br>";
 include ("ms_configura.php");
@@ -94,7 +101,7 @@ echo "<b>$mensagemInicia </b> \n";
 echo "dir_tmp = $dir_tmp \n";
 echo "locmapserv = $locmapserv \n";
 echo "\n<br>";
-echo "editores: \n";
+echo "editores:<pre> \n";
 var_dump($editores);
 
 $ip = "UNKNOWN";
@@ -157,7 +164,7 @@ foreach(array_keys($tabelas) as $tabela)
 	{echo "<span style=color:red >..n&atilde;o encontrada. Consulte o i3geo/guia_de_migracao.txt</span>\n";}
 }
 echo "\n";
-echo "localizando o cgi...\n";
+echo "</pre>localizando o cgi...\n";
 $proto = "http" . ((isset($_SERVER['HTTPS']) && $_SERVER['HTTPS'] == "on") ? "s" : "") . "://";
 $server = isset($_SERVER['HTTP_HOST']) ? $_SERVER['HTTP_HOST'] : $_SERVER['SERVER_NAME'];
 $enderecocgi = $proto.$server.$locmapserv;
@@ -253,3 +260,10 @@ echo "<p><img src=$nome /></p></body></html>";
 
 function saindo($men){echo "<span style=color:red ><br><b>Erro. Saindo...".$men;}
 ?>
+</div>
+<script>
+if(screen.availWidth > 700)
+{document.getElementById("divGeral").style.width = "700px";}
+</script>
+</body>
+</html>
