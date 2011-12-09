@@ -602,8 +602,8 @@ alert("funcao depreciada");
 				var i = $i("tip");
 				i.innerHTML = "<table style='text-align:left'><tr><td style='text-align:left'>"+res+"</td></tr></table>";
 				ist = i.style;
-				ist.top = objposicaocursor.telay - 10;
-				ist.left = objposicaocursor.telax - 20;
+				ist.top = objposicaocursor.telay - 10 + "px";
+				ist.left = objposicaocursor.telax - 20 + "px";
 				ist.display="block";
 			}
 		}

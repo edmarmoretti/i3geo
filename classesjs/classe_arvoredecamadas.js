@@ -477,7 +477,7 @@ i3GEO.arvoreDeCamadas = {
 				novoel.style.position = "absolute";
 				novoel.style.top = "0px";
 				novoel.style.zIndex = "50000";
-				novoel.style.left = (i3GEO.parametros.w / 2) - 75;
+				novoel.style.left = (i3GEO.parametros.w / 2) - 75 + "px";
 				//novoel.style.display = "none";
 				$i(i3GEO.Interface.IDMAPA).appendChild(novoel);
 				i3GEO.arvoreDeCamadas.progressBar = new YAHOO.widget.ProgressBar({

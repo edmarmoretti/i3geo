@@ -84,9 +84,9 @@ i3GEO.mapa = {
 		{novoel.onclick = function(){i3GEO.Interface.atual2ol.inicia();};}
 		novoel.style.cursor = "pointer";
 		novoel.style.position = "absolute";
-		novoel.style.top = i3GEO.parametros.h - 35;
+		novoel.style.top = i3GEO.parametros.h - 35 + "px";
 		novoel.style.zIndex = "50000";
-		novoel.style.left = i3GEO.parametros.w - 35;
+		novoel.style.left = i3GEO.parametros.w - 35 + "px";
 		$i(i3GEO.Interface.IDMAPA).appendChild(novoel);
 	},
 	/*
@@ -99,8 +99,8 @@ i3GEO.mapa = {
 		if(!novoel){
 			return;
 		}
-		novoel.style.top = i3GEO.parametros.h - 35;
-		novoel.style.left = i3GEO.parametros.w - 35;
+		novoel.style.top = i3GEO.parametros.h - 35 + "px";
+		novoel.style.left = i3GEO.parametros.w - 35 + "px";
 	},	
 	/*
 	Function: ativaAutoResize

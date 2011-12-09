@@ -203,12 +203,12 @@ i3GEO.desenho = {
 			if(i3GEO.Interface.TABLET === true)
 			{ne.zIndex=5000;}
 			ne.position="absolute";
-			ne.width=i3GEO.parametros.w;
-			ne.height=i3GEO.parametros.h;
+			ne.width=i3GEO.parametros.w + "px";
+			ne.height=i3GEO.parametros.h + "px";
 			ne.border="0px solid black";
 			ne.display="none";
-			ne.top=pos[1];
-			ne.left=pos[0];
+			ne.top=pos[1] + "px";
+			ne.left=pos[0] + "px";
 			document.body.appendChild(novoel);
 		}
 		return ($i("divGeometriasTemp"));
@@ -235,21 +235,22 @@ i3GEO.desenho = {
 			//
 			//faz o reposicionamento de linhas quando o mouse é movido e a linha está ativa
 			//
-			if((tipo==="resizeLinha") || (tipo==="resizePoligono") && navn){
+			if((tipo==="resizeLinha") || (tipo==="resizePoligono")){
 				try
 				{i3GEO.desenho.richdraw.renderer.resize(objeto,0,0,objposicaocursor.imgx,objposicaocursor.imgy);}
 				catch(erro){
 					if(typeof(console) !== 'undefined'){console.error(erro);}
 				}
 			}
+			/*
 			if((tipo==="resizeLinha") && navm){
 				r = $i(i3GEO.desenho.richdraw.container.id);
 				elementos = r.childNodes;
 				if(desenhoUltimaLinha !== "")
 				{r.removeChild(desenhoUltimaLinha);}
 				dy = objposicaocursor.imgy;
-				dx = objposicaocursor.imgx - (i3GEO.parametros.w/2);
-				i3GEO.desenho.richdraw.renderer.create(i3GEO.desenho.richdraw.mode, i3GEO.desenho.richdraw.fillColor, i3GEO.desenho.richdraw.lineColor, i3GEO.desenho.richdraw.lineWidth, (pontosdistobj.ximg[n-1])-(i3GEO.parametros.w/2),pontosdistobj.yimg[n-1],dx,dy);				
+				dx = objposicaocursor.imgx;// - (i3GEO.parametros.w/2);
+				i3GEO.desenho.richdraw.renderer.create(i3GEO.desenho.richdraw.mode, i3GEO.desenho.richdraw.fillColor, i3GEO.desenho.richdraw.lineColor, i3GEO.desenho.richdraw.lineWidth, (pontosdistobj.ximg[n-1]),pontosdistobj.yimg[n-1],dx,dy);				
 				desenhoUltimaLinha = r.childNodes[$i(i3GEO.desenho.richdraw.container.id).childNodes.length - 1];
 			}
 			if((tipo==="resizePoligono") && navm){
@@ -259,14 +260,15 @@ i3GEO.desenho = {
 					if(desenhoUltimaLinhaPol !== "")
 					{r.removeChild(desenhoUltimaLinhaPol);}
 					dy = objposicaocursor.imgy;
-					dx = objposicaocursor.imgx - (i3GEO.parametros.w/2);
-					i3GEO.desenho.richdraw.renderer.create(i3GEO.desenho.richdraw.mode, i3GEO.desenho.richdraw.fillColor, i3GEO.desenho.richdraw.lineColor, i3GEO.desenho.richdraw.lineWidth, (pontosdistobj.ximg[n-1])-(i3GEO.parametros.w/2),pontosdistobj.yimg[n-1],dx,dy);
+					dx = objposicaocursor.imgx;// - (i3GEO.parametros.w/2);
+					i3GEO.desenho.richdraw.renderer.create(i3GEO.desenho.richdraw.mode, i3GEO.desenho.richdraw.fillColor, i3GEO.desenho.richdraw.lineColor, i3GEO.desenho.richdraw.lineWidth, (pontosdistobj.ximg[n-1]),pontosdistobj.yimg[n-1],dx,dy);
 					desenhoUltimaLinhaPol = r.childNodes[$i(i3GEO.desenho.richdraw.container.id).childNodes.length - 1];
 				}
 				catch(men){
 					if(typeof(console) !== 'undefined'){console.error(men);}
 				}
 			}
+			*/
 			if(tipo==="insereCirculo"){
 				dx = Math.pow(((pontosdistobj.xtela[n])*1) - ((pontosdistobj.xtela[n-1])*1),2);
 				dy = Math.pow(((pontosdistobj.ytela[n])*1) - ((pontosdistobj.ytela[n-1])*1),2);
@@ -297,21 +299,11 @@ i3GEO.desenho = {
 	w {numerico} - raio do círculo em pixels
 	*/
 	insereCirculo: function(x,y,w){
-		if (navn){
-			try{
-				i3GEO.desenho.richdraw.renderer.create('circ', '', i3GEO.desenho.richdraw.circColor, i3GEO.desenho.richdraw.lineWidth, x,y,w,w);
-			}
-			catch(men){
-				if(typeof(console) !== 'undefined'){console.error(men);}
-			}
+		try{
+			i3GEO.desenho.richdraw.renderer.create('circ', '', i3GEO.desenho.richdraw.circColor, i3GEO.desenho.richdraw.lineWidth, x,y,w,w);
 		}
-		else{
-			try{
-				i3GEO.desenho.richdraw.renderer.create('circ', '', i3GEO.desenho.richdraw.circColor, i3GEO.desenho.richdraw.lineWidth, x-w,y-w,w*2,w*2);
-			}
-			catch(men){
-				if(typeof(console) !== 'undefined'){console.error(men);}
-			}
+		catch(men){
+			if(typeof(console) !== 'undefined'){console.error(men);}
 		}
 	},
 	/*

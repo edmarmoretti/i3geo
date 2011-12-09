@@ -385,8 +385,8 @@ i3GEObuscaRapida = {
 		var w = xyMax[0]-xyMin[0];
 		var h = xyMin[1]-xyMax[1];
 		box.style.display = "block";
-		box.style.width = w;
-		box.style.height = h;
+		box.style.width = w + "px";
+		box.style.height = h + "px";
 		box.style.top = xyMax[1]+"px";
 		box.style.left = xyMin[0]+"px";
 	},

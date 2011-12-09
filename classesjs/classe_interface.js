@@ -512,17 +512,17 @@ i3GEO.Interface = {
 				document.getElementById("corpoMapa").appendChild(ndiv);
 			}
 			if(g_tipoacao === "pan" && i3GEO.barraDeBotoes.BOTAOCLICADO === "pan"){
-				$i("imgtemp").style.left = parseInt($i("img").style.left,10);
-				$i("imgtemp").style.top = parseInt($i("img").style.top,10);
-				$i("imgtemp").style.width = i3GEO.parametros.w;
-				$i("imgtemp").style.height = i3GEO.parametros.h;
+				$i("imgtemp").style.left = parseInt($i("img").style.left,10) + "px";
+				$i("imgtemp").style.top = parseInt($i("img").style.top,10) + "px";
+				$i("imgtemp").style.width = i3GEO.parametros.w + "px";
+				$i("imgtemp").style.height = i3GEO.parametros.h + "px";
 			}
 			$i("imgtemp").style.backgroundImage = 'url("'+$i("img").src+'")';
 			$i("imgtemp").style.display="block";
 			i = $i("img");
 			i.style.display="none";
-			i.style.left = 0;
-			i.style.top = 0;
+			i.style.left = 0 + "px";
+			i.style.top = 0 + "px";
 			i.src=i3GEO.parametros.mapimagem;
 		},
 		cria:function(){
@@ -669,8 +669,8 @@ i3GEO.Interface = {
 					i.innerHTML = ins;
 				}
 				f = $i("flamingo");
-				f.style.width = w;
-				f.style.height = h;
+				f.style.width = w + "px";
+				f.style.height = h + "px";
 				i3GEO.Interface.IDMAPA = "flamingo";
 			}
 		},
@@ -824,8 +824,8 @@ i3GEO.Interface = {
 					i.innerHTML = ins;
 				}
 				f = $i("openlayers");
-				f.style.width = w;
-				f.style.height = h;
+				f.style.width = w+"px";
+				f.style.height = h+"px";
 			}
 			i3GEO.Interface.IDMAPA = "openlayers";
 			if(i3GEO.Interface.TABLET === true){
@@ -1562,8 +1562,8 @@ i3GEO.Interface = {
 				}
 				f = $i("googlemapsdiv");
 				if(w){
-					f.style.width = w;
-					f.style.height = h;
+					f.style.width = w + "px";
+					f.style.height = h + "px";
 				}
 			}
 			i3GeoMap = "";
@@ -2274,8 +2274,8 @@ i3GEO.Interface = {
 			i = $i(i3GEO.Interface.IDCORPO);
 			if(i){
 				i3GeoMap3d = document.createElement("div");
-				i3GeoMap3d.style.width = w;
-				i3GeoMap3d.style.height = h;// + 45;
+				i3GeoMap3d.style.width = w + "px";
+				i3GeoMap3d.style.height = h + "px";// + 45;
 				i.style.height = h ;//+ 45;
 				i3GeoMap3d.id = "i3GeoMap3d";
 				i3GeoMap3d.style.zIndex = 0;

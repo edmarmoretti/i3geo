@@ -609,8 +609,8 @@ i3GEO.calculo = {
 		d = "block";
 		if($i(idrect)){
 			box = $i(idrect);
-			box.style.width = w;
-			box.style.height = h;
+			box.style.width = w + "px";
+			box.style.height = h + "px";
 			box.style.top = t + "px";
 			box.style.left = l + "px";
 			box.style.display=d;

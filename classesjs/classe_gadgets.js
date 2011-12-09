@@ -706,8 +706,8 @@ i3GEO.gadgets = {
 					iclone.style.border="1px solid blue";
 					i.parentNode.appendChild(iclone);
 					iclone.src = i.src;
-					iclone.style.width = i3GEO.parametros.w;
-					iclone.style.heigth = i3GEO.parametros.h;
+					iclone.style.width = i3GEO.parametros.w + "px";
+					iclone.style.height = i3GEO.parametros.h + "px";
 					iclone.style.top = i.style.top;
 					iclone.style.left = i.style.left;
 					c = $i("imgClone");

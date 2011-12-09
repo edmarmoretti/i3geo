@@ -143,7 +143,7 @@ Balloon.prototype.showTooltip = function(evt,caption,sticky,width) {
   balloonIsSticky = sticky;
 
   // force balloon width and/or height if requested
-  this.width  = width;
+  this.width  = width  + "px";
 
   this.hideTooltip();
 

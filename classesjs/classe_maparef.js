@@ -341,8 +341,8 @@ i3GEO.maparef = {
 		if(w > 120)
 		{box.style.display = "none";return;}
 		box.style.display = "block";
-		box.style.top = parseInt(box.style.top,10)+4;
-		box.style.left = parseInt(box.style.left,10)+4;
+		box.style.top = parseInt(box.style.top,10)+4 + "px";
+		box.style.left = parseInt(box.style.left,10)+4 + "px";
 		if(w < 3){
 			box.style.width = "3px";
 			box.style.height = "3px";

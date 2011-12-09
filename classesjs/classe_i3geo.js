@@ -225,6 +225,8 @@ i3GEO = {
 	*/
 	cria:function(){
 		if(typeof(console) !== 'undefined'){console.info("i3GEO.cria()");}
+		if(i3GEO.configura.ajustaDocType === true)
+		{i3GEO.util.ajustaDocType();}
 		var temp,i,tamanho;
 		if (window.location.href.split("?")[1]){
 			i3GEO.configura.sid = window.location.href.split("?")[1];
@@ -569,8 +571,8 @@ i3GEO = {
 		Dh = YAHOO.util.Dom.getDocumentHeight();
 		novow = Dw - i3GEO.scrollerWidth;
 		novoh = Dh;
-		document.body.style.width = novow;
-		document.body.style.height = novoh;
+		document.body.style.width = novow + "px";
+		document.body.style.height = novoh + "px";
 
 		w = novow - menos - diminuix;
 		h = novoh - diminuiy;
@@ -624,7 +626,7 @@ i3GEO = {
 		temp = (antigoh - (novoh - diminuiy));
 		temp1 = (antigow - (novow - diminuix));
 	
-		document.body.style.height = novoh;
+		document.body.style.height = novoh + "px";
 		w = novow - menos - diminuix;
 		h = novoh - diminuiy;
 

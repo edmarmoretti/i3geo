@@ -11,6 +11,13 @@ Para a versão 4.6
 					WIDTH 3
 					COLOR 255 0 0
 				END
+	Layout
+	
+		Para utilizar o padrão CSS3 foi incluído nas páginas o doctype:
+		<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+
+		Se vc usa customizações, verifique se o seu HTML é compatível com CSS3.
+		Um dos principais problemas é a necessidade de uso de "px" sempre que forem utilizados os estilos top, left, width e height
 -------------------------------------------------------------------------------------------------
 Para a versão 4.5 + SP11
 

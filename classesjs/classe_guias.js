@@ -410,9 +410,9 @@ i3GEO.guias = {
 						temp.style.overflow="auto";
 						if(i3GEO.guias.TIPO === "guia"){
 							if(i3GEO.guias.ALTURACORPOGUIAS === 0)
-							{temp.style.height = i3GEO.parametros.h;}
+							{temp.style.height = i3GEO.parametros.h + "px";}
 							else
-							{temp.style.height = i3GEO.guias.ALTURACORPOGUIAS;}
+							{temp.style.height = i3GEO.guias.ALTURACORPOGUIAS + "px";}
 						}
 						else
 						{temp.style.height = onde.style.height;}
@@ -448,17 +448,17 @@ i3GEO.guias = {
 			if(guia){
 				guia.style.overflow="auto";
 				if(this.TIPO === "guia")
-				{guia.style.height = altura;}
+				{guia.style.height = altura + "px";}
 				if(this.TIPO === "sanfona"){
-					guia.style.height = altura;
+					guia.style.height = altura + "px";
 					temp = $i("guiasYUI");
 					if(temp){
-						temp.style.height = altura;
+						temp.style.height = altura + "px";
 						temps = temp.getElementsByTagName("dd");
 						n = temps.length;
 						for(i=0;i<n;i++){
 							if(temps[i].style.visibility == "visible")
-							{temps[i].style.height = altura;}
+							{temps[i].style.height = altura + "px";}
 						}
 					}
 					YAHOO.lutsr.accordion.properties.altura = altura;
@@ -615,8 +615,8 @@ i3GEO.guias = {
 			l = i3GEO.parametros.w + w;
 			i3GEO.parametros.h = a;
 			i3GEO.parametros.w = l;
-			if (navm)
-			{pos = "";}
+			//if (navm)
+			//{pos = "";}
 			i = $i(i3GEO.Interface.IDCORPO);
 			if(i){
 				i.style.width= l+pos;
@@ -683,7 +683,7 @@ i3GEO.guias = {
 						temp.borderTop="0px solid black";
 						temp.width="270px";
 						temp.left="-1px";
-						temp.height = i3GEO.parametros.h - 90;
+						temp.height = i3GEO.parametros.h - 90 + "px";
 					}
 				}
 				i3GEO.atualiza("");
@@ -785,11 +785,11 @@ i3GEO.guias = {
 			//temp.height = config.alturaGuiaMovel + "px";
 			temp.left = (posMapa[0] + i3GEO.parametros.w - config.larguraPuxador) + "px";
 			//aberta temp.left = (posMapa[0] + i3GEO.parametros.w - config.larguraPuxador - config.larguraGuiaMovel) + "px";
-			i3GEO.guias.guiaMovel.left = parseInt(temp.left,10);
+			i3GEO.guias.guiaMovel.left = parseInt(temp.left,10) + "px";
 			if(config.topGuiaMovel === 0)
 			{temp.top = (centroY - ((config.alturaGuiaMovel - 42) / 2)) + "px";}
 			else
-			{temp.top = config.topGuiaMovel;}
+			{temp.top = config.topGuiaMovel + "px";}
 			temp.width = config.larguraPuxador + "px";
 			//aberta temp.width = config.larguraPuxador + config.larguraGuiaMovel + "px";
 
@@ -912,7 +912,7 @@ i3GEO.guias = {
 				$i("i3GEOguiaMovelIcones").style.display = "none";
 				$i("i3GEOguiaMovelConteudo").style.display = "none";
 				attributes = {
-					left: { to: i3GEO.guias.guiaMovel.left },
+					left: { to: parseInt(i3GEO.guias.guiaMovel.left,10) },
 					id: "i3GEOguiaMovel"
 				};
 				anim = new YAHOO.util.Anim(guia, attributes, 1, YAHOO.util.Easing.easeNone);

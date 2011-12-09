@@ -88,10 +88,10 @@ VMLRenderer.prototype.create = function(shape, fillColor, lineColor, lineWidth, 
 
   if (shape != 'line') {  
     vml.style.position = 'absolute';
-    vml.style.left = left;
-    vml.style.top = top;
-    vml.style.width = width;
-    vml.style.height = height;
+    vml.style.left = left + "px";
+    vml.style.top = top + "px";
+    vml.style.width = width + "px";
+    vml.style.height = height + "px";
 
     if (fillColor != '') {
       vml.setAttribute('filled', 'true');
@@ -128,12 +128,12 @@ VMLRenderer.prototype.remove = function(shape) {
 
 VMLRenderer.prototype.move = function(shape, left, top) {
   if (shape.tagName == 'line') {
-    shape.style.marginLeft = left;
-    shape.style.marginTop = top;
+    shape.style.marginLeft = left + "px";
+    shape.style.marginTop = top + "px";
   }
   else {
-    shape.style.left = left;
-    shape.style.top = top;
+    shape.style.left = left + "px";
+    shape.style.top = top + "px";
   }
 };
 
@@ -239,10 +239,10 @@ VMLRenderer.prototype.showTracker = function(shape) {
   tracker = this.container.ownerDocument.createElement('v:rect');
   tracker.id = 'tracker';
   tracker.style.position = 'absolute';
-  tracker.style.left = box.x - 10;
-  tracker.style.top = box.y - 10;
-  tracker.style.width = box.width + 20;
-  tracker.style.height = box.height + 20;
+  tracker.style.left = box.x - 10 + "px";
+  tracker.style.top = box.y - 10 + "px";
+  tracker.style.width = box.width + 20 + "px";
+  tracker.style.height = box.height + 20 + "px";
   tracker.setAttribute('filled', 'false');
   tracker.setAttribute('stroked', 'true');
   tracker.setAttribute('strokecolor', 'blue');

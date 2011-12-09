@@ -217,6 +217,19 @@ i3GEO.configura = {
 	*/
 	tipoimagem: "nenhum",
 	/*
+	Propriedade: ajustaDocType
+
+	Ajusta ou não a declaração DOCTYPE do documento HTML. O ajuste é necessário para que algumas opções funcionem adequadamente.
+	Caso vc deseje usar um DOCTYPE específico, utilize false. O ajuste do DOCTYPE não funciona no navegador IE.
+
+	Tipo:
+	{boolean}
+
+	Default:
+	{true}
+	*/
+	ajustaDocType: true,
+	/*
 	Propriedade: tipotip
 
 	Tipo de tip que é mostrado na função de identificação quando o usuário estaciona o mouse sobre o mapa
@@ -802,14 +815,14 @@ i3GEO.configura = {
 							l = 0;
 							if (parseInt($i("i3geo").style.left,10))
 							{l = parseInt($i("i3geo").style.left,10);}
-							$i(i3GEO.Interface.IDMAPA).style.left = nx - l;
+							$i(i3GEO.Interface.IDMAPA).style.left = nx - l + "px";
 							t = 0;
 							if (parseInt($i("i3geo").style.top,10))
 							{t = parseInt($i("i3geo").style.top,10);}
-							$i(i3GEO.Interface.IDMAPA).style.top = ny - t;
+							$i(i3GEO.Interface.IDMAPA).style.top = ny - t + "px";
 							if(boxrefObj){
-								boxrefObj.style.left = boxrefObjLeft - (nx / proporcaoBox);
-								boxrefObj.style.top = boxrefObjTop - (ny / proporcaoBox);
+								boxrefObj.style.left = boxrefObjLeft - (nx / proporcaoBox) + "px";
+								boxrefObj.style.top = boxrefObjTop - (ny / proporcaoBox) + "px";
 							}
 						}
 						else{

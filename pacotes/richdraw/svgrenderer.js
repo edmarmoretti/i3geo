@@ -99,7 +99,7 @@ SVGRenderer.prototype.create = function(shape, fillColor, lineColor, lineWidth, 
     svg.setAttributeNS(null, 'height', height + 'px');
   }
   else if (shape == 'line') {
-    svg = this.container.ownerDocument.createElementNS(svgNamespace, 'line');
+	svg = this.container.ownerDocument.createElementNS(svgNamespace, 'line');
     svg.setAttributeNS(null, 'x1', left + 'px');
     svg.setAttributeNS(null, 'y1', top + 'px');
     svg.setAttributeNS(null, 'x2', width + 'px');

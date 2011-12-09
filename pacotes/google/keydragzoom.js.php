@@ -66,19 +66,19 @@
       computedStyle = h.ownerDocument.defaultView.getComputedStyle(h, "");
       if (computedStyle) {
         // The computed styles are always in pixel units (good!)
-        bw.top = parseInt(computedStyle.borderTopWidth, 10) || 0;
-        bw.bottom = parseInt(computedStyle.borderBottomWidth, 10) || 0;
-        bw.left = parseInt(computedStyle.borderLeftWidth, 10) || 0;
-        bw.right = parseInt(computedStyle.borderRightWidth, 10) || 0;
+        bw.top = parseInt(computedStyle.borderTopWidth, 10) + "px" || 0 + "px";
+        bw.bottom = parseInt(computedStyle.borderBottomWidth, 10) + "px" || 0 + "px";
+        bw.left = parseInt(computedStyle.borderLeftWidth, 10) + "px" || 0 + "px";
+        bw.right = parseInt(computedStyle.borderRightWidth, 10) + "px" || 0 + "px";
         return bw;
       }
     } else if (document.documentElement.currentStyle) { // MSIE
       if (h.currentStyle) {
         // The current styles may not be in pixel units so try to convert (bad!)
-        bw.top = parseInt(toPixels(h.currentStyle.borderTopWidth), 10) || 0;
-        bw.bottom = parseInt(toPixels(h.currentStyle.borderBottomWidth), 10) || 0;
-        bw.left = parseInt(toPixels(h.currentStyle.borderLeftWidth), 10) || 0;
-        bw.right = parseInt(toPixels(h.currentStyle.borderRightWidth), 10) || 0;
+        bw.top = parseInt(toPixels(h.currentStyle.borderTopWidth), 10) + "px" || 0 + "px";
+        bw.bottom = parseInt(toPixels(h.currentStyle.borderBottomWidth), 10) + "px" || 0 + "px";
+        bw.left = parseInt(toPixels(h.currentStyle.borderLeftWidth), 10) + "px" || 0 + "px";
+        bw.right = parseInt(toPixels(h.currentStyle.borderRightWidth), 10) + "px" || 0 + "px";
         return bw;
       }
     }

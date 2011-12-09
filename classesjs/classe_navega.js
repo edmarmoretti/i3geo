@@ -514,8 +514,8 @@ i3GEO.navega = {
 		setas += "<td><img class='rosasudeste' title='sudeste' src='"+$im("branco.gif")+"' onclick=\"i3GEO.navega.panFixo('"+i3GEO.configura.locaplic+"','"+i3GEO.configura.sid+"','sudeste','"+i3GEO.parametros.w+"','"+i3GEO.parametros.h+"','"+i3GEO.parametros.mapscale+"')\" /></td></tr></table>";
 		i = $i("i3geo_rosa");
 		i.innerHTML = setas;
-		i.style.top = objposicaocursor.telay - 27;
-		i.style.left = objposicaocursor.telax - 27;
+		i.style.top = objposicaocursor.telay - 27 + "px";
+		i.style.left = objposicaocursor.telax - 27 + "px";
 		i.style.display="block";
 		if($i("img")){
 			YAHOO.util.Event.addListener(
@@ -648,12 +648,12 @@ i3GEO.navega = {
 			if(!$i("i3geoboxZoom"))
 			{i3GEO.navega.zoomBox.criaBox();}
 			var i = $i("i3geoboxZoom").style;
-			i.width=0;
-			i.height=0;
+			i.width=0 + "px";
+			i.height=0 + "px";
 			i.visibility="visible";
 			i.display="block";
-			i.left = objposicaocursor.telax;
-			i.top = objposicaocursor.telay;
+			i.left = objposicaocursor.telax + "px";
+			i.top = objposicaocursor.telay + "px";
 			boxxini = objposicaocursor.telax;
 			boxyini = objposicaocursor.telay;
 			tamanhox = 0;
@@ -693,9 +693,9 @@ i3GEO.navega = {
 					hb = parseInt(b.height,10);
 					if (navm){
 						if(wb > 2)
-						{b.width = wb - 2;}
+						{b.width = wb - 2 + "px";}
 						if(hb > 2)
-						{b.height = hb - 2;}
+						{b.height = hb - 2 + "px";}
 					}
 					else{
 						b.width = wb - 2 + "px";
@@ -733,13 +733,13 @@ i3GEO.navega = {
 			py = objposicaocursor.telay;
 			if (navm){
 				if ((ppx > boxxini) && ((ppx - boxxini - 2) > 0))
-				{bxs.width = ppx - boxxini - 2;}
+				{bxs.width = ppx - boxxini - 2 + "px";}
 				if ((py > boxyini) && ((py - boxyini - 2) > 0))
-				{bxs.height = py - boxyini - 2;}
+				{bxs.height = py - boxyini - 2 + "px";}
 				if (ppx < boxxini)
-				{bxs.left = ppx;bxs.width = boxxini - ppx + 2;}
+				{bxs.left = ppx;bxs.width = boxxini - ppx + 2 + "px";}
 				if (py < boxyini)
-				{bxs.top = py;bxs.height = boxyini - py + 2;}
+				{bxs.top = py;bxs.height = boxyini - py + 2 + "px";}
 			}
 			else{
 				if (ppx > boxxini)
@@ -778,8 +778,8 @@ i3GEO.navega = {
 					var bxs = $i("i3geoboxZoom").style;
 					bxs.display="none";
 					bxs.visibility="hidden";
-					bxs.width = 0;
-					bxs.height = 0;
+					bxs.width = 0 + "px";
+					bxs.height = 0 + "px";
 				};
 				if((x1 === x2) || (y1 === y2))
 				{limpa.call();return;}
@@ -842,8 +842,8 @@ i3GEO.navega = {
 				letras=["L","O","N","S"];
 				for (l=0;l<4; l++){
 					if ($i("img"+letras[l])){
-						$i("img"+letras[l]).style.width = i3GEO.parametros.w;
-						$i("img"+letras[l]).style.height = i3GEO.parametros.h;
+						$i("img"+letras[l]).style.width = i3GEO.parametros.w + "px";
+						$i("img"+letras[l]).style.height = i3GEO.parametros.h + "px";
 						$i("img"+letras[l]).style.display = "block";
 					}
 				}
@@ -1049,8 +1049,8 @@ i3GEO.navega = {
 					clipt = "rect("+ (topo - 120) + " " + (esq + 120) + " " + (topo + 120) + " " + (esq - 120) +")";
 					i = $i("lente").style;
 					i.clip = clipt;
-					i.top = pos[1] - (topo - 120);
-					i.left = pos[0] - (esq - 120);
+					i.top = pos[1] - (topo - 120) + "px";
+					i.left = pos[0] - (esq - 120) + "px";
 					//eval("i." + g_tipotop + "= (pos[1] - (topo - 40))");
 					//eval("i." + g_tipoleft +  "= (pos[0] - (esq - 40)");
 				}
@@ -1111,12 +1111,12 @@ i3GEO.navega = {
 				novoel.style.zIndex = 5000;
 				document.body.appendChild(novoel);
 				$i("div_d").innerHTML = "<input style='position:relative;top:0px;left:0px'' type=image src='' id='img_d' />";
-				$i("div_d").style.left = parseInt(pos[0],10);
-				$i("div_d").style.top = parseInt(pos[1],10);
-				$i("img_d").style.left = 0;
-				$i("img_d").style.top = 0;
-				$i("img_d").style.width = i3GEO.parametros.w;
-				$i("img_d").style.height = i3GEO.parametros.h;
+				$i("div_d").style.left = parseInt(pos[0],10) + "px";
+				$i("div_d").style.top = parseInt(pos[1],10) + "px";
+				$i("img_d").style.left = 0 + "px";
+				$i("img_d").style.top = 0 + "px";
+				$i("img_d").style.width = i3GEO.parametros.w + "px";
+				$i("img_d").style.height = i3GEO.parametros.h + "px";
 				$i("div_d").style.clip = 'rect(0 75 75 0)';
 				novoeli = document.createElement("div");
 				novoeli.id = "div_di";
@@ -1312,10 +1312,10 @@ i3GEO.navega = {
 						if(!corpo)
 						{return;}
 						iclone.src = corpo.src;
-						iclone.style.width = i3GEO.parametros.w;
-						iclone.style.heigth = i3GEO.parametros.h;
-						iclone.style.top = corpo.style.top;
-						iclone.style.left = corpo.style.left;
+						iclone.style.width = i3GEO.parametros.w + "px";
+						iclone.style.height = i3GEO.parametros.h + "px";
+						iclone.style.top = corpo.style.top + "px";
+						iclone.style.left = corpo.style.left + "px";
 						$i("img").style.display = "none";
 						iclone.style.display = "block";
 					}
@@ -1359,8 +1359,8 @@ i3GEO.navega = {
 							i3geo_ns=parseInt(i3GEO.parametros.mapscale / fatorEscala,10);
 						}
 						if(iclone){
-							iclone.style.width = nw;
-							iclone.style.height = nh;
+							iclone.style.width = nw + "px";
+							iclone.style.height = nh + "px";
 							if (iclone.style.pixelTop)
 							{iclone.style.pixelTop=nt;}
 							else

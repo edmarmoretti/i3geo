@@ -88,12 +88,12 @@ function prop()
 	this.topo = function()
 	{
 		var valor = document.getElementById(this.idtopo).value;
-		window.parent.document.getElementById(this.id).style.top = valor;
+		window.parent.document.getElementById(this.id).style.top = valor + "px";
 	}
 	this.esquerda = function()
 	{
 		var valor = document.getElementById(this.idesquerda).value;
-		window.parent.document.getElementById(this.id).style.left = valor;
+		window.parent.document.getElementById(this.id).style.left = valor + "px";
 	}
 	this.tamanho = function()
 	{
@@ -103,7 +103,7 @@ function prop()
 	this.largura = function()
 	{
 		var valor = document.getElementById(this.idlargura).value;
-		window.parent.document.getElementById(this.id).style.width = valor;
+		window.parent.document.getElementById(this.id).style.width = valor + "px";
 	}
 	this.cor = function()
 	{

@@ -676,8 +676,8 @@ i3GEO.util = {
 		mx = parseInt(i.style.width,10) / 2;
 		my = parseInt(i.style.height,10) / 2;
 		i.style.position = "absolute";
-		i.style.top = objposicaocursor.telay - my;
-		i.style.left = objposicaocursor.telax - mx;
+		i.style.top = objposicaocursor.telay - my + "px";
+		i.style.left = objposicaocursor.telax - mx + "px";
 		return [objposicaocursor.telay - my,objposicaocursor.telax - mx];
 	},
 	/*
@@ -855,12 +855,12 @@ i3GEO.util = {
 					i = novoel.style;
 					i.position = "absolute";
 					if($i(i3GEO.Interface.IDCORPO)){
-						i.top = parseInt($i(i3GEO.Interface.IDCORPO).style.top,10);
-						i.left = parseInt($i(i3GEO.Interface.IDCORPO).style.left,10);
+						i.top = parseInt($i(i3GEO.Interface.IDCORPO).style.top,10) + "px";
+						i.left = parseInt($i(i3GEO.Interface.IDCORPO).style.left,10) + "px";
 					}
 					else{
-						i.top = parseInt($i(i3GEO.Interface.IDMAPA).style.top,10);
-						i.left = parseInt($i(i3GEO.Interface.IDMAPA).style.left,10);
+						i.top = parseInt($i(i3GEO.Interface.IDMAPA).style.top,10) + "px";
+						i.left = parseInt($i(i3GEO.Interface.IDMAPA).style.left,10) + "px";
 					}
 					document.body.appendChild(novoel);
 				}
@@ -2440,6 +2440,23 @@ i3GEO.util = {
 		{valor = novoel.offsetHeight;}
 		document.body.removeChild(novoel);
 		return valor;
+	},
+	/*
+	Function: ajustaDocType
+	
+	Ajusta o DOCTYPE do HTML para funcionar com CSS3
+	*/
+	ajustaDocType: function(){
+		if(document.implementation.createDocumentType){
+			var newDoctype = document.implementation.createDocumentType(
+				'html',
+				'-//W3C//DTD XHTML 1.0 Transitional//EN',
+				'http://www.w3.org/TR/html4/loose.dtd'
+			);
+			if (document.doctype) {
+				document.doctype.parentNode.replaceChild(newDoctype, document.doctype);
+			}
+		}
 	}
 };
 //++++++++++++++++++++++++++++++++++++

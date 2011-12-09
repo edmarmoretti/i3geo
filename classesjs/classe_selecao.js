@@ -83,12 +83,12 @@ i3GEO.selecao = {
 			i3GEO.selecao.box.criaBox();
 			adicionaxyBox = i3GEO.util.pegaPosicaoObjeto($i(i3GEO.Interface.IDCORPO));
 			var i = $i("i3geoboxSel").style;
-			i.width=0;
-			i.height=0;
+			i.width=0 + "px";
+			i.height=0 + "px";
 			i.visibility="visible";
 			i.display="block";
-			i.left = objposicaocursor.imgx + adicionaxyBox[0];
-			i.top = objposicaocursor.imgy + adicionaxyBox[1];
+			i.left = objposicaocursor.imgx + adicionaxyBox[0] + "px";
+			i.top = objposicaocursor.imgy + adicionaxyBox[1] + "px";
 
 			boxxini = objposicaocursor.imgx + adicionaxyBox[0];
 			boxyini = objposicaocursor.imgy + adicionaxyBox[1];
@@ -133,9 +133,9 @@ i3GEO.selecao = {
 					hb = parseInt(b.height,10);
 					if (navm){
 						if(wb > 2)
-						{b.width = wb - 2;}
+						{b.width = wb - 2 + "px";}
 						if(hb > 2)
-						{b.height = hb - 2;}
+						{b.height = hb - 2 + "px";}
 					}
 					else{
 						b.width = wb - 2 + "px";
@@ -171,13 +171,13 @@ i3GEO.selecao = {
 			py = objposicaocursor.imgy + adicionaxyBox[1];
 			if (navm){
 				if ((ppx > boxxini) && ((ppx - boxxini - 2) > 0))
-				{bxs.width = ppx - boxxini - 2;}
+				{bxs.width = ppx - boxxini - 2 + "px";}
 				if ((py > boxyini) && ((py - boxyini - 2) > 0))
-				{bxs.height = py - boxyini - 2;}
+				{bxs.height = py - boxyini - 2 + "px";}
 				if (ppx < boxxini)
-				{bxs.left = ppx;bxs.width = boxxini - ppx + 2;}
+				{bxs.left = ppx;bxs.width = boxxini - ppx + 2 + "px";}
 				if (py < boxyini)
-				{bxs.top = py;bxs.height = boxyini - py + 2;}
+				{bxs.top = py;bxs.height = boxyini - py + 2 + "px";}
 			}
 			else{
 				if (ppx > boxxini)
@@ -210,8 +210,8 @@ i3GEO.selecao = {
 					var bxs = $i("i3geoboxSel").style;
 					bxs.display="none";
 					bxs.visibility="hidden";
-					bxs.width = 0;
-					bxs.height = 0;
+					bxs.width = 0 + "px";
+					bxs.height = 0 + "px";
 				};
 				if((x1 === x2) || (y1 === y2))
 				{limpa.call();return;}

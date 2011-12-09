@@ -71,10 +71,10 @@ i3GEOF.opcoesTamanho = {
 			i3GEO.util.criaBox("boxg");
 			var pos = i3GEO.util.pegaPosicaoObjeto($i(i3GEO.Interface.IDMAPA));
 			box = $i("boxg");
-			box.style.left = pos[0];
-			box.style.top = pos[1];
-			box.style.width = i3GEO.parametros.w;
-			box.style.height = i3GEO.parametros.h;
+			box.style.left = pos[0] + "px";
+			box.style.top = pos[1] + "px";
+			box.style.width = i3GEO.parametros.w + "px";
+			box.style.height = i3GEO.parametros.h + "px";
 			box.style.display = "block";
 			box.style.zIndex = 6000;
 		}

@@ -300,8 +300,8 @@ i3GEO.janela = {
 		wdocaiframe = $i(id+"i");
 		if(wdocaiframe){
 			temp = wdocaiframe.style;
-			temp.width = parseInt(wlargura,10)-12;
-			temp.height = waltura;
+			temp.width = parseInt(wlargura,10)-12 + "px";
+			temp.height = waltura + "px";
 			temp.display = "block";
 			wdocaiframe.src = wsrc;
 		}
@@ -472,8 +472,8 @@ i3GEO.janela = {
 		else
 		{i = $i("wdoca");}
 		if(i){
-			i.style.width = w;
-			i.style.height = h;
+			i.style.width = w + "px";
+			i.style.height = h + "px";
 		}
 	},
 	/*
@@ -641,8 +641,8 @@ i3GEO.janela = {
 		res += "<span style='color:navy;cursor:pointer;text-align:left' onclick='javascript:$i(\""+Nid+"cabecatip\").innerHTML =\"\";' >"+cabecalho+"</span></div>";
 		novoel.innerHTML = "<table style='text-align:left'><tr><td style='text-align:left'>"+res+"</td></tr></table>";
 		ist = novoel.style;
-		ist.top = objposicaocursor.telay - 9;
-		ist.left = objposicaocursor.telax - 5;
+		ist.top = objposicaocursor.telay - 9 + "px";
+		ist.left = objposicaocursor.telax - 5 + "px";
 		ist.display="block";
 		//
 		//registra a função de eliminação dos tips
@@ -922,7 +922,7 @@ try{
 						{nBodyHeight = 0;}
 						oBody.style.height =  nBodyHeight + "px";
 						if ($i("wdocai")){
-							$i("wdocai").style.height = nBodyHeight;
+							$i("wdocai").style.height = nBodyHeight + "px";
 							$i("wdocai").style.width = oBody.style.width;
 						}
 					};

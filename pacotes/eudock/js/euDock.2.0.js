@@ -279,7 +279,7 @@ var euOPAQUE      = 16;
 				if (this.objectAlign==euDOWN){
 					tempx = euIdObjLeft(this.idObjectHook) + (this.idObjectHook.offsetWidth/2);
 					tempy = euIdObjTop(this.idObjectHook)  + this.idObjectHook.offsetHeight + this.offset
-					if(navm){
+					if(navm && !document.doctype || (navm && document.doctype && document.doctype.systemId == "")){
 						tempx = i3GEO.util.pegaPosicaoObjeto($i(i3GEO.Interface.IDMAPA))[0] - (euIdObjLeft(this.idObjectHook) / 2);
 						tempy = euIdObjTop(this.idObjectHook)  + this.idObjectHook.offsetHeight + this.offset;
 					}

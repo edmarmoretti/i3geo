@@ -698,8 +698,8 @@ i3GEO.barraDeBotoes = {
 				temp = $i("i3geoMarcaIcone");
 				if(temp){
 					temp.style.display = "block";
-					temp.style.top = posY + 43;//(parseInt(y / n,10) * n) + 40;
-					temp.style.left = posX + 18;//(parseInt(x / n,10) * n) + 6;
+					temp.style.top = posY + 43 + "px";//(parseInt(y / n,10) * n) + 40;
+					temp.style.left = posX + 18 + "px";//(parseInt(x / n,10) * n) + 6;
 				}
 			}
 			if(botao.funcaoonclick){
@@ -1380,8 +1380,8 @@ i3GEO.barraDeBotoes = {
 	},
 	editor:{
 		inicia: function(){
-			if(navm)
-			{alert("O editor não funciona corretamente nesse navegador.");}
+			//if(navm)
+			//{alert("O editor não funciona corretamente nesse navegador.");}
 			i3GEO.barraDeBotoes.editor.carregaJs();
 		},
 		carregaJs: function(idjanela){

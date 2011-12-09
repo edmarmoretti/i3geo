@@ -200,8 +200,8 @@ Balloon.prototype.showTooltip = function(evt,caption,sticky,width,height,x,y) {
 			return false;
 		}
 		
-		this.width  = width;
-		this.height = height;
+		this.width  = width + "px";
+		this.height = height + "px";
 		this.actualWidth = null;
 		//edmar
 		this.x = x;

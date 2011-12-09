@@ -141,8 +141,8 @@ function aguardeTotal(tipo)
 		novoel.display = "none";
 		novoel.style.zIndex=10000;
 		novoel.style.position = "absolute";
-		novoel.style.top = 0;
-		novoel.style.left = 0;
+		novoel.style.top = 0 + "px";
+		novoel.style.left = 0 + "px";
 		novoel.style.backgroundColor="gray";
 		if(navn)
 		{novoel.style.opacity = 0.45;}

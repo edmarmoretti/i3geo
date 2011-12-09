@@ -1095,10 +1095,10 @@ var Position = {
     element._originalHeight = element.style.height;
 
     element.style.position = 'absolute';
-    element.style.top    = top + 'px';;
-    element.style.left   = left + 'px';;
-    element.style.width  = width + 'px';;
-    element.style.height = height + 'px';;
+    element.style.top    = top + 'px';
+    element.style.left   = left + 'px';
+    element.style.width  = width + 'px';
+    element.style.height = height + 'px';
   },
 
   relativize: function(element) {
@@ -1112,7 +1112,7 @@ var Position = {
 
     element.style.top    = top + 'px';
     element.style.left   = left + 'px';
-    element.style.height = element._originalHeight;
-    element.style.width  = element._originalWidth;
+    element.style.height = element._originalHeight + "px";
+    element.style.width  = element._originalWidth + "px";
   }
 };

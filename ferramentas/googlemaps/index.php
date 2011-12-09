@@ -55,8 +55,8 @@ function inicializa(){
 	counterClick = 0
     var m = document.getElementById("mapa")
 	if(window.parent.i3GEO){
-    	m.style.width = (window.parent.i3GEO.parametros.w / 2) - 20;
-    	m.style.height = (window.parent.i3GEO.parametros.h / 2) -20;
+    	m.style.width = (window.parent.i3GEO.parametros.w / 2) - 20 + "px";
+    	m.style.height = (window.parent.i3GEO.parametros.h / 2) -20 + "px";
 		i3geoOverlay = false;
 		if(window.parent.document.getElementById("boxg"))
 		window.parent.document.getElementById("boxg").style.zIndex = 0
@@ -219,8 +219,8 @@ function ondegoogle()
 	var w = xyMax[0]-xyMin[0]
 	var h = xyMin[1]-xyMax[1]
 	box.style.display = "block"
-	box.style.width = w
-	box.style.height = h+3
+	box.style.width = w + "px"
+	box.style.height = h+3 + "px"
 	box.style.top = xyMax[1]+"px"
 	box.style.left = xyMin[0]+"px"
 	box.style.display="block"

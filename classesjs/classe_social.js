@@ -49,7 +49,7 @@ i3GEO.social = {
 		if(tipo === "comtotal")
 		{return '<iframe allowtransparency="true" frameborder="0" scrolling="no" src="http://platform.twitter.com/widgets/tweet_button.html?count=horizontal&via=i3geo&url='+url+'" style="width:100px; height:21px;"></iframe>';}
 		if(tipo === "semtotal")
-		{return '<iframe allowtransparency="true" frameborder="0" scrolling="no" src="http://platform.twitter.com/widgets/tweet_button.html?count=none&via=i3geo&url='+url+'" style="width:55px; height:21px;"></iframe>';}
+		{return '<iframe allowtransparency="true" frameborder="0" scrolling="no" src="http://platform.twitter.com/widgets/tweet_button.html?count=none&via=i3geo&url='+url+'" style="width:65px; height:21px;"></iframe>';}
 	},
 	/*
 	Function: compartilhar

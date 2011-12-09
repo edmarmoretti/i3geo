@@ -61,7 +61,7 @@ function iniciaAtlas(combow)
 	if(!combow)
 	{combow = 0;}
 	document.body.style.width = "100%";
-	document.body.style.height = parseInt(document.body.style.height)+20;
+	document.body.style.height = parseInt(document.body.style.height)+20  + "px";
 	cpObjAtlas = new cpaint();
 	cpObjAtlas.set_async("true");
 	cpObjAtlas.set_response_type("JSON");
