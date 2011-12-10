@@ -266,7 +266,9 @@ i3GEO.janela = {
 		}
 		//if((navm) && i3GEO.Interface.ATUAL === "googleearth")
 		//{funcaoMinimiza = null;}
-		wlargurA = parseInt(wlargura,10)+2+"px";
+		temp = navm ? 0:2;
+		wlargurA = parseInt(wlargura,10)+temp+"px";
+
 		if($i(id))
 		{YAHOO.janelaDoca.xp.panel.destroy();}
 		i3GEO.util.removeChild(id+"_c");
@@ -307,14 +309,13 @@ i3GEO.janela = {
 		}
 		else{
 			if(waltura !== "auto")
-			{$i(id+'_corpo').style.height=parseInt(waltura,10);}
-			$i(id+'_corpo').style.width=parseInt(wlargura,10);
-			if(navm)
-			{$i(id+'_corpo').style.width=parseInt(wlargura,10)+2;}
+			{$i(id+'_corpo').style.height=parseInt(waltura,10)+"px";}
+			$i(id+'_corpo').style.width=parseInt(wlargura,10)+"px";
 		}
 		fix = false;
 		if(nx === "" || nx === "center")
 		{fix = true;}
+		//no IE, com CSS3, a sombra não funciona
 		if(modal === true)
 		{underlay = "none";}
 		else
@@ -325,7 +326,7 @@ i3GEO.janela = {
 		{ifr = false;}
 		if(waltura === "auto")
 		{YAHOO.janelaDoca.xp.panel = new YAHOO.widget.Panel(id, { iframe:ifr,modal:modal, width: wlargurA,underlay:"none", fixedcenter: fix, constraintoviewport: false, visible: true,monitorresize:false,dragOnly:true,keylisteners:null} );}
-		else{YAHOO.janelaDoca.xp.panel = new YAHOO.widget.ResizePanel(id, { iframe:ifr,underlay:underlay, modal:modal, width: wlargurA, fixedcenter: fix, constraintoviewport: false, visible: true,monitorresize:false,dragOnly:true,keylisteners:null} );}
+		else{YAHOO.janelaDoca.xp.panel = new YAHOO.widget.ResizePanel(id, { hideMode:'offsets',iframe:ifr,underlay:underlay, modal:modal, width: wlargurA, fixedcenter: fix, constraintoviewport: false, visible: true,monitorresize:false,dragOnly:true,keylisteners:null} );}
 		if(nx !== "" && nx !== "center"){
 			YAHOO.janelaDoca.xp.panel.moveTo(nx,ny + 50);
 		}
@@ -336,6 +337,7 @@ i3GEO.janela = {
 			]);
 		}
 		YAHOO.janelaDoca.xp.panel.render();
+		
 		if(navm && id !== "i3geo_janelaMensagens" && i3GEO.Interface.ATUAL === "googleearth")
 		{YAHOO.janelaDoca.xp.panel.moveTo(0,0);}
 		if(ifr === true)
@@ -349,7 +351,16 @@ i3GEO.janela = {
 		if($i(id+"_c")){
 			$i(id+"_c").style.zIndex = 23000 + i3GEO.janela.ULTIMOZINDEX + 1;
 			i3GEO.janela.ULTIMOZINDEX = 23000 + i3GEO.janela.ULTIMOZINDEX + 1;
+			if(waltura === "auto"){
+				$i(id+"_c").style.border = "0px solid white";
+			}
 		}
+		temp = $i(id+"_corpo");
+		if(temp){
+			if(navm)
+			{temp.style.paddingRight = "0px";}
+			temp.style.width = parseInt(temp.style.width,10) - 2 + "px";
+		}		
 		if(funcaoCabecalho)
 		{$i(id+'_cabecalho').onclick = funcaoCabecalho;}
 		if(funcaoMinimiza)
@@ -814,9 +825,6 @@ i3GEO.janela = {
 					c.style.width = "150px";
 					c.style.border = "solid #B4B4B4 1px";
 					c.style.top = "1px";
-					if(navm){
-						c.style.top = "-4px";
-					}
 					c.style.left = "2px";
 					c.style.position = "relative";
 					c.style.fontSize = "10px";
@@ -923,7 +931,7 @@ try{
 						oBody.style.height =  nBodyHeight + "px";
 						if ($i("wdocai")){
 							$i("wdocai").style.height = nBodyHeight + "px";
-							$i("wdocai").style.width = oBody.style.width;
+							$i("wdocai").style.width = oBody.style.width + "px";
 						}
 					};
 					this.ddResize.onMouseUp = this.ddResize.onDrag.call();

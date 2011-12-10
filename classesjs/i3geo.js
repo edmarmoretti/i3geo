@@ -67,6 +67,6 @@ var $i = function(id)
 		}
 	}
 	document.write("<link rel='stylesheet' type='text/css' href='" + scriptLocation + "../css/i3geo46.css.php'></link>");
-	document.write("<link rel='stylesheet' type='text/css' href='" + scriptLocation + "../pacotes/yui270/build/button/assets/skins/sam/button.css'></link>");
+	document.write("<link rel='stylesheet' type='text/css' href='" + scriptLocation + "../pacotes/yui290/build/button/assets/skins/sam/button.css'></link>");
 	document.write("<script src='" + scriptLocation + "i3geo_tudo_compacto46.js.php'></script>");
 })()

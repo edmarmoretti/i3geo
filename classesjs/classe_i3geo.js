@@ -228,15 +228,18 @@ i3GEO = {
 		if(i3GEO.configura.ajustaDocType === true)
 		{i3GEO.util.ajustaDocType();}
 		var temp,i,tamanho;
-		if (window.location.href.split("?")[1]){
-			i3GEO.configura.sid = window.location.href.split("?")[1];
+		temp = window.location.href.split("?");
+		if (temp[1]){
+			i3GEO.configura.sid = temp[1];
 			//
-			//a biblioteca YUI, por algum motivo, acrescenta # na URL. O # precisa ser removido, caso contrário, a opção de reload da página pelo browser as vezes não funciona
+			//O # precisa ser removido, caso contrário, a opção de reload da página pelo browser as vezes não funciona
 			//
 			if (i3GEO.configura.sid.split("#")[0])
 			{i3GEO.configura.sid = i3GEO.configura.sid.split("#")[0];}
 		}
 		else
+		{i3GEO.configura.sid = "";}
+		if(i3GEO.configura.sid === 'undefined')
 		{i3GEO.configura.sid = "";}
 		if(i3GEO.Interface.ALTTABLET != ""){
 			if(i3GEO.util.detectaTablet())

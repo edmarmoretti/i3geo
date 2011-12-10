@@ -1350,31 +1350,31 @@ for (i = 0; i < scripts.length; i++) {
 <?php if(extension_loaded('zlib')){ob_end_flush();}?>
 */
 var jsfiles = new Array(
-"../../pacotes/yui270/build/utilities/utilities.js",
-"../../pacotes/yui270/build/yahoo-dom-event/yahoo-dom-event.js",
-"../../pacotes/yui270/build/element/element-min.js",
-"../../pacotes/yui270/build/datasource/datasource-min.js",
-"../../pacotes/yui270/build/datatable/datatable-min.js",
-"../../pacotes/yui270/build/button/button-min.js",
-"../../pacotes/yui270/build/dragdrop/dragdrop-min.js",
-"../../pacotes/yui270/build/container/container-min.js",
-"../../pacotes/yui270/build/connection/connection-min.js",
-"../../pacotes/yui270/build/treeview/treeview.js",
-"../../pacotes/yui270/build/json/json-min.js",
-"../../pacotes/yui270/build/menu/menu-min.js",
-"../../pacotes/yui270/build/editor/editor-min.js"
+"../../pacotes/yui290/build/utilities/utilities.js",
+"../../pacotes/yui290/build/yahoo-dom-event/yahoo-dom-event.js",
+"../../pacotes/yui290/build/element/element-min.js",
+"../../pacotes/yui290/build/datasource/datasource-min.js",
+"../../pacotes/yui290/build/datatable/datatable-min.js",
+"../../pacotes/yui290/build/button/button-min.js",
+"../../pacotes/yui290/build/dragdrop/dragdrop-min.js",
+"../../pacotes/yui290/build/container/container-min.js",
+"../../pacotes/yui290/build/connection/connection-min.js",
+"../../pacotes/yui290/build/treeview/treeview.js",
+"../../pacotes/yui290/build/json/json-min.js",
+"../../pacotes/yui290/build/menu/menu-min.js",
+"../../pacotes/yui290/build/editor/editor-min.js"
 );
 //
 //arquivos css
 //
 var cssfiles =new Array(
 "../html/admin.css",
-"../../pacotes/yui270/build/fonts/fonts-min.css",
-"../../pacotes/yui270/build/datatable/assets/skins/sam/datatable.css",
-"../../pacotes/yui270/build/button/assets/skins/sam/button.css",
-"../../pacotes/yui270/build/container/assets/skins/sam/container.css",
-"../../pacotes/yui270/build/treeview/assets/skins/sam/treeview.css",
-"../../pacotes/yui270/build/editor/assets/skins/sam/editor.css"
+"../../pacotes/yui290/build/fonts/fonts-min.css",
+"../../pacotes/yui290/build/datatable/assets/skins/sam/datatable.css",
+"../../pacotes/yui290/build/button/assets/skins/sam/button.css",
+"../../pacotes/yui290/build/container/assets/skins/sam/container.css",
+"../../pacotes/yui290/build/treeview/assets/skins/sam/treeview.css",
+"../../pacotes/yui290/build/editor/assets/skins/sam/editor.css"
 );
 //
 //carrega os arquivos js

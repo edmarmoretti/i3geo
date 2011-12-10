@@ -765,7 +765,7 @@ i3GEO.arvoreDeCamadas = {
 			this.logger = this.logger || YAHOO;
 			YAHOO.util.Dom.setStyle(this.getDragEl(), "opacity", 0.67); // The proxy is slightly transparent
 			this.goingUp = false;
-			this.lastY = 0;
+			this.lastY = 0;			
 		};
 		YAHOO.extend(
 			YAHOO.example.DDList, YAHOO.util.DDProxy, {
@@ -781,7 +781,7 @@ i3GEO.arvoreDeCamadas = {
 					Dom.setStyle(dragEl, "color", Dom.getStyle(clickEl, "color"));
 					Dom.setStyle(dragEl, "backgroundColor", Dom.getStyle(clickEl, "backgroundColor"));
 					Dom.setStyle(dragEl, "border", "4px solid gray");
-					Dom.setStyle(dragEl, "z-index", "5000");
+					Dom.setStyle(dragEl, "z-index", "5000");		
 				},
 				endDrag: function(e){
 					var srcEl,proxy,a,thisid,proxyid;
@@ -858,6 +858,9 @@ i3GEO.arvoreDeCamadas = {
 					if (y > this.lastY)
 					{this.goingUp = false;}
 					this.lastY = y;
+					if(i3GEO.guias.TIPO === "movel"){
+						YAHOO.util.Dom.setStyle("i3GEOguiaMovelMolde", "opacity", 0.9);
+					}
 				},
 				onDragOver: function(e, id){
 					var srcEl,destEl;

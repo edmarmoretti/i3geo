@@ -435,7 +435,7 @@ i3GEO.mapa = {
 					novoel.id = "moveLegi";
 					novoel.style.display="block";
 					temp = '<div class="hd"  >Legenda</div>';
-					temp += '<div id="wlegenda" style="display:block;padding:5px 2px 5px 2px;text-align:left;background-color:white;height:300px;width:300px;overflow:auto" ></div>';
+					temp += '<div id="wlegenda" style="display:block;padding:5px 2px 5px 0px;text-align:left;background-color:white;height:300px;width:300px;overflow:auto" ></div>';
 					novoel.innerHTML = temp;
 					document.body.appendChild(novoel);
 					YAHOO.namespace("moveLegi.xp");
