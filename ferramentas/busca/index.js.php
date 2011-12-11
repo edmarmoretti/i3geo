@@ -96,7 +96,7 @@ i3GEOF.busca = {
 	html:function(){
 		var ins = '';
 		ins += '<p class="paragrafo" >';
-		ins += $inputText("","","i3GEObuscapalavra","",47,"digite aqui o texto...");
+		ins += $inputText("","","i3GEObuscapalavra","",35,"digite aqui o texto...");
 		ins += '<p class="paragrafo" ><input id=i3GEObuscabotao1 size=20  type=button value="Procurar" />';
 		ins += '<br><br><table summary="Lista de opcoes" class=lista3 width="250px">';
 		ins += '	<tr>';
@@ -141,7 +141,7 @@ i3GEOF.busca = {
 			i3GEO.janela.minimiza("i3GEOF.busca");
 		};
 		//cria a janela flutuante
-		titulo = "<div style='z-index:1;position:absolute' id='i3GEOFbuscaComboCabeca' >------</div>&nbsp;Buscar <a class=ajuda_usuario target=_blank href='" + i3GEO.configura.locaplic + "/ajuda_usuario.php?idcategoria=5&idajuda=35' >&nbsp;&nbsp;&nbsp;</a>";
+		titulo = "<div style='z-index:1;position:absolute' id='i3GEOFbuscaComboCabeca' >------</div>&nbsp;<a class=ajuda_usuario style='margin-left:40px;' target=_blank href='" + i3GEO.configura.locaplic + "/ajuda_usuario.php?idcategoria=5&idajuda=35' >&nbsp;&nbsp;&nbsp;</a>";
 		janela = i3GEO.janela.cria(
 			"290px",
 			"330px",

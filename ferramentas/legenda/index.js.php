@@ -447,7 +447,7 @@ i3GEOF.legenda = {
 						ins.push("<tr><td><img style='cursor:pointer' title='clique para excluir' onclick='i3GEOF.legenda.excluilinhaf(this)' src='" + i3GEO.configura.locaplic + "/imagens/x.gif' title='excluir' /></td><td><img width='30px' height='15px' style='cursor:pointer' title='clique para alterar' src='"+retorno.data[i].imagem+"' onclick=i3GEOF.legenda.editaSimbolo('i3GEOlegendaid_"+id+"') /></td>");
 						ins.push("<td><img onclick=i3GEOF.legenda.modificaCor('"+retorno.data[i].idclasse+"') title='alterar a cor' style='cursor:pointer' src='" + i3GEO.configura.locaplic + "/imagens/aquarela.gif' /></td>");
 						ins.push("<td>");
-						ins.push($inputText("","","i3GEOlegendaid_"+id,"digite o novo nome",30,retorno.data[i].nomeclasse,"nome","javascript:i3GEOF.legenda.aviso()"));
+						ins.push($inputText("","","i3GEOlegendaid_"+id,"digite o novo nome",20,retorno.data[i].nomeclasse,"nome","javascript:i3GEOF.legenda.aviso()"));
 						ins.push("</td><td>");
 						ins.push($inputText("","","i3GEOlegendaid_"+id,"digite a nova express&atilde;o",30,exp,"expressao","javascript:i3GEOF.legenda.aviso()"));
 						ins.push("</td>");

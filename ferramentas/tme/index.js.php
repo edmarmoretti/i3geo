@@ -106,9 +106,9 @@ i3GEOF.tme = {
 		'<div style="text-align:left;" id=i3GEOTMEresultado ></div>' +
 		'<p class="paragrafo" >' +
 		'Título que será mostrado no mapa';
-		ins += $inputText("","","i3GEOTMEtitulo","",68,"") +
+		ins += $inputText("","","i3GEOTMEtitulo","",48,"") +
 		'<br><br>Descrição do mapa';
-		ins += $inputText("","","i3GEOTMEdesc","",68,"") +
+		ins += $inputText("","","i3GEOTMEdesc","",48,"") +
 		'<br><br>Coluna que contém os nomes das regiões (exemplo: nomes dos Estados ou nomes dos municípios):' +
 		'<div id="i3GEOTMEregioeslista" style="text-align:left;" ></div>' +
 		'<p class="paragrafo" >' +
@@ -137,7 +137,7 @@ i3GEOF.tme = {
 			i3GEO.janela.minimiza("i3GEOF.tme");
 		};
 		//cria a janela flutuante
-		titulo = "<div style='z-index:1;position:absolute' id='i3GEOFtmeComboCabeca' >------</div>&nbsp;&nbsp;&nbsp;tme <a class=ajuda_usuario target=_blank href='" + i3GEO.configura.locaplic + "/ajuda_usuario.php?idcategoria=5&idajuda=37' >&nbsp;&nbsp;&nbsp;</a>";
+		titulo = "<div style='z-index:1;position:absolute' id='i3GEOFtmeComboCabeca' >------</div><span style=margin-left:60px>tme</span><a class=ajuda_usuario target=_blank href='" + i3GEO.configura.locaplic + "/ajuda_usuario.php?idcategoria=5&idajuda=108' >&nbsp;&nbsp;&nbsp;</a>";
 		janela = i3GEO.janela.cria(
 			"380px",
 			"320px",

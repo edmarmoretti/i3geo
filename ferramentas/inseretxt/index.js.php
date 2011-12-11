@@ -138,7 +138,7 @@ i3GEOF.inseretxt = {
 		'</div><br>' +
 		'	<div class=guiaobj id="i3GEOinseretxtguia1obj" style="left:1px;display:none;">' +
 		'		<p class="paragrafo" >Texto que será inserido:<br><br>' +	
-		$inputText("","","i3GEOinseretxttexto","",60,"") +
+		$inputText("","","i3GEOinseretxttexto","",45,"") +
 		'		<br><br>' +
 		'		<input class=inputsb style=cursor:pointer type=checkbox id=i3GEOinseretxttextoconector >&nbsp;Insere com conector' +
 		'		<div id=i3GEOinseretxtmen1 style="text-align:left;" >'+

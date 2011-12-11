@@ -95,7 +95,7 @@ i3GEOF.conectargeojson = {
 	html:function(){
 		var ins = '' +
 		'<p class="paragrafo" >Endereço (URL) do GeoJson (ou escolha da lista):<br><br>' +	
-		$inputText("","","i3GEOconectargeojsonurl","",60,"") +
+		$inputText("","","i3GEOconectargeojsonurl","",45,"") +
 		'<br><br>' +
 		'<div id="i3GEOconectargeojsonCombo" style="left:1px;display:block;width:315px;text-align:left;">Aguarde...' +
 		'</div>' +

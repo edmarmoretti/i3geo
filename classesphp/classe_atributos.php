@@ -531,9 +531,9 @@ Include:
 		$filtro = $this->layer->getfilterstring();
 		if ($filtro != ""){$this->layer->setfilter("");}
 		//le o arquivo de query se existir e checa se existe sele&ccedil;&atilde;o para o tema
-		$shapes = retornaShapesSelecionados($layerPt,$this->arquivo,$this->mapa);
+		$shapes = retornaShapesSelecionados($this->layer,$this->arquivo,$this->mapa);
 		if(count($shapes) == 0){
-			$shapes = retornaShapesMapext($layerPt,$this->mapa);
+			$shapes = retornaShapesMapext($this->layer,$this->mapa);
 		}		
 		//pega os valores
 		foreach($shapes as $shape)

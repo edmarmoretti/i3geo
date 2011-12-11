@@ -108,7 +108,7 @@ i3GEOF.opcoesQuery = {
 		//cria a janela flutuante
 		titulo = "Cor da sele&ccedil;&atilde;o <a class=ajuda_usuario target=_blank href='" + i3GEO.configura.locaplic + "/ajuda_usuario.php?idcategoria=1&idajuda=5' >&nbsp;&nbsp;&nbsp;</a>";
 		janela = i3GEO.janela.cria(
-			"210px",
+			"220px",
 			"80px",
 			"",
 			"",

@@ -2050,7 +2050,6 @@ function downloadTema2($map_file,$tema,$locaplic,$dir_tmp,$postgis_mapa)
 		$map_tmp->save($map_file);
 		$nomeRand = false;
 	}
-	
 	//
 	//verifica se o tema existe no mapfile
 	//se não existir, tenta inserir com base no mapfile existente no diretório temas
@@ -2067,7 +2066,7 @@ function downloadTema2($map_file,$tema,$locaplic,$dir_tmp,$postgis_mapa)
 	//caso o usuario tenha usado caixa alta no nome do layer
 	if ($teste == "")
 	{$teste = @$map->getlayerbyname(strtoupper($tema));}
-	if ($teste == "")
+	if($teste == "")
 	{
 		$maptemp = ms_newMapObj($temasdir."/".$tema.".map");
 		$temastemp = $maptemp->getalllayernames();
@@ -2088,7 +2087,6 @@ function downloadTema2($map_file,$tema,$locaplic,$dir_tmp,$postgis_mapa)
 				ms_newLayerObj($map, $ll);
 				$tema = $ll->name;
 			}
-			
 		}
 	}
 	else
@@ -2226,19 +2224,23 @@ function downloadTema2($map_file,$tema,$locaplic,$dir_tmp,$postgis_mapa)
 	//
 	//gera um mapfile para download
 	//
-	$maptemp = ms_newMapObj($temasdir."/".$tema.".map");
-	$temas = $maptemp->getAllLayerNames();
-	foreach ($temas as $l)
-	{
-		$gl = $maptemp->getlayerbyname($l);
-		$gl->set("data","");
-		$gl->set("connection","");
+	$nomemapfileurl = "";
+	if(file_exists($temasdir."/".$tema.".map")){
+		$maptemp = ms_newMapObj($temasdir."/".$tema.".map");
+		$temas = $maptemp->getAllLayerNames();
+		foreach ($temas as $l)
+		{
+			$gl = $maptemp->getlayerbyname($l);
+			$gl->set("data","");
+			$gl->set("connection","");
+		}
+		$nomemapfile = $dir_tmp."/".nomerandomico(20)."download.map";
+		
+		$ext = $maptemp->extent;
+		$ext->setextent($rectextent->minx,$rectextent->miny,$rectextent->maxx,$rectextent->maxy);
+		$maptemp->save($nomemapfile);
+		$nomemapfileurl = str_replace($radtmp."/","",$nomemapfile);
 	}
-	$nomemapfile = $dir_tmp."/".nomerandomico(20)."download.map";
-	$ext = $maptemp->extent;
-	$ext->setextent($rectextent->minx,$rectextent->miny,$rectextent->maxx,$rectextent->maxy);
-	$maptemp->save($nomemapfile);
-	$nomemapfileurl = str_replace($radtmp."/","",$nomemapfile);
 	return array("tema"=>$tema,"mapfile"=>$nomemapfile,"mapfileurl"=>$nomemapfileurl,"arquivos"=>implode(",",$resultado),"nreg"=>$nreg);
 }
 

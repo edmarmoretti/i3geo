@@ -1936,6 +1936,7 @@ i3GEO.arvoreDeTemas = {
 				minimiza
 			);
 			$i("i3GEOFuploadarquivo_corpo").style.backgroundColor = "white";
+			$i("i3GEOFuploadarquivo_corpo").style.overflow = "hidden";
 			ins = "" +
 			"	<p class=paragrafo style='width:90%' ><b>Tipo de arquivo</b><br><br>" +
 			"	<table class=lista6 style=left:20px;position:relative >";
@@ -1979,7 +1980,7 @@ i3GEO.arvoreDeTemas = {
 			};
 			titulo = "Conexão com serviços</a>";
 			janela = i3GEO.janela.cria(
-				"250px",
+				"260px",
 				"150px",
 				"",
 				"",
@@ -1992,6 +1993,7 @@ i3GEO.arvoreDeTemas = {
 				minimiza
 			);
 			$i("i3GEOFconectaservico_corpo").style.backgroundColor = "white";
+			$i("i3GEOFconectaservico_corpo").style.overflow = "hidden";
 			ins = "" +
 			"	<p class=paragrafo style='width:90%' ><b>Tipo de conexão</b><br><br>" +
 			"	<table class=lista6 style=left:20px;position:relative >";

@@ -303,7 +303,7 @@ i3GEO.janela = {
 		if(wdocaiframe){
 			temp = wdocaiframe.style;
 			temp.width = parseInt(wlargura,10)-12 + "px";
-			temp.height = waltura + "px";
+			temp.height = waltura;
 			temp.display = "block";
 			wdocaiframe.src = wsrc;
 		}

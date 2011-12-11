@@ -858,9 +858,25 @@ i3GEO.guias = {
 			{temp.chaves = i3GEO.guias.ORDEM;}
 			for(i=0;i<n;i++){
 				if(temp.chaves[i])
-				{ins += "<button title='"+temp.titulos[i]+"' onclick='i3GEO.guias.guiaMovel.ativa(\""+temp.chaves[i]+"\")' style='padding:2px;border-radius:5px 5px 5px 5px;background-image:none;margin-left:8px;border:solid 1px gray;box-shadow:0 1px 3px gray'><img id='"+temp.ids[i]+"' src='"+i3GEO.configura.locaplic+"/"+temp.icones[i]+"' style='cursor:pointer;;' /></button>";}
+				{ins += "<button title='"+temp.titulos[i]+"' onmouseout='javascript:this.className = \"iconeGuiaMovel iconeGuiaMovelMouseOut\"' onmouseover='javascript:this.className = \"iconeGuiaMovel iconeGuiaMovelMouseOver\"' onclick='i3GEO.guias.guiaMovel.ativa(\""+temp.chaves[i]+"\")' class=iconeGuiaMovel ><img id='"+temp.ids[i]+"' src='"+i3GEO.configura.locaplic+"/"+temp.icones[i]+"' style='cursor:pointer;;' /></button>";}
 			}
 			$i("i3GEOguiaMovelIcones").innerHTML = ins;
+			if($i(i3GEO.guias.CONFIGURA[i3GEO.guias.ATUAL].id)){
+				$i(i3GEO.guias.CONFIGURA[i3GEO.guias.ATUAL].id).parentNode.style.backgroundColor = "#cedff2";
+			}			
+		},
+		/*
+		Function: desativaIcones
+		
+		Altera a cor do fundo dos ícones, voltando ao original
+		*/
+		desativaIcones:function(){
+			var ims = $i("i3GEOguiaMovelIcones").getElementsByTagName("button"),
+				n = ims.length,
+				i;
+			for(i=0;i<n;i++){
+				ims[i].style.backgroundColor = "white";
+			}		
 		},
 		/*
 		Function: ativa
@@ -877,6 +893,10 @@ i3GEO.guias = {
 			i3GEO.guias.escondeGuias();
 			i3GEO.guias.mostra(chave);
 			i3GEO.guias.ATUAL = chave;
+			i3GEO.guias.guiaMovel.desativaIcones();
+			if($i(i3GEO.guias.CONFIGURA[chave].id)){
+				$i(i3GEO.guias.CONFIGURA[chave].id).parentNode.style.backgroundColor = "#cedff2";
+			}
 		},
 		/*
 		Function: reposiciona
