@@ -60,8 +60,15 @@ error_reporting(E_ALL);
 
 //echo "<pre>\n";
 echo "<b>TESTE DE INSTALACAO DO i3Geo</b><br>\n";
+//ip
+$ip = "UNKNOWN";
+if (getenv("HTTP_CLIENT_IP")) $ip = getenv("HTTP_CLIENT_IP");
+else if(getenv("HTTP_X_FORWARDED_FOR")) $ip = getenv("HTTP_X_FORWARDED_FOR");
+else if(getenv("REMOTE_ADDR")) $ip = getenv("REMOTE_ADDR");
+else $ip = "UNKNOWN";
+echo "Seu endereço IP: ".$ip."<br>\n";
 echo getcwd();
-//echo "<br>SERVER_SOFTWARE: ".$SERVER_SOFTWARE."<br>";
+
 echo "<br><br>PHP (a vers&atilde;o deve ser a 5x): ";
 echo "<br>".phpversion()."<br>\n";
 include("classesphp/carrega_ext.php");
