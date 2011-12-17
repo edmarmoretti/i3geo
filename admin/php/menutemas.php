@@ -442,9 +442,9 @@ switch (strtoupper($funcao))
 		{echo "Vc nao e um editor cadastrado. Apenas os editores definidos em i3geo/ms_configura.php podem acessar o sistema de administracao.";exit;}
 		$r = alteraTemas();
 		if($id == "")
-		retornaJSON($r);
+		{retornaJSON($r);}
 		else
-		retornaJSON(pegaDados("select * from i3geoadmin_temas where id_tema = '$id'"));
+		{retornaJSON(pegaDados("select * from i3geoadmin_temas where id_tema = $id"));}
 		exit;
 	break;
 	/*
@@ -1040,7 +1040,7 @@ function alteraTemas()
 	    	$dbhw->query("UPDATE i3geoadmin_temas SET es='$es', it='$it', en='$en',tags_tema='$tags', link_tema='$link', nome_tema ='$nome',desc_tema='$desc',codigo_tema='$codigo',tipoa_tema='$tipoa',download_tema='$download',ogc_tema='$ogc',kml_tema='$kml',kmz_tema='$kmz' WHERE id_tema = $id");    		
     		$retorna = $id;
     		if(!isset($kmz)){$kmz = "nao";}
- 			$sql = "SELECT * from i3geoadmin_temas where id_tema = '$id'";
+ 			$sql = "SELECT * from i3geoadmin_temas where id_tema = $id";
     		$q = $dbh->query($sql,PDO::FETCH_ASSOC);
     		$resultado = $q->fetchAll();
     		$mapfile = $resultado[0]["codigo_tema"];

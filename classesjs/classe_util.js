@@ -746,10 +746,10 @@ i3GEO.util = {
 			{$i(idPai).style.width=larguraIdPai+"px";}
 			$i(idPai).style.padding="3";
 			$i(idPai).style.textAlign="center";
-			$i(idPai).onmouseover = function()
-			{this.className = "digitarMouseover";};
-			$i(idPai).onmouseout = function()
-			{this.className = "";};
+			//$i(idPai).onmouseover = function()
+			//{this.className = "digitarMouseover";};
+			//$i(idPai).onmouseout = function()
+			//{this.className = "";};
 		}
 		if(!onch)
 		{onch = "";}
@@ -2447,16 +2447,19 @@ i3GEO.util = {
 	Ajusta o DOCTYPE do HTML para funcionar com CSS3
 	*/
 	ajustaDocType: function(){
-		if(document.implementation.createDocumentType){
-			var newDoctype = document.implementation.createDocumentType(
-				'html',
-				'-//W3C//DTD XHTML 1.0 Transitional//EN',
-				'http://www.w3.org/TR/html4/loose.dtd'
-			);
-			if (document.doctype) {
-				document.doctype.parentNode.replaceChild(newDoctype, document.doctype);
+		try{
+			if(document.implementation.createDocumentType){
+				var newDoctype = document.implementation.createDocumentType(
+					'html',
+					'-//W3C//DTD XHTML 1.0 Transitional//EN',
+					'http://www.w3.org/TR/html4/loose.dtd'
+				);
+				if (document.doctype) {
+					document.doctype.parentNode.replaceChild(newDoctype, document.doctype);
+				}
 			}
 		}
+		catch(e){}
 	}
 };
 //++++++++++++++++++++++++++++++++++++
