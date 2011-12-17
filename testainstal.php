@@ -19,7 +19,7 @@ catch(ee)
 }
 
 </script>
-<body class="fundoPonto">
+<body class="yui-skin-sam fundoPonto">
 <center>
 <div class="bordaSuperior"  >&nbsp;</div>
 <div class="mascaraPrincipal" id="divGeral" style=text-align:left >
