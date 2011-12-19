@@ -143,7 +143,7 @@ require_once ($caminho."classesphp/carrega_ext.php");
 //quando $funcao existe, é pq o ms_criamapa.php está sendo utilizado como um include em classesphp/mapa_controle.php
 //
 if(!isset($funcao))
-{ob_clean();}
+{ob_end_clean();}
 if (!isset($caminho))
 {$caminho = "";}
 if (!file_exists($caminho."classesphp/carrega_ext.php"))

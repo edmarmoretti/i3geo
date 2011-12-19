@@ -74,7 +74,9 @@ i3GEOF.excluirarvore = {
 				{onclick:{fn: i3GEOF.excluirarvore.lote}}
 			);				
 		}
-		catch(erro){alert(erro);}
+		catch(erro){
+			i3GEO.eventos.ATUALIZAARVORECAMADAS.remove("i3GEOF.excluirarvore.inicia(i3GEOF.excluirarvore.iddiv)");
+		}
 		while(n > 0){
 			n -= 1;
 			temp = $i("excluirC_"+camadas[n].name);

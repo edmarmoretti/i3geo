@@ -36,7 +36,7 @@ Variavel: listaAtlas
 
 Objeto com as informações básicas sobre os Atlas existentes.
 
-Essa lista é obtida lendo-se o arquivo xml definido em atlasxml ou no siostema de administração
+Essa lista é obtida lendo-se o arquivo xml definido em atlasxml ou no sistema de administração
 */
 listaAtlas = "";
 /*
@@ -55,8 +55,10 @@ Pega o título e monta as pranchas
 Parametros:
 
 combow {numerico} - largura do combo. Para escapar, utilize 0
+
+atlasId {numerico} id do atlas que será utilizado para carregar as pranchas. Se não for definido, o i3Geo usará a seção PHP
 */
-function iniciaAtlas(combow)
+function iniciaAtlas(combow,atlasId)
 {
 	if(!combow)
 	{combow = 0;}
@@ -142,6 +144,8 @@ function iniciaAtlas(combow)
 		i3GEO.mapa.ajustaPosicao();
 	}
 	var p = i3GEO.configura.locaplic+"/classesphp/atlas_controle.php?funcao=pegaListaDePranchas&g_sid="+i3GEO.configura.sid;
+	if(atlasId)
+	{p += "&atlasId="+atlasId;}
 	cpObjAtlas.call(p,"pegaListaDePranchas",monta);
 }
 /*

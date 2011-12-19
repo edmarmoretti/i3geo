@@ -77,6 +77,10 @@ if(isset($g_sid))
 	session_name("i3GeoPHP");
 	session_id($g_sid);
 	session_start();
+	//guarda na section se o id tiver sido enviado epla URL
+	if(isset($atlasId))
+	{$_SESSION["atlasId"] = $atlasId;}
+	//	
 	foreach(array_keys($_SESSION) as $k)
 	{eval("\$".$k."='".$_SESSION[$k]."';");}
 	$postgis_mapa = $_SESSION["postgis_mapa"];
