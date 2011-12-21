@@ -38,7 +38,7 @@ include_once ("../classesphp/pega_variaveis.php");
 include_once("../classesphp/carrega_ext.php");
 include_once("../classesphp/funcoes_gerais.php");
 include_once("../classesphp/classe_mapa.php");
-include_once("../ms_configura.php");
+include("../ms_configura.php");
 if (!isset($texto))
 {$texto = "digite o texto";}
 ?>

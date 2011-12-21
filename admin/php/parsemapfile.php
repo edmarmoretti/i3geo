@@ -33,7 +33,7 @@ Arquivo:
 
 i3geo/admin/php/parsemapfile.php
 */
-include_once("../../ms_configura.php");
+include("../../ms_configura.php");
 include_once("../../classesphp/funcoes_gerais.php");
 include_once("../../classesphp/carrega_ext.php");
 include_once("../../classesphp/pega_variaveis.php");

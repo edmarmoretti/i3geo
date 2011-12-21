@@ -50,7 +50,7 @@ include_once("pega_variaveis.php");
 include_once("lews/wms_functions.php");
 include_once("../pacotes/cpaint/cpaint2.inc.php");
 include_once("carrega_ext.php");
-include_once("../ms_configura.php");
+include("../ms_configura.php");
 $cp = new cpaint();
 //
 //busca o getcapabilities de um wms

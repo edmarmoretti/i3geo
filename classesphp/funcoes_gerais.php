@@ -2010,9 +2010,9 @@ function downloadTema2($map_file,$tema,$locaplic,$dir_tmp,$postgis_mapa)
 {
 	ini_set("max_execution_time","1800");
 	if(file_exists($locaplic."/ms_configura.php"))
-	include_once($locaplic."/ms_configura.php");
+	include($locaplic."/ms_configura.php");
 	else	
-	include_once("../ms_configura.php");
+	include("../ms_configura.php");
 	$versao = versao();
 	$versao = $versao["principal"];
 	//
@@ -2260,8 +2260,13 @@ Return:
 function verificaDBF($arq){
 	if(function_exists("dbase_open"))
 		$db = dbase_open($arq, 0);
-	else
+	else{
+		if(file_exists("../../pacotes/phpxbase/api_conversion.php"))
+		{include_once("../../pacotes/phpxbase/api_conversion.php");}
+		else	
+		{include_once "../pacotes/phpxbase/api_conversion.php";}	
 		$db = xbase_open($arq, 0);
+	}
 	if ($db) {
 		if(function_exists("dbase_numrecords")){
 			$record_numbers = dbase_numrecords($db);
@@ -2419,9 +2424,9 @@ function autoClasses(&$nlayer,$mapa,$locaplic=null)
 	if(!isset($locaplic))
 	{
 		if(file_exists("ms_configura.php"))
-		include_once("ms_configura.php");
+		include("ms_configura.php");
 		else
-		include_once("../ms_configura.php");
+		include("../ms_configura.php");
 	}
 	else
 	{include_once("$locaplic/ms_configura.php");}

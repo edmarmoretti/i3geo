@@ -45,17 +45,17 @@ if(!isset($locaplic))
 {
 	$locaplic = "";
 	if(file_exists("../../../ms_configura.php"))
-	{include_once("../../../ms_configura.php");}
+	{include("../../../ms_configura.php");}
 	else
 	{
 		if(file_exists("../../ms_configura.php"))
-		{include_once("../../ms_configura.php");}
+		{include("../../ms_configura.php");}
 		else
 		{
 			if(file_exists("../ms_configura.php"))
-			{include_once("../ms_configura.php");}
+			{include("../ms_configura.php");}
 			else
-			include_once("ms_configura.php");
+			include("ms_configura.php");
 		}	
 	}
 }

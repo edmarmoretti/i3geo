@@ -9,7 +9,7 @@ img
 //http://localhost/i3geo/pacotes/openid/login.php?g_sid=dqpk71kh6ei121s4u5g1qb9vi1
 session_name("openid");
 session_start();
-include_once("../../ms_configura.php");
+include("../../ms_configura.php");
 if($_SESSION["openid"] == false)
 {
 	$dadosurl = array_merge($_GET,$_POST);

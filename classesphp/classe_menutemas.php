@@ -66,7 +66,7 @@ $idioma - (opcional) pt|en|es|it
 		if($editores == "")
 		{
 			if(file_exists("../ms_configura.php"))
-			{include_once("../ms_configura.php");}
+			{include("../ms_configura.php");}
 		}
 		$perfil = str_replace(" ",",",$perfil);
 		$this->perfil = explode(",",$perfil);

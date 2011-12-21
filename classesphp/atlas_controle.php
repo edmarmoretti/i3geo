@@ -117,9 +117,9 @@ if ($map_file != "")
 if(!isset($locaplic))
 {
 	if(file_exists("../ms_configura.php"))
-	{include_once("../ms_configura.php");}
+	{include("../ms_configura.php");}
 	else
-	{include_once("ms_configura.php");}
+	{include("ms_configura.php");}
 }
 include($locaplic."/admin/php/xml.php");
 $xml = simplexml_load_string(geraXmlAtlas($locaplic,$editores));

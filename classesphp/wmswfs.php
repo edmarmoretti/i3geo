@@ -55,7 +55,7 @@ function gravaCacheWMS($servico)
 {
 	global $dir_tmp;
 	if($dir_tmp == "")
-	{include_once("../ms_configura.php");}
+	{include("../ms_configura.php");}
 	error_reporting(0);
 	try{
 		$teste = explode("=",$servico);

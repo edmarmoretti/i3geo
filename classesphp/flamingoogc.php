@@ -47,7 +47,7 @@ if (!function_exists('ms_GetVersion'))
 	{dl('php_mapscript.so');}
 }
 include_once("carrega_ext.php");
-include_once("../ms_configura.php");
+include("../ms_configura.php");
 include_once("pega_variaveis.php");
 //
 //cria o web service

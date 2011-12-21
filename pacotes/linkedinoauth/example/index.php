@@ -1,6 +1,6 @@
 <?php
 require_once("common.inc.php");
-include_once("../../../ms_configura.php");
+include("../../../ms_configura.php");
 
 $test_consumer = new OAuthConsumer($linkedinoauth["consumerkey"], $linkedinoauth["consumersecret"], NULL);
 $req_token = new OAuthConsumer($linkedinoauth["consumerkey"], $linkedinoauth["consumersecret"], 1);

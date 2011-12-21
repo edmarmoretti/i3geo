@@ -1,5 +1,5 @@
 <?php
-include_once("../../ms_configura.php");
+include("../../ms_configura.php");
 include_once("../../classesphp/pega_variaveis.php");
 ?>
 <html>

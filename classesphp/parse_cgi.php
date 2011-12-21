@@ -61,7 +61,7 @@ session_start();
 $mapext = $temp;
 $map_file = $_SESSION["map_file"];
 
-include_once("../ms_configura.php");
+include("../ms_configura.php");
 if(isset($fingerprint))
 {
 	if (md5('I3GEOSEC' . $_SERVER['HTTP_USER_AGENT'] . session_id()) != $fingerprint)

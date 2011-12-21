@@ -948,9 +948,9 @@ class LayerServer {
 			{
 				$this->map_object = ms_newMapObj($this->map);
 				if(file_exists("ms_configura.php"))
-				{include_once("ms_configura.php");}
+				{include("ms_configura.php");}
 				else
-				{include_once("../../ms_configura.php");}
+				{include("../../ms_configura.php");}
 				if(!$this->_zipped)
 				$this->map_object->setmetadata('wms_onlineresource',$servidor.":80".$locmapserv."?map=".$temp."&width=1500&height=1500&");
 				$n = $this->map_object->numlayers;

@@ -2943,7 +2943,7 @@ Pega a lista de drives registrados para o usuário atual.
 A lista de drives é definida no ms_configura e permite que o usuário navegue pelos arquivos do servidor.
 */
 	case "LISTADRIVES":
-		include_once("../ms_configura.php");
+		include("../ms_configura.php");
 		//verifica se está cadastrado
 		$ipcliente = pegaIPcliente();
 		$retorno = array();
