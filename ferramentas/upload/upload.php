@@ -32,7 +32,7 @@ if (isset($_FILES['i3GEOuploadshp']['name']))
 		$mapa = ms_newMapObj($map_file);
 		$dirmap = dirname($map_file);
 	}
-	if(isset($dirDestino)){
+	if(isset($dirDestino) && $dirDestino != ""){
 		if(!isset($editores))
 		{echo "<p class='paragrafo' >Lista de editores não disponível. Não pode gravar fora do diretório temporário";paraAguarde();exit;}
 		$dirmap = $dirDestino;
@@ -62,6 +62,10 @@ if (isset($_FILES['i3GEOuploadshp']['name']))
 	$status =  move_uploaded_file($Arquivo,$dirmap."/".$nomePrefixo.".dbf");
 	if($status != 1)
 	{echo "<p class='paragrafo' >Ocorreu um erro no envio do arquivo DBF";paraAguarde();exit;}
+	
+	if(!file_exists($dirmap."/".$nomePrefixo.".shp"))
+	{echo "<p class='paragrafo' >Ocorreu algum problema no envio do arquivo ".$dirmap."/".$nomePrefixo;paraAguarde();exit;}	
+	
 	echo "<p class='paragrafo' >Arquivo enviado.</p>";
 	if(isset($map_file)){
 		echo "<p class='paragrafo' >Adicionando tema...</p>";

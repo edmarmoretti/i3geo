@@ -99,7 +99,8 @@ i3GEOF.upload = {
 		'<input type=hidden name=g_sid value="'+i3GEO.configura.sid+'" >' +
 		'<input type="hidden" name="MAX_FILE_SIZE" value="1000000">' +
 		'</form>' +
-		'<br><iframe name=i3GEOuploadiframe style="text-align:left;border:1px solid gray;" width="98%" height="60px"></iframe>';
+		"<p class='paragrafo' style=color:red >Não utilize '_' no nome do arquivo. Apenas letras e números são aceitos!!!</p>" +
+		'<iframe name=i3GEOuploadiframe style="text-align:left;border:1px solid gray;" width="98%" height="60px"></iframe>';
 		return ins;
 	},
 	/*
@@ -116,7 +117,7 @@ i3GEOF.upload = {
 		titulo = "Upload de shapefile <a class=ajuda_usuario target=_blank href='" + i3GEO.configura.locaplic + "/ajuda_usuario.php?idcategoria=4&idajuda=27' >&nbsp;&nbsp;&nbsp;</a>";
 		janela = i3GEO.janela.cria(
 			"355px",
-			"450px",
+			"470px",
 			"",
 			"",
 			"",

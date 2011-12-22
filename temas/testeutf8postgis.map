@@ -4,7 +4,8 @@ MAP
   FONTSET "../symbols/fontes.txt"
   SYMBOLSET "../symbols/simbolos.sym"
   LAYER
-    CONNECTION "teste"
+    #CONNECTION "teste"
+	CONNECTION "user=postgres password=postgres dbname=postgis host=localhost port=5432 options='-c client_encoding=ISO-8859-1'"
     CONNECTIONTYPE POSTGIS
     DATA "the_geom FROM (select * FROM teste.estados) as foo USING UNIQUE gid USING SRID=4291"
     METADATA
