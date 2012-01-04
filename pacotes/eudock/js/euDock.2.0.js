@@ -273,7 +273,6 @@ var euOPAQUE      = 16;
 				this.idObjectHook = document.getElementById(idObj);
 				this.setObjectCoord();
 			};
-			
 			this.setObjectCoord = function(){
 				var tempx,tempy;
 				if (this.objectAlign==euDOWN){
@@ -281,8 +280,14 @@ var euOPAQUE      = 16;
 					tempy = euIdObjTop(this.idObjectHook)  + this.idObjectHook.offsetHeight + this.offset
 					if(navm && !document.doctype || (navm && document.doctype && document.doctype.systemId == "")){
 						tempx = i3GEO.util.pegaPosicaoObjeto($i(i3GEO.Interface.IDMAPA))[0] - (euIdObjLeft(this.idObjectHook) / 2);
-						tempy = euIdObjTop(this.idObjectHook)  + this.idObjectHook.offsetHeight + this.offset;
 					}
+					//alert(tempx);
+					if(navm && i3GEO.util.versaoNavegador() === "IE8" && tempx < this.idObjectHook.offsetWidth){
+						tempx = i3GEO.parametros.w / 2;
+						if(i3GEO.guias.TIPO === "guia" || i3GEO.guias.TIPO === "sanfona" && $i("contemFerramentas")){
+							tempx += parseInt($i("contemFerramentas").style.width,10);
+						}
+					}	
 					this.setCenterPos(
 						tempx,
 						tempy

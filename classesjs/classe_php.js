@@ -1072,7 +1072,7 @@ i3GEO.php = {
 			par = "funcao=criaMapa&"+parametros,
 			cp = new cpaint();
 		cp.set_response_type("JSON");
-		if(navn && navigator.userAgent.toLowerCase().indexOf('3.') > -1){
+		if(i3GEO.util.versaoNavegador() === "FF3"){
 			cp.set_async(true);
 			if(typeof(console) !== 'undefined'){console.warn("cp.set_async(true)");}
 		}
@@ -1092,7 +1092,7 @@ i3GEO.php = {
 			par = "funcao=inicia&embedLegenda="+embedLegenda+"&w="+w+"&h="+h+"&g_sid="+i3GEO.configura.sid+"&interface="+i3GEO.Interface.ATUAL,
 			cp = new cpaint();
 		cp.set_response_type("JSON");
-		if(navn && navigator.userAgent.toLowerCase().indexOf('3.') > -1)
+		if(i3GEO.util.versaoNavegador() === "FF3")
 		{cp.set_async(true);}
 		else
 		{cp.set_async(false);}

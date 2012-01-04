@@ -1426,6 +1426,8 @@ function buscaRapida($servico,$palavra)
 		include_once('../pacotes/SOAP/nusoap.php');
 		$soapclient = new nusoap_client($servico);
 	}
+//echo $soapclient->getDebug();
+//exit;	
 	$vv = "erro";
 	$vv = $soapclient->call("procurar",array("palavra"=>$palavra,"tipoBusca"=>"qualquer"));
 	if($vv == ""){$vv = "erro";}

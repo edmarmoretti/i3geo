@@ -2460,6 +2460,19 @@ i3GEO.util = {
 			}
 		}
 		catch(e){}
+	},
+	/*
+	Function: versaoNavegador
+	
+	Retorna algumas versões de navegador
+	*/	
+	versaoNavegador: function(){
+		var v = "";
+		if(navm && navigator.userAgent.toLowerCase().indexOf('msie 8.') > -1)
+		{return "IE8";}
+		if(navn && navigator.userAgent.toLowerCase().indexOf('3.') > -1)
+		{return "FF3";}
+		return "";
 	}
 };
 //++++++++++++++++++++++++++++++++++++
