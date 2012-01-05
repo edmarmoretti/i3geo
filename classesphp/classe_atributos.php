@@ -483,6 +483,7 @@ $onde - Tipo de abrangência espacial (brasil ou mapa)
 			$buscas = $buscas.$buscaUTF;
 			$sopen = $l->open();
 			if($sopen == MS_FAILURE){return "erro";}
+			
 			$l->whichShapes($this->mapa->extent);
 			$fr = array();
 			while ($shape = $l->nextShape())
