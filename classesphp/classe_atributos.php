@@ -275,13 +275,18 @@ $tipo - Tipo de busca brasil|null
 			$shapes = retornaShapesMapext($this->layer,$this->mapa);
 		}
 		$registros[] = array();
+		if(strtoupper($this->layer->getmetadata("convcaracter")) == "NAO")
+		{$convC = false;}
+		else
+		{$convC = true;}
 		foreach($shapes as $shape)
 		{
 			$valitem = array();
 			foreach ($items as $item)
 			{
 				$v = trim($shape->values[$item]);
-				$v = $this->converte($v);
+				if($convC == true)
+				{$v = $this->converte($v);}
 				$valitem[] = $v;
 			}
 			$registros[] = implode(";",$valitem);
@@ -335,6 +340,10 @@ $tipolista - Indica se serão mostrados todos os registros ou apenas os seleciona
 		$res_count = count($shapes);
 		$registros = array();
 		//lista apenas os selecionados
+		if(strtoupper($this->layer->getmetadata("convcaracter")) == "NAO")
+		{$convC = false;}
+		else
+		{$convC = true;}		
 		if ($tipolista == "selecionados")
 		{
 			$chk = "CHECKED";
@@ -350,7 +359,8 @@ $tipolista - Indica se serão mostrados todos os registros ou apenas os seleciona
 				foreach ($items as $item)
 				{
 					$valori = trim($shape->values[$item]);
-					$valori = $this->converte($valori);
+					if($convC == true)
+					{$valori = $this->converte($valori);}
 					$valitem[] = array("item"=>$item,"valor"=>$valori);
 				}
 				$registros[] = array("indice"=>$indx,"valores"=>$valitem,"status"=>$chk);
@@ -395,7 +405,8 @@ $tipolista - Indica se serão mostrados todos os registros ou apenas os seleciona
 						{
 							$valori = ($shape->values[$item]);
 						}
-						$valori = $this->converte($valori);
+						if($convC == true)
+						{$valori = $this->converte($valori);}
 						$valitem[] = array("item"=>$item,"valor"=>$valori);
 					}
 					//if (in_array($shp_index,$shp_atual))
@@ -460,6 +471,10 @@ $onde - Tipo de abrangência espacial (brasil ou mapa)
 			$this->layer = $l;
 			if ($l->data == "")
 			{return "Erro. O tema não tem tabela";}
+			if(strtoupper($this->layer->getmetadata("convcaracter")) == "NAO")
+			{$convC = false;}
+			else
+			{$convC = true;}			
 			$filtro = $l->getfilterstring();
 			if ($filtro != ""){$l->setfilter("");}
 			$buscas = "ÁÃÓÕÔáàãâóòôõúûíéêç";
@@ -481,7 +496,8 @@ $onde - Tipo de abrangência espacial (brasil ou mapa)
 					{
 						if (strtr($v,$buscas,$trocas) == strtr($palavra,$buscas,$trocas))
 						{
-							$v = $this->converte($v);
+							if($convC == true)
+							{$v = $this->converte($v);}
 							$r[] = array("item" => $item,"valor" => $v);
 							$encontrado = "sim";
   						}
@@ -490,7 +506,8 @@ $onde - Tipo de abrangência espacial (brasil ou mapa)
 					{
 						if (stristr(strtr($v,$buscas,$trocas),strtr($palavra,$buscas,$trocas)))
 						{
-							$v = $this->converte($v);
+							if($convC == true)
+							{$v = $this->converte($v);}
 							$r[] = array("item" => $item,"valor" => $v);
 							$encontrado = "sim";
 						}
@@ -1163,6 +1180,10 @@ $listaDeTemas - (opcional) Lista com os códigos dos temas que serão identificado
 		$layer->set("template","none.htm");
 		$pt = ms_newPointObj();
 		$pt->setXY($x, $y);
+		if(strtoupper($layer->getmetadata("convcaracter")) == "NAO")
+		{$convC = false;}
+		else
+		{$convC = true;}		
 		//
 		//operação especial para o caso de wms
 		//
@@ -1216,7 +1237,8 @@ $listaDeTemas - (opcional) Lista com os códigos dos temas que serão identificado
 					if(trim($v) != "")
 					{
 						$va = trim($v);
-						$va = $this->converte($va);
+						if($convC == true)
+						{$va = $this->converte($va);}
 						$n[] = array("alias"=>trim($t[0]),"valor"=>$va,"link"=>"","img"=>"");
 					}
 				}
@@ -1232,7 +1254,10 @@ $listaDeTemas - (opcional) Lista com os códigos dos temas que serão identificado
 					$linha = explode("|",$linha);
 					for($i=0;$i < count($cabecalho);++$i)
 					{
-						$va = $this->converte($linha[$i]);
+						if($convC == true)
+						{$va = $this->converte($linha[$i]);}
+						else
+						{$va = $linha[$i];}
 						$n[] = array("alias"=>$cabecalho[$i],"valor"=>$va,"link"=>"","img"=>"");
 					}
 				}
@@ -1320,6 +1345,10 @@ $listaDeTemas - (opcional) Lista com os códigos dos temas que serão identificado
 			$ident = @$layer->queryByPoint($pt, 1, -1);
 			$sopen = $layer->open();
 			$res_count = $layer->getNumresults();
+			if(strtoupper($layer->getmetadata("convcaracter")) == "NAO")
+			{$convC = false;}
+			else
+			{$convC = true;}			
 			if($sopen == MS_FAILURE){return "erro";}
 			for ($i = 0; $i < $res_count; ++$i)
 			{
@@ -1355,6 +1384,8 @@ $listaDeTemas - (opcional) Lista com os códigos dos temas que serão identificado
 						foreach ($itens as $it)
 						{
 							$val = $shape->values[$it];
+							if($convC == true)
+							{$val = $this->converte($val);}
 							$link = $lks[$conta];
 							foreach($itens as $t)
 							{
@@ -1374,7 +1405,7 @@ $listaDeTemas - (opcional) Lista com os códigos dos temas que serão identificado
 							{$etiqueta = "sim";}
 							$arraytemp = array(
 								"alias"=>$this->converte($itensdesc[$conta]),
-								"valor"=>$this->converte($val),
+								"valor"=>$val,
 								"link"=>$link,
 								"img"=>$img,
 								"tip"=>$etiqueta

@@ -50,6 +50,10 @@ if ($layer->getNumresults() > 0){$existesel = "sim";}
 if ($existesel == "nao")
 {$layer->querybyrect($mapa->extent);}
 $layer->open();
+if(strtoupper($layer->getmetadata("convcaracter")) == "NAO")
+{$convC = false;}
+else
+{$convC = true;}
 //$registros[] = array();
 $res_count = $layer->getNumresults();
 for ($i = 0; $i < $res_count; $i++)
@@ -62,7 +66,7 @@ for ($i = 0; $i < $res_count; $i++)
 	foreach ($itensrel as $item)
 	{
 		$v = trim($shape->values[$item]);
-		if (function_exists("mb_convert_encoding"))
+		if (function_exists("mb_convert_encoding") && $convC == true)
 		{$v = mb_convert_encoding($v,"UTF-8","ISO-8859-1");}
 		$valitem[$item] = $v;
 	}

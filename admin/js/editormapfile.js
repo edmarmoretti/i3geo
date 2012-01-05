@@ -1349,6 +1349,8 @@ function montaEditorDados(dados)
 		"linhas":[
 		{ajuda:"Type of connection. Default is local.",
 		titulo:"Connectiontype",id:"",value:"",div:"<div id=cConnectiontype ></div>",tipo:"text"},
+		{ajuda:"Aplica a conversão de caracteres nas ferramentas que obtém os dados descritivos referentes aos elementos do LAYER. Em alguns casos, a conversão pode provocar problemas de acentuação. Se isso ocorrer, na ferramenta tabela por exemplo, experimente marcar essa opção como 'nao'",
+		titulo:"Conversão de caracteres (METADATA: CONVCARACTER)",id:"",value:dados.convcaracter,tipo:"text",div:"<div id=cConvcaracter ></div>"},
 		{ajuda:"Database connection string to retrieve remote data.An SDE connection string consists of a hostname, instance name, database name, username and password separated by commas.A PostGIS connection string is basically a regular PostgreSQL connection string, it takes the form of 'user=nobody password=****** dbname=dbname host=localhost port=5432' An Oracle connection string: user/pass[@db] . Se vc tiver problemas com acentuação, experimente algo como: user=postgres password=postgres dbname=pgutf8 host=localhost port=5432 options='-c client_encoding=LATIN1'",
 		titulo:"Connection",id:"connection",value:dados.connection,tipo:"text"},
 		{ajuda:"Full filename of the spatial data to process. No file extension is necessary for shapefiles. Can be specified relative to the SHAPEPATH option from the Map Object.If this is an SDE layer, the parameter should include the name of the layer as well as the geometry column, i.e. 'mylayer,shape,myversion'.If this is a PostGIS layer, the parameter should be in the form of '<columnname> from <tablename>', where 'columnname' is the name of the column containing the geometry objects and 'tablename' is the name of the table from which the geometry data will be read.For Oracle, use 'shape FROM table' or 'shape FROM (SELECT statement)' or even more complex Oracle compliant queries! Note that there are important performance impacts when using spatial subqueries however. Try using MapServer's FILTER whenever possible instead. You can also see the SQL submitted by forcing an error, for instance by submitting a DATA parameter you know won't work, using for example a bad column name. Exemplo postgis: the_geom FROM (select * FROM biomas) as foo USING UNIQUE gid USING SRID=4291 . Exemplo shapefile: c://ms4w/Apache/htdocs/geodados/brasil/limitespol/localidades.shp",
@@ -1410,7 +1412,13 @@ function montaEditorDados(dados)
 	temp += core_comboObjeto(objlayertypes,"valor","texto",dados.type)
 	temp += "</select>"
 	$i("cType").innerHTML = temp
-	
+
+	if($i("cConvcaracter")){
+		temp = "<select id='convcaracter' >"
+		temp += core_combosimnao(dados.convcaracter)
+		temp += "</select>"
+		$i("cConvcaracter").innerHTML = temp
+	}	
 	
 	var temp = function()
 	{salvarDadosEditor('conexao',dados.codigoMap,dados.codigoLayer,false)}
@@ -1866,7 +1874,7 @@ function salvarDadosEditor(tipo,codigoMap,codigoLayer,indiceClasse,indiceEstilo,
 	}
 	if(tipo == "conexao")
 	{
-		var campos = new Array("cache","projection","type","connection","data","connectiontype","tileitem","tileindex","filteritem","filter","tipooriginal")
+		var campos = new Array("cache","projection","type","connection","data","connectiontype","tileitem","tileindex","filteritem","filter","tipooriginal","convcaracter");
 		var par = "&codigoMap="+codigoMap+"&codigoLayer="+codigoLayer
 		var prog = "../php/editormapfile.php?funcao=alterarConexao"
 	}

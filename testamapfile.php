@@ -136,7 +136,7 @@ function verifica($map,$solegenda)
 	$tema = "";
 
 	if(file_exists($map))
-	$tema = $map;
+	{$tema = $map;}
 	else
 	{	
 		$map = str_replace("\\","/",$map);
@@ -150,6 +150,8 @@ function verifica($map,$solegenda)
 	}
 	if(($tipo == "") || ($tipo == "todos"))
 	{echo "<hr><br><br><span style='color:red' ><b>Testando: $tema </span><pre></b>";}
+	if(!file_exists($tema))
+	{$tema = $locaplic."/".$tema;}
 	if(!file_exists($tema))
 	{echo "Arquivo ".$map." não encontrado.";exit;}
 	if ($tema != "")
@@ -189,13 +191,14 @@ function verifica($map,$solegenda)
 			eval($pegarext."(\$mapa);");
 		}
 		else{
-			if(@ms_newMapObj($locaplic."/".$tema))
+			if(@ms_newMapObj($tema))
 			{
-				$nmapa = ms_newMapObj($locaplic."/".$tema);
+				$nmapa = ms_newMapObj($tema);
 			}
 			else
 			{
 				echo "erro no arquivo $map <br>";
+				echo "Obs.: em alguns testes o mapfile pode falhar se o endereço dos arquivos de símbolos estiverem <br>definidos de forma relativa ao invés de absoluta. Nesses casos, ao abrir o i3Geo, <br>o mapfile poderá funcionar. <br>";
 				$error = ms_GetErrorObj();
 				while($error && $error->code != MS_NOERR)
 				{

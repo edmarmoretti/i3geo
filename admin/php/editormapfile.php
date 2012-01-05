@@ -1485,7 +1485,7 @@ function pegaConexao()
 	if($dados["projection"] == "null")
 	{$dados["projection"] = "";}
 	$dados["projection"] = str_replace("+i","i",$dados["projection"]);
-
+	$dados["convcaracter"] = $layer->getmetadata("convcaracter");
 	$dados["colunas"] = implode(" ,",pegaItens($layer));
 	if($layer->connectiontype == 7 || $layer->connectiontype == 9){
 		$dados["tipooriginal"] = $layer->getmetadata("tipooriginal");
@@ -1494,7 +1494,7 @@ function pegaConexao()
 }
 function alterarConexao()
 {
-	global $cache,$tipooriginal,$filteritem,$filter,$projection,$type,$dir_tmp,$testar,$codigoMap,$codigoLayer,$locaplic,$connection,$connectiontype,$data,$tileitem,$tileindex;
+	global $convcaracter,$cache,$tipooriginal,$filteritem,$filter,$projection,$type,$dir_tmp,$testar,$codigoMap,$codigoLayer,$locaplic,$connection,$connectiontype,$data,$tileitem,$tileindex;
 	$mapfile = $locaplic."/temas/".$codigoMap.".map";
 	$mapa = ms_newMapObj($mapfile);
 	$layer = $mapa->getlayerbyname($codigoLayer);
@@ -1516,7 +1516,8 @@ function alterarConexao()
 	if($layer->connectiontype == 7 || $layer->connectiontype== 9){
 		$layer->setmetadata("tipooriginal",$tipooriginal);
 	}
-	$layer->setmetadata("cache",$cache);	
+	$layer->setmetadata("cache",$cache);
+	$layer->setmetadata("convcaracter",$convcaracter);	
 	if($testar == "true")
 	{
 		$nome = $dir_tmp."/".$codigoMap.".map";
