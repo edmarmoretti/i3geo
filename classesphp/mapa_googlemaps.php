@@ -89,6 +89,7 @@ if(!isset($_SESSION["map_file"]))
 //
 $map_fileX = $_SESSION["map_file"];
 $postgis_mapa = $_SESSION["postgis_mapa"];
+$cachedir = $_SESSION["cachedir"];
 //
 //converte a requisição do tile em coordenadas geo
 //http://wiki.openstreetmap.org/wiki/Slippy_map_tilenames#tile_numbers_to_lon.2Flat_2
@@ -192,7 +193,7 @@ if(trim($_GET["TIPOIMAGEM"]) != "" && trim($_GET["TIPOIMAGEM"]) != "nenhum")
 if($qy)
 {$cache = false;}
 if($cache == true)
-{carregaCacheImagem($_GET["BBOX"],$nomecache,$map_fileX,$_GET["WIDTH"],$_GET["HEIGHT"]);}
+{carregaCacheImagem($cachedir,$_GET["BBOX"],$nomecache,$map_fileX,$_GET["WIDTH"],$_GET["HEIGHT"]);}
 
 $map_size = explode(" ",$_GET["map_size"]);
 $mapa->setsize($map_size[0],$map_size[1]);
@@ -286,7 +287,7 @@ if(trim($_GET["TIPOIMAGEM"]) != "" && trim($_GET["TIPOIMAGEM"]) != "nenhum")
 }
 else{
 	if($cache == true)
-	{$nomer = salvaCacheImagem($_GET["BBOX"],$nomecache,$map_fileX,$_GET["WIDTH"],$_GET["HEIGHT"]);}
+	{$nomer = salvaCacheImagem($cachedir,$_GET["BBOX"],$nomecache,$map_fileX,$_GET["WIDTH"],$_GET["HEIGHT"]);}
 	else{
 		if($img->imagepath == "")
 		{echo "Erro IMAGEPATH vazio";exit;}
@@ -301,27 +302,34 @@ else{
 	echo header("Content-type: image/png \n\n");
 	imagepng($img);
 }
-function salvaCacheImagem($bbox,$layer,$map,$w,$h){
+function salvaCacheImagem($cachedir,$bbox,$layer,$map,$w,$h){
 	global $img,$map_size;
 	//layers que são sempre iguais
+	//error_reporting(E_ALL);
 	if($layer == "copyright" || $layer == "")
 	{$bbox = "";}
 	if($layer == "")
 	{$layer = "fundo";}
-	$nomedir = dirname(dirname($map))."/cache/googlemaps/".$layer;
-	@mkdir($nomedir,0777);
-	$nome = $nomedir."/".$w.$h.$bbox.".png";
+	if($cachedir == "")
+	{$cachedir = dirname(dirname($map))."/cache/googlemaps/".$layer;}
+	else
+	{$cachedir = $cachedir."/googlemaps/".$layer;}
+	@mkdir($cachedir,0777);
+	$nome = $cachedir."/".$w.$h.$bbox.".png";
 	if(!file_exists($nome))
 	{$img->saveImage($nome);}
 	return $nome;
 }
-function carregaCacheImagem($bbox,$layer,$map,$w,$h){
+function carregaCacheImagem($cachedir,$bbox,$layer,$map,$w,$h){
 	if($layer == "copyright" || $layer == "")
 	{$bbox = "";}
 	if($layer == "")
 	{$layer = "fundo";}
 	$nome = $w.$h.$bbox.".png";
-	$nome = dirname(dirname($map))."/cache/googlemaps/".$layer."/".$nome;
+	if($cachedir == "")
+	{$nome = dirname(dirname($map))."/cache/googlemaps/".$layer."/".$nome;}
+	else
+	{$nome = $cachedir."/googlemaps/".$layer."/".$nome;}	
 	if(file_exists($nome))
 	{
 		if (!function_exists('imagepng'))

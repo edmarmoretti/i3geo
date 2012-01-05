@@ -208,7 +208,7 @@ if ($tipo == "" || $tipo == "metadados")
 				{
 					$l->set("name",$tx);
 					if($cache == true && strtolower($l->getmetadata("cache")) == "sim"){
-						carregaCacheImagem($_GET["BBOX"],$t,$_GET["WIDTH"],$_GET["HEIGHT"]);
+						carregaCacheImagem($_GET["BBOX"],$t,$_GET["WIDTH"],$_GET["HEIGHT"],$cachedir);
 					}
 				}
 				$l->setmetadata("gml_include_items","all");
@@ -433,11 +433,13 @@ function ogc_imprimeListaDeTemas()
 	}
 	echo $imprimir."</body></html>";
 }
-function carregaCacheImagem($bbox,$layer,$w,$h){
+function carregaCacheImagem($bbox,$layer,$w,$h,$cachedir=""){
 	global $dir_tmp;
-
 	$nome = $w.$h.$bbox.".png";
-	$nome = $dir_tmp."/cache/".$layer."/".$nome;
+	if($cachedir == "")
+	{$nome = $dir_tmp."/cache/".$layer."/".$nome;}
+	else
+	{$nome = $cachedir."/".$layer."/".$nome;}
 	if(file_exists($nome))
 	{
 		if (!function_exists('imagepng'))

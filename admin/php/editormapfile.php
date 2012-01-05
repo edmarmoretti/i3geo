@@ -174,19 +174,26 @@ switch (strtoupper($funcao))
 		$mapfile = $locaplic."/temas/".$codigoMap.".map";
 		$mapa = ms_newMapObj($mapfile);
 		$nomes = $mapa->getalllayernames();
+		if($cachedir != "")
+		{$d = $cachedir;}
+		else
+		{$d = $dir_tmp."/cache";}
 		foreach($nomes as $nome)
 		{
-			$dir = $dir_tmp."/cache/".$nome;
-			if (is_dir($dir)) {
-				$objects = scandir($dir);
-				foreach ($objects as $object) {
-					if ($object != "." && $object != "..") {
-						if (filetype($dir."/".$object) == "dir") rrmdir($dir."/".$object); else unlink($dir."/".$object);
+			$dirs[] = $d."/".$nome;
+			$dirs[] = $d."/googlemaps/".$nome;
+			foreach($dirs as $dir){
+				if (is_dir($dir)) {
+					$objects = scandir($dir);
+					foreach ($objects as $object) {
+						if ($object != "." && $object != "..") {
+							if (filetype($dir."/".$object) == "dir") rrmdir($dir."/".$object); else unlink($dir."/".$object);
+						}
 					}
+					reset($objects);
+					rmdir($dir);
 				}
-				reset($objects);
-				rmdir($dir);
-			} 
+			}
 		}
 		retornaJSON("ok");
 		exit;

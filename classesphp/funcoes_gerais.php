@@ -2625,11 +2625,13 @@ Parametro:
 
 $dir_tmp {string} - Diretório temporário (no servidor) utilizado pelo mapserver.
 
+$$cachedir {string} - Diretório de cache temporário definido no ms_configura.php
+
 Retorno:
 
 {boleano}
 */
-function criaDirMapa($dir_tmp)
+function criaDirMapa($dir_tmp,$cachedir="")
 {
 	if(!file_exists($dir_tmp)){
 		@mkdir ($dir_tmp,0777);
@@ -2642,8 +2644,14 @@ function criaDirMapa($dir_tmp)
 		$mapfile = $dir_tmp."/".$tmpdirname."/".$tmpdirname.".map";
 		$tmpimgname = "img".$tmpdirname;
 		@mkdir($dir_tmp."/comum",0777);
-		@mkdir($dir_tmp."/cache",0777);
-		@mkdir($dir_tmp."/cache/googlemaps",0777);
+		if($cachedir == ""){
+			@mkdir($dir_tmp."/cache",0777);
+			@mkdir($dir_tmp."/cache/googlemaps",0777);		
+		}
+		else{
+			@mkdir($cachedir,0777);
+			@mkdir($cachedir."/googlemaps",0777);			
+		}
 		if(file_exists($dir_tmp."/".$tmpdirname))
 		return array($mapfile,$tmpdirname,$tmpimgname);
 		else

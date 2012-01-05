@@ -1,6 +1,4 @@
 MAP
-
-
   FONTSET "c:\ms4w\apache\htdocs\i3geo\symbols\fontes.txt"
   SYMBOLSET "c:\ms4w\apache\htdocs\i3geo\symbols\simbolos.sym"
   LAYER
@@ -10,30 +8,31 @@ MAP
     GROUP "biomashp"
     HEADER "teste.htm"
     METADATA
-      "cache"	""
       "ltempoitemimagem"	""
-      "ltempoitemdescricao"	""
+      "cache"	"SIM"
       "CLASSE"	"SIM"
-      "ltempoiteminicio"	""
+      "ltempoitemdescricao"	""
       "palletestep"	""
-      "ltempoitemtip"	""
+      "ltempoiteminicio"	""
       "permitekmz"	"sim"
-      "ltempoitemtitulo"	""
-      "description_template"	""
+      "ltempoitemtip"	""
       "iconetema"	"http://www.gpsdrive.de/development/map-icons/square.small/leisure/park.png"
+      "description_template"	""
+      "ltempoitemtitulo"	""
       "ltempoitemlink"	""
-      "extensao"	"-44 -23 -39 -21"
       "palletefile"	""
+      "extensao"	"-44 -23 -39 -21"
       "NOMEORIGINAL"	""
-      "ltempoformatodata"	""
       "permitedownload"	"sim"
+      "ltempoformatodata"	""
       "ltempoitemicone"	""
       "download"	"SIM"
-      "permiteogc"	""
       "permitekml"	"sim"
+      "permiteogc"	""
+      "convcaracter"	""
       "TEMA"	"bioma shp"
-      "editorsql"	""
       "identifica"	"NAO"
+      "editorsql"	""
       "ltempoitemfim"	""
     END
     NAME "biomashp"
@@ -109,4 +108,6 @@ MAP
       TITLE ""
     END
   END
+
 END
+

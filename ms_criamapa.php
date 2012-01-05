@@ -191,7 +191,7 @@ if(isset($idioma) && $idioma != "")
 /*
 Cria os diretórios temporários que serão utilizados pelo i3geo para armazenar as imagens e outros dados. 
 */
-$diretorios = criaDirMapa($dir_tmp);
+$diretorios = criaDirMapa($dir_tmp,$cachedir);
 if(!$diretorios)
 {echo "<p style=color:red ><b>N&atilde;o foi poss&iacute;vel criar os diret&oacute;rios tempor&aacute;rios em $dir_tmp.</b></p>";exit;}
 criaIndex();
@@ -204,6 +204,7 @@ As variáveis vêm do arquivo ms_configura.php e são armazenadas em uma seção com 
 */
 if (!isset($mapext)){$mapext="";}
 $editores_ = $editores;
+$cachedir_ = $cachedir;
 $dir_tmp_ = $dir_tmp;
 $emailInstituicao_ = $emailInstituicao;
 $locmapserv_ = $locmapserv;
@@ -261,6 +262,7 @@ isso pq algumas aplicações podem ser prejudicadas caso o aguarde seja mostrado
 */
 $_SESSION["editores"] = $editores_;
 $_SESSION["dir_tmp"] = $dir_tmp_;
+$_SESSION["cachedir"] = $cachedir_;
 $_SESSION["emailInstituicao"] = $emailInstituicao_;
 $_SESSION["locmapserv"] = $locmapserv_;
 $_SESSION["locaplic"] = $locaplic_;

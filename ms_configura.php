@@ -398,6 +398,20 @@ if (strtoupper(substr(PHP_OS, 0, 3) == 'WIN'))
 	Vc pode usar essa variável para customizar a inicialização do mapa.
 	*/
 	$base = "";
+	/*
+	Variable: cachedir
+	
+	Pasta onde ficarão armazenadas as imagens geradas pelo i3Geo para os LAYERS que permitem cache.
+	
+	Os layers que permitem cache são definidos no sistema de administração do i3Geo.
+	
+	Se cachedir for vazia, será utilizado o default do i3geo (diretório temporário)
+	
+	Exemplo
+	
+	$cachedir = 'c:/temp/cache';
+	*/
+	$cachedir = "c:/temp/cache";
 }
 else //se for linux
 {
@@ -433,5 +447,6 @@ else //se for linux
 	$conexaoadmin = "";//$locaplic."/admin/php/conexaopostgresql.php";
 	$interfacePadrao = "openlayers.htm";
 	$base = "";
+	$cachedir = "";
 }
 ?>
