@@ -110,8 +110,9 @@ function iniciaMapa()
 	//pega o xml com os sietmas para identificação
 	//
 	if(!isset($interface)){$interface = "";}
+	
 	if($interface == "googlemaps" || $interface == "googleearth")
-	{
+	{	
 		$m = ms_newMapObj($map_file);
 		if($interface == "googlemaps"){
 			$m->setProjection("proj=merc,a=6378137,b=6378137,lat_ts=0.0,lon_0=0.0,x_0=0.0,y_0=0,k=1.0,units=m");
@@ -127,12 +128,8 @@ function iniciaMapa()
 				if($layer->opacity == "");
 				{$layer->set("opacity",50);}
 			}
-			//if($layer->getProjection() == "" )
-			//{$layer->setProjection("init=epsg:4291");}
 			if($layer->name == "rosadosventos" || $layer->name == "copyright")
-			{
-				$layer->set("status",MS_DELETE);
-			}
+			{$layer->set("status",MS_DELETE);}
 		}
 		$temp = $m->scalebar;
 		$temp->set("status",MS_OFF);

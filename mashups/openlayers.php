@@ -8,6 +8,9 @@ error_reporting(0);
 //
 if(!isset($temas))
 {ajuda();}
+//problema na versão 211 do OpenLayers. Tamanho em % não é aceito
+if(!isset($largura))
+{$largura = 500;}
 if(isset($largura) && !isset($altura))
 {$altura = $largura;}
 if(isset($altura) && !isset($largura))

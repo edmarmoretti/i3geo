@@ -87,7 +87,6 @@ else
 {exit;}
 if(!isset($_SESSION["map_file"]))
 {exit;}
-
 //
 //map_fileX é necessário caso register_globals = On no PHP.INI
 $map_fileX = $_SESSION["map_file"];
@@ -329,7 +328,6 @@ function carregaCacheImagem($cachedir,$bbox,$layer,$map,$w,$h){
 	{$bbox = "";}
 	if($layer == "")
 	{$layer = "fundo";}
-
 	$nome = $w.$h.$bbox.".png";
 	if($cachedir == "")
 	{$nome = dirname(dirname($map))."/cache/".$layer."/".$nome;}

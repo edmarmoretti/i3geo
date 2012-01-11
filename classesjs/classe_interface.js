@@ -262,10 +262,11 @@ i3GEO.Interface = {
 				{i3GEO.Interface.atual2ol.initemp();}
 			}
 			catch(e){
-				i3GEO.util.scriptTag(i3GEO.configura.locaplic+"/pacotes/openlayers/OpenLayers29.js.php","i3GEO.Interface.atual2ol.initemp()","",true);
+				i3GEO.util.scriptTag(i3GEO.configura.locaplic+"/pacotes/openlayers/OpenLayers211.js.php","i3GEO.Interface.atual2ol.initemp()","",true);
 			}
 		},
 		initemp: function(){
+			OpenLayers.ImgPath = "../pacotes/openlayers/img/";
 			$i(i3GEO.Interface.IDCORPO).innerHTML = "";
 			i3GEO.Interface.ATUAL = "openlayers";
 			i3GEO.Interface.cria(i3GEO.parametros.w,i3GEO.parametros.h);

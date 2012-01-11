@@ -970,7 +970,7 @@ i3GEO.guias = {
 					$i("i3GEOguiaMovelIcones").style.display = "block";
 					$i("i3GEOguiaMovelConteudo").style.display = "block";
 					i3GEO.guias.guiaMovel.mostraIcones();
-					//YAHOO.util.Dom.setStyle("i3GEOguiaMovelMolde", "opacity", 0.8);
+					YAHOO.util.Dom.setStyle("i3GEOguiaMovelMolde", "opacity", 0.9);
 				});
 				anim.animate();
 				anim1.animate();

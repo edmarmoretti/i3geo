@@ -474,7 +474,7 @@
 	background-image:URL('../imagens/visual/default/sprite.png');
 	background-repeat: no-repeat;
 	background-position: 0px -1078px;
-	width:14px;
+	width:20px;
 	height:18px;
 }
 .upload
@@ -767,7 +767,7 @@
 	background-image:URL('../imagens/visual/default/sprite.png');
 	background-repeat: no-repeat;
 	background-position: 0px -2075px;
-	width:16px;
+	width:20px;
 	height:16px;
 }
 #soltaLeg
@@ -785,7 +785,7 @@
 	background-repeat: no-repeat;
 	background-position: 0px -2125px;
 	cursor:pointer;
-	width:16px;
+	width:20px;
 	height:16px;
 }
 #soltaleg2
@@ -803,7 +803,7 @@
 	background-repeat: no-repeat;
 	background-position: 0px -2175px;
 	cursor:pointer;
-	width:16px;
+	width:20px;
 	height:16px;
 }
 #animaMapa
@@ -812,7 +812,7 @@
 	background-repeat: no-repeat;
 	background-position: 0px -2190px;
 	cursor:pointer;
-	width:16px;
+	width:20px;
 	height:16px;
 }
 
