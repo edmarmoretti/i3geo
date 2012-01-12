@@ -277,7 +277,7 @@ i3GEO.janela = {
 		ins = '<div id="'+id+'_cabecalho" class="'+classe+'" style="background-color:white;">';
 		if(i3GEO.configura !== undefined)
 		{ins += "<img id='"+id+"_imagemCabecalho' style='z-index:2;position:absolute;left:3px;top:2px;visibility:hidden;' src=\'"+i3GEO.configura.locaplic+"/imagens/aguarde.gif\' />";}
-		ins += texto;
+		ins += "<span style='font-size:10px;'>"+texto+"</span>";
 		if(funcaoMinimiza)
 		{ins += "<div id='"+id+"_minimizaCabecalho' class='container-minimiza'></div>";}
 		ins += '</div><div id="'+id+'_corpo" class="bd" style="'+this.ESTILOBD+'">';
@@ -824,7 +824,7 @@ i3GEO.janela = {
 					c = $i(idCombo);
 					c.style.width = "150px";
 					c.style.border = "solid #B4B4B4 1px";
-					c.style.top = "1px";
+					c.style.top = "6px";
 					c.style.left = "2px";
 					c.style.position = "relative";
 					c.style.fontSize = "10px";

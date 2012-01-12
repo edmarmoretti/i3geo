@@ -474,7 +474,7 @@
 	background-image:URL('../imagens/visual/default/sprite.png');
 	background-repeat: no-repeat;
 	background-position: 0px -1078px;
-	width:20px;
+	width:18px;
 	height:18px;
 }
 .upload
@@ -766,9 +766,9 @@
 {
 	background-image:URL('../imagens/visual/default/sprite.png');
 	background-repeat: no-repeat;
-	background-position: 0px -2075px;
-	width:20px;
-	height:16px;
+	background-position: 0px -2073px;
+	width:18px;
+	height:18px;
 }
 #soltaLeg
 {
@@ -792,28 +792,28 @@
 {
 	background-image:URL('../imagens/visual/default/sprite.png');
 	background-repeat: no-repeat;
-	background-position: 0px -2125px;
+	background-position: 0px -2123px;
 	cursor:pointer;
-	width:16px;
-	height:16px;
+	width:18px;
+	height:18px;
 }
 #opacidadeMapa
 {
 	background-image:URL('../imagens/visual/default/sprite.png');
 	background-repeat: no-repeat;
-	background-position: 0px -2175px;
+	background-position: 0px -2173px;
 	cursor:pointer;
-	width:20px;
-	height:16px;
+	width:18px;
+	height:18px;
 }
 #animaMapa
 {
 	background-image:URL('../imagens/visual/default/sprite.png');
 	background-repeat: no-repeat;
-	background-position: 0px -2190px;
+	background-position: 0px -2187px;
 	cursor:pointer;
-	width:20px;
-	height:16px;
+	width:18px;
+	height:18px;
 }
 
 .importarwmc
@@ -837,6 +837,13 @@ button{background:url(../imagens/tic2.png) 98% 50% no-repeat;}
 	border:solid 1px gray;
 	box-shadow:0px 1px 3px gray;
 }
+
+.iconeMini{
+	border-radius:5px 5px 5px 5px;
+	border:solid 1px gray;
+	margin: 2px;
+}
+
 .iconeGuiaMovelMouseOver{
 	box-shadow:0px 1px 3px #3CA5EB;
 }

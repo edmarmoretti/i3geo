@@ -349,15 +349,7 @@ i3GEO = {
 					if (i3GEO.configura.liberaGuias.toLowerCase() === "sim")
 					{i3GEO.guias.libera();}
 				}
-				if($i("mst")){$i("mst").style.visibility ="visible";}
-				if(YAHOO.lang.isFunction(i3GEO.finaliza))
-				{i3GEO.finaliza.call();}
-				else{
-					if(i3GEO.finaliza != "")
-					{eval(i3GEO.finaliza);}
-				}
-				if(i3GEO.guias.TIPO === "movel")
-				{i3GEO.guias.guiaMovel.inicia();}
+				i3GEO.aposIniciar();
 			}
 			catch(e){
 				if(typeof(console) !== 'undefined'){console.warn(e);}
@@ -395,6 +387,24 @@ i3GEO = {
 		if(i3GEO.mapa.AUTORESIZE === true)
 		{i3GEO.mapa.ativaAutoResize();}
 		//eval(i3GEO.finaliza);
+	},
+	/*
+	Function: aposIniciar
+	
+	Executa operações após o mapa ter sido posicionado na tela
+	
+	Executa também o que for definido em i3Geo.finaliza
+	*/
+	aposIniciar: function(){
+		if($i("mst")){$i("mst").style.visibility ="visible";}
+		if(YAHOO.lang.isFunction(i3GEO.finaliza))
+		{i3GEO.finaliza.call();}
+		else{
+			if(i3GEO.finaliza != "")
+			{eval(i3GEO.finaliza);}
+		}
+		if(i3GEO.guias.TIPO === "movel")
+		{i3GEO.guias.guiaMovel.inicia();}
 	},
 	/*
 	Function: atualiza

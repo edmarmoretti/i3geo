@@ -75,6 +75,46 @@ i3GEO.navega = {
 	*/
 	timerNavega: null,
 	/*
+	Function: centroDoMapa
+	
+	Obtém as coordenadas geográficas do centro do mapa
+	
+	Retorno:
+	
+	{array|false} - false se falhar ou [x,y] se não falhar
+	*/
+	centroDoMapa: function(){
+		if(typeof(console) !== 'undefined'){console.info("i3GEO.navega.centroDoMapa()");}
+		var xy;
+		switch(i3GEO.Interface.ATUAL)
+		{
+			case "openlayers":
+				xy = i3geoOL.getCenter();
+				if(xy)
+				{return [xy.lon,xy.lat];}
+				else
+				{return false;}
+				break;
+			case "googlemaps":
+				xy = i3GeoMap.getCenter();
+				if(xy)
+				{return [xy.lng(),xy.lat()];}
+				else
+				{return false;}
+				break;
+			default:
+				return false;
+		}	
+	},
+	marcaCentroDoMapa: function(xy){
+		if(typeof(console) !== 'undefined'){console.info("i3GEO.navega.marcaCentroDoMapa()");}
+		if(xy != false){
+			xy = i3GEO.calculo.dd2tela(xy[0]*1,xy[1]*1,$i(i3GEO.Interface.IDMAPA),i3GEO.parametros.mapexten,i3GEO.parametros.pixelsize);
+			i3GEO.util.criaPin("i3GeoCentroDoMapa",i3GEO.configura.locaplic+'/imagens/alvo.png','30px','30px');
+			i3GEO.util.posicionaImagemNoMapa("i3GeoCentroDoMapa",xy[0],xy[1]);
+		}
+	},
+	/*
 	Function: zoomin
 
 	Aproxima o mapa aplicando um fator de modificação da escala

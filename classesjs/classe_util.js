@@ -655,6 +655,7 @@ i3GEO.util = {
 			document.body.appendChild(novoel);
 			i3GEO.util.PINS.push(id);
 		}
+		$i(id).style.display = "block";
 	},
 	/*
 	Function: posicionaImagemNoMapa
@@ -665,13 +666,21 @@ i3GEO.util = {
 
 	id {string} - id do elemento que será posicionado
 	
+	x {posição do pixel} - se não for definida ou for vazia, será utilizado o valor de objposicaocursor.telax
+	
+	y {posição do pixel} - se não for definida ou for vazia, será utilizado o valor de objposicaocursor.telay
+	
 	Return:
 	
 	array[top,left] - valores em pixel da posição calculada da imagem
 	*/
-	posicionaImagemNoMapa: function(id){
+	posicionaImagemNoMapa: function(id,x,y){
 		if(typeof(console) !== 'undefined'){console.info("i3GEO.util.posicionaImagemNoMapa()");}
 		var i,mx,my;
+		if(x && x != "")
+		{objposicaocursor.telax = x;}
+		if(y && y != "")
+		{objposicaocursor.telay = y;}
 		i = $i(id);
 		mx = parseInt(i.style.width,10) / 2;
 		my = parseInt(i.style.height,10) / 2;
@@ -823,9 +832,9 @@ i3GEO.util = {
 
 		Parametros:
 
-		xi {Numeric} - coordenada x no mapa.
+		xi {Numeric} - coordenada x no mapa (imagem).
 
-		yi {Numeric} - coordenada y no mapa.
+		yi {Numeric} - coordenada y no mapa (imagem).
 
 		funcaoOnclick {String} - funcao que sera executada quando a marca 
 		for clicada, se for "", o container será esvaziado ao ser clicado na marca
@@ -838,7 +847,7 @@ i3GEO.util = {
 		*/
 		cria:function(xi,yi,funcaoOnclick,container,texto,srci){
 			if(typeof(console) !== 'undefined'){console.info("i3GEO.util.insereMarca.cria()");}
-			if(!srci)
+			if(!srci || srci === "")
 			{srci = i3GEO.configura.locaplic+"/imagens/dot2.gif";}
 			if(i3GEO.Interface.ATUAL === "googleearth"){
 				i3GEO.Interface.googleearth.insereMarca(texto,xi,yi,container);

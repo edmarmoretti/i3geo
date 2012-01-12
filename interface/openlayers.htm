@@ -279,7 +279,8 @@ OpenLayers.ImgPath = "../pacotes/openlayers/img/";
 //
 //esconde a logomarca ao finalizar o mapa
 i3GEO.finaliza = function(){
-	$i("i3GEOlogoMarca").style.display = "none";
+	if($i("i3GEOlogoMarca"))
+	{$i("i3GEOlogoMarca").style.display = "none";}
 	i3GEO.mapa.insereDobraPagina("googlemaps","../imagens/dobragooglemaps.png");
 }
 i3GEO.arvoreDeTemas.OPCOESADICIONAIS.navegacaoDir = true;
