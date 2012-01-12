@@ -88,6 +88,7 @@ Group: Interfaces  {
    File: Interface minima  (interface\minima.htm)
    File: Interface normal  (interface\geral.htm)
    File: Interface Openlayers  (interface\openlayers.htm)
+   File: Interface Openlayers  (interface\debug.htm)
    File: Interface Openlayers para tablets  (interface\openlayers_t.htm)
    File: Interface Openlayers versão com guias à esquerda  (interface\openlayers1.htm)
    File: Interface zerocal  (interface\zerocal.htm)
@@ -364,8 +365,14 @@ Group: Aplicativos adicionais  {
 
    File: Mashups  (mashups\index.html)
    File: twitter2geo.php  (twitter2geo.php)
-   File: Busca metadados na INDE  (ferramentas\buscainde\index.js.php)
-   File: TME  (ferramentas\tme\index.js.php)
+
+   Group: Ferramentas  {
+
+      File: Busca metadados na INDE  (ferramentas\buscainde\index.js.php)
+      File: Excluir camadas em lote  (ferramentas\excluirarvore\index.js.php)
+      File: TME  (ferramentas\tme\index.js.php)
+      }  # Group: Ferramentas
+
    }  # Group: Aplicativos adicionais
 
 Group: Sistema de Administração  {
@@ -392,6 +399,7 @@ Group: Sistema de Administração  {
       File: rsstemasdownload  (admin\rsstemasdownload.php)
       File: rsstemaskml  (admin\rsstemaskml.php)
       File: rsstemasogc  (admin\rsstemasogc.php)
+      File: rsstemasraiz  (admin\rsstemasraiz.php)
       File: xmlgeorss  (admin\xmlgeorss.php)
       File: xmlidentifica  (admin\xmlidentifica.php)
       File: xmlkmlrss  (admin\xmlkmlrss.php)
@@ -459,6 +467,7 @@ Group: Sistema de Administração  {
       File: Opções da ferramenta identifica  (admin\html\identifica.html)
       File: Perfis  (admin\html\perfis.html)
       File: Sistemas de adição de temas  (admin\html\sistemas.html)
+      File: Subir shapefile  (admin\html\subirshapefile.html)
       File: Tags  (admin\html\tags.html)
       File: Web Services  (admin\html\webservices.html)
       }  # Group: Html

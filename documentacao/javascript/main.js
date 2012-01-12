@@ -267,14 +267,14 @@ function NDDoResize()
     i = 0;
     while (item = scrollboxes.item(i))
         {
-        item.style.width = 100 + "px";
+        item.style.width = 100;
         i++;
         };
 
     i = 0;
     while (item = scrollboxes.item(i))
         {
-        item.style.width = item.parentNode.offsetWidth + "px";
+        item.style.width = item.parentNode.offsetWidth;
         i++;
         };
 
