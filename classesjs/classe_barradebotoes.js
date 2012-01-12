@@ -759,7 +759,7 @@ i3GEO.barraDeBotoes = {
 		dock.setObjectAlign(i3GEO.Interface.IDCORPO,euDOWN,(parseInt(document.body.style.height,10))*-1 + i3GEO.barraDeBotoes.OFFSET,euUP);   
 		dock.setBar({
 			left:{euImage:{image:i3GEO.configura.locaplic+"/pacotes/eudock/barImages/dockBg-l.png"}},
-			horizontal:{euImage:{image:i3GEO.configura.locaplic+"/pacotes/eudock/barImages/dockBg-c-o.gif"}},
+			horizontal:{euImage:{image:i3GEO.configura.locaplic+"/pacotes/eudock/barImages/dockBg-c-o.png"}},
 			right:{euImage:{image:i3GEO.configura.locaplic+"/pacotes/eudock/barImages/dockBg-r.png"}}
 		});   
 		dock.setIconsOffset(7); 
