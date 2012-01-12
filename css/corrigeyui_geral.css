@@ -139,14 +139,14 @@ width:16px;
 {
 	background:transparent url(../pacotes/yui270/build/assets/skins/sam/treeview-sprite.gif) no-repeat scroll 0 -6400px;
 	cursor:pointer;
-	height:22px;
+	height:25px;
 	width:18px;
 }
 .ygtvtph
 {
 	background:transparent url(../pacotes/yui270/build/assets/skins/sam/treeview-sprite.gif) no-repeat scroll 0 -7200px;
 	cursor:pointer;
-	height:22px;
+	height:25px;
 	width:18px;
 }
 
@@ -207,6 +207,12 @@ width:16px;
 }
 .ygtvhtml{text-align:left;}
 .ygtvitem{text-align:left;}
+
+td.ygtvcell{
+	border:0;
+	padding:0;
+	padding-right: 3px;
+}
 
 .yui-skin-sam .yui-navset .yui-nav a,.yui-skin-sam .yui-navset .yui-navset-top .yui-nav a
 {background:#d8d8d8 url(../pacotes/yui270/build/assets/skins/sam/sprite.png) repeat-x;border:solid #a3a3a3;border-width:0 1px;color:#000;position:relative;text-decoration:none;}
