@@ -22,12 +22,9 @@
 <td>
   <table width=100% cellspacing=0 cellpadding=0 >
    <tr>
-   <td title="libera guias" class=tdclaro id=encolheFerramentas style="vertical-align:top;width:5px;text-align:left;"></td>
-   <td>
     <!--
     	Guias principais, não mude o ID, apenas o nome se for desejado
     -->
-
     <div class=verdeescuro style="top:0px;cursor:pointer;">
 	 <div id=guia1 class=guia ></div>
 	 <div id=guia2 class=guia ></div>
@@ -35,7 +32,6 @@
 	 <div id=guia5 class=guia ></div>
     </div>
    </td>
-
    </tr>
   </table>
 </td>
@@ -45,7 +41,7 @@
 </td>
 </tr>
 <tr>
- <td class=tdbranca id=contemFerramentas style="vertical-align:top;width:268px;text-align:left;">
+ <td class=tdbranca id=contemFerramentas style="vertical-align:top;width:300px;text-align:left;">
    <div id='guia1obj' >
 	<div style='left:5px;top:10px;' id=buscaRapida ></div>
   	<div id=listaPropriedades style='top:15px;' ></div>
@@ -84,23 +80,22 @@
  </td>
 </tr>
 <tr style="border:0px"><td colspan=3 id="barraInferior" style="background-image:url('../imagens/visual/default/rodape.png');height:10px"></td></tr>
-<tr style="border:0px"><td colspan=3 style=background-color:black ><input style="border:0px none; background-color:black;color:white;font-size:12pt;" type="text" size="1" id="i3geo_letreiro" ></td></tr>
-<tr style="border:0px"><td colspan=3 style=background-color:black;color:white >geoprocessamento@mma.gov.br</td></tr>
-
 </table>
 <center>
-<br><br>
-<table>
-<tr>
-	<td><center><h1><div id=versaoi3geo ></div><h2>i3Geo - Software livre para criação de mapas interativos e geoprocessamento<h3>Baseado no Mapserver, é licenciado sob GPL e integra o Portal do Software Público Brasileiro</h3></h2></h1></td>
-</tr>
-<tr>
-	<td style="padding:10px;"><center><img alt="logomarca" src='../imagens/logo_inicio.png'></td>
-</tr>
-<tr>
-	<td><center>
-	</td>
-</tr>
+<table id="i3GEOlogoMarca" style='box-shadow:0 1px 13px gray;border-radius:5px;'>
+	<tr>
+		<td><center><h1 style="font-size:10px;font-family: Verdana, Arial, Helvetica, sans-serif;"><div id=versaoi3geo ></div><h2 style="font-size:10px;font-family: Verdana, Arial, Helvetica, sans-serif;">i3Geo - Software livre para criação de mapas interativos e geoprocessamento<h3 style="font-size:10px;font-family: Verdana, Arial, Helvetica, sans-serif;">Baseado no Mapserver, é licenciado sob GPL e integra o Portal do Software Público Brasileiro</h3></h2></h1></td>
+	</tr>
+	<tr>
+		<td style="padding:10px;"><center><img alt="" src='../imagens/logo_inicio.png' ></td>
+	</tr>
+	<tr>
+		<td><center>
+			<!--
+			<script id="ohloh" type="text/javascript" src="http://www.ohloh.net/p/150688/widgets/project_users.js?style=red"></script>
+			-->
+		</td>
+	</tr>
 </table>
 <script type="text/javascript">
 /*
@@ -111,16 +106,10 @@ Define o layout do mapa quando um atlas é aberto por http://localhost/i3geo/atla
 File: i3geo/atlas/geral.htm
 
 */
-/*
-	Indica a localização correta do i3geo.
-	
-	É utilizada para identificar o local correto onde estão os programas em php que são utilizados.
-*/
 i3GEO.configura.locaplic = i3GEO.util.protocolo()+"://"+window.location.host+"/i3geo";
-
+i3GEO.configura.autotamanho = false;
 i3GEO.Interface.ATUAL = "openlayers";
 i3GEO.Interface.IDCORPO = "contemImg";
-i3GEO.configura.diminuixN = 20
 
 i3GEO.Interface.openlayers.GADGETS = {
 		PanZoomBar:true,
@@ -129,68 +118,108 @@ i3GEO.Interface.openlayers.GADGETS = {
 		ScaleLine:true,
 		OverviewMap:false	
 	};
-i3GEO.Interface.openlayers.TILES = false;
+i3GEO.Interface.openlayers.TILES = true;
+//
+//controla o tamanho da barra de zoom
+//
+//i3GEO.Interface.openlayers.MINEXTENT = [-0.001, -0.001, 0.001, 0.001]
+//
+//
+//desabilita o item que abre a interface "default" do menu suspenso
+//
+i3GEO.gadgets.PARAMETROS.mostraMenuSuspenso.finaliza = 'if($i("omenudataInterface1")){i3GEOoMenuBar.getMenuItem("omenudataInterface1").cfg.setProperty("text", " ");}'
+
 /*
 Após a criação, é criado o objeto i3geoOL que corresponde ao objeto map da API do OpenLayers.
 Vc pode usar i3geoOL para aplicar os métodos e verificar as propriedades da API do OpenLayers
 */
+
 i3GEO.cria();
-i3GEO.finaliza = "iniciaAtlas()";
 /*
 	Inicializa o mapa
 */
-i3GEO.barraDeBotoes.AUTOALTURA = false;
-i3GEO.barraDeBotoes.ATIVAMENUCONTEXTO = false;
-i3GEO.barraDeBotoes.PERMITEFECHAR = true;
-i3GEO.barraDeBotoes.PERMITEDESLOCAR = true;
-i3GEO.barraDeBotoes.AUTO = true;
-i3GEO.barraDeBotoes.COMPORTAMENTO = "laranja";
-
-i3GEO.Interface.BARRABOTOESLEFT = 50;
-i3GEO.Interface.BARRABOTOESTOP = 10;
-
+//não mostra o mapa de referência
+i3GEO.configura.mapaRefDisplay = "none";
+//tipo de barra de botões
+i3GEO.barraDeBotoes.TIPO = "olhodepeixe";
+//ajusta o deslocamento da barra de botões
+i3GEO.barraDeBotoes.OFFSET = -3;
+i3GEO.configura.oMenuData["submenus"]["janelas"] = [];
+i3GEO.ajuda.ATIVAJANELA = false;
 i3GEO.idioma.IDSELETOR = "seletorIdiomas";
 i3GEO.Interface.ATIVAMENUCONTEXTO = false;
 i3GEO.arvoreDeTemas.TIPOBOTAO = "radio";
 i3GEO.arvoreDeTemas.ATIVATEMAIMEDIATO = true;
+i3GEO.arvoreDeTemas.OPCOESADICIONAIS.comentarios = true;
+i3GEO.arvoreDeCamadas.VERIFICAABRANGENCIATEMAS = true;
+i3GEO.arvoreDeCamadas.MOSTRALISTAKML = false;
+i3GEO.mapa.AUTORESIZE = true;
+//
+//define quanto tempo é aguardado para considerar que o mouse está parado sobre um lugar.
+//utilizado pela função de identificação do tipo balão
+//
+//i3GEO.configura.tempoMouseParado = 1000
 //
 //esta é uma variável interna do OpenLayers que define o endereço do diretório onde estão as imagens usadas nos ícones
 //
-OpenLayers.ImgPath = "../pacotes/openlayers/img/"
+OpenLayers.ImgPath = "../pacotes/openlayers/img/";
 //
 //adiciona camadas que podem ser ativadas como fundo do mapa
 //
-var ims = new OpenLayers.Layer.ArcGIS93Rest( 
-	"ESRI Imagery World 2D",
-    "http://server.arcgisonline.com/ArcGIS/rest/services/ESRI_Imagery_World_2D/MapServer/export",
-	{},
-	{isBaseLayer:true,visibility:false}
-);
-var wsm = new OpenLayers.Layer.ArcGIS93Rest( 
-	"ESRI World Street Map",
-    "http://server.arcgisonline.com/ArcGIS/rest/services/ESRI_StreetMap_World_2D/MapServer/export",
-	{},
-	{isBaseLayer:true,visibility:false}
-);
-var bra = new OpenLayers.Layer.WMS( 
-	"Base carto MMA",
-    "http://mapas.mma.gov.br/cgi-bin/mapserv?map=/opt/www/html/webservices/baseraster.map",
-	{layers:"baseraster",srs:"EPSG:4291",format:"image/png",isBaseLayer:false},
-	{isBaseLayer:true,visibility:false}
-);
-var osm = new OpenLayers.Layer.WMS( 
-	"Open Street Map",
-    "http://full.wms.geofabrik.de/std/demo_key",
-	{layers:""},
-	{isBaseLayer:true,visibility:false}
-);
-
-i3GEO.Interface.openlayers.LAYERSADICIONAIS = [ims,wsm,bra,osm];
-
+(function(){
+	var oce = new OpenLayers.Layer.ArcGIS93Rest( 
+		"ESRI Ocean Basemap",
+		"http://server.arcgisonline.com/ArcGIS/rest/services/Ocean_Basemap/MapServer/export",
+		{format:"jpg"},
+		{isBaseLayer:true,visibility:false}
+	);
+	var ims = new OpenLayers.Layer.ArcGIS93Rest( 
+		"ESRI Imagery World 2D",
+		"http://server.arcgisonline.com/ArcGIS/rest/services/ESRI_Imagery_World_2D/MapServer/export",
+		{},
+		{isBaseLayer:true,visibility:false}
+	);
+	var wsm = new OpenLayers.Layer.ArcGIS93Rest( 
+		"ESRI World Street Map",
+		"http://server.arcgisonline.com/ArcGIS/rest/services/ESRI_StreetMap_World_2D/MapServer/export",
+		{},
+		{isBaseLayer:true,visibility:false}
+	);
+	var bra = new OpenLayers.Layer.WMS( 
+		"Base carto MMA",
+		"http://mapas.mma.gov.br/cgi-bin/mapserv?map=/opt/www/html/webservices/baseraster.map",
+		{layers:"baseraster",srs:"EPSG:4291",format:"image/png",isBaseLayer:false},
+		{isBaseLayer:true,visibility:false}
+	);
+	/*
+	var osm = new OpenLayers.Layer.WMS( 
+		"Open Street Map",
+		"http://full.wms.geofabrik.de/std/demo_key",
+		{layers:""},
+		{isBaseLayer:true,visibility:false}
+	);
+	*/
+	i3GEO.Interface.openlayers.LAYERSADICIONAIS = [oce,ims,wsm,bra];
+})();
+//
+//substitui a janela de alerta normal do navegador por uma janela estilizada. Pode ser comentado sem problemas. No Safari apresentou problemas.
+//
+//i3GEO.janela.ativaAlerta();
 //
 //inicia o mapa
 //
+//esconde a logomarca ao finalizar o mapa
+i3GEO.finaliza = function(){
+	if($i("i3GEOlogoMarca"))
+	{$i("i3GEOlogoMarca").style.display = "none";}
+	i3GEO.mapa.insereDobraPagina("googlemaps","../imagens/dobragooglemaps.png");
+	iniciaAtlas();
+}
+i3GEO.arvoreDeTemas.OPCOESADICIONAIS.navegacaoDir = true;
+//OpenLayers.DOTS_PER_INCH = 96
+//i3GEO.configura.sid = "";
 i3GEO.inicia();
+
 </script>
 </body>
 </html>

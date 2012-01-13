@@ -183,7 +183,6 @@ Parâmetros:
 			ol_mma - base cartográfica do Brasil
 			ol_wms - base mundial da Meta Carta
 			jpl_wms - mosaico de imagens de satélite
-			osm_wms - base do open Street Map
 			top_wms - toponímia do servidor do MMA usado no mapa de referência
 			est_wms - estados do Brasil
 			

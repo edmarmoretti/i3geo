@@ -3047,14 +3047,8 @@ ol_wms: new OpenLayers.Layer.WMS.Untiled(
 ),
 jpl_wms: new OpenLayers.Layer.WMS(
 "NASA Global Mosaic",
-"http://wms.jpl.nasa.gov/wms.cgi",
-{layers: "modis,global_mosaic"},
-{singleTile:true}
-),
-osm_wms: new OpenLayers.Layer.WMS(
-"Open Street Map",
-"http://full.wms.geofabrik.de/std/demo_key?",
-{layers: ""}
+"http://wms.jpl.nasa.gov/wms.cgi?",
+{layers: "global_mosaic"}
 ),
 top_wms: new OpenLayers.Layer.WMS(
 "Toponímia MMA",
@@ -3066,7 +3060,7 @@ est_wms: new OpenLayers.Layer.WMS(
 "http://mapas.mma.gov.br/i3geo/ogc.php?tema=estadosl&",
 {layers: "estadosl",FORMAT:'image/png'}
 ),
-fundo: "ol_mma,ol_wms,jpl_wms,osm_wms,top_wms,est_wms",
+fundo: "ol_mma,ol_wms,jpl_wms,top_wms,est_wms",
 kml: [],
 layersIniciais: [],
 botoes: {
