@@ -2858,6 +2858,27 @@ function verificaEditores($editores)
 	}
 	return $editor;
 }
+/*
+Function: sobeAnno
+
+Coloca todas as camadas do tipo ANNOTATION sobre as demais
+
+Parametros:
+
+$map_file - arquivo mapfile que será processado
+*/
+function sobeAnno($map_file){
+	$mapa = ms_newMapObj($map_file);
+	$numlayers = $mapa->numlayers;
+	for ($i=0;$i<$numlayers;$i++){
+		$layer = $mapa->getlayer($i);
+		if($layer->type == 4){
+			$temp = ms_newLayerObj($mapa,$layer);
+			$layer->set("status",MS_DELETE);
+		}
+	}
+	$mapa->save($map_file);
+}
 function retornaShapesMapext($objLayer,$objMapa){
 	$shapes = array();
 	$status = $objLayer->open();

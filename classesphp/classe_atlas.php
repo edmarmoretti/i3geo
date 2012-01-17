@@ -235,6 +235,10 @@ locaplic - localização do i3geo no servidor
 			{$ext->setextent($newext[0], $newext[1], $newext[2], $newext[3]);}
 			$mapa->save($map_file);	
 		}
+		if(!function_exists("sobeAnno")){
+			include_once("funcoes_gerais.php");
+		}
+		sobeAnno($map_file);		
 		if ($w == ""){$w = 300;}
 		if($h == ""){$h = 300;}
 		return (array("link"=>$link,"w"=>$w,"h"=>$h,"mapexten"=>implode(" ",$newext)));

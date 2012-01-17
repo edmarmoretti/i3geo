@@ -154,6 +154,10 @@ function iniciaMapa()
 	//altera o tamanho do query map para ficar igual ao do mapa
 	include_once("classe_mapa.php");
 	error_reporting(E_ALL);
+	if(!function_exists("sobeAnno")){
+		include_once("funcoes_gerais.php");
+	}
+	sobeAnno($map_file);
 	$m = new Mapa($map_file);
 	if(isset($w))
 	{

@@ -233,24 +233,24 @@ Include:
 			break;
 			//delaunay e voronoi
 			case "deldir":
-			$this->mapaDeldir($nomearq,$dir_tmp,$R_path,$locaplic);
-			$this->deldirDir2shp($nomearq."dirsgs",$dir_tmp,$locaplic);
-			$this->deldirDel2shp($nomearq."delsgs",$dir_tmp,$locaplic);
-			if(file_exists($this->qyfile))
-			{unlink($this->qyfile);}			
+				$this->mapaDeldir($nomearq,$dir_tmp,$R_path,$locaplic);
+				$this->deldirDir2shp($nomearq."dirsgs",$dir_tmp,$locaplic);
+				$this->deldirDel2shp($nomearq."delsgs",$dir_tmp,$locaplic);
+				if(file_exists($this->qyfile))
+				{unlink($this->qyfile);}			
 			return "ok";
 			break;
 			case "kernel":
-			$this->mapaKernel($nomearq,$dimx,$dimy,$dir_tmp,$R_path,$locaplic,$sigma);
+				$this->mapaKernel($nomearq,$dimx,$dimy,$dir_tmp,$R_path,$locaplic,$sigma);
 			break;
 			case "densidade":
-			$this->mapaDensidade($nomearq,$dimx,$dimy,$dir_tmp,$R_path,$locaplic);
+				$this->mapaDensidade($nomearq,$dimx,$dimy,$dir_tmp,$R_path,$locaplic);
 			break;
 			case "distancia":
-			$this->mapaDistancia($nomearq,$dimx,$dimy,$dir_tmp,$R_path,$locaplic);
+				$this->mapaDistancia($nomearq,$dimx,$dimy,$dir_tmp,$R_path,$locaplic);
 			break;
 			case "relatorio":
-			$r = $this->mapaRelatorioAnaliseDist($nomearq,$dimx,$dimy,$dir_tmp,$R_path,$locaplic);
+				$r = $this->mapaRelatorioAnaliseDist($nomearq,$dimx,$dimy,$dir_tmp,$R_path,$locaplic);
 			return($tmpurl.basename($this->diretorio)."/".basename($nomearq).'.htm');
 			break;
 		}
@@ -293,20 +293,29 @@ Include:
 			//
 			//reposiciona o layer
 			//
-			$indicel = $novolayer->index;
-			$numlayers = $this->mapa->numlayers;
-			$nummove = 0;
-			for ($i = $numlayers-1;$i > 0;$i--)
-			{
-				$layerAbaixo = $this->mapa->getlayer($i);
-				$tipo = $layerAbaixo->type;
-				if (($tipo != 2) && ($tipo != 3))
-				{$nummove++;}
+			$layer = $this->mapa->getlayerbyname($this->nome);
+			if($layer != ""){
+				$temp = ms_newLayerObj($this->mapa,$novolayer);
+				$novolayer->set("status",MS_DELETE);
+				$temp = ms_newLayerObj($this->mapa,$layer);
+				$layer->set("status",MS_DELETE);
 			}
-			if ($nummove > 2)
-			{
-				for ($i=0;$i<=($nummove - 3);++$i)
-				{$this->mapa->movelayerup($indicel);}
+			else{
+				$indicel = $novolayer->index;
+				$numlayers = $this->mapa->numlayers;
+				$nummove = 0;
+				for ($i = $numlayers-1;$i > 0;$i--)
+				{
+					$layerAbaixo = $this->mapa->getlayer($i);
+					$tipo = $layerAbaixo->type;
+					if (($tipo != 2) && ($tipo != 3))
+					{$nummove++;}
+				}
+				if ($nummove > 2)
+				{
+					for ($i=0;$i<=($nummove - 3);++$i)
+					{$this->mapa->movelayerup($indicel);}
+				}
 			}
 		}
 		else
