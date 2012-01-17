@@ -1316,7 +1316,6 @@ nome do layer criado com o buffer.
 		}
 		$nomebuffer = nomeRandomico();
 		$nomeshp = $this->diretorio."/".$nomebuffer;
-
 		$listaShapes = array();
 		if($this->nome != ""){
 			$listaShapes = retornaShapesSelecionados($this->layer,$this->arquivo,$this->mapa);

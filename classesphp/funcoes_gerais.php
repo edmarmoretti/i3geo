@@ -2878,6 +2878,8 @@ function retornaShapesSelecionados($objLayer,$map_file,$objMapa){
 	$listaDeIndices = unserialize($conteudo);
 	if(count($listaDeIndices) == 0)
 	{return $shapes;}
+	$versao = versao();
+	$versao = $versao["principal"];	
 	if ($objLayer->connectiontype != MS_POSTGIS){
 		//pega os shapes selecionados
 		carregaquery2($map_file,$objLayer,$objMapa);
@@ -2890,7 +2892,7 @@ function retornaShapesSelecionados($objLayer,$map_file,$objMapa){
 		//pega um shape especifico
 		for ($i = 0; $i < $res_count; ++$i)
 		{
-			if($this->v == 6)
+			if($versao == 6)
 			{$shape = $objLayer->getShape($objLayer->getResult($i));}
 			else{
 				$result = $objLayer->getResult($i);

@@ -218,6 +218,8 @@ if (strtoupper(substr(PHP_OS, 0, 3) == 'WIN'))
 	
 	Separe os ips por vírgula. Os usuários que tiverem seus ips listados, poderão editar o diretório i3geo/temas, desde que os mesmos tenham direito de leitura e escrita nesse diretório.
 	
+	array("127.0.0.1","localhost");
+	
 	Tipo:
 	{array}
 	*/

@@ -524,12 +524,14 @@ i3GEO.janela = {
 		}
 		if(i3GEO.janela.ESTILOAGUARDE === "normal" || i3GEO.janela.ESTILOAGUARDE === "minima")
 		{eval('YAHOO.aguarde.'+id+'.setHeader("<span><img id=aguardeGifAberto src=\'"+i3GEO.configura.locaplic+"/imagens/aguarde.gif\' /></span>&nbsp;<span style=font-size:8px >'+contador+'</span>")');}
-		eval('YAHOO.aguarde.'+id+'.render(document.body)');
+		eval('YAHOO.aguarde.'+id+'.render(document.body);');
+		
 		if(i3GEO.parametros.w > 0)
 		{eval('YAHOO.aguarde.'+id+'.moveTo('+(pos[0] + (i3GEO.parametros.w / 2) - 120)+','+pos[1]+')');}
 		else
 		{eval('YAHOO.aguarde.'+id+'.moveTo('+pos[0]+','+pos[1]+')');}
 		eval('YAHOO.aguarde.'+id+'.show()');
+		eval('try{YAHOO.aguarde.'+id+'.header.style.height="20px";}catch(e){};');
 		if($i(id+"_mask"))
 		{$i(id+"_mask").style.zIndex=25000;}
 		temp = $i(id+"_c");
