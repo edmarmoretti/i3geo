@@ -86,6 +86,7 @@ i3GEOF.uploadkml = {
 	*/
 	html:function(){
 		var ins = '<form id=i3GEOuploadkmlf target="i3GEOuploadkmliframe" action="'+i3GEO.configura.locaplic+'/ferramentas/uploadkml/upload.php" method="post" ENCTYPE="multipart/form-data">' +
+		'<p class="paragrafo" style=color:red >Não use arquivos ou nome de layer com espaços em branco ou acentuação</p>' +
 		'<p class="paragrafo" >Arquivo kml: <br><input class=digitar type="file" size=32 name="i3GEOuploadkml" style="top:0px;left:0px;cursor:pointer;"></p>' +
 		'<p class=paragrafo >Nome do layer KML: <br><input type=text size=42 name=layerkml value=""/></p>' +
 		'<p class=paragrafo >Proje&ccedil;&atilde;o:</p>' +
@@ -111,8 +112,8 @@ i3GEOF.uploadkml = {
 		};
 		titulo = "Upload de arquivo KML <a class=ajuda_usuario target=_blank href='" + i3GEO.configura.locaplic + "/ajuda_usuario.php?idcategoria=4&idajuda=104' >&nbsp;&nbsp;&nbsp;</a>";
 		janela = i3GEO.janela.cria(
-			"340px",
-			"320px",
+			"450px",
+			"360px",
 			"",
 			"",
 			"",
