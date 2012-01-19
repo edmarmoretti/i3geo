@@ -175,7 +175,6 @@ function iniciaMapa()
 	//salva as alterações feitas
 	//
 	$m->salva();
-
 	//prepara a legenda para incluir no mapa, preenchendo os nomes das classes em branco
 	if (strtolower($embedLegenda) == "sim")
 	{
@@ -244,6 +243,9 @@ function iniciaMapa()
 	$of->setOption("QUANTIZE_FORCE","OFF");
 	$of->set("driver","AGG/PNG");		
 	$m->mapa->setmetadata("interface",$interface);
+	//$iref = $m->mapa->reference;
+	//$m->mapa->setmetadata("referencew",$iref->width);
+	//$m->mapa->setmetadata("referenceh",$iref->height);
 	$m->salva();
 
 	$nomes = nomeRandomico(12);
@@ -255,8 +257,8 @@ function iniciaMapa()
 	{$nomer = $locmapserv."?map=".$map_file."&mode=map";}
 	else
 	{$nomer = ($imgo->imageurl).basename($nomer);}
-	$iref = $m->mapa->reference;
-	$irefH = $iref->height;
+	//$iref = $m->mapa->reference;
+	//$irefH = $iref->height;
 	$res["editor"] = $editor;
 	$res["mapexten"] = $ext;
 	$res["mapscale"] = $escalaMapa;

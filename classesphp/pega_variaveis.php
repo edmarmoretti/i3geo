@@ -90,10 +90,10 @@ if (isset($_POST))
 					$p_ = explode("=",$parametro_);
 					$parametro = $p_[0];
 					$p_ = array_slice($p_, 1, count($p_));
-					$valor = implode("=",$p_);
+					$valor_ = implode("=",$p_);
 					
 					if($parametro != "")
-					eval("\$".$parametro."='".(($valor))."';");				
+					eval("\$".$parametro."='".(($valor_))."';");				
 				}
 			}				
 		}

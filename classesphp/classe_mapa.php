@@ -759,6 +759,8 @@ $h - Altura.
 			$testa = explode("QUERYMAP",$e);
 			if (count($testa) > 1)
 			{$pega = "sim";}
+			else
+			{$pega = "nao";}
 			$testa = explode("SIZE",$e);
 			if ((count($testa) > 1) && ($pega == "sim"))
 			{

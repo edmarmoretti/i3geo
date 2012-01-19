@@ -792,6 +792,10 @@ function retornaReferencia($ext="")
 	//
 	$original = $objMapa->getmetadata("referenciaextentoriginal");
 	$ref = $objMapa->reference;
+	$c = $ref->color;
+	$c->setrgb(-1,-1,-1);
+	$c = $ref->outlinecolor;
+	$c->setrgb(-1,-1,-1);	
 	$em = $ref->extent;
 	if($original != "")
 	{
@@ -918,8 +922,8 @@ function retornaReferenciaDinamica($ext="")
 		$original = $r->minx." ".$r->miny." ".$r->maxx." ".$r->maxy;
 		$mapa->setmetadata("referenciaextentoriginal",$original);
 	}
-	$s .= ";var extentref = '".$r->minx." ".$r->miny." ".$r->maxx." ".$r->maxy."';";
-	$d = (abs($r->maxx - $r->minx)) / ($objImagem->width);
+	$s .= ";var extentref = '".$emt->minx." ".$emt->miny." ".$emt->maxx." ".$emt->maxy."';";
+	$d = (abs($emt->maxx - $emt->minx)) / ($objImagem->width);
 	$s .= "g_celularef = ".$d.";";
 	$emt = $objMapa->extent;
 	$r->set("minx",$emt->minx);

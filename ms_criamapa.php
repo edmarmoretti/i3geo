@@ -459,7 +459,7 @@ adaptaLayers();
 
 if (file_exists($locaplic."/pacotes/geoip") && file_exists($locaplic."/pacotes/geoip/GeoLiteCity.dat"))
 {require_once($caminho."ms_registraip.php");}
-
+//echo $tmpfname;exit;
 if ($interface != "mashup")
 {abreInterface();}
 

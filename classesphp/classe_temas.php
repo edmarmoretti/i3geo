@@ -571,6 +571,7 @@ $valor - Novo nome.
 		$valor = str_replace("*","&",$valor);
 		$valor = str_replace("|",";",$valor);
 		$valor = html_entity_decode($valor);
+		
 		foreach ($this->grupo as $lg)
 		{
 			$ll = $this->mapa->getlayerbyname($lg);

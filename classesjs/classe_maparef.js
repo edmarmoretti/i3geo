@@ -100,7 +100,7 @@ i3GEO.maparef = {
 	Default:
 	{true}
 	*/
-	TRANSICAOSUAVE: true,
+	TRANSICAOSUAVE: false,
 	/*
 	Propriedade: OPACIDADE
 
@@ -114,7 +114,7 @@ i3GEO.maparef = {
 	Default:
 	{85}
 	*/
-	OPACIDADE: 85,
+	OPACIDADE: 65,
 	/*
 	Propriedade: TOP
 
@@ -174,7 +174,7 @@ i3GEO.maparef = {
 			ins += '<img style="cursor:pointer;display:none" onload="javascript:this.style.display = \'block\'" id="imagemReferencia" src="" onclick="javascript:i3GEO.maparef.click()">';
 			ins += '</div>';
 			novoel.innerHTML = ins;
-			document.body.appendChild(novoel);
+			
 			if(i3GEO.maparef.TRANSICAOSUAVE){
 				YAHOO.util.Dom.setStyle(novoel,"opacity",i3GEO.maparef.OPACIDADE / 100);
 				novoel.onmouseover = function(){
@@ -184,13 +184,22 @@ i3GEO.maparef = {
 					YAHOO.util.Dom.setStyle(novoel,"opacity",i3GEO.maparef.OPACIDADE / 100);
 				};
 			}
+			document.body.appendChild(novoel);
 		}
 		if($i("i3geo_winRef").style.display !== "block"){
 			$i("i3geo_winRef").style.display = "block";
 			YAHOO.namespace("janelaRef.xp");
 			this.PERMITEDESLOCAR ? temp = "shadow" : temp = "none";
 			YAHOO.janelaRef.xp.panel = new YAHOO.widget.Panel("i3geo_winRef", { height:"177px", width:"156px", fixedcenter: false, constraintoviewport: true, underlay:temp, close:i3GEO.maparef.PERMITEFECHAR, visible:true, draggable:i3GEO.maparef.PERMITEDESLOCAR, modal:false,iframe:false } );
+			if(i3GEO.maparef.TRANSICAOSUAVE ){
+				YAHOO.janelaRef.xp.panel.cfg.setProperty("effect",[
+						{effect:YAHOO.widget.ContainerEffect.FADE,duration:0.5}
+				]);
+			}
 			YAHOO.janelaRef.xp.panel.render();
+			try
+			{YAHOO.janelaRef.xp.panel.header.style.height="20px";}
+			catch(e){};
 			r = $i("i3geo_winRef_c");
 			if(r){
 				r.style.clip = "rect(0px, 160px, 185px, 0px)";
@@ -256,7 +265,7 @@ i3GEO.maparef = {
 				//
 				//no modo cgi ativado, a obtenção da imagem é feita de forma diferente do modo normal do mapa
 				//
-				if($i("imagemReferencia").src === "" || i3GEO.parametros.utilizacgi.toLowerCase() !== "sim"){
+				if(i3GEO.parametros.utilizacgi.toLowerCase() !== "sim"){
 					//
 					//se o valor do tamanho da celula já existir, não é necessário redesenhar a imagem
 					//
