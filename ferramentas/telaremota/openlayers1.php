@@ -1,4 +1,4 @@
-<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/strict.dtd">
 <html>
 <head>
 <META HTTP-EQUIV="Content-Type" CONTENT="text/html; charset=UTF-8">
@@ -6,13 +6,15 @@
 <meta name="HandheldFriendly" content="yes" />
 <meta name="MobileOptimized" content="width" />
 <meta name="apple-mobile-web-app-capable" content="yes">
-<script type="text/javascript" src="../../pacotes/openlayers/OpenLayers29.js.php"></script>
+<script type="text/javascript" src="../../pacotes/openlayers/OpenLayers211.js.php"></script>
 <script type="text/javascript" src="../../pacotes/cpaint/cpaint2_compacto.inc.js"></script>
+<link rel="stylesheet" href="../../mashups/openlayers_compacto.css" type="text/css" />
+<script type="text/javascript" src="../../pacotes/yui290/build/yahoo/yahoo-min.js"></script>
+<script type="text/javascript" src="../../pacotes/yui290/build/dom/dom-min.js"></script>
 </head>
 <body onload="inicia()">
-<div id=openlayers style="width:100%;height:100%;"></div>
+<div id=openlayers style="width:500px;height:500px;"></div>
 <script>
-
 /*
 Title: Interface OpenLayers para a ferramenta tela remota
 
@@ -96,6 +98,9 @@ Free Software Foundation, Inc., no endereço
 */
 
 function inicia(){
+	var mapa = $i("openlayers");
+	mapa.style.width = YAHOO.util.Dom.getViewportWidth() - 30 +"px";
+	mapa.style.height = YAHOO.util.Dom.getViewportHeight() - 30 + "px";
 	extentAnterior = "";
 	contadorSalva = 0;
 	$i = function(id){return document.getElementById(id);};
@@ -127,12 +132,6 @@ function inicia(){
 		{layers:"baseraster",srs:"EPSG:4291",format:"image/png"},
 		{isBaseLayer:true,visibility:false}
 	);
-	var osm = new OpenLayers.Layer.WMS( 
-		"Open Street Map",
-		"http://full.wms.geofabrik.de/std/demo_key",
-		{layers:""},
-		{isBaseLayer:true,visibility:false}
-	);
 	mapaRemoto = new OpenLayers.Map({
 		div: "openlayers",
 		controls: [
@@ -142,7 +141,7 @@ function inicia(){
 			new OpenLayers.Control.Navigation()
 		] 		
 	});	
-	mapaRemoto.addLayers([remotoFundo,bra,osm,remoto]);
+	mapaRemoto.addLayers([remotoFundo,bra,remoto]);
 	recuperaMapa();
 }
 function zoom2ext(ext){

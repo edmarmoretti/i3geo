@@ -1,4 +1,4 @@
-<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/strict.dtd">
 <html>
 <head>
 <META HTTP-EQUIV="Content-Type" CONTENT="text/html; charset=UTF-8">
@@ -8,9 +8,11 @@
 <meta name="apple-mobile-web-app-capable" content="yes">
 <script type="text/javascript" src="http://maps.google.com/maps/api/js?sensor=false"></script>
 <script type="text/javascript" src="../../pacotes/cpaint/cpaint2_compacto.inc.js"></script>
+<script type="text/javascript" src="../../pacotes/yui290/build/yahoo/yahoo-min.js"></script>
+<script type="text/javascript" src="../../pacotes/yui290/build/dom/dom-min.js"></script>
 </head>
 <body onload="inicia()">
-<div id=googlemapsdiv style="width:100%;height:100%;"></div>
+<div id=googlemapsdiv style="width:500px;height:500px;"></div>
 <script>
 
 /*
@@ -96,6 +98,9 @@ Free Software Foundation, Inc., no endereço
 */
 
 function inicia(){
+	var mapa = document.getElementById("googlemapsdiv");
+	mapa.style.width = YAHOO.util.Dom.getViewportWidth() - 30 + "px";
+	mapa.style.height = YAHOO.util.Dom.getViewportHeight() - 30 + "px";
 	extentAnterior = "";
 	contadorSalva = 0;
 	$i = function(id){return document.getElementById(id);};
