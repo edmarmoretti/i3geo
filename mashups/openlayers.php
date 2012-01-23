@@ -1,8 +1,9 @@
 <?php
 error_reporting(0);if(extension_loaded('zlib')){ob_start('ob_gzhandler');} header("Content-type: text/html");
+include_once("../ms_configura.php");
 include_once("../classesphp/pega_variaveis.php");
 include_once("../classesphp/carrega_ext.php");
-error_reporting(0);
+error_reporting(E_ALL);
 //
 //imprime na tela a ajuda ao usuário
 //
@@ -133,8 +134,8 @@ if($temas != "")
 	}
 	else{
 		foreach($temas as $tema){
-			if(file_exists("../temas/".$tema.".map")){
-				$maptemp = @ms_newMapObj("../temas/".$tema.".map");
+			if(file_exists($locaplic."/temas/".$tema.".map")){
+				$maptemp = @ms_newMapObj($locaplic."/temas/".$tema.".map");
 				for($i=0;$i<($maptemp->numlayers);++$i)
 				{
 					$layern = $maptemp->getLayer($i);
@@ -180,9 +181,11 @@ Parâmetros:
 			tema incluido com o parametro 'temas', esses serão incluídos como temas de fundo.
 			Os seguintes fundos podem usados nessa lista:
 			
+			e_oce - ESRI Ocean Basemap
+			e_ims - ESRI Imagery World 2D
+			e_wsm - ESRI World Street Map
 			ol_mma - base cartográfica do Brasil
 			ol_wms - base mundial da Meta Carta
-			jpl_wms - mosaico de imagens de satélite
 			top_wms - toponímia do servidor do MMA usado no mapa de referência
 			est_wms - estados do Brasil
 			

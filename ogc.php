@@ -189,14 +189,21 @@ if(!isset($tema)){
 if ($tipo == "" || $tipo == "metadados")
 {
 	$tema = explode(" ",$tema);
+	//para o caso do tema ser um arquivo mapfile existente em uma pasta
+	$temai3geo = true;
+	if(file_exists($_GET["tema"])){
+		$nmap = ms_newMapobj($_GET["tema"]);
+		$temai3geo = false;
+	}
 	foreach ($tema as $tx)
 	{
 		$extensao = ".map";
-		if(file_exists($locaplic."/temas/".$tx.".php")){
+		if(file_exists($locaplic."/temas/".$tx.".php") && $temai3geo == true){
 			$extensao = ".php";
 		}
-		if($extensao == ".map"){
-			$nmap = ms_newMapobj($locaplic."/temas/".$tx.".map");
+		if($extensao == ".map"){			
+			if($temai3geo == true)
+			{$nmap = ms_newMapobj($locaplic."/temas/".$tx.".map");}
 			$ts = $nmap->getalllayernames();
 			foreach ($ts as $t)
 			{

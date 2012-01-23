@@ -917,11 +917,40 @@ class LayerServer {
 			$temp = $this->map;
 			if(!file_exists($this->map))
 			{
-				$maptemp = ms_newMapObj("../../temas/".$this->map.".map");
-				if (strtoupper(substr(PHP_OS, 0, 3) == 'WIN'))
-				{$this->map = "../../aplicmap/geral1windows.map";}
+				if(file_exists("ms_configura.php"))
+				{include("ms_configura.php");}
 				else
-				{$this->map = "../../aplicmap/geral1.map";}
+				{include("../../ms_configura.php");}
+				$maptemp = ms_newMapObj($locaplic."/temas/".$this->map.".map");
+
+				//if (strtoupper(substr(PHP_OS, 0, 3) == 'WIN'))
+				//{$this->map = $locaplic."/aplicmap/geral1windows.map";}
+				//else
+				//{$this->map = $locaplic."/aplicmap/geral1.map";}
+
+				$versao = $this->versao();
+				$versao = $versao["principal"];
+				if(!isset($base) || $base == "")
+				{
+					if (strtoupper(substr(PHP_OS, 0, 3) == 'WIN'))
+					{$base = $locaplic."/aplicmap/geral1windowsv".$versao.".map";}
+					else
+					{
+						if($base == "" && file_exists('/var/www/i3geo/aplicmap/geral1debianv'.$versao.'.map')){
+							$base = "/var/www/i3geo/aplicmap/geral1debianv".$versao.".map";
+						}
+						if($base == "" && file_exists('/var/www/html/i3geo/aplicmap/geral1fedorav'.$versao.'.map')){
+							$base = "/var/www/html/i3geo/aplicmap/geral1fedorav".$versao.".map";
+						}
+						if($base == "" && file_exists('/opt/www/html/i3geo/aplicmap/geral1fedorav'.$versao.'.map')){
+							$base = "/opt/www/html/i3geo/aplicmap/geral1v".$versao.".map";
+						}
+						if($base == "")
+						{$base = $locaplic."/aplicmap/geral1v".$versao.".map";}
+					}
+				}
+				$this->map = $base;
+				
             	$this->map_object = ms_newMapObj($this->map);
             	if(!$this->_zipped)
             	$this->map_object->setmetadata('wms_onlineresource',$servidor.":80/i3geo/ogc.php?tema=".$temp."&width=1500&height=1500&");
@@ -1054,6 +1083,21 @@ function simplexml_addChild($parent, $name, $value=''){
     $node2 = $node1->ownerDocument->importNode($dom_sxe, true);
     $node1->appendChild($node2);
     return simplexml_import_dom($node2);
+}
+function versao()
+{
+	$v = "5.0.0";
+	$vs = explode(" ",ms_GetVersion());
+	$cvs = count($vs);
+	for ($i=0;$i<$cvs;++$i)
+	{
+		if(trim(strtolower($vs[$i])) == "version")
+		{$v = $vs[$i+1];}
+	}
+	$versao["completa"] = $v;
+	$v = explode(".",$v);
+	$versao["principal"] = $v[0];
+	return $versao;
 }
 }
 ?>

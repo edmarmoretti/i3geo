@@ -752,7 +752,7 @@ Converte o mapa atual em um wms.
 		include_once("classe_mapa.php");
 		$m = new Mapa($map_file);
 		if(!isset($h)){$h = "";}
-		$retorno = $m->converteWS($locmapserv,$h);
+		$retorno = $m->converteWS($locaplic,$h);
 	break;
 /*
 Valor: CONVERTEWMSWMC

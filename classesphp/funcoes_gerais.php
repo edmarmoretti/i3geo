@@ -2847,7 +2847,7 @@ Return:
 function verificaEditores($editores)
 {
 	if (strtolower($_SERVER['HTTP_HOST']) == "localhost")
-	{return "sim";}
+	{return "nao";}
 	$editor = "nao";
 	if($editores == ""){return $editor;}
 	foreach ($editores as $e)

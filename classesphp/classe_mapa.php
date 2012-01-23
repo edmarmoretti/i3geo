@@ -1331,7 +1331,7 @@ O novo map file é armazenado no mesmo diretório do map file original.
 
 Parametros:
 
-$locmapserv - localização do CGI do mapserver
+$locaplic - localização do i3Geo
 
 $h - host name
 
@@ -1339,16 +1339,18 @@ Return:
 
 Endereço do WMS
 */
-	function converteWS($locmapserv,$h)
+	function converteWS($locaplic,$h)
 	{
-		$nomews = str_replace(".map","ws.map",$this->arquivo);
-		$nomeurl = $locmapserv."?map=".$nomews;
+		//$nomews = str_replace(".map","ws.map",$this->arquivo);
+		$nomeurl = "/ogc.php?tema=".$this->arquivo;
+		/*
 		$w = $this->mapa->web;
 		$w->set("template","");
 		//adiciona os parametros no nivel do mapa
 		$this->mapa->setmetadata("wms_title","I3Geo");
 		$this->mapa->setmetadata("wms_onlineresource","http://".$h.$nomeurl);
 		$this->mapa->setmetadata("wms_srs","EPSG:4291");
+		$this->mapa->setmetadata("ows_enable_request","*");
 		//$this->mapa->setmetadata("wms_getcontext_enabled","1");
 		foreach ($this->layers as $layer)
 		{
@@ -1370,6 +1372,7 @@ Endereço do WMS
 		$eb = $this->mapa->scalebar;
 		$eb->set("status",MS_OFF);
 		$this->mapa->save($nomews);
+		*/
 		return($nomeurl);
 	}
 /*
@@ -1399,6 +1402,7 @@ Endereço do WMC
 
 		$nomews = str_replace(".map","wmc.map",$this->arquivo);
 		$nomeurl = $locmapserv."?map=".$nomews;
+		$nomeogc = $urli3geo."/ogc.php?tema=".$nomews;
 		$w = $this->mapa->web;
 		$w->set("template","");
 		// adiciona os parametros no nivel do mapa
@@ -1416,9 +1420,9 @@ Endereço do WMC
 				{$codigo = $layer->name;}
 				$layer->setmetadata("wms_server_version","1.0.0");
 				$layer->setmetadata("wms_name",$codigo);
-				$layer->setmetadata("wms_srs","EPSG:4291 EPSG:4326");
+				//$layer->setmetadata("wms_srs","EPSG:4291 EPSG:4326");
 				$layer->setmetadata("WMS_INCLUDE_ITEMS","all");
-				$layer->setmetadata("wms_onlineresource","http://".$h.$nomeurl);
+				$layer->setmetadata("wms_onlineresource",$nomeogc."&layer=".$layer->name);
 				$layer->setmetadata("gml_include_items","all");
 				$layer->setmetadata("wms_format","image/png");
 				$layer->setmetadata("wms_formatlist","image/gif,image/png,image/png; mode=24bit,image/jpeg,image/wbmp,image/tiff");

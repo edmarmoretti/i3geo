@@ -239,19 +239,19 @@ OpenLayers.ImgPath = "../pacotes/openlayers/img/";
 	var oce = new OpenLayers.Layer.ArcGIS93Rest( 
 		"ESRI Ocean Basemap",
 		"http://server.arcgisonline.com/ArcGIS/rest/services/Ocean_Basemap/MapServer/export",
-		{format:"jpg"},
+		{format:"jpeg"},
 		{isBaseLayer:true,visibility:false}
 	);
 	var ims = new OpenLayers.Layer.ArcGIS93Rest( 
 		"ESRI Imagery World 2D",
 		"http://server.arcgisonline.com/ArcGIS/rest/services/ESRI_Imagery_World_2D/MapServer/export",
-		{},
+		{format:"jpeg"},
 		{isBaseLayer:true,visibility:false}
 	);
 	var wsm = new OpenLayers.Layer.ArcGIS93Rest( 
 		"ESRI World Street Map",
 		"http://server.arcgisonline.com/ArcGIS/rest/services/ESRI_StreetMap_World_2D/MapServer/export",
-		{},
+		{format:"jpeg"},
 		{isBaseLayer:true,visibility:false}
 	);
 	var bra = new OpenLayers.Layer.WMS( 

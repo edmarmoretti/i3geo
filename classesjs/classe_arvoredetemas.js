@@ -1338,8 +1338,8 @@ i3GEO.arvoreDeTemas = {
 			);
 		}
 		if(i3GEO.arvoreDeTemas.OPCOESADICIONAIS.qrcode === true){
-			lkgrcode = i3GEO.arvoreDeTemas.LOCAPLIC+"/pacotes/qrcode/php/qr_html.php?d="+i3GEO.arvoreDeTemas.LOCAPLIC+"/mobile/index.php?temasa="+node.data.idtema;
-			lkgrcode1 = i3GEO.arvoreDeTemas.LOCAPLIC+"/pacotes/qrcode/php/qr_img.php?d="+i3GEO.arvoreDeTemas.LOCAPLIC+"/mobile/index.php?temasa="+node.data.idtema;
+			lkgrcode = i3GEO.arvoreDeTemas.LOCAPLIC+"/pacotes/qrcode/php/qr_html.php?d="+i3GEO.arvoreDeTemas.LOCAPLIC+"/ms_criamapa.php?interface=openlayers_t.htm&temasa="+node.data.idtema+"&layers="+node.data.idtema;
+			lkgrcode1 = i3GEO.arvoreDeTemas.LOCAPLIC+"/pacotes/qrcode/php/qr_img.php?d="+i3GEO.arvoreDeTemas.LOCAPLIC+"/ms_criamapa.php?interface=openlayers_t.htm&temasa="+node.data.idtema+"&layers="+node.data.idtema;
 			tempNode = new YAHOO.widget.HTMLNode(
 				{isLeaf:true,enableHighlight:false,expanded:false,html:"<a title='' onmouseover='i3GEO.ajuda.mostraJanela(\"<img src="+lkgrcode1+" />\")' href='"+lkgrcode+"' target='blank' >Qrcode</a>"},
 				node

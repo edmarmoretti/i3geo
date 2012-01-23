@@ -23,6 +23,24 @@ i3GEO.editorOL = {
 	},
 	backup: new OpenLayers.Layer.Vector("Backup",{displayInLayerSwitcher:false,visibility:false}),
 	nomeFuncaoSalvar: "i3GEO.editorOL.testeSalvar()", 
+	e_oce: new OpenLayers.Layer.ArcGIS93Rest( 
+		"ESRI Ocean Basemap",
+		"http://server.arcgisonline.com/ArcGIS/rest/services/Ocean_Basemap/MapServer/export",
+		{format:"jpeg"},
+		{isBaseLayer:true,visibility:false}
+	),
+	e_ims: new OpenLayers.Layer.ArcGIS93Rest( 
+		"ESRI Imagery World 2D",
+		"http://server.arcgisonline.com/ArcGIS/rest/services/ESRI_Imagery_World_2D/MapServer/export",
+		{format:"jpeg"},
+		{isBaseLayer:true,visibility:false}
+	),
+	e_wsm: new OpenLayers.Layer.ArcGIS93Rest( 
+		"ESRI World Street Map",
+		"http://server.arcgisonline.com/ArcGIS/rest/services/ESRI_StreetMap_World_2D/MapServer/export",
+		{format:"jpeg"},
+		{isBaseLayer:true,visibility:false}
+	),
 	ol_mma: new OpenLayers.Layer.WMS(
 		"Base cartográfica",
 		"http://mapas.mma.gov.br/cgi-bin/mapserv?map=/opt/www/html/webservices/baseraster.map&",
@@ -32,11 +50,6 @@ i3GEO.editorOL = {
 		"OpenLayers WMS",
 		"http://labs.metacarta.com/wms/vmap0",
 		{layers: 'basic'}
-	),
-	jpl_wms: new OpenLayers.Layer.WMS(
-		"NASA Global Mosaic",
-		"http://wms.jpl.nasa.gov/wms.cgi?",
-		{layers: "global_mosaic"}
 	),
 	top_wms: new OpenLayers.Layer.WMS(
 		"Toponímia MMA",
@@ -48,7 +61,7 @@ i3GEO.editorOL = {
 		"http://mapas.mma.gov.br/i3geo/ogc.php?tema=estadosl&",
 		{layers: "estadosl",FORMAT:'image/png'}
 	),
-	fundo: "ol_mma,ol_wms,jpl_wms,top_wms,est_wms",
+	fundo: "e_oce,e_ims,e_wsm,ol_mma,ol_wms,top_wms,est_wms",
 	kml: [],
 	layersIniciais: [],
 	botoes: {

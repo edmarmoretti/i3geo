@@ -109,7 +109,7 @@ i3GEOF.converteMapaWS = {
 			var enderecowms = "Ocorreu um erro ao criar o WMS",
 				enderecowmc = "Ocorreu um erro ao criar o WMS";
 			if (retorno.data != undefined){
-				enderecowms = window.location.protocol+"//"+window.location.host+retorno.data.wms+"&";
+				enderecowms = i3GEO.configura.locaplic+retorno.data.wms+"&";
 				enderecowmc = window.location.protocol+"//"+window.location.host+retorno.data.wmc+"&";
 			}
 			i3GEOF.converteMapaWS.html(divid,enderecowms,enderecowmc);

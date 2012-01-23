@@ -191,9 +191,9 @@ function verifica($map,$solegenda)
 			eval($pegarext."(\$mapa);");
 		}
 		else{
-			if(@ms_newMapObj($tema))
+			if(@ms_newMapObj($locaplic."/".$tema))
 			{
-				$nmapa = ms_newMapObj($tema);
+				$nmapa = ms_newMapObj($locaplic."/".$tema);
 			}
 			else
 			{
