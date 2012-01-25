@@ -1073,7 +1073,7 @@ Acrescenta um novo tema em um arquivo map file tendo como fonte um WMS.
 <Mapa->adicionatemawms>
 */	
 	case "ADICIONATEMAWMS":
-		include_once("classe_mapa.php");
+		include_once("classe_mapa.php");	
 		copiaSeguranca($map_file);
 		$m = new Mapa($map_file);
 	 	$m->adicionatemawms($tema,$servico,$nome,$proj,$formato,$locaplic,$tipo,$versao,$nomecamada,$dir_tmp,$imgdir,$imgurl,$tiporep,$suportasld,$formatosinfo,$time);

@@ -2278,28 +2278,28 @@ i3GEO.Interface = {
 			texto = "<input type=checkbox style='vertical-align:top;cursor:pointer' ";
 			if(i3GEO.Interface.googleearth.GADGETS.LAYER_BORDERS === true)
 			{texto += "CHECKED ";}
-			texto += " onclick='javascript:i3GeoMap.getLayerRoot().enableLayerById(i3GeoMap.LAYER_BORDERS, i3GEO.Interface.checked)'" ;
+			texto += " onclick='javascript:i3GeoMap.getLayerRoot().enableLayerById(i3GeoMap.LAYER_BORDERS, this.checked)'" ;
 			texto += "> "+$trad("ge8");
 			i3GEO.configura.listaDePropriedadesDoMapa.propriedades.push({text: texto,url:""});
 
 			texto = "<input type=checkbox style='vertical-align:top;cursor:pointer' ";
 			if(i3GEO.Interface.googleearth.GADGETS.LAYER_BUILDINGS === true)
 			{texto += "CHECKED ";}
-			texto += " onclick='javascript:i3GeoMap.getLayerRoot().enableLayerById(i3GeoMap.LAYER_BUILDINGS, i3GEO.Interface.checked)'" ;
+			texto += " onclick='javascript:i3GeoMap.getLayerRoot().enableLayerById(i3GeoMap.LAYER_BUILDINGS, this.checked)'" ;
 			texto += "> "+$trad("ge9");
 			i3GEO.configura.listaDePropriedadesDoMapa.propriedades.push({text: texto,url:""});
 
 			texto = "<input type=checkbox style='vertical-align:top;cursor:pointer' ";
 			if(i3GEO.Interface.googleearth.GADGETS.LAYER_ROADS === true)
 			{texto += "CHECKED ";}
-			texto += " onclick='javascript:i3GeoMap.getLayerRoot().enableLayerById(i3GeoMap.LAYER_ROADS, i3GEO.Interface.checked)'" ;
+			texto += " onclick='javascript:i3GeoMap.getLayerRoot().enableLayerById(i3GeoMap.LAYER_ROADS, this.checked)'" ;
 			texto += "> "+$trad("ge10");
 			i3GEO.configura.listaDePropriedadesDoMapa.propriedades.push({text: texto,url:""});
 
 			texto = "<input type=checkbox style='vertical-align:top;cursor:pointer' ";
 			if(i3GEO.Interface.googleearth.GADGETS.LAYER_TERRAIN === true)
 			{texto += "CHECKED ";}
-			texto += " onclick='javascript:i3GeoMap.getLayerRoot().enableLayerById(i3GeoMap.LAYER_TERRAIN, i3GEO.Interface.checked)'" ;
+			texto += " onclick='javascript:i3GeoMap.getLayerRoot().enableLayerById(i3GeoMap.LAYER_TERRAIN, this.checked)'" ;
 			texto += "> "+$trad("ge11");
 			i3GEO.configura.listaDePropriedadesDoMapa.propriedades.push({text: texto,url:""});
 			i3GEO.util.arvore("<b>"+$trad("p13")+"</b>","listaPropriedades",i3GEO.configura.listaDePropriedadesDoMapa);

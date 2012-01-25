@@ -181,8 +181,12 @@ i3GEOF.opcoesTamanho = {
 			temp = function(){
 				i3GEO.atualiza();
 				i3GEO.guias.ALTURACORPOGUIAS = a;
-				i3GEO.guias.ajustaAltura();
 				i3GEOF.opcoesTamanho.aguarde.visibility = "hidden";
+				if(i3GEO.guias.TIPO === "movel")
+				{i3GEO.guias.guiaMovel.reposiciona();}
+				else
+				{i3GEO.guias.ajustaAltura();}
+				i3GEO.mapa.reposicionaDobraPagina();				
 			};
 			p = i3GEO.configura.locaplic+"/classesphp/mapa_controle.php?g_sid="+i3GEO.configura.sid+"&funcao=mudatamanho&altura="+a+"&largura="+l;
 			cp = new cpaint();

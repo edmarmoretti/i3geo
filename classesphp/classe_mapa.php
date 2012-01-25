@@ -1213,11 +1213,11 @@ $time - específico para WMS-T (parâmentro wms_time)
 Include:
 <wmswfs.php>
 */
-	function adicionatemawms($tema,$servico,$nome,$proj,$formato,$locaplic,$tipo,$versao,$nomecamada,$dir_tmp,$imgdir,$imgurl,$tiporep,$suportasld,$formatosinfo="text/plain",$time="")
+	function adicionatemawms($tema,$servico,$nome,$proj,$formato,$locaplic,$tipo="",$versao,$nomecamada,$dir_tmp,$imgdir,$imgurl,$tiporep,$suportasld,$formatosinfo="text/plain",$time="")
 	{
 		//echo $servico;return;
-		if(file_exists($this->locaplic."/wmswfs.php"))
-		include_once($this->locaplic."/wmswfs.php");
+		if(file_exists($this->locaplic."/classesphp/wmswfs.php"))
+		include_once($this->locaplic."/classesphp/wmswfs.php");
 		else
 		include_once("wmswfs.php");
 		//limpa selecao
@@ -1318,9 +1318,8 @@ Include:
 		$layer->setmetadata("wfs","nao");
 		$c = $layer->offsite;
 		$c->setrgb(255,255,255);
-		
 		$of = $this->mapa->outputformat;
-		$of->set("imagemode",MS_IMAGEMODE_RGB);
+		//$of->set("imagemode",MS_IMAGEMODE_RGB);
 		$this->salva();
 	}
 /*
