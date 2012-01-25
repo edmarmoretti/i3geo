@@ -142,7 +142,7 @@ i3GEOF.buffer = {
 	},
 	t3: function(){
 		var ins = "<p class='paragrafo'>O tema com o entorno ser&aacute; adicionado ao mapa atual.";
-		ins += "<br><br><input id=i3GEObufferbotao1 type='buttom' value='Criar entorno' />";
+		ins += "<br><br><input id=i3GEObufferbotao1 type='button' value='Criar entorno' />";
 		i3GEO.util.proximoAnterior("i3GEOF.buffer.t2()","",ins,"i3GEOF.buffer.t3","i3GEObufferresultado");
 		new YAHOO.widget.Button(
 			"i3GEObufferbotao1",

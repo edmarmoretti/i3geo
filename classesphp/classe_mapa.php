@@ -76,7 +76,7 @@ $map_file - Endereço do mapfile no servidor.
 */  	
 	function __construct($map_file,$locaplic="")
 	{
-  		//error_reporting(E_ALL);
+  		error_reporting(E_ALL);
   		if (!function_exists('ms_newMapObj')) {return false;}
   		if(file_exists($locaplic."/funcoes_gerais.php"))
   		include_once($locaplic."/funcoes_gerais.php");
@@ -852,10 +852,11 @@ $incluitexto - sim|nao
 	function gradeCoord($intervalo,$corlinha="200,200,200",$larguralinha=1,$tipolinha="linha",$tamanhotexto=MS_TINY,$fonte="bitmap",$cortexto="0,0,0",$incluitexto="sim",$mascara="-1,-1,-1",$shadowcolor="-1,-1,-1",$shadowsizex=0,$shadowsizey=0)
 	{
 		//echo $corlinha;
-		if (file_exists($this->qyfile))
-		{unlink ($this->qyfile);}
+		//if (file_exists($this->qyfile))
+		//{unlink ($this->qyfile);}
+		//tem erro na versão 6 do Mapserver. Já abri um ticket no trac da OSGEO 
 		$nlayer = criaLayer($this->mapa,MS_LAYER_LINE,MS_DEFAULT,"Grade de coordenadas","SIM");
-		ms_newgridobj($nlayer);
+		ms_newgridobj($nlayer);	
 		$nlayer->grid->set("labelformat", "DDMMSS");
 		$nlayer->grid->set("maxinterval", $intervalo);
 		$classe = $nlayer->getclass(0);
@@ -871,10 +872,8 @@ $incluitexto - sim|nao
 		if($incluitexto == "sim")
 		{
 			$label = $classe->label;
-			
 			$label->set("size",$tamanhotexto);
 			$label->set("type",MS_BITMAP);
-
 			if ($fonte != "bitmap")
 			{
 				$label->set("type",MS_TRUETYPE);
@@ -892,7 +891,6 @@ $incluitexto - sim|nao
 				if ($tamanhotexto >= 14 ){$t = MS_GIANT;}
 				$label->set("size",$t);
 			}
-			
 			$label->set("buffer",0);
 			$label->set("force",MS_FALSE);
 			$label->set("partials",MS_FALSE);
@@ -977,6 +975,9 @@ $random - indica se os nomes dos novos layers serão modificados ou nao
 					{
 						$nlayer = $nmap->getlayerbyname($n);
 						if(function_exists("autoClasses"))
+						//para impedir erros na legenda
+						if($nlayer->getmetadata("classe") == "")
+						{$nlayer->setmetadata("classe","");}
 						autoClasses($nlayer,$this->mapa);
 						//
 						//cria as classes com base em atributos

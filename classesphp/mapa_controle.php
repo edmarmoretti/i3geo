@@ -160,7 +160,6 @@ if (isset($debug) && strtolower($debug) == "sim")
 //
 include_once ("carrega_ext.php");
 include_once("funcoes_gerais.php");
-
 if ($funcao == "criaMapa")
 {
 	unset($GLOBALS);
@@ -215,6 +214,7 @@ if(!isset($locaplic)){
 //
 //substitui a string de conexão
 //
+
 if($funcao != "recuperamapa" && $funcao != "TEMA2SLD")
 {
 	if(!substituiCon($map_file,$postgis_mapa))

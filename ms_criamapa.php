@@ -490,6 +490,9 @@ function adaptaLayers(){
 		}
 		if ($ok == false)
 		{$layer->set("status",MS_OFF);}
+		//para impedir erros na legenda
+		if($layer->getmetadata("classe") == "")
+		{$layer->setmetadata("classe","");}
 	}
 	$mapa->save($tmpfname);
 	erroCriacao();

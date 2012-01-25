@@ -910,6 +910,7 @@ i3GEO.php = {
 			sid = i3GEO.configura.sid;
 			ext = "";
 			listaDeTemas = "";
+			resolucao = 5;
 		}
 		if(arguments.length === 5){
 			locaplic = i3GEO.configura.locaplic;
@@ -920,7 +921,7 @@ i3GEO.php = {
 		if(listaDeTemas === undefined)
 		{listaDeTemas = "";}
 		var p = locaplic+"/classesphp/mapa_controle.php",
-			par = "funcao=identifica2&opcao="+opcao+"&xy="+x+","+y+"&resolucao=5&g_sid="+sid+"&ext="+ext+"&listaDeTemas="+listaDeTemas;
+			par = "funcao=identifica2&opcao="+opcao+"&xy="+x+","+y+"&resolucao="+resolucao+"&g_sid="+sid+"&ext="+ext+"&listaDeTemas="+listaDeTemas;
 		if(opcao !== "tip")
 		{par += "&tema="+tema;}
 		cpJSON.call(p,"identifica",funcao,par);

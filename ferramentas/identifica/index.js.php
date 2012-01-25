@@ -526,7 +526,7 @@ i3GEOF.identifica = {
 			if(res)
 			{resolucao = res.value;}
 			else
-			{res = 5;}
+			{resolucao = 5;}
 			i3GEO.mapa.ativaTema(tema);
 			//var resolucao = "0.01"
 			if (tema === "ligados")

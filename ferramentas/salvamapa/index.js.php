@@ -56,10 +56,13 @@ i3GEOF.salvaMapa = {
 	inicia: function(iddiv){
 		var temp = function(){
 			try{
-				var map_file = i3GEO.parametros.mapfile,
+				var teste,
+					map_file = i3GEO.parametros.mapfile,
 					local = map_file.split("ms_tmp");
+				teste = i3GEO.configura.locaplic+"/testamapfile.php?map="+map_file;	
 				local = i3GEO.util.protocolo()+"://"+window.location.host+"/ms_tmp"+local[1];
-				$i(iddiv).innerHTML += i3GEOF.salvaMapa.html()+"<a href='"+local+"' target='_blank' >Clique aqui para baixar o arquivo</a>";
+				$i(iddiv).innerHTML += i3GEOF.salvaMapa.html()+"<a href='"+local+"' target='_blank' >Clique aqui para baixar o arquivo</a><br>";
+				$i(iddiv).innerHTML += "<a href='"+teste+"' target='_blank' >Clique aqui para testar</a>";
 			}
 			catch(erro){alert(erro);}
 		},
@@ -83,7 +86,7 @@ i3GEOF.salvaMapa = {
 	html:function(){
 		var ins = '';
 		ins += '<p class="paragrafo" >Salvando o mapa atual, voc&ecirc; poder&aacute; carreg&aacute;-lo novamente. Clique no link abaixo com o bot&atilde;o direito do mouse e salve o arquivo em seu computador.';
-		ins += '<p class="paragrafo" >Para carregar o mapa armazenado, utilize a op&ccedil;&atilde;o de carregar mapa.';
+		ins += '<p class="paragrafo" >Para carregar o mapa salvo anteriormente, utilize a op&ccedil;&atilde;o de carregar mapa.';
 		ins += '<p class="paragrafo" >';
 		return ins;
 	},

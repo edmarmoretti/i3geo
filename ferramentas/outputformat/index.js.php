@@ -78,13 +78,8 @@ i3GEOF.outputformat = {
 			'<table class=lista4 width="250px">' +
 			'	<tr>' +
 			'		<td><input onclick="i3GEOF.outputformat.aplicar(\'AGG_Q\')" style="cursor:pointer;border:0px solid white;" type=radio name=i3GEOoutputformattipo value=nenhum ></td>' +
-			'		<td>AGG_Q</td>' +
+			'		<td>png</td>' +
 			'		<td>Formato PNG com 256 cores gerado com a tecnologia AGG. Utilizado como default na versão 4.3 e posteriores do i3Geo</td>' +
-			'	</tr>' +
-			'	<tr>' +
-			'		<td><input onclick="i3GEOF.outputformat.aplicar(\'png1\')" style="cursor:pointer;border:0px solid white;" type=radio name=i3GEOoutputformattipo value=nenhum ></td>' +
-			'		<td>png1</td>' +
-			'		<td>Formato PNG com 256 cores gerado com o driver GD</td>' +
 			'	</tr>' +
 			'	<tr>' +
 			'		<td><input onclick="i3GEOF.outputformat.aplicar(\'jpeg\')" style="cursor:pointer;border:0px solid white;" type=radio name=i3GEOoutputformattipo value=nenhum ></td>' +

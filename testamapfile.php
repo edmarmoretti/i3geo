@@ -134,7 +134,6 @@ function verifica($map,$solegenda)
 	}
 	ms_ResetErrorList();
 	$tema = "";
-
 	if(file_exists($map))
 	{$tema = $map;}
 	else
@@ -191,21 +190,25 @@ function verifica($map,$solegenda)
 			eval($pegarext."(\$mapa);");
 		}
 		else{
-			if(@ms_newMapObj($locaplic."/".$tema))
-			{
-				$nmapa = ms_newMapObj($locaplic."/".$tema);
-			}
-			else
-			{
-				echo "erro no arquivo $map <br>";
-				echo "Obs.: em alguns testes o mapfile pode falhar se o endereço dos arquivos de símbolos estiverem <br>definidos de forma relativa ao invés de absoluta. Nesses casos, ao abrir o i3Geo, <br>o mapfile poderá funcionar. <br>";
-				$error = ms_GetErrorObj();
-				while($error && $error->code != MS_NOERR)
+			if(file_exists($tema))
+			{$nmapa = ms_newMapObj($tema);}
+			else{
+				if(@ms_newMapObj($locaplic."/".$tema))
 				{
-					printf("<br>Error in %s: %s<br>\n", $error->routine, $error->message);
-					$error = $error->next();
+					$nmapa = ms_newMapObj($locaplic."/".$tema);
 				}
-				return;
+				else
+				{
+					echo "erro no arquivo $map <br>";
+					echo "Obs.: em alguns testes o mapfile pode falhar se o endereço dos arquivos de símbolos estiverem <br>definidos de forma relativa ao invés de absoluta. Nesses casos, ao abrir o i3Geo, <br>o mapfile poderá funcionar. <br>";
+					$error = ms_GetErrorObj();
+					while($error && $error->code != MS_NOERR)
+					{
+						printf("<br>Error in %s: %s<br>\n", $error->routine, $error->message);
+						$error = $error->next();
+					}
+					return;
+				}
 			}
 			$temasn = $nmapa->getAllLayerNames();
 			$dados = "";

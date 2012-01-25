@@ -1314,8 +1314,11 @@ nome do layer criado com o buffer.
 	function criaBuffer($distancia,$locaplic,$unir="nao",$wkt="")
 	{
 		set_time_limit(180);
-		$items = pegaItens($this->layer);
-		//error_reporting(E_ALL);
+		error_reporting(0);
+		if($this->nome != "")
+		{$items = pegaItens($this->layer);}
+		else
+		{$items = array();}
 		//para manipular dbf
 		if($this->dbaseExiste == false){
 			if(file_exists($this->locaplic."/pacotes/phpxbase/api_conversion.php"))

@@ -524,7 +524,7 @@ i3GEO.configura = {
 	listaDePropriedadesDoMapa: {
 		"propriedades": [
 		{ text: "p2", url: "javascript:i3GEO.mapa.dialogo.tipoimagem()"},
-		{ text: "p15", url: "javascript:i3GEO.mapa.dialogo.outputformat()"},
+		//{ text: "p15", url: "javascript:i3GEO.mapa.dialogo.outputformat()"},
 		{ text: "p3", url: "javascript:i3GEO.mapa.dialogo.opcoesLegenda()"},
 		{ text: "p4", url: "javascript:i3GEO.mapa.dialogo.opcoesEscala()"},
 		{ text: "p5", url: "javascript:i3GEO.mapa.dialogo.tamanho()"},

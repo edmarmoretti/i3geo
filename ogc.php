@@ -115,6 +115,7 @@ if(isset($lista) && $lista == "temas")
 //cria o web service
 //
 include("classesphp/funcoes_gerais.php");
+error_reporting(E_ALL);
 $versao = versao();
 $versao = $versao["principal"];
 $req = ms_newowsrequestobj();
@@ -134,6 +135,7 @@ foreach ($_GET as $k=>$v)
 	if(strtolower($k) == "layer")
 	{$tema = $v;}
 }
+if(empty($srs)){$srs = "";}
 $listaepsg = $srs." EPSG:4291 EPSG:4326 EPSG:22521 EPSG:22522 EPSG:22523 EPSG:22524 EPSG:22525 EPSG:29101 EPSG:29119 EPSG:29120 EPSG:29121 EPSG:29122 EPSG:29177 EPSG:29178 EPSG:29179 EPSG:29180 EPSG:29181 EPSG:29182 EPSG:29183 EPSG:29184 EPSG:29185";
 
 if(count($_GET) == 0){
@@ -173,6 +175,7 @@ $oMap->setmetadata("wms_attribution_logourl_width","85");
 $oMap->setmetadata("wms_attribution_logourl_href",$proto.$server.dirname($_SERVER['PHP_SELF'])."/imagens/i3geo.png");
 $oMap->setmetadata("wms_attribution_onlineresource",$proto.$server.dirname($_SERVER['PHP_SELF']));
 $oMap->setmetadata("wms_attribution_title",$tituloInstituicao);
+$oMap->setmetadata("ows_enable_request","*");
 
 $e = $oMap->extent;
 $extensaoMap = ($e->minx)." ".($e->miny)." ".($e->maxx)." ".($e->maxy);
@@ -194,6 +197,7 @@ if ($tipo == "" || $tipo == "metadados")
 	if(file_exists($_GET["tema"])){
 		$nmap = ms_newMapobj($_GET["tema"]);
 		$temai3geo = false;
+		$nmap->setmetadata("ows_enable_request","*");
 	}
 	foreach ($tema as $tx)
 	{
@@ -202,8 +206,10 @@ if ($tipo == "" || $tipo == "metadados")
 			$extensao = ".php";
 		}
 		if($extensao == ".map"){			
-			if($temai3geo == true)
-			{$nmap = ms_newMapobj($locaplic."/temas/".$tx.".map");}
+			if($temai3geo == true){
+				$nmap = ms_newMapobj($locaplic."/temas/".$tx.".map");
+				$nmap->setmetadata("ows_enable_request","*");
+			}
 			$ts = $nmap->getalllayernames();
 			foreach ($ts as $t)
 			{
@@ -284,6 +290,7 @@ else
 	$conta = 0;
 	$int = explode(",",$intervalo);
 	$codigosTema = array();
+	if(empty($perfil)){$perfil = "";}
 	$m = new Menutemas("",$perfil,$locaplic,$urli3geo);
 	$menus = $m->pegaListaDeMenus();
 	foreach ($menus as $menu)
@@ -310,14 +317,18 @@ else
 			}
 		}
 	}
+	//echo "<pre>";
+	//var_dump($$codigosTema);
+	//exit;
 	foreach($codigosTema as $c)
 	{
 		$codigoTema = $c["tema"];
-		if(file_exists($locaplic."temas/".$codigoTema.".map"))
+		if(file_exists($locaplic."/temas/".$codigoTema.".map"))
 		{
-			if (@ms_newMapobj($locaplic."temas/".$codigoTema.".map"))
+			if (@ms_newMapobj($locaplic."/temas/".$codigoTema.".map"))
 			{
-				$nmap = ms_newMapobj($locaplic."temas/".$codigoTema.".map");
+				$nmap = ms_newMapobj($locaplic."/temas/".$codigoTema.".map");
+				$nmap->setmetadata("ows_enable_request","*");
 				$ts = $nmap->getalllayernames();
 				if (count($ts) == 1)
 				{ 

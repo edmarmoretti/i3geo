@@ -685,6 +685,7 @@ array - "imagecolor"=>$imagecolor,"transparent"=>transparent,"position"=>$positi
 */
 	function pegaParametrosLegImg()
 	{
+		error_reporting(E_ALL);
 		$legenda = $this->mapa->legend;
 		$height = $legenda->height;
 		$width = $legenda->width;
@@ -696,7 +697,7 @@ array - "imagecolor"=>$imagecolor,"transparent"=>transparent,"position"=>$positi
 		$status = $legenda->status; //MS_ON, MS_OFF, MS_EMBED
 		$position = $legenda->position;
 		if ($position < 99){$position = "10".$position;}
-		$transparent = $legenda->transparent;
+		$transparent = 100;
 		$imagecolor = corRGB($legenda->imagecolor);
 		$label = $legenda->label;
 		$font = $label->font;
