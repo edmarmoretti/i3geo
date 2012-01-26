@@ -1161,6 +1161,10 @@ function criarNovoMap()
 			fwrite($fp,$dado."\n");
 		}
     	require_once("conexao.php");
+		if($convUTF){
+			$nome = utf8_encode($nome);
+			$desc = utf8_encode($desc);
+		}		
     	$dbhw->query("INSERT INTO i3geoadmin_temas (link_tema,kml_tema,kmz_tema,ogc_tema,download_tema,desc_tema,tipoa_tema,tags_tema,nome_tema,codigo_tema,it,es,en) VALUES ('','','', '','','','','','$nome','$codigo','$it','$es','$en')");
     	$dbh = null;
     	$dbhw = null;
