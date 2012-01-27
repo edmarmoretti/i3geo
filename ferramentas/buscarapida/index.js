@@ -152,7 +152,6 @@ i3GEObuscaRapida = {
 		i3GEObuscaRapida.locaplic = locaplic;
 		if(servicosexternos === true){
 			aguarde("block")
-			$i("resultado").innerHTML = "Aguarde..."
 			i3GEO.php.buscaRapida(resultado,locaplic,i3GEObuscaRapida.servico,palavra);
 		}
 		if(temasmapa === true){
@@ -163,11 +162,13 @@ i3GEObuscaRapida = {
 					return;
 				}
 				aguarde("block")
-				$i("resultadoTemas").innerHTML = "Aguarde..."
 				i3GEO.php.buscaRapida(i3GEObuscaRapida.montaResultadoTemas,locaplic,"temas",palavra);
 			}
 			catch(e){}
-		}		
+		}
+		else{
+			$i("resultadoTemas").innerHTML = "";
+		}
 	},
 	/*
 	Function: montaResultadoTemas
@@ -181,7 +182,7 @@ i3GEObuscaRapida = {
 	montaResultadoTemas: function(retorno){
 		var ins = "Nada encontrado nos temas ou nenhum tema permite busca.<br>";
 		try{
-			if(retorno.data){
+			if(retorno.data && retorno.data.length > 0){
 				ins = "<table >";
 				for (i=0;i<retorno.data.length; i++){
 					ins += "<tr><td style='text-align:left'>"
@@ -254,9 +255,9 @@ i3GEObuscaRapida = {
 	retorno {Json} - resultado de 
 	*/
 	resultadoTemas: function(retorno){
-		var retorno = retorno.data;
-		if ((retorno != "erro") && (retorno != undefined)){
-			var ins = "";
+		var retorno = retorno.data,
+			ins = "";
+		if ((retorno != "erro") && (retorno != undefined) && retorno.length > 0){
 			for (ig=0;ig<retorno.length;ig++){
 				var ngSgrupo = retorno[ig].subgrupos;
 				for (sg=0;sg<ngSgrupo.length;sg++){
@@ -272,8 +273,8 @@ i3GEObuscaRapida = {
 					}
 				}
 			}
-			if (ins != ""){	$i(i3GEObuscaRapida.idresultado).innerHTML += "<br><b>Temas:</b><br>"+ins}
 		}
+		if (ins != ""){	$i(i3GEObuscaRapida.idresultado).innerHTML += "<br><b>Temas:</b><br>"+ins}
 	},
 	/*
 	Function: zoom
