@@ -71,7 +71,7 @@ if (!function_exists('ms_GetVersion'))
 require_once("classesphp/carrega_ext.php");
 include("ms_configura.php");
 include("classesphp/pega_variaveis.php");
-include("classesphp/classe_menutemas.php");
+//include("classesphp/classe_menutemas.php");
 if(!isset($temas) && isset($tema))
 {$temas = $tema;}
 //
@@ -108,6 +108,7 @@ if(isset($ajuda))
 //
 if(isset($lista) && $lista == "temas")
 {
+	include_once("classesphp/classe_menutemas.php");
 	ogc_imprimeListaDeTemas();
 	exit;
 }
@@ -137,7 +138,6 @@ foreach ($_GET as $k=>$v)
 }
 if(empty($srs)){$srs = "";}
 $listaepsg = $srs." EPSG:4291 EPSG:4326 EPSG:22521 EPSG:22522 EPSG:22523 EPSG:22524 EPSG:22525 EPSG:29101 EPSG:29119 EPSG:29120 EPSG:29121 EPSG:29122 EPSG:29177 EPSG:29178 EPSG:29179 EPSG:29180 EPSG:29181 EPSG:29182 EPSG:29183 EPSG:29184 EPSG:29185";
-
 if(count($_GET) == 0){
 	$tipo="intervalo";
 	$req->setParameter("REQUEST", "getCapabilities");
@@ -156,6 +156,7 @@ if((isset($legenda)) && (strtolower($legenda) == "sim"))
 {
 	$leg = $oMap->legend;
 	$leg->set("status",MS_EMBED);
+	$cache = false;
 }
 $proto = "http" . ((isset($_SERVER['HTTPS']) && $_SERVER['HTTPS'] == "on") ? "s" : "") . "://";
 $server = isset($_SERVER['HTTP_HOST']) ? $_SERVER['HTTP_HOST'] : $_SERVER['SERVER_NAME'];
@@ -214,16 +215,14 @@ if ($tipo == "" || $tipo == "metadados")
 			foreach ($ts as $t)
 			{
 				$l = $nmap->getlayerbyname($t);
+				if($cache == true && strtolower($l->getmetadata("cache")) == "sim" && $tipo == "" && count($tema) == 1){
+					carregaCacheImagem($_GET["BBOX"],$tx,$_GET["WIDTH"],$_GET["HEIGHT"],$cachedir);
+				}				
 				$l->setmetadata("ows_title",pegaNome($l));
 				$l->setmetadata("ows_srs",$listaepsg);
 				//essa linha é necessária pq as vezes no mapfile não tem nenhum layer com o nome igual ao nome do mapfile
 				if(count($ts)==1)
-				{
-					$l->set("name",$tx);
-					if($cache == true && strtolower($l->getmetadata("cache")) == "sim"){
-						carregaCacheImagem($_GET["BBOX"],$t,$_GET["WIDTH"],$_GET["HEIGHT"],$cachedir);
-					}
-				}
+				{$l->set("name",$tx);}
 				$l->setmetadata("gml_include_items","all");
 				$l->set("dump",MS_TRUE);
 				$l->setmetadata("WMS_INCLUDE_ITEMS","all");
@@ -291,6 +290,7 @@ else
 	$int = explode(",",$intervalo);
 	$codigosTema = array();
 	if(empty($perfil)){$perfil = "";}
+	include("classesphp/classe_menutemas.php");
 	$m = new Menutemas("",$perfil,$locaplic,$urli3geo);
 	$menus = $m->pegaListaDeMenus();
 	foreach ($menus as $menu)
@@ -372,6 +372,9 @@ else
 			}
 		}
 	}
+}
+if($cache == true){
+	
 }
 ms_ioinstallstdouttobuffer();
 $oMap->owsdispatch($req);

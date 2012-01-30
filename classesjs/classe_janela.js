@@ -350,7 +350,7 @@ i3GEO.janela = {
 		}
 		if($i(id+"_c")){
 			$i(id+"_c").style.zIndex = 23000 + i3GEO.janela.ULTIMOZINDEX + 1;
-			i3GEO.janela.ULTIMOZINDEX = 23000 + i3GEO.janela.ULTIMOZINDEX + 1;
+			i3GEO.janela.ULTIMOZINDEX += 23001;
 			if(waltura === "auto"){
 				$i(id+"_c").style.border = "0px solid white";
 			}

@@ -390,8 +390,8 @@ i3GEOF.legenda = {
 		if(i3GEOF.legenda.tema !== "" && i3GEO.arvoreDeCamadas.pegaTema(i3GEOF.legenda.tema) === "")
 		{alert("O tema ja nao existe mais no mapa");}
 		var i = $i("i3GEOF.legenda_c").style;
+		i.zIndex = i3GEO.janela.ULTIMOZINDEX;
 		i3GEO.janela.ULTIMOZINDEX++;
-		i.zIndex = 21000 + i3GEO.janela.ULTIMOZINDEX;
 	},
 	/*
 	Function: aposAlterarLegenda

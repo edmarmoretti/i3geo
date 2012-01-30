@@ -959,7 +959,7 @@ i3GEO.util = {
 			wdocaiframe,
 			fix = false,
 			wlargura = "300",
-			waltura = "250",
+			waltura = "280",
 			wsrc = i3GEO.configura.locaplic+"/ferramentas/colorpicker/index.htm?doc="+janela+"&elemento="+elemento+"&tipo="+tipo,
 			nx = "",
 			ny = "",
@@ -990,14 +990,14 @@ i3GEO.util = {
 		{
 			wdocaiframe.style.display = "block";
 			wdocaiframe.src = wsrc;
-			wdocaiframe.style.height = "250px";
+			wdocaiframe.style.height = "230px";
 			wdocaiframe.style.width = "325px";
 			wdocaiframe.style.border = "0px solid white";
 		}
-		if(nx === "" || nx === "center"){fix = true;}
-		YAHOO.janelaCor.xp.panel = new YAHOO.widget.ResizePanel(id, { height:"300px",zIndex:5000, modal:modal, width: "350px", fixedcenter: fix, constraintoviewport: false, visible: true, iframe:false} );
+		YAHOO.janelaCor.xp.panel = new YAHOO.widget.ResizePanel(id, { height:"290px",zIndex:i3GEO.janela.ULTIMOZINDEX, modal:false, width: "350px", fixedcenter: true, constraintoviewport: false, visible: true, iframe:false} );
 		YAHOO.janelaCor.xp.panel.render();
 		$i(id+'_cabecalho').className = classe;
+		i3GEO.janela.ULTIMOZINDEX++
 	},
 	/*
 	Function: ajaxhttp
