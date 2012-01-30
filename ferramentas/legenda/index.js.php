@@ -145,56 +145,14 @@ i3GEOF.legenda = {
 			
 			new YAHOO.widget.Button(
 				"i3GEOlegendabotao3",
-				{onclick:{fn: i3GEOF.legenda.adicionaConta}}
+				{onclick:{fn: i3GEOF.legenda.adicionaConta},width:"100px"}
 			);
-
+			$i("i3GEOlegendabotao3-button").style.width = "200px";
 			new YAHOO.widget.Button(
 				"i3GEOlegendabotao15",
 				{onclick:{fn: i3GEOF.legenda.adicionaOpacidade}}
 			);
-
-			new YAHOO.widget.Button(
-				"i3GEOlegendabotao4",
-				{onclick:{fn: i3GEOF.legenda.paleta}}
-			);
-			if(navm)
-			{$i("i3GEOlegendabotao4-button").style.width = "0px";}
-			new YAHOO.widget.Button(
-				"i3GEOlegendabotao5",
-				{onclick:{fn: i3GEOF.legenda.simbU}}
-			);
-			new YAHOO.widget.Button(
-				"i3GEOlegendabotao6",
-				{onclick:{fn: i3GEOF.legenda.valorU}}
-			);
-			new YAHOO.widget.Button(
-				"i3GEOlegendabotao7",
-				{onclick:{fn: i3GEOF.legenda.representacao}}
-			);
-			new YAHOO.widget.Button(
-				"i3GEOlegendabotao8",
-				{onclick:{fn: i3GEOF.legenda.valorC}}
-			);
-			new YAHOO.widget.Button(
-				"i3GEOlegendabotao9",
-				{onclick:{fn: i3GEOF.legenda.valorQ}}
-			);
-			new YAHOO.widget.Button(
-				"i3GEOlegendabotao10",
-				{onclick:{fn: i3GEOF.legenda.aplicaEstilo}}
-			);
-			new YAHOO.widget.Button(
-				"i3GEOlegendabotao17",
-				{onclick:{fn: i3GEOF.legenda.alteraGeometriaTema}}
-			);
-			new YAHOO.widget.Button(
-				"i3GEOlegendabotaoSLDe",
-				{onclick:{fn: function(){window.open(i3GEO.configura.locaplic+"/classesphp/mapa_controle.php?funcao=tema2sld&tema="+i3GEOF.legenda.tema+"&g_sid="+i3GEO.configura.sid);}}}
-			);
-			new YAHOO.widget.Button(
-				"i3GEOlegendabotaoSLDi",
-				{onclick:{fn: function(){i3GEO.tema.dialogo.aplicarsld(i3GEOF.legenda.tema);}}}
-			);
+			$i("i3GEOlegendabotao15-button").style.width = "200px";
 			new YAHOO.widget.Button(
 				"i3GEOlegendabotaoRamp",
 				{onclick:{fn: function(){
@@ -204,8 +162,56 @@ i3GEOF.legenda = {
 					i3GEO.util.abreColourRamp("","listaColourRamp",ncores);
 				}}}
 			);
-			if(navm)
-			{$i("i3GEOlegendabotaoRamp-button").style.width = "0px";}
+			$i("i3GEOlegendabotaoRamp-button").style.width = "200px";
+			new YAHOO.widget.Button(
+				"i3GEOlegendabotao4",
+				{onclick:{fn: i3GEOF.legenda.paleta}}
+			);
+			
+
+			new YAHOO.widget.Button(
+				"i3GEOlegendabotao5",
+				{onclick:{fn: i3GEOF.legenda.simbU}}
+			);
+			$i("i3GEOlegendabotao5-button").style.width = "200px";
+			new YAHOO.widget.Button(
+				"i3GEOlegendabotao6",
+				{onclick:{fn: i3GEOF.legenda.valorU}}
+			);
+			$i("i3GEOlegendabotao6-button").style.width = "200px";			
+			new YAHOO.widget.Button(
+				"i3GEOlegendabotao7",
+				{onclick:{fn: i3GEOF.legenda.representacao}}
+			);
+			$i("i3GEOlegendabotao7-button").style.width = "200px";
+			new YAHOO.widget.Button(
+				"i3GEOlegendabotao8",
+				{onclick:{fn: i3GEOF.legenda.valorC}}
+			);
+			$i("i3GEOlegendabotao8-button").style.width = "200px";
+			new YAHOO.widget.Button(
+				"i3GEOlegendabotao9",
+				{onclick:{fn: i3GEOF.legenda.valorQ}}
+			);
+			$i("i3GEOlegendabotao9-button").style.width = "200px";
+			
+			new YAHOO.widget.Button(
+				"i3GEOlegendabotao10",
+				{onclick:{fn: i3GEOF.legenda.aplicaEstilo}}
+			);
+			new YAHOO.widget.Button(
+				"i3GEOlegendabotao17",
+				{onclick:{fn: i3GEOF.legenda.alteraGeometriaTema}}
+			);
+			$i("i3GEOlegendabotao17-button").style.width = "200px";
+			new YAHOO.widget.Button(
+				"i3GEOlegendabotaoSLDe",
+				{onclick:{fn: function(){window.open(i3GEO.configura.locaplic+"/classesphp/mapa_controle.php?funcao=tema2sld&tema="+i3GEOF.legenda.tema+"&g_sid="+i3GEO.configura.sid);}}}
+			);
+			new YAHOO.widget.Button(
+				"i3GEOlegendabotaoSLDi",
+				{onclick:{fn: function(){i3GEO.tema.dialogo.aplicarsld(i3GEOF.legenda.tema);}}}
+			);
 			i3GEOF.legenda.ativaFoco();
 			i3GEOF.legenda.mostralegenda();
 			i3GEO.util.comboItens(
@@ -249,10 +255,10 @@ i3GEOF.legenda = {
 		'	<p class=paragrafo ><input id=i3GEOlegendabotao3 type="button" value="Inclui número de ocorrências" title="incluir o número de ocorrências no nome de cada classe"></p>' +
 		'	<p class=paragrafo ><input id=i3GEOlegendabotao15 type="button" value="Aplica opacidade variável" title="aplicar opacidade nas classes existente, variando de 10 até 100"></p>' +
 		'	<p class=paragrafo ><input id=i3GEOlegendabotaoRamp type="button" size=15 value="Escolher paleta de cores" title="escolher e aplicar as variações de cores, entre dois extremos, nas classes existentes"></p>' +
-
+		'	<p class=paragrafo >Gerar cores</p>' +
 		'	<table summary="" class=lista5 >' + 
 		'		<tr>' +
-		'			<td>Gerar cores de:</td>' +
+		'			<td>de:</td>' +
 		'			<td>' +
 		$inputText("","","i3GEOlegendaacori","",12,"0,0,0") +
 		'			</td>' +
