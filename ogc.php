@@ -116,12 +116,13 @@ if(isset($lista) && $lista == "temas")
 //cria o web service
 //
 include("classesphp/funcoes_gerais.php");
-error_reporting(E_ALL);
+error_reporting(0);
 $versao = versao();
 $versao = $versao["principal"];
 $req = ms_newowsrequestobj();
 $tipo = "";
 $_GET = array_merge($_GET,$_POST);
+
 if(isset($_GET["sld"]) || isset($_GET["filter"]))
 {$cache = false;}
 foreach ($_GET as $k=>$v)

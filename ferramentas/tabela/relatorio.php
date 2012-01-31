@@ -145,7 +145,10 @@ if ($itemagruparel == "")
 			$conta = 0;
 			foreach($linhas as $v)
 			{
-				echo "<td>$v</td>";
+				if(is_numeric(trim($v)))
+				{echo "<td style='text-align:right'>".number_format($v,2,",",".")."</td>";}
+				else
+				{echo "<td style='text-align:left'>$v</td>";}
 				if ($statrel == "true")
 				{
 					$v = trim($v);
@@ -167,12 +170,12 @@ if ($itemagruparel == "")
 		echo "<tr style=background-color:orange >";
 		echo "<td>soma</td>";
 		foreach($soma as $s)
-		echo "<td>$s</td>";
+		echo "<td style='text-align:right'>".number_format($s,2,",",".")."</td>";
 		echo "</tr>";
 		echo "<tr style=background-color:orange >";
 		echo "<td>m&eacute;dia</td>";
 		foreach($soma as $s)
-		echo "<td>".($s / $ocorrencias)."</td>";
+		echo "<td style='text-align:right'>".number_format(($s / $ocorrencias),2,",",".")."</td>";
 		echo "</tr>";
 	}
 	echo "</table>";
@@ -213,7 +216,10 @@ else
 				$conta = 0;
 				foreach($linhas as $v)
 				{
-					echo "<td>$v</td>";
+					if(is_numeric(trim($v)))
+					{echo "<td style='text-align:right'>".number_format($v,2,",",".")."</td>";}
+					else
+					{echo "<td style='text-align:left'>$v</td>";}
 					if ($statrel == "true")
 					{
 						$v = trim($v);
@@ -235,12 +241,12 @@ else
 			echo "<tr style=background-color:orange >";
 			echo "<td>soma</td>";
 			foreach($soma as $s)
-			echo "<td>$s</td>";
+			echo "<td style='text-align:right'>".number_format($s,2,",",".")."</td>";
 			echo "</tr>";
 			echo "<tr style=background-color:orange >";
 			echo "<td>m&eacute;dia</td>";
 			foreach($soma as $s)
-			echo "<td>".($s / $ocorrencias)."</td>";
+			echo "<td style='text-align:right'>".number_format(($s / $ocorrencias),2,",",".")."</td>";
 			echo "</tr>";
 		}
 		echo "</table>";
@@ -249,8 +255,9 @@ else
 }
 function calculaarea($geo)
 {
+	global $postgis_con;
 	$v = versao();
-	if (($v["principal"] != 5) && ($postgis_con == ""))
+	if (($v["principal"] < 5) && ($postgis_con == ""))
 	{return ("erro. É necessária uma versão maior que 5.0 do Mapserver.");}
 	$g = $geo->towkt();
 	$shape = ms_shapeObjFromWkt($g);

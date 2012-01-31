@@ -147,7 +147,7 @@ if($temas != "")
 				$visivel = "false";
 				if(in_array($tema,$visiveis))
 				{$visivel = "true";}
-				$objOpenLayers[] = 'new OpenLayers.Layer.WMS( "'.($layern->getmetadata("tema")).'", "../ogc.php?tema='.$tema.'&",{layers:"'.implode(",",$layers).'",transparent: "true", format: "image/png"},{visibility:'.$visivel.',isBaseLayer:'.$ebase.'})';
+				$objOpenLayers[] = 'new OpenLayers.Layer.WMS( "'.($layern->getmetadata("tema")).'", "../ogc.php?tema='.$tema.'&",{layers:"'.implode(",",$layers).'",transparent: "true", format: "image/png"},{singleTile:true,visibility:'.$visivel.',isBaseLayer:'.$ebase.'})';
 			}
 			else
 			{echo $tema." não foi encontrado.<br>";}

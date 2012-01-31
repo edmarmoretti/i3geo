@@ -16,11 +16,11 @@ FONTSET   "../symbols/fontes.txt"
       METADATA
       END
       STYLE
-          COLOR 0 0 0
+        COLOR 0 0 0
         MAXSIZE 500
         MINSIZE 1
         SIZE 8
-        SYMBOL "seta"
+        SYMBOL "ponto"
       END
     END
   END	

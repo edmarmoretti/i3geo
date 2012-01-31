@@ -199,15 +199,19 @@ $registro - Índice do registro que será consultado.
 	function extensaoRegistro($registro)
 	{
 		if(!$this->layer){return "erro";}
+		//error_reporting(E_ALL);
 		$this->layer->set("template","none.htm");
 		$this->layer->setfilter("");
 		$ext = "";
 		//procura o registro e pega a extensão geográfica
-		if($this->v == 6)
-		{$shape = $this->layer->getShape(new resultObj($registro));}		
+		if($this->v == 6){
+			$this->layer->open();
+			$shape = $this->layer->getShape(new resultObj($registro));
+		}		
 		else{
 			if (@$this->layer->open() == MS_SUCCESS)
 			{
+
 				if (@$this->layer->queryByrect($this->mapa->extent) == MS_SUCCESS)
 				{
 					$this->layer->open();

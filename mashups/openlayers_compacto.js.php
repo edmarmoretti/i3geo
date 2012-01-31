@@ -3056,7 +3056,8 @@ e_wsm: new OpenLayers.Layer.ArcGIS93Rest(
 ol_mma: new OpenLayers.Layer.WMS(
 "Base cartográfica",
 "http://mapas.mma.gov.br/cgi-bin/mapserv?map=/opt/www/html/webservices/baseraster.map&",
-{layers:'baseraster',SRS:'EPSG:4291',FORMAT:'image/png'}
+{layers:'baseraster',SRS:'EPSG:4291',FORMAT:'image/png'},
+{singleTile:true}
 ),
 ol_wms: new OpenLayers.Layer.WMS.Untiled(
 "OpenLayers WMS",

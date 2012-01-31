@@ -120,6 +120,7 @@ if (isset($map) && $map != "")
 function verifica($map,$solegenda)
 {
 	global $tipo,$locaplic,$postgis_mapa,$versao,$base;
+	$mapUrl = $map;
 	if ($tipo == "mini" && file_exists('temas/miniaturas/'.$map.".mini.png"))
 	{
 		Header("Content-type: image/png");
@@ -190,8 +191,8 @@ function verifica($map,$solegenda)
 			eval($pegarext."(\$mapa);");
 		}
 		else{
-			if(file_exists($tema))
-			{$nmapa = ms_newMapObj($tema);}
+			if(file_exists($mapUrl))
+			{$nmapa = ms_newMapObj($mapUrl);}
 			else{
 				if(@ms_newMapObj($locaplic."/".$tema))
 				{

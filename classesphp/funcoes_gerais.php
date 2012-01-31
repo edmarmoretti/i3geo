@@ -1208,7 +1208,7 @@ function pegaValoresM($mapa,$layer,$itens,$exclui="nulo",$selecionados="nao",$ch
 	$nclasses = $layer->numclasses;
 	if (@$layer->queryByrect($mapa->extent) == MS_SUCCESS)
 	{
-		$layer->draw();
+		//$layer->draw();
 		$sopen = $layer->open();
 		if($sopen == MS_FAILURE){return "erro";}
 		$res_count = $layer->getNumresults();

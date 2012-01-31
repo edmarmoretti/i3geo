@@ -519,7 +519,7 @@ String no formato HTML com as imagens dos símbolos
 	{
 		$versao = versao();
 		$versao = $versao["principal"];
-		//error_reporting(E_ALL);
+		error_reporting(E_ALL);
 		if ($tipo == 3){$tipo = 2;} //tipo raster
 		if($imgdir == "")
 		{$dir = $dir_tmp;}
@@ -539,7 +539,6 @@ String no formato HTML com as imagens dos símbolos
 			else
 			{$mapatemp = ms_newMapObj($this->localaplicacao."/aplicmap/".$t);}
 			$ins = "";
-			
 			$l = $mapatemp->getlayer(0);
 			$novoss = dirname($this->mapa->symbolsetfilename)."\\".basename($mapatemp->symbolsetfilename);
 			$this->mapa->setsymbolset($novoss);

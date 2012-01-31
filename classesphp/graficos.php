@@ -375,6 +375,7 @@ function iniciaDadosGrafico($map_file,$tema,$exclui,$itemclasses,$itemvalores,$t
 {
 	global $interface;
 	//pega os valores
+	//error_reporting(E_ALL);
 	$map = ms_newMapObj($map_file);
 	if($interface == "googlemaps")
 	{

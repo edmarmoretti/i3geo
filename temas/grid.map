@@ -1,0 +1,63 @@
+MAP
+  FONTSET "c:\ms4w\apache\htdocs\i3geo\symbols\fontes.txt"
+  SYMBOLSET "c:\ms4w\apache\htdocs\i3geo\symbols\simbolos.sym"
+  LAYER
+    METADATA
+      "ltempoitemimagem"	""
+      "cache"	"SIM"
+      "CLASSE"	"SIM"
+      "ltempoitemdescricao"	""
+      "palletestep"	""
+      "ltempoiteminicio"	""
+      "permitekmz"	"sim"
+      "ltempoitemtip"	""
+      "description_template"	""
+      "ltempoitemtitulo"	""
+      "ltempoitemlink"	""
+      "palletefile"	""
+      "NOMEORIGINAL"	""
+      "permitedownload"	"sim"
+      "ltempoformatodata"	""
+      "ltempoitemicone"	""
+      "download"	"SIM"
+      "permitekml"	"sim"
+      "permiteogc"	""
+      "convcaracter"	""
+      "TEMA"	"grade de coordenadas"
+      "identifica"	"NAO"
+      "editorsql"	""
+      "ltempoitemfim"	""
+    END
+    NAME "grid"
+    STATUS OFF
+	TYPE LINE
+PROJECTION
+    "init=epsg:4291"
+END	
+	CLASS
+	   NAME "Graticule"
+	   COLOR 0 0 0
+	   LABEL
+		 COLOR  255 0 0
+		 SIZE 8
+		 POSITION AUTO
+		 PARTIALS FALSE
+		 BUFFER 5
+		 OUTLINECOLOR 255 255 255
+	   END
+	END
+	GRID
+	  LABELFORMAT "DDMM"
+	#  LABELFORMAT '%g°'  # dec degrees with symbol
+	  MAXARCS 10
+	  MAXINTERVAL 5
+	  MAXSUBDIVIDE 2
+	#  LABELFORMAT '%7.0f m'  # nice if a projected SRS used
+	#  MININTERVAL 20000
+	#  MAXSUBDIVIDE 2
+	END	
+	
+	
+  END
+
+END
