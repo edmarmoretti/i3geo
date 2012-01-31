@@ -208,10 +208,12 @@ i3GEOF.legenda = {
 				"i3GEOlegendabotaoSLDe",
 				{onclick:{fn: function(){window.open(i3GEO.configura.locaplic+"/classesphp/mapa_controle.php?funcao=tema2sld&tema="+i3GEOF.legenda.tema+"&g_sid="+i3GEO.configura.sid);}}}
 			);
+			$i("i3GEOlegendabotaoSLDe-button").style.width = "200px";
 			new YAHOO.widget.Button(
 				"i3GEOlegendabotaoSLDi",
 				{onclick:{fn: function(){i3GEO.tema.dialogo.aplicarsld(i3GEOF.legenda.tema);}}}
 			);
+			$i("i3GEOlegendabotaoSLDi-button").style.width = "200px";
 			i3GEOF.legenda.ativaFoco();
 			i3GEOF.legenda.mostralegenda();
 			i3GEO.util.comboItens(
@@ -1284,7 +1286,8 @@ i3GEOF.legenda = {
 								i3GEO.util.scriptTag(js,"i3GEOF.legenda.iniciaGraficoPizza()","i3GEOF.graficointerativo_script");
 							}
 						}}
-					);				
+					);
+					$i("i3GEOlegendaGraficoPizza-button").style.width = "200px"
 				},
 			p = i3GEO.configura.locaplic+"/classesphp/mapa_controle.php?g_sid="+i3GEO.configura.sid+"&funcao=contagemclasse&tema="+i3GEOF.legenda.tema,
 			cp = new cpaint();

@@ -344,7 +344,7 @@ i3GEO.gadgets = {
 			i3geo_buscaRapida = function(){
 				alert("i3geo_buscaRapida foi depreciada");
 			};
-			i = "<form id=i3GEObotaoFormBuscaRapida"+id+" >"+$inputText(id,"225","valorBuscaRapida"+id,"Município, cidade, UC, endereço...","30",$trad("o2"))+"</form>";
+			i = "<form id=i3GEObotaoFormBuscaRapida"+id+" >"+$inputText(id,"256","valorBuscaRapida"+id,"Município, cidade, UC, endereço...","20",$trad("o2"))+"</form>";
 			ins = "<table><tr><td><a class=ajuda_usuario target=_blank href='"+i3GEO.configura.locaplic+"/ajuda_usuario.php?idcategoria=8&idajuda=71' >&nbsp;&nbsp;&nbsp;</a></td><td>"+i+"</td>";
 			ins += "<td><img src='"+i3GEO.util.$im("branco.gif")+"' title='"+$trad("p13")+"' class='ticPropriedades2' id=i3GEObotaoPropriedadesBuscaRapida"+id+" /></td>";
 			ins += "<td><img src='"+i3GEO.util.$im("branco.gif")+"' class='tic' id=i3GEObotaoBuscaRapida"+id+" /></td></tr></table>";
