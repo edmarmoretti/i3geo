@@ -146,20 +146,21 @@ i3GEOF.selecao = {
 		'	<button title="Grafico" onclick="i3GEOF.selecao.grafico()"><img src="'+i3GEO.configura.locaplic+'/imagens/gisicons/layer-vector-chart-add.png" /></button>' +
 		'	<button title="Perfil"  onclick="i3GEOF.selecao.graficoPerfil()"><img src="'+i3GEO.configura.locaplic+'/imagens/gisicons/grafico-perfil.png" /></button>' +
 		'	<div style=margin-left:8px;text-align:left;  >' +
-		'	<p class=paragrafo >' +
+		'		<p class=paragrafo >' +
 		'		<select title="Tipo de operacao" style=position:relative;top:6px; id=i3GEOselecaotipoOperacao >' +
 		'		<option value="adiciona" >Adicionar à seleção</option>' +
 		'		<option value="novo" >Nova seleção</option>' +		
 		'		<option value="retira" >Retirar da seleção</option>' +
 		'		</select>' +
 		'		<span id=i3GEOselecaoNsel style="position:relative;top:5px;" >0</span></p>' +
-		'	<p class=paragrafo >Temas:<div id=i3GEOselecaoComboTemas style=text-align:left; ></div>' +
-		'	<p class=paragrafo >Dist&acirc;ncia utilizada ao selecionar por ponto (em metros):' +
+		'		<p class=paragrafo >Temas:<div id=i3GEOselecaoComboTemas style=text-align:left; ></div>' +
+		'		<p class=paragrafo >Dist&acirc;ncia utilizada ao selecionar por ponto (em metros):' +
 		$inputText("","","i3GEOselecaotoleranciapt","",3,"0") +
-		'	</p><div id=i3GEOselecaomen1 style=left:0px;width:100%; >' +
+		'		</p><div id=i3GEOselecaomen1 style=left:0px;width:100%; >' +
 		'		<p class=paragrafo >Escolha o(s) tema(s) alvo(s) e o tipo de opera&ccedil;&atilde;o. ' +
 		'		Depois, clique no mapa sobre o elemento desejado.</p>' +
-		'	</div> '+
+		'		</div> '+
+		'	</div>' +
 		'</div>' +
 		'<div class=guiaobj id="i3GEOselecaoguia2obj" style="left:1px;display:none;">' +
 		'	<p class=paragrafo ><input id=i3GEOselecaobotao1 size=18  type="button" value="Selecionar" /></p>'+
