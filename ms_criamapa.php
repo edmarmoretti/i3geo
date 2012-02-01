@@ -142,6 +142,10 @@ require_once ($caminho."classesphp/carrega_ext.php");
 //
 //quando $funcao existe, é pq o ms_criamapa.php está sendo utilizado como um include em classesphp/mapa_controle.php
 //
+if (!isset($_GET["debug"]))
+{error_reporting(0);$debug="nao";}
+else
+{error_reporting(E_ALL);$debug="sim";}
 if(!isset($funcao))
 {ob_end_clean();}
 if (!isset($caminho))
@@ -177,12 +181,6 @@ if(!isset($dir_tmp))
 {include_once ($caminho."ms_configura.php");}
 if(isset($tempBaseX) && $tempBaseX != "")
 {$base = $tempBaseX;}
-
-if (!isset($debug))
-{error_reporting(0);$debug="nao";}
-else
-{error_reporting(E_ALL);$debug="sim";}
-
 /*
 Define o cookie para o idioma da interface
 */
@@ -677,8 +675,8 @@ function incluiTemasIniciais()
 	//
 	if($existeraster)
 	{
-		$of = $mapn->outputformat;
-		$of->set("imagemode",MS_IMAGEMODE_RGB);
+		//$of = $mapn->outputformat;
+		//$of->set("imagemode",MS_IMAGEMODE_RGB);
 	}
 	erroCriacao();
 }

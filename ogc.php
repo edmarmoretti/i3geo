@@ -218,7 +218,7 @@ if ($tipo == "" || $tipo == "metadados")
 				$l = $nmap->getlayerbyname($t);
 				if($cache == true && strtolower($l->getmetadata("cache")) == "sim" && $tipo == "" && count($tema) == 1){
 					carregaCacheImagem($_GET["BBOX"],$tx,$_GET["WIDTH"],$_GET["HEIGHT"],$cachedir);
-				}				
+				}
 				$l->setmetadata("ows_title",pegaNome($l));
 				$l->setmetadata("ows_srs",$listaepsg);
 				//essa linha é necessária pq as vezes no mapfile não tem nenhum layer com o nome igual ao nome do mapfile
@@ -236,10 +236,10 @@ if ($tipo == "" || $tipo == "metadados")
 					$l->setmetadata("wms_attribution_logourl_width","50");
 					$l->setmetadata("wms_attribution_logourl_href",$mini);
 				}
-				if($l->type == MS_LAYER_RASTER)
+				if($l->type == MS_LAYER_RASTER && $l->numclasses > 0)
 				{
 					$c = $l->getclass(0);
-					if ($c->name == "")
+					if($c->name == "")
 					{$c->name = " ";}
 				}
 				//inclui extensao geografica

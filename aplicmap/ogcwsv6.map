@@ -26,7 +26,7 @@ MAP
 		TRANSPARENT TRUE
 	END
   PROJECTION
-    "init=epsg:4291"
+    "+proj=longlat +ellps=GRS67 +no_defs"
   END
   LEGEND
     IMAGECOLOR 255 255 255
