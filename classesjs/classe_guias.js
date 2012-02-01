@@ -861,8 +861,10 @@ i3GEO.guias = {
 				{ins += "<button title='"+temp.titulos[i]+"' onmouseout='javascript:this.className = \"iconeGuiaMovel iconeGuiaMovelMouseOut\"' onmouseover='javascript:this.className = \"iconeGuiaMovel iconeGuiaMovelMouseOver\"' onclick='i3GEO.guias.guiaMovel.ativa(\""+temp.chaves[i]+"\")' class=iconeGuiaMovel ><img id='"+temp.ids[i]+"' src='"+i3GEO.configura.locaplic+"/"+temp.icones[i]+"' style='cursor:pointer;;' /></button>";}
 			}
 			$i("i3GEOguiaMovelIcones").innerHTML = ins;
+			i3GEO.guias.guiaMovel.desativaIcones();
 			if($i(i3GEO.guias.CONFIGURA[i3GEO.guias.ATUAL].id)){
 				$i(i3GEO.guias.CONFIGURA[i3GEO.guias.ATUAL].id).parentNode.style.backgroundColor = "#cedff2";
+				$i(i3GEO.guias.CONFIGURA[i3GEO.guias.ATUAL].id).parentNode.style.boxShadow = "none";
 			}			
 		},
 		/*
@@ -876,6 +878,7 @@ i3GEO.guias = {
 				i;
 			for(i=0;i<n;i++){
 				ims[i].style.backgroundColor = "white";
+				ims[i].style.boxShadow = "";
 			}		
 		},
 		/*
@@ -896,6 +899,7 @@ i3GEO.guias = {
 			i3GEO.guias.guiaMovel.desativaIcones();
 			if($i(i3GEO.guias.CONFIGURA[chave].id)){
 				$i(i3GEO.guias.CONFIGURA[chave].id).parentNode.style.backgroundColor = "#cedff2";
+				$i(i3GEO.guias.CONFIGURA[chave].id).parentNode.style.boxShadow = "none";
 			}
 		},
 		/*

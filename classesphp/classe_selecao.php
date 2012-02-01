@@ -578,6 +578,7 @@ $tipo - Tipo de operação adiciona|retira|inverte|limpa|novo
 		{$shp_atual = $this->unserializeQ($this->qyfileTema);}
 		$shpi = array();
 		$c = explode(" ",$xy);
+
 		$pt = ms_newPointObj();
 		$pt->setXY($c[0], $c[1]);
 		if ($tolerancia == 0)
@@ -594,18 +595,20 @@ $tipo - Tipo de operação adiciona|retira|inverte|limpa|novo
 		}
 		else
 		{
-			$rect = $pt->bounds;
+			error_reporting(E_ALL);
 			$projInObj = ms_newprojectionobj("proj=latlong");
-			$projOutObj = ms_newprojectionobj("proj=poly,ellps=GRS67,lat_0=0,lon_0=".$rect->minx.",x_0=5000000,y_0=10000000");
+			$projOutObj = ms_newprojectionobj("proj=poly,ellps=GRS67,lat_0=0,lon_0=".$pt->x.",x_0=5000000,y_0=10000000");
+
 			$poPoint = ms_newpointobj();
-			$poPoint->setXY($rect->minx, $rect->miny);
-			$dd1 = ms_newpointobj();
-			$dd1->setXY($rect->minx, $rect->miny);
+			$poPoint->setXY($pt->x, $pt->y);
+			//$dd1 = ms_newpointobj();
+			//$dd1->setXY($rect->minx, $rect->miny);
+
 			$poPoint->project($projInObj, $projOutObj);
 			$dd2 = ms_newpointobj();
 			$dd2->setXY(($poPoint->x + $tolerancia), $poPoint->y);
 			$dd2->project($projOutObj,$projInObj);
-			$d = $dd1->distanceToPoint($dd2);
+			$d = $pt->distanceToPoint($dd2);
 			if ($d < 0){$d = $d * -1;}
 			//calcula a distancia 29100
 			//gera o buffer

@@ -1383,10 +1383,10 @@ it:"Aprire gli strumenti per selezionare gli elementi di un tema. Gli elementi s
 }],
 "d24t":[
 {
-pt:"selecionar",
-en:"selecionar",
-es:"selecionar",
-it:"selecionar"
+pt:"Selecionar",
+en:"Selecionar",
+es:"Selecionar",
+it:"Selecionar"
 }],
 "d25":[
 {
