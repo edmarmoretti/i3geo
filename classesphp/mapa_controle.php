@@ -1895,6 +1895,7 @@ Pega a lista de menus para incluir na guia adiciona.
 */
 	case "PEGALISTADEMENUS":
 		include_once("classe_menutemas.php");
+		if(!isset($editores)){$editores = "";}
 		$m = new Menutemas($map_file,$perfil,$locaplic,$urli3geo,$editores,$idioma);
 		$retorno = $m->pegaListaDeMenus();
 	break;

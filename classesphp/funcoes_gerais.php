@@ -2021,6 +2021,7 @@ function downloadTema2($map_file,$tema,$locaplic,$dir_tmp,$postgis_mapa)
 	include("../ms_configura.php");
 	$versao = versao();
 	$versao = $versao["principal"];
+	$dataArquivos = array();
 	//
 	//cria o arquivo mapfile, caso ele não exista, que servirá de base para obtenção dos dados
 	//
@@ -2072,6 +2073,7 @@ function downloadTema2($map_file,$tema,$locaplic,$dir_tmp,$postgis_mapa)
 	//caso o usuario tenha usado caixa alta no nome do layer
 	if ($teste == "")
 	{$teste = @$map->getlayerbyname(strtoupper($tema));}
+	//se o layer não existir no mapfile, pega da pasta i3geo/temas e adiciona em $map
 	if($teste == "")
 	{
 		$maptemp = ms_newMapObj($temasdir."/".$tema.".map");
@@ -2107,6 +2109,7 @@ function downloadTema2($map_file,$tema,$locaplic,$dir_tmp,$postgis_mapa)
 	$map_file = str_replace(".map","tmp.map",$map_file);
 	$map->save($map_file);
 	substituiCon($map_file,$postgis_mapa);
+	//$map_file agora contem os LAYERS necessários
 	$map = ms_newMapObj($map_file);
 	//
 	//verifica se existe mais de um tema (grupo) montando o array com os temas
@@ -2132,6 +2135,7 @@ function downloadTema2($map_file,$tema,$locaplic,$dir_tmp,$postgis_mapa)
 	}
 	if ($multilayer == 0)
 	{$temas[] = $tema;}
+	//$temas agora é um array com os NAMEs dos LAYERS que serão baixados
 	$radtmp = dirname($dir_tmp);
 	foreach ($temas as $tema)
 	{
@@ -2141,6 +2145,7 @@ function downloadTema2($map_file,$tema,$locaplic,$dir_tmp,$postgis_mapa)
 		if(file_exists($nomeshp.".dbf")){
 			//
 			//verifica se o arquivo está vazio ou não
+			//se estiver, apaga o arquivo
 			//
 			$verificaDBF = verificaDBF($nomeshp.".dbf");
 			if($verificaDBF == false){
@@ -2193,25 +2198,19 @@ function downloadTema2($map_file,$tema,$locaplic,$dir_tmp,$postgis_mapa)
 				{return "erro";}
 			}
 			else //se for vetorial, extrai o arquivo
-			{
-				//define o nome correto do arquivo final
-				$sp = $map->shapepath;
-				$arq = "";			
-				if (file_exists($dados))
-				{$arq = $dados;}
-				if (file_exists($dados.".shp"))
-				{$arq = $dados.".shp";}
-				if (file_exists($sp.$dados.".shp"))
-				{$arq = $sp.$dados.".shp";}
-				if (file_exists($sp.$dados))
-				{$arq = $sp.$dados;}
-
+			{			
 				$nomeshp = criaSHP($tema,$map_file,$locaplic,$dir_tmp,$nomeRand);
 				if($nomeshp == false)
 				{return array("arquivos"=>"<span style=color:red >Ocorreu um erro, tente novamente","nreg"=>0);}
+				
 				$resultado[] = str_replace($radtmp."/","",$nomeshp).".shp";
+				$dataArquivos[] = date ("F d Y H:i:s.",filemtime($nomeshp.".shp"));
+				
 				$resultado[] = str_replace($radtmp."/","",$nomeshp).".shx";
+				$dataArquivos[] = date ("F d Y H:i:s.",filemtime($nomeshp.".shx"));
+				
 				$resultado[] = str_replace($radtmp."/","",$nomeshp).".dbf"; 
+				$dataArquivos[] = date ("F d Y H:i:s.",filemtime($nomeshp.".dbf")); 
 			}
 		}
 	}
@@ -2247,7 +2246,7 @@ function downloadTema2($map_file,$tema,$locaplic,$dir_tmp,$postgis_mapa)
 		$maptemp->save($nomemapfile);
 		$nomemapfileurl = str_replace($radtmp."/","",$nomemapfile);
 	}
-	return array("tema"=>$tema,"mapfile"=>$nomemapfile,"mapfileurl"=>$nomemapfileurl,"arquivos"=>implode(",",$resultado),"nreg"=>$nreg);
+	return array("tema"=>$tema,"mapfile"=>$nomemapfile,"mapfileurl"=>$nomemapfileurl,"arquivos"=>implode(",",$resultado),"nreg"=>$nreg,"datas"=>$dataArquivos);
 }
 
 /*
@@ -2273,7 +2272,8 @@ function verificaDBF($arq){
 		{include_once "../pacotes/phpxbase/api_conversion.php";}	
 		$db = xbase_open($arq, 0);
 	}
-	if ($db) {
+	//nas versões novas do PHP open retorna vazio, não dá pra verificar
+	//if ($db) {
 		if(function_exists("dbase_numrecords")){
 			$record_numbers = dbase_numrecords($db);
 			dbase_close($db);
@@ -2286,8 +2286,8 @@ function verificaDBF($arq){
 		{return true;}
 		else
 		{return false;}
-	}
-	else {return false;}	
+	//}
+	//else {return false;}	
 }
 /*
 Section: Outros

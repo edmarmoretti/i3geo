@@ -94,7 +94,7 @@ function geraXmlSistemas($perfil,$locaplic,$editores)
 			$xml .= " <PERFIL>".$row["perfil_sistema"]."</PERFIL>\n";
 			$xml .= " <PUBLICADO>".$row["publicado_sistema"]."</PUBLICADO>\n";
 			$xml .= " <NOMESIS>".xmlTexto_prepara($row["nome_sistema"])."</NOMESIS>\n";
-			geraXmlSistemas_pegafuncoes($perfil,$xml,$row["id_sistema"],$dbh);
+			$xml = geraXmlSistemas_pegafuncoes($perfil,$xml,$row["id_sistema"],$dbh);
 			$xml .= "</SISTEMA>\n";
 		}
 	}
@@ -462,7 +462,7 @@ function geraXmlRSS($locaplic,$sql,$descricao)
 }
 function geraXmlAtlas($locaplic,$editores)
 {
-	error_reporting(E_ALL);
+	error_reporting(0);
 	$dbh = "";
 	include($locaplic."/admin/php/conexao.php");
 	if($convUTF)
@@ -497,7 +497,7 @@ function geraXmlAtlas($locaplic,$editores)
 			$xml .= " <TIPOGUIAS>".$row["tipoguias_atlas"]."</TIPOGUIAS>\n";
 			$xml .= " <BASEMAPFILE>".$row["basemapfile_atlas"]."</BASEMAPFILE>\n";
 			$xml .= " <PRANCHAS>\n";
-			geraXmlAtlas_pegapranchas(&$xml,$row["id_atlas"],$dbh);
+			$xml = geraXmlAtlas_pegapranchas($xml,$row["id_atlas"],$dbh);
 			$xml .= " </PRANCHAS>\n";
 			$xml .= " </ATLAS>\n";
 		}
@@ -624,7 +624,7 @@ function geraXmlMenutemas($perfil,$id_menu,$tipo,$locaplic)
 	//
 	$q = "select nome_tema,codigo_tema,desc_tema,link_tema,tipoa_tema,tags_tema,kml_tema,ogc_tema,download_tema,r.perfil as perfil from i3geoadmin_raiz as r,i3geoadmin_temas as temas where r.id_nivel = 0 and r.id_tema = temas.id_tema and r.id_menu = $id_menu ";
 	$qtemasraiz = $dbh->query($q);
-	geraXmlMenutemas_notema($qtemasraiz,&$xml,$perfil);
+	$xml = geraXmlMenutemas_notema($qtemasraiz,$xml,$perfil);
 	$q = "select nome_grupo,desc_grupo,n1.id_grupo,n1.id_n1,n1.n1_perfil as perfil from i3geoadmin_n1 as n1,i3geoadmin_grupos as grupos where n1.id_menu = $id_menu and n1.id_grupo = grupos.id_grupo ";
 	$qgrupos = $dbh->query($q);
 	foreach($qgrupos as $row)
@@ -741,10 +741,11 @@ function geraXmlAtlas_pegapranchas($xml,$id_atlas,$dbh)
 		$xml .= "   <HABERTURA>".$row["h_prancha"]."</HABERTURA>\n";
 		$xml .= "   <MAPEXT>".$row["mapext_prancha"]."</MAPEXT>\n";
 		$xml .= "   <TEMAS>\n";
-		geraXmlAtlas_pegatemas(&$xml,$row["id_prancha"],$dbh);
+		$xml = geraXmlAtlas_pegatemas($xml,$row["id_prancha"],$dbh);
 		$xml .= "   </TEMAS>\n";
 		$xml .= "  </PRANCHA>\n";
-	}	
+	}
+	return $xml;
 }
 function geraXmlAtlas_pegatemas($xml,$id_prancha,$dbh)
 {
@@ -758,8 +759,9 @@ function geraXmlAtlas_pegatemas($xml,$id_prancha,$dbh)
 		$xml .= "<LIGADO>".$row["ligado_tema"]."</LIGADO>\n";
 		$xml .= "</TEMA>\n";
 	}
+	return $xml;
 }
-function geraXmlSistemas_pegafuncoes($perfil,&$xml,$id_sistema,$dbh)
+function geraXmlSistemas_pegafuncoes($perfil,$xml,$id_sistema,$dbh)
 {
 	$q = "select * from i3geoadmin_sistemasf where id_sistema = '$id_sistema'";
 	$qtemas = $dbh->query($q);
@@ -783,7 +785,7 @@ function geraXmlSistemas_pegafuncoes($perfil,&$xml,$id_sistema,$dbh)
 			$xml .= "</FUNCAO>\n";
 		}
 	}
-	
+	return $xml;
 }
 function array_in_array($needle, $haystack)
 {
