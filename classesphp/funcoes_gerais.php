@@ -267,20 +267,33 @@ $label {objeto} - Objeto do tipo label.
 $cor {string} - RGB separado por espacos, se for um array, aplica diretamente ao objeto cor.
 
 $elemento {string} - Nome do elemento que receberá a cor.
+
+$sombrax { n pixels) - utilizado apena quando se define a cor da sombra de labels
+
+$sombray { n pixels) - utilizado apena quando se define a cor da sombra de labels
 */
-function corE($label,$cor,$elemento)
+function corE($label,$cor,$elemento,$sombrax=1,$sombray=1)
 {
+	$versao = versao();
+	$versao = $versao["principal"];
 	if (is_string($cor))
 	{
+		$cor = str_replace(","," ",$cor);
 		if (count(explode(" ",$cor)) == 3)
 		{
-			$corres = $label->$elemento;
-			$cori = explode(" ",$cor);
-			$corres->setRGB($cori[0],$cori[1],$cori[2]);
-		}
-		if (count(explode(",",$cor)) == 3)
-		{
-			$corres = $label->$elemento;
+			if($versao > 5 && in_array(strtolower($elemento),array("backgroundcolor","backgroundshadowcolor"))){
+				//na 601 não funciona
+				return;
+				$e = new styleObj($label);
+				$e->setGeomTransform("labelpoly");
+				$corres = $e->color;
+				if(strtolower($elemento) == "backgroundshadowcolor"){
+					$e->set("offsetx",$sombrax);
+					$e->set("offsety",$sombray);
+				}				
+			}
+			else
+			{$corres = $label->$elemento;}
 			$cori = explode(",",$cor);
 			$corres->setRGB($cori[0],$cori[1],$cori[2]);
 		}

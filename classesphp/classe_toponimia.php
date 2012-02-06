@@ -82,6 +82,8 @@ $tema - nome do tema que será processado
   		include_once($locaplic."/funcoes_gerais.php");
   		else
   		include_once("funcoes_gerais.php");
+		$this->v = versao();
+		$this->v = $this->v["principal"];		
   		$this->mapa = ms_newMapObj($map_file);
   		$this->arquivo = $map_file;
   		if($tema != "" && @$this->mapa->getlayerbyname($tema))
@@ -155,6 +157,7 @@ Retorno:
 */
 	function criaToponimia($item,$position,$partials,$offsetx,$offsety,$minfeaturesize,$mindistance,$force,$shadowcolor,$shadowsizex,$shadowsizey,$outlinecolor,$cor,$sombray,$sombrax,$sombra,$fundo,$angulo,$tamanho,$fonte,$tipo,$wrap)
 	{
+		error_reporting(E_ALL);
 		if(!$this->layer){return "erro";}
 		if (!isset($tipo)){$tipo = "";}
 		if ($item != "") //o layer nao tem tabela mas tem toponimia
@@ -210,19 +213,20 @@ Retorno:
 			if ($tamanho >= 14 ){$t = MS_GIANT;}
 			$label->set("size",$t);
 		}
-		$label->set("angle",$angulo);
-		if ($angulo == "AUTO")
-		{$label->set("autoangle",MS_TRUE);}
+		if($angulo > 0){
+			$label->set("angle",$angulo);
+		}
+		if($angulo == "AUTO")
+		{$label->updatefromstring("LABEL ANGLE AUTO END");}
 		if (strtoupper($angulo) == "CURVO" || strtoupper($angulo) == "FOLLOW")
 		{
-			//$label->set("angle","FOLLOW");
-			$label->set("autofollow",1);
+			$label->updatefromstring("LABEL ANGLE FOLLOW END");
 		}
+		corE($label,$cor,"color");	
 		corE($label,$fundo,"backgroundcolor");
-		corE($label,$sombra,"backgroundshadowcolor");
-		corE($label,$cor,"color");
-		$label->set("backgroundshadowsizex",$sombrax);
-		$label->set("backgroundshadowsizey",$sombray);
+		corE($label,$sombra,"backgroundshadowcolor",$sombrax,$sombray);
+		//$label->set("backgroundshadowsizex",$sombrax);
+		//$label->set("backgroundshadowsizey",$sombray);
 		corE($label,$outlinecolor,"outlinecolor");
 		corE($label,$shadowcolor,"shadowcolor");
 		$label->set("shadowsizex",$shadowsizex);

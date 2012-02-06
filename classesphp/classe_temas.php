@@ -731,10 +731,12 @@ $wrap - caractere que indica quebra de linha
 					}				
 					$label->set("angle",$angulo);
 					corE($label,$fundo,"backgroundcolor");
-					corE($label,$sombra,"backgroundshadowcolor");
+					corE($label,$sombra,"backgroundshadowcolor",$sombrax,$sombray);
+					
+					//$label->set("backgroundshadowsizex",$sombrax);
+					//$label->set("backgroundshadowsizey",$sombray);
+
 					corE($label,$cor,"color");
-					$label->set("backgroundshadowsizex",$sombrax);
-					$label->set("backgroundshadowsizey",$sombray);
 					corE($label,$outlinecolor,"outlinecolor");
 					corE($label,$shadowcolor,"shadowcolor");
 					$label->set("shadowsizex",$shadowsizex);
@@ -777,7 +779,7 @@ $wrap - caractere que indica quebra de linha
 		{$lin->addxy($apt[$i],$apt[$i + 1]);}
 		$shp->add($lin);
 		$pinlayer->addfeature($shp);
-		$shp->free();
+		//$shp->free();
 		return("ok");
 	}
 /*
