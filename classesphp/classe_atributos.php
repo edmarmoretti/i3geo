@@ -488,8 +488,16 @@ $onde - Tipo de abrangência espacial (brasil ou mapa)
 			$buscas = $buscas.$buscaUTF;
 			$sopen = $l->open();
 			if($sopen == MS_FAILURE){return "erro";}
-			
-			$l->whichShapes($this->mapa->extent);
+			$prjMapa = $this->mapa->getProjection();
+			$prjTema = $l->getProjection();
+			$ret = $this->mapa->extent;
+			if (($prjTema != "") && ($prjMapa != $prjTema))
+			{
+				$projInObj = ms_newprojectionobj($prjTema);
+				$projOutObj = ms_newprojectionobj($prjMapa);
+				$ret->project($projInObj, $projOutObj);
+			}		
+			$l->whichShapes($ret);
 			$fr = array();
 			while ($shape = $l->nextShape())
 			{
@@ -521,7 +529,10 @@ $onde - Tipo de abrangência espacial (brasil ou mapa)
 				}
 				if ($encontrado == "sim")
 				{
-					$novoreg["box"] = $this->extensaoShape($shape,$l);			
+					$ret = $this->extensaoShape($shape,$l);
+					if (($prjTema != "") && ($prjMapa != $prjTema))
+					{$ret->project($projInObj, $projOutObj);}
+					$novoreg["box"] = $ret;			
 					$novoreg["valores"] = $r;
 					$encontrado = "nao";
 					$fr[] = $novoreg;
