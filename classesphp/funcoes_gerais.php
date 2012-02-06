@@ -1403,7 +1403,7 @@ function pegaItens($layer,$mapa="")
 	else{
 		if($layer->type == MS_LAYER_RASTER && $mapa != ""){
 			$pt = ms_newPointObj();
-			$pt->setXY($mapa->extent->minx,$mapa->extent->miny);
+			$pt->setXY($mapa->extent->minx + (($mapa->extent->maxx - $mapa->extent->minx) / 2) ,$mapa->extent->miny + (($mapa->extent->maxy - $mapa->extent->miny) / 2));
 			$layer->queryByPoint($pt,0,0);
 		}
 		$sopen = $layer->open();
@@ -1411,6 +1411,8 @@ function pegaItens($layer,$mapa="")
 		{$items = $layer->getItems();}
 		else
 		{$items = array();}
+		if($layer->type == MS_LAYER_RASTER)
+		{$items[] = "pixel";}
 		$layer->close();
 	}
 	return $items;

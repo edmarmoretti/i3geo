@@ -242,16 +242,17 @@ Lista os itens de um tema.
 		foreach ($l as $tema)
 		{
 			$layer = $this->mapa->getlayerbyname($tema);
+			$layer->set("template","none.htm");
 			//pega o nome correto do tema
 			$nometmp = pegaNome($layer,"UTF-8");
 			$nomestemas[] = $nometmp;
 			if($layer->data != "" || $layer->connectiontype == 7)
 			{
-					$items = pegaItens($layer,$this->mapa);
-					foreach ($items as $item)
-					{
-				 		$lista[] = array("item"=>$item,"nome"=>$nometmp,"tema"=>$tema);
-					}
+				$items = pegaItens($layer,$this->mapa);
+				foreach ($items as $item)
+				{
+					$lista[] = array("item"=>$item,"nome"=>$nometmp,"tema"=>$tema);
+				}
 			}
 		}
 		return (array("valores"=>$lista,"temas"=>$l,"nomes"=>$nomestemas));
@@ -272,7 +273,7 @@ $tipo - Tipo de busca brasil|null
 		$this->layer->set("template","none.htm");
 		$this->layer->setfilter("");
 		//le o arquivo de query se existir e checa se existe seleção para o tema
-		$items = pegaItens($this->layer);
+		$items = pegaItens($this->layer,$this->mapa);
 		
 		$shapes = retornaShapesSelecionados($this->layer,$this->arquivo,$this->mapa);
 		if(count($shapes) == 0){
@@ -336,7 +337,7 @@ $tipolista - Indica se serão mostrados todos os registros ou apenas os seleciona
 		{return "erro. O tema não tem tabela";}
 		//pega os valores
 		if ((!isset($itemtema)) || ($itemtema == ""))
-		{$items = pegaItens($this->layer);}
+		{$items = pegaItens($this->layer,$this->mapa);}
 		else
 		{$items[] = $itemtema;}
 		$resultadoFinal[] = array("itens"=>$items);
@@ -548,7 +549,7 @@ Include:
 	{
 		if(!$this->layer){return "erro";}
 		$this->layer->set("template","none.htm");
-		$items = pegaItens($this->layer);
+		$items = pegaItens($this->layer,$this->mapa);
 		$valores = array();
 		$filtro = $this->layer->getfilterstring();
 		if ($filtro != ""){$this->layer->setfilter("");}
@@ -1271,14 +1272,13 @@ $listaDeTemas - (opcional) Lista com os códigos dos temas que serão identificado
 			$n[] = array("alias"=>"Link WMS","valor"=>"getfeatureinfo padr&atilde;o do servi&ccedil;o","link"=>$res2,"img"=>"");
 			return array($n);
 		}
-		
 		$itens = $layer->getmetadata("ITENS"); // itens
 		$itensdesc = $layer->getmetadata("ITENSDESC"); // descri&ccedil;&atilde;o dos itens
 		$lks = $layer->getmetadata("ITENSLINK"); // link dos itens
 		$itemimg = $layer->getmetadata("ITEMIMG"); //indica um item que será utilizado para colocar um ícone
 		$locimg = $layer->getmetadata("IMGLOC"); //indica o local onde estão os ícones
 		$tips = $layer->getmetadata("TIP");
-		$itensLayer = pegaItens($layer);
+		$itensLayer = pegaItens($layer,$mapa);
 		$nitens = count($itensLayer);
 		if($itens == "")
 		{$itens = $itensLayer;}

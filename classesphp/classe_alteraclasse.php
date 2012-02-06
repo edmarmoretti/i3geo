@@ -665,7 +665,7 @@ Calcula o tamanho dos estilos das classes, alterando o tamanho do símbolo.
 		return("ok");
 	}
 /*
-function: inverteStatusClasse
+function: statusClasse
 
 Inverte o status a uma classe desligando ou desligando, conforme o status atual.
 
@@ -676,13 +676,27 @@ $classe - id da classe
 */
 	function statusClasse($classe)
 	{
+		//
+		//na versão 6 do Mapserver as classes não obedecem o OFF ou ON em arquivos RASTER. Foi necessário contornar o problema usando um metadata
+		//
 		if(!$this->layer){return "erro";}
-		$classe = $this->layer->getclass($classe);
-		$status = $classe->status;
-		if ($status == MS_OFF)
-		{$classe->set("status",MS_ON);}
-		else
-		{$classe->set("status",MS_OFF);}
+		$cl = $this->layer->getclass($classe);
+		$status = $cl->status;
+		echo $status;
+		if ($status == MS_OFF){
+			$cl->set("status",MS_ON);
+			if($this->layer->type == 3){
+				$e = $cl->getstyle(0);
+				$e->set("opacity",100);
+			}
+		}
+		else{
+			$cl->set("status",MS_OFF);
+			if($this->layer->type == 3){
+				$e = $cl->getstyle(0);
+				$e->set("opacity",0);
+			}			
+		}
 		$this->layer->setMetaData("cache","");
 		return("ok");
 	}
