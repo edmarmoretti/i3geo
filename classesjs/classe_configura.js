@@ -126,7 +126,7 @@ i3GEO.configura = {
 			"ajudaMenu": [ 
 			{ id:"omenudataAjudamenu1",text: $trad("u1"), url: "http://www.softwarepublico.gov.br/spb/ver-comunidade?community_id=1444332", target:"_blank" },
 			{ id:"omenudataAjudamenu2",text: $trad("u2"), url: "javascript:i3GEO.ajuda.abreDoc()" },
-			{ id:"omenudataAjudamenu3",text: $trad("u3"), url: "http://pt.wikibooks.org/wiki/I3geo", target:"_blank" },
+			{ id:"omenudataAjudamenu3",text: $trad("u4a"), url: "../documentacao/manual_de_usuario_do_i3geo.pdf", target:"_blank" },
 			{ id:"omenudataAjudamenu4",text: $trad("u4"), url: "http://www.softwarepublico.gov.br/dotlrn/clubs/i3geo/file-storage/index?folder%5fid=22667525", target:"_blank" },
 			{ id:"omenudataAjudamenu5",text: $trad("u5a"), url: "http://www.softwarepublico.gov.br", target:"_blank" },
 			{ id:"omenudataAjudamenu7",text: $trad("u5b"), url: "../ajuda_usuario.php", target:"_blank" },

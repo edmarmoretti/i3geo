@@ -213,6 +213,13 @@ en:"Tutorials",
 es:"Tutoriales",
 it:"Guida"
 }],
+"u4a": [
+{
+pt: "Manual do usuário",
+en:"Manual do usuário",
+es:"Manual do usuário",
+it:"Manual do usuário"
+}],
 "u5": [
 {
 pt: "Blog",
