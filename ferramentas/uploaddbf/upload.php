@@ -158,7 +158,7 @@ function verificaNome($nome)
 	$nome = strtolower($nome);
 	$lista = explode(".",$nome);
 	$extensao = $lista[count($lista) - 1];
-	if(($extensao != "dbf") && ($extensao != "csv"))
+	if(($extensao != "dbf") && ($extensao != "csv") && ($extensao != "txt"))
 	{
 		echo "Nome de arquivo inválido";
 		paraAguarde();
