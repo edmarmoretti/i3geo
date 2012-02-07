@@ -773,10 +773,26 @@ i3GEO.editorOL = {
 							lonlattexto += "<pre><span style=color:blue;cursor:pointer onclick='i3GEO.editorOL.captura(\""+lonlat.lon+","+lonlat.lat+"\")'>captura</span></pre>";
 						}
 						formata = function(texto){
-							var textoN = texto.split(":");
-							if(textoN.length > 0){
-								textoN[0] = "";
-								texto = textoN.join("");
+							var temp,
+								temp1,
+								n,
+								i,
+								f = [],
+								f1 = [],
+								textoN = texto.split(":");
+							if(textoN.length > 1){
+								temp = textoN[2].replace(/\n\r/g, "");
+								temp = temp.replace(/'/g, "");
+								temp = temp.replace(/\n/g, "|");
+								temp = temp.split("|");
+								n = temp.length;
+								for(i=0;i<n;i++){
+									temp1 = temp[i].replace(/^\s+/,"");
+									temp1 = temp1.replace(/\s+$/,"");
+									if(temp1 != "")
+									f.push(temp1);
+								}
+								texto = f.join("<br><br>");								
 							}
 							return texto;
 						};
