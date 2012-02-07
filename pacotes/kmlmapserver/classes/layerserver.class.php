@@ -758,9 +758,11 @@ class LayerServer {
     function add_style_point(&$new_style, &$style_data){
         if($style_data['icon']){
             $st =& $new_style->addChild('IconStyle');
-            if($style_data['width'] && $style_data['icon_width'] != 32){
+			if($style_data['width'] && $style_data['icon_width'] != 32){
                 $st->addChild('scale', $style_data['icon_width'] / 32);
             }
+			else
+			{$st->addChild('scale', 1);}
             $icon =& $st->addChild('Icon');
             $icon->addChild('href', htmlentities($style_data['icon']));
         }

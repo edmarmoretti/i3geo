@@ -1,5 +1,4 @@
 <?php
-
 /*
 Title: mapa_openlayers.php
 
@@ -60,33 +59,7 @@ i3geo/classesphp/mapa_openlayers.php
 
 */
 error_reporting(0);
-clearstatcache();
-$_COOKIE = array();
-if (!function_exists('ms_GetVersion'))
-{
-	$s = PHP_SHLIB_SUFFIX;
-	@dl( 'php_mapscript.'.$s );
-	$ler_extensoes[] = 'php_mapscript';
-}
-//verificação de segurança
-$_SESSION = array();
-session_name("i3GeoPHP");
-if(@$_GET["g_sid"])
-{session_id($_GET["g_sid"]);}
-else
-{ilegal();}
-session_start();
-//var_dump($_SESSION);exit;
-if(@$_SESSION["fingerprint"])
-{
-	$f = explode(",",$_SESSION["fingerprint"]);
-	if (md5('I3GEOSEC' . $_SERVER['HTTP_USER_AGENT'] . session_id()) != $f[0] && !in_array($_GET["telaR"],$f) )
-	{ilegal();}
-}
-else
-{exit;}
-if(!isset($_SESSION["map_file"]))
-{exit;}
+inicializa();
 //
 //map_fileX é necessário caso register_globals = On no PHP.INI
 $map_fileX = $_SESSION["map_file"];
@@ -94,8 +67,7 @@ $postgis_mapa = $_SESSION["postgis_mapa"];
 $cachedir = $_SESSION["cachedir"];
 if(isset($_GET["tipolayer"]) && $_GET["tipolayer"] == "fundo")
 {$map_fileX = str_replace(".map","fundo.map",$map_fileX);}
-if(isset($_GET["BBOX"]))
-{
+if(isset($_GET["BBOX"])){
 	$_GET["mapext"] = str_replace(","," ",$_GET["BBOX"]);
 	$_GET["map_size"] = $_GET["WIDTH"]." ".$_GET["HEIGHT"];
 }
@@ -335,7 +307,27 @@ function carregaCacheImagem($cachedir,$bbox,$layer,$map,$w,$h){
 	{$nome = $cachedir."/".$layer."/".$nome;}
 	if(file_exists($nome))
 	{
-		if (!function_exists('imagepng'))
+		ob_start();
+		// assuming you have image data in $imagedata
+		$img = file_get_contents($nome);
+		$length = strlen($img);
+		$ft = filemtime($nome);
+		if (isset($_SERVER["HTTP_IF_MODIFIED_SINCE"]) && (strtotime($_SERVER["HTTP_IF_MODIFIED_SINCE"]) == $ft)) {
+			// Client's cache IS current, so we just respond '304 Not Modified'.
+			header('Last-Modified: '.gmdate('D, d M Y H:i:s', $ft).' GMT', true, 304);
+		} else {
+			// Image not cached or cache outdated, we respond '200 OK' and output the image.
+			header('Last-Modified: '.gmdate('D, d M Y H:i:s', $ft).' GMT', true, 200);
+		}
+		header('Accept-Ranges: bytes');
+		header('Content-Length: '.$length);
+		header('Content-Type: image/png');
+		print($img);
+		ob_end_flush();
+		exit;
+	}
+	/*
+	if (!function_exists('imagepng'))
 		{
 			$s = PHP_SHLIB_SUFFIX;
 			@dl( 'php_gd2.'.$s );
@@ -345,7 +337,7 @@ function carregaCacheImagem($cachedir,$bbox,$layer,$map,$w,$h){
 		@$img = imagecreatefrompng($nome);
 		if(!$img)
 		{
-			/* Create a blank image */
+			// Create a blank image
 			$img  = imagecreatetruecolor($w, $h);
 			imagealphablending($img, false);
 			imagesavealpha($img, true);
@@ -354,7 +346,7 @@ function carregaCacheImagem($cachedir,$bbox,$layer,$map,$w,$h){
 			$tc  = imagecolorallocate($img, 255, 0, 0);
 
 			imagefilledrectangle($img, 0, 0, $w, $h, $bgc);
-			/* Output an error message */
+			// Output an error message
 			imagestring($img, 3, 5, 5, 'Erro ao ler ' . $nome, $tc);
 		}
 		else
@@ -369,6 +361,7 @@ function carregaCacheImagem($cachedir,$bbox,$layer,$map,$w,$h){
 		imagedestroy($img);
 		exit;
 	}
+	*/
 }
 function nomeRand($n=10)
 {
@@ -405,6 +398,34 @@ function filtraImg($nomer,$tipoimagem){
 		if ($tipoimagem == "pixelate")
 		{imagepng($m->pixelate(),str_replace("\\","/",$nomer));}
 	}
+}
+function inicializa(){
+	clearstatcache();
+	$_COOKIE = array();
+	if (!function_exists('ms_GetVersion')){
+		$s = PHP_SHLIB_SUFFIX;
+		@dl( 'php_mapscript.'.$s );
+		$ler_extensoes[] = 'php_mapscript';
+	}
+	//verificação de segurança
+	$_SESSION = array();
+	session_name("i3GeoPHP");
+	if(@$_GET["g_sid"])
+	{session_id($_GET["g_sid"]);}
+	else
+	{ilegal();}
+	session_start();
+	//var_dump($_SESSION);exit;
+	if(@$_SESSION["fingerprint"])
+	{
+		$f = explode(",",$_SESSION["fingerprint"]);
+		if (md5('I3GEOSEC' . $_SERVER['HTTP_USER_AGENT'] . session_id()) != $f[0] && !in_array($_GET["telaR"],$f) )
+		{ilegal();}
+	}
+	else
+	{exit;}
+	if(!isset($_SESSION["map_file"]))
+	{exit;}
 }
 function ilegal(){
 	$img = imagecreatefrompng("../imagens/ilegal.png");
