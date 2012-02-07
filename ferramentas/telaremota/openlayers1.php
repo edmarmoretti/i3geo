@@ -129,7 +129,7 @@ function inicia(){
 	var bra = new OpenLayers.Layer.WMS( 
 		"Base carto MMA",
 		"http://mapas.mma.gov.br/cgi-bin/mapserv?map=/opt/www/html/webservices/baseraster.map",
-		{layers:"baseraster",srs:"EPSG:4291",format:"image/png"},
+		{layers:"baseraster",srs:"EPSG:4618",format:"image/png"},
 		{isBaseLayer:true,visibility:false}
 	);
 	mapaRemoto = new OpenLayers.Map({

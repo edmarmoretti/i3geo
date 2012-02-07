@@ -5,7 +5,7 @@ LAYER
     CONNECTION "http://mapas.mma.gov.br/cgi-bin/mapserv?map=/opt/www/html/webservices/3dmap.map&"
     CONNECTIONTYPE WMS
       METADATA
-        "wms_srs"	"EPSG:4291"
+        "wms_srs"	"EPSG:4618"
         "wms_exceptions_format"	"application/vnd.ogc.se_xml"
         "wms_name"	"srtmcinza"
         "nomeoriginal"	"srtmcinza"

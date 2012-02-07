@@ -32,7 +32,7 @@ MAP
     STATUS OFF
 	TYPE LINE
 PROJECTION
-    "init=epsg:4291"
+    "init=epsg:4618"
 END	
 	CLASS
 	   NAME "Graticule"

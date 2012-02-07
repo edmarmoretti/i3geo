@@ -7,7 +7,7 @@ FONTSET   "../symbols/fontes.txt"
     CONNECTION "http://mapas.mma.gov.br/cgi-bin/mapserv?map=/opt/www/html/webservices/baseraster.map"
     CONNECTIONTYPE WMS
     METADATA
-      "wms_srs"	"EPSG:4291"
+      "wms_srs"	"EPSG:4618"
       "tipooriginal"	""
       "wms_exceptions_format"	"application/vnd.ogc.se_xml"
       "CLASSE"	"SIM"
@@ -25,7 +25,7 @@ FONTSET   "../symbols/fontes.txt"
     NAME "cartobase"
     OFFSITE 255 255 255
     PROJECTION
-      "init=epsg:4291"
+      "init=epsg:4618"
     END
     STATUS DEFAULT
     TOLERANCE 0

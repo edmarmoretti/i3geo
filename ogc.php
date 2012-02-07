@@ -138,7 +138,7 @@ foreach ($_GET as $k=>$v)
 	{$tema = $v;}
 }
 if(empty($srs)){$srs = "";}
-$listaepsg = $srs." EPSG:4291 EPSG:4326 EPSG:22521 EPSG:22522 EPSG:22523 EPSG:22524 EPSG:22525 EPSG:29101 EPSG:29119 EPSG:29120 EPSG:29121 EPSG:29122 EPSG:29177 EPSG:29178 EPSG:29179 EPSG:29180 EPSG:29181 EPSG:29182 EPSG:29183 EPSG:29184 EPSG:29185";
+$listaepsg = $srs." EPSG:4618 EPSG:4291 EPSG:4326 EPSG:22521 EPSG:22522 EPSG:22523 EPSG:22524 EPSG:22525 EPSG:29101 EPSG:29119 EPSG:29120 EPSG:29121 EPSG:29122 EPSG:29177 EPSG:29178 EPSG:29179 EPSG:29180 EPSG:29181 EPSG:29182 EPSG:29183 EPSG:29184 EPSG:29185";
 if(count($_GET) == 0){
 	$tipo="intervalo";
 	$req->setParameter("REQUEST", "getCapabilities");
@@ -442,7 +442,7 @@ function ogc_imprimeListaDeTemas()
 								$imprimir .= "<span style=color:red >".$tema["tid"]."</span>";
 								$imprimir .= "&nbsp;-&nbsp;".$tema["nome"]."&nbsp";
 								$imprimir .= "&nbsp;<a href='".$urli3geo."/ogc.php?tema=".$tema["tid"]."&service=wms&request=getcapabilities' >Getcapabilities</a>";
-								$imprimir .= "&nbsp;<a href='".$urli3geo."/ogc.php?tema=".$tema["tid"]."&SRS=EPSG:4291&WIDTH=500&HEIGHT=500&BBOX=-76.5125927,-39.3925675209,-29.5851853,9.49014852081&FORMAT=image/png&service=wms&version=1.1.0&request=getmap&layers=".$tema["tid"]."' >GetMap </a>";
+								$imprimir .= "&nbsp;<a href='".$urli3geo."/ogc.php?tema=".$tema["tid"]."&SRS=EPSG:4618&WIDTH=500&HEIGHT=500&BBOX=-76.5125927,-39.3925675209,-29.5851853,9.49014852081&FORMAT=image/png&service=wms&version=1.1.0&request=getmap&layers=".$tema["tid"]."' >GetMap </a>";
 								if($tema["link"] != " ")
 								$imprimir .= "&nbsp;&nbsp;<a href='".$tema["link"]."' >fonte</a>";
 								$imprimir .= "<br>";

@@ -1259,7 +1259,7 @@ Include:
 		else
 		{$layer->set("connectiontype",MS_WMS);}
 		
-		$epsg = "EPSG:4291";
+		$epsg = "EPSG:4618";
 		$e4291 = "nao";
 		$ecrs = "nao";
 		$pos = str_replace(" ",",",$proj);
@@ -1271,14 +1271,14 @@ Include:
 				$p = explode(":",$p);
 				if ($p[1] == "4326")
 				{$epsg = "EPSG:4326";}
-				if ($p[1] == "4291")
-				{$epsg = "EPSG:4291";$e4291="sim";}
+				if ($p[1] == "4618")
+				{$epsg = "EPSG:4618";$e4291="sim";}
 				if ($p[1] == "84")
 				{$ecrs = "CRS:84";$ecrs = "sim";}
 			}
 		}
 		else {$epsg = $proj;}
-		if ($e4291 == "sim"){$epsg = "EPSG:4291";}
+		if ($e4291 == "sim"){$epsg = "EPSG:4618";}
 		if ($ecrs == "sim"){$epsg = $ecrs;}
 		$epsg = trim($epsg);
 		$layer->setmetadata("wms_srs",$epsg);
@@ -1408,7 +1408,7 @@ Endereço do WMC
 		// adiciona os parametros no nivel do mapa
 		$this->mapa->setmetadata("wms_title","i3Geo");
 		$this->mapa->setmetadata("wms_onlineresource","http://".$h.$nomeurl);
-		$this->mapa->setmetadata("wms_srs","EPSG:4291");
+		$this->mapa->setmetadata("wms_srs","EPSG:4618");
 		$this->mapa->setmetadata("wms_getcontext_enabled","1");
 		foreach ($this->layers as $layer)
 		{

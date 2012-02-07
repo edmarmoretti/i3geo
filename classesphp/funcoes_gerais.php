@@ -874,7 +874,7 @@ function retornaReferenciaDinamica($ext="")
 	//
 	$objMapa = ms_newMapObj($map_file);
 	if($interface == "googlemaps")
-	{$objMapa->setProjection("init=epsg:4291,a=6378137,b=6378137");}	
+	{$objMapa->setProjection("init=epsg:4618,a=6378137,b=6378137");}	
 	if($ext && $ext != ""){
 		$e = explode(" ",$ext);
 		$extatual = $objMapa->extent;
@@ -923,7 +923,7 @@ function retornaReferenciaDinamica($ext="")
 	$s =  "var refimagem='".$nomer."';var refwidth=".$objImagem->width.";var refheight=".$objImagem->height.";var refpath='".$objImagem->imagepath."';var refurl='".$objImagem->imageurl."'";
 	$mapa = ms_newMapObj($map_file);
 	if($interface == "googlemaps")
-	{$mapa->setProjection("init=epsg:4291");}
+	{$mapa->setProjection("init=epsg:4618");}
 	$ref = $mapa->reference;
 	$r = $ref->extent;
 	//

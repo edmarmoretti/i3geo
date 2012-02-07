@@ -22,7 +22,7 @@ if(!isset($locaplic))
 var mapaLugar = function(wkt,layer,gid,nm)
 {
 	var ext = i3GEO.util.wkt2ext(wkt,"polygon");
-	var url = "<?php echo $locaplic;?>/ms_criamapa.php?srs_wms=epsg:4291&image_wms=image/png&versao_wms=1.1.1"
+	var url = "<?php echo $locaplic;?>/ms_criamapa.php?srs_wms=epsg:4618&image_wms=image/png&versao_wms=1.1.1"
 	url += "&url_wms=http://mapas.mma.gov.br/webservices/geonameswms.php?gid="+gid+"&";
 	url += "&layer_wms="+layer+"&style_wms=default"
 	url += "&nome_wms="+nm+" - "+layer

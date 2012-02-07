@@ -3,7 +3,7 @@
   <General>
     <Window width="1267" height="617"/>
     <!-- Bounding box corners and spatial reference system -->
-    <BoundingBox SRS="EPSG:4291" minx="-103.280641" miny="-39.392568" maxx="-2.817137" maxy="9.490149"/>
+    <BoundingBox SRS="EPSG:4618" minx="-103.280641" miny="-39.392568" maxx="-2.817137" maxy="9.490149"/>
     <!-- Title of Context -->
     <Title>i3Geo</Title>
     <ContactInformation>
@@ -16,7 +16,7 @@
       </Server>
       <Name>locali</Name>
       <Title>Localidades</Title>
-      <SRS>EPSG:4291 EPSG:4326</SRS>
+      <SRS>EPSG:4618 EPSG:4326</SRS>
       <FormatList>
         <Format>image/gif</Format>
         <Format current="1">image/png</Format>

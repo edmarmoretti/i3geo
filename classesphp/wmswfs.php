@@ -930,8 +930,8 @@ function wms_srs( $dom )
 		{$single[] = "CRS:84";}
 		if ($entry->nodeValue == "EPSG:4326")
 		{$single[] = "EPSG:4326";}
-		if ($entry->nodeValue == "EPSG:4291")
-		{$single[] = "EPSG:4291";}
+		if ($entry->nodeValue == "EPSG:4618")
+		{$single[] = "EPSG:4618";}
 	}
 	if (count($single) > 0)
 	{$arr = $single;}

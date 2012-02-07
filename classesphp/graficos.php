@@ -380,7 +380,7 @@ function iniciaDadosGrafico($map_file,$tema,$exclui,$itemclasses,$itemvalores,$t
 	if($interface == "googlemaps")
 	{
 		$projMapa = $map->getProjection();
-		$map->setProjection("init=epsg:4291,a=6378137,b=6378137");
+		$map->setProjection("init=epsg:4618,a=6378137,b=6378137");
 	}
 	if($ext && $ext != ""){
 		$e = explode(" ",$ext);

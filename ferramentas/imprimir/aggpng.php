@@ -71,7 +71,7 @@ $of->set("driver","AGG/PNG");
 $of->set("imagemode","RGB");
 $map = ms_newMapObj($temp);
 if($interface == "googlemaps")
-{$map->setProjection("init=epsg:4291,a=6378137,b=6378137");}
+{$map->setProjection("init=epsg:4618,a=6378137,b=6378137");}
 //$legenda =$map->legend;
 //$legenda->set("status",MS_EMBED);
 //altera o nome das classes vazias

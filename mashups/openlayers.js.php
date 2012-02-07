@@ -44,7 +44,7 @@ i3GEO.editorOL = {
 	ol_mma: new OpenLayers.Layer.WMS(
 		"Base cartográfica",
 		"http://mapas.mma.gov.br/cgi-bin/mapserv?map=/opt/www/html/webservices/baseraster.map&",
-		{layers:'baseraster',SRS:'EPSG:4291',FORMAT:'image/png'},
+		{layers:'baseraster',SRS:'EPSG:4618',FORMAT:'image/png'},
 		{singleTile:true}
 	),
 	ol_wms: new OpenLayers.Layer.WMS.Untiled(

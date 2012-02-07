@@ -159,7 +159,7 @@ function adicionatema()
 			$tema = $nometema[1];
 	 		$servico = "http://mapas.mma.gov.br/webservices/especieswms.php?gid=".$tabela["gids"]."&cor=".$cor;
 	 		$nome = "default";
-	 		$proj = "EPSG:4291";
+	 		$proj = "EPSG:4618";
 	 		$formato = "image/png";
 	 		$nomecamada = $nomeslegenda[$tema];
 	 		$suportasld = "nao";

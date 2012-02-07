@@ -305,7 +305,7 @@ function mapfile()
 			$ct = "MS_WMS";
 			$d =  "http://".$_SERVER['HTTP_HOST'].str_replace("/admin/php/parsemapfile.php","",$_SERVER['PHP_SELF'])."/ogc.php?tema=".$codigoLayer;
 			$xml .= "<version>1.1.1</version>";
-			$xml .= "<srs>EPSG:4291</srs>";
+			$xml .= "<srs>EPSG:4618</srs>";
 			$xml .= "<format>image/png</format>";
 			$xml .= "<style>default</style>";
 			$tagLegenda = "";

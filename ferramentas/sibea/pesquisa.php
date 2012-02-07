@@ -168,7 +168,7 @@ function adicionatema()
 		$tema = "sibeapol";
 		$servico = "http://mapas.mma.gov.br/webservices/sibeawms.php?gid=".$listaIbge."&cor=".$cor;
 		$nome = "default";
-		$proj = "EPSG:4291";
+		$proj = "EPSG:4618";
 		$formato = "image/png";
 		$nomecamada = $nometema." = ".$nomevalor;
 		$suportasld = "nao";

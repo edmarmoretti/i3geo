@@ -302,7 +302,7 @@ i3GEObuscaRapida = {
 	zoom: function(wkt,layer,gid,nm){
     	var adicionaCamada = function(layer,gid,nm,ext){
 	 		var s = i3GEObuscaRapida.servicowms+"?gid="+gid+"&";
-			i3GEO.php.adicionaTemaWMS(window.parent.i3GEO.atualiza,s,layer,"default","EPSG:4291","image/png","1.1.0",nm+" - "+layer,"","nao","",i3GEObuscaRapida.locaplic,window.parent.i3GEO.configura.sid);
+			i3GEO.php.adicionaTemaWMS(window.parent.i3GEO.atualiza,s,layer,"default","EPSG:4618","image/png","1.1.0",nm+" - "+layer,"","nao","",i3GEObuscaRapida.locaplic,window.parent.i3GEO.configura.sid);
 			i3GEObuscaRapida.zoomExt(ext);
 		};
 		var ext = i3GEO.util.wkt2ext(wkt,"polygon");

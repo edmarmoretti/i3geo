@@ -311,7 +311,7 @@ class LayerServer {
             // Add parameters to OGC server call
             // Fix &
             $wms_link = preg_replace('/&/', '&amp;', $wms_link);
-            $wms_link .= 'VERSION=1.1.1&amp;REQUEST=GetMap&amp;SRS=EPSG:4291&amp;STYLES=&amp;FORMAT=image/jpeg&amp;TRANSPARENT=TRUE&amp;';
+            $wms_link .= 'VERSION=1.1.1&amp;REQUEST=GetMap&amp;SRS=EPSG:4618&amp;STYLES=&amp;FORMAT=image/jpeg&amp;TRANSPARENT=TRUE&amp;';
             // Link ok, create folder
             //$folder =& $this->_xml->Document->addChild('GroundOverlay');
             $folder =& $this->simplexml_addChild($this->_xml->Document,'GroundOverlay');

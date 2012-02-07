@@ -130,7 +130,7 @@ if($tipo == "zoom")
 	$servico = "http://mapas.mma.gov.br/webservices/geonameswms.php?gid=".$gid;
 	$nomecamada = $nome." - ".$layer;
 	$nome = "default";
-	$proj = "EPSG:4291";
+	$proj = "EPSG:4618";
 	$formato = "image/png";
 	$suportasld = "nao";
 	$versao = "1.1.0";

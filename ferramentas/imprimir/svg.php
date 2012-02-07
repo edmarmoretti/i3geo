@@ -67,7 +67,7 @@ $map->save($temp);
 substituiCon($temp,$postgis_mapa);
 $map = ms_newMapObj($temp);
 if($interface == "googlemaps")
-{$map->setProjection("init=epsg:4291,a=6378137,b=6378137");}
+{$map->setProjection("init=epsg:4618,a=6378137,b=6378137");}
 $eb = $map->scalebar;
 $leb = $eb->label;
 if($leb->type == "MS_BITMAP"){

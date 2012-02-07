@@ -39,7 +39,7 @@
 	<fmc:BorderNavigation skin="F1" width="100%" height="100%" listento="map"/>
 	<fmc:Map id="map" movequality="HIGH" conform="true" mapunits="DECIMALDEGREES" width="100%" height="100%" fullextent="-180,-90,180,90"  extent="-180,-90,180,90"  >
 		<fmc:LayerIdentifyIcon/>
-		<fmc:LayerOGWMS id="OG3"  format="PNG" url="http://mapas.mma.gov.br/i3geo/ogc.php?tema=bioma&WMS=i3geoogc&VERSION=1.1.1&SRS=EPSG:4291&EXCEPTIONS=INIMAGE&BGCOLOR=0xF0F0F0" LAYERS="bioma"/>
+		<fmc:LayerOGWMS id="OG3"  format="PNG" url="http://mapas.mma.gov.br/i3geo/ogc.php?tema=bioma&WMS=i3geoogc&VERSION=1.1.1&SRS=EPSG:4618&EXCEPTIONS=INIMAGE&BGCOLOR=0xF0F0F0" LAYERS="bioma"/>
 	</fmc:Map>
 </fmc:Container>
 </FLAMINGO>

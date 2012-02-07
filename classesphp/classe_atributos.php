@@ -125,7 +125,7 @@ $ext - (opcional) extensão geográfica que será aplicada ao mapa
 			}
 			if($this->mapa->getmetadata("interface") == "googlemaps"){
 				$this->projO = $this->mapa->getProjection();
-				$this->mapa->setProjection("init=epsg:4291,a=6378137,b=6378137");
+				$this->mapa->setProjection("init=epsg:4618,a=6378137,b=6378137");
 			}			
 		}
 	}
@@ -1017,8 +1017,8 @@ $listaDeTemas - (opcional) Lista com os códigos dos temas que serão identificado
 			$srs = "EPSG:4326";
 			foreach ($srss as $s)
 			{
-				if(strtoupper($s) == "EPSG:4291")
-				{$srs = "EPSG:4291";}
+				if(strtoupper($s) == "EPSG:4618")
+				{$srs = "EPSG:4618";}
 			}
 			$res .= "&SRS=".$srs;
 			$resposta = file($res."&FORMAT=".$formatoinfo);
