@@ -933,8 +933,6 @@ $random - indica se os nomes dos novos layers serão modificados ou nao
 	function adicionaTema($temas,$locaplic,$random="sim")
 	{
 		//limpa selecao
-		if (file_exists($this->qyfile))
-		{unlink ($this->qyfile);}
 		$temas = explode(",",$temas);
 		$zoomlayer = "";
 		foreach ($temas as $nome)
@@ -970,28 +968,14 @@ $random - indica se os nomes dos novos layers serão modificados ou nao
 						$random == "sim" ? $nomeunico[$n] = nomeRandomico() : $nomeunico[$n] = $n;
 					}
 					//altera os temas para incluir o nome unico
-					include_once($locaplic."/classesphp/funcoes_gerais.php");
+					//include_once($locaplic."/classesphp/funcoes_gerais.php");
 					foreach ($novosnomes as $n)
 					{
 						$nlayer = $nmap->getlayerbyname($n);
-						if(function_exists("autoClasses"))
 						//para impedir erros na legenda
 						if($nlayer->getmetadata("classe") == "")
 						{$nlayer->setmetadata("classe","");}
 						autoClasses($nlayer,$this->mapa);
-						//
-						//cria as classes com base em atributos
-						//
-						//
-						//muda para RGB para melhorar o desenho da imagem raster
-						//
-						/*
-						if($nlayer->type == MS_LAYER_RASTER)
-						{
-							$of = $this->mapa->outputformat;
-							$of->set("imagemode",MS_IMAGEMODE_RGB);
-						}
-						*/
 						$nlayer->set("status",MS_DEFAULT);
 						$nlayer->setmetadata("nomeoriginal",$nlayer->name);
 						$nlayer->set("name",$nomeunico[$n]);
@@ -1022,11 +1006,6 @@ $random - indica se os nomes dos novos layers serão modificados ou nao
 						}						
 						ms_newLayerObj($this->mapa, $nlayer);
 						$l = $this->mapa->getlayerbyname($nlayer->name);
-						//
-						//verifica se deve ser feito o zoom para o tema
-						//
-						//if(strtolower($l->getmetadata("aplicaextensao")) == "sim")
-						//{$zoomlayer = $nlayer->name;}
 						//reposiciona o layer se for o caso
 						if ($l->group == "")
 						{
@@ -1043,11 +1022,15 @@ $random - indica se os nomes dos novos layers serão modificados ou nao
 									if (($tipo != 2) && ($tipo != 3))
 									{$nummove++;}
 								}
-								if ($nummove > 2)
-								{
-									for ($i=0;$i<=($nummove - 3);++$i)
-									{$this->mapa->movelayerup($indicel);}
-								}
+								//echo $nummove;exit;
+								//if ($nummove > 2)
+								//{
+									for ($i=0;$i<($nummove);++$i)
+									{
+										$indicel = $l->index;
+										$this->mapa->movelayerup($indicel);
+									}
+								//}
 							}
 						}
 					}

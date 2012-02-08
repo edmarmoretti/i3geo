@@ -267,7 +267,7 @@ MAP
     CONNECTION "http://mapas.mma.gov.br/cgi-bin/mapserv?map=/var/www/html/webservices/baseraster.map"
     CONNECTIONTYPE WMS
     METADATA
-      "wms_srs"	"EPSG:4618"
+      "wms_srs"	"EPSG:4291"
       "tipooriginal"	""
       "wms_exceptions_format"	"application/vnd.ogc.se_xml"
       "CLASSE"	"SIM"

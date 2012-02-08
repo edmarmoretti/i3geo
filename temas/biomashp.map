@@ -5,7 +5,7 @@ MAP
     CONNECTION ""
     DATA "c:\ms4w\apache\htdocs\i3geo\aplicmap\dados\biomas.shp"
     FOOTER "teste.htm"
-    GROUP "biomashp"
+    #GROUP "biomashp"
     HEADER "teste.htm"
     METADATA
       "ltempoitemimagem"	""
