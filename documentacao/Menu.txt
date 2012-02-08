@@ -89,6 +89,7 @@ Group: Interfaces  {
    File: Interface normal  (interface\geral.htm)
    File: Interface Openlayers  (interface\openlayers.htm)
    File: Interface Openlayers  (interface\debug.htm)
+   File: Interface Openlayers  (interface\openlayersdebug.htm)
    File: Interface Openlayers para tablets  (interface\openlayers_t.htm)
    File: Interface Openlayers versão com guias à esquerda  (interface\openlayers1.htm)
    File: Interface zerocal  (interface\zerocal.htm)
