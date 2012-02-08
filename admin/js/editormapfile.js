@@ -1320,7 +1320,7 @@ function montaEditorDispo(dados)
 	var param = {
 		"linhas":[
 			{ajuda:"Indica se o usuário pode fazer download do tema. Se sim, o ícone de download será mostrado na árvore de camadas disponíveis no mapa.",
-			titulo:"Ícone de download (METADATA: DOWNLOAD)",id:"",value:dados.download,tipo:"text",div:"<div id=cDownload ></div>"},
+			titulo:"Permite download (METADATA: DOWNLOAD)",id:"",value:dados.download,tipo:"text",div:"<div id=cDownload ></div>"},
 			{ajuda:"Endereço de um arquivo pré-existente para download dos dados (caminho completo no servidor). Se definido, o sistema irá usar esse arquivo ao invés de gerar os dados, quando o usuário clicar nas opções de download. Se não for definido, o arquivo de download é gerado diretamente do original, convertendo do banco ou copiando o arquivo definido em DATA.",
 			titulo:"Arquivo download (ARQUIVODOWNLOAD)",id:"arquivodownload",value:dados.arquivodownload,tipo:"text"},
 			{ajuda:"Endereço de um arquivo KMZ ou KML pré-existente para download dos dados (caminho completo no servidor). Se definido, o sistema irá usar esse arquivo ao invés de gerar os dados, quando o usuário clicar nas opções de visualização de KML ou KMZ. Se não for definido, o arquivo é gerado diretamente do original.",

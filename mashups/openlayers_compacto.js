@@ -3786,10 +3786,13 @@ i,
 f = [],
 f1 = [],
 textoN = texto.split(":");
+try{
 if(textoN.length > 1){
 temp = textoN[2].replace(/\n\r/g, "");
 temp = temp.replace(/'/g, "");
 temp = temp.replace(/\n/g, "|");
+temp = temp.replace(/_/g, " ");
+temp = temp.replace(/=/g, ":");
 temp = temp.split("|");
 n = temp.length;
 for(i=0;i<n;i++){
@@ -3800,6 +3803,8 @@ f.push(temp1);
 }
 texto = f.join("<br><br>");
 }
+}
+catch(e){}
 return texto;
 };
 i3GEO.editorOL.mapa.addPopup(new OpenLayers.Popup.FramedCloud(

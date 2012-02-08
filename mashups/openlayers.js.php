@@ -780,20 +780,25 @@ i3GEO.editorOL = {
 								f = [],
 								f1 = [],
 								textoN = texto.split(":");
-							if(textoN.length > 1){
-								temp = textoN[2].replace(/\n\r/g, "");
-								temp = temp.replace(/'/g, "");
-								temp = temp.replace(/\n/g, "|");
-								temp = temp.split("|");
-								n = temp.length;
-								for(i=0;i<n;i++){
-									temp1 = temp[i].replace(/^\s+/,"");
-									temp1 = temp1.replace(/\s+$/,"");
-									if(temp1 != "")
-									f.push(temp1);
+							try{
+								if(textoN.length > 1){
+									temp = textoN[2].replace(/\n\r/g, "");
+									temp = temp.replace(/'/g, "");
+									temp = temp.replace(/\n/g, "|");
+									temp = temp.replace(/_/g, " ");
+									temp = temp.replace(/=/g, ":");
+									temp = temp.split("|");
+									n = temp.length;
+									for(i=0;i<n;i++){
+										temp1 = temp[i].replace(/^\s+/,"");
+										temp1 = temp1.replace(/\s+$/,"");
+										if(temp1 != "")
+										f.push(temp1);
+									}
+									texto = f.join("<br><br>");								
 								}
-								texto = f.join("<br><br>");								
 							}
+							catch(e){}
 							return texto;
 						};
 						i3GEO.editorOL.mapa.addPopup(new OpenLayers.Popup.FramedCloud(

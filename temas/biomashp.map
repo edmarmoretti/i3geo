@@ -5,7 +5,7 @@ MAP
     CONNECTION ""
     DATA "c:\ms4w\apache\htdocs\i3geo\aplicmap\dados\biomas.shp"
     FOOTER "teste.htm"
-    #GROUP "biomashp"
+    GROUP "biomashp"
     HEADER "teste.htm"
     METADATA
       "ltempoitemimagem"	""
@@ -41,6 +41,7 @@ MAP
     OPACITY 50
     TYPE POLYGON
     UNITS METERS
+	PROCESSING "ITEMS=CD_LEGENDA"
     CLASS
       NAME "CAATINGA"
       EXPRESSION ('[CD_LEGENDA]'eq'CAATINGA')
