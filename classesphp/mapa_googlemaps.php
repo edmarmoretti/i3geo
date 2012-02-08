@@ -144,7 +144,7 @@ if(!isset($_GET["telaR"])){//no caso de projecoes remotas, o mapfile nao´e alter
 		if($layerName == $_GET["layer"] || $l->group == $_GET["layer"] && $l->group != "")
 		{
 			$l->set("status",MS_DEFAULT);
-			if (($postgis_mapa != "") && ($postgis_mapa != " "))
+			if (!empty($postgis_mapa))
 			{
 				if ($l->connectiontype == MS_POSTGIS)
 				{

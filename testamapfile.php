@@ -217,28 +217,22 @@ function verifica($map,$solegenda)
 			{
 				$layern = $nmapa->getLayerByName($teman);
 				$layern->set("status",MS_DEFAULT);
-				if (isset($postgis_mapa))
+				if (!empty($postgis_mapa))
 				{
-					if (($postgis_mapa != "") || ($postgis_mapa != " "))
+					if ($layern->connectiontype == MS_POSTGIS)
 					{
-						if ($layern->connectiontype == MS_POSTGIS)
+						$lcon = $layern->connection;
+						error_reporting(0);						
+						if (($lcon == " ") || ($lcon == "") || (in_array($lcon,array_keys($postgis_mapa))))
 						{
-							$lcon = $layern->connection;
-							error_reporting(0);						
-							if (($lcon == " ") || ($lcon == "") || (in_array($lcon,array_keys($postgis_mapa))))
+							if(($lcon == " ") || ($lcon == "")) //para efeitos de compatibilidade
 							{
-								//
-								//o metadata CONEXAOORIGINAL guarda o valor original para posterior substituição
-								//				
-								if(($lcon == " ") || ($lcon == ""))
-								{
-									$layern->set("connection",$postgis_mapa);
-								}
-								else
-								{
-									$layern->set("connection",$postgis_mapa[$lcon]);
-								}					
+								$layern->set("connection",$postgis_mapa);
 							}
+							else
+							{
+								$layern->set("connection",$postgis_mapa[$lcon]);
+							}					
 						}
 					}
 				}

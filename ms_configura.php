@@ -293,21 +293,24 @@ if (strtoupper(substr(PHP_OS, 0, 3) == 'WIN'))
 	
 	Com o uso opcional dessa variável é possível esconder a string de conexão com o banco de dados. O Mapserver
 	não permite esconder essa string, por isso, no i3geo, foi implementado um esquema de substituição.
-	Toda vez que um objeto "map" é criado via PHP Mapscript, a string de conexão é substituída de " " para o valor de $postgis_mapa.
+	Toda vez que um objeto "map" é criado via PHP Mapscript, a string de conexão é substituída pelo valor de $postgis_mapa.
 	Se não for desejado a substituição, deixe essa variável em branco.
 	Se vc especificar essa variável, o mapa será forçado a recusar o modo de operação CGI.
 	
 	Para mais detalhes veja a função substituiCon em classesphp/funcoes_gerais.php
 	
-	Importante - se vc usar o modo de substituição de strings, as interfaces que dependem do modo CGI
-	para funcionarem, não serão capazes de acessar os dados. Isso afeta por exemplo, a interface Google Maps e Openlayers.
-	
 	exemplo - 
 	
 	$postgis_mapa = array(
-		"conexao1"=>"user=geodados password=geodados dbname=geodados host=10.1.1.36 port=5432",
+		"teste"=>"user=geodados password=geodados dbname=geodados host=10.1.1.36 port=5432",
 		"conexao2"=>"user=geodados password=geodados dbname=geodadosteste host=10.1.1.36 port=5432"
 	)
+	
+	No exemplo, vc pode usar "teste" ou "conexao2" no seu mapfile veja em i3geo/temas/testesubstring.map
+	
+	Se vc não quiser usar essa substituição, deixe como está ou use 
+	
+	$postgis_mapa = ""
 	
 	Tipo:
 	{array ou  string}
@@ -315,7 +318,7 @@ if (strtoupper(substr(PHP_OS, 0, 3) == 'WIN'))
 	$postgis_mapa = array(
 		"teste"=>"user=postgres password=postgres dbname=postgis host=localhost port=5432 options='-c client_encoding=LATIN1'",
 		"postgres"=>"user=postgres password=postgres dbname=postgis host=localhost port=5432",
-	); //"user=geodados password=geodados dbname=geodados host=10.1.1.36 port=5432";
+	);
 	/*
 	Variable: utilizacgi
 	

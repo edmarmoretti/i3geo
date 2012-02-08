@@ -247,29 +247,26 @@ if ($tipo == "" || $tipo == "metadados")
 				if($extensao == "")
 				{$extensao = $extensaoMap;}
 				$l->setmetadata("wms_extent",$extensao);
-				if (isset($postgis_mapa))
-				{			
-					if ($postgis_mapa != "")
-					{				
-						if ($l->connectiontype == MS_POSTGIS)
+				if (!empty($postgis_mapa))
+				{					
+					if ($l->connectiontype == MS_POSTGIS)
+					{
+						$lcon = $l->connection;
+						if (($lcon == " ") || ($lcon == "") || (in_array($lcon,array_keys($postgis_mapa))))
 						{
-							$lcon = $l->connection;
-							if (($lcon == " ") || ($lcon == "") || (in_array($lcon,array_keys($postgis_mapa))))
+							//
+							//o metadata CONEXAOORIGINAL guarda o valor original para posterior substituição
+							//				
+							if(($lcon == " ") || ($lcon == ""))
 							{
-								//
-								//o metadata CONEXAOORIGINAL guarda o valor original para posterior substituição
-								//				
-								if(($lcon == " ") || ($lcon == ""))
-								{
-									$l->set("connection",$postgis_mapa);
-									$l->setmetadata("CONEXAOORIGINAL",$lcon);
-								}
-								else
-								{
-									$l->set("connection",$postgis_mapa[$lcon]);
-									$l->setmetadata("CONEXAOORIGINAL",$lcon);
-								}					
+								$l->set("connection",$postgis_mapa);
+								$l->setmetadata("CONEXAOORIGINAL",$lcon);
 							}
+							else
+							{
+								$l->set("connection",$postgis_mapa[$lcon]);
+								$l->setmetadata("CONEXAOORIGINAL",$lcon);
+							}					
 						}
 					}
 				}

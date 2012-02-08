@@ -699,39 +699,36 @@ Retorno:
 function substituiCon($map_file,$postgis_mapa)
 {
 	error_reporting(0);
-	if ((isset($postgis_mapa)) && (file_exists($map_file)))
+	if (!empty($postgis_mapa) && (file_exists($map_file)))
 	{
-		if (($postgis_mapa != "") || ($postgis_mapa != " "))
+		if(!@ms_newMapObj($map_file)){return false;}
+		$objMap = ms_newMapObj($map_file);
+		$numlayers = $objMap->numlayers;
+		for ($i=0;$i < $numlayers;++$i)
 		{
-			if(!@ms_newMapObj($map_file)){return false;}
-			$objMap = ms_newMapObj($map_file);
-			$numlayers = $objMap->numlayers;
-			for ($i=0;$i < $numlayers;++$i)
+			$layer = $objMap->getlayer($i);
+			if ($layer->connectiontype == MS_POSTGIS)
 			{
-				$layer = $objMap->getlayer($i);
-				if ($layer->connectiontype == MS_POSTGIS)
+				$lcon = $layer->connection;
+				if (($lcon == " ") || ($lcon == "") || (in_array($lcon,array_keys($postgis_mapa))))
 				{
-					$lcon = $layer->connection;
-					if (($lcon == " ") || ($lcon == "") || (in_array($lcon,array_keys($postgis_mapa))))
+					//
+					//o metadata CONEXAOORIGINAL guarda o valor original para posterior substituição
+					//				
+					if(($lcon == " ") || ($lcon == ""))
 					{
-						//
-						//o metadata CONEXAOORIGINAL guarda o valor original para posterior substituição
-						//				
-						if(($lcon == " ") || ($lcon == ""))
-						{
-							$layer->set("connection",$postgis_mapa);
-							$layer->setmetadata("CONEXAOORIGINAL",$lcon);
-						}
-						else
-						{
-							$layer->set("connection",$postgis_mapa[$lcon]);
-							$layer->setmetadata("CONEXAOORIGINAL",$lcon);
-						}					
+						$layer->set("connection",$postgis_mapa);
+						$layer->setmetadata("CONEXAOORIGINAL",$lcon);
 					}
+					else
+					{
+						$layer->set("connection",$postgis_mapa[$lcon]);
+						$layer->setmetadata("CONEXAOORIGINAL",$lcon);
+					}					
 				}
 			}
-			$objMap->save($map_file);
 		}
+		$objMap->save($map_file);
 	}
 	return true;
 }
@@ -749,7 +746,7 @@ $postgis_mapa {string} - lista de conexão com o banco
 function restauraCon($map_file,$postgis_mapa)
 {
 	if(!@ms_newMapObj($map_file)){return;}
-	if (isset($postgis_mapa) && $postgis_mapa != "")
+	if (!empty($postgis_mapa))
 	{
 		$objMap = ms_newMapObj($map_file);
 		$numlayers = $objMap->numlayers;
@@ -2018,7 +2015,7 @@ $locaplic {string} - Diretório da aplicação.
 
 $dir_tmp {string} - Diretório temporário
 
-$postgismapa - variavel definida em ms_configura.php
+$postgis_mapa - variavel definida em ms_configura.php
 
 Retorno:
 
