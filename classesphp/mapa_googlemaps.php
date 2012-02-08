@@ -294,6 +294,25 @@ else{
 		$nomer = ($img->imagepath)."imgtemp".nomeRand().".png";
 		$img->saveImage($nomer);
 	}
+	ob_start();
+	// assuming you have image data in $imagedata
+	$img = file_get_contents($nomer);
+	$length = strlen($img);
+	$ft = filemtime($nomer);
+	if (isset($_SERVER["HTTP_IF_MODIFIED_SINCE"]) && (strtotime($_SERVER["HTTP_IF_MODIFIED_SINCE"]) == $ft)) {
+		// Client's cache IS current, so we just respond '304 Not Modified'.
+		header('Last-Modified: '.gmdate('D, d M Y H:i:s', $ft).' GMT', true, 304);
+	} else {
+		// Image not cached or cache outdated, we respond '200 OK' and output the image.
+		header('Last-Modified: '.gmdate('D, d M Y H:i:s', $ft).' GMT', true, 200);
+	}
+	header('Accept-Ranges: bytes');
+	header('Content-Length: '.$length);
+	header('Content-Type: image/png');
+	print($img);
+	ob_end_flush();
+	exit;	
+	/*
 	ob_clean();
 	$img = imagecreatefrompng($nomer);
 	imagealphablending($img, false);
@@ -301,6 +320,7 @@ else{
 	ob_clean();
 	echo header("Content-type: image/png \n\n");
 	imagepng($img);
+	*/
 }
 function salvaCacheImagem($cachedir,$bbox,$layer,$map,$w,$h){
 	global $img,$map_size;

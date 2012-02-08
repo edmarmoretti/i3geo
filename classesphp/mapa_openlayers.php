@@ -59,37 +59,41 @@ i3geo/classesphp/mapa_openlayers.php
 
 */
 error_reporting(0);
+//carrega dados da seção, verifica segurança
 inicializa();
 //
 //map_fileX é necessário caso register_globals = On no PHP.INI
 $map_fileX = $_SESSION["map_file"];
-$postgis_mapa = $_SESSION["postgis_mapa"];
-$cachedir = $_SESSION["cachedir"];
 if(isset($_GET["tipolayer"]) && $_GET["tipolayer"] == "fundo")
 {$map_fileX = str_replace(".map","fundo.map",$map_fileX);}
+$postgis_mapa = $_SESSION["postgis_mapa"];
+$cachedir = $_SESSION["cachedir"];
 if(isset($_GET["BBOX"])){
 	$_GET["mapext"] = str_replace(","," ",$_GET["BBOX"]);
 	$_GET["map_size"] = $_GET["WIDTH"]." ".$_GET["HEIGHT"];
 }
-$mapa = ms_newMapObj($map_fileX); //map_file vem de section
+$mapa = ms_newMapObj($map_fileX);
 //
 //resolve o problema da seleção na versão nova do mapserver
 //
 $qyfile = dirname($map_fileX)."/".$_GET["layer"].".php";
 $qy = file_exists($qyfile);
+//
+//processa os layers do mapfile
+//
 if(!isset($_GET["telaR"])){//no caso de projecoes remotas, o mapfile nao e alterado
 	$numlayers = $mapa->numlayers;
 	$cache = false;
 	for($i = 0;$i < $numlayers;$i++)
 	{
 		$l = $mapa->getLayer($i);
-		$layerName = $l->name;
 		if ($l->getmetadata("classesnome") != "")
 		{
 			if(!function_exists("autoClasses"))
 			{include_once("funcoes_gerais.php");}
 			autoClasses($l,$mapa);
 		}
+		$layerName = $l->name;
 		if($layerName != $_GET["layer"])
 		{$l->set("status",MS_OFF);}
 		if($layerName == $_GET["layer"] || $l->group == $_GET["layer"] && $l->group != "")
@@ -231,7 +235,6 @@ else
 		$l->close();
 	}
 }
-
 if (!function_exists('imagepng'))
 {
 	$s = PHP_SHLIB_SUFFIX;
@@ -265,6 +268,25 @@ else{
 		$nomer = ($img->imagepath)."imgtemp".nomeRand().".png";
 		$img->saveImage($nomer);
 	}
+	ob_start();
+	// assuming you have image data in $imagedata
+	$img = file_get_contents($nomer);
+	$length = strlen($img);
+	$ft = filemtime($nomer);
+	if (isset($_SERVER["HTTP_IF_MODIFIED_SINCE"]) && (strtotime($_SERVER["HTTP_IF_MODIFIED_SINCE"]) == $ft)) {
+		// Client's cache IS current, so we just respond '304 Not Modified'.
+		header('Last-Modified: '.gmdate('D, d M Y H:i:s', $ft).' GMT', true, 304);
+	} else {
+		// Image not cached or cache outdated, we respond '200 OK' and output the image.
+		header('Last-Modified: '.gmdate('D, d M Y H:i:s', $ft).' GMT', true, 200);
+	}
+	header('Accept-Ranges: bytes');
+	header('Content-Length: '.$length);
+	header('Content-Type: image/png');
+	print($img);
+	ob_end_flush();
+	exit;
+/*
 	ob_clean();
 	$img = imagecreatefrompng($nomer);
 	imagealphablending($img, false);
@@ -273,6 +295,7 @@ else{
 	echo header("Content-type: image/png \n\n");
 	imagepng($img);
 	imagedestroy($img);
+*/
 }
 function salvaCacheImagem($cachedir,$bbox,$layer,$map,$w,$h){
 	global $img,$map_size;
