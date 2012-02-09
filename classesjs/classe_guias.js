@@ -908,6 +908,7 @@ i3GEO.guias = {
 		Reposiciona a guia móvel quando o mapa muda de tamanho
 		*/
 		reposiciona: function(){
+			var temp = $i("i3GEOguiaMovel").style.top;
 			i3GEO.guias.guiaMovel.config.guias.icones = [];
 			i3GEO.guias.guiaMovel.config.guias.ids = [];
 			i3GEO.guias.guiaMovel.config.guias.idsconteudos = [];
@@ -920,6 +921,7 @@ i3GEO.guias = {
 			$i("i3GEOguiaMovelMolde").style.display = "none";			
 			i3GEO.guias.escondeGuias();
 			i3GEO.guias.guiaMovel.inicia();
+			$i("i3GEOguiaMovel").style.top = temp;
 		},
 		/*
 		Function: abreFecha

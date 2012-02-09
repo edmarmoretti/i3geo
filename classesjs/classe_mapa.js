@@ -114,7 +114,6 @@ i3GEO.mapa = {
 			var temp,Dw,Dh, r = false;
 			Dw = YAHOO.util.Dom.getViewportWidth();
 			Dh = YAHOO.util.Dom.getViewportHeight();
-			
 			if(Math.abs(Dw - i3GEO.tamanhodoc[0]) > 50){
 				r = true;
 			}
