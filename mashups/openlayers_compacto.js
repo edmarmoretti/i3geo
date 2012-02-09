@@ -3274,7 +3274,7 @@ var layers = i3GEO.editorOL.mapa.layers,
 nlayers = layers.length,
 ins = [];
 for(i=0;i<nlayers;i++){
-if(layers[i].isBaseLayer === false && layers[i].visibility === true){
+if(layers[i].visibility === true){
 ins.push(layers[i]);
 }
 }
