@@ -7,7 +7,7 @@
 <meta name="HandheldFriendly" content="yes" />
 <meta name="MobileOptimized" content="width" />
 <meta name="apple-mobile-web-app-capable" content="yes">
-<title>i3GEO - OpenLayers</title>
+<title>i3GEO - Googlemaps</title>
 <style>
 .listaMenuTitulo{
 	font-size: 13px;
@@ -69,22 +69,21 @@
 </div>
 
 <div id=seletorIdiomas style="position:absolute;top:15px;left:5px;z-index:20000" ></div>
+<script type="text/javascript" src="http://maps.google.com/maps/api/js?sensor=false"></script>
 <script src="../classesjs/i3geo.js"></script>
-<!--<script src="../pacotes/openlayers/OpenLayers29.js.php"></script>-->
-<script src="../pacotes/openlayers/OpenLayers211.js.php"></script>
 <script>
 /*
-Title: Interface Openlayers para tablets
+Title: Interface Googlemaps para tablets
 
-Abre o i3geo com todas as suas funcionalidades e interface de navegação controlada pela API Openlayers adaptada para dispositivos do tipo tablet.
+Abre o i3geo com todas as suas funcionalidades e interface de navegação controlada pela API Googlemaps adaptada para dispositivos do tipo tablet.
 
-File: i3geo/interface/openlayers_t.htm
+File: i3geo/interface/googlemaps_t.htm
 
 Exemplo:
 
 http://<host>/i3geo/ms_criamapa.php
 
-http://<host>/i3geo/interface/openlayers_T.htm
+http://<host>/i3geo/interface/googlemaps_t.htm
 
 http://<host>/i3geo
 
@@ -109,25 +108,17 @@ i3GEO.configura.autotamanho = true;
 
 i3GEO.configura.locaplic = i3GEO.util.protocolo()+"://"+window.location.host+"/i3geo";
 i3GEO.configura.autotamanho = false;
-i3GEO.Interface.ATUAL = "openlayers";
+i3GEO.Interface.ATUAL = "googlemaps";
 i3GEO.Interface.IDCORPO = "contemImg";
 i3GEO.Interface.ALTTABLET = "";
-i3GEO.Interface.openlayers.GADGETS = {
-	PanZoomBar:false,
-	PanZoom:false,
-	LayerSwitcher:false,
-	ScaleLine:false,
-	OverviewMap:false	
-};
-i3GEO.Interface.openlayers.TILES = true;
 
 i3GEO.barraDeBotoes.INCLUIBOTAO = {
-	zoomli: true,
+	zoomli: false,
 	mede: true,
 	area: true,
 	imprimir: true,
-	zoomiauto: true,
-	zoomoauto: true,
+	zoomiauto: false,
+	zoomoauto: false,
 	pan: true,
 	zoomtot:true,
 	identifica: true,
@@ -135,10 +126,10 @@ i3GEO.barraDeBotoes.INCLUIBOTAO = {
 	reinicia: false,
 	exten: false,
 	selecao: true,
-	referencia: true,
+	referencia: false,
 	inserexy: false,
 	textofid: false,
-	google: true,
+	google: false,
 	buscafotos: false,
 	wiki: false,
 	metar: false,
@@ -157,9 +148,8 @@ i3GEO.cria();
 /*
 	Inicializa o mapa
 */
+i3GEO.barraDeBotoes.OFFSET = -10;
 i3GEO.barraDeBotoes.TIPO = "olhodepeixe";
-//ajusta o deslocamento da barra de botões
-i3GEO.barraDeBotoes.OFFSET = -3;
 
 i3GEO.arvoreDeTemas.TIPOBOTAO = "radio";
 i3GEO.arvoreDeTemas.ATIVATEMAIMEDIATO = true;
@@ -171,29 +161,6 @@ i3GEO.guias.CONFIGURA.temas.titulo = $trad("t1");
 i3GEO.idioma.IDSELETOR = "seletorIdiomas";
 i3GEO.configura.mapaRefDisplay = "none";
 i3GEO.mapa.AUTORESIZE = true;
-//
-//esta é uma variável interna do OpenLayers que define o endereço do diretório onde estão as imagens usadas nos ícones
-//
-OpenLayers.ImgPath = "../pacotes/openlayers/img/";
-//
-//adiciona camadas que podem ser ativadas como fundo do mapa
-//
-
-(function(){
-	var bra = new OpenLayers.Layer.WMS( 
-		"Base carto MMA",
-		"http://mapas.mma.gov.br/cgi-bin/mapserv?map=/opt/www/html/webservices/baseraster.map",
-		{layers:"baseraster",srs:"EPSG:4618",format:"image/png",isBaseLayer:false},
-		{isBaseLayer:true,visibility:false}
-	);
-	var osm = new OpenLayers.Layer.WMS( 
-		"Open Street Map",
-		"http://full.wms.geofabrik.de/std/demo_key",
-		{layers:""},
-		{isBaseLayer:true,visibility:false}
-	);
-	i3GEO.Interface.openlayers.LAYERSADICIONAIS = [bra,osm];
-})();
 
 //
 //substitui a janela de alerta normal do navegador por uma janela estilizada. Pode ser comentado sem problemas. No Safari apresentou problemas.

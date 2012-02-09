@@ -1585,9 +1585,11 @@ i3GEO.Interface = {
 			}
 			i3GeoMap = "";
 			i3GEO.Interface.IDMAPA = "googlemapsdiv";
-			i3GEO.barraDeBotoes.INCLUIBOTAO.zoomli = true;
-			i3GEO.barraDeBotoes.INCLUIBOTAO.pan = true;
-			i3GEO.barraDeBotoes.INCLUIBOTAO.zoomtot = true;
+			if(i3GEO.Interface.TABLET === false){
+				i3GEO.barraDeBotoes.INCLUIBOTAO.zoomli = true;
+				i3GEO.barraDeBotoes.INCLUIBOTAO.pan = true;
+				i3GEO.barraDeBotoes.INCLUIBOTAO.zoomtot = true;
+			}
 		},
 		ativaZoomBox: function(){
 			i3GeoMap.enableKeyDragZoom({

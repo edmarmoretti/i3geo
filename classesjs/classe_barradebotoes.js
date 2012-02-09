@@ -266,6 +266,10 @@ i3GEO.barraDeBotoes = {
 	INCLUIBOTAO: {
 
 		zoomli: false,
+		
+		zoomiauto: false,
+		
+		zoomoauto: false
 
 		pan: false,
 
@@ -320,6 +324,8 @@ i3GEO.barraDeBotoes = {
 	INCLUIBOTAO: {
 		localizar: true,
 		zoomli: true,
+		zoomiauto: false,
+		zoomoauto: false,
 		pan: true,
 		zoomtot:true,
 		identifica: true,
@@ -410,6 +416,8 @@ i3GEO.barraDeBotoes = {
 	*/
 	ICONEBOTAO: {
 		zoomli: "/imagens/gisicons/eudock/zoom-region.png",
+		zoomiauto: "/imagens/gisicons/eudock/zoom-in.png",
+		zoomoauto: "/imagens/gisicons/eudock/zoom-out.png",
 		pan: "/imagens/gisicons/eudock/pan.png",
 		zoomtot: "/imagens/gisicons/eudock/zoom-extent.png",
 		identifica: "/imagens/gisicons/eudock/identify.png",
