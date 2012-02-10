@@ -268,34 +268,10 @@ else{
 		$nomer = ($img->imagepath)."imgtemp".nomeRand().".png";
 		$img->saveImage($nomer);
 	}
-	ob_start();
-	// assuming you have image data in $imagedata
-	$img = file_get_contents($nomer);
-	$length = strlen($img);
-	$ft = filemtime($nomer);
-	if (isset($_SERVER["HTTP_IF_MODIFIED_SINCE"]) && (strtotime($_SERVER["HTTP_IF_MODIFIED_SINCE"]) == $ft)) {
-		// Client's cache IS current, so we just respond '304 Not Modified'.
-		header('Last-Modified: '.gmdate('D, d M Y H:i:s', $ft).' GMT', true, 304);
-	} else {
-		// Image not cached or cache outdated, we respond '200 OK' and output the image.
-		header('Last-Modified: '.gmdate('D, d M Y H:i:s', $ft).' GMT', true, 200);
-	}
-	header('Accept-Ranges: bytes');
-	header('Content-Length: '.$length);
+	header('Content-Length: '.filesize($nomer));
 	header('Content-Type: image/png');
-	print($img);
-	ob_end_flush();
+	fpassthru(fopen($nomer, 'rb'));
 	exit;
-/*
-	ob_clean();
-	$img = imagecreatefrompng($nomer);
-	imagealphablending($img, false);
-	imagesavealpha($img, true);
-	ob_clean();
-	echo header("Content-type: image/png \n\n");
-	imagepng($img);
-	imagedestroy($img);
-*/
 }
 function salvaCacheImagem($cachedir,$bbox,$layer,$map,$w,$h){
 	global $img,$map_size;
@@ -309,10 +285,10 @@ function salvaCacheImagem($cachedir,$bbox,$layer,$map,$w,$h){
 	{$cachedir = dirname(dirname($map))."/cache/".$layer;}
 	else
 	{$cachedir = $cachedir."/".$layer;}
-	@mkdir($cachedir,0777);
 	$nome = $cachedir."/".$w.$h.$bbox.".png";
 	if(!file_exists($nome))
 	{
+		@mkdir($cachedir,0777);
 		$img->saveImage($nome);
 		chmod($nome,0777);
 	}
@@ -330,61 +306,31 @@ function carregaCacheImagem($cachedir,$bbox,$layer,$map,$w,$h){
 	{$nome = $cachedir."/".$layer."/".$nome;}
 	if(file_exists($nome))
 	{
+/*
+		header('Accept-Ranges: bytes');
+		header('Content-Length: '.filesize($nome));
+		header('Content-Type: image/png');
+		ob_start;
+		ob_flush();
+		readfile($nome);
+		exit;
+
 		ob_start();
 		// assuming you have image data in $imagedata
 		$img = file_get_contents($nome);
 		$length = strlen($img);
-		$ft = filemtime($nome);
-		if (isset($_SERVER["HTTP_IF_MODIFIED_SINCE"]) && (strtotime($_SERVER["HTTP_IF_MODIFIED_SINCE"]) == $ft)) {
-			// Client's cache IS current, so we just respond '304 Not Modified'.
-			header('Last-Modified: '.gmdate('D, d M Y H:i:s', $ft).' GMT', true, 304);
-		} else {
-			// Image not cached or cache outdated, we respond '200 OK' and output the image.
-			header('Last-Modified: '.gmdate('D, d M Y H:i:s', $ft).' GMT', true, 200);
-		}
 		header('Accept-Ranges: bytes');
 		header('Content-Length: '.$length);
 		header('Content-Type: image/png');
 		print($img);
 		ob_end_flush();
 		exit;
-	}
-	/*
-	if (!function_exists('imagepng'))
-		{
-			$s = PHP_SHLIB_SUFFIX;
-			@dl( 'php_gd2.'.$s );
-			if (!function_exists('imagepng'))
-			@dl( 'php_gd.'.$s );
-		}
-		@$img = imagecreatefrompng($nome);
-		if(!$img)
-		{
-			// Create a blank image
-			$img  = imagecreatetruecolor($w, $h);
-			imagealphablending($img, false);
-			imagesavealpha($img, true);
-
-			$bgc = imagecolorallocatealpha($img, 255, 255, 255,127);
-			$tc  = imagecolorallocate($img, 255, 0, 0);
-
-			imagefilledrectangle($img, 0, 0, $w, $h, $bgc);
-			// Output an error message
-			imagestring($img, 3, 5, 5, 'Erro ao ler ' . $nome, $tc);
-		}
-		else
-		{
-			imagealphablending($img, false);
-			imagesavealpha($img, true);
-		}
-		ob_clean();
-		error_reporting(0);
-		echo header("Content-type: image/png \n\n");
-		imagepng($img);
-		imagedestroy($img);
+*/
+		header('Content-Length: '.filesize($nome));
+		header('Content-Type: image/png');
+		fpassthru(fopen($nome, 'rb'));
 		exit;
 	}
-	*/
 }
 function nomeRand($n=10)
 {

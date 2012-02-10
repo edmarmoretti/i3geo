@@ -294,33 +294,10 @@ else{
 		$nomer = ($img->imagepath)."imgtemp".nomeRand().".png";
 		$img->saveImage($nomer);
 	}
-	ob_start();
-	// assuming you have image data in $imagedata
-	$img = file_get_contents($nomer);
-	$length = strlen($img);
-	$ft = filemtime($nomer);
-	if (isset($_SERVER["HTTP_IF_MODIFIED_SINCE"]) && (strtotime($_SERVER["HTTP_IF_MODIFIED_SINCE"]) == $ft)) {
-		// Client's cache IS current, so we just respond '304 Not Modified'.
-		header('Last-Modified: '.gmdate('D, d M Y H:i:s', $ft).' GMT', true, 304);
-	} else {
-		// Image not cached or cache outdated, we respond '200 OK' and output the image.
-		header('Last-Modified: '.gmdate('D, d M Y H:i:s', $ft).' GMT', true, 200);
-	}
-	header('Accept-Ranges: bytes');
-	header('Content-Length: '.$length);
+	header('Content-Length: '.filesize($nomer));
 	header('Content-Type: image/png');
-	print($img);
-	ob_end_flush();
+	fpassthru(fopen($nomer, 'rb'));
 	exit;	
-	/*
-	ob_clean();
-	$img = imagecreatefrompng($nomer);
-	imagealphablending($img, false);
-	imagesavealpha($img, true);
-	ob_clean();
-	echo header("Content-type: image/png \n\n");
-	imagepng($img);
-	*/
 }
 function salvaCacheImagem($cachedir,$bbox,$layer,$map,$w,$h){
 	global $img,$map_size;
@@ -352,59 +329,11 @@ function carregaCacheImagem($cachedir,$bbox,$layer,$map,$w,$h){
 	{$nome = $cachedir."/googlemaps/".$layer."/".$nome;}
 	if(file_exists($nome))
 	{
-		ob_start();
-		// assuming you have image data in $imagedata
-		$img = file_get_contents($nome);
-		$length = strlen($img);
-		$ft = filemtime($nome);
-		if (isset($_SERVER["HTTP_IF_MODIFIED_SINCE"]) && (strtotime($_SERVER["HTTP_IF_MODIFIED_SINCE"]) == $ft)) {
-			// Client's cache IS current, so we just respond '304 Not Modified'.
-			header('Last-Modified: '.gmdate('D, d M Y H:i:s', $ft).' GMT', true, 304);
-		} else {
-			// Image not cached or cache outdated, we respond '200 OK' and output the image.
-			header('Last-Modified: '.gmdate('D, d M Y H:i:s', $ft).' GMT', true, 200);
-		}
-		header('Accept-Ranges: bytes');
-		header('Content-Length: '.$length);
+		header('Content-Length: '.filesize($nome));
 		header('Content-Type: image/png');
-		print($img);
-		ob_end_flush();
+		fpassthru(fopen($nome, 'rb'));
 		exit;
 	}	
-	/*
-	if(file_exists($nome))
-	{
-		if (!function_exists('imagepng'))
-		{
-			$s = PHP_SHLIB_SUFFIX;
-			@dl( 'php_gd.'.$s );
-			if (!function_exists('imagepng'))
-			{@dl( 'php_gd2.'.$s );}
-		}
-		@$img = imagecreatefrompng($nome);
-		if(!$img)
-		{
-			$img  = imagecreatetruecolor($w, $h);
-			imagealphablending($img, false);
-			imagesavealpha($img, true);
-			$bgc = imagecolorallocatealpha($img, 255, 255, 255,127);
-			$tc  = imagecolorallocate($img, 255, 0, 0);
-			imagefilledrectangle($img, 0, 0, $w, $h, $bgc);
-			imagestring($img, 3, 5, 5, 'Erro ao ler ' . $nome, $tc);
-		}
-		else
-		{
-			imagealphablending($img, false);
-			imagesavealpha($img, true);
-		}
-		ob_clean();
-		error_reporting(0);
-		echo header("Content-type: image/png \n\n");
-		imagepng($img);
-		imagedestroy($img);
-		exit;
-	}
-	*/
 }
 function nomeRand($n=10)
 {

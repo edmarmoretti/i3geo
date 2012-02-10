@@ -163,20 +163,15 @@ MAP
 			#"MENSAGEM" "Isto é um teste de mensagem"
 		END
 		NAME "zee"
-		SIZEUNITS PIXELS
 		STATUS DEFAULT
-		TOLERANCE 0
-		TOLERANCEUNITS PIXELS
 		TYPE POLYGON
 		CLASS
 		    NAME " "
-			COLOR 137 201 255
+			OUTLINECOLOR 137 201 255
 		END
 	END
-	
 	LAYER
 		DATA "c:\ms4w\apache\htdocs\i3geo/aplicmap/dados/mundo"
-		GROUP "mundo"
 		METADATA
 			"CLASSE"	"SIM" #o simbolo sera mostrado na legenda
 			"ITENS"	"FIPS_CNTRY,GMI_CNTRY,LONG_NAME,CNTRY_NAME" #itens que serao mostrados na opcao de identificacao
@@ -190,49 +185,17 @@ MAP
 			"itembuscarapida" "LONG_NAME"
 		END
 		NAME "mundo"
-		SIZEUNITS PIXELS
 		STATUS DEFAULT
 		TEMPLATE "none.htm"
-		TOLERANCE 0
-		TOLERANCEUNITS PIXELS
-		TRANSPARENCY 100
 		TYPE POLYGON
-		UNITS METERS
 		CLASS
 			NAME " " #vazio indica que nao sera incluido o nome ao lado do simbolo
 			STYLE
 				COLOR 230 230 230
-				SIZE 1
-				SYMBOL 0
+				OUTLINECOLOR 255 255 255
 			END
 		END
 	END
-	LAYER
-		DATA "c:\ms4w\apache\htdocs\i3geo/aplicmap/dados/mundo"
-		GROUP "mundo"
-		METADATA
-			"CLASSE"	"NAO"
-			"TEMA" "linha"
-			"TEMA"	"NAO"
-			"ESCONDIDO" "SIM"
-			"cache" "sim"
-		END
-		NAME "mundo2"
-		SIZEUNITS PIXELS
-		STATUS DEFAULT
-		TOLERANCE 0
-		TOLERANCEUNITS PIXELS
-		TRANSPARENCY 100
-		TYPE LINE
-		UNITS METERS
-		CLASS
-			STYLE
-				COLOR 255 255 255
-				WIDTH 3
-			END
-		END
-	END
-	
 	LAYER
 		DATA "c:\ms4w\apache\htdocs\i3geo/aplicmap/dados/estados"
 		METADATA
@@ -245,21 +208,12 @@ MAP
 			"cache" "sim"
 		END
 		NAME "estados"
-		SIZEUNITS PIXELS
 		STATUS DEFAULT
-		TOLERANCE 0
-		TOLERANCEUNITS PIXELS
-		TRANSPARENCY 100
 		TYPE POLYGON
-		UNITS METERS
 		CLASS
 			NAME " "
 			STYLE
 				COLOR 232 220 201
-				MAXSIZE 100
-				MINSIZE 1
-				SIZE 1
-				SYMBOL 0
 			END
 		END
 	END
