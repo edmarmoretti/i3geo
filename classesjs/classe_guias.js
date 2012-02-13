@@ -816,7 +816,6 @@ i3GEO.guias = {
 			{temp.height = "37px";}
 			temp.zIndex = 5;
 			temp.paddingTop = "2px";
-			
 			temp = $i("i3GEOguiaMovelConteudo").style;
 			temp.left = "1px";
 			temp.top = "38px";
@@ -826,17 +825,19 @@ i3GEO.guias = {
 			else
 			{temp.width = (config.larguraGuiaMovel - 5) + "px";}
 			temp.paddingLeft = "4px";
-
 			YAHOO.util.Dom.setStyle("i3GEOguiaMovelConteudo", "opacity", 0.90);
 			YAHOO.util.Dom.setStyle("i3GEOguiaMovelIcones", "opacity", 0.90);
 			YAHOO.util.Dom.setStyle("i3GEOguiaMovelMolde", "opacity", 0.10);
-
 			$i("i3GEOguiaMovelMolde").onmouseover = function(){
 				if($i("i3GEOguiaMovelConteudo").style.display === "block")
 				{YAHOO.util.Dom.setStyle("i3GEOguiaMovelMolde", "opacity", 0.9);}
+				if($i("i3GEOguiaMovelIcones").innerHTML === "")
+				{i3GEO.guias.guiaMovel.mostraIcones();}
 			};
 			$i("i3GEOguiaMovelMolde").onmouseout = function(){
 				YAHOO.util.Dom.setStyle("i3GEOguiaMovelMolde", "opacity", 0.20);
+				if($i("i3GEOguiaMovelIcones").innerHTML === "")
+				{i3GEO.guias.guiaMovel.mostraIcones();}				
 			};
 			i3GEO.guias.guiaMovel.ativa(i3GEO.guias.ATUAL);
 			if(i3GEO.guias.guiaMovel.ABERTA === true)

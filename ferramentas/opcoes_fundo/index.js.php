@@ -137,6 +137,8 @@ i3GEOF.opcoesFundo = {
 	Function: executa
 	
 	Aplica a nova cor
+	
+	A cor do fundo na interface Openlayers é definida por meio de estilo, mas é necessário persistir a cor no mapfile existente no servidor.
 	*/
 	executa: function(){
 		if(i3GEOF.opcoesFundo.aguarde.visibility === "visible")
@@ -145,9 +147,11 @@ i3GEOF.opcoesFundo = {
 		var temp = function(){
 				i3GEOF.opcoesFundo.aguarde.visibility = "hidden";
 				if(i3GEO.Interface.ATUAL === "openlayers"){
-					var layer = i3geoOL.getLayersByName("Nenhum")[0];
-					layer.mergeNewParams({"DESLIGACACHE":"sim"});
-					layer.mergeNewParams({r:Math.random()});
+					//var layer = i3geoOL.getLayersByName("Nenhum")[0];
+					//layer.mergeNewParams({"DESLIGACACHE":"sim"});
+					//layer.mergeNewParams({r:Math.random()});
+					if($i(i3geoOL.id+"_events"))
+					{$i(i3geoOL.id+"_events").style.backgroundColor = "rgb("+$i("i3GEOopcoesFundocor").value+")";}					
 				}
 				i3GEO.atualiza();
 			},

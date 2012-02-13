@@ -811,12 +811,14 @@ Altera a cor do fundo do mapa.
 		$m->corfundo($cor);
 		$m->salva();
 		//no caso da interface openlayers, o mapfile é outro
+		/*
 		$nomefundo = str_replace(".map","fundo.map",$map_file);
 		if(file_exists($nomefundo)){
 			$m = new Mapa($nomefundo);
 			$m->corfundo($cor);
 			$m->salva();
 		}
+		*/
 		$_SESSION["contadorsalva"]++;
 		redesenhaMapa();
 	break;
@@ -830,11 +832,14 @@ Pega a cor do fundo do mapa atual.
 	case "PEGACORFUNDO":
 		include_once("classe_mapa.php");
 		//no caso da interface openlayers, o mapfile é outro
+		/*
 		$nomefundo = str_replace(".map","fundo.map",$map_file);
 		if(file_exists($nomefundo) && $interface == "openlayers")
 		{$m = new Mapa($nomefundo);}
 		else
 		{$m = new Mapa($map_file);}
+		*/
+		$m = new Mapa($map_file);
 		$retorno = $m->corfundo("");
 	break;	
 /*

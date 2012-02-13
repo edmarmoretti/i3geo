@@ -163,7 +163,7 @@ MAP
 			#"MENSAGEM" "Isto é um teste de mensagem"
 		END
 		NAME "zee"
-		STATUS DEFAULT
+		STATUS default
 		TYPE POLYGON
 		CLASS
 		    NAME " "

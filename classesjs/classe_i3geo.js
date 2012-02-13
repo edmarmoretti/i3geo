@@ -118,6 +118,8 @@ i3GEO = {
 	autenticadoopenid {sim|nao} - indica se o usuário foi autenticado em alguma rede social
 
 	editor {sim|nao} - indica se o usuário atual é um editor (administrador)
+	
+	cordefundo {r,g,b}
 	*/
 	parametros: {
 		mapexten: "",
@@ -145,7 +147,8 @@ i3GEO = {
 		mensageminicia:"",
 		interfacePadrao:"geral.htm",
 		embedLegenda:"nao",
-		autenticadoopenid:"nao"
+		autenticadoopenid:"nao",
+		cordefundo: ""
 	},
 	/*
 	Propriedade: scrollerWidth

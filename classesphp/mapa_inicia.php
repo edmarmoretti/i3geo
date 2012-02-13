@@ -105,7 +105,7 @@ function iniciaMapa()
 	{$editor = "nao";}
 	if(!isset($kmlurl))
 	{$kmlurl = "";}
-	error_reporting(E_ALL);
+	error_reporting(0);
 	//
 	//pega o xml com os sietmas para identificação
 	//
@@ -153,7 +153,7 @@ function iniciaMapa()
 	$urli3geo = str_replace("/classesphp/mapa_controle.php","",$protocolo.$_SERVER["PHP_SELF"]);
 	//altera o tamanho do query map para ficar igual ao do mapa
 	include_once("classe_mapa.php");
-	error_reporting(E_ALL);
+	error_reporting(0);
 	if(!function_exists("sobeAnno")){
 		include_once("funcoes_gerais.php");
 	}
@@ -165,7 +165,7 @@ function iniciaMapa()
 		$m = new Mapa($map_file);
 		$m->mapa->setsize($w,$h);
 	}
-	error_reporting(E_ALL);
+	error_reporting(0);
 	//
 	//verifica se a legenda deve ser embebida no mapa
 	//
@@ -213,6 +213,7 @@ function iniciaMapa()
 	//é necessário um mapa para compor o fundo apenas com o imagecolor e sem nenhuma outra camada
 	//utilizado em algumas interfaces
 	//
+	/*
 	$nomefundo = str_replace(".map","fundo.map",$map_file);
 	$m->mapa->save($nomefundo);
 	$mf = ms_newMapObj($nomefundo);
@@ -225,17 +226,10 @@ function iniciaMapa()
 	$of = $mf->outputformat;
 	$of->set("driver","GD/PNG");
 	$versao = versao();
-	/*
-	$versao = versao();
-	if($versao["principal"] == 6)
-	{$of->set("driver","GD/PNG");}
-	else
-	{$of->set("driver","AGG/PNG");}
-	*/
 	$temp = $mf->scalebar;
 	$temp->set("status",MS_OFF);
 	$mf->save($nomefundo);
-	//
+	*/
 	$temp = $m->mapa->scalebar;
 	$temp->set("status",MS_OFF);		
 	$of = $m->mapa->outputformat;
@@ -243,11 +237,7 @@ function iniciaMapa()
 	$of->setOption("QUANTIZE_FORCE","OFF");
 	$of->set("driver","AGG/PNG");		
 	$m->mapa->setmetadata("interface",$interface);
-	//$iref = $m->mapa->reference;
-	//$m->mapa->setmetadata("referencew",$iref->width);
-	//$m->mapa->setmetadata("referenceh",$iref->height);
 	$m->salva();
-
 	$nomes = nomeRandomico(12);
 	if($imgo->imagepath == "")
 	{echo "Erro IMAGEPATH vazio";exit;}	
@@ -257,8 +247,8 @@ function iniciaMapa()
 	{$nomer = $locmapserv."?map=".$map_file."&mode=map";}
 	else
 	{$nomer = ($imgo->imageurl).basename($nomer);}
-	//$iref = $m->mapa->reference;
-	//$irefH = $iref->height;
+	$c = $m->mapa->imagecolor;
+	$cordefundo = $c->red.",".$c->green.",".$c->blue;
 	$res["editor"] = $editor;
 	$res["mapexten"] = $ext;
 	$res["mapscale"] = $escalaMapa;
@@ -276,8 +266,7 @@ function iniciaMapa()
 	{$geoip = "sim";}
 	$res["geoip"] = $geoip;
 	$res["listavisual"] = (file_exists($locaplic."/imagens/visual")) ? implode(",",listaDiretorios($locaplic."/imagens/visual")) : "";					
-	$res["utilizacgi"] = $utilizacgi;					
-	
+	$res["utilizacgi"] = $utilizacgi;
 	$res["versaoms"] = $versao["principal"];
 	$res["versaomscompleta"] = $versao["completa"];
 	$res["mensagens"] = $m->pegaMensagens();
@@ -301,6 +290,7 @@ function iniciaMapa()
 	else
 	{$res["autenticadoopenid"] = "nao";}
 	$res["emailInstituicao"] = $emailInstituicao;
+	$res["cordefundo"] = $cordefundo;
 	copy($map_file,(str_replace(".map","reinc.map",$map_file)));
 	copy($map_file,(str_replace(".map","seguranca.map",$map_file)));
 	ob_clean();

@@ -712,7 +712,7 @@ i3GEO.Interface = {
 		/*
 		Propriedade: FUNDOTEMA
 
-		Estilo "background" do nome dotema enquanto o mesmo está sendo carregado.
+		Estilo "background" do nome do tema na árvore de camadas enquanto o mesmo está sendo carregado.
 		
 		Permite destacar o nome do tema que está em processo de carregamento
 
@@ -855,7 +855,8 @@ i3GEO.Interface = {
 					minResolution: "auto",
 					minExtent: new OpenLayers.Bounds(mi[0],mi[1],mi[2],mi[3]),
 					maxResolution: "auto",
-					maxExtent: new OpenLayers.Bounds(ma[0],ma[1],ma[2],ma[3])
+					maxExtent: new OpenLayers.Bounds(ma[0],ma[1],ma[2],ma[3]),
+					allOverlays: false
 				});
 			}
 		},
@@ -875,7 +876,7 @@ i3GEO.Interface = {
 					],
 					function(){}
 				);
-				openlayers.criaLayers();
+				
 				if(openlayers.GADGETS.PanZoomBar === true){
 					i3GEO.Interface.openlayers.OLpanzoombar = new OpenLayers.Control.PanZoomBar();
 					i3geoOL.addControl(i3GEO.Interface.openlayers.OLpanzoombar);
@@ -888,6 +889,7 @@ i3GEO.Interface = {
 					i3geoOL.addControl(pz);
 					pz.div.style.zIndex = 5000;
 				}
+				openlayers.criaLayers();
 				//
 				//insere a lista de layers de fundo
 				//
@@ -909,6 +911,7 @@ i3GEO.Interface = {
 					if(openlayers.GADGETS.LayerSwitcher === true)
 					{i3geoOL.addControl(new OpenLayers.Control.LayerSwitcher());}
 				}
+				i3geoOL.allOverlays = false;
 				if(openlayers.GADGETS.ScaleLine === true){
 					pz = new OpenLayers.Control.ScaleLine();
 					i3geoOL.addControl(pz);
@@ -1147,6 +1150,7 @@ i3GEO.Interface = {
 			//
 			//verifica se algum layer adicional é do tipo baselayer. Se for, adiciona o layer fundo, mas não como base
 			//
+			
 			try{
 				temp = i3GEO.Interface.openlayers.LAYERSADICIONAIS;
 				n = temp.length;
@@ -1156,9 +1160,13 @@ i3GEO.Interface = {
 				}
 			}
 			catch(e){}
+			//define a cor do fundo do mapa com base em um layer do tipo vector chamado Nenhum
 			if(i3geoOL.getLayersByName("Nenhum").length === 0 && fundoIsBase === true){
-				layer = new OpenLayers.Layer.WMS( "Nenhum", urlfundo,{map_imagetype:i3GEO.Interface.OUTPUTFORMAT},{ratio: 1,singleTile:true,isBaseLayer:true, opacity: 1,visibility:true});
+				//layer = new OpenLayers.Layer.WMS( "Nenhum", urlfundo,{map_imagetype:i3GEO.Interface.OUTPUTFORMAT},{ratio: 1,singleTile:false,isBaseLayer:true, opacity: 1,visibility:false});
+				layer = new OpenLayers.Layer.Vector("Nenhum",{displayInLayerSwitcher:true,visibility:false,isBaseLayer:true,singleTile:true});
 				i3geoOL.addLayer(layer);
+				if($i(i3geoOL.id+"_events"))
+				{$i(i3geoOL.id+"_events").style.backgroundColor = "rgb("+i3GEO.parametros.cordefundo+")";}
 			}
 			opcoes = {
 				gutter:0,
