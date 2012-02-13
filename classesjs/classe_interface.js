@@ -1145,10 +1145,16 @@ i3GEO.Interface = {
 				n,
 				temp,
 				fundoIsBase = true;
+
+
+			var temp = $i("i3GEOprogressoDiv");
+			if(temp){
+				i3GEO.Interface.STATUS.atualizando = [];
+				temp.style.display = "none";
+			}
 			//
 			//verifica se algum layer adicional é do tipo baselayer. Se for, adiciona o layer fundo, mas não como base
 			//
-			
 			try{
 				temp = i3GEO.Interface.openlayers.LAYERSADICIONAIS;
 				n = temp.length;
@@ -1284,26 +1290,30 @@ i3GEO.Interface = {
 			}
 		},
 		loadStartLayer: function(event){
-			var p = $i("i3GEOprogressoDiv");
-			i3GEO.Interface.STATUS.atualizando.push(event.object.name);
-			YAHOO.util.Dom.setStyle("ArvoreTituloTema"+event.object.name,"background",i3GEO.Interface.openlayers.FUNDOTEMA);
-			if(p){
-				p.style.display = "block";
-				i3GEO.arvoreDeCamadas.progressBar.set('maxValue',i3GEO.Interface.STATUS.atualizando.length);
-				i3GEO.arvoreDeCamadas.progressBar.set('value',i3GEO.arvoreDeCamadas.progressBar.get('value') - 1);
+			var p = $i("i3GEOprogressoDiv");		
+			if($i("ArvoreTituloTema"+event.object.name)){
+				i3GEO.Interface.STATUS.atualizando.push(event.object.name);
+				YAHOO.util.Dom.setStyle("ArvoreTituloTema"+event.object.name,"background",i3GEO.Interface.openlayers.FUNDOTEMA);	
+				if(p){
+					p.style.display = "block";
+					i3GEO.arvoreDeCamadas.progressBar.set('maxValue',i3GEO.Interface.STATUS.atualizando.length);
+					i3GEO.arvoreDeCamadas.progressBar.set('value',i3GEO.arvoreDeCamadas.progressBar.get('value') - 1);
+				}
 			}
 		},
 		loadStopLayer: function(event){
 			var p = $i("i3GEOprogressoDiv");
 			i3GEO.Interface.STATUS.atualizando.remove(event.object.name);
-			YAHOO.util.Dom.setStyle("ArvoreTituloTema"+event.object.name,"background","");
-			if(p){
-				p.style.display = "block";
-				if(i3GEO.Interface.STATUS.atualizando.length > 0)
-				{i3GEO.arvoreDeCamadas.progressBar.set('value',i3GEO.arvoreDeCamadas.progressBar.get('value') + 1);}
-				else{
-					i3GEO.arvoreDeCamadas.progressBar.set('value',0);
-					p.style.display = "none";
+			if($i("ArvoreTituloTema"+event.object.name)){
+				YAHOO.util.Dom.setStyle("ArvoreTituloTema"+event.object.name,"background","");
+				if(p){
+					p.style.display = "block";
+					if(i3GEO.Interface.STATUS.atualizando.length > 0)
+					{i3GEO.arvoreDeCamadas.progressBar.set('value',i3GEO.arvoreDeCamadas.progressBar.get('value') + 1);}
+					else{
+						i3GEO.arvoreDeCamadas.progressBar.set('value',0);
+						p.style.display = "none";
+					}
 				}
 			}
 		},

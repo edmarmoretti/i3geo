@@ -87,6 +87,7 @@ i3GEO.mapa = {
 		novoel.style.top = i3GEO.parametros.h - 35 + "px";
 		novoel.style.zIndex = "50000";
 		novoel.style.left = i3GEO.parametros.w - 35 + "px";
+		YAHOO.util.Event.addListener(novoel, "click", YAHOO.util.Event.stopPropagation);
 		$i(i3GEO.Interface.IDMAPA).appendChild(novoel);
 	},
 	/*
