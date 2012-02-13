@@ -207,8 +207,14 @@ i3GEO.mapa = {
 		if(typeof(console) !== 'undefined'){console.info("i3GEO.mapa.ativaLogo()");}
 		if(i3GEO.Interface.ATUAL === "googlemaps")
 		{alert("Essa operação não funciona nessa interface");return;}
-		//i3GEO.contadorAtualiza++;
 		i3GEO.php.ativalogo(i3GEO.atualiza);
+		var cr = $i("i3GEOcopyright");
+		if(cr){
+			if(cr.style.display === "block")
+			{cr.style.display = "none";}
+			else
+			{cr.style.display = "block";}
+		}
 	},
 	/*
 	Function: verifica

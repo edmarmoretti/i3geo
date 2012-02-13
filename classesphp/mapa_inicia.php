@@ -110,7 +110,6 @@ function iniciaMapa()
 	//pega o xml com os sietmas para identificação
 	//
 	if(!isset($interface)){$interface = "";}
-	
 	if($interface == "googlemaps" || $interface == "googleearth")
 	{	
 		$m = ms_newMapObj($map_file);
@@ -230,6 +229,7 @@ function iniciaMapa()
 	$temp->set("status",MS_OFF);
 	$mf->save($nomefundo);
 	*/
+	$versao = versao();
 	$temp = $m->mapa->scalebar;
 	$temp->set("status",MS_OFF);		
 	$of = $m->mapa->outputformat;
@@ -247,8 +247,22 @@ function iniciaMapa()
 	{$nomer = $locmapserv."?map=".$map_file."&mode=map";}
 	else
 	{$nomer = ($imgo->imageurl).basename($nomer);}
+	//pega a cor de fundo do mapa
 	$c = $m->mapa->imagecolor;
 	$cordefundo = $c->red.",".$c->green.",".$c->blue;
+	//pega o texto de copyright
+	$copyright = "";
+	$lc = $m->mapa->getlayerbyname("copyright");
+	if($lc != "" && $lc->status == MS_DEFAULT ){
+		if($versao["principal"] == 6){
+			$shape = $lc->getShape(new resultObj(0));
+			$copyright = $shape->text;
+		}		
+		else{
+			$shape = $lc->getfeature(0,-1);
+			$copyright = $shape->text;
+		}		
+	}
 	$res["editor"] = $editor;
 	$res["mapexten"] = $ext;
 	$res["mapscale"] = $escalaMapa;
@@ -291,6 +305,7 @@ function iniciaMapa()
 	{$res["autenticadoopenid"] = "nao";}
 	$res["emailInstituicao"] = $emailInstituicao;
 	$res["cordefundo"] = $cordefundo;
+	$res["copyright"] = $copyright;
 	copy($map_file,(str_replace(".map","reinc.map",$map_file)));
 	copy($map_file,(str_replace(".map","seguranca.map",$map_file)));
 	ob_clean();

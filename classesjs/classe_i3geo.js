@@ -120,6 +120,8 @@ i3GEO = {
 	editor {sim|nao} - indica se o usuário atual é um editor (administrador)
 	
 	cordefundo {r,g,b}
+	
+	copyright {String} - texto existente no Layer copyright do mapfile de inicialização
 	*/
 	parametros: {
 		mapexten: "",
@@ -148,7 +150,8 @@ i3GEO = {
 		interfacePadrao:"geral.htm",
 		embedLegenda:"nao",
 		autenticadoopenid:"nao",
-		cordefundo: ""
+		cordefundo: "",
+		copyright: ""
 	},
 	/*
 	Propriedade: scrollerWidth
