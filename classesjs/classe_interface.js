@@ -911,7 +911,6 @@ i3GEO.Interface = {
 					if(openlayers.GADGETS.LayerSwitcher === true)
 					{i3geoOL.addControl(new OpenLayers.Control.LayerSwitcher());}
 				}
-				i3geoOL.allOverlays = false;
 				if(openlayers.GADGETS.ScaleLine === true){
 					pz = new OpenLayers.Control.ScaleLine();
 					i3geoOL.addControl(pz);
