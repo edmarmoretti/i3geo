@@ -52,7 +52,7 @@ var Balloon = function () {
 	this.trackCursor = true;
 	
 	// Track the cursor every time the mouse moves
-	document.onmousemove = this.setActiveCoordinates;
+	//document.onmousemove = this.setActiveCoordinates;
 	
 	// scrolling aborts visible balloons
 	var myObject = this.isIE() ? window : document;
@@ -814,7 +814,7 @@ Balloon.prototype.setActiveCoordinates = function(evt) {
 	
 	//var XY = self.eventXY(evt);
 	var XY = [self.x,self.y];
-	adjustment   = self.hOffset < 20 ? 10 : 0;
+	var adjustment   = self.hOffset < 20 ? 10 : 0;
 	self.activeTop    = scrollTop  + XY[1] - adjustment - self.vOffset - self.stemHeight;
 	self.activeLeft   = scrollLeft + XY[0] - adjustment - self.hOffset;
 	self.activeRight  = scrollLeft + XY[0];
