@@ -578,7 +578,7 @@ i3GEO.configura = {
 	Default:
 	{true}
 	*/
-	iniciaJanelaMensagens: true,
+	iniciaJanelaMensagens: false,
 	/*
 	Propriedade: mostraRosaDosVentos
 

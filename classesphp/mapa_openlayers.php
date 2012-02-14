@@ -133,8 +133,8 @@ if(!isset($_GET["telaR"])){//no caso de projecoes remotas, o mapfile nao e alter
 		}
 	}
 }
-if($qy || $_GET["HEIGHT"] != 256 )
-{$cache = false;}
+//if($qy || $_GET["HEIGHT"] != 256 )
+//{$cache = false;}
 if($_GET["layer"] == "")
 {$cache = true;}
 if($_GET == false)
@@ -244,6 +244,7 @@ if (!function_exists('imagepng'))
 	if (!function_exists('imagepng'))
 	{$_GET["TIPOIMAGEM"] = "";}
 }
+
 if(trim($_GET["TIPOIMAGEM"]) != "" && trim($_GET["TIPOIMAGEM"]) != "nenhum")
 {
 	if($img->imagepath == "")

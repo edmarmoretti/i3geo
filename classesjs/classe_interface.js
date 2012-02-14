@@ -1202,7 +1202,7 @@ i3GEO.Interface = {
 						if(camada.connectiontype === 7 && camada.wmsurl !== "" && camada.usasld.toLowerCase() != "sim"){
 							urllayer = camada.wmsurl+"&r="+Math.random();
 							layer = new OpenLayers.Layer.WMS(camada.name, urllayer,{LAYERS:camada.name,format:camada.wmsformat,transparent:true},opcoes);
-							if(camada.wmssrs != "")
+							if(camada.wmssrs != "" && layer.url)
 							{layer.url = layer.url+"&SRS="+camada.wmssrs+"&CRS="+camada.wmssrs;}
 						}
 						else{
@@ -1282,11 +1282,13 @@ i3GEO.Interface = {
 				url,
 				reg;
 			for(i=0;i<nlayers;i += 1){
-				url = layers[i].url;
-				reg = new RegExp(parametro+"([=])+([a-zA-Z0-9_]*)");
-				layers[i].url = url.replace(reg,"");
-				eval("layers[i].mergeNewParams({"+parametro+":valor})");
-				layers[i].redraw();
+				if(layers[i].url){
+					url = layers[i].url;
+					reg = new RegExp(parametro+"([=])+([a-zA-Z0-9_]*)");
+					layers[i].url = url.replace(reg,"");
+					eval("layers[i].mergeNewParams({"+parametro+":valor})");
+					layers[i].redraw();
+				}
 			}
 		},
 		loadStartLayer: function(event){
@@ -1380,21 +1382,25 @@ i3GEO.Interface = {
 				nlayers = layers.length,
 				i;
 			for(i=0;i<nlayers;i++){
-				layers[i].mergeNewParams({r:Math.random()});
-				layers[i].url = layers[i].url.replace("&&&&&&&&&&&&&&","");
-				layers[i].url = layers[i].url+"&&";				
-				if(layers[i].visibility === true){
-					layers[i].redraw();
+				if(layers[i].url){
+					layers[i].mergeNewParams({r:Math.random()});
+					layers[i].url = layers[i].url.replace("&&&&&&&&&&&&&&","");
+					layers[i].url = layers[i].url+"&&";				
+					if(layers[i].visibility === true){
+						layers[i].redraw();
+					}
 				}
 			}
 		},
 		atualizaTema:function(retorno,tema){
 			var layer = i3geoOL.getLayersByName(tema)[0];
 			if(layer && layer != undefined){
-				layer.mergeNewParams({r:Math.random()});
-				layer.url = layer.url.replace("&&&&&&&&&&&&&&","");
-				layer.url = layer.url+"&&";
-				layer.redraw();
+				if(layers[i].url){
+					layer.mergeNewParams({r:Math.random()});
+					layer.url = layer.url.replace("&&&&&&&&&&&&&&","");
+					layer.url = layer.url+"&&";
+					layer.redraw();
+				}
 			}
 			if(retorno === "")
 			{return;}

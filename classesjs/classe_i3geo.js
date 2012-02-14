@@ -345,11 +345,13 @@ i3GEO = {
 						abreJM = i3GEO.util.pegaCookie("botoesAjuda");
 						i3GEO.barraDeBotoes.AJUDA = (abreJM === "sim") ? true : false;
 					}
+					/*
 					abreJM = "sim";
 					if(i3GEO.util.pegaCookie("g_janelaMen")){
 						abreJM = i3GEO.util.pegaCookie("g_janelaMen");
 						i3GEO.configura.iniciaJanelaMensagens = (abreJM === "sim") ? true : false;
 					}
+					*/
 					if(i3GEO.configura.iniciaJanelaMensagens === true)
 					{i3GEO.ajuda.abreJanela();}
 					if (i3GEO.configura.liberaGuias.toLowerCase() === "sim")
