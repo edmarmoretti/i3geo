@@ -758,21 +758,24 @@ i3GEO.barraDeBotoes = {
 			titulo,
 			i,
 			dock = new euDock(),
-			temp = "",
+			temp = "dockBg-r.png",
 			chaves = i3GEO.util.listaChaves(i3GEO.barraDeBotoes.INCLUIBOTAO),
 			n = chaves.length,
 			preload;
 		preload = new Image();
 		preload.src = i3GEO.configura.locaplic+"/imagens/gisicons/eudock/sobe1.png";
 		dock.setObjectAlign(i3GEO.Interface.IDCORPO,euDOWN,(parseInt(document.body.style.height,10))*-1 + i3GEO.barraDeBotoes.OFFSET,euUP);   
+		if(i3GEO.barraDeBotoes.MAXBOTOES >= chaves.length)
+		{temp = "dockBg-r2.png";}
 		dock.setBar({
 			left:{euImage:{image:i3GEO.configura.locaplic+"/pacotes/eudock/barImages/dockBg-l.png"}},
 			horizontal:{euImage:{image:i3GEO.configura.locaplic+"/pacotes/eudock/barImages/dockBg-c-o.png"}},
-			right:{euImage:{image:i3GEO.configura.locaplic+"/pacotes/eudock/barImages/dockBg-r.png"}}
+			right:{euImage:{image:i3GEO.configura.locaplic+"/pacotes/eudock/barImages/"+temp}}
 		});   
 		dock.setIconsOffset(7); 
 		if(i3GEO.barraDeBotoes.MAXBOTOES > 0)
 		{n = i3GEO.barraDeBotoes.MAXBOTOES;}
+		
 		for(i=0;i<n;i+=1){
 			if(i3GEO.barraDeBotoes.INCLUIBOTAO[chaves[i]] && i3GEO.barraDeBotoes.INCLUIBOTAO[chaves[i]] === true){
 				botao = i3GEO.barraDeBotoes.defBotao(chaves[i]);

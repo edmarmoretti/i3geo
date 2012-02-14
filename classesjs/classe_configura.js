@@ -970,6 +970,8 @@ i3GEO.configura = {
 					if (g_operacao === "identifica"){
 						eval(i3GEO.configura.funcaoTip);
 					}
+					else
+					{i3GEO.eventos.MOUSEPARADO.remove("verificaTip()");}
 				};
 				if(i3GEO.eventos.MOUSECLIQUE.toString().search("cliqueIdentifica()") > 0)
 				{i3GEO.eventos.MOUSECLIQUE.remove("cliqueIdentifica()");}
