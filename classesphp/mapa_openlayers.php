@@ -271,6 +271,7 @@ else{
 	}
 	header('Content-Length: '.filesize($nomer));
 	header('Content-Type: image/png');
+	header('Cache-Control: max-age=3600, must-revalidate');
 	fpassthru(fopen($nomer, 'rb'));
 	exit;
 }
@@ -329,6 +330,7 @@ function carregaCacheImagem($cachedir,$bbox,$layer,$map,$w,$h){
 */
 		header('Content-Length: '.filesize($nome));
 		header('Content-Type: image/png');
+		header('Cache-Control: max-age=3600, must-revalidate');
 		fpassthru(fopen($nome, 'rb'));
 		exit;
 	}
