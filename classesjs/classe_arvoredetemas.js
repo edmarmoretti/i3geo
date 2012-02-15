@@ -1029,7 +1029,7 @@ i3GEO.arvoreDeTemas = {
 				{mostra = false;}
 				if(i3GEO.arvoreDeTemas.FILTRAOGC && raiz[i].ogc === "nao")
 				{mostra = false;}
-				if(mostra){
+				if(mostra && raiz[i].nome != ""){
 					tempNode = new YAHOO.widget.HTMLNode(
 						{isLeaf:false,enableHighlight:false,expanded:false,html:i3GEO.arvoreDeTemas.montaTextoTema("gray",raiz[i])},
 						node
@@ -1046,7 +1046,7 @@ i3GEO.arvoreDeTemas = {
 				{editor = "<img title='Editar subgrupos' onclick='i3GEO.arvoreDeTemas.abrejanelaIframe(\"900\",\"500\",\""+i3GEO.configura.locaplic+"/admin/html/arvore.html?id_menu="+node.data.idmenu+"&id_grupo="+grupos[i].id_n1+"\")' style='width:11px;position:relative;left:3px;top:2px;' src='"+i3GEO.configura.locaplic+"/imagens/edit.gif' />";}
 				else
 				{editor = "";}
-				if(mostra){
+				if(mostra && grupos[i].nome != undefined ){
 					//se id_n1 existir, significa que os grupos possuem id, pois são oriundos do sistema
 					//de administração
 					//no caso do uso de menu de temas com base em arquivos xml, o id não existe
@@ -1120,7 +1120,7 @@ i3GEO.arvoreDeTemas = {
 				{editor = "<img title='Editar temas' onclick='i3GEO.arvoreDeTemas.abrejanelaIframe(\"900\",\"500\",\""+i3GEO.configura.locaplic+"/admin/html/arvore.html?id_menu="+node.data.idmenu+"&id_grupo="+node.data.idgrupo+"&id_subgrupo="+subgrupos[i].id_n2+"\")' style='width:11px;position:relative;left:3px;top:2px;' src='"+i3GEO.configura.locaplic+"/imagens/edit.gif' />";}
 				else
 				{editor = "";}
-				if(mostra){
+				if(mostra && subgrupos[i].nome != undefined ){
 					//se id_n2 existir, significa que os grupos possuem id, pois são oriundos do sistema
 					//de administração
 					//no caso do uso de menu de temas com base em arquivos xml, o id não existe
