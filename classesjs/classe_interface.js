@@ -1395,7 +1395,7 @@ i3GEO.Interface = {
 		atualizaTema:function(retorno,tema){
 			var layer = i3geoOL.getLayersByName(tema)[0];
 			if(layer && layer != undefined){
-				if(layers[i].url){
+				if(layer.url){
 					layer.mergeNewParams({r:Math.random()});
 					layer.url = layer.url.replace("&&&&&&&&&&&&&&","");
 					layer.url = layer.url+"&&";
