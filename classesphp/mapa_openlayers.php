@@ -271,7 +271,11 @@ else{
 	}
 	header('Content-Length: '.filesize($nomer));
 	header('Content-Type: image/png');
-	header('Cache-Control: max-age=3600, must-revalidate');
+	//header('Cache-Control: max-age=3600, must-revalidate');
+	header('Expires: ' . gmdate('D, d M Y H:i:s', time()+24*60*60) . ' GMT');
+	header('Last-Modified: '.gmdate('D, d M Y H:i:s', filemtime($nomer)).' GMT', true, 200);
+	$etag = md5_file($nomer);
+	header('Etag: '.$etag);
 	fpassthru(fopen($nomer, 'rb'));
 	exit;
 }
@@ -330,7 +334,11 @@ function carregaCacheImagem($cachedir,$bbox,$layer,$map,$w,$h){
 */
 		header('Content-Length: '.filesize($nome));
 		header('Content-Type: image/png');
-		header('Cache-Control: max-age=3600, must-revalidate');
+		//header('Cache-Control: max-age=3600, must-revalidate');
+		header('Expires: ' . gmdate('D, d M Y H:i:s', time()+24*60*60) . ' GMT');
+		header('Last-Modified: '.gmdate('D, d M Y H:i:s', filemtime($nome)).' GMT', true, 200);
+		$etag = md5_file($nome);
+		header('Etag: '.$etag);
 		fpassthru(fopen($nome, 'rb'));
 		exit;
 	}
