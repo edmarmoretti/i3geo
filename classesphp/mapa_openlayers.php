@@ -133,8 +133,6 @@ if(!isset($_GET["telaR"])){//no caso de projecoes remotas, o mapfile nao e alter
 		}
 	}
 }
-//if($qy || $_GET["HEIGHT"] != 256 )
-//{$cache = false;}
 if($_GET["layer"] == "")
 {$cache = true;}
 if($_GET == false)
@@ -142,6 +140,8 @@ if($_GET == false)
 if(strtolower($_GET["DESLIGACACHE"]) == "sim")
 {$cache = false;}
 if(trim($_GET["TIPOIMAGEM"]) != "" && trim($_GET["TIPOIMAGEM"]) != "nenhum")
+{$cache = false;}
+if($qy)
 {$cache = false;}
 if($cache == true)
 {carregaCacheImagem($cachedir,$_GET["BBOX"],$nomecache,$map_fileX,$_GET["WIDTH"],$_GET["HEIGHT"]);}
@@ -234,6 +234,7 @@ else
 		}
 		$l->close();
 	}
+	$cache = false;
 }
 if (!function_exists('imagepng'))
 {
@@ -244,7 +245,6 @@ if (!function_exists('imagepng'))
 	if (!function_exists('imagepng'))
 	{$_GET["TIPOIMAGEM"] = "";}
 }
-
 if(trim($_GET["TIPOIMAGEM"]) != "" && trim($_GET["TIPOIMAGEM"]) != "nenhum")
 {
 	if($img->imagepath == "")
@@ -271,11 +271,13 @@ else{
 	}
 	header('Content-Length: '.filesize($nomer));
 	header('Content-Type: image/png');
-	//header('Cache-Control: max-age=3600, must-revalidate');
-	header('Expires: ' . gmdate('D, d M Y H:i:s', time()+24*60*60) . ' GMT');
-	header('Last-Modified: '.gmdate('D, d M Y H:i:s', filemtime($nomer)).' GMT', true, 200);
-	$etag = md5_file($nomer);
-	header('Etag: '.$etag);
+	if($cache == true){
+		header('Cache-Control: max-age=3600, must-revalidate');
+		header('Expires: ' . gmdate('D, d M Y H:i:s', time()+24*60*60) . ' GMT');
+		header('Last-Modified: '.gmdate('D, d M Y H:i:s', filemtime($nomer)).' GMT', true, 200);
+		$etag = md5_file($nomer);
+		header('Etag: '.$etag);
+	}	
 	fpassthru(fopen($nomer, 'rb'));
 	exit;
 }
@@ -334,7 +336,7 @@ function carregaCacheImagem($cachedir,$bbox,$layer,$map,$w,$h){
 */
 		header('Content-Length: '.filesize($nome));
 		header('Content-Type: image/png');
-		//header('Cache-Control: max-age=3600, must-revalidate');
+		header('Cache-Control: max-age=3600, must-revalidate');
 		header('Expires: ' . gmdate('D, d M Y H:i:s', time()+24*60*60) . ' GMT');
 		header('Last-Modified: '.gmdate('D, d M Y H:i:s', filemtime($nome)).' GMT', true, 200);
 		$etag = md5_file($nome);
