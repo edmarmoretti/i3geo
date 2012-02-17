@@ -41,7 +41,7 @@ body{
 }
 #demo_bg {
     position: relative;
-    background: url(../../pacotes/yui270/examples/slider/assets/dual_thumb_bg.gif) 0 5px no-repeat;
+    background: url(../../pacotes/yui290/examples/slider/assets/dual_thumb_bg.gif) 0 5px no-repeat;
     height: 28px;
     width: 258px;
 	left: 8px;
@@ -56,7 +56,7 @@ body{
 /* Here's the highlight element */
 #demo_bg span {
     position: absolute;
-    background: url(../../pacotes/yui270/examples/slider/assets/dual_thumb_highlight.gif) 0 0 repeat-x;
+    background: url(../../pacotes/yui290/examples/slider/assets/dual_thumb_highlight.gif) 0 0 repeat-x;
     top: 10px;
     left: 12px;
     height: 13px;
@@ -105,8 +105,8 @@ p .boom {
 <div id="imagens" ></div>
 <div id="demo_bg" title="Range slider">
     <span id="demo_highlight"></span>
-    <div id="demo_min_thumb"><img src="../../pacotes/yui270/examples/slider/assets/l-thumb-round.gif"></div>
-    <div id="demo_max_thumb"><img src="../../pacotes/yui270/examples/slider/assets/r-thumb-round.gif"></div>
+    <div id="demo_min_thumb"><img src="../../pacotes/yui290/examples/slider/assets/l-thumb-round.gif"></div>
+    <div id="demo_max_thumb"><img src="../../pacotes/yui290/examples/slider/assets/r-thumb-round.gif"></div>
 </div>
 <p><span id="demo_range">0-255</span></p>
 <div id=cores ></div>

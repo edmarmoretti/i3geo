@@ -196,7 +196,10 @@ i3GEOF.pontoEmPoligono = {
 					i3GEOF.pontoEmPoligono.aguarde.visibility = "hidden";
 					if (retorno.data==undefined )
 					{alert("Erro. A operação demorou muito.");}
-					else{i3GEO.atualiza();}
+					else{
+						i3GEO.atualiza();
+						i3GEO.janela.mensagemSimples(retorno.data,"Colunas");
+					}
 				}
 				p = i3GEO.configura.locaplic+"/classesphp/mapa_controle.php?g_sid="+i3GEO.configura.sid+"&funcao=pontoEmPoligono&temaPt="+temapt+"&temasPo="+tsl.join(",")+"&ext="+i3GEO.parametros.mapexten;
 				cp = new cpaint();

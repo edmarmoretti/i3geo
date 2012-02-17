@@ -72,6 +72,7 @@ i3GEO.tema = {
 		i3GEO.janela.abreAguarde("i3GEO.atualiza",$trad("o1"));
 		i3GEO.php.excluitema(i3GEO.atualiza,[tema]);
 		i3GEO.mapa.ativaTema("");
+		i3GEO.temaAtivo = "";
 	},
 	/*
 	Function: fonte

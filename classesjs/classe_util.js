@@ -2190,7 +2190,7 @@ i3GEO.util = {
 			novoel,
 			wdocaiframe,
 			fix = false,
-			wlargura = "300",
+			wlargura = "350",
 			waltura = "480",
 			wsrc = i3GEO.configura.locaplic+"/ferramentas/colourramp/index.php?ncores="+ncores+"&doc="+janela+"&elemento="+elemento, //+janela+"&elemento="+elemento+"&tipo="+tipo,
 			nx = "",
@@ -2224,7 +2224,7 @@ i3GEO.util = {
 		wdocaiframe.style.border = "0px solid white";
 
 		if(nx === "" || nx === "center"){fix = true;}
-		YAHOO.janelaCorRamp.xp.panel = new YAHOO.widget.ResizePanel(id, { height:"480px",zIndex:5000, modal:modal, width: "350px", fixedcenter: fix, constraintoviewport: false, visible: true, iframe:false} );
+		YAHOO.janelaCorRamp.xp.panel = new YAHOO.widget.ResizePanel(id, { height:"480px",zIndex:5000, modal:false, width: "380px", fixedcenter: fix, constraintoviewport: false, visible: true, iframe:false} );
 		YAHOO.janelaCorRamp.xp.panel.render();
 		$i(id+'_cabecalho').className = classe;
 	},

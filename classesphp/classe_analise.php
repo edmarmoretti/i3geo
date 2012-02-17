@@ -1112,13 +1112,23 @@ $locaplic - Localização do I3geo.
 							$shape = $layer->getfeature($shp_index,-1);						
 						}
 						foreach ($itens as $item)
-						{$reg[] = $this->truncaS($shape->values[$item]);}
+						{
+							$p = $this->truncaS($shape->values[$item]);
+							if(empty($p))
+							{$p = "-";}
+							$reg[] = $p;
+						}
 					}
 					else
 					{
 						foreach ($itens as $item)
 						{$reg[] = "???";}
 					}
+				}
+				else
+				{
+					foreach ($itens as $item)
+					{$reg[] = "???";}
 				}
 				$layer->close();
 			}
