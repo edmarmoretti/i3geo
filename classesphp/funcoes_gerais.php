@@ -1861,7 +1861,6 @@ function criaSHP($tema,$map_file,$locaplic,$dir_tmp,$nomeRand=TRUE)
 	if(file_exists($nomeshp.".shp"))
 	{return $nomeshp;}
 	$novoshpf = ms_newShapefileObj($nomeshp, $tipol);
-	$novoshpf->free();
 	//se for do tipo features
 	$data = $layer->data;
 	$resultadoFinal = true;
@@ -1889,7 +1888,6 @@ function criaSHP($tema,$map_file,$locaplic,$dir_tmp,$nomeRand=TRUE)
 		}
 		$novoshpf = ms_newShapefileObj($nomeshp.".shp", -2);
 		$novoshpf->addShape($shape);
-		$novoshpf->free();
 		$resultadoFinal = true;
 	}
 	else
@@ -1953,7 +1951,6 @@ function criaSHP($tema,$map_file,$locaplic,$dir_tmp,$nomeRand=TRUE)
 			xbase_close($db);
 			else
 			dbase_close($db);
-			$novoshpf->free();
 			$layer->close();
 			//
 			//verifica a quantidade de registros no final

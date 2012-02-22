@@ -528,6 +528,7 @@ function alteraN3()
 			$id = $dbh->query("SELECT id_n3 FROM i3geoadmin_n3 where id_tema = '$idtemp'");
 			$id = $id->fetchAll();
 			$id = $id[0]['id_n3'];
+    		$dbhw->query("UPDATE i3geoadmin_n3 SET id_tema = '' WHERE id_n3 = $id AND id_tema = '$idtemp'");
 			$retorna = $id;
     	}
     	$dbhw = null;
@@ -561,6 +562,7 @@ function alteraN2()
 			$id = $dbh->query("SELECT id_n2 FROM i3geoadmin_n2 where id_subgrupo = '$idtemp'");
 			$id = $id->fetchAll();
 			$id = $id[0]['id_n2'];
+    		$dbhw->query("UPDATE i3geoadmin_n2 SET id_subgrupo = '' WHERE id_n2 = $id AND id_subgrupo = '$idtemp'");			
 			$retorna = $id;   	
     	}
     	$dbhw = null;
@@ -596,6 +598,7 @@ function alteraN1()
 			$id = $dbh->query("SELECT id_n1 FROM i3geoadmin_n1 where id_grupo = '$idtemp'");
 			$id = $id->fetchAll();
 			$id = $id[0]['id_n1'];
+    		$dbhw->query("UPDATE i3geoadmin_n1 SET id_grupo = '' WHERE id_n1 = $id AND id_grupo = '$idtemp'");			
 			$retorna = $id;   	
     	}
     	$dbhw = null;
@@ -626,10 +629,12 @@ function alterarRaiz()
 			$o = $dbh->query("SELECT MAX(ordem) as o FROM i3geoadmin_raiz where id_menu = '$id_menu' and nivel = '$nivel' and id_nivel = '$id_nivel'");
 			$o = $o->fetchAll();
 			$o = $o[0]['o'] + 1;
-    		$dbhw->query("INSERT INTO i3geoadmin_raiz (id_nivel,nivel,id_menu,perfil,ordem) VALUES ($id_nivel,$nivel,$id_menu,'',$o)");
-			$id = $dbh->query("SELECT id_raiz FROM i3geoadmin_raiz");
+			$idtemp = (rand (9000,10000)) * -1;
+    		$dbhw->query("INSERT INTO i3geoadmin_raiz (id_nivel,nivel,id_menu,perfil,ordem) VALUES ($id_nivel,$nivel,$id_menu,'$idtemp',$o)");
+			$id = $dbh->query("SELECT id_raiz FROM i3geoadmin_raiz WHERE perfil = '$idtemp'");
 			$id = $id->fetchAll();
-			$id = intval($id[count($id)-1]['id_raiz']);
+			$id = $id[0]['id_raiz'];
+			$dbhw->query("UPDATE i3geoadmin_raiz SET perfil = '' WHERE id_raiz = $id AND perfil = '$idtemp'");
 			$retorna = $id;   	
     	}
     	$dbhw = null;

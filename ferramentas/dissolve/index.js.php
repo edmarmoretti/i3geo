@@ -121,10 +121,7 @@ i3GEOF.dissolve = {
 	},
 	t0: function()
 	{
-		var ins = "<p class='paragrafo'>Essa ferramenta transforma v&aacute;rios pol&iacute;gonos em um s&oacute; eliminando as divisas entre eles.";
-		ins += "<p class='paragrafo'>Para definir quais os pol&iacute;gonos devem ser unidos uns com os outros &eacute; preciso escolher um item da tabela de atributos do tema.";
-		ins += "Os pol&iacute;gonos que possu&iacute;rem o mesmo valor ser&atilde;o considerados no mesmo grupo e suas divisas eliminadas. Caso n&atilde;o tenha sido escolhido nenhum item, todas os pol&iacute;gonos ser&atilde;o agrupados em um s&oacute;";
-		ins += "<p class='paragrafo'>O resultado final ser&aacute; um novo tema com pol&iacute;gonos diferentes dos originais e cuja tabela de atributos conter&aacute; apenas o item escolhido.";
+		var ins = "<p class='paragrafo'>Essa ferramenta transforma vários polígonos em um só eliminando as divisas entre eles. Caso seja escolhido um item da tabela de atributos, os polígonos que possuírem o mesmo valor serão considerados no mesmo grupo e suas divisas eliminadas e caso não tenha sido escolhido nenhum item, todas os polígonos serão agrupados em um só. O resultado final será um novo tema com polígonos diferentes dos originais e cuja tabela de atributos conterá apenas um item.";
 		i3GEO.util.proximoAnterior("","i3GEOF.dissolve.t1()",ins,"i3GEOFgradeDePontost0","i3GEOdissolveresultado");
 	},
 	t1: function(){

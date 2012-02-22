@@ -172,10 +172,12 @@ function alterarMapa()
     	}
     	else
     	{
-    		$dbhw->query("INSERT INTO i3geoadmin_mapas (publicado_mapa,ordem_mapa,perfil_mapa,desc_mapa,ext_mapa,imagem_mapa,linkdireto_mapa,outros_mapa,temas_mapa,ligados_mapa,nome_mapa) VALUES ('','','','','','','','','','','')");
-			$id = $dbh->query("SELECT * FROM i3geoadmin_mapas");
+    		$idtemp = (rand (9000,10000)) * -1;
+			$dbhw->query("INSERT INTO i3geoadmin_mapas (publicado_mapa,ordem_mapa,perfil_mapa,desc_mapa,ext_mapa,imagem_mapa,linkdireto_mapa,outros_mapa,temas_mapa,ligados_mapa,nome_mapa) VALUES ('','','','','','','','','','','$id_temp')");
+			$id = $dbh->query("SELECT * FROM i3geoadmin_mapas WHERE nome_mapa = '$id_temp'");
 			$id = $id->fetchAll();
-			$id = intval($id[count($id)-1]['id_mapa']);
+			$id = $id[0]['id_mapa']);
+			$dbhw->query("UPDATE i3geoadmin_mapas SET nome_mapa = '' WHERE id_mapa = $id AND nome_mapa = '$idtemp'");
 			$retorna = $id;
     	}
     	$dbhw = null;

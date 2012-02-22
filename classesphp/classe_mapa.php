@@ -515,7 +515,6 @@ string - javascript com as variáveis para redesenho do mapa
 		$pt->setXY($w / 2, $h * 2);
 		$this->mapa->zoomscale($s * 2,$pt,$w,$h,$e);
 		$nomeS = gravaImagemMapa();
-		$pt->free();
 		return "var imagens=['".$nomeL["url"]."','".$nomeO["url"]."','".$nomeN["url"]."','".$nomeS["url"]."'];";
 	}
 /*
@@ -1575,7 +1574,6 @@ $canal - Identificador do canal (ordem em que está no RSS)
 			$novonomelayer = nomeRandomico(10)."georss";
 			$nomeshp = $diretorio."/".$novonomelayer;
 			$novoshpf = ms_newShapefileObj($nomeshp, $tipol);
-			$novoshpf->free();
 			$def[] = array("TITULO","C","254");
 			$def[] = array("LINK","C","254");
 			$def[] = array("DESC","C","254");
@@ -1614,10 +1612,8 @@ $canal - Identificador do canal (ordem em que está no RSS)
 				$reg = array($r[0],$r[1],$r[2],$r[3]);
 				xbase_add_record($db,$reg);
 				$reg = array();
-				$linha->free();
 			}
 			xbase_close($db);
-			$novoshpf->free();
 			if ($tipog == "georsspoint" || $tipog == "geo")
 			{$tipol = MS_LAYER_POINT;}
 			else

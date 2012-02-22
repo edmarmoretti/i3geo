@@ -489,7 +489,8 @@ i3GEO.guias = {
 						var temp = $i(anim.attributes.id);
 						temp.style.overflow = "auto";
 						temp.style.display="none";
-						i3GEO.barraDeBotoes.BARRAS[0].show();
+						if(i3GEO.barraDeBotoes.BARRAS[0])
+						{i3GEO.barraDeBotoes.BARRAS[0].show();}
 					});
 					anim.animate();				
 				}
@@ -542,7 +543,8 @@ i3GEO.guias = {
 			temp = $i(i3GEO.guias.CONFIGURA[guia].idconteudo);
 			if(temp){
 				if(i3GEO.guias.TIPO === "tablet"){
-					i3GEO.barraDeBotoes.BARRAS[0].hide();
+					if(i3GEO.barraDeBotoes.BARRAS[0])
+					{i3GEO.barraDeBotoes.BARRAS[0].hide();}
 					temp.style.left = (i3GEO.parametros.w / 2) - 150 + "px";
 					temp.style.height = 0;//i3GEO.parametros.h - 10 + "px";
 					temp.style.display = "block";
@@ -910,11 +912,11 @@ i3GEO.guias = {
 		*/
 		reposiciona: function(){
 			var temp = $i("i3GEOguiaMovel").style.top;
-			i3GEO.guias.guiaMovel.config.guias.icones = [];
-			i3GEO.guias.guiaMovel.config.guias.ids = [];
-			i3GEO.guias.guiaMovel.config.guias.idsconteudos = [];
-			i3GEO.guias.guiaMovel.config.guias.titulos = [];
-			i3GEO.guias.guiaMovel.config.guias.chaves = [];
+			//i3GEO.guias.guiaMovel.config.guias.icones = [];
+			//i3GEO.guias.guiaMovel.config.guias.ids = [];
+			//i3GEO.guias.guiaMovel.config.guias.idsconteudos = [];
+			//i3GEO.guias.guiaMovel.config.guias.titulos = [];
+			//i3GEO.guias.guiaMovel.config.guias.chaves = [];
 			i3GEO.guias.guiaMovel.config.alturaGuiaMovel = 0;
 			i3GEO.guias.ALTURACORPOGUIAS = 0;
 			$i("i3GEOguiaMovelIcones").style.display = "none";

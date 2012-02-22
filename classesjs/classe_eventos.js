@@ -509,6 +509,10 @@ i3GEO.eventos = {
 		else{
 			doc = document;
 		}
+		//
+		//algumas operações de análise podem precisar das coordenadas
+		//nesses casos, g_tipoacao é definida como "capturaponto"
+		//
 		if (g_tipoacao !== "capturaponto"){return;}
 		else{
 			try{

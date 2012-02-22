@@ -120,8 +120,7 @@ i3GEOF.centroide = {
 	},
 	t0: function()
 	{
-		var ins = "<p class='paragrafo' >Os centr&oacute;ides s&atilde;o pontos localizados no centro de massa de uma forma.";
-		ins += "<p class='paragrafo'> Para gerar os centr&oacute;ides, voc&ecirc; precisa selecionar alguns elementos de um tema. Utilize para isso a op&ccedil;&atilde;o de sele&ccedil;&atilde;o ou a tabela de atributos do tema desejado.";
+		var ins = "<p class='paragrafo' >Calcula o centro de cada polígono gerado uma nova camada. O cálculo baseia-se no polígono envolvente e podem ocorrer casos em que o ponto é posicionado fora do polígono fonte";
 		i3GEO.util.proximoAnterior("","i3GEOF.centroide.t1()",ins,"i3GEOFgradeDePontost0","i3GEOcentroideresultado");
 	},
 	t1: function(){

@@ -233,11 +233,10 @@ Include:
 			break;
 			//delaunay e voronoi
 			case "deldir":
+				//error_reporting(E_ALL);
 				$this->mapaDeldir($nomearq,$dir_tmp,$R_path,$locaplic);
 				$this->deldirDir2shp($nomearq."dirsgs",$dir_tmp,$locaplic);
-				$this->deldirDel2shp($nomearq."delsgs",$dir_tmp,$locaplic);
-				if(file_exists($this->qyfile))
-				{unlink($this->qyfile);}			
+				$this->deldirDel2shp($nomearq."delsgs",$dir_tmp,$locaplic);	
 			return "ok";
 			break;
 			case "kernel":
@@ -791,11 +790,8 @@ $locaplic - diretório da aplicação i3geo
 					xbase_add_record($db,$registro);
 					else
 					dbase_add_record($db,$registro);
-					$linha->free();
-					$ShapeObj->free();
 				}
 			}
-			$novoshpf->free();
 			if($this->dbaseExiste == false)
 			xbase_close($db);
 			else
@@ -925,7 +921,6 @@ $locaplic - diretório da aplicação i3geo
 					xbase_add_record($dbLinhas,$registro);
 					else
 					dbase_add_record($dbLinhas,$registro);
-					$ShapeObj->free();
 				}
 			}
 			//
@@ -943,9 +938,7 @@ $locaplic - diretório da aplicação i3geo
 				xbase_add_record($dbPoligonos,$registro);
 				else
 				dbase_add_record($dbPoligonos,$registro);
-				$ShapeObjp->free();	
 			}
-			$novoshpPoligonos->free();
 			if($this->dbaseExiste == false)
 			xbase_close($dbPoligonos);
 			else
@@ -979,10 +972,7 @@ $locaplic - diretório da aplicação i3geo
 				xbase_add_record($dbLinhas,$registro);
 				else
 				dbase_add_record($dbLinhas,$registro);
-				$linha->free();
-				$ShapeObj->free();				
 			}
-			$novoshpLinhas->free();
 			if($this->dbaseExiste == false)
 			xbase_close($dbLinhas);
 			else
@@ -1091,7 +1081,7 @@ $locaplic - Localização do I3geo.
 			$lineo = $spt->line(0);
 			$pt = $lineo->point(0);
 			//faz a pesquisa
-			error_reporting(E_ALL);
+			//error_reporting(E_ALL);
 			foreach ($layers as $layer)
 			{
 				$layer->set("template","none.htm");
@@ -1138,7 +1128,6 @@ $locaplic - Localização do I3geo.
 			dbase_add_record($db,$reg);
 			$reg = array();
 		}
-		$novoshpf->free();
 		if($this->dbaseExiste == false)
 		xbase_close($db);
 		else
@@ -1183,7 +1172,7 @@ itemdestino - nome do item na tabela de atributos do tema de origem que será acr
 */
 function distanciaptpt($temaorigem,$temadestino,$temaoverlay,$locaplic,$itemorigem="",$itemdestino="")
 {
-	error_reporting(E_ALL);
+	//error_reporting(E_ALL);
 	set_time_limit(180);
 	//para manipular dbf
 	if($this->dbaseExiste == false){
@@ -1278,7 +1267,6 @@ function distanciaptpt($temaorigem,$temadestino,$temaoverlay,$locaplic,$itemorig
 			dbase_add_record($db,$registro);
 		}
 	}
-	$novoshpf->free();
 	if($this->dbaseExiste == false)
 	xbase_close($db);
 	else
@@ -1405,7 +1393,6 @@ nome do layer criado com o buffer.
 			dbase_add_record($db,$reg);
 			$reg = array();
 		}
-		$novoshpf->free();
 		if($this->dbaseExiste == false)
 		xbase_close($db);
 		else
@@ -1447,7 +1434,7 @@ $item {string} - (opcional) Item q será utilizado para ponderar os valores.
 			else	
 			include_once "../pacotes/phpxbase/api_conversion.php";
 		}
-		error_reporting(E_ALL);
+		//error_reporting(E_ALL);
 		$nomeCentro = nomeRandomico();
 		$nomeshp = $this->diretorio."/".$nomeCentro;
 		//pega os shapes selecionados
@@ -1492,7 +1479,6 @@ $item {string} - (opcional) Item q será utilizado para ponderar os valores.
 		xbase_add_record($db,$reg);
 		else
 		dbase_add_record($db,$reg);
-		$novoshpf->free();
 		if($this->dbaseExiste == false)
 		xbase_close($db);
 		else
@@ -1570,7 +1556,6 @@ $locaplic - Localização do I3geo.
 			dbase_add_record($db,$reg);
 			$reg = array();
 		}
-		$novoshpf->free();
 		if($this->dbaseExiste == false)
 		xbase_close($db);
 		else
@@ -1701,7 +1686,6 @@ $npty - Número de pontos em Y (opcional)
 				$valorcoluna = $valorcoluna + $xdd;
 			}
 		}
-		$novoshpf->free();
 		if($this->dbaseExiste == false)
 		xbase_close($db);
 		else
@@ -1857,7 +1841,6 @@ $npty - Número de pontos em Y (opcional)
 			$valorcoluna = $valorcoluna + $xdd;
 			}
 		}
-		$novoshpf->free();
 		if($this->dbaseExiste == false)
 		xbase_close($db);
 		else
@@ -2024,7 +2007,6 @@ $npty - Número de pontos em Y (opcional)
 				$valorcoluna = $valorcoluna + $xdd;
 			}
 		}
-		$novoshpf->free();
 		if($this->dbaseExiste == false)
 		xbase_close($db);
 		else
@@ -2103,7 +2085,6 @@ $locaplic - Localização do I3geo
 			else
 			dbase_add_record($db,$novoreg);
 		}
-		$novoshpf->free();
 		if($this->dbaseExiste == false)
 		xbase_close($db);
 		else
@@ -2209,7 +2190,6 @@ Salva o mapa acrescentando um novo layer com o resultado.
 			else
 			dbase_add_record($db,array($classe));
 		}
-		$novoshpf->free();
 		if($this->dbaseExiste == false)
 		xbase_close($db);
 		else
@@ -2319,7 +2299,6 @@ $locaplic - Localização do I3geo
 			else
 			dbase_add_record($db,array($classe));
 		}
-		$novoshpf->free();
 		if($this->dbaseExiste == false)
 		xbase_close($db);
 		else
@@ -2485,7 +2464,7 @@ $operacao - Tipo de análise.
 			//se for anterior a 5, utiliza a conexão com o postgis para fazer o processamento dos daods
 			//
             $v = versao();
-			if (($v["principal"] != 5))
+			if (($v["principal"] < 5))
 			{return ("erro. E necessario uma versão maior que 5.0 do Mapserver.");}
 			foreach ($geos["dados"] as &$geo)
 			{
@@ -2610,7 +2589,6 @@ $tipoLista - tipo de valores que são passados em $lista stringArquivos|arraywkt.
 		xbase_close($db);
 		else
 		dbase_close($db);
-		$novoshpf->free();
 		$l->setmetadata("tema",$novonomelayer." geometria");
 		$l->setmetadata("TEMALOCAL","SIM");
 		$l->setmetadata("DOWNLOAD","sim");

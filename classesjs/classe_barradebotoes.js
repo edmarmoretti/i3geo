@@ -1216,8 +1216,10 @@ i3GEO.barraDeBotoes = {
 		var abre = function(){
 				var i,
 					n = i3GEO.barraDeBotoes.BARRAS.length;
-				for(i=0;i<n;i+=1)
-				{i3GEO.barraDeBotoes.BARRAS[i].show();}
+				for(i=0;i<n;i+=1){
+					if(i3GEO.barraDeBotoes.BARRAS[i])
+					{i3GEO.barraDeBotoes.BARRAS[i].show();}
+				}
 			};
 		try{
 			if(arguments.length === 1)
@@ -1256,7 +1258,7 @@ i3GEO.barraDeBotoes = {
 		i3GEO.barraDeBotoes.BARRAS = [];
 		n = BARRAS.length;
 		for(i=0;i<n;i+=1){
-			if(BARRAS[i].id === id){
+			if(BARRAS[i] && BARRAS[i].id === id){
 				//remove o menu de contexto
 				iu.removeChild("contexto_"+id);
 				if(!$i("barraTemporaria"+i)){
@@ -1298,7 +1300,7 @@ i3GEO.barraDeBotoes = {
 		if(typeof(console) !== 'undefined'){console.info("i3GEO.barraDeBotoes.fecha()");}
 		var n = this.BARRAS.length;
 		for(i=0;i<n;i+=1){
-			if(this.BARRAS[i].id === id){
+			if(this.BARRAS[i] && this.BARRAS[i].id === id){
 				$i(id+"_c").style.visibility = "hidden";
 			}
 		}
@@ -1396,12 +1398,24 @@ i3GEO.barraDeBotoes = {
 			i3GEO.barraDeBotoes.editor.carregaJs();
 		},
 		carregaJs: function(idjanela){
-			i3GEO.util.scriptTag(
-				i3GEO.configura.locaplic+"/mashups/openlayers.js.php",
-				"i3GEO.barraDeBotoes.editor.ativaPainel('"+idjanela+"')",
-				"openlayers.js.php",
-				true
-			);
+			if(!i3GEO.editorOL){
+				i3GEO.util.scriptTag(
+					i3GEO.configura.locaplic+"/mashups/openlayers.js.php",
+					"i3GEO.barraDeBotoes.editor.ativaPainel('"+idjanela+"')",
+					"openlayers.js.php",
+					true
+				);
+			}
+			else{
+				if(!i3GEO.editorOL.layergrafico){
+					i3GEO.editorOL.criaLayerGrafico();
+					i3GEO.editorOL.mapa.addLayers([i3GEO.editorOL.layergrafico]);
+				}
+				if(!i3GEO.editorOL.backup){
+					i3GEO.editorOL.backup = new OpenLayers.Layer.Vector("Backup",{displayInLayerSwitcher:false,visibility:false});
+				}
+				i3GEO.editorOL.criaBotoes(i3GEO.editorOL.botoes);
+			}
 		},
 		criaJanela: function(){
 			if($i("i3GEOjanelaEditor"))

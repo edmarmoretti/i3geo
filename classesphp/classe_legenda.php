@@ -511,11 +511,13 @@ $onclick - Função que será incluída no HTML no evento onclick sobre o símbolo
 
 $tamanho - Tamanho (size) do símbolo
 
+$forca {boolean} - forca a exclusao dos simbolos atualmente em cache
+
 return:
 
 String no formato HTML com as imagens dos símbolos
 */
-	function listaSimbolos($tipo,$dir_tmp,$imgdir,$onclick,$tamanho=8,$width=1)
+	function listaSimbolos($tipo,$dir_tmp,$imgdir,$onclick,$tamanho=8,$width=1,$forca=false)
 	{
 		$versao = versao();
 		$versao = $versao["principal"];
@@ -525,6 +527,9 @@ String no formato HTML com as imagens dos símbolos
 		{$dir = $dir_tmp;}
 		else
 		{$dir = $dir_tmp."/".$imgdir;}
+		if($forca == true){
+			unlink($dir."/simbolos".$tipo.".inc");
+		}
 		if (!file_exists($dir."/simbolos".$tipo.".inc"))
 		{
 			$f = fopen($dir."/simbolos".$tipo.".inc","w");
@@ -540,7 +545,10 @@ String no formato HTML com as imagens dos símbolos
 			{$mapatemp = ms_newMapObj($this->localaplicacao."/aplicmap/".$t);}
 			$ins = "";
 			$l = $mapatemp->getlayer(0);
-			$novoss = dirname($this->mapa->symbolsetfilename)."\\".basename($mapatemp->symbolsetfilename);
+			if (strtoupper(substr(PHP_OS, 0, 3) == 'WIN'))
+			{$novoss = dirname($this->mapa->symbolsetfilename)."\\".basename($mapatemp->symbolsetfilename);}
+			else
+			{$novoss = dirname($this->mapa->symbolsetfilename)."/".basename($mapatemp->symbolsetfilename);}
 			$this->mapa->setsymbolset($novoss);
 			$ns = $this->mapa->getnumsymbols();
 			for ($i=0;$i < $ns;++$i)

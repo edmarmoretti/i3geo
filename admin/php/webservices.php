@@ -168,10 +168,12 @@ function alterarWS()
     	}
     	else
     	{
-    		$dbhw->query("INSERT INTO i3geoadmin_ws (nome_ws,desc_ws,autor_ws,tipo_ws,link_ws,nacessos,nacessosok) VALUES ('','','','','',0,0)");
-			$id = $dbh->query("SELECT id_ws FROM i3geoadmin_ws");
+    		$idtemp = (rand (9000,10000)) * -1;
+			$dbhw->query("INSERT INTO i3geoadmin_ws (nome_ws,desc_ws,autor_ws,tipo_ws,link_ws,nacessos,nacessosok) VALUES ('$idtemp','','','','',0,0)");
+			$id = $dbh->query("SELECT id_ws FROM i3geoadmin_ws WHERE nome_ws = '$idtemp'");
 			$id = $id->fetchAll();
-			$id = intval($id[count($id)-1]['id_ws']);
+			$id = $id[0]['id_ws']);
+			$dbhw->query("UPDATE i3geoadmin_ws SET nome_ws = '' WHERE id_ws = $id AND nome_ws = '$idtemp'");
 			$retorna = $id;
     	}
     	$dbhw = null;

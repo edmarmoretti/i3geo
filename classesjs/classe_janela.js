@@ -925,9 +925,9 @@ try{
 							nNewHeight = Math.max(nStartHeight + nOffsetY, 10),
 							nBodyHeight = (nNewHeight - (oFooter.offsetHeight + oHeader.offsetHeight + nBodyOffset));
 						me.cfg.setProperty("width", nNewWidth + "px");
-						if(navm)
-						{nNewWidth = nNewWidth - 2;}
-						oBody.style.width = nNewWidth - 2 +"px";
+						//if(navm)
+						//{nNewWidth = nNewWidth - 2;}
+						oBody.style.width = nNewWidth - 4 +"px";
 						if (nBodyHeight < 0)
 						{nBodyHeight = 0;}
 						oBody.style.height =  nBodyHeight + "px";

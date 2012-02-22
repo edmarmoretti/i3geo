@@ -248,10 +248,12 @@ function alterarSistemas()
     	}
     	else
     	{
-    		$dbhw->query("INSERT INTO i3geoadmin_sistemas (publicado_sistema,nome_sistema,perfil_sistema) VALUES ('','','')");
-			$id = $dbh->query("SELECT id_sistema FROM i3geoadmin_sistemas");
+    		$idtemp = (rand (9000,10000)) * -1;
+			$dbhw->query("INSERT INTO i3geoadmin_sistemas (publicado_sistema,nome_sistema,perfil_sistema) VALUES ('','$idtemp','')");
+			$id = $dbh->query("SELECT id_sistema FROM i3geoadmin_sistemas WHERE nome_sistema = '$idtemp'");
 			$id = $id->fetchAll();
-			$id = intval($id[count($id)-1]['id_sistema']);
+			$id = $id[0]['id_sistema'];
+			$dbhw->query("UPDATE id_sistema SET nome_sistema = '' WHERE id_sistema = $id AND nome_sistema = '$idtemp'");
 			$retorna = $id;    	
     	}
     	$dbhw = null;
@@ -280,10 +282,12 @@ function alterarFuncoes()
     	}
     	else
     	{
-    		$dbhw->query("INSERT INTO i3geoadmin_sistemasf (id_sistema,nome_funcao,perfil_funcao,w_funcao,h_funcao,abrir_funcao) VALUES ('$id_sistema','','','$w','$h','')");
-			$id = $dbh->query("SELECT id_funcao FROM i3geoadmin_sistemasf");
+    		$idtemp = (rand (9000,10000)) * -1;
+			$dbhw->query("INSERT INTO i3geoadmin_sistemasf (id_sistema,nome_funcao,perfil_funcao,w_funcao,h_funcao,abrir_funcao) VALUES ('$id_sistema','$idtemp','','$w','$h','')");
+			$id = $dbh->query("SELECT id_funcao FROM i3geoadmin_sistemasf WHERE nome_funcao = '$idtemp'");
 			$id = $id->fetchAll();
-			$id = intval($id[count($id)-1]['id_funcao']);
+			$id = $id[0]['id_funcao']);
+			$dbhw->query("UPDATE i3geoadmin_sistemasf SET nome_funcao = '' WHERE id_funcao = $id AND nome_funcao = '$idtemp'");
 			$retorna = $id;    		
     	}
     	$dbhw = null;

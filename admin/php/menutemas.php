@@ -877,7 +877,7 @@ function alteraPerfis()
     	}
     	else
     	{
-    		$dbhw->query("INSERT INTO i3geoadmin_perfis (perfil) VALUES ('$perfil')");
+			$dbhw->query("INSERT INTO i3geoadmin_perfis (perfil) VALUES ('$perfil')");
 			$id = $dbh->query("SELECT * FROM i3geoadmin_perfis");
 			$id = $id->fetchAll();
 			$id = intval($id[count($id)-1]['id_perfil']);
@@ -1066,8 +1066,9 @@ function alteraTemas()
     	}
     	else
     	{
-    		$dbhw->query("INSERT INTO i3geoadmin_temas (nome_tema) VALUES ('xxxxxX')");// (link_tema,kml_tema,ogc_tema,download_tema,nome_tema,desc_tema,codigo_tema,tipoa_tema,tags_tema) VALUES ('','', '','','','','','','')");
-			$id = $dbh->query("SELECT * FROM i3geoadmin_temas WHERE nome_tema = 'xxxxxX'");
+    		$idtemp = (rand (9000,10000)) * -1;
+			$dbhw->query("INSERT INTO i3geoadmin_temas (nome_tema) VALUES ('$idtemp')");// (link_tema,kml_tema,ogc_tema,download_tema,nome_tema,desc_tema,codigo_tema,tipoa_tema,tags_tema) VALUES ('','', '','','','','','','')");
+			$id = $dbh->query("SELECT * FROM i3geoadmin_temas WHERE nome_tema = '$idtemp'");
 			$id = $id->fetchAll();
 			$id = intval($id[0]['id_tema']);
 			if(!isset($kmz))

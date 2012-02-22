@@ -1838,18 +1838,18 @@ i3GEO.Interface = {
 			}
 		},
 		retornaDivLayer: function(nomeLayer){
-			var i = false,
+			var i,
 				divmapa = $i("googlemapsdiv"),
-				divlayer = divmapa.firstChild.firstChild.firstChild.getElementsByTagName("div"),
+				divlayer,
 				divs,
 				divimg,
-				j,
-				ndivs = divlayer.length;
-			for(j=0;j<ndivs;j++){
-				divimg = divlayer[j].getElementsByTagName("img");
-				if(divimg.length > 0){
-					if(divimg[0].src.search("&layer="+nomeLayer+"&") > 0)
-					{return divimg[0].parentNode.parentNode.parentNode;}
+				n;
+			divimg = divmapa.getElementsByTagName("img");
+			n = divimg.length;
+			if(divimg && n > 0){
+				for(i=0;i<n;i++){
+					if(divimg[i].src.search("&layer="+nomeLayer+"&") > 0)
+					{return divimg[i].parentNode.parentNode.parentNode;}
 				}
 			}
 			return false;
@@ -1926,8 +1926,11 @@ i3GEO.Interface = {
 				div;
 			for (i=0;i<nlayers;i++){
 				camada = i3GEO.arvoreDeCamadas.CAMADAS[i];
-				div = i3GEO.Interface.googlemaps.retornaDivLayer(camada.name);
-				YAHOO.util.Dom.setStyle(div, "opacity", opacidade);
+				if(camada && camada.name){
+					div = i3GEO.Interface.googlemaps.retornaDivLayer(camada.name);
+					if(div)
+					{YAHOO.util.Dom.setStyle(div, "opacity", opacidade);}
+				}
 			}
 		},
 		mudaOpacidade: function(valor){

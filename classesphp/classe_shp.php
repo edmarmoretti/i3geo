@@ -158,9 +158,7 @@ Nome do tema criado.
 		$tipol = MS_SHP_POINT;
 		$l = criaLayer($this->mapa,MS_LAYER_POINT,MS_DEFAULT,"Ins","SIM");
 		$novoshpf = ms_newShapefileObj($nomeshp, $tipol);
-		$novoshpf->free();
 		$novoshpf = ms_newShapefileObj($nomeshp.".shp", -2);
-		$novoshpf->free();
 		if($tituloTema == "")
 		{$tituloTema = $novonomelayer." pontos";}
 		$l->setmetadata("tema",$tituloTema);
@@ -243,7 +241,6 @@ $projecao - código epsg da projeção das coordenadas
 				}
 				$shapefileObj->addpoint($poPoint);
 			}
-			$shapefileObj->free();
 			return("ok");
 		}
 		else
@@ -538,7 +535,6 @@ $para - linha|poligono
 			dbase_add_record($db,$reg);
 			dbase_close($db);			
 		}
-		$novoshpf->free();
 		$this->layer->close();
 		//cria o novo layer
 		$layer = criaLayer($this->mapa,MS_LAYER_LINE,MS_DEFAULT,"",$metaClasse="SIM");

@@ -2480,8 +2480,11 @@ Define as características de simbologia de uma classe, cria, adiciona e exclui e
 			$retorno = $m->aplicaParametro($classe,$estilo,$outlinecolor,$backgroundcolor,$color,$symbolname,$size,$opacidade);
 			$m->salva();
 		}
-		if ($opcao == "listaSimbolos")
-		{$retorno = $m->listaSimbolos($tipo,$dir_tmp,$imgdir,$onclick);}
+		if ($opcao == "listaSimbolos"){
+			$retorno = $m->listaSimbolos($tipo,$dir_tmp,$imgdir,$onclick);
+			if($retorno == "")
+			{$retorno = $m->listaSimbolos($tipo,$dir_tmp,$imgdir,$onclick,8,1,true);}
+		}
 		if ($opcao == "pegaparametros")
 		{$retorno = $m->pegaParametros($classe);}
 		$_SESSION["contadorsalva"]++;

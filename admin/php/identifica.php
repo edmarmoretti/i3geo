@@ -148,10 +148,12 @@ function alterarFuncoes()
     	}
     	else
     	{
-    		$dbhw->query("INSERT INTO i3geoadmin_identifica (publicado_i,nome_i,abrir_i,target_i) VALUES ('','','','')");
-			$id_i = $dbh->query("SELECT id_i FROM i3geoadmin_identifica");
+    		$idtemp = (rand (9000,10000)) * -1;
+			$dbhw->query("INSERT INTO i3geoadmin_identifica (publicado_i,nome_i,abrir_i,target_i) VALUES ('','$idtemp','','')");
+			$id_i = $dbh->query("SELECT id_i FROM i3geoadmin_identifica WHERE nome_i = '$idtemp'");
 			$id_i = $id_i->fetchAll();
-			$id_i = intval($id_i[count($id_i)-1]['id_i']);
+			$id_i = $id_i[0]['id_i']);
+			$dbhw->query("UPDATE i3geoadmin_identifica SET nome_i = '' WHERE id_i = $id AND nome_i = '$idtemp'");
 			$retorna = $id_i;
     	}
     	$dbhw = null;
