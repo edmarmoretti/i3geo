@@ -4,16 +4,12 @@
 <meta http-equiv="Category" content="I3Geo Mapa interativo MMA geoprocessamento sig mobile">
 <META HTTP-EQUIV="Content-Type" CONTENT="text/html; charset=ISO-8859-1">
 <title>i3Geo - Mapa interativo</title>
-<script type="text/javascript" src="../classesjs/i3geonaocompacto.js"></script>
+<script type="text/javascript" src="../classesjs/i3geo.js"></script>
 <script type="text/javascript" src="../pacotes/openlayers/OpenLayers211.js.php"></script>
 </head>
 <body id="i3geo">
 
 <table id='mst' summary="" style='display:none;' width=100% cellspacing='0'>
-
-<!--
-	Inclui a barra superior. Se vc não quiser o menu, é só comentar o TR
--->
 <tr style="border:0px">
 	<td colspan=2 id="barraSuperior" style="background-image:url('../imagens/visual/default/cabeca.png');height:10px"></td>
 </tr>
@@ -23,10 +19,6 @@
    <tr>
    <td title="libera guias" class=tdclaro id=encolheFerramentas style="vertical-align:top;width:5px;text-align:left;"></td>
    <td>
-    <!--
-    	Guias principais, não mude o ID, apenas o nome se for desejado
-    -->
-
     <div class=verdeescuro style="top:0px;cursor:pointer;">
 	 <div id=guia1 class=guia >Temas</div>
 	 <div id=guia2 class=guia >Adiciona</div>
@@ -39,36 +31,17 @@
   </table>
 </td>
 <td id="contemMenu" style="text-align:right;height:0px;border-width:0pt 0pt 1px;border-color:rgb(240,240,240)">
-	<!--
-		menu suspenso
-	-->
 	 <div id="menus" ></div>    
 </td>
 </tr>
 <tr>
  <td class=tdbranca id=contemFerramentas style="vertical-align:top;width:300px;text-align:left;">
-  <!--
-  	As divs guiaNobj guardam o conteúdo que é mostrado quando a guia é clicada
-  	Para cada botão na guia deve haver um div com o conteúdo, pe.
-  	o div com id=guia1 deve ter um div com id=guia1obj
-  -->
   <div id='guia1obj' >
-	<!-- Esta div acrescenta a opção de busca rápida, caso vc queira colocá-la em um lugar específico -->
 	<div style='left:5px;top:10px;' id=buscaRapida ></div>
-	<!--	Esta div acrescenta a lista de propriedades do mapa -->	
   	<div id=listaPropriedades style='top:15px;' ></div>
-	<!--	Esta div acrescenta a lista de de camadas do tipo 'baselayers' específicas da interface Openlayers. Veja também a opção i3GEO.Interface.openlayers.GADGETS.LayerSwitcher -->
   	<div id=listaLayersBase style='top:15px;'></div>
-	<!--	Esta div acrescenta a lista de de camadas disponíveis no mapa atual -->
   	<div id=listaTemas style='top:15px;'></div>
   </div>
-
- 	<!-- se vc quiser colocar a arvore de adição de temas em um lugar específico, 
-	use o div abaixo, caso contrário, a árvore será colocada na guia definida em objmapa.guiaMenu, por default a guia2
-  	<div id=arvoreAdicionaTema style='top:25px;' ></div>
-  	<div id=outrasOpcoesAdiciona style='top:25px;' ></div>
-  	-->	
-  
   <div id='guia2obj' style='display:none;'>Aguarde...<img alt="" src="../imagens/branco.gif" width=248 /></div>
   <div id='guia4obj' style='display:none;text-align:left'><div id='legenda' style='text-align:left'></div></div>
   <div id='guia5obj' style='display:none;text-align:left'><div id='banners' style='overflow:auto;text-align:left'>Aguarde...</div></div>
@@ -85,90 +58,69 @@
 <tr>
 
  <td class=tdbranca >
- 	<!--
- 		Nesse div são incluídos os ícones que permitem ao usuário modificar o visual de cores dos ícones
- 		<div id=visual ></div>
- 	-->
- 	<!-- aqui serão incluídas as bandeiras que permitem a troca de idioma -->
  	<div id="seletorIdiomas" ></div>
- 	<!-- aqui será incluído o contador de tempo quando o temporizador de redesenho do mapa estiver ativo -->
  	<div id=tempoRedesenho style=color:green;background-color:black;width:50px;display:none ></div>
  </td>
  <td class=tdbranca >
   <table width=100% ><tr>
   <td class=tdbranca ></td>
   <td class=tdbranca style=text-align:center >
-  	<!-- aqui será incluído o gadget que mostra a coordenada geográfica da posição do mouse -->
   	<div id=localizarxy style="text-align:left;font-size:10px;">Aguarde...</div>
   </td>
   <td class=tdbranca >
-  	<!-- aqui será incluída a escala numérica -->
   	<div id=escala ></div>
   </td>
-  <!--
-  	A opção de localização 'onde estou?' baseia-se na identificação do IP do usuário. Para
-  	que esta opção funcione corretamente, deve estar instalado no I3Geo o pacote geoIP. Veja no
-  	SVN do portal do software público o diretório arquivos_versões/pacotes para maiores informações
-  -->
-  <td class=tdbranca ><div id=ondeestou ></div></td>
   </tr>
-  <!-- esta div recebe o cálculo do posicionamento do mouse em coordenadas UTM
-  As coordenadas UTM apenas serão mostradas nessa div se o parâmetro
-  i3GEO.gadgets.mostraCoordenadasUTM.idhtml for diferente de i3GEO.gadgets.mostraCoordenadasGEO.idhtml
-  se os IDs forem iguais, o tipo de coordenada mostrada será intercalada, ora UTM ora GEO.
-  <tr><td></td><td class="tdbranca"><div style="text-align:left;font-size:8px;background-color:white;display:none;" id=mostraUTM ></div></td><td></td></tr>
-   -->
   </table>
  </td>
 </tr>
 <tr style="border:0px"><td colspan=3 id="barraInferior" style="background-image:url('../imagens/visual/default/rodape.png');height:10px"></td></tr>
-<!-- aqui são mostradas imagens obtidas do metadata mensagem que pode existir em cada layer -->
-<tr style="border:0px"><td colspan=3 style=background-color:black ><input style="border:0px none; background-color:black;color:white;font-size:12pt;" type="text" size="1" id="i3geo_letreiro" ></td></tr>
 <tr style="border:0px"><td colspan=3 style=background-color:black;color:white  id="emailInstituicao">geoprocessamento@mma.gov.br</td></tr>
 
 </table>
-
-<!-- Variáveis globais e inicialização do mapa-->
+<!-- estilo necessário para a ferramenta de edição -->
+<style>
+.olControlEditingToolbar1 div {
+	background-image:url(../mashups/openlayers.png);
+	background-repeat:no-repeat;
+	float:right;
+	right: 0px;	
+	height:29px;
+	margin:2px;
+	width:29px;
+	cursor:pointer;
+}
+</style>
 <script type="text/javascript">
-
-/*
-	Indica a localização correta do i3geo.
-	
-	É utilizada para identificar o local correto onde estão os programas em php que são utilizados.
-*/
 i3GEO.configura.locaplic = i3GEO.util.protocolo()+"://"+window.location.host+"/i3geo";
 var g_localimg = i3GEO.util.protocolo()+"://"+window.location.host+"/i3geo/imagens";
+//
+//abilita o modo tile
+//
+i3GEO.Interface.openlayers.TILES = true;
+//número de tiles fora do mapa
+i3GEO.Interface.openlayers.BUFFER = 2;
 
 i3GEO.Interface.ATUAL = "openlayers";
 i3GEO.Interface.IDCORPO = "contemImg";
 i3GEO.configura.diminuixN = 20
-
 i3GEO.Interface.openlayers.GADGETS = {
 		PanZoomBar:true,
 		PanZoom:false,
-		LayerSwitcher:true,
+		LayerSwitcher:false,
 		ScaleLine:true,
 		OverviewMap:false	
 	};
-i3GEO.Interface.openlayers.TILES = true;
-//número de tiles fora do mapa
-i3GEO.Interface.openlayers.BUFFER = 1;
-/*
-Após a criação, é criado o objeto i3geoOL que corresponde ao objeto map da API do OpenLayers.
-Vc pode usar i3geoOL para aplicar os métodos e verificar as propriedades da API do OpenLayers
-*/
 i3GEO.cria();
-/*
-	Inicializa o mapa
-	
-*/
+i3GEO.configura.mapaRefDisplay = "none";
+//tipo de barra de botões
+i3GEO.barraDeBotoes.TIPO = "yui";
 i3GEO.barraDeBotoes.AUTOALTURA = false;
 i3GEO.barraDeBotoes.ATIVAMENUCONTEXTO = false;
 i3GEO.barraDeBotoes.PERMITEFECHAR = true;
 i3GEO.barraDeBotoes.PERMITEDESLOCAR = true;
 i3GEO.barraDeBotoes.AUTO = true;
 i3GEO.barraDeBotoes.COMPORTAMENTO = "laranja"
-
 i3GEO.Interface.BARRABOTOESLEFT = 50
 i3GEO.Interface.BARRABOTOESTOP = 10
 
@@ -176,13 +128,7 @@ i3GEO.idioma.IDSELETOR = "seletorIdiomas"
 i3GEO.Interface.ATIVAMENUCONTEXTO = true
 i3GEO.arvoreDeTemas.TIPOBOTAO = "radio";
 i3GEO.arvoreDeTemas.ATIVATEMAIMEDIATO = true
-//
-//esta é uma variável interna do OpenLayers que define o endereço do diretório onde estão as imagens usadas nos ícones
-//
 OpenLayers.ImgPath = "../pacotes/openlayers/img/"
-//
-//adiciona camadas que podem ser ativadas como fundo do mapa
-//
 var ims = new OpenLayers.Layer.ArcGIS93Rest( 
 	"ESRI Imagery World 2D",
     "http://server.arcgisonline.com/ArcGIS/rest/services/ESRI_Imagery_World_2D/MapServer/export",
@@ -209,10 +155,6 @@ var osm = new OpenLayers.Layer.WMS(
 );
 
 i3GEO.Interface.openlayers.LAYERSADICIONAIS = [ims,wsm,bra,osm];
-
-//
-//inicia o mapa
-//
 i3GEO.inicia();
 </script>
 </body>

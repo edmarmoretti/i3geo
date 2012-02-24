@@ -10,8 +10,8 @@ error_reporting(E_ALL);
 if(!isset($temas))
 {ajuda();}
 //problema na versão 211 do OpenLayers. Tamanho em % não é aceito
-if(!isset($largura))
-{$largura = 500;}
+//if(!isset($largura))
+//{$largura = 500;}
 if(isset($largura) && !isset($altura))
 {$altura = $largura;}
 if(isset($altura) && !isset($largura))
@@ -249,6 +249,7 @@ Parâmetros:
 -->
 
 <script type="text/javascript" src="openlayers_compacto.js.php"></script>
+<script type="text/javascript" src="../classesjs/compactados/classe_util_compacto.js"></script>
 <link rel="stylesheet" href="openlayers_compacto.css" type="text/css" />
 
 <!--
@@ -275,11 +276,17 @@ Parâmetros:
 if(isset($largura) && $largura != "")
 {echo '<div id=i3geoMapa style="width:'.$largura.'px;height:'.$altura.'px;"></div>';}
 else
-{echo '<div id=i3geoMapa style="width:100%;height:100%"></div>';}
+{echo '<div id=i3geoMapa style="width:0;height:0"></div>';}
 
 ?>
-<div id=i3geoSelTemaAtivo style="height:15em;z-index:3000" class=" yui-skin-sam"></div>
+<div id=i3geoSelTemaAtivo style="height:15em;z-index:3000;display:none" class=" yui-skin-sam"></div>
 <script>
+var m = document.getElementById("i3geoMapa");
+if(parseInt(m.style.width,10) === 0){
+	var t = i3GEO.util.tamanhoBrowser();
+	m.style.width = (t[0]-10)+"px";
+	m.style.height = (t[1]-20)+"px";
+}
 i3GEO.editorOL.layersIniciais = [<?php
 	if(isset($objOpenLayers) && $objOpenLayers != "")
 	{echo implode(",",$objOpenLayers);}

@@ -13,7 +13,6 @@
 	</tr>
 	<tr>
 		<td id="contemMenu" style="text-align:right;border-width:0pt 0pt 1px;border-color:rgb(240,240,240)">
-			<!--menu suspenso-->
 			<div id="menus" ></div>
 		</td>
 	</tr>
@@ -33,24 +32,15 @@
 			<table width=100% >
 				<tr>
 					<td class=tdbranca >
-						<!--
-						Nesse div são incluídos os ícones que permitem ao usuário modificar o visual de cores dos ícones
-						<div id=visual ></div>
-						-->
-						<!-- botão de compartilhamento em redes sociais -->
 						<div id=i3GEOcompartilhar style="text-align:left;border-top:1px solid rgb(250,250,250);padding-top:1px" ></div>
-						<!-- aqui será incluído o contador de tempo quando o temporizador de redesenho do mapa estiver ativo -->
 						<div id=tempoRedesenho style=color:green;background-color:black;width:50px;display:none ></div>
 					</td>
 					<td class=tdbranca >
-						<!-- aqui será incluída a escala numérica -->
 						<div id=escala style="text-align:right;" ></div>
 					</td>
 					<td class=tdbranca  >
-						<!-- aqui será incluído o gadget que mostra a coordenada geográfica da posição do mouse -->
 						<div id=localizarxy style="text-align:left;font-size:10px;display:inline-table"></div>
 					</td>
-					<!-- aqui serão incluídas as bandeiras que permitem a troca de idioma -->	  
 					<td class=tdbranca  >
 						<div id=seletorIdiomas ></div>
 					</td>
@@ -72,9 +62,6 @@
 	</tr>
 	<tr>
 		<td><center>
-			<!--
-			<script id="ohloh" type="text/javascript" src="http://www.ohloh.net/p/150688/widgets/project_users.js?style=red"></script>
-			-->
 		</td>
 	</tr>
 </table>
@@ -85,13 +72,9 @@
 		<div id='i3GEOguiaMovelIcones' style='overflow:none;left:0px;display:none;position:absolute;top:0px;text-align:center;height:0px;width:0px;border:solid 0px white;background-color:white' ></div>
 		<div id='i3GEOguiaMovelConteudo' style='overflow:auto;display:none;position:absolute;border-color:gray;border-width:0px 0 0px 0px;left:0px;height:0px;background-color:white'>
 			<div id='guia1obj' style='display:none;' >
-				<!-- Esta div acrescenta a opção de busca rápida, caso vc queira colocá-la em um lugar específico -->
 				<div style='left:5px;top:10px;' id=buscaRapida ></div>
-				<!--	Esta div acrescenta a lista de propriedades do mapa -->	
 				<div id=listaPropriedades style='top:15px;' ></div>
-				<!--	Esta div acrescenta a lista de de camadas do tipo 'baselayers' específicas da interface Openlayers. Veja também a opção i3GEO.Interface.openlayers.GADGETS.LayerSwitcher -->
 				<div id=listaLayersBase style='top:15px;'></div>
-				<!--	Esta div acrescenta a lista de de camadas disponíveis no mapa atual -->
 				<div id=listaTemas style='top:15px;'></div>
 			</div>
 			<div id='guia2obj' style='display:none;'>Aguarde...<img alt="" src="../imagens/branco.gif" width=248 /></div>
@@ -100,10 +83,8 @@
 		</div>
 	</div>
 </div>
-
 <script src="../classesjs/i3geonaocompacto.js"></script>
 <script src="../pacotes/openlayers/OpenLayers211.js.php"></script>
-<!-- estilo necessário para a ferramenta de edição -->
 <style>
 .olControlEditingToolbar1 div {
 	background-image:url(../mashups/openlayers.png);
@@ -117,44 +98,10 @@
 }
 </style>
 <script>
-/*
-Title: Interface Openlayers
-
-Abre o i3geo com todas as suas funcionalidades e interface de navegação controlada pela API Openlayers.
-
-File: i3geo/interface/openlayers.htm
-
-Exemplo:
-
-http://<host>/i3geo/ms_criamapa.php
-
-http://<host>/i3geo/interface/openlayers.htm
-
-http://<host>/i3geo
-
-Para definir quais botões das barras de ferramentas serão incluídos no mapa, veja: <classe_barradebotoes.js> i3GEO.barraDeBotoes.INCLUIBOTAO
-
-*/
-/*
-	Indica a localização correta do i3geo.
-	
-	É utilizada para identificar o local correto onde estão os programas em php que são utilizados.
-	
-	Se não for definida, o i3Geo tentará encontrar o local automaticamente com base na tag javascript 
-*/
-//i3GEO.configura.locaplic = i3GEO.util.protocolo()+"://"+window.location.host+"/i3geo";
-/*
-Para outras configurações, veja i3geo/classesjs/classe_configura.js
-
-exemplo
-
-i3GEO.configura.autotamanho = true;
-*/
 i3GEO.configura.locaplic = i3GEO.util.protocolo()+"://"+window.location.host+"/i3geo";
 i3GEO.configura.autotamanho = false;
 i3GEO.Interface.ATUAL = "openlayers";
 i3GEO.Interface.IDCORPO = "contemImg";
-
 i3GEO.Interface.openlayers.GADGETS = {
 		PanZoomBar:true,
 		PanZoom:false,
@@ -163,49 +110,12 @@ i3GEO.Interface.openlayers.GADGETS = {
 		OverviewMap:false	
 	};
 i3GEO.Interface.openlayers.TILES = true;
-
-//
-//desabilita o item que abre a interface "default" do menu suspenso
-//
 i3GEO.gadgets.PARAMETROS.mostraMenuSuspenso.finaliza = 'if($i("omenudataInterface1")){i3GEOoMenuBar.getMenuItem("omenudataInterface1").cfg.setProperty("text", " ");}'
-
-/*
-Após a criação, é criado o objeto i3geoOL que corresponde ao objeto map da API do OpenLayers.
-Vc pode usar i3geoOL para aplicar os métodos e verificar as propriedades da API do OpenLayers
-*/
 i3GEO.cria();
-/*
-	Inicializa o mapa
-*/
-//não mostra o mapa de referência
 i3GEO.configura.mapaRefDisplay = "none";
-//tipo de barra de botões
 i3GEO.barraDeBotoes.TIPO = "olhodepeixe";
-//ajusta o deslocamento da barra de botões
 i3GEO.barraDeBotoes.OFFSET = -3;
-//ajusta a posição da barra de botões no IE
-//if(navm)
-//{i3GEO.barraDeBotoes.OFFSET = -45;}
-//número máximo de botões na barra de botões inicial
-//i3GEO.barraDeBotoes.MAXBOTOES = 10;
-//remove itens dos menus que não são necessários, já que estão como ícones na barra de botões
 i3GEO.configura.oMenuData["submenus"]["janelas"] = [];
-//
-//barra de botoes normal. descomente para usar
-/*
-i3GEO.barraDeBotoes.TIPO = "yui";
-i3GEO.barraDeBotoes.AUTOALTURA = true;
-i3GEO.barraDeBotoes.ATIVAMENUCONTEXTO = false;
-i3GEO.barraDeBotoes.PERMITEFECHAR = false;
-i3GEO.barraDeBotoes.PERMITEDESLOCAR = false;
-i3GEO.barraDeBotoes.AUTO = true;
-i3GEO.barraDeBotoes.COMPORTAMENTO = "laranja";
-
-i3GEO.Interface.BARRABOTOESLEFT = 0;
-i3GEO.Interface.BARRABOTOESTOP = 2;
-i3GEO.Interface.BARRADEZOOMTOP = 10;
-i3GEO.Interface.BARRADEZOOMLEFT = 40;
-*/
 i3GEO.ajuda.ATIVAJANELA = false;
 i3GEO.idioma.IDSELETOR = "seletorIdiomas";
 i3GEO.Interface.ATIVAMENUCONTEXTO = false;
@@ -216,13 +126,7 @@ i3GEO.arvoreDeCamadas.VERIFICAABRANGENCIATEMAS = true;
 i3GEO.arvoreDeCamadas.MOSTRALISTAKML = false;
 i3GEO.mapa.AUTORESIZE = true;
 i3GEO.guias.TIPO = "movel";
-//
-//esta é uma variável interna do OpenLayers que define o endereço do diretório onde estão as imagens usadas nos ícones
-//
 OpenLayers.ImgPath = "../pacotes/openlayers/img/";
-//
-//adiciona camadas que podem ser ativadas como fundo do mapa
-//
 (function(){
 	var oce = new OpenLayers.Layer.ArcGIS93Rest( 
 		"ESRI Ocean Basemap",
@@ -248,28 +152,15 @@ OpenLayers.ImgPath = "../pacotes/openlayers/img/";
 		{layers:"baseraster",srs:"EPSG:4618",format:"image/png",isBaseLayer:false},
 		{isBaseLayer:true,visibility:false}
 	);
-	/*
-	var osm = new OpenLayers.Layer.WMS( 
-		"Open Street Map",
-		"http://full.wms.geofabrik.de/std/demo_key",
-		{layers:""},
-		{isBaseLayer:true,visibility:false}
-	);
-	*/
 	i3GEO.Interface.openlayers.LAYERSADICIONAIS = [oce,ims,wsm,bra];
 })();
-//
-//substitui a janela de alerta normal do navegador por uma janela estilizada. Pode ser comentado sem problemas. No Safari apresentou problemas.
-//
-//i3GEO.janela.ativaAlerta();
-//
-//inicia o mapa
-//
-//esconde a logomarca ao finalizar o mapa
 i3GEO.finaliza = function(){
 	$i("i3GEOlogoMarca").style.display = "none";
 }
-
+//
+//altera a guia do catalogo
+//
+i3GEO.guias.guiaMovel.ABERTA = true;
 i3GEO.guias.CONFIGURA.adiciona.click = function(){
 		var ondeArvore;
 		i3GEO.guias.mostra("adiciona");
@@ -285,10 +176,8 @@ i3GEO.guias.CONFIGURA.adiciona.click = function(){
 			"<div id=ListaDeMenus ></div><br>" +
 			"<div id=ListaDeGrupos ></div><br>" +
 			"<div id=ListaDeSubGrupos ></div><br>" +
-			"<div id=ListaDeTemas ></div><br>";
-			
+			"<div id=ListaDeTemas ></div><br>";		
 		i3GEO.arvoreDeTemas.comboMenus(i3GEO.configura.locaplic,"escolheuMenu","ListaDeMenus","comboMenus",300,1);
-		//i3GEO.arvoreDeTemas.cria(i3GEO.configura.sid,i3GEO.configura.locaplic,ondeArvore);
 }
 function escolheuMenu(id){
 	i3GEO.arvoreDeTemas.comboGruposMenu(i3GEO.configura.locaplic,"escolheuGrupo","ListaDeGrupos","comboGrupos",300,1,id)

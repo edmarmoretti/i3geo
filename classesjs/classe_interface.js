@@ -246,7 +246,6 @@ i3GEO.Interface = {
 				i3GEO.arvoreDeCamadas.CAMADAS = [];
 				i3GEO.atualiza();
 				i3GEO.mapa.insereDobraPagina("openlayers",i3GEO.configura.locaplic+"/imagens/dobraopenlayers.png");
-				i3GEO.Interface.STATUS.trocando = false;
 			};
 			i3GEO.php.converte2googlemaps(temp);
 		}
@@ -281,7 +280,6 @@ i3GEO.Interface = {
 				i3GEO.arvoreDeCamadas.CAMADAS = [];
 				i3GEO.atualiza();
 				i3GEO.mapa.insereDobraPagina("googlemaps",i3GEO.configura.locaplic+"/imagens/dobragooglemaps.png");
-				i3GEO.Interface.STATUS.trocando = false;
 				i3GEO.Interface.openlayers.zoom2ext(i3GEO.parametros.mapexten);
 			};
 			i3GEO.php.converte2openlayers(temp);
@@ -454,11 +452,15 @@ i3GEO.Interface = {
 	*/
 	ativaBotoes: function(){
 		if(typeof(console) !== 'undefined'){console.info("i3GEO.Interface.ativaBotoes()");}
-		if(i3GEO.barraDeBotoes.TIPO === "olhodepeixe" && i3GEO.Interface.STATUS.trocando === false){
-			i3GEO.barraDeBotoes.inicializaBarra();
+		if(i3GEO.Interface.STATUS.trocando === false){
+			if(i3GEO.barraDeBotoes.TIPO === "olhodepeixe"){
+				i3GEO.barraDeBotoes.inicializaBarra();
+			}
+			else
+			{i3GEO.Interface[i3GEO.Interface.ATUAL].ativaBotoes();}
 		}
-		else
-		{i3GEO.Interface[i3GEO.Interface.ATUAL].ativaBotoes();}
+		//else
+		//{i3GEO.barraDeBotoes.recria("i3geo_barra2");}
 	},
 	/*
 	Classe: i3GEO.Interface.padrao
@@ -940,8 +942,7 @@ i3GEO.Interface = {
 				//é necessário ativar nesse momento pois a barra de botoes já foi criada
 				if(i3GEO.Interface.TABLET === false)
 				{i3GEO.Interface.openlayers.OLpanel.activateControl(i3GEO.Interface.openlayers.OLpan);}
-				if(i3GEO.Interface.STATUS.trocando == true)
-				{i3GEO.Interface.ativaBotoes();}
+				i3GEO.Interface.ativaBotoes();
 				if(openlayers.GADGETS.PanZoomBar === true){
 					i3GEO.Interface.openlayers.OLpanzoombar = new OpenLayers.Control.PanZoomBar();
 					i3geoOL.addControl(i3GEO.Interface.openlayers.OLpanzoombar);
@@ -1681,8 +1682,8 @@ i3GEO.Interface = {
 				//se o mapa está no modo de troca de interface, alguns elementos não precisam ser inseridos novamente
 				if(i3GEO.Interface.STATUS.trocando === false){
 					i3GEO.gadgets.mostraInserirKml();
-					i3GEO.Interface.ativaBotoes();
 				}
+				i3GEO.Interface.ativaBotoes();
 				i3GEO.eventos.ativa($i(i3GEO.Interface.IDMAPA));
 				if(i3GEO.Interface.STATUS.trocando === false){
 					i3GEO.coordenadas.mostraCoordenadas();
