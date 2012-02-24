@@ -40,6 +40,8 @@ Function: iniciaMapa
 
 Inicia um mapa e obtém os parâmetros necessários para o funcionamento da interface HTML.
 
+Para permitir a troca dinâmica de interfaces, são gravados no mapfile os METADATA status e opacity, com o prefixo "ol" para OpenLayers e "gm" para Google Maps e Earth
+
 Globais:
 
 $interface - nome da interface que será utilizada pelo mapa padrao|openlayers|googlemaps|googleearth|flamingo . O valor de $interface é também armazenado no metadata "interface" do objeto Map, podendo ser utilizada em outros programas do i3Geo.
@@ -110,6 +112,20 @@ function iniciaMapa()
 	//pega o xml com os sietmas para identificação
 	//
 	if(!isset($interface)){$interface = "";}
+	if($interface == "openlayers"){
+		$m = ms_newMapObj($map_file);
+		$c = $m->numlayers;
+		for ($i=0;$i < $c;++$i)
+		{
+			$layer = $m->getlayer($i);
+			if($layer->status == 2)
+			{$layer->setmetadata("olstatus","DEFAULT");}
+			else
+			{$layer->setmetadata("olstatus","OFF");}
+			$layer->setmetadata("olopacity",$layer->opacity);
+		}
+		$m->save($map_file);
+	}
 	if($interface == "googlemaps" || $interface == "googleearth")
 	{	
 		$m = ms_newMapObj($map_file);
@@ -120,6 +136,11 @@ function iniciaMapa()
 		for ($i=0;$i < $c;++$i)
 		{
 			$layer = $m->getlayer($i);
+			if($layer->status == 2)
+			{$layer->setmetadata("gmstatus","DEFAULT");}
+			else
+			{$layer->setmetadata("gmstatus","OFF");}
+			$layer->setmetadata("gmopacity",$layer->opacity);
 			if($layer->name == "mundo" || $layer->name == "estados")
 			{$layer->set("status",MS_OFF);}		
 			if($layer->type == MS_LAYER_POLYGON)

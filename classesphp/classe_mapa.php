@@ -1752,5 +1752,42 @@ $arq - Nome do arquivo.
 		{$escreve = fwrite ($abre,$linha);}
 		$fecha = fclose ($abre);
 	}
+/*
+Method: converteInterfacePara
+
+Converte o mapfile atual ajustando o funcionamento para uma interface específica
+
+Parametros:
+
+$interface - googlemaps|openlayers
+*/
+	function converteInterfacePara($interface){
+		if($interface == "openlayers"){
+			$prefixo = "ol";
+			$this->mapa->setProjection("+proj=longlat +ellps=GRS67 +no_defs");
+		}
+		else
+		{$prefixo = "gm";}
+		foreach($this->layers as $l){
+			$opacidadeM = $l->getmetadata($prefixo."opacity");
+			$statusM = $l->getmetadata($prefixo."status");
+			if($opacidadeM == "")
+			{$l->setmetadata($prefixo."opacity",100);}
+			else
+			{$l->set("opacity",$prefixo."opacity");}
+			if($statusM != ""){
+				if($statusM == "OFF")
+				{$l->set("status",MS_OFF);}
+				if($statusM == "DEFAULT")
+				{$l->set("status",MS_DEFAULT);}
+			}
+			if($prefixo == "gm" && ($l->name == "mundo" || $l->name == "estados"))
+			{$l->set("status",MS_OFF);}
+			if($l->opacity == 0)
+			{$l->set("opacity",100);}
+		}
+		$this->salva();
+		return "ok";
+	}
 }
 ?>

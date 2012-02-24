@@ -1064,6 +1064,28 @@ i3GEO.php = {
 		cpJSON.call(p,"corpo",funcao,par);
 	},
 	/*
+	Function: converte2googlemaps
+
+	<CONVERTE2GOOGLEMAPS>
+	*/	
+	converte2googlemaps: function(funcao){
+		i3GEO.php.verifica();
+		var p = i3GEO.configura.locaplic+"/classesphp/mapa_controle.php",
+			par = "funcao=converte2googlemaps&g_sid="+i3GEO.configura.sid;
+		cpJSON.call(p,"converte2googlemaps",funcao,par);	
+	},
+	/*
+	Function: converte2openlayers
+
+	<CONVERTE2OPENLAYERS>
+	*/	
+	converte2openlayers: function(funcao){
+		i3GEO.php.verifica();
+		var p = i3GEO.configura.locaplic+"/classesphp/mapa_controle.php",
+			par = "funcao=converte2openlayers&g_sid="+i3GEO.configura.sid;
+		cpJSON.call(p,"converte2openlayers",funcao,par);	
+	},
+	/*
 	Function: criamapa
 
 	<CRIAMAPA>

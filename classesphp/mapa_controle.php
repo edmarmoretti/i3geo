@@ -296,6 +296,26 @@ Prepara o mapa atual para funcionar na interface googleearth.
 		iniciaMapa();
 	break;
 /*
+Valor: CONVERTE2OPENLAYERS
+
+Prepara o mapa atual que estava usando outra interface
+*/
+	case "CONVERTE2OPENLAYERS":
+		include_once("classe_mapa.php");
+		$m = new Mapa($map_file);
+		$retorno = $m->converteInterfacePara("openlayers");
+	break;
+/*
+Valor: CONVERTE2GOOGLEMAPS
+
+Prepara o mapa atual que estava usando outra interface
+*/
+	case "CONVERTE2GOOGLEMAPS":
+		include_once("classe_mapa.php");
+		$m = new Mapa($map_file);
+		$retorno = $m->converteInterfacePara("googlemaps");
+	break;	
+/*
 Section: Análise
 
 Análise de dados.
