@@ -146,12 +146,13 @@ i3GEObuscaRapida = {
 	temasmapa {boolean} - indica se a busca será feita nos temas existentes no mapa
 	*/
 	inicia: function(palavra,locaplic,resultado,servicosexternos,temasmapa){
-		$i(i3GEObuscaRapida.idresultado).style.display = "none";
+		if($i(i3GEObuscaRapida.idresultado))
+		{$i(i3GEObuscaRapida.idresultado).style.display = "none";}
 		var palavra = i3GEO.util.removeAcentos(palavra);
 		i3GEObuscaRapida.palavra = palavra;
 		i3GEObuscaRapida.locaplic = locaplic;
 		if(servicosexternos === true){
-			aguarde("block")
+			//aguarde("block")
 			i3GEO.php.buscaRapida(resultado,locaplic,i3GEObuscaRapida.servico,palavra);
 		}
 		if(temasmapa === true){
@@ -167,7 +168,8 @@ i3GEObuscaRapida = {
 			catch(e){}
 		}
 		else{
-			$i("resultadoTemas").innerHTML = "";
+			if($i("resultadoTemas"))
+			{$i("resultadoTemas").innerHTML = "";}
 		}
 	},
 	/*

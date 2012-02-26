@@ -6,14 +6,37 @@
 <title>MMA - Mapa interativo</title>
 <script type="text/javascript" src="../classesjs/i3geo.js"></script>
 <script type="text/javascript" src="../pacotes/openlayers/OpenLayers211.js.php"></script>
-
+<style>
+.yui-skin-sam .yui-carousel-button {
+    background: url("../pacotes/yui290/build/assets/skins/sam/sprite.png") no-repeat scroll 0 -600px transparent;
+    float: right;
+    height: 19px;
+    margin: 5px;
+    overflow: hidden;
+    width: 40px;
+}
+.yui-skin-sam .yui-carousel-nav {
+    background: url("../pacotes/yui290/build/assets/skins/sam/sprite.png") repeat-x scroll 0 0 transparent;
+    padding: 3px;
+    text-align: right;
+}
+.yui-skin-sam .yui-carousel-nav ul li {
+    background: url("../pacotes/yui290/build/assets/skins/sam/sprite.png") no-repeat scroll 0 -650px transparent;
+    cursor: pointer;
+    float: left;
+    height: 9px;
+    list-style: none outside none;
+    margin: 10px 0 0 5px;
+    overflow: hidden;
+    padding: 0;
+    width: 9px;
+}
+</style>
 </head>
 <body style="background-color:rgb(200,200,200);z-index:0;" class=yui-skin-sam >
 <div id=carousel style="left:100px;top:0px;position:absolute"  >
 </div>
 <div id=i3geo style="left:100px;top:100px;position:absolute"  >
-
-
 <table id='mst' style=display:none width=100% cellspacing='0'>
 <tr style="border:0px"><td colspan=2 style="background-image:url('../imagens/visual/default/cabeca.png');height:10px"></td></tr>
 <tr>
@@ -90,9 +113,9 @@ i3GEO.Interface.IDCORPO = "contemImg";
 i3GEO.configura.diminuixN = 20
 
 i3GEO.Interface.openlayers.GADGETS = {
-		PanZoomBar:true,
+		PanZoomBar:false,
 		PanZoom:false,
-		LayerSwitcher:true,
+		LayerSwitcher:false,
 		ScaleLine:true,
 		OverviewMap:false	
 	};

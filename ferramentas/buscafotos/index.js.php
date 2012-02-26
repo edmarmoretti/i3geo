@@ -64,8 +64,10 @@ i3GEOF.buscaFotos = {
 	Parametro:
 	
 	iddiv {String} - id do div que receberá o conteudo HTML da ferramenta
+	
+	pagina {integer} - (opcional) página que será mostrada. Se for definida a janela de busca será mostrada já de início por meio do serviço do panoramio
 	*/
-	inicia: function(iddiv){
+	inicia: function(iddiv,busca){
 		try{
 			$i(iddiv).innerHTML += i3GEOF.buscaFotos.html();
 			new YAHOO.widget.Button("i3GEObuscafotosbotao1",{onclick:{fn: function(){
@@ -82,10 +84,10 @@ i3GEOF.buscaFotos = {
 			
 			i3GEOF.buscaFotos.ativaFoco();
 			i3GEO.eventos.NAVEGAMAPA.push("i3GEOF.buscaFotos.busca('1')");
-			if(i3GEO.parametros.mapscale === ""){
+			if(busca){
 				i3GEOF.buscaFotos.mostraMenu();
 				$i("i3GEObuscafotosbuscapanoramio").checked = true;
-				i3GEOF.buscaFotos.busca("1");
+				i3GEOF.buscaFotos.busca(busca);
 			}
 		}
 		catch(erro){alert(erro);}

@@ -1714,6 +1714,7 @@ i3GEO.arvoreDeTemas = {
 				//
 				if(i3GEO.arvoreDeTemas.RETORNAGUIA !== ""){
 					if(i3GEO.arvoreDeTemas.RETORNAGUIA !== i3GEO.guias.ATUAL){
+						i3GEO.guias.escondeGuias();
 						i3GEO.guias.mostra(i3GEO.arvoreDeTemas.RETORNAGUIA);
 					}
 				}

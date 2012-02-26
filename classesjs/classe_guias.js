@@ -585,8 +585,9 @@ i3GEO.guias = {
 	ativa: function(guia){
 		if(typeof(console) !== 'undefined'){console.info("i3GEO.guias.ativa()");}
 		try{
-			if(this.CONFIGURA[this.ATUAL].click !== "")
-			{this.CONFIGURA[this.ATUAL].click.call();}
+			i3GEO.guias.ATUAL = guia;
+			if(i3GEO.guias.CONFIGURA[i3GEO.guias.ATUAL].click !== "")
+			{i3GEO.guias.CONFIGURA[i3GEO.guias.ATUAL].click.call();}
 		}
 		catch(e){
 			if(typeof(console) !== 'undefined'){console.error(e);}
