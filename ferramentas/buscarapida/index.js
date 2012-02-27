@@ -152,7 +152,9 @@ i3GEObuscaRapida = {
 		i3GEObuscaRapida.palavra = palavra;
 		i3GEObuscaRapida.locaplic = locaplic;
 		if(servicosexternos === true){
-			//aguarde("block")
+			try
+			{aguarde("block");}
+			catch(e){}
 			i3GEO.php.buscaRapida(resultado,locaplic,i3GEObuscaRapida.servico,palavra);
 		}
 		if(temasmapa === true){
@@ -198,7 +200,7 @@ i3GEObuscaRapida = {
 		catch(e){var ins = "Nada encontrado nos temas ou nenhum tema permite busca.<br>";}
 		$i("resultadoTemas").style.display = "block";
 		$i("resultadoTemas").innerHTML = ins;
-		aguarde("none");
+		try{aguarde("none");}catch(e){}
 	},	
 	/*
 	Function: montaResultado
@@ -238,7 +240,8 @@ i3GEObuscaRapida = {
 		catch(e){var ins = "Erro ao acessar o serviço "+i3GEObuscaRapida.servico+"<br>";}
 		$i(i3GEObuscaRapida.idresultado).style.display = "block";
 		$i(i3GEObuscaRapida.idresultado).innerHTML = ins
-		aguarde("none")
+		try{aguarde("none");}
+		catch(e){}
 		if(i3GEObuscaRapida.buscaemtemas){	
 			try{
 				window.parent.i3GEO.php.procurartemas2(i3GEObuscaRapida.resultadoTemas,i3GEObuscaRapida.palavra,i3GEObuscaRapida.locaplic);	

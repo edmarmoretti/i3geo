@@ -12,12 +12,12 @@ if(!isset($locaplic))
   	<title></title>
   </head>
   <body name="ancora" class="yui-skin-sam;" style="overflow:auto;">
-<div style="top:5px;left:1px;display:block;width:90%;"  id="resultadoTemas" >Aguarde...</div>
+<div style="top:5px;left:1px;display:block;width:90%;"  id="resultado" >Aguarde...</div>
 	<script src="../../classesjs/i3geo.js" type="text/javascript"></script>
     <script language="JavaScript" type="text/javascript" src="index.js"></script>
 
 <script type="text/javascript">
-
+i3GEObuscaRapida.idresultado
 
 var mapaLugar = function(wkt,layer,gid,nm)
 {
@@ -31,7 +31,7 @@ var mapaLugar = function(wkt,layer,gid,nm)
 	window.open(url)
 }
 i3GEObuscaRapida.funcaozoom = "mapaLugar"
-i3GEObuscaRapida.inicia("<?php echo $palavra;?>","<?php echo $locaplic;?>",mapaLugar,true,false)
+i3GEObuscaRapida.inicia("<?php echo $palavra;?>","<?php echo $locaplic;?>",i3GEObuscaRapida.montaResultado,true,false)
   </script>
 
 

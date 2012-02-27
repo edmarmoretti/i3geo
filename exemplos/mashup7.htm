@@ -1,4 +1,4 @@
-<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/strict.dtd">
 <html>
 <head>
 <meta http-equiv="Category" content="I3Geo Mapa interativo MMA">
@@ -73,7 +73,9 @@ i3GEO.configura.iniciaJanelaMensagens = false
 i3GEO.idioma.MOSTRASELETOR = false
 i3GEO.configura.mashuppar = "&mapext=-53 -26 -42 -18";
 i3GEO.configura.visual = "laranja";
-i3GEO.cria()
+i3GEO.cria();
+OpenLayers.ImgPath = "../pacotes/openlayers/img/";
+
 i3GEO.inicia();
 i3GEO.mapa.legendaHTML.incluiBotaoLibera = false
 i3GEO.mapa.legendaHTML.cria("legendaDoMapa");
