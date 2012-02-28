@@ -2,5 +2,5 @@
 /*
 Utilizado como um include em ms_configura.php
 */
-$mensagemInicia = 'Vers&atilde;o 4.6 - RC 2 ';
+$mensagemInicia = 'Vers&atilde;o 4.7 - Alfa ';
 ?>
