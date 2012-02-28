@@ -224,7 +224,7 @@ function i3geo_gl_configura(loc_i3geo,nomeseltema,temasa,link,grupo,subgrupo,tem
 			ins += "&pontos="+$i("pontos").value
 			ins += "&nometemapontos="+$i("nometemapontos").value
 		}
-		if($i("perfili").value != "")
+		if($i("perfili") && $i("perfili").value != "")
 		{
 			ins += "&perfil="+$i("perfili").value
 		}
