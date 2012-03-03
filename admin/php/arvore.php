@@ -524,11 +524,11 @@ function alteraN3()
 			$o = $o->fetchAll();
 			$o = $o[0]['o'] + 1;
     		$idtemp = (rand (9000,10000)) * -1;
-    		$dbhw->query("INSERT INTO i3geoadmin_n3 (publicado,id_n2,n3_perfil,ordem,id_tema) VALUES ('NAO',$id_n2,'',$o,$idtemp)");
-			$id = $dbh->query("SELECT id_n3 FROM i3geoadmin_n3 where id_tema = '$idtemp'");
+    		$dbhw->query("INSERT INTO i3geoadmin_n3 (publicado,id_n2,n3_perfil,ordem) VALUES ('NAO',$id_n2,'$idtemp',$o)");
+			$id = $dbh->query("SELECT id_n3 FROM i3geoadmin_n3 where n3_perfil = '$idtemp'");
 			$id = $id->fetchAll();
 			$id = $id[0]['id_n3'];
-    		$dbhw->query("UPDATE i3geoadmin_n3 SET id_tema = '' WHERE id_n3 = $id AND id_tema = '$idtemp'");
+    		$dbhw->query("UPDATE i3geoadmin_n3 SET n3_perfil = '' WHERE id_n3 = $id AND n3_perfil = '$idtemp'");
 			$retorna = $id;
     	}
     	$dbhw = null;
@@ -558,11 +558,11 @@ function alteraN2()
 			$o = $o->fetchAll();
 			$o = $o[0]['o'] + 1;
 			$idtemp = (rand (9000,10000)) * -1;
-    		$dbhw->query("INSERT INTO i3geoadmin_n2 (id_n1,n2_perfil,ordem,publicado,id_subgrupo) VALUES ($id_n1,'',$o,'NAO',$idtemp)");
-			$id = $dbh->query("SELECT id_n2 FROM i3geoadmin_n2 where id_subgrupo = '$idtemp'");
+    		$dbhw->query("INSERT INTO i3geoadmin_n2 (id_n1,n2_perfil,ordem,publicado) VALUES ($id_n1,'$idtemp',$o,'NAO')");
+			$id = $dbh->query("SELECT id_n2 FROM i3geoadmin_n2 where n2_perfil = '$idtemp'");
 			$id = $id->fetchAll();
 			$id = $id[0]['id_n2'];
-    		$dbhw->query("UPDATE i3geoadmin_n2 SET id_subgrupo = '' WHERE id_n2 = $id AND id_subgrupo = '$idtemp'");			
+    		$dbhw->query("UPDATE i3geoadmin_n2 SET n2_perfil = '' WHERE id_n2 = $id AND n2_perfil = '$idtemp'");			
 			$retorna = $id;   	
     	}
     	$dbhw = null;
@@ -594,11 +594,11 @@ function alteraN1()
 			$o = $o->fetchAll();
 			$o = $o[0]['o'] + 1;
 			$idtemp = (rand (9000,10000)) * -1;
-    		$dbhw->query("INSERT INTO i3geoadmin_n1 (id_menu,n1_perfil,ordem,publicado,id_grupo) VALUES ($id_menu,'',$o,'NAO',$idtemp)");
-			$id = $dbh->query("SELECT id_n1 FROM i3geoadmin_n1 where id_grupo = '$idtemp'");
+    		$dbhw->query("INSERT INTO i3geoadmin_n1 (id_menu,n1_perfil,ordem,publicado) VALUES ($id_menu,'$idtemp',$o,'NAO')");
+			$id = $dbh->query("SELECT id_n1 FROM i3geoadmin_n1 where n1_perfil = '$idtemp'");
 			$id = $id->fetchAll();
 			$id = $id[0]['id_n1'];
-    		$dbhw->query("UPDATE i3geoadmin_n1 SET id_grupo = '' WHERE id_n1 = $id AND id_grupo = '$idtemp'");			
+    		$dbhw->query("UPDATE i3geoadmin_n1 SET n1_perfil = '' WHERE id_n1 = $id AND n1_perfil = '$idtemp'");			
 			$retorna = $id;   	
     	}
     	$dbhw = null;
