@@ -339,7 +339,7 @@ i3GEO.eventos = {
 			{pos = i3GEO.util.pegaPosicaoObjeto(targ.parentNode);}
 			else
 			{pos = i3GEO.util.pegaPosicaoObjeto(targ);}
-			if((i3GEO.configura.entorno.toLowerCase() === "sim") && (g_panM === "sim")){
+			if(g_panM === "sim"){
 				pos[0] = pos[0] - i3GEO.parametros.w;
 				pos[1] = pos[1] - i3GEO.parametros.h;
 			}

@@ -395,10 +395,6 @@ i3GEO.Interface = {
 		//
 		if($i("mst"))
 		{$i("mst").style.display="block";}
-		if (i3GEO.configura.entorno.toLowerCase() === "sim"){
-			i3GEO.configura.entorno = "nao";
-			i3GEO.navega.entorno.ativaDesativa();
-		}
 		i3GEO.navega.autoRedesenho.ativa();
 		i3GEO.util.defineValor("i3geo_escalanum","value",i3GEO.parametros.mapscale);
 		if ((i3GEO.parametros.geoip === "nao") && ($i("ondeestou")))

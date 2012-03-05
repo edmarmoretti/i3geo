@@ -823,26 +823,6 @@ i3GEO.navega = {
 		}
 	},
 	/*
-	Classe: i3GEO.navega.entorno
-
-	Controla o desenho do entorno do mapa (modo tile)
-	*/
-	entorno:{
-		/*
-		Function: ativaDesativa
-
-		Ajusta o mapa para ativar ou desativar o desenho do entorno
-
-		Ao ser chamada, essa função muda o modo atual, ativando ou desativando o entorno
-		*/
-		ativaDesativa: function(){
-			if(i3GEO.Interface.ATUAL === "googlemaps")
-			{alert("Essa operação não funciona nessa interface");return;}
-			if(i3GEO.Interface.ATUAL === "openlayers")
-			{i3GEO.Interface.openlayers.inverteModoTile();return;}
-		}
-	},
-	/*
 	Classe: i3GEO.navega.lente
 
 	Ativa e controla a lente de aumento.

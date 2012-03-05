@@ -190,10 +190,6 @@ function i3GEOmantemCompatibilidade(){
 	}
 	catch(e){alert("funcao depreciada");}
 	try{
-		i3GEO.configura.entorno = g_entorno;
-	}
-	catch(e){alert("funcao depreciada");}
-	try{
 		i3GEO.navega.lente.POSICAOX = g_posicaoLenteX = 0;
 	}
 	catch(e){alert("funcao depreciada");}
