@@ -738,8 +738,6 @@ i3GEO.mapa = {
 			{etiquetas = true;}}
 			if(etiquetas === false)
 			{return;}
-			if(i3GEO.Interface.ATUAL==="padrao")
-			{$i("img").style.cursor = "wait";}
 			if(i3GEO.Interface.ATUAL === "googleearth")
 			{i3GEO.Interface.googleearth.aguarde.visibility = "visible";}
 			retorna = function(retorno){
@@ -849,21 +847,6 @@ i3GEO.mapa = {
 						{temp = "identifica_contexto";}
 						i3GEO.util.mudaCursor(configura.cursores,temp,i3GEO.Interface.IDMAPA,configura.locaplic);
 					}
-				
-				/*
-				}
-				catch(e){
-					if(i3GEO.Interface.ATUAL==="padrao"){
-						temp = "identifica";
-						if(i3GEO.Interface.ATIVAMENUCONTEXTO)
-						{temp = "identifica_contexto";}
-						i3GEO.util.mudaCursor(i3GEO.configura.cursores,temp,"img",i3GEO.configura.locaplic);
-					}
-					if(i3GEO.Interface.ATUAL === "googleearth")
-					{i3GEO.Interface.googleearth.aguarde.visibility = "hidden";}
-					if(typeof(console) !== 'undefined'){console.error(e);}
-				}
-				*/
 			};
 			i3GEO.php.identifica2(retorna,objposicaocursor.ddx,objposicaocursor.ddy,"5","tip",i3GEO.configura.locaplic,i3GEO.configura.sid,"ligados",i3GEO.parametros.mapexten);
 		}

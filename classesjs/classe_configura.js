@@ -161,7 +161,6 @@ i3GEO.configura = {
 			"arquivos": [
 			{ id:"omenudataArquivos1",text: $trad("u17"), url: "javascript:i3GEO.mapa.dialogo.salvaMapa()" },
 			{ id:"omenudataArquivos2",text: $trad("u18"), url: "javascript:i3GEO.mapa.dialogo.carregaMapa()" },
-			{ id:"omenudataArquivos3",text: $trad("u19"), url: "javascript:i3GEO.gadgets.quadros.listaImagens()" },
 			{ id:"omenudataArquivos4",text: $trad("u20"), url: "javascript:i3GEO.mapa.dialogo.convertews()" },
 			{ id:"omenudataArquivos5",text: $trad("u20a"), url: "javascript:i3GEO.mapa.dialogo.convertekml()" }
 			],
@@ -170,7 +169,6 @@ i3GEO.configura = {
 			//{ id:"omenudataInterface1",text: "Interface normal", url: "javascript:window.location = i3GEO.configura.locaplic+'/interface/geral.htm?'+i3GEO.configura.sid" },
 			{ id:"omenudataInterface2",text: "OpenLayers", url: "javascript:window.location = i3GEO.configura.locaplic+'/interface/openlayers.htm?'+i3GEO.configura.sid" },
 			{ id:"omenudataInterface10",text: "OpenLayers tablet", url: "javascript:window.location = i3GEO.configura.locaplic+'/interface/openlayers_t.htm?'+i3GEO.configura.sid" },
-			//{ id:"omenudataInterface3",text: "Flash", url: "javascript:window.location = i3GEO.configura.locaplic+'/interface/flamingo.htm?'+i3GEO.configura.sid" },
 			{ id:"omenudataInterface4",text: "Google Maps", url: "javascript:window.location = i3GEO.configura.locaplic+'/interface/googlemaps.phtml?'+i3GEO.configura.sid" },
 			{ id:"omenudataInterface5",text: "Google Earth", url: "javascript:window.location = i3GEO.configura.locaplic+'/interface/googleearth.phtml?'+i3GEO.configura.sid" },
 			{ id:"omenudataInterface0b",text: '<span style=color:gray;text-decoration:underline; ><b>'+$trad("u27")+'</b></span>',url: "#"},
@@ -529,7 +527,6 @@ i3GEO.configura = {
 		{ text: "p3", url: "javascript:i3GEO.mapa.dialogo.opcoesLegenda()"},
 		{ text: "p4", url: "javascript:i3GEO.mapa.dialogo.opcoesEscala()"},
 		{ text: "p5", url: "javascript:i3GEO.mapa.dialogo.tamanho()"},
-		{ text: "p6", url: "javascript:i3GEO.navega.entorno.ativaDesativa()"},
 		{ text: "p7", url: "javascript:i3GEO.mapa.ativaLogo()"},
 		{ text: "p8", url: "javascript:i3GEO.mapa.dialogo.queryMap()"},
 		{ text: "p9", url: "javascript:i3GEO.mapa.dialogo.corFundo()"},
@@ -609,26 +606,6 @@ i3GEO.configura = {
 	{nao}
 	*/
 	liberaGuias: "nao",
-	/*
-	Propriedade: entorno (depreciado)
-
-	Define se o entorno do mapa será desenhado também
-
-	O desenho do entorno permite a navegação no mapa no estilo "tiles"
-
-	Observação - A navegação no estilo TILES, para  a interface padrão, foi depreciada na versão 4.4.
-	Se vc desejar essa forma de navegação, utilize a interface "openlayers" (veja i3geo/aplicmap/openlayers.htm
-
-	Tipo:
-	{string}
-
-	Valores:
-	{sim|nao}
-
-	Default:
-	{"nao"}
-	*/
-	entorno: "nao",
 	/*
 	Propriedade: funcoesBotoes
 
@@ -720,8 +697,6 @@ i3GEO.configura = {
 				}
 				var temp;
 				temp = "zoom";
-				if(i3GEO.Interface.ATIVAMENUCONTEXTO && i3GEO.Interface.ATUAL === "padrao")
-				{temp = "zoom_contexto";}
 				i3GEO.util.mudaCursor(i3GEO.configura.cursores,temp,i3GEO.Interface.IDMAPA,i3GEO.configura.locaplic);
 				g_operacao='navega';
 				g_tipoacao='zoomli';
@@ -812,32 +787,6 @@ i3GEO.configura = {
 					if (typeof(g_panM) !== 'undefined' && $i(i3GEO.Interface.IDMAPA) && (g_panM === "sim")){
 						nx = objposicaocursor.telax - leftinicial - clicinicialx;
 						ny = objposicaocursor.telay - topinicial - clicinicialy;
-						if (i3GEO.configura.entorno === "nao"){
-							l = 0;
-							if (parseInt($i("i3geo").style.left,10))
-							{l = parseInt($i("i3geo").style.left,10);}
-							$i(i3GEO.Interface.IDMAPA).style.left = nx - l + "px";
-							t = 0;
-							if (parseInt($i("i3geo").style.top,10))
-							{t = parseInt($i("i3geo").style.top,10);}
-							$i(i3GEO.Interface.IDMAPA).style.top = ny - t + "px";
-							if(boxrefObj){
-								boxrefObj.style.left = boxrefObjLeft - (nx / proporcaoBox) + "px";
-								boxrefObj.style.top = boxrefObjTop - (ny / proporcaoBox) + "px";
-							}
-						}
-						else{
-							$left("img",i3GEO.parametros.w*-1 + nx);
-							$left("imgS",i3GEO.parametros.w*-1 + nx);
-							$left("imgL",i3GEO.parametros.w + nx);
-							$left("imgO",i3GEO.parametros.w*-3 + nx);
-							$left("imgN",i3GEO.parametros.w*-1 + nx);
-							$top("img",i3GEO.parametros.h*-1 + ny);
-							$top("imgS",i3GEO.parametros.h*-1 + ny);
-							$top("imgL",i3GEO.parametros.h*-1 + ny);
-							$top("imgN",i3GEO.parametros.h*-1 + ny);
-							$top("imgO",i3GEO.parametros.h*-1 + ny);
-						}
 					}
 				};
 				panMapaTermina = function(){
@@ -910,7 +859,6 @@ i3GEO.configura = {
 				i3GEO.barraDeBotoes.ativaIcone("identifica");
 				g_tipoacao='identifica';
 				g_operacao='identifica';
-				//i3GEO.barraDeBotoes.BOTAOPADRAO = "identifica";
 				cliqueIdentifica = function(){
 					if (g_operacao === "identifica" || i3GEO.barraDeBotoes.BOTAOPADRAO === "identifica"){
 						g_operacao = "identifica";
@@ -957,7 +905,6 @@ i3GEO.configura = {
 				i3GEO.barraDeBotoes.ativaIcone("identificaBalao");
 				g_tipoacao='identifica';
 				g_operacao='identifica';
-				//i3GEO.barraDeBotoes.BOTAOPADRAO = "identificaBalao";
 				verificaTip = function(){
 					//
 					//cancela se existir alguma ferramenta ativa

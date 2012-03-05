@@ -278,7 +278,6 @@ i3GEO.maparef = {
 				else{
 					re = new RegExp("&mode=map", "g");
 					$i("imagemReferencia").src = $i(i3GEO.Interface.IDMAPA).src.replace(re,'&mode=reference');
-					i3GEO.gadgets.quadros.grava("referencia",$i("imagemReferencia").src);
 				}
 			}
 			if(tiporef === "mapa"){
@@ -287,8 +286,6 @@ i3GEO.maparef = {
 			}
 		}
 		else{
-			if($i("imagemReferencia"))
-			{i3GEO.gadgets.quadros.grava("referencia",$i("imagemReferencia").src);}
 			i3GEO.eventos.NAVEGAMAPA.remove("i3GEO.maparef.atualiza()");
 		}
 	},
@@ -318,7 +315,6 @@ i3GEO.maparef = {
 				m.src = refimagem;
 				temp.src=m.src;
 			}
-			i3GEO.gadgets.quadros.grava("referencia",refimagem);
 			temp = $i("refDinamico");
 			if (temp)
 			{tiporef = temp.value;}

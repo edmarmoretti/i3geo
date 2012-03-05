@@ -349,8 +349,6 @@ i3GEOF.selecao = {
 				fim = function(retorno){
 					var nsel;
 					i3GEOF.selecao.aguarde.visibility = "hidden";
-					if(i3GEO.Interface.ATUAL === "padrao")
-					{i3GEO.atualiza(retorno);}
 					i3GEO.Interface.atualizaTema(retorno,tema);
 					//verifica qts elementos selecionados
 					nsel = i3GEO.arvoreDeCamadas.pegaTema(tema,retorno.data.temas);
@@ -380,8 +378,6 @@ i3GEOF.selecao = {
 			var fim = function(retorno){
 					var nsel;
 					i3GEOF.selecao.aguarde.visibility = "hidden";
-					if(i3GEO.Interface.ATUAL === "padrao")
-					{i3GEO.atualiza(retorno);}
 					i3GEO.Interface.atualizaTema(retorno,tema);
 					nsel = i3GEO.arvoreDeCamadas.pegaTema(tema,retorno.data.temas);
 					$i("i3GEOselecaoNsel").innerHTML = "Selecionados: "+(nsel.nsel);					
@@ -577,8 +573,6 @@ i3GEOF.selecao = {
 		{console.info("i3GEO.navega.selecao.porbox()");}
 		var retorna = function(retorno){
 			var nsel;
-			if(i3GEO.Interface.ATUAL === "padrao")
-			{i3GEO.atualiza(retorno);}
 			i3GEO.Interface.atualizaTema(retorno,tema);
 			nsel = i3GEO.arvoreDeCamadas.pegaTema(tema,retorno.data.temas);
 			$i("i3GEOselecaoNsel").innerHTML = "Selecionados: "+(nsel.nsel);
@@ -620,8 +614,6 @@ i3GEOF.selecao = {
 		if(typeof(console) !== 'undefined'){console.info("i3GEO.selecao.porxy()");}
 		var retorna = function(retorno){
 			var nsel;
-			if(i3GEO.Interface.ATUAL === "padrao")
-			{i3GEO.atualiza(retorno);}
 			i3GEO.Interface.atualizaTema(retorno,tema);
 			nsel = i3GEO.arvoreDeCamadas.pegaTema(tema,retorno.data.temas);
 			$i("i3GEOselecaoNsel").innerHTML = "Selecionados: "+(nsel.nsel);
@@ -713,7 +705,7 @@ i3GEOF.selecao = {
 			catch(e){
 				if(typeof(console) !== 'undefined'){console.error(e);}
 			}
-			if(i3GEO.Interface.ATUAL === "padrao" || i3GEO.Interface.ATUAL === "openlayers" || i3GEO.Interface.ATUAL === "googlemaps")
+			if(i3GEO.Interface.ATUAL === "openlayers" || i3GEO.Interface.ATUAL === "googlemaps")
 			{i3GEO.util.insereMarca.cria(objposicaocursor.imgx,objposicaocursor.imgy,i3GEOF.selecao.poligono.termina,"divGeometriasTemp");}
 			if(i3GEO.Interface.ATUAL === "googleearth")
 			{i3GEO.util.insereMarca.cria(objposicaocursor.ddx,objposicaocursor.ddy,i3GEOF.selecao.poligono.termina,"divGeometriasTemp","");}
@@ -733,8 +725,6 @@ i3GEOF.selecao = {
 			retorna = function(retorno){
 				var nsel;
 				i3GEO.janela.fechaAguarde("i3GEO.atualiza",$trad("o1"));
-				if(i3GEO.Interface.ATUAL === "padrao")
-				{i3GEO.atualiza(retorno);}
 				i3GEO.Interface.atualizaTema(retorno,tema);
 				nsel = i3GEO.arvoreDeCamadas.pegaTema(tema,retorno.data.temas);
 				$i("i3GEOselecaoNsel").innerHTML = "Selecionados: "+(nsel.nsel);
@@ -926,8 +916,6 @@ i3GEOF.selecao = {
 			g_operacao = "selecao"
 		 	temp = function(retorno){
 		 		var nsel;
-				if(i3GEO.Interface.ATUAL === "padrao")
-				{i3GEO.atualiza(retorno);}
 		 		i3GEOF.selecao.aguarde.visibility = "hidden";
 				i3GEO.Interface.atualizaTema(retorno,i3GEO.temaAtivo);
 				nsel = i3GEO.arvoreDeCamadas.pegaTema(tema,retorno.data.temas);
@@ -957,8 +945,6 @@ i3GEOF.selecao = {
 			i3GEOF.selecao.aguarde.visibility = "visible";
 	 		var temp = function(retorno){
 		 		var nsel;
-				if(i3GEO.Interface.ATUAL === "padrao")
-				{i3GEO.atualiza(retorno);}
 		 		i3GEOF.selecao.aguarde.visibility = "hidden";
 				i3GEO.Interface.atualizaTema(retorno,i3GEO.temaAtivo);
 				nsel = i3GEO.arvoreDeCamadas.pegaTema(tema,retorno.data.temas);

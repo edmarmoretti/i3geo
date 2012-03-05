@@ -1066,8 +1066,6 @@ i3GEO.barraDeBotoes = {
 			if(this.SOICONES === true){
 				Dom.setStyle(["i3geo_barra2","i3geo_barra1"],"borderWidth","0 0 0 0");
 			}
-			if((barraZoom === true) && i3GEO.Interface.ATUAL === "padrao")
-			{i3GEO.navega.barraDeZoom.ativa();}
 			YAHOO.janelaBotoes.xp.panel.render();
 			YAHOO.janelaBotoes.xp.panel.moveTo(x,y);
 			if($i("sobeferramentas")){

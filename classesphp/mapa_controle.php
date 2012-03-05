@@ -3104,23 +3104,19 @@ function redesenhaMapa()
 	//
 	//na interface googlemaps não é necessário gerar a imagem
 	//
-	if (isset($interface) && ($interface == "padrao" || $interface == "flamingo"))
-	{$res = $m->redesenhaCorpo($tipoimagem,$utilizacgi,$locmapserv);}
-	else{
-		$e = $m->mapa->extent;
-		$ext = $e->minx." ".$e->miny." ".$e->maxx." ".$e->maxy;
-		$res["mapimagem"] = "";
-		$res["mapexten"] = $ext;
-		$res["mapres"] = "";
-		$res["erro"] = "";
-		$res["mapscale"] = "";
-		$res["pixelsize"] = "";
-		$res["mapimagem"] = "";
-		$res["w"] = $m->mapa->width;
-		$res["h"] = $m->mapa->height;
-		$res["mappath"] = "";
-		$res["mapurl"] = "";		
-	}
+	$e = $m->mapa->extent;
+	$ext = $e->minx." ".$e->miny." ".$e->maxx." ".$e->maxy;
+	$res["mapimagem"] = "";
+	$res["mapexten"] = $ext;
+	$res["mapres"] = "";
+	$res["erro"] = "";
+	$res["mapscale"] = "";
+	$res["pixelsize"] = "";
+	$res["mapimagem"] = "";
+	$res["w"] = $m->mapa->width;
+	$res["h"] = $m->mapa->height;
+	$res["mappath"] = "";
+	$res["mapurl"] = "";		
 	$res["mensagens"] = $m->pegaMensagens();
 	$res["tempo"] = microtime(1) - $tempo;
 	restauraCon($map_file,$postgis_mapa);

@@ -320,7 +320,7 @@ i3GEO.janela = {
 		{underlay = "none";}
 		else
 		{underlay = "shadow";}
-		if(i3GEO.Interface.ATUAL === "googleearth" || i3GEO.Interface.ATUAL === "flamingo")
+		if(i3GEO.Interface.ATUAL === "googleearth")
 		{ifr = true;}
 		else
 		{ifr = false;}

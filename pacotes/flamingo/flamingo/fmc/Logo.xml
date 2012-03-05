@@ -1,4 +1,0 @@
-<Logo>
-  <string id="preloadtitle" nl="laden...[percentage]%" en="loading...[percentage]%"/>
-  <style id=".preloadtitle" font-family="Verdana" font-size="12" color="#666666" display="block" allign="center"/>
-</Logo>

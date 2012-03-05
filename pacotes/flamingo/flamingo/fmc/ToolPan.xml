@@ -1,6 +1,0 @@
-<ToolPan>
-	<string id="tooltip" nl="kaartbeeld slepen" en="pan"/>
-        <cursor id="busy" url="fmc/CursorsMap.swf" linkageid="busy"/>
-        <cursor id="pan"  url="fmc/CursorsMap.swf" linkageid="pan"/>
-        <cursor id="grab" url="fmc/CursorsMap.swf" linkageid="grab_wrinkle" />
-</ToolPan>

@@ -333,22 +333,3 @@ i3GEO.ajuda = {
 		i3GEO.janela.cria("400px","400px",i3GEO.configura.locaplic+"/ferramentas/redessociais/index.php","","",$trad("u5c"),YAHOO.util.Dom.generateId(null,"redes"));
 	}
 };
-//
-//para efeitos de compatibilidade
-//
-/*
-try{
-	if(i3GEO.ajuda.MENSAGEMPADRAO === ""){
-		try {
-			if (g_mensagempadrao !== "")
-			{i3GEO.ajuda.MENSAGEMPADRAO = g_mensagempadrao;}
-			else
-			{i3GEO.ajuda.MENSAGEMPADRAO = $trad("p1");}
-		}
-		catch(e){i3GEO.ajuda.MENSAGEMPADRAO = $trad("p1");}
-	}
-}
-catch(e){}
-if(document.getElementById("bannerMensagem"))
-{i3GEO.ajuda.DIVLETREIRO = "bannerMensagem";}
-*/

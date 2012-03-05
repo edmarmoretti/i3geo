@@ -274,8 +274,6 @@ i3GEOF.analisaGeometrias = {
 	selecionaElemento: function(){
 		if(g_tipoacao === 'analisageometrias'){
 			var retorna = function(retorno){
-				if(i3GEO.Interface.ATUAL === "padrao")
-				{i3GEO.atualiza(retorno);}
 				i3GEO.Interface.atualizaTema(retorno,i3GEO.temaAtivo);
 			};
 			i3GEO.janela.abreAguarde("i3GEO.atualiza",$trad("o1"));

@@ -853,7 +853,7 @@ $zoom - fator de zoom
 
 $tipo - tipo de referência dinamico|mapa
 
-$interface - interface do mapa atual padrao|openlayers|googlemaps|flamingo|googleearth
+$interface - interface do mapa atual openlayers|googlemaps|googleearth
 
 Parametros:
 

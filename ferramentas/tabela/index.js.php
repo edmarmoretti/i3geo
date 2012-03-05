@@ -650,8 +650,6 @@ i3GEOF.tabela = {
 			p,
 			cp,
 			temp = function(retorno){
-				if(i3GEO.Interface.ATUAL === "padrao")
-				{i3GEO.atualiza(retorno);}
 				i3GEO.Interface.atualizaTema(retorno,i3GEOF.tabela.tema);
 				i3GEOF.tabela.aguarde.visibility = "hidden";
 			};

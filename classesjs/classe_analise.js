@@ -350,7 +350,7 @@ i3GEO.analise = {
 				pontosdistobj.yimg[n] = objposicaocursor.imgy;
 				pontosdistobj.dist[n] = 0;
 				//cria a linha que será utilizada para seguir a posição do mouse e o último ponto
-				if(i3GEO.util.in_array(i3GEO.Interface.ATUAL,["padrao","openlayers","googlemaps"])){
+				if(i3GEO.util.in_array(i3GEO.Interface.ATUAL,["openlayers","googlemaps"])){
 					try{
 						if (navn)
 						{pontosdistobj.linhas[n] = i3GEO.desenho.richdraw.renderer.create(i3GEO.desenho.richdraw.mode, i3GEO.desenho.richdraw.fillColor, i3GEO.desenho.richdraw.lineColor, i3GEO.desenho.richdraw.lineWidth, (pontosdistobj.ximg[n]-1),(pontosdistobj.yimg[n]-1),(pontosdistobj.ximg[n]-1),(pontosdistobj.yimg[n]-1));}
@@ -371,7 +371,7 @@ i3GEO.analise = {
 					if(navm)
 					{i3GEO.desenho.richdraw.renderer.create(i3GEO.desenho.richdraw.mode, i3GEO.desenho.richdraw.fillColor, i3GEO.desenho.richdraw.lineColor, i3GEO.desenho.richdraw.lineWidth, (pontosdistobj.ximg[n-1]),pontosdistobj.yimg[n-1],(pontosdistobj.ximg[n]),pontosdistobj.yimg[n]);}
 					if($i("pararraios") && $i("pararraios").checked === true ){
-						if(i3GEO.util.in_array(i3GEO.Interface.ATUAL,["padrao","openlayers","googlemaps"])){
+						if(i3GEO.util.in_array(i3GEO.Interface.ATUAL,["openlayers","googlemaps"])){
 							i3GEO.desenho.aplica("insereCirculo","",n);
 						}
 						if(i3GEO.Interface.ATUAL === "googleearth"){
@@ -380,7 +380,7 @@ i3GEO.analise = {
 						}
 					}
 					if($i("parartextos") && $i("parartextos").checked === true ){
-						if(i3GEO.util.in_array(i3GEO.Interface.ATUAL,["padrao","openlayers","googlemaps"])){
+						if(i3GEO.util.in_array(i3GEO.Interface.ATUAL,["openlayers","googlemaps"])){
 							i3GEO.desenho.aplica("insereTexto","",n,d+" km");
 						}
 						if(i3GEO.Interface.ATUAL === "googleearth")
@@ -392,7 +392,7 @@ i3GEO.analise = {
 						i3GEO.Interface.googleearth.insereLinha(pontosdistobj.xpt[n-1],pontosdistobj.ypt[n-1],pontosdistobj.xpt[n],pontosdistobj.ypt[n],"","divGeometriasTemp");
 					}
 				}
-				if(i3GEO.util.in_array(i3GEO.Interface.ATUAL,["padrao","openlayers","googlemaps"])){
+				if(i3GEO.util.in_array(i3GEO.Interface.ATUAL,["openlayers","googlemaps"])){
 					i3GEO.util.insereMarca.cria(objposicaocursor.imgx,objposicaocursor.imgy,i3GEO.analise.medeDistancia.paraCalculo,"divGeometriasTemp");
 					i3GEO.desenho.insereCirculo(objposicaocursor.imgx,objposicaocursor.imgy,3);
 				}
@@ -508,18 +508,6 @@ i3GEO.analise = {
 				{i3GEO.eventos.NAVEGAMAPA.push("i3GEO.analise.medeArea.fechaJanela()");}
 				YAHOO.util.Event.addListener(YAHOO.janelaDocaarea.xp.panel.close, "click", i3GEO.analise.medeArea.fechaJanela);
 				//
-				//é necessário pegar a resolução de cada pixel do servidor
-				//via mapscript
-				//
-				if(i3GEO.Interface.ATUAL === "padrao"){
-					temp = function(retorno){
-						i3GEO.janela.fechaAguarde("i3GEO.atualiza");
-						var temp = retorno.data < 0 ? alert("Nao e possivel calcular a area. Entre em contato com o administrador do sistema.") : montacontainer();
-					};
-					i3GEO.janela.abreAguarde("i3GEO.atualiza",$trad("o1"));
-					i3GEO.php.areaPixel(temp,i3GEO.parametros.pixelsize);
-				}
-				//
 				//a API do Openlayers e GoogleMaps tem uma função própria de obtenção da resolução de cada pixel
 				//essa função é embutida em i3GEO.calculo.tela2dd
 				//
@@ -621,7 +609,7 @@ i3GEO.analise = {
 				}
 				m = i3GEO.calculo.area(pontosdistobj,g_areapixel);
 				i3GEO.util.defineValor("mostraarea_calculo","innerHTML","<br>m2</b>= "+m.toFixed(2)+"<br><b>km2</b>= "+(m/1000000).toFixed(2)+"<br><b>ha</b>= "+(m/10000).toFixed(2));
-				if(i3GEO.util.in_array(i3GEO.Interface.ATUAL,["padrao","openlayers","googlemaps"])){
+				if(i3GEO.util.in_array(i3GEO.Interface.ATUAL,["openlayers","googlemaps"])){
 					i3GEO.util.insereMarca.cria(objposicaocursor.imgx,objposicaocursor.imgy,i3GEO.analise.medeArea.paraCalculo,"divGeometriasTemp");
 					i3GEO.desenho.insereCirculo(objposicaocursor.imgx,objposicaocursor.imgy,3);
 				}

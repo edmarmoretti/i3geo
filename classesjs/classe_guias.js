@@ -634,29 +634,6 @@ i3GEO.guias = {
 			i = $i("mst");
 			if(i)
 			{i.style.width = l + 1 + pos;}
-
-			if (i3GEO.configura.entorno.toLowerCase() === "sim"){
-				letras=["L","O"];
-				for (l=0;l<2; l++){
-					if ($i("img"+letras[l])){
-						$i("img"+letras[l]).style.width = i3GEO.parametros.w+pos;
-						$i("img"+letras[l]).style.height = i3GEO.parametros.h+pos;
-						$i("corpoMapa"+letras[l]).style.width=i3GEO.parametros.w+pos;
-						$i("corpoMapa"+letras[l]).style.height=i3GEO.parametros.h+pos+pos;
-						$i("corpoMapa"+letras[l]).style.clip = 'rect(0 0 0 0)';
-					}
-				}
-				letras=["N","S"];
-				for (l=0;l<2; l++){
-					if ($i("img"+letras[l])){
-						$i("img"+letras[l]).style.width = i3GEO.parametros.w * 2+pos;
-						$i("img"+letras[l]).style.height = i3GEO.parametros.h * 2+pos;
-						$i("corpoMapa"+letras[l]).style.width=i3GEO.parametros.w * 3+pos;
-						$i("corpoMapa"+letras[l]).style.height=i3GEO.parametros.h+pos;
-						$i("corpoMapa"+letras[l]).style.clip = 'rect(0 0 0 0)';
-					}
-				}
-			}
 			i3GEO.mapa.ajustaPosicao();
 			temp = function(retorno){
 				//carrega janela

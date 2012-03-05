@@ -1,6 +1,0 @@
-<ToolSuperPan>
-	<string id="tooltip" nl="slepen, gooien en zoomen met het wieltje" en="pan, throw, and zoom with mousewheel"/>
-        <cursor id="cursor" url="fmc/CursorsMap.swf" linkageid="pan"/>
-        <cursor id="grab"   url="fmc/CursorsMap.swf" linkageid="grab"/>
-        <cursor id="busy"   url="fmc/CursorsMap.swf" linkageid="busy"/>
-</ToolSuperPan>

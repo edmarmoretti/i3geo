@@ -752,9 +752,6 @@ i3GEO.php = {
 					i3GEO.Interface.openlayers.zoom2ext(i3GEO.parametros.mapexten);
 					i3GEO.janela.fechaAguarde();
 					break;
-				case "padrao":
-					i3GEO.atualiza(retorno);
-					break;
 			}
 		};
 		p = i3GEO.configura.locaplic+"/classesphp/mapa_controle.php";
@@ -786,9 +783,6 @@ i3GEO.php = {
 					i3GEO.atualizaParametros(retorno.data.variaveis);
 					i3GEO.Interface.openlayers.zoom2ext(i3GEO.parametros.mapexten);
 					i3GEO.janela.fechaAguarde();
-					break;
-				case "padrao":
-					i3GEO.atualiza(retorno);
 					break;
 			}
 		};
@@ -1002,17 +996,6 @@ i3GEO.php = {
 		var p = i3GEO.configura.locaplic+"/classesphp/mapa_controle.php",
 			par = "funcao=escalagrafica&g_sid="+i3GEO.configura.sid;
 		cpJSON.call(p,"escalagrafica",funcao,par);
-	},
-	/*
-	Function: flamingo
-
-	<MONTAFLAMINGO>
-	*/
-	flamingo: function(funcao){
-		i3GEO.php.verifica();
-		var p = i3GEO.configura.locaplic+"/classesphp/mapa_controle.php",
-			par = "funcao=montaFlamingo&g_sid="+i3GEO.configura.sid;
-		cpJSON.call(p,"montaFlamingo",funcao,par);
 	},
 	/*
 	Function: googlemaps

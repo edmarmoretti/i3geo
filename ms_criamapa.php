@@ -372,7 +372,7 @@ if (!isset ($map_reference_extent)) //extens&atilde;o geogr&aacute;fica da image
 if(!isset($interface))
 {
 	if(!isset($interfacePadrao))
-	{$interfacePadrao = "geral.htm";}
+	{$interfacePadrao = "openlayers.htm";}
 	$interface = $interfacePadrao;
 }
 

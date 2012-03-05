@@ -147,7 +147,7 @@ i3GEO = {
 		celularef:"",
 		kmlurl:"",
 		mensageminicia:"",
-		interfacePadrao:"geral.htm",
+		interfacePadrao:"openlayers.htm",
 		embedLegenda:"nao",
 		autenticadoopenid:"nao",
 		cordefundo: "",
@@ -262,10 +262,6 @@ i3GEO = {
 		//
 		tamanho = i3GEO.calculaTamanho();
 		i3GEO.Interface.cria(tamanho[0],tamanho[1]);
-		if(tamanho[0] < 550){
-			i = $i(i3GEO.gadgets.PARAMETROS.mostraQuadros.idhtml);
-			if(i){i.style.display = "none";}
-		}
 	},
 	/*
 	Function: inicia
@@ -316,12 +312,6 @@ i3GEO = {
 						i3GEO.arvoreDeCamadas.CAMADAS = retorno.data.temas;
 						if(retorno.data.variaveis.navegacaoDir.toLowerCase() === "sim")
 						{i3GEO.arvoreDeTemas.OPCOESADICIONAIS.navegacaoDir = true;}
-						//
-						//na interface padrão é necessário executar a atualização pois a geração do mapa
-						//ainda não foi feita
-						//
-						if(i3GEO.Interface.ATUAL === "padrao")
-						{i3GEO.atualiza(retorno);}
 						//
 						//calcula (opcional) o tamanho correto da tabela onde fica o mapa
 						//se não for feito esse cálculo, o mapa fica ajustado à esquerda
@@ -376,8 +366,7 @@ i3GEO = {
 				i3GEO.configura.sid = retorno.data;
 				i3GEO.inicia(retorno);
 			};
-			if(i3GEO.Interface.ATUAL !== "padrao")
-			{i3GEO.configura.mashuppar += "&interface="+i3GEO.Interface.ATUAL;}
+			i3GEO.configura.mashuppar += "&interface="+i3GEO.Interface.ATUAL;
 			i3GEO.php.criamapa(mashup,i3GEO.configura.mashuppar);
 		}
 		else{
@@ -545,10 +534,6 @@ i3GEO = {
 			{$i("mensagemt").value = i3GEO.parametros.mapexten;}
 
 			i3GEO.eventos.navegaMapa();
-			if (i3GEO.configura.entorno.toLowerCase() === "sim"){
-				i3GEO.navega.entorno.geraURL();
-				i3GEO.navega.entorno.ajustaPosicao();
-			}
 			i3GEO.ajuda.mostraJanela("Tempo de redesenho em segundos: "+retorno.data.variaveis.tempo,"");
 			//
 			//verifica se deve ser feito o zoom em algum tema

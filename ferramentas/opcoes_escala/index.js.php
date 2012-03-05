@@ -73,9 +73,6 @@ i3GEOF.opcoesEscala = {
 			i3GEOF.opcoesEscala.parametrosAtuais();
 		}
 		catch(erro){alert(erro);}
-		if(i3GEO.Interface.ATUAL !== "padrao")
-		{alert("Essa operacao afeta apenas a barra de escala utilizada na ferramenta de impressao do mapa");}
-
 	},
 	/*
 	Function: html
@@ -189,8 +186,6 @@ i3GEOF.opcoesEscala = {
 		i3GEOF.opcoesEscala.aguarde.visibility = "visible";
 		var temp = function(){
 				i3GEOF.opcoesEscala.aguarde.visibility = "hidden";
-				if(i3GEO.Interface.ATUAL === "padrao")
-				{i3GEO.atualiza();}
 			},
 			par = i3GEOF.opcoesEscala.parametrosFormulario(),
 			p = i3GEO.configura.locaplic+"/classesphp/mapa_controle.php?g_sid="+i3GEO.configura.sid+"&funcao=mudaescalagrafica"+par,

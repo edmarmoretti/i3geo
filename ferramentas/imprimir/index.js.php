@@ -71,16 +71,6 @@ i3GEOF.imprimir = {
 	html:function(){
 		var ins = '<p class=paragrafo > Escolha o modelo: (utilize as propriedades do mapa para compor a legenda e outros elementos do mapa)</p>' +
 			'<table class=lista6 width="200px">';
-			if(i3GEO.Interface.ATUAL == "padrao"){
-			ins += '	<tr>' +
-			'		<td><input style="border:0px solid white;cursor:pointer" onclick=i3GEOF.imprimir.abreI(this) type=radio value="a4l.htm" name=cmodelo /></td>' +
-			'		<td>A4 paisagem</td>' +
-			'	</tr>' +
-			'	<tr>' +
-			'		<td ><input style="border:0px solid white;cursor:pointer" onclick=i3GEOF.imprimir.abreI(this) type=radio value="a4p.htm" name=cmodelo  /></td>' +
-			'		<td >A4 retrato</td>' +
-			'	</tr>';
-			}
 			ins += '	<tr>' +
 			'		<td><input style="border:0px solid white;cursor:pointer" onclick=i3GEOF.imprimir.abreI(this) type=radio value="a4lpaisagempdf.htm" name=cmodelo /></td>' +
 			'		<td>A4 com margens pdf</td>' +
