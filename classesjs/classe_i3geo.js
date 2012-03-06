@@ -30,6 +30,23 @@ Free Software Foundation, Inc., no endereço
 59 Temple Street, Suite 330, Boston, MA 02111-1307 USA.
 */
 /*
+Classe: i3GEOF
+
+Esse objeto recebe os métodos sob demanda por meio de injeção de javascripts (script tag). É utilizado pelas ferramentas existentes em i3geo/ferramentas.
+
+Cada javascript inserido na página adiciona novos objetos, como por exemplo i3GEOF.buffer.
+*/
+i3GEOF = [];
+/*
+Objeto: YAHOO.i3GEO
+
+Namespace da biblioteca YUI que é reutilizável em vários trechos de código do i3Geo
+
+Type:
+{YAHOO.namespace}
+*/
+YAHOO.namespace("i3GEO");
+/*
 Classe: i3GEO
 
 A classe i3GEO possuí os métodos de criação e atualização do mapa. Todas as subclasses
@@ -698,10 +715,3 @@ i3GEO = {
 		i3GEO.parametros.mapurl = variaveis.mapurl;
 	}
 };
-/*
-Classe: i3GEOF
-
-Esta classe recebe os métodos sob demanda por meio da injeção de javascripts por meio de script tag.
-*/
-i3GEOF = [];
-//YAHOO.log("carregou classe i3geo", "Classes i3geo");

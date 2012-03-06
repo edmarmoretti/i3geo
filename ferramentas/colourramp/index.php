@@ -195,7 +195,7 @@ function aplicarCores()
 }
 
 (function () {
-    YAHOO.namespace('example');
+    YAHOO.namespace('i3GEO.colourramp');
 
     var Dom = YAHOO.util.Dom;
 
@@ -274,7 +274,7 @@ function aplicarCores()
         slider.subscribe('change',report);
 
         // Attach the slider to the YAHOO.example namespace for public probing
-        YAHOO.example.slider = slider;
+        YAHOO.i3GEO.colourramp.slider = slider;
     });
 })();
 

@@ -444,9 +444,10 @@ i3GEO.mapa = {
 					temp += '<div id="wlegenda" style="display:block;padding:5px 2px 5px 0px;text-align:left;background-color:white;height:300px;width:300px;overflow:auto" ></div>';
 					novoel.innerHTML = temp;
 					document.body.appendChild(novoel);
-					YAHOO.namespace("moveLegi.xp");
-					YAHOO.moveLegi.xp.panel = new YAHOO.widget.Panel("moveLegi", {width:"302px", fixedcenter: true, constraintoviewport: false, underlay:"shadow", close:true, visible:true, draggable:true, modal:false,iframe:true } );
-					YAHOO.moveLegi.xp.panel.render();
+					YAHOO.namespace("i3GEO.janela.moveLegi");
+					YAHOO.i3GEO.janela.moveLegi = new YAHOO.widget.Panel("moveLegi", {width:"302px", fixedcenter: true, constraintoviewport: false, underlay:"shadow", close:true, visible:true, draggable:true, modal:false,iframe:true } );
+					YAHOO.i3GEO.janela.manager.register(YAHOO.i3GEO.janela.moveLegi);
+					YAHOO.i3GEO.janela.moveLegi.render();
 					
 					novoel.onmouseover = function(){
 						if($i("moveLegi").style.display === "block")
@@ -454,8 +455,7 @@ i3GEO.mapa = {
 					};
 					novoel.onmouseout = function(){
 						YAHOO.util.Dom.setStyle("moveLegi", "opacity", 0.20);
-					};					
-					
+					};
 				}
 				$i("wlegenda").innerHTML = retorno.data.legenda;
 				temp = $i("wlegenda").getElementsByTagName("input");
@@ -463,7 +463,7 @@ i3GEO.mapa = {
 				for(i=0;i<n;i += 1){
 					temp[i].style.display = "none";
 				}
-				YAHOO.moveLegi.xp.panel.show();
+				YAHOO.i3GEO.janela.moveLegi.show();
 				$i("moveLegi_c").style.zIndex = 100000;
 				//$i("moveLegi").style.border = "1px solid gray";
 			};

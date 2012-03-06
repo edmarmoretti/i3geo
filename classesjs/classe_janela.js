@@ -31,8 +31,34 @@ Free Software Foundation, Inc., no endereço
 if(typeof(i3GEO) === 'undefined'){
 	i3GEO = [];
 }
-YAHOO.namespace("janelaDoca.xp");
-YAHOO.janelaDoca.xp.manager = new YAHOO.widget.OverlayManager();
+/*
+Objeto: YAHOO.i3GEO.janela
+
+Namespace da biblioteca YUI utilizado para armazenar janelas flutuantes
+
+Type:
+{YAHOO.namespace}
+*/
+YAHOO.namespace("i3GEO.janela");
+/*
+Objeto: YAHOO.i3GEO.janela.manager
+
+Gerenciador das janelas flutuantes da biblioteca YUI
+
+Type:
+{YAHOO.widget.OverlayManager}
+*/
+YAHOO.i3GEO.janela.manager = new YAHOO.widget.OverlayManager();
+/*
+Objeto: YAHOO.i3GEO.janelaAguarde.manager
+
+Gerenciador das janelas de aguarde da biblioteca YUI
+
+Type:
+{YAHOO.widget.OverlayManager}
+*/
+YAHOO.i3GEO.janelaAguarde.manager = new YAHOO.widget.OverlayManager();
+
 /*
 Classe: i3GEO.janela
 
@@ -224,56 +250,41 @@ i3GEO.janela = {
 	*/
 	cria: function(wlargura,waltura,wsrc,nx,ny,texto,id,modal,classe,funcaoCabecalho,funcaoMinimiza){
 		if(typeof(console) !== 'undefined'){console.info("i3GEO.janela.cria()");}
-		var i,wlargurA ,ins,novoel,wdocaiframe,pos,temp,fix,underlay,ifr;
+		if($i(id)){
+			YAHOO.i3GEO.janela.manager.find(id).show();
+			return;
+		}
+		var i,wlargurA,ins,novoel,wdocaiframe,pos,temp,fix,underlay,ifr,janela;
 		if(navm && !chro)
 		{this.TRANSICAOSUAVE = false;}
+		//executa as funções default de antes de qualquer criação de janela
 		if(this.ANTESCRIA){
 			for(i=0;i<this.ANTESCRIA.length;i++)
 			{eval(this.ANTESCRIA[i]);}
 		}
-		//
-		//por default o id será 'wdoca'
-		//
-		if (arguments.length < 7 || id === ""){
-			id = "wdoca";
-			modal = false;
-			classe = "hd";
-			funcaoCabecalho = null;
-			funcaoMinimiza = null;
-		}
-		if (arguments.length === 7){
-			modal = false;
-			classe = "hd";
-			funcaoCabecalho = null;
-			funcaoMinimiza = null;
-		}
-		if (arguments.length === 8){
-			classe = "hd";
-			funcaoCabecalho = null;
-			funcaoMinimiza = null;
-		}
-		if (arguments.length === 9){
-			funcaoCabecalho = null;
-			funcaoMinimiza = null;
-		}
-		if (arguments.length === 10){
-			funcaoMinimiza = null;
-		}
-		if(i3GEO.Interface.ATUAL === "googleearth")
-		{
-			classe = "hd";
+		//define os parâmetros default
+		if(!classe || classe == "")
+		{classe = "hd";}
+		if(!id || id === "")
+		{id = "wdoca";}
+		if(!modal || modal === "")
+		{modal = false;}
+		ifr = false;
+		if(i3GEO.Interface.ATUAL === "googleearth"){
 			i3GEO.janela.TRANSICAOSUAVE = false;
+			ifr = true;
 		}
-		//if((navm) && i3GEO.Interface.ATUAL === "googleearth")
-		//{funcaoMinimiza = null;}
+		fix = false;
+		if(nx === "" || nx === "center")
+		{fix = true;}
+		//no IE, com CSS3, a sombra não funciona
+		if(modal === true)
+		{underlay = "none";}
+		else
+		{underlay = "shadow";}
+		//cria as marcações html para a janela
 		temp = navm ? 0:2;
 		wlargurA = parseInt(wlargura,10)+temp+"px";
-
-		if($i(id))
-		{YAHOO.janelaDoca.xp.panel.destroy();}
-		i3GEO.util.removeChild(id+"_c");
-		i3GEO.util.removeChild(id);
-
 		ins = '<div id="'+id+'_cabecalho" class="'+classe+'" style="background-color:white;">';
 		if(i3GEO.configura !== undefined)
 		{ins += "<img id='"+id+"_imagemCabecalho' style='z-index:2;position:absolute;left:3px;top:2px;visibility:hidden;' src=\'"+i3GEO.configura.locaplic+"/imagens/aguarde.gif\' />";}
@@ -287,7 +298,6 @@ i3GEO.janela = {
 		novoel = document.createElement("div");
 		novoel.id = id;
 		novoel.style.display="block";
-		//novoel.style.border = "1px solid rgb(120 120 120)";
 		novoel.innerHTML = ins;
 		if(this.TRANSICAOSUAVE ){
 			novoel.onmouseover = function(){
@@ -312,62 +322,39 @@ i3GEO.janela = {
 			{$i(id+'_corpo').style.height=parseInt(waltura,10)+"px";}
 			$i(id+'_corpo').style.width=parseInt(wlargura,10)+"px";
 		}
-		fix = false;
-		if(nx === "" || nx === "center")
-		{fix = true;}
-		//no IE, com CSS3, a sombra não funciona
-		if(modal === true)
-		{underlay = "none";}
-		else
-		{underlay = "shadow";}
-		if(i3GEO.Interface.ATUAL === "googleearth")
-		{ifr = true;}
-		else
-		{ifr = false;}
+		//cria a janela
 		if(waltura === "auto")
-		{YAHOO.janelaDoca.xp.panel = new YAHOO.widget.Panel(id, { iframe:ifr,modal:modal, width: wlargurA,underlay:"none", fixedcenter: fix, constraintoviewport: false, visible: true,monitorresize:false,dragOnly:true,keylisteners:null} );}
-		else{YAHOO.janelaDoca.xp.panel = new YAHOO.widget.ResizePanel(id, { hideMode:'offsets',iframe:ifr,underlay:underlay, modal:modal, width: wlargurA, fixedcenter: fix, constraintoviewport: false, visible: true,monitorresize:false,dragOnly:true,keylisteners:null} );}
+		{janela = new YAHOO.widget.Panel(id, { iframe:ifr,modal:modal, width: wlargurA,underlay:"none", fixedcenter: fix, constraintoviewport: false, visible: true,monitorresize:false,dragOnly:true,keylisteners:null} );}
+		else{janela = new YAHOO.widget.ResizePanel(id, { hideMode:'offsets',iframe:ifr,underlay:underlay, modal:modal, width: wlargurA, fixedcenter: fix, constraintoviewport: false, visible: true,monitorresize:false,dragOnly:true,keylisteners:null} );}
 		if(nx !== "" && nx !== "center"){
-			YAHOO.janelaDoca.xp.panel.moveTo(nx,ny + 50);
+			janela.moveTo(nx,ny + 50);
 		}
-		YAHOO.janelaDoca.xp.manager.register(YAHOO.janelaDoca.xp.panel);
+		YAHOO.i3GEO.janela.manager.register(janela);
 		if(this.TRANSICAOSUAVE ){
-			YAHOO.janelaDoca.xp.panel.cfg.setProperty("effect",[
+			janela.cfg.setProperty("effect",[
 					{effect:YAHOO.widget.ContainerEffect.FADE,duration:0.5}
 			]);
 		}
-		YAHOO.janelaDoca.xp.panel.render();
-		
+		janela.render();
+		//ajusta estilos e outras características da janela criada
 		if(navm && id !== "i3geo_janelaMensagens" && i3GEO.Interface.ATUAL === "googleearth")
-		{YAHOO.janelaDoca.xp.panel.moveTo(0,0);}
+		{janela.moveTo(0,0);}
 		if(ifr === true)
-		{YAHOO.janelaDoca.xp.panel.iframe.style.zIndex = 0;}
-		if(modal === true){
-			if($i(id+"_mask")){
-				$i(id+"_mask").style.zIndex = 9000 + i3GEO.janela.ULTIMOZINDEX + 1;
-				i3GEO.janela.ULTIMOZINDEX = 9000 + i3GEO.janela.ULTIMOZINDEX + 1;
-			}
-		}
-		if($i(id+"_c")){
-			$i(id+"_c").style.zIndex = 23000 + i3GEO.janela.ULTIMOZINDEX + 1;
-			i3GEO.janela.ULTIMOZINDEX += 23001;
-			if(waltura === "auto"){
-				$i(id+"_c").style.border = "0px solid white";
-			}
-		}
+		{janela.iframe.style.zIndex = 0;}
 		temp = $i(id+"_corpo");
 		if(temp){
 			if(navm)
 			{temp.style.paddingRight = "0px";}
 			temp.style.width = parseInt(temp.style.width,10) - 2 + "px";
-		}		
+		}
+		//finaliza
 		if(funcaoCabecalho)
 		{$i(id+'_cabecalho').onclick = funcaoCabecalho;}
 		if(funcaoMinimiza)
 		{$i(id+"_minimizaCabecalho").onclick = funcaoMinimiza;}
-		YAHOO.util.Event.addListener(YAHOO.janelaDoca.xp.panel.close, "click", i3GEO.janela.fecha,YAHOO.janelaDoca.xp.panel,{id:id},true);
+		YAHOO.util.Event.addListener(janela.close, "click", i3GEO.janela.fecha,janela,{id:id},true);
 		i3GEO.janela.ULTIMOZINDEX++;
-		return([YAHOO.janelaDoca.xp.panel,$i(id+"_cabecalho"),$i(id+"_corpo")]);
+		return([janela,$i(id+"_cabecalho"),$i(id+"_corpo")]);
 	},
 	/*
 	function: minimiza
@@ -382,7 +369,7 @@ i3GEO.janela = {
 		var temp = $i(id+"_corpo"),
 			n,
 			i,
-			m = YAHOO.janelaDoca.xp.manager.find(id);
+			m = YAHOO.i3GEO.janela.manager.find(id);
 		if(temp){
 			if(temp.style.display === "block"){
 				temp.style.display = "none";
@@ -431,36 +418,33 @@ i3GEO.janela = {
 
 	Parametros:
 
-	id {String} - id da janela que será fechada
+	event {objeto} - objeto YUI do evento que gerou o fechament da janela
+	
+	args {objeto} - parametros do evento que fechou a janela
 	*/
-	fecha: function(event){
+	fecha: function(event,args){
 		if(typeof(console) !== 'undefined'){console.info("i3GEO.janela.fecha()");}
-		var i,old,id,
+		var i,id,janela,
 			iu = i3GEO.util;
 		//esconde elementos gráficos q a ferramenta pode ter aberto
 		iu.escondePin();
 		iu.escondeBox();
-		//fecha o container de desenho de elementos na tela
-		//if($i("divGeometriasTemp"))
-		//{i3GEO.desenho.richdraw.fecha();}
-		//executa as funções de fechamento
-		if(this.ANTESFECHA){
-			for(i=0;i<this.ANTESFECHA.length;i++)
-			{eval(this.ANTESFECHA[i]);}
+		//executa funções default
+		if(i3GEO.janela.ANTESFECHA){
+			for(i=0;i<i3GEO.janela.ANTESFECHA.length;i++)
+			{eval(i3GEO.janela.ANTESFECHA[i]);}
 		}
-		//YAHOO.janelaDoca.xp.panel.destroy();
-		if(this.id)
-		{id = this.id;}
+		if(i3GEO.janela.id)
+		{id = i3GEO.janela.id;}
 		else
 		{id = event.id;}
-		iu.removeChild(id+"_c");
-		iu.removeChild(id);
-		iu.removeChild(id+"_mask");
-		//
-		//remove script tag se houver
-		//
+		if(id == undefined)
+		{id = args.id;}
+		janela = YAHOO.i3GEO.janela.manager.find(id);
+		//remove script carregado pela ferramenta que abriu a janela se houver
 		iu.removeScriptTag(id+"_script");
-		YAHOO.janelaDoca.xp.manager.remove(YAHOO.janelaDoca.xp.manager.find(id));
+		YAHOO.i3GEO.janela.manager.remove(janela);
+		janela.destroy();
 	},
 	/*
 	Function: alteraTamanho
@@ -500,11 +484,10 @@ i3GEO.janela = {
 	*/
 	abreAguarde: function(id,texto){
 		if(typeof(console) !== 'undefined'){console.info("i3GEO.janela.abreAguarde()");}
-		var pos,index,contador,temp;
-		document.body.style.cursor = "wait";
-		i3GEO.util.removeChild(id+"_mask");
-		i3GEO.util.removeChild(id+"_c");
-		YAHOO.namespace("aguarde."+id);
+		var pos,index,contador,temp,janela;
+		//i3GEO.util.removeChild(id+"_mask");
+		//i3GEO.util.removeChild(id+"_c");
+		//YAHOO.namespace("i3GEO.janela.aguarde."+id);
 		pos = [0,0];
 		if($i(i3GEO.Interface.IDCORPO))
 		{pos = YAHOO.util.Dom.getXY($i(i3GEO.Interface.IDCORPO));}
@@ -516,22 +499,25 @@ i3GEO.janela = {
 		for(index=0; index<i3GEO.contadorAtualiza; index++) {
 			contador = contador + ".";
 		}
-		eval('YAHOO.aguarde.'+id+' = new YAHOO.widget.Panel("'+id+'",{width:"240px",fixedcenter:false,underlay:"none",close:true,draggable:false,modal:'+i3GEO.janela.AGUARDEMODAL.toString()+',monitorresize:false})');
+		eval('YAHOO.i3GEO.janela.aguarde.'+id+' = new YAHOO.widget.Panel("'+id+'",{width:"240px",fixedcenter:false,underlay:"none",close:true,draggable:false,modal:'+i3GEO.janela.AGUARDEMODAL.toString()+',monitorresize:false})');
+		
+		YAHOO.i3GEO.janelaAguarde.manager.register(janela);
+		
 		i3GEO.janela.JANELASAGUARDE.push(id);
 		if(i3GEO.janela.ESTILOAGUARDE === "normal" || i3GEO.janela.ESTILOAGUARDE === "reduzida"){
-			eval('YAHOO.aguarde.'+id+'.setBody(texto)');
-			eval('YAHOO.aguarde.'+id+'.body.style.padding="5px"');
+			eval('YAHOO.i3GEO.janela.aguarde.'+id+'.setBody(texto)');
+			eval('YAHOO.i3GEO.janela.aguarde.'+id+'.body.style.padding="5px"');
 		}
 		if(i3GEO.janela.ESTILOAGUARDE === "normal" || i3GEO.janela.ESTILOAGUARDE === "minima")
-		{eval('YAHOO.aguarde.'+id+'.setHeader("<span><img id=aguardeGifAberto src=\'"+i3GEO.configura.locaplic+"/imagens/aguarde.gif\' /></span>&nbsp;<span style=font-size:8px >'+contador+'</span>")');}
-		eval('YAHOO.aguarde.'+id+'.render(document.body);');
+		{eval('YAHOO.i3GEO.janela.aguarde.'+id+'.setHeader("<span><img id=aguardeGifAberto src=\'"+i3GEO.configura.locaplic+"/imagens/aguarde.gif\' /></span>&nbsp;<span style=font-size:8px >'+contador+'</span>")');}
+		eval('YAHOO.i3GEO.janela.aguarde.'+id+'.render(document.body);');
 		
 		if(i3GEO.parametros.w > 0)
-		{eval('YAHOO.aguarde.'+id+'.moveTo('+(pos[0] + (i3GEO.parametros.w / 2) - 120)+','+pos[1]+')');}
+		{eval('YAHOO.i3GEO.janela.aguarde.'+id+'.moveTo('+(pos[0] + (i3GEO.parametros.w / 2) - 120)+','+pos[1]+')');}
 		else
-		{eval('YAHOO.aguarde.'+id+'.moveTo('+pos[0]+','+pos[1]+')');}
-		eval('YAHOO.aguarde.'+id+'.show()');
-		eval('try{YAHOO.aguarde.'+id+'.header.style.height="20px";}catch(e){};');
+		{eval('YAHOO.i3GEO.janela.aguarde.'+id+'.moveTo('+pos[0]+','+pos[1]+')');}
+		eval('YAHOO.i3GEO.janela.aguarde.'+id+'.show()');
+		eval('try{YAHOO.i3GEO.janela.aguarde.'+id+'.header.style.height="20px";}catch(e){};');
 		if($i(id+"_mask"))
 		{$i(id+"_mask").style.zIndex=25000;}
 		temp = $i(id+"_c");
@@ -551,8 +537,8 @@ i3GEO.janela = {
 	texto {String} - texto da mensagem
 	*/
 	ativaAlerta: function(){
-		YAHOO.namespace("dialogInfo");
-		YAHOO.dialogInfo = new YAHOO.widget.SimpleDialog("simpledialog1",
+		YAHOO.namespace("i3GEO.janela.dialogInfo");
+		YAHOO.i3GEO.janela.dialogInfo = new YAHOO.widget.SimpleDialog("simpledialog1",
 		{
 			width: "300px",
 			fixedcenter: true,
@@ -568,12 +554,13 @@ i3GEO.janela = {
 			icon: YAHOO.widget.SimpleDialog.ICON_WARN,
 			text: ""
 		});
-		//YAHOO.dialogInfo.cfg.setProperty("icon",YAHOO.widget.SimpleDialog.ICON_WARN);
-		YAHOO.dialogInfo.setHeader("Alerta");
-		YAHOO.dialogInfo.render(document.body);
+		//YAHOO.i3GEO.janela.dialogInfo.cfg.setProperty("icon",YAHOO.widget.SimpleDialog.ICON_WARN);
+		YAHOO.i3GEO.janela.manager.register(YAHOO.i3GEO.janela.dialogInfo);
+		YAHOO.i3GEO.janela.dialogInfo.setHeader("Alerta");
+		YAHOO.i3GEO.janela.dialogInfo.render(document.body);
 		window.alert = function(texto){
-			YAHOO.dialogInfo.cfg.setProperty("text",texto);
-			YAHOO.dialogInfo.show();
+			YAHOO.i3GEO.janela.dialogInfo.cfg.setProperty("text",texto);
+			YAHOO.i3GEO.janela.dialogInfo.show();
 		};
 	},
 	/*
@@ -587,8 +574,8 @@ i3GEO.janela = {
 	*/
 	mensagemSimples: function(texto,cabecalho){
 		if(!$i("mensagemSimples1")){
-			YAHOO.namespace("mensagemSimples");
-			YAHOO.mensagemSimples = new YAHOO.widget.SimpleDialog("mensagemSimples1",
+			YAHOO.namespace("i3GEO.janela.mensagemSimples");
+			YAHOO.i3GEO.janela.mensagemSimples = new YAHOO.widget.SimpleDialog("mensagemSimples1",
 			{
 				width: "300px",
 				fixedcenter: true,
@@ -602,7 +589,9 @@ i3GEO.janela = {
 				constraintoviewport: true,
 				text: ""
 			});
+			YAHOO.i3GEO.janela.manager.register(YAHOO.i3GEO.janela.mensagemSimples);
 		}
+		
 		YAHOO.mensagemSimples.setHeader(cabecalho);
 		YAHOO.mensagemSimples.render(document.body);
 		YAHOO.mensagemSimples.cfg.setProperty("text",texto);
@@ -764,7 +753,7 @@ i3GEO.janela = {
 		if(arguments.length > 0 && typeof(id) !== 'undefined'){
 			try{
 				if($i(id+"_c"))
-				{eval('YAHOO.aguarde.'+id+'.destroy()');}
+				{eval('YAHOO.i3GEO.janela.aguarde.'+id+'.destroy()');}
 				if($i(id+"_c"))
 				{$i("i3geo").removeChild($i(id+"_c"));}
 				if($i(id+"_mask"))
@@ -782,7 +771,7 @@ i3GEO.janela = {
 				for(i=0;i<n;i += 1){
 					id = this.JANELASAGUARDE[i];
 					if($i(id+"_c"))
-					{eval('YAHOO.aguarde.'+id+'.destroy()');}
+					{eval('YAHOO.i3GEO.janela.aguarde.'+id+'.destroy()');}
 					iu.removeChild(id+"_c");
 					iu.removeChild(id+"_mask");
 				}

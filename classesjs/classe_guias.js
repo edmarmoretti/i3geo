@@ -643,11 +643,11 @@ i3GEO.guias = {
 				novoel.style.display="block";
 				novoel.innerHTML = '<div class="hd">Guias <div onclick ="i3GEO.janela.minimiza(\'conteudojanelaguias\')" id="janelaguias_minimizaCabecalho" class="container-minimiza" ></div></div><div class="bd" id="conteudojanelaguias_corpo" style=padding:0px ></div>';
 				temp = $i("i3geo") ? $i("i3geo").appendChild(novoel) : document.body.appendChild(novoel);
-				YAHOO.namespace("janelaguias.xp");
-				YAHOO.janelaguias.xp.panel = new YAHOO.widget.Panel("janelaguias", {width:"270px", fixedcenter: true, constraintoviewport: false, underlay:"none", close:false, visible:true, draggable:true, modal:false,iframe:true } );
-				YAHOO.janelaguias.xp.panel.render();
-				YAHOO.janelaguias.xp.panel.cfg.setProperty("y", 0);
-				YAHOO.janelaDoca.xp.manager.register(YAHOO.janelaDoca.xp.panel);
+				YAHOO.namespace("i3GEO.janela.guias");
+				YAHOO.i3GEO.janela.guias = new YAHOO.widget.Panel("janelaguias", {width:"270px", fixedcenter: true, constraintoviewport: false, underlay:"none", close:false, visible:true, draggable:true, modal:false,iframe:true } );
+				YAHOO.i3GEO.janela.manager.register(YAHOO.i3GEO.janela.guias);
+				YAHOO.i3GEO.janela.guias.render();
+				YAHOO.i3GEO.janela.guias.cfg.setProperty("y", 0);
 				i = $i(i3GEO.guias.IDGUIAS);
 				$i("conteudojanelaguias_corpo").appendChild(i);
 				i.style.borderLeft="1px solid black";
@@ -675,8 +675,8 @@ i3GEO.guias = {
 			i3GEO.php.mudatamanho(temp,a,l);
 		}
 		else{
-			YAHOO.janelaguias.xp.panel.render();
-			YAHOO.janelaguias.xp.panel.show();
+			YAHOO.i3GEO.janela.guias.render();
+			YAHOO.i3GEO.janela.guias.show();
 		}
 	},
 	/*

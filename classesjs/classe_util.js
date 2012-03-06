@@ -965,9 +965,9 @@ i3GEO.util = {
 			id = "i3geo_janelaCor",
 			modal = true,
 			classe = "hd";
-		YAHOO.namespace("janelaCor.xp");
+		YAHOO.i3GEO.janela.namespace("cor");
 		if ($i(id))
-		{YAHOO.janelaCor.xp.panel.destroy();}
+		{YAHOO.i3GEO.janela.cor.destroy();}
 		ins = '<div id="'+id+'_cabecalho" class="hd">';
 		ins += "<span><img id='i3geo_janelaCor_imagemCabecalho' style='visibility:hidden;' src=\'"+i3GEO.configura.locaplic+"/imagens/aguarde.gif\' /></span>";
 		ins += texto;
@@ -992,8 +992,9 @@ i3GEO.util = {
 			wdocaiframe.style.width = "325px";
 			wdocaiframe.style.border = "0px solid white";
 		}
-		YAHOO.janelaCor.xp.panel = new YAHOO.widget.ResizePanel(id, { height:"290px",zIndex:i3GEO.janela.ULTIMOZINDEX, modal:false, width: "350px", fixedcenter: true, constraintoviewport: false, visible: true, iframe:false} );
-		YAHOO.janelaCor.xp.panel.render();
+		YAHOO.i3GEO.janela.cor = new YAHOO.widget.ResizePanel(id, { height:"290px",zIndex:i3GEO.janela.ULTIMOZINDEX, modal:false, width: "350px", fixedcenter: true, constraintoviewport: false, visible: true, iframe:false} );
+		YAHOO.i3GEO.janela.manager.register(YAHOO.i3GEO.janela.cor);
+		YAHOO.i3GEO.janela.cor.render();
 		$i(id+'_cabecalho').className = classe;
 		i3GEO.janela.ULTIMOZINDEX++
 	},
@@ -2199,9 +2200,9 @@ i3GEO.util = {
 			id = "i3geo_janelaCorRamp",
 			modal = true,
 			classe = "hd";
-		YAHOO.namespace("janelaCorRamp.xp");
+		YAHOO.namespace("i3GEO.janela.CorRamp");
 		if ($i(id))
-		{YAHOO.janelaCorRamp.xp.panel.destroy();}
+		{YAHOO.i3GEO.janela.CorRamp.destroy();}
 		ins = '<div id="'+id+'_cabecalho" class="hd">';
 		ins += "<span><img id='i3geo_janelaCorRamp_imagemCabecalho' style='visibility:hidden;' src=\'"+i3GEO.configura.locaplic+"/imagens/aguarde.gif\' /></span>";
 		ins += texto;
@@ -2224,8 +2225,9 @@ i3GEO.util = {
 		wdocaiframe.style.border = "0px solid white";
 
 		if(nx === "" || nx === "center"){fix = true;}
-		YAHOO.janelaCorRamp.xp.panel = new YAHOO.widget.ResizePanel(id, { height:"480px",zIndex:5000, modal:false, width: "380px", fixedcenter: fix, constraintoviewport: false, visible: true, iframe:false} );
-		YAHOO.janelaCorRamp.xp.panel.render();
+		YAHOO.i3GEO.janela.CorRamp = new YAHOO.widget.ResizePanel(id, { height:"480px",zIndex:5000, modal:false, width: "380px", fixedcenter: fix, constraintoviewport: false, visible: true, iframe:false} );
+		YAHOO.i3GEO.janela.manager.register(YAHOO.i3GEO.janela.CorRamp);
+		YAHOO.i3GEO.janela.CorRamp.render();
 		$i(id+'_cabecalho').className = classe;
 	},
 	/*

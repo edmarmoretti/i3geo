@@ -188,17 +188,18 @@ i3GEO.maparef = {
 		}
 		if($i("i3geo_winRef").style.display !== "block"){
 			$i("i3geo_winRef").style.display = "block";
-			YAHOO.namespace("janelaRef.xp");
+			YAHOO.namespace("i3GEO.janela.ref");
 			this.PERMITEDESLOCAR ? temp = "shadow" : temp = "none";
-			YAHOO.janelaRef.xp.panel = new YAHOO.widget.Panel("i3geo_winRef", { height:"177px", width:"156px", fixedcenter: false, constraintoviewport: true, underlay:temp, close:i3GEO.maparef.PERMITEFECHAR, visible:true, draggable:i3GEO.maparef.PERMITEDESLOCAR, modal:false,iframe:false } );
+			YAHOO.i3GEO.janela.ref = new YAHOO.widget.Panel("i3geo_winRef", { height:"177px", width:"156px", fixedcenter: false, constraintoviewport: true, underlay:temp, close:i3GEO.maparef.PERMITEFECHAR, visible:true, draggable:i3GEO.maparef.PERMITEDESLOCAR, modal:false,iframe:false } );
+			YAHOO.i3GEO.janela.manager.register(YAHOO.i3GEO.janela.ref);
 			if(i3GEO.maparef.TRANSICAOSUAVE ){
-				YAHOO.janelaRef.xp.panel.cfg.setProperty("effect",[
+				YAHOO.i3GEO.janela.ref.cfg.setProperty("effect",[
 						{effect:YAHOO.widget.ContainerEffect.FADE,duration:0.5}
 				]);
 			}
-			YAHOO.janelaRef.xp.panel.render();
+			YAHOO.i3GEO.janela.ref.render();
 			try
-			{YAHOO.janelaRef.xp.panel.header.style.height="20px";}
+			{YAHOO.i3GEO.janela.ref.header.style.height="20px";}
 			catch(e){};
 			r = $i("i3geo_winRef_c");
 			if(r){
@@ -212,14 +213,14 @@ i3GEO.maparef = {
 			moveY = pos[1] + i3GEO.maparef.TOP;
 			if(i3GEO.Interface.ATUAL === "googlemaps")
 			{moveY += 30;}
-			YAHOO.janelaRef.xp.panel.moveTo(moveX,moveY);
+			YAHOO.i3GEO.janela.ref.moveTo(moveX,moveY);
 			escondeRef = function(){
-				YAHOO.util.Event.removeListener(YAHOO.janelaRef.xp.panel.close, "click");
+				YAHOO.util.Event.removeListener(YAHOO.i3GEO.janela.ref.close, "click");
 				$i("imagemReferencia").src = "";
-				YAHOO.janelaRef.xp.panel.destroy();
+				YAHOO.i3GEO.janela.ref.destroy();
 				i3GEO.util.insereCookie("i3GEO.configura.mapaRefDisplay","none");
 			};
-			YAHOO.util.Event.addListener(YAHOO.janelaRef.xp.panel.close, "click", escondeRef);
+			YAHOO.util.Event.addListener(YAHOO.i3GEO.janela.ref.close, "click", escondeRef);
 			i3GEO.util.insereCookie("i3GEO.configura.mapaRefDisplay","block");
 			if($i("localizarxygeoProjxg")){
 				var temp = function(){
