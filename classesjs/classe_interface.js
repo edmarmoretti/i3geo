@@ -222,7 +222,6 @@ i3GEO.Interface = {
 		inicia: function(){
 			i3GEO.Interface.STATUS.trocando = true;
 			i3GEO.janela.ESTILOAGUARDE = "normal";
-			i3GEO.janela.abreAguarde("googleMapsAguarde","Carregando GoogleMaps...");
 			try{
 				if(google)
 				{i3GEO.Interface.atual2gm.initemp();}
@@ -259,7 +258,6 @@ i3GEO.Interface = {
 		inicia: function(){
 			i3GEO.Interface.STATUS.trocando = true;
 			i3GEO.janela.ESTILOAGUARDE = "normal";
-			i3GEO.janela.abreAguarde("OpenLayersAguarde","Carregando OpenLayers...");
 			try{
 				if(OpenLayers)
 				{i3GEO.Interface.atual2ol.initemp();}

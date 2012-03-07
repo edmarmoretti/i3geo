@@ -50,15 +50,14 @@ Type:
 */
 YAHOO.i3GEO.janela.manager = new YAHOO.widget.OverlayManager();
 /*
-Objeto: YAHOO.i3GEO.janelaAguarde.manager
+Objeto: YAHOO.i3GEO.janela.managerAguarde
 
 Gerenciador das janelas de aguarde da biblioteca YUI
 
 Type:
 {YAHOO.widget.OverlayManager}
 */
-YAHOO.i3GEO.janelaAguarde.manager = new YAHOO.widget.OverlayManager();
-
+YAHOO.i3GEO.janela.managerAguarde = new YAHOO.widget.OverlayManager();
 /*
 Classe: i3GEO.janela
 
@@ -182,17 +181,11 @@ i3GEO.janela = {
 	*/
 	TIPS: [],
 	/*
-	Variavel: ULTIMOZINDEX
+	Variavel: ULTIMOZINDEX (depreciado)
 
 	Cada vez que uma janela flutuante é criada, esse valor é acrescido de 1
 	*/
 	ULTIMOZINDEX : 0,
-	/*
-	Variavel: JANELASAGUARDE
-
-	Guarda os ids das janelas 'aguarde' que foram abertos
-	*/
-	JANELASAGUARDE: [],
 	/*
 	Function: prepara
 
@@ -251,7 +244,9 @@ i3GEO.janela = {
 	cria: function(wlargura,waltura,wsrc,nx,ny,texto,id,modal,classe,funcaoCabecalho,funcaoMinimiza){
 		if(typeof(console) !== 'undefined'){console.info("i3GEO.janela.cria()");}
 		if($i(id)){
-			YAHOO.i3GEO.janela.manager.find(id).show();
+			janela = YAHOO.i3GEO.janela.manager.find(id);
+			janela.show();
+			janela.bringToTop();
 			return;
 		}
 		var i,wlargurA,ins,novoel,wdocaiframe,pos,temp,fix,underlay,ifr,janela;
@@ -353,7 +348,6 @@ i3GEO.janela = {
 		if(funcaoMinimiza)
 		{$i(id+"_minimizaCabecalho").onclick = funcaoMinimiza;}
 		YAHOO.util.Event.addListener(janela.close, "click", i3GEO.janela.fecha,janela,{id:id},true);
-		i3GEO.janela.ULTIMOZINDEX++;
 		return([janela,$i(id+"_cabecalho"),$i(id+"_corpo")]);
 	},
 	/*
@@ -443,8 +437,10 @@ i3GEO.janela = {
 		janela = YAHOO.i3GEO.janela.manager.find(id);
 		//remove script carregado pela ferramenta que abriu a janela se houver
 		iu.removeScriptTag(id+"_script");
-		YAHOO.i3GEO.janela.manager.remove(janela);
-		janela.destroy();
+		if(janela){
+			YAHOO.i3GEO.janela.manager.remove(janela);
+			janela.destroy();
+		}
 	},
 	/*
 	Function: alteraTamanho
@@ -484,10 +480,10 @@ i3GEO.janela = {
 	*/
 	abreAguarde: function(id,texto){
 		if(typeof(console) !== 'undefined'){console.info("i3GEO.janela.abreAguarde()");}
-		var pos,index,contador,temp,janela;
-		//i3GEO.util.removeChild(id+"_mask");
-		//i3GEO.util.removeChild(id+"_c");
-		//YAHOO.namespace("i3GEO.janela.aguarde."+id);
+		var pos,index,temp,janela;
+		if(!id || id == undefined)
+		{return;}
+		janela = YAHOO.i3GEO.janela.managerAguarde.find(id);
 		pos = [0,0];
 		if($i(i3GEO.Interface.IDCORPO))
 		{pos = YAHOO.util.Dom.getXY($i(i3GEO.Interface.IDCORPO));}
@@ -495,38 +491,48 @@ i3GEO.janela = {
 		{pos = YAHOO.util.Dom.getXY($i("contemImg"));}
 		if(i3GEO.janela.AGUARDEMODAL == true)
 		{texto += "<br><span style='color:navy;cursor:pointer;font-size:9px;' onclick='javascript:if(i3GEO.janela.AGUARDEMODAL == true){i3GEO.janela.AGUARDEMODAL = false;}else{i3GEO.janela.AGUARDEMODAL = true;}'>bloquear/desbloquear</span>";}
-		contador = "";
-		for(index=0; index<i3GEO.contadorAtualiza; index++) {
-			contador = contador + ".";
+		if(!janela){
+			janela = new YAHOO.widget.Panel(id,{width:"240px",fixedcenter:false,underlay:"none",close:true,draggable:false,modal:i3GEO.janela.AGUARDEMODAL,monitorresize:false});
+			janela.render(document.body);
+			YAHOO.i3GEO.janela.managerAguarde.register(janela);
 		}
-		eval('YAHOO.i3GEO.janela.aguarde.'+id+' = new YAHOO.widget.Panel("'+id+'",{width:"240px",fixedcenter:false,underlay:"none",close:true,draggable:false,modal:'+i3GEO.janela.AGUARDEMODAL.toString()+',monitorresize:false})');
-		
-		YAHOO.i3GEO.janelaAguarde.manager.register(janela);
-		
-		i3GEO.janela.JANELASAGUARDE.push(id);
 		if(i3GEO.janela.ESTILOAGUARDE === "normal" || i3GEO.janela.ESTILOAGUARDE === "reduzida"){
-			eval('YAHOO.i3GEO.janela.aguarde.'+id+'.setBody(texto)');
-			eval('YAHOO.i3GEO.janela.aguarde.'+id+'.body.style.padding="5px"');
+			janela.setBody(texto);
+			janela.body.style.padding="5px";
 		}
 		if(i3GEO.janela.ESTILOAGUARDE === "normal" || i3GEO.janela.ESTILOAGUARDE === "minima")
-		{eval('YAHOO.i3GEO.janela.aguarde.'+id+'.setHeader("<span><img id=aguardeGifAberto src=\'"+i3GEO.configura.locaplic+"/imagens/aguarde.gif\' /></span>&nbsp;<span style=font-size:8px >'+contador+'</span>")');}
-		eval('YAHOO.i3GEO.janela.aguarde.'+id+'.render(document.body);');
-		
+		{janela.setHeader("<span><img id=aguardeGifAberto src='"+i3GEO.configura.locaplic+"/imagens/aguarde.gif' /></span>&nbsp;<span style=font-size:8px >"+YAHOO.i3GEO.janela.managerAguarde.overlays.length+"</span>");}
 		if(i3GEO.parametros.w > 0)
-		{eval('YAHOO.i3GEO.janela.aguarde.'+id+'.moveTo('+(pos[0] + (i3GEO.parametros.w / 2) - 120)+','+pos[1]+')');}
+		{janela.moveTo(pos[0] + (i3GEO.parametros.w / 2) - 120,pos[1]);}
 		else
-		{eval('YAHOO.i3GEO.janela.aguarde.'+id+'.moveTo('+pos[0]+','+pos[1]+')');}
-		eval('YAHOO.i3GEO.janela.aguarde.'+id+'.show()');
-		eval('try{YAHOO.i3GEO.janela.aguarde.'+id+'.header.style.height="20px";}catch(e){};');
-		if($i(id+"_mask"))
-		{$i(id+"_mask").style.zIndex=25000;}
+		{janela.moveTo(pos[0],pos[1]);}
+		janela.show();
+		try{janela.header.style.height="20px";}
+		catch(e){}
 		temp = $i(id+"_c");
 		if(temp){
-			temp.style.zIndex=26000;
 			temp.style.backgroundColor = "";
 		}
 		YAHOO.util.Dom.setStyle(temp,"opacity",i3GEO.janela.OPACIDADEAGUARDE / 100);
 	},
+	/*
+	Function: fechaAguarde
+
+	Fecha uma janela do tipo aguarde
+
+	Paremeters:
+
+	id {String} - id da janela que será fechada. Se não for definido, tenta fechar as janelas principais.
+	*/
+	fechaAguarde: function(id){
+		if(id != undefined){
+			var janela = YAHOO.i3GEO.janela.managerAguarde.find(id);
+			if(janela){
+				YAHOO.i3GEO.janela.managerAguarde.remove(janela);
+				janela.destroy();
+			}
+		}
+	},	
 	/*
 	Function: ativaAlerta
 
@@ -738,49 +744,6 @@ i3GEO.janela = {
 		Event.on("putval", "click", function(e) {
 			slider.setValue(100, false); //false here means to animate if possible
 		});
-	},
-	/*
-	Function: fechaAguarde
-
-	Fecha uma janela do tipo aguarde
-
-	Paremeters:
-
-	id {String} - id da janela que será fechada. Se não for definido, tenta fechar as janelas principais.
-	*/
-	fechaAguarde: function(id){
-		document.body.style.cursor = "default";
-		if(arguments.length > 0 && typeof(id) !== 'undefined'){
-			try{
-				if($i(id+"_c"))
-				{eval('YAHOO.i3GEO.janela.aguarde.'+id+'.destroy()');}
-				if($i(id+"_c"))
-				{$i("i3geo").removeChild($i(id+"_c"));}
-				if($i(id+"_mask"))
-				{$i("i3geo").removeChild($i(id+"_mask"));}
-			}
-			catch(e){
-				if(typeof(console) !== 'undefined'){console.error(e);}
-			}
-		}
-		else{
-			try{
-				var id,i,
-					n = this.JANELASAGUARDE.length,
-					iu = i3GEO.util;
-				for(i=0;i<n;i += 1){
-					id = this.JANELASAGUARDE[i];
-					if($i(id+"_c"))
-					{eval('YAHOO.i3GEO.janela.aguarde.'+id+'.destroy()');}
-					iu.removeChild(id+"_c");
-					iu.removeChild(id+"_mask");
-				}
-				this.JANELASAGUARDE = [];
-			}
-			catch(e){
-				if(typeof(console) !== 'undefined'){console.error(e);}
-			}
-		}
 	},
 	/*
 	Function: comboCabecalhoTemas

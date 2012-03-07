@@ -637,17 +637,17 @@ i3GEO.guias = {
 			i3GEO.mapa.ajustaPosicao();
 			temp = function(retorno){
 				//carrega janela
-				var novoel,temp,i,g,guias,nguias;
+				var novoel,temp,i,g,guias,nguias,janela;
 				novoel = document.createElement("div");
 				novoel.id = "janelaguias";
 				novoel.style.display="block";
 				novoel.innerHTML = '<div class="hd">Guias <div onclick ="i3GEO.janela.minimiza(\'conteudojanelaguias\')" id="janelaguias_minimizaCabecalho" class="container-minimiza" ></div></div><div class="bd" id="conteudojanelaguias_corpo" style=padding:0px ></div>';
 				temp = $i("i3geo") ? $i("i3geo").appendChild(novoel) : document.body.appendChild(novoel);
-				YAHOO.namespace("i3GEO.janela.guias");
-				YAHOO.i3GEO.janela.guias = new YAHOO.widget.Panel("janelaguias", {width:"270px", fixedcenter: true, constraintoviewport: false, underlay:"none", close:false, visible:true, draggable:true, modal:false,iframe:true } );
-				YAHOO.i3GEO.janela.manager.register(YAHOO.i3GEO.janela.guias);
-				YAHOO.i3GEO.janela.guias.render();
-				YAHOO.i3GEO.janela.guias.cfg.setProperty("y", 0);
+				janela = new YAHOO.widget.Panel("janelaguias", {width:"270px", fixedcenter: true, constraintoviewport: false, underlay:"none", close:false, visible:true, draggable:true, modal:false,iframe:true } );
+				YAHOO.i3GEO.janela.manager.register(janela);
+				janela.render();
+				janela.show();
+				janela.cfg.setProperty("y", 0);
 				i = $i(i3GEO.guias.IDGUIAS);
 				$i("conteudojanelaguias_corpo").appendChild(i);
 				i.style.borderLeft="1px solid black";
@@ -671,12 +671,12 @@ i3GEO.guias = {
 				i.style.left = "-1px";
 				i.style.width = "270px";
 			};
-			i3GEO.janela.abreAguarde("i3GEO.atualiza",$trad("o1"));
 			i3GEO.php.mudatamanho(temp,a,l);
 		}
 		else{
-			YAHOO.i3GEO.janela.guias.render();
-			YAHOO.i3GEO.janela.guias.show();
+			janela = YAHOO.i3GEO.janela.manager.find(id);
+			janela.show();
+			janela.bringToTop();
 		}
 	},
 	/*

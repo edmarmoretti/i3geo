@@ -924,9 +924,7 @@ i3GEO.util = {
 	*/
 	adicionaSHP: function(path){
 		if(typeof(console) !== 'undefined'){console.info("i3GEO.util.adicionaSHP()");}
-		i3GEO.janela.abreAguarde("i3GEO.atualiza",$trad("o1"));
 		var temp = path.split(".");
-		//i3GEO.contadorAtualiza++;
 		if ((temp[1] === "SHP") || (temp[1] === "shp"))
 		{i3GEO.php.adicionaTemaSHP(i3GEO.atualiza,path);}
 		else
@@ -939,35 +937,37 @@ i3GEO.util = {
 
 	Parametros:
 
-	janela {String} - id do conteúdo da janela flutuante que chamou a função. Pode ser "" caso elemento exista em document
+	janelaid {String} - id do conteúdo da janela flutuante que chamou a função. Pode ser "" caso elemento exista em document
 
 	elemento {String} - id do elemento que receberá os valores da cor selecionada
 
 	tipo {String} - opcional pode ser definido como rgb ou hex indicando o tipo de retorno da cor
 	*/
-	abreCor: function(janela,elemento,tipo){
+	abreCor: function(janelaid,elemento,tipo){
 		if(typeof(console) !== 'undefined'){console.info("i3GEO.util.abreCor()");}
 		if(!i3GEO.configura)
 		{i3GEO.configura = {locaplic: "../"};}
 		if(arguments.length === 2)
 		{tipo = "rgb";}
-		var ins,
+		var janela,
+			ins,
 			temp,
 			novoel,
 			wdocaiframe,
 			fix = false,
 			wlargura = "300",
 			waltura = "280",
-			wsrc = i3GEO.configura.locaplic+"/ferramentas/colorpicker/index.htm?doc="+janela+"&elemento="+elemento+"&tipo="+tipo,
+			wsrc = i3GEO.configura.locaplic+"/ferramentas/colorpicker/index.htm?doc="+janelaid+"&elemento="+elemento+"&tipo="+tipo,
 			nx = "",
 			ny = "",
 			texto = "Cor",
 			id = "i3geo_janelaCor",
 			modal = true,
 			classe = "hd";
-		YAHOO.i3GEO.janela.namespace("cor");
-		if ($i(id))
-		{YAHOO.i3GEO.janela.cor.destroy();}
+		if($i(id)){
+			YAHOO.i3GEO.janela.manager.find(id).show();
+			return;
+		}
 		ins = '<div id="'+id+'_cabecalho" class="hd">';
 		ins += "<span><img id='i3geo_janelaCor_imagemCabecalho' style='visibility:hidden;' src=\'"+i3GEO.configura.locaplic+"/imagens/aguarde.gif\' /></span>";
 		ins += texto;
@@ -992,11 +992,10 @@ i3GEO.util = {
 			wdocaiframe.style.width = "325px";
 			wdocaiframe.style.border = "0px solid white";
 		}
-		YAHOO.i3GEO.janela.cor = new YAHOO.widget.ResizePanel(id, { height:"290px",zIndex:i3GEO.janela.ULTIMOZINDEX, modal:false, width: "350px", fixedcenter: true, constraintoviewport: false, visible: true, iframe:false} );
-		YAHOO.i3GEO.janela.manager.register(YAHOO.i3GEO.janela.cor);
-		YAHOO.i3GEO.janela.cor.render();
+		janela = new YAHOO.widget.ResizePanel(id, { height:"290px",modal:false, width: "350px", fixedcenter: true, constraintoviewport: false, visible: true, iframe:false} );
+		YAHOO.i3GEO.janela.manager.register(janela);
+		janela.render();
 		$i(id+'_cabecalho').className = classe;
-		i3GEO.janela.ULTIMOZINDEX++
 	},
 	/*
 	Function: ajaxhttp
@@ -1321,8 +1320,6 @@ i3GEO.util = {
 		if(i3GEO.janela)
 		{tipojanela = i3GEO.janela.ESTILOAGUARDE;}
 		if(!$i(id) || id === ""){
-			//i3GEO.janela.ESTILOAGUARDE = "reduzida";
-			//i3GEO.janela.abreAguarde(id+"aguarde","Carregando JS");
 			head= document.getElementsByTagName('head')[0];
 			script= document.createElement('script');
 			script.type= 'text/javascript';
@@ -2178,31 +2175,35 @@ i3GEO.util = {
 
 	Parametros:
 
-	janela {String} - id do conteúdo da janela flutuante que chamou a função. Pode ser "" caso elemento exista em document
+	janelaid {String} - id do conteúdo da janela flutuante que chamou a função. Pode ser "" caso elemento exista em document
 
 	elemento {String} - id do elemento que receberá os valores da cor selecionada
 
 	ncores {numerico} - número de cores default ao abrir  o seletor de cores
 	*/
-	abreColourRamp: function(janela,elemento,ncores){
+	abreColourRamp: function(janelaid,elemento,ncores){
 		if(typeof(console) !== 'undefined'){console.info("i3GEO.util.abreColourRamp()");}
-		var ins,
+		var janela,
+			ins,
 			temp,
 			novoel,
 			wdocaiframe,
 			fix = false,
 			wlargura = "350",
 			waltura = "480",
-			wsrc = i3GEO.configura.locaplic+"/ferramentas/colourramp/index.php?ncores="+ncores+"&doc="+janela+"&elemento="+elemento, //+janela+"&elemento="+elemento+"&tipo="+tipo,
+			wsrc = i3GEO.configura.locaplic+"/ferramentas/colourramp/index.php?ncores="+ncores+"&doc="+janelaid+"&elemento="+elemento, //+janela+"&elemento="+elemento+"&tipo="+tipo,
 			nx = "",
 			ny = "",
 			texto = "Cor",
 			id = "i3geo_janelaCorRamp",
 			modal = true,
 			classe = "hd";
-		YAHOO.namespace("i3GEO.janela.CorRamp");
-		if ($i(id))
-		{YAHOO.i3GEO.janela.CorRamp.destroy();}
+		if($i(id)){
+			janela = YAHOO.i3GEO.janela.manager.find(id);
+			janela.show();
+			janela.bringToTop();
+			return;
+		}
 		ins = '<div id="'+id+'_cabecalho" class="hd">';
 		ins += "<span><img id='i3geo_janelaCorRamp_imagemCabecalho' style='visibility:hidden;' src=\'"+i3GEO.configura.locaplic+"/imagens/aguarde.gif\' /></span>";
 		ins += texto;
@@ -2225,9 +2226,9 @@ i3GEO.util = {
 		wdocaiframe.style.border = "0px solid white";
 
 		if(nx === "" || nx === "center"){fix = true;}
-		YAHOO.i3GEO.janela.CorRamp = new YAHOO.widget.ResizePanel(id, { height:"480px",zIndex:5000, modal:false, width: "380px", fixedcenter: fix, constraintoviewport: false, visible: true, iframe:false} );
-		YAHOO.i3GEO.janela.manager.register(YAHOO.i3GEO.janela.CorRamp);
-		YAHOO.i3GEO.janela.CorRamp.render();
+		janela = new YAHOO.widget.ResizePanel(id, { height:"480px",modal:false, width: "380px", fixedcenter: fix, constraintoviewport: false, visible: true, iframe:false} );
+		YAHOO.i3GEO.janela.manager.register(janela);
+		janela.render();
 		$i(id+'_cabecalho').className = classe;
 	},
 	/*

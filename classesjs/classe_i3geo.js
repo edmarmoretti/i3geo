@@ -387,8 +387,6 @@ i3GEO = {
 			i3GEO.php.criamapa(mashup,i3GEO.configura.mashuppar);
 		}
 		else{
-			//YAHOO.log("Chamada AJAX para obter o mapa inicial", "i3geo");
-			//i3GEO.janela.abreAguarde("montaMapa",$trad("o5"));
 			if(i3GEO.parametros.w === "" || i3GEO.parametros.h === ""){
 				tamanho = i3GEO.calculaTamanho();
 				i3GEO.parametros.w = tamanho[0];
@@ -457,7 +455,6 @@ i3GEO = {
 		corpoMapa = function(){
 			if($i("ajaxCorpoMapa"))
 			{return;}
-			i3GEO.janela.abreAguarde("ajaxCorpoMapa",$trad("o1")+" atualizando...");
 			i3GEO.php.corpo(i3GEO.atualiza,i3GEO.configura.tipoimagem);
 		};
 		//

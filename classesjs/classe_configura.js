@@ -1080,7 +1080,6 @@ i3GEO.configura = {
 			dica:$trad("d20"),
 			titulo:$trad("d20t"),
 			funcaoonclick:function(){
-				i3GEO.janela.abreAguarde("i3GEO.atualiza",$trad("o1"));
 				var temp = function(){
 					var url = (window.location.href.split("?"));
 					window.location.href = url[0]+"?"+i3GEO.configura.sid;

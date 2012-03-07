@@ -448,7 +448,7 @@ i3GEO.arvoreDeTemas = {
 			i3GEO.janela.fechaAguarde("ajaxredesenha");
 			i3GEO.atualiza();
 		};
-		adiciona = "i3GEO.janela.abreAguarde(\"ajaxredesenha\",\""+$trad("o1")+"\");i3GEO.arvoreDeTemas.checked=false;i3GEO.php.adicionaTemaWMS("+temp+"," +
+		adiciona = "i3GEO.arvoreDeTemas.checked=false;i3GEO.php.adicionaTemaWMS("+temp+"," +
 		"\""+servico+"\"," +
 		"\""+layer+"\"," +
 		"\""+estilo+"\"," +
@@ -1701,7 +1701,6 @@ i3GEO.arvoreDeTemas = {
 			if(!temp){return;}
 		}
 		if(tsl.length > 0){
-			i3GEO.janela.abreAguarde("i3GEO.atualiza",$trad("o1"));
 			temp = function(retorno){
 				i3GEO.janela.fechaAguarde("i3GEO.atualiza");
 				if(retorno.data.erro){

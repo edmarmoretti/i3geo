@@ -519,7 +519,6 @@ i3GEO.gadgets = {
 			//
 			//pega a lista de imagens no diretório do i3geo correspondente ao visual selecionado
 			//
-			i3GEO.janela.abreAguarde("i3GEO.atualiza",$trad("o1"));
 			i3GEO.php.listaarquivos(monta,"imagens/visual/"+visual);
 		}
 	},

@@ -846,7 +846,6 @@ i3GEO.arvoreDeCamadas = {
 							//muda ordem de desenho do tema
 							else{
 								if(i3GEO.arvoreDeCamadas.ARRASTARORDEM === true){
-									i3GEO.janela.abreAguarde("i3GEO.atualiza",$trad("o1"));
 									destEl = Dom.get(id);
 									noid = id.split("arrastar_")[1];
 									destEl.appendChild(this.getEl()); 
@@ -1375,7 +1374,6 @@ i3GEO.arvoreDeCamadas = {
 			if(typeof(console) !== 'undefined'){console.error(erro);}
 		}
 		tempoBotaoAplicar = "";
-		i3GEO.janela.abreAguarde("redesenha",$trad("o1"));
 		if(tipo === "normal"){
 			i3GEO.php.ligatemas(temp,t[1].toString(),t[0].toString());
 			return;
