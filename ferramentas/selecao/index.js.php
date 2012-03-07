@@ -573,6 +573,7 @@ i3GEOF.selecao = {
 		{console.info("i3GEO.navega.selecao.porbox()");}
 		var retorna = function(retorno){
 			var nsel;
+			i3GEO.janela.fechaAguarde("i3GEO.atualiza");
 			i3GEO.Interface.atualizaTema(retorno,tema);
 			nsel = i3GEO.arvoreDeCamadas.pegaTema(tema,retorno.data.temas);
 			$i("i3GEOselecaoNsel").innerHTML = "Selecionados: "+(nsel.nsel);
@@ -614,6 +615,7 @@ i3GEOF.selecao = {
 		if(typeof(console) !== 'undefined'){console.info("i3GEO.selecao.porxy()");}
 		var retorna = function(retorno){
 			var nsel;
+			i3GEO.janela.fechaAguarde("i3GEO.atualiza");
 			i3GEO.Interface.atualizaTema(retorno,tema);
 			nsel = i3GEO.arvoreDeCamadas.pegaTema(tema,retorno.data.temas);
 			$i("i3GEOselecaoNsel").innerHTML = "Selecionados: "+(nsel.nsel);
@@ -724,7 +726,7 @@ i3GEOF.selecao = {
 			ys = pontos.ypt.toString(",");
 			retorna = function(retorno){
 				var nsel;
-				i3GEO.janela.fechaAguarde("i3GEO.atualiza",$trad("o1"));
+				i3GEO.janela.fechaAguarde("i3GEO.atualiza");
 				i3GEO.Interface.atualizaTema(retorno,tema);
 				nsel = i3GEO.arvoreDeCamadas.pegaTema(tema,retorno.data.temas);
 				$i("i3GEOselecaoNsel").innerHTML = "Selecionados: "+(nsel.nsel);

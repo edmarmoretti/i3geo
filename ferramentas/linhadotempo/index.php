@@ -231,6 +231,7 @@ function tituloclique(wkt){
 	wkt = wkt.split(" ");
 	var retorna = function(retorno)
 	{
+		window.parent.i3GEO.janela.fechaAguarde("i3GEO.atualiza");
 		window.parent.i3GEO.atualiza(retorno);
 		window.parent.i3GEO.Interface.atualizaTema(retorno,$i("tema").value);
 	};

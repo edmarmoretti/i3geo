@@ -479,7 +479,7 @@ i3GEO.janela = {
 	texto {String} - texto da janela
 	*/
 	abreAguarde: function(id,texto){
-		if(typeof(console) !== 'undefined'){console.info("i3GEO.janela.abreAguarde()");}
+		if(typeof(console) !== 'undefined'){console.info("i3GEO.janela.abreAguarde("+id+")");}
 		var pos,index,temp,janela;
 		if(!id || id == undefined)
 		{return;}

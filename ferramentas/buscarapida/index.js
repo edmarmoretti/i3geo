@@ -306,7 +306,8 @@ i3GEObuscaRapida = {
 	*/
 	zoom: function(wkt,layer,gid,nm){
     	var adicionaCamada = function(layer,gid,nm,ext){
-	 		var s = i3GEObuscaRapida.servicowms+"?gid="+gid+"&";
+	 		window.parent.i3GEO.janela.fechaAguarde("i3GEO.atualiza");
+			var s = i3GEObuscaRapida.servicowms+"?gid="+gid+"&";
 			i3GEO.php.adicionaTemaWMS(window.parent.i3GEO.atualiza,s,layer,"default","EPSG:4618","image/png","1.1.0",nm+" - "+layer,"","nao","",i3GEObuscaRapida.locaplic,window.parent.i3GEO.configura.sid);
 			i3GEObuscaRapida.zoomExt(ext);
 		};
@@ -346,7 +347,10 @@ i3GEObuscaRapida = {
 		{
 			window.parent.i3GEO.janela.abreAguarde("i3GEO.atualiza","Aguarde...");
 			var temp = function()
-			{window.parent.i3GEO.atualiza("");}
+			{
+				window.parent.i3GEO.janela.fechaAguarde("i3GEO.atualiza");
+				window.parent.i3GEO.atualiza("");
+			}
 			i3GEO.php.adtema(temp,obj.value,i3GEObuscaRapida.locaplic,window.parent.i3GEO.configura.sid);
 		}
 		else

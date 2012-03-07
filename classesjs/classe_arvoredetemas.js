@@ -1702,11 +1702,6 @@ i3GEO.arvoreDeTemas = {
 		}
 		if(tsl.length > 0){
 			temp = function(retorno){
-				i3GEO.janela.fechaAguarde("i3GEO.atualiza");
-				if(retorno.data.erro){
-					alert(retorno.data.erro);
-					return;
-				}
 				i3GEO.atualiza();
 				//
 				//verifica se deve ser ativada uma outra guia que não a atual
@@ -1718,7 +1713,7 @@ i3GEO.arvoreDeTemas = {
 					}
 				}
 				//
-				//verifica se a janela a ferramenta identifica está ativa para atualizar a lista de temas
+				//verifica se a janela da ferramenta identifica está ativa para atualizar a lista de temas
 				//
 				try{
 					if($i("i3GEOidentificalistaTemas")){
