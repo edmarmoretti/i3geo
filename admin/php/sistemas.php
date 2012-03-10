@@ -286,7 +286,7 @@ function alterarFuncoes()
 			$dbhw->query("INSERT INTO i3geoadmin_sistemasf (id_sistema,nome_funcao,perfil_funcao,w_funcao,h_funcao,abrir_funcao) VALUES ('$id_sistema','$idtemp','','$w','$h','')");
 			$id = $dbh->query("SELECT id_funcao FROM i3geoadmin_sistemasf WHERE nome_funcao = '$idtemp'");
 			$id = $id->fetchAll();
-			$id = $id[0]['id_funcao']);
+			$id = $id[0]['id_funcao'];
 			$dbhw->query("UPDATE i3geoadmin_sistemasf SET nome_funcao = '' WHERE id_funcao = $id AND nome_funcao = '$idtemp'");
 			$retorna = $id;    		
     	}
