@@ -196,7 +196,9 @@ i3GEO.selecao = {
 		termina: function(){
 			if(g_tipoacao !== 'selecaobox')
 			{return;}
-			var valor,v,x1,y1,x2,y2,limpa,doc,tipo;
+			var valor,v,x1,y1,x2,y2,
+				limpa = function(){},
+				doc,tipo;
 			try{
 				valor = i3GEO.calculo.rect2ext("i3geoboxSel",i3GEO.parametros.mapexten,i3GEO.parametros.pixelsize);
 				v = valor[0];

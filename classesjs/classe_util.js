@@ -252,7 +252,7 @@ i3GEO.util = {
 	*/
 	listaChaves: function (obj) {
 		if(typeof(console) !== 'undefined'){console.info("i3GEO.util.listaChaves()");}
-		var keys,key;
+		var keys,key = "";
 		keys = [];
 		for(key in obj){
 			if(obj[key])
@@ -360,11 +360,11 @@ i3GEO.util = {
 	*/
 	arvore: function(titulo,onde,obj){
 		if(typeof(console) !== 'undefined'){console.info("i3GEO.util.arvore()");}
-		var arvore,root,tempNode,currentIconMode,d,c,i,linha,conteudo,j,temaNode;
+		var arvore,root,tempNode,d,c,i,linha,conteudo,j,temaNode;
 		if(!$i(onde)){return;}
+		arvore = new YAHOO.widget.TreeView(onde);
+		root = arvore.getRoot();
 		try{
-			arvore = new YAHOO.widget.TreeView(onde);
-			root = arvore.getRoot();
 			tempNode = new YAHOO.widget.TextNode('', root, false);
 			tempNode.isLeaf = false;
 			tempNode.enableHighlight = false;
@@ -453,7 +453,7 @@ i3GEO.util = {
 		{
 			if(!obj.style)
 			{return [0,0];}
-			var curleft = 0,curtop = 0,teste;
+			var curleft = 0,curtop = 0;
 			if(obj){
 				if (obj.offsetParent) {
 					do {
@@ -484,18 +484,23 @@ i3GEO.util = {
 	*/
 	pegaElementoPai: function(e){
 		if(typeof(console) !== 'undefined'){console.info("i3GEO.util.pegaElementoPai()");}
-		var targ;
+		var targ = document;
 		if (!e)
 		{e = window.event;}
 		if (e.target)
 		{targ = e.target;}
-		else
-		if (e.srcElement)
-		{targ = e.srcElement;}
+		else{
+			if (e.srcElement)
+			{targ = e.srcElement;}
+		}
 		if (targ.nodeType === 3)
 		{targ = targ.parentNode;}
-		tparent=targ.parentNode;
-		return(tparent);
+		if(targ.parentNode){
+			tparent=targ.parentNode;
+			return(tparent);
+		}
+		else
+		{return targ;}
 	},
 	/*
 	Function: mudaCursor
@@ -521,9 +526,8 @@ i3GEO.util = {
 		var os = [],
 			o,
 			i,
-			c,
+			c = "",
 			n,
-			layers,
 			cursor="",
 			ext = ".ff";
 		//
@@ -951,18 +955,11 @@ i3GEO.util = {
 		{tipo = "rgb";}
 		var janela,
 			ins,
-			temp,
 			novoel,
 			wdocaiframe,
-			fix = false,
-			wlargura = "300",
-			waltura = "280",
 			wsrc = i3GEO.configura.locaplic+"/ferramentas/colorpicker/index.htm?doc="+janelaid+"&elemento="+elemento+"&tipo="+tipo,
-			nx = "",
-			ny = "",
 			texto = "Cor",
 			id = "i3geo_janelaCor",
-			modal = true,
 			classe = "hd";
 		if($i(id)){
 			YAHOO.i3GEO.janela.manager.find(id).show();
@@ -1037,7 +1034,7 @@ i3GEO.util = {
 	O resultado em um objeto DOM. Se o retorno contiver a palavra "Erro", é gerado um alert.
 	*/
 	ajaxexecASXml: function(programa,funcao){
-		var h,ohttp,retorno;
+		var h,ohttp;
 		if (programa.search("http") === 0){
 			h = window.location.host;
 			if (programa.search(h) < 0){
@@ -1047,7 +1044,6 @@ i3GEO.util = {
 		}
 		ohttp = i3GEO.util.ajaxhttp();
 		ohttp.open("GET",programa,true);
-		retorno = "";
 		ohttp.onreadystatechange=function(){
 			var retorno,parser,dom;
 			if (ohttp.readyState === 4){
@@ -1064,7 +1060,7 @@ i3GEO.util = {
 					}
 				}
 				else
-				{dom = "erro";}
+				{return "erro";}
 				if (funcao !== "volta")
 				{eval(funcao+'(dom)');}
 				else
@@ -1088,7 +1084,7 @@ i3GEO.util = {
 	*/
 	aparece: function(id,tempo,intervalo){
 		if(typeof(console) !== 'undefined'){console.info("i3GEO.util.aparece("+id+")");}
-		var n,obj,opacidade,fadei,tempoFadei;
+		var n,obj,opacidade,fadei = 0,tempoFadei = null;
 		n = parseInt(tempo / intervalo,10);
 		obj = $i(id);
 		if(n === 1){
@@ -1115,7 +1111,8 @@ i3GEO.util = {
 			if(opacidade < 100)
 			{tempoFadei = setTimeout(fadei, tempo);}
 			else{
-				clearTimeout(tempoFadei);
+				if(tempoFadei)
+				{clearTimeout(tempoFadei);}
 				if (navm)
 				{obj.style.filter='alpha(opacity=100)';}
 				else
@@ -1140,7 +1137,7 @@ i3GEO.util = {
 	removeobj {Boolean} - remove ou não o objeto no final
 	*/
 	desaparece: function(id,tempo,intervalo,removeobj){
-		var n,obj,opacidade,fade,p,tempoFade;
+		var n,obj,opacidade,fade = 0,p,tempoFade = null;
 		n = parseInt(tempo / intervalo,10);
 		obj = $i(id);
 		if(n === 1){
@@ -1170,7 +1167,8 @@ i3GEO.util = {
 				tempoFade = setTimeout(fade, tempo);
 			}
 			else{
-				clearTimeout(tempoFade);
+				if(tempoFade)
+				{clearTimeout(tempoFade);}
 				obj.style.display = "none";
 				if (navm)
 				{obj.style.filter='alpha(opacity=100)';}
@@ -1505,9 +1503,9 @@ i3GEO.util = {
 		{nome = "";}
 		if (arguments.length < 5)
 		{multiplo = false;}
-		var monta, lista, temp, temp1, temp2;
+		var monta, temp, temp1, temp2;
 		monta = function(retorno){
-			var i,comboTemas,temp,n,nome;
+			var i,comboTemas,n,nome = "";
 			if (retorno !== undefined)
 			{
 				if(retorno.data)
@@ -1663,10 +1661,10 @@ i3GEO.util = {
 		{$i(onde).innerHTML="<span style=color:red;font-size:10px; >buscando temas...</span>";}
 		if (arguments.length === 3)
 		{nome = "";}
-		var monta, lista, temp, temp1, n, i;
+		var monta, temp, temp1, n, i;
 		monta = function(retorno){
 			try{
-				var i,comboTemas,temp,n,nome;
+				var i,comboTemas,n,nome;
 				if (retorno !== undefined)
 				{
 					if(retorno.data)
@@ -1843,13 +1841,9 @@ i3GEO.util = {
 			}
 			else
 			{temp = {dados:'<div class=erro >Ocorreu um erro</erro>',tipo:"erro"};}
-			eval("funcao(temp)");
+			funcao.apply(funcao,temp);
 		};
 		i3GEO.php.listaValoresItensTema(monta,tema,itemTema);
-		//cp = new cpaint();
-		//cp.set_debug(2)
-		//cp.set_response_type("JSON");
-		//cp.call( g_locaplic+"/classesphp/mapa_controle.php?g_sid="+g_sid+"&funcao=listaregistros&unico=sim&tema="+tema+"&itemtema="+itemTema,"listaRegistros",monta);
 	},
 	/*
 	Function: comboFontes
@@ -1953,7 +1947,7 @@ i3GEO.util = {
 			}
 			else
 			{temp = {dados:'<div class=erro >Ocorreu um erro</div>',tipo:"erro"};}
-			eval("funcao(temp)");
+			funcao.apply(funcao,temp);
 		};
 		i3GEO.php.listaItensTema(monta,tema);
 	},
@@ -1977,7 +1971,7 @@ i3GEO.util = {
 	radioEpsg: function (funcao,onde,prefixo){
 		if (arguments.length === 2)
 		{$i(onde).innerHTML="<span style=color:red;font-size:10px; >buscando...</span>";}
-		var cp,monta = function(retorno){
+		var monta = function(retorno){
 			var ins = [],
 				i,n,temp;
 			if (retorno.data !== undefined){
@@ -1997,7 +1991,7 @@ i3GEO.util = {
 			}
 			else
 			{temp = {dados:'<div class=erro >Ocorreu um erro</erro>',tipo:"erro"};}
-			eval("funcao(temp)");
+			funcao.apply(funcao,temp);
 		};
 		i3GEO.php.listaEpsg(monta);
 	},
@@ -2026,8 +2020,7 @@ i3GEO.util = {
 			ndiv = document.createElement("div"),
 			nids,
 			i,
-			fundo,
-			b;
+			fundo;
 
 		if(temp){$i(container).removeChild(temp);}
 		if (!document.getElementById(idatual))
@@ -2043,13 +2036,13 @@ i3GEO.util = {
 
 			$i(container).appendChild(ndiv);
 
-			b = new YAHOO.widget.Button(idatual+"anterior_",{
+			new YAHOO.widget.Button(idatual+"anterior_",{
 				onclick:{fn: function(){
 					eval(anterior+"()");
 				},
 				lazyloadmenu:true 
 			}});
-			b = new YAHOO.widget.Button(idatual+"proxima_",
+			new YAHOO.widget.Button(idatual+"proxima_",
 				{onclick:{fn: function(){
 					eval(proxima+"()");
 				},
@@ -2125,8 +2118,7 @@ i3GEO.util = {
 		var	box1i = box2,
 			box2i = box1,
 			coordx,
-			coordy,
-			i;
+			coordy;
 		coordx = box1[0]*1;
 		coordy = box1[1]*1;
 		if(coordx >= box2[0]*1 && coordx <= box2[2]*1 && coordy >= box2[1]*1 && coordy <= box2[3]*1){
@@ -2185,18 +2177,13 @@ i3GEO.util = {
 		if(typeof(console) !== 'undefined'){console.info("i3GEO.util.abreColourRamp()");}
 		var janela,
 			ins,
-			temp,
 			novoel,
 			wdocaiframe,
 			fix = false,
-			wlargura = "350",
-			waltura = "480",
 			wsrc = i3GEO.configura.locaplic+"/ferramentas/colourramp/index.php?ncores="+ncores+"&doc="+janelaid+"&elemento="+elemento, //+janela+"&elemento="+elemento+"&tipo="+tipo,
 			nx = "",
-			ny = "",
 			texto = "Cor",
 			id = "i3geo_janelaCorRamp",
-			modal = true,
 			classe = "hd";
 		if($i(id)){
 			janela = YAHOO.i3GEO.janela.manager.find(id);
@@ -2477,7 +2464,6 @@ i3GEO.util = {
 	Retorna algumas versões de navegador
 	*/	
 	versaoNavegador: function(){
-		var v = "";
 		if(navm && navigator.userAgent.toLowerCase().indexOf('msie 8.') > -1)
 		{return "IE8";}
 		if(navn && navigator.userAgent.toLowerCase().indexOf('3.') > -1)
@@ -2528,17 +2514,14 @@ try{
 				this.properties.ativa = ativa;
 			}
 			var accordionObject = document.getElementById(this.properties.Id),
-				headers,
-				bodies;
+				headers;
 			if(accordionObject) {
 				if(accordionObject.nodeName === "DL") {
 					headers = accordionObject.getElementsByTagName("dt");
-					bodies = headers[0].parentNode.getElementsByTagName("dd");
+					this.attachEvents(headers,0);
 				}
-				this.attachEvents(headers,0);
 			}
 		},
-
 		attachEvents : function(headers,nr) {
 			var i,headerProperties,parentObj,header;
 			for(i=0; i<headers.length; i++) {

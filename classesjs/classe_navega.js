@@ -395,7 +395,7 @@ i3GEO.navega = {
 	panFixo: function(locaplic,sid,direcao,w,h,escala){
 		if(typeof(console) !== 'undefined'){console.info("i3GEO.navega.panFixo()");}
 		//YAHOO.log("panfixo", "i3geo");
-		var x,y,f;
+		var x = 0,y = 0,f;
 		if(locaplic !== "")
 		{i3GEO.configura.locaplic = locaplic;}
 		if(sid !== "")
@@ -698,7 +698,7 @@ i3GEO.navega = {
 			if(typeof(console) !== 'undefined'){console.info("i3GEO.navega.zoomBox.criaBox()");}
 			if(i3GEO.navega.timerNavega !== null){return;}
 			if(!$i("i3geoboxZoom")){
-				var novoel,temp;
+				var novoel;
 				novoel = document.createElement("div");
 				novoel.style.width = "0px";
 				novoel.style.height = "0px";
@@ -777,7 +777,8 @@ i3GEO.navega = {
 		*/
 		termina: function(){
 			if(typeof(console) !== 'undefined'){console.info("i3GEO.navega.zoomBox.termina()");}
-			var valor,v,x1,y1,x2,y2,limpa,f;
+			var valor,v,x1,y1,x2,y2,f,
+				limpa = function(){};
 			if(g_tipoacao !== 'zoomli'){
 				i3GEO.eventos.MOUSEDOWN.remove("i3GEO.navega.zoomBox.inicia()");
 				i3GEO.eventos.MOUSEUP.remove("i3GEO.navega.zoomBox.termina()");
@@ -793,11 +794,13 @@ i3GEO.navega = {
 				x2 = valor[3];
 				y2 = valor[4];
 				limpa = function(){
-					var bxs = $i("i3geoboxZoom").style;
-					bxs.display="none";
-					bxs.visibility="hidden";
-					bxs.width = 0 + "px";
-					bxs.height = 0 + "px";
+					var bxs = $i("i3geoboxZoom");
+					if(bxs){
+						bxs.style.display="none";
+						bxs.style.visibility="hidden";
+						bxs.style.width = 0 + "px";
+						bxs.style.height = 0 + "px";
+					}
 				};
 				if((x1 === x2) || (y1 === y2))
 				{limpa.call();return;}
@@ -963,7 +966,8 @@ i3GEO.navega = {
 		movimenta: function(){
 			try{
 				if(i3GEO.navega.lente.ESTAATIVA === "sim"){
-					var pos,esq,topo,clipt,i;
+					var pos = [0,0],
+						esq,topo,clipt,i;
 					if ($i("lente").style.visibility === "visible")
 					{pos = i3GEO.util.pegaPosicaoObjeto($i(i3GEO.Interface.IDMAPA));}
 					esq = (objposicaocursor.telax - pos[0]) * 2.25;
@@ -1245,7 +1249,9 @@ i3GEO.navega = {
 			if($i("vertHandleDivZoom")){
 				$i("vertHandleDivZoom").onmousemove = function(){
 					try{
-						var iclone,corpo,nt,nl,velhoh,velhow,nh,nw,t,l,fatorEscala;
+						var iclone,corpo,nt,nl,velhoh,velhow,
+							nh = 0,nw = 0,
+							t,l,fatorEscala;
 						iclone = $i("imgtemp");
 						corpo = $i("img");
 						if(!corpo)

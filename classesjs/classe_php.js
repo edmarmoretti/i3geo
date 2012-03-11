@@ -611,7 +611,7 @@ i3GEO.php = {
 	<MUDAEXT>
 	*/
 	mudaext: function(funcao,tipoimagem,ext,locaplic,sid,atualiza,geo){
-		var retorno,p;
+		var retorno;
 		if(arguments.length === 3){
 			i3GEO.php.verifica();
 			locaplic = i3GEO.configura.locaplic;

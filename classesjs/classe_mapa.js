@@ -112,7 +112,7 @@ i3GEO.mapa = {
 	*/
 	ativaAutoResize: function(){
 		window.onresize = function(){
-			var temp,Dw,Dh, r = false;
+			var Dw,Dh, r = false;
 			Dw = YAHOO.util.Dom.getViewportWidth();
 			Dh = YAHOO.util.Dom.getViewportHeight();
 			if(Math.abs(Dw - i3GEO.tamanhodoc[0]) > 50){
@@ -124,7 +124,7 @@ i3GEO.mapa = {
 			if(r === false)
 			{return;}
 			i3GEO.tamanhodoc = [Dw,Dh];
-			temp = setTimeout(function(){
+			setTimeout(function(){
 				i3GEO.reCalculaTamanho();
 				i3GEO.barraDeBotoes.recria("i3geo_barra2");
 				if(i3GEO.Interface.TABLET === true)
@@ -153,8 +153,6 @@ i3GEO.mapa = {
 		if(arguments.length === 0){return;}
 		var imagemxi = 0,
 			imagemyi = 0,
-			imagemxref = 0,
-			imagemyref = 0,
 			dc = $i(elemento),
 			c;
 		if(!dc){return;}
@@ -358,11 +356,10 @@ i3GEO.mapa = {
 			if(typeof(console) !== 'undefined'){console.info("i3GEO.mapa.legendaHTML.atualiza()");}
 			var idleg,
 				temp = function(retorno){
-					var s,ins,elementos,i,temp,re;
+					var ins,elementos,i,temp,re;
 					re = new RegExp("<img src='' />", "g");
 					if(i3GEO.mapa.legendaHTML.ID !== "" && $i(i3GEO.mapa.legendaHTML.ID)){
 						if ((retorno.data !== "erro") && (retorno.data !== undefined)){
-							s = i3GEO.configura.locaplic+"/imagens/branco.gif";
 							ins = "";
 							if(i3GEO.mapa.legendaHTML.incluiBotaoLibera === true)
 							{ins += '<div style="cursor: pointer; text-align: left; font-size: 10px; display: block; height: 35px;" onclick="i3GEO.mapa.legendaHTML.libera()"><img id="soltaLeg" src="../imagens/branco.gif" title="clique para liberar" style="margin: 5px; position: relative;"> <p style="position: relative; left: -45px; top: -22px;">Mostra a legenda em uma janela</p></div>';}
@@ -738,7 +735,7 @@ i3GEO.mapa = {
 			if(i3GEO.Interface.ATUAL === "googleearth")
 			{i3GEO.Interface.googleearth.aguarde.visibility = "visible";}
 			retorna = function(retorno){
-				var pos,temp,rfes,n,i,mostra,res,temas,ntemas,titulo,tips,j,ntips,ins,r,ds,nds,s,balloon,
+				var pos,temp,n,i,mostra,res,temas,ntemas,titulo,tips,j,ntips,ins,r,ds,nds,s,balloon,
 					configura = i3GEO.configura,
 					tipotip = configura.tipotip;
 				i = $i("i3geo_rosa");

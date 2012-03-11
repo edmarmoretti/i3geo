@@ -258,8 +258,7 @@ i3GEO.maparef = {
 		if(arguments.length === 0)
 		{forca = false;}
 		if(typeof(console) !== 'undefined'){console.info("i3GEO.maparef.atualiza()");}
-		var dinamico,tiporef,temp,re;
-		dinamico = false;
+		var tiporef,temp,re;
 		temp = $i("refDinamico") ? tiporef = $i("refDinamico").value : tiporef = "fixo";
 		if ($i("mapaReferencia")){
 			temp = $i("maparefmaismenosZoom");
@@ -308,8 +307,8 @@ i3GEO.maparef = {
 	*/
 	processaImagem: function(retorno){
 		if(typeof(console) !== 'undefined'){console.info("i3GEO.maparef.processaImagem()");}
-		var w,m,novoel,boxrefdd,box,temp,
-		tiporef = "fixo";
+		var m,box,temp,
+			tiporef = "fixo";
 		//i3GEO.janela.fechaAguarde("ajaxreferencia1");
 		if ((retorno.data !== "erro") && (retorno.data !== undefined)){
 			eval(retorno.data);
@@ -380,7 +379,7 @@ i3GEO.maparef = {
 			//atualiza o mapa principal quando o box é modificado manualmente
 			//
 			novoel.onmouseup = function(){
-				var rect,telaminx,telaminxy,telamaxx,telaminy,m,x,ext;
+				var rect,telaminx,telamaxx,telaminy,m,x,ext;
 				rect = $i("boxref");
 				telaminx = parseInt(rect.style.left,10);
 				telamaxy = parseInt(rect.style.top,10);

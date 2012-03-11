@@ -598,7 +598,7 @@ i3GEO.Interface = {
 			//monta o mapa após receber o resultado da criação do mapfile temporário
 			//
 			var montaMapa = function(){
-				var pz,pos,temp,propriedades,layers,nlayers,i,texto,estilo,layersn,
+				var pz,temp,layers,i,texto,estilo,layersn,
 				openlayers = i3GEO.Interface.openlayers;
 				i3GEO.util.multiStep([
 						openlayers.registraEventos,
@@ -726,7 +726,7 @@ i3GEO.Interface = {
 			i3GEO.php.listaRSSwsARRAY(monta,"KML");
 		},
 		adicionaKml: function(pan,url,titulo,ativo){
-			var ngeoxml,i,zoom;
+			var ngeoxml,i;
 			if(!$i("arvoreCamadasKml"))
 			{i3GEO.Interface.openlayers.criaArvoreKML();}
 			ngeoxml = "geoXml_"+i3GEO.mapa.GEOXML.length;
@@ -783,7 +783,7 @@ i3GEO.Interface = {
 			}
 		},
 		adicionaNoArvoreKml: function(url,nomeOverlay,ativo,id){
-			var root,node,d,nodekml;
+			var node,d,nodekml;
 			if(!$i("arvoreCamadasKml"))
 			{i3GEO.Interface.openlayers.criaArvoreKML();}
 			if(arguments.length === 2){
@@ -792,7 +792,6 @@ i3GEO.Interface = {
 			}
 			if(arguments.length === 2)
 			{id = nomeOverlay;}
-			root = i3GEO.Interface.openlayers.ARVORE.getRoot();
 			node = i3GEO.Interface.openlayers.ARVORE.getNodeByProperty("idkml","raiz");
 			html = "<input onclick='i3GEO.Interface.openlayers.ativaDesativaCamadaKml(this,\""+url+"\")' class=inputsb style='cursor:pointer;' type='checkbox' value='"+id+"'";
 			if(ativo === true)
@@ -821,35 +820,39 @@ i3GEO.Interface = {
 			eval("i3geoOL.addLayer("+id+");");
 			eval("temp = "+id+".div;");
 			temp.onclick = function(e){
-				var targ,id,temp,features,n,i,j,html="";
+				var targ = "",
+					id,temp,features,n,i,
+					j = "",
+					html="";
 				if (!e){e = window.event;}
 				if (e.target)
 				{targ = e.target;}
 				else
 				if (e.srcElement)
 				{targ = e.srcElement;}
-				
-				temp = targ.id.split("_");
-				if(temp[0] === "OpenLayers.Geometry.Point"){
-					id = targ.id;
-					temp = i3geoOL.getLayer(this.id);
-					features = temp.features;
-					n = features.length;
-					for(i=0;i<n;i++){
-						if(features[i].geometry.id === id){
-							for (j in features[i].attributes) {
-								html += j+": "+features[i].attributes[j];
+				if(targ.id){
+					temp = targ.id.split("_");
+					if(temp[0] === "OpenLayers.Geometry.Point"){
+						id = targ.id;
+						temp = i3geoOL.getLayer(this.id);
+						features = temp.features;
+						n = features.length;
+						for(i=0;i<n;i++){
+							if(features[i].geometry.id === id){
+								for (j in features[i].attributes) {
+									html += j+": "+features[i].attributes[j];
+								}
+								g = features[i].geometry;
+								i3geoOL.addPopup(new OpenLayers.Popup.FramedCloud(
+									"kml", 
+									new OpenLayers.LonLat(g.x,g.y),
+									null,
+									html,
+									null,
+									true
+								));
+								
 							}
-							g = features[i].geometry;
-							i3geoOL.addPopup(new OpenLayers.Popup.FramedCloud(
-								"kml", 
-								new OpenLayers.LonLat(g.x,g.y),
-								null,
-								html,
-								null,
-								true
-							));
-							
 						}
 					}
 				}
@@ -869,20 +872,15 @@ i3GEO.Interface = {
 		criaLayers: function(){
 			var configura = i3GEO.configura,
 				url = configura.locaplic+"/classesphp/mapa_openlayers.php?g_sid="+i3GEO.configura.sid+"&TIPOIMAGEM="+configura.tipoimagem,
-				urlfundo = configura.locaplic+"/classesphp/mapa_openlayers.php?g_sid="+i3GEO.configura.sid+"&layer=&tipolayer=fundo&TIPOIMAGEM="+configura.tipoimagem,
 				nlayers = i3GEO.arvoreDeCamadas.CAMADAS.length,
 				layer,
-				layers,
 				camada,
 				urllayer,
 				opcoes,
 				i,
 				n,
-				temp,
+				temp = $i("i3GEOprogressoDiv"),
 				fundoIsBase = true;
-
-
-			var temp = $i("i3GEOprogressoDiv");
 			if(temp){
 				i3GEO.Interface.STATUS.atualizando = [];
 				temp.style.display = "none";
@@ -987,10 +985,6 @@ i3GEO.Interface = {
 			}
 		},
 		inverteModoTile: function(){
-			var nlayers = i3GEO.arvoreDeCamadas.CAMADAS.length,
-				layer,
-				i,
-				camada;
 			if(i3GEO.Interface.openlayers.TILES === true)
 			{i3GEO.Interface.openlayers.TILES = false;}
 			else
@@ -1084,7 +1078,6 @@ i3GEO.Interface = {
 		},
 		ligaDesliga:function(obj){
 			var layers = i3geoOL.getLayersByName(obj.value),
-				temp = function(){i3GEO.mapa.legendaHTML.atualiza();},
 				desligar = "",
 				ligar = "",
 				b;
@@ -1175,7 +1168,7 @@ i3GEO.Interface = {
 				i3GEO.coordenadas.mostraCoordenadas(false,"",xy[0],xy[1]);
 			});
 			i3geoOL.events.register("mousemove", i3geoOL, function(e){
-				var p,lonlat,d,dc,imgp,targ,pos,mousex,mousey;
+				var p,lonlat,d,pos;
 				if(modoAtual === "move")
 				{return;}
 				p = e.xy;
@@ -1202,7 +1195,9 @@ i3GEO.Interface = {
 		},
 		ativaBotoes: function(){
 			if(typeof(console) !== 'undefined'){console.info("i3GEO.Interface.openlayers.ativaBotoes()");}
-			var imagemxy,x1,y1,x2,y2;
+			var imagemxy,
+				x2 = 0,
+				y2 = 0;
 			imagemxy = i3GEO.util.pegaPosicaoObjeto($i(i3GEO.Interface.IDCORPO));
 			if ($i("barraDeBotoes2") || i3GEO.barraDeBotoes.AUTO === true){
 				x2 = imagemxy[0]+i3GEO.Interface.BARRABOTOESLEFT;
@@ -1343,7 +1338,7 @@ i3GEO.Interface = {
 			i3GEO.Interface.googlemaps.criaLayers();
 		},
 		cria: function(w,h){
-			var i,f,ins,js;
+			var i,f,ins;
 			posfixo = "&nd=0";
 			i = $i(i3GEO.Interface.IDCORPO);
 			if(i){
@@ -1372,11 +1367,11 @@ i3GEO.Interface = {
 			});
 		},
 		inicia: function(){
-			var pol,ret,pt1,pt2,bottomLeft,bottomRight,i3GEOTile;
+			var pol,ret;
 			pol = i3GEO.parametros.mapexten;
 			ret = pol.split(" ");
 			function montaMapa(retorno){
-				var pos, sw,ne,z,myMapType,
+				var sw,ne,
 				dobra = $i("i3GEOdobraPagina");
 				try{
 					i3GeoMap = new google.maps.Map($i(i3GEO.Interface.IDMAPA),{scaleControl:true});
@@ -1450,8 +1445,7 @@ i3GEO.Interface = {
 			}
 		},
 		criaImageMap: function(nomeLayer){
-			var i3GEOTileO,s;
-		
+			var i3GEOTileO = "",s;	
 			s = "i3GEOTileO = new google.maps.ImageMapType({ "+
 					"getTileUrl: function(coord, zoom) {" +
 					"	var url = '" + i3GEO.configura.locaplic +"/classesphp/mapa_googlemaps.php?g_sid=" + i3GEO.configura.sid +
@@ -1462,20 +1456,6 @@ i3GEO.Interface = {
 					"isPng: true," +
 					"name: '" + nomeLayer + "'" +
 				"});";
-			
-/*
-			s = "i3GEOTileO = new google.maps.ImageMapType({ "+
-					"getTileUrl: function(coord, zoom) {" +
-					"	var url = '" + i3GEO.configura.locaplic +"/classesphp/mapa_googlemaps.php?g_sid=" + i3GEO.configura.sid +
-					"&WIDTH=512&HEIGHT=512&BBOX=' + i3GEO.Interface.googlemaps.bbox() + '"+
-					"&Z=' + zoom + '&X=' + (coord.x) + '&Y=' + (coord.y) + '&layer=" + nomeLayer + i3GEO.Interface.googlemaps.PARAMETROSLAYER + '&r='+Math.random()+"';" +
-					"	return url+'&nd='+i3GEO.Interface.googlemaps.posfixo; " +
-					"}, "+
-					"tileSize: new google.maps.Size(512,512)," +
-					"isPng: true," +
-					"name: '" + nomeLayer + "'" +
-				"});";
-*/
 			eval(s);
 			return i3GEOTileO;
 		},
@@ -1576,8 +1556,6 @@ i3GEO.Interface = {
 		retornaDivLayer: function(nomeLayer){
 			var i,
 				divmapa = $i("googlemapsdiv"),
-				divlayer,
-				divs,
 				divimg,
 				n;
 			divimg = divmapa.getElementsByTagName("img");
@@ -1596,7 +1574,6 @@ i3GEO.Interface = {
 				desligar = "",
 				ligar = "",
 				n,
-				listac,
 				i,
 				lista = [],
 				listatemp;
@@ -1643,7 +1620,9 @@ i3GEO.Interface = {
 		},
 		ativaBotoes: function(){
 			if(typeof(console) !== 'undefined'){console.info("i3GEO.Interface.googlemaps.ativaBotoes()");}
-			var imagemxy,x1,y1,x2,y2;
+			var imagemxy,
+				x2 = 0,
+				y2 = 0;
 			imagemxy = i3GEO.util.pegaPosicaoObjeto($i(i3GEO.Interface.IDCORPO));
 			if ($i("barraDeBotoes2") || i3GEO.barraDeBotoes.AUTO === true){
 				x2 = imagemxy[0]+i3GEO.Interface.BARRABOTOESLEFT;
@@ -1675,8 +1654,7 @@ i3GEO.Interface = {
 		},
 		recalcPar: function(){
 			try{
-				var bounds,
-					sw,
+				var sw,
 					ne,
 					escalaAtual = i3GEO.parametros.mapscale;
 				sw = i3GeoMap.getBounds().getSouthWest();
@@ -1711,16 +1689,10 @@ i3GEO.Interface = {
 			}
 		},
 		zoom2extent:function(mapexten){
-			var pol,ret,pt1,pt2,sw,ne,z;
-			pol = mapexten;
-			ret = pol.split(" ");
-			//
-			//verifica se é geo
-			//
-			pt1 = (( (ret[0] * -1) - (ret[2] * -1) ) / 2) + ret[0] *1;
-			pt2 = (((ret[1] - ret[3]) / 2)* -1) + ret[1] *1;
-			sw = new google.maps.LatLng(ret[1],ret[0]);
-			ne = new google.maps.LatLng(ret[3],ret[2]);
+			var pol = mapexten,
+				ret = pol.split(" "),
+				sw = new google.maps.LatLng(ret[1],ret[0]),
+				ne = new google.maps.LatLng(ret[3],ret[2]);
 			i3GeoMap.fitBounds(new google.maps.LatLngBounds(sw,ne));
 		},
 		pan2ponto: function(x,y){
@@ -1746,7 +1718,7 @@ i3GEO.Interface = {
 		ativo {boolean} - indica se a camada estará ativa ou não. Se não for definido, será considerado como true
 		*/
 		adicionaKml: function(pan,url,titulo,ativo){
-			var ngeoxml,i,zoom;
+			var ngeoxml,i;
 			if(!$i("arvoreCamadasKml"))
 			{i3GEO.Interface.googlemaps.criaArvoreKML();}
 			ngeoxml = "geoXml_"+i3GEO.mapa.GEOXML.length;
@@ -1804,7 +1776,7 @@ i3GEO.Interface = {
 		id {string} - nome do objeto GGeoXml
 		*/
 		adicionaNoArvoreGoogle: function(url,nomeOverlay,ativo,id){
-			var root,node,d,nodekml;
+			var node,d,nodekml;
 			if(!$i("arvoreCamadasKml"))
 			{i3GEO.Interface.googlemaps.criaArvoreKML();}
 			if(arguments.length === 2){
@@ -1813,7 +1785,6 @@ i3GEO.Interface = {
 			}
 			if(arguments.length === 2)
 			{id = nomeOverlay;}
-			root = i3GEO.Interface.googlemaps.ARVORE.getRoot();
 			node = i3GEO.Interface.googlemaps.ARVORE.getNodeByProperty("idkml","raiz");
 			html = "<input onclick='i3GEO.Interface.googlemaps.ativaDesativaCamadaKml(this,\""+url+"\")' class=inputsb style='cursor:pointer;' type='checkbox' value='"+id+"'";
 			if(ativo === true)
@@ -1996,7 +1967,7 @@ i3GEO.Interface = {
 			i3GEO.Interface.googleearth.criaLayers();
 		},
 		cria: function(w,h){
-			var i,i3GeoMap3d,i3GeoMap,texto;
+			var i,i3GeoMap3d,texto;
 			i3GEO.configura.listaDePropriedadesDoMapa = {
 				"propriedades": [
 				{ text: "p2", url: "javascript:i3GEO.mapa.dialogo.tipoimagem()"},
@@ -2101,7 +2072,6 @@ i3GEO.Interface = {
 				i3GeoMap3d.style.zIndex = 0;
 				i.appendChild(i3GeoMap3d);
 			}
-			i3GeoMap = null;
 			google.load("earth", "1");
 		},
 		inicia: function(){
@@ -2115,13 +2085,8 @@ i3GEO.Interface = {
 				i3GEO.Interface.googleearth.criaLayers();
 
 				var options = i3GeoMap.getOptions(),
-					layerRoot = i3GeoMap.getLayerRoot(),
-					evento = function(e){
-						i3GEO.Interface.googleearth.recalcPar();
-						g_operacao = "";
-						g_tipoacao = "";
-					};
-
+					layerRoot = i3GeoMap.getLayerRoot();
+				
 				options.setMouseNavigationEnabled(i3GEO.Interface.googleearth.GADGETS.setMouseNavigationEnabled);
 				options.setStatusBarVisibility(i3GEO.Interface.googleearth.GADGETS.setStatusBarVisibility);
 				options.setOverviewMapVisibility(i3GEO.Interface.googleearth.GADGETS.setOverviewMapVisibility);
@@ -2190,16 +2155,20 @@ i3GEO.Interface = {
 		},
 		retornaIndiceLayer: function(nomeLayer){
 			var n = i3GeoMap.getFeatures().getChildNodes().getLength(),
-				indice = false;
-			for(i=0;i<n;i++){
-				if(i3GeoMap.getFeatures().getChildNodes().item(i).getName() === nomeLayer)
-				{indice = i;}
+				indice = 0,
+				i = 0;
+			if(n > 0){
+				for(i=0;i<n;i++){
+					if(i3GeoMap.getFeatures().getChildNodes().item(i).getName() === nomeLayer)
+					{indice = i;}
+				}
+				return indice;
 			}
-			return indice;
+			else
+			{return false;}
 		},
 		aplicaOpacidade: function(opacidade){		
 			var n = i3GeoMap.getFeatures().getChildNodes().getLength(),
-				indice = false,
 				i;
 			for(i=0;i<n;i++){
 				i3GeoMap.getFeatures().getChildNodes().item(i).setOpacity(opacidade);
@@ -2332,11 +2301,9 @@ i3GEO.Interface = {
 			}
 			var polygonPlacemark = i3GeoMap.createPlacemark(''),
 				poly = i3GeoMap.createPolygon(''),
-				outer,
 				polyStyle;
 			poly.setAltitudeMode(i3GeoMap.ALTITUDE_RELATIVE_TO_GROUND);
 			polygonPlacemark.setGeometry(poly);
-			outer = i3GeoMap.createLinearRing('');
 			polygonPlacemark.getGeometry().setOuterBoundary(makeCircle(centerLat, centerLng, radius));
 			polygonPlacemark.setName(name);
 			polygonPlacemark.setSnippet(snippet);
@@ -2403,7 +2370,7 @@ i3GEO.Interface = {
 		ativo {boolean} - indica se a camada estará ativa ou não. Se não for definido, será considerado como true
 		*/
 		adicionaKml: function(pan,url,titulo,ativo){
-			var ngeoxml,i,zoom;
+			var ngeoxml,i;
 			if(!$i("arvoreCamadasKml"))
 			{i3GEO.Interface.googleearth.criaArvoreKML();}
 			ngeoxml = "geoXml_"+i3GEO.mapa.GEOXML.length;
@@ -2468,7 +2435,7 @@ i3GEO.Interface = {
 		id {string} - nome do objeto GGeoXml
 		*/
 		adicionaNoArvoreGoogle: function(url,nomeOverlay,ativo,id){
-			var root,node,d,nodekml;
+			var node,d,nodekml;
 			if(!$i("arvoreCamadasKml"))
 			{i3GEO.Interface.googleearth.criaArvoreKML();}
 			if(arguments.length === 2){
@@ -2477,7 +2444,6 @@ i3GEO.Interface = {
 			}
 			if(arguments.length === 2)
 			{id = nomeOverlay;}
-			root = i3GEO.Interface.googleearth.ARVORE.getRoot();
 			node = i3GEO.Interface.googleearth.ARVORE.getNodeByProperty("idkml","raiz");
 			html = "<input onclick='i3GEO.Interface.googleearth.ativaDesativaCamadaKml(this)' class=inputsb style='cursor:pointer;' type='checkbox' value='"+id+"'";
 			if(ativo === true)

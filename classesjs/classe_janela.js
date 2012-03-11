@@ -249,7 +249,7 @@ i3GEO.janela = {
 			janela.bringToTop();
 			return;
 		}
-		var i,wlargurA,ins,novoel,wdocaiframe,pos,temp,fix,underlay,ifr,janela;
+		var i,wlargurA,ins,novoel,wdocaiframe,temp,fix,underlay,ifr,janela;
 		if(navm && !chro)
 		{this.TRANSICAOSUAVE = false;}
 		//executa as funções default de antes de qualquer criação de janela
@@ -480,7 +480,7 @@ i3GEO.janela = {
 	*/
 	abreAguarde: function(id,texto){
 		if(typeof(console) !== 'undefined'){console.info("i3GEO.janela.abreAguarde("+id+")");}
-		var pos,index,temp,janela;
+		var pos,temp,janela;
 		if(!id || id == undefined)
 		{return;}
 		janela = YAHOO.i3GEO.janela.managerAguarde.find(id);
@@ -701,7 +701,7 @@ i3GEO.janela = {
 		}
 	},
 	slider: function(funcao,inicial){
-		var tickSize,keyIncrement,scaleFactor,bottomConstraint,topConstraint,janela,novoel,Event,Dom,lang,slider,bg,thumb,valuearea,textfield;
+		var scaleFactor,bottomConstraint,topConstraint,janela,novoel,Event,slider = "",bg,thumb;
 		janela = i3GEO.janela.cria(230,200,"","","","Opacidade","opacidadeG");
 		novoel = document.createElement("div");
 		novoel.id = "slider-bg";
@@ -709,12 +709,8 @@ i3GEO.janela = {
 		novoel.innerHTML = '<div style="cursor:default;position:absolute;top:4px" id="slider-thumb"><img src="'+i3GEO.configura.locaplic+'/imagens/thumb-n.gif"></div>';
 		janela[2].appendChild(novoel);
 		Event = YAHOO.util.Event;
-		Dom   = YAHOO.util.Dom;
-		lang  = YAHOO.lang;
 		bg="slider-bg";
 		thumb="slider-thumb"; 
-		valuearea="slider-value";
-		textfield="slider-converted-value";
 		novoel.style.position = "relative";
 		novoel.style.background= 'url('+i3GEO.configura.locaplic+'/imagens/bg-fader.gif) 5px 0 no-repeat';
 		novoel.style.height = "28px";
@@ -727,8 +723,6 @@ i3GEO.janela = {
 		scaleFactor = 1;
 		// The amount the slider moves when the value is changed with the arrow
 		// keys
-		keyIncrement = 20;
-		tickSize = 20;
 		Event.onDOMReady(function() {
 			slider = YAHOO.widget.Slider.getHorizSlider(bg,thumb, topConstraint, bottomConstraint, 20);
 			slider.setValue(parseInt(inicial,10));
@@ -827,7 +821,6 @@ try{
 				YAHOO.widget.ResizePanel.superclass.init.call(this, el);
 				this.beforeInitEvent.fire(YAHOO.widget.ResizePanel);
 				var Dom = YAHOO.util.Dom,
-					Event = YAHOO.util.Event,
 					oInnerElement = this.innerElement,
 					oResizeHandle = document.createElement("DIV"),
 					sResizeHandleId = this.id + "_resizehandle";
@@ -842,12 +835,12 @@ try{
 						oFooter = this.footer,
 						nStartWidth,
 						nStartHeight,
-						aStartPos,
+						aStartPos = 0,
 						nBodyBorderTopWidth,
 						nBodyBorderBottomWidth,
 						nBodyTopPadding,
 						nBodyBottomPadding,
-						nBodyOffset;
+						nBodyOffset = 0;
 					oInnerElement.appendChild(oResizeHandle);
 					this.ddResize = new YAHOO.util.DragDrop(sResizeHandleId, this.id);
 					this.ddResize.setHandleElId(sResizeHandleId);

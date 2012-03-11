@@ -250,7 +250,7 @@ i3GEO.guias = {
 		//
 		//obtém outras guias que podem existir no mapa
 		//
-		var nguiasreal = 0,onf,outf,guiaconteudo,id,guia,guias,g,re,ng,tituloguia,i,ins,largura,altura,temp,preload,
+		var nguiasreal = 0,guiaconteudo,id,guia,g,re,ng,tituloguia,i,ins,altura,temp,
 			CONFIGURA = i3GEO.guias.CONFIGURA,
 			guias = i3GEO.util.listaChaves(CONFIGURA),
 			nguias = guias.length;
@@ -330,23 +330,6 @@ i3GEO.guias = {
 				//adiciona uma guia que permite esconder todas as outras guias se for do tipo tablet
 				ins += "</ul>";
 				onde.innerHTML = ins;
-				
-				onf = function(event){
-					var bcg,cor;
-					YAHOO.util.Event.stopEvent(event);
-					bcg = this.parentNode.parentNode.style;
-					cor = bcg.background.split(" ")[0];
-					if(cor !== "white" && bcg.backgroundColor !== "white")
-					{bcg.background = "#bfdaff";}
-				};
-				outf = function(event){
-					var bcg,cor;
-					YAHOO.util.Event.stopEvent(event);
-					bcg = this.parentNode.parentNode.style;
-					cor = bcg.background.split(" ")[0];
-					if(cor !== "white" && bcg.backgroundColor !== "white")
-					{bcg.background = "transparent";}
-				};
 			}
 			if(i3GEO.guias.TIPO === "sanfona"){
 				ins = '<dl id=sanfona'+onde.id+' class="accordion" >';
@@ -385,8 +368,6 @@ i3GEO.guias = {
 				ins += "</dl>";
 				onde.innerHTML = ins;
 				onde.style.height = altura+"px";
-				onf = function(){};
-				outf = function(){};
 				YAHOO.lutsr.accordion.init(true,5,false,"sanfona"+onde.id,altura);
 				i3GEO.guias.ALTURACORPOGUIAS = altura;
 			}
@@ -403,8 +384,8 @@ i3GEO.guias = {
 					YAHOO.util.Event.addListener($i(id), "click", YAHOO.util.Event.preventDefault);
 					YAHOO.util.Event.addListener($i(id), "click", YAHOO.util.Event.stopPropagation);
 					YAHOO.util.Event.addFocusListener($i(id), YAHOO.util.Event.preventDefault);
-					guiaconteudo.onmouseover = onf;
-					guiaconteudo.onmouseout = outf;
+					guiaconteudo.onmouseover = function(){};
+					guiaconteudo.onmouseout = function(){};
 					temp = $i(guia.idconteudo);
 					if(temp){
 						temp.style.overflow="auto";
@@ -437,7 +418,7 @@ i3GEO.guias = {
 	*/
 	ajustaAltura: function(){
 		if(typeof(console) !== 'undefined'){console.info("i3GEO.guias.ajustaAltura()");}
-		var guia,guias,nguias,temp,temps,n,i,
+		var guia,guias,nguias,temp,temps,n,i,g,
 			altura=0;
 		if(i3GEO.guias.ALTURACORPOGUIAS != 0)
 		{altura = i3GEO.guias.ALTURACORPOGUIAS;}
@@ -512,7 +493,7 @@ i3GEO.guias = {
 	*/
 	mostra: function(guia){
 		if(typeof(console) !== 'undefined'){console.info("i3GEO.guias.mostra()");}
-		var guias,nguias,g,temp,temp1,attributes,anim;
+		var guias,nguias,g,temp,attributes,anim;
 		guias = i3GEO.util.listaChaves(i3GEO.guias.CONFIGURA);
 		nguias = guias.length;
 		//
@@ -601,7 +582,7 @@ i3GEO.guias = {
 	libera: function(){
 		if(typeof(console) !== 'undefined'){console.info("i3GEO.guias.libera()");}
 		if (!$i("conteudojanelaguias")){
-			var i,w,pos,a,l,letras,temp;
+			var i,w,pos,a,l,temp;
 			$i(i3GEO.Interface.IDCORPO).style.left = "0px";
 			if($i(this.IDGUIAS))
 			{$i(this.IDGUIAS).style.display="none";}
@@ -752,7 +733,6 @@ i3GEO.guias = {
 			var posMapa = i3GEO.util.pegaPosicaoObjeto($i(i3GEO.Interface.IDMAPA)),
 				centroY = posMapa[1] + (i3GEO.parametros.h / 2),
 				config = i3GEO.guias.guiaMovel.config,
-				ins = "",
 				temp;
 			
 			if(i3GEO.guias.ALTURACORPOGUIAS === 0 && config.alturaGuiaMovel === 0)
@@ -910,8 +890,7 @@ i3GEO.guias = {
 		Abre ou fecha a guia móvel
 		*/
 		abreFecha: function(){
-			var conteudo = $i("i3GEOguiaMovelConteudo"),
-				molde = $i("i3GEOguiaMovelMolde"),
+			var molde = $i("i3GEOguiaMovelMolde"),
 				guia = $i("i3GEOguiaMovel"),
 				attributes,
 				anim,

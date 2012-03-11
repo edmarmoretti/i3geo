@@ -443,7 +443,7 @@ i3GEO = {
 	*/
 	atualiza: function(retorno){
 		if(typeof(console) !== 'undefined'){console.info("i3GEO.atualiza()");}
-		var corpoMapa,erro,tempo,mapscale,mapexten,temp;
+		var corpoMapa,erro,mapscale,temp;
 		if(i3GEO.contadorAtualiza > 1)
 		{i3GEO.contadorAtualiza--;return;}
 		if(i3GEO.contadorAtualiza > 0)
@@ -496,9 +496,7 @@ i3GEO = {
 			if(typeof(console) !== 'undefined'){console.error(e);}
 		}
 		erro = function(){
-			var legimagem,c;
-			legimagem = "";
-			c = confirm("Ocorreu um erro, quer tentar novamente?");
+			var c = confirm("Ocorreu um erro, quer tentar novamente?");
 			if(c){
 				corpoMapa.call();
 			}
@@ -627,9 +625,8 @@ i3GEO = {
 	{array} - [w,h]
 	*/
 	reCalculaTamanho: function(){
-		var diminuix,diminuiy,menos,novow,novoh,w,h,temp,temp1,
-			antigoh = i3GEO.parametros.h,
-			antigow = i3GEO.parametros.w;
+		var diminuix,diminuiy,menos,novow,novoh,w,h,temp,
+			antigoh = i3GEO.parametros.h;
 		diminuix = (navm) ? i3GEO.configura.diminuixM : i3GEO.configura.diminuixN;
 		diminuiy = (navm) ? i3GEO.configura.diminuiyM : i3GEO.configura.diminuiyN;
 		menos = 0;
@@ -644,7 +641,6 @@ i3GEO = {
 		novow = temp[0];
 		novoh = temp[1];
 		temp = (antigoh - (novoh - diminuiy));
-		temp1 = (antigow - (novow - diminuix));
 	
 		document.body.style.height = novoh + "px";
 		w = novow - menos - diminuix;

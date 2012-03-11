@@ -49,27 +49,27 @@ No caso do datadownload.htm ser disparado de outro local, é necessário definir e
 */
 var loc = window.location.href;
 g_locaplic = loc.split("/datadownload.htm");
-g_locaplic = g_locaplic[0]
+g_locaplic = g_locaplic[0];
 
 var temp = loc.split("?");
 if(temp[1])
-{temaDownload = temp[1]}
+{temaDownload = temp[1];}
 else
-{temaDownload = ""}
+{temaDownload = "";}
 
 //
 //para efeitos de compatibilidade
 //
-try{i3GEO.configura.locaplic = g_locaplic}
+try{i3GEO.configura.locaplic = g_locaplic;}
 catch(e){}
 //
 //diretorio onde esta o i3geo
 //
-g_i3geo = ""
+g_i3geo = "";
 //
 //função que será utilizada quando o usuário clicar na árvore
 //
-g_arvoreClicks = ""
+g_arvoreClicks = "";
 /*
 Propriedade: g_tipo
 
@@ -102,7 +102,7 @@ dir - indica que os dados serão buscados em diretórios no servidor.
 menutemas - indica que os dados serão buscados no arquivo menutemas/menutemas.xml ou 
 no sistema de administração do i3geo
 */
-g_tipo = "menutemas"
+g_tipo = "menutemas";
 /*
 Propriedade: g_dirbaseDown
 
@@ -113,7 +113,7 @@ Tipo:
 {string}
 
 */
-g_dirbaseDown = ""
+g_dirbaseDown = "";
 
 /*
 Propriedade: g_dirbase
@@ -124,7 +124,7 @@ Tipo:
 {string}
 
 */
-g_dirbase = ""
+g_dirbase = "";
 /*
 Propriedade: g_dirarquivos
 
@@ -134,7 +134,7 @@ Tipo:
 {string}
 
 */
-g_dirarquivos = ""
+g_dirarquivos = "";
 /*
 Function: DDinicia
 
@@ -151,11 +151,11 @@ function DDinicia()
 	}
 	if (g_tipo == "menutemas")
 	{
-		i3GEO.arvoreDeTemas.INCLUISISTEMAS = false
-		i3GEO.arvoreDeTemas.FILTRADOWNLOAD = true
-		i3GEO.arvoreDeTemas.INCLUIWMS = false
-		i3GEO.arvoreDeTemas.OPCOESADICIONAIS.incluiArvore = false
-		i3GEO.arvoreDeTemas.OPCOESADICIONAIS.incluibusca = false
+		i3GEO.arvoreDeTemas.INCLUISISTEMAS = false;
+		i3GEO.arvoreDeTemas.FILTRADOWNLOAD = true;
+		i3GEO.arvoreDeTemas.INCLUIWMS = false;
+		i3GEO.arvoreDeTemas.OPCOESADICIONAIS.incluiArvore = false;
+		i3GEO.arvoreDeTemas.OPCOESADICIONAIS.incluibusca = false;
 		//i3GEO.arvoreDeTemas.TIPOBOTAO = "radio";
 		i3GEO.arvoreDeTemas.cria("",g_locaplic,"arvoreTemas","datadownload_download\(this.title\)");
 	}
@@ -167,7 +167,7 @@ function DDinicia()
 		cp.set_response_type("JSON");
 		cp.call(p,"listaDiretorios",processaDiretorios);
 	}
-	dataDownloadLinks(g_RSSl)
+	dataDownloadLinks(g_RSSl);
 	if(temaDownload != ""){
 		datadownload_download(temaDownload);
 	}
@@ -226,9 +226,9 @@ function expandeDiretorio(id)
 				if (!document.getElementById(id+"/"+nomeDir))
 				treeDir.createItem(id+"/"+nomeDir, nomeDir, g_locaplic+"/imagens/folder-s.gif", true, true, true, id);
 			}
-			listaArquivos(id)
+			listaArquivos(id);
 		}
-	}
+	};
 	var p = g_locaplic+"/classesphp/mapa_controle.php?funcao=listaDiretorios&map_file=&diretorio="+id;
 	var cp = new cpaint();
 	//cp.set_debug(2)
@@ -253,27 +253,27 @@ function listaArquivos(dir)
 		alert("Nao foi encontrado o DIV corpo");
 		return;
 	}
-	document.getElementById("corpo").innerHTML = ""
+	document.getElementById("corpo").innerHTML = "";
 	var re = new RegExp(g_dirbase, "g");
-	var d = dir.replace(re,'')
-	var ins = "<div style=text-align:left; >Diretório: "+d+"<br><br>"
+	var d = dir.replace(re,'');
+	var ins = "<div style=text-align:left; >Diretório: "+d+"<br><br>";
 	var volta = function (retorno)
 	{
 		if ((retorno.data != "erro") && (retorno.data != undefined))
 		{
-			ins += "<b>Diretórios:</b><br><br>"
+			ins += "<b>Diretórios:</b><br><br>";
 			for (var ig=0;ig<retorno.data.diretorios.length; ig++)
 			{
-				ins += "<span style=cursor:pointer onclick=listaArquivos('"+g_dirbase+d+"/"+retorno.data.diretorios[ig]+"') ><img src="+g_locaplic+"/imagens/folder-s.gif />"+retorno.data.diretorios[ig]+"</span><br><br>" 
+				ins += "<span style=cursor:pointer onclick=listaArquivos('"+g_dirbase+d+"/"+retorno.data.diretorios[ig]+"') ><img src="+g_locaplic+"/imagens/folder-s.gif />"+retorno.data.diretorios[ig]+"</span><br><br>"; 
 			}
-			ins += "<b>Arquivos:</b><br><br>"
+			ins += "<b>Arquivos:</b><br><br>";
 			for (var ig=0;ig<retorno.data.arquivos.length; ig++)
 			{
-				ins += "<a href='"+g_dirbaseDown+d+"/"+retorno.data.arquivos[ig]+"' target=new >"+retorno.data.arquivos[ig]+"</a><br><br>" 
+				ins += "<a href='"+g_dirbaseDown+d+"/"+retorno.data.arquivos[ig]+"' target=new >"+retorno.data.arquivos[ig]+"</a><br><br>";
 			}
-			document.getElementById("corpo").innerHTML = ins
+			document.getElementById("corpo").innerHTML = ins;
 		}
-	}
+	};
 	var p = g_locaplic+"/classesphp/mapa_controle.php?funcao=listaArquivos&map_file=&diretorio="+dir;
 	var cp = new cpaint();
 	//cp.set_debug(2)
@@ -317,22 +317,23 @@ Mostra na tela os arquivos convertidos para shape file com link para download.
 */
 function mostraDownload(retorno)
 {
+	var ins = "";
 	if (retorno.data != undefined)
 	{
-		var retorno = retorno.data
-		var arqs = retorno.arquivos.split(",")
+		retorno = retorno.data;
+		var arqs = retorno.arquivos.split(",");
 		var n = arqs.length;
 		if(retorno == "erro")
-		{var ins = "<p style=color:red >Ocorreu um erro. O tema não foi encontrado. Pode ser que o código do tema não existe na definição do mapfile. Informe o administrador do sistema.<br>";}
+		{ins = "<p style=color:red >Ocorreu um erro. O tema não foi encontrado. Pode ser que o código do tema não existe na definição do mapfile. Informe o administrador do sistema.<br>";}
 		else
 		{
-			var ins = "<b>Clique nos links para pegar os arquivos.</b><br><br>"
+			ins = "<b>Clique nos links para pegar os arquivos.</b><br><br>";
 			ins += "<a href='"+window.location.protocol+"//"+window.location.host+"/"+retorno.mapfileurl+"' target=blank >Arquivo de configuração Mapfile</a><br>";
 			ins += "<a href='"+g_locaplic+"/classesphp/mapa_controle.php?funcao=TEMA2SLD&tema="+retorno.tema+"&map_file="+retorno.mapfile+"' target=blank >Arquivo de legenda SLD</a><br><br>";
 
 			for (var arq=0;arq<n;arq++)
 			{
-				ins += "<a href='"+window.location.protocol+"//"+window.location.host+"/"+arqs[arq]+"'>"+arqs[arq]+"</a><br>"
+				ins += "<a href='"+window.location.protocol+"//"+window.location.host+"/"+arqs[arq]+"'>"+arqs[arq]+"</a><br>";
 			}
 			ins += "<br><a href='"+g_locaplic+"/fontetema.php?tema="+temaEscolhidoDownload+"' target=blank >Fonte</a>";
 			if(retorno.nreg)
@@ -341,7 +342,7 @@ function mostraDownload(retorno)
 	}
 	else
 	{
-		var ins = "<p style=color:red >Ocorreu um erro<br>"
+		ins = "<p style=color:red >Ocorreu um erro<br>";
 	}
 	YAHOO.datadownloadLista.panel.setBody(ins);
 	YAHOO.datadownloadLista.panel.show();
@@ -369,23 +370,23 @@ function dataDownloadLinks(rss)
 			alert("OOps! Ocorreu um erro\n"+retorno.data);
 			return;
 		}
-		var linhas = retorno.data.split("|")
-		var ins = ""
+		var linhas = retorno.data.split("|");
+		var ins = "";
 		var n = linhas.length;
 		if(n == 1){return;}
 		for (var i=0;i<n; i++)
 		{
-			var caso = linhas[i].split("#")
+			var caso = linhas[i].split("#");
 			if (i > 0)
 			{
-				ins += "<a style=text-align:left href='"+caso[2]+"' target=blank >"+caso[0]+"&nbsp;("+caso[1]+")</a>"
-				ins += "<br>"
+				ins += "<a style=text-align:left href='"+caso[2]+"' target=blank >"+caso[0]+"&nbsp;("+caso[1]+")</a>";
+				ins += "<br>";
 			}
 			else
-			{ins += "<p class=clique ><b>"+caso[0]+"</b>&nbsp;"+caso[1]+"&nbsp;</p>"}
+			{ins += "<p class=clique ><b>"+caso[0]+"</b>&nbsp;"+caso[1]+"&nbsp;</p>";}
 		}
-		document.getElementById("RSSl").innerHTML = ins
-	}
+		document.getElementById("RSSl").innerHTML = ins;
+	};
 	if (document.getElementById("RSSl"))
 	{
 		if (rss.length > 0)

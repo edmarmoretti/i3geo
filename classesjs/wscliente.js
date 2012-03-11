@@ -51,13 +51,13 @@ for (var i = 0; i < scripts.length; i++) {
 	}
 }
 var allScriptTags = "";
-var jsfiles = []
+var jsfiles = [];
 if(typeof(testafuncoes) == 'undefined')
-{jsfiles[0] = "compactados/classe_calculo_compacto.js"}
+{jsfiles[0] = "compactados/classe_calculo_compacto.js";}
 if(typeof(cpaint) == 'undefined')
-{jsfiles[1] = "../pacotes/cpaint/cpaint2.inc.compressed.js"}
+{jsfiles[1] = "../pacotes/cpaint/cpaint2.inc.compressed.js";}
 if(typeof(OpenLayers) == 'undefined')
-{jsfiles[2] = "../pacotes/openlayers/OpenLayers.js"}
+{jsfiles[2] = "../pacotes/openlayers/OpenLayers.js";};
 for (var i = 0; i < jsfiles.length; i++)
 {
 	var currentScriptTag = "<script src='" + scriptLocation + jsfiles[i] + "'></script>";
@@ -125,19 +125,19 @@ function i3geo_wscliente_configura(loc_i3geo,corpo,enderecows,enderecowms,rssws,
 	/* 
 	Tipo de serviço wms ativo
 	*/
-	this.tipo = ""
+	this.tipo = "";
 	/* 
 	Código do tema wms escolhido
 	*/
-	this.tema = ""
+	this.tema = "";
 	/* 
 	Nome do tema wms escolhido
 	*/
-	this.nometema = ""
+	this.nometema = "";
 	/* 
 	Função do ws escolhida.
 	*/
-	this.funcao = ""
+	this.funcao = "";
 	/*
 	Function: inicia
 
@@ -145,15 +145,15 @@ function i3geo_wscliente_configura(loc_i3geo,corpo,enderecows,enderecowms,rssws,
 	*/
 	this.inicia = function()
 	{
-		var ins = ""
-		var i = "&nbsp;&nbsp;<img style=position:relative;top:3px; src='"+this.loc_i3geo+"/imagens/new.gif' >"
-		var ii = "onmouseover='javascript:this.style.textDecoration=\"underline\"' onmouseout='javascript:this.style.textDecoration=\"none\"'"
+		var ins = "";
+		var i = "&nbsp;&nbsp;<img style=position:relative;top:3px; src='"+this.loc_i3geo+"/imagens/new.gif' >";
+		var ii = "onmouseover='javascript:this.style.textDecoration=\"underline\"' onmouseout='javascript:this.style.textDecoration=\"none\"'";
 		ins += "<b>&nbsp;Ajuda</b><br>";
 		ins += i+"<span "+ii+" class=clique onclick='$i3geo_wscliente.ativa(\"oquews\")'>Web Services</span><br>";
 		ins += i+"<span "+ii+"  class=clique onclick='$i3geo_wscliente.ativa(\"oqueogc\")'>Padrões OGC</span><br>";
 		ins += i+"<span "+ii+"  class=clique onclick='$i3geo_wscliente.ativa(\"oquecarto\")'>WS cartográfico</span><br><br>";
-		ins += "</table>"
-		ins += "<b>&nbsp;Mapas</b><br>"
+		ins += "</table>";
+		ins += "<b>&nbsp;Mapas</b><br>";
 		ins += i+"<span "+ii+"  class=clique onclick='$i3geo_wscliente.servicoswms()'>Escolher serviço</span><br>";
 		ins += i+"<span "+ii+"  class=clique onclick='$i3geo_wscliente.listatemas()'>Escolher um tema</span><br>";
 		ins += i+"<span "+ii+"  class=clique onclick='$i3geo_wscliente.getcapabilities(\"WMS\")'>Resposta XML (WMS)</span><br>";
@@ -185,12 +185,12 @@ function i3geo_wscliente_configura(loc_i3geo,corpo,enderecows,enderecowms,rssws,
 			{
 				if (valores[0] == "wms")
 				{
-					$i(this.enderecowms).value = valores[1]
-					this.listatemas()
+					$i(this.enderecowms).value = valores[1];
+					this.listatemas();
 				}
 			}
 		}
-	}
+	};
 	/*
 	Function: ativa
 
@@ -206,9 +206,9 @@ function i3geo_wscliente_configura(loc_i3geo,corpo,enderecows,enderecowms,rssws,
 	*/
 	this.ativa = function (id)
 	{
-		var novo = document.getElementById(id)
-		$i(this.corpo).innerHTML = novo.innerHTML
-	}
+		var novo = document.getElementById(id);
+		$i(this.corpo).innerHTML = novo.innerHTML;
+	};
 	/*
 	Function: listaLinkServicos
 
@@ -221,16 +221,17 @@ function i3geo_wscliente_configura(loc_i3geo,corpo,enderecows,enderecowms,rssws,
 	*/
 	this.listaLinkServicos = function(tipo)
 	{
+		var lista = "",i,ins= "";
 		if (tipo == ("ws"))
-		{var lista = this.rssws}
+		{lista = this.rssws;}
 		else
-		{var lista = this.rsswms}
+		{lista = this.rsswms;}
 		for (i=0;i<lista.length; i++)
 		{
-			var ins = "<p class=clique onclick=\"window.open('"+lista[i]+"')\" ><img src="+this.loc_i3geo+"/imagens/xml.gif >&nbsp;"+lista[i]+"</p>"
+			ins = "<p class=clique onclick=\"window.open('"+lista[i]+"')\" ><img src="+this.loc_i3geo+"/imagens/xml.gif >&nbsp;"+lista[i]+"</p>";
 		}
-		$i(this.corpo).innerHTML = ins
-	}
+		$i(this.corpo).innerHTML = ins;
+	};
 	/*
 	Function: servicosws
 
@@ -243,28 +244,29 @@ function i3geo_wscliente_configura(loc_i3geo,corpo,enderecows,enderecowms,rssws,
 		//monta a lista retornada pela função ajax
 		var monta = function(retorno)
 		{
-			var linhas = retorno.data.split("|")
-			var ins = ""
+			var linhas = retorno.data.split("|"),
+				ins = "",
+				i;
 			if(linhas.length == 1)
-			{var ins = "<br><span style=color:red >"+retorno.data+"</span>"}
+			{ins = "<br><span style=color:red >"+retorno.data+"</span>";}
 			else
 			{
 				for (i=0;i<linhas.length; i++)
 				{
-					var caso = linhas[i].split("#")
-					var clique = "javascript:document.getElementById(\""+$i3geo_wscliente.enderecows+"\").value='"+caso[2]+"';document.getElementById('"+$i3geo_wscliente.enderecows+"').value='"+caso[2]+"'"
-					ins += "<p class=clique onclick="+clique+" ><b>"+caso[0]+"</b><span style=color:gray ><br>&nbsp;"+caso[1]+"<br>&nbsp;("+caso[3]+")</span>"
+					var caso = linhas[i].split("#");
+					var clique = "javascript:document.getElementById(\""+$i3geo_wscliente.enderecows+"\").value='"+caso[2]+"';document.getElementById('"+$i3geo_wscliente.enderecows+"').value='"+caso[2]+"'";
+					ins += "<p class=clique onclick="+clique+" ><b>"+caso[0]+"</b><span style=color:gray ><br>&nbsp;"+caso[1]+"<br>&nbsp;("+caso[3]+")</span>";
 					if (caso[4])
 					{ins += " <span style=color:gray >(disponibilidade: "+parseInt(caso[4])+"%, dias considerados: "+caso[5]+")</span></p>";}
-					else {ins += "</p>"}
+					else {ins += "</p>";}
 				}
 			}
-			$i("resultadoRSSws").innerHTML = ins
-			$i($i3geo_wscliente.corpo).style.display="none"
-			$i("RSSwms").style.display="none"
-			$i("RSSws").style.display="block"
+			$i("resultadoRSSws").innerHTML = ins;
+			$i($i3geo_wscliente.corpo).style.display="none";
+			$i("RSSwms").style.display="none";
+			$i("RSSws").style.display="block";
 			aguardeTotal("none");
-		}
+		};
 		if (this.rssws.length > 0)
 		{
 			aguardeTotal("block");
@@ -274,7 +276,7 @@ function i3geo_wscliente_configura(loc_i3geo,corpo,enderecows,enderecowms,rssws,
 			cp.set_response_type("JSON");
 			cp.call(p,"listaRSSwsARRAY",monta);
 		}
-	}
+	};
 	/*
 	Function: servicoswms
 
@@ -298,9 +300,9 @@ function i3geo_wscliente_configura(loc_i3geo,corpo,enderecows,enderecowms,rssws,
 			}
 			catch(e){alert(e);}
 
-			var canais = retorno.data.canais
-			var ncanais = canais.length
-			var ins = "<br>"+retorno.data.rss
+			var canais = retorno.data.canais;
+			var ncanais = canais.length;
+			var ins = "<br>"+retorno.data.rss;
 			/*
 				for (i=0;i<linhas.length; i++)
 				{
@@ -317,26 +319,26 @@ function i3geo_wscliente_configura(loc_i3geo,corpo,enderecows,enderecowms,rssws,
 					{{ins += ""}}
 				}
 			*/
-			for (i=0;i<ncanais; i++){
-				var caso = canais[i]
-				var clique = "javascript:document.getElementById(\""+$i3geo_wscliente.enderecowms+"\").value='"+caso.link+"';document.getElementById('"+$i3geo_wscliente.enderecowms+"').value='"+caso.link+"'"
-				ins += "<p class=clique onclick="+clique+" ><b>"+caso.title+"</b>"
+			for (var i=0;i<ncanais; i++){
+				var caso = canais[i];
+				var clique = "javascript:document.getElementById(\""+$i3geo_wscliente.enderecowms+"\").value='"+caso.link+"';document.getElementById('"+$i3geo_wscliente.enderecowms+"').value='"+caso.link+"'";
+				ins += "<p class=clique onclick="+clique+" ><b>"+caso.title+"</b>";
 
 				//ins += "\<p class=clique onclick=\"registraws('"+caso.link+"','"+caso.id_ws+"')\" \>\<b\>"+caso.title+"\<\/b\>&nbsp;"+caso.description+"&nbsp;("+caso.author+")"
 				if(caso.nacessos > 0)
 				{
-					var pc = (parseInt(caso.nacessosok) * 100) / parseInt(caso.nacessos)
+					var pc = (parseInt(caso.nacessosok) * 100) / parseInt(caso.nacessos);
 					ins += " \<span style=color:gray \>(disponibilidade: "+pc+"%, acessos considerados: "+caso.nacessos+")\<\/span>\<\/p\>";
 				}
 			}
 
 			$i("resultadoRSSwms").innerHTML = ins+"<br.<br>";
-			$i($i3geo_wscliente.corpo).style.display="none"
-			$i("RSSws").style.display="none"
-			$i("RSSwms").style.display="block"
+			$i($i3geo_wscliente.corpo).style.display="none";
+			$i("RSSws").style.display="none";
+			$i("RSSwms").style.display="block";
 
 			aguardeTotal("none");
-		}
+		};
 		if ($i("RSSwms"))
 		{
 			aguardeTotal("block");
@@ -346,7 +348,7 @@ function i3geo_wscliente_configura(loc_i3geo,corpo,enderecows,enderecowms,rssws,
 			cp.set_response_type("JSON");
 			cp.call(p,"listaRSSwsARRAY",mostraRetornowmsRSS);
 		}
-	}
+	};
 	/*
 	Function: getcapabilities
 
@@ -359,14 +361,14 @@ function i3geo_wscliente_configura(loc_i3geo,corpo,enderecows,enderecowms,rssws,
 	*/
 	this.getcapabilities = function(tipo)
 	{
-		$i("RSSws").style.display="none"
-		$i("RSSwms").style.display="none"
-		$i($i3geo_wscliente.corpo).style.display="block"
+		$i("RSSws").style.display="none";
+		$i("RSSwms").style.display="none";
+		$i($i3geo_wscliente.corpo).style.display="block";
 		var monta = function (retorno)
 		{
 			aguardeTotal("none");
-			$i($i3geo_wscliente.corpo).innerHTML = "<div class=listaAjuda ><p>"+retorno.data+"</div>"
-		}
+			$i($i3geo_wscliente.corpo).innerHTML = "<div class=listaAjuda ><p>"+retorno.data+"</div>";
+		};
 		if ($i(this.enderecowms).value != "")
 		{
 			aguardeTotal("block");
@@ -377,8 +379,8 @@ function i3geo_wscliente_configura(loc_i3geo,corpo,enderecows,enderecowms,rssws,
 			cp.call(p,"getcapabilities",monta);
 		}
 		else
-		$i(this.corpo).innerHTML = "<p>Nenhum serviço foi escolhido.</p>"
-	}
+		$i(this.corpo).innerHTML = "<p>Nenhum serviço foi escolhido.</p>";
+	};
 	/*
 	Function: listatemas
 
@@ -386,34 +388,34 @@ function i3geo_wscliente_configura(loc_i3geo,corpo,enderecows,enderecowms,rssws,
 	*/
 	this.listatemas = function()
 	{
-		var WCservico = $i(this.enderecowms).value
+		var WCservico = $i(this.enderecowms).value;
 		var WCmostraTemas = function(retorno)
 		{
 			aguardeTotal("none");
 			document.cookie = 'i3GeoPHP=; expires=Thu, 2 Aug 2001 20:47:11 UTC; path=/';
-			var ins = "<div style='text-align:left'><p>Selecione a camada que ser&aacute; adicionada ao mapa e depois clique em Aplicar.<br></div>"
-			ins += '<p><div onclick="$i3geo_wscliente.verMapa()" ><input id=botao3 type="button" class=executar value="Aplicar&nbsp;&nbsp;"  /></div>'
-			ins += '<br><div style="text-align:left;height:260px;overflow:auto;width:555px;" >'
-			$i($i3geo_wscliente.corpo).innerHTML = ins+"<p>"+retorno.data+"</div>"
+			var ins = "<div style='text-align:left'><p>Selecione a camada que ser&aacute; adicionada ao mapa e depois clique em Aplicar.<br></div>";
+			ins += '<p><div onclick="$i3geo_wscliente.verMapa()" ><input id=botao3 type="button" class=executar value="Aplicar&nbsp;&nbsp;"  /></div>';
+			ins += '<br><div style="text-align:left;height:260px;overflow:auto;width:555px;" >';
+			$i($i3geo_wscliente.corpo).innerHTML = ins+"<p>"+retorno.data+"</div>";
 			YAHOO.example.init = function ()
 			{
 				function onPushButtonsMarkupReady()
 				{new YAHOO.widget.Button("botao3");}
 				YAHOO.util.Event.onContentReady("botao3", onPushButtonsMarkupReady);
-			}()
-		}
-		$i("RSSws").style.display="none"
-		$i("RSSwms").style.display="none"
-		$i(this.corpo).style.display="block"
+			}();
+		};
+		$i("RSSws").style.display="none";
+		$i("RSSwms").style.display="none";
+		$i(this.corpo).style.display="block";
 		if(WCservico == "")
-		{$i(this.corpo).innerHTML = "<p>Nenhum serviço foi escolhido.</p>"}
+		{$i(this.corpo).innerHTML = "<p>Nenhum serviço foi escolhido.</p>";}
 		aguardeTotal("block");
-		var p = this.loc_i3geo+"/classesphp/mapa_controle.php?map_file=&funcao=temaswms&servico="+WCservico+"&g_sid="
+		var p = this.loc_i3geo+"/classesphp/mapa_controle.php?map_file=&funcao=temaswms&servico="+WCservico+"&g_sid=";
 		var cp = new cpaint();
 		//cp.set_debug(2)
 		cp.set_response_type("JSON");
 		cp.call(p,"temaswms",WCmostraTemas);
-	}
+	};
 	/*
 	Function: verMapa
 
@@ -422,57 +424,59 @@ function i3geo_wscliente_configura(loc_i3geo,corpo,enderecows,enderecowms,rssws,
 	*/
 	this.verMapa = function()
 	{
-		var WCservico = $i(this.enderecowms).value
-		var epsg = $i("proj").value.split(",")
-		var epsg = epsg[0]
-		var epsg = epsg.split(":")
-		var epsg = epsg[1]
-		$i(this.corpo).innerHTML = "<div style=text-align:left id=i3geo_wscliente_id_mapa ></div><div style=width:550px;text-align:left id=localizarxy ></div><div style=text-align:left ><iframe width=400 id=desc ></iframe></div>"
+		var WCservico = $i(this.enderecowms).value,
+			epsg = $i("proj").value.split(","),
+			wms;
+		epsg = epsg[0];
+		epsg = epsg.split(":");
+		epsg = epsg[1];
+		$i(this.corpo).innerHTML = "<div style=text-align:left id=i3geo_wscliente_id_mapa ></div><div style=width:550px;text-align:left id=localizarxy ></div><div style=text-align:left ><iframe width=400 id=desc ></iframe></div>";
 		var map = new OpenLayers.Map('i3geo_wscliente_id_mapa');
 		var bounds = new OpenLayers.Bounds(-73,5,-27,-34);
 		if (this.tipo != "estilo")
-		{var wms = new OpenLayers.Layer.WMS( "OpenLayers WMS",WCservico, {layers: this.tema, srs: epsg} );}
+		{wms = new OpenLayers.Layer.WMS( "OpenLayers WMS",WCservico, {layers: this.tema, srs: epsg} );}
 		else
 		{
-			var wms = new OpenLayers.Layer.WMS( "OpenLayers WMS",WCservico, {layers: this.tema, styles: this.nometema, srs: epsg});
+			wms = new OpenLayers.Layer.WMS( "OpenLayers WMS",WCservico, {layers: this.tema, styles: this.nometema, srs: epsg});
 		}
 		map.addLayer(wms);
 		map.zoomToExtent(bounds);
 		map.events.register("mousemove", map, function(e)
 		{
+			var p;
 			//pega as coordenadas do cursor
 			if(e.xy)
-			{var p = e.xy;}
+			{p = e.xy;}
 			else
-			{var p = new OpenLayers.Pixel(e.x,e.y);}
+			{p = new OpenLayers.Pixel(e.x,e.y);}
 			//altera o indicador de localizacao
 			var lonlat = map.getLonLatFromViewPortPx(p);
 			var d = i3GEO.calculo.dd2dms(lonlat.lon,lonlat.lat);
-			$i("localizarxy").innerHTML = d[0]+" , "+d[1]
-		})
+			$i("localizarxy").innerHTML = d[0]+" , "+d[1];
+		});
 		map.events.register("click", map, function(e)
 		{
+			var p;
 			//pega as coordenadas do cursor
 			if(e.xy)
-			{var p = e.xy;}
+			{p = e.xy;}
 			else
-			{var p = new OpenLayers.Pixel(e.x,e.y);}
+			{p = new OpenLayers.Pixel(e.x,e.y);}
 			//altera o indicador de localizacao
-			var lonlat = map.getLonLatFromViewPortPx(p);
-			var url = wms.getFullRequestString()
-			url = url.replace("GetMap","getfeatureinfo")
-			url += "&QUERY_LAYERS="+$i3geo_wscliente.tema
-			var bb = map.getExtent()
-			url += "&BBOX="+bb.toBBOX()
+			var url = wms.getFullRequestString();
+			url = url.replace("GetMap","getfeatureinfo");
+			url += "&QUERY_LAYERS="+$i3geo_wscliente.tema;
+			var bb = map.getExtent();
+			url += "&BBOX="+bb.toBBOX();
 			//var xy = p.split(",")
-			url += "&x="+p.x
-			url += "&y="+p.y
-			var size = map.getSize()
-			url += "&WIDTH="+size.w
-			url += "&HEIGHT="+size.h
-			$i("desc").src = url
-		})
-	}
+			url += "&x="+p.x;
+			url += "&y="+p.y;
+			var size = map.getSize();
+			url += "&WIDTH="+size.w;
+			url += "&HEIGHT="+size.h;
+			$i("desc").src = url;
+		});
+	};
 	/*
 	Function: listafuncoes
 
@@ -484,43 +488,43 @@ function i3geo_wscliente_configura(loc_i3geo,corpo,enderecows,enderecowms,rssws,
 		var WCmostraFuncoes = function(retorno)
 		{
 			aguardeTotal("none");
-			var ins = "<p>Selecione a fun&ccedil;&atilde;o que ser&aacute; acionada depois clique em Aplicar.<br></div>"
-			ins += '<p><div onclick="$i3geo_wscliente.selParFuncao()" ><input id=botao4 type="buttom" class=executar value="Aplicar&nbsp;&nbsp;" /></div>'
-			ins += '<br><div style="text-align:left;height:260px;overflow:auto;width:555px;" >'
+			var ins = "<p>Selecione a fun&ccedil;&atilde;o que ser&aacute; acionada depois clique em Aplicar.<br></div>";
+			ins += '<p><div onclick="$i3geo_wscliente.selParFuncao()" ><input id=botao4 type="buttom" class=executar value="Aplicar&nbsp;&nbsp;" /></div>';
+			ins += '<br><div style="text-align:left;height:260px;overflow:auto;width:555px;" >';
 			if(!retorno.data)
 			{$i($i3geo_wscliente.corpo).innerHTML="<br><span style=color:red ><b>Erro ao acessar o servi&ccedil;o!</span>";return;}
 			var funcs = retorno.data.split("|");
-			for (i=0;i<funcs.length; i++)
+			for (var i=0;i<funcs.length; i++)
 			{
-				var f = funcs[i].split("#")
-				ins += "<br><b><input style='cursor:pointer' type=radio name='funcao' onclick=\"$i3geo_wscliente.selParFuncao('"+f[0]+"')\" />&nbsp;"+f[0]+"</b>&nbsp;"+f[3]+"<br>"
-				ins += "<i>Entrada:</i>"+f[1]
-				ins += "<br><i>Sa&iacute;da:</i>"+f[2]+"<br>"
+				var f = funcs[i].split("#");
+				ins += "<br><b><input style='cursor:pointer' type=radio name='funcao' onclick=\"$i3geo_wscliente.selParFuncao('"+f[0]+"')\" />&nbsp;"+f[0]+"</b>&nbsp;"+f[3]+"<br>";
+				ins += "<i>Entrada:</i>"+f[1];
+				ins += "<br><i>Sa&iacute;da:</i>"+f[2]+"<br>";
 			}
-			$i($i3geo_wscliente.corpo).innerHTML = ins+"</div>"
+			$i($i3geo_wscliente.corpo).innerHTML = ins+"</div>";
 			YAHOO.example.init = function ()
 			{
 				function onPushButtonsMarkupReady()
 				{new YAHOO.widget.Button("botao4");}
 				YAHOO.util.Event.onContentReady("botao4", onPushButtonsMarkupReady);
-			}()
-			$i("RSSws").style.display="none"
-			$i("RSSwms").style.display="none"
-			$i($i3geo_wscliente.corpo).style.display="block"
-		}
-		var WCservico = $i(this.enderecows).value
+			}();
+			$i("RSSws").style.display="none";
+			$i("RSSwms").style.display="none";
+			$i($i3geo_wscliente.corpo).style.display="block";
+		};
+		var WCservico = $i(this.enderecows).value;
 		if (WCservico != "")
 		{
 			aguardeTotal("block");
-			var p = this.loc_i3geo+"/classesphp/wscliente.php?funcao=funcoesws&servico="+WCservico+"&g_sid="
+			var p = this.loc_i3geo+"/classesphp/wscliente.php?funcao=funcoesws&servico="+WCservico+"&g_sid=";
 			var cp = new cpaint();
 			//cp.set_debug(2)
 			cp.set_response_type("JSON");
 			cp.call(p,"funcoesws",WCmostraFuncoes);
 		}
 		else
-		$i(this.corpo).innerHTML = "<p>Nenhum serviço foi escolhido.</p>"
-	}
+		$i(this.corpo).innerHTML = "<p>Nenhum serviço foi escolhido.</p>";
+	};
 	/*
 	Function: selParFuncao
 
@@ -536,32 +540,32 @@ function i3geo_wscliente_configura(loc_i3geo,corpo,enderecows,enderecowms,rssws,
 		var WCmostraParFuncoes = function (retorno)
 		{
 			aguardeTotal("none");
-			if (retorno.data == ""){$i3geo_wscliente.chamadados(retorno.data)}
+			if (retorno.data == ""){$i3geo_wscliente.chamadados(retorno.data);}
 			else
 			{
-				var pars = retorno.data.split("|")
-				var ins = "<p>Digite os valores dos par&acirc;metros e depois em clique em 'Aplicar'.<br>"
-				ins += '<p><input type="button" class=executar value="Aplicar&nbsp;&nbsp;" onclick=$i3geo_wscliente.chamadados(\"'+retorno.data+'\") />'
-				ins += '<br><div style="text-align:left;height:260px;overflow:auto;width:555px;" >'
-				for (i=0;i<pars.length; i++)
+				var pars = retorno.data.split("|");
+				var ins = "<p>Digite os valores dos par&acirc;metros e depois em clique em 'Aplicar'.<br>";
+				ins += '<p><input type="button" class=executar value="Aplicar&nbsp;&nbsp;" onclick=$i3geo_wscliente.chamadados(\"'+retorno.data+'\") />';
+				ins += '<br><div style="text-align:left;height:260px;overflow:auto;width:555px;" >';
+				for (var i=0;i<pars.length; i++)
 				{
-					var temp = pars[i].split("#")
-					ins+= "<br>"+temp[0]+"&nbsp("+temp[1]+")<input type=text size=20 value='' id=xxx"+temp[0]+" /><br>"
+					var temp = pars[i].split("#");
+					ins+= "<br>"+temp[0]+"&nbsp("+temp[1]+")<input type=text size=20 value='' id=xxx"+temp[0]+" /><br>";
 				}
-				$i($i3geo_wscliente.corpo).innerHTML = ins+"</div>"
+				$i($i3geo_wscliente.corpo).innerHTML = ins+"</div>";
 			}
-			$i("RSSws").style.display="none"
-			$i("RSSwms").style.display="none"
-			$i($i3geo_wscliente.corpo).style.display="block"
-		}
+			$i("RSSws").style.display="none";
+			$i("RSSwms").style.display="none";
+			$i($i3geo_wscliente.corpo).style.display="block";
+		};
 		aguardeTotal("block");
 		this.funcao = funcao;
-		var p = this.loc_i3geo+"/classesphp/wscliente.php?funcao=parfuncoesws&servico="+$i(this.enderecows).value+"&funcaows="+funcao+"&g_sid="
+		var p = this.loc_i3geo+"/classesphp/wscliente.php?funcao=parfuncoesws&servico="+$i(this.enderecows).value+"&funcaows="+funcao+"&g_sid=";
 		var cp = new cpaint();
 		//cp.set_debug(2)
 		cp.set_response_type("JSON");
 		cp.call(p,"parFuncoesws",WCmostraParFuncoes);
-	}
+	};
 	/*
 	Function: chamadados
 
@@ -573,28 +577,28 @@ function i3geo_wscliente_configura(loc_i3geo,corpo,enderecows,enderecowms,rssws,
 		var monta = function (retorno)
 		{
 			aguardeTotal("none");
-			$i($i3geo_wscliente.corpo).innerHTML = "<div style='text-align:left;height:320px;overflow:auto;width:555px;' >"+retorno.data+ "</div>"
-			$i("RSSws").style.display="none"
-			$i("RSSwms").style.display="none"
-			$i($i3geo_wscliente.corpo).style.display="block"
-		}
+			$i($i3geo_wscliente.corpo).innerHTML = "<div style='text-align:left;height:320px;overflow:auto;width:555px;' >"+retorno.data+ "</div>";
+			$i("RSSws").style.display="none";
+			$i("RSSwms").style.display="none";
+			$i($i3geo_wscliente.corpo).style.display="block";
+		};
 		aguardeTotal("block");
-		var par = []
+		var par = [];
 		if (retorno != "")
 		{
-			var pars = retorno.split("|")
-			for (i=0;i<pars.length; i++)
+			var pars = retorno.split("|");
+			for (var i=0;i<pars.length; i++)
 			{
-				var temp = pars[i].split("#")
-				par.push(temp[0]+"*"+$i("xxx"+temp[0]).value)
+				var temp = pars[i].split("#");
+				par.push(temp[0]+"*"+$i("xxx"+temp[0]).value);
 			}
 		}
-		var p = this.loc_i3geo+"/classesphp/wscliente.php?funcao=dadosws&servico="+$i(this.enderecows).value+"&funcaows="+this.funcao+"&param="+par.join("|")+"&g_sid="
+		var p = this.loc_i3geo+"/classesphp/wscliente.php?funcao=dadosws&servico="+$i(this.enderecows).value+"&funcaows="+this.funcao+"&param="+par.join("|")+"&g_sid=";
 		var cp = new cpaint();
 		//cp.set_debug(2)
 		cp.set_response_type("JSON");
 		cp.call(p,"dadosWS",monta);
-	}
+	};
 	/*
 	Function: wsdl
 
@@ -602,7 +606,7 @@ function i3geo_wscliente_configura(loc_i3geo,corpo,enderecows,enderecowms,rssws,
 
 	*/
 	this.wsdl = function()
-	{window.open($i(this.enderecows).value)}
+	{window.open($i(this.enderecows).value);};
 }
 
 /*

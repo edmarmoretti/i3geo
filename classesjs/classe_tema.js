@@ -57,9 +57,7 @@ i3GEO.tema = {
 		if(typeof(console) !== 'undefined'){console.info("i3GEO.tema.exclui()");}
 		g_operacao = "excluitema";
 		//remove o tema do DOM e seus filhos
-		var layer,
-			indice,
-			p;
+		var p;
 		try{
 			p = document.getElementById("idx"+tema).parentNode.parentNode.parentNode;
 			do
@@ -195,7 +193,7 @@ i3GEO.tema = {
 		if(typeof(console) !== 'undefined'){console.info("i3GEO.tema.mudatransp()");}
 		i3GEO.mapa.ativaTema(idtema);
 		g_operacao = "transparencia";
-		var valor,
+		var valor = "",
 			temp = function(retorno){
 				i3GEO.atualiza(retorno);
 				i3GEO.Interface.atualizaTema(retorno,idtema);
@@ -203,8 +201,6 @@ i3GEO.tema = {
 		//o campo input com o valor possui o prefixo 'tr' seguido pelo código do tema
 		if ($i("tr"+idtema))
 		{valor = $i("tr"+idtema).value;}
-		else
-		{alert("Ocorreu um erro");}
 		if (valor !== ""){
 			i3GEO.php.mudatransp(temp,idtema,valor);
 		}
@@ -267,11 +263,9 @@ i3GEO.tema = {
 		if(typeof(console) !== 'undefined'){console.info("i3GEO.tema.mudanome()");}
 		i3GEO.mapa.ativaTema(idtema);
 		g_operacao = "mudanome";
-		var valor;
+		var valor = "";
 		if($i("nn"+idtema))
 		{valor = $i("nn"+idtema).value;}
-		else
-		{alert("Ocorreu um erro");}
 		if (valor !== ""){
 			i3GEO.php.mudanome(i3GEO.atualiza,idtema,valor);
 		}
