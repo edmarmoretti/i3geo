@@ -146,7 +146,7 @@ function initMenu()
 	core_carregando("ativa");
 	core_carregando("buscando temas...");
 	core_ativaPainelAjuda("ajuda","botaoAjuda");
-	core_pegaMapfiles("montaArvore()")
+	core_pegaMapfiles("montaArvore()");
 }
 function ativaBotaoVerificarOrfaos(idBotao)
 {
@@ -155,28 +155,28 @@ function ativaBotaoVerificarOrfaos(idBotao)
 		verificaOrfaos();
 	};
 	//cria o botão de adição de um novo menu
-	var verifica = new YAHOO.widget.Button(idBotao,{ onclick: { fn: temp } });
+	new YAHOO.widget.Button(idBotao,{ onclick: { fn: temp } });
 }
 function ativaBotaoAdicionaMapfile(idBotao)
 {
 	var adiciona = function()
 	{
-		core_montaEditor("adicionaNovoMapfile()","450px","660px")
-		ins = "<p><b>Título do novo tema</b></p>"
+		core_montaEditor("adicionaNovoMapfile()","450px","660px");
+		ins = "<p><b>Título do novo tema</b></p>";
 		ins += "<p>Em português: </p>";
-		ins += "<input size=50 type=text id='Etitulo' value='' /></p>"
+		ins += "<input size=50 type=text id='Etitulo' value='' /></p>";
 		ins += "<p>Espanhol (opcional): </p>";
-		ins += "<input size=50 type=text id='EtituloES' value='' /></p>"
+		ins += "<input size=50 type=text id='EtituloES' value='' /></p>";
 		ins += "<p>Inglês: (opcional)</p>";
-		ins += "<input size=50 type=text id='EtituloEN' value='' /></p>"
+		ins += "<input size=50 type=text id='EtituloEN' value='' /></p>";
 		ins += "<p>Italiano: (opcional)</p>";
-		ins += "<input size=50 type=text id='EtituloIT' value='' /></p>"
-		ins += "<p>Nome do arquivo mapfile (sem .map): </p>"
-		ins += "<input size=50 type=text id='Ecodigo' value='' /></p>"
-		$i("editor_bd").innerHTML = ins
+		ins += "<input size=50 type=text id='EtituloIT' value='' /></p>";
+		ins += "<p>Nome do arquivo mapfile (sem .map): </p>";
+		ins += "<input size=50 type=text id='Ecodigo' value='' /></p>";
+		$i("editor_bd").innerHTML = ins;
 	};
 	//cria o botão de adição de um novo menu
-	var adiciona = new YAHOO.widget.Button(idBotao,{ onclick: { fn: adiciona } });
+	new YAHOO.widget.Button(idBotao,{ onclick: { fn: adiciona } });
 }
 /*
 Function: montaArvore

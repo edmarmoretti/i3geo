@@ -16,42 +16,40 @@ cPaint.set_async("true");
 cPaint.set_response_type("JSON");
 function ativaIndice(onde)
 {
-	var f = document.getElementsByTagName("fieldset")
-	for(t = 0;t < f.length;t++)
-	{
-		//f[t].innerHTML += "<p><a href='#indice'>índice</a></p>"
-	}
-	var etrs = document.getElementsByTagName("legend")
-	var ins = "<fieldset><legend><a name='indice' ><b>Índice</b></a></legend>"
+	var f = document.getElementsByTagName("fieldset");
+	for(var t = 0;t < f.length;t++)
+	{}
+	var etrs = document.getElementsByTagName("legend");
+	var ins = "<fieldset><legend><a name='indice' ><b>Índice</b></a></legend>";
 	for(t = 0;t < etrs.length;t++)
 	{
-		ins += "<a href='#"+etrs[t].innerHTML+"'><p>"+etrs[t].innerHTML+"</p></a>"
+		ins += "<a href='#"+etrs[t].innerHTML+"'><p>"+etrs[t].innerHTML+"</p></a>";
 		etrs[t].innerHTML = "<a name='"+etrs[t].innerHTML+"'>"+etrs[t].innerHTML+"</a>";
 		
 	}
-	document.getElementById(onde).innerHTML = ins+"</fieldset>"
+	document.getElementById(onde).innerHTML = ins+"</fieldset>";
 }
 function ativaTR()
 {
-	var etrs = document.getElementsByTagName("tr")
-	for(t = 0;t < etrs.length;t++)
+	var etrs = document.getElementsByTagName("tr");
+	for(var t = 0;t < etrs.length;t++)
 	{
 		etrs[t].onmouseover = function()
-		{this.style.backgroundColor = "beige"}
+		{this.style.backgroundColor = "beige";};
 		etrs[t].onmouseout = function()
-		{this.style.backgroundColor = ""}
+		{this.style.backgroundColor = "";};
 	}
 }
 function ativaLegenda()
 {
-	var etrs = document.getElementsByTagName("legend")
-	for(t = 0;t < etrs.length;t++)
+	var etrs = document.getElementsByTagName("legend");
+	for(var t = 0;t < etrs.length;t++)
 	{
 		etrs[t].innerHTML = "<img src='../imagens/desce.gif' id='img_"+t+"' >&nbsp;" + etrs[t].innerHTML;
 		etrs[t].onclick = function()
 		{
 			var c = this.parentNode.childNodes;
-			for(h = 0;h < c.length;h++)
+			for(var h = 0;h < c.length;h++)
 			{
 				if(c[h].style && c[h].tagName != "LEGEND")
 				{
@@ -66,144 +64,147 @@ function ativaLegenda()
 					}
 				}
 			}
-		}
+		};
 	}
 }
 function abre(url)
 {
-	window.location.href = url
+	window.location.href = url;
 }
 function verificaEditores()
 {
 	var retorna = function(retorno)
 	{
 		if(retorno.data=="nao")
-		{document.body.innerHTML += "<p style=color:red >Você não está cadastrado como um editor";return}
-		montaParametros()
-	}
+		{document.body.innerHTML += "<p style=color:red >Você não está cadastrado como um editor";return;}
+		montaParametros();
+	};
 	var p = "../php/mapfiles.php?funcao=verificaEditores";
 	cPaint.call(p,"",retorna);
 }
 function combosimnao(marcar)
 {
-	var ins = "<option value='' "
-	if (marcar == ""){ins += "selected"}
+	var ins = "<option value='' ";
+	if (marcar == ""){ins += "selected";}
 	ins += ">---</option>";
-	ins += "<option value='SIM' "
-	if (marcar == "sim" || marcar == "SIM"){ins += "selected"}
+	ins += "<option value='SIM' ";
+	if (marcar == "sim" || marcar == "SIM"){ins += "selected";}
 	ins += ">sim</option>";
-	ins += "<option value='NAO' "
-	if (marcar == "nao" || marcar == "NAO"){ins += "selected"}
+	ins += "<option value='NAO' ";
+	if (marcar == "nao" || marcar == "NAO"){ins += "selected";}
 	ins += ">nao</option>";
-	return(ins)
+	return(ins);
 }
 function combolista(lista,marcar)
 {
-	var ins = "<option value='' "
-	if (marcar == ""){ins += "selected"}
+	var ins = "<option value='' ";
+	if (marcar == ""){ins += "selected";}
 	ins += ">---</option>";
 	for (var k=0;k<lista.length;k++)
 	{
-		ins += "<option value='"+lista[k]+"' "
-		if (marcar == lista[k] || marcar == lista[k].toLowerCase()){ins += "selected"}
+		ins += "<option value='"+lista[k]+"' ";
+		if (marcar == lista[k] || marcar == lista[k].toLowerCase()){ins += "selected";}
 		ins += ">"+lista[k]+"</option>";
 	}
-	return(ins)
+	return(ins);
 }
 function comboObjeto(obj,valor,texto,marcar)
 {
-	var ins = "<option value='' "
+	var ins = "<option value='' ";
 	//if (marcar == ""){ins += "selected"}
 	ins += ">---</option>";
 	for (var k=0;k<obj.length;k++)
 	{
-		var v = eval("obj[k]."+valor)
-		var t = eval("obj[k]."+texto)
-		ins += "<option value='"+v+"' "
-		if (marcar == v){ins += "selected"}
+		var v = eval("obj[k]."+valor);
+		var t = eval("obj[k]."+texto);
+		ins += "<option value='"+v+"' ";
+		if (marcar == v){ins += "selected";}
 		ins += ">"+t+"</option>";
 	}
-	return(ins)
+	return(ins);
 }
 function montaCampos()
 {
-	var ins = ""
-	for (i=0;i<$parametros.simples.length;i++)
+	var ins = "";
+	for (var i=0;i<$parametros.simples.length;i++)
 	{
-		ins += "<fieldset><legend><b>"+$parametros.simples[i].cabeca+"</b></legend>"
-		ins += "<p class=mensagem >"+$parametros.simples[i].mensagem+"</p>"
-		ins += "<table><tr><td><img style=cursor:pointer src=../imagens/02.png title='aplicar' onclick='salva(\""+$parametros.simples[i].variavel+"\")' /></td>"
-		ins += "<td><input type=text size=70 id='"+$parametros.simples[i].variavel+"' /></td></tr></table>"
-		ins += "</fieldset><br>"	
+		ins += "<fieldset><legend><b>"+$parametros.simples[i].cabeca+"</b></legend>";
+		ins += "<p class=mensagem >"+$parametros.simples[i].mensagem+"</p>";
+		ins += "<table><tr><td><img style=cursor:pointer src=../imagens/02.png title='aplicar' onclick='salva(\""+$parametros.simples[i].variavel+"\")' /></td>";
+		ins += "<td><input type=text size=70 id='"+$parametros.simples[i].variavel+"' /></td></tr></table>";
+		ins += "</fieldset><br>";
 	}
-	document.body.innerHTML += ins
+	document.body.innerHTML += ins;
 }
 function geraLinhas(dados,param,ncolunas)
 {
 	var nparam = param.linhas.length;
-	var contaParam = 0
+	var contaParam = 0;
 	var resultado = "";
 	do
 	{
 		var p = param.linhas[contaParam];
-		var idd = eval("dados."+p.id)
+		var idd = eval("dados."+p.id);
+		var id;
+		var texto;
 		if(idd != undefined)
-		var id = p.prefixoid+idd;
+		id = p.prefixoid+idd;
 		else
-		var id = p.prefixoid+p.id;
+		id = p.prefixoid+p.id;
 		var valor = eval("dados."+p.valor);
 		var titulo = p.titulo;
 		if(p.texto)
-		{var texto = p.texto}
+		{texto = p.texto;}
 		else
-		{var texto = ""}
-		resultado += "<tr colspan='"+ncolunas+"' ><td style='background-color:rgb(250,250,250);'  ><b>"+texto+"</b></td></tr>"
-		resultado += "<tr>"
-		resultado += "<td>"+titulo+": </td>"
-		resultado += "<td><input size=60 onchange='this.style.color=\"blue\"' type=text id='"+id+"' value='"+valor+"' /></td>"
+		{texto = "";}
+		resultado += "<tr colspan='"+ncolunas+"' ><td style='background-color:rgb(250,250,250);'  ><b>"+texto+"</b></td></tr>";
+		resultado += "<tr>";
+		resultado += "<td>"+titulo+": </td>";
+		resultado += "<td><input size=60 onchange='this.style.color=\"blue\"' type=text id='"+id+"' value='"+valor+"' /></td>";
 		if(ncolunas = 3)
-		resultado += "<td></td>"
-		resultado += "</tr>"
-		contaParam++
+		resultado += "<td></td>";
+		resultado += "</tr>";
+		contaParam++;
 	}
 	while(contaParam < nparam)
-	return(resultado)
+	return(resultado);
 }
 function geraLinhas2(dados,param,funcao)
 {
 	var nparam = param.linhas.length;
-	var contaParam = 0
+	var contaParam = 0;
 	var resultado = "";
 	do
 	{
 		var p = param.linhas[contaParam];
-		var idd = eval("dados."+p.id)
+		var id;
+		var idd = eval("dados."+p.id);
 		if(idd != undefined)
-		var id = p.prefixoid+idd;
+		id = p.prefixoid+idd;
 		else
-		var id = p.prefixoid+p.id;
+		id = p.prefixoid+p.id;
 		var valor = eval("dados."+p.valor);
 		var titulo = p.titulo;
+		var texto;
 		if(p.texto)
-		{var texto = p.texto}
+		{texto = p.texto;}
 		else
-		{var texto = ""}
-		resultado += "<br><fieldset><legend>+- "+titulo+"</legend><div style=display:none >"
-		resultado += "<p class=textoAjuda style='background-color:rgb(250,250,250);' >"+texto+"</p>"
-		resultado += "<p>"
-		resultado += "<input size=65 onchange='this.style.color=\"blue\"' type=text id='"+id+"' value='"+valor+"' />"
-		resultado += "<img src=../imagens/02.png style=cursor:pointer title='Aplicar' onclick='"+funcao+"(\""+p.id+"\",\""+p.valor+"\",this)'/>"
-		resultado += "</p></div></fieldset>"		
-		contaParam++
+		{texto = "";}
+		resultado += "<br><fieldset><legend>+- "+titulo+"</legend><div style=display:none >";
+		resultado += "<p class=textoAjuda style='background-color:rgb(250,250,250);' >"+texto+"</p>";
+		resultado += "<p>";
+		resultado += "<input size=65 onchange='this.style.color=\"blue\"' type=text id='"+id+"' value='"+valor+"' />";
+		resultado += "<img src=../imagens/02.png style=cursor:pointer title='Aplicar' onclick='"+funcao+"(\""+p.id+"\",\""+p.valor+"\",this)'/>";
+		resultado += "</p></div></fieldset>";
+		contaParam++;
 	}
 	while(contaParam < nparam)
-	return(resultado)
+	return(resultado);
 }
 function registraPerfil(id,perfil)
 {
-	var perfis = $i(id).value
 	if(perfil == "")
-	$i(id).value = perfil
+	$i(id).value = perfil;
 	else
-	$i(id).value = $i(id).value+" "+perfil
+	$i(id).value = $i(id).value+" "+perfil;
 }

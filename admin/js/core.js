@@ -114,30 +114,30 @@ true|false - se o movimento ocorreu
 */
 function core_movimentaNo(tipo,no)
 {
-	var movimenta = false
+	var movimenta = false;
 	if(tipo == "sobe")
 	{
-		var noanterior = no.previousSibling
+		var noanterior = no.previousSibling;
 		if(noanterior)
 		{
 			if(noanterior.previousSibling && noanterior.data.tipo != "etiqueta")
 			{
-				tree.popNode(no)
-				no.insertBefore(noanterior)
-				tree.draw()
-				var movimenta = true
+				tree.popNode(no);
+				no.insertBefore(noanterior);
+				tree.draw();
+				movimenta = true;
 			}	 
 		}
 	}
 	if(tipo == "desce")
 	{
-		var noseguinte = no.nextSibling
+		var noseguinte = no.nextSibling;
 		if(noseguinte)
 		{
-			tree.popNode(no)
-			no.insertAfter(noseguinte)
-			tree.draw()
-			var movimenta = true
+			tree.popNode(no);
+			no.insertAfter(noseguinte);
+			tree.draw();
+			movimenta = true;
 		}
 	}
 	return movimenta;
@@ -219,18 +219,17 @@ tipo - GET ou POST
 */
 function core_makeRequest(sUrl,callback,tipo)
 {
-	var sUrl = escape(sUrl);
+	sUrl = escape(sUrl);
 	var re = new RegExp("%3F", "g");
-	var sUrl = sUrl.replace(re,'?');
-	var re = new RegExp("%3D", "g");
-	var sUrl = sUrl.replace(re,'=');
-	var re = new RegExp("%26", "g");
-	var sUrl = sUrl.replace(re,'&');
+	sUrl = sUrl.replace(re,'?');
+	re = new RegExp("%3D", "g");
+	sUrl = sUrl.replace(re,'=');
+	re = new RegExp("%26", "g");
+	sUrl = sUrl.replace(re,'&');
 	//alert(sUrl)
 	if(arguments.length == 2)
-	{var tipo = "GET";}
-	var request = YAHOO.util.Connect.asyncRequest(tipo, sUrl, callback);
-	//YAHOO.log("Initiating request; tId: " + request.tId + ".", "info", "example");
+	{tipo = "GET";}
+	YAHOO.util.Connect.asyncRequest(tipo, sUrl, callback);
 }
 /*
 Function: core_carregando
@@ -389,7 +388,7 @@ $perfisArray - array com a lista de perfis
 function core_pegaPerfis(funcao)
 {
 	if(arguments.length == 0)
-	{var funcao = "";}
+	{funcao = "";}
 	//pega a lista de perfis
 	var sUrl = "../php/menutemas.php?funcao=pegaPerfis";
 	var callback =
@@ -400,7 +399,7 @@ function core_pegaPerfis(funcao)
   			{
   				$perfis = YAHOO.lang.JSON.parse(o.responseText);
   				$perfisArray = new Array();
-  				for (i=0;i<$perfis.length;i++)
+  				for (var i=0;i<$perfis.length;i++)
   				{$perfisArray.push($perfis[i].perfil);}
   				if(funcao != "")
   				eval(funcao);
@@ -410,7 +409,7 @@ function core_pegaPerfis(funcao)
   		failure:core_handleFailure,
   		argument: { foo:"foo", bar:"bar" }
 	};
-	core_makeRequest(sUrl,callback)
+	core_makeRequest(sUrl,callback);
 }
 /*
 function: core_pegaMapfiles
@@ -421,7 +420,7 @@ Pega a lista de mapfiles
 
 Parameters:
 
-funcao - (opcional) nome da funcao que será executada ao terminar a busca pelos dados
+funcaoM - (opcional) nome da funcao que será executada ao terminar a busca pelos dados
 
 letra - (opcional) letra inicial utilizada para filtrar a lista
 
@@ -429,17 +428,17 @@ filtro - (opcional) string com o filtro, por exemplo, "'download_tema' = 'SIM'"
 */
 function core_pegaMapfiles(funcaoM,letra,filtro)
 {
-	if(arguments.length == 0){
-		var funcao = "";
-		var letra = "";
-		var filtro = "";
+	if(arguments.length == 0){	
+		letra = "";
+		filtro = "";
+		funcaoM = "";
 	}
 	if(arguments.length == 1){
-		var letra = "";
-		var filtro = "";
+		letra = "";
+		filtro = "";
 	}
 	if(arguments.length == 2){
-		var filtro = "";
+		filtro = "";
 	}
 	var sUrl = "../php/menutemas.php?funcao=listaMapsTemas&letra="+letra+"&filtro="+filtro;
 	var callbackM =
@@ -457,7 +456,7 @@ function core_pegaMapfiles(funcaoM,letra,filtro)
   		failure:core_handleFailure,
   		argument: { foo:"foo", bar:"bar" }
 	};
-	core_makeRequest(sUrl,callbackM)
+	core_makeRequest(sUrl,callbackM);
 }
 /*
 Function: core_comboMapfiles
@@ -479,20 +478,20 @@ recarrega {booblean} - força recarregar o combo de mapfiles
 function core_comboMapfiles(onde,id,marcar,funcao,recarrega)
 {
 	if(arguments.length == 3)
-	{var funcao = "";}
+	{funcao = "";}
 	if(!recarrega)
 	{recarrega = false;}
 	if($mapfiles == "" || recarrega === true)
 	{
-		core_pegaMapfiles("core_comboMapfiles('"+onde+"','"+id+"','"+marcar+"','"+funcao+"')")
+		core_pegaMapfiles("core_comboMapfiles('"+onde+"','"+id+"','"+marcar+"','"+funcao+"')");
 	}
 	else
 	{
 		if (funcao != "")
-		{var funcao = "onchange='"+funcao+"'";}
-		ins = "<select  id='"+id+"' "+funcao+" >"
-		ins += core_comboObjeto($mapfiles,"codigo","codigo",marcar)
-		ins += "</select></p>"
+		{funcao = "onchange='"+funcao+"'";}
+		ins = "<select  id='"+id+"' "+funcao+" >";
+		ins += core_comboObjeto($mapfiles,"codigo","codigo",marcar);
+		ins += "</select></p>";
 		$i(onde).innerHTML = ins;
 	}
 }
@@ -514,18 +513,18 @@ funcao - string com o nome da função que será executada no evento onchange
 function core_comboPerfis(onde,id,marcar,funcao)
 {
 	if(arguments.length == 3)
-	{var funcao = "";}
+	{funcao = "";}
 	if($perfis == "")
 	{
-		core_pegaPerfis("core_comboPerfis('"+onde+"','"+id+"','"+marcar+"','"+funcao+"')")
+		core_pegaPerfis("core_comboPerfis('"+onde+"','"+id+"','"+marcar+"','"+funcao+"')");
 	}
 	else
 	{
 		if (funcao != "")
-		{var funcao = "onchange='"+funcao+"'";}
-		ins = "<select  id='"+id+"' "+funcao+" >"
-		ins += core_comboObjeto($perfis,"perfil","perfil",marcar)
-		ins += "</select></p>"
+		{funcao = "onchange='"+funcao+"'";}
+		ins = "<select  id='"+id+"' "+funcao+" >";
+		ins += core_comboObjeto($perfis,"perfil","perfil",marcar);
+		ins += "</select></p>";
 		$i(onde).innerHTML = ins;
 	}
 }
@@ -557,12 +556,12 @@ function core_comboPranchas(onde,id,marcar,funcao,id_atlas)
   			{
   				var valores = YAHOO.lang.JSON.parse(o.responseText);
 				if(arguments.length == 3)
-				{var funcao = "";}
+				{funcao = "";}
 				if (funcao != "")
-				{var funcao = "onchange='"+funcao+"'";}
-				ins = "<select  id='"+id+"' "+funcao+" >"
-				ins += core_comboObjeto(valores,"id_prancha","titulo_prancha",marcar)
-				ins += "</select></p>"
+				{funcao = "onchange='"+funcao+"'";}
+				ins = "<select  id='"+id+"' "+funcao+" >";
+				ins += core_comboObjeto(valores,"id_prancha","titulo_prancha",marcar);
+				ins += "</select></p>";
 				$i(onde).innerHTML = ins;
   			}
   			catch(e){core_handleFailure(e,o.responseText);}
@@ -570,7 +569,7 @@ function core_comboPranchas(onde,id,marcar,funcao,id_atlas)
   		failure:core_handleFailure,
   		argument: { foo:"foo", bar:"bar" }
 	};
-	core_makeRequest(sUrl,callback)
+	core_makeRequest(sUrl,callback);
 }
 /*
 Function: core_comboGrupos
@@ -600,12 +599,12 @@ function core_comboGrupos(onde,id,marcar,funcao)
   			{
   				var valores = YAHOO.lang.JSON.parse(o.responseText);
 				if(arguments.length == 3)
-				{var funcao = "";}
+				{funcao = "";}
 				if (funcao != "")
-				{var funcao = "onchange='"+funcao+"'";}
-				ins = "<select size=6 style='width:370px' id='"+id+"' "+funcao+" >"
-				ins += core_comboObjeto(valores,"id_grupo","nome_grupo",marcar)
-				ins += "</select></p>"
+				{funcao = "onchange='"+funcao+"'";}
+				ins = "<select size=6 style='width:370px' id='"+id+"' "+funcao+" >";
+				ins += core_comboObjeto(valores,"id_grupo","nome_grupo",marcar);
+				ins += "</select></p>";
 				$i(onde).innerHTML = ins;
   			}
   			catch(e){core_handleFailure(e,o.responseText);}
@@ -613,7 +612,7 @@ function core_comboGrupos(onde,id,marcar,funcao)
   		failure:core_handleFailure,
   		argument: { foo:"foo", bar:"bar" }
 	};
-	core_makeRequest(sUrl,callback)
+	core_makeRequest(sUrl,callback);
 }
 /*
 Function: core_comboSubGrupos
@@ -643,12 +642,12 @@ function core_comboSubGrupos(onde,id,marcar,funcao)
   			{
   				var valores = YAHOO.lang.JSON.parse(o.responseText);
 				if(arguments.length == 3)
-				{var funcao = "";}
+				{funcao = "";}
 				if (funcao != "")
-				{var funcao = "onchange='"+funcao+"'";}
-				ins = "<select size=6 style='width:370px' id='"+id+"' "+funcao+" >"
-				ins += core_comboObjeto(valores,"id_subgrupo","nome_subgrupo",marcar)
-				ins += "</select></p>"
+				{funcao = "onchange='"+funcao+"'";}
+				ins = "<select size=6 style='width:370px' id='"+id+"' "+funcao+" >";
+				ins += core_comboObjeto(valores,"id_subgrupo","nome_subgrupo",marcar);
+				ins += "</select></p>";
 				$i(onde).innerHTML = ins;
   			}
   			catch(e){core_handleFailure(e,o.responseText);}
@@ -656,7 +655,7 @@ function core_comboSubGrupos(onde,id,marcar,funcao)
   		failure:core_handleFailure,
   		argument: { foo:"foo", bar:"bar" }
 	};
-	core_makeRequest(sUrl,callback)
+	core_makeRequest(sUrl,callback);
 }
 /*
 Function: core_comboTemas
@@ -686,12 +685,12 @@ function core_comboTemas(onde,id,marcar,funcao)
   			{
   				var valores = YAHOO.lang.JSON.parse(o.responseText);
 				if(arguments.length == 3)
-				{var funcao = "";}
+				{funcao = "";}
 				if (funcao != "")
-				{var funcao = "onchange='"+funcao+"'";}
-				ins = "<select size=6 style='width:370px' id='"+id+"' "+funcao+" >"
-				ins += core_comboObjeto(valores,"id_tema","nome_tema",marcar,"codigo_tema")
-				ins += "</select></p>"
+				{funcao = "onchange='"+funcao+"'";}
+				ins = "<select size=6 style='width:370px' id='"+id+"' "+funcao+" >";
+				ins += core_comboObjeto(valores,"id_tema","nome_tema",marcar,"codigo_tema");
+				ins += "</select></p>";
 				$i(onde).innerHTML = ins;
   			}
   			catch(e){core_handleFailure(e,o.responseText);}
@@ -699,7 +698,7 @@ function core_comboTemas(onde,id,marcar,funcao)
   		failure:core_handleFailure,
   		argument: { foo:"foo", bar:"bar" }
 	};
-	core_makeRequest(sUrl,callback)
+	core_makeRequest(sUrl,callback);
 }
 
 /*
@@ -716,7 +715,7 @@ funcao - (opcional) nome da funcao que será executada ao terminar a busca pelos 
 function core_pegaTags(funcao)
 {
 	if(arguments.length == 0)
-	{var funcao = "";}
+	{funcao = "";}
 	var sUrl = "../php/menutemas.php?funcao=pegaTags";
 	var callback =
 	{
@@ -734,7 +733,7 @@ function core_pegaTags(funcao)
   		failure:core_handleFailure,
   		argument: { foo:"foo", bar:"bar" }
 	};
-	core_makeRequest(sUrl,callback)
+	core_makeRequest(sUrl,callback);
 }
 /*
 Function: core_comboTags
@@ -755,13 +754,13 @@ function core_comboTags(onde,id,change)
 {
 	if($tags == "")
 	{
-		core_pegaTags("core_comboTags('"+onde+"','"+id+"','"+change+"')")
+		core_pegaTags("core_comboTags('"+onde+"','"+id+"','"+change+"')");
 	}
 	else
 	{
-		ins = "<select onchange=\""+change+"(this.value)\" id='"+id+"' >"
-		ins += core_comboObjeto($tags,"nome","nome","")
-		ins += "</select></p>"
+		ins = "<select onchange=\""+change+"(this.value)\" id='"+id+"' >";
+		ins += core_comboObjeto($tags,"nome","nome","");
+		ins += "</select></p>";
 		$i(onde).innerHTML = ins;
 	}
 }
@@ -786,17 +785,16 @@ function core_menuCheckBox(valores,textos,selecionados,target,record,key)
 {
 	function on_menuCheckBoxChange(p_oEvent)
 	{
-		var ins = "";
 		if(p_oEvent.newValue.get("value") == "OK")
 		{
 			var cks = $i("core_menuCK_bd").getElementsByTagName("input");
-			var ins = new Array();
-			for (i=0;i<cks.length;i++)
+			var ins = [];
+			for (var i=0;i<cks.length;i++)
 			{
 				if(cks[i].checked)
-				ins.push(cks[i].value)
+				ins.push(cks[i].value);
 			}
-			target.innerHTML = "<pre ><p>"+ins.toString()+"</pre>"
+			target.innerHTML = "<pre ><p>"+ins.toString()+"</pre>";
 			record.setData(key,ins.toString());
 		}
 		YAHOO.example.container.panelCK.destroy();
@@ -824,14 +822,14 @@ function core_menuCheckBox(valores,textos,selecionados,target,record,key)
 	}
 	var onde = $i("core_menuCK_bd");
 	onde.innerHTML = "";
-	for (i=0;i<valores.length;i++)
+	for (var i=0;i<valores.length;i++)
 	{
 		var novoCK = document.createElement("div");
 		var ck = "";
-		for(j=0;j<selecionados.length;j++)
+		for(var j=0;j<selecionados.length;j++)
 		{
 			if(selecionados[j] == valores[i])
-			var ck = "CHECKED";
+			ck = "CHECKED";
 		}
 		var ins = "<input type=checkbox id='CK_"+valores[i]+"' value='"+valores[i]+"' "+ck+" />"+textos[i]+"<br>";
 		novoCK.innerHTML = ins;
@@ -847,16 +845,16 @@ Retorna os itens option de um combo sim nao
 */
 function core_combosimnao(marcar)
 {
-	var ins = "<option value='' "
-	if (marcar == ""){ins += "selected"}
+	var ins = "<option value='' ";
+	if (marcar == ""){ins += "selected";}
 	ins += ">---</option>";
-	ins += "<option value='SIM' "
-	if (marcar == "sim" || marcar == "SIM"){ins += "selected"}
+	ins += "<option value='SIM' ";
+	if (marcar == "sim" || marcar == "SIM"){ins += "selected";}
 	ins += ">sim</option>";
-	ins += "<option value='NAO' "
-	if (marcar == "nao" || marcar == "NAO"){ins += "selected"}
+	ins += "<option value='NAO' ";
+	if (marcar == "nao" || marcar == "NAO"){ins += "selected";}
 	ins += ">nao</option>";
-	return(ins)
+	return(ins);
 }
 /*
 Function: core_comboObjeto
@@ -865,28 +863,30 @@ Retorna os itens option de um combo baseado em um objeto json
 */
 function core_comboObjeto(obj,valor,texto,marcar,texto2)
 {
-	var ins = "<option value='' "
+	var ins = "<option value='' ";
+	var v;
+	var t;
 	ins += ">---</option>";
 	for (var k=0;k<obj.length;k++)
 	{
 		if(valor != "")
-		var v = eval("obj[k]."+valor);
+		v = eval("obj[k]."+valor);
 		else
-		var v = obj[k];
+		v = obj[k];
 		if(texto != "")
-		var t = eval("obj[k]."+texto);
+		t = eval("obj[k]."+texto);
 		else
-		var t = obj[k];
+		t = obj[k];
 		
 		if(texto2){
 			t += " ("+eval("obj[k]."+texto2)+")";
 		}
 		
-		ins += "<option value='"+v+"' "
-		if (marcar == v){ins += "selected"}
+		ins += "<option value='"+v+"' ";
+		if (marcar == v){ins += "selected";}
 		ins += " title='"+t+"'  >"+t+"</option>";
 	}
-	return(ins)
+	return(ins);
 }
 /*
 Function: core_geraLinhas
@@ -900,7 +900,7 @@ dados - objeto no formato {"linhas":[{titulo:"Nome do tema:",size:"50",id:"Enome
 function core_geraLinhas(dados)
 {
 	var nparam = dados.linhas.length;
-	var contaParam = 0
+	var contaParam = 0;
 	var resultado = "";
 	core_geralinhasEscondeAjuda = function(id){
 		var a = $i(id+"_ajuda"),
@@ -923,24 +923,25 @@ function core_geraLinhas(dados)
 			if(!p.size){p.size = "50";}
 			if(p.ajuda)
 			{
+				var idajuda;
 				if(p.id !== "")
-				{var idajuda = p.id + contaParam;}
+				{idajuda = p.id + contaParam;}
 				else{
-					var idajuda = "a"+parseInt(255*(Math.random()),10);
+					idajuda = "a"+parseInt(255*(Math.random()),10);
 				}
 				//var temp = "$i('"+idajuda+"_ajuda').style.display='block' "
-				resultado += "<p><div onclick='core_geralinhasEscondeAjuda(\""+idajuda+"\")' style=cursor:pointer title='ajuda' ><img id='"+idajuda+"_imgajuda' src='../../imagens/desce.gif' >&nbsp;<b>"+p.titulo+"</b></div>"
-				resultado += "<div id='"+idajuda+"_ajuda' style=display:none >"+p.ajuda+"</div>"
+				resultado += "<p><div onclick='core_geralinhasEscondeAjuda(\""+idajuda+"\")' style=cursor:pointer title='ajuda' ><img id='"+idajuda+"_imgajuda' src='../../imagens/desce.gif' >&nbsp;<b>"+p.titulo+"</b></div>";
+				resultado += "<div id='"+idajuda+"_ajuda' style=display:none >"+p.ajuda+"</div>";
 			}
 			else
 			resultado += "<p><b>"+p.titulo+"</b><br>";
 			if(p.texto)
-			resultado += "<span style=color:gray >"+p.texto+"</span</p>"
+			resultado += "<span style=color:gray >"+p.texto+"</span</p>";
 			if(p.id != "")
 			{
 				if(!p.value)
-				p.value = ""
-				resultado += "<input size="+p.size+" type=text id="+p.id+" value=\""+p.value+"\" />"
+				p.value = "";
+				resultado += "<input size="+p.size+" type=text id="+p.id+" value=\""+p.value+"\" />";
 				if(p.tipo == "cor")
 				{
 					resultado += "&nbsp;<img src='../../imagens/aquarela.gif' style='cursor:pointer;' onclick='core_abreCor(\"\",\""+p.id+"\");' />";
@@ -950,10 +951,10 @@ function core_geraLinhas(dados)
 			if(p.div)
 			{resultado += p.div;}
 		}
-		contaParam++
+		contaParam++;
 	}
 	while(contaParam < nparam)
-	return(resultado)
+	return(resultado);
 }
 /*
 Function: core_ativaBotaoAdicionaLinha
@@ -975,9 +976,9 @@ nomeFuncao - nome da função que será executada ao concluir a adição da linha
 function core_ativaBotaoAdicionaLinha(sUrl,idBotao,nomeFuncao)
 {
 	if(arguments.length == 1)
-	{var idBotao = "adiciona";}
+	{idBotao = "adiciona";}
 	if(arguments.length < 3)
-	var nomeFuncao = "";
+	nomeFuncao = "";
 	var adicionalinha = function()
 	{
 		core_carregando("ativa");
@@ -1004,10 +1005,10 @@ function core_ativaBotaoAdicionaLinha(sUrl,idBotao,nomeFuncao)
   			failure:core_handleFailure,
   			argument: { foo:"foo", bar:"bar" }
 		}; 
-		core_makeRequest(sUrl,callback)
+		core_makeRequest(sUrl,callback);
 	};
 	//cria o botão de adição de um novo menu
-	var adiciona = new YAHOO.widget.Button(idBotao,{ onclick: { fn: adicionalinha } });
+	new YAHOO.widget.Button(idBotao,{ onclick: { fn: adicionalinha } });
 }
 /*
 Function: core_pegaDados
@@ -1046,7 +1047,7 @@ function core_pegaDados(mensagem,sUrl,funcaoRetorno)
   		failure:core_handleFailure,
   		argument: { foo:"foo", bar:"bar" }
 	}; 
-	core_makeRequest(sUrl,callback)
+	core_makeRequest(sUrl,callback);
 }
 /*
 Function: core_gravaLinha
@@ -1070,7 +1071,7 @@ function core_gravaLinha(mensagem,row,sUrl,nomeFuncao)
 	core_carregando("ativa");
 	core_carregando(mensagem);
 	if(arguments.length < 4)
-	var nomeFuncao = "";
+	nomeFuncao = "";
 	var callback =
 	{
   		success:function(o)
@@ -1080,14 +1081,14 @@ function core_gravaLinha(mensagem,row,sUrl,nomeFuncao)
 			var linha = myDataTable.getTrEl(rec);
 			if(nomeFuncao != "")
 			{
-				eval(nomeFuncao+"()")
+				eval(nomeFuncao+"()");
 				try
-				{myDataTable.updateRow(rec,YAHOO.lang.JSON.parse(o.responseText)[0])}
+				{myDataTable.updateRow(rec,YAHOO.lang.JSON.parse(o.responseText)[0]);}
 				catch(e){}
 			}
 			else
 			{
-				myDataTable.updateRow(rec,YAHOO.lang.JSON.parse(o.responseText)[0])
+				myDataTable.updateRow(rec,YAHOO.lang.JSON.parse(o.responseText)[0]);
   			}
 			linha.style.color = "";
 			linha.style.textDecoration = "none";
@@ -1095,7 +1096,7 @@ function core_gravaLinha(mensagem,row,sUrl,nomeFuncao)
   		failure:core_handleFailure,
   		argument: { foo:"foo", bar:"bar" }
 	}; 
-	core_makeRequest(sUrl,callback)
+	core_makeRequest(sUrl,callback);
 }
 /*
 Function: core_excluiLinha
@@ -1130,7 +1131,7 @@ function core_excluiLinha(sUrl,row,mensagem)
   					if(YAHOO.lang.JSON.parse(o.responseText) == "erro")
   					{
   						core_carregando("<span style=color:red >Não foi possível excluir. Verifique se não existem outras tabelas com registros vinculados a este</span>");
-  						setTimeout("core_carregando('desativa')",3000)
+  						setTimeout("core_carregando('desativa')",3000);
   					}
   					else
   					{
@@ -1143,15 +1144,15 @@ function core_excluiLinha(sUrl,row,mensagem)
   			failure:core_handleFailure,
   			argument: { foo:"foo", bar:"bar" }
 		}; 
-		core_makeRequest(sUrl,callback)
+		core_makeRequest(sUrl,callback);
 	};
 	var handleNo = function()
 	{
 		this.hide();
 	};
 	var mensagem = "Exclui o registro?";
-	var largura = "300"
-	core_dialogoContinua(handleYes,handleNo,mensagem,largura)	
+	var largura = "300";
+	core_dialogoContinua(handleYes,handleNo,mensagem,largura);
 }
 /*
 Function: core_excluiNoTree
@@ -1186,7 +1187,7 @@ function core_excluiNoTree(sUrl,no,mensagem)
   					if(YAHOO.lang.JSON.parse(o.responseText) == "erro")
   					{
   						core_carregando("<span style=color:red >Não foi possível excluir. Verifique se não existem outras tabelas com registros vinculados a este</span>");
-  						setTimeout("core_carregando('desativa')",3000)
+  						setTimeout("core_carregando('desativa')",3000);
   					}
   					else
   					{
@@ -1202,15 +1203,15 @@ function core_excluiNoTree(sUrl,no,mensagem)
   			failure:core_handleFailure,
   			argument: { foo:"foo", bar:"bar" }
 		}; 
-		core_makeRequest(sUrl,callback)
+		core_makeRequest(sUrl,callback);
 	};
 	var handleNo = function()
 	{
 		this.hide();
 	};
 	var mensagem = "Exclui o registro?";
-	var largura = "300"
-	core_dialogoContinua(handleYes,handleNo,mensagem,largura)	
+	var largura = "300";
+	core_dialogoContinua(handleYes,handleNo,mensagem,largura);
 }
 /**
 Function: core_montaEditor
@@ -1229,14 +1230,14 @@ function core_montaEditor(funcaoOK,w,h,funcaoClose)
 {	
 	if(arguments.length == 0)
 	{
-		var funcaoOK = "";
-		var w = "400px";
-		var h = w;
+		funcaoOK = "";
+		w = "400px";
+		h = w;
 	}
 	if(arguments.length < 2)
 	{
-		var w = "400px";
-		var h = w;
+		w = "400px";
+		h = w;
 	}
 	if(!$i("janela_editor"))
 	{
@@ -1285,7 +1286,7 @@ function core_montaEditor(funcaoOK,w,h,funcaoClose)
 			eval(funcaoClose+"()");
 		}
 		catch(e){};
-	}
+	};
 	YAHOO.util.Event.addListener(YAHOO.example.container.panelEditor.close, "click", fecha);
 	YAHOO.example.container.panelEditor.show();
 }
@@ -1330,8 +1331,7 @@ function core_ativaforms(lista){
 //
 var scriptLocation = "";
 var scripts = document.getElementsByTagName('script');
-var i = 0;
-for (i = 0; i < scripts.length; i++) {
+for (var i = 0; i < scripts.length; i++) {
 	var src = scripts[i].getAttribute('src');
 	if (src) {
 		var index = src.lastIndexOf("core.js");
@@ -1380,7 +1380,7 @@ var cssfiles =new Array(
 //carrega os arquivos js
 //
 var allScriptTags = "";
-for (i = 0; i < jsfiles.length; i++)
+for (var i = 0; i < jsfiles.length; i++)
 {
 	var currentScriptTag = "<script src='" + scriptLocation + jsfiles[i] + "'></script>";
 	allScriptTags += currentScriptTag;
@@ -1390,7 +1390,7 @@ document.write(allScriptTags);
 //carrega os arquivos css
 //
 var allCssTags = "";
-for (i = 0; i < cssfiles.length; i++)
+for (var i = 0; i < cssfiles.length; i++)
 {
 	var currentCssTag = "<link rel='stylesheet' type='text/css' href='" + scriptLocation + cssfiles[i] + "'/>";
 	allCssTags += currentCssTag;

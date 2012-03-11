@@ -37,7 +37,7 @@ Inicializa o editor
 */
 function initMenu()
 {
-	ativaBotaoAdicionaAtlas("../php/atlas.php?funcao=alterarAtlas","adiciona")
+	ativaBotaoAdicionaAtlas("../php/atlas.php?funcao=alterarAtlas","adiciona");
 	core_carregando("ativa");
 	core_ativaPainelAjuda("ajuda","botaoAjuda");
 	core_pegaPerfis("pegaAtlas()");
@@ -64,10 +64,10 @@ function ativaBotaoAdicionaAtlas(sUrl,idBotao)
   			failure:core_handleFailure,
   			argument: { foo:"foo", bar:"bar" }
 		}; 
-		core_makeRequest(sUrl,callback)
+		core_makeRequest(sUrl,callback);
 	};
 	//cria o botão de adição de um novo menu
-	var adiciona = new YAHOO.widget.Button(idBotao,{ onclick: { fn: adiciona } });
+	new YAHOO.widget.Button(idBotao,{ onclick: { fn: adiciona } });
 }
 /*
 Function: pegaAtlas
@@ -78,7 +78,7 @@ Obtém a lista de atlas
 */
 function pegaAtlas()
 {
-	core_pegaDados("buscando atlas...","../php/atlas.php?funcao=pegaAtlas","montaArvore")
+	core_pegaDados("buscando atlas...","../php/atlas.php?funcao=pegaAtlas","montaArvore");
 }
 /*
 Function: montaArvore
@@ -91,13 +91,9 @@ function montaArvore(dados)
 {
 	YAHOO.example.treeExample = new function()
 	{
-		var currentIconMode;
 		tree = "";
 		function changeIconMode()
 		{
-			var newVal = parseInt(this.value);
-			if (newVal != currentIconMode)
-			{currentIconMode = newVal;}
 			buildTree();
 		}
         function loadNodeData(node, fnLoadComplete)
@@ -107,8 +103,8 @@ function montaArvore(dados)
 			{
                 success: function(oResponse)
                 {
-                    var dados = YAHOO.lang.JSON.parse(oResponse.responseText)
-					adicionaNosPranchas(node,dados,false)
+                    var dados = YAHOO.lang.JSON.parse(oResponse.responseText);
+					adicionaNosPranchas(node,dados,false);
                     oResponse.argument.fnLoadComplete();
                 },
                 failure: function(oResponse)
@@ -127,7 +123,7 @@ function montaArvore(dados)
         function buildTree()
         {
 			tree = new YAHOO.widget.TreeView("tabela");
-			tree.setDynamicLoad(loadNodeData, currentIconMode);
+			tree.setDynamicLoad(loadNodeData, 1);
 			var root = tree.getRoot();
 			var tempNode = new YAHOO.widget.TextNode('', root, false);
 			tempNode.isLeaf = true;
@@ -135,19 +131,19 @@ function montaArvore(dados)
         }
     	buildTree();
 	}();
-   	adicionaNosAtlas(dados)
+   	adicionaNosAtlas(dados);
    	tree.draw();
 }
 function testarMapfile(codigoMap)
 {
-	window.open("../../testamapfile.php?map="+codigoMap+".map")
+	window.open("../../testamapfile.php?map="+codigoMap+".map");
 }
 function adicionaNosTemas(no,dados,redesenha)
 {
 	if(!redesenha)
 	{
-		var conteudo = "<span onclick=\"adicionarTema('"+no.data.id_prancha+"')\" style=\"cursor:pointer;\" ><img style=\"position:relative;top:0px\" width='10px' heigth='10px' src=\"../imagens/05.png\" /><i>Adicionar novo tema:</i></span>"
-		var d = {html:conteudo}
+		var conteudo = "<span onclick=\"adicionarTema('"+no.data.id_prancha+"')\" style=\"cursor:pointer;\" ><img style=\"position:relative;top:0px\" width='10px' heigth='10px' src=\"../imagens/05.png\" /><i>Adicionar novo tema:</i></span>";
+		var d = {html:conteudo};
 		var tempNode = new YAHOO.widget.HTMLNode(d, no, false,true);
 		tempNode.isLeaf = true;
 	}
@@ -155,16 +151,16 @@ function adicionaNosTemas(no,dados,redesenha)
 	{
 		if(dados[i].nome_tema == "null" || !dados[i].nome_tema || dados[i].codigo_tema == "")
 		{dados[i].nome_tema = "";}
-		var conteudo = "&nbsp;<img style=\"position:relative;cursor:pointer;top:0px\" onclick=\"sobeDesce('sobe','tema','"+dados[i].id_tema+"')\" title=sobe src=\"../imagens/34.png\" />"
-		conteudo += "&nbsp;<img style=\"position:relative;cursor:pointer;top:0px\" onclick=\"sobeDesce('desce','tema','"+dados[i].id_tema+"')\" title=desce src=\"../imagens/33.png\" />"
-		conteudo += "&nbsp;<img style=\"position:relative;cursor:pointer;top:0px\" onclick=\"excluir('tema','"+dados[i].id_tema+"')\" title=excluir width='10px' heigth='10px' src=\"../imagens/01.png\" />"
-		conteudo += "&nbsp;<img style=\"position:relative;cursor:pointer;top:0px\" onclick=\"testarMapfile('"+dados[i].codigo_tema+"')\" title=testar width='10px' heigth='10px' src=\"../imagens/41.png\" />"
-		conteudo += "&nbsp;<img style=\"position:relative;cursor:pointer;top:0px\" onclick=\"editar('tema','"+dados[i].id_tema+"')\" title=editar width='10px' heigth='10px' src=\"../imagens/06.png\" />"
+		var conteudo = "&nbsp;<img style=\"position:relative;cursor:pointer;top:0px\" onclick=\"sobeDesce('sobe','tema','"+dados[i].id_tema+"')\" title=sobe src=\"../imagens/34.png\" />";
+		conteudo += "&nbsp;<img style=\"position:relative;cursor:pointer;top:0px\" onclick=\"sobeDesce('desce','tema','"+dados[i].id_tema+"')\" title=desce src=\"../imagens/33.png\" />";
+		conteudo += "&nbsp;<img style=\"position:relative;cursor:pointer;top:0px\" onclick=\"excluir('tema','"+dados[i].id_tema+"')\" title=excluir width='10px' heigth='10px' src=\"../imagens/01.png\" />";
+		conteudo += "&nbsp;<img style=\"position:relative;cursor:pointer;top:0px\" onclick=\"testarMapfile('"+dados[i].codigo_tema+"')\" title=testar width='10px' heigth='10px' src=\"../imagens/41.png\" />";
+		conteudo += "&nbsp;<img style=\"position:relative;cursor:pointer;top:0px\" onclick=\"editar('tema','"+dados[i].id_tema+"')\" title=editar width='10px' heigth='10px' src=\"../imagens/06.png\" />";
 		if(dados[i].codigo_tema != "")
-		{conteudo += "&nbsp;<span>"+dados[i].codigo_tema+" - </span><span style=color:gray >"+dados[i].nome_tema+"</span>"}
+		{conteudo += "&nbsp;<span>"+dados[i].codigo_tema+" - </span><span style=color:gray >"+dados[i].nome_tema+"</span>";}
 		else
-		{conteudo += "&nbsp;<span style=color:red >Edite para definir o tema!!!</span>"}
-		var d = {html:conteudo,id_tema:dados[i].id_tema,tipo:"tema"}
+		{conteudo += "&nbsp;<span style=color:red >Edite para definir o tema!!!</span>";}
+		var d = {html:conteudo,id_tema:dados[i].id_tema,tipo:"tema"};
 		var tempNode = new YAHOO.widget.HTMLNode(d, no, false,true);
 		tempNode.isLeaf = true;
 	}
@@ -192,8 +188,8 @@ function adicionaNosPranchas(no,dados,redesenha)
 		{
             success: function(oResponse)
             {
-                var dados = YAHOO.lang.JSON.parse(oResponse.responseText)
-				adicionaNosTemas(node,dados,false)
+                var dados = YAHOO.lang.JSON.parse(oResponse.responseText);
+				adicionaNosTemas(node,dados,false);
                 oResponse.argument.fnLoadComplete();
             },
             failure: function(oResponse)
@@ -211,22 +207,22 @@ function adicionaNosPranchas(no,dados,redesenha)
     }
     if(!redesenha)
     {
-		var conteudo = "<span style=\"cursor:pointer;\" onclick=\"adicionarPrancha('"+no.data.id_atlas+"')\" ><img style=\"position:relative;top:2px\" src=\"../imagens/05.png\" /><i>Adicionar nova prancha</i></span>"
-		var d = {html:conteudo}
+		var conteudo = "<span style=\"cursor:pointer;\" onclick=\"adicionarPrancha('"+no.data.id_atlas+"')\" ><img style=\"position:relative;top:2px\" src=\"../imagens/05.png\" /><i>Adicionar nova prancha</i></span>";
+		var d = {html:conteudo};
 		var tempNode = new YAHOO.widget.HTMLNode(d, no, false,true);
 		tempNode.isLeaf = true;
 	}
 	for (var i=0, j=dados.length; i<j; i++)
 	{
-		var conteudo = "&nbsp;<img style=\"position:relative;cursor:pointer;top:0px\" onclick=\"sobeDesce('sobe','prancha','"+dados[i].id_prancha+"')\" title=sobe src=\"../imagens/34.png\" />"
-		conteudo += "&nbsp;<img style=\"position:relative;cursor:pointer;top:0px\" onclick=\"sobeDesce('desce','prancha','"+dados[i].id_prancha+"')\" title=desce src=\"../imagens/33.png\" />"
-		conteudo += "&nbsp;<img style=\"position:relative;cursor:pointer;top:0px\" onclick=\"excluir('prancha','"+dados[i].id_prancha+"')\" title=excluir width='10px' heigth='10px' src=\"../imagens/01.png\" />"
-		conteudo += "&nbsp;<img style=\"position:relative;cursor:pointer;top:0px\" onclick=\"editar('prancha','"+dados[i].id_prancha+"')\" title=editar width='10px' heigth='10px' src=\"../imagens/06.png\" />"
+		var conteudo = "&nbsp;<img style=\"position:relative;cursor:pointer;top:0px\" onclick=\"sobeDesce('sobe','prancha','"+dados[i].id_prancha+"')\" title=sobe src=\"../imagens/34.png\" />";
+		conteudo += "&nbsp;<img style=\"position:relative;cursor:pointer;top:0px\" onclick=\"sobeDesce('desce','prancha','"+dados[i].id_prancha+"')\" title=desce src=\"../imagens/33.png\" />";
+		conteudo += "&nbsp;<img style=\"position:relative;cursor:pointer;top:0px\" onclick=\"excluir('prancha','"+dados[i].id_prancha+"')\" title=excluir width='10px' heigth='10px' src=\"../imagens/01.png\" />";
+		conteudo += "&nbsp;<img style=\"position:relative;cursor:pointer;top:0px\" onclick=\"editar('prancha','"+dados[i].id_prancha+"')\" title=editar width='10px' heigth='10px' src=\"../imagens/06.png\" />";
 		if(dados[i].titulo_prancha != "")
-		{conteudo += "&nbsp;<span>"+dados[i].titulo_prancha+"</span>"}
+		{conteudo += "&nbsp;<span>"+dados[i].titulo_prancha+"</span>";}
 		else
-		{conteudo += "&nbsp;<span style=color:red >Edite para definir a prancha!!!</span>"}
-		var d = {html:conteudo,id_prancha:dados[i].id_prancha,tipo:"prancha"}
+		{conteudo += "&nbsp;<span style=color:red >Edite para definir a prancha!!!</span>";}
+		var d = {html:conteudo,id_prancha:dados[i].id_prancha,tipo:"prancha"};
 		var tempNode = new YAHOO.widget.HTMLNode(d, no, false,true);
 		//tempNode.isLeaf = true;
 		tempNode.setDynamicLoad(loadTemasData, temaIconMode);
@@ -238,17 +234,17 @@ function adicionaNosAtlas(dados,redesenha)
 	var root = tree.getRoot();
 	for (var i=0, j=dados.length; i<j; i++)
 	{
-		var conteudo = "&nbsp;<img style=\"position:relative;cursor:pointer;top:0px\" onclick=\"sobeDesce('sobe','atlas','"+dados[i].id_atlas+"')\" title=sobe src=\"../imagens/34.png\" />"
-		conteudo += "&nbsp;<img style=\"position:relative;cursor:pointer;top:0px\" onclick=\"sobeDesce('desce','atlas','"+dados[i].id_atlas+"')\" title=desce src=\"../imagens/33.png\" />"
-		conteudo += "&nbsp;<img style=\"position:relative;cursor:pointer;top:2px\" onclick=\"excluir('atlas','"+dados[i].id_atlas+"')\" title=excluir src=\"../imagens/01.png\" />"
-		conteudo += "&nbsp;<img style=\"position:relative;cursor:pointer;top:2px\" onclick=\"editar('atlas','"+dados[i].id_atlas+"')\" title=editar src=\"../imagens/06.png\" /><b>"
-		conteudo += "&nbsp;<img style=\"width:25px;position:relative;cursor:pointer;top:2px\" onclick=\"abreAtlas('"+dados[i].id_atlas+"')\" title=editar src=\"../../imagens/i3geo2.jpg\" /><b>"
+		var conteudo = "&nbsp;<img style=\"position:relative;cursor:pointer;top:0px\" onclick=\"sobeDesce('sobe','atlas','"+dados[i].id_atlas+"')\" title=sobe src=\"../imagens/34.png\" />";
+		conteudo += "&nbsp;<img style=\"position:relative;cursor:pointer;top:0px\" onclick=\"sobeDesce('desce','atlas','"+dados[i].id_atlas+"')\" title=desce src=\"../imagens/33.png\" />";
+		conteudo += "&nbsp;<img style=\"position:relative;cursor:pointer;top:2px\" onclick=\"excluir('atlas','"+dados[i].id_atlas+"')\" title=excluir src=\"../imagens/01.png\" />";
+		conteudo += "&nbsp;<img style=\"position:relative;cursor:pointer;top:2px\" onclick=\"editar('atlas','"+dados[i].id_atlas+"')\" title=editar src=\"../imagens/06.png\" /><b>";
+		conteudo += "&nbsp;<img style=\"width:25px;position:relative;cursor:pointer;top:2px\" onclick=\"abreAtlas('"+dados[i].id_atlas+"')\" title=editar src=\"../../imagens/i3geo2.jpg\" /><b>";
 		if(dados[i].titulo_atlas != "")
-		{conteudo += "&nbsp;<span>"+dados[i].titulo_atlas+"</span>"}
+		{conteudo += "&nbsp;<span>"+dados[i].titulo_atlas+"</span>";}
 		else
-		{conteudo += "&nbsp;<span style=color:red >Edite para definir o Atlas!!!</span>"}
+		{conteudo += "&nbsp;<span style=color:red >Edite para definir o Atlas!!!</span>";}
 		var d = {html:conteudo,id_atlas:dados[i].id_atlas,tipo:"atlas"};
-		var tempNode = new YAHOO.widget.HTMLNode(d, root, false,true);
+		new YAHOO.widget.HTMLNode(d, root, false,true);
 	}
 	if(redesenha){tree.draw();}
 }
@@ -267,6 +263,7 @@ function editar(tipo,id)
 {
 	core_carregando("ativa");
 	core_carregando(" buscando dados");
+	var sUrl = null;
 	var callback =
 	{
 		success:function(o)
@@ -276,25 +273,25 @@ function editar(tipo,id)
 				if(tipo == "atlas")
 				{
 					var dados = YAHOO.lang.JSON.parse(o.responseText)[0];
-					core_montaEditor("gravaDados('atlas','"+id+"')")
-					$i("editor_bd").innerHTML = montaDivAtlas(dados)
+					core_montaEditor("gravaDados('atlas','"+id+"')");
+					$i("editor_bd").innerHTML = montaDivAtlas(dados);
 					core_carregando("desativa");
-					core_comboPranchas("comboPranchaIni","Epranchadefault_atlas",dados.pranchadefault_atlas,"",id)
+					core_comboPranchas("comboPranchaIni","Epranchadefault_atlas",dados.pranchadefault_atlas,"",id);
 				}
 				if(tipo == "prancha")
 				{
 					var dados = YAHOO.lang.JSON.parse(o.responseText)[0];
-					core_montaEditor("gravaDados('prancha','"+id+"')")
-					$i("editor_bd").innerHTML = montaDivPrancha(dados)
+					core_montaEditor("gravaDados('prancha','"+id+"')");
+					$i("editor_bd").innerHTML = montaDivPrancha(dados);
 					core_carregando("desativa");
 				}
 				if(tipo == "tema")
 				{
 					var dados = YAHOO.lang.JSON.parse(o.responseText)[0];
-					core_montaEditor("gravaDados('tema','"+id+"')")
-					$i("editor_bd").innerHTML = montaDivTema(dados)
+					core_montaEditor("gravaDados('tema','"+id+"')");
+					$i("editor_bd").innerHTML = montaDivTema(dados);
 					core_carregando("desativa");
-					core_comboMapfiles("comboTemaIni","Ecodigo_tema",dados.codigo_tema,"",true)
+					core_comboMapfiles("comboTemaIni","Ecodigo_tema",dados.codigo_tema,"",true);
 				}
 				core_carregando("desativa");
 			}
@@ -304,25 +301,26 @@ function editar(tipo,id)
 		argument: { foo:"foo", bar:"bar" }
 	}; 
 	if(tipo == "atlas")
-	{var sUrl = "../php/atlas.php?funcao=pegaDadosAtlas&id_atlas="+id;}
+	{sUrl = "../php/atlas.php?funcao=pegaDadosAtlas&id_atlas="+id;}
 	if(tipo == "prancha")
-	{var sUrl = "../php/atlas.php?funcao=pegaDadosPrancha&id_prancha="+id;}
+	{sUrl = "../php/atlas.php?funcao=pegaDadosPrancha&id_prancha="+id;}
 	if(tipo == "tema")
-	{var sUrl = "../php/atlas.php?funcao=pegaDadosTema&id_tema="+id;}
-	core_makeRequest(sUrl,callback)
+	{sUrl = "../php/atlas.php?funcao=pegaDadosTema&id_tema="+id;}
+	if(sUrl)
+	{core_makeRequest(sUrl,callback);}
 }
 function montaDivTema(i)
 {
-	var ins = ""
-	ins += "<br>Código do tema:<br>"
-	ins += "<div id=comboTemaIni ></div>"
+	var ins = "";
+	ins += "<br>Código do tema:<br>";
+	ins += "<div id=comboTemaIni ></div>";
 
-	ins += "Ligado (ao abrir a prancha, esse tema estará visível)?<br>"
-	ins += "<select id='Eligado_tema' >"
-	ins += core_combosimnao(i.ligado_tema)
-	ins += "</select>"
-	ins += "<input type=hidden value='"+i.ordem_tema+"' id='Eordem_tema' />"
-	return(ins)
+	ins += "Ligado (ao abrir a prancha, esse tema estará visível)?<br>";
+	ins += "<select id='Eligado_tema' >";
+	ins += core_combosimnao(i.ligado_tema);
+	ins += "</select>";
+	ins += "<input type=hidden value='"+i.ordem_tema+"' id='Eordem_tema' />";
+	return(ins);
 }
 function montaDivPrancha(i)
 {
@@ -337,10 +335,10 @@ function montaDivPrancha(i)
 		{titulo:"(opcional) Ícone que será utilizado na apresentação da prancha:",id:"Eicone_prancha",size:"50",value:i.icone_prancha,tipo:"text",div:""},
 		{titulo:"Extensão geográfica (xmin ymin xmax ymax):",id:"Emapext_prancha",size:"30",value:i.mapext_prancha,tipo:"text",div:""}
 		]
-	}
-	var ins = ""
-	ins += core_geraLinhas(param)
-	ins += "<input type=hidden value='"+i.ordem_prancha+"' id='Eordem_prancha' />"
+	};
+	var ins = "";
+	ins += core_geraLinhas(param);
+	ins += "<input type=hidden value='"+i.ordem_prancha+"' id='Eordem_prancha' />";
 	
 	return(ins)
 }
@@ -358,47 +356,48 @@ function montaDivAtlas(i)
 		{titulo:"(opcional) Ícone que será utilizado na montagem da lista de todos os Atlas:",id:"Eicone_atlas",size:"50",value:i.icone_atlas,tipo:"text",div:""},
 		{titulo:"(opcional) Template HTML (se não for especificado, será usado o default do i3geo. Utilize o caminho completo do arquivo html no servidor):",id:"Etemplate_atlas",size:"50",value:i.template_atlas,tipo:"text",div:""}
 		]
-	}
-	var ins = ""
-	ins += core_geraLinhas(param)
-	ins += "Prancha inicial (será mostrada quando iniciar o atlas):<br>"
-	ins += "<div id=comboPranchaIni ></div><br>"
-	ins += "Tipo da apresentação das guias:<br>"
-	ins += "<select  id='Etipoguias_atlas' />"
-	ins += "<option value='' >---</option>"
-	ins += "<option value='automatica' "
+	};
+	var ins = "";
+	ins += core_geraLinhas(param);
+	ins += "Prancha inicial (será mostrada quando iniciar o atlas):<br>";
+	ins += "<div id=comboPranchaIni ></div><br>";
+	ins += "Tipo da apresentação das guias:<br>";
+	ins += "<select  id='Etipoguias_atlas' />";
+	ins += "<option value='' >---</option>";
+	ins += "<option value='automatica' ";
 	if (i.tipoguias_atlas == "automatica"){ins += "selected";}
-	ins += " >automática</option>"
-	ins += "<option value='combo' "
+	ins += " >automática</option>";
+	ins += "<option value='combo' ";
 	if (i.tipoguias_atlas == "combo"){ins += "selected";}
-	ins += " >combo</option>"
-	ins += "<option value='expandida' "
+	ins += " >combo</option>";
+	ins += "<option value='expandida' ";
 	if (i.tipoguias_atlas == "expandida"){ins += "selected";}
-	ins += " >expandida</option></select><br><br>"
-	ins += "Publicado (os não publicados são mostrados apenas para os usuários administradores)?<br>"
-	ins += "<select id='Epublicado_atlas' >"
-	ins += core_combosimnao(i.publicado_atlas)
-	ins += "</select>"
-	ins += "<input type=hidden value='"+i.ordem_atlas+"' id='Eordem_atlas' />"
+	ins += " >expandida</option></select><br><br>";
+	ins += "Publicado (os não publicados são mostrados apenas para os usuários administradores)?<br>";
+	ins += "<select id='Epublicado_atlas' >";
+	ins += core_combosimnao(i.publicado_atlas);
+	ins += "</select>";
+	ins += "<input type=hidden value='"+i.ordem_atlas+"' id='Eordem_atlas' />";
 
-	return(ins)
+	return(ins);
 }
 function sobeDesce(movimento,tipo,id)
 {
+	var movimenta = null;
 	if(tipo == "atlas")
 	{
-		var no = tree.getNodeByProperty("id_atlas",id)
-		var movimenta = core_movimentaNo(movimento,no)
+		var no = tree.getNodeByProperty("id_atlas",id);
+		movimenta = core_movimentaNo(movimento,no);
 	}
 	if(tipo == "prancha")
 	{
-		var no = tree.getNodeByProperty("id_prancha",id)
-		var movimenta = core_movimentaNo(movimento,no)
+		var no = tree.getNodeByProperty("id_prancha",id);
+		movimenta = core_movimentaNo(movimento,no);
 	}
 	if(tipo == "tema")
 	{
-		var no = tree.getNodeByProperty("id_tema",id)
-		var movimenta = core_movimentaNo(movimento,no)
+		var no = tree.getNodeByProperty("id_tema",id);
+		movimenta = core_movimentaNo(movimento,no);
 	}
 	var callback =
 	{
@@ -407,12 +406,12 @@ function sobeDesce(movimento,tipo,id)
   		failure:core_handleFailure,
   		argument: { foo:"foo", bar:"bar" }
 	};
-	if (movimenta)
+	if(movimenta)
 	{
 		var sUrl = "../php/atlas.php?funcao=movimentaNo&tipo="+tipo+"&movimento="+movimento+"&id="+id;		
 		core_carregando("ativa");
 		core_carregando(" modificando a ordem no banco de dados");
-		core_makeRequest(sUrl,callback)
+		core_makeRequest(sUrl,callback);
 	}
 }
 /*
@@ -429,22 +428,25 @@ Exclui um elemento do atlas
 function excluir(tipo,id)
 {
 	var mensagem = " excluindo o registro do id= "+id;
+	var no = null;
+	var sUrl = null;
 	if(tipo == "atlas")
 	{
-		var no = tree.getNodeByProperty("id_atlas",id)
-		var sUrl = "../php/atlas.php?funcao=excluirAtlas&id="+id;
+		no = tree.getNodeByProperty("id_atlas",id);
+		sUrl = "../php/atlas.php?funcao=excluirAtlas&id="+id;
 	}
 	if(tipo == "prancha")
 	{
-		var no = tree.getNodeByProperty("id_prancha",id)
-		var sUrl = "../php/atlas.php?funcao=excluirPrancha&id="+id;
+		no = tree.getNodeByProperty("id_prancha",id);
+		sUrl = "../php/atlas.php?funcao=excluirPrancha&id="+id;
 	}
 	if(tipo == "tema")
 	{
-		var no = tree.getNodeByProperty("id_tema",id)
-		var sUrl = "../php/atlas.php?funcao=excluirTema&id="+id;
+		no = tree.getNodeByProperty("id_tema",id);
+		sUrl = "../php/atlas.php?funcao=excluirTema&id="+id;
 	}
-	core_excluiNoTree(sUrl,no,mensagem)
+	if(sUrl)
+	{core_excluiNoTree(sUrl,no,mensagem);}
 }
 /*
 Function: adicionarTema
@@ -455,21 +457,20 @@ Adiciona um novo tema
 */
 function adicionarTema(id)
 {
-	var mensagem = " adicionando tema...";
-	var no = tree.getNodeByProperty("id_prancha",id)
+	var no = tree.getNodeByProperty("id_prancha",id);
 	var sUrl = "../php/atlas.php?funcao=alterarTema&id_prancha="+id;
 	var callback =
 	{
     	success: function(oResponse)
 		{
 			var dados = YAHOO.lang.JSON.parse(oResponse.responseText);
-			adicionaNosTemas(no,dados,true)
+			adicionaNosTemas(no,dados,true);
 			editar('tema',dados[dados.length-1].id_tema);
 		},
   		failure:core_handleFailure,
   		argument: { foo:"foo", bar:"bar" }
 	};
-	core_makeRequest(sUrl,callback)
+	core_makeRequest(sUrl,callback);
 }
 /*
 Function: adicionarPrancha
@@ -480,21 +481,20 @@ Adiciona uma nova prancha
 */
 function adicionarPrancha(id)
 {
-	var mensagem = " adicionando prancha...";
-	var no = tree.getNodeByProperty("id_atlas",id)
+	var no = tree.getNodeByProperty("id_atlas",id);
 	var sUrl = "../php/atlas.php?funcao=alterarPrancha&id_atlas="+id;
 	var callback =
 	{
     	success: function(oResponse)
 		{
-			var dados = YAHOO.lang.JSON.parse(oResponse.responseText)
-			adicionaNosPranchas(no,dados,true)
+			var dados = YAHOO.lang.JSON.parse(oResponse.responseText);
+			adicionaNosPranchas(no,dados,true);
 			editar('prancha',dados[dados.length-1].id_prancha);
 		},
   		failure:core_handleFailure,
   		argument: { foo:"foo", bar:"bar" }
 	};
-	core_makeRequest(sUrl,callback)
+	core_makeRequest(sUrl,callback);
 }
 /*
 Function: gravaDados
@@ -509,29 +509,30 @@ Altera dados de um elemento do Atlas
 */
 function gravaDados(tipo,id)
 {
+	var campos = null;
+	var par = null;
+	var prog = null;
 	if(tipo == "atlas")
 	{
-		var campos = new Array("publicado_atlas","ordem_atlas","basemapfile_atlas","desc_atlas","h_atlas","w_atlas","icone_atlas","link_atlas","pranchadefault_atlas","template_atlas","tipoguias_atlas","titulo_atlas")
-		var par = "&id_atlas="+id
-		var prog = "../php/atlas.php?funcao=alterarAtlas"
+		campos = new Array("publicado_atlas","ordem_atlas","basemapfile_atlas","desc_atlas","h_atlas","w_atlas","icone_atlas","link_atlas","pranchadefault_atlas","template_atlas","tipoguias_atlas","titulo_atlas");
+		par = "&id_atlas="+id;
+		prog = "../php/atlas.php?funcao=alterarAtlas";
 	}
 	if(tipo == "prancha")
 	{
-		var campos = new Array("ordem_prancha","desc_prancha","h_prancha","icone_prancha","link_prancha","mapext_prancha","titulo_prancha","w_prancha");
-		var par = "&id_prancha="+id;
-		var prog = "../php/atlas.php?funcao=alterarPrancha"
+		campos = new Array("ordem_prancha","desc_prancha","h_prancha","icone_prancha","link_prancha","mapext_prancha","titulo_prancha","w_prancha");
+		par = "&id_prancha="+id;
+		prog = "../php/atlas.php?funcao=alterarPrancha";
 	}
 	if(tipo == "tema")
 	{
-		var campos = new Array("codigo_tema","ordem_tema","ligado_tema");
-		var par = "&id_tema="+id;
-		var prog = "../php/atlas.php?funcao=alterarTema"
+		campos = new Array("codigo_tema","ordem_tema","ligado_tema");
+		par = "&id_tema="+id;
+		prog = "../php/atlas.php?funcao=alterarTema";
 	}
-	for (i=0;i<campos.length;i++)
-	{par += "&"+campos[i]+"="+($i("E"+campos[i]).value)}
-	core_carregando("ativa");
-	core_carregando(" gravando o registro do id= "+id);
-	var sUrl = prog+par;
+	for (var i=0;i<campos.length;i++)
+	{par += "&"+campos[i]+"="+($i("E"+campos[i]).value);}
+
 	var callback =
 	{
   		success:function(o)
@@ -541,28 +542,28 @@ function gravaDados(tipo,id)
   				if(YAHOO.lang.JSON.parse(o.responseText) == "erro")
   				{
   					core_carregando("<span style=color:red >Não foi possível excluir. Verifique se não existem menus vinculados a este tema</span>");
-  					setTimeout("core_carregando('desativa')",3000)
+  					setTimeout("core_carregando('desativa')",3000);
   				}
   				else
   				{
   					if(tipo == "atlas")
   					{
-  						var no = tree.getNodeByProperty("id_atlas",id)
-  						no.getContentEl().getElementsByTagName("span")[0].innerHTML = document.getElementById("Etitulo_atlas").value
+  						var no = tree.getNodeByProperty("id_atlas",id);
+  						no.getContentEl().getElementsByTagName("span")[0].innerHTML = document.getElementById("Etitulo_atlas").value;
 						no.getContentEl().getElementsByTagName("span")[0].style.color = "";
   						no.html = no.getContentEl().innerHTML;
   					}
   					if(tipo == "prancha")
   					{
-  						var no = tree.getNodeByProperty("id_prancha",id)
-  						no.getContentEl().getElementsByTagName("span")[0].innerHTML = document.getElementById("Etitulo_prancha").value
+  						var no = tree.getNodeByProperty("id_prancha",id);
+  						no.getContentEl().getElementsByTagName("span")[0].innerHTML = document.getElementById("Etitulo_prancha").value;
 						no.getContentEl().getElementsByTagName("span")[0].style.color = "";
   						no.html = no.getContentEl().innerHTML;
   					}
   					if(tipo == "tema")
   					{
-  						var no = tree.getNodeByProperty("id_tema",id)
-  						no.getContentEl().getElementsByTagName("span")[0].innerHTML = document.getElementById("Ecodigo_tema").value
+  						var no = tree.getNodeByProperty("id_tema",id);
+  						no.getContentEl().getElementsByTagName("span")[0].innerHTML = document.getElementById("Ecodigo_tema").value;
 						no.getContentEl().getElementsByTagName("span")[0].style.color = "";
   						no.html = no.getContentEl().innerHTML;
   					}
@@ -575,8 +576,13 @@ function gravaDados(tipo,id)
   		},
   		failure:core_handleFailure,
   		argument: { foo:"foo", bar:"bar" }
-	}; 
-	core_makeRequest(sUrl,callback,'POST')
+	};
+	if(prog && par){
+		core_carregando("ativa");
+		core_carregando(" gravando o registro do id= "+id);
+		var sUrl = prog+par;	
+		core_makeRequest(sUrl,callback,'POST');
+	}
 }
 /*
 Function: abreAtlas

@@ -47,7 +47,7 @@ $id_subgrupo = "";
 try{
 	var u = window.location.href.split("?")[1];
 	u = u.split("&");
-	for(i=0;i<u.length;i++){
+	for(var i=0;i<u.length;i++){
 		var p = u[i].split("=");
 		eval("$"+p[0]+"='"+p[1]+"';");
 	}
@@ -63,28 +63,28 @@ function initMenu()
 	var editorDeMenus = function()
 	{
 		if($i("editor_bd")){return;}
-		core_montaEditor("","600px","500px","pegaMenus")
-		$i("editor_bd").innerHTML = '<input type=button id=adicionaNovoMenu value="Adicionar um novo menu" style="left:-5px;" /><br><br><div id="tabela" style="left:-5px;"> </div>'
-		initEditorMenu()
+		core_montaEditor("","600px","500px","pegaMenus");
+		$i("editor_bd").innerHTML = '<input type=button id=adicionaNovoMenu value="Adicionar um novo menu" style="left:-5px;" /><br><br><div id="tabela" style="left:-5px;"> </div>';
+		initEditorMenu();
 	};
 	var editorDeGrupos = function()
 	{
 		if($i("editor_bd")){return;}
-		core_montaEditor("","600px","500px")
-		$i("editor_bd").innerHTML = '<p class=paragrafo >Clique nas células da tabela para editar a característica de cada item. Finalize com "enter". Após editar, salve o item.</p><p class=paragrafo ><input type=button id=adicionaNovoGrupo value="Adicionar um novo grupo" style="left:-5px;" /></p><p><br><div id="tabela" style="left:-5px;"> </div>'
-		initEditorGrupos()
+		core_montaEditor("","600px","500px");
+		$i("editor_bd").innerHTML = '<p class=paragrafo >Clique nas células da tabela para editar a característica de cada item. Finalize com "enter". Após editar, salve o item.</p><p class=paragrafo ><input type=button id=adicionaNovoGrupo value="Adicionar um novo grupo" style="left:-5px;" /></p><p><br><div id="tabela" style="left:-5px;"> </div>';
+		initEditorGrupos();
 	};
 	var editorDeSubGrupos = function()
 	{
 		if($i("editor_bd")){return;}
-		core_montaEditor("","600px","500px")
-		$i("editor_bd").innerHTML = '<p class=paragrafo >Clique nas células da tabela para editar a característica de cada item. Finalize com "enter". Após editar, salve o item.</p><p class=paragrafo ><input type=button id=adicionaNovoSubGrupo value="Adicionar um novo sub-grupo" style="left:-5px;" /></p><br><div id="tabela" style="left:-5px;"> </div>'
-		initEditorSubGrupos()
+		core_montaEditor("","600px","500px");
+		$i("editor_bd").innerHTML = '<p class=paragrafo >Clique nas células da tabela para editar a característica de cada item. Finalize com "enter". Após editar, salve o item.</p><p class=paragrafo ><input type=button id=adicionaNovoSubGrupo value="Adicionar um novo sub-grupo" style="left:-5px;" /></p><br><div id="tabela" style="left:-5px;"> </div>';
+		initEditorSubGrupos();
 	};
 
-	var botao1 = new YAHOO.widget.Button("botaoEditorMenu",{ onclick: { fn: editorDeMenus } });
-	var botao2 = new YAHOO.widget.Button("botaoEditorGrupo",{ onclick: { fn: editorDeGrupos } });
-	var botao3 = new YAHOO.widget.Button("botaoEditorSubGrupo",{ onclick: { fn: editorDeSubGrupos } });
+	new YAHOO.widget.Button("botaoEditorMenu",{ onclick: { fn: editorDeMenus } });
+	new YAHOO.widget.Button("botaoEditorGrupo",{ onclick: { fn: editorDeGrupos } });
+	new YAHOO.widget.Button("botaoEditorSubGrupo",{ onclick: { fn: editorDeSubGrupos } });
 
 	core_carregando("ativa");
 	core_ativaPainelAjuda("ajuda","botaoAjuda");
@@ -102,7 +102,7 @@ function pegaMenus()
 	try
 	{YAHOO.util.Event.removeListener(YAHOO.example.container.panelEditor.close, "click");}
 	catch(e){}
-	core_pegaDados("buscando menus...","../php/menutemas.php?funcao=pegaMenus2&idioma="+idiomaSel(),"montaArvore")
+	core_pegaDados("buscando menus...","../php/menutemas.php?funcao=pegaMenus2&idioma="+idiomaSel(),"montaArvore");
 }
 /*
 Function: montaArvore
@@ -120,9 +120,6 @@ function montaArvore(dados)
 		tree = "";
 		function changeIconMode()
 		{
-			var newVal = parseInt(this.value);
-			if (newVal != currentIconMode)
-			{currentIconMode = newVal;}
 			buildTree();
 		}
         function loadNodeData(node, fnLoadComplete)
@@ -136,8 +133,8 @@ function montaArvore(dados)
 			{
                 success: function(oResponse)
                 {
-                    var dados = YAHOO.lang.JSON.parse(oResponse.responseText)
-					montaNosGrupos(node.data.id_menu,node,dados,true)
+                    var dados = YAHOO.lang.JSON.parse(oResponse.responseText);
+					montaNosGrupos(node.data.id_menu,node,dados,true);
                     oResponse.argument.fnLoadComplete();
                 },
                 failure: function(oResponse)
@@ -156,7 +153,7 @@ function montaArvore(dados)
         function buildTree()
         {
 			tree = new YAHOO.widget.TreeView("arvoreMenus");
-			tree.setDynamicLoad(loadNodeData, currentIconMode);
+			tree.setDynamicLoad(loadNodeData, 1);
 			var root = tree.getRoot();
 			var tempNode = new YAHOO.widget.TextNode('', root, false);
 			tempNode.isLeaf = true;
@@ -164,7 +161,7 @@ function montaArvore(dados)
         }
     	buildTree();
 	}();
-   	montaNosMenus(dados)
+   	montaNosMenus(dados);
    	tree.draw();	
 }
 function temaIconMode()
@@ -179,20 +176,21 @@ function temaIconMode()
 function montaNosMenus(dados,redesenha)
 {
 	//verifica se foi passado um id pela url
-	var root = tree.getRoot();
+	var root = tree.getRoot(),
+		tempNode = null;
 	for (var i=0, j=dados.length; i<j; i++)
 	{
 		if($id_menu == "" || $id_menu == dados[i].id_menu){
 			var cor = "";
 			if(dados[i].publicado_menu == "NAO")
-			var cor = "style='color:red'";
-			var conteudo = "<b>&nbsp;<span "+cor+" >"+dados[i].nome_menu+"</span>"
+			cor = "style='color:red'";
+			var conteudo = "<b>&nbsp;<span "+cor+" >"+dados[i].nome_menu+"</span>";
 			var d = {html:conteudo,id_menu:dados[i].id_menu,tipo:"menu"};
-			var tempNode = new YAHOO.widget.HTMLNode(d, root, false,true);
+			tempNode = new YAHOO.widget.HTMLNode(d, root, false,true);
 		}
 	}
 	if(redesenha){tree.draw();}
-	if($id_menu !== "")
+	if($id_menu !== "" && tempNode)
 	{tempNode.expand();}
 }
 //
@@ -207,7 +205,8 @@ Monta os nós com os grupos e permite abrir os subgrupos
 */
 function montaNosGrupos(idmenu,no,dados,redesenha)
 {
-    //pega os temas que ficam na raiz da árvore
+    var tempNodeR = null;
+	//pega os temas que ficam na raiz da árvore
 	if(!tree.getNodeByProperty("etiquetaTemasRaiz","menu_"+idmenu))
 	{montaTemasRaiz(no,dados,true);}
 	//pega os grupos do menu
@@ -215,13 +214,13 @@ function montaNosGrupos(idmenu,no,dados,redesenha)
 	{return;}
 	if(!tree.getNodeByProperty("etiquetaGrupo","menu_"+idmenu))
     {
-		var temp = "menu_"+idmenu
-		var d = {tipo:"etiqueta","etiquetaGrupo":temp,html:"<i style=color:gray >Grupos</i>"}
-		var tempNodeR = new YAHOO.widget.HTMLNode(d, no, false,true);
+		var temp = "menu_"+idmenu;
+		var d = {tipo:"etiqueta","etiquetaGrupo":temp,html:"<i style=color:gray >Grupos</i>"};
+		tempNodeR = new YAHOO.widget.HTMLNode(d, no, false,true);
 		tempNodeR.isLeaf = false;
 		if($id_grupo !== "" || $id_menu !== "")
 		{tempNodeR.expand();}
-		var conteudo = "<span onclick=\"novoGrupo('"+idmenu+"')\" style=\"cursor:pointer;\" ><img style=\"position:relative;top:2px\" src=\"../imagens/05.png\" /><i style=color:gray > Adicionar um novo</i></span>"
+		var conteudo = "<span onclick=\"novoGrupo('"+idmenu+"')\" style=\"cursor:pointer;\" ><img style=\"position:relative;top:2px\" src=\"../imagens/05.png\" /><i style=color:gray > Adicionar um novo</i></span>";
 		var d = {html:conteudo};
 		var tempNode = new YAHOO.widget.HTMLNode(d, tempNodeR, false,true);
 		tempNode.isLeaf = true;
@@ -231,12 +230,14 @@ function montaNosGrupos(idmenu,no,dados,redesenha)
 	for (var i=0, j=dados.grupos.length; i<j; i++)
 	{
 		if($id_grupo == "" || $id_grupo == dados.grupos[i].id_n1){
-			var conteudo = montaConteudoNo(dados.grupos[i].id_n1,dados.grupos[i].publicado,dados.grupos[i].nome_grupo,"grupo")
-			var d = {idmenu:idmenu,html:conteudo,id_n1:dados.grupos[i].id_n1,tipo:"grupo"}
-			var tempNode = new YAHOO.widget.HTMLNode(d, tempNodeR, false,true);
-			tempNode.setDynamicLoad(loadSubgruposData, temaIconMode, idmenu);
-			if($id_grupo !== "")
-			{tempNode.expand();}			
+			var conteudo = montaConteudoNo(dados.grupos[i].id_n1,dados.grupos[i].publicado,dados.grupos[i].nome_grupo,"grupo");
+			var d = {idmenu:idmenu,html:conteudo,id_n1:dados.grupos[i].id_n1,tipo:"grupo"};
+			if(tempNodeR){
+				var tempNode = new YAHOO.widget.HTMLNode(d, tempNodeR, false,true);
+				tempNode.setDynamicLoad(loadSubgruposData, temaIconMode, idmenu);
+				if($id_grupo !== "")
+				{tempNode.expand();}		
+			}
 		}
 	}
 	if(redesenha){tree.draw();}
@@ -249,8 +250,8 @@ function loadSubgruposData(node, fnLoadComplete)
 	{
 		success: function(oResponse)
 		{
-			var dados = YAHOO.lang.JSON.parse(oResponse.responseText)
-			montaNosSubgrupos(idmenu,node,dados,true)
+			var dados = YAHOO.lang.JSON.parse(oResponse.responseText);
+			montaNosSubgrupos(idmenu,node,dados,true);
 			oResponse.argument.fnLoadComplete();
 		},
 		failure: function(oResponse)
@@ -274,8 +275,8 @@ function loadTemasData(node, fnLoadComplete)
 	{
 		success: function(oResponse)
 		{
-			var dados = YAHOO.lang.JSON.parse(oResponse.responseText)
-			montaTemas(idmenu,node,dados,false)
+			var dados = YAHOO.lang.JSON.parse(oResponse.responseText);
+			montaTemas(idmenu,node,dados,false);
 			oResponse.argument.fnLoadComplete();
 		},
 		failure: function(oResponse)
@@ -301,20 +302,21 @@ Monta os nós com os temas
 */
 function montaNosSubgrupos(idmenu,no,dados,redesenha)
 {
-    if(!tree.getNodeByProperty("etiquetaTemasGrupo","grupo_"+no.data.id_n1))
-	montaTemasRaizGrupo(idmenu,no,dados,true)
+    var tempNodeR = null;
+	if(!tree.getNodeByProperty("etiquetaTemasGrupo","grupo_"+no.data.id_n1))
+	montaTemasRaizGrupo(idmenu,no,dados,true);
     if(idmenu == undefined)
 	{return;}	
 	if(!tree.getNodeByProperty("etiquetaTemasSubGrupo",no.data.id_n1))
 	{
-		var d = {tipo:"etiqueta",etiquetaTemasSubGrupo:no.data.id_n1,html:"<i style=color:gray >Sub-grupos</i>"}
-		var tempNodeR = new YAHOO.widget.HTMLNode(d, no, false,true);
+		var d = {tipo:"etiqueta",etiquetaTemasSubGrupo:no.data.id_n1,html:"<i style=color:gray >Sub-grupos</i>"};
+		tempNodeR = new YAHOO.widget.HTMLNode(d, no, false,true);
 		tempNodeR.isLeaf = false;
 		if($id_subgrupo !== "" || $id_grupo !== "")
 		{tempNodeR.expand();}
 		
-		var conteudo = "<span style=\"cursor:pointer;\" onclick=\"novoSubGrupo('"+idmenu+"','"+no.data.id_n1+"')\" ><img style=\"position:relative;top:2px\" src=\"../imagens/05.png\" /><i style=color:gray > Adicionar um novo</i></span>"
-		var d = {html:conteudo}
+		var conteudo = "<span style=\"cursor:pointer;\" onclick=\"novoSubGrupo('"+idmenu+"','"+no.data.id_n1+"')\" ><img style=\"position:relative;top:2px\" src=\"../imagens/05.png\" /><i style=color:gray > Adicionar um novo</i></span>";
+		var d = {html:conteudo};
 		var tempNode = new YAHOO.widget.HTMLNode(d, tempNodeR, false,true);
 		tempNode.isLeaf = true;
 		if($id_subgrupo !== "")
@@ -322,9 +324,9 @@ function montaNosSubgrupos(idmenu,no,dados,redesenha)
 	}
 	for (var i=0, j=dados.subgrupos.length; i<j; i++)
 	{
-		if($id_subgrupo == "" || $id_subgrupo == dados.subgrupos[i].id_n2){
-			var conteudo = montaConteudoNo(dados.subgrupos[i].id_n2,dados.subgrupos[i].publicado,dados.subgrupos[i].nome_subgrupo,"subgrupo")
-			var d = {idmenu:idmenu,html:conteudo,id_n2:dados.subgrupos[i].id_n2,tipo:"subgrupo"}
+		if(tempNodeR && $id_subgrupo == "" || $id_subgrupo == dados.subgrupos[i].id_n2){
+			var conteudo = montaConteudoNo(dados.subgrupos[i].id_n2,dados.subgrupos[i].publicado,dados.subgrupos[i].nome_subgrupo,"subgrupo");
+			var d = {idmenu:idmenu,html:conteudo,id_n2:dados.subgrupos[i].id_n2,tipo:"subgrupo"};
 			var tempNode = new YAHOO.widget.HTMLNode(d, tempNodeR, false,true);
 			tempNode.setDynamicLoad(loadTemasData, temaIconMode);
 			if($id_subgrupo !== "")
@@ -335,78 +337,80 @@ function montaNosSubgrupos(idmenu,no,dados,redesenha)
 }
 function montaTemas(idmenu,no,dados,redesenha)
 {
+	var tempNodeR = null;
 	if(!tree.getNodeByProperty("etiquetaTemas",no.data.id_n2))
 	{
-		var d = {tipo:"etiqueta",etiquetaTemas:no.data.id_n2,html:"<i style=color:gray >Temas</i>"}
-		var tempNodeR = new YAHOO.widget.HTMLNode(d, no, false,true);
+		var d = {tipo:"etiqueta",etiquetaTemas:no.data.id_n2,html:"<i style=color:gray >Temas</i>"};
+		tempNodeR = new YAHOO.widget.HTMLNode(d, no, false,true);
 		tempNodeR.isLeaf = false;
-		
-		var conteudo = "<span onclick=\"novoTema('"+idmenu+"','"+no.data.id_n2+"')\" style=\"cursor:pointer;\"><img style=\"position:relative;top:2px\" src=\"../imagens/05.png\" /><i style=color:gray > Adicionar um novo</i></span>"
-		var d = {html:conteudo}
+		var conteudo = "<span onclick=\"novoTema('"+idmenu+"','"+no.data.id_n2+"')\" style=\"cursor:pointer;\"><img style=\"position:relative;top:2px\" src=\"../imagens/05.png\" /><i style=color:gray > Adicionar um novo</i></span>";
+		var d = {html:conteudo};
 		var tempNode = new YAHOO.widget.HTMLNode(d, tempNodeR, false,true);
 		tempNode.isLeaf = true;		
 	}
-	for (i=0, j=dados.length; i<j; i++)
+	for (var i=0, j=dados.length; i<j; i++)
 	{
 		var conteudo = montaConteudoNo(dados[i].id_n3,dados[i].publicado,dados[i].nome_tema,"tema");
-		var d = {html:conteudo,id_n3:dados[i].id_n3,tipo:"tema"}
+		var d = {html:conteudo,id_n3:dados[i].id_n3,tipo:"tema"};
 		var tempNode = new YAHOO.widget.HTMLNode(d, tempNodeR, false,true);
 		tempNode.isLeaf = true;
 	}
 	if(redesenha){tree.draw();}
 }
 function montaConteudoNo(id,publicado,nome,tipo){
-	var conteudo = "&nbsp;<img style=\"position:relative;cursor:pointer;top:0px\" onclick=\"sobeDesce('sobe','"+tipo+"','"+id+"')\" title=sobe src=\"../imagens/34.png\" />"
-	conteudo += "&nbsp;<img style=\"position:relative;cursor:pointer;top:0px\" onclick=\"sobeDesce('desce','"+tipo+"','"+id+"')\" title=desce src=\"../imagens/33.png\" />"
-	conteudo += "&nbsp;<img style=\"position:relative;cursor:pointer;top:0px\" onclick=\"excluir('"+tipo+"','"+id+"')\" title=excluir width='10px' heigth='10px' src=\"../imagens/01.png\" />"
-	conteudo += "&nbsp;<img style=\"position:relative;cursor:pointer;top:0px\" onclick=\"editar('"+tipo+"','"+id+"')\" title=editar width='10px' heigth='10px' src=\"../imagens/06.png\" />&nbsp;"
+	var conteudo = "&nbsp;<img style=\"position:relative;cursor:pointer;top:0px\" onclick=\"sobeDesce('sobe','"+tipo+"','"+id+"')\" title=sobe src=\"../imagens/34.png\" />";
+	conteudo += "&nbsp;<img style=\"position:relative;cursor:pointer;top:0px\" onclick=\"sobeDesce('desce','"+tipo+"','"+id+"')\" title=desce src=\"../imagens/33.png\" />";
+	conteudo += "&nbsp;<img style=\"position:relative;cursor:pointer;top:0px\" onclick=\"excluir('"+tipo+"','"+id+"')\" title=excluir width='10px' heigth='10px' src=\"../imagens/01.png\" />";
+	conteudo += "&nbsp;<img style=\"position:relative;cursor:pointer;top:0px\" onclick=\"editar('"+tipo+"','"+id+"')\" title=editar width='10px' heigth='10px' src=\"../imagens/06.png\" />&nbsp;";
 	var cor = "";
 	if(publicado == "NAO")
-	{var cor = "style='color:red'";}
+	{cor = "style='color:red'";}
 	if(nome)
-	conteudo += "<span "+cor+" >"+nome+"<span style='color:gray'> id: "+id+"</span></span>"
+	conteudo += "<span "+cor+" >"+nome+"<span style='color:gray'> id: "+id+"</span></span>";
 	else
-	conteudo += "<span "+cor+" > ??? vc precisa editar esse nó</span>"
+	conteudo += "<span "+cor+" > ??? vc precisa editar esse nó</span>";
 	return conteudo;
 }
 function montaTemasRaiz(no,dados,redesenha)
 {
-	var resultado = new Array();
+	var resultado = new Array(),
+	tempNodeR = null;
 	if(no.data.id_menu == undefined)
 	{return;}
 	if(!tree.getNodeByProperty("etiquetaTemasRaiz","menu_"+no.data.id_menu))
     {
 		var temp = "menu_"+no.data.id_menu;
-		var d = {id_menu:no.data.id_menu,tipo:"etiqueta",etiquetaTemasRaiz:temp,html:"<i style=color:gray >Temas na raiz do menu</i>"}
-		var tempNodeR = new YAHOO.widget.HTMLNode(d, no, false,true);
+		var d = {id_menu:no.data.id_menu,tipo:"etiqueta",etiquetaTemasRaiz:temp,html:"<i style=color:gray >Temas na raiz do menu</i>"};
+		tempNodeR = new YAHOO.widget.HTMLNode(d, no, false,true);
 		tempNodeR.isLeaf = false;
-		var d = {tipo:"etiqueta",html:"<span style=\"cursor:pointer;\" onclick=\"novoTemaRaiz('"+no.data.id_menu+"')\" ><img style=\"position:relative;top:2px\" src=\"../imagens/05.png\" /><i style=color:gray >Adicionar um novo</i></span>"}
+		var d = {tipo:"etiqueta",html:"<span style=\"cursor:pointer;\" onclick=\"novoTemaRaiz('"+no.data.id_menu+"')\" ><img style=\"position:relative;top:2px\" src=\"../imagens/05.png\" /><i style=color:gray >Adicionar um novo</i></span>"};
 		var tempNode = new YAHOO.widget.HTMLNode(d, tempNodeR, false,true);
 		tempNode.isLeaf = true;		
 	}	
 	for (var i=0, j=dados.raiz.length; i<j; i++)
 	{
-		var conteudo = "&nbsp;<img style=\"position:relative;cursor:pointer;top:0px\" onclick=\"sobeDesce('sobe','raizmenu','"+dados.raiz[i].id_raiz+"')\" title=sobe src=\"../imagens/34.png\" />"
-		conteudo += "&nbsp;<img style=\"position:relative;cursor:pointer;top:0px\" onclick=\"sobeDesce('desce','raizmenu','"+dados.raiz[i].id_raiz+"')\" title=desce src=\"../imagens/33.png\" />"
-		conteudo += "&nbsp;<img style=\"position:relative;cursor:pointer;top:0px\" onclick=\"excluir('raizmenu','"+dados.raiz[i].id_raiz+"')\" title=excluir width='10px' heigth='10px' src=\"../imagens/01.png\" />"
-		conteudo += "&nbsp;<img style=\"position:relative;cursor:pointer;top:0px\" onclick=\"editar('raizmenu','"+dados.raiz[i].id_raiz+"')\" title=editar width='10px' heigth='10px' src=\"../imagens/06.png\" />&nbsp;<span>"+dados.raiz[i].nome_tema+"</span>"
-		var d = {html:conteudo,id_raiz:dados.raiz[i].id_raiz,tipo:"raizmenu"}
+		var conteudo = "&nbsp;<img style=\"position:relative;cursor:pointer;top:0px\" onclick=\"sobeDesce('sobe','raizmenu','"+dados.raiz[i].id_raiz+"')\" title=sobe src=\"../imagens/34.png\" />";
+		conteudo += "&nbsp;<img style=\"position:relative;cursor:pointer;top:0px\" onclick=\"sobeDesce('desce','raizmenu','"+dados.raiz[i].id_raiz+"')\" title=desce src=\"../imagens/33.png\" />";
+		conteudo += "&nbsp;<img style=\"position:relative;cursor:pointer;top:0px\" onclick=\"excluir('raizmenu','"+dados.raiz[i].id_raiz+"')\" title=excluir width='10px' heigth='10px' src=\"../imagens/01.png\" />";
+		conteudo += "&nbsp;<img style=\"position:relative;cursor:pointer;top:0px\" onclick=\"editar('raizmenu','"+dados.raiz[i].id_raiz+"')\" title=editar width='10px' heigth='10px' src=\"../imagens/06.png\" />&nbsp;<span>"+dados.raiz[i].nome_tema+"</span>";
+		var d = {html:conteudo,id_raiz:dados.raiz[i].id_raiz,tipo:"raizmenu"};
 		var tempNode = new YAHOO.widget.HTMLNode(d, tempNodeR, false,true);
 		tempNode.isLeaf = true;
-		resultado.push(tempNode)
+		resultado.push(tempNode);
 	}
 	return resultado;
 }
 function montaTemasRaizGrupo(idmenu,no,dados,redesenha)
 {
-    var resultado = new Array();
+	var resultado = new Array(),
+	tempNodeR = null;
 	if(no.data.id_n1 == undefined)
 	{return;}	
 	if(!tree.getNodeByProperty("etiquetaTemasGrupo","grupo_"+no.data.id_n1))
     {
 		var temp = "grupo_"+no.data.id_n1;
 		var d = {etiquetaTemasGrupo:temp,tipo:"etiqueta",html:"<i style=color:gray >Temas na raiz do grupo:</i>"};
-		var tempNodeR = new YAHOO.widget.HTMLNode(d, no, false,true);
+		tempNodeR = new YAHOO.widget.HTMLNode(d, no, false,true);
 		tempNodeR.isLeaf = false;
 		var d = {tipo:"etiqueta",html:"<span onclick=\"novoTemaRaizGrupo('"+idmenu+"','"+no.data.id_n1+"')\" style=\"cursor:pointer;\" ><img style=\"position:relative;top:2px\" src=\"../imagens/05.png\" /><i style=color:gray >Adicionar um novo</i></span>"};
 		var tempNode = new YAHOO.widget.HTMLNode(d, tempNodeR, false,true);
@@ -418,7 +422,7 @@ function montaTemasRaizGrupo(idmenu,no,dados,redesenha)
 		var d = {html:conteudo,id_raiz:dados.raiz[i].id_raiz,tipo:"raizgrupo"};
 		var tempNode = new YAHOO.widget.HTMLNode(d, tempNodeR,false,true);
 		tempNode.isLeaf = true;
-		resultado.push(tempNode)
+		resultado.push(tempNode);
 	}
 	return resultado;	
 }
@@ -434,16 +438,16 @@ function novoTemaRaiz(id)
 	core_carregando("ativa");
 	var mensagem = " adicionando tema...";
 	core_carregando(mensagem);
-	var no = tree.getNodeByProperty("etiquetaTemasRaiz","menu_"+id)
+	var no = tree.getNodeByProperty("etiquetaTemasRaiz","menu_"+id);
 	var sUrl = "../php/arvore.php?funcao=adicionarTemaRaiz&id_menu="+id+"&idioma="+idiomaSel();
 	var callback =
 	{
     	success: function(oResponse)
 		{
-			var dados = YAHOO.lang.JSON.parse(oResponse.responseText)
+			var dados = YAHOO.lang.JSON.parse(oResponse.responseText);
 			dados = dados.raiz[0];
 			var conteudo = montaConteudoNo(dados.id_raiz,"SIM","","raizmenu");
-			var d = {html:conteudo,id_raiz:dados.id_raiz,tipo:"raizmenu"}
+			var d = {html:conteudo,id_raiz:dados.id_raiz,tipo:"raizmenu"};
 			var tempNode = new YAHOO.widget.HTMLNode(d, no, false,true);
 			tempNode.isLeaf = true;
 			tree.draw();
@@ -452,7 +456,7 @@ function novoTemaRaiz(id)
   		failure:core_handleFailure,
   		argument: { foo:"foo", bar:"bar" }
 	};
-	core_makeRequest(sUrl,callback)
+	core_makeRequest(sUrl,callback);
 }
 /*
 Function: novoTemaRaizGrupo
@@ -466,16 +470,16 @@ function novoTemaRaizGrupo(idmenu,id)
 	core_carregando("ativa");
 	var mensagem = " adicionando tema...";
 	core_carregando(mensagem);
-	var no = tree.getNodeByProperty("etiquetaTemasGrupo","grupo_"+id)
+	var no = tree.getNodeByProperty("etiquetaTemasGrupo","grupo_"+id);
 	var sUrl = "../php/arvore.php?funcao=adicionarTemaRaizGrupo&id_n1="+id+"&id_menu="+idmenu+"&idioma="+idiomaSel();
 	var callback =
 	{
     	success: function(oResponse)
 		{
-			var dados = YAHOO.lang.JSON.parse(oResponse.responseText)
+			var dados = YAHOO.lang.JSON.parse(oResponse.responseText);
 			dados = dados.raiz[0];
 			var conteudo = montaConteudoNo(dados.id_raiz,"SIM","","raizgrupo");
-			var d = {html:conteudo,id_raiz:dados.id_raiz,tipo:"raizgrupo"}
+			var d = {html:conteudo,id_raiz:dados.id_raiz,tipo:"raizgrupo"};
 			var tempNode = new YAHOO.widget.HTMLNode(d, no, false,true);
 			tempNode.isLeaf = true;
 			tree.draw();
@@ -484,7 +488,7 @@ function novoTemaRaizGrupo(idmenu,id)
   		failure:core_handleFailure,
   		argument: { foo:"foo", bar:"bar" }
 	};
-	core_makeRequest(sUrl,callback)
+	core_makeRequest(sUrl,callback);
 }
 /*
 Function: novoGrupo
@@ -503,11 +507,11 @@ function novoGrupo(id_menu)
 	{
     	success: function(oResponse)
 		{
-			var no = tree.getNodeByProperty("etiquetaGrupo","menu_"+id_menu)
-			var dados = YAHOO.lang.JSON.parse(oResponse.responseText)
+			var no = tree.getNodeByProperty("etiquetaGrupo","menu_"+id_menu);
+			var dados = YAHOO.lang.JSON.parse(oResponse.responseText);
 			dados = dados.grupos[0];
 			var conteudo = montaConteudoNo(dados.id_n1,"NAO","","grupo");
-			var d = {idmenu:id_menu,html:conteudo,id_n1:dados.id_n1,tipo:"grupo"}
+			var d = {idmenu:id_menu,html:conteudo,id_n1:dados.id_n1,tipo:"grupo"};
 			var tempNode = new YAHOO.widget.HTMLNode(d, no, false,true);
 			tempNode.isLeaf = false;
 			tempNode.setDynamicLoad(loadSubgruposData, temaIconMode, id_menu);
@@ -518,7 +522,7 @@ function novoGrupo(id_menu)
   		failure:core_handleFailure,
   		argument: { foo:"foo", bar:"bar" }
 	};
-	core_makeRequest(sUrl,callback)
+	core_makeRequest(sUrl,callback);
 }
 /*
 Function: novoSubGrupo
@@ -537,11 +541,11 @@ function novoSubGrupo(id_menu,id_n1)
 	{
     	success: function(oResponse)
 		{
-			var no = tree.getNodeByProperty("etiquetaTemasSubGrupo",id_n1)
-			var dados = YAHOO.lang.JSON.parse(oResponse.responseText)
+			var no = tree.getNodeByProperty("etiquetaTemasSubGrupo",id_n1);
+			var dados = YAHOO.lang.JSON.parse(oResponse.responseText);
 			dados = dados.subgrupos[0];
 			var conteudo = montaConteudoNo(dados.id_n2,dados.publicado,"","subgrupo");
-			var d = {idmenu:id_menu,html:conteudo,id_n2:dados.id_n2,tipo:"subgrupo"}
+			var d = {idmenu:id_menu,html:conteudo,id_n2:dados.id_n2,tipo:"subgrupo"};
 			var tempNode = new YAHOO.widget.HTMLNode(d, no, false,true);
 			tempNode.isLeaf = false;
 			tempNode.setDynamicLoad(loadTemasData, temaIconMode, id_menu);
@@ -552,7 +556,7 @@ function novoSubGrupo(id_menu,id_n1)
   		failure:core_handleFailure,
   		argument: { foo:"foo", bar:"bar" }
 	};
-	core_makeRequest(sUrl,callback)
+	core_makeRequest(sUrl,callback);
 }
 /*
 Function: novoTema
@@ -572,10 +576,10 @@ function novoTema(id_menu,id_n2)
     	success: function(oResponse)
 		{
 			var no = tree.getNodeByProperty("etiquetaTemas",id_n2);
-			var dados = YAHOO.lang.JSON.parse(oResponse.responseText)
+			var dados = YAHOO.lang.JSON.parse(oResponse.responseText);
 			dados = dados[0];
 			var conteudo = montaConteudoNo(dados.id_n3,dados.publicado,"","tema");
-			var d = {idmenu:id_menu,html:conteudo,id_n3:dados.id_n3,tipo:"tema"}
+			var d = {idmenu:id_menu,html:conteudo,id_n3:dados.id_n3,tipo:"tema"};
 			var tempNode = new YAHOO.widget.HTMLNode(d, no, false,true);
 			tempNode.isLeaf = true;
 			tree.draw();
@@ -585,38 +589,42 @@ function novoTema(id_menu,id_n2)
   		failure:core_handleFailure,
   		argument: { foo:"foo", bar:"bar" }
 	};
-	core_makeRequest(sUrl,callback)
+	core_makeRequest(sUrl,callback);
 }
 function excluir(tipo,id)
 {
-	var mensagem = " excluindo o registro do id= "+id;
+	var mensagem = " excluindo o registro do id= "+id,
+		no = null,
+		sUrl = null;
 	if(tipo == "raizgrupo" || tipo == "raizmenu")
 	{
-		var no = tree.getNodeByProperty("id_raiz",id)
-		var sUrl = "../php/arvore.php?funcao=excluir&id="+id+"&tabela=i3geoadmin_raiz&idioma="+idiomaSel();
+		no = tree.getNodeByProperty("id_raiz",id);
+		sUrl = "../php/arvore.php?funcao=excluir&id="+id+"&tabela=i3geoadmin_raiz&idioma="+idiomaSel();
 	}
 
 	if(tipo == "grupo")
 	{
-		var no = tree.getNodeByProperty("id_n1",id)
-		var sUrl = "../php/arvore.php?funcao=excluir&id="+id+"&tabela=i3geoadmin_n1&idioma="+idiomaSel();
+		no = tree.getNodeByProperty("id_n1",id);
+		sUrl = "../php/arvore.php?funcao=excluir&id="+id+"&tabela=i3geoadmin_n1&idioma="+idiomaSel();
 	}
 	if(tipo == "subgrupo")
 	{
-		var no = tree.getNodeByProperty("id_n2",id)
-		var sUrl = "../php/arvore.php?funcao=excluir&id="+id+"&tabela=i3geoadmin_n2&idioma="+idiomaSel();
+		no = tree.getNodeByProperty("id_n2",id);
+		sUrl = "../php/arvore.php?funcao=excluir&id="+id+"&tabela=i3geoadmin_n2&idioma="+idiomaSel();
 	}
 	if(tipo == "tema")
 	{
-		var no = tree.getNodeByProperty("id_n3",id)
-		var sUrl = "../php/arvore.php?funcao=excluir&id="+id+"&tabela=i3geoadmin_n3&idioma="+idiomaSel();
+		no = tree.getNodeByProperty("id_n3",id);
+		sUrl = "../php/arvore.php?funcao=excluir&id="+id+"&tabela=i3geoadmin_n3&idioma="+idiomaSel();
 	}
-	core_excluiNoTree(sUrl,no,mensagem)	
+	if(no && sUrl)
+	{core_excluiNoTree(sUrl,no,mensagem);}
 }
 function editar(tipo,id)
 {
 	core_carregando("ativa");
 	core_carregando(" buscando dados");
+	var sUrl = null;
 	var callback =
 	{
 		success:function(o)
@@ -626,34 +634,34 @@ function editar(tipo,id)
 				if(tipo == "grupo")
 				{
 					var dados = YAHOO.lang.JSON.parse(o.responseText)[0];
-					core_montaEditor("gravaDados('grupo','"+id+"')")
-					$i("editor_bd").innerHTML = montaDivGrupo(dados)
-					core_comboGrupos("comboGrupo","Eid_grupo",dados.id_grupo,"")
-					core_comboPerfis("comboPerfil","Eperfil_grupo","","registraPerfil(this.value,\"En1_perfil\")")
+					core_montaEditor("gravaDados('grupo','"+id+"')");
+					$i("editor_bd").innerHTML = montaDivGrupo(dados);
+					core_comboGrupos("comboGrupo","Eid_grupo",dados.id_grupo,"");
+					core_comboPerfis("comboPerfil","Eperfil_grupo","","registraPerfil(this.value,\"En1_perfil\")");
 				}
 				if(tipo == "subgrupo")
 				{
 					var dados = YAHOO.lang.JSON.parse(o.responseText)[0];
-					core_montaEditor("gravaDados('subgrupo','"+id+"')")
-					$i("editor_bd").innerHTML = montaDivSubGrupo(dados)
-					core_comboSubGrupos("comboSubGrupo","Eid_subgrupo",dados.id_subgrupo,"")
-					core_comboPerfis("comboPerfil","Eperfil_subgrupo","","registraPerfil(this.value,\"En2_perfil\")")
+					core_montaEditor("gravaDados('subgrupo','"+id+"')");
+					$i("editor_bd").innerHTML = montaDivSubGrupo(dados);
+					core_comboSubGrupos("comboSubGrupo","Eid_subgrupo",dados.id_subgrupo,"");
+					core_comboPerfis("comboPerfil","Eperfil_subgrupo","","registraPerfil(this.value,\"En2_perfil\")");
 				}
 				if(tipo == "tema")
 				{
 					var dados = YAHOO.lang.JSON.parse(o.responseText)[0];
-					core_montaEditor("gravaDados('tema','"+id+"')")
-					$i("editor_bd").innerHTML = montaDivTema(dados)
-					core_comboTemas("comboTema","Eid_tema",dados.id_tema,"")
-					core_comboPerfis("comboPerfil","Eperfil_tema","","registraPerfil(this.value,\"En3_perfil\")")
+					core_montaEditor("gravaDados('tema','"+id+"')");
+					$i("editor_bd").innerHTML = montaDivTema(dados);
+					core_comboTemas("comboTema","Eid_tema",dados.id_tema,"");
+					core_comboPerfis("comboPerfil","Eperfil_tema","","registraPerfil(this.value,\"En3_perfil\")");
 				}
 				if(tipo == "raizmenu" || tipo == "raizgrupo")
 				{
 					var dados = YAHOO.lang.JSON.parse(o.responseText)[0];
-					core_montaEditor("gravaDados('"+tipo+"','"+id+"')")
-					$i("editor_bd").innerHTML = montaDivRaiz(dados)
-					core_comboTemas("comboTema","Eid_tema",dados.id_tema,"")
-					core_comboPerfis("comboPerfil","Eperfil","","registraPerfil(this.value,\"Eperfil\")")
+					core_montaEditor("gravaDados('"+tipo+"','"+id+"')");
+					$i("editor_bd").innerHTML = montaDivRaiz(dados);
+					core_comboTemas("comboTema","Eid_tema",dados.id_tema,"");
+					core_comboPerfis("comboPerfil","Eperfil","","registraPerfil(this.value,\"Eperfil\")");
 				}
 				core_carregando("desativa");
 			}
@@ -663,80 +671,81 @@ function editar(tipo,id)
 		argument: { foo:"foo", bar:"bar" }
 	}; 
 	if(tipo == "grupo")
-	{var sUrl = "../php/arvore.php?funcao=pegaDadosGrupo&id="+id+"&idioma="+idiomaSel();}
+	{sUrl = "../php/arvore.php?funcao=pegaDadosGrupo&id="+id+"&idioma="+idiomaSel();}
 	if(tipo == "subgrupo")
-	{var sUrl = "../php/arvore.php?funcao=pegaDadosSubGrupo&id="+id+"&idioma="+idiomaSel();}
+	{sUrl = "../php/arvore.php?funcao=pegaDadosSubGrupo&id="+id+"&idioma="+idiomaSel();}
 	if(tipo == "tema")
-	{var sUrl = "../php/arvore.php?funcao=pegaDadosTema&id="+id+"&idioma="+idiomaSel();}
+	{sUrl = "../php/arvore.php?funcao=pegaDadosTema&id="+id+"&idioma="+idiomaSel();}
 	if(tipo == "raizmenu" || tipo == "raizgrupo")
-	{var sUrl = "../php/arvore.php?funcao=pegaDadosRaiz&id="+id+"&idioma="+idiomaSel();}
-	core_makeRequest(sUrl,callback)
+	{sUrl = "../php/arvore.php?funcao=pegaDadosRaiz&id="+id+"&idioma="+idiomaSel();}
+	if(sUrl)
+	{core_makeRequest(sUrl,callback);}
 }
 function montaDivGrupo(i)
 {
-	var ins = "<br>Escolha o grupo para esse nó:<br><br>"
-	ins += "<div id=comboGrupo >Buscando...</div>"
-	ins += "<p>Perfis que podem ver: </p>"
-	ins += "<input size=50 type=text id='En1_perfil' value='"+i.n1_perfil+"' /></p>"
+	var ins = "<br>Escolha o grupo para esse nó:<br><br>";
+	ins += "<div id=comboGrupo >Buscando...</div>";
+	ins += "<p>Perfis que podem ver: </p>";
+	ins += "<input size=50 type=text id='En1_perfil' value='"+i.n1_perfil+"' /></p>";
 	ins += "<div id=comboPerfil >Buscando...</div>";
-	ins += "<br>Publicado?<br>"
-	ins += "<select id='Epublicado' >"
-	ins += core_combosimnao(i.publicado)
-	ins += "</select>"
-	ins += "<br><br><br><br>"
-	ins += "<input type=hidden value="+i.ordem+" id='Eordem' />"
-	return(ins)
+	ins += "<br>Publicado?<br>";
+	ins += "<select id='Epublicado' >";
+	ins += core_combosimnao(i.publicado);
+	ins += "</select>";
+	ins += "<br><br><br><br>";
+	ins += "<input type=hidden value="+i.ordem+" id='Eordem' />";
+	return(ins);
 }
 function montaDivSubGrupo(i)
 {
-	var ins = "<br>Escolha o sub-grupo para esse nó:<br><br>"
-	ins += "<div id=comboSubGrupo >Buscando...</div>"
-	ins += "<p>Perfis que podem ver: </p>"
-	ins += "<input size=50 type=text id='En2_perfil' value='"+i.n2_perfil+"' /></p>"
+	var ins = "<br>Escolha o sub-grupo para esse nó:<br><br>";
+	ins += "<div id=comboSubGrupo >Buscando...</div>";
+	ins += "<p>Perfis que podem ver: </p>";
+	ins += "<input size=50 type=text id='En2_perfil' value='"+i.n2_perfil+"' /></p>";
 	ins += "<div id=comboPerfil >Buscando...</div>";
-	ins += "<br>Publicado?<br>"
-	ins += "<select id='Epublicado' >"
-	ins += core_combosimnao(i.publicado)
-	ins += "</select>"
-	ins += "<br><br><br><br>"
-	ins += "<input type=hidden value="+i.ordem+" id='Eordem' />"
-	return(ins)
+	ins += "<br>Publicado?<br>";
+	ins += "<select id='Epublicado' >";
+	ins += core_combosimnao(i.publicado);
+	ins += "</select>";
+	ins += "<br><br><br><br>";
+	ins += "<input type=hidden value="+i.ordem+" id='Eordem' />";
+	return(ins);
 }
 function montaDivTema(i)
 {
-	var ins = "<br>Escolha o tema para esse nó:<br><br>"
-	ins += "<div id=comboTema >Buscando...</div>"
-	ins += "<p>Perfis que podem ver: </p>"
-	ins += "<input type=text id='En3_perfil' value='"+i.n3_perfil+"' /></p>"
+	var ins = "<br>Escolha o tema para esse nó:<br><br>";
+	ins += "<div id=comboTema >Buscando...</div>";
+	ins += "<p>Perfis que podem ver: </p>";
+	ins += "<input type=text id='En3_perfil' value='"+i.n3_perfil+"' /></p>";
 	ins += "<div id=comboPerfil >Buscando...</div>";
-	ins += "<br>Publicado?<br>"
-	ins += "<select id='Epublicado' >"
-	ins += core_combosimnao(i.publicado)
-	ins += "</select>"
-	ins += "<br>Ordem<br>"
-	ins += "<input size=10 type=text value="+i.ordem+" id='Eordem' />"
-	return(ins)
+	ins += "<br>Publicado?<br>";
+	ins += "<select id='Epublicado' >";
+	ins += core_combosimnao(i.publicado);
+	ins += "</select>";
+	ins += "<br>Ordem<br>";
+	ins += "<input size=10 type=text value="+i.ordem+" id='Eordem' />";;
+	return(ins);
 }
 function montaDivRaiz(i)
 {
-	var ins = "<br>Tema:<br><br>"
-	ins += "<div id=comboTema >Buscando...</div>"
-	ins += "<p>Perfis que podem ver: </p>"
-	ins += "<input size=50 type=text id='Eperfil' value='"+i.perfil+"' /></p>"
+	var ins = "<br>Tema:<br><br>";
+	ins += "<div id=comboTema >Buscando...</div>";
+	ins += "<p>Perfis que podem ver: </p>";
+	ins += "<input size=50 type=text id='Eperfil' value='"+i.perfil+"' /></p>";
 	ins += "<div id=comboPerfil >Buscando...</div>";
-	ins += "<br><br>Para criar um novo mapfile clique <a href='../html/editormapfile.html' target=_blank >aqui</a>."
-	ins += "<br><br>Para criar um novo perfil clique <a href='../html/perfis.html' target=_blank >aqui</a>."
-	ins += "<input type=hidden value="+i.ordem+" id='Eordem' />"
-	return(ins)
+	ins += "<br><br>Para criar um novo mapfile clique <a href='../html/editormapfile.html' target=_blank >aqui</a>.";
+	ins += "<br><br>Para criar um novo perfil clique <a href='../html/perfis.html' target=_blank >aqui</a>.";
+	ins += "<input type=hidden value="+i.ordem+" id='Eordem' />";
+	return(ins);
 }
 function registraPerfil(valor,id)
 {
-	var inp = $i(id)
-	var perfis = inp.value
+	var inp = $i(id);
+	var perfis = inp.value;
 	if(perfis == "")
-	inp.value = valor
+	inp.value = valor;
 	else
-	inp.value = perfis+" "+valor
+	inp.value = perfis+" "+valor;
 }
 /*
 Function: gravaDados
@@ -753,33 +762,35 @@ Altera dados de um nó
 */
 function gravaDados(tipo,id)
 {
+	var campos = [];
+	var par = null;
+	var prog = null;
 	if(tipo == "grupo")
 	{
-		var campos = new Array("id_grupo","n1_perfil","publicado","ordem")
-		var par = "&id="+id
-		var prog = "../php/arvore.php?funcao=alterarGrupo&idioma="+idiomaSel();
+		campos = new Array("id_grupo","n1_perfil","publicado","ordem");
+		par = "&id="+id;
+		prog = "../php/arvore.php?funcao=alterarGrupo&idioma="+idiomaSel();
 	}
 	if(tipo == "subgrupo")
 	{
-		var campos = new Array("id_subgrupo","n2_perfil","publicado","ordem")
-		var par = "&id="+id
-		var prog = "../php/arvore.php?funcao=alterarSubGrupo&idioma="+idiomaSel();
+		campos = new Array("id_subgrupo","n2_perfil","publicado","ordem");
+		par = "&id="+id;
+		prog = "../php/arvore.php?funcao=alterarSubGrupo&idioma="+idiomaSel();
 	}
 	if(tipo == "tema")
 	{
-		var campos = new Array("id_tema","n3_perfil","publicado","ordem")
-		var par = "&id="+id
-		var prog = "../php/arvore.php?funcao=alterarTema&idioma="+idiomaSel()
+		campos = new Array("id_tema","n3_perfil","publicado","ordem");
+		par = "&id="+id;
+		prog = "../php/arvore.php?funcao=alterarTema&idioma="+idiomaSel();
 	}
 	if(tipo == "raizmenu" || tipo == "raizgrupo")
 	{
-		var campos = new Array("id_tema","perfil","ordem")
-		var par = "&id="+id
-		var prog = "../php/arvore.php?funcao=alterarRaiz&idioma="+idiomaSel()
+		campos = new Array("id_tema","perfil","ordem");
+		par = "&id="+id;
+		prog = "../php/arvore.php?funcao=alterarRaiz&idioma="+idiomaSel();
 	}
-
-	for (i=0;i<campos.length;i++)
-	{par += "&"+campos[i]+"="+($i("E"+campos[i]).value)}
+	for (var i=0;i<campos.length;i++)
+	{par += "&"+campos[i]+"="+($i("E"+campos[i]).value);}
 	core_carregando("ativa");
 	core_carregando(" gravando o registro do id= "+id);
 	var sUrl = prog+par;
@@ -792,71 +803,71 @@ function gravaDados(tipo,id)
   				if(YAHOO.lang.JSON.parse(o.responseText) == "erro")
   				{
   					core_carregando("<span style=color:red >Não foi possível excluir. Verifique se não existem menus vinculados a este tema</span>");
-  					setTimeout("core_carregando('desativa')",3000)
+  					setTimeout("core_carregando('desativa')",3000);
   				}
   				else
   				{
   					if(tipo == "grupo")
   					{
-  						var obj = document.getElementById("Eid_grupo")
-  						var texto = obj.options[obj.selectedIndex].text
+  						var obj = document.getElementById("Eid_grupo");
+  						var texto = obj.options[obj.selectedIndex].text;
   						
-  						var objpub = document.getElementById("Epublicado")
-  						var publicado = objpub.options[objpub.selectedIndex].value
+  						var objpub = document.getElementById("Epublicado");
+  						var publicado = objpub.options[objpub.selectedIndex].value;
   						  						
-  						var no = tree.getNodeByProperty("id_n1",id)
-  						no.getContentEl().getElementsByTagName("span")[0].innerHTML = texto
+  						var no = tree.getNodeByProperty("id_n1",id);
+  						no.getContentEl().getElementsByTagName("span")[0].innerHTML = texto;
 
   						if(publicado == "NAO")
-  						no.getContentEl().getElementsByTagName("span")[0].style.color = "red"
+  						no.getContentEl().getElementsByTagName("span")[0].style.color = "red";
   						else
-  						no.getContentEl().getElementsByTagName("span")[0].style.color = "black"
+  						no.getContentEl().getElementsByTagName("span")[0].style.color = "black";
 
   						no.html = no.getContentEl().innerHTML;
   					}
   					if(tipo == "subgrupo")
   					{
-  						var obj = document.getElementById("Eid_subgrupo")
-  						var texto = obj.options[obj.selectedIndex].text
+  						var obj = document.getElementById("Eid_subgrupo");
+  						var texto = obj.options[obj.selectedIndex].text;
 
-  						var objpub = document.getElementById("Epublicado")
-  						var publicado = objpub.options[objpub.selectedIndex].value
+  						var objpub = document.getElementById("Epublicado");
+  						var publicado = objpub.options[objpub.selectedIndex].value;
 
-  						var no = tree.getNodeByProperty("id_n2",id)
-  						no.getContentEl().getElementsByTagName("span")[0].innerHTML = texto
+  						var no = tree.getNodeByProperty("id_n2",id);
+  						no.getContentEl().getElementsByTagName("span")[0].innerHTML = texto;
 
   						if(publicado == "NAO")
-  						no.getContentEl().getElementsByTagName("span")[0].style.color = "red"
+  						no.getContentEl().getElementsByTagName("span")[0].style.color = "red";
   						else
-  						no.getContentEl().getElementsByTagName("span")[0].style.color = "black"
+  						no.getContentEl().getElementsByTagName("span")[0].style.color = "black";
 
   						no.html = no.getContentEl().innerHTML; 					
   					}
   					if(tipo == "tema")
   					{
-  						var obj = document.getElementById("Eid_tema")
-  						var texto = obj.options[obj.selectedIndex].text
+  						var obj = document.getElementById("Eid_tema");
+  						var texto = obj.options[obj.selectedIndex].text;
   						
-  						var objpub = document.getElementById("Epublicado")
-  						var publicado = objpub.options[objpub.selectedIndex].value
+  						var objpub = document.getElementById("Epublicado");
+  						var publicado = objpub.options[objpub.selectedIndex].value;
 
-  						var no = tree.getNodeByProperty("id_n3",id)
+  						var no = tree.getNodeByProperty("id_n3",id);
   						
-  						no.getContentEl().getElementsByTagName("span")[0].innerHTML = texto
+  						no.getContentEl().getElementsByTagName("span")[0].innerHTML = texto;
   						
   						if(publicado == "NAO")
-  						no.getContentEl().getElementsByTagName("span")[0].style.color = "red"
+  						no.getContentEl().getElementsByTagName("span")[0].style.color = "red";
   						else
-  						no.getContentEl().getElementsByTagName("span")[0].style.color = "black"
+  						no.getContentEl().getElementsByTagName("span")[0].style.color = "black";
   						
   						no.html = no.getContentEl().innerHTML;
   					}
 					if(tipo == "raizmenu" || tipo == "raizgrupo")
   					{
-  						var obj = document.getElementById("Eid_tema")
-  						var texto = obj.options[obj.selectedIndex].text
-  						var no = tree.getNodeByProperty("id_raiz",id)
-  						no.getContentEl().getElementsByTagName("span")[0].innerHTML = texto
+  						var obj = document.getElementById("Eid_tema");
+  						var texto = obj.options[obj.selectedIndex].text;
+  						var no = tree.getNodeByProperty("id_raiz",id);
+  						no.getContentEl().getElementsByTagName("span")[0].innerHTML = texto;
   						no.html = no.getContentEl().innerHTML;
   					}		
   					core_carregando("desativa");
@@ -869,29 +880,31 @@ function gravaDados(tipo,id)
   		failure:core_handleFailure,
   		argument: { foo:"foo", bar:"bar" }
 	}; 
-	core_makeRequest(sUrl,callback,'POST')
+	core_makeRequest(sUrl,callback,'POST');
 }
 function sobeDesce(movimento,tipo,id)
 {
+	var no = null,
+		movimenta = null;
 	if(tipo == "raizmenu" || tipo == "raizgrupo")
 	{
-		var no = tree.getNodeByProperty("id_raiz",id)
-		var movimenta = core_movimentaNo(movimento,no)
+		no = tree.getNodeByProperty("id_raiz",id);
+		movimenta = core_movimentaNo(movimento,no);
 	}
 	if(tipo == "grupo")
 	{
-		var no = tree.getNodeByProperty("id_n1",id)
-		var movimenta = core_movimentaNo(movimento,no)
+		no = tree.getNodeByProperty("id_n1",id);
+		movimenta = core_movimentaNo(movimento,no);
 	}
 	if(tipo == "subgrupo")
 	{
-		var no = tree.getNodeByProperty("id_n2",id)
-		var movimenta = core_movimentaNo(movimento,no)
+		no = tree.getNodeByProperty("id_n2",id);
+		movimenta = core_movimentaNo(movimento,no);
 	}
 	if(tipo == "tema")
 	{
-		var no = tree.getNodeByProperty("id_n3",id)
-		var movimenta = core_movimentaNo(movimento,no)
+		no = tree.getNodeByProperty("id_n3",id);
+		movimenta = core_movimentaNo(movimento,no);
 	}
 	var callback =
 	{
@@ -905,7 +918,7 @@ function sobeDesce(movimento,tipo,id)
 		var sUrl = "../php/arvore.php?funcao=movimentaNo&tipo="+tipo+"&movimento="+movimento+"&id="+id+"&idioma="+idiomaSel();		
 		core_carregando("ativa");
 		core_carregando(" modificando a ordem no banco de dados");
-		core_makeRequest(sUrl,callback)
+		core_makeRequest(sUrl,callback);
 	}
 }
 YAHOO.util.Event.addListener(window, "load", initMenu);
