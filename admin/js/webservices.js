@@ -39,7 +39,7 @@ Inicializa o editor
 */
 function initMenu()
 {
-	core_ativaBotaoAdicionaLinha("../php/webservices.php?funcao=alterarWS","adiciona")
+	core_ativaBotaoAdicionaLinha("../php/webservices.php?funcao=alterarWS","adiciona");
 	core_carregando("ativa");
 	core_ativaPainelAjuda("ajuda","botaoAjuda");
 	pegaWS();
@@ -56,14 +56,14 @@ function pegaWS()
     //
 	//pega o tipo de WS que será listado se tiver sido definido na url
 	//
-	var tipows = "";
+	var tipows = "",u;
 	try{
-		var u = window.location.href.split("?");
-		var u = u[1].split("=");
+		u = window.location.href.split("?");
+		u = u[1].split("=");
 		tipows = u[1];
 	}
 	catch(e){tipows = "";}
-	core_pegaDados("buscando endereços...","../php/webservices.php?funcao=pegaWS&tipows="+tipows,"montaTabela")
+	core_pegaDados("buscando endereços...","../php/webservices.php?funcao=pegaWS&tipows="+tipows,"montaTabela");
 }
 /*
 Function: montaTabela
@@ -132,7 +132,7 @@ function montaTabela(dados)
   					failure:core_handleFailure,
   					argument: { foo:"foo", bar:"bar" }
 				}; 
-				core_makeRequest(sUrl,callback)
+				core_makeRequest(sUrl,callback);
 			}
 
 		});
@@ -155,7 +155,6 @@ function montaEditor(dados,id,recordid)
 {
 	function on_editorCheckBoxChange(p_oEvent)
 	{
-		var ins = "";
 		if(p_oEvent.newValue.get("value") == "OK")
 		{
 			gravaDados(id,recordid);
@@ -186,7 +185,7 @@ function montaEditor(dados,id,recordid)
 	}
 	YAHOO.example.container.panelEditor.show();
 	//carrega os dados na janela
-	$i("editor_bd").innerHTML = montaDiv(dados[0])
+	$i("editor_bd").innerHTML = montaDiv(dados[0]);
 	core_carregando("desativa");
 }
 function montaDiv(i)
@@ -198,42 +197,42 @@ function montaDiv(i)
 		{titulo:"Autor:",id:"Eautor_ws",size:"50",value:i.autor_ws,tipo:"text",div:""},
 		{titulo:"Endereço:",id:"Elink_ws",size:"50",value:i.link_ws,tipo:"text",div:""}
 		]
-	}
-	var ins = ""
-	ins += core_geraLinhas(param)	
+	};
+	var ins = "";
+	ins += core_geraLinhas(param);	
 
-	ins += "<p>Tipo:<br>"
-	ins += "<select  id='Etipo_ws' />"
-	ins += "<option value='' "
+	ins += "<p>Tipo:<br>";
+	ins += "<select  id='Etipo_ws' />";
+	ins += "<option value='' ";
 	if (i.tipo_ws == ""){ins += "selected";}
-	ins += ">---</option>"
-	ins += "<option value='KML' "
+	ins += ">---</option>";
+	ins += "<option value='KML' ";
 	if (i.tipo_ws == "KML"){ins += "selected";}
-	ins += " >KML</option>"
-	ins += "<option value='WMS' "
+	ins += " >KML</option>";
+	ins += "<option value='WMS' ";
 	if (i.tipo_ws == "WMS"){ins += "selected";}
-	ins += " >WMS</option>"
-	ins += "<option value='GEORSS' "
+	ins += " >WMS</option>";
+	ins += "<option value='GEORSS' ";
 	if (i.tipo_ws == "GEORSS"){ins += "selected";}
-	ins += " >GEORSS</option>"
-	ins += "<option value='WS' "
+	ins += " >GEORSS</option>";
+	ins += "<option value='WS' ";
 	if (i.tipo_ws == "WS"){ins += "selected";}
-	ins += " >WS</option>"
-	ins += "<option value='DOWNLOAD' "
+	ins += " >WS</option>";
+	ins += "<option value='DOWNLOAD' ";
 	if (i.tipo_ws == "DOWNLOAD"){ins += "selected";}
-	ins += " >DOWNLOAD</option>"
-	ins += "<option value='GEOJSON' "
+	ins += " >DOWNLOAD</option>";
+	ins += "<option value='GEOJSON' ";
 	if (i.tipo_ws == "GEOJSON"){ins += "selected";}
-	ins += " >GEOJSON</option>"
+	ins += " >GEOJSON</option>";
 
-	ins += "</select></p>"
-	return(ins)
+	ins += "</select></p>";
+	return(ins);
 }
 function excluiLinha(id,row)
 {
 	var mensagem = " excluindo o registro do id= "+id;
 	var sUrl = "../php/webservices.php?funcao=excluir&id="+id;
-	core_excluiLinha(sUrl,row,mensagem)
+	core_excluiLinha(sUrl,row,mensagem);
 }
 /*
 Function: gravaDados
@@ -244,11 +243,12 @@ Aplica as alterações feitas em um WS
 */
 function gravaDados(id,recordid)
 {
-	var campos = new Array("desc","nome","link","tipo","autor")
-	var par = ""
+	var campos = new Array("desc","nome","link","tipo","autor"),
+		par = "",
+		i;
 	for (i=0;i<campos.length;i++)
 	{par += "&"+campos[i]+"_ws="+($i("E"+campos[i]+"_ws").value)}
-	par += "&id_ws="+id
+	par += "&id_ws="+id;
 	core_carregando("ativa");
 	core_carregando(" gravando o registro do id= "+id);
 	var sUrl = "../php/webservices.php?funcao=alterarWS"+par;
@@ -261,12 +261,12 @@ function gravaDados(id,recordid)
   				if(YAHOO.lang.JSON.parse(o.responseText) == "erro")
   				{
   					core_carregando("<span style=color:red >Não foi possível excluir. Verifique se não existem registros vinculados</span>");
-  					setTimeout("core_carregando('desativa')",3000)
+  					setTimeout("core_carregando('desativa')",3000);
   				}
   				else
   				{
   					var rec = myDataTable.getRecordSet().getRecord(recordid);
-  					myDataTable.updateRow(rec,YAHOO.lang.JSON.parse(o.responseText)[0])
+  					myDataTable.updateRow(rec,YAHOO.lang.JSON.parse(o.responseText)[0]);
   					core_carregando("desativa");
   				}
 				YAHOO.example.container.panelEditor.destroy();

@@ -244,7 +244,7 @@ i3GEO.eventos = {
 	eventos {array} - array com os nomes das funções
 	*/
 	executaEventos: function(eventos){
-		var f,temp;
+		var f = 0;
 		try{
 			if (eventos.length > 0){
 				f = eventos.length-1;
@@ -303,7 +303,10 @@ i3GEO.eventos = {
 		//Entretanto, nas ferramentas que usam o richdraw (distância e área) o posicionamento
 		//deve ser controlado pelo i3geo
 		//
-		var teladd,teladms,container,targ,pos,mousex,mousey,xfig,yfig,xreffig,yreffig,xtela,ytela,c,ex,r;
+		var teladd,teladms,
+			container = "",
+			targ = "",
+			pos,mousex,mousey,xfig,yfig,xreffig,yreffig,xtela,ytela,c,ex,r;
 		if (!e){e = window.event;}
 		try{
 			if (e.target)
@@ -311,7 +314,8 @@ i3GEO.eventos = {
 			else
 			if (e.srcElement)
 			{targ = e.srcElement;}
-			container = targ.parentNode.id;
+			if(targ.parentNode)
+			{container = targ.parentNode.id;}
 		}
 		catch(erro){
 			if(typeof(console) !== 'undefined'){console.error(erro);}
@@ -495,7 +499,7 @@ i3GEO.eventos = {
 	*/
 	cliqueCapturaPt: function(ixg,ixm,ixs,iyg,iym,iys){
 		if(typeof(console) !== 'undefined'){console.info("i3GEO.eventos.cliqueCapturaPt()");}
-		var x,y,doc;
+		var x,y,doc = document;
 		if(arguments.length === 0){
 			ixg = "ixg";
 			ixm = "ixm";
@@ -505,9 +509,6 @@ i3GEO.eventos = {
 			iys = "iys";
 			if($i("wdocai"))
 			{doc = (navm) ? document.frames("wdocai").document : $i("wdocai").contentDocument;}
-		}
-		else{
-			doc = document;
 		}
 		//
 		//algumas operações de análise podem precisar das coordenadas

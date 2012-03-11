@@ -260,13 +260,12 @@ i3GEO.coordenadas = {
 				if(objposicaocursor.imgx < 10 || objposicaocursor.imgy < 10)
 				{return;}
 				if($i("wdoca")){return;}
-				var tempUtm,s,n,i,t;
 				//
 				//cancela se existir alguma ferramenta ativa
 				//
 				if(i3GEO.util.verificaScriptTag("i3GEOF") === true)
 				{return;}
-				tempUtm = function(retorno){
+				var tempUtm = function(retorno){
 					var funcao,temp,texto;
 					funcao = "$i(i3GEO.coordenadas.PARAMETROS.mostraCoordenadasUTM.idhtml).style.display='none';"+
 					"if(i3GEO.coordenadas.PARAMETROS.mostraCoordenadasGEO.idhtml == i3GEO.coordenadas.PARAMETROS.mostraCoordenadasUTM.idhtml)"+
@@ -303,7 +302,6 @@ i3GEO.coordenadas = {
 	mostraCoordenadasGEO: function(id){
 		if(typeof(console) !== 'undefined'){console.info("i3GEO.coordenadas.mostraCoordenadasGEO()");}
 		try{
-			var ins;
 			if(arguments.length === 0 || id === "" || typeof(id) === 'undefined')
 			{id = this.PARAMETROS.mostraCoordenadasGEO.idhtml;}
 			else
@@ -445,7 +443,8 @@ i3GEO.coordenadas = {
 
 	*/
 	atualizaProj4: function(onde,configProj,x,y){
-		var destino,zona,temp,p,
+		var zona,temp,p,
+			destino = "",
 			iu = i3GEO.util;
 		try{
 			if(!$i(onde+configProj+"ZN"))

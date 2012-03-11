@@ -69,7 +69,7 @@ i3GEO.analise = {
 			if(typeof(console) !== 'undefined'){console.info("i3GEO.analise.dialogo.linhaDoTempo()");}
 			i3GEO.janela.cria("450px","300px",i3GEO.configura.locaplic+"/ferramentas/linhadotempo/index.php","","","Linha do tempo <a class=ajuda_usuario target=_blank href='"+i3GEO.configura.locaplic+"/ajuda_usuario.php?idcategoria=3&idajuda=88' >&nbsp;&nbsp;&nbsp;</a>");
 			atualizaLinhaDoTempo = function(){
-				var doc,temp;
+				var doc = "";
 				try{
 					if (navn){
 						if ($i("wdocai"))
@@ -79,7 +79,7 @@ i3GEO.analise = {
 						if(document.frames("wdocai"))
 						{doc = document.frames("wdocai").document;}
 					}
-					temp = doc.getElementById("tl") ? window.parent.wdocai.carregaDados() : i3GEO.eventos.NAVEGAMAPA.remove("atualizaLinhaDoTempo()");
+					doc.getElementById("tl") ? window.parent.wdocai.carregaDados() : i3GEO.eventos.NAVEGAMAPA.remove("atualizaLinhaDoTempo()");
 				}
 				catch(e){
 					i3GEO.eventos.NAVEGAMAPA.remove("atualizaLinhaDoTempo()");
@@ -135,7 +135,7 @@ i3GEO.analise = {
 		Abre a janela de diálogo da ferramenta pontosdistri
 		*/
 		pontosdistri: function(){
-			var temp = i3GEO.parametros.r === "nao" ? alert("Opção não disponível") : i3GEO.util.dialogoFerramenta("i3GEO.analise.dialogo.pontosdistri()","pontosdistri","pontosDistri");
+			i3GEO.parametros.r === "nao" ? alert("Opção não disponível") : i3GEO.util.dialogoFerramenta("i3GEO.analise.dialogo.pontosdistri()","pontosdistri","pontosDistri");
 		},
 		/*
 		Function: pontoempoligono
@@ -265,7 +265,7 @@ i3GEO.analise = {
 		Cria a janela para mostrar os resultados da medição
 		*/
 		criaJanela: function(){
-			var novoel,ins,imagemxy,temp,janela;
+			var novoel,ins,imagemxy,janela;
 			if (!$i("mostradistancia")){
 				novoel = document.createElement("div");
 				novoel.id = "mostradistancia";
@@ -306,7 +306,7 @@ i3GEO.analise = {
 			//botao que abre a ferramenta de cálculo de perfis.
 			//pontosdistobj contém as coordenadas dos pontos
 			//
-			temp = new YAHOO.widget.Button(
+			new YAHOO.widget.Button(
 				"i3GEObotaoPerfil",
 				{onclick:{fn: function(){
 					var js = i3GEO.configura.locaplic+"/ferramentas/perfil/index.js.php";

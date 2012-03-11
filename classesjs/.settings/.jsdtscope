@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<classpath>
+	<classpathentry excluding="compactados/|zerocal/" kind="src" path=""/>
+	<classpathentry kind="src" path="compactados"/>
+	<classpathentry kind="src" path="zerocal"/>
+	<classpathentry kind="con" path="org.eclipse.wst.jsdt.launching.JRE_CONTAINER"/>
+	<classpathentry kind="con" path="org.eclipse.wst.jsdt.USER_LIBRARY/YUI"/>
+	<classpathentry kind="output" path=""/>
+</classpath>

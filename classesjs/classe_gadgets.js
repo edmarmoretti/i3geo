@@ -228,7 +228,7 @@ i3GEO.gadgets = {
 	*/
 	mostraEscalaNumerica: function(id){
 		if(typeof(console) !== 'undefined'){console.info("i3GEO.gadgets.mostraEscalaNumerica()");}
-		var i,ins,temp,onde,fsubmit;
+		var i,ins,temp,onde;
 		if(arguments.length === 0)
 		{id = i3GEO.gadgets.PARAMETROS.mostraEscalaNumerica.idhtml;}
 		onde = $i(id);
@@ -551,7 +551,7 @@ i3GEO.gadgets = {
 	*/
 	mostraMenuSuspenso: function(id){
 		if(typeof(console) !== 'undefined'){console.info("i3GEO.gadgets.mostraMenuSuspenso()");}
-		var objid,sobe,n,i,estilo,t,onMenuBarBeforeRender,temp,ifr,i3GEOoMenuBarLocal,
+		var objid,n,i,estilo,t,onMenuBarBeforeRender,temp,ifr,i3GEOoMenuBarLocal,
 			ms = i3GEO.gadgets.PARAMETROS.mostraMenuSuspenso,
 			confm = i3GEO.configura.oMenuData,
 			ins = "",
@@ -597,8 +597,13 @@ i3GEO.gadgets = {
 				ins += '</ul>'; 
 				ins += '</div>';
 				objid.innerHTML=ins;
+				if(i3GEO.Interface.ATUAL === "googleearth")
+				{ifr = true;}
+				else
+				{ifr = false;}
+				i3GEOoMenuBarLocal = new YAHOO.widget.MenuBar(id,{iframe:ifr,autosubmenudisplay: true, showdelay: 100, hidedelay: 500, lazyload: false});
 				onMenuBarBeforeRender = function (p_sType, p_sArgs){
-					var conta,nomeMenu,nomeSub,
+					var nomeMenu = "",nomeSub,
 						subs = i3GEO.configura.oMenuData.submenus,
 						conta = 0;
 					for(nomeMenu in subs){
@@ -617,11 +622,6 @@ i3GEO.gadgets = {
 						}
 					}
 				};
-				if(i3GEO.Interface.ATUAL === "googleearth")
-				{ifr = true;}
-				else
-				{ifr = false;}
-				i3GEOoMenuBarLocal = new YAHOO.widget.MenuBar(id,{iframe:ifr,autosubmenudisplay: true, showdelay: 100, hidedelay: 500, lazyload: false});
 				i3GEOoMenuBar.addMenu(i3GEOoMenuBarLocal);
 				i3GEOoMenuBarLocal.beforeRenderEvent.subscribe(onMenuBarBeforeRender);
 				i3GEOoMenuBarLocal.render();
@@ -718,7 +718,8 @@ i3GEO.gadgets = {
 	i3GEO.gadgets.PARAMETROS
 	*/
 	mostraMenuLista: function(id){
-		var objid,n,i,estilo,t,temp,nomeMenu,sub,
+		var objid,n,i,sub,
+			nomeMenu = "",
 			ms = i3GEO.gadgets.PARAMETROS.mostraMenuLista,
 			confm = i3GEO.configura.oMenuData,
 			ins = "",
@@ -727,7 +728,6 @@ i3GEO.gadgets = {
 		{id = ms.idhtml;}
 		else
 		{ms.idhtml = id;}
-
 		objid = $i(id);
 		if(objid){
 			n = confm.menu.length;

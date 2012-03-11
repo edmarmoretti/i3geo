@@ -250,7 +250,7 @@ i3GEO = {
 		if(typeof(console) !== 'undefined'){console.info("i3GEO.cria()");}
 		if(i3GEO.configura.ajustaDocType === true)
 		{i3GEO.util.ajustaDocType();}
-		var temp,i,tamanho;
+		var temp,tamanho;
 		temp = window.location.href.split("?");
 		if (temp[1]){
 			i3GEO.configura.sid = temp[1];
@@ -303,7 +303,7 @@ i3GEO = {
 		{i3GEOmantemCompatibilidade();}
 		montaMapa = function(retorno){
 			try{
-				var tempo,titulo,temp,abreJM;
+				var temp,abreJM;
 				if(retorno === ""){
 					alert("Ocorreu um erro no mapa - montaMapa");
 					retorno = {data:{erro: "erro"}};
