@@ -33,14 +33,14 @@ i3geo/admin/js/identifica.js
 YAHOO.namespace("example.container");
 function initMenu()
 {
-	core_ativaBotaoAdicionaLinha("../php/identifica.php?funcao=alterarFuncoes")
+	core_ativaBotaoAdicionaLinha("../php/identifica.php?funcao=alterarFuncoes");
 	core_carregando("ativa");
 	core_ativaPainelAjuda("ajuda","botaoAjuda");
 	pegaFuncoes();
 }
 function pegaFuncoes()
 {
-	core_pegaDados("buscando funções...","../php/identifica.php?funcao=pegaFuncoes","montaTabela")
+	core_pegaDados("buscando funções...","../php/identifica.php?funcao=pegaFuncoes","montaTabela");
 }
 function montaTabela(dados)
 {
@@ -54,10 +54,6 @@ function montaTabela(dados)
         var formatTexto = function(elCell, oRecord, oColumn, oData)
         {
             elCell.innerHTML = "<pre ><p>" + oData + "</pre>";
-        };
-        var formatSalva = function(elCell, oRecord, oColumn)
-        {
-            elCell.innerHTML = "<div class=salvar style='text-align:center' onclick='gravaLinha(\""+oRecord._sId+"\")'></div>";
         };
         var formatExclui = function(elCell, oRecord, oColumn)
         {
@@ -114,7 +110,7 @@ function montaTabela(dados)
   					failure:core_handleFailure,
   					argument: { foo:"foo", bar:"bar" }
 				}; 
-				core_makeRequest(sUrl,callback)
+				core_makeRequest(sUrl,callback);
 			}
 		});
 
@@ -125,7 +121,6 @@ function montaEditor(dados,id,recordid)
 {
 	function on_editorCheckBoxChange(p_oEvent)
 	{
-		var ins = "";
 		if(p_oEvent.newValue.get("value") == "OK")
 		{
 			gravaDados(id,recordid);
@@ -156,7 +151,7 @@ function montaEditor(dados,id,recordid)
 	}
 	YAHOO.example.container.panelEditor.show();
 	//carrega os dados na janela
-	$i("editor_bd").innerHTML = montaDiv(dados[0])
+	$i("editor_bd").innerHTML = montaDiv(dados[0]);
 	core_carregando("desativa");
 }
 function montaDiv(i)
@@ -167,23 +162,23 @@ function montaDiv(i)
 		{titulo:"Programa: o i3Geo irá adicionar automaticamente os parâmetros &x e &y no final do endereço",id:"Eabrir_i",size:"50",value:i.abrir_i,tipo:"text",div:""},
 		{titulo:"Abrir como: escreva 'self' para abrir na mesma janela ou 'blank' para abrir em uma nova aba",id:"Etarget_i",size:"50",value:i.target_i,tipo:"text",div:""}
 		]
-	}
-	var ins = ""
-	ins += core_geraLinhas(param)	
+	};
+	var ins = "";
+	ins += core_geraLinhas(param)	;
 
-	ins += "<p><b>Publicado?</b><br>"
-	ins += "<select  id='Epublicado_i' />"
-	ins += "<option value='' "
+	ins += "<p><b>Publicado?</b><br>";
+	ins += "<select  id='Epublicado_i' />";
+	ins += "<option value='' ";
 	if (i.publicado_i == ""){ins += "selected";}
-	ins += ">---</option>"
-	ins += "<option value='SIM' "
+	ins += ">---</option>";
+	ins += "<option value='SIM' ";
 	if (i.publicado_i == "SIM"){ins += "selected";}
-	ins += " >sim</option>"
-	ins += "<option value='NAO' "
+	ins += " >sim</option>";
+	ins += "<option value='NAO' ";
 	if (i.publicado_i == "NAO"){ins += "selected";}
-	ins += " >não</option>"
-	ins += "</select></p>"
-	return(ins)
+	ins += " >não</option>";
+	ins += "</select></p>";
+	return(ins);
 }
 /*
 Function: gravaDados
@@ -194,11 +189,11 @@ Salva as alterações feitas
 */
 function gravaDados(id,recordid)
 {
-	var campos = new Array("nome","publicado","abrir","target")
-	var par = ""
-	for (i=0;i<campos.length;i++)
-	{par += "&"+campos[i]+"_i="+($i("E"+campos[i]+"_i").value)}
-	par += "&id_i="+id
+	var campos = new Array("nome","publicado","abrir","target");
+	var par = "";
+	for (var i=0;i<campos.length;i++)
+	{par += "&"+campos[i]+"_i="+($i("E"+campos[i]+"_i").value);}
+	par += "&id_i="+id;
 	core_carregando("ativa");
 	core_carregando(" gravando o registro do id= "+id);
 	var sUrl = "../php/identifica.php?funcao=alterarFuncoes"+par;
@@ -211,12 +206,12 @@ function gravaDados(id,recordid)
   				if(YAHOO.lang.JSON.parse(o.responseText) == "erro")
   				{
   					core_carregando("<span style=color:red >Não foi possível excluir. Verifique se não existem registros vinculados</span>");
-  					setTimeout("core_carregando('desativa')",3000)
+  					setTimeout("core_carregando('desativa')",3000);
   				}
   				else
   				{
   					var rec = myDataTable.getRecordSet().getRecord(recordid);
-  					myDataTable.updateRow(rec,YAHOO.lang.JSON.parse(o.responseText)[0])
+  					myDataTable.updateRow(rec,YAHOO.lang.JSON.parse(o.responseText)[0]);
   					core_carregando("desativa");
   				}
 				YAHOO.example.container.panelEditor.destroy();
@@ -227,13 +222,13 @@ function gravaDados(id,recordid)
   		failure:core_handleFailure,
   		argument: { foo:"foo", bar:"bar" }
 	}; 
-	core_makeRequest(sUrl,callback)
+	core_makeRequest(sUrl,callback);
 }
 
 function excluiLinha(id,row)
 {
 	var mensagem = " excluindo o registro do id= "+id;
 	var sUrl = "../php/identifica.php?funcao=excluir&id="+id;
-	core_excluiLinha(sUrl,row,mensagem)
+	core_excluiLinha(sUrl,row,mensagem);
 }
 YAHOO.util.Event.addListener(window, "load", initMenu);

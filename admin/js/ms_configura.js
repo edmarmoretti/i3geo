@@ -40,7 +40,7 @@ Inicializa o editor
 function initMenu()
 {
 	core_ativaPainelAjuda("ajuda","botaoAjuda");
-	new YAHOO.widget.Button("botao2",{ onclick: { fn: function(){window.open('../../testainstal.php') }} });
+	new YAHOO.widget.Button("botao2",{ onclick: { fn: function(){window.open('../../testainstal.php');}} });
 	$parametros = {
 	"simples": [
 	{ mensagem: "Mensagem mostrada sempre que o i3geo é inicializado.",cabeca: "Mensagem de inicialização", variavel: "$mensagemInicia"},
@@ -64,22 +64,22 @@ function initMenu()
 	{ mensagem: "Interface padrão utilizada para mostrar o mapa. essa é a interface utilizada quando o i3Geo é inicializado sem a passagem de parâmetros para definição da interface a ser usada.",cabeca: "Interface padrão", variavel: "$interfacePadrao"}	
 	]};
 	core_carregando("ativa");
-	core_pegaDados("buscando parâmetros...","../php/ms_configura.php?funcao=pegaParametrosConfigura","pegaParametros")
+	core_pegaDados("buscando parâmetros...","../php/ms_configura.php?funcao=pegaParametrosConfigura","pegaParametros");
 }
 function pegaParametros(retorno)
 {
-	var ins = ""
-	for (i=0;i<$parametros.simples.length;i++)
+	var ins = "";
+	for (var i=0;i<$parametros.simples.length;i++)
 	{
-		ins += "<fieldset><legend><b>"+$parametros.simples[i].cabeca+"</b></legend>"
-		ins += "<p class=mensagem >"+$parametros.simples[i].mensagem+"</p>"
-		ins += "<table><tr><td><img style=cursor:pointer src=../imagens/02.png title='aplicar' onclick='salva(\""+$parametros.simples[i].variavel+"\")' /></td>"
-		ins += "<td><input onchange=\"this.style.color='blue'\" type=text size=70 id='"+$parametros.simples[i].variavel+"' /></td></tr></table>"
-		ins += "</fieldset><br>"	
+		ins += "<fieldset><legend><b>"+$parametros.simples[i].cabeca+"</b></legend>";
+		ins += "<p class=mensagem >"+$parametros.simples[i].mensagem+"</p>";
+		ins += "<table><tr><td><img style=cursor:pointer src=../imagens/02.png title='aplicar' onclick='salva(\""+$parametros.simples[i].variavel+"\")' /></td>";
+		ins += "<td><input onchange=\"this.style.color='blue'\" type=text size=70 id='"+$parametros.simples[i].variavel+"' /></td></tr></table>";
+		ins += "</fieldset><br>";
 	}
-	$i("tabela").innerHTML += ins
-	retorno.$postgis_mapa = "Esta variável só pode ser definida editando-se diretamente o arquivo ms_configura.php"
-	for (i=0;i<$parametros.simples.length;i++)
+	$i("tabela").innerHTML += ins;
+	retorno.$postgis_mapa = "Esta variável só pode ser definida editando-se diretamente o arquivo ms_configura.php";
+	for (var i=0;i<$parametros.simples.length;i++)
 	{
 		if($i($parametros.simples[i].variavel))
 		{$i($parametros.simples[i].variavel).value = eval("retorno."+$parametros.simples[i].variavel);}
@@ -96,13 +96,13 @@ Aplica as alterações feitas em uma variável
 function salva(variavel)
 {
 	if(variavel == "$postgis_mapa")
-	{alert("erro")}
+	{alert("erro");}
 	else
 	{
 		var original = $i(variavel).value;
 		$i(variavel).value = "gravando...";
-		core_pegaDados("gravando...","../php/ms_configura.php?funcao=salvaConfigura&variavel="+variavel+"&valor="+original,"")
-		$i(variavel).style.color = ""
+		core_pegaDados("gravando...","../php/ms_configura.php?funcao=salvaConfigura&variavel="+variavel+"&valor="+original,"");
+		$i(variavel).style.color = "";
 		$i(variavel).value = original;
 	}
 }

@@ -8,9 +8,10 @@ td {text-align:left}
 </style>
 </head>
 <body style=overflow:auto; >
-<div style=text-align:center;width:600px >
-<p><img src="../../imagens/i3geo1.jpg" />
-<p style='font-size:16px'>Estatística do sistema de administração</p> 
+<div style="text-align:center;width:600px" >
+	<p><img src="../../imagens/i3geo1.jpg" /></p>
+	<p style='font-size:16px'>Estatística do sistema de administração</p>
+</div>
 <div style=text-align:left;width:600px >
 <?php
 /*
@@ -143,3 +144,4 @@ echo "<pre>";
 echo "<hr>".date('l jS \of F Y h:i:s A');
 //var_dump($temasacessos);
 ?>
+</div>

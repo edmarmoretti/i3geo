@@ -339,8 +339,7 @@ function montaDivPrancha(i)
 	var ins = "";
 	ins += core_geraLinhas(param);
 	ins += "<input type=hidden value='"+i.ordem_prancha+"' id='Eordem_prancha' />";
-	
-	return(ins)
+	return(ins);
 }
 function montaDivAtlas(i)
 {

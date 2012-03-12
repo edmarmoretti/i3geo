@@ -39,7 +39,7 @@ Inicializa o editor
 */
 function initMenu()
 {
-	core_ativaBotaoAdicionaLinha("../php/menutemas.php?funcao=alteraTags","adiciona")
+	core_ativaBotaoAdicionaLinha("../php/menutemas.php?funcao=alteraTags","adiciona");
 	core_carregando("ativa");
 	core_ativaPainelAjuda("ajuda","botaoAjuda");
 	pegaTags();
@@ -53,7 +53,7 @@ Obtém a lista de tags
 */
 function pegaTags()
 {
-	core_pegaDados("buscando tags...","../php/menutemas.php?funcao=pegaTags","montaTabela")
+	core_pegaDados("buscando tags...","../php/menutemas.php?funcao=pegaTags","montaTabela");
 }
 function montaTabela(dados)
 {
@@ -142,10 +142,11 @@ function montaTabela(dados)
         });
         myDataTable.subscribe("editorSaveEvent", function(oArgs)
         {
-			if(oArgs.newData != oArgs.oldData)
-			var linha = myDataTable.getTrEl(oArgs.editor.getRecord())
-			linha.style.color = "blue";
-			linha.style.textDecoration = "blink";
+			if(oArgs.newData != oArgs.oldData){
+				var linha = myDataTable.getTrEl(oArgs.editor.getRecord());
+				linha.style.color = "blue";
+				linha.style.textDecoration = "blink";
+			}
         });
 
     };
@@ -166,12 +167,12 @@ function gravaLinha(row)
 	core_carregando("ativa");
 	var mensagem = " gravando registro do id= "+id_tag;
 	var sUrl = "../php/menutemas.php?funcao=alteraTags&nome="+nome+"&id="+id_tag;
-	core_gravaLinha(mensagem,row,sUrl)
+	core_gravaLinha(mensagem,row,sUrl);
 }
 function excluiLinha(id,row)
 {
 	var mensagem = " excluindo o registro do id= "+id;
 	var sUrl = "../php/menutemas.php?funcao=excluirRegistro&id="+id+"&tabela=tags";
-	core_excluiLinha(sUrl,row,mensagem)
+	core_excluiLinha(sUrl,row,mensagem);
 }
 YAHOO.util.Event.addListener(window, "load", initMenu);

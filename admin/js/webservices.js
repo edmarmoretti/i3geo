@@ -247,7 +247,7 @@ function gravaDados(id,recordid)
 		par = "",
 		i;
 	for (i=0;i<campos.length;i++)
-	{par += "&"+campos[i]+"_ws="+($i("E"+campos[i]+"_ws").value)}
+	{par += "&"+campos[i]+"_ws="+($i("E"+campos[i]+"_ws").value);}
 	par += "&id_ws="+id;
 	core_carregando("ativa");
 	core_carregando(" gravando o registro do id= "+id);
@@ -277,6 +277,6 @@ function gravaDados(id,recordid)
   		failure:core_handleFailure,
   		argument: { foo:"foo", bar:"bar" }
 	}; 
-	core_makeRequest(sUrl,callback)
+	core_makeRequest(sUrl,callback);
 }
 YAHOO.util.Event.addListener(window, "load", initMenu);

@@ -38,8 +38,8 @@ Inicializa o editor
 */
 function initEditorGrupos()
 {
-	core_ativaBotaoAdicionaLinha("../php/menutemas.php?funcao=alteraGrupos","adicionaNovoGrupo","pegaGrupos_G")
-	pegaGrupos_G()
+	core_ativaBotaoAdicionaLinha("../php/menutemas.php?funcao=alteraGrupos","adicionaNovoGrupo","pegaGrupos_G");
+	pegaGrupos_G();
 }
 /*
 Function: pegaGrupos_G
@@ -51,7 +51,7 @@ Obtém a lista de grupos
 function pegaGrupos_G()
 {
 	core_carregando("ativa");
-	core_pegaDados("buscando grupos...","../php/menutemas.php?funcao=pegaGrupos","montaTabela_G")
+	core_pegaDados("buscando grupos...","../php/menutemas.php?funcao=pegaGrupos","montaTabela_G");
 }
 function montaTabela_G(dados)
 {
@@ -147,10 +147,13 @@ function montaTabela_G(dados)
         });
         myDataTable.subscribe("editorSaveEvent", function(oArgs)
         {
-			if(oArgs.newData != oArgs.oldData)
-			var linha = myDataTable.getTrEl(oArgs.editor.getRecord())
-			linha.style.color = "blue";
-			linha.style.textDecoration = "blink";
+			if(oArgs.newData != oArgs.oldData){
+				var linha = myDataTable.getTrEl(oArgs.editor.getRecord());
+				if(linha){
+					linha.style.color = "blue";
+					linha.style.textDecoration = "blink";
+				}
+			}
         });
     };
     core_carregando("desativa");
@@ -174,12 +177,12 @@ function gravaLinha_G(row)
 	core_carregando("ativa");
 	var mensagem = " gravando registro do id= "+id_grupo;
 	var sUrl = "../php/menutemas.php?funcao=alteraGrupos&nome="+nome_grupo+"&desc="+desc_grupo+"&id="+id_grupo+"&en="+en+"&es="+es+"&it="+it;
-	core_gravaLinha(mensagem,row,sUrl,"pegaGrupos_G")
+	core_gravaLinha(mensagem,row,sUrl,"pegaGrupos_G");
 }
 function excluiLinha_G(id,row)
 {
 	var mensagem = " excluindo o registro do id= "+id;
 	var sUrl = "../php/menutemas.php?funcao=excluirRegistro&id="+id+"&tabela=grupos";
-	core_excluiLinha(sUrl,row,mensagem)
+	core_excluiLinha(sUrl,row,mensagem);
 }
 //YAHOO.util.Event.addListener(window, "load", initMenu);

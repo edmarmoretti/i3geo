@@ -39,8 +39,8 @@ Inicializa o editor
 function initEditorMenu()
 {
 	YAHOO.namespace("example.container");
-	core_ativaBotaoAdicionaLinha("../php/menutemas.php?funcao=alteraMenus&publicado_menu=&perfil=&nome=&desc=&id=&aberto=","adicionaNovoMenu","pegaMenus_M")
-	pegaMenus_M()
+	core_ativaBotaoAdicionaLinha("../php/menutemas.php?funcao=alteraMenus&publicado_menu=&perfil=&nome=&desc=&id=&aberto=","adicionaNovoMenu","pegaMenus_M");
+	pegaMenus_M();
 }
 /*
 Function: pegaMenus_M
@@ -52,7 +52,7 @@ Obtém a lista de menus
 function pegaMenus_M()
 {
 	core_carregando("ativa");
-	core_pegaDados("buscando menus...","../php/menutemas.php?funcao=pegaMenus","montaTabela_M")
+	core_pegaDados("buscando menus...","../php/menutemas.php?funcao=pegaMenus","montaTabela_M");
 }
 function montaTabela_M(dados)
 {
@@ -65,10 +65,6 @@ function montaTabela_M(dados)
 				oData = "<span style='color:gray' ></span>";
 			}
 			elCell.innerHTML = "<pre ><p style=cursor:pointer title='clique para editar'>" + oData + "</pre>";
-        };
-        var formatSalva = function(elCell, oRecord, oColumn)
-        {
-            elCell.innerHTML = "<div class=salvar title='salva' style='text-align:center' onclick='gravaLinha_M(\""+oRecord._sId+"\")'></div>";
         };
         var formatExclui = function(elCell, oRecord, oColumn)
         {
@@ -134,7 +130,7 @@ function montaTabela_M(dados)
   					failure:core_handleFailure,
   					argument: { foo:"foo", bar:"bar" }
 				}; 
-				core_makeRequest(sUrl,callback)
+				core_makeRequest(sUrl,callback);
 			}
 		});
     };
@@ -144,7 +140,6 @@ function montaEditor_M(dados,id,recordid)
 {
 	function on_editorCheckBoxChange(p_oEvent)
 	{
-		var ins = "";
 		if(p_oEvent.newValue.get("value") == "OK")
 		{
 			gravaDados_M(id,recordid);
@@ -171,7 +166,7 @@ function montaEditor_M(dados,id,recordid)
 		YAHOO.example.container.panelEditor2.render();
 	}
 	YAHOO.example.container.panelEditor2.show();
-	$i("editor_bd2").innerHTML = montaDiv_M(dados[0])
+	$i("editor_bd2").innerHTML = montaDiv_M(dados[0]);
 	core_carregando("desativa");
 }
 function montaDiv_M(i)
@@ -186,33 +181,33 @@ function montaDiv_M(i)
 			{titulo:"Perfis (opcional):",id:"Eperfil_menu",size:"50",value:i.perfil_menu,tipo:"text",div:""}
 		]
 	};
-	var ins = ""
-	ins += core_geraLinhas(param)	
-	ins += "<p>Publicado para todos verem?<br>"
-	ins += "<select  id='Epublicado_menu' />"
-	ins += "<option value='' "
+	var ins = "";
+	ins += core_geraLinhas(param);
+	ins += "<p>Publicado para todos verem?<br>";
+	ins += "<select  id='Epublicado_menu' />";
+	ins += "<option value='' ";
 	if (i.publicado_menu == ""){ins += "selected";}
-	ins += ">---</option>"
-	ins += "<option value='SIM' "
+	ins += ">---</option>";
+	ins += "<option value='SIM' ";
 	if ((i.publicado_menu).toLowerCase() == "sim"){ins += "selected";}
-	ins += " >sim</option>"
-	ins += "<option value='NAO' "
+	ins += " >sim</option>";
+	ins += "<option value='NAO' ";
 	if ((i.publicado_menu).toLowerCase() == "nao"){ins += "selected";}
-	ins += " >não</option>"
-	ins += "</select></p>"
-	ins += "<p>Inicia aberto na árvore?<br>"
-	ins += "<select  id='Eaberto' />"
-	ins += "<option value='' "
+	ins += " >não</option>";
+	ins += "</select></p>";
+	ins += "<p>Inicia aberto na árvore?<br>";
+	ins += "<select  id='Eaberto' />";
+	ins += "<option value='' ";
 	if (i.aberto == ""){ins += "selected";}
-	ins += ">---</option>"
-	ins += "<option value='SIM' "
+	ins += ">---</option>";
+	ins += "<option value='SIM' ";
 	if ((i.aberto).toLowerCase() == "sim"){ins += "selected";}
-	ins += " >sim</option>"
-	ins += "<option value='NAO' "
+	ins += " >sim</option>";
+	ins += "<option value='NAO' ";
 	if ((i.aberto).toLowerCase() == "nao"){ins += "selected";}
-	ins += " >não</option>"
-	ins += "</select></p>"
-	return(ins)
+	ins += " >não</option>";
+	ins += "</select></p>";
+	return(ins);
 }
 /*
 Function: gravaDados_M
@@ -224,12 +219,12 @@ Salva as alterações feitas
 function gravaDados_M(id,recordid)
 {
 	var campos = new Array("publicado_menu","perfil_menu","nome_menu","desc_menu","aberto","en","es","it");
-	var par = ""
-	for (i=0;i<campos.length;i++)
+	var par = "";
+	for (var i=0;i<campos.length;i++)
 	{
-		par += "&"+campos[i]+"="+($i("E"+campos[i]).value)
+		par += "&"+campos[i]+"="+($i("E"+campos[i]).value);
 	}
-	par += "&id_menu="+id
+	par += "&id_menu="+id;
 	core_carregando("ativa");
 	core_carregando(" gravando o registro do id= "+id);
 	var sUrl = "../php/menutemas.php?funcao=alteraMenus"+par;
@@ -242,28 +237,26 @@ function gravaDados_M(id,recordid)
   				if(YAHOO.lang.JSON.parse(o.responseText) == "erro")
   				{
   					core_carregando("<span style=color:red >Não foi possível excluir. Verifique se não existem registros vinculados</span>");
-  					setTimeout("core_carregando('desativa')",3000)
+  					setTimeout("core_carregando('desativa')",3000);
   				}
   				else
   				{
   					var rec = myDataTable.getRecordSet().getRecord(recordid);
-  					myDataTable.updateRow(rec,YAHOO.lang.JSON.parse(o.responseText)[0])
+  					myDataTable.updateRow(rec,YAHOO.lang.JSON.parse(o.responseText)[0]);
   					core_carregando("desativa");
   				}
-				//YAHOO.example.container.panelEditor.destroy();
-				//YAHOO.example.container.panelEditor = null;
   			}
   			catch(e){core_handleFailure(e,o.responseText);}
   		},
   		failure:core_handleFailure,
   		argument: { foo:"foo", bar:"bar" }
 	}; 
-	core_makeRequest(sUrl,callback)
+	core_makeRequest(sUrl,callback);
 }
 function excluiLinha_M(id,row)
 {
 	var mensagem = " excluindo o registro do id= "+id;
 	var sUrl = "../php/menutemas.php?funcao=excluirRegistro&id="+id+"&tabela=menus";
-	core_excluiLinha(sUrl,row,mensagem)
+	core_excluiLinha(sUrl,row,mensagem);
 }
 //YAHOO.util.Event.addListener(window, "load", initMenu);

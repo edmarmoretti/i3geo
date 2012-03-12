@@ -282,8 +282,7 @@ i3GEO.ajuda = {
 			k = $i("janelaMenTexto"),
 			jm = $i("i3geo_janelaMensagens"),
 			Dom = YAHOO.util.Dom,
-			h = parseInt(Dom.getStyle(jm,"height"),10),
-			temp;
+			h = parseInt(Dom.getStyle(jm,"height"),10);
 		if(j){
 			j.innerHTML = texto === "" ? "-" : texto;
 		}
@@ -293,7 +292,7 @@ i3GEO.ajuda = {
 			if(k)
 			{k.innerHTML = texto;}
 			if(this.TRANSICAOSUAVE){
-				temp = texto !== "" ? Dom.setStyle(jm,"opacity","1") : Dom.setStyle(jm,"opacity",(this.OPACIDADE / 100));
+				texto !== "" ? Dom.setStyle(jm,"opacity","1") : Dom.setStyle(jm,"opacity",(this.OPACIDADE / 100));
 			}
 			h = parseInt(Dom.getStyle(jm,"height"),10);
 			if(h)
@@ -310,7 +309,7 @@ i3GEO.ajuda = {
 	*/
 	mostraLetreiro: function(){
 		if(typeof(console) !== 'undefined'){console.info("i3GEO.ajuda.mostraLetreiro()");}
-		for (count=0; count<BPos; count += 1)
+		for (var count=0; count<BPos; count += 1)
 		{BSpaces+= " ";}
 		if (BPos < 1){
 			$i(i3GEO.ajuda.DIVLETREIRO).value = BMessage.substring(Math.abs(BPos), BMessage.length);

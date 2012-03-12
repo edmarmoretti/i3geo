@@ -1632,13 +1632,10 @@ i3GEO.arvoreDeCamadas = {
 		if(i3GEO.arvoreDeCamadas.VERIFICAABRANGENCIATEMAS === false)
 		{return;}
 		try{
-			var resultado = [],
-				i = 0,
+			var i = 0,
 				temp,
 				nelementos = i3GEO.arvoreDeCamadas.CAMADAS.length,
-				ltema,
-				intersec,
-				node;
+				ltema;
 			if (nelementos > 0){
 				do{
 					ltema = i3GEO.arvoreDeCamadas.CAMADAS[i];

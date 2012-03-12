@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<classpath>
+	<classpathentry excluding="buscarapida/|imprimir/|depreciados/downloadbase/|depreciados/inserexy/|depreciados/exemplo/|template/|nuvemtagsflash/|depreciados/|wmstime/|navegacaodir_depreciado/|depreciados/conectarwfs/|conectargeorss/|conectarwms/|scielo/" kind="src" path=""/>
+	<classpathentry kind="src" path="buscarapida"/>
+	<classpathentry kind="src" path="conectargeorss"/>
+	<classpathentry kind="src" path="conectarwms"/>
+	<classpathentry excluding="downloadbase/|inserexy/|exemplo/|conectarwfs/" kind="src" path="depreciados"/>
+	<classpathentry kind="src" path="depreciados/conectarwfs"/>
+	<classpathentry kind="src" path="depreciados/downloadbase"/>
+	<classpathentry kind="src" path="depreciados/exemplo"/>
+	<classpathentry kind="src" path="depreciados/inserexy"/>
+	<classpathentry kind="src" path="imprimir"/>
+	<classpathentry kind="src" path="navegacaodir_depreciado"/>
+	<classpathentry kind="src" path="nuvemtagsflash"/>
+	<classpathentry kind="src" path="scielo"/>
+	<classpathentry kind="src" path="template"/>
+	<classpathentry kind="src" path="wmstime"/>
+	<classpathentry kind="con" path="org.eclipse.wst.jsdt.launching.JRE_CONTAINER"/>
+	<classpathentry kind="output" path=""/>
+</classpath>

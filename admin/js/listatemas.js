@@ -1,12 +1,12 @@
 function editorTemaMapfile(mapfile)
 {
-	core_pegaDados("buscando dados...","../php/menutemas.php?funcao=pegaTemaPorMapfile&codigo_tema="+mapfile,"montaEditorTema")
+	core_pegaDados("buscando dados...","../php/menutemas.php?funcao=pegaTemaPorMapfile&codigo_tema="+mapfile,"montaEditorTema");
 }
 function montaEditorTema(dados)
 {
 	function on_editorCheckBoxChange(p_oEvent)
 	{
-		var ins = "",temp;
+		var temp;
 		if(p_oEvent.newValue.get("value") == "OK")
 		{
 			gravaDadosTema(dados[0].id_tema);
@@ -42,12 +42,12 @@ function montaEditorTema(dados)
 		{
 			YAHOO.example.container.panelEditorTema.destroy();
 			YAHOO.example.container.panelEditorTema = null;
-		}
+		};
 		YAHOO.util.Event.addListener(YAHOO.example.container.panelEditorTema.close, "click", fecha);
 	}
 	YAHOO.example.container.panelEditorTema.show();
 	//carrega os dados na janela
-	$i("editor_bd").innerHTML = montaDivTemas(dados[0])
+	$i("editor_bd").innerHTML = montaDivTemas(dados[0]);
 	core_carregando("desativa");
 	//
 	//preenche a div com a lista de tags
@@ -56,12 +56,12 @@ function montaEditorTema(dados)
 }
 function registraTagTema(valor)
 {
-	var inp = $i("tags_tema")
-	var tags = inp.value
+	var inp = $i("tags_tema");
+	var tags = inp.value;
 	if(tags == "")
-	inp.value = valor
+	inp.value = valor;
 	else
-	inp.value = tags+" "+valor
+	inp.value = tags+" "+valor;
 }
 function montaDivTemas(i)
 {
@@ -72,55 +72,55 @@ function montaDivTemas(i)
 		{titulo:"Espanhol (opcional):",id:"es",size:"40",value:i.es,tipo:"text",div:""},
 		{titulo:"Italiano (opcional):",id:"it",size:"40",value:i.it,tipo:"text",div:""}
 		]
-	}
-	var ins = ""
-	ins += core_geraLinhas(param)	
+	};
+	var ins = "";
+	ins += core_geraLinhas(param);
 	
 	ins += "<p>Descrição (opcional):<br>";
-	ins += "<input size=40 type=text id=desc_tema value='"+i.desc_tema+"' /></p>"
+	ins += "<input size=40 type=text id=desc_tema value='"+i.desc_tema+"' /></p>";
 	
 	ins += "<p>Link para a fonte (opcional):<br>";
-	ins += "<input size=40 type=text id=link_tema value='"+i.link_tema+"' /></p>"
+	ins += "<input size=40 type=text id=link_tema value='"+i.link_tema+"' /></p>";
 	
-	ins += "<p>Tags (separe com espaço). Você pode digitar novos tags ou pegar da lista abaixo (opcional):"
-	ins += "<input type=text size=40 value='"+i.tags_tema+"' id='tags_tema' ><br>"
+	ins += "<p>Tags (separe com espaço). Você pode digitar novos tags ou pegar da lista abaixo (opcional):";
+	ins += "<input type=text size=40 value='"+i.tags_tema+"' id='tags_tema' ><br>";
 	ins += "<div id=comboTags >Buscando...</div>";
 	
-	ins += "<p>Tipo (preencha apenas se for do tipo WMS):<br>"
-	ins += "<select  id='tipo_tema' />"
-	ins += "<option value='' "
+	ins += "<p>Tipo (preencha apenas se for do tipo WMS):<br>";
+	ins += "<select  id='tipo_tema' />";
+	ins += "<option value='' ";
 	if (i.tipoa_tema == ""){ins += "selected";}
-	ins += ">Normal</option>"
-	ins += "<option value='WMS' "
+	ins += ">Normal</option>";
+	ins += "<option value='WMS' ";
 	if (i.tipoa_tema == "WMS"){ins += "selected";}
-	ins += " >WMS<option></select></p>"
+	ins += " >WMS<option></select></p>";
 	
-	ins += "<p>Permite acesso via WMS/WFS?<br>"
-	ins += "<select  id='ogc_tema' >"
-	ins += core_combosimnao(i.ogc_tema)
-	ins += "</select></p>"
+	ins += "<p>Permite acesso via WMS/WFS?<br>";
+	ins += "<select  id='ogc_tema' >";
+	ins += core_combosimnao(i.ogc_tema);
+	ins += "</select></p>";
 	
-	ins += "<p>Permite o download na aplicação datadownload.htm?<br>"
-	ins += "<select  id='download_tema' >"
-	ins += core_combosimnao(i.download_tema)
-	ins += "</select></p>"
+	ins += "<p>Permite o download na aplicação datadownload.htm?<br>";
+	ins += "<select  id='download_tema' >";
+	ins += core_combosimnao(i.download_tema);
+	ins += "</select></p>";
 
-	ins += "<p>Permite acesso via kml?<br>"
-	ins += "<select  id='kml_tema' >"
-	ins += core_combosimnao(i.kml_tema)
-	ins += "</select></p>"
+	ins += "<p>Permite acesso via kml?<br>";
+	ins += "<select  id='kml_tema' >";
+	ins += core_combosimnao(i.kml_tema);
+	ins += "</select></p>";
 
-	ins += "<p>Permite acesso via kmz (kml com dados vetoriais)?<br>"
-	ins += "<select  id='kmz_tema' >"
-	ins += core_combosimnao(i.kmz_tema)
-	ins += "</select></p>"
+	ins += "<p>Permite acesso via kmz (kml com dados vetoriais)?<br>";
+	ins += "<select  id='kmz_tema' >";
+	ins += core_combosimnao(i.kmz_tema);
+	ins += "</select></p>";
 	
 	ins += "<p><span onclick='atualizaMiniatura()' style='color:blue;cursor:pointer' >Atualiza ou cria a miniatura.</span> Cada tema pode ter uma imagem miniatura que é mostrada em algumas funcionalidades do i3Geo. Utilize essa opção para criar a miniatura para o tema em edição.<br>";
 	ins += "<img id='imagemMiniatura' src='../../temas/miniaturas/"+i.imagem+"' /></p><br><br>";
 
 	
-	ins += "<input type=hidden id=codigo_tema value='"+i.codigo_tema+"'/>"
-	return(ins)
+	ins += "<input type=hidden id=codigo_tema value='"+i.codigo_tema+"'/>";
+	return(ins);
 }
 function atualizaMiniatura(){
 	$i("imagemMiniatura").src = "../../imagens/aguarde.gif";
@@ -137,7 +137,7 @@ function atualizaMiniatura(){
   		failure:core_handleFailure,
   		argument: { foo:"foo", bar:"bar" }
 	}; 
-	core_makeRequest(sUrl,callback,"GET")	
+	core_makeRequest(sUrl,callback,"GET");
 }
 function gravaDadosTema(id)
 {
@@ -152,20 +152,20 @@ function gravaDadosTema(id)
 		if(($i("kml_tema").value).toLowerCase() == "nao")
 		{$i("kmz_tema").value = "NAO";}
 	}
-	var campos = new Array("nome","desc","link","tags","tipo","ogc","download","kml","codigo","kmz")
-	var par = ""
-	for (i=0;i<campos.length;i++)
+	var campos = new Array("nome","desc","link","tags","tipo","ogc","download","kml","codigo","kmz");
+	var par = "";
+	for (var i=0;i<campos.length;i++)
 	{
 		if($i(campos[i]+"_tema"))
-		par += "&"+campos[i]+"="+($i(campos[i]+"_tema").value)
+		par += "&"+campos[i]+"="+($i(campos[i]+"_tema").value);
 	}
-	var campos = new Array("en","es","it")
+	var campos = new Array("en","es","it");
 	for (i=0;i<campos.length;i++)
 	{
 		if($i(campos[i]))
-		par += "&"+campos[i]+"="+($i(campos[i]).value)
+		par += "&"+campos[i]+"="+($i(campos[i]).value);
 	}
-	par += "&id="+id
+	par += "&id="+id;
 	core_carregando("ativa");
 	core_carregando(" gravando o registro do id= "+id);
 	var sUrl = "../php/menutemas.php?funcao=alteraTemas"+par;
@@ -178,7 +178,7 @@ function gravaDadosTema(id)
   				if(YAHOO.lang.JSON.parse(o.responseText) == "erro")
   				{
   					core_carregando("<span style=color:red >Não foi possível excluir. Verifique se não existem menus vinculados a este tema</span>");
-  					setTimeout("core_carregando('desativa')",3000)
+  					setTimeout("core_carregando('desativa')",3000);
   				}
   				else
   				{
@@ -194,5 +194,5 @@ function gravaDadosTema(id)
   		failure:core_handleFailure,
   		argument: { foo:"foo", bar:"bar" }
 	}; 
-	core_makeRequest(sUrl,callback,"POST")
+	core_makeRequest(sUrl,callback,"POST");
 }

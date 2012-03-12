@@ -39,7 +39,7 @@ Inicializa o editor
 */
 function initMenu()
 {
-	core_ativaBotaoAdicionaLinha("../php/menutemas.php?funcao=alteraPerfis")
+	core_ativaBotaoAdicionaLinha("../php/menutemas.php?funcao=alteraPerfis");
 	core_carregando("ativa");
 	core_ativaPainelAjuda("ajuda","botaoAjuda");
 	pegaPerfis();
@@ -53,7 +53,7 @@ Obtém a lista de perfis
 */
 function pegaPerfis()
 {
-	core_pegaDados("buscando perfis...","../php/menutemas.php?funcao=pegaPerfis","montaTabela")
+	core_pegaDados("buscando perfis...","../php/menutemas.php?funcao=pegaPerfis","montaTabela");
 }
 function montaTabela(dados)
 {
@@ -139,10 +139,11 @@ function montaTabela(dados)
         });
         myDataTable.subscribe("editorSaveEvent", function(oArgs)
         {
-			if(oArgs.newData != oArgs.oldData)
-			var linha = myDataTable.getTrEl(oArgs.editor.getRecord())
-			linha.style.color = "blue";
-			linha.style.textDecoration = "blink";
+			if(oArgs.newData != oArgs.oldData){
+				var linha = myDataTable.getTrEl(oArgs.editor.getRecord());
+				linha.style.color = "blue";
+				linha.style.textDecoration = "blink";
+			}
         });
         
         myDataTable.subscribe("editorBlurEvent", function(oArgs)
@@ -167,12 +168,12 @@ function gravaLinha(row)
 	core_carregando("ativa");
 	var mensagem = " gravando registro do id= "+id_perfil;
 	var sUrl = "../php/menutemas.php?funcao=alteraPerfis&perfil="+perfil+"&id="+id_perfil;
-	core_gravaLinha(mensagem,row,sUrl)
+	core_gravaLinha(mensagem,row,sUrl);
 }
 function excluiLinha(id,row)
 {
 	var mensagem = " excluindo o registro do id= "+id;
 	var sUrl = "../php/menutemas.php?funcao=excluirRegistro&id="+id+"&tabela=perfis";
-	core_excluiLinha(sUrl,row,mensagem)
+	core_excluiLinha(sUrl,row,mensagem);
 }
 YAHOO.util.Event.addListener(window, "load", initMenu);

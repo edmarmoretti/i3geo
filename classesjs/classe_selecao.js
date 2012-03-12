@@ -316,11 +316,10 @@ i3GEO.selecao = {
 		Termina o desenho do polígono e executa a operação de seleção
 		*/
 		termina: function(){
-			var doc,pontos,n,xs,ys,retorna,p,cp;
+			var doc,pontos,xs,ys,retorna,p,cp;
 			doc = (navm) ? document.frames("wdocai").document : $i("wdocai").contentDocument;
 			pontos = pontosdistobj;
 			i3GEO.desenho.richdraw.fecha();
-			n = pontos.xpt.length;
 			i3GEO.mapa.ativaTema(doc.getElementById("comboTemas").value);
 			xs = pontos.xpt.toString(",");
 			ys = pontos.ypt.toString(",");

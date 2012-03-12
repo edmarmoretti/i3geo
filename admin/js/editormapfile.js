@@ -1,4 +1,4 @@
-/*
+/* 
 Title: editormapfile.js
 
 Funções que controlam a interface do editor de mapfiles (temas)
@@ -189,15 +189,9 @@ function montaArvore()
 {
 	YAHOO.example.treeExample = new function()
 	{
-		var currentIconMode;
 		tree = "";
 		function changeIconMode()
-		{
-			var newVal = parseInt(this.value);
-			if (newVal != currentIconMode)
-			{currentIconMode = newVal;}
-			buildTree();
-		}
+		{buildTree();}
         function loadNodeData(node, fnLoadComplete)
         {
 			if(node.data.codigoMap == undefined){
@@ -209,8 +203,8 @@ function montaArvore()
 			{
                 success: function(oResponse)
                 {
-                    var dados = YAHOO.lang.JSON.parse(oResponse.responseText)
-					montaRaizTema(node,dados)
+                    var dados = YAHOO.lang.JSON.parse(oResponse.responseText);
+					montaRaizTema(node,dados);
                     oResponse.argument.fnLoadComplete();
                 },
                 failure: function(oResponse)
@@ -229,7 +223,7 @@ function montaArvore()
         function buildTree()
         {
 			tree = new YAHOO.widget.TreeView("tabela");
-			tree.setDynamicLoad(loadNodeData, currentIconMode);
+			tree.setDynamicLoad(loadNodeData, 0);
 			var root = tree.getRoot();
 			var tempNode = new YAHOO.widget.TextNode('', root, false);
 			tempNode.isLeaf = true;
@@ -237,7 +231,7 @@ function montaArvore()
         }
     	buildTree();
 	}();
-   	montaNosRaiz("nao")
+   	montaNosRaiz("nao");
    	tree.draw();
 }
 function montaNosRaiz(redesenha)
@@ -253,24 +247,23 @@ function montaNosRaiz(redesenha)
 			iconePlus = false;
 			conteudo += "<b>("+$mapfiles[i].extensao+") </b>";
 		}
-		conteudo += "&nbsp;<img style=\"width:12px;position:relative;cursor:pointer;top:2px\" onclick=\"excluirMapfile('"+$mapfiles[i].codigo+"')\" title=excluir src=\"../imagens/01.png\" />"
+		conteudo += "&nbsp;<img style=\"width:12px;position:relative;cursor:pointer;top:2px\" onclick=\"excluirMapfile('"+$mapfiles[i].codigo+"')\" title=excluir src=\"../imagens/01.png\" />";
 		if(iconePlus)
-		{conteudo += "&nbsp;<img style=\"width:12px;position:relative;cursor:pointer;top:2px\" onclick=\"clonarMapfile('"+$mapfiles[i].codigo+"')\" title='cria uma cópia' src=\"../imagens/clonar.png\" />"}
-		conteudo += "&nbsp;<img style=\"width:12px;position:relative;cursor:pointer;top:2px\" onclick=\"limparCacheMapfile('"+$mapfiles[i].codigo+"')\" title='limpa o chache de imagens se houver' src=\"../imagens/limparcache.png\" />"
-		conteudo += "&nbsp;<img style=\"width:12px;position:relative;cursor:pointer;top:2px\" onclick=\"editorTemaMapfile('"+$mapfiles[i].codigo+"')\" title='editar tema associado' src=\"../imagens/03.png\" />"
+		{conteudo += "&nbsp;<img style=\"width:12px;position:relative;cursor:pointer;top:2px\" onclick=\"clonarMapfile('"+$mapfiles[i].codigo+"')\" title='cria uma cópia' src=\"../imagens/clonar.png\" />";}
+		conteudo += "&nbsp;<img style=\"width:12px;position:relative;cursor:pointer;top:2px\" onclick=\"limparCacheMapfile('"+$mapfiles[i].codigo+"')\" title='limpa o chache de imagens se houver' src=\"../imagens/limparcache.png\" />";
+		conteudo += "&nbsp;<img style=\"width:12px;position:relative;cursor:pointer;top:2px\" onclick=\"editorTemaMapfile('"+$mapfiles[i].codigo+"')\" title='editar tema associado' src=\"../imagens/03.png\" />";
 		if(iconePlus){
-			conteudo += "<a style='border:solid white 0px;text-decoration:none;' href='../php/editortexto.php?mapfile="+$mapfiles[i].codigo+"' target=_self >&nbsp;<img title='Editor de textos' style=\"border:0px solid white;width:12px;position:relative;cursor:pointer;top:2px\" src=\"../imagens/06.png\" /></a>"
+			conteudo += "<a style='border:solid white 0px;text-decoration:none;' href='../php/editortexto.php?mapfile="+$mapfiles[i].codigo+"' target=_self >&nbsp;<img title='Editor de textos' style=\"border:0px solid white;width:12px;position:relative;cursor:pointer;top:2px\" src=\"../imagens/06.png\" /></a>";
 		}
-		conteudo += "&nbsp;<img style=\"width:12px;position:relative;cursor:pointer;top:2px\" onclick=\"testarMapfile('"+$mapfiles[i].codigo+"')\" title='testar!' src=\"../imagens/41.png\" />"
-		conteudo += "&nbsp;<img width=20px style=\"position:relative;cursor:pointer;top:2px\" onclick=\"javascript:window.open('../../ms_criamapa.php?layers="+$mapfiles[i].codigo+"')\" title='abrir no i3Geo' src=\"../../imagens/i3geo2.jpg\" />"
-		conteudo += "<b>&nbsp;<span>"+$mapfiles[i].codigo+" <span style=color:gray id='idNome_"+$mapfiles[i].codigo+"'>"+$mapfiles[i].nome+"</span></span>"
+		conteudo += "&nbsp;<img style=\"width:12px;position:relative;cursor:pointer;top:2px\" onclick=\"testarMapfile('"+$mapfiles[i].codigo+"')\" title='testar!' src=\"../imagens/41.png\" />";
+		conteudo += "&nbsp;<img width=20px style=\"position:relative;cursor:pointer;top:2px\" onclick=\"javascript:window.open('../../ms_criamapa.php?layers="+$mapfiles[i].codigo+"')\" title='abrir no i3Geo' src=\"../../imagens/i3geo2.jpg\" />";
+		conteudo += "<b>&nbsp;<span>"+$mapfiles[i].codigo+" <span style=color:gray id='idNome_"+$mapfiles[i].codigo+"'>"+$mapfiles[i].nome+"</span></span>";
 		if($mapfiles[i].imagem != "" && $i("mostraMini").checked == true){
 			conteudo += "</b><br><img src='../../temas/miniaturas/"+$mapfiles[i].imagem+"'/>";
 		}
 		var d = {html:conteudo,id:$mapfiles[i].codigo,codigoMap:$mapfiles[i].codigo};
-		
 		var tempNode = new YAHOO.widget.HTMLNode(d, root, false,iconePlus);
-		nos.push(tempNode)
+		nos.push(tempNode);
 	}
 	if(redesenha=="sim")
 	tree.draw();
@@ -278,7 +271,7 @@ function montaNosRaiz(redesenha)
 }
 function testarMapfile(codigoMap)
 {
-	window.open("../../testamapfile.php?map="+codigoMap+".map")
+	window.open("../../testamapfile.php?map="+codigoMap+".map");
 }
 /*
 Function: montaRaizTema
@@ -289,28 +282,22 @@ Monta as opções de edição básicas de um LAYER
 */
 function montaRaizTema(no,dados)
 {
-	var codigoMap = no.data.codigoMap;
-	function iconMode()
-	{
-		var newVal = parseInt(this.value);
-		if (newVal != currentIconMode)
-		{currentIconMode = newVal;}
-	}
-    if(!tree.getNodeByProperty("etiquetaLayers",no.data.codigoMap))
+    var tempNodeR = "";
+	if(!tree.getNodeByProperty("etiquetaLayers",no.data.codigoMap))
     {
-		var d = {tipo:"etiqueta",etiquetaLayers:no.data.codigoMap,html:"<i>Layers</i>"}
-		var tempNodeR = new YAHOO.widget.HTMLNode(d, no, true,true);
+		var d = {tipo:"etiqueta",etiquetaLayers:no.data.codigoMap,html:"<i>Layers</i>"};
+		tempNodeR = new YAHOO.widget.HTMLNode(d, no, true,true);
 		tempNodeR.isLeaf = false;
 		
-		var conteudo = "<span style=\"cursor:pointer;\" onclick=\"adicionaNovoLayer('"+no.data.codigoMap+"')\" ><img style='position:relative;top:2px' src=\"../imagens/05.png\" /><i>Adicionar um novo</i></span>"
-		var d = {html:conteudo}
+		var conteudo = "<span style=\"cursor:pointer;\" onclick=\"adicionaNovoLayer('"+no.data.codigoMap+"')\" ><img style='position:relative;top:2px' src=\"../imagens/05.png\" /><i>Adicionar um novo</i></span>";
+		var d = {html:conteudo};
 		var tempNode = new YAHOO.widget.HTMLNode(d, tempNodeR, false,true);
 		tempNode.isLeaf = true;		
 	}
 	for (var i=0, j=dados.layers.length; i<j; i++)
 	{		
-		var tempNode = new YAHOO.widget.HTMLNode(montaNoLayer(no.data.codigoMap,dados.layers[i]), tempNodeR, false,true);
-		tempNode.setDynamicLoad(loadLayerData, iconMode);
+		tempNode = new YAHOO.widget.HTMLNode(montaNoLayer(no.data.codigoMap,dados.layers[i]), tempNodeR, false,true);
+		tempNode.setDynamicLoad(loadLayerData, 0);
 		tempNode.isLeaf = false;
 	}
 	tree.draw();
@@ -322,8 +309,8 @@ function loadLayerData(node, fnLoadComplete)
 	{
 		success: function(oResponse)
 		{
-			var dados = YAHOO.lang.JSON.parse(oResponse.responseText)
-			montaParametrosTemas(node,dados,false)
+			var dados = YAHOO.lang.JSON.parse(oResponse.responseText);
+			montaParametrosTemas(node,dados,false);
 			oResponse.argument.fnLoadComplete();
 		},
 		failure: function(oResponse)
@@ -341,10 +328,10 @@ function loadLayerData(node, fnLoadComplete)
 }
 
 function montaNoLayer(codigo,indice){
-	var conteudo = "&nbsp;<img style=\"position:relative;cursor:pointer;top:0px\" onclick=\"sobeDesce('sobe','layer','"+codigo+"','"+indice+"')\" title=sobe src=\"../imagens/34.png\" />"
-	conteudo += "&nbsp;<img style=\"position:relative;cursor:pointer;top:0px\" onclick=\"sobeDesce('desce','layer','"+codigo+"','"+indice+"')\" title=desce src=\"../imagens/33.png\" />"
-	conteudo += "&nbsp;<img style=\"position:relative;cursor:pointer;top:0px\" onclick=\"excluirLayer('"+codigo+"','"+indice+"')\" title=excluir width='10px' heigth='10px' src=\"../imagens/01.png\" />&nbsp;<span>"+indice+"</span>"
-	var d = {html:conteudo,id:codigo+"_"+indice,codigoMap:codigo,codigoLayer:indice}
+	var conteudo = "&nbsp;<img style=\"position:relative;cursor:pointer;top:0px\" onclick=\"sobeDesce('sobe','layer','"+codigo+"','"+indice+"')\" title=sobe src=\"../imagens/34.png\" />";
+	conteudo += "&nbsp;<img style=\"position:relative;cursor:pointer;top:0px\" onclick=\"sobeDesce('desce','layer','"+codigo+"','"+indice+"')\" title=desce src=\"../imagens/33.png\" />";
+	conteudo += "&nbsp;<img style=\"position:relative;cursor:pointer;top:0px\" onclick=\"excluirLayer('"+codigo+"','"+indice+"')\" title=excluir width='10px' heigth='10px' src=\"../imagens/01.png\" />&nbsp;<span>"+indice+"</span>";
+	var d = {html:conteudo,id:codigo+"_"+indice,codigoMap:codigo,codigoLayer:indice};
 	return d;
 }
 function iconMode()
@@ -366,62 +353,62 @@ function montaParametrosTemas(no,dados,redesenha)
 	var codigoLayer = no.data.codigoLayer;
 	var id = codigoMap+"_"+codigoLayer;
 	var conteudo = "";
+	var tempNodeR = "";
     if(!tree.getNodeByProperty("etiquetaDados",id))
     {
-		conteudo = "<span style=cursor:pointer; onclick=\"editorDados('"+codigoMap+"','"+codigoLayer+"')\" ><img width='10px' heigth='10px' style=\"position:relative;top:0px\" title='' src=\"../imagens/06.png\" /> Conexão com os dados</span>"
-		var d = {tipo:"etiquetaDados",etiquetaDados:id,html:conteudo}
+		conteudo = "<span style=cursor:pointer; onclick=\"editorDados('"+codigoMap+"','"+codigoLayer+"')\" ><img width='10px' heigth='10px' style=\"position:relative;top:0px\" title='' src=\"../imagens/06.png\" /> Conexão com os dados</span>";
+		var d = {tipo:"etiquetaDados",etiquetaDados:id,html:conteudo};
 		var tempNode = new YAHOO.widget.HTMLNode(d, no, false,true);
 		tempNode.isLeaf = true;
 	}
     if(!tree.getNodeByProperty("etiquetaTitulo",id))
     {
-		conteudo = "<span style=cursor:pointer; onclick=\"editorTitulo('"+codigoMap+"','"+codigoLayer+"')\" ><img width='10px' heigth='10px' style=\"position:relative;top:0px\" title='' src=\"../imagens/06.png\" /> Título, escala, extensão</span>"
-		var d = {tipo:"etiquetaTitulo",etiquetaTitulo:id,html:conteudo}
+		conteudo = "<span style=cursor:pointer; onclick=\"editorTitulo('"+codigoMap+"','"+codigoLayer+"')\" ><img width='10px' heigth='10px' style=\"position:relative;top:0px\" title='' src=\"../imagens/06.png\" /> Título, escala, extensão</span>";
+		var d = {tipo:"etiquetaTitulo",etiquetaTitulo:id,html:conteudo};
 		var tempNode = new YAHOO.widget.HTMLNode(d, no, false,true);
 		tempNode.isLeaf = true;
 	}
     if(!tree.getNodeByProperty("etiquetaComport",id))
     {
-		conteudo = "<span style=cursor:pointer; onclick=\"editorComport('"+codigoMap+"','"+codigoLayer+"')\" ><img width='10px' heigth='10px' style=\"position:relative;top:0px\" title='' src=\"../imagens/06.png\" /> Comportamento no mapa</span>"
-		var d = {tipo:"etiquetaComport",etiquetaComport:id,html:conteudo}
+		conteudo = "<span style=cursor:pointer; onclick=\"editorComport('"+codigoMap+"','"+codigoLayer+"')\" ><img width='10px' heigth='10px' style=\"position:relative;top:0px\" title='' src=\"../imagens/06.png\" /> Comportamento no mapa</span>";
+		var d = {tipo:"etiquetaComport",etiquetaComport:id,html:conteudo};
 		var tempNode = new YAHOO.widget.HTMLNode(d, no, false,true);
 		tempNode.isLeaf = true;
-	}		
+	}
 	
     if(!tree.getNodeByProperty("etiquetaDispo",id))
     {
-		conteudo = "<span style=cursor:pointer; onclick=\"editorDispo('"+codigoMap+"','"+codigoLayer+"')\" ><img width='10px' heigth='10px' style=\"position:relative;top:0px\" title='' src=\"../imagens/06.png\" /> Disponibilidade (download, wms,...)</span>"
-		var d = {tipo:"etiquetaDispo",etiquetaDispo:id,html:conteudo}
+		conteudo = "<span style=cursor:pointer; onclick=\"editorDispo('"+codigoMap+"','"+codigoLayer+"')\" ><img width='10px' heigth='10px' style=\"position:relative;top:0px\" title='' src=\"../imagens/06.png\" /> Disponibilidade (download, wms,...)</span>";
+		var d = {tipo:"etiquetaDispo",etiquetaDispo:id,html:conteudo};
 		var tempNode = new YAHOO.widget.HTMLNode(d, no, false,true);
 		tempNode.isLeaf = true;
 	}		
 //rever
     if(!tree.getNodeByProperty("etiquetaMetadados",id))
     {
-		conteudo = "<span style=cursor:pointer; onclick=\"editorMetadados('"+codigoMap+"','"+codigoLayer+"')\" ><img width='10px' heigth='10px' style=\"position:relative;top:0px\" title='edita metadados' src=\"../imagens/06.png\" /> Miscelânea</span>"
-		var d = {tipo:"etiquetaMetadados",etiquetaMetadados:id,html:conteudo}
+		conteudo = "<span style=cursor:pointer; onclick=\"editorMetadados('"+codigoMap+"','"+codigoLayer+"')\" ><img width='10px' heigth='10px' style=\"position:relative;top:0px\" title='edita metadados' src=\"../imagens/06.png\" /> Miscelânea</span>";
+		var d = {tipo:"etiquetaMetadados",etiquetaMetadados:id,html:conteudo};
 		var tempNode = new YAHOO.widget.HTMLNode(d, no, false,true);
 		tempNode.isLeaf = true;
 	}
-	var tempNodeR = no;
     if(!tree.getNodeByProperty("etiquetaClasses",id))
     {
-		var d = {id:id,codigoMap:codigoMap,codigoLayer:codigoLayer,tipo:"etiquetaClasses",etiquetaClasses:id,html:"<i>&nbsp;Classes</i>"}
-		var tempNodeR = new YAHOO.widget.HTMLNode(d, no, false,true);
+		var d = {id:id,codigoMap:codigoMap,codigoLayer:codigoLayer,tipo:"etiquetaClasses",etiquetaClasses:id,html:"<i>&nbsp;Classes</i>"};
+		tempNodeR = new YAHOO.widget.HTMLNode(d, no, false,true);
 		tempNodeR.isLeaf = false;
 
-		conteudo = "<span style='cursor:pointer;' onclick=\"adicionaNovaClasse('"+codigoMap+"','"+codigoLayer+"')\" ><img  style='position:relative;top:2px' src=\"../imagens/05.png\" /> Adicionar uma classe</span>"
-		var d = {html:conteudo}
+		conteudo = "<span style='cursor:pointer;' onclick=\"adicionaNovaClasse('"+codigoMap+"','"+codigoLayer+"')\" ><img  style='position:relative;top:2px' src=\"../imagens/05.png\" /> Adicionar uma classe</span>";
+		var d = {html:conteudo};
 		var tempNode = new YAHOO.widget.HTMLNode(d, tempNodeR, false,true);
 		tempNode.isLeaf = true;
 		
-		conteudo = "<span style='cursor:pointer;' onclick=\"classesAuto('"+codigoMap+"','"+codigoLayer+"')\" ><img style='position:relative;top:2px' src=\"../imagens/classificar.gif\" /> Criar classes automaticamente</span>"
-		var d = {html:conteudo}
+		conteudo = "<span style='cursor:pointer;' onclick=\"classesAuto('"+codigoMap+"','"+codigoLayer+"')\" ><img style='position:relative;top:2px' src=\"../imagens/classificar.gif\" /> Criar classes automaticamente</span>";
+		var d = {html:conteudo};
 		var tempNode = new YAHOO.widget.HTMLNode(d, tempNodeR, false,true);
 		tempNode.isLeaf = true;
 		
-		conteudo = "<span style='cursor:pointer;' onclick=\"window.open('../../testamapfile.php?solegenda=sim&map="+no.data.codigoMap+"')\" > <img style='position:relative;top:2px' src=\"../imagens/41.png\" /> Testar</span>"
-		var d = {html:conteudo}
+		conteudo = "<span style='cursor:pointer;' onclick=\"window.open('../../testamapfile.php?solegenda=sim&map="+no.data.codigoMap+"')\" > <img style='position:relative;top:2px' src=\"../imagens/41.png\" /> Testar</span>";
+		var d = {html:conteudo};
 		var tempNode = new YAHOO.widget.HTMLNode(d, tempNodeR, false,true);
 		tempNode.isLeaf = true;
 	}
@@ -441,8 +428,8 @@ function loadClasseData(node, fnLoadComplete)
 	{
 		success: function(oResponse)
 		{
-			var dados = YAHOO.lang.JSON.parse(oResponse.responseText)
-			montaParametrosClasses(node,dados,false)
+			var dados = YAHOO.lang.JSON.parse(oResponse.responseText);
+			montaParametrosClasses(node,dados,false);
 			oResponse.argument.fnLoadComplete();
 		},
 		failure: function(oResponse)
@@ -459,71 +446,73 @@ function loadClasseData(node, fnLoadComplete)
 	YAHOO.util.Connect.asyncRequest('GET', sUrl, callback);
 }
 function conteudoNoClasse(codigoMap,codigoLayer,indice,nome){
-	var conteudo = "&nbsp;<img style=\"position:relative;cursor:pointer;top:0px\" onclick=\"sobeDesce('sobe','classe','"+codigoMap+"','"+codigoLayer+"','"+indice+"')\" title=sobe src=\"../imagens/34.png\" />"
-	conteudo += "&nbsp;<img style=\"position:relative;cursor:pointer;top:0px\" onclick=\"sobeDesce('desce','classe','"+codigoMap+"','"+codigoLayer+"','"+indice+"')\" title=desce src=\"../imagens/33.png\" />"
-	conteudo += "&nbsp;<img style=\"position:relative;cursor:pointer;top:0px\" onclick=\"excluirClasse('"+codigoMap+"','"+codigoLayer+"','"+indice+"')\" title=excluir width='10px' heigth='10px' src=\"../imagens/01.png\" />&nbsp;<span>"+indice+" "+nome+"</span>"
-	var d = {classes:codigoMap+"_"+codigoLayer,html:conteudo,id:codigoMap+"_"+codigoLayer+"_"+indice,codigoMap:codigoMap,codigoLayer:codigoLayer,indiceClasse:indice}
+	var conteudo = "&nbsp;<img style=\"position:relative;cursor:pointer;top:0px\" onclick=\"sobeDesce('sobe','classe','"+codigoMap+"','"+codigoLayer+"','"+indice+"')\" title=sobe src=\"../imagens/34.png\" />";
+	conteudo += "&nbsp;<img style=\"position:relative;cursor:pointer;top:0px\" onclick=\"sobeDesce('desce','classe','"+codigoMap+"','"+codigoLayer+"','"+indice+"')\" title=desce src=\"../imagens/33.png\" />";
+	conteudo += "&nbsp;<img style=\"position:relative;cursor:pointer;top:0px\" onclick=\"excluirClasse('"+codigoMap+"','"+codigoLayer+"','"+indice+"')\" title=excluir width='10px' heigth='10px' src=\"../imagens/01.png\" />&nbsp;<span>"+indice+" "+nome+"</span>";
+	var d = {classes:codigoMap+"_"+codigoLayer,html:conteudo,id:codigoMap+"_"+codigoLayer+"_"+indice,codigoMap:codigoMap,codigoLayer:codigoLayer,indiceClasse:indice};
 	return d;
 }
 function montaParametrosClasses(no,dados,redesenha)
 {
 	var codigoMap = no.data.codigoMap;
-	var codigoLayer = no.data.codigoLayer
-	var indiceClasse = no.data.indiceClasse
+	var codigoLayer = no.data.codigoLayer;
+	var indiceClasse = no.data.indiceClasse;
 	var conteudo = "";
+	var tempNode = "";
+	var tempNodeR = "";
     if(!tree.getNodeByProperty("etiquetaClasseGeral",no.data.id))
     {
-		conteudo = "<span style=cursor:pointer; onclick=\"editorClasseGeral('"+codigoMap+"','"+codigoLayer+"','"+indiceClasse+"')\"  ><img width='10px' heigth='10px' style=\"position:relative;top:0px\" title='edita características da classe' src=\"../imagens/06.png\" /> Editar características gerais</span>"
-		var d = {tipo:"etiquetaClasseGeral",etiquetaClasseGeral:codigoMap+"_"+codigoLayer+"_"+indiceClasse,html:conteudo}
-		var tempNode = new YAHOO.widget.HTMLNode(d, no, false,true);
+		conteudo = "<span style=cursor:pointer; onclick=\"editorClasseGeral('"+codigoMap+"','"+codigoLayer+"','"+indiceClasse+"')\"  ><img width='10px' heigth='10px' style=\"position:relative;top:0px\" title='edita características da classe' src=\"../imagens/06.png\" /> Editar características gerais</span>";
+		var d = {tipo:"etiquetaClasseGeral",etiquetaClasseGeral:codigoMap+"_"+codigoLayer+"_"+indiceClasse,html:conteudo};
+		tempNode = new YAHOO.widget.HTMLNode(d, no, false,true);
 		tempNode.isLeaf = true;
 	}
     if(!tree.getNodeByProperty("etiquetaClasseLabel",no.data.id))
     {
-		conteudo = "<span style=cursor:pointer; onclick=\"editorClasseLabel('"+codigoMap+"','"+codigoLayer+"','"+indiceClasse+"')\" ><img width='10px' heigth='10px' style=\"position:relative;top:0px\" title='edita identificadores de texto' src=\"../imagens/06.png\" /> Editar toponímia</span>"
-		var d = {tipo:"etiquetaClasseLabel",etiquetaClasseLabel:codigoMap+"_"+codigoLayer+"_"+indiceClasse,html:conteudo}
-		var tempNode = new YAHOO.widget.HTMLNode(d, no, false,true);
+		conteudo = "<span style=cursor:pointer; onclick=\"editorClasseLabel('"+codigoMap+"','"+codigoLayer+"','"+indiceClasse+"')\" ><img width='10px' heigth='10px' style=\"position:relative;top:0px\" title='edita identificadores de texto' src=\"../imagens/06.png\" /> Editar toponímia</span>";
+		var d = {tipo:"etiquetaClasseLabel",etiquetaClasseLabel:codigoMap+"_"+codigoLayer+"_"+indiceClasse,html:conteudo};
+		tempNode = new YAHOO.widget.HTMLNode(d, no, false,true);
 		tempNode.isLeaf = true;
 	}
     if(!tree.getNodeByProperty("etiquetaEstilo",no.data.id))
     {
-		var d = {tipo:"etiquetaEstilo",etiquetaEstilo:codigoMap+"_"+codigoLayer+"_"+indiceClasse,html:"<i>Estilos</i>"}
-		var tempNodeR = new YAHOO.widget.HTMLNode(d, no, false,true);
+		var d = {tipo:"etiquetaEstilo",etiquetaEstilo:codigoMap+"_"+codigoLayer+"_"+indiceClasse,html:"<i>Estilos</i>"};
+		tempNodeR = new YAHOO.widget.HTMLNode(d, no, false,true);
 		tempNodeR.isLeaf = false;
 		
-		conteudo = "<span onclick=\"adicionaNovoEstilo('"+codigoMap+"','"+codigoLayer+"','"+indiceClasse+"')\" style=\"cursor:pointer;\" ><img style=\"position:relative;top:2px\" src=\"../imagens/05.png\" /> Adicionar um novo</span>"
-		var d = {tipo:"etiquetaEstilo",etiquetaEstilo:codigoMap+"_"+codigoLayer+"_"+indiceClasse,html:conteudo}
-		var tempNode = new YAHOO.widget.HTMLNode(d, tempNodeR, false,true);
+		conteudo = "<span onclick=\"adicionaNovoEstilo('"+codigoMap+"','"+codigoLayer+"','"+indiceClasse+"')\" style=\"cursor:pointer;\" ><img style=\"position:relative;top:2px\" src=\"../imagens/05.png\" /> Adicionar um novo</span>";
+		var d = {tipo:"etiquetaEstilo",etiquetaEstilo:codigoMap+"_"+codigoLayer+"_"+indiceClasse,html:conteudo};
+		tempNode = new YAHOO.widget.HTMLNode(d, tempNodeR, false,true);
 		tempNode.isLeaf = true;
 	}
 	for (var i=0, j=dados.length; i<j; i++)
 	{
 		var d = conteudoNoEstilo(codigoMap,codigoLayer,indiceClasse,dados[i].estilo);
-		var tempNode = new YAHOO.widget.HTMLNode(d, tempNodeR, false,true);
+		tempNode = new YAHOO.widget.HTMLNode(d, tempNodeR, false,true);
 		tempNode.isLeaf = true;
 	}
 	tree.draw();
 }
 function conteudoNoEstilo(codigoMap,codigoLayer,indice,estilo){
-	var conteudo = "&nbsp;<img style=\"position:relative;cursor:pointer;top:0px\" onclick=\"sobeDesce('sobe','estilo','"+codigoMap+"','"+codigoLayer+"','"+indice+"','"+estilo+"')\" title=sobe src=\"../imagens/34.png\" />"
-	conteudo += "&nbsp;<img style=\"position:relative;cursor:pointer;top:0px\" onclick=\"sobeDesce('desce','estilo','"+codigoMap+"','"+codigoLayer+"','"+indice+"','"+estilo+"')\" title=desce src=\"../imagens/33.png\" />"
-	conteudo += "&nbsp;<img style=\"position:relative;cursor:pointer;top:0px\" onclick=\"excluirEstilo('"+codigoMap+"','"+codigoLayer+"','"+indice+"','"+estilo+"')\" title=excluir width='10px' heigth='10px' src=\"../imagens/01.png\" />&nbsp;"
-	conteudo += "<img width='10px' heigth='10px' style=\"position:relative;cursor:pointer;top:0px\" onclick=\"editorEstilo('"+codigoMap+"','"+codigoLayer+"','"+indice+"','"+estilo+"')\" title='classes' src=\"../imagens/06.png\" />&nbsp;<span>"+estilo+"</span>"
-	var d = {estilos:codigoMap+"_"+codigoLayer+"_"+indice,html:conteudo,id:codigoMap+"_"+codigoLayer+"_"+indice+"_"+estilo,codigoMap:codigoMap,codigoLayer:codigoLayer,indiceClasse:indice,indiceEstilo:estilo}
+	var conteudo = "&nbsp;<img style=\"position:relative;cursor:pointer;top:0px\" onclick=\"sobeDesce('sobe','estilo','"+codigoMap+"','"+codigoLayer+"','"+indice+"','"+estilo+"')\" title=sobe src=\"../imagens/34.png\" />";
+	conteudo += "&nbsp;<img style=\"position:relative;cursor:pointer;top:0px\" onclick=\"sobeDesce('desce','estilo','"+codigoMap+"','"+codigoLayer+"','"+indice+"','"+estilo+"')\" title=desce src=\"../imagens/33.png\" />";
+	conteudo += "&nbsp;<img style=\"position:relative;cursor:pointer;top:0px\" onclick=\"excluirEstilo('"+codigoMap+"','"+codigoLayer+"','"+indice+"','"+estilo+"')\" title=excluir width='10px' heigth='10px' src=\"../imagens/01.png\" />&nbsp;";
+	conteudo += "<img width='10px' heigth='10px' style=\"position:relative;cursor:pointer;top:0px\" onclick=\"editorEstilo('"+codigoMap+"','"+codigoLayer+"','"+indice+"','"+estilo+"')\" title='classes' src=\"../imagens/06.png\" />&nbsp;<span>"+estilo+"</span>";
+	var d = {estilos:codigoMap+"_"+codigoLayer+"_"+indice,html:conteudo,id:codigoMap+"_"+codigoLayer+"_"+indice+"_"+estilo,codigoMap:codigoMap,codigoLayer:codigoLayer,indiceClasse:indice,indiceEstilo:estilo};
 	return d;
 }
 function editorDeTexto(codigoMap)
 {
 	core_carregando("ativa");
 	core_carregando("buscando texto...");
-	sUrl = "../php/editormapfile.php?funcao=pegaTextoMapfile&codigoMap="+codigoMap
+	sUrl = "../php/editormapfile.php?funcao=pegaTextoMapfile&codigoMap="+codigoMap;
 	var callback =
 	{
 		success:function(o)
 		{
-			core_montaEditor("","600px","800px")
-			var ins = "<input type=button id=salvarTexto value='Salvar' />"
-			ins += "<textarea id='editorArea' rows='19' cols='70'>"+YAHOO.lang.JSON.parse(o.responseText)+"</textarea>"
+			core_montaEditor("","600px","800px");
+			var ins = "<input type=button id=salvarTexto value='Salvar' />";
+			ins += "<textarea id='editorArea' rows='19' cols='70'>"+YAHOO.lang.JSON.parse(o.responseText)+"</textarea>";
 			var temp = function()
 			{
 				core_carregando("ativa");
@@ -532,27 +521,27 @@ function editorDeTexto(codigoMap)
 				{
 					success:function(o)
 					{
-						$i("editorArea").innerHTML = YAHOO.lang.JSON.parse(o.responseText)
+						$i("editorArea").innerHTML = YAHOO.lang.JSON.parse(o.responseText);
 						core_carregando("desativa");
 					},
 					failure:core_handleFailure,
 					argument: { foo:"foo", bar:"bar" }
-				}
-				var linhas = $i("editorArea").value.split("\n")
-				var tempLinhas = ""
+				};
+				var linhas = $i("editorArea").value.split("\n");
+				var tempLinhas = "";
 				for(var i=0, j=linhas.length; i<j; i++)
-				{tempLinhas += linhas[i]+"xxxxxxxx"}
-				sUrl = "../php/editormapfile.php?funcao=salvaTextoMapfile&codigoMap="+codigoMap+"&texto="+tempLinhas
-				core_makeRequest(sUrl,callback1,"GET")
-			}
-			$i("editor_bd").innerHTML = ins
+				{tempLinhas += linhas[i]+"xxxxxxxx";}
+				sUrl = "../php/editormapfile.php?funcao=salvaTextoMapfile&codigoMap="+codigoMap+"&texto="+tempLinhas;
+				core_makeRequest(sUrl,callback1,"GET");
+			};
+			$i("editor_bd").innerHTML = ins;
 			new YAHOO.widget.Button("salvarTexto",{ onclick: { fn: temp }});
 			core_carregando("desativa");
 		},
 		failure:core_handleFailure,
 		argument: { foo:"foo", bar:"bar" }
 	}; 
-	core_makeRequest(sUrl,callback)
+	core_makeRequest(sUrl,callback);
 }
 /*
 Function: verificaOrfaos
@@ -578,7 +567,7 @@ function verificaOrfaos()
 				if(YAHOO.lang.JSON.parse(o.responseText) == "erro")
 				{
 					core_carregando("<span style=color:red >Erro</span>");
-					setTimeout("core_carregando('desativa')",3000)
+					setTimeout("core_carregando('desativa')",3000);
 				}
 				else
 				{
@@ -599,7 +588,7 @@ function verificaOrfaos()
 		failure:core_handleFailure,
 		argument: { foo:"foo", bar:"bar" }
 	}; 
-	core_makeRequest(sUrl,callback)
+	core_makeRequest(sUrl,callback);
 }
 function excluirOrfao(codigo_tema){
 	excluirMapfile(codigo_tema);
@@ -615,14 +604,14 @@ Adiciona um novo mapfile
 */
 function adicionaNovoMapfile()
 {
-	var nome = $i("Etitulo").value
-	var it = $i("EtituloIT").value
-	var es = $i("EtituloES").value
-	var en = $i("EtituloEN").value
-	var codigo = $i("Ecodigo").value
+	var nome = $i("Etitulo").value;
+	var it = $i("EtituloIT").value;
+	var es = $i("EtituloES").value;
+	var en = $i("EtituloEN").value;
+	var codigo = $i("Ecodigo").value;
 	if(codigo === "")
 	{alert("Digite o nome do arquivo");return;}
-	sUrl = "../php/editormapfile.php?funcao=criarNovoMap&nome="+nome+"&codigo="+codigo+"&it="+it+"&en="+en+"&es="+es
+	sUrl = "../php/editormapfile.php?funcao=criarNovoMap&nome="+nome+"&codigo="+codigo+"&it="+it+"&en="+en+"&es="+es;
 	core_carregando("ativa");
 	core_carregando(" adicionando um novo mapfile");
 
@@ -635,13 +624,13 @@ function adicionaNovoMapfile()
 				if(YAHOO.lang.JSON.parse(o.responseText) == "erro")
 				{
 					core_carregando("<span style=color:red >Código já existe</span>");
-					setTimeout("core_carregando('desativa')",3000)
+					setTimeout("core_carregando('desativa')",3000);
 				}
 				else
 				{
 					YAHOO.example.container.panelEditor.destroy();
 					YAHOO.example.container.panelEditor = null;
-					core_pegaMapfiles("montaArvore()")
+					core_pegaMapfiles("montaArvore()");
 				}
 			}
 			catch(e){core_handleFailure(e,o.responseText);}
@@ -649,7 +638,7 @@ function adicionaNovoMapfile()
 		failure:core_handleFailure,
 		argument: { foo:"foo", bar:"bar" }
 	}; 
-	core_makeRequest(sUrl,callback)
+	core_makeRequest(sUrl,callback);
 }
 /*
 Function: adicionaNovoLayer
@@ -662,7 +651,7 @@ function adicionaNovoLayer(codigoMap)
 {
 	core_carregando("ativa");
 	core_carregando(" adicionando um novo layer");
-	sUrl = "../php/editormapfile.php?funcao=criarNovoLayer&codigoMap="+codigoMap
+	sUrl = "../php/editormapfile.php?funcao=criarNovoLayer&codigoMap="+codigoMap;
 	var callback =
 	{
 		success:function(o)
@@ -672,11 +661,11 @@ function adicionaNovoLayer(codigoMap)
 				if(YAHOO.lang.JSON.parse(o.responseText) == "erro")
 				{
 					core_carregando("<span style=color:red >Erro</span>");
-					setTimeout("core_carregando('desativa')",3000)
+					setTimeout("core_carregando('desativa')",3000);
 				}
 				else
 				{
-					var dados = YAHOO.lang.JSON.parse(o.responseText)
+					var dados = YAHOO.lang.JSON.parse(o.responseText);
 					var no = tree.getNodeByProperty("etiquetaLayers",codigoMap);					
 					var tempNode = new YAHOO.widget.HTMLNode(montaNoLayer(codigoMap,dados.layers[0]), no, false,true);
 					tempNode.setDynamicLoad(loadLayerData, iconMode);
@@ -691,7 +680,7 @@ function adicionaNovoLayer(codigoMap)
 		failure:core_handleFailure,
 		argument: { foo:"foo", bar:"bar" }
 	}; 
-	core_makeRequest(sUrl,callback)
+	core_makeRequest(sUrl,callback);
 }
 /*
 Function: adicionaNovaClasse
@@ -704,7 +693,7 @@ function adicionaNovaClasse(codigoMap,codigoLayer,indiceClasse)
 {
 	core_carregando("ativa");
 	core_carregando(" adicionando uma nova classe");
-	sUrl = "../php/editormapfile.php?funcao=criarNovaClasse&codigoMap="+codigoMap+"&codigoLayer="+codigoLayer
+	sUrl = "../php/editormapfile.php?funcao=criarNovaClasse&codigoMap="+codigoMap+"&codigoLayer="+codigoLayer;
 	var callback =
 	{
 		success:function(o)
@@ -714,7 +703,7 @@ function adicionaNovaClasse(codigoMap,codigoLayer,indiceClasse)
 				if(YAHOO.lang.JSON.parse(o.responseText) == "erro")
 				{
 					core_carregando("<span style=color:red >Erro</span>");
-					setTimeout("core_carregando('desativa')",3000)
+					setTimeout("core_carregando('desativa')",3000);
 				}
 				else
 				{
@@ -733,7 +722,7 @@ function adicionaNovaClasse(codigoMap,codigoLayer,indiceClasse)
 		failure:core_handleFailure,
 		argument: { foo:"foo", bar:"bar" }
 	}; 
-	core_makeRequest(sUrl,callback)
+	core_makeRequest(sUrl,callback);
 }
 /*
 Function: classesAuto
@@ -746,7 +735,6 @@ function classesAuto(codigoMap,codigoLayer)
 {
 	function on_editorCheckBoxChange(p_oEvent)
 	{
-		var ins = "";
 		var itemExpressao = document.getElementById("itemExpressao").value;
 		var itemNome = document.getElementById("itemNome").value;
 		if(itemNome == "")
@@ -762,14 +750,14 @@ function classesAuto(codigoMap,codigoLayer)
   				{
   					try
   					{
-						var dados = YAHOO.lang.JSON.parse(o.responseText)				
-						var nos = tree.getNodesByProperty("classes",codigoMap+"_"+codigoLayer)
+						var dados = YAHOO.lang.JSON.parse(o.responseText);			
+						var nos = tree.getNodesByProperty("classes",codigoMap+"_"+codigoLayer);
 						if(nos){
 							for (var i=0, j=nos.length; i<j; i++)
-							{tree.removeNode(nos[i],false)}
+							{tree.removeNode(nos[i],false);}
 						}
-						var no = tree.getNodeByProperty("etiquetaClasses",codigoMap+"_"+codigoLayer)
-						montaParametrosTemas(no,dados)
+						var no = tree.getNodeByProperty("etiquetaClasses",codigoMap+"_"+codigoLayer);
+						montaParametrosTemas(no,dados);
   						core_carregando("desativa");
 						YAHOO.example.container.panelEditorAutoClasses.destroy();
 						YAHOO.example.container.panelEditorAutoClasses = null;
@@ -779,7 +767,7 @@ function classesAuto(codigoMap,codigoLayer)
   				failure:core_handleFailure,
   				argument: { foo:"foo", bar:"bar" }
 			};		
-			core_makeRequest(sUrl,callback2)
+			core_makeRequest(sUrl,callback2);
 		}
 		else
 		{
@@ -812,14 +800,14 @@ function classesAuto(codigoMap,codigoLayer)
   				try
   				{
   					var itens = core_comboObjeto(YAHOO.lang.JSON.parse(o.responseText).itens,"","","");
-  					ins = "<p>Item da tabela de atributos que será utilizado para compor a expressão de seleção de cada classe</p>"
-  					ins += "<select  id='itemExpressao' >"
-  					ins += itens
-  					ins += "</select></p>"
-  					ins += "<p>Item da tabela de atributos que será utilizado para compor o nome de cada classe</p>"
-  					ins += "<select  id='itemNome' >"
-  					ins += itens
-  					ins += "</select></p>"
+  					var ins = "<p>Item da tabela de atributos que será utilizado para compor a expressão de seleção de cada classe</p>";
+  					ins += "<select  id='itemExpressao' >";
+  					ins += itens;
+  					ins += "</select></p>";
+  					ins += "<p>Item da tabela de atributos que será utilizado para compor o nome de cada classe</p>";
+  					ins += "<select  id='itemNome' >";
+  					ins += itens;
+  					ins += "</select></p>";
   					$i("editor_bd").innerHTML = ins;
   					core_carregando("desativa");
   				}
@@ -828,7 +816,7 @@ function classesAuto(codigoMap,codigoLayer)
   			failure:core_handleFailure,
   			argument: { foo:"foo", bar:"bar" }
 		};		
-		core_makeRequest(sUrl,callback)
+		core_makeRequest(sUrl,callback);
 	}
 	YAHOO.example.container.panelEditorAutoClasses.show();
 }
@@ -843,7 +831,7 @@ function adicionaNovoEstilo(codigoMap,codigoLayer,indiceClasse)
 {
 	core_carregando("ativa");
 	core_carregando(" adicionando um novo estilo");
-	sUrl = "../php/editormapfile.php?funcao=criarNovoEstilo&codigoMap="+codigoMap+"&codigoLayer="+codigoLayer+"&indiceClasse="+indiceClasse
+	sUrl = "../php/editormapfile.php?funcao=criarNovoEstilo&codigoMap="+codigoMap+"&codigoLayer="+codigoLayer+"&indiceClasse="+indiceClasse;
 	var callback =
 	{
 		success:function(o)
@@ -853,7 +841,7 @@ function adicionaNovoEstilo(codigoMap,codigoLayer,indiceClasse)
 				if(YAHOO.lang.JSON.parse(o.responseText) == "erro")
 				{
 					core_carregando("<span style=color:red >Erro</span>");
-					setTimeout("core_carregando('desativa')",3000)
+					setTimeout("core_carregando('desativa')",3000);
 				}
 				else
 				{
@@ -871,7 +859,7 @@ function adicionaNovoEstilo(codigoMap,codigoLayer,indiceClasse)
 		failure:core_handleFailure,
 		argument: { foo:"foo", bar:"bar" }
 	}; 
-	core_makeRequest(sUrl,callback)
+	core_makeRequest(sUrl,callback);
 }
 /*
 Function: limparCacheMapfile
@@ -900,13 +888,13 @@ function limparCacheMapfile(codigoMap)
   			failure:core_handleFailure,
   			argument: { foo:"foo", bar:"bar" }
 		}; 
-		core_makeRequest(sUrl,callback)
+		core_makeRequest(sUrl,callback);
 	};
 	var handleNo = function()
 	{this.hide();};
 	var mensagem = "Exclui o cache temporário de renderização?";
-	var largura = "300"
-	core_dialogoContinua(handleYes,handleNo,mensagem,largura)	
+	var largura = "300";
+	core_dialogoContinua(handleYes,handleNo,mensagem,largura);
 }
 /*
 Function: excluirMapfile
@@ -918,9 +906,9 @@ Exclui um mapfile
 function excluirMapfile(codigoMap)
 {
 	var mensagem = " excluindo "+codigoMap;
-	var no = tree.getNodeByProperty("id",codigoMap)
+	var no = tree.getNodeByProperty("id",codigoMap);
 	var sUrl = "../php/editormapfile.php?funcao=excluirMapfile&codigoMap="+codigoMap;
-	core_excluiNoTree(sUrl,no,mensagem)
+	core_excluiNoTree(sUrl,no,mensagem);
 }
 /*
 Function: clonarMapfile
@@ -931,7 +919,6 @@ Exclui um mapfile
 */
 function clonarMapfile(codigoMap)
 {
-	var mensagem = " clonando "+codigoMap;
 	var sUrl = "../php/editormapfile.php?funcao=clonarMapfile&codigomap="+codigoMap;
 	var handleYes = function()
 	{
@@ -955,13 +942,13 @@ function clonarMapfile(codigoMap)
   			failure:core_handleFailure,
   			argument: { foo:"foo", bar:"bar" }
 		}; 
-		core_makeRequest(sUrl+"&novomap="+novonome,callback)
+		core_makeRequest(sUrl+"&novomap="+novonome,callback);
 	};
 	var handleNo = function()
 	{this.hide();};
 	var mensagem = "Nome do novo arquivo:<br><input type=text value='' id=clonarComo />";
-	var largura = "300"
-	core_dialogoPergunta(handleYes,handleNo,mensagem,largura)	
+	var largura = "300";
+	core_dialogoPergunta(handleYes,handleNo,mensagem,largura);
 }
 /*
 Function: excluirLayer
@@ -973,9 +960,9 @@ Exclui um layer
 function excluirLayer(codigoMap,codigoLayer)
 {
 	var mensagem = " excluindo "+codigoLayer;
-	var no = tree.getNodeByProperty("id",codigoMap+"_"+codigoLayer)
+	var no = tree.getNodeByProperty("id",codigoMap+"_"+codigoLayer);
 	var sUrl = "../php/editormapfile.php?funcao=excluirLayer&codigoMap="+codigoMap+"&codigoLayer="+codigoLayer;
-	core_excluiNoTree(sUrl,no,mensagem)	
+	core_excluiNoTree(sUrl,no,mensagem);
 }
 /*
 Function: excluirClasse
@@ -999,10 +986,9 @@ function excluirClasse(codigoMap,codigoLayer,indiceClasse)
 			{
 				try
 				{
-					var dados = YAHOO.lang.JSON.parse(o.responseText)
 					var no = tree.getNodesByProperty("id",codigoMap+"_"+codigoLayer+"_"+indiceClasse);
 					tree.removeNode(no[0]);
-					tree.draw()
+					tree.draw();
 					core_carregando("desativa");
 				}
 				catch(e){core_handleFailure(e,o.responseText);}
@@ -1010,13 +996,13 @@ function excluirClasse(codigoMap,codigoLayer,indiceClasse)
 			failure:core_handleFailure,
 			argument: { foo:"foo", bar:"bar" }
 		};	
-		core_makeRequest(sUrl,callback)
-	}
+		core_makeRequest(sUrl,callback);
+	};
 	var handleNo = function()
 	{this.hide();};
 	var mensagem = "Exclui a classe?";
-	var largura = "300"
-	core_dialogoContinua(handleYes,handleNo,mensagem,largura)
+	var largura = "300";
+	core_dialogoContinua(handleYes,handleNo,mensagem,largura);
 }
 /*
 Function: excluirEstilo
@@ -1040,10 +1026,9 @@ function excluirEstilo(codigoMap,codigoLayer,indiceClasse,indiceEstilo)
 			{
 				try
 				{
-					var dados = YAHOO.lang.JSON.parse(o.responseText)
 					var no = tree.getNodesByProperty("id",codigoMap+"_"+codigoLayer+"_"+indiceClasse+"_"+indiceEstilo);
 					tree.removeNode(no[0]);
-					tree.draw()
+					tree.draw();
 					core_carregando("desativa");
 				}
 				catch(e){core_handleFailure(e,o.responseText);}
@@ -1051,13 +1036,13 @@ function excluirEstilo(codigoMap,codigoLayer,indiceClasse,indiceEstilo)
 			failure:core_handleFailure,
 			argument: { foo:"foo", bar:"bar" }
 		};	
-		core_makeRequest(sUrl,callback)
-	}
+		core_makeRequest(sUrl,callback);
+	};
 	var handleNo = function()
 	{this.hide();};
 	var mensagem = "Exclui o estilo?";
-	var largura = "300"
-	core_dialogoContinua(handleYes,handleNo,mensagem,largura)
+	var largura = "300";
+	core_dialogoContinua(handleYes,handleNo,mensagem,largura);
 }
 /*
 Function: editorDados
@@ -1068,9 +1053,9 @@ Abre o editor de conexão com a fonte dos dados de um layer
 */
 function editorDados(codigoMap,codigoLayer)
 {
-	core_montaEditor("","450px","650px")
+	core_montaEditor("","450px","650px");
 	var sUrl = "../php/editormapfile.php?funcao=pegaConexao&codigoMap="+codigoMap+"&codigoLayer="+codigoLayer;
-	core_pegaDados("Obtendo dados...",sUrl,"montaEditorDados")
+	core_pegaDados("Obtendo dados...",sUrl,"montaEditorDados");
 }
 /*
 Function: editorComport
@@ -1081,9 +1066,9 @@ Abre o editor das opções que controlam o comportamento do layer no mapa
 */
 function editorComport(codigoMap,codigoLayer)
 {
-	core_montaEditor("","450px","650px")
+	core_montaEditor("","450px","650px");
 	var sUrl = "../php/editormapfile.php?funcao=pegaComport&codigoMap="+codigoMap+"&codigoLayer="+codigoLayer;
-	core_pegaDados("Obtendo dados...",sUrl,"montaEditorComport")
+	core_pegaDados("Obtendo dados...",sUrl,"montaEditorComport");
 }
 
 /*
@@ -1095,9 +1080,9 @@ Abre o editor de título e descrição
 */
 function editorTitulo(codigoMap,codigoLayer)
 {
-	core_montaEditor("","450px","650px")
+	core_montaEditor("","450px","650px");
 	var sUrl = "../php/editormapfile.php?funcao=pegaTitulo&codigoMap="+codigoMap+"&codigoLayer="+codigoLayer;
-	core_pegaDados("Obtendo dados...",sUrl,"montaEditorTitulo")
+	core_pegaDados("Obtendo dados...",sUrl,"montaEditorTitulo");
 }
 /*
 Function: editorDispo
@@ -1108,9 +1093,9 @@ Abre o editor que define a disponibilidade dos dados
 */
 function editorDispo(codigoMap,codigoLayer)
 {
-	core_montaEditor("","450px","650px")
+	core_montaEditor("","450px","650px");
 	var sUrl = "../php/editormapfile.php?funcao=pegaDispo&codigoMap="+codigoMap+"&codigoLayer="+codigoLayer;
-	core_pegaDados("Obtendo dados...",sUrl,"montaEditorDispo")
+	core_pegaDados("Obtendo dados...",sUrl,"montaEditorDispo");
 }
 //depreciado
 function editorConexao(codigoMap,codigoLayer)
@@ -1124,9 +1109,9 @@ Abre o editor de metadados
 */
 function editorMetadados(codigoMap,codigoLayer)
 {
-	core_montaEditor("","450px","500px")
+	core_montaEditor("","450px","500px");
 	var sUrl = "../php/editormapfile.php?funcao=pegaMetadados&codigoMap="+codigoMap+"&codigoLayer="+codigoLayer;
-	core_pegaDados("Obtendo dados...",sUrl,"montaEditorMetadados")
+	core_pegaDados("Obtendo dados...",sUrl,"montaEditorMetadados");
 }
 /*
 Function: editorGeral
@@ -1137,9 +1122,9 @@ Abre o editor de dados gerais de um layer
 */
 function editorGeral(codigoMap,codigoLayer)
 {
-	core_montaEditor("","450px","500px")
+	core_montaEditor("","450px","500px");
 	var sUrl = "../php/editormapfile.php?funcao=pegaGeral&codigoMap="+codigoMap+"&codigoLayer="+codigoLayer;
-	core_pegaDados("Obtendo dados...",sUrl,"montaEditorGeral")
+	core_pegaDados("Obtendo dados...",sUrl,"montaEditorGeral");
 }
 /*
 Function: editorClasseGeral
@@ -1150,9 +1135,9 @@ Abre o editor de dados gerais de uma classe
 */
 function editorClasseGeral(codigoMap,codigoLayer,indiceClasse)
 {
-	core_montaEditor("","450px","500px")
+	core_montaEditor("","450px","500px");
 	var sUrl = "../php/editormapfile.php?funcao=pegaClasseGeral&codigoMap="+codigoMap+"&codigoLayer="+codigoLayer+"&indiceClasse="+indiceClasse;
-	core_pegaDados("Obtendo dados...",sUrl,"montaEditorClasseGeral")
+	core_pegaDados("Obtendo dados...",sUrl,"montaEditorClasseGeral");
 }
 /*
 Function: editorClasseLabel
@@ -1163,9 +1148,9 @@ Abre o editor dos labels de um layer
 */
 function editorClasseLabel(codigoMap,codigoLayer,indiceClasse)
 {
-	core_montaEditor("","450px","500px")
+	core_montaEditor("","450px","500px");
 	var sUrl = "../php/editormapfile.php?funcao=pegaClasseLabel&codigoMap="+codigoMap+"&codigoLayer="+codigoLayer+"&indiceClasse="+indiceClasse;
-	core_pegaDados("Obtendo dados...",sUrl,"montaEditorClasseLabel")
+	core_pegaDados("Obtendo dados...",sUrl,"montaEditorClasseLabel");
 }
 /*
 Function: editorEstilo
@@ -1176,9 +1161,9 @@ Abre o editor de dados gerais de um estilo
 */
 function editorEstilo(codigoMap,codigoLayer,indiceClasse,indiceEstilo)
 {
-	core_montaEditor("","450px","500px")
+	core_montaEditor("","450px","500px");
 	var sUrl = "../php/editormapfile.php?funcao=pegaEstilo&codigoMap="+codigoMap+"&codigoLayer="+codigoLayer+"&indiceClasse="+indiceClasse+"&indiceEstilo="+indiceEstilo;
-	core_pegaDados("Obtendo dados...",sUrl,"montaEditorEstilo")
+	core_pegaDados("Obtendo dados...",sUrl,"montaEditorEstilo");
 }
 function montaEditorComport(dados)
 {
@@ -1225,64 +1210,64 @@ function montaEditorComport(dados)
 			{ajuda:"Sets the unit of CLASS object SIZE values (default is pixels). Useful for simulating buffering",
 			titulo:"Sizeunits",id:"",value:dados.sizeunits,tipo:"text",div:"<div id=cSizeunits ></div>"}		
 		]
-	}
-	var ins = "<input type=button title='Salvar' value='Salvar' id=salvarEditor />"
-	ins += core_geraLinhas(param)
-	ins += "<br><br><br>"
-	$i("editor_bd").innerHTML = ins
+	};
+	var ins = "<input type=button title='Salvar' value='Salvar' id=salvarEditor />";
+	ins += core_geraLinhas(param);
+	ins += "<br><br><br>";
+	$i("editor_bd").innerHTML = ins;
 
 	if($i("cAplicaextensao")){
-		temp = "<select id='aplicaextensao' >"
-		temp += core_combosimnao(dados.aplicaextensao)
-		temp += "</select>"
-		$i("cAplicaextensao").innerHTML = temp
+		temp = "<select id='aplicaextensao' >";
+		temp += core_combosimnao(dados.aplicaextensao);
+		temp += "</select>";
+		$i("cAplicaextensao").innerHTML = temp;
 	}
 	if($i("cPermitecomentario")){
-		temp = "<select id='permitecomentario' >"
-		temp += core_combosimnao(dados.permitecomentario)
-		temp += "</select>"
-		$i("cPermitecomentario").innerHTML = temp
+		temp = "<select id='permitecomentario' >";
+		temp += core_combosimnao(dados.permitecomentario);
+		temp += "</select>";
+		$i("cPermitecomentario").innerHTML = temp;
 	}
 	if($i("cClasse")){
-		temp = "<p><select id='classe' >"
-		temp += core_combosimnao(dados.classe)
-		temp += "</select>"
-		$i("cClasse").innerHTML = temp
+		temp = "<p><select id='classe' >";
+		temp += core_combosimnao(dados.classe);
+		temp += "</select>";
+		$i("cClasse").innerHTML = temp;
 	}
 	if($i("cEscondido")){
-		temp = "<select id='escondido' >"
-		temp += core_combosimnao(dados.escondido)
-		temp += "</select>"
-		$i("cEscondido").innerHTML = temp
+		temp = "<select id='escondido' >";
+		temp += core_combosimnao(dados.escondido);
+		temp += "</select>";
+		$i("cEscondido").innerHTML = temp;
 	}
 	if($i("cIdentifica")){
-		temp = "<select id='identifica' >"
-		temp += core_combosimnao(dados.identifica)
-		temp += "</select>"
-		$i("cIdentifica").innerHTML = temp
+		temp = "<select id='identifica' >";
+		temp += core_combosimnao(dados.identifica);
+		temp += "</select>";
+		$i("cIdentifica").innerHTML = temp;
 	}
 	if($i("cTransitioneffect")){
-		temp = "<select id='transitioneffect' >"
-		temp += core_combosimnao(dados.transitioneffect)
-		temp += "</select>"
-		$i("cTransitioneffect").innerHTML = temp
+		temp = "<select id='transitioneffect' >";
+		temp += core_combosimnao(dados.transitioneffect);
+		temp += "</select>";
+		$i("cTransitioneffect").innerHTML = temp;
 	}
-	temp = "<select id='status' >"
-	temp += core_comboObjeto(objstatus,"valor","texto",dados.status)
-	temp += "</select>"
-	$i("cStatus").innerHTML = temp	
+	temp = "<select id='status' >";
+	temp += core_comboObjeto(objstatus,"valor","texto",dados.status);
+	temp += "</select>";
+	$i("cStatus").innerHTML = temp;
 	
-	temp = "<select id='sizeunits' >"
-	temp += core_comboObjeto(objmapunits,"valor","texto",dados.sizeunits)
-	temp += "</select>"
-	$i("cSizeunits").innerHTML = temp
-	temp = "<select id='toleranceunits' >"
-	temp += core_comboObjeto(objmapunits,"valor","texto",dados.toleranceunits)
-	temp += "</select>"
-	$i("cToleranceunits").innerHTML = temp
+	temp = "<select id='sizeunits' >";
+	temp += core_comboObjeto(objmapunits,"valor","texto",dados.sizeunits);
+	temp += "</select>";
+	$i("cSizeunits").innerHTML = temp;
+	temp = "<select id='toleranceunits' >";
+	temp += core_comboObjeto(objmapunits,"valor","texto",dados.toleranceunits);
+	temp += "</select>";
+	$i("cToleranceunits").innerHTML = temp;
 
 	var temp = function()
-	{salvarDadosEditor('comport',dados.codigoMap,dados.codigoLayer,false)}
+	{salvarDadosEditor('comport',dados.codigoMap,dados.codigoLayer,false);};
 	new YAHOO.widget.Button("salvarEditor",{ onclick: { fn: temp }});
 }
 
@@ -1305,14 +1290,14 @@ function montaEditorTitulo(dados)
 			{ajuda:"Mensagem que será mostrada no rodapé do mapa quando o tema estiver visível. É útil para apresentar ao usuário observações especiais sobre o uso daquele tema.",
 			titulo:"Mensagem (MENSAGEM)",id:"mensagem",value:dados.mensagem,tipo:"text"}
 		]
-	}
-	var ins = "<input type=button title='Salvar' value='Salvar' id=salvarEditor />"
-	ins += core_geraLinhas(param)
-	ins += "<br><br><br>"
-	$i("editor_bd").innerHTML = ins
+	};
+	var ins = "<input type=button title='Salvar' value='Salvar' id=salvarEditor />";
+	ins += core_geraLinhas(param);
+	ins += "<br><br><br>";
+	$i("editor_bd").innerHTML = ins;
 		
 	var temp = function()
-	{salvarDadosEditor('titulo',dados.codigoMap,dados.codigoLayer,false)}
+	{salvarDadosEditor('titulo',dados.codigoMap,dados.codigoLayer,false);};
 	new YAHOO.widget.Button("salvarEditor",{ onclick: { fn: temp }});
 }
 function montaEditorDispo(dados)
@@ -1326,19 +1311,19 @@ function montaEditorDispo(dados)
 			{ajuda:"Endereço de um arquivo KMZ ou KML pré-existente para download dos dados (caminho completo no servidor). Se definido, o sistema irá usar esse arquivo ao invés de gerar os dados, quando o usuário clicar nas opções de visualização de KML ou KMZ. Se não for definido, o arquivo é gerado diretamente do original.",
 			titulo:"Arquivo KML ou KMZ (ARQUIVOKMZ)",id:"arquivokmz",value:dados.arquivokmz,tipo:"text"}
 		]
-	}
-	var ins = "<input type=button title='Salvar' value='Salvar' id=salvarEditor />"
-	ins += core_geraLinhas(param)
-	ins += "<br><br><br>"
-	$i("editor_bd").innerHTML = ins
+	};
+	var ins = "<input type=button title='Salvar' value='Salvar' id=salvarEditor />";
+	ins += core_geraLinhas(param);
+	ins += "<br><br><br>";
+	$i("editor_bd").innerHTML = ins;
 	if($i("cDownload")){
-		temp = "<select id='download' >"
-		temp += core_combosimnao(dados.download)
-		temp += "</select>"
-		$i("cDownload").innerHTML = temp
+		temp = "<select id='download' >";
+		temp += core_combosimnao(dados.download);
+		temp += "</select>";
+		$i("cDownload").innerHTML = temp;
 	}		
 	var temp = function()
-	{salvarDadosEditor('dispo',dados.codigoMap,dados.codigoLayer,false)}
+	{salvarDadosEditor('dispo',dados.codigoMap,dados.codigoLayer,false);};
 	new YAHOO.widget.Button("salvarEditor",{ onclick: { fn: temp }});
 }
 
@@ -1372,9 +1357,9 @@ function montaEditorDados(dados)
 		{ajuda:"Tipo de representação das feições mostradas da camada. É importante definir esse parâmetro para que as funções de geração de SLD funcionem corretamente.",
 		titulo:"Tipo de representação (tipooriginal) - para temas do tipo WMS",id:"",value:dados.tipooriginal,tipo:"text",div:"<div id=cTipooriginal ></div>"}
 		]
-	}
-	var ins = "<input type=button title='Salvar' value='Salvar' id=salvarEditor />"
-	ins += "&nbsp;<input type=button title='Testar' value='Testar' id=testarEditor />"
+	};
+	var ins = "<input type=button title='Salvar' value='Salvar' id=salvarEditor />";
+	ins += "&nbsp;<input type=button title='Testar' value='Testar' id=testarEditor />";
 
 	if(dados.postgis_mapa.length > 0)
 	{
@@ -1385,47 +1370,47 @@ function montaEditorDados(dados)
 	if(dados.colunas != "" && dados.colunas != undefined)
 	{
 		ins += "<p>O layer possuí as seguintes colunas na tabela de atributos: ";
-		ins += dados.colunas+"</p><br>"
+		ins += dados.colunas+"</p><br>";
 	}	
-	ins += core_geraLinhas(param)
-	ins += "<br><br><br>"
-	$i("editor_bd").innerHTML = ins
+	ins += core_geraLinhas(param);
+	ins += "<br><br><br>";
+	$i("editor_bd").innerHTML = ins;
 	if($i("cCache")){
-		temp = "<select id='cache' >"
-		temp += core_combosimnao(dados.cache)
-		temp += "</select>"
-		$i("cCache").innerHTML = temp
+		temp = "<select id='cache' >";
+		temp += core_combosimnao(dados.cache);
+		temp += "</select>";
+		$i("cCache").innerHTML = temp;
 	}
 	if($i("cTipooriginal")){
-		temp = "<select id='tipooriginal' >"
-		temp += core_comboObjeto(objtipooriginal,"valor","texto",dados.tipooriginal)
-		temp += "</select>"
-		$i("cTipooriginal").innerHTML = temp
+		temp = "<select id='tipooriginal' >";
+		temp += core_comboObjeto(objtipooriginal,"valor","texto",dados.tipooriginal);
+		temp += "</select>";
+		$i("cTipooriginal").innerHTML = temp;
 	}	
 	
-	temp = "<select id='connectiontype' >"
-	temp += core_comboObjeto(objcontype,"valor","texto",dados.connectiontype)
-	temp += "</select>"
-	$i("cConnectiontype").innerHTML = temp
+	temp = "<select id='connectiontype' >";
+	temp += core_comboObjeto(objcontype,"valor","texto",dados.connectiontype);
+	temp += "</select>";
+	$i("cConnectiontype").innerHTML = temp;
 	
-	temp = "<select id='type' >"
-	temp += core_comboObjeto(objlayertypes,"valor","texto",dados.type)
-	temp += "</select>"
-	$i("cType").innerHTML = temp
+	temp = "<select id='type' >";
+	temp += core_comboObjeto(objlayertypes,"valor","texto",dados.type);
+	temp += "</select>";
+	$i("cType").innerHTML = temp;
 
 	if($i("cConvcaracter")){
-		temp = "<select id='convcaracter' >"
-		temp += core_combosimnao(dados.convcaracter)
-		temp += "</select>"
-		$i("cConvcaracter").innerHTML = temp
+		temp = "<select id='convcaracter' >";
+		temp += core_combosimnao(dados.convcaracter);
+		temp += "</select>";
+		$i("cConvcaracter").innerHTML = temp;
 	}	
 	
 	var temp = function()
-	{salvarDadosEditor('conexao',dados.codigoMap,dados.codigoLayer,false)}
+	{salvarDadosEditor('conexao',dados.codigoMap,dados.codigoLayer,false);};
 	new YAHOO.widget.Button("salvarEditor",{ onclick: { fn: temp }});
 
 	var temp = function()
-	{salvarDadosEditor('conexao',dados.codigoMap,dados.codigoLayer,"","",true)}
+	{salvarDadosEditor('conexao',dados.codigoMap,dados.codigoLayer,"","",true);};
 	new YAHOO.widget.Button("testarEditor",{ onclick: { fn: temp }});
 	
 	core_desativaforms(idsForms);
@@ -1568,9 +1553,9 @@ function montaEditorMetadados(dados)
 	if(dados.colunas != "")
 	{
 		ins += "<p>O layer possuí as seguintes colunas na tabela de atributos: ";
-		ins += dados.colunas+"</p>"
+		ins += dados.colunas+"</p>";
 	}
-	ins += core_geraLinhas(param)
+	ins += core_geraLinhas(param);
 	if(dados.type !== 3 && dados.type !== 4)
 	{ins += core_geraLinhas(paramVetor);}
 	if(dados.connectiontype !== 7 && dados.connectiontype !== 9)
@@ -1579,23 +1564,23 @@ function montaEditorMetadados(dados)
 	{ins += core_geraLinhas(paramRaster);}	
 	if(dados.connectiontype === 7 || dados.connectiontype === 9)
 	{ins += core_geraLinhas(paramOWS);}
-	ins += "<br><br><br>"
-	$i("editor_bd").innerHTML = ins
+	ins += "<br><br><br>";
+	$i("editor_bd").innerHTML = ins;
 	
 	if($i("cEditorsql")){
-		temp = "<select id='editorsql' >"
-		temp += core_combosimnao(dados.editorsql)
-		temp += "</select>"
-		$i("cEditorsql").innerHTML = temp
+		temp = "<select id='editorsql' >";
+		temp += core_combosimnao(dados.editorsql);
+		temp += "</select>";
+		$i("cEditorsql").innerHTML = temp;
 	}
 	if($i("cLtempoconvencode")){
-		temp = "<select id='ltempoconvencode' >"
-		temp += core_combosimnao(dados.ltempoconvencode)
-		temp += "</select>"
-		$i("cLtempoconvencode").innerHTML = temp
+		temp = "<select id='ltempoconvencode' >";
+		temp += core_combosimnao(dados.ltempoconvencode);
+		temp += "</select>";
+		$i("cLtempoconvencode").innerHTML = temp;
 	}	
 	var temp = function()
-	{salvarDadosEditor('metadados',dados.codigoMap,dados.codigoLayer)}
+	{salvarDadosEditor('metadados',dados.codigoMap,dados.codigoLayer);};
 	new YAHOO.widget.Button("salvarEditor",{ onclick: { fn: temp }});
 }
 
@@ -1625,24 +1610,24 @@ function montaEditorClasseGeral(dados)
 		{ajuda:"Minimum scale at which this CLASS is drawn. Scale is given as the denominator of the actual scale fraction, for example for a map at a scale of 1:24,000 use 24000.",
 		titulo:"Minscale",id:"minscale",value:dados.minscale,tipo:"text"}
 		]
-	}
-	var ins = "<input type=button title='Salvar' value='Salvar' id=salvarEditor />"
+	};
+	var ins = "<input type=button title='Salvar' value='Salvar' id=salvarEditor />";
 	if(dados.colunas != "")
 	{
 		ins += "<p>O layer possuí as seguintes colunas na tabela de atributos: ";
-		ins += dados.colunas+"</p>"
+		ins += dados.colunas+"</p>";
 	}
-	ins += core_geraLinhas(param)
-	ins += "<br><br><br>"
-	$i("editor_bd").innerHTML = ins
+	ins += core_geraLinhas(param);
+	ins += "<br><br><br>";
+	$i("editor_bd").innerHTML = ins;
 		
-	temp = "<select id='status' >"
-	temp += core_comboObjeto(objstatus,"valor","texto",dados.status)
-	temp += "</select>"
-	$i("cStatus").innerHTML = temp	
+	temp = "<select id='status' >";
+	temp += core_comboObjeto(objstatus,"valor","texto",dados.status);
+	temp += "</select>";
+	$i("cStatus").innerHTML = temp;
 
 	var temp = function()
-	{salvarDadosEditor('classeGeral',dados.codigoMap,dados.codigoLayer,dados.indiceClasse)}
+	{salvarDadosEditor('classeGeral',dados.codigoMap,dados.codigoLayer,dados.indiceClasse);};
 	new YAHOO.widget.Button("salvarEditor",{ onclick: { fn: temp }});
 }
 function montaEditorClasseLabel(dados)
@@ -1704,44 +1689,44 @@ function montaEditorClasseLabel(dados)
 		{ajuda:"Supported encoding format to be used for labels. If the format is not supported, the label will not be drawn. Requires the iconv library (present on most systems). The library is always detected if present on the system, but if not the label will not be drawn. Required for displaying international characters in MapServer. More information can be found at: http://www.foss4g.org/FOSS4G/MAPSERVER/mpsnf-i18n-en.html.",
 		titulo:"Encoding",id:"encoding",value:dados.encoding,tipo:"text"}
 		]
-	}
-	var ins = "<input type=button title='Salvar' value='Salvar' id=salvarEditor />"
+	};
+	var ins = "<input type=button title='Salvar' value='Salvar' id=salvarEditor />";
 	if(dados.colunas != "")
 	{
 		ins += "<p>O layer possuí as seguintes colunas na tabela de atributos: ";
-		ins += dados.colunas+"</p>"
+		ins += dados.colunas+"</p>";
 	}
-	ins += core_geraLinhas(param)
-	ins += "<br><br><br>"
-	$i("editor_bd").innerHTML = ins
+	ins += core_geraLinhas(param);
+	ins += "<br><br><br>";
+	$i("editor_bd").innerHTML = ins;
 
-	temp = "<select id='font' >"
-	temp += core_comboObjeto(dados.fontes,"","",dados.font)
-	temp += "</select>"
-	$i("cFont").innerHTML = temp
+	temp = "<select id='font' >";
+	temp += core_comboObjeto(dados.fontes,"","",dados.font);
+	temp += "</select>";
+	$i("cFont").innerHTML = temp;
 	
-	temp = "<select id='type' >"
-	temp += core_comboObjeto(objfonttypes,"valor","texto",dados.type)
-	temp += "</select>"
-	$i("cType").innerHTML = temp	
+	temp = "<select id='type' >";
+	temp += core_comboObjeto(objfonttypes,"valor","texto",dados.type);
+	temp += "</select>";
+	$i("cType").innerHTML = temp;
 	
-	temp = "<select id='partials' >"
-	temp += core_comboObjeto(objbool_tf,"valor","texto",dados.partials)
-	temp += "</select>"
-	$i("cPartials").innerHTML = temp	
+	temp = "<select id='partials' >";
+	temp += core_comboObjeto(objbool_tf,"valor","texto",dados.partials);
+	temp += "</select>";
+	$i("cPartials").innerHTML = temp;
 
-	temp = "<select id='force' >"
-	temp += core_comboObjeto(objbool_tf,"valor","texto",dados.force)
-	temp += "</select>"
-	$i("cForce").innerHTML = temp	
+	temp = "<select id='force' >";
+	temp += core_comboObjeto(objbool_tf,"valor","texto",dados.force);
+	temp += "</select>";
+	$i("cForce").innerHTML = temp;
 
-	temp = "<select id='autoangle' >"
-	temp += core_comboObjeto(objbool_tf,"valor","texto",dados.autoangle)
-	temp += "</select>"
-	$i("cAutoangle").innerHTML = temp
+	temp = "<select id='autoangle' >";
+	temp += core_comboObjeto(objbool_tf,"valor","texto",dados.autoangle);
+	temp += "</select>";
+	$i("cAutoangle").innerHTML = temp;
 
 	var temp = function()
-	{salvarDadosEditor('classeLabel',dados.codigoMap,dados.codigoLayer,dados.indiceClasse)}
+	{salvarDadosEditor('classeLabel',dados.codigoMap,dados.codigoLayer,dados.indiceClasse);};
 	new YAHOO.widget.Button("salvarEditor",{ onclick: { fn: temp }});
 }
 function montaEditorEstilo(dados)
@@ -1777,18 +1762,18 @@ function montaEditorEstilo(dados)
 			{ajuda:"Angle, given in degrees, to draw the line work. Default is 0. For symbols of Type HATCH, this is the angle of the hatched lines. For its use with hatched lines, see Example#8 in the SYMBOL examples.",
 			titulo:"Angle",id:"angle",value:dados.angle,tipo:"text"}
 		]
-	}
-	var ins = "<input type=button title='Salvar' value='Salvar' id=salvarEditor />"
-	ins += core_geraLinhas(param)
-	ins += "<br><br><br>"
-	$i("editor_bd").innerHTML = ins	
+	};
+	var ins = "<input type=button title='Salvar' value='Salvar' id=salvarEditor />";
+	ins += core_geraLinhas(param);
+	ins += "<br><br><br>";
+	$i("editor_bd").innerHTML = ins;	
 
 	temp = "<input type='text' value='"+dados.symbolname+"' id='symbolname' size='50'>";
 	temp += "<div id='listaSimbolos' style='overflow:auto;width:400px;height:50px;'></div>";
-	$i("cSymbolname").innerHTML = temp	
+	$i("cSymbolname").innerHTML = temp;
 	
 	var temp = function()
-	{salvarDadosEditor('estilo',dados.codigoMap,dados.codigoLayer,dados.indiceClasse,dados.indiceEstilo)}
+	{salvarDadosEditor('estilo',dados.codigoMap,dados.codigoLayer,dados.indiceClasse,dados.indiceEstilo);};
 	new YAHOO.widget.Button("salvarEditor",{ onclick: { fn: temp }});
 
 	escolheSimbolo = function(nome){
@@ -1805,7 +1790,7 @@ function montaEditorEstilo(dados)
 				var re = new RegExp("ms_tmp", "g");
 				var t = o.responseText.replace(re,"../../../ms_tmp/");
 				var re = new RegExp("\\\\", "g");
-				var t = t.replace(re,"");
+				t = t.replace(re,"");
 				$i("listaSimbolos").innerHTML = t;
   			}
   			catch(e){}
@@ -1813,7 +1798,7 @@ function montaEditorEstilo(dados)
   		failure:core_handleFailure,
   		argument: { foo:"foo", bar:"bar" }
 	}; 
-	core_makeRequest(sUrl,callback,'POST')
+	core_makeRequest(sUrl,callback,'POST');
 }
 /*
 Function: salvarDadosEditor
@@ -1832,25 +1817,26 @@ Altera um mapfile conforme o editor específico de uma característica
 */
 function salvarDadosEditor(tipo,codigoMap,codigoLayer,indiceClasse,indiceEstilo,testar)
 {
-	if(arguments.length < 6){var testar = false;}
+	var campos = [], par = "", prog = "", temp, re;
+	if(arguments.length < 6){testar = false;}
 	if(tipo == "comport")
 	{
-		var campos = new Array("aplicaextensao","permitecomentario","temporizador","classe","legendaimg","escondido","identifica","transitioneffect","status","offsite","opacity","maxscale","minscale","labelitem","labelmaxscale","labelminscale","symbolscale","tolerance","toleranceunits","sizeunits");
-		var par = "&codigoMap="+codigoMap+"&codigoLayer="+codigoLayer;
-		var prog = "../php/editormapfile.php?funcao=alterarComport";
+		campos = new Array("aplicaextensao","permitecomentario","temporizador","classe","legendaimg","escondido","identifica","transitioneffect","status","offsite","opacity","maxscale","minscale","labelitem","labelmaxscale","labelminscale","symbolscale","tolerance","toleranceunits","sizeunits");
+		par = "&codigoMap="+codigoMap+"&codigoLayer="+codigoLayer;
+		prog = "../php/editormapfile.php?funcao=alterarComport";
 	}
 	if(tipo == "dispo")
 	{
-		var campos = new Array("download","arquivodownload","arquivokmz");
-		var par = "&codigoMap="+codigoMap+"&codigoLayer="+codigoLayer;
-		var prog = "../php/editormapfile.php?funcao=alterarDispo";
+		campos = new Array("download","arquivodownload","arquivokmz");
+		par = "&codigoMap="+codigoMap+"&codigoLayer="+codigoLayer;
+		prog = "../php/editormapfile.php?funcao=alterarDispo";
 	}
 	if(tipo == "titulo")
 	{
 		//
 		//validação
 		//
-		var valorTeste = $i("extensao").value
+		var valorTeste = $i("extensao").value;
 		if(valorTeste != ""){
 			var teste1 = valorTeste.split(" ");
 			if(teste1.length != 4)
@@ -1860,63 +1846,62 @@ function salvarDadosEditor(tipo,codigoMap,codigoLayer,indiceClasse,indiceEstilo,
 			if(teste1[1]*1 > teste1[3]*1)
 			{alert("ymin maior que ymax em extensao");return;}
 		}
-		var valorTeste = $i("escala").value
+		var valorTeste = $i("escala").value;
 		if(valorTeste != ""){
 			var teste1 = valorTeste * 1;
-			if(teste1 > 0){}
-			else
+			if(teste1 <= 0){}
 			{alert("Valor de escala incorreto");return;}
 		}
 
-		var campos = new Array("name","tema","iconetema","mensagem","escala","extensao","group");
-		var par = "&codigoMap="+codigoMap+"&codigoLayer="+codigoLayer;
-		var prog = "../php/editormapfile.php?funcao=alterarTitulo"
+		campos = new Array("name","tema","iconetema","mensagem","escala","extensao","group");
+		par = "&codigoMap="+codigoMap+"&codigoLayer="+codigoLayer;
+		prog = "../php/editormapfile.php?funcao=alterarTitulo";
 	}
 	if(tipo == "conexao")
 	{
-		var campos = new Array("cache","projection","type","connection","data","connectiontype","tileitem","tileindex","filteritem","filter","tipooriginal","convcaracter");
-		var par = "&codigoMap="+codigoMap+"&codigoLayer="+codigoLayer
-		var prog = "../php/editormapfile.php?funcao=alterarConexao"
+		campos = new Array("cache","projection","type","connection","data","connectiontype","tileitem","tileindex","filteritem","filter","tipooriginal","convcaracter");
+		par = "&codigoMap="+codigoMap+"&codigoLayer="+codigoLayer;
+		prog = "../php/editormapfile.php?funcao=alterarConexao";
 	}
 	if(tipo == "metadados")
 	{
-		var campos = new Array("legendaimg","wms_srs","wms_name","wms_server_version","wms_format","wms_auth_username","wms_auth_password","wms_auth_type","wms_connectiontimeout","wms_latlonboundingbox","wms_proxy_auth_type","wms_proxy_host","wms_proxy_port","wms_proxy_type","wms_proxy_username","wms_proxy_password","wms_sld_body","wms_sld_url","wms_style","wms_bgcolor","wms_transparent","wms_time","itembuscarapida","ltempoformatodata","ltempoiteminicio","ltempoitemfim","ltempoitemtitulo","ltempoitemdescricao","ltempoitemtip","ltempoitemimagem","ltempoitemicone","ltempoitemlink","editorsql","ltempoconvencode","description_template","palletefile","palletestep","classestamanho","classessimbolo","classescor","classesnome","classesitem","identifica","transitioneffect","extensao","escondido","classe","tip","itenslink","itens","itensdesc")
-		var par = "&codigoMap="+codigoMap+"&codigoLayer="+codigoLayer
-		var prog = "../php/editormapfile.php?funcao=alterarMetadados"
+		campos = new Array("legendaimg","wms_srs","wms_name","wms_server_version","wms_format","wms_auth_username","wms_auth_password","wms_auth_type","wms_connectiontimeout","wms_latlonboundingbox","wms_proxy_auth_type","wms_proxy_host","wms_proxy_port","wms_proxy_type","wms_proxy_username","wms_proxy_password","wms_sld_body","wms_sld_url","wms_style","wms_bgcolor","wms_transparent","wms_time","itembuscarapida","ltempoformatodata","ltempoiteminicio","ltempoitemfim","ltempoitemtitulo","ltempoitemdescricao","ltempoitemtip","ltempoitemimagem","ltempoitemicone","ltempoitemlink","editorsql","ltempoconvencode","description_template","palletefile","palletestep","classestamanho","classessimbolo","classescor","classesnome","classesitem","identifica","transitioneffect","extensao","escondido","classe","tip","itenslink","itens","itensdesc");
+		par = "&codigoMap="+codigoMap+"&codigoLayer="+codigoLayer;
+		prog = "../php/editormapfile.php?funcao=alterarMetadados";
 	}
 	if(tipo == "classeGeral")
 	{
-		var campos = new Array("status","minscale","maxscale","name","title","keyimage")
-		var par = "&codigoMap="+codigoMap+"&codigoLayer="+codigoLayer+"&indiceClasse="+indiceClasse
-		var temp = $i("expression").value;
-		var re = /]/g;
-		var temp = temp.replace(re,"C_");
-		var re = "[";
-		var temp = temp.replace(re,"_C");
-		var re = /'/g;
-		var temp = temp.replace(re,"_A_");
+		campos = new Array("status","minscale","maxscale","name","title","keyimage");
+		par = "&codigoMap="+codigoMap+"&codigoLayer="+codigoLayer+"&indiceClasse="+indiceClasse;
+		temp = $i("expression").value;
+		re = /]/g;
+		temp = temp.replace(re,"C_");
+		re = "[";
+		temp = temp.replace(re,"_C");
+		re = /'/g;
+		temp = temp.replace(re,"_A_");
 		par += "&expression="+temp;
-		var prog = "../php/editormapfile.php?funcao=alterarClasseGeral"	
+		prog = "../php/editormapfile.php?funcao=alterarClasseGeral";
 	}
 	if(tipo == "classeLabel")
 	{
-		var campos = new Array("encoding","force","partials","mindistance","minfeaturesize","wrap","antialias","buffer","autoangle","angle","offsety","offsetx","position","maxsize","minsize","size","backgroundshadowsizey","backgroundshadowsizex","shadowsizey","shadowsizex","shadowcolor","outlinecolor","color","backgroundshadowcolor","backgroundcolor","type","font")
-		var par = "&codigoMap="+codigoMap+"&codigoLayer="+codigoLayer+"&indiceClasse="+indiceClasse
-		var prog = "../php/editormapfile.php?funcao=alterarClasseLabel"	
+		campos = new Array("encoding","force","partials","mindistance","minfeaturesize","wrap","antialias","buffer","autoangle","angle","offsety","offsetx","position","maxsize","minsize","size","backgroundshadowsizey","backgroundshadowsizex","shadowsizey","shadowsizex","shadowcolor","outlinecolor","color","backgroundshadowcolor","backgroundcolor","type","font");
+		par = "&codigoMap="+codigoMap+"&codigoLayer="+codigoLayer+"&indiceClasse="+indiceClasse;
+		prog = "../php/editormapfile.php?funcao=alterarClasseLabel"	;
 	}
 	if(tipo == "estilo")
 	{
-		var campos = new Array("angle","maxwidth","minwidth","width","outlinecolor","backgroundcolor","antialias","offsety","offsetx","maxsize","minsize","size","color","symbolname")
-		var par = "&codigoMap="+codigoMap+"&codigoLayer="+codigoLayer+"&indiceClasse="+indiceClasse+"&indiceEstilo="+indiceEstilo
-		var prog = "../php/editormapfile.php?funcao=alterarEstilo"	
+		campos = new Array("angle","maxwidth","minwidth","width","outlinecolor","backgroundcolor","antialias","offsety","offsetx","maxsize","minsize","size","color","symbolname");
+		par = "&codigoMap="+codigoMap+"&codigoLayer="+codigoLayer+"&indiceClasse="+indiceClasse+"&indiceEstilo="+indiceEstilo;
+		prog = "../php/editormapfile.php?funcao=alterarEstilo";
 	}
 	prog += "&testar="+testar;
 	try{
-		for (i=0;i<campos.length;i++){
+		for (var i=0;i<campos.length;i++){
 			if($i(campos[i]))
 			{par += "&"+campos[i]+"="+($i(campos[i]).value);}
 		}
-	}catch(e){alert(e)}
+	}catch(e){alert(e);}
 	core_carregando("ativa");
 	core_carregando(" gravando o registro do layer= "+codigoLayer);
 	var sUrl = prog+par;
@@ -1929,7 +1914,7 @@ function salvarDadosEditor(tipo,codigoMap,codigoLayer,indiceClasse,indiceEstilo,
   				if(YAHOO.lang.JSON.parse(o.responseText) == "erro")
   				{
   					core_carregando("<span style=color:red >Não foi possível salvar.</span>");
-  					setTimeout("core_carregando('desativa')",3000)
+  					setTimeout("core_carregando('desativa')",3000);
   				}
   				else
   				{
@@ -1946,11 +1931,11 @@ function salvarDadosEditor(tipo,codigoMap,codigoLayer,indiceClasse,indiceEstilo,
   						{montaEditorMetadados(YAHOO.lang.JSON.parse(o.responseText));}
   						if(tipo=="geral")
   						{
-  							var d = YAHOO.lang.JSON.parse(o.responseText)
+  							var d = YAHOO.lang.JSON.parse(o.responseText);
   							montaEditorGeral(d);
   							if(d.name != codigoLayer)
   							{
-  								core_pegaMapfiles("montaArvore()")
+  								core_pegaMapfiles("montaArvore()");
 								YAHOO.example.container.panelEditor.destroy();
 								YAHOO.example.container.panelEditor = null;  							
   							}
@@ -1963,7 +1948,7 @@ function salvarDadosEditor(tipo,codigoMap,codigoLayer,indiceClasse,indiceEstilo,
   						{montaEditorEstilo(YAHOO.lang.JSON.parse(o.responseText));}
   					}
   					else{
-  						window.open("../../testamapfile.php?map="+YAHOO.lang.JSON.parse(o.responseText).url)
+  						window.open("../../testamapfile.php?map="+YAHOO.lang.JSON.parse(o.responseText).url);
   					}
   					core_carregando("desativa");
   				}
@@ -1973,27 +1958,28 @@ function salvarDadosEditor(tipo,codigoMap,codigoLayer,indiceClasse,indiceEstilo,
   		failure:core_handleFailure,
   		argument: { foo:"foo", bar:"bar" }
 	}; 
-	core_makeRequest(sUrl,callback,'POST')
+	core_makeRequest(sUrl,callback,'POST');
 }
 function sobeDesce(movimento,tipo,codigoMap,codigoLayer,indiceClasse,indiceEstilo)
 {
+	var movimenta = "", no;
 	if(tipo == "layer")
 	{
-		var no = tree.getNodeByProperty("id",codigoMap+"_"+codigoLayer);
-		var movimenta = core_movimentaNo(movimento,no);
-		var indiceClasse = "";
-		var indiceEstilo = "";
+		no = tree.getNodeByProperty("id",codigoMap+"_"+codigoLayer);
+		movimenta = core_movimentaNo(movimento,no);
+		indiceClasse = "";
+		indiceEstilo = "";
 	}
 	if(tipo == "classe")
 	{
-		var no = tree.getNodeByProperty("id",codigoMap+"_"+codigoLayer+"_"+indiceClasse);
-		var movimenta = true;
-		var indiceEstilo = "";
+		no = tree.getNodeByProperty("id",codigoMap+"_"+codigoLayer+"_"+indiceClasse);
+		movimenta = true;
+		indiceEstilo = "";
 	}
 	if(tipo == "estilo")
 	{
-		var no = tree.getNodeByProperty("id",codigoMap+"_"+codigoLayer+"_"+indiceClasse+"_"+indiceEstilo);
-		var movimenta = true;
+		no = tree.getNodeByProperty("id",codigoMap+"_"+codigoLayer+"_"+indiceClasse+"_"+indiceEstilo);
+		movimenta = true;
 	}
 
 	var callback =
@@ -2001,16 +1987,17 @@ function sobeDesce(movimento,tipo,codigoMap,codigoLayer,indiceClasse,indiceEstil
     	success: function(o)
 		{
 			core_carregando("desativa");
+			var no = "";
 			if(tipo == "classe")
 			{
-				var no = tree.getNodeByProperty("id",codigoMap+"_"+codigoLayer)
-				tree.removeChildren(no)  
+				no = tree.getNodeByProperty("id",codigoMap+"_"+codigoLayer);
+				tree.removeChildren(no) ;
 				no.expand();
 			}
 			if(tipo == "estilo")
 			{
-				var no = tree.getNodeByProperty("id",codigoMap+"_"+codigoLayer+"_"+indiceClasse)
-				tree.removeChildren(no)  
+				no = tree.getNodeByProperty("id",codigoMap+"_"+codigoLayer+"_"+indiceClasse);
+				tree.removeChildren(no); 
 				no.expand();
 			}
 
@@ -2023,7 +2010,7 @@ function sobeDesce(movimento,tipo,codigoMap,codigoLayer,indiceClasse,indiceEstil
 		var sUrl = "../php/editormapfile.php?funcao=movimentaNo&tipo="+tipo+"&movimento="+movimento+"&codigoMap="+codigoMap+"&codigoLayer="+codigoLayer+"&indiceClasse="+indiceClasse+"&indiceEstilo="+indiceEstilo;		
 		core_carregando("ativa");
 		core_carregando(" modificando a ordem");
-		core_makeRequest(sUrl,callback)
+		core_makeRequest(sUrl,callback);
 	}
 }
 //YAHOO.util.Event.addListener(window, "load", initMenu);

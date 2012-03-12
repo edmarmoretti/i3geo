@@ -56,7 +56,6 @@ salvatudojs($jsfiles,$buffer,"../pacotes/richdraw/richdraw_tudo_compacto.js","js
 //gera um arquivo compactado para cada um
 //
 packer("../pacotes/mobileesp/mdetect.js","../pacotes/mobileesp/mdetect_compacto.js","None");
-packer("depreciados.js","compactados/depreciados_compacto.js","None");
 packer("classe_arvoredecamadas.js","compactados/classe_arvoredecamadas_compacto.js","Normal");
 packer("classe_arvoredetemas.js","compactados/classe_arvoredetemas_compacto.js","Normal");
 packer("classe_util.js","compactados/classe_util_compacto.js","Normal");
@@ -131,7 +130,6 @@ $jsfiles = array(
 "compactados/classe_idioma_compacto.js",
 "compactados/classe_php_compacto.js",
 "compactados/classe_configura_compacto.js",
-"compactados/depreciados_compacto.js",
 "compactados/classe_calculo_compacto.js",
 "compactados/classe_desenho_compacto.js",
 "compactados/classe_interface_compacto.js",

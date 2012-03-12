@@ -229,7 +229,7 @@ i3GEO.idioma = {
 	Abre uma nova janela do navegador com a lista de palavras do dicionário.
 	*/
 	mostraDicionario: function() {
-		var w,k;
+		var w,k = 0;
 		w = window.open();
 		for (k in i3GEO.idioma.DICIONARIO){
 			if(i3GEO.idioma.DICIONARIO.hasOwnProperty(k))

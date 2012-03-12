@@ -40,7 +40,7 @@ Inicializa o editor
 function initMenu()
 {
 	core_ativaPainelAjuda("ajuda","botaoAjuda");
-	new YAHOO.widget.Button("botao2",{ onclick: { fn: function(){window.open('../../testainstal.php') }} });
+	new YAHOO.widget.Button("botao2",{ onclick: { fn: function(){window.open('../../testainstal.php');}} });
 	$parametros = {
 	"simples": [
 	{ mensagem: "Arquivo que define as fontes de texto utilizadas",cabeca: "FONTSET", variavel: "FONTSET"},
@@ -52,7 +52,7 @@ function initMenu()
 	{ mensagem: "Complemento para a url das imagens",cabeca: "IMAGEURL", variavel: "IMAGEURL"}
 	]};
 	core_carregando("ativa");
-	core_pegaDados("buscando parâmetros...","../php/mapfiles.php?funcao=pegaParametrosConfigura","pegaParametros")
+	core_pegaDados("buscando parâmetros...","../php/mapfiles.php?funcao=pegaParametrosConfigura","pegaParametros");
 }
 /*
 Function: pegaParametros
@@ -63,17 +63,17 @@ Pega os parâmetros do mapfiles.php
 function pegaParametros(retorno)
 {
 	$i("mapfilebase").innerHTML = retorno.mapfile;
-	var ins = ""
-	for (i=0;i<$parametros.simples.length;i++)
+	var ins = "";
+	for (var i=0;i<$parametros.simples.length;i++)
 	{
-		ins += "<fieldset><legend><b>"+$parametros.simples[i].cabeca+"</b></legend>"
-		ins += "<p class=mensagem >"+$parametros.simples[i].mensagem+"</p>"
-		ins += "<table><tr><td><img style=cursor:pointer src=../imagens/02.png title='aplicar' onclick='salva(\""+$parametros.simples[i].variavel+"\")' /></td>"
-		ins += "<td><input onchange=\"this.style.color='blue'\" type=text size=70 id='"+$parametros.simples[i].variavel+"' /></td></tr></table>"
-		ins += "</fieldset><br>"	
+		ins += "<fieldset><legend><b>"+$parametros.simples[i].cabeca+"</b></legend>";
+		ins += "<p class=mensagem >"+$parametros.simples[i].mensagem+"</p>";
+		ins += "<table><tr><td><img style=cursor:pointer src=../imagens/02.png title='aplicar' onclick='salva(\""+$parametros.simples[i].variavel+"\")' /></td>";
+		ins += "<td><input onchange=\"this.style.color='blue'\" type=text size=70 id='"+$parametros.simples[i].variavel+"' /></td></tr></table>";
+		ins += "</fieldset><br>";
 	}
-	$i("tabela").innerHTML += ins
-	for (i=0;i<$parametros.simples.length;i++)
+	$i("tabela").innerHTML += ins;
+	for (var i=0;i<$parametros.simples.length;i++)
 	{
 		if($i($parametros.simples[i].variavel))
 		{$i($parametros.simples[i].variavel).value = eval("retorno."+$parametros.simples[i].variavel);}
@@ -90,10 +90,10 @@ Salva o novo valor de uma variável
 function salva(variavel)
 {
 	var original = $i(variavel).value;
-	$i(variavel).value = "gravando..."
-	core_pegaDados("gravando...","../php/mapfiles.php?funcao=salvaConfigura&variavel="+variavel+"&valor="+original,"")
+	$i(variavel).value = "gravando...";
+	core_pegaDados("gravando...","../php/mapfiles.php?funcao=salvaConfigura&variavel="+variavel+"&valor="+original,"");
 	
-	$i(variavel).style.color = ""
-	$i(variavel).value = original
+	$i(variavel).style.color = "";
+	$i(variavel).value = original;
 }
 YAHOO.util.Event.addListener(window, "load", initMenu);

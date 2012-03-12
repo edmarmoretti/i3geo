@@ -320,8 +320,8 @@ i3GEO.analise = {
 		Fecha a janela e os elementos gráficos criados para a ferramenta de medição
 		*/
 		fechaJanela: function(){
-			var janela,
-				temp = i3GEO.Interface.ATUAL !== "googleearth" ? i3GEO.desenho.richdraw.fecha() : i3GEO.Interface.googleearth.removePlacemark("divGeometriasTemp");
+			var janela;
+			i3GEO.Interface.ATUAL !== "googleearth" ? i3GEO.desenho.richdraw.fecha() : i3GEO.Interface.googleearth.removePlacemark("divGeometriasTemp");
 			i3GEO.util.removeChild("pontosins");
 			if($i("divGeometriasTemp"))
 			{i3GEO.desenho.richdraw.fecha();}
@@ -341,8 +341,7 @@ i3GEO.analise = {
 		Adiciona uma marca na tela e realiza o cálculo de distância dos pontos inseridos
 		*/
 		clique: function(){
-			var n,d,decimal,dd,dV;
-				//pontosdistobj = i3GEO.analise.medeDistancia.pontosdistobj;
+			var n,d,decimal,dd;
 			if (g_tipoacao === "mede"){
 				n = pontosdistobj.xpt.length;
 				pontosdistobj.xpt[n] = objposicaocursor.ddx;
@@ -407,9 +406,9 @@ i3GEO.analise = {
 		Para o cálculo de distâncias e ativa o botão "pan"
 		*/
 		paraCalculo: function(){
-			var temp,botaoPan = $i("pan");
+			var botaoPan = $i("pan");
 			g_tipoacao = "";
-			temp = botaoPan ? botaoPan.onclick.call() : i3GEO.barraDeBotoes.ativaBotoes();
+			botaoPan ? botaoPan.onclick.call() : i3GEO.barraDeBotoes.ativaBotoes();
 		},
 		/*
 		Function: movimento
@@ -489,7 +488,7 @@ i3GEO.analise = {
 				linhas: [],
 				linhastemp: []
 			};
-			var temp,x,y,ll1,ll2,d,
+			var x,y,ll1,ll2,d,
 			calculo = i3GEO.calculo,
 				montacontainer = function(){
 					var desenho = i3GEO.desenho;
@@ -521,7 +520,7 @@ i3GEO.analise = {
 					d = calculo.distancia(ll1[0],ll1[1],ll2[0],ll2[1]);
 					d = d * 1000;
 					g_areapixel = d * d;
-					temp = g_areapixel < 0 ? alert("Nao e possivel calcular a area. Entre em contato com o administrador do sistema.") : montacontainer();
+					g_areapixel < 0 ? alert("Nao e possivel calcular a area. Entre em contato com o administrador do sistema.") : montacontainer();
 				}
 			}
 			else{i3GEO.desenho.richdraw.fecha();}
@@ -532,7 +531,7 @@ i3GEO.analise = {
 		Cria a janela para mostrar os resultados da medição
 		*/
 		criaJanela: function(){
-			var novoel,ins,imagemxy,temp,janela;
+			var novoel,ins,imagemxy,janela;
 			if (!$i("mostraarea")){
 				novoel = document.createElement("div");
 				novoel.id = "mostraarea";
@@ -629,10 +628,9 @@ i3GEO.analise = {
 		Para o cálculo de área e ativa o botão "pan"
 		*/
 		paraCalculo: function(){
-			var botaoPan = $i("pan"),
-				temp;
+			var botaoPan = $i("pan");
 			g_tipoacao = "";
-			temp = botaoPan ? botaoPan.onclick.call() : i3GEO.barraDeBotoes.ativaBotoes();
+			botaoPan ? botaoPan.onclick.call() : i3GEO.barraDeBotoes.ativaBotoes();
 		},
 		/*
 		Function: movimento
@@ -640,8 +638,7 @@ i3GEO.analise = {
 		Realiza o desenho do poligono conforme o usuário movimenta o mouse
 		*/
 		movimento: function(){
-			var n,d,decimal,da,m;
-				//pontosdistobj = i3GEO.analise.medeArea.pontosdistobj;
+			var n;
 			if (g_tipoacao === "area"){
 				n = pontosdistobj.xpt.length;
 				if (n > 0){

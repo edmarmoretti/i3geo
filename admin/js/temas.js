@@ -103,53 +103,53 @@ $i = function(i)
 var retorna = function(retorno)
 {
 	fontes = retorno.data;
-}
+};
 var p = "../php/temas.php?funcao=pegaFontes";
 cPaint.call(p,"",retorna);
 
 function iniciaAdmin()
 {
-	verificaEditores()
+	verificaEditores();
 }
 
 function montaParametros()
 {
 	var retorna = function(retorno)
 	{
-		ins = "<select id=temaAtivo onchange='ativaTema(this.value)'>"
-		ins += comboObjeto(retorno.data,"codigo_tema","nome_tema","")
-		ins += "</select>"
-		$i("arquivoAtivo").innerHTML = ins
-	}
+		ins = "<select id=temaAtivo onchange='ativaTema(this.value)'>";
+		ins += comboObjeto(retorno.data,"codigo_tema","nome_tema","");
+		ins += "</select>";
+		$i("arquivoAtivo").innerHTML = ins;
+	};
 	var p = "../php/menutemas.php?funcao=pegaTemas";
 	cPaint.call(p,"",retorna);	
 }
 function adicionarLayer()
 {
-	var codigoMap = $i("temaAtivo").value
+	var codigoMap = $i("temaAtivo").value;
 	if(codigoMap != "")
 	{
 		var retorna = function(retorno)
 		{
-			ativaTema(codigoMap)
-		}
+			ativaTema(codigoMap);
+		};
 		var p = "../php/temas.php?funcao=criarNovoLayer&codigoMap="+codigoMap;
 		cPaint.call(p,"",retorna);		
 	}
 }
 function criarNovoMap()
 {
-	var nome = $i("nomeNovoMap").value
-	var codigo = $i("codigoNovoMap").value
+	var nome = $i("nomeNovoMap").value;
+	var codigo = $i("codigoNovoMap").value;
 	if(nome != "" && codigo != "")
 	{
 		var retorna = function(retorno)
 		{
-			$i("nomeNovoMap").value = ""
-			$i("codigoNovoMap").value = ""
-			$i("forms").style.display="none"
-			montaParametros()
-		}
+			$i("nomeNovoMap").value = "";
+			$i("codigoNovoMap").value = "";
+			$i("forms").style.display="none";
+			montaParametros();
+		};
 		var p = "../php/temas.php?funcao=criarNovoMap&nome="+nome+"&codigo="+codigo;
 		cPaint.call(p,"",retorna);		
 	}
@@ -158,68 +158,68 @@ function ativaTema(codigoMap)
 {
 	var retorna = function(retorno)
 	{
-		var cl = retorno.data.layers
-		var ins = ""
-		for(c=0;c<cl.length;c++)
+		var cl = retorno.data.layers;
+		var ins = "";
+		for(var c=0;c<cl.length;c++)
 		{
-			ins += "<br><fieldset><legend>+- "+cl[c]+"</legend><div >"
-			ins += "<div id='geral_"+cl[c]+"_"+codigoMap+"'  >"
-			ins += "</div>"
-			ins += "<div id='metadados_"+cl[c]+"_"+codigoMap+"'  >"
-			ins += "</div>"
-			ins += "<div id='classes_"+cl[c]+"_"+codigoMap+"'  >"
-			ins += "</div>"
+			ins += "<br><fieldset><legend>+- "+cl[c]+"</legend><div >";
+			ins += "<div id='geral_"+cl[c]+"_"+codigoMap+"'  >";
+			ins += "</div>";
+			ins += "<div id='metadados_"+cl[c]+"_"+codigoMap+"'  >";
+			ins += "</div>";
+			ins += "<div id='classes_"+cl[c]+"_"+codigoMap+"'  >";
+			ins += "</div>";
 
-			ins += "</div></fieldset>"
+			ins += "</div></fieldset>";
 		}
-		$i("forms").innerHTML = ins
-		var ins = ""
-		for(c=0;c<cl.length;c++)
+		$i("forms").innerHTML = ins;
+		ins = "";
+		for(var c=0;c<cl.length;c++)
 		{
-			pegaCaracteristicasGerais(codigoMap,cl[c])
-			pegaMetadados(codigoMap,cl[c])
-			pegaClasses(codigoMap,cl[c])
+			pegaCaracteristicasGerais(codigoMap,cl[c]);
+			pegaMetadados(codigoMap,cl[c]);
+			pegaClasses(codigoMap,cl[c]);
 		}
-	}
-	$i("forms").style.display="block"
+	};
+	$i("forms").style.display="block";
 	var p = "../php/temas.php?funcao=pegaLayers&codigoMap="+codigoMap;
 	cPaint.call(p,"",retorna);	
 }
 function pegaClasses(codigoMap,codigoLayer)
 {
-	var ins = "<br><fieldset style='background-color:beige'><legend>+- Classes</legend><div style=display:none >"
-	ins += "<p><input onclick=adicionarClasse('"+codigoLayer+"',this) type=button value='Adicionar classe' /></p>"
-	ins += "<br><fieldset><legend>+- Legenda (amostra)</legend><div style=display:none >"
-	ins += "<img id='legenda_"+codigoLayer+"' src='../ogc.php?tema=bioma&service=wms&request=getlegendgraphic&layer="+codigoLayer+"&format=image/png' />"
-	ins += "</div></fieldset>"
+	var ins = "<br><fieldset style='background-color:beige'><legend>+- Classes</legend><div style=display:none >";
+	ins += "<p><input onclick=adicionarClasse('"+codigoLayer+"',this) type=button value='Adicionar classe' /></p>";
+	ins += "<br><fieldset><legend>+- Legenda (amostra)</legend><div style=display:none >";
+	ins += "<img id='legenda_"+codigoLayer+"' src='../ogc.php?tema=bioma&service=wms&request=getlegendgraphic&layer="+codigoLayer+"&format=image/png' />";
+	ins += "</div></fieldset>";
 	var retorna = function(retorna)
 	{
-		var nc = retorna.data.length
-		for(c=0;c<nc;c++)
+		var nc = retorna.data.length;
+		for(var c=0;c<nc;c++)
 		{
-			d = retorna.data[c]
+			var d = retorna.data[c];
 			var param = {
 				"linhas":[
 					{texto:"Nome da classe para ser mostrada na legenda",
 					titulo:"name",prefixoid:"name_",id:codigoLayer+"_"+d.id,valor:"name"}
 				]
-			}
+			};
 					
-			ins += "<br><fieldset><legend>+- "+d.id+"</legend><div style=display:none >"
-			ins += "<p><input onclick=excluirClasse('"+codigoLayer+"','"+d.id+"',this) type=button value='Excluir classe' /></p>"
-			ins += "<br><fieldset><legend>+- status</legend><div style=display:none >"
-			ins += "<p class=textoAjuda style='background-color:rgb(250,250,250);'>Sets the current display status of the class. Default turns the class on.</p>"
-			ins += "<p><select onchange='this.style.color=\"blue\"' id='status_"+codigoLayer+"_"+d.id+"' >"
-			ins += comboObjeto(objstatus,"valor","texto",d.dados.status)
-			ins += "</select>"
-			ins += "<img src=../imagens/02.png style=cursor:pointer title='Aplicar' onclick='salvarClasse(\""+codigoLayer+"_"+d.id+"\",\"status\",this)'/>"
-			ins += "</p></div></fieldset>"
+			ins += "<br><fieldset><legend>+- "+d.id+"</legend><div style=display:none >";
+			ins += "<p><input onclick=excluirClasse('"+codigoLayer+"','"+d.id+"',this) type=button value='Excluir classe' /></p>";
+			ins += "<br><fieldset><legend>+- status</legend><div style=display:none >";
+			ins += "<p class=textoAjuda style='background-color:rgb(250,250,250);'>Sets the current display status of the class. Default turns the class on.</p>";
+			ins += "<p><select onchange='this.style.color=\"blue\"' id='status_"+codigoLayer+"_"+d.id+"' >";
+			ins += comboObjeto(objstatus,"valor","texto",d.dados.status);
+			ins += "</select>";
+			ins += "<img src=../imagens/02.png style=cursor:pointer title='Aplicar' onclick='salvarClasse(\""+codigoLayer+"_"+d.id+"\",\"status\",this)'/>";
+			ins += "</p></div></fieldset>";
 			
-			ins += "<br><fieldset><legend>+- expression</legend><div style=display:none >"
-			ins += "<p class=textoAjuda style='background-color:rgb(250,250,250);'>Four types of expressions are now supported to define class membership. String comparisons, regular expressions, simple logical expressions, and string functions. If no expression is given, then all features are said to belong to this class.<br>String comparisons are case sensitive and are the fastest to evaluate. No special delimiters are necessary although string must be quoted if they contain special characters. (As a matter of good habit, it is recommended you quote all strings).<br>Regular expressions function just like previous versions of MapServer. However, you must now delimit a regular expression using /regex/. No quotes should be used.<br><br>Logical expressions allow you to build fairly complex tests based on one or more attributes and therefore are only available with shapefiles. Logical expressions are delimited by parentheses '(expression)'. Attribute names are delimited by square brackets '[ATTRIBUTE]'. These names are case sensitive and must match the items in the shapefile. For example: EXPRESSION ([POPULATION] > 50000 AND '[LANGUAGE]' eq 'FRENCH') ... The following logical operators are supported: =,>,<,<=,>=,=,or,and,lt,gt,ge,le,eq,ne. As you might expect this level of complexity is slower to process.<br>One string function exists: length(). This obviously computes the length of a string. An example follows:<br>EXPRESSION (length('[NAME_E]') < 8)<br>String comparisons and regular expressions work from the classitem defined at the layer level. You may mix expression types within the different classes of a layer.</p>"
-			ins += "<p><input type=text onchange='this.style.color=\"blue\"' id='expression_"+codigoLayer+"_"+d.id+"' value=\""+d.dados.expression+"\" />"
-			ins += "<img src=../imagens/02.png style=cursor:pointer title='Aplicar' onclick='salvarClasse(\""+codigoLayer+"_"+d.id+"\",\"expression\",this)'/>"
-			ins += "</p></div></fieldset>"
+			ins += "<br><fieldset><legend>+- expression</legend><div style=display:none >";
+			ins += "<p class=textoAjuda style='background-color:rgb(250,250,250);'>Four types of expressions are now supported to define class membership. String comparisons, regular expressions, simple logical expressions, and string functions. If no expression is given, then all features are said to belong to this class.<br>String comparisons are case sensitive and are the fastest to evaluate. No special delimiters are necessary although string must be quoted if they contain special characters. (As a matter of good habit, it is recommended you quote all strings).<br>Regular expressions function just like previous versions of MapServer. However, you must now delimit a regular expression using /regex/. No quotes should be used.<br><br>Logical expressions allow you to build fairly complex tests based on one or more attributes and therefore are only available with shapefiles. Logical expressions are delimited by parentheses '(expression)'. Attribute names are delimited by square brackets '[ATTRIBUTE]'. These names are case sensitive and must match the items in the shapefile. For example: EXPRESSION ([POPULATION] > 50000 AND '[LANGUAGE]' eq 'FRENCH') ... The following logical operators are supported: =,>,<,<=,>=,=,or,and,lt,gt,ge,le,eq,ne. As you might expect this level of complexity is slower to process.<br>One string function exists: length(). This obviously computes the length of a string. An example follows:<br>EXPRESSION (length('[NAME_E]') < 8)<br>String comparisons and regular expressions work from the classitem defined at the layer level. You may mix expression types within the different classes of a layer.</p>";
+			ins += "<p><input type=text onchange='this.style.color=\"blue\"' id='expression_"+codigoLayer+"_"+d.id+"' value=\""+d.dados.expression+"\" />";
+			ins += "<img src=../imagens/02.png style=cursor:pointer title='Aplicar' onclick='salvarClasse(\""+codigoLayer+"_"+d.id+"\",\"expression\",this)'/>";
+			ins += "</p></div></fieldset>";
 
 			ins += (geraLinhas2(d.dados,param,"salvarClasse"));
 
@@ -240,13 +240,13 @@ function pegaClasses(codigoMap,codigoLayer)
 					{texto:"Static text to label features in this class with. This overrides values obtained from the LABELTIEM. The string may be given as an expression delimited using the ()'s. This allows you to concatenate multiple attributes into a single label. For example: ([FIRSTNAME],[LASTNAME]).",
 					titulo:"text",prefixoid:"text_",id:codigoLayer+"_"+d.id,valor:"text"}
 				]
-			}
+			};
 
-			ins += "<br><fieldset style=background-color:#f0e68c ><legend style=color:brown >+- Mais...</legend><div style=display:none >"
+			ins += "<br><fieldset style=background-color:#f0e68c ><legend style=color:brown >+- Mais...</legend><div style=display:none >";
 			ins += (geraLinhas2(d.dados,param,"salvarClasse"));
-			ins += "</fieldset>"
+			ins += "</fieldset>";
 			//labels
-			ins += "<br><fieldset><legend style=color:brown >+- Label (para ativar, defina LABELITEM em caract. gerais)</legend><div style=display:none >"		
+			ins += "<br><fieldset><legend style=color:brown >+- Label (para ativar, defina LABELITEM em caract. gerais)</legend><div style=display:none >";	
 			var param = {
 				"linhas":[
 					{texto:"Color to draw text with.",
@@ -258,39 +258,39 @@ function pegaClasses(codigoMap,codigoLayer)
 					{texto:"Padding, in pixels, around labels. Useful for maintaining spacing around text to enhance readability. Available only for cached labels. Default is 0.",
 					titulo:"buffer",prefixoid:"label_buffer_",id:codigoLayer+"_"+d.id,valor:"label.buffer"}
 				]
-			}
+			};
 
-			ins += "<br><fieldset><legend>+- font</legend><div style=display:none >"
-			ins += "<p class=textoAjuda style='background-color:rgb(250,250,250);'>Font alias (as defined in the FONTSET) to use for labeling.</p>"
-			ins += "<p><select onchange='this.style.color=\"blue\"' id='label_font_"+codigoLayer+"_"+d.id+"' >"
-			ins += combolista(fontes,d.dados.label.font)
-			ins += "</select>"
-			ins += "<img src=../imagens/02.png style=cursor:pointer title='Aplicar' onclick='salvarClasseLabel(\""+codigoLayer+"_"+d.id+"\",\".font\",this)'/>"
-			ins += "</p></div></fieldset>"
+			ins += "<br><fieldset><legend>+- font</legend><div style=display:none >";
+			ins += "<p class=textoAjuda style='background-color:rgb(250,250,250);'>Font alias (as defined in the FONTSET) to use for labeling.</p>";
+			ins += "<p><select onchange='this.style.color=\"blue\"' id='label_font_"+codigoLayer+"_"+d.id+"' >";
+			ins += combolista(fontes,d.dados.label.font);
+			ins += "</select>";
+			ins += "<img src=../imagens/02.png style=cursor:pointer title='Aplicar' onclick='salvarClasseLabel(\""+codigoLayer+"_"+d.id+"\",\".font\",this)'/>";
+			ins += "</p></div></fieldset>";
 
-			ins += "<br><fieldset><legend>+- type</legend><div style=display:none >"
-			ins += "<p class=textoAjuda style='background-color:rgb(250,250,250);'>Type of font to use. Generally bitmap fonts are faster to draw then TrueType fonts. However,TrueType fonts are scalable and available in a variety of faces. Be sure to set the FONT parameter ifyou select TrueType.</p>"
-			ins += "<p><select onchange='this.style.color=\"blue\"' id='label_type_"+codigoLayer+"_"+d.id+"' >"
-			ins += comboObjeto(objfonttypes,"valor","texto",d.dados.label.type)
-			ins += "</select>"
-			ins += "<img src=../imagens/02.png style=cursor:pointer title='Aplicar' onclick='salvarClasseLabel(\""+codigoLayer+"_"+d.id+"\",\".type\",this)'/>"
-			ins += "</p></div></fieldset>"
+			ins += "<br><fieldset><legend>+- type</legend><div style=display:none >";
+			ins += "<p class=textoAjuda style='background-color:rgb(250,250,250);'>Type of font to use. Generally bitmap fonts are faster to draw then TrueType fonts. However,TrueType fonts are scalable and available in a variety of faces. Be sure to set the FONT parameter ifyou select TrueType.</p>";
+			ins += "<p><select onchange='this.style.color=\"blue\"' id='label_type_"+codigoLayer+"_"+d.id+"' >";
+			ins += comboObjeto(objfonttypes,"valor","texto",d.dados.label.type);
+			ins += "</select>";
+			ins += "<img src=../imagens/02.png style=cursor:pointer title='Aplicar' onclick='salvarClasseLabel(\""+codigoLayer+"_"+d.id+"\",\".type\",this)'/>";
+			ins += "</p></div></fieldset>";
 
-			ins += "<br><fieldset><legend>+- partials</legend><div style=display:none >"
-			ins += "<p class=textoAjuda style='background-color:rgb(250,250,250);'>Can text run off the edge of the map? Default is true.</p>"
-			ins += "<p><select onchange='this.style.color=\"blue\"' id='label_type_"+codigoLayer+"_"+d.id+"' >"
-			ins += comboObjeto(objbool_tf,"valor","texto",d.dados.label.partials)
-			ins += "</select>"
-			ins += "<img src=../imagens/02.png style=cursor:pointer title='Aplicar' onclick='salvarClasseLabel(\""+codigoLayer+"_"+d.id+"\",\".partials\",this)'/>"
-			ins += "</p></div></fieldset>"
+			ins += "<br><fieldset><legend>+- partials</legend><div style=display:none >";
+			ins += "<p class=textoAjuda style='background-color:rgb(250,250,250);'>Can text run off the edge of the map? Default is true.</p>";
+			ins += "<p><select onchange='this.style.color=\"blue\"' id='label_type_"+codigoLayer+"_"+d.id+"' >";
+			ins += comboObjeto(objbool_tf,"valor","texto",d.dados.label.partials);
+			ins += "</select>";
+			ins += "<img src=../imagens/02.png style=cursor:pointer title='Aplicar' onclick='salvarClasseLabel(\""+codigoLayer+"_"+d.id+"\",\".partials\",this)'/>";
+			ins += "</p></div></fieldset>";
 			
-			ins += "<br><fieldset><legend>+- force</legend><div style=display:none >"
-			ins += "<p class=textoAjuda style='background-color:rgb(250,250,250);'>Forces labels for a particular class on, regardless of collisions. Available only for cached labels. Default is false.</p>"
-			ins += "<p><select onchange='this.style.color=\"blue\"' id='label_type_"+codigoLayer+"_"+d.id+"' >"
-			ins += comboObjeto(objbool_tf,"valor","texto",d.dados.label.force)
-			ins += "</select>"
-			ins += "<img src=../imagens/02.png style=cursor:pointer title='Aplicar' onclick='salvarClasseLabel(\""+codigoLayer+"_"+d.id+"\",\".force\",this)'/>"
-			ins += "</p></div></fieldset>"
+			ins += "<br><fieldset><legend>+- force</legend><div style=display:none >";
+			ins += "<p class=textoAjuda style='background-color:rgb(250,250,250);'>Forces labels for a particular class on, regardless of collisions. Available only for cached labels. Default is false.</p>";
+			ins += "<p><select onchange='this.style.color=\"blue\"' id='label_type_"+codigoLayer+"_"+d.id+"' >";
+			ins += comboObjeto(objbool_tf,"valor","texto",d.dados.label.force);
+			ins += "</select>";
+			ins += "<img src=../imagens/02.png style=cursor:pointer title='Aplicar' onclick='salvarClasseLabel(\""+codigoLayer+"_"+d.id+"\",\".force\",this)'/>";
+			ins += "</p></div></fieldset>";
 			
 			ins += (geraLinhas2(d.dados,param,"salvarClasseLabel"));
 			var param = {
@@ -332,23 +332,23 @@ function pegaClasses(codigoMap,codigoLayer)
 					{texto:"Supported encoding format to be used for labels. If the format is not supported, the label will not be drawn. Requires the iconv library (present on most systems). The library is always detected if present on the system, but if not the label will not be drawn. Required for displaying international characters in MapServer. More information can be found at: http://www.foss4g.org/FOSS4G/MAPSERVER/mpsnf-i18n-en.html.",
 					titulo:"encoding",prefixoid:"label_encoding_",id:codigoLayer+"_"+d.id,valor:"label.encoding"}
 				]
-			}			
-			ins += "<br><fieldset style=background-color:#f0e68c ><legend style=color:brown >+- Mais...</legend><div style=display:none >"
+			};		
+			ins += "<br><fieldset style=background-color:#f0e68c ><legend style=color:brown >+- Mais...</legend><div style=display:none >";
 			ins += (geraLinhas2(d.dados,param,"salvarClasseLabel"));
-			ins += "</fieldset>"
+			ins += "</fieldset>";
 
-			ins += "</div></fieldset>"
+			ins += "</div></fieldset>";
 
-			ins += "<br><fieldset><legend style=color:brown >+- Estilos</legend><div style=display:none >"
-			ins += "<p><input onclick=adicionarEstilo('"+codigoLayer+"','"+d.id+"',this) type=button value='Adicionar estilo' /></p>"
-			ins += "<div id='estilos_"+codigoLayer+"_"+d.id+"' ></div>"
-			ins += "</div></fieldset>"
-			ins += "</div></fieldset>"
+			ins += "<br><fieldset><legend style=color:brown >+- Estilos</legend><div style=display:none >";
+			ins += "<p><input onclick=adicionarEstilo('"+codigoLayer+"','"+d.id+"',this) type=button value='Adicionar estilo' /></p>";
+			ins += "<div id='estilos_"+codigoLayer+"_"+d.id+"' ></div>";
+			ins += "</div></fieldset>";
+			ins += "</div></fieldset>";
 		}
-		ins += "</div></fieldset>"
-		$i("classes_"+codigoLayer+"_"+codigoMap).innerHTML = ins
-		pegaEstilos(codigoMap,codigoLayer)
-	}
+		ins += "</div></fieldset>";
+		$i("classes_"+codigoLayer+"_"+codigoMap).innerHTML = ins;
+		pegaEstilos(codigoMap,codigoLayer);
+	};
 	var p = "../php/temas.php?funcao=pegaClasses&codigoMap="+codigoMap+"&codigoLayer="+codigoLayer;
 	cPaint.call(p,"",retorna);
 
@@ -357,18 +357,17 @@ function pegaEstilos(codigoMap,codigoLayer)
 {
 	var retorna = function(retorno)
 	{
-		var nc = retorno.data.length
-		for(c=0;c<nc;c++)
+		var nc = retorno.data.length;
+		for(var c=0;c<nc;c++)
 		{
-			var idclasse = retorno.data[c].classe
-			var estilos = retorno.data[c].estilos
+			var idclasse = retorno.data[c].classe;
 			var divestilos = "estilos_"+codigoLayer+"_"+idclasse;
-			var nes = retorno.data[c].estilos.length
-			for(est=0;est<nes;est++)
+			var nes = retorno.data[c].estilos.length;
+			for(var est=0;est<nes;est++)
 			{
-				var ins = ""
-				var d = retorno.data[c].estilos[est].dados
-				var preid = codigoLayer+"_"+idclasse+"_"+est
+				var ins = "";
+				var d = retorno.data[c].estilos[est].dados;
+				var preid = codigoLayer+"_"+idclasse+"_"+est;
 				var param = {
 					"linhas":[
 						{texto:"The symbol name or number to use for all features if attribute tables are not used. The number is the index of the symbol in the symbol file, starting at 1, the 5th symbol in the file is therefore symbol number 5. You can also give your symbols names using the NAME keyword in the symbol definition file, and use those to refer to them. Default is 0, which results in a single pixel, single width line, or solid polygon fill, depending on layer type.You can also specify a gif or png filename. The path is relative to the location of the mapfile.",
@@ -382,8 +381,8 @@ function pegaEstilos(codigoMap,codigoLayer)
 						{texto:"Width refers to the thickness of line work drawn, in pixels. Default is 1. For symbols of Type HATCH, the WIDTH is how thick the hatched lines are. For its use with hatched lines, see Example#8 in the SYMBOL examples.",
 						titulo:"width",prefixoid:"",id:"width_"+preid,valor:"width"},
 					]
-				}
-				ins += "<br><fieldset style='background-color:rgb(240,240,240)'><legend>+- "+est+"</legend>"
+				};
+				ins += "<br><fieldset style='background-color:rgb(240,240,240)'><legend>+- "+est+"</legend>";
 				ins += (geraLinhas2(d,param,"salvarEstilo"));
 				
 				var param = {
@@ -407,22 +406,22 @@ function pegaEstilos(codigoMap,codigoLayer)
 						{texto:"For MapServer versions <5, this is the attribute/field that stores the size to be used in rendering. Value is given in pixels.",
 						titulo:"sizeitem",prefixoid:"",id:"sizeitem_"+preid,valor:"sizeitem"}
 					]
-				}
-				ins += "<br><fieldset style=background-color:#f0e68c ><legend style=color:brown >+- Mais...</legend><div style=display:none >"
+				};
+				ins += "<br><fieldset style=background-color:#f0e68c ><legend style=color:brown >+- Mais...</legend><div style=display:none >";
 				ins += (geraLinhas2(d,param,"salvarEstilo"));
-				ins += "</fieldset>"
-				ins += "</fieldset>"
-				$i(divestilos).innerHTML = ins
+				ins += "</fieldset>";
+				ins += "</fieldset>";
+				$i(divestilos).innerHTML = ins;
 			}
 		}
-		ativaLegenda()
-	}
+		ativaLegenda();
+	};
 	var p = "../php/temas.php?funcao=pegaEstilos&codigoMap="+codigoMap+"&codigoLayer="+codigoLayer;
 	cPaint.call(p,"",retorna);
 }
 function pegaMetadados(codigoMap,codigoLayer)
 {
-	var ins = "<br><fieldset><legend>+- Metadados</legend><div style=display:none >"
+	var ins = "<br><fieldset><legend>+- Metadados</legend><div style=display:none >";
 	var retorna = function(retorna)
 	{
 	    ins += "";
@@ -435,25 +434,25 @@ function pegaMetadados(codigoMap,codigoLayer)
 				{texto:"Extensão geográfica máxima do tema, no formato xmin ymin xmax ymax. É utilizado na opção de 'zoom para o tema'. Quando o tema é baseado em shapefile, esse metadata não é necessário, pois o mapserver consegue calcular a extensão. Já em outros tipos de dados, como Postgis, o parâmetro é necessário. Nesse caso, se não for indicado, o botão de zoom para o tema não será visível para o usuário",
 				titulo:"extensao",prefixoid:"extensao_",id:codigoLayer,valor:"extensao"}
 			]
-		}
+		};
 		ins += (geraLinhas2(retorna.data,param,"salvarMetadados"));
 
-		ins += "<br><fieldset><legend>+- aplicaextensao</legend><div style=display:none >"
-		ins += "<p class=textoAjuda style='background-color:rgb(250,250,250);'>Indica se a extensão geográfica do mapa deve ser alterada quando o tema for adicionado ao mapa</p>"
-		ins += "<p><select onchange='this.style.color=\"blue\"' id='aplicaextensao_"+codigoLayer+"' >"
-		ins += combosimnao(retorna.data.aplicaextensao)
-		ins += "</select>"
-		ins += "<img src=../imagens/02.png style=cursor:pointer title='Aplicar' onclick='salvarMetadados(\""+codigoLayer+"\",\"aplicaextensao\",this)'/>"
-		ins += "</p></div></fieldset>"
+		ins += "<br><fieldset><legend>+- aplicaextensao</legend><div style=display:none >";
+		ins += "<p class=textoAjuda style='background-color:rgb(250,250,250);'>Indica se a extensão geográfica do mapa deve ser alterada quando o tema for adicionado ao mapa</p>";
+		ins += "<p><select onchange='this.style.color=\"blue\"' id='aplicaextensao_"+codigoLayer+"' >";
+		ins += combosimnao(retorna.data.aplicaextensao);
+		ins += "</select>";
+		ins += "<img src=../imagens/02.png style=cursor:pointer title='Aplicar' onclick='salvarMetadados(\""+codigoLayer+"\",\"aplicaextensao\",this)'/>";
+		ins += "</p></div></fieldset>";
 
 				
-		ins += "<br><fieldset><legend>+- download</legend><div style=display:none >"
-		ins += "<p class=textoAjuda style='background-color:rgb(250,250,250);'>Indica se o usuário pode fazer download do tema</p>"
-		ins += "<p><select onchange='this.style.color=\"blue\"' id='download_"+codigoLayer+"' >"
-		ins += combosimnao(retorna.data.download)
-		ins += "</select>"
-		ins += "<img src=../imagens/02.png style=cursor:pointer title='Aplicar' onclick='salvarMetadados(\""+codigoLayer+"\",\"download\",this)'/>"
-		ins += "</p></div></fieldset>"
+		ins += "<br><fieldset><legend>+- download</legend><div style=display:none >";
+		ins += "<p class=textoAjuda style='background-color:rgb(250,250,250);'>Indica se o usuário pode fazer download do tema</p>";
+		ins += "<p><select onchange='this.style.color=\"blue\"' id='download_"+codigoLayer+"' >";
+		ins += combosimnao(retorna.data.download);
+		ins += "</select>";
+		ins += "<img src=../imagens/02.png style=cursor:pointer title='Aplicar' onclick='salvarMetadados(\""+codigoLayer+"\",\"download\",this)'/>";
+		ins += "</p></div></fieldset>";
 		
 		var param = {
 			"linhas":[
@@ -478,48 +477,48 @@ function pegaMetadados(codigoMap,codigoLayer)
 				{texto:"Nome da coluna que definirá o tamanho de cada símbolo.",
 				titulo:"classestamanho",prefixoid:"classestamanho_",id:codigoLayer,valor:"classestamanho"}
 			]
-		}
+		};
 
 
-		ins += "<br><fieldset style=background-color:#f0e68c ><legend style=color:brown >+- Mais...</legend><div style=display:none >"
+		ins += "<br><fieldset style=background-color:#f0e68c ><legend style=color:brown >+- Mais...</legend><div style=display:none >";
 
 		ins += (geraLinhas2(retorna.data,param,"salvarMetadados"));
 
-		ins += "<br><fieldset><legend>+- classe</legend><div style=display:none >"
-		ins += "<p class=textoAjuda style='background-color:rgb(250,250,250);'>Indica se as classes serão mostradas ou não na legenda. Por padrão é SIM.</p>"
-		ins += "<p><select onchange='this.style.color=\"blue\"' id='classe_"+codigoLayer+"' >"
-		ins += combosimnao(retorna.data.classe)
-		ins += "</select>"
-		ins += "<img src=../imagens/02.png style=cursor:pointer title='Aplicar' onclick='salvarMetadados(\""+codigoLayer+"\",\"classe\",this)'/>"
-		ins += "</p></div></fieldset>"
+		ins += "<br><fieldset><legend>+- classe</legend><div style=display:none >";
+		ins += "<p class=textoAjuda style='background-color:rgb(250,250,250);'>Indica se as classes serão mostradas ou não na legenda. Por padrão é SIM.</p>";
+		ins += "<p><select onchange='this.style.color=\"blue\"' id='classe_"+codigoLayer+"' >";
+		ins += combosimnao(retorna.data.classe);
+		ins += "</select>";
+		ins += "<img src=../imagens/02.png style=cursor:pointer title='Aplicar' onclick='salvarMetadados(\""+codigoLayer+"\",\"classe\",this)'/>";
+		ins += "</p></div></fieldset>";
 
-		ins += "<br><fieldset><legend>+- escondido</legend><div style=display:none >"
-		ins += "<p class=textoAjuda style='background-color:rgb(250,250,250);'>Indica se o tema é mostrado no mapa mas não nas listas da legenda e na guia 'temas'</p>"	
-		ins += "<p><select onchange='this.style.color=\"blue\"' id='escondido_"+codigoLayer+"' >"
-		ins += combosimnao(retorna.data.escondido)
-		ins += "</select>"
-		ins += "<img src=../imagens/02.png style=cursor:pointer title='Aplicar' onclick='salvarMetadados(\""+codigoLayer+"\",\"escondido\",this)'/>"
-		ins += "</p></div></fieldset>"
+		ins += "<br><fieldset><legend>+- escondido</legend><div style=display:none >";
+		ins += "<p class=textoAjuda style='background-color:rgb(250,250,250);'>Indica se o tema é mostrado no mapa mas não nas listas da legenda e na guia 'temas'</p>"	;
+		ins += "<p><select onchange='this.style.color=\"blue\"' id='escondido_"+codigoLayer+"' >";
+		ins += combosimnao(retorna.data.escondido);
+		ins += "</select>";
+		ins += "<img src=../imagens/02.png style=cursor:pointer title='Aplicar' onclick='salvarMetadados(\""+codigoLayer+"\",\"escondido\",this)'/>";
+		ins += "</p></div></fieldset>";
 		
-		ins += "<br><fieldset><legend>+- identifica</legend><div style=display:none >"		
-		ins += "<p class=textoAjuda style='background-color:rgb(250,250,250);'>Indica se o tema irá ser mostrado na ferramenta de identificação</p>"
-		ins += "<p><select onchange='this.style.color=\"blue\"' id='identifica_"+codigoLayer+"' >"
-		ins += combosimnao(retorna.data.identifica)
-		ins += "</select>"
-		ins += "<img src=../imagens/02.png style=cursor:pointer title='Aplicar' onclick='salvarMetadados(\""+codigoLayer+"\",\"identifica\",this)'/>"
-		ins += "</p></div></fieldset>"
+		ins += "<br><fieldset><legend>+- identifica</legend><div style=display:none >";	
+		ins += "<p class=textoAjuda style='background-color:rgb(250,250,250);'>Indica se o tema irá ser mostrado na ferramenta de identificação</p>";
+		ins += "<p><select onchange='this.style.color=\"blue\"' id='identifica_"+codigoLayer+"' >";
+		ins += combosimnao(retorna.data.identifica);
+		ins += "</select>";
+		ins += "<img src=../imagens/02.png style=cursor:pointer title='Aplicar' onclick='salvarMetadados(\""+codigoLayer+"\",\"identifica\",this)'/>";
+		ins += "</p></div></fieldset>";
 
-		ins += "</div></fieldset>"
+		ins += "</div></fieldset>";
 
-		$i("metadados_"+codigoLayer+"_"+codigoMap).innerHTML = ins
-	}
+		$i("metadados_"+codigoLayer+"_"+codigoMap).innerHTML = ins;
+	};
 	var p = "../php/temas.php?funcao=pegaMetadados&codigoMap="+codigoMap+"&codigoLayer="+codigoLayer;
 	cPaint.call(p,"",retorna);
 }
 function pegaCaracteristicasGerais(codigoMap,codigoLayer)
 {
-	var ins = "<p><input onclick=excluirLayer('"+codigoLayer+"',this) type=button value='Excluir este layer' /></p>"
-	ins += "<br><fieldset><legend>+- Características gerais</legend><div style=display:none >"
+	var ins = "<p><input onclick=excluirLayer('"+codigoLayer+"',this) type=button value='Excluir este layer' /></p>";
+	ins += "<br><fieldset><legend>+- Características gerais</legend><div style=display:none >";
 	var retorna = function(retorna)
 	{
 		var param = {
@@ -531,31 +530,31 @@ function pegaCaracteristicasGerais(codigoMap,codigoLayer)
 			{texto:"Full filename of the spatial data to process. No file extension is necessary for shapefiles. Can be specified relative to the SHAPEPATH option from the Map Object.If this is an SDE layer, the parameter should include the name of the layer as well as the geometry column, i.e. 'mylayer,shape,myversion'.If this is a PostGIS layer, the parameter should be in the form of '<columnname> from <tablename>', where 'columnname' is the name of the column containing the geometry objects and 'tablename' is the name of the table from which the geometry data will be read.For Oracle, use 'shape FROM table' or 'shape FROM (SELECT statement)' or even more complex Oracle compliant queries! Note that there are important performance impacts when using spatial subqueries however. Try using MapServer's FILTER whenever possible instead. You can also see the SQL submitted by forcing an error, for instance by submitting a DATA parameter you know won't work, using for example a bad column name.",
 			titulo:"data",prefixoid:"data_",id:codigoLayer,valor:"data"}
 			]
-		}
-		ins += "<p>Colunas: "+retorna.data.colunas+"</p>"
-		ins += "<br><fieldset><legend>+- status</legend><div style=display:none >"
-		ins += "<p class=textoAjuda style='background-color:rgb(250,250,250);' >Sets the current status of the layer. Often modified by MapServer itself. Default turns the layer on permanently.</b></p>"
-		ins += "<p><select onchange='this.style.color=\"blue\"' id='status_"+codigoLayer+"' >"
-		ins += comboObjeto(objstatus,"valor","texto",retorna.data.status)
-		ins += "</select>"
-		ins += "<img src=../imagens/02.png style=cursor:pointer title='Aplicar' onclick='salvarLayer(\""+codigoLayer+"\",\"status\",this)'/>"
-		ins += "</p></fieldset>"
+		};
+		ins += "<p>Colunas: "+retorna.data.colunas+"</p>";
+		ins += "<br><fieldset><legend>+- status</legend><div style=display:none >";
+		ins += "<p class=textoAjuda style='background-color:rgb(250,250,250);' >Sets the current status of the layer. Often modified by MapServer itself. Default turns the layer on permanently.</b></p>";
+		ins += "<p><select onchange='this.style.color=\"blue\"' id='status_"+codigoLayer+"' >";
+		ins += comboObjeto(objstatus,"valor","texto",retorna.data.status);
+		ins += "</select>";
+		ins += "<img src=../imagens/02.png style=cursor:pointer title='Aplicar' onclick='salvarLayer(\""+codigoLayer+"\",\"status\",this)'/>";
+		ins += "</p></fieldset>";
 
-		ins += "<br><fieldset><legend>+- type</legend><div style=display:none >"
-		ins += "<p class=textoAjuda style='background-color:rgb(250,250,250);' >Specifies how the data should be drawn. Need not be the same as the shapefile type. For example, a polygon shapefile may be drawn as a point layer, but a point shapefile may not be drawn as a polygon layer. Common sense rules. Annotation means that a label point will be calculated for the features, but the feature itself will not be drawn although a marker symbol can be optionally drawn. this allows for advanced labeling like numbered highway shields. Points are labeled at that point. Polygons are labeled first using a centroid, and if that doesn't fall in the polygon a scanline approach is used to guarantee the label falls within the feature. Lines are labeled at the middle of the longest arc in the visible portion of the line. Query only means the layer can be queried but not drawn.In order to differentiate between POLYGONs and POLYLINEs (which do not exist as a type), simply respectively use or ommit the COLOR keyword when classifying. If you use it, it's a polygon with a fill color, otherwise it's a polyline with only an OUTLINECOLOR.For CHART layers, see the Dynamic Charting howto.A circle must be defined by a a minimum bounding rectangle. That is, 2 points that define the smallest square that can contain it. These 2 points are the two opposite corners of said box.</b></p>"
-		ins += "<p><select onchange='this.style.color=\"blue\"' id='type_"+codigoLayer+"' >"
-		ins += comboObjeto(objlayertypes,"valor","texto",retorna.data.type)
-		ins += "</select>"
-		ins += "<img src=../imagens/02.png style=cursor:pointer title='Aplicar' onclick='salvarLayer(\""+codigoLayer+"\",\"type\",this)'/>"
-		ins += "</p></fieldset>"
+		ins += "<br><fieldset><legend>+- type</legend><div style=display:none >";
+		ins += "<p class=textoAjuda style='background-color:rgb(250,250,250);' >Specifies how the data should be drawn. Need not be the same as the shapefile type. For example, a polygon shapefile may be drawn as a point layer, but a point shapefile may not be drawn as a polygon layer. Common sense rules. Annotation means that a label point will be calculated for the features, but the feature itself will not be drawn although a marker symbol can be optionally drawn. this allows for advanced labeling like numbered highway shields. Points are labeled at that point. Polygons are labeled first using a centroid, and if that doesn't fall in the polygon a scanline approach is used to guarantee the label falls within the feature. Lines are labeled at the middle of the longest arc in the visible portion of the line. Query only means the layer can be queried but not drawn.In order to differentiate between POLYGONs and POLYLINEs (which do not exist as a type), simply respectively use or ommit the COLOR keyword when classifying. If you use it, it's a polygon with a fill color, otherwise it's a polyline with only an OUTLINECOLOR.For CHART layers, see the Dynamic Charting howto.A circle must be defined by a a minimum bounding rectangle. That is, 2 points that define the smallest square that can contain it. These 2 points are the two opposite corners of said box.</b></p>";
+		ins += "<p><select onchange='this.style.color=\"blue\"' id='type_"+codigoLayer+"' >";
+		ins += comboObjeto(objlayertypes,"valor","texto",retorna.data.type);
+		ins += "</select>";
+		ins += "<img src=../imagens/02.png style=cursor:pointer title='Aplicar' onclick='salvarLayer(\""+codigoLayer+"\",\"type\",this)'/>";
+		ins += "</p></fieldset>";
 		
-		ins += "<br><fieldset><legend>+- connectiontype</legend><div style=display:none >"
-		ins += "<p class=textoAjuda  style='background-color:rgb(250,250,250);' >Type of connection. Default is local.</b></p>"
-		ins += "<p><select onchange='this.style.color=\"blue\"' id='connectiontype_"+codigoLayer+"' >"
-		ins += comboObjeto(objcontype,"valor","texto",retorna.data.connectiontype)
-		ins += "</select>"
-		ins += "<img src=../imagens/02.png style=cursor:pointer title='Aplicar' onclick='salvarLayer(\""+codigoLayer+"\",\"connectiontype\",this)'/>"
-		ins += "</p></div></fieldset>"
+		ins += "<br><fieldset><legend>+- connectiontype</legend><div style=display:none >";
+		ins += "<p class=textoAjuda  style='background-color:rgb(250,250,250);' >Type of connection. Default is local.</b></p>";
+		ins += "<p><select onchange='this.style.color=\"blue\"' id='connectiontype_"+codigoLayer+"' >";
+		ins += comboObjeto(objcontype,"valor","texto",retorna.data.connectiontype);
+		ins += "</select>";
+		ins += "<img src=../imagens/02.png style=cursor:pointer title='Aplicar' onclick='salvarLayer(\""+codigoLayer+"\",\"connectiontype\",this)'/>";
+		ins += "</p></div></fieldset>";
 
 		ins += (geraLinhas2(retorna.data,param,"salvarLayer"));
 
@@ -597,131 +596,129 @@ function pegaCaracteristicasGerais(codigoMap,codigoLayer)
 			{texto:" ",
 			titulo:"projection",prefixoid:"projection_",id:codigoLayer,valor:"projection"}			
 			]
-		}
+		};
 
 
-		ins += "<br><fieldset style=background-color:#f0e68c ><legend style=color:brown >+- Mais...</legend><div style=display:none >"
+		ins += "<br><fieldset style=background-color:#f0e68c ><legend style=color:brown >+- Mais...</legend><div style=display:none >";
 		ins += (geraLinhas2(retorna.data,param,"salvarLayer"));
 
-		ins += "<br><fieldset><legend>+- sizeunits</legend><div style=display:none >"
-		ins += "<p class=textoAjuda style='background-color:rgb(250,250,250);' >Sets the unit of CLASS object SIZE values (default is pixels). Useful for simulating buffering.</b><p>"
-		ins += "<p><select onchange='this.style.color=\"blue\"' id='sizeunits_"+codigoLayer+"' >"
-		ins += comboObjeto(objmapunits,"valor","texto",retorna.data.sizeunits)
-		ins += "</select>"
-		ins += "<img src=../imagens/02.png style=cursor:pointer title='Aplicar' onclick='salvarLayer(\""+codigoLayer+"\",\"sizeunits\",this)'/>"
-		ins += "</p></div></fieldset>"		
+		ins += "<br><fieldset><legend>+- sizeunits</legend><div style=display:none >";
+		ins += "<p class=textoAjuda style='background-color:rgb(250,250,250);' >Sets the unit of CLASS object SIZE values (default is pixels). Useful for simulating buffering.</b><p>";
+		ins += "<p><select onchange='this.style.color=\"blue\"' id='sizeunits_"+codigoLayer+"' >";
+		ins += comboObjeto(objmapunits,"valor","texto",retorna.data.sizeunits);
+		ins += "</select>";
+		ins += "<img src=../imagens/02.png style=cursor:pointer title='Aplicar' onclick='salvarLayer(\""+codigoLayer+"\",\"sizeunits\",this)'/>";
+		ins += "</p></div></fieldset>";	
 
-		ins += "</div></fieldset>"
+		ins += "</div></fieldset>";
 				
-		ins += "</div></fieldset>"
-		$i("geral_"+codigoLayer+"_"+codigoMap).innerHTML = ins
-	}
+		ins += "</div></fieldset>";
+		$i("geral_"+codigoLayer+"_"+codigoMap).innerHTML = ins;
+	};
 	var p = "../php/temas.php?funcao=pegaCaracteristicasGerais&codigoMap="+codigoMap+"&codigoLayer="+codigoLayer;
 	cPaint.call(p,"",retorna);
 }
 function testarMap()
 {
-	var codigo = $i("temaAtivo").value
-	window.open("../testamapfile.php?map="+codigo+".map")
+	var codigo = $i("temaAtivo").value;
+	window.open("../testamapfile.php?map="+codigo+".map");
 }
 function salvarLayer(layer,parametro,icone)
 {
-	icone.src="../imagens/aguarde.gif"
+	icone.src="../imagens/aguarde.gif";
 	var retorna = function(retorno)
-	{icone.src="../imagens/02.png";}
-	var valor = $i(parametro+"_"+layer).value
-	$i(parametro+"_"+layer).style.color="black"
+	{icone.src="../imagens/02.png";};
+	var valor = $i(parametro+"_"+layer).value;
+	$i(parametro+"_"+layer).style.color="black";
 	var p = "../php/temas.php?funcao=alteraLayer&codigoMap="+$i("temaAtivo").value+"&codigoLayer="+layer+"&parametro="+parametro+"&valor="+valor;
 	cPaint.call(p,"",retorna);
 }
 function salvarMetadados(layer,parametro,icone)
 {
-	icone.src="../imagens/aguarde.gif"
+	icone.src="../imagens/aguarde.gif";
 	var retorna = function(retorno)
-	{icone.src="../imagens/02.png";}
-	var valor = $i(parametro+"_"+layer).value
-	$i(parametro+"_"+layer).style.color="black"
+	{icone.src="../imagens/02.png";};
+	var valor = $i(parametro+"_"+layer).value;
+	$i(parametro+"_"+layer).style.color="black";
 	var p = "../php/temas.php?funcao=alteraMetadados&codigoMap="+$i("temaAtivo").value+"&codigoLayer="+layer+"&parametro="+parametro+"&valor="+valor;
 	cPaint.call(p,"",retorna);
 }
 function salvarClasse(layer,parametro,icone)
 {
-	icone.src="../imagens/aguarde.gif"
-	var temp = layer.split("_")
-	var layer = temp[0]
-	var classe = temp[1]
+	icone.src="../imagens/aguarde.gif";
+	var temp = layer.split("_");
+	var layer = temp[0];
+	var classe = temp[1];
 	var retorna = function(retorno)
 	{
 		icone.src="../imagens/02.png";
-		contaN++
-		$i('legenda_'+layer).src='../ogc.php?tema='+layer+'&service=wms&request=getlegendgraphic&layer='+layer+'&format=image/png&'+contaN
-	}
-	var valor = $i(parametro+"_"+layer+"_"+classe).value
-	$i(parametro+"_"+layer+"_"+classe).style.color="black"
+		contaN++;
+		$i('legenda_'+layer).src='../ogc.php?tema='+layer+'&service=wms&request=getlegendgraphic&layer='+layer+'&format=image/png&'+contaN;
+	};
+	var valor = $i(parametro+"_"+layer+"_"+classe).value;
+	$i(parametro+"_"+layer+"_"+classe).style.color="black";
 	var p = "../php/temas.php?funcao=alteraClasse&codigoMap="+$i("temaAtivo").value+"&codigoLayer="+layer+"&classe="+classe+"&parametro="+parametro+"&valor="+valor;
 	cPaint.call(p,"",retorna);
 }
 function salvarClasseLabel(layer,parametro,icone)
 {
-	icone.src="../imagens/aguarde.gif"
-	var temp = layer.split("_")
-	var layer = temp[0]
-	var classe = temp[1]
-	var parametro = parametro.split(".");
-	var parametro = parametro[1]
+	icone.src="../imagens/aguarde.gif";
+	var temp = layer.split("_");
+	var layer = temp[0];
+	var classe = temp[1];
+	parametro = parametro.split(".");
+	parametro = parametro[1];
 	var retorna = function(retorno)
-	{icone.src="../imagens/02.png";}
-	var valor = $i("label_"+parametro+"_"+layer+"_"+classe).value
-	$i("label_"+parametro+"_"+layer+"_"+classe).style.color="black"
+	{icone.src="../imagens/02.png";};
+	var valor = $i("label_"+parametro+"_"+layer+"_"+classe).value;
+	$i("label_"+parametro+"_"+layer+"_"+classe).style.color="black";
 	var p = "../php/temas.php?funcao=alteraClasseLabel&codigoMap="+$i("temaAtivo").value+"&codigoLayer="+layer+"&classe="+classe+"&parametro="+parametro+"&valor="+valor;
 	cPaint.call(p,"",retorna);
 }
 function salvarEstilo(estilo,parametro,icone)
 {
-	icone.src="../imagens/aguarde.gif"
-	var temp = estilo.split("_")
-	var layer = temp[1]
-	var classe = temp[2]
-	var estilo = temp[3]
+	icone.src="../imagens/aguarde.gif";
+	var temp = estilo.split("_");
+	var layer = temp[1];
+	var classe = temp[2];
+	var estilo = temp[3];
 	var retorna = function(retorno)
 	{
 		icone.src="../imagens/02.png";
-		contaN++
-		$i('legenda_'+layer).src='../ogc.php?tema='+layer+'&service=wms&request=getlegendgraphic&layer='+layer+'&format=image/png&'+contaN
-	}
-	var valor = $i(parametro+"_"+layer+"_"+classe+"_"+estilo).value
-	$i(parametro+"_"+layer+"_"+classe+"_"+estilo).style.color="black"
+		contaN++;
+		$i('legenda_'+layer).src='../ogc.php?tema='+layer+'&service=wms&request=getlegendgraphic&layer='+layer+'&format=image/png&'+contaN;
+	};
+	var valor = $i(parametro+"_"+layer+"_"+classe+"_"+estilo).value;
+	$i(parametro+"_"+layer+"_"+classe+"_"+estilo).style.color="black";
 	var p = "../php/temas.php?funcao=alteraEstilo&codigoMap="+$i("temaAtivo").value+"&codigoLayer="+layer+"&classe="+classe+"&estilo="+estilo+"&parametro="+parametro+"&valor="+valor;
 	cPaint.call(p,"",retorna);
 }
 function adicionarClasse(codigoLayer,botao)
 {
-	botao.style.color="red"
-	var o = botao.value
-	botao.value = "Aguarde..."
-	var codigoMap = $i("temaAtivo").value
+	botao.style.color="red";
+	botao.value = "Aguarde...";
+	var codigoMap = $i("temaAtivo").value;
 	if(codigoMap != "")
 	{
 		var retorna = function(retorno)
 		{
-			pegaClasses(codigoMap,codigoLayer)
-		}
+			pegaClasses(codigoMap,codigoLayer);
+		};
 		var p = "../php/temas.php?funcao=adicionarClasse&codigoMap="+codigoMap+"&codigoLayer="+codigoLayer;
 		cPaint.call(p,"",retorna);		
 	}
 }
 function adicionarEstilo(codigoLayer,codigoClasse,botao)
 {
-	botao.style.color="red"
-	var o = botao.value
-	botao.value = "Aguarde..."
-	var codigoMap = $i("temaAtivo").value
+	botao.style.color="red";
+	botao.value = "Aguarde...";
+	var codigoMap = $i("temaAtivo").value;
 	if(codigoMap != "")
 	{
 		var retorna = function(retorno)
 		{
-			pegaEstilos(codigoMap,codigoLayer)
-		}
+			pegaEstilos(codigoMap,codigoLayer);
+		};
 		var p = "../php/temas.php?funcao=adicionarClasse&codigoMap="+codigoMap+"&codigoLayer="+codigoLayer+"&codigoClasse="+codigoClasse;
 		cPaint.call(p,"",retorna);		
 	}
@@ -730,16 +727,15 @@ function excluirClasse(codigoLayer,codigoClasse,botao)
 {
 	if(confirm("Você realmente quer fazer isso?"))
 	{
-		botao.style.color="red"
-		var o = botao.value
-		botao.value = "Aguarde..."
-		var codigoMap = $i("temaAtivo").value
+		botao.style.color="red";
+		botao.value = "Aguarde...";
+		var codigoMap = $i("temaAtivo").value;
 		if(codigoMap != "")
 		{
 			var retorna = function(retorno)
 			{
-				pegaClasses(codigoMap,codigoLayer)
-			}
+				pegaClasses(codigoMap,codigoLayer);
+			};
 			var p = "../php/temas.php?funcao=excluirClasse&codigoMap="+codigoMap+"&codigoLayer="+codigoLayer+"&codigoClasse="+codigoClasse;
 			cPaint.call(p,"",retorna);		
 		}
@@ -749,16 +745,15 @@ function excluirLayer(codigoLayer,botao)
 {
 	if(confirm("Você realmente quer fazer isso?"))
 	{
-		botao.style.color="red"
-		var o = botao.value
-		botao.value = "Aguarde..."
-		var codigoMap = $i("temaAtivo").value
+		botao.style.color="red";
+		botao.value = "Aguarde...";
+		var codigoMap = $i("temaAtivo").value;
 		if(codigoMap != "")
 		{
 			var retorna = function(retorno)
 			{
-				ativaTema(codigoMap)
-			}
+				ativaTema(codigoMap);
+			};
 			var p = "../php/temas.php?funcao=excluirLayer&codigoMap="+codigoMap+"&codigoLayer="+codigoLayer;
 			cPaint.call(p,"",retorna);		
 		}

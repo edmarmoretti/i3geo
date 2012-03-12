@@ -7,6 +7,7 @@ Para a versão 4.7
 - A interface "padrao" (geral) foi removida definitivamente
 - O gadget "quadro" foi removido
 - A opção de ativação/desativação do entorno foi removida
+- Remoção da pasta i3geo/classesjs/zerocal
 
 
 -------------------------------------------------------------------------------------------------

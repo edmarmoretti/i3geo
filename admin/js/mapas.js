@@ -39,10 +39,9 @@ Inicializa o editor
 */
 function initMenu()
 {
-	core_ativaBotaoAdicionaLinha("../php/mapas.php?funcao=alterarMapa")
+	core_ativaBotaoAdicionaLinha("../php/mapas.php?funcao=alterarMapa");
 	core_carregando("ativa");
 	core_ativaPainelAjuda("ajuda","botaoAjuda");
-	//core_pegaPerfis("pegaMapas()");
 	pegaMapas();
 }
 /*
@@ -54,7 +53,7 @@ Obtém a lista de mapas
 */
 function pegaMapas()
 {
-	core_pegaDados("buscando mapas...","../php/mapas.php?funcao=pegaMapas","montaTabela")
+	core_pegaDados("buscando mapas...","../php/mapas.php?funcao=pegaMapas","montaTabela");
 }
 /*
 Function: montaTabela
@@ -126,7 +125,7 @@ function montaTabela(dados)
   					failure:core_handleFailure,
   					argument: { foo:"foo", bar:"bar" }
 				}; 
-				core_makeRequest(sUrl,callback)
+				core_makeRequest(sUrl,callback);
 			}
 
 		});
@@ -149,7 +148,6 @@ function montaEditorMapa(dados,id,recordid)
 {
 	function on_editorCheckBoxChange(p_oEvent)
 	{
-		var ins = "";
 		if(p_oEvent.newValue.get("value") == "OK")
 		{
 			gravaDadosMapa(id,recordid);
@@ -180,7 +178,7 @@ function montaEditorMapa(dados,id,recordid)
 	}
 	YAHOO.example.container.panelEditorMapa.show();
 	//carrega os dados na janela
-	$i("editor_bd").innerHTML = montaDivMapas(dados[0])
+	$i("editor_bd").innerHTML = montaDivMapas(dados[0]);
 	core_carregando("desativa");
 	//
 	//preenche a div com a lista de mapfiles e perfis
@@ -190,75 +188,74 @@ function montaEditorMapa(dados,id,recordid)
 }
 function registraPerfil(valor)
 {
-	var inp = $i("Eperfil_mapa")
-	var perfis = inp.value
+	var inp = $i("Eperfil_mapa");
+	var perfis = inp.value;
 	if(perfis == "")
-	inp.value = valor
+	inp.value = valor;
 	else
-	inp.value = perfis+" "+valor
+	inp.value = perfis+" "+valor;
 }
 
 function registraMapfile(valor,onde)
 {
-	var inp = $i(onde)
-	var temas = inp.value
+	var inp = $i(onde);
+	var temas = inp.value;
 	if(temas == "")
-	inp.value = valor
+	inp.value = valor;
 	else
-	inp.value = temas+" "+valor
+	inp.value = temas+" "+valor;
 }
 function montaDivMapas(i)
 {
-	var ins = ""
+	var ins = "";
 
 	//ins += "<p>Mapfile (código do mapfile que será utilizado para criar a camada no i3geo):"
 	//ins += "<div id=comboMapfiles >Buscando...</div>";
 	ins += "<p>Ordem de apresentação do mapa:<br>";
-	ins += "<input size=10 type=text id=Eordem_mapa value='"+i.ordem_mapa+"' /></p>"
+	ins += "<input size=10 type=text id=Eordem_mapa value='"+i.ordem_mapa+"' /></p>";
 
 	ins += "<p>Nome do mapa:<br>";
-	ins += "<input size=50 type=text id=Enome_mapa value='"+i.nome_mapa+"' /></p>"
+	ins += "<input size=50 type=text id=Enome_mapa value='"+i.nome_mapa+"' /></p>";
 
-	ins += "<p>Publicado?<br>"
-	ins += "<select  id='Epublicado_mapa' >"
-	ins += core_combosimnao(i.publicado_mapa)
-	ins += "</select></p>"
+	ins += "<p>Publicado?<br>";
+	ins += "<select  id='Epublicado_mapa' >";
+	ins += core_combosimnao(i.publicado_mapa);
+	ins += "</select></p>";
 
 	ins += "<p>Descrição:<br>";
-	ins += "<input size=50 type=text id=Edesc_mapa value='"+i.desc_mapa+"' /></p>"
+	ins += "<input size=50 type=text id=Edesc_mapa value='"+i.desc_mapa+"' /></p>";
 
 	ins += "<p>Extensão geográfica:<br>";
-	ins += "<input size=50 type=text id=Eext_mapa value='"+i.ext_mapa+"' /></p>"
+	ins += "<input size=50 type=text id=Eext_mapa value='"+i.ext_mapa+"' /></p>";
 
 	ins += "<p>URL da imagem miniatura:<br>";
-	ins += "<input size=50 type=text id=Eimagem_mapa value='"+i.imagem_mapa+"' /></p>"
-	ins += "<img src='"+i.imagem_mapa+"' />"
+	ins += "<input size=50 type=text id=Eimagem_mapa value='"+i.imagem_mapa+"' /></p>";
+	ins += "<img src='"+i.imagem_mapa+"' />";
 
-	ins += "<p>Temas que serão incluídos nesse mapa (utilize os códigos dos mapfiles mostrados na lista abaixo): </p>"
-	ins += "<input size=50 type=text id='Etemas_mapa' value='"+i.temas_mapa+"' /></p>"
+	ins += "<p>Temas que serão incluídos nesse mapa (utilize os códigos dos mapfiles mostrados na lista abaixo): </p>";
+	ins += "<input size=50 type=text id='Etemas_mapa' value='"+i.temas_mapa+"' /></p>";
 	ins += "<div id=comboMapfiles >Buscando...</div>";
 
-	ins += "<p>Temas que serão ligados. Devem constar na lista de temas incluídos: </p>"
-	ins += "<input size=50 type=text id='Eligados_mapa' value='"+i.ligados_mapa+"' /></p>"
-	//ins += "<div id=comboMapfilesLigados >Buscando...</div>";
+	ins += "<p>Temas que serão ligados. Devem constar na lista de temas incluídos: </p>";
+	ins += "<input size=50 type=text id='Eligados_mapa' value='"+i.ligados_mapa+"' /></p>";
 
-	ins += "<p>Perfis que podem ver este mapa: </p>"
-	ins += "<input size=50 type=text id='Eperfil_mapa' value='"+i.perfil_mapa+"' /></p>"
+	ins += "<p>Perfis que podem ver este mapa: </p>";
+	ins += "<input size=50 type=text id='Eperfil_mapa' value='"+i.perfil_mapa+"' /></p>";
 	ins += "<div id=comboPerfis >Buscando...</div>";
 
 	ins += "<p>Outros parâmetros (separe com '&'):<br>";
-	ins += "<input size=50 type=text id=Eoutros_mapa value='"+i.outros_mapa+"' /></p>"
+	ins += "<input size=50 type=text id=Eoutros_mapa value='"+i.outros_mapa+"' /></p>";
 
 	ins += "<p>Link direto para abertura do mapa (despreza os outros parâmetros):<br>";
-	ins += "<input size=50 type=text id=Elinkdireto_mapa value='"+i.linkdireto_mapa+"' /></p>"
-	ins += "<br><br><br>"
-	return(ins)
+	ins += "<input size=50 type=text id=Elinkdireto_mapa value='"+i.linkdireto_mapa+"' /></p>";
+	ins += "<br><br><br>";
+	return(ins);
 }
 function excluiLinha(id,row)
 {
 	var mensagem = " excluindo o registro do id= "+id;
 	var sUrl = "../php/mapas.php?funcao=excluirMapa&id="+id;
-	core_excluiLinha(sUrl,row,mensagem)
+	core_excluiLinha(sUrl,row,mensagem);
 }
 /*
 Function: gravaDadosMapa
@@ -269,13 +266,13 @@ Aplica as alterações feitas em um mapa
 */
 function gravaDadosMapa(id,recordid)
 {
-	var campos = new Array("publicado","ordem","perfil","ligados","temas","desc","ext","imagem","linkdireto","nome","outros")
-	var par = ""
-	for (i=0;i<campos.length;i++)
+	var campos = new Array("publicado","ordem","perfil","ligados","temas","desc","ext","imagem","linkdireto","nome","outros");
+	var par = "";
+	for (var i=0;i<campos.length;i++)
 	{
-		par += "&"+campos[i]+"_mapa="+($i("E"+campos[i]+"_mapa").value)
+		par += "&"+campos[i]+"_mapa="+($i("E"+campos[i]+"_mapa").value);
 	}
-	par += "&id_mapa="+id
+	par += "&id_mapa="+id;
 	core_carregando("ativa");
 	core_carregando(" gravando o registro do id= "+id);
 	var sUrl = "../php/mapas.php?funcao=alterarMapa"+par;
@@ -288,12 +285,12 @@ function gravaDadosMapa(id,recordid)
   				if(YAHOO.lang.JSON.parse(o.responseText) == "erro")
   				{
   					core_carregando("<span style=color:red >Não foi possível excluir. Verifique se não existem víncilos com outros elementos</span>");
-  					setTimeout("core_carregando('desativa')",3000)
+  					setTimeout("core_carregando('desativa')",3000);
   				}
   				else
   				{
   					var rec = myDataTable.getRecordSet().getRecord(recordid);
-  					myDataTable.updateRow(rec,YAHOO.lang.JSON.parse(o.responseText)[0])
+  					myDataTable.updateRow(rec,YAHOO.lang.JSON.parse(o.responseText)[0]);
   					core_carregando("desativa");
   				}
 				YAHOO.example.container.panelEditorMapa.destroy();
@@ -304,6 +301,6 @@ function gravaDadosMapa(id,recordid)
   		failure:core_handleFailure,
   		argument: { foo:"foo", bar:"bar" }
 	}; 
-	core_makeRequest(sUrl,callback)
+	core_makeRequest(sUrl,callback);
 }
 YAHOO.util.Event.addListener(window, "load", initMenu);

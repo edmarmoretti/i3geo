@@ -116,7 +116,6 @@ function montaArvore(dados)
 
 	YAHOO.example.treeExample = new function()
 	{
-		var currentIconMode;
 		tree = "";
 		function changeIconMode()
 		{
