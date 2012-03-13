@@ -1,59 +1,58 @@
 <html>
 <body>
 <pre>
-<p>
+
 <a href="ms_criamapa.php?temasa=biomashp estadosl" target="blank">
 ms_criamapa.php?temasa=biomashp estadosl | temasa - lista, separada por espaços, com os nomes dos arquivos map que serão adicionados ao mapa. Se o arquivo map não estiver no diretório i3geo/temas, o nome deve incluir o caminho completo no servidor. O arquivo map pode conter mais de um layer pois todos os existentes serão adicionados ao mapa. Por default, todos os layers encontrados nos mapfiles são adicionados ao mapa com o status de desenho em OFF.
 </a>
-<p>
+
 <a href="ms_criamapa.php?temasa=biomashp estadosl&layers=biomashp" target="blank">
-ms_criamapa.php?temasa=biomashp estadosl&layers=biomashp | layers - lista, separada por espaços, com os nomes dos layers que serão ligados. A lista deve conter os nomes dos layers e não os nomes dos mapfiles acrescentados ao mapa. Por exemplo, ao adicionar com "temasa" um mapfile chamado "transporte" que contenha os layers "estradas" e "ferrovias" os dois layers serão adicionados ao mapa. Para que esses dois layers fiquem visíveis no mapa deve-se utilizar &layers=estradas ferrovias.
+ms_criamapa.php?temasa=biomashp estadosl&amp;layers=biomashp | layers - lista, separada por espaços, com os nomes dos layers que serão ligados. A lista deve conter os nomes dos layers e não os nomes dos mapfiles acrescentados ao mapa. Por exemplo, ao adicionar com "temasa" um mapfile chamado "transporte" que contenha os layers "estradas" e "ferrovias" os dois layers serão adicionados ao mapa. Para que esses dois layers fiquem visíveis no mapa deve-se utilizar &amp;layers=estradas ferrovias.
 </a>
-<p>
 <a href="ms_criamapa.php?desligar=estados" target="blank">
 ms_criamapa.php?desligar=estados | desligar - lista com os nomes dos temas que serão forçados a inicializar desligados, ou seja, com STATUS OFF
 </a>
-<p>
+
 <a href="ms_criamapa.php?mapext=-63.252544 -34.336482 -43.952964 -23.813048" target="blank">
-ms_criamapa.php?mapext=-63.252544 -34.336482 -43.952964 -23.813048 | mapext - extensao geografica que será utilizada. Por padrão, a extensão geográfica é definida para abranger o Brasil todo. Para alterar o padrão deve-se utilizar o parâmetro mapext para especificar a nova abrangência. Essa abrangência deve ser definida em coordenadas no formato décimos de grau e na projeção geográfica. Exemplo: &mapext=-54 -30 -50 -12. Observe que a ordem dos valores são xmin ymin xmax ymax
+ms_criamapa.php?mapext=-63.252544 -34.336482 -43.952964 -23.813048 | mapext - extensao geografica que será utilizada. Por padrão, a extensão geográfica é definida para abranger o Brasil todo. Para alterar o padrão deve-se utilizar o parâmetro mapext para especificar a nova abrangência. Essa abrangência deve ser definida em coordenadas no formato décimos de grau e na projeção geográfica. Exemplo: &amp;mapext=-54 -30 -50 -12. Observe que a ordem dos valores são xmin ymin xmax ymax
 </a>
-<p>
+
 <a href="ms_criamapa.php?interface=geral.htm" target="blank">
 ms_criamapa.php?interface=geral.htm | interface - nome da interface que será utilizada para abrir o mapa. As interfaces são arquivos HTML que podem estar no diretório aplicmap. Por default, utiliza-se o geral.htm. Vc pode copiar esse html e alterá-lo para customizar o mapa. Para chamar o html customizado, utilize ms_criamapa.php?interface=meumapa.htm
 </a>
-<p>
+
 <a href="ms_criamapa.php?perfil=teste" target="blank">
-ms_criamapa.php?perfil=teste | perfil - perfil utilizado para restringir os menus de temas. O menu com os temas mostrados no i3geo são definidos no arquivo menutemas/menutemas.xml. Nesse arquivo,pode-se utilizar um elemento <PERFIL></PERFIL> indicando que o tema apenas será mostrado em perfis específicos. Por exempo: ms_criamapa.php?perfil=usuário1
+ms_criamapa.php?perfil=teste | perfil - perfil utilizado para restringir os menus de temas. O menu com os temas mostrados no i3geo são definidos no arquivo menutemas/menutemas.xml. Nesse arquivo,pode-se utilizar um elemento &lt;PERFIL&gt;&lt;/PERFIL&gt; indicando que o tema apenas será mostrado em perfis específicos. Por exempo: ms_criamapa.php?perfil=usuário1
 </a>
-<p>
+
 <a href="ms_criamapa.php?pontos=-54 -12 -45 -37.55&nometemapontos=teste de pontos" target="blank">
-ms_criamapa.php?pontos=-54 -12 -45 -37.55&nometemapontos=teste de pontos | pontos - lista de coordenadas x e y que serão adicionadas como pontos no mapa.
+ms_criamapa.php?pontos=-54 -12 -45 -37.55&amp;nometemapontos=teste de pontos | pontos - lista de coordenadas x e y que serão adicionadas como pontos no mapa.
 nometemapontos - nome do tema de pontos
 </a>
-<p>
+
 <a href="ms_criamapa.php?linhas=-54 -12 -45 -37.55 -40 -12&nometemalinhas=teste de linhas" target="blank">
-ms_criamapa.php?linhas=-54 -12 -45 -37.55 -40 -12&nometemalinhas=teste de linhas | linhas - lista de coordenadas x e y que serão adicionadas como linhas no mapa. As coordenadas de linhas diferentes devem ser separadas por ",", por exemplo: -54 -12 -50 -12,-50 -1 -50 -2 -50 -3
+ms_criamapa.php?linhas=-54 -12 -45 -37.55 -40 -12&amp;nometemalinhas=teste de linhas | linhas - lista de coordenadas x e y que serão adicionadas como linhas no mapa. As coordenadas de linhas diferentes devem ser separadas por ",", por exemplo: -54 -12 -50 -12,-50 -1 -50 -2 -50 -3
 nometemalinhas - nome do tema de linhas
 </a>
-<p>
+
 <a href="ms_criamapa.php?poligonos=-54 -12 -45 -37.55 -40 -12&nometemapoligonos=teste de poligonos" target="blank">
-ms_criamapa.php?poligonos=-54 -12 -45 -37.55 -40 -12&nometemapoligonos=teste de poligonos | poligonos - lista de coordenadas x e y que serão adicionadas como polígonos no mapa. As coordenadas dos vértices de polígonos diferentes devem ser separadas por ",".
+ms_criamapa.php?poligonos=-54 -12 -45 -37.55 -40 -12&amp;nometemapoligonos=teste de poligonos | poligonos - lista de coordenadas x e y que serão adicionadas como polígonos no mapa. As coordenadas dos vértices de polígonos diferentes devem ser separadas por ",".
 nometemapoligonos - nome do tema de polígonos
 </a>
-<p>
+
 <a href="ms_criamapa.php?nometemawkt=wkt&wkt=POLYGON ((-56.1874569701050040 -15.2281419679940000, -51.4796050149779990 -10.7049116581660010, -50.8334292564310030 -17.0743584209850000, -56.1874569701050040 -15.2281419679940000))" target="blank">
 wkt - insere elementos no mapa com coordenadas definidas em wkt
 nometemawkt - nome do tema em wkt
 </a>
-<p>
+
 <a href="ms_criamapa.php?idioma=en" target="blank">
 ms_criamapa.php?idioma=en | idioma - idioma da interface (veja os idiomas disponíveis em classe_idioma.js)
 </a>
-<p>
+
 <a href="ms_criamapa.php?interface=googlemaps.phtml&kmlurl=http://gmaps-samples.googlecode.com/svn/trunk/ggeoxml/cta.kml" target="blank">
-ms_criamapa.php?interface=googlemaps.phtml&kmlurl=http://gmaps-samples.googlecode.com/svn/trunk/ggeoxml/cta.kml 0| kmlurl - url de um arquivo KML que será incluido no mapa. Válido apenas na interface google maps
+ms_criamapa.php?interface=googlemaps.phtml&amp;kmlurl=http://gmaps-samples.googlecode.com/svn/trunk/ggeoxml/cta.kml 0| kmlurl - url de um arquivo KML que será incluido no mapa. Válido apenas na interface google maps
 </a>
-<p>
+
 <a href="ms_criamapa.php?srs_wms=EPSG:4618&&image_wms=image/png&versao_wms=1.1.0&url_wms=http://mapas.mma.gov.br/i3geo/ogc.php?tema=bioma&layer_wms=bioma&style_wms=&nome_wms=bioma" target="blank">
 url_wms - endereço de um WMS (será incluido como uma camada no mapa)
 layer_wms - nome do layer
@@ -63,6 +62,7 @@ srs_wms - código da projeção
 image_wms - tipo de imagem disponível
 versao_wms - Versão do WMS (necessário quando da inclusão de uma camada WMS diretamente pela URL)
 </a>
-<p>
+
+</pre>
 </body>
 </html>

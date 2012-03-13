@@ -12,7 +12,6 @@ body
 <title></title>
 </head>
 <body class=" yui-skin-sam fundoPonto" style="overflow:auto" >
-<center>
 <div class="bordaSuperior"  >&nbsp;</div>
 <div class="mascaraPrincipal" id="divGeral">
 <script>

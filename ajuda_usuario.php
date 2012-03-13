@@ -52,7 +52,7 @@ div {left: 0px;}
 <title></title>
 </head>
 <body class=" yui-skin-sam fundoPonto" style="overflow:auto" >
-<center>
+
 <div class="bordaSuperior"  >&nbsp;</div>
 <div class="mascaraPrincipal" id="divGeral">
 	<img src="imagens/i3geo1.jpg" />
@@ -75,12 +75,12 @@ div {left: 0px;}
 </div>
 <script language="JavaScript" type="text/javascript" src="classesjs/dicionario_ajuda.js"></script>
 <script>
-var idcategoria = "<?php echo $idcategoria;?>"
-var idajuda = "<?php echo $idajuda;?>"
+var idcategoria = "<?php echo $idcategoria;?>";
+var idajuda = "<?php echo $idajuda;?>";
 if(screen.availWidth > 700)
 {document.getElementById("divGeral").style.width = "700px";}
 function pegaAjuda(tipo,categoria){
-	eval("var obj = g_traducao_ajuda."+tipo)
+	eval("var obj = g_traducao_ajuda."+tipo);
 	for(var k in obj){
 		if(idajuda != "" && idajuda != k)
 		{}
@@ -88,21 +88,21 @@ function pegaAjuda(tipo,categoria){
 		{
 			if(idajuda == "" && categoria != obj[k].categoria){}
 			else{
-				ins += "<br><li onclick='expande(\""+k+"\")' style='cursor:pointer;font-size:16px;color:#759555'><b>"+obj[k].titulo+"</b></li>"
-				ins += "<div id='"+k+"' style='display:none'><p>"+obj[k].pt+"</p>"
-				ins += "<p>"+obj[k].complemento+"</p>"
-				ins += "<p style='color:gray;padding-left:20px'>"+obj[k].diretorio+"</p>"
+				ins += "<br><li onclick='expande(\""+k+"\")' style='cursor:pointer;font-size:16px;color:#759555'><b>"+obj[k].titulo+"</b></li>";
+				ins += "<div id='"+k+"' style='display:none'><p>"+obj[k].pt+"</p>";
+				ins += "<p>"+obj[k].complemento+"</p>";
+				ins += "<p style='color:gray;padding-left:20px'>"+obj[k].diretorio+"</p>";
 				if(obj[k].apijs){
-					ins += "<p style='color:gray;padding-left:20px'>API js: "+obj[k].apijs+"</p>"
+					ins += "<p style='color:gray;padding-left:20px'>API js: "+obj[k].apijs+"</p>";
 				}
 				if(obj[k].tela){
-					ins += "<p><a href='"+obj[k].tela+"' target=_blank style='padding-left:20px' >Exemplo de tela</a></p>"
+					ins += "<p><a href='"+obj[k].tela+"' target=_blank style='padding-left:20px' >Exemplo de tela</a></p>";
 				}
 				if(obj[k].gadget){
-					ins += "<p><a href='"+obj[k].gadget+"' target=_blank style='padding-left:20px' >Gadget</a></p>"
+					ins += "<p><a href='"+obj[k].gadget+"' target=_blank style='padding-left:20px' >Gadget</a></p>";
 				}
 
-				ins += "</div>"
+				ins += "</div>";
 			}
 			
 		}
@@ -110,38 +110,38 @@ function pegaAjuda(tipo,categoria){
 }
 function inicia()
 {
-	ins = "<div style='text-align:justify'>"
+	ins = "<div style='text-align:justify'>";
 	for(var key in g_traducao_ajuda_categorias){
 		if(idcategoria != "" && idcategoria != key)
 		{}
 		else
 		{
 			if(idajuda == "")
-			ins += "<p style='font-size:18px' ><b>"+g_traducao_ajuda_categorias[key].titulo+"</b></p>"
+			ins += "<p style='font-size:18px' ><b>"+g_traducao_ajuda_categorias[key].titulo+"</b></p>";
 			if(g_traducao_ajuda_categorias[key].observacao)
-			ins += "<p style='font-size:14px;color:gray' >"+g_traducao_ajuda_categorias[key].observacao+"</p>"
+			ins += "<p style='font-size:14px;color:gray' >"+g_traducao_ajuda_categorias[key].observacao+"</p>";
 			if(idajuda == "")
-			pegaAjuda("ferramentas",key)
+			pegaAjuda("ferramentas",key);
 			else{
-				pegaAjuda("ferramentas",g_traducao_ajuda_categorias[key])
+				pegaAjuda("ferramentas",g_traducao_ajuda_categorias[key]);
 			}
 		}
 	}
-	document.getElementById("resultado").innerHTML = ins+"</div>"
-	if(idcategoria != ""){expande(idajuda)}
+	document.getElementById("resultado").innerHTML = ins+"</div>";
+	if(idcategoria != ""){expande(idajuda);}
 }
 function expande(id){
 	var i = document.getElementById(id);
 	if(i.style.display=="none")
 	i.style.display = "block";
 	else
-	i.style.display="none"	
+	i.style.display="none";
 }
 function expandirtudo(){
 	for(var key in g_traducao_ajuda.ferramentas){
 		var j = document.getElementById(key);
 		if(j)
-		{expande(key)}	
+		{expande(key);}	
 	}
 }
 inicia()
