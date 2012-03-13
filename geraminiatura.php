@@ -79,10 +79,14 @@ if (!function_exists('ms_GetVersion'))
 	else
 	{dl('php_mapscript.so');}
 }
-include("ms_configura.php");
-include("classesphp/funcoes_gerais.php");
-require_once("classesphp/pega_variaveis.php");
-include_once ("classesphp/carrega_ext.php");
+//para o caso de ser feito um include desse programa
+if(!isset($locaplic))
+{$locaplic = "";}
+include($locaplic."/ms_configura.php");
+if(!function_exists("versao"))
+{include($locaplic."/classesphp/funcoes_gerais.php");}
+require_once($locaplic."/classesphp/pega_variaveis.php");
+include_once ($locaplic."/classesphp/carrega_ext.php");
 $versao = versao();
 $versao = $versao["principal"];
 //
@@ -130,7 +134,11 @@ if($tipo == "mini" || $tipo == "todos" || $tipo == "grande" || $tipo == "")
 //
 function verificaMiniatura($map,$tipo,$admin=false)
 {
-	global $locaplic,$versao;
+	global $locaplic,$versao,$base;
+	if($versao == ""){
+		$versao = versao();
+		$versao = $versao["principal"];	
+	}
 	//echo $map."<br>";return;
 	ms_ResetErrorList();
 	$tema = "";
@@ -142,15 +150,42 @@ function verificaMiniatura($map,$tipo,$admin=false)
 	{$tema = $locaplic.'/temas/'.$map.".map";}
 	if ($tema != "")
 	{
-		if (strtoupper(substr(PHP_OS, 0, 3) == 'WIN'))
-		{$mapa = ms_newMapObj("$locaplic/aplicmap/geral1windowsv".$versao.".map");}
+		if(isset($base) && $base != ""){
+			if(file_exists($base))
+			{$f = $base;}
+			else
+			{$f = $locaplic."/aplicmap/".$base.".map";}
+			if(!file_exists($base)){
+				echo "<span style=color:red >ARQUIVO $base NÂO FOI ENCONTRADO. CORRIJA ISSO EM ms_configura.php";
+				exit;
+			}
+		}
 		else
-		{$mapa = ms_newMapObj("$locaplic/aplicmap/geral1v".$versao.".map");}
+		{
+			$f = "";
+			if (strtoupper(substr(PHP_OS, 0, 3) == 'WIN'))
+			{$f = $locaplic."/aplicmap/geral1windowsv".$versao.".map";}
+			else
+			{
+				if($f == "" && file_exists('/var/www/i3geo/aplicmap/geral1debianv'.$versao.'.map')){
+					$f = "/var/www/i3geo/aplicmap/geral1debianv".$versao.".map";
+				}
+				if($f == "" && file_exists('/var/www/html/i3geo/aplicmap/geral1fedorav'.$versao.'.map')){
+					$f = "/var/www/html/i3geo/aplicmap/geral1fedorav".$versao.".map";
+				}
+				if($f == "" && file_exists('/opt/www/html/i3geo/aplicmap/geral1fedorav'.$versao.'.map')){
+					$f = "/opt/www/html/i3geo/aplicmap/geral1v".$versao.".map";
+				}
+				if($f == "")
+				{$f = $locaplic."/aplicmap/geral1v".$versao.".map";}
+			}
+		}
+		$mapa = ms_newMapObj($f);
 		if(@ms_newMapObj($tema))
 		{$nmapa = ms_newMapObj($tema);}
 		else
 		{
-			echo "erro no arquivo $map <br>";
+			echo "erro no arquivo $tema <br>";
 			return;
 		}
 		$temasn = $nmapa->getAllLayerNames();
@@ -162,9 +197,9 @@ function verificaMiniatura($map,$tipo,$admin=false)
 			ms_newLayerObj($mapa, $layern);
 			autoClasses($layern,$mapa,$locaplic);
 			if ($layern->data == "")
-			$dados = $layern->connection;
+			{$dados = $layern->connection;}
 			else
-			$dados = $layern->data;
+			{$dados = $layern->data;}
 			$pegarext = $teman;	
 		}
 		if (isset($postgis_mapa))
@@ -184,20 +219,16 @@ function verificaMiniatura($map,$tipo,$admin=false)
 					}
 				}
 			}
-		}
-		
+		}	
 		zoomTemaMiniatura($pegarext,$mapa);
 		if ($tipo == "mini"  || $tipo == "todos")
-		{
-		 	
+		{	
 			$mapa->setsize(50,50);
 			$sca = $mapa->scalebar;
 			$sca->set("status",MS_OFF);
 			$objImagemM = @$mapa->draw();
-			
-			if ($objImagemM == "" || $objImagemM == MS_FAILURE)
-			{echo "Problemas ao gerar o mapa<br>";return;}
-
+			//if ($objImagemM == "" || $objImagemM == MS_FAILURE)
+			//{echo "Problemas ao gerar o mapa<br>";return;}
 			$weboM = $mapa->web;
 			$urlM = $weboM->imageurl."/".$map;
 		}
@@ -207,8 +238,8 @@ function verificaMiniatura($map,$tipo,$admin=false)
 			$sca = $mapa->scalebar;
 			$sca->set("status",MS_OFF);
 			$objImagemG = @$mapa->draw();
-			if ($objImagemG == "" || $objImagemG == MS_FAILURE)
-			{echo "Problemas ao gerar o mapa<br>";return;}
+			//if ($objImagemG == "" || $objImagemG == MS_FAILURE)
+			//{echo "Problemas ao gerar o mapa<br>";return;}
 			$weboG = $mapa->web;
 			$urlG = $weboG->imageurl."/".$map;
 		}

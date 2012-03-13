@@ -1243,9 +1243,10 @@ function removeCabecalho($arq,$symbolset=true)
 }
 function atualizaMiniatura(){
 	global $tema,$locaplic;
+	$tipo = "foo";
 	include_once("../../classesphp/funcoes_gerais.php");
 	require("../../geraminiatura.php");
 	verificaMiniatura($tema,"todos",true);
-	exit;
+	return "ok";
 }
 ?>

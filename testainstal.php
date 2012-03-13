@@ -59,7 +59,8 @@ i3geo/testainstal.php
 error_reporting(E_ALL);
 
 //echo "<pre>\n";
-echo "<b>TESTE DE INSTALACAO DO i3Geo</b><br>\n";
+echo "<span style=font-size:10px >Observação: se você estiver usando Linux e a biblioteca CAIRO estiver instalada corretamente no Mapserver, edite os arquivos i3geo/aplicmap/geral1fedorav6.map e geral1debianv6.map para remover os comentários do OUTPUTFORMAT que utiliza SVG com o drive Cairo</span><br>\n"; 
+echo "<br><b>TESTE DE INSTALACAO DO i3Geo</b><br>\n";
 //ip
 $ip = "UNKNOWN";
 if (getenv("HTTP_CLIENT_IP")) $ip = getenv("HTTP_CLIENT_IP");
