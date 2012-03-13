@@ -163,7 +163,7 @@ i3GEOF.busca = {
 			if(i3GEO.eventos.ATUALIZAARVORECAMADAS.toString().search('i3GEO.janela.comboCabecalhoTemas("i3GEOFbuscaComboCabeca","i3GEOFbuscaComboCabecaSel","busca","ligadosComTabela")') > 0)
 			{i3GEO.eventos.ATUALIZAARVORECAMADAS.remove('i3GEO.janela.comboCabecalhoTemas("i3GEOFbuscaComboCabeca","i3GEOFbuscaComboCabecaSel","busca","ligadosComTabela")');}			
 		};
-		YAHOO.util.Event.addListener(janela[0].close, "click", temp);		
+		YAHOO.util.Event.addListener(janela[0].close, "click", temp);
 	},
 	/*
 	Function: ativaFoco
