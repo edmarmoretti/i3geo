@@ -45,7 +45,6 @@
 	"classe_idioma.js",
 	"classe_php.js",
 	"classe_configura.js",
-	"depreciados.js",
 	"classe_calculo.js",
 	"classe_desenho.js",
 	"classe_interface.js",

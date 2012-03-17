@@ -1,4 +1,5 @@
-/*jslint plusplus:false,white:false,undef: false, rhino: true, onevar: true, evil: false */
+/*jslint white:false,undef: false, rhino: true, onevar: true, evil: false */
+
 /*
 Title: Utilitários
 
@@ -103,17 +104,6 @@ Quando o usuário clica no mapa, essa variável é pesquisada para definir o tipo d
 */
 g_tipoacao = "zoomli";
 
-/*
-g_postpx = "px";
-g_tipotop = "top";
-g_tipoleft = "left";
-if (navm)
-{
-	g_postpx = "";  //utilizado para crossbrowser
-	g_tipotop = "pixelTop"; //utilizado para crossbrowser
-	g_tipoleft = "pixelLeft"; //utilizado para crossbrowser
-}
-*/
 /*
 Function: $i
 
@@ -2471,7 +2461,7 @@ i3GEO.util = {
 		return "";
 	}
 };
-//++++++++++++++++++++++++++++++++++++
+//
 // YUI ACCORDION
 // 1/22/2008 - Edwart Visser
 //
@@ -2479,9 +2469,7 @@ i3GEO.util = {
 //
 // REQUIRES: yahoo-dom-event.js, animation-min.js
 //
-// TODO: build hover script for highlighting header in IE
-// TODO: attach behaviour based on rel attribute
-//++++++++++++++++++++++++++++++++++++
+//
 try{
 	YAHOO.namespace("lutsr");
 	YAHOO.lutsr.accordion = {

@@ -133,20 +133,6 @@ $twitteroauth = array(
 	"authorizeurl" => "https://twitter.com/oauth/authorize"
 );	
 /*
-	Variavel: mensagemInicia
-	
-	Mensagem de inicialização mostrada pelo programa ms_criamapa.php
-	
-	É obtida de um include para permitir a atualização da versão nos pacotes de correção
-	
-	Tipo:
-	{string}
-*/
-if(file_exists("versao.php"))
-{include_once("versao.php");}
-else
-{$mensagemInicia = "";}
-/*
 	Variable: tituloInstituicao
 	
 	Nome que será utilizado em alguns cabeçalhos e títulos de páginas
@@ -454,4 +440,18 @@ else //se for linux
 	$base = "";
 	$cachedir = "";
 }
+/*
+ Variavel: mensagemInicia
+
+Mensagem de inicialização mostrada pelo programa ms_criamapa.php
+
+É obtida de um include para permitir a atualização da versão nos pacotes de correção
+
+Tipo:
+{string}
+*/
+if(file_exists($locaplic."/versao.php"))
+{include_once($locaplic."/versao.php");}
+else
+{$mensagemInicia = "";}
 ?>

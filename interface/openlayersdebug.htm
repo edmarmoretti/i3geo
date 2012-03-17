@@ -4,7 +4,18 @@
 <meta http-equiv="Category" content="i3Geo Mapa interativo MMA geoprocessamento sig mobile">
 <META HTTP-EQUIV="Content-Type" CONTENT="text/html; charset=ISO-8859-1">
 <title>i3GEO - OpenLayers</title>
-
+<style>
+.olControlEditingToolbar1 div {
+	background-image:url(../mashups/openlayers.png);
+	background-repeat:no-repeat;
+	float:right;
+	right: 0px;	
+	height:29px;
+	margin:2px;
+	width:29px;
+	cursor:pointer;
+}
+</style>
 </head>
 <body id="i3geo" style="background-color:white">
 <table id='mst' summary="" style='display:none;' width=100% cellspacing='0'>
@@ -62,16 +73,15 @@
 		<td id="barraInferior" style="background-image:url('../imagens/visual/default/rodape.png');height:10px"></td>
 	</tr>
 </table>
-<center>
-<table id="i3GEOlogoMarca" style='box-shadow:0 1px 13px gray;border-radius:5px;'>
+<table id="i3GEOlogoMarcaX" style='margin: 0px auto;box-shadow:0 1px 13px gray;border-radius:5px;'>
 	<tr>
-		<td><center><h1 style="font-size:10px;font-family: Verdana, Arial, Helvetica, sans-serif;"><div id=versaoi3geo ></div><h2 style="font-size:10px;font-family: Verdana, Arial, Helvetica, sans-serif;">i3Geo - Software livre para criação de mapas interativos e geoprocessamento<h3 style="font-size:10px;font-family: Verdana, Arial, Helvetica, sans-serif;">Baseado no Mapserver, é licenciado sob GPL e integra o Portal do Software Público Brasileiro</h3></h2></h1></td>
+		<td><div id=versaoi3geo ></div><h2 style="font-size:10px;font-family: Verdana, Arial, Helvetica, sans-serif;">i3Geo - Software livre para criação de mapas interativos e geoprocessamento</h2><h3 style="font-size:10px;font-family: Verdana, Arial, Helvetica, sans-serif;">Baseado no Mapserver, é licenciado sob GPL e integra o Portal do Software Público Brasileiro</h3></td>
 	</tr>
 	<tr>
-		<td style="padding:10px;"><center><img style="width:560px;height:81px" alt="" src='../imagens/logo_inicio.png' ></td>
+		<td style="padding:10px;"><img style="width:560px;height:81px" alt="" src='../imagens/logo_inicio.png' ></td>
 	</tr>
 	<tr>
-		<td><center>
+		<td>
 			<!--
 			<script id="ohloh" type="text/javascript" src="http://www.ohloh.net/p/150688/widgets/project_users.js?style=red"></script>
 			-->
@@ -103,18 +113,7 @@
 <script src="../classesjs/i3geonaocompacto.js"></script>
 <script src="../pacotes/openlayers/OpenLayers211.js.php"></script>
 <!-- estilo necessário para a ferramenta de edição -->
-<style>
-.olControlEditingToolbar1 div {
-	background-image:url(../mashups/openlayers.png);
-	background-repeat:no-repeat;
-	float:right;
-	right: 0px;	
-	height:29px;
-	margin:2px;
-	width:29px;
-	cursor:pointer;
-}
-</style>
+
 <script>
 /*
 Title: Interface Openlayers
