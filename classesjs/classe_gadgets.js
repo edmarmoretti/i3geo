@@ -45,8 +45,16 @@ i3GEO.gadgets = {
 	Parametros de inicialização dos gadgets.
 
 	Essa variável define os parâmetros individuais de cada gadget e o ID do elemento HTML onde
-	o gadget será incluído.
-
+	o gadget será incluído (parâmetro "idhtml").
+	
+	Cada tipo de gadget pode ter parâmetros específicos, descritos a seguir.
+	
+	i3GEO.gadgets.PARAMETROS.mostraBuscaRapida.servicosexternos = true|false //indica que os serviços de buscas externos ao i3Geo serão ou não mostrados
+	i3GEO.gadgets.PARAMETROS.mostraBuscaRapida.temasmapa =  true|false //indica se a busca será feita ou não nas camadas existentes no mapa
+	i3GEO.gadgets.PARAMETROS.mostraMenuSuspenso.deslocaEsquerda = 0 //número de pixels que indica o quanto o menu será deslocado para a esquerda
+	i3GEO.gadgets.PARAMETROS.mostraMenuSuspenso.finaliza = "" //nome de uma função que será executada quando a construção do menu tiver terminado
+	i3GEO.gadgets.PARAMETROS.mostraMenuSuspenso.parametrosYUI = {} //objeto contendo parâmetros adicionais da API YUI para menus
+	
 	Você pode acessar os parâmetros da seguinte forma:
 
 	i3GEO.gadgets.PARAMETROS.mostraMenuSuspenso.deslocaEsquerda = 400;
@@ -85,7 +93,7 @@ i3GEO.gadgets = {
 
 		"mostraMenuSuspenso":
 
-		{idhtml:"menus",deslocaEsquerda:0,finaliza:""},
+		{idhtml:"menus",deslocaEsquerda:0,finaliza:"",parametrosYUI={}},
 		
 		"mostraMenuLista":
 		
@@ -116,8 +124,11 @@ i3GEO.gadgets = {
 		{idhtml:"visual"},
 		"mostraHistoricoZoom":
 		{idhtml:"historicozoom"},
-		"mostraMenuSuspenso":
-		{idhtml:"menus",deslocaEsquerda:0},
+		"mostraMenuSuspenso":{
+			idhtml:"menus",
+			deslocaEsquerda:0,
+			parametrosYUI: {iframe:false,autosubmenudisplay: false, showdelay: 200, hidedelay: 500, lazyload: false}
+		},
 		"mostraMenuLista":
 		{idhtml:"menuLista"},
 		"mostraVersao":
@@ -598,10 +609,8 @@ i3GEO.gadgets = {
 				ins += '</div>';
 				objid.innerHTML=ins;
 				if(i3GEO.Interface.ATUAL === "googleearth")
-				{ifr = true;}
-				else
-				{ifr = false;}
-				i3GEOoMenuBarLocal = new YAHOO.widget.MenuBar(id,{iframe:ifr,autosubmenudisplay: true, showdelay: 100, hidedelay: 500, lazyload: false});
+				{i3GEO.gadgets.PARAMETROS.mostraMenuSuspenso.parametrosYUI.iframe = true;}
+				i3GEOoMenuBarLocal = new YAHOO.widget.MenuBar(id,i3GEO.gadgets.PARAMETROS.mostraMenuSuspenso.parametrosYUI);
 				onMenuBarBeforeRender = function (p_sType, p_sArgs){
 					var nomeMenu = "",nomeSub,
 						subs = i3GEO.configura.oMenuData.submenus,

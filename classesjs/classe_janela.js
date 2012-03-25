@@ -50,6 +50,7 @@ Type:
 */
 YAHOO.i3GEO.janela.manager = new YAHOO.widget.OverlayManager();
 //para efeitos de compatibilidade com a versão 4.6
+YAHOO.namespace("janelaDoca.xp");
 YAHOO.janelaDoca.xp.manager = new YAHOO.widget.OverlayManager();
 /*
 Objeto: YAHOO.i3GEO.janela.managerAguarde
