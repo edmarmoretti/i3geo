@@ -551,6 +551,10 @@ i3GEO.Interface = {
 				i = $i(i3GEO.Interface.IDCORPO),
 				bb = i3GEO.barraDeBotoes;
 			OpenLayers.DOTS_PER_INCH = i3GEO.util.calculaDPI();
+			//corrige a localização do script
+			OpenLayers._getScriptLocation = function(){
+				return i3GEO.configura.locaplic + "/pacotes/openlayers/";
+			};
 			if(i){
 				f = $i("openlayers");
 				if(!f){

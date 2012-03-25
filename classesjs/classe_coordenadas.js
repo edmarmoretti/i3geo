@@ -512,6 +512,11 @@ i3GEO.coordenadas = {
 			'ORIGEM' : origem,
 			'DESTINO': destino
 		};
+		//para corrigir o path do proj4js
+		//var url = Proj4js.getScriptLocation() + 'defs/' + this.srsAuth.toUpperCase() + this.srsProjNumber + '.js';
+		Proj4js.getScriptLocation = function(){
+			return i3GEO.configura.locaplic + "/pacotes/proj4js/lib/";
+		};
 		var source = new Proj4js.Proj("ORIGEM"),
 			dest = new Proj4js.Proj("DESTINO"),
 			p = new Proj4js.Point(x,y);

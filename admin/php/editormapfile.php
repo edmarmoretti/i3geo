@@ -1069,6 +1069,10 @@ function refazerLayer()
 		$nl = ms_newLayerObj($mapatema,$layernovo);
 		$nl->set("name",$codigomap);
 		$nl->setmetadata("nomeoriginal","");
+		$nl->setmetadata("olopacity","");
+		$nl->setmetadata("olstatus","");
+		$nl->setmetadata("gmopacity","");
+		$nl->setmetadata("gmstatus","");
 		$nl->setmetadata("cache","");
 		$numclasses = $nl->numclasses;
 		if ($numclasses > 0)

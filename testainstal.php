@@ -61,6 +61,8 @@ error_reporting(E_ALL);
 //echo "<pre>\n";
 echo "<span style=font-size:10px >Observação: se você estiver usando Linux e a biblioteca CAIRO estiver instalada corretamente no Mapserver, edite os arquivos i3geo/aplicmap/geral1fedorav6.map e geral1debianv6.map para remover os comentários do OUTPUTFORMAT que utiliza SVG com o drive Cairo</span><br>\n"; 
 echo "<br><b>TESTE DE INSTALACAO DO i3Geo</b><br>\n";
+include ("versao.php");
+echo "<br><b>$mensagemInicia </b><br><br> \n";
 //ip
 $ip = "UNKNOWN";
 if (getenv("HTTP_CLIENT_IP")) $ip = getenv("HTTP_CLIENT_IP");
@@ -105,7 +107,7 @@ echo "</pre>Existe o ms_configura.php? <br>";
 if(file_exists("ms_configura.php")) echo "Sim\n"; else {echo "Nao";saindo(" ms_configura não encontrado");}
 echo "Incluindo...\n<br>";
 include ("ms_configura.php");
-echo "<b>$mensagemInicia </b> \n";
+echo "<b>$mensagemInicia </b><br><br> \n";
 echo "dir_tmp = $dir_tmp \n";
 echo "locmapserv = $locmapserv \n";
 echo "\n<br>";
