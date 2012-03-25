@@ -591,9 +591,10 @@ i3GEO.guias = {
 			//{i.style.display = "none";}
 			w = parseInt($i("contemFerramentas").style.width,10);
 			$i("contemFerramentas").style.width = "0px";
-			i = $i("visual");
-			if (i)
-			{i.style.width="0px";i.innerHTML="";}
+			//visual foi depreciado na 4.7
+			//i = $i("visual");
+			//if (i)
+			//{i.style.width="0px";i.innerHTML="";}
 			pos = "px";
 			a = i3GEO.parametros.h;
 			l = i3GEO.parametros.w + w;

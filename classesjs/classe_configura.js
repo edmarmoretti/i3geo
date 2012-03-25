@@ -465,7 +465,7 @@ i3GEO.configura = {
 	*/
 	mapaRefDisplay: "block",
 	/*
-	Propriedade: visual
+	Propriedade: visual (depreciado)
 
 	Tipo de visual que será utilizado no mapa.
 

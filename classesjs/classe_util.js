@@ -700,7 +700,7 @@ i3GEO.util = {
 	/*
 	Function: $im ou nome curto $im
 
-	Retorna o caminho correto de uma imagem incluindo o endereço da aplicação e do visual em uso.
+	Retorna o caminho correto de uma imagem.
 
 	Exemplo: $im("imagem.png")
 
@@ -713,7 +713,7 @@ i3GEO.util = {
 	string - caminho para a imagem
 	*/
 	$im: function(g){
-		return i3GEO.configura.locaplic+"/imagens/visual/"+i3GEO.configura.visual+"/"+g;
+		return i3GEO.configura.locaplic+"/imagens/visual/default/"+g;
 	},
 	/*
 	Function $inputText ou nome curto $inputText

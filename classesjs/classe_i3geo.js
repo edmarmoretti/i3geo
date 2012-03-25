@@ -96,7 +96,7 @@ i3GEO = {
 
 	geoip {sim|nao} - indica se o geoip está instalado
 
-	listavisual {String} - lista de visuais disponíveis
+	listavisual {String} - (depreciado) lista de visuais disponíveis
 
 	utilizacgi {sim|nao} - indica se o mapa atual está no modo CGI
 
@@ -150,7 +150,7 @@ i3GEO = {
 		extentTotal: "",
 		mapimagem: "",
 		geoip: "",
-		listavisual: "",
+		listavisual: "", //depreciado
 		utilizacgi:"",
 		versaoms:"",
 		versaomscompleta: "",

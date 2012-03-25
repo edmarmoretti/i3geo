@@ -121,7 +121,7 @@ i3GEO.gadgets = {
 		"mostraBuscaRapida":
 		{idhtml:"buscaRapida",servicosexternos:true,temasmapa:false},
 		"mostraVisual":
-		{idhtml:"visual"},
+		{idhtml:""},
 		"mostraHistoricoZoom":
 		{idhtml:"historicozoom"},
 		"mostraMenuSuspenso":{
@@ -413,7 +413,7 @@ i3GEO.gadgets = {
 		}
 	},
 	/*
-	Classe: i3GEO.gadgets.visual
+	Classe: i3GEO.gadgets.visual (depreciado)
 
 	Gera os ícones e controla as opções de modificação do visual do mapa.
 
@@ -428,7 +428,7 @@ i3GEO.gadgets = {
 	*/
 	visual: {
 		/*
-		Function: inicia
+		Function: inicia (depreciado)
 
 		Constrói os ícones de escolha do visual.
 
@@ -437,27 +437,10 @@ i3GEO.gadgets = {
 		id {String} - id do elemento que receberá os ícones (opcional)
 		*/
 		inicia: function(id){
-			if(typeof(console) !== 'undefined'){console.info("i3GEO.gadgets.inicia()");}
-			var l,visuais,li;
-			if(arguments.length === 0)
-			{id = i3GEO.gadgets.PARAMETROS.mostraVisual.idhtml;}
-			if($i(id)){
-				if (i3GEO.parametros.listavisual !== ""){
-					l = i3GEO.parametros.listavisual.split(",");
-					visuais = "";
-					li = l.length-1;
-					if(li >= 0){
-						do{visuais += "<img title='"+l[li]+"' style=cursor:pointer onclick='i3GEO.gadgets.visual.troca(\""+l[li]+"\")' src='"+i3GEO.configura.locaplic+"/imagens/visual/"+l[li]+".png' />&nbsp;";}
-						while(li--);
-					}
-					$i(id).innerHTML = visuais;
-					$i(id).onmouseover = function(){i3GEO.ajuda.mostraJanela($trad("d26"));};
-					$i(id).onmouseout = function(){i3GEO.ajuda.mostraJanela("");};
-				}
-			}
+			alert("A i3GEO.gadgets.visual foi depreciado");
 		},
 		/*
-		Function: troca
+		Function: troca (depreciado)
 
 		Troca o visual atual. A lista de visuais disponíveis é obtida em i3GEO.parametros.listavisual
 
@@ -466,71 +449,7 @@ i3GEO.gadgets = {
 		visual {String} - nome do visual que será utilizado.
 		*/
 		troca: function(visual){
-			var monta = function(retorno){
-				var imgstemp,imgs,i,temp,elementos,elt,caminho,j,busca,nimagem;
-				try{
-					i3GEO.janela.fechaAguarde("i3GEO.atualiza");
-					//
-					//pega todas as imagens da interface
-					//
-					imgstemp = retorno.data.arquivos;
-					imgs = [];
-					i = imgstemp.length-1;
-					if(i >= 0){
-						do{
-							temp = imgstemp[i].split(".");
-							if ((temp[1] === "png") || (temp[1] === "gif") || (temp[1] === "jpg"))
-							{imgs.push(imgstemp[i]);}
-						}
-						while(i--);
-					}
-					elementos = document.getElementsByTagName("img");
-					elt = elementos.length;
-					caminho = i3GEO.configura.locaplic+"/imagens/visual/"+visual+"/";
-					//faz a troca em imagens
-					j = imgs.length-1;
-					if(j >= 0){
-						do{
-							for (i=0;i < elt; i++){
-								if ((elementos[i].src.search("branco") > -1) && ((elementos[i].className !== "") || (elementos[i].id !== "")))
-								{elementos[i].src = caminho+"branco.gif";}
-								if (elementos[i].src.search("visual") > -1){
-									elementos[i].style.backgroundImage = "url('"+caminho+"sprite.png')";
-								}
-							}
-						}
-						while(j--);
-					}
-					j = imgs.length-1;
-					if(j >= 0){
-						do{
-							busca = imgs[j].split(".");
-							if ($i(busca[0]))
-							{$i(busca[0]).src = caminho+imgs[j];}
-						}
-						while(j--);
-					}
-					//faz a troca em bg
-					elementos = ["barraSuperior","barraInferior","vertMaisZoom","vertMenosZoom","foldermapa","foldermapa1","tic"];
-					i = elementos.length-1;
-					if(i >= 0){
-						do{
-							if ($i(elementos[i])){
-								nimagem = $i(elementos[i]).style.backgroundImage.replace(i3GEO.configura.visual,visual);
-								$i(elementos[i]).style.backgroundImage = nimagem;
-								//$i(elementos[i]).style.backgroundImage = "url('"+caminho+"sprite.png')";
-							}
-						}
-						while(i--);
-					}
-					i3GEO.configura.visual = visual;
-				}
-				catch(e){alert("Ocorreu um erro. mudaVisual"+e);i3GEO.janela.fechaAguarde("i3GEO.atualiza");}
-			};
-			//
-			//pega a lista de imagens no diretório do i3geo correspondente ao visual selecionado
-			//
-			i3GEO.php.listaarquivos(monta,"imagens/visual/"+visual);
+			alert("A i3GEO.gadgets.visual foi depreciado");
 		}
 	},
 	/*
