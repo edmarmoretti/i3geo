@@ -2497,7 +2497,7 @@ Define as características de simbologia de uma classe, cria, adiciona e exclui e
 		}
 		if ($opcao == "aplica")
 		{
-			$retorno = $m->aplicaParametro($classe,$estilo,$outlinecolor,$backgroundcolor,$color,$symbolname,$size,$opacidade);
+			$retorno = $m->aplicaParametro($classe,$estilo,$outlinecolor,$backgroundcolor,$color,$symbolname,$size,$opacidade,$width,$pattern);
 			$m->salva();
 		}
 		if ($opcao == "listaSimbolos"){
