@@ -167,8 +167,6 @@ i3GEOF.legenda = {
 				"i3GEOlegendabotao4",
 				{onclick:{fn: i3GEOF.legenda.paleta}}
 			);
-			
-
 			new YAHOO.widget.Button(
 				"i3GEOlegendabotao5",
 				{onclick:{fn: i3GEOF.legenda.simbU}}
@@ -1046,7 +1044,7 @@ i3GEOF.legenda = {
 				botoes += "&nbsp;<input id=i3GEOlegendabotao12 class=executar size=14 type=buttom value='adicionar estilo' />";
 				botoes += "&nbsp;<input id=i3GEOlegendabotao13 class=executar size=8 type=buttom value='sobe' />";
 				botoes += "&nbsp;<input id=i3GEOlegendabotao14 class=executar size=8 type=buttom value='desce' /></p>";
-				$i("i3GEOlegendacomboestilos").innerHTML = "<p class=paragrafo >Estilo em edição: "+combo+botoes+"<hr>";
+				$i("i3GEOlegendacomboestilos").innerHTML = "<p class=paragrafo >Estilo em edição: "+combo+botoes+" após adicionar ou excluir, aplique a alteração<hr>";
 				new YAHOO.widget.Button(
 					"i3GEOlegendabotao11",{onclick:{fn: function(){
 						try{
@@ -1138,16 +1136,22 @@ i3GEOF.legenda = {
 			"<tr><td style='text-align:left;'>Cor da frente:</td><td>"+
 			$inputText("","","i3GEOlegendacolor","",12,linha[4]) +
 			"</td><td><img style=cursor:pointer src='"+i3GEO.configura.locaplic+"/imagens/aquarela.gif' onclick=\"i3GEOF.legenda.corj('i3GEOlegendacolor')\" /></td></tr>"+
-			"<tr><td style='text-align:left;'>Tamanho:</td><td>"+
+			"<tr><td style='text-align:left;'>Tamanho/espaçamento:</td><td>"+
 			$inputText("","","i3GEOlegendasizes","",12,linha[6]) +
 			"</td><td></td></tr>" +
+			"<tr><td style='text-align:left;'>Espessura:</td><td>"+
+			$inputText("","","i3GEOlegendawidth","",12,linha[8]) +
+			"</td><td></td></tr>" +	
+			"<tr><td style='text-align:left;'>Padrão de repetição:</td><td>"+
+			$inputText("","","i3GEOlegendapattern","",12,linha[9]) +
+			"</td><td></td></tr>" +				
 			"<tr><td style='text-align:left;'>Opacidade:</td><td>"+
 			$inputText("","","i3GEOlegendaopacidade","",3,linha[7]) +
 			"</td><td></td></tr>" +			
 			"<tr><td style='text-align:left;'>S&iacute;mbolo:</td><td>"+
 			$inputText("","","i3GEOlegendasymbolname","",12,linha[5]) +
 			"</td><td></td></tr></table>";
-			$i("i3GEOlegendamostraEstilo").innerHTML = "<p class=paragrafo ><b>Propriedades do s&iacute;mbolo </b>(utilize -1,-1,-1 para anular uma cor. A cor deve ser definida no formato vermelho,verde,azul)<br></p>"+d;
+			$i("i3GEOlegendamostraEstilo").innerHTML = "<p class=paragrafo ><b>Propriedades do s&iacute;mbolo </b>(utilize -1,-1,-1 para anular uma cor. A cor deve ser definida no formato vermelho,verde,azul. Para criar linhas tracejadas utilize o símbolo '0' ou vazio e digite um padrão de repetição como por exemplo 2 10 2 10 )<br></p>"+d;
 			p = i3GEO.configura.locaplic+"/classesphp/mapa_controle.php?g_sid="+i3GEO.configura.sid+"&funcao=editasimbolo&tipo="+tipoLayer+"&opcao=listaSimbolos&onclick=i3GEOF.legenda.aplicaSimbolo(this)";
 			cp = new cpaint();
 			cp.set_response_type("JSON");
@@ -1203,6 +1207,8 @@ i3GEOF.legenda = {
 				valido = "nao",
 				n = simbolos.length,
 				size = $i("i3GEOlegendasizes").value,
+				width = $i("i3GEOlegendawidth").value,
+				pattern = $i("i3GEOlegendapattern").value,
 				opacidade = $i("i3GEOlegendaopacidade").value,
 				p,cp,fim;
 			for (i=0;i<n;i++){
@@ -1214,7 +1220,7 @@ i3GEOF.legenda = {
 				//i3GEOF.legenda.aguarde.visibility = "hidden";
 				//return;
 			}
-			p = i3GEO.configura.locaplic+"/classesphp/mapa_controle.php?g_sid="+i3GEO.configura.sid+"&funcao=editasimbolo&opcao=aplica&tema="+i3GEOF.legenda.tema+"&classe="+i3GEOF.legenda.classe+"&estilo="+i3GEOF.legenda.estilo+"&outlinecolor="+outlinecolor+"&backgroundcolor="+backgroundcolor+"&color="+color+"&symbolname="+symbolname+"&size="+size+"&opacidade="+opacidade;
+			p = i3GEO.configura.locaplic+"/classesphp/mapa_controle.php?g_sid="+i3GEO.configura.sid+"&funcao=editasimbolo&opcao=aplica&tema="+i3GEOF.legenda.tema+"&classe="+i3GEOF.legenda.classe+"&estilo="+i3GEOF.legenda.estilo+"&outlinecolor="+outlinecolor+"&backgroundcolor="+backgroundcolor+"&color="+color+"&symbolname="+symbolname+"&width="+width+"&pattern="+pattern+"&size="+size+"&opacidade="+opacidade;
 			cp = new cpaint();
 			fim = function(){
 				i3GEOF.legenda.aposAlterarLegenda();
