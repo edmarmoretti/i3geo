@@ -8,7 +8,7 @@
                  xmlns:xlink="http://www.w3.org/1999/xlink"
                  xmlns:geonet="http://www.fao.org/geonetwork"
                  xmlns:csw="http://www.opengis.net/cat/csw/2.0.2"
-                 xsi:schemaLocation="http://www.isotc211.org/2005/gmd http://schemas.opengis.net/iso/19139/20060504/srv/srv.xsd">
+                 xsi:schemaLocation="http://www.isotc211.org/2005/gmd http://www.isotc211.org/2005/gmd/gmd.xsd">
   <gmd:fileIdentifier>
       <gco:CharacterString xmlns:gmx="http://www.isotc211.org/2005/gmx">9a7adf1e-2843-4caf-893c-6178b04e7bf8</gco:CharacterString>
   </gmd:fileIdentifier>
