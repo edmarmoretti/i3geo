@@ -129,7 +129,9 @@ if(!isset($_GET["telaR"])){//no caso de projecoes remotas, o mapfile nao e alter
 			$l->setmetadata("gml_include_items","all");
 			$l->setmetadata("WMS_INCLUDE_ITEMS","all");
 			$l->setmetadata("WFS_INCLUDE_ITEMS","all");
+			$l->setmetadata("ows_enable_request","*");
 			$l->set("dump",MS_TRUE);
+			$l->setmetadata("ows_srs","AUTO");
 		}
 	}
 }
