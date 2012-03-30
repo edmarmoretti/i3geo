@@ -92,7 +92,13 @@ class Legenda
 	
 	Localização da aplicação
 	*/
-	protected $localaplicacao;	
+	protected $localaplicacao;
+	/*
+	Variavel: $v
+	
+	Versão atual do Mapserver (primeiro dígito)
+	*/
+	public $v;	
 /*
 Function: __construct
 
@@ -116,6 +122,8 @@ $template - nome do template para processar a legenda
   		include_once($locaplic."/funcoes_gerais.php");
   		else
   		include_once("funcoes_gerais.php");
+		$this->v = versao();
+		$this->v = $this->v["principal"];
 		$this->localaplicacao = $locaplic;
   		if($map_file == "")
 		{return;}		
@@ -438,6 +446,7 @@ Exclui um estilo de uma classe.
 		$classe = $this->layer->getclass($classe);
 		$classe->deletestyle($estilo);
 		$this->layer->removeMetaData("cache");
+		return "ok";
 	}
 /*
 function: adicionaEstilo
@@ -610,6 +619,15 @@ string com o tipo do layer,id do estilo,outlinecolor,backgroundcolor,color,symbo
 			$linha[] = $estilo->symbolname;
 			$linha[] = $estilo->size;
 			$linha[] = $estilo->opacity;
+			if($this->v == 6){
+				$linha[] = $estilo->width;
+				$s = $estilo->symbol;
+				$linha[] = implode(" ",$s->getPatternArray);
+			}
+			else{
+				$linha[] = "";
+				$linha[] = "";
+			}
 			$linhas[] = $tipoLayer."#".implode("#",$linha);
 		}
 		//retorna tipo do layer,id do estilo,outlinecolor,backgroundcolor,color,symbolname,size
@@ -638,11 +656,20 @@ $size - Tamanho que será aplicado ao símbolo.
 
 $opacidade - Opacidade 
 */
-	function aplicaParametro($classe,$estilo,$outlinecolor,$backgroundcolor,$color,$symbolname,$size,$opacidade)
+	function aplicaParametro($classe,$estilo,$outlinecolor,$backgroundcolor,$color,$symbolname,$size,$opacidade,$width,$pattern)
 	{
 		if(!$this->layer){return "erro";}
+		if(!empty($pattern))
+		{$pattern = str_replace(","," ",$pattern);}
 		$classe = $this->layer->getclass($classe);
-		$estilo = $classe->getstyle($estilo);
+		//isso é necessário pq o mapserver não consegue apagar o nome de um estilo
+		if(isset($symbolname) && ($symbolname == "" || $symbolname == "0")){
+			$classe->deletestyle($estilo);
+			$estilo = ms_newStyleObj($classe);
+		}
+		else{
+			$estilo = $classe->getstyle($estilo);
+		}
 		if (isset($outlinecolor))
 		{
 			$cor = $estilo->outlinecolor;
@@ -661,7 +688,7 @@ $opacidade - Opacidade
 			$nc = explode(",",$color);
 			$cor->setRGB($nc[0],$nc[1],$nc[2]);
 		}
-		if ((isset($symbolname)) && ($symbolname != ""))
+		if((isset($symbolname)) && ($symbolname != ""))
 		{
 			if(is_numeric($symbolname))
 			{$estilo->set("symbol",$symbolname);}
@@ -670,6 +697,10 @@ $opacidade - Opacidade
 		}
 		if ((isset ($size)) && ($size != "-1"))
 		{$estilo->set("size",$size);}
+		if ((isset ($width)) && ($width != "-1") && ($this->v == 6))
+		{$estilo->set("width",$width);}
+		if ((isset ($pattern)) && ($pattern != "-1") && ($this->v == 6))
+		{$estilo->updatefromstring("STYLE PATTERN ".$pattern." END");}
 		if(isset($opacidade))
 		{$estilo->set("opacity",$opacidade);}
 		if ($this->layer->getmetadata("sld") != "")
