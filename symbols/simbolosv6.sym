@@ -3,6 +3,14 @@ SYMBOLSET
 #este arquivo está aqui para efeitos de compatibilidade
 #arquivos .map dentro de i3geo/temas podem ainda estar usando esse arquivo
 #
+	Symbol 
+		NAME '0' 
+		TYPE VECTOR 
+		FILLED TRUE 
+		POINTS 
+		0 0 
+		END 
+	END
   SYMBOL 
     NAME 'cruzeta'
 		TYPE VECTOR
