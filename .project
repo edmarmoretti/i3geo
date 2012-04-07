@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <projectDescription>
-	<name>i3geo</name>
+	<name>i3Geo</name>
 	<comment></comment>
 	<projects>
 	</projects>
@@ -11,12 +11,12 @@
 			</arguments>
 		</buildCommand>
 		<buildCommand>
-			<name>org.eclipse.wst.jsdt.core.javascriptValidator</name>
+			<name>org.eclipse.dltk.core.scriptbuilder</name>
 			<arguments>
 			</arguments>
 		</buildCommand>
 		<buildCommand>
-			<name>org.eclipse.dltk.core.scriptbuilder</name>
+			<name>org.eclipse.wst.jsdt.core.javascriptValidator</name>
 			<arguments>
 			</arguments>
 		</buildCommand>
@@ -27,75 +27,30 @@
 	</natures>
 	<filteredResources>
 		<filter>
-			<id>1331787472191</id>
+			<id>0</id>
 			<name></name>
-			<type>30</type>
-			<matcher>
-				<id>org.eclipse.ui.ide.multiFilter</id>
-				<arguments>1.0-name-matches-false-false-*compact*</arguments>
-			</matcher>
-		</filter>
-		<filter>
-			<id>1331787472427</id>
-			<name></name>
-			<type>26</type>
-			<matcher>
-				<id>org.eclipse.ui.ide.multiFilter</id>
-				<arguments>1.0-name-matches-false-false-pacotes</arguments>
-			</matcher>
-		</filter>
-		<filter>
-			<id>1331787472433</id>
-			<name></name>
-			<type>30</type>
+			<type>10</type>
 			<matcher>
 				<id>org.eclipse.ui.ide.multiFilter</id>
 				<arguments>1.0-name-matches-false-false-documentacao</arguments>
 			</matcher>
 		</filter>
 		<filter>
-			<id>1331787472438</id>
+			<id>0</id>
 			<name></name>
-			<type>26</type>
+			<type>14</type>
 			<matcher>
 				<id>org.eclipse.ui.ide.multiFilter</id>
-				<arguments>1.0-name-matches-false-false-ferramentas</arguments>
+				<arguments>1.0-name-matches-false-false-compact*</arguments>
 			</matcher>
 		</filter>
 		<filter>
-			<id>1331787472644</id>
+			<id>0</id>
 			<name></name>
-			<type>30</type>
-			<matcher>
-				<id>org.eclipse.ui.ide.multiFilter</id>
-				<arguments>1.0-name-matches-false-false-*compact*</arguments>
-			</matcher>
-		</filter>
-		<filter>
-			<id>1331787472650</id>
-			<name></name>
-			<type>26</type>
+			<type>10</type>
 			<matcher>
 				<id>org.eclipse.ui.ide.multiFilter</id>
 				<arguments>1.0-name-matches-false-false-pacotes</arguments>
-			</matcher>
-		</filter>
-		<filter>
-			<id>1331787472656</id>
-			<name></name>
-			<type>30</type>
-			<matcher>
-				<id>org.eclipse.ui.ide.multiFilter</id>
-				<arguments>1.0-name-matches-false-false-documentacao</arguments>
-			</matcher>
-		</filter>
-		<filter>
-			<id>1331787472664</id>
-			<name></name>
-			<type>26</type>
-			<matcher>
-				<id>org.eclipse.ui.ide.multiFilter</id>
-				<arguments>1.0-name-matches-false-false-ferramentas</arguments>
 			</matcher>
 		</filter>
 	</filteredResources>

@@ -137,9 +137,16 @@ i3GEO.ajuda = {
 	Function: abreDoc
 
 	Abre a documentacao do i3geo em uma nova janela do navegador
+	
+	Parametro:
+	
+	url - url que será adicionada a i3GEO.configura.locaplic
 	*/
-	abreDoc: function()
-	{window.open(i3GEO.configura.locaplic+"/documentacao/index.html");},
+	abreDoc: function(url){
+		if(!url)
+		{url = "/documentacao/index.html";}
+		window.open(i3GEO.configura.locaplic+url);
+	},
 	/*
 	Function: abreJanela
 

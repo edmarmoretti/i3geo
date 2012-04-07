@@ -137,7 +137,11 @@ foreach ($_GET as $k=>$v)
 	if(strtolower($k) == "layer")
 	{$tema = $v;}
 }
-if(empty($srs)){$srs = "";}
+if(empty($srs))
+{$srs = "";}
+if(!empty($SRS))
+{$srs = $SRS;}
+
 $listaepsg = $srs." EPSG:4618 EPSG:4291 EPSG:4326 EPSG:22521 EPSG:22522 EPSG:22523 EPSG:22524 EPSG:22525 EPSG:29101 EPSG:29119 EPSG:29120 EPSG:29121 EPSG:29122 EPSG:29177 EPSG:29178 EPSG:29179 EPSG:29180 EPSG:29181 EPSG:29182 EPSG:29183 EPSG:29184 EPSG:29185";
 if(count($_GET) == 0){
 	$tipo="intervalo";

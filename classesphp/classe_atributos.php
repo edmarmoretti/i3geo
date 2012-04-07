@@ -444,6 +444,7 @@ $onde - Tipo de abrangência espacial (brasil ou mapa)
 	function buscaRegistros($palavra,$lista,$tipo,$onde)
 	{
 		//error_reporting(E_ALL);
+		$resultado = array();
 		if ($onde == "mapa")
 		{$this->mapa = extPadrao($this->mapa);}
 		$ptvs = explode(",",$lista);
@@ -474,9 +475,10 @@ $onde - Tipo de abrangência espacial (brasil ou mapa)
 			$items = $temasi[$tema];
 			$l = $this->mapa->getlayerbyname($tema);
 			$this->layer = $l;
+			$l->set("template","none.htm");
 			if ($l->data == "")
 			{return "Erro. O tema não tem tabela";}
-			if(strtoupper($this->layer->getmetadata("convcaracter")) == "NAO")
+			if(strtoupper($l->getmetadata("convcaracter")) == "NAO")
 			{$convC = false;}
 			else
 			{$convC = true;}			
@@ -495,51 +497,121 @@ $onde - Tipo de abrangência espacial (brasil ou mapa)
 			{
 				$projInObj = ms_newprojectionobj($prjTema);
 				$projOutObj = ms_newprojectionobj($prjMapa);
-				$ret->project($projInObj, $projOutObj);
-			}		
-			$l->whichShapes($ret);
-			$fr = array();
-			while ($shape = $l->nextShape())
-			{
-				$novoreg = array();
-				$r = array();
-				foreach ($items as $item)
-				{
-					$v = trim($shape->values[$item]);
-					if ($tipo == "exata")
-					{
-						if (strtr($v,$buscas,$trocas) == strtr($palavra,$buscas,$trocas))
-						{
-							if($convC == true)
-							{$v = $this->converte($v);}
-							$r[] = array("item" => $item,"valor" => $v);
-							$encontrado = "sim";
-  						}
-					}
-					else
-					{
-						if (stristr(strtr($v,$buscas,$trocas),strtr($palavra,$buscas,$trocas)))
-						{
-							if($convC == true)
-							{$v = $this->converte($v);}
-							$r[] = array("item" => $item,"valor" => $v);
-							$encontrado = "sim";
-						}
-					}
-				}
-				if ($encontrado == "sim")
-				{
-					$ret = $this->extensaoShape($shape,$l);
-					if (($prjTema != "") && ($prjMapa != $prjTema))
-					{$ret->project($projInObj, $projOutObj);}
-					$novoreg["box"] = $ret;			
-					$novoreg["valores"] = $r;
-					$encontrado = "nao";
-					$fr[] = $novoreg;
+				$status = $ret->project($projInObj, $projOutObj);
+				if($status !== MS_SUCCESS){
+					$ret = $this->mapa->extent;
 				}
 			}
-			$resultado[] = array("tema"=>$tema,"resultado"=>$fr);
-			$l->close();
+			$fr = array();
+			if (@$l->queryByrect($ret) == MS_SUCCESS)
+			{
+				$res_count = $l->getNumresults();
+				for ($i = 0; $i < $res_count; $i++)
+				{
+					$valitem = array();
+					if($this->v == 6){
+						$shape = $l->getShape($l->getResult($i));
+						$indx = $shape->index;
+					}
+					else{
+						$result = $l->getResult($i);
+						$indx  = $result->shapeindex;
+						$shape = $l->getfeature($indx,-1);
+					}
+					$novoreg = array();
+					$r = array();
+					foreach ($items as $item)
+					{
+						$v = trim($shape->values[$item]);
+						if ($tipo == "exata")
+						{
+							if (strtr($v,$buscas,$trocas) == strtr($palavra,$buscas,$trocas))
+							{
+								if($convC == true)
+								{
+									$v = $this->converte($v);
+								}
+								$r[] = array("item" => $item,"valor" => $v);
+								$encontrado = "sim";
+							}
+						}
+						else
+						{
+							if (stristr(strtr($v,$buscas,$trocas),strtr($palavra,$buscas,$trocas)))
+							{
+								if($convC == true)
+								{
+									$v = $this->converte($v);
+								}
+								$r[] = array("item" => $item,"valor" => $v);
+								$encontrado = "sim";
+							}
+						}
+					}
+					if ($encontrado == "sim")
+					{
+						$ret = $this->extensaoShape($shape,$l);
+						if (($prjTema != "") && ($prjMapa != $prjTema))
+						{
+							$ret->project($projInObj, $projOutObj);
+						}
+						$novoreg["box"] = $ret;
+						$novoreg["valores"] = $r;
+						$encontrado = "nao";
+						$fr[] = $novoreg;
+					}
+				}
+				$resultado[] = array("tema"=>$tema,"resultado"=>$fr);
+			}
+			/*
+			$teste = $l->whichShapes($ret);
+			if($teste){
+				$fr = array();
+				while ($shape = $l->nextShape())
+				{
+					$novoreg = array();
+					$r = array();
+					foreach ($items as $item)
+					{
+						$v = trim($shape->values[$item]);
+						echo $v;
+						if ($tipo == "exata")
+						{
+							if (strtr($v,$buscas,$trocas) == strtr($palavra,$buscas,$trocas))
+							{
+								if($convC == true)
+								{$v = $this->converte($v);}
+								$r[] = array("item" => $item,"valor" => $v);
+								$encontrado = "sim";
+	  						}
+						}
+						else
+						{
+
+							if (stristr(strtr($v,$buscas,$trocas),strtr($palavra,$buscas,$trocas)))
+							{
+								if($convC == true)
+								{$v = $this->converte($v);}
+								$r[] = array("item" => $item,"valor" => $v);
+								$encontrado = "sim";
+							}
+						}
+					}
+					if ($encontrado == "sim")
+					{
+						$ret = $this->extensaoShape($shape,$l);
+						if (($prjTema != "") && ($prjMapa != $prjTema))
+						{$ret->project($projInObj, $projOutObj);}
+						$novoreg["box"] = $ret;			
+						$novoreg["valores"] = $r;
+						$encontrado = "nao";
+						$fr[] = $novoreg;
+					}
+				}
+				$resultado[] = array("tema"=>$tema,"resultado"=>$fr);
+				$l->close();
+			}
+			*/
 		}
 		return($resultado);
 	}

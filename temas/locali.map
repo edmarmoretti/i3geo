@@ -3,6 +3,7 @@ MAP
   SYMBOLSET "c:\ms4w\apache\htdocs\i3geo/symbols/simbolos.sym"
   LAYER
     CONNECTION ""
+	
     DATA "c:\ms4w\apache\htdocs\i3geo\aplicmap\dados\locali"
     METADATA
       "cache"	"sim"

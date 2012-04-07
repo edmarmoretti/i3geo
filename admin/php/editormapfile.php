@@ -1501,7 +1501,7 @@ function pegaConexao()
 	{$dados["projection"] = "";}
 	$dados["projection"] = str_replace("+i","i",$dados["projection"]);
 	$dados["convcaracter"] = $layer->getmetadata("convcaracter");
-	$dados["colunas"] = implode(" ,",pegaItens($layer));
+	$dados["colunas"] = implode(",",pegaItens($layer));
 	if($layer->connectiontype == 7 || $layer->connectiontype == 9){
 		$dados["tipooriginal"] = $layer->getmetadata("tipooriginal");
 	}

@@ -659,13 +659,15 @@ i3GEO.editorOL = {
 				this.activate();
 				try{
 					i3GEO.editorOL.ModifyFeature.deactivate();
+					if(i3GEO && i3GEO.barraDeBotoes){
+						i3GEO.barraDeBotoes.ativaPadrao();
+					}					
 				}
 				catch(e){}
 				if(!c.trigger)
 				{c.activate();}
 				else
 				{c.trigger.call();}
-			}
 		});
 		if(botoes.procura===true){
 			button = new OpenLayers.Control.Button({

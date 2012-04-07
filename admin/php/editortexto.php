@@ -10,39 +10,55 @@
 			font-size:14px;
         }
 	</style>
+	<link rel="stylesheet" type="text/css" href="../html/admin.css">
 </head>
-<body>
-<a href="http://mapserver.org/mapfile/index.html#mapfile" target="_new" >Documentação do Mapserver</a><br><br>
-<a href="../html/editormapfile.html" target="_self" >Voltar</a><br><br>
-<form action="editortexto.php?mapfile=<?php echo $_GET["mapfile"];?>" method=post > 
+<body class=" yui-skin-sam fundoPonto">
+<center>
+<div class="bordaSuperior"  >&nbsp;</div>
+<div class="mascaraPrincipal" id="divGeral" style="width:80%">
+	<div id=cabecalhoPrincipal ></div>
+	<h1>Editor de mapfiles</h1>
+	<a href="http://mapserver.org/mapfile/index.html#mapfile" target="_new" >Documentação do Mapserver</a><br><br>
+	<a href="../html/editormapfile.html" target="_self" >Voltar</a><br><br>
+	<form action="editortexto.php?mapfile=<?php echo $_GET["mapfile"];?>" method=post > 
+	<input type=submit value="Salvar"/><input type=button value="Testar" onclick="testar()" /><input type=button value="Testar no i3Geo" onclick="abrirI3geo()" /> (Salve antes de testar)<br><br>
+	
+	<?php
+	//evita erros removendo caracteres PHP
+	if(isset($_POST["texto"])){
+		$gravarTexto = $_POST["texto"];
+		$_POST["texto"] = "";
+	}
+	include_once("admin.php");
+	error_reporting(0);
+	if(verificaEditores($editores) == "nao")
+	{echo "Vc nao e um editor cadastrado. Apenas os editores definidos em i3geo/ms_configura.php podem acessar o sistema de administracao.";exit;}
+	$mapfile = $locaplic."/temas/".$_GET["mapfile"].".map";
+	
 
-<input type=submit value="Salvar"/><input type=button value="Testar" onclick="testar()" /><input type=button value="Testar no i3Geo" onclick="abrirI3geo()" /> (Salve antes de testar)<br><br>
-Edite:<br>
-<?php
-//evita erros removendo caracteres PHP
-if(isset($_POST["texto"])){
-	$gravarTexto = $_POST["texto"];
-	$_POST["texto"] = "";
-}
-include_once("admin.php");
-error_reporting(0);
-if(verificaEditores($editores) == "nao")
-{echo "Vc nao e um editor cadastrado. Apenas os editores definidos em i3geo/ms_configura.php podem acessar o sistema de administracao.";exit;}
-$mapfile = "../../temas/".$_GET["mapfile"].".map";
-if(!file_exists($mapfile))
-{echo "Arquivo $mapfile não existe.";exit;}
-if($_POST["tipo"] == "gravar"){
-	$fp = fopen($mapfile,"w");
-	fwrite($fp,$gravarTexto);
-	fclose($fp);
-}
-
-echo "<TEXTAREA name=texto cols=100 rows=20 >";
-echo file_get_contents($mapfile);
-echo "</TEXTAREA>";
-echo "<input type=hidden name=tipo value=gravar />";
-?>
-</form>
+	
+	if(!file_exists($mapfile))
+	{echo "Arquivo $mapfile não existe.";exit;}
+	if($_POST["tipo"] == "gravar"){
+		$fp = fopen($mapfile,"w");
+		fwrite($fp,$gravarTexto);
+		fclose($fp);
+	}
+	echo "Edite:<br>";
+	echo "<TEXTAREA name=texto cols=100 rows=20 style='width:100%'>";
+	echo file_get_contents($mapfile);
+	echo "</TEXTAREA>";
+	echo "<input type=hidden name=tipo value=gravar />";
+	$mapa = ms_newMapObj($mapfile);
+	$n = $mapa->numlayers;
+	echo "Colunas dos layers:<br><br>";
+	for($i=0;$i<$n;$i++){
+		$l = $mapa->getlayer($i);
+		echo $l->name.": ".(implode(",",pegaItens($l)))."<br><br>";
+	}	
+	?>
+	</form>
+</div>
 <script>
 function testar(){
 	window.open("../../testamapfile.php?map=<?php echo $_GET["mapfile"]; ?>");
