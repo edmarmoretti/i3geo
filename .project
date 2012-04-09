@@ -27,25 +27,25 @@
 	</natures>
 	<filteredResources>
 		<filter>
-			<id>0</id>
+			<id>1333772485484</id>
 			<name></name>
-			<type>10</type>
+			<type>26</type>
 			<matcher>
 				<id>org.eclipse.ui.ide.multiFilter</id>
 				<arguments>1.0-name-matches-false-false-documentacao</arguments>
 			</matcher>
 		</filter>
 		<filter>
-			<id>0</id>
+			<id>1333772485486</id>
 			<name></name>
-			<type>14</type>
+			<type>30</type>
 			<matcher>
 				<id>org.eclipse.ui.ide.multiFilter</id>
-				<arguments>1.0-name-matches-false-false-compact*</arguments>
+				<arguments>1.0-name-matches-false-false-*compact*</arguments>
 			</matcher>
 		</filter>
 		<filter>
-			<id>0</id>
+			<id>1333772485489</id>
 			<name></name>
 			<type>10</type>
 			<matcher>

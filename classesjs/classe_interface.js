@@ -704,7 +704,15 @@ i3GEO.Interface = {
 			if(i3GEO.arvoreDeCamadas.MOSTRALISTAKML === true)
 			{i3GEO.Interface.openlayers.adicionaListaKml();}
 			if(i3GEO.parametros.kmlurl !== "")
-			{i3GEO.Interface.openlayers.adicionaKml(true,i3GEO.parametros.kmlurl);}		
+			{i3GEO.Interface.openlayers.adicionaKml(true,i3GEO.parametros.kmlurl);}
+			if($i("mst")){$i("mst").style.visibility ="visible";}
+			//executa função de finalização, se houver
+			if(YAHOO.lang.isFunction(i3GEO.finalizaAPI))
+			{i3GEO.finalizaAPI.call();}
+			else{
+				if(i3GEO.finalizaAPI != "")
+				{eval(i3GEO.finalizaAPI);}
+			}
 		},
 		aplicaOpacidade: function(opacidade){		
 			var nlayers = i3GEO.arvoreDeCamadas.CAMADAS.length,
@@ -1427,6 +1435,13 @@ i3GEO.Interface = {
 				{i3GEO.Interface.googlemaps.adicionaListaKml();}
 				if(i3GEO.parametros.kmlurl !== "")
 				{i3GEO.Interface.googlemaps.adicionaKml(true,i3GEO.parametros.kmlurl);}
+				//executa função de finalização, se houver
+				if(YAHOO.lang.isFunction(i3GEO.finalizaAPI))
+				{i3GEO.finalizaAPI.call();}
+				else{
+					if(i3GEO.finalizaAPI != "")
+					{eval(i3GEO.finalizaAPI);}
+				}				
 			}
 			i3GEO.php.googlemaps(montaMapa);
 		},
@@ -2116,7 +2131,13 @@ i3GEO.Interface = {
 
 				if(i3GEO.parametros.kmlurl !== "")
 				{i3GEO.Interface.googleearth.adicionaKml(true,i3GEO.parametros.kmlurl,i3GEO.parametros.kmlurl,false);}
-				
+				//executa função de finalização, se houver
+				if(YAHOO.lang.isFunction(i3GEO.finalizaAPI))
+				{i3GEO.finalizaAPI.call();}
+				else{
+					if(i3GEO.finalizaAPI != "")
+					{eval(i3GEO.finalizaAPI);}
+				}
 			}
 			i3GEO.php.googleearth(montaMapa);
 		},

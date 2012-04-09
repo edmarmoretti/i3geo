@@ -188,7 +188,7 @@ i3GEO = {
 	/*
 	Propriedade: finaliza
 
-	Função que será executada após a inicialização do mapa. Pode ser uma string também, que será avaliada com "eval". 
+	Função que será executada após a criação e posicionamento do mapa. Pode ser uma string também, que será avaliada com "eval". 
 
 	Tipo:
 	{string}
@@ -197,6 +197,18 @@ i3GEO = {
 	{""}
 	*/
 	finaliza:"",
+	/*
+	Propriedade: finalizaAPI
+
+	Função que será executada após a API utilizada (Openlayers ou Googlemaps) ter sido inicializada e o objeto com o mapa ter sido criado. Pode ser uma string também, que será avaliada com "eval". 
+
+	Tipo:
+	{string}
+
+	Default:
+	{""}
+	*/
+	finalizaAPI:"",	
 	/*
 	Variavel: tamanhodoc
 	

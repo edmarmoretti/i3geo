@@ -12,8 +12,8 @@
 	</style>
 	<link rel="stylesheet" type="text/css" href="../html/admin.css">
 </head>
-<body class=" yui-skin-sam fundoPonto">
-<center>
+<body class=" yui-skin-sam fundoPonto" style="margin:auto">
+
 <div class="bordaSuperior"  >&nbsp;</div>
 <div class="mascaraPrincipal" id="divGeral" style="width:80%">
 	<div id=cabecalhoPrincipal ></div>
