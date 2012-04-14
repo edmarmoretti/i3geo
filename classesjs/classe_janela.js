@@ -582,9 +582,12 @@ i3GEO.janela = {
 	texto {String} - texto da mensagem
 	*/
 	mensagemSimples: function(texto,cabecalho){
-		if(!$i("mensagemSimples1")){
-			YAHOO.namespace("i3GEO.janela.mensagemSimples");
-			YAHOO.i3GEO.janela.mensagemSimples = new YAHOO.widget.SimpleDialog("mensagemSimples1",
+		var janela;
+		if($i("mensagemSimples1")){
+			janela = YAHOO.i3GEO.janela.manager.find("mensagemSimples1");
+		}
+		else{
+			janela = new YAHOO.widget.SimpleDialog("mensagemSimples1",
 			{
 				width: "300px",
 				fixedcenter: true,
@@ -598,13 +601,13 @@ i3GEO.janela = {
 				constraintoviewport: true,
 				text: ""
 			});
-			YAHOO.i3GEO.janela.manager.register(YAHOO.i3GEO.janela.mensagemSimples);
+			YAHOO.i3GEO.janela.manager.register(janela);
+			janela.setHeader(cabecalho);
+			janela.render(document.body);			
 		}
-		
-		YAHOO.mensagemSimples.setHeader(cabecalho);
-		YAHOO.mensagemSimples.render(document.body);
-		YAHOO.mensagemSimples.cfg.setProperty("text",texto);
-		YAHOO.mensagemSimples.show();
+		janela.setHeader(cabecalho);
+		janela.cfg.setProperty("text",texto);
+		janela.show();
 	},	
 	/*
 	Function: tip
