@@ -667,9 +667,6 @@ i3GEO.barraDeBotoes = {
 	*/
 	ativaBotoes:function(padrao){
 		if(typeof(console) !== 'undefined'){console.info("i3GEO.barraDeBotoes.ativaBotoes()");}
-		if(i3GEO.barraDeBotoes.ATIVA === false){
-			return;
-		}
 		var l,b,temp;
 		if(arguments.length === 0)
 		{padrao = this.BOTAOPADRAO;}
