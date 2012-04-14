@@ -41,6 +41,18 @@ Veja também classe_interface.js (i3GEO.Interface) que possuí parâmetros que perm
 */
 i3GEO.barraDeBotoes = {
 	/*
+	Propriedade: ATIVA
+
+	Indica se a barra de botões será ou não cosntruída automaticamente no processo de inicialização do mapa.
+
+	Tipo:
+	{boolean}
+
+	Default:
+	{true}
+	*/
+	ATIVA: true,
+	/*
 	Propriedade: TIPO
 
 	Tipo de barra.
@@ -513,13 +525,15 @@ i3GEO.barraDeBotoes = {
 	Utilizado para restaurar o status padrão da barra, principalmente por ferramentas que alteram ícones e outras propriedades do mapa
 	*/
 	ativaPadrao: function(){
-		try{
-			var botao = i3GEO.barraDeBotoes.defBotao(i3GEO.barraDeBotoes.BOTAOPADRAO);	
-			if(botao.funcaoonclick){
-				botao.funcaoonclick.call();
+		if(i3GEO.barraDeBotoes.ATIVA === true){
+			try{
+				var botao = i3GEO.barraDeBotoes.defBotao(i3GEO.barraDeBotoes.BOTAOPADRAO);	
+				if(botao.funcaoonclick){
+					botao.funcaoonclick.call();
+				}
 			}
+			catch(e){}
 		}
-		catch(e){}
 	},
 	/*
 	Function: ativaIcone
@@ -535,6 +549,9 @@ i3GEO.barraDeBotoes = {
 	*/
 	ativaIcone: function(icone){
 		if(typeof(console) !== 'undefined'){console.info("i3GEO.barraDeBotoes.ativaIcone()");}
+		if(i3GEO.barraDeBotoes.ATIVA === false){
+			return;
+		}
 		//
 		//desativa a função de zoom por box nativa do OpenLayers
 		//
@@ -650,6 +667,9 @@ i3GEO.barraDeBotoes = {
 	*/
 	ativaBotoes:function(padrao){
 		if(typeof(console) !== 'undefined'){console.info("i3GEO.barraDeBotoes.ativaBotoes()");}
+		if(i3GEO.barraDeBotoes.ATIVA === false){
+			return;
+		}
 		var l,b,temp;
 		if(arguments.length === 0)
 		{padrao = this.BOTAOPADRAO;}
@@ -697,6 +717,9 @@ i3GEO.barraDeBotoes = {
 	y {numeric} - (opcional) posição em pixels da tela onde foi feito o clique do mouse
 	*/
 	execBotao: function(id,x,y,posX,posY){
+		if(i3GEO.barraDeBotoes.ATIVA === false){
+			return;
+		}
 		var temp,
 			botao = i3GEO.barraDeBotoes.defBotao(id);
 		i3GEO.barraDeBotoes.BOTAOCLICADO = id;
@@ -752,6 +775,9 @@ i3GEO.barraDeBotoes = {
 	 
 	*/
 	inicializaBarraOP: function(){
+		if(i3GEO.barraDeBotoes.ATIVA === false){
+			return;
+		}
 		i3GEO.barraDeBotoes.AJUDA = false;
 		euEnv.imageBasePath=i3GEO.configura.locaplic+"/pacotes/eudock/";
 		var botao,
@@ -902,6 +928,9 @@ i3GEO.barraDeBotoes = {
 	onde {String} - (opcional) id do elemento HTML onde os botões serão inseridos
 	*/
 	inicializaBarra:function(idconteudo,idconteudonovo,barraZoom,x,y,onde){
+		if(i3GEO.barraDeBotoes.ATIVA === false){
+			return;
+		}
 		if(typeof(console) !== 'undefined'){console.info("i3GEO.barraDeBotoes.inicializaBarra()");}
 		if (i3GEO.configura.map3d === "")
 		{i3GEO.barraDeBotoes.INCLUIBOTAO.v3d = false;}
@@ -1167,6 +1196,9 @@ i3GEO.barraDeBotoes = {
 	idbarra - {string} id da barra de botões onde o evento será ativado
 	*/
 	ativaMenuContexto: function(idbarra){
+		if(i3GEO.barraDeBotoes.ATIVA === false){
+			return;
+		}
 		if(typeof(console) !== 'undefined'){console.info("i3GEO.barraDeBotoes.ativaMenuContexto()");}
 		var oFieldContextMenuItemData,oFieldContextMenu,onFieldMenuRender;
 		function executar(a,b,c)
@@ -1207,6 +1239,9 @@ i3GEO.barraDeBotoes = {
 	as barras Se não for definido, todas as barras serão reativadas
 	*/
 	reativa: function(indice){
+		if(i3GEO.barraDeBotoes.ATIVA === false){
+			return;
+		}
 		if(typeof(console) !== 'undefined'){console.info("i3GEO.barraDeBotoes.reativa()");}
 		var abre = function(){
 				var i,
@@ -1235,6 +1270,9 @@ i3GEO.barraDeBotoes = {
 	id {String} - id da barra
 	*/
 	recria: function(id){
+		if(i3GEO.barraDeBotoes.ATIVA === false){
+			return;
+		}
 		if(typeof(console) !== 'undefined'){console.info("i3GEO.barraDeBotoes.recria()");}
 		if(i3GEO.barraDeBotoes.TIPO === "olhodepeixe"){
 			euEnv.euDockArray = [];

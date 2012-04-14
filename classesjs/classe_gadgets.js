@@ -134,7 +134,7 @@ i3GEO.gadgets = {
 		"mostraVersao":
 		{idhtml:"versaoi3geo"},
 		"mostraEmail":
-		{idhtml:"emailInstituicao"}		
+		{idhtml:"emailInstituicao"}
 	},
 	/*
 	Function: mostraEmail
