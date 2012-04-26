@@ -284,8 +284,8 @@ i3GEOF.legenda = {
 		'</div>'+
 		'<div id=i3GEOlegendaguia2obj style="width:99%;text-align:left;">'+
 		'	<p class=paragrafo style="color:red;" >Aten&ccedil;&atilde;o: para a montagem das classes s&atilde;o considerados apenas os elementos vis&iacute;veis na extens&atilde;o atual do mapa</p>'+
-		'	<p class=paragrafo >Ao gerar as classes, ignorar valores iguais a:'+
-		$inputText("","","i3GEOlegendaignorar","",10,"") +
+		'	<p class=paragrafo >Ao gerar as classes, ignorar os valores (separe com vírgula):<br>'+
+		$inputText("","","i3GEOlegendaignorar","",20,"") +
 		'	<hr><p class=paragrafo >Transforma a representação geométrica dos elementos do tema. Após alterar esse parâmetro, pode ser necessário modificar as características do símbolo.</p>'+
 		'	<p class=paragrafo >' +
 		'	<select id=i3GEOlegentaTipoGeo >'+
@@ -929,7 +929,7 @@ i3GEOF.legenda = {
 			{alert("Selecione um item!");return;}
 			i3GEOF.legenda.aguarde.visibility = "visible";
 			cp.set_response_type("JSON");
-			window.parent.g_operacao = "outras"
+			//window.parent.g_operacao = "outras"
 			cp.call(p,"alteraclasse",fim);
 		}
 		catch(e){alert("Erro: "+ e);i3GEOF.legenda.aguarde.visibility = "hidden";}

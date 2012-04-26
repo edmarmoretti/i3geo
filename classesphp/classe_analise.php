@@ -2337,8 +2337,8 @@ $locaplic - Localização do I3geo
 	*/
 	function aplicaFuncaoListaWKT($geometrias,$operacao,$dir_tmp="",$imgdir=""){
 		if($operacao === "converteSHP"){
-			$this->incmapageometrias($dir_tmp,$imgdir,$geometrias,$tipoLista="arraywkt");
-			return "ok";
+			$nomelayer = $this->incmapageometrias($dir_tmp,$imgdir,$geometrias,$tipoLista="arraywkt");
+			return $nomelayer;
 		}
 		$geos = array();
 		foreach ($geometrias as $geo){

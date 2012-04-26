@@ -1121,20 +1121,25 @@ function pegaValores($mapa,$layer,$item,$numerico=false,$ignorar="")
 	$layer->setfilter("");
 	$versao = versao();
 	$versao = $versao["principal"];
+	$ignorararray = explode(",",$ignorar);
 	if (@$layer->queryByrect($mapa->extent) == MS_SUCCESS)
 	{
 		$sopen = $layer->open();
-		if($sopen == MS_FAILURE){return "erro";}
+		if($sopen == MS_FAILURE){
+			return "erro";
+		}
 		$res_count = $layer->getNumresults();
 		$valitem = array();
 		for ($i=0;$i<$res_count;++$i)
 		{
 			if($versao == 6)
-			{$shape = $layer->getShape($layer->getResult($i));}
+			{
+				$shape = $layer->getShape($layer->getResult($i));
+			}
 			else{
 				$result = $layer->getResult($i);
 				$shp_index  = $result->shapeindex;
-				$shape = $layer->getfeature($shp_index,-1);			
+				$shape = $layer->getfeature($shp_index,-1);
 			}
 			$v = trim($shape->values[$item]);
 			if ($numerico)
@@ -1142,23 +1147,32 @@ function pegaValores($mapa,$layer,$item,$numerico=false,$ignorar="")
 				if (is_numeric($v))
 				{
 					if ($ignorar == "")
-					{$valitem[] = $v;}
+					{
+						$valitem[] = $v;
+					}
 					else
 					{
-						if ($v != $ignorar)
-						{$valitem[] = $v;}
+						//if ($v != $ignorar)
+						if(!in_array($v,$ignorararray))
+						{
+							$valitem[] = $v;
+						}
 					}
 				}
 			}
 			else
 			{
 				if ($ignorar == "")
-				{$valitem[] = $v;}
+				{
+					$valitem[] = $v;
+				}
 				else
 				{
-					if ($v != $ignorar)
-					{$valitem[] = $v;}
-				}				
+					if(!in_array($v,$ignorararray))
+					{
+						$valitem[] = $v;
+					}
+				}
 			}
 		}
 		$fechou = $layer->close();
@@ -2859,15 +2873,13 @@ function verificaEditores($editores)
 	{return "sim";}
 	$editor = "nao";
 	if($editores == ""){return $editor;}
-	foreach ($editores as $e)
-	{
-		//$e = gethostbyname($e);
-		$ip = "UNKNOWN";
-		if (getenv("HTTP_CLIENT_IP")) $ip = getenv("HTTP_CLIENT_IP");
-		else if(getenv("HTTP_X_FORWARDED_FOR")) $ip = getenv("HTTP_X_FORWARDED_FOR");
-		else if(getenv("REMOTE_ADDR")) $ip = getenv("REMOTE_ADDR");
-		else $ip = "UNKNOWN";
-		if ($e == $ip){$editor="sim";}
+	$ip = "UNKNOWN";
+	if (getenv("HTTP_CLIENT_IP")) $ip = getenv("HTTP_CLIENT_IP");
+	else if(getenv("HTTP_X_FORWARDED_FOR")) $ip = getenv("HTTP_X_FORWARDED_FOR");
+	else if(getenv("REMOTE_ADDR")) $ip = getenv("REMOTE_ADDR");
+	else $ip = "UNKNOWN";
+	if(in_array($ip, $e)){
+		$editor="sim";
 	}
 	return $editor;
 }

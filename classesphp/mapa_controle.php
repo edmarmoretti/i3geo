@@ -2871,8 +2871,11 @@ Cria um novo tema com a toponímia do tema atual.
 		include_once("classe_toponimia.php");
 		copiaSeguranca($map_file);
 		$m = new Toponimia($map_file,$tema);
-		if(!isset($tipo)){$tipo="";}
-		$retorno = $m->criaToponimia($item,$position,$partials,$offsetx,$offsety,$minfeaturesize,$mindistance,$force,$shadowcolor,$shadowsizex,$shadowsizey,$outlinecolor,$cor,$sombray,$sombrax,$sombra,$fundo,$angulo,$tamanho,$fonte,$tipo,$wrap);
+		if(!isset($tipo))
+		{$tipo="";}
+		if(!isset($novotema))
+		{$novotema = "sim";}
+		$retorno = $m->criaToponimia($item,$position,$partials,$offsetx,$offsety,$minfeaturesize,$mindistance,$force,$shadowcolor,$shadowsizex,$shadowsizey,$outlinecolor,$cor,$sombray,$sombrax,$sombra,$fundo,$angulo,$tamanho,$fonte,$tipo,$wrap,$novotema);
 		if ($tipo != "teste")
 		{$m->salva();$_SESSION["contadorsalva"]++;}
 	break;

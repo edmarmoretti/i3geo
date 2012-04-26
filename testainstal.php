@@ -69,8 +69,7 @@ if (getenv("HTTP_CLIENT_IP")) $ip = getenv("HTTP_CLIENT_IP");
 else if(getenv("HTTP_X_FORWARDED_FOR")) $ip = getenv("HTTP_X_FORWARDED_FOR");
 else if(getenv("REMOTE_ADDR")) $ip = getenv("REMOTE_ADDR");
 else $ip = "UNKNOWN";
-echo "Seu endereço IP: ".$ip."<br>\n";
-echo getcwd();
+echo "<br>Seu endereço IP: ".$ip."<br><br>\n";
 
 echo "<br><br>PHP (a vers&atilde;o deve ser a 5x): ";
 echo "<br>".phpversion()."<br>\n";
@@ -80,10 +79,13 @@ $versao = versao();
 $versao = $versao["principal"];
 $exts = get_loaded_extensions();
 echo "MapServer (a vers&atilde;o deve ser &gt;= 5.2 para que a sobreposi&ccedil;&atilde;o de temas funcione na interface Google Maps): <br>";
-echo ms_GetVersion()."<br><br>";
 if(!function_exists("ms_GetVersion"))
-{echo "<span style=color:red >O MAPSERVER PARECE NAO ESTAR INSTALADO!!!<br><br>";}
+{
+	echo "<br><span style=color:red >O MAPSERVER PARECE NAO ESTAR INSTALADO!!!<br><br>";
+}
 echo "---<br>";
+echo ms_GetVersion()."<br><br>";
+
 
 if (get_cfg_var("safe_mode") == 1){
 	echo "<span style=color:red >Problema: safe_mode no php.ini deveria estar como 'Off'. O i3Geo n&atilde;o ir&aacute; funcionar!!!<br></span>";
@@ -107,21 +109,21 @@ echo "</pre>Existe o ms_configura.php? <br>";
 if(file_exists("ms_configura.php")) echo "Sim\n"; else {echo "Nao";saindo(" ms_configura não encontrado");}
 echo "Incluindo...\n<br>";
 include ("ms_configura.php");
-echo "<b>$mensagemInicia </b><br><br> \n";
-echo "dir_tmp = $dir_tmp \n";
+
+echo "Mensagem de inicialização: <b>$mensagemInicia </b><br><br> \n";
+echo "dir_tmp = $dir_tmp \n<br>";
 echo "locmapserv = $locmapserv \n";
 echo "\n<br>";
-echo "editores:<pre> \n";
-var_dump($editores);
+if(in_array($ip, $editores)){
+	echo "<br>Você é um editor cadastrado<br><br>\n";
+	echo "Este php está em ".getcwd()."\n";
+}
+else{
+	echo "Você não é um editor cadastrado\n";
+}
+echo "<pre>";
 
-$ip = "UNKNOWN";
-if (getenv("HTTP_CLIENT_IP")) $ip = getenv("HTTP_CLIENT_IP");
-else if(getenv("HTTP_X_FORWARDED_FOR")) $ip = getenv("HTTP_X_FORWARDED_FOR");
-else if(getenv("REMOTE_ADDR")) $ip = getenv("REMOTE_ADDR");
-else $ip = "UNKNOWN";
 
-echo "IP do cliente = $ip \n";
-echo "\n";
 
 echo "verificando banco de dados de administra&ccedil;&atilde;o...\n";
 $tabelas = array(

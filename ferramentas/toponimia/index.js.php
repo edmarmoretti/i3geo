@@ -119,9 +119,11 @@ i3GEOF.toponimia = {
 		'	</ul>' +
 		'</div><br>' +
 		'	<div class=guiaobj id="i3GEOtoponimiaguia1obj" style="left:1px;90%;display:none;">' +
-		'			<p class="paragrafo" >Escolha o item que contém os textos que serão mostrados no mapa<br><br>' +	
+		'			<p class="paragrafo" >Escolha o item que contém os textos que serão mostrados no mapa<br>' +	
 		'			<div id=i3GEOtoponimiaDivListaItens ></div>' +
-		'			<br><br>' +
+		'			<br>' +
+		'			<p class="paragrafo" ><input style="cursor:pointer" type="checkbox" id="i3GEOtoponimianovotema" />&nbsp;Adiciona a toponímia no tema atual (deixe desmarcado para criar como uma nova camada)' +
+		'			<br>' +
 		'			<p class="paragrafo" ><input id=i3GEOtoponimiabotao1 size=35  type=button value="Criar toponímia" />' +
 		'	</div>' +
 		'	<div class=guiaobj id="i3GEOtoponimiaguia2obj" style="left:1px;display:none;">' +
@@ -215,8 +217,8 @@ i3GEOF.toponimia = {
 		'			<tr><td>O texto pode ultrapassar o mapa?:</td>' +
 		'				<td>' +
 		'					<select id=i3GEOtoponimiapartials_i >' +
-		'						<option value="1" >sim</option>' +
 		'						<option value="0" >n&atilde;o</option>' +
+		'						<option value="1" >sim</option>' +
 		'					</select>' +
 		'				</td>' +
 		'			</tr>' +
@@ -248,7 +250,7 @@ i3GEOF.toponimia = {
 		titulo = "<div style='z-index:1;position:absolute' id='i3GEOFtoponimiaComboCabeca' >------</div><span style=margin-left:60px>Topon&iacute;mia</span><a class=ajuda_usuario target=_blank href='" + i3GEO.configura.locaplic + "/ajuda_usuario.php?idcategoria=5&idajuda=36' >&nbsp;&nbsp;&nbsp;</a>";
 		janela = i3GEO.janela.cria(
 			"390px",
-			"180px",
+			"190px",
 			"",
 			"",
 			"",
@@ -280,6 +282,8 @@ i3GEOF.toponimia = {
 	Pega os parâmetros para montar a chamada ajax que cria ou testa a toponímia
 	*/
 	pegaPar: function(){
+		var par = "",
+			novotema = "sim";
 		if($i("i3GEOtoponimiaListaItens").value == "")
 		{alert("Escolha um item");return false;}
 		if($i("i3GEOtoponimiafundoc_i").value === "")
@@ -290,7 +294,9 @@ i3GEOF.toponimia = {
 		{$i("i3GEOtoponimiamascara_i").value = "off";}				
 		if($i("i3GEOtoponimiafrentes_i").value === "")
 		{$i("i3GEOtoponimiafrentes_i").value = "off";}
-		var par = "&position="+$i("i3GEOtoponimiaposition_i").value +
+		if($i("i3GEOtoponimianovotema").checked)
+		{novotema = "nao";}
+		par = "&position="+$i("i3GEOtoponimiaposition_i").value +
 			"&partials="+$i("i3GEOtoponimiapartials_i").value+
 			"&offsetx="+$i("i3GEOtoponimiaoffsetx_i").value+
 			"&offsety="+$i("i3GEOtoponimiaoffsety_i").value+
@@ -311,10 +317,10 @@ i3GEOF.toponimia = {
 			"&shadowcolor="+$i("i3GEOtoponimiafrentes_i").value+
 			"&item="+$i("i3GEOtoponimiaListaItens").value+
 			"&wrap="+$i("i3GEOtoponimiawrap_i").value+
-			"&tema="+i3GEO.temaAtivo;
+			"&tema="+i3GEO.temaAtivo+
+			"&novotema="+novotema;
 		return par;
-	},
-	/*
+	},	/*
 	Function: cria
 	
 	Cria a toponímia no tema selecionado
@@ -330,7 +336,10 @@ i3GEOF.toponimia = {
 			i3GEOF.toponimia.aguarde.visibility = "visible";
 			var monta = function(){
 			 		i3GEOF.toponimia.aguarde.visibility = "hidden";
-			 		i3GEO.atualiza();
+			 		if($i("i3GEOtoponimianovotema").checked)
+			 		{i3GEO.Interface.atualizaTema("",i3GEO.temaAtivo);}
+			 		else
+			 		{i3GEO.atualiza();}
 				},
 				par = i3GEOF.toponimia.pegaPar(),
 				p = i3GEO.configura.locaplic+"/classesphp/mapa_controle.php?g_sid="+i3GEO.configura.sid+

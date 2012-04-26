@@ -699,7 +699,7 @@ $opacidade - Opacidade
 		{$estilo->set("size",$size);}
 		if ((isset ($width)) && ($width != "-1") && ($this->v == 6))
 		{$estilo->set("width",$width);}
-		if ((isset ($pattern)) && ($pattern != "-1") && ($this->v == 6))
+		if ((isset ($pattern)) && ($pattern != "-1") && ($this->v == 6) && ($pattern != ""))
 		{$estilo->updatefromstring("STYLE PATTERN ".$pattern." END");}
 		if(isset($opacidade))
 		{$estilo->set("opacity",$opacidade);}

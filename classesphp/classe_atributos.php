@@ -525,7 +525,7 @@ $onde - Tipo de abrangência espacial (brasil ou mapa)
 						$v = trim($shape->values[$item]);
 						if ($tipo == "exata")
 						{
-							if (strtr($v,$buscas,$trocas) == strtr($palavra,$buscas,$trocas))
+							if ($v == $palavra || (strtr($v,$buscas,$trocas) == strtr($palavra,$buscas,$trocas)))
 							{
 								if($convC == true)
 								{
@@ -537,7 +537,7 @@ $onde - Tipo de abrangência espacial (brasil ou mapa)
 						}
 						else
 						{
-							if (stristr(strtr($v,$buscas,$trocas),strtr($palavra,$buscas,$trocas)))
+							if ($v == $palavra || (stristr(strtr($v,$buscas,$trocas),strtr($palavra,$buscas,$trocas))))
 							{
 								if($convC == true)
 								{

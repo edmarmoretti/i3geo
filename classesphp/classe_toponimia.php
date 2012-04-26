@@ -151,103 +151,114 @@ $tipo Tipo teste|
 
 $wrap
 
+$novotema sim|nao Cria um novo tema ou não, nesse último caso, a toponímia é inserida em todas as classes
+
 Retorno:
 
 {string} - código do layer criado
 */
-	function criaToponimia($item,$position,$partials,$offsetx,$offsety,$minfeaturesize,$mindistance,$force,$shadowcolor,$shadowsizex,$shadowsizey,$outlinecolor,$cor,$sombray,$sombrax,$sombra,$fundo,$angulo,$tamanho,$fonte,$tipo,$wrap)
+	function criaToponimia($item,$position,$partials,$offsetx,$offsety,$minfeaturesize,$mindistance,$force,$shadowcolor,$shadowsizex,$shadowsizey,$outlinecolor,$cor,$sombray,$sombrax,$sombra,$fundo,$angulo,$tamanho,$fonte,$tipo,$wrap,$novotema="sim")
 	{
 		error_reporting(E_ALL);
 		if(!$this->layer){return "erro";}
 		if (!isset($tipo)){$tipo = "";}
 		if ($item != "") //o layer nao tem tabela mas tem toponimia
 		{
-			$nome = pegaNome($this->layer);
-			$novolayer = ms_newLayerObj($this->mapa, $this->layer);
-			$nomer = nomeRandomico();
-			$novolayer->set("name",$nomer);
-			$novolayer->set("group","");
-			$novolayer->set("type",MS_LAYER_ANNOTATION);
-			$novolayer->setmetadata("cache","");
-			$nclasses = $novolayer->numclasses;
-			for ($i=0; $i < $nclasses; ++$i)
-			{
-				$c = $novolayer->getclass($i);
-				$c->set("status",MS_DELETE);
+			if($novotema == "sim"){
+				$nome = pegaNome($this->layer);
+				$novolayer = ms_newLayerObj($this->mapa, $this->layer);
+				$nomer = nomeRandomico();
+				$novolayer->set("name",$nomer);
+				$novolayer->set("group","");
+				$novolayer->set("type",MS_LAYER_ANNOTATION);
+				$nclasses = $novolayer->numclasses;
+				for ($i=0; $i < $nclasses; ++$i)
+				{
+					$c = $novolayer->getclass($i);
+					$c->set("status",MS_DELETE);
+				}
+				$novac = ms_newClassObj($novolayer);
+				$novolayer->set("status",MS_DEFAULT);
+				$novolayer->setmetadata("tema","texto de ".$nome);
 			}
-			$novac = ms_newClassObj($novolayer);
-			$novolayer->set("status",MS_DEFAULT);
+			else{
+				$nomer = $this->layer->name;
+				$novolayer = $this->mapa->getlayerbyname($nomer);
+			}
+			$novolayer->setmetadata("cache","");
 			$novolayer->set("labelitem",$item);
-			$novolayer->setmetadata("tema","texto de ".$nome);
-			//$novolayer->set("group",$nomer);
+			$this->layer = $novolayer;
 		}
 		else
 		{
-			$novac = $this->layer->getclass(0);
+			//$novac = $this->layer->getclass(0);
 			$nomer = $this->layer->name;
 		}
-		$label = $novac->label;
-		if($wrap != "")
-		{
-			$label->set("maxlength",1);
-			$s = $novac->getTextString;
-			$s = "CLASS LABEL WRAP '$wrap' END END";
-			$novac->updateFromString($s);
+		$nclasses = $this->layer->numclasses;
+		for ($i=0; $i < $nclasses; ++$i){
+			$novac = $this->layer->getclass($i);
+			$label = $novac->label;
+			if($wrap != "")
+			{
+				$label->set("maxlength",1);
+				$s = $novac->getTextString;
+				$s = "CLASS LABEL WRAP '$wrap' END END";
+				$novac->updateFromString($s);
+			}
+			$label = $novac->label;
+			if ($fonte != "bitmap")
+			{
+				$label->set("type",MS_TRUETYPE);
+				$label->set("font",$fonte);
+				$label->set("size",$tamanho);
+			}
+			else
+			{
+				$label->set("type",MS_BITMAP);
+				//$label->set("font",$fonte);
+				$t = MS_TINY;
+				if ($tamanho > 5 ){$t = MS_TINY;}
+				if ($tamanho >= 7 ){$t = MS_SMALL;}
+				if ($tamanho >= 10 ){$t = MS_MEDIUM;}
+				if ($tamanho >= 12 ){$t = MS_LARGE;}
+				if ($tamanho >= 14 ){$t = MS_GIANT;}
+				$label->set("size",$t);
+			}
+			if($angulo > 0){
+				$label->set("angle",$angulo);
+			}
+			if($angulo == "AUTO")
+			{$label->updatefromstring("LABEL ANGLE AUTO END");}
+			if (strtoupper($angulo) == "CURVO" || strtoupper($angulo) == "FOLLOW")
+			{
+				$label->updatefromstring("LABEL ANGLE FOLLOW END");
+			}
+			corE($label,$cor,"color");	
+			corE($label,$fundo,"backgroundcolor");
+			corE($label,$sombra,"backgroundshadowcolor",$sombrax,$sombray);
+			//$label->set("backgroundshadowsizex",$sombrax);
+			//$label->set("backgroundshadowsizey",$sombray);
+			corE($label,$outlinecolor,"outlinecolor");
+			corE($label,$shadowcolor,"shadowcolor");
+			$label->set("shadowsizex",$shadowsizex);
+			$label->set("shadowsizey",$shadowsizey);
+			$label->set("force",$force);
+			$label->set("mindistance",$mindistance);
+			$label->set("minfeaturesize",$minfeaturesize);
+			$label->set("offsetx",$offsetx);
+			$label->set("offsety",$offsety);
+			$label->set("partials",$partials);
+			$p = array("MS_AUTO"=>MS_AUTO,"MS_UL"=>MS_UL,"MS_LR"=>MS_LR,"MS_UR"=>MS_UR,"MS_LL"=>MS_LL,"MS_CR"=>MS_CR,"MS_CL"=>MS_CL,"MS_UC"=>MS_UC,"MS_LC"=>MS_LC,"MS_CC"=>MS_CC);
+			$label->set("position",$p[$position]);
 		}
-		$label = $novac->label;
-		if ($fonte != "bitmap")
-		{
-			$label->set("type",MS_TRUETYPE);
-			$label->set("font",$fonte);
-			$label->set("size",$tamanho);
-		}
-		else
-		{
-			$label->set("type",MS_BITMAP);
-			//$label->set("font",$fonte);
-			$t = MS_TINY;
-			if ($tamanho > 5 ){$t = MS_TINY;}
-			if ($tamanho >= 7 ){$t = MS_SMALL;}
-			if ($tamanho >= 10 ){$t = MS_MEDIUM;}
-			if ($tamanho >= 12 ){$t = MS_LARGE;}
-			if ($tamanho >= 14 ){$t = MS_GIANT;}
-			$label->set("size",$t);
-		}
-		if($angulo > 0){
-			$label->set("angle",$angulo);
-		}
-		if($angulo == "AUTO")
-		{$label->updatefromstring("LABEL ANGLE AUTO END");}
-		if (strtoupper($angulo) == "CURVO" || strtoupper($angulo) == "FOLLOW")
-		{
-			$label->updatefromstring("LABEL ANGLE FOLLOW END");
-		}
-		corE($label,$cor,"color");	
-		corE($label,$fundo,"backgroundcolor");
-		corE($label,$sombra,"backgroundshadowcolor",$sombrax,$sombray);
-		//$label->set("backgroundshadowsizex",$sombrax);
-		//$label->set("backgroundshadowsizey",$sombray);
-		corE($label,$outlinecolor,"outlinecolor");
-		corE($label,$shadowcolor,"shadowcolor");
-		$label->set("shadowsizex",$shadowsizex);
-		$label->set("shadowsizey",$shadowsizey);
-		$label->set("force",$force);
-		$label->set("mindistance",$mindistance);
-		$label->set("minfeaturesize",$minfeaturesize);
-		$label->set("offsetx",$offsetx);
-		$label->set("offsety",$offsety);
-		$label->set("partials",$partials);
-		$p = array("MS_AUTO"=>MS_AUTO,"MS_UL"=>MS_UL,"MS_LR"=>MS_LR,"MS_UR"=>MS_UR,"MS_LL"=>MS_LL,"MS_CR"=>MS_CR,"MS_CL"=>MS_CL,"MS_UC"=>MS_UC,"MS_LC"=>MS_LC,"MS_CC"=>MS_CC);
-		$label->set("position",$p[$position]);
-		if ($tipo == "teste")
-		{
+		if ($tipo == "teste"){
 	 		$i = gravaImagemMapa($this->mapa);
 			return ($i["url"]);
 		}
 		else
 		{return($nomer);}
 	}
-/*
+	/*
 function: ativaEtiquetas
 
 ativa a inclusão de etiquetas em um tema

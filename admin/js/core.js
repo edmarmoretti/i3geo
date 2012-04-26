@@ -274,8 +274,11 @@ mensagem - mensagem do diálogo
 
 largura - largura do diálogo em px
 */
-function core_dialogoContinua(handleYes,handleNo,mensagem,largura)
+function core_dialogoContinua(handleYes,handleNo,mensagem,largura,cabecalho)
 {
+	if(!cabecalho || cabecalho === ""){
+		cabecalho = "Tem certeza?";
+	}
 	// Instantiate the Dialog
 	YAHOO.namespace("continua.container");
 	YAHOO.continua.container.simpledialog1 = 
@@ -292,7 +295,7 @@ function core_dialogoContinua(handleYes,handleNo,mensagem,largura)
 			   buttons: [ { text:"Sim", handler:handleYes, isDefault:true },
 						  { text:"N&atilde;o",  handler:handleNo } ]
 	} );
-	YAHOO.continua.container.simpledialog1.setHeader("Tem certeza?");
+	YAHOO.continua.container.simpledialog1.setHeader(cabecalho);
 	YAHOO.continua.container.simpledialog1.render(document.body);
 	YAHOO.continua.container.simpledialog1.show();
 }
@@ -1113,8 +1116,11 @@ row - objeto row de um datatable
 
 mensagem -
 */
-function core_excluiLinha(sUrl,row,mensagem)
+function core_excluiLinha(sUrl,row,mensagem,cabecalho)
 {
+	if(!cabecalho){
+		cabecalho = "";
+	}
 	//dialogo
 	// Define various event handlers for Dialog
 	var handleYes = function()
@@ -1152,7 +1158,7 @@ function core_excluiLinha(sUrl,row,mensagem)
 	};
 	var mensagem = "Exclui o registro?";
 	var largura = "300";
-	core_dialogoContinua(handleYes,handleNo,mensagem,largura);
+	core_dialogoContinua(handleYes,handleNo,mensagem,largura,cabecalho);
 }
 /*
 Function: core_excluiNoTree
@@ -1169,8 +1175,11 @@ no - objeto no de um treeview
 
 mensagem -
 */
-function core_excluiNoTree(sUrl,no,mensagem)
+function core_excluiNoTree(sUrl,no,mensagem,cabecalho)
 {
+	if(!cabecalho){
+		cabecalho = "";
+	}
 	//dialogo
 	// Define various event handlers for Dialog
 	var handleYes = function()
@@ -1211,7 +1220,7 @@ function core_excluiNoTree(sUrl,no,mensagem)
 	};
 	var mensagem = "Exclui o registro?";
 	var largura = "300";
-	core_dialogoContinua(handleYes,handleNo,mensagem,largura);
+	core_dialogoContinua(handleYes,handleNo,mensagem,largura,cabecalho);
 }
 /**
 Function: core_montaEditor

@@ -908,7 +908,7 @@ function excluirMapfile(codigoMap)
 	var mensagem = " excluindo "+codigoMap;
 	var no = tree.getNodeByProperty("id",codigoMap);
 	var sUrl = "../php/editormapfile.php?funcao=excluirMapfile&codigoMap="+codigoMap;
-	core_excluiNoTree(sUrl,no,mensagem);
+	core_excluiNoTree(sUrl,no,mensagem,codigoMap);
 }
 /*
 Function: clonarMapfile
@@ -962,7 +962,7 @@ function excluirLayer(codigoMap,codigoLayer)
 	var mensagem = " excluindo "+codigoLayer;
 	var no = tree.getNodeByProperty("id",codigoMap+"_"+codigoLayer);
 	var sUrl = "../php/editormapfile.php?funcao=excluirLayer&codigoMap="+codigoMap+"&codigoLayer="+codigoLayer;
-	core_excluiNoTree(sUrl,no,mensagem);
+	core_excluiNoTree(sUrl,no,mensagem,codigoLayer);
 }
 /*
 Function: excluirClasse
