@@ -267,8 +267,10 @@ i3GEOF.graficointerativo = {
 		'	<p class=paragrafo ><input style=cursor:pointer type=checkbox id=i3GEOgraficointerativoAdLinhas checked /> Adiciona as linhas em gráficos de barras</p>' +
 		'	<p class=paragrafo ><input style=cursor:pointer type=checkbox id=i3GEOgraficointerativoAcumula /> Utiliza valores acumulados</p>' +
 		'	<p class=paragrafo ><input style=cursor:pointer type=checkbox id=i3GEOgraficointerativoRelativa /> Utiliza valores relativos (%)</p>' +
+		'	<p class=paragrafo ><input style=cursor:pointer type=checkbox id=i3GEOgraficointerativoOrdenaX checked /> Ordena o eixo X</p>' +		
 		'	<p class=paragrafo ><input style=cursor:pointer type=checkbox id=i3GEOgraficointerativoDadosPuros /> Não processa os valores ao obter os dados (mantém os dados como estão na tabela de atributos) - essa opção é útil nos gráficos de distribuição de pontos</p>' +
 		'	<p class=paragrafo ><input style=cursor:pointer type=checkbox onclick="i3GEOF.graficointerativo.ativaNavegacao(this.checked)" /> Atualiza o gráfico ao navegar pelo mapa</p>' +
+		'	<p class=paragrafo ><select onchange="i3GEOF.graficointerativo.obterDados()" id="i3GEOgraficointerativoTipoAgregacao" ><option value="soma">Soma</option><option value="media">Média</option></select> Tipo de agregação dos valores do eixo Y</p>' +
 		'</div>'+
 		'<div class=guiaobj id="i3GEOgraficointerativoguia4obj" style="left:1px;display:none;top:-0px">' +
 		'</div>' +
@@ -296,7 +298,7 @@ i3GEOF.graficointerativo = {
 		titulo = "Gráficos interativos <a class=ajuda_usuario target=_blank href='" + i3GEO.configura.locaplic + "/ajuda_usuario.php?idcategoria=3&idajuda=84' >&nbsp;&nbsp;&nbsp;</a>";
 		janela = i3GEO.janela.cria(
 			"380px",
-			"260px",
+			"280px",
 			"",
 			"",
 			"",
@@ -456,7 +458,8 @@ i3GEOF.graficointerativo = {
 			excluir = $i("i3GEOgraficointerativoexcluir").value,
 			p = i3GEO.configura.locaplic+"/classesphp/mapa_controle.php?g_sid="+i3GEO.configura.sid+"&funcao=graficoSelecao&tema="+tema+"&itemclasses="+x+"&itemvalores="+y+"&exclui="+excluir+"&ext="+i3GEO.parametros.mapexten,
 			cp = new cpaint(),
-			tipo = "soma",
+			tipo = $i("i3GEOgraficointerativoTipoAgregacao").value,
+			ordenax = "sim",
 			monta;
 		
 		if($i("i3GEOgraficointerativoDadosPuros").checked)
@@ -471,6 +474,8 @@ i3GEOF.graficointerativo = {
 		{alert("Escolha um item para X");return;}
 		if(y === "")
 		{alert("Escolha um item para Y");return;}
+		if(!$i("i3GEOgraficointerativoOrdenaX").checked)
+		{ordenax = "nao";}		
 		monta = function(retorno){
 			i3GEOF.graficointerativo.aguarde.visibility = "hidden";
 			i3GEOF.graficointerativo.montaTabelaDados(retorno);
@@ -478,7 +483,7 @@ i3GEOF.graficointerativo = {
 		};
 		i3GEOF.graficointerativo.aguarde.visibility = "visible";
 		cp.set_response_type("JSON");
-		cp.call(p+"&tipo="+tipo,"graficoSelecao",monta);
+		cp.call(p+"&tipo="+tipo+"&ordenax="+ordenax,"graficoSelecao",monta);
 	},
 	/*
 	Function: montaTabelaDados
@@ -627,6 +632,11 @@ i3GEOF.graficointerativo = {
 			}
 			maior = 100;
 			menor = 0;
+		}
+		if(legendaX == legendaY){
+			menor = 0;
+			legendaX += " (ocorrências)";
+			legendaY += " (n. de ocorrências)";
 		}
 		if(i3GEOF.graficointerativo.tipo === "pizza2d"){
 			parametros = {

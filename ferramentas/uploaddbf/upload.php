@@ -34,7 +34,8 @@ if (isset($_FILES['i3GEOuploaddbffile']['name']))
 	{echo "Ocorreu um erro no envio do arquivo";paraAguarde();exit;}
 	$nome = explode(".",$_FILES['i3GEOuploaddbffile']['name']);
 	$nome = $nome[0];
-	$nomeshp = $dirmap."/".$nome.".shp";
+	$nome = $nome."_".(nomeRandomico(4));
+	$nomeshp = $dirmap."/".$nome.".shp";	
 	if($status == 1)
 	{
 		if(!isset($tema)) //o arquivo deverá ser transformado em uma camada no mapa

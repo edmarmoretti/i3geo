@@ -319,11 +319,15 @@ $inicio - Inicia do registro.
 $fim - Termina no registro.
 
 $tipolista - Indica se serão mostrados todos os registros ou apenas os selecionados (tudo|selecionados)
+
+$dadosDaClasse - sim|nao Indica se serão obtidos os dados que descrevem a classe do layer que contém o registro
 */
-	function listaRegistros($itemtema,$tipo,$unico,$inicio,$fim,$tipolista)
+	function listaRegistros($itemtema,$tipo,$unico,$inicio,$fim,$tipolista,$dadosDaClasse="nao")
 	{
 		error_reporting(0);
 		if(!$this->layer){return "erro";}
+		if($this->v < 6)
+		{$dadosDaClasse="nao";}		
 		$resultadoFinal = array();
 		if ((!isset($tipolista)) || ($tipolista=="")){$tipolista = "tudo";}
 		if (!isset($inicio)){$inicio = 0;}
@@ -368,7 +372,16 @@ $tipolista - Indica se serão mostrados todos os registros ou apenas os seleciona
 					{$valori = $this->converte($valori);}
 					$valitem[] = array("item"=>$item,"valor"=>$valori);
 				}
-				$registros[] = array("indice"=>$indx,"valores"=>$valitem,"status"=>$chk);
+				$classe = "";
+				if($dadosDaClasse == "sim"){
+					$indice = $this->layer->getClassIndex($shape);
+					$nome = $this->layer->getclass($indice)->name;
+					$classe = array(
+						"indice"=>$indice,
+						"nome"=>$nome
+					);
+				}
+				$registros[] = array("indice"=>$indx,"valores"=>$valitem,"status"=>$chk,"classe"=>$classe);
 			}
 			$resultadoFinal[] = array("registros"=>$registros);	 	
 		}
@@ -417,7 +430,16 @@ $tipolista - Indica se serão mostrados todos os registros ou apenas os seleciona
 					//if (in_array($shp_index,$shp_atual))
 					if(isset($shp_atual[$indx]))
 					{$chk = "CHECKED";}
-					$registros[] = array("indice"=>$indx,"valores"=>$valitem,"status"=>$chk);
+					$classe = "";
+					if($dadosDaClasse == "sim"){
+						$indice = $this->layer->getClassIndex($shape);
+						$nome = $this->layer->getclass($indice)->name;
+						$classe = array(
+							"indice"=>$indice,
+							"nome"=>$nome
+						);
+					}
+					$registros[] = array("indice"=>$indx,"valores"=>$valitem,"status"=>$chk,"classe"=>$classe);
 					$chk = "";
 				}
 				$this->layer->close();

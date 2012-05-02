@@ -61,7 +61,7 @@ if (isset($_GET))
 	{
 		if ($_GET[$k] != "''"){
 			$v = strip_tags($_GET[$k]);
-			eval("\$".$k."='".($v)."';");
+			eval("\$".$k."='".(trim($v))."';");
 		}
 	}
 }
@@ -72,12 +72,11 @@ if (isset($_POST))
 	foreach(array_keys($_POST) as $k)
 	{
 		if (($_POST[$k] != "''"))
-		eval("\$".$k."='".(strip_tags($_POST[$k]))."';");
+		eval("\$".$k."='".(strip_tags(trim($_POST[$k])))."';");
 		if (($_POST[$k] != "''") && ($k == "cpaint_argument"))
 		{
 			foreach($_POST["cpaint_argument"] as $argumento_)
 			{
-				
 				if (strtoupper(substr(PHP_OS, 0, 3) == 'WIN'))
 				{$argumento_ = str_replace("\\\"","",$argumento_);}
 				else
@@ -93,7 +92,7 @@ if (isset($_POST))
 					$valor_ = implode("=",$p_);
 					
 					if($parametro != "")
-					eval("\$".$parametro."='".(($valor_))."';");				
+					eval("\$".$parametro."='".(trim($valor_))."';");				
 				}
 			}				
 		}

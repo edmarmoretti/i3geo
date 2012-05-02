@@ -142,7 +142,8 @@ require_once ($caminho."classesphp/carrega_ext.php");
 //
 //quando $funcao existe, é pq o ms_criamapa.php está sendo utilizado como um include em classesphp/mapa_controle.php
 //
-if (!isset($_GET["debug"]))
+$parurl = array_merge($_GET,$_POST);
+if (!isset($parurl["debug"]))
 {error_reporting(0);$debug="nao";}
 else
 {error_reporting(E_ALL);$debug="sim";}
@@ -152,8 +153,8 @@ if (!isset($caminho))
 {$caminho = "";}
 if (!file_exists($caminho."classesphp/carrega_ext.php"))
 {echo "<b> Nao foi possivel localizar o diretório classephp. Provavelmente vc precisara definir a variavel $caminho";exit;}
-if (isset($_GET["caminho"]))
-{$caminho = $_GET["caminho"];}
+if (isset($parurl["caminho"]))
+{$caminho = $parurl["caminho"];}
 /*
  Carrega as extensões PHP
 

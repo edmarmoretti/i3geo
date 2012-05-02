@@ -237,6 +237,10 @@ i3GEOF.tabela = {
 		ins += '			<td><input style="cursor:pointer;border:0px solid white;" onclick="i3GEOF.tabela.pegaRegistros()" type=checkbox id=i3GEOtabelatipolista /></td>';
 		ins += '			<td>Mostrar na listagem apenas os selecionados</td>';
 		ins += '		</tr>';
+		ins += '		<tr>';
+		ins += '			<td><input style="cursor:pointer;border:0px solid white;" onclick="i3GEOF.tabela.pegaRegistros()" type=checkbox id=i3GEOtabelalegenda /></td>';
+		ins += '			<td>Mostrar coluna com a legenda da classe</td>';
+		ins += '		</tr>';
 		ins += '		</table>';
 		ins += '		</div>';
 		ins += '	<div id=i3GEOtabelaguia1obj style="width:99%">';
@@ -422,7 +426,9 @@ i3GEOF.tabela = {
 		{tiporeg = "mapa";}
 		if ($i("i3GEOtabelatipolista").checked)
 		{tipolista = "selecionados";}
-		p = i3GEO.configura.locaplic+"/classesphp/mapa_controle.php?g_sid="+i3GEO.configura.sid+"&funcao=listaregistros&inicio="+inicio+"&fim="+fim+"&tema="+i3GEOF.tabela.tema+"&tipo="+tiporeg+"&tipolista="+tipolista+"&ext="+i3GEO.parametros.mapexten;
+		if ($i("i3GEOtabelalegenda").checked)
+		{dadosDaClasse = "sim";}		
+		p = i3GEO.configura.locaplic+"/classesphp/mapa_controle.php?g_sid="+i3GEO.configura.sid+"&funcao=listaregistros&inicio="+inicio+"&fim="+fim+"&tema="+i3GEOF.tabela.tema+"&tipo="+tiporeg+"&tipolista="+tipolista+"&ext="+i3GEO.parametros.mapexten+"&dadosDaClasse="+dadosDaClasse;
 		cp.set_response_type("JSON");
 		cp.call(p,"listaRegistros",i3GEOF.tabela.montaTabela);
 	},
@@ -440,10 +446,12 @@ i3GEOF.tabela = {
 				cor,
 				j,
 				n,
-				stat;
+				stat,
+				imagem,
+				i3GEOtabelalegenda = $i("i3GEOtabelalegenda").checked;
 			//cabecalho da tabela
 			ins = "<table id=i3GEOtabelatabelai class=lista2 >";
-			ins += "<tr><td></td><td></td><td></td>";
+			ins += "<tr><td></td><td></td><td></td><td></td>";
 			n = retorno.data[0].itens.length;
 			for (i=0;i<n;i++)
 			{ins += "<td style='background-color:yellow' ><img style=cursor:pointer onclick='i3GEOF.tabela.excluiColuna(this,"+(i * 1 + 3)+")' src='"+i3GEO.configura.locaplic+"/imagens/x.gif' title='excluir' />&nbsp;<img style=cursor:pointer onclick='i3GEOF.tabela.ordenaColuna(this,"+(i * 1 + 3)+")' src='"+i3GEO.configura.locaplic+"/imagens/ordena1.gif' title='ordena' /><br> "+retorno.data[0].itens[i]+"</td>";}
@@ -463,6 +471,12 @@ i3GEOF.tabela = {
 					{stat = "";}
 				}
 				ins += "<td><input title='marca' onclick='i3GEOF.tabela.registraLinha(this)' style='cursor:pointer;border:0px solid white;' type='checkbox' "+stat+"  name="+retorno.data[1].registros[i].indice+" /></td>";
+				if(i3GEOtabelalegenda == true){
+					imagem = retorno.data.legenda[retorno.data[1].registros[i].classe["indice"]];
+					ins += "<td><img title='"+retorno.data[1].registros[i].classe["nome"]+"' src='"+imagem+"' /></td>";
+				}
+				else
+				{ins += "<td></td>";}
 			 	if(stat === "CHECKED")
 			 	{i3GEOF.tabela.registros[retorno.data[1].registros[i].indice] = true;}
 			 	vals = retorno.data[1].registros[i].valores;
@@ -761,11 +775,12 @@ i3GEOF.tabela = {
 	},
 	t0: function(){
 		$i("i3GEOtabelaresultado").innerHTML = "";
-		var ins = "<br><img src='"+i3GEO.configura.locaplic+"/imagens/Rlogo.jpg'/>";
+		var ins = "";
 		ins += "<p class='paragrafo' >A representação gr&aacute;fica dos dados tabulares utiliza todos os elementos da tabela ou os selecionados, se estiverem ativos no mapa.";
-		ins += "<p class='paragrafo' >Nas op&ccedil;&otilde;s seguintes, defina o tipo e as op&ccedil;&otilde;es do gr&aacute;fico.";
 		ins += "<p class='paragrafo' ><a href='http://www.r-project.org/' target=blank >Os gráficos s&atilde;o gerados com o software R,</a> mas vc pode optar por usar a ferramenta de gráficos interativos que possuem outras opções e geram gráficos em Flash.";
 		ins += "<p class='paragrafo' ><input type=button value='Gráficos interativos' id=i3GEOtabelaGraficoI /></p>";
+		ins += "<br><br><p class='paragrafo' >Se você optar por usar o R, nas telas seguintes defina o tipo e as op&ccedil;&otilde;es do gr&aacute;fico.";
+
 		i3GEO.util.proximoAnterior("","i3GEOF.tabela.t1()",ins,"i3GEOFtabelat0","i3GEOtabelaresultado");
 		new YAHOO.widget.Button(
 			"i3GEOtabelaGraficoI",

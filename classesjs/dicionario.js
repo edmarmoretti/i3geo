@@ -768,6 +768,20 @@ en:"Graphic",
 es:"Gr&aacute;fico",
 it:"Grafico"
 }],
+"t37a":[
+{
+pt:"Tema com gráficos",
+en:"Graphic",
+es:"Gr&aacute;fico",
+it:"Grafico"
+}],
+"t37b":[
+{
+pt:"Gráfico interativo",
+en:"Graphic",
+es:"Gr&aacute;fico",
+it:"Grafico"
+}],
 "t38":[
 {
 pt:"Exporta a legenda para o padrão SLD.",

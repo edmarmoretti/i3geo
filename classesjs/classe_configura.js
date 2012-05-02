@@ -150,7 +150,7 @@ i3GEO.configura = {
 			{ id:"omenudataAnalise14",text: $trad("u10"), url: "javascript:i3GEO.analise.dialogo.buffer()" },
 			{ id:"omenudataAnalise15",text: $trad("u26"), url: "javascript:i3GEO.analise.dialogo.agrupaElementos()" },
 			{ id:"omenudataAnalise16",text: $trad("u11"), url: "javascript:i3GEO.analise.dialogo.centroide()" },
-			{ id:"omenudataAnalise17",text: $trad("t37"), url: "javascript:i3GEO.analise.dialogo.graficoInterativo()" },
+			{ id:"omenudataAnalise17",text: $trad("t37b"), url: "javascript:i3GEO.analise.dialogo.graficoInterativo()" },
 			{ id:"omenudataAnalise18",text: $trad("d30"), url: "javascript:i3GEO.analise.dialogo.linhaDoTempo()" }
 			],
 			"janelas": [
@@ -191,8 +191,9 @@ i3GEO.configura = {
 			{ id:"omenudataFerramentas5b",text: $trad("t29"), url: "javascript:i3GEO.tema.dialogo.filtro()"},
 			{ id:"omenudataFerramentas6b",text: $trad("t33"), url: "javascript:i3GEO.tema.dialogo.editaLegenda()"},
 			{ id:"omenudataFerramentas7b",text: $trad("t42"), url: "javascript:i3GEO.tema.dialogo.cortina()"},
-			{ id:"omenudataFerramentas8b",text: $trad("t37"), url: "javascript:i3GEO.tema.dialogo.graficotema()"},
-			{ id:"omenudataFerramentas9b",text: $trad("t49"), url: "javascript:i3GEO.tema.dialogo.tme()"},
+			{ id:"omenudataFerramentas8b",text: $trad("t37a"), url: "javascript:i3GEO.tema.dialogo.graficotema()"},
+			{ id:"omenudataFerramentas9b",text: $trad("t37b"), url: "javascript:i3GEO.analise.dialogo.graficoInterativo()" },
+			{ id:"omenudataFerramentas10b",text: $trad("t49"), url: "javascript:i3GEO.tema.dialogo.tme()"},
 			{ id:"omenudataFerramentas0c",text: '<span style=color:gray;text-decoration:underline; ><b>'+$trad("a15")+'</b></span>',url: "#"},
 			{ id:"omenudataFerramentas1c",text: $trad("a16"), url: "javascript:i3GEO.arvoreDeTemas.dialogo.conectaservico()"},
 			{ id:"omenudataFerramentas0d",text: '<span style=color:gray;text-decoration:underline; ><b>Upload</b></span>',url: "#"},

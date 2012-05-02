@@ -1772,9 +1772,10 @@ Pega os dados necessários para a geração dos gráficos da ferramenta seleção
 		{$exclui = "";}
 		if(!isset($tipo))
 		{$tipo = "nenhum";}
-		$retorno = iniciaDadosGrafico($map_file,$tema,$exclui,$itemclasses,$itemvalores,$tipo,false,$ext);
+		if(!isset($ordenax))
+		{$ordenax = "nao";}
+		$retorno = iniciaDadosGrafico($map_file,$tema,$exclui,$itemclasses,$itemvalores,$tipo,false,$ext,true,$ordenax);
 	break;
-
 /*
 Valor: FUSAOGRAFICO
 
@@ -2266,7 +2267,20 @@ Pega todos os valores dos itens de uma tabela de um tema.
 		if(!isset($fim)){$fim = "";}
 		if(!isset($tipolista)){$tipolista = "";}
 		if(!isset($itemtema)){$itemtema = "";}
-		$retorno = $m->listaRegistros($itemtema,$tipo,"",$inicio,$fim,$tipolista);
+		$legenda = "";
+		if(!isset($dadosDaClasse)){$dadosDaClasse = "nao";}
+		else{
+			include_once("classe_legenda.php");
+			$mc = new Legenda($map_file,$locaplic,$tema);
+			$linhas = $mc->tabelaLegenda();
+			foreach($linhas as $linha){
+				if($linha["tema"] == $tema){
+					$legenda[$linha["idclasse"]] = $linha["imagem"];
+				}
+			}
+		}
+		$retorno = $m->listaRegistros($itemtema,$tipo,"",$inicio,$fim,$tipolista,$dadosDaClasse);
+		$retorno["legenda"] = $legenda;
 	break;
 /*
 Valor: EXTREGISTROS

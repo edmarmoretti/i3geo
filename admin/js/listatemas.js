@@ -75,17 +75,13 @@ function montaDivTemas(i)
 	};
 	var ins = "";
 	ins += core_geraLinhas(param);
-	
 	ins += "<p>Descrição (opcional):<br>";
 	ins += "<input size=40 type=text id=desc_tema value='"+i.desc_tema+"' /></p>";
-	
 	ins += "<p>Link para a fonte (opcional):<br>";
 	ins += "<input size=40 type=text id=link_tema value='"+i.link_tema+"' /></p>";
-	
 	ins += "<p>Tags (separe com espaço). Você pode digitar novos tags ou pegar da lista abaixo (opcional):";
 	ins += "<input type=text size=40 value='"+i.tags_tema+"' id='tags_tema' ><br>";
 	ins += "<div id=comboTags >Buscando...</div>";
-	
 	ins += "<p>Tipo (preencha apenas se for do tipo WMS):<br>";
 	ins += "<select  id='tipo_tema' />";
 	ins += "<option value='' ";
@@ -94,50 +90,51 @@ function montaDivTemas(i)
 	ins += "<option value='WMS' ";
 	if (i.tipoa_tema == "WMS"){ins += "selected";}
 	ins += " >WMS<option></select></p>";
-	
 	ins += "<p>Permite acesso via WMS/WFS?<br>";
 	ins += "<select  id='ogc_tema' >";
 	ins += core_combosimnao(i.ogc_tema);
 	ins += "</select></p>";
-	
 	ins += "<p>Permite o download na aplicação datadownload.htm?<br>";
 	ins += "<select  id='download_tema' >";
 	ins += core_combosimnao(i.download_tema);
 	ins += "</select></p>";
-
 	ins += "<p>Permite acesso via kml?<br>";
 	ins += "<select  id='kml_tema' >";
 	ins += core_combosimnao(i.kml_tema);
 	ins += "</select></p>";
-
 	ins += "<p>Permite acesso via kmz (kml com dados vetoriais)?<br>";
 	ins += "<select  id='kmz_tema' >";
 	ins += core_combosimnao(i.kmz_tema);
 	ins += "</select></p>";
-	
 	ins += "<p><span onclick='atualizaMiniatura()' style='color:blue;cursor:pointer' >Atualiza ou cria a miniatura.</span> Cada tema pode ter uma imagem miniatura que é mostrada em algumas funcionalidades do i3Geo. Utilize essa opção para criar a miniatura para o tema em edição.<br>";
 	ins += "<img id='imagemMiniatura' src='../../temas/miniaturas/"+i.imagem+"' /></p><br><br>";
-
-	
 	ins += "<input type=hidden id=codigo_tema value='"+i.codigo_tema+"'/>";
 	return(ins);
 }
 function atualizaMiniatura(){
-	$i("imagemMiniatura").src = "../../imagens/aguarde.gif";
+	var i = $i("imagemMiniatura");
+	i.src = "../../imagens/aguarde.gif";
 	var tema = $i("codigo_tema").value;
 	var sUrl = "../php/menutemas.php?funcao=atualizaMiniatura&tema="+tema;
 	var callback =
 	{
   		success:function(o)
   		{
+  			i.style.display = none;
+  			i.onLoad = function(){
+  				$i("imagemMiniatura").style.display = "block";
+  			}
   			try
-  			{$i("imagemMiniatura").src = "../../temas/miniaturas/"+tema+".map.grande.png";}
-  			catch(e){core_handleFailure(e,o.responseText);}
+  			{i.src = "../../temas/miniaturas/"+tema+".map.grande.png";}
+  			catch(e){
+  				i.style.display = block;
+  				core_handleFailure(e,o.responseText);
+  			}
   		},
   		failure:core_handleFailure,
   		argument: { foo:"foo", bar:"bar" }
 	}; 
-	core_makeRequest(sUrl,callback,"GET");
+	core_makeRequest(sUrl,callback,"GET")	
 }
 function gravaDadosTema(id)
 {

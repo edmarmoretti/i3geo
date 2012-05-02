@@ -47,6 +47,8 @@ if (isset($_FILES['i3GEOuploadshp']['name']))
 	verificaNome($_FILES['i3GEOuploaddbf']['name']);
 	//remove acentos
 	$nomePrefixo = str_replace(" ","_",removeAcentos(str_replace(".shp","",$_FILES['i3GEOuploadshp']['name'])));
+	$nomePrefixo = $nomePrefixo."_".(nomeRandomico(4));
+
 	//sobe arquivo
 	$Arquivo = $_FILES['i3GEOuploadshp']['tmp_name'];
 	if(file_exists($dirmap."/".$nomePrefixo.".shp"))

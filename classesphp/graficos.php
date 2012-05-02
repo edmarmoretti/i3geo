@@ -371,7 +371,7 @@ function iniciaParGrafico($gw,$gh,$res,$dir_tmp,$gfile_name,$margem,$margemexter
 	$rcode[] = 'screen(1, new=FALSE)';
 	return $rcode;	
 }
-function iniciaDadosGrafico($map_file,$tema,$exclui,$itemclasses,$itemvalores,$tipo,$percentual,$ext="",$incluicores=true)
+function iniciaDadosGrafico($map_file,$tema,$exclui,$itemclasses,$itemvalores,$tipo,$percentual,$ext="",$incluicores=true,$ordenax="nao")
 {
 	global $interface;
 	//pega os valores
@@ -400,9 +400,10 @@ function iniciaDadosGrafico($map_file,$tema,$exclui,$itemclasses,$itemvalores,$t
 	$max = max($dados);
 	$soma = array_sum($dados);
 	$tempm = array_keys($dados);
+	$tempval = array();
+	$nnval[] = "n;x";
 	if ($tipo != "xy")
 	{
-		$nnval[] = "n;x";
 		for ($i=0;$i < $nval; ++$i)
 		{
 			if ($dados[$tempm[$i]] > 0)
@@ -421,21 +422,23 @@ function iniciaDadosGrafico($map_file,$tema,$exclui,$itemclasses,$itemvalores,$t
 					if($incluicores == true)
 					{$temp = $temp.";".$cores[$tempm[$i]];}
 				}
-				$nnval[] = $temp;
+				$tempval[] = $temp;
 			}
 		}
 	}
 	else
 	{
-		$nnval[] = "x;y";
 		foreach ($valores as $v)
 		{
 			 $temp = $v[0].";".$v[1];
 			 if($incluicores == true)
 			 {$temp = $temp.";".$cores[$v[0]];}
-			 $nnval[] = $temp;
-		}	
+			 $tempval[] = $temp;
+		}
 	}
+	if($ordenax == "sim")
+	{sort($tempval);}
+	$nnval = array_merge($nnval,$tempval);
 	return array("dados"=>$nnval,"ndados"=>$nval,"max"=>$max);
 }
 function dadosLinhaDoTempo($map_file,$tema,$ext="")
