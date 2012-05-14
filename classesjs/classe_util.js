@@ -1981,7 +1981,7 @@ i3GEO.util = {
 			}
 			else
 			{temp = {dados:'<div class=erro >Ocorreu um erro</erro>',tipo:"erro"};}
-			funcao.apply(funcao,temp);
+			funcao(temp);
 		};
 		i3GEO.php.listaEpsg(monta);
 	},

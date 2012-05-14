@@ -1,4 +1,8 @@
-<?php error_reporting(0);if(extension_loaded('zlib')){ob_start('ob_gzhandler');} header("Content-type: text/css"); ?>.paragrafo
+<?php error_reporting(0);if(extension_loaded('zlib')){ob_start('ob_gzhandler');} header("Content-type: text/css"); ?>fieldset
+{text-align:left;	padding: 10px;	border: 0px solid gray;	border-radius: 5px 5px 5px 5px;	box-shadow: 0 1px 3px gray ;	background-color:rgb(250,250,250);	margin:15px;}
+legend
+{font-weight:bold;cursor:pointer;background-color:white;color:navy;text-align: left;font-size: 10px;font-family: Verdana, Arial, Helvetica, sans-serif;}
+.paragrafo
 {font-size:12px;line-height:15px;margin-bottom:9px;text-align:left;}
 .lista td
 {border: 0px solid rgb(240,240,240);border-left: 0px;border-right:0px;border-top:0px;padding: 0px;color:#2F4632;margin:0px;text-align:left;font-size: 11px;font-family: Verdana, Arial, Helvetica, sans-serif;}

@@ -60,7 +60,13 @@ i3GEOF.inseretxt = {
 	
 	Primeiro ponto do conector clicado no mapa em DD
 	*/
-	pontoi: "0,0",	
+	pontoi: "0,0",
+	/*
+	Variavel: parDefault
+	
+	Parâmetros padrão utilizados para formatar o texto
+	*/	
+	parDefault: "&inserefeature&&position=MS_UR&partials=1&offsetx=0&offsety=0&minfeaturesize=auto&mindistance=auto&force=0&shadowsizex=1&shadowsizey=1&cor=0 0 0&sombray=1&sombrax=1&angulo=0&tamanho=8&fonte=bitmap&fundo=off&sombra=off&outlinecolor=off&shadowcolor=off&wrap=",
 	/*
 	Function: inicia
 	
@@ -109,8 +115,15 @@ i3GEOF.inseretxt = {
 					"ligados"
 				);	
 			};
-			$i("i3GEOinseretxtguia3").onclick = function()
-			{i3GEO.guias.mostraGuiaFerramenta("i3GEOinseretxtguia3","i3GEOinseretxtguia");};
+			$i("i3GEOinseretxtguia3").onclick = function(){
+				//i3GEO.guias.mostraGuiaFerramenta("i3GEOinseretxtguia3","i3GEOinseretxtguia");
+				i3GEO.util.scriptTag(
+					i3GEO.configura.locaplic+"/ferramentas/opcoes_label/index.js",
+					"i3GEOF.proplabel.criaJanelaFlutuante(true)",
+					"i3GEOFproplabel",
+					false
+				);
+			};
 			i3GEO.util.mensagemAjuda("i3GEOinseretxtmen1",$i("i3GEOinseretxtmen1").innerHTML);
 			i3GEO.util.mensagemAjuda("i3GEOinseretxtmen2",$i("i3GEOinseretxtmen2").innerHTML);
 			i3GEO.util.comboFontes("i3GEOinseretxtListaFonte","i3GEOinseretxtDivListaFonte");
@@ -131,9 +144,9 @@ i3GEOF.inseretxt = {
 		var ins = '' +
 		'<div id=i3GEOinseretxtguiasYUI class="yui-navset" style="top:0px;cursor:pointer;left:0px;">' +
 		'	<ul class="yui-nav" style="border-width:0pt 0pt 0px;border-color:rgb(240,240,240);border-bottom-color:white;">' +
+		'		<li><a href="#ancora"><em><div id="i3GEOinseretxtguia3" style="text-align:center;left:0px;" ><img class="ticPropriedades2" style="height:14px" title="Propriedades" src="'+i3GEO.configura.locaplic+'/imagens/visual/default/branco.gif"></div></em></a></li>' +
 		'		<li><a href="#ancora"><em><div id="i3GEOinseretxtguia1" style="text-align:center;left:0px;" >Digitar</div></em></a></li>' +
 		'		<li><a href="#ancora"><em><div id="i3GEOinseretxtguia2" style="text-align:center;left:0px;" >Capturar</div></em></a></li>' +
-		'		<li><a href="#ancora"><em><div id="i3GEOinseretxtguia3" style="text-align:center;left:0px;" >Propriedades</div></em></a></li>' +
 		'	</ul>' +
 		'</div><br>' +
 		'	<div class=guiaobj id="i3GEOinseretxtguia1obj" style="left:1px;display:none;">' +
@@ -337,34 +350,13 @@ i3GEOF.inseretxt = {
 	Pega os parâmetros para montar a chamada ajax que cria ou testa a toponímia
 	*/
 	pegaPar: function(){
-		if($i("i3GEOinseretxtfundoc_i").value === "")
-		{$i("i3GEOinseretxtfundoc_i").value = "off";}
-		if($i("i3GEOinseretxtsombra_i").value === "")
-		{$i("i3GEOinseretxtsombra_i").value = "off";}
-		if($i("i3GEOinseretxtmascara_i").value === "")
-		{$i("i3GEOinseretxtmascara_i").value = "off";}				
-		if($i("i3GEOinseretxtfrentes_i").value === "")
-		{$i("i3GEOinseretxtfrentes_i").value = "off";}
-		var par = "&position="+$i("i3GEOinseretxtposition_i").value +
-			"&partials="+$i("i3GEOinseretxtpartials_i").value+
-			"&offsetx="+$i("i3GEOinseretxtoffsetx_i").value+
-			"&offsety="+$i("i3GEOinseretxtoffsety_i").value+
-			"&minfeaturesize="+$i("i3GEOinseretxtminfeaturesize_i").value+
-			"&mindistance="+$i("i3GEOinseretxtmindistance_i").value+
-			"&force="+$i("i3GEOinseretxtforce_i").value+
-			"&shadowsizex="+$i("i3GEOinseretxtfrentex_i").value+
-			"&shadowsizey="+$i("i3GEOinseretxtfrentey_i").value+
-			"&cor="+$i("i3GEOinseretxtfrente_i").value+
-			"&sombray="+$i("i3GEOinseretxtsombray_i").value+
-			"&sombrax="+$i("i3GEOinseretxtsombrax_i").value+
-			"&angulo="+$i("i3GEOinseretxtangulo_i").value+
-			"&tamanho="+$i("i3GEOinseretxttamanho_i").value+
-			"&fonte="+$i("i3GEOinseretxtListaFonte").value+
-			"&fundo="+$i("i3GEOinseretxtfundoc_i").value+
-			"&sombra="+$i("i3GEOinseretxtsombra_i").value+
-			"&outlinecolor="+$i("i3GEOinseretxtmascara_i").value+
-			"&shadowcolor="+$i("i3GEOinseretxtfrentes_i").value+
-			"&wrap="+$i("i3GEOinseretxtwrap_i").value;
+		try{
+			var par = i3GEOF.proplabel.pegaPar();
+			i3GEOF.inseretxt.parDefault = par;
+		}
+		catch(e){
+			par = i3GEOF.inseretxt.parDefault;
+		}
 		return par;
 	},
 	/*
@@ -453,7 +445,7 @@ i3GEOF.inseretxt = {
 	texto {String}
 	*/
 	insere: function(texto){
-		var monta,par,p,nometema,temp;
+		var monta,par,p,nometema,temp,cp;
 		monta = function(){
 		 	i3GEOF.inseretxt.aguarde.visibility = "hidden";
 		 	i3GEO.atualiza();
@@ -495,8 +487,14 @@ i3GEOF.inseretxt = {
 		temp = temp.split(".");
 		nometema = "pin"+temp[1];
 		par = i3GEOF.inseretxt.pegaPar();
-		par += "&tamanho="+$i("i3GEOinseretxttamanho_c").value;
-		par += "&cor="+$i("i3GEOinseretxtfrente_c").value;
+		if($i("i3GEOproplabeltamanho_c")){
+			par += "&tamanho="+$i("i3GEOproplabeltamanho_c").value;
+			par += "&cor="+$i("i3GEOproplabelfrente_c").value;
+		}
+		else{
+			par += "&tamanho=1";
+			par += "&cor=0 0 0";		
+		}
 		p = i3GEO.configura.locaplic+"/classesphp/mapa_controle.php?g_sid="+i3GEO.configura.sid+
 				"&funcao=inserefeature&"+par+"&pin="+nometema+"&tipo=LINE&texto="+texto+" (conector)&xy="+xy;
 		if(par === false){

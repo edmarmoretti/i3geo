@@ -56,7 +56,7 @@ echo "<br><br>Após criar as tabelas no Postgres, vc deve definir as permissões p
 echo "<br><br>Para usar outro banco de dados que não seja o default (SQLITE), você terá de alterar o programa i3geo/admin/php/conexao.php<br><br>";
 foreach($resultado as $r)
 {
-	echo str_ireplace("INTEGER PRIMARY KEY","SERIAL",$r["sql"])."<br>";
+	echo str_ireplace("INTEGER PRIMARY KEY","SERIAL PRIMARY KEY NOT NULL",$r["sql"])."<br>";
 }
 echo "<br><br><span style=color:red >Listagem completa</span><br><br>";
 

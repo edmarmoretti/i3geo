@@ -702,53 +702,7 @@ $wrap - caractere que indica quebra de linha
 				case "ANNOTATION":
 					$c->set("status",MS_DELETE);
 					$novac = ms_newclassobj($pinlayer);
-					$label = $novac->label;
-					if($wrap != "")
-					{
-						$label->set("maxlength",1);
-						$s = "CLASS LABEL WRAP '$wrap' END END";
-						$novac->updateFromString($s);
-					}
-					$label = $novac->label;
-					
-					if ($fonte != "bitmap")
-					{
-						$label->set("type",MS_TRUETYPE);
-						$label->set("font",$fonte);
-						$label->set("size",$tamanho);
-					}
-					else
-					{
-						$label->set("type",MS_BITMAP);
-						//$label->set("font",$fonte);
-						$t = MS_TINY;
-						if ($tamanho > 5 ){$t = MS_TINY;}
-						if ($tamanho >= 7 ){$t = MS_SMALL;}
-						if ($tamanho >= 10 ){$t = MS_MEDIUM;}
-						if ($tamanho >= 12 ){$t = MS_LARGE;}
-						if ($tamanho >= 14 ){$t = MS_GIANT;}
-						$label->set("size",$t);
-					}				
-					$label->set("angle",$angulo);
-					corE($label,$fundo,"backgroundcolor");
-					corE($label,$sombra,"backgroundshadowcolor",$sombrax,$sombray);
-					
-					//$label->set("backgroundshadowsizex",$sombrax);
-					//$label->set("backgroundshadowsizey",$sombray);
-
-					corE($label,$cor,"color");
-					corE($label,$outlinecolor,"outlinecolor");
-					corE($label,$shadowcolor,"shadowcolor");
-					$label->set("shadowsizex",$shadowsizex);
-					$label->set("shadowsizey",$shadowsizey);
-					$label->set("force",$force);
-					$label->set("mindistance",$mindistance);
-					$label->set("minfeaturesize",$minfeaturesize);
-					$label->set("offsetx",$offsetx);
-					$label->set("offsety",$offsety);
-					$label->set("partials",$partials);
-					$p = array("MS_AUTO"=>MS_AUTO,"MS_UL"=>MS_UL,"MS_LR"=>MS_LR,"MS_UR"=>MS_UR,"MS_LL"=>MS_LL,"MS_CR"=>MS_CR,"MS_CL"=>MS_CL,"MS_UC"=>MS_UC,"MS_LC"=>MS_LC,"MS_CC"=>MS_CC);
-					$label->set("position",$p[$position]);
+					$this->adicionaLabel($novac,$wrap,$fonte,$tamanho,$angulo,$fundo,$sombra,$cor,$outlinecolor,$shadowcolor,$shadowsizex,$shadowsizey,$force,$mindistance,$minfeaturesize,$offsetx,$offsety,$partials,$position);
 					$pinlayer->setmetadata("TEMA",$texto);
 					$pinlayer->set("type",MS_LAYER_ANNOTATION);
 					$pinlayer->set("opacity","100");
@@ -1113,5 +1067,63 @@ Altera o valor do elemento DATA
 		else
 		return "O layer não permite a alteracao do elemento DATA";
 	}
+/*
+function: adicionaLabel
+
+Adiciona LABEL em uma classe de um tema
+*/	
+	function adicionaLabel($novac,$wrap,$fonte,$tamanho,$angulo,$fundo,$sombra,$cor,$outlinecolor,$shadowcolor,$shadowsizex,$shadowsizey,$force,$mindistance,$minfeaturesize,$offsetx,$offsety,$partials,$position){
+		$label = $novac->label;
+		if($wrap != "")
+		{
+			$label->set("maxlength",1);
+			$s = "CLASS LABEL WRAP '$wrap' END END";
+			$novac->updateFromString($s);
+		}
+		$label = $novac->label;
+		if($fonte != "bitmap")
+		{
+			$label->set("type",MS_TRUETYPE);
+			$label->set("font",$fonte);
+			$label->set("size",$tamanho);
+		}
+		else
+		{
+			$label->set("type",MS_BITMAP);
+			//$label->set("font",$fonte);
+			$t = MS_TINY;
+			if ($tamanho > 5 ){$t = MS_TINY;}
+			if ($tamanho >= 7 ){$t = MS_SMALL;}
+			if ($tamanho >= 10 ){$t = MS_MEDIUM;}
+			if ($tamanho >= 12 ){$t = MS_LARGE;}
+			if ($tamanho >= 14 ){$t = MS_GIANT;}
+			$label->set("size",$t);
+		}				
+		$label->set("angle",$angulo);
+		corE($label,$fundo,"backgroundcolor");
+		corE($label,$sombra,"backgroundshadowcolor",$sombrax,$sombray);
+		corE($label,$cor,"color");
+		corE($label,$outlinecolor,"outlinecolor");
+		corE($label,$shadowcolor,"shadowcolor");
+		$label->set("shadowsizex",$shadowsizex);
+		$label->set("shadowsizey",$shadowsizey);
+		$label->set("force",$force);
+		$label->set("mindistance",$mindistance);
+		$label->set("minfeaturesize",$minfeaturesize);
+		$label->set("offsetx",$offsetx);
+		$label->set("offsety",$offsety);
+		$label->set("partials",$partials);
+		$p = array("MS_AUTO"=>MS_AUTO,"MS_UL"=>MS_UL,"MS_LR"=>MS_LR,"MS_UR"=>MS_UR,"MS_LL"=>MS_LL,"MS_CR"=>MS_CR,"MS_CL"=>MS_CL,"MS_UC"=>MS_UC,"MS_LC"=>MS_LC,"MS_CC"=>MS_CC);
+		$label->set("position",$p[$position]);
+		$this->layer->setMetaData("cache","");
+	}
+	function removeLabel($iclasse){
+		$classe = $this->layer->getclass($iclasse);
+		$label = $classe->label;
+		$label->set("type",MS_TRUETYPE);
+		$label->set("font","arial");
+		$label->set("size",0);
+		$this->layer->setMetaData("cache","");		
+	}	
 }
 ?>

@@ -333,6 +333,7 @@ i3GEO.janela = {
 					{effect:YAHOO.widget.ContainerEffect.FADE,duration:0.5}
 			]);
 		}
+		janela.cfg.setProperty("zIndex",[10000]);
 		janela.render();
 		//ajusta estilos e outras características da janela criada
 		if(navm && id !== "i3geo_janelaMensagens" && i3GEO.Interface.ATUAL === "googleearth")
