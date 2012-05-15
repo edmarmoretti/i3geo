@@ -2243,8 +2243,10 @@ Identifica elementos no mapa.
 		include_once("classe_atributos.php");
 		if(!isset($ext))
 		{$ext = "";}
+		if(!isset($wkt))
+		{$wkt = "nao";}		
 		$m = new Atributos($map_file,$tema,"",$ext);
-		$retorno = $m->identifica2($opcao,$xy,$resolucao,$ext,$listaDeTemas);
+		$retorno = $m->identifica2($opcao,$xy,$resolucao,$ext,$listaDeTemas,$wkt);
 	break;
 /*
 Valor: IDENTIFICAUNICO

@@ -327,7 +327,7 @@ $dadosDaClasse - sim|nao Indica se serão obtidos os dados que descrevem a classe
 		error_reporting(0);
 		if(!$this->layer){return "erro";}
 		if($this->v < 6)
-		{$dadosDaClasse="nao";}		
+		{$dadosDaClasse="nao";}
 		$resultadoFinal = array();
 		if ((!isset($tipolista)) || ($tipolista=="")){$tipolista = "tudo";}
 		if (!isset($inicio)){$inicio = 0;}
@@ -843,8 +843,10 @@ $resolucao - Resolucao de busca.
 $ext - (opcional) Extensão geográfica que será aplicada ao mapa antes da operação de query (xmin ymin xmax ymax)
 
 $listaDeTemas - (opcional) Lista com os códigos dos temas que serão identificados - vale apenas se $opcao = lista
+
+$wkt - (opcional) {boolean} inclui ou não o valor do wkt da geometria
 */
-	function identifica2($opcao,$xy,$resolucao,$ext="",$listaDeTemas="")
+	function identifica2($opcao,$xy,$resolucao,$ext="",$listaDeTemas="",$wkt="nao")
 	{
 		if($listaDeTemas != "")
 		{
@@ -908,14 +910,14 @@ $listaDeTemas - (opcional) Lista com os códigos dos temas que serão identificado
 			}
 			foreach ($listatemas as $tema)
 			{
-				$resultados[$tema] = $this->identificaQBP2($tema,$xyarray[0],$xyarray[1],"",$resolucao,"","",false,$ext);
+				$resultados[$tema] = $this->identificaQBP2($tema,$xyarray[0],$xyarray[1],"",$resolucao,"","",false,$ext,$wkt);
 			}
 		}
 		//pesquisa todos os temas acrescentados no mapa
 		if ($opcao == "todos")
 		{
 			foreach ($listatemas as $tema)
-			{$resultados[$tema] = $this->identificaQBP2($tema,$xyarray[0],$xyarray[1],"",$resolucao,"","",false,$ext);}
+			{$resultados[$tema] = $this->identificaQBP2($tema,$xyarray[0],$xyarray[1],"",$resolucao,"","",false,$ext,$wkt);}
 		}
 		//pesquisa apenas os temas visiveis
 		if ($opcao == "ligados" || $opcao == "lista")
@@ -934,7 +936,7 @@ $listaDeTemas - (opcional) Lista com os códigos dos temas que serão identificado
 			foreach ($listatemas as $tema)
 			{
 				$l = $this->mapa->getlayerbyname($tema);
-				$resultados[$tema] = $this->identificaQBP2($tema,$xyarray[0],$xyarray[1],"",$resolucao,"","",false,$ext);
+				$resultados[$tema] = $this->identificaQBP2($tema,$xyarray[0],$xyarray[1],"",$resolucao,"","",false,$ext,$wkt);
 			}
 			//var_dump($resultados);
 		}
@@ -950,7 +952,7 @@ $listaDeTemas - (opcional) Lista com os códigos dos temas que serão identificado
 				{
 					if ($tl->status == MS_DEFAULT || $listaDeTemas != "")
 					{
-						$resultados[$tema] = array("tips"=>$itemtip,"dados"=>$this->identificaQBP2($tema,$xyarray[0],$xyarray[1],"",$resolucao,$itemtip,"",true,$ext));
+						$resultados[$tema] = array("tips"=>$itemtip,"dados"=>$this->identificaQBP2($tema,$xyarray[0],$xyarray[1],"",$resolucao,$itemtip,"",true,$ext,$wkt));
 						$ltemp[] = $tema;
 					}
 				}
@@ -1268,7 +1270,7 @@ $listaDeTemas - (opcional) Lista com os códigos dos temas que serão identificado
 
 	$etip  {booblean} - indica se a solicitação é para obtenção dos dados do tipo etiqueta
 	*/
-	function identificaQBP2($tema="",$x=0,$y=0,$map_file="",$resolucao=0,$item="",$tiporetorno="",$etip=false,$ext="")
+	function identificaQBP2($tema="",$x=0,$y=0,$map_file="",$resolucao=0,$item="",$tiporetorno="",$etip=false,$ext="",$wkt="nao")
 	{
 		if($map_file == "")
 		{
@@ -1300,6 +1302,7 @@ $listaDeTemas - (opcional) Lista com os códigos dos temas que serão identificado
 		//
 		if($layer->connectiontype == MS_WMS)
 		{
+			$wkt = "nao";
 			$layer->set("toleranceunits",MS_PIXELS);
 			$layer->set("tolerance",$resolucao);
 			$ptimg = xy2imagem($map_file,array($x,$y));
@@ -1434,6 +1437,7 @@ $listaDeTemas - (opcional) Lista com os códigos dos temas que serão identificado
 		}
 		if(($layer->connectiontype != MS_WMS) && ($layer->type == MS_LAYER_RASTER))
 		{
+			$wkt = "nao";
 			$layer->set("toleranceunits",MS_PIXELS);
 			$layer->set("tolerance",$resolucao);
 			$ident = @$layer->queryByPoint($pt, 0, 0); //0.01);	
@@ -1513,12 +1517,16 @@ $listaDeTemas - (opcional) Lista com os códigos dos temas que serão identificado
 							$etiqueta = "nao";
 							if(in_array($it,$tips))
 							{$etiqueta = "sim";}
+							if($wkt == "sim"){
+								$wkt = $shape->towkt();
+							}
 							$arraytemp = array(
 								"alias"=>$this->converte($itensdesc[$conta]),
 								"valor"=>$val,
 								"link"=>$link,
 								"img"=>$img,
-								"tip"=>$etiqueta
+								"tip"=>$etiqueta,
+								"wkt"=>$wkt
 							);
 							if($etip==false)
 							{$valori[] = $arraytemp;}
