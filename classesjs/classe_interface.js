@@ -1253,6 +1253,21 @@ i3GEO.Interface = {
 	*/
 	googlemaps:{
 		/*
+		Propriedade: MAPOPTIONS
+
+		Objeto contendo opções que serão utilizadas no construtor do mapa conforme a API do GoogleMaps
+		
+		Exemplo de uso
+		
+		i3GEO.Interface.googlemaps.MAPOPTIONS = {maxZoom:5};
+		
+		https://developers.google.com/maps/documentation/javascript/reference#MapOptions
+
+		Tipo:
+		{MapOptions}
+		*/
+		MAPOPTIONS: {scaleControl:true},
+		/*
 		Propriedade: OPACIDADE
 
 		Valor da opacidade das camadas i3geo do mapa
@@ -1384,7 +1399,7 @@ i3GEO.Interface = {
 				var sw,ne,
 				dobra = $i("i3GEOdobraPagina");
 				try{
-					i3GeoMap = new google.maps.Map($i(i3GEO.Interface.IDMAPA),{scaleControl:true});
+					i3GeoMap = new google.maps.Map($i(i3GEO.Interface.IDMAPA),i3GEO.Interface.googlemaps.MAPOPTIONS);
 				}
 				catch(e){alert(e);return;}
 				if(dobra)
