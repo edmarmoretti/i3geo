@@ -1303,20 +1303,24 @@ i3GEO.util = {
 	*/
 	scriptTag: function(js,ini,id,aguarde){
 		if(typeof(console) !== 'undefined'){console.info("i3GEO.util.scriptTag()");}
-		if(!aguarde){aguarde = true;}
-		var head,script, tipojanela = "";
-		if(i3GEO.janela)
-		{tipojanela = i3GEO.janela.ESTILOAGUARDE;}
+		if(!aguarde){aguarde = false;}
+		var head,script, 
+			tipojanela = i3GEO.janela.ESTILOAGUARDE;
+
 		if(!$i(id) || id === ""){
-			head= document.getElementsByTagName('head')[0];
-			script= document.createElement('script');
+			if(i3GEO.janela && aguarde === true){
+				i3GEO.janela.ESTILOAGUARDE = "reduzida";
+				i3GEO.janela.abreAguarde(id+"aguarde","Carregando JS");
+			}
+			head = document.getElementsByTagName('head')[0];
+			script = document.createElement('script');
 			script.type= 'text/javascript';
 			if(ini !== ""){
 				if(navm){
 					script.onreadystatechange = function(){
 						if(this.readyState === 'loaded' || this.readyState === 'complete')
 						{
-							if(i3GEO.janela){
+							if(i3GEO.janela && aguarde === true){
 								i3GEO.janela.fechaAguarde(id+"aguarde");
 								i3GEO.janela.ESTILOAGUARDE = tipojanela;
 							}
