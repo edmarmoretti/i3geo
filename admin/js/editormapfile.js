@@ -165,7 +165,9 @@ function ativaBotaoAdicionaMapfile(idBotao)
 	var adiciona = function()
 	{
 		core_montaEditor("adicionaNovoMapfile()","450px","660px");
-		ins = "<p><b>Título do novo tema</b></p>";
+		ins = "<p><b>Nome do novo arquivo mapfile (sem .map) </b>não utilize caracteres acentuados ou espaços em branco</p>";
+		ins += "<input size=50 type=text id='Ecodigo' value='' /></p>";
+		ins += "<p><b>Título do novo tema</b></p>";
 		ins += "<p>Em português: </p>";
 		ins += "<input size=50 type=text id='Etitulo' value='' /></p>";
 		ins += "<p>Espanhol (opcional): </p>";
@@ -174,8 +176,6 @@ function ativaBotaoAdicionaMapfile(idBotao)
 		ins += "<input size=50 type=text id='EtituloEN' value='' /></p>";
 		ins += "<p>Italiano: (opcional)</p>";
 		ins += "<input size=50 type=text id='EtituloIT' value='' /></p>";
-		ins += "<p>Nome do arquivo mapfile (sem .map): </p>";
-		ins += "<input size=50 type=text id='Ecodigo' value='' /></p>";
 		$i("editor_bd").innerHTML = ins;
 	};
 	//cria o botão de adição de um novo menu

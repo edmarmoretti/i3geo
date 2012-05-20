@@ -12,8 +12,8 @@
 	</style>
 	<link rel="stylesheet" type="text/css" href="../html/admin.css">
 </head>
-<body class=" yui-skin-sam fundoPonto" style="margin:auto">
-
+<body class=" yui-skin-sam fundoPonto">
+<center>
 <div class="bordaSuperior"  >&nbsp;</div>
 <div class="mascaraPrincipal" id="divGeral" style="width:80%">
 	<div id=cabecalhoPrincipal ></div>
@@ -22,7 +22,8 @@
 	<a href="../html/editormapfile.html" target="_self" >Voltar</a><br><br>
 	<form action="editortexto.php?mapfile=<?php echo $_GET["mapfile"];?>" method=post > 
 	<input type=submit value="Salvar"/><input type=button value="Testar" onclick="testar()" /><input type=button value="Testar no i3Geo" onclick="abrirI3geo()" /> (Salve antes de testar)<br><br>
-	
+	<div id="comboMapfiles" >Aguarde...</div>
+	<br>
 	<?php
 	//evita erros removendo caracteres PHP
 	if(isset($_POST["texto"])){
@@ -34,9 +35,6 @@
 	if(verificaEditores($editores) == "nao")
 	{echo "Vc nao e um editor cadastrado. Apenas os editores definidos em i3geo/ms_configura.php podem acessar o sistema de administracao.";exit;}
 	$mapfile = $locaplic."/temas/".$_GET["mapfile"].".map";
-	
-
-	
 	if(!file_exists($mapfile))
 	{echo "Arquivo $mapfile não existe.";exit;}
 	if($_POST["tipo"] == "gravar"){
@@ -59,7 +57,27 @@
 	?>
 	</form>
 </div>
+<script type="text/javascript" src="../js/core.js"></script>
+<script src="../../classesjs/classe_util.js" type="text/javascript"></script>
 <script>
+function comboMapfiles(){
+	var n = $mapfiles.length,
+		i,ins;
+	ins = "<select onchange='mudaMapfile(this)'><option value=''>Edite outro mapfile</option>";
+	for(i=0;i<n;i++){
+		if($mapfiles[i].extensao === "map"){
+			ins += "<option value='"+$mapfiles[i].codigo+"'>"+$mapfiles[i].codigo+" - "+$mapfiles[i].nome+"</optiona>";
+		}
+	}
+	ins += "</select>";
+	$i("comboMapfiles").innerHTML = ins;
+};
+core_pegaMapfiles("comboMapfiles()","","");
+function mudaMapfile(obj){
+	if(obj.value != ""){
+		window.location.href = "editortexto.php?mapfile="+obj.value;
+	}
+}
 function testar(){
 	window.open("../../testamapfile.php?map=<?php echo $_GET["mapfile"]; ?>");
 }

@@ -94,7 +94,7 @@ function montaDivTemas(i)
 	ins += "<select  id='ogc_tema' >";
 	ins += core_combosimnao(i.ogc_tema);
 	ins += "</select></p>";
-	ins += "<p>Permite o download na aplicação datadownload.htm?<br>";
+	ins += "<p>Permite o download na aplicação datadownload.htm? (não afeta a permissão de download definida no item 'disponibilidade' existente em cada layer)<br>";
 	ins += "<select  id='download_tema' >";
 	ins += core_combosimnao(i.download_tema);
 	ins += "</select></p>";
