@@ -113,10 +113,12 @@ if(screen.availWidth > 700)
 {document.getElementById("divGeral").style.width = "700px";}
 var letras = "Todos A B C D E F G H I J K L M N O P Q R S T U V X Y Z _ 1 2 3 4 5 6 7 8 9".split(" "),
 	nletras = letras.length,
-	letraAtual = "Todos",
+	letraAtual = "",
 	i,
 	ins = "";
-	
+if(i3GEO.util.pegaCookie("I3GEOletraAdmin")){
+	letraAtual = i3GEO.util.pegaCookie("I3GEOletraAdmin");
+}	
 ins += "<p>Filtrar: " +
 	"<select id='selFiltro' onchange='filtraLetra(\""+letraAtual+"\")' >" +
 	"<option value='' >----</option>"+
@@ -139,10 +141,12 @@ for(i=0;i<nletras;i++){
 document.getElementById("letras").innerHTML = ins;
 
 function filtraLetra(letra){
+	
 	letraAtual = letra;
 	document.getElementById("tabela").innerHTML = "<span style=color:red >Aguarde...</span>";
 	if(letra == "Todos")
 	{letra = "";}
+	i3GEO.util.insereCookie("I3GEOletraAdmin",letra);
 	core_pegaMapfiles("montaArvore()",letra,document.getElementById("selFiltro").value);
 }
 cabecalhoGeral("cabecalhoPrincipal","editormapfile");

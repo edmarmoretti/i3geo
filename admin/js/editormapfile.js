@@ -140,13 +140,16 @@ Inicializa a árvore de edição
 */
 function initMenu()
 {
+	if(!letraAtual){
+		letraAtual = "";
+	}
 	ativaBotaoAdicionaMapfile("adiciona");
 	ativaBotaoVerificarOrfaos("semmapfiles");
 
 	core_carregando("ativa");
 	core_carregando("buscando temas...");
 	core_ativaPainelAjuda("ajuda","botaoAjuda");
-	core_pegaMapfiles("montaArvore()");
+	core_pegaMapfiles("montaArvore()",letraAtual);
 }
 function ativaBotaoVerificarOrfaos(idBotao)
 {
@@ -225,7 +228,12 @@ function montaArvore()
 			tree = new YAHOO.widget.TreeView("tabela");
 			tree.setDynamicLoad(loadNodeData, 0);
 			var root = tree.getRoot();
-			var tempNode = new YAHOO.widget.TextNode('', root, false);
+			if(letraAtual == ""){
+				var tempNode = new YAHOO.widget.TextNode('Todos', root, false);
+			}
+			else{
+				var tempNode = new YAHOO.widget.TextNode(letraAtual, root, false);
+			}
 			tempNode.isLeaf = true;
 			core_carregando("desativa");
         }
