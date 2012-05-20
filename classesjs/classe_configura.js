@@ -795,7 +795,7 @@ i3GEO.configura = {
 						eval(i3GEO.configura.funcaoIdentifica);
 					}
 					var temp = function(){
-						$i("i3GEOmarcaIdentifica").style.display = "none";
+						//$i("i3GEOmarcaIdentifica").style.display = "none";
 					},
 					i;
 					i3GEO.util.criaPin("i3GEOmarcaIdentifica",i3GEO.configura.locaplic+"/imagens/marcaidentify.png",48,48,temp);

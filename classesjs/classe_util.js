@@ -625,10 +625,10 @@ i3GEO.util = {
 			imagem = i3GEO.configura.locaplic+'/imagens/marker.png';
 		}
 		if(arguments.length < 3 || w === ""){
-			w = "21px";
+			w = 21;
 		}
 		if(arguments.length < 4 || h === ""){
-			h = "25px";
+			h = 25;
 		}
 		if (!$i(id))
 		{
@@ -636,8 +636,10 @@ i3GEO.util = {
 			novoel.id = id;
 			novoel.style.zIndex=10000;
 			novoel.style.position="absolute";
-			novoel.style.width=w;
-			novoel.style.height=h;
+			novoel.style.width=parseInt(w,10)+"px";
+			novoel.style.height=parseInt(h,10)+"px";
+			novoel.style.top="0px";
+			novoel.style.left="0px";
 			novoel.src = imagem;
 			if(id === "boxpin")
 			{novoel.onmouseover = function(){$i("boxpin").style.display="none";};}
@@ -1320,9 +1322,8 @@ i3GEO.util = {
 					script.onreadystatechange = function(){
 						if(this.readyState === 'loaded' || this.readyState === 'complete')
 						{
-							if(i3GEO.janela && aguarde === true){
+							if(i3GEO.janela){
 								i3GEO.janela.fechaAguarde(id+"aguarde");
-								i3GEO.janela.ESTILOAGUARDE = tipojanela;
 							}
 							eval(ini);
 						}
@@ -1332,11 +1333,11 @@ i3GEO.util = {
 					script.onload=function(){
 						if(i3GEO.janela){
 							i3GEO.janela.fechaAguarde(id+"aguarde");
-							i3GEO.janela.ESTILOAGUARDE = tipojanela;
 						}
 						eval(ini);
 					};
 				}
+				i3GEO.janela.ESTILOAGUARDE = tipojanela;
 			}
 			script.src= js;
 			if(id !== "")
