@@ -73,6 +73,9 @@ $versao = $versao["principal"];
 ms_ResetErrorList();
 if(!isset($tipo))
 {$tipo = "";}
+$arqs = listaArquivos("temas");
+sort($arqs["arquivos"]);
+
 if ($tipo == "")
 {
 	echo '<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">';
@@ -83,20 +86,26 @@ if ($tipo == "")
 	echo '</head><script>function roda(){window.location.href = "?map="+document.getElementById("nomemap").value;}</script>';
 	echo '<body class="fundoPonto"><center><div class="bordaSuperior"  >&nbsp;</div><div class="mascaraPrincipal" id="divGeral">';
 	echo '<form action="testamapfile.php" method="post" id=f >';
-	echo 'Nome do arquivo map existente no diretório i3geo/temas. Exemplo para uso manual da URL: testamapfile.php?map=biomashp (utilize "testamapfile.php?map=todos" na URL para testar todos de uma só vez):<br><br><input id=nomemap class=digitar type="file" size=20 ><input id=map type="hidden" value="" name="map"><input type="button" onclick="roda()" class=executar value="Testar" size=10 name="submit">';
-	echo '<br>Mostra apenas a legenda? <input type=radio name=solegenda value=sim />sim <input type=radio name=solegenda value=nao CHECKED /> não<br></form>';
+	echo 'Nome do arquivo map existente no diretório i3geo/temas. Exemplo para uso manual da URL: testamapfile.php?map=biomashp (utilize "testamapfile.php?map=todos" na URL para testar todos de uma só vez)<br><br>';
+	echo '<br>Mostra apenas a legenda? <input type=radio name=solegenda value=sim />sim <input type=radio name=solegenda value=nao CHECKED /> não<br>';
+	$combo = "<br><select onchange='roda()' id=nomemap ><option value=''>Escolha o arquivo para testar</option>";
+	foreach ($arqs["arquivos"] as $arq){
+		$temp = explode(".",$arq);
+		if($temp[1] == "map"){
+			$combo .= "<option value='".$temp[0]."'>".$temp[0]."</option>";
+		}
+	}
+	echo $combo."</select></form><br>";
 }
 if (isset($map) && $map != "")
 {
 	if(!isset($solegenda)){$solegenda = "nao";}
 	if ($map == "todos")
 	{
-		$tipo = "todos";
-		$arqs = listaArquivos("temas");
+		$tipo = "todos";	
 		$conta = 0;
 		echo "<br>Número de mapas = ".(count($arqs["arquivos"]))." Faltam= ".(count($arqs["arquivos"])-$iniciar-10)."<br>";
 		if (!isset($iniciar)){$iniciar = 0;}
-		sort($arqs["arquivos"]);
 		foreach ($arqs["arquivos"] as $arq)
 		{
 			if (($conta >= $iniciar) && ($conta < $iniciar+10))
@@ -114,9 +123,9 @@ if (isset($map) && $map != "")
 	else
 	{verifica($map,$solegenda);}	
 }
-	echo '</div>';
-	echo '<script>if(screen.availWidth > 700){document.getElementById("divGeral").style.width = "700px";}</script>';
-	echo '</body></html>';
+echo '</div>';
+echo '<script>if(screen.availWidth > 700){document.getElementById("divGeral").style.width = "700px";}</script>';
+echo '</body></html>';
 function verifica($map,$solegenda)
 {
 	global $tipo,$locaplic,$postgis_mapa,$versao,$base;
@@ -180,6 +189,26 @@ function verifica($map,$solegenda)
 			{$base = $locaplic."/aplicmap/".$base;}
 		}
 		$mapa = ms_newMapObj($base);
+		error_reporting(0);
+		$temasn = $mapa->getAllLayerNames();
+		foreach ($temasn as $teman)
+		{
+			$layern = $mapa->getLayerByName($teman);
+			if (!empty($postgis_mapa))
+			{
+				if ($layern->connectiontype == MS_POSTGIS)
+				{
+					$lcon = $layern->connection;
+					if (($lcon == " ") || ($lcon == "") || (in_array($lcon,array_keys($postgis_mapa))))
+					{
+						if(($lcon == " ") || ($lcon == "")) //para efeitos de compatibilidade
+						{$layern->set("connection",$postgis_mapa);}
+						else
+						{$layern->set("connection",$postgis_mapa[$lcon]);}					
+					}
+				}
+			}
+		}
 		if(!stristr($tema, '.php') === FALSE){
 			echo "<br>Arquivo <i>$tema</i> é um programa PHP. O teste pode não funcionar.<br>";
 			include_once($locaplic."/".$tema);
@@ -226,18 +255,14 @@ function verifica($map,$solegenda)
 						if (($lcon == " ") || ($lcon == "") || (in_array($lcon,array_keys($postgis_mapa))))
 						{
 							if(($lcon == " ") || ($lcon == "")) //para efeitos de compatibilidade
-							{
-								$layern->set("connection",$postgis_mapa);
-							}
+							{$layern->set("connection",$postgis_mapa);}
 							else
-							{
-								$layern->set("connection",$postgis_mapa[$lcon]);
-							}					
+							{$layern->set("connection",$postgis_mapa[$lcon]);}					
 						}
 					}
 				}
-				error_reporting(E_ALL);
 				autoClasses($layern,$nmapa);
+				error_reporting(E_ALL);
 				if($layern->classitem != "" && $layern->connectiontype == 7 && $layern->numclasses > 0 && $layern->getmetadata("wms_sld_body") == ""){
 					$tipotemp = $layern->type;
 					$tiporep = $layern->getmetadata("tipooriginal");
