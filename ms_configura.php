@@ -38,7 +38,7 @@ Você deve ter recebido uma cópia da Licença Pública Geral do
 GNU junto com este programa; se não, escreva para a
 Free Software Foundation, Inc., no endereço
 59 Temple Street, Suite 330, Boston, MA 02111-1307 USA.
-
+i3geo/testamapfile.php
 Arquivo: ms_configura.php
 
 */
@@ -53,7 +53,7 @@ Arquivo: ms_configura.php
 
 	Caso vc não queira permitir essa opção, deixe essa variável vazia, e.x
 		
-	Ao registrar utilize o valor http://meuservidor/i3geo/pacotes/openid/login.php?login
+	Ao registrai3geo/testamapfile.phpr utilize o valor http://meuservidor/i3geo/pacotes/openid/login.php?login
 
 	Exemplo:
 	
@@ -132,6 +132,20 @@ $twitteroauth = array(
 	"accesstokenurl" => "https://twitter.com/oauth/access_token",
 	"authorizeurl" => "https://twitter.com/oauth/authorize"
 );	
+/*
+	Variavel: mensagemInicia
+	
+	Mensagem de inicialização mostrada pelo programa ms_criamapa.php
+	
+	É obtida de um include para permitir a atualização da versão nos pacotes de correção
+	
+	Tipo:
+	{string}
+*/
+if(file_exists("versao.php"))
+{include_once("versao.php");}
+else
+{$mensagemInicia = "";}
 /*
 	Variable: tituloInstituicao
 	
@@ -227,7 +241,7 @@ if (strtoupper(substr(PHP_OS, 0, 3) == 'WIN'))
 	Tipo:
 	{string}
 	*/
-	$locaplic = "c:/ms4w/apache/htdocs/i3geo";
+	$locaplic = __DIR__;//"c:/ms4w/apache/htdocs/i3geo";
 	/*
 	Variable: locmapserv
 	
@@ -407,20 +421,14 @@ if (strtoupper(substr(PHP_OS, 0, 3) == 'WIN'))
 else //se for linux
 {
 	//verifica se está sendo utilizado o diretório "opt" ou "var"
-	if(file_exists("/opt/www/html/i3geo/ms_criamapa.php")){
+	$locaplic = __DIR__;
+	if(dirname($locaplic) == "/opt/www/html"){
 		$dir_tmp = "/var/tmp/ms_tmp";
-		$locaplic = "/opt/www/html/i3geo";	
 	}
-	if(file_exists("/var/www/i3geo/ms_criamapa.php")){
+	if((dirname($locaplic) == "/var/www") || (dirname($locaplic) == "/var/www/html")){
 		$dir_tmp = "/tmp/ms_tmp";
-		$locaplic = "/var/www/i3geo";
-	}
-	if(file_exists("/var/www/html/i3geo/ms_criamapa.php")){
-		$dir_tmp = "/tmp/ms_tmp";
-		$locaplic = "/var/www/html/i3geo";
 	}
 	$editores = array("127.0.0.1","localhost");
-	//$navegadoresLocais = "";
 	$navegadoresLocais = array(
 							array(
 								"ip"=>"127.0.0.1",
@@ -440,18 +448,4 @@ else //se for linux
 	$base = "";
 	$cachedir = "";
 }
-/*
- Variavel: mensagemInicia
-
-Mensagem de inicialização mostrada pelo programa ms_criamapa.php
-
-É obtida de um include para permitir a atualização da versão nos pacotes de correção
-
-Tipo:
-{string}
-*/
-if(file_exists($locaplic."/versao.php"))
-{include_once($locaplic."/versao.php");}
-else
-{$mensagemInicia = "";}
 ?>
