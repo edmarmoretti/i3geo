@@ -227,7 +227,7 @@ i3GEO.Interface = {
 				{i3GEO.Interface.atual2gm.initemp();}
 			}
 			catch(e){
-				i3GEO.util.scriptTag("http://www.google.com/jsapi?callback=i3GEO.Interface.atual2gm.loadMaps","","",true);
+				i3GEO.util.scriptTag("http://www.google.com/jsapi?callback=i3GEO.Interface.atual2gm.loadMaps","","",false);
 			}
 		},
 		loadMaps: function(){
@@ -263,7 +263,7 @@ i3GEO.Interface = {
 				{i3GEO.Interface.atual2ol.initemp();}
 			}
 			catch(e){
-				i3GEO.util.scriptTag(i3GEO.configura.locaplic+"/pacotes/openlayers/OpenLayers211.js.php","i3GEO.Interface.atual2ol.initemp()","",true);
+				i3GEO.util.scriptTag(i3GEO.configura.locaplic+"/pacotes/openlayers/OpenLayers211.js.php","i3GEO.Interface.atual2ol.initemp()","",false);
 			}
 		},
 		initemp: function(){

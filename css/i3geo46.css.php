@@ -193,6 +193,17 @@ z-index: 3000;
 background: url(../pacotes/yui270/build/container/img/corner_resize.gif) left bottom no-repeat;
 cursor: se-resize;
 }
+#googlemapsdiv {
+-moz-user-select: -moz-none;
+-khtml-user-select: none;
+-webkit-user-select: none;
+/*
+Introduced in IE 10.
+See http://ie.microsoft.com/testdrive/HTML5/msUserSelect/
+*/
+-ms-user-select: none;
+user-select: none;
+}
 /*hack opera */
 @media all and (-webkit-min-device-pixel-ratio:10000), not all and (-webkit-min-device-pixel-ratio:0)
 { .inputsb {border:1px solid black} }
