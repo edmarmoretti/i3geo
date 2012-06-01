@@ -308,7 +308,7 @@ i3GEOF.legenda = {
 		'	</ul>'+
 		'</div><br>'+
 		'<div id=i3GEOlegendaguia6obj style="width:99%;text-align:left;">'+
-		'	<p class=paragrafo >&nbsp;<input type=checkbox onclick="" checked id=i3GEOFlegendamostra style="cursor:pointer;border:0px solid white;" /> <span style="cursor:pointer;position:relative;top:2px;">Mostra as classes desse tema na legenda do mapa</span></p>' +
+		'	<p class=paragrafo >&nbsp;<input type=checkbox onclick="" checked id=i3GEOFlegendamostra style="cursor:pointer;border:0px solid white;" /> <span style="cursor:pointer;position:relative;top:-2px;">Mostra as classes desse tema na legenda do mapa</span></p>' +
 		'	<p class=paragrafo ><input id=i3GEOlegendabotao3 type="button" value="Inclui número de ocorrências" title="incluir o número de ocorrências no nome de cada classe"></p>' +
 		'	<p class=paragrafo ><input id=i3GEOlegendabotao15 type="button" value="Aplica opacidade variável" title="aplicar opacidade nas classes existente, variando de 10 até 100"></p>' +
 		'	<p class=paragrafo ><input id=i3GEOlegendabotaoRamp type="button" size=15 value="Escolher paleta de cores" title="escolher e aplicar as variações de cores, entre dois extremos, nas classes existentes"></p>' +
@@ -341,7 +341,7 @@ i3GEOF.legenda = {
 		'	</div>'+
 		'</div>'+
 		'<div id=i3GEOlegendaguia2obj style="width:99%;text-align:left;">'+
-		'	<p class=paragrafo style="color:red;" >Aten&ccedil;&atilde;o: para a montagem das classes s&atilde;o considerados apenas os elementos vis&iacute;veis na extens&atilde;o atual do mapa</p>'+
+		'	<p class=paragrafo >&nbsp;<input type=checkbox onclick="" checked id=i3GEOFlegendaaplicaextent style="cursor:pointer;border:0px solid white;" /> <span style="cursor:pointer;position:relative;top:-2px;">marque para considerar apenas os elementos visíveis na extensão geográfica atual, caso contrário, será considerada a extensão geográfica inicial do mapa</span></p>' +
 		'	<p class=paragrafo >Ao gerar as classes, ignorar os valores (separe com vírgula):<br>'+
 		$inputText("","","i3GEOlegendaignorar","",20,"") +
 		'	<hr><p class=paragrafo >Transforma a representação geométrica dos elementos do tema. Após alterar esse parâmetro, pode ser necessário modificar as características do símbolo.</p>'+
@@ -990,12 +990,18 @@ i3GEOF.legenda = {
 			if(i3GEOF.legenda.aguarde.visibility === "visible")
 			{return;}
 			var item = $i("i3GEOlegendaSelItem").value,
-				p = i3GEO.configura.locaplic+"/classesphp/mapa_controle.php?g_sid="+i3GEO.configura.sid+"&funcao=alteraclasse&tema="+i3GEOF.legenda.tema+"&item="+item+"&opcao=valorunico&ignorar="+$i("i3GEOlegendaignorar").value+"&ext="+i3GEO.parametros.mapexten,
+				p = i3GEO.configura.locaplic+"/classesphp/mapa_controle.php?g_sid="+i3GEO.configura.sid+"&funcao=alteraclasse&tema="+i3GEOF.legenda.tema+"&item="+item+"&opcao=valorunico&ignorar="+$i("i3GEOlegendaignorar").value,
 				cp = new cpaint(),
 				fim = function(){
 					i3GEOF.legenda.aposAlterarLegenda();
 					i3GEOF.legenda.aguarde.visibility = "hidden";
 				};	
+			if($i("i3GEOFlegendaaplicaextent").checked === true){
+				p += "&ext="+i3GEO.parametros.mapexten;
+			}
+			else{
+				p += "&ext="+i3GEO.parametros.extentTotal;
+			}
 			if (item == "")
 			{alert("Selecione um item!");return;}
 			i3GEOF.legenda.aguarde.visibility = "visible";
