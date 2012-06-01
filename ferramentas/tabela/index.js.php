@@ -421,6 +421,7 @@ i3GEOF.tabela = {
 			inicio = $i("i3GEOtabelainicio").value - 1,
 			fim = $i("i3GEOtabelafim").value,
 			p,
+			dadosDaClasse = "nao",
 			cp = new cpaint();
 		if ($i("i3GEOtabelatiporeg").checked)
 		{tiporeg = "mapa";}
@@ -454,7 +455,7 @@ i3GEOF.tabela = {
 			ins += "<tr><td></td><td></td><td></td><td></td>";
 			n = retorno.data[0].itens.length;
 			for (i=0;i<n;i++)
-			{ins += "<td style='background-color:yellow' ><img style=cursor:pointer onclick='i3GEOF.tabela.excluiColuna(this,"+(i * 1 + 3)+")' src='"+i3GEO.configura.locaplic+"/imagens/x.gif' title='excluir' />&nbsp;<img style=cursor:pointer onclick='i3GEOF.tabela.ordenaColuna(this,"+(i * 1 + 3)+")' src='"+i3GEO.configura.locaplic+"/imagens/ordena1.gif' title='ordena' /><br> "+retorno.data[0].itens[i]+"</td>";}
+			{ins += "<td style='background-color:yellow' ><img style=cursor:pointer onclick='i3GEOF.tabela.excluiColuna(this,"+(i * 1 + 3)+")' src='"+i3GEO.configura.locaplic+"/imagens/x.gif' title='excluir' />&nbsp;<img style=cursor:pointer onclick='i3GEOF.tabela.ordenaColuna(this,"+(i * 1 + 3)+")' src='"+i3GEO.configura.locaplic+"/imagens/ordena1.gif' title='ordena' /><br><span title='"+retorno.data[0].itens[i]+"'> "+retorno.data[0].alias[i]+"</span></td>";}
 			ins += "</tr>";
 			cor = "linha";
 			n = retorno.data[1].registros.length;
@@ -664,6 +665,8 @@ i3GEOF.tabela = {
 			p,
 			cp,
 			temp = function(retorno){
+				if(i3GEO.Interface.ATUAL === "padrao")
+				{i3GEO.atualiza(retorno);}
 				i3GEO.Interface.atualizaTema(retorno,i3GEOF.tabela.tema);
 				i3GEOF.tabela.aguarde.visibility = "hidden";
 			};
