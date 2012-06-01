@@ -344,7 +344,32 @@ $dadosDaClasse - sim|nao Indica se serão obtidos os dados que descrevem a classe
 		{$items = pegaItens($this->layer,$this->mapa);}
 		else
 		{$items[] = $itemtema;}
-		$resultadoFinal[] = array("itens"=>$items);
+		//pega os alias definidos no metadata itensdesc
+		if($this->layer->getmetadata("itensdesc") != ""){
+			$alias = array();
+			$aliasdesc = explode(",",$this->layer->getmetadata("itensdesc"));
+			$aliasitens = explode(",",$this->layer->getmetadata("itens"));			
+			$aliasc = array_combine($aliasitens,$aliasdesc);
+			if(strtoupper($this->layer->getmetadata("convcaracter")) == "NAO")
+			{$convC = false;}
+			else
+			{$convC = true;}			
+			foreach($items as $i){
+				if($aliasc[$i]){
+					if($convC)
+					{$alias[] = $this->converte($aliasc[$i]);}
+					else
+					{$alias[] = $aliasc[$i];}
+				}
+				else{
+					$alias[] = $i;
+				}
+			}
+		}
+		else{
+			$alias = $items;
+		}
+		$resultadoFinal[] = array("itens"=>$items,"alias"=>$alias);
 		$shapes = retornaShapesSelecionados($this->layer,$this->arquivo,$this->mapa);
 		$res_count = count($shapes);
 		$registros = array();
