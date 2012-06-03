@@ -1062,7 +1062,7 @@ Altera o valor do elemento DATA
 		{
 			$this->layer->set("data",$data);
 			$this->layer->setMetaData("cache","");
-			return $data;
+			return $this->layer->data;
 		}
 		else
 		return "O layer não permite a alteracao do elemento DATA";

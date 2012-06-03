@@ -1192,7 +1192,8 @@ Altera o valor definido no elemento DATA de um LAYER.
 		include_once("classe_temas.php");
 		$m = new Temas($map_file,$tema);
 		$retorno = $m->alteradata($novodata);
-		$m->salva();
+		if($retorno != "")
+		{$m->salva();}
 		$_SESSION["contadorsalva"]++;
 	break;
 /*

@@ -91,8 +91,11 @@ if (isset($_POST))
 					$p_ = array_slice($p_, 1, count($p_));
 					$valor_ = implode("=",$p_);
 					
-					if($parametro != "")
-					eval("\$".$parametro."='".(trim($valor_))."';");				
+					if($parametro != ""){
+						$valor_ = str_replace("'","*#*",$valor_);
+						eval("\$".$parametro."='".(trim($valor_))."';");
+						eval("\$".$parametro."=str_replace('*#*','\'',\$".$parametro.");");
+					}				
 				}
 			}				
 		}

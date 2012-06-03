@@ -171,7 +171,7 @@ i3GEOF.editorsql = {
 		i3GEOF.editorsql.aguarde.visibility = "visible";
 		var temp = function(){
 			i3GEOF.editorsql.aguarde.visibility = "hidden";
-			i3GEO.atualiza();
+			i3GEO.Interface.atualizaTema("",i3GEO.temaAtivo);
 		};
 		i3GEO.php.alteraData(temp,i3GEO.temaAtivo,$i("i3GEOeditorsqlSQL").value);
 	}
