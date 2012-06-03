@@ -456,9 +456,25 @@ g_traducao_ajuda = {
 			titulo: "Alterar interface",
 			diretorio:"i3geo/classesjs/classe_interface.js",
 			categoria:"6",
-			pt:"O i3Geo pode usar diferentes interfaces para manipular a navegação sobre o mapa. Por padrão, é utilizada uma interface própria, desenvolvida para o i3Geo, mas pode-se optar pelo uso do OpenLayers, Google Maps ou Google Earth.",
+			pt:"O i3Geo pode usar diferentes interfaces para manipular a navegação sobre o mapa. Por padrão, é utilizada uma interface própria, desenvolvida para o i3Geo, mas pode-se optar pelo uso do Flamingo, OpenLayers, Google Maps ou Google Earth.",
 			complemento:"As funcionalidade do i3Geo são afetadas pela interface escolhida, sendo que algumas operações diferem de uma para outra. A maior parte das funcionalidades são implementadas apenas na interface padrão. No caso do Google Earth , que permite a visualização do mapa em 3d, é necessário a instalação de um plugin específico.",
 			apijs:"i3GEO.configura.oMenuData"
+		},
+		"53": {
+			titulo: "Obter imagens geradas",
+			diretorio:"i3geo/classesjs/classe_gadgets.js",
+			categoria:"6",
+			pt:"As imagens geradas durante o uso do mapa são registradas na memória do i3Geo, dessa forma é possível obter todas essas imagens. Essa opção lista e mostra essas imagens, incluindo a extensão geográfica de cada uma e legenda.",
+			complemento:"Essa opção é útil para os casos em que se deseja capturar as imagens geradas para a geração de apresentações, impressão, etc.",
+			apijs:"i3GEO.gadgets.quadros.listaImagens()"
+		},
+		"54": {
+			titulo: "Animação",
+			diretorio:"i3geo/ferramentas/opcoes_animacao",
+			categoria:"6",
+			pt:"As imagens geradas durante o uso do mapa são registradas na memória do i3Geo, dessa forma é possível recuperar as imagens de forma sequencial criando um efeito de animação.",
+			complemento:"A opção de animação utiliza um número limitado de quadros, que são preenchidos de forma sequencial e cíclica. Utilize a opção número de quadros para aumentar esse número. Utilize a opção de tempo para definir o tempo de transição entre um quadro e outro (tempo em milisegundos). Para obter o resultado desejado, planeje sua animação antes. Para obter as imagens individualmente, utilize a opção 'Pegar imagens'.",
+			apijs:"i3GEO.gadgets.quadros.anima()"
 		},
 		"55": {
 			titulo: "Extensão geográfica",
@@ -942,7 +958,7 @@ g_traducao_ajuda_categorias = {
 	"4":{titulo:"Inclusão de camadas",observacao:"O i3Geo utiliza um conceito de camadas disponíveis no mapa e camadas adicionais. Camadas disponíveis são as que podem ser consultadas, visualizadas e modificadas, compondo uma lista separada das camadas adicionais. Normalmente as camadas disponíveis são um conjunto menor em relação ao total de temas que podem ser utilizados. Novos temas podem ser adicionados ao mapa por meio das opções existentes na lista de temas, normalmente posicionada na guia '+Temas'."},
 	"5":{titulo:"Operações sobre um tema",observacao:"Uma das características do i3Geo é a possibilidade de modificação das camadas vistas no mapa. As opções que permitem isso são mostradas normalmente na lista de camadas disponíveis no mapa atual. Essa lista é mostrada como uma árvore hierárquica sendo que cada camada é um dos nós. Expandindo-se esse nó, tem-se acesso às operações."},
 	"6":{titulo:"Operações sobre o mapa"},
-	"7":{titulo:"Navegação",observacao:"As funções de navegação permitem alterar a escala do mapa e modificar a abrangência espacial. Esse tipo de mudança, principalmente de escala, afeta o contexto do mapa, modificando seu comportamento. Algumas camadas podem ser sensíveis à escala, mostrando ou não determinados elementos. Quando uma camada possuir muitos elementos, é aconselhável seu desligamento até que a região desejada seja encontrada. Algumas interfaces possuem mecanismos distintos de navegação, como Google e openLayers. A lista abaixo contempla apenas a interface padrão."},
+	"7":{titulo:"Navegação",observacao:"As funções de navegação permitem alterar a escala do mapa e modificar a abrangência espacial. Esse tipo de mudança, principalmente de escala, afeta o contexto do mapa, modificando seu comportamento. Algumas camadas podem ser sensíveis à escala, mostrando ou não determinados elementos. Quando uma camada possuir muitos elementos, é aconselhável seu desligamento até que a região desejada seja encontrada. Algumas interfaces possuem mecanismos distintos de navegação, como Flamingo, Google e openLayers. A lista abaixo contempla apenas a interface padrão."},
 	"8":{titulo:"Pesquisa"}
 };
 //inserir os aplicativos adicionais

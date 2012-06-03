@@ -30,23 +30,6 @@ Free Software Foundation, Inc., no endereço
 59 Temple Street, Suite 330, Boston, MA 02111-1307 USA.
 */
 /*
-Classe: i3GEOF
-
-Esse objeto recebe os métodos sob demanda por meio de injeção de javascripts (script tag). É utilizado pelas ferramentas existentes em i3geo/ferramentas.
-
-Cada javascript inserido na página adiciona novos objetos, como por exemplo i3GEOF.buffer.
-*/
-i3GEOF = [];
-/*
-Objeto: YAHOO.i3GEO
-
-Namespace da biblioteca YUI que é reutilizável em vários trechos de código do i3Geo
-
-Type:
-{YAHOO.namespace}
-*/
-YAHOO.namespace("i3GEO");
-/*
 Classe: i3GEO
 
 A classe i3GEO possuí os métodos de criação e atualização do mapa. Todas as subclasses
@@ -96,7 +79,7 @@ i3GEO = {
 
 	geoip {sim|nao} - indica se o geoip está instalado
 
-	listavisual {String} - (depreciado) lista de visuais disponíveis
+	listavisual {String} - lista de visuais disponíveis
 
 	utilizacgi {sim|nao} - indica se o mapa atual está no modo CGI
 
@@ -150,7 +133,7 @@ i3GEO = {
 		extentTotal: "",
 		mapimagem: "",
 		geoip: "",
-		listavisual: "", //depreciado
+		listavisual: "",
 		utilizacgi:"",
 		versaoms:"",
 		versaomscompleta: "",
@@ -164,7 +147,7 @@ i3GEO = {
 		celularef:"",
 		kmlurl:"",
 		mensageminicia:"",
-		interfacePadrao:"openlayers.htm",
+		interfacePadrao:"geral.htm",
 		embedLegenda:"nao",
 		autenticadoopenid:"nao",
 		cordefundo: "",
@@ -188,7 +171,7 @@ i3GEO = {
 	/*
 	Propriedade: finaliza
 
-	Função que será executada após a criação e posicionamento do mapa. Pode ser uma string também, que será avaliada com "eval". 
+	Função que será executada após a inicialização do mapa. Pode ser uma string também, que será avaliada com "eval". 
 
 	Tipo:
 	{string}
@@ -262,7 +245,7 @@ i3GEO = {
 		if(typeof(console) !== 'undefined'){console.info("i3GEO.cria()");}
 		if(i3GEO.configura.ajustaDocType === true)
 		{i3GEO.util.ajustaDocType();}
-		var temp,tamanho;
+		var temp,i,tamanho;
 		temp = window.location.href.split("?");
 		if (temp[1]){
 			i3GEO.configura.sid = temp[1];
@@ -291,6 +274,10 @@ i3GEO = {
 		//
 		tamanho = i3GEO.calculaTamanho();
 		i3GEO.Interface.cria(tamanho[0],tamanho[1]);
+		if(tamanho[0] < 550){
+			i = $i(i3GEO.gadgets.PARAMETROS.mostraQuadros.idhtml);
+			if(i){i.style.display = "none";}
+		}
 	},
 	/*
 	Function: inicia
@@ -315,7 +302,7 @@ i3GEO = {
 		{i3GEOmantemCompatibilidade();}
 		montaMapa = function(retorno){
 			try{
-				var temp,abreJM;
+				var tempo,titulo,temp,abreJM;
 				if(retorno === ""){
 					alert("Ocorreu um erro no mapa - montaMapa");
 					retorno = {data:{erro: "erro"}};
@@ -341,6 +328,12 @@ i3GEO = {
 						i3GEO.arvoreDeCamadas.CAMADAS = retorno.data.temas;
 						if(retorno.data.variaveis.navegacaoDir.toLowerCase() === "sim")
 						{i3GEO.arvoreDeTemas.OPCOESADICIONAIS.navegacaoDir = true;}
+						//
+						//na interface padrão é necessário executar a atualização pois a geração do mapa
+						//ainda não foi feita
+						//
+						if(i3GEO.Interface.ATUAL === "padrao")
+						{i3GEO.atualiza(retorno);}
 						//
 						//calcula (opcional) o tamanho correto da tabela onde fica o mapa
 						//se não for feito esse cálculo, o mapa fica ajustado à esquerda
@@ -395,10 +388,13 @@ i3GEO = {
 				i3GEO.configura.sid = retorno.data;
 				i3GEO.inicia(retorno);
 			};
-			i3GEO.configura.mashuppar += "&interface="+i3GEO.Interface.ATUAL;
+			if(i3GEO.Interface.ATUAL !== "padrao")
+			{i3GEO.configura.mashuppar += "&interface="+i3GEO.Interface.ATUAL;}
 			i3GEO.php.criamapa(mashup,i3GEO.configura.mashuppar);
 		}
 		else{
+			//YAHOO.log("Chamada AJAX para obter o mapa inicial", "i3geo");
+			//i3GEO.janela.abreAguarde("montaMapa",$trad("o5"));
 			if(i3GEO.parametros.w === "" || i3GEO.parametros.h === ""){
 				tamanho = i3GEO.calculaTamanho();
 				i3GEO.parametros.w = tamanho[0];
@@ -455,7 +451,7 @@ i3GEO = {
 	*/
 	atualiza: function(retorno){
 		if(typeof(console) !== 'undefined'){console.info("i3GEO.atualiza()");}
-		var corpoMapa,erro,mapscale,temp;
+		var corpoMapa,erro,tempo,mapscale,mapexten,temp;
 		if(i3GEO.contadorAtualiza > 1)
 		{i3GEO.contadorAtualiza--;return;}
 		if(i3GEO.contadorAtualiza > 0)
@@ -467,6 +463,7 @@ i3GEO = {
 		corpoMapa = function(){
 			if($i("ajaxCorpoMapa"))
 			{return;}
+			i3GEO.janela.abreAguarde("ajaxCorpoMapa",$trad("o1")+" atualizando...");
 			i3GEO.php.corpo(i3GEO.atualiza,i3GEO.configura.tipoimagem);
 		};
 		//
@@ -508,7 +505,9 @@ i3GEO = {
 			if(typeof(console) !== 'undefined'){console.error(e);}
 		}
 		erro = function(){
-			var c = confirm("Ocorreu um erro, quer tentar novamente?");
+			var legimagem,c;
+			legimagem = "";
+			c = confirm("Ocorreu um erro, quer tentar novamente?");
 			if(c){
 				corpoMapa.call();
 			}
@@ -558,6 +557,10 @@ i3GEO = {
 			{$i("mensagemt").value = i3GEO.parametros.mapexten;}
 
 			i3GEO.eventos.navegaMapa();
+			if (i3GEO.configura.entorno.toLowerCase() === "sim"){
+				i3GEO.navega.entorno.geraURL();
+				i3GEO.navega.entorno.ajustaPosicao();
+			}
 			i3GEO.ajuda.mostraJanela("Tempo de redesenho em segundos: "+retorno.data.variaveis.tempo,"");
 			//
 			//verifica se deve ser feito o zoom em algum tema
@@ -637,8 +640,9 @@ i3GEO = {
 	{array} - [w,h]
 	*/
 	reCalculaTamanho: function(){
-		var diminuix,diminuiy,menos,novow,novoh,w,h,temp,
-			antigoh = i3GEO.parametros.h;
+		var diminuix,diminuiy,menos,novow,novoh,w,h,temp,temp1,
+			antigoh = i3GEO.parametros.h,
+			antigow = i3GEO.parametros.w;
 		diminuix = (navm) ? i3GEO.configura.diminuixM : i3GEO.configura.diminuixN;
 		diminuiy = (navm) ? i3GEO.configura.diminuiyM : i3GEO.configura.diminuiyN;
 		menos = 0;
@@ -653,6 +657,7 @@ i3GEO = {
 		novow = temp[0];
 		novoh = temp[1];
 		temp = (antigoh - (novoh - diminuiy));
+		temp1 = (antigow - (novow - diminuix));
 	
 		document.body.style.height = novoh + "px";
 		w = novow - menos - diminuix;
@@ -720,3 +725,10 @@ i3GEO = {
 		i3GEO.parametros.mapurl = variaveis.mapurl;
 	}
 };
+/*
+Classe: i3GEOF
+
+Esta classe recebe os métodos sob demanda por meio da injeção de javascripts por meio de script tag.
+*/
+i3GEOF = [];
+//YAHOO.log("carregou classe i3geo", "Classes i3geo");

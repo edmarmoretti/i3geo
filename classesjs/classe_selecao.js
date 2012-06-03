@@ -12,12 +12,14 @@ i3GEO.selecao = {
 		if(typeof(console) !== 'undefined'){console.info("i3GEO.selecao.porxy()");}
 		var retorna = function(retorno)
 		{i3GEO.atualiza(retorno);};
+		i3GEO.janela.abreAguarde("i3GEO.atualiza",$trad("o1"));
 		i3GEO.php.selecaopt(retorna,tema,objposicaocursor.ddx+" "+objposicaocursor.ddy,tipo,tolerancia);
 	},
 	porbox: function(tema,tipo,box){
 		if(typeof(console) !== 'undefined'){console.info("i3GEO.navega.selecao.porbox()");}
 		var retorna = function(retorno)
 		{i3GEO.atualiza(retorno);};
+		i3GEO.janela.abreAguarde("i3GEO.atualiza",$trad("o1"));
 		i3GEO.php.selecaobox(retorna,tema,tipo,box);
 	},
 	janelaOpcoes: function(){
@@ -196,9 +198,7 @@ i3GEO.selecao = {
 		termina: function(){
 			if(g_tipoacao !== 'selecaobox')
 			{return;}
-			var valor,v,x1,y1,x2,y2,
-				limpa = function(){},
-				doc,tipo;
+			var valor,v,x1,y1,x2,y2,limpa,doc,tipo;
 			try{
 				valor = i3GEO.calculo.rect2ext("i3geoboxSel",i3GEO.parametros.mapexten,i3GEO.parametros.pixelsize);
 				v = valor[0];
@@ -231,7 +231,8 @@ i3GEO.selecao = {
 				{i3GEO.selecao.porbox(i3GEO.temaAtivo,tipo,v);}
 			}
 			catch(e){
-				if(typeof(console) !== 'undefined'){console.error(e);}
+				if(typeof(console) !== 'undefined')
+				{console.error(e);}
 				limpa.call();
 				return;
 			}
@@ -316,10 +317,11 @@ i3GEO.selecao = {
 		Termina o desenho do polígono e executa a operação de seleção
 		*/
 		termina: function(){
-			var doc,pontos,xs,ys,retorna,p,cp;
+			var doc,pontos,n,xs,ys,retorna,p,cp;
 			doc = (navm) ? document.frames("wdocai").document : $i("wdocai").contentDocument;
 			pontos = pontosdistobj;
 			i3GEO.desenho.richdraw.fecha();
+			n = pontos.xpt.length;
 			i3GEO.mapa.ativaTema(doc.getElementById("comboTemas").value);
 			xs = pontos.xpt.toString(",");
 			ys = pontos.ypt.toString(",");
@@ -327,6 +329,7 @@ i3GEO.selecao = {
 				i3GEO.janela.fechaAguarde("i3GEO.atualiza",$trad("o1"));
 				i3GEO.atualiza("");
 			};
+			i3GEO.janela.abreAguarde("i3GEO.atualiza",$trad("o1"));
 			p = i3GEO.configura.locaplic+"/classesphp/mapa_controle.php?g_sid="+i3GEO.configura.sid+"&funcao=selecaoPoli";
 			cp = new cpaint();
 			//cp.set_debug(2)

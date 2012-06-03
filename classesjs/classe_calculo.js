@@ -109,7 +109,7 @@ i3GEO.calculo = {
 	*/
 	dd2tela: function (vx,vy,docmapa,ext,cellsize){
 		try{
-			var pos,xyn,dc,imgext,c,xy;
+			var pos,latlng,xyn,dc,imgext,c,xy;
 			if(i3GEO.Interface.ATUAL === "googlemaps" && docmapa.id !== "mapaReferencia"){
 				pos = i3GEO.util.pegaPosicaoObjeto($i(i3GEO.Interface.IDCORPO));
 				xyn = i3GeoMapOverlay.getProjection().fromLatLngToContainerPixel(new google.maps.LatLng(vy,vx));
@@ -156,10 +156,7 @@ i3GEO.calculo = {
 	{Array} - Array com o valor de x [0] e y [1] no formato dd mm ss
 	*/
 	dd2dms: function(x,y){
-		var restod = 0,
-			sx = "00.00",
-			sy = "00.00",
-			mx,mm,restos,my,s,dx,dy;
+		var restod,mx,sx,mm,restos,my,sy,s,dx,dy;
 		dx = parseInt(x,10);
 		if (dx > 0)
 		{restod = x - dx;}
@@ -403,12 +400,12 @@ i3GEO.calculo = {
 			iterLimit = 20,
 			sinLambda,
 			cosLambda,
-			sinSigma = 0,
-			cosSigma = 0,
-			sigma = 0,
+			sinSigma,
+			cosSigma,
+			sigma,
 			alpha,
-			cosSqAlpha = 0,
-			cos2SigmaM = 0,
+			cosSqAlpha,
+			cos2SigmaM,
 			C,
 			uSq,
 			A,
@@ -543,7 +540,7 @@ i3GEO.calculo = {
 	*/
 	rect2ext: function(idrect,mapext,pixel){
 		if(typeof(console) !== 'undefined'){console.info("i3GEO.calculo.rect2ext()");}
-		var bx,bxs,xfig,yfig,nx,ny,pos,amext,dy,x1,y1,x2,y2,
+		var bx,bxs,xfig,yfig,nx,ny,pix,piy,pos,amext,dx,dy,x1,y1,x2,y2,
 			pix = parseInt(document.getElementById(idrect).style.left,10),
 			piy = parseInt(document.getElementById(idrect).style.top,10);
 		if($i(idrect)){
@@ -556,6 +553,7 @@ i3GEO.calculo = {
 		xfig = pix + (parseInt(bxs.width,10)) - pos[0];
 		yfig = piy + (parseInt(bxs.height,10)) - pos[1];
 		amext = mapext.split(" ");
+		dx = ((amext[0] * -1) - (amext[2] * -1)) / -1;
 		dy = ((amext[1] * 1) - (amext[3] * 1)) / -1;
 		if (dy < 0)
 		{dy=dy * -1;}
@@ -596,8 +594,9 @@ i3GEO.calculo = {
 	*/
 	ext2rect: function(idrect,mapext,boxext,pixel,documento){
 		if(typeof(console) !== 'undefined'){console.info("i3GEO.calculo.ext2rect()");}
-		var rectbox,xyMin,xyMax,w,h,tl,pos,t,l,d,box;
+		var rectbox,rectmap,xyMin,xyMax,w,h,tl,pos,t,l,d,box;
 		rectbox = boxext.split(" ");
+		rectmap = mapext.split(" ");
 		xyMin = i3GEO.calculo.dd2tela(rectbox[0],rectbox[1],documento,boxext,pixel);
 		xyMax = i3GEO.calculo.dd2tela(rectbox[2],rectbox[3],documento,boxext,pixel);
 		w = xyMax[0]-xyMin[0];

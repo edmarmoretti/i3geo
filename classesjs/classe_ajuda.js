@@ -289,7 +289,8 @@ i3GEO.ajuda = {
 			k = $i("janelaMenTexto"),
 			jm = $i("i3geo_janelaMensagens"),
 			Dom = YAHOO.util.Dom,
-			h = parseInt(Dom.getStyle(jm,"height"),10);
+			h = parseInt(Dom.getStyle(jm,"height"),10),
+			temp;
 		if(j){
 			j.innerHTML = texto === "" ? "-" : texto;
 		}
@@ -299,7 +300,7 @@ i3GEO.ajuda = {
 			if(k)
 			{k.innerHTML = texto;}
 			if(this.TRANSICAOSUAVE){
-				texto !== "" ? Dom.setStyle(jm,"opacity","1") : Dom.setStyle(jm,"opacity",(this.OPACIDADE / 100));
+				temp = texto !== "" ? Dom.setStyle(jm,"opacity","1") : Dom.setStyle(jm,"opacity",(this.OPACIDADE / 100));
 			}
 			h = parseInt(Dom.getStyle(jm,"height"),10);
 			if(h)
@@ -316,7 +317,7 @@ i3GEO.ajuda = {
 	*/
 	mostraLetreiro: function(){
 		if(typeof(console) !== 'undefined'){console.info("i3GEO.ajuda.mostraLetreiro()");}
-		for (var count=0; count<BPos; count += 1)
+		for (count=0; count<BPos; count += 1)
 		{BSpaces+= " ";}
 		if (BPos < 1){
 			$i(i3GEO.ajuda.DIVLETREIRO).value = BMessage.substring(Math.abs(BPos), BMessage.length);
@@ -339,3 +340,22 @@ i3GEO.ajuda = {
 		i3GEO.janela.cria("400px","400px",i3GEO.configura.locaplic+"/ferramentas/redessociais/index.php","","",$trad("u5c"),YAHOO.util.Dom.generateId(null,"redes"));
 	}
 };
+//
+//para efeitos de compatibilidade
+//
+/*
+try{
+	if(i3GEO.ajuda.MENSAGEMPADRAO === ""){
+		try {
+			if (g_mensagempadrao !== "")
+			{i3GEO.ajuda.MENSAGEMPADRAO = g_mensagempadrao;}
+			else
+			{i3GEO.ajuda.MENSAGEMPADRAO = $trad("p1");}
+		}
+		catch(e){i3GEO.ajuda.MENSAGEMPADRAO = $trad("p1");}
+	}
+}
+catch(e){}
+if(document.getElementById("bannerMensagem"))
+{i3GEO.ajuda.DIVLETREIRO = "bannerMensagem";}
+*/

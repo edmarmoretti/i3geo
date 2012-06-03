@@ -244,7 +244,7 @@ i3GEO.eventos = {
 	eventos {array} - array com os nomes das funções
 	*/
 	executaEventos: function(eventos){
-		var f = 0;
+		var f,temp;
 		try{
 			if (eventos.length > 0){
 				f = eventos.length-1;
@@ -303,10 +303,7 @@ i3GEO.eventos = {
 		//Entretanto, nas ferramentas que usam o richdraw (distância e área) o posicionamento
 		//deve ser controlado pelo i3geo
 		//
-		var teladd,teladms,
-			container = "",
-			targ = "",
-			pos,mousex,mousey,xfig,yfig,xreffig,yreffig,xtela,ytela,c,ex,r;
+		var teladd,teladms,container,targ,pos,mousex,mousey,xfig,yfig,xreffig,yreffig,xtela,ytela,c,ex,r;
 		if (!e){e = window.event;}
 		try{
 			if (e.target)
@@ -314,8 +311,7 @@ i3GEO.eventos = {
 			else
 			if (e.srcElement)
 			{targ = e.srcElement;}
-			if(targ.parentNode)
-			{container = targ.parentNode.id;}
+			container = targ.parentNode.id;
 		}
 		catch(erro){
 			if(typeof(console) !== 'undefined'){console.error(erro);}
@@ -333,6 +329,7 @@ i3GEO.eventos = {
 		else if (e.srcElement) {targ = e.srcElement;}
 		if(targ.id === "" && $i(i3GEO.Interface.IDMAPA))
 		{targ = $i(i3GEO.Interface.IDMAPA);}
+		
 		//
 		//se estiver no modo pan, o movimento deve ser obtido do elemento
 		//onde está a imagem do mapa e não diretamente sobre o elemento 'img'
@@ -343,7 +340,7 @@ i3GEO.eventos = {
 			{pos = i3GEO.util.pegaPosicaoObjeto(targ.parentNode);}
 			else
 			{pos = i3GEO.util.pegaPosicaoObjeto(targ);}
-			if(g_panM === "sim"){
+			if((i3GEO.configura.entorno.toLowerCase() === "sim") && (g_panM === "sim")){
 				pos[0] = pos[0] - i3GEO.parametros.w;
 				pos[1] = pos[1] - i3GEO.parametros.h;
 			}
@@ -499,7 +496,7 @@ i3GEO.eventos = {
 	*/
 	cliqueCapturaPt: function(ixg,ixm,ixs,iyg,iym,iys){
 		if(typeof(console) !== 'undefined'){console.info("i3GEO.eventos.cliqueCapturaPt()");}
-		var x,y,doc = document;
+		var x,y,doc;
 		if(arguments.length === 0){
 			ixg = "ixg";
 			ixm = "ixm";
@@ -509,6 +506,9 @@ i3GEO.eventos = {
 			iys = "iys";
 			if($i("wdocai"))
 			{doc = (navm) ? document.frames("wdocai").document : $i("wdocai").contentDocument;}
+		}
+		else{
+			doc = document;
 		}
 		//
 		//algumas operações de análise podem precisar das coordenadas

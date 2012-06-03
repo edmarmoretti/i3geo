@@ -260,12 +260,13 @@ i3GEO.coordenadas = {
 				if(objposicaocursor.imgx < 10 || objposicaocursor.imgy < 10)
 				{return;}
 				if($i("wdoca")){return;}
+				var tempUtm,s,n,i,t;
 				//
 				//cancela se existir alguma ferramenta ativa
 				//
 				if(i3GEO.util.verificaScriptTag("i3GEOF") === true)
 				{return;}
-				var tempUtm = function(retorno){
+				tempUtm = function(retorno){
 					var funcao,temp,texto;
 					funcao = "$i(i3GEO.coordenadas.PARAMETROS.mostraCoordenadasUTM.idhtml).style.display='none';"+
 					"if(i3GEO.coordenadas.PARAMETROS.mostraCoordenadasGEO.idhtml == i3GEO.coordenadas.PARAMETROS.mostraCoordenadasUTM.idhtml)"+
@@ -302,6 +303,7 @@ i3GEO.coordenadas = {
 	mostraCoordenadasGEO: function(id){
 		if(typeof(console) !== 'undefined'){console.info("i3GEO.coordenadas.mostraCoordenadasGEO()");}
 		try{
+			var ins;
 			if(arguments.length === 0 || id === "" || typeof(id) === 'undefined')
 			{id = this.PARAMETROS.mostraCoordenadasGEO.idhtml;}
 			else
@@ -443,8 +445,7 @@ i3GEO.coordenadas = {
 
 	*/
 	atualizaProj4: function(onde,configProj,x,y){
-		var zona,temp,p,
-			destino = "",
+		var destino,zona,temp,p,
 			iu = i3GEO.util;
 		try{
 			if(!$i(onde+configProj+"ZN"))
@@ -516,7 +517,7 @@ i3GEO.coordenadas = {
 		//var url = Proj4js.getScriptLocation() + 'defs/' + this.srsAuth.toUpperCase() + this.srsProjNumber + '.js';
 		Proj4js.getScriptLocation = function(){
 			return i3GEO.configura.locaplic + "/pacotes/proj4js/lib/";
-		};
+		};		
 		var source = new Proj4js.Proj("ORIGEM"),
 			dest = new Proj4js.Proj("DESTINO"),
 			p = new Proj4js.Point(x,y);

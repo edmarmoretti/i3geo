@@ -64,9 +64,9 @@ for (var i = 0; i < scripts.length; i++) {
 	}
 }
 var allScriptTags = "";
-var jsfiles = [];
+var jsfiles = []
 //jsfiles[0] = "i3geo_tudo_compacto.js.php"
-jsfiles[0] = "../pacotes/openlayers/OpenLayers211.js.php";
+jsfiles[0] = "../pacotes/openlayers/OpenLayers211.js.php"
 for (var i = 0; i < jsfiles.length; i++)
 {
 	var currentScriptTag = "<script src='" + scriptLocation + jsfiles[i] + "'></script>";
@@ -154,47 +154,47 @@ function i3geo_gl_configura(loc_i3geo,nomeseltema,temasa,link,grupo,subgrupo,tem
 	this.seltema = function(idtema)
 	{
 		var novodiv = document.createElement("div");
-		novodiv.style.textAlign="left";
-		novodiv.id = idtema;
+		novodiv.style.textAlign="left"
+		novodiv.id = idtema
 		$i($i3geo_gl.temasa).appendChild(novodiv);
 		var novoel = document.createElement("img");
-		novoel.title = "excluir";
+		novoel.title = "excluir"
 		//novoel.onclick = excluir
-		eval("novoel.onclick = $i3geo_gl.excluir");
-		novoel.src = "imagens/x.png";
+		eval("novoel.onclick = $i3geo_gl.excluir")
+		novoel.src = "imagens/x.png"
 		novodiv.appendChild(novoel);
 		var novoel = document.createElement("img");
-		novoel.title = "subir";
-		novoel.src = "imagens/sobe.gif";
+		novoel.title = "subir"
+		novoel.src = "imagens/sobe.gif"
 		//novoel.onclick = subir
-		eval("novoel.onclick = $i3geo_gl.subir");
+		eval("novoel.onclick = $i3geo_gl.subir")
 		novodiv.appendChild(novoel);
 		var novoel = document.createElement("img");
-		novoel.title = "descer";
-		novoel.src = "imagens/desce.gif";
+		novoel.title = "descer"
+		novoel.src = "imagens/desce.gif"
 		//novoel.onclick = descer
-		eval("novoel.onclick = $i3geo_gl.descer;");
+		eval("novoel.onclick = $i3geo_gl.descer")
 		novodiv.appendChild(novoel);
 		var novoel = document.createElement("input");
-		eval("novoel.onclick = function(){$i3geo_gl.crialink()}");
-		novoel.title = "visível/não visível";
-		novoel.type = "checkbox";
-		novoel.style.cursor="pointer";
-		novoel.style.top="3px";
-		novoel.style.position="relative";
-		novoel.style.border="0px";
-		novoel.value=idtema;
+		eval("novoel.onclick = function(){$i3geo_gl.crialink()}")
+		novoel.title = "visível/não visível"
+		novoel.type = "checkbox"
+		novoel.style.cursor="pointer"
+		novoel.style.top="3px"
+		novoel.style.position="relative"
+		novoel.style.border="0px"
+		novoel.value=idtema
 		novodiv.appendChild(novoel);
 		var novoel = document.createElement("span");
 		novoel.style.cursor="pointer";
 		novoel.title="preview";
 		novoel.style.textDecoration = "underline";
-		novoel.innerHTML = idtema;
-		eval("novoel.onclick = $i3geo_gl.preview");
+		novoel.innerHTML = idtema
+		eval("novoel.onclick = $i3geo_gl.preview")
 		novodiv.appendChild(novoel);
 		novodiv.appendChild(document.createElement("br"));
-		this.crialink();
-	};
+		this.crialink()
+	}
 	/*
 	Function: crialink
 
@@ -206,7 +206,7 @@ function i3geo_gl_configura(loc_i3geo,nomeseltema,temasa,link,grupo,subgrupo,tem
 		var iguias = $i($i3geo_gl.temasa).getElementsByTagName("input");
 		var tsl = []; //temas ligados
 		var tsd = []; //temas
-		for (var i=0;i<iguias.length; i++)
+		for (i=0;i<iguias.length; i++)
 		{
 			if (iguias[i].type == "checkbox")
 			{
@@ -216,35 +216,35 @@ function i3geo_gl_configura(loc_i3geo,nomeseltema,temasa,link,grupo,subgrupo,tem
 			}
 		}
 		if(tsd.length > 0)
-		{ins += "&temasa="+tsd.join(" ");}
+		{ins += "&temasa="+tsd.join(" ")}
 		if(tsl.length > 0)
-		{ins += "&layers="+tsl.join(" ");}
+		{ins += "&layers="+tsl.join(" ")}
 		if($i("pontos").value != "")
 		{
-			ins += "&pontos="+$i("pontos").value;
-			ins += "&nometemapontos="+$i("nometemapontos").value;
+			ins += "&pontos="+$i("pontos").value
+			ins += "&nometemapontos="+$i("nometemapontos").value
 		}
-		if($i("perfili") && $i("perfili").value != "")
+		if($i("perfili").value != "")
 		{
-			ins += "&perfil="+$i("perfili").value;
+			ins += "&perfil="+$i("perfili").value
 		}
 		if($i("interface").value != "")
 		{
-			ins += "&interface="+$i("interface").value;
+			ins += "&interface="+$i("interface").value
 		}
 		if($i($i3geo_gl.buscageo))
 		{
 			if($i("i3geo_gl_xmin").value != "")
 			{
-				ins += "&mapext="+$i("i3geo_gl_xmin").value+" ";
-				ins += $i("i3geo_gl_ymin").value+" ";
-				ins += $i("i3geo_gl_xmax").value+" ";
-				ins += $i("i3geo_gl_ymax").value;
+				ins += "&mapext="+$i("i3geo_gl_xmin").value+" "
+				ins += $i("i3geo_gl_ymin").value+" "
+				ins += $i("i3geo_gl_xmax").value+" "
+				ins += $i("i3geo_gl_ymax").value
 			}
 		}
-		$i($i3geo_gl.link).href = ins;
-		$i($i3geo_gl.link).innerHTML = ins;
-	};
+		$i($i3geo_gl.link).href = ins
+		$i($i3geo_gl.link).innerHTML = ins
+	}
 	/*
 	Function: combogrupos
 
@@ -257,8 +257,8 @@ function i3geo_gl_configura(loc_i3geo,nomeseltema,temasa,link,grupo,subgrupo,tem
 	this.combogrupos = function(idMenu)
 	{
 		$i($i3geo_gl.grupo).innerHTML = "<span style=color:red >Aguarde...</span>";
-		i3GEO.arvoreDeTemas.comboGruposMenu($i3geo_gl.loc_i3geo,"$i3geo_gl.combosubgrupos",$i3geo_gl.grupo,"","530","1",idMenu);
-	};
+		i3GEO.arvoreDeTemas.comboGruposMenu($i3geo_gl.loc_i3geo,"$i3geo_gl.combosubgrupos",$i3geo_gl.grupo,"","530","1",idMenu)
+	}
 	/*
 	Function: combosubgrupos
 
@@ -275,8 +275,8 @@ function i3geo_gl_configura(loc_i3geo,nomeseltema,temasa,link,grupo,subgrupo,tem
 		//if(dados != undefined)
 		//{$i3geo_gl.combotemas(idGrupo,$i3geo_gl.subgrupo,dados.temasgrupo);}
 		$i($i3geo_gl.subgrupo).innerHTML = "<span style=color:red >Aguarde...</span>";
-		i3GEO.arvoreDeTemas.comboSubGruposMenu($i3geo_gl.loc_i3geo,"$i3geo_gl.combotemas",$i3geo_gl.subgrupo,"",idGrupo,"530","1");
-	};
+		i3GEO.arvoreDeTemas.comboSubGruposMenu($i3geo_gl.loc_i3geo,"$i3geo_gl.combotemas",$i3geo_gl.subgrupo,"",idGrupo,"530","1")
+	}
 	/*
 	Function: combotemas
 
@@ -295,8 +295,8 @@ function i3geo_gl_configura(loc_i3geo,nomeseltema,temasa,link,grupo,subgrupo,tem
 		if(temas == undefined)
 		{temas = "";}
 		$i($i3geo_gl.tema).innerHTML = "<span style=color:red >Aguarde...</span>";
-		i3GEO.arvoreDeTemas.comboTemasMenu($i3geo_gl.loc_i3geo,"$i3geo_gl.preseltema",$i3geo_gl.tema,"",idGrupo,idSubGrupo,"530","5","",temas);
-	};
+		i3GEO.arvoreDeTemas.comboTemasMenu($i3geo_gl.loc_i3geo,"$i3geo_gl.preseltema",$i3geo_gl.tema,"",idGrupo,idSubGrupo,"530","5","",temas)
+	}
 	/*
 	Function: preseltema
 
@@ -304,8 +304,8 @@ function i3geo_gl_configura(loc_i3geo,nomeseltema,temasa,link,grupo,subgrupo,tem
 	*/
 	this.preseltema = function(idgrupo,idsubgrupo,idtema)
 	{
-		$i3geo_gl.seltema(idtema);
-	};
+		$i3geo_gl.seltema(idtema)
+	}
 	/*
 	Function: preview
 
@@ -317,9 +317,9 @@ function i3geo_gl_configura(loc_i3geo,nomeseltema,temasa,link,grupo,subgrupo,tem
 	*/
 	this.preview = function(e)
 	{
-		var id = i3GEO.util.pegaElementoPai(e).id;
-		window.open("testamapfile.php?map="+id+".map&tipo=grande");
-	};
+		var id = i3GEO.util.pegaElementoPai(e).id
+		window.open("testamapfile.php?map="+id+".map&tipo=grande")
+	}
 	/*
 	Function: descer
 
@@ -331,12 +331,12 @@ function i3geo_gl_configura(loc_i3geo,nomeseltema,temasa,link,grupo,subgrupo,tem
 	*/
 	this.descer = function(e)
 	{
-		var pai = i3GEO.util.pegaElementoPai(e);
-		divpai = pai.parentNode;
+		var pai = i3GEO.util.pegaElementoPai(e)
+		divpai = pai.parentNode
 		if(pai.nextSibling)
-		divpai.insertBefore(pai,pai.nextSibling.nextSibling);
+		divpai.insertBefore(pai,pai.nextSibling.nextSibling)
 		$i3geo_gl.crialink();
-	};
+	}
 	/*
 	Function: subir
 
@@ -348,11 +348,11 @@ function i3geo_gl_configura(loc_i3geo,nomeseltema,temasa,link,grupo,subgrupo,tem
 	*/
 	this.subir = function(e)
 	{
-		var pai = i3GEO.util.pegaElementoPai(e);
-		divpai = pai.parentNode;
-		divpai.insertBefore(pai,pai.previousSibling);
-		$i3geo_gl.crialink();
-	};
+		var pai = i3GEO.util.pegaElementoPai(e)
+		divpai = pai.parentNode
+		divpai.insertBefore(pai,pai.previousSibling)
+		$i3geo_gl.crialink()
+	}
 	/*
 	Function: excluir
 
@@ -364,10 +364,10 @@ function i3geo_gl_configura(loc_i3geo,nomeseltema,temasa,link,grupo,subgrupo,tem
 	*/
 	this.excluir = function(e)
 	{
-		var pai = i3GEO.util.pegaElementoPai(e);
-		pai.parentNode.removeChild(pai);
-		$i3geo_gl.crialink();
-	};
+		var pai = i3GEO.util.pegaElementoPai(e)
+		pai.parentNode.removeChild(pai)
+		$i3geo_gl.crialink()
+	}
 	/*
 	Function: buscageo_init
 
@@ -375,31 +375,31 @@ function i3geo_gl_configura(loc_i3geo,nomeseltema,temasa,link,grupo,subgrupo,tem
 	*/
 	this.buscageo_init = function() 
 	{
-		var ins = "<div style=margin:10px;text-align:left; >";
-		ins += "<p class=paragrafo ><b>Utilize o mapa abaixo para definir as coordenadas geográficas do seu mapa, ou digite os valores desejados (opcional):</b></p>";
-		ins += "<div id=i3geo_gl_mapa1 style='width:250px;height:250px;border:1px solid blue;display:none'></div>";
-		ins += "<div style=position:absolute;top:40px;left:270px;text-align:left; >";
-		ins += "Coordenadas geográficas:<br><br>";
+		var ins = "<div style=margin:10px;text-align:left; >"
+		ins += "<p class=paragrafo ><b>Utilize o mapa abaixo para definir as coordenadas geográficas do seu mapa, ou digite os valores desejados (opcional):</b></p>"
+		ins += "<div id=i3geo_gl_mapa1 style='width:250px;height:250px;border:1px solid blue;display:none'></div>"
+		ins += "<div style=position:absolute;top:40px;left:270px;text-align:left; >"
+		ins += "Coordenadas geográficas:<br><br>"
 		ins += "<table style=text-align:left >";
-		ins += "<tr><td style=text-align:left >Longitude mínima:</td>";
-		ins += "<td><div style=padding:5px;width:80px; id=paiXmin >";
-		ins += "<input onchange='$i3geo_gl.crialink()' type=text size=10 value='' id=i3geo_gl_xmin />";
-		ins += "</div></td></tr>";
-		ins += "<tr><td style=text-align:left >Longitude máxima:</td>";
-		ins += "<td><div style=padding:5px;width:80px; id=paiXmax >";
-		ins += "<input onchange='$i3geo_gl.crialink()' type=text size=10 value='' id=i3geo_gl_xmax />";
-		ins += "</div></td></tr>";
-		ins += "<tr><td style=text-align:left >Latitude mínima:</td>";
-		ins += "<td><div style=padding:5px;width:80px; id=paiYmin >";
-		ins += "<input onchange='$i3geo_gl.crialink()' type=text size=10 value='' id=i3geo_gl_ymin />";
-		ins += "</div></td></tr>";
-		ins += "<tr><td style=text-align:left >Latitude máxima:</td>";
-		ins += "<td><div style=padding:5px;width:80px; id=paiYmax >";
-		ins += "<input onchange='$i3geo_gl.crialink()' type=text size=10 value='' id=i3geo_gl_ymax />";
-		ins += "</div></td></tr></table>";
-		ins += "<input style='position:relative;top:10px;left:-10px' class=aplicar size='20' type='button' value='capturar' onclick='$i3geo_gl.OL.capturageo()' />";
-		ins += "</div></div>";
-		document.getElementById(this.buscageo).innerHTML = ins;
+		ins += "<tr><td style=text-align:left >Longitude mínima:</td>"
+		ins += "<td><div style=padding:5px;width:80px; id=paiXmin >"
+		ins += "<input onchange='$i3geo_gl.crialink()' type=text size=10 value='' id=i3geo_gl_xmin />"
+		ins += "</div></td></tr>"
+		ins += "<tr><td style=text-align:left >Longitude máxima:</td>"
+		ins += "<td><div style=padding:5px;width:80px; id=paiXmax >"
+		ins += "<input onchange='$i3geo_gl.crialink()' type=text size=10 value='' id=i3geo_gl_xmax />"
+		ins += "</div></td></tr>"
+		ins += "<tr><td style=text-align:left >Latitude mínima:</td>"
+		ins += "<td><div style=padding:5px;width:80px; id=paiYmin >"
+		ins += "<input onchange='$i3geo_gl.crialink()' type=text size=10 value='' id=i3geo_gl_ymin />"
+		ins += "</div></td></tr>"
+		ins += "<tr><td style=text-align:left >Latitude máxima:</td>"
+		ins += "<td><div style=padding:5px;width:80px; id=paiYmax >"
+		ins += "<input onchange='$i3geo_gl.crialink()' type=text size=10 value='' id=i3geo_gl_ymax />"
+		ins += "</div></td></tr></table>"
+		ins += "<input style='position:relative;top:10px;left:-10px' class=aplicar size='20' type='button' value='capturar' onclick='$i3geo_gl.OL.capturageo()' />"
+		ins += "</div></div>"
+		document.getElementById(this.buscageo).innerHTML = ins
 		$i("i3geo_gl_mapa1").style.display = "block";
 		$i3geo_gl.OL = new OpenLayers.Map('i3geo_gl_mapa1',{controls:[],numZoomLevels: 13});
 		//
@@ -417,7 +417,7 @@ function i3geo_gl_configura(loc_i3geo,nomeseltema,temasa,link,grupo,subgrupo,tem
 		//
 		//zoom e controle de layers
 		//
-		var ls = new OpenLayers.Control.LayerSwitcher();
+		var ls = new OpenLayers.Control.LayerSwitcher()
 		$i3geo_gl.OL.addControl(ls);
 		$i(ls.id).style.zIndex=2000;
 		$i3geo_gl.OL.setCenter(new OpenLayers.LonLat(-55,-14), 2);
@@ -433,24 +433,24 @@ function i3geo_gl_configura(loc_i3geo,nomeseltema,temasa,link,grupo,subgrupo,tem
 		$i("OpenLayers_Control_PanZoom_panleft").style.display="none"
 		$i("OpenLayers_Control_PanZoom_panright").style.display="none"
 		*/
-		$i("OpenLayers.Control.NavToolbar_36").style.display="none";
-		zb.div.style.left="0px";
+		$i("OpenLayers.Control.NavToolbar_36").style.display="none"
+		zb.div.style.left="0px"
 		$i3geo_gl.OL.capturageo = function()
 		{
 			var b = $i3geo_gl.OL.getExtent();
-			$i("i3geo_gl_xmin").value = b.left;
-			$i("i3geo_gl_xmax").value = b.right;
-			$i("i3geo_gl_ymin").value = b.bottom;
-			$i("i3geo_gl_ymax").value = b.top;
-			$i3geo_gl.crialink();
-		};
+			$i("i3geo_gl_xmin").value = b.left
+			$i("i3geo_gl_xmax").value = b.right
+			$i("i3geo_gl_ymin").value = b.bottom
+			$i("i3geo_gl_ymax").value = b.top
+			$i3geo_gl.crialink()
+		}
 		/*
 		$inputText("paiXmin","","i3geo_gl_xmin","","","")
 		$inputText("paiXmax","","i3geo_gl_xmax","","","")
 		$inputText("paiYmin","","i3geo_gl_ymin","","","")
 		$inputText("paiYmax","","i3geo_gl_ymax","","","")
 		*/
-	};
+	}
 }
 
 /*
@@ -472,9 +472,9 @@ function i3geo_gl_inicia(objeto_i3geo_gl_configura)
 	i3GEO.configura.sid = "";
 	$i3geo_gl = objeto_i3geo_gl_configura;
 	if(document.getElementById($i3geo_gl.buscageo))
-	$i3geo_gl.buscageo_init();
-	$i3geo_gl.seltema($i3geo_gl.nomeseltema);
-	i3GEO.arvoreDeTemas.comboMenus($i3geo_gl.loc_i3geo,"$i3geo_gl.combogrupos",$i3geo_gl.menu,"","530","1","");
+	$i3geo_gl.buscageo_init()
+	$i3geo_gl.seltema($i3geo_gl.nomeseltema)
+	i3GEO.arvoreDeTemas.comboMenus($i3geo_gl.loc_i3geo,"$i3geo_gl.combogrupos",$i3geo_gl.menu,"","530","1","")
 	/*
 	$inputText("paiPontos","","pontos","","","")
 	$inputText("paiNometemapontos","","nometemapontos","","","")

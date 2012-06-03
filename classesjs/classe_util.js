@@ -1,5 +1,4 @@
-/*jslint white:false,undef: false, rhino: true, onevar: true, evil: false */
-
+/*jslint plusplus:false,white:false,undef: false, rhino: true, onevar: true, evil: false */
 /*
 Title: Utilitários
 
@@ -104,6 +103,17 @@ Quando o usuário clica no mapa, essa variável é pesquisada para definir o tipo d
 */
 g_tipoacao = "zoomli";
 
+/*
+g_postpx = "px";
+g_tipotop = "top";
+g_tipoleft = "left";
+if (navm)
+{
+	g_postpx = "";  //utilizado para crossbrowser
+	g_tipotop = "pixelTop"; //utilizado para crossbrowser
+	g_tipoleft = "pixelLeft"; //utilizado para crossbrowser
+}
+*/
 /*
 Function: $i
 
@@ -242,7 +252,7 @@ i3GEO.util = {
 	*/
 	listaChaves: function (obj) {
 		if(typeof(console) !== 'undefined'){console.info("i3GEO.util.listaChaves()");}
-		var keys,key = "";
+		var keys,key;
 		keys = [];
 		for(key in obj){
 			if(obj[key])
@@ -350,11 +360,11 @@ i3GEO.util = {
 	*/
 	arvore: function(titulo,onde,obj){
 		if(typeof(console) !== 'undefined'){console.info("i3GEO.util.arvore()");}
-		var arvore,root,tempNode,d,c,i,linha,conteudo,j,temaNode;
+		var arvore,root,tempNode,currentIconMode,d,c,i,linha,conteudo,j,temaNode;
 		if(!$i(onde)){return;}
-		arvore = new YAHOO.widget.TreeView(onde);
-		root = arvore.getRoot();
 		try{
+			arvore = new YAHOO.widget.TreeView(onde);
+			root = arvore.getRoot();
 			tempNode = new YAHOO.widget.TextNode('', root, false);
 			tempNode.isLeaf = false;
 			tempNode.enableHighlight = false;
@@ -443,7 +453,7 @@ i3GEO.util = {
 		{
 			if(!obj.style)
 			{return [0,0];}
-			var curleft = 0,curtop = 0;
+			var curleft = 0,curtop = 0,teste;
 			if(obj){
 				if (obj.offsetParent) {
 					do {
@@ -474,23 +484,18 @@ i3GEO.util = {
 	*/
 	pegaElementoPai: function(e){
 		if(typeof(console) !== 'undefined'){console.info("i3GEO.util.pegaElementoPai()");}
-		var targ = document;
+		var targ;
 		if (!e)
 		{e = window.event;}
 		if (e.target)
 		{targ = e.target;}
-		else{
-			if (e.srcElement)
-			{targ = e.srcElement;}
-		}
+		else
+		if (e.srcElement)
+		{targ = e.srcElement;}
 		if (targ.nodeType === 3)
 		{targ = targ.parentNode;}
-		if(targ.parentNode){
-			tparent=targ.parentNode;
-			return(tparent);
-		}
-		else
-		{return targ;}
+		tparent=targ.parentNode;
+		return(tparent);
 	},
 	/*
 	Function: mudaCursor
@@ -516,8 +521,9 @@ i3GEO.util = {
 		var os = [],
 			o,
 			i,
-			c = "",
+			c,
 			n,
+			layers,
 			cursor="",
 			ext = ".ff";
 		//
@@ -531,6 +537,7 @@ i3GEO.util = {
 			os.push(document.getElementById(idobjeto));
 			if(i3GEO.Interface.ATUAL === "openlayers"){
 				os = YAHOO.util.Dom.getElementsByClassName('olTileImage', 'img');
+				//os = YAHOO.util.Dom.getElementsByClassName('olMap', 'div');
 			}
 			if(i3GEO.Interface.ATUAL === "googlemaps"){
 				os = document.getElementById(idobjeto).firstChild;
@@ -702,7 +709,7 @@ i3GEO.util = {
 	/*
 	Function: $im ou nome curto $im
 
-	Retorna o caminho correto de uma imagem.
+	Retorna o caminho correto de uma imagem incluindo o endereço da aplicação e do visual em uso.
 
 	Exemplo: $im("imagem.png")
 
@@ -715,7 +722,7 @@ i3GEO.util = {
 	string - caminho para a imagem
 	*/
 	$im: function(g){
-		return i3GEO.configura.locaplic+"/imagens/visual/default/"+g;
+		return i3GEO.configura.locaplic+"/imagens/visual/"+i3GEO.configura.visual+"/"+g;
 	},
 	/*
 	Function $inputText ou nome curto $inputText
@@ -920,7 +927,9 @@ i3GEO.util = {
 	*/
 	adicionaSHP: function(path){
 		if(typeof(console) !== 'undefined'){console.info("i3GEO.util.adicionaSHP()");}
+		i3GEO.janela.abreAguarde("i3GEO.atualiza",$trad("o1"));
 		var temp = path.split(".");
+		//i3GEO.contadorAtualiza++;
 		if ((temp[1] === "SHP") || (temp[1] === "shp"))
 		{i3GEO.php.adicionaTemaSHP(i3GEO.atualiza,path);}
 		else
@@ -933,30 +942,35 @@ i3GEO.util = {
 
 	Parametros:
 
-	janelaid {String} - id do conteúdo da janela flutuante que chamou a função. Pode ser "" caso elemento exista em document
+	janela {String} - id do conteúdo da janela flutuante que chamou a função. Pode ser "" caso elemento exista em document
 
 	elemento {String} - id do elemento que receberá os valores da cor selecionada
 
 	tipo {String} - opcional pode ser definido como rgb ou hex indicando o tipo de retorno da cor
 	*/
-	abreCor: function(janelaid,elemento,tipo){
+	abreCor: function(janela,elemento,tipo){
 		if(typeof(console) !== 'undefined'){console.info("i3GEO.util.abreCor()");}
 		if(!i3GEO.configura)
 		{i3GEO.configura = {locaplic: "../"};}
 		if(arguments.length === 2)
 		{tipo = "rgb";}
-		var janela,
-			ins,
+		var ins,
+			temp,
 			novoel,
 			wdocaiframe,
-			wsrc = i3GEO.configura.locaplic+"/ferramentas/colorpicker/index.htm?doc="+janelaid+"&elemento="+elemento+"&tipo="+tipo,
+			fix = false,
+			wlargura = "300",
+			waltura = "280",
+			wsrc = i3GEO.configura.locaplic+"/ferramentas/colorpicker/index.htm?doc="+janela+"&elemento="+elemento+"&tipo="+tipo,
+			nx = "",
+			ny = "",
 			texto = "Cor",
 			id = "i3geo_janelaCor",
+			modal = true,
 			classe = "hd";
-		if($i(id)){
-			YAHOO.i3GEO.janela.manager.find(id).show();
-			return;
-		}
+		YAHOO.namespace("janelaCor.xp");
+		if ($i(id))
+		{YAHOO.janelaCor.xp.panel.destroy();}
 		ins = '<div id="'+id+'_cabecalho" class="hd">';
 		ins += "<span><img id='i3geo_janelaCor_imagemCabecalho' style='visibility:hidden;' src=\'"+i3GEO.configura.locaplic+"/imagens/aguarde.gif\' /></span>";
 		ins += texto;
@@ -981,10 +995,10 @@ i3GEO.util = {
 			wdocaiframe.style.width = "325px";
 			wdocaiframe.style.border = "0px solid white";
 		}
-		janela = new YAHOO.widget.ResizePanel(id, { height:"290px",modal:false, width: "350px", fixedcenter: true, constraintoviewport: false, visible: true, iframe:false} );
-		YAHOO.i3GEO.janela.manager.register(janela);
-		janela.render();
+		YAHOO.janelaCor.xp.panel = new YAHOO.widget.ResizePanel(id, { height:"290px",zIndex:i3GEO.janela.ULTIMOZINDEX, modal:false, width: "350px", fixedcenter: true, constraintoviewport: false, visible: true, iframe:false} );
+		YAHOO.janelaCor.xp.panel.render();
 		$i(id+'_cabecalho').className = classe;
+		i3GEO.janela.ULTIMOZINDEX++
 	},
 	/*
 	Function: ajaxhttp
@@ -1026,7 +1040,7 @@ i3GEO.util = {
 	O resultado em um objeto DOM. Se o retorno contiver a palavra "Erro", é gerado um alert.
 	*/
 	ajaxexecASXml: function(programa,funcao){
-		var h,ohttp;
+		var h,ohttp,retorno;
 		if (programa.search("http") === 0){
 			h = window.location.host;
 			if (programa.search(h) < 0){
@@ -1036,6 +1050,7 @@ i3GEO.util = {
 		}
 		ohttp = i3GEO.util.ajaxhttp();
 		ohttp.open("GET",programa,true);
+		retorno = "";
 		ohttp.onreadystatechange=function(){
 			var retorno,parser,dom;
 			if (ohttp.readyState === 4){
@@ -1052,7 +1067,7 @@ i3GEO.util = {
 					}
 				}
 				else
-				{return "erro";}
+				{dom = "erro";}
 				if (funcao !== "volta")
 				{eval(funcao+'(dom)');}
 				else
@@ -1076,7 +1091,7 @@ i3GEO.util = {
 	*/
 	aparece: function(id,tempo,intervalo){
 		if(typeof(console) !== 'undefined'){console.info("i3GEO.util.aparece("+id+")");}
-		var n,obj,opacidade,fadei = 0,tempoFadei = null;
+		var n,obj,opacidade,fadei,tempoFadei;
 		n = parseInt(tempo / intervalo,10);
 		obj = $i(id);
 		if(n === 1){
@@ -1103,8 +1118,7 @@ i3GEO.util = {
 			if(opacidade < 100)
 			{tempoFadei = setTimeout(fadei, tempo);}
 			else{
-				if(tempoFadei)
-				{clearTimeout(tempoFadei);}
+				clearTimeout(tempoFadei);
 				if (navm)
 				{obj.style.filter='alpha(opacity=100)';}
 				else
@@ -1129,7 +1143,7 @@ i3GEO.util = {
 	removeobj {Boolean} - remove ou não o objeto no final
 	*/
 	desaparece: function(id,tempo,intervalo,removeobj){
-		var n,obj,opacidade,fade = 0,p,tempoFade = null;
+		var n,obj,opacidade,fade,p,tempoFade;
 		n = parseInt(tempo / intervalo,10);
 		obj = $i(id);
 		if(n === 1){
@@ -1159,8 +1173,7 @@ i3GEO.util = {
 				tempoFade = setTimeout(fade, tempo);
 			}
 			else{
-				if(tempoFade)
-				{clearTimeout(tempoFade);}
+				clearTimeout(tempoFade);
 				obj.style.display = "none";
 				if (navm)
 				{obj.style.filter='alpha(opacity=100)';}
@@ -1498,9 +1511,9 @@ i3GEO.util = {
 		{nome = "";}
 		if (arguments.length < 5)
 		{multiplo = false;}
-		var monta, temp, temp1, temp2;
+		var monta, lista, temp, temp1, temp2;
 		monta = function(retorno){
-			var i,comboTemas,n,nome = "";
+			var i,comboTemas,temp,n,nome;
 			if (retorno !== undefined)
 			{
 				if(retorno.data)
@@ -1656,10 +1669,10 @@ i3GEO.util = {
 		{$i(onde).innerHTML="<span style=color:red;font-size:10px; >buscando temas...</span>";}
 		if (arguments.length === 3)
 		{nome = "";}
-		var monta, temp, temp1, n, i;
+		var monta, lista, temp, temp1, n, i;
 		monta = function(retorno){
 			try{
-				var i,comboTemas,n,nome;
+				var i,comboTemas,temp,n,nome;
 				if (retorno !== undefined)
 				{
 					if(retorno.data)
@@ -1836,9 +1849,13 @@ i3GEO.util = {
 			}
 			else
 			{temp = {dados:'<div class=erro >Ocorreu um erro</erro>',tipo:"erro"};}
-			funcao.apply(funcao,temp);
+			eval("funcao(temp)");
 		};
 		i3GEO.php.listaValoresItensTema(monta,tema,itemTema);
+		//cp = new cpaint();
+		//cp.set_debug(2)
+		//cp.set_response_type("JSON");
+		//cp.call( g_locaplic+"/classesphp/mapa_controle.php?g_sid="+g_sid+"&funcao=listaregistros&unico=sim&tema="+tema+"&itemtema="+itemTema,"listaRegistros",monta);
 	},
 	/*
 	Function: comboFontes
@@ -1942,7 +1959,7 @@ i3GEO.util = {
 			}
 			else
 			{temp = {dados:'<div class=erro >Ocorreu um erro</div>',tipo:"erro"};}
-			funcao.apply(funcao,temp);
+			eval("funcao(temp)");
 		};
 		i3GEO.php.listaItensTema(monta,tema);
 	},
@@ -1966,7 +1983,7 @@ i3GEO.util = {
 	radioEpsg: function (funcao,onde,prefixo){
 		if (arguments.length === 2)
 		{$i(onde).innerHTML="<span style=color:red;font-size:10px; >buscando...</span>";}
-		var monta = function(retorno){
+		var cp,monta = function(retorno){
 			var ins = [],
 				i,n,temp;
 			if (retorno.data !== undefined){
@@ -1986,7 +2003,7 @@ i3GEO.util = {
 			}
 			else
 			{temp = {dados:'<div class=erro >Ocorreu um erro</erro>',tipo:"erro"};}
-			funcao(temp);
+			eval("funcao(temp)");
 		};
 		i3GEO.php.listaEpsg(monta);
 	},
@@ -2015,7 +2032,8 @@ i3GEO.util = {
 			ndiv = document.createElement("div"),
 			nids,
 			i,
-			fundo;
+			fundo,
+			b;
 
 		if(temp){$i(container).removeChild(temp);}
 		if (!document.getElementById(idatual))
@@ -2031,13 +2049,13 @@ i3GEO.util = {
 
 			$i(container).appendChild(ndiv);
 
-			new YAHOO.widget.Button(idatual+"anterior_",{
+			b = new YAHOO.widget.Button(idatual+"anterior_",{
 				onclick:{fn: function(){
 					eval(anterior+"()");
 				},
 				lazyloadmenu:true 
 			}});
-			new YAHOO.widget.Button(idatual+"proxima_",
+			b = new YAHOO.widget.Button(idatual+"proxima_",
 				{onclick:{fn: function(){
 					eval(proxima+"()");
 				},
@@ -2113,7 +2131,8 @@ i3GEO.util = {
 		var	box1i = box2,
 			box2i = box1,
 			coordx,
-			coordy;
+			coordy,
+			i;
 		coordx = box1[0]*1;
 		coordy = box1[1]*1;
 		if(coordx >= box2[0]*1 && coordx <= box2[2]*1 && coordy >= box2[1]*1 && coordy <= box2[3]*1){
@@ -2162,30 +2181,31 @@ i3GEO.util = {
 
 	Parametros:
 
-	janelaid {String} - id do conteúdo da janela flutuante que chamou a função. Pode ser "" caso elemento exista em document
+	janela {String} - id do conteúdo da janela flutuante que chamou a função. Pode ser "" caso elemento exista em document
 
 	elemento {String} - id do elemento que receberá os valores da cor selecionada
 
 	ncores {numerico} - número de cores default ao abrir  o seletor de cores
 	*/
-	abreColourRamp: function(janelaid,elemento,ncores){
+	abreColourRamp: function(janela,elemento,ncores){
 		if(typeof(console) !== 'undefined'){console.info("i3GEO.util.abreColourRamp()");}
-		var janela,
-			ins,
+		var ins,
+			temp,
 			novoel,
 			wdocaiframe,
 			fix = false,
-			wsrc = i3GEO.configura.locaplic+"/ferramentas/colourramp/index.php?ncores="+ncores+"&doc="+janelaid+"&elemento="+elemento, //+janela+"&elemento="+elemento+"&tipo="+tipo,
+			wlargura = "350",
+			waltura = "480",
+			wsrc = i3GEO.configura.locaplic+"/ferramentas/colourramp/index.php?ncores="+ncores+"&doc="+janela+"&elemento="+elemento, //+janela+"&elemento="+elemento+"&tipo="+tipo,
 			nx = "",
+			ny = "",
 			texto = "Cor",
 			id = "i3geo_janelaCorRamp",
+			modal = true,
 			classe = "hd";
-		if($i(id)){
-			janela = YAHOO.i3GEO.janela.manager.find(id);
-			janela.show();
-			janela.bringToTop();
-			return;
-		}
+		YAHOO.namespace("janelaCorRamp.xp");
+		if ($i(id))
+		{YAHOO.janelaCorRamp.xp.panel.destroy();}
 		ins = '<div id="'+id+'_cabecalho" class="hd">';
 		ins += "<span><img id='i3geo_janelaCorRamp_imagemCabecalho' style='visibility:hidden;' src=\'"+i3GEO.configura.locaplic+"/imagens/aguarde.gif\' /></span>";
 		ins += texto;
@@ -2208,9 +2228,8 @@ i3GEO.util = {
 		wdocaiframe.style.border = "0px solid white";
 
 		if(nx === "" || nx === "center"){fix = true;}
-		janela = new YAHOO.widget.ResizePanel(id, { height:"480px",modal:false, width: "380px", fixedcenter: fix, constraintoviewport: false, visible: true, iframe:false} );
-		YAHOO.i3GEO.janela.manager.register(janela);
-		janela.render();
+		YAHOO.janelaCorRamp.xp.panel = new YAHOO.widget.ResizePanel(id, { height:"480px",zIndex:5000, modal:false, width: "380px", fixedcenter: fix, constraintoviewport: false, visible: true, iframe:false} );
+		YAHOO.janelaCorRamp.xp.panel.render();
 		$i(id+'_cabecalho').className = classe;
 	},
 	/*
@@ -2459,6 +2478,7 @@ i3GEO.util = {
 	Retorna algumas versões de navegador
 	*/	
 	versaoNavegador: function(){
+		var v = "";
 		if(navm && navigator.userAgent.toLowerCase().indexOf('msie 8.') > -1)
 		{return "IE8";}
 		if(navn && navigator.userAgent.toLowerCase().indexOf('3.') > -1)
@@ -2466,7 +2486,7 @@ i3GEO.util = {
 		return "";
 	}
 };
-//
+//++++++++++++++++++++++++++++++++++++
 // YUI ACCORDION
 // 1/22/2008 - Edwart Visser
 //
@@ -2474,7 +2494,9 @@ i3GEO.util = {
 //
 // REQUIRES: yahoo-dom-event.js, animation-min.js
 //
-//
+// TODO: build hover script for highlighting header in IE
+// TODO: attach behaviour based on rel attribute
+//++++++++++++++++++++++++++++++++++++
 try{
 	YAHOO.namespace("lutsr");
 	YAHOO.lutsr.accordion = {
@@ -2507,14 +2529,17 @@ try{
 				this.properties.ativa = ativa;
 			}
 			var accordionObject = document.getElementById(this.properties.Id),
-				headers;
+				headers,
+				bodies;
 			if(accordionObject) {
 				if(accordionObject.nodeName === "DL") {
 					headers = accordionObject.getElementsByTagName("dt");
-					this.attachEvents(headers,0);
+					bodies = headers[0].parentNode.getElementsByTagName("dd");
 				}
+				this.attachEvents(headers,0);
 			}
 		},
+
 		attachEvents : function(headers,nr) {
 			var i,headerProperties,parentObj,header;
 			for(i=0; i<headers.length; i++) {

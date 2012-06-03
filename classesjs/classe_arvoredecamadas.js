@@ -526,9 +526,8 @@ i3GEO.arvoreDeCamadas = {
 			i3GEO.arvoreDeCamadas.CAMADAS = "";
 			forca = false;
 		}
-		var estilo,temp,newVal,root,tempNode,titulo,d,c,ltema,temaNode,i,j,n,nk,k,noGrupo,
+		var estilo,temp,currentIconMode,newVal,root,tempNode,titulo,d,c,ltema,temaNode,grupoNode,i,j,n,nk,k,noGrupo,
 			incluidos=[],
-			grupoNode = "",
 			grupoLayers = i3GEO.configura.grupoLayers,
 			textoTema = "";
 		//
@@ -554,7 +553,6 @@ i3GEO.arvoreDeCamadas = {
 		{i3GEO.arvoreDeCamadas.CAMADASINICIAIS = temas;}
 		(function(){
 			function changeIconMode(){
-				var currentIconMode = "";
 				newVal = parseInt(this.value,10);
 				if (newVal !== currentIconMode)
 				{currentIconMode = newVal;}
@@ -746,9 +744,11 @@ i3GEO.arvoreDeCamadas = {
 			if(c.checked !== status)
 			{aplica = true;}
 			c.checked = status;
-			if(aplica === true)
+			if(aplica === true && i3GEO.Interface.ATUAL !== "padrao")
 			{c.onclick.call();}
 		}
+		if(aplica === true && i3GEO.Interface.ATUAL === "padrao")
+		{i3GEO.arvoreDeCamadas.aplicaTemas();}
 	},
 	/*
 	Function: ativaDragDrop
@@ -758,20 +758,21 @@ i3GEO.arvoreDeCamadas = {
 	ativaDragDrop: function(){
 		if(typeof(console) !== 'undefined'){console.info("i3GEO.arvoreDeCamadas.ativaDragDrop()");}
 		var Dom = YAHOO.util.Dom,
-			Event = YAHOO.util.Event;
+			Event = YAHOO.util.Event,
+			DDM = YAHOO.util.DragDropMgr;
 		YAHOO.example.DDList = "";
 		YAHOO.example.DDApp = {
 			init: function() 
 			{
-				var i,ltema;
+				var ddtarget,i,ltema,ddlist;
 				if($i("i3geo_lixeira") && i3GEO.arvoreDeCamadas.ARRASTARLIXEIRA === true)
-				{new YAHOO.util.DDTarget("i3geo_lixeira");}
+				{ddtarget = new YAHOO.util.DDTarget("i3geo_lixeira");}
 				i = i3GEO.arvoreDeCamadas.CAMADAS.length-1;
 				if (i3GEO.arvoreDeCamadas.CAMADAS.length-1 >= 0){
 					do{
 						ltema = i3GEO.arvoreDeCamadas.CAMADAS[i];
 						if($i("arrastar_"+ltema.name))
-						{new YAHOO.example.DDList("arrastar_"+ltema.name);}
+						{ddlist = new YAHOO.example.DDList("arrastar_"+ltema.name);}
 					}
 					while(i--);
 				}
@@ -828,7 +829,7 @@ i3GEO.arvoreDeCamadas = {
 					YAHOO.util.Dom.setStyle('i3geo_lixeira', 'border', '0px solid blue');
 				},
 				onDragDrop: function(e, id){
-					var pt,region,tema,destEl,els,lista,temp,
+					var pt,region,tema,destEl,els,lista,noid,temp,
 						DDM = YAHOO.util.DragDropMgr,
 						Dom = YAHOO.util.Dom;
 					if (DDM.interactionInfo.drop.length === 1){
@@ -847,10 +848,13 @@ i3GEO.arvoreDeCamadas = {
 							//muda ordem de desenho do tema
 							else{
 								if(i3GEO.arvoreDeCamadas.ARRASTARORDEM === true){
+									i3GEO.janela.abreAguarde("i3GEO.atualiza",$trad("o1"));
 									destEl = Dom.get(id);
+									noid = id.split("arrastar_")[1];
 									destEl.appendChild(this.getEl()); 
 									els = i3GEO.arvoreDeCamadas.listaLigadosDesligados();
 									lista = els[2].join(",");
+									//i3GEO.contadorAtualiza++;
 									temp = function(retorno){
 										i3GEO.atualiza(retorno);
 										if(i3GEO.Interface.ATUAL === "openlayers")
@@ -877,7 +881,8 @@ i3GEO.arvoreDeCamadas = {
 					}
 				},
 				onDragOver: function(e, id){
-					var destEl;
+					var srcEl,destEl;
+					srcEl = this.getEl();
 					destEl = YAHOO.util.Dom.get(id);
 					// We are only concerned with list items, we ignore the dragover
 					// notifications for the list.
@@ -905,7 +910,7 @@ i3GEO.arvoreDeCamadas = {
 	montaOpcoes: function(node){
 		if(typeof(console) !== 'undefined'){console.info("i3GEO.arvoreDeCamadas.montaOpcoes()");}
 		//YAHOO.log("Montando as opções da árvore de camadas", "i3geo");
-		var opcoesNode,idtema,ltema,farol,mfarol,tnome = "",
+		var d,conteudo,opcoesNode,idtema,ltema,farol,mfarol,tnome = "",iconesNode,
 			imb = i3GEO.util.$im("branco.gif"),
 			funcoes = i3GEO.arvoreDeCamadas.FUNCOES;
 		idtema = node.data.id;
@@ -939,9 +944,10 @@ i3GEO.arvoreDeCamadas = {
 			{tnome += "&nbsp;<img class='desce' src='"+imb +"' title='"+$trad("t15")+"' onclick='i3GEO.tema.desce(\""+ltema.name+"\")' onmouseover=\"javascript:i3GEO.ajuda.mostraJanela('"+$trad("t16")+"','desce')\" onmouseout=\"javascript:i3GEO.ajuda.mostraJanela('')\" />";}
 			if(funcoes.fonte === true)
 			{tnome += "&nbsp;<img class='fonte' src='"+imb +"' title='"+$trad("a9")+"' onclick='i3GEO.tema.fonte(\""+ltema.name+"\")' onmouseover=\"javascript:i3GEO.ajuda.mostraJanela('"+$trad("a9")+"','fonte')\" onmouseout=\"javascript:i3GEO.ajuda.mostraJanela('')\" />";}
-			if( (ltema.zoomtema.toLowerCase() === "sim") && (funcoes.zoomtema === true))
+			//a operação de zoom para o tema não funciona na interface flamingo
+			if( (ltema.zoomtema.toLowerCase() === "sim") && (i3GEO.Interface.ATUAL !== "flamingo") && (funcoes.zoomtema === true))
 			{tnome += "&nbsp;<img class='extent' src='"+imb +"' title='"+$trad("t17")+"' onclick='i3GEO.tema.zoom(\""+ltema.name+"\")' onmouseover=\"javascript:i3GEO.ajuda.mostraJanela('"+$trad("t18")+"','')\" onmouseout=\"javascript:i3GEO.ajuda.mostraJanela('')\" />";}
-			new YAHOO.widget.HTMLNode({html:tnome,enableHighlight: false,isLeaf:true,expanded:false}, node);
+			iconesNode = new YAHOO.widget.HTMLNode({html:tnome,enableHighlight: false,isLeaf:true,expanded:false}, node);
 			if(funcoes.compartilhar === true && ltema.permitecomentario.toLowerCase() !== "nao")
 			{
 				temp = i3GEO.configura.locaplic+"/ms_criamapa.php?layers="+ltema.name+"&amp;temasa="+ltema.name;				
@@ -971,7 +977,7 @@ i3GEO.arvoreDeCamadas = {
 	mostraOpcoes: function(node){
 		if(typeof(console) !== 'undefined'){console.info("i3GEO.arvoreDeCamadas.mostraOpcoes()");}
 		//YAHOO.log("Mostrando as opções da árvore de camadas", "i3geo");
-		var tnome,
+		var tnome,d,n,temp,
 			idtema = node.data.idopcoes,
 			ltema = i3GEO.arvoreDeCamadas.pegaTema(idtema),
 			funcoes = i3GEO.arvoreDeCamadas.FUNCOES;
@@ -980,24 +986,24 @@ i3GEO.arvoreDeCamadas = {
 			{tnome = "<span onmouseover=\"javascript:i3GEO.ajuda.mostraJanela('"+$trad("t19")+"','')\" onmouseout=\"javascript:i3GEO.ajuda.mostraJanela('')\" >"+$trad("t20")+"</span> <a class=ajuda_usuario target=_blank href='"+i3GEO.configura.locaplic+"/ajuda_usuario.php?idcategoria=5&idajuda=42' >&nbsp;&nbsp;&nbsp;</a>"+$inputText("","","tr"+ltema.name,"","3",ltema.transparency)+"&nbsp;<a  class='tic' onclick='i3GEO.tema.mudatransp(\""+ltema.name+"\")' href='#' /a>";}
 			else
 			{tnome = "<span onmouseover=\"javascript:i3GEO.ajuda.mostraJanela('"+$trad("t19")+"','')\" onmouseout=\"javascript:i3GEO.ajuda.mostraJanela('')\" >"+$trad("t20")+"</span> <a class=ajuda_usuario target=_blank href='"+i3GEO.configura.locaplic+"/ajuda_usuario.php?idcategoria=5&idajuda=42' >&nbsp;&nbsp;&nbsp;</a>"+$inputText("","","tr"+ltema.name,"","3",ltema.transparency)+"<img  class='tic' style='position:relative;top:3px;' onclick='i3GEO.tema.mudatransp(\""+ltema.name+"\")' src='"+i3GEO.util.$im("branco.gif")+"' />";}
-			new YAHOO.widget.HTMLNode({expanded:false,enableHighlight:false,isLeaf:true,html:tnome}, node);
+			n = new YAHOO.widget.HTMLNode({expanded:false,enableHighlight:false,isLeaf:true,html:tnome}, node);
 		}
-		if(funcoes.temporizador === true){
+		if(funcoes.temporizador === true && i3GEO.Interface.ATUAL != "padrao" && i3GEO.Interface.ATUAL != "flamingo"){
 			if(navm)
 			{tnome = "<span onmouseover=\"javascript:i3GEO.ajuda.mostraJanela('"+$trad("t47")+"','')\" onmouseout=\"javascript:i3GEO.ajuda.mostraJanela('')\" >"+$trad("t48")+"</span> <a class=ajuda_usuario target=_blank href='"+i3GEO.configura.locaplic+"/ajuda_usuario.php?idcategoria=5&idajuda=101' >&nbsp;&nbsp;&nbsp;</a>"+$inputText("","","temporizador"+ltema.name,"","3",ltema.temporizador)+"&nbsp;<a  class='tic' onclick='i3GEO.tema.temporizador(\""+ltema.name+"\")' href='#' /a>";}
 			else
 			{tnome = "<span onmouseover=\"javascript:i3GEO.ajuda.mostraJanela('"+$trad("t47")+"','')\" onmouseout=\"javascript:i3GEO.ajuda.mostraJanela('')\" >"+$trad("t48")+"</span> <a class=ajuda_usuario target=_blank href='"+i3GEO.configura.locaplic+"/ajuda_usuario.php?idcategoria=5&idajuda=101' >&nbsp;&nbsp;&nbsp;</a>"+$inputText("","","temporizador"+ltema.name,"","3",ltema.temporizador)+"<img  class='tic' style='position:relative;top:3px;' onclick='i3GEO.tema.temporizador(\""+ltema.name+"\")' src='"+i3GEO.util.$im("branco.gif")+"' />";}
-			new YAHOO.widget.HTMLNode({expanded:false,enableHighlight:false,isLeaf:true,html:tnome}, node);
+			n = new YAHOO.widget.HTMLNode({expanded:false,enableHighlight:false,isLeaf:true,html:tnome}, node);
 		}
 		if(funcoes.mudanome === true){
 			if(navm)
 			{tnome = "<span onmouseover=\"javascript:i3GEO.ajuda.mostraJanela('"+$trad("t21a")+"','')\" onmouseout=\"javascript:i3GEO.ajuda.mostraJanela('')\" />"+$trad("t21")+" </span> <a class=ajuda_usuario target=_blank href='"+i3GEO.configura.locaplic+"/ajuda_usuario.php?idcategoria=5&idajuda=43' >&nbsp;&nbsp;&nbsp;</a>"+$inputText("","","nn"+ltema.name,"","8","")+"&nbsp;<a  class='tic' onclick='i3GEO.tema.mudanome(\""+ltema.name+"\")' href='#' />";}
 			else
 			{tnome = "<span onmouseover=\"javascript:i3GEO.ajuda.mostraJanela('"+$trad("t21a")+"','')\" onmouseout=\"javascript:i3GEO.ajuda.mostraJanela('')\" />"+$trad("t21")+" </span> <a class=ajuda_usuario target=_blank href='"+i3GEO.configura.locaplic+"/ajuda_usuario.php?idcategoria=5&idajuda=43' >&nbsp;&nbsp;&nbsp;</a>"+$inputText("","","nn"+ltema.name,"","10","")+"<img  class='tic' style='position:relative;top:3px;' onclick='i3GEO.tema.mudanome(\""+ltema.name+"\")' src='"+i3GEO.util.$im("branco.gif")+"' />";}
-			new YAHOO.widget.HTMLNode({expanded:false,enableHighlight:false,isLeaf:true,html:tnome}, node);
+			n = new YAHOO.widget.HTMLNode({expanded:false,enableHighlight:false,isLeaf:true,html:tnome}, node);
 		}
 		if ((ltema.type < 3) && (ltema.connectiontype !== 7)){
-			if(funcoes.procurar === true)
+			if(i3GEO.Interface.ATUAL !== "flamingo" && funcoes.procurar === true)
 			{i3GEO.arvoreDeCamadas.adicionaOpcaoTema($trad("t22"),$trad("t23"),'i3GEO.tema.dialogo.procuraratrib(\"'+ltema.name+'\")',node);}
 			if(funcoes.toponimia === true)
 			{i3GEO.arvoreDeCamadas.adicionaOpcaoTema($trad("t24"),$trad("t25"),'i3GEO.tema.dialogo.toponimia(\"'+ltema.name+'\")',node);}
@@ -1014,8 +1020,11 @@ i3GEO.arvoreDeCamadas = {
 		if ((ltema.type < 4 || ltema.type === 8) && funcoes.editorlegenda === true){
 			i3GEO.arvoreDeCamadas.adicionaOpcaoTema($trad("t32"),$trad("t33"),'i3GEO.tema.dialogo.editaLegenda(\"'+ltema.name+'\")',node);
 		}
-		if(funcoes.destacar === true && i3GEO.Interface.ATUAL !== "googlemaps" && i3GEO.Interface.ATUAL !== "googleearth"){
+		if(funcoes.destacar === true && i3GEO.Interface.ATUAL !== "googlemaps" && i3GEO.Interface.ATUAL !== "googleearth" && i3GEO.Interface.ATUAL !== "flamingo"){
 			i3GEO.arvoreDeCamadas.adicionaOpcaoTema($trad("t34"),$trad("t35"),'i3GEO.navega.destacaTema.inicia(\"'+ltema.name+'\")',node);
+		}
+		if(funcoes.cortina === true && i3GEO.Interface.ATUAL !== "padrao" &&  i3GEO.Interface.ATUAL !== "googleearth"  && i3GEO.Interface.ATUAL !== "flamingo"){
+			i3GEO.arvoreDeCamadas.adicionaOpcaoTema($trad("t42"),$trad("t42"),'i3GEO.tema.dialogo.cortina(\"'+ltema.name+'\")',node);
 		}
 		//as opções SLD foram migradas para a ferramenta de edição de legenda
 		//i3GEO.arvoreDeCamadas.adicionaOpcaoTema($trad("t38"),$trad("t39"),'i3GEO.tema.dialogo.sld(\"'+ltema.name+'\")',node);
@@ -1049,8 +1058,8 @@ i3GEO.arvoreDeCamadas = {
 	node {String} - objeto node da árvore (YUI) que receberá o novo nó
 	*/
 	adicionaOpcaoTema:function(dica,titulo,onclick,node){
-		var tnome = "<a href='#' onmouseover=\"javascript:i3GEO.ajuda.mostraJanela('"+dica+"','');\" onclick="+onclick+">"+titulo+" </a>";
-		new YAHOO.widget.HTMLNode({html:tnome,enableHighlight:false,isLeaf:true,expanded:false}, node);
+		var tnome = "<a href='#' onmouseover=\"javascript:i3GEO.ajuda.mostraJanela('"+dica+"','');\" onclick="+onclick+">"+titulo+" </a>",
+		temp = new YAHOO.widget.HTMLNode({html:tnome,enableHighlight:false,isLeaf:true,expanded:false}, node);
 	},
 	/*
 	Function: mostraLegenda
@@ -1064,10 +1073,10 @@ i3GEO.arvoreDeCamadas = {
 	mostraLegenda: function(node){
 		if(typeof(console) !== 'undefined'){console.info("i3GEO.arvoreDeCamadas.mostraLegenda()");}
 		var retorna,
-			idtema = node.data.idlegenda;
+			idtema = node.data.idlegenda,
+			ltema = i3GEO.arvoreDeCamadas.pegaTema(idtema);
 		retorna = function(retorno){
-			var original = {data:""},
-				i,re,tabela,linhas,linha,colunas,incluir,elementos,nelementos,inputs,desativar,nindices;
+			var original,i,re,tabela,linhas,linha,colunas,id,exp,incluir,d,nodeLeg,elementos,nelementos,inputs,desativar,nindices;
 			if(retorno.data.legenda){
 				original = retorno;
 				retorno = retorno.data.legenda;
@@ -1090,7 +1099,9 @@ i3GEO.arvoreDeCamadas = {
 						if(linha >= 0){
 							do{
 								colunas = linhas[linha].split("#");
+								id = colunas[0]+"-"+colunas[1];
 								re = new RegExp("'", "g");
+								exp = colunas[3].replace(re,'"');
 								tabela += "<tr style='border-top:1px solid rgb(240,240,240);'><td><img src='"+colunas[4]+"' </td><td style='text-align:left'>"+colunas[2]+"</td></tr>";
 							}
 							while(linha--);
@@ -1102,7 +1113,7 @@ i3GEO.arvoreDeCamadas = {
 			}
 			else {tabela = "<img src='"+retorno.data[0].imagem+"' />";} //o tema é um wms
 			incluir = "<div style='text-align:left' id='"+idtema+"verdiv"+"'>"+tabela+"</div>";
-			new YAHOO.widget.HTMLNode({html:incluir,enableHighlight:false,expanded:false}, node);
+			nodeLeg = new YAHOO.widget.HTMLNode({html:incluir,enableHighlight:false,expanded:false}, node);
 			node.loadComplete();
 			//
 			//desliga os checkbox que foram desativados
@@ -1231,7 +1242,7 @@ i3GEO.arvoreDeCamadas = {
 	{String} - texto formatado
 	*/
 	montaTextoTema: function(tema){
-		var ck,html,estilo,
+		var ck,html,display="none",estilo,
 			iu = i3GEO.util;
 		if(tema.status*1 === 2)
 		{ck = ' CHECKED ';}
@@ -1345,8 +1356,7 @@ i3GEO.arvoreDeCamadas = {
 		if(arguments.length === 0)
 		{tipo = "normal";}
 		if(typeof(console) !== 'undefined'){console.info("i3GEO.arvoreDeCamadas.aplicaTemas()");}
-		var t = "",
-			temp;
+		var t,temp,ligar,desligar;
 		if(tipo === "normal")
 		{t = i3GEO.arvoreDeCamadas.listaLigadosDesligados("mantem");}
 		if(tipo === "ligartodos"){
@@ -1371,6 +1381,7 @@ i3GEO.arvoreDeCamadas = {
 			if(typeof(console) !== 'undefined'){console.error(erro);}
 		}
 		tempoBotaoAplicar = "";
+		i3GEO.janela.abreAguarde("redesenha",$trad("o1"));
 		if(tipo === "normal"){
 			i3GEO.php.ligatemas(temp,t[1].toString(),t[0].toString());
 			return;
@@ -1404,7 +1415,7 @@ i3GEO.arvoreDeCamadas = {
 		if(arguments.length === 0)
 		{tipo = "manter";}
 		if(typeof(console) !== 'undefined'){console.info("i3GEO.arvoreDeCamadas.listaLigadosDesligados()");}
-		var no,cs,csn,j,c,
+		var no,cs,csn,j,c,temp,
 			nos = i3GEO.arvoreDeCamadas.ARVORE.getNodesByProperty("tipo","tema"),
 			ligados = [],
 			desligados = [],
@@ -1420,7 +1431,7 @@ i3GEO.arvoreDeCamadas = {
 				for(j=0;j<csn;j += 1){
 					c = cs[j];
 					if(c.name==="layer"){
-						c.checked === true ? ligados.push(c.value) : desligados.push(c.value);
+						temp = c.checked === true ? ligados.push(c.value) : desligados.push(c.value);
 						todos.push(c.value);
 						if(tipo === "marca"){
 							c.checked = true;
@@ -1458,7 +1469,7 @@ i3GEO.arvoreDeCamadas = {
 		if(typeof(console) !== 'undefined'){console.info("i3GEO.arvoreDeCamadas.capturaCheckBox()");}
 		if(!$i(i3GEO.arvoreDeCamadas.IDHTML))
 		{return;}
-		var nos,n,i,no,cs,csn,j,c;
+		var nos,ligados,desligados,todos,n,i,no,cs,csn,j,c;
 		nos = i3GEO.arvoreDeCamadas.ARVORE.getNodesByProperty("tipo","tema");
 		n = nos.length;
 		i=0;
@@ -1608,7 +1619,9 @@ i3GEO.arvoreDeCamadas = {
 	*/
 	alteraPropCamadas: function(propriedade,valor,camada){
 		if(typeof(console) !== 'undefined'){console.info("i3GEO.arvoreDeCamadas.alteraPropCamadas()");}
-		var i = 0,
+		var resultado = [],
+			i = 0,
+			temp,
 			nelementos = i3GEO.arvoreDeCamadas.CAMADAS.length,
 			ltema;
 		if (nelementos > 0){
@@ -1632,10 +1645,13 @@ i3GEO.arvoreDeCamadas = {
 		if(i3GEO.arvoreDeCamadas.VERIFICAABRANGENCIATEMAS === false)
 		{return;}
 		try{
-			var i = 0,
+			var resultado = [],
+				i = 0,
 				temp,
 				nelementos = i3GEO.arvoreDeCamadas.CAMADAS.length,
-				ltema;
+				ltema,
+				intersec,
+				node;
 			if (nelementos > 0){
 				do{
 					ltema = i3GEO.arvoreDeCamadas.CAMADAS[i];

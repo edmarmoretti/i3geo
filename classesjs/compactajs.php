@@ -56,6 +56,7 @@ salvatudojs($jsfiles,$buffer,"../pacotes/richdraw/richdraw_tudo_compacto.js","js
 //gera um arquivo compactado para cada um
 //
 packer("../pacotes/mobileesp/mdetect.js","../pacotes/mobileesp/mdetect_compacto.js","None");
+packer("depreciados.js","compactados/depreciados_compacto.js","None");
 packer("classe_arvoredecamadas.js","compactados/classe_arvoredecamadas_compacto.js","Normal");
 packer("classe_arvoredetemas.js","compactados/classe_arvoredetemas_compacto.js","Normal");
 packer("classe_util.js","compactados/classe_util_compacto.js","Normal");
@@ -130,6 +131,7 @@ $jsfiles = array(
 "compactados/classe_idioma_compacto.js",
 "compactados/classe_php_compacto.js",
 "compactados/classe_configura_compacto.js",
+"compactados/depreciados_compacto.js",
 "compactados/classe_calculo_compacto.js",
 "compactados/classe_desenho_compacto.js",
 "compactados/classe_interface_compacto.js",
@@ -154,7 +156,7 @@ $jsfiles = array(
 );
 
 $buffer .= "\$i = function(id){return document.getElementById(id);};\n";
-salvatudojs($jsfiles,$buffer,"i3geo_tudo_compacto47.js","js");
+salvatudojs($jsfiles,$buffer,"i3geo_tudo_compacto46.js","js");
 //
 //gera um único css
 //
@@ -182,7 +184,7 @@ $cssfiles = array(
 ); 
 
 $buffer = "";
-salvatudojs($cssfiles,$buffer,"../css/i3geo47.css","css");
+salvatudojs($cssfiles,$buffer,"../css/i3geo46.css","css");
 //css das ferramentas
 $cssfiles = array(
 "../css/button.css",
@@ -200,10 +202,10 @@ foreach ($cssfiles as $f)
 	fclose($abre);
 	$buffer .= "\n";
 }
-$abre = fopen("../css/i3geo_ferramentas47.css", "wt");
+$abre = fopen("../css/i3geo_ferramentas46.css", "wt");
 $escreve = fwrite ($abre,$buffer);
 $fecha = fclose ($abre);
-chmod("../css/i3geo_ferramentas47.css",0777);
+chmod("../css/i3geo_ferramentas46.css",0777);
 //
 //compacta os códigos para o Mashup do OpenLayers
 //
