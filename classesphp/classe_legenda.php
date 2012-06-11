@@ -656,7 +656,7 @@ $size - Tamanho que será aplicado ao símbolo.
 
 $opacidade - Opacidade 
 */
-	function aplicaParametro($classe,$estilo,$outlinecolor,$backgroundcolor,$color,$symbolname,$size,$opacidade,$width,$pattern)
+	function aplicaParametro($classe,$estilo,$outlinecolor,$backgroundcolor,$color,$symbolname,$size,$opacidade,$width,$pattern,$angle)
 	{
 		if(!$this->layer){return "erro";}
 		if(!empty($pattern))
@@ -703,6 +703,10 @@ $opacidade - Opacidade
 		{$estilo->updatefromstring("STYLE PATTERN ".$pattern." END");}
 		if(isset($opacidade))
 		{$estilo->set("opacity",$opacidade);}
+		if(isset($angle))
+		{
+			$estilo->set("angle",$angle);
+		}
 		if ($this->layer->getmetadata("sld") != "")
 		{
 			$sld = $this->layer->getmetadata("sld");

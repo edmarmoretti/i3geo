@@ -1233,7 +1233,10 @@ i3GEOF.legenda = {
 			"</td><td></td></tr>" +				
 			"<tr><td style='text-align:left;'>Opacidade:</td><td>"+
 			$inputText("","","i3GEOlegendaopacidade","",3,linha[7]) +
-			"</td><td></td></tr>" +			
+			"</td><td></td></tr>" +
+			"<tr><td style='text-align:left;'>Ângulo:</td><td>"+
+			$inputText("","","i3GEOlegendaangulo","",5,linha[10]) +
+			"</td><td></td></tr>" +
 			"<tr><td style='text-align:left;'>S&iacute;mbolo:</td><td>"+
 			$inputText("","","i3GEOlegendasymbolname","",12,linha[5]) +
 			"</td><td></td></tr></table>";
@@ -1296,6 +1299,7 @@ i3GEOF.legenda = {
 				width = $i("i3GEOlegendawidth").value,
 				pattern = $i("i3GEOlegendapattern").value,
 				opacidade = $i("i3GEOlegendaopacidade").value,
+				angle = $i("i3GEOlegendaangulo").value,
 				p,cp,fim;
 			for (i=0;i<n;i++){
 				if(simbolos[i].title == symbolname || symbolname == i)
@@ -1306,7 +1310,7 @@ i3GEOF.legenda = {
 				//i3GEOF.legenda.aguarde.visibility = "hidden";
 				//return;
 			}
-			p = i3GEO.configura.locaplic+"/classesphp/mapa_controle.php?g_sid="+i3GEO.configura.sid+"&funcao=editasimbolo&opcao=aplica&tema="+i3GEOF.legenda.tema+"&classe="+i3GEOF.legenda.classe+"&estilo="+i3GEOF.legenda.estilo+"&outlinecolor="+outlinecolor+"&backgroundcolor="+backgroundcolor+"&color="+color+"&symbolname="+symbolname+"&width="+width+"&pattern="+pattern+"&size="+size+"&opacidade="+opacidade;
+			p = i3GEO.configura.locaplic+"/classesphp/mapa_controle.php?g_sid="+i3GEO.configura.sid+"&funcao=editasimbolo&opcao=aplica&tema="+i3GEOF.legenda.tema+"&classe="+i3GEOF.legenda.classe+"&estilo="+i3GEOF.legenda.estilo+"&outlinecolor="+outlinecolor+"&backgroundcolor="+backgroundcolor+"&color="+color+"&symbolname="+symbolname+"&width="+width+"&pattern="+pattern+"&size="+size+"&opacidade="+opacidade+"&angle="+angle;
 			cp = new cpaint();
 			fim = function(){
 				i3GEOF.legenda.aposAlterarLegenda();
