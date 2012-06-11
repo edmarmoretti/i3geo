@@ -90,7 +90,18 @@ i3GEO.gadgets = {
 		"mostraHistoricoZoom":
 
 		{idhtml:"historicozoom"},
-
+		//inclui opção admin
+		try{
+			if(i3GEO.parametros.editor === "sim"){
+				i3GEO.configura.oMenuData.menu.push({nome:"Admin",id:"i3GeoAdmin"});
+				i3GEO.configura.oMenuData.submenus.i3GeoAdmin = [
+				{id:"omenudataAdmin1",text: "Página principal", url: "javascript:var w = window.open(i3GEO.configura.locaplic+'/admin/index.html')" },
+				{id:"omenudataAdmin2",text: "Catálogo", url: "javascript:var w = window.open(i3GEO.configura.locaplic+'/admin/html/arvore.html')" },
+				{id:"omenudataAdmin3",text: "Menus", url: "javascript:i3GEO.arvoreDeTemas.abrejanelaIframe('900','700','"+i3GEO.configura.locaplic+"/admin/html/menus.html\')"}
+				];
+			}
+		}
+		catch(e){}
 		"mostraMenuSuspenso":
 
 		{idhtml:"menus",deslocaEsquerda:0,finaliza:"",parametrosYUI={}},
@@ -496,6 +507,18 @@ i3GEO.gadgets = {
 		{return;}
 		//cria o menu se ainda não existir
 		if(objid && objid.innerHTML === ""){
+			//inclui opção admin
+			try{
+				if(i3GEO.parametros.editor === "sim"){
+					i3GEO.configura.oMenuData.menu.push({nome:"Admin",id:"i3GeoAdmin"});
+					i3GEO.configura.oMenuData.submenus.i3GeoAdmin = [
+					{id:"omenudataAdmin1",text: "Página principal", url: "javascript:var w = window.open(i3GEO.configura.locaplic+'/admin/index.html')" },
+					{id:"omenudataAdmin2",text: "Catálogo", url: "javascript:var w = window.open(i3GEO.configura.locaplic+'/admin/html/arvore.html')" },
+					{id:"omenudataAdmin3",text: "Menus", url: "javascript:i3GEO.arvoreDeTemas.abrejanelaIframe('900','700','"+i3GEO.configura.locaplic+"/admin/html/menus.html\')"}
+					];
+				}
+			}
+			catch(e){}
 			i3GEOoMenuBar = YAHOO.widget.MenuManager;
 			if(objid){
 				objid.className="yuimenubar";
