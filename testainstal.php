@@ -19,8 +19,8 @@ catch(ee)
 }
 
 </script>
-<body class="yui-skin-sam fundoPonto">
-
+<body class="yui-skin-sam fundoPonto" >
+<center>
 <div class="bordaSuperior"  >&nbsp;</div>
 <div class="mascaraPrincipal" id="divGeral" style=text-align:left >
 <?php
@@ -79,18 +79,18 @@ $versao = versao();
 $versao = $versao["principal"];
 $exts = get_loaded_extensions();
 echo "MapServer (a vers&atilde;o deve ser &gt;= 5.2 para que a sobreposi&ccedil;&atilde;o de temas funcione na interface Google Maps): <br>";
-if(!function_exists("ms_GetVersion"))
-{
-	echo "<br><span style=color:red >O MAPSERVER PARECE NAO ESTAR INSTALADO!!!<br><br>";
-}
-echo "---<br>";
 echo ms_GetVersion()."<br><br>";
-
+if(!function_exists("ms_GetVersion"))
+{echo "<span style=color:red >O MAPSERVER PARECE NAO ESTAR INSTALADO!!!<br><br>";}
+echo "---<br>";
 
 if (get_cfg_var("safe_mode") == 1){
 	echo "<span style=color:red >Problema: safe_mode no php.ini deveria estar como 'Off'. O i3Geo n&atilde;o ir&aacute; funcionar!!!<br></span>";
 }
 echo "<br><pre>Extens&otilde;es:<br>";
+if (!extension_loaded("curl")){
+	echo "<span style=color:red >Problema: n&atilde;o est&aacute; instalado a curl que pode afetar algumas funcionalidades do i3Geo<br></span>";
+}
 if (!extension_loaded("libxml")){echo "<span style=color:red >Problema: n&atilde;o est&aacute; instalado a libxml<br></span>";}
 if (!extension_loaded( "PDO")){echo "<span style=color:red >Problema: n&atilde;o est&aacute; instalado a PDO<br></span>";}
 if (!extension_loaded( "pdo_sqlite")){echo "<span style=color:red >Problema: n&atilde;o est&aacute; instalado a pdo_sqlite<br></span>";}
@@ -109,7 +109,6 @@ echo "</pre>Existe o ms_configura.php? <br>";
 if(file_exists("ms_configura.php")) echo "Sim\n"; else {echo "Nao";saindo(" ms_configura não encontrado");}
 echo "Incluindo...\n<br>";
 include ("ms_configura.php");
-
 echo "Mensagem de inicialização: <b>$mensagemInicia </b><br><br> \n";
 echo "dir_tmp = $dir_tmp \n<br>";
 echo "locmapserv = $locmapserv \n";
@@ -117,13 +116,12 @@ echo "\n<br>";
 if(in_array($ip, $editores)){
 	echo "<br>Você é um editor cadastrado<br><br>\n";
 	echo "Este php está em ".getcwd()."\n";
+	echo "<br>O diretório de arquivos SESSION temporário é: ".session_save_path()."<br>\n";
 }
 else{
 	echo "Você não é um editor cadastrado\n";
 }
 echo "<pre>";
-
-
 
 echo "verificando banco de dados de administra&ccedil;&atilde;o...\n";
 $tabelas = array(
@@ -182,11 +180,17 @@ $server = isset($_SERVER['HTTP_HOST']) ? $_SERVER['HTTP_HOST'] : $_SERVER['SERVE
 $enderecocgi = $proto.$server.$locmapserv;
 echo "Voc&ecirc; pode testar o CGI clicando <a href='".$enderecocgi."' target='_blank'>aqui</a>, se o programa responder corretamente, dever&aacute; aparecer na tela algo como 'No query information to decode. QUERY_STRING is set, but empty.'\n" ;
 
-echo "<br>Escrevendo no diret&oacute;rio tempor&aacute;rio...";
+echo "<br>Escrevendo nos diret&oacute;rios tempor&aacute;rios...<br>";
 $f = @fopen($dir_tmp."/teste.txt",w);
 @fclose($f);
-if (file_exists($dir_tmp."/teste.txt")) echo "ok\n"; else saindo("\nN&atilde;o foi poss&iacute;vel gravar no diret&oacute;rio tempor&aacute;rio $dir_tmp");
-echo "Existe o geral1.map? ";
+if (file_exists($dir_tmp."/teste.txt")) echo "do Mapserver ok<br>\n"; else saindo("\nN&atilde;o foi poss&iacute;vel gravar no diret&oacute;rio tempor&aacute;rio $dir_tmp");
+
+$f = @fopen(session_save_path()."/teste.txt",w);
+@fclose($f);
+if (file_exists(session_save_path()."/teste.txt")) echo "da SESSION PHP ok<br>\n"; else saindo("\nN&atilde;o foi poss&iacute;vel gravar no diret&oacute;rio tempor&aacute;rio da SESSION");
+
+
+echo "<br>Existe o geral1.map? ";
 if(file_exists("$locaplic/aplicmap/geral1.map")) echo "Sim\n"; else {echo "Nao";saindo("geral1.map n&atilde;o encontrado");}
 echo " \n";
 echo "Carregando o map_file base...\n";
