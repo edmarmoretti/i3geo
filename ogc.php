@@ -35,7 +35,7 @@ lista - se for igual a "temas", mostra uma lista dos temas disponíveis
 
 ajuda - se for definida na URL, mostra uma ajuda ao usuário
 
-tema - nome do tema do serviço. Se for definido, o web service conterá apenas o tema.
+tema - nome do tema do serviço. Se for definido, o web service conterá apenas esse tema. O tema é o nome do mapfile existente em i3geo/temas, mas pode ser especificado um mapfile existente em outra pasta. Nesse caso, deve-se especificar o caminho completo para o arquivo.
 
 intervalo - valor inicial e final com o número de temas que serão mostrados no serviço
 
@@ -51,6 +51,8 @@ Exemplos:
 ogc.php?lista=temas
 
 ogc.php?tema=bioma
+
+ogc.php?tema=/var/www/i3geo/aplicmap/geral1debianv6.map&layers=mundo
 
 ogc.php?intervalo=0,50
 */
@@ -198,7 +200,8 @@ if(!isset($tema)){
 if ($tipo == "" || $tipo == "metadados")
 {
 	$tema = explode(" ",$tema);
-	//para o caso do tema ser um arquivo mapfile existente em uma pasta
+	//para o caso do tema ser um arquivo mapfile existente em uma pasta qualquer
+	//$temai3geo = true indica que o layer será buscado na pasta i3geo/temas
 	$temai3geo = true;
 	if(file_exists($_GET["tema"])){
 		$nmap = ms_newMapobj($_GET["tema"]);
@@ -216,12 +219,19 @@ if ($tipo == "" || $tipo == "metadados")
 				$nmap = ms_newMapobj($locaplic."/temas/".$tx.".map");
 				$nmap->setmetadata("ows_enable_request","*");
 			}
-			$ts = $nmap->getalllayernames();
+			if($temai3geo == false || empty($layers))
+			{$ts = $nmap->getalllayernames();}
+			else{
+				$ts = explode(",",str_replace(" ",",",$layers));
+			}
 			foreach ($ts as $t)
 			{
 				$l = $nmap->getlayerbyname($t);
-				if($cache == true && strtolower($l->getmetadata("cache")) == "sim" && $tipo == "" && count($tema) == 1){
-					carregaCacheImagem($_GET["BBOX"],$tx,$_GET["WIDTH"],$_GET["HEIGHT"],$cachedir);
+				//necessário pq o mapfile pode ter todos os layers como default
+				if($temai3geo == false)
+				{$l->set("status",MS_OFF);}
+				if($cache == true && strtolower($l->getmetadata('cache')) == 'sim' && $tipo == '' && count($tema) == 1){
+					carregaCacheImagem($_GET['BBOX'],$tx,$_GET['WIDTH'],$_GET['HEIGHT'],$cachedir);
 				}
 				$l->setmetadata("ows_title",pegaNome($l));
 				$l->setmetadata("ows_srs",$listaepsg);
@@ -408,8 +418,9 @@ function ogc_imprimeAjuda()
 	echo "Para escolher um tema, utilize:<br>";
 	echo "ogc.php?lista=temas - para listar os temas disponíveis<br>";
 	echo "Para usar esse web service, além dos parâmetros normais, vc deverá incluir o parâmetro &tema=,<br>";
-	echo "ou seja,http://[host]/i3geo/ogc.php?tema=[código do tema]<br><br>";
-	echo "Utilize o sistema de administração do i3Geo para configurar quais os temas podem ser utilizados.";
+	echo "ou seja,http://[host]/i3geo/ogc.php?tema=[código do tema]<br>";
+	echo "no lugar do código pode ser especificado também um arquivo mapfile qualquer. Nesse caso, deve ser digitado o caminho completo no servidor<br><br>";
+	echo "Utilize o sistema de administração do i3Geo para configurar quais os temas da pasta i3geo/temas podem ser utilizados.";
 	echo "Utilize o parametro &intervalo=0,20 para definir o número de temas desejado na função getcapabilities.";
 }
 function ogc_imprimeListaDeTemas()
