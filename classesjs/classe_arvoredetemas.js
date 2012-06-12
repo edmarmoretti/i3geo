@@ -101,7 +101,9 @@ i3GEO.arvoreDeTemas = {
 		
 		googleearth: true,
 		
-		uploadarquivo: true //upload de GPX, SHAPEFILE, DBF, CSV e KML
+		uploadarquivo: true, //upload de GPX, SHAPEFILE, DBF, CSV e KML
+		
+		flutuante: true //mostra a opção que permite abrir o catálogo em uma janela flutuante
 	}
 
 	Tipo:
@@ -134,7 +136,8 @@ i3GEO.arvoreDeTemas = {
 		bookmark: true,
 		importarwmc: true,
 		googleearth: true,
-		carregaKml: true
+		carregaKml: true,
+		flutuante: true
 	},
 	/*
 	Propriedade: FATORESTRELA
@@ -342,6 +345,53 @@ i3GEO.arvoreDeTemas = {
 	{JSON}
 	*/
 	TEMAS: null,
+	/*
+	Function: flutuante
+
+	Abre o catálogo em uma janela flutuante
+	*/	
+	flutuante: function(){
+		var janela,ins,temp,cabecalho,minimiza,idold,corpo,altura;
+		cabecalho = function(){};
+		if($i("i3GEOFcatalogo_corpo"))
+		{return;}
+		minimiza = function(){
+			i3GEO.janela.minimiza("i3GEOFcatalogo");
+		};
+		altura = i3GEO.parametros.w - 150;
+		if(altura > 500){
+			altura = 500;
+		}
+		janela = i3GEO.janela.cria(
+			"360px",
+			altura + "px",
+			"",
+			"",
+			"",
+			$trad("g1a"),
+			"i3GEOFcatalogo",
+			false,
+			"hd",
+			cabecalho,
+			minimiza
+		);
+		temp = function(){
+			delete(i3GEO.arvoreDeTemas.ARVORE);
+		};
+		YAHOO.util.Event.addListener(janela[0].close, "click", temp,janela[0].panel,{id:janela[0].id},true);
+		corpo = $i("i3GEOFcatalogo_corpo");
+		corpo.style.backgroundColor = "white";
+		corpo.innerHTML = $trad("o1");
+		corpo.style.overflow = "auto";
+		if($i(i3GEO.arvoreDeTemas.IDHTML)){
+			$i(i3GEO.arvoreDeTemas.IDHTML).innerHTML = "";
+			i3GEO.arvoreDeTemas.IDHTML = idold;
+		}
+		idold = i3GEO.arvoreDeTemas.IDHTML;
+		delete(i3GEO.arvoreDeTemas.ARVORE);
+		i3GEO.arvoreDeTemas.IDHTML = "i3GEOFcatalogo_corpo";
+		i3GEO.arvoreDeTemas.cria(i3GEO.configura.sid,i3GEO.configura.locaplic,"");
+	},	
 	/*
 	Function: listaWMS
 
@@ -860,6 +910,18 @@ i3GEO.arvoreDeTemas = {
 				root
 			);
 		}
+		//
+		//abrir catálogo em janela flutuante
+		//
+		if(i3GEO.arvoreDeTemas.OPCOESADICIONAIS.flutuante === true){
+			tempNode = new YAHOO.widget.HTMLNode(
+				{
+					html:"<a href='#' onclick='i3GEO.arvoreDeTemas.flutuante()' >Abrir em janela flutuante</a>",
+					idmenu:"",enableHighlight:false,expanded:false
+				},
+				root
+			);
+		}			
 		//
 		//wms
 		//
@@ -2025,7 +2087,7 @@ i3GEO.arvoreDeTemas = {
 				"		</tr>";
 			}			
 			ins += "	</table>";			
-			$i(janela[2].id).innerHTML = ins;;
+			$i(janela[2].id).innerHTML = ins;
 		},
 
 		/*

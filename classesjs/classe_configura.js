@@ -180,6 +180,7 @@ i3GEO.configura = {
 			],
 			"ferramentas": [
 			{ id:"omenudataFerramentas0a",text: '<span style=color:gray;text-decoration:underline; ><b>'+$trad("g4a")+'</b></span>',url: "#"}, 
+			{ id:"omenudataFerramentas4a",text: $trad("g1a"), url: "javascript:i3GEO.arvoreDeTemas.flutuante()"},
 			{ id:"omenudataFerramentas1a",text: $trad("t20"), url: "javascript:i3GEO.mapa.dialogo.opacidade()"},
 			{ id:"omenudataFerramentas2a",text: $trad("p21"), url: "javascript:i3GEO.mapa.dialogo.animacao()"},
 			{ id:"omenudataFerramentas3a",text: $trad("d24t"), url: "javascript:i3GEO.mapa.dialogo.selecao();"},
