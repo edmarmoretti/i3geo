@@ -130,14 +130,14 @@ it:"Disattiva legenda"
 "p19": [
 {
 pt: "Ativa ou desativa a legenda de um tema na opção de impressão do mapa",
-en:"Ativa ou desativa a legenda de um tema na opção de impressão do mapa",
+en:"Enables or disables the legend of a theme in the print option on the map",
 es:"Ativa ou desativa a legenda de um tema na opção de impressão do mapa",
 it:"Ativa ou desativa a legenda de um tema na opção de impressão do mapa"
 }],
 "p20": [
 {
 pt: "Tela remota",
-en:"Tela remota",
+en:"Remote screen",
 es:"Tela remota",
 it:"Tela remota"
 }],
@@ -188,8 +188,8 @@ it:"Proprietà"
 "u1": [
 {
 pt: "Sobre o i3Geo",
-en:"About",
-es:"Sobre I3Geo",
+en:"About i3Geo",
+es:"Sobre i3Geo",
 it:"Informazioni WebGis"
 }],
 "u2": [
@@ -216,7 +216,7 @@ it:"Guida"
 "u4a": [
 {
 pt: "Manual do usuário",
-en:"Manual do usuário",
+en:"User manual",
 es:"Manual do usuário",
 it:"Manual do usuário"
 }],
@@ -426,14 +426,14 @@ it:"Altri"
 "u28": [
 {
 pt: "Centro médio",
-en:"Centro médio",
+en:"Mean center",
 es:"Centro médio",
 it:"Centro médio"
 }],
 "u29": [
 {
 pt: "Editor vetorial",
-en:"Editor vetorial",
+en:"Vector editor",
 es:"Editor vetorial",
 it:"Editor vetorial"
 }],
@@ -455,14 +455,14 @@ it:"Trascina qui per rimuovere"
 "t2a":[
 {
 pt:"Filtra a lista de camadas",
-en:"filtra a lista de camadas",
+en:"Filters the list of layers",
 es:"filtra a lista de camadas",
 it:"filtra a lista de camadas"
 }],
 "t2b":[
 {
 pt:"Abre a legenda do mapa",
-en:"Abre a legenda do mapa",
+en:"Opens the map legend",
 es:"Abre a legenda do mapa",
 it:"Abre a legenda do mapa"
 }],
@@ -476,14 +476,14 @@ it:"Fare clic per attivare o disattivare questo tema. Dopo aver modificato lo st
 "t3a":[
 {
 pt:"Clique para ligar todos os temas",
-en:"Turn all layers layer on",
+en:"Turn all layers on",
 es:"Haga clic para conectar los temas",
 it:"Turn all layers on" 
 }],
 "t3b":[
 {
 pt:"Clique para desligar todos os temas",
-en:"Turn all layers layer off",
+en:"Turn all layers off",
 es:"Haga clic para desconectar los temas",
 it:"Turn all layers off" 
 }],
@@ -771,14 +771,14 @@ it:"Grafico"
 "t37a":[
 {
 pt:"Tema com gráficos",
-en:"Graphic",
+en:"Theme chart",
 es:"Gr&aacute;fico",
 it:"Grafico"
 }],
 "t37b":[
 {
 pt:"Gráfico interativo",
-en:"Graphic",
+en:"Interactive chart",
 es:"Gr&aacute;fico",
 it:"Grafico"
 }],
@@ -799,7 +799,7 @@ it:"SLD..."
 "t40":[
 {
 pt:"Abre a ferramenta que permite alterar o SQL de acesso aos dados",
-en:"Abre a ferramenta que permite alterar o SQL de acesso aos dados",
+en:"Open the tool that lets you change the SQL data access",
 es:"Abre a ferramenta que permite alterar o SQL de acesso aos dados",
 it:"Abre a ferramenta que permite alterar o SQL de acesso aos dados"
 }],
@@ -820,7 +820,7 @@ it:"Tenda..."
 "t43":[
 {
 pt:"Aplicar SLD",
-en:"Aplicar SLD...",
+en:"SLD apply...",
 es:"Aplicar SLD...",
 it:"Aplicar SLD..."
 }],
@@ -834,35 +834,35 @@ it:"Salva mapfile"
 "t45": [
 {
 pt: "Comentar",
-en:"Comentar",
+en:"Comment",
 es:"Comentar",
 it:"Comentar"
 }],
 "t46": [
 {
-pt: "Mais populares",
-en:"Mais populares",
+pt:"Mais populares",
+en:"Most popular",
 es:"Mais populares",
 it:"Mais populares"
 }],
 "t47": [
 {
 pt: "Intervalo em segundos após o qual a camada será atualizada. Para ignorar, deixe em branco",
-en:"Intervalo em segundos após o qual a camada será atualizada. Para ignorar, deixe em branco",
+en:"Interval in seconds after which the layer will be updated. To ignore, leave blank",
 es:"Intervalo em segundos após o qual a camada será atualizada. Para ignorar, deixe em branco",
 it:"Intervalo em segundos após o qual a camada será atualizada. Para ignorar, deixe em branco"
 }],
 "t48": [
 {
 pt: "Temporizador",
-en:"Temporizador",
+en:"Timer",
 es:"Temporizador",
 it:"Temporizador"
 }],
 "t49": [
 {
-pt: "Mapa temático 3d",
-en:"Mapa temático 3d",
+pt:"Mapa temático 3d",
+en:"Thematic map 3d",
 es:"Mapa temático 3d",
 it:"Mapa temático 3d"
 }],
@@ -898,7 +898,7 @@ it:"Download dei dati"
 "a3a":[
 {
 pt:"Importar Web Map Context (WMC)",
-en:"Importar Web Map Context (WMC)",
+en:"Web Map Context (WMC) Importer",
 es:"Importar Web Map Context (WMC)",
 it:"Importar Web Map Context (WMC)"
 }],
@@ -1111,7 +1111,7 @@ it:"Modificare la scala della mappa adeguandola per mostrare la stessa copertura
 "d2t":[
 {
 pt:"enquadramento inicial",
-en:"enquadramento inicial",
+en:"initial extent",
 es:"enquadramento inicial",
 it:"enquadramento inicial"
 }],
@@ -1125,7 +1125,7 @@ it:"Ampliare la mappa - pone il punto cliccato nel centro dello schermo o ingran
 "d3t":[
 {
 pt:"clique e arraste para ampliar",
-en:"clique e arraste para ampliar",
+en:"click and drag to enlarge",
 es:"clique e arraste para ampliar",
 it:"clique e arraste para ampliar"
 }],
@@ -1139,7 +1139,7 @@ it:"Sposta la regione visibile sulla mappa. Dopo averla attivata, cliccare e tra
 "d4t":[
 {
 pt:"clique e arraste para deslocar",
-en:"clique e arraste para deslocar",
+en:"click and drag to move",
 es:"clique e arraste para deslocar",
 it:"clique e arraste para deslocar"
 }],
@@ -1153,7 +1153,7 @@ it:"Estendi la mappa tenendo come riferimento il centro corrente."
 "d5t":[
 {
 pt:"aproximar",
-en:"aproximar",
+en:"zoom in",
 es:"aproximar",
 it:"aproximar"
 }],
@@ -1167,7 +1167,7 @@ it:"Riduci la mappa tenendo come referimento il centro corrente"
 "d6t":[
 {
 pt:"afastar",
-en:"afastar",
+en:"zoom out",
 es:"afastar",
 it:"afastar"
 }],
@@ -1181,7 +1181,7 @@ it:"Mostra gli informazioni su un punto sulla mappa. Dopo averla attivata, fare 
 "d7t":[
 {
 pt:"clique para identificar",
-en:"clique para identificar",
+en:"click to identify",
 es:"clique para identificar",
 it:"clique para identificar"
 }],
@@ -1195,7 +1195,7 @@ it:"Mostra gli informazioni su un punto sulla mappa. Dopo averla attivata, ferma
 "d7at":[
 {
 pt:"etiqueta",
-en:"etiqueta",
+en:"label",
 es:"etiqueta",
 it:"etiqueta"
 }],
@@ -1209,7 +1209,7 @@ it:"Mostra la estensione geografica corrente in coordinate geografiche"
 "d8t":[
 {
 pt:"extensão atual",
-en:"extensão atual",
+en:"total extent",
 es:"extensão atual",
 it:"extensão atual"
 }],
@@ -1223,7 +1223,7 @@ it:"Apertura/chiusura della mappa di riferimento"
 "d9t":[
 {
 pt:"mapa de referência",
-en:"mapa de referência",
+en:"reference map",
 es:"mapa de referência",
 it:"mapa de referência"
 }],
@@ -1244,7 +1244,7 @@ it:"Ricerca dati su Wikipedia nell'ambito corrente della mappa. Fare uno zoom su
 "d11t":[
 {
 pt:"buscar na Wikipédia",
-en:"buscar na Wikipédia",
+en:"search in Wikipédia",
 es:"buscar na Wikipédia",
 it:"buscar na Wikipédia"
 }],
@@ -1307,7 +1307,7 @@ it:"Progetto di confluenza. Punti di intersezione delle coordinate osservate in 
 "d17t":[
 {
 pt:"confluências",
-en:"confluências",
+en:"confluences",
 es:"confluências",
 it:"confluências"
 }],
@@ -1321,7 +1321,7 @@ it:"Apri lente di ingrandimento"
 "d18t":[
 {
 pt:"lente",
-en:"lente",
+en:"lens",
 es:"lente",
 it:"lente"
 }],
@@ -1342,7 +1342,7 @@ it:"Ricarica la mappa con la configurazione iniziale."
 "d20t":[
 {
 pt:"reinicia",
-en:"reinicia",
+en:"restart",
 es:"reinicia",
 it:"reinicia"
 }],
@@ -1356,7 +1356,7 @@ it:"Misura la distanza tra due o più punti cliccati sulla mappa (minore distanza
 "d21t":[
 {
 pt:"distância",
-en:"distância",
+en:"distance",
 es:"distância",
 it:"distância"
 }],
@@ -1370,7 +1370,7 @@ it:"Misura l'area di un poligono tracciato sullo schermo. Il calcolo della super
 "d21at":[
 {
 pt:"área",
-en:"área",
+en:"area",
 es:"área",
 it:"área"
 }],
@@ -1384,7 +1384,7 @@ it:"Inserire punti sulla mappa in coordinate geografiche. I punti inseriti posso
 "d22t":[
 {
 pt:"inserir pontos",
-en:"inserir pontos",
+en:"insert points",
 es:"inserir pontos",
 it:"inserir pontos"
 }],
@@ -1405,7 +1405,7 @@ it:"Aprire gli strumenti per selezionare gli elementi di un tema. Gli elementi s
 "d24t":[
 {
 pt:"Selecionar",
-en:"Selecionar",
+en:"Select",
 es:"Selecionar",
 it:"Selecionar"
 }],
@@ -1419,7 +1419,7 @@ it:"Inserisci il testo sulla mappa cliccando su un punto. Utilizzare questa opzi
 "d25t":[
 {
 pt:"Inserir texto",
-en:"Inserir texto",
+en:"Text insert",
 es:"Inserir texto",
 it:"Inserir texto"
 }],
@@ -1447,7 +1447,7 @@ it:"Attendere..."
 "d29":[
 {
 pt:"Estações metar",
-en:"Estações metar",
+en:"Metar stations",
 es:"Estações metar",
 it:"Estações metar"
 }],
@@ -1461,7 +1461,7 @@ it:"Linha do tempo"
 "d31":[
 {
 pt:"Não existe nenhuma camada com etiquetas ativas",
-en:"Não existe nenhuma camada com etiquetas ativas",
+en:"There is no layer with active labels",
 es:"Não existe nenhuma camada com etiquetas ativas",
 it:"Não existe nenhuma camada com etiquetas ativas"
 }],
@@ -1475,20 +1475,20 @@ it:"Applicazioni"
 "ge1":[
 {
 pt:"Navegação com o mouse",
-en:"Navegação com o mouse",
+en:"Mouse navigation",
 es:"Navegação com o mouse",
 it:"Navegação com o mouse"
 }],
 "ge2":[
 {
 pt:"Barra de status",
-en:"Barra de status",
+en:"Status bar",
 es:"Barra de status",
 it:"Barra de status"
 }],
 "ge3":[
 {
-pt:"Mapa de referência",
+pt:"Reference map",
 en:"Mapa de referência",
 es:"Mapa de referência",
 it:"Mapa de referência"
@@ -1496,59 +1496,142 @@ it:"Mapa de referência"
 "ge4":[
 {
 pt:"Escala e legenda",
-en:"Escala e legenda",
+en:"Scale and legend",
 es:"Escala e legenda",
 it:"Escala e legenda"
 }],
 "ge5":[
 {
 pt:"Atmosfera",
-en:"Atmosfera",
+en:"Atmosphere",
 es:"Atmosfera",
 it:"Atmosfera"
 }],
 "ge6":[
 {
 pt:"Grade de coordenadas",
-en:"Grade de coordenadas",
+en:"Coordinates grid",
 es:"Grade de coordenadas",
 it:"Grade de coordenadas"
 }],
 "ge7":[
 {
 pt:"Luz do sol",
-en:"Luz do sol",
+en:"Sunshine",
 es:"Luz do sol",
 it:"Luz do sol"
 }],
 "ge8":[
 {
 pt:"Limites políticos",
-en:"Limites políticos",
+en:"Political boundaries",
 es:"Limites políticos",
 it:"Limites políticos"
 }],
 "ge9":[
 {
 pt:"Construções em 3d",
-en:"Construções em 3d",
+en:"Buildings in 3D",
 es:"Construções em 3d",
 it:"Construções em 3d"
 }],
 "ge10":[
 {
 pt:"Estradas",
-en:"Estradas",
+en:"Roads",
 es:"Estradas",
 it:"Estradas"
 }],
 "ge11":[
 {
 pt:"Terreno",
-en:"Terreno",
+en:"Terrain",
 es:"Terreno",
 it:"Terreno"
+}],
+"x1":[
+{
+pt:"Página principal",
+en:"Home",
+es:"Página principal",
+it:"Página principal"
+}],
+"x2":[
+{
+pt:"Lista de menus",
+en:"Menu list",
+es:"Lista de menus",
+it:"Lista de menus"
+}],
+"x3":[
+{
+pt:"Miniaturas",
+en:"Thumbnails",
+es:"Miniaturas",
+it:"Miniaturas"
+}],
+"x4":[
+{
+pt:"Pesquisa na INDE",
+en:"Search in SDI",
+es:"Pesquisa na INDE",
+it:"Pesquisa na INDE"
+}],
+"x5":[
+{
+pt:"Editar subgrupos",
+en:"Subgroups editing",
+es:"Editar subgrupos",
+it:"Editar subgrupos"
+}],
+"x6":[
+{
+pt:"Editar temas",
+en:"Theme editing",
+es:"Editar temas",
+it:"Editar temas"
+}],
+"x7":[
+{
+pt:"opção visível apenas para editores",
+en:"option visible only to editors",
+es:"opção visível apenas para editores",
+it:"opção visível apenas para editores"
+}],
+"x8":[
+{
+pt:"Sistema de administração",
+en:"Management System",
+es:"Sistema de administração",
+it:"Sistema de administração"
+}],
+"x9":[
+{
+pt:"Editar árvore",
+en:"Edit tree",
+es:"Editar árvore",
+it:"Editar árvore"
+}],
+"x10":[
+{
+pt:"Editar menus",
+en:"Edit menu",
+es:"Editar menus",
+it:"Editar menus"
+}],
+"x11":[
+{
+pt:"Mostra a legenda em uma janela",
+en:"Show the legend in a window",
+es:"Mostra a legenda em uma janela",
+it:"Mostra a legenda em uma janela"
+}],
+"x12":[
+{
+pt:"",
+en:"",
+es:"",
+it:""
 }]
-
 };
 //YAHOO.log("carregou dicionario", "Classes i3geo");

@@ -117,6 +117,10 @@ if(in_array($ip, $editores)){
 	echo "<br>Você é um editor cadastrado<br><br>\n";
 	echo "Este php está em ".getcwd()."\n";
 	echo "<br>O diretório de arquivos SESSION temporário é: ".session_save_path()."<br>\n";
+	if($conexaoadmin == "" && file_exists($locaplic."/admin/admin.db")){
+		echo "<br>As permissões do banco de dados $locaplic/admin/admin.db são (se o arquivo estiver bloqueado, o sistema de administração não irá funcionar):<br>";
+		echo permissoesarquivo($locaplic."/admin/admin.db")."<br>";		
+	}
 }
 else{
 	echo "Você não é um editor cadastrado\n";
