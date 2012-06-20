@@ -38,6 +38,7 @@ i3geo/admin/php/criabanco.php
 */
 $funcao = "";
 include_once("admin.php");
+
 error_reporting(E_ALL);
 if(verificaEditores($editores) == "nao")
 {echo "Vc nao e um editor cadastrado. Apenas os editores definidos em i3geo/ms_configura.php podem acessar o sistema de administracao.";exit;}
@@ -68,9 +69,15 @@ if($conexaoadmin == "")
 {
 	if(file_exists("../../admin/admin.db"))
 	{echo "Arquivo admin/admin.db ja existe. Vc deve apagá-lo para poder criar novamente";exit;}
-	$banco = sqlite_open("../../admin/admin.db",0666);
-	$banco = null;
-	$dbhw = new PDO('sqlite:../../admin/admin.db');
+	if(function_exists("sqlite_open")){
+		$banco = sqlite_open("../../admin/admin.db",0666);
+		$banco = null;
+		$dbhw = new PDO('sqlite:../../admin/admin.db');
+	}
+	else{
+		echo "A função de criação do banco sqlite não existe no PHP. Vc pode usar o arquivo i3geo/admin/adminvazio.db e renomeá-lo para admin.db.";
+		exit;
+	}
 }
 else
 {
