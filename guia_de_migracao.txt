@@ -8,6 +8,14 @@ Para a versão 4.7
 - O gadget "quadro" foi removido
 - A opção de ativação/desativação do entorno foi removida
 - Remoção da pasta i3geo/classesjs/zerocal
+- Remoção da pasta i3geo/mobile
+- Remoção da pasta i3geo/pacotes/yui270
+- Remoção dos arquivos de exemplo de i3geo/ferramentas
+- Remoção das pastas depreciadas de i3geo/ferramentas
+- Remoção da pasta i3geo/pacotes/rlib
+- Remoção da pasta i3geo/pacotes/jsts
+- Remoção da pasta i3geo/pacotes/jsobjects
+- Remoção dos arquivos js da raiz de i3geo/ferramentas
 
 
 -------------------------------------------------------------------------------------------------
