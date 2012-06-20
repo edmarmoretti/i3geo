@@ -36,6 +36,26 @@ i3geo/classesjs/compactajs.php
 //
 //compacta os arquivos do richdraw
 //
+$f = @fopen("../classesjs/teste.txt",w);
+@fclose($f);
+if (!file_exists("../classesjs/teste.txt")){
+	echo "<span style='color:red'>Não foi possível escrever em classesjs";exit;
+}
+$f = @fopen("../css/teste.txt",w);
+@fclose($f);
+if (!file_exists("../css/teste.txt")){
+	echo "<br><span style='color:red'>Não foi possível escrever em css";exit;
+}
+$f = @fopen("../pacotes/teste.txt",w);
+@fclose($f);
+if (!file_exists("../pacotes/teste.txt")){
+	echo "<br><span style='color:red'>Não foi possível escrever em pacotes";exit;
+}
+$f = @fopen("../mashups/teste.txt",w);
+@fclose($f);
+if (!file_exists("../mashups/teste.txt")){
+	echo "<br><span style='color:red'>Não foi possível escrever em mashups";exit;
+}
 echo "<pre>";
 packer("../pacotes/richdraw/richdraw.js","../pacotes/richdraw/richdraw_compacto.js","Normal");
 packer("../pacotes/richdraw/svgrenderer.js","../pacotes/richdraw/svgrenderer_compacto.js","Normal");
@@ -112,7 +132,7 @@ $jsfiles = array(
 "../pacotes/yui290/build/logger/logger-min.js",
 "../pacotes/yui290/build/dragdrop/dragdrop-min.js",
 "../pacotes/yui290/build/slider/slider-min.js",
-"../pacotes/yui270/build/animation/animation-min.js",
+"../pacotes/yui290/build/animation/animation-min.js",
 "../pacotes/yui290/build/container/container_compacto.js",
 "../pacotes/yui290/build/element/element-min.js",
 "../pacotes/yui290/build/tabview/tabview-min.js",
