@@ -1,0 +1,298 @@
+<html>
+<head>
+<STYLE type="text/css" >
+.combo {
+font-family: verdana, arial, sans;
+font-size: 8pt;
+}
+div#ResultadoPesquisa {
+position: absolute;
+left: 2px;
+top: 250px;
+width: 100%;
+height: 20px;
+overflow: auto;
+font-family: verdana, arial, sans;
+font-size: 9pt;
+}
+div#ResultadoDetalhe {
+position: absolute;
+left: 1px;
+top: 410px;
+width: 610px;
+height: 432px;
+overflow: auto;
+font-family: verdana, arial, sans;
+font-size: 9pt;
+}
+div#filtro {
+position:absolute;
+left:10px;;
+top:60px;
+width:255px;
+height:35px;
+}
+div#tipoFiltro {
+position:relative;
+left:0px;;
+top:10px;
+width:155px;
+height:35px;
+}
+div#valores {
+position:relative;
+left:0px;;
+top:70px;
+width:255px;
+height:35px;
+display:none;
+}
+div#especies {
+position:relative;
+left:0px;;
+top:90px;
+width:255px;
+height:35px;
+display:none;
+}
+div#valoresFiltro {
+position:relative;
+left:0px;;
+top:10px;
+width:155px;
+height:35px;
+}
+div#valoresEspecie {
+position:relative;
+left:0px;;
+top:10px;
+width:155px;
+height:35px;
+}
+div#pesquisar {
+position: relative;
+left: 0px;
+top: 110px;
+width: 200px;
+height: 35px;
+}
+</STYLE>
+<link rel="stylesheet" type="text/css" href="../../css/i3geo_ferramentas45.css">
+<link rel="stylesheet" type="text/css" href="../../pacotes/yui231/build/tabview/assets/skins/sam/tabview.css">
+<style type="text/css">
+.yuibutton button{padding-left:2em;background:url(../../imagens/tic.png) 5% 50% no-repeat;}
+</style>
+<title></title>
+</head>
+<body name="ancora" class="yui-skin-sam">
+<FONT face=Arial color=#808000 size=4>Busca espécies - NatureServer</FONT><br>
+<FONT face=Arial color=#808000 size=2>
+Banco de dados NatureServer . <a href="http://www.natureserve.org/infonatura/" target=blank >Mais info...</a>
+</FONT>
+<FORM name=frmSibea>
+<DIV id=filtro >
+	<FONT face="Verdana, Arial, Helvetica, sans-serif" size=2>Escolha o tipo:</FONT>
+	<div id=tipoFiltro >
+		Aguarde...
+	</div>
+</DIV>
+<DIV id=valores >
+	<FONT face="Verdana, Arial, Helvetica, sans-serif" size=2>Escolha a família:</FONT>
+	<div id=valoresFiltro >
+	</div>
+</DIV>
+<DIV id=especies >
+	<FONT face="Verdana, Arial, Helvetica, sans-serif" size=2>Escolha a espécie:</FONT>
+	<div id=valoresEspecie >
+	</div>
+</DIV>
+<DIV id=pesquisar>
+<INPUT class=combo onclick=executa() type=button value='Criar mapa' />
+<select id=cor >
+	<option value='255,0,0' >cor</option>
+	<option value='255,0,0' >vermelho</option>
+	<option value='0,255,0' >verde</option>
+	<option value='255,255,0' >amarelo</option>
+	<option value='0,0,255' >azul</option>
+</select>
+</DIV>
+</form>
+<DIV id=ResultadoPesquisa ></DIV>
+<script src="../i3geo_tudo_compacto.js.php" type="text/javascript"></script>
+<script language="JavaScript" type="text/javascript" src="index.js"></script>
+<script type="text/javascript" >
+/*
+Title: Espécies (JavaScript)
+
+Monta a janela de consulta aos dados de espécies permitindo localizar as áreas de ocorrência
+
+
+Arquivos:
+
+i3geo/ferramentas/especies/pesquisa.php
+i3geo/ferramentas/especies/pesquisa.htm
+
+Licenca:
+
+GPL2
+
+I3Geo Interface Integrada de Ferramentas de Geoprocessamento para Internet
+
+Direitos Autorais Reservados (c) 2006 Ministério do Meio Ambiente Brasil
+Desenvolvedor: Edmar Moretti edmar.moretti@mma.gov.br
+
+Este programa é software livre; você pode redistribuí-lo
+e/ou modificá-lo sob os termos da Licença Pública Geral
+GNU conforme publicada pela Free Software Foundation;
+
+Este programa é distribuído na expectativa de que seja útil,
+porém, SEM NENHUMA GARANTIA; nem mesmo a garantia implícita
+de COMERCIABILIDADE OU ADEQUAÇÃO A UMA FINALIDADE ESPECÍFICA.
+Consulte a Licença Pública Geral do GNU para mais detalhes.
+Você deve ter recebido uma cópia da Licença Pública Geral do
+GNU junto com este programa; se não, escreva para a
+Free Software Foundation, Inc., no endereço
+59 Temple Street, Suite 330, Boston, MA 02111-1307 USA.
+
+*/
+
+
+g_sid = window.parent.g_sid
+
+comboBancos()
+
+/*
+Function: comboBancos
+
+Monta o combo com os tipos de filtro
+*/
+function comboBancos()
+{
+	var monta = function(retorno)
+	{
+		var ins = "\<select class=combo id=comboFiltros onchange='comboListaFamilias(this.value)' \>\<option value=''\>Nenhum\<\/option\>"
+		for(i=0;i<retorno.data.especies.length;i++)
+		{
+			ins += "\<option value="+retorno.data.especies[i].database+" >"+retorno.data.especies[i].nome+"\<\/option\>"
+		}
+		document.getElementById("tipoFiltro").innerHTML = ins+"\<\/select\>"
+	}
+	var p = "pesquisa.php?g_sid="+g_sid+"&funcao=listaBancos"
+	var cp = new cpaint();
+	//cp.set_debug(2)
+	cp.set_response_type("JSON");
+	cp.call(p,"listaBancos",monta);
+}
+/*
+Function: comboListaFamilias
+
+Lista familias de um banco.
+*/
+function comboListaFamilias(banco)
+{
+	document.getElementById("especies").style.display="none"
+	if (banco == "")
+	{
+		document.getElementById("valores").style.display="none"
+		return
+	}
+	document.getElementById("valores").style.display="block"
+	document.getElementById("valoresFiltro").innerHTML = "Aguarde..."
+	var monta = function(retorno)
+	{
+		var ins = "\<select class=combo id=comboFamilias onchange='comboListaEspecies(this.value)' \>\<option value=''\>---\<\/option\>"
+		for(i=0;i<retorno.data.especies.length;i++)
+		{
+			ins += "<option value='"+retorno.data.especies[i]+"' >"+retorno.data.especies[i]+"\<\/option\>"
+		}
+		document.getElementById("valoresFiltro").innerHTML = ins+"\<\/select\>"
+	}
+	var p = "pesquisa.php?g_sid="+g_sid+"&funcao=listaFamilias&banco="+banco
+	var cp = new cpaint();
+	//cp.set_debug(2)
+	cp.set_response_type("JSON");
+	cp.call(p,"listaFamilias",monta);	
+}
+/*
+Function: comboListaEspecies
+
+Lista especies de uma familia.
+*/
+function comboListaEspecies(familia)
+{
+	if (familia == "")
+	{
+		document.getElementById("especies").style.display="none"
+		return
+	}
+	var banco = document.getElementById("comboFiltros").value
+	var familia = document.getElementById("comboFamilias").value
+	document.getElementById("especies").style.display="block"
+	document.getElementById("valoresEspecie").innerHTML = "Aguarde..."
+	var monta = function(retorno)
+	{
+		var ins = "\<select class=combo id=comboEspecies \>\<option value=''\>---\<\/option\>"
+		for(i=0;i<retorno.data.especies.length;i++)
+		{
+			ins += "\<option value='"+retorno.data.especies[i]+"' \>"+retorno.data.especies[i]+"\<\/option\>"
+		}
+		document.getElementById("valoresEspecie").innerHTML = ins+"\<\/select\>"
+	}
+	var p = "pesquisa.php?g_sid="+g_sid+"&funcao=listaEspecies&banco="+banco+"&familia="+familia
+	var cp = new cpaint();
+	//cp.set_debug(2)
+	cp.set_response_type("JSON");
+	cp.call(p,"listaEspecies",monta);	
+}
+
+/*
+Function: executa
+
+Chama a função Ajax para realizar a consulta e adicionar a nova camada ao mapa atual.
+*/
+function executa()
+{
+	var banco = document.getElementById("comboFiltros").value
+	if (banco == "")
+	{$i("ResultadoPesquisa").innerHTML = "";alert("Escolha um tipo!");return}
+	document.getElementById("ResultadoPesquisa").innerHTML = "Aguarde! Pesquisando.....";
+	if (document.getElementById("comboFamilias"))
+	{
+		var familia = document.getElementById("comboFamilias").value
+		if (familia == "")
+		{$i("ResultadoPesquisa").innerHTML = "";alert("Escolha uma familia!");return}
+	}
+	var especie = ""
+	if (document.getElementById("comboEspecies"))
+	{
+		var especie = (document.getElementById("comboEspecies").value)
+		if (especie == "")
+		{$i("ResultadoPesquisa").innerHTML = "";alert("Escolha uma especie!");return}
+	}
+	var cor = document.getElementById("cor").value
+	var p = "pesquisa.php?g_sid="+g_sid+"&funcao=adicionatema&banco="+banco+"&familia="+familia+"&especie="+especie+"&cor="+cor
+	var cp = new cpaint();
+	//cp.set_debug(2)
+	cp.set_response_type("JSON");
+	cp.call(p,"adicionatema",listaretornof);
+	
+}
+/*
+Function: listaretornof
+
+Recebe os dados da função "executa" e redesenha o mapa atual.
+*/
+function listaretornof(retorno)
+{
+	document.getElementById("ResultadoPesquisa").style.color="red"
+	if (retorno.data == "ok")
+	{
+		document.getElementById("ResultadoPesquisa").innerHTML = "<b>Mapa criado!"
+		window.parent.remapaf()
+	}
+	else
+	{document.getElementById("ResultadoPesquisa").innerHTML = "<b>Nenhum registro encontrado!"}
+}
+</script>
+</body>
+</html>

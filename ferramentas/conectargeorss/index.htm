@@ -1,0 +1,87 @@
+<html>
+<head>
+<META HTTP-EQUIV="Content-Type" CONTENT="text/html; charset=ISO-8859-1">
+<link rel="stylesheet" type="text/css" href="../../css/i3geo_ferramentas45.css">
+<title></title> 
+<style type="text/css" >button{background:url(../../imagens/tic.png) 98% 50% no-repeat;}</style>
+<link rel="stylesheet" type="text/css" href="../../pacotes/yui270/build/button/assets/skins/sam/button.css"/>
+<style type="text/css">
+body {
+	margin:0;
+	padding:0;border:0px;
+}
+</style>
+</head>
+<body name="ancora" class="yui-skin-sam" >
+	<div id=guiasYUI class="yui-navset" style="top:0px;cursor:pointer;left:0px;">
+		<ul class="yui-nav" style="border-width:0pt 0pt 0px;border-color:rgb(240,240,240);border-bottom-color:white;">
+			<li><a href="#ancora"><em><div id="guia1" style="text-align:center;font-size:10px;left:0px;" >Serviços</div></em></a></li>
+			<li><a href="#ancora"><em><div id="guia2" style="text-align:center;font-size:10px;left:0px;" >Canais</div></em></a></li>
+		</ul>
+	</div>
+	<div id=geral style="left:0px;top:0px;">
+		<div class=guiaobj id="guia1obj" style="text-align:left;top:0px;left:0px">
+			<div id=opc1 style="text-align:left;top:0px;left:0px">
+				Digite o endere&ccedil;o do servi&ccedil;o ou clique da lista abaixo. Utilize as guias acima para ver o resultado do acesso.<br>
+				<input class=digitar id=servico value="" size=45 />
+			</div>
+			<div id=RSS style="text-align:left;color:navy;cursor:pointer;width:95%;top:5px;left:5px"></div>
+		</div>
+		<div class=guiaobj id="guia2obj" style="display:none;text-align:left;top:0px;left:0px">
+			<div id=resultadoget style="text-align:left;top:0px;left:0px">
+			</div>
+		</div>
+	</div>
+
+<script src="../i3geo_tudo_compacto.js.php" type="text/javascript"></script>
+<script language="JavaScript" type="text/javascript" src="index.js"></script>
+
+<script type="text/javascript" >
+if(window.parent.i3GEO.parametros.editor.toLowerCase() == "sim"){
+	var temp = "<p><a href='#' style='color:red' onclick='abrejanelaIframe()' title='Opção visível apenas para usuários editores'>Editar a lista de endereços dos serviços</a></p>";
+	document.getElementById("opc1").innerHTML += temp;
+}
+aguarde("block");
+g_RSS = new Array("");
+iniciaListaGEORSS()
+function iniciaListaGEORSS(){
+	if (document.getElementById("RSS"))
+	{
+		if (g_RSS.length > 0)
+		{
+			var p = "../../classesphp/wscliente.php?funcao=listaRSSwsARRAY&rss="+g_RSS.join("|")+"&tipo=GEORSS";
+			var cp = new cpaint();
+			//cp.set_debug(2)
+			cp.set_response_type("JSON");
+			cp.call(p,"listaRSSwsARRAY",mostraRetornoRSS);
+		}
+	}
+}
+function mostraRetornoRSS(retorno)
+{
+	aguarde("none")
+	var reg = /Erro/gi;
+	if (retorno.data.rss.search(reg) != -1)
+	{
+		alert("OOps! Ocorreu um erro\n"+retorno.data);
+		return;
+	}
+	var canais = retorno.data.canais
+	var ncanais = canais.length
+	var ins = "<br>"+retorno.data.rss
+	for (i=0;i<ncanais; i++)
+	{
+		var caso = canais[i]
+		ins += "\<p class=clique onclick=\"registraws('"+caso.link+"','"+caso.id_ws+"')\" \>\<b\>"+caso.title+"\<\/b\>&nbsp;"+caso.description+"&nbsp;("+caso.author+")"
+		if(caso.nacessos > 0)
+		{
+			var pc = (parseInt(caso.nacessosok) * 100) / parseInt(caso.nacessos)
+			ins += " \<span style=color:gray \>(disponibilidade: "+pc+"%, acessos considerados: "+caso.nacessos+")\<\/span>\<\/p\>";
+		}
+	}
+	document.getElementById("RSS").innerHTML = ins+"<br><br>"
+}
+
+</script>
+</body>
+</html>

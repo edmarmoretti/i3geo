@@ -1,0 +1,108 @@
+<!--
+cria cor e devolve
+passar pela url o doc, por exemplo?doc=wdocai
+e o elemento, elemento=xxx
+-->
+<html>
+<head>
+<title></title>
+
+<style type="text/css">
+div
+{
+  text-align:left; 
+  border: 0px solid #FFFFFF;
+  font-family: Verdana, Arial, Helvetica, sans-serif;
+  position:relative;
+  display:inline;
+  font-size:10px;
+}
+</style>
+</head>
+<body name="ancora" style='background-color:white'>
+<div id='cores' >
+Aguarde...
+</div>
+<div>
+<select id=esq onchange="muda(this)">
+<option value=vermelho >vermelho</option>
+<option value=verde >verde</option>
+<option value=azul >azul</option>
+<option value=preto >preto</option>
+<option value=ciano >ciano</option>
+<option value=amarelo >amarelo</option>
+<option value=misto >misto</option>
+</select>
+<img alt="" src=../imagens/plus.gif onclick="mais()"/>
+<img alt="" src=../imagens/minus.gif onclick="menos()"/>
+</div>
+
+<script type="text/javascript" >
+//detecï¿½o do navegador
+navm = false; // IE
+navn = false; // netscape
+var app = navigator.appName.substring(0,1);
+if (app=='N') navn=true; else navm=true;
+
+numl = 20
+numc = 20
+nco = 255
+
+inicia("vermelho")
+function inicia(esquema)
+{
+	intnl = Math.ceil(nco / numl);
+	intnc = Math.ceil(nco / numc);
+	r = 0;
+	g = 0;
+	b = 0;
+	ins = ""
+	for (linhas = 1; linhas < numl; linhas++)
+	{
+		ins += "<tbody><tr>\n";
+		for (colunas = 1; colunas < numc; colunas++)
+		{
+			ins += "\<td onclick='aplicacor(\""+r+","+g+","+b+"\")' width=10 style='padding: 0px; border: 0px; line-height:5pt;cursor:pointer; background-color:rgb("+r+","+g+","+b+")' \>&nbsp;\<\/td\>\n";
+			if (esquema == "vermelho") {g = g + intnc;b = b + intnc;}
+			if (esquema == "verde") {r = r + intnc;b = b + intnc;}
+			if (esquema == "azul") {g = g + intnc;r = r + intnc;}
+			if (esquema == "branco") {g = g + intnc;r = r + intnc; b = b + intnc;}
+			if (esquema == "ciano") {g = g + intnc;r = 0; b = 255;}
+			if (esquema == "amarelo") {g = g + intnc;r = 255; b = 0;}
+			if (esquema == "misto") {g = Math.ceil(Math.random() * 255);r = Math.ceil(Math.random() * 255);b = Math.ceil(Math.random() * 255);}
+		}
+		ins += "\<\/tr\>\<\/tbody>\n";
+		if (esquema == "vermelho"){r = r + intnl; g = 0; b = 0;}
+		if (esquema == "verde"){g = g + intnl; r = 0; b = 0;}
+		if (esquema == "azul"){b = b + intnl; g = 0; r = 0;}
+		if (esquema == "branco"){b = linhas; g = linhas; r = linhas;}
+		if (esquema == "ciano"){b = 255; g = linhas; r = 0;}
+		if (esquema == "amarelo"){b = 0; g = linhas; r = 255;}
+	}
+	document.getElementById("cores").innerHTML = "\<table cellpadding='0' cellspacing='0' border='0'\>"+ins+"\<\/table\>"
+}
+function muda (e)
+{
+	inicia(e.value)
+}
+function mais()
+{
+	nco = nco + 20
+	inicia(document.getElementById("esq").value)
+}
+function menos()
+{
+	nco = nco - 20
+	inicia(document.getElementById("esq").value)
+}
+function aplicacor(c)
+{
+	var doc = unescape(((((window.location.href).split("doc="))[1]).split("&"))[0] )
+	var doc = (navm) ? window.parent.frames(doc).document : window.parent.document.getElementById(doc).contentDocument
+	var elemento = unescape(((((window.location.href).split("elemento="))[1]).split("&"))[0] );
+	doc.getElementById(elemento).value = c
+	window.parent.wdocafechaf('wdocac')
+}
+</script>
+</body>
+</html>

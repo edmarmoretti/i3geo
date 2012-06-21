@@ -1,0 +1,121 @@
+<html>
+<head>
+<script src="../../pacotes/cpaint/cpaint2.inc.compressed.js" type="text/javascript"></script>
+<script language="JavaScript" type="text/javascript" src="http://maps.google.com/maps?file=api&amp;v=2&amp;key=ABQIAAAAg9kA9xQlYqK9iBDKaeTpgxSieGwtcPDeiUtRiq7Xa63cyLppcxTVYXnVlPwveOe-sXuXfpBeNpL6pA">
+</script>
+<title></title>
+  </head>
+  <body name="ancora" onunload="GUnload()">
+    <div id="mapa" style="width: 340px; height: 340px"></div>
+  
+    <script type="text/javascript" >
+    //chave na producao= ABQIAAAAg9kA9xQlYqK9iBDKaeTpgxSieGwtcPDeiUtRiq7Xa63cyLppcxTVYXnVlPwveOe-sXuXfpBeNpL6pA
+    //chave no desenvolvimento = ABQIAAAAg9kA9xQlYqK9iBDKaeTpgxQ_qvn5wqSkbcx9uoqrWGnUcZ7lqhRVzkJwzeDN3nQJheG7FjoxyruBIQ
+	if(window.parent.document.getElementById("boxg"))
+	window.parent.document.getElementById("boxg").style.zIndex = 0
+    navm = false; // IE
+    navn = false; // netscape
+    var app = navigator.appName.substring(0,1);
+    if (app=='N') navn=true; else navm=true;
+    
+    if(window.parent.objmapa)
+    {
+    	docmapa = window.parent.document
+    	pol = window.parent.objmapa.extent
+    	ret = pol.split(" ")
+    	pt1 = (( (ret[0] * -1) - (ret[2] * -1) ) / 2) + ret[0] *1
+    	pt2 = (((ret[1] - ret[3]) / 2)* -1) + ret[1] *1
+    	pt = pt1+","+pt2
+    }
+    else
+    {
+    	pt1 = "-54";
+    	pt2 = "-12";
+    }
+    map = new GMap2(document.getElementById("mapa"));
+    map.setMapType(G_SATELLITE_MAP);
+    map.addMapType(G_SATELLITE_3D_MAP);
+    map.addControl(new GLargeMapControl());
+    map.addControl(new GMapTypeControl());
+    map.setCenter(new GLatLng(pt2,pt1), 11);
+    GEvent.addListener(map, "moveend", function() {
+    	ondegoogle(map);
+    });
+    //var boundaries = new GLatLngBounds(new GLatLng(40.716216,-74.213393), new GLatLng(40.765641,-74.139235));
+
+    //wmsmap = new GGroundOverlay(criaWMS(), map.getBounds());
+	//map.addOverlay(wmsmap);
+    
+    GEvent.addListener(map, "zoomend", function() {
+    	ondegoogle();
+    	//map.removeOverlay(wmsmap);
+    	//wmsmap = new GGroundOverlay(criaWMS(), map.getBounds());
+		//map.addOverlay(wmsmap);
+
+    });
+    /*
+    GEvent.addListener(map, "dragend", function() {
+    	map.removeOverlay(wmsmap);
+    	wmsmap = new GGroundOverlay(criaWMS(), map.getBounds());
+		map.addOverlay(wmsmap);
+    });
+	*/
+    function moveMapa(bd)
+    {
+    	nex = bd.minX+" "+bd.minY+" "+bd.maxX+" "+bd.maxY
+    	var p = window.parent.g_locaplic+"/classesphp/mapa_controle.php?funcao=mudaext&ext="+nex
+    	var cp = new cpaint();
+    	//cp.set_debug(2)
+    	cp.set_response_type("JSON");
+    	cp.call(p,"mudaExtensao",window.parent.ajaxredesenha);
+    	//ondegoogle(bd);
+    }
+    function ondegoogle()
+    {
+    	if(window.parent.objmapa)
+    	{
+    		var bd = map.getBounds();
+    		var so = bd.getSouthWest();
+    		var ne = bd.getNorthEast();
+    		var xyMin = window.parent.i3GEO.util.dd2tela(so.lng(),so.lat(),window.parent.document,window.parent.objmapa.extent,window.parent.objmapa.cellsize);
+    		var xyMax = window.parent.i3GEO.util.dd2tela(ne.lng(),ne.lat(),window.parent.document,window.parent.objmapa.extent,window.parent.objmapa.cellsize);
+			var box = window.parent.$i("boxg")
+			var w = xyMax[0]-xyMin[0]
+			var h = xyMin[1]-xyMax[1]
+			box.style.display = "block"
+			box.style.width = w + "px"
+			box.style.height = h + "px"
+			box.style.top = xyMax[1]+"px"
+			box.style.left = xyMin[0]+"px"
+    		box.style.display="block"
+    	}
+    }
+    
+    function panTogoogle()
+    {
+    	var b = window.parent.document.getElementById("boxg");
+    	b.style.display="block";
+    	pol = window.parent.objmapa.extent;
+    	ret = pol.split(" ");
+    	pt1 = (( (ret[0] * -1) - (ret[2] * -1) ) / 2) + ret[0] *1;
+    	pt2 = (((ret[1] - ret[3]) / 2)* -1) + ret[1] *1;
+    	//map.centerAndZoom(new GLatLng(pt2,pt1),map.getZoom());
+    	//map.setZoom(level)
+    	map.panTo(new GLatLng(pt2,pt1))
+    }
+    function bbox()
+    {
+		var bd = map.getBounds();
+		var so = bd.getSouthWest();
+		var ne = bd.getNorthEast();
+		var bbox = so.lng()+","+so.lat()+","+ne.lng()+","+ne.lat()
+		return (bbox)
+    }
+    function criaWMS()
+    {
+    	return("http://mapas.mma.gov.br/i3geo/ogc.php?tema=bioma&width="+parseInt(document.getElementById("map").style.width)+"&height="+parseInt(document.getElementById("map").style.height)+"&VERSION=1.1.1&REQUEST=GetMap&SRS=EPSG:4326&STYLES=&BGCOLOR=0xFFFFFF&FORMAT=image/png&TRANSPARENT=TRUE&layers=bioma&bbox="+bbox())
+    }
+    ondegoogle(map);
+    </script>
+    </body>
+</html>

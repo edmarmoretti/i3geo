@@ -1,0 +1,287 @@
+<html>
+<head>
+<META HTTP-EQUIV="Content-Type" CONTENT="text/html; charset=ISO-8859-1">
+<link rel="stylesheet" type="text/css" href="../../css/i3geo_ferramentas45.css">
+
+<style type="text/css" >button{background:url(../../imagens/tic.png) 98% 50% no-repeat;}</style>
+<link rel="stylesheet" type="text/css" href="../../pacotes/yui270/build/button/assets/skins/sam/button.css"/>
+<style type="text/css">
+body {
+	margin:0;
+	padding:0;border:0px;
+}
+</style>
+
+</head>
+<body name="ancora" class="yui-skin-sam">
+	<div id=guiasYUI class="yui-navset" style="top:0px;cursor:pointer;left:0px;">
+		<ul class="yui-nav" style="border-width:0pt 0pt 0px;border-color:rgb(240,240,240);border-bottom-color:white;">
+			<li><a href="#ancora"><em><div id="guia1" style="text-align:center;font-size:10px;left:0px;" >Título</div></em></a></li>
+			<li><a href="#ancora"><em><div id="guia2" style="text-align:center;font-size:10px;left:0px;" >Legenda</div></em></a></li>
+			<li><a href="#ancora"><em><div id="guia3" style="text-align:center;font-size:10px;left:0px;" >Escala num.</div></em></a></li>
+			<li><a href="#ancora"><em><div id="guia5" style="text-align:center;font-size:10px;left:0px;" >Mapa</div></em></a></li>
+			<li><a href="#ancora"><em><div id="guia6" style="text-align:center;font-size:10px;left:0px;" >Fecha</div></em></a></li>
+		</ul>
+	</div>
+	<div id=geral style="left:0px;top:0px;">
+		<div id=guia1obj style="display:block;text-align:left;position:relative;top:5px;left:0px">
+			<table class=lista width="250px">
+				<tr>
+					<td>Texto</td>
+					<td><img src="../../imagens/tic.png" style="cursor:pointer" onclick="javascript:objtitulo.texto()" /></td>
+					<td><input type=text class=digitar size=25 value="digite o titulo" id=titulo /></td>
+				</tr>
+				<tr>
+					<td>Topo</td>
+					<td><img src="../../imagens/tic.png" style="cursor:pointer" onclick="javascript:objtitulo.topo()" /></td></td>
+					<td><input type=text class=digitar size=10 value="0" id=tituloTopo /></td>
+				</tr>
+				<tr>
+					<td>Esquerda</td>
+					<td><img src="../../imagens/tic.png" style="cursor:pointer" onclick="javascript:objtitulo.esquerda()" /></td></td>
+					<td><input type=text class=digitar size=10 value="0" id=tituloEsquerda /></td>
+				</tr>
+				<tr>
+					<td>Tamanho</td>
+					<td><img src="../../imagens/tic.png" style="cursor:pointer" onclick="javascript:objtitulo.tamanho()" /></td></td>
+					<td><input type=text class=digitar size=10 value="14" id=tituloTamanho /></td>
+				</tr>
+				<tr>
+					<td>Largura</td>
+					<td><img src="../../imagens/tic.png" style="cursor:pointer" onclick="javascript:objtitulo.largura()" /></td></td>
+					<td><input type=text class=digitar size=10 value="0" id=tituloLargura /></td>
+				</tr>
+				<tr>
+					<td>Cor do texto</td>
+					<td><img src="../../imagens/tic.png" style="cursor:pointer" onclick="javascript:objtitulo.cor()" /></td></td>
+					<td><input type=text class=digitar size=15 value="0,0,0" id=tituloCor />
+					<img alt="aquarela.gif" style=cursor:pointer src='../../imagens/aquarela.gif' onclick="i3GEO.util.abreCor('','tituloCor','rgb')" />
+					</td>
+				</tr>
+				<tr>
+					<td>Cor do fundo</td>
+					<td><img src="../../imagens/tic.png" style="cursor:pointer" onclick="javascript:objtitulo.fundo()" /></td></td>
+					<td><input type=text class=digitar size=15 value="255,255,255" id=tituloFundo />
+					<img alt="aquarela.gif" style=cursor:pointer src='../../imagens/aquarela.gif' onclick="i3GEO.util.abreCor('','tituloFundo','rgb')" />
+					</td>
+				</tr>
+				<tr>
+					<td>Margem</td>
+					<td><img src="../../imagens/tic.png" style="cursor:pointer" onclick="javascript:objtitulo.padding()" /></td></td>
+					<td><input type=text class=digitar size=10 value="0" id=tituloPadding /></td>
+				</tr>				
+				<tr>
+					<td>Tamanho da borda</td>
+					<td><img src="../../imagens/tic.png" style="cursor:pointer" onclick="javascript:objtitulo.borda()" /></td></td>
+					<td><input type=text class=digitar size=10 value="0" id=tituloBorda /></td>
+				</tr>
+				<tr>
+					<td>Cor da borda</td>
+					<td><img src="../../imagens/tic.png" style="cursor:pointer" onclick="javascript:objtitulo.bordacor()" /></td></td>
+					<td><input type=text class=digitar size=10 value="0,0,0" id=tituloBordacor />
+					<img alt="aquarela.gif" style=cursor:pointer src='../../imagens/aquarela.gif' onclick="i3GEO.util.abreCor('','tituloBordacor','rgb')" />
+					</td>
+				</tr>
+				<tr>
+					<td>Estilo da borda</td>
+					<td><img src="../../imagens/tic.png" style="cursor:pointer" onclick="javascript:objtitulo.bordaestilo()" /></td></td>
+					<td><select id=tituloBordaestilo >
+					<option value=none >nenhuma</option>
+					<option value=solid >s&oacute;lida</option>
+					<option value=double >dupla</option>
+					<option value=inset >interna</option>
+					<option value=outset >externa</option>
+					</select></td>
+				</tr>
+			</table>
+		</div>
+		<div id=guia2obj style="display:none;text-align:left;position:relative;top:5px;left:0px">
+			<table class=lista width="250px">
+				<tr>
+					<td>Topo</td>
+					<td><img src="../../imagens/tic.png" style="cursor:pointer" onclick="javascript:objlegenda.topo()" /></td></td>
+					<td><input type=text class=digitar size=10 value="20" id=legendaTopo /></td>
+				</tr>
+				<tr>
+					<td>Esquerda</td>
+					<td><img src="../../imagens/tic.png" style="cursor:pointer" onclick="javascript:objlegenda.esquerda()" /></td></td>
+					<td><input type=text class=digitar size=10 value="0" id=legendaEsquerda /></td>
+				</tr>
+				<tr>
+					<td>Largura</td>
+					<td><img src="../../imagens/tic.png" style="cursor:pointer" onclick="javascript:objlegenda.largura()" /></td></td>
+					<td><input type=text class=digitar size=10 value="150" id=legendaLargura /></td>
+				</tr>
+				<tr>
+					<td>Cor do texto</td>
+					<td><img src="../../imagens/tic.png" style="cursor:pointer" onclick="javascript:objlegenda.cor()" /></td></td>
+					<td><input type=text class=digitar size=15 value="0,0,0" id=legendaCor />
+					<img alt="aquarela.gif" style=cursor:pointer src='../../imagens/aquarela.gif' onclick="i3GEO.util.abreCor('','legendaCor','rgb')" />
+					</td>
+				</tr>
+				<tr>
+					<td>Cor do fundo</td>
+					<td><img src="../../imagens/tic.png" style="cursor:pointer" onclick="javascript:objlegenda.fundo()" /></td></td>
+					<td><input type=text class=digitar size=15 value="255,255,255" id=legendaFundo />
+					<img alt="aquarela.gif" style=cursor:pointer src='../../imagens/aquarela.gif' onclick="i3GEO.util.abreCor('','legendaFundo','rgb')" />
+					</td>
+				</tr>
+				<tr>
+					<td>Margem</td>
+					<td><img src="../../imagens/tic.png" style="cursor:pointer" onclick="javascript:objlegenda.padding()" /></td></td>
+					<td><input type=text class=digitar size=10 value="0" id=legendaPadding /></td>
+				</tr>				
+				<tr>
+					<td>Tamanho da borda</td>
+					<td><img src="../../imagens/tic.png" style="cursor:pointer" onclick="javascript:objlegenda.borda()" /></td></td>
+					<td><input type=text class=digitar size=10 value="0" id=legendaBorda /></td>
+				</tr>
+				<tr>
+					<td>Cor da borda</td>
+					<td><img src="../../imagens/tic.png" style="cursor:pointer" onclick="javascript:objlegenda.bordacor()" /></td></td>
+					<td><input type=text class=digitar size=10 value="0,0,0" id=legendaBordacor />
+					<img alt="aquarela.gif" style=cursor:pointer src='../../imagens/aquarela.gif' onclick="i3GEO.util.abreCor('','legendaBordacor','rgb')" />
+					</td>
+				</tr>
+				<tr>
+					<td>Estilo da borda</td>
+					<td><img src="../../imagens/tic.png" style="cursor:pointer" onclick="javascript:objlegenda.bordaestilo()" /></td></td>
+					<td><select id=legendaBordaestilo >
+					<option value=none >nenhuma</option>
+					<option value=solid >s&oacute;lida</option>
+					<option value=double >dupla</option>
+					<option value=inset >interna</option>
+					<option value=outset >externa</option>
+					</select></td>
+				</tr>
+			</table>
+		</div>
+		<div id=guia3obj style="display:none;text-align:left;position:relative;top:5px;left:0px">
+			<table class=lista width="250px">
+				<tr>
+					<td>Topo</td>
+					<td><img src="../../imagens/tic.png" style="cursor:pointer" onclick="javascript:objescalanumerica.topo()" /></td></td>
+					<td><input type=text class=digitar size=10 value="40" id=escalanumericaTopo /></td>
+				</tr>
+				<tr>
+					<td>Esquerda</td>
+					<td><img src="../../imagens/tic.png" style="cursor:pointer" onclick="javascript:objescalanumerica.esquerda()" /></td></td>
+					<td><input type=text class=digitar size=10 value="150" id=escalanumericaEsquerda /></td>
+				</tr>
+				<tr>
+					<td>Tamanho</td>
+					<td><img src="../../imagens/tic.png" style="cursor:pointer" onclick="javascript:objescalanumerica.tamanho()" /></td></td>
+					<td><input type=text class=digitar size=10 value="14" id=escalanumericaTamanho /></td>
+				</tr>
+				<tr>
+					<td>Largura</td>
+					<td><img src="../../imagens/tic.png" style="cursor:pointer" onclick="javascript:objescalanumerica.largura()" /></td></td>
+					<td><input type=text class=digitar size=10 value="0" id=escalanumericaLargura /></td>
+				</tr>
+				<tr>
+					<td>Cor do texto</td>
+					<td><img src="../../imagens/tic.png" style="cursor:pointer" onclick="javascript:objescalanumerica.cor()" /></td></td>
+					<td><input type=text class=digitar size=15 value="0,0,0" id=escalanumericaCor />
+					<img alt="aquarela.gif" style=cursor:pointer src='../../imagens/aquarela.gif' onclick="i3GEO.util.abreCor('','escalanumericacor','rgb')" />
+					</td>
+				</tr>
+				<tr>
+					<td>Cor do fundo</td>
+					<td><img src="../../imagens/tic.png" style="cursor:pointer" onclick="javascript:objescalanumerica.fundo()" /></td></td>
+					<td><input type=text class=digitar size=15 value="255,255,255" id=escalanumericaFundo />
+					<img alt="aquarela.gif" style=cursor:pointer src='../../imagens/aquarela.gif' onclick="i3GEO.util.abreCor('','escalanumericaFundo','rgb')" />
+					</td>
+				</tr>
+				<tr>
+					<td>Margem</td>
+					<td><img src="../../imagens/tic.png" style="cursor:pointer" onclick="javascript:objescalanumerica.padding()" /></td></td>
+					<td><input type=text class=digitar size=10 value="0" id=escalanumericaPadding /></td>
+				</tr>				
+				<tr>
+					<td>Tamanho da borda</td>
+					<td><img src="../../imagens/tic.png" style="cursor:pointer" onclick="javascript:objescalanumerica.borda()" /></td></td>
+					<td><input type=text class=digitar size=10 value="0" id=escalanumericaBorda /></td>
+				</tr>
+				<tr>
+					<td>Cor da borda</td>
+					<td><img src="../../imagens/tic.png" style="cursor:pointer" onclick="javascript:objescalanumerica.bordacor()" /></td></td>
+					<td><input type=text class=digitar size=10 value="0,0,0" id=escalanumericaBordacor />
+					<img alt="aquarela.gif" style=cursor:pointer src='../../imagens/aquarela.gif' onclick="i3GEO.util.abreCor('','escalanumericaBordacor','rgb')" />
+					</td>
+				</tr>
+				<tr>
+					<td>Estilo da borda</td>
+					<td><img src="../../imagens/tic.png" style="cursor:pointer" onclick="javascript:objescalanumerica.bordaestilo()" /></td></td>
+					<td><select id=escalanumericaBordaestilo >
+					<option value=none >nenhuma</option>
+					<option value=solid >s&oacute;lida</option>
+					<option value=double >dupla</option>
+					<option value=inset >interna</option>
+					<option value=outset >externa</option>
+					</select></td>
+				</tr>
+			</table>
+		</div>
+		<div id=guia5obj style="display:none;text-align:left;position:relative;top:5px;left:0px">
+			<table class=lista width="250px">
+				<tr>
+					<td>Topo</td>
+					<td><img src="../../imagens/tic.png" style="cursor:pointer" onclick="javascript:objmapa.topo()" /></td></td>
+					<td><input type=text class=digitar size=10 value="20" id=mapaTopo /></td>
+				</tr>
+				<tr>
+					<td>Esquerda</td>
+					<td><img src="../../imagens/tic.png" style="cursor:pointer" onclick="javascript:objmapa.esquerda()" /></td></td>
+					<td><input type=text class=digitar size=10 value="150" id=mapaEsquerda /></td>
+				</tr>
+				<tr>
+					<td>Largura</td>
+					<td><img src="../../imagens/tic.png" style="cursor:pointer" onclick="javascript:objmapa.largura()" /></td></td>
+					<td><input type=text class=digitar size=10 value="0" id=mapaLargura /></td>
+				</tr>
+				<tr>
+					<td>Cor do fundo</td>
+					<td><img src="../../imagens/tic.png" style="cursor:pointer" onclick="javascript:objmapa.fundo()" /></td></td>
+					<td><input type=text class=digitar size=15 value="255,255,255" id=mapaFundo />
+					<img alt="aquarela.gif" style=cursor:pointer src='../../imagens/aquarela.gif' onclick="i3GEO.util.abreCor('','mapaFundo','rgb')" />
+					</td>
+				</tr>
+				<tr>
+					<td>Margem</td>
+					<td><img src="../../imagens/tic.png" style="cursor:pointer" onclick="javascript:objmapa.padding()" /></td></td>
+					<td><input type=text class=digitar size=10 value="0" id=mapaPadding /></td>
+				</tr>				
+				<tr>
+					<td>Tamanho da borda</td>
+					<td><img src="../../imagens/tic.png" style="cursor:pointer" onclick="javascript:objmapa.borda()" /></td></td>
+					<td><input type=text class=digitar size=10 value="0" id=mapaBorda /></td>
+				</tr>
+				<tr>
+					<td>Cor da borda</td>
+					<td><img src="../../imagens/tic.png" style="cursor:pointer" onclick="javascript:objmapa.bordacor()" /></td></td>
+					<td><input type=text class=digitar size=10 value="0,0,0" id=mapaBordacor />
+					<img alt="aquarela.gif" style=cursor:pointer src='../../imagens/aquarela.gif' onclick="i3GEO.util.abreCor('','mapaBordacor','rgb')" />
+					</td>
+				</tr>
+				<tr>
+					<td>Estilo da borda</td>
+					<td><img src="../../imagens/tic.png" style="cursor:pointer" onclick="javascript:objmapa.bordaestilo()" /></td></td>
+					<td><select id=mapaBordaestilo >
+					<option value=none >nenhuma</option>
+					<option value=solid >s&oacute;lida</option>
+					<option value=double >dupla</option>
+					<option value=inset >interna</option>
+					<option value=outset >externa</option>
+					</select></td>
+				</tr>
+			</table>
+		</div>
+		<div id=guia6obj style="display:none;text-align:left;position:relative;top:5px;left:0px">
+		</div>
+	</div>
+<script type="text/javascript" src="../../classesjs/i3geo.js"> </script>
+<script>i3GEO.configura.locaplic = i3GEO.util.protocolo()+"://"+window.location.host+"/i3geo";</script>
+<script language="JavaScript" type="text/javascript" src="propriedades.js"></script>
+
+</body>
+</html>
