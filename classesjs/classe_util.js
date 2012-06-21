@@ -1,7 +1,7 @@
 /*jslint white:false,undef: false, rhino: true, onevar: true, evil: false */
 
 /*
-Title: Utilitários
+Title: Utilitï¿½rios
 
 Arquivo:
 
@@ -13,20 +13,20 @@ GPL2
 
 i3Geo Interface Integrada de Ferramentas de Geoprocessamento para Internet
 
-Direitos Autorais Reservados (c) 2006 Ministério do Meio Ambiente Brasil
+Direitos Autorais Reservados (c) 2006 Ministï¿½rio do Meio Ambiente Brasil
 Desenvolvedor: Edmar Moretti edmar.moretti@mma.gov.br
 
-Este programa é software livre; você pode redistribuí-lo
-e/ou modificá-lo sob os termos da Licença Pública Geral
+Este programa ï¿½ software livre; vocï¿½ pode redistribuï¿½-lo
+e/ou modificï¿½-lo sob os termos da Licenï¿½a Pï¿½blica Geral
 GNU conforme publicada pela Free Software Foundation;
 
-Este programa é distribuído na expectativa de que seja útil,
-porém, SEM NENHUMA GARANTIA; nem mesmo a garantia implícita
-de COMERCIABILIDADE OU ADEQUAÇÃO A UMA FINALIDADE ESPECÍFICA.
-Consulte a Licença Pública Geral do GNU para mais detalhes.
-Você deve ter recebido uma cópia da Licença Pública Geral do
-GNU junto com este programa; se não, escreva para a
-Free Software Foundation, Inc., no endereço
+Este programa ï¿½ distribuï¿½do na expectativa de que seja ï¿½til,
+porï¿½m, SEM NENHUMA GARANTIA; nem mesmo a garantia implï¿½cita
+de COMERCIABILIDADE OU ADEQUAï¿½ï¿½O A UMA FINALIDADE ESPECï¿½FICA.
+Consulte a Licenï¿½a Pï¿½blica Geral do GNU para mais detalhes.
+Vocï¿½ deve ter recebido uma cï¿½pia da Licenï¿½a Pï¿½blica Geral do
+GNU junto com este programa; se nï¿½o, escreva para a
+Free Software Foundation, Inc., no endereï¿½o
 59 Temple Street, Suite 330, Boston, MA 02111-1307 USA.
 */
 if(typeof(i3GEO) === 'undefined'){
@@ -88,26 +88,26 @@ if(opera === true)
 /*
 Variavel: g_operacao
 
-Nome da última operação que foi executada.
+Nome da ï¿½ltima operaï¿½ï¿½o que foi executada.
 
-Dependendo do tipo de operação são aplicadas as atualizações necessárias aos componentes do mapa. Por exemplo, redesenha o corpo do mapa, atualiza a lista de temas, etc.
+Dependendo do tipo de operaï¿½ï¿½o sï¿½o aplicadas as atualizaï¿½ï¿½es necessï¿½rias aos componentes do mapa. Por exemplo, redesenha o corpo do mapa, atualiza a lista de temas, etc.
 
-Essas operações são controladas pela função ajaxiniciaparametros.
+Essas operaï¿½ï¿½es sï¿½o controladas pela funï¿½ï¿½o ajaxiniciaparametros.
 */
 g_operacao = "";
 /*
 Variavel: g_tipoacao
 
-Tipo de ação que está sendo executada.
-Quando o usuário clica no mapa, essa variável é pesquisada para definir o tipo de operação que deve ser executada.
-É definida quando o usuário seleciona uma determinada ferramenta do i3Geo.
+Tipo de aï¿½ï¿½o que estï¿½ sendo executada.
+Quando o usuï¿½rio clica no mapa, essa variï¿½vel ï¿½ pesquisada para definir o tipo de operaï¿½ï¿½o que deve ser executada.
+ï¿½ definida quando o usuï¿½rio seleciona uma determinada ferramenta do i3Geo.
 */
 g_tipoacao = "zoomli";
 
 /*
 Function: $i
 
-Obtém um elemento DOM a partir de seu id
+Obtï¿½m um elemento DOM a partir de seu id
   
 Parametros:
 
@@ -122,7 +122,7 @@ $i = function(id)
 /*
 Function: Array.remove()
 
-Extende os métodos de um objeto Array, permitindo remover um elemento.
+Extende os mï¿½todos de um objeto Array, permitindo remover um elemento.
 
 */
 Array.prototype.remove=function(s){
@@ -138,13 +138,13 @@ Array.prototype.remove=function(s){
 /*
 Classe: i3GEO.util
 
-Utilitários.
+Utilitï¿½rios.
 */
 i3GEO.util = {
 	/*
 	Variavel: PINS
 
-	Elementos IMG criados na função criaPin
+	Elementos IMG criados na funï¿½ï¿½o criaPin
 
 	Tipo:
 	{Array}
@@ -153,7 +153,7 @@ i3GEO.util = {
 	/*
 	Variavel:BOXES
 
-	Elementos DIV criados na função criaBox
+	Elementos DIV criados na funï¿½ï¿½o criaBox
 
 	Tipo:
 	{Array}
@@ -162,11 +162,11 @@ i3GEO.util = {
 	/*
 	Function: escapeURL
 
-	Converte uma string em uma url válida
+	Converte uma string em uma url vï¿½lida
 
 	Parametros:
 
-	sUrl {String} - url que será convertida
+	sUrl {String} - url que serï¿½ convertida
 
 	Return:
 
@@ -253,19 +253,19 @@ i3GEO.util = {
 	/*
 	Function: criaBotaoAplicar
 
-	Cria um botão flutuante do tipo aplicar.
+	Cria um botï¿½o flutuante do tipo aplicar.
 
-	O novo botão é adicionado no DOM com ID "i3geo_aplicar" e posicionado sobre o objeto definido
+	O novo botï¿½o ï¿½ adicionado no DOM com ID "i3geo_aplicar" e posicionado sobre o objeto definido
    
 	Parametros:
 
-	nomeFuncao - {String} Nome da função que será executada quando o botão for cllicado
+	nomeFuncao - {String} Nome da funï¿½ï¿½o que serï¿½ executada quando o botï¿½o for cllicado
 
-	titulo - (opcional) {String} Título que será mostrado no botão
+	titulo - (opcional) {String} Tï¿½tulo que serï¿½ mostrado no botï¿½o
 
-	classe - (opcional) {String} Nome da classe (estilo) que será aplicado ao botão.
+	classe - (opcional) {String} Nome da classe (estilo) que serï¿½ aplicado ao botï¿½o.
 
-	obj - (opcional) {Objeto} Objeto DOM que foi clicado para provocar a criação do botão.
+	obj - (opcional) {Objeto} Objeto DOM que foi clicado para provocar a criaï¿½ï¿½o do botï¿½o.
 
 	Return:
 
@@ -325,19 +325,19 @@ i3GEO.util = {
 	/*
 	Function: arvore
 
-	Cria uma árvore com base em um objeto contendo as propriedades.
+	Cria uma ï¿½rvore com base em um objeto contendo as propriedades.
 
-	No objeto com as propriedades, se "url" for igual a "", será incluído o texto original definido em "text".
+	No objeto com as propriedades, se "url" for igual a "", serï¿½ incluï¿½do o texto original definido em "text".
 
-	Caso contrário, o valor de "text" será traduzido com $trad(). Nesse caso, utilize em "text" o código definido em dicionario.js
+	Caso contrï¿½rio, o valor de "text" serï¿½ traduzido com $trad(). Nesse caso, utilize em "text" o cï¿½digo definido em dicionario.js
 
 	Parametros:
 
-	titulo - {String} cabeçaljo da árvore
+	titulo - {String} cabeï¿½aljo da ï¿½rvore
 
-	onde - {String} nome do id doelemento que conterá a árvore
+	onde - {String} nome do id doelemento que conterï¿½ a ï¿½rvore
 
-	obj - {Object} objeto contendo os parâmetros, exemplo
+	obj - {Object} objeto contendo os parï¿½metros, exemplo
 
 		g_listaPropriedades = {
 
@@ -396,24 +396,24 @@ i3GEO.util = {
 	removeAcentos: function(palavra) {
 		if(typeof(console) !== 'undefined'){console.info("i3GEO.util.removeAcentos()");}
 		var re;
-		re = /ã|á|à|â/gi;
+		re = /ï¿½|ï¿½|ï¿½|ï¿½/gi;
 		palavra = palavra.replace(re,"a");
-		re = /é|ê/gi;
+		re = /ï¿½|ï¿½/gi;
 		palavra = palavra.replace(re,"e");
-		re = /í/gi;
+		re = /ï¿½/gi;
 		palavra = palavra.replace(re,"i");
-		re = /ó|õ|ô/gi;
+		re = /ï¿½|ï¿½|ï¿½/gi;
 		palavra = palavra.replace(re,"o");
-		re = /ç/gi;
+		re = /ï¿½/gi;
 		palavra = palavra.replace(re,"c");
-		re = /ú/gi;
+		re = /ï¿½/gi;
 		palavra = palavra.replace(re,"u");
 		return(palavra);
 	},
 	/*
 	Function: protocolo
 
-	Obtém o protocolo utilizado na URL atual
+	Obtï¿½m o protocolo utilizado na URL atual
 
 	Return:
 
@@ -428,7 +428,7 @@ i3GEO.util = {
 	/*
 	Function: pegaPosicaoObjeto
 
-	Retorna a posição x,y de um objeto em relação a tela do navegador
+	Retorna a posiï¿½ï¿½o x,y de um objeto em relaï¿½ï¿½o a tela do navegador
 
 	Parametros:
 
@@ -436,7 +436,7 @@ i3GEO.util = {
 
 	Return:
 
-	{Array} - array com a posição [x,y]
+	{Array} - array com a posiï¿½ï¿½o [x,y]
 	*/
 	pegaPosicaoObjeto: function(obj){
 		if(obj)
@@ -462,7 +462,7 @@ i3GEO.util = {
 	/*
 		Function: pegaElementoPai
 
-		Pega o elemento pai de um elemento clicado para identificar o código do tema.
+		Pega o elemento pai de um elemento clicado para identificar o cï¿½digo do tema.
 
 		Parametros:
 
@@ -497,7 +497,7 @@ i3GEO.util = {
 
 	Altera o cursor do ponteiro do mouse.
 
-	Os cursores disponíveis são definidos por default em classe_configura.js
+	Os cursores disponï¿½veis sï¿½o definidos por default em classe_configura.js
 
 	Exemplo i3GEO.util.mudaCursor("","crosshair")
 	
@@ -505,11 +505,11 @@ i3GEO.util = {
 
 	cursores {i3GEO.configura.cursores} - objeto JSON com as URIs de cada cursor (veja i3GEO.configura.cursores)
 
-	tipo {String} - tipo de cursor disponível em cursores
+	tipo {String} - tipo de cursor disponï¿½vel em cursores
 
-	idobjeto {String} - id do objeto que terá o estilo alterado para o cursor desejado
+	idobjeto {String} - id do objeto que terï¿½ o estilo alterado para o cursor desejado
 
-	locaplic {String} - onde está instalado o i3Geo
+	locaplic {String} - onde estï¿½ instalado o i3Geo
 	*/
 	mudaCursor: function(cursores,tipo,idobjeto,locaplic){
 		if(typeof(console) !== 'undefined'){console.info("i3GEO.util.mudaCursor("+idobjeto+")");}
@@ -557,13 +557,13 @@ i3GEO.util = {
 	/*
 	Function: criaBox
 
-	Cria um elemento div na página atual.
+	Cria um elemento div na pï¿½gina atual.
 
-	Esse elemento pode ser utilizado para desenhar retângulos sobre o mapa
+	Esse elemento pode ser utilizado para desenhar retï¿½ngulos sobre o mapa
 
 	Parametros:
 
-	id {String} - id do elemento que será criado. Por default, será 'boxg'
+	id {String} - id do elemento que serï¿½ criado. Por default, serï¿½ 'boxg'
 	*/
 	criaBox: function(id){
 		if(typeof(console) !== 'undefined'){console.info("i3GEO.util.criaBox("+id+")");}
@@ -588,7 +588,7 @@ i3GEO.util = {
 
 	Esconde os BOXES com IDs registrados em i3GEO.util.BOXES
 
-	Os ids são criado pela função criaBox
+	Os ids sï¿½o criado pela funï¿½ï¿½o criaBox
 	*/
 	escondeBox: function(){
 		if(typeof(console) !== 'undefined'){console.info("i3GEO.util.escondeBox()");}
@@ -602,19 +602,19 @@ i3GEO.util = {
 	/*
 	Function: criaPin
 
-	Cria um elemento imagem na página atual.
+	Cria um elemento imagem na pï¿½gina atual.
 
 	Parametros:
 
-	id {String} - (opcional) id do elemento que será criado. Por default, será 'boxpin'
+	id {String} - (opcional) id do elemento que serï¿½ criado. Por default, serï¿½ 'boxpin'
 
-	imagem {URL} - (opcional) endereço da imagem
+	imagem {URL} - (opcional) endereï¿½o da imagem
 
 	w {String} - (opcional) largura da imagem
 
 	h {String} - (opcional) altura da imagem
 
-	mouseover - função que será executada no evento mouseover
+	mouseover - funï¿½ï¿½o que serï¿½ executada no evento mouseover
 	*/
 	criaPin: function(id,imagem,w,h,mouseover){
 		if(typeof(console) !== 'undefined'){console.info("i3GEO.util.criaPin()");}
@@ -654,19 +654,19 @@ i3GEO.util = {
 	/*
 	Function: posicionaImagemNoMapa
 
-	Posiciona uma imagem no mapa no local onde o mouse está posicionado sobre o mapa
+	Posiciona uma imagem no mapa no local onde o mouse estï¿½ posicionado sobre o mapa
 
 	Parametros:
 
-	id {string} - id do elemento que será posicionado
+	id {string} - id do elemento que serï¿½ posicionado
 	
-	x {posição do pixel} - se não for definida ou for vazia, será utilizado o valor de objposicaocursor.telax
+	x {posiï¿½ï¿½o do pixel} - se nï¿½o for definida ou for vazia, serï¿½ utilizado o valor de objposicaocursor.telax
 	
-	y {posição do pixel} - se não for definida ou for vazia, será utilizado o valor de objposicaocursor.telay
+	y {posiï¿½ï¿½o do pixel} - se nï¿½o for definida ou for vazia, serï¿½ utilizado o valor de objposicaocursor.telay
 	
 	Return:
 	
-	array[top,left] - valores em pixel da posição calculada da imagem
+	array[top,left] - valores em pixel da posiï¿½ï¿½o calculada da imagem
 	*/
 	posicionaImagemNoMapa: function(id,x,y){
 		if(typeof(console) !== 'undefined'){console.info("i3GEO.util.posicionaImagemNoMapa()");}
@@ -688,7 +688,7 @@ i3GEO.util = {
 
 	Esconde os PINS com IDs registrados em i3GEO.util.PINS
 
-	Os ids são criados pela função criaPin
+	Os ids sï¿½o criados pela funï¿½ï¿½o criaPin
 	*/
 	escondePin: function(){
 		if(typeof(console) !== 'undefined'){console.info("i3GEO.util.escondePin()");}
@@ -720,7 +720,7 @@ i3GEO.util = {
 	/*
 	Function $inputText ou nome curto $inputText
 
-	Cria um elemento html do tipo input text com formatação especial.
+	Cria um elemento html do tipo input text com formataï¿½ï¿½o especial.
 
 	Parametros:
 
@@ -732,13 +732,13 @@ i3GEO.util = {
 
 	titulo {String} - texto que vai no title
 
-	digitos {Integer} - numero de dígitos do input
+	digitos {Integer} - numero de dï¿½gitos do input
 
 	valor {String} - valor do input
 
 	nome {String} - name do input
 	
-	onch {String} - (opcional) string que será inserida no evento "onchange"
+	onch {String} - (opcional) string que serï¿½ inserida no evento "onchange"
 
 	*/
 	$inputText: function(idPai,larguraIdPai,idInput,titulo,digitos,valor,nome,onch) {
@@ -765,7 +765,7 @@ i3GEO.util = {
 	/*
 	Function: $top ou nome curto $top
 
-	Muda a posição (superior) de um objeto tanto no IE como no Firefox.
+	Muda a posiï¿½ï¿½o (superior) de um objeto tanto no IE como no Firefox.
 
 	Exemplo: $top("imagem",100)
 
@@ -773,7 +773,7 @@ i3GEO.util = {
 
 	id - identificador do objeto
 
-	valor - posição em relação ao topo.
+	valor - posiï¿½ï¿½o em relaï¿½ï¿½o ao topo.
 	*/
 	$top: function(id,valor){
 		if (document.getElementById(id).style){
@@ -786,7 +786,7 @@ i3GEO.util = {
 	/*
 	Function: $left ou nome curto $left
 
-	Muda a posição (esquerda) de um objeto tanto no IE como no Firefox.
+	Muda a posiï¿½ï¿½o (esquerda) de um objeto tanto no IE como no Firefox.
 
 	Exemplo: $left("imagem",100)
 
@@ -794,7 +794,7 @@ i3GEO.util = {
 
 	id - identificador do objeto
 
-	valor - posição em relação a esquerda.
+	valor - posiï¿½ï¿½o em relaï¿½ï¿½o a esquerda.
 	*/
 	$left: function(id,valor){
 		if (document.getElementById(id).style){
@@ -822,7 +822,7 @@ i3GEO.util = {
 
 		Insere um ponto no mapa
 
-		Os pontos são inseridos em um contaier de pontos e mostrados temporáriamente
+		Os pontos sï¿½o inseridos em um contaier de pontos e mostrados temporï¿½riamente
 
 		Parametros:
 
@@ -831,13 +831,13 @@ i3GEO.util = {
 		yi {Numeric} - coordenada y no mapa (imagem).
 
 		funcaoOnclick {String} - funcao que sera executada quando a marca 
-		for clicada, se for "", o container será esvaziado ao ser clicado na marca
+		for clicada, se for "", o container serï¿½ esvaziado ao ser clicado na marca
 
-		container {String} - id do container que receberá os pontos. Se não existir um elemento com esse ID, será criado um novo DIV. No caso da interface google Earth, é utilizado na definição do nome da marca (setname).
+		container {String} - id do container que receberï¿½ os pontos. Se nï¿½o existir um elemento com esse ID, serï¿½ criado um novo DIV. No caso da interface google Earth, ï¿½ utilizado na definiï¿½ï¿½o do nome da marca (setname).
 
-		texto {String} - (apenas para interface Google Earth) nome que será adicionado junto da marca
+		texto {String} - (apenas para interface Google Earth) nome que serï¿½ adicionado junto da marca
 
-		srci {string} - (opcional) endereço da imagem (será incluido em SRC do tag IMG)
+		srci {string} - (opcional) endereï¿½o da imagem (serï¿½ incluido em SRC do tag IMG)
 		*/
 		cria:function(xi,yi,funcaoOnclick,container,texto,srci){
 			if(typeof(console) !== 'undefined'){console.info("i3GEO.util.insereMarca.cria()");}
@@ -933,9 +933,9 @@ i3GEO.util = {
 
 	Parametros:
 
-	janelaid {String} - id do conteúdo da janela flutuante que chamou a função. Pode ser "" caso elemento exista em document
+	janelaid {String} - id do conteï¿½do da janela flutuante que chamou a funï¿½ï¿½o. Pode ser "" caso elemento exista em document
 
-	elemento {String} - id do elemento que receberá os valores da cor selecionada
+	elemento {String} - id do elemento que receberï¿½ os valores da cor selecionada
 
 	tipo {String} - opcional pode ser definido como rgb ou hex indicando o tipo de retorno da cor
 	*/
@@ -989,9 +989,9 @@ i3GEO.util = {
 	/*
 	Function: ajaxhttp
 
-	Cria o objeto XMLHttpRequest para uso com funções próprias de chamada em ajax
+	Cria o objeto XMLHttpRequest para uso com funï¿½ï¿½es prï¿½prias de chamada em ajax
 
-	O uso dessa função não é recomendado. Dê preferência para uso da chamada ajax via YUI
+	O uso dessa funï¿½ï¿½o nï¿½o ï¿½ recomendado. Dï¿½ preferï¿½ncia para uso da chamada ajax via YUI
 
 	Return:
 
@@ -1014,16 +1014,16 @@ i3GEO.util = {
 	/*
 	Function: ajaxexecASXml
 
-	Executa uma chamada ajax no modo assíncrono retornando o resultado em XML.
+	Executa uma chamada ajax no modo assï¿½ncrono retornando o resultado em XML.
 
 	Parametros:
 
-	programa {String} - URL do programa que será executado no servidor.
-	funcao {funcao} - função que tratará o resultado.
+	programa {String} - URL do programa que serï¿½ executado no servidor.
+	funcao {funcao} - funï¿½ï¿½o que tratarï¿½ o resultado.
 
 	Returns:
 
-	O resultado em um objeto DOM. Se o retorno contiver a palavra "Erro", é gerado um alert.
+	O resultado em um objeto DOM. Se o retorno contiver a palavra "Erro", ï¿½ gerado um alert.
 	*/
 	ajaxexecASXml: function(programa,funcao){
 		var h,ohttp;
@@ -1070,7 +1070,7 @@ i3GEO.util = {
 
 	id {String} - id do objeto
 
-	tempo {Integer} - tempo em milesegundos que levará o efeito
+	tempo {Integer} - tempo em milesegundos que levarï¿½ o efeito
 
 	intervalo {Integer} - intervalo entre uma imagem e outra
 	*/
@@ -1122,11 +1122,11 @@ i3GEO.util = {
 
 	id {String} - id do objeto
 
-	tempo {Integer} - tempo em milesegundos que levará o efeito
+	tempo {Integer} - tempo em milesegundos que levarï¿½ o efeito
 
 	intervalo {Integer} - intervalo entre uma imagem e outra
 
-	removeobj {Boolean} - remove ou não o objeto no final
+	removeobj {Boolean} - remove ou nï¿½o o objeto no final
 	*/
 	desaparece: function(id,tempo,intervalo,removeobj){
 		var n,obj,opacidade,fade = 0,p,tempoFade = null;
@@ -1178,7 +1178,7 @@ i3GEO.util = {
 	/*
 	Function: wkt2ext
 
-	Calcula a extensão geográfica de uma geometria fornecida no formato WKT
+	Calcula a extensï¿½o geogrï¿½fica de uma geometria fornecida no formato WKT
 
 	Parametros:
 
@@ -1188,7 +1188,7 @@ i3GEO.util = {
 
 	Return:
 
-	{String} - extensão geográfica (xmin ymin xmax ymax)
+	{String} - extensï¿½o geogrï¿½fica (xmin ymin xmax ymax)
 	*/
 	wkt2ext:function(wkt,tipo){
 		if(typeof(console) !== 'undefined'){console.info("i3GEO.util.wkt2ext()");}
@@ -1237,9 +1237,9 @@ i3GEO.util = {
 	/*
 	Function: sortNumber
 
-	Ordena um array contendo números. Deve ser usado como parâmetro do método "sort", exemplo
+	Ordena um array contendo nï¿½meros. Deve ser usado como parï¿½metro do mï¿½todo "sort", exemplo
 
-	y.sort(i3GEO.util.sortNumber), onde y é um array de números
+	y.sort(i3GEO.util.sortNumber), onde y ï¿½ um array de nï¿½meros
 	*/
 	sortNumber: function(a,b){
 		return a - b;
@@ -1247,7 +1247,7 @@ i3GEO.util = {
 	/*
 	Function: getScrollerWidth
 
-	Calcula o tamanho da barra de rolagem, permitindo calcular o tamanho correto da área útil do navegador
+	Calcula o tamanho da barra de rolagem, permitindo calcular o tamanho correto da ï¿½rea ï¿½til do navegador
 
 	http://www.fleegix.org/articles/2006-05-30-getting-the-scrollbar-width-in-pixels
 
@@ -1297,11 +1297,11 @@ i3GEO.util = {
 
 	js {String} - endereco do JS
 
-	ini {String} - funcao que será executada ao ser carregado o script (pode ser "")
+	ini {String} - funcao que serï¿½ executada ao ser carregado o script (pode ser "")
 
-	id - id do elemento script que será criado
+	id - id do elemento script que serï¿½ criado
 
-	aguarde {boolean} - mostra ou não a janela de aguarde
+	aguarde {boolean} - mostra ou nï¿½o a janela de aguarde
 	*/
 	scriptTag: function(js,ini,id,aguarde){
 		if(typeof(console) !== 'undefined'){console.info("i3GEO.util.scriptTag()");}
@@ -1355,7 +1355,7 @@ i3GEO.util = {
 
 	Parametros:
 
-	id - id do elemento script que será removido
+	id - id do elemento script que serï¿½ removido
 	*/
 	removeScriptTag: function(id){
 		try{
@@ -1377,9 +1377,9 @@ i3GEO.util = {
 	/*
 	Function: verificaScriptTag
 
-	Verifica se um javascript está carregado no documento.
+	Verifica se um javascript estï¿½ carregado no documento.
 
-	Útil para verificar se existe alguma ferramenta ativa ao procurar por i3GEOF.
+	ï¿½til para verificar se existe alguma ferramenta ativa ao procurar por i3GEOF.
 
 	Parametros:
 
@@ -1405,11 +1405,11 @@ i3GEO.util = {
 	/*
 	Function: mensagemAjuda
 
-	Formata uma mensagem de texto com ícone de ?
+	Formata uma mensagem de texto com ï¿½cone de ?
 
 	Parametros:
 
-	onde {String} - id do elemento que receberá a mensagem
+	onde {String} - id do elemento que receberï¿½ a mensagem
 
 	texto {String} - texto da mensagem
 	*/
@@ -1429,7 +1429,7 @@ i3GEO.util = {
 	/*
 	Function: randomRGB
 
-	Gera uma cor RGB de forma aleatória
+	Gera uma cor RGB de forma aleatï¿½ria
 
 	Return:
 	{String} - r,g,b
@@ -1471,24 +1471,24 @@ i3GEO.util = {
 	/*
 	Function: comboTemas
 
-	Cria um combo (caixa de seleção) com a lista de temas existentes no mapa e de determinado tipo
+	Cria um combo (caixa de seleï¿½ï¿½o) com a lista de temas existentes no mapa e de determinado tipo
 
 	Parametros:
 
-	id {String} - id do elemento select que será criado
+	id {String} - id do elemento select que serï¿½ criado
 
-	funcao {Function} - função que será executada ao terminar a montagem do combo. Essa função receberá
-		como parâmetros um Array associativo contendo os dados em HTML gerados e o tipo de resultado. P.ex.:
+	funcao {Function} - funï¿½ï¿½o que serï¿½ executada ao terminar a montagem do combo. Essa funï¿½ï¿½o receberï¿½
+		como parï¿½metros um Array associativo contendo os dados em HTML gerados e o tipo de resultado. P.ex.:
 		{dados:comboTemas,tipo:"dados"}
-		tipo será uma string que pode ser "dados"|"mensagem"|"erro" indicando o tipo de retorno.
+		tipo serï¿½ uma string que pode ser "dados"|"mensagem"|"erro" indicando o tipo de retorno.
 
-	onde {String} - id do elemento HTML que receberá o combo. É utilizado apenas para inserir uma mensagem de aguarde.
+	onde {String} - id do elemento HTML que receberï¿½ o combo. ï¿½ utilizado apenas para inserir uma mensagem de aguarde.
 
-	nome {String} - valor que será incluido no parametro "name" do elemento "select".
+	nome {String} - valor que serï¿½ incluido no parametro "name" do elemento "select".
 
-	multiplo {Booleano} - indica se o combo permite seleções múltiplas
+	multiplo {Booleano} - indica se o combo permite seleï¿½ï¿½es mï¿½ltiplas
 
-	tipoCombo {String} - Tipo de temas que serão incluídos no combo ligados|selecionados|raster|pontosSelecionados|pontos|linhaDoTempo
+	tipoCombo {String} - Tipo de temas que serï¿½o incluï¿½dos no combo ligados|selecionados|raster|pontosSelecionados|pontos|linhaDoTempo
 	*/
 	comboTemas: function(id,funcao,onde,nome,multiplo,tipoCombo){
 		if(typeof(console) !== 'undefined'){console.info("i3GEO.util.comboTemas()");}
@@ -1579,21 +1579,21 @@ i3GEO.util = {
 				monta(i3GEO.arvoreDeCamadas.filtraCamadas("sel","sim","igual",temp));
 			}
 			else
-			{alert("Arvore de camadas não encontrada");}
+			{alert("Arvore de camadas nï¿½o encontrada");}
 		}
 		if(tipoCombo === "pontos"){
 			if(i3GEO.arvoreDeCamadas.CAMADAS !== ""){
 				monta(i3GEO.arvoreDeCamadas.filtraCamadas("type",0,"igual",i3GEO.arvoreDeCamadas.CAMADAS));
 			}
 			else
-			{alert("Arvore de camadas não encontrada");}
+			{alert("Arvore de camadas nï¿½o encontrada");}
 		}
 		if(tipoCombo === "poligonos"){
 			if(i3GEO.arvoreDeCamadas.CAMADAS !== ""){
 				monta(i3GEO.arvoreDeCamadas.filtraCamadas("type",2,"igual",i3GEO.arvoreDeCamadas.CAMADAS));
 			}
 			else
-			{alert("Arvore de camadas não encontrada");}
+			{alert("Arvore de camadas nï¿½o encontrada");}
 		}
 		if(tipoCombo === "poligonosSelecionados"){
 			if(i3GEO.arvoreDeCamadas.CAMADAS !== ""){
@@ -1601,7 +1601,7 @@ i3GEO.util = {
 				monta(i3GEO.arvoreDeCamadas.filtraCamadas("sel","sim","igual",temp));
 			}
 			else
-			{alert("Arvore de camadas não encontrada");}
+			{alert("Arvore de camadas nï¿½o encontrada");}
 		}
 		if(tipoCombo === "naolinearSelecionados"){
 			if(i3GEO.arvoreDeCamadas.CAMADAS !== ""){
@@ -1609,21 +1609,21 @@ i3GEO.util = {
 				monta(i3GEO.arvoreDeCamadas.filtraCamadas("sel","sim","igual",temp));
 			}
 			else
-			{alert("Arvore de camadas não encontrada");}
+			{alert("Arvore de camadas nï¿½o encontrada");}
 		}
 		if(tipoCombo === "linhaDoTempo"){
 			if(i3GEO.arvoreDeCamadas.CAMADAS !== ""){
 				monta(i3GEO.arvoreDeCamadas.filtraCamadas("linhadotempo","sim","igual",i3GEO.arvoreDeCamadas.CAMADAS));
 			}
 			else
-			{alert("Arvore de camadas não encontrada");}
+			{alert("Arvore de camadas nï¿½o encontrada");}
 		}
 		if(tipoCombo === ""){
 			if(i3GEO.arvoreDeCamadas.CAMADAS !== ""){
 				monta(i3GEO.arvoreDeCamadas.filtraCamadas("type","","diferente",i3GEO.arvoreDeCamadas.CAMADAS));
 			}
 			else
-			{alert("Arvore de camadas não encontrada");}
+			{alert("Arvore de camadas nï¿½o encontrada");}
 		}
 	},
 	/*
@@ -1633,22 +1633,22 @@ i3GEO.util = {
 
 	Parametros:
 
-	id {String} - id do elemento select que será criado
+	id {String} - id do elemento select que serï¿½ criado
 
-	funcao {Function} - função que será executada ao terminar a montagem do combo. Essa função receberá
-		como parâmetros um Array associativo contendo os dados em HTML gerados e o tipo de resultado. P.ex.:
+	funcao {Function} - funï¿½ï¿½o que serï¿½ executada ao terminar a montagem do combo. Essa funï¿½ï¿½o receberï¿½
+		como parï¿½metros um Array associativo contendo os dados em HTML gerados e o tipo de resultado. P.ex.:
 		{dados:comboTemas,tipo:"dados"}
-		tipo será uma string que pode ser "dados"|"mensagem"|"erro" indicando o tipo de retorno.
+		tipo serï¿½ uma string que pode ser "dados"|"mensagem"|"erro" indicando o tipo de retorno.
 
-	onde {String} - id do elemento HTML que receberá o combo. É utilizado apenas para inserir uma mensagem de aguarde.
+	onde {String} - id do elemento HTML que receberï¿½ o combo. ï¿½ utilizado apenas para inserir uma mensagem de aguarde.
 
-	nome {String} - valor que será incluido no parametro "name" do elemento "select".
+	nome {String} - valor que serï¿½ incluido no parametro "name" do elemento "select".
 
-	tipoLista {String} - Tipo de temas que serão incluídos na lista ligados|selecionados|raster|pontosSelecionados|pontos|polraster
+	tipoLista {String} - Tipo de temas que serï¿½o incluï¿½dos na lista ligados|selecionados|raster|pontosSelecionados|pontos|polraster
 
-	prefixo {string} - Prefixo que será usado no id de cada elemento
+	prefixo {string} - Prefixo que serï¿½ usado no id de cada elemento
 
-	size {numeric} - tamanho dos elementos input editáveis
+	size {numeric} - tamanho dos elementos input editï¿½veis
 	*/
 	checkTemas: function(id,funcao,onde,nome,tipoLista,prefixo,size){
 		if(typeof(console) !== 'undefined'){console.info("i3GEO.util.checkTemas()");}
@@ -1725,7 +1725,7 @@ i3GEO.util = {
 				monta(temp);
 			}
 			else
-			{alert("Arvore de camadas não encontrada");}
+			{alert("Arvore de camadas nï¿½o encontrada");}
 		}
 		if(tipoLista === "pontosSelecionados"){
 			if(i3GEO.arvoreDeCamadas.CAMADAS !== ""){
@@ -1733,35 +1733,35 @@ i3GEO.util = {
 				monta(i3GEO.arvoreDeCamadas.filtraCamadas("sel","sim","igual",temp));
 			}
 			else
-			{alert("Arvore de camadas não encontrada");}
+			{alert("Arvore de camadas nï¿½o encontrada");}
 		}
 		if(tipoLista === "pontos"){
 			if(i3GEO.arvoreDeCamadas.CAMADAS !== ""){
 				monta(i3GEO.arvoreDeCamadas.filtraCamadas("type",0,"igual",i3GEO.arvoreDeCamadas.CAMADAS));
 			}
 			else
-			{alert("Arvore de camadas não encontrada");}
+			{alert("Arvore de camadas nï¿½o encontrada");}
 		}
 	},
 	/*
 	Function: comboItens
 
-	Cria um combo (caixa de seleção) com a lista de itens de um layer
+	Cria um combo (caixa de seleï¿½ï¿½o) com a lista de itens de um layer
 
 	Parametros:
 
-	id {String} - id do elemento select que será criado
+	id {String} - id do elemento select que serï¿½ criado
 
-	tema {String} - código do tema (layer)
+	tema {String} - cï¿½digo do tema (layer)
 
-	funcao {Function} - função que será executada ao terminar a montagem do combo. Essa função receberá
-		como parâmetros um Array associativo contendo os dados em HTML gerados e o tipo de resultado. P.ex.:
+	funcao {Function} - funï¿½ï¿½o que serï¿½ executada ao terminar a montagem do combo. Essa funï¿½ï¿½o receberï¿½
+		como parï¿½metros um Array associativo contendo os dados em HTML gerados e o tipo de resultado. P.ex.:
 		{dados:comboTemas,tipo:"dados"}
-		tipo será uma string que pode ser "dados"|"mensagem"|"erro" indicando o tipo de retorno.
+		tipo serï¿½ uma string que pode ser "dados"|"mensagem"|"erro" indicando o tipo de retorno.
 
-	onde {String} - id do elemento HTML que receberá o combo. É utilizado apenas para inserir uma mensagem de aguarde.
+	onde {String} - id do elemento HTML que receberï¿½ o combo. ï¿½ utilizado apenas para inserir uma mensagem de aguarde.
 
-	nome {String} - valor que será incluido no parametro "name" do elemento "select".
+	nome {String} - valor que serï¿½ incluido no parametro "name" do elemento "select".
 	*/
 	comboItens: function(id,tema,funcao,onde,nome){
 		if(typeof(console) !== 'undefined'){console.info("i3GEO.util.comboItens()");}
@@ -1796,22 +1796,22 @@ i3GEO.util = {
 	/*
 	Function: comboValoresItem
 
-	Cria uma caixa de seleção com os valores de um item de um tema
+	Cria uma caixa de seleï¿½ï¿½o com os valores de um item de um tema
 
 	Parametros:
 
-	id {String} - id do elemento select que será criado
+	id {String} - id do elemento select que serï¿½ criado
 
-	tema {String} - código do tema (layer)
+	tema {String} - cï¿½digo do tema (layer)
 
 	itemTema {String} - nome do item
 
-	funcao {Function} - função que será executada ao terminar a montagem do combo. Essa função receberá
-		como parâmetros um Array associativo contendo os dados em HTML gerados e o tipo de resultado. P.ex.:
+	funcao {Function} - funï¿½ï¿½o que serï¿½ executada ao terminar a montagem do combo. Essa funï¿½ï¿½o receberï¿½
+		como parï¿½metros um Array associativo contendo os dados em HTML gerados e o tipo de resultado. P.ex.:
 		{dados:comboTemas,tipo:"dados"}
-		tipo será uma string que pode ser "dados"|"mensagem"|"erro" indicando o tipo de retorno.
+		tipo serï¿½ uma string que pode ser "dados"|"mensagem"|"erro" indicando o tipo de retorno.
 
-	onde {String} - id do elemento HTML que receberá o combo. É utilizado apenas para inserir uma mensagem de aguarde.
+	onde {String} - id do elemento HTML que receberï¿½ o combo. ï¿½ utilizado apenas para inserir uma mensagem de aguarde.
 	*/
 	comboValoresItem: function(id,tema,itemTema,funcao,onde){
 		if (arguments.length === 5)
@@ -1843,13 +1843,13 @@ i3GEO.util = {
 	/*
 	Function: comboFontes
 
-	Cria um combo (caixa de seleção) com a lista fontes de texto disponíveis
+	Cria um combo (caixa de seleï¿½ï¿½o) com a lista fontes de texto disponï¿½veis
 
 	Parametros:
 
-	id {String} - id do elemento select que será criado
+	id {String} - id do elemento select que serï¿½ criado
 
-	onde {String} - id do elemento HTML que receberá o combo. É utilizado apenas para inserir uma mensagem de aguarde.
+	onde {String} - id do elemento HTML que receberï¿½ o combo. ï¿½ utilizado apenas para inserir uma mensagem de aguarde.
 	*/
 	comboFontes: function(id,onde){
 		if(typeof(console) !== 'undefined'){console.info("i3GEO.util.comboFontes()");}
@@ -1873,13 +1873,13 @@ i3GEO.util = {
 	/*
 	Function: comboSimNao
 
-	Cria uma caixa de seleção com as palavras sim e não
+	Cria uma caixa de seleï¿½ï¿½o com as palavras sim e nï¿½o
 
 	Parametros:
 
-	id [String} - id do elemento select que será criado
+	id [String} - id do elemento select que serï¿½ criado
 
-	selecionado {string} - qual valor estará selecionado sim|nao
+	selecionado {string} - qual valor estarï¿½ selecionado sim|nao
 
 	Return:
 	{string}
@@ -1893,30 +1893,30 @@ i3GEO.util = {
 		else
 		{combo+= "<option value=TRUE >sim</option>";}
 		if(selecionado === "nao")
-		{combo += "<option value=FALSE selected >não</option>";}
+		{combo += "<option value=FALSE selected >nï¿½o</option>";}
 		else
-		{combo += "<option value=FALSE >não</option>";}
+		{combo += "<option value=FALSE >nï¿½o</option>";}
 		combo += "</select>";
 		return(combo);
 	},
 	/*
 	Function: checkItensEditaveis
 
-	Cria uma lista de elementos do tipo input com textos editáveis contendo a lista de itens de um tema.
+	Cria uma lista de elementos do tipo input com textos editï¿½veis contendo a lista de itens de um tema.
 
 	Parametros:
 
-	tema {string} - código do layer existente no mapa
+	tema {string} - cï¿½digo do layer existente no mapa
 
-	funcao {function} - função que será executada para montar a lista. Essa função receberá
-	como parâmetro um array do tipo {dados:ins,tipo:"dados"}
-	onde ins é um array com as linhas e tipo é o tipo de resultado, que pode ser "dados"|"erro"
+	funcao {function} - funï¿½ï¿½o que serï¿½ executada para montar a lista. Essa funï¿½ï¿½o receberï¿½
+	como parï¿½metro um array do tipo {dados:ins,tipo:"dados"}
+	onde ins ï¿½ um array com as linhas e tipo ï¿½ o tipo de resultado, que pode ser "dados"|"erro"
 
-	onde {string} - id do elemento que receberá a mensagem de aguarde
+	onde {string} - id do elemento que receberï¿½ a mensagem de aguarde
 
-	size {numeric} - tamanho dos elementos input editáveis
+	size {numeric} - tamanho dos elementos input editï¿½veis
 
-	prefixo {string} - Prefixo que será usado no id de cada elemento
+	prefixo {string} - Prefixo que serï¿½ usado no id de cada elemento
 	*/
 	checkItensEditaveis: function(tema,funcao,onde,size,prefixo){
 		if(typeof(console) !== 'undefined'){console.info("i3GEO.util.checkItensEditaveis()");}
@@ -1949,19 +1949,19 @@ i3GEO.util = {
 	/*
 	Function: radioEpsg
 
-	Cria uma lista de códigos EPSG para o usuário escolher um deles.
+	Cria uma lista de cï¿½digos EPSG para o usuï¿½rio escolher um deles.
 
-	A lista é mostrada como uma série de elementos do tipo radio com "name" igual ao prefixo mais a palavra EPSG
+	A lista ï¿½ mostrada como uma sï¿½rie de elementos do tipo radio com "name" igual ao prefixo mais a palavra EPSG
 
 	Parametros:
 
-	funcao {function} - função que será executada para montar a lista. Essa função receberá
-	como parâmetro um array do tipo {dados:ins,tipo:"dados"}
-	onde ins é um array com as linhas e tipo é o tipo de resultado, que pode ser "dados"|"erro"
+	funcao {function} - funï¿½ï¿½o que serï¿½ executada para montar a lista. Essa funï¿½ï¿½o receberï¿½
+	como parï¿½metro um array do tipo {dados:ins,tipo:"dados"}
+	onde ins ï¿½ um array com as linhas e tipo ï¿½ o tipo de resultado, que pode ser "dados"|"erro"
 
-	onde {string} - id do elemento que receberá a mensagem de aguarde
+	onde {string} - id do elemento que receberï¿½ a mensagem de aguarde
 
-	prefixo {string} - Prefixo que será usado no name de cada elemento
+	prefixo {string} - Prefixo que serï¿½ usado no name de cada elemento
 	*/
 	radioEpsg: function (funcao,onde,prefixo){
 		if (arguments.length === 2)
@@ -1993,21 +1993,21 @@ i3GEO.util = {
 	/*
 	Function: proximoAnterior
 
-	Cria uma sequência de opções com botão de anterior e próximo. É utilizado principalmente pelas
-	ferramentas de análise espacial, onde o usuário segue uma sequência de operações de escolha
-	de parâmetros.
+	Cria uma sequï¿½ncia de opï¿½ï¿½es com botï¿½o de anterior e prï¿½ximo. ï¿½ utilizado principalmente pelas
+	ferramentas de anï¿½lise espacial, onde o usuï¿½rio segue uma sequï¿½ncia de operaï¿½ï¿½es de escolha
+	de parï¿½metros.
 
 	Parametros:
 
-	anterior {String} - nome da função que é executada para voltar à tela anterior. Pode ser "".
+	anterior {String} - nome da funï¿½ï¿½o que ï¿½ executada para voltar ï¿½ tela anterior. Pode ser "".
 
-	proxima {String} - nome da função que é executada para avançar para a próxima tela. Pode ser "".
+	proxima {String} - nome da funï¿½ï¿½o que ï¿½ executada para avanï¿½ar para a prï¿½xima tela. Pode ser "".
 
-	texto {String} - texto que comporá a tela atual
+	texto {String} - texto que comporï¿½ a tela atual
 
-	idatual {String} - id do elemento DIV que será criado para inserir o conteúdo definido em 'texto"
+	idatual {String} - id do elemento DIV que serï¿½ criado para inserir o conteï¿½do definido em 'texto"
 
-	container {String} - id do elemento DIV já existente que receberá as telas.
+	container {String} - id do elemento DIV jï¿½ existente que receberï¿½ as telas.
 	*/
 	proximoAnterior: function(anterior,proxima,texto,idatual,container){
 		if(typeof(console) !== 'undefined'){console.info("i3GEO.util.proximoAnterior()");}
@@ -2066,21 +2066,21 @@ i3GEO.util = {
 	/*
 	Function: dialogoFerramenta
 
-	Atalho para abrir a janela de diálogo de uma ferramenta padrão
+	Atalho para abrir a janela de diï¿½logo de uma ferramenta padrï¿½o
 
-	O script adicionado terá como ID "i3GEOF."+nome+"_script"
+	O script adicionado terï¿½ como ID "i3GEOF."+nome+"_script"
 
 	Parametros:
 
-	mensagem {string} - mensagem que será enviada ao console no caso do Firefox
+	mensagem {string} - mensagem que serï¿½ enviada ao console no caso do Firefox
 
-	dir {string} - diretório em i3geo/ferramentas
+	dir {string} - diretï¿½rio em i3geo/ferramentas
 
 	nome {string} - nome da classe da ferramenta
 	*/
 	dialogoFerramenta: function(mensagem,dir,nome){
 		if(typeof(console) !== 'undefined'){console.info(mensagem);}
-		var js = i3GEO.configura.locaplic+"/ferramentas/"+dir+"/index.js.php";
+		var js = i3GEO.configura.locaplic+"/ferramentas/"+dir+"/index.js";
 		if(!$i("i3GEOF."+nome+"_script")){
 			i3GEO.janela.ESTILOAGUARDE = "reduzida";
 			i3GEO.util.multiStep(
@@ -2095,13 +2095,13 @@ i3GEO.util = {
 	/*
 	Function: intersectaBox
 
-	Verifica se um retângulo está dentro de outro retângulo
+	Verifica se um retï¿½ngulo estï¿½ dentro de outro retï¿½ngulo
 
 	Parametros:
 
-	box1 - retângulo que será verificado
+	box1 - retï¿½ngulo que serï¿½ verificado
 
-	box2 - retângulo de referência
+	box2 - retï¿½ngulo de referï¿½ncia
 
 	Return:
 
@@ -2158,15 +2158,15 @@ i3GEO.util = {
 	/*
 	Function: abreColourRamp
 
-	Abre a janela flutuante para escolha de um degradê de cores
+	Abre a janela flutuante para escolha de um degradï¿½ de cores
 
 	Parametros:
 
-	janelaid {String} - id do conteúdo da janela flutuante que chamou a função. Pode ser "" caso elemento exista em document
+	janelaid {String} - id do conteï¿½do da janela flutuante que chamou a funï¿½ï¿½o. Pode ser "" caso elemento exista em document
 
-	elemento {String} - id do elemento que receberá os valores da cor selecionada
+	elemento {String} - id do elemento que receberï¿½ os valores da cor selecionada
 
-	ncores {numerico} - número de cores default ao abrir  o seletor de cores
+	ncores {numerico} - nï¿½mero de cores default ao abrir  o seletor de cores
 	*/
 	abreColourRamp: function(janelaid,elemento,ncores){
 		if(typeof(console) !== 'undefined'){console.info("i3GEO.util.abreColourRamp()");}
@@ -2216,13 +2216,13 @@ i3GEO.util = {
 	/*
 	Function: localizai3GEO
 
-	Tenta identificar onde os JS do i3Geo estão localizados
+	Tenta identificar onde os JS do i3Geo estï¿½o localizados
 
-	Aplica o resultado à variável i3GEO.configura.locaplic
+	Aplica o resultado ï¿½ variï¿½vel i3GEO.configura.locaplic
 
 	Return:
 
-	{string} - url onde está instalado o i3geo
+	{string} - url onde estï¿½ instalado o i3geo
 	*/
 	localizai3GEO: function(){
 		var scriptLocation = "",
@@ -2256,13 +2256,13 @@ i3GEO.util = {
 
 	Remove um filho de um elemento DOM
 
-	Pode-se especificar o pai e o filha a ser removido ou simplesmente o ID do nó que se quer remover
+	Pode-se especificar o pai e o filha a ser removido ou simplesmente o ID do nï¿½ que se quer remover
 
 	Parametros:
 
-	id {string} - id do elemento que será removido (filho)
+	id {string} - id do elemento que serï¿½ removido (filho)
 
-	el {node} - (opcional) node (DOM) que contém o elemento. Se não for definido, será obtido o parent de id
+	el {node} - (opcional) node (DOM) que contï¿½m o elemento. Se nï¿½o for definido, serï¿½ obtido o parent de id
 	*/
 	removeChild: function(id,el){
 		var j = $i(id);
@@ -2280,11 +2280,11 @@ i3GEO.util = {
 
 	Parametros:
 
-	id {string} - id do elemento que será removido (filho)
+	id {string} - id do elemento que serï¿½ removido (filho)
 
-	prop {string} - propriedade que receberá o valor
+	prop {string} - propriedade que receberï¿½ o valor
 
-	valor {string} - valor que será aplicado
+	valor {string} - valor que serï¿½ aplicado
 	*/
 	defineValor: function(id,prop,valor){
 		try
@@ -2294,11 +2294,11 @@ i3GEO.util = {
 	/*
 	Function: in_array
 
-	Procura a ocorrência de um elemento em um array
+	Procura a ocorrï¿½ncia de um elemento em um array
 
 	Parametros:
 
-	x - o que será procurado
+	x - o que serï¿½ procurado
 
 	matriz - array
 
@@ -2307,8 +2307,8 @@ i3GEO.util = {
 	{boolean}
 	*/
 	in_array: function(x, matriz){
-		var txt = "¬" + matriz.join("¬") + "¬";
-		var er = new RegExp ("¬" + x + "¬", "gim");
+		var txt = "ï¿½" + matriz.join("ï¿½") + "ï¿½";
+		var er = new RegExp ("ï¿½" + x + "ï¿½", "gim");
 		return ( (txt.match (er)) ? true : false );
 	},
 	timedProcessArray: function(items,process,callback){
@@ -2329,17 +2329,17 @@ i3GEO.util = {
 	/*
 	Function: multiStep
 	
-	Implementa a técnica de particionamento para execussão de funções no modo assíncrono
+	Implementa a tï¿½cnica de particionamento para execussï¿½o de funï¿½ï¿½es no modo assï¿½ncrono
 	
-	Conforme página 144 do livro "Javascript de alto desempenho, Nicholas Zakas
+	Conforme pï¿½gina 144 do livro "Javascript de alto desempenho, Nicholas Zakas
 	
-	Parâmetros:
+	Parï¿½metros:
 	
-	steps {array} - funções que serão executadas
+	steps {array} - funï¿½ï¿½es que serï¿½o executadas
 	
-	args {array} - array de arrays com os argumentos de cada função
+	args {array} - array de arrays com os argumentos de cada funï¿½ï¿½o
 	
-	callback {function} - função que será executada ao terminar os processos
+	callback {function} - funï¿½ï¿½o que serï¿½ executada ao terminar os processos
 	*/
 	multiStep: function(steps,args,callback){
 		var tasks = steps.concat();//cria um clone
@@ -2357,7 +2357,7 @@ i3GEO.util = {
 	/*
 	Function: tamanhoBrowser
 	
-	Calcula o tamanho da área útil do navegador considerando-se as propriedades nativas do objeto window
+	Calcula o tamanho da ï¿½rea ï¿½til do navegador considerando-se as propriedades nativas do objeto window
 	
 	Return:
 	{[w,h]}
@@ -2394,18 +2394,18 @@ i3GEO.util = {
 	/*
 	Function: detectaTablet
 	
-	Verifica se está em uso um dispositivo do tipo móvel
+	Verifica se estï¿½ em uso um dispositivo do tipo mï¿½vel
 	
 	Se for detectado, utiliza a interface alternativa definida em i3GEO.Interface.ALTTABLET
 	
-	A detecção é feita com base em i3geo/pacotes/mobileesp/mdetect.js
+	A detecï¿½ï¿½o ï¿½ feita com base em i3geo/pacotes/mobileesp/mdetect.js
 	*/
 	detectaTablet: function(){
 		var p,
 			c = DetectaMobile("DetectMobileLong");
 		if(c === false)
 		{return false;}
-		p = confirm("Direciona para a versão adaptada para tablets?");
+		p = confirm("Direciona para a versï¿½o adaptada para tablets?");
 		if(p){
 			window.location = i3GEO.configura.locaplic+'/interface/'+i3GEO.Interface.ALTTABLET+'?'+i3GEO.configura.sid;
 			return true;
@@ -2416,7 +2416,7 @@ i3GEO.util = {
 	
 	Calcula o valor de DPI do monitor.
 	
-	O valor é aproximado e utilizado principalmente na interface OpenLayers
+	O valor ï¿½ aproximado e utilizado principalmente na interface OpenLayers
 	*/
 	calculaDPI: function(){
 		var novoel = document.createElement("div"),
@@ -2456,7 +2456,7 @@ i3GEO.util = {
 	/*
 	Function: versaoNavegador
 	
-	Retorna algumas versões de navegador
+	Retorna algumas versï¿½es de navegador
 	*/	
 	versaoNavegador: function(){
 		if(navm && navigator.userAgent.toLowerCase().indexOf('msie 8.') > -1)

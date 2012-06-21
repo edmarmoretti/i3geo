@@ -1,7 +1,7 @@
 /*jslint plusplus:false,white:false,undef: false, rhino: true, onevar: true, evil: true */
 
 /*
-Esta classe foi depreciada e poderá ser removida. Veja i3geo/ferramentas/selecao/index.js.php
+Esta classe foi depreciada e poderï¿½ ser removida. Veja i3geo/ferramentas/selecao/index.js
 
 */
 if(typeof(i3GEO) === 'undefined'){
@@ -100,7 +100,7 @@ i3GEO.selecao = {
 		/*
 		 criaBox
 
-		Cria o DIV que será utilizado para desenhar o box no mapa
+		Cria o DIV que serï¿½ utilizado para desenhar o box no mapa
 		*/
 		criaBox: function(){
 			try{i3GEO.desenho.richdraw.fecha();}catch(e){
@@ -156,7 +156,7 @@ i3GEO.selecao = {
 		/*
 		 desloca
 
-		Desloca o box conforme o mouse é movimentado
+		Desloca o box conforme o mouse ï¿½ movimentado
 		*/
 		desloca: function(){
 			if(g_tipoacao !== 'selecaobox')
@@ -240,13 +240,13 @@ i3GEO.selecao = {
 	/*
 	 i3GEO.selecao.poligono
 
-	Realiza a seleção desenhando um polígono no mapa
+	Realiza a seleï¿½ï¿½o desenhando um polï¿½gono no mapa
 	*/
 	poligono:{
 		/*
 		 inicia
 
-		Inicia o desenho do polígono
+		Inicia o desenho do polï¿½gono
 		*/
 		inicia: function(){
 			try
@@ -256,7 +256,7 @@ i3GEO.selecao = {
 			}
 			i3GEO.util.insereMarca.limpa();
 			g_tipoacao = "selecaopoli";
-			alert("Clique no mapa para desenhar o polígono.");
+			alert("Clique no mapa para desenhar o polï¿½gono.");
 			i3GEO.desenho.criaContainerRichdraw();
 			i3GEO.desenho.richdraw.lineColor = "red";
 			i3GEO.desenho.richdraw.lineWidth = "2px";
@@ -269,7 +269,7 @@ i3GEO.selecao = {
 		/*
 		 move
 
-		Modifica o polígono conforme o usuário cria vértices
+		Modifica o polï¿½gono conforme o usuï¿½rio cria vï¿½rtices
 		*/
 		move: function(){
 			if (g_tipoacao === "selecaopoli"){
@@ -282,7 +282,7 @@ i3GEO.selecao = {
 		/*
 		 clique
 
-		Inclui um novo vértice no polígono
+		Inclui um novo vï¿½rtice no polï¿½gono
 		*/
 		clique: function(){
 			if (g_tipoacao !== "selecaopoli"){return;}
@@ -313,7 +313,7 @@ i3GEO.selecao = {
 		/*
 		termina
 
-		Termina o desenho do polígono e executa a operação de seleção
+		Termina o desenho do polï¿½gono e executa a operaï¿½ï¿½o de seleï¿½ï¿½o
 		*/
 		termina: function(){
 			var doc,pontos,xs,ys,retorna,p,cp;
