@@ -1426,14 +1426,14 @@ i3GEO.barraDeBotoes = {
 		inicia: function(){
 			//if(navm)
 			//{alert("O editor não funciona corretamente nesse navegador.");}
-			i3GEO.barraDeBotoes.editor.carregaJs();
+			i3GEO.barraDeBotoes.editor.carregaJs("janelaEditorVetorial");
 		},
 		carregaJs: function(idjanela){
 			if(!i3GEO.editorOL){
 				i3GEO.util.scriptTag(
-					i3GEO.configura.locaplic+"/mashups/openlayers.js.php",
+					i3GEO.configura.locaplic+"/mashups/openlayers.js",
 					"i3GEO.barraDeBotoes.editor.ativaPainel('"+idjanela+"')",
-					"openlayers.js.php",
+					"openlayers.js",
 					true
 				);
 			}

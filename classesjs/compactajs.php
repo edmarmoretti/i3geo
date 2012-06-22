@@ -234,7 +234,7 @@ $jsfiles = array(
 "../classesjs/compactados/classe_calculo_compacto.js",
 "../classesjs/compactados/classe_util_compacto.js",
 "../pacotes/openlayers/OpenLayers211.js",
-"../mashups/openlayers.js.php"
+"../mashups/openlayers.js"
 );
 $buffer = "";
 salvatudojs($jsfiles,$buffer,"../mashups/openlayers_compacto.js","js");
