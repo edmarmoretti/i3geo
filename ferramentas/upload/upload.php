@@ -21,7 +21,7 @@ if(isset($g_sid) && $g_sid != ""){
 <link rel="stylesheet" type="text/css" href="../../css/geral.css" />
 <title></title>
 </head>
-<body name="ancora" bgcolor="white" style="background-color:white;text-align:left;">
+<body bgcolor="white" style="background-color:white;text-align:left;">
 <p>
 <?php
 if (isset($_FILES['i3GEOuploadshp']['name']))

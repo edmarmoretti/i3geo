@@ -129,11 +129,11 @@ i3GEOF.inserexy = {
 			i3GEOF.inserexy.montaComboLocal();
 			i3GEO.util.radioEpsg(
 				function(retorno){
-					$i("i3GEOinserexylistaepsg").innerHTML = retorno.dados
+					$i("i3GEOinserexylistaepsg").innerHTML = retorno.dados;
 				},
 				"i3GEOinserexylistaepsg",
 				"i3GEOinserexy"
-			)
+			);
 		}
 		catch(erro){alert(erro);}
 	},
@@ -397,11 +397,11 @@ i3GEOF.inserexy = {
 			if (retorno.data != undefined){
 				var ins = [],i;
 				for (i=0;i<retorno.data.length; i++)
-				{ins.push("<div style='font-size:12px'>"+retorno.data[i].x+" "+retorno.data[i].y+"</div><br>")}
+				{ins.push("<div style='font-size:12px'>"+retorno.data[i].x+" "+retorno.data[i].y+"</div><br>");}
 				$i("i3GEOinserexyguia6obj").innerHTML = ins.join("");
 			}
 			else
-			{$i("i3GEOinserexyguia6obj").innerHTML = "<p style=color:red >Ocorreu um erro<br>"}
+			{$i("i3GEOinserexyguia6obj").innerHTML = "<p style=color:red >Ocorreu um erro<br>";}
 		};
 		cp = new cpaint();
 		cp.set_response_type("JSON");
@@ -445,8 +445,7 @@ i3GEOF.inserexy = {
 	*/
 	inserirdd: function(){
 		try{
-			var reg,regv,xgv,xmv,xsv,direcao,divs,x,y,xy,p,cp;
-			reg = new RegExp("w|W|l|L|o|O|'|G|r", "g");
+			var regv,xgv,xmv,xsv,direcao,divs,x,y,xy;
 			regv = new RegExp(",", "g");
 			xgv = $i("i3GEOinserexyxgdd").value;
 			xmv = $i("i3GEOinserexyxmdd").value;
@@ -472,7 +471,7 @@ i3GEOF.inserexy = {
 		try{
 			var reg = new RegExp("w|W|l|L|o|O|'|G|r", "g"),
 				regv = new RegExp(",", "g"),
-				v,xgv,xmv,xsv,vv,ygv,ymv,ysv,x,y;
+				v,xgv = 0,xmv = 0,xsv = 0,vv,ygv = 0,ymv = 0,ysv = 0,x,y;
 			if($i("i3GEOinserexytipodigcampo").checked){
 				if (!$i("i3GEOinserexylongitude").value == ""){
 					v = $i("i3GEOinserexylongitude").value + " 0" + " 0";
@@ -544,9 +543,9 @@ i3GEOF.inserexy = {
 			projecao = "";
 		for (i=0;i<inputs.length; i++){
 			if (inputs[i].checked == true)
-			{projecao = inputs[i].value}
+			{projecao = inputs[i].value;}
 		}
-		return(projecao)
+		return(projecao);
 	},
 	/*
 	Function: adiciona
@@ -568,14 +567,12 @@ i3GEOF.inserexy = {
 		{return;}
 		if(g_tipoacao === "inserexy"){
 			i3GEOF.inserexy.aguarde.visibility = "visible";
-			var doc,
-				tema = $i("i3GEOinserexytemasLocais").value,
+			var tema = $i("i3GEOinserexytemasLocais").value,
 				item = "",
 				valoritem = "",
 				temp,
 				n,
 				i,
-				temparray,
 				xyn,
 				projecao = i3GEOF.inserexy.pegaProjecao();
 				
@@ -597,7 +594,7 @@ i3GEOF.inserexy = {
 					if(i3GEO.Interface.ATUAL === "padrao")
 					{i3GEO.atualiza();}
 					i3GEO.Interface.atualizaTema(retorno,tema);
-					i3GEOF.inserexy.aguarde.visibility = "hidden"
+					i3GEOF.inserexy.aguarde.visibility = "hidden";
 				};
 				if(fonte !== undefined){
 					projecao = "";
@@ -678,11 +675,11 @@ i3GEOF.inserexy = {
 						$i("i3GEOinserexywktres").innerHTML = "<p class=paragrafo >"+ins+"</p>";
 					}
 					else
-					{$i("i3GEOinserexywktres").innerHTML = "<p style=color:red >Ocorreu um erro<br>"}
+					{$i("i3GEOinserexywktres").innerHTML = "<p style=color:red >Ocorreu um erro<br>";}
 				};
 			for (i=0;i<n;i++)
 			{xy.push(divs[i].innerHTML);}
-			xy = xy.join(" ")
+			xy = xy.join(" ");
 			cp.set_response_type("JSON");
 			cp.call(i3GEO.configura.locaplic+"/classesphp/mapa_controle.php?g_sid="+i3GEO.configura.sid+"&funcao=mostrawkt&xy="+xy,"xy2wkt",mostra);
 		}

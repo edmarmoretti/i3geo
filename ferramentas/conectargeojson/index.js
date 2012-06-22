@@ -108,7 +108,7 @@ i3GEOF.conectargeojson = {
 	Cria a janela flutuante para controle da ferramenta.
 	*/	
 	criaJanelaFlutuante: function(){
-		var minimiza,cabecalho,janela,divid,temp,titulo;
+		var minimiza,cabecalho,janela,divid,titulo;
 		//cria a janela flutuante
 		cabecalho = function(){
 		};

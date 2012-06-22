@@ -466,7 +466,7 @@ function cursor(c){
 }
     </script>
   </head>
-  <body name="ancora" onload="inicializa()">
+  <body onload="inicializa()">
     <div id="mapa" style="width: 440px; height: 340px"></div>
     </body>
 </html>

@@ -83,7 +83,7 @@ i3GEOF.converteKml = {
 	tipo {String} - kml|kmz "kml" gera um link para acesso a um WMS e "kmz" gera um link que permite o acesso a um WMS e ao arquivo kmz vetorial
 	*/	
 	criaJanelaFlutuante: function(tema,tipo){
-		var janela,divid,temp,titulo;
+		var janela,divid,titulo;
 		cabecalho = function(){};
 		minimiza = function(){
 			i3GEO.janela.minimiza("i3GEOF.converteKml");

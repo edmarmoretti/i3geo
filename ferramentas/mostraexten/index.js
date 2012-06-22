@@ -180,7 +180,7 @@ i3GEOF.mostraExten = {
 			{alert("Digite coordenadas válidas");return;}
 			if ((x > xx) || (y > yy))
 			{alert("Digite coordenadas válidas");return;}
-			i3GEO.navega.zoomExt(i3GEO.configura.locaplic,i3GEO.configura.sid,window.parent.i3GEO.parametros.tipoimagem,(x+" "+y+" "+xx+" "+yy))
+			i3GEO.navega.zoomExt(i3GEO.configura.locaplic,i3GEO.configura.sid,window.parent.i3GEO.parametros.tipoimagem,(x+" "+y+" "+xx+" "+yy));
 		}
 		catch(e){alert(e+" Erro. Digite coordenadas válidas");}
 	}

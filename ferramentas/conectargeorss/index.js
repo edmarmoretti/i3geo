@@ -38,9 +38,9 @@ Free Software Foundation, Inc., no endereço
 59 Temple Street, Suite 330, Boston, MA 02111-1307 USA.
 */
 
-parametrosURL()
-ativaGuias("")
-mostraGuia("guia1")
+parametrosURL();
+ativaGuias("");
+mostraGuia("guia1");
 //variaveis globais
 g_tipo = ""; //tipo de tema
 g_tema = ""; //tema selecionado do ws
@@ -49,10 +49,10 @@ g_nometema = ""; //nome do tema
 
 $i("guia1").onclick = function()
 {
-	mostraGuia("guia1")
+	mostraGuia("guia1");
 	$i("resultadoget").innerHTML = "";
-}
-$i("guia2").onclick = function(){clickGuia2();}
+};
+$i("guia2").onclick = function(){clickGuia2();};
 
 /*
 Function: clickGuia2
@@ -65,14 +65,14 @@ Veja:
 */
 function clickGuia2()
 {
-	mostraGuia("guia2")
+	mostraGuia("guia2");
 	$i("resultadoget").innerHTML = "";
 	if ($i("servico").value == ""){alert("Serviço não definido");}
 	else
 	{
 		$i("guia2obj").style.display="block";
-		aguarde("block")
-		var p = g_locaplic+"/classesphp/mapa_controle.php?g_sid="+g_sid+"&funcao=georssCanais&servico="+$i("servico").value
+		aguarde("block");
+		var p = g_locaplic+"/classesphp/mapa_controle.php?g_sid="+g_sid+"&funcao=georssCanais&servico="+$i("servico").value;
 		var cp = new cpaint();
 		//cp.set_debug(2)
 		cp.set_response_type("JSON");
@@ -83,10 +83,10 @@ function registraws(nome,id_ws)
 {
 	$i("servico").value = nome;
 	if(arguments.length == 2)
-	g_idws = id_ws
+	g_idws = id_ws;
 	else
-	g_idws = ""
-	clickGuia2()
+	g_idws = "";
+	clickGuia2();
 }
 /*
 Function: listaCanais
@@ -99,24 +99,24 @@ retorno {JSON} - retorno da função clickGuia2
 */
 function listaCanais(retorno)
 {
-	var ins = "Clique no bot&atilde;o 'mapa' para incluir os dados do canal desejado<br>"
+	var i,ins = "Clique no bot&atilde;o 'mapa' para incluir os dados do canal desejado<br>";
 	if (retorno.data != undefined)
 	{
-		var retorno = retorno.data
+		retorno = retorno.data;
 		for (i=0;i<retorno.length; i++)
 		{
-			ins += "<p style=cursor:pointer onclick=adicionatema('"+i+"') ><input type=radio name=cn value=mapa >&nbsp;<b>"+retorno[i].title+ "</b></p>"
-			ins += "<br><a href="+retorno[i].link+" target=blank >"+retorno[i].link+"</a>"
-			ins += "<br><i>Descri&ccedil;&atilde;o:</i> "+retorno[i].description
-			ins += "<br><i>Categoria: </i>"+retorno[i].category
+			ins += "<p style=cursor:pointer onclick=adicionatema('"+i+"') ><input type=radio name=cn value=mapa >&nbsp;<b>"+retorno[i].title+ "</b></p>";
+			ins += "<br><a href="+retorno[i].link+" target=blank >"+retorno[i].link+"</a>";
+			ins += "<br><i>Descri&ccedil;&atilde;o:</i> "+retorno[i].description;
+			ins += "<br><i>Categoria: </i>"+retorno[i].category;
 		}
-		$i("resultadoget").innerHTML = ins
+		$i("resultadoget").innerHTML = ins;
 	}
 	else
 	{
-		$i("resultadoget").innerHTML = "<p style=color:red >Ocorreu um erro<br>"
+		$i("resultadoget").innerHTML = "<p style=color:red >Ocorreu um erro<br>";
 	}
-	aguarde("none")
+	aguarde("none");
 }
 /*
 Function: adicionatema
@@ -133,13 +133,13 @@ id {string} - id do canal (conforme a ordem que aparece no RSS
 */
 function adicionatema(id)
 {
-	aguarde("block")
+	aguarde("block");
 	var redesenha = function()
 	{
-		aguarde("none")
-		window.parent.i3GEO.atualiza()
-	}
-	var p = g_locaplic+"/classesphp/mapa_controle.php?g_sid="+g_sid+"&funcao=adicionaTemaGeoRSS&canal="+id+"&servico="+$i("servico").value
+		aguarde("none");
+		window.parent.i3GEO.atualiza();
+	};
+	var p = g_locaplic+"/classesphp/mapa_controle.php?g_sid="+g_sid+"&funcao=adicionaTemaGeoRSS&canal="+id+"&servico="+$i("servico").value;
 	var cp = new cpaint();
 	//cp.set_debug(2)
 	cp.set_response_type("JSON");

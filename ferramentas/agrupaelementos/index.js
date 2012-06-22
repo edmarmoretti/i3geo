@@ -233,7 +233,6 @@ i3GEOF.agrupaElementos = {
 			"i3GEOagrupaelementosselItem",
 			tema,
 			function(retorno){
-		 		var combo = retorno.dados;
 		 		if(retorno.tipo === "erro"){
 		 			$i("i3GEOagrupaelementosSelItens").innerHTML = "<br><br><span style='color:red'>erro ao ler os itens do tema de origem</span><br><br>";
 		 		}

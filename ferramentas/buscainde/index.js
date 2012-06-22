@@ -84,7 +84,7 @@ i3GEOF.buscainde = {
 	Cria a janela flutuante para controle da ferramenta.
 	*/	
 	criaJanelaFlutuante: function(){
-		var janela,divid,temp,titulo,cabecalho,minimiza;
+		var janela,divid,titulo,cabecalho,minimiza;
 		cabecalho = function(){};
 		minimiza = function(){
 			i3GEO.janela.minimiza("i3GEOF.buscainde");

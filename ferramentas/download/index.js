@@ -64,7 +64,7 @@ i3GEOF.download = {
 		$i(divid).innerHTML += ins;
 		mostraDownload = function(retorno){
 			var ins = "",
-				retorno,arqs,n,arq;
+				arqs,n,arq;
 			if (retorno.data != undefined){
 				retorno = retorno.data;
 				arqs = retorno.arquivos.split(",");
@@ -83,7 +83,7 @@ i3GEOF.download = {
 			{ins = "<p style=color:red >Ocorreu um erro<br>";}
 			$i("i3GEOdownloadResultado").innerHTML = ins;
 			i3GEOF.download.aguarde.visibility = "hidden";
-		}
+		};
 		p = i3GEO.configura.locaplic+"/classesphp/mapa_controle.php?g_sid="+i3GEO.configura.sid+"&funcao=download2&tema="+tema;
 		cp = new cpaint();
 		cp.set_response_type("JSON");
@@ -99,7 +99,7 @@ i3GEOF.download = {
 	tema {String} - código do tema
 	*/	
 	criaJanelaFlutuante: function(tema){
-		var janela,divid,temp,titulo;
+		var janela,divid,titulo;
 		if(arguments.length == 0)
 		{tema = i3GEO.temaAtivo;}
 		cabecalho = function(){};

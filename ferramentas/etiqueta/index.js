@@ -102,7 +102,7 @@ i3GEOF.etiqueta = {
 	Cria a janela flutuante para controle da ferramenta.
 	*/	
 	criaJanelaFlutuante: function(){
-		var minimiza,cabecalho,janela,divid,temp,titulo,cabecalho,minimiza;
+		var minimiza,cabecalho,janela,divid,temp,titulo;
 		if($i("i3GEOF.etiqueta")){
 			i3GEOF.etiqueta.inicia("i3GEOF.etiqueta_corpo");
 			return;
@@ -155,9 +155,11 @@ i3GEOF.etiqueta = {
 	Monta a lista de itens que poderão ser escolhidos para compor o mapa.
 	
 	A lista é inserida no elemento html com id "i3GEOetiquetalistai"
+	
+	@TODO verificar quando um item ja esta na lista e marca-lo no checkbox
 	*/
 	montaListaItens: function(retorno){
-		var ins,i,n,itensatuais,item,checado;
+		var ins,i,n,itensatuais,item;
 		try{
 			itensatuais = i3GEO.arvoreDeCamadas.pegaTema(i3GEO.temaAtivo);
 			itensatuais = itensatuais.etiquetas.split(",");
@@ -166,7 +168,7 @@ i3GEOF.etiqueta = {
 			n = retorno.data.valores.length;
 			for (i=0;i<n; i++){
 				item = retorno.data.valores[i].item;
-				ins.push("<tr><td><input size=2 style='cursor:pointer' "+checado+" type=checkbox id=i3GEOetiqueta"+item+" /></td>");
+				ins.push("<tr><td><input size=2 style='cursor:pointer' type=checkbox id=i3GEOetiqueta"+item+" /></td>");
 				ins.push("<td>&nbsp;"+item+"</td>");
 			}
 			$i("i3GEOetiquetalistai").innerHTML = ins.join("");
@@ -191,9 +193,7 @@ i3GEOF.etiqueta = {
 			inputs = $i("i3GEOetiquetalistai").getElementsByTagName("input"),
 			i,
 			it,
-			c,
-			n;
-		n = inputs.length;
+			n = inputs.length;
 		for (i=0;i<n; i++){
 			if (inputs[i].checked === true){
 				it = inputs[i].id;

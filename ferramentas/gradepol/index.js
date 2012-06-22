@@ -91,7 +91,7 @@ i3GEOF.gradeDePoligonos = {
 	Cria a janela flutuante para controle da ferramenta.
 	*/	
 	criaJanelaFlutuante: function(){
-		var minimiza,cabecalho,janela,divid,temp,titulo;
+		var minimiza,cabecalho,janela,divid,titulo;
 		//cria a janela flutuante
 		titulo = "Grade de pol&iacute;gonos <a class=ajuda_usuario target=_blank href='" + i3GEO.configura.locaplic + "/ajuda_usuario.php?idcategoria=3&idajuda=14' >&nbsp;&nbsp;&nbsp;</a>";
 		cabecalho = function(){
@@ -208,7 +208,7 @@ i3GEOF.gradeDePoligonos = {
 				{$i("i3GEOgradedepoligonosfim").innerHTML = "<p class='paragrafo'>Erro. A operação demorou muito(?).";}
 				else
 				{i3GEO.atualiza("");}
-			}
+			};
 			p = i3GEO.configura.locaplic+"/classesphp/mapa_controle.php?g_sid="+i3GEO.configura.sid+"&funcao=gradedepol&xdd="+dx+"&ydd="+dy+"&px="+ix+"&py="+iy+"&nptx="+nptx+"&npty="+npty;
 			cp = new cpaint();
 			cp.set_response_type("JSON");

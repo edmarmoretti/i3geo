@@ -16,7 +16,7 @@ $postgis_mapa = $_SESSION["postgis_mapa"];
 <link rel="stylesheet" type="text/css" href="../../css/geral.css" />
 <title></title>
 </head>
-<body name="ancora" bgcolor="white" style="background-color:white;text-align:left;">
+<body bgcolor="white" style="background-color:white;text-align:left;">
 <p>
 <?php
 if (isset($_FILES['i3GEOuploadgpx']['name']))

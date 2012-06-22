@@ -270,7 +270,7 @@ i3GEOF.busca = {
 			i,
 			er,
 			tr,
-			tema
+			tema,
 			posicaoleft = parseInt($i("i3GEOF.busca_c").style.left,10)+(i3GEOF.busca.nbuscas*10),
 			posicaotop  = parseInt($i("i3GEOF.busca_c").style.top,10)+(i3GEOF.busca.nbuscas*10);
 		

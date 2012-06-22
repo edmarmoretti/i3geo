@@ -115,7 +115,7 @@ i3GEOF.opacidademapa = {
 		minimiza = function(){
 			i3GEO.janela.minimiza("i3GEOF.opacidademapa");
 		};		
-		var janela,divid,temp,titulo;
+		var janela,divid,titulo;
 		//cria a janela flutuante
 		titulo = "Opacidade <a class=ajuda_usuario target=_blank href='" + i3GEO.configura.locaplic + "/ajuda_usuario.php?idcategoria=5&idajuda=102' >&nbsp;&nbsp;&nbsp;</a>";
 		janela = i3GEO.janela.cria(

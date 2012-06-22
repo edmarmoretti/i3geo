@@ -113,7 +113,7 @@ i3GEOF.perfil = {
 	pontos = {xpt: [],ypt:[]}; //xpt são os valores de x (array) e ypt os valores de y (array)
 	*/	
 	criaJanelaFlutuante: function(pontos){
-		var minimiza,cabecalho,janela,divid,temp,titulo,cabecalho,minimiza;
+		var minimiza,cabecalho,janela,divid,titulo;
 		i3GEOF.perfil.pontos = pontos;
 		//cria a janela flutuante
 		titulo = "Perfil <a class=ajuda_usuario target=_blank href='" + i3GEO.configura.locaplic + "/ajuda_usuario.php?idcategoria=3&idajuda=96' >&nbsp;&nbsp;&nbsp;</a>";
@@ -151,10 +151,7 @@ i3GEOF.perfil = {
 		try{
 			if(i3GEOF.perfil.aguarde.visibility === "visible")
 			{return;}
-			var temp,
-				p,
-				cp;
-			fim = function(retorno){
+			var fim = function(retorno){
 				i3GEOF.perfil.aguarde.visibility = "hidden";
 				if (retorno.data === undefined )
 				{$i("i3GEOperfilfim").innerHTML = "Erro.";return;}
@@ -223,7 +220,7 @@ i3GEOF.perfil = {
 			ys = i3GEOF.perfil.pontos.xpt;
 		}
 		for(i=0;i<n;i++){
-			lista.push(ys[i]+" "+xs[i])
+			lista.push(ys[i]+" "+xs[i]);
 		}
 		return lista.toString(",");
 	},

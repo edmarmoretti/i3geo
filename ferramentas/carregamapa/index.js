@@ -96,7 +96,7 @@ i3GEOF.carregaMapa = {
 	Cria a janela flutuante para controle da ferramenta.
 	*/	
 	criaJanelaFlutuante: function(){
-		var janela,divid,temp,titulo;
+		var janela,divid,titulo;
 		titulo = "Carrega mapa <a class=ajuda_usuario target=_blank href='" + i3GEO.configura.locaplic + "/ajuda_usuario.php?idcategoria=2&idajuda=11' >&nbsp;&nbsp;&nbsp;</a>";
 		janela = i3GEO.janela.cria(
 			"340px",

@@ -379,7 +379,7 @@ i3GEOF.filtro = {
 						operador = s[0].value;
 						s = nos[4].getElementsByTagName("input");
 						valor = s[0].value;
-						s = nos[5].getElementsByTagName("select")
+						s = nos[5].getElementsByTagName("select");
 						conector = s[0].value;
 						if (valor*1)
 						{filtro = filtro + "(["+itemsel+"] "+operador+" "+valor+")";}

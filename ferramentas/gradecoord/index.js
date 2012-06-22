@@ -146,7 +146,7 @@ i3GEOF.gradeCoord = {
 	Cria a janela flutuante para controle da ferramenta.
 	*/	
 	criaJanelaFlutuante: function(){
-		var janela,divid,temp,titulo;
+		var janela,divid,titulo;
 		//cria a janela flutuante
 		titulo = "Grade de coordenadas <a class=ajuda_usuario target=_blank href='" + i3GEO.configura.locaplic + "/ajuda_usuario.php?idcategoria=1&idajuda=7' >&nbsp;&nbsp;&nbsp;</a>";
 		janela = i3GEO.janela.cria(
@@ -183,14 +183,14 @@ i3GEOF.gradeCoord = {
 	*/
 	executa: function(){
 		if (($i("i3GEOgradeCoordintervalo").value == 0) || ($i("i3GEOgradeCoordintervalo").value == ""))
-		{alert("Entre com a distância entre as linhas")}
+		{alert("Entre com a distância entre as linhas");}
 		else
 		{
 			if(i3GEOF.gradeCoord.aguarde.visibility === "visible")
 			{return;}
 			i3GEOF.gradeCoord.aguarde.visibility = "visible";
 			var temp = function(){
-				i3GEO.atualiza()
+				i3GEO.atualiza();
 				i3GEOF.gradeCoord.aguarde.visibility = "hidden";
 			},
 			p,

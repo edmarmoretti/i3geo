@@ -96,9 +96,9 @@ i3GEOF.nuvemtags = {
 			$i("i3GEOnuvemtagsguia2").onclick = function(){
 				i3GEO.guias.mostraGuiaFerramenta("i3GEOnuvemtagsguia2","i3GEOnuvemtagsguia");
 				
-				var ins = "<p class=paragrafo >Escolha o RSS para cruzar com a lista de tags ou digite um novo valor</p>",
+				var i,ins = "<p class=paragrafo >Escolha o RSS para cruzar com a lista de tags ou digite um novo valor</p>",
 					n = i3GEOF.nuvemtags.listaRSS.length;
-				ins += $inputText("","","i3GEOnuvemtagsRSS","",65,"")
+				ins += $inputText("","","i3GEOnuvemtagsRSS","",65,"");
 				ins += "<br><br><p class=paragrafo ><select onchange='javascript:$i(\"i3GEOnuvemtagsRSS\").value = this.value' >";
 				ins += "<option value='' >---</option>";
 				for (i=0;i<n;i++){
@@ -123,7 +123,7 @@ i3GEOF.nuvemtags = {
 									i3GEO.guias.mostraGuiaFerramenta("i3GEOnuvemtagsguia1","i3GEOnuvemtagsguia");
 								};
 							if (rss == ""){alert("Digite um endereco RSS");return;}
-							i3GEOF.nuvemtags.aguarde.visibility = "visible"
+							i3GEOF.nuvemtags.aguarde.visibility = "visible";
 							cp.set_response_type("JSON");
 							cp.call(p,"listaTags",temp);	
 						}
@@ -168,7 +168,7 @@ i3GEOF.nuvemtags = {
 	dados {JSON} - dados para o gráfico
 	*/	
 	criaJanelaFlutuante: function(dados){
-		var minimiza,cabecalho,janela,divid,temp,titulo;
+		var minimiza,cabecalho,janela,divid,titulo;
 		//cria a janela flutuante
 		cabecalho = function(){
 			i3GEOF.nuvemtags.ativaFoco();
@@ -240,7 +240,7 @@ i3GEOF.nuvemtags = {
 					cor = "98,186,192";
 					h = retorno.data[i].temas.length*1 + 6;
 					if(h > 23)
-					{var h = 23;}
+					{h = 23;}
 					linkrss = "";
 					if(retorno.data[i].noticias.length > 0){
 						cor = "255,0,0";
@@ -253,7 +253,7 @@ i3GEOF.nuvemtags = {
 			}
 		}
 		else
-		{tags = "Nenhum tag encontrado"}
+		{tags = "Nenhum tag encontrado";}
 		$i("i3GEOnuvemtagsguia1obj").innerHTML = tags;
 		new YAHOO.widget.Button(
 			"i3GEOnuvemtagsbotao1",

@@ -476,7 +476,7 @@ i3GEOF.analisaGeometrias = {
 	*/
 	pegaGeometriasMarcadas:function(){
 		var inputs = $i("i3GEOanalisageometriaslistadegeometrias").getElementsByTagName("input"),
-			listai = [],
+			listai = [],i,
 			n = inputs.length;
 		for (i=0;i<n; i++){
 			if (inputs[i].checked === true)
@@ -542,13 +542,13 @@ i3GEOF.analisaGeometrias = {
 			else
 			{i3GEOF.analisaGeometrias.aguarde.visibility = "visible";}
 			
-			lista = i3GEOF.analisaGeometrias.pegaGeometriasMarcadas()
+			lista = i3GEOF.analisaGeometrias.pegaGeometriasMarcadas();
 			if(lista == ""){
 				alert("Nenhuma geometria foi marcada");
 				i3GEOF.analisaGeometrias.aguarde.visibility = "hidden";
 				return;
 			}
-			p = i3GEO.configura.locaplic+"/classesphp/mapa_controle.php?g_sid="+i3GEO.configura.sid+"&funcao=funcoesGeometrias&operacao="+obj.value+"&lista="+lista+"&recalcareaper="+$i("i3geoanalisageometriassemprecalcula").checked
+			p = i3GEO.configura.locaplic+"/classesphp/mapa_controle.php?g_sid="+i3GEO.configura.sid+"&funcao=funcoesGeometrias&operacao="+obj.value+"&lista="+lista+"&recalcareaper="+$i("i3geoanalisageometriassemprecalcula").checked;
 			
 			temp = function(){
 				i3GEOF.analisaGeometrias.aguarde.visibility = "hidden";

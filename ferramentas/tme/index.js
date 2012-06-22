@@ -125,7 +125,7 @@ i3GEOF.tme = {
 	Cria a janela flutuante para controle da ferramenta.
 	*/
 	criaJanelaFlutuante: function(){
-		var minimiza,cabecalho,janela,divid,temp,titulo,cabecalho,minimiza;
+		var minimiza,cabecalho,janela,divid,temp,titulo;
 		if($i("i3GEOF.tme")){
 			i3GEOF.tme.inicia("i3GEOF.tme_corpo");
 			return;
@@ -178,16 +178,18 @@ i3GEOF.tme = {
 	Monta a lista de itens que poderão ser escolhidos para compor o mapa.
 	
 	A lista é inserida no elemento html com id "i3GEOtmelistai"
+	
+	@TODO marcar os itens existentes
 	*/
 	montaListaItens: function(retorno){
-		var ins,i,n,itensatuais,item,checado;
+		var ins,i,n,item;
 		try{
 			ins = [];
 			ins.push("<table class=lista >");
 			n = retorno.data.valores.length;
 			for (i=0;i<n; i++){
 				item = retorno.data.valores[i].item;
-				ins.push("<tr><td><input size=2 style='cursor:pointer' "+checado+" type=checkbox id=i3GEOtme"+item+" /></td>");
+				ins.push("<tr><td><input size=2 style='cursor:pointer' type=checkbox id=i3GEOtme"+item+" /></td>");
 				ins.push("<td>&nbsp;"+item+"</td>");
 			}
 			$i("i3GEOtmelistai").innerHTML = ins.join("");
@@ -206,7 +208,6 @@ i3GEOF.tme = {
 			inputs = $i("i3GEOtmelistai").getElementsByTagName("input"),
 			i,
 			it,
-			c,
 			n;
 		n = inputs.length;
 		for (i=0;i<n; i++){

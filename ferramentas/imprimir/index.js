@@ -52,9 +52,9 @@ i3GEOF.imprimir = {
 		try{
 			$i(iddiv).innerHTML += i3GEOF.imprimir.html();
 			var temp = function(retorno){
-				g_legendaHTML = retorno.data.legenda
-			}
-			i3GEO.php.criaLegendaHTML(temp,"","legendaseminput.htm")
+				g_legendaHTML = retorno.data.legenda;
+			};
+			i3GEO.php.criaLegendaHTML(temp,"","legendaseminput.htm");
 		}
 		catch(erro){alert(erro);}
 		
@@ -106,7 +106,7 @@ i3GEOF.imprimir = {
 	Cria a janela flutuante para controle da ferramenta.
 	*/	
 	criaJanelaFlutuante: function(){
-		var janela,divid,temp,titulo,cabecalho,minimiza;
+		var janela,divid,titulo,cabecalho,minimiza;
 		cabecalho = function(){};
 		minimiza = function(){
 			i3GEO.janela.minimiza("i3GEOF.imprimir");

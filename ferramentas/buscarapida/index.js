@@ -148,7 +148,7 @@ i3GEObuscaRapida = {
 	inicia: function(palavra,locaplic,resultado,servicosexternos,temasmapa){
 		if($i(i3GEObuscaRapida.idresultado))
 		{$i(i3GEObuscaRapida.idresultado).style.display = "none";}
-		var palavra = i3GEO.util.removeAcentos(palavra);
+		palavra = i3GEO.util.removeAcentos(palavra);
 		i3GEObuscaRapida.palavra = palavra;
 		i3GEObuscaRapida.locaplic = locaplic;
 		if(servicosexternos === true){
@@ -164,7 +164,7 @@ i3GEObuscaRapida = {
 					alert("Nenhum tema configurado para busca");
 					return;
 				}
-				aguarde("block")
+				aguarde("block");
 				i3GEO.php.buscaRapida(i3GEObuscaRapida.montaResultadoTemas,locaplic,"temas",palavra);
 			}
 			catch(e){}
@@ -184,20 +184,20 @@ i3GEObuscaRapida = {
 	retorno {JSON} - resultado da função i3GEO.php.buscaRapida
 	*/
 	montaResultadoTemas: function(retorno){
-		var ins = "Nada encontrado nos temas ou nenhum tema permite busca.<br>";
+		var i,ins = "Nada encontrado nos temas ou nenhum tema permite busca.<br>";
 		try{
 			if(retorno.data && retorno.data.length > 0){
 				ins = "<table >";
 				for (i=0;i<retorno.data.length; i++){
-					ins += "<tr><td style='text-align:left'>"
+					ins += "<tr><td style='text-align:left'>";
 					ins += retorno.data[i].valor;
 					var ext = retorno.data[i].box;
-					ins += "</td><td onclick='i3GEObuscaRapida.zoomExt(\""+ext+"\")' onmouseover=\"i3GEObuscaRapida.mostraxy('"+ext+"','extent')\" onmouseout='i3GEObuscaRapida.escondexy()' style='color:blue;cursor:pointer'><img title='localizar' src='../../imagens/branco.gif' class='tic' /></td></tr>"
+					ins += "</td><td onclick='i3GEObuscaRapida.zoomExt(\""+ext+"\")' onmouseover=\"i3GEObuscaRapida.mostraxy('"+ext+"','extent')\" onmouseout='i3GEObuscaRapida.escondexy()' style='color:blue;cursor:pointer'><img title='localizar' src='../../imagens/branco.gif' class='tic' /></td></tr>";
 				}
-				ins += "</table>"
+				ins += "</table>";
 			}
 		}
-		catch(e){var ins = "Nada encontrado nos temas ou nenhum tema permite busca.<br>";}
+		catch(e){ins = "Nada encontrado nos temas ou nenhum tema permite busca.<br>";}
 		$i("resultadoTemas").style.display = "block";
 		$i("resultadoTemas").innerHTML = ins;
 		try{aguarde("none");}catch(e){}
@@ -214,32 +214,33 @@ i3GEObuscaRapida = {
 	retorno {JSON} - resultado da função i3GEO.php.buscaRapida
 	*/
 	montaResultado: function(retorno){
-		var ins = "Nada encontrado em "+i3GEObuscaRapida.servicowms+"<br>";
+		var i,j,layer,
+			ins = "Nada encontrado em "+i3GEObuscaRapida.servicowms+"<br>";
 		try{
 			if(retorno.data){
 				if (retorno.data.geonames){
 					ins = "";
 					for (i=0;i<retorno.data.geonames.length; i++){
-						if (i == 0){var ins = "<table >";}
+						if (i == 0)
+						{ins = "<table >";}
 						ins += "<tr><td style='width:30%;text-align:left;background-color:rgb(220,220,220)' colspan=2 ><b>"+retorno.data.geonames[i].tema+"</b></td></tr>";
-						var layer = retorno.data.geonames[i].layer
+						layer = retorno.data.geonames[i].layer;
 						for (j=0;j<retorno.data.geonames[i].lugares.length; j++){
-							ins += "<tr><td style='text-align:left'>"
-							var nm = retorno.data.geonames[i].lugares[j].nome;
-							ins += nm;
-							var wkt = retorno.data.geonames[i].lugares[j].limite
+							ins += "<tr><td style='text-align:left'>";
+							ins += retorno.data.geonames[i].lugares[j].nome;
+							var wkt = retorno.data.geonames[i].lugares[j].limite;
 							ins += " "+retorno.data.geonames[i].lugares[j].centroide;
-							var gid = retorno.data.geonames[i].lugares[j].gid
-							ins += "</td><td onclick=\""+i3GEObuscaRapida.funcaozoom+"('"+wkt+"','"+layer+"','"+gid+"','"+nm+"')\" onmouseover=\"i3GEObuscaRapida.mostraxy('"+wkt+"','wkt')\" onmouseout='i3GEObuscaRapida.escondexy()' style='color:blue;cursor:pointer'><img title='localizar' src='../../imagens/branco.gif' class='tic' /></td></tr>"
+							var gid = retorno.data.geonames[i].lugares[j].gid;
+							ins += "</td><td onclick=\""+i3GEObuscaRapida.funcaozoom+"('"+wkt+"','"+layer+"','"+gid+"','"+nm+"')\" onmouseover=\"i3GEObuscaRapida.mostraxy('"+wkt+"','wkt')\" onmouseout='i3GEObuscaRapida.escondexy()' style='color:blue;cursor:pointer'><img title='localizar' src='../../imagens/branco.gif' class='tic' /></td></tr>";
 						}
 					}
 				}
-				ins += "</table>"
+				ins += "</table>";
 			}
 		}
-		catch(e){var ins = "Erro ao acessar o serviço "+i3GEObuscaRapida.servico+"<br>";}
+		catch(e){ins = "Erro ao acessar o serviço "+i3GEObuscaRapida.servico+"<br>";}
 		$i(i3GEObuscaRapida.idresultado).style.display = "block";
-		$i(i3GEObuscaRapida.idresultado).innerHTML = ins
+		$i(i3GEObuscaRapida.idresultado).innerHTML = ins;
 		try{aguarde("none");}
 		catch(e){}
 		if(i3GEObuscaRapida.buscaemtemas){	
@@ -260,8 +261,8 @@ i3GEObuscaRapida = {
 	retorno {Json} - resultado de 
 	*/
 	resultadoTemas: function(retorno){
-		var retorno = retorno.data,
-			ins = "";
+		var nomeTema,inp,tid,lk="",ig,sg,st,ins = "";
+		retorno = retorno.data;
 		if ((retorno != "erro") && (retorno != undefined) && retorno.length > 0){
 			for (ig=0;ig<retorno.length;ig++){
 				var ngSgrupo = retorno[ig].subgrupos;
@@ -269,17 +270,18 @@ i3GEObuscaRapida = {
 					var nomeSgrupo = ngSgrupo[sg].subgrupo;
 					var ngTema = ngSgrupo[sg].temas;
 					for (st=0;st<ngTema.length;st++){
+						lk = "";
 						if (ngTema[st].link != " ")
-						{var lk = "<a href="+ngTema[st].link+" target=blank>&nbsp;fonte</a>";}
-						var tid = ngTema[st].tid;
-						var inp = "<input style='text-align:left;cursor:pointer;' onclick='i3GEObuscaRapida.adicionatema(this)' class=inputsb style='cursor:pointer' type=\"checkbox\" value='"+tid+"'  /> ("+nomeSgrupo+")";
-						var nomeTema = inp+(ngTema[st].nome)+lk+"<br>";
+						{lk = "<a href="+ngTema[st].link+" target=blank>&nbsp;fonte</a>";}
+						tid = ngTema[st].tid;
+						inp = "<input style='text-align:left;cursor:pointer;' onclick='i3GEObuscaRapida.adicionatema(this)' class=inputsb style='cursor:pointer' type=\"checkbox\" value='"+tid+"'  /> ("+nomeSgrupo+")";
+						nomeTema = inp+(ngTema[st].nome)+lk+"<br>";
 						ins += nomeTema;
 					}
 				}
 			}
 		}
-		if (ins != ""){	$i(i3GEObuscaRapida.idresultado).innerHTML += "<br><b>Temas:</b><br>"+ins}
+		if (ins != ""){	$i(i3GEObuscaRapida.idresultado).innerHTML += "<br><b>Temas:</b><br>"+ins;}
 	},
 	/*
 	Function: zoom
@@ -346,7 +348,7 @@ i3GEObuscaRapida = {
 		{
 			window.parent.i3GEO.janela.abreAguarde("i3GEO.atualiza","Aguarde...");
 			var temp = function()
-			{window.parent.i3GEO.atualiza("");}
+			{window.parent.i3GEO.atualiza("");};
 			i3GEO.php.adtema(temp,obj.value,i3GEObuscaRapida.locaplic,window.parent.i3GEO.configura.sid);
 		}
 		else
@@ -364,6 +366,7 @@ i3GEObuscaRapida = {
 	tipo {string} - wkt|extent
 	*/
 	mostraxy:function mostraxy(texto,tipo){
+		var ext;
 		try{
 			if(!window.parent){return;}
 			if(!window.parent.i3GEO){return;}
@@ -373,18 +376,18 @@ i3GEObuscaRapida = {
 		}
 		catch(e){if(typeof(console) !== 'undefined'){console.error(e);};return;}
 		if(tipo === "wkt")
-		{var ext = i3GEO.util.wkt2ext(texto,"polygon");}
+		{ext = i3GEO.util.wkt2ext(texto,"polygon");}
 		else
-		{var ext = texto;}
+		{ext = texto;}
 		if(ext == false){alert("texto invalido");return;}	
-		var ext = ext.split(" ");
+		ext = ext.split(" ");
 		var xMin = ext[0];
 		var xMax = ext[2];
 		var yMin = ext[1];
 		var yMax = ext[3];
-		var docmapa = window.parent.document.getElementById(window.parent.i3GEO.Interface.IDCORPO)
- 		var xyMin = window.parent.i3GEO.calculo.dd2tela(xMin,yMin,docmapa,window.parent.i3GEO.parametros.mapexten,window.parent.i3GEO.parametros.pixelsize)
- 		var xyMax = window.parent.i3GEO.calculo.dd2tela(xMax,yMax,docmapa,window.parent.i3GEO.parametros.mapexten,window.parent.i3GEO.parametros.pixelsize)
+		var docmapa = window.parent.document.getElementById(window.parent.i3GEO.Interface.IDCORPO);
+ 		var xyMin = window.parent.i3GEO.calculo.dd2tela(xMin,yMin,docmapa,window.parent.i3GEO.parametros.mapexten,window.parent.i3GEO.parametros.pixelsize);
+ 		var xyMax = window.parent.i3GEO.calculo.dd2tela(xMax,yMax,docmapa,window.parent.i3GEO.parametros.mapexten,window.parent.i3GEO.parametros.pixelsize);
 
 		window.parent.i3GEO.util.criaBox("boxg");
 		var box = window.parent.$i("boxg");
@@ -402,6 +405,6 @@ i3GEObuscaRapida = {
 	Esconde o box criado com mostraxy
 	*/
 	escondexy: function(){
-		window.parent.i3GEO.util.escondeBox()
+		window.parent.i3GEO.util.escondeBox();
 	}
-}
+};

@@ -391,8 +391,6 @@ i3GEOF.graficointerativo = {
 	*/
 	configuraDados: function(){
 		var radios = $i("i3GEOgraficointerativoguia1obj").getElementsByTagName("input"),
-			nradios = radios.length,
-			i,
 			ativa = function(comboxlinha,comboylinha,ajudapizza){
 				try{
 					$i("i3GEOgraficointerativoComboXlinha").style.display = comboxlinha;
@@ -424,7 +422,6 @@ i3GEOF.graficointerativo = {
 			"i3GEOgraficointerativoComboXid",
 			tema,
 			function(retorno){
-		 		var combo = retorno.dados;
 		 		if(retorno.tipo === "erro"){
 		 			$i("i3GEOgraficointerativoComboX").innerHTML = "<br><br><span style='color:red'>erro ao ler os itens do tema de origem</span><br><br>";
 		 			$i("i3GEOgraficointerativoComboY").innerHTML = "<br><br><span style='color:red'>erro ao ler os itens do tema de origem</span><br><br>";
@@ -551,7 +548,7 @@ i3GEOF.graficointerativo = {
 			ninputs = inputs.length,
 			n,
 			i,
-			parametros,
+			parametros = [],
 			valores = [],
 			valoresS = [],
 			acumulado = [],
@@ -584,7 +581,7 @@ i3GEOF.graficointerativo = {
 			fill = "#C4B86A",
 			pointSize = 4;
 		if(i3GEOF.graficointerativo.titulo != "")
-		{titulo = i3GEOF.graficointerativo.titulo}
+		{titulo = i3GEOF.graficointerativo.titulo;}
 		if($i("i3GEOgraficointerativoComboXid"))
 		{legendaX = $i("i3GEOgraficointerativoComboXid").value;}
 		if($i("i3GEOgraficointerativoComboYid"))
@@ -827,7 +824,6 @@ i3GEOF.graficointerativo = {
 			var tabela = $i("i3GEOgraficointerativoDados").getElementsByTagName("table")[0],
 				trs = tabela.getElementsByTagName("tr"),
 				ntrs = trs.length,
-				cabecalhotr = trs[0],
 				psort = [],
 				t,
 				psortfim,
@@ -838,6 +834,7 @@ i3GEOF.graficointerativo = {
 				temp,
 				chaves = [],
 				numero = false;
+			
 			function sortNumber(a,b)
 			{return a - b;}
 			for (t=1;t<ntrs;t++)

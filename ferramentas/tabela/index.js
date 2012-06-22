@@ -141,7 +141,6 @@ i3GEOF.tabela = {
 					"i3GEOtabelaagrupaItem",
 					i3GEOF.tabela.tema,
 					function(retorno){
-		 				var combo = retorno.dados;
 		 				if(retorno.tipo === "erro"){
 		 					$i("i3GEOtabelaagrupamento").innerHTML = "<br><br><span style='color:red'>erro ao ler os itens do tema de origem</span><br><br>";
 		 				}
@@ -568,7 +567,6 @@ i3GEOF.tabela = {
 			var tabela = $i("i3GEOtabelatabelai"),
 				trs = tabela.getElementsByTagName("tr"),
 				ntrs = trs.length,
-				cabecalhotr = trs[0],
 				conta = 0,
 				psort = [],
 				t,
@@ -720,7 +718,6 @@ i3GEOF.tabela = {
 			"i3GEOtabelaComboItensGuia3",
 			tema,
 			function(retorno){
-		 		var combo = retorno.dados;
 		 		if(retorno.tipo === "erro"){
 		 			$i("i3GEOtabelaitensGuia3").innerHTML = "<br><br><span style='color:red'>erro ao ler os itens do tema de origem</span><br><br>";
 		 		}
@@ -828,10 +825,7 @@ i3GEOF.tabela = {
 	},
 	t2:function(combo1,combo2){
 		i3GEOF.tabela.aguarde.visibility = "hidden";
-		var ins = "<p class='paragrafo' >Item com os valores ou eixo y:",
-			c,
-			combo,
-			itens;
+		var ins = "<p class='paragrafo' >Item com os valores ou eixo y:";
 		ins += "<p class='paragrafo' >"+combo1;
 		if ((i3GEOF.tabela.tipoDeGrafico !== "hist"))
 		{
@@ -856,9 +850,7 @@ i3GEOF.tabela = {
 		i3GEOF.tabela.aguarde.visibility = "visible";
 		var temp,
 			i,
-			t,
-			n,
-			tsl = [];
+			n;
 		if (i3GEOF.tabela.tipoDeGrafico === "pie")
 		{i3GEOF.tabela.parametros = "radius,Tgrid,border,Bgrafico,margem,margemexterna,margeminterna,Ttitulo,main,fontmain,cexmain,colmain,Tsubtitulo,sub,fontsub,cexsub,Trotulos,cex,font,Toutros,lty,bg,gw,gh,res,percentual";}
 		if (i3GEOF.tabela.tipoDeGrafico === "barplot")
@@ -913,7 +905,7 @@ i3GEOF.tabela = {
 	retornaPar: function(id){
 		try{
 			var ins = "",
-				t;
+				t = "";
 			if (id === "Tgrid")
 			{ins += "<tr><td><b>Grade e bordas</b></td><td></td></tr>";}
 			if (id === "Ttitulo")
@@ -943,8 +935,8 @@ i3GEOF.tabela = {
 			if (id === "setasdv"){
 				ins += "<tr><td>Plota as marcas do desvio padrão?</td>";
 				ins += "<td>"+i3GEO.util.comboSimNao("i3GEOtabelasetasdv","nao")+"</td></tr>";
-			}	
-			if (id === "margem"){
+			}
+			tsl = [];		if (id === "margem"){
 				ins += "<tr><td>Plota a margem?</td>";
 				ins += "<td>"+i3GEO.util.comboSimNao("i3GEOtabelamargem","sim")+"</td></tr>";
 			}
@@ -1039,6 +1031,7 @@ i3GEOF.tabela = {
 				ins += "<tr><td>Cor</td>";
 				ins += "<td>"+i3GEOF.tabela.combocor("i3GEOtabelacolmain","1")+"</td></tr>";
 			}
+			tsl = [];
 			if (id === "sub"){
 				ins += "<tr><td>Sub-T&iacute;tulo</td>";
 				ins += "<td><input onclick='javascript:this.select();' class=digitar type=text value='' size=20 id=i3GEOtabelasub /></td></tr>";

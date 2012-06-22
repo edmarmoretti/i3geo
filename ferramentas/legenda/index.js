@@ -415,7 +415,7 @@ i3GEOF.legenda = {
 	Cria a janela flutuante para controle da ferramenta.
 	*/	
 	criaJanelaFlutuante: function(){
-		var minimiza,cabecalho,janela,divid,temp,titulo,cabecalho,minimiza;
+		var minimiza,cabecalho,janela,divid,temp,titulo;
 		if($i("i3GEOF.legenda")){
 			i3GEOF.legenda.tema = i3GEO.temaAtivo;
 			i3GEOF.legenda.inicia("i3GEOF.legenda_corpo");
@@ -684,7 +684,7 @@ i3GEOF.legenda = {
 					nn = trs[t].childNodes;
 					for (n=0;n<nn.length;n++){
 						if(nn[n].childNodes){
-							var isn = nn[n].getElementsByTagName("input")
+							var isn = nn[n].getElementsByTagName("input");
 							if (isn[0] != undefined){
 								if(isn[0].name == "nome"){
 									nomes.push(isn[0].value);
@@ -940,7 +940,8 @@ i3GEOF.legenda = {
 		try{
 			$i("i3GEOlegendaguia1obj").style.display="none";
 			$i("i3GEOlegendaguia3obj").style.display="block";
-			var id = id.split("-"),estilo,p,cp;
+			id = id.split("-");
+			var p,cp;
 			i3GEOF.legenda.classe = id[1];
 			i3GEOF.legenda.estilo = 0;
 			p = i3GEO.configura.locaplic+"/classesphp/mapa_controle.php?g_sid="+i3GEO.configura.sid+"&funcao=editasimbolo&opcao=pegaparametros&tema="+i3GEOF.legenda.tema+"&classe="+id[1];
@@ -1054,7 +1055,6 @@ i3GEOF.legenda = {
 			if(i3GEOF.legenda.aguarde.visibility === "visible")
 			{return;}
 			var item = $i("i3GEOlegendaSelItem").value,
-				nclasses = $i("i3GEOlegendanclasses").value,
 				p = i3GEO.configura.locaplic+"/classesphp/mapa_controle.php?g_sid="+i3GEO.configura.sid+"&funcao=alteraclasse&tema="+i3GEOF.legenda.tema+"&item="+item+"&opcao=quartis&ignorar="+$i("i3GEOlegendaignorar").value+"&ext="+i3GEO.parametros.mapexten+"&tipoLegenda="+$i("estiloClassesQuartis").value,
 				cp = new cpaint();
 				fim = function(){
@@ -1273,7 +1273,7 @@ i3GEOF.legenda = {
 	Muda o valor do campo com o código do símbolo escolhido
 	*/
 	aplicaSimbolo: function(s)
-	{$i("i3GEOlegendasymbolname").value = s.title},
+	{$i("i3GEOlegendasymbolname").value = s.title;},
 	/*
 	Function: aplicaEstilo
 	
@@ -1300,7 +1300,7 @@ i3GEOF.legenda = {
 				pattern = $i("i3GEOlegendapattern").value,
 				opacidade = $i("i3GEOlegendaopacidade").value,
 				angle = $i("i3GEOlegendaangulo").value,
-				p,cp,fim;
+				i,p,cp,fim;
 			for (i=0;i<n;i++){
 				if(simbolos[i].title == symbolname || symbolname == i)
 				{valido = "sim";}
@@ -1315,7 +1315,7 @@ i3GEOF.legenda = {
 			fim = function(){
 				i3GEOF.legenda.aposAlterarLegenda();
 				i3GEOF.legenda.aguarde.visibility = "hidden";
-			}	
+			};
 			//cp.set_debug(2)
 			cp.set_response_type("JSON");
 			cp.call(p,"editasimbolo",fim);
@@ -1348,10 +1348,10 @@ i3GEOF.legenda = {
 			var monta = function(retorno){
 					if (retorno.data[0].proc == "") //o layer nao deve ser raster
 					{
-						var ins = [],i,id,re,exp,t;
+						var ins = [],i,re,t;
 						ins.push("<p class='paragrafo' ><input type=button value='Gráfico de pizza' id=i3GEOlegendaGraficoPizza /></p>");
 						ins.push("<p class='paragrafo' >Número de ocorrências em cada classe (n)</p>");
-						ins.push("<table width=100% >")
+						ins.push("<table width=100% >");
 						i3GEOF.legenda.dadosGrafico = ["n;x"];
 						if(retorno.data.length < 2){
 							alert("O tema deve conter pelo menos 2 classes");
@@ -1373,7 +1373,7 @@ i3GEOF.legenda = {
 						$i("i3GEOlegendaguia4obj").innerHTML = ins.join("");
 					}
 					else
-					{$i("i3GEOlegendaguia4obj").innerHTML = "<p style=color:red >Ocorreu um erro<br>"}
+					{$i("i3GEOlegendaguia4obj").innerHTML = "<p style=color:red >Ocorreu um erro<br>";}
 					i3GEOF.legenda.aguarde.visibility = "hidden";
 					new YAHOO.widget.Button(
 						"i3GEOlegendaGraficoPizza",
@@ -1383,7 +1383,7 @@ i3GEOF.legenda = {
 							}
 						}}
 					);
-					$i("i3GEOlegendaGraficoPizza-button").style.width = "200px"
+					$i("i3GEOlegendaGraficoPizza-button").style.width = "200px";
 				},
 			p = i3GEO.configura.locaplic+"/classesphp/mapa_controle.php?g_sid="+i3GEO.configura.sid+"&funcao=contagemclasse&tema="+i3GEOF.legenda.tema,
 			cp = new cpaint();

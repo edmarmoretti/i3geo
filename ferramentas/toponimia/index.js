@@ -240,7 +240,7 @@ i3GEOF.toponimia = {
 	Cria a janela flutuante para controle da ferramenta.
 	*/	
 	criaJanelaFlutuante: function(){
-		var minimiza,cabecalho,janela,divid,temp,titulo;
+		varjanela,divid,temp,titulo;
 		if($i("i3GEOF.toponimia")){
 			i3GEOF.toponimia.tema = i3GEO.temaAtivo;
 			i3GEOF.toponimia.inicia("i3GEOF.toponimia_corpo");

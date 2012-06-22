@@ -77,7 +77,6 @@ i3GEOF.animacao = {
 	html:function(){
 		var camadas = i3GEO.arvoreDeCamadas.CAMADAS,
 			n = camadas.length,
-			temp,
 			ins = "";
 			
 		ins += "" +
@@ -145,11 +144,7 @@ i3GEOF.animacao = {
 	dispara: function(){
 		if(i3GEOF.animacao.aguarde.visibility === "visible")
 		{return;}
-		var codigos = i3GEOF.animacao.obtemTemasAnima(),
-			n = codigos.length,
-			i,
-			t,
-			layer;
+		var codigos = i3GEOF.animacao.obtemTemasAnima();
 		i3GEOF.animacao.codigos = codigos;
 		i3GEOF.animacao.contador = 0;
 		i3GEOF.animacao.aguarde.visibility = "visible";
@@ -247,8 +242,7 @@ i3GEOF.animacao = {
 		}
 	},
 	retornaCoresInicial: function(){
-		var temp = [],
-			cs = $i("i3GEOFanimacaoLista").getElementsByTagName("input"),
+		var cs = $i("i3GEOFanimacaoLista").getElementsByTagName("input"),
 			n = cs.length;
 		while(n > 0){
 			n -= 1;

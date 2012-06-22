@@ -37,22 +37,22 @@ Free Software Foundation, Inc., no endereço
 59 Temple Street, Suite 330, Boston, MA 02111-1307 USA.
 */
 
-parametrosURL()
+parametrosURL();
 //variaveis globais
 g_tipo = ""; //tipo de tema
 g_tema = ""; //tema selecionado do ws
 g_legenda = ""; //legenda do tema
 g_nometema = ""; //nome do tema
-g_idws = ""
-ativaGuias("")
-mostraGuia("guia1")
+g_idws = "";
+ativaGuias("");
+mostraGuia("guia1");
 $i("guia1").onclick = function()
 {
-	mostraGuia("guia1")
+	mostraGuia("guia1");
 	$i("resultadoget").innerHTML = "";
-}
-$i("guia2").onclick = function(){clickGuia2();}
-$i("guia3").onclick = function(){clickGuia3();}
+};
+$i("guia2").onclick = function(){clickGuia2();};
+$i("guia3").onclick = function(){clickGuia3();};
 
 /*
 Function: listaRSS
@@ -73,28 +73,28 @@ onde {Stribg} - id do elemento HTML que receberá a lista de endereços formatada
 function listaRSS(g_RSS,onde)
 {
 	var mostraRetornoRSS = function(retorno){
-		aguarde("none")
+		aguarde("none");
 		var reg = /Erro/gi;
 		if (retorno.data.rss.search(reg) != -1)
 		{
 			alert("OOps! Ocorreu um erro\n"+retorno.data);
 			return;
 		}
-		var canais = retorno.data.canais
-		var ncanais = canais.length
-		var ins = "<br>"+retorno.data.rss
-		for (i=0;i<ncanais; i++)
+		var canais = retorno.data.canais;
+		var ncanais = canais.length;
+		var ins = "<br>"+retorno.data.rss;
+		for (var i=0;i<ncanais; i++)
 		{
-			var caso = canais[i]
-			ins += "\<p class=clique onclick=\"registraws('"+caso.link+"','"+caso.id_ws+"')\" \>\<b\>"+caso.title+"\<\/b\>&nbsp;"+caso.description+"&nbsp;("+caso.author+")"
+			var caso = canais[i];
+			ins += "\<p class=clique onclick=\"registraws('"+caso.link+"','"+caso.id_ws+"')\" \>\<b\>"+caso.title+"\<\/b\>&nbsp;"+caso.description+"&nbsp;("+caso.author+")";
 			if(caso.nacessos > 0)
 			{
-				var pc = (parseInt(caso.nacessosok) * 100) / parseInt(caso.nacessos)
+				var pc = (parseInt(caso.nacessosok) * 100) / parseInt(caso.nacessos);
 				ins += " \<span style=color:gray \>(disponibilidade: "+pc+"%, acessos considerados: "+caso.nacessos+")\<\/span>\<\/p\>";
 			}
 		}
-		document.getElementById(onde).innerHTML = ins+"<br><br>"
-	}
+		document.getElementById(onde).innerHTML = ins+"<br><br>";
+	};
 	if (document.getElementById(onde))
 	{
 		if (g_RSS.length > 0)
@@ -116,7 +116,7 @@ function getcapabilities()
 {
 	if ($i("servico").value == ""){alert("Serviço não definido");}
 	else
-	{window.open($i("servico").value+"&service=wms&request=getcapabilities&version=1.1.1")}
+	{window.open($i("servico").value+"&service=wms&request=getcapabilities&version=1.1.1");}
 }
 /*
 Function: clickGuia2
@@ -129,7 +129,7 @@ Veja:
 */
 function clickGuia2()
 {
-	mostraGuia("guia2")
+	mostraGuia("guia2");
 	if ($i("servico").value == ""){alert("Serviço não definido");}
 	else
 	{
@@ -141,13 +141,13 @@ function clickGuia2()
 			}
 			else
 			{
-				aguarde("none")
-				$i("resultadoget").innerHTML = "<p style=color:red >Ocorreu um erro<br>"
+				aguarde("none");
+				$i("resultadoget").innerHTML = "<p style=color:red >Ocorreu um erro<br>";
 			}
 		};
 		$i("guia2obj").style.display="block";
-		aguarde("block")
-		var p = g_locaplic+"/classesphp/mapa_controle.php?g_sid="+g_sid+"&funcao=getcapabilities2&servico="+$i("servico").value
+		aguarde("block");
+		var p = g_locaplic+"/classesphp/mapa_controle.php?g_sid="+g_sid+"&funcao=getcapabilities2&servico="+$i("servico").value;
 		var cp = new cpaint();
 		//cp.set_debug(2)
 		cp.set_response_type("JSON");
@@ -190,14 +190,14 @@ function clickGuia3()
 		}
 		else
 		{$i("listatemas").innerHTML = "erro";}
-	}
-	mostraGuia("guia3")
+	};
+	mostraGuia("guia3");
 	if ($i("servico").value == ""){alert("Serviço não definido");}
 	else
 	{
 		$i("listatemas").innerHTML = "";
-		aguarde("block")
-		var p = g_locaplic+"/classesphp/mapa_controle.php?g_sid="+g_sid+"&funcao=temaswms&id_ws="+g_idws+"&servico="+$i("servico").value
+		aguarde("block");
+		var p = g_locaplic+"/classesphp/mapa_controle.php?g_sid="+g_sid+"&funcao=temaswms&id_ws="+g_idws+"&servico="+$i("servico").value;
 		var cp = new cpaint();
 		//cp.set_debug(2)
 		cp.set_response_type("JSON");
@@ -223,10 +223,10 @@ function registraws(nome,id_ws)
 	g_legenda = ""; //legenda do tema
 	g_nometema = ""; //nome do tema
 	if(arguments.length == 2)
-	g_idws = id_ws
+	g_idws = id_ws;
 	else
-	g_idws = ""
-	clickGuia3()
+	g_idws = "";
+	clickGuia3();
 }
 /*
 Function: seltema
@@ -254,11 +254,11 @@ function seltema(tipo,tema,legenda,nometema,nomecamada,sldflag)
 			if(retorno.data != "ok")
 			{alert("Ooops! Problemas ao acessar o serviço.");aguarde("none");}
 			else
-			{window.parent.i3GEO.atualiza()}
-		}
+			{window.parent.i3GEO.atualiza();}
+		};
 		aguarde("block");
-		var tiporep = $i("tiporep").value
-		var p = g_locaplic+"/classesphp/mapa_controle.php?g_sid="+g_sid+"&funcao=adicionatemawms&servico="+$i("servico").value+"&tema="+g_tema+"&nome="+g_nometema+"&proj="+$i("proj").value+"&formato="+$i("formatos").value+"&tipo="+g_tipo+"&versao="+$i("versao").value+"&nomecamada="+g_nomecamada+"&tiporep="+tiporep+"&suportasld="+g_sld+"&formatosinfo="+$i("formatosinfo").value
+		var tiporep = $i("tiporep").value;
+		var p = g_locaplic+"/classesphp/mapa_controle.php?g_sid="+g_sid+"&funcao=adicionatemawms&servico="+$i("servico").value+"&tema="+g_tema+"&nome="+g_nometema+"&proj="+$i("proj").value+"&formato="+$i("formatos").value+"&tipo="+g_tipo+"&versao="+$i("versao").value+"&nomecamada="+g_nomecamada+"&tiporep="+tiporep+"&suportasld="+g_sld+"&formatosinfo="+$i("formatosinfo").value;
 		var cp = new cpaint();
 		//cp.set_debug(2)
 		cp.set_response_type("JSON");

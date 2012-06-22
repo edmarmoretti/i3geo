@@ -34,7 +34,7 @@ GNU junto com este programa; se não, escreva para a
 Free Software Foundation, Inc., no endereço
 59 Temple Street, Suite 330, Boston, MA 02111-1307 USA.
 */
-parametrosURL()
+parametrosURL();
 //tipo = 1 anual, 2 mensal, 3 diario
 wms_configura = {
 	"1": {
@@ -149,35 +149,35 @@ wms_configura = {
 		diaFim: 1,
 		tipo: 2
 	}
-}
-var ins = "<p>Escolha o serviço de fornecimento de dados (WMS-T)</p>"
-ins += "<select style='width:353px;border:1px solid gray;' onchange='escolheuServico(this.value)'>"
-ins += "<option value='' >---</option>"
+};
+var ins = "<p>Escolha o serviço de fornecimento de dados (WMS-T)</p>";
+ins += "<select style='width:353px;border:1px solid gray;' onchange='escolheuServico(this.value)'>";
+ins += "<option value='' >---</option>";
 for(var key in wms_configura){
-	ins += "<option value='"+key+"'>"+wms_configura[key].titulo+"</option>"
+	ins += "<option value='"+key+"'>"+wms_configura[key].titulo+"</option>";
 }
 ins += "</select>";
-ins += "<p><input onclick='javascript:this.select();' type=text id=iServico size=54 />"
+ins += "<p><input onclick='javascript:this.select();' type=text id=iServico size=54 />";
 ins += "<p><TEXTAREA id='WMS_descricao' rows='3' cols='52' ></TEXTAREA></p>";
-ins += "<table style='text-align:left'>"
-ins += "<tr><td style='text-align:left'>Ano inicial: </td><td><input onclick='javascript:this.select();' type=text value='0' id=WMS_anoinicio size=4 />"
-ins += "<td style='text-align:left'>Ano final: </td><td><input onclick='javascript:this.select();' type=text value='0' id=WMS_anofim size=4 /></tr>"
+ins += "<table style='text-align:left'>";
+ins += "<tr><td style='text-align:left'>Ano inicial: </td><td><input onclick='javascript:this.select();' type=text value='0' id=WMS_anoinicio size=4 />";
+ins += "<td style='text-align:left'>Ano final: </td><td><input onclick='javascript:this.select();' type=text value='0' id=WMS_anofim size=4 /></tr>";
 
-ins += "<tr><td style='text-align:left'>Mês inicial: </td><td><input onclick='javascript:this.select();' type=text value='nulo' id=WMS_mesinicio size=4 />"
-ins += "<td style='text-align:left'>Mês final: </td><td><input onclick='javascript:this.select();' type=text value='nulo' id=WMS_mesfim size=4 /></tr>"
+ins += "<tr><td style='text-align:left'>Mês inicial: </td><td><input onclick='javascript:this.select();' type=text value='nulo' id=WMS_mesinicio size=4 />";
+ins += "<td style='text-align:left'>Mês final: </td><td><input onclick='javascript:this.select();' type=text value='nulo' id=WMS_mesfim size=4 /></tr>";
 
-ins += "<tr><td style='text-align:left'>Dia inicial: </td><td><input onclick='javascript:this.select();' type=text value='nulo' id=WMS_diainicio size=4 />"
-ins += "<td style='text-align:left'>Dia final: </td><td><input onclick='javascript:this.select();' type=text value='nulo' id=WMS_diafim size=4 /></tr>"
+ins += "<tr><td style='text-align:left'>Dia inicial: </td><td><input onclick='javascript:this.select();' type=text value='nulo' id=WMS_diainicio size=4 />";
+ins += "<td style='text-align:left'>Dia final: </td><td><input onclick='javascript:this.select();' type=text value='nulo' id=WMS_diafim size=4 /></tr>";
 
-ins += "</table>"
+ins += "</table>";
 //ins += "<div style='position:absolute;left:120px;top:180px'>"
-ins += "<p>Obter uma imagem por: "
-ins += "<div id='divumaImagemPor'></div>"
+ins += "<p>Obter uma imagem por: ";
+ins += "<div id='divumaImagemPor'></div>";
 
 
-ins += "<div onclick='iniciaImagens()' style='text-align:left;left:0px;top:20px;'><input id='botao1' size=18 type='button' value='Continuar' /></div>"
-ins += "</div>"
-$i("parametros").innerHTML = ins
+ins += "<div onclick='iniciaImagens()' style='text-align:left;left:0px;top:20px;'><input id='botao1' size=18 type='button' value='Continuar' /></div>";
+ins += "</div>";
+$i("parametros").innerHTML = ins;
 
 //new YAHOO.widget.Button("botao1");
 /*
@@ -190,34 +190,34 @@ Parametro:
 idWMS {String} - id do serviço escolhido
 */
 function escolheuServico(idWMS){
-	tipoServico = wms_configura[idWMS].tipo
-	servico = wms_configura[idWMS].servico+"&VERSION=1.1.1&REQUEST=GetMap&layers="+wms_configura[idWMS].layers+"&styles="+wms_configura[idWMS].styles+"&srs="+wms_configura[idWMS].srs+"&format="+wms_configura[idWMS].format
-	$i("iServico").value = servico
-	$i("WMS_descricao").value = wms_configura[idWMS].descricao
+	tipoServico = wms_configura[idWMS].tipo;
+	servico = wms_configura[idWMS].servico+"&VERSION=1.1.1&REQUEST=GetMap&layers="+wms_configura[idWMS].layers+"&styles="+wms_configura[idWMS].styles+"&srs="+wms_configura[idWMS].srs+"&format="+wms_configura[idWMS].format;
+	$i("iServico").value = servico;
+	$i("WMS_descricao").value = wms_configura[idWMS].descricao;
 	
-	$i("WMS_anoinicio").value = wms_configura[idWMS].anoInicio
+	$i("WMS_anoinicio").value = wms_configura[idWMS].anoInicio;
 	//if(tipoServico > 1)
-	$i("WMS_mesinicio").value = wms_configura[idWMS].mesInicio
+	$i("WMS_mesinicio").value = wms_configura[idWMS].mesInicio;
 	//if(tipoServico > 2)
-	$i("WMS_diainicio").value = wms_configura[idWMS].diaInicio
-	$i("WMS_anofim").value = wms_configura[idWMS].anoFim
+	$i("WMS_diainicio").value = wms_configura[idWMS].diaInicio;
+	$i("WMS_anofim").value = wms_configura[idWMS].anoFim;
 	//if(tipoServico > 1)
-	$i("WMS_mesfim").value = wms_configura[idWMS].mesFim
+	$i("WMS_mesfim").value = wms_configura[idWMS].mesFim;
 	//if(tipoServico > 2)
-	$i("WMS_diafim").value = wms_configura[idWMS].diaFim
+	$i("WMS_diafim").value = wms_configura[idWMS].diaFim;
 
-	var ins = "<select id='umaImagemPor' style='border:1px solid gray'>"
+	var ins = "<select id='umaImagemPor' style='border:1px solid gray'>";
 	if(tipoServico == 1){
-		ins += "<option value='ano' selected >Ano</option></select>"
+		ins += "<option value='ano' selected >Ano</option></select>";
 	}
 	if(tipoServico == 2){
-		ins += "<option value='ano' >Ano</option>"
-		ins += "<option value='mes' selected >Mês</option></select>"
+		ins += "<option value='ano' >Ano</option>";
+		ins += "<option value='mes' selected >Mês</option></select>";
 	}
 	if(tipoServico == 3){
-		ins += "<option value='ano'  >Ano</option>"
-		ins += "<option value='mes' >Mês</option>"
-		ins += "<option value='dia' selected >Dia</option></select>"
+		ins += "<option value='ano'  >Ano</option>";
+		ins += "<option value='mes' >Mês</option>";
+		ins += "<option value='dia' selected >Dia</option></select>";
 	}
 	$i("divumaImagemPor").innerHTML = ins;
 }
@@ -230,88 +230,88 @@ function iniciaImagens(){
 	$i("imagens").innerHTML = "";
 	$i("imagensLidas").innerHTML = "";
 	$i("marcaTempo").innerHTML = "";
-	$i("parametros").style.display="none"
-	$i("quadroAnima").style.display="block"
+	$i("parametros").style.display="none";
+	$i("quadroAnima").style.display="block";
 	if(window.parent.i3GEO.parametros.mapexten){
 		bbox = window.parent.i3GEO.parametros.mapexten.split(" ");
-		bbox = bbox.toString()
+		bbox = bbox.toString();
 	}
 	else
-	bbox = "-51.0347433181,-25.2688559441,-43.4155582517,-21.1417973665"
+	bbox = "-51.0347433181,-25.2688559441,-43.4155582517,-21.1417973665";
 	//var time = "2008-01-01"
-	w = window.parent.i3GEO.parametros.w //985
-	h = window.parent.i3GEO.parametros.h
-	dw = w / 2
-	dh = h / 2
+	w = window.parent.i3GEO.parametros.w; //985
+	h = window.parent.i3GEO.parametros.h;
+	dw = w / 2;
+	dh = h / 2;
 
-	anoInicio = $i("WMS_anoinicio").value
-	mesInicio = $i("WMS_mesinicio").value
-	diaInicio = $i("WMS_diainicio").value
+	anoInicio = $i("WMS_anoinicio").value;
+	mesInicio = $i("WMS_mesinicio").value;
+	diaInicio = $i("WMS_diainicio").value;
 
-	anoFim = $i("WMS_anofim").value
-	mesFim = $i("WMS_mesfim").value
-	diaFim = $i("WMS_diafim").value
+	anoFim = $i("WMS_anofim").value;
+	mesFim = $i("WMS_mesfim").value;
+	diaFim = $i("WMS_diafim").value;
 
-	intervalo = 1
+	intervalo = 1;
 	id = 1;
 	
-	ids = new Array()
-	quantasLidas = 0
-	onde = $i("imagens")
-	ondeContador = $i("imagensLidas")
-	ondeContador.style.display="block"
-	ondeControle = $i("controle")
-	idsValidos = new Array()
-	idsTempo = new Array()
-	parouQuantas = 0
-	ondeMarcaTempo = $i("marcaTempo")
-	ondeData = $i("marcaData")
-	tempoAnima = 500
+	ids = new Array();
+	quantasLidas = 0;
+	onde = $i("imagens");
+	ondeContador = $i("imagensLidas");
+	ondeContador.style.display="block";
+	ondeControle = $i("controle");
+	idsValidos = new Array();
+	idsTempo = new Array();
+	parouQuantas = 0;
+	ondeMarcaTempo = $i("marcaTempo");
+	ondeData = $i("marcaData");
+	tempoAnima = 500;
 
 	if($i("umaImagemPor").value == "mes"){
 		dataFixa = diaInicio;
-		if(dataFixa < 10){var dataFixa = "0"+dataFixa;}
+		if(dataFixa < 10){dataFixa = "0"+dataFixa;}
 		var anoAtual = anoInicio;
 		var mesAtual = mesInicio;
 		while (anoAtual <= anoFim){
 			while (mesAtual < 13){
 				var mes = mesAtual;
-				if(mes < 10){var mes = "0"+mes;}
-				criaImg(anoAtual+"-"+mes+"-"+dataFixa,id)
-				criaImgStatus(anoAtual+"-"+mes+"-"+dataFixa,id)
-				ids.push(id)
-				idsTempo.push(anoAtual+"-"+mes+"-"+dataFixa)
-				id++
-				mesAtual++
-				if(anoAtual == anoFim && mesAtual > mesFim){var mesAtual = 13}
+				if(mes < 10){mes = "0"+mes;}
+				criaImg(anoAtual+"-"+mes+"-"+dataFixa,id);
+				criaImgStatus(anoAtual+"-"+mes+"-"+dataFixa,id);
+				ids.push(id);
+				idsTempo.push(anoAtual+"-"+mes+"-"+dataFixa);
+				id++;
+				mesAtual++;
+				if(anoAtual == anoFim && mesAtual > mesFim){mesAtual = 13;}
 			}
-			var mesAtual = 1
+			mesAtual = 1;
 			anoAtual++;
 		}
 	}
 	if($i("umaImagemPor").value == "dia"){
 		var anoAtual = anoInicio;
 		var mesAtual = mesInicio;
-		var diaAtual = diaInicio
+		var diaAtual = diaInicio;
 		while (anoAtual <= anoFim){
 			while (mesAtual < 13){
 				var mes = mesAtual;
-				if(mes < 10){var mes = "0"+mes;}
+				if(mes < 10){mes = "0"+mes;}
 				while (diaAtual < 31){
 					var dia = diaAtual;
-					if(diaAtual < 10){var dia = "0"+dia;}
-					criaImg(anoAtual+"-"+mes+"-"+dia,id)
-					criaImgStatus(anoAtual+"-"+mes+"-"+dia,id)
-					ids.push(id)
-					idsTempo.push(anoAtual+"-"+mes+"-"+dia)
-					id++
-					diaAtual++
-					if(mesAtual == mesFim && diaAtual > diaFim){var diaAtual = 32}
+					if(diaAtual < 10){dia = "0"+dia;}
+					criaImg(anoAtual+"-"+mes+"-"+dia,id);
+					criaImgStatus(anoAtual+"-"+mes+"-"+dia,id);
+					ids.push(id);
+					idsTempo.push(anoAtual+"-"+mes+"-"+dia);
+					id++;
+					diaAtual++;
+					if(mesAtual == mesFim && diaAtual > diaFim){diaAtual = 32;}
 				}
-				mesAtual++
-				if(anoAtual == anoFim && mesAtual > mesFim){var mesAtual = 13}
+				mesAtual++;
+				if(anoAtual == anoFim && mesAtual > mesFim){mesAtual = 13;}
 			}
-			var mesAtual = 1
+			mesAtual = 1;
 			anoAtual++;
 		}
 	}
@@ -329,22 +329,22 @@ id {string} - id que será definido para a imagem
 */
 function criaImg(tempo,id){
 	var novoel = document.createElement("img");
-	var p = "absolute"
+	var p = "absolute";
 	//if(id==1){var p = "relative"}
 	novoel.id = id;
-	novoel.style.position = p
-	novoel.style.top = "0px"
-	novoel.style.left = "0px"
+	novoel.style.position = p;
+	novoel.style.top = "0px";
+	novoel.style.left = "0px";
 	novoel.style.width = dw+"px";
 	novoel.style.height = dh+"px";
-	novoel.src = $i("iServico").value+"&width="+dw+"&height="+dh+"&bbox="+bbox+"&time="+tempo //"../../imagens/atlas1.jpg";
+	novoel.src = $i("iServico").value+"&width="+dw+"&height="+dh+"&bbox="+bbox+"&time="+tempo; //"../../imagens/atlas1.jpg";
 	novoel.onload = function(){
-		$i("status"+this.id).innerHTML = " <span style=color:red >OK</span>"
-		idsValidos.push(this.id)
-		parouQuantas++
+		$i("status"+this.id).innerHTML = " <span style=color:red >OK</span>";
+		idsValidos.push(this.id);
+		parouQuantas++;
 		if(idsValidos.length == ids.length)
-		{pararStatus()}
-	}
+		{pararStatus();}
+	};
 	onde.appendChild(novoel);
 }
 /*
@@ -361,8 +361,8 @@ id {string} - id da imagem
 function criaImgStatus(tempo,id){
 	var novoel = document.createElement("div");
 	novoel.id = "lida"+id;
-	novoel.style.width="200px"
-	novoel.innerHTML = "Imagem: "+tempo+"...<span style=cursor:pointer;color:blue onclick='pararImagem(\""+id+"\")' id='status"+id+"' >parar</span>"
+	novoel.style.width="200px";
+	novoel.innerHTML = "Imagem: "+tempo+"...<span style=cursor:pointer;color:blue onclick='pararImagem(\""+id+"\")' id='status"+id+"' >parar</span>";
 	ondeContador.appendChild(novoel);
 }
 /*
@@ -378,14 +378,14 @@ function pararImagem(id){
 	if($i(id)){
 		$i(id).src = "";
 		//onde.removeChild(document.getElementById(id))
-		idsValidos.push(id)
-		$i("status"+id).innerHTML = "excluído"
-		parouQuantas++
+		idsValidos.push(id);
+		$i("status"+id).innerHTML = "excluído";
+		parouQuantas++;
 		if(parouQuantas == ids.length)
-		{pararStatus()}
+		{pararStatus();}
 	}
 	else
-	{alert("Imagem excluída")}
+	{alert("Imagem excluída");}
 }
 /*
 Function: pararStatus
@@ -393,17 +393,17 @@ Function: pararStatus
 Para o gráfico que mostra o status das imagens
 */
 function pararStatus(){
-	ondeContador.style.display = "none"
-	ondeControle.style.display="block"
-	ondeMarcaTempo.style.display="block"
-	ondeMarcaTempo.style.top = "10px"
-	ondeControle.style.top = dh + 50 + "px"
-	ondeData.style.top = dh + 30 + "px"
-	ondeData.style.width = dw+"px"
-	desativaQuadros()
-	criaMarcadorTempo()
+	ondeContador.style.display = "none";
+	ondeControle.style.display="block";
+	ondeMarcaTempo.style.display="block";
+	ondeMarcaTempo.style.top = "10px";
+	ondeControle.style.top = dh + 50 + "px";
+	ondeData.style.top = dh + 30 + "px";
+	ondeData.style.width = dw+"px";
+	desativaQuadros();
+	criaMarcadorTempo();
 	//ajustaIds()
-	ativaQuadro(1)
+	ativaQuadro(1);
 }
 function ajustaIds(){
 
@@ -414,23 +414,23 @@ Function: criaMarcadorTempo
 Cria o gráfico que mostra as imagens disponíveis. Serve de base para indicar qual imagem está sendo mostrada
 */
 function criaMarcadorTempo(){
-	var nmarcas = ids.length
-	distanciaMarcas = parseInt(dw / nmarcas)
-	var ins = ""
-	var ini = parseInt((distanciaMarcas*i - (distanciaMarcas/2)))
-	for(i=1;i<=nmarcas;i++){
-		ins += "<img title='clique para adicionar ao mapa' onclick='adicionaMapa(\""+i+"\")' onmouseover='mostraI(\""+i+"\")' onmouseout='escondeI(\""+i+"\")' style='position:absolute;top:"+(dh + 10)+"px;left:"+parseInt((distanciaMarcas*i - (distanciaMarcas/2)))+"px;' src='../../imagens/dot1.gif' id='marcaTempo"+i+"' />"
+	var nmarcas = ids.length;
+	distanciaMarcas = parseInt(dw / nmarcas);
+	var ins = "";
+	var ini = parseInt((distanciaMarcas*i - (distanciaMarcas/2)));
+	for(var i=1;i<=nmarcas;i++){
+		ins += "<img title='clique para adicionar ao mapa' onclick='adicionaMapa(\""+i+"\")' onmouseover='mostraI(\""+i+"\")' onmouseout='escondeI(\""+i+"\")' style='position:absolute;top:"+(dh + 10)+"px;left:"+parseInt((distanciaMarcas*i - (distanciaMarcas/2)))+"px;' src='../../imagens/dot1.gif' id='marcaTempo"+i+"' />";
 	}
-	ins += "<img style='position:absolute;top:"+(dh + 5)+"px;left:"+parseInt((distanciaMarcas - (distanciaMarcas/2)))+"px;' src='../../imagens/dot1red.gif' id='marcaDeTempo' />"
-	ins += "<img style='position:absolute;top:"+(dh + 10)+"px;left:"+parseInt((distanciaMarcas - (distanciaMarcas/2)))+"px;' src='../../imagens/dot1cinza.gif' id='marcaGranulo' />"
+	ins += "<img style='position:absolute;top:"+(dh + 5)+"px;left:"+parseInt((distanciaMarcas - (distanciaMarcas/2)))+"px;' src='../../imagens/dot1red.gif' id='marcaDeTempo' />";
+	ins += "<img style='position:absolute;top:"+(dh + 10)+"px;left:"+parseInt((distanciaMarcas - (distanciaMarcas/2)))+"px;' src='../../imagens/dot1cinza.gif' id='marcaGranulo' />";
 	ngranulo = nmarcas;
 	tgranulo = (parseInt((distanciaMarcas*i - (distanciaMarcas/2))) - ini) / 10;
-	tempoGranulo = tempoAnima / 10
-	ondeMarcaTempo.innerHTML = ins
+	tempoGranulo = tempoAnima / 10;
+	ondeMarcaTempo.innerHTML = ins;
 	marcaVermelha = $i("marcaDeTempo");
-	imgGranulo = $i("marcaGranulo")
-	pararFilme()
-	iniciarFilme()
+	imgGranulo = $i("marcaGranulo");
+	pararFilme();
+	iniciarFilme();
 }
 /*
 Function: mostraI
@@ -443,11 +443,11 @@ obj {dom} - objeto contendo a imagem
 */
 function mostraI(obj){
 	$i(obj).style.display="block";
-	ondeData.innerHTML = "YYMMDD: "+idsTempo[obj-1]
+	ondeData.innerHTML = "YYMMDD: "+idsTempo[obj-1];
 	if($i(quadroAtual))
-	$i(quadroAtual).style.display = "none"
+	$i(quadroAtual).style.display = "none";
 	else
-	$i("1").style.display = "none"
+	$i("1").style.display = "none";
 }
 /*
 Function: escondeI
@@ -460,11 +460,11 @@ obj {dom} - objeto contendo a imagem
 */
 function escondeI(obj){
 	$i(obj).style.display="none";
-	ondeData.innerHTML = ""
+	ondeData.innerHTML = "";
 	if($i(quadroAtual))
-	$i(quadroAtual).style.display = "block"
+	$i(quadroAtual).style.display = "block";
 	else
-	$i("1").style.display = "block"
+	$i("1").style.display = "block";
 }
 /*
 Function: adicionaMapa
@@ -473,101 +473,101 @@ Adiciona uma camada ao mapa baseado na imagem vista na tela
 
 */
 function adicionaMapa(obj){
-	aguarde("block")
-	var serv = wms_configura[obj-1]
+	aguarde("block");
+	var serv = wms_configura[obj-1];
 	var fim = function(retorno){
-		aguarde("none")
+		aguarde("none");
 		if (retorno.data.erro)
-		{alert(retorno.data.erro)}
+		{alert(retorno.data.erro);}
 		else
 		{window.parent.i3GEO.atualiza("");}	
-	}
+	};
 	var p = g_locaplic+"/classesphp/mapa_controle.php?g_sid="+g_sid+"&funcao=adicionatemawms";
-	p += "&servico="+serv.servico
+	p += "&servico="+serv.servico;
 	if(serv.styles == "")
-	p += "&nome="
+	p += "&nome=";
 	else
-	p += "&nome="+serv.styles
-	p += "&tema="+serv.layers
-	p += "&proj="+serv.srs
-	p += "&formato="+serv.format
-	p += "&tipo=estilo"
-	p += "&versao=1.1.1"
-	p += "&nomecamada="+serv.titulo+" "+idsTempo[obj-1]
-	p += "&tiporep=&suportasld=nao"
-	p += "&formatosinfo=text/plain,application/vnd.ogc.gml"
-	p += "&time="+idsTempo[obj-1]
+	p += "&nome="+serv.styles;
+	p += "&tema="+serv.layers;
+	p += "&proj="+serv.srs;
+	p += "&formato="+serv.format;
+	p += "&tipo=estilo";
+	p += "&versao=1.1.1";
+	p += "&nomecamada="+serv.titulo+" "+idsTempo[obj-1];
+	p += "&tiporep=&suportasld=nao";
+	p += "&formatosinfo=text/plain,application/vnd.ogc.gml";
+	p += "&time="+idsTempo[obj-1];
 	var cp = new cpaint();
 	cp.set_response_type("JSON");
 	cp.call(p,"wmstime",fim);
 	
 }
 function desativaQuadros(){
-	var n = idsValidos.length
-	for(i=0;i<n;i++){
-		$i(idsValidos[i]).style.display = "none"
+	var n = idsValidos.length;
+	for(var i=0;i<n;i++){
+		$i(idsValidos[i]).style.display = "none";
 	}
 }
 function ativaQuadro(i){
-	var q = $i(i)
+	var q = $i(i);
 	if(q){
-		q.style.position = "relative"
-		q.style.display = "block"
+		q.style.position = "relative";
+		q.style.display = "block";
 	}
-	marcaVermelha.style.left = $i("marcaTempo"+(i)).style.left
+	marcaVermelha.style.left = $i("marcaTempo"+(i)).style.left;
 }
 function pausarFilme(){
-	pulaGranulo = 11
+	pulaGranulo = 11;
 	try{
-		clearTimeout(ganima)
+		clearTimeout(ganima);
 	}catch(e){}
 }
 function pararFilme(){
 	imgGranulo.style.left = parseInt((distanciaMarcas - (distanciaMarcas/2)))+"px";
 	quadroAtual = 0;
 	desativaQuadros();
-	ativaQuadro(ids[0])
+	ativaQuadro(ids[0]);
 	imgGranulo.style.display="none";
-	ondeData.innerHTML = ""
+	ondeData.innerHTML = "";
 	try{
 		//clearTimeout(tanima)
-		clearTimeout(ganima)
+		clearTimeout(ganima);
 	}catch(e){}
 }
 function iniciarFilme(){
-	imgGranulo.style.display="block"
+	imgGranulo.style.display="block";
 	//tanima = setTimeout("anima()",tempoAnima)
 	//ganima = setTimeout("animacaoGranulo()",tempoGranulo)
-	anima()
+	anima();
 }
 function anima(){
-	desativaQuadros()
-	ativaQuadro(ids[quadroAtual])
-	ondeData.innerHTML = idsTempo[quadroAtual]
-	quadroAtual++
+	desativaQuadros();
+	ativaQuadro(ids[quadroAtual]);
+	ondeData.innerHTML = idsTempo[quadroAtual];
+	quadroAtual++;
 	if(quadroAtual < idsValidos.length){
 		//tanima = setTimeout("anima()",tempoAnima)
-		pulaGranulo = 0
-		imgGranulo.style.left = $i("marcaTempo"+quadroAtual).style.left
-		ganima = setTimeout("animacaoGranulo()",tempoGranulo)
+		pulaGranulo = 0;
+		imgGranulo.style.left = $i("marcaTempo"+quadroAtual).style.left;
+		ganima = setTimeout("animacaoGranulo()",tempoGranulo);
 	}
 	else{
-		imgGranulo.style.display="none"
-		pararFilme()
+		imgGranulo.style.display="none";
+		pararFilme();
 	}
 }
 function animacaoGranulo(){
-	imgGranulo.style.left = parseInt(imgGranulo.style.left) +  tgranulo + "px"
-	pulaGranulo++
+	imgGranulo.style.left = parseInt(imgGranulo.style.left) +  tgranulo + "px";
+	pulaGranulo++;
 	//if(quadroAtual < idsValidos.length)
 	if(pulaGranulo <= 10)
-	ganima = setTimeout("animacaoGranulo()",tempoGranulo)
+	ganima = setTimeout("animacaoGranulo()",tempoGranulo);
 	else
-	anima()
+	anima();
 }
 function maisrapido(){
-	tempoGranulo = tempoGranulo - 10
+	tempoGranulo = tempoGranulo - 10;
 }
 function maislento(){
-	tempoGranulo = tempoGranulo + 10
+	tempoGranulo = tempoGranulo + 10;
 }

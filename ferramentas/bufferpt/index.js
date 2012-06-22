@@ -67,7 +67,6 @@ i3GEOF.bufferpt = {
 	iddiv {String} - id do div que receberá o conteudo HTML da ferramenta
 	*/
 	inicia: function(iddiv){
-		var box;
 		try{
 			$i(iddiv).innerHTML += i3GEOF.bufferpt.html();
 			new YAHOO.widget.Button(
@@ -112,7 +111,7 @@ i3GEOF.bufferpt = {
 	y {dd} - coordenada y (latitude)
 	*/	
 	criaJanelaFlutuante: function(x,y){
-		var janela,divid,temp,titulo,cabecalho,minimiza;
+		var janela,divid,titulo,cabecalho,minimiza;
 		if(x)
 		{i3GEOF.bufferpt.x = x;}
 		if(y)

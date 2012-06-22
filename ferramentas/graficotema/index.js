@@ -152,7 +152,7 @@ i3GEOF.graficoTema = {
 	Cria a janela flutuante para controle da ferramenta.
 	*/	
 	criaJanelaFlutuante: function(){
-		var minimiza,cabecalho,janela,divid,temp,titulo;
+		var janela,divid,temp,titulo;
 		if($i("i3GEOF.graficoTema")){
 			i3GEOF.graficoTema.inicia("i3GEOF.graficoTema_corpo");
 			return;

@@ -123,9 +123,9 @@ i3GEOF.pontoEmPoligono = {
 	},
 	t0: function()
 	{
-		var ins = "<p class='paragrafo'>Ponto em pol&iacute;gono &eacute; uma opera&ccedil;&atilde;o que resulta em um novo tema contendo o cruzamento entre um tema com pontos e outros com pol&iacute;gonos ou raster."
-		ins += "<p class='paragrafo'>As informa&ccedil;&otilde;es do tema poligonal ser&atilde;o inseridas na tabela de atributos de um novo tema do tipo pontual."
-		ins += "<p class='paragrafo'>Para gerar o cruzamento &eacute; necess&aacute;rio que no mapa exista pelo menos um tema poligonal e um com os pontos."
+		var ins = "<p class='paragrafo'>Ponto em pol&iacute;gono &eacute; uma opera&ccedil;&atilde;o que resulta em um novo tema contendo o cruzamento entre um tema com pontos e outros com pol&iacute;gonos ou raster.";
+		ins += "<p class='paragrafo'>As informa&ccedil;&otilde;es do tema poligonal ser&atilde;o inseridas na tabela de atributos de um novo tema do tipo pontual.";
+		ins += "<p class='paragrafo'>Para gerar o cruzamento &eacute; necess&aacute;rio que no mapa exista pelo menos um tema poligonal e um com os pontos.";
 		i3GEO.util.proximoAnterior("","i3GEOF.pontoEmPoligono.t1()",ins,"i3GEOFgradeDePontost0","i3GEOpontoEmPoligonoresultado");
 	},
 	t1: function(){
@@ -145,7 +145,7 @@ i3GEOF.pontoEmPoligono = {
 			{erro.call();}
 			else
 			{
- 				var ins = "<p class='paragrafo'>Escolha os temas que ser&atilde;o utilizados para cruzar com os pontos:"
+ 				var ins = "<p class='paragrafo'>Escolha os temas que ser&atilde;o utilizados para cruzar com os pontos:";
 				ins += "<div id='i3GEOpontoEmPoligonoSelTemasPo' style='text-align:left;font-size:11px'></div>";
 				i3GEO.util.proximoAnterior("i3GEOF.pontoEmPoligono.t1()","i3GEOF.pontoEmPoligono.t3()",ins,"i3GEOF.pontoEmPoligono.t2","i3GEOpontoEmPoligonoresultado");
 				i3GEOF.pontoEmPoligono.comboTemasSelPo();
@@ -200,7 +200,7 @@ i3GEOF.pontoEmPoligono = {
 						i3GEO.atualiza();
 						i3GEO.janela.mensagemSimples(retorno.data,"Colunas");
 					}
-				}
+				};
 				p = i3GEO.configura.locaplic+"/classesphp/mapa_controle.php?g_sid="+i3GEO.configura.sid+"&funcao=pontoEmPoligono&temaPt="+temapt+"&temasPo="+tsl.join(",")+"&ext="+i3GEO.parametros.mapexten;
 				cp = new cpaint();
 				cp.set_response_type("JSON");

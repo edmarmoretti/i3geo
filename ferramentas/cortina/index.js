@@ -155,7 +155,7 @@ i3GEOF.cortina = {
 		$i("i3GEOF.cortina_corpo").style.textAlign = "left";
 		i3GEOF.cortina.aguarde = $i("i3GEOF.cortina_imagemCabecalho").style;
 		temp = function(){
-			var layer,estilo;
+			var layer = null,estilo;
 			if(i3GEO.Interface.ATUAL === "openlayers"){
 				layer = i3geoOL.getLayersByName(i3GEO.temaAtivo)[0];
 				if(layer)
@@ -217,7 +217,7 @@ i3GEOF.cortina = {
 	Zera a barra do slide
 	*/
 	reiniciaSlide: function(){
-		var divlayer,layer;
+		var layer;
 		i3GEOF.cortina.slider.setValue(0,false);
 		if(i3GEO.Interface.ATUAL === "openlayers"){
 			layer = i3geoOL.getLayersByName(i3GEOF.cortina.tema)[0];

@@ -72,7 +72,7 @@ i3GEOF.salvamapfile = {
 					var nome = retorno.data.nomeoriginal;
 					if(nome == "")
 					{
-						$i(iddiv).innerHTML = "<p class=paragrafo >Não existe um arquivo mapfile em i3geo/temas já criado para essa camada. Utilize o sistema de administração para <a href='"+i3GEO.configura.locaplic+"/admin/html/editormapfile.html' target=_blank >criar um</a>"
+						$i(iddiv).innerHTML = "<p class=paragrafo >Não existe um arquivo mapfile em i3geo/temas já criado para essa camada. Utilize o sistema de administração para <a href='"+i3GEO.configura.locaplic+"/admin/html/editormapfile.html' target=_blank >criar um</a>";
 					}
 					else
 					{
@@ -101,7 +101,7 @@ i3GEOF.salvamapfile = {
 	Cria a janela flutuante para controle da ferramenta.
 	*/	
 	criaJanelaFlutuante: function(){
-		var janela,divid,temp,titulo,cabecalho,minimiza;
+		var janela,divid,titulo,cabecalho,minimiza;
 		cabecalho = function(){};
 		minimiza = function(){
 			i3GEO.janela.minimiza("i3GEOF.salvamapfile");

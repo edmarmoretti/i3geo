@@ -75,7 +75,7 @@ i3GEOF.telaremota = {
 			ins += "<a href="+url2+" target=_blank >"+url2+"</a>";
 			$i("i3GEOtelaremotaResultado").innerHTML = ins;
 			i3GEOF.telaremota.aguarde.visibility = "hidden";
-		}
+		};
 		p = i3GEO.configura.locaplic+"/classesphp/mapa_controle.php?g_sid="+i3GEO.configura.sid+"&funcao=telaremota";
 		cp = new cpaint();
 		cp.set_response_type("JSON");
@@ -116,7 +116,7 @@ i3GEOF.telaremota = {
 		i3GEOF.telaremota.aguarde = $i("i3GEOF.telaremota_imagemCabecalho").style;
 		i3GEOF.telaremota.aguarde.visibility = "visible";
 		i3GEOF.telaremota.html(divid,tema);
-		i3GEOF.telaremota.gravaExtent()
+		i3GEOF.telaremota.gravaExtent();
 		temp = function(){
 			if(i3GEO.eventos.NAVEGAMAPA.toString().search("gravaExtent()") > 0)
 			{i3GEO.eventos.NAVEGAMAPA.remove("i3GEOF.telaremota.gravaExtent()");}		

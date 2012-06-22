@@ -96,7 +96,6 @@ i3GEOF.excluirarvore = {
 	html:function(){
 		var camadas = i3GEO.arvoreDeCamadas.CAMADAS,
 			n = camadas.length,
-			temp,
 			ins = "";
 			
 		ins = "<p class=paragrafo ><input id=i3GEOexcluirbotao1 type='buttom' value='Remover do mapa os marcados' /></p>" +			

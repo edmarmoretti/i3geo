@@ -90,13 +90,10 @@ i3GEOF.buffer = {
 	Cria a janela flutuante para controle da ferramenta.
 	*/	
 	criaJanelaFlutuante: function(){
-		var minimiza,cabecalho,janela,divid,temp,titulo,cabecalho,minimiza;
+		var janela,divid,temp,titulo;
 		//cria a janela flutuante
 		titulo = "Entorno <a class=ajuda_usuario target=_blank href='" + i3GEO.configura.locaplic + "/ajuda_usuario.php?idcategoria=3&idajuda=24' >&nbsp;&nbsp;&nbsp;</a>";
 		cabecalho = function(){};
-		minimiza = function(){
-			i3GEO.janela.minimiza("i3GEOF.buffer");
-		};
 		janela = i3GEO.janela.cria(
 			"400px",
 			"200px",
@@ -107,8 +104,10 @@ i3GEOF.buffer = {
 			"i3GEOF.buffer",
 			false,
 			"hd",
-			cabecalho,
-			minimiza
+			function(){},
+			function(){
+				i3GEO.janela.minimiza("i3GEOF.buffer");
+			}
 		);
 		divid = janela[2].id;
 		i3GEOF.buffer.aguarde = $i("i3GEOF.buffer_imagemCabecalho").style;

@@ -54,10 +54,10 @@ i3GEOF.converteMapaKml = {
 
 	*/
 	html:function(divid){
-		var ins,lista,tema;
+		var ins = "",lista,tema;
 		lista = i3GEO.arvoreDeCamadas.CAMADAS;
 		tema = lista[0].name;	
-		var ins = '<p class="paragrafo" >Voc&ecirc; pode utilizar os endere&ccedil;os para visualizar o mapa atual em softwares que aceitam o formato kml,' +
+		ins = '<p class="paragrafo" >Voc&ecirc; pode utilizar os endere&ccedil;os para visualizar o mapa atual em softwares que aceitam o formato kml,' +
 		'como o <a href="http://earth.google.com/intl/pt/" target="_blank" > Google Earth</a>. O endereço de acesso é temporário, ficando disponível por determinado período de tempo conforme definido pelo administrador do i3Geo.' +
 		'<p class="paragrafo" >Clique <a href="'+i3GEO.configura.locaplic+'/documentacao/ajuda/googleearth.htm" target="blank" >aqui</a> para mais detalhes sobre como usar o link kml no Google Earth.' +
 		'<p class="paragrafo" ><b>Kml baseado em um servico WMS: </b></p>' +
@@ -73,7 +73,7 @@ i3GEOF.converteMapaKml = {
 	Cria a janela flutuante para controle da ferramenta.
 	*/	
 	criaJanelaFlutuante: function(){
-		var janela,divid,temp,titulo;
+		var janela,divid,titulo;
 		cabecalho = function(){};
 		minimiza = function(){
 			i3GEO.janela.minimiza("i3GEOF.converteMapaKml");

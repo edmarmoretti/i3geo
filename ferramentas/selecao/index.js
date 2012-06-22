@@ -136,7 +136,7 @@ i3GEOF.selecao = {
 		'<div class=guiaobj id="i3GEOselecaoguia1obj" style="left:1px;display:none;top:-5px">' +
 		'	<p class=paragrafo ><button title="Clique no mapa para selecionar" value="i3GEOselecaopt" onclick="i3GEOF.selecao.tiposel(this)"><img id=i3GEOselecaopt src="'+i3GEO.configura.locaplic+'/imagens/gisicons/select-one.png" /></button>';
 		if(i3GEO.Interface.ATUAL != "googlemaps" && i3GEO.Interface.ATUAL != "googleearth")
-		{ins += '	<button title="Desenhe um poligono no mapa para selecionar" onclick="i3GEOF.selecao.tiposel(this)" value="i3GEOselecaopoli"><img id=i3GEOselecaopoli src="'+i3GEO.configura.locaplic+'/imagens/gisicons/select-polygon.png" /></button>'}
+		{ins += '	<button title="Desenhe um poligono no mapa para selecionar" onclick="i3GEOF.selecao.tiposel(this)" value="i3GEOselecaopoli"><img id=i3GEOselecaopoli src="'+i3GEO.configura.locaplic+'/imagens/gisicons/select-polygon.png" /></button>';}
 		ins += '	<button title="Seleciona o que estiver visivel no mapa" onclick="i3GEOF.selecao.tiposel(this)" value="i3GEOselecaoext" ><img id=i3GEOselecaoext src="'+i3GEO.configura.locaplic+'/imagens/gisicons/map.png" /></button>';
 		if(i3GEO.Interface.ATUAL != "googlemaps" && i3GEO.Interface.ATUAL != "googleearth")
 		{ins += '	<button title="Desenhe um retangulo no mapa para selecionar" onclick="i3GEOF.selecao.tiposel(this)" value="i3GEOselecaobox" ><img id=i3GEOselecaobox src="'+i3GEO.configura.locaplic+'/imagens/gisicons/select-rectangle.png" /></button>';}
@@ -410,7 +410,7 @@ i3GEOF.selecao = {
 				i3GEOF.selecao.mudaicone();
 				obj.style.backgroundColor = "#cedff2";
 				g_tipoacao = "selecaopoli";
-				i3GEOF.selecao.poligono.inicia()
+				i3GEOF.selecao.poligono.inicia();
 			}
 		}
 		catch(e){alert("Erro: "+e);i3GEOF.selecao.aguarde.visibility = "hidden";}
@@ -462,7 +462,7 @@ i3GEOF.selecao = {
 			i3GEO.desenho.criaContainerRichdraw();
 			i3GEO.desenho.richdraw.lineColor = "red";
 			i3GEO.desenho.richdraw.lineWidth = "2px";
-			var novoel,temp;
+			var novoel;
 			if(!$i("i3geoboxSel")){
 				novoel = document.createElement("div");
 				novoel.style.width = "10px";
@@ -525,7 +525,14 @@ i3GEOF.selecao = {
 		Para o desenho do box, captura seu tamanho e faz o zoom no mapa
 		*/
 		termina: function(){
-			var valor,v,x1,y1,x2,y2,limpa,doc,tipo;
+			var valor,v,x1,y1,x2,y2,limpa,tipo;
+			limpa = function(){
+				var bxs = $i("i3geoboxSel").style;
+				bxs.display="none";
+				bxs.visibility="hidden";
+				bxs.width = "0px";
+				bxs.height = "0px";
+			};			
 			try{
 				valor = i3GEO.calculo.rect2ext("i3geoboxSel",i3GEO.parametros.mapexten,i3GEO.parametros.pixelsize);
 				v = valor[0];
@@ -533,13 +540,6 @@ i3GEOF.selecao = {
 				y1 = valor[2];
 				x2 = valor[3];
 				y2 = valor[4];
-				limpa = function(){
-					var bxs = $i("i3geoboxSel").style;
-					bxs.display="none";
-					bxs.visibility="hidden";
-					bxs.width = "0px";
-					bxs.height = "0px";
-				};
 				if((x1 === x2) || (y1 === y2))
 				{limpa.call();return;}
 				// se o retangulo for negativo pula essa parte para nï¿½ gerar erro
@@ -597,7 +597,7 @@ i3GEOF.selecao = {
 		if(typeof(console) !== 'undefined')
 		{console.info("i3GEO.selecao.clique()");}
 		if (g_tipoacao === "selecao"){
-			var doc,tipo,tolerancia;
+			var tipo,tolerancia;
 			tipo = $i("i3GEOselecaotipoOperacao").value;
 			tolerancia = $i("i3GEOselecaotoleranciapt").value;
 			i3GEOF.selecao.porxy(i3GEO.temaAtivo,tipo,tolerancia);		
@@ -683,7 +683,7 @@ i3GEOF.selecao = {
 		*/
 		clique: function(){
 			if (g_tipoacao !== "selecaopoli"){return;}
-			var n,m;
+			var n;
 			n = pontosdistobj.xpt.length;
 			pontosdistobj.xpt[n] = objposicaocursor.ddx;
 			pontosdistobj.ypt[n] = objposicaocursor.ddy;
@@ -724,7 +724,7 @@ i3GEOF.selecao = {
 		Termina o desenho do polígono e executa a operação de seleção
 		*/
 		termina: function(){
-			var pontos,n,xs,ys,retorna,p,cp,tema=i3GEO.temaAtivo;
+			var pontos,xs,ys,retorna,p,cp,tema=i3GEO.temaAtivo;
 			pontos = pontosdistobj;
 			i3GEO.desenho.richdraw.fecha();
 			n = pontos.xpt.length;
@@ -774,7 +774,7 @@ i3GEOF.selecao = {
 	Adiciona uma nova linha de filtro
 	*/
 	adicionaLinhaFiltro: function(){
-		var add,xis,interrogacao,operador,conector,valor,ntb,ntr,ntad,ntd,ntd1,ntd2,ntd3,ntd4,ntd5,tabela;
+		var add,xis,interrogacao,operador,conector,valor,ntr,ntad,ntd,ntd1,ntd2,ntd3,ntd4,ntd5,tabela;
 		try{
 			add = document.createElement("img");
 			add.src = i3GEO.configura.locaplic+'/imagens/plus.gif';
@@ -892,7 +892,7 @@ i3GEOF.selecao = {
 		try{
 			i3GEOF.selecao.aguarde.visibility = "visible";
 			var filtro = "",
-				re,g,ipt,i,ii,nos,s,itemsel,valor,operador,conector,temp;
+				g,ipt,i,ii,nos,s,itemsel,valor,operador,conector,temp;
 			if(navm){ii = 2;}
 			else
 			{ii = 0;}
@@ -907,7 +907,7 @@ i3GEOF.selecao = {
 					operador = s[0].value;
 					s = nos[4].getElementsByTagName("input");
 					valor = s[0].value;
-					s = nos[6].getElementsByTagName("select")
+					s = nos[6].getElementsByTagName("select");
 					conector = s[0].value;
 					if (valor*1)
 					{filtro = filtro + "(["+itemsel+"] "+operador+" "+valor+")";}
@@ -923,7 +923,7 @@ i3GEOF.selecao = {
 				i3GEOF.selecao.aguarde.visibility = "hidden";
 				return;
 			}
-			g_operacao = "selecao"
+			g_operacao = "selecao";
 		 	temp = function(retorno){
 		 		var nsel;
 				if(i3GEO.Interface.ATUAL === "padrao")
@@ -986,7 +986,7 @@ i3GEOF.selecao = {
 	Abre uma janela flutuante para criar gráficos de perfil
 	*/
 	graficoPerfil: function(){
-		var cp,p,temp;
+		var cp,p;
 		if(i3GEOF.selecao.aguarde.visibility === "visible")
 		{return;}
 		if($i("i3GEOselecaotemasLigados").value === "")

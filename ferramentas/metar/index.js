@@ -198,13 +198,13 @@ i3GEOF.metar = {
 				return; 		  		
 	  		},
 	  		argument: { foo:"foo", bar:"bar" }
-		}
+		};
 		if(i3GEO.parametros.mapexten)
 		{ext = i3GEO.parametros.mapexten;}
 		else
 		{ext = "-49.1774741355 -16.379556709 -47.2737662565 -14.9806872512";} //apenas para exemplo
 		p = i3GEO.configura.locaplic+"/ferramentas/metar/metarextensao.php?ret="+ext;
-		var request = YAHOO.util.Connect.asyncRequest("GET", p, montaResultado);		
+		YAHOO.util.Connect.asyncRequest("GET", p, montaResultado);		
 	},
 	/*
 	Function: mostraxy
@@ -229,7 +229,7 @@ i3GEOF.metar = {
 		box.style.top = parseInt(xy[1],10)-27+"px";
 		box.style.left = parseInt(xy[0],10)-13+"px";
 		box.style.position = "absolute";
-		box.style.border = "solid 0px red"
-		box.style.zIndex = 5000
+		box.style.border = "solid 0px red";
+		box.style.zIndex = 5000;
 	}
 };

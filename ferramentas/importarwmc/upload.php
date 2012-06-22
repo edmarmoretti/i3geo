@@ -13,7 +13,7 @@ $map_file = $_SESSION["map_file"];
 <link rel="stylesheet" type="text/css" href="../../css/geral.css" />
 <title></title>
 </head>
-<body name="ancora" bgcolor="white" style="background-color:white;text-align:left;">
+<body bgcolor="white" style="background-color:white;text-align:left;">
 <p>
 <?php
 error_reporting(E_ALL);

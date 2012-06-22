@@ -46,7 +46,7 @@ body,td
 </style>
 
   </head>
-  <body name="ancora" >
+  <body>
 <table>
 <tr>
 	<td>

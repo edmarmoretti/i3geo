@@ -7,14 +7,14 @@ if(!isset($locaplic))
 ?>
 <html xmlns="http://www.w3.org/1999/xhtml">
   <head>
-      <link rel="stylesheet" type="text/css" href="../../css/ferramentas.css">
-      <link rel="stylesheet" type="text/css" href="../../css/botoes.css">
+      <link rel="stylesheet" type="text/css" href="../../css/ferramentas.css"></link>
+      <link rel="stylesheet" type="text/css" href="../../css/botoes.css"></link>
   	<title></title>
   </head>
-  <body name="ancora" class="yui-skin-sam;" style="overflow:auto;">
+  <body class="yui-skin-sam;" style="overflow:auto;">
 <div style="top:5px;left:1px;display:block;width:90%;"  id="resultado" >Aguarde...</div>
 	<script src="../../classesjs/i3geo.js" type="text/javascript"></script>
-    <script language="JavaScript" type="text/javascript" src="index.js"></script>
+    <script type="text/javascript" src="index.js"></script>
 
 <script type="text/javascript">
 i3GEObuscaRapida.idresultado

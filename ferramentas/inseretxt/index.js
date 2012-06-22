@@ -377,7 +377,7 @@ i3GEOF.inseretxt = {
 				return;
 			}
 			i3GEOF.inseretxt.aguarde.visibility = "visible";
-			var texto,temp,tema,item;
+			var temp,tema,item;
 			//
 			//de onde vem o texto
 			//

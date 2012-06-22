@@ -36,9 +36,9 @@ function iniciaNuvem(){
 		YAHOO.util.Event.onContentReady("botao1", onPushButtonsMarkupReady);
 		
 		
-	}()	
-	aguarde("block")
-	parametrosURL()
+	}();
+	aguarde("block");
+	parametrosURL();
 	inicio = 0;
 	tagsFlash;
 	palavra = "";
@@ -46,46 +46,44 @@ function iniciaNuvem(){
 	if (temp[1])
 	{palavra = (temp[1].split("&"))[0];}
 	if(palavra != "")
-	procurar(palavra)
+	procurar(palavra);
 }
 function montaNuvem(r)
 {
-	retorno = r;
+	var i,tags = "",retorno = r;
 	if(retorno.data)
 	{
-		var tags ="Clique na TAG para localizar temas relacionados<br><br><span onmouseout='this.style.textDecoration=\"none\"' onmouseover='this.style.textDecoration=\"underline\"' onclick='javascript:inicio = inicio+2;montaNuvem(retorno);' style='cursor:pointer;vertical-align:middle;color:navy;font-size:'12'pt;'>menos</span><span>&nbsp;</span>"
-		tags +="<span onmouseout='this.style.textDecoration=\"none\"' onmouseover='this.style.textDecoration=\"underline\"' onclick='javascript:inicio = inicio-2;montaNuvem(retorno);' style='cursor:pointer;vertical-align:middle;color:navy;font-size:'12'pt;'>mais</span><span>&nbsp;</span>"
-		tags +="<span onmouseout='this.style.textDecoration=\"none\"' onmouseover='this.style.textDecoration=\"underline\"' onclick='javascript:flash();' style='cursor:pointer;vertical-align:middle;color:navy;font-size:'12'pt;'>animar</span><br><br>"
+		tags ="Clique na TAG para localizar temas relacionados<br><br><span onmouseout='this.style.textDecoration=\"none\"' onmouseover='this.style.textDecoration=\"underline\"' onclick='javascript:inicio = inicio+2;montaNuvem(retorno);' style='cursor:pointer;vertical-align:middle;color:navy;font-size:'12'pt;'>menos</span><span>&nbsp;</span>";
+		tags +="<span onmouseout='this.style.textDecoration=\"none\"' onmouseover='this.style.textDecoration=\"underline\"' onclick='javascript:inicio = inicio-2;montaNuvem(retorno);' style='cursor:pointer;vertical-align:middle;color:navy;font-size:'12'pt;'>mais</span><span>&nbsp;</span>";
+		tags +="<span onmouseout='this.style.textDecoration=\"none\"' onmouseover='this.style.textDecoration=\"underline\"' onclick='javascript:flash();' style='cursor:pointer;vertical-align:middle;color:navy;font-size:'12'pt;'>animar</span><br><br>";
 
 		if((inicio < 0) || (inicio > retorno.data.length)){return;}
 		for (i=0;i<retorno.data.length;i++)
 		{
 			if(retorno.data[i].temas.length*1 >= inicio)
 			{
-				var cor = "98,186,192";
-				var h = retorno.data[i].temas.length*1 + 6
-				if(h > 23){var h = 23;}
+				var h = retorno.data[i].temas.length*1 + 6;
+				if(h > 23){h = 23;}
 				{
 					var linkrss = "";
 					if(retorno.data[i].noticias.length > 0)
 					{
-						var cor = "255,0,0";
 						for (r=0;r<retorno.data[i].noticias.length;r++)
 						{
 							linkrss += "<span><a href='"+retorno.data[i].noticias[r].link+"' target=blanck ><img style=cursor:pointer src='../../imagens/mais.png' title='"+retorno.data[i].noticias[r].titulo+"'/></a></span>" ;
 						}		
 					}
-					tags += "<span> </span> <span onmouseout='this.style.textDecoration=\"none\"' onmouseover='this.style.textDecoration=\"underline\"' onclick='procurar(\""+retorno.data[i].tag+"\")' style='cursor:pointer;vertical-align:middle;color:rgb("+cor+");font-size:"+h+"pt;'>"+retorno.data[i].tag+"</span>"+linkrss
+					tags += "<span> </span> <span onmouseout='this.style.textDecoration=\"none\"' onmouseover='this.style.textDecoration=\"underline\"' onclick='procurar(\""+retorno.data[i].tag+"\")' style='cursor:pointer;vertical-align:middle;color:rgb("+cor+");font-size:"+h+"pt;'>"+retorno.data[i].tag+"</span>"+linkrss;
 					if(h > 7)
-					tagsFlash += "<a href='index.htm?palavra="+retorno.data[i].tag+"' target='_top' style='font-size:"+(h - 15)+"px;color:red;' >"+retorno.data[i].tag+"</a>"
+					tagsFlash += "<a href='index.htm?palavra="+retorno.data[i].tag+"' target='_top' style='font-size:"+(h - 15)+"px;color:red;' >"+retorno.data[i].tag+"</a>";
 				}
 			}
 		}
 	}
 	else
-	{var tags = "Nenhum tag encontrado"}
+	{tags = "Nenhum tag encontrado";}
 	$i("resultado").innerHTML = tags;
-	aguarde("none")
+	aguarde("none");
 }
 //pega a lista de tags
 $i("resultado").innerHTML = "Aguarde...";
@@ -99,16 +97,16 @@ function procurar(texto)
 {
 	if(window.parent.document.getElementById("i3geo_buscatema"))
 	{
-		window.parent.document.getElementById("i3geo_buscatema").value = texto
+		window.parent.document.getElementById("i3geo_buscatema").value = texto;
 		window.parent.i3GEO.arvoreDeTemas.buscaTema(texto);
 	}
 }
 
 function buscarss()
 {
-	var rss = $i("texto").value
+	var rss = $i("texto").value;
 	if (rss == ""){alert("Digite um endereco RSS");return;}
-	aguarde("block")
+	aguarde("block");
 	$i("resultado").innerHTML = "Aguarde...";
 	var cp = new cpaint();
 	cp.set_response_type("JSON");

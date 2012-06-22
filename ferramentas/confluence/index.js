@@ -187,7 +187,7 @@ i3GEOF.confluence = {
 		if(i3GEOF.confluence.aguarde.visibility === "visible")
 		{return;}
 		i3GEOF.confluence.aguarde.visibility = "visible";
-		var ins,res,i,j,t,p,ext,xini,yini,xfim,yfim,xs,dx,ys;
+		var ins = "",i,j,ext,xini,yini,xfim,yfim,xs,dx,ys = [];
 		if(i3GEO.parametros.mapexten)
 		{ext = i3GEO.parametros.mapexten;}
 		else
@@ -201,9 +201,9 @@ i3GEOF.confluence = {
 		dx = xfim - xini;
 		if ((dx > 1) || (dx < -1)){
 			for (i=xini;i<xfim;i++){
-				xs.push(i)
+				xs.push(i);
 			}
-			var ys = [];
+			ys = [];
 			for (i=yini;i<yfim;i++){
 				ys.push(i);
 			}

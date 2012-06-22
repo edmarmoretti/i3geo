@@ -300,7 +300,7 @@ i3GEOF.buscaFotos = {
 		if (retorno.data===undefined )
 		{$i("i3GEObuscafotosresultadofotos").innerHTML = "Erro. A operação demorou muito.";return;}
 		eval("var data = "+retorno.data);
-		var ins,res,i,t,p;
+		var ins = "",res,i,t,p;
 		if(!retorno.data)
 		{ins += "<br><span style=color:red>Problemas no acesso aos dados!</span><br><br>";return;}
 		res = data.count;
@@ -378,7 +378,7 @@ i3GEOF.buscaFotos = {
 	*/
 	listafotoslocr: function(retorno){
 		i3GEOF.buscaFotos.aguarde.visibility = "hidden";
-		var ins,
+		var ins = "",
 			res,
 			i,
 			t,
