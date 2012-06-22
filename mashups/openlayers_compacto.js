@@ -3011,7 +3011,7 @@ OpenLayers.Feature.prototype.destroy.apply(this,arguments);},processXMLNode:func
 if(data&&data.nodeType==9){data=data.documentElement;}
 var capabilities={};this.readNode(data,capabilities);capabilities.version=this.version;return capabilities;},readers:{"wmts":{"Capabilities":function(node,obj){this.readChildNodes(node,obj);},"Contents":function(node,obj){obj.contents={};obj.contents.layers=[];obj.contents.tileMatrixSets={};this.readChildNodes(node,obj.contents);},"Layer":function(node,obj){var layer={styles:[],formats:[],tileMatrixSetLinks:[]};layer.layers=[];this.readChildNodes(node,layer);obj.layers.push(layer);},"Style":function(node,obj){var style={};style.isDefault=(node.getAttribute("isDefault")==="true");this.readChildNodes(node,style);obj.styles.push(style);},"Format":function(node,obj){obj.formats.push(this.getChildValue(node));},"TileMatrixSetLink":function(node,obj){var tileMatrixSetLink={};this.readChildNodes(node,tileMatrixSetLink);obj.tileMatrixSetLinks.push(tileMatrixSetLink);},"TileMatrixSet":function(node,obj){if(obj.layers){var tileMatrixSet={matrixIds:[]};this.readChildNodes(node,tileMatrixSet);obj.tileMatrixSets[tileMatrixSet.identifier]=tileMatrixSet;}else{obj.tileMatrixSet=this.getChildValue(node);}},"TileMatrix":function(node,obj){var tileMatrix={supportedCRS:obj.supportedCRS};this.readChildNodes(node,tileMatrix);obj.matrixIds.push(tileMatrix);},"ScaleDenominator":function(node,obj){obj.scaleDenominator=parseFloat(this.getChildValue(node));},"TopLeftCorner":function(node,obj){var topLeftCorner=this.getChildValue(node);var coords=topLeftCorner.split(" ");var yx;if(obj.supportedCRS){var crs=obj.supportedCRS.replace(/urn:ogc:def:crs:(\w+):.+:(\w+)$/,"urn:ogc:def:crs:$1::$2");yx=!!this.yx[crs];}
 if(yx){obj.topLeftCorner=new OpenLayers.LonLat(coords[1],coords[0]);}else{obj.topLeftCorner=new OpenLayers.LonLat(coords[0],coords[1]);}},"TileWidth":function(node,obj){obj.tileWidth=parseInt(this.getChildValue(node));},"TileHeight":function(node,obj){obj.tileHeight=parseInt(this.getChildValue(node));},"MatrixWidth":function(node,obj){obj.matrixWidth=parseInt(this.getChildValue(node));},"MatrixHeight":function(node,obj){obj.matrixHeight=parseInt(this.getChildValue(node));},"ResourceURL":function(node,obj){obj.resourceUrl=obj.resourceUrl||{};obj.resourceUrl[node.getAttribute("resourceType")]={format:node.getAttribute("format"),template:node.getAttribute("template")};},"WSDL":function(node,obj){obj.wsdl={};obj.wsdl.href=node.getAttribute("xlink:href");},"ServiceMetadataURL":function(node,obj){obj.serviceMetadataUrl={};obj.serviceMetadataUrl.href=node.getAttribute("xlink:href");}},"ows":OpenLayers.Format.OWSCommon.v1_1_0.prototype.readers["ows"]},CLASS_NAME:"OpenLayers.Format.WMTSCapabilities.v1_0_0"});
-/*jslint white:false,undef: false, rhino: true, onevar: true, evil: false */
+/*çjslint white:false,undef: false, rhino: true, onevar: true, evil: false */
 var $i = function(id)
 {return document.getElementById(id);};
 //seta as variáveis navn e navm
@@ -3275,7 +3275,7 @@ visibility:true
 layersLigados: function(){
 var layers = i3GEO.editorOL.mapa.layers,
 nlayers = layers.length,
-ins = [];
+ins = [],i;
 for(i=0;i<nlayers;i++){
 if(layers[i].visibility === true){
 ins.push(layers[i]);
@@ -3290,7 +3290,7 @@ coordenadas: function(){
 var idcoord = i3GEO.editorOL.mapa.getControlsBy("separator"," ");
 if(idcoord[0]){
 i3GEO.editorOL.mapa.events.register("mousemove", i3GEO.editorOL.mapa, function(e){
-var p,lonlat,d,dc;
+var p,lonlat,d;
 if (navm)
 {p = new OpenLayers.Pixel(e.x,e.y);}
 else
@@ -3350,7 +3350,6 @@ criaComboTemas: function(){
 var layers = i3GEO.editorOL.layersLigados(),
 nlayers = layers.length,
 i,
-temp,
 combo = "<select id=i3GEOOLlistaTemasAtivos >";
 //i3GEO.editorOL.layergrafico.setLayerIndex(i3GEO.editorOL.getNumLayers() + 1);
 for(i=0;i<nlayers;i++){
@@ -3395,7 +3394,7 @@ if(i3GEO.eventos.ATUALIZAARVORECAMADAS.toString().search("i3GEO.editorOL.atualiz
 }
 temp = $i("paneltemaativo_minimizaCabecalho");
 if(temp){
-temp.onclick = function(){i3GEO.janela.minimiza("paneltemaativo");}
+temp.onclick = function(){i3GEO.janela.minimiza("paneltemaativo");};
 }
 }
 else{
@@ -3432,7 +3431,6 @@ geometryName: "msGeometry"
 gml = fromgml.read(retorno.responseText),
 prop = gml.featureTypes[0].properties,
 nprop = prop.length,
-itens = [],
 i,
 combo = "<select id="+idobj+" ><option value=''>----</option>";
 for(i = 0;i < nprop; i++){
@@ -3494,7 +3492,7 @@ i3GEO.editorOL.mapa.zoomToExtent(b);
 mostraLegenda: function(){
 var layers = i3GEO.editorOL.layersLigados(),
 nlayers = layers.length,
-ins = "";
+ins = "",i;
 for(i=0;i<nlayers;i++){
 try{
 var url = layers[i].getFullRequestString({"request":"getlegendgraphic"});
@@ -3506,7 +3504,6 @@ catch(e){}
 //var w = window.open();
 //w.document.write(ins);
 //w.document.close();
-var temp;
 if(!document.getElementById("panellegendaeditorOL")){
 YAHOO.namespace("legendaeditorOL.container");
 YAHOO.legendaeditorOL.container.panel = new YAHOO.widget.Panel("panellegendaeditorOL", {zIndex:20000, iframe:true, width:"250px", visible:false, draggable:true, close:true } );
@@ -3606,12 +3603,11 @@ i3GEO.editorOL.processageo("converteSHP");
 listaGeometriasSel: function(){
 var geos = i3GEO.editorOL.layergrafico.selectedFeatures;
 var n = geos.length;
-var ins = "";
+var ins = "",i;
 for(i=0;i<n;i++){
 ins += "<b>Geometria: "+i+"</b><br>"+geos[i].geometry+"<br><br>";
 ins += "<b>Atributos: "+i+"</b><br>";
 var a = geos[i].attributes;
-var keys = [];
 for(key in a){
 if(a[key]){
 ins += key+" = "+a[key]+"<br>";
@@ -3670,11 +3666,12 @@ if(i3GEO && i3GEO.barraDeBotoes){
 i3GEO.barraDeBotoes.ativaPadrao();
 }
 }
-catch(e){}
+catch(e){ }
 if(!c.trigger)
 {c.activate();}
 else
 {c.trigger.call();}
+}
 });
 if(botoes.procura===true){
 button = new OpenLayers.Control.Button({
@@ -3787,7 +3784,6 @@ temp1,
 n,
 i,
 f = [],
-f1 = [],
 textoN = texto.split(":");
 try{
 if(textoN.length > 1){
@@ -4223,7 +4219,6 @@ if(i3GEO.editorOL.pontos.length === 0)
 {return;}
 var SHADOW_Z_INDEX = 10,
 MARKER_Z_INDEX = 11,
-DIAMETER = 200,
 layer = new OpenLayers.Layer.Vector(
 "pontos",
 {
@@ -4245,8 +4240,6 @@ visibility:true
 index,
 x = [],
 y = [],
-pixel,
-lonlat,
 features = [];
 for (index = 0; index < i3GEO.editorOL.pontos.length; index = index + 2){
 x.push(i3GEO.editorOL.pontos[index]);
@@ -4272,13 +4265,15 @@ eval(id+" = new OpenLayers.Layer.Vector('"+id+"', {displayOutsideMaxExtent:true,
 eval("i3GEO.editorOL.mapa.addLayer("+id+");");
 eval("temp = "+id+".div;");
 temp.onclick = function(e){
-var targ,id,temp,features,n,i,j,g,html="";
+var targ = "",id,temp,features,n,i,g,html="";
 if (!e){e = window.event;}
 if (e.target)
 {targ = e.target;}
-else
+else{
 if (e.srcElement)
 {targ = e.srcElement;}
+}
+if(targ.id){
 temp = targ.id.split("_");
 if(temp[0] === "OpenLayers.Geometry.Point"){
 id = targ.id;
@@ -4287,7 +4282,7 @@ features = temp.features;
 n = features.length;
 for(i=0;i<n;i++){
 if(features[i].geometry.id === id){
-for (j in features[i].attributes) {
+for (var j in features[i].attributes) {
 html += j+": "+features[i].attributes[j];
 }
 g = features[i].geometry;
@@ -4299,6 +4294,7 @@ html,
 null,
 true
 ));
+}
 }
 }
 }
@@ -4386,7 +4382,7 @@ YAHOO.editorOL.container.panel.center();
 YAHOO.util.Event.addListener(YAHOO.editorOL.container.panel.close, "click", function(){});
 temp = $i("panelpropriedadesEditor_minimizaCabecalho");
 if(temp){
-temp.onclick = function(){i3GEO.janela.minimiza("panelpropriedadesEditor");}
+temp.onclick = function(){i3GEO.janela.minimiza("panelpropriedadesEditor");};
 }
 }
 YAHOO.editorOL.container.panel.show();
@@ -4411,7 +4407,7 @@ YAHOO.editorOL.listaGeometrias.panel.destroy();
 });
 temp = $i("panellistagEditor_minimizaCabecalho");
 if(temp){
-temp.onclick = function(){i3GEO.janela.minimiza("panellistagEditor");}
+temp.onclick = function(){i3GEO.janela.minimiza("panellistagEditor");};
 }
 }
 else{
@@ -4469,7 +4465,7 @@ YAHOO.util.Event.addListener(YAHOO.editorOL.ferramentas.panel.close, "click", fu
 });
 temp = $i("panelferramentasEditor_minimizaCabecalho");
 if(temp){
-temp.onclick = function(){i3GEO.janela.minimiza("panelferramentasEditor");}
+temp.onclick = function(){i3GEO.janela.minimiza("panelferramentasEditor");};
 }
 }
 else{
@@ -4505,8 +4501,7 @@ if(temp.checked === true)
 processageo: function(operacao){
 if(operacao === ""){return;}
 var geosel = i3GEO.editorOL.layergrafico.selectedFeatures,
-fwkt = new OpenLayers.Format.WKT(),
-polis,linhas,pontos,uniaopolis,uniaolinhas,uniaopontos,n,i,temp;
+polis,linhas,pontos,temp;
 if(geosel.length > 0){
 polis = i3GEO.editorOL.retornaGeometriasTipo(geosel,"OpenLayers.Geometry.Polygon");
 linhas = i3GEO.editorOL.retornaGeometriasTipo(geosel,"OpenLayers.Geometry.LineString");
@@ -4523,7 +4518,7 @@ if(operacao === "converteSHP"){
 i3GEO.atualiza();
 i3GEO.janela.minimiza("paneltemaativo");
 }
-}
+};
 if(operacao === "union" && !i3GEO.php ){
 if(polis.length > 0){
 temp = i3GEO.editorOL.uniaojts(polis);
@@ -4591,13 +4586,13 @@ return lista;
 guardaBackup: function(){
 return;
 if(!i3GEO.editorOL.backup)
-{i3GEO.editorOL.backup = new OpenLayers.Layer.Vector("Backup",{displayInLayerSwitcher:false,visibility:false})}
+{i3GEO.editorOL.backup = new OpenLayers.Layer.Vector("Backup",{displayInLayerSwitcher:false,visibility:false});}
 else
 {i3GEO.editorOL.backup.removeFeatures(i3GEO.editorOL.backup.features);}
 i3GEO.editorOL.backup.addFeatures(i3GEO.editorOL.layergrafico.features);
 },
 unselTodos:function(){
-var n,i,temp;
+var n,i;
 n = i3GEO.editorOL.layergrafico.features.length;
 for(i=0;i<n;i++){
 i3GEO.editorOL.layergrafico.features[i].renderIntent = "default";
@@ -4605,7 +4600,7 @@ i3GEO.editorOL.selbutton.unselect(i3GEO.editorOL.layergrafico.features[i]);
 }
 },
 unselTodosBackup:function(){
-var n,i,temp;
+var n,i;
 n = i3GEO.editorOL.backup.features.length;
 for(i=0;i<n;i++){
 i3GEO.editorOL.backup.features[i].renderIntent = "default";
@@ -4678,7 +4673,7 @@ else
 trazParaFrente: function(){
 var features = i3GEO.editorOL.layergrafico.selectedFeatures;
 if(features.length > 0){
-i3GEO.editorOL.backup = new OpenLayers.Layer.Vector("Backup",{displayInLayerSwitcher:false,visibility:false})
+i3GEO.editorOL.backup = new OpenLayers.Layer.Vector("Backup",{displayInLayerSwitcher:false,visibility:false});
 i3GEO.editorOL.backup.addFeatures(features);
 i3GEO.editorOL.unselTodosBackup();
 i3GEO.editorOL.layergrafico.removeFeatures(features);
