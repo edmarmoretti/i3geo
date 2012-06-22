@@ -372,8 +372,20 @@ if (strtoupper(substr(PHP_OS, 0, 3) == 'WIN'))
 	
 	Tipo:
 	{string}
+	
 	*/
 	$conexaoadmin = "";
+	/*
+	Variable: $esquemaadmin
+	
+	Indica em qual esquema do banco de dados de administração estão armazenadas as tabelas do sistema de administração. Por default, utiliza-se o esquema public.
+	
+	Tipo:
+	{string}
+	
+	@todo Atualizar a documentação sobre isso
+	*/
+	$esquemaadmin = "";
 	/*
 	 Variable: interfacePadrao
 	 
@@ -444,6 +456,7 @@ else //se for linux
 	$utilizacgi = "nao";
 	$expoeMapfile = "sim";
 	$conexaoadmin = "";//$locaplic."/admin/php/conexaopostgresql.php";
+	$esquemaadmin = "";
 	$interfacePadrao = "openlayers.htm";
 	$base = "";
 	$cachedir = "";

@@ -33,8 +33,10 @@ Arquivo:
 
 i3geo/admin/php/xml.php
 */
-if(!function_exists("verificaEditores"))
-{
+
+if(!function_exists("verificaEditores")){
+	include_once(__DIR__."/../../classesphp/funcoes_gerais.php");
+	/*
 	if(isset($locaplic))
 	{include_once($locaplic."/classesphp/funcoes_gerais.php");}
 	else
@@ -44,6 +46,17 @@ if(!function_exists("verificaEditores"))
 			include_once("../../classesphp/funcoes_gerais.php");
 		}
 	}
+	*/
+}
+//
+//processa a variável $esquemaadmin definida em ms_configura.php
+//essa variável precisa ter um . no final quando não for vazia, evitando erros na inclusão dentro dos SQLs
+//
+if (!isset($esquemaadmin)){
+	include_once(__DIR__."/../../ms_configura.php");
+}
+if(!empty($esquemaadmin)){
+	$esquemaadmin = $esquemaadmin.".";
 }
 /*
 Function: geraXmlSistemas (depreciado)
@@ -62,6 +75,7 @@ String na estrutura XML
 */
 function geraXmlSistemas($perfil,$locaplic,$editores)
 {
+	global $esquemaadmin;
 	$editor = verificaEditores($editores);
 	if (!isset($perfil)){$perfil = "";}
 	$perfil = str_replace(","," ",$perfil);
@@ -73,7 +87,7 @@ function geraXmlSistemas($perfil,$locaplic,$editores)
 	else
 	$xml = "<"."\x3F"."xml version='1.0' encoding='ISO-8859-1' "."\x3F".">";
 	$xml .= "\n<SISTEMAS>\n";
-	$q = "select * from i3geoadmin_sistemas";
+	$q = "select * from ".$esquemaadmin."i3geoadmin_sistemas";
 	$qatlas = $dbh->query($q);
 	foreach($qatlas as $row)
 	{
@@ -120,7 +134,8 @@ RSS
 */
 function geraRSScomentariosTemas($locaplic,$id_tema="")
 {
-	$sql = "select b.nome_tema||' '||a.data as nome_ws,a.openidnome||' '||a.openidurl||' &amp;lt;br&amp;gt;'||a.comentario as desc_ws, a.openidnome as autor_ws, b.link_tema as link_ws from i3geoadmin_comentarios as a,i3geoadmin_temas as b where a.id_tema = b.id_tema ";
+	global $esquemaadmin;
+	$sql = "select b.nome_tema||' '||a.data as nome_ws,a.openidnome||' '||a.openidurl||' &amp;lt;br&amp;gt;'||a.comentario as desc_ws, a.openidnome as autor_ws, b.link_tema as link_ws from ".$esquemaadmin."i3geoadmin_comentarios as a,".$esquemaadmin."i3geoadmin_temas as b where a.id_tema = b.id_tema ";
 	if($id_tema != "")
 	{$sql .= " and a.id_tema = $id_tema ";}
 	return geraXmlRSS($locaplic,$sql,"Lista de comentarios");
@@ -142,7 +157,8 @@ RSS
 */
 function geraRSStemas($locaplic,$id_n2)
 {
-	$sql = "select t.codigo_tema as id_ws,t.nome_tema as nome_ws,'' as desc_ws,'php/parsemapfile.php?id='||t.codigo_tema as link_ws,t.link_tema as autor_ws from i3geoadmin_n3 as n3,i3geoadmin_temas as t where t.id_tema = n3.id_tema and n3.id_n2 = '$id_n2' and n3.n3_perfil = '' order by nome_ws"; 
+	global $esquemaadmin;
+	$sql = "select t.codigo_tema as id_ws,t.nome_tema as nome_ws,'' as desc_ws,'php/parsemapfile.php?id='||t.codigo_tema as link_ws,t.link_tema as autor_ws from ".$esquemaadmin."i3geoadmin_n3 as n3,".$esquemaadmin."i3geoadmin_temas as t where t.id_tema = n3.id_tema and n3.id_n2 = '$id_n2' and n3.n3_perfil = '' order by nome_ws"; 
 	return geraXmlRSS($locaplic,$sql,"Lista de temas");
 }
 /*
@@ -164,7 +180,8 @@ RSS
 */
 function geraRSStemasRaiz($locaplic,$id,$nivel)
 {
-	$sql = "select t.codigo_tema as id_ws,t.nome_tema as nome_ws,'' as desc_ws,'php/parsemapfile.php?id='||t.codigo_tema as link_ws,t.link_tema as autor_ws from i3geoadmin_raiz as r,i3geoadmin_temas as t where t.id_tema = r.id_tema and r.nivel = '$nivel' and r.id_nivel = '$id' order by nome_ws"; 
+	global $esquemaadmin;
+	$sql = "select t.codigo_tema as id_ws,t.nome_tema as nome_ws,'' as desc_ws,'php/parsemapfile.php?id='||t.codigo_tema as link_ws,t.link_tema as autor_ws from ".$esquemaadmin."i3geoadmin_raiz as r,".$esquemaadmin."i3geoadmin_temas as t where t.id_tema = r.id_tema and r.nivel = '$nivel' and r.id_nivel = '$id' order by nome_ws"; 
 	return geraXmlRSS($locaplic,$sql,"Temas na raiz");
 }
 /*
@@ -184,7 +201,8 @@ RSS
 */
 function geraRSSsubgrupos($locaplic,$id_n1)
 {
-	$sql = "select n2.id_n2 as id_ws,g.nome_subgrupo as nome_ws,'' as desc_ws,'rsstemas.php?id='||n2.id_n2 as link_ws,'' as autor_ws from i3geoadmin_n2 as n2,i3geoadmin_subgrupos as g where g.id_subgrupo = n2.id_subgrupo and n2.id_n1 = '$id_n1' and n2.n2_perfil = '' order by nome_ws"; 
+	global $esquemaadmin;
+	$sql = "select n2.id_n2 as id_ws,g.nome_subgrupo as nome_ws,'' as desc_ws,'rsstemas.php?id='||n2.id_n2 as link_ws,'' as autor_ws from ".$esquemaadmin."i3geoadmin_n2 as n2,".$esquemaadmin."i3geoadmin_subgrupos as g where g.id_subgrupo = n2.id_subgrupo and n2.id_n1 = '$id_n1' and n2.n2_perfil = '' order by nome_ws"; 
 	return geraXmlRSS($locaplic,$sql,"Lista de sub-grupos");
 }
 /*
@@ -202,8 +220,9 @@ RSS
 */
 function geraRSSgrupos($locaplic)
 {
+	global $esquemaadmin;
 	$sql = "select n1.id_n1 as id_ws, g.nome_grupo as nome_ws,'rsstemasraiz.php?nivel=1&id='||n1.id_n1 as desc_ws,'rsssubgrupos.php?id='||n1.id_n1 as link_ws,'' as autor_ws "; 
-	$sql .= "from i3geoadmin_n1 as n1,i3geoadmin_grupos as g ";
+	$sql .= "from ".$esquemaadmin."i3geoadmin_n1 as n1,".$esquemaadmin."i3geoadmin_grupos as g ";
 	$sql .= "where g.id_grupo = n1.id_grupo and n1.n1_perfil = '' group by nome_ws,desc_ws,link_ws,autor_ws order by nome_ws";
 	return geraXmlRSS($locaplic,$sql,"Lista de grupos");
 }
@@ -222,7 +241,8 @@ RSS
 */
 function geraXmlDownload($locaplic)
 {
-	$sql = "select * from i3geoadmin_ws where tipo_ws = 'DOWNLOAD' and nome_ws <> ''";
+	global $esquemaadmin;
+	$sql = "select * from ".$esquemaadmin."i3geoadmin_ws where tipo_ws = 'DOWNLOAD' and nome_ws <> ''";
 	return geraXmlRSS($locaplic,$sql,"Enderecos para download");
 }
 /*
@@ -240,7 +260,8 @@ RSS
 */
 function geraXmlWS($locaplic)
 {
-	$sql = "select * from i3geoadmin_ws where tipo_ws = 'WS' and nome_ws <> ''";
+	global $esquemaadmin;
+	$sql = "select * from ".$esquemaadmin."i3geoadmin_ws where tipo_ws = 'WS' and nome_ws <> ''";
 	return geraXmlRSS($locaplic,$sql,"Web services");
 }
 /*
@@ -258,7 +279,8 @@ RSS
 */
 function geraXmlKmlrss($locaplic)
 {
-	$sql = "select * from i3geoadmin_ws where tipo_ws = 'KML' and nome_ws <> ''";
+	global $esquemaadmin;
+	$sql = "select * from ".$esquemaadmin."i3geoadmin_ws where tipo_ws = 'KML' and nome_ws <> ''";
 	return geraXmlRSS($locaplic,$sql,"Web services");
 }
 /*
@@ -276,7 +298,8 @@ RSS
 */
 function geraXmlWMS($locaplic)
 {
-	$sql = "select * from i3geoadmin_ws where tipo_ws = 'WMS' and nome_ws <> '' order by nome_ws";
+	global $esquemaadmin;
+	$sql = "select * from ".$esquemaadmin."i3geoadmin_ws where tipo_ws = 'WMS' and nome_ws <> '' order by nome_ws";
 	return geraXmlRSS($locaplic,$sql,"Web services WMS-OGC");
 }
 /*
@@ -294,7 +317,8 @@ RSS
 */
 function geraXmlGeorss($locaplic)
 {
-	$sql = "select * from i3geoadmin_ws where tipo_ws = 'GEORSS' and nome_ws <> ''";
+	global $esquemaadmin;
+	$sql = "select * from ".$esquemaadmin."i3geoadmin_ws where tipo_ws = 'GEORSS' and nome_ws <> ''";
 	return geraXmlRSS($locaplic,$sql,"Georss");
 }
 /*
@@ -312,11 +336,12 @@ RSS
 */
 function geraRSStemasDownload($locaplic)
 {
+	global $esquemaadmin;
 	$protocolo = explode("/",$_SERVER['SERVER_PROTOCOL']);
 	$url = strtolower($protocolo[0])."://".$_SERVER['HTTP_HOST'].(str_replace("/admin/rsstemasdownload.php","",$_SERVER['PHP_SELF']));
 	$sql = "select '".$url."/datadownload.htm?'||codigo_tema as link_ws, g.nome_grupo||' -> '||sg.nome_subgrupo||' -> '||nome_tema as nome_ws, desc_tema as desc_ws, link_tema as autor_ws ";
 	$sql .= "
-		from i3geoadmin_temas as t,i3geoadmin_n3 as n3, i3geoadmin_n2 as n2, i3geoadmin_n1 as n1, i3geoadmin_grupos as g, i3geoadmin_subgrupos as sg
+		from ".$esquemaadmin."i3geoadmin_temas as t,".$esquemaadmin."i3geoadmin_n3 as n3, ".$esquemaadmin."i3geoadmin_n2 as n2, ".$esquemaadmin."i3geoadmin_n1 as n1, ".$esquemaadmin."i3geoadmin_grupos as g, ".$esquemaadmin."i3geoadmin_subgrupos as sg
 		where 
 		t.id_tema = n3.id_tema 
 		and n3.id_n2 = n2.id_n2 
@@ -347,11 +372,12 @@ RSS
 */
 function geraRSStemasKml($locaplic)
 {
+	global $esquemaadmin;
 	$protocolo = explode("/",$_SERVER['SERVER_PROTOCOL']);
 	$url = strtolower($protocolo[0])."://".$_SERVER['HTTP_HOST'].(str_replace("/admin/rsstemaskml.php","",$_SERVER['PHP_SELF']));
 	$sql = "select '".$url."/pacotes/kmlmapserver/kmlservice.php?request=kml&map='||codigo_tema||'&typename='||codigo_tema as link_ws, g.nome_grupo||' -> '||sg.nome_subgrupo||' -> '||nome_tema as nome_ws, desc_tema as desc_ws, link_tema as autor_ws ";
 	$sql .= "
-		from i3geoadmin_temas as t,i3geoadmin_n3 as n3, i3geoadmin_n2 as n2, i3geoadmin_n1 as n1, i3geoadmin_grupos as g, i3geoadmin_subgrupos as sg
+		from ".$esquemaadmin."i3geoadmin_temas as t,".$esquemaadmin."i3geoadmin_n3 as n3, ".$esquemaadmin."i3geoadmin_n2 as n2, ".$esquemaadmin."i3geoadmin_n1 as n1, ".$esquemaadmin."i3geoadmin_grupos as g, ".$esquemaadmin."i3geoadmin_subgrupos as sg
 		where 
 		t.id_tema = n3.id_tema 
 		and n3.id_n2 = n2.id_n2 
@@ -381,11 +407,12 @@ RSS
 */
 function geraRSStemasOgc($locaplic)
 {
+	global $esquemaadmin;
 	$protocolo = explode("/",$_SERVER['SERVER_PROTOCOL']);
 	$url = strtolower($protocolo[0])."://".$_SERVER['HTTP_HOST'].(str_replace("/admin/rsstemasogc.php","",$_SERVER['PHP_SELF']));
 	$sql = "select '".$url."/ogc.php?request=getcapabilities&service=wms&tema='||codigo_tema as link_ws, g.nome_grupo||' -> '||sg.nome_subgrupo||' -> '||nome_tema as nome_ws, desc_tema as desc_ws, link_tema as autor_ws ";
 	$sql .= "
-		from i3geoadmin_temas as t,i3geoadmin_n3 as n3, i3geoadmin_n2 as n2, i3geoadmin_n1 as n1, i3geoadmin_grupos as g, i3geoadmin_subgrupos as sg
+		from ".$esquemaadmin."i3geoadmin_temas as t,".$esquemaadmin."i3geoadmin_n3 as n3, ".$esquemaadmin."i3geoadmin_n2 as n2, ".$esquemaadmin."i3geoadmin_n1 as n1, ".$esquemaadmin."i3geoadmin_grupos as g, ".$esquemaadmin."i3geoadmin_subgrupos as sg
 		where 
 		t.id_tema = n3.id_tema 
 		and n3.id_n2 = n2.id_n2 
@@ -421,6 +448,7 @@ RSS
 */
 function geraXmlRSS($locaplic,$sql,$descricao)
 {
+	global $esquemaadmin;
 	//var_dump($_SERVER);exit;
 	$dbh = "";
 	include($locaplic."/admin/php/conexao.php");
@@ -462,6 +490,7 @@ function geraXmlRSS($locaplic,$sql,$descricao)
 }
 function geraXmlAtlas($locaplic,$editores)
 {
+	global $esquemaadmin;
 	error_reporting(0);
 	$dbh = "";
 	include($locaplic."/admin/php/conexao.php");
@@ -471,7 +500,7 @@ function geraXmlAtlas($locaplic,$editores)
 	$xml = "<"."\x3F"."xml version='1.0' encoding='ISO-8859-1' "."\x3F".">";
 	$xml .= "\n<RAIZ>\n";
 	//$q = "select * from i3geoadmin_atlas";
-	$qatlas = $dbh->query("select * from i3geoadmin_atlas");
+	$qatlas = $dbh->query("select * from ".$esquemaadmin."i3geoadmin_atlas");
 	
 	$editor = verificaEditores($editores);
 	foreach($qatlas as $row)
@@ -509,6 +538,7 @@ function geraXmlAtlas($locaplic,$editores)
 }
 function geraXmlIdentifica($perfil,$locaplic,$editores)
 {
+	global $esquemaadmin;
 	$editor = verificaEditores($editores);
 	if (!isset($perfil)){$perfil = "";}
 	$perfil = str_replace(","," ",$perfil);
@@ -520,7 +550,7 @@ function geraXmlIdentifica($perfil,$locaplic,$editores)
 	else
 	$xml = "<"."\x3F"."xml version='1.0' encoding='ISO-8859-1' "."\x3F".">";
 	$xml .= "\n<SISTEMAS>\n";
-	$q = "select * from i3geoadmin_identifica ";
+	$q = "select * from ".$esquemaadmin."i3geoadmin_identifica ";
 	$qi = $dbh->query($q);
 	foreach($qi as $row)
 	{
@@ -539,7 +569,7 @@ function geraXmlIdentifica($perfil,$locaplic,$editores)
 			if($target == ""){$target = "_self";}
 			$xml .= "  <TARGET>".$target."</TARGET>\n";
 			$xml .= " </FUNCAO>\n";
-		}
+		}error_reporting(E_ALL);
 	}
 	$xml .= "</SISTEMAS>\n";
 	$dbh = null;
@@ -548,6 +578,7 @@ function geraXmlIdentifica($perfil,$locaplic,$editores)
 }
 function geraXmlMapas($perfil,$locaplic,$editores)
 {
+	global $esquemaadmin;
 	if (!isset($perfil)){$perfil = "";}
 	$perfil = str_replace(","," ",$perfil);
 	$perfil = explode(" ",$perfil);
@@ -558,7 +589,7 @@ function geraXmlMapas($perfil,$locaplic,$editores)
 	else
 	$xml = "<"."\x3F"."xml version='1.0' encoding='ISO-8859-1' "."\x3F".">";
 	$xml .= "\n<MAPAS>\n";
-	$q = "select * from i3geoadmin_mapas";
+	$q = "select * from ".$esquemaadmin."i3geoadmin_mapas";
 	$q = $dbh->query($q);
 	$editor = verificaEditores($editores);
 	foreach($q as $row)
@@ -605,6 +636,7 @@ function geraXmlMapas($perfil,$locaplic,$editores)
 //
 function geraXmlMenutemas($perfil,$id_menu,$tipo,$locaplic)
 {
+	global $esquemaadmin;
 	$dbh = "";
 	include($locaplic."/admin/php/conexao.php");
 	if (!isset($perfil)){$perfil = "";}
@@ -622,10 +654,10 @@ function geraXmlMenutemas($perfil,$id_menu,$tipo,$locaplic)
 	//
 	//pega os temas na raiz
 	//
-	$q = "select nome_tema,codigo_tema,desc_tema,link_tema,tipoa_tema,tags_tema,kml_tema,ogc_tema,download_tema,r.perfil as perfil from i3geoadmin_raiz as r,i3geoadmin_temas as temas where r.id_nivel = 0 and r.id_tema = temas.id_tema and r.id_menu = $id_menu ";
+	$q = "select nome_tema,codigo_tema,desc_tema,link_tema,tipoa_tema,tags_tema,kml_tema,ogc_tema,download_tema,r.perfil as perfil from ".$esquemaadmin."i3geoadmin_raiz as r,".$esquemaadmin."i3geoadmin_temas as temas where r.id_nivel = 0 and r.id_tema = temas.id_tema and r.id_menu = $id_menu ";
 	$qtemasraiz = $dbh->query($q);
 	$xml = geraXmlMenutemas_notema($qtemasraiz,$xml,$perfil);
-	$q = "select nome_grupo,desc_grupo,n1.id_grupo,n1.id_n1,n1.n1_perfil as perfil from i3geoadmin_n1 as n1,i3geoadmin_grupos as grupos where n1.id_menu = $id_menu and n1.id_grupo = grupos.id_grupo ";
+	$q = "select nome_grupo,desc_grupo,n1.id_grupo,n1.id_n1,n1.n1_perfil as perfil from ".$esquemaadmin."i3geoadmin_n1 as n1,".$esquemaadmin."i3geoadmin_grupos as grupos where n1.id_menu = $id_menu and n1.id_grupo = grupos.id_grupo ";
 	$qgrupos = $dbh->query($q);
 	foreach($qgrupos as $row)
 	{
@@ -644,7 +676,7 @@ function geraXmlMenutemas($perfil,$id_menu,$tipo,$locaplic)
 			//
 			//pega temas na raiz
 			//
-			$q = "select nome_tema,codigo_tema,desc_tema,link_tema,tipoa_tema,tags_tema,kml_tema,ogc_tema,download_tema,r.perfil as perfil from i3geoadmin_raiz as r,i3geoadmin_temas as temas where r.nivel = 1 and r.id_nivel = ".$row["id_n1"]." and r.id_tema = temas.id_tema and r.id_menu = $id_menu ";
+			$q = "select nome_tema,codigo_tema,desc_tema,link_tema,tipoa_tema,tags_tema,kml_tema,ogc_tema,download_tema,r.perfil as perfil from ".$esquemaadmin."i3geoadmin_raiz as r,".$esquemaadmin."i3geoadmin_temas as temas where r.nivel = 1 and r.id_nivel = ".$row["id_n1"]." and r.id_tema = temas.id_tema and r.id_menu = $id_menu ";
 			$qtemasraiz = $dbh->query($q);
 			$xml = geraXmlMenutemas_notema($qtemasraiz,$xml,$perfil);
 			if(isset($tipo) && ($tipo == "subgrupos") || ($tipo == ""))
@@ -661,7 +693,8 @@ function geraXmlMenutemas($perfil,$id_menu,$tipo,$locaplic)
 }
 function geraXmlMenutemas_pegasubgrupos($id_n1,$xml,$dbh,$tipo,$perfil)
 {
-	$q = "select subgrupos.id_subgrupo,nome_subgrupo,id_n2,n2.n2_perfil as perfil from i3geoadmin_n2 as n2,i3geoadmin_subgrupos as subgrupos where n2.id_n1 = $id_n1 and n2.id_subgrupo = subgrupos.id_subgrupo ";
+	global $esquemaadmin;
+	$q = "select subgrupos.id_subgrupo,nome_subgrupo,id_n2,n2.n2_perfil as perfil from ".$esquemaadmin."i3geoadmin_n2 as n2,".$esquemaadmin."i3geoadmin_subgrupos as subgrupos where n2.id_n1 = $id_n1 and n2.id_subgrupo = subgrupos.id_subgrupo ";
 	//echo $q;exit;
 	$qsgrupos = $dbh->query($q);
 	foreach($qsgrupos as $row)
@@ -687,13 +720,15 @@ function geraXmlMenutemas_pegasubgrupos($id_n1,$xml,$dbh,$tipo,$perfil)
 }
 function geraXmlMenutemas_pegatemas($id_n2,$xml,$dbh,$perfil)
 {
-	$q = "select nome_tema,codigo_tema,desc_tema,link_tema,tipoa_tema,tags_tema,kml_tema,ogc_tema,download_tema,n3.n3_perfil as perfil from i3geoadmin_n3 as n3,i3geoadmin_temas as temas where n3.id_n2 = $id_n2 and n3.id_tema = temas.id_tema ";
+	global $esquemaadmin;
+	$q = "select nome_tema,codigo_tema,desc_tema,link_tema,tipoa_tema,tags_tema,kml_tema,ogc_tema,download_tema,n3.n3_perfil as perfil from ".$esquemaadmin."i3geoadmin_n3 as n3,".$esquemaadmin."i3geoadmin_temas as temas where n3.id_n2 = $id_n2 and n3.id_tema = temas.id_tema ";
 	$qtemas = $dbh->query($q);
 	$xml = geraXmlMenutemas_notema($qtemas,$xml,$perfil);
 	return $xml;
 }
 function geraXmlMenutemas_notema($qtemas,$xml,$perfil)
 {
+	global $esquemaadmin;
 	foreach($qtemas as $row)
 	{
 		if($row["perfil"] == "")
@@ -727,7 +762,8 @@ function geraXmlMenutemas_notema($qtemas,$xml,$perfil)
 }
 function geraXmlAtlas_pegapranchas($xml,$id_atlas,$dbh)
 {
-	$q = "select * from i3geoadmin_atlasp as p where p.id_atlas = $id_atlas order by ordem_prancha";
+	global $esquemaadmin;
+	$q = "select * from ".$esquemaadmin."i3geoadmin_atlasp as p where p.id_atlas = $id_atlas order by ordem_prancha";
 	$qpranchas = $dbh->query($q);
 	foreach($qpranchas as $row)
 	{
@@ -749,7 +785,8 @@ function geraXmlAtlas_pegapranchas($xml,$id_atlas,$dbh)
 }
 function geraXmlAtlas_pegatemas($xml,$id_prancha,$dbh)
 {
-	$q = "select t.codigo_tema,t.ligado_tema from i3geoadmin_atlast as t where t.id_prancha = '$id_prancha' order by ordem_tema";
+	global $esquemaadmin;
+	$q = "select t.codigo_tema,t.ligado_tema from ".$esquemaadmin."i3geoadmin_atlast as t where t.id_prancha = '$id_prancha' order by ordem_tema";
 	//echo $q;
 	$qtemas = $dbh->query($q);
 	foreach($qtemas as $row)
@@ -763,7 +800,8 @@ function geraXmlAtlas_pegatemas($xml,$id_prancha,$dbh)
 }
 function geraXmlSistemas_pegafuncoes($perfil,$xml,$id_sistema,$dbh)
 {
-	$q = "select * from i3geoadmin_sistemasf where id_sistema = '$id_sistema'";
+	global $esquemaadmin;
+	$q = "select * from ".$esquemaadmin."i3geoadmin_sistemasf where id_sistema = '$id_sistema'";
 	$qtemas = $dbh->query($q);
 	foreach($qtemas as $row)
 	{

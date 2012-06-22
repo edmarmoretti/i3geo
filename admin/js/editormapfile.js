@@ -230,11 +230,12 @@ function montaArvore()
 			var root = tree.getRoot();
 			if(letraAtual == ""){
 				var tempNode = new YAHOO.widget.TextNode('Todos', root, false);
+				tempNode.isLeaf = true;
 			}
 			else{
 				var tempNode = new YAHOO.widget.TextNode(letraAtual, root, false);
+				tempNode.isLeaf = true;
 			}
-			tempNode.isLeaf = true;
 			core_carregando("desativa");
         }
     	buildTree();

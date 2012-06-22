@@ -97,13 +97,13 @@ i3GEOF.cortina = {
 	html:function(){
 		var ins = "<div id='i3GEOcortinaTemasDiv' style='text-align:left;font-size:11px'></div>";
 		if(navm){
-			ins += '<div id="slider-bg" class="yui-h-slider" style="background: url('+i3GEO.configura.locaplic+'/pacotes/yui270/build/slider/assets/bg-h.gif) no-repeat -108px 0;height: 28px;width: 210px;" tabindex="-1" title="Slider">' +
-				'<div id="slider-thumb" class="yui-slider-thumb"><img src="'+i3GEO.configura.locaplic+'/pacotes/yui270/build/slider/assets/thumb-n.gif"></div>' +
+			ins += '<div id="slider-bg" class="yui-h-slider" style="background: url('+i3GEO.configura.locaplic+'/pacotes/yui290/build/slider/assets/bg-h.gif) no-repeat -108px 0;height: 28px;width: 210px;" tabindex="-1" title="Slider">' +
+				'<div id="slider-thumb" class="yui-slider-thumb"><img src="'+i3GEO.configura.locaplic+'/pacotes/yui290/build/slider/assets/thumb-n.gif"></div>' +
 				'</div>';
 		}
 		else{
-			ins += '<div id="slider-bg" class="yui-h-slider" style="background: url('+i3GEO.configura.locaplic+'/pacotes/yui270/build/slider/assets/bg-h.gif) no-repeat 5px 0;height: 28px;width: 210px;" tabindex="-1" title="Slider">' +
-				'<div id="slider-thumb" class="yui-slider-thumb"><img src="'+i3GEO.configura.locaplic+'/pacotes/yui270/build/slider/assets/thumb-n.gif"></div>' +
+			ins += '<div id="slider-bg" class="yui-h-slider" style="background: url('+i3GEO.configura.locaplic+'/pacotes/yui290/build/slider/assets/bg-h.gif) no-repeat 5px 0;height: 28px;width: 210px;" tabindex="-1" title="Slider">' +
+				'<div id="slider-thumb" class="yui-slider-thumb"><img src="'+i3GEO.configura.locaplic+'/pacotes/yui290/build/slider/assets/thumb-n.gif"></div>' +
 				'</div>';
 		}
 		return ins;
@@ -208,7 +208,7 @@ i3GEOF.cortina = {
 		});
 		if(navm){
 			$i("slider-bg").style.left = "-100px";
-			$i("i3GEOF.cortina_corpo").style.background = "url("+i3GEO.configura.locaplic+"/pacotes/yui270/build/slider/assets/bg-h.gif) white no-repeat 10px 0px";
+			$i("i3GEOF.cortina_corpo").style.background = "url("+i3GEO.configura.locaplic+"/pacotes/yui290/build/slider/assets/bg-h.gif) white no-repeat 10px 0px";
 		}
 	},
 	/*

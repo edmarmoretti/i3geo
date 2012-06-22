@@ -151,10 +151,14 @@ $tabelas = array(
 	"i3geoadmin_acessostema"=>"codigo_tema,nacessos,dia,mes,ano"
 );
 include_once("admin/php/conexao.php");
+if(!empty($esquemaadmin)){
+	$esquemaadmin = $esquemaadmin.".";
+}
+
 foreach(array_keys($tabelas) as $tabela)
 {
 	echo "     Tabela: <b>".$tabela."</b>";
-	$sql = "select * from $tabela ";
+	$sql = "select * from ".$esquemaadmin.$tabela;
 	$q = $dbh->query($sql,PDO::FETCH_ASSOC);
 	if($q !== false)
 	{

@@ -27,7 +27,6 @@ Licenca:
 
 GPL2
 
-
 i3Geo Interface Integrada de Ferramentas de Geoprocessamento para Internet
 
 Direitos Autorais Reservados (c) 2006 Ministério do Meio Ambiente Brasil
@@ -54,20 +53,7 @@ error_reporting(0);
 if(!isset($locaplic))
 {
 	$locaplic = "";
-	if(file_exists("../../../ms_configura.php"))
-	{include("../../../ms_configura.php");}
-	else
-	{
-		if(file_exists("../../ms_configura.php"))
-		{include("../../ms_configura.php");}
-		else
-		{
-			if(file_exists("../ms_configura.php"))
-			{include("../ms_configura.php");}
-			else
-			include("ms_configura.php");
-		}	
-	}
+	include(__DIR__."/../ms_configura.php");
 }
 include_once($locaplic."/classesphp/pega_variaveis.php");
 include_once($locaplic."/admin/php/admin.php");
@@ -76,7 +62,7 @@ if(!isset($tema))
 $editor = verificaEditores($editores);
 $dbh = "";
 include($locaplic."/admin/php/conexao.php");
-$r = pegaDados("select * from i3geoadmin_temas where codigo_tema = '$tema'");
+$r = pegaDados("select * from ".$esquemaadmin."i3geoadmin_temas where codigo_tema = '$tema'");
 error_reporting(0);
 $link = $r[0]["link_tema"];
 if($link == "")

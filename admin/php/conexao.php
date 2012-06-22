@@ -63,7 +63,8 @@ else
 }
 if(!isset($conexaoadmin))
 {$conexaoadmin = "";}
-
+if(!isset($conexaoadmin))
+{$esquemaadmin = "";}
 //
 //indica se deve ser feita a conversão para UTF8 ao gravar os dados
 //

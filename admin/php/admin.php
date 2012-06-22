@@ -1,10 +1,10 @@
 <?php
 /*
-Title: Funções de uso geral
+Title: FunÃ§Ãµes de uso geral
 
-Funções utilizadas por outros programas do sistema de administração.
+FunÃ§Ãµes utilizadas por outros programas do sistema de administraÃ§Ã£o.
 
-No início do programa é feita a inclusão do i3geo/ms_configura.php e i3geo/classesphp/funcoes_gerais.php
+No inÃ­cio do programa Ã© feita a inclusÃ£o do i3geo/ms_configura.php e i3geo/classesphp/funcoes_gerais.php
 
 Licenca:
 
@@ -12,20 +12,20 @@ GPL2
 
 i3Geo Interface Integrada de Ferramentas de Geoprocessamento para Internet
 
-Direitos Autorais Reservados (c) 2006 Ministério do Meio Ambiente Brasil
+Direitos Autorais Reservados (c) 2006 MinistÃ©rio do Meio Ambiente Brasil
 Desenvolvedor: Edmar Moretti edmar.moretti@mma.gov.br
 
-Este programa é software livre; você pode redistribuí-lo
-e/ou modificá-lo sob os termos da Licença Pública Geral
+Este programa Ã© software livre; vocÃª pode redistribuÃ­-lo
+e/ou modificÃ¡-lo sob os termos da LicenÃ§a PÃºblica Geral
 GNU conforme publicada pela Free Software Foundation;
 
-Este programa é distribuído na expectativa de que seja útil,
-porém, SEM NENHUMA GARANTIA; nem mesmo a garantia implícita
-de COMERCIABILIDADE OU ADEQUAÇÃO A UMA FINALIDADE ESPECÍFICA.
-Consulte a Licença Pública Geral do GNU para mais detalhes.
-Você deve ter recebido uma cópia da Licença Pública Geral do
-GNU junto com este programa; se não, escreva para a
-Free Software Foundation, Inc., no endereço
+Este programa Ã© distribuÃ­do na expectativa de que seja Ãºtil,
+porÃ©m, SEM NENHUMA GARANTIA; nem mesmo a garantia implÃ­cita
+de COMERCIABILIDADE OU ADEQUAÃ‡ÃƒO A UMA FINALIDADE ESPECÃFICA.
+Consulte a LicenÃ§a PÃºblica Geral do GNU para mais detalhes.
+VocÃª deve ter recebido uma cÃ³pia da LicenÃ§a PÃºblica Geral do
+GNU junto com este programa; se nÃ£o, escreva para a
+Free Software Foundation, Inc., no endereÃ§o
 59 Temple Street, Suite 330, Boston, MA 02111-1307 USA.
 
 Arquivo:
@@ -36,20 +36,7 @@ i3geo/admin/php/admin.php
 if(!isset($locaplic))
 {
 	$locaplic = "";
-	if(file_exists("../../../ms_configura.php"))
-	{include("../../../ms_configura.php");}
-	else
-	{
-		if(file_exists("../../ms_configura.php"))
-		{include("../../ms_configura.php");}
-		else
-		{
-			if(file_exists("../ms_configura.php"))
-			{include("../ms_configura.php");}
-			else
-			{include("ms_configura.php");}
-		}	
-	}
+	include(__DIR__."/../../ms_configura.php");
 }
 include_once($locaplic."/classesphp/pega_variaveis.php");
 error_reporting(0);
@@ -60,6 +47,14 @@ include_once ($locaplic."/classesphp/carrega_ext.php");
 include_once ($locaplic."/classesphp/funcoes_gerais.php");
 
 $mapfile = mapfilebase($base,$locaplic);
+//
+//processa a variÃ¡vel $esquemaadmin definida em ms_configura.php
+//essa variÃ¡vel precisa ter um . no final quando nÃ£o for vazia, evitando erros na inclusÃ£o dentro dos SQLs
+//
+if(!empty($esquemaadmin)){
+	$esquemaadmin = $esquemaadmin.".";
+}
+
 /*
 Function: retornaJSON
 
@@ -71,7 +66,7 @@ obj {array}
 
 Retorno:
 
-Imprime na saída a string JSON
+Imprime na saÃ­da a string JSON
 */
 function retornaJSON($obj)
 {
@@ -111,9 +106,9 @@ Verifica se o resultado de um SQL retoena mais de um registro
 
 Parametros:
 
-sql {string} - sql que será executado
+sql {string} - sql que serÃ¡ executado
 
-dbh {PDO} - objeto PDO de conexão com o banco
+dbh {PDO} - objeto PDO de conexÃ£o com o banco
 
 Retorno:
 
@@ -130,9 +125,9 @@ function verificaDuplicados($sql,$dbh)
 /*
 Function: exclui
 
-Exlcui um registro de uma tabela do banco de dados de administração
+Exlcui um registro de uma tabela do banco de dados de administraÃ§Ã£o
 
-Utiliza variáveis globais para fazer a consulta ao banco
+Utiliza variÃ¡veis globais para fazer a consulta ao banco
 
 Globals:
 
@@ -144,10 +139,11 @@ id - valor
 */
 function exclui()
 {
-	global $tabela,$coluna,$id;
+	global $tabela,$coluna,$id,$esquemaadmin;
 	try 
 	{
     	include("conexao.php");
+    	$tabela = $esquemaadmin.$tabela;
     	$dbhw->query("DELETE from $tabela WHERE $coluna = $id");
     	$dbhw = null;
     	$dbh = null;
@@ -165,9 +161,9 @@ Executa um sql de busca de dados
 
 Parametros:
 
-sql {string} - sql que será executado
+sql {string} - sql que serÃ¡ executado
 
-locaplic {string} - endereço do i3Geo no sistema de arquivos
+locaplic {string} - endereÃ§o do i3Geo no sistema de arquivos
 
 Retorno:
 
@@ -175,7 +171,9 @@ Array originada de fetchAll
 */
 function pegaDados($sql,$locaplic="")
 {
-   	$resultado = array();
+	$resultado = array();    	if(!empty($esquemaadmin)){
+    		$esquemaadmin = $esquemaadmin.".";
+    	}
    	if($locaplic == "")
    	include("conexao.php");
    	else
@@ -202,11 +200,11 @@ function pegaDados($sql,$locaplic="")
 /*
 Function: verificaFilhos
 
-Verifica se o pai tem filhos nos componentes hierárquicos do banco de administração
+Verifica se o pai tem filhos nos componentes hierÃ¡rquicos do banco de administraÃ§Ã£o
 
-Por exemplo, pode-se verificar se um grupo possuí subgrupos, indicando-se como tabela i3geoadmin_grupos e o id do grupo
+Por exemplo, pode-se verificar se um grupo possuÃ­ subgrupos, indicando-se como tabela i3geoadmin_grupos e o id do grupo
 
-Variáveis globais:
+VariÃ¡veis globais:
 
 tabela {string} - tabela do banco de dados
 
@@ -218,82 +216,82 @@ Retorno:
 */
 function verificaFilhos()
 {
-	global $tabela,$id;
+	global $tabela,$id,$esquemaadmin;
 	try 
 	{
     	$res = false;
     	if($tabela == "i3geoadmin_n2")
     	{
-    		$r = pegaDados("select * from i3geoadmin_n3 where id_n2=$id");
+    		$r = pegaDados("select * from ".$esquemaadmin."i3geoadmin_n3 where id_n2=$id");
     		if(count($r) > 0)
     		$res = true;
     	}
     	if($tabela == "i3geoadmin_n1")
     	{
-    		$r = pegaDados("select * from i3geoadmin_n2 where id_n1=$id");
+    		$r = pegaDados("select * from ".$esquemaadmin."i3geoadmin_n2 where id_n1=$id");
     		if(count($r) > 0)
     		$res = true;
     	}
     	if($tabela == "i3geoadmin_menus")
     	{
-    		$r = pegaDados("select * from i3geoadmin_n1 where id_menu=$id");
+    		$r = pegaDados("select * from ".$esquemaadmin."i3geoadmin_n1 where id_menu=$id");
     		if(count($r) > 0)
     		$res = true;
     	}
     	if($tabela == "i3geoadmin_grupos")
     	{
-    		$r = pegaDados("select n1.id_grupo from i3geoadmin_n1 as n1, i3geoadmin_n2 as n2 where n1.id_n1 = n2.id_n1 and n1.id_grupo = '$id'");
+    		$r = pegaDados("select n1.id_grupo from ".$esquemaadmin."i3geoadmin_n1 as n1, i3geoadmin_n2 as n2 where n1.id_n1 = n2.id_n1 and n1.id_grupo = '$id'");
     		if(count($r) > 0)
     		$res = true;
     	}
     	if($tabela == "i3geoadmin_subgrupos")
     	{
-    		$r = pegaDados("select n2.id_subgrupo from i3geoadmin_n3 as n3, i3geoadmin_n2 as n2 where n2.id_n2 = n3.id_n3 and n2.id_subgrupo = '$id'");
+    		$r = pegaDados("select n2.id_subgrupo from ".$esquemaadmin."i3geoadmin_n3 as n3, i3geoadmin_n2 as n2 where n2.id_n2 = n3.id_n3 and n2.id_subgrupo = '$id'");
     		if(count($r) > 0)
     		$res = true;
     	}
     	if($tabela == "i3geoadmin_temas")
     	{
-    		$r = pegaDados("select id_tema from i3geoadmin_n3 where id_tema = '$id'");
+    		$r = pegaDados("select id_tema from ".$esquemaadmin."i3geoadmin_n3 where id_tema = '$id'");
     		if(count($r) > 0)
     		$res = true;
     	}
     	if($tabela == "i3geoadmin_sistemas")
     	{
-    		$r = pegaDados("SELECT id_sistema from i3geoadmin_sistemasf where id_sistema ='$id'");
+    		$r = pegaDados("SELECT id_sistema from ".$esquemaadmin."i3geoadmin_sistemasf where id_sistema ='$id'");
     		if(count($r) > 0)
     		$res = true;
     	}
     	if($tabela == "i3geoadmin_atlas")
     	{
-    		$r = pegaDados("SELECT id_atlas from i3geoadmin_atlasp where id_atlas ='$id'");
+    		$r = pegaDados("SELECT id_atlas from ".$esquemaadmin."i3geoadmin_atlasp where id_atlas ='$id'");
     		if(count($r) > 0)
     		$res = true;
     	}
     	if($tabela == "i3geoadmin_atlasp")
     	{
-    		$r = pegaDados("SELECT id_prancha from i3geoadmin_atlast where id_prancha ='$id'");
+    		$r = pegaDados("SELECT id_prancha from ".$esquemaadmin."i3geoadmin_atlast where id_prancha ='$id'");
     		if(count($r) > 0)
     		$res = true;
     	}
     	if($tabela == "i3geoadmin_n2")
     	{
-    		$r = pegaDados("SELECT id_n3 from i3geoadmin_n3 where id_n2 ='$id'");
+    		$r = pegaDados("SELECT id_n3 from ".$esquemaadmin."i3geoadmin_n3 where id_n2 ='$id'");
     		if(count($r) > 0)
     		$res = true;
     	}
     	if($tabela == "i3geoadmin_n1")
     	{
-    		$r = pegaDados("SELECT id_n2 from i3geoadmin_n2 where id_n1 ='$id'");
+    		$r = pegaDados("SELECT id_n2 from ".$esquemaadmin."i3geoadmin_n2 where id_n1 ='$id'");
     		if(count($r) > 0)
     		$res = true;
-    		$r = pegaDados("SELECT id_raiz from i3geoadmin_raiz where nivel='1' and id_nivel ='$id'");
+    		$r = pegaDados("SELECT id_raiz from ".$esquemaadmin."i3geoadmin_raiz where nivel='1' and id_nivel ='$id'");
     		if(count($r) > 0)
     		$res = true;
     	}
     	if($tabela == "mapfiles")
     	{
-    		$r = pegaDados("SELECT id_tema from i3geoadmin_n3 where id_tema ='$id'");
+    		$r = pegaDados("SELECT id_tema from ".$esquemaadmin."i3geoadmin_n3 where id_tema ='$id'");
     		if(count($r) > 0)
    			$res = true;
     	}
@@ -307,7 +305,7 @@ function verificaFilhos()
 /*
 Function: resolveAcentos
 
-Converte uma string para uma codificação de caracteres determinada
+Converte uma string para uma codificaÃ§Ã£o de caracteres determinada
 
 Parametros:
 

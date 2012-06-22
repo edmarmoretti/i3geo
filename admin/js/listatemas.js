@@ -123,7 +123,7 @@ function atualizaMiniatura(){
   			i.style.display = none;
   			i.onLoad = function(){
   				$i("imagemMiniatura").style.display = "block";
-  			}
+  			};
   			try
   			{i.src = "../../temas/miniaturas/"+tema+".map.grande.png";}
   			catch(e){
@@ -134,7 +134,7 @@ function atualizaMiniatura(){
   		failure:core_handleFailure,
   		argument: { foo:"foo", bar:"bar" }
 	}; 
-	core_makeRequest(sUrl,callback,"GET")	
+	core_makeRequest(sUrl,callback,"GET");
 }
 function gravaDadosTema(id)
 {

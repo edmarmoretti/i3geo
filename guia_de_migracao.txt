@@ -16,7 +16,7 @@ Para a versão 4.7
 - Remoção da pasta i3geo/pacotes/jsts
 - Remoção da pasta i3geo/pacotes/jsobjects
 - Remoção dos arquivos js da raiz de i3geo/ferramentas
-
+- Os arquivos javascript das ferramentas foram renomeados, removendo-se a extensão .php
 
 -------------------------------------------------------------------------------------------------
 Para a versão 4.6

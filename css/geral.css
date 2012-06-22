@@ -199,7 +199,7 @@ h1 {padding:.25em .5em;background-color:#ccc;}
      margin: 0; 
      padding: 0; 
      z-index: 3000; 
-     background: url(../pacotes/yui270/build/container/img/corner_resize.gif) left bottom no-repeat;
+     background: url(../pacotes/yui290/build/container/img/corner_resize.gif) left bottom no-repeat;
      cursor: se-resize;
  }
 #googlemapsdiv {

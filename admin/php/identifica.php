@@ -65,9 +65,9 @@ switch (strtoupper($funcao))
 	*/	
 	case "PEGAFUNCOES":
 		if(isset($id_i) && $id_i != "")
-		{$dados = pegaDados("SELECT * from i3geoadmin_identifica where id_i = $id_i ");}
+		{$dados = pegaDados("SELECT * from ".$esquemaadmin."i3geoadmin_identifica where id_i = $id_i ");}
 		else
-		{$dados = pegaDados('SELECT * from i3geoadmin_identifica');}
+		{$dados = pegaDados('SELECT * from ".$esquemaadmin."i3geoadmin_identifica');}
 		retornaJSON($dados);
 		exit;
 	break;
@@ -96,7 +96,7 @@ switch (strtoupper($funcao))
 		if(verificaEditores($editores) == "nao")
 		{echo "Vc nao e um editor cadastrado. Apenas os editores definidos em i3geo/ms_configura.php podem acessar o sistema de administracao.";exit;}
 		$novo = alterarFuncoes();
-		$sql = "SELECT * from i3geoadmin_identifica WHERE id_i = '".$novo."'";
+		$sql = "SELECT * from ".$esquemaadmin."i3geoadmin_identifica WHERE id_i = '".$novo."'";
 		retornaJSON(pegaDados($sql));
 		exit;
 	break;
@@ -132,7 +132,7 @@ Altera o registro de um WS
 */
 function alterarFuncoes()
 {
-	global $id_i,$abrir_i,$nome_i,$target_i,$publicado_i;
+	global $id_i,$abrir_i,$nome_i,$target_i,$publicado_i,$esquemaadmin;
 	try 
 	{
     	//$nome_i = mb_convert_encoding($nome_i,"UTF-8","ISO-8859-1");
@@ -143,17 +143,17 @@ function alterarFuncoes()
 		}
     	if($id_i != "")
     	{
-    		$dbhw->query("UPDATE i3geoadmin_identifica SET publicado_i = '$publicado_i',nome_i = '$nome_i',abrir_i = '$abrir_i', target_i = '$target_i' WHERE id_i = $id_i");
+    		$dbhw->query("UPDATE ".$esquemaadmin."i3geoadmin_identifica SET publicado_i = '$publicado_i',nome_i = '$nome_i',abrir_i = '$abrir_i', target_i = '$target_i' WHERE id_i = $id_i");
     		$retorna = $id_i;
     	}
     	else
     	{
     		$idtemp = (rand (9000,10000)) * -1;
-			$dbhw->query("INSERT INTO i3geoadmin_identifica (publicado_i,nome_i,abrir_i,target_i) VALUES ('','$idtemp','','')");
-			$id_i = $dbh->query("SELECT id_i FROM i3geoadmin_identifica WHERE nome_i = '$idtemp'");
+			$dbhw->query("INSERT INTO ".$esquemaadmin."i3geoadmin_identifica (publicado_i,nome_i,abrir_i,target_i) VALUES ('','$idtemp','','')");
+			$id_i = $dbh->query("SELECT id_i FROM ".$esquemaadmin."i3geoadmin_identifica WHERE nome_i = '$idtemp'");
 			$id_i = $id_i->fetchAll();
 			$id_i = $id_i[0]['id_i'];
-			$dbhw->query("UPDATE i3geoadmin_identifica SET nome_i = '' WHERE id_i = $id AND nome_i = '$idtemp'");
+			$dbhw->query("UPDATE ".$esquemaadmin."i3geoadmin_identifica SET nome_i = '' WHERE id_i = $id AND nome_i = '$idtemp'");
 			$retorna = $id_i;
     	}
     	$dbhw = null;
@@ -167,11 +167,11 @@ function alterarFuncoes()
 }
 function excluirFuncoes()
 {
-	global $id;
+	global $id,$esquemaadmin;
 	try 
 	{
     	include("conexao.php");
-    	$dbhw->query("DELETE from i3geoadmin_identifica WHERE id_i = $id");
+    	$dbhw->query("DELETE from ".$esquemaadmin."i3geoadmin_identifica WHERE id_i = $id");
     	$dbhw = null;
     	$dbh = null;
     	return "ok";
@@ -183,7 +183,7 @@ function excluirFuncoes()
 }
 function importarXmlI()
 {
-	global $xml;
+	global $xml,$esquemaadmin;
 	if(!file_exists($xml))
 	{return "<br><b>Arquivo $xml n&atilde;o encontrado";}
 	include_once("../../classesphp/funcoes_gerais.php");
@@ -193,7 +193,7 @@ function importarXmlI()
 	//importa os grupos
 	//
 	$wsExistentes = array();
-	$q = $dbh->query("select * from i3geoadmin_identifica");
+	$q = $dbh->query("select * from ".$esquemaadmin."i3geoadmin_identifica");
 	$resultado = $q->fetchAll();
 	foreach($resultado as $r)
 	{$iExistentes[$r["nome_i"]] = 0;}
@@ -207,7 +207,7 @@ function importarXmlI()
 		$target_i = ixml($item,"TARGET");
 		$abrir_i = ixml($item,"ABRIR");
 		if(!isset($iExistentes[$nome_i]))
-		$dbhw->query("INSERT INTO i3geoadmin_identifica (publicado_i,nome_i,target_i,abrir_i) VALUES ('','$nome_i','$target_i','$abrir_i')");
+		$dbhw->query("INSERT INTO ".$esquemaadmin."i3geoadmin_identifica (publicado_i,nome_i,target_i,abrir_i) VALUES ('','$nome_i','$target_i','$abrir_i')");
 		$iExistentes[$nome_i] = 0;
 	}
 	$dbhw = null;

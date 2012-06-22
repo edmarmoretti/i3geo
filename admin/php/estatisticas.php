@@ -47,11 +47,11 @@ i3geo/admin/php/estatisticas.php
 
 */
 include_once("admin.php");
-$totaltemas = count(pegaDados("select * from i3geoadmin_temas"));
-$temasvalidos = pegaDados("select codigo_tema,nome_tema,download_tema,kml_tema,ogc_tema,link_tema,tags_tema from i3geoadmin_temas where codigo_tema <> ''");
-$temasassocsubgrupos = pegaDados("select id_tema from i3geoadmin_n3 group by id_tema");
-$nacessostema = pegaDados("select b.nome_tema,sum(a.nacessos) as soma,a.codigo_tema from i3geoadmin_acessostema as a,i3geoadmin_temas as b where a.codigo_tema = b.codigo_tema and a.nacessos > 0 group by a.codigo_tema,b.nome_tema");
-$ntags = pegaDados("select nome from i3geoadmin_tags");
+$totaltemas = count(pegaDados("select * from ".$esquemaadmin."i3geoadmin_temas"));
+$temasvalidos = pegaDados("select codigo_tema,nome_tema,download_tema,kml_tema,ogc_tema,link_tema,tags_tema from ".$esquemaadmin."i3geoadmin_temas where codigo_tema <> ''");
+$temasassocsubgrupos = pegaDados("select id_tema from ".$esquemaadmin."i3geoadmin_n3 group by id_tema");
+$nacessostema = pegaDados("select b.nome_tema,sum(a.nacessos) as soma,a.codigo_tema from ".$esquemaadmin."i3geoadmin_acessostema as a,i3geoadmin_temas as b where a.codigo_tema = b.codigo_tema and a.nacessos > 0 group by a.codigo_tema,b.nome_tema");
+$ntags = pegaDados("select nome from ".$esquemaadmin."i3geoadmin_tags");
 $totaltemasvalidos = count($temasvalidos);
 $codigostemas = array();
 $ncodigostemas = array();
@@ -61,9 +61,9 @@ $nkmltemas = 0;
 $nogctemas = 0;
 $nsemlinktemas = 0;
 $nsemtagstemas = 0;
-$nacessosmaiorqueum = count(pegaDados("select sum(nacessos) as soma from i3geoadmin_acessostema where nacessos > 0 group by codigo_tema"));
-$nacessosmaiorquedez = count(pegaDados("select soma from (select sum(nacessos) as soma from i3geoadmin_acessostema where nacessos > 0 group by codigo_tema) as soma where soma > 10"));
-$nacessosmaiorquecem = count(pegaDados("select soma from (select sum(nacessos) as soma from i3geoadmin_acessostema where nacessos > 0 group by codigo_tema) as soma where soma > 100"));
+$nacessosmaiorqueum = count(pegaDados("select sum(nacessos) as soma from ".$esquemaadmin."i3geoadmin_acessostema where nacessos > 0 group by codigo_tema"));
+$nacessosmaiorquedez = count(pegaDados("select soma from (select sum(nacessos) as soma from ".$esquemaadmin."i3geoadmin_acessostema where nacessos > 0 group by codigo_tema) as soma where soma > 10"));
+$nacessosmaiorquecem = count(pegaDados("select soma from (select sum(nacessos) as soma from ".$esquemaadmin."i3geoadmin_acessostema where nacessos > 0 group by codigo_tema) as soma where soma > 100"));
 $temasacessos = array();
 error_reporting(0);
 foreach($temasvalidos as $tema){

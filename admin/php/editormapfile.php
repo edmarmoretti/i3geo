@@ -217,7 +217,7 @@ switch (strtoupper($funcao))
 		if(verificaEditores($editores) == "nao")
 		{echo "Vc nao e um editor cadastrado. Apenas os editores definidos em i3geo/ms_configura.php podem acessar o sistema de administracao.";exit;}
 		//pega oid do tema
-		$dados = pegaDados("SELECT id_tema from i3geoadmin_temas WHERE codigo_tema = '".$codigoMap."'");
+		$dados = pegaDados("SELECT id_tema from ".$esquemaadmin."i3geoadmin_temas WHERE codigo_tema = '".$codigoMap."'");
 		if(count($dados) > 0)
 		{$id = $dados[0]["id_tema"];}
 		$tabela = "mapfiles";
@@ -1136,7 +1136,7 @@ function sobeDesce()
 }
 function criarNovoMap()
 {
-	global $nome,$codigo,$locaplic,$it,$en,$es;
+	global $nome,$codigo,$locaplic,$it,$en,$es,$esquemaadmin;
 	$arq = $locaplic."/temas/".$codigo.".map";
 	if(!file_exists($arq))
 	{
@@ -1169,7 +1169,7 @@ function criarNovoMap()
 			$nome = utf8_encode($nome);
 			$desc = utf8_encode($desc);
 		}		
-    	$dbhw->query("INSERT INTO i3geoadmin_temas (link_tema,kml_tema,kmz_tema,ogc_tema,download_tema,desc_tema,tipoa_tema,tags_tema,nome_tema,codigo_tema,it,es,en) VALUES ('','','', '','','','','','$nome','$codigo','$it','$es','$en')");
+    	$dbhw->query("INSERT INTO ".$esquemaadmin."i3geoadmin_temas (link_tema,kml_tema,kmz_tema,ogc_tema,download_tema,desc_tema,tipoa_tema,tags_tema,nome_tema,codigo_tema,it,es,en) VALUES ('','','', '','','','','','$nome','$codigo','$it','$es','$en')");
     	$dbh = null;
     	$dbhw = null;
 		return "ok";

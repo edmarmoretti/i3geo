@@ -552,7 +552,7 @@ font-family: Verdana, Arial, Helvetica, sans-serif;
 font-size: 9px;
 }
 .yui-skin-sam .container-close {
-background:transparent url(../pacotes/yui270/build/assets/skins/sam/sprite.png) no-repeat scroll 0 -300px;
+background:transparent url(../pacotes/yui290/build/assets/skins/sam/sprite.png) no-repeat scroll 0 -300px;
 cursor:pointer;
 height:25px;
 position:absolute;
@@ -564,7 +564,7 @@ opacity:.80;
 filter:alpha(opacity=80);
 }
 .yui-skin-sam .yui-panel .hd {
-background: url("../pacotes/yui270/build/assets/skins/sam/sprite.png") repeat-x scroll 0 -200px transparent;
+background: url("../pacotes/yui290/build/assets/skins/sam/sprite.png") repeat-x scroll 0 -200px transparent;
 color: #000000;
 font-size: 93%;
 font-weight: bold;

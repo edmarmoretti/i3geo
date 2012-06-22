@@ -65,9 +65,9 @@ switch (strtoupper($funcao))
 	*/
 	case "PEGAWS":
 		if(isset($tipows) && $tipows != "")
-		{$sql = "SELECT id_ws,nome_ws,tipo_ws from i3geoadmin_ws where tipo_ws = '".strtoupper($tipows)."' order by tipo_ws,nome_ws ";}
+		{$sql = "SELECT id_ws,nome_ws,tipo_ws from ".$esquemaadmin."i3geoadmin_ws where tipo_ws = '".strtoupper($tipows)."' order by tipo_ws,nome_ws ";}
 		else
-		{$sql = "SELECT id_ws,nome_ws,tipo_ws from i3geoadmin_ws order by tipo_ws,nome_ws";}
+		{$sql = "SELECT id_ws,nome_ws,tipo_ws from ".$esquemaadmin."i3geoadmin_ws order by tipo_ws,nome_ws";}
 		retornaJSON(pegaDados($sql));
 		exit;
 	break;
@@ -85,7 +85,7 @@ switch (strtoupper($funcao))
 	{JSON}
 	*/	
 	case "PEGADADOS":
-		retornaJSON(pegaDados("SELECT * from i3geoadmin_ws where id_ws='$id_ws'"));
+		retornaJSON(pegaDados("SELECT * from ".$esquemaadmin."i3geoadmin_ws where id_ws='$id_ws'"));
 		exit;
 	break;
 	/*
@@ -115,7 +115,7 @@ switch (strtoupper($funcao))
 		if(verificaEditores($editores) == "nao")
 		{echo "Vc nao e um editor cadastrado. Apenas os editores definidos em i3geo/ms_configura.php podem acessar o sistema de administracao.";exit;}
 		$novo = alterarWS();
-		$sql = "SELECT * from i3geoadmin_ws WHERE id_ws = '".$novo."'";
+		$sql = "SELECT * from ".$esquemaadmin."i3geoadmin_ws WHERE id_ws = '".$novo."'";
 		retornaJSON(pegaDados($sql));
 		exit;
 	break;
@@ -151,7 +151,7 @@ Altera o registro de um WS
 */
 function alterarWS()
 {
-	global $id_ws,$desc_ws,$nome_ws,$link_ws,$autor_ws,$tipo_ws;
+	global $esquemaadmin,$id_ws,$desc_ws,$nome_ws,$link_ws,$autor_ws,$tipo_ws;
 	try 
 	{
     	require_once("conexao.php");
@@ -163,17 +163,17 @@ function alterarWS()
 		}
     	if($id_ws != "")
     	{
-    		$dbhw->query("UPDATE i3geoadmin_ws SET desc_ws = '$desc_ws',nome_ws = '$nome_ws', link_ws = '$link_ws', autor_ws = '$autor_ws', tipo_ws = '$tipo_ws' WHERE id_ws = $id_ws");
+    		$dbhw->query("UPDATE ".$esquemaadmin."i3geoadmin_ws SET desc_ws = '$desc_ws',nome_ws = '$nome_ws', link_ws = '$link_ws', autor_ws = '$autor_ws', tipo_ws = '$tipo_ws' WHERE id_ws = $id_ws");
     		$retorna = $id_ws;
     	}
     	else
     	{
     		$idtemp = (rand (9000,10000)) * -1;
-			$dbhw->query("INSERT INTO i3geoadmin_ws (nome_ws,desc_ws,autor_ws,tipo_ws,link_ws,nacessos,nacessosok) VALUES ('$idtemp','','','','',0,0)");
-			$id = $dbh->query("SELECT id_ws FROM i3geoadmin_ws WHERE nome_ws = '$idtemp'");
+			$dbhw->query("INSERT INTO ".$esquemaadmin."i3geoadmin_ws (nome_ws,desc_ws,autor_ws,tipo_ws,link_ws,nacessos,nacessosok) VALUES ('$idtemp','','','','',0,0)");
+			$id = $dbh->query("SELECT id_ws FROM ".$esquemaadmin."i3geoadmin_ws WHERE nome_ws = '$idtemp'");
 			$id = $id->fetchAll();
 			$id = $id[0]['id_ws'];
-			$dbhw->query("UPDATE i3geoadmin_ws SET nome_ws = '' WHERE id_ws = $id AND nome_ws = '$idtemp'");
+			$dbhw->query("UPDATE ".$esquemaadmin."i3geoadmin_ws SET nome_ws = '' WHERE id_ws = $id AND nome_ws = '$idtemp'");
 			$retorna = $id;
     	}
     	$dbhw = null;
@@ -187,11 +187,11 @@ function alterarWS()
 }
 function excluirWS()
 {
-	global $id;
+	global $id,$esquemaadmin;
 	try 
 	{
     	include("conexao.php");
-    	$dbhw->query("DELETE from i3geoadmin_ws WHERE id_ws = $id");
+    	$dbhw->query("DELETE from ".$esquemaadmin."i3geoadmin_ws WHERE id_ws = $id");
     	$dbhw = null;
     	$dbh = null;
     	return "ok";
@@ -203,11 +203,12 @@ function excluirWS()
 }
 function adicionaAcesso($id_ws,$sucesso)
 {
+	global $esquemaadmin;
 	try
 	{
     	if($id_ws == ""){return;}
     	include("conexao.php");
-    	$dados = pegaDados("select * from i3geoadmin_ws WHERE id_ws = $id_ws");
+    	$dados = pegaDados("select * from ".$esquemaadmin."i3geoadmin_ws WHERE id_ws = $id_ws");
     	if(count($dados) == 0){return;};
     	if($dados[0]["nacessos"] == ""){$dados[0]["nacessos"] = 0;}
     	$acessos = $dados[0]["nacessos"] + 1;
@@ -218,7 +219,7 @@ function adicionaAcesso($id_ws,$sucesso)
     	$ok = $dados[0]["nacessosok"];
     	
     	if($ok == ""){$ok = 0;}
-   		$dbhw->query("UPDATE i3geoadmin_ws SET nacessos = '$acessos',nacessosok = '$ok' WHERE id_ws = $id_ws");
+   		$dbhw->query("UPDATE ".$esquemaadmin."i3geoadmin_ws SET nacessos = '$acessos',nacessosok = '$ok' WHERE id_ws = $id_ws");
     	$dbhw = null;
     	$dbh = null;
 	}
@@ -226,45 +227,5 @@ function adicionaAcesso($id_ws,$sucesso)
 	{
     	return "Error!: " . $e->getMessage();
 	}
-}
-function importarXmlWS()
-{
-	global $xml,$tipo;
-	set_time_limit(180);
-	if(!file_exists($xml))
-	{return "<br><b>Arquivo $xml n&atilde;o encontrado";}
-	include_once("../../classesphp/funcoes_gerais.php");
-	include("conexao.php");
-	$xml = simplexml_load_file($xml);
-	//
-	//importa os grupos
-	//
-	$wsExistentes = array();
-	$q = $dbh->query("select * from i3geoadmin_ws");
-	$resultado = $q->fetchAll();
-	foreach($resultado as $r)
-	{$wsExistentes[$r["nome_ws"]] = 0;}
-	foreach($xml->channel as $c)
-	{
-		foreach($c->item as $item)
-		{
-			$desc = html_entity_decode(ixml($item,"description"));
-			$nome = html_entity_decode(ixml($item,"title"));
-			$autor = html_entity_decode(ixml($item,"author"));
-			$link = ixml($item,"link");
-			if($convUTF)
-			{
-				$nome = utf8_encode($nome);
-				$desc = utf8_encode($desc);
-				$autor = utf8_encode($autor);
-			}
-			if(!isset($wsExistentes[$nome]))
-			$dbhw->query("INSERT INTO i3geoadmin_ws (nome_ws,desc_ws,autor_ws,link_ws,tipo_ws,nacessos,nacessosok) VALUES ('$nome','$desc','$autor','$link','$tipo',0,0)");
-			$wsExistentes[$nome] = 0;
-		}
-	}
-	$dbhw = null;
-	$dbh = null;
-	return "Dados importados.";
 }
 ?>

@@ -1700,17 +1700,10 @@ $arq - Nome do arquivo.
 	{
     	$resultado = array();
     	include("$locaplic/admin/php/conexao.php");
-    	$dbhw->query("INSERT INTO i3geoadmin_acessostema (codigo_tema,nacessos,dia,mes,ano) VALUES ('$codigo_tema',1,".abs(date("d")).",".abs(date("m")).",".abs(date("Y")).")");
-		/*
-		$sql = "select nacessos from i3geoadmin_temas WHERE codigo_tema = '$codigo_tema' and not(nacessos isnull)";
-    	$q = $dbh->query($sql,PDO::FETCH_ASSOC);
-    	$dados = $q->fetchAll();
-    	if(count($dados[0])>0)
-    	$nacessos = $dados[0]["nacessos"] + 1;
-    	else
-    	$nacessos = 1;
-   		$dbhw->query("UPDATE i3geoadmin_temas SET nacessos = $nacessos WHERE codigo_tema = '$codigo_tema'");
-    	*/
+    	if(!empty($esquemaadmin)){
+    		$esquemaadmin = $esquemaadmin.".";
+    	}
+    	$dbhw->query("INSERT INTO ".$esquemaadmin."i3geoadmin_acessostema (codigo_tema,nacessos,dia,mes,ano) VALUES ('$codigo_tema',1,".abs(date("d")).",".abs(date("m")).",".abs(date("Y")).")");
 		$dbh = null;
     	$dbhw = null;
 	}

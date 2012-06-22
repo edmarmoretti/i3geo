@@ -58,7 +58,7 @@ switch (strtoupper($funcao))
 	{JSON}
 	*/
 	case "PEGASISTEMAS":
-		retornaJSON(pegaDados('SELECT * from i3geoadmin_sistemas order by nome_sistema'));
+		retornaJSON(pegaDados("SELECT * from ".$esquemaadmin."i3geoadmin_sistemas order by nome_sistema"));
 		exit;
 	break;
 	/*
@@ -75,7 +75,7 @@ switch (strtoupper($funcao))
 	{JSON}
 	*/
 	case "PEGASISTEMA":
-		retornaJSON(pegaDados("SELECT * from i3geoadmin_sistemas where id_sistema='$id_sistema'"));
+		retornaJSON(pegaDados("SELECT * from ".$esquemaadmin."i3geoadmin_sistemas where id_sistema='$id_sistema'"));
 		exit;
 	break;
 	/*
@@ -92,7 +92,7 @@ switch (strtoupper($funcao))
 	{JSON}
 	*/
 	case "PEGAFUNCOES":	
-		retornaJSON(pegaDados("SELECT * from i3geoadmin_sistemasf where id_sistema ='$id_sistema'"));
+		retornaJSON(pegaDados("SELECT * from ".$esquemaadmin."i3geoadmin_sistemasf where id_sistema ='$id_sistema'"));
 		exit;
 	break;
 	/*
@@ -109,7 +109,7 @@ switch (strtoupper($funcao))
 	{JSON}
 	*/
 	case "PEGAFUNCAO":	
-		retornaJSON(pegaDados("SELECT * from i3geoadmin_sistemasf where id_funcao ='$id_funcao'"));
+		retornaJSON(pegaDados("SELECT * from ".$esquemaadmin."i3geoadmin_sistemasf where id_funcao ='$id_funcao'"));
 		exit;
 	break;
 	/*
@@ -135,7 +135,7 @@ switch (strtoupper($funcao))
 		if(verificaEditores($editores) == "nao")
 		{echo "Vc nao e um editor cadastrado. Apenas os editores definidos em i3geo/ms_configura.php podem acessar o sistema de administracao.";exit;}
 		$novo = alterarSistemas();
-		$sql = "SELECT * from i3geoadmin_sistemas WHERE id_sistema = '".$novo."'";
+		$sql = "SELECT * from ".$esquemaadmin."i3geoadmin_sistemas WHERE id_sistema = '".$novo."'";
 		retornaJSON(pegaDados($sql));
 		exit;
 	break;
@@ -168,8 +168,8 @@ switch (strtoupper($funcao))
 		if(verificaEditores($editores) == "nao")
 		{echo "Vc nao e um editor cadastrado. Apenas os editores definidos em i3geo/ms_configura.php podem acessar o sistema de administracao.";exit;}
 		$novo = alterarFuncoes();
-		$sql = "SELECT * from i3geoadmin_sistemasf WHERE id_funcao = '".$novo."'";
-		retornaJSON(pegaDados($sql));	
+		$sql = "SELECT * from ".$esquemaadmin."i3geoadmin_sistemasf WHERE id_funcao = '".$novo."'";
+		retornaJSON(pegaDados($sql));
 		exit;
 	break;
 	/*
@@ -233,7 +233,7 @@ Altera o registro de um WS
 */
 function alterarSistemas()
 {
-	global $id_sistema,$perfil_sistema,$nome_sistema,$publicado_sistema;
+	global $esquemaadmin,$id_sistema,$perfil_sistema,$nome_sistema,$publicado_sistema;
 	try 
 	{
     	require_once("conexao.php");
@@ -243,17 +243,17 @@ function alterarSistemas()
 		}
     	if($id_sistema != "")
     	{
-    		$dbhw->query("UPDATE i3geoadmin_sistemas SET publicado_sistema='$publicado_sistema',nome_sistema = '$nome_sistema',perfil_sistema = '$perfil_sistema' WHERE id_sistema = $id_sistema");
+    		$dbhw->query("UPDATE ".$esquemaadmin."i3geoadmin_sistemas SET publicado_sistema='$publicado_sistema',nome_sistema = '$nome_sistema',perfil_sistema = '$perfil_sistema' WHERE id_sistema = $id_sistema");
     		$retorna = $id_sistema;
     	}
     	else
     	{
     		$idtemp = (rand (9000,10000)) * -1;
-			$dbhw->query("INSERT INTO i3geoadmin_sistemas (publicado_sistema,nome_sistema,perfil_sistema) VALUES ('','$idtemp','')");
-			$id = $dbh->query("SELECT id_sistema FROM i3geoadmin_sistemas WHERE nome_sistema = '$idtemp'");
+			$dbhw->query("INSERT INTO ".$esquemaadmin."i3geoadmin_sistemas (publicado_sistema,nome_sistema,perfil_sistema) VALUES ('','$idtemp','')");
+			$id = $dbh->query("SELECT id_sistema FROM ".$esquemaadmin."i3geoadmin_sistemas WHERE nome_sistema = '$idtemp'");
 			$id = $id->fetchAll();
 			$id = $id[0]['id_sistema'];
-			$dbhw->query("UPDATE id_sistema SET nome_sistema = '' WHERE id_sistema = $id AND nome_sistema = '$idtemp'");
+			$dbhw->query("UPDATE ".$esquemaadmin."i3geoadmin_sistemas SET nome_sistema = '' WHERE id_sistema = $id AND nome_sistema = '$idtemp'");
 			$retorna = $id;    	
     	}
     	$dbhw = null;
@@ -267,7 +267,7 @@ function alterarSistemas()
 }
 function alterarFuncoes()
 {
-	global $id_sistema,$id_funcao,$perfil_funcao,$nome_funcao,$w_funcao,$h_funcao,$abrir_funcao;
+	global $esquemaadmin,$id_sistema,$id_funcao,$perfil_funcao,$nome_funcao,$w_funcao,$h_funcao,$abrir_funcao;
 	try 
 	{
     	require_once("conexao.php");
@@ -277,17 +277,17 @@ function alterarFuncoes()
 		}
     	if($id_funcao != "")
     	{
-    		$dbhw->query("UPDATE i3geoadmin_sistemasf SET nome_funcao = '$nome_funcao',perfil_funcao = '$perfil_funcao', w_funcao = '$w_funcao',h_funcao = '$h_funcao', abrir_funcao = '$abrir_funcao' WHERE id_funcao = $id_funcao");
+    		$dbhw->query("UPDATE ".$esquemaadmin."i3geoadmin_sistemasf SET nome_funcao = '$nome_funcao',perfil_funcao = '$perfil_funcao', w_funcao = '$w_funcao',h_funcao = '$h_funcao', abrir_funcao = '$abrir_funcao' WHERE id_funcao = $id_funcao");
     		$retorna = $id_funcao;
     	}
     	else
     	{
     		$idtemp = (rand (9000,10000)) * -1;
-			$dbhw->query("INSERT INTO i3geoadmin_sistemasf (id_sistema,nome_funcao,perfil_funcao,w_funcao,h_funcao,abrir_funcao) VALUES ('$id_sistema','$idtemp','','$w','$h','')");
-			$id = $dbh->query("SELECT id_funcao FROM i3geoadmin_sistemasf WHERE nome_funcao = '$idtemp'");
+			$dbhw->query("INSERT INTO ".$esquemaadmin."i3geoadmin_sistemasf (id_sistema,nome_funcao,perfil_funcao,w_funcao,h_funcao,abrir_funcao) VALUES ('$id_sistema','$idtemp','','$w','$h','')");
+			$id = $dbh->query("SELECT id_funcao FROM ".$esquemaadmin."i3geoadmin_sistemasf WHERE nome_funcao = '$idtemp'");
 			$id = $id->fetchAll();
 			$id = $id[0]['id_funcao'];
-			$dbhw->query("UPDATE i3geoadmin_sistemasf SET nome_funcao = '' WHERE id_funcao = $id AND nome_funcao = '$idtemp'");
+			$dbhw->query("UPDATE ".$esquemaadmin."i3geoadmin_sistemasf SET nome_funcao = '' WHERE id_funcao = $id AND nome_funcao = '$idtemp'");
 			$retorna = $id;    		
     	}
     	$dbhw = null;
@@ -301,11 +301,11 @@ function alterarFuncoes()
 }
 function excluirFuncoes()
 {
-	global $id;
+	global $id,$esquemaadmin;
 	try 
 	{
     	include("conexao.php");
-    	$dbhw->query("DELETE from i3geoadmin_sistemasf WHERE id_funcao = $id");
+    	$dbhw->query("DELETE from ".$esquemaadmin."i3geoadmin_sistemasf WHERE id_funcao = $id");
     	$dbhw = null;
     	$dbh = null;
     	return "ok";
@@ -317,11 +317,11 @@ function excluirFuncoes()
 }
 function excluirSistemas()
 {
-	global $id;
+	global $id,$esquemaadmin;
 	try 
 	{
     	include("conexao.php");
-    	$dbhw->query("DELETE from i3geoadmin_sistemas WHERE id_sistema = $id");
+    	$dbhw->query("DELETE from ".$esquemaadmin."i3geoadmin_sistemas WHERE id_sistema = $id");
     	$dbhw = null;
     	$dbh = null;
     	return $id;
@@ -333,7 +333,7 @@ function excluirSistemas()
 }
 function importarXmlSistemas()
 {
-	global $xml,$tipo;
+	global $xml,$tipo,$esquemaadmin;
 	if(!file_exists($xml))
 	{return "<br><b>Arquivo $xml n&atilde;o encontrado";}
 	include_once("../../classesphp/funcoes_gerais.php");
@@ -343,7 +343,7 @@ function importarXmlSistemas()
 	//importa os grupos
 	//
 	$sistemasExistentes = array();
-	$q = $dbh->query("select * from i3geoadmin_sistemas");
+	$q = $dbh->query("select * from ".$esquemaadmin."i3geoadmin_sistemas");
 	$resultado = $q->fetchAll();
 	foreach($resultado as $r)
 	{$sistemasExistentes[$r["nome_sistema"]] = 0;}
@@ -356,9 +356,9 @@ function importarXmlSistemas()
 		}
 		$perfil = ixml($item,"PERFIL");
 		if(!isset($sistemasExistentes[$nome]))
-		$dbhw->query("INSERT INTO i3geoadmin_sistemas (publicado_sistema,nome_sistema,perfil_sistema) VALUES ('','$nome','$perfil')");
+		$dbhw->query("INSERT INTO ".$esquemaadmin."i3geoadmin_sistemas (publicado_sistema,nome_sistema,perfil_sistema) VALUES ('','$nome','$perfil')");
 		$sistemasExistentes[$nome] = 0;
-		$id_sistema = $dbh->query("SELECT id_sistema FROM i3geoadmin_sistemas");
+		$id_sistema = $dbh->query("SELECT id_sistema FROM ".$esquemaadmin."i3geoadmin_sistemas");
 		$id_sistema = $id_sistema->fetchAll();
 		$id_sistema = intval($id_sistema[count($id_sistema)-1]['id_sistema']);
 		foreach ($item->FUNCAO as $funcao)
@@ -372,7 +372,7 @@ function importarXmlSistemas()
 			$w_funcao = ixml($funcao,"JANELAW");
 			$h_funcao = ixml($funcao,"JANELAH");
 			$perfil_funcao = ixml($funcao,"PERFIL");
-			$dbhw->query("INSERT INTO i3geoadmin_sistemasf (nome_funcao,abrir_funcao,perfil_funcao,w_funcao,h_funcao,id_sistema) VALUES ('$nome_funcao','$abrir_funcao','$perfil_funcao','$w_funcao','$h_funcao','$id_sistema')");			
+			$dbhw->query("INSERT INTO ".$esquemaadmin."i3geoadmin_sistemasf (nome_funcao,abrir_funcao,perfil_funcao,w_funcao,h_funcao,id_sistema) VALUES ('$nome_funcao','$abrir_funcao','$perfil_funcao','$w_funcao','$h_funcao','$id_sistema')");			
 		}
 	}
 	$dbhw = null;

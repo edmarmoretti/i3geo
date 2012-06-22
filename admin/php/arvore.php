@@ -134,7 +134,7 @@ switch (strtoupper($funcao))
 	{JSON}
 	*/
 	case "PEGADADOSGRUPO":
-		retornaJSON(pegaDados("select * from i3geoadmin_n1 LEFT JOIN i3geoadmin_grupos ON i3geoadmin_n1.id_grupo = i3geoadmin_grupos.id_grupo where id_n1 = $id"));
+		retornaJSON(pegaDados("select * from ".$esquemaadmin."i3geoadmin_n1 LEFT JOIN i3geoadmin_grupos ON i3geoadmin_n1.id_grupo = i3geoadmin_grupos.id_grupo where id_n1 = $id"));
 		exit;
 	break;
 	/*
@@ -151,7 +151,7 @@ switch (strtoupper($funcao))
 	{JSON}
 	*/	
 	case "PEGADADOSSUBGRUPO":
-		retornaJSON(pegaDados("select * from i3geoadmin_n2 LEFT JOIN i3geoadmin_subgrupos ON i3geoadmin_n2.id_subgrupo = i3geoadmin_subgrupos.id_subgrupo where id_n2 = $id"));
+		retornaJSON(pegaDados("select * from ".$esquemaadmin."i3geoadmin_n2 LEFT JOIN i3geoadmin_subgrupos ON i3geoadmin_n2.id_subgrupo = i3geoadmin_subgrupos.id_subgrupo where id_n2 = $id"));
 		exit;
 	break;
 	/*
@@ -168,7 +168,7 @@ switch (strtoupper($funcao))
 	{JSON}
 	*/		
 	case "PEGADADOSTEMA":
-		retornaJSON(pegaDados("select * from i3geoadmin_n3 LEFT JOIN i3geoadmin_temas ON i3geoadmin_n3.id_tema = i3geoadmin_temas.id_tema where id_n3 = $id"));
+		retornaJSON(pegaDados("select * from ".$esquemaadmin."i3geoadmin_n3 LEFT JOIN i3geoadmin_temas ON i3geoadmin_n3.id_tema = i3geoadmin_temas.id_tema where id_n3 = $id"));
 		exit;
 	break;
 	/*
@@ -185,7 +185,7 @@ switch (strtoupper($funcao))
 	{JSON}
 	*/	
 	case "PEGADADOSRAIZ":
-		retornaJSON(pegaDados("select * from i3geoadmin_raiz LEFT JOIN i3geoadmin_temas ON i3geoadmin_raiz.id_tema = i3geoadmin_temas.id_tema where id_raiz = $id"));
+		retornaJSON(pegaDados("select * from ".$esquemaadmin."i3geoadmin_raiz LEFT JOIN i3geoadmin_temas ON i3geoadmin_raiz.id_tema = i3geoadmin_temas.id_tema where id_raiz = $id"));
 		exit;
 	break;
 	/*
@@ -207,7 +207,7 @@ switch (strtoupper($funcao))
 		{$coluna = "nome_tema";}
 		else
 		{$coluna = $idioma;}
-		$raiz = pegaDados("select i3geoadmin_raiz.id_raiz,$coluna as nome_tema from i3geoadmin_raiz LEFT JOIN i3geoadmin_temas ON  i3geoadmin_temas.id_tema = i3geoadmin_raiz.id_tema where i3geoadmin_raiz.id_raiz = '$id_raiz'");
+		$raiz = pegaDados("select i3geoadmin_raiz.id_raiz,$coluna as nome_tema from ".$esquemaadmin."i3geoadmin_raiz LEFT JOIN i3geoadmin_temas ON  i3geoadmin_temas.id_tema = i3geoadmin_raiz.id_tema where i3geoadmin_raiz.id_raiz = '$id_raiz'");
 		retornaJSON(array("raiz"=>$raiz,"grupos"=>array()));
 		exit;
 	break;
@@ -234,7 +234,7 @@ switch (strtoupper($funcao))
 		{$coluna = "nome_tema";}
 		else
 		{$coluna = $idioma;}		
-		$raiz = pegaDados("select i3geoadmin_raiz.id_raiz,$coluna as nome_tema from i3geoadmin_raiz LEFT JOIN i3geoadmin_temas ON  i3geoadmin_temas.id_tema = i3geoadmin_raiz.id_tema where i3geoadmin_raiz.id_raiz = '$id_raiz'");
+		$raiz = pegaDados("select i3geoadmin_raiz.id_raiz,$coluna as nome_tema from ".$esquemaadmin."i3geoadmin_raiz LEFT JOIN i3geoadmin_temas ON  i3geoadmin_temas.id_tema = i3geoadmin_raiz.id_tema where i3geoadmin_raiz.id_raiz = '$id_raiz'");
 		retornaJSON(array("raiz"=>$raiz,"grupos"=>array()));
 		exit;
 	break;
@@ -259,7 +259,7 @@ switch (strtoupper($funcao))
 		{$coluna = "nome_grupo";}
 		else
 		{$coluna = $idioma;}
-		$grupos = pegaDados("select i3geoadmin_grupos.$coluna as nome_grupo,id_n1,i3geoadmin_n1.publicado from i3geoadmin_n1 LEFT JOIN i3geoadmin_grupos ON i3geoadmin_n1.id_grupo = i3geoadmin_grupos.id_grupo where id_menu='$id_menu' and id_n1 = '$id_n1'");
+		$grupos = pegaDados("select i3geoadmin_grupos.$coluna as nome_grupo,id_n1,i3geoadmin_n1.publicado from ".$esquemaadmin."i3geoadmin_n1 LEFT JOIN i3geoadmin_grupos ON i3geoadmin_n1.id_grupo = i3geoadmin_grupos.id_grupo where id_menu='$id_menu' and id_n1 = '$id_n1'");
 		$raiz = array();
 		retornaJSON(array("raiz"=>$raiz,"grupos"=>$grupos));
 		exit;
@@ -285,7 +285,7 @@ switch (strtoupper($funcao))
 		{$coluna = "nome_subgrupo";}
 		else
 		{$coluna = $idioma;}
-		$subgrupos = pegaDados("select i3geoadmin_subgrupos.$coluna as nome_subgrupo,i3geoadmin_n2.id_n2,i3geoadmin_n2.publicado from i3geoadmin_n2 LEFT JOIN i3geoadmin_subgrupos ON i3geoadmin_n2.id_subgrupo = i3geoadmin_subgrupos.id_subgrupo where i3geoadmin_n2.id_n2='$id_n2'");
+		$subgrupos = pegaDados("select i3geoadmin_subgrupos.$coluna as nome_subgrupo,i3geoadmin_n2.id_n2,i3geoadmin_n2.publicado from ".$esquemaadmin."i3geoadmin_n2 LEFT JOIN i3geoadmin_subgrupos ON i3geoadmin_n2.id_subgrupo = i3geoadmin_subgrupos.id_subgrupo where i3geoadmin_n2.id_n2='$id_n2'");
 		$raiz = array();
 		retornaJSON(array("raiz"=>$raiz,"subgrupos"=>$subgrupos));
 		exit;
@@ -311,7 +311,7 @@ switch (strtoupper($funcao))
 		{$coluna = "nome_tema";}
 		else
 		{$coluna = $idioma;}
-		$temas = pegaDados("select i3geoadmin_temas.$coluna as nome_tema,i3geoadmin_n3.id_n3,i3geoadmin_n3.publicado from i3geoadmin_n3 LEFT JOIN i3geoadmin_temas ON i3geoadmin_n3.id_tema = i3geoadmin_temas.id_tema where i3geoadmin_n3.id_n3='$id_n3'");
+		$temas = pegaDados("select i3geoadmin_temas.$coluna as nome_tema,i3geoadmin_n3.id_n3,i3geoadmin_n3.publicado from ".$esquemaadmin."i3geoadmin_n3 LEFT JOIN i3geoadmin_temas ON i3geoadmin_n3.id_tema = i3geoadmin_temas.id_tema where i3geoadmin_n3.id_n3='$id_n3'");
 		$raiz = array();
 		retornaJSON($temas);
 		exit;
@@ -509,26 +509,26 @@ Altera o registro de um nível 3 (temas)
 */
 function alteraN3()
 {
-	global $publicado,$n3_perfil,$id,$id_n2,$id_tema,$ordem;
+	global $publicado,$n3_perfil,$id,$id_n2,$id_tema,$ordem,$esquemaadmin;
 	try 
 	{
     	require_once("conexao.php");
     	if($id != "")
     	{
-    		$dbhw->query("UPDATE i3geoadmin_n3 SET ordem = $ordem, publicado = '$publicado',id_tema = '$id_tema', n3_perfil = '$n3_perfil' WHERE id_n3 = $id");
+    		$dbhw->query("UPDATE ".$esquemaadmin."i3geoadmin_n3 SET ordem = $ordem, publicado = '$publicado',id_tema = '$id_tema', n3_perfil = '$n3_perfil' WHERE id_n3 = $id");
     		$retorna = $id;
     	}
     	else
     	{
-			$o = $dbh->query("SELECT MAX(ordem) as o FROM i3geoadmin_n3 where id_n2 = '$id_n2'");
+			$o = $dbh->query("SELECT MAX(ordem) as o FROM ".$esquemaadmin."i3geoadmin_n3 where id_n2 = '$id_n2'");
 			$o = $o->fetchAll();
 			$o = $o[0]['o'] + 1;
     		$idtemp = (rand (9000,10000)) * -1;
-    		$dbhw->query("INSERT INTO i3geoadmin_n3 (publicado,id_n2,n3_perfil,ordem) VALUES ('NAO',$id_n2,'$idtemp',$o)");
-			$id = $dbh->query("SELECT id_n3 FROM i3geoadmin_n3 where n3_perfil = '$idtemp'");
+    		$dbhw->query("INSERT INTO ".$esquemaadmin."i3geoadmin_n3 (publicado,id_n2,n3_perfil,ordem) VALUES ('NAO',$id_n2,'$idtemp',$o)");
+			$id = $dbh->query("SELECT id_n3 FROM ".$esquemaadmin."i3geoadmin_n3 where n3_perfil = '$idtemp'");
 			$id = $id->fetchAll();
 			$id = $id[0]['id_n3'];
-    		$dbhw->query("UPDATE i3geoadmin_n3 SET n3_perfil = '' WHERE id_n3 = $id AND n3_perfil = '$idtemp'");
+    		$dbhw->query("UPDATE ".$esquemaadmin."i3geoadmin_n3 SET n3_perfil = '' WHERE id_n3 = $id AND n3_perfil = '$idtemp'");
 			$retorna = $id;
     	}
     	$dbhw = null;
@@ -543,26 +543,26 @@ Altera o registro de um nível 2
 */
 function alteraN2()
 {
-	global $publicado,$n2_perfil,$id,$id_subgrupo,$id_n1;
+	global $publicado,$n2_perfil,$id,$id_subgrupo,$id_n1,$esquemaadmin;
 	try 
 	{
     	require_once("conexao.php");
     	if($id != "")
     	{
-    		$dbhw->query("UPDATE i3geoadmin_n2 SET publicado='$publicado', id_subgrupo = '$id_subgrupo', n2_perfil = '$n2_perfil' WHERE id_n2 = $id");
+    		$dbhw->query("UPDATE ".$esquemaadmin."i3geoadmin_n2 SET publicado='$publicado', id_subgrupo = '$id_subgrupo', n2_perfil = '$n2_perfil' WHERE id_n2 = $id");
     		$retorna = $id;
     	}
     	else
     	{
-			$o = $dbh->query("SELECT MAX(ordem) as o FROM i3geoadmin_n2 where id_n1 = '$id_n1'");
+			$o = $dbh->query("SELECT MAX(ordem) as o FROM ".$esquemaadmin."i3geoadmin_n2 where id_n1 = '$id_n1'");
 			$o = $o->fetchAll();
 			$o = $o[0]['o'] + 1;
 			$idtemp = (rand (9000,10000)) * -1;
-    		$dbhw->query("INSERT INTO i3geoadmin_n2 (id_n1,n2_perfil,ordem,publicado) VALUES ($id_n1,'$idtemp',$o,'NAO')");
-			$id = $dbh->query("SELECT id_n2 FROM i3geoadmin_n2 where n2_perfil = '$idtemp'");
+    		$dbhw->query("INSERT INTO ".$esquemaadmin."i3geoadmin_n2 (id_n1,n2_perfil,ordem,publicado) VALUES ($id_n1,'$idtemp',$o,'NAO')");
+			$id = $dbh->query("SELECT id_n2 FROM ".$esquemaadmin."i3geoadmin_n2 where n2_perfil = '$idtemp'");
 			$id = $id->fetchAll();
 			$id = $id[0]['id_n2'];
-    		$dbhw->query("UPDATE i3geoadmin_n2 SET n2_perfil = '' WHERE id_n2 = $id AND n2_perfil = '$idtemp'");			
+    		$dbhw->query("UPDATE ".$esquemaadmin."i3geoadmin_n2 SET n2_perfil = '' WHERE id_n2 = $id AND n2_perfil = '$idtemp'");			
 			$retorna = $id;   	
     	}
     	$dbhw = null;
@@ -579,26 +579,26 @@ Altera o registro de um nível 1 (grupos)
 */
 function alteraN1()
 {
-	global $publicado,$n1_perfil,$id_grupo,$id,$id_menu;
+	global $publicado,$n1_perfil,$id_grupo,$id,$id_menu,$esquemaadmin;
 	try 
 	{
     	require_once("conexao.php");
     	if($id != "")
     	{
-    		$dbhw->query("UPDATE i3geoadmin_n1 SET publicado = '$publicado', id_grupo = '$id_grupo', n1_perfil = '$n1_perfil' WHERE id_n1 = $id");
+    		$dbhw->query("UPDATE ".$esquemaadmin."i3geoadmin_n1 SET publicado = '$publicado', id_grupo = '$id_grupo', n1_perfil = '$n1_perfil' WHERE id_n1 = $id");
     		$retorna = $id;
     	}
     	else
     	{
-			$o = $dbh->query("SELECT MAX(ordem) as o FROM i3geoadmin_n1 where id_menu = '$id_menu'");
+			$o = $dbh->query("SELECT MAX(ordem) as o FROM ".$esquemaadmin."i3geoadmin_n1 where id_menu = '$id_menu'");
 			$o = $o->fetchAll();
 			$o = $o[0]['o'] + 1;
 			$idtemp = (rand (9000,10000)) * -1;
-    		$dbhw->query("INSERT INTO i3geoadmin_n1 (id_menu,n1_perfil,ordem,publicado) VALUES ($id_menu,'$idtemp',$o,'NAO')");
-			$id = $dbh->query("SELECT id_n1 FROM i3geoadmin_n1 where n1_perfil = '$idtemp'");
+    		$dbhw->query("INSERT INTO ".$esquemaadmin."i3geoadmin_n1 (id_menu,n1_perfil,ordem,publicado) VALUES ($id_menu,'$idtemp',$o,'NAO')");
+			$id = $dbh->query("SELECT id_n1 FROM ".$esquemaadmin."i3geoadmin_n1 where n1_perfil = '$idtemp'");
 			$id = $id->fetchAll();
 			$id = $id[0]['id_n1'];
-    		$dbhw->query("UPDATE i3geoadmin_n1 SET n1_perfil = '' WHERE id_n1 = $id AND n1_perfil = '$idtemp'");			
+    		$dbhw->query("UPDATE ".$esquemaadmin."i3geoadmin_n1 SET n1_perfil = '' WHERE id_n1 = $id AND n1_perfil = '$idtemp'");			
 			$retorna = $id;   	
     	}
     	$dbhw = null;
@@ -615,26 +615,26 @@ Altera o registro na raiz de um nível
 */
 function alterarRaiz()
 {
-	global $id_nivel,$nivel,$id,$id_menu,$perfil,$id_tema;
+	global $id_nivel,$nivel,$id,$id_menu,$perfil,$id_tema,$esquemaadmin;
 	try 
 	{
     	include("conexao.php");
     	if($id != "")
     	{
-    		$dbhw->query("UPDATE i3geoadmin_raiz SET perfil = '$perfil', id_tema = '$id_tema'  WHERE id_raiz = $id");
+    		$dbhw->query("UPDATE ".$esquemaadmin."i3geoadmin_raiz SET perfil = '$perfil', id_tema = '$id_tema'  WHERE id_raiz = $id");
     		$retorna = $id;
     	}
     	else
     	{
-			$o = $dbh->query("SELECT MAX(ordem) as o FROM i3geoadmin_raiz where id_menu = '$id_menu' and nivel = '$nivel' and id_nivel = '$id_nivel'");
+			$o = $dbh->query("SELECT MAX(ordem) as o FROM ".$esquemaadmin."i3geoadmin_raiz where id_menu = '$id_menu' and nivel = '$nivel' and id_nivel = '$id_nivel'");
 			$o = $o->fetchAll();
 			$o = $o[0]['o'] + 1;
 			$idtemp = (rand (9000,10000)) * -1;
-    		$dbhw->query("INSERT INTO i3geoadmin_raiz (id_nivel,nivel,id_menu,perfil,ordem) VALUES ($id_nivel,$nivel,$id_menu,'$idtemp',$o)");
-			$id = $dbh->query("SELECT id_raiz FROM i3geoadmin_raiz WHERE perfil = '$idtemp'");
+    		$dbhw->query("INSERT INTO ".$esquemaadmin."i3geoadmin_raiz (id_nivel,nivel,id_menu,perfil,ordem) VALUES ($id_nivel,$nivel,$id_menu,'$idtemp',$o)");
+			$id = $dbh->query("SELECT id_raiz FROM ".$esquemaadmin."i3geoadmin_raiz WHERE perfil = '$idtemp'");
 			$id = $id->fetchAll();
 			$id = $id[0]['id_raiz'];
-			$dbhw->query("UPDATE i3geoadmin_raiz SET perfil = '' WHERE id_raiz = $id AND perfil = '$idtemp'");
+			$dbhw->query("UPDATE ".$esquemaadmin."i3geoadmin_raiz SET perfil = '' WHERE id_raiz = $id AND perfil = '$idtemp'");
 			$retorna = $id;   	
     	}
     	$dbhw = null;
@@ -648,11 +648,11 @@ function alterarRaiz()
 }
 function movimentaNo()
 {
-	global $tipo,$movimento,$id;
+	global $tipo,$movimento,$id,$esquemaadmin;
 	if($tipo == "raizmenu" || $tipo == "raizgrupo")
 	{
 		//pega a ordem atual
-		$reg = pegaDados("SELECT * from i3geoadmin_raiz where id_raiz = '$id'");
+		$reg = pegaDados("SELECT * from ".$esquemaadmin."i3geoadmin_raiz where id_raiz = '$id'");
 		$ordematual = $reg[0]["ordem"];
 		$idmenu = $reg[0]["id_menu"];
 		$nivel = $reg[0]["nivel"];
@@ -665,7 +665,7 @@ function movimentaNo()
 	if($tipo == "grupo")
 	{
 		//pega a ordem atual
-		$reg = pegaDados("SELECT ordem,id_menu from i3geoadmin_n1 where id_n1 = '$id'");
+		$reg = pegaDados("SELECT ordem,id_menu from ".$esquemaadmin."i3geoadmin_n1 where id_n1 = '$id'");
 		$ordematual = $reg[0]["ordem"];
 		$idbase = $reg[0]["id_menu"]; 
 		$colunaBate = "id_menu";
@@ -676,7 +676,7 @@ function movimentaNo()
 	if($tipo == "subgrupo")
 	{
 		//pega a ordem atual
-		$reg = pegaDados("SELECT ordem,id_n1 from i3geoadmin_n2 where id_n2 = '$id'");
+		$reg = pegaDados("SELECT ordem,id_n1 from ".$esquemaadmin."i3geoadmin_n2 where id_n2 = '$id'");
 		$ordematual = $reg[0]["ordem"];
 		$idbase = $reg[0]["id_n1"];
 		$colunaBate = "id_n1";
@@ -687,7 +687,7 @@ function movimentaNo()
 	if($tipo == "tema")
 	{
 		//pega a ordem atual
-		$reg = pegaDados("SELECT ordem,id_n2 from i3geoadmin_n3 where id_n3 = '$id'");
+		$reg = pegaDados("SELECT ordem,id_n2 from ".$esquemaadmin."i3geoadmin_n3 where id_n3 = '$id'");
 		$ordematual = $reg[0]["ordem"];
 		$idbase = $reg[0]["id_n2"];
 		$colunaBate = "id_n2";
@@ -702,15 +702,15 @@ function movimentaNo()
 		{
 			$menos = $ordematual - 1;
 			//echo "UPDATE i3geoadmin_$tabela SET 'ordem' = $ordematual where $where and ordem = '$menos'";
-			$dbhw->query("UPDATE i3geoadmin_$tabela SET ordem = $ordematual where $where and ordem = '$menos'");
-			$dbhw->query("UPDATE i3geoadmin_$tabela SET ordem = $menos where id_$posfixo = '$id'");
+			$dbhw->query("UPDATE ".$esquemaadmin."i3geoadmin_$tabela SET ordem = $ordematual where $where and ordem = '$menos'");
+			$dbhw->query("UPDATE ".$esquemaadmin."i3geoadmin_$tabela SET ordem = $menos where id_$posfixo = '$id'");
 		}
 	}	
 	if($movimento == "desce")
 	{
 		$mais = $ordematual + 1;
-		$dbhw->query("UPDATE i3geoadmin_$tabela SET ordem = $ordematual where $where and ordem = '$mais'");
-		$dbhw->query("UPDATE i3geoadmin_$tabela SET ordem = $mais where id_$posfixo = '$id'");
+		$dbhw->query("UPDATE ".$esquemaadmin."i3geoadmin_$tabela SET ordem = $ordematual where $where and ordem = '$mais'");
+		$dbhw->query("UPDATE ".$esquemaadmin."i3geoadmin_$tabela SET ordem = $mais where id_$posfixo = '$id'");
 	}	
    	$dbhw = null;
    	$dbh = null;

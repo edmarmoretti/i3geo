@@ -258,11 +258,11 @@ Parâmetros:
 <head>
 <META HTTP-EQUIV="Content-Type" CONTENT="text/html; charset=ISO-8859-1">
 <!--
-<link rel="stylesheet" type="text/css" href="../pacotes/yui270/build/fonts/fonts-min.css" />
-<link rel="stylesheet" type="text/css" href="../pacotes/yui270/build/container/assets/skins/sam/container.css" />
-<script type="text/javascript" src="../pacotes/yui270/build/yahoo-dom-event/yahoo-dom-event.js"></script>
-<script type="text/javascript" src="../pacotes/yui270/build/dragdrop/dragdrop-min.js"></script>
-<script type="text/javascript" src="../pacotes/yui270/build/container/container-min.js"></script>
+<link rel="stylesheet" type="text/css" href="../pacotes/yui290/build/fonts/fonts-min.css" />
+<link rel="stylesheet" type="text/css" href="../pacotes/yui290/build/container/assets/skins/sam/container.css" />
+<script type="text/javascript" src="../pacotes/yui290/build/yahoo-dom-event/yahoo-dom-event.js"></script>
+<script type="text/javascript" src="../pacotes/yui290/build/dragdrop/dragdrop-min.js"></script>
+<script type="text/javascript" src="../pacotes/yui290/build/container/container-min.js"></script>
 <script type="text/javascript" src="../classesjs/compactados/classe_calculo_compacto.js"></script>
 <script type="text/javascript" src="../pacotes/openlayers/OpenLayers29.js"></script>
 <script type="text/javascript" src="openlayers.js.php"></script>
@@ -278,7 +278,7 @@ Parâmetros:
 -->
 <style>
 .yui-skin-sam .container-minimiza {
-	background:transparent url(../pacotes/yui270/build/assets/skins/sam/sprite.png) no-repeat scroll 0 -450px;
+	background:transparent url(../pacotes/yui290/build/assets/skins/sam/sprite.png) no-repeat scroll 0 -450px;
 	cursor:pointer;
 	height:15px;
 	position:absolute;
