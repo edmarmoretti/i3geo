@@ -17,6 +17,8 @@ Para a versão 4.7
 - Remoção da pasta i3geo/pacotes/jsobjects
 - Remoção dos arquivos js da raiz de i3geo/ferramentas
 - Os arquivos javascript das ferramentas foram renomeados, removendo-se a extensão .php
+- As tabelas do sistema de administração agora já podem ser armazenadas em um esquema diferente do public
+- O arquivo mashups/openlayers.js.php foi substituido por mashups/openlayers.js
 
 -------------------------------------------------------------------------------------------------
 Para a versão 4.6
