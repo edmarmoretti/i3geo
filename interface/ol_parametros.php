@@ -66,16 +66,15 @@
 		<td id="barraInferior" style="background-image:url('../imagens/visual/default/rodape.png');height:10px"></td>
 	</tr>
 </table>
-<center>
-<table id="i3GEOlogoMarca" style='box-shadow:0 1px 13px gray;border-radius:5px;'>
+<table id="i3GEOlogoMarca" style='margin: 0px auto;box-shadow:0 1px 13px gray;border-radius:5px;'>
 	<tr>
-		<td><center><h1 style="font-weight:normal;font-size:10px;font-family: Verdana, Arial, Helvetica, sans-serif;"><div id=versaoi3geo ></div><h2 style="font-weight:normal;font-size:10px;font-family: Verdana, Arial, Helvetica, sans-serif;">i3Geo - Software livre para criação de mapas interativos e geoprocessamento<h3 style="font-weight:normal;font-size:10px;font-family: Verdana, Arial, Helvetica, sans-serif;">Baseado no Mapserver, é licenciado sob GPL e integra o Portal do Software Público Brasileiro</h3></h2></h1></td>
+		<td><div id=versaoi3geo ></div><h2 style="font-size:10px;font-family: Verdana, Arial, Helvetica, sans-serif;">i3Geo - Software livre para criação de mapas interativos e geoprocessamento</h2><h3 style="font-size:10px;font-family: Verdana, Arial, Helvetica, sans-serif;">Baseado no Mapserver, é licenciado sob GPL e integra o Portal do Software Público Brasileiro</h3></td>
 	</tr>
 	<tr>
-		<td style="padding:10px;"><center><img alt="" style="width:560px;height:81px" src='../imagens/logo_inicio.png' ></td>
+		<td style="padding:10px;"><img style="width:560px;height:81px" alt="" src='../imagens/logo_inicio.png' ></td>
 	</tr>
 	<tr>
-		<td><center>
+		<td>
 			<!--
 			<script id="ohloh" type="text/javascript" src="http://www.ohloh.net/p/150688/widgets/project_users.js?style=red"></script>
 			-->
