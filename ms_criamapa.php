@@ -331,8 +331,8 @@ if(!isset($base) || $base == "")
 		{$base = $locaplic."/aplicmap/geral1v".$versao.".map";}
 	}
 }
-if(!isset($estadosl))
-{$estadosl = "estadosl";}
+//if(!isset($estadosl))
+//{$estadosl = "estadosl";}
 /*
  Cria os objetos map que serão processados
 
@@ -589,12 +589,12 @@ Inclui os temas definidos na variável $temasa
 */
 function incluiTemasIniciais()
 {
-	global $temasa,$estadosl,$mapn,$locaplic;
+	global $temasa,$mapn,$locaplic;
 	if (strtoupper(substr(PHP_OS, 0, 3)) == 'WIN')
 	{$temasdir = $locaplic."\\temas";}
 	else
 	{$temasdir = $locaplic."/temas";}
-	if (!isset($temasa)){$temasa = $estadosl;}
+	if (!isset($temasa)){$temasa = "";}
 	$temasa = str_replace(','," ",$temasa);
 	$alayers = explode(" ",$temasa);
 	$existeraster = false;

@@ -27,7 +27,9 @@ MAP
 	#para png1 quando um arquivo raster é adicionado ao mapa
 	#
 	IMAGETYPE AGG_Q
-	EXTENT -76.5125927 -39.3925675209 -29.5851853 9.49014852081
+	#Brasil
+	#EXTENT -76.5125927 -39.3925675209 -29.5851853 9.49014852081
+	EXTENT -126.635767 -74.597837 175.462979 82.512908
 	SIZE 480 500
 	STATUS ON
 	UNITS DD
@@ -159,26 +161,6 @@ MAP
 		TEMPLATE ""
 	END
 	LAYER
-		DATA "/var/www/i3geo/aplicmap/dados/zee"
-		TEMPLATE "none.htm"
-		METADATA
-			"CLASSE"	"SIM" #o simbolo nao sera mostrado na legenda
-			"TEMA"	"Zona Econômica Exclusiva Marinha" #o tema nao sera mostrado na legenda
-			"IDENTIFICA" "nao"
-			"cache" "sim"
-		END
-		NAME "zee"
-		SIZEUNITS PIXELS
-		STATUS DEFAULT
-		TOLERANCE 0
-		TOLERANCEUNITS PIXELS
-		TYPE POLYGON
-		CLASS
-		    NAME " "
-			COLOR 137 201 255
-		END
-	END
-	LAYER
 		DATA "/var/www/i3geo/aplicmap/dados/mundo"
 		GROUP "mundo"
 		METADATA
@@ -235,73 +217,68 @@ MAP
 			END
 		END
 	END
-	LAYER
-		DATA "/var/www/i3geo/aplicmap/dados/estados"
-		METADATA
-			"CLASSE"	"SIM"
-			"TEMA"	"Brasil"
-			"ESCALA" "250000" #escala utilizada nas marcas ao lado do tema na legenda
-			"IDENTIFICA" "nao"
-			"cache" "sim"
-			"EXTENSAO" "-97.911949 -39.413578 -8.185829 9.511159"
-		END
-		NAME "estados"
-		SIZEUNITS PIXELS
-		STATUS DEFAULT
-		TOLERANCE 0
-		TOLERANCEUNITS PIXELS
-		TRANSPARENCY 100
-		TYPE POLYGON
-		UNITS METERS
-		CLASS
-			NAME " "
-			STYLE
-				COLOR 232 220 201
-				MAXSIZE 100
-				MINSIZE 1
-				SIZE 1
-				SYMBOL 0
-			END
-		END
-	END
-	
-  LAYER
-    CONNECTION "http://mapas.mma.gov.br/cgi-bin/mapserv?map=/var/www/webservices/baseraster.map"
-    CONNECTIONTYPE WMS
-    METADATA
-      "wms_srs"	"EPSG:4291"
-      "tipooriginal"	""
-      "wms_exceptions_format"	"application/vnd.ogc.se_xml"
-      "CLASSE"	"SIM"
-      "wfs"	"nao"
-      "TEXTO"	"NAO"
-      "wms_name"	"baseraster"
-      "nomeoriginal"	"cartobase"
-      "wms_format"	"image/png"
-      "wms_formatlist"	"image/gif,image/png,image/png; mode=24bit,image/jpeg,image/wbmp,image/tiff"
-      "wms_connectiontimeout"	"30"
-      "TEMA"	"Base cartográfica"
-      "wms_server_version"	"1.1.1"
-      "wms_style"	"default"
-	  "MENSAGEM" "As cartas RASTER são mostradas apenas em determinadas escalas. Aproxime o mapa até a escala 1:250.000 para que os dados sejam mostrados."
-	  "cache" "sim"
-    END
-    NAME "baserasterwms"
-    OFFSITE 255 255 255
-    STATUS OFF
-    TOLERANCE 0
-    TRANSFORM FALSE
-    TYPE RASTER
-    CLASS
-      NAME " "
-      STYLE
-        ANGLE 360
-        COLOR 200 50 0
-        OUTLINECOLOR 0 0 0
-        SYMBOL 0
-      END
-    END
-  END
+	#
+	#para mostrar o mapa do Brasil, remova os comentários
+	#
+	#LAYER
+	#	DATA "/var/www/i3geo/aplicmap/dados/estados"
+	#	METADATA
+	#		"CLASSE"	"SIM"
+	#		"TEMA"	"Brasil"
+	#		"ESCALA" "250000" #escala utilizada nas marcas ao lado do tema na legenda
+	#		"IDENTIFICA" "nao"
+	#		"cache" "sim"
+	#		"EXTENSAO" "-97.911949 -39.413578 -8.185829 9.511159"
+	#	END
+	#	NAME "estados"
+	#	SIZEUNITS PIXELS
+	#	STATUS DEFAULT
+	#	TOLERANCE 0
+	#	TOLERANCEUNITS PIXELS
+	#	TRANSPARENCY 100
+	#	TYPE POLYGON
+	#	UNITS METERS
+	#	CLASS
+	#		NAME " "
+	#		STYLE
+	#			COLOR 232 220 201
+	#			MAXSIZE 100
+	#			MINSIZE 1
+	#			SIZE 1
+	#			SYMBOL 0
+	#		END
+	#	END
+	#END
+	#
+	#para mostrar os limites estaduais do Brasil, remova os comentários
+	#
+	#LAYER
+	#  NAME estadosl # ok
+	#  TYPE line
+	#  STATUS DEFAULT
+	#  DATA "/var/www/i3geo/aplicmap/dados/estados"
+	#  TEMPLATE "estados.htm"
+	#  METADATA
+	#	  ITENS "ESTADO"
+	#	  ITENSDESC "Estado"
+	#  	  TEMA "Limite Estadual"
+	#	  ESCALA "250000"
+	#  	  CLASSE "SIM"
+	#	  cache "sim"
+	#  END
+	#  CLASS
+	#	  NAME " "
+	#	  STYLE
+	#		  WIDTH 2
+	#          COLOR 255 255 0
+	#          OUTLINECOLOR -1 -1 -1
+	#	  END
+	#	  STYLE
+	#          COLOR 0 0 0
+	#          OUTLINECOLOR -1 -1 -1
+	#	  END
+	#  END  # CLASS
+	#END  # LAYER
 
   
 	LAYER
