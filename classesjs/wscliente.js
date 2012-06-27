@@ -1,7 +1,7 @@
 /*
 Title: Cliente de web services
 
-Classe javascript da aplicação de consulta de web services.
+Classe javascript da aplica&ccedil;ão de consulta de web services.
 
 Lê o conjunto de javascripts para o funcionamento da interface wscliente.htm
 
@@ -15,20 +15,20 @@ GPL2
 
 i3Geo Interface Integrada de Ferramentas de Geoprocessamento para Internet
 
-Direitos Autorais Reservados (c) 2006 Ministério do Meio Ambiente Brasil
+Direitos Autorais Reservados (c) 2006 Minist&eacute;rio do Meio Ambiente Brasil
 Desenvolvedor: Edmar Moretti edmar.moretti@mma.gov.br
 
-Este programa é software livre; você pode redistribuí-lo
-e/ou modificá-lo sob os termos da Licença Pública Geral
+Este programa &eacute; software livre; você pode redistribu&iacute;-lo
+e/ou modific&aacute;-lo sob os termos da Licen&ccedil;a P&uacute;blica Geral
 GNU conforme publicada pela Free Software Foundation;
 
-Este programa é distribuído na expectativa de que seja útil,
-porém, SEM NENHUMA GARANTIA; nem mesmo a garantia implícita
-de COMERCIABILIDADE OU ADEQUAÇÃO A UMA FINALIDADE ESPECÍFICA.
-Consulte a Licença Pública Geral do GNU para mais detalhes.
-Você deve ter recebido uma cópia da Licença Pública Geral do
+Este programa &eacute; distribu&iacute;do na expectativa de que seja &uacute;til,
+por&eacute;m, SEM NENHUMA GARANTIA; nem mesmo a garantia impl&iacute;cita
+de COMERCIABILIDADE OU ADEQUAÇ&Atilde;O A UMA FINALIDADE ESPEC&Iacute;FICA.
+Consulte a Licen&ccedil;a P&uacute;blica Geral do GNU para mais detalhes.
+Você deve ter recebido uma c&oacute;pia da Licen&ccedil;a P&uacute;blica Geral do
 GNU junto com este programa; se não, escreva para a
-Free Software Foundation, Inc., no endereço
+Free Software Foundation, Inc., no endere&ccedil;o
 59 Temple Street, Suite 330, Boston, MA 02111-1307 USA.
 
 Veja:
@@ -67,7 +67,7 @@ document.write(allScriptTags);
 /**
 Classe: i3geo_wscliente_configura
 
-Cria o objeto javascript com os parâmetros de configuração da api e com as funções de manipulação dos elementos da interface.
+Cria o objeto javascript com os parâmetros de configura&ccedil;ão da api e com as fun&ccedil;&otilde;es de manipula&ccedil;ão dos elementos da interface.
 
 Example:
 
@@ -83,17 +83,17 @@ var i3geo_wscliente_configura = new i3geo_wscliente_configura
 
 Parametros:
 
-loc_i3geo - endereço web onde está instalado o i3geo.
+loc_i3geo - endere&ccedil;o web onde est&aacute; instalado o i3geo.
 
 corpo - id do div principal onde as mensagens serão mostradas no navegador
 
-enderecows - id do elemento html do tipo input que receberá o valor da seleção feita pelo usuário ao clicar em um endereço ws 
+enderecows - id do elemento html do tipo input que receber&aacute; o valor da sele&ccedil;ão feita pelo usu&aacute;rio ao clicar em um endere&ccedil;o ws 
 
-enderecowms - id do elemento html do tipo input que receberá o valor da seleção feita pelo usuário ao clicar em um endereço wms 
+enderecowms - id do elemento html do tipo input que receber&aacute; o valor da sele&ccedil;ão feita pelo usu&aacute;rio ao clicar em um endere&ccedil;o wms 
 
-rssws - array com a lista de endereços dos serviços RSS com a lista de webservices convencionais
+rssws - array com a lista de endere&ccedil;os dos servi&ccedil;os RSS com a lista de webservices convencionais
 
-rsswms - array com a lista de endereços dos serviços RSS com a lista de webservices OGC-WMS
+rsswms - array com a lista de endere&ccedil;os dos servi&ccedil;os RSS com a lista de webservices OGC-WMS
 */
 function i3geo_wscliente_configura(loc_i3geo,corpo,enderecows,enderecowms,rssws,rsswms)
 {
@@ -123,11 +123,11 @@ function i3geo_wscliente_configura(loc_i3geo,corpo,enderecows,enderecowms,rssws,
 	*/
 	this.rsswms = rsswms;
 	/* 
-	Tipo de serviço wms ativo
+	Tipo de servi&ccedil;o wms ativo
 	*/
 	this.tipo = "";
 	/* 
-	Código do tema wms escolhido
+	C&oacute;digo do tema wms escolhido
 	*/
 	this.tema = "";
 	/* 
@@ -135,13 +135,13 @@ function i3geo_wscliente_configura(loc_i3geo,corpo,enderecows,enderecowms,rssws,
 	*/
 	this.nometema = "";
 	/* 
-	Função do ws escolhida.
+	Fun&ccedil;ão do ws escolhida.
 	*/
 	this.funcao = "";
 	/*
 	Function: inicia
 
-	Monta a árvore de opções preenchendo a div definida em this.corpo
+	Monta a &aacute;rvore de op&ccedil;&otilde;es preenchendo a div definida em this.corpo
 	*/
 	this.inicia = function()
 	{
@@ -150,17 +150,17 @@ function i3geo_wscliente_configura(loc_i3geo,corpo,enderecows,enderecowms,rssws,
 		var ii = "onmouseover='javascript:this.style.textDecoration=\"underline\"' onmouseout='javascript:this.style.textDecoration=\"none\"'";
 		ins += "<b>&nbsp;Ajuda</b><br>";
 		ins += i+"<span "+ii+" class=clique onclick='$i3geo_wscliente.ativa(\"oquews\")'>Web Services</span><br>";
-		ins += i+"<span "+ii+"  class=clique onclick='$i3geo_wscliente.ativa(\"oqueogc\")'>Padrões OGC</span><br>";
-		ins += i+"<span "+ii+"  class=clique onclick='$i3geo_wscliente.ativa(\"oquecarto\")'>WS cartográfico</span><br><br>";
+		ins += i+"<span "+ii+"  class=clique onclick='$i3geo_wscliente.ativa(\"oqueogc\")'>Padr&otilde;es OGC</span><br>";
+		ins += i+"<span "+ii+"  class=clique onclick='$i3geo_wscliente.ativa(\"oquecarto\")'>WS cartogr&aacute;fico</span><br><br>";
 		ins += "</table>";
 		ins += "<b>&nbsp;Mapas</b><br>";
-		ins += i+"<span "+ii+"  class=clique onclick='$i3geo_wscliente.servicoswms()'>Escolher serviço</span><br>";
+		ins += i+"<span "+ii+"  class=clique onclick='$i3geo_wscliente.servicoswms()'>Escolher servi&ccedil;o</span><br>";
 		ins += i+"<span "+ii+"  class=clique onclick='$i3geo_wscliente.listatemas()'>Escolher um tema</span><br>";
 		ins += i+"<span "+ii+"  class=clique onclick='$i3geo_wscliente.getcapabilities(\"WMS\")'>Resposta XML (WMS)</span><br>";
 		ins += i+"<span "+ii+"  class=clique onclick='$i3geo_wscliente.getcapabilities(\"WFS\")'>Resposta XML (WFS)</span><br>";
 /*
 		ins += "<b>&nbsp;Dados</b><br>";
-		ins += i+"<span "+ii+"  class=clique onclick='$i3geo_wscliente.servicosws()'>Escolher serviço</span><br>";
+		ins += i+"<span "+ii+"  class=clique onclick='$i3geo_wscliente.servicosws()'>Escolher servi&ccedil;o</span><br>";
 		ins += i+"<span "+ii+"  class=clique onclick='$i3geo_wscliente.listafuncoes()'>Escolher fun&ccedil;&atilde;o</span><br>";
 		ins += i+"<span "+ii+"  class=clique onclick='$i3geo_wscliente.wsdl()'>WSDL</span><br><br>";
 
@@ -194,15 +194,15 @@ function i3geo_wscliente_configura(loc_i3geo,corpo,enderecows,enderecowms,rssws,
 	/*
 	Function: ativa
 
-	Ativa uma opção escolhida pelo usuário, mostrando o seu respectivo texto no navegador. É utilizado nas opções que apresentam textos explicativos. 
+	Ativa uma op&ccedil;ão escolhida pelo usu&aacute;rio, mostrando o seu respectivo texto no navegador. &Eacute; utilizado nas op&ccedil;&otilde;es que apresentam textos explicativos. 
 
-	O conteúdo do div (id) é lido e incluído na div corpo
+	O conte&uacute;do do div (id) &eacute; lido e inclu&iacute;do na div corpo
 
-	Por padrão, os conteúdos devem ser incluídos em DIVS com os seguintes ids- oquews oqueogc oquecarto
+	Por padrão, os conte&uacute;dos devem ser inclu&iacute;dos em DIVS com os seguintes ids- oquews oqueogc oquecarto
 
 	Parâmetros:
 
-	id - id do div com o conteúdo que será ativado
+	id - id do div com o conte&uacute;do que ser&aacute; ativado
 	*/
 	this.ativa = function (id)
 	{
@@ -212,7 +212,7 @@ function i3geo_wscliente_configura(loc_i3geo,corpo,enderecows,enderecowms,rssws,
 	/*
 	Function: listaLinkServicos
 
-	Mostra links que permitem ao usuário abrir os RSSs cadastrados para determinado serviço.
+	Mostra links que permitem ao usu&aacute;rio abrir os RSSs cadastrados para determinado servi&ccedil;o.
 
 	Parametros:
 
@@ -235,13 +235,13 @@ function i3geo_wscliente_configura(loc_i3geo,corpo,enderecows,enderecowms,rssws,
 	/*
 	Function: servicosws
 
-	Lista os web services existentes nos arquivos definidos na variável rssws.
+	Lista os web services existentes nos arquivos definidos na vari&aacute;vel rssws.
 
-	É feita a leitura dos arquivos RSS e montada uma lista clicável com os serviços encontrados.
+	&Eacute; feita a leitura dos arquivos RSS e montada uma lista clic&aacute;vel com os servi&ccedil;os encontrados.
 	*/
 	this.servicosws = function()
 	{
-		//monta a lista retornada pela função ajax
+		//monta a lista retornada pela fun&ccedil;ão ajax
 		var monta = function(retorno)
 		{
 			var linhas = retorno.data.split("|"),
@@ -280,9 +280,9 @@ function i3geo_wscliente_configura(loc_i3geo,corpo,enderecows,enderecowms,rssws,
 	/*
 	Function: servicoswms
 
-	Lista os web services existentes no arquivo definido na variável rsswms.
+	Lista os web services existentes no arquivo definido na vari&aacute;vel rsswms.
 
-	A variável rsswms deve ser definida no arquivo html que inicia o wscliente.
+	A vari&aacute;vel rsswms deve ser definida no arquivo html que inicia o wscliente.
 
 	*/
 	this.servicoswms = function()
@@ -379,7 +379,7 @@ function i3geo_wscliente_configura(loc_i3geo,corpo,enderecows,enderecowms,rssws,
 			cp.call(p,"getcapabilities",monta);
 		}
 		else
-		$i(this.corpo).innerHTML = "<p>Nenhum serviço foi escolhido.</p>";
+		$i(this.corpo).innerHTML = "<p>Nenhum servi&ccedil;o foi escolhido.</p>";
 	};
 	/*
 	Function: listatemas
@@ -408,7 +408,7 @@ function i3geo_wscliente_configura(loc_i3geo,corpo,enderecows,enderecowms,rssws,
 		$i("RSSwms").style.display="none";
 		$i(this.corpo).style.display="block";
 		if(WCservico == "")
-		{$i(this.corpo).innerHTML = "<p>Nenhum serviço foi escolhido.</p>";}
+		{$i(this.corpo).innerHTML = "<p>Nenhum servi&ccedil;o foi escolhido.</p>";}
 		aguardeTotal("block");
 		var p = this.loc_i3geo+"/classesphp/mapa_controle.php?map_file=&funcao=temaswms&servico="+WCservico+"&g_sid=";
 		var cp = new cpaint();
@@ -480,7 +480,7 @@ function i3geo_wscliente_configura(loc_i3geo,corpo,enderecows,enderecowms,rssws,
 	/*
 	Function: listafuncoes
 
-	Busca a lista de funções de um WS
+	Busca a lista de fun&ccedil;&otilde;es de um WS
 
 	*/
 	this.listafuncoes = function()
@@ -523,16 +523,16 @@ function i3geo_wscliente_configura(loc_i3geo,corpo,enderecows,enderecowms,rssws,
 			cp.call(p,"funcoesws",WCmostraFuncoes);
 		}
 		else
-		$i(this.corpo).innerHTML = "<p>Nenhum serviço foi escolhido.</p>";
+		$i(this.corpo).innerHTML = "<p>Nenhum servi&ccedil;o foi escolhido.</p>";
 	};
 	/*
 	Function: selParFuncao
 
-	Lista os parâmetros de uma função para o usuário digitar os valores.
+	Lista os parâmetros de uma fun&ccedil;ão para o usu&aacute;rio digitar os valores.
 
 	Parâmetros:
 
-	funcao - função que será chamada
+	funcao - fun&ccedil;ão que ser&aacute; chamada
 
 	*/
 	this.selParFuncao = function(funcao)
@@ -569,7 +569,7 @@ function i3geo_wscliente_configura(loc_i3geo,corpo,enderecows,enderecowms,rssws,
 	/*
 	Function: chamadados
 
-	Busca os dados de uma função de um serviço
+	Busca os dados de uma fun&ccedil;ão de um servi&ccedil;o
 
 	*/
 	this.chamadados = function(retorno)
@@ -616,14 +616,14 @@ Inicia a interface do cliente de web services.
 
 Parametros:
 
-objeto_i3geo_wscliente_configura - objeto com os parâmentros de configuração criado pela função i3geo_gl_configura
+objeto_i3geo_wscliente_configura - objeto com os parâmentros de configura&ccedil;ão criado pela fun&ccedil;ão i3geo_gl_configura
 */
 function i3geo_wscliente_inicia(objeto_i3geo_wscliente_configura)
 {
 	/*
 	Propriedade: $i3geo_wscliente
 
-	Contém o objeto $i3geo_wscliente com todas as propriedades e funções de controle da interface
+	Cont&eacute;m o objeto $i3geo_wscliente com todas as propriedades e fun&ccedil;&otilde;es de controle da interface
 	*/
 	$i3geo_wscliente = objeto_i3geo_wscliente_configura;
 	$i3geo_wscliente.inicia();
@@ -638,15 +638,15 @@ function i3geo_wscliente_inicia(objeto_i3geo_wscliente_configura)
 /*
 Function: seltema
 
-Seta as variáveis necessárias para visualizar o mapa com o OpenLayers após o usuário escolher uma camada de um serviço.
+Seta as vari&aacute;veis necess&aacute;rias para visualizar o mapa com o OpenLayers ap&oacute;s o usu&aacute;rio escolher uma camada de um servi&ccedil;o.
 
-Essa função é chamada por padrão quando uma camada é escolhida na lista de camadas retornada pelo i3geo.
+Essa fun&ccedil;ão &eacute; chamada por padrão quando uma camada &eacute; escolhida na lista de camadas retornada pelo i3geo.
 
 Parametros:
 
 tipo - tipo de tema
 tema - nome do tema
-legenda - endereço da legenda
+legenda - endere&ccedil;o da legenda
 nometema - nome completo do tema
 
 */

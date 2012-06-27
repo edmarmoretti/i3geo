@@ -13,20 +13,20 @@ GPL2
 
 i3Geo Interface Integrada de Ferramentas de Geoprocessamento para Internet
 
-Direitos Autorais Reservados (c) 2006 Ministério do Meio Ambiente Brasil
+Direitos Autorais Reservados (c) 2006 Minist&eacute;rio do Meio Ambiente Brasil
 Desenvolvedor: Edmar Moretti edmar.moretti@mma.gov.br
 
-Este programa é software livre; você pode redistribuí-lo
-e/ou modificá-lo sob os termos da Licença Pública Geral
+Este programa &eacute; software livre; você pode redistribu&iacute;-lo
+e/ou modific&aacute;-lo sob os termos da Licen&ccedil;a P&uacute;blica Geral
 GNU conforme publicada pela Free Software Foundation;
 
-Este programa é distribuído na expectativa de que seja útil,
-porém, SEM NENHUMA GARANTIA; nem mesmo a garantia implícita
-de COMERCIABILIDADE OU ADEQUAÇÃO A UMA FINALIDADE ESPECÍFICA.
-Consulte a Licença Pública Geral do GNU para mais detalhes.
-Você deve ter recebido uma cópia da Licença Pública Geral do
+Este programa &eacute; distribu&iacute;do na expectativa de que seja &uacute;til,
+por&eacute;m, SEM NENHUMA GARANTIA; nem mesmo a garantia impl&iacute;cita
+de COMERCIABILIDADE OU ADEQUAÇ&Atilde;O A UMA FINALIDADE ESPEC&Iacute;FICA.
+Consulte a Licen&ccedil;a P&uacute;blica Geral do GNU para mais detalhes.
+Você deve ter recebido uma c&oacute;pia da Licen&ccedil;a P&uacute;blica Geral do
 GNU junto com este programa; se não, escreva para a
-Free Software Foundation, Inc., no endereço
+Free Software Foundation, Inc., no endere&ccedil;o
 59 Temple Street, Suite 330, Boston, MA 02111-1307 USA.
 */
 if(typeof(i3GEO) === 'undefined'){
@@ -90,9 +90,9 @@ i3GEO.maparef = {
 	/*
 	Propriedade: TRANSICAOSUAVE
 
-	Altera a transparência quando o mouse sobrepõe ao mapa de referência e quando sai
+	Altera a transparência quando o mouse sobrep&otilde;e ao mapa de referência e quando sai
 
-	Essa opção como true não funciona bem no IE
+	Essa op&ccedil;ão como true não funciona bem no IE
 
 	Tipo:
 	{boolean}
@@ -104,7 +104,7 @@ i3GEO.maparef = {
 	/*
 	Propriedade: OPACIDADE
 
-	Valor da transparência mínima utilizada quando TRANSICAOSUAVE for igual a true.
+	Valor da transparência m&iacute;nima utilizada quando TRANSICAOSUAVE for igual a true.
 
 	Varia de 0 a 100
 
@@ -118,7 +118,7 @@ i3GEO.maparef = {
 	/*
 	Propriedade: TOP
 
-	Posição da janela em relação ao topo do mapa
+	Posi&ccedil;ão da janela em rela&ccedil;ão ao topo do mapa
 
 	Tipo:
 	{Numeric}
@@ -130,7 +130,7 @@ i3GEO.maparef = {
 	/*
 	Propriedade: RIGHT
 
-	Posição da janela em relação ao lado direito do mapa
+	Posi&ccedil;ão da janela em rela&ccedil;ão ao lado direito do mapa
 
 	{Numeric}
 
@@ -246,13 +246,13 @@ i3GEO.maparef = {
 
 	Atualiza o mapa de referência.
 
-	Se o modo cgi estiver ativado, o mapa de referência é desenhado utilizando-se como src da imagem o programa cgi do Mapserver.
+	Se o modo cgi estiver ativado, o mapa de referência &eacute; desenhado utilizando-se como src da imagem o programa cgi do Mapserver.
 
-	No modo dinâmico, a imagem é gerada de forma diferenciada. Nesse caso, o modo cgi é desabilitado.
+	No modo dinâmico, a imagem &eacute; gerada de forma diferenciada. Nesse caso, o modo cgi &eacute; desabilitado.
 
-	O atualizaReferencia é sempre chamado após o mapa ser redesenhado.
+	O atualizaReferencia &eacute; sempre chamado ap&oacute;s o mapa ser redesenhado.
 
-	Se houve alteração na extensão, é preciso refazer o mapa de referência se não, a imagem atual é armazenada no quado de animação
+	Se houve altera&ccedil;ão na extensão, &eacute; preciso refazer o mapa de referência se não, a imagem atual &eacute; armazenada no quado de anima&ccedil;ão
 	*/
 	atualiza: function(forca){
 		if(arguments.length === 0)
@@ -268,11 +268,11 @@ i3GEO.maparef = {
 			}
 			if(tiporef === "fixo"){
 				//
-				//no modo cgi ativado, a obtenção da imagem é feita de forma diferente do modo normal do mapa
+				//no modo cgi ativado, a obten&ccedil;ão da imagem &eacute; feita de forma diferente do modo normal do mapa
 				//
 				if(i3GEO.parametros.utilizacgi.toLowerCase() !== "sim"){
 					//
-					//se o valor do tamanho da celula já existir, não é necessário redesenhar a imagem
+					//se o valor do tamanho da celula j&aacute; existir, não &eacute; necess&aacute;rio redesenhar a imagem
 					//
 					if(i3GEO.parametros.celularef === "" || $i("imagemReferencia").src === "" || forca === true)
 					{i3GEO.php.referencia(i3GEO.maparef.processaImagem);}
@@ -297,9 +297,9 @@ i3GEO.maparef = {
 	/*
 	Function: processaImagem
 
-	Substituí a imagem do mapa de referência pela última gerada.
+	Substitu&iacute; a imagem do mapa de referência pela &uacute;ltima gerada.
 
-	Esta função processa os dados de uma chamada AJAX para atualizar o mapa de referência
+	Esta fun&ccedil;ão processa os dados de uma chamada AJAX para atualizar o mapa de referência
 
 	Parametro:
 
@@ -335,9 +335,9 @@ i3GEO.maparef = {
 	/*
 	Function: atualizaBox
 
-	Atualiza o tamanho e a posição do box que indica a extensão geográfica do mapa atual
+	Atualiza o tamanho e a posi&ccedil;ão do box que indica a extensão geogr&aacute;fica do mapa atual
 
-	O box é um div com id = "boxref".
+	O box &eacute; um div com id = "boxref".
 
 	*/
 	atualizaBox: function(){
@@ -372,11 +372,11 @@ i3GEO.maparef = {
 			else{novoel.style.opacity= 0.4;}
 			$i("mapaReferencia").appendChild(novoel);
 			//
-			//aplica os eventos de movimentação sobre o box azul
+			//aplica os eventos de movimenta&ccedil;ão sobre o box azul
 			//
 			boxrefdd = new YAHOO.util.DD("boxref");
 			//
-			//atualiza o mapa principal quando o box é modificado manualmente
+			//atualiza o mapa principal quando o box &eacute; modificado manualmente
 			//
 			novoel.onmouseup = function(){
 				var rect,telaminx,telamaxx,telaminy,m,x,ext;
@@ -398,7 +398,7 @@ i3GEO.maparef = {
 	/*
 	Function: click
 
-	Ocorre quando o usuário clica sobre o mapa de referência, deslocando o mapa principal
+	Ocorre quando o usu&aacute;rio clica sobre o mapa de referência, deslocando o mapa principal
 	*/
 	click: function(){
 		if(typeof(console) !== 'undefined'){console.info("i3GEO.maparef.click()");}

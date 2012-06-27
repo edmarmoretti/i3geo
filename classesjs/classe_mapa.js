@@ -760,7 +760,7 @@ i3GEO.mapa = {
 							ntips = tips.length;
 							ins = "";
 							ds = temas[j].resultado.dados;
-							if(ds !== " "){
+							if(ds !== " " && ds[0] && ds[0] != " "){
 								try{
 									nds = ds.length;
 									for(s=0;s<nds;s += 1){

@@ -12,20 +12,20 @@ GPL2
 
 i3Geo Interface Integrada de Ferramentas de Geoprocessamento para Internet
 
-Direitos Autorais Reservados (c) 2006 Ministério do Meio Ambiente Brasil
+Direitos Autorais Reservados (c) 2006 Minist&eacute;rio do Meio Ambiente Brasil
 Desenvolvedor: Edmar Moretti edmar.moretti@mma.gov.br
 
-Este programa é software livre; você pode redistribuí-lo
-e/ou modificá-lo sob os termos da Licença Pública Geral
+Este programa &eacute; software livre; você pode redistribu&iacute;-lo
+e/ou modific&aacute;-lo sob os termos da Licen&ccedil;a P&uacute;blica Geral
 GNU conforme publicada pela Free Software Foundation;
 
-Este programa é distribuído na expectativa de que seja útil,
-porém, SEM NENHUMA GARANTIA; nem mesmo a garantia implícita
-de COMERCIABILIDADE OU ADEQUAÇÃO A UMA FINALIDADE ESPECÍFICA.
-Consulte a Licença Pública Geral do GNU para mais detalhes.
-Você deve ter recebido uma cópia da Licença Pública Geral do
+Este programa &eacute; distribu&iacute;do na expectativa de que seja &uacute;til,
+por&eacute;m, SEM NENHUMA GARANTIA; nem mesmo a garantia impl&iacute;cita
+de COMERCIABILIDADE OU ADEQUAÇ&Atilde;O A UMA FINALIDADE ESPEC&Iacute;FICA.
+Consulte a Licen&ccedil;a P&uacute;blica Geral do GNU para mais detalhes.
+Você deve ter recebido uma c&oacute;pia da Licen&ccedil;a P&uacute;blica Geral do
 GNU junto com este programa; se não, escreva para a
-Free Software Foundation, Inc., no endereço
+Free Software Foundation, Inc., no endere&ccedil;o
 59 Temple Street, Suite 330, Boston, MA 02111-1307 USA.
 */
 if(typeof(i3GEO) === 'undefined'){
@@ -34,7 +34,7 @@ if(typeof(i3GEO) === 'undefined'){
 /*
 Propriedade: cpJSON
 
-Objeto CPAINT (ver biblioteca CPAINT) utilizado nas chamadas AJAX assíncronas com retorno no formato JSON
+Objeto CPAINT (ver biblioteca CPAINT) utilizado nas chamadas AJAX ass&iacute;ncronas com retorno no formato JSON
 
 Exemplo:
 
@@ -50,9 +50,9 @@ Return:
 
 	cpJSON.call(p,"teste",temp);
 
-	onde, p contém o nome do programa PHP e seus parâmetros
-	"teste" é o nome da função PHP (no caso do i3Geo, isso não afeta em nada)
-	e temp é a função que tratará o retorno dos dados.
+	onde, p cont&eacute;m o nome do programa PHP e seus parâmetros
+	"teste" &eacute; o nome da fun&ccedil;ão PHP (no caso do i3Geo, isso não afeta em nada)
+	e temp &eacute; a fun&ccedil;ão que tratar&aacute; o retorno dos dados.
 
 */
 cpJSON = new cpaint();
@@ -63,32 +63,32 @@ Classe: i3GEO.php
 
 Chamadas em AJAX que executam programas no lado do servidor
 
-Muitos dos parâmetros exigidos pelos programas em PHP são obtidos da variável
-de seção aberta no servidor quando o i3Geo é inicializado, é o caso por exemplo do nome
+Muitos dos parâmetros exigidos pelos programas em PHP são obtidos da vari&aacute;vel
+de se&ccedil;ão aberta no servidor quando o i3Geo &eacute; inicializado, &eacute; o caso por exemplo do nome
 do arquivo correspondente ao mapfile atualmente em uso
 
-Quando classe_php.js é carregado, é criado o objeto cpJSON que necessita da biblioteca CPAINT. Esse objeto
-é utilizado nas chamadas AJAX.
+Quando classe_php.js &eacute; carregado, &eacute; criado o objeto cpJSON que necessita da biblioteca CPAINT. Esse objeto
+&eacute; utilizado nas chamadas AJAX.
 
-O objeto cpJSON possuí um método .call que executa a operação AJAX. Esse método utiliza basicamente dois parâmetros,
-sendo o primeiro o endereço do programa PHP que será executado no servidor e o outro é o nome da função que irá
+O objeto cpJSON possu&iacute; um m&eacute;todo .call que executa a opera&ccedil;ão AJAX. Esse m&eacute;todo utiliza basicamente dois parâmetros,
+sendo o primeiro o endere&ccedil;o do programa PHP que ser&aacute; executado no servidor e o outro &eacute; o nome da fun&ccedil;ão que ir&aacute;
 receber e processar os resultados do programa. Exemplo:
 
 cpJSON.call(p,"",funcao);
 
-"p" é a URL e funcao o nome da função
+"p" &eacute; a URL e funcao o nome da fun&ccedil;ão
 
-Para compor "p" o i3geo utiliza normalmente a variável i3GEO.configura.locaplic e i3GEO.configura.sid, por exemplo:
+Para compor "p" o i3geo utiliza normalmente a vari&aacute;vel i3GEO.configura.locaplic e i3GEO.configura.sid, por exemplo:
 
 var p = i3GEO.configura.locaplic+"/classesphp/mapa_controle.php?funcao=insereSHPgrafico&g_sid="+i3GEO.configura.sid
 
-Para mais detalhes sobre as funções, veja <mapa_controle.php>
+Para mais detalhes sobre as fun&ccedil;&otilde;es, veja <mapa_controle.php>
 */
 i3GEO.php = {
 	/*
 	Function: verifica
 
-	Verifica se as variáveis i3GEO.configura.locaplic e i3GEO.configura.sid existem
+	Verifica se as vari&aacute;veis i3GEO.configura.locaplic e i3GEO.configura.sid existem
 	*/
 	verifica: function(){
 		if(i3GEO.configura.locaplic === undefined)
@@ -604,9 +604,9 @@ i3GEO.php = {
 	/*
 	Function: mudaext
 
-	O parâmetro "atualiza" é do tipo booleano e indica se o redesenho do mapa será feito ou não.
+	O parâmetro "atualiza" &eacute; do tipo booleano e indica se o redesenho do mapa ser&aacute; feito ou não.
 
-	O parâmetro "geo" é do tipo booleano e indica se as coordenadas deverão ser convertidas para geográficas ao serem salvas no mapfile
+	O parâmetro "geo" &eacute; do tipo booleano e indica se as coordenadas deverão ser convertidas para geogr&aacute;ficas ao serem salvas no mapfile
 
 	<MUDAEXT>
 	*/
@@ -1185,7 +1185,7 @@ i3GEO.php = {
 		i3GEO.php.verifica();
 		var p = i3GEO.configura.locaplic+"/classesphp/mapa_controle.php",
 			par = "funcao=corpo&tipoimagem="+tipoimagem+"&g_sid="+i3GEO.configura.sid+"&interface="+i3GEO.Interface.ATUAL;
-		//recalcula a extensão geográfica do parametro i3GEO.parametros.mapexten
+		//recalcula a extensão geogr&aacute;fica do parametro i3GEO.parametros.mapexten
 		if(i3GEO.Interface.ATUAL === "googleearth"){
 			i3GEO.Interface.googleearth.recalcPar();
 			par += "&mapexten="+i3GEO.parametros.mapexten;

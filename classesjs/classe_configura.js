@@ -1,7 +1,7 @@
 /*jslint plusplus:false,white:false,undef: false, rhino: true, onevar: true, evil: false */
 
 /*
-Title: Configurações gerais
+Title: Configura&ccedil;&otilde;es gerais
 
 Arquivo:
 
@@ -13,20 +13,20 @@ GPL2
 
 i3Geo Interface Integrada de Ferramentas de Geoprocessamento para Internet
 
-Direitos Autorais Reservados (c) 2006 Ministério do Meio Ambiente Brasil
+Direitos Autorais Reservados (c) 2006 Minist&eacute;rio do Meio Ambiente Brasil
 Desenvolvedor: Edmar Moretti edmar.moretti@mma.gov.br
 
-Este programa é software livre; você pode redistribuí-lo
-e/ou modificá-lo sob os termos da Licença Pública Geral
+Este programa &eacute; software livre; você pode redistribu&iacute;-lo
+e/ou modific&aacute;-lo sob os termos da Licen&ccedil;a P&uacute;blica Geral
 GNU conforme publicada pela Free Software Foundation;
 
-Este programa é distribuído na expectativa de que seja útil,
-porém, SEM NENHUMA GARANTIA; nem mesmo a garantia implícita
-de COMERCIABILIDADE OU ADEQUAÇÃO A UMA FINALIDADE ESPECÍFICA.
-Consulte a Licença Pública Geral do GNU para mais detalhes.
-Você deve ter recebido uma cópia da Licença Pública Geral do
+Este programa &eacute; distribu&iacute;do na expectativa de que seja &uacute;til,
+por&eacute;m, SEM NENHUMA GARANTIA; nem mesmo a garantia impl&iacute;cita
+de COMERCIABILIDADE OU ADEQUAÇ&Atilde;O A UMA FINALIDADE ESPEC&Iacute;FICA.
+Consulte a Licen&ccedil;a P&uacute;blica Geral do GNU para mais detalhes.
+Você deve ter recebido uma c&oacute;pia da Licen&ccedil;a P&uacute;blica Geral do
 GNU junto com este programa; se não, escreva para a
-Free Software Foundation, Inc., no endereço
+Free Software Foundation, Inc., no endere&ccedil;o
 59 Temple Street, Suite 330, Boston, MA 02111-1307 USA.
 */
 if(typeof(i3GEO) === 'undefined'){
@@ -35,7 +35,7 @@ if(typeof(i3GEO) === 'undefined'){
 /*
 Classe: i3GEO.configura
 
-Configuração do i3geo
+Configura&ccedil;ão do i3geo
 
 Vc pode alterar com esta classe a maioria dos parâmetros que controlam
 o funcionamento do i3geo.
@@ -54,13 +54,13 @@ i3GEO.configura = {
 	/*
 	Propriedade: grupoLayers
 
-	Lista de grupos e seus respectivos layers, para montagem da árvore de camadas.
+	Lista de grupos e seus respectivos layers, para montagem da &aacute;rvore de camadas.
 
-	Se essa propriedade estiver definida, as camadas serão agrupadas na árvore de camadas conforme os grupos definidos.
+	Se essa propriedade estiver definida, as camadas serão agrupadas na &aacute;rvore de camadas conforme os grupos definidos.
 
-	Layers que não constarem nessa propriedade serão incluídos no grupo "outros"
+	Layers que não constarem nessa propriedade serão inclu&iacute;dos no grupo "outros"
 
-	Ao definir grupos, a árvore não conterá as opções de mudança da prdem de desenho das camadas 
+	Ao definir grupos, a &aacute;rvore não conter&aacute; as op&ccedil;&otilde;es de mudan&ccedil;a da prdem de desenho das camadas 
 	( veja http://localhost/i3geo/exemplos/legenda2.htm )
 
 	Por exemplo
@@ -69,8 +69,8 @@ i3GEO.configura = {
 		{nome:"Grupo 2",icone:false,dinamico:true,expandido:false,layers:["mundo"]}
 	];
 
-	Onde "icone" indica se o ícone de ligar/desligar todos os temas do grupo será mostrado,
-	"dinamico" significa que o nó pode ser expandido ou não, e "expandido" significa que o nó inicia aberto se a árvore for dinâmica
+	Onde "icone" indica se o &iacute;cone de ligar/desligar todos os temas do grupo ser&aacute; mostrado,
+	"dinamico" significa que o n&oacute; pode ser expandido ou não, e "expandido" significa que o n&oacute; inicia aberto se a &aacute;rvore for dinâmica
 
 	Type:
 	{JSON}
@@ -82,9 +82,9 @@ i3GEO.configura = {
 	/*
 	Propriedade: oMenuData
 
-	Itens incluídos no menu suspenso. Define os parâmetros para o gadget menu suspenso
+	Itens inclu&iacute;dos no menu suspenso. Define os parâmetros para o gadget menu suspenso
 	
-	Mais informações em <classe_gadgets.js> função <mostraMenuSuspenso>
+	Mais informa&ccedil;&otilde;es em <classe_gadgets.js> fun&ccedil;ão <mostraMenuSuspenso>
 
 	Exemplo:
 
@@ -173,8 +173,8 @@ i3GEO.configura = {
 			{ id:"omenudataInterface5",text: "Google Earth", url: "javascript:window.location = i3GEO.configura.locaplic+'/interface/googleearth.phtml?'+i3GEO.configura.sid" },
 			{ id:"omenudataInterface0b",text: '<span style=color:gray;text-decoration:underline; ><b>'+$trad("u27")+'</b></span>',url: "#"},
 			{ id:"omenudataInterface6",text: $trad("u21"), url: "javascript:var w = window.open(i3GEO.configura.locaplic+'/geradordelinks.htm')" },
-			{ id:"omenudataInterface7",text: "Serviços WMS", url: "javascript:var w = window.open(i3GEO.configura.locaplic+'/ogc.htm')" },
-			{ id:"omenudataInterface8",text: "Hiperbólica", url: "javascript:var w = window.open(i3GEO.configura.locaplic+'/hiperbolica.html')" },
+			{ id:"omenudataInterface7",text: "Servi&ccedil;os WMS", url: "javascript:var w = window.open(i3GEO.configura.locaplic+'/ogc.htm')" },
+			{ id:"omenudataInterface8",text: "Hiperb&oacute;lica", url: "javascript:var w = window.open(i3GEO.configura.locaplic+'/hiperbolica.html')" },
 			{ id:"omenudataInterface9",text: "Download de dados", url: "javascript:var w = window.open(i3GEO.configura.locaplic+'/datadownload.htm')" },
 			{ id:"omenudataInterface11",text: $trad("p20"), url: "javascript:i3GEO.mapa.dialogo.telaRemota()" }
 			],
@@ -205,10 +205,10 @@ i3GEO.configura = {
 	/*
 	Propriedade: tipoimagem
 
-	Indica o tipo de filtro de imagem que está ativo.
-	O filtro ativo é aplicado sobre a imagem toda a vez que o mapa é refeito.
+	Indica o tipo de filtro de imagem que est&aacute; ativo.
+	O filtro ativo &eacute; aplicado sobre a imagem toda a vez que o mapa &eacute; refeito.
 
-	Veja <classe_imagem.php> para obter os tipos possíveis
+	Veja <classe_imagem.php> para obter os tipos poss&iacute;veis
 
 	Tipo:
 	{string}
@@ -220,8 +220,8 @@ i3GEO.configura = {
 	/*
 	Propriedade: ajustaDocType
 
-	Ajusta ou não a declaração DOCTYPE do documento HTML. O ajuste é necessário para que algumas opções funcionem adequadamente.
-	Caso vc deseje usar um DOCTYPE específico, utilize false. O ajuste do DOCTYPE não funciona no navegador IE.
+	Ajusta ou não a declara&ccedil;ão DOCTYPE do documento HTML. O ajuste &eacute; necess&aacute;rio para que algumas op&ccedil;&otilde;es funcionem adequadamente.
+	Caso vc deseje usar um DOCTYPE espec&iacute;fico, utilize false. O ajuste do DOCTYPE não funciona no navegador IE.
 
 	Tipo:
 	{boolean}
@@ -233,7 +233,7 @@ i3GEO.configura = {
 	/*
 	Propriedade: tipotip
 
-	Tipo de tip que é mostrado na função de identificação quando o usuário estaciona o mouse sobre o mapa
+	Tipo de tip que &eacute; mostrado na fun&ccedil;ão de identifica&ccedil;ão quando o usu&aacute;rio estaciona o mouse sobre o mapa
 
 	Tipo:
 	{string}
@@ -249,7 +249,7 @@ i3GEO.configura = {
 	/*
 	Propriedade: alturatip
 
-	Altura em pixel do tip que é mostrado na função de identificação quando o usuário estaciona o mouse sobre o mapa
+	Altura em pixel do tip que &eacute; mostrado na fun&ccedil;ão de identifica&ccedil;ão quando o usu&aacute;rio estaciona o mouse sobre o mapa
 
 	Tipo:
 	{string}
@@ -261,7 +261,7 @@ i3GEO.configura = {
 	/*
 	Propriedade: larguratip
 
-	Largura em pixel do tip que é mostrado na função de identificação quando o usuário estaciona o mouse sobre o mapa
+	Largura em pixel do tip que &eacute; mostrado na fun&ccedil;ão de identifica&ccedil;ão quando o usu&aacute;rio estaciona o mouse sobre o mapa
 
 	Tipo:
 	{string}
@@ -273,7 +273,7 @@ i3GEO.configura = {
 	/*
 	Propriedade: funcaoTip
 
-	Função que será executada na operação de identificação quando o usuário estaciona o mouse sobre o mapa
+	Fun&ccedil;ão que ser&aacute; executada na opera&ccedil;ão de identifica&ccedil;ão quando o usu&aacute;rio estaciona o mouse sobre o mapa
 
 	Tipo:
 	{String}
@@ -285,7 +285,7 @@ i3GEO.configura = {
 	/*
 	Propriedade: funcaoIdentifica
 
-	Função que será executada na operação de identificação quando o usuário clica no mapa
+	Fun&ccedil;ão que ser&aacute; executada na opera&ccedil;ão de identifica&ccedil;ão quando o usu&aacute;rio clica no mapa
 
 	Tipo:
 	{String}
@@ -362,11 +362,11 @@ i3GEO.configura = {
 	/*
 	Propriedade: map3d
 
-	Variável que define o nome do map_file que possuí o layer para uso na função 3d.
-	Pode ser utilizado o caminho completo, se não, busca no diretório aplicmap.
+	Vari&aacute;vel que define o nome do map_file que possu&iacute; o layer para uso na fun&ccedil;ão 3d.
+	Pode ser utilizado o caminho completo, se não, busca no diret&oacute;rio aplicmap.
 
-	O mapfile deve conter um layer para cálculo dos valores de Z para compor o modelo do relevo
-	sobre o qual o mapa será desenhado.
+	O mapfile deve conter um layer para c&aacute;lculo dos valores de Z para compor o modelo do relevo
+	sobre o qual o mapa ser&aacute; desenhado.
 
 	Por padrão, o i3geo utiliza o mapfile aplicmpa/3dmap.map
 
@@ -395,12 +395,12 @@ i3GEO.configura = {
 	/*
 	Propriedade: templateLegenda
 
-	Template HTML que será utilizado na geração da legenda HTML.
+	Template HTML que ser&aacute; utilizado na gera&ccedil;ão da legenda HTML.
 
-	A sintaxe utilizada na montagem do template é baseado na sintaxe do próprio Mapserver.
-	O HTML pode ser armazenado em i3geo/aplicmap ou em um outro endereço no servidor.
-	O template serve para definir o layout da legenda que é mostrada quando a guia legenda é ativada.
-	Se for definido como "", é utilizado o template i3geo/aplicmap/legenda.htm.
+	A sintaxe utilizada na montagem do template &eacute; baseado na sintaxe do pr&oacute;prio Mapserver.
+	O HTML pode ser armazenado em i3geo/aplicmap ou em um outro endere&ccedil;o no servidor.
+	O template serve para definir o layout da legenda que &eacute; mostrada quando a guia legenda &eacute; ativada.
+	Se for definido como "", &eacute; utilizado o template i3geo/aplicmap/legenda.htm.
 
 	Tipo:
 	{string}
@@ -414,8 +414,8 @@ i3GEO.configura = {
 
 	Define os parâmetros que devem ser aplicados no modo mashup
 
-	O modo mashup possibilita que o i3Geo seja embutido dentro de uma página HTML. Nesse
-	caso, o mapa não é criado no modo convencional, que utiliza o programa i3geo/ms_criamapa.php
+	O modo mashup possibilita que o i3Geo seja embutido dentro de uma p&aacute;gina HTML. Nesse
+	caso, o mapa não &eacute; criado no modo convencional, que utiliza o programa i3geo/ms_criamapa.php
 	A variavel mashuppar deve conter os parâmetros que são utilizados pelo programa ms_criamapa
 
 	Exemplo:
@@ -432,9 +432,9 @@ i3GEO.configura = {
 	/*
 	Propriedade: sid
 
-	Código da seção aberta pelo i3Geo no servidor.
+	C&oacute;digo da se&ccedil;ão aberta pelo i3Geo no servidor.
 
-	O código é gerado na inicialização do i3Geo pelo programa ms_criamapa.php
+	O c&oacute;digo &eacute; gerado na inicializa&ccedil;ão do i3Geo pelo programa ms_criamapa.php
 
 	Tipo:
 	{String}
@@ -443,9 +443,9 @@ i3GEO.configura = {
 	/*
 	Propriedade: locaplic
 
-	Localização da instalação do i3geo (URI)
+	Localiza&ccedil;ão da instala&ccedil;ão do i3geo (URI)
 
-	Por default, é definida na inicialização do i3Geo
+	Por default, &eacute; definida na inicializa&ccedil;ão do i3Geo
 
 	Tipo:
 	{string}
@@ -454,7 +454,7 @@ i3GEO.configura = {
 	/*
 	Propriedade: mapaRefDisplay
 
-	Indica se o mapa de referência deverá ser aberto quando o i3Geo for inicializado.
+	Indica se o mapa de referência dever&aacute; ser aberto quando o i3Geo for inicializado.
 
 	Tipo:
 	{string}
@@ -469,11 +469,11 @@ i3GEO.configura = {
 	/*
 	Propriedade: visual (depreciado)
 
-	Tipo de visual que será utilizado no mapa.
+	Tipo de visual que ser&aacute; utilizado no mapa.
 
-	A lista de visuais existentes é obtida na inicialização do i3geo.
+	A lista de visuais existentes &eacute; obtida na inicializa&ccedil;ão do i3geo.
 
-	Veja o diretório i3geo/imagens/visual
+	Veja o diret&oacute;rio i3geo/imagens/visual
 
 	Tipo:
 	{String}
@@ -487,9 +487,9 @@ i3GEO.configura = {
 
 	Imagens utilizadas para os cursores do mouse mostrados no mapa
 
-	A manipulação dos cursores é feita com i3GEO.util.mudaCursor
+	A manipula&ccedil;ão dos cursores &eacute; feita com i3GEO.util.mudaCursor
 
-	É possível utilizar também um dos tipos default, pointer, crosshair, help, move, text
+	&Eacute; poss&iacute;vel utilizar tamb&eacute;m um dos tipos default, pointer, crosshair, help, move, text
 
 	Tipo:
 	{JSON}
@@ -517,7 +517,7 @@ i3GEO.configura = {
 	/*
 	Propriedade: listaDePropriedadesDoMapa
 
-	Lista com as funções que são incluídas no item "Propriedades do mapa"
+	Lista com as fun&ccedil;&otilde;es que são inclu&iacute;das no item "Propriedades do mapa"
 
 	Tipo:
 	{JSON}
@@ -539,9 +539,9 @@ i3GEO.configura = {
 	/*
 	Propriedade: tempoAplicar
 
-	Tempo em milisegundos que será esperado até que o mapa seja desenhado automaticamente.
+	Tempo em milisegundos que ser&aacute; esperado at&eacute; que o mapa seja desenhado automaticamente.
 
-	Utilizado no botão Aplicar, quando o usuário liga/desliga ou adiciona umtema
+	Utilizado no botão Aplicar, quando o usu&aacute;rio liga/desliga ou adiciona umtema
 
 	Tipo:
 	{Numeric}
@@ -553,9 +553,9 @@ i3GEO.configura = {
 	/*
 	Propriedade: tempoMouseParado
 
-	Tempo em milisegundos que será esperado para detectar que o mouse está parado.
+	Tempo em milisegundos que ser&aacute; esperado para detectar que o mouse est&aacute; parado.
 
-	Controla o lapso de tempo utilizado para disparar as funções que ocorrem quando o mouse está parado sobre o mapa
+	Controla o lapso de tempo utilizado para disparar as fun&ccedil;&otilde;es que ocorrem quando o mouse est&aacute; parado sobre o mapa
 
 	Tipo:
 	{Numeric}
@@ -569,7 +569,7 @@ i3GEO.configura = {
 
 	Inicia o i3geo com a janela de mensagens aberta ou fechada.
 
-	Se o cookie g_janelaMen estiver definido, essa variável não terá efeito
+	Se o cookie g_janelaMen estiver definido, essa vari&aacute;vel não ter&aacute; efeito
 
 	Tipo:
 	{Boolean}
@@ -611,15 +611,15 @@ i3GEO.configura = {
 	/*
 	Propriedade: funcoesBotoes
 
-	Objeto com a lista de funcionalidades que serão adicionadas aos botões existentes no mapa.
+	Objeto com a lista de funcionalidades que serão adicionadas aos bot&otilde;es existentes no mapa.
 
-	Essa lista pode ser modificada antes da inicialização do mapa.
+	Essa lista pode ser modificada antes da inicializa&ccedil;ão do mapa.
 
-	As funcionalidades apenas são incluídas se o elemento HTML indicado em iddiv existir. Por isso, caso uma função não seja desejada, basta excluir o div do HTML utilizado no mapa.
+	As funcionalidades apenas são inclu&iacute;das se o elemento HTML indicado em iddiv existir. Por isso, caso uma fun&ccedil;ão não seja desejada, basta excluir o div do HTML utilizado no mapa.
 
-	A lista de funções é incluída em i3GEO.configura.funcoesBotoes.botoes
+	A lista de fun&ccedil;&otilde;es &eacute; inclu&iacute;da em i3GEO.configura.funcoesBotoes.botoes
 	
-	O elemento 'titulo' é usado na barra de botões do tipo olho de peixe
+	O elemento 'titulo' &eacute; usado na barra de bot&otilde;es do tipo olho de peixe
 	
 	Tipo:
 	{Object}
@@ -628,14 +628,14 @@ i3GEO.configura = {
 	funcoesBotoes: {
 		"botoes": [
 		{
-			//Insere a opção de zoom anterior e posterior.
+			//Insere a op&ccedil;ão de zoom anterior e posterior.
 			iddiv:"historicozoom",
 			tipo:"",
 			dica:"",
 			constroiconteudo:'i3GEO.gadgets.mostraHistoricoZoom()'
 		},
 		{
-			//Ativa o botão que realiza a operação de zoom para a extensão total do mapa.
+			//Ativa o botão que realiza a opera&ccedil;ão de zoom para a extensão total do mapa.
 			iddiv:"zoomtot",
 			tipo:"",
 			dica:$trad("d2"),
@@ -654,7 +654,7 @@ i3GEO.configura = {
 			}
 		},
 		{
-			//Ativa o botão que realiza a operação de busca rápida
+			//Ativa o botão que realiza a opera&ccedil;ão de busca r&aacute;pida
 			iddiv:"localizar",
 			tipo:"",
 			dica:$trad("o2"),
@@ -667,7 +667,7 @@ i3GEO.configura = {
 						"",
 						"",
 						"",
-						"Busca rápida",
+						"Busca r&aacute;pida",
 						"janelaBuscaRapida",
 						false,
 						"hd",
@@ -680,7 +680,7 @@ i3GEO.configura = {
 			}
 		},		
 		{
-			//Ativa o botão que realiza a operação de zoom interativo.
+			//Ativa o botão que realiza a opera&ccedil;ão de zoom interativo.
 			iddiv:"zoomli",
 			tipo:"dinamico",
 			dica:$trad("d3"),
@@ -688,7 +688,7 @@ i3GEO.configura = {
 			funcaoonclick:function(){
 				if(i3GEO.Interface.ATUAL === "googlemaps"){
 					//alert("Pressione a tecla CTRL junto com o botão esquerdo do mouse");
-					i3GEO.janela.mensagemSimples("Pressione a tecla CTRL junto com o botão esquerdo do mouse e arraste para definir a área de zoom","?");
+					i3GEO.janela.mensagemSimples("Pressione a tecla CTRL junto com o botão esquerdo do mouse e arraste para definir a &aacute;rea de zoom","?");
 					g_tipoacao='pan';
 					g_operacao='navega';
 					i3GEO.barraDeBotoes.ativaIcone("pan");
@@ -718,7 +718,7 @@ i3GEO.configura = {
 			}
 		},
 		{
-			//Ativa o botão que realiza a operação de deslocamento (pan).
+			//Ativa o botão que realiza a opera&ccedil;ão de deslocamento (pan).
 			iddiv:"pan",
 			tipo:"dinamico",
 			dica:$trad("d4"),
@@ -750,7 +750,7 @@ i3GEO.configura = {
 			}
 		},
 		{
-			//botão que realiza a operação de zoom in.
+			//botão que realiza a opera&ccedil;ão de zoom in.
 			iddiv:"zoomiauto",
 			tipo:"",
 			dica:$trad("d5"),
@@ -761,7 +761,7 @@ i3GEO.configura = {
 			}
 		},
 		{
-			//botão que realiza a operação de zoom out
+			//botão que realiza a opera&ccedil;ão de zoom out
 			iddiv:"zoomoauto",
 			tipo:"",
 			dica:$trad("d6"),
@@ -772,7 +772,7 @@ i3GEO.configura = {
 			}
 		},
 		{
-			//botão que abre a função de identificação.
+			//botão que abre a fun&ccedil;ão de identifica&ccedil;ão.
 			iddiv:"identifica",
 			tipo:"dinamico",
 			dica:$trad("d7"),
@@ -815,7 +815,7 @@ i3GEO.configura = {
 			}
 		},
 		{
-			//botão que abre a função de identificação do tipo balao.
+			//botão que abre a fun&ccedil;ão de identifica&ccedil;ão do tipo balao.
 			//veja tempoMouseParado
 			iddiv:"identificaBalao",
 			tipo:"dinamico",
@@ -860,7 +860,7 @@ i3GEO.configura = {
 			}
 		},
 		{
-			//botão que abre a janela com o valor da extensão geográfica do mapa atual
+			//botão que abre a janela com o valor da extensão geogr&aacute;fica do mapa atual
 			iddiv:"exten",
 			tipo:"",
 			dica:$trad("d8"),
@@ -914,7 +914,7 @@ i3GEO.configura = {
 			{i3GEO.mapa.dialogo.imprimir();}
 		},
 		{
-			//botão de localização do usuário pelo IP
+			//botão de localiza&ccedil;ão do usu&aacute;rio pelo IP
 			iddiv:"ondeestou",
 			tipo:"",
 			dica:$trad("d13"),
@@ -922,7 +922,7 @@ i3GEO.configura = {
 			{i3GEO.navega.zoomIP(i3GEO.configura.locaplic,i3GEO.configura.sid);}
 		},
 		{
-			//abre a opção de geração de um modelo virtual de elevação
+			//abre a op&ccedil;ão de gera&ccedil;ão de um modelo virtual de eleva&ccedil;ão
 			iddiv:"v3d",
 			tipo:"",
 			dica:$trad("d14"),
@@ -939,14 +939,14 @@ i3GEO.configura = {
 			{i3GEO.navega.dialogo.google();}
 		},
 		{
-			//Ativa o botão que realiza a operação de de busca no site Scielo
+			//Ativa o botão que realiza a opera&ccedil;ão de de busca no site Scielo
 			//depreciado
 			iddiv:"scielo",
 			tipo:"",
 			dica:$trad("d16"),
 			titulo:$trad("d16t"),
 			funcaoonclick:function(){
-				scieloAtivo = false;//esta variável é utilizada pela ferramenta durante a navegação no mapa. Se estiver true significa que a ferramenta está sendo atualizada durante um processo de navegação no mapa
+				scieloAtivo = false;//esta vari&aacute;vel &eacute; utilizada pela ferramenta durante a navega&ccedil;ão no mapa. Se estiver true significa que a ferramenta est&aacute; sendo atualizada durante um processo de navega&ccedil;ão no mapa
 				g_operacao = "navega";
 				i3GEO.janela.cria("450px","190px",i3GEO.configura.locaplic+"/ferramentas/scielo/index.htm","","","Scielo");
 				atualizascielo = function(){
@@ -975,7 +975,7 @@ i3GEO.configura = {
 			}
 		},
 		{
-			//Ativa o botão que realiza a operação de de busca no site confluence
+			//Ativa o botão que realiza a opera&ccedil;ão de de busca no site confluence
 			iddiv:"confluence",
 			tipo:"",
 			dica:$trad("d17"),
@@ -997,7 +997,7 @@ i3GEO.configura = {
 			}
 		},
 		{
-			//Coloca as guias em uma janela móvel
+			//Coloca as guias em uma janela m&oacute;vel
 			iddiv:"encolheFerramentas",
 			tipo:"",
 			dica:$trad("d19"),
@@ -1005,7 +1005,7 @@ i3GEO.configura = {
 			{i3GEO.guias.libera();}
 		},
 		{
-			//botão de reinicialização do mapa que restaura as condições iniciais do mapa
+			//botão de reinicializa&ccedil;ão do mapa que restaura as condi&ccedil;&otilde;es iniciais do mapa
 			iddiv:"reinicia",
 			tipo:"",
 			dica:$trad("d20"),
@@ -1019,7 +1019,7 @@ i3GEO.configura = {
 			}
 		},
 		{
-			//botão de medição de distâncias
+			//botão de medi&ccedil;ão de distâncias
 			iddiv:"mede",
 			tipo:"dinamico",
 			dica:$trad("d21"),
@@ -1036,7 +1036,7 @@ i3GEO.configura = {
 			}
 		},
 		{
-			//botão de medição de área
+			//botão de medi&ccedil;ão de &aacute;rea
 			iddiv:"area",
 			tipo:"dinamico",
 			dica:$trad("d21a"),
@@ -1053,7 +1053,7 @@ i3GEO.configura = {
 			}
 		},
 		{
-			//barra de edição
+			//barra de edi&ccedil;ão
 			iddiv:"barraedicao",
 			tipo:"",
 			dica:$trad("u29"),
@@ -1063,7 +1063,7 @@ i3GEO.configura = {
 			}
 		},		
 		{
-			//botão de digitalização
+			//botão de digitaliza&ccedil;ão
 			iddiv:"inserexy",
 			tipo:"dinamico",
 			dica:$trad("d22"),
@@ -1075,7 +1075,7 @@ i3GEO.configura = {
 			}
 		},
 		{
-			//botão de inclusão de gráficos
+			//botão de inclusão de gr&aacute;ficos
 			iddiv:"inseregrafico",
 			tipo:"dinamico",
 			dica:$trad("d23"),
@@ -1086,7 +1086,7 @@ i3GEO.configura = {
 			}
 		},
 		{
-			//botão de seleção
+			//botão de sele&ccedil;ão
 			iddiv:"selecao",
 			tipo:"dinamico",
 			dica:$trad("d24"),
@@ -1097,7 +1097,7 @@ i3GEO.configura = {
 			}
 		},
 		{
-			//botão de inserção de toponímia
+			//botão de inser&ccedil;ão de topon&iacute;mia
 			iddiv:"textofid",
 			tipo:"dinamico",
 			dica:$trad("d25"),
@@ -1135,7 +1135,7 @@ i3GEO.configura = {
 						janela[2].style.height = "300px";
 						directions = new GDirections(i3GeoMap,janela[2]);
 						temp = function(){
-							$i("wdoca_corpo").innerHTML = "Não foi possível criar a rota";
+							$i("wdoca_corpo").innerHTML = "Não foi poss&iacute;vel criar a rota";
 						};
 						GEvent.addListener(directions, "error", temp);
 						directions.load("from: "+pontoRota1.lat()+","+pontoRota1.lng()+" to: "+pontoRota2.lat()+","+pontoRota2.lng());

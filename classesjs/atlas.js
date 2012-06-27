@@ -1,11 +1,11 @@
 /*
 Title: Atlas
 
-Executa as operações da interface Atlas.
+Executa as opera&ccedil;&otilde;es da interface Atlas.
 
 Para abrir os atlas utilize http://localhost/i3geo/atlas
 
-A definição dos atlas é feita em i3geo/menutemas/menutemas.xml ou no sistema de administração do i3geo.
+A defini&ccedil;&atilde;o dos atlas &eacute; feita em i3geo/menutemas/menutemas.xml ou no sistema de administra&ccedil;&atilde;o do i3geo.
 
 Arquivo: i3geo/classesjs/atlas.js
 
@@ -15,34 +15,34 @@ GPL2
 
 i3Geo Interface Integrada de Ferramentas de Geoprocessamento para Internet
 
-Direitos Autorais Reservados (c) 2006 Ministério do Meio Ambiente Brasil
+Direitos Autorais Reservados (c) 2006 Minist&eacute;rio do Meio Ambiente Brasil
 Desenvolvedor: Edmar Moretti edmar.moretti@mma.gov.br
 
-Este programa é software livre; você pode redistribuí-lo
-e/ou modificá-lo sob os termos da Licença Pública Geral
+Este programa &eacute; software livre; você pode redistribu&iacute;-lo
+e/ou modific&aacute;-lo sob os termos da Licen&ccedil;a P&uacute;blica Geral
 GNU conforme publicada pela Free Software Foundation;
 
-Este programa é distribuído na expectativa de que seja útil,
-porém, SEM NENHUMA GARANTIA; nem mesmo a garantia implícita
-de COMERCIABILIDADE OU ADEQUAÇÃO A UMA FINALIDADE ESPECÍFICA.
-Consulte a Licença Pública Geral do GNU para mais detalhes.
-Você deve ter recebido uma cópia da Licença Pública Geral do
-GNU junto com este programa; se não, escreva para a
-Free Software Foundation, Inc., no endereço
+Este programa &eacute; distribu&iacute;do na expectativa de que seja &uacute;til,
+por&eacute;m, SEM NENHUMA GARANTIA; nem mesmo a garantia impl&iacute;cita
+de COMERCIABILIDADE OU ADEQUAÇ&Atilde;O A UMA FINALIDADE ESPEC&Iacute;FICA.
+Consulte a Licen&ccedil;a P&uacute;blica Geral do GNU para mais detalhes.
+Você deve ter recebido uma c&oacute;pia da Licen&ccedil;a P&uacute;blica Geral do
+GNU junto com este programa; se n&atilde;o, escreva para a
+Free Software Foundation, Inc., no endere&ccedil;o
 59 Temple Street, Suite 330, Boston, MA 02111-1307 USA.
 */
 /*
 Variavel: listaAtlas
 
-Objeto com as informações básicas sobre os Atlas existentes.
+Objeto com as informa&ccedil;&otilde;es b&aacute;sicas sobre os Atlas existentes.
 
-Essa lista é obtida lendo-se o arquivo xml definido em atlasxml ou no sistema de administração
+Essa lista &eacute; obtida lendo-se o arquivo xml definido em atlasxml ou no sistema de administra&ccedil;&atilde;o
 */
 listaAtlas = "";
 /*
 Variavel: atlasxml
 
-Endereço do arquivo xml com a lista de atlas.
+Endere&ccedil;o do arquivo xml com a lista de atlas.
 */
 atlasxml = "";
 /*
@@ -50,13 +50,13 @@ Function: iniciaAtlas
 
 Inicializa o Atlas.
 
-Pega o título e monta as pranchas
+Pega o t&iacute;tulo e monta as pranchas
 
 Parametros:
 
 combow {numerico} - largura do combo. Para escapar, utilize 0
 
-atlasId {numerico} id do atlas que será utilizado para carregar as pranchas. Se não for definido, o i3Geo usará a seção PHP
+atlasId {numerico} id do atlas que ser&aacute; utilizado para carregar as pranchas. Se n&atilde;o for definido, o i3Geo usar&aacute; a se&ccedil;&atilde;o PHP
 */
 function iniciaAtlas(combow,atlasId)
 {
@@ -153,7 +153,7 @@ function iniciaAtlas(combow,atlasId)
 /*
 Function: iniciaListaAtlas
 
-Mostra a lista de Atlas disponíveis para que o usuário possa escolher qual abrir.
+Mostra a lista de Atlas dispon&iacute;veis para que o usu&aacute;rio possa escolher qual abrir.
 */
 function iniciaListaAtlas()
 {
@@ -165,7 +165,7 @@ function iniciaListaAtlas()
 /*
 Function: pegaListaDeAtlas
 
-Pega a lista de Atlas e características principais de cada um.
+Pega a lista de Atlas e caracter&iacute;sticas principais de cada um.
 */
 function pegaListaDeAtlas()
 {
@@ -221,11 +221,11 @@ function pegaListaDeAtlas()
 /*
 Function: abreatlas
 
-Abre um Atlas específico escolhido pelo usuário
+Abre um Atlas espec&iacute;fico escolhido pelo usu&aacute;rio
 
 Parametros:
 
-id - id do atlas que será aberto
+id - id do atlas que ser&aacute; aberto
 */
 function abreatlas(id)
 {
@@ -236,11 +236,11 @@ function abreatlas(id)
 /*
 Function: abrePrancha
 
-Ativa uma prancha, adicionando e ativando as camadas específicas.
+Ativa uma prancha, adicionando e ativando as camadas espec&iacute;ficas.
 
 Parametros:
 
-id - id da prancha que será aberta
+id - id da prancha que ser&aacute; aberta
 */
 function abrePrancha(id)
 {
@@ -271,7 +271,7 @@ function abrePrancha(id)
 /*
 Function: atlas2i3geo
 
-Abre o mapa atualmente aberto no i3geo utilizando a interface padrão.
+Abre o mapa atualmente aberto no i3geo utilizando a interface padr&atilde;o.
 */
 function atlas2i3geo()
 {

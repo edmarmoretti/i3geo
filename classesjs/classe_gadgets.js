@@ -10,20 +10,20 @@ GPL2
 
 i3Geo Interface Integrada de Ferramentas de Geoprocessamento para Internet
 
-Direitos Autorais Reservados (c) 2006 Ministério do Meio Ambiente Brasil
+Direitos Autorais Reservados (c) 2006 Minist&eacute;rio do Meio Ambiente Brasil
 Desenvolvedor: Edmar Moretti edmar.moretti@mma.gov.br
 
-Este programa é software livre; você pode redistribuí-lo
-e/ou modificá-lo sob os termos da Licença Pública Geral
+Este programa &eacute; software livre; você pode redistribu&iacute;-lo
+e/ou modific&aacute;-lo sob os termos da Licen&ccedil;a P&uacute;blica Geral
 GNU conforme publicada pela Free Software Foundation;
 
-Este programa é distribuído na expectativa de que seja útil,
-porém, SEM NENHUMA GARANTIA; nem mesmo a garantia implícita
-de COMERCIABILIDADE OU ADEQUAÇÃO A UMA FINALIDADE ESPECÍFICA.
-Consulte a Licença Pública Geral do GNU para mais detalhes.
-Você deve ter recebido uma cópia da Licença Pública Geral do
+Este programa &eacute; distribu&iacute;do na expectativa de que seja &uacute;til,
+por&eacute;m, SEM NENHUMA GARANTIA; nem mesmo a garantia impl&iacute;cita
+de COMERCIABILIDADE OU ADEQUAÇ&Atilde;O A UMA FINALIDADE ESPEC&Iacute;FICA.
+Consulte a Licen&ccedil;a P&uacute;blica Geral do GNU para mais detalhes.
+Você deve ter recebido uma c&oacute;pia da Licen&ccedil;a P&uacute;blica Geral do
 GNU junto com este programa; se não, escreva para a
-Free Software Foundation, Inc., no endereço
+Free Software Foundation, Inc., no endere&ccedil;o
 59 Temple Street, Suite 330, Boston, MA 02111-1307 USA.
 */
 if(typeof(i3GEO) === 'undefined'){
@@ -36,23 +36,23 @@ Inclui elementos especiais no mapa
 
 Os elementos são opcionais e adicionam funcionalidades ao mapa.
 
-Outras funcionalidades são definidas em botões. Veja <classe_configura.js>
+Outras funcionalidades são definidas em bot&otilde;es. Veja <classe_configura.js>
 */
 i3GEO.gadgets = {
 	/*
 	Propriedade: PARAMETROS
 
-	Parametros de inicialização dos gadgets.
+	Parametros de inicializa&ccedil;ão dos gadgets.
 
-	Essa variável define os parâmetros individuais de cada gadget e o ID do elemento HTML onde
-	o gadget será incluído (parâmetro "idhtml").
+	Essa vari&aacute;vel define os parâmetros individuais de cada gadget e o ID do elemento HTML onde
+	o gadget ser&aacute; inclu&iacute;do (parâmetro "idhtml").
 	
-	Cada tipo de gadget pode ter parâmetros específicos, descritos a seguir.
+	Cada tipo de gadget pode ter parâmetros espec&iacute;ficos, descritos a seguir.
 	
-	i3GEO.gadgets.PARAMETROS.mostraBuscaRapida.servicosexternos = true|false //indica que os serviços de buscas externos ao i3Geo serão ou não mostrados
-	i3GEO.gadgets.PARAMETROS.mostraBuscaRapida.temasmapa =  true|false //indica se a busca será feita ou não nas camadas existentes no mapa
-	i3GEO.gadgets.PARAMETROS.mostraMenuSuspenso.deslocaEsquerda = 0 //número de pixels que indica o quanto o menu será deslocado para a esquerda
-	i3GEO.gadgets.PARAMETROS.mostraMenuSuspenso.finaliza = "" //nome de uma função que será executada quando a construção do menu tiver terminado
+	i3GEO.gadgets.PARAMETROS.mostraBuscaRapida.servicosexternos = true|false //indica que os servi&ccedil;os de buscas externos ao i3Geo serão ou não mostrados
+	i3GEO.gadgets.PARAMETROS.mostraBuscaRapida.temasmapa =  true|false //indica se a busca ser&aacute; feita ou não nas camadas existentes no mapa
+	i3GEO.gadgets.PARAMETROS.mostraMenuSuspenso.deslocaEsquerda = 0 //n&uacute;mero de pixels que indica o quanto o menu ser&aacute; deslocado para a esquerda
+	i3GEO.gadgets.PARAMETROS.mostraMenuSuspenso.finaliza = "" //nome de uma fun&ccedil;ão que ser&aacute; executada quando a constru&ccedil;ão do menu tiver terminado
 	i3GEO.gadgets.PARAMETROS.mostraMenuSuspenso.parametrosYUI = {} //objeto contendo parâmetros adicionais da API YUI para menus
 	
 	Você pode acessar os parâmetros da seguinte forma:
@@ -90,13 +90,13 @@ i3GEO.gadgets = {
 		"mostraHistoricoZoom":
 
 		{idhtml:"historicozoom"},
-		//inclui opção admin
+		//inclui op&ccedil;ão admin
 		try{
 			if(i3GEO.parametros.editor === "sim"){
 				i3GEO.configura.oMenuData.menu.push({nome:"Admin",id:"i3GeoAdmin"});
 				i3GEO.configura.oMenuData.submenus.i3GeoAdmin = [
-				{id:"omenudataAdmin1",text: "Página principal", url: "javascript:var w = window.open(i3GEO.configura.locaplic+'/admin/index.html')" },
-				{id:"omenudataAdmin2",text: "Catálogo", url: "javascript:var w = window.open(i3GEO.configura.locaplic+'/admin/html/arvore.html')" },
+				{id:"omenudataAdmin1",text: "P&aacute;gina principal", url: "javascript:var w = window.open(i3GEO.configura.locaplic+'/admin/index.html')" },
+				{id:"omenudataAdmin2",text: "Cat&aacute;logo", url: "javascript:var w = window.open(i3GEO.configura.locaplic+'/admin/html/arvore.html')" },
 				{id:"omenudataAdmin3",text: "Menus", url: "javascript:i3GEO.arvoreDeTemas.abrejanelaIframe('900','700','"+i3GEO.configura.locaplic+"/admin/html/menus.html\')"}
 				];
 			}
@@ -104,7 +104,7 @@ i3GEO.gadgets = {
 		catch(e){}
 		"mostraMenuSuspenso":
 
-		{idhtml:"menus",deslocaEsquerda:0,finaliza:"",parametrosYUI={}},
+		{permiteLogin: true,idhtml:"menus",deslocaEsquerda:0,finaliza:"",parametrosYUI={}},
 		
 		"mostraMenuLista":
 		
@@ -136,6 +136,7 @@ i3GEO.gadgets = {
 		"mostraHistoricoZoom":
 		{idhtml:"historicozoom"},
 		"mostraMenuSuspenso":{
+			permiteLogin: true,
 			idhtml:"menus",
 			deslocaEsquerda:0,
 			parametrosYUI: {iframe:false,autosubmenudisplay: false, showdelay: 200, hidedelay: 500, lazyload: false}
@@ -150,11 +151,11 @@ i3GEO.gadgets = {
 	/*
 	Function: mostraEmail
 
-	Mostra o e-mail armazenado na variável i3GEO.parametros.emailInstituicao
+	Mostra o e-mail armazenado na vari&aacute;vel i3GEO.parametros.emailInstituicao
 
 	Parametro:
 
-	id {String} - id do elemento HTML que receberá o resultado. Esse id por default é obtido de
+	id {String} - id do elemento HTML que receber&aacute; o resultado. Esse id por default &eacute; obtido de
 	i3GEO.gadgets.PARAMETROS
 	*/
 	mostraEmail: function(id){
@@ -168,11 +169,11 @@ i3GEO.gadgets = {
 	/*
 	Function: mostraVersao
 
-	Mostra a versão atual do i3Geo armazenada na variável i3GEO.parametros.mensageminicial
+	Mostra a versão atual do i3Geo armazenada na vari&aacute;vel i3GEO.parametros.mensageminicial
 
 	Parametro:
 
-	id {String} - id do elemento HTML que receberá o resultado. Esse id por default é obtido de
+	id {String} - id do elemento HTML que receber&aacute; o resultado. Esse id por default &eacute; obtido de
 	i3GEO.gadgets.PARAMETROS
 	*/
 	mostraVersao: function(id){
@@ -206,16 +207,16 @@ i3GEO.gadgets = {
 	/*
 	Function: mostraInserirKml
 
-	Mostra no mapa a a opção para inserir kml.
+	Mostra no mapa a a op&ccedil;ão para inserir kml.
 
-	Essa opção só funciona com a API do Google carregada
+	Essa op&ccedil;ão s&oacute; funciona com a API do Google carregada
 
-	Se você não quer essa função no mapa, elimine o elemento HTML existente no mapa que contenha o 
+	Se você não quer essa fun&ccedil;ão no mapa, elimine o elemento HTML existente no mapa que contenha o 
 	id definido em i3GEO.gadgets.PARAMETROS.mostraInserirKml.idhtml
 
 	Parametro:
 
-	id {String} - id do elemento HTML que receberá o resultado. Esse id por default é obtido de
+	id {String} - id do elemento HTML que receber&aacute; o resultado. Esse id por default &eacute; obtido de
 	i3GEO.gadgets.PARAMETROS.mostraInserirKml.idhtml
 	*/
 	mostraInserirKml: function(id){
@@ -236,16 +237,16 @@ i3GEO.gadgets = {
 	/*
 	Function: mostraEscalaNumerica
 
-	Mostra no mapa a escala numérica.
+	Mostra no mapa a escala num&eacute;rica.
 
-	A escala numérica pode ser alterada pelo usuário digitando-se a nova escala.
+	A escala num&eacute;rica pode ser alterada pelo usu&aacute;rio digitando-se a nova escala.
 
-	Se você não quer essa função no mapa, elimine o elemento HTML existente no mapa que contenha o 
+	Se você não quer essa fun&ccedil;ão no mapa, elimine o elemento HTML existente no mapa que contenha o 
 	id definido em i3GEO.gadgets.PARAMETROS
 
 	Parametro:
 
-	id {String} - id do elemento HTML que receberá o resultado. Esse id por default é obtido de
+	id {String} - id do elemento HTML que receber&aacute; o resultado. Esse id por default &eacute; obtido de
 	i3GEO.gadgets.PARAMETROS
 	*/
 	mostraEscalaNumerica: function(id){
@@ -296,12 +297,12 @@ i3GEO.gadgets = {
 
 	Mostra no mapa a escala grafica como um elemento fora do mapa.
 
-	Se você não quer essa função no mapa, elimine o elemento HTML existente no mapa que contenha o 
+	Se você não quer essa fun&ccedil;ão no mapa, elimine o elemento HTML existente no mapa que contenha o 
 	id definido em i3GEO.gadgets.PARAMETROS(escala)
 
 	Parametro:
 
-	id {String} - id do elemento HTML que receberá o resultado. Esse id por default é obtido de
+	id {String} - id do elemento HTML que receber&aacute; o resultado. Esse id por default &eacute; obtido de
 	i3GEO.gadgets.PARAMETROS
 	*/
 	mostraEscalaGrafica: function(id){
@@ -334,18 +335,18 @@ i3GEO.gadgets = {
 	/*
 	Function: mostraBuscaRapida
 
-	Mostra a opção de busca rápida de lugares por palavra digitada.
+	Mostra a op&ccedil;ão de busca r&aacute;pida de lugares por palavra digitada.
 
-	Se você não quer essa função no mapa, elimine o elemento HTML existente no mapa que contenha o 
+	Se você não quer essa fun&ccedil;ão no mapa, elimine o elemento HTML existente no mapa que contenha o 
 	id definido em i3GEO.gadgets.PARAMETROS (buscaRapida)
 	
-	Onde a busca será feita é controlado pela variável i3GEO.gadgets.PARAMETROS.mostraBuscaRapida
+	Onde a busca ser&aacute; feita &eacute; controlado pela vari&aacute;vel i3GEO.gadgets.PARAMETROS.mostraBuscaRapida
 	
 	Veja: ferramentas/<buscarapida>
 
 	Parametro:
 
-	id {String} - id do elemento HTML que receberá o resultado. Esse id por default é obtido de
+	id {String} - id do elemento HTML que receber&aacute; o resultado. Esse id por default &eacute; obtido de
 	i3GEO.gadgets.PARAMETROS
 	*/
 	mostraBuscaRapida: function(id){
@@ -359,7 +360,7 @@ i3GEO.gadgets = {
 			i3geo_buscaRapida = function(){
 				alert("i3geo_buscaRapida foi depreciada");
 			};
-			i = "<form id=i3GEObotaoFormBuscaRapida"+id+" >"+$inputText(id,"256","valorBuscaRapida"+id,"Município, cidade, UC, endereço...","20",$trad("o2"))+"</form>";
+			i = "<form id=i3GEObotaoFormBuscaRapida"+id+" >"+$inputText(id,"256","valorBuscaRapida"+id,"Munic&iacute;pio, cidade, UC, endere&ccedil;o...","20",$trad("o2"))+"</form>";
 			ins = "<table><tr><td><a class=ajuda_usuario target=_blank href='"+i3GEO.configura.locaplic+"/ajuda_usuario.php?idcategoria=8&idajuda=71' >&nbsp;&nbsp;&nbsp;</a></td><td>"+i+"</td>";
 			ins += "<td><img src='"+i3GEO.util.$im("branco.gif")+"' title='"+$trad("p13")+"' class='ticPropriedades2' id=i3GEObotaoPropriedadesBuscaRapida"+id+" /></td>";
 			ins += "<td><img src='"+i3GEO.util.$im("branco.gif")+"' class='tic' id=i3GEObotaoBuscaRapida"+id+" /></td></tr></table>";
@@ -385,12 +386,12 @@ i3GEO.gadgets = {
 					{externo = "checked";}
 					if(i3GEO.gadgets.PARAMETROS.mostraBuscaRapida.temasmapa)
 					{interno = "checked";}
-					ins = "<p class=paragrafo >Onde será feita a busca:</p>" +
+					ins = "<p class=paragrafo >Onde ser&aacute; feita a busca:</p>" +
 						"<table class=lista3 >" +
-						"<tr><td><input style=cursor:pointer onclick='i3GEO.gadgets.PARAMETROS.mostraBuscaRapida.servicosexternos = this.checked' type=checkbox "+externo+" ></td><td>Serviços de busca externos (Google e MMA)</td></tr>" +
+						"<tr><td><input style=cursor:pointer onclick='i3GEO.gadgets.PARAMETROS.mostraBuscaRapida.servicosexternos = this.checked' type=checkbox "+externo+" ></td><td>Servi&ccedil;os de busca externos (Google e MMA)</td></tr>" +
 						"<tr><td><input style=cursor:pointer onclick='i3GEO.gadgets.PARAMETROS.mostraBuscaRapida.temasmapa = this.checked' type=checkbox "+interno+" ></td><td>Temas existentes no mapa</td></tr>" +
 						"</table><br>" +
-						"<p class=paragrafo >Apenas os temas especialmente configurados pelo administrador do i3Geo podem receber operações de busca.</p>";
+						"<p class=paragrafo >Apenas os temas especialmente configurados pelo administrador do i3Geo podem receber opera&ccedil;&otilde;es de busca.</p>";
 					$i("i3GEOpropriedadesBuscaRapida"+id+"_corpo").innerHTML = ins;
 				};	
 			}
@@ -399,11 +400,11 @@ i3GEO.gadgets = {
 	/*
 	Function: mostraHistoricoZoom
 
-	Mostra na barra de zoom os ícones que controlam a visualização do histórico da navegação sobre o mapa
+	Mostra na barra de zoom os &iacute;cones que controlam a visualiza&ccedil;ão do hist&oacute;rico da navega&ccedil;ão sobre o mapa
 
 	Parametro:
 
-	id {String} - id do elemento HTML que receberá o resultado. Esse id por default é obtido de
+	id {String} - id do elemento HTML que receber&aacute; o resultado. Esse id por default &eacute; obtido de
 	i3GEO.gadgets.PARAMETROS
 	*/
 	mostraHistoricoZoom: function(id){
@@ -426,26 +427,26 @@ i3GEO.gadgets = {
 	/*
 	Classe: i3GEO.gadgets.visual (depreciado)
 
-	Gera os ícones e controla as opções de modificação do visual do mapa.
+	Gera os &iacute;cones e controla as op&ccedil;&otilde;es de modifica&ccedil;ão do visual do mapa.
 
-	O visual consiste na definição dos ícones utilizados no mapa. O visual pode
-	ser modificado na inicialização ou então escolhido pelo usuário.
+	O visual consiste na defini&ccedil;ão dos &iacute;cones utilizados no mapa. O visual pode
+	ser modificado na inicializa&ccedil;ão ou então escolhido pelo usu&aacute;rio.
 
-	Os visuais disponíveis são definidos no servidor e consistem em diretórios localizados
-	em i3geo/imagens/visual. A lista de visuais disponíveis é obtida na inicialização do i3geo.
+	Os visuais dispon&iacute;veis são definidos no servidor e consistem em diret&oacute;rios localizados
+	em i3geo/imagens/visual. A lista de visuais dispon&iacute;veis &eacute; obtida na inicializa&ccedil;ão do i3geo.
 
-	Os ícones para mudança do visual são incluídos no elemento HTML definido em
+	Os &iacute;cones para mudan&ccedil;a do visual são inclu&iacute;dos no elemento HTML definido em
 	i3geo.gadgets.PARAMETROS.visual
 	*/
 	visual: {
 		/*
 		Function: inicia (depreciado)
 
-		Constrói os ícones de escolha do visual.
+		Constr&oacute;i os &iacute;cones de escolha do visual.
 
 		Parametro:
 
-		id {String} - id do elemento que receberá os ícones (opcional)
+		id {String} - id do elemento que receber&aacute; os &iacute;cones (opcional)
 		*/
 		inicia: function(id){
 			alert("A i3GEO.gadgets.visual foi depreciado");
@@ -453,11 +454,11 @@ i3GEO.gadgets = {
 		/*
 		Function: troca (depreciado)
 
-		Troca o visual atual. A lista de visuais disponíveis é obtida em i3GEO.parametros.listavisual
+		Troca o visual atual. A lista de visuais dispon&iacute;veis &eacute; obtida em i3GEO.parametros.listavisual
 
 		Parametro:
 
-		visual {String} - nome do visual que será utilizado.
+		visual {String} - nome do visual que ser&aacute; utilizado.
 		*/
 		troca: function(visual){
 			alert("A i3GEO.gadgets.visual foi depreciado");
@@ -466,28 +467,28 @@ i3GEO.gadgets = {
 	/*
 	Function: mostraMenuSuspenso
 
-	Mostra o menu suspenso com opções extras de análise, ajuda, etc
+	Mostra o menu suspenso com op&ccedil;&otilde;es extras de an&aacute;lise, ajuda, etc
 
-	Paradefinir os ícones existentes nos elementos principais do menu, edite o arquivo i3geo/css/botoes2.css e acrescente
-	o estilo desejado. Utilize # para se referenciar ao elemento, cujo identificador é composto por "menu"+chave, exemplo #menuinterface
+	Paradefinir os &iacute;cones existentes nos elementos principais do menu, edite o arquivo i3geo/css/botoes2.css e acrescente
+	o estilo desejado. Utilize # para se referenciar ao elemento, cujo identificador &eacute; composto por "menu"+chave, exemplo #menuinterface
 	ou #menuajuda
 	
-	O objeto YAHOO.widget.MenuBar resultante pode ser obtido na variável i3GEOoMenuBar
+	O objeto YAHOO.widget.MenuBar resultante pode ser obtido na vari&aacute;vel i3GEOoMenuBar
 	
-	i3GEOoMenuBar pode ser manipulado com os métodos da biblioteca YUI, por exemplo,
+	i3GEOoMenuBar pode ser manipulado com os m&eacute;todos da biblioteca YUI, por exemplo,
 	i3GEOoMenuBar.getMenuItem("omenudataInterface1").cfg.setProperty("text", "zzzzzz");
 	i3GEOoMenuBar.getMenuItem("omenudataInterface1").destroy();
 	
-	Para executar uma operação após o menu ser montado, utilize a propriedade
-	i3GEO.gadgets.PARAMETROS.mostraMenuSuspenso.finaliza, por exemplo (a string é executada por meio da função eval do javascript)
+	Para executar uma opera&ccedil;ão ap&oacute;s o menu ser montado, utilize a propriedade
+	i3GEO.gadgets.PARAMETROS.mostraMenuSuspenso.finaliza, por exemplo (a string &eacute; executada por meio da fun&ccedil;ão eval do javascript)
 	
 	i3GEO.gadgets.PARAMETROS.mostraMenuSuspenso.finaliza = 'i3GEOoMenuBar.getMenuItem("omenudataInterface1").cfg.setProperty("text", " ");'
 
-	O conteúdo do menu é baseado na variável i3GEO.configura.oMenuData
+	O conte&uacute;do do menu &eacute; baseado na vari&aacute;vel i3GEO.configura.oMenuData
 
 	Parametro:
 
-	id {String} - id do elemento HTML que receberá o resultado. Esse id por default é obtido de
+	id {String} - id do elemento HTML que receber&aacute; o resultado. Esse id por default &eacute; obtido de
 	i3GEO.gadgets.PARAMETROS
 	*/
 	mostraMenuSuspenso: function(id){
@@ -507,15 +508,24 @@ i3GEO.gadgets = {
 		{return;}
 		//cria o menu se ainda não existir
 		if(objid && objid.innerHTML === ""){
-			//inclui opção admin
+			//inclui op&ccedil;ão admin
 			try{
-				if(i3GEO.parametros.editor === "sim"){
+				if(ms.permiteLogin === true || i3GEO.parametros.editor === "sim"){
 					i3GEO.configura.oMenuData.menu.push({nome:"Admin",id:"i3GeoAdmin"});
-					i3GEO.configura.oMenuData.submenus.i3GeoAdmin = [
-					{id:"omenudataAdmin1",text: "Página principal", url: "javascript:var w = window.open(i3GEO.configura.locaplic+'/admin/index.html')" },
-					{id:"omenudataAdmin2",text: "Catálogo", url: "javascript:var w = window.open(i3GEO.configura.locaplic+'/admin/html/arvore.html')" },
-					{id:"omenudataAdmin3",text: "Menus", url: "javascript:i3GEO.arvoreDeTemas.abrejanelaIframe('900','700','"+i3GEO.configura.locaplic+"/admin/html/menus.html\')"}
-					];
+					i3GEO.configura.oMenuData.submenus.i3GeoAdmin = [];
+					if(ms.permiteLogin === true){
+						i3GEO.configura.oMenuData.submenus.i3GeoAdmin.push(
+							{id:"omenudataAdminu1",text: "Login", url: "javascript:i3GEO.login.dialogo.abrelogin()" },
+							{id:"omenudataAdminu2",text: "Logout", url: "i3GEO.login.dialogo.abrelogout()" }
+						);
+					}
+					if(i3GEO.parametros.editor === "sim"){
+						i3GEO.configura.oMenuData.submenus.i3GeoAdmin.push(
+							{id:"omenudataAdmin1",text: $trad("x1"), url: "javascript:var w = window.open(i3GEO.configura.locaplic+'/admin/index.html')" },
+							{id:"omenudataAdmin2",text: $trad("g1a"), url: "javascript:var w = window.open(i3GEO.configura.locaplic+'/admin/html/arvore.html')" },
+							{id:"omenudataAdmin3",text: $trad("x10"), url: "javascript:i3GEO.arvoreDeTemas.abrejanelaIframe('900','700','"+i3GEO.configura.locaplic+"/admin/html/menus.html\')"}
+						);
+					}
 				}
 			}
 			catch(e){}
@@ -610,7 +620,7 @@ i3GEO.gadgets = {
 			if(typeof(console) !== 'undefined'){console.warning("i3GEO.gadgets.mostraMenuSuspenso() "+ e);}
 		}
 		//
-		//desabilita opções em interfaces específicas
+		//desabilita op&ccedil;&otilde;es em interfaces espec&iacute;ficas
 		//
 		temp = ["omenudataFerramentas7b","omenudataArquivos3","omenudataJanelas1","omenudataJanelas3","omenudataFerramentas2a"];
 		n = temp.length;
@@ -659,13 +669,13 @@ i3GEO.gadgets = {
 	/*
 	Function: mostraMenuLista
 	
-	Mostra as opções existentes no menu suspenso porém na forma de uma lista de opções
+	Mostra as op&ccedil;&otilde;es existentes no menu suspenso por&eacute;m na forma de uma lista de op&ccedil;&otilde;es
 
-	O conteúdo do menu é baseado na variável i3GEO.configura.oMenuData
+	O conte&uacute;do do menu &eacute; baseado na vari&aacute;vel i3GEO.configura.oMenuData
 
 	Parametro:
 
-	id {String} - id do elemento HTML que receberá o resultado. Esse id por default é obtido de
+	id {String} - id do elemento HTML que receber&aacute; o resultado. Esse id por default &eacute; obtido de
 	i3GEO.gadgets.PARAMETROS
 	*/
 	mostraMenuLista: function(id){

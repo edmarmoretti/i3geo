@@ -209,6 +209,7 @@ i3GEO.finaliza = function(){
 		i3GEO.barraDeBotoes.editor.inicia();
 	}
 }
+i3GEO.gadgets.PARAMETROS.mostraMenuSuspenso.permiteLogin = true;
 i3GEO.arvoreDeTemas.OPCOESADICIONAIS.navegacaoDir = true;
 i3GEO.configura.sid = "";
 i3GEO.inicia();

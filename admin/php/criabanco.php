@@ -1,3 +1,13 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
+<html>
+<head>
+<META HTTP-EQUIV="Content-Type" CONTENT="text/html; charset=ISO-8859-1">
+<link rel="stylesheet" type="text/css" href="../html/admin.css">
+</head>
+<body class="yui-skin-sam fundoPonto" >
+<div class="bordaSuperior"  >&nbsp;</div>
+<div class="mascaraPrincipal" id="divGeral" style=text-align:left >
+Criação do banco de administração<br><br>
 <?php
 /*
 Title: criabanco.php
@@ -38,10 +48,9 @@ i3geo/admin/php/criabanco.php
 */
 $funcao = "";
 include_once("admin.php");
-
 error_reporting(E_ALL);
 if(verificaEditores($editores) == "nao")
-{echo "Vc nao e um editor cadastrado. Apenas os editores definidos em i3geo/ms_configura.php podem acessar o sistema de administracao.";exit;}
+{echo "Vc nao e um administrador. Apenas usuarios cadastrados, ou registrados no i3geo/ms_configura.php, e com o papel de administradores podem criar um banco de dados.";exit;}
 
 $tabelas = array(
 "CREATE TABLE ".$esquemaadmin."i3geoadmin_grupos (desc_grupo TEXT, id_grupo INTEGER PRIMARY KEY, nome_grupo TEXT, it TEXT, es TEXT, en TEXT)",
@@ -62,13 +71,26 @@ $tabelas = array(
 "CREATE TABLE ".$esquemaadmin."i3geoadmin_n1 (publicado TEXT, ordem NUMERIC, id_menu NUMERIC, id_grupo NUMERIC, id_n1 INTEGER PRIMARY KEY, n1_perfil TEXT)",
 "CREATE TABLE ".$esquemaadmin."i3geoadmin_n2 (publicado TEXT, ordem NUMERIC, id_n1 NUMERIC, id_n2 INTEGER PRIMARY KEY, id_subgrupo NUMERIC, n2_perfil TEXT)",
 "CREATE TABLE ".$esquemaadmin."i3geoadmin_n3 (publicado TEXT, ordem NUMERIC, id_n2 NUMERIC, id_n3 INTEGER PRIMARY KEY, id_tema NUMERIC, n3_perfil TEXT)",
-"CREATE TABLE ".$esquemaadmin."i3geoadmin_comentarios (comentario TEXT, data TEXT, openidnome TEXT, openidimagem TEXT, openidservico TEXT, openidusuario TEXT, openidurl TEXT, id_tema NUMERIC)"
-
+"CREATE TABLE ".$esquemaadmin."i3geoadmin_comentarios (comentario TEXT, data TEXT, openidnome TEXT, openidimagem TEXT, openidservico TEXT, openidusuario TEXT, openidurl TEXT, id_tema NUMERIC)",
+"CREATE TABLE ".$esquemaadmin."i3geoadmin_usuarios (ativo NUMERIC, data_cadastro TEXT, email TEXT, id_usuario INTEGER PRIMARY KEY, login TEXT, nome_usuario TEXT, senha TEXT)",
+"CREATE TABLE ".$esquemaadmin."i3geoadmin_papelusuario (papel_id NUMERIC, usuario_id NUMERIC)",
+"CREATE TABLE ".$esquemaadmin."i3geoadmin_papeis (descricao TEXT, id_papel INTEGER PRIMARY KEY, nome TEXT)"
 );
 if($conexaoadmin == "")
 {
 	if(file_exists("../../admin/admin.db"))
-	{echo "Arquivo admin/admin.db ja existe. Vc deve apagá-lo para poder criar novamente";exit;}
+	{echo "Arquivo admin/admin.db ja existe. Vc deve apagá-lo para poder criá-lo novamente";exit;}
+	if(empty($_POST["senha"]) || empty($_POST["usuario"])){
+		formularioLoginMaster("criabanco.php");
+		exit;
+	}
+	else{
+		$continua = verificaMaster($_POST["usuario"],$_POST["senha"],$i3geomaster);
+		if($continua == false){
+			echo "Usuário não registrado em i3geo/ms_configura.php na variável i3geomaster";
+			exit;
+		}
+	}	
 	if(function_exists("sqlite_open")){
 		$banco = sqlite_open("../../admin/admin.db",0666);
 		$banco = null;
@@ -91,29 +113,28 @@ foreach($tabelas as $tabela)
 	}
 	//echo $tabela."<br>";
 	$q = $dbhw->query($tabela);
-	/*
-GRANT SELECT ON TABLE i3geoadmin_atlas TO geodados;
-GRANT SELECT ON TABLE i3geoadmin_atlasp TO geodados;
-GRANT SELECT ON TABLE i3geoadmin_atlast TO geodados;
-GRANT SELECT ON TABLE i3geoadmin_grupos TO geodados;
-GRANT SELECT ON TABLE i3geoadmin_identifica TO geodados;
-GRANT SELECT ON TABLE i3geoadmin_mapas TO geodados;
-GRANT SELECT ON TABLE i3geoadmin_menus TO geodados;
-GRANT SELECT ON TABLE i3geoadmin_n1 TO geodados;
-GRANT SELECT ON TABLE i3geoadmin_n2 TO geodados;
-GRANT SELECT ON TABLE i3geoadmin_n3 TO geodados;
-GRANT SELECT ON TABLE i3geoadmin_perfis TO geodados;
-GRANT SELECT ON TABLE i3geoadmin_raiz TO geodados;
-GRANT SELECT ON TABLE i3geoadmin_sistemas TO geodados;
-GRANT SELECT ON TABLE i3geoadmin_sistemasf TO geodados;
-GRANT SELECT ON TABLE i3geoadmin_subgrupos TO geodados;
-GRANT SELECT ON TABLE i3geoadmin_atlas TO geodados;
-GRANT SELECT ON TABLE i3geoadmin_tags TO geodados;
-GRANT SELECT ON TABLE i3geoadmin_temas TO geodados;
-GRANT SELECT ON TABLE i3geoadmin_ws TO geodados;	
-	*/
-	
 }
+$dbhw->query("INSERT INTO ".$esquemaadmin."i3geoadmin_papeis VALUES('Podem executar qualquer tarefa, inclusive cadastrar novos administradores',1,'admin')");
+$dbhw->query("INSERT INTO ".$esquemaadmin."i3geoadmin_papeis VALUES('Podem criar/editar qualquer tema (mapfile) mas não podem editar a Árvore do catálogo de temas',2,'editores')");
+$dbhw->query("INSERT INTO ".$esquemaadmin."i3geoadmin_papeis VALUES('Podem alterar a árvore do catálogo e dos atlas',3,'publicadores')");
+$dbhw->query("INSERT INTO ".$esquemaadmin."i3geoadmin_usuarios VALUES(1,'','',1,'admin','admin','admin')");
+$dbhw->query("INSERT INTO ".$esquemaadmin."i3geoadmin_papelusuario VALUES(1,1)");
 $banco = null;
-echo "Banco criado!!!";
+echo "Banco criado!!! administrador: admin / admin  - não esqueça de alterar essa senha na opção de edição do cadastro de usuários";
+function formularioLoginMaster($action){
+	echo "<form method=post action=$action >";
+	echo "<br>Essa conexão pode não ser segura e os dados de usuário/senha podem ser descobertos<br><br>";
+	echo "Nome do usuário master cadastrado em ms_configura.php:<br> <input type=text name=usuario /><br>";
+	echo "Senha:<br> <input type=password name=senha /><br>";
+	echo "<input type=submit />";
+}
+function verificaMaster($usuario,$senha,$i3geomaster){
+	foreach($i3geomaster as $teste){
+		if(!empty($usuario) && !empty($senha) && $teste["usuario"] == $usuario && $teste["senha"] == $senha){
+			return true;
+		}
+	}
+	return false;
+}
 ?>
+</div>

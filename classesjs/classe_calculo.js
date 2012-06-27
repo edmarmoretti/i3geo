@@ -1,7 +1,7 @@
 /*jslint white:false,undef: false, rhino: true, onevar: true, evil: false */
 
 /*
-Title: Cálculos
+Title: C&aacute;lculos
 
 Arquivo:
 
@@ -13,20 +13,20 @@ GPL2
 
 i3Geo Interface Integrada de Ferramentas de Geoprocessamento para Internet
 
-Direitos Autorais Reservados (c) 2006 Ministério do Meio Ambiente Brasil
+Direitos Autorais Reservados (c) 2006 Minist&eacute;rio do Meio Ambiente Brasil
 Desenvolvedor: Edmar Moretti edmar.moretti@mma.gov.br
 
-Este programa é software livre; você pode redistribuí-lo
-e/ou modificá-lo sob os termos da Licença Pública Geral
+Este programa &eacute; software livre; você pode redistribu&iacute;-lo
+e/ou modific&aacute;-lo sob os termos da Licen&ccedil;a P&uacute;blica Geral
 GNU conforme publicada pela Free Software Foundation;
 
-Este programa é distribuído na expectativa de que seja útil,
-porém, SEM NENHUMA GARANTIA; nem mesmo a garantia implícita
-de COMERCIABILIDADE OU ADEQUAÇÃO A UMA FINALIDADE ESPECÍFICA.
-Consulte a Licença Pública Geral do GNU para mais detalhes.
-Você deve ter recebido uma cópia da Licença Pública Geral do
+Este programa &eacute; distribu&iacute;do na expectativa de que seja &uacute;til,
+por&eacute;m, SEM NENHUMA GARANTIA; nem mesmo a garantia impl&iacute;cita
+de COMERCIABILIDADE OU ADEQUAÇ&Atilde;O A UMA FINALIDADE ESPEC&Iacute;FICA.
+Consulte a Licen&ccedil;a P&uacute;blica Geral do GNU para mais detalhes.
+Você deve ter recebido uma c&oacute;pia da Licen&ccedil;a P&uacute;blica Geral do
 GNU junto com este programa; se não, escreva para a
-Free Software Foundation, Inc., no endereço
+Free Software Foundation, Inc., no endere&ccedil;o
 59 Temple Street, Suite 330, Boston, MA 02111-1307 USA.
 */
 if(typeof(i3GEO) === 'undefined'){
@@ -35,14 +35,14 @@ if(typeof(i3GEO) === 'undefined'){
 /*
 Classe: i3GEO.calculo
 
-Utilitários para cálculos.
+Utilit&aacute;rios para c&aacute;lculos.
 */
 i3GEO.calculo = {
 
 	/*
 	Propriedade: metododistancia
 
-	Método utilizado no cálculo de distâncias
+	M&eacute;todo utilizado no c&aacute;lculo de distâncias
 
 	vicenty|vicenty
 
@@ -65,7 +65,7 @@ i3GEO.calculo = {
 
 	Return:
 
-	{Numeric} - Coordenada em décimos de grau.
+	{Numeric} - Coordenada em d&eacute;cimos de grau.
 	*/
 	dms2dd: function(cd,cm,cs){
 		try{
@@ -97,9 +97,9 @@ i3GEO.calculo = {
 
 	vy {Numeric} - coordenada y.
 
-	docmapa - objeto DOM que contém o objeto imagem
+	docmapa - objeto DOM que cont&eacute;m o objeto imagem
 
-	ext {String} - (opcional) extensão geográfica (espaço como separador) xmin ymin xmax ymax
+	ext {String} - (opcional) extensão geogr&aacute;fica (espa&ccedil;o como separador) xmin ymin xmax ymax
 
 	cellsize {Numeric} - (opcional) tamanho no terreno em DD de cada pixel da imagem
 
@@ -203,7 +203,7 @@ i3GEO.calculo = {
 	/*
 	Function: tela2dd
 
-	Converte o x,y de unidades de tela para décimo de grau.
+	Converte o x,y de unidades de tela para d&eacute;cimo de grau.
 
 	Parametros:
 
@@ -213,9 +213,9 @@ i3GEO.calculo = {
 
 	g_celula {Numeric} - tamanho no terreno do pixel da imagem em dd.
 
-	imgext {String} - extensão geográfica do mapa.
+	imgext {String} - extensão geogr&aacute;fica do mapa.
 
-	idorigem {string} - (opcional) id do objeto que originou o cálculo (é usado para identificar se o cálculo está sendo feito sobr o mapa de referência ou não)
+	idorigem {string} - (opcional) id do objeto que originou o c&aacute;lculo (&eacute; usado para identificar se o c&aacute;lculo est&aacute; sendo feito sobr o mapa de referência ou não)
 
 	Returns:
 
@@ -251,11 +251,11 @@ i3GEO.calculo = {
 	/*
 	Function area
 
-	Calcula a área de um polígono.
+	Calcula a &aacute;rea de um pol&iacute;gono.
 
 	Os pontos são obtidos do objeto pontos
 
-	Para o cálculo da área, é feito o cálculo do número de pixel abrangido pelo polígono e multiplicado pela resolução de cada pixel.
+	Para o c&aacute;lculo da &aacute;rea, &eacute; feito o c&aacute;lculo do n&uacute;mero de pixel abrangido pelo pol&iacute;gono e multiplicado pela resolu&ccedil;ão de cada pixel.
 
 	Referência - http://www.mail-archive.com/mapserver-users@lists.umn.edu/msg07052.html
 
@@ -263,7 +263,7 @@ i3GEO.calculo = {
 
 	pontos {Array} - array com a lista de pontos pontos.xtela corresponde a um array com os valores de x e pontos.ytela aos valores de y
 
-	pixel {Numeric} - área de cada pixel no mapa
+	pixel {Numeric} - &aacute;rea de cada pixel no mapa
 
 	Return:
 
@@ -294,7 +294,7 @@ i3GEO.calculo = {
 
 	Calcula a distância em km entre dois pontos.
 
-	O método de cálculo é definido na variável i3GEO.calculo.metododistancia
+	O m&eacute;todo de c&aacute;lculo &eacute; definido na vari&aacute;vel i3GEO.calculo.metododistancia
 
 	Parametros:
 
@@ -320,11 +320,11 @@ i3GEO.calculo = {
 	/*
 	Function: distHaversine
 
-	Calcula a distância em km entre dois pontos (método Haversine).
+	Calcula a distância em km entre dois pontos (m&eacute;todo Haversine).
 
 	Baseado no site http://www.movable-type.co.uk/scripts/latlong.html (indicado por louriques@yahoo.com.br)
 
-	Em versões anteriores utilizava-se o cálculo proposto em http://www.wcrl.ars.usda.gov/cec/java/lat-long.htm
+	Em vers&otilde;es anteriores utilizava-se o c&aacute;lculo proposto em http://www.wcrl.ars.usda.gov/cec/java/lat-long.htm
 
 	Parametros:
 
@@ -449,7 +449,7 @@ i3GEO.calculo = {
 	/*
 	Function: direcao
 
-	Calcula a direção (0 a 360 graus) entre dois pontos.
+	Calcula a dire&ccedil;ão (0 a 360 graus) entre dois pontos.
 
 	Baseado no site http://www.movable-type.co.uk/scripts/latlong.html (indicado por louriques@yahoo.com.br)
 
@@ -465,7 +465,7 @@ i3GEO.calculo = {
 
 	Return:
 
-	Ângulo em décimos de grau
+	Ângulo em d&eacute;cimos de grau
 
 	Type:
 	{Numeric}
@@ -487,9 +487,9 @@ i3GEO.calculo = {
 	/*
 	Function: destinoDD
 
-	Calcula as coordenadas de um novo ponto em função da posição de um ponto de origem, distância e direção
+	Calcula as coordenadas de um novo ponto em fun&ccedil;ão da posi&ccedil;ão de um ponto de origem, distância e dire&ccedil;ão
 
-	O novo ponto é calculado em coordenadas geográficas em DD
+	O novo ponto &eacute; calculado em coordenadas geogr&aacute;ficas em DD
 
 	Baseado no site http://www.movable-type.co.uk/scripts/latlong.html (indicado por louriques@yahoo.com.br)
 
@@ -501,11 +501,11 @@ i3GEO.calculo = {
 
 	d {Numeric} - distância em Km
 
-	direção {Numeric} - ângulo desejado em décimos de grau (direção de 0 a 360)
+	dire&ccedil;ão {Numeric} - ângulo desejado em d&eacute;cimos de grau (dire&ccedil;ão de 0 a 360)
 
 	Return:
 
-	Array com a longitude e latitude em décimos de grau ([0] = longitude, [1] = latitude
+	Array com a longitude e latitude em d&eacute;cimos de grau ([0] = longitude, [1] = latitude
 
 	Type:
 	{Array}
@@ -527,13 +527,13 @@ i3GEO.calculo = {
 	/*
 	Function: rect2ext
 
-	Calcula a extensão geográfica de um retângulo desenhado sobre o mapa.
+	Calcula a extensão geogr&aacute;fica de um retângulo desenhado sobre o mapa.
 
 	Parametros:
 
 	idrect - id do elemento html com o retangulo
 
-	mapext - extensao geografica do mapa onde está o retangulo
+	mapext - extensao geografica do mapa onde est&aacute; o retangulo
 
 	pixel - tamanho do pixel do mapa em dd
 
@@ -576,19 +576,19 @@ i3GEO.calculo = {
 	/*
 	Function: ext2rect
 
-	Calcula o posicionamento de um retângulo com base na extensão geográfica.
+	Calcula o posicionamento de um retângulo com base na extensão geogr&aacute;fica.
 
 	Parametros:
 
 	idrect {String} - id do elemento html com o retangulo, pode ser vazio
 
-	mapext {String} - extensao geografica do mapa onde está o retangulo
+	mapext {String} - extensao geografica do mapa onde est&aacute; o retangulo
 
 	boxext {String} - extensao geografica do retangulo
 
 	pixel {Number} - tamanho do pixel do mapa em dd
 
-	documento {Object DOM} - objeto sob o qual o retângulo será posicionado
+	documento {Object DOM} - objeto sob o qual o retângulo ser&aacute; posicionado
 
 	Return:
 

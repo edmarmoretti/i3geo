@@ -1,10 +1,10 @@
 <?php
 /*
-Title: FunÃ§Ãµes de uso geral
+Title: Funções de uso geral
 
-FunÃ§Ãµes utilizadas por outros programas do sistema de administraÃ§Ã£o.
+Funções utilizadas por outros programas do sistema de administração.
 
-No inÃ­cio do programa Ã© feita a inclusÃ£o do i3geo/ms_configura.php e i3geo/classesphp/funcoes_gerais.php
+No iní­cio do programa é feita a inclusão do i3geo/ms_configura.php e i3geo/classesphp/funcoes_gerais.php
 
 Licenca:
 
@@ -12,21 +12,22 @@ GPL2
 
 i3Geo Interface Integrada de Ferramentas de Geoprocessamento para Internet
 
-Direitos Autorais Reservados (c) 2006 MinistÃ©rio do Meio Ambiente Brasil
+Direitos Autorais Reservados (c) 2006 Ministério do Meio Ambiente Brasil
 Desenvolvedor: Edmar Moretti edmar.moretti@mma.gov.br
 
-Este programa Ã© software livre; vocÃª pode redistribuÃ­-lo
-e/ou modificÃ¡-lo sob os termos da LicenÃ§a PÃºblica Geral
+Este programa é software livre; você pode redistribuí-lo
+e/ou modificá-lo sob os termos da Licença Pública Geral
 GNU conforme publicada pela Free Software Foundation;
 
-Este programa Ã© distribuÃ­do na expectativa de que seja Ãºtil,
-porÃ©m, SEM NENHUMA GARANTIA; nem mesmo a garantia implÃ­cita
-de COMERCIABILIDADE OU ADEQUAÃ‡ÃƒO A UMA FINALIDADE ESPECÃFICA.
-Consulte a LicenÃ§a PÃºblica Geral do GNU para mais detalhes.
-VocÃª deve ter recebido uma cÃ³pia da LicenÃ§a PÃºblica Geral do
-GNU junto com este programa; se nÃ£o, escreva para a
-Free Software Foundation, Inc., no endereÃ§o
+Este programa é distribuído na expectativa de que seja útil,
+porém, SEM NENHUMA GARANTIA; nem mesmo a garantia implícita
+de COMERCIABILIDADE OU ADEQUAÇÃO A UMA FINALIDADE ESPECÍFICA.
+Consulte a Licença Pública Geral do GNU para mais detalhes.
+Você deve ter recebido uma cópia da Licença Pública Geral do
+GNU junto com este programa; se não, escreva para a
+Free Software Foundation, Inc., no endereço
 59 Temple Street, Suite 330, Boston, MA 02111-1307 USA.
+i3geo/testamapfile.php
 
 Arquivo:
 
@@ -48,8 +49,8 @@ include_once ($locaplic."/classesphp/funcoes_gerais.php");
 
 $mapfile = mapfilebase($base,$locaplic);
 //
-//processa a variÃ¡vel $esquemaadmin definida em ms_configura.php
-//essa variÃ¡vel precisa ter um . no final quando nÃ£o for vazia, evitando erros na inclusÃ£o dentro dos SQLs
+//processa a variavel $esquemaadmin definida em ms_configura.php
+//essa variavel precisa ter um . no final quando nao for vazia, evitando erros na inclusao dentro dos SQLs
 //
 if(!empty($esquemaadmin)){
 	$esquemaadmin = $esquemaadmin.".";
@@ -332,6 +333,44 @@ function resolveAcentos($palavra,$tipo)
 	if($tipo == "palno")
 	$palavra = urldecode($palavra);
 	return $palavra;
+}
+/*
+Function: formularioLoginMaster
+
+Mostra formulário para login quando é necessário o uso da variável $i3geomaster cadastrada em ms_configura.php
+
+Parametros:
+
+action {string} - php que será executado no submit do formulário
+*/
+function formularioLoginMaster($action){
+	echo "<form method=post action=$action >";
+	echo "<br>Essa conexão pode não ser segura e os dados de usuário/senha podem ser descobertos<br><br>";
+	echo "Nome do usuário master cadastrado em ms_configura.php:<br> <input type=text name=usuario /><br>";
+	echo "Senha:<br> <input type=password name=senha /><br>";
+	echo "<br><input type=submit />";
+}
+/*
+Function: verificaMaster
+
+Verifica se um usuário e senha está cadastrado no ms_configura
+
+Parametros:
+
+usuario {string}
+
+senha {string}
+
+i3geomaster {array} - variável existente no ms_configura.php com o cadastro de usuários masters
+*/
+function verificaMaster($usuario,$senha,$i3geomaster){
+	global $i3geomaster;
+	foreach($i3geomaster as $teste){
+		if(!empty($usuario) && !empty($senha) && $teste["usuario"] == $usuario && $teste["senha"] == $senha){
+			return true;
+		}
+	}
+	return false;
 }
 function mapfilebase($base,$locaplic){
 	$versao = versao();

@@ -12,20 +12,20 @@ GPL2
 
 i3Geo Interface Integrada de Ferramentas de Geoprocessamento para Internet
 
-Direitos Autorais Reservados (c) 2006 Ministério do Meio Ambiente Brasil
+Direitos Autorais Reservados (c) 2006 Minist&eacute;rio do Meio Ambiente Brasil
 Desenvolvedor: Edmar Moretti edmar.moretti@mma.gov.br
 
-Este programa é software livre; você pode redistribuí-lo
-e/ou modificá-lo sob os termos da Licença Pública Geral
+Este programa &eacute; software livre; você pode redistribu&iacute;-lo
+e/ou modific&aacute;-lo sob os termos da Licen&ccedil;a P&uacute;blica Geral
 GNU conforme publicada pela Free Software Foundation;
 
-Este programa é distribuído na expectativa de que seja útil,
-porém, SEM NENHUMA GARANTIA; nem mesmo a garantia implícita
-de COMERCIABILIDADE OU ADEQUAÇÃO A UMA FINALIDADE ESPECÍFICA.
-Consulte a Licença Pública Geral do GNU para mais detalhes.
-Você deve ter recebido uma cópia da Licença Pública Geral do
+Este programa &eacute; distribu&iacute;do na expectativa de que seja &uacute;til,
+por&eacute;m, SEM NENHUMA GARANTIA; nem mesmo a garantia impl&iacute;cita
+de COMERCIABILIDADE OU ADEQUAÇ&Atilde;O A UMA FINALIDADE ESPEC&Iacute;FICA.
+Consulte a Licen&ccedil;a P&uacute;blica Geral do GNU para mais detalhes.
+Você deve ter recebido uma c&oacute;pia da Licen&ccedil;a P&uacute;blica Geral do
 GNU junto com este programa; se não, escreva para a
-Free Software Foundation, Inc., no endereço
+Free Software Foundation, Inc., no endere&ccedil;o
 59 Temple Street, Suite 330, Boston, MA 02111-1307 USA.
 */
 if(typeof(i3GEO) === 'undefined'){
@@ -34,7 +34,7 @@ if(typeof(i3GEO) === 'undefined'){
 /*
 Classe: i3GEO.social
 
-Opções de compartilhamento e uso de redes sociais.
+Op&ccedil;&otilde;es de compartilhamento e uso de redes sociais.
 */
 i3GEO.social = {
 	curtirFacebook: function(url,tipo){
@@ -54,13 +54,13 @@ i3GEO.social = {
 	/*
 	Function: compartilhar
 
-	Cria os botões de publicar no Twitter e curtir/compartilhar no Facebook
+	Cria os bot&otilde;es de publicar no Twitter e curtir/compartilhar no Facebook
 
 	Gera o HTML contendo as tags IMG com os links
 
 	Parametro:
 
-	id {string} - id do elemento HTML que receberá os links
+	id {string} - id do elemento HTML que receber&aacute; os links
 
 	urlcf {string} - url para o Facebook
 
@@ -69,11 +69,11 @@ i3GEO.social = {
 	tipo {string} - tipo de botão comtotal|semtotal
 
 
-	locaplic {string} - url onde está o i3Geo. Se não for especificada, será obtida de i3GEO.configura.locaplic
+	locaplic {string} - url onde est&aacute; o i3Geo. Se não for especificada, ser&aacute; obtida de i3GEO.configura.locaplic
 
 	Return:
 
-	HTML com os botões
+	HTML com os bot&otilde;es
 	*/
 	compartilhar: function(id,urlcf,urlpt,tipo,locaplic){
 		if(!locaplic)
@@ -105,19 +105,19 @@ i3GEO.social = {
 	/*
 	Function: bookmark
 
-	Cria os botões de bookmark em redes sociais
+	Cria os bot&otilde;es de bookmark em redes sociais
 
 	Gera o HTML contendo as tags IMG com os links
 
 	Parametro:
 
-	link {string} - link que será marcado
+	link {string} - link que ser&aacute; marcado
 
-	locaplic {string} - url onde está o i3Geo. Se não for especificada, será obtida de i3GEO.configura.locaplic
+	locaplic {string} - url onde est&aacute; o i3Geo. Se não for especificada, ser&aacute; obtida de i3GEO.configura.locaplic
 
 	Return:
 
-	HTML com os botões
+	HTML com os bot&otilde;es
 	*/
 	bookmark: function(link,locaplic){
 		if(!locaplic)

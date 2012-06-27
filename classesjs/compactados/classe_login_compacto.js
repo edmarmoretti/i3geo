@@ -1,0 +1,1 @@
+if(typeof(i3GEO)==='undefined'){i3GEO=[]}i3GEO.login={dialogo:{abrelogin:function(){if(typeof(i3GEOF.loginusuario)==='undefined'){var js=i3GEO.configura.locaplic+"/ferramentas/loginusuario/index.js";i3GEO.util.scriptTag(js,"i3GEOF.loginusuario.criaJanelaFlutuante()","i3GEOF.loginusuario_script")}else{i3GEOF.loginusuario.criaJanelaFlutuante()}},abrelogout:function(){}}}

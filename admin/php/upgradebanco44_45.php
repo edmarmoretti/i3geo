@@ -1,3 +1,13 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
+<html>
+<head>
+<META HTTP-EQUIV="Content-Type" CONTENT="text/html; charset=ISO-8859-1">
+<link rel="stylesheet" type="text/css" href="../html/admin.css">
+</head>
+<body class="yui-skin-sam fundoPonto" >
+<div class="bordaSuperior"  >&nbsp;</div>
+<div class="mascaraPrincipal" id="divGeral" style=text-align:left >
+Upgrade do banco de administração<br><br>
 <?php
 /*
 Title: upgradebanco44_45.php
@@ -40,8 +50,17 @@ $funcao = "";
 include_once("admin.php");
 include_once("conexao.php");
 
-if(verificaEditores($editores) == "nao")
-{echo "Vc nao e um editor cadastrado. Apenas os editores definidos em i3geo/ms_configura.php podem acessar o sistema de administracao.";exit;}
+if(empty($_POST["senha"]) || empty($_POST["usuario"])){
+	formularioLoginMaster("upgradebanco44_45.php");
+	exit;
+}
+else{
+	$continua = verificaMaster($_POST["usuario"],$_POST["senha"],$i3geomaster);
+	if($continua == false){
+		echo "Usuário não registrado em i3geo/ms_configura.php na variável i3geomaster";
+		exit;
+	}
+}
 error_reporting(E_ALL);
 $tabelas = array(
 "CREATE TABLE i3geoadmin_comentarios (comentario TEXT, data TEXT, openidnome TEXT, openidimagem TEXT, openidservico TEXT, openidusuario TEXT, openidurl TEXT, id_tema NUMERIC)",
@@ -82,3 +101,4 @@ foreach($tabelas as $tabela)
 }
 
 ?>
+</div>

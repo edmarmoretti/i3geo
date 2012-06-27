@@ -13,20 +13,20 @@ GPL2
 
 i3Geo Interface Integrada de Ferramentas de Geoprocessamento para Internet
 
-Direitos Autorais Reservados (c) 2006 Ministério do Meio Ambiente Brasil
+Direitos Autorais Reservados (c) 2006 Minist&eacute;rio do Meio Ambiente Brasil
 Desenvolvedor: Edmar Moretti edmar.moretti@mma.gov.br
 
-Este programa é software livre; você pode redistribuí-lo
-e/ou modificá-lo sob os termos da Licença Pública Geral
+Este programa &eacute; software livre; você pode redistribu&iacute;-lo
+e/ou modific&aacute;-lo sob os termos da Licen&ccedil;a P&uacute;blica Geral
 GNU conforme publicada pela Free Software Foundation;
 
-Este programa é distribuído na expectativa de que seja útil,
-porém, SEM NENHUMA GARANTIA; nem mesmo a garantia implícita
-de COMERCIABILIDADE OU ADEQUAÇÃO A UMA FINALIDADE ESPECÍFICA.
-Consulte a Licença Pública Geral do GNU para mais detalhes.
-Você deve ter recebido uma cópia da Licença Pública Geral do
+Este programa &eacute; distribu&iacute;do na expectativa de que seja &uacute;til,
+por&eacute;m, SEM NENHUMA GARANTIA; nem mesmo a garantia impl&iacute;cita
+de COMERCIABILIDADE OU ADEQUAÇ&Atilde;O A UMA FINALIDADE ESPEC&Iacute;FICA.
+Consulte a Licen&ccedil;a P&uacute;blica Geral do GNU para mais detalhes.
+Você deve ter recebido uma c&oacute;pia da Licen&ccedil;a P&uacute;blica Geral do
 GNU junto com este programa; se não, escreva para a
-Free Software Foundation, Inc., no endereço
+Free Software Foundation, Inc., no endere&ccedil;o
 59 Temple Street, Suite 330, Boston, MA 02111-1307 USA.
 */
 if(typeof(i3GEO) === 'undefined'){
@@ -35,10 +35,10 @@ if(typeof(i3GEO) === 'undefined'){
 /*
 Classe: i3GEO.ajuda
 
-Manipulação das mensagens de ajuda.
+Manipula&ccedil;ão das mensagens de ajuda.
 
-Permite definir a mensagem padrão da janela de mensagens. Abrir a janela e definir seu conteúdo.
-Controla também o letreiro móvel que mostra mensagens especiais definidas em cada layer adicionado ao mapa.
+Permite definir a mensagem padrão da janela de mensagens. Abrir a janela e definir seu conte&uacute;do.
+Controla tamb&eacute;m o letreiro m&oacute;vel que mostra mensagens especiais definidas em cada layer adicionado ao mapa.
 
 Exemplos:
 
@@ -67,7 +67,7 @@ i3GEO.ajuda = {
 	/*
 	Propriedade: DIVAJUDA
 
-	Nome do elemento HTML, do tipo DIV, que irá conter os textos de ajuda.
+	Nome do elemento HTML, do tipo DIV, que ir&aacute; conter os textos de ajuda.
 
 	Se esse DIV for encontrado no mapa, os textos serão mostrados em seu interior.
 
@@ -82,9 +82,9 @@ i3GEO.ajuda = {
 	/*
 	Propriedade: DIVLETREIRO
 
-	Id do elemento HTML onde será incluído o banner (letreiro) de mensagens.
+	Id do elemento HTML onde ser&aacute; inclu&iacute;do o banner (letreiro) de mensagens.
 
-	Esse tipo de mensagem é obtida do METADATA "MENSAGEM" que pode ser incluído em um layer.
+	Esse tipo de mensagem &eacute; obtida do METADATA "MENSAGEM" que pode ser inclu&iacute;do em um layer.
 
 	Default:
 
@@ -97,7 +97,7 @@ i3GEO.ajuda = {
 	/*
 	Propriedade: MENSAGEMPADRAO
 
-	Mensagem que será incluída ao iniciar a janela de mensagens ou quando não houver
+	Mensagem que ser&aacute; inclu&iacute;da ao iniciar a janela de mensagens ou quando não houver
 	mensagem definida para o elemento sobre o qual o mouse estaciona.
 
 	Default:
@@ -110,7 +110,7 @@ i3GEO.ajuda = {
 	/*
 	Propriedade: TRANSICAOSUAVE
 
-	Altera a transparência quando o mouse sobrepõe à janela e quando sai
+	Altera a transparência quando o mouse sobrep&otilde;e à janela e quando sai
 
 	Tipo:
 	{boolean}
@@ -122,7 +122,7 @@ i3GEO.ajuda = {
 	/*
 	Propriedade: OPACIDADE
 
-	Valor da opacidade mínima utilizada quando TRANSICAOSUAVE for igual a true.
+	Valor da opacidade m&iacute;nima utilizada quando TRANSICAOSUAVE for igual a true.
 
 	Varia de 0 a 100
 
@@ -140,7 +140,7 @@ i3GEO.ajuda = {
 	
 	Parametro:
 	
-	url - url que será adicionada a i3GEO.configura.locaplic
+	url - url que ser&aacute; adicionada a i3GEO.configura.locaplic
 	*/
 	abreDoc: function(url){
 		if(!url)
@@ -152,7 +152,7 @@ i3GEO.ajuda = {
 
 	Abre a janela flutuante para mostrar as mensagens de ajuda.
 
-	Essa função é executada na inicialização do i3GEO
+	Essa fun&ccedil;ão &eacute; executada na inicializa&ccedil;ão do i3GEO
 	*/
 	abreJanela: function(){
 		if(typeof(console) !== 'undefined'){console.info("i3GEO.ajuda.abreJanela()");}
@@ -194,9 +194,9 @@ i3GEO.ajuda = {
 
 	Ativa o cookie g_janelaMen e inclui o valor "sim".
 
-	Toda a vez que a janela é aberta, o cookie é ativado.
+	Toda a vez que a janela &eacute; aberta, o cookie &eacute; ativado.
 
-	Ativando-se o cookie, a janela de mensagens será aberta automaticamente a próxima vez que o i3geo for iniciado
+	Ativando-se o cookie, a janela de mensagens ser&aacute; aberta automaticamente a pr&oacute;xima vez que o i3geo for iniciado
 	*/
 	ativaCookie: function(){
 		var i = i3GEO.util.insereCookie;
@@ -208,14 +208,14 @@ i3GEO.ajuda = {
 
 	Busca mensagens no metadata "MENSAGEM" existentes nos layers do mapa.
 
-	Se existirem mensagens, as mesmas são incluídas no letreiro.
+	Se existirem mensagens, as mesmas são inclu&iacute;das no letreiro.
 
 	O letreiro deve ser um elemento do tipo INPUT (text).
 
 	Parametro:
 
-	mensagem {String} - (opcional) texto que será mostrado no letreiro. Se não for informado
-	será utilizado a variável i3GEO.parametros.mensagens
+	mensagem {String} - (opcional) texto que ser&aacute; mostrado no letreiro. Se não for informado
+	ser&aacute; utilizado a vari&aacute;vel i3GEO.parametros.mensagens
 	*/
 	ativaLetreiro: function(mensagem){
 		if(typeof(console) !== 'undefined'){console.info("i3GEO.ajuda.ativaLetreiro()");}
@@ -257,9 +257,9 @@ i3GEO.ajuda = {
 
 	Desativa o cookie g_janelaMen.
 
-	Toda a vez que a janela é fechada, o cookie é desativado.
+	Toda a vez que a janela &eacute; fechada, o cookie &eacute; desativado.
 
-	Desativando-se o cookie, a janela de mensagens não será aberta automaticamente a próxima vez que o i3geo for iniciado
+	Desativando-se o cookie, a janela de mensagens não ser&aacute; aberta automaticamente a pr&oacute;xima vez que o i3geo for iniciado
 	*/
 	desativaCookie: function(){
 		i3GEO.util.insereCookie("g_janelaMen","nao");
@@ -309,10 +309,10 @@ i3GEO.ajuda = {
 	/*
 	Function: mostraLetreiro
 
-	Preenche o elemento INPUT com a mensagem de texto e faz a movimentação das letras.
+	Preenche o elemento INPUT com a mensagem de texto e faz a movimenta&ccedil;ão das letras.
 
-	O aparecimento das letras é controlado por um temporizador e asmensagens são mostradas apenas duas vezes,
-	desde o início do redesenho do mapa.
+	O aparecimento das letras &eacute; controlado por um temporizador e asmensagens são mostradas apenas duas vezes,
+	desde o in&iacute;cio do redesenho do mapa.
 	*/
 	mostraLetreiro: function(){
 		if(typeof(console) !== 'undefined'){console.info("i3GEO.ajuda.mostraLetreiro()");}
@@ -332,7 +332,7 @@ i3GEO.ajuda = {
 	/*
 	Function: redesSociais
 
-	Abre uma janela com informações sobre a presença do i3Geo em redes sociais
+	Abre uma janela com informa&ccedil;&otilde;es sobre a presen&ccedil;a do i3Geo em redes sociais
 	*/
 	redesSociais: function(){
 		if(typeof(console) !== 'undefined'){console.info("i3GEO.ajuda.redesSociais()");}

@@ -1,7 +1,7 @@
 /*jslint white:false,undef: false, rhino: true, onevar: true, evil: false */
 
 /*
-Title: Árvore de camadas
+Title: &Aacute;rvore de camadas
 
 Arquivo:
 
@@ -13,20 +13,20 @@ GPL2
 
 i3Geo Interface Integrada de Ferramentas de Geoprocessamento para Internet
 
-Direitos Autorais Reservados (c) 2006 Ministério do Meio Ambiente Brasil
+Direitos Autorais Reservados (c) 2006 Minist&eacute;rio do Meio Ambiente Brasil
 Desenvolvedor: Edmar Moretti edmar.moretti@mma.gov.br
 
-Este programa é software livre; você pode redistribuí-lo
-e/ou modificá-lo sob os termos da Licença Pública Geral
+Este programa &eacute; software livre; você pode redistribu&iacute;-lo
+e/ou modific&aacute;-lo sob os termos da Licen&ccedil;a P&uacute;blica Geral
 GNU conforme publicada pela Free Software Foundation;
 
-Este programa é distribuído na expectativa de que seja útil,
-porém, SEM NENHUMA GARANTIA; nem mesmo a garantia implícita
-de COMERCIABILIDADE OU ADEQUAÇÃO A UMA FINALIDADE ESPECÍFICA.
-Consulte a Licença Pública Geral do GNU para mais detalhes.
-Você deve ter recebido uma cópia da Licença Pública Geral do
+Este programa &eacute; distribu&iacute;do na expectativa de que seja &uacute;til,
+por&eacute;m, SEM NENHUMA GARANTIA; nem mesmo a garantia impl&iacute;cita
+de COMERCIABILIDADE OU ADEQUAÇ&Atilde;O A UMA FINALIDADE ESPEC&Iacute;FICA.
+Consulte a Licen&ccedil;a P&uacute;blica Geral do GNU para mais detalhes.
+Você deve ter recebido uma c&oacute;pia da Licen&ccedil;a P&uacute;blica Geral do
 GNU junto com este programa; se não, escreva para a
-Free Software Foundation, Inc., no endereço
+Free Software Foundation, Inc., no endere&ccedil;o
 59 Temple Street, Suite 330, Boston, MA 02111-1307 USA.
 */
 if(typeof(i3GEO) === 'undefined'){
@@ -35,13 +35,13 @@ if(typeof(i3GEO) === 'undefined'){
 /*
 Classe: i3GEO.arvoreDeCamadas
 
-Monta a árvore com os temas existentes no mapa atual. A árvore contém as opções de ligar e desligar temas.
+Monta a &aacute;rvore com os temas existentes no mapa atual. A &aacute;rvore cont&eacute;m as op&ccedil;&otilde;es de ligar e desligar temas.
 
-Permite controlar quais as opções que serão mostradas na árvore.
+Permite controlar quais as op&ccedil;&otilde;es que serão mostradas na &aacute;rvore.
 
 Exemplos:
 
-	Para alterar as opções da árvore, modifique as propriedades
+	Para alterar as op&ccedil;&otilde;es da &aacute;rvore, modifique as propriedades
 
 	i3GEO.arvoreDeCamadas.OPCOESTEMAS = false;
 */
@@ -63,7 +63,7 @@ i3GEO.arvoreDeCamadas = {
 	/*
 	Propriedade: MOSTRALISTAKML
 
-	Mostra na árvore a lista de endereços de arquivos KML cadastrados no sistema de administração
+	Mostra na &aacute;rvore a lista de endere&ccedil;os de arquivos KML cadastrados no sistema de administra&ccedil;ão
 
 	Default:
 	{true}
@@ -75,7 +75,7 @@ i3GEO.arvoreDeCamadas = {
 	/*
 	Propriedade: FILTRO
 
-	Filtro que será aplicado para restringir os tipos de camadas mostradas na árvore
+	Filtro que ser&aacute; aplicado para restringir os tipos de camadas mostradas na &aacute;rvore
 
 	Default:
 	{""}
@@ -87,9 +87,9 @@ i3GEO.arvoreDeCamadas = {
 	/*
 	Propriedade: VERIFICAABRANGENCIATEMAS
 
-	Verifica ou não se um tema da árvore está dentro da abrangência do mapa atual
+	Verifica ou não se um tema da &aacute;rvore est&aacute; dentro da abrangência do mapa atual
 
-	A verificação só é feita se o tema possuir a extensão geográfica registrada (veja o sistema de administração)
+	A verifica&ccedil;ão s&oacute; &eacute; feita se o tema possuir a extensão geogr&aacute;fica registrada (veja o sistema de administra&ccedil;ão)
 
 	Default:
 	{true}
@@ -101,7 +101,7 @@ i3GEO.arvoreDeCamadas = {
 	/*
 	Propriedade: finaliza
 
-	Nome de uma função que será executada após a árvore ter sido montada
+	Nome de uma fun&ccedil;ão que ser&aacute; executada ap&oacute;s a &aacute;rvore ter sido montada
 
 	Default:
 	{""}
@@ -113,7 +113,7 @@ i3GEO.arvoreDeCamadas = {
 	/*
 	Propriedade: EXPANDESOLEGENDA
 
-	Ao expandir um tema mostra apenas a legenda, sem as outras opções
+	Ao expandir um tema mostra apenas a legenda, sem as outras op&ccedil;&otilde;es
 
 	Default:
 	{false}
@@ -125,7 +125,7 @@ i3GEO.arvoreDeCamadas = {
 	/*
 	Propriedade: PERMITEEXPANDIRTEMAS
 
-	Permite que as opções abaixo dos nós referentes acada tema sejam mostradas
+	Permite que as op&ccedil;&otilde;es abaixo dos n&oacute;s referentes acada tema sejam mostradas
 
 	Default:
 	{true}
@@ -137,7 +137,7 @@ i3GEO.arvoreDeCamadas = {
 	/*
 	Propriedade: ARRASTARORDEM
 
-	Ativa a opção de arrastar um tema para alterar a ordem de desenho das camadas
+	Ativa a op&ccedil;ão de arrastar um tema para alterar a ordem de desenho das camadas
 
 	Default:
 	{true}
@@ -149,7 +149,7 @@ i3GEO.arvoreDeCamadas = {
 	/*
 	Propriedade: ARRASTARLIXEIRA
 
-	Ativa a opção de arrastar um tema para a lixeria quando se quer removê-lo do mapa.
+	Ativa a op&ccedil;ão de arrastar um tema para a lixeria quando se quer removê-lo do mapa.
 
 	Default:
 	{true}
@@ -161,7 +161,7 @@ i3GEO.arvoreDeCamadas = {
 	/*
 	Propriedade: ALTERAOPACIDADE
 	
-	Mostra ou não a opção que permite alterar a transparência das camadas existentes no mapa
+	Mostra ou não a op&ccedil;ão que permite alterar a transparência das camadas existentes no mapa
 	
 	Type:
 	{boolean}
@@ -170,7 +170,7 @@ i3GEO.arvoreDeCamadas = {
 	/*
 	Propriedade: ANIMAMAPA
 	
-	Mostra ou não a opção que permite gerar uma animação do mapa, ligando e desligando camadas
+	Mostra ou não a op&ccedil;ão que permite gerar uma anima&ccedil;ão do mapa, ligando e desligando camadas
 	
 	Type:
 	{boolean}
@@ -179,7 +179,7 @@ i3GEO.arvoreDeCamadas = {
 	/*
 	Propriedade: LIGARDESLIGARTODOS
 
-	Mostra os ícones de desligar/ligar todos os temas.
+	Mostra os &iacute;cones de desligar/ligar todos os temas.
 
 	Default:
 	{true}
@@ -191,7 +191,7 @@ i3GEO.arvoreDeCamadas = {
 	/*
 	Propriedade: FILTRAR
 
-	Mostra o ícone para filtrar as camadas.
+	Mostra o &iacute;cone para filtrar as camadas.
 
 	Default:
 	{true}
@@ -203,7 +203,7 @@ i3GEO.arvoreDeCamadas = {
 	/*
 	Propriedade: ABRELEGENDA
 
-	Mostra o ícone para abrir a legenda do mapa.
+	Mostra o &iacute;cone para abrir a legenda do mapa.
 
 	Default:
 	{true}
@@ -215,7 +215,7 @@ i3GEO.arvoreDeCamadas = {
 	/*
 	Propriedade: EXPANDIDA
 
-	Indica se a árvore será montada de forma expandida ou não. Se true, os nós do primeiro nível serão abertos na inicialização da árvore.
+	Indica se a &aacute;rvore ser&aacute; montada de forma expandida ou não. Se true, os n&oacute;s do primeiro n&iacute;vel serão abertos na inicializa&ccedil;ão da &aacute;rvore.
 
 	Default:
 	{false}
@@ -227,7 +227,7 @@ i3GEO.arvoreDeCamadas = {
 	/*
 	Propriedade: LEGENDAEXPANDIDA
 
-	Indica se a legenda da árvore será montada de forma expandida ou não.
+	Indica se a legenda da &aacute;rvore ser&aacute; montada de forma expandida ou não.
 
 	Default:
 	{false}
@@ -239,7 +239,7 @@ i3GEO.arvoreDeCamadas = {
 	/*
 	Propriedade: OPCOESICONES
 
-	Inclui ou não os ícones de opções em cada tema (farol, zoom para o tema, etc)
+	Inclui ou não os &iacute;cones de op&ccedil;&otilde;es em cada tema (farol, zoom para o tema, etc)
 
 	Default:
 	{true}
@@ -251,7 +251,7 @@ i3GEO.arvoreDeCamadas = {
 	/*
 	Propriedade: OPCOESTEMAS
 
-	Inclui ou não o nó com as opções de manipulação de cada tema.
+	Inclui ou não o n&oacute; com as op&ccedil;&otilde;es de manipula&ccedil;ão de cada tema.
 
 	Default:
 	true
@@ -263,7 +263,7 @@ i3GEO.arvoreDeCamadas = {
 	/*
 	Propriedade: OPCOESLEGENDA
 
-	Inclui ou não o nó para mostrar a legenda do tema.
+	Inclui ou não o n&oacute; para mostrar a legenda do tema.
 
 	Default:
 	true
@@ -275,7 +275,7 @@ i3GEO.arvoreDeCamadas = {
 	/*
 	Propriedade: AGUARDALEGENDA
 
-	Ativa a opção de aguarde para mostrar a legenda de um tema quando o usuário estaciona o mouse sobre o nome de um tema.
+	Ativa a op&ccedil;ão de aguarde para mostrar a legenda de um tema quando o usu&aacute;rio estaciona o mouse sobre o nome de um tema.
 
 	Default:
 	{false}
@@ -287,9 +287,9 @@ i3GEO.arvoreDeCamadas = {
 	/*
 	Propriedade: ICONETEMA
 
-	Mostra ou não o ícone do tema caso exista.
+	Mostra ou não o &iacute;cone do tema caso exista.
 
-	O ícone é definido no METADATA ICONETEMA no mapfile correspondente ao tema
+	O &iacute;cone &eacute; definido no METADATA ICONETEMA no mapfile correspondente ao tema
 
 	Default:
 	{true}
@@ -301,10 +301,10 @@ i3GEO.arvoreDeCamadas = {
 	/*
 	Propriedade: FUNCOES
 
-	Indicação de quais funções serão incluídas em cada tema mostrado na árvore quando o usuário aciona o item "opções"
+	Indica&ccedil;ão de quais fun&ccedil;&otilde;es serão inclu&iacute;das em cada tema mostrado na &aacute;rvore quando o usu&aacute;rio aciona o item "op&ccedil;&otilde;es"
 	
-	Além de definir o item como false ou true, algumas funções apenas são mostradas em conformidade com o tipo de camada.
-	No sistema de administração, pode-se também controlar algumas das funções, como por exemplo "sql", "wms" e "temporizador"
+	Al&eacute;m de definir o item como false ou true, algumas fun&ccedil;&otilde;es apenas são mostradas em conformidade com o tipo de camada.
+	No sistema de administra&ccedil;ão, pode-se tamb&eacute;m controlar algumas das fun&ccedil;&otilde;es, como por exemplo "sql", "wms" e "temporizador"
 	
 	Exemplo de como alterar um valor diretamente no javascript da interface do mapa i3GEO.arvoreDeCamadas.FUNCOES.excluir = false
 
@@ -337,10 +337,10 @@ i3GEO.arvoreDeCamadas = {
 	/*
 	Variavel: CAMADAS
 
-	Objeto com a lista de camadas existentes no mapa. É definido na inicialização ou no redesenho do mapa.
+	Objeto com a lista de camadas existentes no mapa. &Eacute; definido na inicializa&ccedil;ão ou no redesenho do mapa.
 
-	Este objeto é construído nas operações em PHP de inicialização ou redesenho do mapa e lista todos os 
-	layers existentes no mapfile temporário em uso.
+	Este objeto &eacute; constru&iacute;do nas opera&ccedil;&otilde;es em PHP de inicializa&ccedil;ão ou redesenho do mapa e lista todos os 
+	layers existentes no mapfile tempor&aacute;rio em uso.
 
 	Exemplo:
 
@@ -348,7 +348,7 @@ i3GEO.arvoreDeCamadas = {
 
 		{
 
-			"name":"estadosl", //código do layer
+			"name":"estadosl", //c&oacute;digo do layer
 
 			"status":2, //ver constante MS_STATUS do Mapserver
 
@@ -400,7 +400,7 @@ i3GEO.arvoreDeCamadas = {
 	/*
 	Variavel: ARVORE
 
-	Objeto com a árvore criada com YAHOO.widget.TreeView
+	Objeto com a &aacute;rvore criada com YAHOO.widget.TreeView
 
 	Tipo:
 	{YAHOO.widget.TreeView}
@@ -409,7 +409,7 @@ i3GEO.arvoreDeCamadas = {
 	/*
 	Variavel: IDHTML
 
-	Armazena o ID do elemento DOM onde a árvore foi inserida.
+	Armazena o ID do elemento DOM onde a &aacute;rvore foi inserida.
 
 	Tipo:
 	{String}
@@ -421,7 +421,7 @@ i3GEO.arvoreDeCamadas = {
 	/*
 	Variavel: SID
 
-	Código da seção aberta no servidor pelo i3Geo
+	C&oacute;digo da se&ccedil;ão aberta no servidor pelo i3Geo
 
 	Tipo:
 	{String}
@@ -430,7 +430,7 @@ i3GEO.arvoreDeCamadas = {
 	/*
 	Variavel: LOCAPLIC
 
-	Endereço da aplicação i3geo. Utilizado para definir o caminho para a chamada em AJAX.
+	Endere&ccedil;o da aplica&ccedil;ão i3geo. Utilizado para definir o caminho para a chamada em AJAX.
 
 	Exemplo: 'http://localhost/i3geo'
 
@@ -441,7 +441,7 @@ i3GEO.arvoreDeCamadas = {
 	/*
 	Variavel: ATIVATEMA
 
-	Nome da função que será incluída no evento onclick do elemento checkbox adicionado no início do nome de um tema.
+	Nome da fun&ccedil;ão que ser&aacute; inclu&iacute;da no evento onclick do elemento checkbox adicionado no in&iacute;cio do nome de um tema.
 
 	Tipo:
 	{String}
@@ -451,17 +451,17 @@ i3GEO.arvoreDeCamadas = {
 	/*
 	Function: cria
 
-	Cria a árvore com as opções de manipulação das camadas existentes no mapa
+	Cria a &aacute;rvore com as op&ccedil;&otilde;es de manipula&ccedil;ão das camadas existentes no mapa
 
 	Parametros:
 
-	onde {String} - ID do elemento DOM onde a árvore será inserida. Se for definido como "" o id será buscado da variável IDHTML.
+	onde {String} - ID do elemento DOM onde a &aacute;rvore ser&aacute; inserida. Se for definido como "" o id ser&aacute; buscado da vari&aacute;vel IDHTML.
 
-	temas {JSON} - Objeto JSON com as camadas e propriedades. Se não for definido ou for vazio, será utilizado i3GEO.arvoreDeCamadas.CAMADAS
+	temas {JSON} - Objeto JSON com as camadas e propriedades. Se não for definido ou for vazio, ser&aacute; utilizado i3GEO.arvoreDeCamadas.CAMADAS
 
-	g_sid {String} -  Código da seção PHP criada ao abrir o i3Geo
+	g_sid {String} -  C&oacute;digo da se&ccedil;ão PHP criada ao abrir o i3Geo
 
-	funcaoTema {String} - (opcional) Nome da função que será incluida no evento disparado quando o usuário clicar no checkbox de um tema
+	funcaoTema {String} - (opcional) Nome da fun&ccedil;ão que ser&aacute; incluida no evento disparado quando o usu&aacute;rio clicar no checkbox de um tema
 	*/
 	cria: function(onde,temas,g_sid,g_locaplic,funcaoTema){
 		if(typeof(console) !== 'undefined'){console.info("i3GEO.arvoreDeCamadas.cria()");}
@@ -507,17 +507,17 @@ i3GEO.arvoreDeCamadas = {
 	/*
 	Function: atualiza
 
-	Atualiza a árvore de camadas.
+	Atualiza a &aacute;rvore de camadas.
 
-	Antes de executar a atualização, essa função verifica se é necessário fazê-lo.
-	O objeto CAMADAS é comparado com o parâmetro "temas" para verificar se existem diferenças que
-	justifiquem a atualização.
+	Antes de executar a atualiza&ccedil;ão, essa fun&ccedil;ão verifica se &eacute; necess&aacute;rio fazê-lo.
+	O objeto CAMADAS &eacute; comparado com o parâmetro "temas" para verificar se existem diferen&ccedil;as que
+	justifiquem a atualiza&ccedil;ão.
 
 	Parametro:
 
-	temas {JSON} - Objeto com a lista de camadas e propriedades (veja CAMADAS). Se não existir, a árvore é redesenhada
+	temas {JSON} - Objeto com a lista de camadas e propriedades (veja CAMADAS). Se não existir, a &aacute;rvore &eacute; redesenhada
 	
-	forca {boolean} - força a atualização da árvore, sem verificar automaticamente se a atualização deve ou não ser feita
+	forca {boolean} - for&ccedil;a a atualiza&ccedil;ão da &aacute;rvore, sem verificar automaticamente se a atualiza&ccedil;ão deve ou não ser feita
 	*/
 	atualiza: function(temas,forca){
 		if(typeof(console) !== 'undefined'){console.info("i3GEO.arvoreDeCamadas.atualiza()");}
@@ -532,7 +532,7 @@ i3GEO.arvoreDeCamadas = {
 			grupoLayers = i3GEO.configura.grupoLayers,
 			textoTema = "";
 		//
-		//essa verificacao é necessaria quando a arvore é criada fora dos padrões normais
+		//essa verificacao &eacute; necessaria quando a arvore &eacute; criada fora dos padr&otilde;es normais
 		//
 		temp = $i(i3GEO.arvoreDeCamadas.IDHTML);
 		if(temp){
@@ -540,7 +540,7 @@ i3GEO.arvoreDeCamadas = {
 			{temp.innerHTML = "";}
 			if(temp.innerHTML !== ""){
 				if(i3GEO.arvoreDeCamadas.comparaTemas(temas,i3GEO.arvoreDeCamadas.CAMADAS)){
-					if(typeof(console) !== 'undefined'){console.info("Nao é necessario atualizar arvoreDeCamadas - return");}
+					if(typeof(console) !== 'undefined'){console.info("Nao &eacute; necessario atualizar arvoreDeCamadas - return");}
 					i3GEO.arvoreDeCamadas.CAMADAS = temas;
 					return;
 				}
@@ -577,9 +577,9 @@ i3GEO.arvoreDeCamadas = {
 		//
 		estilo = navm ? "text-align:left;font-size:11px;vertical-align:middle;display:table-cell;" : "text-align:left;font-size:11px;vertical-align:vertical-align:top;padding-top:4px;";
 		//
-		//monta a árvore.
+		//monta a &aacute;rvore.
 		//se i3GEO.configura.grupoLayers estiver definido
-		//o processo é diferenciado
+		//o processo &eacute; diferenciado
 		//
 		if (grupoLayers === ""){
 			c = temas.length;
@@ -676,7 +676,7 @@ i3GEO.arvoreDeCamadas = {
 		if(i3GEO.arvoreDeCamadas.ARRASTARORDEM === true || i3GEO.arvoreDeCamadas.ARRASTARLIXEIRA === true)
 		{i3GEO.arvoreDeCamadas.ativaDragDrop();}
 		//
-		//verifica se a ferramenta identifica está ativa para atualizar a lista de temas
+		//verifica se a ferramenta identifica est&aacute; ativa para atualizar a lista de temas
 		//
 		/*
 		try{
@@ -698,11 +698,11 @@ i3GEO.arvoreDeCamadas = {
 	/*
 	Function: montaOpcoesArvore
 	
-	Monta os ícones de opções gerais da árvore, como a lixira, ligar todos, etc.
+	Monta os &iacute;cones de op&ccedil;&otilde;es gerais da &aacute;rvore, como a lixira, ligar todos, etc.
 	
 	Return:
 	
-	{string} - html contendo os ícones
+	{string} - html contendo os &iacute;cones
 	*/
 	montaOpcoesArvore: function(){
 		var ins = "",
@@ -729,11 +729,11 @@ i3GEO.arvoreDeCamadas = {
 	/*
 	Function: ligaDesligaTemas
 
-	Marca ou desmarca os checkbox da árvore de uma lista de temas
+	Marca ou desmarca os checkbox da &aacute;rvore de uma lista de temas
 
 	Parametros:
 
-	lista {string} - lista, separada por vírgulas, dos códigos dos temas
+	lista {string} - lista, separada por v&iacute;rgulas, dos c&oacute;digos dos temas
 
 	status {boolean} - marca ou desmarca
 	*/
@@ -894,17 +894,17 @@ i3GEO.arvoreDeCamadas = {
 	/*
 	Function: montaOpcoes
 
-	Abre o segundo nível da árvore de temas, mostrando as opções disponíveis para cada tema.
+	Abre o segundo n&iacute;vel da &aacute;rvore de temas, mostrando as op&ccedil;&otilde;es dispon&iacute;veis para cada tema.
 
-	Nesse segundo nível são mostrados alguns ícones como o farol, excluir, etc, além do nó de opções e legenda.
+	Nesse segundo n&iacute;vel são mostrados alguns &iacute;cones como o farol, excluir, etc, al&eacute;m do n&oacute; de op&ccedil;&otilde;es e legenda.
 
 	Parametro:
 
-	node {YAHOO.widget.HTMLNode} - Nó que foi clicado
+	node {YAHOO.widget.HTMLNode} - N&oacute; que foi clicado
 	*/
 	montaOpcoes: function(node){
 		if(typeof(console) !== 'undefined'){console.info("i3GEO.arvoreDeCamadas.montaOpcoes()");}
-		//YAHOO.log("Montando as opções da árvore de camadas", "i3geo");
+		//YAHOO.log("Montando as op&ccedil;&otilde;es da &aacute;rvore de camadas", "i3geo");
 		var opcoesNode,idtema,ltema,farol,mfarol,tnome = "",
 			imb = i3GEO.util.$im("branco.gif"),
 			funcoes = i3GEO.arvoreDeCamadas.FUNCOES;
@@ -962,7 +962,7 @@ i3GEO.arvoreDeCamadas = {
 	/*
 	Function: mostraOpcoes
 
-	Monta os nós filhos do nó "opções"
+	Monta os n&oacute;s filhos do n&oacute; "op&ccedil;&otilde;es"
 
 	Parametro:
 
@@ -970,7 +970,7 @@ i3GEO.arvoreDeCamadas = {
 	*/
 	mostraOpcoes: function(node){
 		if(typeof(console) !== 'undefined'){console.info("i3GEO.arvoreDeCamadas.mostraOpcoes()");}
-		//YAHOO.log("Mostrando as opções da árvore de camadas", "i3geo");
+		//YAHOO.log("Mostrando as op&ccedil;&otilde;es da &aacute;rvore de camadas", "i3geo");
 		var tnome,
 			idtema = node.data.idopcoes,
 			ltema = i3GEO.arvoreDeCamadas.pegaTema(idtema),
@@ -1017,7 +1017,7 @@ i3GEO.arvoreDeCamadas = {
 		if(funcoes.destacar === true && i3GEO.Interface.ATUAL !== "googlemaps" && i3GEO.Interface.ATUAL !== "googleearth"){
 			i3GEO.arvoreDeCamadas.adicionaOpcaoTema($trad("t34"),$trad("t35"),'i3GEO.navega.destacaTema.inicia(\"'+ltema.name+'\")',node);
 		}
-		//as opções SLD foram migradas para a ferramenta de edição de legenda
+		//as op&ccedil;&otilde;es SLD foram migradas para a ferramenta de edi&ccedil;ão de legenda
 		//i3GEO.arvoreDeCamadas.adicionaOpcaoTema($trad("t38"),$trad("t39"),'i3GEO.tema.dialogo.sld(\"'+ltema.name+'\")',node);
 		//i3GEO.arvoreDeCamadas.adicionaOpcaoTema($trad("t43"),$trad("t43"),'i3GEO.tema.dialogo.aplicarsld(\"'+ltema.name+'\")',node);
 		if(funcoes.sql === true && ltema.editorsql.toLowerCase() === "sim")
@@ -1028,7 +1028,7 @@ i3GEO.arvoreDeCamadas = {
 			i3GEO.arvoreDeCamadas.adicionaOpcaoTema("Getcapabilities",'WMS-OGC','i3GEO.tema.dialogo.mostraWms(\"'+ltema.name+'\")',node);
 		}
 		if(i3GEO.parametros.editor.toLowerCase() === "sim")
-		{i3GEO.arvoreDeCamadas.adicionaOpcaoTema($trad("t44"),"<span style=color:red title='Apenas usuários editores podem ver essa opção' >"+$trad("t44")+"</span>",'i3GEO.tema.dialogo.salvaMapfile(\"'+ltema.name+'\")',node);}
+		{i3GEO.arvoreDeCamadas.adicionaOpcaoTema($trad("t44"),"<span style=color:red title='Apenas usu&aacute;rios editores podem ver essa op&ccedil;ão' >"+$trad("t44")+"</span>",'i3GEO.tema.dialogo.salvaMapfile(\"'+ltema.name+'\")',node);}
 		if(funcoes.tme === true)
 		{i3GEO.arvoreDeCamadas.adicionaOpcaoTema($trad("t49"),$trad("t49"),'i3GEO.tema.dialogo.tme(\"'+ltema.name+'\")',node);}		
 		node.loadComplete();
@@ -1036,17 +1036,17 @@ i3GEO.arvoreDeCamadas = {
 	/*
 	Function: adicionaOpcaoTema
 
-	Adiciona uma nova opção no nó de opções de um tema
+	Adiciona uma nova op&ccedil;ão no n&oacute; de op&ccedil;&otilde;es de um tema
 
 	Parametros:
 
-	dica {String} - dica que será mostrada na janela de mensagens do mapa quando o usuário sobrepoem o mouse
+	dica {String} - dica que ser&aacute; mostrada na janela de mensagens do mapa quando o usu&aacute;rio sobrepoem o mouse
 
-	titulo {String} - título que será mostrado no nó
+	titulo {String} - t&iacute;tulo que ser&aacute; mostrado no n&oacute;
 
-	onclick {String} - string que define o evento onclick sobre o título da opção
+	onclick {String} - string que define o evento onclick sobre o t&iacute;tulo da op&ccedil;ão
 
-	node {String} - objeto node da árvore (YUI) que receberá o novo nó
+	node {String} - objeto node da &aacute;rvore (YUI) que receber&aacute; o novo n&oacute;
 	*/
 	adicionaOpcaoTema:function(dica,titulo,onclick,node){
 		var tnome = "<a href='#' onmouseover=\"javascript:i3GEO.ajuda.mostraJanela('"+dica+"','');\" onclick="+onclick+">"+titulo+" </a>";
@@ -1055,7 +1055,7 @@ i3GEO.arvoreDeCamadas = {
 	/*
 	Function: mostraLegenda
 
-	Monta os nós filhos do nó "legenda"
+	Monta os n&oacute;s filhos do n&oacute; "legenda"
 
 	Parametro:
 
@@ -1100,7 +1100,7 @@ i3GEO.arvoreDeCamadas = {
 					else{tabela = retorno;}
 				}
 			}
-			else {tabela = "<img src='"+retorno.data[0].imagem+"' />";} //o tema é um wms
+			else {tabela = "<img src='"+retorno.data[0].imagem+"' />";} //o tema &eacute; um wms
 			incluir = "<div style='text-align:left' id='"+idtema+"verdiv"+"'>"+tabela+"</div>";
 			new YAHOO.widget.HTMLNode({html:incluir,enableHighlight:false,expanded:false}, node);
 			node.loadComplete();
@@ -1143,7 +1143,7 @@ i3GEO.arvoreDeCamadas = {
 
 	Atualiza a legenda de um tema.
 
-	A legenda precisa ser atualizada emalgumas circunstâncias, como quando é feitoumzoom no mapa.
+	A legenda precisa ser atualizada emalgumas circunstâncias, como quando &eacute; feitoumzoom no mapa.
 
 	Parametro:
 
@@ -1168,16 +1168,16 @@ i3GEO.arvoreDeCamadas = {
 	/*
 	Function: escolheCorClasse
 
-	Abre uma janela para escolher uma nova cor para o símbolo da classe.
+	Abre uma janela para escolher uma nova cor para o s&iacute;mbolo da classe.
 
-	A chamada dessa função é definida em aplicmap/legenda2.htm
+	A chamada dessa fun&ccedil;ão &eacute; definida em aplicmap/legenda2.htm
 
 	Parametro:
 
 	leg {Object input} - objeto do tipo INPUT com o id da classe e o id do tema
 	*/
 	escolheCorClasse: function (leg){
-		//cria um elemento que receberá a escolha da cor e que irá disparar a função de mudança de cor da classe
+		//cria um elemento que receber&aacute; a escolha da cor e que ir&aacute; disparar a fun&ccedil;ão de mudan&ccedil;a de cor da classe
 		var obj,novoel;
 		leg = leg.parentNode.getElementsByTagName("input")[0];
 		if(!$i("tempinputcorclasse")){
@@ -1203,7 +1203,7 @@ i3GEO.arvoreDeCamadas = {
 
 	Liga ou desliga uma classe da legenda.
 
-	A chamada dessa função é definida em aplicmap/legenda2.htm
+	A chamada dessa fun&ccedil;ão &eacute; definida em aplicmap/legenda2.htm
 
 	Parametro:
 
@@ -1219,8 +1219,8 @@ i3GEO.arvoreDeCamadas = {
 	/*
 	Function: montaTextoTema
 
-	Monta o texto com o título do tema. Esse texto é o que será mostrado nos nós principais da árvore e
-	contém o checkbox para ligar e desligar o tema.
+	Monta o texto com o t&iacute;tulo do tema. Esse texto &eacute; o que ser&aacute; mostrado nos n&oacute;s principais da &aacute;rvore e
+	cont&eacute;m o checkbox para ligar e desligar o tema.
 
 	Parametro:
 
@@ -1238,7 +1238,7 @@ i3GEO.arvoreDeCamadas = {
 		else
 		{ck = "";}
 		//
-		//verifica se o filtro de camadas está ativo
+		//verifica se o filtro de camadas est&aacute; ativo
 		//
 		if(this.FILTRO !== ""){
 			if(this.FILTRO === "desligados" && ck !== "")
@@ -1280,7 +1280,7 @@ i3GEO.arvoreDeCamadas = {
 			html += "&nbsp;<img style='"+estilo+"' src="+iu.$im("estasel.png")+" title='"+$trad("t4")+"' onclick='i3GEO.tema.limpasel(\""+tema.name+"\")' onmouseover=\"javascript:i3GEO.ajuda.mostraJanela('"+$trad("t5")+"','limpasel')\" onmouseout=\"javascript:i3GEO.ajuda.mostraJanela('')\" />";
 			html += "&nbsp;<img style='"+estilo+"' src="+iu.$im("zoomsel.gif")+" title='"+$trad("t4a")+"' onclick='i3GEO.tema.zoomsel(\""+tema.name+"\")' onmouseover=\"javascript:i3GEO.ajuda.mostraJanela('"+$trad("t5")+"','zoomsel')\" onmouseout=\"javascript:i3GEO.ajuda.mostraJanela('')\" />";
 		}
-		//manter a lógica de exigir sim ao invés de vazio
+		//manter a l&oacute;gica de exigir sim ao inv&eacute;s de vazio
 		if (tema.download.toLowerCase() === "sim")
 		{html += "&nbsp;<img style='"+estilo+"' src="+iu.$im("down1.gif") +" title='download' onclick='i3GEO.tema.dialogo.download(\""+tema.name+"\")' onmouseover=\"javascript:i3GEO.ajuda.mostraJanela('"+$trad("t6")+"','download')\" onmouseout=\"javascript:i3GEO.ajuda.mostraJanela('')\" />";}
 		estilo = navm ? "cursor:move;vertical-align:35%;padding-top:0px;color:black;" : "cursor:move;vertical-align:20%;color:black;";
@@ -1305,12 +1305,12 @@ i3GEO.arvoreDeCamadas = {
 
 	Parametro:
 
-	mapscale {Numeric} - escala de comparação com a escala de cada tema
+	mapscale {Numeric} - escala de compara&ccedil;ão com a escala de cada tema
 	*/
 	atualizaFarol: function(mapscale)
 	{
 		if(typeof(console) !== 'undefined'){console.info("i3GEO.arvoreDeCamadas.atualizaFarol()");}
-		//YAHOO.log("Atualizando o farol da árvore de camadas", "i3geo");
+		//YAHOO.log("Atualizando o farol da &aacute;rvore de camadas", "i3geo");
 		var farol,l,ltema,escala,
 			iu = i3GEO.util,
 			im = i3GEO.configura.locaplic+"/imagens/",
@@ -1335,11 +1335,11 @@ i3GEO.arvoreDeCamadas = {
 	/*
 	Function: aplicaTemas
 
-	Refaz o mapa ligando e desligando os temas conforme consta na árvore de camadas ou ligando/desligando todos
+	Refaz o mapa ligando e desligando os temas conforme consta na &aacute;rvore de camadas ou ligando/desligando todos
 
 	Parametro:
 
-	tipo {String} - tipo de operação normal|ligartodos|desligartodos a opção 'normal' irá desligar/ligar o que estiver marcado
+	tipo {String} - tipo de opera&ccedil;ão normal|ligartodos|desligartodos a op&ccedil;ão 'normal' ir&aacute; desligar/ligar o que estiver marcado
 	*/
 	aplicaTemas: function(tipo){
 		if(arguments.length === 0)
@@ -1387,16 +1387,16 @@ i3GEO.arvoreDeCamadas = {
 	Function: listaLigadosDesligados
 
 	Lista os temas que estão ligados e os que estão desligados
-	tendo como fonte de busca os checkbox existentes na árvore.
+	tendo como fonte de busca os checkbox existentes na &aacute;rvore.
 
-	Esse método é mais demorado pois varre a árvore toda. Porém, obtém o status verdadeiro do tema.
+	Esse m&eacute;todo &eacute; mais demorado pois varre a &aacute;rvore toda. Por&eacute;m, obt&eacute;m o status verdadeiro do tema.
 
 	Parametro:
 
-	tipo {String} - mantem|marca|desmarca marca, desmarca ou mantém o checkbox após identificar seu status atual
+	tipo {String} - mantem|marca|desmarca marca, desmarca ou mant&eacute;m o checkbox ap&oacute;s identificar seu status atual
 
 	Return:
-	{Array} - array de arrays com os códigos dos temas [0]=ligados [1]=desligados [2]=todos na ordem encontrada
+	{Array} - array de arrays com os c&oacute;digos dos temas [0]=ligados [1]=desligados [2]=todos na ordem encontrada
 	*/
 	listaLigadosDesligados: function(tipo){
 		if(!$i(i3GEO.arvoreDeCamadas.IDHTML))
@@ -1445,11 +1445,11 @@ i3GEO.arvoreDeCamadas = {
 	/*
 	Function: capturaCheckBox
 
-	Retorna o objeto input (check box) que corresponde a uma determinada camada na árvore.
+	Retorna o objeto input (check box) que corresponde a uma determinada camada na &aacute;rvore.
 
 	Parametro:
 
-	tema {String} - código do tema ao qual o elemento se refere
+	tema {String} - c&oacute;digo do tema ao qual o elemento se refere
 
 	Return:
 	{Objeto} - objeto do tipo input checkbox
@@ -1522,7 +1522,7 @@ i3GEO.arvoreDeCamadas = {
 
 	Parametro:
 
-	idtema - {String} ID do tema que será procurado
+	idtema - {String} ID do tema que ser&aacute; procurado
 	
 	camadas - {Objeto} - objeto com a lista de temas
 
@@ -1547,11 +1547,11 @@ i3GEO.arvoreDeCamadas = {
 	/*
 	Function: filtraCamadas
 
-	Busca temas na variável i3GEO.arvoreDeCamadas.CAMADAS aplicando um filtro
+	Busca temas na vari&aacute;vel i3GEO.arvoreDeCamadas.CAMADAS aplicando um filtro
 
 	Parameters:
 
-	propriedade {string} - propriedade de CAMADAS que será filtrado
+	propriedade {string} - propriedade de CAMADAS que ser&aacute; filtrado
 
 	valor - valor do filtro
 
@@ -1600,11 +1600,11 @@ i3GEO.arvoreDeCamadas = {
 
 	Parameters:
 
-	propriedade {string} - propriedade que será modificada
+	propriedade {string} - propriedade que ser&aacute; modificada
 
 	valor - novo valor
 
-	camada {string} - código da camada
+	camada {string} - c&oacute;digo da camada
 	*/
 	alteraPropCamadas: function(propriedade,valor,camada){
 		if(typeof(console) !== 'undefined'){console.info("i3GEO.arvoreDeCamadas.alteraPropCamadas()");}
@@ -1625,7 +1625,7 @@ i3GEO.arvoreDeCamadas = {
 	/*
 	Function: verificaAbrangenciaTemas
 
-	Verifica se um tema está ou não na abrangência espacial do mapa atual modificando a cor com que o nome é mostrado na árvore
+	Verifica se um tema est&aacute; ou não na abrangência espacial do mapa atual modificando a cor com que o nome &eacute; mostrado na &aacute;rvore
 	*/
 	verificaAbrangenciaTemas: function(){
 		if(typeof(console) !== 'undefined'){console.info("i3GEO.arvoreDeCamadas.verificaAbrangenciaTemas()");}
@@ -1659,11 +1659,11 @@ i3GEO.arvoreDeCamadas = {
 	/*
 	Function: verificaAplicaExtensao
 
-	Verifica se algum tema está marcado com o metadado Aplicaextensao. Retorna a primeira ocorrência se houver
+	Verifica se algum tema est&aacute; marcado com o metadado Aplicaextensao. Retorna a primeira ocorrência se houver
 
 	Return:
 
-	{string} código do tema ou ""
+	{string} c&oacute;digo do tema ou ""
 	*/
 	verificaAplicaExtensao: function(){
 		if(typeof(console) !== 'undefined'){console.info("i3GEO.arvoreDeCamadas.verificaAplicaExtensao()");}
@@ -1689,13 +1689,13 @@ i3GEO.arvoreDeCamadas = {
 	/*
 	Classe: i3GEO.arvoreDeCamadas.dialogo
 
-	Abre as telas de diálogo das opções de manipulação da árvore
+	Abre as telas de di&aacute;logo das op&ccedil;&otilde;es de manipula&ccedil;ão da &aacute;rvore
 	*/
 	dialogo: {
 		/*
 		Function: abreFiltro
 		
-		Abre a janela de diálogo para o usuário escolher ou alterar o filtro aplicado à árvore
+		Abre a janela de di&aacute;logo para o usu&aacute;rio escolher ou alterar o filtro aplicado à &aacute;rvore
 		*/
 		filtro: function(){
 			i3GEO.util.dialogoFerramenta("i3GEO.arvoreDeCamadas.dialogo.filtro()","filtroarvore","filtroarvore");
@@ -1703,7 +1703,7 @@ i3GEO.arvoreDeCamadas = {
 		/*
 		Function: excluir
 		
-		Abre a janela de diálogo para o usuário escolher os temas que serão excluídos da árvore
+		Abre a janela de di&aacute;logo para o usu&aacute;rio escolher os temas que serão exclu&iacute;dos da &aacute;rvore
 		*/
 		excluir: function(){
 			i3GEO.util.dialogoFerramenta("i3GEO.arvoreDeCamadas.dialogo.excluir()","excluirarvore","excluirarvore");

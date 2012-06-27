@@ -1,7 +1,7 @@
 /*jslint plusplus:false,white:false,undef: false, rhino: true, onevar: true, evil: false */
 
 /*
-Title: Desenho de elementos gráficos
+Title: Desenho de elementos gr&aacute;ficos
 
 Arquivo:
 
@@ -13,20 +13,20 @@ GPL2
 
 i3Geo Interface Integrada de Ferramentas de Geoprocessamento para Internet
 
-Direitos Autorais Reservados (c) 2006 Ministério do Meio Ambiente Brasil
+Direitos Autorais Reservados (c) 2006 Minist&eacute;rio do Meio Ambiente Brasil
 Desenvolvedor: Edmar Moretti edmar.moretti@mma.gov.br
 
-Este programa é software livre; você pode redistribuí-lo
-e/ou modificá-lo sob os termos da Licença Pública Geral
+Este programa &eacute; software livre; você pode redistribu&iacute;-lo
+e/ou modific&aacute;-lo sob os termos da Licen&ccedil;a P&uacute;blica Geral
 GNU conforme publicada pela Free Software Foundation;
 
-Este programa é distribuído na expectativa de que seja útil,
-porém, SEM NENHUMA GARANTIA; nem mesmo a garantia implícita
-de COMERCIABILIDADE OU ADEQUAÇÃO A UMA FINALIDADE ESPECÍFICA.
-Consulte a Licença Pública Geral do GNU para mais detalhes.
-Você deve ter recebido uma cópia da Licença Pública Geral do
+Este programa &eacute; distribu&iacute;do na expectativa de que seja &uacute;til,
+por&eacute;m, SEM NENHUMA GARANTIA; nem mesmo a garantia impl&iacute;cita
+de COMERCIABILIDADE OU ADEQUAÇ&Atilde;O A UMA FINALIDADE ESPEC&Iacute;FICA.
+Consulte a Licen&ccedil;a P&uacute;blica Geral do GNU para mais detalhes.
+Você deve ter recebido uma c&oacute;pia da Licen&ccedil;a P&uacute;blica Geral do
 GNU junto com este programa; se não, escreva para a
-Free Software Foundation, Inc., no endereço
+Free Software Foundation, Inc., no endere&ccedil;o
 59 Temple Street, Suite 330, Boston, MA 02111-1307 USA.
 */
 if (typeof(i3GEO) === 'undefined'){
@@ -35,13 +35,13 @@ if (typeof(i3GEO) === 'undefined'){
 /*
 Classe: i3GEO.desenho
 
-Controla as operações de desenho sobre o mapa
+Controla as opera&ccedil;&otilde;es de desenho sobre o mapa
 
-Por desenho, entende-se elementos que são incluídos graficamente no mapa,
-como por exemplo, linhas, pontos, círculos, etc e que não compõem layers
+Por desenho, entende-se elementos que são inclu&iacute;dos graficamente no mapa,
+como por exemplo, linhas, pontos, c&iacute;rculos, etc e que não comp&otilde;em layers
 com dados
 
-As operações de desenho são baseadas na biblioteca Richdraw (i3geo/pacotes/richdraw)
+As opera&ccedil;&otilde;es de desenho são baseadas na biblioteca Richdraw (i3geo/pacotes/richdraw)
 
 Link:
 
@@ -102,18 +102,18 @@ i3GEO.desenho = {
 	/*
 	Function: criaContainerRichdraw
 
-	Cria os elementos 'dom' necessários ao uso das funções de desenho sobre o mapa.
+	Cria os elementos 'dom' necess&aacute;rios ao uso das fun&ccedil;&otilde;es de desenho sobre o mapa.
 
-	As ferramentas de cálculo de distâncias e áreas utilizam esse container.
+	As ferramentas de c&aacute;lculo de distâncias e &aacute;reas utilizam esse container.
 
-	Richdraw é uma biblioteca utilizada pelo i3geo para abstrair as diferenças entre as linguagens svg e vml.
+	Richdraw &eacute; uma biblioteca utilizada pelo i3geo para abstrair as diferen&ccedil;as entre as linguagens svg e vml.
 
-	Essa abstração é necessária devido às diferenças entre os navegadores.
+	Essa abstra&ccedil;ão &eacute; necess&aacute;ria devido às diferen&ccedil;as entre os navegadores.
 
-	O container é criado dentro de um DIV chamado "divGeometriasTemp"
+	O container &eacute; criado dentro de um DIV chamado "divGeometriasTemp"
 
-	Essa função cria também o objeto pontosdistobj que é utilizado para armazenar
-	os dados obtidos da movimentação do mouse sobre o mapa
+	Essa fun&ccedil;ão cria tamb&eacute;m o objeto pontosdistobj que &eacute; utilizado para armazenar
+	os dados obtidos da movimenta&ccedil;ão do mouse sobre o mapa
 
 	*/
 	criaContainerRichdraw: function(){
@@ -137,9 +137,9 @@ i3GEO.desenho = {
 			divgeo.innerHTML = "";
 			//
 			//cria o objeto renderer conforme o browser em uso
-			//esse objeto será utilizado nas funções de desenho
+			//esse objeto ser&aacute; utilizado nas fun&ccedil;&otilde;es de desenho
 			//mais detalhes, veja em pacotes/richdraw
-			//Conforme a resposta do navegador, utiliza-se a criação VML ou SVG
+			//Conforme a resposta do navegador, utiliza-se a cria&ccedil;ão VML ou SVG
 			//
 			try{
 				renderer = new VMLRenderer();
@@ -152,13 +152,13 @@ i3GEO.desenho = {
 				renderer.svgRoot.style.height = divgeo.style.height;
 			}
 			//
-			//definição dos símbolos default para os elementos gráficos
+			//defini&ccedil;ão dos s&iacute;mbolos default para os elementos gr&aacute;ficos
 			//
 			i3GEO.desenho.definePadrao(i3GEO.desenho.estiloPadrao);
 			i3GEO.desenho.richdraw.editCommand('mode', 'line');
 			divgeo.style.display="block";
 			//
-			//após o container ser criado, é necessário que as funções
+			//ap&oacute;s o container ser criado, &eacute; necess&aacute;rio que as fun&ccedil;&otilde;es
 			//de clique sobre o mapa sejam ativadas
 			//para funcionarem sobre o container
 			//
@@ -175,8 +175,8 @@ i3GEO.desenho = {
 	/*
 	Function: criaDivContainer
 
-	Cria o elemento DIV que será utilizado para renderizar os elementos gráficos.
-	Nesse DIV serão incluídos os elementos de desenho em SVG ou VML 
+	Cria o elemento DIV que ser&aacute; utilizado para renderizar os elementos gr&aacute;ficos.
+	Nesse DIV serão inclu&iacute;dos os elementos de desenho em SVG ou VML 
 
 	O DIV recebe como ID "divGeometriasTemp"
 
@@ -190,7 +190,7 @@ i3GEO.desenho = {
 		if (!$i("divGeometriasTemp")){
 			var pos,novoel,ne;
 			//
-			//pega a posição da imagem do mapa para posicionar corretamente o container
+			//pega a posi&ccedil;ão da imagem do mapa para posicionar corretamente o container
 			//
 			pos = [0,0];
 			pos = i3GEO.util.pegaPosicaoObjeto($i(i3GEO.Interface.IDCORPO));
@@ -222,20 +222,20 @@ i3GEO.desenho = {
 
 	Parametros:
 
-	tipo {string} - resizelinha|resizePoligono|insereCirculo tipo de operação
+	tipo {string} - resizelinha|resizePoligono|insereCirculo tipo de opera&ccedil;ão
 
-	objeto {object} - objeto gráfico existente no container richdraw
+	objeto {object} - objeto gr&aacute;fico existente no container richdraw
 
-	n {numeric} - índice do elemento no array pontosdistobj
+	n {numeric} - &iacute;ndice do elemento no array pontosdistobj
 
-	texto {string} - texto que será inserido no tipo "insereTexto"
+	texto {string} - texto que ser&aacute; inserido no tipo "insereTexto"
 	*/
 	aplica: function(tipo,objeto,n,texto){
 		var dy,dx,w;
 		if(i3GEO.desenho.richdraw && $i(i3GEO.Interface.IDCORPO)){
 			//pos = i3GEO.util.pegaPosicaoObjeto($i(i3GEO.Interface.IDCORPO));
 			//
-			//faz o reposicionamento de linhas quando o mouse é movido e a linha está ativa
+			//faz o reposicionamento de linhas quando o mouse &eacute; movido e a linha est&aacute; ativa
 			//
 			if((tipo==="resizeLinha") || (tipo==="resizePoligono")){
 				try
@@ -263,15 +263,15 @@ i3GEO.desenho = {
 	/*
 	Function: insereCirculo
 
-	Insere um circulo no container de elementos gráficos
+	Insere um circulo no container de elementos gr&aacute;ficos
 
 	Parametros:
 
-	x {numerico} - posição do ponto em coordenadas de imagem
+	x {numerico} - posi&ccedil;ão do ponto em coordenadas de imagem
 
-	y {numerico} - posição do ponto em coordenadas de imagem
+	y {numerico} - posi&ccedil;ão do ponto em coordenadas de imagem
 
-	w {numerico} - raio do círculo em pixels
+	w {numerico} - raio do c&iacute;rculo em pixels
 	*/
 	insereCirculo: function(x,y,w){
 		try{
@@ -301,7 +301,7 @@ i3GEO.desenho = {
 	/*
 	Function: caixaEstilos
 
-	Cria uma caixa de seleção para escolha do estilo a ser utilizado
+	Cria uma caixa de sele&ccedil;ão para escolha do estilo a ser utilizado
 	*/
 	caixaEstilos: function(){
 		var lista = i3GEO.util.listaChaves(i3GEO.desenho.estilos),

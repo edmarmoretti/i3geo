@@ -2464,7 +2464,43 @@ i3GEO.util = {
 		if(navn && navigator.userAgent.toLowerCase().indexOf('3.') > -1)
 		{return "FF3";}
 		return "";
-	}
+	},
+	/*
+	Function: decimalPlaces
+	
+	Arredonda um numero
+	
+	Obtido de
+	
+		http://stackoverflow.com/questions/4868556/how-do-i-stop-parsefloat-from-stripping-zeroes-to-right-of-decimal/4868718#4868718
+
+
+	Parameters:
+	
+	float {numer} - numero que sera arredondado
+	
+	length {number} - numero de casas decimais
+	*/
+	decimalPlaces: function(float,length) {
+		ret = "";
+		str = float.toString();
+		array = str.split(".");
+		if(array.length==2) {
+			ret += array[0] + ".";
+			for(i=0;i<length;i++) {
+				if(i>=array[1].length) ret += '0';
+				else ret+= array[1][i];
+			}
+		}
+		else if(array.length == 1) {
+			ret += array[0] + ".";
+			for(i=0;i<length;i++) {
+				ret += '0'
+			}
+		}
+
+		return ret;
+	}	
 };
 //
 // YUI ACCORDION

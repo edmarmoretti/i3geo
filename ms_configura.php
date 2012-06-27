@@ -212,7 +212,7 @@ if (strtoupper(substr(PHP_OS, 0, 3) == 'WIN'))
 							)
 						);
 	/*
-	Variable: editores
+	Variable: editores (depreciado em função do novo sistema de cadastro de usuários)
 	
 	Ip dos usuarios que podem administrar o i3geo via navegador.
 	
@@ -222,8 +222,22 @@ if (strtoupper(substr(PHP_OS, 0, 3) == 'WIN'))
 	
 	Tipo:
 	{array}
+	
+	@TODO Bloquear essa variavel
 	*/
 	$editores = array("127.0.0.1","localhost");
+	/*
+	Variable: i3geomaster
+	
+	Usuário e senha que podem realizar operações de administração inicial do i3Geo, como a criação do banco de dados de administração ou operações críticas do sistema
+	
+	@TODO Documentar no manual do sistema de administração
+	
+	@TODO compatibilizar essa senha com phpliteadmin
+	*/
+	$i3geomaster = array(
+			array("usuario"=>"admin", "senha"=>"admin")
+	);
 	/*
 	Variable: dir_tmp
 	
@@ -440,7 +454,12 @@ else //se for linux
 	if((dirname($locaplic) == "/var/www") || (dirname($locaplic) == "/var/www/html")){
 		$dir_tmp = "/tmp/ms_tmp";
 	}
+	//@TODO Bloquear essa variavel
 	$editores = array("127.0.0.1","localhost");
+	$i3geomaster = array(
+				array("usuario"=>"admin", "senha"=>"admin")
+			);
+	
 	$navegadoresLocais = array(
 							array(
 								"ip"=>"127.0.0.1",

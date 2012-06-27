@@ -12,20 +12,20 @@ GPL2
 
 i3Geo Interface Integrada de Ferramentas de Geoprocessamento para Internet
 
-Direitos Autorais Reservados (c) 2006 Ministério do Meio Ambiente Brasil
+Direitos Autorais Reservados (c) 2006 Minist&eacute;rio do Meio Ambiente Brasil
 Desenvolvedor: Edmar Moretti edmar.moretti@mma.gov.br
 
-Este programa é software livre; você pode redistribuí-lo
-e/ou modificá-lo sob os termos da Licença Pública Geral
+Este programa &eacute; software livre; você pode redistribu&iacute;-lo
+e/ou modific&aacute;-lo sob os termos da Licen&ccedil;a P&uacute;blica Geral
 GNU conforme publicada pela Free Software Foundation;
 
-Este programa é distribuído na expectativa de que seja útil,
-porém, SEM NENHUMA GARANTIA; nem mesmo a garantia implícita
-de COMERCIABILIDADE OU ADEQUAÇÃO A UMA FINALIDADE ESPECÍFICA.
-Consulte a Licença Pública Geral do GNU para mais detalhes.
-Você deve ter recebido uma cópia da Licença Pública Geral do
+Este programa &eacute; distribu&iacute;do na expectativa de que seja &uacute;til,
+por&eacute;m, SEM NENHUMA GARANTIA; nem mesmo a garantia impl&iacute;cita
+de COMERCIABILIDADE OU ADEQUAÇ&Atilde;O A UMA FINALIDADE ESPEC&Iacute;FICA.
+Consulte a Licen&ccedil;a P&uacute;blica Geral do GNU para mais detalhes.
+Você deve ter recebido uma c&oacute;pia da Licen&ccedil;a P&uacute;blica Geral do
 GNU junto com este programa; se não, escreva para a
-Free Software Foundation, Inc., no endereço
+Free Software Foundation, Inc., no endere&ccedil;o
 59 Temple Street, Suite 330, Boston, MA 02111-1307 USA.
 */
 if(typeof(i3GEO) === 'undefined'){
@@ -34,24 +34,24 @@ if(typeof(i3GEO) === 'undefined'){
 /*
 Classe: i3GEO.Interface
 
-Funcoes que controlam o comportamento específico de determinadas interfaces
+Funcoes que controlam o comportamento espec&iacute;fico de determinadas interfaces
 
-As interfaces são definidas na inicialização do i3Geo, por exemplo, openlayers,etc
+As interfaces são definidas na inicializa&ccedil;ão do i3Geo, por exemplo, openlayers,etc
 
-A classe "interface" contém os métdos específicos utilizados nessas interfaces
+A classe "interface" cont&eacute;m os m&eacute;tdos espec&iacute;ficos utilizados nessas interfaces
 
 Exemplo:
 
-Para iniciar o i3geo com uma interface específica, utilize http://localhost/i3geo/ms_criamapa.php?interface=googlemaps.phtml
-O HTML deve conter as definições da interface criada e deve estar armazenado em i3geo/aplicmap
+Para iniciar o i3geo com uma interface espec&iacute;fica, utilize http://localhost/i3geo/ms_criamapa.php?interface=googlemaps.phtml
+O HTML deve conter as defini&ccedil;&otilde;es da interface criada e deve estar armazenado em i3geo/aplicmap
 */
 i3GEO.Interface = {
 	/*
 	Propriedade: TABLET
 	
-	Aplica configurações especiais para uso em tablets.
+	Aplica configura&ccedil;&otilde;es especiais para uso em tablets.
 	
-	Altera o posicionamento da barra de botões e comportamento das guias. Veja o exemplo interface/openlayers_t.htm.
+	Altera o posicionamento da barra de bot&otilde;es e comportamento das guias. Veja o exemplo interface/openlayers_t.htm.
 	
 	Type:
 	{boolean}
@@ -63,11 +63,11 @@ i3GEO.Interface = {
 	/*
 	Propriedade: ALTTABLET
 	
-	Nome do arquivo HTML com a interface alternativa utilizada quando o i3Geo detecta o uso de um dispositivo móvel
+	Nome do arquivo HTML com a interface alternativa utilizada quando o i3Geo detecta o uso de um dispositivo m&oacute;vel
 	
-	A detecção é aplicada automaticamente quando essa variável for definida
+	A detec&ccedil;ão &eacute; aplicada automaticamente quando essa vari&aacute;vel for definida
 	
-	Para não aplicar a detecção, use i3GEO.Interface.ALTTABLET = ""
+	Para não aplicar a detec&ccedil;ão, use i3GEO.Interface.ALTTABLET = ""
 	
 	Type:
 	{string}
@@ -79,9 +79,9 @@ i3GEO.Interface = {
 	/*
 	Propriedade: OUTPUTFORMAT
 
-	Formato de geração da imagem.
+	Formato de gera&ccedil;ão da imagem.
 
-	Os formatos devem estar definidos no mapfile geral1windows.map e geral1.map. A definição dessa variável não afeta a interface padrão, que utiliza a definição que estiver ativa nos mapfiles de inicialização.
+	Os formatos devem estar definidos no mapfile geral1windows.map e geral1.map. A defini&ccedil;ão dessa vari&aacute;vel não afeta a interface padrão, que utiliza a defini&ccedil;ão que estiver ativa nos mapfiles de inicializa&ccedil;ão.
 
 	Tipo:
 	{MAPSERVER OUTPUTFORMAT}
@@ -93,7 +93,7 @@ i3GEO.Interface = {
 	/*
 	Propriedade: BARRABOTOESTOP
 
-	Distância da barra de botões em relação ao topo do mapa.
+	Distância da barra de bot&otilde;es em rela&ccedil;ão ao topo do mapa.
 
 	Tipo:
 	{number}
@@ -105,7 +105,7 @@ i3GEO.Interface = {
 	/*
 	Propriedade: BARRABOTOESLEFT
 
-	Distância da barra de botões em relação ao lado esquerdo do mapa.
+	Distância da barra de bot&otilde;es em rela&ccedil;ão ao lado esquerdo do mapa.
 
 	Tipo:
 	{number}
@@ -117,7 +117,7 @@ i3GEO.Interface = {
 	/*
 	Propriedade: BARRADEZOOMTOP
 
-	Distância da barra de zoom em relação ao topo do mapa.
+	Distância da barra de zoom em rela&ccedil;ão ao topo do mapa.
 
 	Tipo:
 	{number}
@@ -129,7 +129,7 @@ i3GEO.Interface = {
 	/*
 	Propriedade: BARRADEZOOMLEFT
 
-	Distância da barra de zoom em relação ao lado esquerdo do mapa.
+	Distância da barra de zoom em rela&ccedil;ão ao lado esquerdo do mapa.
 
 	Tipo:
 	{number}
@@ -141,13 +141,13 @@ i3GEO.Interface = {
 	/*
 	Propriedade: ATUAL
 
-	Interface utilizada na criação e controle do mapa.
+	Interface utilizada na cria&ccedil;ão e controle do mapa.
 
-	Veja como usar nos arquivos de apresentação do mapa existentes no diretório i3geo/interface
+	Veja como usar nos arquivos de apresenta&ccedil;ão do mapa existentes no diret&oacute;rio i3geo/interface
 
-	O i3Geo, além da interface própria, permite o uso de outras APIs
-	para a construção do mapa, como Google Maps ou Openlayers. Essa propriedade define qual interface será usada.
-	Não confundir com o nome do HTML que é utilizado para mostrar o mapa.
+	O i3Geo, al&eacute;m da interface pr&oacute;pria, permite o uso de outras APIs
+	para a constru&ccedil;ão do mapa, como Google Maps ou Openlayers. Essa propriedade define qual interface ser&aacute; usada.
+	Não confundir com o nome do HTML que &eacute; utilizado para mostrar o mapa.
 
 	Para definir a interface, utilize
 
@@ -166,7 +166,7 @@ i3GEO.Interface = {
 	/*
 	Propriedade: IDCORPO
 
-	ID do elemento HTML que receberá o corpo do mapa
+	ID do elemento HTML que receber&aacute; o corpo do mapa
 
 	Tipo:
 	{string}
@@ -192,7 +192,7 @@ i3GEO.Interface = {
 
 	ID do elemento HTML criado para conter o mapa
 
-	Esse elemento normalmente é criado dentro de IDCORPO dependendo da interface
+	Esse elemento normalmente &eacute; criado dentro de IDCORPO dependendo da interface
 	*/
 	IDMAPA: "",
 	/*
@@ -200,13 +200,13 @@ i3GEO.Interface = {
 
 	Indica o status atual do mapa.
 
-	É utilizado para verificar o status do mapa e bloquear ou não determinadas funções.
+	&Eacute; utilizado para verificar o status do mapa e bloquear ou não determinadas fun&ccedil;&otilde;es.
 
 	Por exemplo, na interface OpenLayers, identifica se as camadas estão sendo atualizadas
 
 	STATUS = {
-		atualizando: new Array(), //guarda os códigos dos layers que estão sendo redesenhados
-		trocando: false //indica se o mapa está na fase de troca de interface
+		atualizando: new Array(), //guarda os c&oacute;digos dos layers que estão sendo redesenhados
+		trocando: false //indica se o mapa est&aacute; na fase de troca de interface
 	}
 	*/
 	STATUS: {
@@ -286,9 +286,9 @@ i3GEO.Interface = {
 	/*
 	Function: redesenha
 
-	Aplica o método redesenha da interface atual. Em alguns casos, a função de redesenho aplica os mesmos
-	processos da função de atualizar o mapa. Isso ocorre pq em alguns casos as funções são otimizadas para cada
-	situação
+	Aplica o m&eacute;todo redesenha da interface atual. Em alguns casos, a fun&ccedil;ão de redesenho aplica os mesmos
+	processos da fun&ccedil;ão de atualizar o mapa. Isso ocorre pq em alguns casos as fun&ccedil;&otilde;es são otimizadas para cada
+	situa&ccedil;ão
 	*/
 	redesenha: function(){
 		if(typeof(console) !== 'undefined'){console.info("i3GEO.Interface.redesenha()");}
@@ -310,9 +310,9 @@ i3GEO.Interface = {
 	/*
 	Function: atualizaMapa
 
-	Aplica o método atualizaMapa da interface atual. Em alguns casos, a função de redesenho aplica os mesmos
-	processos da função de atualizar o mapa. Isso ocorre pq em alguns casos as funções são otimizadas para cada
-	situação
+	Aplica o m&eacute;todo atualizaMapa da interface atual. Em alguns casos, a fun&ccedil;ão de redesenho aplica os mesmos
+	processos da fun&ccedil;ão de atualizar o mapa. Isso ocorre pq em alguns casos as fun&ccedil;&otilde;es são otimizadas para cada
+	situa&ccedil;ão
 	*/
 	atualizaMapa: function(){
 		if(typeof(console) !== 'undefined'){console.info("i3GEO.Interface.atualizaMapa()");}
@@ -327,13 +327,13 @@ i3GEO.Interface = {
 	/*
 	Function: atualizaTema
 
-	Aplica o método atualizaTema da interface atual
+	Aplica o m&eacute;todo atualizaTema da interface atual
 
 	Parametros:
 
-	retorno {JSON} - objeto JSON com os parâmetros obtidos da função PHP de redesenho do mapa. Quando igual a "", é feita apenas a atualização da camada, sem que a árvore de camadas seja atualizada.
+	retorno {JSON} - objeto JSON com os parâmetros obtidos da fun&ccedil;ão PHP de redesenho do mapa. Quando igual a "", &eacute; feita apenas a atualiza&ccedil;ão da camada, sem que a &aacute;rvore de camadas seja atualizada.
 
-	tema {string} - código do tema
+	tema {string} - c&oacute;digo do tema
 	*/
 	atualizaTema: function(retorno,tema){
 		if(typeof(console) !== 'undefined'){console.info("i3GEO.Interface.atualizaTema()");}
@@ -342,7 +342,7 @@ i3GEO.Interface = {
 	/*
 	Function: adicionaKml
 
-	Aplica o método de adição de kml ao mapa conforme a interface atual
+	Aplica o m&eacute;todo de adi&ccedil;ão de kml ao mapa conforme a interface atual
 	*/
 	adicionaKml: function(){
 		if(typeof(console) !== 'undefined'){console.info("i3GEO.Interface.adicionaKml()");}
@@ -356,9 +356,9 @@ i3GEO.Interface = {
 	/*
 	Function: cria
 
-	Cria ou altera os elementos HTML necessários para a interface
+	Cria ou altera os elementos HTML necess&aacute;rios para a interface
 
-	Essa função é executada na inicialização do i3geo
+	Essa fun&ccedil;ão &eacute; executada na inicializa&ccedil;ão do i3geo
 
 	Parametros:
 
@@ -378,7 +378,7 @@ i3GEO.Interface = {
 	inicia: function(w,h){
 		if(typeof(console) !== 'undefined'){console.warn("i3GEO.Interface.inicia()");}
 		//
-		//inicialização  que afeta todas as interfaces
+		//inicializa&ccedil;ão  que afeta todas as interfaces
 		//
 		var temp = window.location.href.split("?")[0],
 			gadgets = i3GEO.gadgets;
@@ -389,7 +389,7 @@ i3GEO.Interface = {
 		gadgets.mostraEmail();
 		i3GEO.guias.cria();
 		//
-		//esse id é utilizado apenas para manter o mapa não visível até que tudo seja montado
+		//esse id &eacute; utilizado apenas para manter o mapa não vis&iacute;vel at&eacute; que tudo seja montado
 		//
 		if($i("mst"))
 		{$i("mst").style.display="block";}
@@ -398,7 +398,7 @@ i3GEO.Interface = {
 		if ((i3GEO.parametros.geoip === "nao") && ($i("ondeestou")))
 		{$i("ondeestou").style.display="none";}
 		//
-		//inicialização específica de cada interface
+		//inicializa&ccedil;ão espec&iacute;fica de cada interface
 		//
 		i3GEO.Interface[i3GEO.Interface.ATUAL].inicia();
 	},
@@ -414,7 +414,7 @@ i3GEO.Interface = {
 	/*
 	Function: ativaBotoes
 
-	Ativa os botões de ferramentas
+	Ativa os bot&otilde;es de ferramentas
 	*/
 	ativaBotoes: function(){
 		if(typeof(console) !== 'undefined'){console.info("i3GEO.Interface.ativaBotoes()");}
@@ -431,23 +431,23 @@ i3GEO.Interface = {
 	/*
 	Classe: i3GEO.Interface.openlayers
 
-	Interface com motor de navegação baseado na API OpenLayers
+	Interface com motor de navega&ccedil;ão baseado na API OpenLayers
 
 	Utilizado quando 
 
 	i3GEO.Interface.ATUAL = "openlayers"
 
-	Cria o objeto i3geoOL que pode receber os métodos da API do OpenLayers
+	Cria o objeto i3geoOL que pode receber os m&eacute;todos da API do OpenLayers
 
-	Para detalhes sobre a configuração da interface, veja i3geo/aplicmap/openlayers.htm
+	Para detalhes sobre a configura&ccedil;ão da interface, veja i3geo/aplicmap/openlayers.htm
 	*/
 	openlayers:{
 		/*
 		Propriedade: FUNDOTEMA
 
-		Estilo "background" do nome do tema na árvore de camadas enquanto o mesmo está sendo carregado.
+		Estilo "background" do nome do tema na &aacute;rvore de camadas enquanto o mesmo est&aacute; sendo carregado.
 		
-		Permite destacar o nome do tema que está em processo de carregamento
+		Permite destacar o nome do tema que est&aacute; em processo de carregamento
 
 		Tipo:
 		{background style}
@@ -459,7 +459,7 @@ i3GEO.Interface = {
 		/*
 		Propriedade: TILES
 
-		Indica se será utilizado o modo de navegação em tiles
+		Indica se ser&aacute; utilizado o modo de navega&ccedil;ão em tiles
 
 		Tipo:
 		{boolean}
@@ -471,7 +471,7 @@ i3GEO.Interface = {
 		/*
 		Propriedade: BUFFER
 
-		Número de TILES na área não visível do mapa
+		N&uacute;mero de TILES na &aacute;rea não vis&iacute;vel do mapa
 
 		Tipo:
 		{integer}
@@ -483,7 +483,7 @@ i3GEO.Interface = {
 		/*
 		Propriedade: GADGETS
 
-		Lista dos controles específicos da API do OpenLayers que serão inseridos ou não no mapa
+		Lista dos controles espec&iacute;ficos da API do OpenLayers que serão inseridos ou não no mapa
 
 		Tipo:
 		{object}
@@ -501,7 +501,7 @@ i3GEO.Interface = {
 		/*
 		Propriedade: MINEXTENT
 
-		Menor extensão geográfica que pode ser mostrada no mapa
+		Menor extensão geogr&aacute;fica que pode ser mostrada no mapa
 
 		Tipo:
 		{array}
@@ -513,7 +513,7 @@ i3GEO.Interface = {
 		/*
 		Propriedade: MAXEXTENT
 
-		Maior extensão geográfica que pode ser mostrada no mapa
+		Maior extensão geogr&aacute;fica que pode ser mostrada no mapa
 
 		Tipo:
 		{array}
@@ -525,7 +525,7 @@ i3GEO.Interface = {
 		/*
 		Propriedades: LAYERSADICIONAIS
 
-		Array com objetos do tipo LAYER que serão adicionados após a crioação de todos os layers default.
+		Array com objetos do tipo LAYER que serão adicionados ap&oacute;s a crioa&ccedil;ão de todos os layers default.
 
 		Tipo:
 		{array}
@@ -551,7 +551,7 @@ i3GEO.Interface = {
 				i = $i(i3GEO.Interface.IDCORPO),
 				bb = i3GEO.barraDeBotoes;
 			OpenLayers.DOTS_PER_INCH = i3GEO.util.calculaDPI();
-			//corrige a localização do script
+			//corrige a localiza&ccedil;ão do script
 			OpenLayers._getScriptLocation = function(){
 				return i3GEO.configura.locaplic + "/pacotes/openlayers/";
 			};
@@ -599,7 +599,7 @@ i3GEO.Interface = {
 		},
 		inicia: function(){
 			//
-			//monta o mapa após receber o resultado da criação do mapfile temporário
+			//monta o mapa ap&oacute;s receber o resultado da cria&ccedil;ão do mapfile tempor&aacute;rio
 			//
 			var montaMapa = function(){
 				var pz,temp,layers,i,texto,estilo,layersn,
@@ -649,7 +649,7 @@ i3GEO.Interface = {
 				{i3geoOL.addControl(new OpenLayers.Control.OverviewMap());}
 				//i3geoOL.addControl(new OpenLayers.Control.KeyboardDefaults());
 				//
-				//estes controles ficam invisíveis e são usados quando os ícones default do i3geo são ativados
+				//estes controles ficam invis&iacute;veis e são usados quando os &iacute;cones default do i3geo são ativados
 				//
 				if(i3GEO.Interface.TABLET === false){
 					i3GEO.Interface.openlayers.OLpan = new OpenLayers.Control.Navigation();
@@ -664,7 +664,7 @@ i3GEO.Interface = {
 					if (i3GEO.configura.mapaRefDisplay === "block")
 					{i3GEO.maparef.inicia();}
 				}
-				//é necessário ativar nesse momento pois a barra de botoes já foi criada
+				//&eacute; necess&aacute;rio ativar nesse momento pois a barra de botoes j&aacute; foi criada
 				if(i3GEO.Interface.TABLET === false)
 				{i3GEO.Interface.openlayers.OLpanel.activateControl(i3GEO.Interface.openlayers.OLpan);}
 				i3GEO.Interface.ativaBotoes();
@@ -706,7 +706,7 @@ i3GEO.Interface = {
 			if(i3GEO.parametros.kmlurl !== "")
 			{i3GEO.Interface.openlayers.adicionaKml(true,i3GEO.parametros.kmlurl);}
 			if($i("mst")){$i("mst").style.visibility ="visible";}
-			//executa função de finalização, se houver
+			//executa fun&ccedil;ão de finaliza&ccedil;ão, se houver
 			if(YAHOO.lang.isFunction(i3GEO.finalizaAPI))
 			{i3GEO.finalizaAPI.call();}
 			else{
@@ -787,7 +787,7 @@ i3GEO.Interface = {
 			if(i3GEO.parametros.editor === "sim"){
 				d = new YAHOO.widget.HTMLNode(
 					{
-						html:"<a style='color:red' title='opção visível apenas para editores' href='../admin/html/webservices.html' target=blank >Editar cadastro</a>",
+						html:"<a style='color:red' title='op&ccedil;ão vis&iacute;vel apenas para editores' href='../admin/html/webservices.html' target=blank >Editar cadastro</a>",
 						idmenu:"",enableHighlight:false,expanded:false
 					},
 					node
@@ -898,7 +898,7 @@ i3GEO.Interface = {
 				temp.style.display = "none";
 			}
 			//
-			//verifica se algum layer adicional é do tipo baselayer. Se for, adiciona o layer fundo, mas não como base
+			//verifica se algum layer adicional &eacute; do tipo baselayer. Se for, adiciona o layer fundo, mas não como base
 			//
 			try{
 				temp = i3GEO.Interface.openlayers.LAYERSADICIONAIS;
@@ -937,8 +937,8 @@ i3GEO.Interface = {
 				layer = "";
 				camada = i3GEO.arvoreDeCamadas.CAMADAS[i];
 				opcoes.singleTile = !(i3GEO.Interface.openlayers.TILES);
-				//o copyright é colocado no mapa como um elemento html. O LAYER com "name = copyright " só é usado
-				//para persistir no mapfile em funçãod as operações de impressão
+				//o copyright &eacute; colocado no mapa como um elemento html. O LAYER com "name = copyright " s&oacute; &eacute; usado
+				//para persistir no mapfile em fun&ccedil;ãod as opera&ccedil;&otilde;es de impressão
 				if(i3geoOL.getLayersByName(camada.name).length === 0 && camada.name.toLowerCase() != "copyright"){
 					urllayer = url+"&layer="+camada.name+"&r="+Math.random();
 					try{
@@ -1152,10 +1152,10 @@ i3GEO.Interface = {
 			i3GEO.janela.fechaAguarde();
 		},
 		registraEventos: function(){
-			//variável que indica se o usuário está movimentando o mapa
+			//vari&aacute;vel que indica se o usu&aacute;rio est&aacute; movimentando o mapa
 			var modoAtual = "";
 			//
-			//ativa os eventos específicos do i3geo
+			//ativa os eventos espec&iacute;ficos do i3geo
 			//
 			i3GEO.eventos.ativa($i("openlayers"));
 			//
@@ -1174,7 +1174,7 @@ i3GEO.Interface = {
 				i3GEO.eventos.navegaMapa();
 				i3GEO.util.escondePin();
 				//
-				//permite que a coordenada do centro mapa seja mostrada no formulário de coordenadas
+				//permite que a coordenada do centro mapa seja mostrada no formul&aacute;rio de coordenadas
 				//
 				xy = i3GEO.navega.centroDoMapa();
 				i3GEO.coordenadas.mostraCoordenadas(false,"",xy[0],xy[1]);
@@ -1242,20 +1242,20 @@ i3GEO.Interface = {
 	/*
 	Classe: i3GEO.Interface.googlemaps
 
-	Interface com motor de navegação baseado na API Google Maps
+	Interface com motor de navega&ccedil;ão baseado na API Google Maps
 
 	Utilizado quando 
 
 	i3GEO.Interface.ATUAL = "googlemaps"
 
-	Cria o objeto i3GeoMap que pode receber os métodos da API.
-	Cria também o objeto i3GeoMapOverlay do tipo Overlay, utilizado para cálculos ou para receber elementos gráficos.
+	Cria o objeto i3GeoMap que pode receber os m&eacute;todos da API.
+	Cria tamb&eacute;m o objeto i3GeoMapOverlay do tipo Overlay, utilizado para c&aacute;lculos ou para receber elementos gr&aacute;ficos.
 	*/
 	googlemaps:{
 		/*
 		Propriedade: MAPOPTIONS
 
-		Objeto contendo opções que serão utilizadas no construtor do mapa conforme a API do GoogleMaps
+		Objeto contendo op&ccedil;&otilde;es que serão utilizadas no construtor do mapa conforme a API do GoogleMaps
 		
 		Exemplo de uso
 		
@@ -1284,7 +1284,7 @@ i3GEO.Interface = {
 		/*
 		Propriedade: TIPOMAPA
 
-		Tipo de mapa que será usado como default, conforme constantes definidas na API do Google Maps.
+		Tipo de mapa que ser&aacute; usado como default, conforme constantes definidas na API do Google Maps.
 
 		Default:
 		"roadmap"
@@ -1315,7 +1315,7 @@ i3GEO.Interface = {
 		/*
 		Variable: posfixo
 
-		String acrescentada à url de cada tile para garantir a remoção do cache local
+		String acrescentada à url de cada tile para garantir a remo&ccedil;ão do cache local
 
 		Type:
 		{string}
@@ -1323,7 +1323,7 @@ i3GEO.Interface = {
 		posfixo: 0,
 		atualizaTema:function(retorno,tema){
 			//
-			//não se atualiza um tema único, mas o mapa todo
+			//não se atualiza um tema &uacute;nico, mas o mapa todo
 			//
 			//i3GEO.atualiza(retorno);
 			var indice = i3GEO.Interface.googlemaps.retornaIndiceLayer(tema);
@@ -1422,7 +1422,7 @@ i3GEO.Interface = {
 				i3GEO.Interface.googlemaps.criaLayers();
 				i3GeoMapOverlay.setMap(i3GeoMap);
 				i3GEO.Interface.googlemaps.registraEventos();
-				//se o mapa está no modo de troca de interface, alguns elementos não precisam ser inseridos novamente
+				//se o mapa est&aacute; no modo de troca de interface, alguns elementos não precisam ser inseridos novamente
 				if(i3GEO.Interface.STATUS.trocando === false){
 					i3GEO.gadgets.mostraInserirKml();
 				}
@@ -1450,7 +1450,7 @@ i3GEO.Interface = {
 				{i3GEO.Interface.googlemaps.adicionaListaKml();}
 				if(i3GEO.parametros.kmlurl !== "")
 				{i3GEO.Interface.googlemaps.adicionaKml(true,i3GEO.parametros.kmlurl);}
-				//executa função de finalização, se houver
+				//executa fun&ccedil;ão de finaliza&ccedil;ão, se houver
 				if(YAHOO.lang.isFunction(i3GEO.finalizaAPI))
 				{i3GEO.finalizaAPI.call();}
 				else{
@@ -1513,7 +1513,7 @@ i3GEO.Interface = {
 				i3GEO.eventos.navegaMapa();
 				i3GEO.util.escondePin();
 				//
-				//permite que a coordenada do centro mapa seja mostrada no formulário de coordenadas
+				//permite que a coordenada do centro mapa seja mostrada no formul&aacute;rio de coordenadas
 				//
 				xy = i3GEO.navega.centroDoMapa();
 				i3GEO.coordenadas.mostraCoordenadas(false,"",xy[0],xy[1]);				
@@ -1528,7 +1528,7 @@ i3GEO.Interface = {
 				g_tipoacao = "";
 				i3GEO.eventos.navegaMapa();
 				//
-				//permite que a coordenada do centro mapa seja mostrada no formulário de coordenadas
+				//permite que a coordenada do centro mapa seja mostrada no formul&aacute;rio de coordenadas
 				//
 				xy = i3GEO.navega.centroDoMapa();
 				i3GEO.coordenadas.mostraCoordenadas(false,"",xy[0],xy[1]);				
@@ -1613,7 +1613,7 @@ i3GEO.Interface = {
 				ligar = obj.value;
 				//verifica qual o indice correto da camada
 				listatemp = i3GEO.arvoreDeCamadas.listaLigadosDesligados()[0];
-				//reordena a lista. Necessário nas interfaces que utilizam grupos na árvore de camadas
+				//reordena a lista. Necess&aacute;rio nas interfaces que utilizam grupos na &aacute;rvore de camadas
 				n = i3GEO.arvoreDeCamadas.CAMADAS.length;
 				for(i=0;i<n;i++){
 					if(i3GEO.util.in_array(i3GEO.arvoreDeCamadas.CAMADAS[i],listatemp)){
@@ -1733,19 +1733,19 @@ i3GEO.Interface = {
 
 		Insere no mapa uma camada KML com base na API do Google Maps
 
-		As camadas adicionadas são acrescentadas na árvore de camadas
+		As camadas adicionadas são acrescentadas na &aacute;rvore de camadas
 
-		A lista de nomes dos objetos geoXml criados é mantida em i3GEO.mapas.GEOXML
+		A lista de nomes dos objetos geoXml criados &eacute; mantida em i3GEO.mapas.GEOXML
 
 		Parametros:
 
-		pan {Boolean} - define se o mapa será deslocado para encaixar o KML
+		pan {Boolean} - define se o mapa ser&aacute; deslocado para encaixar o KML
 
-		url {String} - URL do arquivo KML. Se não for definido, a URL será obtida do INPUT com id = i3geo_urlkml (veja i3GEO.gadgets.mostraInserirKml)
+		url {String} - URL do arquivo KML. Se não for definido, a URL ser&aacute; obtida do INPUT com id = i3geo_urlkml (veja i3GEO.gadgets.mostraInserirKml)
 
-		titulo {string} - titulo que aparecerá na árvore. Se não for definido, será calculado aleatoriamente.
+		titulo {string} - titulo que aparecer&aacute; na &aacute;rvore. Se não for definido, ser&aacute; calculado aleatoriamente.
 
-		ativo {boolean} - indica se a camada estará ativa ou não. Se não for definido, será considerado como true
+		ativo {boolean} - indica se a camada estar&aacute; ativa ou não. Se não for definido, ser&aacute; considerado como true
 		*/
 		adicionaKml: function(pan,url,titulo,ativo){
 			var ngeoxml,i;
@@ -1789,17 +1789,17 @@ i3GEO.Interface = {
 		/*
 		Function: adicionaNoArvoreGoogle
 
-		Acrescenta na árvore de camadas um novo tema no nó que mostra os arquivos KML inseridos no mapa
+		Acrescenta na &aacute;rvore de camadas um novo tema no n&oacute; que mostra os arquivos KML inseridos no mapa
 
-		Os temas são incluídos em um nó chamado "Google Maps".
+		Os temas são inclu&iacute;dos em um n&oacute; chamado "Google Maps".
 
-		Para obter esse nó utilize var node = i3GEO.arvoreDeCamadas.ARVORE.getNodeByProperty("idkml","raiz");
+		Para obter esse n&oacute; utilize var node = i3GEO.arvoreDeCamadas.ARVORE.getNodeByProperty("idkml","raiz");
 
 		Parametros:
 
 		url {string} - url do arquivo KML
 
-		nomeOverlay {string} - título do tema
+		nomeOverlay {string} - t&iacute;tulo do tema
 
 		ativo {boolean} - indica o estado do checkbox
 
@@ -1858,7 +1858,7 @@ i3GEO.Interface = {
 			if(i3GEO.parametros.editor === "sim"){
 				d = new YAHOO.widget.HTMLNode(
 					{
-						html:"<a style='color:red' title='opção visível apenas para editores' href='../admin/html/webservices.html' target=blank >Editar cadastro</a>",
+						html:"<a style='color:red' title='op&ccedil;ão vis&iacute;vel apenas para editores' href='../admin/html/webservices.html' target=blank >Editar cadastro</a>",
 						idmenu:"",enableHighlight:false,expanded:false
 					},
 					node
@@ -1868,7 +1868,7 @@ i3GEO.Interface = {
 		/*
 		Function: ativaDesativaCamadaKml
 
-		Ativa ou desativa uma camada do nó de layers KML
+		Ativa ou desativa uma camada do n&oacute; de layers KML
 
 		Parametro:
 
@@ -1894,13 +1894,13 @@ i3GEO.Interface = {
 	/*
 	Classe: i3GEO.Interface.googleearth
 
-	Interface com motor de navegação baseado na API Google Earth
+	Interface com motor de navega&ccedil;ão baseado na API Google Earth
 
 	Utilizado quando 
 
 	i3GEO.Interface.ATUAL = "googleearth"
 
-	Cria o objeto i3GeoMap que pode receber os métodos da API do google Earth
+	Cria o objeto i3GeoMap que pode receber os m&eacute;todos da API do google Earth
 	*/
 	googleearth:{
 		/*
@@ -1915,7 +1915,7 @@ i3GEO.Interface = {
 		/*
 		Variable: posfixo
 
-		String acrescentada à url de cada tile para garantir a remoção do cache local
+		String acrescentada à url de cada tile para garantir a remo&ccedil;ão do cache local
 
 		Type:
 		{string}
@@ -1924,7 +1924,7 @@ i3GEO.Interface = {
 		/*
 		Propriedade: GADGETS
 
-		Lista dos controles específicos da API do Google Earth que serão inseridos ou não no mapa
+		Lista dos controles espec&iacute;ficos da API do Google Earth que serão inseridos ou não no mapa
 
 		Tipo:
 		{object}
@@ -2133,7 +2133,7 @@ i3GEO.Interface = {
 
 				i3GEO.Interface.googleearth.POSICAOTELA = YAHOO.util.Dom.getXY($i(i3GEO.Interface.IDCORPO));
 				//
-				//i3GEO.arvoreDeCamadas.CAMADAS é definido na inicialização (classe_i3geo)
+				//i3GEO.arvoreDeCamadas.CAMADAS &eacute; definido na inicializa&ccedil;ão (classe_i3geo)
 				//
 				i3GEO.arvoreDeCamadas.cria("",i3GEO.arvoreDeCamadas.CAMADAS,i3GEO.configura.sid,i3GEO.configura.locaplic);
 				i3GEO.gadgets.mostraMenuSuspenso();
@@ -2146,7 +2146,7 @@ i3GEO.Interface = {
 
 				if(i3GEO.parametros.kmlurl !== "")
 				{i3GEO.Interface.googleearth.adicionaKml(true,i3GEO.parametros.kmlurl,i3GEO.parametros.kmlurl,false);}
-				//executa função de finalização, se houver
+				//executa fun&ccedil;ão de finaliza&ccedil;ão, se houver
 				if(YAHOO.lang.isFunction(i3GEO.finalizaAPI))
 				{i3GEO.finalizaAPI.call();}
 				else{
@@ -2318,7 +2318,7 @@ i3GEO.Interface = {
 			i3GeoMap.getFeatures().appendChild(placemark);
 		},
 		//
-		//código obtido em http://code.google.com/intl/pt-BR/apis/earth/documentation/geometries.html
+		//c&oacute;digo obtido em http://code.google.com/intl/pt-BR/apis/earth/documentation/geometries.html
 		//
 		insereCirculo: function(centerLng,centerLat,radius,name,snippet){
 			function makeCircle(centerLat, centerLng, radius) {
@@ -2391,19 +2391,19 @@ i3GEO.Interface = {
 
 		Insere no mapa uma camada KML com base na API do Google Earth
 
-		As camadas adicionadas são crescentadas na árvore de camadas
+		As camadas adicionadas são crescentadas na &aacute;rvore de camadas
 
-		A lista de nomes dos objetos geoXml criados é mantida em i3GEO.mapas.GEOXML
+		A lista de nomes dos objetos geoXml criados &eacute; mantida em i3GEO.mapas.GEOXML
 
 		Parametros:
 
-		pan {Boolean} - define se o mapa será deslocado para encaixar o KML
+		pan {Boolean} - define se o mapa ser&aacute; deslocado para encaixar o KML
 
-		url {String} - URL do arquivo KML. Se não for definido, a URL será obtida do INPUT com id = i3geo_urlkml (veja i3GEO.gadgets.mostraInserirKml)
+		url {String} - URL do arquivo KML. Se não for definido, a URL ser&aacute; obtida do INPUT com id = i3geo_urlkml (veja i3GEO.gadgets.mostraInserirKml)
 
-		titulo {string} - titulo que aparecerá na árvore. Se não for definido, será calculado aleatoriamente.
+		titulo {string} - titulo que aparecer&aacute; na &aacute;rvore. Se não for definido, ser&aacute; calculado aleatoriamente.
 
-		ativo {boolean} - indica se a camada estará ativa ou não. Se não for definido, será considerado como true
+		ativo {boolean} - indica se a camada estar&aacute; ativa ou não. Se não for definido, ser&aacute; considerado como true
 		*/
 		adicionaKml: function(pan,url,titulo,ativo){
 			var ngeoxml,i;
@@ -2454,17 +2454,17 @@ i3GEO.Interface = {
 		/*
 		Function: adicionaNoArvoreGoogle
 
-		Acrescenta na árvore de camadas um novo tema no nó que mostra os arquivos KML inseridos no mapa
+		Acrescenta na &aacute;rvore de camadas um novo tema no n&oacute; que mostra os arquivos KML inseridos no mapa
 
-		Os temas são incluídos em um nó chamado "Google Earth".
+		Os temas são inclu&iacute;dos em um n&oacute; chamado "Google Earth".
 
-		Para obter esse nó utilize var node = i3GEO.arvoreDeCamadas.ARVORE.getNodeByProperty("idkml","raiz");
+		Para obter esse n&oacute; utilize var node = i3GEO.arvoreDeCamadas.ARVORE.getNodeByProperty("idkml","raiz");
 
 		Parametros:
 
 		url {string} - url do arquivo KML
 
-		nomeOverlay {string} - título do tema
+		nomeOverlay {string} - t&iacute;tulo do tema
 
 		ativo {boolean} - indica o estado do checkbox
 
@@ -2516,7 +2516,7 @@ i3GEO.Interface = {
 			if(i3GEO.parametros.editor === "sim"){
 				d = new YAHOO.widget.HTMLNode(
 					{
-						html:"<a style='color:red' title='opção visível apenas para editores' href='../admin/html/webservices.html' target=blank >Editar cadastro</a>",
+						html:"<a style='color:red' title='op&ccedil;ão vis&iacute;vel apenas para editores' href='../admin/html/webservices.html' target=blank >Editar cadastro</a>",
 						idmenu:"",enableHighlight:false,expanded:false
 					},
 					node
@@ -2554,7 +2554,7 @@ i3GEO.Interface = {
 		/*
 		Function: ativaDesativaCamadaKml
 
-		Ativa ou desativa uma camada do nó de layers KML
+		Ativa ou desativa uma camada do n&oacute; de layers KML
 
 		Parametro:
 

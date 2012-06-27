@@ -52,7 +52,7 @@ it:"Attiva / disattiva logo"
 }],
 "p8": [
 {
-pt: "Cor da selecao",
+pt: "Cor da sele&ccedil;ão",
 en:"Selection color",
 es:"Color de la selecci&oacute;n",
 it:"Colore della selezione"
@@ -129,10 +129,10 @@ it:"Disattiva legenda"
 }],
 "p19": [
 {
-pt: "Ativa ou desativa a legenda de um tema na opção de impressão do mapa",
+pt: "Ativa ou desativa a legenda de um tema na op&ccedil;ão de impressão do mapa",
 en:"Enables or disables the legend of a theme in the print option on the map",
-es:"Ativa ou desativa a legenda de um tema na opção de impressão do mapa",
-it:"Ativa ou desativa a legenda de um tema na opção de impressão do mapa"
+es:"Ativa ou desativa a legenda de um tema na op&ccedil;ão de impressão do mapa",
+it:"Ativa ou desativa a legenda de um tema na op&ccedil;ão de impressão do mapa"
 }],
 "p20": [
 {
@@ -143,9 +143,9 @@ it:"Tela remota"
 }],
 "p21": [
 {
-pt: "Animação",
+pt: "Anima&ccedil;ão",
 en:"Animation",
-es:"Animación",
+es:"Animaci&oacute;n",
 it:"Animation"
 }],
 //itens do menu suspenso
@@ -215,10 +215,10 @@ it:"Guida"
 }],
 "u4a": [
 {
-pt: "Manual do usuário",
+pt: "Manual do usu&aacute;rio",
 en:"User manual",
-es:"Manual do usuário",
-it:"Manual do usuário"
+es:"Manual do usu&aacute;rio",
+it:"Manual do usu&aacute;rio"
 }],
 "u5": [
 {
@@ -287,7 +287,7 @@ it:"Buffer"
 {
 pt: "Centr&oacute;ide",
 en:"Centroid",
-es:"Centro geométrico",
+es:"Centro geom&eacute;trico",
 it:"Baricentro"
 }],
 "u11a": [
@@ -425,10 +425,10 @@ it:"Altri"
 }],
 "u28": [
 {
-pt: "Centro médio",
+pt: "Centro m&eacute;dio",
 en:"Mean center",
-es:"Centro médio",
-it:"Centro médio"
+es:"Centro m&eacute;dio",
+it:"Centro m&eacute;dio"
 }],
 "u29": [
 {
@@ -449,7 +449,7 @@ it:"Strati"
 {
 pt:"Arraste o tema aqui ou clique para excluir",
 en:"Drag the layer here to remove",
-es:"Arrastre el tema aqui ó haga clic para excluir",
+es:"Arrastre el tema aqui &oacute; haga clic para excluir",
 it:"Trascina qui per rimuovere"
 }],
 "t2a":[
@@ -728,16 +728,16 @@ it:"Tabella..."
 }],
 "t32":[
 {
-pt:"Abre o editor de legenda, permitindo a alteração da forma de representação desse tema.",
+pt:"Abre o editor de legenda, permitindo a altera&ccedil;ão da forma de representa&ccedil;ão desse tema.",
 en:"Opens the editor of legend, allowing the modification of the form of representation of this theme.",
-es:"Abre el editor de subtítulo, permitiendo la alteraci&oacute;n de la forma de representaci&oacute;n de este tema",
+es:"Abre el editor de subt&iacute;tulo, permitiendo la alteraci&oacute;n de la forma de representaci&oacute;n de este tema",
 it:"Aprire l'editor di legenda, che consente la modifica della forma di rappresentazione di questo tema "
 }],
 "t33":[
 {
 pt:"Editar legenda",
 en:"Legend edit...",
-es:"Editar subtítulo...",
+es:"Editar subt&iacute;tulo...",
 it:"Modifica la legenda"
 }],
 "t34":[
@@ -763,21 +763,21 @@ it:"Tema visibile solo a determinate scale"
 }],
 "t37":[
 {
-pt:"Gráfico",
+pt:"Gr&aacute;fico",
 en:"Graphic",
 es:"Gr&aacute;fico",
 it:"Grafico"
 }],
 "t37a":[
 {
-pt:"Tema com gráficos",
+pt:"Tema com gr&aacute;ficos",
 en:"Theme chart",
 es:"Gr&aacute;fico",
 it:"Grafico"
 }],
 "t37b":[
 {
-pt:"Gráfico interativo",
+pt:"Gr&aacute;fico interativo",
 en:"Interactive chart",
 es:"Gr&aacute;fico",
 it:"Grafico"
@@ -847,10 +847,10 @@ it:"Mais populares"
 }],
 "t47": [
 {
-pt: "Intervalo em segundos após o qual a camada será atualizada. Para ignorar, deixe em branco",
+pt: "Intervalo em segundos ap&oacute;s o qual a camada ser&aacute; atualizada. Para ignorar, deixe em branco",
 en:"Interval in seconds after which the layer will be updated. To ignore, leave blank",
-es:"Intervalo em segundos após o qual a camada será atualizada. Para ignorar, deixe em branco",
-it:"Intervalo em segundos após o qual a camada será atualizada. Para ignorar, deixe em branco"
+es:"Intervalo em segundos ap&oacute;s o qual a camada ser&aacute; atualizada. Para ignorar, deixe em branco",
+it:"Intervalo em segundos ap&oacute;s o qual a camada ser&aacute; atualizada. Para ignorar, deixe em branco"
 }],
 "t48": [
 {
@@ -861,10 +861,10 @@ it:"Temporizador"
 }],
 "t49": [
 {
-pt:"Mapa temático 3d",
+pt:"Mapa tem&aacute;tico 3d",
 en:"Thematic map 3d",
-es:"Mapa temático 3d",
-it:"Mapa temático 3d"
+es:"Mapa tem&aacute;tico 3d",
+it:"Mapa tem&aacute;tico 3d"
 }],
 //guia adiciona
 "a1":[
@@ -946,7 +946,7 @@ it:"Temi"
 }],
 "a8":[
 {
-pt:"Clique no box ao lado do tema para ligar ou desligar, mostrando-o ou não no mapa. Após alterar o estado do tema, aguarde alguns instantes para o mapa ser redesenhado, ou clique no botão aplicar que será mostrado.",
+pt:"Clique no box ao lado do tema para ligar ou desligar, mostrando-o ou não no mapa. Ap&oacute;s alterar o estado do tema, aguarde alguns instantes para o mapa ser redesenhado, ou clique no botão aplicar que ser&aacute; mostrado.",
 en:"Click to connect or disconnect layer, showing it or not on the map. After changing the layer status, wait a few moments to be redesigned the map, or click in the button apply that will be shown.",
 es:"Haga clic para conectar o desconectar este tema, mostr&aacute;ndolo o no en el mapa. Despu&eacute;s de alterar el estado del tema, espere algunos instantes para que el mapa sea redise&ntilde;ado, o haga clic en el bot&oacute;n aplicar que aparecer&aacute;",
 it:"Clicca sulla casella accanto al tema per attivare o disattivare, mostrandolo o meno sulla mappa. Dopo aver modificato lo stato del tema, attendere qualche istante per vedere ridisegnata la mappa, oppure fare clic sul pulsante Applica, che verrà visualizzato."
@@ -995,14 +995,14 @@ it:"Upload SHP, CSV, DBF, GPX, KML"
 }],
 "a15":[
 {
-pt:"Conexões",
+pt:"Conex&otilde;es",
 en:"Conections",
-es:"Conexões",
-it:"Conexões"
+es:"Conex&otilde;es",
+it:"Conex&otilde;es"
 }],
 "a16":[
 {
-pt:"Serviços",
+pt:"Servi&ccedil;os",
 en:"Services",
 es:"Servicios",
 it:"Servers"
@@ -1017,7 +1017,7 @@ it:"Temi"
 }],
 "g1a":[
 {
-pt:"Catálogo",
+pt:"Cat&aacute;logo",
 en:"Catalog",
 es:"Catalogo",
 it:"Catalog"
@@ -1033,7 +1033,7 @@ it:"Aggiunge"
 {
 pt:"Legenda",
 en:"Legend",
-es:"Subtítulo",
+es:"Subt&iacute;tulo",
 it:"Legenda"
 }],
 "g4":[
@@ -1203,7 +1203,7 @@ it:"etiqueta"
 {
 pt:"Mostra a extens&atilde;o geogr&aacute;fica atual em coordenadas geogr&aacute;ficas",
 en:"It shows the extent of current geographic coordinates",
-es:"Muestra la extensi&oacute;n geográfica actual en coordenadas geogr&aacute;ficas",
+es:"Muestra la extensi&oacute;n geogr&aacute;fica actual en coordenadas geogr&aacute;ficas",
 it:"Mostra la estensione geografica corrente in coordinate geografiche"
 }],
 "d8t":[
@@ -1243,10 +1243,10 @@ it:"Ricerca dati su Wikipedia nell'ambito corrente della mappa. Fare uno zoom su
 }],
 "d11t":[
 {
-pt:"buscar na Wikipédia",
-en:"search in Wikipédia",
-es:"buscar na Wikipédia",
-it:"buscar na Wikipédia"
+pt:"buscar na Wikip&eacute;dia",
+en:"search in Wikip&eacute;dia",
+es:"buscar na Wikip&eacute;dia",
+it:"buscar na Wikip&eacute;dia"
 }],
 "d12":[
 {
@@ -1369,10 +1369,10 @@ it:"Misura l'area di un poligono tracciato sullo schermo. Il calcolo della super
 }],
 "d21at":[
 {
-pt:"área",
+pt:"&aacute;rea",
 en:"area",
-es:"área",
-it:"área"
+es:"&aacute;rea",
+it:"&aacute;rea"
 }],
 "d22":[
 {
@@ -1425,7 +1425,7 @@ it:"Inserir texto"
 }],
 "d26":[
 {
-pt:"Escolha o visual para os botões e outras caracter&iacute;sticas visuais do mapa",
+pt:"Escolha o visual para os bot&otilde;es e outras caracter&iacute;sticas visuais do mapa",
 en:"Choose look for the buttons and other map's visual characteristics",
 es:"Elija la vista para los botones y otras caracter&iacute;sticas visuales del mapa",
 it:"Scegli il visuale (??)  per i pulsanti e le altre caratteristiche visive della mappa."
@@ -1446,10 +1446,10 @@ it:"Attendere..."
 }],
 "d29":[
 {
-pt:"Estações metar",
+pt:"Esta&ccedil;&otilde;es metar",
 en:"Metar stations",
-es:"Estações metar",
-it:"Estações metar"
+es:"Esta&ccedil;&otilde;es metar",
+it:"Esta&ccedil;&otilde;es metar"
 }],
 "d30":[
 {
@@ -1474,10 +1474,10 @@ it:"Applicazioni"
 }],
 "ge1":[
 {
-pt:"Navegação com o mouse",
+pt:"Navega&ccedil;ão com o mouse",
 en:"Mouse navigation",
-es:"Navegação com o mouse",
-it:"Navegação com o mouse"
+es:"Navega&ccedil;ão com o mouse",
+it:"Navega&ccedil;ão com o mouse"
 }],
 "ge2":[
 {
@@ -1523,17 +1523,17 @@ it:"Luz do sol"
 }],
 "ge8":[
 {
-pt:"Limites políticos",
+pt:"Limites pol&iacute;ticos",
 en:"Political boundaries",
-es:"Limites políticos",
-it:"Limites políticos"
+es:"Limites pol&iacute;ticos",
+it:"Limites pol&iacute;ticos"
 }],
 "ge9":[
 {
-pt:"Construções em 3d",
+pt:"Constru&ccedil;&otilde;es em 3d",
 en:"Buildings in 3D",
-es:"Construções em 3d",
-it:"Construções em 3d"
+es:"Constru&ccedil;&otilde;es em 3d",
+it:"Constru&ccedil;&otilde;es em 3d"
 }],
 "ge10":[
 {
@@ -1551,10 +1551,10 @@ it:"Terreno"
 }],
 "x1":[
 {
-pt:"Página principal",
+pt:"P&aacute;gina principal",
 en:"Home",
-es:"Página principal",
-it:"Página principal"
+es:"P&aacute;gina principal",
+it:"P&aacute;gina principal"
 }],
 "x2":[
 {
@@ -1593,24 +1593,24 @@ it:"Editar temas"
 }],
 "x7":[
 {
-pt:"opção visível apenas para editores",
+pt:"op&ccedil;ão vis&iacute;vel apenas para editores",
 en:"option visible only to editors",
-es:"opção visível apenas para editores",
-it:"opção visível apenas para editores"
+es:"op&ccedil;ão vis&iacute;vel apenas para editores",
+it:"op&ccedil;ão vis&iacute;vel apenas para editores"
 }],
 "x8":[
 {
-pt:"Sistema de administração",
+pt:"Sistema de administra&ccedil;ão",
 en:"Management System",
-es:"Sistema de administração",
-it:"Sistema de administração"
+es:"Sistema de administra&ccedil;ão",
+it:"Sistema de administra&ccedil;ão"
 }],
 "x9":[
 {
-pt:"Editar árvore",
+pt:"Editar &aacute;rvore",
 en:"Edit tree",
-es:"Editar árvore",
-it:"Editar árvore"
+es:"Editar &aacute;rvore",
+it:"Editar &aacute;rvore"
 }],
 "x10":[
 {
