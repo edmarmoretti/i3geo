@@ -1,16 +1,16 @@
-#Este mapfile é utilizado pelo i3geo na instalação em servidores linux
-#Toda vez que o i3geo é iniciado, esse mapfile é considerado como o mapa básico.
+#Este mapfile e utilizado pelo i3geo na instalacao em servidores linux
+#Toda vez que o i3geo e iniciado, esse mapfile e considerado como o mapa basico.
 #Se vc quer alterar a aparência do mapa inicial, edite esse arquivo para refletir
 #o mapa desejado.
 #
 #Se vc quer adicionar temas, dê preferência por editar o arquivo menutemas/menutemas.xml
-#assim, as camadas ficam disponíveis no menu de adição de temas do i3geo. Não se esqueça
-#de criar o arquivo mapfile no diretório i3geo/temas (veja a documentação no wiki da
-#comunidade i3geo no Portal do Software Público Brasileiro.
+#assim, as camadas ficam disponíveis no menu de adicao de temas do i3geo. Nao se esqueca
+#de criar o arquivo mapfile no diretorio i3geo/temas (veja a documentacao no wiki da
+#comunidade i3geo no Portal do Software Publico Brasileiro.
 #
-#Existem vários metadados que podem ser incluidos na definicao de cada LAYER e que sao especificos do i3geo,
-#Esses metadados possibilitam coisas como mostrar ou não a legenda de um tema no mapa,
-#mostrar ou não o tema na ferramenta de identificacao, etc.
+#Existem varios metadados que podem ser incluidos na definicao de cada LAYER e que sao especificos do i3geo,
+#Esses metadados possibilitam coisas como mostrar ou nao a legenda de um tema no mapa,
+#mostrar ou nao o tema na ferramenta de identificacao, etc.
 #A lista completa de metadados vc pode obter no wiki da comunidade
 #
 MAP
@@ -23,13 +23,13 @@ MAP
 	IMAGECOLOR 104 171 195
 	#
 	#Por default, o i3geo utiliza o tipo de imagem configurado em png2
-	#Esse tipo não é adequado para imagens raster, mas o i3geo muda automaticamente
-	#para png1 quando um arquivo raster é adicionado ao mapa
+	#Esse tipo nao e adequado para imagens raster, mas o i3geo muda automaticamente
+	#para png1 quando um arquivo raster e adicionado ao mapa
 	#
 	IMAGETYPE AGG_Q
 	#Brasil
 	#EXTENT -76.5125927 -39.3925675209 -29.5851853 9.49014852081
-	EXTENT -126.635767 -74.597837 175.462979 82.512908
+	EXTENT -160 -70 160 70
 	SIZE 480 500
 	STATUS ON
 	UNITS DD
@@ -187,7 +187,7 @@ MAP
 		END
 	END
 	#
-	#para mostrar o mapa do Brasil, remova os comentários
+	#para mostrar o mapa do Brasil, remova os comentarios
 	#
 	#LAYER
 	#	DATA "/var/www/i3geo/aplicmap/dados/estados"
@@ -219,7 +219,7 @@ MAP
 	#	END
 	#END
 	#
-	#para mostrar os limites estaduais do Brasil, remova os comentários
+	#para mostrar os limites estaduais do Brasil, remova os comentarios
 	#
 	#LAYER
 	#  NAME estadosl # ok
