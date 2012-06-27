@@ -15,7 +15,7 @@ i3Geo Interface Integrada de Ferramentas de Geoprocessamento para Internet
 Direitos Autorais Reservados (c) 2006 Minist&eacute;rio do Meio Ambiente Brasil
 Desenvolvedor: Edmar Moretti edmar.moretti@mma.gov.br
 
-Este programa &eacute; software livre; você pode redistribu&iacute;-lo
+Este programa &eacute; software livre; voc&ecirc; pode redistribu&iacute;-lo
 e/ou modific&aacute;-lo sob os termos da Licen&ccedil;a P&uacute;blica Geral
 GNU conforme publicada pela Free Software Foundation;
 
@@ -23,8 +23,8 @@ Este programa &eacute; distribu&iacute;do na expectativa de que seja &uacute;til
 por&eacute;m, SEM NENHUMA GARANTIA; nem mesmo a garantia impl&iacute;cita
 de COMERCIABILIDADE OU ADEQUAÇ&Atilde;O A UMA FINALIDADE ESPEC&Iacute;FICA.
 Consulte a Licen&ccedil;a P&uacute;blica Geral do GNU para mais detalhes.
-Você deve ter recebido uma c&oacute;pia da Licen&ccedil;a P&uacute;blica Geral do
-GNU junto com este programa; se não, escreva para a
+Voc&ecirc; deve ter recebido uma c&oacute;pia da Licen&ccedil;a P&uacute;blica Geral do
+GNU junto com este programa; se n&atilde;o, escreva para a
 Free Software Foundation, Inc., no endere&ccedil;o
 59 Temple Street, Suite 330, Boston, MA 02111-1307 USA.
 */
@@ -34,13 +34,13 @@ if(typeof(i3GEO) === 'undefined'){
 /*
 Classe: i3geo.idioma
 
-Tradu&ccedil;ão da interface principal.
+Tradu&ccedil;&atilde;o da interface principal.
 
 Fornece os m&eacute;todos para traduzir frases para idiomas espec&iacute;ficos.
 
 O dicion&aacute;rio &eacute; definido em i3geo/classesjs/dicionario.js
 
-Se você est&aacute; customizando o i3geo,acrescentandonovas funcionalidades,
+Se voc&ecirc; est&aacute; customizando o i3geo,acrescentandonovas funcionalidades,
 utilize o m&eacute;todo alteraDicionario para acrescentar novas tradu&ccedil;&otilde;es, dessa forma,
 quandoo usu&aacute;rio escolher oidioma ainterface ser&aacute; adaptada corretamente.
 
@@ -58,7 +58,7 @@ i3GEO.idioma = {
 	/*
 	Propriedade: MOSTRASELETOR
 
-	Define se o i3Geo ir&aacute; incluir no mapa as bandeiras de sele&ccedil;ão de idiomas
+	Define se o i3Geo ir&aacute; incluir no mapa as bandeiras de sele&ccedil;&atilde;o de idiomas
 
 	Tipo:
 	{Boolean}
@@ -70,7 +70,7 @@ i3GEO.idioma = {
 	/*
 	Propriedade: IDSELETOR
 
-	Define o id do elemento HTML que receber&aacute; o seletor. Se não for definido, o seletor ser&aacute;
+	Define o id do elemento HTML que receber&aacute; o seletor. Se n&atilde;o for definido, o seletor ser&aacute;
 	posicionado automaticamente pelo i3Geo
 
 	Tipo:
@@ -83,7 +83,7 @@ i3GEO.idioma = {
 	/*
 	Propriedade: SELETORES
 
-	Lista os seletores (bandeiras) que serão inclu&iacute;das no seletor
+	Lista os seletores (bandeiras) que ser&atilde;o inclu&iacute;das no seletor
 
 	Tipo:
 	{Array}
@@ -134,7 +134,7 @@ i3GEO.idioma = {
 	Define o objeto com as tradu&ccedil;&otilde;es. O default &eacute; "g_traducao"
    
 	Parametro:
-	obj - {Object} Objeto com a tradu&ccedil;ão.
+	obj - {Object} Objeto com a tradu&ccedil;&atilde;o.
      
 	Example:
 
@@ -242,7 +242,7 @@ i3GEO.idioma = {
 
 	Troca o idioma atual por outro.
 
-	A troca &eacute; baseada na defini&ccedil;ão de um cookie e reload da p&aacute;gina.
+	A troca &eacute; baseada na defini&ccedil;&atilde;o de um cookie e reload da p&aacute;gina.
    
 	Parametro:
 
@@ -270,7 +270,7 @@ i3GEO.idioma = {
 	/*
 	Function: mostraSeletor
 
-	Inclui as bandeiras no mapa permitindo a sele&ccedil;ão do idioma
+	Inclui as bandeiras no mapa permitindo a sele&ccedil;&atilde;o do idioma
 
 	As imagens das bandeiras devem estar definidas no CSS do i3geo, recebendo como identificadores
 	os ids uk,brasil,italiano,espanhol
@@ -322,7 +322,7 @@ i3GEO.idioma = {
 /*
 Function: $trad
 
-Atalho para a fun&ccedil;ão de tradu&ccedil;ão
+Atalho para a fun&ccedil;&atilde;o de tradu&ccedil;&atilde;o
   
 Parametro:
 

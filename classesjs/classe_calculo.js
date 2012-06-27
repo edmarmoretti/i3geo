@@ -16,7 +16,7 @@ i3Geo Interface Integrada de Ferramentas de Geoprocessamento para Internet
 Direitos Autorais Reservados (c) 2006 Minist&eacute;rio do Meio Ambiente Brasil
 Desenvolvedor: Edmar Moretti edmar.moretti@mma.gov.br
 
-Este programa &eacute; software livre; você pode redistribu&iacute;-lo
+Este programa &eacute; software livre; voc&ecirc; pode redistribu&iacute;-lo
 e/ou modific&aacute;-lo sob os termos da Licen&ccedil;a P&uacute;blica Geral
 GNU conforme publicada pela Free Software Foundation;
 
@@ -24,8 +24,8 @@ Este programa &eacute; distribu&iacute;do na expectativa de que seja &uacute;til
 por&eacute;m, SEM NENHUMA GARANTIA; nem mesmo a garantia impl&iacute;cita
 de COMERCIABILIDADE OU ADEQUAÇ&Atilde;O A UMA FINALIDADE ESPEC&Iacute;FICA.
 Consulte a Licen&ccedil;a P&uacute;blica Geral do GNU para mais detalhes.
-Você deve ter recebido uma c&oacute;pia da Licen&ccedil;a P&uacute;blica Geral do
-GNU junto com este programa; se não, escreva para a
+Voc&ecirc; deve ter recebido uma c&oacute;pia da Licen&ccedil;a P&uacute;blica Geral do
+GNU junto com este programa; se n&atilde;o, escreva para a
 Free Software Foundation, Inc., no endere&ccedil;o
 59 Temple Street, Suite 330, Boston, MA 02111-1307 USA.
 */
@@ -99,7 +99,7 @@ i3GEO.calculo = {
 
 	docmapa - objeto DOM que cont&eacute;m o objeto imagem
 
-	ext {String} - (opcional) extensão geogr&aacute;fica (espa&ccedil;o como separador) xmin ymin xmax ymax
+	ext {String} - (opcional) extens&atilde;o geogr&aacute;fica (espa&ccedil;o como separador) xmin ymin xmax ymax
 
 	cellsize {Numeric} - (opcional) tamanho no terreno em DD de cada pixel da imagem
 
@@ -213,9 +213,9 @@ i3GEO.calculo = {
 
 	g_celula {Numeric} - tamanho no terreno do pixel da imagem em dd.
 
-	imgext {String} - extensão geogr&aacute;fica do mapa.
+	imgext {String} - extens&atilde;o geogr&aacute;fica do mapa.
 
-	idorigem {string} - (opcional) id do objeto que originou o c&aacute;lculo (&eacute; usado para identificar se o c&aacute;lculo est&aacute; sendo feito sobr o mapa de referência ou não)
+	idorigem {string} - (opcional) id do objeto que originou o c&aacute;lculo (&eacute; usado para identificar se o c&aacute;lculo est&aacute; sendo feito sobr o mapa de refer&ecirc;ncia ou n&atilde;o)
 
 	Returns:
 
@@ -253,11 +253,11 @@ i3GEO.calculo = {
 
 	Calcula a &aacute;rea de um pol&iacute;gono.
 
-	Os pontos são obtidos do objeto pontos
+	Os pontos s&atilde;o obtidos do objeto pontos
 
-	Para o c&aacute;lculo da &aacute;rea, &eacute; feito o c&aacute;lculo do n&uacute;mero de pixel abrangido pelo pol&iacute;gono e multiplicado pela resolu&ccedil;ão de cada pixel.
+	Para o c&aacute;lculo da &aacute;rea, &eacute; feito o c&aacute;lculo do n&uacute;mero de pixel abrangido pelo pol&iacute;gono e multiplicado pela resolu&ccedil;&atilde;o de cada pixel.
 
-	Referência - http://www.mail-archive.com/mapserver-users@lists.umn.edu/msg07052.html
+	Refer&ecirc;ncia - http://www.mail-archive.com/mapserver-users@lists.umn.edu/msg07052.html
 
 	Parametros:
 
@@ -449,7 +449,7 @@ i3GEO.calculo = {
 	/*
 	Function: direcao
 
-	Calcula a dire&ccedil;ão (0 a 360 graus) entre dois pontos.
+	Calcula a dire&ccedil;&atilde;o (0 a 360 graus) entre dois pontos.
 
 	Baseado no site http://www.movable-type.co.uk/scripts/latlong.html (indicado por louriques@yahoo.com.br)
 
@@ -487,7 +487,7 @@ i3GEO.calculo = {
 	/*
 	Function: destinoDD
 
-	Calcula as coordenadas de um novo ponto em fun&ccedil;ão da posi&ccedil;ão de um ponto de origem, distância e dire&ccedil;ão
+	Calcula as coordenadas de um novo ponto em fun&ccedil;&atilde;o da posi&ccedil;&atilde;o de um ponto de origem, distância e dire&ccedil;&atilde;o
 
 	O novo ponto &eacute; calculado em coordenadas geogr&aacute;ficas em DD
 
@@ -501,7 +501,7 @@ i3GEO.calculo = {
 
 	d {Numeric} - distância em Km
 
-	dire&ccedil;ão {Numeric} - ângulo desejado em d&eacute;cimos de grau (dire&ccedil;ão de 0 a 360)
+	dire&ccedil;&atilde;o {Numeric} - ângulo desejado em d&eacute;cimos de grau (dire&ccedil;&atilde;o de 0 a 360)
 
 	Return:
 
@@ -527,7 +527,7 @@ i3GEO.calculo = {
 	/*
 	Function: rect2ext
 
-	Calcula a extensão geogr&aacute;fica de um retângulo desenhado sobre o mapa.
+	Calcula a extens&atilde;o geogr&aacute;fica de um retângulo desenhado sobre o mapa.
 
 	Parametros:
 
@@ -539,7 +539,7 @@ i3GEO.calculo = {
 
 	return:
 
-	{Array} - extensão, xmin, ymin, xmax, ymax
+	{Array} - extens&atilde;o, xmin, ymin, xmax, ymax
 	*/
 	rect2ext: function(idrect,mapext,pixel){
 		if(typeof(console) !== 'undefined'){console.info("i3GEO.calculo.rect2ext()");}
@@ -576,7 +576,7 @@ i3GEO.calculo = {
 	/*
 	Function: ext2rect
 
-	Calcula o posicionamento de um retângulo com base na extensão geogr&aacute;fica.
+	Calcula o posicionamento de um retângulo com base na extens&atilde;o geogr&aacute;fica.
 
 	Parametros:
 

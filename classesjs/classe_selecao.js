@@ -1,7 +1,7 @@
 /*jslint plusplus:false,white:false,undef: false, rhino: true, onevar: true, evil: true */
 
 /*
-Esta classe foi depreciada e poder� ser removida. Veja i3geo/ferramentas/selecao/index.js
+Esta classe foi depreciada e podera ser removida. Veja i3geo/ferramentas/selecao/index.js
 
 */
 if(typeof(i3GEO) === 'undefined'){
@@ -100,7 +100,7 @@ i3GEO.selecao = {
 		/*
 		 criaBox
 
-		Cria o DIV que ser� utilizado para desenhar o box no mapa
+		Cria o DIV que sera utilizado para desenhar o box no mapa
 		*/
 		criaBox: function(){
 			try{i3GEO.desenho.richdraw.fecha();}catch(e){
@@ -156,7 +156,7 @@ i3GEO.selecao = {
 		/*
 		 desloca
 
-		Desloca o box conforme o mouse � movimentado
+		Desloca o box conforme o mouse e movimentado
 		*/
 		desloca: function(){
 			if(g_tipoacao !== 'selecaobox')
@@ -215,7 +215,7 @@ i3GEO.selecao = {
 				};
 				if((x1 === x2) || (y1 === y2))
 				{limpa.call();return;}
-				// se o retangulo for negativo pula essa parte para n� gerar erro
+				// se o retangulo for negativo pula essa parte para nao gerar erro
 				i3GEO.parametros.mapexten=v;
 				limpa.call();
 				i3GEO.eventos.MOUSEMOVE.remove("i3GEO.selecao.box.desloca()");
@@ -240,13 +240,13 @@ i3GEO.selecao = {
 	/*
 	 i3GEO.selecao.poligono
 
-	Realiza a sele��o desenhando um pol�gono no mapa
+	Realiza a selecao desenhando um poligono no mapa
 	*/
 	poligono:{
 		/*
 		 inicia
 
-		Inicia o desenho do pol�gono
+		Inicia o desenho do poligono
 		*/
 		inicia: function(){
 			try
@@ -256,7 +256,7 @@ i3GEO.selecao = {
 			}
 			i3GEO.util.insereMarca.limpa();
 			g_tipoacao = "selecaopoli";
-			alert("Clique no mapa para desenhar o pol�gono.");
+			alert($trad("x20"));
 			i3GEO.desenho.criaContainerRichdraw();
 			i3GEO.desenho.richdraw.lineColor = "red";
 			i3GEO.desenho.richdraw.lineWidth = "2px";
@@ -269,7 +269,7 @@ i3GEO.selecao = {
 		/*
 		 move
 
-		Modifica o pol�gono conforme o usu�rio cria v�rtices
+		Modifica o poligono conforme o usuario cria vertices
 		*/
 		move: function(){
 			if (g_tipoacao === "selecaopoli"){
@@ -282,7 +282,7 @@ i3GEO.selecao = {
 		/*
 		 clique
 
-		Inclui um novo v�rtice no pol�gono
+		Inclui um novo vertice no poligono
 		*/
 		clique: function(){
 			if (g_tipoacao !== "selecaopoli"){return;}
@@ -313,7 +313,7 @@ i3GEO.selecao = {
 		/*
 		termina
 
-		Termina o desenho do pol�gono e executa a opera��o de sele��o
+		Termina o desenho do poligono e executa a operacao de selecao
 		*/
 		termina: function(){
 			var doc,pontos,xs,ys,retorna,p,cp;

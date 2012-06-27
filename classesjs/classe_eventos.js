@@ -15,7 +15,7 @@ i3Geo Interface Integrada de Ferramentas de Geoprocessamento para Internet
 Direitos Autorais Reservados (c) 2006 Minist&eacute;rio do Meio Ambiente Brasil
 Desenvolvedor: Edmar Moretti edmar.moretti@mma.gov.br
 
-Este programa &eacute; software livre; você pode redistribu&iacute;-lo
+Este programa &eacute; software livre; voc&ecirc; pode redistribu&iacute;-lo
 e/ou modific&aacute;-lo sob os termos da Licen&ccedil;a P&uacute;blica Geral
 GNU conforme publicada pela Free Software Foundation;
 
@@ -23,8 +23,8 @@ Este programa &eacute; distribu&iacute;do na expectativa de que seja &uacute;til
 por&eacute;m, SEM NENHUMA GARANTIA; nem mesmo a garantia impl&iacute;cita
 de COMERCIABILIDADE OU ADEQUAÇ&Atilde;O A UMA FINALIDADE ESPEC&Iacute;FICA.
 Consulte a Licen&ccedil;a P&uacute;blica Geral do GNU para mais detalhes.
-Você deve ter recebido uma c&oacute;pia da Licen&ccedil;a P&uacute;blica Geral do
-GNU junto com este programa; se não, escreva para a
+Voc&ecirc; deve ter recebido uma c&oacute;pia da Licen&ccedil;a P&uacute;blica Geral do
+GNU junto com este programa; se n&atilde;o, escreva para a
 Free Software Foundation, Inc., no endere&ccedil;o
 59 Temple Street, Suite 330, Boston, MA 02111-1307 USA.
 */
@@ -46,15 +46,15 @@ objposicaocursor = {
 /*
 Classe: i3GEO.eventos
 
-Controla as opera&ccedil;&otilde;es que são executadas em eventos que ocorrem no mapa.
+Controla as opera&ccedil;&otilde;es que s&atilde;o executadas em eventos que ocorrem no mapa.
 
 As listas de opera&ccedil;&otilde;es consistem em vari&aacute;veis com nomes de fun&ccedil;&otilde;es.
 
-As listas são inicializadas com algunmas fun&ccedil;&otilde;es j&aacute; embutidas, mas podem ser acrescentadas outras.
+As listas s&atilde;o inicializadas com algunmas fun&ccedil;&otilde;es j&aacute; embutidas, mas podem ser acrescentadas outras.
 
 Exemplos:
 
-	Para incluir uma fun&ccedil;ão em um determinado evento utilize
+	Para incluir uma fun&ccedil;&atilde;o em um determinado evento utilize
 
 	if(i3GEO.eventos.NAVEGAMAPA.toString().search("i3GEO.gadgets.atualizaEscalaNumerica()") < 0)
 
@@ -68,7 +68,7 @@ i3GEO.eventos = {
 	/*
 	Propriedade: ATUALIZAARVORECAMADAS
 
-	Armazena as fun&ccedil;&otilde;es (eventos) que serão executadas quando a &aacute;rvore de camadas for atualizada.
+	Armazena as fun&ccedil;&otilde;es (eventos) que ser&atilde;o executadas quando a &aacute;rvore de camadas for atualizada.
 
 	Tipo:
 	{Array}
@@ -77,7 +77,7 @@ i3GEO.eventos = {
 	/*
 	Propriedade: ATIVATEMA
 
-	Armazena as fun&ccedil;&otilde;es (eventos) que serão executadas quando um tema da &aacute;rvore de camadas &eacute; ativado.
+	Armazena as fun&ccedil;&otilde;es (eventos) que ser&atilde;o executadas quando um tema da &aacute;rvore de camadas &eacute; ativado.
 
 	Tipo:
 	{Array}
@@ -86,7 +86,7 @@ i3GEO.eventos = {
 	/*
 	Propriedade: NAVEGAMAPA
 
-	Armazena as fun&ccedil;&otilde;es que serão executadas quando &eacute; feita uma opera&ccedil;ão de navega&ccedil;ão sobre o mapa.
+	Armazena as fun&ccedil;&otilde;es que ser&atilde;o executadas quando &eacute; feita uma opera&ccedil;&atilde;o de navega&ccedil;&atilde;o sobre o mapa.
 
 	Tipo:
 	{Array}
@@ -95,7 +95,7 @@ i3GEO.eventos = {
 	/*
 	Propriedade: MOUSEPARADO
 
-	Armazena as fun&ccedil;&otilde;es que serão executadas quando o usu&aacute;rio estaciona o mouse sobre o mapa 
+	Armazena as fun&ccedil;&otilde;es que ser&atilde;o executadas quando o usu&aacute;rio estaciona o mouse sobre o mapa 
 	por alguns instantes.
 
 	Tipo:
@@ -108,7 +108,7 @@ i3GEO.eventos = {
 	/*
 	Propriedade: MOUSEMOVE
 
-	Armazena as fun&ccedil;&otilde;es que serão executadas quando o usu&aacute;rio move o mouse sobre o mapa 
+	Armazena as fun&ccedil;&otilde;es que ser&atilde;o executadas quando o usu&aacute;rio move o mouse sobre o mapa 
 
 	Tipo:
 	{Array}
@@ -120,7 +120,7 @@ i3GEO.eventos = {
 	/*
 	Propriedade: MOUSEDOWN
 
-	Armazena as fun&ccedil;&otilde;es que serão executadas quando o usu&aacute;rio pressiona o botão do mouse sobre o mapa 
+	Armazena as fun&ccedil;&otilde;es que ser&atilde;o executadas quando o usu&aacute;rio pressiona o bot&atilde;o do mouse sobre o mapa 
 
 	Tipo:
 	{Array}
@@ -132,7 +132,7 @@ i3GEO.eventos = {
 	/*
 	Propriedade: MOUSEUP
 
-	Armazena as fun&ccedil;&otilde;es que serão executadas quando o usu&aacute;rio solta o botão do mouse sobre o mapa 
+	Armazena as fun&ccedil;&otilde;es que ser&atilde;o executadas quando o usu&aacute;rio solta o bot&atilde;o do mouse sobre o mapa 
 
 	Tipo:
 	{Array}
@@ -144,7 +144,7 @@ i3GEO.eventos = {
 	/*
 	Propriedade: MOUSECLIQUE
 
-	Armazena as fun&ccedil;&otilde;es que serão executadas quando o usu&aacute;rio clica sobre o mapa 
+	Armazena as fun&ccedil;&otilde;es que ser&atilde;o executadas quando o usu&aacute;rio clica sobre o mapa 
 
 	Tipo:
 	{Array}
@@ -167,7 +167,7 @@ i3GEO.eventos = {
 
 	Executa as fun&ccedil;&otilde;es definidas em MOUSEPARADO quando &eacute; detectado que o mouse est&aacute; estacionado.
 
-	A execu&ccedil;ão desse evento &eacute; controlado por um timer definido no evento onmousemove (sobre o mapa).
+	A execu&ccedil;&atilde;o desse evento &eacute; controlado por um timer definido no evento onmousemove (sobre o mapa).
 
 	*/
 	mouseParado: function()	{
@@ -193,7 +193,7 @@ i3GEO.eventos = {
 	/*
 	Function: navegaMapa
 
-	Executa as fun&ccedil;&otilde;es armazenadas em NAVEGAMAPA, ou seja, opera&ccedil;&otilde;es executadas quando o mapa tem sua extensão geogr&aacute;fica alterada.
+	Executa as fun&ccedil;&otilde;es armazenadas em NAVEGAMAPA, ou seja, opera&ccedil;&otilde;es executadas quando o mapa tem sua extens&atilde;o geogr&aacute;fica alterada.
 	*/
 	navegaMapa: function(){
 		if(typeof(console) !== 'undefined'){console.info("i3GEO.eventos.navegaMapa()");}
@@ -265,9 +265,9 @@ i3GEO.eventos = {
 	/*
 	Function posicaoMouseMapa
 
-	Captura a posi&ccedil;ão do mouse sobre um mapa. O c&aacute;lculo pode ser feito sobre o corpo do mapa principal ou sob o corpo do mapa de referência
+	Captura a posi&ccedil;&atilde;o do mouse sobre um mapa. O c&aacute;lculo pode ser feito sobre o corpo do mapa principal ou sob o corpo do mapa de refer&ecirc;ncia
 
-	O resultado dos c&aacute;lculos são armazenados no objeto objposicaocursor
+	O resultado dos c&aacute;lculos s&atilde;o armazenados no objeto objposicaocursor
 	esse objeto ter&aacute; as seguintes propriedades:
 
 			objposicaocursor.ddx valor de x em d&eacute;cimos de grau
@@ -286,9 +286,9 @@ i3GEO.eventos = {
 
 			objposicaocursor.imgy: posicao y no mapa em pixels
 
-			objposicaocursor.refx: posicao x no mapa de referência em pixels
+			objposicaocursor.refx: posicao x no mapa de refer&ecirc;ncia em pixels
 
-			objposicaocursor.refy: posicao x no mapa de referência em pixels
+			objposicaocursor.refy: posicao x no mapa de refer&ecirc;ncia em pixels
 
 	Parameters:
 
@@ -296,8 +296,8 @@ i3GEO.eventos = {
 	*/
 	posicaoMouseMapa: function(e){
 		//
-		//os eventos da interface googlemaps são definidos em i3GEO.Interface
-		//se a interface for googleearth, googlemaps ou openlayers, os eventos são controlados
+		//os eventos da interface googlemaps s&atilde;o definidos em i3GEO.Interface
+		//se a interface for googleearth, googlemaps ou openlayers, os eventos s&atilde;o controlados
 		//pelas respectivas apis
 		//caso contr&aacute;rio, o i3geo ir&aacute; controlar os c&aacute;lculos
 		//Entretanto, nas ferramentas que usam o richdraw (distância e &aacute;rea) o posicionamento
@@ -335,8 +335,8 @@ i3GEO.eventos = {
 		{targ = $i(i3GEO.Interface.IDMAPA);}
 		//
 		//se estiver no modo pan, o movimento deve ser obtido do elemento
-		//onde est&aacute; a imagem do mapa e não diretamente sobre o elemento 'img'
-		//se não for feito assim, o deslocamento do mapa não &eacute; capturado
+		//onde est&aacute; a imagem do mapa e n&atilde;o diretamente sobre o elemento 'img'
+		//se n&atilde;o for feito assim, o deslocamento do mapa n&atilde;o &eacute; capturado
 		//
 		try{
 			if(g_panM !== 'undefined' && g_panM === "sim")
@@ -364,7 +364,7 @@ i3GEO.eventos = {
 		}
 		//
 		//faz os c&aacute;lculos de posicionamento
-		//fig e reffig são a mesma coisa por enquanto
+		//fig e reffig s&atilde;o a mesma coisa por enquanto
 		//
 		xfig = mousex - pos[0];
 		yfig = mousey - pos[1];
@@ -373,9 +373,9 @@ i3GEO.eventos = {
 		xtela = mousex;
 		ytela = mousey;
 		//
-		//celula e extent são necess&aacute;rios para se fazer a
-		//conversão de coordenadas de tela para coordenadas geogr&aacute;ficas
-		//esses valores são obtidos das fun&ccedil;&otilde;es ajax que redesenham ou inicializam o mapa
+		//celula e extent s&atilde;o necess&aacute;rios para se fazer a
+		//convers&atilde;o de coordenadas de tela para coordenadas geogr&aacute;ficas
+		//esses valores s&atilde;o obtidos das fun&ccedil;&otilde;es ajax que redesenham ou inicializam o mapa
 		// 
 		c = i3GEO.parametros.pixelsize;
 		ex = i3GEO.parametros.mapexten;
@@ -410,15 +410,15 @@ i3GEO.eventos = {
 	/*
 	Function: ativa
 
-	Ativa os eventos relacionados ao mapa (movimenta&ccedil;ão do mouse sobre o mapa)
+	Ativa os eventos relacionados ao mapa (movimenta&ccedil;&atilde;o do mouse sobre o mapa)
 
 	Define o que ser&aacute; executado quando o mouse &eacute; clicado ou movido sobre o mapa.
 
-	Al&eacute;m das fun&ccedil;&otilde;es padrão,são ativadas aquelas definidas nas vari&aacute;veis de configura&ccedil;ão (veja classe_configura.js)
+	Al&eacute;m das fun&ccedil;&otilde;es padr&atilde;o,s&atilde;o ativadas aquelas definidas nas vari&aacute;veis de configura&ccedil;&atilde;o (veja classe_configura.js)
 
 	Parametro:
 
-	docMapa {DOM node} - objeto que ser&aacute; alvo da ativa&ccedil;ão dos cliques
+	docMapa {DOM node} - objeto que ser&aacute; alvo da ativa&ccedil;&atilde;o dos cliques
 	*/
 	ativa: function(docMapa){
 		if(typeof(console) !== 'undefined'){console.info("i3GEO.eventos.ativa()");}
@@ -469,7 +469,7 @@ i3GEO.eventos = {
 	/*
 	Function: botaoDireita
 
-	Retorna true se o botão da direita foi utilizado no evento do mouse
+	Retorna true se o bot&atilde;o da direita foi utilizado no evento do mouse
 
 	Parametro:
 
@@ -493,7 +493,7 @@ i3GEO.eventos = {
 
 	Captura um ponto na tela e retorna o resultado para a janela interna que estiver aberta.
 
-	As coordenadas do ponto, em DMS, são repassadas para os campos do tipo input da janela interna que estiver aberta.
+	As coordenadas do ponto, em DMS, s&atilde;o repassadas para os campos do tipo input da janela interna que estiver aberta.
 	A janela aberta deve ter os seguintes elementos do tipo input (ids):
 	ixg,ixm,ixs,iyg,iym,iys
 	*/

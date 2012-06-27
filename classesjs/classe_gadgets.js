@@ -13,7 +13,7 @@ i3Geo Interface Integrada de Ferramentas de Geoprocessamento para Internet
 Direitos Autorais Reservados (c) 2006 Minist&eacute;rio do Meio Ambiente Brasil
 Desenvolvedor: Edmar Moretti edmar.moretti@mma.gov.br
 
-Este programa &eacute; software livre; você pode redistribu&iacute;-lo
+Este programa &eacute; software livre; voc&ecirc; pode redistribu&iacute;-lo
 e/ou modific&aacute;-lo sob os termos da Licen&ccedil;a P&uacute;blica Geral
 GNU conforme publicada pela Free Software Foundation;
 
@@ -21,8 +21,8 @@ Este programa &eacute; distribu&iacute;do na expectativa de que seja &uacute;til
 por&eacute;m, SEM NENHUMA GARANTIA; nem mesmo a garantia impl&iacute;cita
 de COMERCIABILIDADE OU ADEQUAÇ&Atilde;O A UMA FINALIDADE ESPEC&Iacute;FICA.
 Consulte a Licen&ccedil;a P&uacute;blica Geral do GNU para mais detalhes.
-Você deve ter recebido uma c&oacute;pia da Licen&ccedil;a P&uacute;blica Geral do
-GNU junto com este programa; se não, escreva para a
+Voc&ecirc; deve ter recebido uma c&oacute;pia da Licen&ccedil;a P&uacute;blica Geral do
+GNU junto com este programa; se n&atilde;o, escreva para a
 Free Software Foundation, Inc., no endere&ccedil;o
 59 Temple Street, Suite 330, Boston, MA 02111-1307 USA.
 */
@@ -34,28 +34,28 @@ Classe: i3GEO.gadgets
 
 Inclui elementos especiais no mapa
 
-Os elementos são opcionais e adicionam funcionalidades ao mapa.
+Os elementos s&atilde;o opcionais e adicionam funcionalidades ao mapa.
 
-Outras funcionalidades são definidas em bot&otilde;es. Veja <classe_configura.js>
+Outras funcionalidades s&atilde;o definidas em bot&otilde;es. Veja <classe_configura.js>
 */
 i3GEO.gadgets = {
 	/*
 	Propriedade: PARAMETROS
 
-	Parametros de inicializa&ccedil;ão dos gadgets.
+	Parametros de inicializa&ccedil;&atilde;o dos gadgets.
 
 	Essa vari&aacute;vel define os parâmetros individuais de cada gadget e o ID do elemento HTML onde
 	o gadget ser&aacute; inclu&iacute;do (parâmetro "idhtml").
 	
 	Cada tipo de gadget pode ter parâmetros espec&iacute;ficos, descritos a seguir.
 	
-	i3GEO.gadgets.PARAMETROS.mostraBuscaRapida.servicosexternos = true|false //indica que os servi&ccedil;os de buscas externos ao i3Geo serão ou não mostrados
-	i3GEO.gadgets.PARAMETROS.mostraBuscaRapida.temasmapa =  true|false //indica se a busca ser&aacute; feita ou não nas camadas existentes no mapa
+	i3GEO.gadgets.PARAMETROS.mostraBuscaRapida.servicosexternos = true|false //indica que os servi&ccedil;os de buscas externos ao i3Geo ser&atilde;o ou n&atilde;o mostrados
+	i3GEO.gadgets.PARAMETROS.mostraBuscaRapida.temasmapa =  true|false //indica se a busca ser&aacute; feita ou n&atilde;o nas camadas existentes no mapa
 	i3GEO.gadgets.PARAMETROS.mostraMenuSuspenso.deslocaEsquerda = 0 //n&uacute;mero de pixels que indica o quanto o menu ser&aacute; deslocado para a esquerda
-	i3GEO.gadgets.PARAMETROS.mostraMenuSuspenso.finaliza = "" //nome de uma fun&ccedil;ão que ser&aacute; executada quando a constru&ccedil;ão do menu tiver terminado
+	i3GEO.gadgets.PARAMETROS.mostraMenuSuspenso.finaliza = "" //nome de uma fun&ccedil;&atilde;o que ser&aacute; executada quando a constru&ccedil;&atilde;o do menu tiver terminado
 	i3GEO.gadgets.PARAMETROS.mostraMenuSuspenso.parametrosYUI = {} //objeto contendo parâmetros adicionais da API YUI para menus
 	
-	Você pode acessar os parâmetros da seguinte forma:
+	Voc&ecirc; pode acessar os parâmetros da seguinte forma:
 
 	i3GEO.gadgets.PARAMETROS.mostraMenuSuspenso.deslocaEsquerda = 400;
 
@@ -90,7 +90,7 @@ i3GEO.gadgets = {
 		"mostraHistoricoZoom":
 
 		{idhtml:"historicozoom"},
-		//inclui op&ccedil;ão admin
+		//inclui op&ccedil;&atilde;o admin
 		try{
 			if(i3GEO.parametros.editor === "sim"){
 				i3GEO.configura.oMenuData.menu.push({nome:"Admin",id:"i3GeoAdmin"});
@@ -169,7 +169,7 @@ i3GEO.gadgets = {
 	/*
 	Function: mostraVersao
 
-	Mostra a versão atual do i3Geo armazenada na vari&aacute;vel i3GEO.parametros.mensageminicial
+	Mostra a vers&atilde;o atual do i3Geo armazenada na vari&aacute;vel i3GEO.parametros.mensageminicial
 
 	Parametro:
 
@@ -177,7 +177,7 @@ i3GEO.gadgets = {
 	i3GEO.gadgets.PARAMETROS
 	*/
 	mostraVersao: function(id){
-		if(typeof(console) !== 'undefined'){console.info("i3GEO.gadgets.mostraVersão()");}
+		if(typeof(console) !== 'undefined'){console.info("i3GEO.gadgets.mostraVers&atilde;o()");}
 		if(arguments.length === 0 || id === "")
 		{id = i3GEO.gadgets.PARAMETROS.mostraVersao.idhtml;}
 		else
@@ -207,11 +207,11 @@ i3GEO.gadgets = {
 	/*
 	Function: mostraInserirKml
 
-	Mostra no mapa a a op&ccedil;ão para inserir kml.
+	Mostra no mapa a a op&ccedil;&atilde;o para inserir kml.
 
-	Essa op&ccedil;ão s&oacute; funciona com a API do Google carregada
+	Essa op&ccedil;&atilde;o s&oacute; funciona com a API do Google carregada
 
-	Se você não quer essa fun&ccedil;ão no mapa, elimine o elemento HTML existente no mapa que contenha o 
+	Se voc&ecirc; n&atilde;o quer essa fun&ccedil;&atilde;o no mapa, elimine o elemento HTML existente no mapa que contenha o 
 	id definido em i3GEO.gadgets.PARAMETROS.mostraInserirKml.idhtml
 
 	Parametro:
@@ -241,7 +241,7 @@ i3GEO.gadgets = {
 
 	A escala num&eacute;rica pode ser alterada pelo usu&aacute;rio digitando-se a nova escala.
 
-	Se você não quer essa fun&ccedil;ão no mapa, elimine o elemento HTML existente no mapa que contenha o 
+	Se voc&ecirc; n&atilde;o quer essa fun&ccedil;&atilde;o no mapa, elimine o elemento HTML existente no mapa que contenha o 
 	id definido em i3GEO.gadgets.PARAMETROS
 
 	Parametro:
@@ -297,7 +297,7 @@ i3GEO.gadgets = {
 
 	Mostra no mapa a escala grafica como um elemento fora do mapa.
 
-	Se você não quer essa fun&ccedil;ão no mapa, elimine o elemento HTML existente no mapa que contenha o 
+	Se voc&ecirc; n&atilde;o quer essa fun&ccedil;&atilde;o no mapa, elimine o elemento HTML existente no mapa que contenha o 
 	id definido em i3GEO.gadgets.PARAMETROS(escala)
 
 	Parametro:
@@ -335,9 +335,9 @@ i3GEO.gadgets = {
 	/*
 	Function: mostraBuscaRapida
 
-	Mostra a op&ccedil;ão de busca r&aacute;pida de lugares por palavra digitada.
+	Mostra a op&ccedil;&atilde;o de busca r&aacute;pida de lugares por palavra digitada.
 
-	Se você não quer essa fun&ccedil;ão no mapa, elimine o elemento HTML existente no mapa que contenha o 
+	Se voc&ecirc; n&atilde;o quer essa fun&ccedil;&atilde;o no mapa, elimine o elemento HTML existente no mapa que contenha o 
 	id definido em i3GEO.gadgets.PARAMETROS (buscaRapida)
 	
 	Onde a busca ser&aacute; feita &eacute; controlado pela vari&aacute;vel i3GEO.gadgets.PARAMETROS.mostraBuscaRapida
@@ -356,7 +356,7 @@ i3GEO.gadgets = {
 		{id = i3GEO.gadgets.PARAMETROS.mostraBuscaRapida.idhtml;}
 		i3GEO.gadgets.mostraBuscaRapida.id = id;
 		if($i(id)){
-			//depreciado na versão 4.5
+			//depreciado na vers&atilde;o 4.5
 			i3geo_buscaRapida = function(){
 				alert("i3geo_buscaRapida foi depreciada");
 			};
@@ -400,7 +400,7 @@ i3GEO.gadgets = {
 	/*
 	Function: mostraHistoricoZoom
 
-	Mostra na barra de zoom os &iacute;cones que controlam a visualiza&ccedil;ão do hist&oacute;rico da navega&ccedil;ão sobre o mapa
+	Mostra na barra de zoom os &iacute;cones que controlam a visualiza&ccedil;&atilde;o do hist&oacute;rico da navega&ccedil;&atilde;o sobre o mapa
 
 	Parametro:
 
@@ -427,15 +427,15 @@ i3GEO.gadgets = {
 	/*
 	Classe: i3GEO.gadgets.visual (depreciado)
 
-	Gera os &iacute;cones e controla as op&ccedil;&otilde;es de modifica&ccedil;ão do visual do mapa.
+	Gera os &iacute;cones e controla as op&ccedil;&otilde;es de modifica&ccedil;&atilde;o do visual do mapa.
 
-	O visual consiste na defini&ccedil;ão dos &iacute;cones utilizados no mapa. O visual pode
-	ser modificado na inicializa&ccedil;ão ou então escolhido pelo usu&aacute;rio.
+	O visual consiste na defini&ccedil;&atilde;o dos &iacute;cones utilizados no mapa. O visual pode
+	ser modificado na inicializa&ccedil;&atilde;o ou ent&atilde;o escolhido pelo usu&aacute;rio.
 
-	Os visuais dispon&iacute;veis são definidos no servidor e consistem em diret&oacute;rios localizados
-	em i3geo/imagens/visual. A lista de visuais dispon&iacute;veis &eacute; obtida na inicializa&ccedil;ão do i3geo.
+	Os visuais dispon&iacute;veis s&atilde;o definidos no servidor e consistem em diret&oacute;rios localizados
+	em i3geo/imagens/visual. A lista de visuais dispon&iacute;veis &eacute; obtida na inicializa&ccedil;&atilde;o do i3geo.
 
-	Os &iacute;cones para mudan&ccedil;a do visual são inclu&iacute;dos no elemento HTML definido em
+	Os &iacute;cones para mudan&ccedil;a do visual s&atilde;o inclu&iacute;dos no elemento HTML definido em
 	i3geo.gadgets.PARAMETROS.visual
 	*/
 	visual: {
@@ -479,8 +479,8 @@ i3GEO.gadgets = {
 	i3GEOoMenuBar.getMenuItem("omenudataInterface1").cfg.setProperty("text", "zzzzzz");
 	i3GEOoMenuBar.getMenuItem("omenudataInterface1").destroy();
 	
-	Para executar uma opera&ccedil;ão ap&oacute;s o menu ser montado, utilize a propriedade
-	i3GEO.gadgets.PARAMETROS.mostraMenuSuspenso.finaliza, por exemplo (a string &eacute; executada por meio da fun&ccedil;ão eval do javascript)
+	Para executar uma opera&ccedil;&atilde;o ap&oacute;s o menu ser montado, utilize a propriedade
+	i3GEO.gadgets.PARAMETROS.mostraMenuSuspenso.finaliza, por exemplo (a string &eacute; executada por meio da fun&ccedil;&atilde;o eval do javascript)
 	
 	i3GEO.gadgets.PARAMETROS.mostraMenuSuspenso.finaliza = 'i3GEOoMenuBar.getMenuItem("omenudataInterface1").cfg.setProperty("text", " ");'
 
@@ -506,9 +506,9 @@ i3GEO.gadgets = {
 		objid = $i(id);
 		if(!objid)
 		{return;}
-		//cria o menu se ainda não existir
+		//cria o menu se ainda n&atilde;o existir
 		if(objid && objid.innerHTML === ""){
-			//inclui op&ccedil;ão admin
+			//inclui op&ccedil;&atilde;o admin
 			try{
 				if(ms.permiteLogin === true || i3GEO.parametros.editor === "sim"){
 					i3GEO.configura.oMenuData.menu.push({nome:"Admin",id:"i3GeoAdmin"});
@@ -539,7 +539,7 @@ i3GEO.gadgets = {
 				if(ms.deslocaEsquerda){
 					alinhamento = "left:"+ms.deslocaEsquerda*-1+"px;";
 				}
-				//ajusta a altura caso não tenha sido especificado no HTML
+				//ajusta a altura caso n&atilde;o tenha sido especificado no HTML
 				if(!objid.style.height || parseInt(objid.style.height,10) === 0)
 				{objid.style.height = "21px";}
 				else{

@@ -25,7 +25,7 @@
 	"../pacotes/yui290/build/logger/logger-min.js",
 	"../pacotes/yui290/build/dragdrop/dragdrop-min.js",
 	"../pacotes/yui290/build/slider/slider-min.js",
-	"../pacotes/yui290/build/animation/animation-min.js", //a 290 n�o funciona direito
+	"../pacotes/yui290/build/animation/animation-min.js", //a 290 nao funciona direito
 	"../pacotes/yui290/build/container/container.js",
 	"../pacotes/yui290/build/element/element-min.js",
 	"../pacotes/yui290/build/tabview/tabview-min.js",

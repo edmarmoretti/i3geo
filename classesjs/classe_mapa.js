@@ -12,21 +12,22 @@ GPL2
 
 i3Geo Interface Integrada de Ferramentas de Geoprocessamento para Internet
 
-Direitos Autorais Reservados (c) 2006 Minist�rio do Meio Ambiente Brasil
+Direitos Autorais Reservados (c) 2006 Minist&eacute;rio do Meio Ambiente Brasil
 Desenvolvedor: Edmar Moretti edmar.moretti@mma.gov.br
 
-Este programa � software livre; voc� pode redistribu�-lo
-e/ou modific�-lo sob os termos da Licen�a P�blica Geral
+Este programa &eacute; software livre; voc&ecirc; pode redistribu&iacute;-lo
+e/ou modific&aacute;-lo sob os termos da Licen&ccedil;a P&uacute;blica Geral
 GNU conforme publicada pela Free Software Foundation;
 
-Este programa � distribu�do na expectativa de que seja �til,
-por�m, SEM NENHUMA GARANTIA; nem mesmo a garantia impl�cita
-de COMERCIABILIDADE OU ADEQUA��O A UMA FINALIDADE ESPEC�FICA.
-Consulte a Licen�a P�blica Geral do GNU para mais detalhes.
-Voc� deve ter recebido uma c�pia da Licen�a P�blica Geral do
-GNU junto com este programa; se n�o, escreva para a
-Free Software Foundation, Inc., no endere�o
+Este programa &eacute; distribu&iacute;do na expectativa de que seja &uacute;til,
+por&eacute;m, SEM NENHUMA GARANTIA; nem mesmo a garantia impl&iacute;cita
+de COMERCIABILIDADE OU ADEQUAÇ&Atilde;O A UMA FINALIDADE ESPEC&Iacute;FICA.
+Consulte a Licen&ccedil;a P&uacute;blica Geral do GNU para mais detalhes.
+Voc&ecirc; deve ter recebido uma c&oacute;pia da Licen&ccedil;a P&uacute;blica Geral do
+GNU junto com este programa; se n&atilde;o, escreva para a
+Free Software Foundation, Inc., no endere&ccedil;o
 59 Temple Street, Suite 330, Boston, MA 02111-1307 USA.
+
 */
 if(typeof(i3GEO) === 'undefined'){
 	i3GEO = [];
@@ -36,14 +37,14 @@ Classe: i3GEO.mapa
 
 Cria e processa o mapa principal
 
-Em i3GEO.mapa.dialogo est�o as fun��es de abertura dos di�logos para altera��o das propriedades do mapa,
+Em i3GEO.mapa.dialogo estao as funcoes de abertura dos dialogos para alteracao das propriedades do mapa,
 como cor de fundo, tipo de imagem, legenda etc.
 */
 i3GEO.mapa = {
 	/*
 	Propriedade: AUTORESIZE
 	
-	Indica se o tamanho do mapa ser� ajustado toda vez que o navegador for redimensionado
+	Indica se o tamanho do mapa sera ajustado toda vez que o navegador for redimensionado
 	
 	Type:
 	{boolean}
@@ -63,13 +64,13 @@ i3GEO.mapa = {
 	/*
 	Function: insereDobraPagina
 	
-	Insere o �cone do tipo "dobra de�p�gina" que permite alterar o renderizador do mapa
+	Insere o icone do tipo "dobra de pagina" que permite alterar o renderizador do mapa
 	
 	Parametros:
 	
-	tipo {string} - tipo de �cone googlemaps|openlayers
+	tipo {string} - tipo de icone googlemaps|openlayers
 	
-	imagem {string} - endere�o da imagem que ser� utilizada no �cone
+	imagem {string} - endereco da imagem que sera utilizada no icone
 	*/
 	insereDobraPagina: function(tipo,imagem){
 		var novoel = $i("i3GEOdobraPagina");
@@ -93,7 +94,7 @@ i3GEO.mapa = {
 	/*
 	Function: reposicionaDobraPagina
 	
-	Reposiciona o �cone do tipo "dobra de�p�gina"
+	Reposiciona o icone do tipo "dobra de pagina"
 	*/
 	reposicionaDobraPagina: function(){
 		var novoel = $i("i3GEOdobraPagina");
@@ -106,9 +107,9 @@ i3GEO.mapa = {
 	/*
 	Function: ativaAutoResize
 	
-	Ativa o redimensionamento autom�tico do mapa sempre que o navegador for redimensionado
+	Ativa o redimensionamento automatico do mapa sempre que o navegador for redimensionado
 	
-	� definido como um evento do elemento window
+	e definido como um evento do elemento window
 	*/
 	ativaAutoResize: function(){
 		window.onresize = function(){
@@ -142,11 +143,11 @@ i3GEO.mapa = {
 
 	Ajusta o posicionamento do corpo do mapa
 
-	Esse ajuste � necess�rio na inicializa��o, uma vez que o mapa utiliza style.position='absolute'
+	Esse ajuste e necessario na inicializacao, uma vez que o mapa utiliza style.position='absolute'
 
 	Parameters:
 
-	elemento {String} - id do elemento HTML que dever� ser ajustado e que cont�m o mapa
+	elemento {String} - id do elemento HTML que devera ser ajustado e que contem o mapa
 	*/
 	ajustaPosicao: function(elemento){
 		if(typeof(console) !== 'undefined'){console.info("i3GEO.mapa.ajustaPosicao()");}
@@ -177,15 +178,15 @@ i3GEO.mapa = {
 	/*
 	Function: ativaTema
 
-	Altera a vari�vel i3GEO.temaAtivo e atualiza a interface em fun��o do novo tema que for ativado
+	Altera a variavel i3GEO.temaAtivo e atualiza a interface em funcao do novo tema que for ativado
 
-	O tema anteriormente ativo tem sua cor alterada para a cor normal e o novo tema � destacado com uma cor diferente
+	O tema anteriormente ativo tem sua cor alterada para a cor normal e o novo tema e destacado com uma cor diferente
 	
-	Executa tamb�m as fun��es armazenadas em i3GEO.eventos.ATIVATEMA
+	Executa tambem as funcoes armazenadas em i3GEO.eventos.ATIVATEMA
 
 	Parametros:
 
-	codigo {string} - c�digo da camada
+	codigo {string} - codigo da camada
 	*/
 	ativaTema: function(codigo){
 		if(codigo){
@@ -205,7 +206,7 @@ i3GEO.mapa = {
 	ativaLogo: function(){
 		if(typeof(console) !== 'undefined'){console.info("i3GEO.mapa.ativaLogo()");}
 		if(i3GEO.Interface.ATUAL === "googlemaps")
-		{alert("Essa opera��o n�o funciona nessa interface");return;}
+		{alert($trad("x21"));return;}
 		i3GEO.php.ativalogo(i3GEO.atualiza);
 		var cr = $i("i3GEOcopyright");
 		if(cr){
@@ -218,11 +219,11 @@ i3GEO.mapa = {
 	/*
 	Function: verifica
 
-	Verifica se ocorreu algum problema na atualiza��o do corpo do mapa e inicia o processo de tentativa de recupera��o
+	Verifica se ocorreu algum problema na atualizacao do corpo do mapa e inicia o processo de tentativa de recuperacao
 
 	Parametro:
 
-	retorno {string} - objeto recebido da fun��o PHP de atualiza��o do mapa
+	retorno {string} - objeto recebido da funcao PHP de atualizacao do mapa
 	*/
 	verifica:function(retorno){
 		if(typeof(console) !== 'undefined'){console.info("i3GEO.mapa.verifica()");}
@@ -262,14 +263,14 @@ i3GEO.mapa = {
 
 	Tenta recuperar o mapa caso ocorra algum problema
 
-	O i3Geo mant�m sempre uma c�pia do arquivo mapfile em uso. Essa fun��o tenta
-	usar essa c�pia para restaurar o funcionamento do mapa
+	O i3Geo mantem sempre uma copia do arquivo mapfile em uso. Essa funcao tenta
+	usar essa copia para restaurar o funcionamento do mapa
 	*/
 	recupera:{
 		/*
 		Variavel: TENTATIVA
 
-		Armazena a quantidade de tentativas de recupera��o que foram feitas
+		Armazena a quantidade de tentativas de recuperacao que foram feitas
 
 		Tipo:
 		{Integer}
@@ -278,7 +279,7 @@ i3GEO.mapa = {
 		/*
 		Function: inicia
 
-		Inicia a tentativa de recupera��o
+		Inicia a tentativa de recuperacao
 		*/
 		inicia: function(){
 			i3GEO.mapa.ajustaPosicao();
@@ -291,7 +292,7 @@ i3GEO.mapa = {
 		/*
 		Function: restaura
 
-		Restaura o mapa para a c�pia de seguran�a existente no servidor
+		Restaura o mapa para a copia de seguranca existente no servidor
 		*/
 		restaura: function(){
 			i3GEO.php.recuperamapa(i3GEO.atualiza);
@@ -300,15 +301,15 @@ i3GEO.mapa = {
 	/*
 	Classe: i3GEO.mapa.legendaHTML
 
-	Controla a obten��o da legenda do mapa formatada em HTML.
+	Controla a obtencao da legenda do mapa formatada em HTML.
 
-	�til para mostrar a legenda na tela
+	util para mostrar a legenda na tela
 	*/
 	legendaHTML:{
 		/*
 		Propriedade: incluiBotaoLibera
 
-		Define se na legenda ser� incluido o bot�o para liberar a legenda e inclu�-la em uma janela flutuante
+		Define se na legenda sera incluido o botao para liberar a legenda e inclui-la em uma janela flutuante
 
 		Tipo:
 		{boolean}
@@ -320,7 +321,7 @@ i3GEO.mapa = {
 		/*
 		Variavel:  ID
 
-		Armazena o id definido na cria��o da legenda
+		Armazena o id definido na criacao da legenda
 		*/
 		ID: "",
 		/*
@@ -328,7 +329,7 @@ i3GEO.mapa = {
 
 		Cria a legenda HTML
 
-		A legenda � incluida no id definido. Se id for igual a "", ser� apenas definido o evento de atualiza��o
+		A legenda e incluida no id definido. Se id for igual a "", sera apenas definido o evento de atualizacao
 		permitindo que seja criada a janela flutuante apenas, por exemplo:
 
 		i3GEO.mapa.legendaHTML.cria("");
@@ -336,7 +337,7 @@ i3GEO.mapa = {
 
 		Parametros:
 
-		id {String} - id do elemento que receber� a legenda
+		id {String} - id do elemento que recebera a legenda
 		*/
 		cria: function(id){
 			if(typeof(console) !== 'undefined'){console.info("i3GEO.mapa.legendaHTML.cria()");}
@@ -390,11 +391,11 @@ i3GEO.mapa = {
 
 		Faz a chamada em AJAX que gera a legenda
 
-		O resultado � processado pela fun��o passada como par�metro
+		O resultado e processado pela funcao passada como parametro
 
 		Parametro:
 
-		funcao {function} - fun��o que receber� o resultado da chamada AJAX. O objeto CPAINT � enviado como par�metro.
+		funcao {function} - funcao que recebera o resultado da chamada AJAX. O objeto CPAINT e enviado como parametro.
 		*/
 		obtem: function(funcao){
 			if(typeof(console) !== 'undefined'){console.info("i3GEO.mapa.legendaHTML.obtem()");}
@@ -403,11 +404,11 @@ i3GEO.mapa = {
 		/*
 		Function: ativaDesativaTema
 
-		Liga ou desliga um �nico tema. Utilizado pela legenda HTML, permitindo que um tema seja processado diretamente na legenda.
+		Liga ou desliga um unico tema. Utilizado pela legenda HTML, permitindo que um tema seja processado diretamente na legenda.
 
 		Parametro:
 
-		inputbox {object) - objeto do tipo input checkbox com a propriedade value indicando o c�digo do tema que ser� processado
+		inputbox {object) - objeto do tipo input checkbox com a propriedade value indicando o codigo do tema que sera processado
 		*/
 		ativaDesativaTema: function(inputbox){
 			if(typeof(console) !== 'undefined'){console.info("i3GEO.mapa.legendaHTML.ativaDesativaTema()");}
@@ -467,10 +468,10 @@ i3GEO.mapa = {
 	/*
 	Classe: i3GEO.mapa.legendaIMAGEM
 
-	Controla a obten��o da legenda do mapa na forma de uma imagem
+	Controla a obtencao da legenda do mapa na forma de uma imagem
 
-	� utilizado principalmente para armazenar as imagens para a fun��o de 
-	obten��o do hist�rico do mapa
+	e utilizado principalmente para armazenar as imagens para a funcao de 
+	obtencao do historico do mapa
 	*/
 	legendaIMAGEM:{
 		/*
@@ -478,11 +479,11 @@ i3GEO.mapa = {
 
 		Faz a chamada em AJAX que gera a legenda
 
-		O resultado � processado pela fun��o passada como par�metro
+		O resultado e processado pela funcao passada como parametro
 
 		Parametro:
 
-		funcao {function} - fun��o que receber� o resultado da chamada AJAX. O objeto CPAINT � enviado como par�metro.
+		funcao {function} - funcao que recebera o resultado da chamada AJAX. O objeto CPAINT e enviado como parametro.
 		*/
 		obtem: function(funcao){
 			if(typeof(console) !== 'undefined'){console.info("i3GEO.mapa.legendaIMAGEML.obtem()");}
@@ -492,13 +493,13 @@ i3GEO.mapa = {
 	/*
 	Classe: i3GEO.mapa.dialogo
 
-	Abre as telas de di�logo das op��es de manipula��o do mapa atual
+	Abre as telas de dialogo das opcoes de manipulacao do mapa atual
 	*/
 	dialogo:{
 		/*
 		Function: animacao
 
-		Abre a janela de di�logo da ferramenta que permite animar o mapa atual
+		Abre a janela de dialogo da ferramenta que permite animar o mapa atual
 		*/
 		animacao: function(){
 			i3GEO.util.dialogoFerramenta("i3GEO.mapa.dialogo.animacao()","animacao","animacao");
@@ -506,7 +507,7 @@ i3GEO.mapa = {
 		/*
 		Function: opacidade
 
-		Abre a janela de di�logo da ferramenta de defini��o da transpar�ncia das camadas principais do mapa
+		Abre a janela de dialogo da ferramenta de definicao da transparencia das camadas principais do mapa
 		*/
 		opacidade: function(){
 			i3GEO.util.dialogoFerramenta("i3GEO.mapa.dialogo.opacidade()","opacidademapa","opacidademapa");
@@ -514,7 +515,7 @@ i3GEO.mapa = {
 		/*
 		Function: telaRemota
 
-		Abre a janela de di�logo da ferramenta de configura��o de uma tela remota
+		Abre a janela de dialogo da ferramenta de configuracao de uma tela remota
 		*/
 		telaRemota: function(){
 			i3GEO.util.dialogoFerramenta("i3GEO.mapa.dialogo.telaremota()","telaremota","telaremota");
@@ -522,7 +523,7 @@ i3GEO.mapa = {
 		/*
 		Function: t3d
 
-		Abre a janela de di�logo da ferramenta de gera��o da visualiza��o em 3d
+		Abre a janela de dialogo da ferramenta de geracao da visualizacao em 3d
 		*/
 		t3d: function(){
 			i3GEO.util.dialogoFerramenta("i3GEO.mapa.dialogo.t3d()","3d","t3d");
@@ -530,7 +531,7 @@ i3GEO.mapa = {
 		/*
 		Function: imprimir
 
-		Abre a janela de di�logo da ferramenta que permite imprimir o mapa atual
+		Abre a janela de dialogo da ferramenta que permite imprimir o mapa atual
 		*/
 		imprimir: function(){
 			i3GEO.util.dialogoFerramenta("i3GEO.mapa.dialogo.imprimir()","imprimir","imprimir");
@@ -538,7 +539,7 @@ i3GEO.mapa = {
 		/*
 		Function: mostraExten
 
-		Abre a janela de di�logo da ferramenta que mostra a extens�o geogr�fica atual do mapa
+		Abre a janela de dialogo da ferramenta que mostra a extensao geografica atual do mapa
 		*/
 		mostraExten: function(){
 			i3GEO.util.dialogoFerramenta("i3GEO.mapa.dialogo.mostraExten()","mostraexten","mostraExten");
@@ -546,7 +547,7 @@ i3GEO.mapa = {
 		/*
 		Function: outputformat
 
-		Abre a janela de di�logo da ferramenta outputformat
+		Abre a janela de dialogo da ferramenta outputformat
 		*/
 		outputformat: function(){
 			i3GEO.util.dialogoFerramenta("i3GEO.mapa.dialogo.outputformat()","outputformat","outputformat");
@@ -554,7 +555,7 @@ i3GEO.mapa = {
 		/*
 		Function: autoredesenha
 
-		Abre a janela de di�logo da ferramenta opcoes_autoredesenha
+		Abre a janela de dialogo da ferramenta opcoes_autoredesenha
 		*/
 		autoredesenha: function(){
 			i3GEO.util.dialogoFerramenta("i3GEO.mapa.dialogo.autoredesenha()","opcoes_autoredesenha","opcoesTempo");
@@ -562,7 +563,7 @@ i3GEO.mapa = {
 		/*
 		Function: salvaMapa
 
-		Abre a janela de di�logo da ferramenta salvamapa
+		Abre a janela de dialogo da ferramenta salvamapa
 		*/
 		salvaMapa: function(){
 			if(i3GEO.parametros === "")
@@ -572,7 +573,7 @@ i3GEO.mapa = {
 		/*
 		Function: carregaMapa
 
-		Abre a janela de di�logo da ferramenta carregamapa
+		Abre a janela de dialogo da ferramenta carregamapa
 		*/
 		carregaMapa: function(){
 			i3GEO.util.dialogoFerramenta("i3GEO.mapa.dialogo.carregaMapa()","carregamapa","carregaMapa");
@@ -580,7 +581,7 @@ i3GEO.mapa = {
 		/*
 		Function: convertews
 
-		Abre a janela de di�logo da ferramenta convertews
+		Abre a janela de dialogo da ferramenta convertews
 		*/
 		convertews: function(){
 			if(i3GEO.parametros.mapfile === "")
@@ -590,7 +591,7 @@ i3GEO.mapa = {
 		/*
 		Function: convertekml
 
-		Abre a janela de di�logo da ferramenta convertemapakml
+		Abre a janela de dialogo da ferramenta convertemapakml
 		*/
 		convertekml: function(){
 			if(i3GEO.parametros.mapfile === "")
@@ -600,7 +601,7 @@ i3GEO.mapa = {
 		/*
 		Function: queryMap
 
-		Abre a janela de di�logo da ferramenta opcoes_querymap
+		Abre a janela de dialogo da ferramenta opcoes_querymap
 		*/
 		queryMap: function(){
 			i3GEO.util.dialogoFerramenta("i3GEO.mapa.dialogo.queryMap()","opcoes_querymap","opcoesQuery");
@@ -608,14 +609,14 @@ i3GEO.mapa = {
 		/*
 		Function: template
 
-		Abre a janela de di�logo da ferramenta template
+		Abre a janela de dialogo da ferramenta template
 		*/
 		template: function()
 		{i3GEO.janela.cria("300px","400px",i3GEO.configura.locaplic+"/ferramentas/template/index.htm","","","Template <a class=ajuda_usuario target=_blank href='"+i3GEO.configura.locaplic+"/ajuda_usuario.php?idcategoria=1&idajuda=8' >&nbsp;&nbsp;&nbsp;</a>");},
 		/*
 		Function: tamanho
 
-		Abre a janela de di�logo da ferramenta opcoes_tamanho
+		Abre a janela de dialogo da ferramenta opcoes_tamanho
 		*/
 		tamanho: function(){
 			i3GEO.util.dialogoFerramenta("i3GEO.mapa.dialogo.tamanho()","opcoes_tamanho","opcoesTamanho");
@@ -623,7 +624,7 @@ i3GEO.mapa = {
 		/*
 		Function: tipoimagem
 
-		Abre a janela de di�logo da ferramenta tipoimagem
+		Abre a janela de dialogo da ferramenta tipoimagem
 		*/
 		tipoimagem: function(){
 			i3GEO.util.dialogoFerramenta("i3GEO.mapa.dialogo.tipoimagem()","tipoimagem","tipoimagem");
@@ -631,7 +632,7 @@ i3GEO.mapa = {
 		/*
 		Function: corFundo
 
-		Abre a janela de di�logo da ferramenta opcoes_fundo
+		Abre a janela de dialogo da ferramenta opcoes_fundo
 		*/
 		corFundo: function(){
 			i3GEO.util.dialogoFerramenta("i3GEO.mapa.dialogo.corFundo()","opcoes_fundo","opcoesFundo");
@@ -639,7 +640,7 @@ i3GEO.mapa = {
 		/*
 		Function: opcoesEscala
 
-		Abre a janela de di�logo da ferramenta opcoes_escala
+		Abre a janela de dialogo da ferramenta opcoes_escala
 		*/
 		opcoesEscala: function(){
 			i3GEO.util.dialogoFerramenta("i3GEO.mapa.dialogo.opcoesEscala()","opcoes_escala","opcoesEscala");
@@ -647,7 +648,7 @@ i3GEO.mapa = {
 		/*
 		Function: opcoesLegenda
 
-		Abre a janela de di�logo da ferramenta opcoes_legenda
+		Abre a janela de dialogo da ferramenta opcoes_legenda
 		*/
 		opcoesLegenda: function(){
 			i3GEO.util.dialogoFerramenta("i3GEO.mapa.dialogo.opcoesLegenda()","opcoes_legenda","opcoesLegenda");
@@ -655,7 +656,7 @@ i3GEO.mapa = {
 		/*
 		Function: gradeCoord
 
-		Abre a janela de di�logo da ferramenta gradecoord
+		Abre a janela de dialogo da ferramenta gradecoord
 		*/
 		gradeCoord: function(){
 			i3GEO.util.dialogoFerramenta("i3GEO.mapa.dialogo.gradeCoord()","gradecoord","gradeCoord");
@@ -663,7 +664,7 @@ i3GEO.mapa = {
 		/*
 		Function: cliqueTexto
 
-		Abre a janela de di�logo da ferramenta inseretxt
+		Abre a janela de dialogo da ferramenta inseretxt
 		*/
 		cliqueTexto: function(){
 			i3GEO.util.dialogoFerramenta("i3GEO.mapa.dialogo.cliqueTexto()","inseretxt","inseretxt");
@@ -671,7 +672,7 @@ i3GEO.mapa = {
 		/*
 		Function: selecao
 
-		Abre a janela de di�logo da ferramenta selecao
+		Abre a janela de dialogo da ferramenta selecao
 		*/
 		selecao: function(){
 			i3GEO.util.dialogoFerramenta("i3GEO.mapa.dialogo.selecao()","selecao","selecao");
@@ -679,7 +680,7 @@ i3GEO.mapa = {
 		/*
 		Function: cliquePonto
 
-		Abre a janela de di�logo da ferramenta inserexy2
+		Abre a janela de dialogo da ferramenta inserexy2
 		*/
 		cliquePonto: function(){
 			i3GEO.util.dialogoFerramenta("i3GEO.mapa.dialogo.cliquePonto()","inserexy2","inserexy");
@@ -687,7 +688,7 @@ i3GEO.mapa = {
 		/*
 		Function: cliqueGrafico
 
-		Abre a janela de di�logo da ferramenta inseregrafico
+		Abre a janela de dialogo da ferramenta inseregrafico
 		*/
 		cliqueGrafico: function(){
 			i3GEO.util.dialogoFerramenta("i3GEO.mapa.dialogo.cliqueGrafico()","inseregrafico","insereGrafico");
@@ -695,14 +696,14 @@ i3GEO.mapa = {
 		/*
 		Function: cliqueIdentificaDefault
 
-		Abre a janela de di�logo da ferramenta identifica
+		Abre a janela de dialogo da ferramenta identifica
 		*/
 		cliqueIdentificaDefault: function(){
 			if(typeof(console) !== 'undefined'){console.info("i3GEO.mapa.dialogo.cliqueIdentificaDefault()");}
 			if (g_tipoacao === "identifica"){
 				i3GEO.eventos.MOUSEPARADO.remove("verificaTip()");
 				if(typeof(i3GEOF.identifica) === 'undefined'){
-					//javascript que ser� carregado
+					//javascript que sera carregado
 					var js = i3GEO.configura.locaplic+"/ferramentas/identifica/index.js";
 					//carrega o script
 					i3GEO.util.scriptTag(js,"i3GEOF.identifica.criaJanelaFlutuante()","i3GEOF.identifica_script");
@@ -718,9 +719,9 @@ i3GEO.mapa = {
 		/*
 		Function: verificaTipDefault
 
-		Mostra etiquetas no mapa com informa��es sobre os temas com etiquetas ativas
+		Mostra etiquetas no mapa com informacoes sobre os temas com etiquetas ativas
 
-		Essa � a fun��o padr�o definida em i3GEO.configura
+		Essa e a funcao padrao definida em i3GEO.configura
 		*/
 		verificaTipDefault: function(){
 			if(typeof(console) !== 'undefined'){console.info("i3GEO.mapa.dialogo.verificaTipDefault()");}

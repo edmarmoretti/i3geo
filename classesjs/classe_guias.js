@@ -16,7 +16,7 @@ i3Geo Interface Integrada de Ferramentas de Geoprocessamento para Internet
 Direitos Autorais Reservados (c) 2006 Minist&eacute;rio do Meio Ambiente Brasil
 Desenvolvedor: Edmar Moretti edmar.moretti@mma.gov.br
 
-Este programa &eacute; software livre; você pode redistribu&iacute;-lo
+Este programa &eacute; software livre; voc&ecirc; pode redistribu&iacute;-lo
 e/ou modific&aacute;-lo sob os termos da Licen&ccedil;a P&uacute;blica Geral
 GNU conforme publicada pela Free Software Foundation;
 
@@ -24,8 +24,8 @@ Este programa &eacute; distribu&iacute;do na expectativa de que seja &uacute;til
 por&eacute;m, SEM NENHUMA GARANTIA; nem mesmo a garantia impl&iacute;cita
 de COMERCIABILIDADE OU ADEQUAÇ&Atilde;O A UMA FINALIDADE ESPEC&Iacute;FICA.
 Consulte a Licen&ccedil;a P&uacute;blica Geral do GNU para mais detalhes.
-Você deve ter recebido uma c&oacute;pia da Licen&ccedil;a P&uacute;blica Geral do
-GNU junto com este programa; se não, escreva para a
+Voc&ecirc; deve ter recebido uma c&oacute;pia da Licen&ccedil;a P&uacute;blica Geral do
+GNU junto com este programa; se n&atilde;o, escreva para a
 Free Software Foundation, Inc., no endere&ccedil;o
 59 Temple Street, Suite 330, Boston, MA 02111-1307 USA.
 */
@@ -75,11 +75,11 @@ i3GEO.guias = {
 
 	Define os parâmetros de cada guia que ser&aacute; mostrada no mapa, como t&iacute;tulo, conte&uacute;do, etc.
 
-	Você pode modificar o nome de uma guia como no exemplo
+	Voc&ecirc; pode modificar o nome de uma guia como no exemplo
 
 	i3GEO.guias.CONFIGURA.legenda.titulo = "nome diferente";
 
-	Por padrão são definidas as guias legenda, temas, adiciona e mapas (links)
+	Por padr&atilde;o s&atilde;o definidas as guias legenda, temas, adiciona e mapas (links)
 
 	Exemplo
 
@@ -182,11 +182,11 @@ i3GEO.guias = {
 	/*
 	Propriedade: ORDEM
 
-	Ordem de inclusão das guias no mapa. Essa op&ccedil;ão &eacute; mais &uacute;til no caso do tipo sanfona, pois nesse caso,
+	Ordem de inclus&atilde;o das guias no mapa. Essa op&ccedil;&atilde;o &eacute; mais &uacute;til no caso do tipo sanfona, pois nesse caso,
 	a primeira guia &eacute; sempre a que fica ativa. Se esse parâmetro for uma string vazia, a ordem
 	utilizada ser&aacute; a ordem existente em i3GEO.guias.CONFIGURA.
 	
-	Ao ser definida, apenas as guias indicadas no array serão inclu&iacute;das
+	Ao ser definida, apenas as guias indicadas no array ser&atilde;o inclu&iacute;das
 
 	Exemplo:
 
@@ -204,7 +204,7 @@ i3GEO.guias = {
 
 	Tipo de guia
 	
-	Quando TIPO = "movel", a inicializa&ccedil;ão da guia &eacute; feita em i3GEO.inicia
+	Quando TIPO = "movel", a inicializa&ccedil;&atilde;o da guia &eacute; feita em i3GEO.inicia
 	Isso &eacute; ne cess&aacute;rio pq a guia m&oacute;vel s&oacute; pode ser criada ap&oacute;s o posicionamento do corpo do mapa
 
 	Tipo:
@@ -220,7 +220,7 @@ i3GEO.guias = {
 	/*
 	Propriedade: idguias
 
-	ID do elemento DOM, criado pelo YUI, onde serão inseridas as guias
+	ID do elemento DOM, criado pelo YUI, onde ser&atilde;o inseridas as guias
 
 	Tipo:
 	{String}
@@ -237,7 +237,7 @@ i3GEO.guias = {
 	As guias podem ser definidas no HTML do mapa, sem necessariamente estarem na vari&aacute;vel configura.<b> 
 	As guias, nesse caso, devem ter como ID "guia'n'", por exemplo id="guia6". Para cada uma dessas guias
 	deve haver um DIV com o conte&uacute;do. Esse DIV deve ter como ID "guia'n'obj", por exemplo id="guia6obj".
-	No caso de ser utilizado a guia m&oacute;vel, com i3GEO.guias.TIPO = "movel" , "guia'n" não &eacute; necess&aacute;rio, uma vez que são
+	No caso de ser utilizado a guia m&oacute;vel, com i3GEO.guias.TIPO = "movel" , "guia'n" n&atilde;o &eacute; necess&aacute;rio, uma vez que s&atilde;o
 	utilizados os &iacute;cones definidos em i3GEO.guias.CONFIGURA
 
 	Parametro:
@@ -255,8 +255,8 @@ i3GEO.guias = {
 			guias = i3GEO.util.listaChaves(CONFIGURA),
 			nguias = guias.length;
 		//
-		//no caso de TIPO === "movel", as guias não são constru&iacute;das de imediato, apenas &eacute; criado um objeto
-		//com os parâmetros necess&aacute;rios para a cria&ccedil;ão das guias
+		//no caso de TIPO === "movel", as guias n&atilde;o s&atilde;o constru&iacute;das de imediato, apenas &eacute; criado um objeto
+		//com os parâmetros necess&aacute;rios para a cria&ccedil;&atilde;o das guias
 		//
 		if(i3GEO.guias.TIPO === "movel"){
 			i3GEO.guias.IDGUIAS = "i3GEOguiaMovelConteudo";
@@ -303,7 +303,7 @@ i3GEO.guias = {
 			{guias = i3GEO.guias.ORDEM;}
 			nguias = guias.length;
 			//
-			//verifica o div que cont&eacute;m as guias caso não tenha sido passado como parâmetro
+			//verifica o div que cont&eacute;m as guias caso n&atilde;o tenha sido passado como parâmetro
 			//
 			if(arguments.length === 0){
 				for(ng=0;ng<nguias;ng++){
@@ -666,13 +666,13 @@ i3GEO.guias = {
 
 	Mostra uma determinada guia em uma janela do tipo ferramenta.
 
-	As guias são constru&iacute;das pelo construtor da ferramenta
+	As guias s&atilde;o constru&iacute;das pelo construtor da ferramenta
 
 	Parametros:
 
 	guia {String} - O elemento html cujo id for igual a guia+"obj" ter&aacute; seu estilo (display) definido como block, tornando-o vis&iacute;vel
 
-	namespace {String} - Todos os elementos html que tiverem como id o namespace, seguindo por um n&uacute;mero e "obj", terão seu estilo alterado para none, tornando-se invis&iacute;veis
+	namespace {String} - Todos os elementos html que tiverem como id o namespace, seguindo por um n&uacute;mero e "obj", ter&atilde;o seu estilo alterado para none, tornando-se invis&iacute;veis
 
 	*/
 	mostraGuiaFerramenta: function(guia,namespace){
@@ -688,7 +688,7 @@ i3GEO.guias = {
 	/*
 	Function: guiaMovel
 	
-	Controla as guias do tipo "movel", que apresenta uma janela retr&aacute;til onde as op&ccedil;&otilde;es são mostradas
+	Controla as guias do tipo "movel", que apresenta uma janela retr&aacute;til onde as op&ccedil;&otilde;es s&atilde;o mostradas
 	*/
 	guiaMovel: {
 		/*
@@ -722,7 +722,7 @@ i3GEO.guias = {
 		/*
 		Variavel: left
 		
-		Valor de posicionamento à esquerda, calculado na inicializa&ccedil;ão
+		Valor de posicionamento à esquerda, calculado na inicializa&ccedil;&atilde;o
 		*/
 		left: 0,
 		/*

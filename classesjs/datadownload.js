@@ -24,7 +24,7 @@ i3Geo Interface Integrada de Ferramentas de Geoprocessamento para Internet
 Direitos Autorais Reservados (c) 2006 Minist&eacute;rio do Meio Ambiente Brasil
 Desenvolvedor: Edmar Moretti edmar.moretti@mma.gov.br
 
-Este programa &eacute; software livre; você pode redistribu&iacute;-lo
+Este programa &eacute; software livre; voc&ecirc; pode redistribu&iacute;-lo
 e/ou modific&aacute;-lo sob os termos da Licen&ccedil;a P&uacute;blica Geral
 GNU conforme publicada pela Free Software Foundation;
 
@@ -32,8 +32,8 @@ Este programa &eacute; distribu&iacute;do na expectativa de que seja &uacute;til
 por&eacute;m, SEM NENHUMA GARANTIA; nem mesmo a garantia impl&iacute;cita
 de COMERCIABILIDADE OU ADEQUAÇ&Atilde;O A UMA FINALIDADE ESPEC&Iacute;FICA.
 Consulte a Licen&ccedil;a P&uacute;blica Geral do GNU para mais detalhes.
-Você deve ter recebido uma c&oacute;pia da Licen&ccedil;a P&uacute;blica Geral do
-GNU junto com este programa; se não, escreva para a
+Voc&ecirc; deve ter recebido uma c&oacute;pia da Licen&ccedil;a P&uacute;blica Geral do
+GNU junto com este programa; se n&atilde;o, escreva para a
 Free Software Foundation, Inc., no endere&ccedil;o
 59 Temple Street, Suite 330, Boston, MA 02111-1307 USA.
 
@@ -44,8 +44,8 @@ Veja:
 /*
 Propriedade: g_locaplic
 
-Indica a localiza&ccedil;ão do i3geo. Por default, procura no diret&oacute;rio onde foi executada a plica&ccedil;ão datadownload.
-No caso do datadownload.htm ser disparado de outro local, &eacute; necess&aacute;rio definir essa vari&aacute;vel antes de chamar a fun&ccedil;ão DDinicia
+Indica a localiza&ccedil;&atilde;o do i3geo. Por default, procura no diret&oacute;rio onde foi executada a plica&ccedil;&atilde;o datadownload.
+No caso do datadownload.htm ser disparado de outro local, &eacute; necess&aacute;rio definir essa vari&aacute;vel antes de chamar a fun&ccedil;&atilde;o DDinicia
 */
 var loc = window.location.href;
 g_locaplic = loc.split("/datadownload.htm");
@@ -67,7 +67,7 @@ catch(e){}
 //
 g_i3geo = "";
 //
-//fun&ccedil;ão que ser&aacute; utilizada quando o usu&aacute;rio clicar na &aacute;rvore
+//fun&ccedil;&atilde;o que ser&aacute; utilizada quando o usu&aacute;rio clicar na &aacute;rvore
 //
 g_arvoreClicks = "";
 /*
@@ -77,7 +77,7 @@ Tipo de acesso aos dados.
 
 g_tipo &eacute; uma vari&aacute;vel que pode ser definida antes de iniciar a funcao DDinicia
 g_tipo = "menutemas", indica que a lista de temas para download ser&aacute; buscada no xml com a lista de temas do I3Geo
-se g_tipo for "dir", a aplica&ccedil;ão entender&aacute; que se trata de uma busca em diret&oacute;rios
+se g_tipo for "dir", a aplica&ccedil;&atilde;o entender&aacute; que se trata de uma busca em diret&oacute;rios
 nesse caso, g_dirbase deve conter a raiz da busca no servidor, por exemplo:
 g_dirbase = "/opt/www/html/geodados"
 g_dirarquivos indica o diret&oacute;rio inicial para listagem dos arquivos
@@ -97,10 +97,10 @@ Tipo:
 
 Valores:
 
-dir - indica que os dados serão buscados em diret&oacute;rios no servidor.
+dir - indica que os dados ser&atilde;o buscados em diret&oacute;rios no servidor.
 
-menutemas - indica que os dados serão buscados no arquivo menutemas/menutemas.xml ou 
-no sistema de administra&ccedil;ão do i3geo
+menutemas - indica que os dados ser&atilde;o buscados no arquivo menutemas/menutemas.xml ou 
+no sistema de administra&ccedil;&atilde;o do i3geo
 */
 g_tipo = "menutemas";
 /*
@@ -118,7 +118,7 @@ g_dirbaseDown = "";
 /*
 Propriedade: g_dirbase
 
-Endere&ccedil;o no servidor onde estão os arquivos ou diret&oacute;rios que poderão ser acessados
+Endere&ccedil;o no servidor onde est&atilde;o os arquivos ou diret&oacute;rios que poder&atilde;o ser acessados
 
 Tipo:
 {string}
@@ -128,7 +128,7 @@ g_dirbase = "";
 /*
 Propriedade: g_dirarquivos
 
-Endere&ccedil;o do diret&oacute;rio que ser&aacute; acessado na inicializa&ccedil;ão da aplica&ccedil;ão
+Endere&ccedil;o do diret&oacute;rio que ser&aacute; acessado na inicializa&ccedil;&atilde;o da aplica&ccedil;&atilde;o
 
 Tipo:
 {string}
@@ -175,9 +175,9 @@ function DDinicia()
 /*
 Function: processaDiretorios
 
-Cahamado pela fun&ccedil;ão DDinicia. Recebe os dados da fun&ccedil;ão Ajax com a lista de diretorios.
+Cahamado pela fun&ccedil;&atilde;o DDinicia. Recebe os dados da fun&ccedil;&atilde;o Ajax com a lista de diretorios.
 
-Monta a &aacute;rvore para navega&ccedil;ão pelos diret&oacute;rios.
+Monta a &aacute;rvore para navega&ccedil;&atilde;o pelos diret&oacute;rios.
 
 Parametros:
 
@@ -208,7 +208,7 @@ Function: expandeDiretorio
 
 Expande um diret&oacute;rio quando o usu&aacute;rio clica no n&oacute; da &aacute;rvore de diret&oacute;rios.
 
-Definido na fun&ccedil;ão processaDiretorios. Ap&oacute;s serem mostrados os sub-diret&oacute;rios &eacute; disparada a fun&ccedil;ão listaArquivos para mostrar a lista de arquivos existentes no diret&oacute;rio selecionado.
+Definido na fun&ccedil;&atilde;o processaDiretorios. Ap&oacute;s serem mostrados os sub-diret&oacute;rios &eacute; disparada a fun&ccedil;&atilde;o listaArquivos para mostrar a lista de arquivos existentes no diret&oacute;rio selecionado.
 
 Parametros:
 
@@ -324,11 +324,11 @@ function mostraDownload(retorno)
 		var arqs = retorno.arquivos.split(",");
 		var n = arqs.length;
 		if(retorno == "erro")
-		{ins = "<p style=color:red >Ocorreu um erro. O tema não foi encontrado. Pode ser que o c&oacute;digo do tema não existe na defini&ccedil;ão do mapfile. Informe o administrador do sistema.<br>";}
+		{ins = "<p style=color:red >Ocorreu um erro. O tema n&atilde;o foi encontrado. Pode ser que o c&oacute;digo do tema n&atilde;o existe na defini&ccedil;&atilde;o do mapfile. Informe o administrador do sistema.<br>";}
 		else
 		{
 			ins = "<b>Clique nos links para pegar os arquivos.</b><br><br>";
-			ins += "<a href='"+window.location.protocol+"//"+window.location.host+"/"+retorno.mapfileurl+"' target=blank >Arquivo de configura&ccedil;ão Mapfile</a><br>";
+			ins += "<a href='"+window.location.protocol+"//"+window.location.host+"/"+retorno.mapfileurl+"' target=blank >Arquivo de configura&ccedil;&atilde;o Mapfile</a><br>";
 			ins += "<a href='"+g_locaplic+"/classesphp/mapa_controle.php?funcao=TEMA2SLD&tema="+retorno.tema+"&map_file="+retorno.mapfile+"' target=blank >Arquivo de legenda SLD</a><br><br>";
 
 			for (var arq=0;arq<n;arq++)

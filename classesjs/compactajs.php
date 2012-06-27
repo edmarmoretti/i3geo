@@ -4,7 +4,7 @@ Title: Compactador de javascript
 
 Compacta os arquivos js e css utilizados pelo I3Geo.
 
-Deve ser executado sempre que forem feitas alterações nos arquivos javascript existentes em classesjs ou nos arquivos de estilo existentes em css.
+Deve ser executado sempre que forem feitas altera&ccedil;&otilde;es nos arquivos javascript existentes em classesjs ou nos arquivos de estilo existentes em css.
 
 Licenca:
 
@@ -12,20 +12,20 @@ GPL2
 
 i3Geo Interface Integrada de Ferramentas de Geoprocessamento para Internet
 
-Direitos Autorais Reservados (c) 2006 Ministério do Meio Ambiente Brasil
+Direitos Autorais Reservados (c) 2006 Minist&eacute;rio do Meio Ambiente Brasil
 Desenvolvedor: Edmar Moretti edmar.moretti@mma.gov.br
 
-Este programa é software livre; você pode redistribuí-lo
-e/ou modificá-lo sob os termos da Licença Pública Geral
+Este programa &eacute; software livre; voc&ecirc; pode redistribu&iacute;-lo
+e/ou modific&aacute;-lo sob os termos da Licen&ccedil;a P&uacute;blica Geral
 GNU conforme publicada pela Free Software Foundation;
 
-Este programa é distribuído na expectativa de que seja útil,
-porém, SEM NENHUMA GARANTIA; nem mesmo a garantia implícita
-de COMERCIABILIDADE OU ADEQUAÇÃO A UMA FINALIDADE ESPECÍFICA.
-Consulte a Licença Pública Geral do GNU para mais detalhes.
-Você deve ter recebido uma cópia da Licença Pública Geral do
-GNU junto com este programa; se não, escreva para a
-Free Software Foundation, Inc., no endereço
+Este programa &eacute; distribu&iacute;do na expectativa de que seja &uacute;til,
+por&eacute;m, SEM NENHUMA GARANTIA; nem mesmo a garantia impl&iacute;cita
+de COMERCIABILIDADE OU ADEQUAÇ&Atilde;O A UMA FINALIDADE ESPEC&Iacute;FICA.
+Consulte a Licen&ccedil;a P&uacute;blica Geral do GNU para mais detalhes.
+Voc&ecirc; deve ter recebido uma c&oacute;pia da Licen&ccedil;a P&uacute;blica Geral do
+GNU junto com este programa; se n&atilde;o, escreva para a
+Free Software Foundation, Inc., no endere&ccedil;o
 59 Temple Street, Suite 330, Boston, MA 02111-1307 USA.
 
 Arquivo:
@@ -39,22 +39,22 @@ i3geo/classesjs/compactajs.php
 $f = @fopen("../classesjs/teste.txt",w);
 @fclose($f);
 if (!file_exists("../classesjs/teste.txt")){
-	echo "<span style='color:red'>Não foi possível escrever em classesjs";exit;
+	echo "<span style='color:red'>N&atilde;o foi possível escrever em classesjs";exit;
 }
 $f = @fopen("../css/teste.txt",w);
 @fclose($f);
 if (!file_exists("../css/teste.txt")){
-	echo "<br><span style='color:red'>Não foi possível escrever em css";exit;
+	echo "<br><span style='color:red'>N&atilde;o foi possível escrever em css";exit;
 }
 $f = @fopen("../pacotes/teste.txt",w);
 @fclose($f);
 if (!file_exists("../pacotes/teste.txt")){
-	echo "<br><span style='color:red'>Não foi possível escrever em pacotes";exit;
+	echo "<br><span style='color:red'>N&atilde;o foi possível escrever em pacotes";exit;
 }
 $f = @fopen("../mashups/teste.txt",w);
 @fclose($f);
 if (!file_exists("../mashups/teste.txt")){
-	echo "<br><span style='color:red'>Não foi possível escrever em mashups";exit;
+	echo "<br><span style='color:red'>N&atilde;o foi possível escrever em mashups";exit;
 }
 echo "<pre>";
 packer("../pacotes/richdraw/richdraw.js","../pacotes/richdraw/richdraw_compacto.js","Normal");
@@ -118,7 +118,7 @@ packer("../pacotes/balloon-tooltips/htdocs/js/balloon.js","../pacotes/balloon-to
 //packer("../pacotes/eudock/js/euDock.Image.js","../pacotes/eudock/js/euDock.Image_compacto.js","Normal");
 
 //
-//gera um único js para a inicialização do I3Geo
+//gera um único js para a inicializaç&atilde;o do I3Geo
 //
 $jsfiles = array(
 "../pacotes/mobileesp/mdetect_compacto.js",

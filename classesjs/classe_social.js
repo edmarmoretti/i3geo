@@ -15,7 +15,7 @@ i3Geo Interface Integrada de Ferramentas de Geoprocessamento para Internet
 Direitos Autorais Reservados (c) 2006 Minist&eacute;rio do Meio Ambiente Brasil
 Desenvolvedor: Edmar Moretti edmar.moretti@mma.gov.br
 
-Este programa &eacute; software livre; você pode redistribu&iacute;-lo
+Este programa &eacute; software livre; voc&ecirc; pode redistribu&iacute;-lo
 e/ou modific&aacute;-lo sob os termos da Licen&ccedil;a P&uacute;blica Geral
 GNU conforme publicada pela Free Software Foundation;
 
@@ -23,8 +23,8 @@ Este programa &eacute; distribu&iacute;do na expectativa de que seja &uacute;til
 por&eacute;m, SEM NENHUMA GARANTIA; nem mesmo a garantia impl&iacute;cita
 de COMERCIABILIDADE OU ADEQUAÇ&Atilde;O A UMA FINALIDADE ESPEC&Iacute;FICA.
 Consulte a Licen&ccedil;a P&uacute;blica Geral do GNU para mais detalhes.
-Você deve ter recebido uma c&oacute;pia da Licen&ccedil;a P&uacute;blica Geral do
-GNU junto com este programa; se não, escreva para a
+Voc&ecirc; deve ter recebido uma c&oacute;pia da Licen&ccedil;a P&uacute;blica Geral do
+GNU junto com este programa; se n&atilde;o, escreva para a
 Free Software Foundation, Inc., no endere&ccedil;o
 59 Temple Street, Suite 330, Boston, MA 02111-1307 USA.
 */
@@ -66,10 +66,10 @@ i3GEO.social = {
 
 	urlpt {string} - url para o Twitter
 
-	tipo {string} - tipo de botão comtotal|semtotal
+	tipo {string} - tipo de bot&atilde;o comtotal|semtotal
 
 
-	locaplic {string} - url onde est&aacute; o i3Geo. Se não for especificada, ser&aacute; obtida de i3GEO.configura.locaplic
+	locaplic {string} - url onde est&aacute; o i3Geo. Se n&atilde;o for especificada, ser&aacute; obtida de i3GEO.configura.locaplic
 
 	Return:
 
@@ -113,7 +113,7 @@ i3GEO.social = {
 
 	link {string} - link que ser&aacute; marcado
 
-	locaplic {string} - url onde est&aacute; o i3Geo. Se não for especificada, ser&aacute; obtida de i3GEO.configura.locaplic
+	locaplic {string} - url onde est&aacute; o i3Geo. Se n&atilde;o for especificada, ser&aacute; obtida de i3GEO.configura.locaplic
 
 	Return:
 

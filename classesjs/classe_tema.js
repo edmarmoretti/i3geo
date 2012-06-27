@@ -4,24 +4,26 @@ Title: Temas
 
 File: i3geo/classesjs/classe_tema.js
 
-About: Licen�a
+Licenca:
+
+GPL2
 
 i3Geo Interface Integrada de Ferramentas de Geoprocessamento para Internet
 
-Direitos Autorais Reservados (c) 2006 Minist�rio do Meio Ambiente Brasil
+Direitos Autorais Reservados (c) 2006 Minist&eacute;rio do Meio Ambiente Brasil
 Desenvolvedor: Edmar Moretti edmar.moretti@mma.gov.br
 
-Este programa � software livre; voc� pode redistribu�-lo
-e/ou modific�-lo sob os termos da Licen�a P�blica Geral
+Este programa &eacute; software livre; voc&ecirc; pode redistribu&iacute;-lo
+e/ou modific&aacute;-lo sob os termos da Licen&ccedil;a P&uacute;blica Geral
 GNU conforme publicada pela Free Software Foundation;
 
-Este programa � distribu�do na expectativa de que seja �til,
-por�m, SEM NENHUMA GARANTIA; nem mesmo a garantia impl�cita
-de COMERCIABILIDADE OU ADEQUA��O A UMA FINALIDADE ESPEC�FICA.
-Consulte a Licen�a P�blica Geral do GNU para mais detalhes.
-Voc� deve ter recebido uma c�pia da Licen�a P�blica Geral do
-GNU junto com este programa; se n�o, escreva para a
-Free Software Foundation, Inc., no endere�o
+Este programa &eacute; distribu&iacute;do na expectativa de que seja &uacute;til,
+por&eacute;m, SEM NENHUMA GARANTIA; nem mesmo a garantia impl&iacute;cita
+de COMERCIABILIDADE OU ADEQUAÇ&Atilde;O A UMA FINALIDADE ESPEC&Iacute;FICA.
+Consulte a Licen&ccedil;a P&uacute;blica Geral do GNU para mais detalhes.
+Voc&ecirc; deve ter recebido uma c&oacute;pia da Licen&ccedil;a P&uacute;blica Geral do
+GNU junto com este programa; se n&atilde;o, escreva para a
+Free Software Foundation, Inc., no endere&ccedil;o
 59 Temple Street, Suite 330, Boston, MA 02111-1307 USA.
 */
 if(typeof(i3GEO) === 'undefined'){
@@ -30,15 +32,15 @@ if(typeof(i3GEO) === 'undefined'){
 /*
 Classe: i3GEO.tema
 
-Fun��es de di�logo e processamento de propriedades de um tema existente no mapa
+Funcoes de dialogo e processamento de propriedades de um tema existente no mapa
 
-Em i3GEO.tema.dialogo est�o as fun��es de abertura dos di�logos para altera��o das propriedades do tema,
+Em i3GEO.tema.dialogo estao as funcoes de abertura dos dialogos para alteracao das propriedades do tema,
 */
 i3GEO.tema = {
 	/*
 	Variable: TEMPORIZADORESID
 	
-	Objeto que cont�m os identificadores dos temporizadores (setInterval) estabelecidos para cada camada
+	Objeto que contem os identificadores dos temporizadores (setInterval) estabelecidos para cada camada
 	
 	Type:
 	{objeto} - {idtema:{idtemporizador:,tempo:}}
@@ -51,7 +53,7 @@ i3GEO.tema = {
 
 	Parametros:
 
-	tema - c�digo do tema
+	tema - codigo do tema
 	*/
 	exclui: function(tema){
 		if(typeof(console) !== 'undefined'){console.info("i3GEO.tema.exclui()");}
@@ -78,7 +80,7 @@ i3GEO.tema = {
 
 	Parametros:
 
-	tema - c�digo do tema
+	tema - codigo do tema
 	*/
 	fonte: function(tema){
 		if(typeof(console) !== 'undefined'){console.info("i3GEO.tema.fonte()");}
@@ -92,16 +94,16 @@ i3GEO.tema = {
 
 	Parametros:
 
-	tema - c�digo do tema
+	tema - codigo do tema
 	*/
 	sobe: function(tema){
 		if(typeof(console) !== 'undefined'){console.info("i3GEO.tema.sobe()");}
 		i3GEO.mapa.ativaTema(tema);
 		var temp = function(retorno){
 			//
-			//atualiza apenas remonta a �rvore
+			//atualiza apenas remonta a arvore
 			//no caso de interfaces como openlayers
-			//� necess�rio mover o DIV tbm
+			//e necessario mover o DIV tbm
 			//
 			i3GEO.atualiza(retorno);
 			if(i3GEO.Interface.ATUAL === "openlayers")
@@ -116,16 +118,16 @@ i3GEO.tema = {
 
 	Parametros:
 
-	tema - c�digo do tema
+	tema - codigo do tema
 	*/
 	desce: function(tema){
 		if(typeof(console) !== 'undefined'){console.info("i3GEO.tema.desce()");}
 		i3GEO.mapa.ativaTema(tema);
 		var temp = function(retorno){
 			//
-			//atualiza apenas remonta a �rvore
+			//atualiza apenas remonta a arvore
 			//no caso de interfaces como openlayers
-			//� necess�rio mover o DIV tbm
+			//e necessario mover o DIV tbm
 			//
 			i3GEO.atualiza(retorno);
 			if(i3GEO.Interface.ATUAL === "openlayers")
@@ -140,7 +142,7 @@ i3GEO.tema = {
 
 	Parametros:
 
-	tema - c�digo do tema
+	tema - codigo do tema
 	*/
 	zoom: function(tema){
 		i3GEO.mapa.ativaTema(tema);
@@ -154,7 +156,7 @@ i3GEO.tema = {
 
 	Parametros:
 
-	tema - c�digo do tema
+	tema - codigo do tema
 	*/
 	zoomsel: function(tema){
 		if(typeof(console) !== 'undefined'){console.info("i3GEO.tema.zoomsel()");}
@@ -187,7 +189,7 @@ i3GEO.tema = {
 
 	Parametros:
 
-	idtema - c�digo do tema
+	idtema - codigo do tema
 	*/
 	mudatransp: function(idtema){
 		if(typeof(console) !== 'undefined'){console.info("i3GEO.tema.mudatransp()");}
@@ -198,14 +200,14 @@ i3GEO.tema = {
 				i3GEO.atualiza(retorno);
 				i3GEO.Interface.atualizaTema(retorno,idtema);
 			};
-		//o campo input com o valor possui o prefixo 'tr' seguido pelo c�digo do tema
+		//o campo input com o valor possui o prefixo 'tr' seguido pelo codigo do tema
 		if ($i("tr"+idtema))
 		{valor = $i("tr"+idtema).value;}
 		if (valor !== ""){
 			i3GEO.php.mudatransp(temp,idtema,valor);
 		}
 		else
-		{alert("Valor n�o definido.");}
+		{alert($trad("x16");}
 	},
 	/*
 	Function: invertestatuslegenda
@@ -214,11 +216,11 @@ i3GEO.tema = {
 
 	Parametros:
 
-	idtema - c�digo do tema
+	idtema - codigo do tema
 	*/
 	invertestatuslegenda: function(idtema){
 		if(typeof(console) !== 'undefined'){console.info("i3GEO.tema.invertestatuslegenda()");}
-		alert("Essa op��o afeta apenas a impress�o do mapa");
+		alert($trad("x17"));
 		i3GEO.mapa.ativaTema(idtema);
 		g_operacao = "transparencia";
 		var temp = function(retorno){
@@ -234,7 +236,7 @@ i3GEO.tema = {
 
 	Parametros:
 
-	idtema - c�digo do tema
+	idtema - codigo do tema
 
 	idclasse - id da classe
 
@@ -257,7 +259,7 @@ i3GEO.tema = {
 
 	Parametros:
 
-	idtema - c�digo do tema
+	idtema - codigo do tema
 	*/
 	mudanome: function(idtema){
 		if(typeof(console) !== 'undefined'){console.info("i3GEO.tema.mudanome()");}
@@ -270,16 +272,16 @@ i3GEO.tema = {
 			i3GEO.php.mudanome(i3GEO.atualiza,idtema,valor);
 		}
 		else
-		{alert("Nome n�o definido");}
+		{alert($trad("x18"));}
 	},
 	/*
 	Function: mostralegendajanela
 
-	Mostra a legenda de um tema em uma janela flutuante espec�fica
+	Mostra a legenda de um tema em uma janela flutuante especifica
 
-	Na configura��o padr�o, essa fun��o � disparada quando o usu�rio estaciona o ouse sobre o nome de um tema na �rvore de camadas
+	Na configuracao padrao, essa funcao e disparada quando o usuario estaciona o ouse sobre o nome de um tema na arvore de camadas
 
-	O uso normal seria nas op��es onmouseover e onmouseout
+	O uso normal seria nas opcoes onmouseover e onmouseout
 
 	Exemplo:
 
@@ -291,11 +293,11 @@ i3GEO.tema = {
 
 	Parametros:
 
-	idtema {String} - c�digo do tema
+	idtema {String} - codigo do tema
 
-	nome {String} - nome completo do tema que ser� mostrado no cabe�alho da janela
+	nome {String} - nome completo do tema que sera mostrado no cabecalho da janela
 
-	tipoOperacao {String} {ativatimer|desativatimer|abrejanela} - tipo de opera��o que ser� executada
+	tipoOperacao {String} {ativatimer|desativatimer|abrejanela} - tipo de operacao que sera executada
 	*/
 	mostralegendajanela: function(idtema,nome,tipoOperacao){
 		if(typeof(console) !== 'undefined'){console.info("i3GEO.tema.mostralegendajanela()");}
@@ -329,7 +331,7 @@ i3GEO.tema = {
 
 	Aplica um temporizador para que a camada seja redesenhada em determinado intervalo de tempo.
 
-	O campo com o valor de tempo (em segundos) � composto por "temporizador"+idtema
+	O campo com o valor de tempo (em segundos) e composto por "temporizador"+idtema
 
 	Parametros:
 
@@ -352,7 +354,7 @@ i3GEO.tema = {
 	/*
 	Classe: i3GEO.tema.dialogo
 
-	Abre as telas de di�logo das op��es de manipula��o de um tema
+	Abre as telas de dialogo das opcoes de manipulacao de um tema
 
 	Return:
 
@@ -366,7 +368,7 @@ i3GEO.tema = {
 
 		Parametros:
 
-		tema - c�digo do tema escolhido
+		tema - codigo do tema escolhido
 		*/
 		tme: function(tema){
 			i3GEO.mapa.ativaTema(tema);
@@ -375,35 +377,35 @@ i3GEO.tema = {
 		/*
 		Function: mostraWms
 
-		Mostra a url que d� acesso ao WMS de um tema
+		Mostra a url que da acesso ao WMS de um tema
 
 		Parametros:
 
-		tema - c�digo do tema escolhido
+		tema - codigo do tema escolhido
 		*/
 		mostraWms: function(tema){
-			i3GEO.janela.mensagemSimples(i3GEO.configura.locaplic+"/ogc.php?tema="+tema,"Endere�o do WMS");
+			i3GEO.janela.mensagemSimples(i3GEO.configura.locaplic+"/ogc.php?tema="+tema,"WMS url");
 		},
 		/*
 		Function: comentario
 
-		Abre a janela de di�logo para o usu�rio ver e inserir comentarios em um tema
+		Abre a janela de dialogo para o usuario ver e inserir comentarios em um tema
 
 		Parametros:
 
-		tema - c�digo do tema escolhido
+		tema - codigo do tema escolhido
 		*/
 		comentario: function(tema){
-			i3GEO.janela.cria("530px","330px",i3GEO.configura.locaplic+"/ferramentas/comentarios/index.php?tema="+tema+"&g_sid="+i3GEO.configura.sid+"&locaplic="+i3GEO.configura.locaplic,"","","<img src='"+i3GEO.configura.locaplic+"/imagens/player_volta.png' style=cursor:pointer onclick='javascript:history.go(-1)'><span style=position:relative;top:-2px; > Coment�rios de "+tema+" </span><a class=ajuda_usuario target=_blank href='"+i3GEO.configura.locaplic+"/ajuda_usuario.php?idcategoria=7&idajuda=68' >&nbsp;&nbsp;&nbsp;</a>","comentario"+Math.random());
+			i3GEO.janela.cria("530px","330px",i3GEO.configura.locaplic+"/ferramentas/comentarios/index.php?tema="+tema+"&g_sid="+i3GEO.configura.sid+"&locaplic="+i3GEO.configura.locaplic,"","","<img src='"+i3GEO.configura.locaplic+"/imagens/player_volta.png' style=cursor:pointer onclick='javascript:history.go(-1)'><span style=position:relative;top:-2px; > "+$trad("x19")+" "+tema+" </span><a class=ajuda_usuario target=_blank href='"+i3GEO.configura.locaplic+"/ajuda_usuario.php?idcategoria=7&idajuda=68' >&nbsp;&nbsp;&nbsp;</a>","comentario"+Math.random());
 		},
 		/*
 		Function: cortina
 
-		Abre a janela de di�logo da ferramenta cortina
+		Abre a janela de dialogo da ferramenta cortina
 
 		Parametros:
 
-		tema - c�digo do tema escolhido
+		tema - codigo do tema escolhido
 
 		*/
 		cortina: function(tema){
@@ -413,11 +415,11 @@ i3GEO.tema = {
 		/*
 		Function: abreKml
 
-		Abre a janela de di�logo da ferramenta convertekml
+		Abre a janela de dialogo da ferramenta convertekml
 
 		Parametros:
 
-		tema - c�digo do tema escolhido
+		tema - codigo do tema escolhido
 
 		tipo - tipo de kml - kml|kmz , o tipo kmz permite acessar os dados via kml (por meio de um WMS) e via kml vetorial.
 		*/
@@ -435,11 +437,11 @@ i3GEO.tema = {
 		/*
 		Function: salvaMapfile
 
-		Abre a janela de di�logo da ferramenta salvamapfile
+		Abre a janela de dialogo da ferramenta salvamapfile
 
 		Parametros:
 
-		idtema - c�digo do tema
+		idtema - codigo do tema
 		*/
 		salvaMapfile: function(idtema){
 			i3GEO.mapa.ativaTema(idtema);
@@ -448,11 +450,11 @@ i3GEO.tema = {
 		/*
 		Function: graficotema
 
-		Abre a janela de di�logo da ferramenta graficotema
+		Abre a janela de dialogo da ferramenta graficotema
 
 		Parametros:
 
-		idtema - c�digo do tema
+		idtema - codigo do tema
 		*/
 		graficotema: function(idtema){
 			i3GEO.mapa.ativaTema(idtema);
@@ -461,11 +463,11 @@ i3GEO.tema = {
 		/*
 		Function: toponimia
 
-		Abre a janela de di�logo da ferramenta toponimia
+		Abre a janela de dialogo da ferramenta toponimia
 
 		Parametros:
 
-		idtema - c�digo do tema
+		idtema - codigo do tema
 		*/
 		toponimia: function(idtema){
 			i3GEO.mapa.ativaTema(idtema);
@@ -474,11 +476,11 @@ i3GEO.tema = {
 		/*
 		Function: filtro
 
-		Abre a janela de di�logo da ferramenta filtro
+		Abre a janela de dialogo da ferramenta filtro
 
 		Parametros:
 
-		idtema - c�digo do tema
+		idtema - codigo do tema
 		*/
 		filtro: function(idtema){
 			i3GEO.mapa.ativaTema(idtema);
@@ -487,7 +489,7 @@ i3GEO.tema = {
 		/*
 		Function: procuraratrib
 
-		Abre a janela de di�logo da ferramenta busca
+		Abre a janela de dialogo da ferramenta busca
 
 		Parametros:
 
@@ -500,7 +502,7 @@ i3GEO.tema = {
 		/*
 		Function: tabela
 
-		Abre a janela de di�logo da ferramenta tabela
+		Abre a janela de dialogo da ferramenta tabela
 
 		Parametros:
 
@@ -513,7 +515,7 @@ i3GEO.tema = {
 		/*
 		Function: etiquetas
 
-		Abre a janela de di�logo da ferramenta etiqueta
+		Abre a janela de dialogo da ferramenta etiqueta
 
 		Parametros:
 
@@ -526,7 +528,7 @@ i3GEO.tema = {
 		/*
 		Function: editaLegenda
 
-		Abre a janela de di�logo da ferramenta legenda
+		Abre a janela de dialogo da ferramenta legenda
 
 		Parametros:
 
@@ -539,7 +541,7 @@ i3GEO.tema = {
 		/*
 		Function: download
 
-		Abre a janela de di�logo da ferramenta download
+		Abre a janela de dialogo da ferramenta download
 
 		Parametros:
 
@@ -552,9 +554,9 @@ i3GEO.tema = {
 		/*
 		Function: sld
 
-		Converte a legenda do tema para o formato SLD (utilizado em requisi��es de Web Services OGC)
+		Converte a legenda do tema para o formato SLD (utilizado em requisicoes de Web Services OGC)
 
-		O SLD � mostrado em uma janela sobre o mapa
+		O SLD e mostrado em uma janela sobre o mapa
 
 		Parametros:
 
@@ -580,7 +582,7 @@ i3GEO.tema = {
 		/*
 		Function: editorsql
 
-		Abre a janela de di�logo da ferramenta editorsql
+		Abre a janela de dialogo da ferramenta editorsql
 
 		Parametros:
 

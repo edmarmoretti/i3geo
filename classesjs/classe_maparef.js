@@ -1,7 +1,7 @@
 /*jslint plusplus:false,white:false,undef: false, rhino: true, onevar: true, evil: true */
 
 /*
-Title: Mapa de referência
+Title: Mapa de refer&ecirc;ncia
 
 Arquivo:
 
@@ -16,7 +16,7 @@ i3Geo Interface Integrada de Ferramentas de Geoprocessamento para Internet
 Direitos Autorais Reservados (c) 2006 Minist&eacute;rio do Meio Ambiente Brasil
 Desenvolvedor: Edmar Moretti edmar.moretti@mma.gov.br
 
-Este programa &eacute; software livre; você pode redistribu&iacute;-lo
+Este programa &eacute; software livre; voc&ecirc; pode redistribu&iacute;-lo
 e/ou modific&aacute;-lo sob os termos da Licen&ccedil;a P&uacute;blica Geral
 GNU conforme publicada pela Free Software Foundation;
 
@@ -24,8 +24,8 @@ Este programa &eacute; distribu&iacute;do na expectativa de que seja &uacute;til
 por&eacute;m, SEM NENHUMA GARANTIA; nem mesmo a garantia impl&iacute;cita
 de COMERCIABILIDADE OU ADEQUAÇ&Atilde;O A UMA FINALIDADE ESPEC&Iacute;FICA.
 Consulte a Licen&ccedil;a P&uacute;blica Geral do GNU para mais detalhes.
-Você deve ter recebido uma c&oacute;pia da Licen&ccedil;a P&uacute;blica Geral do
-GNU junto com este programa; se não, escreva para a
+Voc&ecirc; deve ter recebido uma c&oacute;pia da Licen&ccedil;a P&uacute;blica Geral do
+GNU junto com este programa; se n&atilde;o, escreva para a
 Free Software Foundation, Inc., no endere&ccedil;o
 59 Temple Street, Suite 330, Boston, MA 02111-1307 USA.
 */
@@ -35,7 +35,7 @@ if(typeof(i3GEO) === 'undefined'){
 /*
 Classe: i3GEO.maparef
 
-Cria e processa o mapa de referência
+Cria e processa o mapa de refer&ecirc;ncia
 
 Exemplo:
 
@@ -45,7 +45,7 @@ i3GEO.maparef = {
 	/*
 	Propriedade: fatorZoomDinamico
 
-	Define o fator de zoom inicial do mapa de referência quando o modo dinâmico for ativado
+	Define o fator de zoom inicial do mapa de refer&ecirc;ncia quando o modo dinâmico for ativado
 
 	Tipo:
 	{numeric}
@@ -57,7 +57,7 @@ i3GEO.maparef = {
 	/*
 	Propriedade: SELETORTIPO
 
-	Inclui ou não o seletor de tipo de mapa de referência
+	Inclui ou n&atilde;o o seletor de tipo de mapa de refer&ecirc;ncia
 
 	Tipo:
 	{Boolean}
@@ -69,7 +69,7 @@ i3GEO.maparef = {
 	/*
 	Propriedade: PERMITEFECHAR
 
-	Mostra o botão para fechar a janela ou não.
+	Mostra o bot&atilde;o para fechar a janela ou n&atilde;o.
 
 	Tipo:
 	{boolean}
@@ -81,7 +81,7 @@ i3GEO.maparef = {
 	/*
 	Propriedade: PERMITEDESLOCAR
 
-	Permite deslocar janela ou não.
+	Permite deslocar janela ou n&atilde;o.
 
 	Tipo:
 	{boolean}
@@ -90,9 +90,9 @@ i3GEO.maparef = {
 	/*
 	Propriedade: TRANSICAOSUAVE
 
-	Altera a transparência quando o mouse sobrep&otilde;e ao mapa de referência e quando sai
+	Altera a transpar&ecirc;ncia quando o mouse sobrep&otilde;e ao mapa de refer&ecirc;ncia e quando sai
 
-	Essa op&ccedil;ão como true não funciona bem no IE
+	Essa op&ccedil;&atilde;o como true n&atilde;o funciona bem no IE
 
 	Tipo:
 	{boolean}
@@ -104,7 +104,7 @@ i3GEO.maparef = {
 	/*
 	Propriedade: OPACIDADE
 
-	Valor da transparência m&iacute;nima utilizada quando TRANSICAOSUAVE for igual a true.
+	Valor da transpar&ecirc;ncia m&iacute;nima utilizada quando TRANSICAOSUAVE for igual a true.
 
 	Varia de 0 a 100
 
@@ -118,7 +118,7 @@ i3GEO.maparef = {
 	/*
 	Propriedade: TOP
 
-	Posi&ccedil;ão da janela em rela&ccedil;ão ao topo do mapa
+	Posi&ccedil;&atilde;o da janela em rela&ccedil;&atilde;o ao topo do mapa
 
 	Tipo:
 	{Numeric}
@@ -130,7 +130,7 @@ i3GEO.maparef = {
 	/*
 	Propriedade: RIGHT
 
-	Posi&ccedil;ão da janela em rela&ccedil;ão ao lado direito do mapa
+	Posi&ccedil;&atilde;o da janela em rela&ccedil;&atilde;o ao lado direito do mapa
 
 	{Numeric}
 
@@ -141,7 +141,7 @@ i3GEO.maparef = {
 	/*
 	Function: inicia
 
-	Inicializa o mapa de referência
+	Inicializa o mapa de refer&ecirc;ncia
 	*/
 	inicia: function(){
 		if(typeof(console) !== 'undefined'){console.info("i3GEO.maparef.inicia()");}
@@ -244,15 +244,15 @@ i3GEO.maparef = {
 	/*
 	Function: atualiza
 
-	Atualiza o mapa de referência.
+	Atualiza o mapa de refer&ecirc;ncia.
 
-	Se o modo cgi estiver ativado, o mapa de referência &eacute; desenhado utilizando-se como src da imagem o programa cgi do Mapserver.
+	Se o modo cgi estiver ativado, o mapa de refer&ecirc;ncia &eacute; desenhado utilizando-se como src da imagem o programa cgi do Mapserver.
 
 	No modo dinâmico, a imagem &eacute; gerada de forma diferenciada. Nesse caso, o modo cgi &eacute; desabilitado.
 
 	O atualizaReferencia &eacute; sempre chamado ap&oacute;s o mapa ser redesenhado.
 
-	Se houve altera&ccedil;ão na extensão, &eacute; preciso refazer o mapa de referência se não, a imagem atual &eacute; armazenada no quado de anima&ccedil;ão
+	Se houve altera&ccedil;&atilde;o na extens&atilde;o, &eacute; preciso refazer o mapa de refer&ecirc;ncia se n&atilde;o, a imagem atual &eacute; armazenada no quado de anima&ccedil;&atilde;o
 	*/
 	atualiza: function(forca){
 		if(arguments.length === 0)
@@ -268,11 +268,11 @@ i3GEO.maparef = {
 			}
 			if(tiporef === "fixo"){
 				//
-				//no modo cgi ativado, a obten&ccedil;ão da imagem &eacute; feita de forma diferente do modo normal do mapa
+				//no modo cgi ativado, a obten&ccedil;&atilde;o da imagem &eacute; feita de forma diferente do modo normal do mapa
 				//
 				if(i3GEO.parametros.utilizacgi.toLowerCase() !== "sim"){
 					//
-					//se o valor do tamanho da celula j&aacute; existir, não &eacute; necess&aacute;rio redesenhar a imagem
+					//se o valor do tamanho da celula j&aacute; existir, n&atilde;o &eacute; necess&aacute;rio redesenhar a imagem
 					//
 					if(i3GEO.parametros.celularef === "" || $i("imagemReferencia").src === "" || forca === true)
 					{i3GEO.php.referencia(i3GEO.maparef.processaImagem);}
@@ -297,9 +297,9 @@ i3GEO.maparef = {
 	/*
 	Function: processaImagem
 
-	Substitu&iacute; a imagem do mapa de referência pela &uacute;ltima gerada.
+	Substitu&iacute; a imagem do mapa de refer&ecirc;ncia pela &uacute;ltima gerada.
 
-	Esta fun&ccedil;ão processa os dados de uma chamada AJAX para atualizar o mapa de referência
+	Esta fun&ccedil;&atilde;o processa os dados de uma chamada AJAX para atualizar o mapa de refer&ecirc;ncia
 
 	Parametro:
 
@@ -335,7 +335,7 @@ i3GEO.maparef = {
 	/*
 	Function: atualizaBox
 
-	Atualiza o tamanho e a posi&ccedil;ão do box que indica a extensão geogr&aacute;fica do mapa atual
+	Atualiza o tamanho e a posi&ccedil;&atilde;o do box que indica a extens&atilde;o geogr&aacute;fica do mapa atual
 
 	O box &eacute; um div com id = "boxref".
 
@@ -372,7 +372,7 @@ i3GEO.maparef = {
 			else{novoel.style.opacity= 0.4;}
 			$i("mapaReferencia").appendChild(novoel);
 			//
-			//aplica os eventos de movimenta&ccedil;ão sobre o box azul
+			//aplica os eventos de movimenta&ccedil;&atilde;o sobre o box azul
 			//
 			boxrefdd = new YAHOO.util.DD("boxref");
 			//
@@ -398,7 +398,7 @@ i3GEO.maparef = {
 	/*
 	Function: click
 
-	Ocorre quando o usu&aacute;rio clica sobre o mapa de referência, deslocando o mapa principal
+	Ocorre quando o usu&aacute;rio clica sobre o mapa de refer&ecirc;ncia, deslocando o mapa principal
 	*/
 	click: function(){
 		if(typeof(console) !== 'undefined'){console.info("i3GEO.maparef.click()");}

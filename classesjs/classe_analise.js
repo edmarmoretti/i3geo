@@ -1,7 +1,7 @@
 /*jslint white:false,undef: false, rhino: true, onevar: true, evil: false */
 
 /*
-Title: An�lise geogr�fica
+Title: Analise geografica
 
 Arquivo:
 
@@ -13,20 +13,20 @@ GPL2
 
 i3Geo Interface Integrada de Ferramentas de Geoprocessamento para Internet
 
-Direitos Autorais Reservados (c) 2006 Minist�rio do Meio Ambiente Brasil
+Direitos Autorais Reservados (c) 2006 Minist&eacute;rio do Meio Ambiente Brasil
 Desenvolvedor: Edmar Moretti edmar.moretti@mma.gov.br
 
-Este programa � software livre; voc� pode redistribu�-lo
-e/ou modific�-lo sob os termos da Licen�a P�blica Geral
+Este programa &eacute; software livre; voc&ecirc; pode redistribu&iacute;-lo
+e/ou modific&aacute;-lo sob os termos da Licen&ccedil;a P&uacute;blica Geral
 GNU conforme publicada pela Free Software Foundation;
 
-Este programa � distribu�do na expectativa de que seja �til,
-por�m, SEM NENHUMA GARANTIA; nem mesmo a garantia impl�cita
-de COMERCIABILIDADE OU ADEQUA��O A UMA FINALIDADE ESPEC�FICA.
-Consulte a Licen�a P�blica Geral do GNU para mais detalhes.
-Voc� deve ter recebido uma c�pia da Licen�a P�blica Geral do
-GNU junto com este programa; se n�o, escreva para a
-Free Software Foundation, Inc., no endere�o
+Este programa &eacute; distribu&iacute;do na expectativa de que seja &uacute;til,
+por&eacute;m, SEM NENHUMA GARANTIA; nem mesmo a garantia impl&iacute;cita
+de COMERCIABILIDADE OU ADEQUAÇ&Atilde;O A UMA FINALIDADE ESPEC&Iacute;FICA.
+Consulte a Licen&ccedil;a P&uacute;blica Geral do GNU para mais detalhes.
+Voc&ecirc; deve ter recebido uma c&oacute;pia da Licen&ccedil;a P&uacute;blica Geral do
+GNU junto com este programa; se n&atilde;o, escreva para a
+Free Software Foundation, Inc., no endere&ccedil;o
 59 Temple Street, Suite 330, Boston, MA 02111-1307 USA.
 */
 if(typeof(i3GEO) === 'undefined'){
@@ -35,19 +35,19 @@ if(typeof(i3GEO) === 'undefined'){
 /*
 Classe: i3GEO.analise
 
-Fun��es de gera��o das an�lises e abertura dos di�logos das op��es de an�lise espacial
+Funcoes de geracao das analises e abertura dos dialogos das opcoes de analise espacial
 
-Em i3GEO.analise.dialogo est�o as fun��es de abertura dos di�logos
+Em i3GEO.analise.dialogo estao as funcoes de abertura dos dialogos
 */
 i3GEO.analise = {
 	/*
 	Classe: i3GEO.analise.dialogo
 
-	Abre as telas de di�logo das op��es de an�lise
+	Abre as telas de dialogo das opcoes de analise
 
 	Exemplo:
 
-	Para abrir a mensagem de di�logo de gera��o de buffer, utilize
+	Para abrir a mensagem de dialogo de geracao de buffer, utilize
 
 	i3GEO.analise.dialogo.buffer()
 	*/
@@ -55,7 +55,7 @@ i3GEO.analise = {
 		/*
 		Function: graficoInterativo
 
-		Abre a janela de di�logo da ferramenta graficointerativo
+		Abre a janela de dialogo da ferramenta graficointerativo
 		*/
 		graficoInterativo: function(){
 			i3GEO.util.dialogoFerramenta("i3GEO.analise.dialogo.graficoInterativo()","graficointerativo","graficointerativo");
@@ -63,7 +63,7 @@ i3GEO.analise = {
 		/*
 		Function: linhaDoTempo
 
-		Abre a janela de di�logo da ferramenta linhadotempo
+		Abre a janela de dialogo da ferramenta linhadotempo
 		*/
 		linhaDoTempo: function(){
 			if(typeof(console) !== 'undefined'){console.info("i3GEO.analise.dialogo.linhaDoTempo()");}
@@ -92,7 +92,7 @@ i3GEO.analise = {
 		/*
 		Function: perfil
 
-		Abre a janela de di�logo da ferramenta perfil
+		Abre a janela de dialogo da ferramenta perfil
 		*/
 		perfil: function(){
 			i3GEO.util.dialogoFerramenta("i3GEO.analise.dialogo.perfil()","perfil","perfil");
@@ -100,7 +100,7 @@ i3GEO.analise = {
 		/*
 		Function: gradePontos
 
-		Abre a janela de di�logo da ferramenta gradepontos
+		Abre a janela de dialogo da ferramenta gradepontos
 		*/
 		gradePontos: function(){
 			i3GEO.util.dialogoFerramenta("i3GEO.analise.dialogo.gradePontos()","gradepontos","gradeDePontos");
@@ -108,7 +108,7 @@ i3GEO.analise = {
 		/*
 		Function: gradePol
 
-		Abre a janela de di�logo da ferramenta gradepol
+		Abre a janela de dialogo da ferramenta gradepol
 		*/
 		gradePol: function(){
 			i3GEO.util.dialogoFerramenta("i3GEO.analise.dialogo.gradePol()","gradepol","gradeDePoligonos");
@@ -116,7 +116,7 @@ i3GEO.analise = {
 		/*
 		Function: gradeHex
 
-		Abre a janela de di�logo da ferramenta gradehex
+		Abre a janela de dialogo da ferramenta gradehex
 		*/
 		gradeHex: function(){
 			i3GEO.util.dialogoFerramenta("i3GEO.analise.dialogo.gradeHex()","gradehex","gradeDeHex");
@@ -124,7 +124,7 @@ i3GEO.analise = {
 		/*
 		Function: analisaGeometrias
 
-		Abre a janela de di�logo da ferramenta analisageometrias
+		Abre a janela de dialogo da ferramenta analisageometrias
 		*/
 		analisaGeometrias: function(){
 			i3GEO.util.dialogoFerramenta("i3GEO.analise.dialogo.analisaGeometrias()","analisageometrias","analisaGeometrias");
@@ -132,15 +132,15 @@ i3GEO.analise = {
 		/*
 		Function: pontosdistri
 
-		Abre a janela de di�logo da ferramenta pontosdistri
+		Abre a janela de dialogo da ferramenta pontosdistri
 		*/
 		pontosdistri: function(){
-			i3GEO.parametros.r === "nao" ? alert("Op��o n�o dispon�vel") : i3GEO.util.dialogoFerramenta("i3GEO.analise.dialogo.pontosdistri()","pontosdistri","pontosDistri");
+			i3GEO.parametros.r === "nao" ? alert($trad("x22")) : i3GEO.util.dialogoFerramenta("i3GEO.analise.dialogo.pontosdistri()","pontosdistri","pontosDistri");
 		},
 		/*
 		Function: pontoempoligono
 
-		Abre a janela de di�logo da ferramenta pontoempoligono
+		Abre a janela de dialogo da ferramenta pontoempoligono
 		*/
 		pontoempoligono: function(){
 			i3GEO.util.dialogoFerramenta("i3GEO.analise.dialogo.pontoempoligono()","pontoempoligono","pontoEmPoligono");
@@ -148,7 +148,7 @@ i3GEO.analise = {
 		/*
 		Function: centromassa
 
-		Abre a janela de di�logo da ferramenta centro m�dio
+		Abre a janela de dialogo da ferramenta centro medio
 		*/
 		centromassa: function(){
 			i3GEO.util.dialogoFerramenta("i3GEO.analise.dialogo.centromassa()","centromassa","centromassa");
@@ -156,7 +156,7 @@ i3GEO.analise = {
 		/*
 		Function: nptPol
 
-		Abre a janela de di�logo da ferramenta nptpol
+		Abre a janela de dialogo da ferramenta nptpol
 		*/
 		nptPol: function(){
 			i3GEO.util.dialogoFerramenta("i3GEO.analise.dialogo.nptPol()","nptpol","nptpol");
@@ -164,7 +164,7 @@ i3GEO.analise = {
 		/*
 		Function: buffer
 
-		Abre a janela de di�logo da ferramenta buffer
+		Abre a janela de dialogo da ferramenta buffer
 		*/
 		buffer: function(){
 			i3GEO.util.dialogoFerramenta("i3GEO.analise.dialogo.buffer()","buffer","buffer");
@@ -172,7 +172,7 @@ i3GEO.analise = {
 		/*
 		Function: distanciaptpt
 
-		Abre a janela de di�logo da ferramenta distanciaptpt
+		Abre a janela de dialogo da ferramenta distanciaptpt
 		*/
 		distanciaptpt: function(){
 			i3GEO.util.dialogoFerramenta("i3GEO.analise.dialogo.distanciaptpt()","distanciaptpt","distanciaptpt");
@@ -180,7 +180,7 @@ i3GEO.analise = {
 		/*
 		Function: centroide
 
-		Abre a janela de di�logo da ferramenta centroide
+		Abre a janela de dialogo da ferramenta centroide
 		*/
 		centroide: function(){
 			i3GEO.util.dialogoFerramenta("i3GEO.analise.dialogo.centroide()","centroide","centroide");
@@ -188,7 +188,7 @@ i3GEO.analise = {
 		/*
 		Function: dissolve
 
-		Abre a janela de di�logo da ferramenta dissolve
+		Abre a janela de dialogo da ferramenta dissolve
 		*/
 		dissolve: function(){
 			i3GEO.util.dialogoFerramenta("i3GEO.analise.dialogo.dissolve()","dissolve","dissolve");
@@ -196,7 +196,7 @@ i3GEO.analise = {
 		/*
 		Function: agrupaElementos
 
-		Abre a janela de di�logo da ferramenta agrupaelementos
+		Abre a janela de dialogo da ferramenta agrupaelementos
 		*/
 		agrupaElementos: function(){
 			i3GEO.util.dialogoFerramenta("i3GEO.analise.dialogo.agrupaElementos()","agrupaelementos","agrupaElementos");
@@ -205,21 +205,21 @@ i3GEO.analise = {
 	/*
 	Classe: i3GEO.analise.medeDistancia
 
-	Ativa e controla a op��o de medi��o de dist�ncias.
+	Ativa e controla a opcao de medicao de distancias.
 
-	A medida � feita quando o usu�rio clica no mapa com esta op��o ativa
+	A medida e feita quando o usuario clica no mapa com esta opcao ativa
 
-	Quando o bot�o � acionado, abre-se a janela que mostra o resultado da medida, o �cone que segue o mouse � alterado.
+	Quando o botao e acionado, abre-se a janela que mostra o resultado da medida, o icone que segue o mouse e alterado.
 
-	Para mostrar o resultado do c�lculo, � inclu�do um div espec�fico.
+	Para mostrar o resultado do calculo, e incluido um div especifico.
 	*/
 	medeDistancia:{
 		/*
 		Function: inicia
 
-		Inicia a opera��o de medi��o, abrindo a janela de resultados e criando os componentes necess�rios
+		Inicia a operacao de medicao, abrindo a janela de resultados e criando os componentes necessorios
 
-		S�o registrados os eventos de clique sobre o mapa e fechamento da janela de resultados
+		Sao registrados os eventos de clique sobre o mapa e fechamento da janela de resultados
 		*/
 		inicia: function(){
 			if(typeof(console) !== 'undefined'){console.info("i3GEO.analise.medeDistancia.inicia()");}
@@ -262,7 +262,7 @@ i3GEO.analise = {
 		/*
 		Function: criaJanela
 
-		Cria a janela para mostrar os resultados da medi��o
+		Cria a janela para mostrar os resultados da medicao
 		*/
 		criaJanela: function(){
 			var novoel,ins,imagemxy,janela;
@@ -300,11 +300,10 @@ i3GEO.analise = {
 			janela.moveTo(imagemxy[0]+150,imagemxy[1]);
 			if(navm && i3GEO.Interface.ATUAL === "googleearth" ){
 				janela.moveTo(0,0);
-				alert("Essa op��o n�o funciona bem no Internet Explorer");
 			}	
 			//
-			//botao que abre a ferramenta de c�lculo de perfis.
-			//pontosdistobj cont�m as coordenadas dos pontos
+			//botao que abre a ferramenta de calculo de perfis.
+			//pontosdistobj contem as coordenadas dos pontos
 			//
 			new YAHOO.widget.Button(
 				"i3GEObotaoPerfil",
@@ -317,7 +316,7 @@ i3GEO.analise = {
 		/*
 		Function: fechaJanela
 
-		Fecha a janela e os elementos gr�ficos criados para a ferramenta de medi��o
+		Fecha a janela e os elementos graficos criados para a ferramenta de medicao
 		*/
 		fechaJanela: function(){
 			var janela;
@@ -338,7 +337,7 @@ i3GEO.analise = {
 		/*
 		Function: clique
 
-		Adiciona uma marca na tela e realiza o c�lculo de dist�ncia dos pontos inseridos
+		Adiciona uma marca na tela e realiza o calculo de distancia dos pontos inseridos
 		*/
 		clique: function(){
 			var n,d,decimal,dd;
@@ -351,7 +350,7 @@ i3GEO.analise = {
 				pontosdistobj.ximg[n] = objposicaocursor.imgx;
 				pontosdistobj.yimg[n] = objposicaocursor.imgy;
 				pontosdistobj.dist[n] = 0;
-				//cria a linha que ser� utilizada para seguir a posi��o do mouse e o �ltimo ponto
+				//cria a linha que sera utilizada para seguir a posicao do mouse e o ultimo ponto
 				if(i3GEO.util.in_array(i3GEO.Interface.ATUAL,["openlayers","googlemaps"])){
 					try{
 						if (navn)
@@ -389,7 +388,7 @@ i3GEO.analise = {
 						{i3GEO.Interface.googleearth.insereMarca(d+" km",objposicaocursor.ddx,objposicaocursor.ddy,"","divGeometriasTemp");}
 
 					}
-					//cria a linha ligando os dois �ltimos pontos
+					//cria a linha ligando os dois ultimos pontos
 					if(i3GEO.Interface.ATUAL === "googleearth"){
 						i3GEO.Interface.googleearth.insereLinha(pontosdistobj.xpt[n-1],pontosdistobj.ypt[n-1],pontosdistobj.xpt[n],pontosdistobj.ypt[n],"","divGeometriasTemp");
 					}
@@ -403,7 +402,7 @@ i3GEO.analise = {
 		/*
 		Function: paraCalculo
 
-		Para o c�lculo de dist�ncias e ativa o bot�o "pan"
+		Para o calculo de distancias e ativa o botao "pan"
 		*/
 		paraCalculo: function(){
 			var botaoPan = $i("pan");
@@ -413,7 +412,7 @@ i3GEO.analise = {
 		/*
 		Function: movimento
 
-		Realiza os c�lculos e desenho da linha conforme o usu�rio movimenta o mouse
+		Realiza os calculos e desenho da linha conforme o usuario movimenta o mouse
 		*/
 		movimento: function(){
 			var n,d,r,decimal,da,mostra,texto,
@@ -443,8 +442,8 @@ i3GEO.analise = {
 
 						mostra = $i("mostradistancia_calculo");
 						if (mostra){
-							texto = " Dist acum.= "+da+" km <br>atual= "+d+" km <br> Dire��o (DMS)= "+r;
-							texto += "<br>M�todo c�lculo de dist�ncias: "+calculo.metododistancia;
+							texto = " Dist acum.= "+da+" km <br>atual= "+d+" km <br> "+$trad("x23")+" (DMS)= "+r;
+							texto += "<br>"+$trad("x24")+": "+calculo.metododistancia;
 							mostra.innerHTML = texto;
 						}
 						if(i3GEO.Interface.ATUAL !== "googleearth" && navn)
@@ -458,21 +457,21 @@ i3GEO.analise = {
 	/*
 	Classe: i3GEO.analise.medeArea
 
-	Ativa e controla a op��o de medi��o de �rea.
+	Ativa e controla a opcao de medicao de area.
 
-	A medida � feita quando o usu�rio clica no mapa com esta op��o ativa
+	A medida e feita quando o usuario clica no mapa com esta opcao ativa
 
-	Quando o bot�o � acionado, abre-se a janela que mostra o resultado da medida, o �cone que segue o mouse � alterado.
+	Quando o botao e acionado, abre-se a janela que mostra o resultado da medida, o icone que segue o mouse e alterado.
 
-	Para mostrar o resultado do c�lculo, � inclu�do um div espec�fico.
+	Para mostrar o resultado do calculo, e incluido um div especifico.
 	*/
 	medeArea:{
 		/*
 		Function: inicia
 
-		Inicia a opera��o de medi��o, abrindo a janela de resultados e criando os componentes necess�rios
+		Inicia a operacao de medicao, abrindo a janela de resultados e criando os componentes necessarios
 
-		S�o registrados os eventos de clique sobre o mapa e fechamento da janela de resultados
+		Sao registrados os eventos de clique sobre o mapa e fechamento da janela de resultados
 		*/
 		inicia: function(){
 			if(typeof(console) !== 'undefined'){console.info("i3GEO.analise.medeArea.inicia()");}
@@ -509,8 +508,8 @@ i3GEO.analise = {
 				if(i3GEO.eventos.NAVEGAMAPA.toString().search("i3GEO.analise.medeArea.fechaJanela()") < 0)
 				{i3GEO.eventos.NAVEGAMAPA.push("i3GEO.analise.medeArea.fechaJanela()");}
 				//
-				//a API do Openlayers e GoogleMaps tem uma fun��o pr�pria de obten��o da resolu��o de cada pixel
-				//essa fun��o � embutida em i3GEO.calculo.tela2dd
+				//a API do Openlayers e GoogleMaps tem uma funcao propria de obtencao da resolucao de cada pixel
+				//essa funcao e embutida em i3GEO.calculo.tela2dd
 				//
 				if(i3GEO.util.in_array(i3GEO.Interface.ATUAL,["openlayers","googlemaps"])){
 					x = parseInt(i3GEO.parametros.w / 2,10);
@@ -528,7 +527,7 @@ i3GEO.analise = {
 		/*
 		Function: criaJanela
 
-		Cria a janela para mostrar os resultados da medi��o
+		Cria a janela para mostrar os resultados da medicao
 		*/
 		criaJanela: function(){
 			var novoel,ins,imagemxy,janela;
@@ -558,7 +557,7 @@ i3GEO.analise = {
 		/*
 		Function: fechaJanela
 
-		Fecha a janela e os elementos gr�ficos criados para a ferramenta de medi��o
+		Fecha a janela e os elementos graficos criados para a ferramenta de medicao
 		*/
 		fechaJanela: function(){
 			var janela;
@@ -577,7 +576,7 @@ i3GEO.analise = {
 		/*
 		Function: clique
 
-		Adiciona uma marca na tela e realiza o c�lculo de dist�ncia dos pontos inseridos
+		Adiciona uma marca na tela e realiza o calculo de distancia dos pontos inseridos
 		*/
 		clique: function(){
 			var n,m;
@@ -625,7 +624,7 @@ i3GEO.analise = {
 		/*
 		Function: paraCalculo
 
-		Para o c�lculo de �rea e ativa o bot�o "pan"
+		Para o calculo de area e ativa o botao "pan"
 		*/
 		paraCalculo: function(){
 			var botaoPan = $i("pan");
@@ -635,7 +634,7 @@ i3GEO.analise = {
 		/*
 		Function: movimento
 
-		Realiza o desenho do poligono conforme o usu�rio movimenta o mouse
+		Realiza o desenho do poligono conforme o usuario movimenta o mouse
 		*/
 		movimento: function(){
 			var n;

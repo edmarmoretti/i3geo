@@ -1,15 +1,15 @@
 /*
 Title: Gerador de links
 
-Classe javascript da aplica&ccedil;ão de gera&ccedil;ão de links.
+Classe javascript da aplica&ccedil;&atilde;o de gera&ccedil;&atilde;o de links.
 
-Lê o conjunto de javascripts para o funcionamento da interface geradordelinks.htm
+L&ecirc; o conjunto de javascripts para o funcionamento da interface geradordelinks.htm
 
 Arquivo:
 
 i3geo/classesjs/geradordelinks.js
 
-Esse programa possu&iacute; as seguintes dependências:
+Esse programa possu&iacute; as seguintes depend&ecirc;ncias:
 
 i3geo/pacotes/cpaint/cpaint2.inc.compressed.js
 
@@ -17,7 +17,7 @@ i3geo/pacotes/openlayers/OpenLayers.js
 
 i3geo/classesjs/compactados/funcoes_compacto.js
 
-As dependências são carregadas pelo pr&oacute;prio geradordelinks.js, não sendo necess&aacute;rio incluir no HTML.
+As depend&ecirc;ncias s&atilde;o carregadas pelo pr&oacute;prio geradordelinks.js, n&atilde;o sendo necess&aacute;rio incluir no HTML.
 
 Licenca:
 
@@ -28,7 +28,7 @@ i3Geo Interface Integrada de Ferramentas de Geoprocessamento para Internet
 Direitos Autorais Reservados (c) 2006 Minist&eacute;rio do Meio Ambiente Brasil
 Desenvolvedor: Edmar Moretti edmar.moretti@mma.gov.br
 
-Este programa &eacute; software livre; você pode redistribu&iacute;-lo
+Este programa &eacute; software livre; voc&ecirc; pode redistribu&iacute;-lo
 e/ou modific&aacute;-lo sob os termos da Licen&ccedil;a P&uacute;blica Geral
 GNU conforme publicada pela Free Software Foundation;
 
@@ -36,8 +36,8 @@ Este programa &eacute; distribu&iacute;do na expectativa de que seja &uacute;til
 por&eacute;m, SEM NENHUMA GARANTIA; nem mesmo a garantia impl&iacute;cita
 de COMERCIABILIDADE OU ADEQUAÇ&Atilde;O A UMA FINALIDADE ESPEC&Iacute;FICA.
 Consulte a Licen&ccedil;a P&uacute;blica Geral do GNU para mais detalhes.
-Você deve ter recebido uma c&oacute;pia da Licen&ccedil;a P&uacute;blica Geral do
-GNU junto com este programa; se não, escreva para a
+Voc&ecirc; deve ter recebido uma c&oacute;pia da Licen&ccedil;a P&uacute;blica Geral do
+GNU junto com este programa; se n&atilde;o, escreva para a
 Free Software Foundation, Inc., no endere&ccedil;o
 59 Temple Street, Suite 330, Boston, MA 02111-1307 USA.
 
@@ -48,7 +48,7 @@ Veja:
 <i3geo/classesjs/funcoes.js>
 */
 //
-//carrega as dependências
+//carrega as depend&ecirc;ncias
 //
 var scriptLocation = "";
 var scripts = document.getElementsByTagName('script');
@@ -76,7 +76,7 @@ document.write(allScriptTags);
 /* 
 Classe: i3geo_gl_configura
 
-Cria o objeto javascript com os parâmetros de configura&ccedil;ão da api e com as fun&ccedil;&otilde;es de manipula&ccedil;ão.
+Cria o objeto javascript com os parâmetros de configura&ccedil;&atilde;o da api e com as fun&ccedil;&otilde;es de manipula&ccedil;&atilde;o.
 
 Example:
 
@@ -98,7 +98,7 @@ subgrupo - Id do elemento HTML que receber&aacute; o combo com os subgrupos
 
 tema - Id do elemento HTML que receber&aacute; o combo com a lista de temas
 
-buscageo - Id do elemento HTML onde ser&aacute; inclu&iacute;da a op&ccedil;ão de busca de coordenadas geogr&aacute;ficas
+buscageo - Id do elemento HTML onde ser&aacute; inclu&iacute;da a op&ccedil;&atilde;o de busca de coordenadas geogr&aacute;ficas
 
 menu - id do elemento HTML onde ser&aacute; incluido a lista de menus
 */
@@ -177,7 +177,7 @@ function i3geo_gl_configura(loc_i3geo,nomeseltema,temasa,link,grupo,subgrupo,tem
 		novodiv.appendChild(novoel);
 		var novoel = document.createElement("input");
 		eval("novoel.onclick = function(){$i3geo_gl.crialink()}");
-		novoel.title = "vis&iacute;vel/não vis&iacute;vel";
+		novoel.title = "vis&iacute;vel/n&atilde;o vis&iacute;vel";
 		novoel.type = "checkbox";
 		novoel.style.cursor="pointer";
 		novoel.style.top="3px";
@@ -248,7 +248,7 @@ function i3geo_gl_configura(loc_i3geo,nomeseltema,temasa,link,grupo,subgrupo,tem
 	/*
 	Function: combogrupos
 
-	Chama a fun&ccedil;ão do i3geo que monta um combo com a lista de grupos de um menu do i3geo
+	Chama a fun&ccedil;&atilde;o do i3geo que monta um combo com a lista de grupos de um menu do i3geo
 
 	Parameters:
 
@@ -262,7 +262,7 @@ function i3geo_gl_configura(loc_i3geo,nomeseltema,temasa,link,grupo,subgrupo,tem
 	/*
 	Function: combosubgrupos
 
-	Chama a fun&ccedil;ão do i3geo que monta um combo com a lista de subgrupos de um grupo do menu do i3geo
+	Chama a fun&ccedil;&atilde;o do i3geo que monta um combo com a lista de subgrupos de um grupo do menu do i3geo
 
 	Parameters:
 
@@ -282,7 +282,7 @@ function i3geo_gl_configura(loc_i3geo,nomeseltema,temasa,link,grupo,subgrupo,tem
 
 	Monta um combo com a lista de temas vinculados diretamente a um grupo.
 
-	Chamado pela fun&ccedil;ão combosubgrupos.
+	Chamado pela fun&ccedil;&atilde;o combosubgrupos.
 
 	Parameters:
 
@@ -300,7 +300,7 @@ function i3geo_gl_configura(loc_i3geo,nomeseltema,temasa,link,grupo,subgrupo,tem
 	/*
 	Function: preseltema
 
-	Compatibiliza a chamada da fun&ccedil;ão i3geo_combotemasMenu com a fun&ccedil;ão this.seltema em termos de n&uacute;mero de parâmetros
+	Compatibiliza a chamada da fun&ccedil;&atilde;o i3geo_combotemasMenu com a fun&ccedil;&atilde;o this.seltema em termos de n&uacute;mero de parâmetros
 	*/
 	this.preseltema = function(idgrupo,idsubgrupo,idtema)
 	{
@@ -371,7 +371,7 @@ function i3geo_gl_configura(loc_i3geo,nomeseltema,temasa,link,grupo,subgrupo,tem
 	/*
 	Function: buscageo_init
 
-	Inicializa o OpenLayers para permitir ao usu&aacute;rio escolher a abrangência espacial do link.
+	Inicializa o OpenLayers para permitir ao usu&aacute;rio escolher a abrang&ecirc;ncia espacial do link.
 	*/
 	this.buscageo_init = function() 
 	{
@@ -460,7 +460,7 @@ Inicia a interface do gerador de links.
 
 Parameters:
 
-objeto_i3geo_gl_configura - objeto com os parâmentros de configura&ccedil;ão criado pela fun&ccedil;ão i3geo_gl_configura
+objeto_i3geo_gl_configura - objeto com os parâmentros de configura&ccedil;&atilde;o criado pela fun&ccedil;&atilde;o i3geo_gl_configura
 */
 function i3geo_gl_inicia(objeto_i3geo_gl_configura)
 {

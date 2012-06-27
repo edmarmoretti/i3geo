@@ -1,7 +1,7 @@
 /*jslint white:false,undef: false, rhino: true, onevar: true, evil: false */
 
 /*
-Title: �rvore de temas
+Title: arvore de temas
 
 Arquivo:
 
@@ -13,20 +13,20 @@ GPL2
 
 i3Geo Interface Integrada de Ferramentas de Geoprocessamento para Internet
 
-Direitos Autorais Reservados (c) 2006 Minist�rio do Meio Ambiente Brasil
+Direitos Autorais Reservados (c) 2006 Minist&eacute;rio do Meio Ambiente Brasil
 Desenvolvedor: Edmar Moretti edmar.moretti@mma.gov.br
 
-Este programa � software livre; voc� pode redistribu�-lo
-e/ou modific�-lo sob os termos da Licen�a P�blica Geral
+Este programa &eacute; software livre; voc&ecirc; pode redistribu&iacute;-lo
+e/ou modific&aacute;-lo sob os termos da Licen&ccedil;a P&uacute;blica Geral
 GNU conforme publicada pela Free Software Foundation;
 
-Este programa � distribu�do na expectativa de que seja �til,
-por�m, SEM NENHUMA GARANTIA; nem mesmo a garantia impl�cita
-de COMERCIABILIDADE OU ADEQUA��O A UMA FINALIDADE ESPEC�FICA.
-Consulte a Licen�a P�blica Geral do GNU para mais detalhes.
-Voc� deve ter recebido uma c�pia da Licen�a P�blica Geral do
-GNU junto com este programa; se n�o, escreva para a
-Free Software Foundation, Inc., no endere�o
+Este programa &eacute; distribu&iacute;do na expectativa de que seja &uacute;til,
+por&eacute;m, SEM NENHUMA GARANTIA; nem mesmo a garantia impl&iacute;cita
+de COMERCIABILIDADE OU ADEQUAÇ&Atilde;O A UMA FINALIDADE ESPEC&Iacute;FICA.
+Consulte a Licen&ccedil;a P&uacute;blica Geral do GNU para mais detalhes.
+Voc&ecirc; deve ter recebido uma c&oacute;pia da Licen&ccedil;a P&uacute;blica Geral do
+GNU junto com este programa; se n&atilde;o, escreva para a
+Free Software Foundation, Inc., no endere&ccedil;o
 59 Temple Street, Suite 330, Boston, MA 02111-1307 USA.
 */
 if(typeof(i3GEO) === 'undefined'){
@@ -35,15 +35,15 @@ if(typeof(i3GEO) === 'undefined'){
 /*
 Classe: i3GEO.arvoreDeTemas
 
-Monta a �rvore com os temas dispon�veis para ser adicionados ao mapa.
+Monta a arvore com os temas disponiveis para ser adicionados ao mapa.
 */
 i3GEO.arvoreDeTemas = {
 	/*
 	Propriedade: OPCOESADICIONAIS
 
-	Objeto com a defini��o das propriedades que ser�o utilizadas na inclus�o dos �cones adicionais de adi��o de temas e no item de descri��o de cada tema.
+	Objeto com a definicao das propriedades que serao utilizadas na inclusao dos icones adicionais de adicao de temas e no item de descricao de cada tema.
 
-	"uploadarquivo" quando "true" indica que ser� mostrado o �cone de upload de arquivos e o �conde de conex�o com servi�os
+	"uploadarquivo" quando "true" indica que sera mostrado o icone de upload de arquivos e o icoe de conexao com servicos
 	
 	Example:
 
@@ -103,7 +103,7 @@ i3GEO.arvoreDeTemas = {
 		
 		uploadarquivo: true, //upload de GPX, SHAPEFILE, DBF, CSV e KML
 		
-		flutuante: true //mostra a op��o que permite abrir o cat�logo em uma janela flutuante
+		flutuante: true //mostra a opcao que permite abrir o catalogo em uma janela flutuante
 	}
 
 	Tipo:
@@ -142,9 +142,9 @@ i3GEO.arvoreDeTemas = {
 	/*
 	Propriedade: FATORESTRELA
 
-	Valor que ser� utilizado para dividir o valor bruto do n�mero de acessos de cada tema.
+	Valor que sera utilizado para dividir o valor bruto do numero de acessos de cada tema.
 
-	A divis�o � utilizada para definir quantas estrelas ser�o mostradas na �rvore de op��es adicionais.<b> 
+	A divisao e utilizada para definir quantas estrelas serao mostradas na arvore de opcoes adicionais.<b> 
 
 	Tipo:
 	{Numeric}
@@ -153,7 +153,7 @@ i3GEO.arvoreDeTemas = {
 	/*
 	Propriedade: INCLUISISTEMAS
 
-	Inclui na �rvore a lista de sistemas adicionais definidos no i3geo?
+	Inclui na arvore a lista de sistemas adicionais definidos no i3geo?
 
 	Tipo:
 	{Boolean}
@@ -162,7 +162,7 @@ i3GEO.arvoreDeTemas = {
 	/*
 	Propriedade: INCLUIWMS
 
-	Inclui na �rvore a lista de Web Services WMS?
+	Inclui na arvore a lista de Web Services WMS?
 
 	Tipo:
 	{Boolean}
@@ -171,7 +171,7 @@ i3GEO.arvoreDeTemas = {
 	/*
 	Propriedade: INCLUIESTRELAS
 
-	Inclui na �rvore um n� com a lista de temas classificados conforme o n�mero de estrelas que possu�
+	Inclui na arvore um no com a lista de temas classificados conforme o numero de estrelas que possui
 
 	Tipo:
 	{Boolean}
@@ -180,7 +180,7 @@ i3GEO.arvoreDeTemas = {
 	/*
 	Propriedade: FILTRADOWNLOAD
 
-	N�o mostra na �rvore os n�s que n�o possuem temas para download
+	Nao mostra na arvore os nos que nao possuem temas para download
 
 	Tipo:
 	{Boolean}
@@ -189,7 +189,7 @@ i3GEO.arvoreDeTemas = {
 	/*
 	Propriedade: FILTRAOGC
 
-	N�o mostra na �rvore os n�s que n�o permitem a gera��o de WMS
+	Nao mostra na arvore os nos que nao permitem a geracao de WMS
 
 	Tipo:
 	{Boolean}
@@ -213,7 +213,7 @@ i3GEO.arvoreDeTemas = {
 	/*
 	Propriedade: ATIVATEMA
 
-	Nome da fun��o que ser� inclu�da no evento onclick do elemento checkbox adicionado no in�cio do nome de um tema.
+	Nome da funcao que sera incluida no evento onclick do elemento checkbox adicionado no inicio do nome de um tema.
 
 	Tipo:
 	{String}
@@ -222,7 +222,7 @@ i3GEO.arvoreDeTemas = {
 	/*
 	Propriedade: ATIVATEMAIMEDIATO
 
-	Adiciona ao mapa o tema clicado imediatamente, sem a defini��o de um temporizador ou necessidade de se clicar no botao "aplicar".
+	Adiciona ao mapa o tema clicado imediatamente, sem a definicao de um temporizador ou necessidade de se clicar no botao "aplicar".
 
 	Tipo:
 	{boolean}
@@ -234,7 +234,7 @@ i3GEO.arvoreDeTemas = {
 	/*
 	Propriedade: IDSMENUS
 
-	Array com a lista de ids que ser�o considerados na montagem da �rvore. Por default � vazio, o que significa que todos os menus ser�o considerados.
+	Array com a lista de ids que serao considerados na montagem da arvore. Por default e vazio, o que significa que todos os menus serao considerados.
 
 	Tipo:
 	{Array}
@@ -243,9 +243,9 @@ i3GEO.arvoreDeTemas = {
 	/*
 	Propriedade: RETORNAGUIA
 
-	Guia que ser� ativada ap�s uma opera��o de adi��o de temas ter sido conclu�da.
+	Guia que sera ativada apos uma operacao de adicao de temas ter sido concluida.
 
-	Se for vazia, a guia atual ser� mantida.
+	Se for vazia, a guia atual sera mantida.
 
 	A string corresponde ao nome da guia que deve estar definida em i3GEO.guias.CONFIGURA, por exemplo i3GEO.arvoreDeTemas.RETORNAGUIA = "temas"
 
@@ -258,7 +258,7 @@ i3GEO.arvoreDeTemas = {
 	/*
 	Variavel: IDHTML
 
-	Armazena o ID do elemento HTML onde a �rvore ser� incluida
+	Armazena o ID do elemento HTML onde a arvore sera incluida
 
 	Tipo:
 	{String}
@@ -267,7 +267,7 @@ i3GEO.arvoreDeTemas = {
 	/*
 	Variavel: LOCAPLIC
 
-	Endere�o da aplica��o i3geo. Utilizado para definir o caminho para a chamada em AJAX.
+	Endereco da aplicacao i3geo. Utilizado para definir o caminho para a chamada em AJAX.
 
 	Tipo:
 	{String}
@@ -276,7 +276,7 @@ i3GEO.arvoreDeTemas = {
 	/*
 	Variavel: SID
 
-	C�digo da se��o aberta no servidor pelo i3Geo
+	Codigo da secao aberta no servidor pelo i3Geo
 
 	Tipo:
 	{String}
@@ -285,7 +285,7 @@ i3GEO.arvoreDeTemas = {
 	/*
 	Variavel: ARVORE
 
-	Objeto com a �rvore criada com YAHOO.widget.TreeView
+	Objeto com a arvore criada com YAHOO.widget.TreeView
 
 	Tipo:
 	{YAHOO.widget.TreeView}
@@ -294,7 +294,7 @@ i3GEO.arvoreDeTemas = {
 	/*
 	Variavel: DRIVES
 
-	Objeto JSON com a lista de drives no servidor que podem ser abertos na op��o de navega��o pelos diret�rios
+	Objeto JSON com a lista de drives no servidor que podem ser abertos na opcao de navegacao pelos diretorios
 
 	Tipo:
 	{JSON}
@@ -312,7 +312,7 @@ i3GEO.arvoreDeTemas = {
 	/*
 	Variavel: MENUS
 
-	Armazena o objeto JSON com a lista de menus resultante da fun��o listaMenus
+	Armazena o objeto JSON com a lista de menus resultante da funcao listaMenus
 
 	Tipo:
 	{JSON}
@@ -321,7 +321,7 @@ i3GEO.arvoreDeTemas = {
 	/*
 	Variavel: GRUPOS
 
-	Armazena o objeto JSON com a �ltima lista de grupos obtida
+	Armazena o objeto JSON com a ultima lista de grupos obtida
 
 	Tipo:
 	{JSON}
@@ -330,7 +330,7 @@ i3GEO.arvoreDeTemas = {
 	/*
 	Variavel: SUBGRUPOS
 
-	Armazena o objeto JSON com a �ltima lista de sub-grupos obtida
+	Armazena o objeto JSON com a ultima lista de sub-grupos obtida
 
 	Tipo:
 	{JSON}
@@ -339,7 +339,7 @@ i3GEO.arvoreDeTemas = {
 	/*
 	Variavel: TEMAS
 
-	Armazena o objeto JSON com a �ltima lista de temas obtida
+	Armazena o objeto JSON com a ultima lista de temas obtida
 
 	Tipo:
 	{JSON}
@@ -348,7 +348,7 @@ i3GEO.arvoreDeTemas = {
 	/*
 	Function: flutuante
 
-	Abre o cat�logo em uma janela flutuante
+	Abre o catalogo em uma janela flutuante
 	*/	
 	flutuante: function(){
 		var janela,ins,temp,cabecalho,minimiza,idold,corpo,altura;
@@ -395,7 +395,7 @@ i3GEO.arvoreDeTemas = {
 	/*
 	Function: listaWMS
 
-	Lista os WMS cadastrados preenchendo o n� OGC-WMS
+	Lista os WMS cadastrados preenchendo o no OGC-WMS
 	*/
 	listaWMS: function(){
 		if(typeof(console) !== 'undefined'){console.info("i3GEO.arvoreDeTemas.listaWMS()");}
@@ -410,7 +410,7 @@ i3GEO.arvoreDeTemas = {
 					html += " ("+((raiz[i].nacessosok * 100) / (raiz[i].nacessos*1))+"%)</span>";
 				}
 				else
-				{html += " (% de acessos n�o definido)</span>";}
+				{html += " (% de acessos n&atilde;o definido)</span>";}
 				html += "<hr>";
 				tempNode = new YAHOO.widget.HTMLNode(
 					{html:html,id_ws:raiz[i].id_ws,url:raiz[i].link,nivel:0,expanded:false,enableHighlight:false},
@@ -425,7 +425,7 @@ i3GEO.arvoreDeTemas = {
 	/*
 	Function: listaLayersWMS
 
-	Lista os layers de um WMS e preenche o n� OGC-WMS
+	Lista os layers de um WMS e preenche o no OGC-WMS
 	*/
 	listaLayersWMS: function(node){
 		//node = no;
@@ -489,7 +489,7 @@ i3GEO.arvoreDeTemas = {
 	/*
 	Function: montaTextoTemaWMS
 
-	Monta o texto que ser� mostrado ao lado de cada layer de um WMS, permitindo incluir o layer no mapa.
+	Monta o texto que sera mostrado ao lado de cada layer de um WMS, permitindo incluir o layer no mapa.
 	*/
 	montaTextoTemaWMS: function(servico,layer,estilo,titulo,proj,formatoinfo,versao,formatoimg,cor){
 		var html,temp,adiciona;
@@ -518,21 +518,21 @@ i3GEO.arvoreDeTemas = {
 	/*
 	Function: listaMenus
 
-	Lista os menus dispon�veis.
+	Lista os menus disponiveis.
 
-	Pesquisa no banco de dados administrativo ou na vari�vel de configura��o (veja ms_configura.php) a lista de menus dispon�veis.
+	Pesquisa no banco de dados administrativo ou na variavel de configuracao (veja ms_configura.php) a lista de menus disponiveis.
 
-	O resultado � inclu�do em i3GEO.arvoreDeTemas.MENUS.
+	O resultado e incluido em i3GEO.arvoreDeTemas.MENUS.
 
-	A propriedade i3GEO.arvoreDetemas.IDSMENUS pode ser utilizada para filtrar alista de menus que ser� utilizada.
+	A propriedade i3GEO.arvoreDetemas.IDSMENUS pode ser utilizada para filtrar alista de menus que sera utilizada.
 
 	Parametros:
 
-	g_sid - {String} C�digo da se��o PHP criada ao abrir o i3Geo
+	g_sid - {String} Codigo da secao PHP criada ao abrir o i3Geo
 
-	g_locaplic - {String} Endere�o da aplica��o (i3geo) onde fica o diret�rio classesphp
+	g_locaplic - {String} Endereco da aplicacao (i3geo) onde fica o diretorio classesphp
 
-	funcao - {String} nome da fun��o que ser� executada quando a lista for recebida. Se for "", n�o � chamada.
+	funcao - {String} nome da funcao que sera executada quando a lista for recebida. Se for "", nao e chamada.
 	*/
 	listaMenus: function(g_sid,g_locaplic,funcao) {
 		if(typeof(console) !== 'undefined'){console.info("i3GEO.arvoreDeTemas.listaMenus()");}
@@ -561,17 +561,17 @@ i3GEO.arvoreDeTemas = {
 
 	Lista os grupos de um menu.
 
-	O resultado � armazenado em i3GEO.arvoreDetemas.GRUPOS 
+	O resultado e armazenado em i3GEO.arvoreDetemas.GRUPOS 
 
 	Parametros:
 
-	g_sid - {String} C�digo da se��o PHP criada ao abrir o i3Geo
+	g_sid - {String} Codigo da secao PHP criada ao abrir o i3Geo
 
-	g_locaplic - {String} Endere�o da aplica��o (i3geo) onde fica o diret�rio classesphp
+	g_locaplic - {String} Endereco da aplicacao (i3geo) onde fica o diretorio classesphp
 
 	id_menu - {String} Id do menu que contem os grupos
 
-	funcao - {Function} fun��o que ser� executada quando a lista for recebida. Se for "", n�o � chamada.
+	funcao - {Function} funcao que sera executada quando a lista for recebida. Se for "", nao e chamada.
 	*/
 	listaGrupos: function(g_sid,g_locaplic,id_menu,funcao) {
 		if(typeof(console) !== 'undefined'){console.info("i3GEO.arvoreDeTemas.listaGrupos()");}
@@ -590,19 +590,19 @@ i3GEO.arvoreDeTemas = {
 
 	Lista os sub-grupos de um grupo.
 
-	O resultado � armazenado emi3GEO.arvoreDetemas.SUBGRUPOS
+	O resultado e armazenado emi3GEO.arvoreDetemas.SUBGRUPOS
 
 	Parametros:
 
-	g_sid - {String} C�digo da se��o PHP criada ao abrir o i3Geo
+	g_sid - {String} Codigo da secao PHP criada ao abrir o i3Geo
 
-	g_locaplic - {String} Endere�o da aplica��o (i3geo) onde fica o diret�rio classesphp
+	g_locaplic - {String} Endereco da aplicacao (i3geo) onde fica o diretorio classesphp
 
 	id_menu - {String} Id do menu que contem os grupos
 
 	id_grupo - {String} Id do grupo que contem os sub-grupos
 
-	funcao - {Function} fun��o que ser� executada quando a lista for recebida. Se for "", n�o � chamada.
+	funcao - {Function} funcao que sera executada quando a lista for recebida. Se for "", nao e chamada.
 	*/
 	listaSubGrupos: function(g_sid,g_locaplic,id_menu,id_grupo,funcao) {
 		if(typeof(console) !== 'undefined'){console.info("i3GEO.arvoreDeTemas.listaSubGrupos()");}
@@ -618,13 +618,13 @@ i3GEO.arvoreDeTemas = {
 
 	Lista os temas de um sub-grupo.
 
-	O resultado � armazenado em i3GEO.arvoreDeTemas.TEMAS
+	O resultado e armazenado em i3GEO.arvoreDeTemas.TEMAS
 
 	Parametros:
 
-	g_sid - {String} C�digo da se��o PHP criada ao abrir o i3Geo
+	g_sid - {String} Codigo da secao PHP criada ao abrir o i3Geo
 
-	g_locaplic - {String} Endere�o da aplica��o (i3geo) onde fica o diret�rio classesphp
+	g_locaplic - {String} Endereco da aplicacao (i3geo) onde fica o diretorio classesphp
 
 	id_menu - {String} Id do menu que contem os grupos
 
@@ -632,7 +632,7 @@ i3GEO.arvoreDeTemas = {
 
 	id_subgrupo - {String} Id do sub-grupo que contem os temas
 
-	funcao - {Function} fun��o que ser� executada quando a lista for recebida. Se for "", n�o � chamada.
+	funcao - {Function} funcao que sera executada quando a lista for recebida. Se for "", nao e chamada.
 	*/
 	listaTemas: function(g_sid,g_locaplic,id_menu,id_grupo,id_subgrupo,funcao) {
 		if(typeof(console) !== 'undefined'){console.info("i3GEO.arvoreDeTemas.listaTemas()");}
@@ -646,17 +646,17 @@ i3GEO.arvoreDeTemas = {
 	/*
 	Function: listaSistemas
 
-	Lista os sistemas especiais de adi��o de temas.
+	Lista os sistemas especiais de adicao de temas.
 
-	O resultado � armazenado em i3GEO.arvoreDeTemas.SISTEMAS
+	O resultado e armazenado em i3GEO.arvoreDeTemas.SISTEMAS
 
 	Parametros:
 
-	g_sid - {String} C�digo da se��o PHP criada ao abrir o i3Geo
+	g_sid - {String} Codigo da secao PHP criada ao abrir o i3Geo
 
-	g_locaplic - {String} Endere�o da aplica��o (i3geo) onde fica o diret�rio classesphp
+	g_locaplic - {String} Endereco da aplicacao (i3geo) onde fica o diretorio classesphp
 
-	funcao - {Function} fun��o que ser� executada quando a lista for recebida. Se for "", n�o � chamada.
+	funcao - {Function} funcao que sera executada quando a lista for recebida. Se for "", nao e chamada.
 	*/
 	listaSistemas: function(g_sid,g_locaplic,funcao) {
 		if(typeof(console) !== 'undefined'){console.info("i3GEO.arvoreDeTemas.listaSistemas()");}
@@ -670,17 +670,17 @@ i3GEO.arvoreDeTemas = {
 	/*
 	Function: listaDrives
 
-	Lista os endere�os no servidor dos drives que podem ser abertos pela op��o de navega��o em arquivos no servidor.
+	Lista os enderecos no servidor dos drives que podem ser abertos pela opcao de navegacao em arquivos no servidor.
 
 	Alista de drives deve ser definida emi3geo/ms_configura.php
 
 	Parametros:
 
-	g_sid - {String} C�digo da se��o PHP criada ao abrir o i3Geo
+	g_sid - {String} Codigo da secao PHP criada ao abrir o i3Geo
 
-	g_locaplic - {String} Endere�o da aplica��o (i3geo) onde fica o diret�rio classesphp
+	g_locaplic - {String} Endereco da aplicacao (i3geo) onde fica o diretorio classesphp
 
-	funcao - {Function} fun��o que ser� executada quando a lista for recebida. Se for "", n�o � chamada.
+	funcao - {Function} funcao que sera executada quando a lista for recebida. Se for "", nao e chamada.
 	*/
 	listaDrives: function(g_sid,g_locaplic,funcao) {
 		if(typeof(console) !== 'undefined'){console.info("i3GEO.arvoreDeTemas.listaDrives()");}
@@ -699,11 +699,11 @@ i3GEO.arvoreDeTemas = {
 	/*
 	Function: listaEstrelas
 
-	Busca e insere na �rvore de temas os temas que cont�m um certo n�vel de estrelas
+	Busca e insere na arvore de temas os temas que contem um certo nivel de estrelas
 
 	Parametros:
 
-	node {objeto} - n� da �rvore que foi expandido pelo usu�rio
+	node {objeto} - no da arvore que foi expandido pelo usuario
 	*/
 	listaEstrelas: function(node){
 		if(typeof(console) !== 'undefined'){console.info("i3GEO.arvoreDeTemas.listaEstrelas()");}
@@ -769,26 +769,26 @@ i3GEO.arvoreDeTemas = {
 	/*
 	Function: cria
 
-	Cria a �rvore com os menus dispon�veis.
+	Cria a arvore com os menus disponiveis.
 
-	A �rvore cont�m opcionalmente a op��o de busca, os �cones adicionais e a lista de sistemas.
+	A arvore contem opcionalmente a opcao de busca, os icones adicionais e a lista de sistemas.
 
-	Ao ser criada, os par�metros utilizados s�o armazenados em vari�veis que podem ser acessadas com
+	Ao ser criada, os parametros utilizados sao armazenados em variaveis que podem ser acessadas com
 	i3geo.arvoreDeTemas.[ATIVATEMA,OPCOESADICIONAIS,IDHTML,LOCAPLIC,SID]
 
 	Parametros:
 
-	g_sid - {String} C�digo da se��o PHP criada ao abrir o i3Geo
+	g_sid - {String} Codigo da secao PHP criada ao abrir o i3Geo
 
-	g_locaplic - {String} Endere�o da aplica��o (i3geo) onde fica o diret�rio classesphp
+	g_locaplic - {String} Endereco da aplicacao (i3geo) onde fica o diretorio classesphp
 
-	idhtml - {String} Id do elemento onde a �rvore ser� inserida. Se for vazio, ser� utilizado o ID definido em IDHTML
+	idhtml - {String} Id do elemento onde a arvore sera inserida. Se for vazio, sera utilizado o ID definido em IDHTML
 
-	funcaoTema - {String} (opcional) Nome da fun��o que ser� executada quando o usu�rio clicar no checkbox de um tema
+	funcaoTema - {String} (opcional) Nome da funcao que sera executada quando o usuario clicar no checkbox de um tema
 
-	objOpcoes - {Object} (opcional) Objeto com as op��es necess�rias para cria��o dos �cones com as op��es adicionais de adi��o de temas
+	objOpcoes - {Object} (opcional) Objeto com as opcoes necessarias para criacao dos icones com as opcoes adicionais de adicao de temas
 
-	tipoBotao - {String} (opcional) checkbox|radio|download tipo de bot�o que ser� mostrado para o usu�rio escolher o tema
+	tipoBotao - {String} (opcional) checkbox|radio|download tipo de botao que sera mostrado para o usuario escolher o tema
 	*/
 	cria: function(g_sid,g_locaplic,idhtml,funcaoTema,objOpcoes,tipoBotao) {
 		if(typeof(console) !== 'undefined'){console.info("i3GEO.arvoreDeTemas.cria()");}
@@ -818,7 +818,7 @@ i3GEO.arvoreDeTemas = {
 	/*
 	Function: atualiza
 
-	Refaz a �rvore atual
+	Refaz a arvore atual
 	*/
 	atualiza: function(){
 		if(typeof(console) !== 'undefined'){console.info("i3GEO.arvoreDeTemas.atualiza()");}
@@ -828,9 +828,9 @@ i3GEO.arvoreDeTemas = {
 	/*
 	Function: montaArvore
 
-	Monta a �rvore incluindo os n�s do primeiro n�vel. 
+	Monta a arvore incluindo os nos do primeiro nivel. 
 
-	A op��o de carga din�mica dos n�s filhos � definida para a montagem dos grupos.
+	A opcao de carga dinamica dos nos filhos e definida para a montagem dos grupos.
 	*/
 	montaArvore: function() {
 		if(typeof(console) !== 'undefined'){console.info("i3GEO.arvoreDeTemas.montaArvore()");}
@@ -844,7 +844,7 @@ i3GEO.arvoreDeTemas = {
 			}
 			buildTree();
 		})();
-		//op��o de busca de temas
+		//opcao de busca de temas
 		root = i3GEO.arvoreDeTemas.ARVORE.getRoot();
 		if(i3GEO.arvoreDeTemas.OPCOESADICIONAIS.incluibusca === true){
 			insp = "<br><br><table><tr>" +
@@ -861,7 +861,7 @@ i3GEO.arvoreDeTemas = {
 				root
 			);
 		}
-		//icones com as outras op��es
+		//icones com as outras opcoes
 		//conforme definido em i3GEO.arvoreDeTemas.OPCOESADICIONAIS
 		outrasOpcoes = i3GEO.arvoreDeTemas.outrasOpcoesHTML();
 		if(i3GEO.arvoreDeTemas.OPCOESADICIONAIS.idonde !== "")
@@ -873,26 +873,26 @@ i3GEO.arvoreDeTemas = {
 			);
 		}
 		//
-		//op��es para abrir o sistema de administra��o
+		//opcoes para abrir o sistema de administracao
 		//
 		if(i3GEO.parametros.editor === "sim"){
 			tempNode = new YAHOO.widget.HTMLNode(
 				{
-					html:"<a style='color:red' title='op��o vis�vel apenas para editores' href='../admin' target=blank >Sistema de administra��o</a>",
+					html:"<a style='color:red' title='op&ccedil;&atilde;o vis&iacute;vel apenas para editores' href='../admin' target=blank >Sistema de administra&ccedil;&atilde;o</a>",
 					idmenu:"",enableHighlight:false,expanded:false
 				},
 				root
 			);
 			tempNode = new YAHOO.widget.HTMLNode(
 				{
-					html:"<a style='color:red' title='op��o vis�vel apenas para editores' href='../admin/html/arvore.html' target=blank >Editar �rvore</a>",
+					html:"<a style='color:red' title='op&ccedil;&atilde;o vis&iacute;vel apenas para editores' href='../admin/html/arvore.html' target=blank >Editar &aacute;rvore</a>",
 					idmenu:"",enableHighlight:false,expanded:false
 				},
 				root
 			);
 			tempNode = new YAHOO.widget.HTMLNode(
 				{
-					html:"<span style='color:red;cursor:pointer' title='op��o vis�vel apenas para editores' onclick='i3GEO.arvoreDeTemas.abrejanelaIframe(\"900\",\"500\",\""+i3GEO.configura.locaplic+"/admin/html/menus.html\")' target=blank >Editar menus</span>",
+					html:"<span style='color:red;cursor:pointer' title='op&ccedil;&atilde;o vis&iacute;vel apenas para editores' onclick='i3GEO.arvoreDeTemas.abrejanelaIframe(\"900\",\"500\",\""+i3GEO.configura.locaplic+"/admin/html/menus.html\")' target=blank >Editar menus</span>",
 					idmenu:"",enableHighlight:false,expanded:false
 				},
 				root
@@ -911,7 +911,7 @@ i3GEO.arvoreDeTemas = {
 			);
 		}
 		//
-		//abrir cat�logo em janela flutuante
+		//abrir catalogo em janela flutuante
 		//
 		if(i3GEO.arvoreDeTemas.OPCOESADICIONAIS.flutuante === true){
 			tempNode = new YAHOO.widget.HTMLNode(
@@ -959,7 +959,7 @@ i3GEO.arvoreDeTemas = {
 			while(ig > 0);
 		}
 		//
-		//adiciona na �rvore a raiz de cada menu
+		//adiciona na arvore a raiz de cada menu
 		//
 		dados = i3GEO.arvoreDeTemas.MENUS;
 		c = dados.length;
@@ -1072,9 +1072,9 @@ i3GEO.arvoreDeTemas = {
 	/*
 	Function: montaGrupos
 
-	Monta a lista de grupos de um n� principal da �rvore. 
+	Monta a lista de grupos de um no principal da arvore. 
 
-	A op��o de carga din�mica dos n�s filhos � definida para a montagem dos sub-grupos.
+	A opcao de carga dinamica dos nos filhos e definida para a montagem dos sub-grupos.
 	*/
 	montaGrupos: function(node){
 		if(typeof(console) !== 'undefined'){console.info("i3GEO.arvoreDeTemas.montaGrupos()");}
@@ -1108,10 +1108,10 @@ i3GEO.arvoreDeTemas = {
 				else
 				{editor = "";}
 				if(mostra && grupos[i].nome != undefined ){
-					//se id_n1 existir, significa que os grupos possuem id, pois s�o oriundos do sistema
-					//de administra��o
-					//no caso do uso de menu de temas com base em arquivos xml, o id n�o existe
-					//sendo necess�rio o uso da ordem dos grupos como identificador
+					//se id_n1 existir, significa que os grupos possuem id, pois sao oriundos do sistema
+					//de administracao
+					//no caso do uso de menu de temas com base em arquivos xml, o id nao existe
+					//sendo necessario o uso da ordem dos grupos como identificador
 					if(grupos[i].publicado){
 						if(grupos[i].publicado === "NAO"){
 							grupos[i].nome = "<span title='nao publicado' ><s>"+grupos[i].nome+"</s></span>";
@@ -1133,9 +1133,9 @@ i3GEO.arvoreDeTemas = {
 	/*
 	Function: montaSubGrupos
 
-	Monta a lista de sub-grupos de um n� do tipo grupo. 
+	Monta a lista de sub-grupos de um no do tipo grupo. 
 
-	A op��o de carga din�mica dos n�s filhos � definida para a montagem dos temas.
+	A opcao de carga dinamica dos nos filhos e definida para a montagem dos temas.
 	*/
 	montaSubGrupos: function(node){
 		if(typeof(console) !== 'undefined'){console.info("i3GEO.arvoreDeTemas.montaSubGrupos()");}
@@ -1182,10 +1182,10 @@ i3GEO.arvoreDeTemas = {
 				else
 				{editor = "";}
 				if(mostra && subgrupos[i].nome != undefined ){
-					//se id_n2 existir, significa que os grupos possuem id, pois s�o oriundos do sistema
-					//de administra��o
-					//no caso do uso de menu de temas com base em arquivos xml, o id n�o existe
-					//sendo necess�rio o uso da ordem dos grupos como identificador
+					//se id_n2 existir, significa que os grupos possuem id, pois sao oriundos do sistema
+					//de administracao
+					//no caso do uso de menu de temas com base em arquivos xml, o id nao existe
+					//sendo necessario o uso da ordem dos grupos como identificador
 					if(subgrupos[i].publicado){
 						if(subgrupos[i].publicado === "NAO"){
 							subgrupos[i].nome = "<span title='nao publicado' ><s>"+subgrupos[i].nome+"</s></span>";
@@ -1207,7 +1207,7 @@ i3GEO.arvoreDeTemas = {
 	/*
 	Function: montaTemas
 
-	Monta a lista de temas de um n�. 
+	Monta a lista de temas de um no. 
 	*/
 	montaTemas: function(node){
 		if(typeof(console) !== 'undefined'){console.info("i3GEO.arvoreDeTemas.montaTemas()");}
@@ -1256,11 +1256,11 @@ i3GEO.arvoreDeTemas = {
 	/*
 	Function: montaDir
 
-	Inclu� na �rvore o navegador de diret�rios
+	Inclui na arvore o navegador de diretorios
 
 	Parametro:
 
-	node {node} - n� onde ser� criada a lista 
+	node {node} - no onde sera criada a lista 
 	*/
 	montaDir: function(node){
 		if(typeof(console) !== 'undefined'){console.info("i3GEO.arvoreDeTemas.montaDir()");}
@@ -1301,11 +1301,11 @@ i3GEO.arvoreDeTemas = {
 	/*
 	Function: montaTextoTema
 
-	Monta o texto com o t�tulo do tema.
+	Monta o texto com o titulo do tema.
 
 	Parametros:
 
-	cor - {String} - cor que ser� utilizada no estilo "color"
+	cor - {String} - cor que sera utilizada no estilo "color"
 
 	tema - {Object} - objeto JSON com as propriedades do tema
 
@@ -1345,11 +1345,11 @@ i3GEO.arvoreDeTemas = {
 	/*
 	Function: propTemas
 
-	Monta o n� com informa��es adicionais sobre o tema.
+	Monta o no com informacoes adicionais sobre o tema.
 
 	Parametro:
 
-	node - {Object} - objeto com o n� que foi clicado
+	node - {Object} - objeto com o no que foi clicado
 	*/
 	propTemas: function(node){
 		if(typeof(console) !== 'undefined'){console.info("i3GEO.arvoreDeTemas.propTemas()");}
@@ -1392,7 +1392,7 @@ i3GEO.arvoreDeTemas = {
 			);
 		}		
 		if (node.data.permitecomentario && node.data.permitecomentario !== "nao" && i3GEO.arvoreDeTemas.OPCOESADICIONAIS.comentarios === true){
-			html = "<a href='#' title='' onclick='i3GEO.tema.dialogo.comentario(\""+node.data.idtema+"\",\"comentario\")' >Coment�rio</a>";
+			html = "<a href='#' title='' onclick='i3GEO.tema.dialogo.comentario(\""+node.data.idtema+"\",\"comentario\")' >"+$trad("x19")+"</a>";
 			new YAHOO.widget.HTMLNode(
 				{isLeaf:true,enableHighlight:false,expanded:false,html:html},
 				node
@@ -1421,7 +1421,7 @@ i3GEO.arvoreDeTemas = {
 	/*
 	Function: outrasOpcoesHTML
 
-	Constr�i o HTML com as op��es adicionais de inclus�o de temas (upload de shp, etc.).
+	Constroi o HTML com as opcoes adicionais de inclusao de temas (upload de shp, etc.).
 
 	Return:
 
@@ -1505,7 +1505,7 @@ i3GEO.arvoreDeTemas = {
 	/*
 	Function: desativaCheckbox
 
-	Desmarca todos os checkbox dos temas marcados na �rvore.
+	Desmarca todos os checkbox dos temas marcados na arvore.
 	*/
 	desativaCheckbox: function(){
 		if(typeof(console) !== 'undefined'){console.info("i3GEO.arvoreDeTemas.desativaCheckbox()");}
@@ -1526,7 +1526,7 @@ i3GEO.arvoreDeTemas = {
 	Lista os temas com checkbox marcados.
 
 	Return:
-	{Array} - array com os c�digos dos temas
+	{Array} - array com os codigos dos temas
 	*/
 	listaTemasAtivos: function(){
 		if(typeof(console) !== 'undefined'){console.info("i3GEO.arvoreDeTemas.listaTemasAtivos()");}
@@ -1545,9 +1545,9 @@ i3GEO.arvoreDeTemas = {
 		return (lista);
 	},
 	/*
-	Depreciado na vers�o 4.4
+	Depreciado na versao 4.4
 
-	Procura temas na �rvore de temas (a busca � feita no servidor e n�o na �rvore atual).
+	Procura temas na arvore de temas (a busca e feita no servidor e nao na arvore atual).
 
 	Parametro:
 
@@ -1606,13 +1606,13 @@ i3GEO.arvoreDeTemas = {
 			nodePalavra.loadComplete();
 		};
 		//
-		//funcao que ser� executada para buscar os temas
+		//funcao que sera executada para buscar os temas
 		//
 		busca = function(){
 			i3GEO.php.procurartemas2(resultadoProcurar,i3GEO.util.removeAcentos(palavra));
 		};
 		//
-		//recolhe todos os n�s e acrescenta um novo
+		//recolhe todos os nos e acrescenta um novo
 		//
 		i3GEO.arvoreDeTemas.ARVORE.collapseAll();
 		root = i3GEO.arvoreDeTemas.ARVORE.getRoot();
@@ -1637,7 +1637,7 @@ i3GEO.arvoreDeTemas = {
 	/*
 	Function: buscaTema2
 
-	Procura temas na �rvore de temas (a busca � feita no servidor e n�o na �rvore atual).
+	Procura temas na arvore de temas (a busca e feita no servidor e nao na arvore atual).
 
 	Parametro:
 
@@ -1702,13 +1702,13 @@ i3GEO.arvoreDeTemas = {
 		};
 
 		//
-		//funcao que ser� executada para buscar os temas
+		//funcao que sera executada para buscar os temas
 		//
 		busca = function(){
 			i3GEO.php.procurartemas2(resultadoProcurar,i3GEO.util.removeAcentos(palavra));
 		};
 		//
-		//recolhe todos os n�s e acrescenta um novo
+		//recolhe todos os nos e acrescenta um novo
 		//
 		i3GEO.arvoreDeTemas.ARVORE.collapseAll();
 		root = i3GEO.arvoreDeTemas.ARVORE.getRoot();
@@ -1729,11 +1729,11 @@ i3GEO.arvoreDeTemas = {
 	/*
 	Function: adicionaTemas
 
-	Adiciona ao mapa os temas selecionados na �rvore
+	Adiciona ao mapa os temas selecionados na arvore
 
 	Parametro:
 
-	tsl {array} - (opcional) c�digo do tema que ser� adicionado ao mapa. Se n�o for especificado, a lista de c�digos ser� obtida da �rvore de temas
+	tsl {array} - (opcional) codigo do tema que sera adicionado ao mapa. Se nao for especificado, a lista de codigos sera obtida da arvore de temas
 	*/
 	adicionaTemas: function(tsl){
 		if(typeof(console) !== 'undefined'){console.info("i3GEO.arvoreDeTemas.adicionaTemas()");}
@@ -1747,25 +1747,25 @@ i3GEO.arvoreDeTemas = {
 		tempoBotaoAplicar = "";
 		i3GEO.mapa.ativaTema("");
 		//
-		//pega os temas ativados na �rvore de menus
+		//pega os temas ativados na arvore de menus
 		//
 		if(arguments.length !== 1)
 		{tsl = i3GEO.arvoreDeTemas.listaTemasAtivos();}
 		//i3GEO.arvoreDeTemas.desativaCheckbox();
 		//
-		//se forem encontrados temas ativos na �rvore de menus, o mapa � redesenhado com a adi��o de novos temas
+		//se forem encontrados temas ativos na arvore de menus, o mapa e redesenhado com a adicao de novos temas
 		//
-		//verifica se o tema j� existe no mapa
+		//verifica se o tema ja existe no mapa
 		//
 		if(tsl.length === 1 && i3GEO.arvoreDeCamadas.pegaTema(tsl[0]) !== ""){
-			temp = window.confirm("O tema j� existe no mapa. Adiciona novamente?");
+			temp = window.confirm("O tema existe no mapa. Adiciona novamente?");
 			if(!temp){return;}
 		}
 		if(tsl.length > 0){
 			temp = function(retorno){
 				i3GEO.atualiza();
 				//
-				//verifica se deve ser ativada uma outra guia que n�o a atual
+				//verifica se deve ser ativada uma outra guia que nao a atual
 				//
 				if(i3GEO.arvoreDeTemas.RETORNAGUIA !== ""){
 					if(i3GEO.arvoreDeTemas.RETORNAGUIA !== i3GEO.guias.ATUAL){
@@ -1774,7 +1774,7 @@ i3GEO.arvoreDeTemas = {
 					}
 				}
 				//
-				//verifica se a janela da ferramenta identifica est� ativa para atualizar a lista de temas
+				//verifica se a janela da ferramenta identifica esta ativa para atualizar a lista de temas
 				//
 				try{
 					if($i("i3GEOidentificalistaTemas")){
@@ -1794,17 +1794,17 @@ i3GEO.arvoreDeTemas = {
 
 	Busca a lista de menus existentes no i3geo e monta um combo com o resultado.
 
-	Ao escolher uma op��o do combo, a fun��o de retorno receber� como par�metro o id do menu.
+	Ao escolher uma opcao do combo, a funcao de retorno recebera como parametro o id do menu.
 
 	Parametros:
 
-	locaplic {String} - endere�o do i3geo
+	locaplic {String} - endereco do i3geo
 
-	funcaoOnchange {String} - nome da funcao que ser� executada quando o usu�rio escolhe um grupo
+	funcaoOnchange {String} - nome da funcao que sera executada quando o usuario escolhe um grupo
 
-	idDestino {String} - id do elemento HTML que receber� o combo
+	idDestino {String} - id do elemento HTML que recebera o combo
 
-	idCombo {String} - id do combo que ser� criado
+	idCombo {String} - id do combo que sera criado
 
 	largura {Numeric} - largura em pixels do combo
 
@@ -1832,23 +1832,23 @@ i3GEO.arvoreDeTemas = {
 
 	Busca a lista de grupos existentes no menu de temas do i3geo e monta um combo com o resultado.
 
-	Ao escolher uma op��o do combo, a fun��o de retorno receber� como par�metro o id do grupo.
+	Ao escolher uma opcao do combo, a funcao de retorno recebera como parametro o id do grupo.
 
 	Parametros:
 
-	locaplic {String} - endere�o do i3geo
+	locaplic {String} - endereco do i3geo
 
-	funcaoOnchange {String} - nome da funcao que ser� executada quando o usu�rio escolhe um grupo
+	funcaoOnchange {String} - nome da funcao que sera executada quando o usuario escolhe um grupo
 
-	idDestino {String} - id do elemento HTML que receber� o combo
+	idDestino {String} - id do elemento HTML que recebera o combo
 
-	idCombo {String} - id do combo que ser� criado
+	idCombo {String} - id do combo que sera criado
 
 	largura {Numeric} - largura em pixels do combo
 
 	altura {Numeric} - altura do combo em linhas
 
-	id_menu {Numeric} - id do menu que ser� utilizado para obter os dados
+	id_menu {Numeric} - id do menu que sera utilizado para obter os dados
 	*/
 	comboGruposMenu: function(locaplic,funcaoOnchange,idDestino,idCombo,largura,altura,id_menu){
 		if(typeof(console) !== 'undefined'){console.info("i3GEO.arvoreDeTemas.comboGruposMenu()");}
@@ -1872,19 +1872,19 @@ i3GEO.arvoreDeTemas = {
 
 	Monta um combo com a lista de subgrupos de um grupo do menu de temas do i3geo.
 
-	Ao escolher um subgrupo, a fun��o de retorno receber� o id do grupo e o id do subgrupo.
+	Ao escolher um subgrupo, a funcao de retorno recebera o id do grupo e o id do subgrupo.
 
 	Parametros:
 
-	locaplic {String} - endere�o do i3geo
+	locaplic {String} - endereco do i3geo
 
-	funcaoOnchange {String} - nome da funcao que ser� executada quando o usu�rio escolhe um grupo
+	funcaoOnchange {String} - nome da funcao que sera executada quando o usuario escolhe um grupo
 
-	idDestino {String} - id do elemento HTML que receber� o combo
+	idDestino {String} - id do elemento HTML que recebera o combo
 
-	idCombo {String} - id do combo que ser� criado
+	idCombo {String} - id do combo que sera criado
 
-	idGrupo {String} - identificador do grupo que ser� pesquisado
+	idGrupo {String} - identificador do grupo que sera pesquisado
 
 	largura {Numeric} - largura em pixels do combo
 
@@ -1914,15 +1914,15 @@ i3GEO.arvoreDeTemas = {
 
 	Parametros:
 
-	locaplic {String} - endere�o do i3geo
+	locaplic {String} - endereco do i3geo
 
-	funcaoOnchange - nome da funcao que ser� executada quando o usu�rio escolhe um grupo
+	funcaoOnchange - nome da funcao que sera executada quando o usuario escolhe um grupo
 
-	idDestino - id do elemento HTML que receber� o combo
+	idDestino - id do elemento HTML que recebera o combo
 
-	idCombo - id do combo que ser� criado
+	idCombo - id do combo que sera criado
 
-	idGrupo - identificador do grupo que ser� pesquisado
+	idGrupo - identificador do grupo que sera pesquisado
 
 	idSubGrupo - id do subgrupo
 
@@ -1959,7 +1959,7 @@ i3GEO.arvoreDeTemas = {
 	/*
 	Classe: dialogo
 
-	Abre as janelas de di�logo com as op��es adicionais que permitem acrescentar temas ao mapa
+	Abre as janelas de dialogo com as opcoes adicionais que permitem acrescentar temas ao mapa
 
 	Por exemplo, para abrir a janela de upload de arquivos dbf, utilize
 
@@ -2026,7 +2026,7 @@ i3GEO.arvoreDeTemas = {
 		/*
 		Function: conectaservico
 
-		Abre uma janela flutunate que permite abrir outras ferramentas para conex�o com servi�os externos
+		Abre uma janela flutunate que permite abrir outras ferramentas para conexao com servicos externos
 		*/
 		conectaservico: function(){
 			var janela,ins,titulo,cabecalho,minimiza,
@@ -2036,7 +2036,7 @@ i3GEO.arvoreDeTemas = {
 			minimiza = function(){
 				i3GEO.janela.minimiza("i3GEOFconectaservico");
 			};
-			titulo = "Conex�o com servi�os</a>";
+			titulo = "Conex&atilde;o com servi&ccedil;os</a>";
 			janela = i3GEO.janela.cria(
 				"260px",
 				"150px",
@@ -2053,7 +2053,7 @@ i3GEO.arvoreDeTemas = {
 			$i("i3GEOFconectaservico_corpo").style.backgroundColor = "white";
 			$i("i3GEOFconectaservico_corpo").style.overflow = "hidden";
 			ins = "" +
-			"	<p class=paragrafo style='width:90%' ><b>Tipo de conex�o</b><br><br>" +
+			"	<p class=paragrafo style='width:90%' ><b>Tipo de conex&aatilde;o</b><br><br>" +
 			"	<table class=lista6 style=left:20px;position:relative >";
 			
 			if(OPCOESADICIONAIS.carregaKml === true){
@@ -2093,7 +2093,7 @@ i3GEO.arvoreDeTemas = {
 		/*
 		Function: carregaKml
 
-		Abre a janela flutuante para o usu�rio adicionar temas baseado em arquivos KML
+		Abre a janela flutuante para o usuario adicionar temas baseado em arquivos KML
 		*/
 		carregaKml: function(){
 			i3GEO.util.scriptTag(i3GEO.configura.locaplic+"/ferramentas/carregakml/index.js","i3GEOF.carregakml.criaJanelaFlutuante()","i3GEOF.carregakml_script");
@@ -2101,7 +2101,7 @@ i3GEO.arvoreDeTemas = {
 		/*
 		Function: carouselTemas
 
-		Abre a janela flutuante para o usu�rio adicionar temas baseado nas imagens miniatura
+		Abre a janela flutuante para o usuario adicionar temas baseado nas imagens miniatura
 		*/
 		carouselTemas: function(){
 			i3GEO.util.scriptTag(i3GEO.configura.locaplic+"/ferramentas/carouseltemas/index.js","i3GEOF.carouseltemas.criaJanelaFlutuante()","i3GEOF.carouseltemas_script");
@@ -2109,7 +2109,7 @@ i3GEO.arvoreDeTemas = {
 		/*
 		Function: buscaInde
 
-		Abre a janela flutuante para o usu�rio procurar metadados na INDE
+		Abre a janela flutuante para o usuario procurar metadados na INDE
 		*/
 		buscaInde: function(){
 			i3GEO.util.scriptTag(i3GEO.configura.locaplic+"/ferramentas/buscainde/index.js","i3GEOF.buscainde.criaJanelaFlutuante()","i3GEOF.buscainde_script");
@@ -2127,14 +2127,14 @@ i3GEO.arvoreDeTemas = {
 
 		Mostra a nuvem de tags para escolha de temas baseado nos tags registrados nos menus de temas.
 
-		Essa ferramenta � alternativa a ferramenta nuvemTags, mostrando tbm a nuvem com um aplicativo em flash
+		Essa ferramenta e alternativa a ferramenta nuvemTags, mostrando tbm a nuvem com um aplicativo em flash
 		*/
 		nuvemTagsFlash: function()
 		{i3GEO.janela.cria("550px","350px",i3GEO.configura.locaplic+"/ferramentas/nuvemtagsflash/index.htm","","","Nuvem Flash");},
 		/*
 		Function: navegacaoDir
 
-		Abre a janela para adicionar temas navegando pelos diret�rios do servidor
+		Abre a janela para adicionar temas navegando pelos diretorios do servidor
 		*/
 		navegacaoDir: function()
 		{i3GEO.janela.cria("550px","350px",i3GEO.configura.locaplic+"/ferramentas/navegacaodir/index.htm","","","Diret&oacute;rios");},
@@ -2151,7 +2151,7 @@ i3GEO.arvoreDeTemas = {
 		Abre a janela para adicionar temas tendo como fonte um web service do tipo wms
 		*/
 		conectarwms: function()
-		{i3GEO.janela.cria("400px","300px",i3GEO.configura.locaplic+"/ferramentas/conectarwms/index.htm","","","Conex�o WMS <a class=ajuda_usuario target=_blank href='"+i3GEO.configura.locaplic+"/ajuda_usuario.php?idcategoria=4&idajuda=28' >&nbsp;&nbsp;&nbsp;</a>");},
+		{i3GEO.janela.cria("400px","300px",i3GEO.configura.locaplic+"/ferramentas/conectarwms/index.htm","","","Conex&atilde;o WMS <a class=ajuda_usuario target=_blank href='"+i3GEO.configura.locaplic+"/ajuda_usuario.php?idcategoria=4&idajuda=28' >&nbsp;&nbsp;&nbsp;</a>");},
 		/*
 		Function: conectarwmst
 
@@ -2167,7 +2167,7 @@ i3GEO.arvoreDeTemas = {
 			{a = i3GEO.parametros.h + 200;}
 			else
 			{a = 350;}
-			i3GEO.janela.cria(l/2 + "px",a/2 + "px",i3GEO.configura.locaplic+"/ferramentas/wmstime/index.htm","","","Conex�o WMS-T <a class=ajuda_usuario target=_blank href='"+i3GEO.configura.locaplic+"/ajuda_usuario.php?idcategoria=4&idajuda=76' >&nbsp;&nbsp;&nbsp;</a>");
+			i3GEO.janela.cria(l/2 + "px",a/2 + "px",i3GEO.configura.locaplic+"/ferramentas/wmstime/index.htm","","","Conex&atilde;o WMS-T <a class=ajuda_usuario target=_blank href='"+i3GEO.configura.locaplic+"/ajuda_usuario.php?idcategoria=4&idajuda=76' >&nbsp;&nbsp;&nbsp;</a>");
 		},
 		/*
 		Function: conectarwfs
@@ -2190,7 +2190,7 @@ i3GEO.arvoreDeTemas = {
 		Abre a janela para adicionar temas tendo como fonte um georss
 		*/
 		conectargeorss: function()
-		{i3GEO.janela.cria("400px","300px",i3GEO.configura.locaplic+"/ferramentas/conectargeorss/index.htm","","","Conex�o GeoRSS <a class=ajuda_usuario target=_blank href='"+i3GEO.configura.locaplic+"/ajuda_usuario.php?idcategoria=4&idajuda=29' >&nbsp;&nbsp;&nbsp;</a>");},
+		{i3GEO.janela.cria("400px","300px",i3GEO.configura.locaplic+"/ferramentas/conectargeorss/index.htm","","","Conex&atilde;o GeoRSS <a class=ajuda_usuario target=_blank href='"+i3GEO.configura.locaplic+"/ajuda_usuario.php?idcategoria=4&idajuda=29' >&nbsp;&nbsp;&nbsp;</a>");},
 		/*
 		Function: upload
 

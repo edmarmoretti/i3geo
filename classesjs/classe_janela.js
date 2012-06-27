@@ -15,7 +15,7 @@ i3Geo Interface Integrada de Ferramentas de Geoprocessamento para Internet
 Direitos Autorais Reservados (c) 2006 Minist&eacute;rio do Meio Ambiente Brasil
 Desenvolvedor: Edmar Moretti edmar.moretti@mma.gov.br
 
-Este programa &eacute; software livre; você pode redistribu&iacute;-lo
+Este programa &eacute; software livre; voc&ecirc; pode redistribu&iacute;-lo
 e/ou modific&aacute;-lo sob os termos da Licen&ccedil;a P&uacute;blica Geral
 GNU conforme publicada pela Free Software Foundation;
 
@@ -23,8 +23,8 @@ Este programa &eacute; distribu&iacute;do na expectativa de que seja &uacute;til
 por&eacute;m, SEM NENHUMA GARANTIA; nem mesmo a garantia impl&iacute;cita
 de COMERCIABILIDADE OU ADEQUAÇ&Atilde;O A UMA FINALIDADE ESPEC&Iacute;FICA.
 Consulte a Licen&ccedil;a P&uacute;blica Geral do GNU para mais detalhes.
-Você deve ter recebido uma c&oacute;pia da Licen&ccedil;a P&uacute;blica Geral do
-GNU junto com este programa; se não, escreva para a
+Voc&ecirc; deve ter recebido uma c&oacute;pia da Licen&ccedil;a P&uacute;blica Geral do
+GNU junto com este programa; se n&atilde;o, escreva para a
 Free Software Foundation, Inc., no endere&ccedil;o
 59 Temple Street, Suite 330, Boston, MA 02111-1307 USA.
 */
@@ -49,7 +49,7 @@ Type:
 {YAHOO.widget.OverlayManager}
 */
 YAHOO.i3GEO.janela.manager = new YAHOO.widget.OverlayManager();
-//para efeitos de compatibilidade com a versão 4.6
+//para efeitos de compatibilidade com a vers&atilde;o 4.6
 YAHOO.namespace("janelaDoca.xp");
 YAHOO.janelaDoca.xp.manager = new YAHOO.widget.OverlayManager();
 /*
@@ -66,7 +66,7 @@ Classe: i3GEO.janela
 
 Abre janelas flutuantes
 
-As janelas são criadas por meio da biblioteca YUI
+As janelas s&atilde;o criadas por meio da biblioteca YUI
 */
 i3GEO.janela = {
 	/*
@@ -98,7 +98,7 @@ i3GEO.janela = {
 	/*
 	Propriedade: AGUARDEMODAL
 
-	Indica se a janela de aguarde ser&aacute; do tipo MODAL, ou seja, se ir&aacute; ou não bloquear as op&ccedil;&otilde;es do mapa.
+	Indica se a janela de aguarde ser&aacute; do tipo MODAL, ou seja, se ir&aacute; ou n&atilde;o bloquear as op&ccedil;&otilde;es do mapa.
 
 	Tipo:
 	{Boolean}
@@ -110,10 +110,10 @@ i3GEO.janela = {
 	/*
 	Propriedade: ANTESCRIA
 
-	Lista com os nomes das fun&ccedil;&otilde;es que serão executadas antes de abrir a janela.
+	Lista com os nomes das fun&ccedil;&otilde;es que ser&atilde;o executadas antes de abrir a janela.
 
 	Este &eacute; um array que pode ser modificado utilizando-se as fun&ccedil;&otilde;es javascript de
-	manipula&ccedil;ão de arrays.
+	manipula&ccedil;&atilde;o de arrays.
 
 	Tipo:
 	{Array}
@@ -125,10 +125,10 @@ i3GEO.janela = {
 	/*
 	Propriedade: ANTESFECHA
 
-	Lista com os nomes das fun&ccedil;&otilde;es que serão executadas antes de fechar a janela.
+	Lista com os nomes das fun&ccedil;&otilde;es que ser&atilde;o executadas antes de fechar a janela.
 
 	Este &eacute; um array que pode ser modificado utilizando-se as fun&ccedil;&otilde;es javascript de
-	manipula&ccedil;ão de arrays.
+	manipula&ccedil;&atilde;o de arrays.
 
 	Tipo:
 	{Array}
@@ -140,7 +140,7 @@ i3GEO.janela = {
 	/*
 	Propriedade: TRANSICAOSUAVE
 
-	Altera a transparência das janelas quando o mouse sobrep&otilde;e e quando sai (não &eacute; ativado no navegador IE)
+	Altera a transpar&ecirc;ncia das janelas quando o mouse sobrep&otilde;e e quando sai (n&atilde;o &eacute; ativado no navegador IE)
 
 	Tipo:
 	{boolean}
@@ -180,7 +180,7 @@ i3GEO.janela = {
 	/*
 	Variavel: TIPS
 
-	Lista os tips inseridos no mapa, possibilitando sua remo&ccedil;ão em lote
+	Lista os tips inseridos no mapa, possibilitando sua remo&ccedil;&atilde;o em lote
 	*/
 	TIPS: [],
 	/*
@@ -218,21 +218,21 @@ i3GEO.janela = {
 
 	waltura {integer} - altura da janela em pixels
 
-	wsrc {String} - URL que ser&aacute; inclu&iacute;da no SRC do iframe interno da janela. Se for "", o iframe não ser&aacute; criado
+	wsrc {String} - URL que ser&aacute; inclu&iacute;da no SRC do iframe interno da janela. Se for "", o iframe n&atilde;o ser&aacute; criado
 
-	nx {Integer} - posi&ccedil;ão x da janela em pixels. Se for "" ser&aacute; fixada no centro
+	nx {Integer} - posi&ccedil;&atilde;o x da janela em pixels. Se for "" ser&aacute; fixada no centro
 
-	ny {Integer} - posi&ccedil;ão y da janela em pixels. Se for "" ser&aacute; fixada no centro
+	ny {Integer} - posi&ccedil;&atilde;o y da janela em pixels. Se for "" ser&aacute; fixada no centro
 
 	texto {String} - texto do cabe&ccedil;alho
 
-	id {String} - (opcional) nome que ser&aacute; dado ao id que conter&aacute; a janela. Se não for definido, ser&aacute; usado o id="wdoca". O
+	id {String} - (opcional) nome que ser&aacute; dado ao id que conter&aacute; a janela. Se n&atilde;o for definido, ser&aacute; usado o id="wdoca". O
 		id do iframe interno &eacute; sempre igual ao id + a letra i. Por default, ser&aacute; "wdocai".
 		O id do cab&ccedil;alho ser&aacute; igual a id+"_cabecalho" e o id do corpo ser&aacute; id+"_corpo".
-		O id tamb&eacute;m &eacute; utilizado na fun&ccedil;ão de fechamento da janela. Quando for usada a t&eacute;cnica de
-		script tag, ao fechar a janela a fun&ccedil;ão de mesmo nome do id ser&aacute; definida como "null".
+		O id tamb&eacute;m &eacute; utilizado na fun&ccedil;&atilde;o de fechamento da janela. Quando for usada a t&eacute;cnica de
+		script tag, ao fechar a janela a fun&ccedil;&atilde;o de mesmo nome do id ser&aacute; definida como "null".
 
-	modal {Boolean} - (opcional) indica se a janela bloquear&aacute; as inferiores ou não. Por default &eacute; false
+	modal {Boolean} - (opcional) indica se a janela bloquear&aacute; as inferiores ou n&atilde;o. Por default &eacute; false
 
 	classe {String} - (opcional) classe CSS que ser&aacute; aplicada à barra de menu. Por default o valor &eacute; hd2. Na interface Google Earth, esse valor &eacute; sempre alterado para "hd".
 
@@ -255,7 +255,7 @@ i3GEO.janela = {
 		var i,wlargurA,ins,novoel,wdocaiframe,temp,fix,underlay,ifr,janela;
 		if(navm && !chro)
 		{this.TRANSICAOSUAVE = false;}
-		//executa as fun&ccedil;&otilde;es default de antes de qualquer cria&ccedil;ão de janela
+		//executa as fun&ccedil;&otilde;es default de antes de qualquer cria&ccedil;&atilde;o de janela
 		if(this.ANTESCRIA){
 			for(i=0;i<this.ANTESCRIA.length;i++)
 			{eval(this.ANTESCRIA[i]);}
@@ -275,7 +275,7 @@ i3GEO.janela = {
 		fix = false;
 		if(nx === "" || nx === "center")
 		{fix = true;}
-		//no IE, com CSS3, a sombra não funciona
+		//no IE, com CSS3, a sombra n&atilde;o funciona
 		if(modal === true)
 		{underlay = "none";}
 		else
@@ -361,7 +361,7 @@ i3GEO.janela = {
 
 	Parametro:
 
-	id {string} - prefixo utilizado na composi&ccedil;ão do id da janela
+	id {string} - prefixo utilizado na composi&ccedil;&atilde;o do id da janela
 	*/
 	minimiza: function(id){
 		var temp = $i(id+"_corpo"),
@@ -411,7 +411,7 @@ i3GEO.janela = {
 	/*
 	Function: fecha
 
-	Aplica a op&ccedil;ão definida em ANTESFECHA e elimina alguns objetos que são comumente adicionados por algumas opera&ccedil;&otilde;es do i3geo
+	Aplica a op&ccedil;&atilde;o definida em ANTESFECHA e elimina alguns objetos que s&atilde;o comumente adicionados por algumas opera&ccedil;&otilde;es do i3geo
 	como richdraw, box, pin
 
 	Parametros:
@@ -457,7 +457,7 @@ i3GEO.janela = {
 
 	h {Integer} - nova altura
 
-	id {String} - (opcional) id que identifica a janela aberta, por padrão utiliza "wdoca"
+	id {String} - (opcional) id que identifica a janela aberta, por padr&atilde;o utiliza "wdoca"
 	*/
 	alteraTamanho: function(w,h,id){
 		if(typeof(console) !== 'undefined'){console.info("i3GEO.janela.alteraTamanho()");}
@@ -526,7 +526,7 @@ i3GEO.janela = {
 
 	Paremeters:
 
-	id {String} - id da janela que ser&aacute; fechada. Se não for definido, tenta fechar as janelas principais.
+	id {String} - id da janela que ser&aacute; fechada. Se n&atilde;o for definido, tenta fechar as janelas principais.
 	*/
 	fechaAguarde: function(id){
 		if(id != undefined){
@@ -540,7 +540,7 @@ i3GEO.janela = {
 	/*
 	Function: ativaAlerta
 
-	Substitui a janel&ccedil;a de alerta padrão do sistema operacional por uma outra customizada
+	Substitui a janel&ccedil;a de alerta padr&atilde;o do sistema operacional por uma outra customizada
 
 	Parametros:
 
@@ -613,11 +613,11 @@ i3GEO.janela = {
 	/*
 	Function: tip
 
-	Cria um DIV e posiciona sobre o mapa na posi&ccedil;ão do mouse.
+	Cria um DIV e posiciona sobre o mapa na posi&ccedil;&atilde;o do mouse.
 
 	Parametro:
 
-	cabecalho {String} - texto que ser&aacute; usado no cabe&ccedil;alho (op&ccedil;ão fixar) (opcional)
+	cabecalho {String} - texto que ser&aacute; usado no cabe&ccedil;alho (op&ccedil;&atilde;o fixar) (opcional)
 
 	Return:
 
@@ -648,9 +648,9 @@ i3GEO.janela = {
 		i3GEO.janela.TIPS.push($i(Nid));
 		//
 		//monta o TIP com o id &uacute;nico criado
-		//quando o usu&aacute;rio escolhe a op&ccedil;ão de fixar,
+		//quando o usu&aacute;rio escolhe a op&ccedil;&atilde;o de fixar,
 		//o div &eacute; incluido no array i3GEO.janela.TIPS
-		//quando o mapa &eacute; redesenhado, esses elementos são exclu&iacute;dos do mapa
+		//quando o mapa &eacute; redesenhado, esses elementos s&atilde;o exclu&iacute;dos do mapa
 		//
 		res = "<div id='"+Nid+"cabecatip' style='text-align:left;background-color:rgb(240,240,240)'>";
 		res += "<span style='color:navy;cursor:pointer;text-align:left' onclick='javascript:$i(\""+Nid+"cabecatip\").innerHTML =\"\";' >"+cabecalho+"</span></div>";
@@ -660,7 +660,7 @@ i3GEO.janela = {
 		ist.left = objposicaocursor.telax - 5 + "px";
 		ist.display="block";
 		//
-		//registra a fun&ccedil;ão de elimina&ccedil;ão dos tips
+		//registra a fun&ccedil;&atilde;o de elimina&ccedil;&atilde;o dos tips
 		//
 		if(i3GEO.eventos.NAVEGAMAPA.toString().search("i3GEO.janela.excluiTips('todos')") < 0)
 		{i3GEO.eventos.NAVEGAMAPA.push("i3GEO.janela.excluiTips('todos')");}
@@ -676,7 +676,7 @@ i3GEO.janela = {
 
 	Parametro:
 
-	tipo {String} - todos|naofixos tipos de tips que serão exclu&iacute;dos
+	tipo {String} - todos|naofixos tipos de tips que ser&atilde;o exclu&iacute;dos
 	*/
 	excluiTips: function(tipo){
 		if(typeof(console) !== 'undefined'){console.info("i3GEO.janela.excluiTips()");}
@@ -751,7 +751,7 @@ i3GEO.janela = {
 	
 	Adiciona no cabe&ccedil;alho da janela um combo com a lista de temas para janelas abertas por ferramentas
 	
-	Essa fun&ccedil;ão &eacute; utilizada pelas ferramentas que operam sobre um determinado tema. O combo permite que o usu&aacute;rio
+	Essa fun&ccedil;&atilde;o &eacute; utilizada pelas ferramentas que operam sobre um determinado tema. O combo permite que o usu&aacute;rio
 	selecione um tema e ative a ferramenta para funcionar com esse tema
 	
 	Parametros:

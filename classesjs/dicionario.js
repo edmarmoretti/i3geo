@@ -52,7 +52,7 @@ it:"Attiva / disattiva logo"
 }],
 "p8": [
 {
-pt: "Cor da sele&ccedil;ão",
+pt: "Cor da sele&ccedil;&atilde;o",
 en:"Selection color",
 es:"Color de la selecci&oacute;n",
 it:"Colore della selezione"
@@ -122,17 +122,17 @@ it:"Attiva legenda"
 }],
 "p18": [
 {
-pt: "Não imprime a legenda",
+pt: "N&atilde;o imprime a legenda",
 en:"Disable legend",
 es:"Desactivar Subtitulo",
 it:"Disattiva legenda"
 }],
 "p19": [
 {
-pt: "Ativa ou desativa a legenda de um tema na op&ccedil;ão de impressão do mapa",
+pt: "Ativa ou desativa a legenda de um tema na op&ccedil;&atilde;o de impress&atilde;o do mapa",
 en:"Enables or disables the legend of a theme in the print option on the map",
-es:"Ativa ou desativa a legenda de um tema na op&ccedil;ão de impressão do mapa",
-it:"Ativa ou desativa a legenda de um tema na op&ccedil;ão de impressão do mapa"
+es:"Ativa ou desativa a legenda de um tema na op&ccedil;&atilde;o de impress&atilde;o do mapa",
+it:"Ativa ou desativa a legenda de um tema na op&ccedil;&atilde;o de impress&atilde;o do mapa"
 }],
 "p20": [
 {
@@ -143,7 +143,7 @@ it:"Tela remota"
 }],
 "p21": [
 {
-pt: "Anima&ccedil;ão",
+pt: "Anima&ccedil;&atilde;o",
 en:"Animation",
 es:"Animaci&oacute;n",
 it:"Animation"
@@ -630,7 +630,7 @@ it:"Legenda"
 }],
 "t19":[
 {
-pt:"Altera a transparência do tema, possibilitando que as camadas inferiores possam ser vistas.",
+pt:"Altera a transpar&ecirc;ncia do tema, possibilitando que as camadas inferiores possam ser vistas.",
 en:"Change the layer transparency.",
 es:"Altera la transparencia del tema, haciendo posible que las capas inferiores puedan verse",
 it:"Modifica la trasparenza del tema, consentendo che gli strati più bassi siano visti"
@@ -728,7 +728,7 @@ it:"Tabella..."
 }],
 "t32":[
 {
-pt:"Abre o editor de legenda, permitindo a altera&ccedil;ão da forma de representa&ccedil;ão desse tema.",
+pt:"Abre o editor de legenda, permitindo a altera&ccedil;&atilde;o da forma de representa&ccedil;&atilde;o desse tema.",
 en:"Opens the editor of legend, allowing the modification of the form of representation of this theme.",
 es:"Abre el editor de subt&iacute;tulo, permitiendo la alteraci&oacute;n de la forma de representaci&oacute;n de este tema",
 it:"Aprire l'editor di legenda, che consente la modifica della forma di rappresentazione di questo tema "
@@ -784,10 +784,10 @@ it:"Grafico"
 }],
 "t38":[
 {
-pt:"Exporta a legenda para o padrão SLD.",
+pt:"Exporta a legenda para o padr&atilde;o SLD.",
 en:"Export the legend to SLD.",
-es:"Exporta a legenda para o padrão SLD.",
-it:"Exporta a legenda para o padrão SLD."
+es:"Exporta a legenda para o padr&atilde;o SLD.",
+it:"Exporta a legenda para o padr&atilde;o SLD."
 }],
 "t39":[
 {
@@ -946,7 +946,7 @@ it:"Temi"
 }],
 "a8":[
 {
-pt:"Clique no box ao lado do tema para ligar ou desligar, mostrando-o ou não no mapa. Ap&oacute;s alterar o estado do tema, aguarde alguns instantes para o mapa ser redesenhado, ou clique no botão aplicar que ser&aacute; mostrado.",
+pt:"Clique no box ao lado do tema para ligar ou desligar, mostrando-o ou n&atilde;o no mapa. Ap&oacute;s alterar o estado do tema, aguarde alguns instantes para o mapa ser redesenhado, ou clique no bot&atilde;o aplicar que ser&aacute; mostrado.",
 en:"Click to connect or disconnect layer, showing it or not on the map. After changing the layer status, wait a few moments to be redesigned the map, or click in the button apply that will be shown.",
 es:"Haga clic para conectar o desconectar este tema, mostr&aacute;ndolo o no en el mapa. Despu&eacute;s de alterar el estado del tema, espere algunos instantes para que el mapa sea redise&ntilde;ado, o haga clic en el bot&oacute;n aplicar que aparecer&aacute;",
 it:"Clicca sulla casella accanto al tema per attivare o disattivare, mostrandolo o meno sulla mappa. Dopo aver modificato lo stato del tema, attendere qualche istante per vedere ridisegnata la mappa, oppure fare clic sul pulsante Applica, che verrà visualizzato."
@@ -1208,10 +1208,10 @@ it:"Mostra la estensione geografica corrente in coordinate geografiche"
 }],
 "d8t":[
 {
-pt:"extensão atual",
+pt:"extens&atilde;o atual",
 en:"total extent",
-es:"extensão atual",
-it:"extensão atual"
+es:"extens&atilde;o atual",
+it:"extens&atilde;o atual"
 }],
 "d9":[
 {
@@ -1222,10 +1222,10 @@ it:"Apertura/chiusura della mappa di riferimento"
 }],
 "d9t":[
 {
-pt:"mapa de referência",
+pt:"mapa de refer&ecirc;ncia",
 en:"reference map",
-es:"mapa de referência",
-it:"mapa de referência"
+es:"mapa de refer&ecirc;ncia",
+it:"mapa de refer&ecirc;ncia"
 }],
 "d10":[
 {
@@ -1306,10 +1306,10 @@ it:"Progetto di confluenza. Punti di intersezione delle coordinate osservate in 
 }],
 "d17t":[
 {
-pt:"confluências",
+pt:"conflu&ecirc;ncias",
 en:"confluences",
-es:"confluências",
-it:"confluências"
+es:"conflu&ecirc;ncias",
+it:"conflu&ecirc;ncias"
 }],
 "d18":[
 {
@@ -1460,10 +1460,10 @@ it:"Linha do tempo"
 }],
 "d31":[
 {
-pt:"Não existe nenhuma camada com etiquetas ativas",
+pt:"N&atilde;o existe nenhuma camada com etiquetas ativas",
 en:"There is no layer with active labels",
-es:"Não existe nenhuma camada com etiquetas ativas",
-it:"Não existe nenhuma camada com etiquetas ativas"
+es:"N&atilde;o existe nenhuma camada com etiquetas ativas",
+it:"N&atilde;o existe nenhuma camada com etiquetas ativas"
 }],
 "d32":[
 {
@@ -1474,10 +1474,10 @@ it:"Applicazioni"
 }],
 "ge1":[
 {
-pt:"Navega&ccedil;ão com o mouse",
+pt:"Navega&ccedil;&atilde;o com o mouse",
 en:"Mouse navigation",
-es:"Navega&ccedil;ão com o mouse",
-it:"Navega&ccedil;ão com o mouse"
+es:"Navega&ccedil;&atilde;o com o mouse",
+it:"Navega&ccedil;&atilde;o com o mouse"
 }],
 "ge2":[
 {
@@ -1489,9 +1489,9 @@ it:"Barra de status"
 "ge3":[
 {
 pt:"Reference map",
-en:"Mapa de referência",
-es:"Mapa de referência",
-it:"Mapa de referência"
+en:"Mapa de refer&ecirc;ncia",
+es:"Mapa de refer&ecirc;ncia",
+it:"Mapa de refer&ecirc;ncia"
 }],
 "ge4":[
 {
@@ -1593,17 +1593,17 @@ it:"Editar temas"
 }],
 "x7":[
 {
-pt:"op&ccedil;ão vis&iacute;vel apenas para editores",
+pt:"op&ccedil;&atilde;o vis&iacute;vel apenas para editores",
 en:"option visible only to editors",
-es:"op&ccedil;ão vis&iacute;vel apenas para editores",
-it:"op&ccedil;ão vis&iacute;vel apenas para editores"
+es:"op&ccedil;&atilde;o vis&iacute;vel apenas para editores",
+it:"op&ccedil;&atilde;o vis&iacute;vel apenas para editores"
 }],
 "x8":[
 {
-pt:"Sistema de administra&ccedil;ão",
+pt:"Sistema de administra&ccedil;&atilde;o",
 en:"Management System",
-es:"Sistema de administra&ccedil;ão",
-it:"Sistema de administra&ccedil;ão"
+es:"Sistema de administra&ccedil;&atilde;o",
+it:"Sistema de administra&ccedil;&atilde;o"
 }],
 "x9":[
 {
@@ -1626,7 +1626,105 @@ en:"Show the legend in a window",
 es:"Mostra a legenda em uma janela",
 it:"Mostra a legenda em uma janela"
 }],
-"x12":[
+"x13":[
+{
+pt:"&Acute;rvore de camadas n&atilde;o encontrada",
+en:"Tree layers not found",
+es:"Arboles de capas no se encuentra",
+it:"&Acute;rvore de camadas n&atilde;o encontrada"
+}],
+"x14":[
+{
+pt:"sim",
+en:"si",
+es:"yes",
+it:"sim"
+}],
+"x15":[
+{
+pt:"n&atilde;o",
+en:"no",
+es:"no",
+it:"nao"
+}],
+"x16":[
+{
+pt:"Valor n&atilde;o definido",
+en:"Value not set",
+es:"Valor no establecido",
+it:"Valor n&atilde;o definido"
+}],
+"x17":[
+{
+pt:"Essa op&ccedil;&atilde;o afeta apenas a impress&atilde;o do mapa",
+en:"This option only affects the printing of the map",
+es:"Esta opci&oacute;n s&ocaute;lo afecta a la impresi&ocaute;n del mapa",
+it:"Essa op&ccedil;&atilde;o afeta apenas a impress&atilde;o do mapa"
+}],
+"x18":[
+{
+pt:"Nome n&atilde;o definido",
+en:"El nombre no se ha definido",
+es:"Name was not defined",
+it:"Name was not defined"
+}],
+"x19":[
+{
+pt:"Coment&aacute;rios de",
+en:"Reviews",
+es:"Comentarios",
+it:""
+}],
+"x20":[
+{
+pt:"Clique no mapa para desenhar o pol&iacute;gono",
+en:"Click the map to draw the polygon",
+es:"Haga clic en el mapa para dibujar el pol&iacute;gono",
+it:"Click the map to draw the polygon"
+}],
+"x21":[
+{
+pt:"Essa opera&ccedil;&atilde;o n&atilde;o funciona nessa interface",
+en:"This operation does not work on this interface",
+es:"Esta operaci&oacute;n no funciona en esta interfaz",
+it:""
+}],
+"x22":[
+{
+pt:"Op&ccedil;&atilde;o n&atilde;o dispon&iacute;vel",
+en:"Option not available",
+es:"Opción no disponible",
+it:"Opción no disponible"
+}],
+"x23":[
+{
+pt:"Dire&ccedil;&atilde;o",
+en:"",
+es:"Direcci&oacute;n",
+it:"Direction"
+}],
+"x25":[
+{
+pt:"M&eacute;todo para calcular dist&acirc;ncias",
+en:"Method to calculate distances",
+es:"M&eacute;todo para calcular distancias",
+it:"Method to calculate distances"
+}],
+"x26":[
+{
+pt:"",
+en:"",
+es:"",
+it:""
+}],
+"x27":[
+{
+pt:"",
+en:"",
+es:"",
+it:""
+}],
+"x28":[
 {
 pt:"",
 en:"",

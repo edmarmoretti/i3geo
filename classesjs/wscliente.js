@@ -1,9 +1,9 @@
 /*
 Title: Cliente de web services
 
-Classe javascript da aplica&ccedil;ão de consulta de web services.
+Classe javascript da aplica&ccedil;&atilde;o de consulta de web services.
 
-Lê o conjunto de javascripts para o funcionamento da interface wscliente.htm
+L&ecirc; o conjunto de javascripts para o funcionamento da interface wscliente.htm
 
 Arquivo:
 
@@ -18,7 +18,7 @@ i3Geo Interface Integrada de Ferramentas de Geoprocessamento para Internet
 Direitos Autorais Reservados (c) 2006 Minist&eacute;rio do Meio Ambiente Brasil
 Desenvolvedor: Edmar Moretti edmar.moretti@mma.gov.br
 
-Este programa &eacute; software livre; você pode redistribu&iacute;-lo
+Este programa &eacute; software livre; voc&ecirc; pode redistribu&iacute;-lo
 e/ou modific&aacute;-lo sob os termos da Licen&ccedil;a P&uacute;blica Geral
 GNU conforme publicada pela Free Software Foundation;
 
@@ -26,8 +26,8 @@ Este programa &eacute; distribu&iacute;do na expectativa de que seja &uacute;til
 por&eacute;m, SEM NENHUMA GARANTIA; nem mesmo a garantia impl&iacute;cita
 de COMERCIABILIDADE OU ADEQUAÇ&Atilde;O A UMA FINALIDADE ESPEC&Iacute;FICA.
 Consulte a Licen&ccedil;a P&uacute;blica Geral do GNU para mais detalhes.
-Você deve ter recebido uma c&oacute;pia da Licen&ccedil;a P&uacute;blica Geral do
-GNU junto com este programa; se não, escreva para a
+Voc&ecirc; deve ter recebido uma c&oacute;pia da Licen&ccedil;a P&uacute;blica Geral do
+GNU junto com este programa; se n&atilde;o, escreva para a
 Free Software Foundation, Inc., no endere&ccedil;o
 59 Temple Street, Suite 330, Boston, MA 02111-1307 USA.
 
@@ -67,7 +67,7 @@ document.write(allScriptTags);
 /**
 Classe: i3geo_wscliente_configura
 
-Cria o objeto javascript com os parâmetros de configura&ccedil;ão da api e com as fun&ccedil;&otilde;es de manipula&ccedil;ão dos elementos da interface.
+Cria o objeto javascript com os parâmetros de configura&ccedil;&atilde;o da api e com as fun&ccedil;&otilde;es de manipula&ccedil;&atilde;o dos elementos da interface.
 
 Example:
 
@@ -85,11 +85,11 @@ Parametros:
 
 loc_i3geo - endere&ccedil;o web onde est&aacute; instalado o i3geo.
 
-corpo - id do div principal onde as mensagens serão mostradas no navegador
+corpo - id do div principal onde as mensagens ser&atilde;o mostradas no navegador
 
-enderecows - id do elemento html do tipo input que receber&aacute; o valor da sele&ccedil;ão feita pelo usu&aacute;rio ao clicar em um endere&ccedil;o ws 
+enderecows - id do elemento html do tipo input que receber&aacute; o valor da sele&ccedil;&atilde;o feita pelo usu&aacute;rio ao clicar em um endere&ccedil;o ws 
 
-enderecowms - id do elemento html do tipo input que receber&aacute; o valor da sele&ccedil;ão feita pelo usu&aacute;rio ao clicar em um endere&ccedil;o wms 
+enderecowms - id do elemento html do tipo input que receber&aacute; o valor da sele&ccedil;&atilde;o feita pelo usu&aacute;rio ao clicar em um endere&ccedil;o wms 
 
 rssws - array com a lista de endere&ccedil;os dos servi&ccedil;os RSS com a lista de webservices convencionais
 
@@ -135,7 +135,7 @@ function i3geo_wscliente_configura(loc_i3geo,corpo,enderecows,enderecowms,rssws,
 	*/
 	this.nometema = "";
 	/* 
-	Fun&ccedil;ão do ws escolhida.
+	Fun&ccedil;&atilde;o do ws escolhida.
 	*/
 	this.funcao = "";
 	/*
@@ -194,11 +194,11 @@ function i3geo_wscliente_configura(loc_i3geo,corpo,enderecows,enderecowms,rssws,
 	/*
 	Function: ativa
 
-	Ativa uma op&ccedil;ão escolhida pelo usu&aacute;rio, mostrando o seu respectivo texto no navegador. &Eacute; utilizado nas op&ccedil;&otilde;es que apresentam textos explicativos. 
+	Ativa uma op&ccedil;&atilde;o escolhida pelo usu&aacute;rio, mostrando o seu respectivo texto no navegador. &Eacute; utilizado nas op&ccedil;&otilde;es que apresentam textos explicativos. 
 
 	O conte&uacute;do do div (id) &eacute; lido e inclu&iacute;do na div corpo
 
-	Por padrão, os conte&uacute;dos devem ser inclu&iacute;dos em DIVS com os seguintes ids- oquews oqueogc oquecarto
+	Por padr&atilde;o, os conte&uacute;dos devem ser inclu&iacute;dos em DIVS com os seguintes ids- oquews oqueogc oquecarto
 
 	Parâmetros:
 
@@ -241,7 +241,7 @@ function i3geo_wscliente_configura(loc_i3geo,corpo,enderecows,enderecowms,rssws,
 	*/
 	this.servicosws = function()
 	{
-		//monta a lista retornada pela fun&ccedil;ão ajax
+		//monta a lista retornada pela fun&ccedil;&atilde;o ajax
 		var monta = function(retorno)
 		{
 			var linhas = retorno.data.split("|"),
@@ -528,11 +528,11 @@ function i3geo_wscliente_configura(loc_i3geo,corpo,enderecows,enderecowms,rssws,
 	/*
 	Function: selParFuncao
 
-	Lista os parâmetros de uma fun&ccedil;ão para o usu&aacute;rio digitar os valores.
+	Lista os parâmetros de uma fun&ccedil;&atilde;o para o usu&aacute;rio digitar os valores.
 
 	Parâmetros:
 
-	funcao - fun&ccedil;ão que ser&aacute; chamada
+	funcao - fun&ccedil;&atilde;o que ser&aacute; chamada
 
 	*/
 	this.selParFuncao = function(funcao)
@@ -569,7 +569,7 @@ function i3geo_wscliente_configura(loc_i3geo,corpo,enderecows,enderecowms,rssws,
 	/*
 	Function: chamadados
 
-	Busca os dados de uma fun&ccedil;ão de um servi&ccedil;o
+	Busca os dados de uma fun&ccedil;&atilde;o de um servi&ccedil;o
 
 	*/
 	this.chamadados = function(retorno)
@@ -616,7 +616,7 @@ Inicia a interface do cliente de web services.
 
 Parametros:
 
-objeto_i3geo_wscliente_configura - objeto com os parâmentros de configura&ccedil;ão criado pela fun&ccedil;ão i3geo_gl_configura
+objeto_i3geo_wscliente_configura - objeto com os parâmentros de configura&ccedil;&atilde;o criado pela fun&ccedil;&atilde;o i3geo_gl_configura
 */
 function i3geo_wscliente_inicia(objeto_i3geo_wscliente_configura)
 {
@@ -640,7 +640,7 @@ Function: seltema
 
 Seta as vari&aacute;veis necess&aacute;rias para visualizar o mapa com o OpenLayers ap&oacute;s o usu&aacute;rio escolher uma camada de um servi&ccedil;o.
 
-Essa fun&ccedil;ão &eacute; chamada por padrão quando uma camada &eacute; escolhida na lista de camadas retornada pelo i3geo.
+Essa fun&ccedil;&atilde;o &eacute; chamada por padr&atilde;o quando uma camada &eacute; escolhida na lista de camadas retornada pelo i3geo.
 
 Parametros:
 
