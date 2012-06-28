@@ -2,8 +2,8 @@
 /*
 Title: wmswfs.php
 
-Funções de uso geral para realizar a leitura e o processamento de Web Services nos padrões OGC.
-Atualmente, processa apenas serviços no padrão WMS.
+Fun&ccedil;&otilde;es de uso geral para realizar a leitura e o processamento de Web Services nos padr&otilde;es OGC.
+Atualmente, processa apenas servi&ccedil;os no padr&atilde;o WMS.
 
 Licenca:
 
@@ -12,20 +12,20 @@ GPL2
 
 i3Geo Interface Integrada de Ferramentas de Geoprocessamento para Internet
 
-Direitos Autorais Reservados (c) 2006 Ministério do Meio Ambiente Brasil
+Direitos Autorais Reservados (c) 2006 Minist&eacute;rio do Meio Ambiente Brasil
 Desenvolvedor: Edmar Moretti edmar.moretti@mma.gov.br
 
-Este programa é software livre; você pode redistribuí-lo
-e/ou modificá-lo sob os termos da Licença Pública Geral
+Este programa &eacute; software livre; voc&ecirc; pode redistribu&iacute;-lo
+e/ou modific&aacute;-lo sob os termos da Licen&ccedil;a P&uacute;blica Geral
 GNU conforme publicada pela Free Software Foundation;
 
-Este programa é distribuído na expectativa de que seja útil,
-porém, SEM NENHUMA GARANTIA; nem mesmo a garantia implícita
-de COMERCIABILIDADE OU ADEQUAÇÃO A UMA FINALIDADE ESPECÍFICA.
-Consulte a Licença Pública Geral do GNU para mais detalhes.
-Você deve ter recebido uma cópia da Licença Pública Geral do
-GNU junto com este programa; se não, escreva para a
-Free Software Foundation, Inc., no endereço
+Este programa &eacute; distribu&iacute;do na expectativa de que seja &uacute;til,
+por&eacute;m, SEM NENHUMA GARANTIA; nem mesmo a garantia impl&iacute;cita
+de COMERCIABILIDADE OU ADEQUA&Ccedil;&Atilde;O A UMA FINALIDADE ESPEC&Iacute;FICA.
+Consulte a Licen&ccedil;a P&uacute;blica Geral do GNU para mais detalhes.
+Voc&ecirc; deve ter recebido uma cópia da Licen&ccedil;a P&uacute;blica Geral do
+GNU junto com este programa; se n&atilde;o, escreva para a
+Free Software Foundation, Inc., no endere&ccedil;o
 59 Temple Street, Suite 330, Boston, MA 02111-1307 USA.
 
 Arquivo:
@@ -35,17 +35,17 @@ i3geo/classesphp/wmswfs.php
 /*
 Function: gravaCacheWMS
 
-Lê o getcapabilities de um WMS e salva em disco se o mesmo não tiver sido salvo antes
+L&ecirc; o getcapabilities de um WMS e salva em disco se o mesmo n&atilde;o tiver sido salvo antes
 
-O arquivo é gravado no diretório temporário
+O arquivo &eacute; gravado no diretório tempor&aacute;rio
 
 Parametros:
 
-$servico {string} - endereço do WMS
+$servico {string} - endere&ccedil;o do WMS
 
 Global:
 
-$dir_tmp {string} - (opcional) endereço do diretório temporário onde o cache será armazenado. Se não for definido, tenta obter das variáveis de configuração existentes em i3geo/ms_configura.php
+$dir_tmp {string} - (opcional) endere&ccedil;o do diretório tempor&aacute;rio onde o cache ser&aacute; armazenado. Se n&atilde;o for definido, tenta obter das vari&aacute;veis de configura&ccedil;&atilde;o existentes em i3geo/ms_configura.php
 
 Return:
 
@@ -94,9 +94,9 @@ Verifica se existe um tema em um servico WFS.
 
 Globais:
 
-$wfs {string} - endereço do serviço
+$wfs {string} - endere&ccedil;o do servi&ccedil;o
 
-$tema {string} - tema (layer) que será verificado
+$tema {string} - tema (layer) que ser&aacute; verificado
 
 Retorno:
 
@@ -127,7 +127,7 @@ Verifica se existe um servico WFS invocando o getcapabilities.
 
 Global:
 
-$servico {string} - endereço do serviço
+$servico {string} - endere&ccedil;o do servi&ccedil;o
 
 Retorno:
 
@@ -152,11 +152,11 @@ function existeWFS()
 /*
 Function: getcapabilities
 
-Chama a função getcapabilities e retorna o resultado.
+Chama a fun&ccedil;&atilde;o getcapabilities e retorna o resultado.
 
 Global:
 
-$servico {string} - Endereço do web service.
+$servico {string} - Endere&ccedil;o do web service.
 
 Retorno:
 
@@ -182,11 +182,11 @@ function getcapabilities()
 /*
 function: getcapabilities2
 
-Chama a função getcapabilities e retorna o resultado pré-formatado (WMS).
+Chama a fun&ccedil;&atilde;o getcapabilities e retorna o resultado pr&eacute;-formatado (WMS).
 
 Global:
 
-$servico {string} - Endereço do web service.
+$servico {string} - Endere&ccedil;o do web service.
 
 Retorno:
 
@@ -266,11 +266,11 @@ function getcapabilities2()
 /*
 getcapabilities3
 
-Chama a função getcapabilities e retorna o resultado formatado (WFS).
+Chama a fun&ccedil;&atilde;o getcapabilities e retorna o resultado formatado (WFS).
 
 Global:
 
-$servico {string} - Endereço do web service.
+$servico {string} - Endere&ccedil;o do web service.
 
 
 */
@@ -315,9 +315,9 @@ Lista os temas de um web service WMS.
 
 Globais:
 
-$servico {string} - Endereço do web service.
+$servico {string} - Endere&ccedil;o do web service.
 
-$id_ws {string} - (opcional) id do serviço registrado no sistema de administração do i3geo. Se definido, é feito o registro de tentativa de acesso ao serviço no sistema de administração
+$id_ws {string} - (opcional) id do servi&ccedil;o registrado no sistema de administra&ccedil;&atilde;o do i3geo. Se definido, &eacute; feito o registro de tentativa de acesso ao servi&ccedil;o no sistema de administra&ccedil;&atilde;o
 
 Retorno:
 
@@ -454,11 +454,11 @@ Lista os temas de um web service WMS e retorna o resultado como um array.
 
 Globais:
 
-$servico {string} - Endereço do web service.
+$servico {string} - Endere&ccedil;o do web service.
 
-$nivel - nível do layer na hierarquia existente no getcapabilities
+$nivel - n&iacute;vel do layer na hierarquia existente no getcapabilities
 
-$nomelayer - nome do layer que contém os próximos layers
+$nomelayer - nome do layer que cont&eacute;m os próximos layers
 
 Retorno:
 
@@ -524,7 +524,7 @@ function listaLayersWMS()
 	else
 	{
 		//
-		//pega os layers no primeiro nível
+		//pega os layers no primeiro n&iacute;vel
 		//
 		$q .= "/Layer";
 		$layers = $xpath->query($q);	
@@ -616,7 +616,7 @@ temaswfs
 Lista os temas de um web service WFS.
 
 parameters:
-$servico - Endereço do web service.
+$servico - Endere&ccedil;o do web service.
 
 $cp - Objeto CPAINT.
 */
@@ -680,7 +680,7 @@ Converte caracteres XML em HTML.
 
 Parametro:
 
-$str {string} - Xml que será convertido
+$str {string} - Xml que ser&aacute; convertido
 
 Retorno:
 
@@ -696,7 +696,7 @@ function xml2html ( $str )
 /*
 wms_descricao
 
-Retorna a descrição de um serviço (nó).
+Retorna a descri&ccedil;&atilde;o de um servi&ccedil;o (nó).
 */
 function wms_descricao ( $dom,$xp )
 {
@@ -713,7 +713,7 @@ function wms_descricao ( $dom,$xp )
 /*
 wms_descricaov
 
-Retorna a descrição de um serviço (atributo).
+Retorna a descri&ccedil;&atilde;o de um servi&ccedil;o (atributo).
 */
 function wms_descricaov ( $dom,$xp,$attrib )
 {
@@ -730,7 +730,7 @@ function wms_descricaov ( $dom,$xp,$attrib )
 /*
 wms_descricaon
 
-Retorna a descrição de um serviço (filho de um nó).
+Retorna a descri&ccedil;&atilde;o de um servi&ccedil;o (filho de um nó).
 */
 function wms_descricaon ( $dom,$xp,$n ) {
 	$ctx = xpath_new_context($dom);
@@ -741,7 +741,7 @@ function wms_descricaon ( $dom,$xp,$n ) {
 /*
 wms_title
 
-Retorna o título de um WMS.
+Retorna o t&iacute;tulo de um WMS.
 */
 function wms_title ( $dom ) {
 	#
@@ -792,7 +792,7 @@ function wms_formats ( $dom )
 /*
 wms_formatsinfo
 
-Retorna os formatos existentes de retorno da opção getfeatureinfo.
+Retorna os formatos existentes de retorno da op&ccedil;&atilde;o getfeatureinfo.
 */
 function wms_formatsinfo ( $dom )
 {

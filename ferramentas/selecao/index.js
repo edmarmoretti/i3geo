@@ -2,9 +2,9 @@
 /*jslint plusplus:false,white:false,undef: false, rhino: true, onevar: true, evil: true */
 
 /*
-Title: Seleção
+Title: Sele&ccedil;ão
 
-Operações de seleção de elementos no mapa.
+Opera&ccedil;&otilde;es de sele&ccedil;ão de elementos no mapa.
 
 Veja:
 
@@ -20,20 +20,20 @@ GPL2
 
 i3Geo Interface Integrada de Ferramentas de Geoprocessamento para Internet
 
-Direitos Autorais Reservados (c) 2006 Ministério do Meio Ambiente Brasil
+Direitos Autorais Reservados (c) 2006 Minist&eacute;rio do Meio Ambiente Brasil
 Desenvolvedor: Edmar Moretti edmar.moretti@mma.gov.br
 
-Este programa é software livre; você pode redistribuí-lo
-e/ou modificá-lo sob os termos da Licença Pública Geral
+Este programa &eacute; software livre; voc&ecirc; pode redistribu&iacute;-lo
+e/ou modific&aacute;-lo sob os termos da Licen&ccedil;a P&uacute;blica Geral
 GNU conforme publicada pela Free Software Foundation;
 
-Este programa é distribuído na expectativa de que seja útil,
-porém, SEM NENHUMA GARANTIA; nem mesmo a garantia implícita
-de COMERCIABILIDADE OU ADEQUAÇÃO A UMA FINALIDADE ESPECÍFICA.
-Consulte a Licença Pública Geral do GNU para mais detalhes.
-Você deve ter recebido uma cópia da Licença Pública Geral do
+Este programa &eacute; distribu&iacute;do na expectativa de que seja &uacute;til,
+por&eacute;m, SEM NENHUMA GARANTIA; nem mesmo a garantia impl&iacute;cita
+de COMERCIABILIDADE OU ADEQUAÇÃO A UMA FINALIDADE ESPEC&Iacute;FICA.
+Consulte a Licen&ccedil;a P&uacute;blica Geral do GNU para mais detalhes.
+Voc&ecirc; deve ter recebido uma c&oacute;pia da Licen&ccedil;a P&uacute;blica Geral do
 GNU junto com este programa; se não, escreva para a
-Free Software Foundation, Inc., no endereço
+Free Software Foundation, Inc., no endere&ccedil;o
 59 Temple Street, Suite 330, Boston, MA 02111-1307 USA.
 */
 
@@ -47,17 +47,17 @@ i3GEOF.selecao = {
 	/*
 	Variavel: aguarde
 	
-	Estilo do objeto DOM com a imagem de aguarde existente no cabeçalho da janela.
+	Estilo do objeto DOM com a imagem de aguarde existente no cabe&ccedil;alho da janela.
 	*/
 	aguarde: "",
 	/*
 	Function: inicia
 	
-	Inicia a ferramenta. É chamado por criaJanelaFlutuante
+	Inicia a ferramenta. &Eacute; chamado por criaJanelaFlutuante
 	
 	Parametro:
 	
-	iddiv {String} - id do div que receberá o conteudo HTML da ferramenta
+	iddiv {String} - id do div que receber&aacute; o conteudo HTML da ferramenta
 	*/
 	inicia: function(iddiv){
 		var i,n,ics;
@@ -118,11 +118,11 @@ i3GEOF.selecao = {
 	/*
 	Function: html
 	
-	Gera o código html para apresentação das opções da ferramenta
+	Gera o c&oacute;digo html para apresenta&ccedil;ão das op&ccedil;&otilde;es da ferramenta
 	
 	Retorno:
 	
-	String com o código html
+	String com o c&oacute;digo html
 	*/
 	html:function(){
 		var ins = '' +
@@ -148,9 +148,9 @@ i3GEOF.selecao = {
 		'	<div style=margin-left:8px;text-align:left;  >' +
 		'		<p class=paragrafo >' +
 		'		<select title="Tipo de operacao" style=position:relative;top:6px; id=i3GEOselecaotipoOperacao >' +
-		'		<option value="adiciona" >Adicionar à seleção</option>' +
-		'		<option value="novo" >Nova seleção</option>' +		
-		'		<option value="retira" >Retirar da seleção</option>' +
+		'		<option value="adiciona" >Adicionar à sele&ccedil;ão</option>' +
+		'		<option value="novo" >Nova sele&ccedil;ão</option>' +		
+		'		<option value="retira" >Retirar da sele&ccedil;ão</option>' +
 		'		</select>' +
 		'		<span id=i3GEOselecaoNsel style="position:relative;top:5px;" >0</span></p>' +
 		'		<p class=paragrafo >Temas:<div id=i3GEOselecaoComboTemas style=text-align:left; ></div>' +
@@ -202,7 +202,7 @@ i3GEOF.selecao = {
 		minimiza = function(){
 			i3GEO.janela.minimiza("i3GEOF.selecao");
 		};
-		titulo = "Seleção <a class=ajuda_usuario target=_blank href='" + i3GEO.configura.locaplic + "/ajuda_usuario.php?idcategoria=5&idajuda=48a' >&nbsp;&nbsp;&nbsp;</a>";
+		titulo = "Sele&ccedil;ão <a class=ajuda_usuario target=_blank href='" + i3GEO.configura.locaplic + "/ajuda_usuario.php?idcategoria=5&idajuda=48a' >&nbsp;&nbsp;&nbsp;</a>";
 		janela = i3GEO.janela.cria(
 			"470px",
 			"200px",
@@ -263,7 +263,7 @@ i3GEOF.selecao = {
 	/*
 	Function: criaCombosTemas
 	
-	Cria os combos de seleção de temas
+	Cria os combos de sele&ccedil;ão de temas
 	*/
 	criaCombosTemas: function(){
 		i3GEO.util.comboTemas(
@@ -290,7 +290,7 @@ i3GEOF.selecao = {
 	/*
 	Function: mudaicone
 	
-	Altera as bordas dos ícones
+	Altera as bordas dos &iacute;cones
 	*/
 	mudaicone: function(){
 		$i("i3GEOselecaopt").parentNode.style.backgroundColor = "#F5F5F5";
@@ -305,7 +305,7 @@ i3GEOF.selecao = {
 	/*
 	Function: pegaTemasSel
 	
-	Pega a lista de temas escolhidos pelo usuário
+	Pega a lista de temas escolhidos pelo usu&aacute;rio
 	*/
 	pegaTemasSel: function(){
 		var selObj = $i("i3GEOselecaotemasLigados"),
@@ -327,7 +327,7 @@ i3GEOF.selecao = {
 	/*
 	Function: operacao
 	
-	Executa uma operação sobre o conjunto de elementos selecionados
+	Executa uma opera&ccedil;ão sobre o conjunto de elementos selecionados
 	
 	Veja:
 	
@@ -335,7 +335,7 @@ i3GEOF.selecao = {
 	
 	Parametro:
 	
-	tipo {String} - tipo de operação inverte|limpa
+	tipo {String} - tipo de opera&ccedil;ão inverte|limpa
 	*/
 	operacao: function(tipo){
 		if(i3GEOF.selecao.aguarde.visibility === "visible")
@@ -363,11 +363,11 @@ i3GEOF.selecao = {
 	/*
 	Function: tiposel
 	
-	Executa um tipo de seleção interativa
+	Executa um tipo de sele&ccedil;ão interativa
 	
 	Parameter:
 	
-	obj {objeto dom) - objeto que foi clicado para disparar a operação. O valor identifica o tipo de operação
+	obj {objeto dom) - objeto que foi clicado para disparar a opera&ccedil;ão. O valor identifica o tipo de opera&ccedil;ão
 	*/
 	tiposel: function(obj){
 		if(i3GEOF.selecao.aguarde.visibility === "visible")
@@ -418,13 +418,13 @@ i3GEOF.selecao = {
 	/*
 	Classe: i3GEOF.selecao.box
 	
-	Controla o desenho do box para a seleção e executa a operação de seleção
+	Controla o desenho do box para a sele&ccedil;ão e executa a opera&ccedil;ão de sele&ccedil;ão
 	*/
 	box:{
 		/*
 		Function: inicia
 		
-		Marca o início do desenho do box, capturando a posição do mouse
+		Marca o in&iacute;cio do desenho do box, capturando a posi&ccedil;ão do mouse
 		*/
 		inicia: function(){
 			if($i("i3GEOselecaotemasLigados").value === "")
@@ -452,7 +452,7 @@ i3GEOF.selecao = {
 		/*
 		Function: criaBox
 		
-		Cria o DIV que será utilizado para desenhar o box no mapa
+		Cria o DIV que ser&aacute; utilizado para desenhar o box no mapa
 		*/
 		criaBox: function(){
 			try{i3GEO.desenho.richdraw.fecha();}
@@ -498,7 +498,7 @@ i3GEOF.selecao = {
 		/*
 		Function: desloca
 		
-		Desloca o box conforme o mouse é movimentado
+		Desloca o box conforme o mouse &eacute; movimentado
 		*/
 		desloca: function(){
 			if(g_tipoacao !== 'selecaobox')
@@ -566,9 +566,9 @@ i3GEOF.selecao = {
 	
 	Parametros:
 	
-	tema {String} - código do tema
+	tema {String} - c&oacute;digo do tema
 	
-	tipo {String} - tipo de operação adiciona|retira
+	tipo {String} - tipo de opera&ccedil;ão adiciona|retira
 	
 	box {String} - xmin ymin xmax ymax
 	*/
@@ -606,13 +606,13 @@ i3GEOF.selecao = {
 	/*
 	Function: porxy
 	
-	Executa a seleção de elementos de um tema com base em um par de coordenadas xy
+	Executa a sele&ccedil;ão de elementos de um tema com base em um par de coordenadas xy
 	
 	Parametros:
 	
-	tema {String} - código do tema
+	tema {String} - c&oacute;digo do tema
 	
-	tipo {String} - tipo de operação adiciona|retira
+	tipo {String} - tipo de opera&ccedil;ão adiciona|retira
 	
 	tolerancia {Integer} - tolerância de busca
 	*/
@@ -632,13 +632,13 @@ i3GEOF.selecao = {
 	/*
 	Classe: i3GEOF.selecao.poligono
 	
-	Realiza a seleção desenhando um polígono no mapa
+	Realiza a sele&ccedil;ão desenhando um pol&iacute;gono no mapa
 	*/
 	poligono:{
 		/*
 		Function: inicia
 		
-		Inicia o desenho do polígono
+		Inicia o desenho do pol&iacute;gono
 		*/
 		inicia: function(){
 			try
@@ -648,7 +648,7 @@ i3GEOF.selecao = {
 			pontosdistobj = [];
 			i3GEO.util.insereMarca.limpa();
 			g_tipoacao = "selecaopoli";
-			alert("Clique no mapa para desenhar o polígono.");
+			alert("Clique no mapa para desenhar o pol&iacute;gono.");
 			i3GEO.eventos.MOUSECLIQUE.remove("i3GEOF.selecao.clique()");
 			if(i3GEO.eventos.MOUSEMOVE.toString().search("i3GEOF.selecao.poligono.move()") < 0)
 			{i3GEO.eventos.MOUSEMOVE.push("i3GEOF.selecao.poligono.move()");}
@@ -661,7 +661,7 @@ i3GEOF.selecao = {
 		/*
 		Function: move
 		
-		Modifica o polígono conforme o usuário cria vértices
+		Modifica o pol&iacute;gono conforme o usu&aacute;rio cria v&eacute;rtices
 		*/
 		move: function(){
 			if (g_tipoacao === "selecaopoli"){
@@ -679,7 +679,7 @@ i3GEOF.selecao = {
 		/*
 		Function: clique
 		
-		Inclui um novo vértice no polígono
+		Inclui um novo v&eacute;rtice no pol&iacute;gono
 		*/
 		clique: function(){
 			if (g_tipoacao !== "selecaopoli"){return;}
@@ -721,7 +721,7 @@ i3GEOF.selecao = {
 		/*
 		Function: termina
 		
-		Termina o desenho do polígono e executa a operação de seleção
+		Termina o desenho do pol&iacute;gono e executa a opera&ccedil;ão de sele&ccedil;ão
 		*/
 		termina: function(){
 			var pontos,xs,ys,retorna,p,cp,tema=i3GEO.temaAtivo;
@@ -751,7 +751,7 @@ i3GEOF.selecao = {
 	/*
 	Function: criatema
 	
-	Cria um novo tema com a seleção atual
+	Cria um novo tema com a sele&ccedil;ão atual
 	*/
 	criatema: function(){
 		if(i3GEOF.selecao.aguarde.visibility === "visible")
@@ -943,7 +943,7 @@ i3GEOF.selecao = {
 	/*
 	Function: aplicaselecaoTema
 	
-	Realiza a seleção cruzando um tema com outro
+	Realiza a sele&ccedil;ão cruzando um tema com outro
 	*/
 	aplicaselecaoTema: function(){
 		if(i3GEOF.selecao.aguarde.visibility === "visible")
@@ -975,7 +975,7 @@ i3GEOF.selecao = {
 	/*
 	Function: grafico
 	
-	Abre uma janela flutuante para criar gráficos
+	Abre uma janela flutuante para criar gr&aacute;ficos
 	*/
 	grafico: function(){
 		i3GEO.analise.dialogo.graficoInterativo();
@@ -983,7 +983,7 @@ i3GEOF.selecao = {
 	/*
 	Function: graficoPerfil
 	
-	Abre uma janela flutuante para criar gráficos de perfil
+	Abre uma janela flutuante para criar gr&aacute;ficos de perfil
 	*/
 	graficoPerfil: function(){
 		var cp,p;

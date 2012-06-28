@@ -81,7 +81,7 @@ function verificaNome($nome)
 	$extensao = $lista[count($lista) - 1];
 	if($extensao != "xml")
 	{
-		echo "Nome de arquivo inválido.";
+		echo "Nome de arquivo inv&aacute;lido.";
 		paraAguarde();
 		exit;
 	}

@@ -2,9 +2,9 @@
 /*
 Title: classe_escala.php
 
-Manipulação da escala.
+Manipula&ccedil;&atilde;o da escala.
 
-Cria escala grafica, edita características, etc.
+Cria escala grafica, edita caracter&iacute;sticas, etc.
 
 Licenca:
 
@@ -13,20 +13,20 @@ GPL2
 
 i3Geo Interface Integrada de Ferramentas de Geoprocessamento para Internet
 
-Direitos Autorais Reservados (c) 2006 Ministério do Meio Ambiente Brasil
+Direitos Autorais Reservados (c) 2006 Minist&eacute;rio do Meio Ambiente Brasil
 Desenvolvedor: Edmar Moretti edmar.moretti@mma.gov.br
 
-Este programa é software livre; você pode redistribuí-lo
-e/ou modificá-lo sob os termos da Licença Pública Geral
+Este programa &eacute; software livre; voc&ecirc; pode redistribu&iacute;-lo
+e/ou modific&aacute;-lo sob os termos da Licen&ccedil;a P&uacute;blica Geral
 GNU conforme publicada pela Free Software Foundation;
 
-Este programa é distribuído na expectativa de que seja útil,
-porém, SEM NENHUMA GARANTIA; nem mesmo a garantia implícita
-de COMERCIABILIDADE OU ADEQUAÇÃO A UMA FINALIDADE ESPECÍFICA.
-Consulte a Licença Pública Geral do GNU para mais detalhes.
-Você deve ter recebido uma cópia da Licença Pública Geral do
-GNU junto com este programa; se não, escreva para a
-Free Software Foundation, Inc., no endereço
+Este programa &eacute; distribu&iacute;do na expectativa de que seja &uacute;til,
+por&eacute;m, SEM NENHUMA GARANTIA; nem mesmo a garantia impl&iacute;cita
+de COMERCIABILIDADE OU ADEQUA&Ccedil;&Atilde;O A UMA FINALIDADE ESPEC&Iacute;FICA.
+Consulte a Licen&ccedil;a P&uacute;blica Geral do GNU para mais detalhes.
+Voc&ecirc; deve ter recebido uma cópia da Licen&ccedil;a P&uacute;blica Geral do
+GNU junto com este programa; se n&atilde;o, escreva para a
+Free Software Foundation, Inc., no endere&ccedil;o
 59 Temple Street, Suite 330, Boston, MA 02111-1307 USA.
 
 Arquivo:
@@ -64,7 +64,7 @@ function: __construct
 Cria um objeto Escala 
 
 parameters:
-$map_file - Endereço do mapfile no servidor. 
+$map_file - Endere&ccedil;o do mapfile no servidor. 
 */
 	function __construct($map_file,$nomeImagem="",$locaplic="")
 	{
@@ -96,10 +96,10 @@ function: retornaBarraEscala
 
 Gera barra de escala.
 
-Retorna uma string com sintaxe em javaScript com o nome da imagem e demais parâmetros.
+Retorna uma string com sintaxe em javaScript com o nome da imagem e demais par&acirc;metros.
 
 return:
-string com variáveis javascript.
+string com vari&aacute;veis javascript.
 */
 	function retornaBarraEscala()
 	{
@@ -114,7 +114,7 @@ string com variáveis javascript.
 /*
 function: parametrosBarraEscala
 
-Pega os parâmetros da barra de escala.
+Pega os par&acirc;metros da barra de escala.
 
 return:
 string javascript com os parametros.
@@ -133,7 +133,7 @@ string javascript com os parametros.
 /*
 function: mudaEscalaGrafica
 
-Muda os parâmetros da barra de escala.
+Muda os par&acirc;metros da barra de escala.
 
 parameters:
 $w - integer Largura.
@@ -142,15 +142,15 @@ $h - integer Altura.
 
 $estilo - estilo
 
-$intervalos - Número de intervalos.
+$intervalos - N&uacute;mero de intervalos.
 
 $unidade - Tipo de unidade de medida.
 
-$cor - Cor RGB separado por vírgulas.
+$cor - Cor RGB separado por v&iacute;rgulas.
 
-$bcor - Cor do fundo RGB separado por vírgulas.
+$bcor - Cor do fundo RGB separado por v&iacute;rgulas.
 
-$ocor - Cor do contorno RGB separado por vírgulas.
+$ocor - Cor do contorno RGB separado por v&iacute;rgulas.
 */
 	function mudaEscalaGrafica($w,$h,$estilo,$intervalos,$unidade,$cor,$bcor,$ocor)
 	{
@@ -181,7 +181,7 @@ $ocor - Cor do contorno RGB separado por vírgulas.
 /*
 function: testaescalagrafica
 
-Testa os parâmetros da barra de escala.
+Testa os par&acirc;metros da barra de escala.
 
 Gera uma imagem da escala sem alterar o mapa
 
@@ -192,19 +192,19 @@ $h - integer Altura.
 
 $estilo - estilo
 
-$intervalos - Número de intervalos.
+$intervalos - N&uacute;mero de intervalos.
 
 $unidade - Tipo de unidade de medida.
 
-$cor - Cor RGB separado por vírgulas.
+$cor - Cor RGB separado por v&iacute;rgulas.
 
-$bcor - Cor do fundo RGB separado por vírgulas.
+$bcor - Cor do fundo RGB separado por v&iacute;rgulas.
 
-$ocor - Cor do contorno RGB separado por vírgulas.
+$ocor - Cor do contorno RGB separado por v&iacute;rgulas.
 
 return:
 
-string com o endereço da imagem criada
+string com o endere&ccedil;o da imagem criada
 */
 	function testaescalagrafica($w,$h,$estilo,$intervalos,$unidade,$cor,$bcor,$ocor)
 	{

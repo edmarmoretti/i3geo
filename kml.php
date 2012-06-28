@@ -4,9 +4,9 @@ Title: kml.php
 
 Gerador de menu em kml para uso no Google Earth
 
-Lê o(s) menu(s) de temas e acrescenta os links necessários ao acesso aos dados no Google Earth. Veja mais detalhes em ajuda/googleearth.htm
+L&ecirc; o(s) menu(s) de temas e acrescenta os links necess&aacute;rios ao acesso aos dados no Google Earth. Veja mais detalhes em ajuda/googleearth.htm
 
-Utilize o parâmetro "idioma" para definir a linguagem utilizada (por default é pt)
+Utilize o par&acirc;metro "idioma" para definir a linguagem utilizada (por default &eacute; pt)
 
 Exemplo
 
@@ -16,29 +16,29 @@ Licenca:
 
 i3Geo Interface Integrada de Ferramentas de Geoprocessamento para Internet
 
-Direitos Autorais Reservados (c) 2006 Ministério do Meio Ambiente Brasil
+Direitos Autorais Reservados (c) 2006 Minist&eacute;rio do Meio Ambiente Brasil
 Desenvolvedor: Edmar Moretti edmar.moretti@mma.gov.br
 
-Este programa é software livre; você pode redistribuí-lo
-e/ou modificá-lo sob os termos da Licença Pública Geral
+Este programa &eacute; software livre; voc&ecirc; pode redistribu&iacute;-lo
+e/ou modific&aacute;-lo sob os termos da Licen&ccedil;a P&uacute;blica Geral
 GNU conforme publicada pela Free Software Foundation;
 
-Este programa é distribuído na expectativa de que seja útil,
-porém, SEM NENHUMA GARANTIA; nem mesmo a garantia implícita
-de COMERCIABILIDADE OU ADEQUAÇÃO A UMA FINALIDADE ESPECÍFICA.
-Consulte a Licença Pública Geral do GNU para mais detalhes.
-Você deve ter recebido uma cópia da Licença Pública Geral do
-GNU junto com este programa; se não, escreva para a
-Free Software Foundation, Inc., no endereço
+Este programa &eacute; distribu&iacute;do na expectativa de que seja &uacute;til,
+por&eacute;m, SEM NENHUMA GARANTIA; nem mesmo a garantia impl&iacute;cita
+de COMERCIABILIDADE OU ADEQUA&Ccedil;&Atilde;O A UMA FINALIDADE ESPEC&Iacute;FICA.
+Consulte a Licen&ccedil;a P&uacute;blica Geral do GNU para mais detalhes.
+Voc&ecirc; deve ter recebido uma cópia da Licen&ccedil;a P&uacute;blica Geral do
+GNU junto com este programa; se n&atilde;o, escreva para a
+Free Software Foundation, Inc., no endere&ccedil;o
 59 Temple Street, Suite 330, Boston, MA 02111-1307 USA.
 
 Arquivo: i3geo/kml.php
 
 Parametro:
 
-perfil - perfis separados por espaços. Ao usar um perfil, serão mostrados apenas os temas disponíveis para o perfil indicado.
+perfil - perfis separados por espa&ccedil;os. Ao usar um perfil, ser&atilde;o mostrados apenas os temas dispon&iacute;veis para o perfil indicado.
 
-tipoxml - (opcional) se for "kml" insere o cabeçalho de tipo kml no xml, permitindo abrir o xml diretamente na aplicação Google Earth
+tipoxml - (opcional) se for "kml" insere o cabe&ccedil;alho de tipo kml no xml, permitindo abrir o xml diretamente na aplica&ccedil;&atilde;o Google Earth
 */
 error_reporting(0);
 include_once ("classesphp/carrega_ext.php");
@@ -60,7 +60,7 @@ echo '<?xml version="1.0" encoding="'.$encoding.'"?>';
 echo "<kml xmlns='http://earth.google.com/kml/2.2'>\n";
 
 //
-//pega os endereços para compor a url de chamada do gerador de web services
+//pega os endere&ccedil;os para compor a url de chamada do gerador de web services
 //ogc.php
 //
 $protocolo = explode("/",$_SERVER['SERVER_PROTOCOL']);
@@ -80,8 +80,8 @@ echo "<Document><name>Menu i3geo</name><open>0</open><description></description>
 if ($menutemas != "" || is_array($menutemas))
 {
 	//
-	//para manter a compatibilidade entre as versões do i3geo
-	//é necessário verificar se a variável $menutemas é um array ou não
+	//para manter a compatibilidade entre as vers&otilde;es do i3geo
+	//&eacute; necess&aacute;rio verificar se a vari&aacute;vel $menutemas &eacute; um array ou n&atilde;o
 	//
 	if(is_array($menutemas))
 	{
@@ -116,7 +116,7 @@ if ($menutemas != "" || is_array($menutemas))
 	}
 }
 //
-//no caso do menu vir do sistema de administração
+//no caso do menu vir do sistema de administra&ccedil;&atilde;o
 //
 //error_reporting(E_ALL);
 if(!isset($menutemas) || $menutemas == "")

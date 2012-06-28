@@ -14,7 +14,7 @@ catch(ee)
 	{
 		try{var objhttp1 = new ActiveXObject("Microsoft.XMLHTTP");}
 		catch(E)
-		{document.write("<H1>Seu navegador não aceita AJAX. O mapa nao vai funcionar!!!</H1><br>");}
+		{document.write("<H1>Seu navegador n&atilde;o aceita AJAX. O mapa nao vai funcionar!!!</H1><br>");}
 	}
 }
 
@@ -25,9 +25,9 @@ catch(ee)
 <div class="mascaraPrincipal" id="divGeral" style=text-align:left >
 <?php
 /*
-Title: Testa a instalação do i3Geo
+Title: Testa a instala&ccedil;&atilde;o do i3Geo
 
-Executa testes e aponta erros na instalação.
+Executa testes e aponta erros na instala&ccedil;&atilde;o.
 
 Licenca:
 
@@ -35,20 +35,20 @@ GPL2
 
 i3Geo Interface Integrada de Ferramentas de Geoprocessamento para Internet
 
-Direitos Autorais Reservados (c) 2006 Ministério do Meio Ambiente Brasil
+Direitos Autorais Reservados (c) 2006 Minist&eacute;rio do Meio Ambiente Brasil
 Desenvolvedor: Edmar Moretti edmar.moretti@mma.gov.br
 
-Este programa é software livre; você pode redistribuí-lo
-e/ou modificá-lo sob os termos da Licença Pública Geral
+Este programa &eacute; software livre; voc&ecirc; pode redistribu&iacute;-lo
+e/ou modific&aacute;-lo sob os termos da Licen&ccedil;a P&uacute;blica Geral
 GNU conforme publicada pela Free Software Foundation;
 
-Este programa é distribuído na expectativa de que seja útil,
-porém, SEM NENHUMA GARANTIA; nem mesmo a garantia implícita
-de COMERCIABILIDADE OU ADEQUAÇÃO A UMA FINALIDADE ESPECÍFICA.
-Consulte a Licença Pública Geral do GNU para mais detalhes.
-Você deve ter recebido uma cópia da Licença Pública Geral do
-GNU junto com este programa; se não, escreva para a
-Free Software Foundation, Inc., no endereço
+Este programa &eacute; distribu&iacute;do na expectativa de que seja &uacute;til,
+por&eacute;m, SEM NENHUMA GARANTIA; nem mesmo a garantia impl&iacute;cita
+de COMERCIABILIDADE OU ADEQUA&Ccedil;&Atilde;O A UMA FINALIDADE ESPEC&Iacute;FICA.
+Consulte a Licen&ccedil;a P&uacute;blica Geral do GNU para mais detalhes.
+Voc&ecirc; deve ter recebido uma cópia da Licen&ccedil;a P&uacute;blica Geral do
+GNU junto com este programa; se n&atilde;o, escreva para a
+Free Software Foundation, Inc., no endere&ccedil;o
 59 Temple Street, Suite 330, Boston, MA 02111-1307 USA.
 
 Arquivo:
@@ -59,7 +59,7 @@ i3geo/testainstal.php
 error_reporting(E_ALL);
 
 //echo "<pre>\n";
-echo "<span style=font-size:10px >Observação: se você estiver usando Linux e a biblioteca CAIRO estiver instalada corretamente no Mapserver, edite os arquivos i3geo/aplicmap/geral1fedorav6.map e geral1debianv6.map para remover os comentários do OUTPUTFORMAT que utiliza SVG com o drive Cairo</span><br>\n"; 
+echo "<span style=font-size:10px >Observa&ccedil;&atilde;o: se voc&ecirc; estiver usando Linux e a biblioteca CAIRO estiver instalada corretamente no Mapserver, edite os arquivos i3geo/aplicmap/geral1fedorav6.map e geral1debianv6.map para remover os coment&aacute;rios do OUTPUTFORMAT que utiliza SVG com o drive Cairo</span><br>\n"; 
 echo "<br><b>TESTE DE INSTALACAO DO i3Geo</b><br>\n";
 include ("versao.php");
 echo "<br><b>$mensagemInicia </b><br><br> \n";
@@ -69,7 +69,7 @@ if (getenv("HTTP_CLIENT_IP")) $ip = getenv("HTTP_CLIENT_IP");
 else if(getenv("HTTP_X_FORWARDED_FOR")) $ip = getenv("HTTP_X_FORWARDED_FOR");
 else if(getenv("REMOTE_ADDR")) $ip = getenv("REMOTE_ADDR");
 else $ip = "UNKNOWN";
-echo "<br>Seu endereço IP: ".$ip."<br><br>\n";
+echo "<br>Seu endere&ccedil;o IP: ".$ip."<br><br>\n";
 
 echo "<br><br>PHP (a vers&atilde;o deve ser a 5x): ";
 echo "<br>".phpversion()."<br>\n";
@@ -100,30 +100,30 @@ if (!extension_loaded( "dom")){echo "<span style=color:red >Problema: n&atilde;o
 if (!extension_loaded( "xml")){echo "<span style=color:red >Problema: n&atilde;o est&aacute; instalado a xml<br></span>";}
 if (!extension_loaded( "zlib")){echo "<span style=color:red >Problema: n&atilde;o est&aacute; instalado a zlib <br></span>";}
 if (!extension_loaded( "gd")){echo "<span style=color:red >Problema: n&atilde;o est&aacute; instalado a gd<br></span>";}
-if (!extension_loaded( "gd2")){echo "<span style=color:red >Obs: n&atilde;o est&aacute; instalado a gd2 - o que não é muito crítico....<br></span>";}
+if (!extension_loaded( "gd2")){echo "<span style=color:red >Obs: n&atilde;o est&aacute; instalado a gd2 - o que n&atilde;o &eacute; muito cr&iacute;tico....<br></span>";}
 if (!extension_loaded( "mbstring")){echo "<span style=color:red >Obs: n&atilde;o est&aacute; instalado a mbstring<br></span>";}
 
 var_dump( $exts );
 
 echo "</pre>Existe o ms_configura.php? <br>";
-if(file_exists("ms_configura.php")) echo "Sim\n"; else {echo "Nao";saindo(" ms_configura não encontrado");}
+if(file_exists("ms_configura.php")) echo "Sim\n"; else {echo "Nao";saindo(" ms_configura n&atilde;o encontrado");}
 echo "Incluindo...\n<br>";
 include ("ms_configura.php");
-echo "Mensagem de inicialização: <b>$mensagemInicia </b><br><br> \n";
+echo "Mensagem de inicializa&ccedil;&atilde;o: <b>$mensagemInicia </b><br><br> \n";
 echo "dir_tmp = $dir_tmp \n<br>";
 echo "locmapserv = $locmapserv \n";
 echo "\n<br>";
 if(in_array($ip, $editores)){
-	echo "<br>Você é um editor cadastrado<br><br>\n";
-	echo "Este php está em ".getcwd()."\n";
-	echo "<br>O diretório de arquivos SESSION temporário é: ".session_save_path()."<br>\n";
+	echo "<br>Voc&ecirc; &eacute; um editor cadastrado<br><br>\n";
+	echo "Este php est&aacute; em ".getcwd()."\n";
+	echo "<br>O diretório de arquivos SESSION tempor&aacute;rio &eacute;: ".session_save_path()."<br>\n";
 	if($conexaoadmin == "" && file_exists($locaplic."/admin/admin.db")){
-		echo "<br>As permissões do banco de dados $locaplic/admin/admin.db são (se o arquivo estiver bloqueado, o sistema de administração não irá funcionar):<br>";
+		echo "<br>As permiss&otilde;es do banco de dados $locaplic/admin/admin.db s&atilde;o (se o arquivo estiver bloqueado, o sistema de administra&ccedil;&atilde;o n&atilde;o ir&aacute; funcionar):<br>";
 		echo permissoesarquivo($locaplic."/admin/admin.db")."<br>";		
 	}
 }
 else{
-	echo "Você não é um editor cadastrado\n";
+	echo "Voc&ecirc; n&atilde;o &eacute; um editor cadastrado\n";
 }
 echo "<pre>";
 
@@ -210,7 +210,7 @@ if(isset($base) && $base != ""){
 	else
 	{$f = $locaplic."/aplicmap/".$base.".map";}
 	if(!file_exists($base)){
-		echo "<span style=color:red >ARQUIVO $base NÂO FOI ENCONTRADO. CORRIJA ISSO EM ms_configura.php";
+		echo "<span style=color:red >ARQUIVO $base N&Acirc;O FOI ENCONTRADO. CORRIJA ISSO EM ms_configura.php";
 		exit;
 	}
 }
@@ -235,7 +235,7 @@ else
 	}
 }
 $mapa = ms_newMapObj($f);
-echo "<br>O arquivo mapfile de inicilização é: $f<br>\n";
+echo "<br>O arquivo mapfile de iniciliza&ccedil;&atilde;o &eacute;: $f<br>\n";
 echo "<b>E agora..desenhando o mapa (se o mapa n&atilde;o aparecer &eacute; um problema...\nverifique os caminhos no ms_configura.php e no $f):</b>\n";
 $imgo = $mapa->draw();
 $nome = ($imgo->imagepath)."teste.png";
@@ -262,10 +262,10 @@ while($error && $error->code != MS_NOERR)
 	$error = $error->next();
 }
 echo "<b>E agora..desenhando o mapa (se o mapa n&atilde;o aparecer &eacute; um problema...\nverifique os caminhos no ms_configura.php e no estadosl.map ou estadoslwindows.map):</b>\n";
-echo "Um problema bastante comum &eacute; o n&atilde;o reconhecimento do diret&oacute;rio ms_tmp pelo Apache. \nO diretório ms_tmp é utilizado pelo Mapserver e pelo i3geo para armazenar dados temporários. \nÉ nesse diretório que ficam as imagens do mapa.\n";
-echo "Quando o Apache n&atilde;o consegue utilizar esse diret&oacute;rio, a imagem n&atilde;o ser&aacute; mostrada,\n apesar de ser gerada dentro do ms_tmp (vc pode verificar se as imagens do \nmapa estão sendo criadas no ms_tmp após rodar o testainstal.php).\n";
-echo "Para solucionar esse problema, vc pode criar um link simb&oacute;lico (nos sistemas linux),\n no mesmo local onde está instalado o i3geo, apontando para o local \nfísico onde está o ms_tmp.\n";
-echo "<b>O nome do link simbólico deve ser o mesmo que estiver definido em aplicmap/geral1.map ou geral1debian.map na linha IMAGEURL. Esse nome por default é definido como ms_tmp.\n";
+echo "Um problema bastante comum &eacute; o n&atilde;o reconhecimento do diret&oacute;rio ms_tmp pelo Apache. \nO diretório ms_tmp &eacute; utilizado pelo Mapserver e pelo i3geo para armazenar dados tempor&aacute;rios. \n&Eacute; nesse diretório que ficam as imagens do mapa.\n";
+echo "Quando o Apache n&atilde;o consegue utilizar esse diret&oacute;rio, a imagem n&atilde;o ser&aacute; mostrada,\n apesar de ser gerada dentro do ms_tmp (vc pode verificar se as imagens do \nmapa est&atilde;o sendo criadas no ms_tmp após rodar o testainstal.php).\n";
+echo "Para solucionar esse problema, vc pode criar um link simb&oacute;lico (nos sistemas linux),\n no mesmo local onde est&aacute; instalado o i3geo, apontando para o local \nf&iacute;sico onde est&aacute; o ms_tmp.\n";
+echo "<b>O nome do link simbólico deve ser o mesmo que estiver definido em aplicmap/geral1.map ou geral1debian.map na linha IMAGEURL. Esse nome por default &eacute; definido como ms_tmp.\n";
 echo "No wiki do portal do software p&uacute;blico vc poder&aacute; encontrar mais detalhes sobre isso.\n";
 
 for($i=0;$i<($maptemp->numlayers);$i++)

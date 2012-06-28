@@ -1,7 +1,7 @@
 <?php
 //
-//caso o usuário seja um administrador, ele pode enviar um nome de diretório onde os arquivos serão armazenados
-//na variável $dirDestino
+//caso o usu&aacute;rio seja um administrador, ele pode enviar um nome de diret&oacute;rio onde os arquivos serão armazenados
+//na vari&aacute;vel $dirDestino
 //
 require_once("../../classesphp/pega_variaveis.php");
 require_once("../../classesphp/funcoes_gerais.php");
@@ -34,10 +34,10 @@ if (isset($_FILES['i3GEOuploadshp']['name']))
 	}
 	if(isset($dirDestino) && $dirDestino != ""){
 		if(!isset($editores))
-		{echo "<p class='paragrafo' >Lista de editores não disponível. Não pode gravar fora do diretório temporário";paraAguarde();exit;}
+		{echo "<p class='paragrafo' >Lista de editores não dispon&iacute;vel. Não pode gravar fora do diret&oacute;rio tempor&aacute;rio";paraAguarde();exit;}
 		$dirmap = $dirDestino;
 		if(verificaEditores($editores) == "nao")
-		{echo "<p class='paragrafo' >Você não é um editor cadastrado. Não pode gravar fora do diretório temporário";paraAguarde();exit;}
+		{echo "<p class='paragrafo' >Voc&ecirc; não &eacute; um editor cadastrado. Não pode gravar fora do diret&oacute;rio tempor&aacute;rio";paraAguarde();exit;}
 		if(!file_exists($dirmap))
 		{echo "<p class='paragrafo' >Pasta não existe no servidor";paraAguarde();exit;}
 	}
@@ -51,7 +51,7 @@ if (isset($_FILES['i3GEOuploadshp']['name']))
 	//sobe arquivo
 	$Arquivo = $_FILES['i3GEOuploadshp']['tmp_name'];
 	if(file_exists($dirmap."/".$nomePrefixo.".shp"))
-	{echo "<p class='paragrafo' >Já existe um SHP com o nome ".$dirmap."/".$nomePrefixo;paraAguarde();exit;}	
+	{echo "<p class='paragrafo' >J&aacute; existe um SHP com o nome ".$dirmap."/".$nomePrefixo;paraAguarde();exit;}	
 	$status =  move_uploaded_file($Arquivo,$dirmap."/".$nomePrefixo.".shp");
 	if($status != 1)
 	{echo "<p class='paragrafo' >Ocorreu um erro no envio do arquivo SHP";paraAguarde();exit;}	
@@ -132,7 +132,7 @@ function verificaNome($nome)
 	$extensao = $lista[count($lista) - 1];
 	if(($extensao != "dbf") && ($extensao != "shx") && ($extensao != "shp"))
 	{
-		echo "Nome de arquivo inválido.";
+		echo "Nome de arquivo inv&aacute;lido.";
 		paraAguarde();
 		exit;
 	}

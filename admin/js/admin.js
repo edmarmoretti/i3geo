@@ -1,10 +1,10 @@
 //
 //usado apenas no importador de xml
 //
-//variáveis globais
+//vari&aacute;veis globais
 navn = false;
 navm = false;
-//seta as variáveis navn e navm
+//seta as vari&aacute;veis navn e navm
 var app = navigator.appName.substring(0,1);
 if (app==='N'){navn=true;}else{navm=true;}
 
@@ -20,7 +20,7 @@ function ativaIndice(onde)
 	for(var t = 0;t < f.length;t++)
 	{}
 	var etrs = document.getElementsByTagName("legend");
-	var ins = "<fieldset><legend><a name='indice' ><b>Índice</b></a></legend>";
+	var ins = "<fieldset><legend><a name='indice' ><b>&Iacute;ndice</b></a></legend>";
 	for(t = 0;t < etrs.length;t++)
 	{
 		ins += "<a href='#"+etrs[t].innerHTML+"'><p>"+etrs[t].innerHTML+"</p></a>";
@@ -76,7 +76,7 @@ function verificaEditores()
 	var retorna = function(retorno)
 	{
 		if(retorno.data=="nao")
-		{document.body.innerHTML += "<p style=color:red >Você não está cadastrado como um editor";return;}
+		{document.body.innerHTML += "<p style=color:red >Voc&ecirc; n&atilde;o est&aacute; cadastrado como um editor";return;}
 		montaParametros();
 	};
 	var p = "../php/mapfiles.php?funcao=verificaEditores";

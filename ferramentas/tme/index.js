@@ -4,7 +4,7 @@
 /*
 Title: TME
 
-Cria um arquivo KML com a representação em mapa temático baseado no pacote TME
+Cria um arquivo KML com a representa&ccedil;ão em mapa tem&aacute;tico baseado no pacote TME
 
 <i3GEO.tema.dialogo.tme>
 
@@ -18,20 +18,20 @@ GPL2
 
 i3Geo Interface Integrada de Ferramentas de Geoprocessamento para Internet
 
-Direitos Autorais Reservados (c) 2006 Ministério do Meio Ambiente Brasil
+Direitos Autorais Reservados (c) 2006 Minist&eacute;rio do Meio Ambiente Brasil
 Desenvolvedor: Edmar Moretti edmar.moretti@mma.gov.br
 
-Este programa é software livre; você pode redistribuí-lo
-e/ou modificá-lo sob os termos da Licença Pública Geral
+Este programa &eacute; software livre; voc&ecirc; pode redistribu&iacute;-lo
+e/ou modific&aacute;-lo sob os termos da Licen&ccedil;a P&uacute;blica Geral
 GNU conforme publicada pela Free Software Foundation;
 
-Este programa é distribuído na expectativa de que seja útil,
-porém, SEM NENHUMA GARANTIA; nem mesmo a garantia implícita
-de COMERCIABILIDADE OU ADEQUAÇÃO A UMA FINALIDADE ESPECÍFICA.
-Consulte a Licença Pública Geral do GNU para mais detalhes.
-Você deve ter recebido uma cópia da Licença Pública Geral do
+Este programa &eacute; distribu&iacute;do na expectativa de que seja &uacute;til,
+por&eacute;m, SEM NENHUMA GARANTIA; nem mesmo a garantia impl&iacute;cita
+de COMERCIABILIDADE OU ADEQUAÇÃO A UMA FINALIDADE ESPEC&Iacute;FICA.
+Consulte a Licen&ccedil;a P&uacute;blica Geral do GNU para mais detalhes.
+Voc&ecirc; deve ter recebido uma c&oacute;pia da Licen&ccedil;a P&uacute;blica Geral do
 GNU junto com este programa; se não, escreva para a
-Free Software Foundation, Inc., no endereço
+Free Software Foundation, Inc., no endere&ccedil;o
 59 Temple Street, Suite 330, Boston, MA 02111-1307 USA.
 */
 if(typeof(i3GEOF) === 'undefined'){
@@ -45,7 +45,7 @@ i3GEOF.tme = {
 	/*
 	Variavel: tema
 	
-	Tema que será utilizado
+	Tema que ser&aacute; utilizado
 	
 	Type:
 	{string}
@@ -54,17 +54,17 @@ i3GEOF.tme = {
 	/*
 	Variavel: aguarde
 	
-	Estilo do objeto DOM com a imagem de aguarde existente no cabeçalho da janela.
+	Estilo do objeto DOM com a imagem de aguarde existente no cabe&ccedil;alho da janela.
 	*/
 	aguarde: "",
 	/*
 	Function: inicia
 	
-	Inicia a ferramenta. É chamado por criaJanelaFlutuante
+	Inicia a ferramenta. &Eacute; chamado por criaJanelaFlutuante
 	
 	Parametro:
 	
-	iddiv {String} - id do div que receberá o conteudo HTML da ferramenta
+	iddiv {String} - id do div que receber&aacute; o conteudo HTML da ferramenta
 	*/
 	inicia: function(iddiv){
 		i3GEO.janela.comboCabecalhoTemas("i3GEOFtmeComboCabeca","i3GEOFtmeComboCabecaSel","tme","ligadosComTabela");
@@ -95,28 +95,28 @@ i3GEOF.tme = {
 	/*
 	Function: html
 	
-	Gera o código html para apresentação das opções da ferramenta
+	Gera o c&oacute;digo html para apresenta&ccedil;ão das op&ccedil;&otilde;es da ferramenta
 	
 	Retorno:
 	
-	String com o código html
+	String com o c&oacute;digo html
 	*/
 	html:function(){
 		var ins = '' +
 		'<div style="text-align:left;" id=i3GEOTMEresultado ></div>' +
 		'<p class="paragrafo" >' +
-		'Título que será mostrado no mapa';
+		'T&iacute;tulo que ser&aacute; mostrado no mapa';
 		ins += $inputText("","","i3GEOTMEtitulo","",48,"") +
-		'<br><br>Descrição do mapa';
+		'<br><br>Descri&ccedil;ão do mapa';
 		ins += $inputText("","","i3GEOTMEdesc","",48,"") +
-		'<br><br>Coluna que contém os nomes das regiões (exemplo: nomes dos Estados ou nomes dos municípios):' +
+		'<br><br>Coluna que cont&eacute;m os nomes das regi&otilde;es (exemplo: nomes dos Estados ou nomes dos munic&iacute;pios):' +
 		'<div id="i3GEOTMEregioeslista" style="text-align:left;" ></div>' +
 		'<p class="paragrafo" >' +
-		'<br>Escolha uma ou mais colunas que contém os dados estatísticos que serão representados:' +	
+		'<br>Escolha uma ou mais colunas que cont&eacute;m os dados estat&iacute;sticos que serão representados:' +	
 		'<div id=i3GEOtmelistai class=digitar style="text-align:left;left:0px;top:0px;330px;height:80px;overflow:auto;display:block;"></div>' +
 		'<br>' +
 		'<input id=i3GEOtmebotao1 size=35  type=button value="Aplicar" />' +
-		'<div id=i3GEOtmemen1 style=top:15px;left:0px; ><p class=paragrafo >Será criado um arquivo KML que pode ser aberto com o Google Earth. A coluna com os nomes das regiões define o nome que será mostrado para cada elemento mapeado. Quando os nomes das colunas com os valores corresponderem a um determinado ano, será mostrado um botão do tipo slide no Google Earth, mas isso só ocorre se o nome da coluna for o mesmo nome do ano, exemplo, para o ano de 1980 o nome da coluna deverá ser 1980</div>';
+		'<div id=i3GEOtmemen1 style=top:15px;left:0px; ><p class=paragrafo >Ser&aacute; criado um arquivo KML que pode ser aberto com o Google Earth. A coluna com os nomes das regi&otilde;es define o nome que ser&aacute; mostrado para cada elemento mapeado. Quando os nomes das colunas com os valores corresponderem a um determinado ano, ser&aacute; mostrado um botão do tipo slide no Google Earth, mas isso s&oacute; ocorre se o nome da coluna for o mesmo nome do ano, exemplo, para o ano de 1980 o nome da coluna dever&aacute; ser 1980</div>';
 		return ins;
 	},
 	/*
@@ -177,7 +177,7 @@ i3GEOF.tme = {
 	
 	Monta a lista de itens que poderão ser escolhidos para compor o mapa.
 	
-	A lista é inserida no elemento html com id "i3GEOtmelistai"
+	A lista &eacute; inserida no elemento html com id "i3GEOtmelistai"
 	
 	@TODO marcar os itens existentes
 	*/
@@ -201,7 +201,7 @@ i3GEOF.tme = {
 	/*
 	Function: pegaItensMarcados
 	
-	Recupera os itens que foram marcados e monta uma lista para enviar como parâmetro para a função de geração dos gráficos
+	Recupera os itens que foram marcados e monta uma lista para enviar como parâmetro para a fun&ccedil;ão de gera&ccedil;ão dos gr&aacute;ficos
 	*/
 	pegaItensMarcados: function(){
 		var listadeitens = [],
@@ -239,7 +239,7 @@ i3GEOF.tme = {
 			if(lista.length === 0)
 			{alert("selecione um item");return;}
 			if(colunanomeregiao === 0)
-			{alert("selecione um item com as regiões");return;}
+			{alert("selecione um item com as regi&otilde;es");return;}
 			i3GEOF.tme.aguarde.visibility = "visible";
 			temp = function(retorno){
 				i3GEOF.tme.aguarde.visibility = "hidden";

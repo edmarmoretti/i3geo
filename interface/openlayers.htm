@@ -5,7 +5,7 @@
 <META HTTP-EQUIV="Content-Type" CONTENT="text/html; charset=ISO-8859-1">
 
 <title>i3GEO - OpenLayers</title>
-<!-- estilo necessário para a ferramenta de edição -->
+<!-- estilo necess&aacute;rio para a ferramenta de edi&ccedil;&atilde;o -->
 <style>
 .olControlEditingToolbar1 div {
 	background-image:url(../mashups/openlayers.png);
@@ -47,23 +47,23 @@
 				<tr>
 					<td class=tdbranca >
 						<!--
-						Nesse div são incluídos os ícones que permitem ao usuário modificar o visual de cores dos ícones
+						Nesse div s&atilde;o inclu&iacute;dos os &iacute;cones que permitem ao usu&aacute;rio modificar o visual de cores dos &iacute;cones
 						<div id=visual ></div>
 						-->
-						<!-- botão de compartilhamento em redes sociais -->
+						<!-- bot&atilde;o de compartilhamento em redes sociais -->
 						<div id=i3GEOcompartilhar style="text-align:left;border-top:1px solid rgb(250,250,250);padding-top:1px" ></div>
-						<!-- aqui será incluído o contador de tempo quando o temporizador de redesenho do mapa estiver ativo -->
+						<!-- aqui ser&aacute; inclu&iacute;do o contador de tempo quando o temporizador de redesenho do mapa estiver ativo -->
 						<div id=tempoRedesenho style=color:green;background-color:black;width:50px;display:none ></div>
 					</td>
 					<td class=tdbranca >
-						<!-- aqui será incluída a escala numérica -->
+						<!-- aqui ser&aacute; inclu&iacute;da a escala num&eacute;rica -->
 						<div id=escala style="text-align:right;" ></div>
 					</td>
 					<td class=tdbranca  >
-						<!-- aqui será incluído o gadget que mostra a coordenada geográfica da posição do mouse -->
+						<!-- aqui ser&aacute; inclu&iacute;do o gadget que mostra a coordenada geogr&aacute;fica da posi&ccedil;&atilde;o do mouse -->
 						<div id=localizarxy style="text-align:left;font-size:10px;display:inline-table"></div>
 					</td>
-					<!-- aqui serão incluídas as bandeiras que permitem a troca de idioma -->	  
+					<!-- aqui ser&atilde;o inclu&iacute;das as bandeiras que permitem a troca de idioma -->	  
 					<td class=tdbranca  >
 						<div id=seletorIdiomas ></div>
 					</td>
@@ -77,7 +77,7 @@
 </table>
 <table id="i3GEOlogoMarca" style='margin: 0px auto;box-shadow:0 1px 13px gray;border-radius:5px;'>
 	<tr>
-		<td><div id=versaoi3geo ></div><h2 style="font-size:10px;font-family: Verdana, Arial, Helvetica, sans-serif;">i3Geo - Software livre para criação de mapas interativos e geoprocessamento</h2><h3 style="font-size:10px;font-family: Verdana, Arial, Helvetica, sans-serif;">Baseado no Mapserver, é licenciado sob GPL e integra o Portal do Software Público Brasileiro</h3></td>
+		<td><div id=versaoi3geo ></div><h2 style="font-size:10px;font-family: Verdana, Arial, Helvetica, sans-serif;">i3Geo - Software livre para cria&ccedil;&atilde;o de mapas interativos e geoprocessamento</h2><h3 style="font-size:10px;font-family: Verdana, Arial, Helvetica, sans-serif;">Baseado no Mapserver, &eacute; licenciado sob GPL e integra o Portal do Software P&uacute;blico Brasileiro</h3></td>
 	</tr>
 	<tr>
 		<td style="padding:10px;"><img style="width:560px;height:81px" alt="" src='../imagens/logo_inicio.png' ></td>
@@ -97,13 +97,13 @@
 		<div id="i3GEOguiaMovelIcones" style='overflow:none;left:0px;display:none;position:absolute;top:0px;text-align:center;height:0px;width:0px;border:solid 0px white;background-color:white' ></div>
 		<div id="i3GEOguiaMovelConteudo" style='overflow:auto;display:none;position:absolute;border-color:gray;border-width:0px 0 0px 0px;left:0px;height:0px;background-color:white'>
 			<div id='guia1obj' style='display:none;' >
-				<!-- Esta div acrescenta a opção de busca rápida, caso vc queira colocá-la em um lugar específico -->
+				<!-- Esta div acrescenta a op&ccedil;&atilde;o de busca r&aacute;pida, caso vc queira coloc&aacute;-la em um lugar espec&iacute;fico -->
 				<div style='left:5px;top:10px;' id=buscaRapida ></div>
 				<!--	Esta div acrescenta a lista de propriedades do mapa -->	
 				<div id=listaPropriedades style='top:15px;' ></div>
-				<!--	Esta div acrescenta a lista de de camadas do tipo 'baselayers' específicas da interface Openlayers. Veja também a opção i3GEO.Interface.openlayers.GADGETS.LayerSwitcher -->
+				<!--	Esta div acrescenta a lista de de camadas do tipo 'baselayers' espec&iacute;ficas da interface Openlayers. Veja tamb&eacute;m a op&ccedil;&atilde;o i3GEO.Interface.openlayers.GADGETS.LayerSwitcher -->
 				<div id=listaLayersBase style='top:15px;'></div>
-				<!--	Esta div acrescenta a lista de de camadas disponíveis no mapa atual -->
+				<!--	Esta div acrescenta a lista de de camadas dispon&iacute;veis no mapa atual -->
 				<div id=listaTemas style='top:15px;'></div>
 			</div>
 			<div id='guia2obj' style='display:none;'>Aguarde...<img alt="" src="../imagens/branco.gif" width=248 /></div>
@@ -120,7 +120,7 @@
 /*
 Title: Interface Openlayers
 
-Abre o i3geo com todas as suas funcionalidades e interface de navegação controlada pela API Openlayers.
+Abre o i3geo com todas as suas funcionalidades e interface de navega&ccedil;&atilde;o controlada pela API Openlayers.
 
 File: i3geo/interface/openlayers.htm
 
@@ -132,19 +132,19 @@ http://<host>/i3geo/interface/openlayers.htm
 
 http://<host>/i3geo
 
-Para definir quais botões das barras de ferramentas serão incluídos no mapa, veja: <classe_barradebotoes.js> i3GEO.barraDeBotoes.INCLUIBOTAO
+Para definir quais bot&otilde;es das barras de ferramentas ser&atilde;o inclu&iacute;dos no mapa, veja: <classe_barradebotoes.js> i3GEO.barraDeBotoes.INCLUIBOTAO
 
 */
 /*
-	Indica a localização correta do i3geo.
+	Indica a localiza&ccedil;&atilde;o correta do i3geo.
 	
-	É utilizada para identificar o local correto onde estão os programas em php que são utilizados.
+	&Eacute; utilizada para identificar o local correto onde est&atilde;o os programas em php que s&atilde;o utilizados.
 	
-	Se não for definida, o i3Geo tentará encontrar o local automaticamente com base na tag javascript 
+	Se n&atilde;o for definida, o i3Geo tentar&aacute; encontrar o local automaticamente com base na tag javascript 
 */
 //i3GEO.configura.locaplic = i3GEO.util.protocolo()+"://"+window.location.host+"/i3geo";
 /*
-Para outras configurações, veja i3geo/classesjs/classe_configura.js
+Para outras configura&ccedil;&otilde;es, veja i3geo/classesjs/classe_configura.js
 
 exemplo
 
@@ -177,29 +177,29 @@ i3GEO.Interface.openlayers.TILES = true;
 i3GEO.gadgets.PARAMETROS.mostraMenuSuspenso.finaliza = 'if($i("omenudataInterface1")){i3GEOoMenuBar.getMenuItem("omenudataInterface1").cfg.setProperty("text", " ");}'
 
 /*
-Após a criação, é criado o objeto i3geoOL que corresponde ao objeto map da API do OpenLayers.
-Vc pode usar i3geoOL para aplicar os métodos e verificar as propriedades da API do OpenLayers
+Após a cria&ccedil;&atilde;o, &eacute; criado o objeto i3geoOL que corresponde ao objeto map da API do OpenLayers.
+Vc pode usar i3geoOL para aplicar os m&eacute;todos e verificar as propriedades da API do OpenLayers
 */
 
 i3GEO.cria();
 /*
 	Inicializa o mapa
 */
-//não mostra o mapa de referência
+//n&atilde;o mostra o mapa de refer&ecirc;ncia
 i3GEO.configura.mapaRefDisplay = "none";
-//tipo de barra de botões
+//tipo de barra de bot&otilde;es
 i3GEO.barraDeBotoes.TIPO = "olhodepeixe";
-//ajusta o deslocamento da barra de botões
+//ajusta o deslocamento da barra de bot&otilde;es
 i3GEO.barraDeBotoes.OFFSET = -3;
-//ajusta a posição da barra de botões no IE
+//ajusta a posi&ccedil;&atilde;o da barra de bot&otilde;es no IE
 //if(navm)
 //{i3GEO.barraDeBotoes.OFFSET = -45;}
-//número máximo de botões na barra de botões inicial
+//n&uacute;mero m&aacute;ximo de bot&otilde;es na barra de bot&otilde;es inicial
 //i3GEO.barraDeBotoes.MAXBOTOES = 10;
-//remove itens dos menus que não são necessários, já que estão como ícones na barra de botões
+//remove itens dos menus que n&atilde;o s&atilde;o necess&aacute;rios, j&aacute; que est&atilde;o como &iacute;cones na barra de bot&otilde;es
 i3GEO.configura.oMenuData["submenus"]["janelas"] = [];
 i3GEO.gadgets.PARAMETROS.mostraMenuSuspenso.permiteLogin = true;
-//a barra de botões será mostrada no mapa conforme o construtor padrão
+//a barra de bot&otilde;es ser&aacute; mostrada no mapa conforme o construtor padr&atilde;o
 i3GEO.barraDeBotoes.ATIVA = true;
 //
 //barra de botoes normal. descomente para usar
@@ -227,15 +227,15 @@ i3GEO.arvoreDeCamadas.MOSTRALISTAKML = false;
 i3GEO.mapa.AUTORESIZE = true;
 i3GEO.guias.TIPO = "movel";
 //i3GEO.guias.guiaMovel.ABERTA = true;
-//posição da guia movel em relação ao topo do mapa. Se for igual a 0, o cálculo será feito de forma automática
+//posi&ccedil;&atilde;o da guia movel em rela&ccedil;&atilde;o ao topo do mapa. Se for igual a 0, o c&aacute;lculo ser&aacute; feito de forma autom&aacute;tica
 i3GEO.guias.guiaMovel.config.topGuiaMovel = 0;
 //
-//define quanto tempo é aguardado para considerar que o mouse está parado sobre um lugar.
-//utilizado pela função de identificação do tipo balão
+//define quanto tempo &eacute; aguardado para considerar que o mouse est&aacute; parado sobre um lugar.
+//utilizado pela fun&ccedil;&atilde;o de identifica&ccedil;&atilde;o do tipo bal&atilde;o
 //
 //i3GEO.configura.tempoMouseParado = 1000
 //
-//esta é uma variável interna do OpenLayers que define o endereço do diretório onde estão as imagens usadas nos ícones
+//esta &eacute; uma vari&aacute;vel interna do OpenLayers que define o endere&ccedil;o do diretório onde est&atilde;o as imagens usadas nos &iacute;cones
 //
 OpenLayers.ImgPath = "../pacotes/openlayers/img/";
 //

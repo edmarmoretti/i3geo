@@ -1,21 +1,21 @@
 <?php
 /*
-Title: hiperbolica
+ Title: hiperbolica
 
 Cria um arquivo no formato XML para o aplicativo arvore hiperbolica.
 
 A ï¿½rvore hiperbolica e montada por um applet que carrega um XML contendo a estrutura de nos.
 
-Esse programa le o banco de administração e monta o XML contendo os menus, grupos, subgrupos e temas.
+Esse programa le o banco de administra&ccedil;&atilde;o e monta o XML contendo os menus, grupos, subgrupos e temas.
 
-A hierarquia dos níveis é codificada com os elementos armazenados em "tipo".
+A hierarquia dos n&iacute;veis &eacute; codificada com os elementos armazenados em "tipo".
 
-O elemento "familia" armazena dados que podem ser utilizados e funções javascript da árvore. Por exemplo, quando o não
-for um tema, o código do tema é guardado nesse elemento.
+O elemento "familia" armazena dados que podem ser utilizados e fun&ccedil;&otilde;es javascript da &aacute;rvore. Por exemplo, quando o n&atilde;o
+for um tema, o código do tema &eacute; guardado nesse elemento.
 
 Para ver o XML utilize <http://localhost/i3geo/admin/hiperbolica.php>
 
-Para ver a árvore, utilize <http://localhost/i3geo/pacotes/arvorehiper/index.php>
+Para ver a &aacute;rvore, utilize <http://localhost/i3geo/pacotes/arvorehiper/index.php>
 
 Licenca:
 
@@ -23,20 +23,20 @@ GPL2
 
 i3Geo Interface Integrada de Ferramentas de Geoprocessamento para Internet
 
-Direitos Autorais Reservados (c) 2006 Ministério do Meio Ambiente Brasil
+Direitos Autorais Reservados (c) 2006 Minist&eacute;rio do Meio Ambiente Brasil
 Desenvolvedor: Edmar Moretti edmar.moretti@mma.gov.br
 
-Este programa é software livre; você pode redistribuí-lo
-e/ou modificá-lo sob os termos da Licença Pública Geral
+Este programa &eacute; software livre; voc&ecirc; pode redistribu&iacute;-lo
+e/ou modific&aacute;-lo sob os termos da Licen&ccedil;a P&uacute;blica Geral
 GNU conforme publicada pela Free Software Foundation;
 
-Este programa é distribuído na expectativa de que seja útil,
-porém, SEM NENHUMA GARANTIA; nem mesmo a garantia implícita
-de COMERCIABILIDADE OU ADEQUAÇÃO A UMA FINALIDADE ESPECÍFICA.
-Consulte a Licença Pública Geral do GNU para mais detalhes.
-Você deve ter recebido uma cópia da Licença Pública Geral do
-GNU junto com este programa; se não, escreva para a
-Free Software Foundation, Inc., no endereço
+Este programa &eacute; distribu&iacute;do na expectativa de que seja &uacute;til,
+por&eacute;m, SEM NENHUMA GARANTIA; nem mesmo a garantia impl&iacute;cita
+de COMERCIABILIDADE OU ADEQUA&Ccedil;&Atilde;O A UMA FINALIDADE ESPEC&Iacute;FICA.
+Consulte a Licen&ccedil;a P&uacute;blica Geral do GNU para mais detalhes.
+Voc&ecirc; deve ter recebido uma cópia da Licen&ccedil;a P&uacute;blica Geral do
+	GNU junto com este programa; se n&atilde;o, escreva para a
+Free Software Foundation, Inc., no endere&ccedil;o
 59 Temple Street, Suite 330, Boston, MA 02111-1307 USA.
 
 
@@ -58,7 +58,7 @@ if(!empty($esquemaadmin)){
 }
 $encoding = "UTF-8";
 if($convUTF)
-$xml = "<"."\x3F"."xml version='1.0' encoding='UTF-8' "."\x3F".">";
+	$xml = "<"."\x3F"."xml version='1.0' encoding='UTF-8' "."\x3F".">";
 else
 {
 	$xml = "<"."\x3F"."xml version='1.0' encoding='ISO-8859-1' "."\x3F".">";
@@ -78,7 +78,9 @@ $xml .= '<item cor="#FFFFCC" id="'.$contador.'" tipo="TE1" nome="Menus" familia=
 foreach ($menus as $menu)
 {
 	if(strtolower($menu["publicado_menu"]) == "nao")
-	{continue;}
+	{
+		continue;
+	}
 	$id = $menu["id_menu"];
 	$nome = html_entity_decode($menu["nome_menu"]);
 	$nome = h_converteTexto($nome);
@@ -104,13 +106,13 @@ foreach ($menus as $menu)
 		//var_dump($temasRaizGrupo);exit;
 		$t = obtemTemas($temasRaizGrupo,$contador,$id);
 		$xml .= $t[0];
-		$contador += $t[1];		
+		$contador += $t[1];
 		//
 		//obtem os subgrupos
 		//
 		$subgrupos = pegaDados("select i3geoadmin_subgrupos.nome_subgrupo,i3geoadmin_n2.id_n2 from ".$esquemaadmin."i3geoadmin_n2 LEFT JOIN ".$esquemaadmin."i3geoadmin_subgrupos ON i3geoadmin_n2.id_subgrupo = i3geoadmin_subgrupos.id_subgrupo where i3geoadmin_n2.id_n1='$idgrupo' order by ordem",$locaplic);
 		if(count($subgrupos) > 0)
-		$xml .= '<item cor="#FF9966" id="'.$contador.'" tipo="TE4" nome="SUBGRUPOS" familia="'.$id.'" />  '."\n";		
+			$xml .= '<item cor="#FF9966" id="'.$contador.'" tipo="TE4" nome="SUBGRUPOS" familia="'.$id.'" />  '."\n";
 		for($j=0;$j < count($subgrupos);++$j)
 		{
 			$contador++;
@@ -150,17 +152,17 @@ for($i=0;$i < count($grupos);++$i)
 	if(count($arrayTag > 0))
 	{
 		$contador++;
-		$xml .= '<item cor="#FFCC99" id="'.$contador.'" tipo="TE3" nome="TAGs" familia="'.$id.'" />  '."\n";	
+		$xml .= '<item cor="#FFCC99" id="'.$contador.'" tipo="TE3" nome="TAGs" familia="'.$id.'" />  '."\n";
 		foreach($arrayTag as $tag)
 		{
 			$tag = html_entity_decode($tag);
 			$tag = h_converteTexto($tag);
 			$contador++;
 			if($tag != "")
-			$xml .= '<item cor="#33CCFF" id="'.$contador.'" tipo="TE4" nome="'.$tag.'" familia="tag,'.$tag.'" />  '."\n";	
+				$xml .= '<item cor="#33CCFF" id="'.$contador.'" tipo="TE4" nome="'.$tag.'" familia="tag,'.$tag.'" />  '."\n";
 		}
-	}		
-}	
+	}
+}
 $id = $contador;
 $xml .= '<item cor="#FFFFCC" id="'.$contador.'" tipo="TE1" nome="Web Services" familia="3" />  '."\n";
 $tipos = pegaDados("select tipo_ws from ".$esquemaadmin."i3geoadmin_ws group by tipo_ws",$locaplic);
@@ -176,7 +178,7 @@ foreach ($tipos as $tipo)
 		$nome = h_converteTexto($nome);
 		$link = str_replace("&","&amp;",$w["link_ws"]);
 		if($nome != "")
-		$xml .= '<item cor="#33CCFF" id="'.$contador.'" tipo="TE3" nome="'.$nome.'" familia="'.$tipo["tipo_ws"].",".$link.'" />  '."\n";		
+			$xml .= '<item cor="#33CCFF" id="'.$contador.'" tipo="TE3" nome="'.$nome.'" familia="'.$tipo["tipo_ws"].",".$link.'" />  '."\n";
 	}
 }
 $xml .= "</termo>";
@@ -189,13 +191,13 @@ header("Content-type: application/xml");
 
 echo $xml;
 /*
-Converte o encoding conforme definido em $i
+ Converte o encoding conforme definido em $i
 */
 function h_converteTexto($i)
 {
 	global $encoding;
 	$s = mb_detect_encoding($i, 'UTF-8, UTF-7, ASCII, ISO-8859-1');
-	return mb_convert_encoding($i,$encoding,$s);	
+	return mb_convert_encoding($i,$encoding,$s);
 }
 function obtemTemas($temas,$contador,$id)
 {
@@ -222,7 +224,7 @@ function obtemTemas($temas,$contador,$id)
 					$tag = html_entity_decode($tag);
 					$tag = h_converteTexto($tag);
 					if($tag != "")
-					$xml .= '<item cor="#ffffff" id="'.$contador.'" tipo="TE9" nome="'.$tag.'" familia="tag,'.$tag.'" />  '."\n";
+						$xml .= '<item cor="#ffffff" id="'.$contador.'" tipo="TE9" nome="'.$tag.'" familia="tag,'.$tag.'" />  '."\n";
 				}
 			}
 		}

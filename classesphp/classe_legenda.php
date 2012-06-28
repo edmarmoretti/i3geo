@@ -2,7 +2,7 @@
 /*
 Title: classe_legenda.php
 
-Manipulação da legenda.
+Manipula&ccedil;&atilde;o da legenda.
 
 Cria legenda, edita simbolos, etc.
 
@@ -13,20 +13,20 @@ GPL2
 
 i3Geo Interface Integrada de Ferramentas de Geoprocessamento para Internet
 
-Direitos Autorais Reservados (c) 2006 Ministério do Meio Ambiente Brasil
+Direitos Autorais Reservados (c) 2006 Minist&eacute;rio do Meio Ambiente Brasil
 Desenvolvedor: Edmar Moretti edmar.moretti@mma.gov.br
 
-Este programa é software livre; você pode redistribuí-lo
-e/ou modificá-lo sob os termos da Licença Pública Geral
+Este programa &eacute; software livre; voc&ecirc; pode redistribu&iacute;-lo
+e/ou modific&aacute;-lo sob os termos da Licen&ccedil;a P&uacute;blica Geral
 GNU conforme publicada pela Free Software Foundation;
 
-Este programa é distribuído na expectativa de que seja útil,
-porém, SEM NENHUMA GARANTIA; nem mesmo a garantia implícita
-de COMERCIABILIDADE OU ADEQUAÇÃO A UMA FINALIDADE ESPECÍFICA.
-Consulte a Licença Pública Geral do GNU para mais detalhes.
-Você deve ter recebido uma cópia da Licença Pública Geral do
-GNU junto com este programa; se não, escreva para a
-Free Software Foundation, Inc., no endereço
+Este programa &eacute; distribu&iacute;do na expectativa de que seja &uacute;til,
+por&eacute;m, SEM NENHUMA GARANTIA; nem mesmo a garantia impl&iacute;cita
+de COMERCIABILIDADE OU ADEQUA&Ccedil;&Atilde;O A UMA FINALIDADE ESPEC&Iacute;FICA.
+Consulte a Licen&ccedil;a P&uacute;blica Geral do GNU para mais detalhes.
+Voc&ecirc; deve ter recebido uma cópia da Licen&ccedil;a P&uacute;blica Geral do
+GNU junto com este programa; se n&atilde;o, escreva para a
+Free Software Foundation, Inc., no endere&ccedil;o
 59 Temple Street, Suite 330, Boston, MA 02111-1307 USA.
 
 Arquivo:
@@ -72,7 +72,7 @@ class Legenda
 	/*
 	Variavel: $visiveis
 	
-	Temas do grupo que são visíveis em função da escala
+	Temas do grupo que s&atilde;o vis&iacute;veis em fun&ccedil;&atilde;o da escala
 	*/
 	protected $visiveis;
 	/*
@@ -90,13 +90,13 @@ class Legenda
 	/*
 	Variavel: $localaplicacao
 	
-	Localização da aplicação
+	Localiza&ccedil;&atilde;o da aplica&ccedil;&atilde;o
 	*/
 	protected $localaplicacao;
 	/*
 	Variavel: $v
 	
-	Versão atual do Mapserver (primeiro dígito)
+	Vers&atilde;o atual do Mapserver (primeiro d&iacute;gito)
 	*/
 	public $v;	
 /*
@@ -106,9 +106,9 @@ Cria um objeto Legenda
 
 parameters:
 
-$map_file - Endereço do mapfile no servidor.
+$map_file - Endere&ccedil;o do mapfile no servidor.
 
-$locaplic - localização do I3Geo no servidor
+$locaplic - localiza&ccedil;&atilde;o do I3Geo no servidor
 
 $tema - nome do tema
 
@@ -177,7 +177,7 @@ Salva o mapfile atual
 /*
 function: recalculaSLD
 
-Constrói o SLD que é aplicado ao metadata wms_sld_body. O SLD resultante é baseado nas definições das classes existentes no layer
+Constrói o SLD que &eacute; aplicado ao metadata wms_sld_body. O SLD resultante &eacute; baseado nas defini&ccedil;&otilde;es das classes existentes no layer
 */
 	function recalculaSLD(){
 		if($this->layer->classitem != "" && $this->layer->connectiontype == 7 && $this->layer->numclasses > 0){
@@ -200,7 +200,7 @@ Constrói o SLD que é aplicado ao metadata wms_sld_body. O SLD resultante é basea
 /*
 function: criaLegenda
 
-Gera a legenda processando o template HTML definido na construção da classe.
+Gera a legenda processando o template HTML definido na constru&ccedil;&atilde;o da classe.
 
 Se o tema for um WMS ou se o metadata legendaimg estiver definido, executa $this->tabelaLegenda
 
@@ -214,7 +214,7 @@ string com a legenda HTML
 		$numlayers = $this->mapa->numlayers;
 		if($this->nome != "")
 		{
-			//verifica se é wms ou se o metadata legendaimg está definido
+			//verifica se &eacute; wms ou se o metadata legendaimg est&aacute; definido
 			$c = $this->layer->connectiontype;
 			if ($c == 7 || $this->layer->getmetadata("legendaimg") != "")
 			{
@@ -297,7 +297,7 @@ function: tabelaLegenda
 
 Cria elementos para construir uma legenda no formato de tabela em HTML.
 
-Utilizado na função de edição de legenda e legenda de WMS
+Utilizado na fun&ccedil;&atilde;o de edi&ccedil;&atilde;o de legenda e legenda de WMS
 
 parameters:
 
@@ -312,7 +312,7 @@ array
 		foreach ($this->visiveis as $l)
 		{
 			$layer = $this->mapa->getlayerbyname($l);
-			//verifica se é wms ou wfs
+			//verifica se &eacute; wms ou wfs
 			$c = $layer->connectiontype;
 			
 			$s = $layer->getmetadata("wms_sld_url");
@@ -332,7 +332,7 @@ array
 				{$layer->set("type",MS_LAYER_POINT);}						
 			}
 			//
-			//se for WMS e não tiver classes, tenta pegar a legenda via requisição WMS
+			//se for WMS e n&atilde;o tiver classes, tenta pegar a legenda via requisi&ccedil;&atilde;o WMS
 			//
 			if ($nc == 0 && ($c == 7 || $im != ""))
 			{
@@ -472,8 +472,8 @@ function: sobeEstilo
 Sobe um estilo na ordem de desenho de uma classe.
 
 parameters:
-$classe - Índice da classe.
-$estilo - Índice do estilo de uma classe que será clonado.
+$classe - &Iacute;ndice da classe.
+$estilo - &Iacute;ndice do estilo de uma classe que ser&aacute; clonado.
 */
 	function sobeEstilo($classe,$estilo)
 	{
@@ -488,9 +488,9 @@ function: desceEstilo
 Desce um estilo na ordem de desenho de uma classe.
 
 parameters:
-$classe - Índice da classe.
+$classe - &Iacute;ndice da classe.
 
-$estilo - Índice do estilo de uma classe que será clonado.
+$estilo - &Iacute;ndice do estilo de uma classe que ser&aacute; clonado.
 */
 	function desceEstilo($classe,$estilo)
 	{
@@ -502,29 +502,29 @@ $estilo - Índice do estilo de uma classe que será clonado.
 /*
 function: listaSimbolos
 
-Retorna uma lista de símbolos clicáveis no formato HTML.
+Retorna uma lista de s&iacute;mbolos clic&aacute;veis no formato HTML.
 
-Para cada tipo de simbologia deve haver um arquivo .map com as definições básicas.
+Para cada tipo de simbologia deve haver um arquivo .map com as defini&ccedil;&otilde;es b&aacute;sicas.
 
-Todos os símbolos do arquivo symbols/simbolos serão retornados como imagens. 
+Todos os s&iacute;mbolos do arquivo symbols/simbolos ser&atilde;o retornados como imagens. 
 
 parameters:
 
-$tipo - Tipo de representação do símbolo, 0 pontos, 1 linhas e 2 polígonos.
+$tipo - Tipo de representa&ccedil;&atilde;o do s&iacute;mbolo, 0 pontos, 1 linhas e 2 pol&iacute;gonos.
 
-$dir_tmp - Diretório temporário do mapserver.
+$dir_tmp - Diretório tempor&aacute;rio do mapserver.
 
-$imgdir - Diretório temporário das imagens.
+$imgdir - Diretório tempor&aacute;rio das imagens.
 
-$onclick - Função que será incluída no HTML no evento onclick sobre o símbolo
+$onclick - Fun&ccedil;&atilde;o que ser&aacute; inclu&iacute;da no HTML no evento onclick sobre o s&iacute;mbolo
 
-$tamanho - Tamanho (size) do símbolo
+$tamanho - Tamanho (size) do s&iacute;mbolo
 
 $forca {boolean} - forca a exclusao dos simbolos atualmente em cache
 
 return:
 
-String no formato HTML com as imagens dos símbolos
+String no formato HTML com as imagens dos s&iacute;mbolos
 */
 	function listaSimbolos($tipo,$dir_tmp,$imgdir,$onclick,$tamanho=8,$width=1,$forca=false)
 	{
@@ -594,10 +594,10 @@ String no formato HTML com as imagens dos símbolos
 /*
 function: pegaParametros
 
-Retorna uma lista com parâmetros sobre cada estilo de uma classe.
+Retorna uma lista com par&acirc;metros sobre cada estilo de uma classe.
 
 parameters:
-$classe - Índice da classe.
+$classe - &Iacute;ndice da classe.
 
 return:
 string com o tipo do layer,id do estilo,outlinecolor,backgroundcolor,color,symbolname,size|
@@ -636,13 +636,13 @@ string com o tipo do layer,id do estilo,outlinecolor,backgroundcolor,color,symbo
 /*
 function: aplicaParametro
 
-Aplica um parâmetro em um estilo de uma classe.
+Aplica um par&acirc;metro em um estilo de uma classe.
 
 parameters:
 
-$classe - Índice da classe.
+$classe - &Iacute;ndice da classe.
 
-$estilo - Índice do estilo que será alterado.
+$estilo - &Iacute;ndice do estilo que ser&aacute; alterado.
 
 $outlinecolor - Cor do contorno.
 
@@ -650,9 +650,9 @@ $backgroundcolor - Cor do fundo.
 
 $color - Cor da frente.
 
-$symbolname - Nome do símbolo.
+$symbolname - Nome do s&iacute;mbolo.
 
-$size - Tamanho que será aplicado ao símbolo.
+$size - Tamanho que ser&aacute; aplicado ao s&iacute;mbolo.
 
 $opacidade - Opacidade 
 */
@@ -662,7 +662,7 @@ $opacidade - Opacidade
 		if(!empty($pattern))
 		{$pattern = str_replace(","," ",$pattern);}
 		$classe = $this->layer->getclass($classe);
-		//isso é necessário pq o mapserver não consegue apagar o nome de um estilo
+		//isso &eacute; necess&aacute;rio pq o mapserver n&atilde;o consegue apagar o nome de um estilo
 		if(isset($symbolname) && ($symbolname == "" || $symbolname == "0")){
 			$classe->deletestyle($estilo);
 			$estilo = ms_newStyleObj($classe);
@@ -718,7 +718,7 @@ $opacidade - Opacidade
 /*
 function: pegaParametrosLegImg
 
-Pega os parâmetros da legenda embebida no mapa.
+Pega os par&acirc;metros da legenda embebida no mapa.
 
 return:
 
@@ -762,7 +762,7 @@ array - "imagecolor"=>$imagecolor,"transparent"=>transparent,"position"=>$positi
 /*
 function: aplicaParametrosLegImg
 
-Aplica os parâmetros da legenda embebida no mapa.
+Aplica os par&acirc;metros da legenda embebida no mapa.
 
 parameters:
 

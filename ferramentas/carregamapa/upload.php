@@ -31,7 +31,7 @@ if (isset($_FILES['i3GEOcarregamapafilemap']['name']))
 	if( (ereg('[^a-zA-Z0-9\.]',$Arquivo)) || (!ereg('\.map$',$Arquivo)) )
 	{$statusNome = 0;}
 	if($statusNome != 1)
-	{echo "<p class='paragrafo' >Arquivo inválido.!";paraAguarde();exit;}	
+	{echo "<p class='paragrafo' >Arquivo inv&aacute;lido.!";paraAguarde();exit;}	
 	*/
 	$nome = basename($Arquivo);
 	$arqtemp = $dirmap."/".$Arquivo;
@@ -100,7 +100,7 @@ function verificaNome($nome)
 	$extensao = $lista[count($lista) - 1];
 	if($extensao != "map")
 	{
-		echo "Nome de arquivo inválido";
+		echo "Nome de arquivo inv&aacute;lido";
 		paraAguarde();
 		exit;
 	}

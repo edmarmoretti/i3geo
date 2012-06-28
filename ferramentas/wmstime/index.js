@@ -1,8 +1,8 @@
 /*
 Title: WMS Time
 
-Acessa um serviço WMS-T, baseado em uma lista pré-definida, e monta as imagens em uma sequência temporal.
-As imagens podem ser apresentadas em sequência, simulando uma animação.
+Acessa um servi&ccedil;o WMS-T, baseado em uma lista pr&eacute;-definida, e monta as imagens em uma sequ&ecirc;ncia temporal.
+As imagens podem ser apresentadas em sequ&ecirc;ncia, simulando uma anima&ccedil;ão.
 
 Veja:
 
@@ -18,20 +18,20 @@ GPL2
 
 i3Geo Interface Integrada de Ferramentas de Geoprocessamento para Internet
 
-Direitos Autorais Reservados (c) 2006 Ministério do Meio Ambiente Brasil
+Direitos Autorais Reservados (c) 2006 Minist&eacute;rio do Meio Ambiente Brasil
 Desenvolvedor: Edmar Moretti edmar.moretti@mma.gov.br
 
-Este programa é software livre; você pode redistribuí-lo
-e/ou modificá-lo sob os termos da Licença Pública Geral
+Este programa &eacute; software livre; voc&ecirc; pode redistribu&iacute;-lo
+e/ou modific&aacute;-lo sob os termos da Licen&ccedil;a P&uacute;blica Geral
 GNU conforme publicada pela Free Software Foundation;
 
-Este programa é distribuído na expectativa de que seja útil,
-porém, SEM NENHUMA GARANTIA; nem mesmo a garantia implícita
-de COMERCIABILIDADE OU ADEQUAÇÃO A UMA FINALIDADE ESPECÍFICA.
-Consulte a Licença Pública Geral do GNU para mais detalhes.
-Você deve ter recebido uma cópia da Licença Pública Geral do
+Este programa &eacute; distribu&iacute;do na expectativa de que seja &uacute;til,
+por&eacute;m, SEM NENHUMA GARANTIA; nem mesmo a garantia impl&iacute;cita
+de COMERCIABILIDADE OU ADEQUAÇÃO A UMA FINALIDADE ESPEC&Iacute;FICA.
+Consulte a Licen&ccedil;a P&uacute;blica Geral do GNU para mais detalhes.
+Voc&ecirc; deve ter recebido uma c&oacute;pia da Licen&ccedil;a P&uacute;blica Geral do
 GNU junto com este programa; se não, escreva para a
-Free Software Foundation, Inc., no endereço
+Free Software Foundation, Inc., no endere&ccedil;o
 59 Temple Street, Suite 330, Boston, MA 02111-1307 USA.
 */
 parametrosURL();
@@ -44,7 +44,7 @@ wms_configura = {
 		styles:"",
 		srs:"EPSG:4326",
 		format:"image/jpeg",
-		descricao:"Dados diários disponíveis desde 12 de janeiro de 2007. A contiunously updating composite of visual images from TERRA MODIS scenes, see http://modis.gsfc.nasa.gov for details about MODIS. This dataset is built local on the OnEarth server, it updates as soon as scenes are available, usually with a 6 to 24 hour delay from real time. Images are produced from MODIS scenes using the HDFLook application. Base resolution is 8 arcseconds per pixel.",
+		descricao:"Dados di&aacute;rios dispon&iacute;veis desde 12 de janeiro de 2007. A contiunously updating composite of visual images from TERRA MODIS scenes, see http://modis.gsfc.nasa.gov for details about MODIS. This dataset is built local on the OnEarth server, it updates as soon as scenes are available, usually with a 6 to 24 hour delay from real time. Images are produced from MODIS scenes using the HDFLook application. Base resolution is 8 arcseconds per pixel.",
 		anoInicio: 2008,
 		mesInicio: 11,
 		diaInicio: 7,
@@ -60,7 +60,7 @@ wms_configura = {
 		styles:"",
 		srs:"EPSG:4326",
 		format:"image/jpeg",
-		descricao:"Dados diários disponíveis desde 12 de janeiro de 2008. A contiunously updating composite of visual images from AQUA MODIS scenes, see http://modis.gsfc.nasa.gov for details about MODIS. This dataset is built local on the OnEarth server, it updates as soon as scenes are available, usually with a 6 to 24 hour delay from real time. Images are produced from MODIS scenes using the HDFLook application. Base resolution is 8 arcseconds per pixel.",
+		descricao:"Dados di&aacute;rios dispon&iacute;veis desde 12 de janeiro de 2008. A contiunously updating composite of visual images from AQUA MODIS scenes, see http://modis.gsfc.nasa.gov for details about MODIS. This dataset is built local on the OnEarth server, it updates as soon as scenes are available, usually with a 6 to 24 hour delay from real time. Images are produced from MODIS scenes using the HDFLook application. Base resolution is 8 arcseconds per pixel.",
 		anoInicio: 2008,
 		mesInicio: 11,
 		diaInicio: 7,
@@ -76,7 +76,7 @@ wms_configura = {
 		styles:"",
 		srs:"EPSG:4326",
 		format:"image/jpeg",
-		descricao:"Dados diários disponíveis desde 1 de janeiro de 2006 até 12 de março de 2008. This layer is no longer updated. Daily generated mosaic of TERRA images released by the MODIS Rapid Response System, http://rapidfire.gsfc.nasa.gov/. Updates every day, at about 1200Z, with images taken during the previous day. Maximum resolution is 8 arcseconds per pixel",
+		descricao:"Dados di&aacute;rios dispon&iacute;veis desde 1 de janeiro de 2006 at&eacute; 12 de mar&ccedil;o de 2008. This layer is no longer updated. Daily generated mosaic of TERRA images released by the MODIS Rapid Response System, http://rapidfire.gsfc.nasa.gov/. Updates every day, at about 1200Z, with images taken during the previous day. Maximum resolution is 8 arcseconds per pixel",
 		anoInicio: 2006,
 		mesInicio: 1,
 		diaInicio: 1,
@@ -92,7 +92,7 @@ wms_configura = {
 		styles:"",
 		srs:"EPSG:4326",
 		format:"image/jpeg",
-		descricao:"Dados diários disponíveis desde 1 de janeiro de 2006 até 12 de março de 2008. This layer is no longer updated. Daily generated mosaic of AQUA images released by the MODIS Rapid Response System, http://rapidfire.gsfc.nasa.gov/. Updates every day, at about 1200Z, with images taken during the previous day. Maximum resolution is 8 arcseconds per pixel",
+		descricao:"Dados di&aacute;rios dispon&iacute;veis desde 1 de janeiro de 2006 at&eacute; 12 de mar&ccedil;o de 2008. This layer is no longer updated. Daily generated mosaic of AQUA images released by the MODIS Rapid Response System, http://rapidfire.gsfc.nasa.gov/. Updates every day, at about 1200Z, with images taken during the previous day. Maximum resolution is 8 arcseconds per pixel",
 		anoInicio: 2006,
 		mesInicio: 1,
 		diaInicio: 1,
@@ -108,7 +108,7 @@ wms_configura = {
 		styles:"",
 		srs:"EPSG:4326",
 		format:"image/jpeg",
-		descricao:"Dados diários disponíveis desde 1 de janeiro de 2006 até 12 de março de 2008. This layer is no longer updated. Daily generated mosaic of TERRA images released by the MODIS Rapid Response System, http://rapidfire.gsfc.nasa.gov/. Updates every day, at about 1200Z, with images taken during the previous day. Maximum resolution is 8 arcseconds per pixel",
+		descricao:"Dados di&aacute;rios dispon&iacute;veis desde 1 de janeiro de 2006 at&eacute; 12 de mar&ccedil;o de 2008. This layer is no longer updated. Daily generated mosaic of TERRA images released by the MODIS Rapid Response System, http://rapidfire.gsfc.nasa.gov/. Updates every day, at about 1200Z, with images taken during the previous day. Maximum resolution is 8 arcseconds per pixel",
 		anoInicio: 2006,
 		mesInicio: 1,
 		diaInicio: 1,
@@ -124,7 +124,7 @@ wms_configura = {
 		styles:"",
 		srs:"EPSG:4326",
 		format:"image/jpeg",
-		descricao:"Dados diários disponíveis desde 1 de janeiro de 2006 até 12 de março de 2008. This layer is no longer updated. Daily generated mosaic of AQUA images released by the MODIS Rapid Response System, http://rapidfire.gsfc.nasa.gov/. Updates every day, at about 1200Z, with images taken during the previous day. Maximum resolution is 8 arcseconds per pixel",
+		descricao:"Dados di&aacute;rios dispon&iacute;veis desde 1 de janeiro de 2006 at&eacute; 12 de mar&ccedil;o de 2008. This layer is no longer updated. Daily generated mosaic of AQUA images released by the MODIS Rapid Response System, http://rapidfire.gsfc.nasa.gov/. Updates every day, at about 1200Z, with images taken during the previous day. Maximum resolution is 8 arcseconds per pixel",
 		anoInicio: 2006,
 		mesInicio: 1,
 		diaInicio: 1,
@@ -140,7 +140,7 @@ wms_configura = {
 		styles:"rgb",
 		srs:"EPSG:4326",
 		format:"image/jpeg",
-		descricao:"Dados acumulados de um mês março de 2000 a março de 2009. Fire is a recurring part of nature.  Wildfires can be caused by lightning striking a forest canopy or, in a few isolated cases, by lava or hot rocks ejected from erupting volcanoes.  Most fires worldwide are started by humans, sometimes accidentally and sometimes on purpose.  Not all fires are bad.  Fire clears away dead and dying underbrush, which can help restore forest ecosystems to good health.  Humans use fire as a tool in slash-and-burn agriculture to speed up the process of breaking down unwanted vegetation into the soil.  Humans also use fire to clear away old-growth forests to make room for living spaces, roads, and fields for raising crops and cattle.  But not all fires are good.  Wildfires can destroy natural resources and human structures.  Globally, fire plays a major role in Earth&apos;s carbon cycle by releasing carbon into the air, and by consuming trees that would otherwise absorb carbon from the air during photosynthesis.  These maps show the locations of actively burning fires around the world, detected by instruments aboard NASA satellites.",
+		descricao:"Dados acumulados de um m&ecirc;s mar&ccedil;o de 2000 a mar&ccedil;o de 2009. Fire is a recurring part of nature.  Wildfires can be caused by lightning striking a forest canopy or, in a few isolated cases, by lava or hot rocks ejected from erupting volcanoes.  Most fires worldwide are started by humans, sometimes accidentally and sometimes on purpose.  Not all fires are bad.  Fire clears away dead and dying underbrush, which can help restore forest ecosystems to good health.  Humans use fire as a tool in slash-and-burn agriculture to speed up the process of breaking down unwanted vegetation into the soil.  Humans also use fire to clear away old-growth forests to make room for living spaces, roads, and fields for raising crops and cattle.  But not all fires are good.  Wildfires can destroy natural resources and human structures.  Globally, fire plays a major role in Earth&apos;s carbon cycle by releasing carbon into the air, and by consuming trees that would otherwise absorb carbon from the air during photosynthesis.  These maps show the locations of actively burning fires around the world, detected by instruments aboard NASA satellites.",
 		anoInicio: 2006,
 		mesInicio: 1,
 		diaInicio: 1,
@@ -150,7 +150,7 @@ wms_configura = {
 		tipo: 2
 	}
 };
-var ins = "<p>Escolha o serviço de fornecimento de dados (WMS-T)</p>";
+var ins = "<p>Escolha o servi&ccedil;o de fornecimento de dados (WMS-T)</p>";
 ins += "<select style='width:353px;border:1px solid gray;' onchange='escolheuServico(this.value)'>";
 ins += "<option value='' >---</option>";
 for(var key in wms_configura){
@@ -163,8 +163,8 @@ ins += "<table style='text-align:left'>";
 ins += "<tr><td style='text-align:left'>Ano inicial: </td><td><input onclick='javascript:this.select();' type=text value='0' id=WMS_anoinicio size=4 />";
 ins += "<td style='text-align:left'>Ano final: </td><td><input onclick='javascript:this.select();' type=text value='0' id=WMS_anofim size=4 /></tr>";
 
-ins += "<tr><td style='text-align:left'>Mês inicial: </td><td><input onclick='javascript:this.select();' type=text value='nulo' id=WMS_mesinicio size=4 />";
-ins += "<td style='text-align:left'>Mês final: </td><td><input onclick='javascript:this.select();' type=text value='nulo' id=WMS_mesfim size=4 /></tr>";
+ins += "<tr><td style='text-align:left'>M&ecirc;s inicial: </td><td><input onclick='javascript:this.select();' type=text value='nulo' id=WMS_mesinicio size=4 />";
+ins += "<td style='text-align:left'>M&ecirc;s final: </td><td><input onclick='javascript:this.select();' type=text value='nulo' id=WMS_mesfim size=4 /></tr>";
 
 ins += "<tr><td style='text-align:left'>Dia inicial: </td><td><input onclick='javascript:this.select();' type=text value='nulo' id=WMS_diainicio size=4 />";
 ins += "<td style='text-align:left'>Dia final: </td><td><input onclick='javascript:this.select();' type=text value='nulo' id=WMS_diafim size=4 /></tr>";
@@ -183,11 +183,11 @@ $i("parametros").innerHTML = ins;
 /*
 Function: escolheuServico
 
-Monta a tela de parâmetros após um serviço ter sido escolhido
+Monta a tela de parâmetros ap&oacute;s um servi&ccedil;o ter sido escolhido
 
 Parametro:
 
-idWMS {String} - id do serviço escolhido
+idWMS {String} - id do servi&ccedil;o escolhido
 */
 function escolheuServico(idWMS){
 	tipoServico = wms_configura[idWMS].tipo;
@@ -212,11 +212,11 @@ function escolheuServico(idWMS){
 	}
 	if(tipoServico == 2){
 		ins += "<option value='ano' >Ano</option>";
-		ins += "<option value='mes' selected >Mês</option></select>";
+		ins += "<option value='mes' selected >M&ecirc;s</option></select>";
 	}
 	if(tipoServico == 3){
 		ins += "<option value='ano'  >Ano</option>";
-		ins += "<option value='mes' >Mês</option>";
+		ins += "<option value='mes' >M&ecirc;s</option>";
 		ins += "<option value='dia' selected >Dia</option></select>";
 	}
 	$i("divumaImagemPor").innerHTML = ins;
@@ -224,7 +224,7 @@ function escolheuServico(idWMS){
 /*
 Function: iniciaImagens
 
-Inicia a tela de apresentação das imagens
+Inicia a tela de apresenta&ccedil;ão das imagens
 */
 function iniciaImagens(){
 	$i("imagens").innerHTML = "";
@@ -319,13 +319,13 @@ function iniciaImagens(){
 /*
 function: criaImg
 
-Cria um elemento do tipo IMG com base no serviço escolhido e nos parâmetros de tempo
+Cria um elemento do tipo IMG com base no servi&ccedil;o escolhido e nos parâmetros de tempo
 
 Parametros:
 
-tempo {string} - data da imagem que será requisitada
+tempo {string} - data da imagem que ser&aacute; requisitada
 
-id {string} - id que será definido para a imagem
+id {string} - id que ser&aacute; definido para a imagem
 */
 function criaImg(tempo,id){
 	var novoel = document.createElement("img");
@@ -350,7 +350,7 @@ function criaImg(tempo,id){
 /*
 Function: criaImgStatus
 
-Cria um ícone que permite parar a apresentação da animação em uma determinada imagem
+Cria um &iacute;cone que permite parar a apresenta&ccedil;ão da anima&ccedil;ão em uma determinada imagem
 
 Parametros:
 
@@ -368,7 +368,7 @@ function criaImgStatus(tempo,id){
 /*
 Function: pararImagem
 
-Parar a apresentação da animação em uma determinada imagem
+Parar a apresenta&ccedil;ão da anima&ccedil;ão em uma determinada imagem
 
 Parametro:
 
@@ -379,18 +379,18 @@ function pararImagem(id){
 		$i(id).src = "";
 		//onde.removeChild(document.getElementById(id))
 		idsValidos.push(id);
-		$i("status"+id).innerHTML = "excluído";
+		$i("status"+id).innerHTML = "exclu&iacute;do";
 		parouQuantas++;
 		if(parouQuantas == ids.length)
 		{pararStatus();}
 	}
 	else
-	{alert("Imagem excluída");}
+	{alert("Imagem exclu&iacute;da");}
 }
 /*
 Function: pararStatus
 
-Para o gráfico que mostra o status das imagens
+Para o gr&aacute;fico que mostra o status das imagens
 */
 function pararStatus(){
 	ondeContador.style.display = "none";
@@ -411,7 +411,7 @@ function ajustaIds(){
 /*
 Function: criaMarcadorTempo
 
-Cria o gráfico que mostra as imagens disponíveis. Serve de base para indicar qual imagem está sendo mostrada
+Cria o gr&aacute;fico que mostra as imagens dispon&iacute;veis. Serve de base para indicar qual imagem est&aacute; sendo mostrada
 */
 function criaMarcadorTempo(){
 	var nmarcas = ids.length;
@@ -435,7 +435,7 @@ function criaMarcadorTempo(){
 /*
 Function: mostraI
 
-Mostra uma imagem específica
+Mostra uma imagem espec&iacute;fica
 
 Parametro:
 

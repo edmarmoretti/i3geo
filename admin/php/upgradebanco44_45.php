@@ -7,18 +7,18 @@
 <body class="yui-skin-sam fundoPonto" >
 <div class="bordaSuperior"  >&nbsp;</div>
 <div class="mascaraPrincipal" id="divGeral" style=text-align:left >
-Upgrade do banco de administração<br><br>
+Upgrade do banco de administra&ccedil;&atilde;o<br><br>
 <?php
 /*
 Title: upgradebanco44_45.php
 
-Adiciona as novas tabelas utilizadas na versão 4.5
+Adiciona as novas tabelas utilizadas na vers&atilde;o 4.5
 
 Se vc quiser recriar o banco de dados default, apague o arquivo
-i3geo/admin/admin.db ou faça uma cópia. Depois é só executar esse programa.
+i3geo/admin/admin.db ou fa&ccedil;a uma cópia. Depois &eacute; só executar esse programa.
 
-Se a configuração do arquivo de conexão foi alterada (veja ms_configura.php), o novo
-banco irá ser criado conforme a nova string de conexão.
+Se a configura&ccedil;&atilde;o do arquivo de conex&atilde;o foi alterada (veja ms_configura.php), o novo
+banco ir&aacute; ser criado conforme a nova string de conex&atilde;o.
 
 Licenca:
 
@@ -26,20 +26,20 @@ GPL2
 
 i3Geo Interface Integrada de Ferramentas de Geoprocessamento para Internet
 
-Direitos Autorais Reservados (c) 2006 Ministério do Meio Ambiente Brasil
+Direitos Autorais Reservados (c) 2006 Minist&eacute;rio do Meio Ambiente Brasil
 Desenvolvedor: Edmar Moretti edmar.moretti@mma.gov.br
 
-Este programa é software livre; você pode redistribuí-lo
-e/ou modificá-lo sob os termos da Licença Pública Geral
+Este programa &eacute; software livre; voc&ecirc; pode redistribu&iacute;-lo
+e/ou modific&aacute;-lo sob os termos da Licen&ccedil;a P&uacute;blica Geral
 GNU conforme publicada pela Free Software Foundation;
 
-Este programa é distribuído na expectativa de que seja útil,
-porém, SEM NENHUMA GARANTIA; nem mesmo a garantia implícita
-de COMERCIABILIDADE OU ADEQUAÇÃO A UMA FINALIDADE ESPECÍFICA.
-Consulte a Licença Pública Geral do GNU para mais detalhes.
-Você deve ter recebido uma cópia da Licença Pública Geral do
-GNU junto com este programa; se não, escreva para a
-Free Software Foundation, Inc., no endereço
+Este programa &eacute; distribu&iacute;do na expectativa de que seja &uacute;til,
+por&eacute;m, SEM NENHUMA GARANTIA; nem mesmo a garantia impl&iacute;cita
+de COMERCIABILIDADE OU ADEQUA&Ccedil;&Atilde;O A UMA FINALIDADE ESPEC&Iacute;FICA.
+Consulte a Licen&ccedil;a P&uacute;blica Geral do GNU para mais detalhes.
+Voc&ecirc; deve ter recebido uma cópia da Licen&ccedil;a P&uacute;blica Geral do
+GNU junto com este programa; se n&atilde;o, escreva para a
+Free Software Foundation, Inc., no endere&ccedil;o
 59 Temple Street, Suite 330, Boston, MA 02111-1307 USA.
 
 Arquivo:
@@ -57,7 +57,7 @@ if(empty($_POST["senha"]) || empty($_POST["usuario"])){
 else{
 	$continua = verificaMaster($_POST["usuario"],$_POST["senha"],$i3geomaster);
 	if($continua == false){
-		echo "Usuário não registrado em i3geo/ms_configura.php na variável i3geomaster";
+		echo "Usu&aacute;rio n&atilde;o registrado em i3geo/ms_configura.php na vari&aacute;vel i3geomaster";
 		exit;
 	}
 }

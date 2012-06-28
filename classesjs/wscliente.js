@@ -37,33 +37,35 @@ Veja:
 
 <i3geo/classesjs/wscliente.js>
 */
-var scriptLocation = "";
-var scripts = document.getElementsByTagName('script');
-for (var i = 0; i < scripts.length; i++) {
-	var src = scripts[i].getAttribute('src');
-	if (src) {
-		var index = src.lastIndexOf("wscliente.js");
-		// is it found, at the end of the URL?
-		if ((index > -1) && (index + "wscliente.js".length == src.length)) {
-			scriptLocation = src.slice(0, -"wscliente.js".length);
-			break;
+(function(){
+	var scriptLocation = "";
+	var scripts = document.getElementsByTagName('script');
+	for (var i = 0; i < scripts.length; i++) {
+		var src = scripts[i].getAttribute('src');
+		if (src) {
+			var index = src.lastIndexOf("wscliente.js");
+			// is it found, at the end of the URL?
+			if ((index > -1) && (index + "wscliente.js".length == src.length)) {
+				scriptLocation = src.slice(0, -"wscliente.js".length);
+				break;
+			}
 		}
 	}
-}
-var allScriptTags = "";
-var jsfiles = [];
-if(typeof(testafuncoes) == 'undefined')
-{jsfiles[0] = "compactados/classe_calculo_compacto.js";}
-if(typeof(cpaint) == 'undefined')
-{jsfiles[1] = "../pacotes/cpaint/cpaint2.inc.compressed.js";}
-if(typeof(OpenLayers) == 'undefined')
-{jsfiles[2] = "../pacotes/openlayers/OpenLayers.js";};
-for (var i = 0; i < jsfiles.length; i++)
-{
-	var currentScriptTag = "<script src='" + scriptLocation + jsfiles[i] + "'></script>";
-	allScriptTags += currentScriptTag;
-}
-document.write(allScriptTags);
+	var allScriptTags = "";
+	var jsfiles = [];
+	if(typeof(testafuncoes) == 'undefined')
+	{jsfiles[0] = "compactados/classe_calculo_compacto.js";}
+	if(typeof(cpaint) == 'undefined')
+	{jsfiles[1] = "../pacotes/cpaint/cpaint2.inc.compressed.js";}
+	if(typeof(OpenLayers) == 'undefined')
+	{jsfiles[2] = "../pacotes/openlayers/OpenLayers.js";};
+	for (var i = 0; i < jsfiles.length; i++)
+	{
+		var currentScriptTag = "<script src='" + scriptLocation + jsfiles[i] + "'></script>";
+		allScriptTags += currentScriptTag;
+	}
+	document.write(allScriptTags);
+})();
 /**
 Classe: i3geo_wscliente_configura
 

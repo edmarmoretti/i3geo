@@ -24,7 +24,7 @@ MAP
       "wms_connectiontimeout"	"30"
       "permitekml"	""
       "permiteogc"	""
-      "TEMA"	"Usinas termelétricas"
+      "TEMA"	"Usinas termeletricas"
       "wms_server_version"	"1.1.1"
       "wms_style"	"default"
     END

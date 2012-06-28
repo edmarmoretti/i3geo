@@ -3,10 +3,10 @@
 /*
 Title: Busca fotos
 
-Busca fotos em serviços como Panoramio e Flicker na região mostrada no mapa.
+Busca fotos em servi&ccedil;os como Panoramio e Flicker na região mostrada no mapa.
 
-As fotos obtidas são mostradas e o usuário pode passar o mouse sobre elas para ver a posição no mapa.
-O código para realizar a busca depende das APIs de cada serviço. Quando necessário, utiliza-se
+As fotos obtidas são mostradas e o usu&aacute;rio pode passar o mouse sobre elas para ver a posi&ccedil;ão no mapa.
+O c&oacute;digo para realizar a busca depende das APIs de cada servi&ccedil;o. Quando necess&aacute;rio, utiliza-se
 buscafotos/funcoes.php para realizar a busca.
 
 Veja:
@@ -17,24 +17,24 @@ Arquivo:
 
 i3geo/ferramentas/buscafotos/index.js.php
 
-About: Licença
+About: Licen&ccedil;a
 
 i3Geo Interface Integrada de Ferramentas de Geoprocessamento para Internet
 
-Direitos Autorais Reservados (c) 2006 Ministério do Meio Ambiente Brasil
+Direitos Autorais Reservados (c) 2006 Minist&eacute;rio do Meio Ambiente Brasil
 Desenvolvedor: Edmar Moretti edmar.moretti@mma.gov.br
 
-Este programa é software livre; você pode redistribuí-lo
-e/ou modificá-lo sob os termos da Licença Pública Geral
+Este programa &eacute; software livre; voc&ecirc; pode redistribu&iacute;-lo
+e/ou modific&aacute;-lo sob os termos da Licen&ccedil;a P&uacute;blica Geral
 GNU conforme publicada pela Free Software Foundation;
 
-Este programa é distribuído na expectativa de que seja útil,
-porém, SEM NENHUMA GARANTIA; nem mesmo a garantia implícita
-de COMERCIABILIDADE OU ADEQUAÇÃO A UMA FINALIDADE ESPECÍFICA.
-Consulte a Licença Pública Geral do GNU para mais detalhes.
-Você deve ter recebido uma cópia da Licença Pública Geral do
+Este programa &eacute; distribu&iacute;do na expectativa de que seja &uacute;til,
+por&eacute;m, SEM NENHUMA GARANTIA; nem mesmo a garantia impl&iacute;cita
+de COMERCIABILIDADE OU ADEQUAÇÃO A UMA FINALIDADE ESPEC&Iacute;FICA.
+Consulte a Licen&ccedil;a P&uacute;blica Geral do GNU para mais detalhes.
+Voc&ecirc; deve ter recebido uma c&oacute;pia da Licen&ccedil;a P&uacute;blica Geral do
 GNU junto com este programa; se não, escreva para a
-Free Software Foundation, Inc., no endereço
+Free Software Foundation, Inc., no endere&ccedil;o
 59 Temple Street, Suite 330, Boston, MA 02111-1307 USA.
 */
 if(typeof(i3GEOF) === 'undefined'){
@@ -47,25 +47,25 @@ i3GEOF.buscaFotos = {
 	/*
 	Variavel: aguarde
 	
-	Objeto DOM com a imagem de aguarde existente no cabeçalho da janela.
+	Objeto DOM com a imagem de aguarde existente no cabe&ccedil;alho da janela.
 	*/
 	aguarde: "",
 	/*
 	Propriedade: chaveFlicker
 	
-	Código de acesso aos web services do Flicker
+	C&oacute;digo de acesso aos web services do Flicker
 	*/
 	chaveFlicker: "b170cde3c3064ca44b1ae0fbe747575d",
 	/*
 	Function: inicia
 	
-	Inicia a ferramenta. É chamado por criaJanelaFlutuante
+	Inicia a ferramenta. &Eacute; chamado por criaJanelaFlutuante
 	
 	Parametro:
 	
-	iddiv {String} - id do div que receberá o conteudo HTML da ferramenta
+	iddiv {String} - id do div que receber&aacute; o conteudo HTML da ferramenta
 	
-	pagina {integer} - (opcional) página que será mostrada. Se for definida a janela de busca será mostrada já de início por meio do serviço do panoramio
+	pagina {integer} - (opcional) p&aacute;gina que ser&aacute; mostrada. Se for definida a janela de busca ser&aacute; mostrada j&aacute; de in&iacute;cio por meio do servi&ccedil;o do panoramio
 	*/
 	inicia: function(iddiv,busca){
 		try{
@@ -95,20 +95,20 @@ i3GEOF.buscaFotos = {
 	/*
 	Function: html
 	
-	Gera o código html para apresentação das opções da ferramenta
+	Gera o c&oacute;digo html para apresenta&ccedil;ão das op&ccedil;&otilde;es da ferramenta
 	
 	Retorno:
 	
-	String com o código html
+	String com o c&oacute;digo html
 	*/
 	html:function(){
 		var ins = '';
 		ins += '<div id=i3GEObuscafotosaviso style=display:block >';
 		ins += '<p class="paragrafo" >As fotos mostradas aqui s&atilde;o de responsabilidade dos servi&ccedil;os de hospedagem utilizados na busca e podem abranger tem&aacute;ticas diversas.';
 		ins += '<p class="paragrafo" >A busca &eacute; feita apenas para a regi&atilde;o de abrang&ecirc;ncia do mapa atual.';
-		ins += '<p class="paragrafo" >A restrição de escala é necessária para melhorar a performance da busca.';
+		ins += '<p class="paragrafo" >A restri&ccedil;ão de escala &eacute; necess&aacute;ria para melhorar a performance da busca.';
     	if(i3GEO.parametros.mapscale > 30000001){
-    		ins += '<p class="paragrafo" >O mapa atual está fora do limite de escala.';
+    		ins += '<p class="paragrafo" >O mapa atual est&aacute; fora do limite de escala.';
     		ins += '<p class="paragrafo" ><input id=i3GEObuscafotosbotao3 size=20  type=button value="Ajustar" />';
     	}
     	else{
@@ -118,7 +118,7 @@ i3GEOF.buscaFotos = {
 		ins += '<div id=i3GEObuscafotosbusca style=display:none >';
 		ins += '	<div id="i3GEObuscafotosf" style="display:none">';
 		ins += '		<p class="paragrafo" ><i>Este produto usa a API do Flickr, mas n&atilde;o &eacute; endossado nem certificado pelo Flickr.</i>';
-		ins += '		<p class="paragrafo" >Opções: Se nenhum par&acirc;metro for definido, ser&atilde;o consideradas apenas as fotos inclu&iacute;das nas &uacute;ltimas 12 horas.';
+		ins += '		<p class="paragrafo" >Op&ccedil;&otilde;es: Se nenhum par&acirc;metro for definido, ser&atilde;o consideradas apenas as fotos inclu&iacute;das nas &uacute;ltimas 12 horas.';
 		ins += '		De qualquer forma, s&atilde;o mostrados no m&aacute;ximo 250 registros. ';
 		ins += '		O ano refere-se a data de inclus&atilde;o da foto no Flickr';
 		ins += '		<p class="paragrafo" >Texto: <input onclick="javascript:this.select();" style="cursor:text" class=digitar type=text size=30 value="" id="i3GEObuscafotostexto" />';
@@ -144,7 +144,7 @@ i3GEOF.buscaFotos = {
 	*/	
 	criaJanelaFlutuante: function(){
 		var minimiza,cabecalho,janela,divid,temp,titulo;
-		//funcao que sera executada ao ser clicado no cabeçalho da janela
+		//funcao que sera executada ao ser clicado no cabe&ccedil;alho da janela
 		cabecalho = function(){
 			i3GEOF.buscaFotos.ativaFoco();
 		};
@@ -200,11 +200,11 @@ i3GEOF.buscaFotos = {
 	/*
 	Function: esconde
 	
-	Esconde as opções de busca dos servidores de fotos e mostra as opções do objeto especificado
+	Esconde as op&ccedil;&otilde;es de busca dos servidores de fotos e mostra as op&ccedil;&otilde;es do objeto especificado
 	
 	Parametro:
 	
-	obj - objeto que terá o estilo modificado para display = none
+	obj - objeto que ter&aacute; o estilo modificado para display = none
 	*/
 	esconde: function (obj){
 		$i("i3GEObuscafotosf").style.display="none";
@@ -218,7 +218,7 @@ i3GEOF.buscaFotos = {
 	/*
 	Function: busca
 	
-	Procura as fotos no servidor escolhido e chama a função correta de apresentação das fotos.
+	Procura as fotos no servidor escolhido e chama a fun&ccedil;ão correta de apresenta&ccedil;ão das fotos.
 	
 	*/
 	busca: function(pagina){
@@ -263,7 +263,7 @@ i3GEOF.buscaFotos = {
 	/*
 	Function: escondexy
 	
-	Esconde a imagem de localização da foto no mapa
+	Esconde a imagem de localiza&ccedil;ão da foto no mapa
 	*/
 	escondexy: function(){
 		if($i("pinfoto")){
@@ -293,12 +293,12 @@ i3GEOF.buscaFotos = {
 	/*
 	Function: listafotospanoramio
 	
-	Monta a apresentação das fotos obtidas do servidor Panoramio
+	Monta a apresenta&ccedil;ão das fotos obtidas do servidor Panoramio
 	*/
 	listafotospanoramio: function(retorno){
 		i3GEOF.buscaFotos.aguarde.visibility = "hidden";
 		if (retorno.data===undefined )
-		{$i("i3GEObuscafotosresultadofotos").innerHTML = "Erro. A operação demorou muito.";return;}
+		{$i("i3GEObuscafotosresultadofotos").innerHTML = "Erro. A opera&ccedil;ão demorou muito.";return;}
 		eval("var data = "+retorno.data);
 		var ins = "",res,i,t,p;
 		if(!retorno.data)
@@ -332,7 +332,7 @@ i3GEOF.buscaFotos = {
 	/*
 	Function: listafotosflickr
 	
-	Monta a apresentação das fotos obtidas do servidor Flickr
+	Monta a apresenta&ccedil;ão das fotos obtidas do servidor Flickr
 	*/
 	listafotosflickr: function(retorno){
 		i3GEOF.buscaFotos.aguarde.visibility = "hidden";
@@ -343,7 +343,7 @@ i3GEOF.buscaFotos = {
 			t,
 			p;
 		if (retorno.data===undefined )
-		{$i("i3GEObuscafotosresultadofotos").innerHTML = "Erro. A operação demorou muito.";return;}
+		{$i("i3GEObuscafotosresultadofotos").innerHTML = "Erro. A opera&ccedil;ão demorou muito.";return;}
 		if((!retorno.data) || (retorno.data === ""))
 		{ins = "<br><span style=color:red>Problemas no acesso aos dados!</span><br><br>";$i("i3GEObuscafotosresultadofotos").innerHTML = ins;return;}
 		data = retorno.data.photo;
@@ -374,7 +374,7 @@ i3GEOF.buscaFotos = {
 	/*
 	Function: listafotoslocr
 	
-	Monta a apresentação das fotos obtidas do servidor Locr
+	Monta a apresenta&ccedil;ão das fotos obtidas do servidor Locr
 	*/
 	listafotoslocr: function(retorno){
 		i3GEOF.buscaFotos.aguarde.visibility = "hidden";
@@ -384,7 +384,7 @@ i3GEOF.buscaFotos = {
 			t,
 			p;
 		if (retorno.data === undefined )
-		{$i("i3GEObuscafotosresultadofotos").innerHTML = "Erro. A operação demorou muito.";return;}
+		{$i("i3GEObuscafotosresultadofotos").innerHTML = "Erro. A opera&ccedil;ão demorou muito.";return;}
 		eval("var data = "+retorno.data);
 		if(!retorno.data)
 		{ins += "<br><span style=color:red>Problemas no acesso aos dados!</span><br><br>";return;}

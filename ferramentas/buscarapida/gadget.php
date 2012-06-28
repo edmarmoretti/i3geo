@@ -1,9 +1,9 @@
 <?php
 include_once("../../classesphp/pega_variaveis.php");
 if(!isset($palavra))
-{echo "Parâmetro &palavra= não foi definido. 'palavra' é a palavra que será buscada";}
+{echo "Parâmetro &palavra= não foi definido. 'palavra' &eacute; a palavra que ser&aacute; buscada";}
 if(!isset($locaplic))
-{echo "<br>Parâmetro &locaplic= não foi definido. 'locaplic' indica onde o i3geo está instalado";}
+{echo "<br>Parâmetro &locaplic= não foi definido. 'locaplic' indica onde o i3geo est&aacute; instalado";}
 ?>
 <html xmlns="http://www.w3.org/1999/xhtml">
   <head>

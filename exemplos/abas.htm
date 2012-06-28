@@ -6,7 +6,7 @@
 <title>i3Geo - Mapa interativo</title>
 <script type="text/javascript" src="../classesjs/i3geo.js"></script>
 </head>
-<!-- Neste exemplo, a aba legenda será retirada e será criada uma nova aba -->
+<!-- Neste exemplo, a aba legenda ser&aacute; retirada e ser&aacute; criada uma nova aba -->
 <body id="i3geo" >
 <center>
 <table id='mst' summary="" style='display:none' width=100% cellspacing='0'>
@@ -22,10 +22,10 @@
     <div class=verdeescuro style="top:0px;cursor:pointer;">
 	 <div id=guia1 class=guia >Temas</div>
 	 <div id=guia2 class=guia >Adiciona</div>
-<!-- comentando a linha abaixo, a guia Legenda não será mostrada no mapa
+<!-- comentando a linha abaixo, a guia Legenda n&atilde;o ser&aacute; mostrada no mapa
 	 <div id=guia4 class=guia >Legenda</div>
 -->
-<!-- Aqui é definida a nova aba. Ela deve ter um id entre 6 e 10 -->
+<!-- Aqui &eacute; definida a nova aba. Ela deve ter um id entre 6 e 10 -->
 	 <div id=guia6 class=guia >Nova aba</div>
 	 <div id=guia5 class=guia >Mapas</div>
     </div>
@@ -45,13 +45,13 @@
   	<div id=listaTemas style='top:15px;'></div>
   </div>
   <div id='guia2obj' style='display:none;'>Aguarde...<img alt="" src="../imagens/branco.gif" width=248 /></div>
-<!-- Opcionalmente, comente essa linha também para não incluir os dados da legenda
+<!-- Opcionalmente, comente essa linha tamb&eacute;m para n&atilde;o incluir os dados da legenda
   <div id='guia4obj' style='display:none;text-align:left'><div id='legenda' style='text-align:left'></div></div>
 -->
-<!-- aqui deve-se incluir o que será mostrado quando a guia 6 for ativada. O id deve ser definido utilizando-se 'obj' após o nome do id da guia -->
+<!-- aqui deve-se incluir o que ser&aacute; mostrado quando a guia 6 for ativada. O id deve ser definido utilizando-se 'obj' após o nome do id da guia -->
   <div id='guia6obj' style=text-align:left;font-size:12px  >
-	<p style=text-align:left >Esta é uma nova guia</p>
-	<p style=text-align:left >Abaixo estão alguns exemplos de operações</p><br>
+	<p style=text-align:left >Esta &eacute; uma nova guia</p>
+	<p style=text-align:left >Abaixo est&atilde;o alguns exemplos de opera&ccedil;&otilde;es</p><br>
 	<p style=text-align:left ><input style=cursor:pointer type=button value="redesenhar" onclick="remapaf()" /></p>
 	<br><div style=text-align:left id=resultadoExemplo ></div>
   </div>
@@ -168,7 +168,7 @@
 <script type="text/javascript">
 
 //
-//esta função contém o código customizado desta interface
+//esta fun&ccedil;&atilde;o cont&eacute;m o código customizado desta interface
 //
 function minhaFuncao()
 {
@@ -178,7 +178,7 @@ function minhaFuncao()
 	}
 	//
 	//aqui alguns exemplos de chamada em ajax
-	//o objeto cpObj já está criado e pode ser reaproveitado
+	//o objeto cpObj j&aacute; est&aacute; criado e pode ser reaproveitado
 	//
 
 	//retorna uma string com código javascript
@@ -205,7 +205,7 @@ objmapa.guiaListaMapas = "guia5";
 	Inicializa o mapa
 */
 //
-//aqui é definida a função que será executada após a inicialização do mapa
+//aqui &eacute; definida a fun&ccedil;&atilde;o que ser&aacute; executada após a inicializa&ccedil;&atilde;o do mapa
 //
 objmapa.finaliza = "minhaFuncao()";
 

@@ -21,7 +21,7 @@ GNU conforme publicada pela Free Software Foundation;
 
 Este programa &eacute; distribu&iacute;do na expectativa de que seja &uacute;til,
 por&eacute;m, SEM NENHUMA GARANTIA; nem mesmo a garantia impl&iacute;cita
-de COMERCIABILIDADE OU ADEQUAÇ&Atilde;O A UMA FINALIDADE ESPEC&Iacute;FICA.
+de COMERCIABILIDADE OU ADEQUAï¿½&Atilde;O A UMA FINALIDADE ESPEC&Iacute;FICA.
 Consulte a Licen&ccedil;a P&uacute;blica Geral do GNU para mais detalhes.
 Voc&ecirc; deve ter recebido uma c&oacute;pia da Licen&ccedil;a P&uacute;blica Geral do
 GNU junto com este programa; se n&atilde;o, escreva para a
@@ -39,22 +39,22 @@ i3geo/classesjs/compactajs.php
 $f = @fopen("../classesjs/teste.txt",w);
 @fclose($f);
 if (!file_exists("../classesjs/teste.txt")){
-	echo "<span style='color:red'>N&atilde;o foi possível escrever em classesjs";exit;
+	echo "<span style='color:red'>N&atilde;o foi possï¿½vel escrever em classesjs";exit;
 }
 $f = @fopen("../css/teste.txt",w);
 @fclose($f);
 if (!file_exists("../css/teste.txt")){
-	echo "<br><span style='color:red'>N&atilde;o foi possível escrever em css";exit;
+	echo "<br><span style='color:red'>N&atilde;o foi possï¿½vel escrever em css";exit;
 }
 $f = @fopen("../pacotes/teste.txt",w);
 @fclose($f);
 if (!file_exists("../pacotes/teste.txt")){
-	echo "<br><span style='color:red'>N&atilde;o foi possível escrever em pacotes";exit;
+	echo "<br><span style='color:red'>N&atilde;o foi possï¿½vel escrever em pacotes";exit;
 }
 $f = @fopen("../mashups/teste.txt",w);
 @fclose($f);
 if (!file_exists("../mashups/teste.txt")){
-	echo "<br><span style='color:red'>N&atilde;o foi possível escrever em mashups";exit;
+	echo "<br><span style='color:red'>N&atilde;o foi possï¿½vel escrever em mashups";exit;
 }
 echo "<pre>";
 packer("../pacotes/richdraw/richdraw.js","../pacotes/richdraw/richdraw_compacto.js","Normal");
@@ -118,7 +118,7 @@ packer("../pacotes/balloon-tooltips/htdocs/js/balloon.js","../pacotes/balloon-to
 //packer("../pacotes/eudock/js/euDock.Image.js","../pacotes/eudock/js/euDock.Image_compacto.js","Normal");
 
 //
-//gera um único js para a inicializaç&atilde;o do I3Geo
+//gera um ï¿½nico js para a inicializaï¿½&atilde;o do I3Geo
 //
 $jsfiles = array(
 "../pacotes/mobileesp/mdetect_compacto.js",
@@ -133,7 +133,7 @@ $jsfiles = array(
 "../pacotes/yui290/build/logger/logger-min.js",
 "../pacotes/yui290/build/dragdrop/dragdrop-min.js",
 "../pacotes/yui290/build/slider/slider-min.js",
-"../pacotes/yui290/build/animation/animation-min.js",
+"../pacotes/yui290/build/animation/animation-min270.js",
 "../pacotes/yui290/build/container/container_compacto.js",
 "../pacotes/yui290/build/element/element-min.js",
 "../pacotes/yui290/build/tabview/tabview-min.js",
@@ -178,7 +178,7 @@ $jsfiles = array(
 $buffer .= "\$i = function(id){return document.getElementById(id);};\n";
 salvatudojs($jsfiles,$buffer,"i3geo_tudo_compacto47.js","js");
 //
-//gera um único css
+//gera um ï¿½nico css
 //
 
 $cssfiles = array(
@@ -227,7 +227,7 @@ $escreve = fwrite ($abre,$buffer);
 $fecha = fclose ($abre);
 chmod("../css/i3geo_ferramentas47.css",0777);
 //
-//compacta os códigos para o Mashup do OpenLayers
+//compacta os cï¿½digos para o Mashup do OpenLayers
 //
 $jsfiles = array(
 "../pacotes/yui290/build/yahoo-dom-event/yahoo-dom-event.js",

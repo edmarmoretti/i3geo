@@ -1,11 +1,11 @@
 /*
 Title: arvore.js
 
-Funções que controlam a interface do editor da árvore de temas
+Funï¿½ï¿½es que controlam a interface do editor da ï¿½rvore de temas
 
-Atuam no controle dos nós da árvore
+Atuam no controle dos nï¿½s da ï¿½rvore
 
-Pode-se enviar parâmetros pela URL utilizada na inclusão desse script
+Pode-se enviar parï¿½metros pela URL utilizada na inclusï¿½o desse script
 
 Exemplo:
 
@@ -17,20 +17,20 @@ GPL2
 
 i3Geo Interface Integrada de Ferramentas de Geoprocessamento para Internet
 
-Direitos Autorais Reservados (c) 2006 Ministério do Meio Ambiente Brasil
+Direitos Autorais Reservados (c) 2006 Ministï¿½rio do Meio Ambiente Brasil
 Desenvolvedor: Edmar Moretti edmar.moretti@mma.gov.br
 
-Este programa é software livre; você pode redistribuí-lo
-e/ou modificá-lo sob os termos da Licença Pública Geral
+Este programa ï¿½ software livre; vocï¿½ pode redistribuï¿½-lo
+e/ou modificï¿½-lo sob os termos da Licenï¿½a Pï¿½blica Geral
 GNU conforme publicada pela Free Software Foundation;
 
-Este programa é distribuído na expectativa de que seja útil,
-porém, SEM NENHUMA GARANTIA; nem mesmo a garantia implícita
-de COMERCIABILIDADE OU ADEQUAÇÃO A UMA FINALIDADE ESPECÍFICA.
-Consulte a Licença Pública Geral do GNU para mais detalhes.
-Você deve ter recebido uma cópia da Licença Pública Geral do
-GNU junto com este programa; se não, escreva para a
-Free Software Foundation, Inc., no endereço
+Este programa ï¿½ distribuï¿½do na expectativa de que seja ï¿½til,
+porï¿½m, SEM NENHUMA GARANTIA; nem mesmo a garantia implï¿½cita
+de COMERCIABILIDADE OU ADEQUAï¿½ï¿½O A UMA FINALIDADE ESPECï¿½FICA.
+Consulte a Licenï¿½a Pï¿½blica Geral do GNU para mais detalhes.
+Vocï¿½ deve ter recebido uma cï¿½pia da Licenï¿½a Pï¿½blica Geral do
+GNU junto com este programa; se nï¿½o, escreva para a
+Free Software Foundation, Inc., no endereï¿½o
 59 Temple Street, Suite 330, Boston, MA 02111-1307 USA.
 
 Arquivo:
@@ -41,6 +41,7 @@ YAHOO.namespace("example.container");
 //
 //obtem os parametros da url
 //
+(function(){
 $id_menu = "";
 $id_grupo = "";
 $id_subgrupo = "";
@@ -53,10 +54,11 @@ try{
 	}
 }
 catch(e){}
+})();
 /*
 Function: initMenu
 
-Inicializa a árvore
+Inicializa a ï¿½rvore
 */
 function initMenu()
 {
@@ -71,14 +73,14 @@ function initMenu()
 	{
 		if($i("editor_bd")){return;}
 		core_montaEditor("","600px","500px");
-		$i("editor_bd").innerHTML = '<p class=paragrafo >Clique nas células da tabela para editar a característica de cada item. Finalize com "enter". Após editar, salve o item.</p><p class=paragrafo ><input type=button id=adicionaNovoGrupo value="Adicionar um novo grupo" style="left:-5px;" /></p><p><br><div id="tabela" style="left:-5px;"> </div>';
+		$i("editor_bd").innerHTML = '<p class=paragrafo >Clique nas cï¿½lulas da tabela para editar a caracterï¿½stica de cada item. Finalize com "enter". Apï¿½s editar, salve o item.</p><p class=paragrafo ><input type=button id=adicionaNovoGrupo value="Adicionar um novo grupo" style="left:-5px;" /></p><p><br><div id="tabela" style="left:-5px;"> </div>';
 		initEditorGrupos();
 	};
 	var editorDeSubGrupos = function()
 	{
 		if($i("editor_bd")){return;}
 		core_montaEditor("","600px","500px");
-		$i("editor_bd").innerHTML = '<p class=paragrafo >Clique nas células da tabela para editar a característica de cada item. Finalize com "enter". Após editar, salve o item.</p><p class=paragrafo ><input type=button id=adicionaNovoSubGrupo value="Adicionar um novo sub-grupo" style="left:-5px;" /></p><br><div id="tabela" style="left:-5px;"> </div>';
+		$i("editor_bd").innerHTML = '<p class=paragrafo >Clique nas cï¿½lulas da tabela para editar a caracterï¿½stica de cada item. Finalize com "enter". Apï¿½s editar, salve o item.</p><p class=paragrafo ><input type=button id=adicionaNovoSubGrupo value="Adicionar um novo sub-grupo" style="left:-5px;" /></p><br><div id="tabela" style="left:-5px;"> </div>';
 		initEditorSubGrupos();
 	};
 
@@ -93,7 +95,7 @@ function initMenu()
 /*
 Function: pegaMenus
 
-Obtém a lista de menus e monta os nós principais da árvore
+Obtï¿½m a lista de menus e monta os nï¿½s principais da ï¿½rvore
 
 <PEGAMENUS>
 */
@@ -107,7 +109,7 @@ function pegaMenus()
 /*
 Function: montaArvore
 
-Monta a árvore de temas
+Monta a ï¿½rvore de temas
 
 <PEGAGRUPOS>
 */
@@ -170,7 +172,7 @@ function temaIconMode()
 	{currentIconMode = newVal;}
 }
 //
-//adiciona os menus na árvore
+//adiciona os menus na ï¿½rvore
 //
 function montaNosMenus(dados,redesenha)
 {
@@ -198,14 +200,14 @@ function montaNosMenus(dados,redesenha)
 /*
 Function: montaNosGrupos
 
-Monta os nós com os grupos e permite abrir os subgrupos
+Monta os nï¿½s com os grupos e permite abrir os subgrupos
 
 <PEGASUBGRUPOS>
 */
 function montaNosGrupos(idmenu,no,dados,redesenha)
 {
     var tempNodeR = null;
-	//pega os temas que ficam na raiz da árvore
+	//pega os temas que ficam na raiz da ï¿½rvore
 	if(!tree.getNodeByProperty("etiquetaTemasRaiz","menu_"+idmenu))
 	{montaTemasRaiz(no,dados,true);}
 	//pega os grupos do menu
@@ -295,7 +297,7 @@ function loadTemasData(node, fnLoadComplete)
 /*
 Function: montaNosSubgrupos
 
-Monta os nós com os temas
+Monta os nï¿½s com os temas
 
 <PEGATEMAS>
 */
@@ -367,7 +369,7 @@ function montaConteudoNo(id,publicado,nome,tipo){
 	if(nome)
 	conteudo += "<span "+cor+" >"+nome+"<span style='color:gray'> id: "+id+"</span></span>";
 	else
-	conteudo += "<span "+cor+" > ??? vc precisa editar esse nó</span>";
+	conteudo += "<span "+cor+" > ??? vc precisa editar esse nï¿½</span>";
 	return conteudo;
 }
 function montaTemasRaiz(no,dados,redesenha)
@@ -682,7 +684,7 @@ function editar(tipo,id)
 }
 function montaDivGrupo(i)
 {
-	var ins = "<br>Escolha o grupo para esse nó:<br><br>";
+	var ins = "<br>Escolha o grupo para esse nï¿½:<br><br>";
 	ins += "<div id=comboGrupo >Buscando...</div>";
 	ins += "<p>Perfis que podem ver: </p>";
 	ins += "<input size=50 type=text id='En1_perfil' value='"+i.n1_perfil+"' /></p>";
@@ -697,7 +699,7 @@ function montaDivGrupo(i)
 }
 function montaDivSubGrupo(i)
 {
-	var ins = "<br>Escolha o sub-grupo para esse nó:<br><br>";
+	var ins = "<br>Escolha o sub-grupo para esse nï¿½:<br><br>";
 	ins += "<div id=comboSubGrupo >Buscando...</div>";
 	ins += "<p>Perfis que podem ver: </p>";
 	ins += "<input size=50 type=text id='En2_perfil' value='"+i.n2_perfil+"' /></p>";
@@ -712,7 +714,7 @@ function montaDivSubGrupo(i)
 }
 function montaDivTema(i)
 {
-	var ins = "<br>Escolha o tema para esse nó:<br><br>";
+	var ins = "<br>Escolha o tema para esse nï¿½:<br><br>";
 	ins += "<div id=comboTema >Buscando...</div>";
 	ins += "<p>Perfis que podem ver: </p>";
 	ins += "<input type=text id='En3_perfil' value='"+i.n3_perfil+"' /></p>";
@@ -749,7 +751,7 @@ function registraPerfil(valor,id)
 /*
 Function: gravaDados
 
-Altera dados de um nó
+Altera dados de um nï¿½
 
 <ALTERARGRUPO>
 
@@ -801,7 +803,7 @@ function gravaDados(tipo,id)
   			{
   				if(YAHOO.lang.JSON.parse(o.responseText) == "erro")
   				{
-  					core_carregando("<span style=color:red >Não foi possível excluir. Verifique se não existem menus vinculados a este tema</span>");
+  					core_carregando("<span style=color:red >Nï¿½o foi possï¿½vel excluir. Verifique se nï¿½o existem menus vinculados a este tema</span>");
   					setTimeout("core_carregando('desativa')",3000);
   				}
   				else

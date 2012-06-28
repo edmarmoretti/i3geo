@@ -2,7 +2,7 @@
 /*
 Title: classe_selecao.php
 
-Seleção de elementos de um tema.
+Sele&ccedil;&atilde;o de elementos de um tema.
 
 Adiciona, remove, etc.
 
@@ -13,20 +13,20 @@ GPL2
 
 i3Geo Interface Integrada de Ferramentas de Geoprocessamento para Internet
 
-Direitos Autorais Reservados (c) 2006 Ministério do Meio Ambiente Brasil
+Direitos Autorais Reservados (c) 2006 Minist&eacute;rio do Meio Ambiente Brasil
 Desenvolvedor: Edmar Moretti edmar.moretti@mma.gov.br
 
-Este programa é software livre; você pode redistribuí-lo
-e/ou modificá-lo sob os termos da Licença Pública Geral
+Este programa &eacute; software livre; voc&ecirc; pode redistribu&iacute;-lo
+e/ou modific&aacute;-lo sob os termos da Licen&ccedil;a P&uacute;blica Geral
 GNU conforme publicada pela Free Software Foundation;
 
-Este programa é distribuído na expectativa de que seja útil,
-porém, SEM NENHUMA GARANTIA; nem mesmo a garantia implícita
-de COMERCIABILIDADE OU ADEQUAÇÃO A UMA FINALIDADE ESPECÍFICA.
-Consulte a Licença Pública Geral do GNU para mais detalhes.
-Você deve ter recebido uma cópia da Licença Pública Geral do
-GNU junto com este programa; se não, escreva para a
-Free Software Foundation, Inc., no endereço
+Este programa &eacute; distribu&iacute;do na expectativa de que seja &uacute;til,
+por&eacute;m, SEM NENHUMA GARANTIA; nem mesmo a garantia impl&iacute;cita
+de COMERCIABILIDADE OU ADEQUA&Ccedil;&Atilde;O A UMA FINALIDADE ESPEC&Iacute;FICA.
+Consulte a Licen&ccedil;a P&uacute;blica Geral do GNU para mais detalhes.
+Voc&ecirc; deve ter recebido uma cópia da Licen&ccedil;a P&uacute;blica Geral do
+GNU junto com este programa; se n&atilde;o, escreva para a
+Free Software Foundation, Inc., no endere&ccedil;o
 59 Temple Street, Suite 330, Boston, MA 02111-1307 USA.
 
 Arquivo:
@@ -65,7 +65,7 @@ class Selecao
 	/*
 	Variavel: $qyfile
 	
-	Nome do arquivo de seleção (.qy)
+	Nome do arquivo de sele&ccedil;&atilde;o (.qy)
 	*/
 	public $qyfile;
 	/*
@@ -77,7 +77,7 @@ class Selecao
 	/*
 	Variavel: $v
 	
-	Versão atual do Mapserver (primeiro dígito)
+	Vers&atilde;o atual do Mapserver (primeiro d&iacute;gito)
 	*/
 	public $v;
 /*
@@ -85,15 +85,15 @@ Function: __construct
 
 Cria um objeto Selecao 
 
-O tipo de interface usada pelo mapa é obtido do metadata "interface". Se for a interface Googlemaps, é feita a alteração temporária da projeção do mapa.
+O tipo de interface usada pelo mapa &eacute; obtido do metadata "interface". Se for a interface Googlemaps, &eacute; feita a altera&ccedil;&atilde;o tempor&aacute;ria da proje&ccedil;&atilde;o do mapa.
 
 parameters:
 
-$map_file - Endereço do mapfile no servidor.
+$map_file - Endere&ccedil;o do mapfile no servidor.
 
 $tema - nome do tema
 
-$ext - extensão geográfica do mapa
+$ext - extens&atilde;o geogr&aacute;fica do mapa
 */
 
 	function __construct($map_file,$tema="",$ext="")
@@ -145,7 +145,7 @@ Salva o mapfile atual
 /*
 function: nSel
 
-Retorna o número de elementos selecionados 
+Retorna o n&uacute;mero de elementos selecionados 
 */	
 	function nSel(){
 		return $this->layer->getNumresults();
@@ -153,11 +153,11 @@ Retorna o número de elementos selecionados
 /*
 function: selecaoPorPoligono
 
-Seleciona os elementos de um tema baseado em um conjunto de pontos que formarão um polígono.
+Seleciona os elementos de um tema baseado em um conjunto de pontos que formar&atilde;o um pol&iacute;gono.
 
 parameters:
 
-$tipo - Tipo de operação adiciona|retira|inverte|limpa|novo
+$tipo - Tipo de opera&ccedil;&atilde;o adiciona|retira|inverte|limpa|novo
 
 $xs - lista de coordenadas x separadas por virgula
 
@@ -227,9 +227,9 @@ Seleciona os elementos de um tema baseado nos elementos selecionados em outro.
 
 parameters:
 
-$temao - Tema que será processado.
+$temao - Tema que ser&aacute; processado.
 
-$tipo - Tipo de operação adiciona|retira|inverte|limpa|novo
+$tipo - Tipo de opera&ccedil;&atilde;o adiciona|retira|inverte|limpa|novo
 */
 	function selecaoTema($temao,$tipo)
 	{
@@ -397,15 +397,15 @@ $tipo - Tipo de operação adiciona|retira|inverte|limpa|novo
 /*
 function: selecaoAtributos
 
-Seleção simples por atributo. Não permite composição de atributos, porém, se valor for igual a vazio "",
-a string existente em "operador" será incluida como está no filtro. Para que isso funcione, a string
-deve estar no padrão utilizado pelo mapserver.
+Sele&ccedil;&atilde;o simples por atributo. N&atilde;o permite composi&ccedil;&atilde;o de atributos, por&eacute;m, se valor for igual a vazio "",
+a string existente em "operador" ser&aacute; incluida como est&aacute; no filtro. Para que isso funcione, a string
+deve estar no padr&atilde;o utilizado pelo mapserver.
 
 parameters:
 
-$tipo - Tipo de operação adiciona|retira|inverte|limpa|novo
+$tipo - Tipo de opera&ccedil;&atilde;o adiciona|retira|inverte|limpa|novo
 
-$item - Item que será consultado.
+$item - Item que ser&aacute; consultado.
 
 $operador - Operador.
 
@@ -484,13 +484,13 @@ $valor - Valor.
 	/*
 	function: selecaoAtributos2
 	
-	Seleção por atributo. Permite composição de atributos.
+	Sele&ccedil;&atilde;o por atributo. Permite composi&ccedil;&atilde;o de atributos.
 	
 	parameters:
 	
-	$filtro - Expressão de seleção
+	$filtro - Express&atilde;o de sele&ccedil;&atilde;o
 	
-	$tipo - Tipo de operação adiciona|retira|inverte|limpa|novo
+	$tipo - Tipo de opera&ccedil;&atilde;o adiciona|retira|inverte|limpa|novo
 	*/	
 	function selecaoAtributos2($filtro,$tipo)
 	{
@@ -557,9 +557,9 @@ Seleciona por ponto.
 
 parameters:
 
-$xy - X e Y separados por vírgula.
+$xy - X e Y separados por v&iacute;rgula.
 
-$tipo - Tipo de operação adiciona|retira|inverte|limpa|novo
+$tipo - Tipo de opera&ccedil;&atilde;o adiciona|retira|inverte|limpa|novo
 */
 	function selecaoPT($xy,$tipo,$tolerancia)
 	{
@@ -637,7 +637,7 @@ $tipo - Tipo de operação adiciona|retira|inverte|limpa|novo
 /*
 function: selecaoLimpa
 
-Limpa a seleção do tema.
+Limpa a sele&ccedil;&atilde;o do tema.
 */
 	function selecaoLimpa()
 	{
@@ -666,7 +666,7 @@ Limpa a seleção do tema.
 /*
 function: selecaoInverte
 
-Inverte seleção do tema.
+Inverte sele&ccedil;&atilde;o do tema.
 */
 	function selecaoInverte()
 	{
@@ -709,13 +709,13 @@ Inverte seleção do tema.
 /*
 function: selecaoAdiciona
 
-Adiciona elementos na seleção do tema.
+Adiciona elementos na sele&ccedil;&atilde;o do tema.
 
 parameters:
 
 $shpi - Indices dos registros novos.
 
-$shp_atual - Indices dos elementos já selecionados.
+$shp_atual - Indices dos elementos j&aacute; selecionados.
 */
 	function selecaoAdiciona($shpi,$shp_atual)
 	{
@@ -735,13 +735,13 @@ $shp_atual - Indices dos elementos já selecionados.
 /*
 function: selecaoRetira
 
-Retira elementos na seleção do tema.
+Retira elementos na sele&ccedil;&atilde;o do tema.
 
 parameters:
 
-$shpi - Indices dos registros que serão retirados.
+$shpi - Indices dos registros que ser&atilde;o retirados.
 
-$shp_atual - Indices dos elementos já selecionados.
+$shp_atual - Indices dos elementos j&aacute; selecionados.
 */
 	function selecaoRetira($shpi,$shp_atual)
 	{
@@ -760,13 +760,13 @@ $shp_atual - Indices dos elementos já selecionados.
 /*
 function: incluiSel
 
-Inclui uma lista de ids na seleção do tema.
+Inclui uma lista de ids na sele&ccedil;&atilde;o do tema.
 
 Salva o arquivo .qy adicionando os novos registros
 
 parameters:
 
-$ids - Ids separados por vírgula correspondendo aos registros.
+$ids - Ids separados por v&iacute;rgula correspondendo aos registros.
 */
 	function incluiSel($ids)
 	{
@@ -788,16 +788,16 @@ function: selecao2tema
 Exporta elementos selecionados de um tema em shape file e adiciona no mapa atual.
 
 parameters:
-$locaplic - localização do I3geo
+$locaplic - localiza&ccedil;&atilde;o do I3geo
 
-$dir_tmp - localização do diretório temporário
+$dir_tmp - localiza&ccedil;&atilde;o do diretório tempor&aacute;rio
 */
 	function selecao2tema($locaplic,$dir_tmp)
 	{
 		if(!$this->layer){return "erro";}
 		$this->layer->setfilter("");
 		$nomeshp = criaSHP($this->nome,$this->arquivo,$locaplic,$dir_tmp);
-		$novolayer = criaLayer($this->mapa,$this->layer->type,MS_DEFAULT,"Seleção de ".(pegaNome($this->layer))." (".$this->nome.")",$metaClasse="SIM");
+		$novolayer = criaLayer($this->mapa,$this->layer->type,MS_DEFAULT,"Sele&ccedil;&atilde;o de ".(pegaNome($this->layer))." (".$this->nome.")",$metaClasse="SIM");
 		$novolayer->set("data",$nomeshp.".shp");
 		$novolayer->set("name",basename($nomeshp));
 		$down = "nao";
@@ -814,11 +814,11 @@ $dir_tmp - localização do diretório temporário
 /*
 function: selecaoEXT
 
-Seleciona por extensão geográfica.
+Seleciona por extens&atilde;o geogr&aacute;fica.
 
 parameters:
 
-$tipo - Tipo de operação adiciona|retira|inverte|limpa|novo
+$tipo - Tipo de opera&ccedil;&atilde;o adiciona|retira|inverte|limpa|novo
 */
 	function selecaoEXT($tipo)
 	{
@@ -871,13 +871,13 @@ $tipo - Tipo de operação adiciona|retira|inverte|limpa|novo
 /*
 function: selecaoBOX
 
-Seleciona por retângulo.
+Seleciona por ret&acirc;ngulo.
 
 parameters:
 
-$tipo - Tipo de operação adiciona|retira|inverte|limpa|novo
+$tipo - Tipo de opera&ccedil;&atilde;o adiciona|retira|inverte|limpa|novo
 
-$ext - coordenadas separadas por espaços no estilo xmin ymin xmax ymax
+$ext - coordenadas separadas por espa&ccedil;os no estilo xmin ymin xmax ymax
 */
 	function selecaoBOX($tipo,$ext)
 	{
@@ -938,7 +938,7 @@ function unserializeQ
 Deserializa um arquivo.
 
 Parametros:
-$arquivo - arquivo que será processado
+$arquivo - arquivo que ser&aacute; processado
 */ 	 	
 	function unserializeQ($arq)
 	{
@@ -953,7 +953,7 @@ function serializeQ
 Serializa um arquivo.
 
 Parametros:
-$arquivo - arquivo que será processado
+$arquivo - arquivo que ser&aacute; processado
 
 $geos - array com os dados
 */ 	 	

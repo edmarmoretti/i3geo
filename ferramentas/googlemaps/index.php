@@ -11,7 +11,7 @@ Title: Google Maps
 
 Abre um mapa, baseado na API do Google Maps, que permite navegar de forma integrada com o mapa principal do i3Geo.
 
-O código da API do Google Maps é armazenada em i3geo/ms_configura.php
+O c&oacute;digo da API do Google Maps &eacute; armazenada em i3geo/ms_configura.php
 
 Veja:
 
@@ -27,27 +27,27 @@ GPL2
 
 i3Geo Interface Integrada de Ferramentas de Geoprocessamento para Internet
 
-Direitos Autorais Reservados (c) 2006 Ministério do Meio Ambiente Brasil
+Direitos Autorais Reservados (c) 2006 Minist&eacute;rio do Meio Ambiente Brasil
 Desenvolvedor: Edmar Moretti edmar.moretti@mma.gov.br
 
-Este programa é software livre; você pode redistribuí-lo
-e/ou modificá-lo sob os termos da Licença Pública Geral
+Este programa &eacute; software livre; voc&ecirc; pode redistribu&iacute;-lo
+e/ou modific&aacute;-lo sob os termos da Licen&ccedil;a P&uacute;blica Geral
 GNU conforme publicada pela Free Software Foundation;
 
-Este programa é distribuído na expectativa de que seja útil,
-porém, SEM NENHUMA GARANTIA; nem mesmo a garantia implícita
-de COMERCIABILIDADE OU ADEQUAÇÃO A UMA FINALIDADE ESPECÍFICA.
-Consulte a Licença Pública Geral do GNU para mais detalhes.
-Você deve ter recebido uma cópia da Licença Pública Geral do
+Este programa &eacute; distribu&iacute;do na expectativa de que seja &uacute;til,
+por&eacute;m, SEM NENHUMA GARANTIA; nem mesmo a garantia impl&iacute;cita
+de COMERCIABILIDADE OU ADEQUAÇÃO A UMA FINALIDADE ESPEC&Iacute;FICA.
+Consulte a Licen&ccedil;a P&uacute;blica Geral do GNU para mais detalhes.
+Voc&ecirc; deve ter recebido uma c&oacute;pia da Licen&ccedil;a P&uacute;blica Geral do
 GNU junto com este programa; se não, escreva para a
-Free Software Foundation, Inc., no endereço
+Free Software Foundation, Inc., no endere&ccedil;o
 59 Temple Street, Suite 330, Boston, MA 02111-1307 USA.
 */
 /*
 Function: inicializa
 
-Cria o mapa do Google Maps e adiciona os botões especiais do i3Geo. Define os eventos que disparam modificações no mapa
-principal do i3Geo quando é feita a navegação.
+Cria o mapa do Google Maps e adiciona os bot&otilde;es especiais do i3Geo. Define os eventos que disparam modifica&ccedil;&otilde;es no mapa
+principal do i3Geo quando &eacute; feita a navega&ccedil;ão.
 */ 
 function inicializa(){
 	window.parent.i3GEO.util.criaPin("boxpingoogle",window.parent.i3GEO.configura.locaplic+'/imagens/dot1red.gif',"5px","5px");
@@ -204,7 +204,7 @@ function moveMapa(bd)
 /*
 Function: ondegoogle
 
-Mostra, no mapa principal, um retângulo indicando a extensão geográfica do mapa mostrado na janela do GM
+Mostra, no mapa principal, um retângulo indicando a extensão geogr&aacute;fica do mapa mostrado na janela do GM
 */
 function ondegoogle()
 {
@@ -228,7 +228,7 @@ function ondegoogle()
 /*
 Function: panTogoogle
 
-Desloca o mapa principal conforme a extensão geográfica do mapa do GM
+Desloca o mapa principal conforme a extensão geogr&aacute;fica do mapa do GM
 */
 function panTogoogle()
 {
@@ -245,7 +245,7 @@ function panTogoogle()
 /*
 Function: bbox
 
-Obtém os valores de extensão geográfica do GM e converte para uma string no formato aceito pelo i3Geo
+Obt&eacute;m os valores de extensão geogr&aacute;fica do GM e converte para uma string no formato aceito pelo i3Geo
 
 Return:
 
@@ -298,7 +298,7 @@ function ativaI3geo()
 /*
 Function: ativaI3geoRota
 
-Inicia a função de criação de rotas, solicitando a indicação do primeiro ponto
+Inicia a fun&ccedil;ão de cria&ccedil;ão de rotas, solicitando a indica&ccedil;ão do primeiro ponto
 */
 function ativaI3geoRota()
 {
@@ -309,7 +309,7 @@ function ativaI3geoRota()
 /*
 Function: parametrosRota
 
-Obtém os parâmetros para criação da rota, inclusive o ponto de destino
+Obt&eacute;m os parâmetros para cria&ccedil;ão da rota, inclusive o ponto de destino
 */
 function parametrosRota(overlay,latlng)
 {
@@ -389,7 +389,7 @@ function constroiRota()
 /*
 Function: montaRota
 
-Inclui o traçado da rota como uma nova camada no mapa principal
+Inclui o tra&ccedil;ado da rota como uma nova camada no mapa principal
 */
 function montaRota()
 {

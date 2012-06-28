@@ -22,7 +22,7 @@ GNU conforme publicada pela Free Software Foundation;
 
 Este programa &eacute; distribu&iacute;do na expectativa de que seja &uacute;til,
 por&eacute;m, SEM NENHUMA GARANTIA; nem mesmo a garantia impl&iacute;cita
-de COMERCIABILIDADE OU ADEQUAÇ&Atilde;O A UMA FINALIDADE ESPEC&Iacute;FICA.
+de COMERCIABILIDADE OU ADEQUAï¿½&Atilde;O A UMA FINALIDADE ESPEC&Iacute;FICA.
 Consulte a Licen&ccedil;a P&uacute;blica Geral do GNU para mais detalhes.
 Voc&ecirc; deve ter recebido uma c&oacute;pia da Licen&ccedil;a P&uacute;blica Geral do
 GNU junto com este programa; se n&atilde;o, escreva para a
@@ -37,7 +37,7 @@ Classe: i3GEO.barradebotoes
 
 Constr&oacute;i a barra de bot&otilde;es flutuante
 
-Veja tamb&eacute;m classe_interface.js (i3GEO.Interface) que possu&iacute; parâmetros que permitem ajustar a posi&ccedil;&atilde;o das barras no mapa
+Veja tamb&eacute;m classe_interface.js (i3GEO.Interface) que possu&iacute; parï¿½metros que permitem ajustar a posi&ccedil;&atilde;o das barras no mapa
 */
 i3GEO.barraDeBotoes = {
 	/*
@@ -876,7 +876,7 @@ i3GEO.barraDeBotoes = {
 		};
 		//div que mostra o t&iacute;tulo do bot&atilde;o
 		if(!$i("euDockMensagem")){
-			temp = novoel = document.createElement("div");
+			temp = document.createElement("div");
 			temp.style.top = "38px";
 			temp.style.color = "gray";
 			temp.style.textAlign = "center";
@@ -893,7 +893,7 @@ i3GEO.barraDeBotoes = {
 
 	A barra de zoom &eacute; inserida automaticamente na barra de botoes 1 se esta existir
 	
-	Caso i3GEO.barraDeBotoes.TIPO === "olhodepeixe" os parâmetros s&atilde;o ignorados.
+	Caso i3GEO.barraDeBotoes.TIPO === "olhodepeixe" os parï¿½metros s&atilde;o ignorados.
 
 	Exemplo:
 
@@ -1260,7 +1260,7 @@ i3GEO.barraDeBotoes = {
 	/*
 	Function: recria
 
-	Recria uma barra de ferramentas j&aacute; aberta aplicando os parâmetros de configura&ccedil;&atilde;o definidos (vari&aacute;veis)
+	Recria uma barra de ferramentas j&aacute; aberta aplicando os parï¿½metros de configura&ccedil;&atilde;o definidos (vari&aacute;veis)
 
 	Parametro:
 
@@ -1324,7 +1324,7 @@ i3GEO.barraDeBotoes = {
 
 	Parametro:
 
-	id {String} - id que identifica a barra. Corresponde ao parâmetro idconteudonovo da fun&ccedil;&atilde;o de inicializa&ccedil;&atilde;o das barras
+	id {String} - id que identifica a barra. Corresponde ao parï¿½metro idconteudonovo da fun&ccedil;&atilde;o de inicializa&ccedil;&atilde;o das barras
 	*/
 	fecha: function(id){
 		if(typeof(console) !== 'undefined'){console.info("i3GEO.barraDeBotoes.fecha()");}

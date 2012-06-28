@@ -2,11 +2,11 @@
 /*
 Title: wscliente.php
 
-Executa requisições a Web Services convencionais ou nos padrões OGC.
+Executa requisi&ccedil;&otilde;es a Web Services convencionais ou nos padr&otilde;es OGC.
 
-Possibilita a leitura dos metadados dos serviços e também a execução das funções existentes.
+Possibilita a leitura dos metadados dos servi&ccedil;os e tamb&eacute;m a execu&ccedil;&atilde;o das fun&ccedil;&otilde;es existentes.
 
-É utilizado apenas pela aplicação wscliente e as requisições são feitas por meio de AJAX utilizando-se abiblioteca CPAINT.
+&Eacute; utilizado apenas pela aplica&ccedil;&atilde;o wscliente e as requisi&ccedil;&otilde;es s&atilde;o feitas por meio de AJAX utilizando-se abiblioteca CPAINT.
 
 Licenca:
 
@@ -14,20 +14,20 @@ GPL2
 
 i3Geo Interface Integrada de Ferramentas de Geoprocessamento para Internet
 
-Direitos Autorais Reservados (c) 2006 Ministério do Meio Ambiente Brasil
+Direitos Autorais Reservados (c) 2006 Minist&eacute;rio do Meio Ambiente Brasil
 Desenvolvedor: Edmar Moretti edmar.moretti@mma.gov.br
 
-Este programa é software livre; você pode redistribuí-lo
-e/ou modificá-lo sob os termos da Licença Pública Geral
+Este programa &eacute; software livre; voc&ecirc; pode redistribu&iacute;-lo
+e/ou modific&aacute;-lo sob os termos da Licen&ccedil;a P&uacute;blica Geral
 GNU conforme publicada pela Free Software Foundation;
 
-Este programa é distribuído na expectativa de que seja útil,
-porém, SEM NENHUMA GARANTIA; nem mesmo a garantia implícita
-de COMERCIABILIDADE OU ADEQUAÇÃO A UMA FINALIDADE ESPECÍFICA.
-Consulte a Licença Pública Geral do GNU para mais detalhes.
-Você deve ter recebido uma cópia da Licença Pública Geral do
-GNU junto com este programa; se não, escreva para a
-Free Software Foundation, Inc., no endereço
+Este programa &eacute; distribu&iacute;do na expectativa de que seja &uacute;til,
+por&eacute;m, SEM NENHUMA GARANTIA; nem mesmo a garantia impl&iacute;cita
+de COMERCIABILIDADE OU ADEQUA&Ccedil;&Atilde;O A UMA FINALIDADE ESPEC&Iacute;FICA.
+Consulte a Licen&ccedil;a P&uacute;blica Geral do GNU para mais detalhes.
+Voc&ecirc; deve ter recebido uma cópia da Licen&ccedil;a P&uacute;blica Geral do
+GNU junto com este programa; se n&atilde;o, escreva para a
+Free Software Foundation, Inc., no endere&ccedil;o
 59 Temple Street, Suite 330, Boston, MA 02111-1307 USA.
 
 Arquivo:
@@ -36,11 +36,11 @@ i3geo/classesphp/wscliente.php
 
 Parametros:
 
-$funcao {string} - nome da função que será executada
+$funcao {string} - nome da fun&ccedil;&atilde;o que ser&aacute; executada
 
-$cp {CPAINT} - objeto CPAINT contendo os parâmetros da API CPAINT
+$cp {CPAINT} - objeto CPAINT contendo os par&acirc;metros da API CPAINT
 
-As variáveis globais de cada função devem ser enviadas como prâmetros ao ser feita a requisição
+As vari&aacute;veis globais de cada fun&ccedil;&atilde;o devem ser enviadas como pr&acirc;metros ao ser feita a requisi&ccedil;&atilde;o
 
 Exemplo:
 
@@ -65,19 +65,19 @@ if ($funcao == "getcapabilities")
 /*
 Function: getcapabilities
 
-Retorna a resposta da função getcapabilities de um serviço WMS.
+Retorna a resposta da fun&ccedil;&atilde;o getcapabilities de um servi&ccedil;o WMS.
 
 Globais:
 
 $cp {CPAINT} - Objeto CPAINT.
 
-$onlineresource {string} - Endereço do serviço.
+$onlineresource {string} - Endere&ccedil;o do servi&ccedil;o.
 
-$tipo {string} - Tipo do serviço WMS|WFS.
+$tipo {string} - Tipo do servi&ccedil;o WMS|WFS.
 
 Retorno:
 
-{JSON} - Objeto JSON com as marcações do XML resultante convertidas para HTML 
+{JSON} - Objeto JSON com as marca&ccedil;&otilde;es do XML resultante convertidas para HTML 
 */
 function getcapabilities()
 {
@@ -99,7 +99,7 @@ function getcapabilities()
 	#
 	if( !($wms_capabilities = file($wms_service_request)) ) {
 		# Cannot download the capabilities file.
-		wms_fatal("Não foi possível ler o retorno do serviço '$wms_service_request'.");
+		wms_fatal("N&atilde;o foi poss&iacute;vel ler o retorno do servi&ccedil;o '$wms_service_request'.");
 	}
 
 	$wms_capabilities = implode("",$wms_capabilities);
@@ -111,7 +111,7 @@ function getcapabilities()
 	$dom->loadXML($wms_capabilities);
 	$cp->set_data(xml2html($wms_capabilities));
 }
-//le funções de um WS
+//le fun&ccedil;&otilde;es de um WS
 if ($funcao == "funcoesws")
 {
 	$cp->register('funcoesws');
@@ -122,17 +122,17 @@ if ($funcao == "funcoesws")
 /*
 Function: funcoesws
 
-Lista as funções de um web service SOAP ou RPC.
+Lista as fun&ccedil;&otilde;es de um web service SOAP ou RPC.
 
 Globais:
 
-$servico {string} - Endereço do web service.
+$servico {string} - Endere&ccedil;o do web service.
 
 $cp {CPAINT} - Objeto CPAINT.
 
 Retorno:
 
-{JSON} - lista de funções e parâmetros de cada uma
+{JSON} - lista de fun&ccedil;&otilde;es e par&acirc;metros de cada uma
 */
 function funcoesws()
 {
@@ -205,7 +205,7 @@ function funcoesws()
 		$retorna = implode("|",$final);
 	}
 	else
-	{$retorna="Nenhuma função encontrada";}
+	{$retorna="Nenhuma fun&ccedil;&atilde;o encontrada";}
 	$cp->set_data($retorna);
 }
 //busca dados de um WS
@@ -219,21 +219,21 @@ if ($funcao == "dadosws")
 /*
 Function: dadosWS
 
-Faz a chamada de uma função de um WS para pegar os dados.
+Faz a chamada de uma fun&ccedil;&atilde;o de um WS para pegar os dados.
 
 Globais:
 
 $cp {CPAINT} - Objeto CPAINT.
 
-$servico {string} - Endereço do web service.
+$servico {string} - Endere&ccedil;o do web service.
 
-$funcaows {string} - Nome da função do serviço.
+$funcaows {string} - Nome da fun&ccedil;&atilde;o do servi&ccedil;o.
 
-$param {string} - Parâmetros da funcao.
+$param {string} - Par&acirc;metros da funcao.
 
 Retorno:
 
-{JSON} - resultado da chamada ao serviço
+{JSON} - resultado da chamada ao servi&ccedil;o
 */
 function dadosWS()
 {
@@ -280,7 +280,7 @@ function dadosWS()
 	else 
 	{$cp->set_data($retorna);}
 }
-//le parâmetros de uma função de um WS
+//le par&acirc;metros de uma fun&ccedil;&atilde;o de um WS
 if ($funcao == "parfuncoesws")
 {
 	$cp->register('parFuncoesws');
@@ -291,15 +291,15 @@ if ($funcao == "parfuncoesws")
 /*
 Function: parFuncoesws
 
-Retorna os campos de parâmetros de uma função de um WS.
+Retorna os campos de par&acirc;metros de uma fun&ccedil;&atilde;o de um WS.
 
 Globais:
 
 $cp {CPAINT} - Objeto CPAINT.
 
-$servico {string} - Endereço do web service.
+$servico {string} - Endere&ccedil;o do web service.
 
-$funcaows {string} - Nome da função do serviço.
+$funcaows {string} - Nome da fun&ccedil;&atilde;o do servi&ccedil;o.
 
 Retorno:
 
@@ -388,9 +388,9 @@ Pega os links de um RSS.
 
 cp - Objeto CPAINT.
 
-rss - Endereços dos RSS.
+rss - Endere&ccedil;os dos RSS.
 
-tipo - Tipo de recurso, permite a escolha do programa PHP que será usado GEORSS|WMS|WS|DOWNLOAD
+tipo - Tipo de recurso, permite a escolha do programa PHP que ser&aacute; usado GEORSS|WMS|WS|DOWNLOAD
 */
 function listaRSSws2()
 {
@@ -458,9 +458,9 @@ Globais:
 
 $cp {CPAINT} - Objeto CPAINT.
 
-$rss {string} - Endereços dos RSS.
+$rss {string} - Endere&ccedil;os dos RSS.
 
-$tipo {string} - Tipo de recurso, permite a escolha do programa PHP que será usado GEORSS|WMS|WS|DOWNLOAD
+$tipo {string} - Tipo de recurso, permite a escolha do programa PHP que ser&aacute; usado GEORSS|WMS|WS|DOWNLOAD
 
 Retorno:
 
@@ -537,7 +537,7 @@ Globais:
 
 $cp {CPAINT} - Objeto CPAINT.
 
-$rss {string} - Endereços dos RSS.
+$rss {string} - Endere&ccedil;os dos RSS.
 
 Retorno:
 

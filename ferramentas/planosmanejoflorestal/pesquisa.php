@@ -55,7 +55,7 @@ function pesquisa()
 }
 function adicionatema($map_file,$dir_tmp,$imgdir,$nometemapontos,$itens,$valores)
 {
-	//$valores é um array com os valores
+	//$valores &eacute; um array com os valores
 	$nomes = "";
 	$a = 'azertyuiopqsdfghjklmwxcvbnABCDEFGHIJKLMNOPQRSTUVWXYZ';
 	$max = strlen($a)-1;

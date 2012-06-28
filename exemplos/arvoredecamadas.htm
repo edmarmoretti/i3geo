@@ -9,101 +9,101 @@
 <div id=listaTemas style='position:absolute;top:15px;left:15px'></div>
 <div style='position:absolute;top:15px;left:350px;width:600px'>
 <p class=paragrafo >
-A árvore de camadas mostra a lista de layers que estão disponíveis no mapa atual. A árvore controla 
-quais temas estão visíveis ou não, a ordem de sobreposição e possibilita acessar as funções de 
-manipulação das características de cada layer, como simbologia, título, etc.
+A &aacute;rvore de camadas mostra a lista de layers que est&atilde;o dispon&iacute;veis no mapa atual. A &aacute;rvore controla 
+quais temas est&atilde;o vis&iacute;veis ou n&atilde;o, a ordem de sobreposi&ccedil;&atilde;o e possibilita acessar as fun&ccedil;&otilde;es de 
+manipula&ccedil;&atilde;o das caracter&iacute;sticas de cada layer, como simbologia, t&iacute;tulo, etc.
 </p>
 <p class=paragrafo >
-Nesta página são mostrados os parâmetros principais que podem ser utilizados para customizar a árvore, 
+Nesta p&aacute;gina s&atilde;o mostrados os par&acirc;metros principais que podem ser utilizados para customizar a &aacute;rvore, 
 modificando o seu comportamento normal. 
 </p>
 <p class=paragrafo >
-Você pode testar os parâmetros e obter o código javascript necessário para fazê-los funcionar. Os códigos 
-normalmente devem ser inseridos no HTML utilizado para montar o seu mapa. Por exemplo, você pode editar o 
-arquivo padrão do i3Geo: i3geo/locaplic/geral.htm. Nesse caso, os códigos devem ser inseridos antes da linha:<br>
+Voc&ecirc; pode testar os par&acirc;metros e obter o código javascript necess&aacute;rio para faz&ecirc;-los funcionar. Os códigos 
+normalmente devem ser inseridos no HTML utilizado para montar o seu mapa. Por exemplo, voc&ecirc; pode editar o 
+arquivo padr&atilde;o do i3Geo: i3geo/locaplic/geral.htm. Nesse caso, os códigos devem ser inseridos antes da linha:<br>
 i3GEO.cria();
 </p>
 <p class=paragrafo >
-<input class=aplicar type="button" value="Atualizar a árvore" onclick="ARVatualizar()" />
+<input class=aplicar type="button" value="Atualizar a &aacute;rvore" onclick="ARVatualizar()" />
 </p>
 <div id=ARVparametros >
-<p class=paragrafo ><b>Parâmetros:</b></p>
+<p class=paragrafo ><b>Par&acirc;metros:</b></p>
 <p class=paragrafo >
 	<select name="ARRASTARORDEM">
 		<option value=true selected >true</option>
 		<option value=false >false</option>
 	</select>
-	Ativa a opção de arrastar um tema para alterar a ordem de desenho das camadas
+	Ativa a op&ccedil;&atilde;o de arrastar um tema para alterar a ordem de desenho das camadas
 </p>
 <p class=paragrafo >
 	<select name="ARRASTARLIXEIRA">
 		<option value=true selected >true</option>
 		<option value=false >false</option>
 	</select>
-	Ativa a opção de arrastar um tema para a lixeria quando se quer removê-lo do mapa
+	Ativa a op&ccedil;&atilde;o de arrastar um tema para a lixeria quando se quer remov&ecirc;-lo do mapa
 </p>
 <p class=paragrafo >
 	<select name="LIGARDESLIGARTODOS">
 		<option value=true selected >true</option>
 		<option value=false >false</option>
 	</select>
-	Mostra os ícones de desligar/ligar todos os temas
+	Mostra os &iacute;cones de desligar/ligar todos os temas
 </p>
 <p class=paragrafo >
 	<select name="PERMITEEXPANDIRTEMAS">
 		<option value=true  selected >true</option>
 		<option value=false >false</option>
 	</select>
-	Permite que as opções abaixo dos nós referentes acada tema sejam mostradas
+	Permite que as op&ccedil;&otilde;es abaixo dos nós referentes acada tema sejam mostradas
 </p>
 <p class=paragrafo >
 	<select name="EXPANDIDA">
 		<option value=true  >true</option>
 		<option value=false selected >false</option>
 	</select>
-	Indica se a árvore será montada de forma expandida ou não. Se true, os nós do primeiro nível serão abertos na inicialização da árvore
+	Indica se a &aacute;rvore ser&aacute; montada de forma expandida ou n&atilde;o. Se true, os nós do primeiro n&iacute;vel ser&atilde;o abertos na inicializa&ccedil;&atilde;o da &aacute;rvore
 </p>
 <p class=paragrafo >
 	<select name="EXPANDESOLEGENDA">
 		<option value=true  >true</option>
 		<option value=false selected >false</option>
 	</select>
-	Ao expandir um tema mostra apenas a legenda, sem as outras opções
+	Ao expandir um tema mostra apenas a legenda, sem as outras op&ccedil;&otilde;es
 </p>
 <p class=paragrafo >
 	<select name="LEGENDAEXPANDIDA">
 		<option value=true  >true</option>
 		<option value=false selected >false</option>
 	</select>
-	Indica se a legenda da árvore será montada de forma expandida ou não
+	Indica se a legenda da &aacute;rvore ser&aacute; montada de forma expandida ou n&atilde;o
 </p>
 <p class=paragrafo >
 	<select name="OPCOESICONES">
 		<option value=true  selected >true</option>
 		<option value=false >false</option>
 	</select>
-	Inclui ou não os ícones de opções em cada tema (farol, zoom para o tema, etc)
+	Inclui ou n&atilde;o os &iacute;cones de op&ccedil;&otilde;es em cada tema (farol, zoom para o tema, etc)
 </p>
 <p class=paragrafo >
 	<select name="OPCOESTEMAS">
 		<option value=true  selected >true</option>
 		<option value=false >false</option>
 	</select>
-	Inclui ou não o nó com as opções de manipulação de cada tema
+	Inclui ou n&atilde;o o nó com as op&ccedil;&otilde;es de manipula&ccedil;&atilde;o de cada tema
 </p>
 <p class=paragrafo >
 	<select name="OPCOESLEGENDA">
 		<option value=true  selected >true</option>
 		<option value=false >false</option>
 	</select>
-	Inclui ou não o nó para mostrar a legenda do tema
+	Inclui ou n&atilde;o o nó para mostrar a legenda do tema
 </p>
 <p class=paragrafo >
 	<select name="AGUARDALEGENDA">
 		<option value=true  >true</option>
 		<option value=false selected >false</option>
 	</select>
-	Ativa a opção de aguarde para mostrar a legenda de um tema quando o usuário estaciona o mouse sobre o nome de um tema
+	Ativa a op&ccedil;&atilde;o de aguarde para mostrar a legenda de um tema quando o usu&aacute;rio estaciona o mouse sobre o nome de um tema
 </p>
 </div>
 <p class=paragrafo ><b>Código:</b></p>

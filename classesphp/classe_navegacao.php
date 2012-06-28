@@ -2,9 +2,9 @@
 /*
 Title: classe_navegacao.php
 
-Operações de navegação que alteram a abrangência do mapa.
+Opera&ccedil;&otilde;es de navega&ccedil;&atilde;o que alteram a abrang&ecirc;ncia do mapa.
 
-Alteração de escala, deslocamento, etc.
+Altera&ccedil;&atilde;o de escala, deslocamento, etc.
 
 Licenca:
 
@@ -13,20 +13,20 @@ GPL2
 
 i3Geo Interface Integrada de Ferramentas de Geoprocessamento para Internet
 
-Direitos Autorais Reservados (c) 2006 Ministério do Meio Ambiente Brasil
+Direitos Autorais Reservados (c) 2006 Minist&eacute;rio do Meio Ambiente Brasil
 Desenvolvedor: Edmar Moretti edmar.moretti@mma.gov.br
 
-Este programa é software livre; você pode redistribuí-lo
-e/ou modificá-lo sob os termos da Licença Pública Geral
+Este programa &eacute; software livre; voc&ecirc; pode redistribu&iacute;-lo
+e/ou modific&aacute;-lo sob os termos da Licen&ccedil;a P&uacute;blica Geral
 GNU conforme publicada pela Free Software Foundation;
 
-Este programa é distribuído na expectativa de que seja útil,
-porém, SEM NENHUMA GARANTIA; nem mesmo a garantia implícita
-de COMERCIABILIDADE OU ADEQUAÇÃO A UMA FINALIDADE ESPECÍFICA.
-Consulte a Licença Pública Geral do GNU para mais detalhes.
-Você deve ter recebido uma cópia da Licença Pública Geral do
-GNU junto com este programa; se não, escreva para a
-Free Software Foundation, Inc., no endereço
+Este programa &eacute; distribu&iacute;do na expectativa de que seja &uacute;til,
+por&eacute;m, SEM NENHUMA GARANTIA; nem mesmo a garantia impl&iacute;cita
+de COMERCIABILIDADE OU ADEQUA&Ccedil;&Atilde;O A UMA FINALIDADE ESPEC&Iacute;FICA.
+Consulte a Licen&ccedil;a P&uacute;blica Geral do GNU para mais detalhes.
+Voc&ecirc; deve ter recebido uma cópia da Licen&ccedil;a P&uacute;blica Geral do
+GNU junto com este programa; se n&atilde;o, escreva para a
+Free Software Foundation, Inc., no endere&ccedil;o
 59 Temple Street, Suite 330, Boston, MA 02111-1307 USA.
 
 Arquivo:
@@ -57,7 +57,7 @@ function: __construct
 Cria um objeto avegacao 
 
 parameters:
-$map_file - string $map_file Endereço do mapfile no servidor. 
+$map_file - string $map_file Endere&ccedil;o do mapfile no servidor. 
 */  	
 	function __construct($map_file,$locaplic="")
 	{
@@ -100,7 +100,7 @@ string - nome da imagem gravada
 /*
 function: afasta
 
-Afasta a visualização de um mapa (zoom out)
+Afasta a visualiza&ccedil;&atilde;o de um mapa (zoom out)
 
 O centro do mapa permanece inalterado, mudando-se apenas a escala.
 
@@ -119,12 +119,12 @@ $nivel - nivel de zoom
 /*
 function: aproxima
 
-Aproxima a visualização de um mapa (zoom in)
+Aproxima a visualiza&ccedil;&atilde;o de um mapa (zoom in)
 
 O centro do mapa permanece inalterado, mudando-se apenas a escala.
 
 paremeter:
-$nivel - integer Nível de zoom.
+$nivel - integer N&iacute;vel de zoom.
 */	
 	function aproxima($nivel)
 	{
@@ -154,15 +154,15 @@ Desliga o status das camadas raster
 /*
 function: aplicaResolucao
 
-Aplica uma resolução nova ao mapa atual
+Aplica uma resolu&ccedil;&atilde;o nova ao mapa atual
 
 Utilizado para gerar imagens ampliadas do mapa atual
 
 parameter:
 
-$resolucao - Resolução a ser aplicada
+$resolucao - Resolu&ccedil;&atilde;o a ser aplicada
 
-$ext - extensão geográfica que será aplicada ao mapa
+$ext - extens&atilde;o geogr&aacute;fica que ser&aacute; aplicada ao mapa
 */
 	function aplicaResolucao($resolucao,$ext="")
 	{
@@ -176,16 +176,16 @@ $ext - extensão geográfica que será aplicada ao mapa
 /*
 function: pan
 
-Desloca a visualização de um mapa (pan).
+Desloca a visualiza&ccedil;&atilde;o de um mapa (pan).
 
 parameters:
 $x - Valor de x em coordenadas de imagem.
 
 $y - Valor de y em coordenadas de imagem.
 
-$escala - Valor da escala (utilizado quando o clique é feito sobre o mapa de referência).
+$escala - Valor da escala (utilizado quando o clique &eacute; feito sobre o mapa de refer&ecirc;ncia).
 
-$tipo - ref| Indica se o ponto foi clicado no mapa ou no mapa de referência 
+$tipo - ref| Indica se o ponto foi clicado no mapa ou no mapa de refer&ecirc;ncia 
 */
 	function pan($x,$y,$escala,$tipo)
 	{
@@ -205,10 +205,10 @@ $tipo - ref| Indica se o ponto foi clicado no mapa ou no mapa de referência
 /*
 function: mudaExtensao
 
-Muda a extensão geográfica do mapa.
+Muda a extens&atilde;o geogr&aacute;fica do mapa.
 
 parameter:
-$ext -  Extensão geográfica a ser aplicada com valores separados por virgula ou espaços.
+$ext -  Extens&atilde;o geogr&aacute;fica a ser aplicada com valores separados por virgula ou espa&ccedil;os.
 */
 	function mudaExtensao($ext)
 	{
@@ -245,10 +245,10 @@ $escala - Escala a ser aplicada.
 /*
 function: zoomPonto
 
-Desloca o centro do mapa para um ponto específico.
+Desloca o centro do mapa para um ponto espec&iacute;fico.
 
 parameter:
-$xy - XY com as coordenadas separado por espaço
+$xy - XY com as coordenadas separado por espa&ccedil;o
 */
 	function zoomPonto($xy)
 	{

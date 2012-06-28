@@ -3,7 +3,7 @@
 /*
 Title: Tela remota
 
-Mostra um link que permite clonar o mapa atual e exibí-lo em uma outra tela. O mapa clonado é atualizado de tempos em tempos, permitindo a visualização remota do mapa aberto poroutro usuário.
+Mostra um link que permite clonar o mapa atual e exib&iacute;-lo em uma outra tela. O mapa clonado &eacute; atualizado de tempos em tempos, permitindo a visualiza&ccedil;ão remota do mapa aberto poroutro usu&aacute;rio.
 
 Veja:
 
@@ -19,20 +19,20 @@ GPL2
 
 i3Geo Interface Integrada de Ferramentas de Geoprocessamento para Internet
 
-Direitos Autorais Reservados (c) 2006 Ministério do Meio Ambiente Brasil
+Direitos Autorais Reservados (c) 2006 Minist&eacute;rio do Meio Ambiente Brasil
 Desenvolvedor: Edmar Moretti edmar.moretti@mma.gov.br
 
-Este programa é software livre; você pode redistribuí-lo
-e/ou modificá-lo sob os termos da Licença Pública Geral
+Este programa &eacute; software livre; voc&ecirc; pode redistribu&iacute;-lo
+e/ou modific&aacute;-lo sob os termos da Licen&ccedil;a P&uacute;blica Geral
 GNU conforme publicada pela Free Software Foundation;
 
-Este programa é distribuído na expectativa de que seja útil,
-porém, SEM NENHUMA GARANTIA; nem mesmo a garantia implícita
-de COMERCIABILIDADE OU ADEQUAÇÃO A UMA FINALIDADE ESPECÍFICA.
-Consulte a Licença Pública Geral do GNU para mais detalhes.
-Você deve ter recebido uma cópia da Licença Pública Geral do
+Este programa &eacute; distribu&iacute;do na expectativa de que seja &uacute;til,
+por&eacute;m, SEM NENHUMA GARANTIA; nem mesmo a garantia impl&iacute;cita
+de COMERCIABILIDADE OU ADEQUAÇÃO A UMA FINALIDADE ESPEC&Iacute;FICA.
+Consulte a Licen&ccedil;a P&uacute;blica Geral do GNU para mais detalhes.
+Voc&ecirc; deve ter recebido uma c&oacute;pia da Licen&ccedil;a P&uacute;blica Geral do
 GNU junto com este programa; se não, escreva para a
-Free Software Foundation, Inc., no endereço
+Free Software Foundation, Inc., no endere&ccedil;o
 59 Temple Street, Suite 330, Boston, MA 02111-1307 USA.
 */
 if(typeof(i3GEOF) === 'undefined'){
@@ -45,7 +45,7 @@ i3GEOF.telaremota = {
 	/*
 	Function: html
 	
-	Gera o código html para apresentação das opções da ferramenta
+	Gera o c&oacute;digo html para apresenta&ccedil;ão das op&ccedil;&otilde;es da ferramenta
 	
 	Veja:
 	
@@ -53,12 +53,12 @@ i3GEOF.telaremota = {
 
 	Parametros:
 	
-	divid {String} - id do div que receberá o conteudo HTML da ferramenta
+	divid {String} - id do div que receber&aacute; o conteudo HTML da ferramenta
 	*/
 	html:function(divid,tema){
 		var cp,p,ins;
 		ins = '<p class="paragrafo" >Utilize o link abaixo para abrir o mapa em outro navegador ou computador.</p>';
-		ins += '<p class="paragrafo" >Não feche essa janela ou a janela remota não receberá o valor da extensão geográfica do mapa original.</p>';
+		ins += '<p class="paragrafo" >Não feche essa janela ou a janela remota não receber&aacute; o valor da extensão geogr&aacute;fica do mapa original.</p>';
 		ins += '<p class="paragrafo" ><div id=i3GEOtelaremotaResultado style=text-align:left ></div>';
 		$i(divid).innerHTML += ins;
 		mostraLink = function(retorno){
@@ -88,7 +88,7 @@ i3GEOF.telaremota = {
 	
 	Parametros:
 	
-	tema {String} - código do tema
+	tema {String} - c&oacute;digo do tema
 	*/	
 	criaJanelaFlutuante: function(tema){
 		var janela,divid,temp,titulo;
@@ -128,7 +128,7 @@ i3GEOF.telaremota = {
 	/*
 	Function: gravaExtent
 	
-	Grava a extensão geográfica do mapa atual na section PHP aberta pelo mapa atual.
+	Grava a extensão geogr&aacute;fica do mapa atual na section PHP aberta pelo mapa atual.
 	*/
 	gravaExtent: function(){
 		var p,cp,temp;

@@ -38,7 +38,7 @@ if (isset($_FILES['i3GEOuploaddbffile']['name']))
 	$nomeshp = $dirmap."/".$nome.".shp";
 	if($status == 1)
 	{
-		if(!isset($tema)) //o arquivo deverá ser transformado em uma camada no mapa
+		if(!isset($tema)) //o arquivo dever&aacute; ser transformado em uma camada no mapa
 		{
 			$nomex = strtoupper($i3GEOuploaddbfnomex);
 			$nomey = strtoupper($i3GEOuploaddbfnomey);
@@ -161,7 +161,7 @@ function verificaNome($nome)
 	$extensao = $lista[count($lista) - 1];
 	if(($extensao != "dbf") && ($extensao != "csv") && ($extensao != "txt"))
 	{
-		echo "Nome de arquivo inválido";
+		echo "Nome de arquivo inv&aacute;lido";
 		paraAguarde();
 		exit;
 	}

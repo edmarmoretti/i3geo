@@ -2,9 +2,9 @@
 /*
 Title: ajuda_usuario.php
 
-Lista as funcionalidades cadastradas em i3geo/classesjs/dicionario_ajuda.js. A listagem é organizada em grupos que podem ser expandidos individualmente ou no total.
+Lista as funcionalidades cadastradas em i3geo/classesjs/dicionario_ajuda.js. A listagem &eacute; organizada em grupos que podem ser expandidos individualmente ou no total.
 
-É utilizado pelo i3geo para fornecer ajuda ao usuário em como utilizar as funcionalidades cadatsradas.
+&Eacute; utilizado pelo i3geo para fornecer ajuda ao usu&aacute;rio em como utilizar as funcionalidades cadatsradas.
 
 Licenca:
 
@@ -12,27 +12,27 @@ GPL2
 
 i3Geo Interface Integrada de Ferramentas de Geoprocessamento para Internet
 
-Direitos Autorais Reservados (c) 2006 Ministério do Meio Ambiente Brasil
+Direitos Autorais Reservados (c) 2006 Minist&eacute;rio do Meio Ambiente Brasil
 Desenvolvedor: Edmar Moretti edmar.moretti@mma.gov.br
 
-Este programa é software livre; você pode redistribuí-lo
-e/ou modificá-lo sob os termos da Licença Pública Geral
+Este programa &eacute; software livre; voc&ecirc; pode redistribu&iacute;-lo
+e/ou modific&aacute;-lo sob os termos da Licen&ccedil;a P&uacute;blica Geral
 GNU conforme publicada pela Free Software Foundation;
 
-Este programa é distribuído na expectativa de que seja útil,
-porém, SEM NENHUMA GARANTIA; nem mesmo a garantia implícita
-de COMERCIABILIDADE OU ADEQUAÇÃO A UMA FINALIDADE ESPECÍFICA.
-Consulte a Licença Pública Geral do GNU para mais detalhes.
-Você deve ter recebido uma cópia da Licença Pública Geral do
-GNU junto com este programa; se não, escreva para a
-Free Software Foundation, Inc., no endereço
+Este programa &eacute; distribu&iacute;do na expectativa de que seja &uacute;til,
+por&eacute;m, SEM NENHUMA GARANTIA; nem mesmo a garantia impl&iacute;cita
+de COMERCIABILIDADE OU ADEQUA&Ccedil;&Atilde;O A UMA FINALIDADE ESPEC&Iacute;FICA.
+Consulte a Licen&ccedil;a P&uacute;blica Geral do GNU para mais detalhes.
+Voc&ecirc; deve ter recebido uma cópia da Licen&ccedil;a P&uacute;blica Geral do
+GNU junto com este programa; se n&atilde;o, escreva para a
+Free Software Foundation, Inc., no endere&ccedil;o
 59 Temple Street, Suite 330, Boston, MA 02111-1307 USA.
 
 Arquivo: i3geo/ajuda_usuario.php
 
 Parametros:
 
-idcategoria {string} - (opcional) id da categoria que será listada. Lista apenas uma categoria de funcionalidade
+idcategoria {string} - (opcional) id da categoria que ser&aacute; listada. Lista apenas uma categoria de funcionalidade
 
 idajuda {string} - (opcional) id da funcionalidade. Lista apenas uma funcionalidade
 */
@@ -56,12 +56,12 @@ div {left: 0px;}
 <div class="bordaSuperior"  >&nbsp;</div>
 <div class="mascaraPrincipal" id="divGeral">
 	<img src="imagens/i3geo1.jpg" />
-	<p style='font-size:16px'>Documentação do usuário.</p>
+	<p style='font-size:16px'>Documenta&ccedil;&atilde;o do usu&aacute;rio.</p>
 	<p><?php echo $mensagemInicia;?></p>
 	<?php
 	if (isset($idcategoria))
 	{
-		echo "<p>Para ver toda a documentação, ";
+		echo "<p>Para ver toda a documenta&ccedil;&atilde;o, ";
 		echo "clique <a href='ajuda_usuario.php' >aqui</a></p>";
 	}
 	else

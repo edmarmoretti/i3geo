@@ -21,20 +21,20 @@ GPL2
 
 i3Geo Interface Integrada de Ferramentas de Geoprocessamento para Internet
 
-Direitos Autorais Reservados (c) 2006 Ministério do Meio Ambiente Brasil
+Direitos Autorais Reservados (c) 2006 Minist&eacute;rio do Meio Ambiente Brasil
 Desenvolvedor: Edmar Moretti edmar.moretti@mma.gov.br
 
-Este programa é software livre; você pode redistribuí-lo
-e/ou modificá-lo sob os termos da Licença Pública Geral
+Este programa &eacute; software livre; voc&ecirc; pode redistribu&iacute;-lo
+e/ou modific&aacute;-lo sob os termos da Licen&ccedil;a P&uacute;blica Geral
 GNU conforme publicada pela Free Software Foundation;
 
-Este programa é distribuído na expectativa de que seja útil,
-porém, SEM NENHUMA GARANTIA; nem mesmo a garantia implícita
-de COMERCIABILIDADE OU ADEQUAÇÃO A UMA FINALIDADE ESPECÍFICA.
-Consulte a Licença Pública Geral do GNU para mais detalhes.
-Você deve ter recebido uma cópia da Licença Pública Geral do
+Este programa &eacute; distribu&iacute;do na expectativa de que seja &uacute;til,
+por&eacute;m, SEM NENHUMA GARANTIA; nem mesmo a garantia impl&iacute;cita
+de COMERCIABILIDADE OU ADEQUAÇÃO A UMA FINALIDADE ESPEC&Iacute;FICA.
+Consulte a Licen&ccedil;a P&uacute;blica Geral do GNU para mais detalhes.
+Voc&ecirc; deve ter recebido uma c&oacute;pia da Licen&ccedil;a P&uacute;blica Geral do
 GNU junto com este programa; se não, escreva para a
-Free Software Foundation, Inc., no endereço
+Free Software Foundation, Inc., no endere&ccedil;o
 59 Temple Street, Suite 330, Boston, MA 02111-1307 USA.
 */
 
@@ -49,7 +49,7 @@ i3GEOF.filtro = {
 	/*
 	Variavel: aguarde
 	
-	Estilo do objeto DOM com a imagem de aguarde existente no cabeçalho da janela.
+	Estilo do objeto DOM com a imagem de aguarde existente no cabe&ccedil;alho da janela.
 	*/
 	aguarde: "",
 	/*
@@ -61,11 +61,11 @@ i3GEOF.filtro = {
 	/*
 	Function: inicia
 	
-	Inicia a ferramenta. É chamado por criaJanelaFlutuante
+	Inicia a ferramenta. &Eacute; chamado por criaJanelaFlutuante
 	
 	Parametro:
 	
-	iddiv {String} - id do div que receberá o conteudo HTML da ferramenta
+	iddiv {String} - id do div que receber&aacute; o conteudo HTML da ferramenta
 	*/
 	inicia: function(iddiv){
 		i3GEO.janela.comboCabecalhoTemas("i3GEOFfiltroComboCabeca","i3GEOFfiltroComboCabecaSel","filtro","ligadosComTabela");
@@ -97,7 +97,7 @@ i3GEOF.filtro = {
 			);
 			i3GEO.util.mensagemAjuda("i3GEOfiltromen1",$i("i3GEOfiltromen1").innerHTML);
 			//
-			//pega a lista de itens e chama a função de montagem das opções de criação do filtro
+			//pega a lista de itens e chama a fun&ccedil;ão de montagem das op&ccedil;&otilde;es de cria&ccedil;ão do filtro
 			//
 			i3GEO.util.comboItens(
 				"none",
@@ -113,11 +113,11 @@ i3GEOF.filtro = {
 	/*
 	Function: html
 	
-	Gera o código html para apresentação das opções da ferramenta
+	Gera o c&oacute;digo html para apresenta&ccedil;ão das op&ccedil;&otilde;es da ferramenta
 	
 	Retorno:
 	
-	String com o código html
+	String com o c&oacute;digo html
 	*/
 	html:function(){
 		var ins = '' +
@@ -148,7 +148,7 @@ i3GEOF.filtro = {
 		'	</div>'+
 		'	<div id=i3GEOfiltrovalores style="position:relative;top:5px;left:0px">'+
 		'	</div>'+
-		'	<div id=i3GEOfiltromen1 style=top:15px;left:0px; ><p class=paragrafo >O resultado da filtragem ser&aacute; mostrado no mapa. Certifique-se que o tema está v&iacute;sivel. Antes de aplicar, vc pode testar o filtro definido. Na op&ccedil;&atilde;o IN separe os valores com v&iacute;rgula.</div>'+
+		'	<div id=i3GEOfiltromen1 style=top:15px;left:0px; ><p class=paragrafo >O resultado da filtragem ser&aacute; mostrado no mapa. Certifique-se que o tema est&aacute; v&iacute;sivel. Antes de aplicar, vc pode testar o filtro definido. Na op&ccedil;&atilde;o IN separe os valores com v&iacute;rgula.</div>'+
 		'</div>'+
 		'<div class=guiaobj id="i3GEOfiltroguia2obj" style="left:1px;display:none;">'+
 		'	<p class=paragrafo >Digite o filtro:<br>'+
@@ -349,7 +349,7 @@ i3GEOF.filtro = {
 	
 	Parametro:
 	
-	testa {String} - sim|nao indica a realização de teste ou aplicação final do filtro
+	testa {String} - sim|nao indica a realiza&ccedil;ão de teste ou aplica&ccedil;ão final do filtro
 	*/
 	aplicaFiltro: function(testa){
 		if(arguments.length === 0)

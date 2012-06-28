@@ -18,7 +18,7 @@ function inicializa()
    	var pt1 = function(response)
    	{  	
 		if (!response || response.Status.code != 200) {
-   			var ins = "Não foi possível encontrar o endereço. Status Code:" + response.Status.code;
+   			var ins = "Não foi poss&iacute;vel encontrar o endere&ccedil;o. Status Code:" + response.Status.code;
 		} else {
 			place = response.Placemark[0];
    			var ins = '<b>orig latlng:</b>' + response.name + '<br/>' 
@@ -28,7 +28,7 @@ function inicializa()
         	ins += '<b>Address:</b>' + place.address + '<br>'
         	ins += '<b>Accuracy:</b>' + place.AddressDetails.Accuracy + '<br>'
         	ins += '<b>Country code:</b> ' + place.AddressDetails.Country.CountryNameCode;
-    		ins += '<br><br>O endereço obtido é aproximado. Mais detalhes em <a href="http://nicogoeminne.googlepages.com/documentation.html" >Google</a>'
+    		ins += '<br><br>O endere&ccedil;o obtido &eacute; aproximado. Mais detalhes em <a href="http://nicogoeminne.googlepages.com/documentation.html" >Google</a>'
 		}
 		document.getElementById("mapa").innerHTML = ins
     }

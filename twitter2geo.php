@@ -4,37 +4,37 @@ Title: twitter2geo.php
 
 Converte mensagens registradas no twitter, para um determinado TAG, em um arquivo georreferenciado
 
-As mensagens são consideradas apenas qd possuírem as TAGs #x ou #y, ou então, #lat ou #long
+As mensagens s&atilde;o consideradas apenas qd possu&iacute;rem as TAGs #x ou #y, ou ent&atilde;o, #lat ou #long
 
-São aceitos todos os parâmetros de busca da API do Twitter, como definidos em http://search.twitter.com/
+S&atilde;o aceitos todos os par&acirc;metros de busca da API do Twitter, como definidos em http://search.twitter.com/
 
 Licenca
 
 i3Geo Interface Integrada de Ferramentas de Geoprocessamento para Internet
 
-Direitos Autorais Reservados (c) 2006 Ministério do Meio Ambiente Brasil
+Direitos Autorais Reservados (c) 2006 Minist&eacute;rio do Meio Ambiente Brasil
 Desenvolvedor: Edmar Moretti edmar.moretti@mma.gov.br
 
-Este programa é software livre; você pode redistribuí-lo
-e/ou modificá-lo sob os termos da Licença Pública Geral
+Este programa &eacute; software livre; voc&ecirc; pode redistribu&iacute;-lo
+e/ou modific&aacute;-lo sob os termos da Licen&ccedil;a P&uacute;blica Geral
 GNU conforme publicada pela Free Software Foundation;
 
-Este programa é distribuído na expectativa de que seja útil,
-porém, SEM NENHUMA GARANTIA; nem mesmo a garantia implícita
-de COMERCIABILIDADE OU ADEQUAÇÃO A UMA FINALIDADE ESPECÍFICA.
-Consulte a Licença Pública Geral do GNU para mais detalhes.
-Você deve ter recebido uma cópia da Licença Pública Geral do
-GNU junto com este programa; se não, escreva para a
-Free Software Foundation, Inc., no endereço
+Este programa &eacute; distribu&iacute;do na expectativa de que seja &uacute;til,
+por&eacute;m, SEM NENHUMA GARANTIA; nem mesmo a garantia impl&iacute;cita
+de COMERCIABILIDADE OU ADEQUA&Ccedil;&Atilde;O A UMA FINALIDADE ESPEC&Iacute;FICA.
+Consulte a Licen&ccedil;a P&uacute;blica Geral do GNU para mais detalhes.
+Voc&ecirc; deve ter recebido uma cópia da Licen&ccedil;a P&uacute;blica Geral do
+GNU junto com este programa; se n&atilde;o, escreva para a
+Free Software Foundation, Inc., no endere&ccedil;o
 59 Temple Street, Suite 330, Boston, MA 02111-1307 USA.
 
 Arquivo: i3geo/twitter2geo.php
 
 Parametros:
 
-ajuda - se for definida na URL, mostra uma ajuda ao usuário
+ajuda - se for definida na URL, mostra uma ajuda ao usu&aacute;rio
 
-tipo - tipo de arquivo que será retornado
+tipo - tipo de arquivo que ser&aacute; retornado
 
 Valores:
 
@@ -58,13 +58,13 @@ $chaves = array_keys($par);
 if($par["ajuda"] || !$par["tipo"]){
 	echo "<pre>Title: twitter2geo.php
 		Converte mensagens registradas no twitter, para um determinado TAG, em um arquivo georreferenciado
-		As mensagens são consideradas apenas qd possuírem as TAGs #x ou #y, ou então, #lat ou #long
-		São aceitos todos os parâmetros de busca da API do Twitter, como definidos em http://search.twitter.com/
+		As mensagens s&atilde;o consideradas apenas qd possu&iacute;rem as TAGs #x ou #y, ou ent&atilde;o, #lat ou #long
+		S&atilde;o aceitos todos os par&acirc;metros de busca da API do Twitter, como definidos em http://search.twitter.com/
 
 		Parametros:
 
-		ajuda - se for definida na URL, mostra uma ajuda ao usuário
-		tipo - tipo de arquivo que será retornado
+		ajuda - se for definida na URL, mostra uma ajuda ao usu&aacute;rio
+		tipo - tipo de arquivo que ser&aacute; retornado
 
 		Valores:
 
@@ -85,7 +85,7 @@ $s = PHP_SHLIB_SUFFIX;
 if(!function_exists('curl_init'))
 {@dl( 'php_curl'.'.'.$s );}
 if(!function_exists('curl_init'))
-{echo "curl não instalado";}
+{echo "curl n&atilde;o instalado";}
 $curl = curl_init();
 curl_setopt ($curl, CURLOPT_URL, "http://search.twitter.com/search.json?".($query));
 curl_setopt($curl, CURLOPT_RETURNTRANSFER, 1);

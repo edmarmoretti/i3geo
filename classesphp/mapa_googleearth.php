@@ -2,10 +2,10 @@
 /*
 Title: mapa_googleearth.php
 
-Faz o processamento de um mapfile segundo as necessidades do i3geo, como por exemplo, fazendo a substituição
-das variáveis de conexão com banco e outras operações específicas do i3Geo.
+Faz o processamento de um mapfile segundo as necessidades do i3geo, como por exemplo, fazendo a substitui&ccedil;&atilde;o
+das vari&aacute;veis de conex&atilde;o com banco e outras opera&ccedil;&otilde;es espec&iacute;ficas do i3Geo.
 
-É utilizado especificamente nas interfaces que utilizam a biblioteca Google Earth.
+&Eacute; utilizado especificamente nas interfaces que utilizam a biblioteca Google Earth.
 
 
 Licenca:
@@ -14,20 +14,20 @@ GPL2
 
 i3Geo Interface Integrada de Ferramentas de Geoprocessamento para Internet
 
-Direitos Autorais Reservados (c) 2006 Ministério do Meio Ambiente Brasil
+Direitos Autorais Reservados (c) 2006 Minist&eacute;rio do Meio Ambiente Brasil
 Desenvolvedor: Edmar Moretti edmar.moretti@mma.gov.br
 
-Este programa é software livre; você pode redistribuí-lo
-e/ou modificá-lo sob os termos da Licença Pública Geral
+Este programa &eacute; software livre; voc&ecirc; pode redistribu&iacute;-lo
+e/ou modific&aacute;-lo sob os termos da Licen&ccedil;a P&uacute;blica Geral
 GNU conforme publicada pela Free Software Foundation;
 
-Este programa é distribuído na expectativa de que seja útil,
-porém, SEM NENHUMA GARANTIA; nem mesmo a garantia implícita
-de COMERCIABILIDADE OU ADEQUAÇÃO A UMA FINALIDADE ESPECÍFICA.
-Consulte a Licença Pública Geral do GNU para mais detalhes.
-Você deve ter recebido uma cópia da Licença Pública Geral do
-GNU junto com este programa; se não, escreva para a
-Free Software Foundation, Inc., no endereço
+Este programa &eacute; distribu&iacute;do na expectativa de que seja &uacute;til,
+por&eacute;m, SEM NENHUMA GARANTIA; nem mesmo a garantia impl&iacute;cita
+de COMERCIABILIDADE OU ADEQUA&Ccedil;&Atilde;O A UMA FINALIDADE ESPEC&Iacute;FICA.
+Consulte a Licen&ccedil;a P&uacute;blica Geral do GNU para mais detalhes.
+Voc&ecirc; deve ter recebido uma cópia da Licen&ccedil;a P&uacute;blica Geral do
+GNU junto com este programa; se n&atilde;o, escreva para a
+Free Software Foundation, Inc., no endere&ccedil;o
 59 Temple Street, Suite 330, Boston, MA 02111-1307 USA.
 
 Arquivo:
@@ -44,7 +44,7 @@ if (!function_exists('ms_GetVersion'))
 	@dl( 'php_mapscript.'.$s );
 	$ler_extensoes[] = 'php_mapscript';
 }
-//verificação de segurança
+//verifica&ccedil;&atilde;o de seguran&ccedil;a
 $_SESSION = array();
 session_name("i3GeoPHP");
 if(@$_GET["g_sid"])
@@ -112,7 +112,7 @@ function retornaWms($map_fileX,$postgis_mapa){
 	$mapa = ms_newMapObj($map_fileX);
 	$mapa->setProjection("init=epsg:4326");
 	//
-	//resolve o problema da seleção na versão nova do mapserver
+	//resolve o problema da sele&ccedil;&atilde;o na vers&atilde;o nova do mapserver
 	//
 	$qyfile = dirname($map_fileX)."/".$_GET["layer"].".php";
 	$qy = file_exists($qyfile);
@@ -172,7 +172,7 @@ function retornaWms($map_fileX,$postgis_mapa){
 		$escala->set("status",MS_OFF);
 	}
 	//
-	//se o layer não for do tipo fundo
+	//se o layer n&atilde;o for do tipo fundo
 	//
 	if(isset($_GET["tipolayer"]) && $_GET["tipolayer"] != "fundo")
 	{$o->set("transparent",MS_TRUE);}

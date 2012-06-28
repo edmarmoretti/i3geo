@@ -50,29 +50,31 @@ Veja:
 //
 //carrega as depend&ecirc;ncias
 //
-var scriptLocation = "";
-var scripts = document.getElementsByTagName('script');
-for (var i = 0; i < scripts.length; i++) {
-	var src = scripts[i].getAttribute('src');
-	if (src) {
-		var index = src.lastIndexOf("geradordelinks.js");
-		// is it found, at the end of the URL?
-		if ((index > -1) && (index + "geradordelinks.js".length == src.length)) {
-			scriptLocation = src.slice(0, -"geradordelinks.js".length);
-			break;
+(function(){
+	var scriptLocation = "";
+	var scripts = document.getElementsByTagName('script');
+	for (var i = 0; i < scripts.length; i++) {
+		var src = scripts[i].getAttribute('src');
+		if (src) {
+			var index = src.lastIndexOf("geradordelinks.js");
+			// is it found, at the end of the URL?
+			if ((index > -1) && (index + "geradordelinks.js".length == src.length)) {
+				scriptLocation = src.slice(0, -"geradordelinks.js".length);
+				break;
+			}
 		}
 	}
-}
-var allScriptTags = "";
-var jsfiles = [];
-//jsfiles[0] = "i3geo_tudo_compacto.js.php"
-jsfiles[0] = "../pacotes/openlayers/OpenLayers211.js.php";
-for (var i = 0; i < jsfiles.length; i++)
-{
-	var currentScriptTag = "<script src='" + scriptLocation + jsfiles[i] + "'></script>";
-	allScriptTags += currentScriptTag;
-}
-document.write(allScriptTags);
+	var allScriptTags = "";
+	var jsfiles = [];
+	//jsfiles[0] = "i3geo_tudo_compacto.js.php"
+	jsfiles[0] = "../pacotes/openlayers/OpenLayers211.js.php";
+	for (var i = 0; i < jsfiles.length; i++)
+	{
+		var currentScriptTag = "<script src='" + scriptLocation + jsfiles[i] + "'></script>";
+		allScriptTags += currentScriptTag;
+	}
+	document.write(allScriptTags);
+})();
 /* 
 Classe: i3geo_gl_configura
 

@@ -3,7 +3,7 @@
 /*
 Title: Editor de legenda
 
-Define a forma de representação de um tema, modificando o tipo de classificação e os símbolos utilizados em cada classe
+Define a forma de representa&ccedil;ão de um tema, modificando o tipo de classifica&ccedil;ão e os s&iacute;mbolos utilizados em cada classe
 
 Veja:
 
@@ -19,20 +19,20 @@ GPL2
 
 i3Geo Interface Integrada de Ferramentas de Geoprocessamento para Internet
 
-Direitos Autorais Reservados (c) 2006 Ministério do Meio Ambiente Brasil
+Direitos Autorais Reservados (c) 2006 Minist&eacute;rio do Meio Ambiente Brasil
 Desenvolvedor: Edmar Moretti edmar.moretti@mma.gov.br
 
-Este programa é software livre; você pode redistribuí-lo
-e/ou modificá-lo sob os termos da Licença Pública Geral
+Este programa &eacute; software livre; voc&ecirc; pode redistribu&iacute;-lo
+e/ou modific&aacute;-lo sob os termos da Licen&ccedil;a P&uacute;blica Geral
 GNU conforme publicada pela Free Software Foundation;
 
-Este programa é distribuído na expectativa de que seja útil,
-porém, SEM NENHUMA GARANTIA; nem mesmo a garantia implícita
-de COMERCIABILIDADE OU ADEQUAÇÃO A UMA FINALIDADE ESPECÍFICA.
-Consulte a Licença Pública Geral do GNU para mais detalhes.
-Você deve ter recebido uma cópia da Licença Pública Geral do
+Este programa &eacute; distribu&iacute;do na expectativa de que seja &uacute;til,
+por&eacute;m, SEM NENHUMA GARANTIA; nem mesmo a garantia impl&iacute;cita
+de COMERCIABILIDADE OU ADEQUAÇÃO A UMA FINALIDADE ESPEC&Iacute;FICA.
+Consulte a Licen&ccedil;a P&uacute;blica Geral do GNU para mais detalhes.
+Voc&ecirc; deve ter recebido uma c&oacute;pia da Licen&ccedil;a P&uacute;blica Geral do
 GNU junto com este programa; se não, escreva para a
-Free Software Foundation, Inc., no endereço
+Free Software Foundation, Inc., no endere&ccedil;o
 59 Temple Street, Suite 330, Boston, MA 02111-1307 USA.
 */
 
@@ -53,7 +53,7 @@ i3GEOF.legenda = {
 	/*
 	Variavel: aviso
 	
-	Indica que uma alteração ainda não foi salva
+	Indica que uma altera&ccedil;ão ainda não foi salva
 	
 	Type:
 	{boolean}
@@ -62,7 +62,7 @@ i3GEOF.legenda = {
 	/*
 	Variavel: tema
 	
-	Tema que será utilizado
+	Tema que ser&aacute; utilizado
 	
 	Type:
 	{string}
@@ -71,19 +71,19 @@ i3GEOF.legenda = {
 	/*
 	Variavel: dadosGrafico
 	
-	Dados utilizados no gráfico no formato da ferramenta graficointerativo
+	Dados utilizados no gr&aacute;fico no formato da ferramenta graficointerativo
 	*/
 	dadosGrafico: "",
 	/*
 	Variavel: aguarde
 	
-	Estilo do objeto DOM com a imagem de aguarde existente no cabeçalho da janela.
+	Estilo do objeto DOM com a imagem de aguarde existente no cabe&ccedil;alho da janela.
 	*/
 	aguarde: "",
 	/*
 	Variavel: estilos
 	
-	Estilos existentes em um símbolo de uma classe
+	Estilos existentes em um s&iacute;mbolo de uma classe
 	*/
 	estilos: "",
 	/*
@@ -101,11 +101,11 @@ i3GEOF.legenda = {
 	/*
 	Function: inicia
 	
-	Inicia a ferramenta. É chamado por criaJanelaFlutuante
+	Inicia a ferramenta. &Eacute; chamado por criaJanelaFlutuante
 	
 	Parametro:
 	
-	iddiv {String} - id do div que receberá o conteudo HTML da ferramenta
+	iddiv {String} - id do div que receber&aacute; o conteudo HTML da ferramenta
 	*/
 	inicia: function(iddiv){
 		i3GEO.janela.comboCabecalhoTemas("i3GEOFlegendaComboCabeca","i3GEOFlegendaComboCabecaSel","legenda","ligados");
@@ -126,7 +126,7 @@ i3GEOF.legenda = {
 			$i("i3GEOlegendaguia2").onclick = function()
 			{i3GEO.guias.mostraGuiaFerramenta("i3GEOlegendaguia2","i3GEOlegendaguia");};
 			$i("i3GEOlegendaguia3").onclick = function(){
-				alert("Para acessar o editor, clique em um símbolo na guia 'Legenda'");
+				alert("Para acessar o editor, clique em um s&iacute;mbolo na guia 'Legenda'");
 			};
 			$i("i3GEOlegendaguia4").onclick = function(){
 				i3GEOF.legenda.mostraGrafico();
@@ -289,11 +289,11 @@ i3GEOF.legenda = {
 	/*
 	Function: html
 	
-	Gera o código html para apresentação das opções da ferramenta
+	Gera o c&oacute;digo html para apresenta&ccedil;ão das op&ccedil;&otilde;es da ferramenta
 	
 	Retorno:
 	
-	String com o código html
+	String com o c&oacute;digo html
 	*/
 	html:function(){
 		var ins = '' +
@@ -309,9 +309,9 @@ i3GEOF.legenda = {
 		'</div><br>'+
 		'<div id=i3GEOlegendaguia6obj style="width:99%;text-align:left;">'+
 		'	<p class=paragrafo >&nbsp;<input type=checkbox onclick="" checked id=i3GEOFlegendamostra style="cursor:pointer;border:0px solid white;" /> <span style="cursor:pointer;position:relative;top:-2px;">Mostra as classes desse tema na legenda do mapa</span></p>' +
-		'	<p class=paragrafo ><input id=i3GEOlegendabotao3 type="button" value="Inclui número de ocorrências" title="incluir o número de ocorrências no nome de cada classe"></p>' +
-		'	<p class=paragrafo ><input id=i3GEOlegendabotao15 type="button" value="Aplica opacidade variável" title="aplicar opacidade nas classes existente, variando de 10 até 100"></p>' +
-		'	<p class=paragrafo ><input id=i3GEOlegendabotaoRamp type="button" size=15 value="Escolher paleta de cores" title="escolher e aplicar as variações de cores, entre dois extremos, nas classes existentes"></p>' +
+		'	<p class=paragrafo ><input id=i3GEOlegendabotao3 type="button" value="Inclui n&uacute;mero de ocorr&ecirc;ncias" title="incluir o n&uacute;mero de ocorr&ecirc;ncias no nome de cada classe"></p>' +
+		'	<p class=paragrafo ><input id=i3GEOlegendabotao15 type="button" value="Aplica opacidade vari&aacute;vel" title="aplicar opacidade nas classes existente, variando de 10 at&eacute; 100"></p>' +
+		'	<p class=paragrafo ><input id=i3GEOlegendabotaoRamp type="button" size=15 value="Escolher paleta de cores" title="escolher e aplicar as varia&ccedil;&otilde;es de cores, entre dois extremos, nas classes existentes"></p>' +
 		'	<p class=paragrafo >Gerar cores</p>' +
 		'	<table summary="" class=lista5 >' + 
 		'		<tr>' +
@@ -327,51 +327,51 @@ i3GEOF.legenda = {
 		'			</td>' +
 		'			<td><img alt="aquarela.gif" style=cursor:pointer src="'+i3GEO.configura.locaplic+'/imagens/aquarela.gif" onclick="i3GEOF.legenda.corj(\'i3GEOlegendaacorf\')" /> ' +
 		'			</td>' +
-		'			<td><input id=i3GEOlegendabotao4 type="button" size=15 value="Aplicar" title="aplicar variações de cores, entre dois extremos, nas classes existentes"></td>' +		
+		'			<td><input id=i3GEOlegendabotao4 type="button" size=15 value="Aplicar" title="aplicar varia&ccedil;&otilde;es de cores, entre dois extremos, nas classes existentes"></td>' +		
 		'		</tr>' +
 		'	</table>' +
 		'</div>' +
 		'<div id=i3GEOlegendaguia1obj style="width:99%;text-align:left;">'+
 		'	<table summary="" class=lista5 ><tr>' +
-		'	<td><input id=i3GEOlegendabotao1 size="22" type="button" value="Aplicar alterações" ></td>'+
+		'	<td><input id=i3GEOlegendabotao1 size="22" type="button" value="Aplicar altera&ccedil;&otilde;es" ></td>'+
 		'	<td><input id=i3GEOlegendabotao2 size="22" type="button" value="Adicionar classe" title="adicionar uma nova classe na legenda" ></td>' +
 		'	</tr></table><br>' +
-		'	<p class=paragrafo >Clique no símbolo da classe para alterar</p>' +
+		'	<p class=paragrafo >Clique no s&iacute;mbolo da classe para alterar</p>' +
 		'	<div id="i3GEOlegendaresultado" style="text-align:left;width:100%;display:block;left:0px">' +
 		'	</div>'+
 		'</div>'+
 		'<div id=i3GEOlegendaguia2obj style="width:99%;text-align:left;">'+
-		'	<p class=paragrafo >&nbsp;<input type=checkbox onclick="" checked id=i3GEOFlegendaaplicaextent style="cursor:pointer;border:0px solid white;" /> <span style="cursor:pointer;position:relative;top:-2px;">marque para considerar apenas os elementos visíveis na extensão geográfica atual, caso contrário, será considerada a extensão geográfica inicial do mapa</span></p>' +
-		'	<p class=paragrafo >Ao gerar as classes, ignorar os valores (separe com vírgula):<br>'+
+		'	<p class=paragrafo >&nbsp;<input type=checkbox onclick="" checked id=i3GEOFlegendaaplicaextent style="cursor:pointer;border:0px solid white;" /> <span style="cursor:pointer;position:relative;top:-2px;">marque para considerar apenas os elementos vis&iacute;veis na extensão geogr&aacute;fica atual, caso contr&aacute;rio, ser&aacute; considerada a extensão geogr&aacute;fica inicial do mapa</span></p>' +
+		'	<p class=paragrafo >Ao gerar as classes, ignorar os valores (separe com v&iacute;rgula):<br>'+
 		$inputText("","","i3GEOlegendaignorar","",20,"") +
-		'	<hr><p class=paragrafo >Transforma a representação geométrica dos elementos do tema. Após alterar esse parâmetro, pode ser necessário modificar as características do símbolo.</p>'+
+		'	<hr><p class=paragrafo >Transforma a representa&ccedil;ão geom&eacute;trica dos elementos do tema. Ap&oacute;s alterar esse parâmetro, pode ser necess&aacute;rio modificar as caracter&iacute;sticas do s&iacute;mbolo.</p>'+
 		'	<p class=paragrafo >' +
 		'	<select id=i3GEOlegentaTipoGeo >'+
-		'		<option value="">nenhuma transformação</option>'+		
-		'		<option value="centroid">centróide</option>'+
+		'		<option value="">nenhuma transforma&ccedil;ão</option>'+		
+		'		<option value="centroid">centr&oacute;ide</option>'+
 		'		<option value="bbox">box</option>'+
-		'		<option value="vertices">vértices</option>'+
-		'		<option value="start">vértice inicial</option>'+
-		'		<option value="end">vértice final</option>'+
+		'		<option value="vertices">v&eacute;rtices</option>'+
+		'		<option value="start">v&eacute;rtice inicial</option>'+
+		'		<option value="end">v&eacute;rtice final</option>'+
 		'	</select>'+
 		'	<p class=paragrafo >' +
 		'	<input id=i3GEOlegendabotao17 size="35" type="button" value="Altera geometria"></p>'+
-		'	<hr><p class=paragrafo >Altera o tipo de representação do tema. Se for poligonal, passa para linear e vice-versa.</p>'+
+		'	<hr><p class=paragrafo >Altera o tipo de representa&ccedil;ão do tema. Se for poligonal, passa para linear e vice-versa.</p>'+
 		'	<p class=paragrafo ><input id=i3GEOlegendabotao7 size="25" type="button" value="Altera tipo"></p>'+
-		'	<hr><p class=paragrafo >Todos os elementos serão desenhados com um único símbolo</p>'+
-		'	<p class=paragrafo ><input id=i3GEOlegendabotao5 size="25" type="button" value="Símbolo único"></p>'+
-		'	<hr><p class=paragrafo >Cada ocorrência de um valor para o item selecionado, será desenhado com o mesmo símbolo</p>'+
+		'	<hr><p class=paragrafo >Todos os elementos serão desenhados com um &uacute;nico s&iacute;mbolo</p>'+
+		'	<p class=paragrafo ><input id=i3GEOlegendabotao5 size="25" type="button" value="S&iacute;mbolo &uacute;nico"></p>'+
+		'	<hr><p class=paragrafo >Cada ocorr&ecirc;ncia de um valor para o item selecionado, ser&aacute; desenhado com o mesmo s&iacute;mbolo</p>'+
 		'	<div id="i3GEOlegendaitens" style="text-align:left;" ></div><br>'+
-		'	<p class=paragrafo ><input id=i3GEOlegendabotao6 size="25" type="button" value="Valor único"></p>'+
-		'	<hr><p class=paragrafo >Cria classes para um item numérico utilizando um número fixo de classes (o item utilizado é o mesmo indicado acima)</p>'+
-		'	<p class=paragrafo >Número de classes:'+
+		'	<p class=paragrafo ><input id=i3GEOlegendabotao6 size="25" type="button" value="Valor &uacute;nico"></p>'+
+		'	<hr><p class=paragrafo >Cria classes para um item num&eacute;rico utilizando um n&uacute;mero fixo de classes (o item utilizado &eacute; o mesmo indicado acima)</p>'+
+		'	<p class=paragrafo >N&uacute;mero de classes:'+
 		$inputText("","","i3GEOlegendanclasses","",3,"5") +
 		'	<p class=paragrafo ><input id=i3GEOlegendabotao8 size="25" type="button" value="Intervalos iguais">'+
-		'	<hr><p class=paragrafo >Cria classes para um item numérico utilizando os quartis (o item utilizado é o mesmo indicado acima)</p>'+
+		'	<hr><p class=paragrafo >Cria classes para um item num&eacute;rico utilizando os quartis (o item utilizado &eacute; o mesmo indicado acima)</p>'+
 		'	<p class=paragrafo ><input id=i3GEOlegendabotao9 size="25" type="button" value="Quartis">'+
 		'	<p class=paragrafo >Estilo dos nomes das classes: ' +
 		'	<select id=estiloClassesQuartis >' +
-		'	<option value=minimo select >só os valores</option>' +
+		'	<option value=minimo select >s&oacute; os valores</option>' +
 		'	<option value=simples select >quartil e os valores</option>' +
 		'	<option value=completo select >expressão completa</option>' +
 		'	</select></p>' +
@@ -388,7 +388,7 @@ i3GEOF.legenda = {
 		'	</fieldset><br>'+
 		'	<fieldset style="padding:5px;margin:2px;">'+
 		'	<legend>Estilos</legend>'+
-		'		<p class=paragrafo style="font-size:10px;">Cada símbolo pode ser formado por um ou mais estilos. Utilize -1,-1,-1 para anular uma cor. A cor deve ser definida no formato vermelho,verde,azul. Para criar linhas tracejadas utilize o símbolo 0 ou vazio e digite um padrão de repetição como por exemplo 2 10 2 10 <br></p>'+
+		'		<p class=paragrafo style="font-size:10px;">Cada s&iacute;mbolo pode ser formado por um ou mais estilos. Utilize -1,-1,-1 para anular uma cor. A cor deve ser definida no formato vermelho,verde,azul. Para criar linhas tracejadas utilize o s&iacute;mbolo 0 ou vazio e digite um padrão de repeti&ccedil;ão como por exemplo 2 10 2 10 <br></p>'+
 		'		<div id="i3GEOlegendacomboestilos" style="position:relative;top:0px;left:0px;text-align:left">'+
 		'		</div>'+
 		'		<br><p class=paragrafo style="font-size:10px" ><input id=i3GEOlegendabotao10 size="35" type="button" value="Aplicar as altera&ccedil;&otilde;es"></p>'+
@@ -401,7 +401,7 @@ i3GEOF.legenda = {
 		'<div id=i3GEOlegendaguia4obj style="width:99%;text-align:left;">'+
 		'</div>'+
 		'<div id=i3GEOlegendaguia5obj style="width:99%;text-align:left;">'+
-		'	<p class=paragrafo >Gera um arquivo XML, no padrão SLD, contendo a legenda atual da camada. Para maiores informações, veja <a href="http://mapserver.org/ogc/sld.html#sld" target=_blank >Mapserver SLD</a> (O SLD só é gerado ou aplicado corretamente em camadas que utilizam expressões simples e o elemento CLASSITEM)'+
+		'	<p class=paragrafo >Gera um arquivo XML, no padrão SLD, contendo a legenda atual da camada. Para maiores informa&ccedil;&otilde;es, veja <a href="http://mapserver.org/ogc/sld.html#sld" target=_blank >Mapserver SLD</a> (O SLD s&oacute; &eacute; gerado ou aplicado corretamente em camadas que utilizam express&otilde;es simples e o elemento CLASSITEM)'+
 		'	<p class=paragrafo ><input id=i3GEOlegendabotaoSLDe size="25" type="button" value="Exportar SLD"></p>'+
 		'	<p class=paragrafo >Aplica um arquivo SLD à camada ativa' +
 		'	<p class=paragrafo ><input id=i3GEOlegendabotaoSLDi size="25" type="button" value="Aplicar SLD"></p>'+		
@@ -467,7 +467,7 @@ i3GEOF.legenda = {
 	/*
 	Function: aposAlterarLegenda
 	
-	Função executada após ocorrer alguma alteração efetiva da legenda do mapa
+	Fun&ccedil;ão executada ap&oacute;s ocorrer alguma altera&ccedil;ão efetiva da legenda do mapa
 	*/
 	aposAlterarLegenda: function(){
 		i3GEO.atualiza();
@@ -497,11 +497,11 @@ i3GEOF.legenda = {
 	/*
 	Function: montaLegenda
 	
-	Formata a tabela de edição da legenda
+	Formata a tabela de edi&ccedil;ão da legenda
 	
 	Parametro:
 	
-	retorno - objeto contendo os dados para formatação da legenda
+	retorno - objeto contendo os dados para formata&ccedil;ão da legenda
 	*/
 	montaLegenda: function(retorno){
 		i3GEOF.legenda.aviso = false;
@@ -538,12 +538,12 @@ i3GEOF.legenda = {
 					$i("i3GEOlegendaresultado").innerHTML = ins.join("");
 				}
 				else{
-					ajuda = "<br><p class=paragrafo >Para aplicar um ajuste entre 0 e 255 cores, utilize a opção 'Escala de Cores'." +
+					ajuda = "<br><p class=paragrafo >Para aplicar um ajuste entre 0 e 255 cores, utilize a op&ccedil;ão 'Escala de Cores'." +
 					"<p class=paragrafo >O valor de SCALE= pode ser a palavra AUTO (SCALE=AUTO) ou um valor m&iacute;nimo e m&aacute;ximo (por exemplo SCALE=20,3000)." +
 					"<p class=paragrafo >Voc&ecirc; pode aplicar a escala em bandas individuais, para isso, utilize SCALE_n, por exemplo SCALE_1=AUTO SCALE_2=200,500." +
 					"<p class=paragrafo >Para escolher quais bandas ser&atilde;o utilizadas e qual sua ordem, utilize a op&ccedil;&atilde;o BANDAS." +
 					"Utilize, por exemplo, BANDS=1,2,3 BANDS=1 ." +
-					"<p class=paragrafo >Para alterar o modo de amostragem, utilize RESAMPLE com uma das opções: AVERAGE,NEAREST ou BILINEAR.";
+					"<p class=paragrafo >Para alterar o modo de amostragem, utilize RESAMPLE com uma das op&ccedil;&otilde;es: AVERAGE,NEAREST ou BILINEAR.";
 					ins = "<p class=paragrafo >Voc&ecirc; pode incluir processos na imagem para modificar as caracter&iacute;sticas de visualiza&ccedil;&atilde;o<br><br>Adicionar processo:" +
 					"<select onchange=i3GEOF.legenda.adicionaProcesso(this) >" +
 					"<option value='' >selecione o processo</option>" +
@@ -574,18 +574,18 @@ i3GEOF.legenda = {
 			{$i("i3GEOlegendaresultado").innerHTML = "<p style=color:red >Ocorreu um erro<br>";}
 			i3GEOF.legenda.aguarde.visibility = "hidden";
 		}
-		catch(e){alert("Não é possível editar a legenda desse tema");i3GEOF.legenda.aguarde.visibility = "hidden";}
+		catch(e){alert("Não &eacute; poss&iacute;vel editar a legenda desse tema");i3GEOF.legenda.aguarde.visibility = "hidden";}
 	},
 	/*
 	Function: aviso
 	
-	Mostra um alerta ao usuário quando um campo da tabela que contém os dados da legenda é alterado
+	Mostra um alerta ao usu&aacute;rio quando um campo da tabela que cont&eacute;m os dados da legenda &eacute; alterado
 	
-	O aviso é mostrado apenas uma vez
+	O aviso &eacute; mostrado apenas uma vez
 	*/
 	aviso: function(){
 		if(i3GEOF.legenda.aviso == true){
-			alert("Clique em 'Aplicar' para que as alteraçõpes sejam salvas");
+			alert("Clique em 'Aplicar' para que as altera&ccedil;&otilde;pes sejam salvas");
 			i3GEOF.legenda.aviso == false;
 		}
 	},
@@ -615,7 +615,7 @@ i3GEOF.legenda = {
 	/*
 	Function: corj
 	
-	Abre a janela para o usuário selecionar uma cor interativamente
+	Abre a janela para o usu&aacute;rio selecionar uma cor interativamente
 	*/
 	corj: function(obj)
 	{i3GEO.util.abreCor("",obj);},
@@ -720,7 +720,7 @@ i3GEOF.legenda = {
 	/*
 	Function: alteraGeometria
 	
-	Altera o tipo de representação geométrica dos elementos de um layer
+	Altera o tipo de representa&ccedil;ão geom&eacute;trica dos elementos de um layer
 	
 	Veja:
 	
@@ -743,7 +743,7 @@ i3GEOF.legenda = {
 	/*
 	Function: adicionaConta
 	
-	Adiciona ao nome de cada classe o número de ocorrências em cada uma
+	Adiciona ao nome de cada classe o n&uacute;mero de ocorr&ecirc;ncias em cada uma
 	
 	Veja:
 	
@@ -757,7 +757,7 @@ i3GEOF.legenda = {
 			cp = new cpaint();
 		cp.set_response_type("JSON");
 		cp.call(p,"contagemclasse",i3GEOF.legenda.montaLegenda);
-		alert("A contagem considera apenas os elementos visíveis na abrangência do mapa");
+		alert("A contagem considera apenas os elementos vis&iacute;veis na abrang&ecirc;ncia do mapa");
 	},
 	/*
 	Function: adicionaClasse
@@ -779,7 +779,7 @@ i3GEOF.legenda = {
 	/*
 	Function: adicionaOpacidade
 	
-	Adiciona opacidade variável em cada classe
+	Adiciona opacidade vari&aacute;vel em cada classe
 	
 	Veja:
 	
@@ -829,7 +829,7 @@ i3GEOF.legenda = {
 	/*
 	Function: inverteCores
 	
-	Inverte as cores utilizadas nos símbolos das classes
+	Inverte as cores utilizadas nos s&iacute;mbolos das classes
 	
 	Veja:
 	
@@ -855,7 +855,7 @@ i3GEOF.legenda = {
 	/*
 	Function: calculaTamanho
 	
-	Muda o símbolo de cada classe aplicando tamanhos diferentes e lineares
+	Muda o s&iacute;mbolo de cada classe aplicando tamanhos diferentes e lineares
 	
 	Veja:
 	
@@ -881,7 +881,7 @@ i3GEOF.legenda = {
 	/*
 	Function: excluilinhaf
 	
-	Exclui uma linha da tabela de edição de classes da legendda
+	Exclui uma linha da tabela de edi&ccedil;ão de classes da legendda
 	*/
 	excluilinhaf: function(celula){
 		var p = celula.parentNode.parentNode;
@@ -894,7 +894,7 @@ i3GEOF.legenda = {
 	/*
 	Function: sobelinhaf
 	
-	Sobe uma linha na tabela de edição de classes da legendda
+	Sobe uma linha na tabela de edi&ccedil;ão de classes da legendda
 	*/
 	sobelinhaf: function(idclasse){
 		if(i3GEOF.legenda.aguarde.visibility === "visible")
@@ -912,7 +912,7 @@ i3GEOF.legenda = {
 	/*
 	Function: descelinhaf
 	
-	Desce uma linha na tabela de edição de classes da legendda
+	Desce uma linha na tabela de edi&ccedil;ão de classes da legendda
 	*/
 	descelinhaf: function(idclasse){
 		if(i3GEOF.legenda.aguarde.visibility === "visible")
@@ -930,7 +930,7 @@ i3GEOF.legenda = {
 	/*
 	Function: editaSimbolo
 	
-	Abre o editor de símbolos
+	Abre o editor de s&iacute;mbolos
 	
 	Veja:
 	
@@ -955,7 +955,7 @@ i3GEOF.legenda = {
 	/*
 	Function: simbU
 	
-	Altera a leganda do tema para o tipo símbolo único
+	Altera a leganda do tema para o tipo s&iacute;mbolo &uacute;nico
 	
 	Veja:
 	
@@ -980,7 +980,7 @@ i3GEOF.legenda = {
 	/*
 	Function: valorU
 	
-	Altera a leganda do tema para o tipo valor único
+	Altera a leganda do tema para o tipo valor &uacute;nico
 	
 	Veja:
 	
@@ -1015,7 +1015,7 @@ i3GEOF.legenda = {
 	/*
 	Function: valorC
 	
-	Altera a leganda do tema com um número específico de classes
+	Altera a leganda do tema com um n&uacute;mero espec&iacute;fico de classes
 
 	Veja:
 	
@@ -1044,7 +1044,7 @@ i3GEOF.legenda = {
 	/*
 	Function: valorQ
 	
-	Altera a leganda do tema claculando as classes pelo método quartil
+	Altera a leganda do tema claculando as classes pelo m&eacute;todo quartil
 
 	Veja:
 	
@@ -1072,7 +1072,7 @@ i3GEOF.legenda = {
 	/*
 	Function: representacao
 	
-	Altera o tipo de representação do tema (linear ou poligonoal)
+	Altera o tipo de representa&ccedil;ão do tema (linear ou poligonoal)
 	
 	Veja:
 	
@@ -1098,7 +1098,7 @@ i3GEOF.legenda = {
 	/*
 	Function: montaEditor
 	
-	Monta o editor de símbolos quando o usuário clica em um símbolo na legenda
+	Monta o editor de s&iacute;mbolos quando o usu&aacute;rio clica em um s&iacute;mbolo na legenda
 	*/
 	montaEditor: function(retorno){
 		try{
@@ -1130,7 +1130,7 @@ i3GEOF.legenda = {
 				botoes += "&nbsp;<input id=i3GEOlegendabotao12 class=executar size=14 type=buttom value='adicionar' />";
 				botoes += "&nbsp;<input id=i3GEOlegendabotao13 class=executar size=8 type=buttom value='sobe' />";
 				botoes += "&nbsp;<input id=i3GEOlegendabotao14 class=executar size=8 type=buttom value='desce' />";
-				$i("i3GEOlegendacomboestilos").innerHTML = "<table class='lista5'><tr><td><span class=paragrafo >Estilo em edição:</span></td><td>"+combo+"</td><td>"+botoes+"</td></tr></table>&nbsp;(pós adicionar ou excluir, aplique a alteração)<br><br>";
+				$i("i3GEOlegendacomboestilos").innerHTML = "<table class='lista5'><tr><td><span class=paragrafo >Estilo em edi&ccedil;ão:</span></td><td>"+combo+"</td><td>"+botoes+"</td></tr></table>&nbsp;(p&oacute;s adicionar ou excluir, aplique a altera&ccedil;ão)<br><br>";
 				new YAHOO.widget.Button(
 					"i3GEOlegendabotao11",{onclick:{fn: function(){
 						try{
@@ -1203,7 +1203,7 @@ i3GEOF.legenda = {
 	/*
 	Function: mostraEstilo
 	
-	Mostra as propriedades de um estilo de um símbolo
+	Mostra as propriedades de um estilo de um s&iacute;mbolo
 	*/
 	mostraEstilo: function(e){
 		i3GEOF.legenda.aguarde.visibility = "visible";
@@ -1222,13 +1222,13 @@ i3GEOF.legenda = {
 			"<tr><td style='text-align:left;'>Cor da frente:</td><td>"+
 			$inputText("","","i3GEOlegendacolor","",12,linha[4]) +
 			"</td><td><img style=cursor:pointer src='"+i3GEO.configura.locaplic+"/imagens/aquarela.gif' onclick=\"i3GEOF.legenda.corj('i3GEOlegendacolor')\" /></td></tr>"+
-			"<tr><td style='text-align:left;'>Tamanho/espaçamento:</td><td>"+
+			"<tr><td style='text-align:left;'>Tamanho/espa&ccedil;amento:</td><td>"+
 			$inputText("","","i3GEOlegendasizes","",12,linha[6]) +
 			"</td><td></td></tr>" +
 			"<tr><td style='text-align:left;'>Espessura:</td><td>"+
 			$inputText("","","i3GEOlegendawidth","",12,linha[8]) +
 			"</td><td></td></tr>" +	
-			"<tr><td style='text-align:left;'>Padrão de repetição:</td><td>"+
+			"<tr><td style='text-align:left;'>Padrão de repeti&ccedil;ão:</td><td>"+
 			$inputText("","","i3GEOlegendapattern","",12,linha[9]) +
 			"</td><td></td></tr>" +				
 			"<tr><td style='text-align:left;'>Opacidade:</td><td>"+
@@ -1252,7 +1252,7 @@ i3GEOF.legenda = {
 	/*
 	Function: listaSimbolos
 	
-	Monta a lista de símbolos com imagem
+	Monta a lista de s&iacute;mbolos com imagem
 	*/
 	listaSimbolos: function(retorno){
 		i3GEOF.legenda.aguarde.visibility = "visible";
@@ -1270,7 +1270,7 @@ i3GEOF.legenda = {
 	/*
 	Function: aplicaSimbolo
 	
-	Muda o valor do campo com o código do símbolo escolhido
+	Muda o valor do campo com o c&oacute;digo do s&iacute;mbolo escolhido
 	*/
 	aplicaSimbolo: function(s)
 	{$i("i3GEOlegendasymbolname").value = s.title;},
@@ -1325,7 +1325,7 @@ i3GEOF.legenda = {
 	/*
 	Function: reMontaEditor
 	
-	Gera novamente o editor de símbolo após ter sido feita alguma alteração nos estilos
+	Gera novamente o editor de s&iacute;mbolo ap&oacute;s ter sido feita alguma altera&ccedil;ão nos estilos
 	*/
 	reMontaEditor: function(){
 		var id = i3GEOF.legenda.tema+"-"+i3GEOF.legenda.classe;
@@ -1334,7 +1334,7 @@ i3GEOF.legenda = {
 	/*
 	Function: mostraGrafico
 	
-	Mostra um gráfico com a contegem de elementos em caada classe
+	Mostra um gr&aacute;fico com a contegem de elementos em caada classe
 	
 	Veja:
 	
@@ -1349,8 +1349,8 @@ i3GEOF.legenda = {
 					if (retorno.data[0].proc == "") //o layer nao deve ser raster
 					{
 						var ins = [],i,re,t;
-						ins.push("<p class='paragrafo' ><input type=button value='Gráfico de pizza' id=i3GEOlegendaGraficoPizza /></p>");
-						ins.push("<p class='paragrafo' >Número de ocorrências em cada classe (n)</p>");
+						ins.push("<p class='paragrafo' ><input type=button value='Gr&aacute;fico de pizza' id=i3GEOlegendaGraficoPizza /></p>");
+						ins.push("<p class='paragrafo' >N&uacute;mero de ocorr&ecirc;ncias em cada classe (n)</p>");
 						ins.push("<table width=100% >");
 						i3GEOF.legenda.dadosGrafico = ["n;x"];
 						if(retorno.data.length < 2){
@@ -1406,7 +1406,7 @@ i3GEOF.legenda = {
 	/*
 	Function: aplicaProcessos
 	
-	Aplica processos de ajuste em imagens de satélite
+	Aplica processos de ajuste em imagens de sat&eacute;lite
 	
 	Veja:
 	

@@ -2,12 +2,12 @@
 /*
 Title: pega_variaveis.php
 
-Processa os arrays $_GET e $_POST, transformando-os em variáveis conforme as chaves.
+Processa os arrays $_GET e $_POST, transformando-os em vari&aacute;veis conforme as chaves.
 
-Deve ser incluído sempre no início dos programas em PHP utilizados pelo i3Geo, evitando que o parâmetro "REGISTER_GLOBALS" 
+Deve ser inclu&iacute;do sempre no in&iacute;cio dos programas em PHP utilizados pelo i3Geo, evitando que o par&acirc;metro "REGISTER_GLOBALS" 
 do PHP precise ser definido como "On".
 
-No caso do uso de POST do lado cliente com a biblioteca CPAINT, é feito o processamento
+No caso do uso de POST do lado cliente com a biblioteca CPAINT, &eacute; feito o processamento
 dos argumentos definidos na chamada call. Para fazer a chamada utilizando-se POST, deve-se seguir o exemplo abaixo:
 
 	var cp = new cpaint();
@@ -21,7 +21,7 @@ dos argumentos definidos na chamada call. Para fazer a chamada utilizando-se POS
 	cp.call(p,"criaSHPvazio",ativanovotema,"funcao=criashpvazio,tema=teste");
 	
 	
-O parâmetro "funcao=criashpvazio,tema=teste" será transformado em variáveis, ou seja,
+O par&acirc;metro "funcao=criashpvazio,tema=teste" ser&aacute; transformado em vari&aacute;veis, ou seja,
 
 $funcao = "v";
 
@@ -33,20 +33,20 @@ GPL2
 
 i3Geo Interface Integrada de Ferramentas de Geoprocessamento para Internet
 
-Direitos Autorais Reservados (c) 2006 Ministério do Meio Ambiente Brasil
+Direitos Autorais Reservados (c) 2006 Minist&eacute;rio do Meio Ambiente Brasil
 Desenvolvedor: Edmar Moretti edmar.moretti@mma.gov.br
 
-Este programa é software livre; você pode redistribuí-lo
-e/ou modificá-lo sob os termos da Licença Pública Geral
+Este programa &eacute; software livre; voc&ecirc; pode redistribu&iacute;-lo
+e/ou modific&aacute;-lo sob os termos da Licen&ccedil;a P&uacute;blica Geral
 GNU conforme publicada pela Free Software Foundation;
 
-Este programa é distribuído na expectativa de que seja útil,
-porém, SEM NENHUMA GARANTIA; nem mesmo a garantia implícita
-de COMERCIABILIDADE OU ADEQUAÇÃO A UMA FINALIDADE ESPECÍFICA.
-Consulte a Licença Pública Geral do GNU para mais detalhes.
-Você deve ter recebido uma cópia da Licença Pública Geral do
-GNU junto com este programa; se não, escreva para a
-Free Software Foundation, Inc., no endereço
+Este programa &eacute; distribu&iacute;do na expectativa de que seja &uacute;til,
+por&eacute;m, SEM NENHUMA GARANTIA; nem mesmo a garantia impl&iacute;cita
+de COMERCIABILIDADE OU ADEQUA&Ccedil;&Atilde;O A UMA FINALIDADE ESPEC&Iacute;FICA.
+Consulte a Licen&ccedil;a P&uacute;blica Geral do GNU para mais detalhes.
+Voc&ecirc; deve ter recebido uma cópia da Licen&ccedil;a P&uacute;blica Geral do
+GNU junto com este programa; se n&atilde;o, escreva para a
+Free Software Foundation, Inc., no endere&ccedil;o
 59 Temple Street, Suite 330, Boston, MA 02111-1307 USA.
 
 Arquivo:

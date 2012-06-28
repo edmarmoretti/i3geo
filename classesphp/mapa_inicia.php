@@ -4,9 +4,9 @@ Title: mapa_inicia.php
 
 Inicia um novo mapa.
 
-Gera as imagens necessárias para abrir o mapa e calcula um conjunto de variáveis necessárias
-ao funcionamento do i3Geo. Os dados são devolvidos como um objeto json. Conforme a interface
-que será utilizada pelo mapa, são feitos ajustes específicos.
+Gera as imagens necess&aacute;rias para abrir o mapa e calcula um conjunto de vari&aacute;veis necess&aacute;rias
+ao funcionamento do i3Geo. Os dados s&atilde;o devolvidos como um objeto json. Conforme a interface
+que ser&aacute; utilizada pelo mapa, s&atilde;o feitos ajustes espec&iacute;ficos.
 
 Licenca:
 
@@ -14,20 +14,20 @@ GPL2
 
 i3Geo Interface Integrada de Ferramentas de Geoprocessamento para Internet
 
-Direitos Autorais Reservados (c) 2006 Ministério do Meio Ambiente Brasil
+Direitos Autorais Reservados (c) 2006 Minist&eacute;rio do Meio Ambiente Brasil
 Desenvolvedor: Edmar Moretti edmar.moretti@mma.gov.br
 
-Este programa é software livre; você pode redistribuí-lo
-e/ou modificá-lo sob os termos da Licença Pública Geral
+Este programa &eacute; software livre; voc&ecirc; pode redistribu&iacute;-lo
+e/ou modific&aacute;-lo sob os termos da Licen&ccedil;a P&uacute;blica Geral
 GNU conforme publicada pela Free Software Foundation;
 
-Este programa é distribuído na expectativa de que seja útil,
-porém, SEM NENHUMA GARANTIA; nem mesmo a garantia implícita
-de COMERCIABILIDADE OU ADEQUAÇÃO A UMA FINALIDADE ESPECÍFICA.
-Consulte a Licença Pública Geral do GNU para mais detalhes.
-Você deve ter recebido uma cópia da Licença Pública Geral do
-GNU junto com este programa; se não, escreva para a
-Free Software Foundation, Inc., no endereço
+Este programa &eacute; distribu&iacute;do na expectativa de que seja &uacute;til,
+por&eacute;m, SEM NENHUMA GARANTIA; nem mesmo a garantia impl&iacute;cita
+de COMERCIABILIDADE OU ADEQUA&Ccedil;&Atilde;O A UMA FINALIDADE ESPEC&Iacute;FICA.
+Consulte a Licen&ccedil;a P&uacute;blica Geral do GNU para mais detalhes.
+Voc&ecirc; deve ter recebido uma cópia da Licen&ccedil;a P&uacute;blica Geral do
+GNU junto com este programa; se n&atilde;o, escreva para a
+Free Software Foundation, Inc., no endere&ccedil;o
 59 Temple Street, Suite 330, Boston, MA 02111-1307 USA.
 
 Arquivo:
@@ -38,19 +38,19 @@ i3geo/classesphp/mapa_inicia.php
 /*
 Function: iniciaMapa
 
-Inicia um mapa e obtém os parâmetros necessários para o funcionamento da interface HTML.
+Inicia um mapa e obt&eacute;m os par&acirc;metros necess&aacute;rios para o funcionamento da interface HTML.
 
-Para permitir a troca dinâmica de interfaces, são gravados no mapfile os METADATA status e opacity, com o prefixo "ol" para OpenLayers e "gm" para Google Maps e Earth
+Para permitir a troca din&acirc;mica de interfaces, s&atilde;o gravados no mapfile os METADATA status e opacity, com o prefixo "ol" para OpenLayers e "gm" para Google Maps e Earth
 
 Globais:
 
-$interface - nome da interface que será utilizada pelo mapa padrao|openlayers|googlemaps|googleearth|flamingo . O valor de $interface é também armazenado no metadata "interface" do objeto Map, podendo ser utilizada em outros programas do i3Geo.
+$interface - nome da interface que ser&aacute; utilizada pelo mapa padrao|openlayers|googlemaps|googleearth|flamingo . O valor de $interface &eacute; tamb&eacute;m armazenado no metadata "interface" do objeto Map, podendo ser utilizada em outros programas do i3Geo.
 
-$openid - indica se o usuário foi ou não autenticado em alguma rede social (veja i3geo/pacotes/openid)
+$openid - indica se o usu&aacute;rio foi ou n&atilde;o autenticado em alguma rede social (veja i3geo/pacotes/openid)
 
 $interfacePadrao - interface definida em ms_configura.php
 
-$navegadoresLocais - array que indica quais usuários podem navegar no servidor
+$navegadoresLocais - array que indica quais usu&aacute;rios podem navegar no servidor
 
 $cp - Objeto CPAINT.
 
@@ -58,17 +58,17 @@ $embedLegenda - inclui a legenda no corpo do mapa sim|nao
 
 $map_file - Arquivo map file.
 
-$mapext - Extensão geográfica do mapa.
+$mapext - Extens&atilde;o geogr&aacute;fica do mapa.
 
 $w - Largura da imagem do mapa.
 
 $h - Altura da imagem do mapa.
 
-$R_path - Variável definida no arquivo ms_configura.php que indica se o software R está instalado.
+$R_path - Vari&aacute;vel definida no arquivo ms_configura.php que indica se o software R est&aacute; instalado.
 
-$locmapserv - Variável definida no arquivo ms_configura.php que indica nome do mapserver cgi.
+$locmapserv - Vari&aacute;vel definida no arquivo ms_configura.php que indica nome do mapserver cgi.
 
-$kmlurl - url de um arquivo kml que será inserido no mapa. Válido para a interface google maps
+$kmlurl - url de um arquivo kml que ser&aacute; inserido no mapa. V&aacute;lido para a interface google maps
 
 Retorno:
 
@@ -109,7 +109,7 @@ function iniciaMapa()
 	{$kmlurl = "";}
 	error_reporting(0);
 	//
-	//pega o xml com os sietmas para identificação
+	//pega o xml com os sietmas para identifica&ccedil;&atilde;o
 	//
 	if(!isset($interface)){$interface = "";}
 	if($interface == "openlayers"){
@@ -192,7 +192,7 @@ function iniciaMapa()
 	$legenda = $m->mapa->legend;
 	$embedLegenda == "sim" ? $legenda->set("status",MS_EMBED) : $legenda->set("status",MS_OFF);
 	//
-	//salva as alterações feitas
+	//salva as altera&ccedil;&otilde;es feitas
 	//
 	$m->salva();
 	//prepara a legenda para incluir no mapa, preenchendo os nomes das classes em branco
@@ -213,7 +213,7 @@ function iniciaMapa()
 	}
 	//
 	//cuidado ao mexer aqui
-	//o mapa precisa ser salvo para registrar a extensão geográfica
+	//o mapa precisa ser salvo para registrar a extens&atilde;o geogr&aacute;fica
 	//
 	$imgo = $m->mapa->draw();
 	$m->salva($map_file);
@@ -230,7 +230,7 @@ function iniciaMapa()
 	$temas = $m->parametrosTemas();
 	//$m->ligaDesligaTemas("",implode(",",$m->nomes),"nao");
 	//
-	//é necessário um mapa para compor o fundo apenas com o imagecolor e sem nenhuma outra camada
+	//&eacute; necess&aacute;rio um mapa para compor o fundo apenas com o imagecolor e sem nenhuma outra camada
 	//utilizado em algumas interfaces
 	//
 	/*

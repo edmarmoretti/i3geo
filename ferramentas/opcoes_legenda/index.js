@@ -2,9 +2,9 @@
 /*jslint plusplus:false,white:false,undef: false, rhino: true, onevar: true, evil: true */
 
 /*
-Title: Legenda gráfica do mapa
+Title: Legenda gr&aacute;fica do mapa
 
-Edita a legenda que é mostrada no corpo do mapa, controlando o tamanho, posição, fontes, etc.
+Edita a legenda que &eacute; mostrada no corpo do mapa, controlando o tamanho, posi&ccedil;ão, fontes, etc.
 
 Veja:
 
@@ -20,20 +20,20 @@ GPL2
 
 i3Geo Interface Integrada de Ferramentas de Geoprocessamento para Internet
 
-Direitos Autorais Reservados (c) 2006 Ministério do Meio Ambiente Brasil
+Direitos Autorais Reservados (c) 2006 Minist&eacute;rio do Meio Ambiente Brasil
 Desenvolvedor: Edmar Moretti edmar.moretti@mma.gov.br
 
-Este programa é software livre; você pode redistribuí-lo
-e/ou modificá-lo sob os termos da Licença Pública Geral
+Este programa &eacute; software livre; voc&ecirc; pode redistribu&iacute;-lo
+e/ou modific&aacute;-lo sob os termos da Licen&ccedil;a P&uacute;blica Geral
 GNU conforme publicada pela Free Software Foundation;
 
-Este programa é distribuído na expectativa de que seja útil,
-porém, SEM NENHUMA GARANTIA; nem mesmo a garantia implícita
-de COMERCIABILIDADE OU ADEQUAÇÃO A UMA FINALIDADE ESPECÍFICA.
-Consulte a Licença Pública Geral do GNU para mais detalhes.
-Você deve ter recebido uma cópia da Licença Pública Geral do
+Este programa &eacute; distribu&iacute;do na expectativa de que seja &uacute;til,
+por&eacute;m, SEM NENHUMA GARANTIA; nem mesmo a garantia impl&iacute;cita
+de COMERCIABILIDADE OU ADEQUAÇÃO A UMA FINALIDADE ESPEC&Iacute;FICA.
+Consulte a Licen&ccedil;a P&uacute;blica Geral do GNU para mais detalhes.
+Voc&ecirc; deve ter recebido uma c&oacute;pia da Licen&ccedil;a P&uacute;blica Geral do
 GNU junto com este programa; se não, escreva para a
-Free Software Foundation, Inc., no endereço
+Free Software Foundation, Inc., no endere&ccedil;o
 59 Temple Street, Suite 330, Boston, MA 02111-1307 USA.
 */
 if(typeof(i3GEOF) === 'undefined'){
@@ -47,17 +47,17 @@ i3GEOF.opcoesLegenda = {
 	/*
 	Variavel: aguarde
 	
-	Estilo do objeto DOM com a imagem de aguarde existente no cabeçalho da janela.
+	Estilo do objeto DOM com a imagem de aguarde existente no cabe&ccedil;alho da janela.
 	*/
 	aguarde: "",
 	/*
 	Function: inicia
 	
-	Inicia a ferramenta. É chamado por criaJanelaFlutuante
+	Inicia a ferramenta. &Eacute; chamado por criaJanelaFlutuante
 	
 	Parametro:
 	
-	iddiv {String} - id do div que receberá o conteudo HTML da ferramenta
+	iddiv {String} - id do div que receber&aacute; o conteudo HTML da ferramenta
 	*/
 	inicia: function(iddiv){
 		try{
@@ -80,11 +80,11 @@ i3GEOF.opcoesLegenda = {
 	/*
 	Function: html
 	
-	Gera o código html para apresentação das opções da ferramenta
+	Gera o c&oacute;digo html para apresenta&ccedil;ão das op&ccedil;&otilde;es da ferramenta
 	
 	Retorno:
 	
-	String com o código html
+	String com o c&oacute;digo html
 	*/
 	html:function(){
 		var ins = '<table summary="" class=lista >' +
@@ -101,12 +101,12 @@ i3GEOF.opcoesLegenda = {
 			'<img alt="aquarela.gif" style=cursor:pointer src="'+i3GEO.configura.locaplic+'/imagens/aquarela.gif" onclick="i3GEOF.opcoesLegenda.corj(\'i3GEOopcoesLegendaimagecolor\')" />' +
 			'</td></tr>' +
 			'<tr><td>&nbsp;</td><td></td></tr>' +
-			'<tr><td>Contorno dos símbolos:</td><td>' +
+			'<tr><td>Contorno dos s&iacute;mbolos:</td><td>' +
 			$inputText("","","i3GEOopcoesLegendaoutlinecolor","",12,"") +
 			'<img alt="aquarela.gif" style=cursor:pointer src="'+i3GEO.configura.locaplic+'/imagens/aquarela.gif" onclick="i3GEOF.opcoesLegenda.corj(\'i3GEOopcoesLegendaoutlinecolor\')" />' +
 			'</td></tr>' +
 			'<tr><td>&nbsp;</td><td></td></tr>' +
-			'<tr><td>Posição:</td><td>' +
+			'<tr><td>Posi&ccedil;ão:</td><td>' +
 			'	<select id=i3GEOopcoesLegendaposition >' +
 			'		<option value=101 >sup. esquerdo</option>' +
 			'		<option value=107 >sup. centro</option>' +
@@ -117,19 +117,19 @@ i3GEOF.opcoesLegenda = {
 			'	</select>' +
 			'<td></tr>' +
 			'<tr><td>&nbsp;</td><td></td></tr>' +
-			'<tr><td>Espaçamento em Y:</td><td>' +
+			'<tr><td>Espa&ccedil;amento em Y:</td><td>' +
 			$inputText("","","i3GEOopcoesLegendakeyspacingy","",4,"") +
 			'<td></tr>' +
 			'<tr><td>&nbsp;</td><td></td></tr>' +
-			'<tr><td>Espaçamento em X:</td><td>' +
+			'<tr><td>Espa&ccedil;amento em X:</td><td>' +
 			$inputText("","","i3GEOopcoesLegendakeyspacingx","",4,"") +
 			'</td></tr>' +
 			'<tr><td>&nbsp;</td><td></td></tr>' +
-			'<tr><td>Tamanho do símb. Y:</td><td>' +
+			'<tr><td>Tamanho do s&iacute;mb. Y:</td><td>' +
 			$inputText("","","i3GEOopcoesLegendakeysizey","",4,"") +
 			'<td></tr>' +
 			'<tr><td>&nbsp;</td><td></td></tr>' +
-			'<tr><td>Tamanho do símb. X:</td><td>' +
+			'<tr><td>Tamanho do s&iacute;mb. X:</td><td>' +
 			$inputText("","","i3GEOopcoesLegendakeysizex","",4,"") +
 			'<td></tr>' +
 			'<tr><td>&nbsp;</td><td></td></tr>' +			
@@ -137,7 +137,7 @@ i3GEOF.opcoesLegenda = {
 			$inputText("","","i3GEOopcoesLegendalabelsize","",4,"") +
 			'<td></tr>' +
 			'<tr><td>&nbsp;</td><td></td></tr>' +			
-			'<tr><td>Fonte: (teste a fonte mais adequada para apresentação correta da acentuação)</td>' +
+			'<tr><td>Fonte: (teste a fonte mais adequada para apresenta&ccedil;ão correta da acentua&ccedil;ão)</td>' +
 			'	<td id=i3GEOopcoesLegendafontef >aguarde...</td>' +
 			'</tr></table><br>'+
 			'<p class=paragrafo >' +
@@ -181,7 +181,7 @@ i3GEOF.opcoesLegenda = {
 	/*
 	Function: corj
 	
-	Abre a janela para o usuário selecionar uma cor interativamente
+	Abre a janela para o usu&aacute;rio selecionar uma cor interativamente
 	*/
 	corj: function(obj)
 	{i3GEO.util.abreCor("",obj);},
@@ -248,7 +248,7 @@ i3GEOF.opcoesLegenda = {
 	/*
 	Function: parametrosFormulario
 	
-	Pega os valores do formulário atual
+	Pega os valores do formul&aacute;rio atual
 	*/
 	parametrosFormulario: function(){
 		var par = "",
@@ -275,7 +275,7 @@ i3GEOF.opcoesLegenda = {
 	/*
 	Function: testa
 	
-	Testa a legenda, mostrando uma imagem temporária
+	Testa a legenda, mostrando uma imagem tempor&aacute;ria
 	
 	Veja:
 	

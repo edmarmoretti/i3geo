@@ -1,9 +1,9 @@
 /*
 Title: Conexão com WMS
 
-Acrescenta ao mapa um novo tema com base em um endereço de WMS
+Acrescenta ao mapa um novo tema com base em um endere&ccedil;o de WMS
 
-O usuário pode indicar o endereço ou escolher de uma lista. A lista é pré-definida por meio do sistema de administração
+O usu&aacute;rio pode indicar o endere&ccedil;o ou escolher de uma lista. A lista &eacute; pr&eacute;-definida por meio do sistema de administra&ccedil;ão
 do i3Geo.
 
 Veja:
@@ -20,20 +20,20 @@ GPL2
 
 i3Geo Interface Integrada de Ferramentas de Geoprocessamento para Internet
 
-Direitos Autorais Reservados (c) 2006 Ministério do Meio Ambiente Brasil
+Direitos Autorais Reservados (c) 2006 Minist&eacute;rio do Meio Ambiente Brasil
 Desenvolvedor: Edmar Moretti edmar.moretti@mma.gov.br
 
-Este programa é software livre; você pode redistribuí-lo
-e/ou modificá-lo sob os termos da Licença Pública Geral
+Este programa &eacute; software livre; voc&ecirc; pode redistribu&iacute;-lo
+e/ou modific&aacute;-lo sob os termos da Licen&ccedil;a P&uacute;blica Geral
 GNU conforme publicada pela Free Software Foundation;
 
-Este programa é distribuído na expectativa de que seja útil,
-porém, SEM NENHUMA GARANTIA; nem mesmo a garantia implícita
-de COMERCIABILIDADE OU ADEQUAÇÃO A UMA FINALIDADE ESPECÍFICA.
-Consulte a Licença Pública Geral do GNU para mais detalhes.
-Você deve ter recebido uma cópia da Licença Pública Geral do
+Este programa &eacute; distribu&iacute;do na expectativa de que seja &uacute;til,
+por&eacute;m, SEM NENHUMA GARANTIA; nem mesmo a garantia impl&iacute;cita
+de COMERCIABILIDADE OU ADEQUAÇÃO A UMA FINALIDADE ESPEC&Iacute;FICA.
+Consulte a Licen&ccedil;a P&uacute;blica Geral do GNU para mais detalhes.
+Voc&ecirc; deve ter recebido uma c&oacute;pia da Licen&ccedil;a P&uacute;blica Geral do
 GNU junto com este programa; se não, escreva para a
-Free Software Foundation, Inc., no endereço
+Free Software Foundation, Inc., no endere&ccedil;o
 59 Temple Street, Suite 330, Boston, MA 02111-1307 USA.
 */
 
@@ -57,7 +57,7 @@ $i("guia3").onclick = function(){clickGuia3();};
 /*
 Function: listaRSS
 
-Monta a lista de serviços WMS cadastrados no sistema de administração do i3Geo
+Monta a lista de servi&ccedil;os WMS cadastrados no sistema de administra&ccedil;ão do i3Geo
 
 Veja:
 
@@ -65,10 +65,10 @@ Veja:
 
 Parametros:
 
-g_RSS {Array} - array com a lista de RSS que contém a lista de WMS cadastrados. Se for um array com um único elemento vazio,
-será utilizado o endereço default do i3GEO (g_RSS = new Array(""))
+g_RSS {Array} - array com a lista de RSS que cont&eacute;m a lista de WMS cadastrados. Se for um array com um &uacute;nico elemento vazio,
+ser&aacute; utilizado o endere&ccedil;o default do i3GEO (g_RSS = new Array(""))
 
-onde {Stribg} - id do elemento HTML que receberá a lista de endereços formatada
+onde {Stribg} - id do elemento HTML que receber&aacute; a lista de endere&ccedil;os formatada
 */ 
 function listaRSS(g_RSS,onde)
 {
@@ -114,14 +114,14 @@ Abre uma nova janela com o resultado da chamada GETCAPABILITIES sobre o WMS esco
 */
 function getcapabilities()
 {
-	if ($i("servico").value == ""){alert("Serviço não definido");}
+	if ($i("servico").value == ""){alert("Servi&ccedil;o não definido");}
 	else
 	{window.open($i("servico").value+"&service=wms&request=getcapabilities&version=1.1.1");}
 }
 /*
 Function: clickGuia2
 
-Mostra as principais informações sobre o WMS escolhido tendo como fonte o getcapabilities
+Mostra as principais informa&ccedil;&otilde;es sobre o WMS escolhido tendo como fonte o getcapabilities
 
 Veja:
 
@@ -130,7 +130,7 @@ Veja:
 function clickGuia2()
 {
 	mostraGuia("guia2");
-	if ($i("servico").value == ""){alert("Serviço não definido");}
+	if ($i("servico").value == ""){alert("Servi&ccedil;o não definido");}
 	else
 	{
 		var metadados = function(retorno){
@@ -159,7 +159,7 @@ Function: clickGuia3
 
 Lista as camadas existentes no WMS escolhido.
 
-O resultado da chamada em PHP é uma string HTML já formatada. O "radio" aponta para a função "adiciona"
+O resultado da chamada em PHP &eacute; uma string HTML j&aacute; formatada. O "radio" aponta para a fun&ccedil;ão "adiciona"
 
 Veja:
 
@@ -192,7 +192,7 @@ function clickGuia3()
 		{$i("listatemas").innerHTML = "erro";}
 	};
 	mostraGuia("guia3");
-	if ($i("servico").value == ""){alert("Serviço não definido");}
+	if ($i("servico").value == ""){alert("Servi&ccedil;o não definido");}
 	else
 	{
 		$i("listatemas").innerHTML = "";
@@ -207,7 +207,7 @@ function clickGuia3()
 /*
 Function: registraws
 
-Armazena em variáveis locais os parâmetros do WMS escolhido e ativa a guia 3, mostrando a lista de camadas disponíveis
+Armazena em vari&aacute;veis locais os parâmetros do WMS escolhido e ativa a guia 3, mostrando a lista de camadas dispon&iacute;veis
 
 Parametros:
 
@@ -252,7 +252,7 @@ function seltema(tipo,tema,legenda,nometema,nomecamada,sldflag)
 		{
 			aguarde("none");
 			if(retorno.data != "ok")
-			{alert("Ooops! Problemas ao acessar o serviço.");aguarde("none");}
+			{alert("Ooops! Problemas ao acessar o servi&ccedil;o.");aguarde("none");}
 			else
 			{window.parent.i3GEO.atualiza();}
 		};

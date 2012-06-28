@@ -2,9 +2,9 @@
 /*
 Title: sistemas.php
 
-Funções utilizadas pelo editor do cadastro de sistemas
+Fun&ccedil;&otilde;es utilizadas pelo editor do cadastro de sistemas
 
-Sistemas são opções adicionais que pode ser incluídas na árvore de adição de temas do i3Geo
+Sistemas s&atilde;o op&ccedil;&otilde;es adicionais que pode ser inclu&iacute;das na &aacute;rvore de adi&ccedil;&atilde;o de temas do i3Geo
 
 Licenca:
 
@@ -12,20 +12,20 @@ GPL2
 
 i3Geo Interface Integrada de Ferramentas de Geoprocessamento para Internet
 
-Direitos Autorais Reservados (c) 2006 Ministério do Meio Ambiente Brasil
+Direitos Autorais Reservados (c) 2006 Minist&eacute;rio do Meio Ambiente Brasil
 Desenvolvedor: Edmar Moretti edmar.moretti@mma.gov.br
 
-Este programa é software livre; você pode redistribuí-lo
-e/ou modificá-lo sob os termos da Licença Pública Geral
+Este programa &eacute; software livre; voc&ecirc; pode redistribu&iacute;-lo
+e/ou modific&aacute;-lo sob os termos da Licen&ccedil;a P&uacute;blica Geral
 GNU conforme publicada pela Free Software Foundation;
 
-Este programa é distribuído na expectativa de que seja útil,
-porém, SEM NENHUMA GARANTIA; nem mesmo a garantia implícita
-de COMERCIABILIDADE OU ADEQUAÇÃO A UMA FINALIDADE ESPECÍFICA.
-Consulte a Licença Pública Geral do GNU para mais detalhes.
-Você deve ter recebido uma cópia da Licença Pública Geral do
-GNU junto com este programa; se não, escreva para a
-Free Software Foundation, Inc., no endereço
+Este programa &eacute; distribu&iacute;do na expectativa de que seja &uacute;til,
+por&eacute;m, SEM NENHUMA GARANTIA; nem mesmo a garantia impl&iacute;cita
+de COMERCIABILIDADE OU ADEQUA&Ccedil;&Atilde;O A UMA FINALIDADE ESPEC&Iacute;FICA.
+Consulte a Licen&ccedil;a P&uacute;blica Geral do GNU para mais detalhes.
+Voc&ecirc; deve ter recebido uma cópia da Licen&ccedil;a P&uacute;blica Geral do
+GNU junto com este programa; se n&atilde;o, escreva para a
+Free Software Foundation, Inc., no endere&ccedil;o
 59 Temple Street, Suite 330, Boston, MA 02111-1307 USA.
 
 Arquivo:
@@ -34,19 +34,19 @@ i3geo/admin/php/sistemas.php
 
 Parametros:
 
-O parâmetro principal é "funcao", que define qual operação será executada, por exemplo, sistemas.php?funcao=pegasistemas.
+O par&acirc;metro principal &eacute; "funcao", que define qual opera&ccedil;&atilde;o ser&aacute; executada, por exemplo, sistemas.php?funcao=pegasistemas.
 
-Cada operação possuí seus próprios parâmetros, que devem ser enviados também na requisição da operação.
+Cada opera&ccedil;&atilde;o possu&iacute; seus próprios par&acirc;metros, que devem ser enviados tamb&eacute;m na requisi&ccedil;&atilde;o da opera&ccedil;&atilde;o.
 */
 include_once("admin.php");
 error_reporting(0);
-//faz a busca da função que deve ser executada
+//faz a busca da fun&ccedil;&atilde;o que deve ser executada
 switch (strtoupper($funcao))
 {
 	/*
 	Note:
 	
-	Valores que o parâmetro &funcao pode receber. Os parâmetros devem ser enviados na requisição em AJAX.
+	Valores que o par&acirc;metro &funcao pode receber. Os par&acirc;metros devem ser enviados na requisi&ccedil;&atilde;o em AJAX.
 	*/
 	/*
 	Valor: PEGASISTEMAS
@@ -81,7 +81,7 @@ switch (strtoupper($funcao))
 	/*
 	Valor: PEGAFUNCOES
 	
-	Lista de funções de um sistema
+	Lista de fun&ccedil;&otilde;es de um sistema
 	
 	Parametro:
 	
@@ -98,7 +98,7 @@ switch (strtoupper($funcao))
 	/*
 	Valor: PEGAFUNCAO
 	
-	Pega os dados de uma função específica
+	Pega os dados de uma fun&ccedil;&atilde;o espec&iacute;fica
 	
 	Parametro:
 	
@@ -142,7 +142,7 @@ switch (strtoupper($funcao))
 	/*
 	Valor: ALTERARFUNCOES
 	
-	Altera os dados de uma função
+	Altera os dados de uma fun&ccedil;&atilde;o
 	
 	Parametros:
 	
@@ -204,7 +204,7 @@ switch (strtoupper($funcao))
 	/*
 	Valor: EXCLUIRFUNCAO
 	
-	Exclui uma função
+	Exclui uma fun&ccedil;&atilde;o
 	
 	Parametros:
 	

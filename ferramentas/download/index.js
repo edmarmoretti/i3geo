@@ -3,7 +3,7 @@
 /*
 Title: Download de um tema
 
-Faz o download de um tema existente na árvore de camadas.
+Faz o download de um tema existente na &aacute;rvore de camadas.
 
 Veja:
 
@@ -19,20 +19,20 @@ GPL2
 
 i3Geo Interface Integrada de Ferramentas de Geoprocessamento para Internet
 
-Direitos Autorais Reservados (c) 2006 Ministério do Meio Ambiente Brasil
+Direitos Autorais Reservados (c) 2006 Minist&eacute;rio do Meio Ambiente Brasil
 Desenvolvedor: Edmar Moretti edmar.moretti@mma.gov.br
 
-Este programa é software livre; você pode redistribuí-lo
-e/ou modificá-lo sob os termos da Licença Pública Geral
+Este programa &eacute; software livre; voc&ecirc; pode redistribu&iacute;-lo
+e/ou modific&aacute;-lo sob os termos da Licen&ccedil;a P&uacute;blica Geral
 GNU conforme publicada pela Free Software Foundation;
 
-Este programa é distribuído na expectativa de que seja útil,
-porém, SEM NENHUMA GARANTIA; nem mesmo a garantia implícita
-de COMERCIABILIDADE OU ADEQUAÇÃO A UMA FINALIDADE ESPECÍFICA.
-Consulte a Licença Pública Geral do GNU para mais detalhes.
-Você deve ter recebido uma cópia da Licença Pública Geral do
+Este programa &eacute; distribu&iacute;do na expectativa de que seja &uacute;til,
+por&eacute;m, SEM NENHUMA GARANTIA; nem mesmo a garantia impl&iacute;cita
+de COMERCIABILIDADE OU ADEQUAÇÃO A UMA FINALIDADE ESPEC&Iacute;FICA.
+Consulte a Licen&ccedil;a P&uacute;blica Geral do GNU para mais detalhes.
+Voc&ecirc; deve ter recebido uma c&oacute;pia da Licen&ccedil;a P&uacute;blica Geral do
 GNU junto com este programa; se não, escreva para a
-Free Software Foundation, Inc., no endereço
+Free Software Foundation, Inc., no endere&ccedil;o
 59 Temple Street, Suite 330, Boston, MA 02111-1307 USA.
 */
 if(typeof(i3GEOF) === 'undefined'){
@@ -45,7 +45,7 @@ i3GEOF.download = {
 	/*
 	Function: html
 	
-	Gera o código html para apresentação das opções da ferramenta
+	Gera o c&oacute;digo html para apresenta&ccedil;ão das op&ccedil;&otilde;es da ferramenta
 	
 	Veja:
 	
@@ -53,9 +53,9 @@ i3GEOF.download = {
 
 	Parametros:
 	
-	divid {String} - id do div que receberá o conteudo HTML da ferramenta
+	divid {String} - id do div que receber&aacute; o conteudo HTML da ferramenta
 
-	tema {String} - código do tema
+	tema {String} - c&oacute;digo do tema
 	*/
 	html:function(divid,tema){
 		var cp,p,ins,mostraDownload;
@@ -70,7 +70,7 @@ i3GEOF.download = {
 				arqs = retorno.arquivos.split(",");
 				n = arqs.length;
 				if(retorno == "erro")
-				{ins = "<p style=color:red >Ocorreu um erro. O tema não foi encontrado. Pode ser que o código do tema não existe na definição do mapfile. Informe o administrador do sistema.<br>";}
+				{ins = "<p style=color:red >Ocorreu um erro. O tema não foi encontrado. Pode ser que o c&oacute;digo do tema não existe na defini&ccedil;ão do mapfile. Informe o administrador do sistema.<br>";}
 				else{
 					for (arq=0;arq<n;arq++){
 						ins += "<a href='"+window.location.protocol+"//"+window.location.host+"/"+arqs[arq]+"'>"+arqs[arq]+"</a><br>";
@@ -96,7 +96,7 @@ i3GEOF.download = {
 	
 	Parametros:
 	
-	tema {String} - código do tema
+	tema {String} - c&oacute;digo do tema
 	*/	
 	criaJanelaFlutuante: function(tema){
 		var janela,divid,titulo;

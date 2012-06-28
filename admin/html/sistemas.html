@@ -1,58 +1,62 @@
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
 <html>
 <head>
-    <meta http-equiv="content-type" content="text/html; charset=ISO-8859-1">
-    <title>Sistemas especiais</title>
-    <style type="text/css">
-        /*margin and padding on body element
+<meta http-equiv="content-type" content="text/html; charset=ISO-8859-1">
+<title>Sistemas especiais</title>
+<style type="text/css">
+/*margin and padding on body element
           can introduce errors in determining
           element position and are not recommended;
           we turn them off as a foundation for YUI
           CSS treatments. */
-        body {
-            margin:0;
-        	padding:0;
-        }
-	</style>
-	<script type="text/javascript" src="../js/core.js"></script>
-	<script type="text/javascript" src="../js/sistemas.js"></script>
-	<link rel="stylesheet" type="text/css" href="admin.css">
+body {
+	margin: 0;
+	padding: 0;
+}
+</style>
+<script type="text/javascript" src="../js/core.js"></script>
+<script type="text/javascript" src="../js/sistemas.js"></script>
+<link rel="stylesheet" type="text/css" href="admin.css">
 </head>
 <body class=" yui-skin-sam fundoPonto">
-<center>
-<div class="bordaSuperior"  >&nbsp;</div>
-<div class="mascaraPrincipal" id="divGeral">
-	<div id=cabecalhoPrincipal ></div>
-	<h1>Administração do i3geo - sistemas especiais </h1>
-	<div id="ajuda">
-		<div class="hd">Ajuda</div>
-		<div class="bd" style="height:144px;overflow:auto">
-			Este programa permite editar a lista de sistemas especiais.<br><br>
-			Sistemas especiais são utilizados para incluir camadas no i3geo tendo como base
-			programas que interagem com o usuário de alguma forma específica.<br><br>
-			Cada sistema pode ter um objetivo específico e uma interface própria. Normalmente são utilizados
-			para realizar consultas a bancos de dados ou Web Services e gerar a camada para acrescentar ao mapa.<br><br>
-			Esses sistemas podem por exemplo, consultar bancos de dados estatísticos para gerar cartogramas.<br><br>
-			A lista de sistemas é baseada no banco admin.db.<br><br>
-			A lista de IPs dos usuários que podem administrar o i3geo é definida no
-			arquivo i3geo/ms_configura.php	
+	<center>
+		<div class="bordaSuperior">&nbsp;</div>
+		<div class="mascaraPrincipal" id="divGeral">
+			<div id=cabecalhoPrincipal></div>
+			<h1>Administra&ccedil;&atilde;o do i3geo - sistemas especiais</h1>
+			<div id="ajuda">
+				<div class="hd">Ajuda</div>
+				<div class="bd" style="height: 144px; overflow: auto">
+					Este programa permite editar a lista de sistemas especiais.<br>
+					<br> Sistemas especiais s&atilde;o utilizados para incluir camadas no
+					i3geo tendo como base programas que interagem com o usu&aacute;rio de
+					alguma forma espec&iacute;fica.<br>
+					<br> Cada sistema pode ter um objetivo espec&iacute;fico e uma
+					interface própria. Normalmente s&atilde;o utilizados para realizar
+					consultas a bancos de dados ou Web Services e gerar a camada para
+					acrescentar ao mapa.<br>
+					<br> Esses sistemas podem por exemplo, consultar bancos de
+					dados estat&iacute;sticos para gerar cartogramas.<br>
+					<br> A lista de sistemas &eacute; baseada no banco admin.db.<br>
+					<br> A lista de IPs dos usu&aacute;rios que podem administrar o i3geo
+					&eacute; definida no arquivo i3geo/ms_configura.php
+				</div>
+				<div class="ft"></div>
+			</div>
+			<input onclick="adicionaLinha()" type=button id=adiciona
+				value="Adicionar um novo sistema" /> <br>
+			<p>Sistemas existentes:</p>
+			<div id="tabela" style="left: -5px;"></div>
+			<div id=logajax style="display: block"></div>
 		</div>
-		<div class="ft"></div>
-	</div>
-	<input onclick="adicionaLinha()" type=button id=adiciona value="Adicionar um novo sistema" />
-	<br>
-	<p>Sistemas existentes:</p>
-	<div id="tabela" style="left:-5px;"></div>
-	<div id=logajax style="display:block" ></div>
-</div>
-</center>
-<script>
+	</center>
+	<script>
 /*
-Title: Sistemas de adição de temas
+Title: Sistemas de adi&ccedil;&atilde;o de temas
 
-HTML da interface de administração do cadastro de sistemas
+HTML da interface de administra&ccedil;&atilde;o do cadastro de sistemas
 
-Veja também:
+Veja tamb&eacute;m:
 
 <core.js>
 
@@ -64,20 +68,20 @@ GPL2
 
 i3Geo Interface Integrada de Ferramentas de Geoprocessamento para Internet
 
-Direitos Autorais Reservados (c) 2006 Ministério do Meio Ambiente Brasil
+Direitos Autorais Reservados (c) 2006 Minist&eacute;rio do Meio Ambiente Brasil
 Desenvolvedor: Edmar Moretti edmar.moretti@mma.gov.br
 
-Este programa é software livre; você pode redistribuí-lo
-e/ou modificá-lo sob os termos da Licença Pública Geral
+Este programa &eacute; software livre; voc&ecirc; pode redistribu&iacute;-lo
+e/ou modific&aacute;-lo sob os termos da Licen&ccedil;a P&uacute;blica Geral
 GNU conforme publicada pela Free Software Foundation;
 
-Este programa é distribuído na expectativa de que seja útil,
-porém, SEM NENHUMA GARANTIA; nem mesmo a garantia implícita
-de COMERCIABILIDADE OU ADEQUAÇÃO A UMA FINALIDADE ESPECÍFICA.
-Consulte a Licença Pública Geral do GNU para mais detalhes.
-Você deve ter recebido uma cópia da Licença Pública Geral do
-GNU junto com este programa; se não, escreva para a
-Free Software Foundation, Inc., no endereço
+Este programa &eacute; distribu&iacute;do na expectativa de que seja &uacute;til,
+por&eacute;m, SEM NENHUMA GARANTIA; nem mesmo a garantia impl&iacute;cita
+de COMERCIABILIDADE OU ADEQUA&Ccedil;&Atilde;O A UMA FINALIDADE ESPEC&Iacute;FICA.
+Consulte a Licen&ccedil;a P&uacute;blica Geral do GNU para mais detalhes.
+Voc&ecirc; deve ter recebido uma cópia da Licen&ccedil;a P&uacute;blica Geral do
+GNU junto com este programa; se n&atilde;o, escreva para a
+Free Software Foundation, Inc., no endere&ccedil;o
 59 Temple Street, Suite 330, Boston, MA 02111-1307 USA.
 
 Arquivo:

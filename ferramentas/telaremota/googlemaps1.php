@@ -20,9 +20,9 @@ Title: Interface GoogleMaps para a ferramenta tela remota
 
 Clone de um mapa aberto no i3Geo.
 
-O clone monitora as mudanças no mapa original e aplica a extensão geográfica e recarrega o mapfile utilizado no original.
+O clone monitora as mudan&ccedil;as no mapa original e aplica a extensão geogr&aacute;fica e recarrega o mapfile utilizado no original.
 
-A abertura de um clone só é possível tendo-se o código de abertura, gerado pela ferramenta Tela Remota do i3Geo
+A abertura de um clone s&oacute; &eacute; poss&iacute;vel tendo-se o c&oacute;digo de abertura, gerado pela ferramenta Tela Remota do i3Geo
 
 Veja:
 
@@ -38,33 +38,33 @@ GPL2
 
 i3Geo Interface Integrada de Ferramentas de Geoprocessamento para Internet
 
-Direitos Autorais Reservados (c) 2006 Ministério do Meio Ambiente Brasil
+Direitos Autorais Reservados (c) 2006 Minist&eacute;rio do Meio Ambiente Brasil
 Desenvolvedor: Edmar Moretti edmar.moretti@mma.gov.br
 
-Este programa é software livre; você pode redistribuí-lo
-e/ou modificá-lo sob os termos da Licença Pública Geral
+Este programa &eacute; software livre; voc&ecirc; pode redistribu&iacute;-lo
+e/ou modific&aacute;-lo sob os termos da Licen&ccedil;a P&uacute;blica Geral
 GNU conforme publicada pela Free Software Foundation;
 
-Este programa é distribuído na expectativa de que seja útil,
-porém, SEM NENHUMA GARANTIA; nem mesmo a garantia implícita
-de COMERCIABILIDADE OU ADEQUAÇÃO A UMA FINALIDADE ESPECÍFICA.
-Consulte a Licença Pública Geral do GNU para mais detalhes.
-Você deve ter recebido uma cópia da Licença Pública Geral do
+Este programa &eacute; distribu&iacute;do na expectativa de que seja &uacute;til,
+por&eacute;m, SEM NENHUMA GARANTIA; nem mesmo a garantia impl&iacute;cita
+de COMERCIABILIDADE OU ADEQUAÇÃO A UMA FINALIDADE ESPEC&Iacute;FICA.
+Consulte a Licen&ccedil;a P&uacute;blica Geral do GNU para mais detalhes.
+Voc&ecirc; deve ter recebido uma c&oacute;pia da Licen&ccedil;a P&uacute;blica Geral do
 GNU junto com este programa; se não, escreva para a
-Free Software Foundation, Inc., no endereço
+Free Software Foundation, Inc., no endere&ccedil;o
 59 Temple Street, Suite 330, Boston, MA 02111-1307 USA.
 */
 
 /*
 Title: Tela remota - Google Maps
 
-Interface baseada na API Google Maps utilizada na apresentação remota do mapa em uso.
+Interface baseada na API Google Maps utilizada na apresenta&ccedil;ão remota do mapa em uso.
 
 Parametros:
 
-g_sid {string} - código da "section" PHP aberta na criação do mapa em uso
+g_sid {string} - c&oacute;digo da "section" PHP aberta na cria&ccedil;ão do mapa em uso
 
-telaR {string} - código especial que autoriza o uso do mapa atual em um navegador diferente daquele utilizado na criação do mapa em uso
+telaR {string} - c&oacute;digo especial que autoriza o uso do mapa atual em um navegador diferente daquele utilizado na cria&ccedil;ão do mapa em uso
 
 Veja:
 
@@ -80,20 +80,20 @@ GPL2
 
 i3Geo Interface Integrada de Ferramentas de Geoprocessamento para Internet
 
-Direitos Autorais Reservados (c) 2006 Ministério do Meio Ambiente Brasil
+Direitos Autorais Reservados (c) 2006 Minist&eacute;rio do Meio Ambiente Brasil
 Desenvolvedor: Edmar Moretti edmar.moretti@mma.gov.br
 
-Este programa é software livre; você pode redistribuí-lo
-e/ou modificá-lo sob os termos da Licença Pública Geral
+Este programa &eacute; software livre; voc&ecirc; pode redistribu&iacute;-lo
+e/ou modific&aacute;-lo sob os termos da Licen&ccedil;a P&uacute;blica Geral
 GNU conforme publicada pela Free Software Foundation;
 
-Este programa é distribuído na expectativa de que seja útil,
-porém, SEM NENHUMA GARANTIA; nem mesmo a garantia implícita
-de COMERCIABILIDADE OU ADEQUAÇÃO A UMA FINALIDADE ESPECÍFICA.
-Consulte a Licença Pública Geral do GNU para mais detalhes.
-Você deve ter recebido uma cópia da Licença Pública Geral do
+Este programa &eacute; distribu&iacute;do na expectativa de que seja &uacute;til,
+por&eacute;m, SEM NENHUMA GARANTIA; nem mesmo a garantia impl&iacute;cita
+de COMERCIABILIDADE OU ADEQUAÇÃO A UMA FINALIDADE ESPEC&Iacute;FICA.
+Consulte a Licen&ccedil;a P&uacute;blica Geral do GNU para mais detalhes.
+Voc&ecirc; deve ter recebido uma c&oacute;pia da Licen&ccedil;a P&uacute;blica Geral do
 GNU junto com este programa; se não, escreva para a
-Free Software Foundation, Inc., no endereço
+Free Software Foundation, Inc., no endere&ccedil;o
 59 Temple Street, Suite 330, Boston, MA 02111-1307 USA.
 */
 
@@ -105,7 +105,7 @@ function inicia(){
 	contadorSalva = 0;
 	$i = function(id){return document.getElementById(id);};
 	navn = false;
-	//seta as variáveis navn e navm
+	//seta as vari&aacute;veis navn e navm
 	navn = false;
 	navm = false;
 	var app = navigator.appName.substring(0,1);

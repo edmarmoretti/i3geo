@@ -1,9 +1,9 @@
 
 /*jslint plusplus:false,white:false,undef: false, rhino: true, onevar: true, evil: true */
 /*
-Title: Número de pontos em polígonos
+Title: N&uacute;mero de pontos em pol&iacute;gonos
 
-Calcula quantos pontos existem em cada polígono cruzando dois temas.
+Calcula quantos pontos existem em cada pol&iacute;gono cruzando dois temas.
 
 Veja:
 
@@ -19,20 +19,20 @@ GPL2
 
 i3Geo Interface Integrada de Ferramentas de Geoprocessamento para Internet
 
-Direitos Autorais Reservados (c) 2006 Ministério do Meio Ambiente Brasil
+Direitos Autorais Reservados (c) 2006 Minist&eacute;rio do Meio Ambiente Brasil
 Desenvolvedor: Edmar Moretti edmar.moretti@mma.gov.br
 
-Este programa é software livre; você pode redistribuí-lo
-e/ou modificá-lo sob os termos da Licença Pública Geral
+Este programa &eacute; software livre; voc&ecirc; pode redistribu&iacute;-lo
+e/ou modific&aacute;-lo sob os termos da Licen&ccedil;a P&uacute;blica Geral
 GNU conforme publicada pela Free Software Foundation;
 
-Este programa é distribuído na expectativa de que seja útil,
-porém, SEM NENHUMA GARANTIA; nem mesmo a garantia implícita
-de COMERCIABILIDADE OU ADEQUAÇÃO A UMA FINALIDADE ESPECÍFICA.
-Consulte a Licença Pública Geral do GNU para mais detalhes.
-Você deve ter recebido uma cópia da Licença Pública Geral do
+Este programa &eacute; distribu&iacute;do na expectativa de que seja &uacute;til,
+por&eacute;m, SEM NENHUMA GARANTIA; nem mesmo a garantia impl&iacute;cita
+de COMERCIABILIDADE OU ADEQUAÇÃO A UMA FINALIDADE ESPEC&Iacute;FICA.
+Consulte a Licen&ccedil;a P&uacute;blica Geral do GNU para mais detalhes.
+Voc&ecirc; deve ter recebido uma c&oacute;pia da Licen&ccedil;a P&uacute;blica Geral do
 GNU junto com este programa; se não, escreva para a
-Free Software Foundation, Inc., no endereço
+Free Software Foundation, Inc., no endere&ccedil;o
 59 Temple Street, Suite 330, Boston, MA 02111-1307 USA.
 */
 if(typeof(i3GEOF) === 'undefined'){
@@ -45,17 +45,17 @@ i3GEOF.nptpol = {
 	/*
 	Variavel: aguarde
 	
-	Estilo do objeto DOM com a imagem de aguarde existente no cabeçalho da janela.
+	Estilo do objeto DOM com a imagem de aguarde existente no cabe&ccedil;alho da janela.
 	*/
 	aguarde: "",
 	/*
 	Function: inicia
 	
-	Inicia a ferramenta. É chamado por criaJanelaFlutuante
+	Inicia a ferramenta. &Eacute; chamado por criaJanelaFlutuante
 	
 	Parametro:
 	
-	iddiv {String} - id do div que receberá o conteudo HTML da ferramenta
+	iddiv {String} - id do div que receber&aacute; o conteudo HTML da ferramenta
 	*/
 	inicia: function(iddiv){
 		try{
@@ -67,11 +67,11 @@ i3GEOF.nptpol = {
 	/*
 	Function: html
 	
-	Gera o código html para apresentação das opções da ferramenta
+	Gera o c&oacute;digo html para apresenta&ccedil;ão das op&ccedil;&otilde;es da ferramenta
 	
 	Retorno:
 	
-	String com o código html
+	String com o c&oacute;digo html
 	*/
 	html:function(){
 		var ins = '';
@@ -89,7 +89,7 @@ i3GEOF.nptpol = {
 	criaJanelaFlutuante: function(){
 		var minimiza,cabecalho,janela,divid,temp,titulo;
 		//cria a janela flutuante
-		titulo = "Pontos em polígonos <a class=ajuda_usuario target=_blank href='" + i3GEO.configura.locaplic + "/ajuda_usuario.php?idcategoria=3&idajuda=19' >&nbsp;&nbsp;&nbsp;</a>";
+		titulo = "Pontos em pol&iacute;gonos <a class=ajuda_usuario target=_blank href='" + i3GEO.configura.locaplic + "/ajuda_usuario.php?idcategoria=3&idajuda=19' >&nbsp;&nbsp;&nbsp;</a>";
 		cabecalho = function(){};
 		minimiza = function(){
 			i3GEO.janela.minimiza("i3GEOF.nptpol");
@@ -120,15 +120,15 @@ i3GEOF.nptpol = {
 	},
 	t0: function()
 	{
-		var ins = "<p class='paragrafo'>Ponto em pol&iacute;gono &eacute; uma opera&ccedil;&atilde;o que resulta em um novo tema contendo o cruzamento entre um tema com pontos e outro com pol&iacute;gonos considerando-se a extensão geográfica do mapa atual.</p>";
-		ins += "<p class='paragrafo'>O resultado será um novo tema do tipo poligonal, sendo que a tabela de atributos conterá o total de pontos que se sobrepõem ao polígono.</p>";
+		var ins = "<p class='paragrafo'>Ponto em pol&iacute;gono &eacute; uma opera&ccedil;&atilde;o que resulta em um novo tema contendo o cruzamento entre um tema com pontos e outro com pol&iacute;gonos considerando-se a extensão geogr&aacute;fica do mapa atual.</p>";
+		ins += "<p class='paragrafo'>O resultado ser&aacute; um novo tema do tipo poligonal, sendo que a tabela de atributos conter&aacute; o total de pontos que se sobrep&otilde;em ao pol&iacute;gono.</p>";
 		ins += "<p class='paragrafo'>Para gerar o cruzamento &eacute; necess&aacute;rio que no mapa exista pelo menos um tema poligonal e um com os pontos.</p>";
 		i3GEO.util.proximoAnterior("","i3GEOF.nptpol.t1()",ins,"i3GEOFgradeDePontost0","i3GEOnptpolresultado");
 	},
 	t1: function(){
 		var ins = "<p class='paragrafo' >Tema contendo os pontos:<br>";
 		ins += "<div style='text-align:left;' id='i3GEOnptpolDivPontos' ></div><br>";
-		ins += "<p class='paragrafo' >Tema contendo os polígonos:<br>";
+		ins += "<p class='paragrafo' >Tema contendo os pol&iacute;gonos:<br>";
 		ins += "<div style='text-align:left;' id='i3GEOnptpolDivPoligonos' ></div>";
 		i3GEO.util.proximoAnterior("i3GEOF.nptpol.t0()","i3GEOF.nptpol.t2()",ins,"i3GEOF.nptpol.t1","i3GEOnptpolresultado");
 		i3GEOF.nptpol.comboTemasPontos();
@@ -161,7 +161,7 @@ i3GEOF.nptpol = {
 			cp,
 			fim = function(retorno){
 				if (retorno.data==undefined )
-				{$i("i3GEOnptpolfim").innerHTML = "<p class='paragrafo' >Erro. A operação demorou muito.";}
+				{$i("i3GEOnptpolfim").innerHTML = "<p class='paragrafo' >Erro. A opera&ccedil;ão demorou muito.";}
 				else
 				{i3GEO.atualiza();}
 				i3GEOF.nptpol.aguarde.visibility = "hidden";

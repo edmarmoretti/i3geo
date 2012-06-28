@@ -1,10 +1,10 @@
 <?php
 /*
-Title: Espécies (PHP)
+Title: Esp&eacute;cies (PHP)
 
-Acessa os web services do MMA para recuperar os dados de espécies.
+Acessa os web services do MMA para recuperar os dados de esp&eacute;cies.
 
-Por ser executado dentro do i3Geo, boa parte dos parâmetros são obtidos da variável de seção.
+Por ser executado dentro do i3Geo, boa parte dos parâmetros são obtidos da vari&aacute;vel de se&ccedil;ão.
 
 Arquivos:
 
@@ -17,20 +17,20 @@ GPL2
 
 i3Geo Interface Integrada de Ferramentas de Geoprocessamento para Internet
 
-Direitos Autorais Reservados (c) 2006 Ministério do Meio Ambiente Brasil
+Direitos Autorais Reservados (c) 2006 Minist&eacute;rio do Meio Ambiente Brasil
 Desenvolvedor: Edmar Moretti edmar.moretti@mma.gov.br
 
-Este programa é software livre; você pode redistribuí-lo
-e/ou modificá-lo sob os termos da Licença Pública Geral
+Este programa &eacute; software livre; voc&ecirc; pode redistribu&iacute;-lo
+e/ou modific&aacute;-lo sob os termos da Licen&ccedil;a P&uacute;blica Geral
 GNU conforme publicada pela Free Software Foundation;
 
-Este programa é distribuído na expectativa de que seja útil,
-porém, SEM NENHUMA GARANTIA; nem mesmo a garantia implícita
-de COMERCIABILIDADE OU ADEQUAÇÃO A UMA FINALIDADE ESPECÍFICA.
-Consulte a Licença Pública Geral do GNU para mais detalhes.
-Você deve ter recebido uma cópia da Licença Pública Geral do
+Este programa &eacute; distribu&iacute;do na expectativa de que seja &uacute;til,
+por&eacute;m, SEM NENHUMA GARANTIA; nem mesmo a garantia impl&iacute;cita
+de COMERCIABILIDADE OU ADEQUAÇÃO A UMA FINALIDADE ESPEC&Iacute;FICA.
+Consulte a Licen&ccedil;a P&uacute;blica Geral do GNU para mais detalhes.
+Voc&ecirc; deve ter recebido uma c&oacute;pia da Licen&ccedil;a P&uacute;blica Geral do
 GNU junto com este programa; se não, escreva para a
-Free Software Foundation, Inc., no endereço
+Free Software Foundation, Inc., no endere&ccedil;o
 59 Temple Street, Suite 330, Boston, MA 02111-1307 USA.
 
 */
@@ -80,7 +80,7 @@ if ($funcao == "adicionatema")
 /*
 Function: listaBancos
 
-Obtém a lista de bancos.
+Obt&eacute;m a lista de bancos.
 */
 function listaBancos()
 {
@@ -96,7 +96,7 @@ function listaBancos()
 /*
 Function: listaFamilias
 
-Obtém a lista de familias.
+Obt&eacute;m a lista de familias.
 */
 function listaFamilias()
 {
@@ -112,7 +112,7 @@ function listaFamilias()
 /*
 Function: listaEspecies
 
-Obtém a lista de especies.
+Obt&eacute;m a lista de especies.
 */
 function listaEspecies()
 {
@@ -145,11 +145,11 @@ function adicionatema()
 	$mapa = ms_newMapObj($map_file);
 	include("../../classesphp/classe_mapa.php");
 	include("../../classesphp/funcoes_gerais.php");
-	$nomeslegenda["munamb1"] = "pássaros (poligonos) ".$especie;
-	$nomeslegenda["munamb2"] = "anfíbios (poligonos) ".$especie;
-	$nomeslegenda["munamb3"] = "mamíferos (poligonos) ".$especie;
-	$nomeslegenda["munamb4"] = "pássaros (pontos) ".$especie;
-	$nomeslegenda["munamb5"] = "mamíferos (pontos) ".$especie;
+	$nomeslegenda["munamb1"] = "p&aacute;ssaros (poligonos) ".$especie;
+	$nomeslegenda["munamb2"] = "anf&iacute;bios (poligonos) ".$especie;
+	$nomeslegenda["munamb3"] = "mam&iacute;feros (poligonos) ".$especie;
+	$nomeslegenda["munamb4"] = "p&aacute;ssaros (pontos) ".$especie;
+	$nomeslegenda["munamb5"] = "mam&iacute;feros (pontos) ".$especie;
 	foreach ($tabelas as $tabela)
 	{
 		if ($tabela["gids"] != '')

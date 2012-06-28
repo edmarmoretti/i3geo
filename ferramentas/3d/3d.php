@@ -126,7 +126,7 @@ $texto .= "}
 	solid TRUE
 height [\n";
 fwrite($fp,$texto);
-//fator redução de z
+//fator redu&ccedil;ão de z
 if(($fz == "")||($fz == 0)){$fz = 1;}
 
 for ($y = 0; $y < $sy; $y++)

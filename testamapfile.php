@@ -2,12 +2,12 @@
 /*
 Title: Testa um mapfile
 
-Permite testar um mapfile específico existente no diretório "temas" ou gerar uma imagem miniatura.
+Permite testar um mapfile espec&iacute;fico existente no diretório "temas" ou gerar uma imagem miniatura.
 
-As miniaturas são utilizadas na árvore de temas mostrada na opção "adiciona", existente na interface padrão.
-Quando o usuário passa o mouse sobre a palavra "miniatura" é executado o programa de geração de miniaturas. Caso o
-a miniatura tiver sido gerada previamente, a preferência é por esse arquivo em cahce. Isso permite uma performance melhor,
-uma vez que a geração on-line pode ser muito demorada. Para gerar as miniaturas o administrador deve executar o
+As miniaturas s&atilde;o utilizadas na &aacute;rvore de temas mostrada na op&ccedil;&atilde;o "adiciona", existente na interface padr&atilde;o.
+Quando o usu&aacute;rio passa o mouse sobre a palavra "miniatura" &eacute; executado o programa de gera&ccedil;&atilde;o de miniaturas. Caso o
+a miniatura tiver sido gerada previamente, a prefer&ecirc;ncia &eacute; por esse arquivo em cahce. Isso permite uma performance melhor,
+uma vez que a gera&ccedil;&atilde;o on-line pode ser muito demorada. Para gerar as miniaturas o administrador deve executar o
 programa geraminiatura.php.
 
 Licenca:
@@ -16,20 +16,20 @@ GPL2
 
 i3Geo Interface Integrada de Ferramentas de Geoprocessamento para Internet
 
-Direitos Autorais Reservados (c) 2006 Ministério do Meio Ambiente Brasil
+Direitos Autorais Reservados (c) 2006 Minist&eacute;rio do Meio Ambiente Brasil
 Desenvolvedor: Edmar Moretti edmar.moretti@mma.gov.br
-Colaboração: Luis Henrique Weirich de Matos
-Este programa é software livre; você pode redistribuí-lo
-e/ou modificá-lo sob os termos da Licença Pública Geral
+Colabora&ccedil;&atilde;o: Luis Henrique Weirich de Matos
+Este programa &eacute; software livre; voc&ecirc; pode redistribu&iacute;-lo
+e/ou modific&aacute;-lo sob os termos da Licen&ccedil;a P&uacute;blica Geral
 GNU conforme publicada pela Free Software Foundation;
 
-Este programa é distribuído na expectativa de que seja útil,
-porém, SEM NENHUMA GARANTIA; nem mesmo a garantia implícita
-de COMERCIABILIDADE OU ADEQUAÇÃO A UMA FINALIDADE ESPECÍFICA.
-Consulte a Licença Pública Geral do GNU para mais detalhes.
-Você deve ter recebido uma cópia da Licença Pública Geral do
-GNU junto com este programa; se não, escreva para a
-Free Software Foundation, Inc., no endereço
+Este programa &eacute; distribu&iacute;do na expectativa de que seja &uacute;til,
+por&eacute;m, SEM NENHUMA GARANTIA; nem mesmo a garantia impl&iacute;cita
+de COMERCIABILIDADE OU ADEQUA&Ccedil;&Atilde;O A UMA FINALIDADE ESPEC&Iacute;FICA.
+Consulte a Licen&ccedil;a P&uacute;blica Geral do GNU para mais detalhes.
+Voc&ecirc; deve ter recebido uma cópia da Licen&ccedil;a P&uacute;blica Geral do
+GNU junto com este programa; se n&atilde;o, escreva para a
+Free Software Foundation, Inc., no endere&ccedil;o
 59 Temple Street, Suite 330, Boston, MA 02111-1307 USA.
 
 Arquivo:
@@ -44,9 +44,9 @@ testamapfile.php?map=bioma&tipo=mini
 
 Parametros:
 
-map {string} - Nome do mapfile que será testado ou usado na geração da miniatura. O arquivo é procurado no caminho indicado e no diretório i3geo/temas. Se map=todos, todos os mapas são testados em grupos de 10 em 10 e a miniatura não é gerada.
+map {string} - Nome do mapfile que ser&aacute; testado ou usado na gera&ccedil;&atilde;o da miniatura. O arquivo &eacute; procurado no caminho indicado e no diretório i3geo/temas. Se map=todos, todos os mapas s&atilde;o testados em grupos de 10 em 10 e a miniatura n&atilde;o &eacute; gerada.
 
-tipo {string} - (opcional) mini|grande Define o tamanho da imagem que será gerada. Se não for definido, será feito o teste do mapfile. Controla o tamanho da miniatura que deverá ser mostrada.
+tipo {string} - (opcional) mini|grande Define o tamanho da imagem que ser&aacute; gerada. Se n&atilde;o for definido, ser&aacute; feito o teste do mapfile. Controla o tamanho da miniatura que dever&aacute; ser mostrada.
 */
 set_time_limit(300);
 ini_set('max_execution_time', 300);
@@ -87,7 +87,7 @@ if ($tipo == "")
 	echo '<body class="fundoPonto"><center><div class="bordaSuperior"  >&nbsp;</div><div class="mascaraPrincipal" id="divGeral">';
 	echo '<form action="testamapfile.php" method="post" id=f >';
 	echo 'Nome do arquivo map existente no diretório i3geo/temas. Exemplo para uso manual da URL: testamapfile.php?map=biomashp (utilize "testamapfile.php?map=todos" na URL para testar todos de uma só vez)<br><br>';
-	echo '<br>Mostra apenas a legenda? <input type=radio name=solegenda value=sim />sim <input type=radio name=solegenda value=nao CHECKED /> não<br>';
+	echo '<br>Mostra apenas a legenda? <input type=radio name=solegenda value=sim />sim <input type=radio name=solegenda value=nao CHECKED /> n&atilde;o<br>';
 	$combo = "<br><select onchange='roda()' id=nomemap ><option value=''>Escolha o arquivo para testar</option>";
 	foreach ($arqs["arquivos"] as $arq){
 		$temp = explode(".",$arq);
@@ -104,7 +104,7 @@ if (isset($map) && $map != "")
 	{
 		$tipo = "todos";	
 		$conta = 0;
-		echo "<br>Número de mapas = ".(count($arqs["arquivos"]))." Faltam= ".(count($arqs["arquivos"])-$iniciar-10)."<br>";
+		echo "<br>N&uacute;mero de mapas = ".(count($arqs["arquivos"]))." Faltam= ".(count($arqs["arquivos"])-$iniciar-10)."<br>";
 		if (!isset($iniciar)){$iniciar = 0;}
 		foreach ($arqs["arquivos"] as $arq)
 		{
@@ -114,7 +114,7 @@ if (isset($map) && $map != "")
 				if($temp[1] == "map")
 				verifica($arq,$solegenda);
 				else
-				{echo "<br>Arquivo <i>$map</i> não é válido. <br>";}
+				{echo "<br>Arquivo <i>$map</i> n&atilde;o &eacute; v&aacute;lido. <br>";}
 			}
 			$conta++;
 		}
@@ -162,7 +162,7 @@ function verifica($map,$solegenda)
 	if(!file_exists($tema))
 	{$tema = $locaplic."/".$tema;}
 	if(!file_exists($tema))
-	{echo "Arquivo ".$map." não encontrado.";exit;}
+	{echo "Arquivo ".$map." n&atilde;o encontrado.";exit;}
 	if ($tema != "")
 	{
 		if($base == "" or !isset($base)){
@@ -210,7 +210,7 @@ function verifica($map,$solegenda)
 			}
 		}
 		if(!stristr($tema, '.php') === FALSE){
-			echo "<br>Arquivo <i>$tema</i> é um programa PHP. O teste pode não funcionar.<br>";
+			echo "<br>Arquivo <i>$tema</i> &eacute; um programa PHP. O teste pode n&atilde;o funcionar.<br>";
 			include_once($locaplic."/".$tema);
 			//
 			//$pegarext deve guardar o nome da camada para ser usado mais abaixo
@@ -230,7 +230,7 @@ function verifica($map,$solegenda)
 				else
 				{
 					echo "erro no arquivo $map <br>";
-					echo "Obs.: em alguns testes o mapfile pode falhar se o endereço dos arquivos de símbolos estiverem <br>definidos de forma relativa ao invés de absoluta. Nesses casos, ao abrir o i3Geo, <br>o mapfile poderá funcionar. <br>";
+					echo "Obs.: em alguns testes o mapfile pode falhar se o endere&ccedil;o dos arquivos de s&iacute;mbolos estiverem <br>definidos de forma relativa ao inv&eacute;s de absoluta. Nesses casos, ao abrir o i3Geo, <br>o mapfile poder&aacute; funcionar. <br>";
 					$error = ms_GetErrorObj();
 					while($error && $error->code != MS_NOERR)
 					{

@@ -6,11 +6,11 @@
 <title>i3Geo - Mapa interativo</title>
 <!--
 	Leitura dos programas javaScript e estilos.
-	Os códigos do i3geo são compactados para tornar o carregamento mais rápido.
-	Se vc alterar os códigos originais, não se esqueça de compactá-los com classesjs/compactajs.php.
-	Para depurar o código sem ter de compactá-los, substitua na linha abaixo 
+	Os códigos do i3geo s&atilde;o compactados para tornar o carregamento mais r&aacute;pido.
+	Se vc alterar os códigos originais, n&atilde;o se esque&ccedil;a de compact&aacute;-los com classesjs/compactajs.php.
+	Para depurar o código sem ter de compact&aacute;-los, substitua na linha abaixo 
 	o arquivo i3geo.js por i3geonaocompacto.js
-	No modo não compactado o código está adaptado para uso com o Firebug do Firefox.
+	No modo n&atilde;o compactado o código est&aacute; adaptado para uso com o Firebug do Firefox.
 -->
 <script type="text/javascript" src="../classesjs/i3geo.js"></script>
 	<style> 
@@ -27,7 +27,7 @@
 <table id='mst' summary="" style='display:none;' width=100% cellspacing='0' >
 
 <!--
-	Inclui a barra superior. Se vc não quiser o menu, é só comentar o TR
+	Inclui a barra superior. Se vc n&atilde;o quiser o menu, &eacute; só comentar o TR
 -->
 <tr style="border:0px">
 	<td colspan=2 id="barraSuperior" style="background-image:url('../imagens/visual/default/cabeca.png');height:10px"></td>
@@ -39,7 +39,7 @@
    <td title="libera guias" class=tdclaro id=encolheFerramentas style="vertical-align:top;width:5px;text-align:left;"></td>
    <td>
     <!--
-    	Guias principais, não mude o ID, apenas o nome se for desejado
+    	Guias principais, n&atilde;o mude o ID, apenas o nome se for desejado
     -->
 
     <div class=verdeescuro style="top:0px;cursor:pointer;">
@@ -63,17 +63,17 @@
 <tr>
  <td class=tdbranca id=contemFerramentas style="vertical-align:top;width:300px;text-align:left;">
   <!--
-  	Esta div acrescenta a lista de propriedades do mapa, caso vc queira colocá-la em um lugar específico
+  	Esta div acrescenta a lista de propriedades do mapa, caso vc queira coloc&aacute;-la em um lugar espec&iacute;fico
   -->
 
   <!--<div id=listaPropriedades ></div>-->
   <!--
-  	Esta div acrescenta a opção de busca rápida, caso vc queira colocá-la em um lugar específico
+  	Esta div acrescenta a op&ccedil;&atilde;o de busca r&aacute;pida, caso vc queira coloc&aacute;-la em um lugar espec&iacute;fico
   -->
   <!-- <div id=buscaRapida ></div> -->
   <!--
-  	As divs guiaNobj guardam o conteúdo que é mostrado quando a guia é clicada
-  	Para cada botão na guia deve haver um div com o conteúdo, pe.
+  	As divs guiaNobj guardam o conte&uacute;do que &eacute; mostrado quando a guia &eacute; clicada
+  	Para cada bot&atilde;o na guia deve haver um div com o conte&uacute;do, pe.
   	o div com id=guia1 deve ter um div com id=guia1obj
   -->
   <div id='guia1obj' >
@@ -100,43 +100,43 @@
 
  <td class=tdbranca >
  	<!--
- 		Nesse div são incluídos os ícones que permitem ao usuário modificar o visual de cores dos ícones
+ 		Nesse div s&atilde;o inclu&iacute;dos os &iacute;cones que permitem ao usu&aacute;rio modificar o visual de cores dos &iacute;cones
  		<div id=visual ></div>
  	-->
- 	<!-- aqui serão incluídas as bandeiras que permitem a troca de idioma -->
+ 	<!-- aqui ser&atilde;o inclu&iacute;das as bandeiras que permitem a troca de idioma -->
  	<div id="seletorIdiomas" ></div>
- 	<!-- aqui será incluído o contador de tempo quando o temporizador de redesenho do mapa estiver ativo -->
+ 	<!-- aqui ser&aacute; inclu&iacute;do o contador de tempo quando o temporizador de redesenho do mapa estiver ativo -->
  	<div id=tempoRedesenho style=color:green;background-color:black;width:50px;display:none ></div>
  </td>
  <td class=tdbranca >
   <table width=100% ><tr>
   <td class=tdbranca ></td>
   <td class=tdbranca style=text-align:center >
-  	<!-- aqui será incluído o gadget que mostra a coordenada geográfica da posição do mouse -->
+  	<!-- aqui ser&aacute; inclu&iacute;do o gadget que mostra a coordenada geogr&aacute;fica da posi&ccedil;&atilde;o do mouse -->
   	<div id=localizarxy style="text-align:left;font-size:10px;">Aguarde...</div>
   </td>
   <td class=tdbranca >
-  	<!-- aqui será incluída a escala numérica -->
+  	<!-- aqui ser&aacute; inclu&iacute;da a escala num&eacute;rica -->
   	<div id=escala ></div>
   </td>
   <!--
-  	A opção de localização 'onde estou?' baseia-se na identificação do IP do usuário. Para
-  	que esta opção funcione corretamente, deve estar instalado no I3Geo o pacote geoIP. Veja no
-  	SVN do portal do software público o diretório arquivos_versões/pacotes para maiores informações
+  	A op&ccedil;&atilde;o de localiza&ccedil;&atilde;o 'onde estou?' baseia-se na identifica&ccedil;&atilde;o do IP do usu&aacute;rio. Para
+  	que esta op&ccedil;&atilde;o funcione corretamente, deve estar instalado no I3Geo o pacote geoIP. Veja no
+  	SVN do portal do software p&uacute;blico o diretório arquivos_vers&otilde;es/pacotes para maiores informa&ccedil;&otilde;es
   -->
   <td class=tdbranca ><div id=ondeestou ></div></td>
   </tr>
-  <!-- esta div recebe o cálculo do posicionamento do mouse em coordenadas UTM
-  As coordenadas UTM apenas serão mostradas nessa div se o parâmetro
+  <!-- esta div recebe o c&aacute;lculo do posicionamento do mouse em coordenadas UTM
+  As coordenadas UTM apenas ser&atilde;o mostradas nessa div se o par&acirc;metro
   i3GEO.gadgets.mostraCoordenadasUTM.idhtml for diferente de i3GEO.gadgets.mostraCoordenadasGEO.idhtml
-  se os IDs forem iguais, o tipo de coordenada mostrada será intercalada, ora UTM ora GEO.
+  se os IDs forem iguais, o tipo de coordenada mostrada ser&aacute; intercalada, ora UTM ora GEO.
   <tr><td></td><td class="tdbranca"><div style="text-align:left;font-size:8px;background-color:white;display:none;" id=mostraUTM ></div></td><td></td></tr>
    -->
   </table>
  </td>
 </tr>
 <tr style="border:0px"><td colspan=3 id="barraInferior" style="background-image:url('../imagens/visual/default/rodape.png');height:10px"></td></tr>
-<!-- aqui são mostradas imagens obtidas do metadata mensagem que pode existir em cada layer -->
+<!-- aqui s&atilde;o mostradas imagens obtidas do metadata mensagem que pode existir em cada layer -->
 <tr style="border:0px"><td colspan=3 style=background-color:black ><input style="border:0px none; background-color:black;color:white;font-size:12pt;" type="text" size="1" id="i3geo_letreiro" ></td></tr>
 <tr style="border:0px"><td colspan=3 style=background-color:black;color:white  id="emailInstituicao">geoprocessamento@mma.gov.br</td></tr>
 </table>
@@ -160,9 +160,9 @@
 
 
 <!--
-	Barra de botoes que serão incluídos na janela móvel de navegação
-	Para excluir um botão é só apagar a linha.
-	Para adicionar um botão, é só criar uma linha e especificar a função que será executada quando o usuário clicar no botão
+	Barra de botoes que ser&atilde;o inclu&iacute;dos na janela móvel de navega&ccedil;&atilde;o
+	Para excluir um bot&atilde;o &eacute; só apagar a linha.
+	Para adicionar um bot&atilde;o, &eacute; só criar uma linha e especificar a fun&ccedil;&atilde;o que ser&aacute; executada quando o usu&aacute;rio clicar no bot&atilde;o
 -->
 <div id=barraDeBotoes1 style='display:none'> 
    <table style="width:100%"><caption style="text-align:center">&nbsp;</caption><tr><td style='background-color:rgb(250,250,250);'><div ID='historicozoom' ></div></td></tr><tr><td style=height:5px ></td></tr></table>
@@ -245,7 +245,7 @@
 	</div>
 	<div style='display:none;background-color:rgb(250,250,250);'>
 		<p style='font-size:4px;'>&nbsp;</p>
-		<img  title="Insere gráficos" alt="" src="../imagens/branco.gif" id='inseregrafico'/>
+		<img  title="Insere gr&aacute;ficos" alt="" src="../imagens/branco.gif" id='inseregrafico'/>
 	</div>	
 	<div style='display:none;background-color:rgb(250,250,250);'>
 		<p style='font-size:4px;'>&nbsp;</p>
@@ -254,7 +254,7 @@
    <table style="width:100%;"><tr><td style='background-color:rgb(250,250,250);'><p style='font-size:6px;'>&nbsp;</p><img title="" alt="" src="../imagens/branco.gif" id='desceferramentas'/></td></tr></table>
 </div>
 <div id=teste ></div>
-<!-- Variáveis globais e inicialização do mapa-->
+<!-- Vari&aacute;veis globais e inicializa&ccedil;&atilde;o do mapa-->
 <script type="text/javascript">
 
 i3GEO.configura.locaplic = i3GEO.util.protocolo()+"://"+window.location.host+"/i3geo";

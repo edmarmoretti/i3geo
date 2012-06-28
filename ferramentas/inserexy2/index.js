@@ -4,7 +4,7 @@
 /*
 Title: Insere ponto
 
-Inclui pontos no mapa no local clicado pelo usuário
+Inclui pontos no mapa no local clicado pelo usu&aacute;rio
 
 Veja:
 
@@ -20,20 +20,20 @@ GPL2
 
 i3Geo Interface Integrada de Ferramentas de Geoprocessamento para Internet
 
-Direitos Autorais Reservados (c) 2006 Ministério do Meio Ambiente Brasil
+Direitos Autorais Reservados (c) 2006 Minist&eacute;rio do Meio Ambiente Brasil
 Desenvolvedor: Edmar Moretti edmar.moretti@mma.gov.br
 
-Este programa é software livre; você pode redistribuí-lo
-e/ou modificá-lo sob os termos da Licença Pública Geral
+Este programa &eacute; software livre; voc&ecirc; pode redistribu&iacute;-lo
+e/ou modific&aacute;-lo sob os termos da Licen&ccedil;a P&uacute;blica Geral
 GNU conforme publicada pela Free Software Foundation;
 
-Este programa é distribuído na expectativa de que seja útil,
-porém, SEM NENHUMA GARANTIA; nem mesmo a garantia implícita
-de COMERCIABILIDADE OU ADEQUAÇÃO A UMA FINALIDADE ESPECÍFICA.
-Consulte a Licença Pública Geral do GNU para mais detalhes.
-Você deve ter recebido uma cópia da Licença Pública Geral do
+Este programa &eacute; distribu&iacute;do na expectativa de que seja &uacute;til,
+por&eacute;m, SEM NENHUMA GARANTIA; nem mesmo a garantia impl&iacute;cita
+de COMERCIABILIDADE OU ADEQUAÇÃO A UMA FINALIDADE ESPEC&Iacute;FICA.
+Consulte a Licen&ccedil;a P&uacute;blica Geral do GNU para mais detalhes.
+Voc&ecirc; deve ter recebido uma c&oacute;pia da Licen&ccedil;a P&uacute;blica Geral do
 GNU junto com este programa; se não, escreva para a
-Free Software Foundation, Inc., no endereço
+Free Software Foundation, Inc., no endere&ccedil;o
 59 Temple Street, Suite 330, Boston, MA 02111-1307 USA.
 */
 if(typeof(i3GEOF) === 'undefined'){
@@ -48,17 +48,17 @@ i3GEOF.inserexy = {
 	/*
 	Variavel: aguarde
 	
-	Estilo do objeto DOM com a imagem de aguarde existente no cabeçalho da janela.
+	Estilo do objeto DOM com a imagem de aguarde existente no cabe&ccedil;alho da janela.
 	*/
 	aguarde: "",
 	/*
 	Function: inicia
 	
-	Inicia a ferramenta. É chamado por criaJanelaFlutuante
+	Inicia a ferramenta. &Eacute; chamado por criaJanelaFlutuante
 	
 	Parametro:
 	
-	iddiv {String} - id do div que receberá o conteudo HTML da ferramenta
+	iddiv {String} - id do div que receber&aacute; o conteudo HTML da ferramenta
 	*/
 	inicia: function(iddiv){
 		try{
@@ -140,11 +140,11 @@ i3GEOF.inserexy = {
 	/*
 	Function: html
 	
-	Gera o código html para apresentação das opções da ferramenta
+	Gera o c&oacute;digo html para apresenta&ccedil;ão das op&ccedil;&otilde;es da ferramenta
 	
 	Retorno:
 	
-	String com o código html
+	String com o c&oacute;digo html
 	*/
 	html:function(){
 		var ins = '' +
@@ -164,11 +164,11 @@ i3GEOF.inserexy = {
 		'	</div>' +
 		'</div>' +
 		'<div class=guiaobj id="i3GEOinserexyguia1obj" style="left:1px;display:none;top:10px">' +
-		'	<p class=paragrafo >Escolha o tema editável para inserir os pontos:</p>' +
+		'	<p class=paragrafo >Escolha o tema edit&aacute;vel para inserir os pontos:</p>' +
 		'	<div id=i3GEOinserexyshapefile style="left:0px;text-align:left;">' +
 		'	</div><br>' +
-	 	'	<p class=paragrafo ><input id=i3GEOinserexybotaocriatema type="button" size=18 value="Criar um tema editável" />' +
-	 	'	<input id=i3GEOinserexybotaoperfil type="button" size=18 value="Gráfico de perfil" /></p>' +
+	 	'	<p class=paragrafo ><input id=i3GEOinserexybotaocriatema type="button" size=18 value="Criar um tema edit&aacute;vel" />' +
+	 	'	<input id=i3GEOinserexybotaoperfil type="button" size=18 value="Gr&aacute;fico de perfil" /></p>' +
 
 		'	<div id=i3GEOinserexyopcitens style=display:none;left:0px;text-align:left; >' +
 		'		<p class=paragrafo >Se vc quiser, escolha um item existente no tema e o valor que ser&aacute; inclu&iacute;do quando o ponto for adicionado. Vc pode mudar o valor quando desejar:</p>' +
@@ -185,7 +185,7 @@ i3GEOF.inserexy = {
 		'</div>' +
 
 		'<div class=guiaobj id="i3GEOinserexyguia2obj" style="left:1px;display:none;">' +
-		'	<p class=paragrafo >Direção:</p>' +
+		'	<p class=paragrafo >Dire&ccedil;ão:</p>' +
 		$inputText("","","i3GEOinserexyxgdd","grau",3,"00") +
 		$inputText("","","i3GEOinserexyxmdd","minuto",3,"00") +
 		$inputText("","","i3GEOinserexyxsdd","segundo",3,"0.0") +
@@ -195,8 +195,8 @@ i3GEOF.inserexy = {
 		'		<p class=paragrafo ><input id=i3GEOinserexybotaodd type="button" size=14 value="Insere"  /></p>' +
 		'	</div>' +
 		'	<div id=i3GEOinserexymendd style="position:relative;left:0px;top:20px">' +
-		'		<p class=paragrafo >O próximo ponto será incluído em relação ao último ponto existente no tema, considerando-se apenas os pontos visíveis na extensão do mapa atual.</p>' +
-		'		<p class=paragrafo >Digite o ângulo em relação ao Norte e a distância em Km.</p>' +
+		'		<p class=paragrafo >O pr&oacute;ximo ponto ser&aacute; inclu&iacute;do em rela&ccedil;ão ao &uacute;ltimo ponto existente no tema, considerando-se apenas os pontos vis&iacute;veis na extensão do mapa atual.</p>' +
+		'		<p class=paragrafo >Digite o ângulo em rela&ccedil;ão ao Norte e a distância em Km.</p>' +
 		'	</div>' +
 		'</div> '+
 		'<div class=guiaobj id="i3GEOinserexyguia3obj" style="left:1px;display:none;">' +
@@ -205,7 +205,7 @@ i3GEOF.inserexy = {
 		'		<table summary="Tipo de entrada" class=lista6 >' +
 		'		<tr>' +
 		'			<td><input style="border:0px solid white;cursor:pointer" title="DMS" onclick="i3GEOF.inserexy.escolhedig(\'i3GEOinserexydigmascara\')" name=i3GEOinserexytipodig type=radio id="i3GEOinserexytipodigmascara" checked /></td>' +
-		'			<td>Máscara</td>' +
+		'			<td>M&aacute;scara</td>' +
 		'			<td><input style="border:0px solid white;cursor:pointer" title="DMS" onclick="i3GEOF.inserexy.escolhedig(\'i3GEOinserexydigcampo\')" name=i3GEOinserexytipodig type=radio id="i3GEOinserexytipodigcampo" /></td>' +
 		'			<td>Campo &uacute;nico</td>' +
 		'		</tr>' +
@@ -231,7 +231,7 @@ i3GEOF.inserexy = {
 		'	<div id=i3GEOinserexymen2 style="left:0px;">' +
 		'		<p class=paragrafo >Digite as coordenadas do ponto desejado e clique em "Insere".' +
 		'		<p class=paragrafo >A coordenada X corresponde a longitude (leste-oeste) e a coordenada Y corresponde a latitude (norte-sul).' +
-		'		<p class=paragrafo >Os valores devem sempre estar no formato Grau, Minuto e Segundo, sendo que no caso da opção de campo &uacute;nico, os valores devem estar separados por espaços. Caso as coordenadas estejam em d&eacute;cimos de grau, utilize a guia "Colar".' +
+		'		<p class=paragrafo >Os valores devem sempre estar no formato Grau, Minuto e Segundo, sendo que no caso da op&ccedil;ão de campo &uacute;nico, os valores devem estar separados por espa&ccedil;os. Caso as coordenadas estejam em d&eacute;cimos de grau, utilize a guia "Colar".' +
 		'		<p class=paragrafo >O valor correspondente ao Grau deve receber o sinal de negativo("-") nos casos de longitude oeste (todo o Brasil est&aacute; nesse caso) e nos casos de latitude Sul.<br><br><br>' +
 		'	</div>' +
 		'</div>' +
@@ -313,7 +313,7 @@ i3GEOF.inserexy = {
 	/*
 	Function: montaComboLocal
 	
-	Monta o combo com a lista de temas que podem ser editados (temas armazenados no diretório temporário do i3Geo)
+	Monta o combo com a lista de temas que podem ser editados (temas armazenados no diret&oacute;rio tempor&aacute;rio do i3Geo)
 	
 	Veja:
 	
@@ -431,7 +431,7 @@ i3GEOF.inserexy = {
 	/*
 	Function: adicionaClique
 	
-	Adiciona um ponto no mapa no local onde o usuário clicar com o mouse
+	Adiciona um ponto no mapa no local onde o usu&aacute;rio clicar com o mouse
 	
 	As coordenadas são obtidas do objeto objposicaocursor
 	*/
@@ -441,7 +441,7 @@ i3GEOF.inserexy = {
 	/*
 	Function: inserirdd
 	
-	Insere um ponto com base na direção e distância
+	Insere um ponto com base na dire&ccedil;ão e distância
 	*/
 	inserirdd: function(){
 		try{
@@ -452,7 +452,7 @@ i3GEOF.inserexy = {
 			xsv = $i("i3GEOinserexyxsdd").value;
 			xsv = xsv.replace(regv,".");
 			direcao = i3GEO.calculo.dms2dd(xgv,xmv,xsv);
-			//pega o último ponto
+			//pega o &uacute;ltimo ponto
 			divs = $i("i3GEOinserexyguia6obj").getElementsByTagName("div");
 			divs = divs[divs.length - 1];
 			divs = divs.innerHTML.split(" ");
@@ -514,7 +514,7 @@ i3GEOF.inserexy = {
 	/*
 	Functin: colar
 	
-	Captura as coordenadas coladas pelo usuário e insere os pontos
+	Captura as coordenadas coladas pelo usu&aacute;rio e insere os pontos
 	*/
 	colar: function(){
 		var regv = new RegExp(",", "g"),
@@ -535,7 +535,7 @@ i3GEOF.inserexy = {
 	/*
 	Function: pegaProjecao
 	
-	Obtém o código da projeção escolhida
+	Obt&eacute;m o c&oacute;digo da proje&ccedil;ão escolhida
 	*/
 	pegaProjecao: function(){
 		var inputs = $i("i3GEOinserexylistaepsg").getElementsByTagName("input"),
@@ -554,9 +554,9 @@ i3GEOF.inserexy = {
 	
 	Parametros:
 	
-	xy {string} - coordenadas x e y separadas por espaço
+	xy {string} - coordenadas x e y separadas por espa&ccedil;o
 	
-	fonte {string} - (opcional) como a coordenada foi obtida. Se for "cliqueMapa" o parametro projeção será enviado como vazio para o servidor
+	fonte {string} - (opcional) como a coordenada foi obtida. Se for "cliqueMapa" o parametro proje&ccedil;ão ser&aacute; enviado como vazio para o servidor
 	
 	Veja:
 	
@@ -688,7 +688,7 @@ i3GEOF.inserexy = {
 	/*
 	Function: graficoPerfil
 	
-	Cria um gráfico de perfil com base nos dados inseridos
+	Cria um gr&aacute;fico de perfil com base nos dados inseridos
 	*/
 	graficoPerfil: function(){
 		try{

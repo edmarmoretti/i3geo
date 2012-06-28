@@ -2,11 +2,11 @@
 /*
 Title: classe_toponimia.php
 
-Processa a toponímia de um tema.
+Processa a topon&iacute;mia de um tema.
 
 Adiciona, remove, altera, etc.
 
-Cria camadas com a toponímia e gerencia o status das etiquetas mostradas no mapa.
+Cria camadas com a topon&iacute;mia e gerencia o status das etiquetas mostradas no mapa.
 
 Licenca:
 
@@ -15,20 +15,20 @@ GPL2
 
 i3Geo Interface Integrada de Ferramentas de Geoprocessamento para Internet
 
-Direitos Autorais Reservados (c) 2006 Ministério do Meio Ambiente Brasil
+Direitos Autorais Reservados (c) 2006 Minist&eacute;rio do Meio Ambiente Brasil
 Desenvolvedor: Edmar Moretti edmar.moretti@mma.gov.br
 
-Este programa é software livre; você pode redistribuí-lo
-e/ou modificá-lo sob os termos da Licença Pública Geral
+Este programa &eacute; software livre; voc&ecirc; pode redistribu&iacute;-lo
+e/ou modific&aacute;-lo sob os termos da Licen&ccedil;a P&uacute;blica Geral
 GNU conforme publicada pela Free Software Foundation;
 
-Este programa é distribuído na expectativa de que seja útil,
-porém, SEM NENHUMA GARANTIA; nem mesmo a garantia implícita
-de COMERCIABILIDADE OU ADEQUAÇÃO A UMA FINALIDADE ESPECÍFICA.
-Consulte a Licença Pública Geral do GNU para mais detalhes.
-Você deve ter recebido uma cópia da Licença Pública Geral do
-GNU junto com este programa; se não, escreva para a
-Free Software Foundation, Inc., no endereço
+Este programa &eacute; distribu&iacute;do na expectativa de que seja &uacute;til,
+por&eacute;m, SEM NENHUMA GARANTIA; nem mesmo a garantia impl&iacute;cita
+de COMERCIABILIDADE OU ADEQUA&Ccedil;&Atilde;O A UMA FINALIDADE ESPEC&Iacute;FICA.
+Consulte a Licen&ccedil;a P&uacute;blica Geral do GNU para mais detalhes.
+Voc&ecirc; deve ter recebido uma cópia da Licen&ccedil;a P&uacute;blica Geral do
+GNU junto com este programa; se n&atilde;o, escreva para a
+Free Software Foundation, Inc., no endere&ccedil;o
 59 Temple Street, Suite 330, Boston, MA 02111-1307 USA.
 
 Arquivo:
@@ -71,9 +71,9 @@ function __construct
 Cria um objeto map e seta a variavel tema 
 
 parameters:
-$map_file - Endereço do mapfile no servidor. 
+$map_file - Endere&ccedil;o do mapfile no servidor. 
 
-$tema - nome do tema que será processado
+$tema - nome do tema que ser&aacute; processado
 */
 	function __construct($map_file,$tema="",$locaplic="")
 	{
@@ -103,13 +103,13 @@ Salva o mapfile atual
 /*
 function: criaToponimia
 
-Cria a toponímia de um tema
+Cria a topon&iacute;mia de um tema
 
 parameter:
 
-$item Item que será utilizado.
+$item Item que ser&aacute; utilizado.
 
-$position Posição da âncora do texto.
+$position Posi&ccedil;&atilde;o da &acirc;ncora do texto.
 
 $partials Corta texto nas bordas do mapa.
 
@@ -117,11 +117,11 @@ $offsetx Deslocamento em X.
 
 $offsety Deslocamento em Y.
 
-$minfeaturesize Tamanho mínimo que o texto deve ter.
+$minfeaturesize Tamanho m&iacute;nimo que o texto deve ter.
 
-$mindistance Distância mínima entre os textos.
+$mindistance Dist&acirc;ncia m&iacute;nima entre os textos.
 
-$force Força colisão.
+$force For&ccedil;a colis&atilde;o.
 
 $shadowcolor Cor da sombra.
 
@@ -141,7 +141,7 @@ $sombra string Inclui sombra.
 
 $fundo Cor do fundo.
 
-$angulo Ângulo do texto.
+$angulo &Acirc;ngulo do texto.
 
 $tamanho Tamanho do texto.
 
@@ -151,7 +151,7 @@ $tipo Tipo teste|
 
 $wrap
 
-$novotema sim|nao Cria um novo tema ou não, nesse último caso, a toponímia é inserida em todas as classes
+$novotema sim|nao Cria um novo tema ou n&atilde;o, nesse &uacute;ltimo caso, a topon&iacute;mia &eacute; inserida em todas as classes
 
 Retorno:
 
@@ -261,10 +261,10 @@ Retorno:
 	/*
 function: ativaEtiquetas
 
-ativa a inclusão de etiquetas em um tema
+ativa a inclus&atilde;o de etiquetas em um tema
 
 parameter:
-$item Lista de Itens separados por vírgula que serão utilizados.	
+$item Lista de Itens separados por v&iacute;rgula que ser&atilde;o utilizados.	
 */
 	function ativaEtiquetas($item)
 	{
@@ -276,7 +276,7 @@ $item Lista de Itens separados por vírgula que serão utilizados.
 /*
 function: removeEtiquetas
 
-remove a inclusão de etiquetas em um tema.
+remove a inclus&atilde;o de etiquetas em um tema.
 
 */
 	function removeEtiquetas()

@@ -2,10 +2,10 @@
 /*
 Title: parse_cgi.php
 
-Faz o processamento de um mapfile segundo as necessidades do i3geo, como por exemplo, fazendo a substituição
-das variáveis de conexão com banco e outras operações específicas do i3Geo.
+Faz o processamento de um mapfile segundo as necessidades do i3geo, como por exemplo, fazendo a substitui&ccedil;&atilde;o
+das vari&aacute;veis de conex&atilde;o com banco e outras opera&ccedil;&otilde;es espec&iacute;ficas do i3Geo.
 
-Pode ser utilizado na tag IMG de um arquivo HTML ao invés de ser utilizado o Mapserver em modo CGI.
+Pode ser utilizado na tag IMG de um arquivo HTML ao inv&eacute;s de ser utilizado o Mapserver em modo CGI.
 
 Licenca:
 
@@ -14,37 +14,37 @@ GPL2
 
 i3Geo Interface Integrada de Ferramentas de Geoprocessamento para Internet
 
-Direitos Autorais Reservados (c) 2006 Ministério do Meio Ambiente Brasil
+Direitos Autorais Reservados (c) 2006 Minist&eacute;rio do Meio Ambiente Brasil
 Desenvolvedor: Edmar Moretti edmar.moretti@mma.gov.br
 
-Este programa é software livre; você pode redistribuí-lo
-e/ou modificá-lo sob os termos da Licença Pública Geral
+Este programa &eacute; software livre; voc&ecirc; pode redistribu&iacute;-lo
+e/ou modific&aacute;-lo sob os termos da Licen&ccedil;a P&uacute;blica Geral
 GNU conforme publicada pela Free Software Foundation;
 
-Este programa é distribuído na expectativa de que seja útil,
-porém, SEM NENHUMA GARANTIA; nem mesmo a garantia implícita
-de COMERCIABILIDADE OU ADEQUAÇÃO A UMA FINALIDADE ESPECÍFICA.
-Consulte a Licença Pública Geral do GNU para mais detalhes.
-Você deve ter recebido uma cópia da Licença Pública Geral do
-GNU junto com este programa; se não, escreva para a
-Free Software Foundation, Inc., no endereço
+Este programa &eacute; distribu&iacute;do na expectativa de que seja &uacute;til,
+por&eacute;m, SEM NENHUMA GARANTIA; nem mesmo a garantia impl&iacute;cita
+de COMERCIABILIDADE OU ADEQUA&Ccedil;&Atilde;O A UMA FINALIDADE ESPEC&Iacute;FICA.
+Consulte a Licen&ccedil;a P&uacute;blica Geral do GNU para mais detalhes.
+Voc&ecirc; deve ter recebido uma cópia da Licen&ccedil;a P&uacute;blica Geral do
+GNU junto com este programa; se n&atilde;o, escreva para a
+Free Software Foundation, Inc., no endere&ccedil;o
 59 Temple Street, Suite 330, Boston, MA 02111-1307 USA.
 
 Arquivo:
 
 i3geo/classesphp/parse_cgi.php
 
-Parâmetros:
+Par&acirc;metros:
 
-$g_sid {string} - código da seção aberta no servidor
+$g_sid {string} - código da se&ccedil;&atilde;o aberta no servidor
 
 $map_size {string} - string com o tamanho do novo mapa (w h)
 
-$mapext {string}- extensão geográfica do novo mapa (xmin ymin xmax ymax)
+$mapext {string}- extens&atilde;o geogr&aacute;fica do novo mapa (xmin ymin xmax ymax)
 
-$map_imagecolor {string} - cor do fundo do mapa (default é -1 -1 -1)
+$map_imagecolor {string} - cor do fundo do mapa (default &eacute; -1 -1 -1)
 
-$map_transparent {string} - a cor do fundo será transparente? (ON OFF, default é ON)
+$map_transparent {string} - a cor do fundo ser&aacute; transparente? (ON OFF, default &eacute; ON)
 
 Exemplo:
 

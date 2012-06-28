@@ -5,11 +5,11 @@ include_once("../classesphp/pega_variaveis.php");
 include_once("../classesphp/carrega_ext.php");
 error_reporting(E_ALL);
 //
-//imprime na tela a ajuda ao usuário
+//imprime na tela a ajuda ao usu&aacute;rio
 //
 if(!isset($temas))
 {ajuda();}
-//problema na versão 211 do OpenLayers. Tamanho em % não é aceito
+//problema na vers&atilde;o 211 do OpenLayers. Tamanho em % n&atilde;o &eacute; aceito
 //if(!isset($largura))
 //{$largura = 500;}
 if(isset($largura) && !isset($altura))
@@ -17,7 +17,7 @@ if(isset($largura) && !isset($altura))
 if(isset($altura) && !isset($largura))
 {$largura = $altura;}
 //
-//define quais controles serão mostrados no mapa
+//define quais controles ser&atilde;o mostrados no mapa
 //
 $objControles = array();
 if(isset($controles)){
@@ -40,7 +40,7 @@ if(isset($controles)){
 	{$objControles[] = "new OpenLayers.Control.KeyboardDefaults()";}
 }
 //
-//define quais botoes serão mostrados no mapa
+//define quais botoes ser&atilde;o mostrados no mapa
 //
 $objBotoes = array();
 if(isset($botoes)){
@@ -98,7 +98,7 @@ if(isset($botoes)){
 
 //
 //define a lista de layers do tipo baselayers
-//$fundo é um array com a lista dos nomes possíveis ou passados pela url
+//$fundo &eacute; um array com a lista dos nomes poss&iacute;veis ou passados pela url
 //cada um deve ser definido em openlayers.js.php
 //
 if(isset($fundo) && $fundo != ""){
@@ -107,7 +107,7 @@ if(isset($fundo) && $fundo != ""){
 }
 
 //
-//define quais os layers que comporão o mapa
+//define quais os layers que compor&atilde;o o mapa
 //
 if(isset($temas)){
 	$objOpenLayers = array();
@@ -171,7 +171,7 @@ if($temas != "")
 				$objOpenLayers[] = 'new OpenLayers.Layer.WMS( "'.$tituloLayer.'", "../ogc.php?tema='.$tema.'&",{layers:"'.$nomeLayer.'",transparent: "true", format: "image/png"},{singleTile:true,visibility:'.$visivel.',isBaseLayer:'.$ebase.'})';
 			}
 			else
-			{echo $tema." não foi encontrado.<br>";}
+			{echo $tema." n&atilde;o foi encontrado.<br>";}
 		}
 	}
 }
@@ -179,37 +179,37 @@ function ajuda(){
 	echo "
 <pre><b>
 Mashup OpenLayers
-Parâmetros:
-	kml - lista de endereços (url) de um arquivos kml que serão adicionados ao mapa. Separado por ','
-	servidor - por default é ../ogc.php o que força o uso do i3geo local. Esse é o programa que será utilizado em conjunto com a lista definida no parâmetro 'temas'
-	temas - lista com os temas (mapfiles) do i3Geo que serão incluídos no mapa. Pode ser incluído um arquivo mapfile que esteja fora da pasta i3geo/temas. Nesse caso, deve-se definir o caminho completo do arquivo e também o parâmetro &layers
-	visiveis - lista de temas (mesmos nomes do parâmetro temas) que iniciarão como visíveis no mapa. Se não for definido, todos os temas serão visíveis.
-	numzoomlevels - número de níveis de zoom, default=6
-	maxextent - extensão geográfica máxima do mapa (xmin,ymin,xmax,ymax)
-	mapext - extensão geográfica inicial do mapa (xmin,ymin,xmax,ymax)
+Par&acirc;metros:
+	kml - lista de endere&ccedil;os (url) de um arquivos kml que ser&atilde;o adicionados ao mapa. Separado por ','
+	servidor - por default &eacute; ../ogc.php o que for&ccedil;a o uso do i3geo local. Esse &eacute; o programa que ser&aacute; utilizado em conjunto com a lista definida no par&acirc;metro 'temas'
+	temas - lista com os temas (mapfiles) do i3Geo que ser&atilde;o inclu&iacute;dos no mapa. Pode ser inclu&iacute;do um arquivo mapfile que esteja fora da pasta i3geo/temas. Nesse caso, deve-se definir o caminho completo do arquivo e tamb&eacute;m o par&acirc;metro &layers
+	visiveis - lista de temas (mesmos nomes do par&acirc;metro temas) que iniciar&atilde;o como vis&iacute;veis no mapa. Se n&atilde;o for definido, todos os temas ser&atilde;o vis&iacute;veis.
+	numzoomlevels - n&uacute;mero de n&iacute;veis de zoom, default=6
+	maxextent - extens&atilde;o geogr&aacute;fica m&aacute;xima do mapa (xmin,ymin,xmax,ymax)
+	mapext - extens&atilde;o geogr&aacute;fica inicial do mapa (xmin,ymin,xmax,ymax)
 	largura - lagura do mapa em pixels
 	altura - altura do mapa em pixels
-	pontos - lista de coordenadas x e y que serão incluídas como marcas no mapa
-	marca - nome do arquivo que contém a imagem que será utilizada para mostrar as coordenadas
-	tiles (true|false) - indica se o modo tile será usado ou não (true por default). O modo tile pode tornar o mashup mais lento em algumas situações.
-	incluilayergrafico (true|false) - indica se o layer que recebe elementos gráficos será adicionado ou não ao mapa
-	ativalayerswicther (true|false) - inicia o mapa com a caixa de escolha das camadas (layerSwitcher) aberta ou não. Por default, inicia fechada
-	ativarodadomouse (true|false) - ativa ou não o zoom com base na roda do mouse (default é true)
+	pontos - lista de coordenadas x e y que ser&atilde;o inclu&iacute;das como marcas no mapa
+	marca - nome do arquivo que cont&eacute;m a imagem que ser&aacute; utilizada para mostrar as coordenadas
+	tiles (true|false) - indica se o modo tile ser&aacute; usado ou n&atilde;o (true por default). O modo tile pode tornar o mashup mais lento em algumas situa&ccedil;&otilde;es.
+	incluilayergrafico (true|false) - indica se o layer que recebe elementos gr&aacute;ficos ser&aacute; adicionado ou n&atilde;o ao mapa
+	ativalayerswicther (true|false) - inicia o mapa com a caixa de escolha das camadas (layerSwitcher) aberta ou n&atilde;o. Por default, inicia fechada
+	ativarodadomouse (true|false) - ativa ou n&atilde;o o zoom com base na roda do mouse (default &eacute; true)
 	
-	fundo - lista com os nomes, separados por ',' dos layers que serão usados como fundo para o mapa. Se não for definido,
-			será usado o default. O primeiro da lista será o fundo ativo. Se na lista de temas de fundo estiver algum
-			tema incluido com o parametro 'temas', esses serão incluídos como temas de fundo.
+	fundo - lista com os nomes, separados por ',' dos layers que ser&atilde;o usados como fundo para o mapa. Se n&atilde;o for definido,
+			ser&aacute; usado o default. O primeiro da lista ser&aacute; o fundo ativo. Se na lista de temas de fundo estiver algum
+			tema incluido com o parametro 'temas', esses ser&atilde;o inclu&iacute;dos como temas de fundo.
 			Os seguintes fundos podem usados nessa lista:
 			
 			e_oce - ESRI Ocean Basemap
 			e_ims - ESRI Imagery World 2D
 			e_wsm - ESRI World Street Map
-			ol_mma - base cartográfica do Brasil
+			ol_mma - base cartogr&aacute;fica do Brasil
 			ol_wms - base mundial da Meta Carta
-			top_wms - toponímia do servidor do MMA usado no mapa de referência
+			top_wms - topon&iacute;mia do servidor do MMA usado no mapa de refer&ecirc;ncia
 			est_wms - estados do Brasil
 			
-	controles - lista com os nomes dos controles que serão adicionados ao mapa. Se não for definido, todos os controles serão adicionados
+	controles - lista com os nomes dos controles que ser&atilde;o adicionados ao mapa. Se n&atilde;o for definido, todos os controles ser&atilde;o adicionados
 		navigation
 		panzoombar 
 		layerswitcher 
@@ -217,7 +217,7 @@ Parâmetros:
 		mouseposition
 		overviewmap 
 		keyboarddefaults
-	botoes - lista com os nomes dos botoes que serão adicionados ao mapa. Se não for definido, todos os botões serão adicionados
+	botoes - lista com os nomes dos botoes que ser&atilde;o adicionados ao mapa. Se n&atilde;o for definido, todos os bot&otilde;es ser&atilde;o adicionados
 		pan
 		zoombox
 		zoomtot
@@ -242,8 +242,8 @@ Parâmetros:
 		fecha
 		corta
 
-	Para ver a lista de códigos de temas, que podem ser utilizados no parâmetro 'temas', acesse: 
-	<a href='../ogc.php?lista=temas' >lista de temas</a>. Os códigos são mostrados em vermelho.
+	Para ver a lista de códigos de temas, que podem ser utilizados no par&acirc;metro 'temas', acesse: 
+	<a href='../ogc.php?lista=temas' >lista de temas</a>. Os códigos s&atilde;o mostrados em vermelho.
 
 	Exemplo:
 

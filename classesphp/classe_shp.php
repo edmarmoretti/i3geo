@@ -2,7 +2,7 @@
 /*
 Title: classe_shp.php
 
-Manipulação de shapefile.
+Manipula&ccedil;&atilde;o de shapefile.
 
 Licenca:
 
@@ -11,20 +11,20 @@ GPL2
 
 i3Geo Interface Integrada de Ferramentas de Geoprocessamento para Internet
 
-Direitos Autorais Reservados (c) 2006 Ministério do Meio Ambiente Brasil
+Direitos Autorais Reservados (c) 2006 Minist&eacute;rio do Meio Ambiente Brasil
 Desenvolvedor: Edmar Moretti edmar.moretti@mma.gov.br
 
-Este programa é software livre; você pode redistribuí-lo
-e/ou modificá-lo sob os termos da Licença Pública Geral
+Este programa &eacute; software livre; voc&ecirc; pode redistribu&iacute;-lo
+e/ou modific&aacute;-lo sob os termos da Licen&ccedil;a P&uacute;blica Geral
 GNU conforme publicada pela Free Software Foundation;
 
-Este programa é distribuído na expectativa de que seja útil,
-porém, SEM NENHUMA GARANTIA; nem mesmo a garantia implícita
-de COMERCIABILIDADE OU ADEQUAÇÃO A UMA FINALIDADE ESPECÍFICA.
-Consulte a Licença Pública Geral do GNU para mais detalhes.
-Você deve ter recebido uma cópia da Licença Pública Geral do
-GNU junto com este programa; se não, escreva para a
-Free Software Foundation, Inc., no endereço
+Este programa &eacute; distribu&iacute;do na expectativa de que seja &uacute;til,
+por&eacute;m, SEM NENHUMA GARANTIA; nem mesmo a garantia impl&iacute;cita
+de COMERCIABILIDADE OU ADEQUA&Ccedil;&Atilde;O A UMA FINALIDADE ESPEC&Iacute;FICA.
+Consulte a Licen&ccedil;a P&uacute;blica Geral do GNU para mais detalhes.
+Voc&ecirc; deve ter recebido uma cópia da Licen&ccedil;a P&uacute;blica Geral do
+GNU junto com este programa; se n&atilde;o, escreva para a
+Free Software Foundation, Inc., no endere&ccedil;o
 59 Temple Street, Suite 330, Boston, MA 02111-1307 USA.
 
 Arquivo:
@@ -63,13 +63,13 @@ class SHP
 	/*
 	Variavel: $dbaseExiste
 	
-	Indica se a biblioteca dbase está carregada
+	Indica se a biblioteca dbase est&aacute; carregada
 	*/
 	protected $dbaseExiste;
 	/*
 	Variavel: $v
 	
-	Versão atual do Mapserver (primeiro dígito)
+	Vers&atilde;o atual do Mapserver (primeiro d&iacute;gito)
 	*/
 	public $v;
 	
@@ -80,11 +80,11 @@ Cria um objeto map e seta a variavel tema
 
 parameters:
 
-$map_file - Endereço do mapfile no servidor.
+$map_file - Endere&ccedil;o do mapfile no servidor.
 
 $tema - nome do tema
 
-$ext - extensao geográfica que será aplicada ao mapa
+$ext - extensao geogr&aacute;fica que ser&aacute; aplicada ao mapa
 */
 	function __construct($map_file,$tema="",$locaplic="",$ext="")
 	{
@@ -131,7 +131,7 @@ Cria um shape file do tipo pontual vazio no diretório local
 
 Parameter:
 
-$tituloTema - título do novo tema
+$tituloTema - t&iacute;tulo do novo tema
 
 return:
 Nome do tema criado.
@@ -182,9 +182,9 @@ function: insereSHP
 Insere um ponto em um shape file no diretório local
 
 parameters:
-$xy - X e y do novo ponto, separados por espaços. Pode ser mais de um ponto.
+$xy - X e y do novo ponto, separados por espa&ccedil;os. Pode ser mais de um ponto.
 
-$projecao - código epsg da projeção das coordenadas
+$projecao - código epsg da proje&ccedil;&atilde;o das coordenadas
 */
 	function insereSHP($xy,$projecao,$item="",$valor="")
 	{
@@ -249,9 +249,9 @@ $projecao - código epsg da projeção das coordenadas
 /*
 function: insereSHPgrafico
 
-Insere um ponto em um shape file, criado no diretório temporário, e adiciona ao mapa
-atual. O layer adicionado é representado como um símbolo, construído a partir de uma
-imagem temporária representando o gráfico criado.
+Insere um ponto em um shape file, criado no diretório tempor&aacute;rio, e adiciona ao mapa
+atual. O layer adicionado &eacute; representado como um s&iacute;mbolo, constru&iacute;do a partir de uma
+imagem tempor&aacute;ria representando o gr&aacute;fico criado.
 
 parameters:
 
@@ -261,13 +261,13 @@ $y - Coordenada Y.
 
 $itens - Lista de itens
 
-$imgurl - Endereço da imagem atual
+$imgurl - Endere&ccedil;o da imagem atual
 
-$width - Largura do gráfico
+$width - Largura do gr&aacute;fico
 
-$inclinacao - Inclinação do gráfico
+$inclinacao - Inclina&ccedil;&atilde;o do gr&aacute;fico
 
-$shadow_height - Tamanho da sombra do gráfico
+$shadow_height - Tamanho da sombra do gr&aacute;fico
 
 Include:
 <classe_atributos.php>, <graficopizza.php>
@@ -314,7 +314,7 @@ Include:
 			$oSymbol->set("type",MS_SYMBOL_PIXMAP);
 			$oSymbol->setimagepath($img[0]);
 			$oSymbol->set("name",$nomes);
-			$pinlayer = criaLayer($this->mapa,MS_LAYER_POINT,MS_DEFAULT,"Gráfico (".$temaedit.")","SIM");
+			$pinlayer = criaLayer($this->mapa,MS_LAYER_POINT,MS_DEFAULT,"Gr&aacute;fico (".$temaedit.")","SIM");
 			$c = $pinlayer->getclass(0);
 			$e = $c->getstyle(0);
 			$pinlayer->set("name",$temaedit);
@@ -405,7 +405,7 @@ array - xy
 /*
 function: ultimoXY
 
-Obtém as coordenadas xy do último ponto existente no layer. O último ponto é considerado entre aqueles que estão visíveis no mapa atual
+Obt&eacute;m as coordenadas xy do &uacute;ltimo ponto existente no layer. O &uacute;ltimo ponto &eacute; considerado entre aqueles que est&atilde;o vis&iacute;veis no mapa atual
 
 return:
 array("layerprj"=>$xylayer,"mapprj"=>$xymapa)
@@ -449,7 +449,7 @@ function: shpPT2shp
 Cria um tema linear ou poligonal com base em pontos de um tema pontual.
 
 parameters:
-$locaplic - Localização do I3geo
+$locaplic - Localiza&ccedil;&atilde;o do I3geo
 
 $para - linha|poligono
 */

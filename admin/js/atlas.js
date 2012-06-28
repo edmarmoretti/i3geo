@@ -1,7 +1,7 @@
 /*
 Title: atlas.js
 
-Funções que controlam a interface do editor de atlas
+Fun&ccedil;&otilde;es que controlam a interface do editor de atlas
 
 Licenca:
 
@@ -9,20 +9,20 @@ GPL2
 
 i3Geo Interface Integrada de Ferramentas de Geoprocessamento para Internet
 
-Direitos Autorais Reservados (c) 2006 Ministério do Meio Ambiente Brasil
+Direitos Autorais Reservados (c) 2006 Minist&eacute;rio do Meio Ambiente Brasil
 Desenvolvedor: Edmar Moretti edmar.moretti@mma.gov.br
 
-Este programa é software livre; você pode redistribuí-lo
-e/ou modificá-lo sob os termos da Licença Pública Geral
+Este programa &eacute; software livre; voc&ecirc; pode redistribu&iacute;-lo
+e/ou modific&aacute;-lo sob os termos da Licen&ccedil;a P&uacute;blica Geral
 GNU conforme publicada pela Free Software Foundation;
 
-Este programa é distribuído na expectativa de que seja útil,
-porém, SEM NENHUMA GARANTIA; nem mesmo a garantia implícita
-de COMERCIABILIDADE OU ADEQUAÇÃO A UMA FINALIDADE ESPECÍFICA.
-Consulte a Licença Pública Geral do GNU para mais detalhes.
-Você deve ter recebido uma cópia da Licença Pública Geral do
-GNU junto com este programa; se não, escreva para a
-Free Software Foundation, Inc., no endereço
+Este programa &eacute; distribu&iacute;do na expectativa de que seja &uacute;til,
+por&eacute;m, SEM NENHUMA GARANTIA; nem mesmo a garantia impl&iacute;cita
+de COMERCIABILIDADE OU ADEQUA&Ccedil;&Atilde;O A UMA FINALIDADE ESPEC&Iacute;FICA.
+Consulte a Licen&ccedil;a P&uacute;blica Geral do GNU para mais detalhes.
+Voc&ecirc; deve ter recebido uma cópia da Licen&ccedil;a P&uacute;blica Geral do
+GNU junto com este programa; se n&atilde;o, escreva para a
+Free Software Foundation, Inc., no endere&ccedil;o
 59 Temple Street, Suite 330, Boston, MA 02111-1307 USA.
 
 Arquivo:
@@ -66,13 +66,13 @@ function ativaBotaoAdicionaAtlas(sUrl,idBotao)
 		}; 
 		core_makeRequest(sUrl,callback);
 	};
-	//cria o botão de adição de um novo menu
+	//cria o bot&atilde;o de adi&ccedil;&atilde;o de um novo menu
 	new YAHOO.widget.Button(idBotao,{ onclick: { fn: adiciona } });
 }
 /*
 Function: pegaAtlas
 
-Obtém a lista de atlas
+Obt&eacute;m a lista de atlas
 
 <PEGAATLAS>
 */
@@ -83,7 +83,7 @@ function pegaAtlas()
 /*
 Function: montaArvore
 
-Monta a árvore de edição
+Monta a &aacute;rvore de edi&ccedil;&atilde;o
 
 <PEGAPRANCHAS>
 */
@@ -315,7 +315,7 @@ function montaDivTema(i)
 	ins += "<br>Código do tema:<br>";
 	ins += "<div id=comboTemaIni ></div>";
 
-	ins += "Ligado (ao abrir a prancha, esse tema estará visível)?<br>";
+	ins += "Ligado (ao abrir a prancha, esse tema estar&aacute; vis&iacute;vel)?<br>";
 	ins += "<select id='Eligado_tema' >";
 	ins += core_combosimnao(i.ligado_tema);
 	ins += "</select>";
@@ -327,13 +327,13 @@ function montaDivPrancha(i)
 	var param =
 	{
 		"linhas":[
-		{titulo:"Título:",id:"Etitulo_prancha",size:"50",value:i.titulo_prancha,tipo:"text",div:""},
-		{titulo:"(opcional) Descrição:",id:"Edesc_prancha",size:"50",value:i.desc_prancha,tipo:"text",div:""},
-		{titulo:"(opcional) Link para o texto que será mostrado na inicialização:",id:"Elink_prancha",size:"50",value:i.link_prancha,tipo:"text",div:""},
+		{titulo:"T&iacute;tulo:",id:"Etitulo_prancha",size:"50",value:i.titulo_prancha,tipo:"text",div:""},
+		{titulo:"(opcional) Descri&ccedil;&atilde;o:",id:"Edesc_prancha",size:"50",value:i.desc_prancha,tipo:"text",div:""},
+		{titulo:"(opcional) Link para o texto que ser&aacute; mostrado na inicializa&ccedil;&atilde;o:",id:"Elink_prancha",size:"50",value:i.link_prancha,tipo:"text",div:""},
 		{titulo:"Largura da janela do texto inicial:",id:"Ew_prancha",size:"5",value:i.w_prancha,tipo:"text",div:""},
 		{titulo:"Altura:",id:"Eh_prancha",size:"5",value:i.h_prancha,tipo:"text",div:""},
-		{titulo:"(opcional) Ícone que será utilizado na apresentação da prancha:",id:"Eicone_prancha",size:"50",value:i.icone_prancha,tipo:"text",div:""},
-		{titulo:"Extensão geográfica (xmin ymin xmax ymax):",id:"Emapext_prancha",size:"30",value:i.mapext_prancha,tipo:"text",div:""}
+		{titulo:"(opcional) &Iacute;cone que ser&aacute; utilizado na apresenta&ccedil;&atilde;o da prancha:",id:"Eicone_prancha",size:"50",value:i.icone_prancha,tipo:"text",div:""},
+		{titulo:"Extens&atilde;o geogr&aacute;fica (xmin ymin xmax ymax):",id:"Emapext_prancha",size:"30",value:i.mapext_prancha,tipo:"text",div:""}
 		]
 	};
 	var ins = "";
@@ -346,33 +346,33 @@ function montaDivAtlas(i)
 	var param =
 	{
 		"linhas":[
-		{titulo:"Título:",id:"Etitulo_atlas",size:"50",value:i.titulo_atlas,tipo:"text",div:""},
-		{titulo:"(opcional) Descrição:",id:"Edesc_atlas",size:"50",value:i.desc_atlas,tipo:"text",div:""},
-		{titulo:"(opcional) Link para o texto que será mostrado na inicialização do Atlas:",id:"Elink_atlas",size:"50",value:i.link_atlas,tipo:"text",div:""},
+		{titulo:"T&iacute;tulo:",id:"Etitulo_atlas",size:"50",value:i.titulo_atlas,tipo:"text",div:""},
+		{titulo:"(opcional) Descri&ccedil;&atilde;o:",id:"Edesc_atlas",size:"50",value:i.desc_atlas,tipo:"text",div:""},
+		{titulo:"(opcional) Link para o texto que ser&aacute; mostrado na inicializa&ccedil;&atilde;o do Atlas:",id:"Elink_atlas",size:"50",value:i.link_atlas,tipo:"text",div:""},
 		{titulo:"Largura da janela do texto inicial:",id:"Ew_atlas",size:"5",value:i.w_atlas,tipo:"text",div:""},
 		{titulo:"Altura:",id:"Eh_atlas",size:"5",value:i.h_atlas,tipo:"text",div:""},
-		{titulo:"(opcional) Mapfile inicial (mapfile que será usado como base para montagem do mapa inicial. Se não for definido, será usado o default do i3geo. Utilize o endereço completo do aquivo mapfile no servidor.):",id:"Ebasemapfile_atlas",size:"50",value:i.basemapfile_atlas,tipo:"text",div:""},
-		{titulo:"(opcional) Ícone que será utilizado na montagem da lista de todos os Atlas:",id:"Eicone_atlas",size:"50",value:i.icone_atlas,tipo:"text",div:""},
-		{titulo:"(opcional) Template HTML (se não for especificado, será usado o default do i3geo. Utilize o caminho completo do arquivo html no servidor):",id:"Etemplate_atlas",size:"50",value:i.template_atlas,tipo:"text",div:""}
+		{titulo:"(opcional) Mapfile inicial (mapfile que ser&aacute; usado como base para montagem do mapa inicial. Se n&atilde;o for definido, ser&aacute; usado o default do i3geo. Utilize o endere&ccedil;o completo do aquivo mapfile no servidor.):",id:"Ebasemapfile_atlas",size:"50",value:i.basemapfile_atlas,tipo:"text",div:""},
+		{titulo:"(opcional) &Iacute;cone que ser&aacute; utilizado na montagem da lista de todos os Atlas:",id:"Eicone_atlas",size:"50",value:i.icone_atlas,tipo:"text",div:""},
+		{titulo:"(opcional) Template HTML (se n&atilde;o for especificado, ser&aacute; usado o default do i3geo. Utilize o caminho completo do arquivo html no servidor):",id:"Etemplate_atlas",size:"50",value:i.template_atlas,tipo:"text",div:""}
 		]
 	};
 	var ins = "";
 	ins += core_geraLinhas(param);
-	ins += "Prancha inicial (será mostrada quando iniciar o atlas):<br>";
+	ins += "Prancha inicial (ser&aacute; mostrada quando iniciar o atlas):<br>";
 	ins += "<div id=comboPranchaIni ></div><br>";
-	ins += "Tipo da apresentação das guias:<br>";
+	ins += "Tipo da apresenta&ccedil;&atilde;o das guias:<br>";
 	ins += "<select  id='Etipoguias_atlas' />";
 	ins += "<option value='' >---</option>";
 	ins += "<option value='automatica' ";
 	if (i.tipoguias_atlas == "automatica"){ins += "selected";}
-	ins += " >automática</option>";
+	ins += " >autom&aacute;tica</option>";
 	ins += "<option value='combo' ";
 	if (i.tipoguias_atlas == "combo"){ins += "selected";}
 	ins += " >combo</option>";
 	ins += "<option value='expandida' ";
 	if (i.tipoguias_atlas == "expandida"){ins += "selected";}
 	ins += " >expandida</option></select><br><br>";
-	ins += "Publicado (os não publicados são mostrados apenas para os usuários administradores)?<br>";
+	ins += "Publicado (os n&atilde;o publicados s&atilde;o mostrados apenas para os usu&aacute;rios administradores)?<br>";
 	ins += "<select id='Epublicado_atlas' >";
 	ins += core_combosimnao(i.publicado_atlas);
 	ins += "</select>";
@@ -540,7 +540,7 @@ function gravaDados(tipo,id)
   			{
   				if(YAHOO.lang.JSON.parse(o.responseText) == "erro")
   				{
-  					core_carregando("<span style=color:red >Não foi possível excluir. Verifique se não existem menus vinculados a este tema</span>");
+  					core_carregando("<span style=color:red >N&atilde;o foi poss&iacute;vel excluir. Verifique se n&atilde;o existem menus vinculados a este tema</span>");
   					setTimeout("core_carregando('desativa')",3000);
   				}
   				else

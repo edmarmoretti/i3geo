@@ -427,18 +427,18 @@ function pegaMetadados(codigoMap,codigoLayer)
 	    ins += "";
 		var param = {
 			"linhas":[
-				{texto:"Nome que será utilizado na legenda do mapa e na guia 'Temas'",
+				{texto:"Nome que ser&aacute; utilizado na legenda do mapa e na guia 'Temas'",
 				titulo:"tema",prefixoid:"tema_",id:codigoLayer,valor:"tema"},
-				{texto:"Denominador da escala da fonte dos dados utilizado pelo tema. É utilizado para apresentar a indicação de compatibilidade entre a escala do tema e a escala do mapa que está sendo visto.",
+				{texto:"Denominador da escala da fonte dos dados utilizado pelo tema. &Eacute; utilizado para apresentar a indica&ccedil;&atilde;o de compatibilidade entre a escala do tema e a escala do mapa que est&aacute; sendo visto.",
 				titulo:"escala",prefixoid:"escala_",id:codigoLayer,valor:"escala"},
-				{texto:"Extensão geográfica máxima do tema, no formato xmin ymin xmax ymax. É utilizado na opção de 'zoom para o tema'. Quando o tema é baseado em shapefile, esse metadata não é necessário, pois o mapserver consegue calcular a extensão. Já em outros tipos de dados, como Postgis, o parâmetro é necessário. Nesse caso, se não for indicado, o botão de zoom para o tema não será visível para o usuário",
+				{texto:"Extens&atilde;o geogr&aacute;fica m&aacute;xima do tema, no formato xmin ymin xmax ymax. &Eacute; utilizado na op&ccedil;&atilde;o de 'zoom para o tema'. Quando o tema &eacute; baseado em shapefile, esse metadata n&atilde;o &eacute; necess&aacute;rio, pois o mapserver consegue calcular a extens&atilde;o. J&aacute; em outros tipos de dados, como Postgis, o par&acirc;metro &eacute; necess&aacute;rio. Nesse caso, se n&atilde;o for indicado, o bot&atilde;o de zoom para o tema n&atilde;o ser&aacute; vis&iacute;vel para o usu&aacute;rio",
 				titulo:"extensao",prefixoid:"extensao_",id:codigoLayer,valor:"extensao"}
 			]
 		};
 		ins += (geraLinhas2(retorna.data,param,"salvarMetadados"));
 
 		ins += "<br><fieldset><legend>+- aplicaextensao</legend><div style=display:none >";
-		ins += "<p class=textoAjuda style='background-color:rgb(250,250,250);'>Indica se a extensão geográfica do mapa deve ser alterada quando o tema for adicionado ao mapa</p>";
+		ins += "<p class=textoAjuda style='background-color:rgb(250,250,250);'>Indica se a extens&atilde;o geogr&aacute;fica do mapa deve ser alterada quando o tema for adicionado ao mapa</p>";
 		ins += "<p><select onchange='this.style.color=\"blue\"' id='aplicaextensao_"+codigoLayer+"' >";
 		ins += combosimnao(retorna.data.aplicaextensao);
 		ins += "</select>";
@@ -447,7 +447,7 @@ function pegaMetadados(codigoMap,codigoLayer)
 
 				
 		ins += "<br><fieldset><legend>+- download</legend><div style=display:none >";
-		ins += "<p class=textoAjuda style='background-color:rgb(250,250,250);'>Indica se o usuário pode fazer download do tema</p>";
+		ins += "<p class=textoAjuda style='background-color:rgb(250,250,250);'>Indica se o usu&aacute;rio pode fazer download do tema</p>";
 		ins += "<p><select onchange='this.style.color=\"blue\"' id='download_"+codigoLayer+"' >";
 		ins += combosimnao(retorna.data.download);
 		ins += "</select>";
@@ -456,25 +456,25 @@ function pegaMetadados(codigoMap,codigoLayer)
 		
 		var param = {
 			"linhas":[
-				{texto:"Nomes das colunas da tabela de atributos do tema, que serão mostradas na ferramenta de identificação. Se for vazio, todas as colunas serão mostradas. A lista de itens deve ser separada por ',' e grafada em caixa alta no caso de shapefile.",
+				{texto:"Nomes das colunas da tabela de atributos do tema, que ser&atilde;o mostradas na ferramenta de identifica&ccedil;&atilde;o. Se for vazio, todas as colunas ser&atilde;o mostradas. A lista de itens deve ser separada por ',' e grafada em caixa alta no caso de shapefile.",
 				titulo:"itens",prefixoid:"itens_",id:codigoLayer,valor:"itens"},
 				{texto:"Lista com os 'alias', ou apelidos, para os nomes das colunas listados no metadata 'itens'. Os alias devem ser separados por ',' e seguir a ordem definida em ITENS.",
 				titulo:"itensdesc",prefixoid:"itensdesc_",id:codigoLayer,valor:"itensdesc"},
-				{texto:"Lista de links que serão incluídos em cada resultado de busca da ferramenta de identificação. A lista de links deve ser separada por ',', podendo-se incluir '' para indicar que o item não tem link. Exemplo de uso para inclusão de links para o site do IBGE quando um município é clicado no mapa:<br>ITENS 'codigo,nome2,uf'<br>ITENSDESC 'codigo do IBGE,nome do município,uf'<br>ITENSLLINK ',http://www.ibge.gov.br/munic2001/tabelas.php?codmun=[codigo]&descricao=[nome],'",
+				{texto:"Lista de links que ser&atilde;o inclu&iacute;dos em cada resultado de busca da ferramenta de identifica&ccedil;&atilde;o. A lista de links deve ser separada por ',', podendo-se incluir '' para indicar que o item n&atilde;o tem link. Exemplo de uso para inclus&atilde;o de links para o site do IBGE quando um munic&iacute;pio &eacute; clicado no mapa:<br>ITENS 'codigo,nome2,uf'<br>ITENSDESC 'codigo do IBGE,nome do munic&iacute;pio,uf'<br>ITENSLLINK ',http://www.ibge.gov.br/munic2001/tabelas.php?codmun=[codigo]&descricao=[nome],'",
 				titulo:"itenslink",prefixoid:"itenslink_",id:codigoLayer,valor:"itenslink"},
-				{texto:"Lista de colunas que serão utilizadas na opção de inclusão de 'etiquetas'. As etiquetas são mostradas no mapa quando o usuário estaciona o mouse por alguns instantes sobre o mapa. Separe a lista com ','.",
+				{texto:"Lista de colunas que ser&atilde;o utilizadas na op&ccedil;&atilde;o de inclus&atilde;o de 'etiquetas'. As etiquetas s&atilde;o mostradas no mapa quando o usu&aacute;rio estaciona o mouse por alguns instantes sobre o mapa. Separe a lista com ','.",
 				titulo:"tip",prefixoid:"tip_",id:codigoLayer,valor:"tip"},
-				{texto:"Mensagem que será mostrada no rodapé do mapa quando o tema estiver visível. É útil para apresentar ao usuário observações especiais sobre o uso daquele tema.",
+				{texto:"Mensagem que ser&aacute; mostrada no rodap&eacute; do mapa quando o tema estiver vis&iacute;vel. &Eacute; &uacute;til para apresentar ao usu&aacute;rio observa&ccedil;&otilde;es especiais sobre o uso daquele tema.",
 				titulo:"mensagem",prefixoid:"mensagem_",id:codigoLayer,valor:"mensagem"},
-				{texto:"É possível a geração de classes automaticamente por meio da definição de colunas na tabela de atributos do tema que armazenam as informações sobre cor, tamanho, etc. Esse metadata é utilizado para definir qual a coluna da tabela que identifica unicamente cada classe. Para cada valor será criada uma classe.<br>O tema que utiliza a geração de classes de forma automática, deve ter definido apenas uma classe. Essa classe será utilizada como padrão para geração das demais.",
+				{texto:"&Eacute; poss&iacute;vel a gera&ccedil;&atilde;o de classes automaticamente por meio da defini&ccedil;&atilde;o de colunas na tabela de atributos do tema que armazenam as informa&ccedil;&otilde;es sobre cor, tamanho, etc. Esse metadata &eacute; utilizado para definir qual a coluna da tabela que identifica unicamente cada classe. Para cada valor ser&aacute; criada uma classe.<br>O tema que utiliza a gera&ccedil;&atilde;o de classes de forma autom&aacute;tica, deve ter definido apenas uma classe. Essa classe ser&aacute; utilizada como padr&atilde;o para gera&ccedil;&atilde;o das demais.",
 				titulo:"classesitem",prefixoid:"classesitem_",id:codigoLayer,valor:"classesitem"},
-				{texto:"Nome da coluna que será utilizada para compor o nome das classes geradas automaticamente.",
+				{texto:"Nome da coluna que ser&aacute; utilizada para compor o nome das classes geradas automaticamente.",
 				titulo:"classesnome",prefixoid:"classesnome_",id:codigoLayer,valor:"classesnome"},
-				{texto:"Nome da coluna que definirá a cor do símbolo utilizado em cada classe. As cores devem ser definidas em RGB.",
+				{texto:"Nome da coluna que definir&aacute; a cor do s&iacute;mbolo utilizado em cada classe. As cores devem ser definidas em RGB.",
 				titulo:"classescor",prefixoid:"classescor_",id:codigoLayer,valor:"classescor"},
-				{texto:"Nome da coluna que definirá o símbolo utilizado em cada classe.",
+				{texto:"Nome da coluna que definir&aacute; o s&iacute;mbolo utilizado em cada classe.",
 				titulo:"classessimbolo",prefixoid:"classessimbolo_",id:codigoLayer,valor:"classessimbolo"},
-				{texto:"Nome da coluna que definirá o tamanho de cada símbolo.",
+				{texto:"Nome da coluna que definir&aacute; o tamanho de cada s&iacute;mbolo.",
 				titulo:"classestamanho",prefixoid:"classestamanho_",id:codigoLayer,valor:"classestamanho"}
 			]
 		};
@@ -485,7 +485,7 @@ function pegaMetadados(codigoMap,codigoLayer)
 		ins += (geraLinhas2(retorna.data,param,"salvarMetadados"));
 
 		ins += "<br><fieldset><legend>+- classe</legend><div style=display:none >";
-		ins += "<p class=textoAjuda style='background-color:rgb(250,250,250);'>Indica se as classes serão mostradas ou não na legenda. Por padrão é SIM.</p>";
+		ins += "<p class=textoAjuda style='background-color:rgb(250,250,250);'>Indica se as classes ser&atilde;o mostradas ou n&atilde;o na legenda. Por padr&atilde;o &eacute; SIM.</p>";
 		ins += "<p><select onchange='this.style.color=\"blue\"' id='classe_"+codigoLayer+"' >";
 		ins += combosimnao(retorna.data.classe);
 		ins += "</select>";
@@ -493,7 +493,7 @@ function pegaMetadados(codigoMap,codigoLayer)
 		ins += "</p></div></fieldset>";
 
 		ins += "<br><fieldset><legend>+- escondido</legend><div style=display:none >";
-		ins += "<p class=textoAjuda style='background-color:rgb(250,250,250);'>Indica se o tema é mostrado no mapa mas não nas listas da legenda e na guia 'temas'</p>"	;
+		ins += "<p class=textoAjuda style='background-color:rgb(250,250,250);'>Indica se o tema &eacute; mostrado no mapa mas n&atilde;o nas listas da legenda e na guia 'temas'</p>"	;
 		ins += "<p><select onchange='this.style.color=\"blue\"' id='escondido_"+codigoLayer+"' >";
 		ins += combosimnao(retorna.data.escondido);
 		ins += "</select>";
@@ -501,7 +501,7 @@ function pegaMetadados(codigoMap,codigoLayer)
 		ins += "</p></div></fieldset>";
 		
 		ins += "<br><fieldset><legend>+- identifica</legend><div style=display:none >";	
-		ins += "<p class=textoAjuda style='background-color:rgb(250,250,250);'>Indica se o tema irá ser mostrado na ferramenta de identificação</p>";
+		ins += "<p class=textoAjuda style='background-color:rgb(250,250,250);'>Indica se o tema ir&aacute; ser mostrado na ferramenta de identifica&ccedil;&atilde;o</p>";
 		ins += "<p><select onchange='this.style.color=\"blue\"' id='identifica_"+codigoLayer+"' >";
 		ins += combosimnao(retorna.data.identifica);
 		ins += "</select>";
@@ -518,7 +518,7 @@ function pegaMetadados(codigoMap,codigoLayer)
 function pegaCaracteristicasGerais(codigoMap,codigoLayer)
 {
 	var ins = "<p><input onclick=excluirLayer('"+codigoLayer+"',this) type=button value='Excluir este layer' /></p>";
-	ins += "<br><fieldset><legend>+- Características gerais</legend><div style=display:none >";
+	ins += "<br><fieldset><legend>+- Caracter&iacute;sticas gerais</legend><div style=display:none >";
 	var retorna = function(retorna)
 	{
 		var param = {
@@ -725,7 +725,7 @@ function adicionarEstilo(codigoLayer,codigoClasse,botao)
 }
 function excluirClasse(codigoLayer,codigoClasse,botao)
 {
-	if(confirm("Você realmente quer fazer isso?"))
+	if(confirm("Voc&ecirc; realmente quer fazer isso?"))
 	{
 		botao.style.color="red";
 		botao.value = "Aguarde...";
@@ -743,7 +743,7 @@ function excluirClasse(codigoLayer,codigoClasse,botao)
 }
 function excluirLayer(codigoLayer,botao)
 {
-	if(confirm("Você realmente quer fazer isso?"))
+	if(confirm("Voc&ecirc; realmente quer fazer isso?"))
 	{
 		botao.style.color="red";
 		botao.value = "Aguarde...";

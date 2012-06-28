@@ -2,7 +2,7 @@
 /*
 Title: classe_temas.php
 
-Manipulação de temas.
+Manipula&ccedil;&atilde;o de temas.
 
 Adiciona, remove, muda ordem, etc.
 
@@ -13,20 +13,20 @@ GPL2
 
 i3Geo Interface Integrada de Ferramentas de Geoprocessamento para Internet
 
-Direitos Autorais Reservados (c) 2006 Ministério do Meio Ambiente Brasil
+Direitos Autorais Reservados (c) 2006 Minist&eacute;rio do Meio Ambiente Brasil
 Desenvolvedor: Edmar Moretti edmar.moretti@mma.gov.br
 
-Este programa é software livre; você pode redistribuí-lo
-e/ou modificá-lo sob os termos da Licença Pública Geral
+Este programa &eacute; software livre; voc&ecirc; pode redistribu&iacute;-lo
+e/ou modific&aacute;-lo sob os termos da Licen&ccedil;a P&uacute;blica Geral
 GNU conforme publicada pela Free Software Foundation;
 
-Este programa é distribuído na expectativa de que seja útil,
-porém, SEM NENHUMA GARANTIA; nem mesmo a garantia implícita
-de COMERCIABILIDADE OU ADEQUAÇÃO A UMA FINALIDADE ESPECÍFICA.
-Consulte a Licença Pública Geral do GNU para mais detalhes.
-Você deve ter recebido uma cópia da Licença Pública Geral do
-GNU junto com este programa; se não, escreva para a
-Free Software Foundation, Inc., no endereço
+Este programa &eacute; distribu&iacute;do na expectativa de que seja &uacute;til,
+por&eacute;m, SEM NENHUMA GARANTIA; nem mesmo a garantia impl&iacute;cita
+de COMERCIABILIDADE OU ADEQUA&Ccedil;&Atilde;O A UMA FINALIDADE ESPEC&Iacute;FICA.
+Consulte a Licen&ccedil;a P&uacute;blica Geral do GNU para mais detalhes.
+Voc&ecirc; deve ter recebido uma cópia da Licen&ccedil;a P&uacute;blica Geral do
+GNU junto com este programa; se n&atilde;o, escreva para a
+Free Software Foundation, Inc., no endere&ccedil;o
 59 Temple Street, Suite 330, Boston, MA 02111-1307 USA.
 
 Arquivo:
@@ -71,7 +71,7 @@ class Temas
 	/*
 	Variavel: $visiveis
 	
-	Temas do grupo que são visíveis em função da escala
+	Temas do grupo que s&atilde;o vis&iacute;veis em fun&ccedil;&atilde;o da escala
 	*/
 	protected $visiveis;
 	/*
@@ -83,13 +83,13 @@ class Temas
 	/*
 	Variavel: $qyfile
 	
-	Nome do arquivo de seleção (.qy)
+	Nome do arquivo de sele&ccedil;&atilde;o (.qy)
 	*/
 	public $qyfile;
 	/*
 	Variavel: $v
 	
-	Versão atual do Mapserver (primeiro dígito)
+	Vers&atilde;o atual do Mapserver (primeiro d&iacute;gito)
 	*/
 	public $v;
 /*
@@ -98,13 +98,13 @@ function __construct
 Cria um objeto map e seta a variavel tema 
 
 parameters:
-$map_file - Endereço do mapfile no servidor. 
+$map_file - Endere&ccedil;o do mapfile no servidor. 
 
-$tema - nome do tema que será processado. (Pode ser uma lista separada por ',' mas só funciona nas funções que trabalham sobre os índices dos layers)
+$tema - nome do tema que ser&aacute; processado. (Pode ser uma lista separada por ',' mas só funciona nas fun&ccedil;&otilde;es que trabalham sobre os &iacute;ndices dos layers)
 
-$locaplic - (opcional) endereço do i3geo
+$locaplic - (opcional) endere&ccedil;o do i3geo
 
-$ext - (opcional) extensão geográfica que será aplicada ao mapa
+$ext - (opcional) extens&atilde;o geogr&aacute;fica que ser&aacute; aplicada ao mapa
 */
 	function __construct($map_file,$tema=null,$locaplic="",$ext="")
 	{
@@ -205,7 +205,7 @@ function: geraDestaque
 
 Gera uma imagem para destaque.
 
-Gera a imagem desenhando apenas um tema na resolução atual.
+Gera a imagem desenhando apenas um tema na resolu&ccedil;&atilde;o atual.
 */
 	function geraDestaque()
 	{
@@ -223,8 +223,8 @@ function: alteraRepresentacao
 
 Altera a representacao de um tema.
 
-Temas poligonais são transformados em lineares, e lineares em poligonais.
-A mudança é feita apenas na representação do layer.
+Temas poligonais s&atilde;o transformados em lineares, e lineares em poligonais.
+A mudan&ccedil;a &eacute; feita apenas na representa&ccedil;&atilde;o do layer.
 */
 	function alteraRepresentacao()
 	{
@@ -343,7 +343,7 @@ Reordena os temas baseados em uma lista com a nova ordem.
 
 Parametros:
 
-lista - lista com a nova ordem para os temas. A lista contém os nomes dos temas separados por vírgula.
+lista - lista com a nova ordem para os temas. A lista cont&eacute;m os nomes dos temas separados por v&iacute;rgula.
 */
 	function reordenatemas($lista)
 	{
@@ -386,7 +386,7 @@ function: zoomTema
 
 Zoom para um tema.
 
-Calcula a extensão geográfica de um tema e ajusta o mapa para essa extensão.
+Calcula a extens&atilde;o geogr&aacute;fica de um tema e ajusta o mapa para essa extens&atilde;o.
 */
 	function zoomTema()
 	{
@@ -405,7 +405,7 @@ Calcula a extensão geográfica de um tema e ajusta o mapa para essa extensão.
 		$extatual = $this->mapa->extent;
 		$ret = $this->layer->getmetadata("extensao");
 		//
-		//necessário para evitar que em qualquer redesenho do mapa, seja aplicado o zoom para o tema marcado com aplicaextensao
+		//necess&aacute;rio para evitar que em qualquer redesenho do mapa, seja aplicado o zoom para o tema marcado com aplicaextensao
 		//
 		$this->layer->setmetadata("aplicaextensao","");
 		if($ret == "" && $this->layer->type == MS_LAYER_RASTER)
@@ -457,7 +457,7 @@ Inclui um filtro no tema.
 
 parameters:
 
-$filtro - string com o filtro. As aspas simples devem ser substituídas por |.
+$filtro - string com o filtro. As aspas simples devem ser substitu&iacute;das por |.
 
 $testa - Testa o filtro e retorna uma imagem.
 */
@@ -519,10 +519,10 @@ $testa - Testa o filtro e retorna uma imagem.
 /*
 function: mudaTransparencia
 
-Muda a transparência do tema.
+Muda a transpar&ecirc;ncia do tema.
 
 parameter:
-$valor - Novo valor da transparência
+$valor - Novo valor da transpar&ecirc;ncia
 */
 	function mudaTransparencia($valor)
 	{
@@ -584,19 +584,19 @@ $valor - Novo nome.
 /*
 function: insereFeature
 
-Insere elemento gráfico em um tema.
+Insere elemento gr&aacute;fico em um tema.
 
 parameters:
 
-$marca - nome do símbolo que será utilizado
+$marca - nome do s&iacute;mbolo que ser&aacute; utilizado
 
 $tipo - Tipo de elemento GRAFICOPIZZA|POLYGON|LINE|POINT|ANNOTATION|limpaponto.
 
-$xy - Pares de coordenadas separadas por espaço.
+$xy - Pares de coordenadas separadas por espa&ccedil;o.
 
-$texto - Texto que será inserido, no caso do tipo ANNOTATION.
+$texto - Texto que ser&aacute; inserido, no caso do tipo ANNOTATION.
 
-$position - Posição da âncora do texto.
+$position - Posi&ccedil;&atilde;o da &acirc;ncora do texto.
 
 $partials - Corta texto nas bordas do mapa.
 
@@ -604,11 +604,11 @@ $offsetx - Deslocamento em X.
 
 $offsety - Deslocamento em Y.
 
-$minfeature - Tamanho mínimo que o texto deve ter.
+$minfeature - Tamanho m&iacute;nimo que o texto deve ter.
 
-$mindistance - Distância mínima entre os textos.
+$mindistance - Dist&acirc;ncia m&iacute;nima entre os textos.
 
-$force - Força colisão.
+$force - For&ccedil;a colis&atilde;o.
 
 $shadowcolor - Cor da sombra.
 
@@ -628,7 +628,7 @@ $sombra - Inclui sombra.
 
 $fundo - Cor do fundo.
 
-$angulo - Ângulo do texto.
+$angulo - &Acirc;ngulo do texto.
 
 $tamanho - Tamanho do texto.
 
@@ -742,11 +742,11 @@ function: capturaGeometrias
 Captura as geometrias selecionadas e salva em um arquivo texto serializado (analise de geometrias).
 
 parameters:
-$dir_tmp - diretório temporário do I3Geo
+$dir_tmp - diretório tempor&aacute;rio do I3Geo
 
-$imgdir - diretório temporário das imagens do mapa atual
+$imgdir - diretório tempor&aacute;rio das imagens do mapa atual
 
-$nome - nome que será dado a geometria
+$nome - nome que ser&aacute; dado a geometria
 */
 	function capturaGeometrias($dir_tmp,$imgdir,$nome="")
 	{
@@ -805,12 +805,12 @@ $nome - nome que será dado a geometria
 /*
 function: listaGeometrias
 
-Lista as geometrias arquivos com extensão geo (análise de geometrias).
+Lista as geometrias arquivos com extens&atilde;o geo (an&aacute;lise de geometrias).
 
 parameters:
-$dir_tmp - diretório temporário do I3Geo
+$dir_tmp - diretório tempor&aacute;rio do I3Geo
 
-$imgdir - diretório temporário das imagens do mapa atual
+$imgdir - diretório tempor&aacute;rio das imagens do mapa atual
 */
 	function listaGeometrias($dir_tmp,$imgdir)
 	{
@@ -832,12 +832,12 @@ $imgdir - diretório temporário das imagens do mapa atual
 /*
 function: removerGeometrias
 
-Remove os arquivos correspondentes a determinadas geometrias (análise de geometrias).
+Remove os arquivos correspondentes a determinadas geometrias (an&aacute;lise de geometrias).
 
 parameters:
-$dir_tmp - diretório temporário do I3Geo
+$dir_tmp - diretório tempor&aacute;rio do I3Geo
 
-$imgdir - diretório temporário das imagens do mapa atual
+$imgdir - diretório tempor&aacute;rio das imagens do mapa atual
 
 $lista - lista com os nomes dos arquivos
 */
@@ -854,7 +854,7 @@ $lista - lista com os nomes dos arquivos
 /*
 function: graficotema
 
-Gera um tema com gráficos em cada elemento.
+Gera um tema com gr&aacute;ficos em cada elemento.
 
 parameters:
 
@@ -920,7 +920,7 @@ tema - código do tema
 		$this->xml = "";
 		foreach($menutemas->pegaListaDeMenus() as $menu)
 		{
-			if(!isset($menu["url"])){$menu["url"] = "";} //para efeitos de compatibilidade entre versões do i3geo
+			if(!isset($menu["url"])){$menu["url"] = "";} //para efeitos de compatibilidade entre vers&otilde;es do i3geo
 			$ondexml = $menu["arquivo"];
 			if($menu["url"] != ""){$ondexml = $menu["url"];}
 			$verificaXml = false;
@@ -930,7 +930,7 @@ tema - código do tema
 				if($verificaXml)
 				$this->xml[] = $verificaXml;
 			}
-			else //pega o xml do sistema de administração
+			else //pega o xml do sistema de administra&ccedil;&atilde;o
 			{
 				$verificaXml = simplexml_load_string(geraXmlMenutemas(implode(" ",$this->perfil),$menu["idmenu"],$tipo,$this->locaplic));
 				if($verificaXml)
@@ -964,7 +964,7 @@ function: zoomSel
 
 Zoom para os elementos selecionados de um tema.
 
-Calcula a extensão geográfica dos elementos selecionados de um tema e ajusta o mapa para essa extensão.
+Calcula a extens&atilde;o geogr&aacute;fica dos elementos selecionados de um tema e ajusta o mapa para essa extens&atilde;o.
 */
 	function zoomSel()
 	{
@@ -1042,7 +1042,7 @@ Retorna o valor do elemento DATA
 		if(strtolower($metadata) != "nao")
 		return $this->layer->data;
 		else
-		return "O layer não permite a alteracao do elemento DATA";
+		return "O layer n&atilde;o permite a alteracao do elemento DATA";
 	}
 /*
 function: alteradata
@@ -1065,7 +1065,7 @@ Altera o valor do elemento DATA
 			return $this->layer->data;
 		}
 		else
-		return "O layer não permite a alteracao do elemento DATA";
+		return "O layer n&atilde;o permite a alteracao do elemento DATA";
 	}
 /*
 function: adicionaLabel

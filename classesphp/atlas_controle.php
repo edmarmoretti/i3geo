@@ -2,15 +2,15 @@
 /*
 Title: atlas_controle.php
 
-Controle das requisições em Ajax feitas pela interface Atlas do i3geo
+Controle das requisi&ccedil;&otilde;es em Ajax feitas pela interface Atlas do i3geo
 
-A lista de atlas é definida no sistema de administração do i3Geo ou em um arquivo XML
+A lista de atlas &eacute; definida no sistema de administra&ccedil;&atilde;o do i3Geo ou em um arquivo XML
 
-Recebe as requisições feitas em JavaScript (AJAX) e retorna o resultado para a interface.
+Recebe as requisi&ccedil;&otilde;es feitas em JavaScript (AJAX) e retorna o resultado para a interface.
 
-As principais variáveis são obtidas da seção, definida na inicialização do I3Geo. Se a variável $map_file não for enviada, o retorno é uma mensagem linkquebrado e o fim do programa.
+As principais vari&aacute;veis s&atilde;o obtidas da se&ccedil;&atilde;o, definida na inicializa&ccedil;&atilde;o do I3Geo. Se a vari&aacute;vel $map_file n&atilde;o for enviada, o retorno &eacute; uma mensagem linkquebrado e o fim do programa.
 
-O parâmetro "funcao" define qual a operação que será executada (veja exemplo abaixo). esse parâmetro é verificado em um bloco "switch ($funcao)".
+O par&acirc;metro "funcao" define qual a opera&ccedil;&atilde;o que ser&aacute; executada (veja exemplo abaixo). esse par&acirc;metro &eacute; verificado em um bloco "switch ($funcao)".
 
 Licenca:
 
@@ -18,20 +18,20 @@ GPL2
 
 i3Geo Interface Integrada de Ferramentas de Geoprocessamento para Internet
 
-Direitos Autorais Reservados (c) 2006 Ministério do Meio Ambiente Brasil
+Direitos Autorais Reservados (c) 2006 Minist&eacute;rio do Meio Ambiente Brasil
 Desenvolvedor: Edmar Moretti edmar.moretti@mma.gov.br
 
-Este programa é software livre; você pode redistribuí-lo
-e/ou modificá-lo sob os termos da Licença Pública Geral
+Este programa &eacute; software livre; voc&ecirc; pode redistribu&iacute;-lo
+e/ou modific&aacute;-lo sob os termos da Licen&ccedil;a P&uacute;blica Geral
 GNU conforme publicada pela Free Software Foundation;
 
-Este programa é distribuído na expectativa de que seja útil,
-porém, SEM NENHUMA GARANTIA; nem mesmo a garantia implícita
-de COMERCIABILIDADE OU ADEQUAÇÃO A UMA FINALIDADE ESPECÍFICA.
-Consulte a Licença Pública Geral do GNU para mais detalhes.
-Você deve ter recebido uma cópia da Licença Pública Geral do
-GNU junto com este programa; se não, escreva para a
-Free Software Foundation, Inc., no endereço
+Este programa &eacute; distribu&iacute;do na expectativa de que seja &uacute;til,
+por&eacute;m, SEM NENHUMA GARANTIA; nem mesmo a garantia impl&iacute;cita
+de COMERCIABILIDADE OU ADEQUA&Ccedil;&Atilde;O A UMA FINALIDADE ESPEC&Iacute;FICA.
+Consulte a Licen&ccedil;a P&uacute;blica Geral do GNU para mais detalhes.
+Voc&ecirc; deve ter recebido uma cópia da Licen&ccedil;a P&uacute;blica Geral do
+GNU junto com este programa; se n&atilde;o, escreva para a
+Free Software Foundation, Inc., no endere&ccedil;o
 59 Temple Street, Suite 330, Boston, MA 02111-1307 USA.
 
 Arquivo:
@@ -40,33 +40,33 @@ i3geo/classesphp/atlas_controle.php
 
 Parametros:
 
-funcao {string} - opção que será executada.
+funcao {string} - op&ccedil;&atilde;o que ser&aacute; executada.
 
-g_sid {string} - id da seção PHP.
+g_sid {string} - id da se&ccedil;&atilde;o PHP.
 
 Retorno:
 
-cp - o resultado da operação será retornado em um objeto CPAINT.
+cp - o resultado da opera&ccedil;&atilde;o ser&aacute; retornado em um objeto CPAINT.
 
-Variáveis de Seção:
+Vari&aacute;veis de Se&ccedil;&atilde;o:
 
-dir_tmp - diretório, no servidor, temporário utilizado pelo I3Geo, exemplo: c:/ms4w/tmp/ms_tmp
-locmapserv - localização, no servidor, do CGI, exemplo: /cgi-bin/mapserv.exe
-locaplic - localização, no servidor, do I3Geo, exemplo: c:/ms4w/apache/htdocs/i3geo
-R_path - localização, no servidor, do executável do pacote R, exemplo: c:/ms4w/apache/htdocs/i3geo/pacotes/r/win/bin/R.exe
+dir_tmp - diretório, no servidor, tempor&aacute;rio utilizado pelo I3Geo, exemplo: c:/ms4w/tmp/ms_tmp
+locmapserv - localiza&ccedil;&atilde;o, no servidor, do CGI, exemplo: /cgi-bin/mapserv.exe
+locaplic - localiza&ccedil;&atilde;o, no servidor, do I3Geo, exemplo: c:/ms4w/apache/htdocs/i3geo
+R_path - localiza&ccedil;&atilde;o, no servidor, do execut&aacute;vel do pacote R, exemplo: c:/ms4w/apache/htdocs/i3geo/pacotes/r/win/bin/R.exe
 imgurl - url das imagens geradas pelo mapa, exemplo: http://localhost/ms_tmp/imgTVHbdijFMk/
-tmpurl - url do diretório temporário, exemplo: http://localhost/ms_tmp/
-map_file - endereço, no servidor, do mapfile atual, exemplo: c:/ms4w/tmp/ms_tmp/TVHbdijFMk/TVHbdijFMk.map
-mapext - extensão geográfica do mapa atual, exemplo: -76.5125927 -39.3925675209 -29.5851853 9.49014852081
-perfil - nome do perfil para controlar os temas que serão visíveis na lista de temas.
-mapdir - localização, no servidor, do diretório com o mapfile temporário do mapa atual.
-imgdir - localização, no servidor, das imagens temporárias do mapa atual. 
+tmpurl - url do diretório tempor&aacute;rio, exemplo: http://localhost/ms_tmp/
+map_file - endere&ccedil;o, no servidor, do mapfile atual, exemplo: c:/ms4w/tmp/ms_tmp/TVHbdijFMk/TVHbdijFMk.map
+mapext - extens&atilde;o geogr&aacute;fica do mapa atual, exemplo: -76.5125927 -39.3925675209 -29.5851853 9.49014852081
+perfil - nome do perfil para controlar os temas que ser&atilde;o vis&iacute;veis na lista de temas.
+mapdir - localiza&ccedil;&atilde;o, no servidor, do diretório com o mapfile tempor&aacute;rio do mapa atual.
+imgdir - localiza&ccedil;&atilde;o, no servidor, das imagens tempor&aacute;rias do mapa atual. 
 debug - (pode ser definido como "sim" indica se o erro_reporting deve ser definido como E_ALL
 */
 error_reporting(0);
 $tempo = microtime(1);
 //
-// quando as funções abaixo forem utilizadas, é necessário definir $map_file para que o programa continue.
+// quando as fun&ccedil;&otilde;es abaixo forem utilizadas, &eacute; necess&aacute;rio definir $map_file para que o programa continue.
 //
 //
 //pega as variaveis passadas com get ou post
@@ -88,13 +88,13 @@ if(isset($g_sid))
 if (($funcao == "pegaListaDeAtlas") || ($funcao == "criaAtlas"))
 {$map_file = "";}
 //
-//ativa o php mapscript e as extensões necessárias
-//se as extensões já estiverem carregadas no PHP, vc pode comentar essa linha para que o processamento fique mais rápido
+//ativa o php mapscript e as extens&otilde;es necess&aacute;rias
+//se as extens&otilde;es j&aacute; estiverem carregadas no PHP, vc pode comentar essa linha para que o processamento fique mais r&aacute;pido
 //
 include_once("carrega_ext.php");
 include_once("funcoes_gerais.php");
 //
-//verifica se o usuário está tentando utilizar um link que não funciona mais
+//verifica se o usu&aacute;rio est&aacute; tentando utilizar um link que n&atilde;o funciona mais
 //
 if (!isset($map_file))
 {
@@ -110,7 +110,7 @@ if ($map_file != "")
 	//
 	copiaSeguranca($map_file);
 	//
-	//substitui a string de conexão
+	//substitui a string de conex&atilde;o
 	//
 	substituiCon($map_file,$postgis_mapa);
 }
@@ -124,7 +124,7 @@ if(!isset($locaplic))
 include($locaplic."/admin/php/xml.php");
 $xml = simplexml_load_string(geraXmlAtlas($locaplic,$editores));
 //
-//faz a busca da função que deve ser executada
+//faz a busca da fun&ccedil;&atilde;o que deve ser executada
 //
 switch (strtoupper($funcao))
 {
@@ -143,9 +143,9 @@ Pega a lista de Atlas definida no arquivo xml menutemas/atlas.xml.
 /*
 Valor: CRIAATLAS
 
-Abre um Atlas específico, criando o mapa e chamando a interface desejada.
+Abre um Atlas espec&iacute;fico, criando o mapa e chamando a interface desejada.
 
-Esse programa é chamado diretamente, por exemplo, i3geo/classesphp/atlas_controle.php?&atlasId=
+Esse programa &eacute; chamado diretamente, por exemplo, i3geo/classesphp/atlas_controle.php?&atlasId=
 
 <criaAtlas()>
 */
@@ -163,7 +163,7 @@ Esse programa é chamado diretamente, por exemplo, i3geo/classesphp/atlas_control
 		if (!isset($caminho))
 		{$caminho = "../";}
 		//
-		// a função gravaId será executada no final do processo de geração do mapa (ver ms_criamapa.php)
+		// a fun&ccedil;&atilde;o gravaId ser&aacute; executada no final do processo de gera&ccedil;&atilde;o do mapa (ver ms_criamapa.php)
 		//
 		$executa = "gravaId";
 		$temasa = "";
@@ -173,7 +173,7 @@ Esse programa é chamado diretamente, por exemplo, i3geo/classesphp/atlas_control
 /*
 Valor: PEGALISTADEPRANCHAS
 
-Pega a lista de pranchas de um atlas específico.
+Pega a lista de pranchas de um atlas espec&iacute;fico.
 
 <pegaListaDePranchas()>
 */

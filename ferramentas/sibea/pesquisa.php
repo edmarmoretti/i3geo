@@ -4,7 +4,7 @@ Title: SIBEA-MMA (PHP)
 
 Acessa os web services do MMA para recuperar dados sobre educadores ambientais.
 
-Por ser executado dentro do I3Geo, boa parte dos parâmetros são obtidos da variável de seção.
+Por ser executado dentro do I3Geo, boa parte dos parâmetros são obtidos da vari&aacute;vel de se&ccedil;ão.
 
 Arquivos: 
 
@@ -17,20 +17,20 @@ GPL2
 
 i3Geo Interface Integrada de Ferramentas de Geoprocessamento para Internet
 
-Direitos Autorais Reservados (c) 2006 Ministério do Meio Ambiente Brasil
+Direitos Autorais Reservados (c) 2006 Minist&eacute;rio do Meio Ambiente Brasil
 Desenvolvedor: Edmar Moretti edmar.moretti@mma.gov.br
 
-Este programa é software livre; você pode redistribuí-lo
-e/ou modificá-lo sob os termos da Licença Pública Geral
+Este programa &eacute; software livre; voc&ecirc; pode redistribu&iacute;-lo
+e/ou modific&aacute;-lo sob os termos da Licen&ccedil;a P&uacute;blica Geral
 GNU conforme publicada pela Free Software Foundation;
 
-Este programa é distribuído na expectativa de que seja útil,
-porém, SEM NENHUMA GARANTIA; nem mesmo a garantia implícita
-de COMERCIABILIDADE OU ADEQUAÇÃO A UMA FINALIDADE ESPECÍFICA.
-Consulte a Licença Pública Geral do GNU para mais detalhes.
-Você deve ter recebido uma cópia da Licença Pública Geral do
+Este programa &eacute; distribu&iacute;do na expectativa de que seja &uacute;til,
+por&eacute;m, SEM NENHUMA GARANTIA; nem mesmo a garantia impl&iacute;cita
+de COMERCIABILIDADE OU ADEQUAÇÃO A UMA FINALIDADE ESPEC&Iacute;FICA.
+Consulte a Licen&ccedil;a P&uacute;blica Geral do GNU para mais detalhes.
+Voc&ecirc; deve ter recebido uma c&oacute;pia da Licen&ccedil;a P&uacute;blica Geral do
 GNU junto com este programa; se não, escreva para a
-Free Software Foundation, Inc., no endereço
+Free Software Foundation, Inc., no endere&ccedil;o
 59 Temple Street, Suite 330, Boston, MA 02111-1307 USA.
 
 */
@@ -73,7 +73,7 @@ if ($funcao == "adicionatema")
 /*
 Function: listaTipoFiltro
 
-Obtém a lista de tipos de filtro.
+Obt&eacute;m a lista de tipos de filtro.
 */
 function listaTipoFiltro()
 {
@@ -89,7 +89,7 @@ function listaTipoFiltro()
 /*
 Function: listaValorFiltro
 
-Obtém a lista de valores de um tipo de filtro.
+Obt&eacute;m a lista de valores de um tipo de filtro.
 */
 function listaValorFiltro()
 {
@@ -112,9 +112,9 @@ Parameters:
 
 map_file - arquivo map file atual
 
-dir_tmp - diretório temporário do Mapserver
+dir_tmp - diret&oacute;rio tempor&aacute;rio do Mapserver
 
-imgdir - diretório temporário para guardar as imagens do mapa atual
+imgdir - diret&oacute;rio tempor&aacute;rio para guardar as imagens do mapa atual
 
 filtro - nome do tipo de filtro
 
@@ -124,7 +124,7 @@ function adicionatema()
 {
 	global $map_file,$dir_tmp,$imgdir,$filtro,$valor,$servico,$cp,$nomevalor,$cor,$locaplic,$imgurl;
 	//
-	//pega a lista de códigos siafi
+	//pega a lista de c&oacute;digos siafi
 	//
 	if (function_exists('ereg'))
 	$soapclient = new Xsoapclient($servico."?wsdl","wsdl");
@@ -134,17 +134,17 @@ function adicionatema()
 	if ($filtro == "tipoTitulacaoMaxima")
 	{
 		$resultado = $soapclient->call("sibeaTitulacaoMaxima",$valor);
-		$nometema = "Titulação máxima";		
+		$nometema = "Titula&ccedil;ão m&aacute;xima";		
 	}
 	if ($filtro == "tipoFormacao")
 	{
 		$resultado = $soapclient->call("sibeaFormacao",$valor);
-		$nometema = "Formação";		
+		$nometema = "Forma&ccedil;ão";		
 	}
 	if ($filtro == "tipoAreaFormacao")
 	{
 		$resultado = $soapclient->call("sibeaGrandeArea",$valor);
-		$nometema = "Grande área de formação";		
+		$nometema = "Grande &aacute;rea de forma&ccedil;ão";		
 	}
 	//
 	//converte siafi-ibge

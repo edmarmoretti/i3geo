@@ -13,20 +13,20 @@ GPL2
 
 i3Geo Interface Integrada de Ferramentas de Geoprocessamento para Internet
 
-Direitos Autorais Reservados (c) 2006 Ministério do Meio Ambiente Brasil
+Direitos Autorais Reservados (c) 2006 Minist&eacute;rio do Meio Ambiente Brasil
 Desenvolvedor: Edmar Moretti edmar.moretti@mma.gov.br
 
-Este programa é software livre; você pode redistribuí-lo
-e/ou modificá-lo sob os termos da Licença Pública Geral
+Este programa &eacute; software livre; voc&ecirc; pode redistribu&iacute;-lo
+e/ou modific&aacute;-lo sob os termos da Licen&ccedil;a P&uacute;blica Geral
 GNU conforme publicada pela Free Software Foundation;
 
-Este programa é distribuído na expectativa de que seja útil,
-porém, SEM NENHUMA GARANTIA; nem mesmo a garantia implícita
-de COMERCIABILIDADE OU ADEQUAÇÃO A UMA FINALIDADE ESPECÍFICA.
-Consulte a Licença Pública Geral do GNU para mais detalhes.
-Você deve ter recebido uma cópia da Licença Pública Geral do
-GNU junto com este programa; se não, escreva para a
-Free Software Foundation, Inc., no endereço
+Este programa &eacute; distribu&iacute;do na expectativa de que seja &uacute;til,
+por&eacute;m, SEM NENHUMA GARANTIA; nem mesmo a garantia impl&iacute;cita
+de COMERCIABILIDADE OU ADEQUA&Ccedil;&Atilde;O A UMA FINALIDADE ESPEC&Iacute;FICA.
+Consulte a Licen&ccedil;a P&uacute;blica Geral do GNU para mais detalhes.
+Voc&ecirc; deve ter recebido uma cópia da Licen&ccedil;a P&uacute;blica Geral do
+GNU junto com este programa; se n&atilde;o, escreva para a
+Free Software Foundation, Inc., no endere&ccedil;o
 59 Temple Street, Suite 330, Boston, MA 02111-1307 USA.
 
 Arquivo:
@@ -66,7 +66,7 @@ class Atributos
 	/*
 	Variavel: $qyfile
 	
-	Nome do arquivo de seleção (.qy)
+	Nome do arquivo de sele&ccedil;&atilde;o (.qy)
 	*/
 	public $qyfile;
 	/*
@@ -78,7 +78,7 @@ class Atributos
 	/*
 	Variavel: $v
 	
-	Versão atual do Mapserver (primeiro dígito)
+	Vers&atilde;o atual do Mapserver (primeiro d&iacute;gito)
 	*/
 	public $v;		
 /*
@@ -86,17 +86,17 @@ Function: __construct
 
 Cria um objeto Atributos.
 
-O tipo de interface usada pelo mapa é obtido do metadata "interface". Se for a interface Googlemaps, é feita a alteração temporária da projeção do mapa.
+O tipo de interface usada pelo mapa &eacute; obtido do metadata "interface". Se for a interface Googlemaps, &eacute; feita a altera&ccedil;&atilde;o tempor&aacute;ria da proje&ccedil;&atilde;o do mapa.
 
 parameters:
 
-$map_file - Endereço do mapfile no servidor.
+$map_file - Endere&ccedil;o do mapfile no servidor.
 
 $tema - nome do tema
 
-$locaplic - (opcional) endereço do i3geo
+$locaplic - (opcional) endere&ccedil;o do i3geo
 
-$ext - (opcional) extensão geográfica que será aplicada ao mapa
+$ext - (opcional) extens&atilde;o geogr&aacute;fica que ser&aacute; aplicada ao mapa
 */
 	function __construct($map_file="",$tema="",$locaplic="",$ext="")
 	{
@@ -146,13 +146,13 @@ Salva o mapfile atual
 /*
 function: extensaoShape
 
-Pega a extensão geográfica de um objeto shape.
+Pega a extens&atilde;o geogr&aacute;fica de um objeto shape.
 
 parameters:
 Objeto shape
 
 return:
-xmin ymin xmax ymax separados por espaço.
+xmin ymin xmax ymax separados por espa&ccedil;o.
 */
 	function extensaoShape($shape)
 	{
@@ -161,7 +161,7 @@ xmin ymin xmax ymax separados por espaço.
 		$prjTema = $this->layer->getProjection();
 		$ret = $shape->bounds;
 		//
-		//verifica se o retangulo está ou não em coordenadas geográficas
+		//verifica se o retangulo est&aacute; ou n&atilde;o em coordenadas geogr&aacute;ficas
 		//
 		if($ret->minx > 180 ||  $ret->minx < -180)
 		{
@@ -191,10 +191,10 @@ xmin ymin xmax ymax separados por espaço.
 /*
 function - extensaoRegistro
 
-Pega a extensão geográfica de um registro na tabela de atributos de um tema.
+Pega a extens&atilde;o geogr&aacute;fica de um registro na tabela de atributos de um tema.
 
 parameters:
-$registro - Índice do registro que será consultado.
+$registro - &Iacute;ndice do registro que ser&aacute; consultado.
 */
 	function extensaoRegistro($registro)
 	{
@@ -203,7 +203,7 @@ $registro - Índice do registro que será consultado.
 		$this->layer->set("template","none.htm");
 		$this->layer->setfilter("");
 		$ext = "";
-		//procura o registro e pega a extensão geográfica
+		//procura o registro e pega a extens&atilde;o geogr&aacute;fica
 		if($this->v == 6){
 			$this->layer->open();
 			$shape = $this->layer->getShape(new resultObj($registro));
@@ -230,7 +230,7 @@ Lista os itens de um tema.
 */
 	function listaItens()
 	{
-		//verifica se o tema é um grupo e cria um array com a lista de temas
+		//verifica se o tema &eacute; um grupo e cria um array com a lista de temas
 		$vermultilayer = new vermultilayer();
 		$vermultilayer->verifica($this->arquivo,$this->nome);
 		if ($vermultilayer->resultado == 1) // o tema e multi layer
@@ -272,7 +272,7 @@ $tipo - Tipo de busca brasil|null
 		{$this->mapa = extPadrao($this->mapa);}
 		$this->layer->set("template","none.htm");
 		$this->layer->setfilter("");
-		//le o arquivo de query se existir e checa se existe seleção para o tema
+		//le o arquivo de query se existir e checa se existe sele&ccedil;&atilde;o para o tema
 		$items = pegaItens($this->layer,$this->mapa);
 		
 		$shapes = retornaShapesSelecionados($this->layer,$this->arquivo,$this->mapa);
@@ -308,19 +308,19 @@ O range de busca pode ser limitado.
 
 parameters:
 
-$itemtema - Tema que será processado.
+$itemtema - Tema que ser&aacute; processado.
 
-$tipo - Tipo de abrangência espacial (brasil ou mapa).
+$tipo - Tipo de abrang&ecirc;ncia espacial (brasil ou mapa).
 
-$unico - Lista valores únicos (sim ou vazio).
+$unico - Lista valores &uacute;nicos (sim ou vazio).
 
 $inicio - Inicia do registro.
 
 $fim - Termina no registro.
 
-$tipolista - Indica se serão mostrados todos os registros ou apenas os selecionados (tudo|selecionados)
+$tipolista - Indica se ser&atilde;o mostrados todos os registros ou apenas os selecionados (tudo|selecionados)
 
-$dadosDaClasse - sim|nao Indica se serão obtidos os dados que descrevem a classe do layer que contém o registro
+$dadosDaClasse - sim|nao Indica se ser&atilde;o obtidos os dados que descrevem a classe do layer que cont&eacute;m o registro
 */
 	function listaRegistros($itemtema,$tipo,$unico,$inicio,$fim,$tipolista,$dadosDaClasse="nao")
 	{
@@ -332,13 +332,13 @@ $dadosDaClasse - sim|nao Indica se serão obtidos os dados que descrevem a classe
 		if ((!isset($tipolista)) || ($tipolista=="")){$tipolista = "tudo";}
 		if (!isset($inicio)){$inicio = 0;}
 		if (!isset($fim)){$fim = "";}
-		//se tipo for igual a brasil, define a extensão geográfica total
+		//se tipo for igual a brasil, define a extens&atilde;o geogr&aacute;fica total
 		if ($tipo == "brasil")
 		{$this->mapa = extPadrao($this->mapa);}
 		$this->layer->set("template","none.htm");
 		$this->layer->setfilter("");
 		if ($this->layer->data == "")
-		{return "erro. O tema não tem tabela";}
+		{return "erro. O tema n&atilde;o tem tabela";}
 		//pega os valores
 		if ((!isset($itemtema)) || ($itemtema == ""))
 		{$items = pegaItens($this->layer,$this->mapa);}
@@ -480,13 +480,13 @@ Procura valores em uma tabela que aderem a uma palavra de busca.
 
 parameters:
 
-$palavra - Palavra que será procurada.
+$palavra - Palavra que ser&aacute; procurada.
 
 $lista - Lista de busca no formato item;tema,item;tema.
 
 $tipo - Tipo de busca exata|qualquer.
 
-$onde - Tipo de abrangência espacial (brasil ou mapa)
+$onde - Tipo de abrang&ecirc;ncia espacial (brasil ou mapa)
 */
 	function buscaRegistros($palavra,$lista,$tipo,$onde)
 	{
@@ -524,14 +524,14 @@ $onde - Tipo de abrangência espacial (brasil ou mapa)
 			$this->layer = $l;
 			$l->set("template","none.htm");
 			if ($l->data == "")
-			{return "Erro. O tema não tem tabela";}
+			{return "Erro. O tema n&atilde;o tem tabela";}
 			if(strtoupper($l->getmetadata("convcaracter")) == "NAO")
 			{$convC = false;}
 			else
 			{$convC = true;}			
 			$filtro = $l->getfilterstring();
 			if ($filtro != ""){$l->setfilter("");}
-			$buscas = "ÁÃÓÕÔáàãâóòôõúûíéêç";
+			$buscas = "&Aacute;&Atilde;Ó&Otilde;&Ocirc;&aacute;à&atilde;&acirc;óò&ocirc;&otilde;&uacute;û&iacute;&eacute;&ecirc;&ccedil;";
 			$buscaUTF = $this->converte($buscas);
 			$trocas = "AAOOOaaaaoooouuieecAAOOOaaaaoooouuieec";
 			$buscas = $buscas.$buscaUTF;
@@ -665,12 +665,12 @@ $onde - Tipo de abrangência espacial (brasil ou mapa)
 /*
 function: estatDescritivas
 
-Calcula estatísticas básicas de uma tabela de um tema.
+Calcula estat&iacute;sticas b&aacute;sicas de uma tabela de um tema.
 
 parameters:
-$item - Item que será calculado.
+$item - Item que ser&aacute; calculado.
 
-$exclui - Valor que não será cosiderado.
+$exclui - Valor que n&atilde;o ser&aacute; cosiderado.
 
 Include:
 <classe_estatistica.php>
@@ -729,7 +729,7 @@ Include:
 /*
 function: identifica
 
-Depreciado na versão 4.2 (utilize "identifica2")
+Depreciado na vers&atilde;o 4.2 (utilize "identifica2")
 
 Identifica elementos no mapa.
 
@@ -865,11 +865,11 @@ $xy - coordenada x e y separadas por virgulao.
 
 $resolucao - Resolucao de busca.
 
-$ext - (opcional) Extensão geográfica que será aplicada ao mapa antes da operação de query (xmin ymin xmax ymax)
+$ext - (opcional) Extens&atilde;o geogr&aacute;fica que ser&aacute; aplicada ao mapa antes da opera&ccedil;&atilde;o de query (xmin ymin xmax ymax)
 
-$listaDeTemas - (opcional) Lista com os códigos dos temas que serão identificados - vale apenas se $opcao = lista
+$listaDeTemas - (opcional) Lista com os códigos dos temas que ser&atilde;o identificados - vale apenas se $opcao = lista
 
-$wkt - (opcional) {boolean} inclui ou não o valor do wkt da geometria
+$wkt - (opcional) {boolean} inclui ou n&atilde;o o valor do wkt da geometria
 */
 	function identifica2($opcao,$xy,$resolucao,$ext="",$listaDeTemas="",$wkt="nao")
 	{
@@ -995,9 +995,9 @@ $wkt - (opcional) {boolean} inclui ou não o valor do wkt da geometria
 	/*
 	function: retornaI2
 
-	Depreciado na versão 4.2
+	Depreciado na vers&atilde;o 4.2
 
-	Processa o resultado da identificação de um elemento compondo um array de strings formatadas.
+	Processa o resultado da identifica&ccedil;&atilde;o de um elemento compondo um array de strings formatadas.
 
 	parameters:
 	$listatemas - Lista de temas
@@ -1026,9 +1026,9 @@ $wkt - (opcional) {boolean} inclui ou não o valor do wkt da geometria
 	/*
 	function: retornaI
 
-	Depreciado na versão 4.2
+	Depreciado na vers&atilde;o 4.2
 
-	Processa o resultado da identificação de um elemento compondo um array de strings formatadas.
+	Processa o resultado da identifica&ccedil;&atilde;o de um elemento compondo um array de strings formatadas.
 
 	parameters:
 	$listatemas - Lista de temas
@@ -1068,13 +1068,13 @@ $wkt - (opcional) {boolean} inclui ou não o valor do wkt da geometria
 	/*
 	function: identificaQBP
 
-	Depreciado na versão 4.2
+	Depreciado na vers&atilde;o 4.2
 
 	Identifica um elemento utilizando querybypoint.
 
 	parameters:
 
-	$tema - Tema que será identificado
+	$tema - Tema que ser&aacute; identificado
 
 	$x - Coordenada X.
 
@@ -1082,11 +1082,11 @@ $wkt - (opcional) {boolean} inclui ou não o valor do wkt da geometria
 
 	$map_file - Arquivo map file.
 
-	$resolucao - Resolução de busca.
+	$resolucao - Resolu&ccedil;&atilde;o de busca.
 
-	$item - Item único que será identificado.
+	$item - Item &uacute;nico que ser&aacute; identificado.
 
-	$tiporetorno - Tipo de retorno dos dados. Se for vazio, o retorno é formatado como string, se for shape, retorna o objeto shape 
+	$tiporetorno - Tipo de retorno dos dados. Se for vazio, o retorno &eacute; formatado como string, se for shape, retorna o objeto shape 
 	*/
 	function identificaQBP($tema,$x,$y,$map_file,$resolucao,$item="",$tiporetorno="")
 	{
@@ -1097,7 +1097,7 @@ $wkt - (opcional) {boolean} inclui ou não o valor do wkt da geometria
 		$pt = ms_newPointObj();
 		$pt->setXY($x,$y);
 		//
-		//operação especial para o caso de wms
+		//opera&ccedil;&atilde;o especial para o caso de wms
 		//
 		if($layer->connectiontype == MS_WMS)
 		{
@@ -1191,8 +1191,8 @@ $wkt - (opcional) {boolean} inclui ou não o valor do wkt da geometria
 				$descisarray = explode(",",$descis); // array com a descri&ccedil;&atilde;o dos itens
 				$itsarray = explode(",",$its); // array com os nomes dos itens
 				$lks = $layer->getmetadata("ITENSLINK"); // link dos itens
-				$itemimg = $layer->getmetadata("ITEMIMG"); //indica um item que será utilizado para colocar um ícone
-				$locimg = $layer->getmetadata("IMGLOC"); //indica o local onde estão os ícones
+				$itemimg = $layer->getmetadata("ITEMIMG"); //indica um item que ser&aacute; utilizado para colocar um &iacute;cone
+				$locimg = $layer->getmetadata("IMGLOC"); //indica o local onde est&atilde;o os &iacute;cones
 				$lksarray = explode(",",$lks);
 				if ($item != "") //utilizado pela funcao tip
 				{
@@ -1279,21 +1279,21 @@ $wkt - (opcional) {boolean} inclui ou não o valor do wkt da geometria
 
 	parameters:
 
-	$tema - Tema que será identificado (se for vazio, será utilizado o objeto mapa definido no construtor da classe)
+	$tema - Tema que ser&aacute; identificado (se for vazio, ser&aacute; utilizado o objeto mapa definido no construtor da classe)
 
 	$x - Coordenada X.
 
 	$y - Coordenada Y.
 
-	$map_file - Arquivo map file (se for vazio, será utilizado o objeto mapa definido no construtor da classe).
+	$map_file - Arquivo map file (se for vazio, ser&aacute; utilizado o objeto mapa definido no construtor da classe).
 
-	$resolucao - Resolução de busca.
+	$resolucao - Resolu&ccedil;&atilde;o de busca.
 
-	$item - Item único que será identificado.
+	$item - Item &uacute;nico que ser&aacute; identificado.
 
-	$tiporetorno - Tipo de retorno dos dados. Se for vazio, o retorno é formatado como string, se for shape, retorna o objeto shape, googlerelevo retorna no padrão da API do google para relevo
+	$tiporetorno - Tipo de retorno dos dados. Se for vazio, o retorno &eacute; formatado como string, se for shape, retorna o objeto shape, googlerelevo retorna no padr&atilde;o da API do google para relevo
 
-	$etip  {booblean} - indica se a solicitação é para obtenção dos dados do tipo etiqueta
+	$etip  {booblean} - indica se a solicita&ccedil;&atilde;o &eacute; para obten&ccedil;&atilde;o dos dados do tipo etiqueta
 	*/
 	function identificaQBP2($tema="",$x=0,$y=0,$map_file="",$resolucao=0,$item="",$tiporetorno="",$etip=false,$ext="",$wkt="nao")
 	{
@@ -1323,7 +1323,7 @@ $wkt - (opcional) {boolean} inclui ou não o valor do wkt da geometria
 		else
 		{$convC = true;}		
 		//
-		//operação especial para o caso de wms
+		//opera&ccedil;&atilde;o especial para o caso de wms
 		//
 		if($layer->connectiontype == MS_WMS)
 		{
@@ -1408,8 +1408,8 @@ $wkt - (opcional) {boolean} inclui ou não o valor do wkt da geometria
 		$itens = $layer->getmetadata("ITENS"); // itens
 		$itensdesc = $layer->getmetadata("ITENSDESC"); // descri&ccedil;&atilde;o dos itens
 		$lks = $layer->getmetadata("ITENSLINK"); // link dos itens
-		$itemimg = $layer->getmetadata("ITEMIMG"); //indica um item que será utilizado para colocar um ícone
-		$locimg = $layer->getmetadata("IMGLOC"); //indica o local onde estão os ícones
+		$itemimg = $layer->getmetadata("ITEMIMG"); //indica um item que ser&aacute; utilizado para colocar um &iacute;cone
+		$locimg = $layer->getmetadata("IMGLOC"); //indica o local onde est&atilde;o os &iacute;cones
 		$tips = $layer->getmetadata("TIP");
 		$itensLayer = pegaItens($layer,$mapa);
 		$nitens = count($itensLayer);
@@ -1538,7 +1538,7 @@ $wkt - (opcional) {boolean} inclui ou não o valor do wkt da geometria
 							else
 							if($itemimg[$conta] != "")
 							{$img = "<img src='".$shape->values[$itemimg[$conta]]."' //>";}					
-							//indica se o item é tbm uma etiqueta
+							//indica se o item &eacute; tbm uma etiqueta
 							$etiqueta = "nao";
 							if(in_array($it,$tips))
 							{$etiqueta = "sim";}
@@ -1577,7 +1577,7 @@ $wkt - (opcional) {boolean} inclui ou não o valor do wkt da geometria
 	
 	Parametro:
 	
-	$texto - string que será convertida
+	$texto - string que ser&aacute; convertida
 	
 	Return:
 	

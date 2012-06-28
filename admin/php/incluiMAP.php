@@ -1,10 +1,10 @@
 <?php
 /*
-Title: incluiMAP.php
+ Title: incluiMAP.php
 
 Ajusta mapfiles antigos incluindo a palavra MAP na primeira linha.
 
-Esse ajuste é necessário em versões do Mapserver posteriores à 5.2
+Esse ajuste &eacute; necess&aacute;rio em vers&otilde;es do Mapserver posteriores à 5.2
 
 Licenca:
 
@@ -12,20 +12,20 @@ GPL2
 
 i3Geo Interface Integrada de Ferramentas de Geoprocessamento para Internet
 
-Direitos Autorais Reservados (c) 2006 Ministério do Meio Ambiente Brasil
+Direitos Autorais Reservados (c) 2006 Minist&eacute;rio do Meio Ambiente Brasil
 Desenvolvedor: Edmar Moretti edmar.moretti@mma.gov.br
 
-Este programa é software livre; você pode redistribuí-lo
-e/ou modificá-lo sob os termos da Licença Pública Geral
+Este programa &eacute; software livre; voc&ecirc; pode redistribu&iacute;-lo
+e/ou modific&aacute;-lo sob os termos da Licen&ccedil;a P&uacute;blica Geral
 GNU conforme publicada pela Free Software Foundation;
 
-Este programa é distribuído na expectativa de que seja útil,
-porém, SEM NENHUMA GARANTIA; nem mesmo a garantia implícita
-de COMERCIABILIDADE OU ADEQUAÇÃO A UMA FINALIDADE ESPECÍFICA.
-Consulte a Licença Pública Geral do GNU para mais detalhes.
-Você deve ter recebido uma cópia da Licença Pública Geral do
-GNU junto com este programa; se não, escreva para a
-Free Software Foundation, Inc., no endereço
+Este programa &eacute; distribu&iacute;do na expectativa de que seja &uacute;til,
+por&eacute;m, SEM NENHUMA GARANTIA; nem mesmo a garantia impl&iacute;cita
+de COMERCIABILIDADE OU ADEQUA&Ccedil;&Atilde;O A UMA FINALIDADE ESPEC&Iacute;FICA.
+Consulte a Licen&ccedil;a P&uacute;blica Geral do GNU para mais detalhes.
+Voc&ecirc; deve ter recebido uma cópia da Licen&ccedil;a P&uacute;blica Geral do
+	GNU junto com este programa; se n&atilde;o, escreva para a
+Free Software Foundation, Inc., no endere&ccedil;o
 59 Temple Street, Suite 330, Boston, MA 02111-1307 USA.
 
 Arquivo:
@@ -36,22 +36,24 @@ i3geo/admin/php/incluiMAP.php
 include_once("admin.php");
 error_reporting(0);
 if(verificaEditores($editores) == "nao")
-{echo "Vc nao e um editor cadastrado. Apenas os editores definidos em i3geo/ms_configura.php podem acessar o sistema de administracao.";exit;}
+{
+	echo "Vc nao e um editor cadastrado. Apenas os editores definidos em i3geo/ms_configura.php podem acessar o sistema de administracao.";exit;
+}
 
 $arquivos = array();
 if (is_dir($locaplic."/temas"))
 {
-	if ($dh = opendir($locaplic."/temas")) 
+	if ($dh = opendir($locaplic."/temas"))
 	{
-   		while (($file = readdir($dh)) !== false) 
+		while (($file = readdir($dh)) !== false)
 		{
 			if(!stristr($file, '.map') === FALSE)
 			{
 				$arquivos[] = $file;
 			}
 		}
-   	}
-   	closedir($dh);
+	}
+	closedir($dh);
 }
 echo "Arquivos convertidos: <br>";
 foreach($arquivos as $arquivo)
@@ -67,32 +69,35 @@ foreach($arquivos as $arquivo)
 		$buffer = fgets($abre);
 		$buffer = str_replace(PHP_EOL,"",rtrim($buffer));
 		if(trim($buffer) != "MAP" && $buffer != "")
-		{$maparray[] = $buffer;}
+		{
+			$maparray[] = $buffer;
+		}
 		else
-		{$mapExiste = true;}
+		{$mapExiste = true;
+		}
 	}
 	fclose($abre);
 	$search = array(
-		"transparency ",
-		"LABELANGLEITEM ",
-		"LABELMAXSCALE ",
-		"LABELMINSCALE ",
-		"LABELMINSCALE ",
-		"LABELSIZEITEM ",
-		"MAXSCALE ",
-		"MINSCALE ",
-		"SYMBOLSCALE "
+			"transparency ",
+			"LABELANGLEITEM ",
+			"LABELMAXSCALE ",
+			"LABELMINSCALE ",
+			"LABELMINSCALE ",
+			"LABELSIZEITEM ",
+			"MAXSCALE ",
+			"MINSCALE ",
+			"SYMBOLSCALE "
 	);
 	$replace = array(
-		"OPACITY ",
-		"#LABELANGLEITEM ",
-		"LABELMAXSCALEDENOM ",
-		"LABELMINSCALEDENOM ",
-		"LABELMINSCALEDENOM ",
-		"#LABELSIZEITEM ",
-		"MAXSCALEDENOM ",
-		"MINSCALEDENOM ",
-		"SYMBOLSCALEDENOM "
+			"OPACITY ",
+			"#LABELANGLEITEM ",
+			"LABELMAXSCALEDENOM ",
+			"LABELMINSCALEDENOM ",
+			"LABELMINSCALEDENOM ",
+			"#LABELSIZEITEM ",
+			"MAXSCALEDENOM ",
+			"MINSCALEDENOM ",
+			"SYMBOLSCALEDENOM "
 	);
 	str_ireplace($search,$replace,$maparray);
 	$abre = fopen($arq, "wt");

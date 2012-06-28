@@ -22,33 +22,33 @@ if(screen.availWidth > 700)
 /*
 Title: geraminiatura.php
 
-Gera as miniaturas dos mapas baseado nos mapfiles existentes em i3geo/temas. As miniaturas são utilizadas no i3geo na guia temas para mostrar um preview de cada tema.
+Gera as miniaturas dos mapas baseado nos mapfiles existentes em i3geo/temas. As miniaturas s&atilde;o utilizadas no i3geo na guia temas para mostrar um preview de cada tema.
 
-Por padrão, as imagens são armazenadas no diretório temporário do i3geo e devem ser movidas para o diretório i3geo/temas/miniaturas 
-para poderem ser utilizadas. O programa verifica se a miniatura já existe no diretório temas/miniaturas e gera apenas as que faltarem.
+Por padr&atilde;o, as imagens s&atilde;o armazenadas no diretório tempor&aacute;rio do i3geo e devem ser movidas para o diretório i3geo/temas/miniaturas 
+para poderem ser utilizadas. O programa verifica se a miniatura j&aacute; existe no diretório temas/miniaturas e gera apenas as que faltarem.
 
-É utilizado também como um include pelo sistema de administração, permitindo armazenar as miniaturas no local correto.
+&Eacute; utilizado tamb&eacute;m como um include pelo sistema de administra&ccedil;&atilde;o, permitindo armazenar as miniaturas no local correto.
 
 Licenca:
 
 i3Geo Interface Integrada de Ferramentas de Geoprocessamento para Internet
 
-Direitos Autorais Reservados (c) 2006 Ministério do Meio Ambiente Brasil
+Direitos Autorais Reservados (c) 2006 Minist&eacute;rio do Meio Ambiente Brasil
 Desenvolvedor: Edmar Moretti edmar.moretti@mma.gov.br
 
-Colaboração: Luis Henrique Weirich de Matos
+Colabora&ccedil;&atilde;o: Luis Henrique Weirich de Matos
 
-Este programa é software livre; você pode redistribuí-lo
-e/ou modificá-lo sob os termos da Licença Pública Geral
+Este programa &eacute; software livre; voc&ecirc; pode redistribu&iacute;-lo
+e/ou modific&aacute;-lo sob os termos da Licen&ccedil;a P&uacute;blica Geral
 GNU conforme publicada pela Free Software Foundation;
 
-Este programa é distribuído na expectativa de que seja útil,
-porém, SEM NENHUMA GARANTIA; nem mesmo a garantia implícita
-de COMERCIABILIDADE OU ADEQUAÇÃO A UMA FINALIDADE ESPECÍFICA.
-Consulte a Licença Pública Geral do GNU para mais detalhes.
-Você deve ter recebido uma cópia da Licença Pública Geral do
-GNU junto com este programa; se não, escreva para a
-Free Software Foundation, Inc., no endereço
+Este programa &eacute; distribu&iacute;do na expectativa de que seja &uacute;til,
+por&eacute;m, SEM NENHUMA GARANTIA; nem mesmo a garantia impl&iacute;cita
+de COMERCIABILIDADE OU ADEQUA&Ccedil;&Atilde;O A UMA FINALIDADE ESPEC&Iacute;FICA.
+Consulte a Licen&ccedil;a P&uacute;blica Geral do GNU para mais detalhes.
+Voc&ecirc; deve ter recebido uma cópia da Licen&ccedil;a P&uacute;blica Geral do
+GNU junto com este programa; se n&atilde;o, escreva para a
+Free Software Foundation, Inc., no endere&ccedil;o
 59 Temple Street, Suite 330, Boston, MA 02111-1307 USA.
 
 Arquivo: i3geo/geraminiatura.php
@@ -98,9 +98,9 @@ if($tipo == "mini" || $tipo == "todos" || $tipo == "grande" || $tipo == "")
 	ms_ResetErrorList();
 	if (!isset($tipo) || $tipo == "")
 	{
-		echo "Utilize geraminiatura.php?tipo=mini ou grande ou todos. As imagens são armazenadas no diretório temporário.";
+		echo "Utilize geraminiatura.php?tipo=mini ou grande ou todos. As imagens s&atilde;o armazenadas no diretório tempor&aacute;rio.";
 		echo "<br>Após geradas as imagens, copie os arquivos para o diretório i3geo/temas/miniaturas.";
-		echo "<br>As miniaturas são geradas apenas para os arquivos que ainda não existem no diretório temas/miniaturas.";
+		echo "<br>As miniaturas s&atilde;o geradas apenas para os arquivos que ainda n&atilde;o existem no diretório temas/miniaturas.";
 		echo "<br><a href='geraminiatura.php?tipo=todos' >Gerar todas as miniaturas</a>";
 		echo "<br><a href='geraminiatura.php?tipo=mini' >Gerar apenas as pequenas</a>";
 		echo "<br><a href='geraminiatura.php?tipo=grande' >Gerar apenas as grandes</a>";
@@ -129,7 +129,7 @@ if($tipo == "mini" || $tipo == "todos" || $tipo == "grande" || $tipo == "")
 	}
 }
 //
-//se tipo for igual a "admin", as imagens são gravadas em i3geo/temas/miniaturas
+//se tipo for igual a "admin", as imagens s&atilde;o gravadas em i3geo/temas/miniaturas
 //
 function verificaMiniatura($map,$tipo,$admin=false)
 {
@@ -155,7 +155,7 @@ function verificaMiniatura($map,$tipo,$admin=false)
 			else
 			{$f = $locaplic."/aplicmap/".$base.".map";}
 			if(!file_exists($base)){
-				echo "<span style=color:red >ARQUIVO $base NÂO FOI ENCONTRADO. CORRIJA ISSO EM ms_configura.php";
+				echo "<span style=color:red >ARQUIVO $base N&Acirc;O FOI ENCONTRADO. CORRIJA ISSO EM ms_configura.php";
 				exit;
 			}
 		}

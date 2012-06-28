@@ -1,11 +1,11 @@
 
 /*jslint plusplus:false,white:false,undef: false, rhino: true, onevar: true, evil: true */
 /*
-Title: Insere gráfico interativo
+Title: Insere gr&aacute;fico interativo
 
-Inclui gráficos em elementos indicados pelo usuário tendo como fonte a tabela de atributos de um tema.
-Abre uma janela com várias opções e lista de itens para os gráficos.
-O tema que será utilizado é o que estiver armazenado na variável global i3GEO.temaAtivo
+Inclui gr&aacute;ficos em elementos indicados pelo usu&aacute;rio tendo como fonte a tabela de atributos de um tema.
+Abre uma janela com v&aacute;rias op&ccedil;&otilde;es e lista de itens para os gr&aacute;ficos.
+O tema que ser&aacute; utilizado &eacute; o que estiver armazenado na vari&aacute;vel global i3GEO.temaAtivo
 
 Veja:
 
@@ -13,24 +13,24 @@ Veja:
 
 Arquivo: i3geo/ferramentas/inseregrafico/index.js.php
 
-About: Licença
+About: Licen&ccedil;a
 
 i3Geo Interface Integrada de Ferramentas de Geoprocessamento para Internet
 
-Direitos Autorais Reservados (c) 2006 Ministério do Meio Ambiente Brasil
+Direitos Autorais Reservados (c) 2006 Minist&eacute;rio do Meio Ambiente Brasil
 Desenvolvedor: Edmar Moretti edmar.moretti@mma.gov.br
 
-Este programa é software livre; você pode redistribuí-lo
-e/ou modificá-lo sob os termos da Licença Pública Geral
+Este programa &eacute; software livre; voc&ecirc; pode redistribu&iacute;-lo
+e/ou modific&aacute;-lo sob os termos da Licen&ccedil;a P&uacute;blica Geral
 GNU conforme publicada pela Free Software Foundation;
 
-Este programa é distribuído na expectativa de que seja útil,
-porém, SEM NENHUMA GARANTIA; nem mesmo a garantia implícita
-de COMERCIABILIDADE OU ADEQUAÇÃO A UMA FINALIDADE ESPECÍFICA.
-Consulte a Licença Pública Geral do GNU para mais detalhes.
-Você deve ter recebido uma cópia da Licença Pública Geral do
+Este programa &eacute; distribu&iacute;do na expectativa de que seja &uacute;til,
+por&eacute;m, SEM NENHUMA GARANTIA; nem mesmo a garantia impl&iacute;cita
+de COMERCIABILIDADE OU ADEQUAÇÃO A UMA FINALIDADE ESPEC&Iacute;FICA.
+Consulte a Licen&ccedil;a P&uacute;blica Geral do GNU para mais detalhes.
+Voc&ecirc; deve ter recebido uma c&oacute;pia da Licen&ccedil;a P&uacute;blica Geral do
 GNU junto com este programa; se não, escreva para a
-Free Software Foundation, Inc., no endereço
+Free Software Foundation, Inc., no endere&ccedil;o
 59 Temple Street, Suite 330, Boston, MA 02111-1307 USA.
 */
 if(typeof(i3GEOF) === 'undefined'){
@@ -44,17 +44,17 @@ i3GEOF.insereGrafico = {
 	/*
 	Variavel: aguarde
 	
-	Estilo do objeto DOM com a imagem de aguarde existente no cabeçalho da janela.
+	Estilo do objeto DOM com a imagem de aguarde existente no cabe&ccedil;alho da janela.
 	*/
 	aguarde: "",
 	/*
 	Function: inicia
 	
-	Inicia a ferramenta. É chamado por criaJanelaFlutuante
+	Inicia a ferramenta. &Eacute; chamado por criaJanelaFlutuante
 	
 	Parametro:
 	
-	iddiv {String} - id do div que receberá o conteudo HTML da ferramenta
+	iddiv {String} - id do div que receber&aacute; o conteudo HTML da ferramenta
 	*/
 	inicia: function(iddiv){
 		try{
@@ -78,11 +78,11 @@ i3GEOF.insereGrafico = {
 	/*
 	Function: html
 	
-	Gera o código html para apresentação das opções da ferramenta
+	Gera o c&oacute;digo html para apresenta&ccedil;ão das op&ccedil;&otilde;es da ferramenta
 	
 	Retorno:
 	
-	String com o código html
+	String com o c&oacute;digo html
 	*/
 	html:function(){
 		var ins = '';
@@ -104,12 +104,12 @@ i3GEOF.insereGrafico = {
 		ins += '	<div class=guiaobj id="i3GEOinseregraficoguia2obj" style="left:1px;display:none;">';
 		ins += '		<table summary="" class=lista width="70%">';
 		ins += '		<tr>  ';
-		ins += '			<td>Tamanho do círculo:</td>';
+		ins += '			<td>Tamanho do c&iacute;rculo:</td>';
 		ins += '			<td>';
 		ins += $inputText("","","i3GEOinseregraficow","",5,"50")+'</td>';
 		ins += '		</tr><tr><td></td><td>&nbsp;</td></tr>';
 		ins += '		<tr>';
-		ins += '			<td>Inclina&ccedil;&atilde;o do círculo:</td>';
+		ins += '			<td>Inclina&ccedil;&atilde;o do c&iacute;rculo:</td>';
 		ins += '			<td>';
 		ins += $inputText("","","i3GEOinseregraficoinclinacao","",4,"1.5")+'</td>';
 		ins += '		</tr><tr><td></td><td>&nbsp;</td></tr>';
@@ -130,7 +130,7 @@ i3GEOF.insereGrafico = {
 	*/	
 	criaJanelaFlutuante: function(){
 		var minimiza,cabecalho,janela,divid,temp,titulo;
-		//funcao que sera executada ao ser clicado no cabeçalho da janela
+		//funcao que sera executada ao ser clicado no cabe&ccedil;alho da janela
 		cabecalho = function(){
 			i3GEOF.insereGrafico.ativaFoco();
 		};
@@ -190,9 +190,9 @@ i3GEOF.insereGrafico = {
 	/*
 	Function: insere
 	
-	Insere um grafico no mapa na posição clicada
+	Insere um grafico no mapa na posi&ccedil;ão clicada
 
-	O ponto é obtidos do objeto objposicaocursor e os demais parâmetros da janela interna aberta no iframe "wdocai"
+	O ponto &eacute; obtidos do objeto objposicaocursor e os demais parâmetros da janela interna aberta no iframe "wdocai"
 	
 	Veja:
 	
@@ -226,7 +226,7 @@ i3GEOF.insereGrafico = {
 	/*
 	Function: comboTemas
 	
-	Cria o combo com os temas disponíveis (temas ligados) para adição dos gráficos.
+	Cria o combo com os temas dispon&iacute;veis (temas ligados) para adi&ccedil;ão dos gr&aacute;ficos.
 	
 	Veja:
 	
@@ -258,7 +258,7 @@ i3GEOF.insereGrafico = {
 	/*
 	Function: listaItens
 	
-	Monta a listagem de itens de um tema com a opção de seleção de cor
+	Monta a listagem de itens de um tema com a op&ccedil;ão de sele&ccedil;ão de cor
 	
 	Parametro:
 	
@@ -286,14 +286,14 @@ i3GEOF.insereGrafico = {
 	/*
 	Function: corj
 	
-	Abre a janela para o usuário selecionar uma cor interativamente
+	Abre a janela para o usu&aacute;rio selecionar uma cor interativamente
 	*/
 	corj: function(obj)
 	{i3GEO.util.abreCor("",obj);},
 	/*
 	Function: pegaItensMarcados
 	
-	Recupera os itens que foram marcados e monta uma lista para enviar como parâmetro para a função de geração dos gráficos
+	Recupera os itens que foram marcados e monta uma lista para enviar como parâmetro para a fun&ccedil;ão de gera&ccedil;ão dos gr&aacute;ficos
 	*/
 	pegaItensMarcados: function(){
 		var listadeitens = [],
@@ -317,7 +317,7 @@ i3GEOF.insereGrafico = {
 	/*
 	Function: legenda
 	
-	Mostra a legenda no mapa do último gráfico inserido
+	Mostra a legenda no mapa do &uacute;ltimo gr&aacute;fico inserido
 	*/
 	legenda: function(){
 		var par = i3GEOF.insereGrafico.pegaItensMarcados(),

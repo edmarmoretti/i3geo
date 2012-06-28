@@ -4,8 +4,8 @@ Title: parsemapfile.php
 
 Converte um mapfile em um arquivo XML
 
-O padrão XML utilizado é compatível com a estrutura de um projeto do softwrae GVSIG ate a versão 1.1
-Esse XML é utilizado pelo plugin do i3Geo para GVSIG, que permite visualizar a árvore de temas do i3Geo dentro do GVSIG.
+O padr&atilde;o XML utilizado &eacute; compat&iacute;vel com a estrutura de um projeto do softwrae GVSIG ate a vers&atilde;o 1.1
+Esse XML &eacute; utilizado pelo plugin do i3Geo para GVSIG, que permite visualizar a &aacute;rvore de temas do i3Geo dentro do GVSIG.
 
 Licenca:
 
@@ -13,20 +13,20 @@ GPL2
 
 i3Geo Interface Integrada de Ferramentas de Geoprocessamento para Internet
 
-Direitos Autorais Reservados (c) 2006 Ministério do Meio Ambiente Brasil
+Direitos Autorais Reservados (c) 2006 Minist&eacute;rio do Meio Ambiente Brasil
 Desenvolvedor: Edmar Moretti edmar.moretti@mma.gov.br
 
-Este programa é software livre; você pode redistribuí-lo
-e/ou modificá-lo sob os termos da Licença Pública Geral
+Este programa &eacute; software livre; voc&ecirc; pode redistribu&iacute;-lo
+e/ou modific&aacute;-lo sob os termos da Licen&ccedil;a P&uacute;blica Geral
 GNU conforme publicada pela Free Software Foundation;
 
-Este programa é distribuído na expectativa de que seja útil,
-porém, SEM NENHUMA GARANTIA; nem mesmo a garantia implícita
-de COMERCIABILIDADE OU ADEQUAÇÃO A UMA FINALIDADE ESPECÍFICA.
-Consulte a Licença Pública Geral do GNU para mais detalhes.
-Você deve ter recebido uma cópia da Licença Pública Geral do
-GNU junto com este programa; se não, escreva para a
-Free Software Foundation, Inc., no endereço
+Este programa &eacute; distribu&iacute;do na expectativa de que seja &uacute;til,
+por&eacute;m, SEM NENHUMA GARANTIA; nem mesmo a garantia impl&iacute;cita
+de COMERCIABILIDADE OU ADEQUA&Ccedil;&Atilde;O A UMA FINALIDADE ESPEC&Iacute;FICA.
+Consulte a Licen&ccedil;a P&uacute;blica Geral do GNU para mais detalhes.
+Voc&ecirc; deve ter recebido uma cópia da Licen&ccedil;a P&uacute;blica Geral do
+GNU junto com este programa; se n&atilde;o, escreva para a
+Free Software Foundation, Inc., no endere&ccedil;o
 59 Temple Street, Suite 330, Boston, MA 02111-1307 USA.
 
 Arquivo:
@@ -81,9 +81,9 @@ if($tipoparse == "legenda")
 //
 //verifica o tipo de legenda
 //pode retornar:
-//simples - o layer não terá classes
-//valorunico - as classes são definidas por um item
-//intervalo - as classes são definidas por um intervalo do mesmo item
+//simples - o layer n&atilde;o ter&aacute; classes
+//valorunico - as classes s&atilde;o definidas por um item
+//intervalo - as classes s&atilde;o definidas por um intervalo do mesmo item
 //
 function tipoLegenda($layername)
 {
@@ -115,7 +115,7 @@ function tipoLegenda($layername)
 			exit;
 		}
 		//
-		//verifica se os itens são únicos nas expressões
+		//verifica se os itens s&atilde;o &uacute;nicos nas express&otilde;es
 		//
 		$item = preg_replace('/.*\[|\].*/i','\1', $expressao);
 		$verItem[$item] = 0;
@@ -259,7 +259,7 @@ function legendaSimples($layername)
 	exit;		
 }
 //
-//gera xml com parâmetros do mapfile
+//gera xml com par&acirc;metros do mapfile
 //
 function mapfile()
 {

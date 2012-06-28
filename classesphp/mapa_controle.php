@@ -2,35 +2,35 @@
 /*
 Title: mapa_controle.php
 
-Controle das requisições em Ajax feitas pelas interfaces normais do i3geo
+Controle das requisi&ccedil;&otilde;es em Ajax feitas pelas interfaces normais do i3geo
 
-Recebe as requisições feitas em JavaScript (AJAX) e retorna o resultado para a interface.
+Recebe as requisi&ccedil;&otilde;es feitas em JavaScript (AJAX) e retorna o resultado para a interface.
 
-As principais variáveis necessárias são obtidas da seção, definida na inicialização do I3Geo.
+As principais vari&aacute;veis necess&aacute;rias s&atilde;o obtidas da se&ccedil;&atilde;o, definida na inicializa&ccedil;&atilde;o do I3Geo.
 
-Se a variável $map_file não for enviada, o retorno é uma mensagem linkquebrado e o fim do programa.
+Se a vari&aacute;vel $map_file n&atilde;o for enviada, o retorno &eacute; uma mensagem linkquebrado e o fim do programa.
 
-Para utilizar esse programa fora do i3Geo, envie o parâmetro "map_file=''", dessa forma, evita-se a mensagem de link quebrado.
+Para utilizar esse programa fora do i3Geo, envie o par&acirc;metro "map_file=''", dessa forma, evita-se a mensagem de link quebrado.
 
-O parâmetro "funcao" define qual a operação que será executada (veja exemplo abaixo). Esse parâmetro é verificado em um bloco "switch ($funcao)".
+O par&acirc;metro "funcao" define qual a opera&ccedil;&atilde;o que ser&aacute; executada (veja exemplo abaixo). Esse par&acirc;metro &eacute; verificado em um bloco "switch ($funcao)".
 
-Sequência de operações:
+Sequ&ecirc;ncia de opera&ccedil;&otilde;es:
 
-pega as variáveis get ou post->
+pega as vari&aacute;veis get ou post->
 
-pega as variáveis da seção->
+pega as vari&aacute;veis da se&ccedil;&atilde;o->
 
 verifica se o debug deve ser ativado->
 
-carrega as extensões do PHP->
+carrega as extens&otilde;es do PHP->
 
 cria o objeto cpaint->
 
-carrega as funções de uso mais comuns->
+carrega as fun&ccedil;&otilde;es de uso mais comuns->
 
-faz uma cópia de segurança do map_file->
+faz uma cópia de seguran&ccedil;a do map_file->
 
-roda a função desejada->
+roda a fun&ccedil;&atilde;o desejada->
 
 retorna os valores obtidos
 
@@ -40,20 +40,20 @@ GPL2
 
 i3Geo Interface Integrada de Ferramentas de Geoprocessamento para Internet
 
-Direitos Autorais Reservados (c) 2006 Ministério do Meio Ambiente Brasil
+Direitos Autorais Reservados (c) 2006 Minist&eacute;rio do Meio Ambiente Brasil
 Desenvolvedor: Edmar Moretti edmar.moretti@mma.gov.br
 
-Este programa é software livre; você pode redistribuí-lo
-e/ou modificá-lo sob os termos da Licença Pública Geral
+Este programa &eacute; software livre; voc&ecirc; pode redistribu&iacute;-lo
+e/ou modific&aacute;-lo sob os termos da Licen&ccedil;a P&uacute;blica Geral
 GNU conforme publicada pela Free Software Foundation;
 
-Este programa é distribuído na expectativa de que seja útil,
-porém, SEM NENHUMA GARANTIA; nem mesmo a garantia implícita
-de COMERCIABILIDADE OU ADEQUAÇÃO A UMA FINALIDADE ESPECÍFICA.
-Consulte a Licença Pública Geral do GNU para mais detalhes.
-Você deve ter recebido uma cópia da Licença Pública Geral do
-GNU junto com este programa; se não, escreva para a
-Free Software Foundation, Inc., no endereço
+Este programa &eacute; distribu&iacute;do na expectativa de que seja &uacute;til,
+por&eacute;m, SEM NENHUMA GARANTIA; nem mesmo a garantia impl&iacute;cita
+de COMERCIABILIDADE OU ADEQUA&Ccedil;&Atilde;O A UMA FINALIDADE ESPEC&Iacute;FICA.
+Consulte a Licen&ccedil;a P&uacute;blica Geral do GNU para mais detalhes.
+Voc&ecirc; deve ter recebido uma cópia da Licen&ccedil;a P&uacute;blica Geral do
+GNU junto com este programa; se n&atilde;o, escreva para a
+Free Software Foundation, Inc., no endere&ccedil;o
 59 Temple Street, Suite 330, Boston, MA 02111-1307 USA.
 
 Arquivo:
@@ -62,16 +62,16 @@ i3geo/classesphp/mapa_controle.php
 
 Parametros:
 
-funcao - opção que será executada (veja abaixo a lista de Valores que esse parâmetro pode assumir).
+funcao - op&ccedil;&atilde;o que ser&aacute; executada (veja abaixo a lista de Valores que esse par&acirc;metro pode assumir).
 
 Retorno:
 
-O resultado da operação será retornado em um objeto CPAINT.
+O resultado da opera&ccedil;&atilde;o ser&aacute; retornado em um objeto CPAINT.
 
-A construção da string JSON é feita preferencialmente pelas funções nativas do PHP.
-Para efeitos de compatibilidade, uma vez que até a versão 4.2 a string JSON era construida pelo CPAINT,
-o objeto CPAINT ainda é definido, porém, a função cpjson verifica se as funções nativas do PHPO (json)
-estão instaladas, se estiverem, utiliza-se a função nativa, se não, utiliza-se o CPAINT para gerar o JSON.
+A constru&ccedil;&atilde;o da string JSON &eacute; feita preferencialmente pelas fun&ccedil;&otilde;es nativas do PHP.
+Para efeitos de compatibilidade, uma vez que at&eacute; a vers&atilde;o 4.2 a string JSON era construida pelo CPAINT,
+o objeto CPAINT ainda &eacute; definido, por&eacute;m, a fun&ccedil;&atilde;o cpjson verifica se as fun&ccedil;&otilde;es nativas do PHPO (json)
+est&atilde;o instaladas, se estiverem, utiliza-se a fun&ccedil;&atilde;o nativa, se n&atilde;o, utiliza-se o CPAINT para gerar o JSON.
 
 Exemplo de chamada CPAINT (Ajax) do lado do cliente (javascript):
 
@@ -83,21 +83,21 @@ cp.set_response_type("JSON")
 
 cp.call(p,"lente",ajaxabrelente)
 
-Variáveis de Seção:
+Vari&aacute;veis de Se&ccedil;&atilde;o:
 
-dir_tmp - diretório, no servidor, temporário utilizado pelo I3Geo, exemplo: c:/ms4w/tmp/ms_tmp
-locmapserv - localização, no servidor, do CGI, exemplo: /cgi-bin/mapserv.exe
-locaplic - localização, no servidor, do I3Geo, exemplo: c:/ms4w/apache/htdocs/i3geo
-R_path - localização, no servidor, do executável do pacote R, exemplo: c:/ms4w/apache/htdocs/i3geo/pacotes/r/win/bin/R.exe
+dir_tmp - diretório, no servidor, tempor&aacute;rio utilizado pelo I3Geo, exemplo: c:/ms4w/tmp/ms_tmp
+locmapserv - localiza&ccedil;&atilde;o, no servidor, do CGI, exemplo: /cgi-bin/mapserv.exe
+locaplic - localiza&ccedil;&atilde;o, no servidor, do I3Geo, exemplo: c:/ms4w/apache/htdocs/i3geo
+R_path - localiza&ccedil;&atilde;o, no servidor, do execut&aacute;vel do pacote R, exemplo: c:/ms4w/apache/htdocs/i3geo/pacotes/r/win/bin/R.exe
 imgurl - url das imagens geradas pelo mapa, exemplo: http://localhost/ms_tmp/imgTVHbdijFMk/
-tmpurl - url do diretório temporário, exemplo: http://localhost/ms_tmp/
-map_file - endereço, no servidor, do mapfile atual, exemplo: c:/ms4w/tmp/ms_tmp/TVHbdijFMk/TVHbdijFMk.map
-mapext - extensão geográfica do mapa atual, exemplo: -76.5125927 -39.3925675209 -29.5851853 9.49014852081
-perfil - nome do perfil para controlar os temas que serão visíveis na lista de temas.
-mapdir - localização, no servidor, do diretório com o mapfile temporário do mapa atual.
-imgdir - localização, no servidor, das imagens temporárias do mapa atual. 
+tmpurl - url do diretório tempor&aacute;rio, exemplo: http://localhost/ms_tmp/
+map_file - endere&ccedil;o, no servidor, do mapfile atual, exemplo: c:/ms4w/tmp/ms_tmp/TVHbdijFMk/TVHbdijFMk.map
+mapext - extens&atilde;o geogr&aacute;fica do mapa atual, exemplo: -76.5125927 -39.3925675209 -29.5851853 9.49014852081
+perfil - nome do perfil para controlar os temas que ser&atilde;o vis&iacute;veis na lista de temas.
+mapdir - localiza&ccedil;&atilde;o, no servidor, do diretório com o mapfile tempor&aacute;rio do mapa atual.
+imgdir - localiza&ccedil;&atilde;o, no servidor, das imagens tempor&aacute;rias do mapa atual. 
 debug - (pode ser definido como "sim" indica se o erro_reporting deve ser definido como E_ALL
-contadorsalva - indica quantas vezes o mapa já foi salvo. Permite que uma aplicação verifique se o mapa foi alterado ou não.
+contadorsalva - indica quantas vezes o mapa j&aacute; foi salvo. Permite que uma aplica&ccedil;&atilde;o verifique se o mapa foi alterado ou n&atilde;o.
 */
 error_reporting(0);
 
@@ -110,8 +110,8 @@ $tempo = microtime(1);
 include_once("pega_variaveis.php");
 $interfaceTemp = $interface;
 //
-//inicializa a sessão
-//TEMA2SLD é usado por datadownload.htm
+//inicializa a sess&atilde;o
+//TEMA2SLD &eacute; usado por datadownload.htm
 //
 if ($funcao != "criaMapa" && $funcao != "TEMA2SLD")
 {
@@ -138,8 +138,8 @@ if ($funcao != "criaMapa" && $funcao != "TEMA2SLD")
 	}
 }
 //
-//isso é necessário pois a variável "interface" pode ser utilizada como parâmetro em algumas funções ajax
-//nesses casos, é necessário recuperar o valor correto e não da sessão
+//isso &eacute; necess&aacute;rio pois a vari&aacute;vel "interface" pode ser utilizada como par&acirc;metro em algumas fun&ccedil;&otilde;es ajax
+//nesses casos, &eacute; necess&aacute;rio recuperar o valor correto e n&atilde;o da sess&atilde;o
 //
 if(isset($interfaceTemp) && $interfaceTemp != ""){
 	$_SESSION["interface"] = $interfaceTemp;
@@ -155,8 +155,8 @@ if (isset($debug) && strtolower($debug) == "sim")
 //
 //for($i==0;$i<5000000000;$i++){}
 //
-//ativa o php mapscript e as extensões necessárias
-//se as extensões já estiverem carregadas no PHP, vc pode comentar essa linha para que o processamento fique mais rápido
+//ativa o php mapscript e as extens&otilde;es necess&aacute;rias
+//se as extens&otilde;es j&aacute; estiverem carregadas no PHP, vc pode comentar essa linha para que o processamento fique mais r&aacute;pido
 //
 include_once ("carrega_ext.php");
 include_once("funcoes_gerais.php");
@@ -166,14 +166,14 @@ if ($funcao == "criaMapa")
 	session_destroy();
 	$_COOKIE = array();
 	//
-	//primeiro é necessário carregar o ms_configura.php para pegar a variável $locaplic
+	//primeiro &eacute; necess&aacute;rio carregar o ms_configura.php para pegar a vari&aacute;vel $locaplic
 	//
 	$d = "";
 	if(!file_exists("ms_configura.php"))
 	{$d = "../";}
 	include_once($d."ms_configura.php");
 	//
-	//é necessário mudar o diretório em função dos includes que são feitos pelo ms_criamapa.php
+	//&eacute; necess&aacute;rio mudar o diretório em fun&ccedil;&atilde;o dos includes que s&atilde;o feitos pelo ms_criamapa.php
 	//
 	chdir($locaplic);
 	$interfaceTemp = $interface;
@@ -185,7 +185,7 @@ if ($funcao == "criaMapa")
 }
 if (!isset($map_file))
 {
-	//nesse caso é necessário criar o diretório temporário e iniciar o mapa
+	//nesse caso &eacute; necess&aacute;rio criar o diretório tempor&aacute;rio e iniciar o mapa
 	//$cp->set_data(array("erro"=>"linkquebrado"));
 	//$cp->return_data();
 	//cpjson(array("erro"=>"linkquebrado"));
@@ -203,7 +203,7 @@ $protocolo = explode("/",$_SERVER['SERVER_PROTOCOL']);
 $protocolo = strtolower($protocolo[0]) . '://'.$_SERVER['HTTP_HOST'];//$_SERVER['SERVER_NAME'] .":". $_SERVER['SERVER_PORT'];
 $urli3geo = str_replace("/classesphp/mapa_controle.php","",$protocolo.$_SERVER["PHP_SELF"]);
 //
-//inserido na versão 4.6
+//inserido na vers&atilde;o 4.6
 //
 if(!isset($locaplic)){
 	$d = "";
@@ -212,7 +212,7 @@ if(!isset($locaplic)){
 	include_once($d."ms_configura.php");
 }
 //
-//substitui a string de conexão
+//substitui a string de conex&atilde;o
 //
 
 if($funcao != "recuperamapa" && $funcao != "TEMA2SLD")
@@ -226,27 +226,27 @@ if($funcao != "recuperamapa" && $funcao != "TEMA2SLD")
 	}
 }
 //
-//faz a busca da função que deve ser executada
+//faz a busca da fun&ccedil;&atilde;o que deve ser executada
 //
-$retorno = ""; //string que será retornada ao browser via JSON
+$retorno = ""; //string que ser&aacute; retornada ao browser via JSON
 switch (strtoupper($funcao))
 {
 /*
-Section: Inicialização
+Section: Inicializa&ccedil;&atilde;o
 
 Inicia o mapa.
 */
 /*
 Valor: INICIA
 
-Inicia o mapa, pegando os parâmetros necessários para a montagem inicial.
+Inicia o mapa, pegando os par&acirc;metros necess&aacute;rios para a montagem inicial.
 
 <iniciaMapa>
 */
 	case "INICIA":
 		include_once("mapa_inicia.php");
 		//
-		//a variável $editores vem da session
+		//a vari&aacute;vel $editores vem da session
 		//
 		$editor = verificaEditores($_SESSION["editores"]);
 		iniciaMapa();
@@ -254,10 +254,10 @@ Inicia o mapa, pegando os parâmetros necessários para a montagem inicial.
 /*
 Valor: MONTAFLAMINGO
 
-Gera o arquivo xml de configuração para a interface Flamingo.
+Gera o arquivo xml de configura&ccedil;&atilde;o para a interface Flamingo.
 
-O arquivo xml é gravado no diretório temporário do mapserver e contém a string de conexão com o gerador de webservices classesphp/flamingoogc.php
-Esse gerador, recebe como parâmetro o id da seção atual e transforma o mapfile atual em um webservcie capaz de ser entendido pelo flamingo.
+O arquivo xml &eacute; gravado no diretório tempor&aacute;rio do mapserver e cont&eacute;m a string de conex&atilde;o com o gerador de webservices classesphp/flamingoogc.php
+Esse gerador, recebe como par&acirc;metro o id da se&ccedil;&atilde;o atual e transforma o mapfile atual em um webservcie capaz de ser entendido pelo flamingo.
 
 <flamingo.inc>
 */
@@ -316,9 +316,9 @@ Prepara o mapa atual que estava usando outra interface
 		$retorno = $m->converteInterfacePara("googlemaps");
 	break;	
 /*
-Section: Análise
+Section: An&aacute;lise
 
-Análise de dados.
+An&aacute;lise de dados.
 
 <classe_analise.php>
 */
@@ -327,7 +327,7 @@ Valor: INCMAPAGEOMETRIAS
 
 Inclui geometrias, armazenadas no formato I3Geo, como um tema no mapa atual.
 
-O mapfile é alterado e salvo novamente com os novos layers.
+O mapfile &eacute; alterado e salvo novamente com os novos layers.
 
 <Analise->incmapageometrias>
 */
@@ -341,7 +341,7 @@ O mapfile é alterado e salvo novamente com os novos layers.
 Valor: FUNCOESGEOMETRIAS
 
 Processa geometrias, armazenadas no formato i3Geo, gerando uma nova geometria.
-União, intersecção, etc.
+Uni&atilde;o, intersec&ccedil;&atilde;o, etc.
 
 <Analise->funcoesGeometrias>
 */
@@ -358,7 +358,7 @@ União, intersecção, etc.
 Valor: FUNCOESGEOMETRIASWKT
 
 Processa geometrias recebidas como WKT gerando uma nova geometria.
-União, intersecção, etc.
+Uni&atilde;o, intersec&ccedil;&atilde;o, etc.
 
 A lista de WKTs deve usar o separador |
 
@@ -372,8 +372,8 @@ A lista de WKTs deve usar o separador |
 /*
 Valor: CALCULAGEOMETRIAS
 
-Processa geometrias, armazenadas no formato I3Geo, gerando cálculos.
-Área, perímetro, etc.
+Processa geometrias, armazenadas no formato I3Geo, gerando c&aacute;lculos.
+&Aacute;rea, per&iacute;metro, etc.
 
 <Analise->calculaGeometrias>
 */
@@ -385,9 +385,9 @@ Processa geometrias, armazenadas no formato I3Geo, gerando cálculos.
 /*
 Valor: LISTAGEOMETRIAS
 
-Gera a lista de geometrias disponíveis para o mapa atual.
+Gera a lista de geometrias dispon&iacute;veis para o mapa atual.
 
-As geometrias são armazenadas no diretório temporário do usuário, utilizando um formato próprio do I3Geo.
+As geometrias s&atilde;o armazenadas no diretório tempor&aacute;rio do usu&aacute;rio, utilizando um formato próprio do I3Geo.
 
 <Temas->listaGeometrias>
 */
@@ -402,7 +402,7 @@ Valor: CAPTURAGEOMETRIAS
 
 Gera um arquivo de geometrias, no formato I3Geo, para um tema, considerando os elementos selecionados.
 
-As geometrias são armazenadas no diretório temporário do usuário, utilizando um formato próprio do I3Geo.
+As geometrias s&atilde;o armazenadas no diretório tempor&aacute;rio do usu&aacute;rio, utilizando um formato próprio do I3Geo.
 
 <Temas->capturaGeometrias>
 */	
@@ -414,7 +414,7 @@ As geometrias são armazenadas no diretório temporário do usuário, utilizando um 
 /*
 Valor: DISSOLVEPOLIGONO
 
-Elimina divisas entre polígonos com o mesmo atributo.
+Elimina divisas entre pol&iacute;gonos com o mesmo atributo.
 
 Salva o mapa acrescentando um novo layer com o resultado.
 
@@ -431,7 +431,7 @@ Salva o mapa acrescentando um novo layer com o resultado.
 /*
 Valor: AGRUPAELEMENTOS
 
-Agrupa elementos em um polígono.
+Agrupa elementos em um pol&iacute;gono.
 
 Salva o mapa acrescentando um novo layer com o resultado.
 
@@ -466,7 +466,7 @@ Salva o mapa acrescentando um novo layer com o resultado.
 /*
 Valor: NPTPOL
 
-Conta o número de pontos em polígono cruzando dois temas.
+Conta o n&uacute;mero de pontos em pol&iacute;gono cruzando dois temas.
 
 Salva o mapa acrescentando um novo layer com o resultado.
 
@@ -506,7 +506,7 @@ Valor: DISTANCIAPTPT
 
 Calcula a distancia entre um ponto de origem e os pontos em um tema.
 
-São considerados apenas os pontos próximos definidos por um buffer.
+S&atilde;o considerados apenas os pontos próximos definidos por um buffer.
 
 <Analise->distanciaptpt>
 */	
@@ -539,7 +539,7 @@ Salva o mapa acrescentando um novo layer com os pontos.
 /*
 Valor: CENTROMASSA
 
-Calcula o centro médio de uma distribuição de pontos.
+Calcula o centro m&eacute;dio de uma distribui&ccedil;&atilde;o de pontos.
 
 Salva o mapa acrescentando um novo layer com o ponto.
 
@@ -556,7 +556,7 @@ Salva o mapa acrescentando um novo layer com o ponto.
 /*
 Valor: ANALISEDISTRIPT
 
-Gera análise de distribuição de pontos.
+Gera an&aacute;lise de distribui&ccedil;&atilde;o de pontos.
 
 Executa script R para gerar a imagem.
 
@@ -577,7 +577,7 @@ Executa script R para gerar a imagem.
 /*
 Valor: GRADEDEPONTOS
 
-Gera uma grade de pontos com espaçamento regular definido em décimos de grau.
+Gera uma grade de pontos com espa&ccedil;amento regular definido em d&eacute;cimos de grau.
 
 Salva o mapa acrescentando um novo layer com a grade de coordenadas.
 
@@ -595,7 +595,7 @@ Salva o mapa acrescentando um novo layer com a grade de coordenadas.
 /*
 Valor: GRADEDEPOL
 
-Gera uma grade de polígonos com espaçamento regular definido em décimos de grau.
+Gera uma grade de pol&iacute;gonos com espa&ccedil;amento regular definido em d&eacute;cimos de grau.
 
 Salva o mapa acrescentando um novo layer com a grade.
 
@@ -613,7 +613,7 @@ Salva o mapa acrescentando um novo layer com a grade.
 /*
 Valor: GRADEDEHEX
 
-Gera uma grade de polígonos hexagonais definido em décimos de grau.
+Gera uma grade de pol&iacute;gonos hexagonais definido em d&eacute;cimos de grau.
 
 Salva o mapa acrescentando um novo layer com a grade.
 
@@ -638,7 +638,7 @@ Valor: TELAREMOTA
 
 Registra um ID para permitir o acesso ao mapa atual por outro navegador.
 
-O ID é adicionado à string $_SESSION["fingerprint"] separado por ','
+O ID &eacute; adicionado à string $_SESSION["fingerprint"] separado por ','
 
 <Mapa->telaRemota>
 */
@@ -662,7 +662,7 @@ Pega as mensagens do metadata 'mensagem'.
 /*
 Valor: REINICIAMAPA
 
-Reinicia um mapa restaurando a cópia de segurança.
+Reinicia um mapa restaurando a cópia de seguran&ccedil;a.
 */	
 	case "REINICIAMAPA":
 		$qyfile = str_replace(".map",".qy",$map_file);
@@ -676,7 +676,7 @@ Reinicia um mapa restaurando a cópia de segurança.
 /*
 Valor: RECUPERAMAPA
 
-Recupera o mapfile de segurança.
+Recupera o mapfile de seguran&ccedil;a.
 */	
 	case "RECUPERAMAPA":
 		$qyfile = str_replace(".map",".qy",$map_file);
@@ -792,7 +792,7 @@ Converte o mapa atual em um wms e wmc.
 /*
 Valor: QUERYMAPCOR
 
-Altera a cor de seleção.
+Altera a cor de sele&ccedil;&atilde;o.
 
 <Mapa->corQM>
 */
@@ -808,7 +808,7 @@ Altera a cor de seleção.
 /*
 Valor: PEGAQUERYMAPCOR
 
-Pega a cor de seleção atual.
+Pega a cor de sele&ccedil;&atilde;o atual.
 
 <Mapa->corQM>
 */
@@ -830,7 +830,7 @@ Altera a cor do fundo do mapa.
 		$m = new Mapa($map_file);
 		$m->corfundo($cor);
 		$m->salva();
-		//no caso da interface openlayers, o mapfile é outro
+		//no caso da interface openlayers, o mapfile &eacute; outro
 		/*
 		$nomefundo = str_replace(".map","fundo.map",$map_file);
 		if(file_exists($nomefundo)){
@@ -851,7 +851,7 @@ Pega a cor do fundo do mapa atual.
 */
 	case "PEGACORFUNDO":
 		include_once("classe_mapa.php");
-		//no caso da interface openlayers, o mapfile é outro
+		//no caso da interface openlayers, o mapfile &eacute; outro
 		/*
 		$nomefundo = str_replace(".map","fundo.map",$map_file);
 		if(file_exists($nomefundo) && $interface == "openlayers")
@@ -974,7 +974,7 @@ Lista os temas existentes em um mapa.
 /*
 Valor: LISTATEMASLOCAIS
 
-Lista os temas existentes no diretório temporário do mapa atual.
+Lista os temas existentes no diretório tempor&aacute;rio do mapa atual.
 
 <Mapa->listaTemasLocais>
 */		
@@ -999,7 +999,7 @@ Lista os temas existentes por tipo.
 /*
 Valor: LISTATEMASCOMSEL
 
-Lista os temas que possuem seleção.
+Lista os temas que possuem sele&ccedil;&atilde;o.
 
 <Mapa->listaTemasComSel>
 */	
@@ -1111,7 +1111,7 @@ Acrescenta um novo tema em um arquivo map file tendo como fonte um WMS.
 /*
 Valor: REFERENCIA
 
-Gera a imagem do mapa de referência.
+Gera a imagem do mapa de refer&ecirc;ncia.
 */	
 	case "REFERENCIA":
 		$objMapa = ms_newMapObj($map_file);
@@ -1123,7 +1123,7 @@ Gera a imagem do mapa de referência.
 /*
 Valor: REFERENCIADINAMICA
 
-Gera a imagem do mapa de referência de forma dinâmica, variando com a escala do mapa atual.
+Gera a imagem do mapa de refer&ecirc;ncia de forma din&acirc;mica, variando com a escala do mapa atual.
 */	
 	case "REFERENCIADINAMICA":
 		//$objMapa = ms_newMapObj($map_file);
@@ -1160,7 +1160,7 @@ Processa os layers do mapa.
 /*
 Valor: PEGANOMELAYER
 
-Obtém o nome de um layer e de seu arquivo mapfile original.
+Obt&eacute;m o nome de um layer e de seu arquivo mapfile original.
 
 <Temas->peganomelayer>
 */	
@@ -1172,7 +1172,7 @@ Obtém o nome de um layer e de seu arquivo mapfile original.
 /*
 Valor: PEGADATA
 
-Obtém o valor definido no elemento DATA de um LAYER.
+Obt&eacute;m o valor definido no elemento DATA de um LAYER.
 
 <Temas->pegadata>
 */	
@@ -1199,9 +1199,9 @@ Altera o valor definido no elemento DATA de um LAYER.
 /*
 Valor: REMOVERGEOMETRIAS
 
-Remove geometrias do diretório temporário.
+Remove geometrias do diretório tempor&aacute;rio.
 
-As geometrias são armazenadas no diretório temporário do usuário, utilizando um formato próprio do I3Geo.
+As geometrias s&atilde;o armazenadas no diretório tempor&aacute;rio do usu&aacute;rio, utilizando um formato próprio do I3Geo.
 
 <Temas->removerGeometrias>
 */	
@@ -1214,7 +1214,7 @@ As geometrias são armazenadas no diretório temporário do usuário, utilizando um 
 /*
 Valor: ALTERAREPRESENTACAO
 
-Altera o tipo de representação cartográfica do tema.
+Altera o tipo de representa&ccedil;&atilde;o cartogr&aacute;fica do tema.
 
 <Temas->alteraRepresentacao>
 */
@@ -1230,7 +1230,7 @@ Altera o tipo de representação cartográfica do tema.
 /*
 Valor: GERADESTAQUE
 
-Gera uma imagem que será utilizada para destacar um determinado tema.
+Gera uma imagem que ser&aacute; utilizada para destacar um determinado tema.
 
 <Temas->geraDestaque>
 */
@@ -1256,7 +1256,7 @@ Gera os arquivos para download de um tema.
 /*
 Valor: DOWNLOAD3
 
-Gera os arquivos para download de um tema forçando um mapfile vazio.
+Gera os arquivos para download de um tema for&ccedil;ando um mapfile vazio.
 */
 	case "DOWNLOAD3":
 		$retorno = downloadTema2("",$tema,$locaplic,$dir_tmp,$postgis_mapa);
@@ -1264,7 +1264,7 @@ Gera os arquivos para download de um tema forçando um mapfile vazio.
 /*
 function: INSEREFEATURE
 
-Insere elemento gráfico em um tema.
+Insere elemento gr&aacute;fico em um tema.
 
 <Temas->insereFeature>
 */
@@ -1359,7 +1359,7 @@ Busca o link para a fonte do tema
 /*
 Valor: REORDENATEMAS
 
-Reordena os temas baseados na localização de um segundo tema no mapa.
+Reordena os temas baseados na localiza&ccedil;&atilde;o de um segundo tema no mapa.
 
 <Temas->reordenatemas>
 */
@@ -1375,7 +1375,7 @@ Reordena os temas baseados na localização de um segundo tema no mapa.
 /*
 Valor: ZOOMTEMA
 
-Muda a extensão geográfica do mapa de acordo com a abrangência de um tema.
+Muda a extens&atilde;o geogr&aacute;fica do mapa de acordo com a abrang&ecirc;ncia de um tema.
 
 <Temas->zoomTema>
 */
@@ -1391,7 +1391,7 @@ Muda a extensão geográfica do mapa de acordo com a abrangência de um tema.
 /*
 Valor: ZOOMSEL
 
-Muda a extensão geográfica do mapa de acordo com a abrangência dos elementos selecionados de um tema.
+Muda a extens&atilde;o geogr&aacute;fica do mapa de acordo com a abrang&ecirc;ncia dos elementos selecionados de um tema.
 
 <Temas->zoomSel>
 */
@@ -1471,7 +1471,7 @@ Inverte o metadata CLASSE
 /*
 Valor: MUDATRANSP
 
-Altera a transparência de um tema
+Altera a transpar&ecirc;ncia de um tema
 
 <Temas->mudaTransparencia>
 */					
@@ -1535,14 +1535,14 @@ Gera graficos automaticamente para os elementos de um tema
 /*
 Section: Classes
 
-Edita as características das classes de um tema.
+Edita as caracter&iacute;sticas das classes de um tema.
 
 <classe_alteraclasse.php>
 */
 /*
 Valor: ALTERACLASSE
 
-Altera uma classe de um tema, aplicando uma nova classificação ou modificando parâmetros de uma ou mais classes.
+Altera uma classe de um tema, aplicando uma nova classifica&ccedil;&atilde;o ou modificando par&acirc;metros de uma ou mais classes.
 */	
 	case "ALTERACLASSE":
 		include_once("classe_alteraclasse.php");
@@ -1579,7 +1579,7 @@ Altera uma classe de um tema, aplicando uma nova classificação ou modificando pa
 		}
 		if ($opcao == "alteraclasses")
 		{
-			//esta operação é chamada com POST via cpaint
+			//esta opera&ccedil;&atilde;o &eacute; chamada com POST via cpaint
 			error_reporting(E_ALL);
 			alteraclassesPost($ids,$nomes,$exps);
 			restauraCon($map_file,$postgis_mapa);
@@ -1609,7 +1609,7 @@ Inverte a ordem das cores das classes de um tema.
 /*
 Valor: CALCULATAMANHOCLASSES
 
-Calcula o tamanho dos estilos das classes, alterando o tamanho do símbolo.
+Calcula o tamanho dos estilos das classes, alterando o tamanho do s&iacute;mbolo.
 
 <Alteraclasse->calculaTamanhoClasses>
 */	
@@ -1639,7 +1639,7 @@ Altera as cores das classes de um tema conforme uma cor inicial e uma final.
 /*
 Valor: INVERTESTATUSCLASSE
 
-Altera o status de desenho de uma classe, tornando-a vi´sivel ou não.
+Altera o status de desenho de uma classe, tornando-a vi´sivel ou n&atilde;o.
 
 <Alteraclasse->statusClasse>
 */
@@ -1671,9 +1671,9 @@ Gera cores tendo como base uma cor inicial e uma cor final.
 	break;
 
 /*
-Section: Edição
+Section: Edi&ccedil;&atilde;o
 
-Cria arquivos shapefile ou altera suas características.
+Cria arquivos shapefile ou altera suas caracter&iacute;sticas.
 
 <classe_shp.php>
 */
@@ -1752,7 +1752,7 @@ Insere um ponto em um shape file existente.
 /*
 Valor: PEGAXYULTIMOPONTO
 
-Insere um ponto em um shape file tendo como referência o último ponto existente no tema, a direção e a distância.
+Insere um ponto em um shape file tendo como refer&ecirc;ncia o &uacute;ltimo ponto existente no tema, a dire&ccedil;&atilde;o e a dist&acirc;ncia.
 
 <SHP->ultimoXY>
 */
@@ -1765,9 +1765,9 @@ Insere um ponto em um shape file tendo como referência o último ponto existente 
 /*
 Valor: INSERESHPGRAFICO
 
-Cria um gráfico e insere no mapa em um local clicado no mapa.
+Cria um gr&aacute;fico e insere no mapa em um local clicado no mapa.
 
-Os valores para o gráfico são obtidos do tema indicado na classe. Para cada novo gráfico é criado um tema no mapa.
+Os valores para o gr&aacute;fico s&atilde;o obtidos do tema indicado na classe. Para cada novo gr&aacute;fico &eacute; criado um tema no mapa.
 
 <SHP->insereSHPgrafico>
 */
@@ -1788,16 +1788,16 @@ Gera string wkt de um conjunto de pontos.
 		$retorno = array($res["ponto"],$res["linha"],$res["poligono"]);
 	break;
 /*
-Section: Gráficos
+Section: Gr&aacute;ficos
 
-Criação de representações gráficas de dados estatísticos.
+Cria&ccedil;&atilde;o de representa&ccedil;&otilde;es gr&aacute;ficas de dados estat&iacute;sticos.
 
 <graficos.php>
 */
 /*
 Valor: GRAFICOSELECAO
 
-Pega os dados necessários para a geração dos gráficos da ferramenta seleção
+Pega os dados necess&aacute;rios para a gera&ccedil;&atilde;o dos gr&aacute;ficos da ferramenta sele&ccedil;&atilde;o
 
 <iniciaDadosGrafico>
 */					
@@ -1814,7 +1814,7 @@ Pega os dados necessários para a geração dos gráficos da ferramenta seleção
 /*
 Valor: FUSAOGRAFICO
 
-Faz a fusão da imagem de um gráfico com a imagem do mapa atual.
+Faz a fus&atilde;o da imagem de um gr&aacute;fico com a imagem do mapa atual.
 
 <fusaoGrafico>
 */	
@@ -1828,7 +1828,7 @@ Faz a fusão da imagem de um gráfico com a imagem do mapa atual.
 /*
 Valor: GRAFICOESTRELA
 
-Cria um gráfico do tipo estrela.
+Cria um gr&aacute;fico do tipo estrela.
 
 <graficoEstrela>
 */	
@@ -1839,7 +1839,7 @@ Cria um gráfico do tipo estrela.
 /*
 Valor: GRAFICOSCATTER
 
-Cria um gráfico de distribuição de pontos.
+Cria um gr&aacute;fico de distribui&ccedil;&atilde;o de pontos.
 
 <graficoScatter>
 */	
@@ -1850,7 +1850,7 @@ Cria um gráfico de distribuição de pontos.
 /*
 Valor: GRAFICOSCATTERBINS
 
-Cria um gráfico de distribuição de pontos com agrupamento em pixels (bins).
+Cria um gr&aacute;fico de distribui&ccedil;&atilde;o de pontos com agrupamento em pixels (bins).
 
 <graficoScatterBins>
 */	
@@ -1861,7 +1861,7 @@ Cria um gráfico de distribuição de pontos com agrupamento em pixels (bins).
 /*
 Valor: GRAFICOLINHAS
 
-Cria um gráfico de linhas.
+Cria um gr&aacute;fico de linhas.
 
 <graficoLinhas>
 */
@@ -1872,7 +1872,7 @@ Cria um gráfico de linhas.
 /*
 Valor: GRAFICOHIST
 
-Cria um gráfico de histograma.
+Cria um gr&aacute;fico de histograma.
 
 <graficoHist>
 */
@@ -1883,7 +1883,7 @@ Cria um gráfico de histograma.
 /*
 Valor: GRAFICOBARRAS
 
-Cria um gráfico de barras.
+Cria um gr&aacute;fico de barras.
 
 <graficoBarras>
 */
@@ -1894,7 +1894,7 @@ Cria um gráfico de barras.
 /*
 Valor: GRAFICOPIZZA
 
-Cria um gráfico de pizza.
+Cria um gr&aacute;fico de pizza.
 
 <graficoPizza>
 */
@@ -1905,7 +1905,7 @@ Cria um gráfico de pizza.
 /*
 Valor: DADOSLINHADOTEMPO
 
-Pega os dados de um tema para geração do gráfico de linha do tempo.
+Pega os dados de um tema para gera&ccedil;&atilde;o do gr&aacute;fico de linha do tempo.
 
 <dadosLinhaDoTempo>
 */
@@ -1918,7 +1918,7 @@ Pega os dados de um tema para geração do gráfico de linha do tempo.
 /*
 Valor: DADOSPERFILRELEVO
 
-Pega os dados para elaboração de gráfico de perfil do relevo
+Pega os dados para elabora&ccedil;&atilde;o de gr&aacute;fico de perfil do relevo
 
 <dadosPerfilRelevo>
 */
@@ -1931,7 +1931,7 @@ Pega os dados para elaboração de gráfico de perfil do relevo
 /*
 Section: Menu de temas
 
-Obtém a lista de temas, grupos e sub-grupos.
+Obt&eacute;m a lista de temas, grupos e sub-grupos.
 
 <classe_menutemas.php>
 */
@@ -1979,7 +1979,7 @@ Pega a lista de grupos do menu.
 /*
 Valor: PEGASISTEMASIDENTIFICACAO
 
-Pega a lista de sistemas especiais de identificação de elementos no mapa
+Pega a lista de sistemas especiais de identifica&ccedil;&atilde;o de elementos no mapa
 
 <Menutemas->pegaSistemasI>
 */
@@ -2041,7 +2041,7 @@ Procura um tema no menu considerando apenas os existentes em subgruppos.
 /*
 Valor: PROCURARTEMAS2
 
-Procura um tema no menu considerando todos os níveis.
+Procura um tema no menu considerando todos os n&iacute;veis.
 
 <Menutemas->procurartemas2>
 */
@@ -2053,7 +2053,7 @@ Procura um tema no menu considerando todos os níveis.
 /*
 Valor: PROCURARTEMASESTRELA
 
-Procura um tema com um certo número de estrelas.
+Procura um tema com um certo n&uacute;mero de estrelas.
 
 <Menutemas->procurartemasestrela>
 */
@@ -2079,7 +2079,7 @@ Utilizado no preenchimento da guia mapas
 /*
 Section: Webservices
 
-Processa serviços OGC.
+Processa servi&ccedil;os OGC.
 
 <wmswfs.php>
 */
@@ -2096,7 +2096,7 @@ Lista os canais de um georss.
 /*
 Valor: GETCAPABILITIES
 
-Chama a função getcapabilities e retorna o resultado.
+Chama a fun&ccedil;&atilde;o getcapabilities e retorna o resultado.
 
 <getcapabilities>
 */
@@ -2108,7 +2108,7 @@ Chama a função getcapabilities e retorna o resultado.
 /*
 Valor: GETCAPABILITIES2
 
-Chama a função getcapabilities e retorna o resultado formatado (WMS).
+Chama a fun&ccedil;&atilde;o getcapabilities e retorna o resultado formatado (WMS).
 
 <getcapabilities2>
 */
@@ -2120,7 +2120,7 @@ Chama a função getcapabilities e retorna o resultado formatado (WMS).
 /*
 Valor: GETCAPABILITIES3
 
-Chama a função getcapabilities e retorna o resultado formatado (WFS).
+Chama a fun&ccedil;&atilde;o getcapabilities e retorna o resultado formatado (WFS).
 
 <getcapabilities3>
 */
@@ -2162,9 +2162,9 @@ Processa os atributos da tabela associada ao tema.
 /*
 Valor: BUSCARAPIDA
 
-Acessa dados de um serviço de geonames ou busca dados nos temas existentes no mapa.
+Acessa dados de um servi&ccedil;o de geonames ou busca dados nos temas existentes no mapa.
 
-A pesquisa em temas é feita apenas quando existir o metadata itembuscarapida
+A pesquisa em temas &eacute; feita apenas quando existir o metadata itembuscarapida
 
 <buscaRapida>
 */
@@ -2218,7 +2218,7 @@ Procura valores em uma tabela que aderem a uma palavra de busca.
 /*
 Valor: IDENTIFICA
 
-Depreciado na versão 4.2 (utilize "identifica2")
+Depreciado na vers&atilde;o 4.2 (utilize "identifica2")
 
 Identifica elementos no mapa.
 
@@ -2252,7 +2252,7 @@ Identifica elementos no mapa.
 /*
 Valor: IDENTIFICAUNICO
 
-Identifica elementos no mapa retornando apenas o valor de um único item.
+Identifica elementos no mapa retornando apenas o valor de um &uacute;nico item.
 
 <Atributos->identificaQBP>
 */
@@ -2268,7 +2268,7 @@ Identifica elementos no mapa retornando apenas o valor de um único item.
 /*
 Valor: ESTATISTICA
 
-Calcula estatísticas básicas de uma tabela de um tema.
+Calcula estat&iacute;sticas b&aacute;sicas de uma tabela de um tema.
 
 <Atributos->estatDescritivas>
 */	
@@ -2322,7 +2322,7 @@ Pega todos os valores dos itens de uma tabela de um tema.
 /*
 Valor: EXTREGISTROS
 
-Pega a extensão geográfica de um registro na tabela de atributos de um tema.
+Pega a extens&atilde;o geogr&aacute;fica de um registro na tabela de atributos de um tema.
 
 <Atributos->extensaoRegistro>
 */		
@@ -2333,9 +2333,9 @@ Pega a extensão geográfica de um registro na tabela de atributos de um tema.
 		$m->salva();
 	break;
 /*
-Section: Navegação
+Section: Navega&ccedil;&atilde;o
 
-Altera a extensão geográfica do mapa.
+Altera a extens&atilde;o geogr&aacute;fica do mapa.
 
 <classe_navegacao.php>
 */
@@ -2361,7 +2361,7 @@ Desativa o modo cgi.
 /*
 Valor: MUDAEXT
 
-Muda a extensão geográfica do mapa.
+Muda a extens&atilde;o geogr&aacute;fica do mapa.
 
 <Navegacao->mudaExtensao>
 */
@@ -2397,7 +2397,7 @@ Muda a escala do mapa.
 /*
 Valor: PAN
 
-Desloca a visualização de um mapa (pan).
+Desloca a visualiza&ccedil;&atilde;o de um mapa (pan).
 
 <Navegacao->pan>
 */
@@ -2414,7 +2414,7 @@ Desloca a visualização de um mapa (pan).
 /*
 Valor: APROXIMA
 
-Aproxima a visualização de um mapa (zoom in)
+Aproxima a visualiza&ccedil;&atilde;o de um mapa (zoom in)
 
 <Navegacao->aproxima>
 */
@@ -2430,7 +2430,7 @@ Aproxima a visualização de um mapa (zoom in)
 /*
 Valor: AFASTA
 
-Afasta a visualização de um mapa (zoom out)
+Afasta a visualiza&ccedil;&atilde;o de um mapa (zoom out)
 
 <Navegacao->afasta>
 */
@@ -2446,7 +2446,7 @@ Afasta a visualização de um mapa (zoom out)
 /*
 Valor: CRIALENTE
 
-Aplica uma resolução nova ao mapa atual e gera uma imagem para a lente.
+Aplica uma resolu&ccedil;&atilde;o nova ao mapa atual e gera uma imagem para a lente.
 
 <Navegacao->aplicaResolucao>
 */
@@ -2462,9 +2462,9 @@ Aplica uma resolução nova ao mapa atual e gera uma imagem para a lente.
 /*
 Valor: LOCALIZAIP
 
-Localiza as coordenadas geográficas do usuário atual.
+Localiza as coordenadas geogr&aacute;ficas do usu&aacute;rio atual.
 
-Baseia-se na identificação do IP e no pacote geoip
+Baseia-se na identifica&ccedil;&atilde;o do IP e no pacote geoip
 */
 	case "LOCALIZAIP":
 		copiaSeguranca($map_file);
@@ -2480,7 +2480,7 @@ Baseia-se na identificação do IP e no pacote geoip
 /*
 Valor: ZOOMPONTO
 
-Desloca o centro do mapa para um ponto específico.
+Desloca o centro do mapa para um ponto espec&iacute;fico.
 
 <Navegacao->zoomPonto>
 */
@@ -2502,7 +2502,7 @@ Desloca o centro do mapa para um ponto específico.
 /*
 Section: Legenda
 
-Processa a legenda do mapa e de temas específicos.
+Processa a legenda do mapa e de temas espec&iacute;ficos.
 
 <classe_legenda.php>
 */
@@ -2519,7 +2519,7 @@ Retorna uma lista de valores RGB de cores geradas com base nsa grades de cores e
 /*
 Valor: EDITASIMBOLO
 
-Define as características de simbologia de uma classe, cria, adiciona e exclui estilos.
+Define as caracter&iacute;sticas de simbologia de uma classe, cria, adiciona e exclui estilos.
 */
 	case "EDITASIMBOLO":
 		include_once("classe_legenda.php");
@@ -2583,7 +2583,7 @@ Gera a legenda processando o template HTML.
 */
 	case "CRIALEGENDAHTML":
 		include_once("classe_legenda.php");
-		//para efeitos de compatibilidade com versões anteriores
+		//para efeitos de compatibilidade com vers&otilde;es anteriores
 		if(isset($template)){$templateLegenda = $template;}
 		$m = new Legenda($map_file,$locaplic,$tema,$templateLegenda);
 		$r = $m->criaLegenda();
@@ -2593,7 +2593,7 @@ Gera a legenda processando o template HTML.
 /*
 Valor: TESTALEGENDA
 
-Testa os parâmetros de definição da legenda inserida no mapa.
+Testa os par&acirc;metros de defini&ccedil;&atilde;o da legenda inserida no mapa.
 
 <Legenda->aplicaParametrosLegImg>
 */
@@ -2633,7 +2633,7 @@ Desenha a imagem da legenda.
 /*
 Valor: PEGAPARAMETROSLEGIMG
 
-Pega os parâmetros da legenda embebida no mapa.
+Pega os par&acirc;metros da legenda embebida no mapa.
 
 <Legenda->pegaParametrosLegImg>
 */
@@ -2645,14 +2645,14 @@ Pega os parâmetros da legenda embebida no mapa.
 /*
 Valor: APLICAPARAMETROSLEGIMG
 
-Aplica um parâmetro em um estilo de uma classe.
+Aplica um par&acirc;metro em um estilo de uma classe.
 
 <Legenda->aplicaParametrosLegImg>
 */
 	case "APLICAPARAMETROSLEGIMG":
 		include_once("classe_legenda.php");
 		//
-		//no caso da opção de legenda incluida no mapa, o modo cgi não desenha a imagem corretamente
+		//no caso da op&ccedil;&atilde;o de legenda incluida no mapa, o modo cgi n&atilde;o desenha a imagem corretamente
 		//
 		if($status == 3)
 		{
@@ -2665,9 +2665,9 @@ Aplica um parâmetro em um estilo de uma classe.
 		$_SESSION["contadorsalva"]++;
 	break;
 /*
-Section: Escala gráfica
+Section: Escala gr&aacute;fica
 
-Processa a escala gráfica do mapa.
+Processa a escala gr&aacute;fica do mapa.
 
 <classe_escala.php>
 */
@@ -2686,7 +2686,7 @@ Gera a imagem da barra de escala.
 /*
 Valor: TESTAESCALAGRAFICA
 
-Testa os novos parâmetros de uma barra de escala.
+Testa os novos par&acirc;metros de uma barra de escala.
 
 <Escala->testaescalagrafica>
 */
@@ -2698,7 +2698,7 @@ Testa os novos parâmetros de uma barra de escala.
 /*
 Valor: ESCALAPARAMETROS
 
-Pega os parâmetros da barra de escala atual.
+Pega os par&acirc;metros da barra de escala atual.
 
 <Escala->parametrosBarraEscala>
 */
@@ -2710,7 +2710,7 @@ Pega os parâmetros da barra de escala atual.
 /*
 Valor: MUDAESCALAGRAFICA
 
-Aplica novos parâmetros na barra de escala atual.
+Aplica novos par&acirc;metros na barra de escala atual.
 
 <Escala->mudaEscalaGrafica>
 */
@@ -2722,9 +2722,9 @@ Aplica novos parâmetros na barra de escala atual.
 		$_SESSION["contadorsalva"]++;
 	break;
 /*
-Section: Seleção
+Section: Sele&ccedil;&atilde;o
 
-Seleciona elementos do mapa ou processa a seleção existente.
+Seleciona elementos do mapa ou processa a sele&ccedil;&atilde;o existente.
 
 <classe_selecao.php>
 */
@@ -2752,7 +2752,7 @@ Seleciona elementos utilizando um ponto.
 /*
 Valor: SELECAOEXT
 
-Seleciona elementos utilizando a extensão do mapa.
+Seleciona elementos utilizando a extens&atilde;o do mapa.
 
 <Selecao->selecaoEXT>
 */	
@@ -2772,7 +2772,7 @@ Seleciona elementos utilizando a extensão do mapa.
 /*
 Valor: SELECAOBOX
 
-Seleciona elementos utilizando um retângulo.
+Seleciona elementos utilizando um ret&acirc;ngulo.
 
 <Selecao->selecaoBOX>
 */	
@@ -2842,12 +2842,12 @@ Sleciona elementos de um tema com base em outro tema.
 /*
 Valor: SELECAOPOLI
 
-Seleção por poligono (chamado via POST).
+Sele&ccedil;&atilde;o por poligono (chamado via POST).
 
 <Selecao->selecaoPoli>
 */	
 	case "SELECAOPOLI":
-		//esta operação é chamada com POST via cpaint
+		//esta opera&ccedil;&atilde;o &eacute; chamada com POST via cpaint
 		//por isso precisa ser executada com start
 		copiaSeguranca($map_file);
 		$retorno = selecaoPoli($xs,$ys,$tema,$tipo);
@@ -2858,7 +2858,7 @@ Seleção por poligono (chamado via POST).
 /*
 Valor: LIMPASEL
 
-Limpa a seleção existente em um tema.
+Limpa a sele&ccedil;&atilde;o existente em um tema.
 
 <Selecao->selecaoLimpa>
 */
@@ -2867,7 +2867,7 @@ Limpa a seleção existente em um tema.
 		$m = new Selecao($map_file,$tema);
 		$retorno = $m->selecaoLimpa();
 		//
-		//é necessário obter os parâmetros do mapa para remontar a árvore de camadas 
+		//&eacute; necess&aacute;rio obter os par&acirc;metros do mapa para remontar a &aacute;rvore de camadas 
 		//
 		$_SESSION["contadorsalva"]++;
 		redesenhaMapa();		
@@ -2875,7 +2875,7 @@ Limpa a seleção existente em um tema.
 /*
 Valor: INCLUISEL
 
-Incluí elementos em uma seleção.
+Inclu&iacute; elementos em uma sele&ccedil;&atilde;o.
 
 <Selecao->incluiSel>
 */
@@ -2884,7 +2884,7 @@ Incluí elementos em uma seleção.
 		$m = new Selecao($map_file,$tema);
 		$retorno = $m->incluiSel($ids);
 		//
-		//é necessário obter os parâmetros do mapa para remontar a árvore de camadas 
+		//&eacute; necess&aacute;rio obter os par&acirc;metros do mapa para remontar a &aacute;rvore de camadas 
 		//
 		$_SESSION["contadorsalva"]++;
 		redesenhaMapa();
@@ -2892,7 +2892,7 @@ Incluí elementos em uma seleção.
 /*
 Valor: CRIATEMASEL
 
-Cria um novo tema com a seleção atual.
+Cria um novo tema com a sele&ccedil;&atilde;o atual.
 
 <Selecao->selecao2tema>
 */
@@ -2905,16 +2905,16 @@ Cria um novo tema com a seleção atual.
 		$_SESSION["contadorsalva"]++;
 	break;
 /*
-Section: Toponímia
+Section: Topon&iacute;mia
 
-Processa a toponímia de um tema.
+Processa a topon&iacute;mia de um tema.
 
 <classe_toponimia.php>
 */
 /*
 Valor: CRIATOPONIMIA
 
-Cria um novo tema com a toponímia do tema atual.
+Cria um novo tema com a topon&iacute;mia do tema atual.
 
 <Toponimia->criaToponimia>
 */	
@@ -2963,12 +2963,12 @@ Desativa as etiquetas de um tema.
 /*
 Section: Outros
 
-Opções de uso geral.
+Op&ccedil;&otilde;es de uso geral.
 */
 /*
 Valor: LISTATRUETYPE
 
-Lista as fontes truetype disponíveis.
+Lista as fontes truetype dispon&iacute;veis.
 */
 	case "LISTATRUETYPE":
 		$retorno = listaTrueType();
@@ -2977,7 +2977,7 @@ Lista as fontes truetype disponíveis.
 /*
 Valor: AREAPIXEL
 
-Calcula a área de um pixel da imagem.
+Calcula a &aacute;rea de um pixel da imagem.
 */
 	case "AREAPIXEL":
 		$retorno = calculaAreaPixel($map_file,$celsize);
@@ -2985,7 +2985,7 @@ Calcula a área de um pixel da imagem.
 /*
 Valor: LISTAEPSG
 
-Pega os códigos de projeção EPSG.
+Pega os códigos de proje&ccedil;&atilde;o EPSG.
 
 */
 	case "LISTAEPSG":
@@ -3021,13 +3021,13 @@ Essa chave deve ser registrada em i3geo/ms_configura.php
 /*
 Valor: LISTADRIVES
 
-Pega a lista de drives registrados para o usuário atual.
+Pega a lista de drives registrados para o usu&aacute;rio atual.
 
-A lista de drives é definida no ms_configura e permite que o usuário navegue pelos arquivos do servidor.
+A lista de drives &eacute; definida no ms_configura e permite que o usu&aacute;rio navegue pelos arquivos do servidor.
 */
 	case "LISTADRIVES":
 		include("../ms_configura.php");
-		//verifica se está cadastrado
+		//verifica se est&aacute; cadastrado
 		$ipcliente = pegaIPcliente();
 		$retorno = array();
 		foreach ($navegadoresLocais as $n)
@@ -3050,13 +3050,13 @@ else
 /*
 Function: projetaExt
 
-Projeta uma string com coordenadas geográficas para coordenadas métricas
+Projeta uma string com coordenadas geogr&aacute;ficas para coordenadas m&eacute;tricas
 
 Parametros:
 
 $map_file {string}
 
-$ext {string} - extensão geográfica com valores separados por espaço ou um par de coordenadas x y
+$ext {string} - extens&atilde;o geogr&aacute;fica com valores separados por espa&ccedil;o ou um par de coordenadas x y
 
 Return:
 
@@ -3093,7 +3093,7 @@ function projetaExt($map_file,$ext,$separador=" ")
 /*
 Function: alteraclassesPost
 
-Altera as classes de um tema aplicando novos parâmetros como nome e expressão.
+Altera as classes de um tema aplicando novos par&acirc;metros como nome e express&atilde;o.
 
 Include:
 <classe_alteraclasse.php>
@@ -3109,7 +3109,7 @@ function alteraclassesPost($ids,$nomes,$exps)
 /*
 Function: selecaoPoli
 
-Seleciona um tema por polígono baseado em uma lista de pontos.
+Seleciona um tema por pol&iacute;gono baseado em uma lista de pontos.
 
 Include:
 <classe_selecao.php>
@@ -3131,14 +3131,14 @@ function selecaoPoli($xs,$ys,$tema,$tipo)
 /*
 Function: redesenhaMapa
 
-Redesenha o mapa e retorna os parâmetros do novo mapa.
+Redesenha o mapa e retorna os par&acirc;metros do novo mapa.
 
 Include:
 <classe_mapa.php>
 
 Parametros:
 
-tipoimagem {String} - tipo de imagem que será gerada nenhum|cinza|sepianormal|sepiaclara
+tipoimagem {String} - tipo de imagem que ser&aacute; gerada nenhum|cinza|sepianormal|sepiaclara
 */
 function redesenhaMapa()
 {
@@ -3156,7 +3156,7 @@ function redesenhaMapa()
 	$m = New Mapa($map_file);
 	$par = $m->parametrosTemas();
 	//
-	//na interface googlemaps não é necessário gerar a imagem
+	//na interface googlemaps n&atilde;o &eacute; necess&aacute;rio gerar a imagem
 	//
 	$e = $m->mapa->extent;
 	$ext = $e->minx." ".$e->miny." ".$e->maxx." ".$e->maxy;

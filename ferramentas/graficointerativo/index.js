@@ -1,13 +1,13 @@
 
 /*jslint plusplus:false,white:false,undef: false, rhino: true, onevar: true, evil: true */
 /*
-Title: Gráfico interativo
+Title: Gr&aacute;fico interativo
 
-Representação gráfica de dados. O gráfico é construído tendo como base os atributos de um tema e é modificado
-conforme o usuário navega pelo mapa. A renderização do gráfico é feito pelo navegador por meio do aplicativo openflashchart.
-Os dados que serão utilizados no gráfico são baseados em um elemento TABLE. Esse elemento pode ser montado com base na tabela
-de atributos e editada pelo usuário. Os dados podem também ser inseridos como parâmetros na inicialização da ferramenta,
-permitindo que o gráfico seja utilizado por outras ferramentas.
+Representa&ccedil;ão gr&aacute;fica de dados. O gr&aacute;fico &eacute; constru&iacute;do tendo como base os atributos de um tema e &eacute; modificado
+conforme o usu&aacute;rio navega pelo mapa. A renderiza&ccedil;ão do gr&aacute;fico &eacute; feito pelo navegador por meio do aplicativo openflashchart.
+Os dados que serão utilizados no gr&aacute;fico são baseados em um elemento TABLE. Esse elemento pode ser montado com base na tabela
+de atributos e editada pelo usu&aacute;rio. Os dados podem tamb&eacute;m ser inseridos como parâmetros na inicializa&ccedil;ão da ferramenta,
+permitindo que o gr&aacute;fico seja utilizado por outras ferramentas.
 
 Veja:
 
@@ -23,20 +23,20 @@ GPL2
 
 i3Geo Interface Integrada de Ferramentas de Geoprocessamento para Internet
 
-Direitos Autorais Reservados (c) 2006 Ministério do Meio Ambiente Brasil
+Direitos Autorais Reservados (c) 2006 Minist&eacute;rio do Meio Ambiente Brasil
 Desenvolvedor: Edmar Moretti edmar.moretti@mma.gov.br
 
-Este programa é software livre; você pode redistribuí-lo
-e/ou modificá-lo sob os termos da Licença Pública Geral
+Este programa &eacute; software livre; voc&ecirc; pode redistribu&iacute;-lo
+e/ou modific&aacute;-lo sob os termos da Licen&ccedil;a P&uacute;blica Geral
 GNU conforme publicada pela Free Software Foundation;
 
-Este programa é distribuído na expectativa de que seja útil,
-porém, SEM NENHUMA GARANTIA; nem mesmo a garantia implícita
-de COMERCIABILIDADE OU ADEQUAÇÃO A UMA FINALIDADE ESPECÍFICA.
-Consulte a Licença Pública Geral do GNU para mais detalhes.
-Você deve ter recebido uma cópia da Licença Pública Geral do
+Este programa &eacute; distribu&iacute;do na expectativa de que seja &uacute;til,
+por&eacute;m, SEM NENHUMA GARANTIA; nem mesmo a garantia impl&iacute;cita
+de COMERCIABILIDADE OU ADEQUAÇÃO A UMA FINALIDADE ESPEC&Iacute;FICA.
+Consulte a Licen&ccedil;a P&uacute;blica Geral do GNU para mais detalhes.
+Voc&ecirc; deve ter recebido uma c&oacute;pia da Licen&ccedil;a P&uacute;blica Geral do
 GNU junto com este programa; se não, escreva para a
-Free Software Foundation, Inc., no endereço
+Free Software Foundation, Inc., no endere&ccedil;o
 59 Temple Street, Suite 330, Boston, MA 02111-1307 USA.
 */
 
@@ -51,25 +51,25 @@ i3GEOF.graficointerativo = {
 	/*
 	Variavel: aguarde
 	
-	Estilo do objeto DOM com a imagem de aguarde existente no cabeçalho da janela.
+	Estilo do objeto DOM com a imagem de aguarde existente no cabe&ccedil;alho da janela.
 	*/
 	aguarde: "",
 	/*
 	Propriedade: titulo
 	
-	Título do gráfico. Se for vazio, será obtido do nome do tema selecionado
+	T&iacute;tulo do gr&aacute;fico. Se for vazio, ser&aacute; obtido do nome do tema selecionado
 	*/
 	titulo: "",	
 	/*
 	Propriedade: tipo
 	
-	Tipo de gráfico escolhido pelo usuário.
+	Tipo de gr&aacute;fico escolhido pelo usu&aacute;rio.
 	*/
 	tipo: "",
 	/*
 	Propriedade: acumula
 	
-	Acumula os valores ao gerar o gráfico
+	Acumula os valores ao gerar o gr&aacute;fico
 	
 	Type:
 	{boolean}
@@ -81,7 +81,7 @@ i3GEOF.graficointerativo = {
 	/*
 	Propriedade: relativa
 	
-	Utiliza valores relativos ao criar o gráfico
+	Utiliza valores relativos ao criar o gr&aacute;fico
 	
 	Type:
 	{boolean}
@@ -93,7 +93,7 @@ i3GEOF.graficointerativo = {
 	/*
 	Propriedade: dadospuros
 	
-	Não faz nenhum tipo de processamento nos dados antes de gerar o gráfico
+	Não faz nenhum tipo de processamento nos dados antes de gerar o gr&aacute;fico
 	
 	Type:
 	{boolean}
@@ -105,7 +105,7 @@ i3GEOF.graficointerativo = {
 	/*
 	Propriedade: navegacao
 	
-	Ativa ou não a navegação dinâmica do mapa
+	Ativa ou não a navega&ccedil;ão dinâmica do mapa
 	
 	Type:
 	{boolean}
@@ -117,13 +117,13 @@ i3GEOF.graficointerativo = {
 	/*
 	Function: inicia
 	
-	Inicia a ferramenta. É chamado por criaJanelaFlutuante
+	Inicia a ferramenta. &Eacute; chamado por criaJanelaFlutuante
 	
 	Parametros:
 	
-	iddiv {String} - id do div que receberá o conteudo HTML da ferramenta
+	iddiv {String} - id do div que receber&aacute; o conteudo HTML da ferramenta
 	
-	dados {JSON} - dados para o gráfico (opcional) exemplo ["n;x","'Argentina';33796870","'Paraguay';4773464","'Brazil';151525400","'Chile';13772710"]
+	dados {JSON} - dados para o gr&aacute;fico (opcional) exemplo ["n;x","'Argentina';33796870","'Paraguay';4773464","'Brazil';151525400","'Chile';13772710"]
 	*/
 	inicia: function(iddiv,dados){
 		//try{
@@ -193,11 +193,11 @@ i3GEOF.graficointerativo = {
 	/*
 	Function: html
 	
-	Gera o código html para apresentação das opções da ferramenta
+	Gera o c&oacute;digo html para apresenta&ccedil;ão das op&ccedil;&otilde;es da ferramenta
 	
 	Retorno:
 	
-	String com o código html
+	String com o c&oacute;digo html
 	*/
 	html:function(){
 		var ins = '' +
@@ -206,17 +206,17 @@ i3GEOF.graficointerativo = {
 		'		<li><a href="#ancora"><em><div id="i3GEOgraficointerativoguia1" style="text-align:center;left:0px;" >Tipo</div></em></a></li>' +
 		'		<li><a href="#ancora"><em><div id="i3GEOgraficointerativoguia2" style="text-align:center;left:0px;" >Dados</div></em></a></li>' +
 		'		<li><a href="#ancora"><em><div id="i3GEOgraficointerativoguia3" style="text-align:center;left:0px;" >Propriedades</div></em></a></li>' +
-		'		<li><a href="#ancora"><em><div id="i3GEOgraficointerativoguia4" style="text-align:center;left:0px;" >Gráfico</div></em></a></li>' +
+		'		<li><a href="#ancora"><em><div id="i3GEOgraficointerativoguia4" style="text-align:center;left:0px;" >Gr&aacute;fico</div></em></a></li>' +
 		'	</ul>' +
 		'</div><br>' +
 		'<div class=guiaobj id="i3GEOgraficointerativoguia1obj" style="left:1px;display:none;">' +
-		'	<p class=paragrafo >Escolha o tipo de gráfico: </p>' +
+		'	<p class=paragrafo >Escolha o tipo de gr&aacute;fico: </p>' +
 		'	<table class=lista6 >' +
 		'		<tr><td><input type=radio onclick="i3GEOF.graficointerativo.ativaTipo(this)" value="pizza2d" name="tipoGrafico" style="border:0px solid white;cursor:pointer" > </td><td>pizza 2d</td></tr>' +
 		'		<tr><td>&nbsp;</td></tr>' +
-		'		<tr><td><input type=radio onclick="i3GEOF.graficointerativo.ativaTipo(this)" value="area" name="tipoGrafico" style="border:0px solid white;cursor:pointer" > </td><td>área 2d</td></tr>' +
+		'		<tr><td><input type=radio onclick="i3GEOF.graficointerativo.ativaTipo(this)" value="area" name="tipoGrafico" style="border:0px solid white;cursor:pointer" > </td><td>&aacute;rea 2d</td></tr>' +
 		'		<tr><td>&nbsp;</td></tr>' +
-		'		<tr><td><input type=radio onclick="i3GEOF.graficointerativo.ativaTipo(this)" value="scatter" name="tipoGrafico" style="border:0px solid white;cursor:pointer" > </td><td>distribuição de pontos</td></tr>' +
+		'		<tr><td><input type=radio onclick="i3GEOF.graficointerativo.ativaTipo(this)" value="scatter" name="tipoGrafico" style="border:0px solid white;cursor:pointer" > </td><td>distribui&ccedil;ão de pontos</td></tr>' +
 		'		<tr><td>&nbsp;</td></tr>' +
 		'		<tr><td><input type=radio onclick="i3GEOF.graficointerativo.ativaTipo(this)" value="line" name="tipoGrafico" style="border:0px solid white;cursor:pointer" > </td><td>linha</td></tr>' +
 		'		<tr><td>&nbsp;</td></tr>' +
@@ -235,17 +235,17 @@ i3GEOF.graficointerativo = {
 		'		<tr><td>&nbsp;</td></tr>' +
 		'		<tr><td><input type=radio onclick="i3GEOF.graficointerativo.ativaTipo(this)" value="bar_cylinder_outline" name="tipoGrafico" style="border:0px solid white;cursor:pointer" > </td><td>barras cilindro com contorno</td></tr>' +
 		'		<tr><td>&nbsp;</td></tr>' +
-		'		<tr><td><input type=radio onclick="i3GEOF.graficointerativo.ativaTipo(this)" value="bar_round_glass" name="tipoGrafico" style="border:0px solid white;cursor:pointer" > </td><td>barras cúpula</td></tr>' +
+		'		<tr><td><input type=radio onclick="i3GEOF.graficointerativo.ativaTipo(this)" value="bar_round_glass" name="tipoGrafico" style="border:0px solid white;cursor:pointer" > </td><td>barras c&uacute;pula</td></tr>' +
 		'		<tr><td>&nbsp;</td></tr>' +
-		'		<tr><td><input type=radio onclick="i3GEOF.graficointerativo.ativaTipo(this)" value="bar_round" name="tipoGrafico" style="border:0px solid white;cursor:pointer" > </td><td>barras pílula</td></tr>' +
+		'		<tr><td><input type=radio onclick="i3GEOF.graficointerativo.ativaTipo(this)" value="bar_round" name="tipoGrafico" style="border:0px solid white;cursor:pointer" > </td><td>barras p&iacute;lula</td></tr>' +
 		'		<tr><td>&nbsp;</td></tr>' +
 		'		<tr><td><input type=radio onclick="i3GEOF.graficointerativo.ativaTipo(this)" value="hbar" name="tipoGrafico" style="border:0px solid white;cursor:pointer" > </td><td>barras horizontais</td></tr>' +
 
 		'	</table>' +
 		'</div> ' +
 		'<div class=guiaobj id="i3GEOgraficointerativoguia2obj" style="left:1px;display:none;top:-5px">' +
-		'	<p class=paragrafo >Escolha os dados que comporão o gráfico: </p>' +
-		'	<div class=paragrafo id=i3GEOgraficointerativoAjudaPizza >Se vc escolher para X e Y o mesmo item, será considerada a frequência das ocorrências para compor cada parte da pizza. Caso contrário, será feita a soma dos valores existentes em Y para cada ocorrência existente em X.</div>' +
+		'	<p class=paragrafo >Escolha os dados que comporão o gr&aacute;fico: </p>' +
+		'	<div class=paragrafo id=i3GEOgraficointerativoAjudaPizza >Se vc escolher para X e Y o mesmo item, ser&aacute; considerada a frequ&ecirc;ncia das ocorr&ecirc;ncias para compor cada parte da pizza. Caso contr&aacute;rio, ser&aacute; feita a soma dos valores existentes em Y para cada ocorr&ecirc;ncia existente em X.</div>' +
 		'	<p class=paragrafo >Tema:</p>' +
 		'	<div class=paragrafo id=i3GEOgraficointerativoComboTemas ></div>' +
 		'	<div class=paragrafo id=i3GEOgraficointerativoComboXlinha >' +
@@ -258,18 +258,18 @@ i3GEOF.graficointerativo = {
 		'	</div>' +
 		'	<p class=paragrafo >Excluir o seguinte valor: ' +
 		$inputText("","","i3GEOgraficointerativoexcluir","",3,"") +
-		'	<p class=paragrafo ><input type=checkbox style="cursor:pointer;top:3px;position:relative;" id=i3GEOgraficointerativoCoresA /> gera cores aleatórias</p>' +
+		'	<p class=paragrafo ><input type=checkbox style="cursor:pointer;top:3px;position:relative;" id=i3GEOgraficointerativoCoresA /> gera cores aleat&oacute;rias</p>' +
 		'	<p class=paragrafo ><input id=i3GEOgraficointerativobotao1 type="buttom" value="Obter dados" /></p>'+
 		'	<div id=i3GEOgraficointerativoDados ></div>'+
 		'</div>' +
 		'<div class=guiaobj id="i3GEOgraficointerativoguia3obj" style="left:1px;display:none;top:-5px">' +
-		'	<p class=paragrafo ><input style=cursor:pointer type=checkbox id=i3GEOgraficointerativoAdLinhas checked /> Adiciona as linhas em gráficos de barras</p>' +
+		'	<p class=paragrafo ><input style=cursor:pointer type=checkbox id=i3GEOgraficointerativoAdLinhas checked /> Adiciona as linhas em gr&aacute;ficos de barras</p>' +
 		'	<p class=paragrafo ><input style=cursor:pointer type=checkbox id=i3GEOgraficointerativoAcumula /> Utiliza valores acumulados</p>' +
 		'	<p class=paragrafo ><input style=cursor:pointer type=checkbox id=i3GEOgraficointerativoRelativa /> Utiliza valores relativos (%)</p>' +
 		'	<p class=paragrafo ><input style=cursor:pointer type=checkbox id=i3GEOgraficointerativoOrdenaX checked /> Ordena o eixo X</p>' +
-		'	<p class=paragrafo ><input style=cursor:pointer type=checkbox id=i3GEOgraficointerativoDadosPuros /> Não processa os valores ao obter os dados (mantém os dados como estão na tabela de atributos) - essa opção é útil nos gráficos de distribuição de pontos</p>' +
-		'	<p class=paragrafo ><input style=cursor:pointer type=checkbox onclick="i3GEOF.graficointerativo.ativaNavegacao(this.checked)" /> Atualiza o gráfico ao navegar pelo mapa</p>' +
-		'	<p class=paragrafo ><select onchange="i3GEOF.graficointerativo.obterDados()" id="i3GEOgraficointerativoTipoAgregacao" ><option value="soma">Soma</option><option value="media">Média</option></select> Tipo de agregação dos valores do eixo Y</p>' +
+		'	<p class=paragrafo ><input style=cursor:pointer type=checkbox id=i3GEOgraficointerativoDadosPuros /> Não processa os valores ao obter os dados (mant&eacute;m os dados como estão na tabela de atributos) - essa op&ccedil;ão &eacute; &uacute;til nos gr&aacute;ficos de distribui&ccedil;ão de pontos</p>' +
+		'	<p class=paragrafo ><input style=cursor:pointer type=checkbox onclick="i3GEOF.graficointerativo.ativaNavegacao(this.checked)" /> Atualiza o gr&aacute;fico ao navegar pelo mapa</p>' +
+		'	<p class=paragrafo ><select onchange="i3GEOF.graficointerativo.obterDados()" id="i3GEOgraficointerativoTipoAgregacao" ><option value="soma">Soma</option><option value="media">M&eacute;dia</option></select> Tipo de agrega&ccedil;ão dos valores do eixo Y</p>' +
 		'</div>'+
 		'<div class=guiaobj id="i3GEOgraficointerativoguia4obj" style="left:1px;display:none;top:-0px">' +
 		'</div>' +
@@ -283,7 +283,7 @@ i3GEOF.graficointerativo = {
 	
 	Parametro
 	
-	dados {JSON} - dados para o gráfico
+	dados {JSON} - dados para o gr&aacute;fico
 	*/	
 	criaJanelaFlutuante: function(dados){
 		var minimiza,cabecalho,janela,divid,temp,titulo;
@@ -294,7 +294,7 @@ i3GEOF.graficointerativo = {
 		minimiza = function(){
 			i3GEO.janela.minimiza("i3GEOF.graficointerativo");
 		};
-		titulo = "Gráficos interativos <a class=ajuda_usuario target=_blank href='" + i3GEO.configura.locaplic + "/ajuda_usuario.php?idcategoria=3&idajuda=84' >&nbsp;&nbsp;&nbsp;</a>";
+		titulo = "Gr&aacute;ficos interativos <a class=ajuda_usuario target=_blank href='" + i3GEO.configura.locaplic + "/ajuda_usuario.php?idcategoria=3&idajuda=84' >&nbsp;&nbsp;&nbsp;</a>";
 		janela = i3GEO.janela.cria(
 			"380px",
 			"280px",
@@ -347,7 +347,7 @@ i3GEOF.graficointerativo = {
 	/*
 	Function: comboTemas
 	
-	Monta o combo para escolha do tema que será utilizado no gráfico
+	Monta o combo para escolha do tema que ser&aacute; utilizado no gr&aacute;fico
 	*/
 	comboTemas: function(){
 		i3GEO.util.comboTemas(
@@ -375,7 +375,7 @@ i3GEOF.graficointerativo = {
 	/*
 	Function: ativaTipo
 	
-	Define a variável com o tipo de gráfico e mostra a guia 2
+	Define a vari&aacute;vel com o tipo de gr&aacute;fico e mostra a guia 2
 	*/
 	ativaTipo: function(obj){
 		i3GEOF.graficointerativo.tipo = obj.value;
@@ -387,7 +387,7 @@ i3GEOF.graficointerativo = {
 	/*
 	Function: configuraDados
 	
-	Configura o formulário para obtenção dos dados para cada tipo de gráfico
+	Configura o formul&aacute;rio para obten&ccedil;ão dos dados para cada tipo de gr&aacute;fico
 	*/
 	configuraDados: function(){
 		var radios = $i("i3GEOgraficointerativoguia1obj").getElementsByTagName("input"),
@@ -439,7 +439,7 @@ i3GEOF.graficointerativo = {
 	/*
 	Function: obterDados
 	
-	Obtém os dados que serão utilizados no gráfico
+	Obt&eacute;m os dados que serão utilizados no gr&aacute;fico
 	
 	Veja:
 	
@@ -485,7 +485,7 @@ i3GEOF.graficointerativo = {
 	/*
 	Function: montaTabelaDados
 	
-	Monta a tabela com os dados que serão utilizados no gráfico
+	Monta a tabela com os dados que serão utilizados no gr&aacute;fico
 	
 	Parametro:
 	
@@ -504,7 +504,7 @@ i3GEOF.graficointerativo = {
 		else
 		{dados = retorno;}
 		n = dados.length;
-		ins.push("<p class=paragrafo >Tabela de dados para o gráfico. Os valores podem ser editados</p><table class=lista4 id=i3GEOgraficointerativotabeladados ><tr><td></td>");
+		ins.push("<p class=paragrafo >Tabela de dados para o gr&aacute;fico. Os valores podem ser editados</p><table class=lista4 id=i3GEOgraficointerativotabeladados ><tr><td></td>");
 		ins.push("<td style=background-color:yellow >&nbsp;<img style=cursor:pointer onclick='i3GEOF.graficointerativo.ordenaColuna(this,1)' src='"+i3GEO.configura.locaplic+"/imagens/ordena1.gif' title='ordena' /> nome</td>");
 		ins.push("<td style=background-color:yellow >&nbsp;<img style=cursor:pointer onclick='i3GEOF.graficointerativo.ordenaColuna(this,2)' src='"+i3GEO.configura.locaplic+"/imagens/ordena1.gif' title='ordena' /> valor</td>");
 		ins.push("<td style=background-color:yellow >cor</td><td></td></tr>");
@@ -539,7 +539,7 @@ i3GEOF.graficointerativo = {
 	/*
 	Function: tabela2dados
 	
-	Obtém os dados da tabela para compor o gráfico
+	Obt&eacute;m os dados da tabela para compor o gr&aacute;fico
 	*/
 	tabela2dados: function(){
 		var temp = 0,
@@ -624,8 +624,8 @@ i3GEOF.graficointerativo = {
 		}
 		if(legendaX == legendaY){
 			menor = 0;
-			legendaX += " (ocorrências)";
-			legendaY += " (n. de ocorrências)";
+			legendaX += " (ocorr&ecirc;ncias)";
+			legendaY += " (n. de ocorr&ecirc;ncias)";
 		}
 		if($i("i3GEOgraficointerativoRelativa").checked){
 			n = valores.length;
@@ -810,7 +810,7 @@ i3GEOF.graficointerativo = {
 	/*
 	Function: corj
 	
-	Abre a janela para o usuário selecionar uma cor interativamente
+	Abre a janela para o usu&aacute;rio selecionar uma cor interativamente
 	*/
 	corj: function(obj)
 	{i3GEO.util.abreCor("",obj,"hex");},
@@ -868,7 +868,7 @@ i3GEOF.graficointerativo = {
 	/*
 	Function: ativaNavegacao
 	
-	Ativa ou desativa a atualização automática ao navegar no mapa
+	Ativa ou desativa a atualiza&ccedil;ão autom&aacute;tica ao navegar no mapa
 	*/
 	ativaNavegacao: function(obj){
 		if(obj === true){

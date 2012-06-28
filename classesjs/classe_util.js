@@ -2482,9 +2482,10 @@ i3GEO.util = {
 	length {number} - numero de casas decimais
 	*/
 	decimalPlaces: function(float,length) {
-		ret = "";
-		str = float.toString();
-		array = str.split(".");
+		var ret = "",
+			str = float.toString(),
+			array = str.split("."),
+			i;
 		if(array.length==2) {
 			ret += array[0] + ".";
 			for(i=0;i<length;i++) {
@@ -2495,10 +2496,9 @@ i3GEO.util = {
 		else if(array.length == 1) {
 			ret += array[0] + ".";
 			for(i=0;i<length;i++) {
-				ret += '0'
+				ret += '0';
 			}
 		}
-
 		return ret;
 	}	
 };

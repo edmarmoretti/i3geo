@@ -4,7 +4,7 @@
 /*
 Title: Perfil
 
-Cria um gráfico de perfil do "relevo"
+Cria um gr&aacute;fico de perfil do "relevo"
 
 Veja:
 
@@ -20,20 +20,20 @@ GPL2
 
 i3Geo Interface Integrada de Ferramentas de Geoprocessamento para Internet
 
-Direitos Autorais Reservados (c) 2006 Ministério do Meio Ambiente Brasil
+Direitos Autorais Reservados (c) 2006 Minist&eacute;rio do Meio Ambiente Brasil
 Desenvolvedor: Edmar Moretti edmar.moretti@mma.gov.br
 
-Este programa é software livre; você pode redistribuí-lo
-e/ou modificá-lo sob os termos da Licença Pública Geral
+Este programa &eacute; software livre; voc&ecirc; pode redistribu&iacute;-lo
+e/ou modific&aacute;-lo sob os termos da Licen&ccedil;a P&uacute;blica Geral
 GNU conforme publicada pela Free Software Foundation;
 
-Este programa é distribuído na expectativa de que seja útil,
-porém, SEM NENHUMA GARANTIA; nem mesmo a garantia implícita
-de COMERCIABILIDADE OU ADEQUAÇÃO A UMA FINALIDADE ESPECÍFICA.
-Consulte a Licença Pública Geral do GNU para mais detalhes.
-Você deve ter recebido uma cópia da Licença Pública Geral do
+Este programa &eacute; distribu&iacute;do na expectativa de que seja &uacute;til,
+por&eacute;m, SEM NENHUMA GARANTIA; nem mesmo a garantia impl&iacute;cita
+de COMERCIABILIDADE OU ADEQUAÇÃO A UMA FINALIDADE ESPEC&Iacute;FICA.
+Consulte a Licen&ccedil;a P&uacute;blica Geral do GNU para mais detalhes.
+Voc&ecirc; deve ter recebido uma c&oacute;pia da Licen&ccedil;a P&uacute;blica Geral do
 GNU junto com este programa; se não, escreva para a
-Free Software Foundation, Inc., no endereço
+Free Software Foundation, Inc., no endere&ccedil;o
 59 Temple Street, Suite 330, Boston, MA 02111-1307 USA.
 */
 if(typeof(i3GEOF) === 'undefined'){
@@ -46,7 +46,7 @@ i3GEOF.perfil = {
 	/*
 	Variavel: pontos
 	
-	Objeto com a lista de pontos iniciais enviadas como parâmetro na inicialização da ferramenta
+	Objeto com a lista de pontos iniciais enviadas como parâmetro na inicializa&ccedil;ão da ferramenta
 	*/
 	pontos: "",
 	/*
@@ -58,17 +58,17 @@ i3GEOF.perfil = {
 	/*
 	Variavel: aguarde
 	
-	Objeto DOM com a imagem de aguarde existente no cabeçalho da janela.
+	Objeto DOM com a imagem de aguarde existente no cabe&ccedil;alho da janela.
 	*/
 	aguarde: "",
 	/*
 	Function: inicia
 	
-	Inicia a ferramenta. É chamado por criaJanelaFlutuante
+	Inicia a ferramenta. &Eacute; chamado por criaJanelaFlutuante
 	
 	Parametro:
 	
-	iddiv {String} - id do div que receberá o conteudo HTML da ferramenta
+	iddiv {String} - id do div que receber&aacute; o conteudo HTML da ferramenta
 	*/
 	inicia: function(iddiv){
 		try{
@@ -84,20 +84,20 @@ i3GEOF.perfil = {
 	/*
 	Function: html
 	
-	Gera o código html para apresentação das opções da ferramenta
+	Gera o c&oacute;digo html para apresenta&ccedil;ão das op&ccedil;&otilde;es da ferramenta
 	
 	Retorno:
 	
-	String com o código html
+	String com o c&oacute;digo html
 	*/
 	html:function(){
-		var ins = "<p class='paragrafo' >Escolha qual será a fonte dos dados de Z:";
+		var ins = "<p class='paragrafo' >Escolha qual ser&aacute; a fonte dos dados de Z:";
 		ins += "<p class='paragrafo' ><input onclick='if(this.checked == true){$i(\"i3GEOFperfilTemasSel\").value = \"\";$i(\"i3GEOFperfilDivComboItens\").innerHTML = \"\";}' style=cursor:pointer checked type=radio name=i3GEOFperfilFonte id=i3GEOFperfilFonteGoogle /> Google ou";
 		ins += "<p class='paragrafo' >um tema do mapa: <div style=text-align:left; id=i3GEOFperfilTemas ></div>";
 		ins += "<div style=text-align:left; id=i3GEOFperfilDivComboItens ></div><br>";
 		
-		ins += "<p class='paragrafo' ><input type=text id=i3GEOFperfilAmostragem value=20 size=3 /> Número de pontos que serão obtidos ao longo da linha";
-		ins += "<br><br><input id=i3GEOperfilbotao1 type='buttom' value='Criar gráfico' />";
+		ins += "<p class='paragrafo' ><input type=text id=i3GEOFperfilAmostragem value=20 size=3 /> N&uacute;mero de pontos que serão obtidos ao longo da linha";
+		ins += "<br><br><input id=i3GEOperfilbotao1 type='buttom' value='Criar gr&aacute;fico' />";
 		ins += "<br><br><div style=text-align:left id=i3GEOperfilfim ></div>";
 		return ins;
 	},
@@ -108,7 +108,7 @@ i3GEOF.perfil = {
 	
 	Parametro:
 	
-	pontos {objeto} - contém as coordenadas dos pontos que serão usados nos cálculos, como no exemplo
+	pontos {objeto} - cont&eacute;m as coordenadas dos pontos que serão usados nos c&aacute;lculos, como no exemplo
 	
 	pontos = {xpt: [],ypt:[]}; //xpt são os valores de x (array) e ypt os valores de y (array)
 	*/	
@@ -141,7 +141,7 @@ i3GEOF.perfil = {
 	/*
 	Function: criaPerfil
 	
-	Executa a operação de geração do perfil
+	Executa a opera&ccedil;ão de gera&ccedil;ão do perfil
 	
 	Veja:
 	
@@ -157,13 +157,13 @@ i3GEOF.perfil = {
 				{$i("i3GEOperfilfim").innerHTML = "Erro.";return;}
 				else{
 					if(retorno.data.status != "OK")
-					{$i("i3GEOperfilfim").innerHTML = "Erro ao acessar o serviço de fornecimento dos dados";return;}
+					{$i("i3GEOperfilfim").innerHTML = "Erro ao acessar o servi&ccedil;o de fornecimento dos dados";return;}
 					i3GEOF.perfil.converteDados(retorno.data.results);
 					if(!$i("i3GEOF.graficointerativo_script")){
 						var js = i3GEO.configura.locaplic+"/ferramentas/graficointerativo/index.js.php";
 						i3GEO.util.scriptTag(js,"i3GEOF.perfil.iniciaGrafico()","i3GEOF.graficointerativo_script");
 					}
-					//é obrigado mostrar o mapa do google quando o perfil usa o google
+					//&eacute; obrigado mostrar o mapa do google quando o perfil usa o google
 					if($i("i3GEOFperfilFonteGoogle").checked === true && i3GEO.Interface.ATUAL !== "googlemaps"){
 						i3GEO.navega.dialogo.google(i3GEOF.perfil.listaPontos(true).split(","));
 					}	
@@ -190,7 +190,7 @@ i3GEOF.perfil = {
 	/*
 	Function: iniciaGrafico
 	
-	Inicializa o gráfico de perfil definindo os parâmetros da ferramenta i3GEOF.graficointerativo
+	Inicializa o gr&aacute;fico de perfil definindo os parâmetros da ferramenta i3GEOF.graficointerativo
 	*/
 	iniciaGrafico: function(){
 		i3GEOF.graficointerativo.tipo = "line";
@@ -227,7 +227,7 @@ i3GEOF.perfil = {
 	/*
 	Function: converteDados
 	
-	Converte os dados com a altimetria para o formato aceito pela ferramenta de gráficos
+	Converte os dados com a altimetria para o formato aceito pela ferramenta de gr&aacute;ficos
 	
 	Parametro:
 	

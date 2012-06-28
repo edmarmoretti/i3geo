@@ -4,8 +4,8 @@
 /*
 Title: Tabela de atributos
 
-Mostra a tabela de atributos de um tema com opções de seleção, estatística, gráficos e relatórios.
-O tema utilizado é o que estiver definido em i3GEO.temaAtivo
+Mostra a tabela de atributos de um tema com op&ccedil;&otilde;es de sele&ccedil;ão, estat&iacute;stica, gr&aacute;ficos e relat&oacute;rios.
+O tema utilizado &eacute; o que estiver definido em i3GEO.temaAtivo
 
 Veja:
 
@@ -21,20 +21,20 @@ GPL2
 
 i3Geo Interface Integrada de Ferramentas de Geoprocessamento para Internet
 
-Direitos Autorais Reservados (c) 2006 Ministério do Meio Ambiente Brasil
+Direitos Autorais Reservados (c) 2006 Minist&eacute;rio do Meio Ambiente Brasil
 Desenvolvedor: Edmar Moretti edmar.moretti@mma.gov.br
 
-Este programa é software livre; você pode redistribuí-lo
-e/ou modificá-lo sob os termos da Licença Pública Geral
+Este programa &eacute; software livre; voc&ecirc; pode redistribu&iacute;-lo
+e/ou modific&aacute;-lo sob os termos da Licen&ccedil;a P&uacute;blica Geral
 GNU conforme publicada pela Free Software Foundation;
 
-Este programa é distribuído na expectativa de que seja útil,
-porém, SEM NENHUMA GARANTIA; nem mesmo a garantia implícita
-de COMERCIABILIDADE OU ADEQUAÇÃO A UMA FINALIDADE ESPECÍFICA.
-Consulte a Licença Pública Geral do GNU para mais detalhes.
-Você deve ter recebido uma cópia da Licença Pública Geral do
+Este programa &eacute; distribu&iacute;do na expectativa de que seja &uacute;til,
+por&eacute;m, SEM NENHUMA GARANTIA; nem mesmo a garantia impl&iacute;cita
+de COMERCIABILIDADE OU ADEQUAÇÃO A UMA FINALIDADE ESPEC&Iacute;FICA.
+Consulte a Licen&ccedil;a P&uacute;blica Geral do GNU para mais detalhes.
+Voc&ecirc; deve ter recebido uma c&oacute;pia da Licen&ccedil;a P&uacute;blica Geral do
 GNU junto com este programa; se não, escreva para a
-Free Software Foundation, Inc., no endereço
+Free Software Foundation, Inc., no endere&ccedil;o
 59 Temple Street, Suite 330, Boston, MA 02111-1307 USA.
 */
 
@@ -49,19 +49,19 @@ i3GEOF.tabela = {
 	/*
 	Variavel: aguarde
 	
-	Estilo do objeto DOM com a imagem de aguarde existente no cabeçalho da janela.
+	Estilo do objeto DOM com a imagem de aguarde existente no cabe&ccedil;alho da janela.
 	*/
 	aguarde: "",
 	/*
 	Variavel: tipoDeGrafico
 	
-	Guarda o tipo de grafico escolhido pelo usuário
+	Guarda o tipo de grafico escolhido pelo usu&aacute;rio
 	*/
 	tipoDeGrafico: "",
 	/*
 	Variavel: tema
 	
-	Tema que será utilizado
+	Tema que ser&aacute; utilizado
 	
 	Type:
 	{string}
@@ -70,7 +70,7 @@ i3GEOF.tabela = {
 	/*
 	Variavel: registros
 	
-	Guarda os índices dos registros escolhidos na tabela
+	Guarda os &iacute;ndices dos registros escolhidos na tabela
 	
 	Type:
 	{array}
@@ -79,9 +79,9 @@ i3GEOF.tabela = {
 	/*
 	Variavel: parametros
 	
-	Parametros utilizados para o gráfico.
+	Parametros utilizados para o gr&aacute;fico.
 	
-	É definido em função do tipo de gráfico escolhido
+	&Eacute; definido em fun&ccedil;ão do tipo de gr&aacute;fico escolhido
 	
 	Type:
 	{string}
@@ -90,17 +90,17 @@ i3GEOF.tabela = {
 	/*
 	Variable: nomeArquivoGr
 	
-	Nome do arquivo gerado com os dados para o gráfico
+	Nome do arquivo gerado com os dados para o gr&aacute;fico
 	*/
 	nomeArquivoGr: "",
 	/*
 	Function: inicia
 	
-	Inicia a ferramenta. É chamado por criaJanelaFlutuante
+	Inicia a ferramenta. &Eacute; chamado por criaJanelaFlutuante
 	
 	Parametro:
 	
-	iddiv {String} - id do div que receberá o conteudo HTML da ferramenta
+	iddiv {String} - id do div que receber&aacute; o conteudo HTML da ferramenta
 	*/
 	inicia: function(iddiv){
 		i3GEO.janela.comboCabecalhoTemas("i3GEOFtabelaComboCabeca","i3GEOFtabelaComboCabecaSel","tabela","ligadosComTabela");
@@ -196,7 +196,7 @@ i3GEOF.tabela = {
 			i3GEO.util.mensagemAjuda("i3GEOtabelamen1",$i("i3GEOtabelamen1").innerHTML);
 
 			if (i3GEO.parametros.r.toLowerCase() !== "sim")
-			{$i("i3GEOtabelaguia4obj").innerHTML = "Opção não disponível";}
+			{$i("i3GEOtabelaguia4obj").innerHTML = "Op&ccedil;ão não dispon&iacute;vel";}
 			i3GEOF.tabela.pegaRegistros();
 		}
 		catch(erro){alert(erro);}
@@ -204,11 +204,11 @@ i3GEOF.tabela = {
 	/*
 	Function: html
 	
-	Gera o código html para apresentação das opções da ferramenta
+	Gera o c&oacute;digo html para apresenta&ccedil;ão das op&ccedil;&otilde;es da ferramenta
 	
 	Retorno:
 	
-	String com o código html
+	String com o c&oacute;digo html
 	*/
 	html:function(){
 		var ins = '';//<p class="paragrafo" >
@@ -226,11 +226,11 @@ i3GEOF.tabela = {
 		ins += '		<table summary="" class=lista2 >';
 		ins += '		<tr>';
 		ins += '			<td><input style="cursor:pointer;border:0px solid white;" onclick="i3GEOF.tabela.pegaRegistros()" type=checkbox id=i3GEOtabelatiporeg CHECKED /></td>';
-		ins += '			<td>Considerar na listagem a regi&atilde;o mostrada no mapa (se essa opção for desmarcada, ser&aacute; considerada a extens&atilde;o geogr&aacute;fica do mapa inicial)</td>';
+		ins += '			<td>Considerar na listagem a regi&atilde;o mostrada no mapa (se essa op&ccedil;ão for desmarcada, ser&aacute; considerada a extens&atilde;o geogr&aacute;fica do mapa inicial)</td>';
 		ins += '		</tr>';
 		ins += '		<tr>';
 		ins += '			<td><input style="cursor:pointer;border:0px solid white;" type=checkbox onclick="i3GEOF.tabela.ativaAutoAtualiza(this)"  /></td>';
-		ins += '			<td>Atualiza a tabela após navegar no mapa</td>';
+		ins += '			<td>Atualiza a tabela ap&oacute;s navegar no mapa</td>';
 		ins += '		</tr>';
 		ins += '		<tr>';
 		ins += '			<td><input style="cursor:pointer;border:0px solid white;" onclick="i3GEOF.tabela.pegaRegistros()" type=checkbox id=i3GEOtabelatipolista /></td>';
@@ -246,8 +246,8 @@ i3GEOF.tabela = {
 		ins += '		<div id=i3GEOtabelacombot style="position:relative;top:5px;left:0px;">';
 		ins += '		</div>';		
 		ins += '		<br><p class="paragrafo" ><input title="Seleciona no mapa as linhas marcadas" id=i3GEOtabelabotao2 size=25 type=button value="Ativa a sele&ccedil;&atilde;o" />';
-		ins += '		<input title="Limpa a seleção do mapa" id=i3GEOtabelabotao3 size=25  type=button value="Limpa a sele&ccedil;&atilde;o"/>';
-		ins += '		<input title="Cria um novo tema no mapa contendo a seleção" id=i3GEOtabelabotao6 size=30  type=button value="Cria um tema novo"/>';
+		ins += '		<input title="Limpa a sele&ccedil;ão do mapa" id=i3GEOtabelabotao3 size=25  type=button value="Limpa a sele&ccedil;&atilde;o"/>';
+		ins += '		<input title="Cria um novo tema no mapa contendo a sele&ccedil;ão" id=i3GEOtabelabotao6 size=30  type=button value="Cria um tema novo"/>';
 		ins += '		<div id=i3GEOtabelacontador style="background-color:rgb(240,240,240);width:100%;position:relative;top:15px;left:0px;text-align:left">';
 		ins += '			de <img style=cursor:pointer onclick="i3GEOF.tabela.menos()" src="'+i3GEO.configura.locaplic+'/imagens/minus.gif" />';
 		ins += $inputText("","","i3GEOtabelainicio","",5,"1");
@@ -260,8 +260,8 @@ i3GEOF.tabela = {
 		ins += '		</div>';
 		ins += '	</div>';
 		ins += '	<div id=i3GEOtabelaguia3obj style="display:none;width:99%;left:0px" >';
-		ins += '		<p class="paragrafo" >Item para aplicar os cálculos: <span id=i3GEOtabelaitensGuia3 ></span>';
-		ins += '		<p class="paragrafo" >Excluir dos cálculos o valor:';
+		ins += '		<p class="paragrafo" >Item para aplicar os c&aacute;lculos: <span id=i3GEOtabelaitensGuia3 ></span>';
+		ins += '		<p class="paragrafo" >Excluir dos c&aacute;lculos o valor:';
 		ins += $inputText("","","i3GEOtabelafiltro1","",5,"");
 		ins += '		<p class="paragrafo" ><input id=i3GEOtabelabotao4 size=30  type=button value="Calcular"/>';
 		ins += '		<div id="i3GEOtabelaoperacoes" class=digitar style="text-align:left;position:relative;top:15px;left:0px;"  >';
@@ -290,8 +290,8 @@ i3GEOF.tabela = {
 		ins += '			Incluir c&aacute;lculo de estat&iacute;sticas';
 		ins += '		<p class="paragrafo" >Excluir das estat&iacute;sticas o valor: ';
 		ins += $inputText("","","i3GEOtabelaexcestat","",10,"");
-		ins += '		<p class="paragrafo" ><input id=i3GEOtabelabotao7 size=30  type=button value="Relatório"/>';
-		ins += '		<input id=i3GEOtabelabotao5 size=25  type=button value="Relatório no formato texto"/>';
+		ins += '		<p class="paragrafo" ><input id=i3GEOtabelabotao7 size=30  type=button value="Relat&oacute;rio"/>';
+		ins += '		<input id=i3GEOtabelabotao5 size=25  type=button value="Relat&oacute;rio no formato texto"/>';
 		ins += '		<form method=post style="display:none" id=i3GEOtabelarelatorio action="'+i3GEO.configura.locaplic+'/ferramentas/tabela/relatorio.php" target="_blank" >';
 		ins += '			<input type=hidden id=i3GEOtabelaarearelh name=arearel value=nao />';
 		ins += '			<input type=hidden id=i3GEOtabelastatrelh name=statrel value=nao />';
@@ -374,7 +374,7 @@ i3GEOF.tabela = {
 	/*
 	Function: ativaAutoAtualiza
 	
-	Ativa ou desativa a atualização automática da tabela quando o usuário navega no mapa
+	Ativa ou desativa a atualiza&ccedil;ão autom&aacute;tica da tabela quando o usu&aacute;rio navega no mapa
 	*/
 	ativaAutoAtualiza:function(obj){
 		if(obj.checked == true){
@@ -435,7 +435,7 @@ i3GEOF.tabela = {
 	/*
 	Function: montaTabela
 	
-	Monta a visualização da tabela de atributos
+	Monta a visualiza&ccedil;ão da tabela de atributos
 	*/
 	montaTabela: function(retorno){
 		if (retorno.data !== undefined)
@@ -492,7 +492,7 @@ i3GEOF.tabela = {
 	/*
 	Function: mais
 	
-	Avança o contador de registros para a listagem
+	Avan&ccedil;a o contador de registros para a listagem
 	*/
 	mais:function(){
 		if(i3GEOF.tabela.aguarde.visibility === "visible")
@@ -526,7 +526,7 @@ i3GEOF.tabela = {
 	/*
 	Function: excluiColuna
 	
-	Exclui uma coluna da visualização da tabela
+	Exclui uma coluna da visualiza&ccedil;ão da tabela
 	*/
 	excluiColuna: function(coluna,cid){
 		i3GEOF.tabela.aguarde.visibility = "visible";
@@ -633,7 +633,7 @@ i3GEOF.tabela = {
 	/*
 	Function: listaMarcados
 	
-	Retorna um array com os índices dos registros que estão marcados.
+	Retorna um array com os &iacute;ndices dos registros que estão marcados.
 	*/
 	listaMarcados: function(){
 		var lista = [],
@@ -676,7 +676,7 @@ i3GEOF.tabela = {
 	/*
 	Function: limpaSelecao
 	
-	Limpa a seleção do tema da tabela
+	Limpa a sele&ccedil;ão do tema da tabela
 	*/
 	limpaSelecao: function(){
 		if(i3GEOF.tabela.aguarde.visibility === "visible")
@@ -695,7 +695,7 @@ i3GEOF.tabela = {
 	/*
 	Function: criaNovoTema
 	
-	Cria um novo tema contendo a seleção existente
+	Cria um novo tema contendo a sele&ccedil;ão existente
 	*/
 	criaNovoTema: function(){
 		if(i3GEOF.tabela.aguarde.visibility === "visible")
@@ -776,10 +776,10 @@ i3GEOF.tabela = {
 	t0: function(){
 		$i("i3GEOtabelaresultado").innerHTML = "";
 		var ins = "";
-		ins += "<p class='paragrafo' >A representação gr&aacute;fica dos dados tabulares utiliza todos os elementos da tabela ou os selecionados, se estiverem ativos no mapa.";
-		ins += "<p class='paragrafo' ><a href='http://www.r-project.org/' target=blank >Os gráficos s&atilde;o gerados com o software R,</a> mas vc pode optar por usar a ferramenta de gráficos interativos que possuem outras opções e geram gráficos em Flash.";
-		ins += "<p class='paragrafo' ><input type=button value='Gráficos interativos' id=i3GEOtabelaGraficoI /></p>";
-		ins += "<br><br><p class='paragrafo' >Se você optar por usar o R, nas telas seguintes defina o tipo e as op&ccedil;&otilde;es do gr&aacute;fico.";
+		ins += "<p class='paragrafo' >A representa&ccedil;ão gr&aacute;fica dos dados tabulares utiliza todos os elementos da tabela ou os selecionados, se estiverem ativos no mapa.";
+		ins += "<p class='paragrafo' ><a href='http://www.r-project.org/' target=blank >Os gr&aacute;ficos s&atilde;o gerados com o software R,</a> mas vc pode optar por usar a ferramenta de gr&aacute;ficos interativos que possuem outras op&ccedil;&otilde;es e geram gr&aacute;ficos em Flash.";
+		ins += "<p class='paragrafo' ><input type=button value='Gr&aacute;ficos interativos' id=i3GEOtabelaGraficoI /></p>";
+		ins += "<br><br><p class='paragrafo' >Se voc&ecirc; optar por usar o R, nas telas seguintes defina o tipo e as op&ccedil;&otilde;es do gr&aacute;fico.";
 
 		i3GEO.util.proximoAnterior("","i3GEOF.tabela.t1()",ins,"i3GEOFtabelat0","i3GEOtabelaresultado");
 		new YAHOO.widget.Button(
@@ -900,7 +900,7 @@ i3GEOF.tabela = {
 	/*
 	Function: retornaPar
 	
-	Monta os parâmetros adicionais de cada tipo de gráfico
+	Monta os parâmetros adicionais de cada tipo de gr&aacute;fico
 	*/
 	retornaPar: function(id){
 		try{
@@ -909,17 +909,17 @@ i3GEOF.tabela = {
 			if (id === "Tgrid")
 			{ins += "<tr><td><b>Grade e bordas</b></td><td></td></tr>";}
 			if (id === "Ttitulo")
-			{ins += "<tr><td><b>Título</b></td><td></td></tr>";}
+			{ins += "<tr><td><b>T&iacute;tulo</b></td><td></td></tr>";}
 			if (id === "Tsubtitulo")
-			{ins += "<tr><td><b>Sub-Título</b></td><td></td></tr>";}
+			{ins += "<tr><td><b>Sub-T&iacute;tulo</b></td><td></td></tr>";}
 			if (id === "Teixo")
 			{ins += "<tr><td><b>Texto dos eixos</b></td><td></td></tr>";}
 			if (id === "Trotulos")
-			{ins += "<tr><td><b>Texto dos rótulos dos eixos</b></td><td></td></tr>";}
+			{ins += "<tr><td><b>Texto dos r&oacute;tulos dos eixos</b></td><td></td></tr>";}
 			if (id === "Toutros")
 			{ins += "<tr><td><b>Outros</b></td><td></td></tr>";}
 			if (id === "Bgrafico")
-			{ins += "<tr><td><b>Margem do gráfico</b></td><td></td></tr>";}
+			{ins += "<tr><td><b>Margem do gr&aacute;fico</b></td><td></td></tr>";}
 			if (id === "corlinha"){
 				ins += "<tr><td>Cor da linha</td>";
 				ins += "<td>"+i3GEOF.tabela.combocor("i3GEOtabelacorlinha","1")+"</td></tr>";
@@ -949,7 +949,7 @@ i3GEOF.tabela = {
 				ins += "<td>"+i3GEOF.tabela.combocor("i3GEOtabelamargeminterna","0")+"</td></tr>";
 			}
 			if (id === "nbins"){
-				ins += "<tr><td>Número de divisões dos eixos</td>";
+				ins += "<tr><td>N&uacute;mero de divis&otilde;es dos eixos</td>";
 				ins += "<td><input onclick='javascript:this.select();' class=digitar type=text value='40' size=20 id=i3GEOtabelanbins /></td></tr>";
 			}
 			if (id === "breaks"){
@@ -969,7 +969,7 @@ i3GEOF.tabela = {
 				ins += "<td><input onclick='javascript:this.select();' class=digitar type=text value='0.9' size=20 id=i3GEOtabelaradius /></td></tr>";
 			}
 			if (id === "percentual"){
-				ins += "<tr><td>Plota o percentual nos rótulos?</td>";
+				ins += "<tr><td>Plota o percentual nos r&oacute;tulos?</td>";
 				ins += "<td>"+i3GEO.util.comboSimNao("i3GEOtabelapercentual","sim")+"</td></tr>";
 			}
 			if (id === "densidade"){
@@ -994,8 +994,8 @@ i3GEOF.tabela = {
 				ins +=  '<select name="font" id=i3GEOtabelafont >';
 				ins +=   '<option value="2" selected >normal</option>';
 				ins +=   '<option value="3">negrito</option>';
-				ins +=   '<option value="4">itálico</option>';
-				ins +=   '<option value="5">negrito-itálico</option>';
+				ins +=   '<option value="4">it&aacute;lico</option>';
+				ins +=   '<option value="5">negrito-it&aacute;lico</option>';
 				ins +=  "</select>";
 				ins +=  '</td></tr>';
 			}
@@ -1018,8 +1018,8 @@ i3GEOF.tabela = {
 				ins +=  '<select name="fontmain" id=i3GEOtabelafontmain >';
 				ins +=   '<option value="2" selected >normal</option>';
 				ins +=   '<option value="3">negrito</option>';
-				ins +=   '<option value="4">itálico</option>';
-				ins +=   '<option value="5">negrito-itálico</option>';
+				ins +=   '<option value="4">it&aacute;lico</option>';
+				ins +=   '<option value="5">negrito-it&aacute;lico</option>';
 				ins +=  "</select>";
 				ins +=  '</td></tr>';
 			}
@@ -1042,8 +1042,8 @@ i3GEOF.tabela = {
 				ins +=  '<select id=i3GEOtabelafontsub >';
 				ins +=   '<option value="2" selected >normal</option>';
 				ins +=   '<option value="3">negrito</option>';
-				ins +=   '<option value="4">itálico</option>';
-				ins +=   '<option value="5">negrito-itálico</option>';
+				ins +=   '<option value="4">it&aacute;lico</option>';
+				ins +=   '<option value="5">negrito-it&aacute;lico</option>';
 				ins +=  "</select>";
 				ins +=  '</td></tr>';
 			}
@@ -1093,8 +1093,8 @@ i3GEOF.tabela = {
 				ins +=  '<select id=i3GEOtabelafontaxis >';
 				ins +=   '<option value="2" selected >normal</option>';
 				ins +=   '<option value="3">negrito</option>';
-				ins +=   '<option value="4">itálico</option>';
-				ins +=   '<option value="5">negrito-itálico</option>';
+				ins +=   '<option value="4">it&aacute;lico</option>';
+				ins +=   '<option value="5">negrito-it&aacute;lico</option>';
 				ins +=  "</select>";
 				ins +=  '</td></tr>';
 			}
@@ -1104,8 +1104,8 @@ i3GEOF.tabela = {
 				ins +=  '<select id=i3GEOtabelafontlab >';
 				ins +=   '<option value="2" selected >normal</option>';
 				ins +=   '<option value="3">negrito</option>';
-				ins +=   '<option value="4">itálico</option>';
-				ins +=   '<option value="5">negrito-itálico</option>';
+				ins +=   '<option value="4">it&aacute;lico</option>';
+				ins +=   '<option value="5">negrito-it&aacute;lico</option>';
 				ins +=  "</select>";
 				ins +=  '</td></tr>';
 			}
@@ -1123,12 +1123,12 @@ i3GEOF.tabela = {
 				ins += '<td style="text-align:right">';
 				ins += '<select id="i3GEOtabelalty" >\n';
 				ins +=  '<option value="0"  >nenhum</option>';
-				ins +=  '<option value="1" selected >sólido</option>';
+				ins +=  '<option value="1" selected >s&oacute;lido</option>';
 				ins +=  '<option value="2">tracejado</option>';
 				ins +=  '<option value="3">pontilhado</option>';
-				ins +=  '<option value="4">traço-ponto</option>';
-				ins +=  '<option value="5">traço longo</option>';
-				ins +=  '<option value="6">traço duplo</option>';
+				ins +=  '<option value="4">tra&ccedil;o-ponto</option>';
+				ins +=  '<option value="5">tra&ccedil;o longo</option>';
+				ins +=  '<option value="6">tra&ccedil;o duplo</option>';
 				ins += "</select>";
 				ins += '</td></tr>';
 			}
@@ -1157,11 +1157,11 @@ i3GEOF.tabela = {
 				ins += "<td>"+i3GEO.util.comboSimNao("i3GEOtabelappontos","sim")+"</td></tr>";
 			}
 			if (id === "full"){
-				ins += "<tr><td>Círculo inteiro?</td>";
+				ins += "<tr><td>C&iacute;rculo inteiro?</td>";
 				ins += "<td>"+i3GEO.util.comboSimNao("i3GEOtabelafull","sim")+"</td></tr>";
 			}
 			if (id === "pch"){
-				ins += "<tr><td>Símbolo dos pontos</td>";
+				ins += "<tr><td>S&iacute;mbolo dos pontos</td>";
 				ins += "<td><input onclick='javascript:this.select();' class=digitar type=text value='o' size=20 id=i3GEOtabelapch /></td></tr>";
 			}
 			if (id === "tpt"){
@@ -1198,7 +1198,7 @@ i3GEOF.tabela = {
 	/*
 	Function: geraGrafico
 	
-	Gera a imagem do gráfico
+	Gera a imagem do gr&aacute;fico
 	*/
 	geraGrafico: function(funcao){
 		if(i3GEOF.tabela.aguarde.visibility === "visible")
@@ -1243,7 +1243,7 @@ i3GEOF.tabela = {
 	/*
 	Function: mostraGrafico
 	
-	Mostra o gráfico gerado em uma nova janela do navegador
+	Mostra o gr&aacute;fico gerado em uma nova janela do navegador
 	*/
 	mostraGrafico: function(retorno){
 		i3GEOF.tabela.aguarde.visibility = "hidden";
@@ -1264,7 +1264,7 @@ i3GEOF.tabela = {
 	/*
 	Function: mostraImagem
 	
-	Mostra o gráfico na janela flutuante do i3Geo
+	Mostra o gr&aacute;fico na janela flutuante do i3Geo
 	
 	*/
 	mostraImagem: function(retorno){
@@ -1284,14 +1284,14 @@ i3GEOF.tabela = {
 	/*
 	Function: fusaoGrafico
 	
-	Faz a fusão do mapa com o gráfico gerado
+	Faz a fusão do mapa com o gr&aacute;fico gerado
 	*/
 	fusaoGrafico: function(){
 		if(i3GEOF.tabela.aguarde.visibility === "visible")
 		{return;}
 		i3GEOF.tabela.aguarde.visibility = "visible";	
 		if (i3GEOF.tabela.imagemG === ""){
-			alert("O gráfico ainda não foi gerado.");
+			alert("O gr&aacute;fico ainda não foi gerado.");
 			i3GEOF.tabela.aguarde.visibility = "hidden";
 		}
 		else{
@@ -1313,7 +1313,7 @@ i3GEOF.tabela = {
 	/*
 	Function: montaPar
 	
-	Monta os parâmetros para um determinado tipo de gráfico, que serão utilizados na chamada ajax de criação do gráfico
+	Monta os parâmetros para um determinado tipo de gr&aacute;fico, que serão utilizados na chamada ajax de cria&ccedil;ão do gr&aacute;fico
 	*/
 	montapar: function(parametros){
 		try{
@@ -1354,7 +1354,7 @@ i3GEOF.tabela = {
 	/*
 	Function: relatorioTabela
 	
-	Monta o relatório padrão em uma nova janela
+	Monta o relat&oacute;rio padrão em uma nova janela
 	*/
 	relatorioTabela: function(){
 		try{
@@ -1388,7 +1388,7 @@ i3GEOF.tabela = {
 	/*
 	Function: relatorioTexto
 	
-	Gera o relatório no formato CSV
+	Gera o relat&oacute;rio no formato CSV
 	*/
 	relatorioTexto: function(){
 		try{

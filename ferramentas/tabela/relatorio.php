@@ -258,7 +258,7 @@ function calculaarea($geo)
 	global $postgis_con;
 	$v = versao();
 	if (($v["principal"] < 5) && ($postgis_con == ""))
-	{return ("erro. É necessária uma versão maior que 5.0 do Mapserver.");}
+	{return ("erro. &Eacute; necess&aacute;ria uma versão maior que 5.0 do Mapserver.");}
 	$g = $geo->towkt();
 	$shape = ms_shapeObjFromWkt($g);
 	$rect = $shape->bounds;

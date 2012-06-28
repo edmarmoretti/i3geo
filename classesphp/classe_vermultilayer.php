@@ -4,7 +4,7 @@ Title: classe_vermultilayer.php
 
 Verifica se o layer e multilayer
 
-Analisa um mapfile e retorna a situação de agrupamento das camadas.
+Analisa um mapfile e retorna a situa&ccedil;&atilde;o de agrupamento das camadas.
 
 Licenca:
 
@@ -13,20 +13,20 @@ GPL2
 
 i3Geo Interface Integrada de Ferramentas de Geoprocessamento para Internet
 
-Direitos Autorais Reservados (c) 2006 Ministério do Meio Ambiente Brasil
+Direitos Autorais Reservados (c) 2006 Minist&eacute;rio do Meio Ambiente Brasil
 Desenvolvedor: Edmar Moretti edmar.moretti@mma.gov.br
 
-Este programa é software livre; você pode redistribuí-lo
-e/ou modificá-lo sob os termos da Licença Pública Geral
+Este programa &eacute; software livre; voc&ecirc; pode redistribu&iacute;-lo
+e/ou modific&aacute;-lo sob os termos da Licen&ccedil;a P&uacute;blica Geral
 GNU conforme publicada pela Free Software Foundation;
 
-Este programa é distribuído na expectativa de que seja útil,
-porém, SEM NENHUMA GARANTIA; nem mesmo a garantia implícita
-de COMERCIABILIDADE OU ADEQUAÇÃO A UMA FINALIDADE ESPECÍFICA.
-Consulte a Licença Pública Geral do GNU para mais detalhes.
-Você deve ter recebido uma cópia da Licença Pública Geral do
-GNU junto com este programa; se não, escreva para a
-Free Software Foundation, Inc., no endereço
+Este programa &eacute; distribu&iacute;do na expectativa de que seja &uacute;til,
+por&eacute;m, SEM NENHUMA GARANTIA; nem mesmo a garantia impl&iacute;cita
+de COMERCIABILIDADE OU ADEQUA&Ccedil;&Atilde;O A UMA FINALIDADE ESPEC&Iacute;FICA.
+Consulte a Licen&ccedil;a P&uacute;blica Geral do GNU para mais detalhes.
+Voc&ecirc; deve ter recebido uma cópia da Licen&ccedil;a P&uacute;blica Geral do
+GNU junto com este programa; se n&atilde;o, escreva para a
+Free Software Foundation, Inc., no endere&ccedil;o
 59 Temple Street, Suite 330, Boston, MA 02111-1307 USA.
 
 Arquivo:
@@ -41,7 +41,7 @@ class vermultilayer
 	/*
 	Variavel: $resultado
 	
-	Indica se é multi-layer ou não (0 ou 1)
+	Indica se &eacute; multi-layer ou n&atilde;o (0 ou 1)
 	*/
 	var $resultado;
 	/*
@@ -65,24 +65,24 @@ class vermultilayer
 	/*
 	Variavel: $nomesvisiveis
 	
-	Lista dos nomes dos temas visíveis
+	Lista dos nomes dos temas vis&iacute;veis
 	*/
-	var $nomesvisiveis; //nomes dos temas visíveis na escala
+	var $nomesvisiveis; //nomes dos temas vis&iacute;veis na escala
 	/*
 	Variavel: $temasvisiveis
 	
-	Lista com os códigos dos temas visíveis
+	Lista com os códigos dos temas vis&iacute;veis
 	*/
 	var $temasvisiveis; //temas vi'siveis na escala
 	/*
 	function: verifica
 	
-	Verifica se um tema é multilayer
+	Verifica se um tema &eacute; multilayer
 	
 	parameters:
 	$mapfile - arquivo mapfile
 	
-	$tema - código do tema que será verificado
+	$tema - código do tema que ser&aacute; verificado
 	*/
 	function verifica($mapfile,$tema) //$mapfile = arquivo .map, $tema = nome do layer
 	{
@@ -100,7 +100,7 @@ class vermultilayer
 		{
 			$layer = $map->getlayerbyname($temai);
 			$testa = 0;
-			//verifica se o tema é visivel na escala
+			//verifica se o tema &eacute; visivel na escala
 			$mins = $layer->minscaledenom;
 			$maxs = $layer->maxscaledenom;
 			if ($mins != $maxs)

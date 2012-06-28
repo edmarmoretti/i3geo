@@ -13,7 +13,7 @@
 <table id='mst' summary="" style='display:none;' width=100% cellspacing='0'>
 
 <!--
-	Inclui a barra superior. Se vc não quiser o menu, é só comentar o TR
+	Inclui a barra superior. Se vc n&atilde;o quiser o menu, &eacute; só comentar o TR
 -->
 <tr style="border:0px">
 	<td colspan=2 id="barraSuperior" style="background-image:url('../imagens/visual/default/cabeca.png');height:10px"></td>
@@ -23,7 +23,7 @@
   <table width=100% cellspacing=0 cellpadding=0 >
    <tr>
     <!--
-    	Guias principais, não mude o ID, apenas o nome se for desejado
+    	Guias principais, n&atilde;o mude o ID, apenas o nome se for desejado
     -->
     <td>
     <div class=verdeescuro style="top:0px;cursor:pointer;">
@@ -87,8 +87,8 @@
 	<tr>
 		<td><center><h1 style="font-size:10px;font-family: Verdana, Arial, Helvetica, sans-serif;">
 		<span id=versaoi3geo ></span></h1>
-		<h2 style="font-size:10px;font-family: Verdana, Arial, Helvetica, sans-serif;">i3Geo - Software livre para criação de mapas interativos e geoprocessamento</h2>
-		<h3 style="font-size:10px;font-family: Verdana, Arial, Helvetica, sans-serif;">Baseado no Mapserver, é licenciado sob GPL e integra o Portal do Software Público Brasileiro</h3>
+		<h2 style="font-size:10px;font-family: Verdana, Arial, Helvetica, sans-serif;">i3Geo - Software livre para cria&ccedil;&atilde;o de mapas interativos e geoprocessamento</h2>
+		<h3 style="font-size:10px;font-family: Verdana, Arial, Helvetica, sans-serif;">Baseado no Mapserver, &eacute; licenciado sob GPL e integra o Portal do Software P&uacute;blico Brasileiro</h3>
 		</center></td>
 	</tr>
 	<tr>
@@ -98,9 +98,9 @@
 </center>
 <script type="text/javascript">
 /*
-Title: Interface padrão dos Atlas
+Title: Interface padr&atilde;o dos Atlas
 
-Define o layout do mapa quando um atlas é aberto por http://localhost/i3geo/atlas
+Define o layout do mapa quando um atlas &eacute; aberto por http://localhost/i3geo/atlas
 
 File: i3geo/atlas/geral.htm
 
@@ -129,19 +129,19 @@ i3GEO.Interface.openlayers.TILES = true;
 i3GEO.gadgets.PARAMETROS.mostraMenuSuspenso.finaliza = 'if($i("omenudataInterface1")){i3GEOoMenuBar.getMenuItem("omenudataInterface1").cfg.setProperty("text", " ");}'
 
 /*
-Após a criação, é criado o objeto i3geoOL que corresponde ao objeto map da API do OpenLayers.
-Vc pode usar i3geoOL para aplicar os métodos e verificar as propriedades da API do OpenLayers
+Após a cria&ccedil;&atilde;o, &eacute; criado o objeto i3geoOL que corresponde ao objeto map da API do OpenLayers.
+Vc pode usar i3geoOL para aplicar os m&eacute;todos e verificar as propriedades da API do OpenLayers
 */
 
 i3GEO.cria();
 /*
 	Inicializa o mapa
 */
-//não mostra o mapa de referência
+//n&atilde;o mostra o mapa de refer&ecirc;ncia
 i3GEO.configura.mapaRefDisplay = "none";
-//tipo de barra de botões
+//tipo de barra de bot&otilde;es
 i3GEO.barraDeBotoes.TIPO = "olhodepeixe";
-//ajusta o deslocamento da barra de botões
+//ajusta o deslocamento da barra de bot&otilde;es
 i3GEO.barraDeBotoes.OFFSET = -3;
 i3GEO.configura.oMenuData["submenus"]["janelas"] = [];
 i3GEO.ajuda.ATIVAJANELA = false;
@@ -154,12 +154,12 @@ i3GEO.arvoreDeCamadas.VERIFICAABRANGENCIATEMAS = true;
 i3GEO.arvoreDeCamadas.MOSTRALISTAKML = false;
 i3GEO.mapa.AUTORESIZE = true;
 //
-//define quanto tempo é aguardado para considerar que o mouse está parado sobre um lugar.
-//utilizado pela função de identificação do tipo balão
+//define quanto tempo &eacute; aguardado para considerar que o mouse est&aacute; parado sobre um lugar.
+//utilizado pela fun&ccedil;&atilde;o de identifica&ccedil;&atilde;o do tipo bal&atilde;o
 //
 //i3GEO.configura.tempoMouseParado = 1000
 //
-//esta é uma variável interna do OpenLayers que define o endereço do diretório onde estão as imagens usadas nos ícones
+//esta &eacute; uma vari&aacute;vel interna do OpenLayers que define o endere&ccedil;o do diretório onde est&atilde;o as imagens usadas nos &iacute;cones
 //
 OpenLayers.ImgPath = "../pacotes/openlayers/img/";
 //

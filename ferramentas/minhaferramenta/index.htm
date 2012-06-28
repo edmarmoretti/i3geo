@@ -2,21 +2,21 @@
 <body name="ancora" class="yui-skin-sam">
 Minha ferramenta!
 <div id=exemplos> </div>
-<br>Digite as coordenadas da nova extensão geográfica:<br>
+<br>Digite as coordenadas da nova extensão geogr&aacute;fica:<br>
 <input type=text value="-48 -26 -38 -18" id=valor />
 <br><input type=button value="ok" onclick="mudaext()"/>
 <script src="../i3geo_tudo_compacto.js.php" type="text/javascript"></script>
 <script>
 //essa funcao pega valores passados pela URL
 parametrosURL()
-var secao = "<br>A seção atual é :"+ g_sid
-var aplic = "<br>O i3geo está instalado em:"+g_locaplic
-//$i é um alias para pegar um objeto
+var secao = "<br>A se&ccedil;ão atual &eacute; :"+ g_sid
+var aplic = "<br>O i3geo est&aacute; instalado em:"+g_locaplic
+//$i &eacute; um alias para pegar um objeto
 $i("exemplos").innerHTML = secao+aplic
 function mudaext()
 {
 	aguarde("block")
-	//essa função só é executada quando ocorrer o retorno da chamada do objeto "cp"
+	//essa fun&ccedil;ão s&oacute; &eacute; executada quando ocorrer o retorno da chamada do objeto "cp"
 	var fim = function()
 	{
 		aguarde("none")

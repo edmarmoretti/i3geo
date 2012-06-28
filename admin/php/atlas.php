@@ -1,10 +1,10 @@
 <?php
 /*
-Title: atlas.php
+ Title: atlas.php
 
-Funções utilizadas pelo editor de Atlas.
+Fun&ccedil;&otilde;es utilizadas pelo editor de Atlas.
 
-É utilizado nas funções em AJAX da interface de edição dos Atlas
+&Eacute; utilizado nas fun&ccedil;&otilde;es em AJAX da interface de edi&ccedil;&atilde;o dos Atlas
 
 Licenca:
 
@@ -12,20 +12,20 @@ GPL2
 
 i3Geo Interface Integrada de Ferramentas de Geoprocessamento para Internet
 
-Direitos Autorais Reservados (c) 2006 Ministério do Meio Ambiente Brasil
+Direitos Autorais Reservados (c) 2006 Minist&eacute;rio do Meio Ambiente Brasil
 Desenvolvedor: Edmar Moretti edmar.moretti@mma.gov.br
 
-Este programa é software livre; você pode redistribuí-lo
-e/ou modificá-lo sob os termos da Licença Pública Geral
+Este programa &eacute; software livre; voc&ecirc; pode redistribu&iacute;-lo
+e/ou modific&aacute;-lo sob os termos da Licen&ccedil;a P&uacute;blica Geral
 GNU conforme publicada pela Free Software Foundation;
 
-Este programa é distribuído na expectativa de que seja útil,
-porém, SEM NENHUMA GARANTIA; nem mesmo a garantia implícita
-de COMERCIABILIDADE OU ADEQUAÇÃO A UMA FINALIDADE ESPECÍFICA.
-Consulte a Licença Pública Geral do GNU para mais detalhes.
-Você deve ter recebido uma cópia da Licença Pública Geral do
-GNU junto com este programa; se não, escreva para a
-Free Software Foundation, Inc., no endereço
+Este programa &eacute; distribu&iacute;do na expectativa de que seja &uacute;til,
+por&eacute;m, SEM NENHUMA GARANTIA; nem mesmo a garantia impl&iacute;cita
+de COMERCIABILIDADE OU ADEQUA&Ccedil;&Atilde;O A UMA FINALIDADE ESPEC&Iacute;FICA.
+Consulte a Licen&ccedil;a P&uacute;blica Geral do GNU para mais detalhes.
+Voc&ecirc; deve ter recebido uma cópia da Licen&ccedil;a P&uacute;blica Geral do
+	GNU junto com este programa; se n&atilde;o, escreva para a
+Free Software Foundation, Inc., no endere&ccedil;o
 59 Temple Street, Suite 330, Boston, MA 02111-1307 USA.
 
 Arquivo:
@@ -34,327 +34,343 @@ i3geo/admin/php/atlas.php
 
 Parametros:
 
-O parâmetro principal é "funcao", que define qual operação será executada, por exemplo, atlas.php?funcao=pegaAtlas
+O par&acirc;metro principal &eacute; "funcao", que define qual opera&ccedil;&atilde;o ser&aacute; executada, por exemplo, atlas.php?funcao=pegaAtlas
 
-Cada operação possuí seus próprios parâmetros, que devem ser enviados também na requisição da operação.
+Cada opera&ccedil;&atilde;o possu&iacute; seus próprios par&acirc;metros, que devem ser enviados tamb&eacute;m na requisi&ccedil;&atilde;o da opera&ccedil;&atilde;o.
 
 */
 include_once("admin.php");
-//faz a busca da função que deve ser executada
+//faz a busca da fun&ccedil;&atilde;o que deve ser executada
 switch (strtoupper($funcao))
 {
 	/*
-	Note:
-	
-	Valores que o parâmetro &funcao pode receber. Os parâmetros devem ser enviados na requisição em AJAX.
+	 Note:
+
+	Valores que o par&acirc;metro &funcao pode receber. Os par&acirc;metros devem ser enviados na requisi&ccedil;&atilde;o em AJAX.
 	*/
 	/*
-	Valor: PEGAATLAS
-	
+	 Valor: PEGAATLAS
+
 	Lista todos os Atlas
-	
+
 	Retorno:
-	
+
 	{JSON}
 	*/
 	case "PEGAATLAS":
 		retornaJSON(pegaDados("SELECT id_atlas,titulo_atlas from ".$esquemaadmin."i3geoadmin_atlas order by ordem_atlas"));
 		exit;
-	break;
-	/*
-	Valor: PEGAPRANCHAS
-	
-	Lista de pranchas de um Atlas
-	
-	Parametros:
-	
-	id_atlas
-	
-	Retorno:
-	
-	{JSON}
-	*/
+		break;
+		/*
+		 Valor: PEGAPRANCHAS
+
+		Lista de pranchas de um Atlas
+
+		Parametros:
+
+		id_atlas
+
+		Retorno:
+
+		{JSON}
+		*/
 	case "PEGAPRANCHAS":
 		retornaJSON(pegaDados("SELECT id_prancha,titulo_prancha from ".$esquemaadmin."i3geoadmin_atlasp where id_atlas='$id_atlas' order by ordem_prancha"));
 		exit;
-	break;
-	/*
-	Valor: PEGATEMAS
-	
-	Lista os temas de uma prancha
-	
-	Parametros:
-	
-	id_prancha
-	
-	Retorno:
-	
-	{JSON}
-	*/	
+		break;
+		/*
+		 Valor: PEGATEMAS
+
+		Lista os temas de uma prancha
+
+		Parametros:
+
+		id_prancha
+
+		Retorno:
+
+		{JSON}
+		*/
 	case "PEGATEMAS":
 		retornaJSON(pegaDados("SELECT i3geoadmin_atlast.*,i3geoadmin_temas.nome_tema from ".$esquemaadmin."i3geoadmin_atlast LEFT JOIN i3geoadmin_temas ON ( i3geoadmin_atlast.codigo_tema =  i3geoadmin_temas.codigo_tema ) where id_prancha = '$id_prancha' order by ordem_tema"));
 		exit;
-	break;
-	/*
-	Valor: PEGADADOSATLAS
-	
-	Lista os dados de um atlas
-	
-	Parametros:
-	
-	id_atlas
-	
-	Retorno:
-	
-	{JSON}
-	*/	
+		break;
+		/*
+		 Valor: PEGADADOSATLAS
+
+		Lista os dados de um atlas
+
+		Parametros:
+
+		id_atlas
+
+		Retorno:
+
+		{JSON}
+		*/
 	case "PEGADADOSATLAS":
 		retornaJSON(pegaDados("SELECT * from ".$esquemaadmin."i3geoadmin_atlas where id_atlas =".$id_atlas));
 		exit;
-	break;
-	/*
-	Valor: PEGADADOSPRANCHA
-	
-	Lista os dados de uma prancha
-	
-	Parametros:
-	
-	id_prancha
-	
-	Retorno:
-	
-	{JSON}
-	*/	
+		break;
+		/*
+		 Valor: PEGADADOSPRANCHA
+
+		Lista os dados de uma prancha
+
+		Parametros:
+
+		id_prancha
+
+		Retorno:
+
+		{JSON}
+		*/
 	case "PEGADADOSPRANCHA":
 		retornaJSON(pegaDados("SELECT * from ".$esquemaadmin."i3geoadmin_atlasp where id_prancha =".$id_prancha));
 		exit;
-	break;
-	/*
-	Valor: PEGADADOSTEMA
-	
-	Lista os dados de um tema
-	
-	Parametros:
-	
-	id_tema
-	
-	Retorno:
-	
-	{JSON}
-	*/	
+		break;
+		/*
+		 Valor: PEGADADOSTEMA
+
+		Lista os dados de um tema
+
+		Parametros:
+
+		id_tema
+
+		Retorno:
+
+		{JSON}
+		*/
 	case "PEGADADOSTEMA":
 		retornaJSON(pegaDados("SELECT * from ".$esquemaadmin."i3geoadmin_atlast where id_tema = '$id_tema'"));
 		exit;
-	break;
-	/*
-	Valor: ALTERARATLAS
-	
-	Altera os dados de um atlas
-	
-	Parametros:
-	
-	publicado_atlas
-	
-	id_atlas
-	
-	basemapfile_atlas
-	
-	desc_atlas
-	
-	h_atlas
-	
-	w_atlas
-	
-	icone_atlas
-	
-	link_atlas
-	
-	pranchadefault_atlas
-	
-	template_atlas
-	
-	tipoguias_atlas
-	
-	titulo_atlas
-	
-	ordem_atlas
-	
-	Retorno:
-	
-	{JSON}
-	*/	
+		break;
+		/*
+		 Valor: ALTERARATLAS
+
+		Altera os dados de um atlas
+
+		Parametros:
+
+		publicado_atlas
+
+		id_atlas
+
+		basemapfile_atlas
+
+		desc_atlas
+
+		h_atlas
+
+		w_atlas
+
+		icone_atlas
+
+		link_atlas
+
+		pranchadefault_atlas
+
+		template_atlas
+
+		tipoguias_atlas
+
+		titulo_atlas
+
+		ordem_atlas
+
+		Retorno:
+
+		{JSON}
+		*/
 	case "ALTERARATLAS":
 		if(verificaEditores($editores) == "nao")
-		{echo "Vc nao e um editor cadastrado. Apenas os editores definidos em i3geo/ms_configura.php podem acessar o sistema de administracao.";exit;}
+		{
+			echo "Vc nao e um editor cadastrado. Apenas os editores definidos em i3geo/ms_configura.php podem acessar o sistema de administracao.";exit;
+		}
 		$novo = alterarAtlas();
 		$sql = "SELECT * from ".$esquemaadmin."i3geoadmin_atlas WHERE id_atlas = '".$novo."'";
 		retornaJSON(pegaDados($sql));
 		exit;
-	break;
-	/*
-	Valor: ALTERARPRANCHA
-	
-	Altera os dados de uma prancha
-	
-	Parametros:
-	
-	mapext_prancha
-	
-	id_atlas
-	
-	id_prancha
-	
-	desc_prancha
-	
-	h_prancha
-	
-	w_prancha
-	
-	icone_prancha
-	
-	link_prancha
-	
-	titulo_prancha
-	
-	ordem_prancha
-	
-	Retorno:
-	
-	{JSON}
-	*/
+		break;
+		/*
+		 Valor: ALTERARPRANCHA
+
+		Altera os dados de uma prancha
+
+		Parametros:
+
+		mapext_prancha
+
+		id_atlas
+
+		id_prancha
+
+		desc_prancha
+
+		h_prancha
+
+		w_prancha
+
+		icone_prancha
+
+		link_prancha
+
+		titulo_prancha
+
+		ordem_prancha
+
+		Retorno:
+
+		{JSON}
+		*/
 	case "ALTERARPRANCHA":
 		if(verificaEditores($editores) == "nao")
-		{echo "Vc nao e um editor cadastrado. Apenas os editores definidos em i3geo/ms_configura.php podem acessar o sistema de administracao.";exit;}
+		{
+			echo "Vc nao e um editor cadastrado. Apenas os editores definidos em i3geo/ms_configura.php podem acessar o sistema de administracao.";exit;
+		}
 		$novo = alterarPrancha();
 		$sql = "SELECT * from ".$esquemaadmin."i3geoadmin_atlasp WHERE id_prancha = '".$novo."'";
 		retornaJSON(pegaDados($sql));
 		exit;
-	break;
-	/*
-	Valor: ALTERARTEMA
-	
-	Altera os dados de um tema
-	
-	Parametros:
+		break;
+		/*
+		 Valor: ALTERARTEMA
 
-	id_tema
-	
-	id_prancha
-	
-	codigo_tema
-	
-	ligado_tema
-	
-	ordem_tema	
-	
-	Retorno:
-	
-	{JSON}
-	*/
+		Altera os dados de um tema
+
+		Parametros:
+
+		id_tema
+
+		id_prancha
+
+		codigo_tema
+
+		ligado_tema
+
+		ordem_tema
+
+		Retorno:
+
+		{JSON}
+		*/
 	case "ALTERARTEMA":
 		if(verificaEditores($editores) == "nao")
-		{echo "Vc nao e um editor cadastrado. Apenas os editores definidos em i3geo/ms_configura.php podem acessar o sistema de administracao.";exit;}
+		{
+			echo "Vc nao e um editor cadastrado. Apenas os editores definidos em i3geo/ms_configura.php podem acessar o sistema de administracao.";exit;
+		}
 		$novo = alterarTema();
 		$sql = "SELECT * from ".$esquemaadmin."i3geoadmin_atlast WHERE id_tema = '".$novo."'";
 		retornaJSON(pegaDados($sql));
-	break;
-	/*
-	Valor: EXCLUIRATLAS
-	
-	Exclui um Atlas
-	
-	Parametros:
+		break;
+		/*
+		 Valor: EXCLUIRATLAS
 
-	id
-	
-	Retorno:
-	
-	{JSON}
-	*/	
+		Exclui um Atlas
+
+		Parametros:
+
+		id
+
+		Retorno:
+
+		{JSON}
+		*/
 	case "EXCLUIRATLAS":
 		if(verificaEditores($editores) == "nao")
-		{echo "Vc nao e um editor cadastrado. Apenas os editores definidos em i3geo/ms_configura.php podem acessar o sistema de administracao.";exit;}
+		{
+			echo "Vc nao e um editor cadastrado. Apenas os editores definidos em i3geo/ms_configura.php podem acessar o sistema de administracao.";exit;
+		}
 		$tabela = "i3geoadmin_atlas";
 		$f = verificaFilhos();
 		if(!$f)
-		retornaJSON(excluirAtlas());
+			retornaJSON(excluirAtlas());
 		else
-		retornaJSON("erro");	
+			retornaJSON("erro");
 		exit;
-	break;
-	/*
-	Valor: EXCLUIRPRANCHA
-	
-	Exclui uma prancha
-	
-	Parametros:
+		break;
+		/*
+		 Valor: EXCLUIRPRANCHA
 
-	id
-	
-	Retorno:
-	
-	{JSON}
-	*/
+		Exclui uma prancha
+
+		Parametros:
+
+		id
+
+		Retorno:
+
+		{JSON}
+		*/
 	case "EXCLUIRPRANCHA":
 		if(verificaEditores($editores) == "nao")
-		{echo "Vc nao e um editor cadastrado. Apenas os editores definidos em i3geo/ms_configura.php podem acessar o sistema de administracao.";exit;}
-		$tabela = "i3geoadmin_atlasp";	
+		{
+			echo "Vc nao e um editor cadastrado. Apenas os editores definidos em i3geo/ms_configura.php podem acessar o sistema de administracao.";exit;
+		}
+		$tabela = "i3geoadmin_atlasp";
 		$f = verificaFilhos();
 		if(!$f)
-		retornaJSON(excluirPrancha());
+			retornaJSON(excluirPrancha());
 		else
-		retornaJSON("erro");	
+			retornaJSON("erro");
 		exit;
-	break;
-	/*
-	Valor: EXCLUIRTEMA
-	
-	Exclui um tema de uma prancha
-	
-	Parametros:
+		break;
+		/*
+		 Valor: EXCLUIRTEMA
 
-	id
-	
-	Retorno:
-	
-	{JSON}
-	*/	
+		Exclui um tema de uma prancha
+
+		Parametros:
+
+		id
+
+		Retorno:
+
+		{JSON}
+		*/
 	case "EXCLUIRTEMA":
 		if(verificaEditores($editores) == "nao")
-		{echo "Vc nao e um editor cadastrado. Apenas os editores definidos em i3geo/ms_configura.php podem acessar o sistema de administracao.";exit;}
+		{
+			echo "Vc nao e um editor cadastrado. Apenas os editores definidos em i3geo/ms_configura.php podem acessar o sistema de administracao.";exit;
+		}
 		retornaJSON(excluirTema());
 		exit;
-	break;
-	/*
-	Valor: MOVIMENTANO
-	
-	Muda a ordem de um nó
-	
-	Parametros:
-	
-	tipo - tipo de nó tema|prancha|atlas
-	
-	movimento - sobe|desce
-	
-	id- id do nó
-	
-	Retorno:
-	
-	{JSON}
-	*/	
+		break;
+		/*
+		 Valor: MOVIMENTANO
+
+		Muda a ordem de um nó
+
+		Parametros:
+
+		tipo - tipo de nó tema|prancha|atlas
+
+		movimento - sobe|desce
+
+		id- id do nó
+
+		Retorno:
+
+		{JSON}
+		*/
 	case "MOVIMENTANO":
 		if(verificaEditores($editores) == "nao")
-		{echo "Vc nao e um editor cadastrado. Apenas os editores definidos em i3geo/ms_configura.php podem acessar o sistema de administracao.";exit;}
-		movimentaNo();	
+		{
+			echo "Vc nao e um editor cadastrado. Apenas os editores definidos em i3geo/ms_configura.php podem acessar o sistema de administracao.";exit;
+		}
+		movimentaNo();
 		retornaJSON("ok");
 		exit;
-	break;
+		break;
 	case "IMPORTARXMLATLAS":
 		if(verificaEditores($editores) == "nao")
-		{echo "Vc nao e um editor cadastrado. Apenas os editores definidos em i3geo/ms_configura.php podem acessar o sistema de administracao.";exit;}
+		{
+			echo "Vc nao e um editor cadastrado. Apenas os editores definidos em i3geo/ms_configura.php podem acessar o sistema de administracao.";exit;
+		}
 		retornaJSON(importarXmlAtlas());
 		exit;
-	break;
+		break;
 }
 function movimentaNo()
 {
@@ -394,24 +410,24 @@ function movimentaNo()
 		$menos = $ordematual - 1;
 		$dbhw->query("UPDATE ".$esquemaadmin."i3geoadmin_$tabela SET ordem_$posfixo = $ordematual where $where ordem_$posfixo = '$menos'");
 		$dbhw->query("UPDATE ".$esquemaadmin."i3geoadmin_$tabela SET ordem_$posfixo = $menos where id_$posfixo = '$id'");
-	}	
+	}
 	if($movimento == "desce")
 	{
 		$mais = $ordematual + 1;
 		$dbhw->query("UPDATE ".$esquemaadmin."i3geoadmin_$tabela SET ordem_$posfixo = $ordematual where $where ordem_$posfixo = '$mais'");
 		$dbhw->query("UPDATE ".$esquemaadmin."i3geoadmin_$tabela SET ordem_$posfixo = $mais where id_$posfixo = '$id'");
-	}			
-   	$dbhw = null;
-   	$dbh = null;
-   	return "ok";
+	}
+	$dbhw = null;
+	$dbh = null;
+	return "ok";
 }
 function dadosAtlas()
 {
 	global $id_atlas,$esquemaadmin;
 	if($id_atlas == "")
-	$sis = pegaDados('SELECT * from '.$esquemaadmin.'i3geoadmin_atlas order by titulo_atlas');
+		$sis = pegaDados('SELECT * from '.$esquemaadmin.'i3geoadmin_atlas order by titulo_atlas');
 	else
-	$sis = pegaDados("SELECT * from ".$esquemaadmin."i3geoadmin_atlas where id_atlas = '$id_atlas' ");
+		$sis = pegaDados("SELECT * from ".$esquemaadmin."i3geoadmin_atlas where id_atlas = '$id_atlas' ");
 	for($i=0;$i<count($sis);++$i)
 	{
 		$pranchas = pegaDados("SELECT * from ".$esquemaadmin."i3geoadmin_atlasp where id_atlas =".($sis[$i]["id_atlas"]));
@@ -419,185 +435,197 @@ function dadosAtlas()
 		{
 			$temas = pegaDados("SELECT * from ".$esquemaadmin."i3geoadmin_atlast where id_prancha =".($pranchas[$j]["id_prancha"]));
 			if(count($temas) > 0)
-			$pranchas[$j]["temas"] = $temas;
+				$pranchas[$j]["temas"] = $temas;
 			else
-			$pranchas[$j]["temas"] = "";
+				$pranchas[$j]["temas"] = "";
 		}
 		if(count($pranchas) > 0)
-		$sis[$i]["pranchas"] = $pranchas;
+			$sis[$i]["pranchas"] = $pranchas;
 		else
-		$sis[$i]["pranchas"] = "";
+			$sis[$i]["pranchas"] = "";
 	}
 	return $sis;
 }
 function alterarAtlas()
 {
 	global $esquemaadmin,$publicado_atlas,$id_atlas,$basemapfile_atlas,$desc_atlas,$h_atlas,$w_atlas,$icone_atlas,$link_atlas,$pranchadefault_atlas,$template_atlas,$tipoguias_atlas,$titulo_atlas,$ordem_atlas;
-	try 
+	try
 	{
-    	include("conexao.php");
-    	if($h_atlas == "")
-		{$h_atlas = 0;}
+		include("conexao.php");
 		if($h_atlas == "")
-		{$w_atlas = 0;}
+		{
+			$h_atlas = 0;
+		}
+		if($h_atlas == "")
+		{
+			$w_atlas = 0;
+		}
 		if($ordem_atlas == "")
-		{$ordem_atlas = 0;}
+		{
+			$ordem_atlas = 0;
+		}
 		if($convUTF)
 		{
 			$desc_atlas = utf8_encode($desc_atlas);
 			$titulo_atlas = utf8_encode($titulo_atlas);
 		}
-    	if($id_atlas != "")
-    	{
-    		$dbhw->query("UPDATE ".$esquemaadmin."i3geoadmin_atlas SET publicado_atlas='$publicado_atlas',ordem_atlas=$ordem_atlas,basemapfile_atlas='$basemapfile_atlas',desc_atlas='$desc_atlas',h_atlas=$h_atlas,w_atlas=$w_atlas,icone_atlas='$icone_atlas',link_atlas='$link_atlas',pranchadefault_atlas='$pranchadefault_atlas',template_atlas='$template_atlas',tipoguias_atlas='$tipoguias_atlas',titulo_atlas='$titulo_atlas' WHERE id_atlas = $id_atlas");
-    		$retorna = $id_atlas;
-    	}
-    	else
-    	{
+		if($id_atlas != "")
+		{
+			$dbhw->query("UPDATE ".$esquemaadmin."i3geoadmin_atlas SET publicado_atlas='$publicado_atlas',ordem_atlas=$ordem_atlas,basemapfile_atlas='$basemapfile_atlas',desc_atlas='$desc_atlas',h_atlas=$h_atlas,w_atlas=$w_atlas,icone_atlas='$icone_atlas',link_atlas='$link_atlas',pranchadefault_atlas='$pranchadefault_atlas',template_atlas='$template_atlas',tipoguias_atlas='$tipoguias_atlas',titulo_atlas='$titulo_atlas' WHERE id_atlas = $id_atlas");
+			$retorna = $id_atlas;
+		}
+		else
+		{
 			$o = $dbh->query("SELECT MAX(ordem_atlas) as o FROM ".$esquemaadmin."i3geoadmin_atlas");
 			$o = $o->fetchAll();
 			$o = $o[0]['o'] + 1;
 			$idtemp = (rand (9000,10000)) * -1;
-    		$dbhw->query("INSERT INTO ".$esquemaadmin."i3geoadmin_atlas (publicado_atlas,ordem_atlas,basemapfile_atlas,desc_atlas,h_atlas,w_atlas,icone_atlas,link_atlas,pranchadefault_atlas,template_atlas,tipoguias_atlas,titulo_atlas) VALUES ('',$o,'','',null,null,'','','','','','$idtemp')");
+			$dbhw->query("INSERT INTO ".$esquemaadmin."i3geoadmin_atlas (publicado_atlas,ordem_atlas,basemapfile_atlas,desc_atlas,h_atlas,w_atlas,icone_atlas,link_atlas,pranchadefault_atlas,template_atlas,tipoguias_atlas,titulo_atlas) VALUES ('',$o,'','',null,null,'','','','','','$idtemp')");
 			$id = $dbh->query("SELECT id_atlas FROM ".$esquemaadmin."i3geoadmin_atlas WHERE titulo_atlas = '$idtemp'");
 			$id = $id->fetchAll();
 			$id = $id[0]['id_atlas'];
 			$dbhw->query("UPDATE ".$esquemaadmin."i3geoadmin_atlas SET titulo_atlas = '' WHERE id_atlas = $id AND titulo_atlas = '$idtemp'");
 			$retorna = $id;
-    	}
-    	$dbhw = null;
-    	$dbh = null;
-    	return $retorna;
+		}
+		$dbhw = null;
+		$dbh = null;
+		return $retorna;
 	}
 	catch (PDOException $e)
 	{
-    	return "Error!: " . $e->getMessage();
+		return "Error!: " . $e->getMessage();
 	}
 }
 function alterarPrancha()
 {
 	global $esquemaadmin,$mapext_prancha,$id_atlas,$id_prancha,$desc_prancha,$h_prancha,$w_prancha,$icone_prancha,$link_prancha,$titulo_prancha,$ordem_prancha;
-	try 
+	try
 	{
-    	include("conexao.php");
-    	if($h_prancha == "")
-		{$h_prancha = 0;}
+		include("conexao.php");
 		if($h_prancha == "")
-		{$w_prancha = 0;}
+		{
+			$h_prancha = 0;
+		}
+		if($h_prancha == "")
+		{
+			$w_prancha = 0;
+		}
 		if($ordem_prancha == "")
-		{$ordem_prancha = 0;}
-		
+		{
+			$ordem_prancha = 0;
+		}
+
 		if($convUTF)
 		{
 			$desc_prancha = utf8_encode($desc_prancha);
 			$titulo_prancha = utf8_encode($titulo_prancha);
 		}
-    	if($id_prancha != "")
-    	{
-    		$dbhw->query("UPDATE ".$esquemaadmin."i3geoadmin_atlasp SET ordem_prancha='$ordem_prancha', mapext_prancha='$mapext_prancha',desc_prancha='$desc_prancha',h_prancha='$h_prancha',w_prancha='$w_prancha',icone_prancha='$icone_prancha',link_prancha='$link_prancha',titulo_prancha='$titulo_prancha' WHERE id_prancha = '$id_prancha'");
-    		$retorna = $id_prancha;
-    	}
-    	else
-    	{
+		if($id_prancha != "")
+		{
+			$dbhw->query("UPDATE ".$esquemaadmin."i3geoadmin_atlasp SET ordem_prancha='$ordem_prancha', mapext_prancha='$mapext_prancha',desc_prancha='$desc_prancha',h_prancha='$h_prancha',w_prancha='$w_prancha',icone_prancha='$icone_prancha',link_prancha='$link_prancha',titulo_prancha='$titulo_prancha' WHERE id_prancha = '$id_prancha'");
+			$retorna = $id_prancha;
+		}
+		else
+		{
 			$o = $dbh->query("SELECT MAX(ordem_prancha) as o FROM ".$esquemaadmin."i3geoadmin_atlasp WHERE id_atlas = '$id_atlas'");
 			$o = $o->fetchAll();
 			$o = $o[0]['o'] + 1;
 			$idtemp = (rand (9000,10000)) * -1;
-    		$dbhw->query("INSERT INTO ".$esquemaadmin."i3geoadmin_atlasp (ordem_prancha,mapext_prancha,desc_prancha,h_prancha,w_prancha,icone_prancha,link_prancha,titulo_prancha,id_atlas) VALUES ($o,'','','$h_prancha','$w_prancha','','','$idtemp','$id_atlas')");
-    		$id = $dbh->query("SELECT id_prancha FROM ".$esquemaadmin."i3geoadmin_atlasp WHERE titulo_prancha = '$idtemp'");
+			$dbhw->query("INSERT INTO ".$esquemaadmin."i3geoadmin_atlasp (ordem_prancha,mapext_prancha,desc_prancha,h_prancha,w_prancha,icone_prancha,link_prancha,titulo_prancha,id_atlas) VALUES ($o,'','','$h_prancha','$w_prancha','','','$idtemp','$id_atlas')");
+			$id = $dbh->query("SELECT id_prancha FROM ".$esquemaadmin."i3geoadmin_atlasp WHERE titulo_prancha = '$idtemp'");
 			$id = $id->fetchAll();
 			$id = $id[0]['id_prancha'];
 			$dbhw->query("UPDATE ".$esquemaadmin."i3geoadmin_atlasp SET titulo_prancha = '' WHERE id_prancha = $id AND titulo_prancha = '$idtemp'");
 			$retorna = $id;
-    	}
-    	$dbhw = null;
-    	$dbh = null;
-    	return $retorna;
+		}
+		$dbhw = null;
+		$dbh = null;
+		return $retorna;
 	}
 	catch (PDOException $e)
 	{
-    	return "Error!: " . $e->getMessage();
+		return "Error!: " . $e->getMessage();
 	}
 }
 function alterarTema()
 {
 	global $esquemaadmin,$id_tema,$id_prancha,$codigo_tema,$ligado_tema,$ordem_tema;
-	try 
+	try
 	{
-    	include("conexao.php");
-    	if($id_tema != "")
-    	{
-    		$dbhw->query("UPDATE ".$esquemaadmin."i3geoadmin_atlast SET ordem_tema='$ordem_tema',codigo_tema='$codigo_tema',ligado_tema='$ligado_tema' WHERE id_tema='$id_tema'");
-    		$retorna = $id_tema;
-    	}
-    	else
-    	{
+		include("conexao.php");
+		if($id_tema != "")
+		{
+			$dbhw->query("UPDATE ".$esquemaadmin."i3geoadmin_atlast SET ordem_tema='$ordem_tema',codigo_tema='$codigo_tema',ligado_tema='$ligado_tema' WHERE id_tema='$id_tema'");
+			$retorna = $id_tema;
+		}
+		else
+		{
 			$o = $dbh->query("SELECT MAX(ordem_tema) as o FROM ".$esquemaadmin."i3geoadmin_atlast where id_prancha = '$id_prancha'");
 			$o = $o->fetchAll();
 			$o = $o[0]['o'] + 1;
 			$idtemp = (rand (9000,10000)) * -1;
-    		$dbhw->query("INSERT INTO ".$esquemaadmin."i3geoadmin_atlast (ordem_tema,codigo_tema,ligado_tema,id_prancha) VALUES ($o,'$idtemp','','$id_prancha')");
+			$dbhw->query("INSERT INTO ".$esquemaadmin."i3geoadmin_atlast (ordem_tema,codigo_tema,ligado_tema,id_prancha) VALUES ($o,'$idtemp','','$id_prancha')");
 			$id = $dbh->query("SELECT id_tema FROM ".$esquemaadmin."i3geoadmin_atlast WHERE codigo_tema = '$idtemp'");
 			$id = $id->fetchAll();
 			$id = $id[0]['id_tema'];
 			$dbhw->query("UPDATE ".$esquemaadmin."i3geoadmin_atlast SET codigo_tema = '' WHERE id_tema = $id AND codigo_tema = '$idtemp'");
 			$retorna = $id;
-    	}
-    	$dbhw = null;
-    	$dbh = null;
-    	return $retorna;
+		}
+		$dbhw = null;
+		$dbh = null;
+		return $retorna;
 	}
 	catch (PDOException $e)
 	{
-    	return "Error!: " . $e->getMessage();
+		return "Error!: " . $e->getMessage();
 	}
 }
 function excluirPrancha()
 {
 	global $esquemaadmin,$id;
-	try 
+	try
 	{
-    	include("conexao.php");
-    	$dbhw->query("DELETE from ".$esquemaadmin."i3geoadmin_atlasp WHERE id_prancha = $id");
-    	$dbhw = null;
-    	$dbh = null;
-    	return "ok";
+		include("conexao.php");
+		$dbhw->query("DELETE from ".$esquemaadmin."i3geoadmin_atlasp WHERE id_prancha = $id");
+		$dbhw = null;
+		$dbh = null;
+		return "ok";
 	}
 	catch (PDOException $e)
 	{
-    	return "Error!: " . $e->getMessage();
+		return "Error!: " . $e->getMessage();
 	}
 }
 function excluirTema()
 {
 	global $esquemaadmin,$id;
-	try 
+	try
 	{
-    	include("conexao.php");
-    	$dbhw->query("DELETE from ".$esquemaadmin."i3geoadmin_atlast WHERE id_tema = $id");
-    	$dbhw = null;
-    	$dbh = null;
-    	return "ok";
+		include("conexao.php");
+		$dbhw->query("DELETE from ".$esquemaadmin."i3geoadmin_atlast WHERE id_tema = $id");
+		$dbhw = null;
+		$dbh = null;
+		return "ok";
 	}
 	catch (PDOException $e)
 	{
-    	return "Error!: " . $e->getMessage();
+		return "Error!: " . $e->getMessage();
 	}
 }
 function excluirAtlas()
 {
 	global $esquemaadmin,$id;
-	try 
+	try
 	{
-    	include("conexao.php");
-    	$dbhw->query("DELETE from ".$esquemaadmin."i3geoadmin_atlas WHERE id_atlas = $id");
-    	$dbhw = null;
-    	$dbh = null;
-    	return "ok";
+		include("conexao.php");
+		$dbhw->query("DELETE from ".$esquemaadmin."i3geoadmin_atlas WHERE id_atlas = $id");
+		$dbhw = null;
+		$dbh = null;
+		return "ok";
 	}
 	catch (PDOException $e)
 	{
-    	return "Error!: " . $e->getMessage();
+		return "Error!: " . $e->getMessage();
 	}
 }
 ?>

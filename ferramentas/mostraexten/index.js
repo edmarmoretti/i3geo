@@ -4,7 +4,7 @@
 /*
 Title: Mostra extensão
 
-Mostra a extensão geográfica atual do mapa permitindo também alterá-la digitando-se os valores de lat e long
+Mostra a extensão geogr&aacute;fica atual do mapa permitindo tamb&eacute;m alter&aacute;-la digitando-se os valores de lat e long
 
 Veja:
 
@@ -20,20 +20,20 @@ GPL2
 
 i3Geo Interface Integrada de Ferramentas de Geoprocessamento para Internet
 
-Direitos Autorais Reservados (c) 2006 Ministério do Meio Ambiente Brasil
+Direitos Autorais Reservados (c) 2006 Minist&eacute;rio do Meio Ambiente Brasil
 Desenvolvedor: Edmar Moretti edmar.moretti@mma.gov.br
 
-Este programa é software livre; você pode redistribuí-lo
-e/ou modificá-lo sob os termos da Licença Pública Geral
+Este programa &eacute; software livre; voc&ecirc; pode redistribu&iacute;-lo
+e/ou modific&aacute;-lo sob os termos da Licen&ccedil;a P&uacute;blica Geral
 GNU conforme publicada pela Free Software Foundation;
 
-Este programa é distribuído na expectativa de que seja útil,
-porém, SEM NENHUMA GARANTIA; nem mesmo a garantia implícita
-de COMERCIABILIDADE OU ADEQUAÇÃO A UMA FINALIDADE ESPECÍFICA.
-Consulte a Licença Pública Geral do GNU para mais detalhes.
-Você deve ter recebido uma cópia da Licença Pública Geral do
+Este programa &eacute; distribu&iacute;do na expectativa de que seja &uacute;til,
+por&eacute;m, SEM NENHUMA GARANTIA; nem mesmo a garantia impl&iacute;cita
+de COMERCIABILIDADE OU ADEQUAÇÃO A UMA FINALIDADE ESPEC&Iacute;FICA.
+Consulte a Licen&ccedil;a P&uacute;blica Geral do GNU para mais detalhes.
+Voc&ecirc; deve ter recebido uma c&oacute;pia da Licen&ccedil;a P&uacute;blica Geral do
 GNU junto com este programa; se não, escreva para a
-Free Software Foundation, Inc., no endereço
+Free Software Foundation, Inc., no endere&ccedil;o
 59 Temple Street, Suite 330, Boston, MA 02111-1307 USA.
 */
 if(typeof(i3GEOF) === 'undefined'){
@@ -46,17 +46,17 @@ i3GEOF.mostraExten = {
 	/*
 	Variavel: aguarde
 	
-	Estilo do objeto DOM com a imagem de aguarde existente no cabeçalho da janela.
+	Estilo do objeto DOM com a imagem de aguarde existente no cabe&ccedil;alho da janela.
 	*/
 	aguarde: "",
 	/*
 	Function: inicia
 	
-	Inicia a ferramenta. É chamado por criaJanelaFlutuante
+	Inicia a ferramenta. &Eacute; chamado por criaJanelaFlutuante
 	
 	Parametro:
 	
-	iddiv {String} - id do div que receberá o conteudo HTML da ferramenta
+	iddiv {String} - id do div que receber&aacute; o conteudo HTML da ferramenta
 	*/
 	inicia: function(iddiv){
 		try{
@@ -72,16 +72,16 @@ i3GEOF.mostraExten = {
 	/*
 	Function: html
 	
-	Gera o código html para apresentação das opções da ferramenta
+	Gera o c&oacute;digo html para apresenta&ccedil;ão das op&ccedil;&otilde;es da ferramenta
 	
 	Retorno:
 	
-	String com o código html
+	String com o c&oacute;digo html
 	*/
 	html:function(){
-		var ins = '<p class="paragrafo" >Extens&atilde;o geográfica atual, em d&eacute;cimos de grau. As coordenadas correspondem a menor longitude, menor latitude, maior longitude e maior latitude:</p>' +
+		var ins = '<p class="paragrafo" >Extens&atilde;o geogr&aacute;fica atual, em d&eacute;cimos de grau. As coordenadas correspondem a menor longitude, menor latitude, maior longitude e maior latitude:</p>' +
 		'<textarea id=i3GEOmostraExtenatual rows=3 cols=50 onclick="javascript:this.select();"></textarea>' +
-		'<p class="paragrafo" >	Digite as coordenadas referentes a nova extensão geográfica desejada para o mapa. Utilize coordenadas (graus) negativos para indicar a longitude como oeste e latitude como sul:</p>' +
+		'<p class="paragrafo" >	Digite as coordenadas referentes a nova extensão geogr&aacute;fica desejada para o mapa. Utilize coordenadas (graus) negativos para indicar a longitude como oeste e latitude como sul:</p>' +
 		'	<table class=lista3 >' +
 		'		<tr><td>Menor longitude (oeste):</td>' +
 		'		<td>' +
@@ -124,7 +124,7 @@ i3GEOF.mostraExten = {
 		minimiza = function(){
 			i3GEO.janela.minimiza("i3GEOF.mostraExten");
 		};
-		titulo = "Extensão geográfica <a class=ajuda_usuario target=_blank href='" + i3GEO.configura.locaplic + "/ajuda_usuario.php?idcategoria=7&idajuda=55' >&nbsp;&nbsp;&nbsp;</a>";
+		titulo = "Extensão geogr&aacute;fica <a class=ajuda_usuario target=_blank href='" + i3GEO.configura.locaplic + "/ajuda_usuario.php?idcategoria=7&idajuda=55' >&nbsp;&nbsp;&nbsp;</a>";
 		janela = i3GEO.janela.cria(
 			"370px",
 			"320px",
@@ -153,7 +153,7 @@ i3GEOF.mostraExten = {
 	/*
 	Function: ativaFoco
 	
-	Função que é disparada quando o usuário clica no cabeçalho da ferramenta
+	Fun&ccedil;ão que &eacute; disparada quando o usu&aacute;rio clica no cabe&ccedil;alho da ferramenta
 	*/
 	ativaFoco: function(){
 		$i("i3GEOmostraExtenatual").innerHTML = i3GEO.parametros.mapexten;
@@ -177,11 +177,11 @@ i3GEOF.mostraExten = {
 			var y = i3GEO.calculo.dms2dd($i("i3GEOmostraExtenyg").value,$i("i3GEOmostraExtenym").value,$i("i3GEOmostraExtenys").value);
 			var yy = i3GEO.calculo.dms2dd($i("i3GEOmostraExtenyyg").value,$i("i3GEOmostraExtenyym").value,$i("i3GEOmostraExtenyys").value);
 			if ((x == xx) || (y == yy))
-			{alert("Digite coordenadas válidas");return;}
+			{alert("Digite coordenadas v&aacute;lidas");return;}
 			if ((x > xx) || (y > yy))
-			{alert("Digite coordenadas válidas");return;}
+			{alert("Digite coordenadas v&aacute;lidas");return;}
 			i3GEO.navega.zoomExt(i3GEO.configura.locaplic,i3GEO.configura.sid,window.parent.i3GEO.parametros.tipoimagem,(x+" "+y+" "+xx+" "+yy));
 		}
-		catch(e){alert(e+" Erro. Digite coordenadas válidas");}
+		catch(e){alert(e+" Erro. Digite coordenadas v&aacute;lidas");}
 	}
 };

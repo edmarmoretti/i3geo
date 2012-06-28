@@ -6,8 +6,8 @@ try
 }
 catch (PDOException $e)
 {
-   	print "Erro : " . $e->getMessage() . "<br/> Se vc estiver usando SQLITE, talvez exista alguma incompatibilidade entre o PHP e o banco admin.db. Vc pode apagar o arquivo menutemas/admin.db e recria-lo com admin/php/criasqlite.php";
-   	die();
+	print "Erro : " . $e->getMessage() . "<br/> Se vc estiver usando SQLITE, talvez exista alguma incompatibilidade entre o PHP e o banco admin.db. Vc pode apagar o arquivo menutemas/admin.db e recria-lo com admin/php/criasqlite.php";
+	die();
 }
 $convUTF = true;
 ?>

@@ -2,11 +2,11 @@
 /*jslint plusplus:false,white:false,undef: false, rhino: true, onevar: true, evil: true */
 
 /*
-Title: Gráfico tema
+Title: Gr&aacute;fico tema
 
-Inclui gráficos em cada elemento de um tema tendo como fonte a tabela de atributos. É criado um novo tema no mapa com
-os gráficos. Abre uma janela com várias opções e lista de itens para os gráficos.
-O tema que será utilizado é o que estiver armazenado na variável global i3GEO.temaAtivo
+Inclui gr&aacute;ficos em cada elemento de um tema tendo como fonte a tabela de atributos. &Eacute; criado um novo tema no mapa com
+os gr&aacute;ficos. Abre uma janela com v&aacute;rias op&ccedil;&otilde;es e lista de itens para os gr&aacute;ficos.
+O tema que ser&aacute; utilizado &eacute; o que estiver armazenado na vari&aacute;vel global i3GEO.temaAtivo
 
 Arquivo:
 
@@ -18,20 +18,20 @@ GPL2
 
 i3Geo Interface Integrada de Ferramentas de Geoprocessamento para Internet
 
-Direitos Autorais Reservados (c) 2006 Ministério do Meio Ambiente Brasil
+Direitos Autorais Reservados (c) 2006 Minist&eacute;rio do Meio Ambiente Brasil
 Desenvolvedor: Edmar Moretti edmar.moretti@mma.gov.br
 
-Este programa é software livre; você pode redistribuí-lo
-e/ou modificá-lo sob os termos da Licença Pública Geral
+Este programa &eacute; software livre; voc&ecirc; pode redistribu&iacute;-lo
+e/ou modific&aacute;-lo sob os termos da Licen&ccedil;a P&uacute;blica Geral
 GNU conforme publicada pela Free Software Foundation;
 
-Este programa é distribuído na expectativa de que seja útil,
-porém, SEM NENHUMA GARANTIA; nem mesmo a garantia implícita
-de COMERCIABILIDADE OU ADEQUAÇÃO A UMA FINALIDADE ESPECÍFICA.
-Consulte a Licença Pública Geral do GNU para mais detalhes.
-Você deve ter recebido uma cópia da Licença Pública Geral do
+Este programa &eacute; distribu&iacute;do na expectativa de que seja &uacute;til,
+por&eacute;m, SEM NENHUMA GARANTIA; nem mesmo a garantia impl&iacute;cita
+de COMERCIABILIDADE OU ADEQUAÇÃO A UMA FINALIDADE ESPEC&Iacute;FICA.
+Consulte a Licen&ccedil;a P&uacute;blica Geral do GNU para mais detalhes.
+Voc&ecirc; deve ter recebido uma c&oacute;pia da Licen&ccedil;a P&uacute;blica Geral do
 GNU junto com este programa; se não, escreva para a
-Free Software Foundation, Inc., no endereço
+Free Software Foundation, Inc., no endere&ccedil;o
 59 Temple Street, Suite 330, Boston, MA 02111-1307 USA.
 */
 if(typeof(i3GEOF) === 'undefined'){
@@ -46,17 +46,17 @@ i3GEOF.graficoTema = {
 	/*
 	Variavel: aguarde
 	
-	Estilo do objeto DOM com a imagem de aguarde existente no cabeçalho da janela.
+	Estilo do objeto DOM com a imagem de aguarde existente no cabe&ccedil;alho da janela.
 	*/
 	aguarde: "",
 	/*
 	Function: inicia
 	
-	Inicia a ferramenta. É chamado por criaJanelaFlutuante
+	Inicia a ferramenta. &Eacute; chamado por criaJanelaFlutuante
 	
 	Parametro:
 	
-	iddiv {String} - id do div que receberá o conteudo HTML da ferramenta
+	iddiv {String} - id do div que receber&aacute; o conteudo HTML da ferramenta
 	*/
 	inicia: function(iddiv){
 		i3GEO.janela.comboCabecalhoTemas("i3GEOFgraficotemaComboCabeca","i3GEOFgraficotemaComboCabecaSel","graficoTema","ligadosComTabela");
@@ -78,7 +78,7 @@ i3GEOF.graficoTema = {
 			);
 			i3GEO.util.mensagemAjuda("i3GEOgraficotemamen1",$i("i3GEOgraficotemamen1").innerHTML);
 			//
-			//pega a lista de itens e chama a função de montagem das opções de escolha
+			//pega a lista de itens e chama a fun&ccedil;ão de montagem das op&ccedil;&otilde;es de escolha
 			//
 			i3GEO.php.listaItensTema(i3GEOF.graficoTema.montaListaItens,i3GEO.temaAtivo);
 		}
@@ -87,11 +87,11 @@ i3GEOF.graficoTema = {
 	/*
 	Function: html
 	
-	Gera o código html para apresentação das opções da ferramenta
+	Gera o c&oacute;digo html para apresenta&ccedil;ão das op&ccedil;&otilde;es da ferramenta
 	
 	Retorno:
 	
-	String com o código html
+	String com o c&oacute;digo html
 	*/
 	html:function(){
 		var ins = '';
@@ -107,7 +107,7 @@ i3GEOF.graficoTema = {
 		ins += '			<p class="paragrafo" >Escolha os itens to tipo num&eacute;rico que compor&atilde;o cada parte do gr&aacute;fico<br><br>';	
 		ins += '			<div id=i3GEOgraficotemalistai class=digitar style="text-align:left;left:0px;top:0px;330px;height:80px;overflow:auto;display:block;">Escolha o tema para ver a lista de itens</div>';
 		ins += '			<br><br>';
-		ins += '			<p class="paragrafo" ><input id=i3GEOgraficotemabotao1 size=35  type=button value="Criar gráficos" />';
+		ins += '			<p class="paragrafo" ><input id=i3GEOgraficotemabotao1 size=35  type=button value="Criar gr&aacute;ficos" />';
 		ins += '		<div id=i3GEOgraficotemamen1 style=top:10px;left:1px ><p class="paragrafo">Marque os itens para compor as partes do gr&aacute;fico. Edite os valores de cor (R,G,B) conforme o desejado. Ap&oacute;s escolher os itens, clique em criar gr&aacute;ficos para inserir um novo tema com os gr&aacute;ficos.</div>';
 		ins += '	</div>';
 		ins += '	<div class=guiaobj id="i3GEOgraficotemaguia2obj" style="left:1px;display:none;">';
@@ -185,7 +185,7 @@ i3GEOF.graficoTema = {
 	
 	Monta a lista de itens que poderão ser escolhidos para compor o mapa.
 	
-	A lista é inserida no elemento html com id "i3GEOgraficotemalistai"
+	A lista &eacute; inserida no elemento html com id "i3GEOgraficotemalistai"
 	*/
 	montaListaItens: function(retorno){
 		var ins,i,n;
@@ -208,14 +208,14 @@ i3GEOF.graficoTema = {
 	/*
 	Function: corj
 	
-	Abre a janela para o usuário selecionar uma cor interativamente
+	Abre a janela para o usu&aacute;rio selecionar uma cor interativamente
 	*/
 	corj: function(obj)
 	{i3GEO.util.abreCor("",obj);},
 	/*
 	Function: pegaItensMarcados
 	
-	Recupera os itens que foram marcados e monta uma lista para enviar como parâmetro para a função de geração dos gráficos
+	Recupera os itens que foram marcados e monta uma lista para enviar como parâmetro para a fun&ccedil;ão de gera&ccedil;ão dos gr&aacute;ficos
 	*/
 	pegaItensMarcados: function(){
 		var listadeitens = [],
@@ -239,7 +239,7 @@ i3GEOF.graficoTema = {
 	/*
 	Function: criaNovoTema
 	
-	Cria um novo tema que irá conter os gráficos e adiciona ao mapa.
+	Cria um novo tema que ir&aacute; conter os gr&aacute;ficos e adiciona ao mapa.
 	
 	Veja:
 	

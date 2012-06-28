@@ -207,7 +207,7 @@ i3GEO.tema = {
 			i3GEO.php.mudatransp(temp,idtema,valor);
 		}
 		else
-		{alert($trad("x16");}
+		{alert($trad("x16"));}
 	},
 	/*
 	Function: invertestatuslegenda

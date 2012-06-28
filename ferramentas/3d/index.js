@@ -4,10 +4,10 @@
 /*
 Title: 3d
 
-Gera um arquivo no formato WRL conforme a extensão geográfica do mapa atual. A imagem do mapa atual é sobreposta ao modelo
+Gera um arquivo no formato WRL conforme a extensão geogr&aacute;fica do mapa atual. A imagem do mapa atual &eacute; sobreposta ao modelo
 3d. Para obter os valores de Z e compor o modelo 3d, utiliza-se por default o LAYER definido no mapfile i3geo/temasaplic/3dmap
-O usuário pode escolher um tema existente no mapa atual ao invés do default.
-A obtenção do valor de Z é feita com base no valor de cor do píxel do LAYER e não no valor real da altimetria.
+O usu&aacute;rio pode escolher um tema existente no mapa atual ao inv&eacute;s do default.
+A obten&ccedil;ão do valor de Z &eacute; feita com base no valor de cor do p&iacute;xel do LAYER e não no valor real da altimetria.
 
 Veja:
 
@@ -23,20 +23,20 @@ GPL2
 
 i3Geo Interface Integrada de Ferramentas de Geoprocessamento para Internet
 
-Direitos Autorais Reservados (c) 2006 Ministério do Meio Ambiente Brasil
+Direitos Autorais Reservados (c) 2006 Minist&eacute;rio do Meio Ambiente Brasil
 Desenvolvedor: Edmar Moretti edmar.moretti@mma.gov.br
 
-Este programa é software livre; você pode redistribuí-lo
-e/ou modificá-lo sob os termos da Licença Pública Geral
+Este programa &eacute; software livre; voc&ecirc; pode redistribu&iacute;-lo
+e/ou modific&aacute;-lo sob os termos da Licen&ccedil;a P&uacute;blica Geral
 GNU conforme publicada pela Free Software Foundation;
 
-Este programa é distribuído na expectativa de que seja útil,
-porém, SEM NENHUMA GARANTIA; nem mesmo a garantia implícita
-de COMERCIABILIDADE OU ADEQUAÇÃO A UMA FINALIDADE ESPECÍFICA.
-Consulte a Licença Pública Geral do GNU para mais detalhes.
-Você deve ter recebido uma cópia da Licença Pública Geral do
+Este programa &eacute; distribu&iacute;do na expectativa de que seja &uacute;til,
+por&eacute;m, SEM NENHUMA GARANTIA; nem mesmo a garantia impl&iacute;cita
+de COMERCIABILIDADE OU ADEQUAÇÃO A UMA FINALIDADE ESPEC&Iacute;FICA.
+Consulte a Licen&ccedil;a P&uacute;blica Geral do GNU para mais detalhes.
+Voc&ecirc; deve ter recebido uma c&oacute;pia da Licen&ccedil;a P&uacute;blica Geral do
 GNU junto com este programa; se não, escreva para a
-Free Software Foundation, Inc., no endereço
+Free Software Foundation, Inc., no endere&ccedil;o
 59 Temple Street, Suite 330, Boston, MA 02111-1307 USA.
 */
 
@@ -46,19 +46,19 @@ if(typeof(i3GEOF) === 'undefined'){
 /*
 Classe: i3GEOF.t3d
 
-Gera um arquivo para visualização em 3d com o mapa atual.
+Gera um arquivo para visualiza&ccedil;ão em 3d com o mapa atual.
 */
 i3GEOF.t3d = {
 	/*
 	Variavel: aguarde
 	
-	Objeto DOM com a imagem de aguarde existente no cabeçalho da janela.
+	Objeto DOM com a imagem de aguarde existente no cabe&ccedil;alho da janela.
 	*/
 	aguarde: "",
 	/*
 	Propriedade: dmap
 	
-	Arquivo mapfile que contém o layer que será utilizado para a obtenção dos valores  de Z.
+	Arquivo mapfile que cont&eacute;m o layer que ser&aacute; utilizado para a obten&ccedil;ão dos valores  de Z.
 	O arquivo deve ficar armazenado em i3geo/aplicmap
 	
 	Tipo:
@@ -72,11 +72,11 @@ i3GEOF.t3d = {
 	/*
 	Function: inicia
 	
-	Inicia a ferramenta. É chamado por criaJanelaFlutuante.
+	Inicia a ferramenta. &Eacute; chamado por criaJanelaFlutuante.
 	
 	Parametro:
 	
-	iddiv {String} - id do div que receberá o conteudo HTML da ferramenta
+	iddiv {String} - id do div que receber&aacute; o conteudo HTML da ferramenta
 	*/
 	inicia: function(iddiv){
 		try{
@@ -88,11 +88,11 @@ i3GEOF.t3d = {
 	/*
 	Function: html
 	
-	Gera o código html para apresentação das opções da ferramenta
+	Gera o c&oacute;digo html para apresenta&ccedil;ão das op&ccedil;&otilde;es da ferramenta
 	
 	Retorno:
 	
-	String com o código html
+	String com o c&oacute;digo html
 	*/
 	html:function(){
 		var ins =	'<div style="background-color:#F2F2F2;top:0px;left:0px;display:block;width:98%;" id="i3GEO3dresultado" >';
@@ -147,7 +147,7 @@ i3GEOF.t3d = {
 	},
 	t1: function(){
 		var ins = "<p class='paragrafo' >O tempo de processamento pode variar em fun&ccedil;&atilde;o do tamanho da imagem do mapa.";
-		ins += "<p class='paragrafo' >Para obter um melhor resultado, o mapa é sempre reduzido para 400x400 pixels'.";
+		ins += "<p class='paragrafo' >Para obter um melhor resultado, o mapa &eacute; sempre reduzido para 400x400 pixels'.";
 		i3GEO.util.proximoAnterior("i3GEOF.t3d.t0()","i3GEOF.t3d.t2()",ins,"i3GEOF.t3d.t1","i3GEO3dresultado");
 	},
 	t2: function(){
@@ -180,7 +180,7 @@ i3GEOF.t3d = {
 	
 	Abre uma nova janela no navegador para criar o arquivo 3d
 	
-	O arquivo é gerado pelo programa ferramentas/3d/3d.php e o resultado é mostrado em uma nova janela no navegador.
+	O arquivo &eacute; gerado pelo programa ferramentas/3d/3d.php e o resultado &eacute; mostrado em uma nova janela no navegador.
 	*/
 	criar3d: function(){
 	    var raster = "",

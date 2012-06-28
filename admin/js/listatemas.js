@@ -67,19 +67,19 @@ function montaDivTemas(i)
 {
 	var param = {
 		"linhas":[
-		{titulo:"Nome que será mostrado na árvore de menus (português) - altera também o metadata TEMA, existente no mapfile, usado como título na árvore de camadas:",id:"nome_tema",size:"40",value:i.nome_tema,tipo:"text",div:""},
-		{titulo:"Inglês (opcional):",id:"en",size:"40",value:i.en,tipo:"text",div:""},
+		{titulo:"Nome que ser&aacute; mostrado na &aacute;rvore de menus (portugu&ecirc;s) - altera tamb&eacute;m o metadata TEMA, existente no mapfile, usado como t&iacute;tulo na &aacute;rvore de camadas:",id:"nome_tema",size:"40",value:i.nome_tema,tipo:"text",div:""},
+		{titulo:"Ingl&ecirc;s (opcional):",id:"en",size:"40",value:i.en,tipo:"text",div:""},
 		{titulo:"Espanhol (opcional):",id:"es",size:"40",value:i.es,tipo:"text",div:""},
 		{titulo:"Italiano (opcional):",id:"it",size:"40",value:i.it,tipo:"text",div:""}
 		]
 	};
 	var ins = "";
 	ins += core_geraLinhas(param);
-	ins += "<p>Descrição (opcional):<br>";
+	ins += "<p>Descri&ccedil;&atilde;o (opcional):<br>";
 	ins += "<input size=40 type=text id=desc_tema value='"+i.desc_tema+"' /></p>";
 	ins += "<p>Link para a fonte (opcional):<br>";
 	ins += "<input size=40 type=text id=link_tema value='"+i.link_tema+"' /></p>";
-	ins += "<p>Tags (separe com espaço). Você pode digitar novos tags ou pegar da lista abaixo (opcional):";
+	ins += "<p>Tags (separe com espa&ccedil;o). Voc&ecirc; pode digitar novos tags ou pegar da lista abaixo (opcional):";
 	ins += "<input type=text size=40 value='"+i.tags_tema+"' id='tags_tema' ><br>";
 	ins += "<div id=comboTags >Buscando...</div>";
 	ins += "<p>Tipo (preencha apenas se for do tipo WMS):<br>";
@@ -94,7 +94,7 @@ function montaDivTemas(i)
 	ins += "<select  id='ogc_tema' >";
 	ins += core_combosimnao(i.ogc_tema);
 	ins += "</select></p>";
-	ins += "<p>Permite o download na aplicação datadownload.htm? (não afeta a permissão de download definida no item 'disponibilidade' existente em cada layer)<br>";
+	ins += "<p>Permite o download na aplica&ccedil;&atilde;o datadownload.htm? (n&atilde;o afeta a permiss&atilde;o de download definida no item 'disponibilidade' existente em cada layer)<br>";
 	ins += "<select  id='download_tema' >";
 	ins += core_combosimnao(i.download_tema);
 	ins += "</select></p>";
@@ -106,7 +106,7 @@ function montaDivTemas(i)
 	ins += "<select  id='kmz_tema' >";
 	ins += core_combosimnao(i.kmz_tema);
 	ins += "</select></p>";
-	ins += "<p><span onclick='atualizaMiniatura()' style='color:blue;cursor:pointer' >Atualiza ou cria a miniatura.</span> Cada tema pode ter uma imagem miniatura que é mostrada em algumas funcionalidades do i3Geo. Utilize essa opção para criar a miniatura para o tema em edição.<br>";
+	ins += "<p><span onclick='atualizaMiniatura()' style='color:blue;cursor:pointer' >Atualiza ou cria a miniatura.</span> Cada tema pode ter uma imagem miniatura que &eacute; mostrada em algumas funcionalidades do i3Geo. Utilize essa op&ccedil;&atilde;o para criar a miniatura para o tema em edi&ccedil;&atilde;o.<br>";
 	ins += "<img id='imagemMiniatura' src='../../temas/miniaturas/"+i.imagem+"' /></p><br><br>";
 	ins += "<input type=hidden id=codigo_tema value='"+i.codigo_tema+"'/>";
 	return(ins);
@@ -174,7 +174,7 @@ function gravaDadosTema(id)
   			{
   				if(YAHOO.lang.JSON.parse(o.responseText) == "erro")
   				{
-  					core_carregando("<span style=color:red >Não foi possível excluir. Verifique se não existem menus vinculados a este tema</span>");
+  					core_carregando("<span style=color:red >N&atilde;o foi poss&iacute;vel excluir. Verifique se n&atilde;o existem menus vinculados a este tema</span>");
   					setTimeout("core_carregando('desativa')",3000);
   				}
   				else

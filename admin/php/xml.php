@@ -2,10 +2,10 @@
 /*
 Title: xml.php
 
-Conjunto de funções que geram arquivos na estrutura XML conforme os dados cadastrados no sistema de administração.
+Conjunto de fun&ccedil;&otilde;es que geram arquivos na estrutura XML conforme os dados cadastrados no sistema de administra&ccedil;&atilde;o.
 
-Permite a geração de XML no padrão RSS e outros. É utilizado por funções internas do i3Geo e por programas
-utilitários que fornecem dados no formato RSS para outros fins.
+Permite a gera&ccedil;&atilde;o de XML no padr&atilde;o RSS e outros. &Eacute; utilizado por fun&ccedil;&otilde;es internas do i3Geo e por programas
+utilit&aacute;rios que fornecem dados no formato RSS para outros fins.
 
 Licenca:
 
@@ -13,20 +13,20 @@ GPL2
 
 i3Geo Interface Integrada de Ferramentas de Geoprocessamento para Internet
 
-Direitos Autorais Reservados (c) 2006 Ministério do Meio Ambiente Brasil
+Direitos Autorais Reservados (c) 2006 Minist&eacute;rio do Meio Ambiente Brasil
 Desenvolvedor: Edmar Moretti edmar.moretti@mma.gov.br
 
-Este programa é software livre; você pode redistribuí-lo
-e/ou modificá-lo sob os termos da Licença Pública Geral
+Este programa &eacute; software livre; voc&ecirc; pode redistribu&iacute;-lo
+e/ou modific&aacute;-lo sob os termos da Licen&ccedil;a P&uacute;blica Geral
 GNU conforme publicada pela Free Software Foundation;
 
-Este programa é distribuído na expectativa de que seja útil,
-porém, SEM NENHUMA GARANTIA; nem mesmo a garantia implícita
-de COMERCIABILIDADE OU ADEQUAÇÃO A UMA FINALIDADE ESPECÍFICA.
-Consulte a Licença Pública Geral do GNU para mais detalhes.
-Você deve ter recebido uma cópia da Licença Pública Geral do
-GNU junto com este programa; se não, escreva para a
-Free Software Foundation, Inc., no endereço
+Este programa &eacute; distribu&iacute;do na expectativa de que seja &uacute;til,
+por&eacute;m, SEM NENHUMA GARANTIA; nem mesmo a garantia impl&iacute;cita
+de COMERCIABILIDADE OU ADEQUA&Ccedil;&Atilde;O A UMA FINALIDADE ESPEC&Iacute;FICA.
+Consulte a Licen&ccedil;a P&uacute;blica Geral do GNU para mais detalhes.
+Voc&ecirc; deve ter recebido uma cópia da Licen&ccedil;a P&uacute;blica Geral do
+GNU junto com este programa; se n&atilde;o, escreva para a
+Free Software Foundation, Inc., no endere&ccedil;o
 59 Temple Street, Suite 330, Boston, MA 02111-1307 USA.
 
 Arquivo:
@@ -49,8 +49,8 @@ if(!function_exists("verificaEditores")){
 	*/
 }
 //
-//processa a variável $esquemaadmin definida em ms_configura.php
-//essa variável precisa ter um . no final quando não for vazia, evitando erros na inclusão dentro dos SQLs
+//processa a vari&aacute;vel $esquemaadmin definida em ms_configura.php
+//essa vari&aacute;vel precisa ter um . no final quando n&atilde;o for vazia, evitando erros na inclus&atilde;o dentro dos SQLs
 //
 if (!isset($esquemaadmin)){
 	include_once(__DIR__."/../../ms_configura.php");
@@ -63,9 +63,9 @@ Function: geraXmlSistemas (depreciado)
 
 Parametros:
 
-perfil {string} - perfil que será considerado na geração do XML
+perfil {string} - perfil que ser&aacute; considerado na gera&ccedil;&atilde;o do XML
 
-locaplic {string} - localização do i3Geo no sistema de arquivos
+locaplic {string} - localiza&ccedil;&atilde;o do i3Geo no sistema de arquivos
 
 editores {array} - lista de editores cadastrados em ms_configura.php
 
@@ -124,9 +124,9 @@ RSS com os comentarios sobre um ou todos os temas
 
 Parametros:
 
-locaplic {string} - localização do i3Geo no sistema de arquivos
+locaplic {string} - localiza&ccedil;&atilde;o do i3Geo no sistema de arquivos
 
-id_tema {numeric} - (opcional) id do tema para mostrar apenas os comentários de um tema
+id_tema {numeric} - (opcional) id do tema para mostrar apenas os coment&aacute;rios de um tema
 
 Retorno:
 
@@ -147,9 +147,9 @@ RSS com os temas cadastrados
 
 Parametros:
 
-locaplic {string} - localização do i3Geo no sistema de arquivos
+locaplic {string} - localiza&ccedil;&atilde;o do i3Geo no sistema de arquivos
 
-id_n2 {string} - código do subgrupo do sistema de administração
+id_n2 {string} - código do subgrupo do sistema de administra&ccedil;&atilde;o
 
 Retorno:
 
@@ -164,15 +164,15 @@ function geraRSStemas($locaplic,$id_n2)
 /*
 Function: geraRSStemasRaiz
 
-RSS com os temas localizados na raiz de um nível
+RSS com os temas localizados na raiz de um n&iacute;vel
 
 Parametros:
 
-locaplic {string} - localização do i3Geo no sistema de arquivos
+locaplic {string} - localiza&ccedil;&atilde;o do i3Geo no sistema de arquivos
 
 id {string} - código do nó
 
-nivel {string} - nível do nó
+nivel {string} - n&iacute;vel do nó
 
 Retorno:
 
@@ -191,9 +191,9 @@ RSS com os subgrupos cadastrados
 
 Parametros:
 
-locaplic {string} - localização do i3Geo no sistema de arquivos
+locaplic {string} - localiza&ccedil;&atilde;o do i3Geo no sistema de arquivos
 
-id_n1 {string} - código do grupo do sistema de administração
+id_n1 {string} - código do grupo do sistema de administra&ccedil;&atilde;o
 
 Retorno:
 
@@ -212,7 +212,7 @@ RSS com os grupos cadastrados
 
 Parametros:
 
-locaplic {string} - localização do i3Geo no sistema de arquivos
+locaplic {string} - localiza&ccedil;&atilde;o do i3Geo no sistema de arquivos
 
 Retorno:
 
@@ -233,7 +233,7 @@ RSS com os links para sistemas de download
 
 Parametros:
 
-locaplic {string} - localização do i3Geo no sistema de arquivos
+locaplic {string} - localiza&ccedil;&atilde;o do i3Geo no sistema de arquivos
 
 Retorno:
 
@@ -252,7 +252,7 @@ RSS com a lista de WS cadastrados
 
 Parametros:
 
-locaplic {string} - localização do i3Geo no sistema de arquivos
+locaplic {string} - localiza&ccedil;&atilde;o do i3Geo no sistema de arquivos
 
 Retorno:
 
@@ -271,7 +271,7 @@ RSS com a lista de KML cadastrados
 
 Parametros:
 
-locaplic {string} - localização do i3Geo no sistema de arquivos
+locaplic {string} - localiza&ccedil;&atilde;o do i3Geo no sistema de arquivos
 
 Retorno:
 
@@ -290,7 +290,7 @@ RSS com a lista de WMS cadastrados
 
 Parametros:
 
-locaplic {string} - localização do i3Geo no sistema de arquivos
+locaplic {string} - localiza&ccedil;&atilde;o do i3Geo no sistema de arquivos
 
 Retorno:
 
@@ -309,7 +309,7 @@ RSS com a lista de GEORSS cadastrados
 
 Parametros:
 
-locaplic {string} - localização do i3Geo no sistema de arquivos
+locaplic {string} - localiza&ccedil;&atilde;o do i3Geo no sistema de arquivos
 
 Retorno:
 
@@ -328,7 +328,7 @@ RSS com a lista de temas para download
 
 Parametros:
 
-locaplic {string} - localização do i3Geo no sistema de arquivos
+locaplic {string} - localiza&ccedil;&atilde;o do i3Geo no sistema de arquivos
 
 Retorno:
 
@@ -364,7 +364,7 @@ RSS com a lista de temas que permitem KML
 
 Parametros:
 
-locaplic {string} - localização do i3Geo no sistema de arquivos
+locaplic {string} - localiza&ccedil;&atilde;o do i3Geo no sistema de arquivos
 
 Retorno:
 
@@ -395,11 +395,11 @@ function geraRSStemasKml($locaplic)
 /*
 Function: geraRSStemasOgc
 
-RSS com a lista de temas que permitem serviços OGC
+RSS com a lista de temas que permitem servi&ccedil;os OGC
 
 Parametros:
 
-locaplic {string} - localização do i3Geo no sistema de arquivos
+locaplic {string} - localiza&ccedil;&atilde;o do i3Geo no sistema de arquivos
 
 Retorno:
 
@@ -431,17 +431,17 @@ function geraRSStemasOgc($locaplic)
 /*
 Function: geraXmlRSS
 
-Gera um RSS com base em um SQL compatível com o sistema de administração.
+Gera um RSS com base em um SQL compat&iacute;vel com o sistema de administra&ccedil;&atilde;o.
 
-O SQL deverá retornar os itens nome_ws desc_ws e link_ws
+O SQL dever&aacute; retornar os itens nome_ws desc_ws e link_ws
 
 Parametros:
 
-locaplic {string} - localização do i3Geo no sistema de arquivos
+locaplic {string} - localiza&ccedil;&atilde;o do i3Geo no sistema de arquivos
 
-sql {string} - SQL que será aplicado ao sistema de administração
+sql {string} - SQL que ser&aacute; aplicado ao sistema de administra&ccedil;&atilde;o
 
-descricao {string} - descrição que será inserida no canal RSS
+descricao {string} - descri&ccedil;&atilde;o que ser&aacute; inserida no canal RSS
 Retorno:
 
 RSS
@@ -628,11 +628,11 @@ function geraXmlMapas($perfil,$locaplic,$editores)
 	return $xml;
 }
 //
-//$id_menu = id do menu que será montado
-//$perfil = perfis separados por espaços
+//$id_menu = id do menu que ser&aacute; montado
+//$perfil = perfis separados por espa&ccedil;os
 //$tipo = gruposeraiz|subgrupos|temas
-//$dbh objeto com a conexão com o banco
-//$locaplic = localização do i3geo no servidor
+//$dbh objeto com a conex&atilde;o com o banco
+//$locaplic = localiza&ccedil;&atilde;o do i3geo no servidor
 //
 function geraXmlMenutemas($perfil,$id_menu,$tipo,$locaplic)
 {

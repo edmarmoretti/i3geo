@@ -1,65 +1,76 @@
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
 <html>
 <head>
-    <meta http-equiv="content-type" content="text/html; charset=ISO-8859-1">
-    <title>Lista de menus</title>
-    <style type="text/css">
-        /*margin and padding on body element
+<meta http-equiv="content-type" content="text/html; charset=ISO-8859-1">
+<title>Lista de menus</title>
+<style type="text/css">
+/*margin and padding on body element
           can introduce errors in determining
           element position and are not recommended;
           we turn them off as a foundation for YUI
           CSS treatments. */
-        body {
-            margin:0;
-        	padding:0;
-        }
-	</style>
-	<script type="text/javascript" src="../js/core.js"></script>
-	<script type="text/javascript" src="../js/menu.js"></script>
+body {
+	margin: 0;
+	padding: 0;
+}
+</style>
+<script type="text/javascript" src="../js/core.js"></script>
+<script type="text/javascript" src="../js/menu.js"></script>
 </head>
 <body class=" yui-skin-sam">
-<div style="margin:20px">
-<div id=cabecalhoPrincipal style=width:80%;text-align:left;>
-</div>
-<div style=width:80%;text-align:center;>
-<h1>Administração do i3geo - Menus <img src="../imagens/04.png" style="cursor:pointer" id=botaoAjuda /></h1>
+	<div style="margin: 20px">
+		<div id=cabecalhoPrincipal style="width: 80%; text-align: left;">
+		</div>
+		<div style="width: 80%; text-align: center;">
+			<h1>
+				Administra&ccedil;&atilde;o do i3geo - Menus <img src="../imagens/04.png"
+					style="cursor: pointer" id=botaoAjuda />
+			</h1>
 
-</div>
-<div id="ajuda" style=display:none >
-	<div class="hd">Ajuda</div>
-	<div class="bd" style="height:144px;overflow:auto">
-		<p>Este formulário permite editar a lista de menus que será utilizada pelo i3Geo.
-		<p>A árvore é composta de menus, grupos, sub-grupos e temas. Vc deve criar os menus,
-		a lista de grupos e a lista de sub-grupos. Ao criar um menu, esse é mostrado imediatamente na árvore.
-		<p>Menus ou nós da árvore marcados como não publicados são mostrados em vermelho e aparecem apenas para os administradores.
-		<p>Em cada nó da árvore podem ser associados os temas, mesmo na raiz de um dos níveis.
-		Os temas são arquivos mapfiles armazenados em i3geo/temas e registrados no sistema de administração.
-		<p>A criação de mapfiles e a vinculação tema-mapfile é feita por meio do editor de mapfiles, e consiste 
-		na determinação de um nome para cada mapfile. Esse nome é listado ao ser adicionado um tema na árvore.
+		</div>
+		<div id="ajuda" style="display: none">
+			<div class="hd">Ajuda</div>
+			<div class="bd" style="height: 144px; overflow: auto">
+				<p>Este formul&aacute;rio permite editar a lista de menus que ser&aacute;
+					utilizada pelo i3Geo.
+				<p>A &aacute;rvore &eacute; composta de menus, grupos, sub-grupos e temas. Vc
+					deve criar os menus, a lista de grupos e a lista de sub-grupos. Ao
+					criar um menu, esse &eacute; mostrado imediatamente na &aacute;rvore.
+				<p>Menus ou nós da &aacute;rvore marcados como n&atilde;o publicados s&atilde;o
+					mostrados em vermelho e aparecem apenas para os administradores.
+				<p>Em cada nó da &aacute;rvore podem ser associados os temas, mesmo na
+					raiz de um dos n&iacute;veis. Os temas s&atilde;o arquivos mapfiles armazenados
+					em i3geo/temas e registrados no sistema de administra&ccedil;&atilde;o.
+				<p>A cria&ccedil;&atilde;o de mapfiles e a vincula&ccedil;&atilde;o tema-mapfile &eacute; feita por
+					meio do editor de mapfiles, e consiste na determina&ccedil;&atilde;o de um nome
+					para cada mapfile. Esse nome &eacute; listado ao ser adicionado um tema na
+					&aacute;rvore.
+			</div>
+			<div class="ft"></div>
+		</div>
+		<br>
+		<p class=paragrafo>
+			Idioma: <select id="idioma" onchange="initMenu()">
+				<option value="pt" selected>Portugu&ecirc;s</option>
+				<option value="en">Ingl&ecirc;s</option>
+				<option value="es">Espanhol</option>
+				<option value="it">Italiano</option>
+			</select>
+		</p>
+		<input type=button id=adicionaNovoMenu value="Adicionar um novo menu"
+			style="left: -5px;" />
+		<p>
+			<br>
+		<div id="tabela" style="left: -5px;"></div>
 	</div>
-	<div class="ft"></div>
-</div>
-<br>
-<p class=paragrafo >
-	Idioma:
-	<select id="idioma" onchange="initMenu()">
-		<option value="pt" selected >Português</option>
-		<option value="en" >Inglês</option>
-		<option value="es" >Espanhol</option>
-		<option value="it" >Italiano</option>
-	</select>
-</p>
-<input type=button id=adicionaNovoMenu value="Adicionar um novo menu" style="left:-5px;" /><p><br>
-<div id="tabela" style="left:-5px;"> </div>
-</div>
-<div id=logajax style="display:block" ></div>
-<script>
+	<div id=logajax style="display: block"></div>
+	<script>
 /*
 Title: Editor da lista de menus
 
-HTML da interface de administração da lista de menus
+HTML da interface de administra&ccedil;&atilde;o da lista de menus
 
-Veja também:
+Veja tamb&eacute;m:
 
 <core.js>
 
@@ -77,20 +88,20 @@ GPL2
 
 i3Geo Interface Integrada de Ferramentas de Geoprocessamento para Internet
 
-Direitos Autorais Reservados (c) 2006 Ministério do Meio Ambiente Brasil
+Direitos Autorais Reservados (c) 2006 Minist&eacute;rio do Meio Ambiente Brasil
 Desenvolvedor: Edmar Moretti edmar.moretti@mma.gov.br
 
-Este programa é software livre; você pode redistribuí-lo
-e/ou modificá-lo sob os termos da Licença Pública Geral
+Este programa &eacute; software livre; voc&ecirc; pode redistribu&iacute;-lo
+e/ou modific&aacute;-lo sob os termos da Licen&ccedil;a P&uacute;blica Geral
 GNU conforme publicada pela Free Software Foundation;
 
-Este programa é distribuído na expectativa de que seja útil,
-porém, SEM NENHUMA GARANTIA; nem mesmo a garantia implícita
-de COMERCIABILIDADE OU ADEQUAÇÃO A UMA FINALIDADE ESPECÍFICA.
-Consulte a Licença Pública Geral do GNU para mais detalhes.
-Você deve ter recebido uma cópia da Licença Pública Geral do
-GNU junto com este programa; se não, escreva para a
-Free Software Foundation, Inc., no endereço
+Este programa &eacute; distribu&iacute;do na expectativa de que seja &uacute;til,
+por&eacute;m, SEM NENHUMA GARANTIA; nem mesmo a garantia impl&iacute;cita
+de COMERCIABILIDADE OU ADEQUA&Ccedil;&Atilde;O A UMA FINALIDADE ESPEC&Iacute;FICA.
+Consulte a Licen&ccedil;a P&uacute;blica Geral do GNU para mais detalhes.
+Voc&ecirc; deve ter recebido uma cópia da Licen&ccedil;a P&uacute;blica Geral do
+GNU junto com este programa; se n&atilde;o, escreva para a
+Free Software Foundation, Inc., no endere&ccedil;o
 59 Temple Street, Suite 330, Boston, MA 02111-1307 USA.
 
 Arquivo:

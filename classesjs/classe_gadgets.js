@@ -493,7 +493,7 @@ i3GEO.gadgets = {
 	*/
 	mostraMenuSuspenso: function(id){
 		if(typeof(console) !== 'undefined'){console.info("i3GEO.gadgets.mostraMenuSuspenso()");}
-		var objid,n,i,estilo,t,onMenuBarBeforeRender,temp,ifr,i3GEOoMenuBarLocal,
+		var objid,n,i,estilo,t,onMenuBarBeforeRender,temp,i3GEOoMenuBarLocal,
 			ms = i3GEO.gadgets.PARAMETROS.mostraMenuSuspenso,
 			confm = i3GEO.configura.oMenuData,
 			ins = "",

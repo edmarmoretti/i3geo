@@ -2,39 +2,39 @@
 /*
 Title: Inicializa o i3Geo via URL ms_criamapa.php
 
-Esse é o programa principal de inicialização, podendo ser chamado diretamente pelo navegador web.
+Esse &eacute; o programa principal de inicializa&ccedil;&atilde;o, podendo ser chamado diretamente pelo navegador web.
 
-Cria os diretórios temporários em ms_tmp, incluindo o mapfile (http://mapserver.org/mapfile/index.html#mapfile) que será a base para o funcionamento do mapa. 
+Cria os diretórios tempor&aacute;rios em ms_tmp, incluindo o mapfile (http://mapserver.org/mapfile/index.html#mapfile) que ser&aacute; a base para o funcionamento do mapa. 
 
-Com o uso de parâmetros é possível alterar o processo padrão de criação do mapa, como por exemplo, podem ser adicionadas novas camadas ou modificada a abrangência espacial do mapa.
+Com o uso de par&acirc;metros &eacute; poss&iacute;vel alterar o processo padr&atilde;o de cria&ccedil;&atilde;o do mapa, como por exemplo, podem ser adicionadas novas camadas ou modificada a abrang&ecirc;ncia espacial do mapa.
 
-A inicialização padrão abrirá uma interface HTML com todas as funcionalidades disponíveis, porém é possível escolher qualquer outro HTML para a apresentação do mapa.
+A inicializa&ccedil;&atilde;o padr&atilde;o abrir&aacute; uma interface HTML com todas as funcionalidades dispon&iacute;veis, por&eacute;m &eacute; poss&iacute;vel escolher qualquer outro HTML para a apresenta&ccedil;&atilde;o do mapa.
 
-No diretório i3geo/interface estão os arquivos HTML que formatam a apresentação do mapa. Além desses arquivos, podem ser criados outros, conforme a necessidade do usuário.
+No diretório i3geo/interface est&atilde;o os arquivos HTML que formatam a apresenta&ccedil;&atilde;o do mapa. Al&eacute;m desses arquivos, podem ser criados outros, conforme a necessidade do usu&aacute;rio.
 
-Os parâmetros podem ser utilizados na chamada do i3geo via navegador, p.e.,
+Os par&acirc;metros podem ser utilizados na chamada do i3geo via navegador, p.e.,
 
 http://localhost/i3geo/ms_criamapa.php?temasa=estadosl
 
-A ordem dos parâmetros não é importante, mas o primeiro deve ser precedido de "?". Os demais parâmetros devem ser acrescentados sempre precedidos de "&", p.e.,
+A ordem dos par&acirc;metros n&atilde;o &eacute; importante, mas o primeiro deve ser precedido de "?". Os demais par&acirc;metros devem ser acrescentados sempre precedidos de "&", p.e.,
 
 http://localhost/i3geo/ms_criamapa.php?temasa=estadosl bioma&layers=estadosl bioma
 
-Caso a inicialização do i3geo ocorra por um outro programa PHP, o ms_criamapa.php deve ser executado via include. Nesse caso, os parâmetros devem ser especificados como variáveis, p.e.,
+Caso a inicializa&ccedil;&atilde;o do i3geo ocorra por um outro programa PHP, o ms_criamapa.php deve ser executado via include. Nesse caso, os par&acirc;metros devem ser especificados como vari&aacute;veis, p.e.,
 
 $temasa=bioma;
 
 include("ms_criamapa.php");
 
-Observações:
+Observa&ccedil;&otilde;es:
 
-Os cookies passados ao servidor são eliminados com a linha
+Os cookies passados ao servidor s&atilde;o eliminados com a linha
 
 $_COOKIE = array();
 
-Se a sua aplicação precisa de cookies, comente essa linha do programa.
+Se a sua aplica&ccedil;&atilde;o precisa de cookies, comente essa linha do programa.
 
-A interface HTML padrão de abertura do mapa é definido em uma variável no arquivo ms_configura.php, podendo ser alterada se necessário.
+A interface HTML padr&atilde;o de abertura do mapa &eacute; definido em uma vari&aacute;vel no arquivo ms_configura.php, podendo ser alterada se necess&aacute;rio.
 
 Link:
 
@@ -46,72 +46,72 @@ GPL2
 
 i3Geo Interface Integrada de Ferramentas de Geoprocessamento para Internet
 
-Direitos Autorais Reservados (c) 2006 Ministério do Meio Ambiente Brasil
+Direitos Autorais Reservados (c) 2006 Minist&eacute;rio do Meio Ambiente Brasil
 Desenvolvedor: Edmar Moretti edmar.moretti@mma.gov.br
 
-Este programa é software livre; você pode redistribuí-lo
-e/ou modificá-lo sob os termos da Licença Pública Geral
+Este programa &eacute; software livre; voc&ecirc; pode redistribu&iacute;-lo
+e/ou modific&aacute;-lo sob os termos da Licen&ccedil;a P&uacute;blica Geral
 GNU conforme publicada pela Free Software Foundation;
 
-Este programa é distribuído na expectativa de que seja útil,
-porém, SEM NENHUMA GARANTIA; nem mesmo a garantia implícita
-de COMERCIABILIDADE OU ADEQUAÇÃO A UMA FINALIDADE ESPECÍFICA.
-Consulte a Licença Pública Geral do GNU para mais detalhes.
-Você deve ter recebido uma cópia da Licença Pública Geral do
-GNU junto com este programa; se não, escreva para a
-Free Software Foundation, Inc., no endereço
+Este programa &eacute; distribu&iacute;do na expectativa de que seja &uacute;til,
+por&eacute;m, SEM NENHUMA GARANTIA; nem mesmo a garantia impl&iacute;cita
+de COMERCIABILIDADE OU ADEQUA&Ccedil;&Atilde;O A UMA FINALIDADE ESPEC&Iacute;FICA.
+Consulte a Licen&ccedil;a P&uacute;blica Geral do GNU para mais detalhes.
+Voc&ecirc; deve ter recebido uma cópia da Licen&ccedil;a P&uacute;blica Geral do
+GNU junto com este programa; se n&atilde;o, escreva para a
+Free Software Foundation, Inc., no endere&ccedil;o
 59 Temple Street, Suite 330, Boston, MA 02111-1307 USA.
 
 Arquivo: i3geo/ms_criamapa.php
 
 Parametros:
 
-base - arquivo mapfile que servirá de base para a criação do mapa.Por default, são utilizados os arquivos existentes em i3geo/aplicmap (geral1windows, geral1,...)
-	Essa variável pode ser definida em ms_configura também. Se não estiver definida em nenhum lugar, o i3Geo tentará descobrir o arquivo adequado a ser utilizado.
+base - arquivo mapfile que servir&aacute; de base para a cria&ccedil;&atilde;o do mapa.Por default, s&atilde;o utilizados os arquivos existentes em i3geo/aplicmap (geral1windows, geral1,...)
+	Essa vari&aacute;vel pode ser definida em ms_configura tamb&eacute;m. Se n&atilde;o estiver definida em nenhum lugar, o i3Geo tentar&aacute; descobrir o arquivo adequado a ser utilizado.
 
-temasa - lista, separada por espaços, com os nomes dos arquivos map que serão adicionados ao mapa. Se o arquivo map não estiver no diretório i3geo/temas, o nome deve incluir o caminho completo no servidor. O arquivo map pode conter mais de um layer pois todos os existentes serão adicionados ao mapa. Por default, todos os layers encontrados nos mapfiles são adicionados ao mapa com o status de desenho em OFF.
+temasa - lista, separada por espa&ccedil;os, com os nomes dos arquivos map que ser&atilde;o adicionados ao mapa. Se o arquivo map n&atilde;o estiver no diretório i3geo/temas, o nome deve incluir o caminho completo no servidor. O arquivo map pode conter mais de um layer pois todos os existentes ser&atilde;o adicionados ao mapa. Por default, todos os layers encontrados nos mapfiles s&atilde;o adicionados ao mapa com o status de desenho em OFF.
 
-layers - lista, separada por espaços, com os nomes dos layers que serão ligados. A lista deve conter os nomes dos layers e não os nomes dos mapfiles acrescentados ao mapa. Por exemplo, ao adicionar com "temasa" um mapfile chamado "transporte" que contenha os layers "estradas" e "ferrovias" os dois layers serão adicionados ao mapa. Para que esses dois layers fiquem visíveis no mapa deve-se utilizar &layers=estradas ferrovias.
+layers - lista, separada por espa&ccedil;os, com os nomes dos layers que ser&atilde;o ligados. A lista deve conter os nomes dos layers e n&atilde;o os nomes dos mapfiles acrescentados ao mapa. Por exemplo, ao adicionar com "temasa" um mapfile chamado "transporte" que contenha os layers "estradas" e "ferrovias" os dois layers ser&atilde;o adicionados ao mapa. Para que esses dois layers fiquem vis&iacute;veis no mapa deve-se utilizar &layers=estradas ferrovias.
 
-desligar - lista com os nomes dos temas que serão forçados a inicializar desligados, ou seja, com STATUS OFF
+desligar - lista com os nomes dos temas que ser&atilde;o for&ccedil;ados a inicializar desligados, ou seja, com STATUS OFF
 
-mapext - extensao geografica que será utilizada. Por padrão, a extensão geográfica é definida para abranger o Brasil todo. Para alterar o padrão deve-se utilizar o parâmetro mapext para especificar a nova abrangência. Essa abrangência deve ser definida em coordenadas no formato décimos de grau e na projeção geográfica. Exemplo: &mapext=-54 -30 -50 -12. Observe que a ordem dos valores são xmin ymin xmax ymax
+mapext - extensao geografica que ser&aacute; utilizada. Por padr&atilde;o, a extens&atilde;o geogr&aacute;fica &eacute; definida para abranger o Brasil todo. Para alterar o padr&atilde;o deve-se utilizar o par&acirc;metro mapext para especificar a nova abrang&ecirc;ncia. Essa abrang&ecirc;ncia deve ser definida em coordenadas no formato d&eacute;cimos de grau e na proje&ccedil;&atilde;o geogr&aacute;fica. Exemplo: &mapext=-54 -30 -50 -12. Observe que a ordem dos valores s&atilde;o xmin ymin xmax ymax
 
-executa - programa ou função em php que será executado via include. O include é feito no final do processo de inicialização quando a variável $tmpfname já está definida. Essa variável guarda o nome do arquivo mapfile que será utilizado pelo i3geo.
+executa - programa ou fun&ccedil;&atilde;o em php que ser&aacute; executado via include. O include &eacute; feito no final do processo de inicializa&ccedil;&atilde;o quando a vari&aacute;vel $tmpfname j&aacute; est&aacute; definida. Essa vari&aacute;vel guarda o nome do arquivo mapfile que ser&aacute; utilizado pelo i3geo.
 
-interface - nome da interface que será utilizada para abrir o mapa. As interfaces são arquivos HTML que podem estar no diretório aplicmap. Por default, utiliza-se o geral.htm. Vc pode copiar esse html e alterá-lo para customizar o mapa. Para chamar o html customizado, utilize ms_criamapa.php?interface=meumapa.htm
+interface - nome da interface que ser&aacute; utilizada para abrir o mapa. As interfaces s&atilde;o arquivos HTML que podem estar no diretório aplicmap. Por default, utiliza-se o geral.htm. Vc pode copiar esse html e alter&aacute;-lo para customizar o mapa. Para chamar o html customizado, utilize ms_criamapa.php?interface=meumapa.htm
 
-perfil - perfil utilizado para restringir os menus de temas. ms_criamapa.php?perfil=usuário1
+perfil - perfil utilizado para restringir os menus de temas. ms_criamapa.php?perfil=usu&aacute;rio1
 
-caminho - caminho para os programas que serão incluídos com "include". Ao chamar o programa ms_criamapa.php por meio de "include" é necessário especificar essa variável para indicar o caminho correto do i3geo.
+caminho - caminho para os programas que ser&atilde;o inclu&iacute;dos com "include". Ao chamar o programa ms_criamapa.php por meio de "include" &eacute; necess&aacute;rio especificar essa vari&aacute;vel para indicar o caminho correto do i3geo.
 
-pontos - lista de coordenadas x e y que serão adicionadas como pontos no mapa.
+pontos - lista de coordenadas x e y que ser&atilde;o adicionadas como pontos no mapa.
 
 nometemapontos - nome do tema de pontos
 
-linhas - lista de coordenadas x e y que serão adicionadas como linhas no mapa. As coordenadas de linhas diferentes devem ser separadas por ",", por exemplo: -54 -12 -50 -12,-50 -1 -50 -2 -50 -3
+linhas - lista de coordenadas x e y que ser&atilde;o adicionadas como linhas no mapa. As coordenadas de linhas diferentes devem ser separadas por ",", por exemplo: -54 -12 -50 -12,-50 -1 -50 -2 -50 -3
 
 nometemalinhas - nome do tema de linhas
 
-poligonos - lista de coordenadas x e y que serão adicionadas como polígonos no mapa. As coordenadas dos vértices de polígonos diferentes devem ser separadas por ",".
+poligonos - lista de coordenadas x e y que ser&atilde;o adicionadas como pol&iacute;gonos no mapa. As coordenadas dos v&eacute;rtices de pol&iacute;gonos diferentes devem ser separadas por ",".
 
-nometemapoligonos - nome do tema de polígonos
+nometemapoligonos - nome do tema de pol&iacute;gonos
 
-simbolo - nome do símbolo que será utilizado para desenhar os elementos inseridos (veja arquivo de símbolos em i3geo/symbols)
+simbolo - nome do s&iacute;mbolo que ser&aacute; utilizado para desenhar os elementos inseridos (veja arquivo de s&iacute;mbolos em i3geo/symbols)
 
-corsimbolo - cor do símbolo definido em RGB separados por espaço ou vírgula
+corsimbolo - cor do s&iacute;mbolo definido em RGB separados por espa&ccedil;o ou v&iacute;rgula
 
-tamanhosimbolo - tamanho do símbolo em pixels
+tamanhosimbolo - tamanho do s&iacute;mbolo em pixels
 
 wkt - insere elementos no mapa com coordenadas definidas em wkt
 
 nometemawkt - nome do tema em wkt
 
-idioma - idioma da interface (veja os idiomas disponíveis em classe_idioma.js)
+idioma - idioma da interface (veja os idiomas dispon&iacute;veis em classe_idioma.js)
 
-kmlurl - url de um arquivo KML que será incluido no mapa. Válido apenas na interface google maps
+kmlurl - url de um arquivo KML que ser&aacute; incluido no mapa. V&aacute;lido apenas na interface google maps
 
-url_wms - endereço de um WMS (será incluido como uma camada no mapa)
+url_wms - endere&ccedil;o de um WMS (ser&aacute; incluido como uma camada no mapa)
 
 layer_wms - nome do layer
 
@@ -119,28 +119,28 @@ style_wms - estilo do layer
 
 nome_wms - nome da camada (titulo)
 
-srs_wms - código da projeção
+srs_wms - código da proje&ccedil;&atilde;o
 
-image_wms - tipo de imagem disponível
+image_wms - tipo de imagem dispon&iacute;vel
 
-versao_wms - Versão do WMS (necessário quando da inclusão de uma camada WMS diretamente pela URL)
+versao_wms - Vers&atilde;o do WMS (necess&aacute;rio quando da inclus&atilde;o de uma camada WMS diretamente pela URL)
 
-gvsiggvp - endereço no servidor do arquivo de projeto gvSig (gvp) que será utilizado para construir o mapa (experimental)
+gvsiggvp - endere&ccedil;o no servidor do arquivo de projeto gvSig (gvp) que ser&aacute; utilizado para construir o mapa (experimental)
 
 gvsigview - nome da view do projeto gvSig (http://localhost/i3geo/ms_criamapa.php?gvsiggvp=c:\temp\teste.gvp&gvsigview=Untitled - 0)
 */
 
 /*
-Verifica a variável $caminho
+Verifica a vari&aacute;vel $caminho
 
-Essa variável deve ser definida em programas que utilizam o ms_criamapa.php via include.
-Indica onde está o diretório i3geo para que os includes seguintes possam ser localizados.
-$caminho é sempre colocada antes do nome dos arquivos que serão incluídos, p.e., 
+Essa vari&aacute;vel deve ser definida em programas que utilizam o ms_criamapa.php via include.
+Indica onde est&aacute; o diretório i3geo para que os includes seguintes possam ser localizados.
+$caminho &eacute; sempre colocada antes do nome dos arquivos que ser&atilde;o inclu&iacute;dos, p.e., 
 require_once ($caminho."classesphp/carrega_ext.php");
 */
 //$_COOKIE = array();
 //
-//quando $funcao existe, é pq o ms_criamapa.php está sendo utilizado como um include em classesphp/mapa_controle.php
+//quando $funcao existe, &eacute; pq o ms_criamapa.php est&aacute; sendo utilizado como um include em classesphp/mapa_controle.php
 //
 $parurl = array_merge($_GET,$_POST);
 if (!isset($parurl["debug"]))
@@ -156,16 +156,16 @@ if (!file_exists($caminho."classesphp/carrega_ext.php"))
 if (isset($parurl["caminho"]))
 {$caminho = $parurl["caminho"];}
 /*
- Carrega as extensões PHP
+ Carrega as extens&otilde;es PHP
 
-Carrega as extensões utilizadas no programa de inicialização. 
-A carga das extensões geralmente é necessária nas instalações windows (ms4w) ou quando as mesmas não são carregadas pela própria inicialização do PHP.
+Carrega as extens&otilde;es utilizadas no programa de inicializa&ccedil;&atilde;o. 
+A carga das extens&otilde;es geralmente &eacute; necess&aacute;ria nas instala&ccedil;&otilde;es windows (ms4w) ou quando as mesmas n&atilde;o s&atilde;o carregadas pela própria inicializa&ccedil;&atilde;o do PHP.
 */
 include_once ($caminho."classesphp/carrega_ext.php");
 /*
 Include dos arquivos PHP.
 
-Inclui os programas php com funções utilizadas pelo ms_criamapa.php
+Inclui os programas php com fun&ccedil;&otilde;es utilizadas pelo ms_criamapa.php
 */
 include_once ($caminho."classesphp/pega_variaveis.php");
 include_once ($caminho."classesphp/funcoes_gerais.php");
@@ -173,8 +173,8 @@ $versao = versao();
 $versao = $versao["principal"];
 
 //
-//a variável $base pode ser definida em ms_configura, mas a preferência é pela definição já existente
-//por isso, $base é guardada em uma variável e retomada após o include de ms_configura.php
+//a vari&aacute;vel $base pode ser definida em ms_configura, mas a prefer&ecirc;ncia &eacute; pela defini&ccedil;&atilde;o j&aacute; existente
+//por isso, $base &eacute; guardada em uma vari&aacute;vel e retomada após o include de ms_configura.php
 //
 if(isset($base))
 {$tempBaseX = $base;}
@@ -188,7 +188,7 @@ Define o cookie para o idioma da interface
 if(isset($idioma) && $idioma != "")
 {setcookie("i3geolingua", $idioma);}
 /*
-Cria os diretórios temporários que serão utilizados pelo i3geo para armazenar as imagens e outros dados. 
+Cria os diretórios tempor&aacute;rios que ser&atilde;o utilizados pelo i3geo para armazenar as imagens e outros dados. 
 */
 $diretorios = criaDirMapa($dir_tmp,$cachedir);
 if(!$diretorios)
@@ -197,9 +197,9 @@ criaIndex();
 $tmpfname = $diretorios[0];
 $protocolo = explode("/",$_SERVER['SERVER_PROTOCOL']);
 /*
- Prepara as variáveis que serão incluidas na seção
+ Prepara as vari&aacute;veis que ser&atilde;o incluidas na se&ccedil;&atilde;o
 
-As variáveis vêm do arquivo ms_configura.php e são armazenadas em uma seção com nome específico para o i3geo.
+As vari&aacute;veis v&ecirc;m do arquivo ms_configura.php e s&atilde;o armazenadas em uma se&ccedil;&atilde;o com nome espec&iacute;fico para o i3geo.
 */
 if (!isset($mapext)){$mapext="";}
 $editores_ = $editores;
@@ -226,8 +226,8 @@ if(isset($interface)){$interface_ = $interface;}
 else{$interface_ = $interfacePadrao;}
 if(isset($kmlurl)){$kmlurl_ = $kmlurl;}
 //
-//se houver string de conexão para substituição
-//o modo cgi não irá funcionar
+//se houver string de conex&atilde;o para substitui&ccedil;&atilde;o
+//o modo cgi n&atilde;o ir&aacute; funcionar
 //
 if($postgis_mapa != "")
 {$utilizacgi = "nao";}
@@ -239,10 +239,10 @@ $navegadoresLocais_ = "sim";
 else
 $navegadoresLocais_ = "nao";
 /*
- Inicia a seção
+ Inicia a se&ccedil;&atilde;o
 
-O i3geo inicia uma seção específica no servidor, denominada i3GeoPHP.
-Se já houver uma seção aberta, em função de outro browser estar ativo, cria uma nova. Faz a cópia das variáveis definidas para itens da seção.
+O i3geo inicia uma se&ccedil;&atilde;o espec&iacute;fica no servidor, denominada i3GeoPHP.
+Se j&aacute; houver uma se&ccedil;&atilde;o aberta, em fun&ccedil;&atilde;o de outro browser estar ativo, cria uma nova. Faz a cópia das vari&aacute;veis definidas para itens da se&ccedil;&atilde;o.
 */
 session_name("i3GeoPHP");
 session_start();
@@ -254,10 +254,10 @@ if(isset($_SESSION["map_file"]) || $g_sid != "" || $g_sid == "undefined")
 /*
  Aguarde
 
-Monta a apresentação do aguarde.
+Monta a apresenta&ccedil;&atilde;o do aguarde.
 
-Aqui é necessário verificar se $executa está definido
-isso pq algumas aplicações podem ser prejudicadas caso o aguarde seja mostrado
+Aqui &eacute; necess&aacute;rio verificar se $executa est&aacute; definido
+isso pq algumas aplica&ccedil;&otilde;es podem ser prejudicadas caso o aguarde seja mostrado
 */
 $_SESSION["editores"] = $editores_;
 $_SESSION["dir_tmp"] = $dir_tmp_;
@@ -286,14 +286,14 @@ if(isset($interface_))
 $_SESSION["interface"] = $interface_;
 if(isset($kmlurl_))
 $_SESSION["kmlurl"] = $kmlurl_;
-//rotina de segurança, ver http://shiflett.org/articles/the-truth-about-sessions
+//rotina de seguran&ccedil;a, ver http://shiflett.org/articles/the-truth-about-sessions
 $fingerprint = 'I3GEOSEC' . $_SERVER['HTTP_USER_AGENT'];
 $_SESSION['fingerprint'] = md5($fingerprint . session_id());
 $_SESSION["mapdir"] = $diretorios[1];
 $_SESSION["imgdir"] = $diretorios[2];
 $_SESSION["contadorsalva"] = 0;//essa variavel e utilizada pela ferramenta telaremota. Toda vez que o mapa e salvo, acrescenta 1 (veja classesphp/mapa_controle.php)
 //
-//pega todas as variáveis da sessão, mesmo as que foram definidas anteriormente
+//pega todas as vari&aacute;veis da sess&atilde;o, mesmo as que foram definidas anteriormente
 //
 
 foreach(array_keys($_SESSION) as $k)
@@ -302,12 +302,12 @@ $postgis_mapa = $postgis_mapa_;
 /*
  Define os arquivos .map 
 
-Seleciona os arquivos mapfile que serão carregados como base conforme o tipo de sistema operacional.
+Seleciona os arquivos mapfile que ser&atilde;o carregados como base conforme o tipo de sistema operacional.
 
-A variável $base pode ser definida como um parâmetro na inicialização, caso contrário será utilizado o valor definido em ms_configura.php ou o i3Geo tentará descobrir o melhor arquivo a ser usado, conforme o que existir em i3geo/aplicmap.
+A vari&aacute;vel $base pode ser definida como um par&acirc;metro na inicializa&ccedil;&atilde;o, caso contr&aacute;rio ser&aacute; utilizado o valor definido em ms_configura.php ou o i3Geo tentar&aacute; descobrir o melhor arquivo a ser usado, conforme o que existir em i3geo/aplicmap.
 
-Os arquivos .map padrão são armazenados em i3geo/aplicmap.
-O arquivo é lido conforma a característica do sistema operacional.
+Os arquivos .map padr&atilde;o s&atilde;o armazenados em i3geo/aplicmap.
+O arquivo &eacute; lido conforma a caracter&iacute;stica do sistema operacional.
 
 */
 $versao = versao();
@@ -334,9 +334,9 @@ if(!isset($base) || $base == "")
 //if(!isset($estadosl))
 //{$estadosl = "estadosl";}
 /*
- Cria os objetos map que serão processados
+ Cria os objetos map que ser&atilde;o processados
 
-O arquivo definido em $base é lido como um objeto map. Esse objeto será processado para incluir novos layers e alterar outros parâmetros definidos pelo usuário.
+O arquivo definido em $base &eacute; lido como um objeto map. Esse objeto ser&aacute; processado para incluir novos layers e alterar outros par&acirc;metros definidos pelo usu&aacute;rio.
 */
 if (file_exists($base))
 {
@@ -360,9 +360,9 @@ if(isset($gvsiggvp) && $gvsiggvp != ""){
 	{echo "Nenhuma vista foi definida &gvsigview";}
 }
 /*
- Parâmetros adicionais.
+ Par&acirc;metros adicionais.
 
-Processa os parâmetros para a inicialização verificando se foram passados pela URL ou não.
+Processa os par&acirc;metros para a inicializa&ccedil;&atilde;o verificando se foram passados pela URL ou n&atilde;o.
 */
 if (!isset($mapext))
 {$mapext = $map->extent->minx." ".$map->extent->miny." ".$map->extent->maxx." ".$map->extent->maxy;}
@@ -414,9 +414,9 @@ if ((isset($mapext)) && ($mapext != ""))
 	{$ext->setextent($newext[0], $newext[1], $newext[2], $newext[3]);}
 }
 /*
-Configura os endereços corretos no mapfile.
+Configura os endere&ccedil;os corretos no mapfile.
 
-Altera as propriedades imagepath e imageurl corrigindo os caminhos padrão conforme o diretório criado para armazenar o mapa de trabalho.
+Altera as propriedades imagepath e imageurl corrigindo os caminhos padr&atilde;o conforme o diretório criado para armazenar o mapa de trabalho.
 */
 
 $w = $mapn->web;
@@ -465,7 +465,7 @@ if ($interface != "mashup")
 /*
 Adapta os dados de cada layer.
 
-Faz alterações em cada layer caso sejam necessárias.
+Faz altera&ccedil;&otilde;es em cada layer caso sejam necess&aacute;rias.
 */
 function adaptaLayers(){
 	global $tmpfname;
@@ -524,7 +524,7 @@ function abreInterface(){
 	}	
 }
 /*
-Desliga os temas definidos na variável $desligar
+Desliga os temas definidos na vari&aacute;vel $desligar
 */
 function desligaTemasIniciais()
 {
@@ -553,7 +553,7 @@ function desligaTemasIniciais()
 	erroCriacao();
 }
 /*
-Liga os temas definidos na variável $layers
+Liga os temas definidos na vari&aacute;vel $layers
 */
 function ligaTemas()
 {
@@ -585,7 +585,7 @@ function ligaTemas()
 	erroCriacao();
 }
 /*
-Inclui os temas definidos na variável $temasa
+Inclui os temas definidos na vari&aacute;vel $temasa
 */
 function incluiTemasIniciais()
 {
@@ -641,7 +641,7 @@ function incluiTemasIniciais()
 						$layern->setmetadata("NOMEORIGINAL",$layern->name);
 						autoClasses($layern,$mapn);
 						//
-						//necessário para não alterar a extensão do mapa por esse parâmetro
+						//necess&aacute;rio para n&atilde;o alterar a extens&atilde;o do mapa por esse par&acirc;metro
 						//
 						$layern->setmetadata("aplicaextensao","");
 						//cria e aplica sld se for wms e existirem classes
@@ -682,7 +682,7 @@ function incluiTemasIniciais()
 	erroCriacao();
 }
 /*
-Cria os arquivos vazios index.htm e index.html nos diretórios temporários
+Cria os arquivos vazios index.htm e index.html nos diretórios tempor&aacute;rios
 */
 function criaIndex()
 {
@@ -704,7 +704,7 @@ function criaIndex()
 	}
 	if (!file_exists($dir_tmp."/index.htm"))
 	{
-		echo "Erro. Não foi possível gravar no diretório temporário";
+		echo "Erro. N&atilde;o foi poss&iacute;vel gravar no diretório tempor&aacute;rio";
 		exit;
 	}
 }
@@ -895,7 +895,7 @@ function inserePontosUrl()
 /*
 Insere um tema do tipo linear
 
-As linhas devem ter os pontos separados por espaços e cada linha separada por vírgula
+As linhas devem ter os pontos separados por espa&ccedil;os e cada linha separada por v&iacute;rgula
 
 */
 function insereLinhasUrl()
@@ -985,7 +985,7 @@ function insereLinhasUrl()
 /*
 Insere um tema poligonal.
 
-Os polígonos devem ter os pontos separados por espaços e cada polígono separado por vírgula
+Os pol&iacute;gonos devem ter os pontos separados por espa&ccedil;os e cada pol&iacute;gono separado por v&iacute;rgula
 */
 function inserePoligonosUrl()
 {

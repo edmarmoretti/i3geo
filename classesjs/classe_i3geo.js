@@ -22,7 +22,7 @@ GNU conforme publicada pela Free Software Foundation;
 
 Este programa &eacute; distribu&iacute;do na expectativa de que seja &uacute;til,
 por&eacute;m, SEM NENHUMA GARANTIA; nem mesmo a garantia impl&iacute;cita
-de COMERCIABILIDADE OU ADEQUAÇ&Atilde;O A UMA FINALIDADE ESPEC&Iacute;FICA.
+de COMERCIABILIDADE OU ADEQUAÃ&Atilde;O A UMA FINALIDADE ESPEC&Iacute;FICA.
 Consulte a Licen&ccedil;a P&uacute;blica Geral do GNU para mais detalhes.
 Voc&ecirc; deve ter recebido uma c&oacute;pia da Licen&ccedil;a P&uacute;blica Geral do
 GNU junto com este programa; se n&atilde;o, escreva para a
@@ -58,19 +58,17 @@ Ap&oacute;s terminado o processo de inicializa&ccedil;&atilde;o, pode-se executa
 deve ser definida em i3GEO.finaliza, por exemplo i3GEO.finaliza = "funcaoDeAjuste()" ou i3GEO.finaliza = function(){}
 
 Ao inicializar ou atualizar o i3Geo, &eacute; feita uma chamada em AJAX 
-para a obten&ccedil;&atilde;o dos parâmetros necess&aacute;rios ao funcionamento do mapa. Esses parâmetros
+para a obten&ccedil;&atilde;o dos parametros necess&aacute;rios ao funcionamento do mapa. Esses parametros
 s&atilde;o armazenados na vari&aacute;vel i3GEO.parametros
 
 Nessa classe est&atilde;o dispon&iacute;veis vari&aacute;veis internas utilizadas em v&aacute;rias fun&ccedil;&otilde;es, como i3GEO.temaAtivo
 */
-
-
 i3GEO = {
 
 	/*
 	Propriedade: parametros
 
-	Parâmetros obtidos do mapa atual. Os parâmetros s&atilde;o fornecidos pelos programas
+	Parametros obtidos do mapa atual. Os parametros s&atilde;o fornecidos pelos programas
 	PHP de redesenho e cria&ccedil;&atilde;o do mapa e atualizados sempre que o mapa &eacute; alterado.
 
 	Exemplos:
@@ -216,7 +214,7 @@ i3GEO = {
 	
 	Largura e altura do navegador ap&oacute;s a inicializa&ccedil;&atilde;o do mapa
 	
-	&Eacute; utilizado como um parâmetro para verificar se o mapa foi ou n&atilde;o redimensionado pelo usu&aacute;rio de forma consistente
+	&Eacute; utilizado como um parÃ¢metro para verificar se o mapa foi ou n&atilde;o redimensionado pelo usu&aacute;rio de forma consistente
 	
 	Type:
 	{array}
@@ -243,7 +241,7 @@ i3GEO = {
 	Essa vari&aacute;vel &eacute; um contador utilizado para indicar quantos processos est&atilde;o ativos e que
 	ir&atilde;o executar o redesenho do mapa. O mapa s&oacute; &eacute; atualizado quando o contador for menor que 1.
 	Esse contador &eacute; utilizado no m&eacute;todo i3GEO.atualiza 
-	O contador &eacute; necess&aacute;rio para evitar chamadas desnecess&aacute;rias à fun&ccedil;&atilde;o de redesenho do mapa.
+	O contador &eacute; necess&aacute;rio para evitar chamadas desnecess&aacute;rias Ã  fun&ccedil;&atilde;o de redesenho do mapa.
 
 	Tipo:
 	{string}
@@ -345,7 +343,7 @@ i3GEO = {
 						{i3GEO.arvoreDeTemas.OPCOESADICIONAIS.navegacaoDir = true;}
 						//
 						//calcula (opcional) o tamanho correto da tabela onde fica o mapa
-						//se n&atilde;o for feito esse c&aacute;lculo, o mapa fica ajustado à esquerda
+						//se n&atilde;o for feito esse c&aacute;lculo, o mapa fica ajustado Ã  esquerda
 						//
 						temp = 0;
 						if ($i("contemFerramentas")){temp = temp + parseInt($i("contemFerramentas").style.width,10);}
@@ -435,7 +433,7 @@ i3GEO = {
 	/*
 	Function: atualiza
 
-	Atualiza o mapa atual, altera a imagem do mapa os gadgets ativos e os parâmetros e
+	Atualiza o mapa atual, altera a imagem do mapa os gadgets ativos e os parÃ¢metros e
 	verifica a integridade do mapa em uso (arquivo mapfile)
 
 	O processo executa tamb&eacute;m a fun&ccedil;&atilde;o de atualiza&ccedil;&atilde;o espec&iacute;fica da interface atual em uso, veja
@@ -451,7 +449,7 @@ i3GEO = {
 
 	Parametro:
 
-	retorno {String} - string com os parâmetros do novo mapa. Se retorno n&atilde;o
+	retorno {String} - string com os parÃ¢metros do novo mapa. Se retorno n&atilde;o
 	for especificado ou se for vazio, ser&aacute; feita uma chamada em ajax para sua obten&ccedil;&atilde;o. O resultado
 	dessa chamada &eacute; armazenada em i3GEO.parametros
 	*/
@@ -495,8 +493,8 @@ i3GEO = {
 			//corpoMapa.call();
 			return;
 		}
-		//verifica se o parâmetro retorno existe, caso contr&aacute;rio,
-		//faz a chamada ao programa PHP para obter os parâmetros
+		//verifica se o parÃ¢metro retorno existe, caso contr&aacute;rio,
+		//faz a chamada ao programa PHP para obter os parÃ¢metros
 		try{
 			if (retorno.data === "erro"){
 				alert("Erro no mapa. Sera feita uma tentativa de recuperacao.");
@@ -539,7 +537,7 @@ i3GEO = {
 			if(retorno.data.variaveis.erro !== "")
 			{alert(retorno.data.variaveis.erro);}
 			//
-			//o try aqui &eacute; necess&aacute;rio pois na interface googlemaps os parâmetros retorno.data.variaveis n&atilde;o s&atilde;o gerados completamente
+			//o try aqui &eacute; necess&aacute;rio pois na interface googlemaps os parÃ¢metros retorno.data.variaveis n&atilde;o s&atilde;o gerados completamente
 			//
 			try{
 				i3GEO.arvoreDeCamadas.atualiza(retorno.data.temas);

@@ -1,7 +1,7 @@
 /*
 Title: ogcws.js
 
-Funções que controlam os parâmetros do ogcws.map utilizado no gerador de WMS/WFS
+Fun&ccedil;&otilde;es que controlam os par&acirc;metros do ogcws.map utilizado no gerador de WMS/WFS
 
 Licenca:
 
@@ -9,20 +9,20 @@ GPL2
 
 i3Geo Interface Integrada de Ferramentas de Geoprocessamento para Internet
 
-Direitos Autorais Reservados (c) 2006 Ministério do Meio Ambiente Brasil
+Direitos Autorais Reservados (c) 2006 Minist&eacute;rio do Meio Ambiente Brasil
 Desenvolvedor: Edmar Moretti edmar.moretti@mma.gov.br
 
-Este programa é software livre; você pode redistribuí-lo
-e/ou modificá-lo sob os termos da Licença Pública Geral
+Este programa &eacute; software livre; voc&ecirc; pode redistribu&iacute;-lo
+e/ou modific&aacute;-lo sob os termos da Licen&ccedil;a P&uacute;blica Geral
 GNU conforme publicada pela Free Software Foundation;
 
-Este programa é distribuído na expectativa de que seja útil,
-porém, SEM NENHUMA GARANTIA; nem mesmo a garantia implícita
-de COMERCIABILIDADE OU ADEQUAÇÃO A UMA FINALIDADE ESPECÍFICA.
-Consulte a Licença Pública Geral do GNU para mais detalhes.
-Você deve ter recebido uma cópia da Licença Pública Geral do
-GNU junto com este programa; se não, escreva para a
-Free Software Foundation, Inc., no endereço
+Este programa &eacute; distribu&iacute;do na expectativa de que seja &uacute;til,
+por&eacute;m, SEM NENHUMA GARANTIA; nem mesmo a garantia impl&iacute;cita
+de COMERCIABILIDADE OU ADEQUA&Ccedil;&Atilde;O A UMA FINALIDADE ESPEC&Iacute;FICA.
+Consulte a Licen&ccedil;a P&uacute;blica Geral do GNU para mais detalhes.
+Voc&ecirc; deve ter recebido uma cópia da Licen&ccedil;a P&uacute;blica Geral do
+GNU junto com este programa; se n&atilde;o, escreva para a
+Free Software Foundation, Inc., no endere&ccedil;o
 59 Temple Street, Suite 330, Boston, MA 02111-1307 USA.
 
 Arquivo:
@@ -60,7 +60,7 @@ function initMenu()
 		},
 		{
 			mensagem: "ows_accessconstraints",
-			cabeca: "Restrições",
+			cabeca: "Restri&ccedil;&otilde;es",
 			variavel: "ows_accessconstraints"
 		},
 		{
@@ -70,7 +70,7 @@ function initMenu()
 		},
 		{
 			mensagem: "ows_contactorganization",
-			cabeca: "Organização",
+			cabeca: "Organiza&ccedil;&atilde;o",
 			variavel: "ows_contactorganization"
 		},
 		{
@@ -80,12 +80,12 @@ function initMenu()
 		},
 		{
 			mensagem: "ows_addresstype",
-			cabeca: "Tipo de endereço",
+			cabeca: "Tipo de endere&ccedil;o",
 			variavel: "ows_addresstype"
 		},
 		{
 			mensagem: "ows_address",
-			cabeca: "Endereço",
+			cabeca: "Endere&ccedil;o",
 			variavel: "ows_address"
 		},
 		{
@@ -105,7 +105,7 @@ function initMenu()
 		},
 		{
 			mensagem: "ows_country",
-			cabeca: "País",
+			cabeca: "Pa&iacute;s",
 			variavel: "ows_country"
 		},
 		{
@@ -115,12 +115,12 @@ function initMenu()
 		},
 		{
 			mensagem: "ows_name",
-			cabeca: "Nome do serviço",
+			cabeca: "Nome do servi&ccedil;o",
 			variavel: "ows_name"
 		}
 	]};
 	core_carregando("ativa");
-	core_pegaDados("buscando parâmetros...","../php/ogcws.php?funcao=pegaParametrosConfigura","pegaParametros");
+	core_pegaDados("buscando par&acirc;metros...","../php/ogcws.php?funcao=pegaParametrosConfigura","pegaParametros");
 }
 function pegaParametros(retorno)
 {
@@ -135,7 +135,7 @@ function pegaParametros(retorno)
 		ins += "</fieldset><br>";
 	}
 	$i("tabela").innerHTML += ins;
-	retorno.$postgis_mapa = "Esta variável só pode ser definida editando-se diretamente o arquivo ms_configura.php";
+	retorno.$postgis_mapa = "Esta vari&aacute;vel só pode ser definida editando-se diretamente o arquivo ms_configura.php";
 	for (i=0;i<$parametros.simples.length;i++)
 	{
 		if($i($parametros.simples[i].variavel))
@@ -146,7 +146,7 @@ function pegaParametros(retorno)
 /*
 Function: salva
 
-Aplica as alterações feitas em uma variável
+Aplica as altera&ccedil;&otilde;es feitas em uma vari&aacute;vel
 
 <SALVACONFIGURA>
 */

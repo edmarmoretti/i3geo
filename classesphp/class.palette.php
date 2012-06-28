@@ -2,9 +2,9 @@
 /*
 Title: class.palette.php
 
-About: Licença
+About: Licen&ccedil;a
 
-Vladimir Guzmán
+Vladimir Guzm&aacute;n
 http://www.maintask.com
 -----------------------
 Este código es de uso absolutamente libre.
@@ -23,9 +23,9 @@ i3geo/classesphp/class.palette.php
 /*
 Classe: palette
 
-Gera um degradê de cores ou lista as peletes existentes.
+Gera um degrad&ecirc; de cores ou lista as peletes existentes.
 
-As cores pré-definidas são armazenadas em i3geo/symbols/colourramp
+As cores pr&eacute;-definidas s&atilde;o armazenadas em i3geo/symbols/colourramp
 
 Os arquivos .cores correspondem a um array serializado contendo as cores tipo $cor[0] = array("r"=>,"g"=>,"b"=>)
 
@@ -54,9 +54,9 @@ Cria o objeto palette
 
 parameters:
 
-$colors - Array com as cores de início e fim de palette.
+$colors - Array com as cores de in&iacute;cio e fim de palette.
 
-$numSteps - número de cores finais
+$numSteps - n&uacute;mero de cores finais
 */
   public function __construct($colors=NULL,$numSteps=NULL){
     if($colors!=NULL && is_array($colors))

@@ -4,7 +4,7 @@
 /*
 Title: Metar
 
-Busca as estações meteorológicas da rede METAR na extensão geográfica do mapa atual.
+Busca as esta&ccedil;&otilde;es meteorol&oacute;gicas da rede METAR na extensão geogr&aacute;fica do mapa atual.
 
 Veja:
 
@@ -24,20 +24,20 @@ GPL2
 
 i3Geo Interface Integrada de Ferramentas de Geoprocessamento para Internet
 
-Direitos Autorais Reservados (c) 2006 Ministério do Meio Ambiente Brasil
+Direitos Autorais Reservados (c) 2006 Minist&eacute;rio do Meio Ambiente Brasil
 Desenvolvedor: Edmar Moretti edmar.moretti@mma.gov.br
 
-Este programa é software livre; você pode redistribuí-lo
-e/ou modificá-lo sob os termos da Licença Pública Geral
+Este programa &eacute; software livre; voc&ecirc; pode redistribu&iacute;-lo
+e/ou modific&aacute;-lo sob os termos da Licen&ccedil;a P&uacute;blica Geral
 GNU conforme publicada pela Free Software Foundation;
 
-Este programa é distribuído na expectativa de que seja útil,
-porém, SEM NENHUMA GARANTIA; nem mesmo a garantia implícita
-de COMERCIABILIDADE OU ADEQUAÇÃO A UMA FINALIDADE ESPECÍFICA.
-Consulte a Licença Pública Geral do GNU para mais detalhes.
-Você deve ter recebido uma cópia da Licença Pública Geral do
+Este programa &eacute; distribu&iacute;do na expectativa de que seja &uacute;til,
+por&eacute;m, SEM NENHUMA GARANTIA; nem mesmo a garantia impl&iacute;cita
+de COMERCIABILIDADE OU ADEQUAÇÃO A UMA FINALIDADE ESPEC&Iacute;FICA.
+Consulte a Licen&ccedil;a P&uacute;blica Geral do GNU para mais detalhes.
+Voc&ecirc; deve ter recebido uma c&oacute;pia da Licen&ccedil;a P&uacute;blica Geral do
 GNU junto com este programa; se não, escreva para a
-Free Software Foundation, Inc., no endereço
+Free Software Foundation, Inc., no endere&ccedil;o
 59 Temple Street, Suite 330, Boston, MA 02111-1307 USA.
 */
 if(typeof(i3GEOF) === 'undefined'){
@@ -51,17 +51,17 @@ i3GEOF.metar = {
 	/*
 	Variavel: aguarde
 	
-	Estilo do objeto DOM com a imagem de aguarde existente no cabeçalho da janela.
+	Estilo do objeto DOM com a imagem de aguarde existente no cabe&ccedil;alho da janela.
 	*/
 	aguarde: "",
 	/*
 	Function: inicia
 	
-	Inicia a ferramenta. É chamado por criaJanelaFlutuante
+	Inicia a ferramenta. &Eacute; chamado por criaJanelaFlutuante
 	
 	Parametro:
 	
-	iddiv {String} - id do div que receberá o conteudo HTML da ferramenta
+	iddiv {String} - id do div que receber&aacute; o conteudo HTML da ferramenta
 	*/
 	inicia: function(iddiv){
 		try{
@@ -84,11 +84,11 @@ i3GEOF.metar = {
 	/*
 	Function: html
 	
-	Gera o código html para apresentação das opções da ferramenta
+	Gera o c&oacute;digo html para apresenta&ccedil;ão das op&ccedil;&otilde;es da ferramenta
 	
 	Retorno:
 	
-	String com o código html
+	String com o c&oacute;digo html
 	*/
 	html:function(){
 		var ins = '';
@@ -102,7 +102,7 @@ i3GEOF.metar = {
 	*/	
 	criaJanelaFlutuante: function(){
 		var minimiza,cabecalho,janela,divid,temp,titulo;
-		//funcao que sera executada ao ser clicado no cabeçalho da janela
+		//funcao que sera executada ao ser clicado no cabe&ccedil;alho da janela
 		cabecalho = function(){
 			i3GEOF.metar.ativaFoco();
 		};
@@ -155,7 +155,7 @@ i3GEOF.metar = {
 	/*
 	Function: lista
 	
-	Lista as estações consultando o webservice http://ws.geonames.org/weatherJSON
+	Lista as esta&ccedil;&otilde;es consultando o webservice http://ws.geonames.org/weatherJSON
 	*/
 	lista: function(){
 		$i("i3GEOmetarLista").innerHTML = "";
@@ -166,7 +166,7 @@ i3GEOF.metar = {
 	  		success:function(o){
 	  			var ins,dados,ndados,i,temp,temp1;
 				i3GEOF.metar.aguarde.visibility = "hidden";
-				ins = "<p class=paragrafo >Navegue no mapa para atualizar a lista de resultados (são mostradas apenas as 10 primeiras estações encontradas)</p>";
+				ins = "<p class=paragrafo >Navegue no mapa para atualizar a lista de resultados (são mostradas apenas as 10 primeiras esta&ccedil;&otilde;es encontradas)</p>";
 				try{
 					dados = YAHOO.lang.JSON.parse(o.responseText)[0].weatherObservations;
 					ndados = dados.length;
@@ -174,13 +174,13 @@ i3GEOF.metar = {
 					for(i=0;i<ndados;i++){
 						temp = "i3GEOF.metar.mostraxy("+dados[i].lng+","+dados[i].lat+")";
 						temp1 = "i3GEO.navega.zoomponto(i3GEO.configura.locaplic,i3GEO.configura.sid,"+dados[i].lng+","+dados[i].lat+")";
-						ins += 	"<tr><td style=background:yellow ><b>Estação</b></td><td style=background:yellow ><b>" + dados[i].stationName + "</b></td></tr>" +
+						ins += 	"<tr><td style=background:yellow ><b>Esta&ccedil;ão</b></td><td style=background:yellow ><b>" + dados[i].stationName + "</b></td></tr>" +
 								"<tr><td></td><td><a href='#' onclick='"+temp1+"' onmouseover='"+temp+"' onmouseout='i3GEO.util.escondeBox()' >long: " + dados[i].lng + ", lat: "+dados[i].lat+"</a></td></tr>" +
 								"<tr><td>temperatura</td><td>" + dados[i].temperature + " C</td></tr>" +
-								"<tr><td>condição</td><td>" + dados[i].weatherCondition + "</td></tr>" +
-								"<tr><td>observação</td><td>" + dados[i].observation + "</td></tr>" +
+								"<tr><td>condi&ccedil;ão</td><td>" + dados[i].weatherCondition + "</td></tr>" +
+								"<tr><td>observa&ccedil;ão</td><td>" + dados[i].observation + "</td></tr>" +
 								"<tr><td>nuvens</td><td>" + dados[i].clouds + "</td></tr>" +
-								"<tr><td>direção do vento</td><td>" + dados[i].windDirection + "</td></tr>" +
+								"<tr><td>dire&ccedil;ão do vento</td><td>" + dados[i].windDirection + "</td></tr>" +
 								"<tr><td>ponto de orvalho</td><td>" + dados[i].dewPoint + " C</td></tr>" +
 								"<tr><td>velocidade do vento</td><td>" + dados[i].windSpeed + " mph</td></tr>" +
 								"<tr><td>humidade</td><td>" + dados[i].humidity + " %</td></tr>" +
@@ -193,7 +193,7 @@ i3GEOF.metar = {
 				catch(e){$i("i3GEOmetarLista").innerHTML = ins + "Ocorreu um erro ou nada foi encontrado";}
 	  		},
 	  		failure: function(o){
-	 			$i("i3GEOmetarLista").innerHTML = "Erro. A operação demorou muito.";
+	 			$i("i3GEOmetarLista").innerHTML = "Erro. A opera&ccedil;ão demorou muito.";
 	 			i3GEOF.metar.aguarde.visibility = "hidden";
 				return; 		  		
 	  		},
@@ -209,7 +209,7 @@ i3GEOF.metar = {
 	/*
 	Function: mostraxy
 	
-	Indica no mapa a localização de uma estação
+	Indica no mapa a localiza&ccedil;ão de uma esta&ccedil;ão
 	
 	Parametros:
 	

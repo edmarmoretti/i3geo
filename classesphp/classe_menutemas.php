@@ -2,9 +2,9 @@
 /*
 Title: classe_menutemas.php
 
-Manipulação dos temas do arquivo menutemas.xml ou sistema de administração
+Manipula&ccedil;&atilde;o dos temas do arquivo menutemas.xml ou sistema de administra&ccedil;&atilde;o
 
-Quando o i3Geo está configurado para acessar o sistema de administração, os métodos desta classe
+Quando o i3Geo est&aacute; configurado para acessar o sistema de administra&ccedil;&atilde;o, os m&eacute;todos desta classe
 passam a utilizar a classe i3geo/admin/php/classe_arvore.php
 
 Lista temas, grupos,etc.
@@ -16,20 +16,20 @@ GPL2
 
 i3Geo Interface Integrada de Ferramentas de Geoprocessamento para Internet
 
-Direitos Autorais Reservados (c) 2006 Ministério do Meio Ambiente Brasil
+Direitos Autorais Reservados (c) 2006 Minist&eacute;rio do Meio Ambiente Brasil
 Desenvolvedor: Edmar Moretti edmar.moretti@mma.gov.br
 
-Este programa é software livre; você pode redistribuí-lo
-e/ou modificá-lo sob os termos da Licença Pública Geral
+Este programa &eacute; software livre; voc&ecirc; pode redistribu&iacute;-lo
+e/ou modific&aacute;-lo sob os termos da Licen&ccedil;a P&uacute;blica Geral
 GNU conforme publicada pela Free Software Foundation;
 
-Este programa é distribuído na expectativa de que seja útil,
-porém, SEM NENHUMA GARANTIA; nem mesmo a garantia implícita
-de COMERCIABILIDADE OU ADEQUAÇÃO A UMA FINALIDADE ESPECÍFICA.
-Consulte a Licença Pública Geral do GNU para mais detalhes.
-Você deve ter recebido uma cópia da Licença Pública Geral do
-GNU junto com este programa; se não, escreva para a
-Free Software Foundation, Inc., no endereço
+Este programa &eacute; distribu&iacute;do na expectativa de que seja &uacute;til,
+por&eacute;m, SEM NENHUMA GARANTIA; nem mesmo a garantia impl&iacute;cita
+de COMERCIABILIDADE OU ADEQUA&Ccedil;&Atilde;O A UMA FINALIDADE ESPEC&Iacute;FICA.
+Consulte a Licen&ccedil;a P&uacute;blica Geral do GNU para mais detalhes.
+Voc&ecirc; deve ter recebido uma cópia da Licen&ccedil;a P&uacute;blica Geral do
+GNU junto com este programa; se n&atilde;o, escreva para a
+Free Software Foundation, Inc., no endere&ccedil;o
 59 Temple Street, Suite 330, Boston, MA 02111-1307 USA.
 
 Arquivo:
@@ -49,13 +49,13 @@ Cria um objeto Menutemas
 
 parameters:
 
-$map_file - (opcional) endereço do mapfile no servidor
+$map_file - (opcional) endere&ccedil;o do mapfile no servidor
 
-$perfil - (opcional) lista dos perfis, separados por espaços, que devem restringir a lista de menus, grupos, temas e etc.
+$perfil - (opcional) lista dos perfis, separados por espa&ccedil;os, que devem restringir a lista de menus, grupos, temas e etc.
 
-$locaplic - (opcional) endereço físico do i3geo
+$locaplic - (opcional) endere&ccedil;o f&iacute;sico do i3geo
 
-$urli3geo - (opcional) url onde está o i3geo (p.ex. http://localhost/i3geo
+$urli3geo - (opcional) url onde est&aacute; o i3geo (p.ex. http://localhost/i3geo
 
 $editores - (opcional) array com os editores cadastrados no ms_configura.php
 
@@ -85,9 +85,9 @@ $idioma - (opcional) pt|en|es|it
 			}
 		}
 		//
-		//verifica se o ip atual está cadastrado como um dos editores
-		//editores podem ver as coisas marcadas como não publicado
-		//no sistema de administração
+		//verifica se o ip atual est&aacute; cadastrado como um dos editores
+		//editores podem ver as coisas marcadas como n&atilde;o publicado
+		//no sistema de administra&ccedil;&atilde;o
 		//
 		$this->editor = false;
 		if($editores != "")
@@ -97,9 +97,9 @@ $idioma - (opcional) pt|en|es|it
 /*
 function: pegaListaDeMenus
 
-Pega a lista de menus do banco de dados de administração.
+Pega a lista de menus do banco de dados de administra&ccedil;&atilde;o.
 
-O perfil do usuário é armazenado na seção na inicialização do I3Geo.
+O perfil do usu&aacute;rio &eacute; armazenado na se&ccedil;&atilde;o na inicializa&ccedil;&atilde;o do I3Geo.
 
 Parametros:
 
@@ -109,7 +109,7 @@ array
 	function pegaListaDeMenus()
 	{
 		$resultado = array();
-		//necessário por conta da inclusao do conexao.php
+		//necess&aacute;rio por conta da inclusao do conexao.php
 		$locaplic = $this->locaplic;
 		if(!isset($this->locaplic))
 		{return "locaplic nao foi definido";}
@@ -124,15 +124,15 @@ function: pegaListaDeGrupos
 
 Pega a lista de grupos, subgrupos e sistemas adicionais.
 
-O perfil do usuário é armazenado na seção na inicialização do I3Geo.
+O perfil do usu&aacute;rio &eacute; armazenado na se&ccedil;&atilde;o na inicializa&ccedil;&atilde;o do I3Geo.
 
 Parametros:
 
 idmenu - id que identifica o menu
 
-listasistemas - sim|nao pega a lista de sistemas para montar a árvore de sistemas
+listasistemas - sim|nao pega a lista de sistemas para montar a &aacute;rvore de sistemas
 
-listasgrupos - sim|nao lista também os subgrupos associados
+listasgrupos - sim|nao lista tamb&eacute;m os subgrupos associados
 
 return:
 
@@ -163,7 +163,7 @@ function: pegaListaDeSubGrupos
 
 Pega a lista de sub-grupos.
 
-O perfil do usuário é armazenado na seção na inicialização do I3Geo.
+O perfil do usu&aacute;rio &eacute; armazenado na se&ccedil;&atilde;o na inicializa&ccedil;&atilde;o do I3Geo.
 
 Parametros:
 
@@ -221,18 +221,18 @@ function: pegaListaDeMapas
 
 Lista de mapas cadastrados
 
-O perfil do usuário é armazenado na seção na inicialização do I3Geo.
+O perfil do usu&aacute;rio &eacute; armazenado na se&ccedil;&atilde;o na inicializa&ccedil;&atilde;o do I3Geo.
 
 Parametros:
 
-locmapas - endereço do arquivo xml.
+locmapas - endere&ccedil;o do arquivo xml.
 
 return:
 array
 */
 	function pegaListaDeMapas($locmapas)
 	{
-		//necessário por conta da inclusao do conexao.php
+		//necess&aacute;rio por conta da inclusao do conexao.php
 		$locaplic = $this->locaplic;
 		$perfilgeral = implode(" ",$this->perfil);
 		if($locmapas != "")
@@ -267,7 +267,7 @@ array
 /*
 function: pegaSistemas
 
-Retorna a lista de sistemas especiais de adição de temas.
+Retorna a lista de sistemas especiais de adi&ccedil;&atilde;o de temas.
 
 parameters:
 
@@ -313,7 +313,7 @@ Array
 /*
 function: pegaSistemasI
 
-Retorna a lista de sistemas especiais de identificação de temas.
+Retorna a lista de sistemas especiais de identifica&ccedil;&atilde;o de temas.
 
 parameters:
 
@@ -352,7 +352,7 @@ Procura um tema no menu de temas considerando apenas os subgrupos.
 
 parameters:
 
-$procurar - String que será procurada.
+$procurar - String que ser&aacute; procurada.
 */
 	function procurartemas($procurar)
 	{
@@ -363,7 +363,7 @@ $procurar - String que será procurada.
 		{
 			foreach($this->pegaListaDeMenus() as $menu)
 			{
-				if(!isset($menu["url"])){$menu["url"] = "";} //para efeitos de compatibilidade entre versões do i3geo
+				if(!isset($menu["url"])){$menu["url"] = "";} //para efeitos de compatibilidade entre vers&otilde;es do i3geo
 				$ondexml = $menu["arquivo"];
 				if($menu["url"] != ""){$ondexml = $menu["url"];}
 				$this->xml[] = simplexml_load_file($ondexml);
@@ -478,7 +478,7 @@ Procura um tema no menu de temas.
 
 parameters:
 
-$procurar - String que será procurada.
+$procurar - String que ser&aacute; procurada.
 */
 	function procurartemas2($procurar)
 	{
@@ -491,11 +491,11 @@ $procurar - String que será procurada.
 /*
 function: procurartemasestrela
 
-Procura temas com determinado número de estrelas
+Procura temas com determinado n&uacute;mero de estrelas
 
 parameters:
 
-$nivel - número de estrelas
+$nivel - n&uacute;mero de estrelas
 
 $fatorestrela - valor para normalizar o total de acessos com o valor da estrela
 */
@@ -514,17 +514,17 @@ Lista os tags registrados nos menus de temas.
 
 Parametros:
 
-rss - (opcional) endereço de um RSS para cruzar com as tags.
+rss - (opcional) endere&ccedil;o de um RSS para cruzar com as tags.
 
-nrss - (opcional) número de registros no rss que serão considerados
+nrss - (opcional) n&uacute;mero de registros no rss que ser&atilde;o considerados
 
 */
 	function listaTags($rss="",$nrss="")
 	{
 		include_once($this->locaplic."/admin/php/xml.php");
 		$tipo = "";
-		//carrega os títulos e links do rss especificado
-		$noticiasRSS = array(); //guarda as notícias originais do RRS
+		//carrega os t&iacute;tulos e links do rss especificado
+		$noticiasRSS = array(); //guarda as not&iacute;cias originais do RRS
 		if($rss != "")
 		{
 			$conta = 0;
@@ -647,18 +647,18 @@ nrss - (opcional) número de registros no rss que serão considerados
 	
 	function removeAcentos($s)
 	{
-		$s = ereg_replace("[áàâã]","a",$s);
-		$s = ereg_replace("[ÁÀÂÃ]","A",$s);
-		$s = ereg_replace("[éèê]","e",$s);
-		$s = ereg_replace("[í]","i",$s);
-		$s = ereg_replace("[Í]","I",$s);
-		$s = ereg_replace("[ÉÈÊ]","E",$s);
-		$s = ereg_replace("[óòôõ]","o",$s);
-		$s = ereg_replace("[ÓÒÔÕ]","O",$s);
-		$s = ereg_replace("[úùû]","u",$s);
-		$s = ereg_replace("[ÚÙÛ]","U",$s);
-		$s = str_replace("ç","c",$s);
-		$s = str_replace("Ç","C",$s);
+		$s = ereg_replace("[&aacute;à&acirc;&atilde;]","a",$s);
+		$s = ereg_replace("[&Aacute;À&Acirc;&Atilde;]","A",$s);
+		$s = ereg_replace("[&eacute;è&ecirc;]","e",$s);
+		$s = ereg_replace("[&iacute;]","i",$s);
+		$s = ereg_replace("[&Iacute;]","I",$s);
+		$s = ereg_replace("[&Eacute;È&Ecirc;]","E",$s);
+		$s = ereg_replace("[óò&ocirc;&otilde;]","o",$s);
+		$s = ereg_replace("[ÓÒ&Ocirc;&Otilde;]","O",$s);
+		$s = ereg_replace("[&uacute;ùû]","u",$s);
+		$s = ereg_replace("[&Uacute;ÙÛ]","U",$s);
+		$s = str_replace("&ccedil;","c",$s);
+		$s = str_replace("&Ccedil;","C",$s);
 		//$str = htmlentities($s);
 		$str = preg_replace("/(&)([a-z])([a-z]+;)/i", '$2', $s);
 		$str = preg_replace("/[^A-Z0-9]/i", ' ', $str);
@@ -668,7 +668,7 @@ nrss - (opcional) número de registros no rss que serão considerados
 	/*
 	Function: array_in_array
 
-	Procura ocorrências de um array em outro array
+	Procura ocorr&ecirc;ncias de um array em outro array
 	*/
 	function array_in_array($needle, $haystack)
 	{

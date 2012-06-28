@@ -1,58 +1,62 @@
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
 <html>
 <head>
-    <meta http-equiv="content-type" content="text/html; charset=ISO-8859-1">
-    <title>Web Services</title>
-    <style type="text/css">
-        /*margin and padding on body element
+<meta http-equiv="content-type" content="text/html; charset=ISO-8859-1">
+<title>Web Services</title>
+<style type="text/css">
+/*margin and padding on body element
           can introduce errors in determining
           element position and are not recommended;
           we turn them off as a foundation for YUI
           CSS treatments. */
-        body {
-            margin:0;
-        	padding:0;
-        }
-	</style>
-	<script type="text/javascript" src="../js/core.js"></script>
-	<script type="text/javascript" src="../js/webservices.js"></script>
-	<link rel="stylesheet" type="text/css" href="admin.css">
+body {
+	margin: 0;
+	padding: 0;
+}
+</style>
+<script type="text/javascript" src="../js/core.js"></script>
+<script type="text/javascript" src="../js/webservices.js"></script>
+<link rel="stylesheet" type="text/css" href="admin.css">
 </head>
 <body class=" yui-skin-sam fundoPonto">
-<center>
-<div class="bordaSuperior"  >&nbsp;</div>
-<div class="mascaraPrincipal" id="divGeral">
-	<div id=cabecalhoPrincipal ></div>
-	<h1>Administração do i3geo - web Services </h1>
+	<center>
+		<div class="bordaSuperior">&nbsp;</div>
+		<div class="mascaraPrincipal" id="divGeral">
+			<div id=cabecalhoPrincipal></div>
+			<h1>Administra&ccedil;&atilde;o do i3geo - web Services</h1>
 
-	<div id="ajuda">
-		<div class="hd">Ajuda</div>
-		<div class="bd" style="height:144px;overflow:auto">
-			Este programa permite editar o cadastro de Web Services.<br><br>
-			O i3Geo acessa Web Services e serviços para obtenção de dados nos padrões WMS, RSS, GEORSS e endereços de sistemas de download de dados.
-			Todos os endereços são cadastrados e organizados por tipos. A lista de WMS e GEORSS é utilizada na guia de adição de temas já os 
-			Web Services convencionais, são utilizados no aplicativo WSCLIENTE. Pode-se ainda cadastrar endereços para
-			sítios na internet que possibilitam o download de dados, esse cadastro é utilizado no aplicativo DATADOWNLOAD.<br><br>
-			A lista de Web Services é baseada no banco admin.db.<br><br>
-			A lista de IPs dos usuários que podem administrar o i3geo é definida no
-			arquivo i3geo/ms_configura.php	
+			<div id="ajuda">
+				<div class="hd">Ajuda</div>
+				<div class="bd" style="height: 144px; overflow: auto">
+					Este programa permite editar o cadastro de Web Services.<br>
+					<br> O i3Geo acessa Web Services e servi&ccedil;os para obten&ccedil;&atilde;o de
+					dados nos padr&otilde;es WMS, RSS, GEORSS e endere&ccedil;os de sistemas de
+					download de dados. Todos os endere&ccedil;os s&atilde;o cadastrados e organizados
+					por tipos. A lista de WMS e GEORSS &eacute; utilizada na guia de adi&ccedil;&atilde;o de
+					temas j&aacute; os Web Services convencionais, s&atilde;o utilizados no
+					aplicativo WSCLIENTE. Pode-se ainda cadastrar endere&ccedil;os para s&iacute;tios
+					na internet que possibilitam o download de dados, esse cadastro &eacute;
+					utilizado no aplicativo DATADOWNLOAD.<br>
+					<br> A lista de Web Services &eacute; baseada no banco admin.db.<br>
+					<br> A lista de IPs dos usu&aacute;rios que podem administrar o i3geo
+					&eacute; definida no arquivo i3geo/ms_configura.php
+				</div>
+				<div class="ft"></div>
+			</div>
+			<input onclick="adicionaLinha()" type=button id=adiciona
+				value="Adicionar um novo endere&ccedil;o" /> <br>
+			<p>Temas existentes:</p>
+			<div id="tabela" style="left: -5px;"></div>
+			<div id=logajax style="display: block"></div>
 		</div>
-		<div class="ft"></div>
-	</div>
-	<input onclick="adicionaLinha()" type=button id=adiciona value="Adicionar um novo endereço" />
-	<br>
-	<p>Temas existentes:</p>
-	<div id="tabela" style="left:-5px;"></div>
-	<div id=logajax style="display:block" ></div>
-</div>
-</center>
-<script>
+	</center>
+	<script>
 /*
 Title: Web Services
 
-HTML da interface de administração do cadastro de Web Services
+HTML da interface de administra&ccedil;&atilde;o do cadastro de Web Services
 
-Veja também:
+Veja tamb&eacute;m:
 
 <core.js>
 
@@ -64,20 +68,20 @@ GPL2
 
 i3Geo Interface Integrada de Ferramentas de Geoprocessamento para Internet
 
-Direitos Autorais Reservados (c) 2006 Ministério do Meio Ambiente Brasil
+Direitos Autorais Reservados (c) 2006 Minist&eacute;rio do Meio Ambiente Brasil
 Desenvolvedor: Edmar Moretti edmar.moretti@mma.gov.br
 
-Este programa é software livre; você pode redistribuí-lo
-e/ou modificá-lo sob os termos da Licença Pública Geral
+Este programa &eacute; software livre; voc&ecirc; pode redistribu&iacute;-lo
+e/ou modific&aacute;-lo sob os termos da Licen&ccedil;a P&uacute;blica Geral
 GNU conforme publicada pela Free Software Foundation;
 
-Este programa é distribuído na expectativa de que seja útil,
-porém, SEM NENHUMA GARANTIA; nem mesmo a garantia implícita
-de COMERCIABILIDADE OU ADEQUAÇÃO A UMA FINALIDADE ESPECÍFICA.
-Consulte a Licença Pública Geral do GNU para mais detalhes.
-Você deve ter recebido uma cópia da Licença Pública Geral do
-GNU junto com este programa; se não, escreva para a
-Free Software Foundation, Inc., no endereço
+Este programa &eacute; distribu&iacute;do na expectativa de que seja &uacute;til,
+por&eacute;m, SEM NENHUMA GARANTIA; nem mesmo a garantia impl&iacute;cita
+de COMERCIABILIDADE OU ADEQUA&Ccedil;&Atilde;O A UMA FINALIDADE ESPEC&Iacute;FICA.
+Consulte a Licen&ccedil;a P&uacute;blica Geral do GNU para mais detalhes.
+Voc&ecirc; deve ter recebido uma cópia da Licen&ccedil;a P&uacute;blica Geral do
+GNU junto com este programa; se n&atilde;o, escreva para a
+Free Software Foundation, Inc., no endere&ccedil;o
 59 Temple Street, Suite 330, Boston, MA 02111-1307 USA.
 
 Arquivo:

@@ -14,7 +14,7 @@ foreach(array_keys($_SESSION) as $k)
 }
 $postgis_mapa = $_SESSION["postgis_mapa"];
 //
-//se as extensões já estiverem carregadas no PHP, vc pode comentar essa linha para que o processamento fique mais rápido
+//se as extens&otilde;es j&aacute; estiverem carregadas no PHP, vc pode comentar essa linha para que o processamento fique mais r&aacute;pido
 //
 include_once ("../../classesphp/carrega_ext.php");
 //
@@ -34,7 +34,7 @@ if (array_search( "MapScript", $exts) != TRUE)
 require("../../classesphp/funcoes_gerais.php");
 $nomes = nomeRandomico();
 //
-//substitui a string de conexão com o banco em cada layer se for necessário
+//substitui a string de conexão com o banco em cada layer se for necess&aacute;rio
 //
 $map = ms_newMapObj($map_file);
 $temp = str_replace(".map","xxx.map",$map_file);
@@ -129,7 +129,7 @@ if (($wMapa / $wMapaMax) > ($hMapa / $hMapaMax)){
 	$nH = $hMapaMax;
 	$nW = $wMapa * $nH / $hMapa;
 }
-$pdf->Rect(3, 3, $nW+69, 14, 'D');//Título
+$pdf->Rect(3, 3, $nW+69, 14, 'D');//T&iacute;tulo
 $pdf->SetFont('Arial','B',18);
 $xMsg = 292/2 - $pdf->GetStringWidth($titulo)/2;
 $pdf->Text($xMsg,13,$titulo);
@@ -139,11 +139,11 @@ $pdf->Rect(3, 20, 65, $nH+2, 'D');//Legenda
 $pdf->Rect(70, 20, $nW+2, $nH+2, 'D');//Mapa
 $pdf->Image($pathMapa, 71, 21, $nW, $nH);
 $pdf->SetFont('Arial','',9);
-//$pdf->Text(14,$nH-1,"Projeção Geográficas");
-//$pdf->Text(14,$nH+3,"Sistema de Referência:  SAD69");
+//$pdf->Text(14,$nH-1,"Proje&ccedil;ão Geogr&aacute;ficas");
+//$pdf->Text(14,$nH+3,"Sistema de Refer&ecirc;ncia:  SAD69");
 $pdf->Image("../../imagens/i3geo1.jpg", 23, $nH+5, 25);
 $pdf->SetFont('Arial','',9);
-$textMsg = "Projeção Geográfica - datum SAD-69";
+$textMsg = "Proje&ccedil;ão Geogr&aacute;fica - datum SAD-69";
 $xMsg = 292/2 - $pdf->GetStringWidth($textMsg)/2;
 $pdf->Text($xMsg,$nH+28,$textMsg);
 $wLegendaMax = 63;

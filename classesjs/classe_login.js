@@ -18,7 +18,7 @@ GNU conforme publicada pela Free Software Foundation;
 
 Este programa &eacute; distribu&iacute;do na expectativa de que seja &uacute;til,
 por&eacute;m, SEM NENHUMA GARANTIA; nem mesmo a garantia impl&iacute;cita
-de COMERCIABILIDADE OU ADEQUAÇ&Atilde;O A UMA FINALIDADE ESPEC&Iacute;FICA.
+de COMERCIABILIDADE OU ADEQUA&Ccedil;&Atilde;O A UMA FINALIDADE ESPEC&Iacute;FICA.
 Consulte a Licen&ccedil;a P&uacute;blica Geral do GNU para mais detalhes.
 Voc&ecirc; deve ter recebido uma c&oacute;pia da Licen&ccedil;a P&uacute;blica Geral do
 GNU junto com este programa; se n&atilde;o, escreva para a
@@ -36,12 +36,13 @@ Controla o sistema de login e &aacute;rea restrita dos usu&aacute;rios
 i3GEO.login = {
 	dialogo: {
 		abrelogin: function(locaplic){
+			var js;
 			if(!locaplic){
 				locaplic = i3GEO.configura.locaplic;
 			}
 			if(typeof(console) !== 'undefined'){console.info("i3GEO.login.dialogo.abrelogin()");}
 			if(typeof(i3GEOF.loginusuario) === 'undefined'){
-				var js = locaplic+"/ferramentas/loginusuario/index.js";
+				js = locaplic+"/ferramentas/loginusuario/index.js";
 				i3GEO.util.scriptTag(js,"i3GEOF.loginusuario.criaJanelaFlutuante()","i3GEOF.loginusuario_script");
 			}
 			else

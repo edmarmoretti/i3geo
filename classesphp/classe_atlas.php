@@ -2,7 +2,7 @@
 /*
 Title: classe_atlas.php
 
-Manipulação da interface Atlas.
+Manipula&ccedil;&atilde;o da interface Atlas.
 
 Licenca:
 
@@ -11,20 +11,20 @@ GPL2
 
 i3Geo Interface Integrada de Ferramentas de Geoprocessamento para Internet
 
-Direitos Autorais Reservados (c) 2006 Ministério do Meio Ambiente Brasil
+Direitos Autorais Reservados (c) 2006 Minist&eacute;rio do Meio Ambiente Brasil
 Desenvolvedor: Edmar Moretti edmar.moretti@mma.gov.br
 
-Este programa é software livre; você pode redistribuí-lo
-e/ou modificá-lo sob os termos da Licença Pública Geral
+Este programa &eacute; software livre; voc&ecirc; pode redistribu&iacute;-lo
+e/ou modific&aacute;-lo sob os termos da Licen&ccedil;a P&uacute;blica Geral
 GNU conforme publicada pela Free Software Foundation;
 
-Este programa é distribuído na expectativa de que seja útil,
-porém, SEM NENHUMA GARANTIA; nem mesmo a garantia implícita
-de COMERCIABILIDADE OU ADEQUAÇÃO A UMA FINALIDADE ESPECÍFICA.
-Consulte a Licença Pública Geral do GNU para mais detalhes.
-Você deve ter recebido uma cópia da Licença Pública Geral do
-GNU junto com este programa; se não, escreva para a
-Free Software Foundation, Inc., no endereço
+Este programa &eacute; distribu&iacute;do na expectativa de que seja &uacute;til,
+por&eacute;m, SEM NENHUMA GARANTIA; nem mesmo a garantia impl&iacute;cita
+de COMERCIABILIDADE OU ADEQUA&Ccedil;&Atilde;O A UMA FINALIDADE ESPEC&Iacute;FICA.
+Consulte a Licen&ccedil;a P&uacute;blica Geral do GNU para mais detalhes.
+Voc&ecirc; deve ter recebido uma cópia da Licen&ccedil;a P&uacute;blica Geral do
+GNU junto com este programa; se n&atilde;o, escreva para a
+Free Software Foundation, Inc., no endere&ccedil;o
 59 Temple Street, Suite 330, Boston, MA 02111-1307 USA.
 
 Arquivo:
@@ -54,11 +54,11 @@ $atlasxml - Objeto xml com o atlas.
 /*
 Method: pegaListaDeAtlas
 
-Pega a lista de atlas existentes e as informações básicas sobre cada um
+Pega a lista de atlas existentes e as informa&ccedil;&otilde;es b&aacute;sicas sobre cada um
 
 Parametros:
 
-tituloinstituicao - é utilizado para montar o cabeçalho HTML com a lista de atlas. Pode ser obtido do ms_configura.php
+tituloinstituicao - &eacute; utilizado para montar o cabe&ccedil;alho HTML com a lista de atlas. Pode ser obtido do ms_configura.php
 */
 	function pegaListaDeAtlas($tituloinstituicao="")
 	{
@@ -73,7 +73,7 @@ tituloinstituicao - é utilizado para montar o cabeçalho HTML com a lista de atla
 /*
 Method: criaAtlas
 
-Lê os parâmetros necessários para abrir um atlas no i3geo
+L&ecirc; os par&acirc;metros necess&aacute;rios para abrir um atlas no i3geo
 
 Parametros:
 
@@ -95,7 +95,7 @@ atlasId - id do atlas desejado, conforme existente em atlas.xml
 /*
 Method: pegaListaDePranchas
 
-Pega a lista de pranchas existentes em um atlas específico e as informações básicas sobre cada uma
+Pega a lista de pranchas existentes em um atlas espec&iacute;fico e as informa&ccedil;&otilde;es b&aacute;sicas sobre cada uma
 
 Parametros:
 
@@ -132,9 +132,9 @@ Method: abrePrancha
 
 Ativa uma prancha do atlas.
 
-Inclui os temas definidos na configuração da prancha.
+Inclui os temas definidos na configura&ccedil;&atilde;o da prancha.
 
-Os layers que não são oriundos de uma prancha recebe o metadata "ATLAS" igual a "nao". Isso é feito na inicialização do Atlas.
+Os layers que n&atilde;o s&atilde;o oriundos de uma prancha recebe o metadata "ATLAS" igual a "nao". Isso &eacute; feito na inicializa&ccedil;&atilde;o do Atlas.
 
 Parametros:
 
@@ -144,7 +144,7 @@ pranchaId - identificador da prancha de um atlas
 
 map_file - nome do mapfile do mapa atual
 
-locaplic - localização do i3geo no servidor
+locaplic - localiza&ccedil;&atilde;o do i3geo no servidor
 */
 	function abrePrancha($atlasId,$pranchaId,$map_file,$locaplic)
 	{
@@ -219,7 +219,7 @@ locaplic - localização do i3geo no servidor
 			}
 			$mapa->save($map_file);
 		}
-		//verifica extensão geográfica
+		//verifica extens&atilde;o geogr&aacute;fica
 		$newext = array();
 		if ($mp != "")
 		{

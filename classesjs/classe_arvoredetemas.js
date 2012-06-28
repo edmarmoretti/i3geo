@@ -351,7 +351,7 @@ i3GEO.arvoreDeTemas = {
 	Abre o catalogo em uma janela flutuante
 	*/	
 	flutuante: function(){
-		var janela,ins,temp,cabecalho,minimiza,idold,corpo,altura;
+		var janela,temp,cabecalho,minimiza,idold,corpo,altura;
 		cabecalho = function(){};
 		if($i("i3GEOFcatalogo_corpo"))
 		{return;}
@@ -385,12 +385,12 @@ i3GEO.arvoreDeTemas = {
 		corpo.style.overflow = "auto";
 		if($i(i3GEO.arvoreDeTemas.IDHTML)){
 			$i(i3GEO.arvoreDeTemas.IDHTML).innerHTML = "";
-			i3GEO.arvoreDeTemas.IDHTML = idold;
 		}
 		idold = i3GEO.arvoreDeTemas.IDHTML;
 		delete(i3GEO.arvoreDeTemas.ARVORE);
 		i3GEO.arvoreDeTemas.IDHTML = "i3GEOFcatalogo_corpo";
 		i3GEO.arvoreDeTemas.cria(i3GEO.configura.sid,i3GEO.configura.locaplic,"");
+		i3GEO.arvoreDeTemas.IDHTML = idold;
 	},	
 	/*
 	Function: listaWMS

@@ -2,7 +2,7 @@
 /*jslint plusplus:false,white:false,undef: false, rhino: true, onevar: true, evil: true */
 
 /*
-Title: Salva as definições de uma camada no arquivo mapfile correspondente
+Title: Salva as defini&ccedil;&otilde;es de uma camada no arquivo mapfile correspondente
 
 Veja:
 
@@ -18,20 +18,20 @@ GPL2
 
 i3Geo Interface Integrada de Ferramentas de Geoprocessamento para Internet
 
-Direitos Autorais Reservados (c) 2006 Ministério do Meio Ambiente Brasil
+Direitos Autorais Reservados (c) 2006 Minist&eacute;rio do Meio Ambiente Brasil
 Desenvolvedor: Edmar Moretti edmar.moretti@mma.gov.br
 
-Este programa é software livre; você pode redistribuí-lo
-e/ou modificá-lo sob os termos da Licença Pública Geral
+Este programa &eacute; software livre; voc&ecirc; pode redistribu&iacute;-lo
+e/ou modific&aacute;-lo sob os termos da Licen&ccedil;a P&uacute;blica Geral
 GNU conforme publicada pela Free Software Foundation;
 
-Este programa é distribuído na expectativa de que seja útil,
-porém, SEM NENHUMA GARANTIA; nem mesmo a garantia implícita
-de COMERCIABILIDADE OU ADEQUAÇÃO A UMA FINALIDADE ESPECÍFICA.
-Consulte a Licença Pública Geral do GNU para mais detalhes.
-Você deve ter recebido uma cópia da Licença Pública Geral do
+Este programa &eacute; distribu&iacute;do na expectativa de que seja &uacute;til,
+por&eacute;m, SEM NENHUMA GARANTIA; nem mesmo a garantia impl&iacute;cita
+de COMERCIABILIDADE OU ADEQUAÇÃO A UMA FINALIDADE ESPEC&Iacute;FICA.
+Consulte a Licen&ccedil;a P&uacute;blica Geral do GNU para mais detalhes.
+Voc&ecirc; deve ter recebido uma c&oacute;pia da Licen&ccedil;a P&uacute;blica Geral do
 GNU junto com este programa; se não, escreva para a
-Free Software Foundation, Inc., no endereço
+Free Software Foundation, Inc., no endere&ccedil;o
 59 Temple Street, Suite 330, Boston, MA 02111-1307 USA.
 */
 if(typeof(i3GEOF) === 'undefined'){
@@ -44,23 +44,23 @@ i3GEOF.salvamapfile = {
 	/*
 	Variavel: aguarde
 	
-	Estilo do objeto DOM com a imagem de aguarde existente no cabeçalho da janela.
+	Estilo do objeto DOM com a imagem de aguarde existente no cabe&ccedil;alho da janela.
 	*/
 	aguarde: "",
 	/*
 	Variavel: tema
 	
-	código do tema
+	c&oacute;digo do tema
 	*/
 	tema: i3GEO.temaAtivo,
 	/*
 	Function: inicia
 	
-	Inicia a ferramenta. É chamado por criaJanelaFlutuante
+	Inicia a ferramenta. &Eacute; chamado por criaJanelaFlutuante
 	
 	Parametro:
 	
-	iddiv {String} - id do div que receberá o conteudo HTML da ferramenta
+	iddiv {String} - id do div que receber&aacute; o conteudo HTML da ferramenta
 	*/
 	inicia: function(iddiv){
 		try{
@@ -72,12 +72,12 @@ i3GEOF.salvamapfile = {
 					var nome = retorno.data.nomeoriginal;
 					if(nome == "")
 					{
-						$i(iddiv).innerHTML = "<p class=paragrafo >Não existe um arquivo mapfile em i3geo/temas já criado para essa camada. Utilize o sistema de administração para <a href='"+i3GEO.configura.locaplic+"/admin/html/editormapfile.html' target=_blank >criar um</a>";
+						$i(iddiv).innerHTML = "<p class=paragrafo >Não existe um arquivo mapfile em i3geo/temas j&aacute; criado para essa camada. Utilize o sistema de administra&ccedil;ão para <a href='"+i3GEO.configura.locaplic+"/admin/html/editormapfile.html' target=_blank >criar um</a>";
 					}
 					else
 					{
-						var ins = "<p class=paragrafo >O tema ("+nome+") ativo possui um mapfile já criado. Ao salvar, as definições originais  de legenda, filtros e outras, serão substituídas pelas atuais" +
-						'<span id="i3GEOsalvamapconcluido" style=display:none;color:red  > Concluído!</span></p>' +
+						var ins = "<p class=paragrafo >O tema ("+nome+") ativo possui um mapfile j&aacute; criado. Ao salvar, as defini&ccedil;&otilde;es originais  de legenda, filtros e outras, serão substitu&iacute;das pelas atuais" +
+						'<span id="i3GEOsalvamapconcluido" style=display:none;color:red  > Conclu&iacute;do!</span></p>' +
 						'<br><p class=paragrafo ><input size=20 id=i3GEOsalvamapfilebotao1 type=button value="Salvar"  />&nbsp;&nbsp;<input size=20 id=i3GEOsalvamapfilebotao2 type=button value="Testar"  />';
 						$i(iddiv).innerHTML = ins;
 						new YAHOO.widget.Button(

@@ -11,7 +11,7 @@ foreach(array_keys($_SESSION) as $k)
 }
 $postgis_mapa = $_SESSION["postgis_mapa"];
 //
-//se as extensões já estiverem carregadas no PHP, vc pode comentar essa linha para que o processamento fique mais rápido
+//se as extens&otilde;es j&aacute; estiverem carregadas no PHP, vc pode comentar essa linha para que o processamento fique mais r&aacute;pido
 //
 include_once ("../../classesphp/carrega_ext.php");
 //

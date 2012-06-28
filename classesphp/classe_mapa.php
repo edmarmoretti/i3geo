@@ -2,7 +2,7 @@
 /*
 Title: classe_mapa.php
 
-Manipulação do mapa. Altera tamanho, lista temas, etc.
+Manipula&ccedil;&atilde;o do mapa. Altera tamanho, lista temas, etc.
 
 Licenca:
 
@@ -10,20 +10,20 @@ GPL2
 
 i3Geo Interface Integrada de Ferramentas de Geoprocessamento para Internet
 
-Direitos Autorais Reservados (c) 2006 Ministério do Meio Ambiente Brasil
+Direitos Autorais Reservados (c) 2006 Minist&eacute;rio do Meio Ambiente Brasil
 Desenvolvedor: Edmar Moretti edmar.moretti@mma.gov.br
 
-Este programa é software livre; você pode redistribuí-lo
-e/ou modificá-lo sob os termos da Licença Pública Geral
+Este programa &eacute; software livre; voc&ecirc; pode redistribu&iacute;-lo
+e/ou modific&aacute;-lo sob os termos da Licen&ccedil;a P&uacute;blica Geral
 GNU conforme publicada pela Free Software Foundation;
 
-Este programa é distribuído na expectativa de que seja útil,
-porém, SEM NENHUMA GARANTIA; nem mesmo a garantia implícita
-de COMERCIABILIDADE OU ADEQUAÇÃO A UMA FINALIDADE ESPECÍFICA.
-Consulte a Licença Pública Geral do GNU para mais detalhes.
-Você deve ter recebido uma cópia da Licença Pública Geral do
-GNU junto com este programa; se não, escreva para a
-Free Software Foundation, Inc., no endereço
+Este programa &eacute; distribu&iacute;do na expectativa de que seja &uacute;til,
+por&eacute;m, SEM NENHUMA GARANTIA; nem mesmo a garantia impl&iacute;cita
+de COMERCIABILIDADE OU ADEQUA&Ccedil;&Atilde;O A UMA FINALIDADE ESPEC&Iacute;FICA.
+Consulte a Licen&ccedil;a P&uacute;blica Geral do GNU para mais detalhes.
+Voc&ecirc; deve ter recebido uma cópia da Licen&ccedil;a P&uacute;blica Geral do
+GNU junto com este programa; se n&atilde;o, escreva para a
+Free Software Foundation, Inc., no endere&ccedil;o
 59 Temple Street, Suite 330, Boston, MA 02111-1307 USA.
 
 Arquivo:
@@ -56,13 +56,13 @@ class Mapa
 	/*
 	Variavel: $qyfile
 	
-	Nome do arquivo de seleção (.qy)
+	Nome do arquivo de sele&ccedil;&atilde;o (.qy)
 	*/
 	public $qyfile;	
 	/*
 	Variavel: $v
 	
-	Versão atual do Mapserver (primeiro dígito)
+	Vers&atilde;o atual do Mapserver (primeiro d&iacute;gito)
 	*/
 	public $v;	
 /*
@@ -72,7 +72,7 @@ Cria um objeto mapa
 
 parameters:
 
-$map_file - Endereço do mapfile no servidor.
+$map_file - Endere&ccedil;o do mapfile no servidor.
 */  	
 	function __construct($map_file,$locaplic="")
 	{
@@ -113,11 +113,11 @@ Salva o mapfile atual
 /*
 Method: listaTemasBuscaRapida
 
-Elabora uma lista de temas e seus respectivos itens para uso no método buscaRegistros da classe classe_atributos
+Elabora uma lista de temas e seus respectivos itens para uso no m&eacute;todo buscaRegistros da classe classe_atributos
 
 <Atributos->buscaRegistros>
 
-A lista contém apenas os temas que estão visíveis e que possuem o metadata "itembuscarapida"
+A lista cont&eacute;m apenas os temas que est&atilde;o vis&iacute;veis e que possuem o metadata "itembuscarapida"
 
 Retorno:
 
@@ -140,7 +140,7 @@ Muda o OUTPUTFORMAT
 
 Parametro:
 
-tipo {string} - OUTPUTFORMAT que será aplicado. deve existir no mapfile básico que iniciou o i3Geo 
+tipo {string} - OUTPUTFORMAT que ser&aacute; aplicado. deve existir no mapfile b&aacute;sico que iniciou o i3Geo 
 */	
  	function mudaoutputformat($tipo)
  	{
@@ -222,7 +222,7 @@ string - javascript com os parametros
 				if ($escala == ""){$escala = 0;}
 				$down = $oLayer->getmetadata("download");
 				//
-				//verifica se o layer é do tipo features
+				//verifica se o layer &eacute; do tipo features
 				//
 				$f = "nao";
 				if (($oLayer->data == "") && ($oLayer->connection == ""))
@@ -239,7 +239,7 @@ string - javascript com os parametros
 				if($oLayer->getmetadata("wms_sld_body") !== "" || $oLayer->getmetadata("wms_sld_url") !== "")
 				{$usasld = "sim";}				
 				//
-				//verifica se o tema pode receber a operação de zoom para o tema
+				//verifica se o tema pode receber a opera&ccedil;&atilde;o de zoom para o tema
 				//
 				if (($ct != 1) && ($oLayer->getmetadata("extensao") == ""))
 				{
@@ -252,13 +252,13 @@ string - javascript com os parametros
 					$exttema = $oLayer->getmetadata("extensao");
 				}
 				//
-				//verifica se existe restrição de escala
+				//verifica se existe restri&ccedil;&atilde;o de escala
 				//
 				$contextoescala = "nao";
 				if(($oLayer->minscaledenom > 0) || ($oLayer->maxscaledenom > 0))
 				{$contextoescala = "sim";}
 				//
-				//verifica se o usuário pode editar o SQL em DATA
+				//verifica se o usu&aacute;rio pode editar o SQL em DATA
 				//
 				$editorsql = "nao";
 				if($ct == 3 || $ct == 4 || $ct == 6 || $ct == 8)
@@ -267,13 +267,13 @@ string - javascript com os parametros
 					{$editorsql = "sim";}
 				}
 				//
-				//verifica se o tema pode ser utilizado para gerar gráficos de linha do tempo
+				//verifica se o tema pode ser utilizado para gerar gr&aacute;ficos de linha do tempo
 				//
 				$ltempo = "nao";
 				if($oLayer->getmetadata("ltempoformatodata") !== "")
 				{$ltempo = "sim";}
 				//
-				//verifica se o tema receberá efeito de transição de zoom
+				//verifica se o tema receber&aacute; efeito de transi&ccedil;&atilde;o de zoom
 				//
 				$transitioneffect = "sim";
 				if($oLayer->getmetadata("transitioneffect") == "NAO")
@@ -332,7 +332,7 @@ string - javascript com os parametros
 				);
 			}
 		}
-		//apaga o arquivo qy se não for necessário
+		//apaga o arquivo qy se n&atilde;o for necess&aacute;rio
 		//if (!$existesel && $qy)
 		//{unlink($this->qyfile);}
 		$temas = array_reverse($temas);
@@ -341,11 +341,11 @@ string - javascript com os parametros
 /*
 Method: redesenhaCorpo
 
-Redesenha o mapa e retorna as variáveis necessárias para montar o mapa.
+Redesenha o mapa e retorna as vari&aacute;veis necess&aacute;rias para montar o mapa.
 
 Parametros:
 
-$tipoimagem - filtro que será aplicado na imagem (opcional).
+$tipoimagem - filtro que ser&aacute; aplicado na imagem (opcional).
 
 Return:
 
@@ -394,7 +394,7 @@ Include:
 		//
 		//gera a imagem do mapa
 		//se estiver sendo utilizado o cgi para desenhar a imagem
-		//é necessário criar uma imagem vazia para capturar o nome que será retornado
+		//&eacute; necess&aacute;rio criar uma imagem vazia para capturar o nome que ser&aacute; retornado
 		//
 		if (isset($utilizacgi) && strtolower($utilizacgi) == "sim" && $tipoimagem=="nenhum" && !$qy)
 		{
@@ -483,11 +483,11 @@ Method: redesenhaEntorno (depreciado)
 
 Redesenha o entorno do mapa (depreciado).
 
-Redesenha as partes norte, sul, leste e oeste do mapa e retorna as variáveis necessárias para montar o mapa.
+Redesenha as partes norte, sul, leste e oeste do mapa e retorna as vari&aacute;veis necess&aacute;rias para montar o mapa.
 
 Return:
 
-string - javascript com as variáveis para redesenho do mapa
+string - javascript com as vari&aacute;veis para redesenho do mapa
 */
 	function redesenhaEntorno()
 	{
@@ -520,7 +520,7 @@ string - javascript com as variáveis para redesenho do mapa
 /*
 Method: ativalegenda
 
-Ativa/desativa legenda, incluindo ou não no corpo do mapa.
+Ativa/desativa legenda, incluindo ou n&atilde;o no corpo do mapa.
 */
 	function ativalegenda()
 	{
@@ -533,9 +533,9 @@ Method: ativalogo
 
 Ativa/desativa logomarca.
 
-A logomarca é mostrada no canto superior direito da imagem do mapa.
-No mapfile padrão (geral1.map), o layer "copyright" é utilizado para incluir a logomarca.
-Essa função liga ou desliga esse layer, manipulando a propriedade "status".
+A logomarca &eacute; mostrada no canto superior direito da imagem do mapa.
+No mapfile padr&atilde;o (geral1.map), o layer "copyright" &eacute; utilizado para incluir a logomarca.
+Essa fun&ccedil;&atilde;o liga ou desliga esse layer, manipulando a propriedade "status".
 
 */
 	function ativalogo()
@@ -552,18 +552,18 @@ Method: listaTemasLocais
 
 Lista os temas locais de um mapa.
 
-Lista os temas existentes no mapfile atual, que utilizam como fonte de dados shape file, e que estão armazenados no diretório temporário do mapa.
-Os arquivos shape file existentes no diretório temporário do mapa são passíveis de edição.
-Obs.: Toda vez que um tema local é criado pelo I3Geo, o METADATA "TEMALOCAL" é marcado como "sim".
+Lista os temas existentes no mapfile atual, que utilizam como fonte de dados shape file, e que est&atilde;o armazenados no diretório tempor&aacute;rio do mapa.
+Os arquivos shape file existentes no diretório tempor&aacute;rio do mapa s&atilde;o pass&iacute;veis de edi&ccedil;&atilde;o.
+Obs.: Toda vez que um tema local &eacute; criado pelo I3Geo, o METADATA "TEMALOCAL" &eacute; marcado como "sim".
 
 Parameter:
 
-$tipo - tipo de layer que será considerado. Default é 0.
+$tipo - tipo de layer que ser&aacute; considerado. Default &eacute; 0.
 */
 	function listaTemasLocais($tipo=0)
 	{
 		$final = array(); //resultado final
-		//verifica se o tema é local
+		//verifica se o tema &eacute; local
 		$layers = array();
 		foreach ($this->layers as $layer)
 		{
@@ -579,13 +579,13 @@ Method: listaTemas
 
 Lista os temas de um mapa.
 
-Obs.: o "METADATA" "ESCONDIDO", quando presente no tema e diferente de vazio, indica que o tema é do
-tipo escondido, ou seja, não deve ser listado pelo I3Geo em combos ou listagens. Por isso,
-layers desse tipo são ignorados por essa função.
+Obs.: o "METADATA" "ESCONDIDO", quando presente no tema e diferente de vazio, indica que o tema &eacute; do
+tipo escondido, ou seja, n&atilde;o deve ser listado pelo I3Geo em combos ou listagens. Por isso,
+layers desse tipo s&atilde;o ignorados por essa fun&ccedil;&atilde;o.
 
 Parameter:
 
-$opcao Situação desejada do tema (ligados ou todos).
+$opcao Situa&ccedil;&atilde;o desejada do tema (ligados ou todos).
 
 Return:
 
@@ -624,11 +624,11 @@ nome
 /*
 Method: listaTemasTipo
 
-Lista os temas, visíveis, de um determinado tipo de feição de um mapa.
+Lista os temas, vis&iacute;veis, de um determinado tipo de fei&ccedil;&atilde;o de um mapa.
 
-Obs.: o "METADATA" "ESCONDIDO", quando presente no tema e diferente de vazio, indica que o tema é do
-tipo escondido, ou seja, não deve ser listado pelo I3Geo em combos ou listagens. Por isso,
-layers desse tipo são ignorados por essa função.
+Obs.: o "METADATA" "ESCONDIDO", quando presente no tema e diferente de vazio, indica que o tema &eacute; do
+tipo escondido, ou seja, n&atilde;o deve ser listado pelo I3Geo em combos ou listagens. Por isso,
+layers desse tipo s&atilde;o ignorados por essa fun&ccedil;&atilde;o.
 
 Parametros:
 
@@ -684,9 +684,9 @@ Method: listaTemasComSel
 
 Lista os temas de um mapa que possuem elementos selecionados.
 
-Obs.: o "METADATA" "ESCONDIDO", quando presente no tema e diferente de vazio, indica que o tema é do
-tipo escondido, ou seja, não deve ser listado pelo I3Geo em combos ou listagens. Por isso,
-layers desse tipo são ignorados por essa função.
+Obs.: o "METADATA" "ESCONDIDO", quando presente no tema e diferente de vazio, indica que o tema &eacute; do
+tipo escondido, ou seja, n&atilde;o deve ser listado pelo I3Geo em combos ou listagens. Por isso,
+layers desse tipo s&atilde;o ignorados por essa fun&ccedil;&atilde;o.
 
 Return:
 
@@ -730,8 +730,8 @@ Method: mudaQS
 
 Muda o tamanho do query map.
 
-Essa função é executada na inicialização do mapa ou quando o mapa tem suas dimensões alteradas.
-A função de alteração dos parâmetros do query map original do PHPMapscript, não funciona corretamente.
+Essa fun&ccedil;&atilde;o &eacute; executada na inicializa&ccedil;&atilde;o do mapa ou quando o mapa tem suas dimens&otilde;es alteradas.
+A fun&ccedil;&atilde;o de altera&ccedil;&atilde;o dos par&acirc;metros do query map original do PHPMapscript, n&atilde;o funciona corretamente.
 
 Parametros:
 
@@ -783,7 +783,7 @@ Muda a cor utilizada para mostrar os elementos selecionados de um tema ou retorn
 
 Parameter:
 
-$cor - RGB separado por vírgula. Se a cor for vazia, retorna a cor atual.
+$cor - RGB separado por v&iacute;rgula. Se a cor for vazia, retorna a cor atual.
 
 */
 	function corQM($cor)
@@ -808,7 +808,7 @@ Muda a cor do fundo do mapa.
 
 Parameter:
 
-$cor - RGB separado por vírgula. Se a cor for vazia, retorna a cor atual.
+$cor - RGB separado por v&iacute;rgula. Se a cor for vazia, retorna a cor atual.
 
 */
 	function corfundo($cor)
@@ -830,7 +830,7 @@ Method: gradeCoord
 
 Gera uma grade de coordenadas
 
-A grade é incluida no mapa como um novo layer.
+A grade &eacute; incluida no mapa como um novo layer.
 
 Parameter:
 
@@ -840,7 +840,7 @@ $corlinha - cor em RGB das linhas da grade
 
 $larguralinha - largura das linhas da grade em pixel
 
-$tipolinha - símbolo das linhas
+$tipolinha - s&iacute;mbolo das linhas
 
 $tamanhotexto - tamanho do texto
 
@@ -853,7 +853,7 @@ $incluitexto - sim|nao
 		//echo $corlinha;
 		//if (file_exists($this->qyfile))
 		//{unlink ($this->qyfile);}
-		//tem erro na versão 6 do Mapserver. Já abri um ticket no trac da OSGEO 
+		//tem erro na vers&atilde;o 6 do Mapserver. J&aacute; abri um ticket no trac da OSGEO 
 		$nlayer = criaLayer($this->mapa,MS_LAYER_LINE,MS_DEFAULT,"Grade de coordenadas","SIM");
 		ms_newgridobj($nlayer);	
 		$nlayer->grid->set("labelformat", "DDMMSS");
@@ -915,19 +915,19 @@ Method: adicionaTema
 
 Acrescenta um novo tema em um arquivo map file.
 
-O tema deve estar incluído em um arquivo .map localizado no diretório "temas".
-Ao ser adicionado, todos os layers do arquivo indicado serão acrescentados.
-Os layers que formam grupos também são processados, tendo seus nomes alterados de acordo.
-Cada novo layer receberá um novo nome, definido de forma aleatória.
+O tema deve estar inclu&iacute;do em um arquivo .map localizado no diretório "temas".
+Ao ser adicionado, todos os layers do arquivo indicado ser&atilde;o acrescentados.
+Os layers que formam grupos tamb&eacute;m s&atilde;o processados, tendo seus nomes alterados de acordo.
+Cada novo layer receber&aacute; um novo nome, definido de forma aleatória.
 Os nomes dos temas podem conter o caminho completo do mapfile.
 
 Parametros:
 
-$temas - string Lista separada por vírgulas, dos arquivos que serão abertos para pegar os novos layers. Não inclua a extensão ".map".
+$temas - string Lista separada por v&iacute;rgulas, dos arquivos que ser&atilde;o abertos para pegar os novos layers. N&atilde;o inclua a extens&atilde;o ".map".
 
-$locaplic - string Diretório onde fica a aplicação.
+$locaplic - string Diretório onde fica a aplica&ccedil;&atilde;o.
 
-$random - indica se os nomes dos novos layers serão modificados ou nao
+$random - indica se os nomes dos novos layers ser&atilde;o modificados ou nao
 */
 	function adicionaTema($temas,$locaplic,$random="sim")
 	{
@@ -939,7 +939,7 @@ $random - indica se os nomes dos novos layers serão modificados ou nao
 			$this->adicionaAcesso($nome,$locaplic);
 			$nomemap = "";
 			//
-			//verifica se o tema é um arquivo php
+			//verifica se o tema &eacute; um arquivo php
 			//
 			if ((file_exists($locaplic."/temas/".$nome.".php")) || (file_exists($nome.".php"))){
 				include_once($locaplic."/temas/".$nome.".php");
@@ -986,8 +986,8 @@ $random - indica se os nomes dos novos layers serão modificados ou nao
 							$nlayer->set("group",$nomeunico[$lr]);
 						}
 						//
-						//verifica se é um WMS e se existem classes definidas
-						//se existirem as classes, é criado um SLD para ser aplicado ao layer
+						//verifica se &eacute; um WMS e se existem classes definidas
+						//se existirem as classes, &eacute; criado um SLD para ser aplicado ao layer
 						//O SLD só funciona se CLASSITEM estiver definido
 						//
 						if($nlayer->classitem != "" && $nlayer->connectiontype == 7 && $nlayer->numclasses > 0 && $nlayer->getmetadata("wms_sld_body") == ""){
@@ -1043,11 +1043,11 @@ Method: excluiTemas
 
 Exclui temas de um mapa.
 
-O arquivo de seleção (.qy) é apagado do diretório temporário.
+O arquivo de sele&ccedil;&atilde;o (.qy) &eacute; apagado do diretório tempor&aacute;rio.
 
 Parameter:
 
-$temas - lista separada por vírgula dos temas que serão excluídos.
+$temas - lista separada por v&iacute;rgula dos temas que ser&atilde;o exclu&iacute;dos.
 */
 	function excluiTemas($temas)
 	{
@@ -1087,15 +1087,15 @@ Method: ligaDesligaTemas
 
 Liga desliga temas.
 
-Torna temas visíveis ou não no mapa alterando seu status.
+Torna temas vis&iacute;veis ou n&atilde;o no mapa alterando seu status.
 
 Parametros:
 
-$ligar - lista separada por vírgula dos temas que serão ligados.
+$ligar - lista separada por v&iacute;rgula dos temas que ser&atilde;o ligados.
 
-$desligar - lista separada por vírgula dos temas que serão desligados. Se for igual a todos, todos os layers serão desligados.
+$desligar - lista separada por v&iacute;rgula dos temas que ser&atilde;o desligados. Se for igual a todos, todos os layers ser&atilde;o desligados.
 
-$adicionar - sim|nao força a adição de um tema se ele não existir no mapfile atual
+$adicionar - sim|nao for&ccedil;a a adi&ccedil;&atilde;o de um tema se ele n&atilde;o existir no mapfile atual
 */
 	function ligaDesligaTemas($ligar,$desligar,$adicionar="nao")
 	{
@@ -1176,22 +1176,22 @@ Acrescenta um novo tema em um arquivo map file tendo como fonte um WMS.
 
 Parametros:
 
-$tema - Tema que será adicionado.
-$servico - Endereço do web service.
+$tema - Tema que ser&aacute; adicionado.
+$servico - Endere&ccedil;o do web service.
 $nome - Nome do tema para a legenda.
-$proj - Lista das projeções suportadas separadas por vírgula.
-$formato - Lista dos formatos de imagem separadas por vírgula.
-$locaplic - Diretório onde fica a aplicação.
-$tipo - Tipo de representação poligonal|linear|pontual.
-$versao - Versão do getcapabilities
+$proj - Lista das proje&ccedil;&otilde;es suportadas separadas por v&iacute;rgula.
+$formato - Lista dos formatos de imagem separadas por v&iacute;rgula.
+$locaplic - Diretório onde fica a aplica&ccedil;&atilde;o.
+$tipo - Tipo de representa&ccedil;&atilde;o poligonal|linear|pontual.
+$versao - Vers&atilde;o do getcapabilities
 $nomecamada - nome da camada do WMS
-$dir_tmp - diretório temporário do I3Geo
-$imgdir - diretório temporário das imagens
+$dir_tmp - diretório tempor&aacute;rio do I3Geo
+$imgdir - diretório tempor&aacute;rio das imagens
 $imgurl - url do imgdir
-$tiporep - tipo de representação das feições do mapa. Quando definido, é criado um sld para ser aplicado ao layer. poligonal|linear|pontual
+$tiporep - tipo de representa&ccedil;&atilde;o das fei&ccedil;&otilde;es do mapa. Quando definido, &eacute; criado um sld para ser aplicado ao layer. poligonal|linear|pontual
 $suportasld - Suporta SLD sim|nao.
-$formatosinfo - lista de formatos da requisição de atributos para a função getfeatureinfo (default text/plain)
-$time - específico para WMS-T (parâmentro wms_time)
+$formatosinfo - lista de formatos da requisi&ccedil;&atilde;o de atributos para a fun&ccedil;&atilde;o getfeatureinfo (default text/plain)
+$time - espec&iacute;fico para WMS-T (par&acirc;mentro wms_time)
 Include:
 <wmswfs.php>
 */
@@ -1276,8 +1276,8 @@ Include:
 		if($time != "")
 		$layer->setmetadata("wms_time",$time);
 		//pega o tipo de formato de imagem que deve ser requisitado
-		//a preferência é png, mas se não for possível, pega o primeiro da lista de formatos
-		//disponíveis no formato
+		//a prefer&ecirc;ncia &eacute; png, mas se n&atilde;o for poss&iacute;vel, pega o primeiro da lista de formatos
+		//dispon&iacute;veis no formato
 		if (stristr($formato,"png"))
 		{$im = "image/png";}
 		else
@@ -1309,17 +1309,17 @@ Method: converteWS
 
 Transforma o mapa atual em um web service.
 
-O novo map file é armazenado no mesmo diretório do map file original.
+O novo map file &eacute; armazenado no mesmo diretório do map file original.
 
 Parametros:
 
-$locaplic - localização do i3Geo
+$locaplic - localiza&ccedil;&atilde;o do i3Geo
 
 $h - host name
 
 Return:
 
-Endereço do WMS
+Endere&ccedil;o do WMS
 */
 	function converteWS($locaplic,$h)
 	{
@@ -1362,17 +1362,17 @@ Method: converteWMC
 
 Transforma o mapa atual em um Web Map Context.
 
-O novo map file é armazenado no mesmo diretório do map file original.
+O novo map file &eacute; armazenado no mesmo diretório do map file original.
 
 Parametros:
 
-$locmapserv - localização do CGI do mapserver
+$locmapserv - localiza&ccedil;&atilde;o do CGI do mapserver
 
 $h - host name
 
 Return:
 
-Endereço do WMC
+Endere&ccedil;o do WMC
 */
 	function converteWMC($locmapserv,$h)
 	{
@@ -1442,9 +1442,9 @@ Adiciona um canal GeoRSS como um tema no mapa.
 
 Parametros:
 
-$servico - Endereço (url)  do GeoJson.
-$dir_tmp - Diretório onde o arquivo será criado.
-$locaplic - Localização do I3geo
+$servico - Endere&ccedil;o (url)  do GeoJson.
+$dir_tmp - Diretório onde o arquivo ser&aacute; criado.
+$locaplic - Localiza&ccedil;&atilde;o do I3geo
 
 */
 	function adicionaTemaGeoJson($servico,$dir_tmp,$locaplic){
@@ -1495,10 +1495,10 @@ Adiciona um canal GeoRSS como um tema no mapa.
 
 Parametros:
 
-$servico - Endereço (url) do RSS.
-$dir_tmp - Diretório onde o arquivo será criado.
-$locaplic - Localização do I3geo
-$canal - Identificador do canal (ordem em que está no RSS)
+$servico - Endere&ccedil;o (url) do RSS.
+$dir_tmp - Diretório onde o arquivo ser&aacute; criado.
+$locaplic - Localiza&ccedil;&atilde;o do I3geo
+$canal - Identificador do canal (ordem em que est&aacute; no RSS)
 */
 	function adicionaTemaGeoRSS($servico,$dir_tmp,$locaplic,$canal)
 	{
@@ -1708,9 +1708,9 @@ $arq - Nome do arquivo.
     	$dbhw = null;
 	}
 	//
-	//esta função não está concluida
-	//não use
-	//pois não funcionará
+	//esta fun&ccedil;&atilde;o n&atilde;o est&aacute; concluida
+	//n&atilde;o use
+	//pois n&atilde;o funcionar&aacute;
 	//
 	function insereJOIN($string,$layername)
 	{
@@ -1748,7 +1748,7 @@ $arq - Nome do arquivo.
 /*
 Method: converteInterfacePara
 
-Converte o mapfile atual ajustando o funcionamento para uma interface específica
+Converte o mapfile atual ajustando o funcionamento para uma interface espec&iacute;fica
 
 Parametros:
 

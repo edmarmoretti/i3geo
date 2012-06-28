@@ -1,6 +1,6 @@
-# Geográfica SAD69 GRS67 4291
+# Geogr&aacute;fica SAD69 GRS67 4291
 <4291> +proj=longlat +ellps=GRS67 +no_defs  no_defs   <>
-# Geográfica SAD69 aust_SA 4618 (mais recente)
+# Geogr&aacute;fica SAD69 aust_SA 4618 (mais recente)
 <4618> +proj=longlat +ellps=aust_SA +no_defs  <>
 # WGS 84
 <4326> +proj=longlat +ellps=WGS84 +datum=WGS84 +no_defs  no_defs <>

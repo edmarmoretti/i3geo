@@ -1,2 +1,2 @@
 Para abrir o atlas, utilize o index.html.
-Vc precisa editar o arquivo mapa.map para ajustar os caminhos de acesso aos dados. Adaptando-os para sua instalação.
+Vc precisa editar o arquivo mapa.map para ajustar os caminhos de acesso aos dados. Adaptando-os para sua instala&ccedil;&atilde;o.

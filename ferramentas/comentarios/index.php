@@ -12,7 +12,7 @@ Parametros:
 
 g_sid
 
-tema - tema que será comentado
+tema - tema que ser&aacute; comentado
 */
 $parametrosURL = array_merge($_GET,$_POST);
 
@@ -48,11 +48,11 @@ function linkOpenId()
 	$urlVolta = $_SESSION["locaplic"]."/ferramentas/comentarios/index.php?";
 	$urlVolta .= "tema=".$_SESSION["tema"];
 	$url = $_SESSION["locaplic"]."/pacotes/openid/login.php?";
-	echo "<p><a href='".$url."' target=_self ><img style='border:0px solid white' src='../../imagens/plus.png' >Inserir comentário</a>";
+	echo "<p><a href='".$url."' target=_self ><img style='border:0px solid white' src='../../imagens/plus.png' >Inserir coment&aacute;rio</a>";
 }
 function formularioInsere()
 {
-	echo "<p>Adicione um comentário:</p>";
+	echo "<p>Adicione um coment&aacute;rio:</p>";
 	$url = $_SESSION["locaplic"]."/ferramentas/comentarios/index.php?g_sid=".$_SESSION["g_sid"]."&tema=".$_SESSION["tema"]."&locaplic=".$_SESSION["locaplic"];
 	echo "<form action='".$url."' method='post'>";
 	echo "	<textarea name=novocomentario value='' type='text' style='height:150px;width:98%' ></textarea><br>";
@@ -88,13 +88,13 @@ function listaComentarios()
 	echo "</table><hr>";
    	$dbhw = null;
    	$dbh = null;
-	echo "<p><a href='../../admin/rsscomentariostemas.php'><img src='../../imagens/rss.gif' style='border:0px solid gray;' > todos os comentários</a>";
-	echo " <a href='../../admin/rsscomentariostemas.php?id_tema=".$id_tema."'><img src='../../imagens/rss.gif' style='border:0px solid gray;' > comentários para o tema</a></p>";
+	echo "<p><a href='../../admin/rsscomentariostemas.php'><img src='../../imagens/rss.gif' style='border:0px solid gray;' > todos os coment&aacute;rios</a>";
+	echo " <a href='../../admin/rsscomentariostemas.php?id_tema=".$id_tema."'><img src='../../imagens/rss.gif' style='border:0px solid gray;' > coment&aacute;rios para o tema</a></p>";
 
 }
 function gravaComentario()
 {
-	//necessário para os includes do admin.php
+	//necess&aacute;rio para os includes do admin.php
 	include_once("../../admin/php/conexao.php");
 	if(!empty($esquemaadmin)){
 		$esquemaadmin = $esquemaadmin.".";

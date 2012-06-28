@@ -4,8 +4,8 @@
 /*
 Title: Cortina
 
-Aplica um efeito de cortina a um tema, permitindo mostrá-lo ou escondê-lo de forma controlada por um botão deslizante.
-Funciona apenas nas interfaces que utilizam camadas múltiplas, como a interface openlayers
+Aplica um efeito de cortina a um tema, permitindo mostr&aacute;-lo ou escond&ecirc;-lo de forma controlada por um botão deslizante.
+Funciona apenas nas interfaces que utilizam camadas m&uacute;ltiplas, como a interface openlayers
 
 Veja:
 
@@ -21,20 +21,20 @@ GPL2
 
 i3Geo Interface Integrada de Ferramentas de Geoprocessamento para Internet
 
-Direitos Autorais Reservados (c) 2006 Ministério do Meio Ambiente Brasil
+Direitos Autorais Reservados (c) 2006 Minist&eacute;rio do Meio Ambiente Brasil
 Desenvolvedor: Edmar Moretti edmar.moretti@mma.gov.br
 
-Este programa é software livre; você pode redistribuí-lo
-e/ou modificá-lo sob os termos da Licença Pública Geral
+Este programa &eacute; software livre; voc&ecirc; pode redistribu&iacute;-lo
+e/ou modific&aacute;-lo sob os termos da Licen&ccedil;a P&uacute;blica Geral
 GNU conforme publicada pela Free Software Foundation;
 
-Este programa é distribuído na expectativa de que seja útil,
-porém, SEM NENHUMA GARANTIA; nem mesmo a garantia implícita
-de COMERCIABILIDADE OU ADEQUAÇÃO A UMA FINALIDADE ESPECÍFICA.
-Consulte a Licença Pública Geral do GNU para mais detalhes.
-Você deve ter recebido uma cópia da Licença Pública Geral do
+Este programa &eacute; distribu&iacute;do na expectativa de que seja &uacute;til,
+por&eacute;m, SEM NENHUMA GARANTIA; nem mesmo a garantia impl&iacute;cita
+de COMERCIABILIDADE OU ADEQUAÇÃO A UMA FINALIDADE ESPEC&Iacute;FICA.
+Consulte a Licen&ccedil;a P&uacute;blica Geral do GNU para mais detalhes.
+Voc&ecirc; deve ter recebido uma c&oacute;pia da Licen&ccedil;a P&uacute;blica Geral do
 GNU junto com este programa; se não, escreva para a
-Free Software Foundation, Inc., no endereço
+Free Software Foundation, Inc., no endere&ccedil;o
 59 Temple Street, Suite 330, Boston, MA 02111-1307 USA.
 */
 
@@ -48,13 +48,13 @@ i3GEOF.cortina = {
 	/*
 	Variavel: aguarde
 	
-	Estilo do objeto DOM com a imagem de aguarde existente no cabeçalho da janela.
+	Estilo do objeto DOM com a imagem de aguarde existente no cabe&ccedil;alho da janela.
 	*/
 	aguarde: "",
 	/*
 	Variavel: tema
 	
-	Código do tema definido na inicialização da janela e que será alvo da cortina.
+	C&oacute;digo do tema definido na inicializa&ccedil;ão da janela e que ser&aacute; alvo da cortina.
 	*/
 	tema: "",
 	/*
@@ -69,11 +69,11 @@ i3GEOF.cortina = {
 	/*
 	Function: inicia
 	
-	Inicia a ferramenta. É chamado por criaJanelaFlutuante
+	Inicia a ferramenta. &Eacute; chamado por criaJanelaFlutuante
 	
 	Parametro:
 	
-	iddiv {String} - id do div que receberá o conteudo HTML da ferramenta
+	iddiv {String} - id do div que receber&aacute; o conteudo HTML da ferramenta
 	*/
 	inicia: function(iddiv){
 		//if(navm)
@@ -88,11 +88,11 @@ i3GEOF.cortina = {
 	/*
 	Function: html
 	
-	Gera o código html para apresentação das opções da ferramenta
+	Gera o c&oacute;digo html para apresenta&ccedil;ão das op&ccedil;&otilde;es da ferramenta
 	
 	Retorno:
 	
-	String com o código html
+	String com o c&oacute;digo html
 	*/
 	html:function(){
 		var ins = "<div id='i3GEOcortinaTemasDiv' style='text-align:left;font-size:11px'></div>";
@@ -117,9 +117,9 @@ i3GEOF.cortina = {
 	
 	tema {string} - codigo do tema
 	
-	mx {numero} - (opcional) posição em x para onde a janela será movida após ser criada
+	mx {numero} - (opcional) posi&ccedil;ão em x para onde a janela ser&aacute; movida ap&oacute;s ser criada
 	
-	my {numero} - (opcional) posição em y para onde a janela será movida após ser criada
+	my {numero} - (opcional) posi&ccedil;ão em y para onde a janela ser&aacute; movida ap&oacute;s ser criada
 	*/
 	criaJanelaFlutuante: function(tema,mx,my){
 		if(tema == undefined)

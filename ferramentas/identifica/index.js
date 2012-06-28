@@ -3,8 +3,8 @@
 /*
 Title: Identifica
 
-Obtém os atributos de um ou mais temas para uma coordenada.
-Abre uma janela com várias opções e lista de temas disponíveis no mapa atual.
+Obt&eacute;m os atributos de um ou mais temas para uma coordenada.
+Abre uma janela com v&aacute;rias op&ccedil;&otilde;es e lista de temas dispon&iacute;veis no mapa atual.
 
 Veja:
 
@@ -12,24 +12,24 @@ Veja:
 
 File: i3geo/ferramentas/identifica/index.js.php
 
-About: Licença
+About: Licen&ccedil;a
 
 i3Geo Interface Integrada de Ferramentas de Geoprocessamento para Internet
 
-Direitos Autorais Reservados (c) 2006 Ministério do Meio Ambiente Brasil
+Direitos Autorais Reservados (c) 2006 Minist&eacute;rio do Meio Ambiente Brasil
 Desenvolvedor: Edmar Moretti edmar.moretti@mma.gov.br
 
-Este programa é software livre; você pode redistribuí-lo
-e/ou modificá-lo sob os termos da Licença Pública Geral
+Este programa &eacute; software livre; voc&ecirc; pode redistribu&iacute;-lo
+e/ou modific&aacute;-lo sob os termos da Licen&ccedil;a P&uacute;blica Geral
 GNU conforme publicada pela Free Software Foundation;
 
-Este programa é distribuído na expectativa de que seja útil,
-porém, SEM NENHUMA GARANTIA; nem mesmo a garantia implícita
-de COMERCIABILIDADE OU ADEQUAÇÃO A UMA FINALIDADE ESPECÍFICA.
-Consulte a Licença Pública Geral do GNU para mais detalhes.
-Você deve ter recebido uma cópia da Licença Pública Geral do
+Este programa &eacute; distribu&iacute;do na expectativa de que seja &uacute;til,
+por&eacute;m, SEM NENHUMA GARANTIA; nem mesmo a garantia impl&iacute;cita
+de COMERCIABILIDADE OU ADEQUAÇÃO A UMA FINALIDADE ESPEC&Iacute;FICA.
+Consulte a Licen&ccedil;a P&uacute;blica Geral do GNU para mais detalhes.
+Voc&ecirc; deve ter recebido uma c&oacute;pia da Licen&ccedil;a P&uacute;blica Geral do
 GNU junto com este programa; se não, escreva para a
-Free Software Foundation, Inc., no endereço
+Free Software Foundation, Inc., no endere&ccedil;o
 59 Temple Street, Suite 330, Boston, MA 02111-1307 USA.
 */
 if(typeof(i3GEOF) === 'undefined'){
@@ -45,7 +45,7 @@ i3GEOF.identifica = {
 	
 	Mostra ou não o link para abrir o site GeoHack.
 	
-	Este site permite o uso de vários buscadores disponíveis na internet.
+	Este site permite o uso de v&aacute;rios buscadores dispon&iacute;veis na internet.
 	
 	Type:
 	{boolean}
@@ -63,7 +63,7 @@ i3GEOF.identifica = {
 	/*
 	Variavel: tema
 	
-	Código do tema que será pesquisado
+	C&oacute;digo do tema que ser&aacute; pesquisado
 	
 	Type:
 	{String}
@@ -90,7 +90,7 @@ i3GEOF.identifica = {
 	/*
 	Variavel: sistemasAdicionais
 	
-	Guarda a lista de sistemas adicionais que são incluídos na seleção de temas
+	Guarda a lista de sistemas adicionais que são inclu&iacute;dos na sele&ccedil;ão de temas
 	
 	Type:
 	{Array}
@@ -99,7 +99,7 @@ i3GEOF.identifica = {
 	/*
 	Variavel: dadosIdentifica
 	
-	Guarda os dados obtidos com a chamada em AJAX de identificação
+	Guarda os dados obtidos com a chamada em AJAX de identifica&ccedil;ão
 	
 	Type:
 	{Array}
@@ -108,17 +108,17 @@ i3GEOF.identifica = {
 	/*
 	Function: inicia
 	
-	Inicia a janela de informações
+	Inicia a janela de informa&ccedil;&otilde;es
 	
 	Parameters:
 	
-	tema {String} - código do tema, existente no mapfile armazenado na seção, que será consultado já na inicialização
+	tema {String} - c&oacute;digo do tema, existente no mapfile armazenado na se&ccedil;ão, que ser&aacute; consultado j&aacute; na inicializa&ccedil;ão
 
-	x {Numeric} - coordenada x do ponto que será utilizado para busca dos atributos
+	x {Numeric} - coordenada x do ponto que ser&aacute; utilizado para busca dos atributos
 	
 	y {Numeric} - coordenada y do ponto
 	
-	iddiv {String} - id do elemento html onde o conteúdo da ferramenta será incluido
+	iddiv {String} - id do elemento html onde o conte&uacute;do da ferramenta ser&aacute; incluido
 	
 	mostraLinkGeohack {boolean} - mostra ou não o link para o site geohacks
 	
@@ -132,7 +132,7 @@ i3GEOF.identifica = {
 			i3GEOF.identifica.y = y;
 			i3GEOF.identifica.mostraLinkGeohack = mostraLinkGeohack;
 			i3GEOF.identifica.mostraSistemasAdicionais = mostraSistemasAdicionais;
-			//se o usuário for editor, força mostrar a lista de sistemas
+			//se o usu&aacute;rio for editor, for&ccedil;a mostrar a lista de sistemas
 			if(i3GEO.parametros.editor.toLowerCase() == "sim")
 			{i3GEOF.identifica.mostraSistemasAdicionais == true;}
 			i3GEO.guias.mostraGuiaFerramenta("i3GEOidentificaguia1","i3GEOidentificaguia");
@@ -200,7 +200,7 @@ i3GEOF.identifica = {
         });
         resize.on('resize', function(ev) {
             Dom.setStyle(col1, 'height', '');
-			//150 é o tamanho inicial da parte esquerda, corresponde a 40%
+			//150 &eacute; o tamanho inicial da parte esquerda, corresponde a 40%
 			var w1 = parseInt(col1.style.width);
 			var dif = parseInt((w1 * 40) / 150,10);
 			Dom.setStyle(col2, 'width', 40 - dif + 60 + '%');
@@ -225,7 +225,7 @@ i3GEOF.identifica = {
 	*/
 	criaJanelaFlutuante: function(){
 		var minimiza,cabecalho,janela,divid,temp,titulo;
-		//funcao que sera executada ao ser clicado no cabeçalho da janela
+		//funcao que sera executada ao ser clicado no cabe&ccedil;alho da janela
 		cabecalho = function(){
 			i3GEO.barraDeBotoes.ativaIcone("identifica");
 			g_tipoacao='identifica';
@@ -294,11 +294,11 @@ i3GEOF.identifica = {
 	/*
 	Function: html
 	
-	Gera o código html para apresentação das opções da ferramenta
+	Gera o c&oacute;digo html para apresenta&ccedil;ão das op&ccedil;&otilde;es da ferramenta
 	
 	Retorno:
 	
-	String com o código html
+	String com o c&oacute;digo html
 	*/
 	html:function(){
 		var ins = '';
@@ -325,7 +325,7 @@ i3GEOF.identifica = {
 		ins += '		Resolu&ccedil;&atilde;o de busca - n&uacute;mero de pixels, no entorno do ponto clicado no mapa, que ser&atilde;o utilizados na busca de dados:<br>  <input onclick="javascript:this.select();" type=text class=digitar value=5 id="i3GEOidentificaresolucao" size=2 />';
 		ins += '	</div>';
 		ins += '	<div class=guiaobj id="i3GEOidentificaguia4obj" style="left:1px;top:10px;display:none;font-size:12px;overflow:hidden" >';
-		ins += '		As etiquetas são mostradas quando o mouse é estacionado sobre um elemento.';
+		ins += '		As etiquetas são mostradas quando o mouse &eacute; estacionado sobre um elemento.';
 		ins += '		<br><br><input id=i3GEOidentificabotao1 size=20  type=button value="Configurar etiquetas" />';
 		ins += '	</div>';
 		ins += '	<div class=guiaobj id="i3GEOidentificaguia5obj" style="left:1px;top:10px;display:none;font-size:12px;overflow:hidden" >';
@@ -340,7 +340,7 @@ i3GEOF.identifica = {
 	/*
 	Function: listaTemas
 	
-	Incluí a lista de temas para o usuário escolher
+	Inclu&iacute; a lista de temas para o usu&aacute;rio escolher
 	
 	Veja:
 	
@@ -348,7 +348,7 @@ i3GEOF.identifica = {
 	
 	Parametros:
 	
-	tipo {String} - ligados|todos lista apenas os temas que estão visíveis no mapa ou todos os temas
+	tipo {String} - ligados|todos lista apenas os temas que estão vis&iacute;veis no mapa ou todos os temas
 	*/
 	listaTemas: function(tipo){
 		if(i3GEO.arvoreDeCamadas.CAMADAS !== ""){
@@ -365,9 +365,9 @@ i3GEOF.identifica = {
 	/*
 	Function: montaListaTemas
 	
-	Monta a lista de temas na forma de botões 'radio'
+	Monta a lista de temas na forma de bot&otilde;es 'radio'
 	
-	O resultado é inserido no div com id "listaTemas"
+	O resultado &eacute; inserido no div com id "listaTemas"
 	
 	Parametros:
 	
@@ -445,9 +445,9 @@ i3GEOF.identifica = {
 	/*
 	Function: montaListaSistemas
 	
-	Obtém a lista de sistemas especiais de consulta.
+	Obt&eacute;m a lista de sistemas especiais de consulta.
 	
-	O resultado é inserido no div com id "listaSistemas".
+	O resultado &eacute; inserido no div com id "listaSistemas".
 	
 	Cada sistema consiste em uma URL para a qual serão passados os parâmetros x e y.
 	
@@ -494,7 +494,7 @@ i3GEOF.identifica = {
 				}
 				if(divins){
 					if(i3GEO.parametros.editor.toLowerCase() == "sim"){
-						temp = "<p class=paragrafo ><a href='#' title='Opção visível apenas para quem é editor' style=color:red onclick=\"i3GEOF.identifica.abrejanelaIframe('1050','500','"+i3GEO.configura.locaplic+"/admin/html/webservices.html');\" >Editar a lista de sistemas adicionais</a></p>";
+						temp = "<p class=paragrafo ><a href='#' title='Op&ccedil;ão vis&iacute;vel apenas para quem &eacute; editor' style=color:red onclick=\"i3GEOF.identifica.abrejanelaIframe('1050','500','"+i3GEO.configura.locaplic+"/admin/html/webservices.html');\" >Editar a lista de sistemas adicionais</a></p>";
 					}
 					else
 					{temp = "";}
@@ -508,7 +508,7 @@ i3GEOF.identifica = {
 	/*
 	Function: buscaDadosTema
 	
-	Obtém os dados de um tema para o ponto de coordenadas clicado no mapa
+	Obt&eacute;m os dados de um tema para o ponto de coordenadas clicado no mapa
 	
 	Veja:
 	
@@ -543,13 +543,13 @@ i3GEOF.identifica = {
 	/*
 	Function: mostraDadosSistema
 	
-	Obtém os dados de um sistema para o ponto de coordenadas clicado no mapa
+	Obt&eacute;m os dados de um sistema para o ponto de coordenadas clicado no mapa
 	
 	Parametros:
 	
-	exec {String} - url que será aberta
+	exec {String} - url que ser&aacute; aberta
 	
-	target {String} (depreciado) - _self|self| onde a url será aberta. Se for "self", será aberta na mesma janela, caso contrário, em uma nova página do navegador 
+	target {String} (depreciado) - _self|self| onde a url ser&aacute; aberta. Se for "self", ser&aacute; aberta na mesma janela, caso contr&aacute;rio, em uma nova p&aacute;gina do navegador 
 	*/	
 	mostraDadosSistema: function(exec,target){
 		exec += "&x="+i3GEOF.identifica.x+"&y="+i3GEOF.identifica.y;
@@ -588,7 +588,7 @@ i3GEOF.identifica = {
 	
 	Mostra os dados obtidos de um ou mais temas.
 	
-	Recebe o resultado em JSON da operação de consulta realizada pelo servidor e formata os dados para apresentação na tela.
+	Recebe o resultado em JSON da opera&ccedil;ão de consulta realizada pelo servidor e formata os dados para apresenta&ccedil;ão na tela.
 	
 	Parametros:
 	
@@ -679,7 +679,7 @@ i3GEOF.identifica = {
 		}
 		select += "</select>";
 		ins = "<table><tr>";
-		ins += "<td>Mostra a ocorrência: </td>";
+		ins += "<td>Mostra a ocorr&ecirc;ncia: </td>";
 		ins += "<td> "+select+"</td>";
 		ins += "</tr></table>";
 		if(nres == 1)

@@ -2,7 +2,7 @@
 /*
 Title: graficos.php
 
-Funções de representação gráfica de dados com o software R.
+Fun&ccedil;&otilde;es de representa&ccedil;&atilde;o gr&aacute;fica de dados com o software R.
 Gera scripts na linguagem R para ser executados como CGI.
 
 Licenca:
@@ -11,20 +11,20 @@ GPL2
 
 i3Geo Interface Integrada de Ferramentas de Geoprocessamento para Internet
 
-Direitos Autorais Reservados (c) 2006 Ministério do Meio Ambiente Brasil
+Direitos Autorais Reservados (c) 2006 Minist&eacute;rio do Meio Ambiente Brasil
 Desenvolvedor: Edmar Moretti edmar.moretti@mma.gov.br
 
-Este programa é software livre; você pode redistribuí-lo
-e/ou modificá-lo sob os termos da Licença Pública Geral
+Este programa &eacute; software livre; voc&ecirc; pode redistribu&iacute;-lo
+e/ou modific&aacute;-lo sob os termos da Licen&ccedil;a P&uacute;blica Geral
 GNU conforme publicada pela Free Software Foundation;
 
-Este programa é distribuído na expectativa de que seja útil,
-porém, SEM NENHUMA GARANTIA; nem mesmo a garantia implícita
-de COMERCIABILIDADE OU ADEQUAÇÃO A UMA FINALIDADE ESPECÍFICA.
-Consulte a Licença Pública Geral do GNU para mais detalhes.
-Você deve ter recebido uma cópia da Licença Pública Geral do
-GNU junto com este programa; se não, escreva para a
-Free Software Foundation, Inc., no endereço
+Este programa &eacute; distribu&iacute;do na expectativa de que seja &uacute;til,
+por&eacute;m, SEM NENHUMA GARANTIA; nem mesmo a garantia impl&iacute;cita
+de COMERCIABILIDADE OU ADEQUA&Ccedil;&Atilde;O A UMA FINALIDADE ESPEC&Iacute;FICA.
+Consulte a Licen&ccedil;a P&uacute;blica Geral do GNU para mais detalhes.
+Voc&ecirc; deve ter recebido uma cópia da Licen&ccedil;a P&uacute;blica Geral do
+GNU junto com este programa; se n&atilde;o, escreva para a
+Free Software Foundation, Inc., no endere&ccedil;o
 59 Temple Street, Suite 330, Boston, MA 02111-1307 USA.
 
 Arquivo:
@@ -32,7 +32,7 @@ Arquivo:
 i3geo/classesphp/graficos.php
 */
 /*
-* Gera gráfico de pizza.
+* Gera gr&aacute;fico de pizza.
 */
 function graficoPizza()
 {
@@ -68,7 +68,7 @@ function graficoPizza()
 	$cp->set_data($url.$gfile_name.".png,".$url.(basename($nome)).",".$nome);
 }
 /**
-* Gera gráfico de barras.
+* Gera gr&aacute;fico de barras.
 */
 function graficoBarras()
 {
@@ -118,7 +118,7 @@ function graficoBarras()
 	return($url.$gfile_name.".png,".$url.(basename($nome)).",".$nome);
 }
 /**
-* Gera gráfico de histograma.
+* Gera gr&aacute;fico de histograma.
 */
 function graficoHist()
 {
@@ -167,7 +167,7 @@ function graficoHist()
 	return($url.$gfile_name.".png,".$url.(basename($nome)).",".$nome);
 }
 /**
-* Gera gráfico de linhas.
+* Gera gr&aacute;fico de linhas.
 */
 function graficoLinhas()
 {
@@ -213,7 +213,7 @@ function graficoLinhas()
 	return($url.$gfile_name.".png,".$url.(basename($nome)).",".$nome);
 }
 /**
-* Gera gráfico de distribuição de pontos (scatter).
+* Gera gr&aacute;fico de distribui&ccedil;&atilde;o de pontos (scatter).
 */
 function graficoScatter()
 {
@@ -245,7 +245,7 @@ function graficoScatter()
 	return ($url.$gfile_name.".png,".$url.(basename($nome)).",".$nome);
 }
 /**
-* Gera gráfico de distribuição de pontos (scatter) com agrupamento em pixels.
+* Gera gr&aacute;fico de distribui&ccedil;&atilde;o de pontos (scatter) com agrupamento em pixels.
 */
 function graficoScatterBins()
 {
@@ -289,7 +289,7 @@ function graficoScatterBins()
 }
 
 /**
-* Gera gráfico de estrelas.
+* Gera gr&aacute;fico de estrelas.
 */
 function graficoEstrela()
 {
@@ -550,7 +550,7 @@ function dadosLinhaDoTempo($map_file,$tema,$ext="")
 	);
 }
 //
-//opcao pode ser "google" ou o código de um tema. Nesse último caso, deve-se definir $item
+//opcao pode ser "google" ou o código de um tema. Nesse &uacute;ltimo caso, deve-se definir $item
 //
 function dadosPerfilRelevo($pontos,$opcao,$amostragem,$item="",$map_file=""){
 	$urlGoogle = "http://maps.google.com/maps/api/elevation/json?sensor=false&path=";

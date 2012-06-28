@@ -1,153 +1,193 @@
-P
-{text-align: left;font-size: 12px;font-family: Verdana, Arial, Helvetica, sans-serif;}
+P {
+	text-align: left;
+	font-size: 12px;
+	font-family: Verdana, Arial, Helvetica, sans-serif;
+}
 
-legend
-{font-weight:bold;cursor:pointer;background-color:white;color:navy;text-align: left;font-size: 12px;font-family: Verdana, Arial, Helvetica, sans-serif;}
+legend {
+	font-weight: bold;
+	cursor: pointer;
+	background-color: white;
+	color: navy;
+	text-align: left;
+	font-size: 12px;
+	font-family: Verdana, Arial, Helvetica, sans-serif;
+}
 
-.mensagem
-{color:black;text-align: left;font-size: 12px;font-family: Verdana, Arial, Helvetica, sans-serif;}
+.mensagem {
+	color: black;
+	text-align: left;
+	font-size: 12px;
+	font-family: Verdana, Arial, Helvetica, sans-serif;
+}
 
-h1
-{text-align: left;font-size:15px;font-family: Verdana, Arial, Helvetica, sans-serif;}
+h1 {
+	text-align: left;
+	font-size: 15px;
+	font-family: Verdana, Arial, Helvetica, sans-serif;
+}
 
-input
-{cursor:pointer;}
+input {
+	cursor: pointer;
+}
 
-.lista td
-{border: 1px solid rgb(140,140,140);border-left: 0px;border-right:0px;border-top:0px;padding: 0px;color:#2F4632;margin:0px;text-align:left;font-size: 10px;font-family: Verdana, Arial, Helvetica, sans-serif;}
+.lista td {
+	border: 1px solid rgb(140, 140, 140);
+	border-left: 0px;
+	border-right: 0px;
+	border-top: 0px;
+	padding: 0px;
+	color: #2F4632;
+	margin: 0px;
+	text-align: left;
+	font-size: 10px;
+	font-family: Verdana, Arial, Helvetica, sans-serif;
+}
 
-.lista1 td
-{cursor:pointer;text-align:left;font-size: 14px;font-family: Verdana, Arial, Helvetica, sans-serif;}
+.lista1 td {
+	cursor: pointer;
+	text-align: left;
+	font-size: 14px;
+	font-family: Verdana, Arial, Helvetica, sans-serif;
+}
 
-.lista1
-{text-align:left;}
-.aplicar
-{
-	background-image:URL('../imagens/02.png');
+.lista1 {
+	text-align: left;
+}
+
+.aplicar {
+	background-image: URL('../imagens/02.png');
 	background-repeat: no-repeat;
 	background-position: 0px 0px;
-	cursor:pointer;
+	cursor: pointer;
 	width: 20px;
 	height: 20px;
 }
-.salvar
-{
-	background-image:URL('../imagens/save1.png');
+
+.salvar {
+	background-image: URL('../imagens/save1.png');
 	background-repeat: no-repeat;
 	background-position: 0px 0px;
-	cursor:pointer;
+	cursor: pointer;
 	width: 20px;
 	height: 20px;
 }
-.excluir
-{
-	background-image:URL('../imagens/01.png');
+
+.excluir {
+	background-image: URL('../imagens/01.png');
 	background-repeat: no-repeat;
 	background-position: 0px 0px;
-	cursor:pointer;
+	cursor: pointer;
 	width: 20px;
 	height: 20px;
 }
-.testar
-{
-	background-image:URL('../imagens/41.png');
+
+.testar {
+	background-image: URL('../imagens/41.png');
 	background-repeat: no-repeat;
 	background-position: 0px 0px;
-	cursor:pointer;
+	cursor: pointer;
 	width: 20px;
 	height: 20px;
 }
-.mais
-{
-	background-image:URL('../imagens/05.png');
+
+.mais {
+	background-image: URL('../imagens/05.png');
 	background-repeat: no-repeat;
 	background-position: 0px 0px;
-	cursor:pointer;
+	cursor: pointer;
 	width: 20px;
 	height: 20px;
 }
-.editar
-{
-	background-image:URL('../imagens/06.png');
+
+.editar {
+	background-image: URL('../imagens/06.png');
 	background-repeat: no-repeat;
 	background-position: 0px 0px;
-	cursor:pointer;
+	cursor: pointer;
 	width: 20px;
 	height: 20px;
 }
-.sobe
-{
-	background-image:URL('../imagens/34.png');
+
+.sobe {
+	background-image: URL('../imagens/34.png');
 	background-repeat: no-repeat;
 	background-position: 0px 0px;
-	cursor:pointer;
+	cursor: pointer;
 }
-.desce
-{
-	background-image:URL('../imagens/35.png');
+
+.desce {
+	background-image: URL('../imagens/35.png');
 	background-repeat: no-repeat;
 	background-position: 0px 0px;
-	cursor:pointer;
+	cursor: pointer;
 }
-.mostrar
-{
-	background-image:URL('../imagens/03.png');
+
+.mostrar {
+	background-image: URL('../imagens/03.png');
 	background-repeat: no-repeat;
 	background-position: 0px 0px;
-	cursor:pointer;
+	cursor: pointer;
 	width: 20px;
 	height: 20px;
 }
-.ajuda
-{
-	background-image:URL('../imagens/04.png');
+
+.ajuda {
+	background-image: URL('../imagens/04.png');
 	background-repeat: no-repeat;
 	background-position: 0px 0px;
-	cursor:pointer;
+	cursor: pointer;
 	width: 20px;
 	height: 15px;
 }
-.textoAjuda
-{
-	color:black;text-align: left;font-size: 12px;font-family: Verdana, Arial, Helvetica, sans-serif;
+
+.textoAjuda {
+	color: black;
+	text-align: left;
+	font-size: 12px;
+	font-family: Verdana, Arial, Helvetica, sans-serif;
 }
-.fieldsetRaiz
-{
-	background-color:rgb(252,210,186);
+
+.fieldsetRaiz {
+	background-color: rgb(252, 210, 186);
 	border: 1px solid gray;
-	
 }
-fieldset
-{
-	text-align:left;
+
+fieldset {
+	text-align: left;
 	padding: 10px;
 	border: 0px solid gray;
 	border-radius: 5px 5px 5px 5px;
-	box-shadow: 0 1px 3px gray ;
-	background-color:rgb(250,250,250);
-	margin:15px;
+	box-shadow: 0 1px 3px gray;
+	background-color: rgb(250, 250, 250);
+	margin: 15px;
 }
-.mascaraPrincipal{
-	position:relative;
-	top:-15px;
-	width:100%;
-	text-align:left;
-	background-color:white;
-	margin:0px auto;
-	box-shadow:0px 8px 10px 0px #888;
-	padding:15px
+
+.mascaraPrincipal {
+	position: relative;
+	top: -15px;
+	width: 100%;
+	text-align: left;
+	background-color: white;
+	margin: 0px auto;
+	box-shadow: 0px 8px 10px 0px #888;
+	padding: 15px
 }
-.bordaSuperior{
-	height:25px;
-	width:100%;
-	text-align:left;
-	background-color:#00500F;
+
+.bordaSuperior {
+	height: 25px;
+	width: 100%;
+	text-align: left;
+	background-color: #00500F;
 }
+
 .fundoPonto {
-	background:url("../../imagens/fundo_ponto.jpg") repeat-x scroll left transparent;
-	margin:0px;
+	background: url("../../imagens/fundo_ponto.jpg") repeat-x scroll left
+		transparent;
+	margin: 0px;
 	font-family: Verdana, Arial, Helvetica, sans-serif;
 }
-.cabecalhoGeral{
+
+.cabecalhoGeral {
 	margin: 0px;
 }

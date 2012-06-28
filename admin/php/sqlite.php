@@ -2,9 +2,9 @@
 /*
 Title: sqlite.php
 
-Lista as definições do banco de dados de administração
+Lista as defini&ccedil;&otilde;es do banco de dados de administra&ccedil;&atilde;o
 
-Obtém as definições do arquivo i3geo/menutemas/admin.db
+Obt&eacute;m as defini&ccedil;&otilde;es do arquivo i3geo/menutemas/admin.db
 
 Licenca:
 
@@ -12,20 +12,20 @@ GPL2
 
 i3Geo Interface Integrada de Ferramentas de Geoprocessamento para Internet
 
-Direitos Autorais Reservados (c) 2006 Ministério do Meio Ambiente Brasil
+Direitos Autorais Reservados (c) 2006 Minist&eacute;rio do Meio Ambiente Brasil
 Desenvolvedor: Edmar Moretti edmar.moretti@mma.gov.br
 
-Este programa é software livre; você pode redistribuí-lo
-e/ou modificá-lo sob os termos da Licença Pública Geral
+Este programa &eacute; software livre; voc&ecirc; pode redistribu&iacute;-lo
+e/ou modific&aacute;-lo sob os termos da Licen&ccedil;a P&uacute;blica Geral
 GNU conforme publicada pela Free Software Foundation;
 
-Este programa é distribuído na expectativa de que seja útil,
-porém, SEM NENHUMA GARANTIA; nem mesmo a garantia implícita
-de COMERCIABILIDADE OU ADEQUAÇÃO A UMA FINALIDADE ESPECÍFICA.
-Consulte a Licença Pública Geral do GNU para mais detalhes.
-Você deve ter recebido uma cópia da Licença Pública Geral do
-GNU junto com este programa; se não, escreva para a
-Free Software Foundation, Inc., no endereço
+Este programa &eacute; distribu&iacute;do na expectativa de que seja &uacute;til,
+por&eacute;m, SEM NENHUMA GARANTIA; nem mesmo a garantia impl&iacute;cita
+de COMERCIABILIDADE OU ADEQUA&Ccedil;&Atilde;O A UMA FINALIDADE ESPEC&Iacute;FICA.
+Consulte a Licen&ccedil;a P&uacute;blica Geral do GNU para mais detalhes.
+Voc&ecirc; deve ter recebido uma cópia da Licen&ccedil;a P&uacute;blica Geral do
+GNU junto com este programa; se n&atilde;o, escreva para a
+Free Software Foundation, Inc., no endere&ccedil;o
 59 Temple Street, Suite 330, Boston, MA 02111-1307 USA.
 
 Arquivo:
@@ -34,7 +34,7 @@ i3geo/admin/php/sqlite.php
 */
 if(!file_exists("../admin.db"))
 {
-	echo "O arquivo menutemas/admin.db não existe. Utilize i3geo/admin/criasqlite.php para criar o banco de dados SQLITE.";
+	echo "O arquivo menutemas/admin.db n&atilde;o existe. Utilize i3geo/admin/criasqlite.php para criar o banco de dados SQLITE.";
 	exit;
 }
 echo "<pre>";
@@ -46,14 +46,14 @@ foreach ($resultado as $r)
 echo $r["name"]."<br>";
 $q = $dbh->query("select * from sqlite_master",PDO::FETCH_ASSOC);
 $resultado = $q->fetchAll();
-echo "<br><br><span style=color:red >SQL no padrão SQLITE</span><br><br>";
+echo "<br><br><span style=color:red >SQL no padr&atilde;o SQLITE</span><br><br>";
 foreach($resultado as $r)
 {
 	echo $r["sql"]."<br>";
 }
-echo "<br><br><span style=color:red >SQL no padrão POSTGRES</span><br><br>";
-echo "<br><br>Após criar as tabelas no Postgres, vc deve definir as permissões para os usuários.<br><br>";
-echo "<br><br>Para usar outro banco de dados que não seja o default (SQLITE), você terá de alterar o programa i3geo/admin/php/conexao.php<br><br>";
+echo "<br><br><span style=color:red >SQL no padr&atilde;o POSTGRES</span><br><br>";
+echo "<br><br>Após criar as tabelas no Postgres, vc deve definir as permiss&otilde;es para os usu&aacute;rios.<br><br>";
+echo "<br><br>Para usar outro banco de dados que n&atilde;o seja o default (SQLITE), voc&ecirc; ter&aacute; de alterar o programa i3geo/admin/php/conexao.php<br><br>";
 foreach($resultado as $r)
 {
 	echo str_ireplace("INTEGER PRIMARY KEY","SERIAL PRIMARY KEY NOT NULL",$r["sql"])."<br>";

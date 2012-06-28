@@ -2,7 +2,7 @@
 /*
 Title: classe_analise.php
 
-Gera análises espaciais, como buffer, calculo de centróides, etc.
+Gera an&aacute;lises espaciais, como buffer, calculo de centróides, etc.
 
 Licenca:
 
@@ -11,20 +11,20 @@ GPL2
 
 i3Geo Interface Integrada de Ferramentas de Geoprocessamento para Internet
 
-Direitos Autorais Reservados (c) 2006 Ministério do Meio Ambiente Brasil
+Direitos Autorais Reservados (c) 2006 Minist&eacute;rio do Meio Ambiente Brasil
 Desenvolvedor: Edmar Moretti edmar.moretti@mma.gov.br
 
-Este programa é software livre; você pode redistribuí-lo
-e/ou modificá-lo sob os termos da Licença Pública Geral
+Este programa &eacute; software livre; voc&ecirc; pode redistribu&iacute;-lo
+e/ou modific&aacute;-lo sob os termos da Licen&ccedil;a P&uacute;blica Geral
 GNU conforme publicada pela Free Software Foundation;
 
-Este programa é distribuído na expectativa de que seja útil,
-porém, SEM NENHUMA GARANTIA; nem mesmo a garantia implícita
-de COMERCIABILIDADE OU ADEQUAÇÃO A UMA FINALIDADE ESPECÍFICA.
-Consulte a Licença Pública Geral do GNU para mais detalhes.
-Você deve ter recebido uma cópia da Licença Pública Geral do
-GNU junto com este programa; se não, escreva para a
-Free Software Foundation, Inc., no endereço
+Este programa &eacute; distribu&iacute;do na expectativa de que seja &uacute;til,
+por&eacute;m, SEM NENHUMA GARANTIA; nem mesmo a garantia impl&iacute;cita
+de COMERCIABILIDADE OU ADEQUA&Ccedil;&Atilde;O A UMA FINALIDADE ESPEC&Iacute;FICA.
+Consulte a Licen&ccedil;a P&uacute;blica Geral do GNU para mais detalhes.
+Voc&ecirc; deve ter recebido uma cópia da Licen&ccedil;a P&uacute;blica Geral do
+GNU junto com este programa; se n&atilde;o, escreva para a
+Free Software Foundation, Inc., no endere&ccedil;o
 59 Temple Street, Suite 330, Boston, MA 02111-1307 USA.
 
 Arquivo:
@@ -70,19 +70,19 @@ class Analise
 	/*
 	Variavel: $qyfile
 	
-	Nome do arquivo de seleção (.qy)
+	Nome do arquivo de sele&ccedil;&atilde;o (.qy)
 	*/
 	public $qyfile;
 	/*
 	Variavel: $v
 	
-	Versão atual do Mapserver (primeiro dígito)
+	Vers&atilde;o atual do Mapserver (primeiro d&iacute;gito)
 	*/
 	public $v;	
 	/*
 	Variavel: $dbaseExiste
 	
-	Indica se a biblioteca dbase está carregada
+	Indica se a biblioteca dbase est&aacute; carregada
 	*/
 	protected $dbaseExiste;
 /*
@@ -92,11 +92,11 @@ Cria um objeto Analise
 
 parameters:
 
-$map_file - Endereço do mapfile no servidor.
+$map_file - Endere&ccedil;o do mapfile no servidor.
 
-$tema - Nome do tema que será processado
+$tema - Nome do tema que ser&aacute; processado
 
-$ext - Extensão geográfica do mapa
+$ext - Extens&atilde;o geogr&aacute;fica do mapa
 */  
 	function __construct($map_file,$tema="",$locaplic="",$ext="")
 	{
@@ -127,7 +127,7 @@ $ext - Extensão geográfica do mapa
 /*
 Method: criaDefDb
 
-Cria um array contendo as definições das colunas que serão criadas em uma tabela DBF conforme as exigências de arquivos dbf
+Cria um array contendo as defini&ccedil;&otilde;es das colunas que ser&atilde;o criadas em uma tabela DBF conforme as exig&ecirc;ncias de arquivos dbf
 
 parameters:
 
@@ -178,20 +178,20 @@ Salva o mapfile atual
 /*
 function: analiseDistriPt
 
-Gera análise de distribuição de pontos.
+Gera an&aacute;lise de distribui&ccedil;&atilde;o de pontos.
 
 Executa script R para gerar a imagem.
 
 parameters:
-$locaplic - Localização da aplicação I3Geo
+$locaplic - Localiza&ccedil;&atilde;o da aplica&ccedil;&atilde;o I3Geo
 
-$dir_tmp - Diretório temporário do mapserver
+$dir_tmp - Diretório tempor&aacute;rio do mapserver
 
 $R_path - Onde fica o R
 
-$numclasses - Número de classes que serão representadas
+$numclasses - N&uacute;mero de classes que ser&atilde;o representadas
 
-$tipo - Tipo de análise.
+$tipo - Tipo de an&aacute;lise.
 
 $cori - Cor inicial em rgb.
 
@@ -199,11 +199,11 @@ $corf - Cor final em rgb.
 
 $tmpurl - Url com o nome da imagem final
 
-$sigma - desvio padrão para a opção kernel
+$sigma - desvio padr&atilde;o para a op&ccedil;&atilde;o kernel
 
-$limitepontos - "TRUE"|"FALSE" limita o resultado ao limite geográfico dos pontos se "TRUE" ou ao limite do mapa se "FALSE"
+$limitepontos - "TRUE"|"FALSE" limita o resultado ao limite geogr&aacute;fico dos pontos se "TRUE" ou ao limite do mapa se "FALSE"
 
-$extendelimite - extende o limite dos pontos em um determinado percentual em relação a área final de abrangência
+$extendelimite - extende o limite dos pontos em um determinado percentual em rela&ccedil;&atilde;o a &aacute;rea final de abrang&ecirc;ncia
 Include:
 <class.palette.php>
 */
@@ -211,7 +211,7 @@ Include:
 	{
 		set_time_limit(120);
 		//
-		//pega os dados do tema dois para as funções que o utilizam
+		//pega os dados do tema dois para as fun&ccedil;&otilde;es que o utilizam
 		//
 		$dados1 = $this->gravaCoordenadasPt($this->nome,$limitepontos,$extendelimite);
 		$nomearq = $dados1["prefixoarquivo"];
@@ -326,7 +326,7 @@ Include:
 /*
 function: mapaRelatorioAnaliseDist
 
-Gera um relatório da análise de distribuição de pontos.
+Gera um relatório da an&aacute;lise de distribui&ccedil;&atilde;o de pontos.
 
 Executa script R para gerar relatório .
 
@@ -338,7 +338,7 @@ $dimx - Range em x no formato R c(-54,-53).
 
 $dimy - Range em y no formato R c(-25,-23).
 
-$dir_tmp - Diretório temporário do mapserver.
+$dir_tmp - Diretório tempor&aacute;rio do mapserver.
 
 $R_path - Onde fica o R.
 
@@ -371,7 +371,7 @@ $locaplic - Onde fica o I3Geo.
 		$rcode[] = 'img<-distmap(oppp)';
 		$rcode[] = 'zz <- file("'.$arqpt.'.htm", "w")';
 		$rcode[] = 'sink(zz)';
-		$rcode[] = 'cat("<br><b>Distância</b>\n", file = zz)';
+		$rcode[] = 'cat("<br><b>Dist&acirc;ncia</b>\n", file = zz)';
 		$rcode[] = 'sink()';
 		$rcode[] = $tipoimg.'(file="'.$nomedir.'distancia.png")';
 		$rcode[] = 'plot(img,main="")';
@@ -463,7 +463,7 @@ $dimx - Range em x no formato R c(-54,-53).
 
 $dimy - Range em y no formato R c(-25,-23).
 
-$dir_tmp - Diretório temporário do mapserver.
+$dir_tmp - Diretório tempor&aacute;rio do mapserver.
 
 $R_path - Onde fica o R.
 
@@ -518,7 +518,7 @@ $dimx - Range em x no formato R c(-54,-53).
 
 $dimy - Range em y no formato R c(-25,-23).
 
-$dir_tmp - Diretório temporário do mapserver.
+$dir_tmp - Diretório tempor&aacute;rio do mapserver.
 
 $R_path - Onde fica o R.
 
@@ -578,7 +578,7 @@ $dimx - Range em x no formato R c(-54,-53).
 
 $dimy - Range em y no formato R c(-25,-23).
 
-$dir_tmp - Diretório temporário do mapserver.
+$dir_tmp - Diretório tempor&aacute;rio do mapserver.
 
 $R_path - Onde fica o R.
 
@@ -632,7 +632,7 @@ $dimx - Range em x no formato R c(-54,-53).
 
 $dimy - Range em y no formato R c(-25,-23).
 
-$dir_tmp - Diretório temporário do mapserver.
+$dir_tmp - Diretório tempor&aacute;rio do mapserver.
 
 $R_path - Onde fica o R.
 
@@ -674,9 +674,9 @@ $locaplic - Onde fica o I3Geo.
 /*
 function: mapaDeldir
 
-Calcula a triangulação de Delaunay e diagrama de Voronoi.
+Calcula a triangula&ccedil;&atilde;o de Delaunay e diagrama de Voronoi.
 
-Para funcionar, é necessário a instalação da biblioteca deldir do R.
+Para funcionar, &eacute; necess&aacute;rio a instala&ccedil;&atilde;o da biblioteca deldir do R.
 
 http://cran.r-project.org/web/packages/deldir
 
@@ -684,7 +684,7 @@ parameters:
 
 $arqpt - Prefixo dos arquivos em disco com os pontos.
 
-$dir_tmp - Diretório temporário do mapserver.
+$dir_tmp - Diretório tempor&aacute;rio do mapserver.
 
 $R_path - Onde fica o R.
 
@@ -719,17 +719,17 @@ $locaplic - Onde fica o I3Geo.
 /*
 function deldirDel2shp
 
-Lê um arquivo CSV gerado pelo software R com os dados referentes à triangulação de Delaunay.
+L&ecirc; um arquivo CSV gerado pelo software R com os dados referentes à triangula&ccedil;&atilde;o de Delaunay.
 
-O arquivo CSV é lido e convertido em um shape file que é então adicionado ao mapa.
+O arquivo CSV &eacute; lido e convertido em um shape file que &eacute; ent&atilde;o adicionado ao mapa.
 
 Parametros:
 
 $nomearq - nome do arquivo CSV
 
-$dir_tmp - diretório temporário do Mapserver
+$dir_tmp - diretório tempor&aacute;rio do Mapserver
 
-$locaplic - diretório da aplicação i3geo
+$locaplic - diretório da aplica&ccedil;&atilde;o i3geo
 */
 	function deldirDel2shp($nomearq,$dir_tmp,$locaplic)
 	{
@@ -741,7 +741,7 @@ $locaplic - diretório da aplicação i3geo
 				else	
 				include_once "../pacotes/phpxbase/api_conversion.php";
 			}
-			//define o nome do novo shapefile que será criado
+			//define o nome do novo shapefile que ser&aacute; criado
 			$nomefinal = nomeRandomico();
 			$nomeshp = $this->diretorio."/".$nomefinal;
 			//cria o shape file
@@ -813,17 +813,17 @@ $locaplic - diretório da aplicação i3geo
 /*
 function deldirDir2shp
 
-Lê um arquivo CSV gerado pelo software R com os dados referentes ao diagrama de Voronoi.
+L&ecirc; um arquivo CSV gerado pelo software R com os dados referentes ao diagrama de Voronoi.
 
-O arquivo CSV é lido e convertido em um shape file que é então adicionado ao mapa.
+O arquivo CSV &eacute; lido e convertido em um shape file que &eacute; ent&atilde;o adicionado ao mapa.
 
 Parametros:
 
 $nomearq - nome do arquivo CSV
 
-$dir_tmp - diretório temporário do Mapserver
+$dir_tmp - diretório tempor&aacute;rio do Mapserver
 
-$locaplic - diretório da aplicação i3geo
+$locaplic - diretório da aplica&ccedil;&atilde;o i3geo
 */	
 	function deldirDir2shp($nomearq,$dir_tmp,$locaplic)
 	{
@@ -836,7 +836,7 @@ $locaplic - diretório da aplicação i3geo
 				include_once "../pacotes/phpxbase/api_conversion.php";
 			}
 			//
-			//define os nomes dos novos shapefiles que serão criados
+			//define os nomes dos novos shapefiles que ser&atilde;o criados
 			//
 			$nomeLinhas = nomeRandomico();
 			$nomePoligonos = nomeRandomico();
@@ -876,7 +876,7 @@ $locaplic - diretório da aplicação i3geo
 			//			
 			//le o arquivo linha a linha, pulando a primeira
 			//acrescenta os pontos no shape file formando as linhas
-			//cria o array para criar os polígonos
+			//cria o array para criar os pol&iacute;gonos
 			//
 			$abre = fopen($nomearq, "r");
 			$buffer = fgets($abre);
@@ -944,7 +944,7 @@ $locaplic - diretório da aplicação i3geo
 			else
 			dbase_close($dbPoligonos);
 			//
-			//adiciona o layer com os polígonos no mapa
+			//adiciona o layer com os pol&iacute;gonos no mapa
 			//
 			$novolayerp = criaLayer($this->mapa,MS_LAYER_POLYGON,MS_DEFAULT,("Voronoi - poligonos (".$nomePoligonos.")"),$metaClasse="SIM");
 			$novolayerp->set("data",$nomeshpPoligonos.".shp");
@@ -999,11 +999,11 @@ Salva o mapa acrescentando um novo layer com o resultado.
 
 parameters:
 
-$temaPt - Tema de pontos que será utilizado.
+$temaPt - Tema de pontos que ser&aacute; utilizado.
 
 $temaPo - Temas poligonais separados por virgula.
 
-$locaplic - Localização do I3geo.
+$locaplic - Localiza&ccedil;&atilde;o do I3geo.
 */
 	function pontoEmPoligono($temaPt,$temasPo,$locaplic)
 	{
@@ -1017,7 +1017,7 @@ $locaplic - Localização do I3geo.
 		$layerPt = $this->mapa->getlayerbyname($temaPt);
 		$layerPt->set("template","none.htm");
 		$layerPt->set("tolerance",0);
-		//define o nome do novo shapefile que será criado
+		//define o nome do novo shapefile que ser&aacute; criado
 		$nomefinal = nomeRandomico();
 		$nomeshp = $this->diretorio."/".$nomefinal;
 		//
@@ -1153,7 +1153,7 @@ function: distanciaptpt
 
 Calcula a distancia entre um ponto de origem e os pontos em um tema.
 
-São considerados apenas os pontos dentro de um tema de overlay.
+S&atilde;o considerados apenas os pontos dentro de um tema de overlay.
 
 parameters:
 
@@ -1161,13 +1161,13 @@ temaorigem - nome do layer com o ponto de origem
 
 temadestino - nome do tema com os pontos de destino
 
-temaoverlay - tema que será utilizado para selecionar o tema de destino
+temaoverlay - tema que ser&aacute; utilizado para selecionar o tema de destino
 
-locapli - endereço da aplicação i3geo
+locapli - endere&ccedil;o da aplica&ccedil;&atilde;o i3geo
 
-itemorigem - nome do item na tabela de atributos do tema de origem que será acrescentado ao tema que será criado
+itemorigem - nome do item na tabela de atributos do tema de origem que ser&aacute; acrescentado ao tema que ser&aacute; criado
 
-itemdestino - nome do item na tabela de atributos do tema de origem que será acrescentado ao tema que será criado
+itemdestino - nome do item na tabela de atributos do tema de origem que ser&aacute; acrescentado ao tema que ser&aacute; criado
 
 */
 function distanciaptpt($temaorigem,$temadestino,$temaoverlay,$locaplic,$itemorigem="",$itemdestino="")
@@ -1181,7 +1181,7 @@ function distanciaptpt($temaorigem,$temadestino,$temaoverlay,$locaplic,$itemorig
 		else	
 		include_once "../pacotes/phpxbase/api_conversion.php";
 	}
-	//define o nome do novo shapefile que será criado
+	//define o nome do novo shapefile que ser&aacute; criado
 	$nomefinal = nomeRandomico();
 	$nomeshp = $this->diretorio."/".$nomefinal;
 
@@ -1296,14 +1296,14 @@ Salva o mapa acrescentando um novo layer com o buffer.
 
 Parametros:
 
-$distancia - Distância em metros.
+$distancia - Dist&acirc;ncia em metros.
 
-$locaplic - Localização do I3geo.
+$locaplic - Localiza&ccedil;&atilde;o do I3geo.
 
-$unir - sim|nao indica se os elementos selecionados deverão ser unidos em um só antes do buffer ser criado
+$unir - sim|nao indica se os elementos selecionados dever&atilde;o ser unidos em um só antes do buffer ser criado
 
-$wkt - (opcional) elemento no formato wkt para o qual o buffer será gerado. Só de ve ser definido se $this->nome for vazio, ou seja
-se o parâmetro "tema" não tiver sido fornecido ao construtor da classe
+$wkt - (opcional) elemento no formato wkt para o qual o buffer ser&aacute; gerado. Só de ve ser definido se $this->nome for vazio, ou seja
+se o par&acirc;metro "tema" n&atilde;o tiver sido fornecido ao construtor da classe
 
 return:
 
@@ -1337,7 +1337,7 @@ nome do layer criado com o buffer.
 			$listaShapes[] = $s;
 		}
 		foreach($listaShapes as $shape){
-			//calcula a extensão geografica
+			//calcula a extens&atilde;o geografica
 			$rect = $shape->bounds;
 			$projInObj = ms_newprojectionobj("proj=latlong");
 			$projOutObj = ms_newprojectionobj("proj=poly,ellps=GRS67,lat_0=".$rect->miny.",lon_0=".$rect->minx.",x_0=5000000,y_0=10000000");
@@ -1356,7 +1356,7 @@ nome do layer criado com o buffer.
 			$buffers[] = $shape->buffer($d);
 			$shapes[] = $shape;
 		}
-		//faz a união dos elementos se necessário
+		//faz a uni&atilde;o dos elementos se necess&aacute;rio
 		if($unir == "sim")
 		{
 			$ns = $buffers[0];
@@ -1415,13 +1415,13 @@ nome do layer criado com o buffer.
 /*
 function: centroMassa
 
-Calcula o centro médio.
+Calcula o centro m&eacute;dio.
 
-Se "item" for diferente de vazio, calcula o centro médio ponderado baseado no item
+Se "item" for diferente de vazio, calcula o centro m&eacute;dio ponderado baseado no item
 
 Parametros:
 
-$item {string} - (opcional) Item q será utilizado para ponderar os valores.
+$item {string} - (opcional) Item q ser&aacute; utilizado para ponderar os valores.
 */
 	function centroMassa($item="")
 	{
@@ -1506,7 +1506,7 @@ Salva o mapa acrescentando um novo layer com os pontos.
 
 Parametros:
 
-$locaplic - Localização do I3geo.
+$locaplic - Localiza&ccedil;&atilde;o do I3geo.
 */
 	function criaCentroide($locaplic)
 	{
@@ -1575,23 +1575,23 @@ $locaplic - Localização do I3geo.
 /*
 function: gradeDePontos
 
-Gera uma grade de pontos com espaçamento regular definido em décimos de grau.
+Gera uma grade de pontos com espa&ccedil;amento regular definido em d&eacute;cimos de grau.
 
 Salva o mapa acrescentando um novo layer com a grade de coordenadas.
 
-$ddx - Espaçamento em x.
+$ddx - Espa&ccedil;amento em x.
 
-$ddy - Espaçamento em y.
+$ddy - Espa&ccedil;amento em y.
 
 $px - X do primeiro ponto (superior esquerdo)
 
 $py - Y do primeiro ponto.
 
-$locaplic - Endereço da aplicação.
+$locaplic - Endere&ccedil;o da aplica&ccedil;&atilde;o.
 
-$nptx - Número de pontos em X (opcional)
+$nptx - N&uacute;mero de pontos em X (opcional)
 
-$npty - Número de pontos em Y (opcional)
+$npty - N&uacute;mero de pontos em Y (opcional)
 */
 	function gradeDePontos($xdd,$ydd,$px,$py,$locaplic,$nptx,$npty)
 	{
@@ -1609,7 +1609,7 @@ $npty - Número de pontos em Y (opcional)
 		$ext = $this->mapa->extent;
 		$fx = $ext->maxx;
 		$fy = $ext->miny;
-		//calcula a distância entre os pontos em dd
+		//calcula a dist&acirc;ncia entre os pontos em dd
 		$distx = $fx - $px;
 		$disty = $fy - $py;
 		if ($distx < 0){$distx = $distx * -1;}
@@ -1702,25 +1702,25 @@ $npty - Número de pontos em Y (opcional)
 /*
 function: gradeDePol
 
-Gera uma grade de polígonos com espaçamento regular definido em décimos de grau.
+Gera uma grade de pol&iacute;gonos com espa&ccedil;amento regular definido em d&eacute;cimos de grau.
 
 Salva o mapa acrescentando um novo layer com a grade.
 
 parameters:
 
-$xdd - Espaçamento em x.
+$xdd - Espa&ccedil;amento em x.
 
-$ydd - Espaçamento em y.
+$ydd - Espa&ccedil;amento em y.
 
 $x - X do primeiro ponto (superior esquerdo)
 
 $y - Y do primeiro ponto.
 
-$locaplic - Endereço da aplicação.
+$locaplic - Endere&ccedil;o da aplica&ccedil;&atilde;o.
 
-$nptx - Número de pontos em X (opcional)
+$nptx - N&uacute;mero de pontos em X (opcional)
 
-$npty - Número de pontos em Y (opcional)
+$npty - N&uacute;mero de pontos em Y (opcional)
 */
 	function gradeDePol($xdd,$ydd,$px,$py,$locaplic,$nptx,$npty)
 	{
@@ -1734,12 +1734,12 @@ $npty - Número de pontos em Y (opcional)
 		}
 		$nomegrade = nomeRandomico();
 		$nomeshp = $this->diretorio."/".$nomegrade;
-		//pega a extensão geográfica do mapa
+		//pega a extens&atilde;o geogr&aacute;fica do mapa
 		$this->mapa->preparequery();
 		$ext = $this->mapa->extent;
 		$fx = $ext->maxx;
 		$fy = $ext->miny;
-		//calcula a distância entre os pontos em dd
+		//calcula a dist&acirc;ncia entre os pontos em dd
 		$distx = $fx - $px;
 		$disty = $fy - $py;
 		if ($distx < 0){$distx = $distx * -1;}
@@ -1858,24 +1858,24 @@ $npty - Número de pontos em Y (opcional)
 /*
 function: gradeDeHex
 
-Gera uma grade de polígonos hexagonais definido em décimos de grau.
+Gera uma grade de pol&iacute;gonos hexagonais definido em d&eacute;cimos de grau.
 
 Salva o mapa acrescentando um novo layer com a grade.
 
 parameters:
-$xdd - Espaçamento em x.
+$xdd - Espa&ccedil;amento em x.
 
-$ydd - Espaçamento em y.
+$ydd - Espa&ccedil;amento em y.
 
 $px - X do primeiro ponto (superior esquerdo)
 
 $py - Y do primeiro ponto.
 
-$locaplic - Endereço da aplicação.
+$locaplic - Endere&ccedil;o da aplica&ccedil;&atilde;o.
 
-$nptx - Número de pontos em X (opcional)
+$nptx - N&uacute;mero de pontos em X (opcional)
 
-$npty - Número de pontos em Y (opcional)
+$npty - N&uacute;mero de pontos em Y (opcional)
 */
 	function gradeDeHex($xdd,$ydd,$px,$py,$locaplic,$nptx,$npty)
 	{
@@ -1889,12 +1889,12 @@ $npty - Número de pontos em Y (opcional)
 		}
 		$nomegrade = nomeRandomico();
 		$nomeshp = $this->diretorio."/".$nomegrade;
-		//pega a extensão geográfica do mapa
+		//pega a extens&atilde;o geogr&aacute;fica do mapa
 		$this->mapa->preparequery();
 		$ext = $this->mapa->extent;
 		$fx = $ext->maxx;
 		$fy = $ext->miny;
-		//calcula a distância entre os pontos em dd
+		//calcula a dist&acirc;ncia entre os pontos em dd
 		$distx = $fx - $px;
 		$disty = $fy - $py;
 		if ($distx < 0){$distx = $distx * -1;}
@@ -2024,7 +2024,7 @@ $npty - Número de pontos em Y (opcional)
 /*
 function: nptPol
 
-Conta o número de pontos em polígono cruzando dois temas.
+Conta o n&uacute;mero de pontos em pol&iacute;gono cruzando dois temas.
 
 Salva o mapa acrescentando um novo layer com o resultado.
 
@@ -2033,7 +2033,7 @@ $temaPt - Tema de pontos.
 
 $temaPo - Tema poligonal.
 
-$locaplic - Localização do I3geo
+$locaplic - Localiza&ccedil;&atilde;o do I3geo
 */
 	function nptPol($temaPt,$temaPo,$locaplic)
 	{
@@ -2051,7 +2051,7 @@ $locaplic - Localização do I3geo
 		$layerPt->set("tolerance",0);
 		$layerPo = $this->mapa->getlayerbyname($temaPo);
 		$layerPo->set("template","none.htm");
-		//define o nome do novo shapefile que será criado
+		//define o nome do novo shapefile que ser&aacute; criado
 		$nomefinal = nomeRandomico();
 		$nomeshp = $this->diretorio."/".$nomefinal;
 		$itenspo = pegaItens($layerPo);
@@ -2102,7 +2102,7 @@ $locaplic - Localização do I3geo
 /*
 Function: agrupaElementos
 
-Agrupa elementos em um polígono.
+Agrupa elementos em um pol&iacute;gono.
 
 Salva o mapa acrescentando um novo layer com o resultado.
 */
@@ -2208,13 +2208,13 @@ Salva o mapa acrescentando um novo layer com o resultado.
 /*
 function: dissolvePoligono
 
-Dissolve as bordas entre polígonos com o mesmo atributo.
+Dissolve as bordas entre pol&iacute;gonos com o mesmo atributo.
 
 Salva o mapa acrescentando um novo layer com o resultado.
 
-$item - item utilizado para agregar os polígonos
+$item - item utilizado para agregar os pol&iacute;gonos
 
-$locaplic - Localização do I3geo
+$locaplic - Localiza&ccedil;&atilde;o do I3geo
 */
 	function dissolvePoligono($item,$locaplic)
 	{
@@ -2319,15 +2319,15 @@ $locaplic - Localização do I3geo
 	/*
 	Function aplicaFuncaoListaWKT
 	
-	Aplica uma função do Mapserver à uma lista de geometrias no formato WKT
+	Aplica uma fun&ccedil;&atilde;o do Mapserver à uma lista de geometrias no formato WKT
 	
 	Parametros:
 	
 	$geometrias {Array} - lista de WKT
 	
-	$operacao {String} - operação suportada pelo Mapserver, por exemplo, union, intersects, etc. converteSHP irá converter as geometrias em um tema e adicioná-lo ao mapa
+	$operacao {String} - opera&ccedil;&atilde;o suportada pelo Mapserver, por exemplo, union, intersects, etc. converteSHP ir&aacute; converter as geometrias em um tema e adicion&aacute;-lo ao mapa
 
-	$dir_tmp - Diretório temporário do mapserver. Utilizado apenas se $operacao = "converteSHP"
+	$dir_tmp - Diretório tempor&aacute;rio do mapserver. Utilizado apenas se $operacao = "converteSHP"
 
 	$imgdir - Diretório das imagens do mapa atual. Utilizado apenas se $operacao = "converteSHP"
 	
@@ -2368,16 +2368,16 @@ $locaplic - Localização do I3geo
 /*
 function: funcoesGeometrias
 
-Funções de análise de geometrias da ferramenta Geometrias.
+Fun&ccedil;&otilde;es de an&aacute;lise de geometrias da ferramenta Geometrias.
 
 parameters:
-$dir_tmp - Diretório temporário do mapserver
+$dir_tmp - Diretório tempor&aacute;rio do mapserver
 
 $imgdir - Diretório das imagens do mapa atual
 
-$lista - String com a lista de nomes dos arquivos serializados que contém as geometrias
+$lista - String com a lista de nomes dos arquivos serializados que cont&eacute;m as geometrias
 
-$operacao - Tipo de análise.
+$operacao - Tipo de an&aacute;lise.
 */
 	function funcoesGeometrias($dir_tmp,$imgdir,$lista,$operacao)
 	{
@@ -2439,17 +2439,17 @@ $operacao - Tipo de análise.
 /*
 function: calculaGeometrias
 
-Funções de cálculo de geometrias da ferramenta Geometrias.
+Fun&ccedil;&otilde;es de c&aacute;lculo de geometrias da ferramenta Geometrias.
 
 parameters:
 
-$dir_tmp - Diretório temporário do mapserver
+$dir_tmp - Diretório tempor&aacute;rio do mapserver
 
 $imgdir - Diretório das imagens do mapa atual
 
 $lista - Arquivos com as geometrias
 
-$operacao - Tipo de análise.
+$operacao - Tipo de an&aacute;lise.
 */
 	function calculaGeometrias($dir_tmp,$imgdir,$lista,$operacao)
 	{
@@ -2460,12 +2460,12 @@ $operacao - Tipo de análise.
 		{
 			$geos = $this->unserializeGeo($dir.$l);
 			//
-			//verifica a versão do mapserver
-			//se for anterior a 5, utiliza a conexão com o postgis para fazer o processamento dos daods
+			//verifica a vers&atilde;o do mapserver
+			//se for anterior a 5, utiliza a conex&atilde;o com o postgis para fazer o processamento dos daods
 			//
             $v = versao();
 			if (($v["principal"] < 5))
-			{return ("erro. E necessario uma versão maior que 5.0 do Mapserver.");}
+			{return ("erro. E necessario uma vers&atilde;o maior que 5.0 do Mapserver.");}
 			foreach ($geos["dados"] as &$geo)
 			{
 				$g = $geo["wkt"];
@@ -2508,13 +2508,13 @@ Insere geometrias como tema no mapa.
 
 parameters:
 
-$dir_tmp - Diretório temporário do mapserver
+$dir_tmp - Diretório tempor&aacute;rio do mapserver
 
 $imgdir - Diretório das imagens do mapa atual
 
-$lista - Nomes, sem o caminho, dos arquivos com as geometrias, separados por vírgula.
+$lista - Nomes, sem o caminho, dos arquivos com as geometrias, separados por v&iacute;rgula.
 
-$tipoLista - tipo de valores que são passados em $lista stringArquivos|arraywkt. O default é stringArquivos
+$tipoLista - tipo de valores que s&atilde;o passados em $lista stringArquivos|arraywkt. O default &eacute; stringArquivos
 */
 	function incmapageometrias($dir_tmp,$imgdir,$lista,$tipoLista="stringArquivos")
 	{
@@ -2611,21 +2611,21 @@ $tipoLista - tipo de valores que são passados em $lista stringArquivos|arraywkt.
 /*
 function: gravaCoordenadasPt
 
-Lê as coordenadas de um tema pontual e grava em arquivos.
+L&ecirc; as coordenadas de um tema pontual e grava em arquivos.
 
-Essa função é utilizada nas opções que utilizam o R para cálculos e necessitam ler as coordenadas dos pontos.
+Essa fun&ccedil;&atilde;o &eacute; utilizada nas op&ccedil;&otilde;es que utilizam o R para c&aacute;lculos e necessitam ler as coordenadas dos pontos.
 
 Parametros:
 
 tema - nome do tema com os pontos
 
-limitepontos - FALSE para considerar a extensão geográfica do mapa atual e TRUE para considerar como limite as ocorrências pontuais do tema
+limitepontos - FALSE para considerar a extens&atilde;o geogr&aacute;fica do mapa atual e TRUE para considerar como limite as ocorr&ecirc;ncias pontuais do tema
 
-extendelimite - percentual utilizado para extender o limite da área resultante
+extendelimite - percentual utilizado para extender o limite da &aacute;rea resultante
 
 return:
 
-array com as dimensões em x e y e nome dos arquivos com x e y gerados.
+array com as dimens&otilde;es em x e y e nome dos arquivos com x e y gerados.
 */
 function gravaCoordenadasPt($tema,$limitepontos="TRUE",$extendelimite)
 {
@@ -2705,7 +2705,7 @@ function unserializeGeo
 Deserializa um arquivo de geometrias.
 
 Parametros:
-$arquivo - arquivo que será processado
+$arquivo - arquivo que ser&aacute; processado
 */ 	 	
 	public function unserializeGeo($arq)
 	{
@@ -2720,7 +2720,7 @@ function serializeGeo
 Deserializa um arquivo de geometrias.
 
 Parametros:
-$arquivo - arquivo que será processado
+$arquivo - arquivo que ser&aacute; processado
 
 $geos - array com os dados
 */ 	 	

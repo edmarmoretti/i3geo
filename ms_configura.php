@@ -1,20 +1,20 @@
 <?php
 /*
-Title: Variáveis de inicialização ms_configura.php
+Title: Vari&aacute;veis de inicializa&ccedil;&atilde;o ms_configura.php
 
-Nesse programa PHP são definidas as variáveis globais principais necessárias ao funcionamento do I3Geo do lado do servidor web.
+Nesse programa PHP s&atilde;o definidas as vari&aacute;veis globais principais necess&aacute;rias ao funcionamento do I3Geo do lado do servidor web.
 
-O ms_configura é incluído em vários programas do i3Geo e os valores das variáveis devem ser editados 
-caso a instalação do i3geo tenha sido feita em um diretório diferente do padrão.
-No windows o diretório padrão é c:\ms4w\apache\htdocs\i3geo e no linux é /opt/www/html/i3geo
+O ms_configura &eacute; inclu&iacute;do em v&aacute;rios programas do i3Geo e os valores das vari&aacute;veis devem ser editados 
+caso a instala&ccedil;&atilde;o do i3geo tenha sido feita em um diretório diferente do padr&atilde;o.
+No windows o diretório padr&atilde;o &eacute; c:\ms4w\apache\htdocs\i3geo e no linux &eacute; /opt/www/html/i3geo
 
-Para verificar a instalação do i3geo utilize o programa i3geo/testainstal.php, que pode fornecer algumas dicas
-caso estejam ocorrendo problemas na iniciallização.
+Para verificar a instala&ccedil;&atilde;o do i3geo utilize o programa i3geo/testainstal.php, que pode fornecer algumas dicas
+caso estejam ocorrendo problemas na inicialliza&ccedil;&atilde;o.
 
-As variáveis de configuração são definidas em blocos diferentes conforme o sistema operacional (linux ou windows).
+As vari&aacute;veis de configura&ccedil;&atilde;o s&atilde;o definidas em blocos diferentes conforme o sistema operacional (linux ou windows).
 
-O ms_criamapa.php carrega o ms_configura.php e armazena a maior parte das variáveis na seção. Algumas variáveis
-são também fornecidas para o cliente (navegador) na inicialização do mapa e ficam disponíveis em variáveis javascript.
+O ms_criamapa.php carrega o ms_configura.php e armazena a maior parte das vari&aacute;veis na se&ccedil;&atilde;o. Algumas vari&aacute;veis
+s&atilde;o tamb&eacute;m fornecidas para o cliente (navegador) na inicializa&ccedil;&atilde;o do mapa e ficam dispon&iacute;veis em vari&aacute;veis javascript.
 
 
 Licenca:
@@ -23,35 +23,35 @@ GPL2
 
 i3Geo Interface Integrada de Ferramentas de Geoprocessamento para Internet
 
-Direitos Autorais Reservados (c) 2006 Ministério do Meio Ambiente Brasil
+Direitos Autorais Reservados (c) 2006 Minist&eacute;rio do Meio Ambiente Brasil
 Desenvolvedor: Edmar Moretti edmar.moretti@mma.gov.br
 
-Este programa é software livre; você pode redistribuí-lo
-e/ou modificá-lo sob os termos da Licença Pública Geral
+Este programa &eacute; software livre; voc&ecirc; pode redistribu&iacute;-lo
+e/ou modific&aacute;-lo sob os termos da Licen&ccedil;a P&uacute;blica Geral
 GNU conforme publicada pela Free Software Foundation;
 
-Este programa é distribuído na expectativa de que seja útil,
-porém, SEM NENHUMA GARANTIA; nem mesmo a garantia implícita
-de COMERCIABILIDADE OU ADEQUAÇÃO A UMA FINALIDADE ESPECÍFICA.
-Consulte a Licença Pública Geral do GNU para mais detalhes.
-Você deve ter recebido uma cópia da Licença Pública Geral do
-GNU junto com este programa; se não, escreva para a
-Free Software Foundation, Inc., no endereço
+Este programa &eacute; distribu&iacute;do na expectativa de que seja &uacute;til,
+por&eacute;m, SEM NENHUMA GARANTIA; nem mesmo a garantia impl&iacute;cita
+de COMERCIABILIDADE OU ADEQUA&Ccedil;&Atilde;O A UMA FINALIDADE ESPEC&Iacute;FICA.
+Consulte a Licen&ccedil;a P&uacute;blica Geral do GNU para mais detalhes.
+Voc&ecirc; deve ter recebido uma cópia da Licen&ccedil;a P&uacute;blica Geral do
+GNU junto com este programa; se n&atilde;o, escreva para a
+Free Software Foundation, Inc., no endere&ccedil;o
 59 Temple Street, Suite 330, Boston, MA 02111-1307 USA.
 i3geo/testamapfile.php
 Arquivo: ms_configura.php
 
 */
 /*
-	Variavel: linkedinoauth (ainda não implementado)
+	Variavel: linkedinoauth (ainda n&atilde;o implementado)
 	
-	Parâmetros registrados no Linkedin para permitir que o i3Geo faça autenticação com base na conta do usuário
+	Par&acirc;metros registrados no Linkedin para permitir que o i3Geo fa&ccedil;a autentica&ccedil;&atilde;o com base na conta do usu&aacute;rio
 	
-	O Linkedin exige que cada site seja registrado para permitir que a API de autenticação funcione
+	O Linkedin exige que cada site seja registrado para permitir que a API de autentica&ccedil;&atilde;o funcione
 	
-	Veja o site para maiores informações: http://developer.linkedin.com/docs/DOC-1008
+	Veja o site para maiores informa&ccedil;&otilde;es: http://developer.linkedin.com/docs/DOC-1008
 
-	Caso vc não queira permitir essa opção, deixe essa variável vazia, e.x
+	Caso vc n&atilde;o queira permitir essa op&ccedil;&atilde;o, deixe essa vari&aacute;vel vazia, e.x
 		
 	Ao registrai3geo/testamapfile.phpr utilize o valor http://meuservidor/i3geo/pacotes/openid/login.php?login
 
@@ -69,13 +69,13 @@ $linkedinoauth = "";
 /*
 	Variavel: facebookoauth
 	
-	Parâmetros registrados no Facebook para permitir que o i3Geo faça autenticação com base na conta do usuário
+	Par&acirc;metros registrados no Facebook para permitir que o i3Geo fa&ccedil;a autentica&ccedil;&atilde;o com base na conta do usu&aacute;rio
 	
-	O Facebook exige que cada site seja registrado para permitir que a API de autenticação funcione
+	O Facebook exige que cada site seja registrado para permitir que a API de autentica&ccedil;&atilde;o funcione
 	
-	Veja o site para maiores informações: http://developers.facebook.com/setup/
+	Veja o site para maiores informa&ccedil;&otilde;es: http://developers.facebook.com/setup/
 
-	Caso vc não queira permitir essa opção, deixe essa variável vazia, e.x
+	Caso vc n&atilde;o queira permitir essa op&ccedil;&atilde;o, deixe essa vari&aacute;vel vazia, e.x
 		
 	Ao registrar utilize o valor http://meuservidor/i3geo/pacotes/openid/login.php?login
 
@@ -96,19 +96,19 @@ $facebookoauth = array(
 /*
 	Variavel: twitteroauth
 	
-	Parâmetros registrados no Twitter para permitir que o i3Geo faça autenticação com base na conta do usuário
+	Par&acirc;metros registrados no Twitter para permitir que o i3Geo fa&ccedil;a autentica&ccedil;&atilde;o com base na conta do usu&aacute;rio
 	
-	O Twitter exige que cada site seja registrado para permitir que a API de autenticação funcione
+	O Twitter exige que cada site seja registrado para permitir que a API de autentica&ccedil;&atilde;o funcione
 	
-	Veja o site para maiores informações: http://www.snipe.net/2009/07/writing-your-first-twitter-application-with-oauth/
+	Veja o site para maiores informa&ccedil;&otilde;es: http://www.snipe.net/2009/07/writing-your-first-twitter-application-with-oauth/
 
-	Lista de aplicações cadastradas: https://twitter.com/oauth_clients/
+	Lista de aplica&ccedil;&otilde;es cadastradas: https://twitter.com/oauth_clients/
 
-	Caso vc não queira permitir essa opção, deixe essa variável vazia, e.x
+	Caso vc n&atilde;o queira permitir essa op&ccedil;&atilde;o, deixe essa vari&aacute;vel vazia, e.x
 	
 	$twitteroauth = "";
 	
-	Ao registrar a aplicação, utilize o endereço do i3geo em Application Website, por exemplo http://meuservidor/i3geo
+	Ao registrar a aplica&ccedil;&atilde;o, utilize o endere&ccedil;o do i3geo em Application Website, por exemplo http://meuservidor/i3geo
 	
 	Ao registrar utilize como "Callback URL" o valor http://meuservidor/i3geo/pacotes/openid/login.php?login
 
@@ -135,9 +135,9 @@ $twitteroauth = array(
 /*
 	Variavel: mensagemInicia
 	
-	Mensagem de inicialização mostrada pelo programa ms_criamapa.php
+	Mensagem de inicializa&ccedil;&atilde;o mostrada pelo programa ms_criamapa.php
 	
-	É obtida de um include para permitir a atualização da versão nos pacotes de correção
+	&Eacute; obtida de um include para permitir a atualiza&ccedil;&atilde;o da vers&atilde;o nos pacotes de corre&ccedil;&atilde;o
 	
 	Tipo:
 	{string}
@@ -149,7 +149,7 @@ else
 /*
 	Variable: tituloInstituicao
 	
-	Nome que será utilizado em alguns cabeçalhos e títulos de páginas
+	Nome que ser&aacute; utilizado em alguns cabe&ccedil;alhos e t&iacute;tulos de p&aacute;ginas
 	
 	Tipo:
 	{string}
@@ -158,7 +158,7 @@ $tituloInstituicao = "i3Geo";
 /*
 	Variable: emailInstituicao
 	
-	Endereço de e-mail que pode ser mostrado na interface do mapa
+	Endere&ccedil;o de e-mail que pode ser mostrado na interface do mapa
 	
 	Tipo:
 	{string}
@@ -169,8 +169,8 @@ $emailInstituicao = "geoprocessamento@mma.gov.br";
 	
 	Chave utilizada pela API do Google maps.
 	
-	A API do Google maps é utilizada em algumas funcionalidades do i3geo. Vc deve registrar uma chave
-	no site do Google para o seu endereço de servidor web. veja como fazer em:
+	A API do Google maps &eacute; utilizada em algumas funcionalidades do i3geo. Vc deve registrar uma chave
+	no site do Google para o seu endere&ccedil;o de servidor web. veja como fazer em:
 	http://code.google.com/apis/maps/signup.html
 	
 	Tipo:
@@ -183,21 +183,21 @@ if (strtoupper(substr(PHP_OS, 0, 3) == 'WIN'))
 	/*
 	Variable: navegadoresLocais
 	
-	Ip dos usuarios que podem navegar no servidor para acessar arquivos de dados geográficos.
+	Ip dos usuarios que podem navegar no servidor para acessar arquivos de dados geogr&aacute;ficos.
 	
-	O i3geo possibilita que os usuários acessem dados geográficos no servidor diretamente, navegando pelo sistema de arquivos.
-	Isso possibilita o acesso aos dados mesmo que não constem na árvore de temas definida em menutemas/menutemas.xml
-	Por segurança, essa funcionalidade só é ativada para números IP específicos, definidos nessa variável.
+	O i3geo possibilita que os usu&aacute;rios acessem dados geogr&aacute;ficos no servidor diretamente, navegando pelo sistema de arquivos.
+	Isso possibilita o acesso aos dados mesmo que n&atilde;o constem na &aacute;rvore de temas definida em menutemas/menutemas.xml
+	Por seguran&ccedil;a, essa funcionalidade só &eacute; ativada para n&uacute;meros IP espec&iacute;ficos, definidos nessa vari&aacute;vel.
 	
-	Para cada IP registrado, deve-se definir os diretórios que serão acessíveis, conforme mostrado abaixo.
+	Para cada IP registrado, deve-se definir os diretórios que ser&atilde;o acess&iacute;veis, conforme mostrado abaixo.
 	
-	A validação do IP é feita com javascript, na inicialização do mapa, a variável javascript objmapa.navegacaoDir é definida como sim (caso $navegadoresLocais for diferente de "") ou nao.
+	A valida&ccedil;&atilde;o do IP &eacute; feita com javascript, na inicializa&ccedil;&atilde;o do mapa, a vari&aacute;vel javascript objmapa.navegacaoDir &eacute; definida como sim (caso $navegadoresLocais for diferente de "") ou nao.
 	
-	Se objmapa.navegacaoDir for igual a "sim", ou seja, $navegadoresLocais é diferente de "", na guia de adição de temas da interface HTML, será mostrada a opção de navegação. Portanto, se vc não quiser que essa opção seja ativada, mantenha essa variável igual a
+	Se objmapa.navegacaoDir for igual a "sim", ou seja, $navegadoresLocais &eacute; diferente de "", na guia de adi&ccedil;&atilde;o de temas da interface HTML, ser&aacute; mostrada a op&ccedil;&atilde;o de navega&ccedil;&atilde;o. Portanto, se vc n&atilde;o quiser que essa op&ccedil;&atilde;o seja ativada, mantenha essa vari&aacute;vel igual a
 	
 	$navegadoresLocais = "";
 	
-	Com a opção ativa na interface do mapa, o ip do cliente é verificado e caso estiver registrado no array, a navegação pelos diretórios do servidor será permitida. Para mais detalhes, veja a ferramenta i3geo/ferramentas/navegacaodir
+	Com a op&ccedil;&atilde;o ativa na interface do mapa, o ip do cliente &eacute; verificado e caso estiver registrado no array, a navega&ccedil;&atilde;o pelos diretórios do servidor ser&aacute; permitida. Para mais detalhes, veja a ferramenta i3geo/ferramentas/navegacaodir
 	 
 	Tipo:
 	{array}
@@ -212,11 +212,11 @@ if (strtoupper(substr(PHP_OS, 0, 3) == 'WIN'))
 							)
 						);
 	/*
-	Variable: editores (depreciado em função do novo sistema de cadastro de usuários)
+	Variable: editores (depreciado em fun&ccedil;&atilde;o do novo sistema de cadastro de usu&aacute;rios)
 	
 	Ip dos usuarios que podem administrar o i3geo via navegador.
 	
-	Separe os ips por vírgula. Os usuários que tiverem seus ips listados, poderão editar o diretório i3geo/temas, desde que os mesmos tenham direito de leitura e escrita nesse diretório.
+	Separe os ips por v&iacute;rgula. Os usu&aacute;rios que tiverem seus ips listados, poder&atilde;o editar o diretório i3geo/temas, desde que os mesmos tenham direito de leitura e escrita nesse diretório.
 	
 	array("127.0.0.1","localhost");
 	
@@ -229,9 +229,9 @@ if (strtoupper(substr(PHP_OS, 0, 3) == 'WIN'))
 	/*
 	Variable: i3geomaster
 	
-	Usuário e senha que podem realizar operações de administração inicial do i3Geo, como a criação do banco de dados de administração ou operações críticas do sistema
+	Usu&aacute;rio e senha que podem realizar opera&ccedil;&otilde;es de administra&ccedil;&atilde;o inicial do i3Geo, como a cria&ccedil;&atilde;o do banco de dados de administra&ccedil;&atilde;o ou opera&ccedil;&otilde;es cr&iacute;ticas do sistema
 	
-	@TODO Documentar no manual do sistema de administração
+	@TODO Documentar no manual do sistema de administra&ccedil;&atilde;o
 	
 	@TODO compatibilizar essa senha com phpliteadmin
 	*/
@@ -241,7 +241,7 @@ if (strtoupper(substr(PHP_OS, 0, 3) == 'WIN'))
 	/*
 	Variable: dir_tmp
 	
-	Caminho completo do diretório temporário utilizado pelo mapserver.
+	Caminho completo do diretório tempor&aacute;rio utilizado pelo mapserver.
 	
 	Tipo:
 	{string}
@@ -259,11 +259,11 @@ if (strtoupper(substr(PHP_OS, 0, 3) == 'WIN'))
 	/*
 	Variable: locmapserv
 	
-	Localização do executável do Mapserver conforme deve ser acrescentado a URL após o nome do host.
+	Localiza&ccedil;&atilde;o do execut&aacute;vel do Mapserver conforme deve ser acrescentado a URL após o nome do host.
 	
-	Essa variável é necessária em processos que utilizam o mapserver no modo CGI.
+	Essa vari&aacute;vel &eacute; necess&aacute;ria em processos que utilizam o mapserver no modo CGI.
 	
-	Por exemplo, se o endereço for http://localhost/cgi-bin/mapserv.exe, a variável deverá conter apenas /cgi-bin/mapserv.exe
+	Por exemplo, se o endere&ccedil;o for http://localhost/cgi-bin/mapserv.exe, a vari&aacute;vel dever&aacute; conter apenas /cgi-bin/mapserv.exe
 	
 	Tipo:
 	{string}
@@ -274,11 +274,11 @@ if (strtoupper(substr(PHP_OS, 0, 3) == 'WIN'))
 	
 	Onde fica o xml, para preencher a guia mapas.
 	
-	Se for "" será utilizado o sistema de administração do i3geo (veja i3geo/admin).	
+	Se for "" ser&aacute; utilizado o sistema de administra&ccedil;&atilde;o do i3geo (veja i3geo/admin).	
 	
-	A guia "Mapas" mostra uma lista de links que permitem abrir mapas específicos. Essa lista é utilizada também pela versão mobile do i3geo.
+	A guia "Mapas" mostra uma lista de links que permitem abrir mapas espec&iacute;ficos. Essa lista &eacute; utilizada tamb&eacute;m pela vers&atilde;o mobile do i3geo.
 	
-	Veja a documentação específica do arquivo mapas.xml para maiores detalhes.
+	Veja a documenta&ccedil;&atilde;o espec&iacute;fica do arquivo mapas.xml para maiores detalhes.
 	
 	Tipo:
 	{string}
@@ -289,8 +289,8 @@ if (strtoupper(substr(PHP_OS, 0, 3) == 'WIN'))
 	
 	Onde esta o executavel do software R
 	
-	O R é um pacote estatístico utilizado pelo I3Geo para geração de gráficos e análises estatísticas
-	Se vc não possui o R instalado, comente a linha abaixo
+	O R &eacute; um pacote estat&iacute;stico utilizado pelo I3Geo para gera&ccedil;&atilde;o de gr&aacute;ficos e an&aacute;lises estat&iacute;sticas
+	Se vc n&atilde;o possui o R instalado, comente a linha abaixo
 	
 	Tipo:
 	{string}
@@ -299,19 +299,19 @@ if (strtoupper(substr(PHP_OS, 0, 3) == 'WIN'))
 	/*
 	Variable: postgis_mapa
 	
-	String de conexão para acesso aos dados (opcional).
+	String de conex&atilde;o para acesso aos dados (opcional).
 	
 	Prefira usar o esquema de criptografia nativo do Mapserver, veja em:
 	
 	http://mapserver.org/utilities/msencrypt.html
 	
-	Com o uso opcional dessa variável é possível esconder a string de conexão com o banco de dados. O Mapserver
-	não permite esconder essa string, por isso, no i3geo, foi implementado um esquema de substituição.
-	Toda vez que um objeto "map" é criado via PHP Mapscript, a string de conexão é substituída pelo valor de $postgis_mapa.
-	Se não for desejado a substituição, deixe essa variável em branco.
-	Se vc especificar essa variável, o mapa será forçado a recusar o modo de operação CGI.
+	Com o uso opcional dessa vari&aacute;vel &eacute; poss&iacute;vel esconder a string de conex&atilde;o com o banco de dados. O Mapserver
+	n&atilde;o permite esconder essa string, por isso, no i3geo, foi implementado um esquema de substitui&ccedil;&atilde;o.
+	Toda vez que um objeto "map" &eacute; criado via PHP Mapscript, a string de conex&atilde;o &eacute; substitu&iacute;da pelo valor de $postgis_mapa.
+	Se n&atilde;o for desejado a substitui&ccedil;&atilde;o, deixe essa vari&aacute;vel em branco.
+	Se vc especificar essa vari&aacute;vel, o mapa ser&aacute; for&ccedil;ado a recusar o modo de opera&ccedil;&atilde;o CGI.
 	
-	Para mais detalhes veja a função substituiCon em classesphp/funcoes_gerais.php
+	Para mais detalhes veja a fun&ccedil;&atilde;o substituiCon em classesphp/funcoes_gerais.php
 	
 	exemplo - 
 	
@@ -322,7 +322,7 @@ if (strtoupper(substr(PHP_OS, 0, 3) == 'WIN'))
 	
 	No exemplo, vc pode usar "teste" ou "conexao2" no seu mapfile veja em i3geo/temas/testesubstring.map
 	
-	Se vc não quiser usar essa substituição, deixe como está ou use 
+	Se vc n&atilde;o quiser usar essa substitui&ccedil;&atilde;o, deixe como est&aacute; ou use 
 	
 	$postgis_mapa = ""
 	
@@ -336,16 +336,16 @@ if (strtoupper(substr(PHP_OS, 0, 3) == 'WIN'))
 	/*
 	Variable: utilizacgi
 	
-	Variável indicando se o desenho do corpo do mapa será baseado no modo cgi.
+	Vari&aacute;vel indicando se o desenho do corpo do mapa ser&aacute; baseado no modo cgi.
 	
-	Por default, o mapserver desenha o mapa via php, porém, pode-se alterar o modo de desenho.
+	Por default, o mapserver desenha o mapa via php, por&eacute;m, pode-se alterar o modo de desenho.
 	
-	No modo normal, a imagem do mapa é gerada e armazenada no diretório ms_tmp. Após a geração da imagem 
-	o endereço do arquivo é retornado ao mapa (retorno via Ajax) e o javascript se encarrega de alterar o
-	endereço da imagem no navegador. Com o uso do CGI a imagem não é gerada, sendo repassado ao navegador
-	o endereço do cgi acrescentado do nome do mapfile, fazendo com que a imagem seja retornada diretamente.
+	No modo normal, a imagem do mapa &eacute; gerada e armazenada no diretório ms_tmp. Após a gera&ccedil;&atilde;o da imagem 
+	o endere&ccedil;o do arquivo &eacute; retornado ao mapa (retorno via Ajax) e o javascript se encarrega de alterar o
+	endere&ccedil;o da imagem no navegador. Com o uso do CGI a imagem n&atilde;o &eacute; gerada, sendo repassado ao navegador
+	o endere&ccedil;o do cgi acrescentado do nome do mapfile, fazendo com que a imagem seja retornada diretamente.
 	
-	Em alguns casos o uso do cgi torna a aplicação mais rápida.
+	Em alguns casos o uso do cgi torna a aplica&ccedil;&atilde;o mais r&aacute;pida.
 	
 	Tipo:
 	{string}
@@ -354,9 +354,9 @@ if (strtoupper(substr(PHP_OS, 0, 3) == 'WIN'))
 	/*
 	 Variable: expoeMapfile
 	 
-	 Essa variável controla se o nome do mapfile atual será ou não retornado para a aplicação via ajax.
+	 Essa vari&aacute;vel controla se o nome do mapfile atual ser&aacute; ou n&atilde;o retornado para a aplica&ccedil;&atilde;o via ajax.
 	 
-	 Quando essa variável for definida como "nao" algumas das funcionalidades do i3geo poderão ficar prejudicadas, mas sem comprometimento das funções principais.
+	 Quando essa vari&aacute;vel for definida como "nao" algumas das funcionalidades do i3geo poder&atilde;o ficar prejudicadas, mas sem comprometimento das fun&ccedil;&otilde;es principais.
 	 
 	 Tipo:
 	 {string}
@@ -365,19 +365,19 @@ if (strtoupper(substr(PHP_OS, 0, 3) == 'WIN'))
 	/*
 	 Variable: conexaoadmin
 	 
-	 Arquivo PHP que define a string de conexão (PDO) com o banco de dados administrativo.
+	 Arquivo PHP que define a string de conex&atilde;o (PDO) com o banco de dados administrativo.
 	 
-	 Esse arquivo é incluído no programa i3geo/admin/conexao.php
+	 Esse arquivo &eacute; inclu&iacute;do no programa i3geo/admin/conexao.php
 	 
-	 O banco de dados administrativo é utilizado para definir coisas como a árvore de temas, árvore de mapas, etc.
+	 O banco de dados administrativo &eacute; utilizado para definir coisas como a &aacute;rvore de temas, &aacute;rvore de mapas, etc.
 	 
-	 O banco de dados, originalmente, é montado em SQLITE, porém, em ambientes corporativos, sugere-se o uso de bancos de daods mais robustos.
+	 O banco de dados, originalmente, &eacute; montado em SQLITE, por&eacute;m, em ambientes corporativos, sugere-se o uso de bancos de daods mais robustos.
 	 
-	 Se você quiser utilizar a conexão default, baseado no SQLITE, mantenha essa variável vazia.
+	 Se voc&ecirc; quiser utilizar a conex&atilde;o default, baseado no SQLITE, mantenha essa vari&aacute;vel vazia.
 	 
-	 O uso do banco de dados não é obrigatório, uma vez que os arquivos podem ser mantidos em disco (arquivos XML).
+	 O uso do banco de dados n&atilde;o &eacute; obrigatório, uma vez que os arquivos podem ser mantidos em disco (arquivos XML).
 	
-	 O programa PHP que estabelece a conexão deve retornar objetos com nomes padronizados. Veja o arquivo i3geo/admin/conexao.php para maiores detalhes.
+	 O programa PHP que estabelece a conex&atilde;o deve retornar objetos com nomes padronizados. Veja o arquivo i3geo/admin/conexao.php para maiores detalhes.
 	
 	 Exemplos:
 	 
@@ -392,24 +392,24 @@ if (strtoupper(substr(PHP_OS, 0, 3) == 'WIN'))
 	/*
 	Variable: $esquemaadmin
 	
-	Indica em qual esquema do banco de dados de administração estão armazenadas as tabelas do sistema de administração. Por default, utiliza-se o esquema public.
+	Indica em qual esquema do banco de dados de administra&ccedil;&atilde;o est&atilde;o armazenadas as tabelas do sistema de administra&ccedil;&atilde;o. Por default, utiliza-se o esquema public.
 	
 	Tipo:
 	{string}
 	
-	@todo Atualizar a documentação sobre isso
+	@todo Atualizar a documenta&ccedil;&atilde;o sobre isso
 	*/
 	$esquemaadmin = "";
 	/*
 	 Variable: interfacePadrao
 	 
-	 Interface padrão utilizada para abrir o mapa.
+	 Interface padr&atilde;o utilizada para abrir o mapa.
 	 
-	 A interface pode ser um arquivo com as extensões .htm .html .phtml
+	 A interface pode ser um arquivo com as extens&otilde;es .htm .html .phtml
 	 
 	 O arquivo deve estar armazenado em i3geo/aplicmap
 	 
-	 A interface padrão é utilizada quando não é definida nenhuma interface via URL.
+	 A interface padr&atilde;o &eacute; utilizada quando n&atilde;o &eacute; definida nenhuma interface via URL.
 	 
 	 Tipo:
 	 {string}
@@ -418,25 +418,25 @@ if (strtoupper(substr(PHP_OS, 0, 3) == 'WIN'))
 	/*
 	Variable: base
 	
-	Enderço do arquivo mapfile que será utilizado como base para a criação do mapa
+	Ender&ccedil;o do arquivo mapfile que ser&aacute; utilizado como base para a cria&ccedil;&atilde;o do mapa
 	
-	Se vc não usar o caminho completo, o arquivo será procurado em i3geo/aplicmap
+	Se vc n&atilde;o usar o caminho completo, o arquivo ser&aacute; procurado em i3geo/aplicmap
 	
-	Quando não for definido, o i3Geo tentará escolher o mapfile mais adequado, conforme o que existir em i3geo/aplicmap
+	Quando n&atilde;o for definido, o i3Geo tentar&aacute; escolher o mapfile mais adequado, conforme o que existir em i3geo/aplicmap
 	
-	A escolha depende do sistema operacional e da versão do Mapserver.
+	A escolha depende do sistema operacional e da vers&atilde;o do Mapserver.
 	
-	Vc pode usar essa variável para customizar a inicialização do mapa.
+	Vc pode usar essa vari&aacute;vel para customizar a inicializa&ccedil;&atilde;o do mapa.
 	*/
 	$base = "";
 	/*
 	Variable: cachedir
 	
-	Pasta onde ficarão armazenadas as imagens geradas pelo i3Geo para os LAYERS que permitem cache.
+	Pasta onde ficar&atilde;o armazenadas as imagens geradas pelo i3Geo para os LAYERS que permitem cache.
 	
-	Os layers que permitem cache são definidos no sistema de administração do i3Geo.
+	Os layers que permitem cache s&atilde;o definidos no sistema de administra&ccedil;&atilde;o do i3Geo.
 	
-	Se cachedir for vazia, será utilizado o default do i3geo (diretório temporário)
+	Se cachedir for vazia, ser&aacute; utilizado o default do i3geo (diretório tempor&aacute;rio)
 	
 	Exemplo
 	
@@ -446,7 +446,7 @@ if (strtoupper(substr(PHP_OS, 0, 3) == 'WIN'))
 }
 else //se for linux
 {
-	//verifica se está sendo utilizado o diretório "opt" ou "var"
+	//verifica se est&aacute; sendo utilizado o diretório "opt" ou "var"
 	$locaplic = __DIR__;
 	if(dirname($locaplic) == "/opt/www/html"){
 		$dir_tmp = "/var/tmp/ms_tmp";
@@ -470,7 +470,7 @@ else //se for linux
 							)
 						);
 	$locmapserv = "/cgi-bin/mapserv";
-	$R_path = "R";//se vc não instalou o R no seu servidor, tente o endereço $R_path = $locaplic."/pacotes/r/linux/r";
+	$R_path = "R";//se vc n&atilde;o instalou o R no seu servidor, tente o endere&ccedil;o $R_path = $locaplic."/pacotes/r/linux/r";
 	$postgis_mapa = "";
 	$utilizacgi = "nao";
 	$expoeMapfile = "sim";

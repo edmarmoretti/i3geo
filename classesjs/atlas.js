@@ -60,6 +60,7 @@ atlasId {numerico} id do atlas que ser&aacute; utilizado para carregar as pranch
 */
 function iniciaAtlas(combow,atlasId)
 {
+	var localTitulo, monta;
 	if(!combow)
 	{combow = 0;}
 	document.body.style.width = "100%";
@@ -67,41 +68,41 @@ function iniciaAtlas(combow,atlasId)
 	cpObjAtlas = new cpaint();
 	cpObjAtlas.set_async("true");
 	cpObjAtlas.set_response_type("JSON");
-	var localTitulo = document.getElementById("tituloAtlas");
-	var monta = function (retorno)
+	localTitulo = document.getElementById("tituloAtlas");
+	monta = function (retorno)
 	{
+		var pai,ins,pranchas,i,icone;
 		if(retorno.data == undefined)
 		{return;}
 		if(retorno.data.tipoguias == "")
-		{retorno.data.tipoguias = "combo"}
+		{retorno.data.tipoguias = "combo";}
 		
-		var pai = document.getElementById("guiasAtlas");
+		pai = document.getElementById("guiasAtlas");
 		if(pai){
-			var ins = '<ul class="yui-nav" style="border-width:0pt 0pt 2px;border-color:rgb(240,240,240)">';
+			ins = '<ul class="yui-nav" style="border-width:0pt 0pt 2px;border-color:rgb(240,240,240)">';
 			//coloca as guias com barra de rolagem
 			if (retorno.data.tipoguias == "expandida")
 			{
-				var ins = '<ul class="yui-nav" style="width:2000px;border-width:0pt 0pt 2px;border-color:rgb(240,240,240)">';
+				ins = '<ul class="yui-nav" style="width:2000px;border-width:0pt 0pt 2px;border-color:rgb(240,240,240)">';
 				pai.style.width=i3GEO.parametros.w;
 				pai.style.height="35px";
 				//pai.style.overflow="";
 			}
-			var texto = "";
-			var pranchas = retorno.data.pranchas;
+			pranchas = retorno.data.pranchas;
 			if (retorno.data.tipoguias == "combo")
 			{
-				pai.style.textAlign="left"
+				pai.style.textAlign="left";
 				ins = "Escolha a prancha: <select onchange='abrePrancha(this.value)' ";
 				if(combow > 0)
 				{ins += "style=width:"+combow+"px ";}
 				ins += ">";
-				ins += "<option value=''>---</option>"
+				ins += "<option value=''>---</option>";
 			}
 			if (pai)
 			{
 				if(pai.className == "")
 				{pai.className = "yui-navset";}
-				var i = 0;
+				i = 0;
 				do
 				{
 					if (pranchas[i])
@@ -109,24 +110,24 @@ function iniciaAtlas(combow,atlasId)
 						//monta as guias das pranchas
 						if (retorno.data.tipoguias == "combo")
 						{
-							ins += "<option value='"+pranchas[i].id+"'>"+pranchas[i].titulo+"</option>"
+							ins += "<option value='"+pranchas[i].id+"'>"+pranchas[i].titulo+"</option>";
 						}
 						else
 						{
 							ins += '<li><a href="#"><em><div onclick="abrePrancha(\''+pranchas[i].id+'\')" id=guiaAtlas'+i+' style=text-align:center;font-size:10px;left:0px; >';
-							var icone = i3GEO.configura.locaplic+"/imagens/branco.gif";
+							icone = i3GEO.configura.locaplic+"/imagens/branco.gif";
 							if(pranchas[i].icone != "")
 							{
-								var icone = pranchas[i].icone;
+								icone = pranchas[i].icone;
 							}
 							ins += "<img src='"+icone+"'/>&nbsp;";
 							ins += pranchas[i].titulo+'</div></em></a></li>';
 						}
 					}
-					var i = i + 1;
+					i = i + 1;
 				}
 				while(pranchas[i])
-				if (retorno.data.tipoguias == "combo"){ins += "</select>"}
+				if (retorno.data.tipoguias == "combo"){ins += "</select>";}
 				else
 				{ins += "</ul>";}
 				pai.innerHTML = ins;
@@ -134,17 +135,17 @@ function iniciaAtlas(combow,atlasId)
 		}
 		if (localTitulo)
 		{
-			var icone = i3GEO.configura.locaplic+"/imagens/branco.gif";
+			icone = i3GEO.configura.locaplic+"/imagens/branco.gif";
 			if (retorno.data.icone != "")
-			{var icone = retorno.data.icone;}
+			{icone = retorno.data.icone;}
 			localTitulo.innerHTML = retorno.data.titulo;
 		}
 		if (retorno.data.link != "")
 		{wdocaf(retorno.data.w+"px",retorno.data.h+"px",retorno.data.link,"center","","Info");}
 		if(retorno.data.pranchadefault != "")
-		{abrePrancha(retorno.data.pranchadefault)}
+		{abrePrancha(retorno.data.pranchadefault);}
 		i3GEO.mapa.ajustaPosicao();
-	}
+	};
 	var p = i3GEO.configura.locaplic+"/classesphp/atlas_controle.php?funcao=pegaListaDePranchas&g_sid="+i3GEO.configura.sid;
 	if(atlasId)
 	{p += "&atlasId="+atlasId;}
@@ -206,12 +207,12 @@ function pegaListaDeAtlas()
 					texto += "<div class='descricao' >Link: "+inicia+"</div><br></td>";
 					texto += "</tr>";
 				}
-				var i = i + 1;
+				i = i + 1;
 			}
 			while(listaAtlas[i])
 			local.innerHTML = texto+"</table>";
-			document.getElementById("tituloinstituicao").innerHTML = retorno.data.tituloinstituicao
-		}
+			document.getElementById("tituloinstituicao").innerHTML = retorno.data.tituloinstituicao;
+		};
 		var p = i3GEO.configura.locaplic+"/classesphp/atlas_controle.php?funcao=pegaListaDeAtlas";
 		cpObjAtlas.call(p,"pegaListaDeAtlas",monta);
 	}
@@ -264,7 +265,7 @@ function abrePrancha(id)
 		if(retorno.data.mapexten != "")
 		{i3GEO.navega.zoomExt(i3GEO.configura.locaplic,i3GEO.configura.sid,"nenhum",retorno.data.mapexten);}
 		i3GEO.atualiza();
-	}
+	};
 	var p = i3GEO.configura.locaplic+"/classesphp/atlas_controle.php?g_sid="+i3GEO.configura.sid+"&funcao=abrePrancha&pranchaId="+id;
 	cpObjAtlas.call(p,"abrePrancha",monta);
 }
@@ -277,6 +278,6 @@ function atlas2i3geo()
 {
 	var atual = window.location.href;
 	var nova = atual.replace("atlas",'aplicmap');
-	var nova = nova.replace("#",'');
+	nova = nova.replace("#",'');
 	window.location=nova;
 }

@@ -1,7 +1,7 @@
 /*
 Title: mapfiles.js
 
-Funções que controlam a interface do editor de mapfiles de inicialização
+Fun&ccedil;&otilde;es que controlam a interface do editor de mapfiles de inicializa&ccedil;&atilde;o
 
 Licenca:
 
@@ -9,20 +9,20 @@ GPL2
 
 i3Geo Interface Integrada de Ferramentas de Geoprocessamento para Internet
 
-Direitos Autorais Reservados (c) 2006 Ministério do Meio Ambiente Brasil
+Direitos Autorais Reservados (c) 2006 Minist&eacute;rio do Meio Ambiente Brasil
 Desenvolvedor: Edmar Moretti edmar.moretti@mma.gov.br
 
-Este programa é software livre; você pode redistribuí-lo
-e/ou modificá-lo sob os termos da Licença Pública Geral
+Este programa &eacute; software livre; voc&ecirc; pode redistribu&iacute;-lo
+e/ou modific&aacute;-lo sob os termos da Licen&ccedil;a P&uacute;blica Geral
 GNU conforme publicada pela Free Software Foundation;
 
-Este programa é distribuído na expectativa de que seja útil,
-porém, SEM NENHUMA GARANTIA; nem mesmo a garantia implícita
-de COMERCIABILIDADE OU ADEQUAÇÃO A UMA FINALIDADE ESPECÍFICA.
-Consulte a Licença Pública Geral do GNU para mais detalhes.
-Você deve ter recebido uma cópia da Licença Pública Geral do
-GNU junto com este programa; se não, escreva para a
-Free Software Foundation, Inc., no endereço
+Este programa &eacute; distribu&iacute;do na expectativa de que seja &uacute;til,
+por&eacute;m, SEM NENHUMA GARANTIA; nem mesmo a garantia impl&iacute;cita
+de COMERCIABILIDADE OU ADEQUA&Ccedil;&Atilde;O A UMA FINALIDADE ESPEC&Iacute;FICA.
+Consulte a Licen&ccedil;a P&uacute;blica Geral do GNU para mais detalhes.
+Voc&ecirc; deve ter recebido uma cópia da Licen&ccedil;a P&uacute;blica Geral do
+GNU junto com este programa; se n&atilde;o, escreva para a
+Free Software Foundation, Inc., no endere&ccedil;o
 59 Temple Street, Suite 330, Boston, MA 02111-1307 USA.
 
 Arquivo:
@@ -45,19 +45,19 @@ function initMenu()
 	"simples": [
 	{ mensagem: "Arquivo que define as fontes de texto utilizadas",cabeca: "FONTSET", variavel: "FONTSET"},
 	{ mensagem: "Arquivo que define a simbologia",cabeca: "SYMBOLSET", variavel: "SYMBOLSET"},
-	{ mensagem: "Diretório com o caminho padrão para arquivos shapefile",cabeca: "SHAPEPATH", variavel: "SHAPEPATH"},
-	{ mensagem: "Extensão geográfica (xmin ymin xmax ymax). ",cabeca: "EXTENT", variavel: "EXTENT"},
-	{ mensagem: "Endereço da imagem de referência",cabeca: "IMAGE", variavel: "IMAGE"},
-	{ mensagem: "Caminho para o armazenamento das imagens temporárias",cabeca: "IMAGEPATH", variavel: "IMAGEPATH"},
+	{ mensagem: "Diretório com o caminho padr&atilde;o para arquivos shapefile",cabeca: "SHAPEPATH", variavel: "SHAPEPATH"},
+	{ mensagem: "Extens&atilde;o geogr&aacute;fica (xmin ymin xmax ymax). ",cabeca: "EXTENT", variavel: "EXTENT"},
+	{ mensagem: "Endere&ccedil;o da imagem de refer&ecirc;ncia",cabeca: "IMAGE", variavel: "IMAGE"},
+	{ mensagem: "Caminho para o armazenamento das imagens tempor&aacute;rias",cabeca: "IMAGEPATH", variavel: "IMAGEPATH"},
 	{ mensagem: "Complemento para a url das imagens",cabeca: "IMAGEURL", variavel: "IMAGEURL"}
 	]};
 	core_carregando("ativa");
-	core_pegaDados("buscando parâmetros...","../php/mapfiles.php?funcao=pegaParametrosConfigura","pegaParametros");
+	core_pegaDados("buscando par&acirc;metros...","../php/mapfiles.php?funcao=pegaParametrosConfigura","pegaParametros");
 }
 /*
 Function: pegaParametros
 
-Pega os parâmetros do mapfiles.php
+Pega os par&acirc;metros do mapfiles.php
 
 */
 function pegaParametros(retorno)
@@ -83,7 +83,7 @@ function pegaParametros(retorno)
 /*
 Function: salva
 
-Salva o novo valor de uma variável
+Salva o novo valor de uma vari&aacute;vel
 
 <SALVACONFIGURA>
 */

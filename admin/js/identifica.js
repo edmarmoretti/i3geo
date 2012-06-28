@@ -1,7 +1,7 @@
 /*
 Title: identifica.js
 
-Funções que controlam a interface do editor dos sistemas adicionais de identificação
+Fun&ccedil;&otilde;es que controlam a interface do editor dos sistemas adicionais de identifica&ccedil;&atilde;o
 
 Licenca:
 
@@ -9,20 +9,20 @@ GPL2
 
 i3Geo Interface Integrada de Ferramentas de Geoprocessamento para Internet
 
-Direitos Autorais Reservados (c) 2006 Ministério do Meio Ambiente Brasil
+Direitos Autorais Reservados (c) 2006 Minist&eacute;rio do Meio Ambiente Brasil
 Desenvolvedor: Edmar Moretti edmar.moretti@mma.gov.br
 
-Este programa é software livre; você pode redistribuí-lo
-e/ou modificá-lo sob os termos da Licença Pública Geral
+Este programa &eacute; software livre; voc&ecirc; pode redistribu&iacute;-lo
+e/ou modific&aacute;-lo sob os termos da Licen&ccedil;a P&uacute;blica Geral
 GNU conforme publicada pela Free Software Foundation;
 
-Este programa é distribuído na expectativa de que seja útil,
-porém, SEM NENHUMA GARANTIA; nem mesmo a garantia implícita
-de COMERCIABILIDADE OU ADEQUAÇÃO A UMA FINALIDADE ESPECÍFICA.
-Consulte a Licença Pública Geral do GNU para mais detalhes.
-Você deve ter recebido uma cópia da Licença Pública Geral do
-GNU junto com este programa; se não, escreva para a
-Free Software Foundation, Inc., no endereço
+Este programa &eacute; distribu&iacute;do na expectativa de que seja &uacute;til,
+por&eacute;m, SEM NENHUMA GARANTIA; nem mesmo a garantia impl&iacute;cita
+de COMERCIABILIDADE OU ADEQUA&Ccedil;&Atilde;O A UMA FINALIDADE ESPEC&Iacute;FICA.
+Consulte a Licen&ccedil;a P&uacute;blica Geral do GNU para mais detalhes.
+Voc&ecirc; deve ter recebido uma cópia da Licen&ccedil;a P&uacute;blica Geral do
+GNU junto com este programa; se n&atilde;o, escreva para a
+Free Software Foundation, Inc., no endere&ccedil;o
 59 Temple Street, Suite 330, Boston, MA 02111-1307 USA.
 
 Arquivo:
@@ -40,7 +40,7 @@ function initMenu()
 }
 function pegaFuncoes()
 {
-	core_pegaDados("buscando funções...","../php/identifica.php?funcao=pegaFuncoes","montaTabela");
+	core_pegaDados("buscando fun&ccedil;&otilde;es...","../php/identifica.php?funcao=pegaFuncoes","montaTabela");
 }
 function montaTabela(dados)
 {
@@ -159,7 +159,7 @@ function montaDiv(i)
 	var param = {
 		"linhas":[
 		{titulo:"Nome:",id:"Enome_i",size:"50",value:i.nome_i,tipo:"text",div:""},
-		{titulo:"Programa: o i3Geo irá adicionar automaticamente os parâmetros &x e &y no final do endereço",id:"Eabrir_i",size:"50",value:i.abrir_i,tipo:"text",div:""},
+		{titulo:"Programa: o i3Geo ir&aacute; adicionar automaticamente os par&acirc;metros &x e &y no final do endere&ccedil;o",id:"Eabrir_i",size:"50",value:i.abrir_i,tipo:"text",div:""},
 		{titulo:"Abrir como: escreva 'self' para abrir na mesma janela ou 'blank' para abrir em uma nova aba",id:"Etarget_i",size:"50",value:i.target_i,tipo:"text",div:""}
 		]
 	};
@@ -176,14 +176,14 @@ function montaDiv(i)
 	ins += " >sim</option>";
 	ins += "<option value='NAO' ";
 	if (i.publicado_i == "NAO"){ins += "selected";}
-	ins += " >não</option>";
+	ins += " >n&atilde;o</option>";
 	ins += "</select></p>";
 	return(ins);
 }
 /*
 Function: gravaDados
 
-Salva as alterações feitas
+Salva as altera&ccedil;&otilde;es feitas
 
 <ALTERARFUNCOES>
 */
@@ -205,7 +205,7 @@ function gravaDados(id,recordid)
   			{
   				if(YAHOO.lang.JSON.parse(o.responseText) == "erro")
   				{
-  					core_carregando("<span style=color:red >Não foi possível excluir. Verifique se não existem registros vinculados</span>");
+  					core_carregando("<span style=color:red >N&atilde;o foi poss&iacute;vel excluir. Verifique se n&atilde;o existem registros vinculados</span>");
   					setTimeout("core_carregando('desativa')",3000);
   				}
   				else

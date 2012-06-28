@@ -4,9 +4,9 @@
 /*
 Title: Nuvem de tags
 
-Mostra uma nuvem de tags baseado nos tags de cada tema, definido no sistema de administração do i3Geo.
-Ao escolher um tag, é feita a busca dos temas que os contém, sendo mostrados na árvore de temas. Opcionalmente, o
-usuário pode escolher um RSS para que seja feito o cruzamento entre os tags encontrados. Dessa forma, são apresentadas as notícias
+Mostra uma nuvem de tags baseado nos tags de cada tema, definido no sistema de administra&ccedil;ão do i3Geo.
+Ao escolher um tag, &eacute; feita a busca dos temas que os cont&eacute;m, sendo mostrados na &aacute;rvore de temas. Opcionalmente, o
+usu&aacute;rio pode escolher um RSS para que seja feito o cruzamento entre os tags encontrados. Dessa forma, são apresentadas as not&iacute;cias
 referentes aos tags de cada tema.
 
 Veja:
@@ -23,20 +23,20 @@ GPL2
 
 i3Geo Interface Integrada de Ferramentas de Geoprocessamento para Internet
 
-Direitos Autorais Reservados (c) 2006 Ministério do Meio Ambiente Brasil
+Direitos Autorais Reservados (c) 2006 Minist&eacute;rio do Meio Ambiente Brasil
 Desenvolvedor: Edmar Moretti edmar.moretti@mma.gov.br
 
-Este programa é software livre; você pode redistribuí-lo
-e/ou modificá-lo sob os termos da Licença Pública Geral
+Este programa &eacute; software livre; voc&ecirc; pode redistribu&iacute;-lo
+e/ou modific&aacute;-lo sob os termos da Licen&ccedil;a P&uacute;blica Geral
 GNU conforme publicada pela Free Software Foundation;
 
-Este programa é distribuído na expectativa de que seja útil,
-porém, SEM NENHUMA GARANTIA; nem mesmo a garantia implícita
-de COMERCIABILIDADE OU ADEQUAÇÃO A UMA FINALIDADE ESPECÍFICA.
-Consulte a Licença Pública Geral do GNU para mais detalhes.
-Você deve ter recebido uma cópia da Licença Pública Geral do
+Este programa &eacute; distribu&iacute;do na expectativa de que seja &uacute;til,
+por&eacute;m, SEM NENHUMA GARANTIA; nem mesmo a garantia impl&iacute;cita
+de COMERCIABILIDADE OU ADEQUAÇÃO A UMA FINALIDADE ESPEC&Iacute;FICA.
+Consulte a Licen&ccedil;a P&uacute;blica Geral do GNU para mais detalhes.
+Voc&ecirc; deve ter recebido uma c&oacute;pia da Licen&ccedil;a P&uacute;blica Geral do
 GNU junto com este programa; se não, escreva para a
-Free Software Foundation, Inc., no endereço
+Free Software Foundation, Inc., no endere&ccedil;o
 59 Temple Street, Suite 330, Boston, MA 02111-1307 USA.
 */
 
@@ -50,7 +50,7 @@ i3GEOF.nuvemtags = {
 	/*
 	Variavel: aguarde
 	
-	Estilo do objeto DOM com a imagem de aguarde existente no cabeçalho da janela.
+	Estilo do objeto DOM com a imagem de aguarde existente no cabe&ccedil;alho da janela.
 	*/
 	aguarde: "",
 	/*
@@ -62,13 +62,13 @@ i3GEOF.nuvemtags = {
 	/*
 	Variavel: inicio
 	
-	Valor inicial referente ao número de ocorrências de cada tag que deve ser considerado na montagem da nuvem
+	Valor inicial referente ao n&uacute;mero de ocorr&ecirc;ncias de cada tag que deve ser considerado na montagem da nuvem
 	*/
 	inicio: 0,
 	/*
 	Propriedade: listaRSS
 	
-	Lista de RSS com notícias para fazer o cruzamento com a nuvem
+	Lista de RSS com not&iacute;cias para fazer o cruzamento com a nuvem
 	*/
 	listaRSS: ["http://www.mma.gov.br/webservice/noticias/rss_noticias.php", 
 	    "http://www.estadao.com.br/rss/ultimas.xml",
@@ -77,13 +77,13 @@ i3GEOF.nuvemtags = {
 	/*
 	Function: inicia
 	
-	Inicia a ferramenta. É chamado por criaJanelaFlutuante
+	Inicia a ferramenta. &Eacute; chamado por criaJanelaFlutuante
 	
 	Parametros:
 	
-	iddiv {String} - id do div que receberá o conteudo HTML da ferramenta
+	iddiv {String} - id do div que receber&aacute; o conteudo HTML da ferramenta
 	
-	dados {JSON} - dados para o gráfico (opcional)
+	dados {JSON} - dados para o gr&aacute;fico (opcional)
 	*/
 	inicia: function(iddiv){
 		try{
@@ -138,11 +138,11 @@ i3GEOF.nuvemtags = {
 	/*
 	Function: html
 	
-	Gera o código html para apresentação das opções da ferramenta
+	Gera o c&oacute;digo html para apresenta&ccedil;ão das op&ccedil;&otilde;es da ferramenta
 	
 	Retorno:
 	
-	String com o código html
+	String com o c&oacute;digo html
 	*/
 	html:function(){
 		var ins = '' +
@@ -165,7 +165,7 @@ i3GEOF.nuvemtags = {
 	
 	Parametro
 	
-	dados {JSON} - dados para o gráfico
+	dados {JSON} - dados para o gr&aacute;fico
 	*/	
 	criaJanelaFlutuante: function(dados){
 		var minimiza,cabecalho,janela,divid,titulo;

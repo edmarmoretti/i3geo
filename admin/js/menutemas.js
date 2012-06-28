@@ -71,7 +71,7 @@ function pegaParametros(tipo)
 		var retornaMenus = function(retorno)
 		{
 			var r = retorno.data;
-			var ins = "<table class=lista ><tr><td></td><td></td><td><b>Publicado</td><td><b>Nome</td><td><b>Descrição</td><td><b>Aberto</td><td><b>Perfil</td><td></td></tr>";
+			var ins = "<table class=lista ><tr><td></td><td></td><td><b>Publicado</td><td><b>Nome</td><td><b>Descri&ccedil;&atilde;o</td><td><b>Aberto</td><td><b>Perfil</td><td></td></tr>";
 			for (var i=0;i<r.length;i++)
 			{
 				ins += "<tr>";
@@ -104,7 +104,7 @@ function pegaParametros(tipo)
 		var retornaGrupos = function(retorno)
 		{
 			var r = retorno.data;
-			var ins = "<table class=lista ><tr><td></td><td></td><td><b>Nome</td><td><b>Descrição</td></tr>";
+			var ins = "<table class=lista ><tr><td></td><td></td><td><b>Nome</td><td><b>Descri&ccedil;&atilde;o</td></tr>";
 			for (var i=0;i<r.length;i++)
 			{
 				ins += montaOpcoes("grupo",r[i].id_grupo,r[i].nome_grupo,r[i].desc_grupo);
@@ -121,7 +121,7 @@ function pegaParametros(tipo)
 		var retornaSubGrupos = function(retorno)
 		{
 			var r = retorno.data;
-			var ins = "<table class=lista ><tr><td></td><td></td><td><b>Nome</td><td><b>Descrição</td></tr>";
+			var ins = "<table class=lista ><tr><td></td><td></td><td><b>Nome</td><td><b>Descri&ccedil;&atilde;o</td></tr>";
 			for (var i=0;i<r.length;i++)
 			{
 				ins += montaOpcoes("subgrupo",r[i].id_subgrupo,r[i].nome_subgrupo,r[i].desc_subgrupo);
@@ -173,13 +173,13 @@ function montaDivTemas(i)
 	var param = {
 		"linhas":[
 		{titulo:"Nome do tema",prefixoid:"nometema_",id:"id_tema",valor:"nome_tema"},
-		{titulo:"Descrição",prefixoid:"desctema_",id:"id_tema",valor:"desc_tema"},
+		{titulo:"Descri&ccedil;&atilde;o",prefixoid:"desctema_",id:"id_tema",valor:"desc_tema"},
 		{titulo:"Link para a fonte",prefixoid:"linktema_",id:"id_tema",valor:"link_tema"}
 		]
 	};
 	ins += (geraLinhas(i,param,2));
 	
-	ins += "<tr><td>Tags (separe com espaço):</td><td>";
+	ins += "<tr><td>Tags (separe com espa&ccedil;o):</td><td>";
 	ins += "<input type=text size=40 value='"+i.tags_tema+"' id='tagstema_"+i.id_tema+"' >";
 	ins += "<select onchange='registraTag(\"tagstema_"+i.id_tema+"\",this.value)'>";
 	ins += comboObjeto($listaTags,"nome","nome","");
@@ -204,7 +204,7 @@ function montaDivTemas(i)
 	ins += combosimnao(i.ogc_tema);
 	ins += "</select></td></tr>";
 	
-	ins += "<tr><td>Permite o download na aplicação datadownload.htm?</td><td>";
+	ins += "<tr><td>Permite o download na aplica&ccedil;&atilde;o datadownload.htm?</td><td>";
 	ins += "<select  id='downloadtema_"+i.id_tema+"' >";
 	ins += combosimnao(i.download_tema);
 	ins += "</select></td></tr>";
@@ -231,7 +231,7 @@ function registraTag(id,tag)
 }
 function alterar(prefixo,id)
 {
-	//if(confirm("Você realmente quer fazer isso?"))
+	//if(confirm("Voc&ecirc; realmente quer fazer isso?"))
 	//{
 		var retorna = function()
 		{pegaParametros(prefixo);};
@@ -365,7 +365,7 @@ function alterar(prefixo,id)
 }
 function excluir(prefixo,id)
 {
-	if(confirm("Você realmente quer fazer isso?"))
+	if(confirm("Voc&ecirc; realmente quer fazer isso?"))
 	{
 		var retorna = function()
 		{pegaParametros(prefixo);};

@@ -2,7 +2,7 @@
 /*
 Title: funcoes_gerais.php
 
-Contém um conjunto de funções que são compartilhadas por outros programas PHP utilizados pelo i3Geo.
+Cont&eacute;m um conjunto de fun&ccedil;&otilde;es que s&atilde;o compartilhadas por outros programas PHP utilizados pelo i3Geo.
 
 Licenca:
 
@@ -11,20 +11,20 @@ GPL2
 
 i3Geo Interface Integrada de Ferramentas de Geoprocessamento para Internet
 
-Direitos Autorais Reservados (c) 2006 Ministério do Meio Ambiente Brasil
+Direitos Autorais Reservados (c) 2006 Minist&eacute;rio do Meio Ambiente Brasil
 Desenvolvedor: Edmar Moretti edmar.moretti@mma.gov.br
 
-Este programa é software livre; você pode redistribuí-lo
-e/ou modificá-lo sob os termos da Licença Pública Geral
+Este programa &eacute; software livre; voc&ecirc; pode redistribu&iacute;-lo
+e/ou modific&aacute;-lo sob os termos da Licen&ccedil;a P&uacute;blica Geral
 GNU conforme publicada pela Free Software Foundation;
 
-Este programa é distribuído na expectativa de que seja útil,
-porém, SEM NENHUMA GARANTIA; nem mesmo a garantia implícita
-de COMERCIABILIDADE OU ADEQUAÇÃO A UMA FINALIDADE ESPECÍFICA.
-Consulte a Licença Pública Geral do GNU para mais detalhes.
-Você deve ter recebido uma cópia da Licença Pública Geral do
-GNU junto com este programa; se não, escreva para a
-Free Software Foundation, Inc., no endereço
+Este programa &eacute; distribu&iacute;do na expectativa de que seja &uacute;til,
+por&eacute;m, SEM NENHUMA GARANTIA; nem mesmo a garantia impl&iacute;cita
+de COMERCIABILIDADE OU ADEQUA&Ccedil;&Atilde;O A UMA FINALIDADE ESPEC&Iacute;FICA.
+Consulte a Licen&ccedil;a P&uacute;blica Geral do GNU para mais detalhes.
+Voc&ecirc; deve ter recebido uma cópia da Licen&ccedil;a P&uacute;blica Geral do
+GNU junto com este programa; se n&atilde;o, escreva para a
+Free Software Foundation, Inc., no endere&ccedil;o
 59 Temple Street, Suite 330, Boston, MA 02111-1307 USA.
 
 Arquivo:
@@ -37,17 +37,17 @@ Section: Imagens
 /*
 Function: classesRasterI
 
-Gera parâmetros para classificação de imagens.
+Gera par&acirc;metros para classifica&ccedil;&atilde;o de imagens.
 
-Gera a expressão e as cores para uso em classes com intervalos iguais para representação de imagens raster.
+Gera a express&atilde;o e as cores para uso em classes com intervalos iguais para representa&ccedil;&atilde;o de imagens raster.
 
 Parametros:
 
-$minvalor {numeric} - Menor valor existente na série
+$minvalor {numeric} - Menor valor existente na s&eacute;rie
 
 $maxvalor {numeric} - Maior valor
 
-$nclasses {numeric} - Número de classes
+$nclasses {numeric} - N&uacute;mero de classes
 
 $cores {array} - Cores. Array de array de cores cores[0] = array(r,g,b)
 
@@ -95,11 +95,11 @@ $dir_tmp {string} - diretorio onde estao as imagens
 
 $cp {CPAINT} - Objeto CPAINT
 
-$map_file [string} - arquivo mapfile que será utilizado para gerar a imagem base. Se for "", será utilizado a imagem definida em $imagem
+$map_file [string} - arquivo mapfile que ser&aacute; utilizado para gerar a imagem base. Se for "", ser&aacute; utilizado a imagem definida em $imagem
 
 Retorno:
 
-{string} - endereço da imagem criada
+{string} - endere&ccedil;o da imagem criada
 
 */
 function fusaoGrafico()
@@ -130,13 +130,13 @@ Executa comandos do R.
 
 Parametros:
 
-$rcode {array} - Código que será executado.
+$rcode {array} - Código que ser&aacute; executado.
 
-$dir_tmp {string} - Diretório temporário onde ficarão os arquivos para processamento.
+$dir_tmp {string} - Diretório tempor&aacute;rio onde ficar&atilde;o os arquivos para processamento.
 
-$R_path {string} - Executável do R.
+$R_path {string} - Execut&aacute;vel do R.
 
-$gfile_name {string} - nome da imagem que será criada
+$gfile_name {string} - nome da imagem que ser&aacute; criada
 
 Retorno:
 
@@ -167,11 +167,11 @@ Cria uma imagem png a partir de dados armazenados em disco.
 
 Utilizado para gerar uma imagem com base nos resultados de comandos R.
 
-O nome da imagem criada será o mesmo nome de $nomearq, porém com extensão .png
+O nome da imagem criada ser&aacute; o mesmo nome de $nomearq, por&eacute;m com extens&atilde;o .png
 
 Parametros:
 
-$nomearq {string} - Nome do arquivo no servidor que será utilizado para gerar a imagem.
+$nomearq {string} - Nome do arquivo no servidor que ser&aacute; utilizado para gerar a imagem.
 
 Retorno:
 
@@ -238,7 +238,7 @@ Section: cor
 /*
 Function: corRGB
 
-Obtém os valores em RGB de um objeto cor do Mapscript.
+Obt&eacute;m os valores em RGB de um objeto cor do Mapscript.
 
 Parametro:
 
@@ -246,7 +246,7 @@ $cor {objeto} - objeto cor do mapscript.
 
 Retorno:
 
-{string} - Cor em RGB separados por vírgula.
+{string} - Cor em RGB separados por v&iacute;rgula.
 */
 function corRGB($cor)
 {
@@ -266,7 +266,7 @@ $label {objeto} - Objeto do tipo label.
 
 $cor {string} - RGB separado por espacos, se for um array, aplica diretamente ao objeto cor.
 
-$elemento {string} - Nome do elemento que receberá a cor.
+$elemento {string} - Nome do elemento que receber&aacute; a cor.
 
 $sombrax { n pixels) - utilizado apena quando se define a cor da sombra de labels
 
@@ -282,7 +282,7 @@ function corE($label,$cor,$elemento,$sombrax=1,$sombray=1)
 		if (count(explode(" ",$cor)) == 3)
 		{
 			if($versao > 5 && in_array(strtolower($elemento),array("backgroundcolor","backgroundshadowcolor"))){
-				//na 601 não funciona
+				//na 601 n&atilde;o funciona
 				return;
 				$e = new styleObj($label);
 				$e->setGeomTransform("labelpoly");
@@ -306,7 +306,7 @@ Function: colorHex
 
 Aloca uma cor a um objeto imagem (GD).
 
-A origem é uma cor definida em hexadecimal.
+A origem &eacute; uma cor definida em hexadecimal.
 
 Parametro:
 
@@ -326,7 +326,7 @@ Function: colorRGB
 
 Aloca uma cor a um objeto imagem (GD).
 
-A origem é uma cor definida em rgb.
+A origem &eacute; uma cor definida em rgb.
 
 Parametros:
 
@@ -347,7 +347,7 @@ Function: colorRGBshadow
 
 Aloca uma cor de sombra a um objeto imagem (GD).
 
-A origem é uma cor definida em rgb.
+A origem &eacute; uma cor definida em rgb.
 
 Parametros:
 
@@ -380,7 +380,7 @@ Function: colorHexshadow
 
 Aloca uma cor de sombra a um objeto imagem (GD).
 
-A origem é uma cor definida em hexadecimal.
+A origem &eacute; uma cor definida em hexadecimal.
 
 Parametros:
 
@@ -433,11 +433,11 @@ Section: arquivos
 /*
 Function: nomeRandomico
 
-Gera um nome randômico.
+Gera um nome rand&ocirc;mico.
 
 Parametro:
 
-$n {numeric} - Número de dígitos.
+$n {numeric} - N&uacute;mero de d&iacute;gitos.
 
 Retorno:
 
@@ -455,9 +455,9 @@ function nomeRandomico($n=10)
 /*
 Function: listaEpsg
 
-Lê o arquivo com os códigos de projeção epsg e retorna um array com os dados.
+L&ecirc; o arquivo com os códigos de proje&ccedil;&atilde;o epsg e retorna um array com os dados.
 
-O arquivo lido é "../ferramentas/epsg.txt"
+O arquivo lido &eacute; "../ferramentas/epsg.txt"
 
 Retorno:
 
@@ -501,7 +501,7 @@ function listaEpsg()
 /*
 Function: copiaSeguranca
 
-Cria cópia de segurança do map_file.
+Cria cópia de seguran&ccedil;a do map_file.
 
 Salva o mapfile atual incluindo no nome, a string "seguranca".
 
@@ -547,7 +547,7 @@ Retorna lista de diretórios.
 
 parameters:
 
-$diretorio {string} - Raiz onde será feita a busca.
+$diretorio {string} - Raiz onde ser&aacute; feita a busca.
 
 Retorno:
 
@@ -580,7 +580,7 @@ Retorna lista de arquivos.
 
 Parametro:
 
-$diretorio {string} - Raiz onde será feita a busca.
+$diretorio {string} - Raiz onde ser&aacute; feita a busca.
 
 Retorno:
 
@@ -620,9 +620,9 @@ Grava as linhas de um array em um arquivo.
 
 Parametros:
 
-$dados {array} - Dados que serão gravados.
+$dados {array} - Dados que ser&atilde;o gravados.
 
-$arq {string} - Nome do arquivo que será gravado
+$arq {string} - Nome do arquivo que ser&aacute; gravado
 */
 function gravaDados($dados,$arq)
 {
@@ -638,19 +638,19 @@ Function: listaTrueType
 
 Lista as fontes true type.
 
-Lê o arquivo fontes.txt existente no diretório symbols da instalação do I3Geo.
-O resultado é gravado em um arquivo temporário para include, o que torna mais rápida a carga futura.
-O arquivo para include armazena a variável res que contém a lista de fontes separadas por vírgula.
+L&ecirc; o arquivo fontes.txt existente no diretório symbols da instala&ccedil;&atilde;o do I3Geo.
+O resultado &eacute; gravado em um arquivo tempor&aacute;rio para include, o que torna mais r&aacute;pida a carga futura.
+O arquivo para include armazena a vari&aacute;vel res que cont&eacute;m a lista de fontes separadas por v&iacute;rgula.
 
 Parametros:
 
 $cp {CAPAINT} - Objeto CPAINT.
 
-$locaplic {string} - Localização da aplicação no servidor.
+$locaplic {string} - Localiza&ccedil;&atilde;o da aplica&ccedil;&atilde;o no servidor.
 
 $imgdir {string} - Diretório das imagens.
 
-$dir_tmp {string} - Diretório temporário.
+$dir_tmp {string} - Diretório tempor&aacute;rio.
 
 Retorno:
 
@@ -684,13 +684,13 @@ Section: mapa
 /*
 Function: substituiCon
 
-Substituí a string de conexão com o banco postgis pela string definida na inicialização (ms_configura.php)
+Substitu&iacute; a string de conex&atilde;o com o banco postgis pela string definida na inicializa&ccedil;&atilde;o (ms_configura.php)
 
 Parametros:
 
 $map_file {string} - arquivo mapfile
 
-$postgis_mapa {array} - lista de strings de conexão com o banco
+$postgis_mapa {array} - lista de strings de conex&atilde;o com o banco
 
 Retorno:
 
@@ -713,7 +713,7 @@ function substituiCon($map_file,$postgis_mapa)
 				if (($lcon == " ") || ($lcon == "") || (in_array($lcon,array_keys($postgis_mapa))))
 				{
 					//
-					//o metadata CONEXAOORIGINAL guarda o valor original para posterior substituição
+					//o metadata CONEXAOORIGINAL guarda o valor original para posterior substitui&ccedil;&atilde;o
 					//				
 					if(($lcon == " ") || ($lcon == ""))
 					{
@@ -735,13 +735,13 @@ function substituiCon($map_file,$postgis_mapa)
 /*
 Function: restauraCon
 
-Esconde a string de conexão com o banco, caso necessário
+Esconde a string de conex&atilde;o com o banco, caso necess&aacute;rio
 
 Parametros:
 
 $map_file {string} - arquivo mapfile
 
-$postgis_mapa {string} - lista de conexão com o banco
+$postgis_mapa {string} - lista de conex&atilde;o com o banco
 */
 function restauraCon($map_file,$postgis_mapa)
 {
@@ -775,19 +775,19 @@ $nomeImagem {string} - Nome da imagem do corpo do mapa.
 
 $objMapa {objeto} - Objeto map.
 
-$utilizacgi {string} - indica se o mapserver CGI está em uso
+$utilizacgi {string} - indica se o mapserver CGI est&aacute; em uso
 
-$locmapserv	{string} - locallização do mapserver CGI
+$locmapserv	{string} - localliza&ccedil;&atilde;o do mapserver CGI
 
-$map_file {string} - mapfile que será processado
+$map_file {string} - mapfile que ser&aacute; processado
 
 Parametros:
 
-$ext {string} - (opcional) extensão geográfica do mapa
+$ext {string} - (opcional) extens&atilde;o geogr&aacute;fica do mapa
 
 Retorno:
 
-string contendo variáveis no formato javascript
+string contendo vari&aacute;veis no formato javascript
 */
 function retornaReferencia($ext="")
 {
@@ -833,7 +833,7 @@ Function: retornaReferenciaDinamica
 
 Retorna uma string com as variaveis de um novo mapa de referencia gerado de forma dinamica.
 
-O mapa de referência é baseado no mapfile aplicmap/referenciadinamica.map ou no mapa atual
+O mapa de refer&ecirc;ncia &eacute; baseado no mapfile aplicmap/referenciadinamica.map ou no mapa atual
 
 Globais:
 
@@ -841,27 +841,27 @@ $nomeImagem {string} - Nome da imagem do corpo do mapa.
 
 $objMapa {objeto} - Objeto map.
 
-$utilizacgi {string} - indica se o mapserver CGI está em uso
+$utilizacgi {string} - indica se o mapserver CGI est&aacute; em uso
 
-$locmapserv	{string} - locallização do mapserver CGI
+$locmapserv	{string} - localliza&ccedil;&atilde;o do mapserver CGI
 
-$map_file {string} - mapfile que será processado
+$map_file {string} - mapfile que ser&aacute; processado
 
-$locaplic {string} - onde o i3geo está instalado
+$locaplic {string} - onde o i3geo est&aacute; instalado
 
 $zoom - fator de zoom
 
-$tipo - tipo de referência dinamico|mapa
+$tipo - tipo de refer&ecirc;ncia dinamico|mapa
 
 $interface - interface do mapa atual openlayers|googlemaps|googleearth
 
 Parametros:
 
-$ext {string} - (opcional) extensão geográfica do mapa
+$ext {string} - (opcional) extens&atilde;o geogr&aacute;fica do mapa
 
 Retorno:
 
-String contendo variáveis no formato javascript
+String contendo vari&aacute;veis no formato javascript
 */
 function retornaReferenciaDinamica($ext="")
 {
@@ -924,7 +924,7 @@ function retornaReferenciaDinamica($ext="")
 	$ref = $mapa->reference;
 	$r = $ref->extent;
 	//
-	//guarda a extensao original para quando o modo dinâmico parar
+	//guarda a extensao original para quando o modo din&acirc;mico parar
 	//
 	$original = $mapa->getmetadata("referenciaextentoriginal");
 	if($original == "")
@@ -946,15 +946,15 @@ function retornaReferenciaDinamica($ext="")
 /*
 Function: testaMapa
 
-Testa se um mapa está íntegro.
+Testa se um mapa est&aacute; &iacute;ntegro.
 
-Se o mapfile apresentar problemas, a cópia de segurança é restaurada.
+Se o mapfile apresentar problemas, a cópia de seguran&ccedil;a &eacute; restaurada.
 
 Parametro:
 
 $map_file {string} - Arquivo map file.
 
-$postgis_mapa {array} - lista de strings de conexão com o banco de dados definida em ms_configura.php
+$postgis_mapa {array} - lista de strings de conex&atilde;o com o banco de dados definida em ms_configura.php
 
 Retorno:
 
@@ -997,7 +997,7 @@ function testaMapa($map_file,$postgis_mapa)
 /*
 Function: desligamargem
 
-Desliga o mapa de referência e a barra de escala de um mapa.
+Desliga o mapa de refer&ecirc;ncia e a barra de escala de um mapa.
 
 Parametro:
 
@@ -1041,7 +1041,7 @@ function desligaTemas($objMapa)
 /*
 Function: extPadrao
 
-Aplica o valor da extensao geográfica padrao a um objeto map.
+Aplica o valor da extensao geogr&aacute;fica padrao a um objeto map.
 
 Parametro:
 
@@ -1103,13 +1103,13 @@ Pega os valores de um item de um tema.
 
 Parametros:
 
-$layer {objeto} - Layer que será processado.
+$layer {objeto} - Layer que ser&aacute; processado.
 
-$item {string} - Item que será processado.
+$item {string} - Item que ser&aacute; processado.
 
 $numerico {boleano} - O item e numerico (true ou false).
 
-$ignorar {string} - valor que será ignorado na listagem final
+$ignorar {string} - valor que ser&aacute; ignorado na listagem final
 
 Retorno:
 
@@ -1183,23 +1183,23 @@ function pegaValores($mapa,$layer,$item,$numerico=false,$ignorar="")
 /*
 Function: pegaValoresM
 
-Pega os valores de múltiplos itens de um tema.
+Pega os valores de m&uacute;ltiplos itens de um tema.
 
-Se for passado apenas um item, o array de retorno será unidimensional.
+Se for passado apenas um item, o array de retorno ser&aacute; unidimensional.
 
 Parametros:
 
-$layer {objeto} - Layer que será processado.
+$layer {objeto} - Layer que ser&aacute; processado.
 
-$itens {array} - Itens que serão processados.
+$itens {array} - Itens que ser&atilde;o processados.
 
-$exclui {string} - O registro não será considerado se um dos valores for igual a esse valor.
+$exclui {string} - O registro n&atilde;o ser&aacute; considerado se um dos valores for igual a esse valor.
 
 $selecionados {string} - sim|nao Utiliza apenas os selecionados ou todos
 
-$chaves {boolean} - inclui ou não os nomes dos itens como chave no array resultante
+$chaves {boolean} - inclui ou n&atilde;o os nomes dos itens como chave no array resultante
 
-$centroide {boolean} - captura ou não o WKT com o centroide do elemento
+$centroide {boolean} - captura ou n&atilde;o o WKT com o centroide do elemento
 
 Retorno:
 
@@ -1295,17 +1295,17 @@ function pegaValoresM($mapa,$layer,$itens,$exclui="nulo",$selecionados="nao",$ch
 /*
 Function: agrupaValores
 
-Agrupa os valores de um array por um método de cálculo.
+Agrupa os valores de um array por um m&eacute;todo de c&aacute;lculo.
 
-No caso de soma e média, será considerado apenas um item e uma chave.
+No caso de soma e m&eacute;dia, ser&aacute; considerado apenas um item e uma chave.
 
 Parametros:
 
-$lista {array} - Lista com os arrays contendo os dados que serão processados.
+$lista {array} - Lista com os arrays contendo os dados que ser&atilde;o processados.
 
-$indiceChave {string} - Índice do array da lista que será considerado como a chave do array.
+$indiceChave {string} - &Iacute;ndice do array da lista que ser&aacute; considerado como a chave do array.
 
-$indiceValor {string} - Índice do array da lista que será considerado como o valor.
+$indiceValor {string} - &Iacute;ndice do array da lista que ser&aacute; considerado como o valor.
 
 $tipo {string} - Tipo de processamento soma|media|contagem|nenhum.
 
@@ -1469,13 +1469,13 @@ Section: coordenadas
 /*
 Function: ip2geo
 
-Localiza a coordenada geográfica de um endereço IP.
+Localiza a coordenada geogr&aacute;fica de um endere&ccedil;o IP.
 
-Essa função baseia-se no pacote geoIP, que deve estar instalado em pacotes/geoip.
+Essa fun&ccedil;&atilde;o baseia-se no pacote geoIP, que deve estar instalado em pacotes/geoip.
 
 Parametros:
 
-$ip {string} - Número do IP.
+$ip {string} - N&uacute;mero do IP.
 
 Retorno:
 
@@ -1513,7 +1513,7 @@ Parametros:
 
 $map_file {string} - Arquivo map file.
 
-$xy {string | array} - XY com as coordenadas (separado por espaço no caso de string)
+$xy {string | array} - XY com as coordenadas (separado por espa&ccedil;o no caso de string)
 
 Retorno:
 
@@ -1540,13 +1540,13 @@ function xy2imagem($map_file,$xy)
 /*
 Function: imagem2xy
 
-Converte coordenadas de imagem em coordenadas geográficas.
+Converte coordenadas de imagem em coordenadas geogr&aacute;ficas.
 
 Parametros:
 
 $map_file {string} - Arquivo map file.
 
-$xy {array | string} - XY com as coordenadas (separado por espaço no caso de string)
+$xy {array | string} - XY com as coordenadas (separado por espa&ccedil;o no caso de string)
 
 Retorno:
 
@@ -1574,7 +1574,7 @@ Converte coordenadas para wkt.
 
 Parametro:
 
-$xy {string} - Lista de pares de coordenadas xy separadas por espaço.
+$xy {string} - Lista de pares de coordenadas xy separadas por espa&ccedil;o.
 
 Retorno:
 
@@ -1638,7 +1638,7 @@ function geo2zonaUTM($x)
 /*
 Function: geo2utm
 
-Converte coordenadas geográficas para UTM
+Converte coordenadas geogr&aacute;ficas para UTM
 
 Parametros:
 
@@ -1685,7 +1685,7 @@ $map_file {string} - arquivo map_file
 
 $tema {string} - código do tema
 
-$sld {string} - arquivo onde o sld será gravado
+$sld {string} - arquivo onde o sld ser&aacute; gravado
 */
 function reSLD($map_file,$tema,$sld)
 {
@@ -1711,13 +1711,13 @@ georssCanais (depreciado)
 Lista os canais de um GeoRss.
 
 Parametros:
-$servico - Endereço do RSS.
+$servico - Endere&ccedil;o do RSS.
 
 $map_file - Nome do arquivo map file. Inclua o caminho completo no servidor.
 
-$dir_tmp - Diretório onde o arquivo será criado.
+$dir_tmp - Diretório onde o arquivo ser&aacute; criado.
 
-$locaplic - Localização do I3geo
+$locaplic - Localiza&ccedil;&atilde;o do I3geo
 */
 function georssCanais($servico,$map_file,$dir_tmp,$locaplic)
 {
@@ -1743,7 +1743,7 @@ Parametros:
 
 $layer {objeto} - Objeto layer
 
-$enc {string} - Código de página para conversão de caracteres
+$enc {string} - Código de p&aacute;gina para convers&atilde;o de caracteres
 
 Retorno:
 
@@ -1775,11 +1775,11 @@ $ms_tipo {MS_LAYER} - tipo de layer
 
 $ms_status [MS_STATUS} - status de visibilidade
 
-$metaTema {string} - nome do tema que será incluído no metadata TEMA
+$metaTema {string} - nome do tema que ser&aacute; inclu&iacute;do no metadata TEMA
 
-$metaClasse {string} - SIM|NAO indica se a classe é visível ou não na legenda
+$metaClasse {string} - SIM|NAO indica se a classe &eacute; vis&iacute;vel ou n&atilde;o na legenda
 
-$reposiciona {boolean} - reordena ou não o novo layer
+$reposiciona {boolean} - reordena ou n&atilde;o o novo layer
 
 Retorno:
 
@@ -1837,13 +1837,13 @@ Cria um arquivo shape file de um tema.
 
 Parametros:
 
-$tema {string} - Tema que será processado.
+$tema {string} - Tema que ser&aacute; processado.
 
 $map_file {string} - Nome do arquivo map file. Inclua o caminho completo no servidor.
 
-$locaplic {string} - Diretório onde está a aplicação no servidor.
+$locaplic {string} - Diretório onde est&aacute; a aplica&ccedil;&atilde;o no servidor.
 
-$dir_tmp {string} - Diretório temporário
+$dir_tmp {string} - Diretório tempor&aacute;rio
 
 $nomeRand {boleano} - Gera um nome randomico para o shapefile (TRUE) ou utiliza o nome do tema (FALSE)
 
@@ -2020,11 +2020,11 @@ Parametros:
 
 $map_file {string} - Nome do arquivo map file. Inclua o caminho completo no servidor.
 
-$tema {string} - Tema que será processado.
+$tema {string} - Tema que ser&aacute; processado.
 
-$locaplic {string} - Diretório da aplicação.
+$locaplic {string} - Diretório da aplica&ccedil;&atilde;o.
 
-$dir_tmp {string} - Diretório temporário
+$dir_tmp {string} - Diretório tempor&aacute;rio
 
 $postgis_mapa - variavel definida em ms_configura.php
 
@@ -2046,7 +2046,7 @@ function downloadTema2($map_file,$tema,$locaplic,$dir_tmp,$postgis_mapa)
 	$versao = $versao["principal"];
 	$dataArquivos = array();
 	//
-	//cria o arquivo mapfile, caso ele não exista, que servirá de base para obtenção dos dados
+	//cria o arquivo mapfile, caso ele n&atilde;o exista, que servir&aacute; de base para obten&ccedil;&atilde;o dos dados
 	//
 	$nomeRand = true;
 	//echo $versao;exit;
@@ -2082,8 +2082,8 @@ function downloadTema2($map_file,$tema,$locaplic,$dir_tmp,$postgis_mapa)
 	}
 	//
 	//verifica se o tema existe no mapfile
-	//se não existir, tenta inserir com base no mapfile existente no diretório temas
-	//o tema pode existir se a função estiver sendo chamada da árvore de temas de um mapa já aberto
+	//se n&atilde;o existir, tenta inserir com base no mapfile existente no diretório temas
+	//o tema pode existir se a fun&ccedil;&atilde;o estiver sendo chamada da &aacute;rvore de temas de um mapa j&aacute; aberto
 	//
 	$temasdir = $locaplic."/temas";
 	$map = ms_newMapObj($map_file);
@@ -2096,7 +2096,7 @@ function downloadTema2($map_file,$tema,$locaplic,$dir_tmp,$postgis_mapa)
 	//caso o usuario tenha usado caixa alta no nome do layer
 	if ($teste == "")
 	{$teste = @$map->getlayerbyname(strtoupper($tema));}
-	//se o layer não existir no mapfile, pega da pasta i3geo/temas e adiciona em $map
+	//se o layer n&atilde;o existir no mapfile, pega da pasta i3geo/temas e adiciona em $map
 	if($teste == "")
 	{
 		$maptemp = ms_newMapObj($temasdir."/".$tema.".map");
@@ -2122,7 +2122,7 @@ function downloadTema2($map_file,$tema,$locaplic,$dir_tmp,$postgis_mapa)
 	}
 	else
 	{
-		//remove o metadata com um nome de arquivo opcional, pois a função de download pode estar sendo executada da árvore de camadas
+		//remove o metadata com um nome de arquivo opcional, pois a fun&ccedil;&atilde;o de download pode estar sendo executada da &aacute;rvore de camadas
 		$teste = $map->getlayerbyname($tema);
 		$teste->setmetadata("arquivodownload","");
 	}
@@ -2132,11 +2132,11 @@ function downloadTema2($map_file,$tema,$locaplic,$dir_tmp,$postgis_mapa)
 	$map_file = str_replace(".map","tmp.map",$map_file);
 	$map->save($map_file);
 	substituiCon($map_file,$postgis_mapa);
-	//$map_file agora contem os LAYERS necessários
+	//$map_file agora contem os LAYERS necess&aacute;rios
 	$map = ms_newMapObj($map_file);
 	//
 	//verifica se existe mais de um tema (grupo) montando o array com os temas
-	//os grupos podem ter o nome do layer em GROUP ao invés de NAME
+	//os grupos podem ter o nome do layer em GROUP ao inv&eacute;s de NAME
 	//
 	$multilayer = 0;
 	$grupos = $map->getAllGroupNames();
@@ -2158,7 +2158,7 @@ function downloadTema2($map_file,$tema,$locaplic,$dir_tmp,$postgis_mapa)
 	}
 	if ($multilayer == 0)
 	{$temas[] = $tema;}
-	//$temas agora é um array com os NAMEs dos LAYERS que serão baixados
+	//$temas agora &eacute; um array com os NAMEs dos LAYERS que ser&atilde;o baixados
 	$radtmp = dirname($dir_tmp);
 	foreach ($temas as $tema)
 	{
@@ -2167,7 +2167,7 @@ function downloadTema2($map_file,$tema,$locaplic,$dir_tmp,$postgis_mapa)
 		$nomeshp = $dir_tmp."/".$novonomelayer;
 		if(file_exists($nomeshp.".dbf")){
 			//
-			//verifica se o arquivo está vazio ou não
+			//verifica se o arquivo est&aacute; vazio ou n&atilde;o
 			//se estiver, apaga o arquivo
 			//
 			$verificaDBF = verificaDBF($nomeshp.".dbf");
@@ -2178,13 +2178,13 @@ function downloadTema2($map_file,$tema,$locaplic,$dir_tmp,$postgis_mapa)
 			}
 		}
 		//
-		//se existir um arquivo já pronto, definido no metadata arquivodownload, irá ser utilizado
+		//se existir um arquivo j&aacute; pronto, definido no metadata arquivodownload, ir&aacute; ser utilizado
 		//
 		$meta = $l->getmetadata("arquivodownload");
 		if($meta != "")
 		{
 			//
-			//se o arquivo não tiver sido copiado
+			//se o arquivo n&atilde;o tiver sido copiado
 			//
 			$nomecopia = $dir_tmp."/".basename($meta);
 			if(file_exists($meta))
@@ -2194,7 +2194,7 @@ function downloadTema2($map_file,$tema,$locaplic,$dir_tmp,$postgis_mapa)
 			}
 			$resultado[] = basename($dir_tmp)."/".basename($nomecopia);
 		}
-		else //se não existir arquivo definido
+		else //se n&atilde;o existir arquivo definido
 		{
 			$dados = $l->data;
 			//
@@ -2275,7 +2275,7 @@ function downloadTema2($map_file,$tema,$locaplic,$dir_tmp,$postgis_mapa)
 /*
 Function: verificaDBF
 
-Verifica se um arquivo dbf está ou não vazio
+Verifica se um arquivo dbf est&aacute; ou n&atilde;o vazio
 
 Parametros:
 
@@ -2283,7 +2283,7 @@ $arq {string} - nome do arquivo dbf
 
 Return:
 
-{boolean} - true indica que não está vazio
+{boolean} - true indica que n&atilde;o est&aacute; vazio
 */
 function verificaDBF($arq){
 	if(function_exists("dbase_open"))
@@ -2295,7 +2295,7 @@ function verificaDBF($arq){
 		{include_once "../pacotes/phpxbase/api_conversion.php";}	
 		$db = xbase_open($arq, 0);
 	}
-	//nas versões novas do PHP open retorna vazio, não dá pra verificar
+	//nas vers&otilde;es novas do PHP open retorna vazio, n&atilde;o d&aacute; pra verificar
 	//if ($db) {
 		if(function_exists("dbase_numrecords")){
 			$record_numbers = dbase_numrecords($db);
@@ -2318,19 +2318,19 @@ Section: Outros
 /*
 Function: calculaAreaPixel
 
-Calcula a área em m2 de um pixel do mapa
+Calcula a &aacute;rea em m2 de um pixel do mapa
 
-O cálculo é feito projetando-se o mapa atual para a projeção policônica
+O c&aacute;lculo &eacute; feito projetando-se o mapa atual para a proje&ccedil;&atilde;o polic&ocirc;nica
 
 Parametros:
 
 $map_file {string} - arquivo do mapa
 
-$celsize {numerico} - tamanho do pixel em décimos de grau
+$celsize {numerico} - tamanho do pixel em d&eacute;cimos de grau
 
 Retorno:
 
-{Numerico} - área em metros quadrados
+{Numerico} - &aacute;rea em metros quadrados
 */
 function calculaAreaPixel($map_file,$celsize)
 {
@@ -2393,7 +2393,7 @@ function pegaIPcliente2()
 /*
 Function: versao
 
-Retorna a versão do Mapserver.
+Retorna a vers&atilde;o do Mapserver.
 
 Retorno:
 
@@ -2434,13 +2434,13 @@ Function: autoClasses
 
 Gera as classes do layer com base em valores definidos na tabela de atributos.
 
-Os parâmetros para montagem das classes são definidos em metadados do layer.
+Os par&acirc;metros para montagem das classes s&atilde;o definidos em metadados do layer.
 
 Parametros:
 
-$nlayer {objeto} - objeto layer que será processado
+$nlayer {objeto} - objeto layer que ser&aacute; processado
 
-$mapa {objeto} - objeto mapa que será processado
+$mapa {objeto} - objeto mapa que ser&aacute; processado
 
 Retorno:
 
@@ -2639,20 +2639,20 @@ Retorno:
 */
 function removeAcentos($var)
 {
-	$a = array('À', 'Á', 'Â', 'Ã', 'Ä', 'Å', 'Æ',  'Ç', 'È', 'É', 'Ê', 'Ë', 'Ì', 'Í', 'Î', 'Ï', 'Ð', 'Ñ', 'Ò', 'Ó', 'Ô', 'Õ', 'Ö', 'Ø', 'Ù', 'Ú', 'Û', 'Ü', 'Ý', 'ß', 'à', 'á', 'â', 'ã', 'ä', 'å', 'æ',  'ç', 'è', 'é', 'ê', 'ë', 'ì', 'í', 'î', 'ï', 'ñ', 'ò', 'ó', 'ô', 'õ', 'ö', 'ø', 'ù', 'ú', 'û', 'ü', 'ý', 'ÿ', 'A', 'a', 'A', 'a', 'A', 'a', 'C', 'c', 'C', 'c', 'C', 'c', 'C', 'c', 'D', 'd', 'Ð', 'd', 'E', 'e', 'E', 'e', 'E', 'e', 'E', 'e', 'E', 'e', 'G', 'g', 'G', 'g', 'G', 'g', 'G', 'g', 'H', 'h', 'H', 'h', 'I', 'i', 'I', 'i', 'I', 'i', 'I', 'i', 'I', 'i', '?', '?',   'J', 'j', 'K', 'k', 'L', 'l', 'L', 'l', 'L', 'l', '?', '?', 'L', 'l', 'N', 'n', 'N', 'n', 'N', 'n', '?', 'O', 'o', 'O', 'o', 'O', 'o', 'Œ', 'œ',   'R', 'r', 'R', 'r', 'R', 'r', 'S', 's', 'S', 's', 'S', 's', 'Š', 'š', 'T', 't', 'T', 't', 'T', 't', 'U', 'u', 'U', 'u', 'U', 'u', 'U', 'u', 'U', 'u', 'U', 'u', 'W', 'w', 'Y', 'y', 'Ÿ', 'Z', 'z', 'Z', 'z', 'Ž', 'ž', '?', 'ƒ', 'O', 'o', 'U', 'u', 'A', 'a', 'I', 'i', 'O', 'o', 'U', 'u', 'U', 'u', 'U', 'u', 'U', 'u', 'U', 'u', '?', '?', '?', '?', '?', '?');
+	$a = array('À', '&Aacute;', '&Acirc;', '&Atilde;', 'Ä', 'Å', 'Æ',  '&Ccedil;', 'È', '&Eacute;', '&Ecirc;', 'Ë', 'Ì', '&Iacute;', 'Î', 'Ï', 'Ð', 'Ñ', 'Ò', 'Ó', '&Ocirc;', '&Otilde;', 'Ö', 'Ø', 'Ù', '&Uacute;', 'Û', 'Ü', 'Ý', 'ß', 'à', '&aacute;', '&acirc;', '&atilde;', 'ä', 'å', 'æ',  '&ccedil;', 'è', '&eacute;', '&ecirc;', 'ë', 'ì', '&iacute;', 'î', 'ï', 'ñ', 'ò', 'ó', '&ocirc;', '&otilde;', 'ö', 'ø', 'ù', '&uacute;', 'û', 'ü', 'ý', 'ÿ', 'A', 'a', 'A', 'a', 'A', 'a', 'C', 'c', 'C', 'c', 'C', 'c', 'C', 'c', 'D', 'd', 'Ð', 'd', 'E', 'e', 'E', 'e', 'E', 'e', 'E', 'e', 'E', 'e', 'G', 'g', 'G', 'g', 'G', 'g', 'G', 'g', 'H', 'h', 'H', 'h', 'I', 'i', 'I', 'i', 'I', 'i', 'I', 'i', 'I', 'i', '?', '?',   'J', 'j', 'K', 'k', 'L', 'l', 'L', 'l', 'L', 'l', '?', '?', 'L', 'l', 'N', 'n', 'N', 'n', 'N', 'n', '?', 'O', 'o', 'O', 'o', 'O', 'o', 'Œ', 'œ',   'R', 'r', 'R', 'r', 'R', 'r', 'S', 's', 'S', 's', 'S', 's', 'Š', 'š', 'T', 't', 'T', 't', 'T', 't', 'U', 'u', 'U', 'u', 'U', 'u', 'U', 'u', 'U', 'u', 'U', 'u', 'W', 'w', 'Y', 'y', 'Ÿ', 'Z', 'z', 'Z', 'z', 'Ž', 'ž', '?', 'ƒ', 'O', 'o', 'U', 'u', 'A', 'a', 'I', 'i', 'O', 'o', 'U', 'u', 'U', 'u', 'U', 'u', 'U', 'u', 'U', 'u', '?', '?', '?', '?', '?', '?');
 	$b = array('A', 'A', 'A', 'A', 'A', 'A', 'AE', 'C', 'E', 'E', 'E', 'E', 'I', 'I', 'I', 'I', 'D', 'N', 'O', 'O', 'O', 'O', 'O', 'O', 'U', 'U', 'U', 'U', 'Y', 's', 'a', 'a', 'a', 'a', 'a', 'a', 'ae', 'c', 'e', 'e', 'e', 'e', 'i', 'i', 'i', 'i', 'n', 'o', 'o', 'o', 'o', 'o', 'o', 'u', 'u', 'u', 'u', 'y', 'y', 'A', 'a', 'A', 'a', 'A', 'a', 'C', 'c', 'C', 'c', 'C', 'c', 'C', 'c', 'D', 'd', 'D', 'd', 'E', 'e', 'E', 'e', 'E', 'e', 'E', 'e', 'E', 'e', 'G', 'g', 'G', 'g', 'G', 'g', 'G', 'g', 'H', 'h', 'H', 'h', 'I', 'i', 'I', 'i', 'I', 'i', 'I', 'i', 'I', 'i', 'IJ', 'ij', 'J', 'j', 'K', 'k', 'L', 'l', 'L', 'l', 'L', 'l', 'L', 'l', 'L', 'l', 'N', 'n', 'N', 'n', 'N', 'n', 'n', 'O', 'o', 'O', 'o', 'O', 'o', 'OE', 'oe', 'R', 'r', 'R', 'r', 'R', 'r', 'S', 's', 'S', 's', 'S', 's', 'S', 's', 'T', 't', 'T', 't', 'T', 't', 'U', 'u', 'U', 'u', 'U', 'u', 'U', 'u', 'U', 'u', 'U', 'u', 'W', 'w', 'Y', 'y', 'Y', 'Z', 'z', 'Z', 'z', 'Z', 'z', 's', 'f', 'O', 'o', 'U', 'u', 'A', 'a', 'I', 'i', 'O', 'o', 'U', 'u', 'U', 'u', 'U', 'u', 'U', 'u', 'U', 'u', 'A', 'a', 'AE', 'ae', 'O', 'o');
 	return str_replace($a, $b, $var); 
 }
 /*
 Function: criaDirMapa
 
-Cria os diretórios temporários para a aplicação.
+Cria os diretórios tempor&aacute;rios para a aplica&ccedil;&atilde;o.
 
 Parametro:
 
-$dir_tmp {string} - Diretório temporário (no servidor) utilizado pelo mapserver.
+$dir_tmp {string} - Diretório tempor&aacute;rio (no servidor) utilizado pelo mapserver.
 
-$$cachedir {string} - Diretório de cache temporário definido no ms_configura.php
+$$cachedir {string} - Diretório de cache tempor&aacute;rio definido no ms_configura.php
 
 Retorno:
 
@@ -2690,13 +2690,13 @@ function criaDirMapa($dir_tmp,$cachedir="")
 /*
 Function: array2json
 
-Converte um array em uma string no formato JSON. Utiliza as funções nativas do PHP para gerar o objeto.
+Converte um array em uma string no formato JSON. Utiliza as fun&ccedil;&otilde;es nativas do PHP para gerar o objeto.
 
 Parametro:
 
 $a {array}
 
-$cpaint {boolean} - se for true é acrescentado o elemento "data" como chave no array, mantendo a compatibilidade da resposta com o CPAINT
+$cpaint {boolean} - se for true &eacute; acrescentado o elemento "data" como chave no array, mantendo a compatibilidade da resposta com o CPAINT
 
 Retorno:
 
@@ -2752,7 +2752,7 @@ Converte um array em um objeto JSON e retorna para o navegador
 
 Parametro:
 
-$obj {array} - objeto que será convertido
+$obj {array} - objeto que ser&aacute; convertido
 */
 function cpjson($obj){
 	if(function_exists("json_encode"))
@@ -2770,7 +2770,7 @@ function cpjson($obj){
 /*
 Function: removeLinha
 
-Remove uma linha do mapfile baseado na comparação de strings.
+Remove uma linha do mapfile baseado na compara&ccedil;&atilde;o de strings.
 
 Parametros:
 
@@ -2826,9 +2826,9 @@ function carregaquery($mapfile,$objlayer,$objmapa)
 /*
 Function: carregaquery2
 
-Le um arquivo PHP, serializado com a lista de índices de objetos SHAPE selecionados em um LAYER, e aplica ao LAYER a seleção desses SHAPES usando querybyindex
+Le um arquivo PHP, serializado com a lista de &iacute;ndices de objetos SHAPE selecionados em um LAYER, e aplica ao LAYER a sele&ccedil;&atilde;o desses SHAPES usando querybyindex
 
-Atenção: na versão 6 do Mapserver, não funciona com layers do tipo Postgis
+Aten&ccedil;&atilde;o: na vers&atilde;o 6 do Mapserver, n&atilde;o funciona com layers do tipo Postgis
 
 Parametros:
 
@@ -2857,7 +2857,7 @@ function carregaquery2($mapfile,&$objlayer,&$objmapa)
 /*
 Function: verificaEditores
 
-Verifica se o usuário atual está cadastrado como editor
+Verifica se o usu&aacute;rio atual est&aacute; cadastrado como editor
 
 Parametros:
 
@@ -2890,7 +2890,7 @@ Coloca todas as camadas do tipo ANNOTATION sobre as demais
 
 Parametros:
 
-$map_file - arquivo mapfile que será processado
+$map_file - arquivo mapfile que ser&aacute; processado
 */
 function sobeAnno($map_file){
 	$mapa = ms_newMapObj($map_file);
@@ -2970,7 +2970,7 @@ function retornaShapesSelecionados($objLayer,$map_file,$objMapa){
 /*
 Function: permissoesarquivo
 
-Retorna as permissões de um arquivo
+Retorna as permiss&otilde;es de um arquivo
 
 Parametros:
 

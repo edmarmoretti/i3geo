@@ -2,10 +2,10 @@
 /*
 Title: metarproxima
 
-Acessa o Web Service do Geonames que busca estações meteorológicas da rede METAR mais próximas de um ponto.
+Acessa o Web Service do Geonames que busca esta&ccedil;&otilde;es meteorol&oacute;gicas da rede METAR mais pr&oacute;ximas de um ponto.
 
-Esse programa é utilizado na ferramenta de identificação e seu uso deve ser habilitado por meio do sistema
-de administração do i3Geo. Para isso, utilize http://localhost/i3geo/admin/html/identifica.html e insira
+Esse programa &eacute; utilizado na ferramenta de identifica&ccedil;ão e seu uso deve ser habilitado por meio do sistema
+de administra&ccedil;ão do i3Geo. Para isso, utilize http://localhost/i3geo/admin/html/identifica.html e insira
 "../ferramentas/metar/metarproxima.php" em uma nova linha na coluna "programa".
 
 Licenca:
@@ -14,27 +14,27 @@ GPL2
 
 i3Geo Interface Integrada de Ferramentas de Geoprocessamento para Internet
 
-Direitos Autorais Reservados (c) 2006 Ministério do Meio Ambiente Brasil
+Direitos Autorais Reservados (c) 2006 Minist&eacute;rio do Meio Ambiente Brasil
 Desenvolvedor: Edmar Moretti edmar.moretti@mma.gov.br
 
-Este programa é software livre; você pode redistribuí-lo
-e/ou modificá-lo sob os termos da Licença Pública Geral
+Este programa &eacute; software livre; voc&ecirc; pode redistribu&iacute;-lo
+e/ou modific&aacute;-lo sob os termos da Licen&ccedil;a P&uacute;blica Geral
 GNU conforme publicada pela Free Software Foundation;
 
-Este programa é distribuído na expectativa de que seja útil,
-porém, SEM NENHUMA GARANTIA; nem mesmo a garantia implícita
-de COMERCIABILIDADE OU ADEQUAÇÃO A UMA FINALIDADE ESPECÍFICA.
-Consulte a Licença Pública Geral do GNU para mais detalhes.
-Você deve ter recebido uma cópia da Licença Pública Geral do
+Este programa &eacute; distribu&iacute;do na expectativa de que seja &uacute;til,
+por&eacute;m, SEM NENHUMA GARANTIA; nem mesmo a garantia impl&iacute;cita
+de COMERCIABILIDADE OU ADEQUAÇÃO A UMA FINALIDADE ESPEC&Iacute;FICA.
+Consulte a Licen&ccedil;a P&uacute;blica Geral do GNU para mais detalhes.
+Voc&ecirc; deve ter recebido uma c&oacute;pia da Licen&ccedil;a P&uacute;blica Geral do
 GNU junto com este programa; se não, escreva para a
-Free Software Foundation, Inc., no endereço
+Free Software Foundation, Inc., no endere&ccedil;o
 59 Temple Street, Suite 330, Boston, MA 02111-1307 USA.
 
 Parametros:
 
-x - coordenada x em décimos de grau
+x - coordenada x em d&eacute;cimos de grau
 
-y - coordenada y em décimos de grau
+y - coordenada y em d&eacute;cimos de grau
 
 Return:
 
@@ -68,7 +68,7 @@ if($xml == true){
 		
 		$r = $e->xpath('stationName');
 		foreach($r as $t)
-		{$resultado .= "<p><b> Estação: </b>".$t;}
+		{$resultado .= "<p><b> Esta&ccedil;ão: </b>".$t;}
 		
 		$r = $e->xpath('ICAO');
 		foreach($r as $t)
@@ -76,7 +76,7 @@ if($xml == true){
 		
 		$r = $e->xpath('elevation');
 		foreach($r as $t)
-		{$resultado .= "<p><b> Elevação: </b>".$t;}
+		{$resultado .= "<p><b> Eleva&ccedil;ão: </b>".$t;}
 		
 		$r = $e->xpath('lat');
 		foreach($r as $t){
@@ -107,7 +107,7 @@ if($xml == true){
 		
 		$r = $e->xpath('weatherCondition');
 		foreach($r as $t)
-		{$resultado .= "<p><b> Condição: </b>".$t;}
+		{$resultado .= "<p><b> Condi&ccedil;ão: </b>".$t;}
 		
 		$r = $e->xpath('hectoPascAltimeter');
 		foreach($r as $t)
@@ -115,7 +115,7 @@ if($xml == true){
 		
 		$r = $e->xpath('windDirection');
 		foreach($r as $t)
-		{$resultado .= "<p><b> Direção do vento: </b>".$t;}
+		{$resultado .= "<p><b> Dire&ccedil;ão do vento: </b>".$t;}
 		
 		$r = $e->xpath('windSpeed');
 		foreach($r as $t)

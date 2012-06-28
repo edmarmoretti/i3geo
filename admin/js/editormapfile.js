@@ -1,7 +1,7 @@
 /* 
 Title: editormapfile.js
 
-Funções que controlam a interface do editor de mapfiles (temas)
+Fun&ccedil;&otilde;es que controlam a interface do editor de mapfiles (temas)
 
 Licenca:
 
@@ -9,20 +9,20 @@ GPL2
 
 i3Geo Interface Integrada de Ferramentas de Geoprocessamento para Internet
 
-Direitos Autorais Reservados (c) 2006 Ministério do Meio Ambiente Brasil
+Direitos Autorais Reservados (c) 2006 Minist&eacute;rio do Meio Ambiente Brasil
 Desenvolvedor: Edmar Moretti edmar.moretti@mma.gov.br
 
-Este programa é software livre; você pode redistribuí-lo
-e/ou modificá-lo sob os termos da Licença Pública Geral
+Este programa &eacute; software livre; voc&ecirc; pode redistribu&iacute;-lo
+e/ou modific&aacute;-lo sob os termos da Licen&ccedil;a P&uacute;blica Geral
 GNU conforme publicada pela Free Software Foundation;
 
-Este programa é distribuído na expectativa de que seja útil,
-porém, SEM NENHUMA GARANTIA; nem mesmo a garantia implícita
-de COMERCIABILIDADE OU ADEQUAÇÃO A UMA FINALIDADE ESPECÍFICA.
-Consulte a Licença Pública Geral do GNU para mais detalhes.
-Você deve ter recebido uma cópia da Licença Pública Geral do
-GNU junto com este programa; se não, escreva para a
-Free Software Foundation, Inc., no endereço
+Este programa &eacute; distribu&iacute;do na expectativa de que seja &uacute;til,
+por&eacute;m, SEM NENHUMA GARANTIA; nem mesmo a garantia impl&iacute;cita
+de COMERCIABILIDADE OU ADEQUA&Ccedil;&Atilde;O A UMA FINALIDADE ESPEC&Iacute;FICA.
+Consulte a Licen&ccedil;a P&uacute;blica Geral do GNU para mais detalhes.
+Voc&ecirc; deve ter recebido uma cópia da Licen&ccedil;a P&uacute;blica Geral do
+GNU junto com este programa; se n&atilde;o, escreva para a
+Free Software Foundation, Inc., no endere&ccedil;o
 59 Temple Street, Suite 330, Boston, MA 02111-1307 USA.
 
 Arquivo:
@@ -136,7 +136,7 @@ YAHOO.namespace("example.container");
 /*
 Function: initMenu
 
-Inicializa a árvore de edição
+Inicializa a &aacute;rvore de edi&ccedil;&atilde;o
 */
 function initMenu()
 {
@@ -157,7 +157,7 @@ function ativaBotaoVerificarOrfaos(idBotao)
 		core_montaEditor("","450px","660px");
 		verificaOrfaos();
 	};
-	//cria o botão de adição de um novo menu
+	//cria o bot&atilde;o de adi&ccedil;&atilde;o de um novo menu
 	new YAHOO.widget.Button(idBotao,{ onclick: { fn: temp } });
 }
 function ativaBotaoAdicionaMapfile(idBotao)
@@ -165,26 +165,26 @@ function ativaBotaoAdicionaMapfile(idBotao)
 	var adiciona = function()
 	{
 		core_montaEditor("adicionaNovoMapfile()","450px","660px");
-		ins = "<p><b>Nome do novo arquivo mapfile (sem .map) </b>não utilize caracteres acentuados ou espaços em branco</p>";
+		ins = "<p><b>Nome do novo arquivo mapfile (sem .map) </b>n&atilde;o utilize caracteres acentuados ou espa&ccedil;os em branco</p>";
 		ins += "<input size=50 type=text id='Ecodigo' value='' /></p>";
-		ins += "<p><b>Título do novo tema</b></p>";
-		ins += "<p>Em português: </p>";
+		ins += "<p><b>T&iacute;tulo do novo tema</b></p>";
+		ins += "<p>Em portugu&ecirc;s: </p>";
 		ins += "<input size=50 type=text id='Etitulo' value='' /></p>";
 		ins += "<p>Espanhol (opcional): </p>";
 		ins += "<input size=50 type=text id='EtituloES' value='' /></p>";
-		ins += "<p>Inglês: (opcional)</p>";
+		ins += "<p>Ingl&ecirc;s: (opcional)</p>";
 		ins += "<input size=50 type=text id='EtituloEN' value='' /></p>";
 		ins += "<p>Italiano: (opcional)</p>";
 		ins += "<input size=50 type=text id='EtituloIT' value='' /></p>";
 		$i("editor_bd").innerHTML = ins;
 	};
-	//cria o botão de adição de um novo menu
+	//cria o bot&atilde;o de adi&ccedil;&atilde;o de um novo menu
 	new YAHOO.widget.Button(idBotao,{ onclick: { fn: adiciona } });
 }
 /*
 Function: montaArvore
 
-Monta a árvore
+Monta a &aacute;rvore
 
 <PEGALAYERS>
 */
@@ -285,7 +285,7 @@ function testarMapfile(codigoMap)
 /*
 Function: montaRaizTema
 
-Monta as opções de edição básicas de um LAYER
+Monta as op&ccedil;&otilde;es de edi&ccedil;&atilde;o b&aacute;sicas de um LAYER
 
 <LISTACLASSES>
 */
@@ -352,7 +352,7 @@ function iconMode()
 /*
 Function: montaParametrosTemas
 
-Complementa as opções de edição básicas de um LAYER
+Complementa as op&ccedil;&otilde;es de edi&ccedil;&atilde;o b&aacute;sicas de um LAYER
 
 <LISTAESTILOS>
 */
@@ -365,14 +365,14 @@ function montaParametrosTemas(no,dados,redesenha)
 	var tempNodeR = "";
     if(!tree.getNodeByProperty("etiquetaDados",id))
     {
-		conteudo = "<span style=cursor:pointer; onclick=\"editorDados('"+codigoMap+"','"+codigoLayer+"')\" ><img width='10px' heigth='10px' style=\"position:relative;top:0px\" title='' src=\"../imagens/06.png\" /> Conexão com os dados</span>";
+		conteudo = "<span style=cursor:pointer; onclick=\"editorDados('"+codigoMap+"','"+codigoLayer+"')\" ><img width='10px' heigth='10px' style=\"position:relative;top:0px\" title='' src=\"../imagens/06.png\" /> Conex&atilde;o com os dados</span>";
 		var d = {tipo:"etiquetaDados",etiquetaDados:id,html:conteudo};
 		var tempNode = new YAHOO.widget.HTMLNode(d, no, false,true);
 		tempNode.isLeaf = true;
 	}
     if(!tree.getNodeByProperty("etiquetaTitulo",id))
     {
-		conteudo = "<span style=cursor:pointer; onclick=\"editorTitulo('"+codigoMap+"','"+codigoLayer+"')\" ><img width='10px' heigth='10px' style=\"position:relative;top:0px\" title='' src=\"../imagens/06.png\" /> Título, escala, extensão</span>";
+		conteudo = "<span style=cursor:pointer; onclick=\"editorTitulo('"+codigoMap+"','"+codigoLayer+"')\" ><img width='10px' heigth='10px' style=\"position:relative;top:0px\" title='' src=\"../imagens/06.png\" /> T&iacute;tulo, escala, extens&atilde;o</span>";
 		var d = {tipo:"etiquetaTitulo",etiquetaTitulo:id,html:conteudo};
 		var tempNode = new YAHOO.widget.HTMLNode(d, no, false,true);
 		tempNode.isLeaf = true;
@@ -395,7 +395,7 @@ function montaParametrosTemas(no,dados,redesenha)
 //rever
     if(!tree.getNodeByProperty("etiquetaMetadados",id))
     {
-		conteudo = "<span style=cursor:pointer; onclick=\"editorMetadados('"+codigoMap+"','"+codigoLayer+"')\" ><img width='10px' heigth='10px' style=\"position:relative;top:0px\" title='edita metadados' src=\"../imagens/06.png\" /> Miscelânea</span>";
+		conteudo = "<span style=cursor:pointer; onclick=\"editorMetadados('"+codigoMap+"','"+codigoLayer+"')\" ><img width='10px' heigth='10px' style=\"position:relative;top:0px\" title='edita metadados' src=\"../imagens/06.png\" /> Miscel&acirc;nea</span>";
 		var d = {tipo:"etiquetaMetadados",etiquetaMetadados:id,html:conteudo};
 		var tempNode = new YAHOO.widget.HTMLNode(d, no, false,true);
 		tempNode.isLeaf = true;
@@ -471,14 +471,14 @@ function montaParametrosClasses(no,dados,redesenha)
 	var tempNodeR = "";
     if(!tree.getNodeByProperty("etiquetaClasseGeral",no.data.id))
     {
-		conteudo = "<span style=cursor:pointer; onclick=\"editorClasseGeral('"+codigoMap+"','"+codigoLayer+"','"+indiceClasse+"')\"  ><img width='10px' heigth='10px' style=\"position:relative;top:0px\" title='edita características da classe' src=\"../imagens/06.png\" /> Editar características gerais</span>";
+		conteudo = "<span style=cursor:pointer; onclick=\"editorClasseGeral('"+codigoMap+"','"+codigoLayer+"','"+indiceClasse+"')\"  ><img width='10px' heigth='10px' style=\"position:relative;top:0px\" title='edita caracter&iacute;sticas da classe' src=\"../imagens/06.png\" /> Editar caracter&iacute;sticas gerais</span>";
 		var d = {tipo:"etiquetaClasseGeral",etiquetaClasseGeral:codigoMap+"_"+codigoLayer+"_"+indiceClasse,html:conteudo};
 		tempNode = new YAHOO.widget.HTMLNode(d, no, false,true);
 		tempNode.isLeaf = true;
 	}
     if(!tree.getNodeByProperty("etiquetaClasseLabel",no.data.id))
     {
-		conteudo = "<span style=cursor:pointer; onclick=\"editorClasseLabel('"+codigoMap+"','"+codigoLayer+"','"+indiceClasse+"')\" ><img width='10px' heigth='10px' style=\"position:relative;top:0px\" title='edita identificadores de texto' src=\"../imagens/06.png\" /> Editar toponímia</span>";
+		conteudo = "<span style=cursor:pointer; onclick=\"editorClasseLabel('"+codigoMap+"','"+codigoLayer+"','"+indiceClasse+"')\" ><img width='10px' heigth='10px' style=\"position:relative;top:0px\" title='edita identificadores de texto' src=\"../imagens/06.png\" /> Editar topon&iacute;mia</span>";
 		var d = {tipo:"etiquetaClasseLabel",etiquetaClasseLabel:codigoMap+"_"+codigoLayer+"_"+indiceClasse,html:conteudo};
 		tempNode = new YAHOO.widget.HTMLNode(d, no, false,true);
 		tempNode.isLeaf = true;
@@ -555,9 +555,9 @@ function editorDeTexto(codigoMap)
 /*
 Function: verificaOrfaos
 
-Verifica se existem temas cadastrados no banco de dados e que não possuem mapfile associado.
+Verifica se existem temas cadastrados no banco de dados e que n&atilde;o possuem mapfile associado.
 
-É mostrada ujma lista dos casos e opção para apagar o registro do banco ou criar novamente o mapfile
+&Eacute; mostrada ujma lista dos casos e op&ccedil;&atilde;o para apagar o registro do banco ou criar novamente o mapfile
 
 <VERIFICAORFAOS>
 */
@@ -581,7 +581,7 @@ function verificaOrfaos()
 				else
 				{
 					core_carregando("desativa");
-					var ins = "<p>Os temas listados a seguir não possuem mapfiles criados. Você pode excluir o registro do tema (remoção do banco de dados) clicando na opção 'excluir' ou criar o mapfile na opção existente no formulário principal.",
+					var ins = "<p>Os temas listados a seguir n&atilde;o possuem mapfiles criados. Voc&ecirc; pode excluir o registro do tema (remo&ccedil;&atilde;o do banco de dados) clicando na op&ccedil;&atilde;o 'excluir' ou criar o mapfile na op&ccedil;&atilde;o existente no formul&aacute;rio principal.",
 						d = YAHOO.lang.JSON.parse(o.responseText),
 						n = d.length,
 						i,ima;
@@ -632,7 +632,7 @@ function adicionaNovoMapfile()
 			{
 				if(YAHOO.lang.JSON.parse(o.responseText) == "erro")
 				{
-					core_carregando("<span style=color:red >Código já existe</span>");
+					core_carregando("<span style=color:red >Código j&aacute; existe</span>");
 					setTimeout("core_carregando('desativa')",3000);
 				}
 				else
@@ -809,11 +809,11 @@ function classesAuto(codigoMap,codigoLayer)
   				try
   				{
   					var itens = core_comboObjeto(YAHOO.lang.JSON.parse(o.responseText).itens,"","","");
-  					var ins = "<p>Item da tabela de atributos que será utilizado para compor a expressão de seleção de cada classe</p>";
+  					var ins = "<p>Item da tabela de atributos que ser&aacute; utilizado para compor a express&atilde;o de sele&ccedil;&atilde;o de cada classe</p>";
   					ins += "<select  id='itemExpressao' >";
   					ins += itens;
   					ins += "</select></p>";
-  					ins += "<p>Item da tabela de atributos que será utilizado para compor o nome de cada classe</p>";
+  					ins += "<p>Item da tabela de atributos que ser&aacute; utilizado para compor o nome de cada classe</p>";
   					ins += "<select  id='itemNome' >";
   					ins += itens;
   					ins += "</select></p>";
@@ -901,7 +901,7 @@ function limparCacheMapfile(codigoMap)
 	};
 	var handleNo = function()
 	{this.hide();};
-	var mensagem = "Exclui o cache temporário de renderização?";
+	var mensagem = "Exclui o cache tempor&aacute;rio de renderiza&ccedil;&atilde;o?";
 	var largura = "300";
 	core_dialogoContinua(handleYes,handleNo,mensagem,largura);
 }
@@ -1056,7 +1056,7 @@ function excluirEstilo(codigoMap,codigoLayer,indiceClasse,indiceEstilo)
 /*
 Function: editorDados
 
-Abre o editor de conexão com a fonte dos dados de um layer
+Abre o editor de conex&atilde;o com a fonte dos dados de um layer
 
 <PEGACONEXAO>
 */
@@ -1069,7 +1069,7 @@ function editorDados(codigoMap,codigoLayer)
 /*
 Function: editorComport
 
-Abre o editor das opções que controlam o comportamento do layer no mapa
+Abre o editor das op&ccedil;&otilde;es que controlam o comportamento do layer no mapa
 
 <PEGACOMPORT>
 */
@@ -1083,7 +1083,7 @@ function editorComport(codigoMap,codigoLayer)
 /*
 Function: editorTitulo
 
-Abre o editor de título e descrição
+Abre o editor de t&iacute;tulo e descri&ccedil;&atilde;o
 
 <PEGACONEXAO>
 */
@@ -1180,24 +1180,24 @@ function montaEditorComport(dados)
 		"linhas":[
 			{ajuda:"Sets the current status of the layer. Often modified by MapServer itself. Default turns the layer on permanently",
 			titulo:"Status",id:"",value:dados.status,tipo:"text",div:"<div id=cStatus ></div>"},		
-			{ajuda:"Indica se o tema irá ser mostrado na ferramenta de identificação",
+			{ajuda:"Indica se o tema ir&aacute; ser mostrado na ferramenta de identifica&ccedil;&atilde;o",
 			titulo:"Identifica (IDENTIFICA)",id:"",value:dados.identifica,tipo:"text",div:"<div id=cIdentifica ></div>"},
 			{ajuda:"Sets the opacity level (or the inability to see through the layer) of all classed pixels for a given layer. The value can either be an integer in the range (0-100) or the named symbol 'ALPHA'. A value of 100 is opaque and 0 is fully transparent. Implemented in MapServer 5.0, to replace the deprecated TRANSPARENCY parameter.The 'ALPHA' symbol directs the MapServer rendering code to honor the indexed or alpha transparency of pixmap symbols used to style a layer. This is only needed in the case of RGB output formats, and should be used only when necessary as it is expensive to render transparent pixmap symbols onto an RGB map image.",
 			titulo:"Opacity",id:"opacity",value:dados.opacity,tipo:"text"},
-			{ajuda:"Indica se a extensão geográfica do mapa deve ser alterada quando o tema for adicionado ao mapa",
+			{ajuda:"Indica se a extens&atilde;o geogr&aacute;fica do mapa deve ser alterada quando o tema for adicionado ao mapa",
 			titulo:"Aplica extensao (APLICAEXTENSAO)",id:"",value:dados.aplicaextensao,tipo:"text",div:"<div id=cAplicaextensao ></div>"},
-			{ajuda:"Indica se o usuário pode incluir comentários no tema",
+			{ajuda:"Indica se o usu&aacute;rio pode incluir coment&aacute;rios no tema",
 			titulo:"Permite comentar (PERMITECOMENTARIO)",id:"",value:dados.permitecomentario,tipo:"text",div:"<div id=cPermitecomentario ></div>"},
-			{ajuda:"Temporizador (em segundos) para atualização automática da camada. A camada será redesenhada continuamente a cada intervalo de tempo definido",
+			{ajuda:"Temporizador (em segundos) para atualiza&ccedil;&atilde;o autom&aacute;tica da camada. A camada ser&aacute; redesenhada continuamente a cada intervalo de tempo definido",
 			titulo:"Temporizador em segundos (METADATA: TEMPORIZADOR)",id:"temporizador",value:dados.temporizador,tipo:"text"},
-			{ajuda:"Indica se as classes serão mostradas ou não na legenda. Por padrão é SIM. ",
+			{ajuda:"Indica se as classes ser&atilde;o mostradas ou n&atilde;o na legenda. Por padr&atilde;o &eacute; SIM. ",
 			titulo:"Classe (CLASSE)",id:"",value:dados.classe,tipo:"text",div:"<div id=cClasse ></div>"},
-			{ajuda:"URL de uma imagem que será utilizada em substituição à geração normal da legenda ",
+			{ajuda:"URL de uma imagem que ser&aacute; utilizada em substitui&ccedil;&atilde;o à gera&ccedil;&atilde;o normal da legenda ",
 			titulo:"URL da legenda (opcional) (LEGENDAIMG)",id:"legendaimg",value:dados.legendaimg,tipo:"text"},
-			{ajuda:"Indica se o tema é mostrado no mapa mas não nas listas da legenda e na guia 'temas'",
+			{ajuda:"Indica se o tema &eacute; mostrado no mapa mas n&atilde;o nas listas da legenda e na guia 'temas'",
 			titulo:"Escondido (ESCONDIDO)",id:"",value:dados.escondido,tipo:"text",div:"<div id=cEscondido ></div>"},
-			{ajuda:"Aplica efeitos de transição nas operações de zoom e pan na interface Openlayers",
-			titulo:"Efeitos de transição zoom (TRANSITIONEFFECT)",id:"",value:dados.transitioneffect,tipo:"text",div:"<div id=cTransitioneffect ></div>"},		
+			{ajuda:"Aplica efeitos de transi&ccedil;&atilde;o nas opera&ccedil;&otilde;es de zoom e pan na interface Openlayers",
+			titulo:"Efeitos de transi&ccedil;&atilde;o zoom (TRANSITIONEFFECT)",id:"",value:dados.transitioneffect,tipo:"text",div:"<div id=cTransitioneffect ></div>"},		
 			{ajuda:"Sets the color index to treat as transparent for raster layers.",
 			titulo:"Offsite (R,G,B) (utilize -1,-1,-1 para anular o valor)",id:"offsite",value:dados.offsite,tipo:"text"},
 			{ajuda:"Maximum scale at which this LAYER is drawn. Scale is given as the denominator of the actual scale fraction, for example for a map at a scale of 1:24,000 use 24000.",
@@ -1284,19 +1284,19 @@ function montaEditorTitulo(dados)
 {
 	var param = {
 		"linhas":[
-			{ajuda:"Elemento 'NAME'. Não confunda com o nome que aparece no mapa ou  na árvore de temas. Normalmente o código recebe o mesmo nome do arquivo mapfile, sem a extensão '.map'",
+			{ajuda:"Elemento 'NAME'. N&atilde;o confunda com o nome que aparece no mapa ou  na &aacute;rvore de temas. Normalmente o código recebe o mesmo nome do arquivo mapfile, sem a extens&atilde;o '.map'",
 			titulo:"Código do layer",id:"name",value:dados.name,tipo:"text"},
 			{ajuda:"Name of a group that this layer belongs to. The group name can then be reference as a regular layer name in the template files, allowing to do things like turning on and off a group of layers at once.",
 			titulo:"Group",id:"group",value:dados.group,tipo:"text"},
-			{ajuda:"Nome que será utilizado na legenda do mapa e na guia 'Temas'",
-			titulo:"Título (METADATA: TEMA)",id:"tema",value:dados.tema,tipo:"text"},
-			{ajuda:"Denominador da escala da fonte dos dados utilizado pelo tema. É utilizado para apresentar a indicação de compatibilidade entre a escala do tema e a escala do mapa que está sendo visto.",
+			{ajuda:"Nome que ser&aacute; utilizado na legenda do mapa e na guia 'Temas'",
+			titulo:"T&iacute;tulo (METADATA: TEMA)",id:"tema",value:dados.tema,tipo:"text"},
+			{ajuda:"Denominador da escala da fonte dos dados utilizado pelo tema. &Eacute; utilizado para apresentar a indica&ccedil;&atilde;o de compatibilidade entre a escala do tema e a escala do mapa que est&aacute; sendo visto.",
 			titulo:"Escala (ESCALA)",id:"escala",value:dados.escala,tipo:"text"},
-			{ajuda:"Extensão geográfica máxima do tema, no formato xmin ymin xmax ymax. É utilizado na opção de 'zoom para o tema'. Quando o tema é baseado em shapefile, esse metadata não é necessário, pois o mapserver consegue calcular a extensão. Já em outros tipos de dados, como Postgis, o parâmetro é necessário. Nesse caso, se não for indicado, o botão de zoom para o tema não será visível para o usuário",
+			{ajuda:"Extens&atilde;o geogr&aacute;fica m&aacute;xima do tema, no formato xmin ymin xmax ymax. &Eacute; utilizado na op&ccedil;&atilde;o de 'zoom para o tema'. Quando o tema &eacute; baseado em shapefile, esse metadata n&atilde;o &eacute; necess&aacute;rio, pois o mapserver consegue calcular a extens&atilde;o. J&aacute; em outros tipos de dados, como Postgis, o par&acirc;metro &eacute; necess&aacute;rio. Nesse caso, se n&atilde;o for indicado, o bot&atilde;o de zoom para o tema n&atilde;o ser&aacute; vis&iacute;vel para o usu&aacute;rio",
 			titulo:"Extensao (EXTENSAO)",id:"extensao",value:dados.extensao,tipo:"text"},
-			{ajuda:"Ícone que será mostrado na árvore de camadas. A imagem deve existir na web e deve ser incluído o caminho completo ou relativo em relação ao local da interface HTML do mapa.",
-			titulo:"Ícone (METADATA: ICONETEMA)",id:"iconetema",value:dados.iconetema,tipo:"text"},
-			{ajuda:"Mensagem que será mostrada no rodapé do mapa quando o tema estiver visível. É útil para apresentar ao usuário observações especiais sobre o uso daquele tema.",
+			{ajuda:"&Iacute;cone que ser&aacute; mostrado na &aacute;rvore de camadas. A imagem deve existir na web e deve ser inclu&iacute;do o caminho completo ou relativo em rela&ccedil;&atilde;o ao local da interface HTML do mapa.",
+			titulo:"&Iacute;cone (METADATA: ICONETEMA)",id:"iconetema",value:dados.iconetema,tipo:"text"},
+			{ajuda:"Mensagem que ser&aacute; mostrada no rodap&eacute; do mapa quando o tema estiver vis&iacute;vel. &Eacute; &uacute;til para apresentar ao usu&aacute;rio observa&ccedil;&otilde;es especiais sobre o uso daquele tema.",
 			titulo:"Mensagem (MENSAGEM)",id:"mensagem",value:dados.mensagem,tipo:"text"}
 		]
 	};
@@ -1313,11 +1313,11 @@ function montaEditorDispo(dados)
 {
 	var param = {
 		"linhas":[
-			{ajuda:"Indica se o usuário pode fazer download do tema. Se sim, o ícone de download será mostrado na árvore de camadas disponíveis no mapa.",
+			{ajuda:"Indica se o usu&aacute;rio pode fazer download do tema. Se sim, o &iacute;cone de download ser&aacute; mostrado na &aacute;rvore de camadas dispon&iacute;veis no mapa.",
 			titulo:"Permite download (METADATA: DOWNLOAD)",id:"",value:dados.download,tipo:"text",div:"<div id=cDownload ></div>"},
-			{ajuda:"Endereço de um arquivo pré-existente para download dos dados (caminho completo no servidor). Se definido, o sistema irá usar esse arquivo ao invés de gerar os dados, quando o usuário clicar nas opções de download. Se não for definido, o arquivo de download é gerado diretamente do original, convertendo do banco ou copiando o arquivo definido em DATA.",
+			{ajuda:"Endere&ccedil;o de um arquivo pr&eacute;-existente para download dos dados (caminho completo no servidor). Se definido, o sistema ir&aacute; usar esse arquivo ao inv&eacute;s de gerar os dados, quando o usu&aacute;rio clicar nas op&ccedil;&otilde;es de download. Se n&atilde;o for definido, o arquivo de download &eacute; gerado diretamente do original, convertendo do banco ou copiando o arquivo definido em DATA.",
 			titulo:"Arquivo download (ARQUIVODOWNLOAD)",id:"arquivodownload",value:dados.arquivodownload,tipo:"text"},
-			{ajuda:"Endereço de um arquivo KMZ ou KML pré-existente para download dos dados (caminho completo no servidor). Se definido, o sistema irá usar esse arquivo ao invés de gerar os dados, quando o usuário clicar nas opções de visualização de KML ou KMZ. Se não for definido, o arquivo é gerado diretamente do original.",
+			{ajuda:"Endere&ccedil;o de um arquivo KMZ ou KML pr&eacute;-existente para download dos dados (caminho completo no servidor). Se definido, o sistema ir&aacute; usar esse arquivo ao inv&eacute;s de gerar os dados, quando o usu&aacute;rio clicar nas op&ccedil;&otilde;es de visualiza&ccedil;&atilde;o de KML ou KMZ. Se n&atilde;o for definido, o arquivo &eacute; gerado diretamente do original.",
 			titulo:"Arquivo KML ou KMZ (ARQUIVOKMZ)",id:"arquivokmz",value:dados.arquivokmz,tipo:"text"}
 		]
 	};
@@ -1343,17 +1343,17 @@ function montaEditorDados(dados)
 		"linhas":[
 		{ajuda:"Type of connection. Default is local.",
 		titulo:"Connectiontype",id:"",value:"",div:"<div id=cConnectiontype ></div>",tipo:"text"},
-		{ajuda:"Aplica a conversão de caracteres nas ferramentas que obtém os dados descritivos referentes aos elementos do LAYER. Em alguns casos, a conversão pode provocar problemas de acentuação. Se isso ocorrer, na ferramenta tabela por exemplo, experimente marcar essa opção como 'nao'",
-		titulo:"Conversão de caracteres (METADATA: CONVCARACTER)",id:"",value:dados.convcaracter,tipo:"text",div:"<div id=cConvcaracter ></div>"},
-		{ajuda:"Database connection string to retrieve remote data.An SDE connection string consists of a hostname, instance name, database name, username and password separated by commas.A PostGIS connection string is basically a regular PostgreSQL connection string, it takes the form of 'user=nobody password=****** dbname=dbname host=localhost port=5432' An Oracle connection string: user/pass[@db] . Se vc tiver problemas com acentuação, experimente algo como: user=postgres password=postgres dbname=pgutf8 host=localhost port=5432 options='-c client_encoding=LATIN1'",
+		{ajuda:"Aplica a convers&atilde;o de caracteres nas ferramentas que obt&eacute;m os dados descritivos referentes aos elementos do LAYER. Em alguns casos, a convers&atilde;o pode provocar problemas de acentua&ccedil;&atilde;o. Se isso ocorrer, na ferramenta tabela por exemplo, experimente marcar essa op&ccedil;&atilde;o como 'nao'",
+		titulo:"Convers&atilde;o de caracteres (METADATA: CONVCARACTER)",id:"",value:dados.convcaracter,tipo:"text",div:"<div id=cConvcaracter ></div>"},
+		{ajuda:"Database connection string to retrieve remote data.An SDE connection string consists of a hostname, instance name, database name, username and password separated by commas.A PostGIS connection string is basically a regular PostgreSQL connection string, it takes the form of 'user=nobody password=****** dbname=dbname host=localhost port=5432' An Oracle connection string: user/pass[@db] . Se vc tiver problemas com acentua&ccedil;&atilde;o, experimente algo como: user=postgres password=postgres dbname=pgutf8 host=localhost port=5432 options='-c client_encoding=LATIN1'",
 		titulo:"Connection",id:"connection",value:dados.connection,tipo:"text"},
 		{ajuda:"Full filename of the spatial data to process. No file extension is necessary for shapefiles. Can be specified relative to the SHAPEPATH option from the Map Object.If this is an SDE layer, the parameter should include the name of the layer as well as the geometry column, i.e. 'mylayer,shape,myversion'.If this is a PostGIS layer, the parameter should be in the form of '<columnname> from <tablename>', where 'columnname' is the name of the column containing the geometry objects and 'tablename' is the name of the table from which the geometry data will be read.For Oracle, use 'shape FROM table' or 'shape FROM (SELECT statement)' or even more complex Oracle compliant queries! Note that there are important performance impacts when using spatial subqueries however. Try using MapServer's FILTER whenever possible instead. You can also see the SQL submitted by forcing an error, for instance by submitting a DATA parameter you know won't work, using for example a bad column name. Exemplo postgis: the_geom FROM (select * FROM biomas) as foo USING UNIQUE gid USING SRID=4291 . Exemplo shapefile: c://ms4w/Apache/htdocs/geodados/brasil/limitespol/localidades.shp",
 		titulo:"Data",id:"data",value:dados.data,tipo:"text"},
 		{ajuda:"Specifies how the data should be drawn. Need not be the same as the shapefile type. For example, a polygon shapefile may be drawn as a point layer, but a point shapefile may not be drawn as a polygon layer. Common sense rules. Annotation means that a label point will be calculated for the features, but the feature itself will not be drawn although a marker symbol can be optionally drawn. this allows for advanced labeling like numbered highway shields. Points are labeled at that point. Polygons are labeled first using a centroid, and if that doesn't fall in the polygon a scanline approach is used to guarantee the label falls within the feature. Lines are labeled at the middle of the longest arc in the visible portion of the line. Query only means the layer can be queried but not drawn.In order to differentiate between POLYGONs and POLYLINEs (which do not exist as a type), simply respectively use or ommit the COLOR keyword when classifying. If you use it, it's a polygon with a fill color, otherwise it's a polyline with only an OUTLINECOLOR.For CHART layers, see the Dynamic Charting howto.A circle must be defined by a a minimum bounding rectangle. That is, 2 points that define the smallest square that can contain it. These 2 points are the two opposite corners of said box",
 		titulo:"Type",id:"",value:dados.type,tipo:"text",div:"<div id=cType ></div>"},
-		{ajuda:"Ativa ou não a manutenção de um cache para armazenar as imagens geradas para montar o mapa. Essa opção afeta apenas as interfaces do i3Geo que utilizam o modo TILE (como a interface OpenLayers). O cache é mantido no diretório temporário utilizado pelo i3Geo, na pasta chamada cache. Para cada camada é criada uma sub-pasta. Para limpar o cache, utilize a opção existente junto ao nó principal desse mapfile",
-		titulo:"Cache de mapas. Camadas WMS são acessadas diretamente do servidor de origem quando o cache estiver inativo. (CACHE)",id:"",value:dados.cache,tipo:"text",div:"<div id=cCache ></div>"},
-		{ajuda:"Projeção",
+		{ajuda:"Ativa ou n&atilde;o a manuten&ccedil;&atilde;o de um cache para armazenar as imagens geradas para montar o mapa. Essa op&ccedil;&atilde;o afeta apenas as interfaces do i3Geo que utilizam o modo TILE (como a interface OpenLayers). O cache &eacute; mantido no diretório tempor&aacute;rio utilizado pelo i3Geo, na pasta chamada cache. Para cada camada &eacute; criada uma sub-pasta. Para limpar o cache, utilize a op&ccedil;&atilde;o existente junto ao nó principal desse mapfile",
+		titulo:"Cache de mapas. Camadas WMS s&atilde;o acessadas diretamente do servidor de origem quando o cache estiver inativo. (CACHE)",id:"",value:dados.cache,tipo:"text",div:"<div id=cCache ></div>"},
+		{ajuda:"Proje&ccedil;&atilde;o",
 		titulo:"Projection",id:"projection",value:dados.projection,tipo:"text"},		
 		{ajuda:"This parameter allows for data specific attribute filtering that is done at the same time spatial filtering is done, but before any CLASS expressions are evaluated. For OGR and shapefiles the string is simply a mapserver regular expression. For spatial databases the string is a SQL WHERE clause that is valid with respect to the underlying database.For example: FILTER type='road' and size <2",
 		titulo:"Filter",id:"filter",value:dados.filter,tipo:"text"},
@@ -1363,8 +1363,8 @@ function montaEditorDados(dados)
 		titulo:"tileitem",id:"tileitem",value:dados.tileitem,tipo:"text"},
 		{ajuda:"Name of the tileindex file or layer. A tileindex is similar to an ArcInfo library index. The tileindex contains polygon features for each tile. The item that contains the location of the tiled data is given using the TILEITEM parameter. When a file is used as the tileindex for shapefile or raster layers, the tileindex should be a shapefile. For CONNECTIONTYPE OGR layers, any OGR supported datasource can be a tileindex. Normally the location should contain the path to the tile file relative to the shapepath, not relative to the tileindex itself. If the DATA parameter contains a value then it is added to the end of the location. When a tileindex layer is used, it works similarly to directly referring to a file, but any supported feature source can be used (ie. postgres, oracle).NOTE: All files in the tileindex should have the same coordinate system, and for vector files the same set of attributes in the same order.",
 		titulo:"tileindex",id:"tileindex",value:dados.tileindex,tipo:"text"},
-		{ajuda:"Tipo de representação das feições mostradas da camada. É importante definir esse parâmetro para que as funções de geração de SLD funcionem corretamente.",
-		titulo:"Tipo de representação (tipooriginal) - para temas do tipo WMS",id:"",value:dados.tipooriginal,tipo:"text",div:"<div id=cTipooriginal ></div>"}
+		{ajuda:"Tipo de representa&ccedil;&atilde;o das fei&ccedil;&otilde;es mostradas da camada. &Eacute; importante definir esse par&acirc;metro para que as fun&ccedil;&otilde;es de gera&ccedil;&atilde;o de SLD funcionem corretamente.",
+		titulo:"Tipo de representa&ccedil;&atilde;o (tipooriginal) - para temas do tipo WMS",id:"",value:dados.tipooriginal,tipo:"text",div:"<div id=cTipooriginal ></div>"}
 		]
 	};
 	var ins = "<input type=button title='Salvar' value='Salvar' id=salvarEditor />";
@@ -1372,13 +1372,13 @@ function montaEditorDados(dados)
 
 	if(dados.postgis_mapa.length > 0)
 	{
-		ins += "<p>Os seguintes 'alias' estão definidos em ms_configura como nomes de conexões: ";
+		ins += "<p>Os seguintes 'alias' est&atilde;o definidos em ms_configura como nomes de conex&otilde;es: ";
 		ins += dados.postgis_mapa;
-		ins += "<br>Os campos em cores não são compatíveis com o tipo de conexão.</p><br>";
+		ins += "<br>Os campos em cores n&atilde;o s&atilde;o compat&iacute;veis com o tipo de conex&atilde;o.</p><br>";
 	}
 	if(dados.colunas != "" && dados.colunas != undefined)
 	{
-		ins += "<p>O layer possuí as seguintes colunas na tabela de atributos: ";
+		ins += "<p>O layer possu&iacute; as seguintes colunas na tabela de atributos: ";
 		ins += dados.colunas+"</p><br>";
 	}	
 	ins += core_geraLinhas(param);
@@ -1449,65 +1449,65 @@ function montaEditorMetadados(dados)
 {
 	var paramRaster = {
 		"linhas":[
-			{ajuda:"A palete é válida apenas para temas RASTER. Entre com o endereço do arquivo no servidor. Veja exemplo em i3geo/localhost/symbols/testepalete.txt",
+			{ajuda:"A palete &eacute; v&aacute;lida apenas para temas RASTER. Entre com o endere&ccedil;o do arquivo no servidor. Veja exemplo em i3geo/localhost/symbols/testepalete.txt",
 			titulo:"Arquivo com palete de cores (opcional e serve apenas para temas raster) (PALLETEFILE)",id:"palletefile",value:dados.palletefile,tipo:"text"},
-			{ajuda:"Quantas cores em cada nível da palete. Veja exemplo em i3geo/localhost/symbols/testepalete.txt",
+			{ajuda:"Quantas cores em cada n&iacute;vel da palete. Veja exemplo em i3geo/localhost/symbols/testepalete.txt",
 			titulo:"Passo (opcional e serve apenas para temas raster) (PALLETESTEP)",id:"palletestep",value:dados.palletestep,tipo:"text"}
 		]
 	};
 	var paramVetor = {
 		"linhas":[
-			{ajuda:"Indica se o usuário pode abrir o editor de SQL para poder alterar o elemento DATA do Mapfile.",
+			{ajuda:"Indica se o usu&aacute;rio pode abrir o editor de SQL para poder alterar o elemento DATA do Mapfile.",
 			titulo:"Permite editar SQL (EDITORSQL)",id:"",value:dados.editorsql,tipo:"text",div:"<div id=cEditorsql ></div>"},
 			{ajuda:"Formato das datas existentes na tabela de atributos p.e. iso8601",
 			titulo:"Linha do tempo: LTEMPOFORMATODATA",id:"ltempoformatodata",value:dados.ltempoformatodata,tipo:"text"},
-			{ajuda:"Item que indica a data de início de um evento",
+			{ajuda:"Item que indica a data de in&iacute;cio de um evento",
 			titulo:"Linha do tempo: LTEMPOITEMINICIO",id:"ltempoiteminicio",value:dados.ltempoiteminicio,tipo:"text"},
 			{ajuda:"Item que indica a data final de um evento (opcional)",
 			titulo:"Linha do tempo: LTEMPOITEMFIM",id:"ltempoitemfim",value:dados.ltempoitemfim,tipo:"text"},
-			{ajuda:"Item que contém o título de cada evento",
+			{ajuda:"Item que cont&eacute;m o t&iacute;tulo de cada evento",
 			titulo:"Linha do tempo: LTEMPOITEMTITULO",id:"ltempoitemtitulo",value:dados.ltempoitemtitulo,tipo:"text"},
-			{ajuda:"Item com a descrição do evento (opcional)",
+			{ajuda:"Item com a descri&ccedil;&atilde;o do evento (opcional)",
 			titulo:"Linha do tempo: LTEMPOITEMDESCRICAO",id:"ltempoitemdescricao",value:dados.ltempoitemdescricao,tipo:"text"},
-			{ajuda:"Item para etiquetas do título (opcional)",
+			{ajuda:"Item para etiquetas do t&iacute;tulo (opcional)",
 			titulo:"Linha do tempo: LTEMPOITEMTIP",id:"ltempoitemtip",value:dados.ltempoitemtip,tipo:"text"},
-			{ajuda:"Item com o endereço de uma imagem que será incluída no menu popup, aberto quando o usuário clica em um evento (opcional)",
+			{ajuda:"Item com o endere&ccedil;o de uma imagem que ser&aacute; inclu&iacute;da no menu popup, aberto quando o usu&aacute;rio clica em um evento (opcional)",
 			titulo:"Linha do tempo: LTEMPOITEMIMAGEM",id:"ltempoitemimagem",value:dados.ltempoitemimagem,tipo:"text"},
-			{ajuda:"Link para uma página que será incluído no menu popup",
+			{ajuda:"Link para uma p&aacute;gina que ser&aacute; inclu&iacute;do no menu popup",
 			titulo:"Linha do tempo: LTEMPOITEMLINK",id:"ltempoitemlink",value:dados.ltempoitemlink,tipo:"text"},
-			{ajuda:"Endereço da imagem do ícone que irá representar o evento (opcional)",
+			{ajuda:"Endere&ccedil;o da imagem do &iacute;cone que ir&aacute; representar o evento (opcional)",
 			titulo:"Linha do tempo: LTEMPOITEMICONE",id:"ltempoitemicone",value:dados.ltempoitemicone,tipo:"text"},
-			{ajuda:"Aplica conversão do código de caracteres? Pode ser necessário para corrigir problemas de acentuação",
+			{ajuda:"Aplica convers&atilde;o do código de caracteres? Pode ser necess&aacute;rio para corrigir problemas de acentua&ccedil;&atilde;o",
 			titulo:"Linha do tempo: LTEMPOCONVENCODE",id:"",value:dados.ltempoconvencode,tipo:"text",div:"<div id=cLtempoconvencode ></div>"},
 		]
 	};
 	var paramNaoOWS = {
 		"linhas":[
-			{ajuda:"É possível a geração de classes automaticamente por meio da definição de colunas na tabela de atributos do tema que armazenam as informações sobre cor, tamanho, etc. Esse metadata é utilizado para definir qual a coluna da tabela que identifica unicamente cada classe. Para cada valor será criada uma classe.<br>O tema que utiliza a geração de classes de forma automática, deve ter definido apenas uma classe. Essa classe será utilizada como padrão para geração das demais.",
+			{ajuda:"&Eacute; poss&iacute;vel a gera&ccedil;&atilde;o de classes automaticamente por meio da defini&ccedil;&atilde;o de colunas na tabela de atributos do tema que armazenam as informa&ccedil;&otilde;es sobre cor, tamanho, etc. Esse metadata &eacute; utilizado para definir qual a coluna da tabela que identifica unicamente cada classe. Para cada valor ser&aacute; criada uma classe.<br>O tema que utiliza a gera&ccedil;&atilde;o de classes de forma autom&aacute;tica, deve ter definido apenas uma classe. Essa classe ser&aacute; utilizada como padr&atilde;o para gera&ccedil;&atilde;o das demais.",
 			titulo:"Auto-legenda: id das classes (CLASSESITEM)",id:"classesitem",value:dados.classesitem,tipo:"text"},
-			{ajuda:"Nome da coluna que será utilizada para compor o nome das classes geradas automaticamente.",
+			{ajuda:"Nome da coluna que ser&aacute; utilizada para compor o nome das classes geradas automaticamente.",
 			titulo:"Auto-legenda: nome das classes (CLASSESNOME)",id:"classesnome",value:dados.classesnome,tipo:"text"},
-			{ajuda:"Nome da coluna que definirá a cor do símbolo utilizado em cada classe. As cores devem ser definidas em RGB.",
+			{ajuda:"Nome da coluna que definir&aacute; a cor do s&iacute;mbolo utilizado em cada classe. As cores devem ser definidas em RGB.",
 			titulo:"Auto-legenda: cor da classe (CLASSESCOR)",id:"classescor",value:dados.classescor,tipo:"text"},
-			{ajuda:"Nome da coluna que definirá o símbolo utilizado em cada classe.",
-			titulo:"Auto-legenda: símbolo (CLASSESSIMBOLO)",id:"classessimbolo",value:dados.classessimbolo,tipo:"text"},
-			{ajuda:"Nome da coluna que definirá o tamanho de cada símbolo.",
+			{ajuda:"Nome da coluna que definir&aacute; o s&iacute;mbolo utilizado em cada classe.",
+			titulo:"Auto-legenda: s&iacute;mbolo (CLASSESSIMBOLO)",id:"classessimbolo",value:dados.classessimbolo,tipo:"text"},
+			{ajuda:"Nome da coluna que definir&aacute; o tamanho de cada s&iacute;mbolo.",
 			titulo:"Auto-legenda: tamanho (CLASSESTAMANHO)",id:"classestamanho",value:dados.classestamanho,tipo:"text"}
 		]
 	};
 	var param = {
 		"linhas":[
-			{ajuda:"Nome da coluna da tabela de atributos do tema que será utilizado na ferramenta busca rápida. Entre apenas uma coluna",
-			titulo:"Item utilizado no busca rápida (itembuscarapida)",id:"itembuscarapida",value:dados.itembuscarapida,tipo:"text"},
-			{ajuda:"Nomes das colunas da tabela de atributos do tema, que serão mostradas na ferramenta de identificação. Se for vazio, todas as colunas serão mostradas. A lista de itens deve ser separada por ',' e grafada em caixa alta no caso de shapefile.",
+			{ajuda:"Nome da coluna da tabela de atributos do tema que ser&aacute; utilizado na ferramenta busca r&aacute;pida. Entre apenas uma coluna",
+			titulo:"Item utilizado no busca r&aacute;pida (itembuscarapida)",id:"itembuscarapida",value:dados.itembuscarapida,tipo:"text"},
+			{ajuda:"Nomes das colunas da tabela de atributos do tema, que ser&atilde;o mostradas na ferramenta de identifica&ccedil;&atilde;o. Se for vazio, todas as colunas ser&atilde;o mostradas. A lista de itens deve ser separada por ',' e grafada em caixa alta no caso de shapefile.",
 			titulo:"Itens (ITENS)",id:"itens",value:dados.itens,tipo:"text"},
 			{ajuda:"Lista com os 'alias', ou apelidos, para os nomes das colunas listados no metadata 'itens'. Os alias devem ser separados por ',' e seguir a ordem definida em ITENS.",
 			titulo:"Nomes dos itens (ITENSDESC)",id:"itensdesc",value:dados.itensdesc,tipo:"text"},
-			{ajuda:"Lista de links que serão incluídos em cada resultado de busca da ferramenta de identificação. A lista de links deve ser separada por ',', podendo-se incluir '' para indicar que o item não tem link. Exemplo de uso para inclusão de links para o site do IBGE quando um município é clicado no mapa:<br>ITENS 'codigo,nome2,uf'<br>ITENSDESC 'codigo do IBGE,nome do município,uf'<br>ITENSLLINK ',http://www.ibge.gov.br/munic2001/tabelas.php?codmun=[codigo]&descricao=[nome],'<br>Podem ser incluídos comandos javascript, para isso utilize sempre aspas simples para fechar o link e acrescente o código javascript, exemplo:<br>ITENSLINK \",'../ferramentas/identifica/testelink.php?sid='+i3GEO.configura.sid\"",
+			{ajuda:"Lista de links que ser&atilde;o inclu&iacute;dos em cada resultado de busca da ferramenta de identifica&ccedil;&atilde;o. A lista de links deve ser separada por ',', podendo-se incluir '' para indicar que o item n&atilde;o tem link. Exemplo de uso para inclus&atilde;o de links para o site do IBGE quando um munic&iacute;pio &eacute; clicado no mapa:<br>ITENS 'codigo,nome2,uf'<br>ITENSDESC 'codigo do IBGE,nome do munic&iacute;pio,uf'<br>ITENSLLINK ',http://www.ibge.gov.br/munic2001/tabelas.php?codmun=[codigo]&descricao=[nome],'<br>Podem ser inclu&iacute;dos comandos javascript, para isso utilize sempre aspas simples para fechar o link e acrescente o código javascript, exemplo:<br>ITENSLINK \",'../ferramentas/identifica/testelink.php?sid='+i3GEO.configura.sid\"",
 			titulo:"Links dos itens (ITENSLINK)",id:"itenslink",value:dados.itenslink,tipo:"text"},
-			{ajuda:"Template utilizado no gerador de KML para definir o conteúdo dos balões de informação. O template utiliza o caractere '%' para iniciar e fechar o nome de uma coluna. O template pode usar também elementos HTML, por exemplo: <code>'<b>Nome do municipio</b>: %NOMEMUN%'</code>. Se o template não for especificado, o i3Geo irá utilizar o metadata ITENS e ITENSDESC. Se esses não forem especificados, será utilizado o nome original da coluna.",
+			{ajuda:"Template utilizado no gerador de KML para definir o conte&uacute;do dos bal&otilde;es de informa&ccedil;&atilde;o. O template utiliza o caractere '%' para iniciar e fechar o nome de uma coluna. O template pode usar tamb&eacute;m elementos HTML, por exemplo: <code>'<b>Nome do municipio</b>: %NOMEMUN%'</code>. Se o template n&atilde;o for especificado, o i3Geo ir&aacute; utilizar o metadata ITENS e ITENSDESC. Se esses n&atilde;o forem especificados, ser&aacute; utilizado o nome original da coluna.",
 			titulo:"KML template (DESCRIPTION_TEMPLATE)",id:"description_template",value:dados.description_template,tipo:"text"},
-			{ajuda:"Lista de colunas que serão utilizadas na opção de inclusão de 'etiquetas'. As etiquetas são mostradas no mapa quando o usuário estaciona o mouse por alguns instantes sobre o mapa. Separe a lista com ','.",
+			{ajuda:"Lista de colunas que ser&atilde;o utilizadas na op&ccedil;&atilde;o de inclus&atilde;o de 'etiquetas'. As etiquetas s&atilde;o mostradas no mapa quando o usu&aacute;rio estaciona o mouse por alguns instantes sobre o mapa. Separe a lista com ','.",
 			titulo:"Etiqueta (TIP)",id:"tip",value:dados.tip,tipo:"text"}
 		]
 	};
@@ -1561,7 +1561,7 @@ function montaEditorMetadados(dados)
 	var ins = "<input type=button title='Salvar' value='Salvar' id=salvarEditor />";
 	if(dados.colunas != "")
 	{
-		ins += "<p>O layer possuí as seguintes colunas na tabela de atributos: ";
+		ins += "<p>O layer possu&iacute; as seguintes colunas na tabela de atributos: ";
 		ins += dados.colunas+"</p>";
 	}
 	ins += core_geraLinhas(param);
@@ -1606,7 +1606,7 @@ function montaEditorClasseGeral(dados)
 		"linhas":[
 		{ajuda:"Nome da classe para ser mostrada na legenda",
 		titulo:"Name",id:"name",value:dados.name,tipo:"text"},
-		{ajuda:"Descrição da classe (mostrada na legenda quando o mouse é sobreposto",
+		{ajuda:"Descri&ccedil;&atilde;o da classe (mostrada na legenda quando o mouse &eacute; sobreposto",
 		titulo:"Title",id:"title",value:dados.title,tipo:"text"},
 		{ajuda:"Sets the current display status of the class. Default turns the class on",
 		titulo:"Status",id:"",value:dados.status,tipo:"text",div:"<div id=cStatus ></div>"},
@@ -1623,7 +1623,7 @@ function montaEditorClasseGeral(dados)
 	var ins = "<input type=button title='Salvar' value='Salvar' id=salvarEditor />";
 	if(dados.colunas != "")
 	{
-		ins += "<p>O layer possuí as seguintes colunas na tabela de atributos: ";
+		ins += "<p>O layer possu&iacute; as seguintes colunas na tabela de atributos: ";
 		ins += dados.colunas+"</p>";
 	}
 	ins += core_geraLinhas(param);
@@ -1685,7 +1685,7 @@ function montaEditorClasseLabel(dados)
 		titulo:"Offsety",id:"offsety",value:dados.offsety,tipo:"text"},
 		{ajuda:"Angle, given in degrees, to draw the label or AUTO to allow the software to compute the angle, AUTO is valid for LINE layers only. FOLLOW was introduced in version 4.10 and tells map server to compute a curved label for appropriate linear features",
 		titulo:"Angle (utilize MS_FOLLOW para textos curvos)",id:"angle",value:dados.angle,tipo:"text"},
-		{ajuda:"Cálculo automático do ângulo quando os elementos forem lineares",
+		{ajuda:"C&aacute;lculo autom&aacute;tico do &acirc;ngulo quando os elementos forem lineares",
 		titulo:"Autoangle",id:"",value:dados.angle,tipo:"text",div:"<div id=cAutoangle ></div>"},
 		{ajuda:"Should text be antialiased? Note that this requires more available colors, decreased drawing performance, and results in slightly larger output images.",
 		titulo:"Antialias",id:"antialias",value:dados.antialias,tipo:"text"},
@@ -1702,7 +1702,7 @@ function montaEditorClasseLabel(dados)
 	var ins = "<input type=button title='Salvar' value='Salvar' id=salvarEditor />";
 	if(dados.colunas != "")
 	{
-		ins += "<p>O layer possuí as seguintes colunas na tabela de atributos: ";
+		ins += "<p>O layer possu&iacute; as seguintes colunas na tabela de atributos: ";
 		ins += dados.colunas+"</p>";
 	}
 	ins += core_geraLinhas(param);
@@ -1812,7 +1812,7 @@ function montaEditorEstilo(dados)
 /*
 Function: salvarDadosEditor
 
-Altera um mapfile conforme o editor específico de uma característica
+Altera um mapfile conforme o editor espec&iacute;fico de uma caracter&iacute;stica
 
 <alterarConexao>
 
@@ -1843,7 +1843,7 @@ function salvarDadosEditor(tipo,codigoMap,codigoLayer,indiceClasse,indiceEstilo,
 	if(tipo == "titulo")
 	{
 		//
-		//validação
+		//valida&ccedil;&atilde;o
 		//
 		var valorTeste = $i("extensao").value;
 		if(valorTeste != ""){
@@ -1922,7 +1922,7 @@ function salvarDadosEditor(tipo,codigoMap,codigoLayer,indiceClasse,indiceEstilo,
   			{
   				if(YAHOO.lang.JSON.parse(o.responseText) == "erro")
   				{
-  					core_carregando("<span style=color:red >Não foi possível salvar.</span>");
+  					core_carregando("<span style=color:red >N&atilde;o foi poss&iacute;vel salvar.</span>");
   					setTimeout("core_carregando('desativa')",3000);
   				}
   				else

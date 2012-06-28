@@ -2,14 +2,14 @@
 /*jslint plusplus:false,white:false,undef: false, rhino: true, onevar: true, evil: true */
 
 /*
-Title: Análise de Geometrias
+Title: An&aacute;lise de Geometrias
 
-Permite capturar geometrias de uma ou mais camadas e executar operações de análise.
-Após o usuário selecionar elementos de um tema, a geometria pode ser capturada, ou seja, ela é armazenada no servidor para
-poder receber operações de análise. As operações envolvem cálculos, como área e perímetro, além de processos de cruzamento
-entre geometrias. Após realizar uma operação, o resultado é listado ou pode ser adicionado ao mapa como uma nova camada.
+Permite capturar geometrias de uma ou mais camadas e executar opera&ccedil;&otilde;es de an&aacute;lise.
+Ap&oacute;s o usu&aacute;rio selecionar elementos de um tema, a geometria pode ser capturada, ou seja, ela &eacute; armazenada no servidor para
+poder receber opera&ccedil;&otilde;es de an&aacute;lise. As opera&ccedil;&otilde;es envolvem c&aacute;lculos, como &aacute;rea e per&iacute;metro, al&eacute;m de processos de cruzamento
+entre geometrias. Ap&oacute;s realizar uma opera&ccedil;ão, o resultado &eacute; listado ou pode ser adicionado ao mapa como uma nova camada.
 
-As geometrias armazenadas ficam disponíveis temporariamente, assim como o mapfile do mapa atual.
+As geometrias armazenadas ficam dispon&iacute;veis temporariamente, assim como o mapfile do mapa atual.
 
 Veja:
 
@@ -19,24 +19,24 @@ Arquivo:
 
 i3geo/ferramentas/analisageometrias/index.js.php
 
-About: Licença
+About: Licen&ccedil;a
 
 i3Geo Interface Integrada de Ferramentas de Geoprocessamento para Internet
 
-Direitos Autorais Reservados (c) 2006 Ministério do Meio Ambiente Brasil
+Direitos Autorais Reservados (c) 2006 Minist&eacute;rio do Meio Ambiente Brasil
 Desenvolvedor: Edmar Moretti edmar.moretti@mma.gov.br
 
-Este programa é software livre; você pode redistribuí-lo
-e/ou modificá-lo sob os termos da Licença Pública Geral
+Este programa &eacute; software livre; voc&ecirc; pode redistribu&iacute;-lo
+e/ou modific&aacute;-lo sob os termos da Licen&ccedil;a P&uacute;blica Geral
 GNU conforme publicada pela Free Software Foundation;
 
-Este programa é distribuído na expectativa de que seja útil,
-porém, SEM NENHUMA GARANTIA; nem mesmo a garantia implícita
-de COMERCIABILIDADE OU ADEQUAÇÃO A UMA FINALIDADE ESPECÍFICA.
-Consulte a Licença Pública Geral do GNU para mais detalhes.
-Você deve ter recebido uma cópia da Licença Pública Geral do
+Este programa &eacute; distribu&iacute;do na expectativa de que seja &uacute;til,
+por&eacute;m, SEM NENHUMA GARANTIA; nem mesmo a garantia impl&iacute;cita
+de COMERCIABILIDADE OU ADEQUAÇÃO A UMA FINALIDADE ESPEC&Iacute;FICA.
+Consulte a Licen&ccedil;a P&uacute;blica Geral do GNU para mais detalhes.
+Voc&ecirc; deve ter recebido uma c&oacute;pia da Licen&ccedil;a P&uacute;blica Geral do
 GNU junto com este programa; se não, escreva para a
-Free Software Foundation, Inc., no endereço
+Free Software Foundation, Inc., no endere&ccedil;o
 59 Temple Street, Suite 330, Boston, MA 02111-1307 USA.
 */
 if(typeof(i3GEOF) === 'undefined'){
@@ -49,17 +49,17 @@ i3GEOF.analisaGeometrias = {
 	/*
 	Variavel: aguarde
 	
-	Objeto DOM com a imagem de aguarde existente no cabeçalho da janela.
+	Objeto DOM com a imagem de aguarde existente no cabe&ccedil;alho da janela.
 	*/
 	aguarde: "",
 	/*
 	Function: inicia
 	
-	Inicia a ferramenta. É chamado por criaJanelaFlutuante
+	Inicia a ferramenta. &Eacute; chamado por criaJanelaFlutuante
 	
 	Parametro:
 	
-	iddiv {String} - id do div que receberá o conteudo HTML da ferramenta
+	iddiv {String} - id do div que receber&aacute; o conteudo HTML da ferramenta
 	*/
 	inicia: function(iddiv){
 		try{
@@ -127,11 +127,11 @@ i3GEOF.analisaGeometrias = {
 	/*
 	Function: html
 	
-	Gera o código html para apresentação das opções da ferramenta
+	Gera o c&oacute;digo html para apresenta&ccedil;ão das op&ccedil;&otilde;es da ferramenta
 	
 	Retorno:
 	
-	String com o código html
+	String com o c&oacute;digo html
 	*/
 	html:function(){
 		var ins = '';
@@ -162,14 +162,14 @@ i3GEOF.analisaGeometrias = {
 		ins += '		</div>';
 		ins += '	</div>';
 		ins += '	<div class=guiaobj id="i3GEOanalisageometrias3obj" style="left:1px;display:none;">';
-		ins += '			<p class=paragrafo ><input style="cursor:pointer;vertical-align:text-bottom" type=checkbox id=i3geoanalisageometriassemprecalcula /> Recalcula a área e o perímetro das novas geometrias';
-		ins += '			<p class=paragrafo >Operações que obtém descrições sobre a geometria, retornando valores que são adicionados aos itens da geometria:';
+		ins += '			<p class=paragrafo ><input style="cursor:pointer;vertical-align:text-bottom" type=checkbox id=i3geoanalisageometriassemprecalcula /> Recalcula a &aacute;rea e o per&iacute;metro das novas geometrias';
+		ins += '			<p class=paragrafo >Opera&ccedil;&otilde;es que obt&eacute;m descri&ccedil;&otilde;es sobre a geometria, retornando valores que são adicionados aos itens da geometria:';
 		ins += '			<p class=paragrafo ><select id=i3GEOanalisageometriasselecaocalculo style="position:relative;top:-3px;"  >';
 		ins += '				<option value="" selected >---</option>';
 		ins += '				<option value=area >&Aacute;rea</option>';
 		ins += '				<option value=perimetro >Per&iacute;metro</option>';
 		ins += '			</select><input id=i3GEOanalisageometriasbotaocalculo type=button value="Aplicar"/></p>';
-		ins += '			<p class=paragrafo >Operações que criam novas geometrias a partir de duas ou mais geometrias:';
+		ins += '			<p class=paragrafo >Opera&ccedil;&otilde;es que criam novas geometrias a partir de duas ou mais geometrias:';
 		ins += '			<p class=paragrafo ><select id=i3GEOanalisageometriasselecaofuncoes style="position:relative;top:-3px;" >';
 		ins += '				<option value="" selected >---</option>';
 		ins += '				<option value=union >Uni&atilde;o</option>';
@@ -178,7 +178,7 @@ i3GEOF.analisaGeometrias = {
 		ins += '				<option value=symdifference >Diferen&ccedil;a inversa</option>';
 		ins += '				<option value=convexhull >Convexo</option>';
 		ins += '			</select><input id=i3GEOanalisageometriasbotaofuncoes type=button value="Aplicar"/></p>';
-		ins += '			<p class=paragrafo >Operações que atuam sobre uma única geometria:';
+		ins += '			<p class=paragrafo >Opera&ccedil;&otilde;es que atuam sobre uma &uacute;nica geometria:';
 		ins += '			<p class=paragrafo ><select id=i3GEOanalisageometriasselecaofuncoes1 style="position:relative;top:-3px;" >';
 		ins += '				<option value="" selected >---</option>';
 		ins += '				<option value=convexhull >Convexo</option>';
@@ -186,7 +186,7 @@ i3GEOF.analisaGeometrias = {
 		ins += '			</select><input id=i3GEOanalisageometriasbotaofuncoes1 type=button value="Aplicar"/></p>';
 		ins += '		<div id=i3GEOanalisageometriasmen2 style="text-align:left;left:0px" >';
 		ins += '			<p class=paragrafo >As opera&ccedil;&otilde;es de an&aacute;lise s&atilde;o executadas sobre as geometrias selecionadas.';
-		ins += '			<p class=paragrafo >Para maiores informações, veja: <a href="http://www.opengeospatial.org/standards/sfs" target=blank >OGC</a>, <a href="http://postgis.refractions.net/docs/ch06.html" target=blank >PostGis, </a>e <a href="http://www.vividsolutions.com/jts/tests/index.html" target=blank >JTS</a>';
+		ins += '			<p class=paragrafo >Para maiores informa&ccedil;&otilde;es, veja: <a href="http://www.opengeospatial.org/standards/sfs" target=blank >OGC</a>, <a href="http://postgis.refractions.net/docs/ch06.html" target=blank >PostGis, </a>e <a href="http://www.vividsolutions.com/jts/tests/index.html" target=blank >JTS</a>';
 		ins += '			<p class=paragrafo >Algumas fun&ccedil;&otilde;es para operarem corretamente sobre temas pontuais, precisam que antes seja feita a uni&atilde;o dos pontos em uma nova geometria.';
 		ins += '		</div>';
 		ins += '	</div>';
@@ -200,7 +200,7 @@ i3GEOF.analisaGeometrias = {
 	*/	
 	criaJanelaFlutuante: function(){
 		var minimiza,cabecalho,janela,divid,temp,titulo;
-		//funcao que sera executada ao ser clicado no cabeçalho da janela
+		//funcao que sera executada ao ser clicado no cabe&ccedil;alho da janela
 		cabecalho = function(){
 			i3GEOF.analisaGeometrias.ativaFoco();
 		};
@@ -263,9 +263,9 @@ i3GEOF.analisaGeometrias = {
 	/*
 	Function: selecionaElemento
 	
-	Seleciona um elemento do tema ativo quando o usuário clica no mapa
+	Seleciona um elemento do tema ativo quando o usu&aacute;rio clica no mapa
 	
-	É executado no evento de clique no mapa, definido na inicialização da ferramenta.
+	&Eacute; executado no evento de clique no mapa, definido na inicializa&ccedil;ão da ferramenta.
 	
 	Veja:
 	
@@ -285,7 +285,7 @@ i3GEOF.analisaGeometrias = {
 	/*
 	Function: comboTemas
 	
-	Cria o combo com os temas disponíveis (temas ligados) para seleção.
+	Cria o combo com os temas dispon&iacute;veis (temas ligados) para sele&ccedil;ão.
 	
 	Veja:
 	
@@ -316,7 +316,7 @@ i3GEOF.analisaGeometrias = {
 	Function: capturaGeo
 	
 	Captura as geometrias selecionadas. As geometrias capturadas são armazenadas como objetos
-	serializados no servidor, e podem ser utilizadas nas operações de análise. A captura é feita sob o tema ativo e os
+	serializados no servidor, e podem ser utilizadas nas opera&ccedil;&otilde;es de an&aacute;lise. A captura &eacute; feita sob o tema ativo e os
 	elementos selecionados.
 	
 	Veja:
@@ -352,7 +352,7 @@ i3GEOF.analisaGeometrias = {
 	/*
 	Function: listaGeo
 	
-	Obtém a lista de geometrias já capturadas e monta a lista que é apresentada ao usuário.
+	Obt&eacute;m a lista de geometrias j&aacute; capturadas e monta a lista que &eacute; apresentada ao usu&aacute;rio.
 	
 	Veja:
 	
@@ -487,7 +487,7 @@ i3GEOF.analisaGeometrias = {
 	/*
 	Function: calculo
 	
-	Realiza cálculos do tipo área e perímetro sobre as geometrias marcadas
+	Realiza c&aacute;lculos do tipo &aacute;rea e per&iacute;metro sobre as geometrias marcadas
 	
 	Veja:
 	
@@ -523,7 +523,7 @@ i3GEOF.analisaGeometrias = {
 	/*
 	Function: funcoes
 	
-	Realiza operações geométricas de cruzamento entre geometrias
+	Realiza opera&ccedil;&otilde;es geom&eacute;tricas de cruzamento entre geometrias
 	
 	Veja:
 	
@@ -561,7 +561,7 @@ i3GEOF.analisaGeometrias = {
 	/*
 	Function: funcoes1
 	
-	Realiza operações geométricas em uma única geometria
+	Realiza opera&ccedil;&otilde;es geom&eacute;tricas em uma &uacute;nica geometria
 	
 	Veja:
 	

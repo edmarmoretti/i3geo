@@ -3,8 +3,8 @@
 /*
 Title: Converte um mapa em WMS
 
-Transforma o mapfile atual em um WMS permitindo que o usuário acesse o mapa de outras aplicações.
-O WMS é armazenado no diretório temporário do i3Geo.
+Transforma o mapfile atual em um WMS permitindo que o usu&aacute;rio acesse o mapa de outras aplica&ccedil;&otilde;es.
+O WMS &eacute; armazenado no diret&oacute;rio tempor&aacute;rio do i3Geo.
 
 Veja:
 
@@ -20,20 +20,20 @@ GPL2
 
 i3Geo Interface Integrada de Ferramentas de Geoprocessamento para Internet
 
-Direitos Autorais Reservados (c) 2006 Ministério do Meio Ambiente Brasil
+Direitos Autorais Reservados (c) 2006 Minist&eacute;rio do Meio Ambiente Brasil
 Desenvolvedor: Edmar Moretti edmar.moretti@mma.gov.br
 
-Este programa é software livre; você pode redistribuí-lo
-e/ou modificá-lo sob os termos da Licença Pública Geral
+Este programa &eacute; software livre; voc&ecirc; pode redistribu&iacute;-lo
+e/ou modific&aacute;-lo sob os termos da Licen&ccedil;a P&uacute;blica Geral
 GNU conforme publicada pela Free Software Foundation;
 
-Este programa é distribuído na expectativa de que seja útil,
-porém, SEM NENHUMA GARANTIA; nem mesmo a garantia implícita
-de COMERCIABILIDADE OU ADEQUAÇÃO A UMA FINALIDADE ESPECÍFICA.
-Consulte a Licença Pública Geral do GNU para mais detalhes.
-Você deve ter recebido uma cópia da Licença Pública Geral do
+Este programa &eacute; distribu&iacute;do na expectativa de que seja &uacute;til,
+por&eacute;m, SEM NENHUMA GARANTIA; nem mesmo a garantia impl&iacute;cita
+de COMERCIABILIDADE OU ADEQUAÇÃO A UMA FINALIDADE ESPEC&Iacute;FICA.
+Consulte a Licen&ccedil;a P&uacute;blica Geral do GNU para mais detalhes.
+Voc&ecirc; deve ter recebido uma c&oacute;pia da Licen&ccedil;a P&uacute;blica Geral do
 GNU junto com este programa; se não, escreva para a
-Free Software Foundation, Inc., no endereço
+Free Software Foundation, Inc., no endere&ccedil;o
 59 Temple Street, Suite 330, Boston, MA 02111-1307 USA.
 */
 if(typeof(i3GEOF) === 'undefined'){
@@ -46,24 +46,24 @@ i3GEOF.converteMapaWS = {
 	/*
 	Variavel: aguarde
 	
-	Estilo do objeto DOM com a imagem de aguarde existente no cabeçalho da janela.
+	Estilo do objeto DOM com a imagem de aguarde existente no cabe&ccedil;alho da janela.
 	*/
 	aguarde: "",
 	/*
 	Function: html
 	
-	Gera o código html para apresentação das opções da ferramenta
+	Gera o c&oacute;digo html para apresenta&ccedil;ão das op&ccedil;&otilde;es da ferramenta
 
 	Parametros:
 	
-	divid {String} - id do div que receberá o conteudo HTML da ferramenta
+	divid {String} - id do div que receber&aacute; o conteudo HTML da ferramenta
 
 	*/
 	html:function(divid,enderecowms,enderecowmc){
 		try{
 			var ins = '<p class="paragrafo" >Voc&ecirc; pode utilizar o endere&ccedil;o em softwares de geoprocessamento instalados em seu computador, como por exemplo, o <a href="http://www.openjump.org" target=blank >OpenJump</a> ou <a href="http://www.gvsig.gva.es/" target=blank > gvSig</a>' +
 			'<p class="paragrafo" >O "web service" criado, utiliza o padr&atilde;o WMS, conforme definido pelo OGC. A disponibilidade do endere&ccedil;o &eacute; tempor&aacute;ria, permanecendo ativa apenas no dia em que foi criado.' +
-			'<p class="paragrafo" >O Web Map Context (WMC) pode ou não ser gerado dependendo da configuração do servidor onde o i3Geo está instalado. <a href="'+enderecowmc+'" target=_blank >Clique para obter o Web Map Context</a>'+
+			'<p class="paragrafo" >O Web Map Context (WMC) pode ou não ser gerado dependendo da configura&ccedil;ão do servidor onde o i3Geo est&aacute; instalado. <a href="'+enderecowmc+'" target=_blank >Clique para obter o Web Map Context</a>'+
 			'<p class="paragrafo" ><b>WMS: </b></p>' +
 			'<p class="paragrafo" > <textarea cols="65" rows="3" style=cursor:pointer onclick="javascript:this.select()">' +
 			enderecowms + '</textarea></p>' +

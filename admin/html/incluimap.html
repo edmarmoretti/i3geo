@@ -1,28 +1,29 @@
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
 <html>
 <head>
-    <meta http-equiv="content-type" content="text/html; charset=ISO-8859-1">
-	<script type="text/javascript" src="../js/core.js"></script>
-    <link rel="stylesheet" type="text/css" href="admin.css">
+<meta http-equiv="content-type" content="text/html; charset=ISO-8859-1">
+<script type="text/javascript" src="../js/core.js"></script>
+<link rel="stylesheet" type="text/css" href="admin.css">
 </head>
 <body class=" yui-skin-sam fundoPonto">
-<center>
-<div class="bordaSuperior"  >&nbsp;</div>
-<div class="mascaraPrincipal" id="divGeral">
-	<div id=cabecalhoPrincipal ></div>
-	<p>
-	As versões novas do Mapserver exigem que os arquivos mapfile iniciem com a palavra "MAP"
-	</p>
-	<p>
-	Os mapfiles utilizados pelo i3geo, até a versão 4.1, e armazenados no diretório i3Geo/temas não iniciam com "MAP". Para ajustar os mapfiles 
-	você pode editá-los individulamente ou rodar o programa i3geo/admin/php/incluiMAP.php
-	<p>
-	Antes de fazer isso, faça um backup do seu diretório i3geo/temas
-	<p>
-	<a href="../php/incluiMAP.php" >Clique para ajustar os mapfiles - inclusão da palavra "MAP" no início dos arquivos; substituição de vários elementos depreciados</a>
-	<p>
-	Lista de substituições:
-	<pre>
+	<center>
+		<div class="bordaSuperior">&nbsp;</div>
+		<div class="mascaraPrincipal" id="divGeral">
+			<div id=cabecalhoPrincipal></div>
+			<p>As vers&otilde;es novas do Mapserver exigem que os arquivos mapfile
+				iniciem com a palavra "MAP"</p>
+			<p>Os mapfiles utilizados pelo i3geo, at&eacute; a vers&atilde;o 4.1, e
+				armazenados no diretório i3Geo/temas n&atilde;o iniciam com "MAP". Para
+				ajustar os mapfiles voc&ecirc; pode edit&aacute;-los individulamente ou rodar o
+				programa i3geo/admin/php/incluiMAP.php
+			<p>Antes de fazer isso, fa&ccedil;a um backup do seu diretório
+				i3geo/temas
+			<p>
+				<a href="../php/incluiMAP.php">Clique para ajustar os mapfiles
+					- inclus&atilde;o da palavra "MAP" no in&iacute;cio dos arquivos; substitui&ccedil;&atilde;o de
+					v&aacute;rios elementos depreciados</a>
+			<p>Lista de substitui&ccedil;&otilde;es:
+			<pre>
 		$search = array(
 			"transparency ",
 			"LABELANGLEITEM ",
@@ -46,15 +47,15 @@
 			"SYMBOLSCALEDENOM "
 		);
 	</pre>
-</div>
-</center>
-<script>
+		</div>
+	</center>
+	<script>
 /*
 Title: Ajuste de mapfiles
 
-HTML da interface de ajuste dos arquivos Mapfiles antigos, que não iniciam com a palavra MAP
+HTML da interface de ajuste dos arquivos Mapfiles antigos, que n&atilde;o iniciam com a palavra MAP
 
-Veja também:
+Veja tamb&eacute;m:
 
 <incluiMAP.php>
 
@@ -64,20 +65,20 @@ GPL2
 
 i3Geo Interface Integrada de Ferramentas de Geoprocessamento para Internet
 
-Direitos Autorais Reservados (c) 2006 Ministério do Meio Ambiente Brasil
+Direitos Autorais Reservados (c) 2006 Minist&eacute;rio do Meio Ambiente Brasil
 Desenvolvedor: Edmar Moretti edmar.moretti@mma.gov.br
 
-Este programa é software livre; você pode redistribuí-lo
-e/ou modificá-lo sob os termos da Licença Pública Geral
+Este programa &eacute; software livre; voc&ecirc; pode redistribu&iacute;-lo
+e/ou modific&aacute;-lo sob os termos da Licen&ccedil;a P&uacute;blica Geral
 GNU conforme publicada pela Free Software Foundation;
 
-Este programa é distribuído na expectativa de que seja útil,
-porém, SEM NENHUMA GARANTIA; nem mesmo a garantia implícita
-de COMERCIABILIDADE OU ADEQUAÇÃO A UMA FINALIDADE ESPECÍFICA.
-Consulte a Licença Pública Geral do GNU para mais detalhes.
-Você deve ter recebido uma cópia da Licença Pública Geral do
-GNU junto com este programa; se não, escreva para a
-Free Software Foundation, Inc., no endereço
+Este programa &eacute; distribu&iacute;do na expectativa de que seja &uacute;til,
+por&eacute;m, SEM NENHUMA GARANTIA; nem mesmo a garantia impl&iacute;cita
+de COMERCIABILIDADE OU ADEQUA&Ccedil;&Atilde;O A UMA FINALIDADE ESPEC&Iacute;FICA.
+Consulte a Licen&ccedil;a P&uacute;blica Geral do GNU para mais detalhes.
+Voc&ecirc; deve ter recebido uma cópia da Licen&ccedil;a P&uacute;blica Geral do
+GNU junto com este programa; se n&atilde;o, escreva para a
+Free Software Foundation, Inc., no endere&ccedil;o
 59 Temple Street, Suite 330, Boston, MA 02111-1307 USA.
 
 Arquivo:

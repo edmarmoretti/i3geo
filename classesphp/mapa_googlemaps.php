@@ -2,34 +2,34 @@
 /*
 Title: mapa_googlemaps.php
 
-Faz o processamento de um mapfile segundo as necessidades do i3geo, como por exemplo, fazendo a substituição
-das variáveis de conexão com banco e outras operações específicas do i3Geo.
+Faz o processamento de um mapfile segundo as necessidades do i3geo, como por exemplo, fazendo a substitui&ccedil;&atilde;o
+das vari&aacute;veis de conex&atilde;o com banco e outras opera&ccedil;&otilde;es espec&iacute;ficas do i3Geo.
 
-É utilizado especificamente nas interfaces que utilizam a biblioteca Googlemaps.
+&Eacute; utilizado especificamente nas interfaces que utilizam a biblioteca Googlemaps.
 
-Precisa do código da "section" PHP aberta pelo i3Geo ou o código para acesso especial indicado no parâmetro telaR
+Precisa do código da "section" PHP aberta pelo i3Geo ou o código para acesso especial indicado no par&acirc;metro telaR
 (veja a ferramenta TELAREMOTA).
 
 Parametros:
 
 g_sid {string} - código da "section" PHP
 
-telaR {string} - (opcional) utilizado para autorizar o uso do mapfile aberto (deve estar registrado em $fingerprint (variável de seção)
+telaR {string} - (opcional) utilizado para autorizar o uso do mapfile aberto (deve estar registrado em $fingerprint (vari&aacute;vel de se&ccedil;&atilde;o)
 
-tipolayer {fundo|} - (opcional) indica que a imagem a ser produzida compõe o fundo do mapa
+tipolayer {fundo|} - (opcional) indica que a imagem a ser produzida comp&otilde;e o fundo do mapa
 
-BBOX {xmin xmax ymin ymax} - extensão geográfica a ser utilizada no desenho do mapa
+BBOX {xmin xmax ymin ymax} - extens&atilde;o geogr&aacute;fica a ser utilizada no desenho do mapa
 
 WIDTH {numeric} - largura do mapa
 
 HEIGHT {numeric} - altura do mapa
 
-layer {string} - código do layer existente no mapa que será desenhado (ignorado quando telaR for definido)
+layer {string} - código do layer existente no mapa que ser&aacute; desenhado (ignorado quando telaR for definido)
 
-DESLIGACACHE {sim|nao} - força a não usar o cache de imagens qd definido como "sim", do contrário, o uso ou não do cache será definido automaticamente
+DESLIGACACHE {sim|nao} - for&ccedil;a a n&atilde;o usar o cache de imagens qd definido como "sim", do contr&aacute;rio, o uso ou n&atilde;o do cache ser&aacute; definido automaticamente
 
 TIPOIMAGEM {cinza|sepiaclara|sepianormal|negativo|detectaBordas|embassa|gaussian_blur|selective_blur|mean_removal|pixelate
-} - filtro de imagem que será aplicado na imagem
+} - filtro de imagem que ser&aacute; aplicado na imagem
 
 
 Licenca:
@@ -38,20 +38,20 @@ GPL2
 
 i3Geo Interface Integrada de Ferramentas de Geoprocessamento para Internet
 
-Direitos Autorais Reservados (c) 2006 Ministério do Meio Ambiente Brasil
+Direitos Autorais Reservados (c) 2006 Minist&eacute;rio do Meio Ambiente Brasil
 Desenvolvedor: Edmar Moretti edmar.moretti@mma.gov.br
 
-Este programa é software livre; você pode redistribuí-lo
-e/ou modificá-lo sob os termos da Licença Pública Geral
+Este programa &eacute; software livre; voc&ecirc; pode redistribu&iacute;-lo
+e/ou modific&aacute;-lo sob os termos da Licen&ccedil;a P&uacute;blica Geral
 GNU conforme publicada pela Free Software Foundation;
 
-Este programa é distribuído na expectativa de que seja útil,
-porém, SEM NENHUMA GARANTIA; nem mesmo a garantia implícita
-de COMERCIABILIDADE OU ADEQUAÇÃO A UMA FINALIDADE ESPECÍFICA.
-Consulte a Licença Pública Geral do GNU para mais detalhes.
-Você deve ter recebido uma cópia da Licença Pública Geral do
-GNU junto com este programa; se não, escreva para a
-Free Software Foundation, Inc., no endereço
+Este programa &eacute; distribu&iacute;do na expectativa de que seja &uacute;til,
+por&eacute;m, SEM NENHUMA GARANTIA; nem mesmo a garantia impl&iacute;cita
+de COMERCIABILIDADE OU ADEQUA&Ccedil;&Atilde;O A UMA FINALIDADE ESPEC&Iacute;FICA.
+Consulte a Licen&ccedil;a P&uacute;blica Geral do GNU para mais detalhes.
+Voc&ecirc; deve ter recebido uma cópia da Licen&ccedil;a P&uacute;blica Geral do
+GNU junto com este programa; se n&atilde;o, escreva para a
+Free Software Foundation, Inc., no endere&ccedil;o
 59 Temple Street, Suite 330, Boston, MA 02111-1307 USA.
 
 Arquivo:
@@ -68,7 +68,7 @@ if (!function_exists('ms_GetVersion'))
 	@dl( 'php_mapscript.'.$s );
 	$ler_extensoes[] = 'php_mapscript';
 }
-//verificação de segurança
+//verifica&ccedil;&atilde;o de seguran&ccedil;a
 $_SESSION = array();
 session_name("i3GeoPHP");
 if(@$_GET["g_sid"])
@@ -91,7 +91,7 @@ $map_fileX = $_SESSION["map_file"];
 $postgis_mapa = $_SESSION["postgis_mapa"];
 $cachedir = $_SESSION["cachedir"];
 //
-//converte a requisição do tile em coordenadas geo
+//converte a requisi&ccedil;&atilde;o do tile em coordenadas geo
 //http://wiki.openstreetmap.org/wiki/Slippy_map_tilenames#tile_numbers_to_lon.2Flat_2
 //
 	$x = $_GET["X"];
@@ -210,7 +210,7 @@ if(!isset($_GET["telaR"])){
 	$escala->set("status",MS_OFF);
 }
 //
-//se o layer não for do tipo fundo
+//se o layer n&atilde;o for do tipo fundo
 //
 if($_GET["tipolayer"] != "fundo")
 {$o->set("transparent",MS_TRUE);}
@@ -301,7 +301,7 @@ else{
 }
 function salvaCacheImagem($cachedir,$bbox,$layer,$map,$w,$h){
 	global $img,$map_size;
-	//layers que são sempre iguais
+	//layers que s&atilde;o sempre iguais
 	//error_reporting(E_ALL);
 	if($layer == "copyright" || $layer == "")
 	{$bbox = "";}

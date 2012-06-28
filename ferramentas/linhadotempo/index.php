@@ -24,10 +24,10 @@ Timeline_parameters='bundle=true';
 /*
 Title: Linha do tempo
 
-Cria um gráfico de linha do tempo, tendo como base os atributos dos elementos de um tema visíveis na extensão geográfica
-do mapa atual. Para possibilitar a geração do gráfico, o layer deve estar configurado corretamente, contendo os METADATA
-específicos para essa ferramenta (veja o editor de mapfile do sistema de administração do i3Geo). Essa ferramenta é baseada
-no pacote TIMELINE, distribuído junto com o i3Geo.
+Cria um gr&aacute;fico de linha do tempo, tendo como base os atributos dos elementos de um tema vis&iacute;veis na extensão geogr&aacute;fica
+do mapa atual. Para possibilitar a gera&ccedil;ão do gr&aacute;fico, o layer deve estar configurado corretamente, contendo os METADATA
+espec&iacute;ficos para essa ferramenta (veja o editor de mapfile do sistema de administra&ccedil;ão do i3Geo). Essa ferramenta &eacute; baseada
+no pacote TIMELINE, distribu&iacute;do junto com o i3Geo.
 
 Veja:
 
@@ -43,25 +43,25 @@ GPL2
 
 i3Geo Interface Integrada de Ferramentas de Geoprocessamento para Internet
 
-Direitos Autorais Reservados (c) 2006 Ministério do Meio Ambiente Brasil
+Direitos Autorais Reservados (c) 2006 Minist&eacute;rio do Meio Ambiente Brasil
 Desenvolvedor: Edmar Moretti edmar.moretti@mma.gov.br
 
-Este programa é software livre; você pode redistribuí-lo
-e/ou modificá-lo sob os termos da Licença Pública Geral
+Este programa &eacute; software livre; voc&ecirc; pode redistribu&iacute;-lo
+e/ou modific&aacute;-lo sob os termos da Licen&ccedil;a P&uacute;blica Geral
 GNU conforme publicada pela Free Software Foundation;
 
-Este programa é distribuído na expectativa de que seja útil,
-porém, SEM NENHUMA GARANTIA; nem mesmo a garantia implícita
-de COMERCIABILIDADE OU ADEQUAÇÃO A UMA FINALIDADE ESPECÍFICA.
-Consulte a Licença Pública Geral do GNU para mais detalhes.
-Você deve ter recebido uma cópia da Licença Pública Geral do
+Este programa &eacute; distribu&iacute;do na expectativa de que seja &uacute;til,
+por&eacute;m, SEM NENHUMA GARANTIA; nem mesmo a garantia impl&iacute;cita
+de COMERCIABILIDADE OU ADEQUAÇÃO A UMA FINALIDADE ESPEC&Iacute;FICA.
+Consulte a Licen&ccedil;a P&uacute;blica Geral do GNU para mais detalhes.
+Voc&ecirc; deve ter recebido uma c&oacute;pia da Licen&ccedil;a P&uacute;blica Geral do
 GNU junto com este programa; se não, escreva para a
-Free Software Foundation, Inc., no endereço
+Free Software Foundation, Inc., no endere&ccedil;o
 59 Temple Street, Suite 330, Boston, MA 02111-1307 USA.
 */
 
 if(navm){
-	alert("o funcionamento da linha do tempo é muito melhor com o Firefox")
+	alert("o funcionamento da linha do tempo &eacute; muito melhor com o Firefox")
 }
 $i = function(id){
 	return document.getElementById(id);
@@ -74,7 +74,7 @@ var eventSource1 = new Timeline.DefaultEventSource();
 /*
 Function: inicializa
 
-Inicializa a ferramenta construindo o combo para escolha do tema que será usado no gráfico
+Inicializa a ferramenta construindo o combo para escolha do tema que ser&aacute; usado no gr&aacute;fico
 
 Veja:
 
@@ -112,7 +112,7 @@ function inicializa(){
 /*
 Function: bandas
 
-Cria o objeto bandInfos com os parâmetros necessários para a criação do gráfico
+Cria o objeto bandInfos com os parâmetros necess&aacute;rios para a cria&ccedil;ão do gr&aacute;fico
 */
 function bandas(){
 	tl_el = $i("tl");
@@ -160,7 +160,7 @@ function bandas(){
 /*
 Function: carregaDados
 
-Obtém os dados que serão incluídos no gráfico. É criado o objeto Timeline chamado tl
+Obt&eacute;m os dados que serão inclu&iacute;dos no gr&aacute;fico. &Eacute; criado o objeto Timeline chamado tl
 
 Veja:
 
@@ -182,7 +182,7 @@ function carregaDados(){
 /*
 Function: tituloover
 
-Indica no mapa a localização de um evento quando o usuário passa o mouse sobre o título de um evento
+Indica no mapa a localiza&ccedil;ão de um evento quando o usu&aacute;rio passa o mouse sobre o t&iacute;tulo de um evento
 
 Parametro:
 
@@ -241,7 +241,7 @@ function tituloclique(wkt){
 /*
 Function: tituloout
 
-Remove do mapa a marca de localização do evento quando o usuário move o mouse para fora do título do evento
+Remove do mapa a marca de localiza&ccedil;ão do evento quando o usu&aacute;rio move o mouse para fora do t&iacute;tulo do evento
 
 */
 function tituloout(){

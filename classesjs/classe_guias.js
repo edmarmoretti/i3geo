@@ -22,7 +22,7 @@ GNU conforme publicada pela Free Software Foundation;
 
 Este programa &eacute; distribu&iacute;do na expectativa de que seja &uacute;til,
 por&eacute;m, SEM NENHUMA GARANTIA; nem mesmo a garantia impl&iacute;cita
-de COMERCIABILIDADE OU ADEQUAÇ&Atilde;O A UMA FINALIDADE ESPEC&Iacute;FICA.
+de COMERCIABILIDADE OU ADEQUAï¿½&Atilde;O A UMA FINALIDADE ESPEC&Iacute;FICA.
 Consulte a Licen&ccedil;a P&uacute;blica Geral do GNU para mais detalhes.
 Voc&ecirc; deve ter recebido uma c&oacute;pia da Licen&ccedil;a P&uacute;blica Geral do
 GNU junto com este programa; se n&atilde;o, escreva para a
@@ -73,7 +73,7 @@ i3GEO.guias = {
 	/*
 	Propriedade: CONFIGURA
 
-	Define os parâmetros de cada guia que ser&aacute; mostrada no mapa, como t&iacute;tulo, conte&uacute;do, etc.
+	Define os parï¿½metros de cada guia que ser&aacute; mostrada no mapa, como t&iacute;tulo, conte&uacute;do, etc.
 
 	Voc&ecirc; pode modificar o nome de uma guia como no exemplo
 
@@ -183,7 +183,7 @@ i3GEO.guias = {
 	Propriedade: ORDEM
 
 	Ordem de inclus&atilde;o das guias no mapa. Essa op&ccedil;&atilde;o &eacute; mais &uacute;til no caso do tipo sanfona, pois nesse caso,
-	a primeira guia &eacute; sempre a que fica ativa. Se esse parâmetro for uma string vazia, a ordem
+	a primeira guia &eacute; sempre a que fica ativa. Se esse parï¿½metro for uma string vazia, a ordem
 	utilizada ser&aacute; a ordem existente em i3GEO.guias.CONFIGURA.
 	
 	Ao ser definida, apenas as guias indicadas no array ser&atilde;o inclu&iacute;das
@@ -256,7 +256,7 @@ i3GEO.guias = {
 			nguias = guias.length;
 		//
 		//no caso de TIPO === "movel", as guias n&atilde;o s&atilde;o constru&iacute;das de imediato, apenas &eacute; criado um objeto
-		//com os parâmetros necess&aacute;rios para a cria&ccedil;&atilde;o das guias
+		//com os parï¿½metros necess&aacute;rios para a cria&ccedil;&atilde;o das guias
 		//
 		if(i3GEO.guias.TIPO === "movel"){
 			i3GEO.guias.IDGUIAS = "i3GEOguiaMovelConteudo";
@@ -303,7 +303,7 @@ i3GEO.guias = {
 			{guias = i3GEO.guias.ORDEM;}
 			nguias = guias.length;
 			//
-			//verifica o div que cont&eacute;m as guias caso n&atilde;o tenha sido passado como parâmetro
+			//verifica o div que cont&eacute;m as guias caso n&atilde;o tenha sido passado como parï¿½metro
 			//
 			if(arguments.length === 0){
 				for(ng=0;ng<nguias;ng++){
@@ -722,7 +722,7 @@ i3GEO.guias = {
 		/*
 		Variavel: left
 		
-		Valor de posicionamento à esquerda, calculado na inicializa&ccedil;&atilde;o
+		Valor de posicionamento a esquerda, calculado na inicializa&ccedil;&atilde;o
 		*/
 		left: 0,
 		/*
@@ -925,7 +925,6 @@ i3GEO.guias = {
 					id: "i3GEOguiaMovel"
 				};
 				anim = new YAHOO.util.Anim(guia, attributes, 1, YAHOO.util.Easing.easeNone);
-				
 				attributes = {
 					width: { to: i3GEO.guias.guiaMovel.config.larguraGuiaMovel },
 					id: "i3GEOguiaMovelMolde"

@@ -3,8 +3,8 @@
 /*
 Title: Converte um tema em kml
 
-Mostra os endereços que permitem acessar o tema no formato KML. Essa ferramenta não processa os dados, apenas constrói
-os links para os programas que fazem a conversão ou visualização dos dados em KML vetorial ou do tipo GroundOverlay (via WMS)
+Mostra os endere&ccedil;os que permitem acessar o tema no formato KML. Essa ferramenta não processa os dados, apenas constr&oacute;i
+os links para os programas que fazem a conversão ou visualiza&ccedil;ão dos dados em KML vetorial ou do tipo GroundOverlay (via WMS)
 
 Veja:
 
@@ -20,20 +20,20 @@ GPL2
 
 i3Geo Interface Integrada de Ferramentas de Geoprocessamento para Internet
 
-Direitos Autorais Reservados (c) 2006 Ministério do Meio Ambiente Brasil
+Direitos Autorais Reservados (c) 2006 Minist&eacute;rio do Meio Ambiente Brasil
 Desenvolvedor: Edmar Moretti edmar.moretti@mma.gov.br
 
-Este programa é software livre; você pode redistribuí-lo
-e/ou modificá-lo sob os termos da Licença Pública Geral
+Este programa &eacute; software livre; voc&ecirc; pode redistribu&iacute;-lo
+e/ou modific&aacute;-lo sob os termos da Licen&ccedil;a P&uacute;blica Geral
 GNU conforme publicada pela Free Software Foundation;
 
-Este programa é distribuído na expectativa de que seja útil,
-porém, SEM NENHUMA GARANTIA; nem mesmo a garantia implícita
-de COMERCIABILIDADE OU ADEQUAÇÃO A UMA FINALIDADE ESPECÍFICA.
-Consulte a Licença Pública Geral do GNU para mais detalhes.
-Você deve ter recebido uma cópia da Licença Pública Geral do
+Este programa &eacute; distribu&iacute;do na expectativa de que seja &uacute;til,
+por&eacute;m, SEM NENHUMA GARANTIA; nem mesmo a garantia impl&iacute;cita
+de COMERCIABILIDADE OU ADEQUAÇÃO A UMA FINALIDADE ESPEC&Iacute;FICA.
+Consulte a Licen&ccedil;a P&uacute;blica Geral do GNU para mais detalhes.
+Voc&ecirc; deve ter recebido uma c&oacute;pia da Licen&ccedil;a P&uacute;blica Geral do
 GNU junto com este programa; se não, escreva para a
-Free Software Foundation, Inc., no endereço
+Free Software Foundation, Inc., no endere&ccedil;o
 59 Temple Street, Suite 330, Boston, MA 02111-1307 USA.
 */
 if(typeof(i3GEOF) === 'undefined'){
@@ -46,13 +46,13 @@ i3GEOF.converteKml = {
 	/*
 	Function: html
 	
-	Gera o código html para apresentação das opções da ferramenta
+	Gera o c&oacute;digo html para apresenta&ccedil;ão das op&ccedil;&otilde;es da ferramenta
 
 	Parametros:
 	
-	divid {String} - id do div que receberá o conteudo HTML da ferramenta
+	divid {String} - id do div que receber&aacute; o conteudo HTML da ferramenta
 
-	tema {String} - código do tema
+	tema {String} - c&oacute;digo do tema
 	
 	tipo {String} - kml|kmz "kml" gera um link para acesso a um WMS e "kmz" gera um link que permite o acesso a um WMS e ao arquivo kmz vetorial
 	
@@ -67,7 +67,7 @@ i3GEOF.converteKml = {
 			ins += '<p class="paragrafo" ><b>Kmz que gera um arquivo kml vetorial: </b></p>' +
 			'<p class="paragrafo" ><textarea cols="65" rows="3" style=cursor:pointer onclick="javascript:this.select()">' + i3GEO.configura.locaplic + '/pacotes/kmlmapserver/kmlservice.php?map='+tema+'&typename='+tema+'&request=kmz</textarea></p>';
 		}
-		ins += '<p class="paragrafo" >Voc&ecirc; pode também utilizar o link abaixo para mostrar a &aacute;rvore completa de temas no GoogleEarth' +
+		ins += '<p class="paragrafo" >Voc&ecirc; pode tamb&eacute;m utilizar o link abaixo para mostrar a &aacute;rvore completa de temas no GoogleEarth' +
 		'<p class="paragrafo" ><textarea cols="65" rows="2" style=cursor:pointer onclick="javascript:this.select()">' + i3GEO.configura.locaplic + '/kml.php </textarea></p>';
 		$i(divid).innerHTML += ins;
 	},
@@ -78,7 +78,7 @@ i3GEOF.converteKml = {
 	
 	Parametros:
 	
-	tema {String} - código do tema
+	tema {String} - c&oacute;digo do tema
 	
 	tipo {String} - kml|kmz "kml" gera um link para acesso a um WMS e "kmz" gera um link que permite o acesso a um WMS e ao arquivo kmz vetorial
 	*/	

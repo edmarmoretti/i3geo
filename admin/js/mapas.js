@@ -1,7 +1,7 @@
 /*
 Title: mapas.js
 
-Funções que controlam a interface do editor de mapas
+Fun&ccedil;&otilde;es que controlam a interface do editor de mapas
 
 Licenca:
 
@@ -9,20 +9,20 @@ GPL2
 
 i3Geo Interface Integrada de Ferramentas de Geoprocessamento para Internet
 
-Direitos Autorais Reservados (c) 2006 Ministério do Meio Ambiente Brasil
+Direitos Autorais Reservados (c) 2006 Minist&eacute;rio do Meio Ambiente Brasil
 Desenvolvedor: Edmar Moretti edmar.moretti@mma.gov.br
 
-Este programa é software livre; você pode redistribuí-lo
-e/ou modificá-lo sob os termos da Licença Pública Geral
+Este programa &eacute; software livre; voc&ecirc; pode redistribu&iacute;-lo
+e/ou modific&aacute;-lo sob os termos da Licen&ccedil;a P&uacute;blica Geral
 GNU conforme publicada pela Free Software Foundation;
 
-Este programa é distribuído na expectativa de que seja útil,
-porém, SEM NENHUMA GARANTIA; nem mesmo a garantia implícita
-de COMERCIABILIDADE OU ADEQUAÇÃO A UMA FINALIDADE ESPECÍFICA.
-Consulte a Licença Pública Geral do GNU para mais detalhes.
-Você deve ter recebido uma cópia da Licença Pública Geral do
-GNU junto com este programa; se não, escreva para a
-Free Software Foundation, Inc., no endereço
+Este programa &eacute; distribu&iacute;do na expectativa de que seja &uacute;til,
+por&eacute;m, SEM NENHUMA GARANTIA; nem mesmo a garantia impl&iacute;cita
+de COMERCIABILIDADE OU ADEQUA&Ccedil;&Atilde;O A UMA FINALIDADE ESPEC&Iacute;FICA.
+Consulte a Licen&ccedil;a P&uacute;blica Geral do GNU para mais detalhes.
+Voc&ecirc; deve ter recebido uma cópia da Licen&ccedil;a P&uacute;blica Geral do
+GNU junto com este programa; se n&atilde;o, escreva para a
+Free Software Foundation, Inc., no endere&ccedil;o
 59 Temple Street, Suite 330, Boston, MA 02111-1307 USA.
 
 Arquivo:
@@ -47,7 +47,7 @@ function initMenu()
 /*
 Function: pegaMapas
 
-Obtém a lista de mapas
+Obt&eacute;m a lista de mapas
 
 <PEGAMAPAS>
 */
@@ -58,7 +58,7 @@ function pegaMapas()
 /*
 Function: montaTabela
 
-Monta a tabela com as opções de edição de cada registro
+Monta a tabela com as op&ccedil;&otilde;es de edi&ccedil;&atilde;o de cada registro
 
 <PEGADADOSMAPA>
 */
@@ -209,9 +209,9 @@ function montaDivMapas(i)
 {
 	var ins = "";
 
-	//ins += "<p>Mapfile (código do mapfile que será utilizado para criar a camada no i3geo):"
+	//ins += "<p>Mapfile (código do mapfile que ser&aacute; utilizado para criar a camada no i3geo):"
 	//ins += "<div id=comboMapfiles >Buscando...</div>";
-	ins += "<p>Ordem de apresentação do mapa:<br>";
+	ins += "<p>Ordem de apresenta&ccedil;&atilde;o do mapa:<br>";
 	ins += "<input size=10 type=text id=Eordem_mapa value='"+i.ordem_mapa+"' /></p>";
 
 	ins += "<p>Nome do mapa:<br>";
@@ -222,31 +222,31 @@ function montaDivMapas(i)
 	ins += core_combosimnao(i.publicado_mapa);
 	ins += "</select></p>";
 
-	ins += "<p>Descrição:<br>";
+	ins += "<p>Descri&ccedil;&atilde;o:<br>";
 	ins += "<input size=50 type=text id=Edesc_mapa value='"+i.desc_mapa+"' /></p>";
 
-	ins += "<p>Extensão geográfica:<br>";
+	ins += "<p>Extens&atilde;o geogr&aacute;fica:<br>";
 	ins += "<input size=50 type=text id=Eext_mapa value='"+i.ext_mapa+"' /></p>";
 
 	ins += "<p>URL da imagem miniatura:<br>";
 	ins += "<input size=50 type=text id=Eimagem_mapa value='"+i.imagem_mapa+"' /></p>";
 	ins += "<img src='"+i.imagem_mapa+"' />";
 
-	ins += "<p>Temas que serão incluídos nesse mapa (utilize os códigos dos mapfiles mostrados na lista abaixo): </p>";
+	ins += "<p>Temas que ser&atilde;o inclu&iacute;dos nesse mapa (utilize os códigos dos mapfiles mostrados na lista abaixo): </p>";
 	ins += "<input size=50 type=text id='Etemas_mapa' value='"+i.temas_mapa+"' /></p>";
 	ins += "<div id=comboMapfiles >Buscando...</div>";
 
-	ins += "<p>Temas que serão ligados. Devem constar na lista de temas incluídos: </p>";
+	ins += "<p>Temas que ser&atilde;o ligados. Devem constar na lista de temas inclu&iacute;dos: </p>";
 	ins += "<input size=50 type=text id='Eligados_mapa' value='"+i.ligados_mapa+"' /></p>";
 
 	ins += "<p>Perfis que podem ver este mapa: </p>";
 	ins += "<input size=50 type=text id='Eperfil_mapa' value='"+i.perfil_mapa+"' /></p>";
 	ins += "<div id=comboPerfis >Buscando...</div>";
 
-	ins += "<p>Outros parâmetros (separe com '&'):<br>";
+	ins += "<p>Outros par&acirc;metros (separe com '&'):<br>";
 	ins += "<input size=50 type=text id=Eoutros_mapa value='"+i.outros_mapa+"' /></p>";
 
-	ins += "<p>Link direto para abertura do mapa (despreza os outros parâmetros):<br>";
+	ins += "<p>Link direto para abertura do mapa (despreza os outros par&acirc;metros):<br>";
 	ins += "<input size=50 type=text id=Elinkdireto_mapa value='"+i.linkdireto_mapa+"' /></p>";
 	ins += "<br><br><br>";
 	return(ins);
@@ -260,7 +260,7 @@ function excluiLinha(id,row)
 /*
 Function: gravaDadosMapa
 
-Aplica as alterações feitas em um mapa
+Aplica as altera&ccedil;&otilde;es feitas em um mapa
 
 <ALTERARMAPA>
 */
@@ -284,7 +284,7 @@ function gravaDadosMapa(id,recordid)
   			{
   				if(YAHOO.lang.JSON.parse(o.responseText) == "erro")
   				{
-  					core_carregando("<span style=color:red >Não foi possível excluir. Verifique se não existem víncilos com outros elementos</span>");
+  					core_carregando("<span style=color:red >N&atilde;o foi poss&iacute;vel excluir. Verifique se n&atilde;o existem v&iacute;ncilos com outros elementos</span>");
   					setTimeout("core_carregando('desativa')",3000);
   				}
   				else

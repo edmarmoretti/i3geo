@@ -1,7 +1,7 @@
-/*çjslint white:false,undef: false, rhino: true, onevar: true, evil: false */
+/*&ccedil;jslint white:false,undef: false, rhino: true, onevar: true, evil: false */
 var $i = function(id)
 {return document.getElementById(id);};
-//seta as variáveis navn e navm
+//seta as vari&aacute;veis navn e navm
 var navn = false;
 var navm = false;
 var app = navigator.appName.substring(0,1);
@@ -42,7 +42,7 @@ i3GEO.editorOL = {
 		{isBaseLayer:true,visibility:false}
 	),
 	ol_mma: new OpenLayers.Layer.WMS(
-		"Base cartográfica",
+		"Base cartogr&aacute;fica",
 		"http://mapas.mma.gov.br/cgi-bin/mapserv?map=/opt/www/html/webservices/baseraster.map&",
 		{layers:'baseraster',SRS:'EPSG:4618',FORMAT:'image/png'},
 		{singleTile:true}
@@ -53,7 +53,7 @@ i3GEO.editorOL = {
 		{layers: 'basic'}
 	),
 	top_wms: new OpenLayers.Layer.WMS(
-		"Toponímia MMA",
+		"Topon&iacute;mia MMA",
 		"http://mapas.mma.gov.br/cgi-bin/mapserv?map=/opt/www/html/webservices/baseref.map&",
 		{layers: "base",FORMAT:'image/png'}
 	),
@@ -253,7 +253,7 @@ i3GEO.editorOL = {
 		style.addRules([
 			new OpenLayers.Rule({symbolizer: sketchSymbolizers})
 		]);
-		i3GEO.editorOL.layergrafico = new OpenLayers.Layer.Vector("Edição",{
+		i3GEO.editorOL.layergrafico = new OpenLayers.Layer.Vector("Edi&ccedil;&atilde;o",{
 				styleMap: styleMap1,
 				displayInLayerSwitcher:true,
 				visibility:true
@@ -696,7 +696,7 @@ i3GEO.editorOL = {
 			button = new OpenLayers.Control.Button({
 				displayClass: "editorOLzoomtot", 
 				trigger: function(){i3GEO.editorOL.mapa.zoomToMaxExtent();},
-				title: "ajusta extensão",
+				title: "ajusta extens&atilde;o",
 				type: OpenLayers.Control.TYPE_BUTTON
 			});
 			controles.push(button);
@@ -719,7 +719,7 @@ i3GEO.editorOL = {
 					handlerOptions: {layerOptions: {styleMap: styleMap}},
 					persist: true,
 					displayClass: "editorOLdistancia", 
-					title: "distância",
+					title: "dist&acirc;ncia",
 					type: OpenLayers.Control.TYPE_TOOL
 				}
 			);
@@ -727,7 +727,7 @@ i3GEO.editorOL = {
 				"measure": function(event){
 						var units = event.units,
 							measure = event.measure;
-						alert("Distância: " + measure.toFixed(3) + " " + units);
+						alert("Dist&acirc;ncia: " + measure.toFixed(3) + " " + units);
 				}
 			});
 			controles.push(button);
@@ -740,7 +740,7 @@ i3GEO.editorOL = {
 					handlerOptions: {layerOptions: {styleMap: styleMap}},
 					persist: true,
 					displayClass: "editorOLarea", 
-					title: "área",
+					title: "&aacute;rea",
 					type: OpenLayers.Control.TYPE_TOOL
 				}
 			);
@@ -748,7 +748,7 @@ i3GEO.editorOL = {
 				"measure": function(event){
 						var units = event.units;
 						var measure = event.measure;
-						alert("Área: " + measure.toFixed(3) + " " + units + " quadrados");
+						alert("&Aacute;rea: " + measure.toFixed(3) + " " + units + " quadrados");
 				}
 			});
 			controles.push(button);
@@ -889,7 +889,7 @@ i3GEO.editorOL = {
 				OpenLayers.Handler.Polygon,
 				{
 					displayClass: "editorOLpoligono",
-					title: "digitalizar polígono",
+					title: "digitalizar pol&iacute;gono",
 					type: OpenLayers.Control.TYPE_TOOL,
 					//handlerOptions: {holeModifier: "altKey"},
 					callbacks:{
@@ -1046,7 +1046,7 @@ i3GEO.editorOL = {
 			controles.push(button);
 			adiciona = true;
 		}		
-		//botao de seleção
+		//botao de sele&ccedil;&atilde;o
 		if(botoes.selecao===true){
 			i3GEO.editorOL.selbutton = new OpenLayers.Control.SelectFeature(
 				i3GEO.editorOL.layergrafico,
@@ -1088,7 +1088,7 @@ i3GEO.editorOL = {
 			controles.push(button);
 			adiciona = true;
 		}
-		//não disponível ainda
+		//n&atilde;o dispon&iacute;vel ainda
 		/*
 		if(botoes.undo===true){
 			button = new OpenLayers.Control.Button({
@@ -1139,7 +1139,7 @@ i3GEO.editorOL = {
 			button = new OpenLayers.Control.Button({
 				displayClass: "editorOLfecha", 
 				trigger: function(){
-					var temp = window.confirm("Remove a edição?");
+					var temp = window.confirm("Remove a edi&ccedil;&atilde;o?");
 					i3GEOpanelEditor.destroy();
 					try{YAHOO.temaativo.container.panel.destroy();}catch(e){}
 					try{YAHOO.procura.container.panel.destroy();}catch(e){}
@@ -1335,10 +1335,10 @@ i3GEO.editorOL = {
 			'	</tr>' +
 			'</table>' +
 			'<br />' +
-			'<p class=paragrafo ><b>Ajusta nó em edição para o(a):</b></p>' +
+			'<p class=paragrafo ><b>Ajusta nó em edi&ccedil;&atilde;o para o(a):</b></p>' +
 			'<table class=lista7 >' +
 			'	<tr>' +
-			'		<td></td><td>nó</td><td></td><td>vértice</td><td></td><td>borda</td>' +
+			'		<td></td><td>nó</td><td></td><td>v&eacute;rtice</td><td></td><td>borda</td>' +
 			'	</tr>' +
 			'	<tr>' +
 			'		<td><input style=cursor:pointer onclick="i3GEO.editorOL.snap()" type="checkbox" id="target_node" /></td><td><input onchange="i3GEO.editorOL.snap()" id="target_nodeTolerance" type="text" size="3" value=15 /></td>' +
@@ -1347,14 +1347,14 @@ i3GEO.editorOL = {
 			'	</tr>' +
 			'</table>' +
 			'<br />' +
-			'<p class=paragrafo ><b>Divide intersecção ao digitalizar</b></p>' +
+			'<p class=paragrafo ><b>Divide intersec&ccedil;&atilde;o ao digitalizar</b></p>' +
 			'<table class=lista7 >' +
 			'	<tr>' +
 			'		<td><input style=cursor:pointer onclick="i3GEO.editorOL.split()" type="checkbox" id="edge_split_toggle" /></td><td>borda</td>' +
 			'	</tr>' +
 			'</table>' +
 			'<br />' +
-			'<p class=paragrafo ><b>Operação ativada pelo botão de modificação da figura</b></p>' +
+			'<p class=paragrafo ><b>Opera&ccedil;&atilde;o ativada pelo bot&atilde;o de modifica&ccedil;&atilde;o da figura</b></p>' +
 			'<table class=lista7 >' +
 			'	<tr>' +
 			'		<td><input checked style=cursor:pointer onclick="i3GEO.editorOL.ModifyFeature.mode = OpenLayers.Control.ModifyFeature.RESHAPE;" type="radio" name=i3geoOLtipoEdita /></td><td>altera figura</td>' +
@@ -1413,7 +1413,7 @@ i3GEO.editorOL = {
 		geos = i3GEO.editorOL.layergrafico.features,
 		n = geos.length,
 		ins = "<table class=lista4 >";
-		ins += "<tr><td><i>Geometrias</i></td><td><i>Opções</i></td><td></td><td></td></tr>";
+		ins += "<tr><td><i>Geometrias</i></td><td><i>Op&ccedil;&otilde;es</i></td><td></td><td></td></tr>";
 
 		while(n > 0){
 			n -= 1;
@@ -1422,7 +1422,7 @@ i3GEO.editorOL = {
 		}
 		ins += "</table>";
 		if(geos.length === 0)
-		{ins = "Nenhum elemento gráfico encontrado. Utilize as opções de criação de geometrias.";}
+		{ins = "Nenhum elemento gr&aacute;fico encontrado. Utilize as op&ccedil;&otilde;es de cria&ccedil;&atilde;o de geometrias.";}
 		YAHOO.editorOL.listaGeometrias.panel.show();
 		if(i3GEO.configura)
 		{temp = $i("panellistagEditor").getElementsByTagName("div")[2];}
@@ -1437,16 +1437,16 @@ i3GEO.editorOL = {
 			YAHOO.namespace("editorOL.ferramentas");
 			YAHOO.editorOL.ferramentas.panel = new YAHOO.widget.Panel("panelferramentasEditor", {zIndex:20000, iframe:true, width:"300px", visible:false, draggable:true, close:true } );
 			var ins = "" +
-			'<p class=paragrafo >Operações sobre as figuras selecionadas:</p>' +
+			'<p class=paragrafo >Opera&ccedil;&otilde;es sobre as figuras selecionadas:</p>' +
 			'<select onchange="i3GEO.editorOL.processageo(this.value);this.value = \'\'" >' +
 			'	<option value="">---</option>' +
-			'	<option value=union >União</option>';
+			'	<option value=union >Uni&atilde;o</option>';
 			if(i3GEO.php){
-				ins += '	<option value=intersection >Intersecção</option>' +	
+				ins += '	<option value=intersection >Intersec&ccedil;&atilde;o</option>' +	
 				'	<option value=convexhull >Convex hull</option>' +				
 				'	<option value=boundary >Bordas</option>' +				
-				'	<option value=difference >Diferença</option>' +				
-				'	<option value=symdifference >Diferença simétrica</option>';
+				'	<option value=difference >Diferen&ccedil;a</option>' +				
+				'	<option value=symdifference >Diferen&ccedil;a sim&eacute;trica</option>';
 			}
 			ins += '</select>'+
 			'<br><br><a class=paragrafo href=# onclick="i3GEO.editorOL.layergrafico.destroyFeatures()" >Apaga tudo</a>';

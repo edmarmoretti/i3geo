@@ -1,9 +1,9 @@
 
 /*jslint plusplus:false,white:false,undef: false, rhino: true, onevar: true, evil: true */
 /*
-Title: Distribuição de pontos
+Title: Distribui&ccedil;ão de pontos
 
-Adiciona um novo tema ao mapa em função da análise de distribuição de pontos.
+Adiciona um novo tema ao mapa em fun&ccedil;ão da an&aacute;lise de distribui&ccedil;ão de pontos.
 O tema com os pontos deve existir no mapa atual.
 
 Veja:
@@ -12,24 +12,24 @@ Veja:
 
 Arquivo: i3geo/ferramentas/pontosdistri/index.js.php
 
-About: Licença
+About: Licen&ccedil;a
 
 i3Geo Interface Integrada de Ferramentas de Geoprocessamento para Internet
 
-Direitos Autorais Reservados (c) 2006 Ministério do Meio Ambiente Brasil
+Direitos Autorais Reservados (c) 2006 Minist&eacute;rio do Meio Ambiente Brasil
 Desenvolvedor: Edmar Moretti edmar.moretti@mma.gov.br
 
-Este programa é software livre; você pode redistribuí-lo
-e/ou modificá-lo sob os termos da Licença Pública Geral
+Este programa &eacute; software livre; voc&ecirc; pode redistribu&iacute;-lo
+e/ou modific&aacute;-lo sob os termos da Licen&ccedil;a P&uacute;blica Geral
 GNU conforme publicada pela Free Software Foundation;
 
-Este programa é distribuído na expectativa de que seja útil,
-porém, SEM NENHUMA GARANTIA; nem mesmo a garantia implícita
-de COMERCIABILIDADE OU ADEQUAÇÃO A UMA FINALIDADE ESPECÍFICA.
-Consulte a Licença Pública Geral do GNU para mais detalhes.
-Você deve ter recebido uma cópia da Licença Pública Geral do
+Este programa &eacute; distribu&iacute;do na expectativa de que seja &uacute;til,
+por&eacute;m, SEM NENHUMA GARANTIA; nem mesmo a garantia impl&iacute;cita
+de COMERCIABILIDADE OU ADEQUAÇÃO A UMA FINALIDADE ESPEC&Iacute;FICA.
+Consulte a Licen&ccedil;a P&uacute;blica Geral do GNU para mais detalhes.
+Voc&ecirc; deve ter recebido uma c&oacute;pia da Licen&ccedil;a P&uacute;blica Geral do
 GNU junto com este programa; se não, escreva para a
-Free Software Foundation, Inc., no endereço
+Free Software Foundation, Inc., no endere&ccedil;o
 59 Temple Street, Suite 330, Boston, MA 02111-1307 USA.
 */
 if(typeof(i3GEOF) === 'undefined'){
@@ -42,17 +42,17 @@ i3GEOF.pontosDistri = {
 	/*
 	Variavel: aguarde
 	
-	Estilo do objeto DOM com a imagem de aguarde existente no cabeçalho da janela.
+	Estilo do objeto DOM com a imagem de aguarde existente no cabe&ccedil;alho da janela.
 	*/
 	aguarde: "",
 	/*
 	Function: inicia
 	
-	Inicia a ferramenta. É chamado por criaJanelaFlutuante
+	Inicia a ferramenta. &Eacute; chamado por criaJanelaFlutuante
 	
 	Parametro:
 	
-	iddiv {String} - id do div que receberá o conteudo HTML da ferramenta
+	iddiv {String} - id do div que receber&aacute; o conteudo HTML da ferramenta
 	*/
 	inicia: function(iddiv){
 		try{
@@ -94,24 +94,24 @@ i3GEOF.pontosDistri = {
 	/*
 	Function: html
 	
-	Gera o código html para apresentação das opções da ferramenta
+	Gera o c&oacute;digo html para apresenta&ccedil;ão das op&ccedil;&otilde;es da ferramenta
 	
 	Retorno:
 	
-	String com o código html
+	String com o c&oacute;digo html
 	*/
 	html:function(){
 		var ins = '';
 		ins += '<div class="yui-navset" style="top:0px;cursor:pointer;left:0px;">';
 		ins += '	<ul class="yui-nav" style="border-width:0pt 0pt 0px;border-color:rgb(240,240,240);border-bottom-color:white;">';
-		ins += '		<li><a href="#ancora"><em><div id="i3GEOpontosDistriguia1" style="text-align:center;left:0px;" >Cálculo</div></em></a></li>';
+		ins += '		<li><a href="#ancora"><em><div id="i3GEOpontosDistriguia1" style="text-align:center;left:0px;" >C&aacute;lculo</div></em></a></li>';
 		ins += '		<li><a href="#ancora"><em><div id="i3GEOpontosDistriguia2" style="text-align:center;left:0px;" >Propriedades</div></em></a></li>';
 		ins += '	</ul>';
 		ins += '</div><br>';
 		ins += '<div class="guiaobj" id="i3GEOpontosDistriguia1obj" style="left:1px;display:none;">';
-		ins += '	<p class="paragrafo" >Escolha o tema que ser&aacute; utilizado (no caso de linhas ou polígonos, será calculado o centróide):</p>';
+		ins += '	<p class="paragrafo" >Escolha o tema que ser&aacute; utilizado (no caso de linhas ou pol&iacute;gonos, ser&aacute; calculado o centr&oacute;ide):</p>';
 		ins += '	<div id=i3GEOpontosDistriTemas ></div>';
-		ins += '	<p class="paragrafo">Restringe a análise aos limites de abrang&ecirc;ncia dos pontos?';
+		ins += '	<p class="paragrafo">Restringe a an&aacute;lise aos limites de abrang&ecirc;ncia dos pontos?';
 		ins += i3GEO.util.comboSimNao("i3GEOpontosDistrilimitePontos","sim");
 		ins += '	<p class="paragrafo" >Extende os limites de abrang&ecirc;ncia em ';
 		ins += $inputText("","","i3GEOpontosDistriextendelimite","",3,"10")+' %';
@@ -163,7 +163,7 @@ i3GEOF.pontosDistri = {
 	*/	
 	criaJanelaFlutuante: function(){
 		var minimiza,cabecalho,janela,divid,temp,titulo;
-		//funcao que sera executada ao ser clicado no cabeçalho da janela
+		//funcao que sera executada ao ser clicado no cabe&ccedil;alho da janela
 		cabecalho = function(){
 			i3GEOF.pontosDistri.ativaFoco();
 		};
@@ -207,7 +207,7 @@ i3GEOF.pontosDistri = {
 			"i3GEOpontosDistritemasComSel",
 			function(retorno){
 		 		if(retorno.tipo !== "dados"){
-		 			$i("i3GEOpontosDistriTemas").innerHTML = "<p class=paragrafo style=color:red >Nenhum tema de pontos com seleção<span style=cursor:pointer;color:blue onclick='i3GEO.mapa.dialogo.selecao()' > Selecionar...</span></p>";
+		 			$i("i3GEOpontosDistriTemas").innerHTML = "<p class=paragrafo style=color:red >Nenhum tema de pontos com sele&ccedil;ão<span style=cursor:pointer;color:blue onclick='i3GEO.mapa.dialogo.selecao()' > Selecionar...</span></p>";
 		 			return;
 		 		}
 		 		$i("i3GEOpontosDistriTemas").innerHTML = "<p class=paragrafo >"+retorno.dados + "</p>";
@@ -230,14 +230,14 @@ i3GEOF.pontosDistri = {
 	/*
 	Function: corj
 	
-	Abre a janela para o usuário selecionar uma cor interativamente
+	Abre a janela para o usu&aacute;rio selecionar uma cor interativamente
 	*/
 	corj: function(obj)
 	{i3GEO.util.abreCor("",obj);},
 	/*
 	Function: verCores
 	
-	Mostra as cores definidas nos intervalos de definição da paleta
+	Mostra as cores definidas nos intervalos de defini&ccedil;ão da paleta
 	
 	Veja:
 	
@@ -270,7 +270,7 @@ i3GEOF.pontosDistri = {
 	/*
 	Function: analiseDistancia
 	
-	Executa a análise de distribuição de pontos
+	Executa a an&aacute;lise de distribui&ccedil;ão de pontos
 	
 	Veja:
 	
@@ -306,7 +306,7 @@ i3GEOF.pontosDistri = {
 	/*
 	Function: analiseDensidade
 	
-	Executa a análise de densidade
+	Executa a an&aacute;lise de densidade
 	
 	Veja:
 	
@@ -342,7 +342,7 @@ i3GEOF.pontosDistri = {
 	/*
 	Function: analiseKernel
 	
-	Executa a análise de kernel
+	Executa a an&aacute;lise de kernel
 
 	Veja:
 	
@@ -378,7 +378,7 @@ i3GEOF.pontosDistri = {
 	/*
 	Function: analiseDeldir
 	
-	Executa a análise de triangulação
+	Executa a an&aacute;lise de triangula&ccedil;ão
 
 	Veja:
 	
@@ -412,7 +412,7 @@ i3GEOF.pontosDistri = {
 	/*
 	Function: analiseRelatorio
 	
-	Abre o relatório de análise
+	Abre o relat&oacute;rio de an&aacute;lise
 
 	Veja:
 	

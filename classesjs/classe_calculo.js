@@ -22,7 +22,7 @@ GNU conforme publicada pela Free Software Foundation;
 
 Este programa &eacute; distribu&iacute;do na expectativa de que seja &uacute;til,
 por&eacute;m, SEM NENHUMA GARANTIA; nem mesmo a garantia impl&iacute;cita
-de COMERCIABILIDADE OU ADEQUA«&Atilde;O A UMA FINALIDADE ESPEC&Iacute;FICA.
+de COMERCIABILIDADE OU ADEQUA√á&Atilde;O A UMA FINALIDADE ESPEC&Iacute;FICA.
 Consulte a Licen&ccedil;a P&uacute;blica Geral do GNU para mais detalhes.
 Voc&ecirc; deve ter recebido uma c&oacute;pia da Licen&ccedil;a P&uacute;blica Geral do
 GNU junto com este programa; se n&atilde;o, escreva para a
@@ -42,7 +42,7 @@ i3GEO.calculo = {
 	/*
 	Propriedade: metododistancia
 
-	M&eacute;todo utilizado no c&aacute;lculo de dist‚ncias
+	M&eacute;todo utilizado no c&aacute;lculo de dist√¢ncias
 
 	vicenty|vicenty
 
@@ -292,7 +292,7 @@ i3GEO.calculo = {
 	/*
 	Function: distancia
 
-	Calcula a dist‚ncia em km entre dois pontos.
+	Calcula a dist√¢ncia em km entre dois pontos.
 
 	O m&eacute;todo de c&aacute;lculo &eacute; definido na vari&aacute;vel i3GEO.calculo.metododistancia
 
@@ -320,7 +320,7 @@ i3GEO.calculo = {
 	/*
 	Function: distHaversine
 
-	Calcula a dist‚ncia em km entre dois pontos (m&eacute;todo Haversine).
+	Calcula a dist√¢ncia em km entre dois pontos (m&eacute;todo Haversine).
 
 	Baseado no site http://www.movable-type.co.uk/scripts/latlong.html (indicado por louriques@yahoo.com.br)
 
@@ -465,7 +465,7 @@ i3GEO.calculo = {
 
 	Return:
 
-	¬ngulo em d&eacute;cimos de grau
+	√Çngulo em d&eacute;cimos de grau
 
 	Type:
 	{Numeric}
@@ -487,7 +487,7 @@ i3GEO.calculo = {
 	/*
 	Function: destinoDD
 
-	Calcula as coordenadas de um novo ponto em fun&ccedil;&atilde;o da posi&ccedil;&atilde;o de um ponto de origem, dist‚ncia e dire&ccedil;&atilde;o
+	Calcula as coordenadas de um novo ponto em fun&ccedil;&atilde;o da posi&ccedil;&atilde;o de um ponto de origem, dist√¢ncia e dire&ccedil;&atilde;o
 
 	O novo ponto &eacute; calculado em coordenadas geogr&aacute;ficas em DD
 
@@ -499,9 +499,9 @@ i3GEO.calculo = {
 
 	lat {Numeric} - latitude do ponto de origem
 
-	d {Numeric} - dist‚ncia em Km
+	d {Numeric} - dist√¢ncia em Km
 
-	dire&ccedil;&atilde;o {Numeric} - ‚ngulo desejado em d&eacute;cimos de grau (dire&ccedil;&atilde;o de 0 a 360)
+	dire&ccedil;&atilde;o {Numeric} - √¢ngulo desejado em d&eacute;cimos de grau (dire&ccedil;&atilde;o de 0 a 360)
 
 	Return:
 
@@ -527,7 +527,7 @@ i3GEO.calculo = {
 	/*
 	Function: rect2ext
 
-	Calcula a extens&atilde;o geogr&aacute;fica de um ret‚ngulo desenhado sobre o mapa.
+	Calcula a extens&atilde;o geogr&aacute;fica de um ret√¢ngulo desenhado sobre o mapa.
 
 	Parametros:
 
@@ -576,7 +576,7 @@ i3GEO.calculo = {
 	/*
 	Function: ext2rect
 
-	Calcula o posicionamento de um ret‚ngulo com base na extens&atilde;o geogr&aacute;fica.
+	Calcula o posicionamento de um ret√¢ngulo com base na extens&atilde;o geogr&aacute;fica.
 
 	Parametros:
 
@@ -588,7 +588,7 @@ i3GEO.calculo = {
 
 	pixel {Number} - tamanho do pixel do mapa em dd
 
-	documento {Object DOM} - objeto sob o qual o ret‚ngulo ser&aacute; posicionado
+	documento {Object DOM} - objeto sob o qual o ret√¢ngulo ser&aacute; posicionado
 
 	Return:
 

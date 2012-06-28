@@ -3,7 +3,7 @@
 /*
 Title: Centro de massa
 
-Calcula o centro médio e centro médio ponderado de um conjunto de pontos
+Calcula o centro m&eacute;dio e centro m&eacute;dio ponderado de um conjunto de pontos
 
 Veja:
 
@@ -19,20 +19,20 @@ GPL2
 
 i3Geo Interface Integrada de Ferramentas de Geoprocessamento para Internet
 
-Direitos Autorais Reservados (c) 2006 Ministério do Meio Ambiente Brasil
+Direitos Autorais Reservados (c) 2006 Minist&eacute;rio do Meio Ambiente Brasil
 Desenvolvedor: Edmar Moretti edmar.moretti@mma.gov.br
 
-Este programa é software livre; você pode redistribuí-lo
-e/ou modificá-lo sob os termos da Licença Pública Geral
+Este programa &eacute; software livre; voc&ecirc; pode redistribu&iacute;-lo
+e/ou modific&aacute;-lo sob os termos da Licen&ccedil;a P&uacute;blica Geral
 GNU conforme publicada pela Free Software Foundation;
 
-Este programa é distribuído na expectativa de que seja útil,
-porém, SEM NENHUMA GARANTIA; nem mesmo a garantia implícita
-de COMERCIABILIDADE OU ADEQUAÇÃO A UMA FINALIDADE ESPECÍFICA.
-Consulte a Licença Pública Geral do GNU para mais detalhes.
-Você deve ter recebido uma cópia da Licença Pública Geral do
+Este programa &eacute; distribu&iacute;do na expectativa de que seja &uacute;til,
+por&eacute;m, SEM NENHUMA GARANTIA; nem mesmo a garantia impl&iacute;cita
+de COMERCIABILIDADE OU ADEQUAÇÃO A UMA FINALIDADE ESPEC&Iacute;FICA.
+Consulte a Licen&ccedil;a P&uacute;blica Geral do GNU para mais detalhes.
+Voc&ecirc; deve ter recebido uma c&oacute;pia da Licen&ccedil;a P&uacute;blica Geral do
 GNU junto com este programa; se não, escreva para a
-Free Software Foundation, Inc., no endereço
+Free Software Foundation, Inc., no endere&ccedil;o
 59 Temple Street, Suite 330, Boston, MA 02111-1307 USA.
 */
 if(typeof(i3GEOF) === 'undefined'){
@@ -45,17 +45,17 @@ i3GEOF.centromassa = {
 	/*
 	Variavel: aguarde
 	
-	Estilo do objeto DOM com a imagem de aguarde existente no cabeçalho da janela.
+	Estilo do objeto DOM com a imagem de aguarde existente no cabe&ccedil;alho da janela.
 	*/
 	aguarde: "",
 	/*
 	Function: inicia
 	
-	Inicia a ferramenta. É chamado por criaJanelaFlutuante
+	Inicia a ferramenta. &Eacute; chamado por criaJanelaFlutuante
 	
 	Parametro:
 	
-	iddiv {String} - id do div que receberá o conteudo HTML da ferramenta
+	iddiv {String} - id do div que receber&aacute; o conteudo HTML da ferramenta
 	*/
 	inicia: function(iddiv){
 		try{
@@ -67,11 +67,11 @@ i3GEOF.centromassa = {
 	/*
 	Function: html
 	
-	Gera o código html para apresentação das opções da ferramenta
+	Gera o c&oacute;digo html para apresenta&ccedil;ão das op&ccedil;&otilde;es da ferramenta
 	
 	Retorno:
 	
-	String com o código html
+	String com o c&oacute;digo html
 	*/
 	html:function(){
 		var ins = '';
@@ -120,8 +120,8 @@ i3GEOF.centromassa = {
 	},
 	t0: function()
 	{
-		var ins = "<p class='paragrafo'>O centro médio é uma opera&ccedil;&atilde;o que resulta em um novo tema contendo o ponto que indica o centro de equilíbrio de uma distribuição.</p>";
-		ins += "<p class='paragrafo'>Para gerar o cálculo &eacute; necess&aacute;rio que no mapa exista pelo menos um tema de pontos. Se não houverem elementos selecionados, será considerada a extensão geográfica.</p>";
+		var ins = "<p class='paragrafo'>O centro m&eacute;dio &eacute; uma opera&ccedil;&atilde;o que resulta em um novo tema contendo o ponto que indica o centro de equil&iacute;brio de uma distribui&ccedil;ão.</p>";
+		ins += "<p class='paragrafo'>Para gerar o c&aacute;lculo &eacute; necess&aacute;rio que no mapa exista pelo menos um tema de pontos. Se não houverem elementos selecionados, ser&aacute; considerada a extensão geogr&aacute;fica.</p>";
 		i3GEO.util.proximoAnterior("","i3GEOF.centromassa.t1()",ins,"i3GEOFgradeDePontost0","i3GEOcentromassaresultado");
 	},
 	t1: function(){
@@ -144,7 +144,7 @@ i3GEOF.centromassa = {
 	/*
 	Function: calcula
 	
-	Faz o cálculo
+	Faz o c&aacute;lculo
 	
 	Veja:
 	
@@ -159,7 +159,7 @@ i3GEOF.centromassa = {
 			cp,
 			fim = function(retorno){
 				if (retorno.data==undefined )
-				{$i("i3GEOcentromassafim").innerHTML = "<p class='paragrafo' >Erro. A operação demorou muito.";}
+				{$i("i3GEOcentromassafim").innerHTML = "<p class='paragrafo' >Erro. A opera&ccedil;ão demorou muito.";}
 				else
 				{i3GEO.atualiza();}
 				i3GEOF.centromassa.aguarde.visibility = "hidden";

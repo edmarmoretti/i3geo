@@ -1,7 +1,7 @@
 /*
 Title: menu.js
 
-Funções que controlam a interface do editor de menus
+Fun&ccedil;&otilde;es que controlam a interface do editor de menus
 
 Licenca:
 
@@ -9,20 +9,20 @@ GPL2
 
 i3Geo Interface Integrada de Ferramentas de Geoprocessamento para Internet
 
-Direitos Autorais Reservados (c) 2006 Ministério do Meio Ambiente Brasil
+Direitos Autorais Reservados (c) 2006 Minist&eacute;rio do Meio Ambiente Brasil
 Desenvolvedor: Edmar Moretti edmar.moretti@mma.gov.br
 
-Este programa é software livre; você pode redistribuí-lo
-e/ou modificá-lo sob os termos da Licença Pública Geral
+Este programa &eacute; software livre; voc&ecirc; pode redistribu&iacute;-lo
+e/ou modific&aacute;-lo sob os termos da Licen&ccedil;a P&uacute;blica Geral
 GNU conforme publicada pela Free Software Foundation;
 
-Este programa é distribuído na expectativa de que seja útil,
-porém, SEM NENHUMA GARANTIA; nem mesmo a garantia implícita
-de COMERCIABILIDADE OU ADEQUAÇÃO A UMA FINALIDADE ESPECÍFICA.
-Consulte a Licença Pública Geral do GNU para mais detalhes.
-Você deve ter recebido uma cópia da Licença Pública Geral do
-GNU junto com este programa; se não, escreva para a
-Free Software Foundation, Inc., no endereço
+Este programa &eacute; distribu&iacute;do na expectativa de que seja &uacute;til,
+por&eacute;m, SEM NENHUMA GARANTIA; nem mesmo a garantia impl&iacute;cita
+de COMERCIABILIDADE OU ADEQUA&Ccedil;&Atilde;O A UMA FINALIDADE ESPEC&Iacute;FICA.
+Consulte a Licen&ccedil;a P&uacute;blica Geral do GNU para mais detalhes.
+Voc&ecirc; deve ter recebido uma cópia da Licen&ccedil;a P&uacute;blica Geral do
+GNU junto com este programa; se n&atilde;o, escreva para a
+Free Software Foundation, Inc., no endere&ccedil;o
 59 Temple Street, Suite 330, Boston, MA 02111-1307 USA.
 
 Arquivo:
@@ -45,7 +45,7 @@ function initEditorMenu()
 /*
 Function: pegaMenus_M
 
-Obtém a lista de menus
+Obt&eacute;m a lista de menus
 
 <PEGAMENUS>
 */
@@ -78,14 +78,14 @@ function montaTabela_M(dados)
             {key:"excluir",label:"excluir",formatter:formatExclui},
 			{key:"mais",label:"editar",formatter:formatMais},
             {label:"id",key:"id_menu", formatter:formatTexto},
-			{label:"nome padrão do menu",resizeable:true,key:"nome_menu", formatter:formatTexto,editor:new YAHOO.widget.TextboxCellEditor({disableBtns:true})},
-			{label:"nome em inglês (opcional)",resizeable:true,key:"en", formatter:formatTexto,editor:new YAHOO.widget.TextboxCellEditor({disableBtns:true})},
+			{label:"nome padr&atilde;o do menu",resizeable:true,key:"nome_menu", formatter:formatTexto,editor:new YAHOO.widget.TextboxCellEditor({disableBtns:true})},
+			{label:"nome em ingl&ecirc;s (opcional)",resizeable:true,key:"en", formatter:formatTexto,editor:new YAHOO.widget.TextboxCellEditor({disableBtns:true})},
 			{label:"nome em espanhol (opcional)",resizeable:true,key:"es", formatter:formatTexto,editor:new YAHOO.widget.TextboxCellEditor({disableBtns:true})},
 			{label:"nome em italiano (opcional)",resizeable:true,key:"it", formatter:formatTexto,editor:new YAHOO.widget.TextboxCellEditor({disableBtns:true})},
 			{label:"publicado para todos verem?",key:"publicado_menu",editor:"radio" ,editorOptions:{radioOptions:["SIM","NAO"],disableBtns:false,LABEL_SAVE:"OK"}},
 			{label:"perfis",resizeable:true,key:"perfil_menu", formatter:formatTexto,editor:"textbox",editorOptions:{LABEL_SAVE:"OK"}},
 			{label:"inicia aberto?",key:"aberto", editor:"radio" ,editorOptions:{radioOptions:["SIM","NAO"],disableBtns:false,LABEL_SAVE:"OK"}},
-			{label:"descrição",resizeable:true,key:"desc_menu", formatter:formatTexto,editor:new YAHOO.widget.TextboxCellEditor({disableBtns:true})}
+			{label:"descri&ccedil;&atilde;o",resizeable:true,key:"desc_menu", formatter:formatTexto,editor:new YAHOO.widget.TextboxCellEditor({disableBtns:true})}
         ];
 		//YAHOO.widget.CellEditor.LABEL_SAVE = "Aplicar";
         myDataSource = new YAHOO.util.DataSource(dados);
@@ -173,9 +173,9 @@ function montaDiv_M(i)
 {
 	var param = {
 		"linhas":[
-			{titulo:"Nome padrão:",id:"Enome_menu",size:"50",value:i.nome_menu,tipo:"text",div:""},
+			{titulo:"Nome padr&atilde;o:",id:"Enome_menu",size:"50",value:i.nome_menu,tipo:"text",div:""},
 			{titulo:"Descricao (opcional):",id:"Edesc_menu",size:"50",value:i.desc_menu,tipo:"text",div:""},
-			{titulo:"Nome em inglês (opcional):",id:"Een",size:"50",value:i.en,tipo:"text",div:""},
+			{titulo:"Nome em ingl&ecirc;s (opcional):",id:"Een",size:"50",value:i.en,tipo:"text",div:""},
 			{titulo:"Espanhol (opcional):",id:"Ees",size:"50",value:i.es,tipo:"text",div:""},
 			{titulo:"Italiano (opcional):",id:"Eit",size:"50",value:i.it,tipo:"text",div:""},
 			{titulo:"Perfis (opcional):",id:"Eperfil_menu",size:"50",value:i.perfil_menu,tipo:"text",div:""}
@@ -193,9 +193,9 @@ function montaDiv_M(i)
 	ins += " >sim</option>";
 	ins += "<option value='NAO' ";
 	if ((i.publicado_menu).toLowerCase() == "nao"){ins += "selected";}
-	ins += " >não</option>";
+	ins += " >n&atilde;o</option>";
 	ins += "</select></p>";
-	ins += "<p>Inicia aberto na árvore?<br>";
+	ins += "<p>Inicia aberto na &aacute;rvore?<br>";
 	ins += "<select  id='Eaberto' />";
 	ins += "<option value='' ";
 	if (i.aberto == ""){ins += "selected";}
@@ -205,14 +205,14 @@ function montaDiv_M(i)
 	ins += " >sim</option>";
 	ins += "<option value='NAO' ";
 	if ((i.aberto).toLowerCase() == "nao"){ins += "selected";}
-	ins += " >não</option>";
+	ins += " >n&atilde;o</option>";
 	ins += "</select></p>";
 	return(ins);
 }
 /*
 Function: gravaDados_M
 
-Salva as alterações feitas
+Salva as altera&ccedil;&otilde;es feitas
 
 <ALTERAMENUS>
 */
@@ -236,7 +236,7 @@ function gravaDados_M(id,recordid)
   			{
   				if(YAHOO.lang.JSON.parse(o.responseText) == "erro")
   				{
-  					core_carregando("<span style=color:red >Não foi possível excluir. Verifique se não existem registros vinculados</span>");
+  					core_carregando("<span style=color:red >N&atilde;o foi poss&iacute;vel excluir. Verifique se n&atilde;o existem registros vinculados</span>");
   					setTimeout("core_carregando('desativa')",3000);
   				}
   				else

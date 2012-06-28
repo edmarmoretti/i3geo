@@ -1,7 +1,7 @@
 /*
 Title: sistemas.js
 
-Funções que controlam a interface do editor de sistemas
+Fun&ccedil;&otilde;es que controlam a interface do editor de sistemas
 
 Licenca:
 
@@ -9,20 +9,20 @@ GPL2
 
 i3Geo Interface Integrada de Ferramentas de Geoprocessamento para Internet
 
-Direitos Autorais Reservados (c) 2006 Ministério do Meio Ambiente Brasil
+Direitos Autorais Reservados (c) 2006 Minist&eacute;rio do Meio Ambiente Brasil
 Desenvolvedor: Edmar Moretti edmar.moretti@mma.gov.br
 
-Este programa é software livre; você pode redistribuí-lo
-e/ou modificá-lo sob os termos da Licença Pública Geral
+Este programa &eacute; software livre; voc&ecirc; pode redistribu&iacute;-lo
+e/ou modific&aacute;-lo sob os termos da Licen&ccedil;a P&uacute;blica Geral
 GNU conforme publicada pela Free Software Foundation;
 
-Este programa é distribuído na expectativa de que seja útil,
-porém, SEM NENHUMA GARANTIA; nem mesmo a garantia implícita
-de COMERCIABILIDADE OU ADEQUAÇÃO A UMA FINALIDADE ESPECÍFICA.
-Consulte a Licença Pública Geral do GNU para mais detalhes.
-Você deve ter recebido uma cópia da Licença Pública Geral do
-GNU junto com este programa; se não, escreva para a
-Free Software Foundation, Inc., no endereço
+Este programa &eacute; distribu&iacute;do na expectativa de que seja &uacute;til,
+por&eacute;m, SEM NENHUMA GARANTIA; nem mesmo a garantia impl&iacute;cita
+de COMERCIABILIDADE OU ADEQUA&Ccedil;&Atilde;O A UMA FINALIDADE ESPEC&Iacute;FICA.
+Consulte a Licen&ccedil;a P&uacute;blica Geral do GNU para mais detalhes.
+Voc&ecirc; deve ter recebido uma cópia da Licen&ccedil;a P&uacute;blica Geral do
+GNU junto com este programa; se n&atilde;o, escreva para a
+Free Software Foundation, Inc., no endere&ccedil;o
 59 Temple Street, Suite 330, Boston, MA 02111-1307 USA.
 
 Arquivo:
@@ -66,13 +66,13 @@ function ativaBotaoAdicionaRaiz(sUrl,idBotao)
 		}; 
 		core_makeRequest(sUrl,callback);
 	};
-	//cria o botão de adição de um novo menu
+	//cria o bot&atilde;o de adi&ccedil;&atilde;o de um novo menu
 	new YAHOO.widget.Button(idBotao,{ onclick: { fn: adiciona } });
 }
 /*
 Function: pegaSistemas
 
-Obtém a lista de sistemas
+Obt&eacute;m a lista de sistemas
 
 <PEGASISTEMAS>
 */
@@ -83,7 +83,7 @@ function pegaSistemas()
 /*
 Function: montaArvore
 
-Monta a árvore de edição
+Monta a &aacute;rvore de edi&ccedil;&atilde;o
 
 <PEGAFUNCOES>
 */
@@ -152,7 +152,7 @@ function adicionaNosRaiz(dados,redesenha)
 	for (var i=0, j=dados.length; i<j; i++)
 	{
 		var conteudo = "&nbsp;<img style=\"position:relative;cursor:pointer;top:2px\" onclick=\"excluir('sistema','"+dados[i].id_sistema+"')\" title=excluir src=\"../imagens/01.png\" />";
-		conteudo += "&nbsp;<img style=\"position:relative;cursor:pointer;top:2px\" onclick=\"adicionarFuncao('"+dados[i].id_sistema+"')\" title='adiciona função' src=\"../imagens/05.png\" />";
+		conteudo += "&nbsp;<img style=\"position:relative;cursor:pointer;top:2px\" onclick=\"adicionarFuncao('"+dados[i].id_sistema+"')\" title='adiciona fun&ccedil;&atilde;o' src=\"../imagens/05.png\" />";
 		conteudo += "&nbsp;<img style=\"position:relative;cursor:pointer;top:2px\" onclick=\"editar('sistema','"+dados[i].id_sistema+"')\" title=editar src=\"../imagens/06.png\" /><b>&nbsp;<span>"+dados[i].nome_sistema+"</span>";
 		var d = {html:conteudo,id_sistema:dados[i].id_sistema,tipo:"sistema"};
 		new YAHOO.widget.HTMLNode(d, root, false,true);
@@ -162,7 +162,7 @@ function adicionaNosRaiz(dados,redesenha)
 /*
 Function: editar
 
-Monta o editor específico de um nó
+Monta o editor espec&iacute;fico de um nó
 
 <PEGAFUNCAO>
 
@@ -258,9 +258,9 @@ function montaDivFuncoes(i)
 	var param =
 	{
 		"linhas":[
-		{titulo:"Nome da função:",id:"Enome_funcao",size:"50",value:i.nome_funcao,tipo:"text",div:""},
-		{titulo:"Programa que será executado:",id:"Eabrir_funcao",size:"50",value:i.abrir_funcao,tipo:"text",div:""},
-		{titulo:"Largura da janela onde o programa será aberto:",id:"Ew_funcao",size:"5",value:i.w_funcao,tipo:"text",div:""},
+		{titulo:"Nome da fun&ccedil;&atilde;o:",id:"Enome_funcao",size:"50",value:i.nome_funcao,tipo:"text",div:""},
+		{titulo:"Programa que ser&aacute; executado:",id:"Eabrir_funcao",size:"50",value:i.abrir_funcao,tipo:"text",div:""},
+		{titulo:"Largura da janela onde o programa ser&aacute; aberto:",id:"Ew_funcao",size:"5",value:i.w_funcao,tipo:"text",div:""},
 		{titulo:"Altura da janela:",id:"Eh_funcao",size:"5",value:i.h_funcao,tipo:"text",div:""},
 		{titulo:"Perfis - escolha da lista abaixo:",id:"Eperfil_funcao",size:"50",value:i.perfil_funcao,tipo:"text",div:"<div id=comboPerfis >Buscando...</div>"}
 		]
@@ -272,7 +272,7 @@ function montaDivFuncoes(i)
 /*
 Function: excluir
 
-Exclui um nó específico
+Exclui um nó espec&iacute;fico
 
 <EXCLUIRSISTEMA>
 
@@ -297,7 +297,7 @@ function excluir(tipo,id)
 /*
 Function: adicionarFuncao
 
-Adiciona uma nova função
+Adiciona uma nova fun&ccedil;&atilde;o
 
 <ALTERARFUNCOES>
 */
@@ -321,7 +321,7 @@ function adicionarFuncao(id)
 /*
 Function: gravaDadosFuncao
 
-Altera uma função
+Altera uma fun&ccedil;&atilde;o
 
 <ALTERARFUNCOES>
 */
@@ -343,7 +343,7 @@ function gravaDadosFuncao(id)
   			{
   				if(YAHOO.lang.JSON.parse(o.responseText) == "erro")
   				{
-  					core_carregando("<span style=color:red >Não foi possível excluir. Verifique se não existem menus vinculados a este tema</span>");
+  					core_carregando("<span style=color:red >N&atilde;o foi poss&iacute;vel excluir. Verifique se n&atilde;o existem menus vinculados a este tema</span>");
   					setTimeout("core_carregando('desativa')",3000);
   				}
   				else
@@ -388,7 +388,7 @@ function gravaDadosSistema(id)
   			{
   				if(YAHOO.lang.JSON.parse(o.responseText) == "erro")
   				{
-  					core_carregando("<span style=color:red >Não foi possível excluir. Verifique se não existem menus vinculados a este tema</span>");
+  					core_carregando("<span style=color:red >N&atilde;o foi poss&iacute;vel excluir. Verifique se n&atilde;o existem menus vinculados a este tema</span>");
   					setTimeout("core_carregando('desativa')",3000);
   				}
   				else

@@ -1,7 +1,7 @@
 /*
 Title: core.js
 
-Funções de uso comum das interfaces dos editores
+Fun&ccedil;&otilde;es de uso comum das interfaces dos editores
 
 Licenca:
 
@@ -9,20 +9,20 @@ GPL2
 
 i3Geo Interface Integrada de Ferramentas de Geoprocessamento para Internet
 
-Direitos Autorais Reservados (c) 2006 Ministério do Meio Ambiente Brasil
+Direitos Autorais Reservados (c) 2006 Minist&eacute;rio do Meio Ambiente Brasil
 Desenvolvedor: Edmar Moretti edmar.moretti@mma.gov.br
 
-Este programa é software livre; você pode redistribuí-lo
-e/ou modificá-lo sob os termos da Licença Pública Geral
+Este programa &eacute; software livre; voc&ecirc; pode redistribu&iacute;-lo
+e/ou modific&aacute;-lo sob os termos da Licen&ccedil;a P&uacute;blica Geral
 GNU conforme publicada pela Free Software Foundation;
 
-Este programa é distribuído na expectativa de que seja útil,
-porém, SEM NENHUMA GARANTIA; nem mesmo a garantia implícita
-de COMERCIABILIDADE OU ADEQUAÇÃO A UMA FINALIDADE ESPECÍFICA.
-Consulte a Licença Pública Geral do GNU para mais detalhes.
-Você deve ter recebido uma cópia da Licença Pública Geral do
-GNU junto com este programa; se não, escreva para a
-Free Software Foundation, Inc., no endereço
+Este programa &eacute; distribu&iacute;do na expectativa de que seja &uacute;til,
+por&eacute;m, SEM NENHUMA GARANTIA; nem mesmo a garantia impl&iacute;cita
+de COMERCIABILIDADE OU ADEQUA&Ccedil;&Atilde;O A UMA FINALIDADE ESPEC&Iacute;FICA.
+Consulte a Licen&ccedil;a P&uacute;blica Geral do GNU para mais detalhes.
+Voc&ecirc; deve ter recebido uma cópia da Licen&ccedil;a P&uacute;blica Geral do
+GNU junto com este programa; se n&atilde;o, escreva para a
+Free Software Foundation, Inc., no endere&ccedil;o
 59 Temple Street, Suite 330, Boston, MA 02111-1307 USA.
 
 Arquivo:
@@ -37,7 +37,7 @@ Pega um objeto do documento.
 
 Exemplo: $i("box1")
 
-Parâmetros:
+Par&acirc;metros:
 
 id - id do objeto
 
@@ -67,11 +67,11 @@ Armazena o objeto com a lista de perfis
 var $perfis = "";
 function cabecalhoGeral(id,excluir){
 	var i,n,temp,
-		ins = "<fieldset class='cabecalhoGeral'><legend>Opções principais</legend>",
+		ins = "<fieldset class='cabecalhoGeral'><legend>Op&ccedil;&otilde;es principais</legend>",
 		botoes = [
-			{id:"principal",titulo:"Início",link:"../index.html"},
+			{id:"principal",titulo:"In&iacute;cio",link:"../index.html"},
 			{id:"menus",titulo:"Menus",link:"menus.html"},			
-			{id:"arvore",titulo:"Árvore de temas",link:"arvore.html"},
+			{id:"arvore",titulo:"&Aacute;rvore de temas",link:"arvore.html"},
 			{id:"editormapfile",titulo:"Mapfiles",link:"editormapfile.html"},
 			{id:"atlas",titulo:"Atlas",link:"atlas.html"}
 		];
@@ -98,15 +98,15 @@ function cabecalhoGeral(id,excluir){
 /*
 Function: core_movimentaNo
 
-Movimenta um nó para cima ou para baixo na árvore.
+Movimenta um nó para cima ou para baixo na &aacute;rvore.
 
-Essa função utiliza uma árvore que deve estar armazenada no objeto tree
+Essa fun&ccedil;&atilde;o utiliza uma &aacute;rvore que deve estar armazenada no objeto tree
 
 Parameters:
 
 tipo - sobe|desce
 
-no - objeto no que será movimentado
+no - objeto no que ser&aacute; movimentado
 
 Return:
 
@@ -145,8 +145,8 @@ function core_movimentaNo(tipo,no)
 /*
 Function: core_handleSuccess
 
-Processa o retorno da chamada em ajax quando tiver sucesso. Esta é uma
-função genérica, pouco usada.
+Processa o retorno da chamada em ajax quando tiver sucesso. Esta &eacute; uma
+fun&ccedil;&atilde;o gen&eacute;rica, pouco usada.
 
 Parameters:
 
@@ -154,7 +154,7 @@ o - string retornada pelo ajax
 */
 function core_handleSuccess(o)
 {
-	//div onde será mostrado o log
+	//div onde ser&aacute; mostrado o log
 	if(!$i('logajax'))
 	{document.body.innerHTML += "<div id=logajax ></div>";}
 	log = $i('logajax');
@@ -180,7 +180,7 @@ o - string retornada pelo ajax
 */
 function core_handleFailure(o,texto)
 {
-	//div onde será mostrado o log
+	//div onde ser&aacute; mostrado o log
 	//alert(texto)
 	if(!$i('logajax'))
 	{return;}
@@ -211,9 +211,9 @@ Executa uma chamada em ajax.
 
 Parameters:
 
-sUrl - url que será executada
+sUrl - url que ser&aacute; executada
 
-callback - função que processará o retorno
+callback - fun&ccedil;&atilde;o que processar&aacute; o retorno
 
 tipo - GET ou POST
 */
@@ -262,17 +262,17 @@ function core_carregando(tipo)
 /*
 Function: core_dialogoContinua
 
-Mostra um diálogo do tipo sim não
+Mostra um di&aacute;logo do tipo sim n&atilde;o
 
 Parameters:
 
-handleYes - função para sim
+handleYes - fun&ccedil;&atilde;o para sim
 
-handleNo - função para não
+handleNo - fun&ccedil;&atilde;o para n&atilde;o
 
-mensagem - mensagem do diálogo
+mensagem - mensagem do di&aacute;logo
 
-largura - largura do diálogo em px
+largura - largura do di&aacute;logo em px
 */
 function core_dialogoContinua(handleYes,handleNo,mensagem,largura,cabecalho)
 {
@@ -302,17 +302,17 @@ function core_dialogoContinua(handleYes,handleNo,mensagem,largura,cabecalho)
 /*
 Function: core_dialogoPergunta
 
-Mostra um diálogo do tipo sim não com uma pergunta
+Mostra um di&aacute;logo do tipo sim n&atilde;o com uma pergunta
 
 Parameters:
 
-handleYes - função para sim
+handleYes - fun&ccedil;&atilde;o para sim
 
-handleNo - função para não
+handleNo - fun&ccedil;&atilde;o para n&atilde;o
 
-mensagem - mensagem do diálogo
+mensagem - mensagem do di&aacute;logo
 
-largura - largura do diálogo em px
+largura - largura do di&aacute;logo em px
 */
 function core_dialogoPergunta(handleYes,handleNo,mensagem,largura)
 {
@@ -341,9 +341,9 @@ Function: core_ativaPainelAjuda
 
 Parameters:
 
-id - id do elemento que receberá o painel
+id - id do elemento que receber&aacute; o painel
 
-botao - id do elemento que deverá ser lcicado para abrir o painel
+botao - id do elemento que dever&aacute; ser lcicado para abrir o painel
 */
 function core_ativaPainelAjuda(id,botao)
 {
@@ -363,7 +363,7 @@ Function: core_ativaPainelTexto
 
 Parameters:
 
-id - id do elemento que receberá o painel
+id - id do elemento que receber&aacute; o painel
 */
 function core_ativaPainelTexto(id)
 {
@@ -380,11 +380,11 @@ Pega a lista de perfis
 
 Parameters:
 
-funcao - (opcional) string com o nome da funcao que será executada após a chamada ajax ter tido sucesso
+funcao - (opcional) string com o nome da funcao que ser&aacute; executada após a chamada ajax ter tido sucesso
 
 Return
 
-$perfis - variável global com o objeto perfis
+$perfis - vari&aacute;vel global com o objeto perfis
 
 $perfisArray - array com a lista de perfis
 */
@@ -423,7 +423,7 @@ Pega a lista de mapfiles
 
 Parameters:
 
-funcaoM - (opcional) nome da funcao que será executada ao terminar a busca pelos dados
+funcaoM - (opcional) nome da funcao que ser&aacute; executada ao terminar a busca pelos dados
 
 letra - (opcional) letra inicial utilizada para filtrar a lista
 
@@ -468,15 +468,15 @@ Cria um combo para escolha do mapfile
 
 Parameters:
 
-onde - id do elemento que receberá o combo
+onde - id do elemento que receber&aacute; o combo
 
-id - id do combo que será criado
+id - id do combo que ser&aacute; criado
 
-marcar - valor que será marcado como selecionado
+marcar - valor que ser&aacute; marcado como selecionado
 
-funcao - string com o nome da função que será executada no evento onchange
+funcao - string com o nome da fun&ccedil;&atilde;o que ser&aacute; executada no evento onchange
 
-recarrega {booblean} - força recarregar o combo de mapfiles
+recarrega {booblean} - for&ccedil;a recarregar o combo de mapfiles
 */
 function core_comboMapfiles(onde,id,marcar,funcao,recarrega)
 {
@@ -505,13 +505,13 @@ Cria um combo para escolha de perfil
 
 Parameters:
 
-onde - id do elemento que receberá o combo
+onde - id do elemento que receber&aacute; o combo
 
-id - id do combo que será criado
+id - id do combo que ser&aacute; criado
 
-marcar - valor que será marcado como selecionado
+marcar - valor que ser&aacute; marcado como selecionado
 
-funcao - string com o nome da função que será executada no evento onchange
+funcao - string com o nome da fun&ccedil;&atilde;o que ser&aacute; executada no evento onchange
 */
 function core_comboPerfis(onde,id,marcar,funcao)
 {
@@ -540,13 +540,13 @@ Cria um combo para escolha de pranchas de um atlas
 
 Parameters:
 
-onde - id do elemento que receberá o combo
+onde - id do elemento que receber&aacute; o combo
 
-id - id do combo que será criado
+id - id do combo que ser&aacute; criado
 
-marcar - valor que será marcado como selecionado
+marcar - valor que ser&aacute; marcado como selecionado
 
-funcao - string com o nome da função que será executada no evento onchange
+funcao - string com o nome da fun&ccedil;&atilde;o que ser&aacute; executada no evento onchange
 */
 function core_comboPranchas(onde,id,marcar,funcao,id_atlas)
 {
@@ -583,13 +583,13 @@ Cria um combo para escolha de um grupo
 
 Parameters:
 
-onde - id do elemento que receberá o combo
+onde - id do elemento que receber&aacute; o combo
 
-id - id do combo que será criado
+id - id do combo que ser&aacute; criado
 
-marcar - valor que será marcado como selecionado
+marcar - valor que ser&aacute; marcado como selecionado
 
-funcao - string com o nome da função que será executada no evento onchange
+funcao - string com o nome da fun&ccedil;&atilde;o que ser&aacute; executada no evento onchange
 */
 function core_comboGrupos(onde,id,marcar,funcao)
 {
@@ -626,13 +626,13 @@ Cria um combo para escolha de um sub-grupo
 
 Parameters:
 
-onde - id do elemento que receberá o combo
+onde - id do elemento que receber&aacute; o combo
 
-id - id do combo que será criado
+id - id do combo que ser&aacute; criado
 
-marcar - valor que será marcado como selecionado
+marcar - valor que ser&aacute; marcado como selecionado
 
-funcao - string com o nome da função que será executada no evento onchange
+funcao - string com o nome da fun&ccedil;&atilde;o que ser&aacute; executada no evento onchange
 */
 function core_comboSubGrupos(onde,id,marcar,funcao)
 {
@@ -669,13 +669,13 @@ Cria um combo para escolha de um tema
 
 Parameters:
 
-onde - id do elemento que receberá o combo
+onde - id do elemento que receber&aacute; o combo
 
-id - id do combo que será criado
+id - id do combo que ser&aacute; criado
 
-marcar - valor que será marcado como selecionado
+marcar - valor que ser&aacute; marcado como selecionado
 
-funcao - string com o nome da função que será executada no evento onchange
+funcao - string com o nome da fun&ccedil;&atilde;o que ser&aacute; executada no evento onchange
 */
 function core_comboTemas(onde,id,marcar,funcao)
 {
@@ -713,7 +713,7 @@ Pega a lista de tags
 
 Parameters:
 
-funcao - (opcional) nome da funcao que será executada ao terminar a busca pelos dados
+funcao - (opcional) nome da funcao que ser&aacute; executada ao terminar a busca pelos dados
 */
 function core_pegaTags(funcao)
 {
@@ -745,13 +745,13 @@ Cria um combo para escolha de tags
 
 Parameters:
 
-onde - id do elemento que receberá o combo
+onde - id do elemento que receber&aacute; o combo
 
-id - id do combo que será criado
+id - id do combo que ser&aacute; criado
 
-marcar - valor que será marcado como selecionado
+marcar - valor que ser&aacute; marcado como selecionado
 
-change - nome da função do evento onchange
+change - nome da fun&ccedil;&atilde;o do evento onchange
 */
 function core_comboTags(onde,id,change)
 {
@@ -768,7 +768,7 @@ function core_comboTags(onde,id,change)
 	}
 }
 /*
-Function: gera uma janela flutuante com opções de escolha baseadas em checkbox
+Function: gera uma janela flutuante com op&ccedil;&otilde;es de escolha baseadas em checkbox
 
 Parameters:
 
@@ -894,7 +894,7 @@ function core_comboObjeto(obj,valor,texto,marcar,texto2)
 /*
 Function: core_geraLinhas
 
-Gera campos de formulário
+Gera campos de formul&aacute;rio
 
 Parameters:
 
@@ -962,19 +962,19 @@ function core_geraLinhas(dados)
 /*
 Function: core_ativaBotaoAdicionaLinha
 
-Ativa o botão que adiciona uma linha em uma tabela no banco de dados e na interface HTML
+Ativa o bot&atilde;o que adiciona uma linha em uma tabela no banco de dados e na interface HTML
 
-Essa função utiliza o objeto datatable que deve estar armazenado na variável myDataTable
+Essa fun&ccedil;&atilde;o utiliza o objeto datatable que deve estar armazenado na vari&aacute;vel myDataTable
 
 Parameters:
 
 myDataTable - objeto dataTable do YUI
 
-sUrl - url com o programa que será executado no servidor
+sUrl - url com o programa que ser&aacute; executado no servidor
 
-idBotao - id do elemento com o botão
+idBotao - id do elemento com o bot&atilde;o
 
-nomeFuncao - nome da função que será executada ao concluir a adição da linha
+nomeFuncao - nome da fun&ccedil;&atilde;o que ser&aacute; executada ao concluir a adi&ccedil;&atilde;o da linha
 */
 function core_ativaBotaoAdicionaLinha(sUrl,idBotao,nomeFuncao)
 {
@@ -1010,21 +1010,21 @@ function core_ativaBotaoAdicionaLinha(sUrl,idBotao,nomeFuncao)
 		}; 
 		core_makeRequest(sUrl,callback);
 	};
-	//cria o botão de adição de um novo menu
+	//cria o bot&atilde;o de adi&ccedil;&atilde;o de um novo menu
 	new YAHOO.widget.Button(idBotao,{ onclick: { fn: adicionalinha } });
 }
 /*
 Function: core_pegaDados
 
-Busca dados no servidor via Ajax e executa uma função de retorno com os daods
+Busca dados no servidor via Ajax e executa uma fun&ccedil;&atilde;o de retorno com os daods
 
 Parameters:
 
-mensagem - mensagem que será mostrada na tela
+mensagem - mensagem que ser&aacute; mostrada na tela
 
-sUrl - url do programa que será executado no servidor
+sUrl - url do programa que ser&aacute; executado no servidor
 
-funcaoRetorno - funcao que será executada ao terminar a busca pelos dados
+funcaoRetorno - funcao que ser&aacute; executada ao terminar a busca pelos dados
 */
 function core_pegaDados(mensagem,sUrl,funcaoRetorno)
 {
@@ -1057,15 +1057,15 @@ Function: core_gravaLinha
 
 Grava um registro no banco de dados e atualiza o datatable atual
 
-Essa função utiliza o objeto datatable que deve estar armazenado na variável myDataTable
+Essa fun&ccedil;&atilde;o utiliza o objeto datatable que deve estar armazenado na vari&aacute;vel myDataTable
 
 Parameters:
 
-mensagem - mensagem que será mostrada na tela
+mensagem - mensagem que ser&aacute; mostrada na tela
 
-row - objeto row que foi clicado pelo usuário. Utilizado para se obter os daods do recordset
+row - objeto row que foi clicado pelo usu&aacute;rio. Utilizado para se obter os daods do recordset
 
-sUrl - url do programa que será executado
+sUrl - url do programa que ser&aacute; executado
 
 nomeFuncao - nome da funcao que sera executada após gravar os dados (opcional)
 */
@@ -1104,13 +1104,13 @@ function core_gravaLinha(mensagem,row,sUrl,nomeFuncao)
 /*
 Function: core_excluiLinha
 
-Excluí um registro no banco de dados e atualiza o datatable.
+Exclu&iacute; um registro no banco de dados e atualiza o datatable.
 
-Essa função utiliza o objeto datatable que deve estar armazenado na variável myDataTable
+Essa fun&ccedil;&atilde;o utiliza o objeto datatable que deve estar armazenado na vari&aacute;vel myDataTable
 
 Parameters:
 
-sUrl - url do programa que será executado
+sUrl - url do programa que ser&aacute; executado
 
 row - objeto row de um datatable
 
@@ -1136,7 +1136,7 @@ function core_excluiLinha(sUrl,row,mensagem,cabecalho)
   				{
   					if(YAHOO.lang.JSON.parse(o.responseText) == "erro")
   					{
-  						core_carregando("<span style=color:red >Não foi possível excluir. Verifique se não existem outras tabelas com registros vinculados a este</span>");
+  						core_carregando("<span style=color:red >N&atilde;o foi poss&iacute;vel excluir. Verifique se n&atilde;o existem outras tabelas com registros vinculados a este</span>");
   						setTimeout("core_carregando('desativa')",3000);
   					}
   					else
@@ -1163,13 +1163,13 @@ function core_excluiLinha(sUrl,row,mensagem,cabecalho)
 /*
 Function: core_excluiNoTree
 
-Excluí um registro no banco de dados e atualiza o treeview.
+Exclu&iacute; um registro no banco de dados e atualiza o treeview.
 
-Essa função utiliza o objeto treeview que deve estar armazenado na variável tree
+Essa fun&ccedil;&atilde;o utiliza o objeto treeview que deve estar armazenado na vari&aacute;vel tree
 
 Parameters:
 
-sUrl - url do programa que será executado
+sUrl - url do programa que ser&aacute; executado
 
 no - objeto no de um treeview
 
@@ -1195,7 +1195,7 @@ function core_excluiNoTree(sUrl,no,mensagem,cabecalho)
   				{
   					if(YAHOO.lang.JSON.parse(o.responseText) == "erro")
   					{
-  						core_carregando("<span style=color:red >Não foi possível excluir. Verifique se não existem outras tabelas com registros vinculados a este</span>");
+  						core_carregando("<span style=color:red >N&atilde;o foi poss&iacute;vel excluir. Verifique se n&atilde;o existem outras tabelas com registros vinculados a este</span>");
   						setTimeout("core_carregando('desativa')",3000);
   					}
   					else
@@ -1225,15 +1225,15 @@ function core_excluiNoTree(sUrl,no,mensagem,cabecalho)
 /**
 Function: core_montaEditor
 
-Monta uma janela flutuante com um formulário.
+Monta uma janela flutuante com um formul&aacute;rio.
 
-O editor possui um div com id=editor_bd que deve ser usado para incluir o formulário.
+O editor possui um div com id=editor_bd que deve ser usado para incluir o formul&aacute;rio.
 
 Parameters:
 
-funcaoOK - string com o nome da função que será executada quando o botão OK for pressionado.
+funcaoOK - string com o nome da fun&ccedil;&atilde;o que ser&aacute; executada quando o bot&atilde;o OK for pressionado.
 
-funcaoClose - nome da funcao que será executada quando a janela for fechada
+funcaoClose - nome da funcao que ser&aacute; executada quando a janela for fechada
 */
 function core_montaEditor(funcaoOK,w,h,funcaoClose)
 {	
@@ -1338,74 +1338,75 @@ function core_ativaforms(lista){
 //
 //define o local correto dos programas
 //
-var scriptLocation = "";
-var scripts = document.getElementsByTagName('script');
-for (var i = 0; i < scripts.length; i++) {
-	var src = scripts[i].getAttribute('src');
-	if (src) {
-		var index = src.lastIndexOf("core.js");
-		// is it found, at the end of the URL?
-		if ((index > -1) && (index + "core.js".length == src.length)) {
-			scriptLocation = src.slice(0, -"core.js".length);
-			break;
+(function(){
+	var scriptLocation = "";
+	var scripts = document.getElementsByTagName('script');
+	for (var i = 0; i < scripts.length; i++) {
+		var src = scripts[i].getAttribute('src');
+		if (src) {
+			var index = src.lastIndexOf("core.js");
+			// is it found, at the end of the URL?
+			if ((index > -1) && (index + "core.js".length == src.length)) {
+				scriptLocation = src.slice(0, -"core.js".length);
+				break;
+			}
 		}
 	}
-}
-//
-//arquivos javascript que serão carregados
-//
-/*
-<?php if(extension_loaded('zlib')){ob_start('ob_gzhandler');} header("Content-type: text/javascript"); ?>
-<?php if(extension_loaded('zlib')){ob_end_flush();}?>
-*/
-var jsfiles = new Array(
-"../../pacotes/yui290/build/utilities/utilities.js",
-"../../pacotes/yui290/build/yahoo-dom-event/yahoo-dom-event.js",
-"../../pacotes/yui290/build/element/element-min.js",
-"../../pacotes/yui290/build/datasource/datasource-min.js",
-"../../pacotes/yui290/build/datatable/datatable-min.js",
-"../../pacotes/yui290/build/button/button-min.js",
-"../../pacotes/yui290/build/dragdrop/dragdrop-min.js",
-"../../pacotes/yui290/build/container/container-min.js",
-"../../pacotes/yui290/build/connection/connection-min.js",
-"../../pacotes/yui290/build/treeview/treeview.js",
-"../../pacotes/yui290/build/json/json-min.js",
-"../../pacotes/yui290/build/menu/menu-min.js",
-"../../pacotes/yui290/build/editor/editor-min.js"
-);
-//
-//arquivos css
-//
-var cssfiles =new Array(
-"../html/admin.css",
-"../../pacotes/yui290/build/fonts/fonts-min.css",
-"../../pacotes/yui290/build/datatable/assets/skins/sam/datatable.css",
-"../../pacotes/yui290/build/button/assets/skins/sam/button.css",
-"../../pacotes/yui290/build/container/assets/skins/sam/container.css",
-"../../pacotes/yui290/build/treeview/assets/skins/sam/treeview.css",
-"../../pacotes/yui290/build/editor/assets/skins/sam/editor.css"
-);
-//
-//carrega os arquivos js
-//
-var allScriptTags = "";
-for (var i = 0; i < jsfiles.length; i++)
-{
-	var currentScriptTag = "<script src='" + scriptLocation + jsfiles[i] + "'></script>";
-	allScriptTags += currentScriptTag;
-}
-document.write(allScriptTags);
-//
-//carrega os arquivos css
-//
-var allCssTags = "";
-for (var i = 0; i < cssfiles.length; i++)
-{
-	var currentCssTag = "<link rel='stylesheet' type='text/css' href='" + scriptLocation + cssfiles[i] + "'/>";
-	allCssTags += currentCssTag;
-}
-document.write(allCssTags);
-
+	//
+	//arquivos javascript que ser&atilde;o carregados
+	//
+	/*
+	<?php if(extension_loaded('zlib')){ob_start('ob_gzhandler');} header("Content-type: text/javascript"); ?>
+	<?php if(extension_loaded('zlib')){ob_end_flush();}?>
+	*/
+	var jsfiles = new Array(
+	"../../pacotes/yui290/build/utilities/utilities.js",
+	"../../pacotes/yui290/build/yahoo-dom-event/yahoo-dom-event.js",
+	"../../pacotes/yui290/build/element/element-min.js",
+	"../../pacotes/yui290/build/datasource/datasource-min.js",
+	"../../pacotes/yui290/build/datatable/datatable-min.js",
+	"../../pacotes/yui290/build/button/button-min.js",
+	"../../pacotes/yui290/build/dragdrop/dragdrop-min.js",
+	"../../pacotes/yui290/build/container/container-min.js",
+	"../../pacotes/yui290/build/connection/connection-min.js",
+	"../../pacotes/yui290/build/treeview/treeview.js",
+	"../../pacotes/yui290/build/json/json-min.js",
+	"../../pacotes/yui290/build/menu/menu-min.js",
+	"../../pacotes/yui290/build/editor/editor-min.js"
+	);
+	//
+	//arquivos css
+	//
+	var cssfiles =new Array(
+	"../html/admin.css",
+	"../../pacotes/yui290/build/fonts/fonts-min.css",
+	"../../pacotes/yui290/build/datatable/assets/skins/sam/datatable.css",
+	"../../pacotes/yui290/build/button/assets/skins/sam/button.css",
+	"../../pacotes/yui290/build/container/assets/skins/sam/container.css",
+	"../../pacotes/yui290/build/treeview/assets/skins/sam/treeview.css",
+	"../../pacotes/yui290/build/editor/assets/skins/sam/editor.css"
+	);
+	//
+	//carrega os arquivos js
+	//
+	var allScriptTags = "";
+	for (var i = 0; i < jsfiles.length; i++)
+	{
+		var currentScriptTag = "<script src='" + scriptLocation + jsfiles[i] + "'></script>";
+		allScriptTags += currentScriptTag;
+	}
+	document.write(allScriptTags);
+	//
+	//carrega os arquivos css
+	//
+	var allCssTags = "";
+	for (var i = 0; i < cssfiles.length; i++)
+	{
+		var currentCssTag = "<link rel='stylesheet' type='text/css' href='" + scriptLocation + cssfiles[i] + "'/>";
+		allCssTags += currentCssTag;
+	}
+	document.write(allCssTags);
+})();
 
 
 

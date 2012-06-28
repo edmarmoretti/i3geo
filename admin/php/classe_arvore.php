@@ -1,8 +1,8 @@
 <?php
 /*
-Title: classe_arvore.php
+ Title: classe_arvore.php
 
-Funções para montagem da árvore de temas
+Fun&ccedil;&otilde;es para montagem da &aacute;rvore de temas
 
 Licenca:
 
@@ -10,20 +10,20 @@ GPL2
 
 i3Geo Interface Integrada de Ferramentas de Geoprocessamento para Internet
 
-Direitos Autorais Reservados (c) 2006 Ministério do Meio Ambiente Brasil
+Direitos Autorais Reservados (c) 2006 Minist&eacute;rio do Meio Ambiente Brasil
 Desenvolvedor: Edmar Moretti edmar.moretti@mma.gov.br
 
-Este programa é software livre; você pode redistribuí-lo
-e/ou modificá-lo sob os termos da Licença Pública Geral
+Este programa &eacute; software livre; voc&ecirc; pode redistribu&iacute;-lo
+e/ou modific&aacute;-lo sob os termos da Licen&ccedil;a P&uacute;blica Geral
 GNU conforme publicada pela Free Software Foundation;
 
-Este programa é distribuído na expectativa de que seja útil,
-porém, SEM NENHUMA GARANTIA; nem mesmo a garantia implícita
-de COMERCIABILIDADE OU ADEQUAÇÃO A UMA FINALIDADE ESPECÍFICA.
-Consulte a Licença Pública Geral do GNU para mais detalhes.
-Você deve ter recebido uma cópia da Licença Pública Geral do
-GNU junto com este programa; se não, escreva para a
-Free Software Foundation, Inc., no endereço
+Este programa &eacute; distribu&iacute;do na expectativa de que seja &uacute;til,
+por&eacute;m, SEM NENHUMA GARANTIA; nem mesmo a garantia impl&iacute;cita
+de COMERCIABILIDADE OU ADEQUA&Ccedil;&Atilde;O A UMA FINALIDADE ESPEC&Iacute;FICA.
+Consulte a Licen&ccedil;a P&uacute;blica Geral do GNU para mais detalhes.
+Voc&ecirc; deve ter recebido uma cópia da Licen&ccedil;a P&uacute;blica Geral do
+	GNU junto com este programa; se n&atilde;o, escreva para a
+Free Software Foundation, Inc., no endere&ccedil;o
 59 Temple Street, Suite 330, Boston, MA 02111-1307 USA.
 
 Arquivo:
@@ -31,11 +31,11 @@ Arquivo:
 i3geo/admin/php/classe_arvore.php
 */
 /*
-Classe: Arvore
+ Classe: Arvore
 
-Classe utilizada para compor a árvore de temas ou obter dados específicos da árvore.
+Classe utilizada para compor a &aacute;rvore de temas ou obter dados espec&iacute;ficos da &aacute;rvore.
 
-É utilizada por várias operações do i3Geo, principalmente pela <classe_menutemas>
+&Eacute; utilizada por v&aacute;rias opera&ccedil;&otilde;es do i3Geo, principalmente pela <classe_menutemas>
 */
 class Arvore
 {
@@ -52,96 +52,114 @@ class Arvore
 	//public $sql_temas = "select * from i3geoadmin_temas ";
 	//temas de um subgrupo
 	//public $sql_temasSubgrupo = "select i3geoadmin_temas.tipoa_tema, i3geoadmin_temas.codigo_tema,i3geoadmin_temas.tags_tema,i3geoadmin_n3.id_n3,i3geoadmin_temas.nome_tema,i3geoadmin_n3.publicado,i3geoadmin_n3.n3_perfil,i3geoadmin_n3.id_tema,i3geoadmin_temas.download_tema,i3geoadmin_temas.ogc_tema from i3geoadmin_n3 LEFT JOIN i3geoadmin_temas ON i3geoadmin_n3.id_tema = i3geoadmin_temas.id_tema ";
-/*
-Function: __construct
+	/*
+	 Function: __construct
 
-Cria um objeto Arvore 
+	Cria um objeto Arvore
 
-Parametros:
+	Parametros:
 
-locaplic {string} - localização do i3geo no sistema de arquivos
+	locaplic {string} - localiza&ccedil;&atilde;o do i3geo no sistema de arquivos
 
-idioma {string} - default = "pt"
-*/ 
+	idioma {string} - default = "pt"
+	*/
 	function __construct($locaplic,$idioma="pt")
 	{
 		$this->idioma = $idioma;
 		if($idioma == "pt")
-		{$coluna = "nome_grupo";}
+		{
+			$coluna = "nome_grupo";
+		}
 		else
-		{$coluna = $idioma;}
+		{$coluna = $idioma;
+		}
 		$this->sql_grupos = "select i3geoadmin_grupos.$coluna as nome_grupo,id_n1,id_menu,i3geoadmin_n1.publicado,n1_perfil from i3geoadmin_n1 LEFT JOIN i3geoadmin_grupos ON i3geoadmin_n1.id_grupo = i3geoadmin_grupos.id_grupo ";
 
 		if($idioma == "pt")
-		{$coluna = "nome_subgrupo";}
+		{
+			$coluna = "nome_subgrupo";
+		}
 		else
-		{$coluna = $idioma;}
+		{$coluna = $idioma;
+		}
 		$this->sql_subgrupos = "select i3geoadmin_subgrupos.$coluna as nome_subgrupo,i3geoadmin_n2.id_n2,i3geoadmin_n2.publicado,i3geoadmin_n2.n2_perfil from i3geoadmin_n2 LEFT JOIN i3geoadmin_subgrupos ON i3geoadmin_n2.id_subgrupo = i3geoadmin_subgrupos.id_subgrupo ";
 
 		if($idioma == "pt")
-		{$coluna = "nome_tema";}
+		{
+			$coluna = "nome_tema";
+		}
 		else
-		{$coluna = $idioma;}
+		{$coluna = $idioma;
+		}
 		$this->sql_temasraiz = "select id_raiz,i3geoadmin_raiz.id_tema,$coluna as nome_tema,tipoa_tema,perfil FROM i3geoadmin_raiz LEFT JOIN i3geoadmin_temas ON i3geoadmin_temas.id_tema = i3geoadmin_raiz.id_tema ";
 		$this->sql_temasSubgrupo = "select i3geoadmin_temas.tipoa_tema, i3geoadmin_temas.codigo_tema,i3geoadmin_temas.tags_tema,i3geoadmin_n3.id_n3,i3geoadmin_temas.$coluna as nome_tema,i3geoadmin_n3.publicado,i3geoadmin_n3.n3_perfil,i3geoadmin_n3.id_tema,i3geoadmin_temas.download_tema,i3geoadmin_temas.ogc_tema from i3geoadmin_n3 LEFT JOIN i3geoadmin_temas ON i3geoadmin_n3.id_tema = i3geoadmin_temas.id_tema ";
 
 		//$this->sql_temas = "select kmz_tema,nacessos,id_tema,kml_tema,ogc_tema,download_tema,tags_tema,tipoa_tema,link_tema,desc_tema,$coluna as nome_tema,codigo_tema from i3geoadmin_temas ";
 
-		$this->sql_temas = "select kmz_tema,b.soma as nacessos,id_tema,kml_tema,ogc_tema,download_tema,tags_tema,tipoa_tema,link_tema,desc_tema,$coluna as nome_tema,codigo_tema  from i3geoadmin_temas as a,(SELECT c.codigo_tema codigo_soma,sum( r.nacessos) as soma FROM i3geoadmin_temas c LEFT JOIN i3geoadmin_acessostema r ON (c.codigo_tema = r.codigo_tema) group by  c.codigo_tema) as b WHERE a.codigo_tema = b.codigo_soma	";	
-		
+		$this->sql_temas = "select kmz_tema,b.soma as nacessos,id_tema,kml_tema,ogc_tema,download_tema,tags_tema,tipoa_tema,link_tema,desc_tema,$coluna as nome_tema,codigo_tema  from i3geoadmin_temas as a,(SELECT c.codigo_tema codigo_soma,sum( r.nacessos) as soma FROM i3geoadmin_temas c LEFT JOIN i3geoadmin_acessostema r ON (c.codigo_tema = r.codigo_tema) group by  c.codigo_tema) as b WHERE a.codigo_tema = b.codigo_soma	";
+
 		$this->locaplic = $locaplic;
 		$dbh = "";
 		error_reporting(0);
 		include($locaplic."/admin/php/conexao.php");
 		if(!isset($convUTF))
-		{$convUTF = true;}
+		{
+			$convUTF = true;
+		}
 		$this->convUTF = $convUTF;
 		$this->dbh = $dbh;
 		//
-		//verifica se o ip atual está cadastrado como um dos editores
-		//editores podem ver as coisas marcadas como não publicado
-		//no sistema de administração
+		//verifica se o ip atual est&aacute; cadastrado como um dos editores
+		//editores podem ver as coisas marcadas como n&atilde;o publicado
+		//no sistema de administra&ccedil;&atilde;o
 		//
 		include($locaplic."/ms_configura.php");
 		$this->editor = false;
 		if($editores != "")
-		{$this->editor = $this->verificaeditores($editores);}
+		{
+			$this->editor = $this->verificaeditores($editores);
+		}
 		$this->editores = $editores;
 		$this->pubsql = " (publicado != 'NAO' or publicado isnull) and ";
 		if($this->editor)
-		{$this->pubsql = "";}
+		{
+			$this->pubsql = "";
+		}
 	}
 	function __destruct()
 	{
 		$this->dbh = null;
 		$this->dbhw = null;
 	}
-/*
-Function: pegaListaDeMenus
+	/*
+	 Function: pegaListaDeMenus
 
-Retorna a lista de menus
+	Retorna a lista de menus
 
-Parametros:
+	Parametros:
 
-perfil {string} - considera apenas esse perfil
+	perfil {string} - considera apenas esse perfil
 
-Return:
+	Return:
 
-{array}
-*/
+	{array}
+	*/
 	function pegaListaDeMenus($perfil)
 	{
 		if($this->idioma == "pt")
-		{$coluna = "nome_menu";}
+		{
+			$coluna = "nome_menu";
+		}
 		else
-		{$coluna = $this->idioma;}
+		{$coluna = $this->idioma;
+		}
 		if($this->editor == true)
 		{
 			$perfil = "";
 			$sql = "SELECT publicado_menu,'' as perfil_menu,aberto,desc_menu,id_menu,$coluna as nome_menu from i3geoadmin_menus order by nome_menu";
 		}
 		else
-		$sql = "SELECT publicado_menu,perfil_menu,aberto,desc_menu,id_menu,$coluna as nome_menu from i3geoadmin_menus where publicado_menu != 'NAO' or publicado_menu isnull order by nome_menu";
+			$sql = "SELECT publicado_menu,perfil_menu,aberto,desc_menu,id_menu,$coluna as nome_menu from i3geoadmin_menus where publicado_menu != 'NAO' or publicado_menu isnull order by nome_menu";
 		$regs = $this->execSQL($sql);
 		$resultado = array();
 		foreach($regs as $reg)
@@ -152,32 +170,34 @@ Return:
 			{
 				$status = "fechado";
 				if(strtolower($reg["aberto"]) == "sim")
-				$status = "aberto";
+					$status = "aberto";
 				$url = "";
 				$resultado[] = array("desc"=>$this->converte($reg["desc_menu"]),"publicado"=>$reg["publicado_menu"],"nomemenu"=>$this->converte($reg["nome_menu"]),"idmenu"=>$reg["id_menu"],"arquivo"=>"","status"=>$status,"url"=>$url);
 			}
 		}
 		return $resultado;
 	}
-/*
-Function: procuraTemas
+	/*
+	 Function: procuraTemas
 
-Localiza temas conforme uma palavra de busca
+	Localiza temas conforme uma palavra de busca
 
-Parametros:
+	Parametros:
 
-procurar {string} - palavra de busca
+	procurar {string} - palavra de busca
 
-perfil {string} - considera apenas esse perfil
+	perfil {string} - considera apenas esse perfil
 
-Return:
+	Return:
 
-{array}
-*/
+	{array}
+	*/
 	function procuraTemas ($procurar,$perfil)
 	{
 		if($procurar != "")
-		{$procurar = $this->removeAcentos($procurar);}
+		{
+			$procurar = $this->removeAcentos($procurar);
+		}
 		$menus = $this->pegaListaDeMenus($perfil);
 		$resultado = array();
 		$subgrupo = array();
@@ -197,7 +217,7 @@ Return:
 					foreach($temasR as $tema)
 					{
 						$a = $tema["perfil"];
-						$a = str_replace(" ",",",$a);								
+						$a = str_replace(" ",",",$a);
 						if($this->verificaOcorrencia($perfil,explode(",",$a)))
 						{
 							$t = $this->pegaTema($tema["id_tema"]);
@@ -208,25 +228,35 @@ Return:
 							$nome1 = $this->removeAcentos(mb_convert_encoding($tema["nome_tema"],"ISO-8859-1","UTF-8"));
 							$miniatura = "nao";
 							if(file_exists($this->locaplic."/temas/miniaturas/".$t["codigo_tema"].".map.mini.png"))
-							{$miniatura = "sim";}
+							{
+								$miniatura = "sim";
+							}
 							$down = "sim";
 							if (strtolower($t["download_tema"]) == "nao")
-							{$down = "nao";}
+							{
+								$down = "nao";
+							}
 							$texto = array("miniatura"=>$miniatura,"tid"=>$t["codigo_tema"],"nome"=>$this->converte($tema["nome_tema"]),"link"=>$t["link_tema"],"download"=>$down);
 							if($procurar == "")
-							{$temasRaizGrupo[] = $texto;}
+							{
+								$temasRaizGrupo[] = $texto;
+							}
 							else
 							{
 								if (stristr($nome,$procurar) || stristr($nome1,$procurar))
-								{$temasRaizGrupo[] = $texto;}
+								{
+									$temasRaizGrupo[] = $texto;
+								}
 								else
 								{
 									if (stristr($tags,$procurar) || stristr($tags1,$procurar))
-									{$temasRaizGrupo[] = $texto;}
+									{
+										$temasRaizGrupo[] = $texto;
+									}
 								}
 							}
 						}
-					}				
+					}
 					foreach($sgrupos["subgrupos"] as $sgrupo)
 					{
 						$a = $sgrupo["n2_perfil"];
@@ -237,7 +267,7 @@ Return:
 							foreach ($temas as $tema)
 							{
 								$a = $tema["n3_perfil"];
-								$a = str_replace(" ",",",$a);								
+								$a = str_replace(" ",",",$a);
 								if($this->verificaOcorrencia($perfil,explode(",",$a)))
 								{
 									$t = $this->pegaTema($tema["id_tema"]);
@@ -248,53 +278,67 @@ Return:
 									$nome1 = $this->removeAcentos(mb_convert_encoding($tema["nome_tema"],"ISO-8859-1","UTF-8"));
 									$miniatura = "nao";
 									if(file_exists($this->locaplic."/temas/miniaturas/".$tema["codigo_tema"].".map.mini.png"))
-									{$miniatura = "sim";}
+									{
+										$miniatura = "sim";
+									}
 									$down = "sim";
 									if (strtolower($t["download_tema"]) == "nao")
-									{$down = "nao";}
+									{
+										$down = "nao";
+									}
 									$texto = array("miniatura"=>$miniatura,"tid"=>$tema["codigo_tema"],"nome"=>$this->converte($tema["nome_tema"]),"link"=>$t["link_tema"],"download"=>$down);
 									if($procurar == "")
-									{$resultado[] = $texto;}
+									{
+										$resultado[] = $texto;
+									}
 									else
 									{
 										if (stristr($nome,$procurar) || stristr($nome1,$procurar))
-										{$resultado[] = $texto;}
+										{
+											$resultado[] = $texto;
+										}
 										else
 										{
 											if (stristr($tags,$procurar) || stristr($tags1,$procurar))
-											{$resultado[] = $texto;}
+											{
+												$resultado[] = $texto;
+											}
 										}
 									}
 								}
 							}
 						}
 						if (count($resultado) > 0)
-						{$subgrupo[] = array("subgrupo"=>$this->converte($sgrupo["nome_subgrupo"]),"temas"=>$resultado);}
+						{
+							$subgrupo[] = array("subgrupo"=>$this->converte($sgrupo["nome_subgrupo"]),"temas"=>$resultado);
+						}
 						$resultado = array();
-					}	
+					}
 				}
 				if (count($subgrupo) > 0 || count($temasRaizGrupo) > 0)
-				{$final[] = array("grupo"=>$this->converte($grupo["nome_grupo"]),"temas"=>$temasRaizGrupo,"subgrupos"=>$subgrupo);}
-				$subgrupo = array();				
+				{
+					$final[] = array("grupo"=>$this->converte($grupo["nome_grupo"]),"temas"=>$temasRaizGrupo,"subgrupos"=>$subgrupo);
+				}
+				$subgrupo = array();
 			}
 		}
 		return $final;
 	}
-/*
-Function: procuraTemasEstrela
+	/*
+	 Function: procuraTemasEstrela
 
-Localiza temas que têm um determinado número (nível) de estrelas
+	Localiza temas que t&ecirc;m um determinado n&uacute;mero (n&iacute;vel) de estrelas
 
-Parametros:
+	Parametros:
 
-nivel {numeric} - número de estrelas
+	nivel {numeric} - n&uacute;mero de estrelas
 
-perfil {string} - considera apenas esse perfil
+	perfil {string} - considera apenas esse perfil
 
-Return:
+	Return:
 
-{array}
-*/
+	{array}
+	*/
 	function procuraTemasEstrela($nivel,$fatorestrela,$perfil)
 	{
 		$menus = $this->pegaListaDeMenus($perfil);
@@ -316,7 +360,7 @@ Return:
 					foreach($temasR as $tema)
 					{
 						$a = $tema["perfil"];
-						$a = str_replace(" ",",",$a);								
+						$a = str_replace(" ",",",$a);
 						if($this->verificaOcorrencia($perfil,explode(",",$a)))
 						{
 							$t = $this->pegaTema($tema["id_tema"]);
@@ -327,18 +371,26 @@ Return:
 							$nome1 = $this->removeAcentos(mb_convert_encoding($tema["nome_tema"],"ISO-8859-1","UTF-8"));
 							$miniatura = "nao";
 							if(file_exists($this->locaplic."/temas/miniaturas/".$t["codigo_tema"].".map.mini.png"))
-							{$miniatura = "sim";}
+							{
+								$miniatura = "sim";
+							}
 							$down = "sim";
 							if (strtolower($t["download_tema"]) == "nao")
-							{$down = "nao";}
+							{
+								$down = "nao";
+							}
 							$texto = array("miniatura"=>$miniatura,"tid"=>$t["codigo_tema"],"nome"=>$this->converte($tema["nome_tema"]),"link"=>$t["link_tema"],"download"=>$down);
-							$n = intval($t["nacessos"] / $fatorestrela);							
-							if($n >= 5){$n = 5;}
-							
+							$n = intval($t["nacessos"] / $fatorestrela);
+							if($n >= 5){
+								$n = 5;
+							}
+								
 							if ($n == $nivel)
-							{$temasRaizGrupo[] = $texto;}
+							{
+								$temasRaizGrupo[] = $texto;
+							}
 						}
-					}				
+					}
 					foreach($sgrupos["subgrupos"] as $sgrupo)
 					{
 						$a = $sgrupo["n2_perfil"];
@@ -349,7 +401,7 @@ Return:
 							foreach ($temas as $tema)
 							{
 								$a = $tema["n3_perfil"];
-								$a = str_replace(" ",",",$a);								
+								$a = str_replace(" ",",",$a);
 								if($this->verificaOcorrencia($perfil,explode(",",$a)))
 								{
 									$t = $this->pegaTema($tema["id_tema"]);
@@ -360,148 +412,162 @@ Return:
 									$nome1 = $this->removeAcentos(mb_convert_encoding($tema["nome_tema"],"ISO-8859-1","UTF-8"));
 									$miniatura = "nao";
 									if(file_exists($this->locaplic."/temas/miniaturas/".$tema["codigo_tema"].".map.mini.png"))
-									{$miniatura = "sim";}
+									{
+										$miniatura = "sim";
+									}
 									$down = "sim";
 									if (strtolower($t["download_tema"]) == "nao")
-									{$down = "nao";}
+									{
+										$down = "nao";
+									}
 									$texto = array("miniatura"=>$miniatura,"tid"=>$tema["codigo_tema"],"nome"=>$this->converte($tema["nome_tema"]),"link"=>$t["link_tema"],"download"=>$down);
-									$n = abs($t["nacessos"] / $fatorestrela);		
-									if($n >= 5){$n = 5;}
+									$n = abs($t["nacessos"] / $fatorestrela);
+									if($n >= 5){
+										$n = 5;
+									}
 									if ($n == $nivel)
-									{$resultado[] = $texto;}
+									{
+										$resultado[] = $texto;
+									}
 								}
 							}
 						}
 						if (count($resultado) > 0)
-						{$subgrupo[] = array("subgrupo"=>$this->converte($sgrupo["nome_subgrupo"]),"temas"=>$resultado);}
+						{
+							$subgrupo[] = array("subgrupo"=>$this->converte($sgrupo["nome_subgrupo"]),"temas"=>$resultado);
+						}
 						$resultado = array();
-					}	
+					}
 				}
 				if (count($subgrupo) > 0 || count($temasRaizGrupo) > 0)
-				{$final[] = array("grupo"=>$this->converte($grupo["nome_grupo"]),"temas"=>$temasRaizGrupo,"subgrupos"=>$subgrupo);}
-				$subgrupo = array();				
+				{
+					$final[] = array("grupo"=>$this->converte($grupo["nome_grupo"]),"temas"=>$temasRaizGrupo,"subgrupos"=>$subgrupo);
+				}
+				$subgrupo = array();
 			}
 		}
 		return $final;
 	}
-/*
-Function: pegaGruposMenu
+	/*
+	 Function: pegaGruposMenu
 
-Retorna a lista de grupos de um menu
+	Retorna a lista de grupos de um menu
 
-Parametros:
+	Parametros:
 
-id_menu {string}
+	id_menu {string}
 
-Return:
+	Return:
 
-{array}
-*/	
+	{array}
+	*/
 	function pegaGruposMenu($id_menu)
 	{
 		$grupos = $this->execSQL($this->sql_grupos."where ".$this->pubsql." id_menu='$id_menu' order by ordem");
 		$raiz = $this->execSQL($this->sql_temasraiz."where i3geoadmin_raiz.id_menu='$id_menu' and i3geoadmin_raiz.nivel = 0 order by ordem");
-		return array("raiz"=>$raiz,"grupos"=>$grupos);		
+		return array("raiz"=>$raiz,"grupos"=>$grupos);
 	}
-/*
-Function: pegaSubgruposGrupo
+	/*
+	 Function: pegaSubgruposGrupo
 
-Retorna a lista de subgrupos de um grupo
+	Retorna a lista de subgrupos de um grupo
 
-Parametros:
+	Parametros:
 
-id_menu {string}
+	id_menu {string}
 
-id_n1 {string} - id do grupo
+	id_n1 {string} - id do grupo
 
-Return:
+	Return:
 
-{array}
-*/
+	{array}
+	*/
 	function pegaSubgruposGrupo($id_menu,$id_n1)
 	{
 		$subgrupos = $this->execSQL($this->sql_subgrupos."where ".$this->pubsql." i3geoadmin_n2.id_n1='$id_n1' order by ordem");
 		$raiz = $this->execSQL($this->sql_temasraiz."where i3geoadmin_raiz.nivel = 1 and i3geoadmin_raiz.id_nivel = $id_n1 order by ordem");
-		return array("raiz"=>$raiz,"subgrupos"=>$subgrupos);		
+		return array("raiz"=>$raiz,"subgrupos"=>$subgrupos);
 	}
-/*
-Function: pegaTemasRaizGrupo
+	/*
+	 Function: pegaTemasRaizGrupo
 
-Retorna a lista de temas da raiz de um grupo
+	Retorna a lista de temas da raiz de um grupo
 
-Parametros:
+	Parametros:
 
-id_menu {string}
+	id_menu {string}
 
-id_n1 {string} - id do grupo
+	id_n1 {string} - id do grupo
 
-Return:
+	Return:
 
-{array}
-*/
+	{array}
+	*/
 	function pegaTemasRaizGrupo($id_menu,$id_n1)
 	{
 		return $this->execSQL($this->sql_temasraiz."where i3geoadmin_raiz.nivel = 1 and i3geoadmin_raiz.id_nivel = $id_n1 order by ordem");
 	}
-/*
-Function: pegaTema
+	/*
+	 Function: pegaTema
 
-Retorna os dados de um tema
+	Retorna os dados de um tema
 
-Parametros:
+	Parametros:
 
-id_tema {string}
+	id_tema {string}
 
-Return:
+	Return:
 
-{array}
-*/
+	{array}
+	*/
 	function pegaTema($id_tema)
 	{
 		$q =  $this->execSQL($this->sql_temas." and id_tema = '$id_tema' ");
 		if($q)
-		{return $q;}
+		{
+			return $q;
+		}
 		else{
 			//caso de banco de dados antigo
-			$sql = "select kmz_tema,'0' as nacessos,id_tema,kml_tema,ogc_tema,download_tema,tags_tema,tipoa_tema,link_tema,desc_tema,nome_tema,codigo_tema  from i3geoadmin_temas	";	
+			$sql = "select kmz_tema,'0' as nacessos,id_tema,kml_tema,ogc_tema,download_tema,tags_tema,tipoa_tema,link_tema,desc_tema,nome_tema,codigo_tema  from i3geoadmin_temas	";
 			$q = $this->execSQL($sql." where id_tema = '$id_tema' ");
 			return $q;
 		}
 	}
-/*
-Function: pegaTemasSubGrupo
+	/*
+	 Function: pegaTemasSubGrupo
 
-Retorna os temas de um subgrupo
+	Retorna os temas de um subgrupo
 
-Parametros:
+	Parametros:
 
-id_n2 {string} - id do subgrupo
+	id_n2 {string} - id do subgrupo
 
-Return:
+	Return:
 
-{array}
-*/
+	{array}
+	*/
 	function pegaTemasSubGrupo($id_n2)
 	{
 		return $this->execSQL($this->sql_temasSubgrupo."where ".$this->pubsql." i3geoadmin_n3.id_n2='$id_n2' order by ordem");
 	}
-/*
-Function: formataGruposMenu
+	/*
+	 Function: formataGruposMenu
 
-Retorna os grupos e temas na raiz de um menu, formatados no padrão da árvore
+	Retorna os grupos e temas na raiz de um menu, formatados no padr&atilde;o da &aacute;rvore
 
-Parametros:
+	Parametros:
 
-id_menu {string}
+	id_menu {string}
 
-perfil {string}
+	perfil {string}
 
-listasgrupos {string} - sim|nao
+	listasgrupos {string} - sim|nao
 
-Return:
+	Return:
 
-{array}
-*/
+	{array}
+	*/
 	function formataGruposMenu ($id_menu,$perfil,$listasgrupos)
 	{
 		//error_reporting(E_ALL);
@@ -509,9 +575,13 @@ Return:
 		$resultado = array();
 		$temasraiz = array();
 		foreach($dados["raiz"] as $temar)
-		{$temasraiz[] = $this->formataTema($temar["id_tema"]);}
+		{
+			$temasraiz[] = $this->formataTema($temar["id_tema"]);
+		}
 		if(count($dados["grupos"]) == 0)
-		{$grupos[] = array();}
+		{
+			$grupos[] = array();
+		}
 		foreach($dados["grupos"] as $grupo)
 		{
 			$a = $grupo["n1_perfil"];
@@ -523,7 +593,9 @@ Return:
 				$grupodown = "nao";
 				$grupoogc = "nao";
 				foreach($raizgrupo as $tema)
-				{$temas[] = $this->formataTema($tema["id_tema"]);}
+				{
+					$temas[] = $this->formataTema($tema["id_tema"]);
+				}
 				if($temas > 0)
 				{
 					$grupodown = "sim";
@@ -533,7 +605,7 @@ Return:
 				if($listasgrupos=="sim")
 				{
 					$dadossubgrupos = $this->pegaSubgruposGrupo($id_menu,$grupo["id_n1"]);
-					
+						
 					foreach($dadossubgrupos["subgrupos"] as $sgrupo)
 					{
 						$a = $sgrupo["n2_perfil"];
@@ -547,16 +619,20 @@ Return:
 							foreach($listaT as $tema)
 							{
 								if(strtolower($tema["tipoa_tema"]) != "wms")
-								{	
+								{
 									if (strtolower($tema["download_tema"]) != "nao")
-									{$down = "sim";$grupodown = "sim";}
-									
+									{
+										$down = "sim";$grupodown = "sim";
+									}
+										
 									if (strtolower($tema["ogc_tema"]) != "nao")
-									{$ogc = "sim";$grupoogc = "sim";}
+									{
+										$ogc = "sim";$grupoogc = "sim";
+									}
 								}
 							}
 							if(count($listaT) > 0)
-							$subgrupos[] = array("id_n2"=>$sgrupo["id_n2"],"publicado"=>($sgrupo["publicado"]),"nome"=>$this->converte($sgrupo["nome_subgrupo"]),"download"=>$down,"ogc"=>$ogc);
+								$subgrupos[] = array("id_n2"=>$sgrupo["id_n2"],"publicado"=>($sgrupo["publicado"]),"nome"=>$this->converte($sgrupo["nome_subgrupo"]),"download"=>$down,"ogc"=>$ogc);
 						}
 					}
 				}
@@ -568,34 +644,38 @@ Return:
 		$sistemas = array();
 		$grupos[] = array("idmenu"=>$id_menu);
 		$grupos[] = array("sistemas"=>"");
-		return($grupos);		
+		return($grupos);
 	}
-/*
-Function: formataSubgruposGrupo
+	/*
+	 Function: formataSubgruposGrupo
 
-Retorna os subgrupos e temas na raiz de um grupo, formatados no padrão da árvore
+	Retorna os subgrupos e temas na raiz de um grupo, formatados no padr&atilde;o da &aacute;rvore
 
-Parametros:
+	Parametros:
 
-id_menu {string}
+	id_menu {string}
 
-id_n1 {string} - id do grupo
+	id_n1 {string} - id do grupo
 
-perfil {string}
+	perfil {string}
 
-Return:
+	Return:
 
-{array}
-*/
+	{array}
+	*/
 	function formataSubgruposGrupo ($id_menu,$id_n1,$perfil)
 	{
 		$dados = $this->pegaSubgruposGrupo($id_menu,$id_n1);
 		$resultado = array();
 		$temasraiz = array();
 		foreach($dados["raiz"] as $temar)
-		{$temasraiz[] = $this->formataTema($temar["id_tema"]);}
+		{
+			$temasraiz[] = $this->formataTema($temar["id_tema"]);
+		}
 		if(count($dados["subgrupos"]) == 0)
-		{$sgrupos[] = array();}
+		{
+			$sgrupos[] = array();
+		}
 		$subgrupos = array();
 		foreach($dados["subgrupos"] as $sgrupo)
 		{
@@ -611,32 +691,38 @@ Return:
 					if(strtolower($tema["tipoa_tema"]) != "wms")
 					{
 						if (strtolower($tema["download_tema"]) != "nao")
-						{$down = "sim";}
+						{
+							$down = "sim";
+						}
 						if (strtolower($tema["ogc_tema"]) != "nao")
-						{$ogc = "sim";}
+						{
+							$ogc = "sim";
+						}
 					}
 				}
 				if(count($listaT) > 0)
-				{$subgrupos[] = array("publicado"=>($sgrupo["publicado"]),"id_n2"=>($sgrupo["id_n2"]),"nome"=>$this->converte($sgrupo["nome_subgrupo"]),"download"=>$down,"ogc"=>$ogc,"temas"=>$listaT);}
+				{
+					$subgrupos[] = array("publicado"=>($sgrupo["publicado"]),"id_n2"=>($sgrupo["id_n2"]),"nome"=>$this->converte($sgrupo["nome_subgrupo"]),"download"=>$down,"ogc"=>$ogc,"temas"=>$listaT);
+				}
 			}
 		}
 		return (array("subgrupo"=>$subgrupos,"temasgrupo"=>$temasraiz));
 	}
-/*
-Function: formataTemasSubgrupo
+	/*
+	 Function: formataTemasSubgrupo
 
-Retorna os temas de um subgrupo, formatados no padrão da árvore
+	Retorna os temas de um subgrupo, formatados no padr&atilde;o da &aacute;rvore
 
-Parametros:
+	Parametros:
 
-id_n2 {string} - id do subgrupo
+	id_n2 {string} - id do subgrupo
 
-perfil {string}
+	perfil {string}
 
-Return:
+	Return:
 
-{array}
-*/
+	{array}
+	*/
 	function formataTemasSubgrupo($id_n2,$perfil)
 	{
 		$dados = $this->pegaTemasSubGrupo($id_n2);
@@ -646,25 +732,27 @@ Return:
 			$a = $tema["n3_perfil"];
 			$a = str_replace(" ",",",$a);
 			if($this->verificaOcorrencia($perfil,explode(",",$a)))
-			{$temas[] = $this->formataTema($tema["id_tema"],$tema["publicado"]);}
+			{
+				$temas[] = $this->formataTema($tema["id_tema"],$tema["publicado"]);
+			}
 		}
 		return $temas;
 	}
-/*
-Function: formataTema
+	/*
+	 Function: formataTema
 
-Retorna os dados de um tema, formatados no padrão da árvore
+	Retorna os dados de um tema, formatados no padr&atilde;o da &aacute;rvore
 
-Parametros:
+	Parametros:
 
-id_tema {string}
+	id_tema {string}
 
-publicado {string} - SIM|NAO valor do índice "publicado" que será incluído no array de retorno
+	publicado {string} - SIM|NAO valor do &iacute;ndice "publicado" que ser&aacute; inclu&iacute;do no array de retorno
 
-Return:
+	Return:
 
-{array}
-*/
+	{array}
+	*/
 	function formataTema($id_tema,$publicado="SIM")
 	{
 		$recordset = $this->pegaTema($id_tema);
@@ -674,51 +762,70 @@ Return:
 		$link = " ";
 		$kmz = "nao";
 		if (strtolower($recordset["download_tema"]) == "nao")
-		{$down = "nao";}
+		{
+			$down = "nao";
+		}
 		if (strtolower($recordset["ogc_tema"]) == "nao")
-		{$ogc = "nao";}
+		{
+			$ogc = "nao";
+		}
 		if(strtolower($recordset["tipoa_tema"]) == "wms")
-		{$down = "nao";$ogc="nao";}
+		{
+			$down = "nao";$ogc="nao";
+		}
 		if ($recordset["link_tema"] != "")
-		{$link = $recordset["link_tema"];}
+		{
+			$link = $recordset["link_tema"];
+		}
 		if (strtolower($recordset["kmz_tema"]) == "sim")
-		{$kmz = "sim";}
-		return array("publicado"=>$publicado,"nacessos"=>($recordset["nacessos"]),"tid"=>($recordset["codigo_tema"]),"nome"=>$this->converte($recordset["nome_tema"]),"link"=>$link,"download"=>$down,"ogc"=>$ogc,"kmz"=>$kmz);		
+		{
+			$kmz = "sim";
+		}
+		return array("publicado"=>$publicado,"nacessos"=>($recordset["nacessos"]),"tid"=>($recordset["codigo_tema"]),"nome"=>$this->converte($recordset["nome_tema"]),"link"=>$link,"download"=>$down,"ogc"=>$ogc,"kmz"=>$kmz);
 	}
-/*
-Function: execSQL
+	/*
+	 Function: execSQL
 
-Executa um SQL no banco de administração
+	Executa um SQL no banco de administra&ccedil;&atilde;o
 
-Parametros:
+	Parametros:
 
-sql {string}
+	sql {string}
 
-Return:
+	Return:
 
-{array}
-*/
+	{array}
+	*/
 	function execSQL($sql)
 	{
-    	//echo "<br>".$sql;
+		//echo "<br>".$sql;
 		//error_reporting(E_ALL);
 		$q = $this->dbh->query($sql,PDO::FETCH_ASSOC);
 		if($q)
-    	{return $q->fetchAll();}
+		{
+			return $q->fetchAll();
+		}
 		else
-		{return false;}
+		{return false;
+		}
 	}
-/*
-Verifica se uma string ocorre em um array
-*/	
+	/*
+	 Verifica se uma string ocorre em um array
+	*/
 	function verificaOcorrencia($procurar,$em)
 	{
 		if(count($em) == 1 && $em[0] == "")
-		{$em = "";}
+		{
+			$em = "";
+		}
 		if($procurar == "" && $em == "")
-		{return true;}
+		{
+			return true;
+		}
 		if($em == "")
-		{return true;}		
+		{
+			return true;
+		}
 		$resultado = false;
 		if($procurar != "" && $em != "")
 		{
@@ -729,7 +836,9 @@ Verifica se uma string ocorre em um array
 				{
 					$p = trim($p);
 					if($p == $e)
-					{$resultado = true;}
+					{
+						$resultado = true;
+					}
 				}
 			}
 		}
@@ -746,24 +855,26 @@ Verifica se uma string ocorre em um array
 			else if(getenv("HTTP_X_FORWARDED_FOR")) $ip = getenv("HTTP_X_FORWARDED_FOR");
 			else if(getenv("REMOTE_ADDR")) $ip = getenv("REMOTE_ADDR");
 			else $ip = "UNKNOWN";
-			if ($e == $ip){$editor=true;}
+			if ($e == $ip){
+				$editor=true;
+			}
 		}
 		return $editor;
 	}
 	function removeAcentos($s)
 	{
-		$s = ereg_replace("[áàâã]","a",$s);
-		$s = ereg_replace("[ÁÀÂÃ]","A",$s);
-		$s = ereg_replace("[éèê]","e",$s);
-		$s = ereg_replace("[í]","i",$s);
-		$s = ereg_replace("[Í]","I",$s);
-		$s = ereg_replace("[ÉÈÊ]","E",$s);
-		$s = ereg_replace("[óòôõ]","o",$s);
-		$s = ereg_replace("[ÓÒÔÕ]","O",$s);
-		$s = ereg_replace("[úùû]","u",$s);
-		$s = ereg_replace("[ÚÙÛ]","U",$s);
-		$s = str_replace("ç","c",$s);
-		$s = str_replace("Ç","C",$s);
+		$s = ereg_replace("[&aacute;à&acirc;&atilde;]","a",$s);
+		$s = ereg_replace("[&Aacute;À&Acirc;&Atilde;]","A",$s);
+		$s = ereg_replace("[&eacute;è&ecirc;]","e",$s);
+		$s = ereg_replace("[&iacute;]","i",$s);
+		$s = ereg_replace("[&Iacute;]","I",$s);
+		$s = ereg_replace("[&Eacute;È&Ecirc;]","E",$s);
+		$s = ereg_replace("[óò&ocirc;&otilde;]","o",$s);
+		$s = ereg_replace("[ÓÒ&Ocirc;&Otilde;]","O",$s);
+		$s = ereg_replace("[&uacute;ùû]","u",$s);
+		$s = ereg_replace("[&Uacute;ÙÛ]","U",$s);
+		$s = str_replace("&ccedil;","c",$s);
+		$s = str_replace("&Ccedil;","C",$s);
 		//$str = htmlentities($s);
 		$str = preg_replace("/(&)([a-z])([a-z]+;)/i", '$2', $s);
 		$str = preg_replace("/[^A-Z0-9]/i", ' ', $str);
@@ -772,10 +883,10 @@ Verifica se uma string ocorre em um array
 	}
 	function converte($texto){
 		if($this->convUTF == true)
-		$texto = mb_convert_encoding($texto,mb_detect_encoding($texto),"UTF-8");
+			$texto = mb_convert_encoding($texto,mb_detect_encoding($texto),"UTF-8");
 		else
-		$texto = mb_convert_encoding($texto,mb_detect_encoding($texto),"ISO-8859-1");
-		return $texto;	
+			$texto = mb_convert_encoding($texto,mb_detect_encoding($texto),"ISO-8859-1");
+		return $texto;
 	}
 }
 ?>

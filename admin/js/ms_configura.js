@@ -1,7 +1,7 @@
 /*
 Title: ms_configura.js
 
-Funções que controlam a interface do editor das variáveis de inicialização
+Fun&ccedil;&otilde;es que controlam a interface do editor das vari&aacute;veis de inicializa&ccedil;&atilde;o
 
 Licenca:
 
@@ -9,20 +9,20 @@ GPL2
 
 i3Geo Interface Integrada de Ferramentas de Geoprocessamento para Internet
 
-Direitos Autorais Reservados (c) 2006 Ministério do Meio Ambiente Brasil
+Direitos Autorais Reservados (c) 2006 Minist&eacute;rio do Meio Ambiente Brasil
 Desenvolvedor: Edmar Moretti edmar.moretti@mma.gov.br
 
-Este programa é software livre; você pode redistribuí-lo
-e/ou modificá-lo sob os termos da Licença Pública Geral
+Este programa &eacute; software livre; voc&ecirc; pode redistribu&iacute;-lo
+e/ou modific&aacute;-lo sob os termos da Licen&ccedil;a P&uacute;blica Geral
 GNU conforme publicada pela Free Software Foundation;
 
-Este programa é distribuído na expectativa de que seja útil,
-porém, SEM NENHUMA GARANTIA; nem mesmo a garantia implícita
-de COMERCIABILIDADE OU ADEQUAÇÃO A UMA FINALIDADE ESPECÍFICA.
-Consulte a Licença Pública Geral do GNU para mais detalhes.
-Você deve ter recebido uma cópia da Licença Pública Geral do
-GNU junto com este programa; se não, escreva para a
-Free Software Foundation, Inc., no endereço
+Este programa &eacute; distribu&iacute;do na expectativa de que seja &uacute;til,
+por&eacute;m, SEM NENHUMA GARANTIA; nem mesmo a garantia impl&iacute;cita
+de COMERCIABILIDADE OU ADEQUA&Ccedil;&Atilde;O A UMA FINALIDADE ESPEC&Iacute;FICA.
+Consulte a Licen&ccedil;a P&uacute;blica Geral do GNU para mais detalhes.
+Voc&ecirc; deve ter recebido uma cópia da Licen&ccedil;a P&uacute;blica Geral do
+GNU junto com este programa; se n&atilde;o, escreva para a
+Free Software Foundation, Inc., no endere&ccedil;o
 59 Temple Street, Suite 330, Boston, MA 02111-1307 USA.
 
 Arquivo:
@@ -43,28 +43,28 @@ function initMenu()
 	new YAHOO.widget.Button("botao2",{ onclick: { fn: function(){window.open('../../testainstal.php');}} });
 	$parametros = {
 	"simples": [
-	{ mensagem: "Mensagem mostrada sempre que o i3geo é inicializado.",cabeca: "Mensagem de inicialização", variavel: "$mensagemInicia"},
-	{ mensagem: "Texto mostrado na barra superior do navegador e em alguns aplicativos do i3geo, como a versão mobile.",cabeca: "Título", variavel: "$tituloInstituicao"},
-	{ mensagem: "Diretório (caminho absoluto) utilizado para armazenar os mapfiles temporários e outros arquivos utilizados durante a operação do i3geo. Em sistemas Linux, você pode criar um link simbólico para esse diretório.",cabeca: "Diretório temporário", variavel: "$dir_tmp"},
+	{ mensagem: "Mensagem mostrada sempre que o i3geo &eacute; inicializado.",cabeca: "Mensagem de inicializa&ccedil;&atilde;o", variavel: "$mensagemInicia"},
+	{ mensagem: "Texto mostrado na barra superior do navegador e em alguns aplicativos do i3geo, como a vers&atilde;o mobile.",cabeca: "T&iacute;tulo", variavel: "$tituloInstituicao"},
+	{ mensagem: "Diretório (caminho absoluto) utilizado para armazenar os mapfiles tempor&aacute;rios e outros arquivos utilizados durante a opera&ccedil;&atilde;o do i3geo. Em sistemas Linux, voc&ecirc; pode criar um link simbólico para esse diretório.",cabeca: "Diretório tempor&aacute;rio", variavel: "$dir_tmp"},
 	{ mensagem: "Chave utilizada pelo Google Maps",cabeca: "Google maps", variavel: "$googleApiKey"},
-	{ mensagem: "Local no servidor (caminho absoluto) onde o i3geo está armazenado.",cabeca: "Localização do i3geo", variavel: "$locaplic"},
+	{ mensagem: "Local no servidor (caminho absoluto) onde o i3geo est&aacute; armazenado.",cabeca: "Localiza&ccedil;&atilde;o do i3geo", variavel: "$locaplic"},
 	{ mensagem: "Diretório onde ficam armazenados os arquivos de template HTML e mapfiles iniciais",cabeca: "Diretório aplicmap", variavel: "$temasaplic"},
-	{ mensagem: "Onde está armazenado o mapserv CGI no servidor",cabeca: "Mapserv CGI", variavel: "$locmapserv"},
-	{ mensagem: "Endereço do arquivo XML ou programa PHP que gera o xml com a lista de sistemas que são incluídos na guia de adição de temas. Se você deixar em branco, será utilizado o banco de dados administrativo ao invés do arquivo XML em disco.",cabeca: "XML sistemas", variavel: "$locsistemas"},
-	{ mensagem: "Endereço do arquivo XML ou programa PHP que gera o xml com a lista de programas especiais executados na ferramenta de identificação. Se você deixar em branco, será utilizado o banco de dados administrativo ao invés do arquivo XML em disco.",cabeca: "XML identifica", variavel: "$locidentifica"},
-	{ mensagem: "Endereço do arquivo XML ou programa PHP que gera o xml com a lista de mapas que são mostrados na versão mobile e na guia mapas. Se você deixar em branco, será utilizado o banco de dados administrativo ao invés do arquivo XML em disco.",cabeca: "XML mapas", variavel: "$locmapas"},
-	{ mensagem: "(opcional) Endereço do arquivo XML ou programa PHP que gera o xml com a lista de atlas e pranchas utilizadas na interface Atlas do i3geo. Se você deixar em branco, será utilizado o banco de dados administrativo ao invés do arquivo XML em disco.",cabeca: "XML Atlas", variavel: "$atlasxml"},
-	{ mensagem: "Caminho onde fica o arquivo executável do software R. Se você incluiu o caminho do R como uma variável de ambiente, inclua a qui apenas o nome do executável.",cabeca: "Caminho para o R", variavel: "$R_path"},
-	{ mensagem: "(depreciado) string de conexão com o banco de dados postgis para a realização de cálculos geométricos, como área. Na versão 5.x do mapserver não é mais necessário",cabeca: "Conexão postgis para cálculos", variavel: "$postgis_con"},
-	{ mensagem: "(depreciado) código da projeção definida no banco de dados postgis para cálculos de área",cabeca: "SRID postgis", variavel: "$srid_area"},
-	{ mensagem: "(opcional) string de conexão com o banco de dados para substituir o item CONECTION quando o mesmo estiver vazio",cabeca: "Substituição de conexão", variavel: "$postgis_mapa"},
-	{ mensagem: "sim|nao Define se o desenho da imagem do mapa será feito por meio do CGI ou não. A escolha do uso do CGI ou não deve ser testada para verificar qual a melhor performance em cada instalação.",cabeca: "Utiliza CGI", variavel: "$utilizacgi"},
-	{ mensagem: "sim|nao Expõe ou não o endereço do arquivo mapfile utilizado no mapa que está sendo usado. Quando essa variável for definida como nao algumas das funcionalidades do i3geo poderão ficar prejudicadas, mas sem comprometimento das funções principais",cabeca: "Expõe o mapfile", variavel: "$expoeMapfile"},	
-	{ mensagem: "Arquivo (PHP) que define a conexão com o banco de dados administrativo. Mantendo esse valor como vazio, o i3geo irá utilizar o banco de dados padrão em SQLITE. Veja i3geo/ms_configura.php e i3geo/admin/conexao.php para maiores informações sobre como utilizar outros bancos de dados.",cabeca: "Conexão com o banco de dados administrativo", variavel: "$conexaoadmin"},
-	{ mensagem: "Interface padrão utilizada para mostrar o mapa. essa é a interface utilizada quando o i3Geo é inicializado sem a passagem de parâmetros para definição da interface a ser usada.",cabeca: "Interface padrão", variavel: "$interfacePadrao"}	
+	{ mensagem: "Onde est&aacute; armazenado o mapserv CGI no servidor",cabeca: "Mapserv CGI", variavel: "$locmapserv"},
+	{ mensagem: "Endere&ccedil;o do arquivo XML ou programa PHP que gera o xml com a lista de sistemas que s&atilde;o inclu&iacute;dos na guia de adi&ccedil;&atilde;o de temas. Se voc&ecirc; deixar em branco, ser&aacute; utilizado o banco de dados administrativo ao inv&eacute;s do arquivo XML em disco.",cabeca: "XML sistemas", variavel: "$locsistemas"},
+	{ mensagem: "Endere&ccedil;o do arquivo XML ou programa PHP que gera o xml com a lista de programas especiais executados na ferramenta de identifica&ccedil;&atilde;o. Se voc&ecirc; deixar em branco, ser&aacute; utilizado o banco de dados administrativo ao inv&eacute;s do arquivo XML em disco.",cabeca: "XML identifica", variavel: "$locidentifica"},
+	{ mensagem: "Endere&ccedil;o do arquivo XML ou programa PHP que gera o xml com a lista de mapas que s&atilde;o mostrados na vers&atilde;o mobile e na guia mapas. Se voc&ecirc; deixar em branco, ser&aacute; utilizado o banco de dados administrativo ao inv&eacute;s do arquivo XML em disco.",cabeca: "XML mapas", variavel: "$locmapas"},
+	{ mensagem: "(opcional) Endere&ccedil;o do arquivo XML ou programa PHP que gera o xml com a lista de atlas e pranchas utilizadas na interface Atlas do i3geo. Se voc&ecirc; deixar em branco, ser&aacute; utilizado o banco de dados administrativo ao inv&eacute;s do arquivo XML em disco.",cabeca: "XML Atlas", variavel: "$atlasxml"},
+	{ mensagem: "Caminho onde fica o arquivo execut&aacute;vel do software R. Se voc&ecirc; incluiu o caminho do R como uma vari&aacute;vel de ambiente, inclua a qui apenas o nome do execut&aacute;vel.",cabeca: "Caminho para o R", variavel: "$R_path"},
+	{ mensagem: "(depreciado) string de conex&atilde;o com o banco de dados postgis para a realiza&ccedil;&atilde;o de c&aacute;lculos geom&eacute;tricos, como &aacute;rea. Na vers&atilde;o 5.x do mapserver n&atilde;o &eacute; mais necess&aacute;rio",cabeca: "Conex&atilde;o postgis para c&aacute;lculos", variavel: "$postgis_con"},
+	{ mensagem: "(depreciado) código da proje&ccedil;&atilde;o definida no banco de dados postgis para c&aacute;lculos de &aacute;rea",cabeca: "SRID postgis", variavel: "$srid_area"},
+	{ mensagem: "(opcional) string de conex&atilde;o com o banco de dados para substituir o item CONECTION quando o mesmo estiver vazio",cabeca: "Substitui&ccedil;&atilde;o de conex&atilde;o", variavel: "$postgis_mapa"},
+	{ mensagem: "sim|nao Define se o desenho da imagem do mapa ser&aacute; feito por meio do CGI ou n&atilde;o. A escolha do uso do CGI ou n&atilde;o deve ser testada para verificar qual a melhor performance em cada instala&ccedil;&atilde;o.",cabeca: "Utiliza CGI", variavel: "$utilizacgi"},
+	{ mensagem: "sim|nao Exp&otilde;e ou n&atilde;o o endere&ccedil;o do arquivo mapfile utilizado no mapa que est&aacute; sendo usado. Quando essa vari&aacute;vel for definida como nao algumas das funcionalidades do i3geo poder&atilde;o ficar prejudicadas, mas sem comprometimento das fun&ccedil;&otilde;es principais",cabeca: "Exp&otilde;e o mapfile", variavel: "$expoeMapfile"},	
+	{ mensagem: "Arquivo (PHP) que define a conex&atilde;o com o banco de dados administrativo. Mantendo esse valor como vazio, o i3geo ir&aacute; utilizar o banco de dados padr&atilde;o em SQLITE. Veja i3geo/ms_configura.php e i3geo/admin/conexao.php para maiores informa&ccedil;&otilde;es sobre como utilizar outros bancos de dados.",cabeca: "Conex&atilde;o com o banco de dados administrativo", variavel: "$conexaoadmin"},
+	{ mensagem: "Interface padr&atilde;o utilizada para mostrar o mapa. essa &eacute; a interface utilizada quando o i3Geo &eacute; inicializado sem a passagem de par&acirc;metros para defini&ccedil;&atilde;o da interface a ser usada.",cabeca: "Interface padr&atilde;o", variavel: "$interfacePadrao"}	
 	]};
 	core_carregando("ativa");
-	core_pegaDados("buscando parâmetros...","../php/ms_configura.php?funcao=pegaParametrosConfigura","pegaParametros");
+	core_pegaDados("buscando par&acirc;metros...","../php/ms_configura.php?funcao=pegaParametrosConfigura","pegaParametros");
 }
 function pegaParametros(retorno)
 {
@@ -78,7 +78,7 @@ function pegaParametros(retorno)
 		ins += "</fieldset><br>";
 	}
 	$i("tabela").innerHTML += ins;
-	retorno.$postgis_mapa = "Esta variável só pode ser definida editando-se diretamente o arquivo ms_configura.php";
+	retorno.$postgis_mapa = "Esta vari&aacute;vel só pode ser definida editando-se diretamente o arquivo ms_configura.php";
 	for (var i=0;i<$parametros.simples.length;i++)
 	{
 		if($i($parametros.simples[i].variavel))
@@ -89,7 +89,7 @@ function pegaParametros(retorno)
 /*
 Function: salva
 
-Aplica as alterações feitas em uma variável
+Aplica as altera&ccedil;&otilde;es feitas em uma vari&aacute;vel
 
 <SALVACONFIGURA>
 */

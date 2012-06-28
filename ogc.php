@@ -2,48 +2,48 @@
 /*
 Title: ogc.php
 
-Gera web services nos padrões OGC
+Gera web services nos padr&otilde;es OGC
 
-A lista de projeções mostradas na função getcapabilities é definida na variável $listaepsg. Edite essa variável
-se forem necessárias outras projeções além das existentes
+A lista de proje&ccedil;&otilde;es mostradas na fun&ccedil;&atilde;o getcapabilities &eacute; definida na vari&aacute;vel $listaepsg. Edite essa vari&aacute;vel
+se forem necess&aacute;rias outras proje&ccedil;&otilde;es al&eacute;m das existentes
 
 Licenca:
 
 i3Geo Interface Integrada de Ferramentas de Geoprocessamento para Internet
 
-Direitos Autorais Reservados (c) 2006 Ministério do Meio Ambiente Brasil
+Direitos Autorais Reservados (c) 2006 Minist&eacute;rio do Meio Ambiente Brasil
 Desenvolvedor: Edmar Moretti edmar.moretti@mma.gov.br
 
-Este programa é software livre; você pode redistribuí-lo
-e/ou modificá-lo sob os termos da Licença Pública Geral
+Este programa &eacute; software livre; voc&ecirc; pode redistribu&iacute;-lo
+e/ou modific&aacute;-lo sob os termos da Licen&ccedil;a P&uacute;blica Geral
 GNU conforme publicada pela Free Software Foundation;
 
-Este programa é distribuído na expectativa de que seja útil,
-porém, SEM NENHUMA GARANTIA; nem mesmo a garantia implícita
-de COMERCIABILIDADE OU ADEQUAÇÃO A UMA FINALIDADE ESPECÍFICA.
-Consulte a Licença Pública Geral do GNU para mais detalhes.
-Você deve ter recebido uma cópia da Licença Pública Geral do
-GNU junto com este programa; se não, escreva para a
-Free Software Foundation, Inc., no endereço
+Este programa &eacute; distribu&iacute;do na expectativa de que seja &uacute;til,
+por&eacute;m, SEM NENHUMA GARANTIA; nem mesmo a garantia impl&iacute;cita
+de COMERCIABILIDADE OU ADEQUA&Ccedil;&Atilde;O A UMA FINALIDADE ESPEC&Iacute;FICA.
+Consulte a Licen&ccedil;a P&uacute;blica Geral do GNU para mais detalhes.
+Voc&ecirc; deve ter recebido uma cópia da Licen&ccedil;a P&uacute;blica Geral do
+GNU junto com este programa; se n&atilde;o, escreva para a
+Free Software Foundation, Inc., no endere&ccedil;o
 59 Temple Street, Suite 330, Boston, MA 02111-1307 USA.
 
 Arquivo: i3geo/ogc.php
 
 Parametros:
 
-lista - se for igual a "temas", mostra uma lista dos temas disponíveis
+lista - se for igual a "temas", mostra uma lista dos temas dispon&iacute;veis
 
-ajuda - se for definida na URL, mostra uma ajuda ao usuário
+ajuda - se for definida na URL, mostra uma ajuda ao usu&aacute;rio
 
-tema - nome do tema do serviço. Se for definido, o web service conterá apenas esse tema. O tema é o nome do mapfile existente em i3geo/temas, mas pode ser especificado um mapfile existente em outra pasta. Nesse caso, deve-se especificar o caminho completo para o arquivo.
+tema - nome do tema do servi&ccedil;o. Se for definido, o web service conter&aacute; apenas esse tema. O tema &eacute; o nome do mapfile existente em i3geo/temas, mas pode ser especificado um mapfile existente em outra pasta. Nesse caso, deve-se especificar o caminho completo para o arquivo.
 
-intervalo - valor inicial e final com o número de temas que serão mostrados no serviço
+intervalo - valor inicial e final com o n&uacute;mero de temas que ser&atilde;o mostrados no servi&ccedil;o
 
 legenda - mostra a legenda no corpo do mapa sim|nao
 
 perfil - perfil utilizado para escolher os menus
 
-format - (opcional) pode ser utilizado a opção &format=application/openlayers para abrir o mashup do OpenLayers com as camadas definida em temas, exemplo
+format - (opcional) pode ser utilizado a op&ccedil;&atilde;o &format=application/openlayers para abrir o mashup do OpenLayers com as camadas definida em temas, exemplo
 		http://localhost/i3geo/ogc.php?temas=biomashp&format=application/openlayers&bbox=-54,-14,-50,-10
 
 Exemplos:
@@ -57,7 +57,7 @@ ogc.php?tema=/var/www/i3geo/aplicmap/geral1debianv6.map&layers=mundo
 ogc.php?intervalo=0,50
 */
 //
-//validações e includes
+//valida&ccedil;&otilde;es e includes
 //
 $cache = true;
 if (!function_exists('ms_GetVersion'))
@@ -89,7 +89,7 @@ if(isset($format) && strtolower($format) == "application/openlayers"){
 	{echo "<meta http-equiv='refresh' content='0;url=$urln'>";}	
 }
 //
-//pega os endereços para compor a url de chamada do gerador de web services
+//pega os endere&ccedil;os para compor a url de chamada do gerador de web services
 //ogc.php
 //
 $protocolo = explode("/",$_SERVER['SERVER_PROTOCOL']);
@@ -106,7 +106,7 @@ if(isset($ajuda))
 	exit;
 }
 //
-//imprime na tela a lista de temas disponíveis
+//imprime na tela a lista de temas dispon&iacute;veis
 //
 if(isset($lista) && $lista == "temas")
 {
@@ -171,7 +171,7 @@ $or = $proto.$server.$_SERVER['PHP_SELF'];
 if((isset($tema)) && ($tema != "") && ($tipo=="metadados"))
 {$or = $or."?tema=".$tema."&";}
 //
-//parametros no nível maior
+//parametros no n&iacute;vel maior
 //
 $oMap->setmetadata("ows_onlineresource",$or);
 $oMap->setmetadata("wms_onlineresource",$or);
@@ -201,7 +201,7 @@ if ($tipo == "" || $tipo == "metadados")
 {
 	$tema = explode(" ",$tema);
 	//para o caso do tema ser um arquivo mapfile existente em uma pasta qualquer
-	//$temai3geo = true indica que o layer será buscado na pasta i3geo/temas
+	//$temai3geo = true indica que o layer ser&aacute; buscado na pasta i3geo/temas
 	$temai3geo = true;
 	if(file_exists($_GET["tema"])){
 		$nmap = ms_newMapobj($_GET["tema"]);
@@ -227,7 +227,7 @@ if ($tipo == "" || $tipo == "metadados")
 			foreach ($ts as $t)
 			{
 				$l = $nmap->getlayerbyname($t);
-				//necessário pq o mapfile pode ter todos os layers como default
+				//necess&aacute;rio pq o mapfile pode ter todos os layers como default
 				if($temai3geo == false)
 				{$l->set("status",MS_OFF);}
 				if($cache == true && strtolower($l->getmetadata('cache')) == 'sim' && $tipo == '' && count($tema) == 1){
@@ -235,7 +235,7 @@ if ($tipo == "" || $tipo == "metadados")
 				}
 				$l->setmetadata("ows_title",pegaNome($l));
 				$l->setmetadata("ows_srs",$listaepsg);
-				//essa linha é necessária pq as vezes no mapfile não tem nenhum layer com o nome igual ao nome do mapfile
+				//essa linha &eacute; necess&aacute;ria pq as vezes no mapfile n&atilde;o tem nenhum layer com o nome igual ao nome do mapfile
 				if(count($ts)==1)
 				{$l->set("name",$tx);}
 				$l->setmetadata("gml_include_items","all");
@@ -269,7 +269,7 @@ if ($tipo == "" || $tipo == "metadados")
 						if (($lcon == " ") || ($lcon == "") || (in_array($lcon,array_keys($postgis_mapa))))
 						{
 							//
-							//o metadata CONEXAOORIGINAL guarda o valor original para posterior substituição
+							//o metadata CONEXAOORIGINAL guarda o valor original para posterior substitui&ccedil;&atilde;o
 							//				
 							if(($lcon == " ") || ($lcon == ""))
 							{
@@ -399,7 +399,7 @@ header("Content-type: $contenttype");
 $buffer = ms_iogetStdoutBufferBytes();
 ms_ioresethandlers();
 //
-//funções
+//fun&ccedil;&otilde;es
 //
 function ogc_pegaListaDeMenus()
 {
@@ -413,15 +413,15 @@ function ogc_pegaListaDeMenus()
 function ogc_imprimeAjuda()
 {
 	echo "<pre><b>Construtor de web services do I3Geo.</b><br><br>";
-	echo "Esse utilitário usa os arquivos mapfiles existentes em <br>";
-	echo "i3geo/temas para gerar web services no padrão OGC.<br>";
+	echo "Esse utilit&aacute;rio usa os arquivos mapfiles existentes em <br>";
+	echo "i3geo/temas para gerar web services no padr&atilde;o OGC.<br>";
 	echo "Para escolher um tema, utilize:<br>";
-	echo "ogc.php?lista=temas - para listar os temas disponíveis<br>";
-	echo "Para usar esse web service, além dos parâmetros normais, vc deverá incluir o parâmetro &tema=,<br>";
+	echo "ogc.php?lista=temas - para listar os temas dispon&iacute;veis<br>";
+	echo "Para usar esse web service, al&eacute;m dos par&acirc;metros normais, vc dever&aacute; incluir o par&acirc;metro &tema=,<br>";
 	echo "ou seja,http://[host]/i3geo/ogc.php?tema=[código do tema]<br>";
-	echo "no lugar do código pode ser especificado também um arquivo mapfile qualquer. Nesse caso, deve ser digitado o caminho completo no servidor<br><br>";
-	echo "Utilize o sistema de administração do i3Geo para configurar quais os temas da pasta i3geo/temas podem ser utilizados.";
-	echo "Utilize o parametro &intervalo=0,20 para definir o número de temas desejado na função getcapabilities.";
+	echo "no lugar do código pode ser especificado tamb&eacute;m um arquivo mapfile qualquer. Nesse caso, deve ser digitado o caminho completo no servidor<br><br>";
+	echo "Utilize o sistema de administra&ccedil;&atilde;o do i3Geo para configurar quais os temas da pasta i3geo/temas podem ser utilizados.";
+	echo "Utilize o parametro &intervalo=0,20 para definir o n&uacute;mero de temas desejado na fun&ccedil;&atilde;o getcapabilities.";
 }
 function ogc_imprimeListaDeTemas()
 {
@@ -429,7 +429,7 @@ function ogc_imprimeListaDeTemas()
 	$m = new Menutemas("",$perfil,$locaplic,$urli3geo);
 	$menus = $m->pegaListaDeMenus();
 	echo '<html><head><title>WMS</title><META HTTP-EQUIV="Content-Type" CONTENT="text/html; charset=ISO-8859-1"><meta name="description" content="OGC"><meta name="keywords" content="WMS OGC mapa sig gis webmapping geo geoprocessamento interativo meio ambiente MMA cartografia geografia"> <meta name="robots" content="index,follow">';
-	echo "<body><b>Lista de temas por grupos e subgrupos e endereços de acesso aos dados por meio de Web Services WMS (os códigos dos temas estão em vermelho)</b><br><br>";
+	echo "<body><b>Lista de temas por grupos e subgrupos e endere&ccedil;os de acesso aos dados por meio de Web Services WMS (os códigos dos temas est&atilde;o em vermelho)</b><br><br>";
 	$imprimir = "";
 	foreach ($menus as $menu)
 	{

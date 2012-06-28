@@ -1,7 +1,7 @@
 /*
 Title: webservices.js
 
-Funções que controlam a interface do editor do cadastro de Web Services
+Fun&ccedil;&otilde;es que controlam a interface do editor do cadastro de Web Services
 
 Licenca:
 
@@ -9,20 +9,20 @@ GPL2
 
 i3Geo Interface Integrada de Ferramentas de Geoprocessamento para Internet
 
-Direitos Autorais Reservados (c) 2006 Ministério do Meio Ambiente Brasil
+Direitos Autorais Reservados (c) 2006 Minist&eacute;rio do Meio Ambiente Brasil
 Desenvolvedor: Edmar Moretti edmar.moretti@mma.gov.br
 
-Este programa é software livre; você pode redistribuí-lo
-e/ou modificá-lo sob os termos da Licença Pública Geral
+Este programa &eacute; software livre; voc&ecirc; pode redistribu&iacute;-lo
+e/ou modific&aacute;-lo sob os termos da Licen&ccedil;a P&uacute;blica Geral
 GNU conforme publicada pela Free Software Foundation;
 
-Este programa é distribuído na expectativa de que seja útil,
-porém, SEM NENHUMA GARANTIA; nem mesmo a garantia implícita
-de COMERCIABILIDADE OU ADEQUAÇÃO A UMA FINALIDADE ESPECÍFICA.
-Consulte a Licença Pública Geral do GNU para mais detalhes.
-Você deve ter recebido uma cópia da Licença Pública Geral do
-GNU junto com este programa; se não, escreva para a
-Free Software Foundation, Inc., no endereço
+Este programa &eacute; distribu&iacute;do na expectativa de que seja &uacute;til,
+por&eacute;m, SEM NENHUMA GARANTIA; nem mesmo a garantia impl&iacute;cita
+de COMERCIABILIDADE OU ADEQUA&Ccedil;&Atilde;O A UMA FINALIDADE ESPEC&Iacute;FICA.
+Consulte a Licen&ccedil;a P&uacute;blica Geral do GNU para mais detalhes.
+Voc&ecirc; deve ter recebido uma cópia da Licen&ccedil;a P&uacute;blica Geral do
+GNU junto com este programa; se n&atilde;o, escreva para a
+Free Software Foundation, Inc., no endere&ccedil;o
 59 Temple Street, Suite 330, Boston, MA 02111-1307 USA.
 
 Arquivo:
@@ -47,14 +47,14 @@ function initMenu()
 /*
 Function: pegaWS
 
-Obtém a lista de WS
+Obt&eacute;m a lista de WS
 
 <PEGAWS>
 */
 function pegaWS()
 {
     //
-	//pega o tipo de WS que será listado se tiver sido definido na url
+	//pega o tipo de WS que ser&aacute; listado se tiver sido definido na url
 	//
 	var tipows = "",u;
 	try{
@@ -63,12 +63,12 @@ function pegaWS()
 		tipows = u[1];
 	}
 	catch(e){tipows = "";}
-	core_pegaDados("buscando endereços...","../php/webservices.php?funcao=pegaWS&tipows="+tipows,"montaTabela");
+	core_pegaDados("buscando endere&ccedil;os...","../php/webservices.php?funcao=pegaWS&tipows="+tipows,"montaTabela");
 }
 /*
 Function: montaTabela
 
-Monta a tabela de edição
+Monta a tabela de edi&ccedil;&atilde;o
 
 <PEGADADOS>
 */
@@ -193,9 +193,9 @@ function montaDiv(i)
 	var param = {
 		"linhas":[
 		{titulo:"Nome:",id:"Enome_ws",size:"50",value:i.nome_ws,tipo:"text",div:""},
-		{titulo:"Descrição:",id:"Edesc_ws",size:"50",value:i.desc_ws,tipo:"text",div:""},
+		{titulo:"Descri&ccedil;&atilde;o:",id:"Edesc_ws",size:"50",value:i.desc_ws,tipo:"text",div:""},
 		{titulo:"Autor:",id:"Eautor_ws",size:"50",value:i.autor_ws,tipo:"text",div:""},
-		{titulo:"Endereço:",id:"Elink_ws",size:"50",value:i.link_ws,tipo:"text",div:""}
+		{titulo:"Endere&ccedil;o:",id:"Elink_ws",size:"50",value:i.link_ws,tipo:"text",div:""}
 		]
 	};
 	var ins = "";
@@ -237,7 +237,7 @@ function excluiLinha(id,row)
 /*
 Function: gravaDados
 
-Aplica as alterações feitas em um WS
+Aplica as altera&ccedil;&otilde;es feitas em um WS
 
 <ALTERARWS>
 */
@@ -260,7 +260,7 @@ function gravaDados(id,recordid)
   			{
   				if(YAHOO.lang.JSON.parse(o.responseText) == "erro")
   				{
-  					core_carregando("<span style=color:red >Não foi possível excluir. Verifique se não existem registros vinculados</span>");
+  					core_carregando("<span style=color:red >N&atilde;o foi poss&iacute;vel excluir. Verifique se n&atilde;o existem registros vinculados</span>");
   					setTimeout("core_carregando('desativa')",3000);
   				}
   				else

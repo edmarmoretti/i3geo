@@ -2,7 +2,7 @@
 /*
 Title: classe_alteraclasse.php
 
-Manipulação de classes e estilos de um layer
+Manipula&ccedil;&atilde;o de classes e estilos de um layer
 
 
 Licenca:
@@ -11,20 +11,20 @@ GPL2
 
 i3Geo Interface Integrada de Ferramentas de Geoprocessamento para Internet
 
-Direitos Autorais Reservados (c) 2006 Ministério do Meio Ambiente Brasil
+Direitos Autorais Reservados (c) 2006 Minist&eacute;rio do Meio Ambiente Brasil
 Desenvolvedor: Edmar Moretti edmar.moretti@mma.gov.br
 
-Este programa é software livre; você pode redistribuí-lo
-e/ou modificá-lo sob os termos da Licença Pública Geral
+Este programa &eacute; software livre; voc&ecirc; pode redistribu&iacute;-lo
+e/ou modific&aacute;-lo sob os termos da Licen&ccedil;a P&uacute;blica Geral
 GNU conforme publicada pela Free Software Foundation;
 
-Este programa é distribuído na expectativa de que seja útil,
-porém, SEM NENHUMA GARANTIA; nem mesmo a garantia implícita
-de COMERCIABILIDADE OU ADEQUAÇÃO A UMA FINALIDADE ESPECÍFICA.
-Consulte a Licença Pública Geral do GNU para mais detalhes.
-Você deve ter recebido uma cópia da Licença Pública Geral do
-GNU junto com este programa; se não, escreva para a
-Free Software Foundation, Inc., no endereço
+Este programa &eacute; distribu&iacute;do na expectativa de que seja &uacute;til,
+por&eacute;m, SEM NENHUMA GARANTIA; nem mesmo a garantia impl&iacute;cita
+de COMERCIABILIDADE OU ADEQUA&Ccedil;&Atilde;O A UMA FINALIDADE ESPEC&Iacute;FICA.
+Consulte a Licen&ccedil;a P&uacute;blica Geral do GNU para mais detalhes.
+Voc&ecirc; deve ter recebido uma cópia da Licen&ccedil;a P&uacute;blica Geral do
+GNU junto com este programa; se n&atilde;o, escreva para a
+Free Software Foundation, Inc., no endere&ccedil;o
 59 Temple Street, Suite 330, Boston, MA 02111-1307 USA.
 
 Arquivo:
@@ -34,8 +34,8 @@ i3geo/classesphp/classe_alteraclasse.php
 /*
 Classe: Alteraclasse
 
-Operações que alteram as classes da legenda de um tema existente no mapa.
-As modificações permitem contruir novas legendas para cada tema.
+Opera&ccedil;&otilde;es que alteram as classes da legenda de um tema existente no mapa.
+As modifica&ccedil;&otilde;es permitem contruir novas legendas para cada tema.
 */
 class Alteraclasse
 {
@@ -70,7 +70,7 @@ Cria um objeto Alteraclasse
 
 Parametros:
 
-$map_file - Endereço do mapfile no servidor.
+$map_file - Endere&ccedil;o do mapfile no servidor.
 
 $tema - nome do tema
 */ 
@@ -139,7 +139,7 @@ cores {array} - array com a lista de valores RGB
 function: simbolounico
 
 Elimina as classes existentes em um objeto layer mantendo apenas a primeira classe.
-Todos os elementos passarão a ser desenhados conforme essa primeira classe, uma vez que a expressão de definição da classe passa a ser vazia.
+Todos os elementos passar&atilde;o a ser desenhados conforme essa primeira classe, uma vez que a express&atilde;o de defini&ccedil;&atilde;o da classe passa a ser vazia.
 */
 	function simbolounico()
 	{
@@ -147,7 +147,7 @@ Todos os elementos passarão a ser desenhados conforme essa primeira classe, uma 
 		$numclasses = $this->layer->numclasses;
 		if ($numclasses > 0)
 		{
-			//elimina a expressão da primeira classe
+			//elimina a express&atilde;o da primeira classe
 			$classe0 = $this->layer->getClass(0);
 			//echo "<pre>";var_dump($classe0);exit;
 			$classe0->setexpression("");
@@ -165,15 +165,15 @@ Todos os elementos passarão a ser desenhados conforme essa primeira classe, uma 
 /*
 function: alteraclasses
 
-Altera as classes existentes em um objeto layer conforme a lista de índices, nomes e expressões definidas nos parâmetros passados como argumentos.
+Altera as classes existentes em um objeto layer conforme a lista de &iacute;ndices, nomes e express&otilde;es definidas nos par&acirc;metros passados como argumentos.
 
 Parametros:
 
-$ids - lista de ids, separados por vírgula, que identificam as classes no layer
+$ids - lista de ids, separados por v&iacute;rgula, que identificam as classes no layer
 
 $nomes - lista com os novos nomes
 
-$exps - lista com as novas expressões
+$exps - lista com as novas express&otilde;es
 */
 	function alteraclasses($ids,$nomes,$exps)
 	{
@@ -208,7 +208,7 @@ $exps - lista com as novas expressões
 		$c = count($ids);
 		for ($i=0; $i < $c; ++$i)
 		{
-			$layerc = explode("-",$ids[$i]); //nome do layer é o indice 0 do array
+			$layerc = explode("-",$ids[$i]); //nome do layer &eacute; o indice 0 do array
 			$layer = $this->mapa->getlayerbyname($layerc[0]);
 			$ncl = $layer->numclasses;
 			if ($layerc[1] < $ncl)
@@ -228,15 +228,15 @@ $exps - lista com as novas expressões
 /*
 function: intervalosiguais
 
-Cria classes em um objeto layer com intervalos iguais baseando-se em um item numérico na tabela de atributos com um número de classes fixos.
+Cria classes em um objeto layer com intervalos iguais baseando-se em um item num&eacute;rico na tabela de atributos com um n&uacute;mero de classes fixos.
 
 Parametros:
 
 $item - item da tabela de atributos
 
-$nclasses - número de classes
+$nclasses - n&uacute;mero de classes
 
-$ignorar - valor que será ignorado na listagem final
+$ignorar - valor que ser&aacute; ignorado na listagem final
 */
 	function intervalosiguais($item,$nclasses,$ignorar)
 	{
@@ -289,15 +289,15 @@ $ignorar - valor que será ignorado na listagem final
 /*
 function: quartis
 
-Cria classes em um objeto layer com intervalos em quartis baseando-se em um item numérico na tabela de atributos com um número de classes fixos.
+Cria classes em um objeto layer com intervalos em quartis baseando-se em um item num&eacute;rico na tabela de atributos com um n&uacute;mero de classes fixos.
 
 Parametros:
 
 $item - Item da tabela de atributos utilizado para gerar as classes.
 
-$ignorar - valor que será ignorado na listagem final
+$ignorar - valor que ser&aacute; ignorado na listagem final
 
-$tipoLegenda - tipo de texto que será incluído no nome de cada classe completo|simples|minimo
+$tipoLegenda - tipo de texto que ser&aacute; inclu&iacute;do no nome de cada classe completo|simples|minimo
 
 Include:
 <classe_estatistica.php>
@@ -367,15 +367,15 @@ function: valorunico
 
 Cria classes em um objeto layer baseando-se em um item na tabela de atributos.
 
-Para cada ocorrência de um valor é acrescentada uma classe.
+Para cada ocorr&ecirc;ncia de um valor &eacute; acrescentada uma classe.
 
 Parametros:
 
 $item - Item da tabela de atributos utilizado para gerar as classes.
 
-$ignorar - valor que será ignorado na listagem final
+$ignorar - valor que ser&aacute; ignorado na listagem final
 
-$itemNome - item que será usado para definir os nomes das classes (por default será igual a $item)
+$itemNome - item que ser&aacute; usado para definir os nomes das classes (por default ser&aacute; igual a $item)
 */
 	function valorunico($item,$ignorar,$itemNome="")
 	{
@@ -445,7 +445,7 @@ function: adicionaclasse
 
 Adiciona uma nova classe em um objeto layer
 
-A nova classe será uma cópia da classe 0.
+A nova classe ser&aacute; uma cópia da classe 0.
 */
 	function adicionaclasse()
 	{
@@ -462,7 +462,7 @@ Sobe uma classe na ordem de desenho
 
 Parametro:
 
-$idclasse {numerico} - id da classe (índice)
+$idclasse {numerico} - id da classe (&iacute;ndice)
 */
 	function sobeclasse($idclasse)
 	{
@@ -477,7 +477,7 @@ Desce uma classe na ordem de desenho
 
 Parametro:
 
-$idclasse {numerico} - id da classe (índice)
+$idclasse {numerico} - id da classe (&iacute;ndice)
 */
 	function desceclasse($idclasse)
 	{
@@ -488,7 +488,7 @@ $idclasse {numerico} - id da classe (índice)
 /*
 function: adicionaopacidade
 
-Adiciona opacidade variável de 0 a 100 conforme o número de classes
+Adiciona opacidade vari&aacute;vel de 0 a 100 conforme o n&uacute;mero de classes
 
 */
 	function adicionaopacidade()
@@ -518,7 +518,7 @@ Aplica uma nova cor aos estilos de uma classe
 
 Parametros:
 
-$idclasse {numerico} - id da classe (índice)
+$idclasse {numerico} - id da classe (&iacute;ndice)
 
 $cor {string} - cor rgb
 */
@@ -543,11 +543,11 @@ $cor {string} - cor rgb
 /*
 function: alterageometria
 
-Altera a geometria de representação de todos os estilos de todas as classes de um layer
+Altera a geometria de representa&ccedil;&atilde;o de todos os estilos de todas as classes de um layer
 
 Parametro:
 
-$tipo {string} - tipo de representação
+$tipo {string} - tipo de representa&ccedil;&atilde;o
 */
 	function alterageometria($tipo)
 	{
@@ -640,7 +640,7 @@ Inverte as cores da legenda de um tema.
 /*
 function: calculaTamanhoClasses
 
-Calcula o tamanho dos estilos das classes, alterando o tamanho do símbolo.
+Calcula o tamanho dos estilos das classes, alterando o tamanho do s&iacute;mbolo.
 */
 	function calculaTamanhoClasses()
 	{
@@ -677,7 +677,7 @@ $classe - id da classe
 	function statusClasse($classe)
 	{
 		//
-		//na versão 6 do Mapserver as classes não obedecem o OFF ou ON em arquivos RASTER. Foi necessário contornar o problema usando um metadata
+		//na vers&atilde;o 6 do Mapserver as classes n&atilde;o obedecem o OFF ou ON em arquivos RASTER. Foi necess&aacute;rio contornar o problema usando um metadata
 		//
 		if(!$this->layer){return "erro";}
 		$cl = $this->layer->getclass($classe);

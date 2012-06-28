@@ -3,7 +3,7 @@
 /*
 Title: Insere textos
 
-Inclui um texto no mapa no ponto clicado pelo usuário
+Inclui um texto no mapa no ponto clicado pelo usu&aacute;rio
 
 Veja:
 
@@ -19,20 +19,20 @@ GPL2
 
 i3Geo Interface Integrada de Ferramentas de Geoprocessamento para Internet
 
-Direitos Autorais Reservados (c) 2006 Ministério do Meio Ambiente Brasil
+Direitos Autorais Reservados (c) 2006 Minist&eacute;rio do Meio Ambiente Brasil
 Desenvolvedor: Edmar Moretti edmar.moretti@mma.gov.br
 
-Este programa é software livre; você pode redistribuí-lo
-e/ou modificá-lo sob os termos da Licença Pública Geral
+Este programa &eacute; software livre; voc&ecirc; pode redistribu&iacute;-lo
+e/ou modific&aacute;-lo sob os termos da Licen&ccedil;a P&uacute;blica Geral
 GNU conforme publicada pela Free Software Foundation;
 
-Este programa é distribuído na expectativa de que seja útil,
-porém, SEM NENHUMA GARANTIA; nem mesmo a garantia implícita
-de COMERCIABILIDADE OU ADEQUAÇÃO A UMA FINALIDADE ESPECÍFICA.
-Consulte a Licença Pública Geral do GNU para mais detalhes.
-Você deve ter recebido uma cópia da Licença Pública Geral do
+Este programa &eacute; distribu&iacute;do na expectativa de que seja &uacute;til,
+por&eacute;m, SEM NENHUMA GARANTIA; nem mesmo a garantia impl&iacute;cita
+de COMERCIABILIDADE OU ADEQUAÇÃO A UMA FINALIDADE ESPEC&Iacute;FICA.
+Consulte a Licen&ccedil;a P&uacute;blica Geral do GNU para mais detalhes.
+Voc&ecirc; deve ter recebido uma c&oacute;pia da Licen&ccedil;a P&uacute;blica Geral do
 GNU junto com este programa; se não, escreva para a
-Free Software Foundation, Inc., no endereço
+Free Software Foundation, Inc., no endere&ccedil;o
 59 Temple Street, Suite 330, Boston, MA 02111-1307 USA.
 */
 if(typeof(i3GEOF) === 'undefined'){
@@ -46,13 +46,13 @@ i3GEOF.inseretxt = {
 	/*
 	Variavel: aguarde
 	
-	Estilo do objeto DOM com a imagem de aguarde existente no cabeçalho da janela.
+	Estilo do objeto DOM com a imagem de aguarde existente no cabe&ccedil;alho da janela.
 	*/
 	aguarde: "",
 	/*
 	Variavel: contaPontos
 	
-	Conta quantos pontos o usuário clicou na adição de um conector
+	Conta quantos pontos o usu&aacute;rio clicou na adi&ccedil;ão de um conector
 	*/
 	contaPontos: 0,
 	/*
@@ -70,11 +70,11 @@ i3GEOF.inseretxt = {
 	/*
 	Function: inicia
 	
-	Inicia a ferramenta. É chamado por criaJanelaFlutuante
+	Inicia a ferramenta. &Eacute; chamado por criaJanelaFlutuante
 	
 	Parametro:
 	
-	iddiv {String} - id do div que receberá o conteudo HTML da ferramenta
+	iddiv {String} - id do div que receber&aacute; o conteudo HTML da ferramenta
 	*/
 	inicia: function(iddiv){
 		try{
@@ -134,11 +134,11 @@ i3GEOF.inseretxt = {
 	/*
 	Function: html
 	
-	Gera o código html para apresentação das opções da ferramenta
+	Gera o c&oacute;digo html para apresenta&ccedil;ão das op&ccedil;&otilde;es da ferramenta
 	
 	Retorno:
 	
-	String com o código html
+	String com o c&oacute;digo html
 	*/
 	html:function(){
 		var ins = '' +
@@ -150,12 +150,12 @@ i3GEOF.inseretxt = {
 		'	</ul>' +
 		'</div><br>' +
 		'	<div class=guiaobj id="i3GEOinseretxtguia1obj" style="left:1px;display:none;">' +
-		'		<p class="paragrafo" >Texto que será inserido:<br><br>' +	
+		'		<p class="paragrafo" >Texto que ser&aacute; inserido:<br><br>' +	
 		$inputText("","","i3GEOinseretxttexto","",45,"") +
 		'		<br><br>' +
 		'		<input class=inputsb style=cursor:pointer type=checkbox id=i3GEOinseretxttextoconector >&nbsp;Insere com conector' +
 		'		<div id=i3GEOinseretxtmen1 style="text-align:left;" >'+
-		'			<p class="paragrafo" >Digite o texto e clique no mapa no ponto de inclus&atilde;o. Para definir os par&acirc;metros de fonte, tamanho, etc, utilize a guia de propriedades. Se o texto contiver acentuação, não use a fonte padrão (bitmap). Ativando o conector, vc dever&aacute; clicar no ponto inicial e final.' +
+		'			<p class="paragrafo" >Digite o texto e clique no mapa no ponto de inclus&atilde;o. Para definir os par&acirc;metros de fonte, tamanho, etc, utilize a guia de propriedades. Se o texto contiver acentua&ccedil;ão, não use a fonte padrão (bitmap). Ativando o conector, vc dever&aacute; clicar no ponto inicial e final.' +
 		'		</div>' +
 		'	</div>' +
 		'	<div class=guiaobj id="i3GEOinseretxtguia2obj" style="left:1px;display:none;">' +
@@ -167,7 +167,7 @@ i3GEOF.inseretxt = {
 		'		</div>' +
 		'		<br><br>' +
 		'		<div id=i3GEOinseretxtmen2 style="text-align:left;" >' +
-		'			<p class=paragrafo >Após escolher o tema e o item da tabela de atributos, clique no mapa no lugar desejado para incluir o texto.</p>' +
+		'			<p class=paragrafo >Ap&oacute;s escolher o tema e o item da tabela de atributos, clique no mapa no lugar desejado para incluir o texto.</p>' +
 		'		</div>' +
 		'	</div>' +
 		'	<div class=guiaobj id="i3GEOinseretxtguia3obj" style="left:1px;display:none;">' +
@@ -340,14 +340,14 @@ i3GEOF.inseretxt = {
 	/*
 	Function: corj
 	
-	Abre a janela para o usuário selecionar uma cor interativamente
+	Abre a janela para o usu&aacute;rio selecionar uma cor interativamente
 	*/
 	corj: function(obj)
 	{i3GEO.util.abreCor("",obj);},
 	/*
 	Function: pegaPar
 	
-	Pega os parâmetros para montar a chamada ajax que cria ou testa a toponímia
+	Pega os parâmetros para montar a chamada ajax que cria ou testa a topon&iacute;mia
 	*/
 	pegaPar: function(){
 		try{

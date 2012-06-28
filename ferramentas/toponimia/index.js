@@ -2,10 +2,10 @@
 /*jslint plusplus:false,white:false,undef: false, rhino: true, onevar: true, evil: true */
 
 /*
-Title: Toponímia de um tema
+Title: Topon&iacute;mia de um tema
 
-Ativa a apresentação da toponímia de um tema.
-A toponímia é definida em função das colunas existentes na tabela de atributos.
+Ativa a apresenta&ccedil;ão da topon&iacute;mia de um tema.
+A topon&iacute;mia &eacute; definida em fun&ccedil;ão das colunas existentes na tabela de atributos.
 
 Veja:
 
@@ -21,20 +21,20 @@ GPL2
 
 i3Geo Interface Integrada de Ferramentas de Geoprocessamento para Internet
 
-Direitos Autorais Reservados (c) 2006 Ministério do Meio Ambiente Brasil
+Direitos Autorais Reservados (c) 2006 Minist&eacute;rio do Meio Ambiente Brasil
 Desenvolvedor: Edmar Moretti edmar.moretti@mma.gov.br
 
-Este programa é software livre; você pode redistribuí-lo
-e/ou modificá-lo sob os termos da Licença Pública Geral
+Este programa &eacute; software livre; voc&ecirc; pode redistribu&iacute;-lo
+e/ou modific&aacute;-lo sob os termos da Licen&ccedil;a P&uacute;blica Geral
 GNU conforme publicada pela Free Software Foundation;
 
-Este programa é distribuído na expectativa de que seja útil,
-porém, SEM NENHUMA GARANTIA; nem mesmo a garantia implícita
-de COMERCIABILIDADE OU ADEQUAÇÃO A UMA FINALIDADE ESPECÍFICA.
-Consulte a Licença Pública Geral do GNU para mais detalhes.
-Você deve ter recebido uma cópia da Licença Pública Geral do
+Este programa &eacute; distribu&iacute;do na expectativa de que seja &uacute;til,
+por&eacute;m, SEM NENHUMA GARANTIA; nem mesmo a garantia impl&iacute;cita
+de COMERCIABILIDADE OU ADEQUAÇÃO A UMA FINALIDADE ESPEC&Iacute;FICA.
+Consulte a Licen&ccedil;a P&uacute;blica Geral do GNU para mais detalhes.
+Voc&ecirc; deve ter recebido uma c&oacute;pia da Licen&ccedil;a P&uacute;blica Geral do
 GNU junto com este programa; se não, escreva para a
-Free Software Foundation, Inc., no endereço
+Free Software Foundation, Inc., no endere&ccedil;o
 59 Temple Street, Suite 330, Boston, MA 02111-1307 USA.
 */
 if(typeof(i3GEOF) === 'undefined'){
@@ -49,17 +49,17 @@ i3GEOF.toponimia = {
 	/*
 	Variavel: aguarde
 	
-	Estilo do objeto DOM com a imagem de aguarde existente no cabeçalho da janela.
+	Estilo do objeto DOM com a imagem de aguarde existente no cabe&ccedil;alho da janela.
 	*/
 	aguarde: "",
 	/*
 	Function: inicia
 	
-	Inicia a ferramenta. É chamado por criaJanelaFlutuante
+	Inicia a ferramenta. &Eacute; chamado por criaJanelaFlutuante
 	
 	Parametro:
 	
-	iddiv {String} - id do div que receberá o conteudo HTML da ferramenta
+	iddiv {String} - id do div que receber&aacute; o conteudo HTML da ferramenta
 	*/
 	inicia: function(iddiv){
 		i3GEO.janela.comboCabecalhoTemas("i3GEOFtoponimiaComboCabeca","i3GEOFtoponimiaComboCabecaSel","toponimia","ligadosComTabela");
@@ -84,7 +84,7 @@ i3GEOF.toponimia = {
 				{onclick:{fn: i3GEOF.toponimia.cria}}
 			);
 			//
-			//pega a lista de itens e chama a função de montagem das opções de escolha
+			//pega a lista de itens e chama a fun&ccedil;ão de montagem das op&ccedil;&otilde;es de escolha
 			//
 			i3GEO.util.comboItens(
 				"i3GEOtoponimiaListaItens",
@@ -103,11 +103,11 @@ i3GEOF.toponimia = {
 	/*
 	Function: html
 	
-	Gera o código html para apresentação das opções da ferramenta
+	Gera o c&oacute;digo html para apresenta&ccedil;ão das op&ccedil;&otilde;es da ferramenta
 	
 	Retorno:
 	
-	String com o código html
+	String com o c&oacute;digo html
 	*/
 	html:function(){
 		var ins = '' +
@@ -119,12 +119,12 @@ i3GEOF.toponimia = {
 		'	</ul>' +
 		'</div><br>' +
 		'	<div class=guiaobj id="i3GEOtoponimiaguia1obj" style="left:1px;90%;display:none;">' +
-		'			<p class="paragrafo" >Escolha o item que contém os textos que serão mostrados no mapa<br>' +	
+		'			<p class="paragrafo" >Escolha o item que cont&eacute;m os textos que serão mostrados no mapa<br>' +	
 		'			<div id=i3GEOtoponimiaDivListaItens ></div>' +
 		'			<br>' +
-		'			<p class="paragrafo" ><input style="cursor:pointer" type="checkbox" id="i3GEOtoponimianovotema" />&nbsp;Adiciona a toponímia no tema atual (deixe desmarcado para criar como uma nova camada)' +
+		'			<p class="paragrafo" ><input style="cursor:pointer" type="checkbox" id="i3GEOtoponimianovotema" />&nbsp;Adiciona a topon&iacute;mia no tema atual (deixe desmarcado para criar como uma nova camada)' +
 		'			<br>' +
-		'			<p class="paragrafo" ><input id=i3GEOtoponimiabotao1 size=35  type=button value="Criar toponímia" />' +
+		'			<p class="paragrafo" ><input id=i3GEOtoponimiabotao1 size=35  type=button value="Criar topon&iacute;mia" />' +
 		'	</div>' +
 		'	<div class=guiaobj id="i3GEOtoponimiaguia2obj" style="left:1px;display:none;">' +
 		'		<table summary="" class=lista width="98%">' +
@@ -272,14 +272,14 @@ i3GEOF.toponimia = {
 	/*
 	Function: corj
 	
-	Abre a janela para o usuário selecionar uma cor interativamente
+	Abre a janela para o usu&aacute;rio selecionar uma cor interativamente
 	*/
 	corj: function(obj)
 	{i3GEO.util.abreCor("",obj);},
 	/*
 	Function: pegaPar
 	
-	Pega os parâmetros para montar a chamada ajax que cria ou testa a toponímia
+	Pega os parâmetros para montar a chamada ajax que cria ou testa a topon&iacute;mia
 	*/
 	pegaPar: function(){
 		var par = "",
@@ -324,7 +324,7 @@ i3GEOF.toponimia = {
 	/*
 	Function: cria
 	
-	Cria a toponímia no tema selecionado
+	Cria a topon&iacute;mia no tema selecionado
 	
 	Veja:
 	
@@ -357,7 +357,7 @@ i3GEOF.toponimia = {
 	/*
 	Function:
 	
-	Testa a criação da toponímia gerando uma imagem temporária
+	Testa a cria&ccedil;ão da topon&iacute;mia gerando uma imagem tempor&aacute;ria
 	
 	Veja:
 	

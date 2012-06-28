@@ -51,7 +51,7 @@ MAP
       END
     END
     CLASS
-      NAME "Savana Estépica"
+      NAME "Savana Estepica"
       EXPRESSION ('[NOME]'eq'Savana Estepica')
       STYLE
         ANGLE 360
