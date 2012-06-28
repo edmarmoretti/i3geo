@@ -171,7 +171,17 @@ include_once ($caminho."classesphp/pega_variaveis.php");
 include_once ($caminho."classesphp/funcoes_gerais.php");
 $versao = versao();
 $versao = $versao["principal"];
-
+//
+//verifica a sessao que controla o login do usuario
+//
+session_name("i3GeoLogin");
+session_start();
+if(empty($_SESSION["usuario"])){
+	setcookie("i3geocodigologin", "");
+	setcookie("i3geousuariologin", "");
+	setcookie("i3GeoLogin", "");
+	session_destroy();
+}
 //
 //a vari&aacute;vel $base pode ser definida em ms_configura, mas a prefer&ecirc;ncia &eacute; pela defini&ccedil;&atilde;o j&aacute; existente
 //por isso, $base &eacute; guardada em uma vari&aacute;vel e retomada após o include de ms_configura.php

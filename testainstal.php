@@ -148,7 +148,10 @@ $tabelas = array(
 	"i3geoadmin_temas"=>"it,es,en,kmz_tema,id_tema,kml_tema,ogc_tema,download_tema,tags_tema,tipoa_tema,link_tema,desc_tema,nome_tema,codigo_tema",
 	"i3geoadmin_menus"=>"it,es,en,publicado_menu,perfil_menu,aberto,desc_menu,id_menu,nome_menu",
 	"i3geoadmin_comentarios"=>"comentario,data,openidnome,openidimagem,openidservico,openidusuario,openidurl,id_tema",
-	"i3geoadmin_acessostema"=>"codigo_tema,nacessos,dia,mes,ano"
+	"i3geoadmin_acessostema"=>"codigo_tema,nacessos,dia,mes,ano",
+	"i3geoadmin_usuarios"=>"ativo,data_cadastro,email,id_usuario,login,nome_usuario,senha",
+	"i3geoadmin_papeis"=> "descricao,id_papel,nome",
+	"i3geoadmin_papelusuario"=> "id_papel,id_usuario"
 );
 include_once("admin/php/conexao.php");
 if(!empty($esquemaadmin)){

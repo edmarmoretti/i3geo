@@ -35,7 +35,7 @@ Controla o sistema de login e &aacute;rea restrita dos usu&aacute;rios
 */
 i3GEO.login = {
 	dialogo: {
-		abrelogin: function(locaplic){
+		abreLogin: function(locaplic){
 			var js;
 			if(!locaplic){
 				locaplic = i3GEO.configura.locaplic;
@@ -48,6 +48,16 @@ i3GEO.login = {
 			else
 			{i3GEOF.loginusuario.criaJanelaFlutuante();}
 		},
-		abrelogout: function(){}
+		abreLogout: function(){
+			var r = confirm($trad("x26"));
+			if (r == true){
+				i3GEO.login.anulaCookie();
+				i3GEO.janela.destroi("i3GEOF.loginusuario");
+			}
+		}
+	},
+	anulaCookie: function(){
+		i3GEO.util.insereCookie("i3geocodigologin","");
+		i3GEO.util.insereCookie("i3geousuariologin","");		
 	}
 };

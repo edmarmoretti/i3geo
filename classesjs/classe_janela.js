@@ -422,11 +422,10 @@ i3GEO.janela = {
 	*/
 	fecha: function(event,args){
 		if(typeof(console) !== 'undefined'){console.info("i3GEO.janela.fecha()");}
-		var i,id,janela,
-			iu = i3GEO.util;
+		var i,id;
 		//esconde elementos gr&aacute;ficos q a ferramenta pode ter aberto
-		iu.escondePin();
-		iu.escondeBox();
+		i3GEO.util.escondePin();
+		i3GEO.util.escondeBox();
 		//executa fun&ccedil;&otilde;es default
 		if(i3GEO.janela.ANTESFECHA){
 			for(i=0;i<i3GEO.janela.ANTESFECHA.length;i++)
@@ -438,13 +437,24 @@ i3GEO.janela = {
 		{id = event.id;}
 		if(id == undefined)
 		{id = args.id;}
-		janela = YAHOO.i3GEO.janela.manager.find(id);
-		//remove script carregado pela ferramenta que abriu a janela se houver
-		iu.removeScriptTag(id+"_script");
+		i3GEO.janela.destroi(id);
+	},
+	/*
+	Function: destroi
+
+	Destroi uma janela sem aplicar as funcoes adicionais
+
+	Parametros:
+
+	id {string} - id da janela
+	*/	
+	destroi: function(id){
+		var janela = YAHOO.i3GEO.janela.manager.find(id);
+		i3GEO.util.removeScriptTag(id+"_script");
 		if(janela){
 			YAHOO.i3GEO.janela.manager.remove(janela);
 			janela.destroy();
-		}
+		}		
 	},
 	/*
 	Function: alteraTamanho

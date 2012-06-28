@@ -658,7 +658,7 @@ CREATE TABLE i3geoadmin_papeis (descricao TEXT, id_papel INTEGER PRIMARY KEY, no
 INSERT INTO i3geoadmin_papeis VALUES('Podem executar qualquer tarefa, inclusive cadastrar novos administradores',1,'admin');
 INSERT INTO i3geoadmin_papeis VALUES('Podem criar/editar qualquer tema (mapfile) mas n&atilde;o podem editar a &atilde;rvore do cat&atilde;logo de temas',2,'editores');
 INSERT INTO i3geoadmin_papeis VALUES('Podem alterar a &atilde;rvore do cat&atilde;logo e dos atlas',3,'publicadores');
-CREATE TABLE i3geoadmin_papelusuario (papel_id NUMERIC, usuario_id NUMERIC);
+CREATE TABLE i3geoadmin_papelusuario (id_papel NUMERIC, id_usuario NUMERIC);
 INSERT INTO i3geoadmin_papelusuario VALUES(1,1);
 CREATE TABLE i3geoadmin_perfis (id_perfil INTEGER PRIMARY KEY, perfil TEXT);
 INSERT INTO i3geoadmin_perfis VALUES(1,'teste');

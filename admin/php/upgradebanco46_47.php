@@ -64,7 +64,7 @@ else{
 error_reporting(E_ALL);
 $tabelas = array(
 "CREATE TABLE ".$esquemaadmin."i3geoadmin_usuarios (ativo NUMERIC, data_cadastro TEXT, email TEXT, id_usuario INTEGER PRIMARY KEY, login TEXT, nome_usuario TEXT, senha TEXT)",
-"CREATE TABLE ".$esquemaadmin."i3geoadmin_papelusuario (papel_id NUMERIC, usuario_id NUMERIC)",
+"CREATE TABLE ".$esquemaadmin."i3geoadmin_papelusuario (id_papel NUMERIC, id_usuario NUMERIC)",
 "CREATE TABLE ".$esquemaadmin."i3geoadmin_papeis (descricao TEXT, id_papel INTEGER PRIMARY KEY, nome TEXT)"
 );
 foreach($tabelas as $tabela)
@@ -89,8 +89,8 @@ foreach($tabelas as $tabela)
    	}
 }
 $dbhw->query("INSERT INTO ".$esquemaadmin."i3geoadmin_papeis VALUES('Podem executar qualquer tarefa, inclusive cadastrar novos administradores',1,'admin')");
-$dbhw->query("INSERT INTO ".$esquemaadmin."i3geoadmin_papeis VALUES('Podem criar/editar qualquer tema (mapfile) mas n&atilde;o podem editar a &Aacute;rvore do cat&aacute;logo de temas',2,'editores')");
-$dbhw->query("INSERT INTO ".$esquemaadmin."i3geoadmin_papeis VALUES('Podem alterar a &aacute;rvore do cat&aacute;logo e dos atlas',3,'publicadores')");
+$dbhw->query("INSERT INTO ".$esquemaadmin."i3geoadmin_papeis VALUES('Podem criar/editar qualquer tema (mapfile) mas nao podem editar a Arvore do catalogo de temas',2,'editores')");
+$dbhw->query("INSERT INTO ".$esquemaadmin."i3geoadmin_papeis VALUES('Podem alterar a Arvore do catalogo e dos atlas',3,'publicadores')");
 $dbhw->query("INSERT INTO ".$esquemaadmin."i3geoadmin_usuarios VALUES(1,'','',1,'admin','admin','admin')");
 $dbhw->query("INSERT INTO ".$esquemaadmin."i3geoadmin_papelusuario VALUES(1,1)");
 ?>

@@ -25,7 +25,7 @@ Este programa &eacute; distribu&iacute;do na expectativa de que seja &uacute;til
 por&eacute;m, SEM NENHUMA GARANTIA; nem mesmo a garantia impl&iacute;cita
 de COMERCIABILIDADE OU ADEQUA&Ccedil;&Atilde;O A UMA FINALIDADE ESPEC&Iacute;FICA.
 Consulte a Licen&ccedil;a P&uacute;blica Geral do GNU para mais detalhes.
-Voc&ecirc; deve ter recebido uma cópia da Licen&ccedil;a P&uacute;blica Geral do
+Voc&ecirc; deve ter recebido uma cï¿½pia da Licen&ccedil;a P&uacute;blica Geral do
 GNU junto com este programa; se n&atilde;o, escreva para a
 Free Software Foundation, Inc., no endere&ccedil;o
 59 Temple Street, Suite 330, Boston, MA 02111-1307 USA.
@@ -58,28 +58,33 @@ cp.set_response_type("JSON")
 cp.call(p,"lente",ajaxabrelente)
 
 */
-error_reporting(0);
+error_reporting(E_ALL);
 //
 //pega as variaveis passadas com get ou post
 //
-include_once("/pega_variaveis.php");
+include_once(__DIR__."/pega_variaveis.php");
+include_once(__DIR__."/funcoes_gerais.php");
 session_name("i3GeoLogin");
-if(!empty($_POST["login"]) && !empty($_POST["usuario"])){
+//se o usuario estiver tentando fazer login
+if(!empty($usuario) && !empty($senha)){
+	logoutUsuario();
 	session_regenerate_id();
 	$_SESSION = array();
 	session_start();
 }
-else{
-	if(!empty($_COOKIE["i3geocodigologin"])){
-		session_id($_COOKIE["i3geocodigologin"]);
+else{//se nao, verifica se o login ja existe realmente
+	if(!empty($_COOKIE["i3GeoLogin"])){
+		session_id($_COOKIE["i3GeoLogin"]);
 		session_start();
+		if($_SESSION["usuario"] != $_COKIEE["i3geousuariologin"]){
+			logoutUsuario();
+		}
 	}
-	else{
+	else{//caso nao exista, retorna um erro
 		$retorno = "erro";
 	}
 }
-
-$retorno = ""; //string que ser&aacute; retornada ao browser via JSON
+$retorno = "logout"; //string que ser&aacute; retornada ao browser via JSON
 switch (strtoupper($funcao))
 {
 	/*
@@ -90,9 +95,49 @@ switch (strtoupper($funcao))
 	<iniciaMapa>
 	*/
 	case "LOGIN":
-		$_SESSION["usuario"] = $_POST["usuario"];
-		$retorno = session_id();
+		$teste = autenticaUsuario($usuario,$senha);
+		if($teste != false){
+			$_SESSION["usuario"] = $usuario;
+			$_SESSION["senha"] = $senha;
+			$_SESSION["papeis"] = $teste["papeis"];
+			$fingerprint = 'I3GEOLOGIN' . $_SERVER['HTTP_USER_AGENT'];
+			$_SESSION['fingerprint'] = md5($fingerprint . session_id());
+			$retorno = array("id"=>session_id(),"nome"=>$teste["usuario"]["nome_usuario"]);
+		}
 	break;
 }
+if($retorno == "logout"){
+	logoutUsuario();
+}
 cpjson($retorno);
+function validaSessao(){
+	$fingerprint = 'I3GEOLOGIN' . $_SERVER['HTTP_USER_AGENT'];
+	if($_SESSION['fingerprint'] != md5($fingerprint . session_id())){
+		return false;
+	}
+	if($_SESSION["usuario"] != $_COOKIE["usuario"]){
+		return false;
+	}
+	return true;
+}
+function autenticaUsuario($usuario,$senha){
+	include_once(__DIR__."/../admin/php/admin.php");
+	/**
+	 * @TODO aplicar md5 na senha
+	 */
+	$dados = pegaDados("select * from ".$esquemaadmin."i3GEOadmin_usuarios where nome_usuario = '$usuario' and senha = '$senha' and ativo = 1",$locaplic);
+	if(count($dados) > 0){
+		$papeis = pegaDados("select * from ".$esquemaadmin."i3geoadmin_papelusuario where id_usuario = ".$dados[0]["id_usuario"]);
+		$r = array("usuario"=>$dados[0],"papeis"=>$papeis);
+		return $r;
+	}
+	else{
+		return false;
+	}
+}
+function logoutUsuario(){
+	$_COOKIE = array();
+	$_SESSION = array();
+	session_destroy();
+}
 ?>

@@ -23,10 +23,10 @@ GNU conforme publicada pela Free Software Foundation;
 
 Este programa &eacute; distribu&iacute;do na expectativa de que seja &uacute;til,
 por&eacute;m, SEM NENHUMA GARANTIA; nem mesmo a garantia impl&iacute;cita
-de COMERCIABILIDADE OU ADEQUAÇÃO A UMA FINALIDADE ESPEC&Iacute;FICA.
+de COMERCIABILIDADE OU ADEQUAï¿½ï¿½O A UMA FINALIDADE ESPEC&Iacute;FICA.
 Consulte a Licen&ccedil;a P&uacute;blica Geral do GNU para mais detalhes.
 Voc&ecirc; deve ter recebido uma c&oacute;pia da Licen&ccedil;a P&uacute;blica Geral do
-GNU junto com este programa; se não, escreva para a
+GNU junto com este programa; se nï¿½o, escreva para a
 Free Software Foundation, Inc., no endere&ccedil;o
 59 Temple Street, Suite 330, Boston, MA 02111-1307 USA.
 */
@@ -60,25 +60,34 @@ i3GEOF.loginusuario = {
 				"i3GEOFloginusuario",
 				{onclick:{fn: i3GEOF.loginusuario.enviar}}
 			);
+			new YAHOO.widget.Button(
+				"i3GEOFlogoutusuario",
+				{onclick:{fn: i3GEO.login.dialogo.abreLogout}}
+			);			
 		}
 		catch(erro){alert(erro);}
 	},
 	/*
 	Function: html
 	
-	Gera o c&oacute;digo html para apresenta&ccedil;ão das op&ccedil;&otilde;es da ferramenta
+	Gera o c&oacute;digo html para apresenta&ccedil;ï¿½o das op&ccedil;&otilde;es da ferramenta
 	
 	Retorno:
 	
 	String com o c&oacute;digo html
 	*/
 	html:function(){
-		var ins = '' +
-		'<p class="paragrafo" >Usu&aacute;rio:<br>' +
+		var u = i3GEO.util.pegaCookie("i3geousuariologin"),
+			ins = "";
+		if(!u){
+			u = "-";
+		}
+		ins = '<p class="paragrafo" >'+$trad("x30")+': <b><i>'+u+"</i></b>" +
+		'<p class="paragrafo" >'+$trad("x27")+':<br>' +
 		'<input id=i3geousuario type=text style="width:250px;" value=""/>' +
-		'<p class="paragrafo" >Senha:<br>' +
-		'<input id=i3geosenha type=text style="width:250px;" value=""/><br>' +
-		'<p class="paragrafo" ><input id=i3GEOFloginusuario size=20  type=button value="Enviar" />';
+		'<p class="paragrafo" >'+$trad("x28")+':<br>' +
+		'<input id=i3geosenha type=password style="width:250px;" value=""/><br>' +
+		'<p class="paragrafo" ><input id=i3GEOFloginusuario size=20  type=button value="'+$trad("x29")+'" />&nbsp;<input id=i3GEOFlogoutusuario size=20  type=button value="Logout" />';
 		return ins;	
 	},
 	/*
@@ -87,16 +96,16 @@ i3GEOF.loginusuario = {
 	Cria a janela flutuante para controle da ferramenta.
 	*/	
 	criaJanelaFlutuante: function(){
-		var minimiza,cabecalho,janela,divid,temp,titulo;
+		var minimiza,cabecalho,janela,divid,titulo;
 		//cria a janela flutuante
 		cabecalho = function(){};
 		minimiza = function(){
 			i3GEO.janela.minimiza("i3GEOF.loginusuario");
 		};
-		titulo = "Login &nbsp;&nbsp;&nbsp;</a>";
+		titulo = "Login &nbsp;&nbsp;&nbsp;";
 		janela = i3GEO.janela.cria(
 			"260px",
-			"110px",
+			"140px",
 			"",
 			"",
 			"",
@@ -115,7 +124,7 @@ i3GEOF.loginusuario = {
 	/*
 	Function: enviar
 	
-	Envia os daods de login
+	Envia os dados de login
 	*/
 	enviar: function(){
 		var u = $i("i3geousuario").value,
@@ -128,13 +137,21 @@ i3GEOF.loginusuario = {
 			i3GEOF.loginusuario.aguarde.visibility = "hidden";
 			return;
 		}
-		/*
+		/**
 		 * @TODO criptografar o envio de usuario e senha
 		 */
-		temp = function(){
-				i3GEOF.opcoesEscala.aguarde.visibility = "hidden";
-				i3GEO.util.insereCookie("i3geocodigologin",retorno.data);
-			};
+		temp = function(retorno){
+			i3GEOF.loginusuario.aguarde.visibility = "hidden";
+			if(retorno.data == "erro"){
+				i3GEO.login.anulaCookie();
+			}
+			else{
+				i3GEO.util.insereCookie("i3geocodigologin",retorno.data.id);
+				i3GEO.util.insereCookie("i3geousuariologin",u);
+				alert("Login OK -> "+retorno.data.nome);
+				i3GEO.janela.destroi("i3GEOF.loginusuario");
+			}
+		};
 		p = i3GEO.configura.locaplic+"/classesphp/funcoes_login.php?funcao=login";
 		cp = new cpaint();
 		cp.set_transfer_mode("POST");	

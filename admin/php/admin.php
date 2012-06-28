@@ -172,9 +172,7 @@ Array originada de fetchAll
 */
 function pegaDados($sql,$locaplic="")
 {
-	$resultado = array();    	if(!empty($esquemaadmin)){
-		$esquemaadmin = $esquemaadmin.".";
-	}
+	$resultado = array();
 	if($locaplic == "")
 		include("conexao.php");
 	else

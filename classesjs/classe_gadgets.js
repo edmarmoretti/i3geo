@@ -19,7 +19,7 @@ GNU conforme publicada pela Free Software Foundation;
 
 Este programa &eacute; distribu&iacute;do na expectativa de que seja &uacute;til,
 por&eacute;m, SEM NENHUMA GARANTIA; nem mesmo a garantia impl&iacute;cita
-de COMERCIABILIDADE OU ADEQUAÇ&Atilde;O A UMA FINALIDADE ESPEC&Iacute;FICA.
+de COMERCIABILIDADE OU ADEQUAï¿½&Atilde;O A UMA FINALIDADE ESPEC&Iacute;FICA.
 Consulte a Licen&ccedil;a P&uacute;blica Geral do GNU para mais detalhes.
 Voc&ecirc; deve ter recebido uma c&oacute;pia da Licen&ccedil;a P&uacute;blica Geral do
 GNU junto com este programa; se n&atilde;o, escreva para a
@@ -44,18 +44,18 @@ i3GEO.gadgets = {
 
 	Parametros de inicializa&ccedil;&atilde;o dos gadgets.
 
-	Essa vari&aacute;vel define os parâmetros individuais de cada gadget e o ID do elemento HTML onde
-	o gadget ser&aacute; inclu&iacute;do (parâmetro "idhtml").
+	Essa vari&aacute;vel define os parï¿½metros individuais de cada gadget e o ID do elemento HTML onde
+	o gadget ser&aacute; inclu&iacute;do (parï¿½metro "idhtml").
 	
-	Cada tipo de gadget pode ter parâmetros espec&iacute;ficos, descritos a seguir.
+	Cada tipo de gadget pode ter parï¿½metros espec&iacute;ficos, descritos a seguir.
 	
 	i3GEO.gadgets.PARAMETROS.mostraBuscaRapida.servicosexternos = true|false //indica que os servi&ccedil;os de buscas externos ao i3Geo ser&atilde;o ou n&atilde;o mostrados
 	i3GEO.gadgets.PARAMETROS.mostraBuscaRapida.temasmapa =  true|false //indica se a busca ser&aacute; feita ou n&atilde;o nas camadas existentes no mapa
 	i3GEO.gadgets.PARAMETROS.mostraMenuSuspenso.deslocaEsquerda = 0 //n&uacute;mero de pixels que indica o quanto o menu ser&aacute; deslocado para a esquerda
 	i3GEO.gadgets.PARAMETROS.mostraMenuSuspenso.finaliza = "" //nome de uma fun&ccedil;&atilde;o que ser&aacute; executada quando a constru&ccedil;&atilde;o do menu tiver terminado
-	i3GEO.gadgets.PARAMETROS.mostraMenuSuspenso.parametrosYUI = {} //objeto contendo parâmetros adicionais da API YUI para menus
+	i3GEO.gadgets.PARAMETROS.mostraMenuSuspenso.parametrosYUI = {} //objeto contendo parï¿½metros adicionais da API YUI para menus
 	
-	Voc&ecirc; pode acessar os parâmetros da seguinte forma:
+	Voc&ecirc; pode acessar os parï¿½metros da seguinte forma:
 
 	i3GEO.gadgets.PARAMETROS.mostraMenuSuspenso.deslocaEsquerda = 400;
 
@@ -515,8 +515,8 @@ i3GEO.gadgets = {
 					i3GEO.configura.oMenuData.submenus.i3GeoAdmin = [];
 					if(ms.permiteLogin === true){
 						i3GEO.configura.oMenuData.submenus.i3GeoAdmin.push(
-							{id:"omenudataAdminu1",text: "Login", url: "javascript:i3GEO.login.dialogo.abrelogin()" },
-							{id:"omenudataAdminu2",text: "Logout", url: "i3GEO.login.dialogo.abrelogout()" }
+							{id:"omenudataAdminu1",text: "Login", url: "javascript:i3GEO.login.dialogo.abreLogin()" },
+							{id:"omenudataAdminu2",text: "Logout", url: "javascript:i3GEO.login.dialogo.abreLogout()" }
 						);
 					}
 					if(i3GEO.parametros.editor === "sim"){
