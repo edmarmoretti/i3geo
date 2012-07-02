@@ -179,7 +179,7 @@ i3GEOF.tme = {
 	
 	A lista &eacute; inserida no elemento html com id "i3GEOtmelistai"
 	
-	@TODO marcar os itens existentes
+	TODO marcar os itens existentes
 	*/
 	montaListaItens: function(retorno){
 		var ins,i,n,item;

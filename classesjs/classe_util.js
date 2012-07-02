@@ -194,12 +194,17 @@ i3GEO.util = {
 
 	nome - {String} Nome do cookie.
 
-	valor - (String) Valor do cookie
+	valor - {String} Valor do cookie
+	
+	expira - {numerico} Dias que levara para expirar
 	*/
-	insereCookie: function(nome,valor) {
+	insereCookie: function(nome,valor,expira) {
 		if(typeof(console) !== 'undefined'){console.info("i3GEO.util.insereCookie()");}
+		if(!expira){
+			expira = 10;
+		}
 		var exdate=new Date();
-		exdate.setDate(exdate.getDate() + 10);
+		exdate.setDate(exdate.getDate() + expira);
 		document.cookie = nome+"="+valor+"; expires="+exdate.toUTCString()+";path=/";
 	},
 	/*

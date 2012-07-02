@@ -41,7 +41,10 @@ O par&acirc;metro principal &eacute; "funcao", que define qual opera&ccedil;&ati
 Cada opera&ccedil;&atilde;o possu&iacute; seus próprios par&acirc;metros, que devem ser enviados tamb&eacute;m na requisi&ccedil;&atilde;o da opera&ccedil;&atilde;o.
 
 */
-require_once("admin.php");
+include_once(__DIR__."/login.php");
+if(verificaOperacaoSessao("admin/html/arvore") == false){
+	echo "Vc nao pode realizar essa operacao.";exit;
+}
 if(!isset($idioma))
 {
 	$idioma = "pt";

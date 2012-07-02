@@ -50,31 +50,33 @@ body {
 				</div>
 				<div class="ft"></div>
 			</div>
-			<br>
-			<p class=paragrafo>
-				Idioma: <select id="idioma" onchange="initMenu()">
-					<option value="pt" selected>Portugu&ecirc;s</option>
-					<option value="en">Ingl&ecirc;s</option>
-					<option value="es">Espanhol</option>
-					<option value="it">Italiano</option>
-				</select>
-			</p>
-			<p class=paragrafo>
-				Utilize os bot&otilde;es para criar novos nomes de menus, grupos ou
-				sub-grupos, formando listas de itens.<br>Os itens criados podem
-				ser reaproveitados em v&aacute;rios nós da &aacute;rvore.
-			</p>
-			<p class=paragrafo>
-				<input id="botaoEditorMenu" type=button
-					value="Editar lista de menus" style="left: -5px;" /> <input
-					id="botaoEditorGrupo" type=button value="Editar lista de grupos" />
-				<input id="botaoEditorSubGrupo" type=button
-					value="Editar lista de sub-grupos" />
-			</p>
+			<div id="formulario" style="display: none">
+				<br>
+				<p class=paragrafo>
+					Idioma: <select id="idioma" onchange="initMenu()">
+						<option value="pt" selected>Portugu&ecirc;s</option>
+						<option value="en">Ingl&ecirc;s</option>
+						<option value="es">Espanhol</option>
+						<option value="it">Italiano</option>
+					</select>
+				</p>
+				<p class=paragrafo>
+					Utilize os bot&otilde;es para criar novos nomes de menus, grupos ou
+					sub-grupos, formando listas de itens.<br>Os itens criados podem
+					ser reaproveitados em v&aacute;rios nós da &aacute;rvore.
+				</p>
+				<p class=paragrafo>
+					<input id="botaoEditorMenu" type=button
+						value="Editar lista de menus" style="left: -5px;" /> <input
+						id="botaoEditorGrupo" type=button value="Editar lista de grupos" />
+					<input id="botaoEditorSubGrupo" type=button
+						value="Editar lista de sub-grupos" />
+				</p>
 
-			<p>&Aacute;rvore do cat&aacute;logo:</p>
-			<div id="arvoreMenus" style="left: -5px;"></div>
-			<div id=logajax style="display: block"></div>
+				<p>&Aacute;rvore do cat&aacute;logo:</p>
+				<div id="arvoreMenus" style="left: -5px;"></div>
+				<div id=logajax style="display: block"></div>
+			</div>
 		</div>
 	</center>
 	<script>
@@ -123,6 +125,16 @@ i3geo/admin/html/arvore.html
 */
 if(screen.availWidth > 700)
 {document.getElementById("divGeral").style.width = "700px";}
+//necessario para a ferramenta login e outras
+i3GEO.configura = {
+	locaplic: "../.."
+};
+//
 cabecalhoGeral("cabecalhoPrincipal","arvore");
+temp = function(){
+	document.getElementById("formulario").style.display = "block";
+	initMenu();
+}
+i3GEO.login.verificaOperacao("admin/html/arvore",i3GEO.configura.locaplic,temp,"sessao");
 </script>
 </body>

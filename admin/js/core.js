@@ -68,12 +68,14 @@ var $perfis = "";
 function cabecalhoGeral(id,excluir){
 	var i,n,temp,
 		ins = "<fieldset class='cabecalhoGeral'><legend>Op&ccedil;&otilde;es principais</legend>",
+		u = i3GEO.util.pegaCookie("i3geousuarionome"),
 		botoes = [
 			{id:"principal",titulo:"In&iacute;cio",link:"../index.html"},
-			{id:"menus",titulo:"Menus",link:"menus.html"},			
+			{id:"menus",titulo:"Menus",link:"menus.html"},
 			{id:"arvore",titulo:"&Aacute;rvore de temas",link:"arvore.html"},
 			{id:"editormapfile",titulo:"Mapfiles",link:"editormapfile.html"},
-			{id:"atlas",titulo:"Atlas",link:"atlas.html"}
+			{id:"atlas",titulo:"Atlas",link:"atlas.html"},
+			{id:"login",titulo:"Login",js:"i3GEO.login.dialogo.abreLogin()"}
 		];
 	n = botoes.length;
 	for(i=0;i<n;i++){
@@ -81,17 +83,31 @@ function cabecalhoGeral(id,excluir){
 			ins += '<input type=button id="'+botoes[i].id+'" value="'+botoes[i].titulo+'" />';
 		}
 	}
+	if(!u){
+		u = "-";
+	}
+	ins += "<div id='i3GEONomeLogin' > Login: "+u+"</div>";
 	ins += "</fieldset>";
 	temp = $i(id);
 	temp.innerHTML = ins;
 	for(i=0;i<n;i++){
-		if(excluir === "principal")
-		{botoes[i].link = "html/"+botoes[i].link;}	
+		if(excluir === "principal" && botoes[i].link)
+		{botoes[i].link = "html/"+botoes[i].link;}
 		if(botoes[i].id !== excluir){
 			new YAHOO.widget.Button(botoes[i].id);
-			eval('$i("'+botoes[i].id+'-button'+'").onclick = function(){window.location = \''+botoes[i].link+'\';}');
+			if(botoes[i].link){
+				eval('$i("'+botoes[i].id+'-button'+'").onclick = function(){window.location = \''+botoes[i].link+'\';}');
+			}
+			else{
+				eval('$i("'+botoes[i].id+'-button'+'").onclick = function(){'+botoes[i].js+';}');
+			}
+
 		}
 	}
+	try{
+		i3GEO.login.recarrega = true;
+	}
+	catch(e){ }
 	//temp.style.border = "solid 1px gray";
 	//temp.style.padding = "10px";
 }
@@ -126,7 +142,7 @@ function core_movimentaNo(tipo,no)
 				no.insertBefore(noanterior);
 				tree.draw();
 				movimenta = true;
-			}	 
+			}
 		}
 	}
 	if(tipo == "desce")
@@ -202,7 +218,7 @@ function core_handleFailure(o,texto)
 		YAHOO.example.container.wait.render(document.body);
 	}
 	else
-	{YAHOO.example.container.wait.setBody(log.innerHTML);}	
+	{YAHOO.example.container.wait.setBody(log.innerHTML);}
 }
 /*
 Function: core_makeRequest
@@ -246,18 +262,18 @@ function core_carregando(tipo)
 	{
     	YAHOO.example.container.wait = new YAHOO.widget.Panel("wait",{width: "240px",fixedcenter: true,close: true,draggable: false,zindex:4,modal: true,visible: false});
 		YAHOO.example.container.wait.setHeader("Aguarde...");
-		YAHOO.example.container.wait.setBody("<img src=\"../../imagens/aguarde.gif\"/>");		
+		YAHOO.example.container.wait.setBody("<img src=\"../../imagens/aguarde.gif\"/>");
 		YAHOO.example.container.wait.render(document.body);
 	}
 	else
 	{YAHOO.example.container.wait.show();}
-	YAHOO.example.container.wait.setBody("<img src=\"../../imagens/aguarde.gif\"/>");		
+	YAHOO.example.container.wait.setBody("<img src=\"../../imagens/aguarde.gif\"/>");
 	if(tipo == "ativa")
 	{YAHOO.example.container.wait.show();}
 	if(tipo == "desativa")
 	{YAHOO.example.container.wait.hide();}
 	if(tipo != "ativa" && tipo != "desativa")
-	{YAHOO.example.container.wait.setBody("<img src=\"../../imagens/aguarde.gif\"/> "+tipo);}	
+	{YAHOO.example.container.wait.setBody("<img src=\"../../imagens/aguarde.gif\"/> "+tipo);}
 }
 /*
 Function: core_dialogoContinua
@@ -281,8 +297,8 @@ function core_dialogoContinua(handleYes,handleNo,mensagem,largura,cabecalho)
 	}
 	// Instantiate the Dialog
 	YAHOO.namespace("continua.container");
-	YAHOO.continua.container.simpledialog1 = 
-		new YAHOO.widget.SimpleDialog("simpledialog1", 
+	YAHOO.continua.container.simpledialog1 =
+		new YAHOO.widget.SimpleDialog("simpledialog1",
 			 { width: largura+"px",
 			   fixedcenter: true,
 			   visible: false,
@@ -318,8 +334,8 @@ function core_dialogoPergunta(handleYes,handleNo,mensagem,largura)
 {
 	// Instantiate the Dialog
 	YAHOO.namespace("continua.container");
-	YAHOO.continua.container.simpledialog1 = 
-		new YAHOO.widget.SimpleDialog("simpledialog1", 
+	YAHOO.continua.container.simpledialog1 =
+		new YAHOO.widget.SimpleDialog("simpledialog1",
 			 { width: largura+"px",
 			   fixedcenter: true,
 			   visible: false,
@@ -431,7 +447,7 @@ filtro - (opcional) string com o filtro, por exemplo, "'download_tema' = 'SIM'"
 */
 function core_pegaMapfiles(funcaoM,letra,filtro)
 {
-	if(arguments.length == 0){	
+	if(arguments.length == 0){
 		letra = "";
 		filtro = "";
 		funcaoM = "";
@@ -819,7 +835,7 @@ function core_menuCheckBox(valores,textos,selecionados,target,record,key)
             { label: "OK", value: "OK", checked: false},
             { label: "Cancel", value: "CANCEL", checked: false }
         ]);
-		og_core.on("checkedButtonChange", on_menuCheckBoxChange);	
+		og_core.on("checkedButtonChange", on_menuCheckBoxChange);
 		YAHOO.example.container.panelCK = new YAHOO.widget.Overlay("core_menuCK", { zindex:"100",close:false,underlay:false,width:"200px", height:"200px",overflow:"auto", visible:false,constraintoviewport:true } );
 		YAHOO.example.container.panelCK.render();
 	}
@@ -880,11 +896,11 @@ function core_comboObjeto(obj,valor,texto,marcar,texto2)
 		t = eval("obj[k]."+texto);
 		else
 		t = obj[k];
-		
+
 		if(texto2){
 			t += " ("+eval("obj[k]."+texto2)+")";
 		}
-		
+
 		ins += "<option value='"+v+"' ";
 		if (marcar == v){ins += "selected";}
 		ins += " title='"+t+"'  >"+t+"</option>";
@@ -908,14 +924,14 @@ function core_geraLinhas(dados)
 	core_geralinhasEscondeAjuda = function(id){
 		var a = $i(id+"_ajuda"),
 			i = $i(id+"_imgajuda");
-		
+
 		if(a.style.display == "block"){
 			a.style.display = "none";
 			i. src = "../../imagens/desce.gif";
 		}
 		else{
 			a.style.display = "block";
-			i. src = "../../imagens/sobe.gif";		
+			i. src = "../../imagens/sobe.gif";
 		}
 	};
 	do
@@ -1007,7 +1023,7 @@ function core_ativaBotaoAdicionaLinha(sUrl,idBotao,nomeFuncao)
   			},
   			failure:core_handleFailure,
   			argument: { foo:"foo", bar:"bar" }
-		}; 
+		};
 		core_makeRequest(sUrl,callback);
 	};
 	//cria o bot&atilde;o de adi&ccedil;&atilde;o de um novo menu
@@ -1049,7 +1065,7 @@ function core_pegaDados(mensagem,sUrl,funcaoRetorno)
   		},
   		failure:core_handleFailure,
   		argument: { foo:"foo", bar:"bar" }
-	}; 
+	};
 	core_makeRequest(sUrl,callback);
 }
 /*
@@ -1098,7 +1114,7 @@ function core_gravaLinha(mensagem,row,sUrl,nomeFuncao)
   		},
   		failure:core_handleFailure,
   		argument: { foo:"foo", bar:"bar" }
-	}; 
+	};
 	core_makeRequest(sUrl,callback);
 }
 /*
@@ -1149,7 +1165,7 @@ function core_excluiLinha(sUrl,row,mensagem,cabecalho)
   			},
   			failure:core_handleFailure,
   			argument: { foo:"foo", bar:"bar" }
-		}; 
+		};
 		core_makeRequest(sUrl,callback);
 	};
 	var handleNo = function()
@@ -1211,7 +1227,7 @@ function core_excluiNoTree(sUrl,no,mensagem,cabecalho)
   			},
   			failure:core_handleFailure,
   			argument: { foo:"foo", bar:"bar" }
-		}; 
+		};
 		core_makeRequest(sUrl,callback);
 	};
 	var handleNo = function()
@@ -1236,24 +1252,24 @@ funcaoOK - string com o nome da fun&ccedil;&atilde;o que ser&aacute; executada q
 funcaoClose - nome da funcao que ser&aacute; executada quando a janela for fechada
 */
 function core_montaEditor(funcaoOK,w,h,funcaoClose)
-{	
+{
 	if(arguments.length == 0)
 	{
 		funcaoOK = "";
 		w = "400px";
-		h = w;
+		h = "354px";
 	}
 	if(arguments.length < 2)
 	{
 		w = "400px";
-		h = w;
+		h = "354px";
 	}
 	if(!$i("janela_editor"))
 	{
 		var novoel = document.createElement("div");
 		novoel.id =  "janela_editor";
 		var ins = '<div class="hd">Editor</div>';
-		ins += "<div class='bd' style='height:354px;overflow:auto'>";
+		ins += "<div class='bd' style='height:"+h+";overflow:auto'>";
 		ins += "<div id='okcancel_checkbox'></div>";
 		ins += "<div id='editor_bd'></div>";
 		novoel.innerHTML = ins;
@@ -1372,7 +1388,13 @@ function core_ativaforms(lista){
 	"../../pacotes/yui290/build/treeview/treeview.js",
 	"../../pacotes/yui290/build/json/json-min.js",
 	"../../pacotes/yui290/build/menu/menu-min.js",
-	"../../pacotes/yui290/build/editor/editor-min.js"
+	"../../pacotes/yui290/build/editor/editor-min.js",
+	"../../classesjs/compactados/classe_util_compacto.js",
+	"../../classesjs/compactados/classe_login_compacto.js",
+	"../../classesjs/compactados/classe_janela_compacto.js",
+	"../../classesjs/compactados/dicionario_compacto.js",
+	"../../classesjs/compactados/classe_idioma_compacto.js",
+	"../../pacotes/cpaint/cpaint2.inc.compressed.js"
 	);
 	//
 	//arquivos css

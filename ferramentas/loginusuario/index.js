@@ -33,7 +33,6 @@ Free Software Foundation, Inc., no endere&ccedil;o
 if(typeof(i3GEOF) === 'undefined'){
 	i3GEOF = [];
 }
-
 /*
 Classe: i3GEOF.loginusuario
 */
@@ -77,9 +76,9 @@ i3GEOF.loginusuario = {
 	String com o c&oacute;digo html
 	*/
 	html:function(){
-		var u = i3GEO.util.pegaCookie("i3geousuariologin"),
+		var u = i3GEO.util.pegaCookie("i3geousuarionome")+" - "+i3GEO.util.pegaCookie("i3geousuariologin"),
 			ins = "";
-		if(!u){
+		if(!i3GEO.util.pegaCookie("i3geousuariologin") || !i3GEO.util.pegaCookie("i3GeoLogin") || i3GEO.util.pegaCookie("i3geousuariologin") == "" || i3GEO.util.pegaCookie("i3GeoLogin") == ""){
 			u = "-";
 		}
 		ins = '<p class="paragrafo" >'+$trad("x30")+': <b><i>'+u+"</i></b>" +
@@ -105,7 +104,7 @@ i3GEOF.loginusuario = {
 		titulo = "Login &nbsp;&nbsp;&nbsp;";
 		janela = i3GEO.janela.cria(
 			"260px",
-			"140px",
+			"180px",
 			"",
 			"",
 			"",
@@ -138,21 +137,28 @@ i3GEOF.loginusuario = {
 			return;
 		}
 		/**
-		 * @TODO criptografar o envio de usuario e senha
+		 * TODO criptografar o envio de usuario e senha
 		 */
 		temp = function(retorno){
 			i3GEOF.loginusuario.aguarde.visibility = "hidden";
-			if(retorno.data == "erro"){
-				i3GEO.login.anulaCookie();
+			if(retorno.data == "erro" || retorno.data == "logout"){
+				alert($trad("x31"));
 			}
 			else{
-				i3GEO.util.insereCookie("i3geocodigologin",retorno.data.id);
-				i3GEO.util.insereCookie("i3geousuariologin",u);
+				i3GEO.util.insereCookie("i3geocodigologin",retorno.data.id,1);
+				i3GEO.util.insereCookie("i3geousuariologin",u,1);
+				i3GEO.util.insereCookie("i3geousuarionome",retorno.data.nome,1);
 				alert("Login OK -> "+retorno.data.nome);
 				i3GEO.janela.destroi("i3GEOF.loginusuario");
+				if(i3GEO.login.recarrega == true){
+					document.location.reload();
+				}
+				if($i(i3GEO.login.divnomelogin)){
+					$i(i3GEO.login.divnomelogin).innerHTML = retorno.data.nome;
+				}
 			}
 		};
-		p = i3GEO.configura.locaplic+"/classesphp/funcoes_login.php?funcao=login";
+		p = i3GEO.configura.locaplic+"/admin/php/login.php?funcao=login";
 		cp = new cpaint();
 		cp.set_transfer_mode("POST");	
 		cp.set_response_type("JSON");

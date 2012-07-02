@@ -202,6 +202,10 @@ if (strtoupper(substr(PHP_OS, 0, 3) == 'WIN'))
 	Tipo:
 	{array}
 	*/
+	/**
+	 * 
+	 * TODO bloquear essa variavel
+	 */
 	$navegadoresLocais = array(
 							array(
 							"ip"=>"127.0.0.1",
@@ -223,18 +227,22 @@ if (strtoupper(substr(PHP_OS, 0, 3) == 'WIN'))
 	Tipo:
 	{array}
 	
-	@TODO Bloquear essa variavel
 	*/
+/**
+ * TODO Bloquear essa variavel
+ */
 	$editores = array("127.0.0.1","localhost");
 	/*
 	Variable: i3geomaster
 	
 	Usu&aacute;rio e senha que podem realizar opera&ccedil;&otilde;es de administra&ccedil;&atilde;o inicial do i3Geo, como a cria&ccedil;&atilde;o do banco de dados de administra&ccedil;&atilde;o ou opera&ccedil;&otilde;es cr&iacute;ticas do sistema
 	
-	@TODO Documentar no manual do sistema de administra&ccedil;&atilde;o
-	
-	@TODO compatibilizar essa senha com phpliteadmin
 	*/
+	/**
+	 * 
+	 * TODO Documentar no manual do sistema de administra&ccedil;&atilde;o 
+	 * TODO compatibilizar essa senha com phpliteadmin
+	 */
 	$i3geomaster = array(
 			array("usuario"=>"admin", "senha"=>"admin")
 	);
@@ -396,9 +404,11 @@ if (strtoupper(substr(PHP_OS, 0, 3) == 'WIN'))
 	
 	Tipo:
 	{string}
-	
-	@todo Atualizar a documenta&ccedil;&atilde;o sobre isso
 	*/
+	/**
+	 * 
+	 * TODO Atualizar a documenta&ccedil;&atilde;o sobre isso
+	 */
 	$esquemaadmin = "";
 	/*
 	 Variable: interfacePadrao

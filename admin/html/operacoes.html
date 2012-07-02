@@ -2,7 +2,7 @@
 <html>
 <head>
 <meta http-equiv="content-type" content="text/html; charset=ISO-8859-1">
-<title>Identifica</title>
+<title>Atlas</title>
 <style type="text/css">
 /*margin and padding on body element
           can introduce errors in determining
@@ -15,7 +15,7 @@ body {
 }
 </style>
 <script type="text/javascript" src="../js/core.js"></script>
-<script type="text/javascript" src="../js/identifica.js"></script>
+<script type="text/javascript" src="../js/operacoes.js"></script>
 <link rel="stylesheet" type="text/css" href="admin.css">
 </head>
 <body class=" yui-skin-sam fundoPonto">
@@ -23,43 +23,39 @@ body {
 		<div class="bordaSuperior">&nbsp;</div>
 		<div class="mascaraPrincipal" id="divGeral">
 			<div id=cabecalhoPrincipal></div>
-			<h1>Administra&ccedil;&atilde;o do i3geo - sistemas de identifica&ccedil;&atilde;o</h1>
-
-			<div id="ajuda">
-				<div class="hd">Ajuda</div>
-				<div class="bd" style="height: 144px; overflow: auto">
-					Este programa permite editar a lista de sistemas de identifica&ccedil;&atilde;o.<br>
-					<br> A ferramenta de identifica&ccedil;&atilde;o utilizada no i3geo, lista
-					os dados do ponto clicado no mapa pelo usu&aacute;rio, com base nas
-					camadas existentes no mapa. Os sistemas de identifica&ccedil;&atilde;o adicionam
-					outras op&ccedil;&otilde;es na janela de identifica&ccedil;&atilde;o, permitindo, por exemplo,
-					o uso de programas especiais de busca de dados.<br>
-					<br> Os sistemas s&atilde;o baseados no banco admin.db e os usu&aacute;rios
-					que n&atilde;o s&atilde;o editores podem ver apenas os sistemas publicados.<br>
-					<br> A lista de IPs dos usu&aacute;rios que podem administrar o i3geo
-					&eacute; definida no arquivo i3geo/ms_configura.php
+			<h1>
+				Administra&ccedil;&atilde;o do i3geo - Opera&ccedil;&otilde;es <img src="../imagens/04.png"
+					style="cursor: pointer" id=botaoAjuda />
+			</h1>
+			<div id="formulario" style="display: none">
+				<div id="ajuda">
+					<div class="hd">Ajuda</div>
+					<div class="bd" style="height: 144px; overflow: auto">
+						<p>Aqui s&atilde;o definidas quais funcionalidades ser&atilde;o controladas e quais pap&eacute;is podem utiliz&aacute;-las
+						<p>Para que o controle funcione, o c&oacute; do i3Geo deve ser modificado para que a valida&ccedil;&atilde;o seja realizada.
+					</div>
+					<div class="ft"></div>
 				</div>
-				<div class="ft"></div>
+			
+				<input onclick="adicionaLinha()" type=button id=adiciona
+					value="Adicionar funcionalidade" /> <br>
+				<p>Funcionalidades cadastradas:</p>
+				<div id="tabela" style="left: -5px;"></div>
+				<div id=logajax style="display: block"></div>
 			</div>
-			<input onclick="adicionaLinha()" type=button id=adiciona
-				value="Adicionar um novo sistema" /> <br>
-			<p></p>
-			<div id="tabela" style="left: -5px;"></div>
-			<div id=logajax style="display: block"></div>
-			<div id=dialogoContinua style="display: block"></div>
 		</div>
 	</center>
 	<script>
 /*
-Title: Op&ccedil;&otilde;es da ferramenta identifica
+Title: Editor das opera&ccedil;&otilde;es sob controle
 
-HTML da interface de administra&ccedil;&atilde;o do cadastro de links da interface de identifica&ccedil;&atilde;o
+HTML da interface de administra&cceidl;&atilde;o do controle de acesso a funcionalidades
 
 Veja tamb&eacute;m:
 
 <core.js>
 
-<identifica.js>
+<operacoes.js>
 
 Licenca:
 
@@ -85,16 +81,20 @@ Free Software Foundation, Inc., no endere&ccedil;o
 
 Arquivo:
 
-i3geo/admin/html/identifica.html
+i3geo/admin/html/funcionalidades.html
 */
 if(screen.availWidth > 700)
-{document.getElementById("divGeral").style.width = "1100px";}
+{document.getElementById("divGeral").style.width = "700px";}
 //necessario para a ferramenta login e outras
 i3GEO.configura = {
 	locaplic: "../.."
 };
 //
 cabecalhoGeral("cabecalhoPrincipal","");
+temp = function(){
+	document.getElementById("formulario").style.display = "block";
+	initMenu()
+}
+i3GEO.login.verificaOperacao("admin/html/operacoes",i3GEO.configura.locaplic,temp,"sessao");
 </script>
-
 </body>

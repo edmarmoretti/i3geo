@@ -163,7 +163,7 @@ function montaArvore(dados)
     	buildTree();
 	}();
    	montaNosMenus(dados);
-   	tree.draw();	
+   	tree.draw();
 }
 function temaIconMode()
 {
@@ -226,8 +226,8 @@ function montaNosGrupos(idmenu,no,dados,redesenha)
 		var tempNode = new YAHOO.widget.HTMLNode(d, tempNodeR, false,true);
 		tempNode.isLeaf = true;
 		if($id_grupo !== "")
-		{tempNode.expand();}		
-	}	
+		{tempNode.expand();}
+	}
 	for (var i=0, j=dados.grupos.length; i<j; i++)
 	{
 		if($id_grupo == "" || $id_grupo == dados.grupos[i].id_n1){
@@ -237,7 +237,7 @@ function montaNosGrupos(idmenu,no,dados,redesenha)
 				var tempNode = new YAHOO.widget.HTMLNode(d, tempNodeR, false,true);
 				tempNode.setDynamicLoad(loadSubgruposData, temaIconMode, idmenu);
 				if($id_grupo !== "")
-				{tempNode.expand();}		
+				{tempNode.expand();}
 			}
 		}
 	}
@@ -307,7 +307,7 @@ function montaNosSubgrupos(idmenu,no,dados,redesenha)
 	if(!tree.getNodeByProperty("etiquetaTemasGrupo","grupo_"+no.data.id_n1))
 	montaTemasRaizGrupo(idmenu,no,dados,true);
     if(idmenu == undefined)
-	{return;}	
+	{return;}
 	if(!tree.getNodeByProperty("etiquetaTemasSubGrupo",no.data.id_n1))
 	{
 		var d = {tipo:"etiqueta",etiquetaTemasSubGrupo:no.data.id_n1,html:"<i style=color:gray >Sub-grupos</i>"};
@@ -315,13 +315,13 @@ function montaNosSubgrupos(idmenu,no,dados,redesenha)
 		tempNodeR.isLeaf = false;
 		if($id_subgrupo !== "" || $id_grupo !== "")
 		{tempNodeR.expand();}
-		
+
 		var conteudo = "<span style=\"cursor:pointer;\" onclick=\"novoSubGrupo('"+idmenu+"','"+no.data.id_n1+"')\" ><img style=\"position:relative;top:2px\" src=\"../imagens/05.png\" /><i style=color:gray > Adicionar um novo</i></span>";
 		var d = {html:conteudo};
 		var tempNode = new YAHOO.widget.HTMLNode(d, tempNodeR, false,true);
 		tempNode.isLeaf = true;
 		if($id_subgrupo !== "")
-		{tempNode.expand();}		
+		{tempNode.expand();}
 	}
 	for (var i=0, j=dados.subgrupos.length; i<j; i++)
 	{
@@ -331,7 +331,7 @@ function montaNosSubgrupos(idmenu,no,dados,redesenha)
 			var tempNode = new YAHOO.widget.HTMLNode(d, tempNodeR, false,true);
 			tempNode.setDynamicLoad(loadTemasData, temaIconMode);
 			if($id_subgrupo !== "")
-			{tempNode.expand();}			
+			{tempNode.expand();}
 		}
 	}
 	if(redesenha){tree.draw();}
@@ -347,7 +347,7 @@ function montaTemas(idmenu,no,dados,redesenha)
 		var conteudo = "<span onclick=\"novoTema('"+idmenu+"','"+no.data.id_n2+"')\" style=\"cursor:pointer;\"><img style=\"position:relative;top:2px\" src=\"../imagens/05.png\" /><i style=color:gray > Adicionar um novo</i></span>";
 		var d = {html:conteudo};
 		var tempNode = new YAHOO.widget.HTMLNode(d, tempNodeR, false,true);
-		tempNode.isLeaf = true;		
+		tempNode.isLeaf = true;
 	}
 	for (var i=0, j=dados.length; i<j; i++)
 	{
@@ -386,8 +386,8 @@ function montaTemasRaiz(no,dados,redesenha)
 		tempNodeR.isLeaf = false;
 		var d = {tipo:"etiqueta",html:"<span style=\"cursor:pointer;\" onclick=\"novoTemaRaiz('"+no.data.id_menu+"')\" ><img style=\"position:relative;top:2px\" src=\"../imagens/05.png\" /><i style=color:gray >Adicionar um novo</i></span>"};
 		var tempNode = new YAHOO.widget.HTMLNode(d, tempNodeR, false,true);
-		tempNode.isLeaf = true;		
-	}	
+		tempNode.isLeaf = true;
+	}
 	for (var i=0, j=dados.raiz.length; i<j; i++)
 	{
 		var conteudo = "&nbsp;<img style=\"position:relative;cursor:pointer;top:0px\" onclick=\"sobeDesce('sobe','raizmenu','"+dados.raiz[i].id_raiz+"')\" title=sobe src=\"../imagens/34.png\" />";
@@ -406,7 +406,7 @@ function montaTemasRaizGrupo(idmenu,no,dados,redesenha)
 	var resultado = new Array(),
 	tempNodeR = null;
 	if(no.data.id_n1 == undefined)
-	{return;}	
+	{return;}
 	if(!tree.getNodeByProperty("etiquetaTemasGrupo","grupo_"+no.data.id_n1))
     {
 		var temp = "grupo_"+no.data.id_n1;
@@ -415,7 +415,7 @@ function montaTemasRaizGrupo(idmenu,no,dados,redesenha)
 		tempNodeR.isLeaf = false;
 		var d = {tipo:"etiqueta",html:"<span onclick=\"novoTemaRaizGrupo('"+idmenu+"','"+no.data.id_n1+"')\" style=\"cursor:pointer;\" ><img style=\"position:relative;top:2px\" src=\"../imagens/05.png\" /><i style=color:gray >Adicionar um novo</i></span>"};
 		var tempNode = new YAHOO.widget.HTMLNode(d, tempNodeR, false,true);
-		tempNode.isLeaf = true;		
+		tempNode.isLeaf = true;
 	}
 	for (var i=0, j=dados.raiz.length; i<j; i++)
 	{
@@ -425,7 +425,7 @@ function montaTemasRaizGrupo(idmenu,no,dados,redesenha)
 		tempNode.isLeaf = true;
 		resultado.push(tempNode);
 	}
-	return resultado;	
+	return resultado;
 }
 /*
 Function: novoTemaRaiz
@@ -670,7 +670,7 @@ function editar(tipo,id)
 		},
 		failure:core_handleFailure,
 		argument: { foo:"foo", bar:"bar" }
-	}; 
+	};
 	if(tipo == "grupo")
 	{sUrl = "../php/arvore.php?funcao=pegaDadosGrupo&id="+id+"&idioma="+idiomaSel();}
 	if(tipo == "subgrupo")
@@ -812,10 +812,10 @@ function gravaDados(tipo,id)
   					{
   						var obj = document.getElementById("Eid_grupo");
   						var texto = obj.options[obj.selectedIndex].text;
-  						
+
   						var objpub = document.getElementById("Epublicado");
   						var publicado = objpub.options[objpub.selectedIndex].value;
-  						  						
+
   						var no = tree.getNodeByProperty("id_n1",id);
   						no.getContentEl().getElementsByTagName("span")[0].innerHTML = texto;
 
@@ -842,25 +842,25 @@ function gravaDados(tipo,id)
   						else
   						no.getContentEl().getElementsByTagName("span")[0].style.color = "black";
 
-  						no.html = no.getContentEl().innerHTML; 					
+  						no.html = no.getContentEl().innerHTML;
   					}
   					if(tipo == "tema")
   					{
   						var obj = document.getElementById("Eid_tema");
   						var texto = obj.options[obj.selectedIndex].text;
-  						
+
   						var objpub = document.getElementById("Epublicado");
   						var publicado = objpub.options[objpub.selectedIndex].value;
 
   						var no = tree.getNodeByProperty("id_n3",id);
-  						
+
   						no.getContentEl().getElementsByTagName("span")[0].innerHTML = texto;
-  						
+
   						if(publicado == "NAO")
   						no.getContentEl().getElementsByTagName("span")[0].style.color = "red";
   						else
   						no.getContentEl().getElementsByTagName("span")[0].style.color = "black";
-  						
+
   						no.html = no.getContentEl().innerHTML;
   					}
 					if(tipo == "raizmenu" || tipo == "raizgrupo")
@@ -870,7 +870,7 @@ function gravaDados(tipo,id)
   						var no = tree.getNodeByProperty("id_raiz",id);
   						no.getContentEl().getElementsByTagName("span")[0].innerHTML = texto;
   						no.html = no.getContentEl().innerHTML;
-  					}		
+  					}
   					core_carregando("desativa");
   				}
 				YAHOO.example.container.panelEditor.destroy();
@@ -880,7 +880,7 @@ function gravaDados(tipo,id)
   		},
   		failure:core_handleFailure,
   		argument: { foo:"foo", bar:"bar" }
-	}; 
+	};
 	core_makeRequest(sUrl,callback,'POST');
 }
 function sobeDesce(movimento,tipo,id)
@@ -916,10 +916,9 @@ function sobeDesce(movimento,tipo,id)
 	};
 	if(movimenta)
 	{
-		var sUrl = "../php/arvore.php?funcao=movimentaNo&tipo="+tipo+"&movimento="+movimento+"&id="+id+"&idioma="+idiomaSel();		
+		var sUrl = "../php/arvore.php?funcao=movimentaNo&tipo="+tipo+"&movimento="+movimento+"&id="+id+"&idioma="+idiomaSel();
 		core_carregando("ativa");
 		core_carregando(" modificando a ordem no banco de dados");
 		core_makeRequest(sUrl,callback);
 	}
 }
-YAHOO.util.Event.addListener(window, "load", initMenu);

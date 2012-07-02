@@ -1049,7 +1049,7 @@ $oMap {objeto} - objeto mapa
 */
 function extPadrao($oMap)
 {
-	$ext = "-76.512593 -39.392568 -29.585185 9.490149";
+	$ext = "-160 -70 160 70";
 	$extform = explode(" ",$ext);
 	$extatual = $oMap->extent;
 	$xmin = min($extform[0],$extform[2]);

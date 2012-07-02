@@ -28,19 +28,40 @@ Free Software Foundation, Inc., no endere&ccedil;o
 if(typeof(i3GEO) === 'undefined'){
 	i3GEO = [];
 }
+if(typeof(i3GEOF) === 'undefined'){
+	i3GEOF = [];
+}
 /*
 Classe: i3GEO.login
 
 Controla o sistema de login e &aacute;rea restrita dos usu&aacute;rios
 */
 i3GEO.login = {
+	/*
+		Variavel: divnomelogin
+		
+		Id do elemento div que recebera o nome do usuario apos o login.
+	 */
+	divnomelogin: "i3GEONomeLogin",
+	/*
+	Variavel: recarrega
+	
+	Recarrega ou nao a pagina atual apos o login
+	
+	Tipo:
+	{boolean}
+
+	Default:
+	{false}	
+	*/
+	recarrega: false,	
 	dialogo: {
 		abreLogin: function(locaplic){
 			var js;
 			if(!locaplic){
 				locaplic = i3GEO.configura.locaplic;
 			}
-			if(typeof(console) !== 'undefined'){console.info("i3GEO.login.dialogo.abrelogin()");}
+			//if(typeof(console) !== 'undefined'){console.info("i3GEO.login.dialogo.abrelogin()");}
 			if(typeof(i3GEOF.loginusuario) === 'undefined'){
 				js = locaplic+"/ferramentas/loginusuario/index.js";
 				i3GEO.util.scriptTag(js,"i3GEOF.loginusuario.criaJanelaFlutuante()","i3GEOF.loginusuario_script");
@@ -53,11 +74,62 @@ i3GEO.login = {
 			if (r == true){
 				i3GEO.login.anulaCookie();
 				i3GEO.janela.destroi("i3GEOF.loginusuario");
+				if($i(i3GEO.login.divnomelogin)){
+					$i(i3GEO.login.divnomelogin).innerHTML = "";
+				}
+				if(i3GEO.login.recarrega == true){
+					document.location.reload();
+				}				
 			}
 		}
 	},
 	anulaCookie: function(){
-		i3GEO.util.insereCookie("i3geocodigologin","");
-		i3GEO.util.insereCookie("i3geousuariologin","");		
+		i3GEO.util.insereCookie("i3geocodigologin","",1);
+		i3GEO.util.insereCookie("i3geousuariologin","",1);
+		i3GEO.util.insereCookie("i3geousuarionome","",1);
+		i3GEO.util.insereCookie("i3GeoLogin","",1);
+	},
+	verificaOperacao: function(operacao,locaplic,funcao,tipo){
+		var p = "",cp,temp,resultado = true;
+		if(!i3GEO.util.pegaCookie("i3geousuariologin") || !i3GEO.util.pegaCookie("i3GeoLogin") || i3GEO.util.pegaCookie("i3geousuariologin") == "" || i3GEO.util.pegaCookie("i3GeoLogin") == ""){
+			alert("Login!");
+			return false;
+		}
+		if(!locaplic){
+			locaplic = i3GEO.configura.locaplic;
+		}
+		temp = function(retorno){
+			if(retorno.data == "sim"){
+				resultado = true;
+			}
+			else{
+				resultado = false;
+			}
+			if(funcao && resultado === true){
+				funcao.call();
+			}
+			else{
+				if($i(i3GEO.login.divnomelogin)){
+					$i(i3GEO.login.divnomelogin).innerHTML = "";
+				}
+				return resultado;
+			}
+				
+		};
+		//verificacao rapida, busca apenas na sessao do usuario ja aberta
+		if(tipo === "sessao"){
+			p = locaplic+"/admin/php/login.php?funcao=validaoperacaosessao";
+		}
+		//verifica no banoc de dados, o que considera qualquer mudanca no banco feita apos o usuario ter aberto a sessao
+		/**
+		 * TODO implementar funcao validaoperacaobanco
+		 */
+		if(tipo === "banco"){
+			p = locaplic+"/admin/php/login.php?funcao=validaoperacaobanco";
+		}
+		cp = new cpaint();
+		cp.set_response_type("JSON");
+		cp.set_transfer_mode("POST");
+		cp.call(p,"login",temp,"&operacao="+operacao);		
 	}
 };

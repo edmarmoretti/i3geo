@@ -62,8 +62,10 @@ error_reporting(E_ALL);
 //
 //pega as variaveis passadas com get ou post
 //
-include_once(__DIR__."/pega_variaveis.php");
-include_once(__DIR__."/funcoes_gerais.php");
+/**
+ * TODO documentar o sistema de login
+ */
+include_once(__DIR__."/admin.php");
 session_name("i3GeoLogin");
 //se o usuario estiver tentando fazer login
 if(!empty($usuario) && !empty($senha)){
@@ -76,7 +78,7 @@ else{//se nao, verifica se o login ja existe realmente
 	if(!empty($_COOKIE["i3GeoLogin"])){
 		session_id($_COOKIE["i3GeoLogin"]);
 		session_start();
-		if($_SESSION["usuario"] != $_COKIEE["i3geousuariologin"]){
+		if($_SESSION["usuario"] != $_COOKIE["i3geousuariologin"]){
 			logoutUsuario();
 		}
 	}
@@ -89,27 +91,63 @@ switch (strtoupper($funcao))
 {
 	/*
 	Valor: LOGIN
-	
+
 	Verifica usu&aacute;rio e senha e registra id da sessao que guarda o resultado.
-	
-	<iniciaMapa>
+
 	*/
 	case "LOGIN":
 		$teste = autenticaUsuario($usuario,$senha);
 		if($teste != false){
 			$_SESSION["usuario"] = $usuario;
+			$_SESSION["id_usuario"] = $teste["usuario"]["id_usuario"];
 			$_SESSION["senha"] = $senha;
 			$_SESSION["papeis"] = $teste["papeis"];
+			$_SESSION["operacoes"] = $teste["operacoes"];
 			$fingerprint = 'I3GEOLOGIN' . $_SERVER['HTTP_USER_AGENT'];
+			//var_dump($_SESSION["operacoes"]);exit;
 			$_SESSION['fingerprint'] = md5($fingerprint . session_id());
 			$retorno = array("id"=>session_id(),"nome"=>$teste["usuario"]["nome_usuario"]);
+			cpjson($retorno);
+		}
+		else{
+			logoutUsuario();
 		}
 	break;
+	/*
+	 Valor: VALIDAOPERACAOUSUARIO
+
+	Verifica se um usuario pode executar uma operacao
+
+	Para que o usuario possa executar a operacao, o papel ao qual ele pertence deve estar registrado em operacoespaeis no banco de administracao
+
+	Paremeter:
+
+	$operacao - operacao que sera verificada
+	*/
+	case "VALIDAOPERACAOSESSAO":
+		$retorno = "nao";
+		if(verificaOperacaoSessao($operacao) == true){
+			$retorno = "sim";
+		}
+		else{
+			logoutUsuario();
+		}
+		cpjson($retorno);
+	break;
 }
-if($retorno == "logout"){
-	logoutUsuario();
+function verificaOperacaoSessao($operacao){
+	$resultado = false;
+	//verifica se e administrador
+	foreach($_SESSION["papeis"] as $p){
+		if($p["id_papel"] == 1){
+			return true;
+		}
+	}
+	if(!empty($_SESSION["operacoes"][$operacao])){
+		$resultado = true;
+	}
+	return $resultado;
 }
-cpjson($retorno);
 function validaSessao(){
 	$fingerprint = 'I3GEOLOGIN' . $_SERVER['HTTP_USER_AGENT'];
 	if($_SESSION['fingerprint'] != md5($fingerprint . session_id())){
@@ -121,14 +159,19 @@ function validaSessao(){
 	return true;
 }
 function autenticaUsuario($usuario,$senha){
-	include_once(__DIR__."/../admin/php/admin.php");
+	include(__DIR__."/conexao.php");
 	/**
-	 * @TODO aplicar md5 na senha
+	 * TODO aplicar md5 na senha
 	 */
-	$dados = pegaDados("select * from ".$esquemaadmin."i3GEOadmin_usuarios where nome_usuario = '$usuario' and senha = '$senha' and ativo = 1",$locaplic);
+	$dados = pegaDados("select * from ".$esquemaadmin."i3GEOadmin_usuarios where login = '$usuario' and senha = '$senha' and ativo = 1",$locaplic);
 	if(count($dados) > 0){
-		$papeis = pegaDados("select * from ".$esquemaadmin."i3geoadmin_papelusuario where id_usuario = ".$dados[0]["id_usuario"]);
-		$r = array("usuario"=>$dados[0],"papeis"=>$papeis);
+		$papeis = pegaDados("select * from ".$esquemaadmin."i3geoadmin_papelusuario where id_usuario = ".$dados[0]["id_usuario"],$locaplic);
+		$op = pegadados("SELECT O.codigo, PU.id_usuario FROM ".$esquemaadmin."i3geoadmin_operacoes AS O JOIN ".$esquemaadmin."i3geoadmin_operacoespapeis AS OP ON O.id_operacao = OP.id_operacao JOIN ".$esquemaadmin."i3geoadmin_papelusuario AS PU ON OP.id_papel = PU.id_papel	WHERE id_usuario = ".$dados[0]["id_usuario"],$locaplic);
+		$operacoes = array();
+		foreach($op as $o){
+			$operacoes[$o["codigo"]] = true;
+		}
+		$r = array("usuario"=>$dados[0],"papeis"=>$papeis,"operacoes"=>$operacoes);
 		return $r;
 	}
 	else{

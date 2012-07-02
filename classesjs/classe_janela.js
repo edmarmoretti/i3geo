@@ -268,7 +268,7 @@ i3GEO.janela = {
 		if(!modal || modal === "")
 		{modal = false;}
 		ifr = false;
-		if(i3GEO.Interface.ATUAL === "googleearth"){
+		if(i3GEO.Interface && i3GEO.Interface.ATUAL === "googleearth"){
 			i3GEO.janela.TRANSICAOSUAVE = false;
 			ifr = true;
 		}

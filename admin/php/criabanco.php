@@ -46,6 +46,11 @@
 
 		i3geo/admin/php/criabanco.php
 		*/
+
+		/**
+		 *
+		 * TODO verificar se as tabelas estao corretas em funcao do sistema de administracao
+		 */
 		$funcao = "";
 		include_once("admin.php");
 		error_reporting(E_ALL);
@@ -119,8 +124,10 @@
 			$q = $dbhw->query($tabela);
 		}
 		$dbhw->query("INSERT INTO ".$esquemaadmin."i3geoadmin_papeis VALUES('Podem executar qualquer tarefa, inclusive cadastrar novos administradores',1,'admin')");
-		$dbhw->query("INSERT INTO ".$esquemaadmin."i3geoadmin_papeis VALUES('Podem criar/editar qualquer tema (mapfile) mas n&atilde;o podem editar a &Aacute;rvore do cat&aacute;logo de temas',2,'editores')");
-		$dbhw->query("INSERT INTO ".$esquemaadmin."i3geoadmin_papeis VALUES('Podem alterar a &aacute;rvore do cat&aacute;logo e dos atlas',3,'publicadores')");
+		$dbhw->query("INSERT INTO ".$esquemaadmin."i3geoadmin_papeis VALUES('Podem criar/editar qualquer tema (mapfile) mas nao podem editar a arvore do catalogo de temas',2,'editores')");
+		$dbhw->query("INSERT INTO ".$esquemaadmin."i3geoadmin_papeis VALUES('Podem alterar a arvore do catalogo e dos atlas',3,'publicadores')");
+		$dbhw->query("INSERT INTO ".$esquemaadmin."i3geoadmin_papeis VALUES('Podem editar dados geograficos',4,'editoresgeo')");
+
 		$dbhw->query("INSERT INTO ".$esquemaadmin."i3geoadmin_usuarios VALUES(1,'','',1,'admin','admin','admin')");
 		$dbhw->query("INSERT INTO ".$esquemaadmin."i3geoadmin_papelusuario VALUES(1,1)");
 		$banco = null;
