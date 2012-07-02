@@ -134,7 +134,7 @@ function montaTabela(dados)
         {
             if(oArgs.editor.column.key === "active")
             {
-                this.saveCellEditor();               
+                this.saveCellEditor();
             }
         });
         myDataTable.subscribe("editorSaveEvent", function(oArgs)
@@ -145,7 +145,7 @@ function montaTabela(dados)
 				linha.style.textDecoration = "blink";
 			}
         });
-        
+
         myDataTable.subscribe("editorBlurEvent", function(oArgs)
         {
             this.cancelCellEditor();
@@ -176,4 +176,3 @@ function excluiLinha(id,row)
 	var sUrl = "../php/menutemas.php?funcao=excluirRegistro&id="+id+"&tabela=perfis";
 	core_excluiLinha(sUrl,row,mensagem);
 }
-YAHOO.util.Event.addListener(window, "load", initMenu);

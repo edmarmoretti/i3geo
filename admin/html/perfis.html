@@ -27,22 +27,24 @@ body {
 				Administra&ccedil;&atilde;o do i3geo - perfis <img src="../imagens/04.png"
 					style="cursor: pointer" id=botaoAjuda />
 			</h1>
-			<div id="ajuda">
-				<div class="hd">Ajuda</div>
-				<div class="bd" style="height: 144px; overflow: auto">
-					<p>Os perfis s&atilde;o utilizados para restringir o acesso a
-						determinados temas, grupos, sub-grupos e menus. Nesse formul&aacute;rio &eacute;
-						montada a lista de perfis que &eacute; mostrada nos outros formul&aacute;rios do
-						sistema.
+			<div id="formulario" style="display: none">
+				<div id="ajuda">
+					<div class="hd">Ajuda</div>
+					<div class="bd" style="height: 144px; overflow: auto">
+						<p>Os perfis s&atilde;o utilizados para restringir o acesso a
+							determinados temas, grupos, sub-grupos e menus. Nesse formul&aacute;rio &eacute;
+							montada a lista de perfis que &eacute; mostrada nos outros formul&aacute;rios do
+							sistema.
+					</div>
+					<div class="ft"></div>
 				</div>
-				<div class="ft"></div>
+				<input onclick="adicionaLinha()" type=button id=adiciona
+					value="Adicionar um novo perfil" /> <br>
+				<p>Perfis existentes: (clique na c&eacute;lula para editar e salve a
+					linha editada)</p>
+				<div id="tabela" style="left: -5px;"></div>
+				<div id=logajax style="display: block"></div>
 			</div>
-			<input onclick="adicionaLinha()" type=button id=adiciona
-				value="Adicionar um novo perfil" /> <br>
-			<p>Perfis existentes: (clique na c&eacute;lula para editar e salve a
-				linha editada)</p>
-			<div id="tabela" style="left: -5px;"></div>
-			<div id=logajax style="display: block"></div>
 		</div>
 	</center>
 	<script>
@@ -91,6 +93,11 @@ i3GEO.configura = {
 };
 //
 cabecalhoGeral("cabecalhoPrincipal","");
+temp = function(){
+	document.getElementById("formulario").style.display = "block";
+	initMenu();
+}
+i3GEO.login.verificaOperacao("admin/html/perfis",i3GEO.configura.locaplic,temp,"sessao");
 </script>
 
 </body>

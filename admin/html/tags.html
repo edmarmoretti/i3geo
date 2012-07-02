@@ -24,70 +24,80 @@ body {
 		<div class="mascaraPrincipal" id="divGeral">
 			<div id=cabecalhoPrincipal></div>
 			<h1>
-				Administra&ccedil;&atilde;o do i3geo - tags <img src="../imagens/04.png"
-					style="cursor: pointer" id=botaoAjuda />
+				Administra&ccedil;&atilde;o do i3geo - tags <img
+					src="../imagens/04.png" style="cursor: pointer" id=botaoAjuda />
 			</h1>
-			<div id="ajuda">
-				<div class="hd">Ajuda</div>
-				<div class="bd" style="height: 144px; overflow: auto">
-					<p>Tags s&atilde;o como palavras-chave que podem ser adicionadas aos
-						temas para a realiza&ccedil;&atilde;o de buscas.
+			<div id="formulario" style="display: none">
+				<div id="ajuda">
+					<div class="hd">Ajuda</div>
+					<div class="bd" style="height: 144px; overflow: auto">
+						<p>Tags s&atilde;o como palavras-chave que podem ser
+							adicionadas aos temas para a realiza&ccedil;&atilde;o de buscas.
+
+					</div>
+					<div class="ft"></div>
 				</div>
-				<div class="ft"></div>
+				<input onclick="adicionaLinha()" type=button id=adiciona
+					value="Adicionar um novo tag" /> <br>
+				<p>Tags existentes: (clique na c&eacute;lula para editar e salve
+					a linha editada)</p>
+				<div id="tabela" style="left: -5px;"></div>
+				<div id=logajax style="display: block"></div>
 			</div>
-			<input onclick="adicionaLinha()" type=button id=adiciona
-				value="Adicionar um novo tag" /> <br>
-			<p>Tags existentes: (clique na c&eacute;lula para editar e salve a linha
-				editada)</p>
-			<div id="tabela" style="left: -5px;"></div>
-			<div id=logajax style="display: block"></div>
 		</div>
 	</center>
 	<script>
-/*
-Title: Tags
+		/*
+		 Title: Tags
 
-HTML da interface de administra&ccedil;&atilde;o do cadastro de tags
+		 HTML da interface de administra&ccedil;&atilde;o do cadastro de tags
 
-Veja tamb&eacute;m:
+		 Veja tamb&eacute;m:
 
-<core.js>
+		 <core.js>
 
-<tags.js>
+		 <tags.js>
 
-Licenca:
+		 Licenca:
 
-GPL2
+		 GPL2
 
-i3Geo Interface Integrada de Ferramentas de Geoprocessamento para Internet
+		 i3Geo Interface Integrada de Ferramentas de Geoprocessamento para Internet
 
-Direitos Autorais Reservados (c) 2006 Minist&eacute;rio do Meio Ambiente Brasil
-Desenvolvedor: Edmar Moretti edmar.moretti@mma.gov.br
+		 Direitos Autorais Reservados (c) 2006 Minist&eacute;rio do Meio Ambiente Brasil
+		 Desenvolvedor: Edmar Moretti edmar.moretti@mma.gov.br
 
-Este programa &eacute; software livre; voc&ecirc; pode redistribu&iacute;-lo
-e/ou modific&aacute;-lo sob os termos da Licen&ccedil;a P&uacute;blica Geral
-GNU conforme publicada pela Free Software Foundation;
+		 Este programa &eacute; software livre; voc&ecirc; pode redistribu&iacute;-lo
+		 e/ou modific&aacute;-lo sob os termos da Licen&ccedil;a P&uacute;blica Geral
+		 GNU conforme publicada pela Free Software Foundation;
 
-Este programa &eacute; distribu&iacute;do na expectativa de que seja &uacute;til,
-por&eacute;m, SEM NENHUMA GARANTIA; nem mesmo a garantia impl&iacute;cita
-de COMERCIABILIDADE OU ADEQUA&Ccedil;&Atilde;O A UMA FINALIDADE ESPEC&Iacute;FICA.
-Consulte a Licen&ccedil;a P&uacute;blica Geral do GNU para mais detalhes.
-Voc&ecirc; deve ter recebido uma cópia da Licen&ccedil;a P&uacute;blica Geral do
-GNU junto com este programa; se n&atilde;o, escreva para a
-Free Software Foundation, Inc., no endere&ccedil;o
-59 Temple Street, Suite 330, Boston, MA 02111-1307 USA.
+		 Este programa &eacute; distribu&iacute;do na expectativa de que seja &uacute;til,
+		 por&eacute;m, SEM NENHUMA GARANTIA; nem mesmo a garantia impl&iacute;cita
+		 de COMERCIABILIDADE OU ADEQUA&Ccedil;&Atilde;O A UMA FINALIDADE ESPEC&Iacute;FICA.
+		 Consulte a Licen&ccedil;a P&uacute;blica Geral do GNU para mais detalhes.
+		 Voc&ecirc; deve ter recebido uma cópia da Licen&ccedil;a P&uacute;blica Geral do
+		 GNU junto com este programa; se n&atilde;o, escreva para a
+		 Free Software Foundation, Inc., no endere&ccedil;o
+		 59 Temple Street, Suite 330, Boston, MA 02111-1307 USA.
 
-Arquivo:
+		 Arquivo:
 
-i3geo/admin/html/tags.html
-*/
-if(screen.availWidth > 700)
-{document.getElementById("divGeral").style.width = "700px";}
-//necessário para a ferramenta login e outras
-i3GEO.configura = {
-	locaplic: "../.."
-};
-//
-cabecalhoGeral("cabecalhoPrincipal","");
-</script>
+		 i3geo/admin/html/tags.html
+		 */
+		if (screen.availWidth > 700) {
+			document.getElementById("divGeral").style.width = "700px";
+		}
+		//necessário para a ferramenta login e outras
+		i3GEO.configura = {
+			locaplic : "../.."
+		};
+		//
+		cabecalhoGeral("cabecalhoPrincipal", "");
+		temp = function() {
+			document.getElementById("formulario").style.display = "block";
+			initMenu();
+		}
+		i3GEO.login.verificaOperacao("admin/html/tags",
+				i3GEO.configura.locaplic, temp, "sessao");
+	</script>
 </body>

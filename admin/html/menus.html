@@ -23,97 +23,108 @@ body {
 		</div>
 		<div style="width: 80%; text-align: center;">
 			<h1>
-				Administra&ccedil;&atilde;o do i3geo - Menus <img src="../imagens/04.png"
-					style="cursor: pointer" id=botaoAjuda />
+				Administra&ccedil;&atilde;o do i3geo - Menus <img
+					src="../imagens/04.png" style="cursor: pointer" id=botaoAjuda />
 			</h1>
 
 		</div>
-		<div id="ajuda" style="display: none">
-			<div class="hd">Ajuda</div>
-			<div class="bd" style="height: 144px; overflow: auto">
-				<p>Este formul&aacute;rio permite editar a lista de menus que ser&aacute;
-					utilizada pelo i3Geo.
-				<p>A &aacute;rvore &eacute; composta de menus, grupos, sub-grupos e temas. Vc
-					deve criar os menus, a lista de grupos e a lista de sub-grupos. Ao
-					criar um menu, esse &eacute; mostrado imediatamente na &aacute;rvore.
-				<p>Menus ou nós da &aacute;rvore marcados como n&atilde;o publicados s&atilde;o
-					mostrados em vermelho e aparecem apenas para os administradores.
-				<p>Em cada nó da &aacute;rvore podem ser associados os temas, mesmo na
-					raiz de um dos n&iacute;veis. Os temas s&atilde;o arquivos mapfiles armazenados
-					em i3geo/temas e registrados no sistema de administra&ccedil;&atilde;o.
-				<p>A cria&ccedil;&atilde;o de mapfiles e a vincula&ccedil;&atilde;o tema-mapfile &eacute; feita por
-					meio do editor de mapfiles, e consiste na determina&ccedil;&atilde;o de um nome
-					para cada mapfile. Esse nome &eacute; listado ao ser adicionado um tema na
-					&aacute;rvore.
+		<div id="formulario" style="display: none">
+			<div id="ajuda" style="display: none">
+				<div class="hd">Ajuda</div>
+				<div class="bd" style="height: 144px; overflow: auto">
+					<p>Este formul&aacute;rio permite editar a lista de menus que
+						ser&aacute; utilizada pelo i3Geo.
+					<p>A &aacute;rvore &eacute; composta de menus, grupos,
+						sub-grupos e temas. Vc deve criar os menus, a lista de grupos e a
+						lista de sub-grupos. Ao criar um menu, esse &eacute; mostrado
+						imediatamente na &aacute;rvore.
+					<p>Menus ou nós da &aacute;rvore marcados como n&atilde;o
+						publicados s&atilde;o mostrados em vermelho e aparecem apenas para
+						os administradores.
+					<p>Em cada nó da &aacute;rvore podem ser associados os temas,
+						mesmo na raiz de um dos n&iacute;veis. Os temas s&atilde;o
+						arquivos mapfiles armazenados em i3geo/temas e registrados no
+						sistema de administra&ccedil;&atilde;o.
+					<p>A cria&ccedil;&atilde;o de mapfiles e a
+						vincula&ccedil;&atilde;o tema-mapfile &eacute; feita por meio do
+						editor de mapfiles, e consiste na determina&ccedil;&atilde;o de um
+						nome para cada mapfile. Esse nome &eacute; listado ao ser
+						adicionado um tema na &aacute;rvore.
+				</div>
+				<div class="ft"></div>
 			</div>
-			<div class="ft"></div>
-		</div>
-		<br>
-		<p class=paragrafo>
-			Idioma: <select id="idioma" onchange="initMenu()">
-				<option value="pt" selected>Portugu&ecirc;s</option>
-				<option value="en">Ingl&ecirc;s</option>
-				<option value="es">Espanhol</option>
-				<option value="it">Italiano</option>
-			</select>
-		</p>
-		<input type=button id=adicionaNovoMenu value="Adicionar um novo menu"
-			style="left: -5px;" />
-		<p>
 			<br>
-		<div id="tabela" style="left: -5px;"></div>
+			<p class=paragrafo>
+				Idioma: <select id="idioma" onchange="initMenu()">
+					<option value="pt" selected>Portugu&ecirc;s</option>
+					<option value="en">Ingl&ecirc;s</option>
+					<option value="es">Espanhol</option>
+					<option value="it">Italiano</option>
+				</select>
+			</p>
+			<input type=button id=adicionaNovoMenu value="Adicionar um novo menu"
+				style="left: -5px;" />
+			<p>
+				<br>
+			<div id="tabela" style="left: -5px;"></div>
+		</div>
 	</div>
 	<div id=logajax style="display: block"></div>
 	<script>
-/*
-Title: Editor da lista de menus
+		/*
+		 Title: Editor da lista de menus
 
-HTML da interface de administra&ccedil;&atilde;o da lista de menus
+		 HTML da interface de administra&ccedil;&atilde;o da lista de menus
 
-Veja tamb&eacute;m:
+		 Veja tamb&eacute;m:
 
-<core.js>
+		 <core.js>
 
-<arvore.js>
+		 <arvore.js>
 
-<menu.js>
+		 <menu.js>
 
-<grupos.js>
+		 <grupos.js>
 
-<subgrupos.js>
+		 <subgrupos.js>
 
-Licenca:
+		 Licenca:
 
-GPL2
+		 GPL2
 
-i3Geo Interface Integrada de Ferramentas de Geoprocessamento para Internet
+		 i3Geo Interface Integrada de Ferramentas de Geoprocessamento para Internet
 
-Direitos Autorais Reservados (c) 2006 Minist&eacute;rio do Meio Ambiente Brasil
-Desenvolvedor: Edmar Moretti edmar.moretti@mma.gov.br
+		 Direitos Autorais Reservados (c) 2006 Minist&eacute;rio do Meio Ambiente Brasil
+		 Desenvolvedor: Edmar Moretti edmar.moretti@mma.gov.br
 
-Este programa &eacute; software livre; voc&ecirc; pode redistribu&iacute;-lo
-e/ou modific&aacute;-lo sob os termos da Licen&ccedil;a P&uacute;blica Geral
-GNU conforme publicada pela Free Software Foundation;
+		 Este programa &eacute; software livre; voc&ecirc; pode redistribu&iacute;-lo
+		 e/ou modific&aacute;-lo sob os termos da Licen&ccedil;a P&uacute;blica Geral
+		 GNU conforme publicada pela Free Software Foundation;
 
-Este programa &eacute; distribu&iacute;do na expectativa de que seja &uacute;til,
-por&eacute;m, SEM NENHUMA GARANTIA; nem mesmo a garantia impl&iacute;cita
-de COMERCIABILIDADE OU ADEQUA&Ccedil;&Atilde;O A UMA FINALIDADE ESPEC&Iacute;FICA.
-Consulte a Licen&ccedil;a P&uacute;blica Geral do GNU para mais detalhes.
-Voc&ecirc; deve ter recebido uma cópia da Licen&ccedil;a P&uacute;blica Geral do
-GNU junto com este programa; se n&atilde;o, escreva para a
-Free Software Foundation, Inc., no endere&ccedil;o
-59 Temple Street, Suite 330, Boston, MA 02111-1307 USA.
+		 Este programa &eacute; distribu&iacute;do na expectativa de que seja &uacute;til,
+		 por&eacute;m, SEM NENHUMA GARANTIA; nem mesmo a garantia impl&iacute;cita
+		 de COMERCIABILIDADE OU ADEQUA&Ccedil;&Atilde;O A UMA FINALIDADE ESPEC&Iacute;FICA.
+		 Consulte a Licen&ccedil;a P&uacute;blica Geral do GNU para mais detalhes.
+		 Voc&ecirc; deve ter recebido uma cópia da Licen&ccedil;a P&uacute;blica Geral do
+		 GNU junto com este programa; se n&atilde;o, escreva para a
+		 Free Software Foundation, Inc., no endere&ccedil;o
+		 59 Temple Street, Suite 330, Boston, MA 02111-1307 USA.
 
-Arquivo:
+		 Arquivo:
 
-i3geo/admin/html/menus.html
-*/
-initEditorMenu()
-//necessario para a ferramenta login e outras
-i3GEO.configura = {
-	locaplic: "../.."
-};
-//
-cabecalhoGeral("cabecalhoPrincipal","menus");
-</script>
+		 i3geo/admin/html/menus.html
+		 */
+
+		//necessario para a ferramenta login e outras
+		i3GEO.configura = {
+			locaplic : "../.."
+		};
+		cabecalhoGeral("cabecalhoPrincipal", "menus");
+		temp = function() {
+			document.getElementById("formulario").style.display = "block";
+			initEditorMenu()
+		}
+		i3GEO.login.verificaOperacao("admin/html/menus",
+				i3GEO.configura.locaplic, temp, "sessao");
+	</script>
 </body>

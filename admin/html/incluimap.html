@@ -10,20 +10,21 @@
 		<div class="bordaSuperior">&nbsp;</div>
 		<div class="mascaraPrincipal" id="divGeral">
 			<div id=cabecalhoPrincipal></div>
-			<p>As vers&otilde;es novas do Mapserver exigem que os arquivos mapfile
-				iniciem com a palavra "MAP"</p>
-			<p>Os mapfiles utilizados pelo i3geo, at&eacute; a vers&atilde;o 4.1, e
-				armazenados no diretório i3Geo/temas n&atilde;o iniciam com "MAP". Para
-				ajustar os mapfiles voc&ecirc; pode edit&aacute;-los individulamente ou rodar o
-				programa i3geo/admin/php/incluiMAP.php
-			<p>Antes de fazer isso, fa&ccedil;a um backup do seu diretório
-				i3geo/temas
-			<p>
-				<a href="../php/incluiMAP.php">Clique para ajustar os mapfiles
-					- inclus&atilde;o da palavra "MAP" no in&iacute;cio dos arquivos; substitui&ccedil;&atilde;o de
-					v&aacute;rios elementos depreciados</a>
-			<p>Lista de substitui&ccedil;&otilde;es:
-			<pre>
+			<div id="formulario" style="display: none">
+				<p>As vers&otilde;es novas do Mapserver exigem que os arquivos
+					mapfile iniciem com a palavra "MAP"</p>
+				<p>Os mapfiles utilizados pelo i3geo, at&eacute; a vers&atilde;o
+					4.1, e armazenados no diretório i3Geo/temas n&atilde;o iniciam com
+					"MAP". Para ajustar os mapfiles voc&ecirc; pode edit&aacute;-los
+					individulamente ou rodar o programa i3geo/admin/php/incluiMAP.php
+				<p>Antes de fazer isso, fa&ccedil;a um backup do seu diretório
+					i3geo/temas
+				<p>
+					<a href="../php/incluiMAP.php">Clique para ajustar os mapfiles
+						- inclus&atilde;o da palavra "MAP" no in&iacute;cio dos arquivos;
+						substitui&ccedil;&atilde;o de v&aacute;rios elementos depreciados</a>
+				<p>Lista de substitui&ccedil;&otilde;es:
+				<pre>
 		$search = array(
 			"transparency ",
 			"LABELANGLEITEM ",
@@ -47,52 +48,59 @@
 			"SYMBOLSCALEDENOM "
 		);
 	</pre>
+			</div>
 		</div>
 	</center>
 	<script>
-/*
-Title: Ajuste de mapfiles
+		/*
+		 Title: Ajuste de mapfiles
 
-HTML da interface de ajuste dos arquivos Mapfiles antigos, que n&atilde;o iniciam com a palavra MAP
+		 HTML da interface de ajuste dos arquivos Mapfiles antigos, que n&atilde;o iniciam com a palavra MAP
 
-Veja tamb&eacute;m:
+		 Veja tamb&eacute;m:
 
-<incluiMAP.php>
+		 <incluiMAP.php>
 
-Licenca:
+		 Licenca:
 
-GPL2
+		 GPL2
 
-i3Geo Interface Integrada de Ferramentas de Geoprocessamento para Internet
+		 i3Geo Interface Integrada de Ferramentas de Geoprocessamento para Internet
 
-Direitos Autorais Reservados (c) 2006 Minist&eacute;rio do Meio Ambiente Brasil
-Desenvolvedor: Edmar Moretti edmar.moretti@mma.gov.br
+		 Direitos Autorais Reservados (c) 2006 Minist&eacute;rio do Meio Ambiente Brasil
+		 Desenvolvedor: Edmar Moretti edmar.moretti@mma.gov.br
 
-Este programa &eacute; software livre; voc&ecirc; pode redistribu&iacute;-lo
-e/ou modific&aacute;-lo sob os termos da Licen&ccedil;a P&uacute;blica Geral
-GNU conforme publicada pela Free Software Foundation;
+		 Este programa &eacute; software livre; voc&ecirc; pode redistribu&iacute;-lo
+		 e/ou modific&aacute;-lo sob os termos da Licen&ccedil;a P&uacute;blica Geral
+		 GNU conforme publicada pela Free Software Foundation;
 
-Este programa &eacute; distribu&iacute;do na expectativa de que seja &uacute;til,
-por&eacute;m, SEM NENHUMA GARANTIA; nem mesmo a garantia impl&iacute;cita
-de COMERCIABILIDADE OU ADEQUA&Ccedil;&Atilde;O A UMA FINALIDADE ESPEC&Iacute;FICA.
-Consulte a Licen&ccedil;a P&uacute;blica Geral do GNU para mais detalhes.
-Voc&ecirc; deve ter recebido uma cópia da Licen&ccedil;a P&uacute;blica Geral do
-GNU junto com este programa; se n&atilde;o, escreva para a
-Free Software Foundation, Inc., no endere&ccedil;o
-59 Temple Street, Suite 330, Boston, MA 02111-1307 USA.
+		 Este programa &eacute; distribu&iacute;do na expectativa de que seja &uacute;til,
+		 por&eacute;m, SEM NENHUMA GARANTIA; nem mesmo a garantia impl&iacute;cita
+		 de COMERCIABILIDADE OU ADEQUA&Ccedil;&Atilde;O A UMA FINALIDADE ESPEC&Iacute;FICA.
+		 Consulte a Licen&ccedil;a P&uacute;blica Geral do GNU para mais detalhes.
+		 Voc&ecirc; deve ter recebido uma cópia da Licen&ccedil;a P&uacute;blica Geral do
+		 GNU junto com este programa; se n&atilde;o, escreva para a
+		 Free Software Foundation, Inc., no endere&ccedil;o
+		 59 Temple Street, Suite 330, Boston, MA 02111-1307 USA.
 
-Arquivo:
+		 Arquivo:
 
-i3geo/admin/html/incluimap.html
-*/
-if(screen.availWidth > 700)
-{document.getElementById("divGeral").style.width = "700px";}
-//necessario para a ferramenta login e outras
-i3GEO.configura = {
-	locaplic: "../.."
-};
-//
-cabecalhoGeral("cabecalhoPrincipal","");
-</script>
+		 i3geo/admin/html/incluimap.html
+		 */
+		if (screen.availWidth > 700) {
+			document.getElementById("divGeral").style.width = "700px";
+		}
+		//necessario para a ferramenta login e outras
+		i3GEO.configura = {
+			locaplic : "../.."
+		};
+		//
+		cabecalhoGeral("cabecalhoPrincipal", "");
+		temp = function() {
+			document.getElementById("formulario").style.display = "block";
+		}
+		i3GEO.login.verificaOperacao("admin/html/incluimap",
+				i3GEO.configura.locaplic, temp, "sessao");
+	</script>
 
 </body>

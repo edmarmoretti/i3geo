@@ -24,72 +24,82 @@ body {
 		<div class="mascaraPrincipal" id="divGeral">
 			<div id=cabecalhoPrincipal></div>
 			<h1>
-				Administra&ccedil;&atilde;o do i3geo - Web Services OGC <img id=botaoAjuda
-					src="../imagens/04.png" style="cursor: pointer" />
+				Administra&ccedil;&atilde;o do i3geo - Web Services OGC <img
+					id=botaoAjuda src="../imagens/04.png" style="cursor: pointer" />
 			</h1>
+			<div id="formulario" style="display: none">
+				<div id="ajuda">
+					<div class="hd">Ajuda</div>
+					<div class="bd" style="height: 144px; overflow: auto">
+						<p>Este formul&aacute;rio permite alterar as
+							configura&ccedil;&otilde;es de contato do gerador de Web Services
 
-			<div id="ajuda">
-				<div class="hd">Ajuda</div>
-				<div class="bd" style="height: 144px; overflow: auto">
-					<p>Este formul&aacute;rio permite alterar as configura&ccedil;&otilde;es de contato
-						do gerador de Web Services
-					<p>As mudan&ccedil;as inclu&iacute;das aqui afetam o programa i3geo/ogc.php e
-						s&atilde;o armazenadas em i3geo/aplicmpa/ogcws.map
+						<p>As mudan&ccedil;as inclu&iacute;das aqui afetam o programa
+							i3geo/ogc.php e s&atilde;o armazenadas em
+							i3geo/aplicmpa/ogcws.map
+					</div>
+					<div class="ft"></div>
 				</div>
-				<div class="ft"></div>
+				<p>Par&acirc;metros obtidos do mapfile:</p>
+				<b><span id=mapfile style="color: navy"></span></b><br> <br>
+				<div id="tabela" style="left: -5px;"></div>
 			</div>
-			<p>Par&acirc;metros obtidos do mapfile:</p>
-			<b><span id=mapfile style="color: navy"></span></b><br> <br>
-			<div id="tabela" style="left: -5px;"></div>
 		</div>
 	</center>
 	<script>
-/*
-Title: Editor do ogcws.map
+		/*
+		 Title: Editor do ogcws.map
 
-HTML da interface de administra&ccedil;&atilde;o das vari&aacute;veis de configura&ccedil;&atilde;o do gerador de Web Services OGC
+		 HTML da interface de administra&ccedil;&atilde;o das vari&aacute;veis de configura&ccedil;&atilde;o do gerador de Web Services OGC
 
-Veja tamb&eacute;m:
+		 Veja tamb&eacute;m:
 
-<core.js>
+		 <core.js>
 
-<ogcws.js>
+		 <ogcws.js>
 
-Licenca:
+		 Licenca:
 
-GPL2
+		 GPL2
 
-i3Geo Interface Integrada de Ferramentas de Geoprocessamento para Internet
+		 i3Geo Interface Integrada de Ferramentas de Geoprocessamento para Internet
 
-Direitos Autorais Reservados (c) 2006 Minist&eacute;rio do Meio Ambiente Brasil
-Desenvolvedor: Edmar Moretti edmar.moretti@mma.gov.br
+		 Direitos Autorais Reservados (c) 2006 Minist&eacute;rio do Meio Ambiente Brasil
+		 Desenvolvedor: Edmar Moretti edmar.moretti@mma.gov.br
 
-Este programa &eacute; software livre; voc&ecirc; pode redistribu&iacute;-lo
-e/ou modific&aacute;-lo sob os termos da Licen&ccedil;a P&uacute;blica Geral
-GNU conforme publicada pela Free Software Foundation;
+		 Este programa &eacute; software livre; voc&ecirc; pode redistribu&iacute;-lo
+		 e/ou modific&aacute;-lo sob os termos da Licen&ccedil;a P&uacute;blica Geral
+		 GNU conforme publicada pela Free Software Foundation;
 
-Este programa &eacute; distribu&iacute;do na expectativa de que seja &uacute;til,
-por&eacute;m, SEM NENHUMA GARANTIA; nem mesmo a garantia impl&iacute;cita
-de COMERCIABILIDADE OU ADEQUA&Ccedil;&Atilde;O A UMA FINALIDADE ESPEC&Iacute;FICA.
-Consulte a Licen&ccedil;a P&uacute;blica Geral do GNU para mais detalhes.
-Voc&ecirc; deve ter recebido uma cópia da Licen&ccedil;a P&uacute;blica Geral do
-GNU junto com este programa; se n&atilde;o, escreva para a
-Free Software Foundation, Inc., no endere&ccedil;o
-59 Temple Street, Suite 330, Boston, MA 02111-1307 USA.
+		 Este programa &eacute; distribu&iacute;do na expectativa de que seja &uacute;til,
+		 por&eacute;m, SEM NENHUMA GARANTIA; nem mesmo a garantia impl&iacute;cita
+		 de COMERCIABILIDADE OU ADEQUA&Ccedil;&Atilde;O A UMA FINALIDADE ESPEC&Iacute;FICA.
+		 Consulte a Licen&ccedil;a P&uacute;blica Geral do GNU para mais detalhes.
+		 Voc&ecirc; deve ter recebido uma cópia da Licen&ccedil;a P&uacute;blica Geral do
+		 GNU junto com este programa; se n&atilde;o, escreva para a
+		 Free Software Foundation, Inc., no endere&ccedil;o
+		 59 Temple Street, Suite 330, Boston, MA 02111-1307 USA.
 
-Arquivo:
+		 Arquivo:
 
-i3geo/admin/html/ogcws.html
-*/
-if(screen.availWidth > 700)
-{document.getElementById("divGeral").style.width = "700px";}
-//necessario para a ferramenta login e outras
-i3GEO.configura = {
-	locaplic: "../.."
-};
-//
-cabecalhoGeral("cabecalhoPrincipal","");
-</script>
+		 i3geo/admin/html/ogcws.html
+		 */
+		if (screen.availWidth > 700) {
+			document.getElementById("divGeral").style.width = "700px";
+		}
+		//necessario para a ferramenta login e outras
+		i3GEO.configura = {
+			locaplic : "../.."
+		};
+		//
+		cabecalhoGeral("cabecalhoPrincipal", "");
+		temp = function() {
+			document.getElementById("formulario").style.display = "block";
+			initMenu()
+		}
+		i3GEO.login.verificaOperacao("admin/html/ogcws",
+				i3GEO.configura.locaplic, temp, "sessao");
+	</script>
 </body>
 
 </html>

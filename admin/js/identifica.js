@@ -109,7 +109,7 @@ function montaTabela(dados)
   					},
   					failure:core_handleFailure,
   					argument: { foo:"foo", bar:"bar" }
-				}; 
+				};
 				core_makeRequest(sUrl,callback);
 			}
 		});
@@ -145,7 +145,7 @@ function montaEditor(dados,id,recordid)
             { label: "Salva", value: "OK", checked: false},
             { label: "Cancela", value: "CANCEL", checked: false }
         ]);
-		editorBotoes.on("checkedButtonChange", on_editorCheckBoxChange);	
+		editorBotoes.on("checkedButtonChange", on_editorCheckBoxChange);
 		YAHOO.example.container.panelEditor = new YAHOO.widget.Panel("janela_editor", { fixedcenter:true,close:false,width:"400px", height:"400px",overflow:"auto", visible:false,constraintoviewport:true } );
 		YAHOO.example.container.panelEditor.render();
 	}
@@ -221,7 +221,7 @@ function gravaDados(id,recordid)
   		},
   		failure:core_handleFailure,
   		argument: { foo:"foo", bar:"bar" }
-	}; 
+	};
 	core_makeRequest(sUrl,callback);
 }
 
@@ -231,4 +231,3 @@ function excluiLinha(id,row)
 	var sUrl = "../php/identifica.php?funcao=excluir&id="+id;
 	core_excluiLinha(sUrl,row,mensagem);
 }
-YAHOO.util.Event.addListener(window, "load", initMenu);

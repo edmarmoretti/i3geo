@@ -27,6 +27,7 @@ body {
 				Administra&ccedil;&atilde;o do i3geo - Atlas <img src="../imagens/04.png"
 					style="cursor: pointer" id=botaoAjuda />
 			</h1>
+			<div id="formulario" style="display: none">
 			<div id="ajuda">
 				<div class="hd">Ajuda</div>
 				<div class="bd" style="height: 144px; overflow: auto">
@@ -48,6 +49,7 @@ body {
 			<p>Atlas existentes:</p>
 			<div id="tabela" style="left: -5px;"></div>
 			<div id=logajax style="display: block"></div>
+			</div>
 		</div>
 	</center>
 	<script>
@@ -96,5 +98,10 @@ i3GEO.configura = {
 };
 //
 cabecalhoGeral("cabecalhoPrincipal","atlas");
+temp = function(){
+	document.getElementById("formulario").style.display = "block";
+	initMenu();
+}
+i3GEO.login.verificaOperacao("admin/html/atlas",i3GEO.configura.locaplic,temp,"sessao");
 </script>
 </body>

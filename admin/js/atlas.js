@@ -63,7 +63,7 @@ function ativaBotaoAdicionaAtlas(sUrl,idBotao)
   			},
   			failure:core_handleFailure,
   			argument: { foo:"foo", bar:"bar" }
-		}; 
+		};
 		core_makeRequest(sUrl,callback);
 	};
 	//cria o bot&atilde;o de adi&ccedil;&atilde;o de um novo menu
@@ -299,7 +299,7 @@ function editar(tipo,id)
 		},
 		failure:core_handleFailure,
 		argument: { foo:"foo", bar:"bar" }
-	}; 
+	};
 	if(tipo == "atlas")
 	{sUrl = "../php/atlas.php?funcao=pegaDadosAtlas&id_atlas="+id;}
 	if(tipo == "prancha")
@@ -407,7 +407,7 @@ function sobeDesce(movimento,tipo,id)
 	};
 	if(movimenta)
 	{
-		var sUrl = "../php/atlas.php?funcao=movimentaNo&tipo="+tipo+"&movimento="+movimento+"&id="+id;		
+		var sUrl = "../php/atlas.php?funcao=movimentaNo&tipo="+tipo+"&movimento="+movimento+"&id="+id;
 		core_carregando("ativa");
 		core_carregando(" modificando a ordem no banco de dados");
 		core_makeRequest(sUrl,callback);
@@ -579,7 +579,7 @@ function gravaDados(tipo,id)
 	if(prog && par){
 		core_carregando("ativa");
 		core_carregando(" gravando o registro do id= "+id);
-		var sUrl = prog+par;	
+		var sUrl = prog+par;
 		core_makeRequest(sUrl,callback,'POST');
 	}
 }
@@ -591,4 +591,3 @@ Abre o Atlas para teste
 function abreAtlas(id){
 	window.open("../../classesphp/atlas_controle.php?atlasId_="+id+"&funcao=criaAtlas","blank");
 }
-YAHOO.util.Event.addListener(window, "load", initMenu);

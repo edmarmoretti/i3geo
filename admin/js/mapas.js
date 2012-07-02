@@ -124,7 +124,7 @@ function montaTabela(dados)
   					},
   					failure:core_handleFailure,
   					argument: { foo:"foo", bar:"bar" }
-				}; 
+				};
 				core_makeRequest(sUrl,callback);
 			}
 
@@ -134,7 +134,7 @@ function montaTabela(dados)
         {
             if(oArgs.editor.column.key === "active")
             {
-                this.saveCellEditor();  
+                this.saveCellEditor();
             }
         });
         myDataTable.subscribe("editorBlurEvent", function(oArgs)
@@ -172,7 +172,7 @@ function montaEditorMapa(dados,id,recordid)
             { label: "Salva", value: "OK", checked: false},
             { label: "Cancela", value: "CANCEL", checked: false }
         ]);
-		editorBotoes.on("checkedButtonChange", on_editorCheckBoxChange);	
+		editorBotoes.on("checkedButtonChange", on_editorCheckBoxChange);
 		YAHOO.example.container.panelEditorMapa = new YAHOO.widget.Panel("janela_editor", { fixedcenter:true,close:false,width:"400px", height:"400px",overflow:"auto", visible:false,constraintoviewport:true } );
 		YAHOO.example.container.panelEditorMapa.render();
 	}
@@ -300,7 +300,6 @@ function gravaDadosMapa(id,recordid)
   		},
   		failure:core_handleFailure,
   		argument: { foo:"foo", bar:"bar" }
-	}; 
+	};
 	core_makeRequest(sUrl,callback);
 }
-YAHOO.util.Event.addListener(window, "load", initMenu);

@@ -25,29 +25,13 @@ body {
 		<div class="bordaSuperior">&nbsp;</div>
 		<div class="mascaraPrincipal" id="divGeral">
 			<div id=cabecalhoPrincipal></div>
-			<div id="conteudo" style="width: 500px"></div>
+			<div id="formulario" style="display: none">
+				<div id="conteudo" style="width: 500px"></div>
+			</div>
 		</div>
-		<br>
-		<br>
-		<br>
-		<br>
-		<br>
-		<br>
-		<br>
-		<br>
-		<br>
-		<br>
-		<br>
-		<br>
-		<br>
-		<br>
-		<br>
-		<br>
-		<br>
-		<br>
-		<br>
-		<br>
-		<br>
+		<br> <br> <br> <br> <br> <br> <br>
+		<br> <br> <br> <br> <br> <br> <br>
+		<br> <br> <br> <br> <br> <br> <br>
 	</center>
 	<script>
 /*
@@ -87,6 +71,10 @@ i3GEO.configura.locaplic = "../..";
 i3GEO.parametros.editor = "sim";
 i3GEO.configura.sid = "";
 cabecalhoGeral("cabecalhoPrincipal","");
-i3GEOF.upload.inicia("conteudo");
+temp = function(){
+	document.getElementById("formulario").style.display = "block";
+	i3GEOF.upload.inicia("conteudo");
+}
+i3GEO.login.verificaOperacao("admin/html/subirshapefile",i3GEO.configura.locaplic,temp,"sessao");
 </script>
 </body>

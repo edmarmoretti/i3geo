@@ -63,7 +63,7 @@ function ativaBotaoAdicionaRaiz(sUrl,idBotao)
   			},
   			failure:core_handleFailure,
   			argument: { foo:"foo", bar:"bar" }
-		}; 
+		};
 		core_makeRequest(sUrl,callback);
 	};
 	//cria o bot&atilde;o de adi&ccedil;&atilde;o de um novo menu
@@ -187,7 +187,7 @@ function editar(tipo,id)
 			},
 			failure:core_handleFailure,
 			argument: { foo:"foo", bar:"bar" }
-		}; 
+		};
 		var sUrl = "../php/sistemas.php?funcao=pegaFuncao&id_funcao="+id;
 		core_makeRequest(sUrl,callback);
 	}
@@ -208,7 +208,7 @@ function editar(tipo,id)
 			},
 			failure:core_handleFailure,
 			argument: { foo:"foo", bar:"bar" }
-		}; 
+		};
 		var sUrl = "../php/sistemas.php?funcao=pegaSistema&id_sistema="+id;
 		core_makeRequest(sUrl,callback);
 	}
@@ -315,7 +315,7 @@ function adicionarFuncao(id)
   		failure:core_handleFailure,
   		argument: { foo:"foo", bar:"bar" }
 	};
-	
+
 	core_makeRequest(sUrl,callback);
 }
 /*
@@ -360,7 +360,7 @@ function gravaDadosFuncao(id)
   		},
   		failure:core_handleFailure,
   		argument: { foo:"foo", bar:"bar" }
-	}; 
+	};
 	core_makeRequest(sUrl,callback);
 }
 /*
@@ -405,7 +405,6 @@ function gravaDadosSistema(id)
   		},
   		failure:core_handleFailure,
   		argument: { foo:"foo", bar:"bar" }
-	}; 
+	};
 	core_makeRequest(sUrl,callback);
 }
-YAHOO.util.Event.addListener(window, "load", initMenu);
