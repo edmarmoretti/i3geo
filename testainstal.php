@@ -17,7 +17,6 @@ catch(ee)
 		{document.write("<H1>Seu navegador n&atilde;o aceita AJAX. O mapa nao vai funcionar!!!</H1><br>");}
 	}
 }
-
 </script>
 <body class="yui-skin-sam fundoPonto" >
 
@@ -56,10 +55,24 @@ Arquivo:
 i3geo/testainstal.php
 
 */
-error_reporting(E_ALL);
+$locaplic = __DIR__;
+include_once("admin/php/admin.php");
+include_once("admin/php/conexao.php");
 
+if(empty($_POST["senha"]) || empty($_POST["usuario"])){
+	formularioLoginMaster("testainstal.php");
+	exit;
+}
+else{
+	$continua = verificaMaster($_POST["usuario"],$_POST["senha"],$i3geomaster);
+	if($continua == false){
+		echo "Usu&aacute;rio n&atilde;o registrado em i3geo/ms_configura.php na vari&aacute;vel i3geomaster";
+		exit;
+	}
+}
+error_reporting(E_ALL);
 //echo "<pre>\n";
-echo "<span style=font-size:10px >Observa&ccedil;&atilde;o: se voc&ecirc; estiver usando Linux e a biblioteca CAIRO estiver instalada corretamente no Mapserver, edite os arquivos i3geo/aplicmap/geral1fedorav6.map e geral1debianv6.map para remover os coment&aacute;rios do OUTPUTFORMAT que utiliza SVG com o drive Cairo</span><br>\n"; 
+echo "<span style=font-size:10px >Observa&ccedil;&atilde;o: se voc&ecirc; estiver usando Linux e a biblioteca CAIRO estiver instalada corretamente no Mapserver, edite os arquivos i3geo/aplicmap/geral1fedorav6.map e geral1debianv6.map para remover os coment&aacute;rios do OUTPUTFORMAT que utiliza SVG com o drive Cairo</span><br>\n";
 echo "<br><b>TESTE DE INSTALACAO DO i3Geo</b><br>\n";
 include ("versao.php");
 echo "<br><b>$mensagemInicia </b><br><br> \n";
@@ -73,15 +86,15 @@ echo "<br>Seu endere&ccedil;o IP: ".$ip."<br><br>\n";
 
 echo "<br><br>PHP (a vers&atilde;o deve ser a 5x): ";
 echo "<br>".phpversion()."<br>\n";
-include("classesphp/carrega_ext.php");
-include("classesphp/funcoes_gerais.php");
+include_once("classesphp/carrega_ext.php");
+include_once("classesphp/funcoes_gerais.php");
 $versao = versao();
 $versao = $versao["principal"];
 $exts = get_loaded_extensions();
 echo "MapServer (a vers&atilde;o deve ser &gt;= 5.2 para que a sobreposi&ccedil;&atilde;o de temas funcione na interface Google Maps): <br>";
 echo ms_GetVersion()."<br><br>";
 if(!function_exists("ms_GetVersion"))
-{echo "<span style=color:red >O MAPSERVER PARECE NAO ESTAR INSTALADO!!!<br><br>";}
+{echo "<span style=color:red >PARECE QUE O MAPSERVER NAO ESTA INSTALADO!!!<br><br>";}
 echo "---<br>";
 
 if (get_cfg_var("safe_mode") == 1){
@@ -113,21 +126,19 @@ echo "Mensagem de inicializa&ccedil;&atilde;o: <b>$mensagemInicia </b><br><br> \
 echo "dir_tmp = $dir_tmp \n<br>";
 echo "locmapserv = $locmapserv \n";
 echo "\n<br>";
-if(in_array($ip, $editores)){
-	echo "<br>Voc&ecirc; &eacute; um editor cadastrado<br><br>\n";
-	echo "Este php est&aacute; em ".getcwd()."\n";
-	echo "<br>O diretório de arquivos SESSION tempor&aacute;rio &eacute;: ".session_save_path()."<br>\n";
-	if($conexaoadmin == "" && file_exists($locaplic."/admin/admin.db")){
-		echo "<br>As permiss&otilde;es do banco de dados $locaplic/admin/admin.db s&atilde;o (se o arquivo estiver bloqueado, o sistema de administra&ccedil;&atilde;o n&atilde;o ir&aacute; funcionar):<br>";
-		echo permissoesarquivo($locaplic."/admin/admin.db")."<br>";		
-	}
-}
-else{
-	echo "Voc&ecirc; n&atilde;o &eacute; um editor cadastrado\n";
+echo "Este php est&aacute; em ".getcwd()."\n";
+echo "<br>O diretório de arquivos SESSION tempor&aacute;rio &eacute;: ".session_save_path()."<br>\n";
+if($conexaoadmin == "" && file_exists($locaplic."/admin/admin.db")){
+	echo "<br>As permiss&otilde;es do banco de dados $locaplic/admin/admin.db s&atilde;o (se o arquivo estiver bloqueado, o sistema de administra&ccedil;&atilde;o n&atilde;o ir&aacute; funcionar):<br>";
+	echo permissoesarquivo($locaplic."/admin/admin.db")."<br>";
 }
 echo "<pre>";
 
 echo "verificando banco de dados de administra&ccedil;&atilde;o...\n";
+/**
+ *
+ * TODO verificar tabelas antes de fechar versao
+ */
 $tabelas = array(
 	"i3geoadmin_sistemasf"=>"abrir_funcao,h_funcao,id_funcao,id_sistema,nome_funcao,perfil_funcao,w_funcao",
 	"i3geoadmin_tags"=>"id_tag,nome",
@@ -151,7 +162,9 @@ $tabelas = array(
 	"i3geoadmin_acessostema"=>"codigo_tema,nacessos,dia,mes,ano",
 	"i3geoadmin_usuarios"=>"ativo,data_cadastro,email,id_usuario,login,nome_usuario,senha",
 	"i3geoadmin_papeis"=> "descricao,id_papel,nome",
-	"i3geoadmin_papelusuario"=> "id_papel,id_usuario"
+	"i3geoadmin_papelusuario"=> "id_papel,id_usuario",
+	"i3geoadmin_operacoes" => "id_operacao,codigo,descricao",
+	"i3geoadmin_operacoespapeis" => "id_operacao,id_papel"
 );
 include_once("admin/php/conexao.php");
 if(!empty($esquemaadmin)){
@@ -185,11 +198,17 @@ foreach(array_keys($tabelas) as $tabela)
 	{echo "<span style=color:red >..n&atilde;o encontrada. Consulte o i3geo/guia_de_migracao.txt</span>\n";}
 }
 echo "\n";
-echo "</pre>localizando o cgi...\n";
+echo "</pre><br>localizando o cgi...\n";
 $proto = "http" . ((isset($_SERVER['HTTPS']) && $_SERVER['HTTPS'] == "on") ? "s" : "") . "://";
 $server = isset($_SERVER['HTTP_HOST']) ? $_SERVER['HTTP_HOST'] : $_SERVER['SERVER_NAME'];
 $enderecocgi = $proto.$server.$locmapserv;
 echo "Voc&ecirc; pode testar o CGI clicando <a href='".$enderecocgi."' target='_blank'>aqui</a>, se o programa responder corretamente, dever&aacute; aparecer na tela algo como 'No query information to decode. QUERY_STRING is set, but empty.'\n" ;
+
+$f = @fopen("temas/teste.txt",w);
+@fclose($f);
+if (!file_exists("temas/teste.txt")){
+	echo "<br><span style='color:red'>N&atilde;o foi possivel escrever na pasta temas. O sistema de administracao pode nao funcionar corretamente</span><br>";
+}
 
 echo "<br>Escrevendo nos diret&oacute;rios tempor&aacute;rios...<br>";
 $f = @fopen($dir_tmp."/teste.txt",w);
@@ -200,9 +219,6 @@ $f = @fopen(session_save_path()."/teste.txt",w);
 @fclose($f);
 if (file_exists(session_save_path()."/teste.txt")) echo "da SESSION PHP ok<br>\n"; else saindo("\nN&atilde;o foi poss&iacute;vel gravar no diret&oacute;rio tempor&aacute;rio da SESSION");
 
-
-echo "<br>Existe o geral1.map? ";
-if(file_exists("$locaplic/aplicmap/geral1.map")) echo "Sim\n"; else {echo "Nao";saindo("geral1.map n&atilde;o encontrado");}
 echo " \n";
 echo "Carregando o map_file base...\n";
 $versao = versao();

@@ -57,13 +57,13 @@ $locaplic - (opcional) endere&ccedil;o f&iacute;sico do i3geo
 
 $urli3geo - (opcional) url onde est&aacute; o i3geo (p.ex. http://localhost/i3geo
 
-$editores - (opcional) array com os editores cadastrados no ms_configura.php
+$editores - (depreciado) array com os editores cadastrados no ms_configura.php
 
 $idioma - (opcional) pt|en|es|it
-*/  	
+*/
 	function __construct($map_file="",$perfil="",$locaplic="",$urli3geo="",$editores="",$idioma="pt")
 	{
-		if($editores == "")
+		if($locaplic == "")
 		{
 			if(file_exists("../ms_configura.php"))
 			{include("../ms_configura.php");}
@@ -85,14 +85,13 @@ $idioma - (opcional) pt|en|es|it
 			}
 		}
 		//
-		//verifica se o ip atual est&aacute; cadastrado como um dos editores
+		//verifica o usuario logado esta cadastrado como um dos publicadores
 		//editores podem ver as coisas marcadas como n&atilde;o publicado
 		//no sistema de administra&ccedil;&atilde;o
 		//
 		$this->editor = false;
-		if($editores != "")
-		{$this->editor = $this->verificaeditores($editores);}
-		$this->editores = $editores;
+		$this->editores = "";
+		$this->editor = $this->verificaPapelSessao(3);
 	}
 /*
 function: pegaListaDeMenus
@@ -240,7 +239,7 @@ array
 		else
 		{
 			include_once($this->locaplic."/admin/php/xml.php");
-			$this->xml = simplexml_load_string(geraXmlMapas(implode(" ",$this->perfil),$this->locaplic,$this->editores));
+			$this->xml = simplexml_load_string(geraXmlMapas(implode(" ",$this->perfil),$this->locaplic));
 		}
 		$mapas = array();
 		//pega os sistemas checando os perfis
@@ -263,7 +262,7 @@ array
 			}
 		}
 		return (array("mapas"=>$mapas));
-	}	
+	}
 /*
 function: pegaSistemas
 
@@ -279,7 +278,7 @@ Array
 	{
 		error_reporting(0);
 		include_once($this->locaplic."/admin/php/xml.php");
-		$xmlsistemas = simplexml_load_string(geraXmlSistemas(implode(" ",$this->perfil),$this->locaplic,$this->editores));
+		$xmlsistemas = simplexml_load_string(geraXmlSistemas(implode(" ",$this->perfil),$this->locaplic));
 		$sistemas = array();
 		foreach($xmlsistemas->SISTEMA as $s)
 		{
@@ -308,7 +307,7 @@ Array
 				}
 			}
 		}
-		return $sistemas;		
+		return $sistemas;
 	}
 /*
 function: pegaSistemasI
@@ -325,8 +324,8 @@ Array
 	{
 		error_reporting(0);
 		include_once($this->locaplic."/admin/php/xml.php");
-		
-		$xmlsistemas = simplexml_load_string(geraXmlIdentifica(implode(" ",$this->perfil),$this->locaplic,$this->editores));
+
+		$xmlsistemas = simplexml_load_string(geraXmlIdentifica(implode(" ",$this->perfil),$this->locaplic));
 		$sistemas = array();
 		foreach($xmlsistemas->FUNCAO as $s)
 		{
@@ -343,8 +342,8 @@ Array
 				}
 			}
 		}
-		return $sistemas;		
-	}	
+		return $sistemas;
+	}
 /*
 function: procurartemas
 
@@ -429,7 +428,7 @@ $procurar - String que ser&aacute; procurada.
 									{$down = "sim";}
 									$link = $this->ixml($tema,"TLINK");
 									$tid = $this->ixml($tema,"TID");
-									
+
 									if(!isset($texto[$tid]))
 									{
 										$texto[$tid] = array("tid"=>$tid,"nome"=>($this->ixml($tema,"TNOME")),"link"=>$link,"download"=>$down);
@@ -448,7 +447,7 @@ $procurar - String que ser&aacute; procurada.
 											$pp1 = $this->ixml($tema,"TAGS");
 											$pp1 = $this->removeAcentos($pp1);
 											if (stristr($pp1,$p1))
-											{$listadetemas[] = $texto[$tid];}	
+											{$listadetemas[] = $texto[$tid];}
 										}
 									}
 								}
@@ -459,7 +458,7 @@ $procurar - String que ser&aacute; procurada.
 							}
 							$listadetemas = array();
 						}
-						
+
 					}
 					if (count($subgrupo) > 0)
 					{
@@ -533,7 +532,7 @@ nrss - (opcional) n&uacute;mero de registros no rss que ser&atilde;o considerado
 				if($conta < $nrss)
 				$noticiasRSS[] = array("desc"=>($this->ixml($item,"description")),"titulo"=>($this->ixml($item,"title")),"link"=>($this->ixml($item,"link")));
 				$conta++;
-			}	
+			}
 		}
 		$this->xml = array();
 		foreach($this->pegaListaDeMenus() as $menu)
@@ -548,7 +547,7 @@ nrss - (opcional) n&uacute;mero de registros no rss que ser&atilde;o considerado
 			$xml = simplexml_load_string($xml);
 			foreach($xml->GRUPO as $grupo)
 			{
-				
+
 				$incluigrupo = TRUE;
 				$temp = $this->ixml($grupo,"PERFIL");
 				if ($temp != "")
@@ -560,10 +559,10 @@ nrss - (opcional) n&uacute;mero de registros no rss que ser&atilde;o considerado
 				}
 				if ($incluigrupo == TRUE)
 				{
-					
+
 					foreach($grupo->SGRUPO as $sgrupo)
 					{
-						
+
 						$incluisgrupo = TRUE;
 						if ($this->perfil != "")
 						{
@@ -575,10 +574,10 @@ nrss - (opcional) n&uacute;mero de registros no rss que ser&atilde;o considerado
 						}
 						if ($incluisgrupo == TRUE)
 						{
-							
+
 							foreach($sgrupo->TEMA as $tema)
 							{
-								
+
 								$inclui = TRUE;
 								if ($this->perfil != "")
 								{
@@ -589,15 +588,15 @@ nrss - (opcional) n&uacute;mero de registros no rss que ser&atilde;o considerado
 								}
 								if ($inclui == TRUE)
 								{
-									
+
 									$tid = $this->ixml($tema,"TID");
 									$tags = explode(" ",$this->ixml($tema,"TAGS"));
 									foreach ($tags as $tag)
 									{
-										
+
 										if($tag != "")
 										{
-											
+
 											if(!isset($resultado[$tag]))
 											{
 												$resultado[$tag] = array($tid);
@@ -616,7 +615,7 @@ nrss - (opcional) n&uacute;mero de registros no rss que ser&atilde;o considerado
 															else
 															$noticias[$tag] = array_merge($noticias[$tag],array("titulo"=>$noticia["titulo"],"link"=>$noticia["link"]));
 														}
-													}	
+													}
 												}
 											}
 											else
@@ -644,7 +643,26 @@ nrss - (opcional) n&uacute;mero de registros no rss que ser&atilde;o considerado
 		}
 		return ($final);
 	}
-	
+	function verificaPapelSessao($id_papel){
+		if(!empty($_COOKIE["i3geocodigologin"])){
+			session_write_close();
+			session_name("i3GeoLogin");
+			session_id($_COOKIE["i3geocodigologin"]);
+			session_start();
+			//var_dump($_SESSION);exit;
+			if($_SESSION["usuario"] != $_COOKIE["i3geousuariologin"]){
+				return false;
+			}
+			foreach($_SESSION["papeis"] as $p){
+				if($p["id_papel"] == 1 || $p["id_papel"] == $id_papel){
+					return true;
+				}
+			}
+		}
+		else{//caso nao exista, retorna um erro
+			return false;
+		}
+	}
 	function removeAcentos($s)
 	{
 		$s = ereg_replace("[&aacute;à&acirc;&atilde;]","a",$s);
@@ -680,21 +698,6 @@ nrss - (opcional) n&uacute;mero de registros no rss que ser&atilde;o considerado
     	//Return FALSE if none of the values from $needle are found in $haystack
     	return FALSE;
 	}
-	function verificaEditores($editores)
-	{
-		$editor = false;
-		foreach ($editores as $e)
-		{
-			$e = gethostbyname($e);
-			$ip = "UNKNOWN";
-			if (getenv("HTTP_CLIENT_IP")) $ip = getenv("HTTP_CLIENT_IP");
-			else if(getenv("HTTP_X_FORWARDED_FOR")) $ip = getenv("HTTP_X_FORWARDED_FOR");
-			else if(getenv("REMOTE_ADDR")) $ip = getenv("REMOTE_ADDR");
-			else $ip = "UNKNOWN";
-			if ($e == $ip){$editor=true;}
-		}
-		return $editor;
-	}
 	function ixml($no,$nome)
 	{
 		$texto = $no->$nome;
@@ -702,6 +705,5 @@ nrss - (opcional) n&uacute;mero de registros no rss que ser&atilde;o considerado
 		{$texto = mb_convert_encoding($texto,"UTF-8","ISO-8859-1");}
 		return mb_convert_encoding($texto,"HTML-ENTITIES","auto");
 	}
-
 }
 ?>

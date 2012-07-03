@@ -65,7 +65,8 @@ error_reporting(E_ALL);
 /**
  * TODO documentar o sistema de login
  */
-include_once(__DIR__."/admin.php");
+include_once(__DIR__."/../../classesphp/pega_variaveis.php");
+session_write_close();
 session_name("i3GeoLogin");
 //se o usuario estiver tentando fazer login
 if(!empty($usuario) && !empty($senha)){
@@ -75,8 +76,8 @@ if(!empty($usuario) && !empty($senha)){
 	session_start();
 }
 else{//se nao, verifica se o login ja existe realmente
-	if(!empty($_COOKIE["i3GeoLogin"])){
-		session_id($_COOKIE["i3GeoLogin"]);
+	if(!empty($_COOKIE["i3geocodigologin"])){
+		session_id($_COOKIE["i3geocodigologin"]);
 		session_start();
 		if($_SESSION["usuario"] != $_COOKIE["i3geousuariologin"]){
 			logoutUsuario();
@@ -96,6 +97,7 @@ switch (strtoupper($funcao))
 
 	*/
 	case "LOGIN":
+		include_once(__DIR__."/admin.php");
 		$teste = autenticaUsuario($usuario,$senha);
 		if($teste != false){
 			$_SESSION["usuario"] = $usuario;
@@ -111,6 +113,7 @@ switch (strtoupper($funcao))
 		}
 		else{
 			logoutUsuario();
+			cpjson("logout");
 		}
 	break;
 	/*
@@ -120,31 +123,52 @@ switch (strtoupper($funcao))
 
 	Para que o usuario possa executar a operacao, o papel ao qual ele pertence deve estar registrado em operacoespaeis no banco de administracao
 
+	Se $operacao for vazio, e retornado "sim", o que permite que a verificacao apenas confirme que o login esta correto na sessao
+
 	Paremeter:
 
 	$operacao - operacao que sera verificada
 	*/
 	case "VALIDAOPERACAOSESSAO":
 		$retorno = "nao";
-		if(verificaOperacaoSessao($operacao) == true){
+		if($operacao == ""){
 			$retorno = "sim";
 		}
 		else{
-			logoutUsuario();
+			if(verificaOperacaoSessao($operacao) == true){
+				$retorno = "sim";
+			}
+			else{
+				logoutUsuario();
+			}
 		}
 		cpjson($retorno);
 	break;
 }
+function verificaPapelSessao($id_papel){
+	$resultado = false;
+	//verifica se e administrador
+	if(validaSessao()){
+		foreach($_SESSION["papeis"] as $p){
+			if($p["id_papel"] == 1 || $p["id_papel"] == $id_papel){
+				return true;
+			}
+		}
+	}
+	return $resultado;
+}
 function verificaOperacaoSessao($operacao){
 	$resultado = false;
 	//verifica se e administrador
-	foreach($_SESSION["papeis"] as $p){
-		if($p["id_papel"] == 1){
-			return true;
+	if(validaSessao()){
+		foreach($_SESSION["papeis"] as $p){
+			if($p["id_papel"] == 1){
+				return true;
+			}
 		}
-	}
-	if(!empty($_SESSION["operacoes"][$operacao])){
-		$resultado = true;
+		if(!empty($_SESSION["operacoes"][$operacao])){
+			$resultado = true;
+		}
 	}
 	return $resultado;
 }

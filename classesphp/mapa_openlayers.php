@@ -226,7 +226,7 @@ else
 		$cor = $classe0->getstyle(0)->color;
 		$cor->setrgb($c->red,$c->green,$c->blue);
 		$cor = $classe0->getstyle(0)->outlinecolor;
-		$cor->setrgb($c->red,$c->green,$c->blue);	
+		$cor->setrgb($c->red,$c->green,$c->blue);
 		$status = $l->open();
 		$status = $l->whichShapes($mapa->extent);
 		while ($shape = $l->nextShape())
@@ -250,7 +250,7 @@ if (!function_exists('imagepng'))
 if(trim($_GET["TIPOIMAGEM"]) != "" && trim($_GET["TIPOIMAGEM"]) != "nenhum")
 {
 	if($img->imagepath == "")
-	{echo "Erro IMAGEPATH vazio";exit;}	
+	{echo "Erro IMAGEPATH vazio";exit;}
 	$nomer = ($img->imagepath)."filtroimgtemp".nomeRand().".png";
 	$img->saveImage($nomer);
 	filtraImg($nomer,$_GET["TIPOIMAGEM"]);
@@ -279,7 +279,7 @@ else{
 		header('Last-Modified: '.gmdate('D, d M Y H:i:s', filemtime($nomer)).' GMT', true, 200);
 		$etag = md5_file($nomer);
 		header('Etag: '.$etag);
-	}	
+	}
 	fpassthru(fopen($nomer, 'rb'));
 	exit;
 }
@@ -385,14 +385,14 @@ function filtraImg($nomer,$tipoimagem){
 }
 function inicializa(){
 	clearstatcache();
-	$_COOKIE = array();
+	//$_COOKIE = array();
 	if (!function_exists('ms_GetVersion')){
 		$s = PHP_SHLIB_SUFFIX;
 		@dl( 'php_mapscript.'.$s );
 		$ler_extensoes[] = 'php_mapscript';
 	}
 	//verifica&ccedil;&atilde;o de seguran&ccedil;a
-	$_SESSION = array();
+	//$_SESSION = array();
 	session_name("i3GeoPHP");
 	if(@$_GET["g_sid"])
 	{session_id($_GET["g_sid"]);}

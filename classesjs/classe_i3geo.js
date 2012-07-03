@@ -57,7 +57,7 @@ Para inicializar o mapa, utilize i3GEO.inicia() e para atualizar o mapa, utilize
 Ap&oacute;s terminado o processo de inicializa&ccedil;&atilde;o, pode-se executar uma fun&ccedil;&atilde;o de ajuste. Essa fun&ccedil;&atilde;o
 deve ser definida em i3GEO.finaliza, por exemplo i3GEO.finaliza = "funcaoDeAjuste()" ou i3GEO.finaliza = function(){}
 
-Ao inicializar ou atualizar o i3Geo, &eacute; feita uma chamada em AJAX 
+Ao inicializar ou atualizar o i3Geo, &eacute; feita uma chamada em AJAX
 para a obten&ccedil;&atilde;o dos parametros necess&aacute;rios ao funcionamento do mapa. Esses parametros
 s&atilde;o armazenados na vari&aacute;vel i3GEO.parametros
 
@@ -135,9 +135,9 @@ i3GEO = {
 	autenticadoopenid {sim|nao} - indica se o usu&aacute;rio foi autenticado em alguma rede social
 
 	editor {sim|nao} - indica se o usu&aacute;rio atual &eacute; um editor (administrador)
-	
+
 	cordefundo {r,g,b}
-	
+
 	copyright {String} - texto existente no Layer copyright do mapfile de inicializa&ccedil;&atilde;o
 	*/
 	parametros: {
@@ -168,19 +168,20 @@ i3GEO = {
 		embedLegenda:"nao",
 		autenticadoopenid:"nao",
 		cordefundo: "",
-		copyright: ""
+		copyright: "",
+		editor: "nao"
 	},
 	/*
 	Propriedade: scrollerWidth
-	
+
 	Largura da barra de rolagem do navegador. Se for igual a "", a largura ser&aacute; calculada automaticamente.
-	
+
 	O valor "scrollerWidth" ser&aacute; utilizado no calculo da largura do mapa. Se vc n&atilde;o quer diminuir o tamanho do mapa,
 	subtraindo a largura da barra de rolagem, defina scrollerWidth = 0
-	
+
 	Tipo:
 	{num&eacute;rico}
-	
+
 	Default:
 	{""}
 	*/
@@ -188,7 +189,7 @@ i3GEO = {
 	/*
 	Propriedade: finaliza
 
-	Fun&ccedil;&atilde;o que ser&aacute; executada ap&oacute;s a cria&ccedil;&atilde;o e posicionamento do mapa. Pode ser uma string tamb&eacute;m, que ser&aacute; avaliada com "eval". 
+	Fun&ccedil;&atilde;o que ser&aacute; executada ap&oacute;s a cria&ccedil;&atilde;o e posicionamento do mapa. Pode ser uma string tamb&eacute;m, que ser&aacute; avaliada com "eval".
 
 	Tipo:
 	{string}
@@ -200,7 +201,7 @@ i3GEO = {
 	/*
 	Propriedade: finalizaAPI
 
-	Fun&ccedil;&atilde;o que ser&aacute; executada ap&oacute;s a API utilizada (Openlayers ou Googlemaps) ter sido inicializada e o objeto com o mapa ter sido criado. Pode ser uma string tamb&eacute;m, que ser&aacute; avaliada com "eval". 
+	Fun&ccedil;&atilde;o que ser&aacute; executada ap&oacute;s a API utilizada (Openlayers ou Googlemaps) ter sido inicializada e o objeto com o mapa ter sido criado. Pode ser uma string tamb&eacute;m, que ser&aacute; avaliada com "eval".
 
 	Tipo:
 	{string}
@@ -208,14 +209,14 @@ i3GEO = {
 	Default:
 	{""}
 	*/
-	finalizaAPI:"",	
+	finalizaAPI:"",
 	/*
 	Variavel: tamanhodoc
-	
+
 	Largura e altura do navegador ap&oacute;s a inicializa&ccedil;&atilde;o do mapa
-	
+
 	&Eacute; utilizado como um parÃ¢metro para verificar se o mapa foi ou n&atilde;o redimensionado pelo usu&aacute;rio de forma consistente
-	
+
 	Type:
 	{array}
 	*/
@@ -240,7 +241,7 @@ i3GEO = {
 
 	Essa vari&aacute;vel &eacute; um contador utilizado para indicar quantos processos est&atilde;o ativos e que
 	ir&atilde;o executar o redesenho do mapa. O mapa s&oacute; &eacute; atualizado quando o contador for menor que 1.
-	Esse contador &eacute; utilizado no m&eacute;todo i3GEO.atualiza 
+	Esse contador &eacute; utilizado no m&eacute;todo i3GEO.atualiza
 	O contador &eacute; necess&aacute;rio para evitar chamadas desnecess&aacute;rias Ã  fun&ccedil;&atilde;o de redesenho do mapa.
 
 	Tipo:
@@ -343,7 +344,7 @@ i3GEO = {
 						{i3GEO.arvoreDeTemas.OPCOESADICIONAIS.navegacaoDir = true;}
 						//
 						//calcula (opcional) o tamanho correto da tabela onde fica o mapa
-						//se n&atilde;o for feito esse c&aacute;lculo, o mapa fica ajustado Ã  esquerda
+						//se n&atilde;o for feito esse c&aacute;lculo, o mapa fica ajustado a� esquerda
 						//
 						temp = 0;
 						if ($i("contemFerramentas")){temp = temp + parseInt($i("contemFerramentas").style.width,10);}
@@ -414,9 +415,9 @@ i3GEO = {
 	},
 	/*
 	Function: aposIniciar
-	
+
 	Executa opera&ccedil;&otilde;es ap&oacute;s o mapa ter sido posicionado na tela
-	
+
 	Executa tamb&eacute;m o que for definido em i3Geo.finaliza
 	*/
 	aposIniciar: function(){
@@ -493,8 +494,8 @@ i3GEO = {
 			//corpoMapa.call();
 			return;
 		}
-		//verifica se o parÃ¢metro retorno existe, caso contr&aacute;rio,
-		//faz a chamada ao programa PHP para obter os parÃ¢metros
+		//verifica se o parametro retorno existe, caso contr&aacute;rio,
+		//faz a chamada ao programa PHP para obter os parametros
 		try{
 			if (retorno.data === "erro"){
 				alert("Erro no mapa. Sera feita uma tentativa de recuperacao.");
@@ -537,7 +538,7 @@ i3GEO = {
 			if(retorno.data.variaveis.erro !== "")
 			{alert(retorno.data.variaveis.erro);}
 			//
-			//o try aqui &eacute; necess&aacute;rio pois na interface googlemaps os parÃ¢metros retorno.data.variaveis n&atilde;o s&atilde;o gerados completamente
+			//o try aqui &eacute; necess&aacute;rio pois na interface googlemaps os parametros retorno.data.variaveis n&atilde;o s&atilde;o gerados completamente
 			//
 			try{
 				i3GEO.arvoreDeCamadas.atualiza(retorno.data.temas);
@@ -571,7 +572,7 @@ i3GEO = {
 	Function: calculaTamanho
 
 	Calcula o tamanho do mapa atual e define alguns elementos HTML do mapa
-	
+
 	Return:
 	{array} - [w,h]
 	*/
@@ -632,7 +633,7 @@ i3GEO = {
 	Function: reCalculaTamanho
 
 	Recalcula o tamanho do mapa com base nas configura&ccedil;&otilde;es do navegador
-	
+
 	Return:
 	{array} - [w,h]
 	*/
@@ -653,7 +654,7 @@ i3GEO = {
 		novow = temp[0];
 		novoh = temp[1];
 		temp = (antigoh - (novoh - diminuiy));
-	
+
 		document.body.style.height = novoh + "px";
 		w = novow - menos - diminuix;
 		h = novoh - diminuiy;
@@ -718,5 +719,11 @@ i3GEO = {
 		i3GEO.parametros.h = variaveis.h*1;
 		i3GEO.parametros.mappath = variaveis.mappath;
 		i3GEO.parametros.mapurl = variaveis.mapurl;
+		if(i3GEO.login.verificaCookieLogin()){
+			i3GEO.parametros.editor = "sim";
+		}
+		else{
+			i3GEO.parametros.editor = "nao";
+		}
 	}
 };

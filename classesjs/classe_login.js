@@ -39,22 +39,46 @@ Controla o sistema de login e &aacute;rea restrita dos usu&aacute;rios
 i3GEO.login = {
 	/*
 		Variavel: divnomelogin
-		
+
 		Id do elemento div que recebera o nome do usuario apos o login.
 	 */
 	divnomelogin: "i3GEONomeLogin",
 	/*
 	Variavel: recarrega
-	
+
 	Recarrega ou nao a pagina atual apos o login
-	
+
 	Tipo:
 	{boolean}
 
 	Default:
-	{false}	
+	{false}
 	*/
-	recarrega: false,	
+	recarrega: false,
+	/*
+	Variavel: funcaoLoginOk
+
+	Funcao que sera executada quando o login ocorrer de forma correta
+
+	Tipo:
+	{function}
+
+	Default:
+	{null}
+	*/
+	funcaoLoginOk: null,
+	/*
+	Variavel: funcaoLoginErro
+
+	Funcao que sera executada quando o login ocorrer de forma errada
+
+	Tipo:
+	{function}
+
+	Default:
+	{null}
+	*/
+	funcaoLoginErro: null,
 	dialogo: {
 		abreLogin: function(locaplic){
 			var js;
@@ -79,7 +103,7 @@ i3GEO.login = {
 				}
 				if(i3GEO.login.recarrega == true){
 					document.location.reload();
-				}				
+				}
 			}
 		}
 	},
@@ -89,10 +113,25 @@ i3GEO.login = {
 		i3GEO.util.insereCookie("i3geousuarionome","",1);
 		i3GEO.util.insereCookie("i3GeoLogin","",1);
 	},
-	verificaOperacao: function(operacao,locaplic,funcao,tipo){
+	verificaCookieLogin: function(){
+		var a = i3GEO.util.pegaCookie("i3geocodigologin"),
+			b = i3GEO.util.pegaCookie("i3geocodigologin"),
+			c = i3GEO.util.pegaCookie("i3geousuarionome");
+		if(a && b && c && a != "" && b != "" && c != ""){
+			return true;
+		}
+		else{
+			return false;
+		}
+	},
+	verificaOperacao: function(operacao,locaplic,funcaoOk,tipo,funcaoErro){
 		var p = "",cp,temp,resultado = true;
-		if(!i3GEO.util.pegaCookie("i3geousuariologin") || !i3GEO.util.pegaCookie("i3GeoLogin") || i3GEO.util.pegaCookie("i3geousuariologin") == "" || i3GEO.util.pegaCookie("i3GeoLogin") == ""){
-			alert("Login!");
+		if(!i3GEO.login.verificaCookieLogin()){
+			if(!funcaoErro)
+			{alert("Login!");}
+			else{
+				funcaoErro.call();
+			}
 			return false;
 		}
 		if(!locaplic){
@@ -105,16 +144,20 @@ i3GEO.login = {
 			else{
 				resultado = false;
 			}
-			if(funcao && resultado === true){
-				funcao.call();
+			if(resultado === true){
+				if(funcaoOk && funcaoOk != ""){
+					funcaoOk.call();
+				}
 			}
 			else{
 				if($i(i3GEO.login.divnomelogin)){
 					$i(i3GEO.login.divnomelogin).innerHTML = "";
 				}
-				return resultado;
+				if(funcaoErro && funcaoErro != "" && resultado === false){
+					funcaoErro.call();
+				}
 			}
-				
+			return resultado;
 		};
 		//verificacao rapida, busca apenas na sessao do usuario ja aberta
 		if(tipo === "sessao"){
@@ -130,6 +173,6 @@ i3GEO.login = {
 		cp = new cpaint();
 		cp.set_response_type("JSON");
 		cp.set_transfer_mode("POST");
-		cp.call(p,"login",temp,"&operacao="+operacao);		
+		cp.call(p,"login",temp,"&operacao="+operacao);
 	}
 };

@@ -46,15 +46,15 @@ i3GEO.gadgets = {
 
 	Essa vari&aacute;vel define os par�metros individuais de cada gadget e o ID do elemento HTML onde
 	o gadget ser&aacute; inclu&iacute;do (par�metro "idhtml").
-	
+
 	Cada tipo de gadget pode ter par�metros espec&iacute;ficos, descritos a seguir.
-	
+
 	i3GEO.gadgets.PARAMETROS.mostraBuscaRapida.servicosexternos = true|false //indica que os servi&ccedil;os de buscas externos ao i3Geo ser&atilde;o ou n&atilde;o mostrados
 	i3GEO.gadgets.PARAMETROS.mostraBuscaRapida.temasmapa =  true|false //indica se a busca ser&aacute; feita ou n&atilde;o nas camadas existentes no mapa
 	i3GEO.gadgets.PARAMETROS.mostraMenuSuspenso.deslocaEsquerda = 0 //n&uacute;mero de pixels que indica o quanto o menu ser&aacute; deslocado para a esquerda
 	i3GEO.gadgets.PARAMETROS.mostraMenuSuspenso.finaliza = "" //nome de uma fun&ccedil;&atilde;o que ser&aacute; executada quando a constru&ccedil;&atilde;o do menu tiver terminado
 	i3GEO.gadgets.PARAMETROS.mostraMenuSuspenso.parametrosYUI = {} //objeto contendo par�metros adicionais da API YUI para menus
-	
+
 	Voc&ecirc; pode acessar os par�metros da seguinte forma:
 
 	i3GEO.gadgets.PARAMETROS.mostraMenuSuspenso.deslocaEsquerda = 400;
@@ -105,17 +105,17 @@ i3GEO.gadgets = {
 		"mostraMenuSuspenso":
 
 		{permiteLogin: true,idhtml:"menus",deslocaEsquerda:0,finaliza:"",parametrosYUI={}},
-		
+
 		"mostraMenuLista":
-		
+
 		{idhtml:"menuLista"},
 
 		"mostraVersao":
 
 		{idhtml:"versaoi3geo"},
-		
+
 		"mostraEmail":
-		
+
 		{idhtml:"emailInstituicao"}
 	}
 
@@ -165,7 +165,7 @@ i3GEO.gadgets = {
 		else
 		{i3GEO.gadgets.PARAMETROS.mostraEmail.idhtml = id;}
 		i3GEO.util.defineValor(id,"innerHTML",i3GEO.parametros.emailInstituicao);
-	},	
+	},
 	/*
 	Function: mostraVersao
 
@@ -211,7 +211,7 @@ i3GEO.gadgets = {
 
 	Essa op&ccedil;&atilde;o s&oacute; funciona com a API do Google carregada
 
-	Se voc&ecirc; n&atilde;o quer essa fun&ccedil;&atilde;o no mapa, elimine o elemento HTML existente no mapa que contenha o 
+	Se voc&ecirc; n&atilde;o quer essa fun&ccedil;&atilde;o no mapa, elimine o elemento HTML existente no mapa que contenha o
 	id definido em i3GEO.gadgets.PARAMETROS.mostraInserirKml.idhtml
 
 	Parametro:
@@ -241,7 +241,7 @@ i3GEO.gadgets = {
 
 	A escala num&eacute;rica pode ser alterada pelo usu&aacute;rio digitando-se a nova escala.
 
-	Se voc&ecirc; n&atilde;o quer essa fun&ccedil;&atilde;o no mapa, elimine o elemento HTML existente no mapa que contenha o 
+	Se voc&ecirc; n&atilde;o quer essa fun&ccedil;&atilde;o no mapa, elimine o elemento HTML existente no mapa que contenha o
 	id definido em i3GEO.gadgets.PARAMETROS
 
 	Parametro:
@@ -267,7 +267,7 @@ i3GEO.gadgets = {
 				onde.innerHTML = ins;
 				$i("i3GEOescalanumForm").onsubmit = function(){
 					i3GEO.navega.aplicaEscala(i3GEO.configura.locaplic,i3GEO.configura.sid,document.getElementById("i3geo_escalanum").value);
-					return false;				
+					return false;
 				};
 			}
 			if(i3GEO.eventos.NAVEGAMAPA.toString().search("i3GEO.gadgets.atualizaEscalaNumerica()") < 0)
@@ -275,7 +275,7 @@ i3GEO.gadgets = {
 		}
 	},
 	atualizaEscalaNumerica: function(escala){
-		var e = $i("i3geo_escalanum");  
+		var e = $i("i3geo_escalanum");
 		if(!e){
 			i3GEO.eventos.NAVEGAMAPA.remove("i3GEO.gadgets.atualizaEscalaNumerica()");
 			return;
@@ -291,13 +291,13 @@ i3GEO.gadgets = {
 			}
 		}
 	},
-	
+
 	/*
 	Function: mostraEscalaGrafica
 
 	Mostra no mapa a escala grafica como um elemento fora do mapa.
 
-	Se voc&ecirc; n&atilde;o quer essa fun&ccedil;&atilde;o no mapa, elimine o elemento HTML existente no mapa que contenha o 
+	Se voc&ecirc; n&atilde;o quer essa fun&ccedil;&atilde;o no mapa, elimine o elemento HTML existente no mapa que contenha o
 	id definido em i3GEO.gadgets.PARAMETROS(escala)
 
 	Parametro:
@@ -312,7 +312,7 @@ i3GEO.gadgets = {
 		var e,temp,ins;
 		if($i(id)){
 			atualizaEscalaGrafica = function(){
-				e = $i("imagemEscalaGrafica");  
+				e = $i("imagemEscalaGrafica");
 				if(!e){
 					i3GEO.eventos.NAVEGAMAPA.remove("atualizaEscalaGrafica()");
 					return;
@@ -337,11 +337,11 @@ i3GEO.gadgets = {
 
 	Mostra a op&ccedil;&atilde;o de busca r&aacute;pida de lugares por palavra digitada.
 
-	Se voc&ecirc; n&atilde;o quer essa fun&ccedil;&atilde;o no mapa, elimine o elemento HTML existente no mapa que contenha o 
+	Se voc&ecirc; n&atilde;o quer essa fun&ccedil;&atilde;o no mapa, elimine o elemento HTML existente no mapa que contenha o
 	id definido em i3GEO.gadgets.PARAMETROS (buscaRapida)
-	
+
 	Onde a busca ser&aacute; feita &eacute; controlado pela vari&aacute;vel i3GEO.gadgets.PARAMETROS.mostraBuscaRapida
-	
+
 	Veja: ferramentas/<buscarapida>
 
 	Parametro:
@@ -393,7 +393,7 @@ i3GEO.gadgets = {
 						"</table><br>" +
 						"<p class=paragrafo >Apenas os temas especialmente configurados pelo administrador do i3Geo podem receber opera&ccedil;&otilde;es de busca.</p>";
 					$i("i3GEOpropriedadesBuscaRapida"+id+"_corpo").innerHTML = ins;
-				};	
+				};
 			}
 		}
 	},
@@ -472,16 +472,16 @@ i3GEO.gadgets = {
 	Paradefinir os &iacute;cones existentes nos elementos principais do menu, edite o arquivo i3geo/css/botoes2.css e acrescente
 	o estilo desejado. Utilize # para se referenciar ao elemento, cujo identificador &eacute; composto por "menu"+chave, exemplo #menuinterface
 	ou #menuajuda
-	
+
 	O objeto YAHOO.widget.MenuBar resultante pode ser obtido na vari&aacute;vel i3GEOoMenuBar
-	
+
 	i3GEOoMenuBar pode ser manipulado com os m&eacute;todos da biblioteca YUI, por exemplo,
 	i3GEOoMenuBar.getMenuItem("omenudataInterface1").cfg.setProperty("text", "zzzzzz");
 	i3GEOoMenuBar.getMenuItem("omenudataInterface1").destroy();
-	
+
 	Para executar uma opera&ccedil;&atilde;o ap&oacute;s o menu ser montado, utilize a propriedade
 	i3GEO.gadgets.PARAMETROS.mostraMenuSuspenso.finaliza, por exemplo (a string &eacute; executada por meio da fun&ccedil;&atilde;o eval do javascript)
-	
+
 	i3GEO.gadgets.PARAMETROS.mostraMenuSuspenso.finaliza = 'i3GEOoMenuBar.getMenuItem("omenudataInterface1").cfg.setProperty("text", " ");'
 
 	O conte&uacute;do do menu &eacute; baseado na vari&aacute;vel i3GEO.configura.oMenuData
@@ -518,8 +518,9 @@ i3GEO.gadgets = {
 							{id:"omenudataAdminu1",text: "Login", url: "javascript:i3GEO.login.dialogo.abreLogin()" },
 							{id:"omenudataAdminu2",text: "Logout", url: "javascript:i3GEO.login.dialogo.abreLogout()" }
 						);
+						i3GEO.login.recarrega = true;
 					}
-					if(i3GEO.parametros.editor === "sim"){
+					if(i3GEO.login.verificaCookieLogin()){
 						i3GEO.configura.oMenuData.submenus.i3GeoAdmin.push(
 							{id:"omenudataAdmin1",text: $trad("x1"), url: "javascript:var w = window.open(i3GEO.configura.locaplic+'/admin/index.html')" },
 							{id:"omenudataAdmin2",text: $trad("g1a"), url: "javascript:var w = window.open(i3GEO.configura.locaplic+'/admin/html/arvore.html')" },
@@ -557,7 +558,7 @@ i3GEO.gadgets = {
 					if(confm.submenus[confm.menu[i].id].length > 0)
 					{ins += '<li class="yuimenubaritem" style="padding-top:2px;"><a style="'+estilo+'" href="#" class="yuimenubaritemlabel" '+t+'id="menu'+confm.menu[i].id+'" >&nbsp;'+confm.menu[i].nome+'</a></li>';}
 				}
-				ins += '</ul>'; 
+				ins += '</ul>';
 				ins += '</div>';
 				objid.innerHTML=ins;
 				if(i3GEO.Interface.ATUAL === "googleearth")
@@ -614,7 +615,7 @@ i3GEO.gadgets = {
 			}
 			if(temp != "" && $i(temp)){
 				i3GEOoMenuBar.getMenuItem(temp).cfg.setProperty("checked", true);
-			}			
+			}
 		}
 		catch(e){
 			if(typeof(console) !== 'undefined'){console.warning("i3GEO.gadgets.mostraMenuSuspenso() "+ e);}
@@ -668,7 +669,7 @@ i3GEO.gadgets = {
 	},
 	/*
 	Function: mostraMenuLista
-	
+
 	Mostra as op&ccedil;&otilde;es existentes no menu suspenso por&eacute;m na forma de uma lista de op&ccedil;&otilde;es
 
 	O conte&uacute;do do menu &eacute; baseado na vari&aacute;vel i3GEO.configura.oMenuData

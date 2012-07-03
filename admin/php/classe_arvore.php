@@ -113,13 +113,8 @@ class Arvore
 		//editores podem ver as coisas marcadas como n&atilde;o publicado
 		//no sistema de administra&ccedil;&atilde;o
 		//
-		include($locaplic."/ms_configura.php");
 		$this->editor = false;
-		if($editores != "")
-		{
-			$this->editor = $this->verificaeditores($editores);
-		}
-		$this->editores = $editores;
+		$this->editor = $this->verificaPapelSessao(3);
 		$this->pubsql = " (publicado != 'NAO' or publicado isnull) and ";
 		if($this->editor)
 		{
@@ -384,7 +379,7 @@ class Arvore
 							if($n >= 5){
 								$n = 5;
 							}
-								
+
 							if ($n == $nivel)
 							{
 								$temasRaizGrupo[] = $texto;
@@ -605,7 +600,7 @@ class Arvore
 				if($listasgrupos=="sim")
 				{
 					$dadossubgrupos = $this->pegaSubgruposGrupo($id_menu,$grupo["id_n1"]);
-						
+
 					foreach($dadossubgrupos["subgrupos"] as $sgrupo)
 					{
 						$a = $sgrupo["n2_perfil"];
@@ -624,7 +619,7 @@ class Arvore
 									{
 										$down = "sim";$grupodown = "sim";
 									}
-										
+
 									if (strtolower($tema["ogc_tema"]) != "nao")
 									{
 										$ogc = "sim";$grupoogc = "sim";
@@ -844,23 +839,6 @@ class Arvore
 		}
 		return $resultado;
 	}
-	function verificaEditores($editores)
-	{
-		$editor = false;
-		foreach ($editores as $e)
-		{
-			$e = gethostbyname($e);
-			$ip = "UNKNOWN";
-			if (getenv("HTTP_CLIENT_IP")) $ip = getenv("HTTP_CLIENT_IP");
-			else if(getenv("HTTP_X_FORWARDED_FOR")) $ip = getenv("HTTP_X_FORWARDED_FOR");
-			else if(getenv("REMOTE_ADDR")) $ip = getenv("REMOTE_ADDR");
-			else $ip = "UNKNOWN";
-			if ($e == $ip){
-				$editor=true;
-			}
-		}
-		return $editor;
-	}
 	function removeAcentos($s)
 	{
 		$s = ereg_replace("[&aacute;à&acirc;&atilde;]","a",$s);
@@ -887,6 +865,26 @@ class Arvore
 		else
 			$texto = mb_convert_encoding($texto,mb_detect_encoding($texto),"ISO-8859-1");
 		return $texto;
+	}
+	function verificaPapelSessao($id_papel){
+		if(!empty($_COOKIE["i3geocodigologin"])){
+			session_write_close();
+			session_name("i3GeoLogin");
+			session_id($_COOKIE["i3geocodigologin"]);
+			session_start();
+			//var_dump($_SESSION);exit;
+			if($_SESSION["usuario"] != $_COOKIE["i3geousuariologin"]){
+				return false;
+			}
+			foreach($_SESSION["papeis"] as $p){
+				if($p["id_papel"] == 1 || $p["id_papel"] == $id_papel){
+					return true;
+				}
+			}
+		}
+		else{//caso nao exista, retorna um erro
+			return false;
+		}
 	}
 }
 ?>

@@ -290,7 +290,7 @@ function corE($label,$cor,$elemento,$sombrax=1,$sombray=1)
 				if(strtolower($elemento) == "backgroundshadowcolor"){
 					$e->set("offsetx",$sombrax);
 					$e->set("offsety",$sombray);
-				}				
+				}
 			}
 			else
 			{$corres = $label->$elemento;}
@@ -494,9 +494,9 @@ function listaEpsg()
 		$d = str_replace("<","",$d);
 		$c = str_replace("<","",$c);
 		$n = mb_convert_encoding($n,"UTF-8","ISO-8859-1");
-		$lista[] = array("codigo"=>$c,"nome"=>$n,"def"=>$d);	
+		$lista[] = array("codigo"=>$c,"nome"=>$n,"def"=>$d);
 	}
-	return $lista;		
+	return $lista;
 }
 /*
 Function: copiaSeguranca
@@ -537,7 +537,7 @@ function copiaSeguranca($map_file)
 	}
 	else
 	{
-		copy((str_replace(".map","seguranca.map",$map_file)),$map_file);	
+		copy((str_replace(".map","seguranca.map",$map_file)),$map_file);
 	}
 }
 /*
@@ -714,7 +714,7 @@ function substituiCon($map_file,$postgis_mapa)
 				{
 					//
 					//o metadata CONEXAOORIGINAL guarda o valor original para posterior substitui&ccedil;&atilde;o
-					//				
+					//
 					if(($lcon == " ") || ($lcon == ""))
 					{
 						$layer->set("connection",$postgis_mapa);
@@ -724,7 +724,7 @@ function substituiCon($map_file,$postgis_mapa)
 					{
 						$layer->set("connection",$postgis_mapa[$lcon]);
 						$layer->setmetadata("CONEXAOORIGINAL",$lcon);
-					}					
+					}
 				}
 			}
 		}
@@ -805,7 +805,7 @@ function retornaReferencia($ext="")
 	$c = $ref->color;
 	$c->setrgb(-1,-1,-1);
 	$c = $ref->outlinecolor;
-	$c->setrgb(-1,-1,-1);	
+	$c->setrgb(-1,-1,-1);
 	$em = $ref->extent;
 	if($original != "")
 	{
@@ -871,7 +871,7 @@ function retornaReferenciaDinamica($ext="")
 	//
 	$objMapa = ms_newMapObj($map_file);
 	if($interface == "googlemaps")
-	{$objMapa->setProjection("init=epsg:4618,a=6378137,b=6378137");}	
+	{$objMapa->setProjection("init=epsg:4618,a=6378137,b=6378137");}
 	if($ext && $ext != ""){
 		$e = explode(" ",$ext);
 		$extatual = $objMapa->extent;
@@ -1092,7 +1092,7 @@ function gravaImagemMapa($mapa)
 	else
 	{$retorno = false;}
 	return $retorno;
-}	
+}
 /*
 Section: atributos
 */
@@ -1213,14 +1213,14 @@ function pegaValoresM($mapa,$layer,$itens,$exclui="nulo",$selecionados="nao",$ch
 	$prjTema = $layer->getProjection();
 	$layer->set("template","none.htm");
 	$layer->setfilter("");
-	
+
 	$indicesel = array();
 	//pega os valores dos indices dos elementos selecionados para comparacao posterior
 	if ($selecionados == "sim")
 	{
 		$sopen = $layer->open();
 		if($sopen == MS_FAILURE){return "erro";}
-		$res_count = $layer->getNumresults(); 	
+		$res_count = $layer->getNumresults();
 		for ($i = 0; $i < $res_count; ++$i)
 		{
 			$result = $layer->getResult($i);
@@ -1236,7 +1236,7 @@ function pegaValoresM($mapa,$layer,$itens,$exclui="nulo",$selecionados="nao",$ch
 		$sopen = $layer->open();
 		if($sopen == MS_FAILURE){return "erro";}
 		$res_count = $layer->getNumresults();
-		
+
 		for ($i=0;$i<$res_count;++$i)
 		{
 			if($versao == 6){
@@ -1246,7 +1246,7 @@ function pegaValoresM($mapa,$layer,$itens,$exclui="nulo",$selecionados="nao",$ch
 			else{
 				$result = $layer->getResult($i);
 				$shp_index  = $result->shapeindex;
-				$shape = $layer->getfeature($shp_index,-1);			
+				$shape = $layer->getfeature($shp_index,-1);
 			}
 			if (($selecionados == "sim") && (array_search($shp_index,$indicesel) === FALSE))
 			{continue;}
@@ -1345,7 +1345,7 @@ function agrupaValores($lista,$indiceChave,$indiceValor,$tipo)
 				$soma[$c] = $soma[$c] + $v;
 				else
 				$soma[$c] = $v;
-				
+
 				if(@$conta[$c])
 				$conta[$c] = $conta[$c] + 1;
 				else
@@ -1403,7 +1403,7 @@ function pegaItens($layer,$mapa="")
 		$dom->loadXML($xml->asxml());
 		$items = array();
 		$sequences = $dom->getElementsByTagName("sequence");
-		
+
 		foreach ($sequences as $sq){
 			$services = $sq->getElementsByTagName("element");
 			foreach ($services as $s){
@@ -1457,7 +1457,7 @@ function buscaRapida($servico,$palavra)
 		$soapclient = new nusoap_client($servico);
 	}
 //echo $soapclient->getDebug();
-//exit;	
+//exit;
 	$vv = "erro";
 	$vv = $soapclient->call("procurar",array("palavra"=>$palavra,"tipoBusca"=>"qualquer"));
 	if($vv == ""){$vv = "erro";}
@@ -1858,7 +1858,7 @@ function criaSHP($tema,$map_file,$locaplic,$dir_tmp,$nomeRand=TRUE)
 	//para manipular dbf
 	if(file_exists($locaplic."/pacotes/phpxbase/api_conversion.php"))
 	include_once($locaplic."/pacotes/phpxbase/api_conversion.php");
-	else	
+	else
 	include_once "../pacotes/phpxbase/api_conversion.php";
 	$map = @ms_newMapObj($map_file);
 	$layer = $map->getlayerbyname($tema);
@@ -1883,12 +1883,12 @@ function criaSHP($tema,$map_file,$locaplic,$dir_tmp,$nomeRand=TRUE)
 		$def[] = array("ID","C","50");
 		$reg[] = 0;
 		if(!function_exists("dbase_create")){
-			$db = xbase_create($nomeshp.".dbf", $def);		
+			$db = xbase_create($nomeshp.".dbf", $def);
 			xbase_add_record($db,$reg);
 			xbase_close($db);
 		}
 		else{
-			$db = dbase_create($nomeshp.".dbf", $def);		
+			$db = dbase_create($nomeshp.".dbf", $def);
 			dbase_add_record($db,$reg);
 			dbase_close($db);
 		}
@@ -1944,7 +1944,7 @@ function criaSHP($tema,$map_file,$locaplic,$dir_tmp,$nomeRand=TRUE)
 				else{
 					$result = $layer->getResult($i);
 					$shp_index  = $result->shapeindex;
-					$shape = $layer->getfeature($shp_index,-1);				
+					$shape = $layer->getfeature($shp_index,-1);
 				}
 				foreach ($items as $ni)
 				{
@@ -1973,12 +1973,12 @@ function criaSHP($tema,$map_file,$locaplic,$dir_tmp,$nomeRand=TRUE)
 			$db = dbase_open($nomeshp.".dbf", 0);
 			else
 			$db = xbase_open($nomeshp.".dbf", 0);
-			
+
 			if(function_exists("dbase_numrecords"))
 			$record_numbers = dbase_numrecords($db);
 			else
 			$record_numbers = xbase_numrecords($db);
-			
+
 			if(function_exists("dbase_close"))
 			dbase_close($db);
 			else
@@ -2040,7 +2040,7 @@ function downloadTema2($map_file,$tema,$locaplic,$dir_tmp,$postgis_mapa)
 	ini_set("max_execution_time","1800");
 	if(file_exists($locaplic."/ms_configura.php"))
 	include($locaplic."/ms_configura.php");
-	else	
+	else
 	include("../ms_configura.php");
 	$versao = versao();
 	$versao = $versao["principal"];
@@ -2105,7 +2105,7 @@ function downloadTema2($map_file,$tema,$locaplic,$dir_tmp,$postgis_mapa)
 		{
 			$ll = $maptemp->getlayerbyname($tt);
 			$permite = $ll->getmetadata("permitedownload");
-			if($permite != "nao")			
+			if($permite != "nao")
 			{ms_newLayerObj($map, $ll);}
 		}
 		$teste = @$map->getlayerbyname($tema);
@@ -2113,7 +2113,7 @@ function downloadTema2($map_file,$tema,$locaplic,$dir_tmp,$postgis_mapa)
 		{
 			$ll = $maptemp->getlayer(0);
 			$permite = $ll->getmetadata("permitedownload");
-			if($permite != "nao")			
+			if($permite != "nao")
 			{
 				ms_newLayerObj($map, $ll);
 				$tema = $ll->name;
@@ -2214,33 +2214,33 @@ function downloadTema2($map_file,$tema,$locaplic,$dir_tmp,$postgis_mapa)
 						if(!file_exists($copia) && file_exists($dir."/".$arq[0].".".$ext))
 						{copy($dir."/".$arq[0].".".$ext,$copia);}
 						if(file_exists($copia))
-						$resultado[] = basename($dir_tmp)."/".basename($copia);	
+						$resultado[] = basename($dir_tmp)."/".basename($copia);
 					}
 				}
 				else
 				{return "erro";}
 			}
 			else //se for vetorial, extrai o arquivo
-			{			
+			{
 				$nomeshp = criaSHP($tema,$map_file,$locaplic,$dir_tmp,$nomeRand);
 				if($nomeshp == false)
 				{return array("arquivos"=>"<span style=color:red >Ocorreu um erro, tente novamente","nreg"=>0);}
-				
+
 				$resultado[] = str_replace($radtmp."/","",$nomeshp).".shp";
 				$dataArquivos[] = date ("F d Y H:i:s.",filemtime($nomeshp.".shp"));
-				
+
 				$resultado[] = str_replace($radtmp."/","",$nomeshp).".shx";
 				$dataArquivos[] = date ("F d Y H:i:s.",filemtime($nomeshp.".shx"));
-				
-				$resultado[] = str_replace($radtmp."/","",$nomeshp).".dbf"; 
-				$dataArquivos[] = date ("F d Y H:i:s.",filemtime($nomeshp.".dbf")); 
+
+				$resultado[] = str_replace($radtmp."/","",$nomeshp).".dbf";
+				$dataArquivos[] = date ("F d Y H:i:s.",filemtime($nomeshp.".dbf"));
 			}
 		}
 	}
 	$nreg = "";
 	if(count($resultado) == 3){
 		$arq = $radtmp."/".$resultado[2];
-		if(function_exists("dbase_open")){	
+		if(function_exists("dbase_open")){
 			$db = dbase_open($arq, 0);
 			if($db){$nreg = dbase_numrecords($db);}
 		}
@@ -2263,7 +2263,7 @@ function downloadTema2($map_file,$tema,$locaplic,$dir_tmp,$postgis_mapa)
 			$gl->set("connection","");
 		}
 		$nomemapfile = $dir_tmp."/".nomerandomico(20)."download.map";
-		
+
 		$ext = $maptemp->extent;
 		$ext->setextent($rectextent->minx,$rectextent->miny,$rectextent->maxx,$rectextent->maxy);
 		$maptemp->save($nomemapfile);
@@ -2291,8 +2291,8 @@ function verificaDBF($arq){
 	else{
 		if(file_exists("../../pacotes/phpxbase/api_conversion.php"))
 		{include_once("../../pacotes/phpxbase/api_conversion.php");}
-		else	
-		{include_once "../pacotes/phpxbase/api_conversion.php";}	
+		else
+		{include_once "../pacotes/phpxbase/api_conversion.php";}
 		$db = xbase_open($arq, 0);
 	}
 	//nas vers&otilde;es novas do PHP open retorna vazio, n&atilde;o d&aacute; pra verificar
@@ -2310,7 +2310,7 @@ function verificaDBF($arq){
 		else
 		{return false;}
 	//}
-	//else {return false;}	
+	//else {return false;}
 }
 /*
 Section: Outros
@@ -2351,7 +2351,7 @@ function calculaAreaPixel($map_file,$celsize)
 	$shape->project($projInObj,$projOutObj);
 	$s = $shape->towkt();
 	$shape = ms_shapeObjFromWkt($s);
-	$area = $shape->getArea();	
+	$area = $shape->getArea();
 	return $area;
 }
 /*
@@ -2500,14 +2500,14 @@ function autoClasses(&$nlayer,$mapa,$locaplic=null)
 			$ret = ms_newRectObj();
 			$ret->setextent($temp[0],$temp[1],$temp[2],$temp[3]);
 		}
-		//	
+		//
 		$sopen = $nlayer->open();
 		if($sopen == MS_FAILURE){return "erro";}
 
 		$status = $nlayer->whichShapes($ret);
-		$parametrosClasses = array();	
+		$parametrosClasses = array();
 		if ($status == 0)
-		{	
+		{
 			while ($shape = $nlayer->nextShape())
 			{
 				$id = trim($shape->values[$itemid]);
@@ -2613,7 +2613,7 @@ function autoClasses(&$nlayer,$mapa,$locaplic=null)
 				$rgb=getRGBpallete($rule,$value);
 				$style->color->setRGB($rgb[0],$rgb[1],$rgb[2]);
 			}
-		}	
+		}
 	}
 	return;
 }
@@ -2641,7 +2641,7 @@ function removeAcentos($var)
 {
 	$a = array('À', '&Aacute;', '&Acirc;', '&Atilde;', 'Ä', 'Å', 'Æ',  '&Ccedil;', 'È', '&Eacute;', '&Ecirc;', 'Ë', 'Ì', '&Iacute;', 'Î', 'Ï', 'Ð', 'Ñ', 'Ò', 'Ó', '&Ocirc;', '&Otilde;', 'Ö', 'Ø', 'Ù', '&Uacute;', 'Û', 'Ü', 'Ý', 'ß', 'à', '&aacute;', '&acirc;', '&atilde;', 'ä', 'å', 'æ',  '&ccedil;', 'è', '&eacute;', '&ecirc;', 'ë', 'ì', '&iacute;', 'î', 'ï', 'ñ', 'ò', 'ó', '&ocirc;', '&otilde;', 'ö', 'ø', 'ù', '&uacute;', 'û', 'ü', 'ý', 'ÿ', 'A', 'a', 'A', 'a', 'A', 'a', 'C', 'c', 'C', 'c', 'C', 'c', 'C', 'c', 'D', 'd', 'Ð', 'd', 'E', 'e', 'E', 'e', 'E', 'e', 'E', 'e', 'E', 'e', 'G', 'g', 'G', 'g', 'G', 'g', 'G', 'g', 'H', 'h', 'H', 'h', 'I', 'i', 'I', 'i', 'I', 'i', 'I', 'i', 'I', 'i', '?', '?',   'J', 'j', 'K', 'k', 'L', 'l', 'L', 'l', 'L', 'l', '?', '?', 'L', 'l', 'N', 'n', 'N', 'n', 'N', 'n', '?', 'O', 'o', 'O', 'o', 'O', 'o', 'Œ', 'œ',   'R', 'r', 'R', 'r', 'R', 'r', 'S', 's', 'S', 's', 'S', 's', 'Š', 'š', 'T', 't', 'T', 't', 'T', 't', 'U', 'u', 'U', 'u', 'U', 'u', 'U', 'u', 'U', 'u', 'U', 'u', 'W', 'w', 'Y', 'y', 'Ÿ', 'Z', 'z', 'Z', 'z', 'Ž', 'ž', '?', 'ƒ', 'O', 'o', 'U', 'u', 'A', 'a', 'I', 'i', 'O', 'o', 'U', 'u', 'U', 'u', 'U', 'u', 'U', 'u', 'U', 'u', '?', '?', '?', '?', '?', '?');
 	$b = array('A', 'A', 'A', 'A', 'A', 'A', 'AE', 'C', 'E', 'E', 'E', 'E', 'I', 'I', 'I', 'I', 'D', 'N', 'O', 'O', 'O', 'O', 'O', 'O', 'U', 'U', 'U', 'U', 'Y', 's', 'a', 'a', 'a', 'a', 'a', 'a', 'ae', 'c', 'e', 'e', 'e', 'e', 'i', 'i', 'i', 'i', 'n', 'o', 'o', 'o', 'o', 'o', 'o', 'u', 'u', 'u', 'u', 'y', 'y', 'A', 'a', 'A', 'a', 'A', 'a', 'C', 'c', 'C', 'c', 'C', 'c', 'C', 'c', 'D', 'd', 'D', 'd', 'E', 'e', 'E', 'e', 'E', 'e', 'E', 'e', 'E', 'e', 'G', 'g', 'G', 'g', 'G', 'g', 'G', 'g', 'H', 'h', 'H', 'h', 'I', 'i', 'I', 'i', 'I', 'i', 'I', 'i', 'I', 'i', 'IJ', 'ij', 'J', 'j', 'K', 'k', 'L', 'l', 'L', 'l', 'L', 'l', 'L', 'l', 'L', 'l', 'N', 'n', 'N', 'n', 'N', 'n', 'n', 'O', 'o', 'O', 'o', 'O', 'o', 'OE', 'oe', 'R', 'r', 'R', 'r', 'R', 'r', 'S', 's', 'S', 's', 'S', 's', 'S', 's', 'T', 't', 'T', 't', 'T', 't', 'U', 'u', 'U', 'u', 'U', 'u', 'U', 'u', 'U', 'u', 'U', 'u', 'W', 'w', 'Y', 'y', 'Y', 'Z', 'z', 'Z', 'z', 'Z', 'z', 's', 'f', 'O', 'o', 'U', 'u', 'A', 'a', 'I', 'i', 'O', 'o', 'U', 'u', 'U', 'u', 'U', 'u', 'U', 'u', 'U', 'u', 'A', 'a', 'AE', 'ae', 'O', 'o');
-	return str_replace($a, $b, $var); 
+	return str_replace($a, $b, $var);
 }
 /*
 Function: criaDirMapa
@@ -2673,11 +2673,11 @@ function criaDirMapa($dir_tmp,$cachedir="")
 		@mkdir($dir_tmp."/comum",0777);
 		if($cachedir == ""){
 			@mkdir($dir_tmp."/cache",0777);
-			@mkdir($dir_tmp."/cache/googlemaps",0777);		
+			@mkdir($dir_tmp."/cache/googlemaps",0777);
 		}
 		else{
 			@mkdir($cachedir,0777);
-			@mkdir($cachedir."/googlemaps",0777);			
+			@mkdir($cachedir."/googlemaps",0777);
 		}
 		if(file_exists($dir_tmp."/".$tmpdirname))
 		return array($mapfile,$tmpdirname,$tmpimgname);
@@ -2757,7 +2757,7 @@ $obj {array} - objeto que ser&aacute; convertido
 function cpjson($obj){
 	if(function_exists("json_encode"))
 	{
-		echojson(array2json($obj));	
+		echojson(array2json($obj));
 	}
 	else
 	{
@@ -2816,7 +2816,7 @@ function carregaquery($mapfile,$objlayer,$objmapa)
 		$handle = fopen ($qyfile, "r");
 		$conteudo = fread ($handle, filesize ($qyfile));
 		fclose ($handle);
-		$shp = unserialize($conteudo);	
+		$shp = unserialize($conteudo);
 		foreach ($shp as $indx)
 		{$objmapa->querybyindex($indxlayer,-1,$indx,MS_TRUE);}
 		return "sim";
@@ -2847,7 +2847,7 @@ function carregaquery2($mapfile,&$objlayer,&$objmapa)
 		$handle = fopen ($qyfile, "r");
 		$conteudo = fread ($handle, filesize ($qyfile));
 		fclose ($handle);
-		$shp = unserialize($conteudo);	
+		$shp = unserialize($conteudo);
 		foreach ($shp as $indx)
 		{$objmapa->querybyindex($indxlayer,-1,$indx,MS_TRUE);}
 		return "sim";
@@ -2884,6 +2884,27 @@ function verificaEditores($editores)
 	return $editor;
 }
 /*
+ Function: verificaPapelUsuario
+
+Verifica se o usu&aacute;rio logado est&aacute; cadastrado em determinado papel.
+
+Os papeis sao cadastrados no sistema de login
+
+Parametros:
+
+papel - codigo do papel
+
+Return:
+
+{boolean}
+*/
+function verificaPapelUsuario($id_papel)
+{
+	include_once(__DIR__."/../admin/php/login.php");
+	$r = verificaPapelSessao($id_papel);
+	return $r;
+}
+/*
 Function: sobeAnno
 
 Coloca todas as camadas do tipo ANNOTATION sobre as demais
@@ -2910,7 +2931,7 @@ function retornaShapesMapext($objLayer,$objMapa){
 	$status = $objLayer->whichShapes($objMapa->extent);
 	while ($shape = $objLayer->nextShape())
 	{$shapes[] = $shape;}
-	$objLayer->close();			
+	$objLayer->close();
 	return $shapes;
 }
 function retornaShapesSelecionados($objLayer,$map_file,$objMapa){
@@ -2925,7 +2946,7 @@ function retornaShapesSelecionados($objLayer,$map_file,$objMapa){
 	if(count($listaDeIndices) == 0)
 	{return $shapes;}
 	$versao = versao();
-	$versao = $versao["principal"];	
+	$versao = $versao["principal"];
 	if ($objLayer->connectiontype != MS_POSTGIS){
 		//pega os shapes selecionados
 		carregaquery2($map_file,$objLayer,$objMapa);
@@ -2943,7 +2964,7 @@ function retornaShapesSelecionados($objLayer,$map_file,$objMapa){
 			else{
 				$result = $objLayer->getResult($i);
 				$shp_index  = $result->shapeindex;
-				$shape = $objLayer->getfeature($shp_index,-1);			
+				$shape = $objLayer->getfeature($shp_index,-1);
 			}
 			$shapes[] = $shape;
 		}
@@ -2960,13 +2981,13 @@ function retornaShapesSelecionados($objLayer,$map_file,$objMapa){
 		while ($shape = $objLayer->nextShape())
 		{
 			if(in_array($shape->index,$listaDeIndices)){
-				$shapes[] = $shape;			  
+				$shapes[] = $shape;
 			}
 		}
-		$objLayer->close();			
+		$objLayer->close();
 	}
 	return $shapes;
-}	
+}
 /*
 Function: permissoesarquivo
 
@@ -2978,7 +2999,7 @@ $arquivo
 */
 function permissoesarquivo($arquivo){
 	$perms = fileperms($arquivo);
-	
+
 	if (($perms & 0xC000) == 0xC000) {
 		// Socket
 		$info = 's';
@@ -3004,28 +3025,28 @@ function permissoesarquivo($arquivo){
 		// Unknown
 		$info = 'u';
 	}
-	
+
 	// Owner
 	$info .= (($perms & 0x0100) ? 'r' : '-');
 	$info .= (($perms & 0x0080) ? 'w' : '-');
 	$info .= (($perms & 0x0040) ?
 			(($perms & 0x0800) ? 's' : 'x' ) :
 			(($perms & 0x0800) ? 'S' : '-'));
-	
+
 	// Group
 	$info .= (($perms & 0x0020) ? 'r' : '-');
 	$info .= (($perms & 0x0010) ? 'w' : '-');
 	$info .= (($perms & 0x0008) ?
 			(($perms & 0x0400) ? 's' : 'x' ) :
 			(($perms & 0x0400) ? 'S' : '-'));
-	
+
 	// World
 	$info .= (($perms & 0x0004) ? 'r' : '-');
 	$info .= (($perms & 0x0002) ? 'w' : '-');
 	$info .= (($perms & 0x0001) ?
 			(($perms & 0x0200) ? 't' : 'x' ) :
 			(($perms & 0x0200) ? 'T' : '-'));
-	
+
 	return $info;
 }
 ?>

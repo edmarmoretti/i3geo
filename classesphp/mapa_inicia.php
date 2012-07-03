@@ -103,6 +103,9 @@ Retorno:
 function iniciaMapa()
 {
 	global $emailInstituicao,$openid,$interfacePadrao,$mensagemInicia,$kmlurl,$tituloInstituicao,$tempo,$navegadoresLocais,$editor,$locaplic,$embedLegenda,$map_file,$mapext,$w,$h,$R_path,$locmapserv,$utilizacgi,$expoeMapfile,$interface;
+	/**
+	 * TODO depreciar na versão 4.8
+	 */
 	if(!isset($editor) || empty($editor))
 	{$editor = "nao";}
 	if(!isset($kmlurl))
@@ -127,7 +130,7 @@ function iniciaMapa()
 		$m->save($map_file);
 	}
 	if($interface == "googlemaps" || $interface == "googleearth")
-	{	
+	{
 		$m = ms_newMapObj($map_file);
 		if($interface == "googlemaps"){
 			$m->setProjection("proj=merc,a=6378137,b=6378137,lat_ts=0.0,lon_0=0.0,x_0=0.0,y_0=0,k=1.0,units=m");
@@ -142,7 +145,7 @@ function iniciaMapa()
 			{$layer->setmetadata("gmstatus","OFF");}
 			$layer->setmetadata("gmopacity",$layer->opacity);
 			if($layer->name == "mundo" || $layer->name == "estados")
-			{$layer->set("status",MS_OFF);}		
+			{$layer->set("status",MS_OFF);}
 			if($layer->type == MS_LAYER_POLYGON)
 			{
 				if($layer->opacity == "");
@@ -252,16 +255,16 @@ function iniciaMapa()
 	*/
 	$versao = versao();
 	$temp = $m->mapa->scalebar;
-	$temp->set("status",MS_OFF);		
+	$temp->set("status",MS_OFF);
 	$of = $m->mapa->outputformat;
 	$of->set("imagemode",MS_IMAGEMODE_RGBA);
 	$of->setOption("QUANTIZE_FORCE","OFF");
-	$of->set("driver","AGG/PNG");		
+	$of->set("driver","AGG/PNG");
 	$m->mapa->setmetadata("interface",$interface);
 	$m->salva();
 	$nomes = nomeRandomico(12);
 	if($imgo->imagepath == "")
-	{echo "Erro IMAGEPATH vazio";exit;}	
+	{echo "Erro IMAGEPATH vazio";exit;}
 	$nomer = ($imgo->imagepath)."mapa".$nomes.".png";
 	$imgo->saveImage($nomer);
 	if (isset($utilizacgi) && strtolower($utilizacgi) == "sim")
@@ -278,12 +281,15 @@ function iniciaMapa()
 		if($versao["principal"] == 6){
 			$shape = $lc->getShape(new resultObj(0));
 			$copyright = $shape->text;
-		}		
+		}
 		else{
 			$shape = $lc->getfeature(0,-1);
 			$copyright = $shape->text;
-		}		
+		}
 	}
+	/**
+	 * TODO depreciar na versão 4.8
+	 */
 	$res["editor"] = $editor;
 	$res["mapexten"] = $ext;
 	$res["mapscale"] = $escalaMapa;
@@ -295,22 +301,22 @@ function iniciaMapa()
 	{$res["mapfile"] = $map_file;}
 	$res["cgi"] = $locmapserv;
 	$res["extentTotal"] = $ext;
-	$res["mapimagem"] = $nomer;	
+	$res["mapimagem"] = $nomer;
 	$geoip = "nao";
 	if (file_exists($locaplic."/pacotes/geoip") && file_exists($locaplic."/pacotes/geoip/GeoLiteCity.dat"))
 	{$geoip = "sim";}
 	$res["geoip"] = $geoip;
-	$res["listavisual"] = (file_exists($locaplic."/imagens/visual")) ? implode(",",listaDiretorios($locaplic."/imagens/visual")) : "";					
+	$res["listavisual"] = (file_exists($locaplic."/imagens/visual")) ? implode(",",listaDiretorios($locaplic."/imagens/visual")) : "";
 	$res["utilizacgi"] = $utilizacgi;
 	$res["versaoms"] = $versao["principal"];
 	$res["versaomscompleta"] = $versao["completa"];
 	$res["mensagens"] = $m->pegaMensagens();
-	$res["r"] = (isset($R_path)) ? "sim" : "nao";					
-	$res["extentref"] = "";					
-	$res["kmlurl"] = $kmlurl;					
-	$res["mensageminicia"] = $mensagemInicia;					
-	$res["interfacePadrao"] = $interfacePadrao;					
-	$res["embedLegenda"] =	$embedLegenda;				
+	$res["r"] = (isset($R_path)) ? "sim" : "nao";
+	$res["extentref"] = "";
+	$res["kmlurl"] = $kmlurl;
+	$res["mensageminicia"] = $mensagemInicia;
+	$res["interfacePadrao"] = $interfacePadrao;
+	$res["embedLegenda"] =	$embedLegenda;
 	$res["w"] = $w;
 	$res["h"] = $h;
 	$res["titulo"] = $tituloInstituicao;

@@ -4,7 +4,7 @@ Title: Inicializa o i3Geo via URL ms_criamapa.php
 
 Esse &eacute; o programa principal de inicializa&ccedil;&atilde;o, podendo ser chamado diretamente pelo navegador web.
 
-Cria os diretórios tempor&aacute;rios em ms_tmp, incluindo o mapfile (http://mapserver.org/mapfile/index.html#mapfile) que ser&aacute; a base para o funcionamento do mapa. 
+Cria os diretórios tempor&aacute;rios em ms_tmp, incluindo o mapfile (http://mapserver.org/mapfile/index.html#mapfile) que ser&aacute; a base para o funcionamento do mapa.
 
 Com o uso de par&acirc;metros &eacute; poss&iacute;vel alterar o processo padr&atilde;o de cria&ccedil;&atilde;o do mapa, como por exemplo, podem ser adicionadas novas camadas ou modificada a abrang&ecirc;ncia espacial do mapa.
 
@@ -135,7 +135,7 @@ Verifica a vari&aacute;vel $caminho
 
 Essa vari&aacute;vel deve ser definida em programas que utilizam o ms_criamapa.php via include.
 Indica onde est&aacute; o diretório i3geo para que os includes seguintes possam ser localizados.
-$caminho &eacute; sempre colocada antes do nome dos arquivos que ser&atilde;o inclu&iacute;dos, p.e., 
+$caminho &eacute; sempre colocada antes do nome dos arquivos que ser&atilde;o inclu&iacute;dos, p.e.,
 require_once ($caminho."classesphp/carrega_ext.php");
 */
 //$_COOKIE = array();
@@ -158,7 +158,7 @@ if (isset($parurl["caminho"]))
 /*
  Carrega as extens&otilde;es PHP
 
-Carrega as extens&otilde;es utilizadas no programa de inicializa&ccedil;&atilde;o. 
+Carrega as extens&otilde;es utilizadas no programa de inicializa&ccedil;&atilde;o.
 A carga das extens&otilde;es geralmente &eacute; necess&aacute;ria nas instala&ccedil;&otilde;es windows (ms4w) ou quando as mesmas n&atilde;o s&atilde;o carregadas pela própria inicializa&ccedil;&atilde;o do PHP.
 */
 include_once ($caminho."classesphp/carrega_ext.php");
@@ -174,14 +174,16 @@ $versao = $versao["principal"];
 //
 //verifica a sessao que controla o login do usuario
 //
+/*
 session_name("i3GeoLogin");
 session_start();
 if(empty($_SESSION["usuario"])){
-	setcookie("i3geocodigologin", "");
+	setcookie("i3geocodigologin", session_id());
 	setcookie("i3geousuariologin", "");
 	setcookie("i3GeoLogin", "");
 	session_destroy();
 }
+*/
 //
 //a vari&aacute;vel $base pode ser definida em ms_configura, mas a prefer&ecirc;ncia &eacute; pela defini&ccedil;&atilde;o j&aacute; existente
 //por isso, $base &eacute; guardada em uma vari&aacute;vel e retomada após o include de ms_configura.php
@@ -198,7 +200,7 @@ Define o cookie para o idioma da interface
 if(isset($idioma) && $idioma != "")
 {setcookie("i3geolingua", $idioma);}
 /*
-Cria os diretórios tempor&aacute;rios que ser&atilde;o utilizados pelo i3geo para armazenar as imagens e outros dados. 
+Cria os diretórios tempor&aacute;rios que ser&atilde;o utilizados pelo i3geo para armazenar as imagens e outros dados.
 */
 $diretorios = criaDirMapa($dir_tmp,$cachedir);
 if(!$diretorios)
@@ -212,7 +214,6 @@ $protocolo = explode("/",$_SERVER['SERVER_PROTOCOL']);
 As vari&aacute;veis v&ecirc;m do arquivo ms_configura.php e s&atilde;o armazenadas em uma se&ccedil;&atilde;o com nome espec&iacute;fico para o i3geo.
 */
 if (!isset($mapext)){$mapext="";}
-$editores_ = $editores;
 $cachedir_ = $cachedir;
 $dir_tmp_ = $dir_tmp;
 $emailInstituicao_ = $emailInstituicao;
@@ -269,7 +270,6 @@ Monta a apresenta&ccedil;&atilde;o do aguarde.
 Aqui &eacute; necess&aacute;rio verificar se $executa est&aacute; definido
 isso pq algumas aplica&ccedil;&otilde;es podem ser prejudicadas caso o aguarde seja mostrado
 */
-$_SESSION["editores"] = $editores_;
 $_SESSION["dir_tmp"] = $dir_tmp_;
 $_SESSION["cachedir"] = $cachedir_;
 $_SESSION["emailInstituicao"] = $emailInstituicao_;
@@ -310,7 +310,7 @@ foreach(array_keys($_SESSION) as $k)
 {eval("\$".$k."='".$_SESSION[$k]."';");}
 $postgis_mapa = $postgis_mapa_;
 /*
- Define os arquivos .map 
+ Define os arquivos .map
 
 Seleciona os arquivos mapfile que ser&atilde;o carregados como base conforme o tipo de sistema operacional.
 
@@ -517,7 +517,7 @@ function abreInterface(){
 	{
 		if(file_exists($caminho."interface/".$interface))
 		{include_once($caminho."interface/".$interface);}
-		else 
+		else
 		{include_once($interface);}
 		exit;
 	}
@@ -525,13 +525,13 @@ function abreInterface(){
 	{
 		if(file_exists($caminho."interface/".$interface))
 		{$urln = $caminho."interface/".$interface."?".session_id();}
-		else 
+		else
 		{$urln = $interface."?".session_id();}
 		if(!headers_sent())
 		{header("Location:".$urln);}
 		else
 		{echo "<meta http-equiv='refresh' content='0;url=$urln'>";}
-	}	
+	}
 }
 /*
 Desliga os temas definidos na vari&aacute;vel $desligar
@@ -678,7 +678,7 @@ function incluiTemasIniciais()
 					include_once($arqtemp);
 					eval($arqt."(\$mapn);");
 				}
-			}	
+			}
 		}
 	}
 	//
@@ -735,7 +735,7 @@ function mostraAguarde()
 		echo "<td colspan=3 ><center><img src='".$caminho."imagens/i3geo1.jpg'></td></tr>";
 		echo "<tr><td><center><img src='".$caminho."imagens/pspb.png'></td>";
 		echo "<td><center><img src='".$caminho."imagens/mapserv.png'></td>";
-		echo "<td><center><img src='".$caminho."imagens/yui-logo.png'></td>";		
+		echo "<td><center><img src='".$caminho."imagens/yui-logo.png'></td>";
 		echo "<td><center><a href='http://mapas.mma.gov.br/download' target=blank ><img src='".$caminho."imagens/somerights20_pt.gif' ></a></td>";
 		echo "</tr></table>";
 		echo '<BODY bgcolor="white" style="background-color:white">';
@@ -775,7 +775,7 @@ function insereWKTUrl()
 	if ($tipol == 3)
 	{$novoshpf = ms_newShapefileObj($nomeshp, MS_SHP_MULTIPOINT);}
 	if ($tipol == 2)
-	{$novoshpf = ms_newShapefileObj($nomeshp, MS_SHP_POLYGON);}	
+	{$novoshpf = ms_newShapefileObj($nomeshp, MS_SHP_POLYGON);}
 	$reg[] = "";
 	$novoshpf->addShape($shape);
 	xbase_add_record($db,$reg);
@@ -811,14 +811,14 @@ function insereWKTUrl()
 	}
 	if($shape->type == 2)
 	{$layer->set("opacity","50");}
-	
+
 	$cor = $estilo->color;
 	if(!isset($corsimbolo))
 	{$corsimbolo ="255,0,0";}
 	$corsimbolo = str_replace(" ",",",$corsimbolo);
 	$corsimbolo = explode(",",$corsimbolo);
 	$cor->setRGB($corsimbolo[0],$corsimbolo[1],$corsimbolo[2]);
-	
+
 	$salvo = $mapa->save($tmpfname);
 	erroCriacao();
 }
@@ -885,12 +885,12 @@ function inserePontosUrl()
 	$classe = ms_newClassObj($layer);
 	$classe->set("name"," ");
 	$estilo = ms_newStyleObj($classe);
-	
+
 	if(!isset($simbolo))
 	{$simbolo = "ponto";}
 	$estilo->set("symbolname",$simbolo);
 	if(!isset($tamanhosimbolo))
-	{$tamanhosimbolo = 6;}	
+	{$tamanhosimbolo = 6;}
 	$estilo->set("size",$tamanhosimbolo);
 	$cor = $estilo->color;
 	if(!isset($corsimbolo))
@@ -898,7 +898,7 @@ function inserePontosUrl()
 	$corsimbolo = str_replace(" ",",",$corsimbolo);
 	$corsimbolo = explode(",",$corsimbolo);
 	$cor->setRGB($corsimbolo[0],$corsimbolo[1],$corsimbolo[2]);
-	
+
 	$salvo = $mapa->save($tmpfname);
 	erroCriacao();
 }
@@ -929,7 +929,7 @@ function insereLinhasUrl()
 	if(!function_exists(dbase_create))
 	{xbase_create($nomeshp.".dbf", $def);}
 	else
-	{dbase_create($nomeshp.".dbf", $def);}	
+	{dbase_create($nomeshp.".dbf", $def);}
 	$dbname = $nomeshp.".dbf";
 	$db=xbase_open($dbname,2);
 	$novoshpf = ms_newShapefileObj($nomeshp, $tipol);
@@ -980,7 +980,7 @@ function insereLinhasUrl()
 	{$simbolo = "linha";}
 	$estilo->set("symbolname",$simbolo);
 	if(!isset($tamanhosimbolo))
-	{$tamanhosimbolo = 6;}	
+	{$tamanhosimbolo = 6;}
 	$estilo->set("size",$tamanhosimbolo);
 	$cor = $estilo->color;
 	if(!isset($corsimbolo))
@@ -988,7 +988,7 @@ function insereLinhasUrl()
 	$corsimbolo = str_replace(" ",",",$corsimbolo);
 	$corsimbolo = explode(",",$corsimbolo);
 	$cor->setRGB($corsimbolo[0],$corsimbolo[1],$corsimbolo[2]);
-	
+
 	$salvo = $mapa->save($tmpfname);
 	erroCriacao();
 }
@@ -1042,7 +1042,7 @@ function inserePoligonosUrl()
 		for ($ci = 0;$ci < count($linhas);$ci=$ci+2)
 		{
 			$linha->addXY($linhas[$ci],$linhas[$ci+1]);
-			
+
 		}
 		$shape->add($linha);
 		$novoshpf->addShape($shape);

@@ -36,25 +36,40 @@ i3geo/classesjs/compactajs.php
 //
 //compacta os arquivos do richdraw
 //
+$locaplic = __DIR__."/..";
+include_once("../admin/php/admin.php");
+include_once("../admin/php/conexao.php");
+
+if(empty($_POST["senha"]) || empty($_POST["usuario"])){
+	formularioLoginMaster("compactajs.php");
+	exit;
+}
+else{
+	$continua = verificaMaster($_POST["usuario"],$_POST["senha"],$i3geomaster);
+	if($continua == false){
+		echo "Usu&aacute;rio n&atilde;o registrado em i3geo/ms_configura.php na vari&aacute;vel i3geomaster";
+		exit;
+	}
+}
 $f = @fopen("../classesjs/teste.txt",w);
 @fclose($f);
 if (!file_exists("../classesjs/teste.txt")){
-	echo "<span style='color:red'>N&atilde;o foi poss�vel escrever em classesjs";exit;
+	echo "<span style='color:red'>N&atilde;o foi possivel escrever em classesjs";exit;
 }
 $f = @fopen("../css/teste.txt",w);
 @fclose($f);
 if (!file_exists("../css/teste.txt")){
-	echo "<br><span style='color:red'>N&atilde;o foi poss�vel escrever em css";exit;
+	echo "<br><span style='color:red'>N&atilde;o foi possivel escrever em css";exit;
 }
 $f = @fopen("../pacotes/teste.txt",w);
 @fclose($f);
 if (!file_exists("../pacotes/teste.txt")){
-	echo "<br><span style='color:red'>N&atilde;o foi poss�vel escrever em pacotes";exit;
+	echo "<br><span style='color:red'>N&atilde;o foi possivel escrever em pacotes";exit;
 }
 $f = @fopen("../mashups/teste.txt",w);
 @fclose($f);
 if (!file_exists("../mashups/teste.txt")){
-	echo "<br><span style='color:red'>N&atilde;o foi poss�vel escrever em mashups";exit;
+	echo "<br><span style='color:red'>N&atilde;o foi possivel escrever em mashups";exit;
 }
 echo "<pre>";
 packer("../pacotes/richdraw/richdraw.js","../pacotes/richdraw/richdraw_compacto.js","Normal");
@@ -201,7 +216,7 @@ $cssfiles = array(
 "../css/corrigeyui_geral.css",
 "../mashups/theme/default/style.css",
 "../mashups/openlayers.css"
-); 
+);
 
 $buffer = "";
 salvatudojs($cssfiles,$buffer,"../css/i3geo47.css","css");
@@ -307,9 +322,9 @@ function salvatudojs($jsfiles,$buffer,$final,$tipo)
 {
 	//junta todos os js em um unico
 	if(file_exists($final))
-	{unlink($final);}	
+	{unlink($final);}
 	if(file_exists($final.".php"))
-	{unlink($final.".php");}	
+	{unlink($final.".php");}
 
 	foreach ($jsfiles as $f)
 	{
@@ -326,7 +341,7 @@ function salvatudojs($jsfiles,$buffer,$final,$tipo)
 */
 		$linhas = file($f);
 		foreach($linhas as $linha){
-			$linha = trim(preg_replace('#[\r\n]#', '', $linha)); 
+			$linha = trim(preg_replace('#[\r\n]#', '', $linha));
 			if($linha != "")
 			{$buffer .= $linha."\n";}
 		}
@@ -335,7 +350,7 @@ function salvatudojs($jsfiles,$buffer,$final,$tipo)
 	$abre = fopen($final, "wt");
 	$escreve = fwrite ($abre,$buffer);
 	$fecha = fclose ($abre);
-	
+
 
 	chmod($final,0777);
 	//gzip

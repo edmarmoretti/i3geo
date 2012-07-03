@@ -39,17 +39,17 @@ Classe: i3GEOF.loginusuario
 i3GEOF.loginusuario = {
 	/*
 	Variavel: aguarde
-	
+
 	Estilo do objeto DOM com a imagem de aguarde existente no cabe&ccedil;alho da janela.
 	*/
 	aguarde: "",
 	/*
 	Function: inicia
-	
+
 	Inicia a ferramenta. &Eacute; chamado por criaJanelaFlutuante
-	
+
 	Parametro:
-	
+
 	iddiv {String} - id do div que receber&aacute; o conteudo HTML da ferramenta
 	*/
 	inicia: function(iddiv){
@@ -62,17 +62,17 @@ i3GEOF.loginusuario = {
 			new YAHOO.widget.Button(
 				"i3GEOFlogoutusuario",
 				{onclick:{fn: i3GEO.login.dialogo.abreLogout}}
-			);			
+			);
 		}
 		catch(erro){alert(erro);}
 	},
 	/*
 	Function: html
-	
+
 	Gera o c&oacute;digo html para apresenta&ccedil;�o das op&ccedil;&otilde;es da ferramenta
-	
+
 	Retorno:
-	
+
 	String com o c&oacute;digo html
 	*/
 	html:function(){
@@ -87,13 +87,13 @@ i3GEOF.loginusuario = {
 		'<p class="paragrafo" >'+$trad("x28")+':<br>' +
 		'<input id=i3geosenha type=password style="width:250px;" value=""/><br>' +
 		'<p class="paragrafo" ><input id=i3GEOFloginusuario size=20  type=button value="'+$trad("x29")+'" />&nbsp;<input id=i3GEOFlogoutusuario size=20  type=button value="Logout" />';
-		return ins;	
+		return ins;
 	},
 	/*
 	Function: criaJanelaFlutuante
-	
+
 	Cria a janela flutuante para controle da ferramenta.
-	*/	
+	*/
 	criaJanelaFlutuante: function(){
 		var minimiza,cabecalho,janela,divid,titulo;
 		//cria a janela flutuante
@@ -122,7 +122,7 @@ i3GEOF.loginusuario = {
 	},
 	/*
 	Function: enviar
-	
+
 	Envia os dados de login
 	*/
 	enviar: function(){
@@ -141,26 +141,37 @@ i3GEOF.loginusuario = {
 		 */
 		temp = function(retorno){
 			i3GEOF.loginusuario.aguarde.visibility = "hidden";
-			if(retorno.data == "erro" || retorno.data == "logout"){
-				alert($trad("x31"));
+			if(!retorno || !retorno.data || retorno.data == "erro" || retorno.data == "logout"){
+				if(i3GEO.login.funcaoLoginErro){
+					i3GEO.login.funcaoLoginErro.call();
+				}
+				else{
+					alert($trad("x31"));
+				}
 			}
 			else{
 				i3GEO.util.insereCookie("i3geocodigologin",retorno.data.id,1);
 				i3GEO.util.insereCookie("i3geousuariologin",u,1);
 				i3GEO.util.insereCookie("i3geousuarionome",retorno.data.nome,1);
-				alert("Login OK -> "+retorno.data.nome);
 				i3GEO.janela.destroi("i3GEOF.loginusuario");
 				if(i3GEO.login.recarrega == true){
 					document.location.reload();
+					return;
 				}
 				if($i(i3GEO.login.divnomelogin)){
 					$i(i3GEO.login.divnomelogin).innerHTML = retorno.data.nome;
+				}
+				if(i3GEO.login.funcaoLoginOk){
+					i3GEO.login.funcaoLoginOk.call();
+				}
+				else{
+					alert("Login OK -> "+retorno.data.nome);
 				}
 			}
 		};
 		p = i3GEO.configura.locaplic+"/admin/php/login.php?funcao=login";
 		cp = new cpaint();
-		cp.set_transfer_mode("POST");	
+		cp.set_transfer_mode("POST");
 		cp.set_response_type("JSON");
 		cp.call(p,"login",temp,"&usuario="+u+"&senha="+s);
 	}

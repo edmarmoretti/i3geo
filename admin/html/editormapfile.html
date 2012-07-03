@@ -67,19 +67,16 @@ body {
 					</div>
 					<div class="ft"></div>
 				</div>
-				<div id="formulario" style="display: none">
-					<input onclick="" type=button id=adiciona
-						value="Criar um novo mapfile" /> <input onclick="" type=button
-						id=semmapfiles value="Verificar temas sem mapfiles" /> <br>
-					<br> Al&eacute;m de criar os mapfiles, &eacute;
-					necess&aacute;rio definir as caracter&iacute;sticas de cada LAYER
-					nas op&ccedil;&otilde;es abaixo. <br> Para incluir o tema nos
-					menus, <a href='arvore.html'>edite a &aacute;rvore de temas </a> <br>
-					<div id="letras"></div>
-					<p>Mapfiles (arquivos .map existentes no diretório
-						i3geo/temas):</p>
-					<div id="tabela" style="left: -5px;"></div>
-				</div>
+				<input onclick="" type=button id=adiciona
+					value="Criar um novo mapfile" /> <input onclick="" type=button
+					id=semmapfiles value="Verificar temas sem mapfiles" /> <br> <br>
+				Al&eacute;m de criar os mapfiles, &eacute; necess&aacute;rio definir
+				as caracter&iacute;sticas de cada LAYER nas op&ccedil;&otilde;es
+				abaixo. <br> Para incluir o tema nos menus, <a
+					href='arvore.html'>edite a &aacute;rvore de temas </a> <br>
+				<div id="letras"></div>
+				<p>Mapfiles (arquivos .map existentes no diretório i3geo/temas):</p>
+				<div id="tabela" style="left: -5px;"></div>
 			</div>
 		</div>
 		<div id=logajax style="display: block"></div>
@@ -189,7 +186,6 @@ body {
 			document.getElementById("formulario").style.display = "block";
 			initMenu();
 		}
-		i3GEO.login.verificaOperacao("admin/html/editormapfile",
-				i3GEO.configura.locaplic, temp, "sessao");
+		i3GEO.login.verificaOperacao("admin/html/editormapfile",i3GEO.configura.locaplic, temp, "sessao");
 	</script>
 </body>

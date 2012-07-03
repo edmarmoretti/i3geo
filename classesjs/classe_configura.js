@@ -60,7 +60,7 @@ i3GEO.configura = {
 
 	Layers que n&atilde;o constarem nessa propriedade ser&atilde;o inclu&iacute;dos no grupo "outros"
 
-	Ao definir grupos, a &aacute;rvore n&atilde;o conter&aacute; as op&ccedil;&otilde;es de mudan&ccedil;a da prdem de desenho das camadas 
+	Ao definir grupos, a &aacute;rvore n&atilde;o conter&aacute; as op&ccedil;&otilde;es de mudan&ccedil;a da prdem de desenho das camadas
 	( veja http://localhost/i3geo/exemplos/legenda2.htm )
 
 	Por exemplo
@@ -83,7 +83,7 @@ i3GEO.configura = {
 	Propriedade: oMenuData
 
 	Itens inclu&iacute;dos no menu suspenso. Define os parâmetros para o gadget menu suspenso
-	
+
 	Mais informa&ccedil;&otilde;es em <classe_gadgets.js> fun&ccedil;&atilde;o <mostraMenuSuspenso>
 
 	Exemplo:
@@ -98,7 +98,7 @@ i3GEO.configura = {
 
 		submenus:{
 
-			"ajudas": [ 
+			"ajudas": [
 
 			{ text: $trad("u1"), url: "http://www.softwarepublico.gov.br/spb/ver-comunidade?community_id=1444332" },
 
@@ -123,29 +123,32 @@ i3GEO.configura = {
 			{nome:$trad("u15a"),id:"ferramentas"}
 		],
 		submenus:{
-			"ajudaMenu": [ 
+			"ajudaMenu": [
 			{ id:"omenudataAjudamenu1",text: $trad("u1"), url: "http://www.softwarepublico.gov.br/spb/ver-comunidade?community_id=1444332", target:"_blank" },
 			{ id:"omenudataAjudamenu2",text: $trad("u2"), url: "javascript:i3GEO.ajuda.abreDoc()" },
-			{ id:"omenudataAjudamenu3",text: $trad("u4a"), url: "javascript:i3GEO.ajuda.abreDoc('/documentacao/manual_de_usuario_do_i3geo.pdf')" },
+			/**
+			 * TODO gerar arquivo PDF
+			 */
+			{ id:"omenudataAjudamenu3",text: $trad("u4a"), url: "javascript:i3GEO.ajuda.abreDoc('/documentacao/manual-i3geo-4_7-pt.pdf')" },
 			{ id:"omenudataAjudamenu4",text: $trad("u4"), url: "http://www.softwarepublico.gov.br/dotlrn/clubs/i3geo/file-storage/index?folder%5fid=22667525", target:"_blank" },
 			{ id:"omenudataAjudamenu5",text: $trad("u5a"), url: "http://www.softwarepublico.gov.br", target:"_blank" },
 			{ id:"omenudataAjudamenu7",text: $trad("u5b"), url: "javascript:i3GEO.ajuda.abreDoc('/ajuda_usuario.php')"},
 			{ id:"omenudataAjudamenu8",text: $trad("u5c"), url: "javascript:i3GEO.ajuda.redesSociais()" }
 			],
 			"analise": [
-			{ id:"omenudataAnalise1",text: '<span style=color:gray;text-decoration:underline; ><b>'+$trad("u22")+'</b></span>',url: "#"}, 
+			{ id:"omenudataAnalise1",text: '<span style=color:gray;text-decoration:underline; ><b>'+$trad("u22")+'</b></span>',url: "#"},
 			{ id:"omenudataAnalise2",text: $trad("u7"), url: "javascript:i3GEO.analise.dialogo.gradePol()"},
 			{ id:"omenudataAnalise3",text: $trad("u8"), url: "javascript:i3GEO.analise.dialogo.gradePontos()" },
 			{ id:"omenudataAnalise4",text: $trad("u9"), url: "javascript:i3GEO.analise.dialogo.gradeHex()" },
-			{ id:"omenudataAnalise5",text: '<span style=color:gray;text-decoration:underline; ><b>'+$trad("u23")+'</b></span>',url: "#"}, 
+			{ id:"omenudataAnalise5",text: '<span style=color:gray;text-decoration:underline; ><b>'+$trad("u23")+'</b></span>',url: "#"},
 			{ id:"omenudataAnalise6",text: $trad("u11a"), url: "javascript:i3GEO.analise.dialogo.distanciaptpt()" },
 			{ id:"omenudataAnalise7",text: $trad("u12"), url: "javascript:i3GEO.analise.dialogo.nptPol()" },
 			{ id:"omenudataAnalise8",text: $trad("u13"), url: "javascript:i3GEO.analise.dialogo.pontoempoligono()" },
 			{ id:"omenudataAnalise9",text: $trad("u14"), url: "javascript:i3GEO.analise.dialogo.pontosdistri()" },
 			{ id:"omenudataAnalise9a",text: $trad("u28"), url: "javascript:i3GEO.analise.dialogo.centromassa()" },
-			{ id:"omenudataAnalise10",text: '<span style=color:gray;text-decoration:underline; ><b>'+$trad("u24")+'</b></span>',url: "#"}, 
+			{ id:"omenudataAnalise10",text: '<span style=color:gray;text-decoration:underline; ><b>'+$trad("u24")+'</b></span>',url: "#"},
 			{ id:"omenudataAnalise11",text: $trad("u25"), url: "javascript:i3GEO.analise.dialogo.dissolve()" },
-			{ id:"omenudataAnalise12",text: '<span style=color:gray;text-decoration:underline; ><b>'+$trad("u27")+'</b></span>',url: "#"}, 
+			{ id:"omenudataAnalise12",text: '<span style=color:gray;text-decoration:underline; ><b>'+$trad("u27")+'</b></span>',url: "#"},
 			{ id:"omenudataAnalise13",text: $trad("u6"), url: "javascript:i3GEO.analise.dialogo.analisaGeometrias()" },
 			{ id:"omenudataAnalise14",text: $trad("u10"), url: "javascript:i3GEO.analise.dialogo.buffer()" },
 			{ id:"omenudataAnalise15",text: $trad("u26"), url: "javascript:i3GEO.analise.dialogo.agrupaElementos()" },
@@ -156,8 +159,8 @@ i3GEO.configura = {
 			"janelas": [
 			{ id:"omenudataJanelas1",text: $trad("u15"), url: "javascript:i3GEO.barraDeBotoes.reativa(0);i3GEO.barraDeBotoes.reativa(1)" },
 			{ id:"omenudataJanelas2",text: $trad("u16"), url: "javascript:i3GEO.ajuda.abreJanela()" },
-			{ id:"omenudataJanelas3",text: $trad("u29"), url: "javascript:i3GEO.barraDeBotoes.editor.inicia()" }		  
-			],			
+			{ id:"omenudataJanelas3",text: $trad("u29"), url: "javascript:i3GEO.barraDeBotoes.editor.inicia()" }
+			],
 			"arquivos": [
 			{ id:"omenudataArquivos1",text: $trad("u17"), url: "javascript:i3GEO.mapa.dialogo.salvaMapa()" },
 			{ id:"omenudataArquivos2",text: $trad("u18"), url: "javascript:i3GEO.mapa.dialogo.carregaMapa()" },
@@ -179,12 +182,12 @@ i3GEO.configura = {
 			{ id:"omenudataInterface11",text: $trad("p20"), url: "javascript:i3GEO.mapa.dialogo.telaRemota()" }
 			],
 			"ferramentas": [
-			{ id:"omenudataFerramentas0a",text: '<span style=color:gray;text-decoration:underline; ><b>'+$trad("g4a")+'</b></span>',url: "#"}, 
+			{ id:"omenudataFerramentas0a",text: '<span style=color:gray;text-decoration:underline; ><b>'+$trad("g4a")+'</b></span>',url: "#"},
 			{ id:"omenudataFerramentas4a",text: $trad("g1a"), url: "javascript:i3GEO.arvoreDeTemas.flutuante()"},
 			{ id:"omenudataFerramentas1a",text: $trad("t20"), url: "javascript:i3GEO.mapa.dialogo.opacidade()"},
 			{ id:"omenudataFerramentas2a",text: $trad("p21"), url: "javascript:i3GEO.mapa.dialogo.animacao()"},
 			{ id:"omenudataFerramentas3a",text: $trad("d24t"), url: "javascript:i3GEO.mapa.dialogo.selecao();"},
-			{ id:"omenudataFerramentas0b",text: '<span style=color:gray;text-decoration:underline; ><b>'+$trad("a7")+'</b></span>',url: "#"}, 
+			{ id:"omenudataFerramentas0b",text: '<span style=color:gray;text-decoration:underline; ><b>'+$trad("a7")+'</b></span>',url: "#"},
 			{ id:"omenudataFerramentas1b",text: $trad("t31"), url: "javascript:i3GEO.tema.dialogo.tabela()"},
 			{ id:"omenudataFerramentas2b",text: $trad("t23"), url: "javascript:i3GEO.tema.dialogo.procuraratrib()"},
 			{ id:"omenudataFerramentas3b",text: $trad("t25"), url: "javascript:i3GEO.tema.dialogo.toponimia()"},
@@ -618,9 +621,9 @@ i3GEO.configura = {
 	As funcionalidades apenas s&atilde;o inclu&iacute;das se o elemento HTML indicado em iddiv existir. Por isso, caso uma fun&ccedil;&atilde;o n&atilde;o seja desejada, basta excluir o div do HTML utilizado no mapa.
 
 	A lista de fun&ccedil;&otilde;es &eacute; inclu&iacute;da em i3GEO.configura.funcoesBotoes.botoes
-	
+
 	O elemento 'titulo' &eacute; usado na barra de bot&otilde;es do tipo olho de peixe
-	
+
 	Tipo:
 	{Object}
 
@@ -678,7 +681,7 @@ i3GEO.configura = {
 					i3GEO.gadgets.mostraBuscaRapida(janela[2].id);
 				}
 			}
-		},		
+		},
 		{
 			//Ativa o bot&atilde;o que realiza a opera&ccedil;&atilde;o de zoom interativo.
 			iddiv:"zoomli",
@@ -1061,7 +1064,7 @@ i3GEO.configura = {
 			funcaoonclick:function(){
 				i3GEO.barraDeBotoes.editor.inicia();
 			}
-		},		
+		},
 		{
 			//bot&atilde;o de digitaliza&ccedil;&atilde;o
 			iddiv:"inserexy",
