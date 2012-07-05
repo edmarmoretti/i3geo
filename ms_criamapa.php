@@ -261,7 +261,6 @@ session_start();
 if (!isset($g_sid)){$g_sid="";}
 if(isset($_SESSION["map_file"]) || $g_sid != "" || $g_sid == "undefined")
 {session_regenerate_id();$_SESSION = array();}
-
 /*
  Aguarde
 

@@ -42,9 +42,25 @@ Cada opera&ccedil;&atilde;o possu&iacute; seus próprios par&acirc;metros, que de
 
 */
 include_once(__DIR__."/login.php");
-if(verificaOperacaoSessao("admin/html/arvore") == false){
-	echo "Vc nao pode realizar essa operacao.";exit;
+$funcoesEdicao = array(
+		"ADICIONARTEMARAIZ",
+		"ADICIONARTEMARAIZGRUPO",
+		"ADICIONARGRUPO",
+		"ADICIONARSUBGRUPO",
+		"ADICIONARTEMA",
+		"ALTERARGRUPO",
+		"ALTERARSUBGRUPO",
+		"ALTERARTEMA",
+		"ALTERARRAIZ",
+		"MOVIMENTANO",
+		"EXCLUIR"
+);
+if(in_array(strtoupper($funcao),$funcoesEdicao)){
+	if(verificaOperacaoSessao("admin/html/arvore") == false){
+		retornaJSON("Vc nao pode realizar essa operacao.");exit;
+	}
 }
+
 if(!isset($idioma))
 {
 	$idioma = "pt";
@@ -205,10 +221,6 @@ switch (strtoupper($funcao))
 		{JSON}
 		*/
 	case "ADICIONARTEMARAIZ":
-		if(verificaEditores($editores) == "nao")
-		{
-			echo "Vc nao e um editor cadastrado. Apenas os editores definidos em i3geo/ms_configura.php podem acessar o sistema de administracao.";exit;
-		}
 		$id_nivel = 0;
 		$nivel = 0;
 		$id_raiz = alterarRaiz();
@@ -237,10 +249,6 @@ switch (strtoupper($funcao))
 		{JSON}
 		*/
 	case "ADICIONARTEMARAIZGRUPO":
-		if(verificaEditores($editores) == "nao")
-		{
-			echo "Vc nao e um editor cadastrado. Apenas os editores definidos em i3geo/ms_configura.php podem acessar o sistema de administracao.";exit;
-		}
 		$id_nivel = $id_n1;
 		$nivel = 1;
 		$id_raiz = alterarRaiz();
@@ -269,10 +277,6 @@ switch (strtoupper($funcao))
 		{JSON}
 		*/
 	case "ADICIONARGRUPO":
-		if(verificaEditores($editores) == "nao")
-		{
-			echo "Vc nao e um editor cadastrado. Apenas os editores definidos em i3geo/ms_configura.php podem acessar o sistema de administracao.";exit;
-		}
 		$id_n1 = alteraN1();
 		if($idioma == "pt")
 		{
@@ -300,10 +304,6 @@ switch (strtoupper($funcao))
 		{JSON}
 		*/
 	case "ADICIONARSUBGRUPO":
-		if(verificaEditores($editores) == "nao")
-		{
-			echo "Vc nao e um editor cadastrado. Apenas os editores definidos em i3geo/ms_configura.php podem acessar o sistema de administracao.";exit;
-		}
 		$id_n2 = alteraN2();
 		if($idioma == "pt")
 		{
@@ -331,10 +331,6 @@ switch (strtoupper($funcao))
 		{JSON}
 		*/
 	case "ADICIONARTEMA":
-		if(verificaEditores($editores) == "nao")
-		{
-			echo "Vc nao e um editor cadastrado. Apenas os editores definidos em i3geo/ms_configura.php podem acessar o sistema de administracao.";exit;
-		}
 		$id_n3 = alteraN3();
 		if($idioma == "pt")
 		{
@@ -370,10 +366,6 @@ switch (strtoupper($funcao))
 		{JSON}
 		*/
 	case "ALTERARGRUPO":
-		if(verificaEditores($editores) == "nao")
-		{
-			echo "Vc nao e um editor cadastrado. Apenas os editores definidos em i3geo/ms_configura.php podem acessar o sistema de administracao.";exit;
-		}
 		retornaJSON(alteraN1());
 		exit;
 		break;
@@ -399,10 +391,6 @@ switch (strtoupper($funcao))
 		{JSON}
 		*/
 	case "ALTERARSUBGRUPO":
-		if(verificaEditores($editores) == "nao")
-		{
-			echo "Vc nao e um editor cadastrado. Apenas os editores definidos em i3geo/ms_configura.php podem acessar o sistema de administracao.";exit;
-		}
 		retornaJSON(alteraN2());
 		exit;
 		break;
@@ -428,10 +416,6 @@ switch (strtoupper($funcao))
 		{JSON}
 		*/
 	case "ALTERARTEMA":
-		if(verificaEditores($editores) == "nao")
-		{
-			echo "Vc nao e um editor cadastrado. Apenas os editores definidos em i3geo/ms_configura.php podem acessar o sistema de administracao.";exit;
-		}
 		retornaJSON(alteraN3());
 		exit;
 		break;
@@ -461,10 +445,6 @@ switch (strtoupper($funcao))
 		{JSON}
 		*/
 	case "ALTERARRAIZ":
-		if(verificaEditores($editores) == "nao")
-		{
-			echo "Vc nao e um editor cadastrado. Apenas os editores definidos em i3geo/ms_configura.php podem acessar o sistema de administracao.";exit;
-		}
 		retornaJSON(alterarRaiz());
 		exit;
 		break;
@@ -486,10 +466,6 @@ switch (strtoupper($funcao))
 		{JSON}
 		*/
 	case "MOVIMENTANO":
-		if(verificaEditores($editores) == "nao")
-		{
-			echo "Vc nao e um editor cadastrado. Apenas os editores definidos em i3geo/ms_configura.php podem acessar o sistema de administracao.";exit;
-		}
 		movimentaNo();
 		retornaJSON("ok");
 		exit;
@@ -512,10 +488,6 @@ switch (strtoupper($funcao))
 		{JSON}
 		*/
 	case "EXCLUIR";
-	if(verificaEditores($editores) == "nao")
-	{
-		echo "Vc nao e um editor cadastrado. Apenas os editores definidos em i3geo/ms_configura.php podem acessar o sistema de administracao.";exit;
-	}
 	if($tabela == "i3geoadmin_raiz")
 	{
 		$coluna = "id_raiz";

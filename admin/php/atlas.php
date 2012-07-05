@@ -39,7 +39,20 @@ O par&acirc;metro principal &eacute; "funcao", que define qual opera&ccedil;&ati
 Cada opera&ccedil;&atilde;o possu&iacute; seus próprios par&acirc;metros, que devem ser enviados tamb&eacute;m na requisi&ccedil;&atilde;o da opera&ccedil;&atilde;o.
 
 */
-include_once("admin.php");
+include_once(__DIR__."/login.php");
+$funcoesEdicao = array(
+		"ALTERARATLAS",
+		"ALTERARPRANCHA",
+		"ALTERARTEMA",
+		"EXCLUIRATLAS",
+		"EXCLUIRPRANCHA",
+		"EXCLUIRTEMA"
+);
+if(in_array(strtoupper($funcao),$funcoesEdicao)){
+	if(verificaOperacaoSessao("admin/html/atlas") == false){
+		retornaJSON("Vc nao pode realizar essa operacao.");exit;
+	}
+}
 //faz a busca da fun&ccedil;&atilde;o que deve ser executada
 switch (strtoupper($funcao))
 {
@@ -184,10 +197,6 @@ switch (strtoupper($funcao))
 		{JSON}
 		*/
 	case "ALTERARATLAS":
-		if(verificaEditores($editores) == "nao")
-		{
-			echo "Vc nao e um editor cadastrado. Apenas os editores definidos em i3geo/ms_configura.php podem acessar o sistema de administracao.";exit;
-		}
 		$novo = alterarAtlas();
 		$sql = "SELECT * from ".$esquemaadmin."i3geoadmin_atlas WHERE id_atlas = '".$novo."'";
 		retornaJSON(pegaDados($sql));
@@ -225,10 +234,6 @@ switch (strtoupper($funcao))
 		{JSON}
 		*/
 	case "ALTERARPRANCHA":
-		if(verificaEditores($editores) == "nao")
-		{
-			echo "Vc nao e um editor cadastrado. Apenas os editores definidos em i3geo/ms_configura.php podem acessar o sistema de administracao.";exit;
-		}
 		$novo = alterarPrancha();
 		$sql = "SELECT * from ".$esquemaadmin."i3geoadmin_atlasp WHERE id_prancha = '".$novo."'";
 		retornaJSON(pegaDados($sql));
@@ -256,10 +261,6 @@ switch (strtoupper($funcao))
 		{JSON}
 		*/
 	case "ALTERARTEMA":
-		if(verificaEditores($editores) == "nao")
-		{
-			echo "Vc nao e um editor cadastrado. Apenas os editores definidos em i3geo/ms_configura.php podem acessar o sistema de administracao.";exit;
-		}
 		$novo = alterarTema();
 		$sql = "SELECT * from ".$esquemaadmin."i3geoadmin_atlast WHERE id_tema = '".$novo."'";
 		retornaJSON(pegaDados($sql));
@@ -278,10 +279,6 @@ switch (strtoupper($funcao))
 		{JSON}
 		*/
 	case "EXCLUIRATLAS":
-		if(verificaEditores($editores) == "nao")
-		{
-			echo "Vc nao e um editor cadastrado. Apenas os editores definidos em i3geo/ms_configura.php podem acessar o sistema de administracao.";exit;
-		}
 		$tabela = "i3geoadmin_atlas";
 		$f = verificaFilhos();
 		if(!$f)
@@ -304,10 +301,6 @@ switch (strtoupper($funcao))
 		{JSON}
 		*/
 	case "EXCLUIRPRANCHA":
-		if(verificaEditores($editores) == "nao")
-		{
-			echo "Vc nao e um editor cadastrado. Apenas os editores definidos em i3geo/ms_configura.php podem acessar o sistema de administracao.";exit;
-		}
 		$tabela = "i3geoadmin_atlasp";
 		$f = verificaFilhos();
 		if(!$f)
@@ -330,10 +323,6 @@ switch (strtoupper($funcao))
 		{JSON}
 		*/
 	case "EXCLUIRTEMA":
-		if(verificaEditores($editores) == "nao")
-		{
-			echo "Vc nao e um editor cadastrado. Apenas os editores definidos em i3geo/ms_configura.php podem acessar o sistema de administracao.";exit;
-		}
 		retornaJSON(excluirTema());
 		exit;
 		break;
@@ -355,20 +344,8 @@ switch (strtoupper($funcao))
 		{JSON}
 		*/
 	case "MOVIMENTANO":
-		if(verificaEditores($editores) == "nao")
-		{
-			echo "Vc nao e um editor cadastrado. Apenas os editores definidos em i3geo/ms_configura.php podem acessar o sistema de administracao.";exit;
-		}
 		movimentaNo();
 		retornaJSON("ok");
-		exit;
-		break;
-	case "IMPORTARXMLATLAS":
-		if(verificaEditores($editores) == "nao")
-		{
-			echo "Vc nao e um editor cadastrado. Apenas os editores definidos em i3geo/ms_configura.php podem acessar o sistema de administracao.";exit;
-		}
-		retornaJSON(importarXmlAtlas());
 		exit;
 		break;
 }

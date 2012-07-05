@@ -40,8 +40,39 @@ Cada opera&ccedil;&atilde;o possu&iacute; seus próprios par&acirc;metros, que de
 
 */
 include_once(__DIR__."/login.php");
-if(verificaOperacaoSessao("admin/html/editormapfile") == false){
-	echo "Vc nao pode realizar essa operacao.";exit;
+$funcoesEdicao = array(
+		"CRIARNOVOMAP",
+		"EDITASIMBOLO",
+		"LIMPARCACHEMAPFILE",
+		"EXCLUIRMAPFILE",
+		"REFAZERLAYER",
+		"CLONARMAPFILE",
+		"CRIARNOVOLAYER",
+		"EXCLUIRLAYER",
+		"AUTOCLASSESLAYER",
+		"CRIARNOVACLASSE",
+		"EXCLUIRCLASSE",
+		"CRIARNOVOESTILO",
+		"EXCLUIRESTILO",
+		"ALTERARESTILO",
+		"ALTERARCONEXAO",
+		"ALTERARTITULO",
+		"ALTERARDISPO",
+		"ALTERARCOMPORT",
+		"ALTERARMETADADOS",
+		"ALTERARGERAL",
+		"ALTERARCLASSEGERAL",
+		"ALTERARCLASSELABEL"
+);
+if(in_array(strtoupper($funcao),$funcoesEdicao)){
+	$f = @fopen("$locaplic/temas/teste.txt",w);
+	@fclose($f);
+	if (!file_exists("$locaplic/temas/teste.txt")){
+		retornaJSON("sem direito de escrita na pasta temas");exit;
+	}
+	if(verificaOperacaoSessao("admin/html/editormapfile") == false){
+		retornaJSON("Vc nao pode realizar essa operacao.");exit;
+	}
 }
 error_reporting(0);
 //faz a busca da fun&ccedil;&atilde;o que deve ser executada
@@ -74,10 +105,6 @@ switch (strtoupper($funcao))
 	{JSON}
 	*/
 	case "CRIARNOVOMAP":
-		if(verificaEditores($editores) == "nao")
-		{
-			echo "Vc nao e um editor cadastrado. Apenas os editores definidos em i3geo/ms_configura.php podem acessar o sistema de administracao.";exit;
-		}
 		retornaJSON(criarNovoMap());
 		exit;
 		break;
@@ -228,10 +255,6 @@ switch (strtoupper($funcao))
 		{JSON}
 		*/
 	case "EXCLUIRMAPFILE":
-		if(verificaEditores($editores) == "nao")
-		{
-			echo "Vc nao e um editor cadastrado. Apenas os editores definidos em i3geo/ms_configura.php podem acessar o sistema de administracao.";exit;
-		}
 		//pega oid do tema
 		$dados = pegaDados("SELECT id_tema from ".$esquemaadmin."i3geoadmin_temas WHERE codigo_tema = '".$codigoMap."'");
 		if(count($dados) > 0)
@@ -279,10 +302,6 @@ switch (strtoupper($funcao))
 		{JSON}
 		*/
 	case "REFAZERLAYER":
-		if(verificaEditores($editores) == "nao")
-		{
-			echo "Vc nao e um editor cadastrado. Apenas os editores definidos em i3geo/ms_configura.php podem acessar o sistema de administracao.";exit;
-		}
 		retornaJSON(refazerLayer());
 		exit;
 		break;
@@ -302,10 +321,6 @@ switch (strtoupper($funcao))
 		{JSON}
 		*/
 	case "CLONARMAPFILE":
-		if(verificaEditores($editores) == "nao")
-		{
-			echo "Vc nao e um editor cadastrado. Apenas os editores definidos em i3geo/ms_configura.php podem acessar o sistema de administracao.";exit;
-		}
 		retornaJSON(clonarMapfile());
 		exit;
 		break;
@@ -325,10 +340,6 @@ switch (strtoupper($funcao))
 		{JSON}
 		*/
 	case "CRIARNOVOLAYER":
-		if(verificaEditores($editores) == "nao")
-		{
-			echo "Vc nao e um editor cadastrado. Apenas os editores definidos em i3geo/ms_configura.php podem acessar o sistema de administracao.";exit;
-		}
 		retornaJSON(criarNovoLayer());
 		exit;
 		break;
@@ -348,10 +359,6 @@ switch (strtoupper($funcao))
 		{JSON}
 		*/
 	case "EXCLUIRLAYER":
-		if(verificaEditores($editores) == "nao")
-		{
-			echo "Vc nao e um editor cadastrado. Apenas os editores definidos em i3geo/ms_configura.php podem acessar o sistema de administracao.";exit;
-		}
 		retornaJSON(excluirLayer());
 		exit;
 		break;
@@ -395,10 +402,6 @@ switch (strtoupper($funcao))
 		{JSON}
 		*/
 	case "AUTOCLASSESLAYER":
-		if(verificaEditores($editores) == "nao")
-		{
-			echo "Vc nao e um editor cadastrado. Apenas os editores definidos em i3geo/ms_configura.php podem acessar o sistema de administracao.";exit;
-		}
 		autoClassesLayer();
 		retornaJSON(listaClasses());
 		exit;
@@ -419,10 +422,6 @@ switch (strtoupper($funcao))
 		{JSON}
 		*/
 	case "CRIARNOVACLASSE":
-		if(verificaEditores($editores) == "nao")
-		{
-			echo "Vc nao e um editor cadastrado. Apenas os editores definidos em i3geo/ms_configura.php podem acessar o sistema de administracao.";exit;
-		}
 		retornaJSON(criarNovaClasse());
 		exit;
 		break;
@@ -444,10 +443,6 @@ switch (strtoupper($funcao))
 		{JSON}
 		*/
 	case "EXCLUIRCLASSE":
-		if(verificaEditores($editores) == "nao")
-		{
-			echo "Vc nao e um editor cadastrado. Apenas os editores definidos em i3geo/ms_configura.php podem acessar o sistema de administracao.";exit;
-		}
 		excluirClasse();
 		retornaJSON(listaClasses());
 		exit;
@@ -491,10 +486,6 @@ switch (strtoupper($funcao))
 		{JSON}
 		*/
 	case "CRIARNOVOESTILO":
-		if(verificaEditores($editores) == "nao")
-		{
-			echo "Vc nao e um editor cadastrado. Apenas os editores definidos em i3geo/ms_configura.php podem acessar o sistema de administracao.";exit;
-		}
 		retornaJSON(criarNovoEstilo());
 		exit;
 		break;
@@ -518,10 +509,6 @@ switch (strtoupper($funcao))
 		{JSON}
 		*/
 	case "EXCLUIRESTILO":
-		if(verificaEditores($editores) == "nao")
-		{
-			echo "Vc nao e um editor cadastrado. Apenas os editores definidos em i3geo/ms_configura.php podem acessar o sistema de administracao.";exit;
-		}
 		excluirEstilo();
 		retornaJSON(listaEstilos());
 		exit;
@@ -597,10 +584,6 @@ switch (strtoupper($funcao))
 		{JSON}
 		*/
 	case "ALTERARESTILO":
-		if(verificaEditores($editores) == "nao")
-		{
-			echo "Vc nao e um editor cadastrado. Apenas os editores definidos em i3geo/ms_configura.php podem acessar o sistema de administracao.";exit;
-		}
 		alterarEstilo();
 		retornaJSON(pegaEstilo());
 		exit;
@@ -621,10 +604,6 @@ switch (strtoupper($funcao))
 		{JSON}
 		*/
 	case "PEGACONEXAO":
-		if(verificaEditores($editores) == "nao")
-		{
-			echo "Vc nao e um editor cadastrado. Apenas os editores definidos em i3geo/ms_configura.php podem acessar o sistema de administracao.";exit;
-		}
 		retornaJSON(pegaConexao());
 		exit;
 		break;
@@ -656,10 +635,6 @@ switch (strtoupper($funcao))
 		{JSON}
 		*/
 	case "ALTERARCONEXAO":
-		if(verificaEditores($editores) == "nao")
-		{
-			echo "Vc nao e um editor cadastrado. Apenas os editores definidos em i3geo/ms_configura.php podem acessar o sistema de administracao.";exit;
-		}
 		$retorno = alterarConexao();
 		if($testar == "false")
 			retornaJSON(pegaConexao());
@@ -706,10 +681,6 @@ switch (strtoupper($funcao))
 		exit;
 		break;
 	case "ALTERARTITULO":
-		if(verificaEditores($editores) == "nao")
-		{
-			echo "Vc nao e um editor cadastrado. Apenas os editores definidos em i3geo/ms_configura.php podem acessar o sistema de administracao.";exit;
-		}
 		alterarTitulo();
 		retornaJSON(pegaTitulo());
 		exit;
@@ -719,10 +690,6 @@ switch (strtoupper($funcao))
 		exit;
 		break;
 	case "ALTERARDISPO":
-		if(verificaEditores($editores) == "nao")
-		{
-			echo "Vc nao e um editor cadastrado. Apenas os editores definidos em i3geo/ms_configura.php podem acessar o sistema de administracao.";exit;
-		}
 		alterarDispo();
 		retornaJSON(pegaDispo());
 		exit;
@@ -732,10 +699,6 @@ switch (strtoupper($funcao))
 		exit;
 		break;
 	case "ALTERARCOMPORT":
-		if(verificaEditores($editores) == "nao")
-		{
-			echo "Vc nao e um editor cadastrado. Apenas os editores definidos em i3geo/ms_configura.php podem acessar o sistema de administracao.";exit;
-		}
 		alterarComport();
 		retornaJSON(pegaComport());
 		exit;
@@ -831,10 +794,6 @@ switch (strtoupper($funcao))
 		{JSON}
 		*/
 	case "ALTERARMETADADOS":
-		if(verificaEditores($editores) == "nao")
-		{
-			echo "Vc nao e um editor cadastrado. Apenas os editores definidos em i3geo/ms_configura.php podem acessar o sistema de administracao.";exit;
-		}
 		alterarMetadados();
 		retornaJSON(pegaMetadados());
 		exit;
@@ -914,13 +873,7 @@ switch (strtoupper($funcao))
 		{JSON}
 		*/
 	case "ALTERARGERAL":
-		if(verificaEditores($editores) == "nao")
-		{
-			echo "Vc nao e um editor cadastrado. Apenas os editores definidos em i3geo/ms_configura.php podem acessar o sistema de administracao.";exit;
-		}
-
 		$retorno = alterarGeral();
-
 		if($testar == "false")
 		{
 			$codigoLayer = $name;
@@ -983,10 +936,6 @@ switch (strtoupper($funcao))
 		{JSON}
 		*/
 	case "ALTERARCLASSEGERAL":
-		if(verificaEditores($editores) == "nao")
-		{
-			echo "Vc nao e um editor cadastrado. Apenas os editores definidos em i3geo/ms_configura.php podem acessar o sistema de administracao.";exit;
-		}
 		alterarClasseGeral();
 		retornaJSON(pegaClasseGeral());
 		exit;
@@ -1084,19 +1033,11 @@ switch (strtoupper($funcao))
 		{JSON}
 		*/
 	case "ALTERARCLASSELABEL":
-		if(verificaEditores($editores) == "nao")
-		{
-			echo "Vc nao e um editor cadastrado. Apenas os editores definidos em i3geo/ms_configura.php podem acessar o sistema de administracao.";exit;
-		}
 		alterarClasseLabel();
 		retornaJSON(pegaClasseLabel());
 		exit;
 		break;
 	case "MOVIMENTANO":
-		if(verificaEditores($editores) == "nao")
-		{
-			echo "Vc nao e um editor cadastrado. Apenas os editores definidos em i3geo/ms_configura.php podem acessar o sistema de administracao.";exit;
-		}
 		$res = sobeDesce();
 		retornaJSON($res);
 		exit;

@@ -43,23 +43,23 @@ Classe: i3GEOF.salvamapfile
 i3GEOF.salvamapfile = {
 	/*
 	Variavel: aguarde
-	
+
 	Estilo do objeto DOM com a imagem de aguarde existente no cabe&ccedil;alho da janela.
 	*/
 	aguarde: "",
 	/*
 	Variavel: tema
-	
+
 	c&oacute;digo do tema
 	*/
 	tema: i3GEO.temaAtivo,
 	/*
 	Function: inicia
-	
+
 	Inicia a ferramenta. &Eacute; chamado por criaJanelaFlutuante
-	
+
 	Parametro:
-	
+
 	iddiv {String} - id do div que receber&aacute; o conteudo HTML da ferramenta
 	*/
 	inicia: function(iddiv){
@@ -70,13 +70,11 @@ i3GEOF.salvamapfile = {
 				retorno = function(retorno){
 					i3GEOF.salvamapfile.aguarde.visibility = "hidden";
 					var nome = retorno.data.nomeoriginal;
-					if(nome == "")
-					{
-						$i(iddiv).innerHTML = "<p class=paragrafo >Não existe um arquivo mapfile em i3geo/temas j&aacute; criado para essa camada. Utilize o sistema de administra&ccedil;ão para <a href='"+i3GEO.configura.locaplic+"/admin/html/editormapfile.html' target=_blank >criar um</a>";
+					if(nome == ""){
+						$i(iddiv).innerHTML = "<p class=paragrafo >Não existe um arquivo mapfile cadastrado para essa camada. Utilize o sistema de administra&ccedil;ão para <a href='"+i3GEO.configura.locaplic+"/admin/html/editormapfile.html' target=_blank >criar um</a>";
 					}
-					else
-					{
-						var ins = "<p class=paragrafo >O tema ("+nome+") ativo possui um mapfile j&aacute; criado. Ao salvar, as defini&ccedil;&otilde;es originais  de legenda, filtros e outras, serão substitu&iacute;das pelas atuais" +
+					else{
+						var ins = "<p class=paragrafo >Apenas usu&aacute;rios cadastrados como editores podem salvar um mapfile. O tema ("+nome+") ativo possui um mapfile j&aacute; criado. Ao salvar, as defini&ccedil;&otilde;es originais  de legenda, filtros e outras, serão substitu&iacute;das pelas atuais" +
 						'<span id="i3GEOsalvamapconcluido" style=display:none;color:red  > Conclu&iacute;do!</span></p>' +
 						'<br><p class=paragrafo ><input size=20 id=i3GEOsalvamapfilebotao1 type=button value="Salvar"  />&nbsp;&nbsp;<input size=20 id=i3GEOsalvamapfilebotao2 type=button value="Testar"  />';
 						$i(iddiv).innerHTML = ins;
@@ -87,7 +85,7 @@ i3GEOF.salvamapfile = {
 						new YAHOO.widget.Button(
 							"i3GEOsalvamapfilebotao2",
 							{onclick:{fn: function(){window.open(i3GEO.configura.locaplic+"/testamapfile.php?map="+nome);}}}
-						);						
+						);
 					}
 				};
 			cp.set_response_type("JSON");
@@ -97,9 +95,9 @@ i3GEOF.salvamapfile = {
 	},
 	/*
 	Function: criaJanelaFlutuante
-	
+
 	Cria a janela flutuante para controle da ferramenta.
-	*/	
+	*/
 	criaJanelaFlutuante: function(){
 		var janela,divid,titulo,cabecalho,minimiza;
 		cabecalho = function(){};
@@ -110,7 +108,7 @@ i3GEOF.salvamapfile = {
 		titulo = "Salva o tema <i>"+i3GEO.temaAtivo+"</i> <a class=ajuda_usuario target=_blank href='" + i3GEO.configura.locaplic + "/ajuda_usuario.php?idcategoria=5&idajuda=92' >&nbsp;&nbsp;&nbsp;</a>";
 		janela = i3GEO.janela.cria(
 			"330px",
-			"120px",
+			"130px",
 			"",
 			"",
 			"",
@@ -129,7 +127,7 @@ i3GEOF.salvamapfile = {
 	},
 	/*
 	Function: salva
-	
+
 	Salva o mapfile
 	*/
 	salva: function(nome,mapfile,nomelayer){

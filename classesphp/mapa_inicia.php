@@ -102,12 +102,7 @@ Retorno:
 */
 function iniciaMapa()
 {
-	global $emailInstituicao,$openid,$interfacePadrao,$mensagemInicia,$kmlurl,$tituloInstituicao,$tempo,$navegadoresLocais,$editor,$locaplic,$embedLegenda,$map_file,$mapext,$w,$h,$R_path,$locmapserv,$utilizacgi,$expoeMapfile,$interface;
-	/**
-	 * TODO depreciar na versão 4.8
-	 */
-	if(!isset($editor) || empty($editor))
-	{$editor = "nao";}
+	global $emailInstituicao,$openid,$interfacePadrao,$mensagemInicia,$kmlurl,$tituloInstituicao,$tempo,$navegadoresLocais,$locaplic,$embedLegenda,$map_file,$mapext,$w,$h,$R_path,$locmapserv,$utilizacgi,$expoeMapfile,$interface;
 	if(!isset($kmlurl))
 	{$kmlurl = "";}
 	error_reporting(0);
@@ -287,10 +282,28 @@ function iniciaMapa()
 			$copyright = $shape->text;
 		}
 	}
-	/**
-	 * TODO depreciar na versão 4.8
-	 */
-	$res["editor"] = $editor;
+	$res["editor"] = "nao";
+	//
+	//papeis do usuario se estiver logado
+	//
+	$res["papeis"] = array();
+	if(!empty($_COOKIE["i3geocodigologin"])){
+		session_write_close();
+		session_name("i3GeoLogin");
+		session_id($_COOKIE["i3geocodigologin"]);
+		session_start();
+		//var_dump($_SESSION);exit;
+		if(!empty($_SESSION["usuario"]) && $_SESSION["usuario"] == $_COOKIE["i3geousuariologin"]){
+			$res["papeis"] = $_SESSION["papeis"];
+		}
+	}
+	//verifica se o usuario logado pode ver as opcoes de edicao do sistema de admin dentro do mapa
+	foreach($res["papeis"] as $p){
+		if($p < 3){
+			$res["editor"] = "sim";
+		}
+	}
+	//
 	$res["mapexten"] = $ext;
 	$res["mapscale"] = $escalaMapa;
 	$res["mapres"] = $m->mapa->resolution;

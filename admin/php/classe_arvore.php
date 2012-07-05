@@ -114,7 +114,7 @@ class Arvore
 		//no sistema de administra&ccedil;&atilde;o
 		//
 		$this->editor = false;
-		$this->editor = $this->verificaPapelSessao(3);
+		$this->editor = $this->verificaOperacaoSessao("admin/php/classe_arvore/editor");
 		$this->pubsql = " (publicado != 'NAO' or publicado isnull) and ";
 		if($this->editor)
 		{
@@ -839,6 +839,10 @@ class Arvore
 		}
 		return $resultado;
 	}
+	/**
+	 *
+	 * TODO corrigir acentuacao
+	 */
 	function removeAcentos($s)
 	{
 		$s = ereg_replace("[&aacute;à&acirc;&atilde;]","a",$s);
@@ -877,7 +881,7 @@ class Arvore
 				return false;
 			}
 			foreach($_SESSION["papeis"] as $p){
-				if($p["id_papel"] == 1 || $p["id_papel"] == $id_papel){
+				if($p == 1 || $p == $id_papel){
 					return true;
 				}
 			}
@@ -885,6 +889,23 @@ class Arvore
 		else{//caso nao exista, retorna um erro
 			return false;
 		}
+	}
+	function verificaOperacaoSessao($operacao){
+		session_write_close();
+		session_name("i3GeoLogin");
+		session_id($_COOKIE["i3geocodigologin"]);
+		session_start();
+		$resultado = false;
+		//verifica se e administrador
+		foreach($_SESSION["papeis"] as $p){
+			if($p["id_papel"] == 1){
+				return true;
+			}
+		}
+		if(!empty($_SESSION["operacoes"][$operacao])){
+			$resultado = true;
+		}
+		return $resultado;
 	}
 }
 ?>

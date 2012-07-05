@@ -37,9 +37,10 @@ O par&acirc;metro principal &eacute; "funcao", que define qual opera&ccedil;&ati
 Cada opera&ccedil;&atilde;o possu&iacute; seus próprios par&acirc;metros, que devem ser enviados tamb&eacute;m na requisi&ccedil;&atilde;o da opera&ccedil;&atilde;o.
 
 */
-include_once("admin.php");
-if(verificaEditores($editores) == "nao")
-{echo "Vc nao e um editor cadastrado. Apenas os editores definidos em i3geo/ms_configura.php podem acessar o sistema de administracao.";exit;}
+include_once(__DIR__."/login.php");
+if(verificaOperacaoSessao("admin/html/ogcws") == false){
+	retornaJSON("Vc nao pode realizar essa operacao.");exit;
+}
 //error_reporting(E_ALL);
 $versao = versao();
 $map_file = $locaplic."/aplicmap/ogcwsv".$versao["principal"].".map";
@@ -51,16 +52,16 @@ switch (strtoupper($funcao))
 {
 	/*
 	Note:
-	
+
 	Valores que o par&acirc;metro &funcao pode receber. Os par&acirc;metros devem ser enviados na requisi&ccedil;&atilde;o em AJAX.
 	*/
 	/*
 	Valor: PEGAPARAMETROSCONFIGURA
-	
+
 	Lista os valores atuais das vari&aacute;veis registradas no ms_configura
-	
+
 	Retorno:
-	
+
 	{JSON}
 	*/
 	case "PEGAPARAMETROSCONFIGURA":
@@ -79,7 +80,7 @@ switch (strtoupper($funcao))
 			"ows_postcode",
 			"ows_country",
 			"ows_contactelectronicmailaddress",
-			"ows_name"			
+			"ows_name"
 		);
 		$par = array();
 		foreach ($vs as $v)
@@ -92,7 +93,7 @@ switch (strtoupper($funcao))
 	break;
 	/*
 	Valor: SALVACONFIGURA
-	
+
 	Salva um novo valor de uma vari&aacute;vel no ms_configura.php
 
 	Parameters:
@@ -100,9 +101,9 @@ switch (strtoupper($funcao))
 	variavel - nome da vari&aacute;vel
 
 	valor - novo valor
-	
+
 	Retorno:
-	
+
 	{JSON}
 	*/
 	case "SALVACONFIGURA":

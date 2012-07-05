@@ -58,7 +58,7 @@ cp.set_response_type("JSON")
 cp.call(p,"lente",ajaxabrelente)
 
 */
-error_reporting(E_ALL);
+error_reporting(0);
 //
 //pega as variaveis passadas com get ou post
 //
@@ -66,6 +66,7 @@ error_reporting(E_ALL);
  * TODO documentar o sistema de login
  */
 include_once(__DIR__."/../../classesphp/pega_variaveis.php");
+include_once(__DIR__."/admin.php");
 session_write_close();
 session_name("i3GeoLogin");
 //se o usuario estiver tentando fazer login
@@ -87,6 +88,7 @@ else{//se nao, verifica se o login ja existe realmente
 		$retorno = "erro";
 	}
 }
+//var_dump($_SESSION);exit;
 $retorno = "logout"; //string que ser&aacute; retornada ao browser via JSON
 switch (strtoupper($funcao))
 {
@@ -97,7 +99,6 @@ switch (strtoupper($funcao))
 
 	*/
 	case "LOGIN":
-		include_once(__DIR__."/admin.php");
 		$teste = autenticaUsuario($usuario,$senha);
 		if($teste != false){
 			$_SESSION["usuario"] = $usuario;
@@ -162,7 +163,7 @@ function verificaOperacaoSessao($operacao){
 	//verifica se e administrador
 	if(validaSessao()){
 		foreach($_SESSION["papeis"] as $p){
-			if($p["id_papel"] == 1){
+			if($p == 1){
 				return true;
 			}
 		}
@@ -177,7 +178,7 @@ function validaSessao(){
 	if($_SESSION['fingerprint'] != md5($fingerprint . session_id())){
 		return false;
 	}
-	if($_SESSION["usuario"] != $_COOKIE["usuario"]){
+	if($_SESSION["usuario"] != $_COOKIE["i3geousuariologin"]){
 		return false;
 	}
 	return true;
@@ -189,11 +190,15 @@ function autenticaUsuario($usuario,$senha){
 	 */
 	$dados = pegaDados("select * from ".$esquemaadmin."i3GEOadmin_usuarios where login = '$usuario' and senha = '$senha' and ativo = 1",$locaplic);
 	if(count($dados) > 0){
-		$papeis = pegaDados("select * from ".$esquemaadmin."i3geoadmin_papelusuario where id_usuario = ".$dados[0]["id_usuario"],$locaplic);
+		$pa = pegaDados("select * from ".$esquemaadmin."i3geoadmin_papelusuario where id_usuario = ".$dados[0]["id_usuario"],$locaplic);
 		$op = pegadados("SELECT O.codigo, PU.id_usuario FROM ".$esquemaadmin."i3geoadmin_operacoes AS O JOIN ".$esquemaadmin."i3geoadmin_operacoespapeis AS OP ON O.id_operacao = OP.id_operacao JOIN ".$esquemaadmin."i3geoadmin_papelusuario AS PU ON OP.id_papel = PU.id_papel	WHERE id_usuario = ".$dados[0]["id_usuario"],$locaplic);
 		$operacoes = array();
 		foreach($op as $o){
 			$operacoes[$o["codigo"]] = true;
+		}
+		$papeis = array();
+		foreach($pa as $p){
+			$papeis[] = $p["id_papel"];
 		}
 		$r = array("usuario"=>$dados[0],"papeis"=>$papeis,"operacoes"=>$operacoes);
 		return $r;

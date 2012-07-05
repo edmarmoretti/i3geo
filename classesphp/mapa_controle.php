@@ -162,6 +162,7 @@ include_once ("carrega_ext.php");
 include_once("funcoes_gerais.php");
 if ($funcao == "criaMapa")
 {
+	session_name("i3GeoPHP");
 	unset($GLOBALS);
 	session_destroy();
 	$_COOKIE = array();

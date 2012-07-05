@@ -44,23 +44,32 @@ error_reporting(0);
 //n&atilde;o sei pq mas ob_start e clean s&atilde;o necess&aacute;rios no Linux para n&atilde;o gerar erro indesejado
 //
 ob_start();
-include_once("admin.php");
+include_once(__DIR__."/login.php");
+$funcoesEdicao = array(
+		"ALTERARWS",
+		"EXCLUIR"
+);
+if(in_array(strtoupper($funcao),$funcoesEdicao)){
+	if(verificaOperacaoSessao("admin/html/webservices") == false){
+		retornaJSON("Vc nao pode realizar essa operacao.");exit;
+	}
+}
 ob_clean();
 //faz a busca da fun&ccedil;&atilde;o que deve ser executada
 switch (strtoupper($funcao))
 {
 	/*
 	Note:
-	
+
 	Valores que o par&acirc;metro &funcao pode receber. Os par&acirc;metros devem ser enviados na requisi&ccedil;&atilde;o em AJAX.
 	*/
 	/*
 	Valor: PEGAWS
-	
+
 	Lista de servi&ccedil;os cadastrados
-	
+
 	Retorno:
-	
+
 	{JSON}
 	*/
 	case "PEGAWS":
@@ -73,44 +82,44 @@ switch (strtoupper($funcao))
 	break;
 	/*
 	Valor: PEGADADOS
-	
+
 	Dados de um servico
-	
+
 	Parametro:
-	
+
 	id_ws {string}
-	
+
 	Retorno:
-	
+
 	{JSON}
-	*/	
+	*/
 	case "PEGADADOS":
 		retornaJSON(pegaDados("SELECT * from ".$esquemaadmin."i3geoadmin_ws where id_ws='$id_ws'"));
 		exit;
 	break;
 	/*
 	Valor: ALTERARWS
-	
+
 	Altera um registro
-	
+
 	Parametros:
-	
+
 	id_ws
-	
+
 	desc_ws
-	
+
 	nome_ws
-	
+
 	link_ws
-	
+
 	autor_ws
-	
+
 	tipo_ws
-	
+
 	Retorno:
-	
+
 	{JSON}
-	*/	
+	*/
 	case "ALTERARWS":
 		if(verificaEditores($editores) == "nao")
 		{echo "Vc nao e um editor cadastrado. Apenas os editores definidos em i3geo/ms_configura.php podem acessar o sistema de administracao.";exit;}
@@ -121,30 +130,24 @@ switch (strtoupper($funcao))
 	break;
 	/*
 	Valor: EXCLUIR
-	
+
 	Exclui um registro
-	
+
 	Parametro:
-	
+
 	id {string}
-	
+
 	Retorno:
-	
+
 	{JSON}
-	*/		
+	*/
 	case "EXCLUIR":
 		if(verificaEditores($editores) == "nao")
 		{echo "Vc nao e um editor cadastrado. Apenas os editores definidos em i3geo/ms_configura.php podem acessar o sistema de administracao.";exit;}
 		retornaJSON(excluirWS());
 		exit;
 	break;
-	
-	case "IMPORTARXMLWS":
-		if(verificaEditores($editores) == "nao")
-		{echo "Vc nao e um editor cadastrado. Apenas os editores definidos em i3geo/ms_configura.php podem acessar o sistema de administracao.";exit;}
-		retornaJSON(importarXmlWS());
-		exit;
-	break;
+
 }
 /*
 Altera o registro de um WS
@@ -152,7 +155,7 @@ Altera o registro de um WS
 function alterarWS()
 {
 	global $esquemaadmin,$id_ws,$desc_ws,$nome_ws,$link_ws,$autor_ws,$tipo_ws;
-	try 
+	try
 	{
     	require_once("conexao.php");
 		if($convUTF)
@@ -188,7 +191,7 @@ function alterarWS()
 function excluirWS()
 {
 	global $id,$esquemaadmin;
-	try 
+	try
 	{
     	include("conexao.php");
     	$dbhw->query("DELETE from ".$esquemaadmin."i3geoadmin_ws WHERE id_ws = $id");
@@ -212,12 +215,12 @@ function adicionaAcesso($id_ws,$sucesso)
     	if(count($dados) == 0){return;};
     	if($dados[0]["nacessos"] == ""){$dados[0]["nacessos"] = 0;}
     	$acessos = $dados[0]["nacessos"] + 1;
-    	
+
     	if($sucesso)
     	$ok = $dados[0]["nacessosok"] + 1;
     	else
     	$ok = $dados[0]["nacessosok"];
-    	
+
     	if($ok == ""){$ok = 0;}
    		$dbhw->query("UPDATE ".$esquemaadmin."i3geoadmin_ws SET nacessos = '$acessos',nacessosok = '$ok' WHERE id_ws = $id_ws");
     	$dbhw = null;

@@ -38,23 +38,34 @@ O par&acirc;metro principal &eacute; "funcao", que define qual opera&ccedil;&ati
 
 Cada opera&ccedil;&atilde;o possu&iacute; seus próprios par&acirc;metros, que devem ser enviados tamb&eacute;m na requisi&ccedil;&atilde;o da opera&ccedil;&atilde;o.
 */
-include_once("admin.php");
+include_once(__DIR__."/login.php");
+$funcoesEdicao = array(
+		"ALTERARSISTEMAS",
+		"ALTERARFUNCOES",
+		"EXCLUIRSISTEMA",
+		"EXCLUIRFUNCAO"
+);
+if(in_array(strtoupper($funcao),$funcoesEdicao)){
+	if(verificaOperacaoSessao("admin/html/sistemas") == false){
+		retornaJSON("Vc nao pode realizar essa operacao.");exit;
+	}
+}
 error_reporting(0);
 //faz a busca da fun&ccedil;&atilde;o que deve ser executada
 switch (strtoupper($funcao))
 {
 	/*
 	Note:
-	
+
 	Valores que o par&acirc;metro &funcao pode receber. Os par&acirc;metros devem ser enviados na requisi&ccedil;&atilde;o em AJAX.
 	*/
 	/*
 	Valor: PEGASISTEMAS
-	
+
 	Lista de sistemas
-		
+
 	Retorno:
-	
+
 	{JSON}
 	*/
 	case "PEGASISTEMAS":
@@ -63,15 +74,15 @@ switch (strtoupper($funcao))
 	break;
 	/*
 	Valor: PEGASISTEMA
-	
+
 	Dados de um sistemas
-	
+
 	Parametro:
-	
+
 	id_sistema
-		
+
 	Retorno:
-	
+
 	{JSON}
 	*/
 	case "PEGASISTEMA":
@@ -80,57 +91,57 @@ switch (strtoupper($funcao))
 	break;
 	/*
 	Valor: PEGAFUNCOES
-	
+
 	Lista de fun&ccedil;&otilde;es de um sistema
-	
+
 	Parametro:
-	
+
 	id_sistema
-		
+
 	Retorno:
-	
+
 	{JSON}
 	*/
-	case "PEGAFUNCOES":	
+	case "PEGAFUNCOES":
 		retornaJSON(pegaDados("SELECT * from ".$esquemaadmin."i3geoadmin_sistemasf where id_sistema ='$id_sistema'"));
 		exit;
 	break;
 	/*
 	Valor: PEGAFUNCAO
-	
+
 	Pega os dados de uma fun&ccedil;&atilde;o espec&iacute;fica
-	
+
 	Parametro:
-	
+
 	id_funcao
-		
+
 	Retorno:
-	
+
 	{JSON}
 	*/
-	case "PEGAFUNCAO":	
+	case "PEGAFUNCAO":
 		retornaJSON(pegaDados("SELECT * from ".$esquemaadmin."i3geoadmin_sistemasf where id_funcao ='$id_funcao'"));
 		exit;
 	break;
 	/*
 	Valor: ALTERARSISTEMAS
-	
+
 	Altera os dados de um sistema
-	
+
 	Parametros:
-	
+
 	id_sistema
-	
+
 	perfil_sistema
-	
+
 	nome_sistema
-	
+
 	publicado_sistema
-		
+
 	Retorno:
-	
+
 	{JSON}
-	*/	
+	*/
 	case "ALTERARSISTEMAS":
 		if(verificaEditores($editores) == "nao")
 		{echo "Vc nao e um editor cadastrado. Apenas os editores definidos em i3geo/ms_configura.php podem acessar o sistema de administracao.";exit;}
@@ -141,27 +152,27 @@ switch (strtoupper($funcao))
 	break;
 	/*
 	Valor: ALTERARFUNCOES
-	
+
 	Altera os dados de uma fun&ccedil;&atilde;o
-	
+
 	Parametros:
-	
+
 	id_sistema
-	
+
 	id_funcao
-	
+
 	perfil_funcao
-	
+
 	nome_funcao
-	
+
 	w_funcao
-	
+
 	h_funcao
-	
+
 	abrir_funcao
-		
+
 	Retorno:
-	
+
 	{JSON}
 	*/
 	case "ALTERARFUNCOES":
@@ -174,17 +185,17 @@ switch (strtoupper($funcao))
 	break;
 	/*
 	Valor: EXCLUIRSISTEMA
-	
+
 	Exclui um sistema
-	
+
 	Parametros:
-	
+
 	id
-		
+
 	Retorno:
-	
+
 	{JSON}
-	*/	
+	*/
 	case "EXCLUIRSISTEMA":
 		if(verificaEditores($editores) == "nao")
 		{echo "Vc nao e um editor cadastrado. Apenas os editores definidos em i3geo/ms_configura.php podem acessar o sistema de administracao.";exit;}
@@ -203,30 +214,24 @@ switch (strtoupper($funcao))
 	break;
 	/*
 	Valor: EXCLUIRFUNCAO
-	
+
 	Exclui uma fun&ccedil;&atilde;o
-	
+
 	Parametros:
-	
+
 	id
-		
+
 	Retorno:
-	
+
 	{JSON}
-	*/	
+	*/
 	case "EXCLUIRFUNCAO":
 		if(verificaEditores($editores) == "nao")
 		{echo "Vc nao e um editor cadastrado. Apenas os editores definidos em i3geo/ms_configura.php podem acessar o sistema de administracao.";exit;}
 		retornaJSON(excluirFuncoes());
 		exit;
 	break;
-	
-	case "IMPORTARXMLSISTEMAS":
-		if(verificaEditores($editores) == "nao")
-		{echo "Vc nao e um editor cadastrado. Apenas os editores definidos em i3geo/ms_configura.php podem acessar o sistema de administracao.";exit;}
-		retornaJSON(importarXmlSistemas());
-		exit;
-	break;
+
 }
 /*
 Altera o registro de um WS
@@ -234,7 +239,7 @@ Altera o registro de um WS
 function alterarSistemas()
 {
 	global $esquemaadmin,$id_sistema,$perfil_sistema,$nome_sistema,$publicado_sistema;
-	try 
+	try
 	{
     	require_once("conexao.php");
 		if($convUTF)
@@ -254,7 +259,7 @@ function alterarSistemas()
 			$id = $id->fetchAll();
 			$id = $id[0]['id_sistema'];
 			$dbhw->query("UPDATE ".$esquemaadmin."i3geoadmin_sistemas SET nome_sistema = '' WHERE id_sistema = $id AND nome_sistema = '$idtemp'");
-			$retorna = $id;    	
+			$retorna = $id;
     	}
     	$dbhw = null;
     	$dbh = null;
@@ -268,7 +273,7 @@ function alterarSistemas()
 function alterarFuncoes()
 {
 	global $esquemaadmin,$id_sistema,$id_funcao,$perfil_funcao,$nome_funcao,$w_funcao,$h_funcao,$abrir_funcao;
-	try 
+	try
 	{
     	require_once("conexao.php");
 		if($convUTF)
@@ -288,7 +293,7 @@ function alterarFuncoes()
 			$id = $id->fetchAll();
 			$id = $id[0]['id_funcao'];
 			$dbhw->query("UPDATE ".$esquemaadmin."i3geoadmin_sistemasf SET nome_funcao = '' WHERE id_funcao = $id AND nome_funcao = '$idtemp'");
-			$retorna = $id;    		
+			$retorna = $id;
     	}
     	$dbhw = null;
     	$dbh = null;
@@ -302,7 +307,7 @@ function alterarFuncoes()
 function excluirFuncoes()
 {
 	global $id,$esquemaadmin;
-	try 
+	try
 	{
     	include("conexao.php");
     	$dbhw->query("DELETE from ".$esquemaadmin."i3geoadmin_sistemasf WHERE id_funcao = $id");
@@ -318,7 +323,7 @@ function excluirFuncoes()
 function excluirSistemas()
 {
 	global $id,$esquemaadmin;
-	try 
+	try
 	{
     	include("conexao.php");
     	$dbhw->query("DELETE from ".$esquemaadmin."i3geoadmin_sistemas WHERE id_sistema = $id");
@@ -372,7 +377,7 @@ function importarXmlSistemas()
 			$w_funcao = ixml($funcao,"JANELAW");
 			$h_funcao = ixml($funcao,"JANELAH");
 			$perfil_funcao = ixml($funcao,"PERFIL");
-			$dbhw->query("INSERT INTO ".$esquemaadmin."i3geoadmin_sistemasf (nome_funcao,abrir_funcao,perfil_funcao,w_funcao,h_funcao,id_sistema) VALUES ('$nome_funcao','$abrir_funcao','$perfil_funcao','$w_funcao','$h_funcao','$id_sistema')");			
+			$dbhw->query("INSERT INTO ".$esquemaadmin."i3geoadmin_sistemasf (nome_funcao,abrir_funcao,perfil_funcao,w_funcao,h_funcao,id_sistema) VALUES ('$nome_funcao','$abrir_funcao','$perfil_funcao','$w_funcao','$h_funcao','$id_sistema')");
 		}
 	}
 	$dbhw = null;

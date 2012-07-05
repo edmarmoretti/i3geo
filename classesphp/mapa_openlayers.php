@@ -125,7 +125,7 @@ if(!isset($_GET["telaR"])){//no caso de projecoes remotas, o mapfile nao e alter
 			}
 		}
 		$l->set("template","none.htm");
-		if($_GET["REQUEST"] == "GetFeatureInfo" || $_GET["request"] == "getfeature"){
+		if($_GET["REQUEST"] == "GetFeatureInfo" || $_GET["REQUEST"] == "getfeature"){
 			$l->setmetadata("gml_include_items","all");
 			$l->setmetadata("WMS_INCLUDE_ITEMS","all");
 			$l->setmetadata("WFS_INCLUDE_ITEMS","all");
@@ -139,8 +139,10 @@ if($_GET["layer"] == "")
 {$cache = true;}
 if($_GET == false)
 {$cache = false;}
-if(strtolower($_GET["DESLIGACACHE"]) == "sim")
-{$cache = false;}
+if(!empty($_GET["DESLIGACACHE"])){
+	if(strtolower($_GET["DESLIGACACHE"]) == "sim")
+	{$cache = false;}
+}
 if(trim($_GET["TIPOIMAGEM"]) != "" && trim($_GET["TIPOIMAGEM"]) != "nenhum")
 {$cache = false;}
 if($qy)

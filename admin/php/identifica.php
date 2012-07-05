@@ -39,16 +39,21 @@ O par&acirc;metro principal &eacute; "funcao", que define qual opera&ccedil;&ati
 Cada opera&ccedil;&atilde;o possu&iacute; seus pr�prios par&acirc;metros, que devem ser enviados tamb&eacute;m na requisi&ccedil;&atilde;o da opera&ccedil;&atilde;o.
 
 */
-include_once("admin.php");
+include_once(__DIR__."/login.php");
+$funcoesEdicao = array(
+		"ALTERARFUNCOES",
+		"EXCLUIR"
+
+);
+if(in_array(strtoupper($funcao),$funcoesEdicao)){
+	if(verificaOperacaoSessao("admin/html/identifica") == false){
+		retornaJSON("Vc nao pode realizar essa operacao.");exit;
+	}
+}
 error_reporting(0);
 //faz a busca da fun&ccedil;&atilde;o que deve ser executada
 switch (strtoupper($funcao))
 {
-	//verifica os editores
-	case "VERIFICAEDITORES":
-		retornaJSON(verificaEditores($editores));
-		exit;
-		break;
 		/*
 		 Note:
 
@@ -96,10 +101,6 @@ switch (strtoupper($funcao))
 		{JSON}
 		*/
 	case "ALTERARFUNCOES":
-		if(verificaEditores($editores) == "nao")
-		{
-			echo "Vc nao e um editor cadastrado. Apenas os editores definidos em i3geo/ms_configura.php podem acessar o sistema de administracao.";exit;
-		}
 		$novo = alterarFuncoes();
 		$sql = "SELECT * from ".$esquemaadmin."i3geoadmin_identifica WHERE id_i = '".$novo."'";
 		retornaJSON(pegaDados($sql));
@@ -119,21 +120,8 @@ switch (strtoupper($funcao))
 		{JSON}
 		*/
 	case "EXCLUIR":
-		if(verificaEditores($editores) == "nao")
-		{
-			echo "Vc nao e um editor cadastrado. Apenas os editores definidos em i3geo/ms_configura.php podem acessar o sistema de administracao.";exit;
-		}
 		retornaJSON(excluirFuncoes());
 		exit;
-		break;
-
-	case "IMPORTARXMLI":
-		if(verificaEditores($editores) == "nao")
-		{
-			echo "Vc nao e um editor cadastrado. Apenas os editores definidos em i3geo/ms_configura.php podem acessar o sistema de administracao.";exit;
-		}
-		retornaJSON(importarXmlI());
-		exit;;
 		break;
 }
 /*

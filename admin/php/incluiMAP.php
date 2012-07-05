@@ -33,11 +33,20 @@ Arquivo:
 i3geo/admin/php/incluiMAP.php
 */
 
+$funcao = "";
+$locaplic = __DIR__."/../..";
 include_once("admin.php");
-error_reporting(0);
-if(verificaEditores($editores) == "nao")
-{
-	echo "Vc nao e um editor cadastrado. Apenas os editores definidos em i3geo/ms_configura.php podem acessar o sistema de administracao.";exit;
+include_once("conexao.php");
+if(empty($_POST["senha"]) || empty($_POST["usuario"])){
+	formularioLoginMaster("incluiMAP.php");
+	exit;
+}
+else{
+	$continua = verificaMaster($_POST["usuario"],$_POST["senha"],$i3geomaster);
+	if($continua == false){
+		echo "Usu&aacute;rio n&atilde;o registrado em i3geo/ms_configura.php na vari&aacute;vel i3geomaster";
+		exit;
+	}
 }
 
 $arquivos = array();

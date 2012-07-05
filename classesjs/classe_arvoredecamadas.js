@@ -50,12 +50,12 @@ i3GEO.arvoreDeCamadas = {
 	Propriedade: BARRAPROGRESSO
 
 	Mostra uma barra com o progresso do desenho das camadas do mapa
-	
+
 	N&atilde;o funciona em todas as interfaces
 
 	Default:
 	{true}
-	 
+
 	Type:
 	{boolean}
 	*/
@@ -67,7 +67,7 @@ i3GEO.arvoreDeCamadas = {
 
 	Default:
 	{true}
-	 
+
 	Type:
 	{boolean}
 	*/
@@ -79,7 +79,7 @@ i3GEO.arvoreDeCamadas = {
 
 	Default:
 	{""}
-	 
+
 	Type:
 	{string} - ligados|desligados|selecionados|download|wms|raster|toponimia
 	*/
@@ -93,7 +93,7 @@ i3GEO.arvoreDeCamadas = {
 
 	Default:
 	{true}
-	 
+
 	Type:
 	{boolean}
 	*/
@@ -105,7 +105,7 @@ i3GEO.arvoreDeCamadas = {
 
 	Default:
 	{""}
-	 
+
 	Type:
 	{String}
 	*/
@@ -160,22 +160,22 @@ i3GEO.arvoreDeCamadas = {
 	ARRASTARLIXEIRA: true,
 	/*
 	Propriedade: ALTERAOPACIDADE
-	
+
 	Mostra ou n&atilde;o a op&ccedil;&atilde;o que permite alterar a transpar&ecirc;ncia das camadas existentes no mapa
-	
+
 	Type:
 	{boolean}
 	*/
 	ALTERAOPACIDADE: true,
 	/*
 	Propriedade: ANIMAMAPA
-	
+
 	Mostra ou n&atilde;o a op&ccedil;&atilde;o que permite gerar uma anima&ccedil;&atilde;o do mapa, ligando e desligando camadas
-	
+
 	Type:
 	{boolean}
 	*/
-	ANIMAMAPA: true,	
+	ANIMAMAPA: true,
 	/*
 	Propriedade: LIGARDESLIGARTODOS
 
@@ -302,10 +302,10 @@ i3GEO.arvoreDeCamadas = {
 	Propriedade: FUNCOES
 
 	Indica&ccedil;&atilde;o de quais fun&ccedil;&otilde;es ser&atilde;o inclu&iacute;das em cada tema mostrado na &aacute;rvore quando o usu&aacute;rio aciona o item "op&ccedil;&otilde;es"
-	
+
 	Al&eacute;m de definir o item como false ou true, algumas fun&ccedil;&otilde;es apenas s&atilde;o mostradas em conformidade com o tipo de camada.
 	No sistema de administra&ccedil;&atilde;o, pode-se tamb&eacute;m controlar algumas das fun&ccedil;&otilde;es, como por exemplo "sql", "wms" e "temporizador"
-	
+
 	Exemplo de como alterar um valor diretamente no javascript da interface do mapa i3GEO.arvoreDeCamadas.FUNCOES.excluir = false
 
 	*/
@@ -339,7 +339,7 @@ i3GEO.arvoreDeCamadas = {
 
 	Objeto com a lista de camadas existentes no mapa. &Eacute; definido na inicializa&ccedil;&atilde;o ou no redesenho do mapa.
 
-	Este objeto &eacute; constru&iacute;do nas opera&ccedil;&otilde;es em PHP de inicializa&ccedil;&atilde;o ou redesenho do mapa e lista todos os 
+	Este objeto &eacute; constru&iacute;do nas opera&ccedil;&otilde;es em PHP de inicializa&ccedil;&atilde;o ou redesenho do mapa e lista todos os
 	layers existentes no mapfile tempor&aacute;rio em uso.
 
 	Exemplo:
@@ -396,7 +396,7 @@ i3GEO.arvoreDeCamadas = {
 	Tipo:
 	{OBJETO}
 	*/
-	CAMADASINICIAIS: "",	
+	CAMADASINICIAIS: "",
 	/*
 	Variavel: ARVORE
 
@@ -485,7 +485,7 @@ i3GEO.arvoreDeCamadas = {
 					width: 150,
 					minValue: 1,
 					maxValue: 0,
-					value: 0	
+					value: 0
 				}).render("i3GEOprogressoDiv");
 			}
 		}
@@ -516,7 +516,7 @@ i3GEO.arvoreDeCamadas = {
 	Parametro:
 
 	temas {JSON} - Objeto com a lista de camadas e propriedades (veja CAMADAS). Se n&atilde;o existir, a &aacute;rvore &eacute; redesenhada
-	
+
 	forca {boolean} - for&ccedil;a a atualiza&ccedil;&atilde;o da &aacute;rvore, sem verificar automaticamente se a atualiza&ccedil;&atilde;o deve ou n&atilde;o ser feita
 	*/
 	atualiza: function(temas,forca){
@@ -626,7 +626,7 @@ i3GEO.arvoreDeCamadas = {
 				if(grupoLayers[i].expandido && grupoLayers[i].expandido === true)
 				{d = true;}
 				n = grupoLayers[i].layers.length;
-							
+
 				//layers de um grupo
 				for(j=0;j<n; j += 1){
 					//busca na lista de temas
@@ -697,11 +697,11 @@ i3GEO.arvoreDeCamadas = {
 	},
 	/*
 	Function: montaOpcoesArvore
-	
+
 	Monta os &iacute;cones de op&ccedil;&otilde;es gerais da &aacute;rvore, como a lixira, ligar todos, etc.
-	
+
 	Return:
-	
+
 	{string} - html contendo os &iacute;cones
 	*/
 	montaOpcoesArvore: function(){
@@ -709,7 +709,7 @@ i3GEO.arvoreDeCamadas = {
 			imb = i3GEO.util.$im("branco.gif"),
 			estilo = function(i){
 				return " onmouseout='javascript:this.className = \""+i+" iconeMini iconeGuiaMovelMouseOut\";' onmouseover='javascript:this.className = \""+i+" iconeMini iconeGuiaMovelMouseOver\";' class='"+i+" iconeMini iconeGuiaMovelMouseOut' src='"+imb+"' style='cursor:pointer;text-align:left' ";
-			};		
+			};
 		if(this.ARRASTARLIXEIRA === true)
 		{ins += "<img "+estilo("i3geo_lixeira")+" onclick='i3GEO.arvoreDeCamadas.dialogo.excluir();' id='i3geo_lixeira' title='"+$trad("t2")+"' />";}
 		if(this.FILTRAR === true)
@@ -761,7 +761,7 @@ i3GEO.arvoreDeCamadas = {
 			Event = YAHOO.util.Event;
 		YAHOO.example.DDList = "";
 		YAHOO.example.DDApp = {
-			init: function() 
+			init: function()
 			{
 				var i,ltema;
 				if($i("i3geo_lixeira") && i3GEO.arvoreDeCamadas.ARRASTARLIXEIRA === true)
@@ -782,13 +782,13 @@ i3GEO.arvoreDeCamadas = {
 			this.logger = this.logger || YAHOO;
 			YAHOO.util.Dom.setStyle(this.getDragEl(), "opacity", 0.67); // The proxy is slightly transparent
 			this.goingUp = false;
-			this.lastY = 0;			
+			this.lastY = 0;
 		};
 		YAHOO.extend(
 			YAHOO.example.DDList, YAHOO.util.DDProxy, {
 				startDrag: function(x, y){
 					var dragEl,clickEl,
-						Dom = YAHOO.util.Dom; 
+						Dom = YAHOO.util.Dom;
 					this.logger.log(this.id + " startDrag");
 					// make the proxy look like the source element
 					dragEl = this.getDragEl();
@@ -798,7 +798,7 @@ i3GEO.arvoreDeCamadas = {
 					Dom.setStyle(dragEl, "color", Dom.getStyle(clickEl, "color"));
 					Dom.setStyle(dragEl, "backgroundColor", Dom.getStyle(clickEl, "backgroundColor"));
 					Dom.setStyle(dragEl, "border", "4px solid gray");
-					Dom.setStyle(dragEl, "z-index", "5000");		
+					Dom.setStyle(dragEl, "z-index", "5000");
 				},
 				endDrag: function(e){
 					var srcEl,proxy,a,thisid,proxyid;
@@ -806,12 +806,12 @@ i3GEO.arvoreDeCamadas = {
 					proxy = this.getDragEl();
 					// Show the proxy element and animate it to the src element's location
 					Dom.setStyle(proxy, "visibility", "");
-					a = new YAHOO.util.Motion( 
-						proxy,{ 
+					a = new YAHOO.util.Motion(
+						proxy,{
 							points:
 							{to: Dom.getXY(srcEl)}
-						}, 
-						0.2, 
+						},
+						0.2,
 						YAHOO.util.Easing.easeOut
 					);
 					proxyid = proxy.id;
@@ -832,8 +832,8 @@ i3GEO.arvoreDeCamadas = {
 						DDM = YAHOO.util.DragDropMgr,
 						Dom = YAHOO.util.Dom;
 					if (DDM.interactionInfo.drop.length === 1){
-						pt = DDM.interactionInfo.point; 
-						region = DDM.interactionInfo.sourceRegion; 
+						pt = DDM.interactionInfo.point;
+						region = DDM.interactionInfo.sourceRegion;
 						if (!region.intersect(pt)){
 							DDM.refreshCache();
 							//exclui tema
@@ -848,7 +848,7 @@ i3GEO.arvoreDeCamadas = {
 							else{
 								if(i3GEO.arvoreDeCamadas.ARRASTARORDEM === true){
 									destEl = Dom.get(id);
-									destEl.appendChild(this.getEl()); 
+									destEl.appendChild(this.getEl());
 									els = i3GEO.arvoreDeCamadas.listaLigadosDesligados();
 									lista = els[2].join(",");
 									temp = function(retorno){
@@ -866,7 +866,7 @@ i3GEO.arvoreDeCamadas = {
 					// Keep track of the direction of the drag for use during onDragOver
 					var y;
 					y = Event.getPageY(e);
-					if (y < this.lastY) 
+					if (y < this.lastY)
 					{this.goingUp = true;}
 					else
 					if (y > this.lastY)
@@ -944,7 +944,7 @@ i3GEO.arvoreDeCamadas = {
 			new YAHOO.widget.HTMLNode({html:tnome,enableHighlight: false,isLeaf:true,expanded:false}, node);
 			if(funcoes.compartilhar === true && ltema.permitecomentario.toLowerCase() !== "nao")
 			{
-				temp = i3GEO.configura.locaplic+"/ms_criamapa.php?layers="+ltema.name+"&amp;temasa="+ltema.name;				
+				temp = i3GEO.configura.locaplic+"/ms_criamapa.php?layers="+ltema.name+"&amp;temasa="+ltema.name;
 				tnome = i3GEO.social.compartilhar("",temp,temp,"semtotal");
 				iconesNode = new YAHOO.widget.HTMLNode({html:tnome,enableHighlight:false,isLeaf:true,expanded:false},node);
 			}
@@ -1027,10 +1027,10 @@ i3GEO.arvoreDeCamadas = {
 		if(funcoes.wms === true && ltema.permiteogc.toLowerCase() !== "nao"){
 			i3GEO.arvoreDeCamadas.adicionaOpcaoTema("Getcapabilities",'WMS-OGC','i3GEO.tema.dialogo.mostraWms(\"'+ltema.name+'\")',node);
 		}
-		if(i3GEO.parametros.editor.toLowerCase() === "sim")
+		if(i3GEO.login.verificaCookieLogin() && i3GEO.parametros.editor.toLowerCase() === "sim")
 		{i3GEO.arvoreDeCamadas.adicionaOpcaoTema($trad("t44"),"<span style=color:red title='Apenas usu&aacute;rios editores podem ver essa op&ccedil;&atilde;o' >"+$trad("t44")+"</span>",'i3GEO.tema.dialogo.salvaMapfile(\"'+ltema.name+'\")',node);}
 		if(funcoes.tme === true)
-		{i3GEO.arvoreDeCamadas.adicionaOpcaoTema($trad("t49"),$trad("t49"),'i3GEO.tema.dialogo.tme(\"'+ltema.name+'\")',node);}		
+		{i3GEO.arvoreDeCamadas.adicionaOpcaoTema($trad("t49"),$trad("t49"),'i3GEO.tema.dialogo.tme(\"'+ltema.name+'\")',node);}
 		node.loadComplete();
 	},
 	/*
@@ -1258,7 +1258,7 @@ i3GEO.arvoreDeCamadas = {
 		}
 		estilo = navm ? "text-align:left;font-size:11px;vertical-align:middle;display:table-cell;" : "text-align:left;font-size:11px;vertical-align:top;";
 		html = "<p onclick='i3GEO.mapa.ativaTema(\""+tema.name+"\")' id='arrastar_"+tema.name+"' style='"+estilo+"' >";
-		estilo = navm ? "cursor:pointer;vertical-align:15%;" : "cursor:pointer;"; 
+		estilo = navm ? "cursor:pointer;vertical-align:15%;" : "cursor:pointer;";
 		html += "<input class=inputsb style='"+estilo+"' onmouseover=\"javascript:i3GEO.ajuda.mostraJanela('"+$trad("t3")+"','ligadesliga')\" onmouseout=\"javascript:i3GEO.ajuda.mostraJanela('')\" type='checkbox' name=\"layer\" value='"+tema.name+"' "+ ck ;
 		if(i3GEO.arvoreDeCamadas.ATIVATEMA !== "")
 		{html += "onclick=\""+i3GEO.arvoreDeCamadas.ATIVATEMA+"\"";}
@@ -1289,11 +1289,11 @@ i3GEO.arvoreDeCamadas = {
 		else
 		{html += "&nbsp;<span id='ArvoreTituloTema"+tema.name+"' style='"+estilo+"' onmouseover=\"javascript:i3GEO.ajuda.mostraJanela('"+$trad("t7")+"','')\" onmouseout=\"javascript:i3GEO.ajuda.mostraJanela('')\" >"+tema.tema+"</span>";}
 		html += "</p>";
-		
+
 		if(i3GEO.tema.TEMPORIZADORESID[tema.name] == undefined && tema.temporizador != "")
 		{i3GEO.tema.temporizador(tema.name,tema.temporizador);}
-		
-		
+
+
 		return(html);
 	},
 	/*
@@ -1500,7 +1500,7 @@ i3GEO.arvoreDeCamadas = {
 			var novon = novo.length,i;
 			if(novon !== atual.length)
 			{return (false);}
-			
+
 			for (i=0;i<novon;i += 1){
 				if(novo[i].name !== atual[i].name)
 				{return (false);}
@@ -1523,7 +1523,7 @@ i3GEO.arvoreDeCamadas = {
 	Parametro:
 
 	idtema - {String} ID do tema que ser&aacute; procurado
-	
+
 	camadas - {Objeto} - objeto com a lista de temas
 
 	Return:
@@ -1535,13 +1535,13 @@ i3GEO.arvoreDeCamadas = {
 		var i;
 		if(!camadas)
 		{camadas = i3GEO.arvoreDeCamadas.CAMADAS;}
-		i = camadas.length;			
+		i = camadas.length;
 		while(i > 0){
 			i -= 1;
 			if(camadas[i].name === idtema){
 				return camadas[i];
 			}
-		}	
+		}
 		return "";
 	},
 	/*
@@ -1694,7 +1694,7 @@ i3GEO.arvoreDeCamadas = {
 	dialogo: {
 		/*
 		Function: abreFiltro
-		
+
 		Abre a janela de di&aacute;logo para o usu&aacute;rio escolher ou alterar o filtro aplicado à &aacute;rvore
 		*/
 		filtro: function(){
@@ -1702,7 +1702,7 @@ i3GEO.arvoreDeCamadas = {
 		},
 		/*
 		Function: excluir
-		
+
 		Abre a janela de di&aacute;logo para o usu&aacute;rio escolher os temas que ser&atilde;o exclu&iacute;dos da &aacute;rvore
 		*/
 		excluir: function(){
