@@ -86,7 +86,8 @@ i3GEOF.loginusuario = {
 		'<input id=i3geousuario type=text style="width:250px;" value=""/>' +
 		'<p class="paragrafo" >'+$trad("x28")+':<br>' +
 		'<input id=i3geosenha type=password style="width:250px;" value=""/><br>' +
-		'<p class="paragrafo" ><input id=i3GEOFloginusuario size=20  type=button value="'+$trad("x29")+'" />&nbsp;<input id=i3GEOFlogoutusuario size=20  type=button value="Logout" />';
+		'<p class="paragrafo" ><input id=i3GEOFloginusuario size=20  type=button value="'+$trad("x29")+'" />&nbsp;<input id=i3GEOFlogoutusuario size=20  type=button value="Logout" />' +
+		'<p class="paragrafo" onclick="i3GEOF.loginusuario.recuperarSenha()" style="cursor:pointer;color:blue;">'+$trad("x27")+'</p>';
 		return ins;
 	},
 	/*
@@ -174,5 +175,21 @@ i3GEOF.loginusuario = {
 		cp.set_transfer_mode("POST");
 		cp.set_response_type("JSON");
 		cp.call(p,"login",temp,"&usuario="+u+"&senha="+s);
+	},
+	recuperarSenha: function(){
+		var u = $i("i3geousuario").value,
+		temp,cp;
+		if(u == ""){
+			alert($trad("x30"));
+			return;
+		}
+		temp = function(retorno){
+
+		};
+		p = i3GEO.configura.locaplic+"/admin/php/login.php?funcao=recuperarSenha";
+		cp = new cpaint();
+		cp.set_transfer_mode("POST");
+		cp.set_response_type("JSON");
+		cp.call(p,"login",temp,"&usuario="+u);
 	}
 };

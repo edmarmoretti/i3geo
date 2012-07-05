@@ -30,7 +30,7 @@ Free Software Foundation, Inc., no endere&ccedil;o
 59 Temple Street, Suite 330, Boston, MA 02111-1307 USA.
 */
 if(typeof(i3GEO) === 'undefined'){
-	i3GEO = [];
+	var i3GEO = {};
 }
 /*
 Classe: i3GEO.configura

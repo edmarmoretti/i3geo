@@ -30,7 +30,7 @@ Free Software Foundation, Inc., no endere&ccedil;o
 59 Temple Street, Suite 330, Boston, MA 02111-1307 USA.
 */
 if(typeof(i3GEO) === 'undefined'){
-	i3GEO = [];
+	var i3GEO = {};
 }
 /*
 Classe: i3GEO.maparef
@@ -145,7 +145,7 @@ i3GEO.maparef = {
 	*/
 	inicia: function(){
 		if(typeof(console) !== 'undefined'){console.info("i3GEO.maparef.inicia()");}
-		var r,pos,novoel,ins,temp,moveX,moveY,escondeRef,janela;	
+		var r,pos,novoel,ins,temp,moveX,moveY,escondeRef,janela;
 		if($i("i3geo_winRef")){
 			janela = YAHOO.i3GEO.janela.manager.find("i3geo_winRef");
 			janela.show();

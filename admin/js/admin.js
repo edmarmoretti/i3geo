@@ -5,7 +5,7 @@
 navn = false;
 navm = false;
 //seta as vari&aacute;veis navn e navm
-var app = navigator.appName.substring(0,1);
+app = navigator.appName.substring(0,1);
 if (app==='N'){navn=true;}else{navm=true;}
 
 $mensagemAguarde = "<img src='../../imagens/aguarde.gif' />";//"<span style=color:red ><p>Aguarde...</p></span>"
@@ -25,7 +25,7 @@ function ativaIndice(onde)
 	{
 		ins += "<a href='#"+etrs[t].innerHTML+"'><p>"+etrs[t].innerHTML+"</p></a>";
 		etrs[t].innerHTML = "<a name='"+etrs[t].innerHTML+"'>"+etrs[t].innerHTML+"</a>";
-		
+
 	}
 	document.getElementById(onde).innerHTML = ins+"</fieldset>";
 }

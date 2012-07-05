@@ -30,7 +30,7 @@ Free Software Foundation, Inc., no endere&ccedil;o
 59 Temple Street, Suite 330, Boston, MA 02111-1307 USA.
 */
 if(typeof(i3GEO) === 'undefined'){
-	i3GEO = [];
+	var i3GEO = {};
 }
 /*
 Propriedade: navm
@@ -108,7 +108,7 @@ g_tipoacao = "zoomli";
 Function: $i
 
 Obtem um elemento DOM a partir de seu id
-  
+
 Parametros:
 
 id - {String} ID do elemento.
@@ -188,14 +188,14 @@ i3GEO.util = {
 	/*
 	Function: insereCookie
 
-	Cria um novo cookie. 
-   
+	Cria um novo cookie.
+
 	Parametros:
 
 	nome - {String} Nome do cookie.
 
 	valor - {String} Valor do cookie
-	
+
 	expira - {numerico} Dias que levara para expirar
 	*/
 	insereCookie: function(nome,valor,expira) {
@@ -210,8 +210,8 @@ i3GEO.util = {
 	/*
 	Function: pegaCookie
 
-	Pega o valor de um cookie. 
-   
+	Pega o valor de um cookie.
+
 	Parametros:
 
 	nome - {String} Nome do cookie.
@@ -235,8 +235,8 @@ i3GEO.util = {
 	/*
 	Function: listaChaves
 
-	Lista as chaves de um objeto. 
-   
+	Lista as chaves de um objeto.
+
 	Parametros:
 
 	obj - {Object}
@@ -261,7 +261,7 @@ i3GEO.util = {
 	Cria um botao flutuante do tipo aplicar.
 
 	O novo botao e adicionado no DOM com ID "i3geo_aplicar" e posicionado sobre o objeto definido
-   
+
 	Parametros:
 
 	nomeFuncao - {String} Nome da funcao que sera executada quando o botao for cllicado
@@ -505,7 +505,7 @@ i3GEO.util = {
 	Os cursores disponiveis sao definidos por default em classe_configura.js
 
 	Exemplo i3GEO.util.mudaCursor("","crosshair")
-	
+
 	Parametros:
 
 	cursores {i3GEO.configura.cursores} - objeto JSON com as URIs de cada cursor (veja i3GEO.configura.cursores)
@@ -664,13 +664,13 @@ i3GEO.util = {
 	Parametros:
 
 	id {string} - id do elemento que sera posicionado
-	
+
 	x {posicao do pixel} - se nao for definida ou for vazia, sera utilizado o valor de objposicaocursor.telax
-	
+
 	y {posicao do pixel} - se nao for definida ou for vazia, sera utilizado o valor de objposicaocursor.telay
-	
+
 	Return:
-	
+
 	array[top,left] - valores em pixel da posicao calculada da imagem
 	*/
 	posicionaImagemNoMapa: function(id,x,y){
@@ -742,7 +742,7 @@ i3GEO.util = {
 	valor {String} - valor do input
 
 	nome {String} - name do input
-	
+
 	onch {String} - (opcional) string que sera inserida no evento "onchange"
 
 	*/
@@ -835,7 +835,7 @@ i3GEO.util = {
 
 		yi {Numeric} - coordenada y no mapa (imagem).
 
-		funcaoOnclick {String} - funcao que sera executada quando a marca 
+		funcaoOnclick {String} - funcao que sera executada quando a marca
 		for clicada, se for "", o container sera esvaziado ao ser clicado na marca
 
 		container {String} - id do container que recebera os pontos. Se nao existir um elemento com esse ID, sera criado um novo DIV. No caso da interface google Earth, e utilizado na definicao do nome da marca (setname).
@@ -1311,7 +1311,7 @@ i3GEO.util = {
 	scriptTag: function(js,ini,id,aguarde){
 		if(typeof(console) !== 'undefined'){console.info("i3GEO.util.scriptTag()");}
 		if(!aguarde){aguarde = false;}
-		var head,script, 
+		var head,script,
 			tipojanela = i3GEO.janela.ESTILOAGUARDE;
 
 		if(!$i(id) || id === ""){
@@ -1556,7 +1556,7 @@ i3GEO.util = {
 				temp = i3GEO.arvoreDeCamadas.filtraCamadas("status",2,"igual",i3GEO.arvoreDeCamadas.CAMADAS);
 				temp1 = i3GEO.arvoreDeCamadas.filtraCamadas("type",3,"menor",temp);
 				temp2 = i3GEO.arvoreDeCamadas.filtraCamadas("type",8,"igual",temp);
-				monta(temp1.concat(temp2));				
+				monta(temp1.concat(temp2));
 			}
 			else
 			{i3GEO.php.listaTemas(monta,"ligados",i3GEO.configura.locaplic,i3GEO.configura.sid);}
@@ -2040,7 +2040,7 @@ i3GEO.util = {
 				onclick:{fn: function(){
 					eval(anterior+"()");
 				},
-				lazyloadmenu:true 
+				lazyloadmenu:true
 			}});
 			new YAHOO.widget.Button(idatual+"proxima_",
 				{onclick:{fn: function(){
@@ -2333,17 +2333,17 @@ i3GEO.util = {
 	},
 	/*
 	Function: multiStep
-	
+
 	Implementa a tecnica de particionamento para execussao de funcoes no modo assincrono
-	
+
 	Conforme pagina 144 do livro "Javascript de alto desempenho, Nicholas Zakas
-	
+
 	Parametros:
-	
+
 	steps {array} - funcoes que serao executadas
-	
+
 	args {array} - array de arrays com os argumentos de cada funcao
-	
+
 	callback {function} - funcao que sera executada ao terminar os processos
 	*/
 	multiStep: function(steps,args,callback){
@@ -2361,9 +2361,9 @@ i3GEO.util = {
 	},
 	/*
 	Function: tamanhoBrowser
-	
+
 	Calcula o tamanho da area util do navegador considerando-se as propriedades nativas do objeto window
-	
+
 	Return:
 	{[w,h]}
 	*/
@@ -2398,11 +2398,11 @@ i3GEO.util = {
 	},
 	/*
 	Function: detectaTablet
-	
+
 	Verifica se esta em uso um dispositivo do tipo movel
-	
+
 	Se for detectado, utiliza a interface alternativa definida em i3GEO.Interface.ALTTABLET
-	
+
 	A deteccao e feita com base em i3geo/pacotes/mobileesp/mdetect.js
 	*/
 	detectaTablet: function(){
@@ -2418,9 +2418,9 @@ i3GEO.util = {
 	},
 	/*
 	Function: calculaDPI
-	
+
 	Calcula o valor de DPI do monitor.
-	
+
 	O valor e aproximado e utilizado principalmente na interface OpenLayers
 	*/
 	calculaDPI: function(){
@@ -2440,7 +2440,7 @@ i3GEO.util = {
 	},
 	/*
 	Function: ajustaDocType
-	
+
 	Ajusta o DOCTYPE do HTML para funcionar com CSS3
 	*/
 	ajustaDocType: function(){
@@ -2460,9 +2460,9 @@ i3GEO.util = {
 	},
 	/*
 	Function: versaoNavegador
-	
+
 	Retorna algumas versoes de navegador
-	*/	
+	*/
 	versaoNavegador: function(){
 		if(navm && navigator.userAgent.toLowerCase().indexOf('msie 8.') > -1)
 		{return "IE8";}
@@ -2472,18 +2472,18 @@ i3GEO.util = {
 	},
 	/*
 	Function: decimalPlaces
-	
+
 	Arredonda um numero
-	
+
 	Obtido de
-	
+
 		http://stackoverflow.com/questions/4868556/how-do-i-stop-parsefloat-from-stripping-zeroes-to-right-of-decimal/4868718#4868718
 
 
 	Parameters:
-	
+
 	float {numer} - numero que sera arredondado
-	
+
 	length {number} - numero de casas decimais
 	*/
 	decimalPlaces: function(float,length) {
@@ -2505,7 +2505,7 @@ i3GEO.util = {
 			}
 		}
 		return ret;
-	}	
+	}
 };
 //
 // YUI ACCORDION
@@ -2567,7 +2567,7 @@ try{
 				YAHOO.util.Event.addListener(headers[i],"click",this.clickHeader,headerProperties);
 			}
 			parentObj = headers[this.properties.ativa].parentNode;
-			headers = parentObj.getElementsByTagName("dd"); 
+			headers = parentObj.getElementsByTagName("dd");
 			header = headers[this.properties.ativa];
 
 			this.expand(header);

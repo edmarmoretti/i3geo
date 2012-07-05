@@ -30,7 +30,7 @@ Free Software Foundation, Inc., no endere&ccedil;o
 59 Temple Street, Suite 330, Boston, MA 02111-1307 USA.
 */
 if(typeof(i3GEO) === 'undefined'){
-	i3GEO = [];
+	var i3GEO = {};
 }
 /*
 Classe: i3GEO.ajuda
@@ -137,9 +137,9 @@ i3GEO.ajuda = {
 	Function: abreDoc
 
 	Abre a documentacao do i3geo em uma nova janela do navegador
-	
+
 	Parametro:
-	
+
 	url - url que ser&aacute; adicionada a i3GEO.configura.locaplic
 	*/
 	abreDoc: function(url){
@@ -171,10 +171,10 @@ i3GEO.ajuda = {
 				if(corpo){pos = YU.Dom.getXY(corpo);}
 				else{
 					corpo = $i(i3GEO.Interface.IDMAPA);
-					if(corpo){pos = YU.Dom.getXY(corpo);}				
+					if(corpo){pos = YU.Dom.getXY(corpo);}
 				}
 				nx = pos[0] - largura - 3;
-				ny = i3GEO.parametros.h - 78;				
+				ny = i3GEO.parametros.h - 78;
 				texto = '<div id="janelaMenTexto" style="text-align:left;font-size:10px;color:rgb(80,80,80)">'+i3GEO.ajuda.MENSAGEMPADRAO+'</div>';
 				if(nx < 0)
 				{nx = 10;ny = ny - 50;}
@@ -182,7 +182,7 @@ i3GEO.ajuda = {
 				janela[2].innerHTML = texto;
 				YU.Event.addListener(janela[0].close, "click", i3GEO.ajuda.fechaJanela);
 				this.ativaCookie();
-				
+
 			}
 		}
 		catch(e){
@@ -265,7 +265,7 @@ i3GEO.ajuda = {
 		i3GEO.util.insereCookie("g_janelaMen","nao");
 	},
 	/*
-	Function: fechaJanela. 
+	Function: fechaJanela.
 
 	Fecha a janela de ajuda.
 	*/

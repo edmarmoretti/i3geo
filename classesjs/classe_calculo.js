@@ -30,7 +30,7 @@ Free Software Foundation, Inc., no endere&ccedil;o
 59 Temple Street, Suite 330, Boston, MA 02111-1307 USA.
 */
 if(typeof(i3GEO) === 'undefined'){
-	i3GEO = [];
+	var i3GEO = {};
 }
 /*
 Classe: i3GEO.calculo
@@ -38,7 +38,6 @@ Classe: i3GEO.calculo
 Utilit&aacute;rios para c&aacute;lculos.
 */
 i3GEO.calculo = {
-
 	/*
 	Propriedade: metododistancia
 
@@ -345,11 +344,11 @@ i3GEO.calculo = {
 		if(typeof(console) !== 'undefined'){console.info("i3GEO.calculo.distancia()");}
 		var dLat,dLon,a,c,d;
 		dLat = ((lat2-lat1))* Math.PI / 180;
-		dLon = ((lon2-lon1)) * Math.PI / 180; 
+		dLon = ((lon2-lon1)) * Math.PI / 180;
 		a = Math.sin(dLat/2) * Math.sin(dLat/2) +
-		Math.cos(lat1 * Math.PI / 180) * Math.cos(lat2 * Math.PI / 180) * 
-		Math.sin(dLon/2) * Math.sin(dLon/2); 
-		c = 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1-a)); 
+		Math.cos(lat1 * Math.PI / 180) * Math.cos(lat2 * Math.PI / 180) *
+		Math.sin(dLon/2) * Math.sin(dLon/2);
+		c = 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1-a));
 		d = 6378.137 * c;
 		return d;
 	},

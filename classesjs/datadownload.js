@@ -47,11 +47,11 @@ Propriedade: g_locaplic
 Indica a localiza&ccedil;&atilde;o do i3geo. Por default, procura no diret&oacute;rio onde foi executada a plica&ccedil;&atilde;o datadownload.
 No caso do datadownload.htm ser disparado de outro local, &eacute; necess&aacute;rio definir essa vari&aacute;vel antes de chamar a fun&ccedil;&atilde;o DDinicia
 */
-var loc = window.location.href;
+loc = window.location.href;
 g_locaplic = loc.split("/datadownload.htm");
 g_locaplic = g_locaplic[0];
 
-var temp = loc.split("?");
+temp = loc.split("?");
 if(temp[1])
 {temaDownload = temp[1];}
 else
@@ -99,7 +99,7 @@ Valores:
 
 dir - indica que os dados ser&atilde;o buscados em diret&oacute;rios no servidor.
 
-menutemas - indica que os dados ser&atilde;o buscados no arquivo menutemas/menutemas.xml ou 
+menutemas - indica que os dados ser&atilde;o buscados no arquivo menutemas/menutemas.xml ou
 no sistema de administra&ccedil;&atilde;o do i3geo
 */
 g_tipo = "menutemas";
@@ -244,7 +244,7 @@ No HTML deve existir um DIV com id='corpo'. Nesse div ser&aacute; inclu&iacute;d
 
 Parametros:
 
-dir - diret&oacute;rio no servidor 
+dir - diret&oacute;rio no servidor
 */
 function listaArquivos(dir)
 {
@@ -264,7 +264,7 @@ function listaArquivos(dir)
 			ins += "<b>Diret&oacute;rios:</b><br><br>";
 			for (var ig=0;ig<retorno.data.diretorios.length; ig++)
 			{
-				ins += "<span style=cursor:pointer onclick=listaArquivos('"+g_dirbase+d+"/"+retorno.data.diretorios[ig]+"') ><img src="+g_locaplic+"/imagens/folder-s.gif />"+retorno.data.diretorios[ig]+"</span><br><br>"; 
+				ins += "<span style=cursor:pointer onclick=listaArquivos('"+g_dirbase+d+"/"+retorno.data.diretorios[ig]+"') ><img src="+g_locaplic+"/imagens/folder-s.gif />"+retorno.data.diretorios[ig]+"</span><br><br>";
 			}
 			ins += "<b>Arquivos:</b><br><br>";
 			for (var ig=0;ig<retorno.data.arquivos.length; ig++)

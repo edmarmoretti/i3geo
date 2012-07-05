@@ -29,7 +29,7 @@ Free Software Foundation, Inc., no endere&ccedil;o
 59 Temple Street, Suite 330, Boston, MA 02111-1307 USA.
 */
 if(typeof(i3GEO) === 'undefined'){
-	i3GEO = [];
+	var i3GEO = {};
 }
 objposicaocursor = {
 	ddx: "",
@@ -95,7 +95,7 @@ i3GEO.eventos = {
 	/*
 	Propriedade: MOUSEPARADO
 
-	Armazena as fun&ccedil;&otilde;es que ser&atilde;o executadas quando o usu&aacute;rio estaciona o mouse sobre o mapa 
+	Armazena as fun&ccedil;&otilde;es que ser&atilde;o executadas quando o usu&aacute;rio estaciona o mouse sobre o mapa
 	por alguns instantes.
 
 	Tipo:
@@ -108,7 +108,7 @@ i3GEO.eventos = {
 	/*
 	Propriedade: MOUSEMOVE
 
-	Armazena as fun&ccedil;&otilde;es que ser&atilde;o executadas quando o usu&aacute;rio move o mouse sobre o mapa 
+	Armazena as fun&ccedil;&otilde;es que ser&atilde;o executadas quando o usu&aacute;rio move o mouse sobre o mapa
 
 	Tipo:
 	{Array}
@@ -120,7 +120,7 @@ i3GEO.eventos = {
 	/*
 	Propriedade: MOUSEDOWN
 
-	Armazena as fun&ccedil;&otilde;es que ser&atilde;o executadas quando o usu&aacute;rio pressiona o bot&atilde;o do mouse sobre o mapa 
+	Armazena as fun&ccedil;&otilde;es que ser&atilde;o executadas quando o usu&aacute;rio pressiona o bot&atilde;o do mouse sobre o mapa
 
 	Tipo:
 	{Array}
@@ -132,7 +132,7 @@ i3GEO.eventos = {
 	/*
 	Propriedade: MOUSEUP
 
-	Armazena as fun&ccedil;&otilde;es que ser&atilde;o executadas quando o usu&aacute;rio solta o bot&atilde;o do mouse sobre o mapa 
+	Armazena as fun&ccedil;&otilde;es que ser&atilde;o executadas quando o usu&aacute;rio solta o bot&atilde;o do mouse sobre o mapa
 
 	Tipo:
 	{Array}
@@ -144,7 +144,7 @@ i3GEO.eventos = {
 	/*
 	Propriedade: MOUSECLIQUE
 
-	Armazena as fun&ccedil;&otilde;es que ser&atilde;o executadas quando o usu&aacute;rio clica sobre o mapa 
+	Armazena as fun&ccedil;&otilde;es que ser&atilde;o executadas quando o usu&aacute;rio clica sobre o mapa
 
 	Tipo:
 	{Array}
@@ -376,7 +376,7 @@ i3GEO.eventos = {
 		//celula e extent s&atilde;o necess&aacute;rios para se fazer a
 		//convers&atilde;o de coordenadas de tela para coordenadas geogr&aacute;ficas
 		//esses valores s&atilde;o obtidos das fun&ccedil;&otilde;es ajax que redesenham ou inicializam o mapa
-		// 
+		//
 		c = i3GEO.parametros.pixelsize;
 		ex = i3GEO.parametros.mapexten;
 		try{

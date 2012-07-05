@@ -145,6 +145,28 @@ switch (strtoupper($funcao))
 		}
 		cpjson($retorno);
 	break;
+	case "RECUPERARSENHA":
+		$retorno = false;
+		if(!empty($usuario)){
+			$retorno = recuperarSenha();
+		}
+		cpjson($retorno);
+	break;
+}
+function recuperarSenha(){
+	global $usuario;
+	include(__DIR__."/conexao.php");
+	$dados = pegaDados("select * from ".$esquemaadmin."i3GEOadmin_usuarios where login = '$usuario' and ativo = 1",$locaplic);
+	if(count($dados) > 0){
+		$to      = $dados[0]["email"];
+		$subject = 'senha i3geo';
+		$message = $dados[0]["senha"];
+		mail($to, $subject, $message);
+		return true;
+	}
+	else{
+		return false;
+	}
 }
 function verificaPapelSessao($id_papel){
 	$resultado = false;

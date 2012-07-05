@@ -30,12 +30,12 @@ Free Software Foundation, Inc., no endere&ccedil;o
 59 Temple Street, Suite 330, Boston, MA 02111-1307 USA.
 */
 if(typeof(i3GEO) === 'undefined'){
-	i3GEO = [];
+	var i3GEO = {};
 }
 /*
 Classe: i3GEO.guias
 
-Cria e controla os blocos de op&ccedil;&otilde;es ativados por meio de guias ou bot&otilde;es 
+Cria e controla os blocos de op&ccedil;&otilde;es ativados por meio de guias ou bot&otilde;es
 
 Para configurar as guias do mapa principal utilize i3GEO.guias.configura = ...
 
@@ -57,16 +57,16 @@ i3GEO.guias = {
 	ATUAL: "temas",
 	/*
 	Propriedade: ALTURACORPOGUIAS
-	
+
 	Altura em pixels que ser&aacute; aplicado em cada guia
-	
+
 	Por default, a altura &eacute; calculada automaticamente, mas em alguns casos, pode ser necess&aacute;rio especificar o valor para permitir um melhor ajuste do layout do mapa
-	
+
 	Mantenha como 0 para que o c&aacute;lculo seja autom&aacute;tico
-	
+
 	Tipo:
 	{numeric}
-	
+
 	Default: 0
 	*/
 	ALTURACORPOGUIAS: 0,
@@ -185,7 +185,7 @@ i3GEO.guias = {
 	Ordem de inclus&atilde;o das guias no mapa. Essa op&ccedil;&atilde;o &eacute; mais &uacute;til no caso do tipo sanfona, pois nesse caso,
 	a primeira guia &eacute; sempre a que fica ativa. Se esse par�metro for uma string vazia, a ordem
 	utilizada ser&aacute; a ordem existente em i3GEO.guias.CONFIGURA.
-	
+
 	Ao ser definida, apenas as guias indicadas no array ser&atilde;o inclu&iacute;das
 
 	Exemplo:
@@ -203,7 +203,7 @@ i3GEO.guias = {
 	Propriedade: TIPO
 
 	Tipo de guia
-	
+
 	Quando TIPO = "movel", a inicializa&ccedil;&atilde;o da guia &eacute; feita em i3GEO.inicia
 	Isso &eacute; ne cess&aacute;rio pq a guia m&oacute;vel s&oacute; pode ser criada ap&oacute;s o posicionamento do corpo do mapa
 
@@ -234,7 +234,7 @@ i3GEO.guias = {
 
 	Cria as guias com base na vari&aacute;vel i3GEO.guias.CONFIGURA
 
-	As guias podem ser definidas no HTML do mapa, sem necessariamente estarem na vari&aacute;vel configura.<b> 
+	As guias podem ser definidas no HTML do mapa, sem necessariamente estarem na vari&aacute;vel configura.<b>
 	As guias, nesse caso, devem ter como ID "guia'n'", por exemplo id="guia6". Para cada uma dessas guias
 	deve haver um DIV com o conte&uacute;do. Esse DIV deve ter como ID "guia'n'obj", por exemplo id="guia6obj".
 	No caso de ser utilizado a guia m&oacute;vel, com i3GEO.guias.TIPO = "movel" , "guia'n" n&atilde;o &eacute; necess&aacute;rio, uma vez que s&atilde;o
@@ -245,7 +245,7 @@ i3GEO.guias = {
 	onde {String} - id do elemento que conter&aacute; as guias
 	*/
 	cria: function(onde){
-		
+
 		if(typeof(console) !== 'undefined'){console.info("i3GEO.guias.cria()");}
 		//
 		//obt&eacute;m outras guias que podem existir no mapa
@@ -343,7 +343,7 @@ i3GEO.guias = {
 				}
 				else
 				{nguiasreal = i3GEO.guias.ORDEM.length;}
-				
+
 				if(navn)
 				{altura = i3GEO.parametros.h - (nguiasreal * 25) - 1;}
 				else
@@ -449,7 +449,7 @@ i3GEO.guias = {
 	},
 	/*
 	Function: escondeGuias
-	
+
 	Esconde todas as guias
 	*/
 	escondeGuias: function(){
@@ -465,7 +465,7 @@ i3GEO.guias = {
 						height: { to: 0 },
 						id: this.CONFIGURA[guias[g]].idconteudo
 					};
-					anim = new YAHOO.util.Anim(temp, attributes, 1, YAHOO.util.Easing.easeNone);				
+					anim = new YAHOO.util.Anim(temp, attributes, 1, YAHOO.util.Easing.easeNone);
 					anim.onComplete.subscribe(function(){
 						var temp = $i(anim.attributes.id);
 						temp.style.overflow = "auto";
@@ -473,14 +473,14 @@ i3GEO.guias = {
 						if(i3GEO.barraDeBotoes.BARRAS[0])
 						{i3GEO.barraDeBotoes.BARRAS[0].show();}
 					});
-					anim.animate();				
+					anim.animate();
 				}
 				else
 				{temp.style.display="none";}
 			}
 			if($i(this.CONFIGURA[guias[g]].id) && i3GEO.guias.TIPO !== "movel")
 			{$i(this.CONFIGURA[guias[g]].id).parentNode.parentNode.style.background="transparent";}
-		}	
+		}
 	},
 	/*
 	Function: mostra
@@ -534,7 +534,7 @@ i3GEO.guias = {
 					attributes = {
 						height: { to: i3GEO.parametros.h - 10 }
 					};
-					anim = new YAHOO.util.Anim(temp, attributes, 1, YAHOO.util.Easing.easeNone);				
+					anim = new YAHOO.util.Anim(temp, attributes, 1, YAHOO.util.Easing.easeNone);
 					anim.onComplete.subscribe(function(){
 						temp.style.overflow = "auto";
 						temp.style.display = "block";
@@ -542,7 +542,7 @@ i3GEO.guias = {
 					if(DetectaMobile("DetectAndroid") === true){
 						temp.style.height = "";
 						temp.style.overflow = "auto";
-					}					
+					}
 					else
 					{anim.animate();}
 				}
@@ -687,22 +687,22 @@ i3GEO.guias = {
 	},
 	/*
 	Function: guiaMovel
-	
+
 	Controla as guias do tipo "movel", que apresenta uma janela retr&aacute;til onde as op&ccedil;&otilde;es s&atilde;o mostradas
 	*/
 	guiaMovel: {
 		/*
 		Propriedade: ABERTA
-		
+
 		Indica se a guia inicializar&aacute; aberta
-		
+
 		Type:
 		{boolean}
 		*/
 		ABERTA: false,
 		/*
 		Propriedade: config
-		
+
 		Define os valores de posicionamento dos elementos que comp&otilde;em a guia
 		*/
 		config: {
@@ -721,13 +721,13 @@ i3GEO.guias = {
 		},
 		/*
 		Variavel: left
-		
+
 		Valor de posicionamento a esquerda, calculado na inicializa&ccedil;&atilde;o
 		*/
 		left: 0,
 		/*
 		Function: inicia
-		
+
 		Inicializa a guia m&oacute;vel
 		*/
 		inicia: function(){
@@ -735,13 +735,13 @@ i3GEO.guias = {
 				centroY = posMapa[1] + (i3GEO.parametros.h / 2),
 				config = i3GEO.guias.guiaMovel.config,
 				temp;
-			
+
 			if(i3GEO.guias.ALTURACORPOGUIAS === 0 && config.alturaGuiaMovel === 0)
 			{i3GEO.guias.guiaMovel.config.alturaGuiaMovel = i3GEO.parametros.h;}
 			else
 			{i3GEO.guias.guiaMovel.config.alturaGuiaMovel = i3GEO.guias.ALTURACORPOGUIAS;}
 			config = i3GEO.guias.guiaMovel.config;
-			
+
 			temp = $i("i3GEOguiaMovel").style;
 			//temp.height = config.alturaGuiaMovel + "px";
 			temp.left = (posMapa[0] + i3GEO.parametros.w - config.larguraPuxador) + "px";
@@ -760,19 +760,19 @@ i3GEO.guias = {
 			temp.width = "0px"; //config.larguraGuiaMovel + "px";
 			temp.height = config.alturaGuiaMovel + "px";
 			temp.backgroundColor = "white";
-			
+
 			temp = $i("i3GEOguiaMovelPuxador").style;
 			temp.top = ((config.alturaGuiaMovel  - config.alturaPuxador) / 2 ) + "px";
 			temp.left = "0px";
 			temp.width = config.larguraPuxador + "px";
 			temp.height = config.alturaPuxador + "px";
-			
+
 			temp = $i("i3GEOguiaMovelIcones").style;
 			temp.left = "1px";
 			temp.top = "1px";
 			temp.width = (config.larguraGuiaMovel - 1) + "px";
 			temp.height = "35px";
-			
+
 			if(navm)
 			{temp.height = "37px";}
 			temp.zIndex = 5;
@@ -798,7 +798,7 @@ i3GEO.guias = {
 			$i("i3GEOguiaMovelMolde").onmouseout = function(){
 				YAHOO.util.Dom.setStyle("i3GEOguiaMovelMolde", "opacity", 0.20);
 				if($i("i3GEOguiaMovelIcones").innerHTML === "")
-				{i3GEO.guias.guiaMovel.mostraIcones();}				
+				{i3GEO.guias.guiaMovel.mostraIcones();}
 			};
 			i3GEO.guias.guiaMovel.ativa(i3GEO.guias.ATUAL);
 			if(i3GEO.guias.guiaMovel.ABERTA === true)
@@ -806,7 +806,7 @@ i3GEO.guias = {
 		},
 		/*
 		Function: mostraIcones
-		
+
 		Mostra os &iacute;cones que acionam cada guia
 		*/
 		mostraIcones: function(){
@@ -827,11 +827,11 @@ i3GEO.guias = {
 			if($i(i3GEO.guias.CONFIGURA[i3GEO.guias.ATUAL].id)){
 				$i(i3GEO.guias.CONFIGURA[i3GEO.guias.ATUAL].id).parentNode.style.backgroundColor = "#cedff2";
 				$i(i3GEO.guias.CONFIGURA[i3GEO.guias.ATUAL].id).parentNode.style.boxShadow = "none";
-			}			
+			}
 		},
 		/*
 		Function: desativaIcones
-		
+
 		Altera a cor do fundo dos &iacute;cones, voltando ao original
 		*/
 		desativaIcones:function(){
@@ -841,15 +841,15 @@ i3GEO.guias = {
 			for(i=0;i<n;i++){
 				ims[i].style.backgroundColor = "white";
 				ims[i].style.boxShadow = "";
-			}		
+			}
 		},
 		/*
 		Function: ativa
-		
+
 		Ativa o conte&uacute;do de determinada guia
-		
+
 		Parametro:
-		
+
 		chave {string} - c&oacute;digo da guia, definido em i3GEO.guias.CONFIGURA
 		*/
 		ativa: function(chave){
@@ -866,7 +866,7 @@ i3GEO.guias = {
 		},
 		/*
 		Function: reposiciona
-		
+
 		Reposiciona a guia m&oacute;vel quando o mapa muda de tamanho
 		*/
 		reposiciona: function(){
@@ -880,14 +880,14 @@ i3GEO.guias = {
 			i3GEO.guias.ALTURACORPOGUIAS = 0;
 			$i("i3GEOguiaMovelIcones").style.display = "none";
 			$i("i3GEOguiaMovelConteudo").style.display = "none";
-			$i("i3GEOguiaMovelMolde").style.display = "none";			
+			$i("i3GEOguiaMovelMolde").style.display = "none";
 			i3GEO.guias.escondeGuias();
 			i3GEO.guias.guiaMovel.inicia();
 			$i("i3GEOguiaMovel").style.top = temp;
 		},
 		/*
 		Function: abreFecha
-		
+
 		Abre ou fecha a guia m&oacute;vel
 		*/
 		abreFecha: function(){
@@ -908,18 +908,18 @@ i3GEO.guias = {
 					width: { to: 0 },
 					id: "i3GEOguiaMovelMolde"
 				};
-				anim1 = new YAHOO.util.Anim(molde, attributes, 1, YAHOO.util.Easing.easeNone);					
+				anim1 = new YAHOO.util.Anim(molde, attributes, 1, YAHOO.util.Easing.easeNone);
 				anim.duration = 0.5;
 				anim1.duration = 0.5;
 				anim.animate();
 				anim1.animate();
 				anim1.onComplete.subscribe(function(){
 					molde.style.display = "none";
-				});				
+				});
 			}
 			else{
 				//conteudo.style.display = "block";
-				molde.style.display	= "block";		
+				molde.style.display	= "block";
 				attributes = {
 					left: { to: parseInt(guia.style.left,10) - i3GEO.guias.guiaMovel.config.larguraGuiaMovel },
 					id: "i3GEOguiaMovel"
@@ -929,7 +929,7 @@ i3GEO.guias = {
 					width: { to: i3GEO.guias.guiaMovel.config.larguraGuiaMovel },
 					id: "i3GEOguiaMovelMolde"
 				};
-				anim1 = new YAHOO.util.Anim(molde, attributes, 1, YAHOO.util.Easing.easeNone);					
+				anim1 = new YAHOO.util.Anim(molde, attributes, 1, YAHOO.util.Easing.easeNone);
 				anim.duration = 0.5;
 				anim1.duration = 0.5;
 				anim1.onComplete.subscribe(function(){

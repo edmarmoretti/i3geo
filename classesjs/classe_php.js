@@ -29,7 +29,7 @@ Free Software Foundation, Inc., no endere&ccedil;o
 59 Temple Street, Suite 330, Boston, MA 02111-1307 USA.
 */
 if(typeof(i3GEO) === 'undefined'){
-	i3GEO = [];
+	var i3GEO = {};
 }
 /*
 Propriedade: cpJSON
@@ -157,7 +157,7 @@ i3GEO.php = {
 	excluitema: function(funcao,temas){
 		var layer,retorno,p,n,i,par;
 		i3GEO.php.verifica();
-		retorno = function(retorno){		
+		retorno = function(retorno){
 			i3GEO.janela.fechaAguarde("excluitema");
 			n = temas.length;
 			for(i=0;i<n;i++){
@@ -212,9 +212,12 @@ i3GEO.php = {
 		}
 		if(arguments.length === 2)
 		{template = "legenda2.htm";}
-		var p = i3GEO.configura.locaplic+"/classesphp/mapa_controle.php",
-			par = "funcao=criaLegendaHTML&tema="+tema+"&templateLegenda="+template+"&g_sid="+i3GEO.configura.sid;
-		cpJSON.call(p,"criaLegendaHTML",funcao,par);
+		cpJSON.call(
+				i3GEO.configura.locaplic+"/classesphp/mapa_controle.php",
+				"criaLegendaHTML",
+				funcao,
+				"funcao=criaLegendaHTML&tema="+tema+"&templateLegenda="+template+"&g_sid="+i3GEO.configura.sid
+		);
 	},
 	/*
 	Function: inverteStatusClasse
@@ -624,7 +627,7 @@ i3GEO.php = {
 		if(atualiza === undefined)
 		{atualiza = true;}
 		if(ext === undefined)
-		{alert("extensao nao definida");return;}	
+		{alert("extensao nao definida");return;}
 		retorno = function(retorno){
 			switch(i3GEO.Interface.ATUAL)
 			{
@@ -826,7 +829,7 @@ i3GEO.php = {
 		p = i3GEO.configura.locaplic+"/classesphp/mapa_controle.php";
 		par = "funcao=zoomtema&tema="+tema+"&g_sid="+i3GEO.configura.sid;
 		i3GEO.janela.abreAguarde("zoomtema",$trad("o1"));
-		cpJSON.call(p,"zoomtema",retorno,par);	
+		cpJSON.call(p,"zoomtema",retorno,par);
 	},
 	/*
 	Function: zoomsel
@@ -1196,7 +1199,7 @@ i3GEO.php = {
 	Function: converte2googlemaps
 
 	<CONVERTE2GOOGLEMAPS>
-	*/	
+	*/
 	converte2googlemaps: function(funcao){
 		i3GEO.php.verifica();
 		var p = i3GEO.configura.locaplic+"/classesphp/mapa_controle.php",
@@ -1206,13 +1209,13 @@ i3GEO.php = {
 				funcao.call(funcao,retorno);
 			};
 		i3GEO.janela.abreAguarde("converte2googlemaps",$trad("o1"));
-		cpJSON.call(p,"converte2googlemaps",retorno,par);	
+		cpJSON.call(p,"converte2googlemaps",retorno,par);
 	},
 	/*
 	Function: converte2openlayers
 
 	<CONVERTE2OPENLAYERS>
-	*/	
+	*/
 	converte2openlayers: function(funcao){
 		i3GEO.php.verifica();
 		var p = i3GEO.configura.locaplic+"/classesphp/mapa_controle.php",
@@ -1222,7 +1225,7 @@ i3GEO.php = {
 				funcao.call(funcao,retorno);
 			};
 		i3GEO.janela.abreAguarde("converte2openlayers",$trad("o1"));
-		cpJSON.call(p,"converte2openlayers",retorno,par);	
+		cpJSON.call(p,"converte2openlayers",retorno,par);
 	},
 	/*
 	Function: criamapa

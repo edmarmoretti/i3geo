@@ -29,7 +29,7 @@ Free Software Foundation, Inc., no endere&ccedil;o
 59 Temple Street, Suite 330, Boston, MA 02111-1307 USA.
 */
 if(typeof(i3GEO) === 'undefined'){
-	i3GEO = [];
+	var i3GEO = {};
 }
 /*
 Objeto: YAHOO.i3GEO.janela
@@ -176,7 +176,7 @@ i3GEO.janela = {
 	Default:
 	{50}
 	*/
-	OPACIDADEAGUARDE: 50,	
+	OPACIDADEAGUARDE: 50,
 	/*
 	Variavel: TIPS
 
@@ -417,7 +417,7 @@ i3GEO.janela = {
 	Parametros:
 
 	event {objeto} - objeto YUI do evento que gerou o fechament da janela
-	
+
 	args {objeto} - parametros do evento que fechou a janela
 	*/
 	fecha: function(event,args){
@@ -447,14 +447,14 @@ i3GEO.janela = {
 	Parametros:
 
 	id {string} - id da janela
-	*/	
+	*/
 	destroi: function(id){
 		var janela = YAHOO.i3GEO.janela.manager.find(id);
 		i3GEO.util.removeScriptTag(id+"_script");
 		if(janela){
 			YAHOO.i3GEO.janela.manager.remove(janela);
 			janela.destroy();
-		}		
+		}
 	},
 	/*
 	Function: alteraTamanho
@@ -546,7 +546,7 @@ i3GEO.janela = {
 				janela.destroy();
 			}
 		}
-	},	
+	},
 	/*
 	Function: ativaAlerta
 
@@ -614,12 +614,12 @@ i3GEO.janela = {
 			});
 			YAHOO.i3GEO.janela.manager.register(janela);
 			janela.setHeader(cabecalho);
-			janela.render(document.body);			
+			janela.render(document.body);
 		}
 		janela.setHeader(cabecalho);
 		janela.cfg.setProperty("text",texto);
 		janela.show();
-	},	
+	},
 	/*
 	Function: tip
 
@@ -727,11 +727,11 @@ i3GEO.janela = {
 		janela[2].appendChild(novoel);
 		Event = YAHOO.util.Event;
 		bg="slider-bg";
-		thumb="slider-thumb"; 
+		thumb="slider-thumb";
 		novoel.style.position = "relative";
 		novoel.style.background= 'url('+i3GEO.configura.locaplic+'/imagens/bg-fader.gif) 5px 0 no-repeat';
 		novoel.style.height = "28px";
-		novoel.style.width= "228px"; 
+		novoel.style.width= "228px";
 		// The slider can move 0 pixels up
 		topConstraint = 0;
 		// The slider can move 200 pixels down
@@ -758,20 +758,20 @@ i3GEO.janela = {
 	},
 	/*
 	Function: comboCabecalhoTemas
-	
+
 	Adiciona no cabe&ccedil;alho da janela um combo com a lista de temas para janelas abertas por ferramentas
-	
+
 	Essa fun&ccedil;&atilde;o &eacute; utilizada pelas ferramentas que operam sobre um determinado tema. O combo permite que o usu&aacute;rio
 	selecione um tema e ative a ferramenta para funcionar com esse tema
-	
+
 	Parametros:
-	
+
 	idDiv {string} - id do elemento HTML que receber&aacute; o combo
-	
+
 	idCombo {string} - id do combo que ser&aacute; criado
-	
+
 	ferramenta {string} - nome da ferramenta (namespace da classe, por exemplo "tabela" para a classe i3GEOF.tabela
-	
+
 	tipo {string} - tipo de combo
 	*/
 	comboCabecalhoTemas: function(idDiv,idCombo,ferramenta,tipo){
@@ -805,10 +805,10 @@ i3GEO.janela = {
 					c.onchange = function(){
 						var valor = $i(idCombo).value;
 						if(valor !== ""){
-							i3GEO.mapa.ativaTema(valor);	
+							i3GEO.mapa.ativaTema(valor);
 							i3GEOF[ferramenta].tema = valor;
 							$i("i3GEOF."+ferramenta+"_corpo").innerHTML = "";
-							eval("i3GEOF."+ferramenta+".inicia('i3GEOF."+ferramenta+"_corpo');");							
+							eval("i3GEOF."+ferramenta+".inicia('i3GEOF."+ferramenta+"_corpo');");
 						}
 					};
 				},
@@ -816,18 +816,18 @@ i3GEO.janela = {
 				"",
 				false,
 				tipo
-			);				
+			);
 		}
 		temp = "i3GEO.janela.comboCabecalhoTemas('"+idDiv+"','"+idCombo+"','"+ferramenta+"','"+tipo+"')";
 		if(i3GEO.eventos.ATUALIZAARVORECAMADAS.toString().search(temp) < 0)
-		{i3GEO.eventos.ATUALIZAARVORECAMADAS.push(temp);}		
-	}	
+		{i3GEO.eventos.ATUALIZAARVORECAMADAS.push(temp);}
+	}
 };
 try{
 	//controle dos pain&eacute;is que podem ser redimensionados
 	YAHOO.widget.ResizePanel = function(el, userConfig)
 	{
-		if (arguments.length > 0) 
+		if (arguments.length > 0)
 		{YAHOO.widget.ResizePanel.superclass.constructor.call(this, el, userConfig);}
 	};
 	YAHOO.widget.ResizePanel.CSS_PANEL_RESIZE = "yui-resizepanel";

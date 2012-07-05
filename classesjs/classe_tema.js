@@ -27,7 +27,7 @@ Free Software Foundation, Inc., no endere&ccedil;o
 59 Temple Street, Suite 330, Boston, MA 02111-1307 USA.
 */
 if(typeof(i3GEO) === 'undefined'){
-	i3GEO = [];
+	var i3GEO = {};
 }
 /*
 Classe: i3GEO.tema
@@ -39,9 +39,9 @@ Em i3GEO.tema.dialogo estao as funcoes de abertura dos dialogos para alteracao d
 i3GEO.tema = {
 	/*
 	Variable: TEMPORIZADORESID
-	
+
 	Objeto que contem os identificadores dos temporizadores (setInterval) estabelecidos para cada camada
-	
+
 	Type:
 	{objeto} - {idtema:{idtemporizador:,tempo:}}
 	*/
@@ -59,9 +59,8 @@ i3GEO.tema = {
 		if(typeof(console) !== 'undefined'){console.info("i3GEO.tema.exclui()");}
 		g_operacao = "excluitema";
 		//remove o tema do DOM e seus filhos
-		var p;
 		try{
-			p = document.getElementById("idx"+tema).parentNode.parentNode.parentNode;
+			var p = document.getElementById("idx"+tema).parentNode.parentNode.parentNode;
 			do
 			{p.removeChild(p.childNodes[0]);}
 			while
@@ -99,17 +98,19 @@ i3GEO.tema = {
 	sobe: function(tema){
 		if(typeof(console) !== 'undefined'){console.info("i3GEO.tema.sobe()");}
 		i3GEO.mapa.ativaTema(tema);
-		var temp = function(retorno){
-			//
-			//atualiza apenas remonta a arvore
-			//no caso de interfaces como openlayers
-			//e necessario mover o DIV tbm
-			//
-			i3GEO.atualiza(retorno);
-			if(i3GEO.Interface.ATUAL === "openlayers")
-			{i3GEO.Interface.openlayers.ordenaLayers();}
-		};
-		i3GEO.php.sobetema(temp,tema);
+		i3GEO.php.sobetema(
+			function(retorno){
+				//
+				//atualiza apenas remonta a arvore
+				//no caso de interfaces como openlayers
+				//e necessario mover o DIV tbm
+				//
+				i3GEO.atualiza(retorno);
+				if(i3GEO.Interface.ATUAL === "openlayers")
+				{i3GEO.Interface.openlayers.ordenaLayers();}
+			},
+			tema
+		);
 	},
 	/*
 	Function: desce
@@ -123,17 +124,19 @@ i3GEO.tema = {
 	desce: function(tema){
 		if(typeof(console) !== 'undefined'){console.info("i3GEO.tema.desce()");}
 		i3GEO.mapa.ativaTema(tema);
-		var temp = function(retorno){
-			//
-			//atualiza apenas remonta a arvore
-			//no caso de interfaces como openlayers
-			//e necessario mover o DIV tbm
-			//
-			i3GEO.atualiza(retorno);
-			if(i3GEO.Interface.ATUAL === "openlayers")
-			{i3GEO.Interface.openlayers.ordenaLayers();}
-		};
-		i3GEO.php.descetema(temp,tema);
+		i3GEO.php.descetema(
+			function(retorno){
+				//
+				//atualiza apenas remonta a arvore
+				//no caso de interfaces como openlayers
+				//e necessario mover o DIV tbm
+				//
+				i3GEO.atualiza(retorno);
+				if(i3GEO.Interface.ATUAL === "openlayers")
+				{i3GEO.Interface.openlayers.ordenaLayers();}
+			},
+			tema
+		);
 	},
 	/*
 	Function: zoom
@@ -176,11 +179,13 @@ i3GEO.tema = {
 		if(typeof(console) !== 'undefined'){console.info("i3GEO.tema.limpasel()");}
 		i3GEO.mapa.ativaTema(tema);
 		g_operacao = "limpasel";
-		var temp = function(retorno){
-			i3GEO.atualiza(retorno);
-			i3GEO.Interface.atualizaTema(retorno,tema);
-		};
-		i3GEO.php.limpasel(temp,tema);
+		i3GEO.php.limpasel(
+			function(retorno){
+				i3GEO.atualiza(retorno);
+				i3GEO.Interface.atualizaTema(retorno,tema);
+			},
+			tema
+		);
 	},
 	/*
 	Function: mudatransp
@@ -195,16 +200,19 @@ i3GEO.tema = {
 		if(typeof(console) !== 'undefined'){console.info("i3GEO.tema.mudatransp()");}
 		i3GEO.mapa.ativaTema(idtema);
 		g_operacao = "transparencia";
-		var valor = "",
-			temp = function(retorno){
-				i3GEO.atualiza(retorno);
-				i3GEO.Interface.atualizaTema(retorno,idtema);
-			};
+		var valor = "";
 		//o campo input com o valor possui o prefixo 'tr' seguido pelo codigo do tema
 		if ($i("tr"+idtema))
 		{valor = $i("tr"+idtema).value;}
 		if (valor !== ""){
-			i3GEO.php.mudatransp(temp,idtema,valor);
+			i3GEO.php.mudatransp(
+				function(retorno){
+					i3GEO.atualiza(retorno);
+					i3GEO.Interface.atualizaTema(retorno,idtema);
+				},
+				idtema,
+				valor
+			);
 		}
 		else
 		{alert($trad("x16"));}
@@ -223,11 +231,13 @@ i3GEO.tema = {
 		alert($trad("x17"));
 		i3GEO.mapa.ativaTema(idtema);
 		g_operacao = "transparencia";
-		var temp = function(retorno){
-			i3GEO.atualiza(retorno);
-			i3GEO.arvoreDeCamadas.atualiza();
-		};
-		i3GEO.php.invertestatuslegenda(temp,idtema);
+		i3GEO.php.invertestatuslegenda(
+			function(retorno){
+				i3GEO.atualiza(retorno);
+				i3GEO.arvoreDeCamadas.atualiza();
+			},
+			idtema
+		);
 	},
 	/*
 	Function: alteracorclasse
@@ -245,12 +255,16 @@ i3GEO.tema = {
 	alteracorclasse: function(idtema,idclasse,rgb){
 		if(typeof(console) !== 'undefined'){console.info("i3GEO.tema.alteracorclasse()");}
 		i3GEO.mapa.ativaTema(idtema);
-		var temp = function(){
-			i3GEO.atualiza();
-			i3GEO.Interface.atualizaTema("",idtema);
-			i3GEO.arvoreDeCamadas.atualizaLegenda(idtema);
-		};
-		i3GEO.php.aplicaCorClasseTema(temp,idtema,idclasse,rgb);
+		i3GEO.php.aplicaCorClasseTema(
+			temp = function(){
+				i3GEO.atualiza();
+				i3GEO.Interface.atualizaTema("",idtema);
+				i3GEO.arvoreDeCamadas.atualizaLegenda(idtema);
+			},
+			idtema,
+			idclasse,
+			rgb
+		);
 	},
 	/*
 	Function: mudanome
@@ -301,8 +315,6 @@ i3GEO.tema = {
 	*/
 	mostralegendajanela: function(idtema,nome,tipoOperacao){
 		if(typeof(console) !== 'undefined'){console.info("i3GEO.tema.mostralegendajanela()");}
-		//alert(idtema+" "+status)
-		var retorna,janela;
 		if(tipoOperacao === "ativatimer"){
 			mostralegendajanelaTimer = setTimeout("i3GEO.tema.mostralegendajanela('"+idtema+"','"+nome+"','abrejanela')",4000);
 		}
@@ -311,16 +323,19 @@ i3GEO.tema = {
 			catch(e){
 				if(typeof(console) !== 'undefined'){console.error(e);}
 			}
-			retorna = function(retorno){
-				$i("janelaLegenda"+idtema+"_corpo").innerHTML = retorno.data.legenda;
-			};
 			if(!$i("janelaLegenda"+idtema)){
-				janela = i3GEO.janela.cria("250px","","","","",nome,"janelaLegenda"+idtema,false);
+				var janela = i3GEO.janela.cria("250px","","","","",nome,"janelaLegenda"+idtema,false);
 				janela[2].style.textAlign="left";
 				janela[2].style.background="white";
 				janela[2].innerHTML = $trad("o1");
 			}
-			i3GEO.php.criaLegendaHTML(retorna,idtema,"legenda3.htm");
+			i3GEO.php.criaLegendaHTML(
+				function(retorno){
+					$i("janelaLegenda"+idtema+"_corpo").innerHTML = retorno.data.legenda;
+				},
+				idtema,
+				"legenda3.htm"
+			);
 		}
 		if(tipoOperacao === "desativatimer"){
 			clearTimeout(mostralegendajanelaTimer);
@@ -350,7 +365,7 @@ i3GEO.tema = {
 			}
 			catch(e){}
 		}
-	},		
+	},
 	/*
 	Classe: i3GEO.tema.dialogo
 
@@ -428,8 +443,7 @@ i3GEO.tema = {
 			if(arguments.lenght === 1)
 			{tipo = "kml";}
 			if(typeof(i3GEOF.converteKml) === 'undefined'){
-				var js = i3GEO.configura.locaplic+"/ferramentas/convertekml/index.js";
-				i3GEO.util.scriptTag(js,"i3GEOF.converteKml.criaJanelaFlutuante('"+tema+"','"+tipo+"')","i3GEOF.converteKml_script");
+				i3GEO.util.scriptTag(i3GEO.configura.locaplic+"/ferramentas/convertekml/index.js","i3GEOF.converteKml.criaJanelaFlutuante('"+tema+"','"+tipo+"')","i3GEOF.converteKml_script");
 			}
 			else
 			{i3GEOF.converteKml.criaJanelaFlutuante(tema,tipo);}

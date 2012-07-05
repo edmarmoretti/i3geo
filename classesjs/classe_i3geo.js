@@ -63,8 +63,7 @@ s&atilde;o armazenados na vari&aacute;vel i3GEO.parametros
 
 Nessa classe est&atilde;o dispon&iacute;veis vari&aacute;veis internas utilizadas em v&aacute;rias fun&ccedil;&otilde;es, como i3GEO.temaAtivo
 */
-i3GEO = {
-
+var i3GEO = {
 	/*
 	Propriedade: parametros
 

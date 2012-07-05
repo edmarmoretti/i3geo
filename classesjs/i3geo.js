@@ -48,7 +48,7 @@ Retorno:
 
 object - objeto javaScript
 */
-var $i = function(id)
+$i = function(id)
 {return document.getElementById(id);};
 
 (function(){

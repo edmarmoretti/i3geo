@@ -29,8 +29,8 @@ GNU junto com este programa; se n&atilde;o, escreva para a
 Free Software Foundation, Inc., no endere&ccedil;o
 59 Temple Street, Suite 330, Boston, MA 02111-1307 USA.
 */
-if (typeof(i3GEO) === 'undefined'){
-	i3GEO = [];
+if(typeof(i3GEO) === 'undefined'){
+	var i3GEO = {};
 }
 /*
 Classe: i3GEO.desenho
@@ -176,7 +176,7 @@ i3GEO.desenho = {
 	Function: criaDivContainer
 
 	Cria o elemento DIV que ser&aacute; utilizado para renderizar os elementos gr&aacute;ficos.
-	Nesse DIV ser&atilde;o inclu&iacute;dos os elementos de desenho em SVG ou VML 
+	Nesse DIV ser&atilde;o inclu&iacute;dos os elementos de desenho em SVG ou VML
 
 	O DIV recebe como ID "divGeometriasTemp"
 

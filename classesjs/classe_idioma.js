@@ -29,7 +29,7 @@ Free Software Foundation, Inc., no endere&ccedil;o
 59 Temple Street, Suite 330, Boston, MA 02111-1307 USA.
 */
 if(typeof(i3GEO) === 'undefined'){
-	i3GEO = [];
+	var i3GEO = {};
 }
 /*
 Classe: i3geo.idioma
@@ -107,8 +107,8 @@ i3GEO.idioma = {
 	/*
 	Function: define
 
-	Define qual o idioma em uso. O default &eacute; "pt". 
-   
+	Define qual o idioma em uso. O default &eacute; "pt".
+
 	Parametro:
 	codigo - {String} C&oacute;digo do idioma.
 	*/
@@ -120,8 +120,8 @@ i3GEO.idioma = {
 	/*
 	Function: retornaAtual
 
-	Retorna o idioma atual. 
-       
+	Retorna o idioma atual.
+
 	Returns:
 	{string} C&oacute;digo do idioma.
 	*/
@@ -132,10 +132,10 @@ i3GEO.idioma = {
 	Function: defineDicionario
 
 	Define o objeto com as tradu&ccedil;&otilde;es. O default &eacute; "g_traducao"
-   
+
 	Parametro:
 	obj - {Object} Objeto com a tradu&ccedil;&atilde;o.
-     
+
 	Example:
 
 	g_traducao = {
@@ -158,14 +158,14 @@ i3GEO.idioma = {
 	/*
 	Function: alteraDicionario
 
-	Altera um texto do dicionario ou acresecenta um novo texto para o idioma atual. 
-   
+	Altera um texto do dicionario ou acresecenta um novo texto para o idioma atual.
+
 	Parametros:
 
 	id - {String} C&oacute;digo do texto.
 
 	novo - (String) Novo texto.
-     
+
 	*/
 	alteraDicionario: function(id,novo) {
 		i3GEO.idioma.DICIONARIO[id][0][i3GEO.idioma.ATUAL] = novo;
@@ -174,11 +174,11 @@ i3GEO.idioma = {
 	Function: traduzir
 
 	Traduz um texto para o idioma escolhido
-   
+
 	Parametro:
 
 	id - {String} C&oacute;digo do texto.
-     
+
 	Returns:
 
 	{String} Texto traduzido.
@@ -195,11 +195,11 @@ i3GEO.idioma = {
 	Function: adicionaDicionario
 
 	Adiciona novos registros ao dicion&aacute;rio atual
-   
+
 	Parametro:
 
 	novodic - {Object} Objeto novo dicion&aacute;rio.
-     
+
 	Example:
 
 	var novodic ={ 	"pp": [{
@@ -243,7 +243,7 @@ i3GEO.idioma = {
 	Troca o idioma atual por outro.
 
 	A troca &eacute; baseada na defini&ccedil;&atilde;o de um cookie e reload da p&aacute;gina.
-   
+
 	Parametro:
 
 	codigo - {String} C&oacute;digo do idioma (p.e. "en")
@@ -257,7 +257,7 @@ i3GEO.idioma = {
 	Function: listaIdiomas
 
 	Lista os idiomas dispon&iacute;veis no dicion&aacute;rio ativo
-   
+
 	Returns:
 	{Array} Array com os c&oacute;digos de idioma dispon&iacute;veis.
 	*/
@@ -323,16 +323,16 @@ i3GEO.idioma = {
 Function: $trad
 
 Atalho para a fun&ccedil;&atilde;o de tradu&ccedil;&atilde;o
-  
+
 Parametro:
 
 id - {String} C&oacute;digo do texto.
-    
+
 Returns:
 
 {String} Texto traduzido.
 */
-var $trad = function(id)
+$trad = function(id)
 {return (i3GEO.idioma.traduzir(id));};
 //
 (function(){

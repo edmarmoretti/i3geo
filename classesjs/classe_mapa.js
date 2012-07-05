@@ -30,7 +30,7 @@ Free Software Foundation, Inc., no endere&ccedil;o
 
 */
 if(typeof(i3GEO) === 'undefined'){
-	i3GEO = [];
+	var i3GEO = {};
 }
 /*
 Classe: i3GEO.mapa
@@ -43,12 +43,12 @@ como cor de fundo, tipo de imagem, legenda etc.
 i3GEO.mapa = {
 	/*
 	Propriedade: AUTORESIZE
-	
+
 	Indica se o tamanho do mapa sera ajustado toda vez que o navegador for redimensionado
-	
+
 	Type:
 	{boolean}
-	
+
 	Default:
 	{false}
 	*/
@@ -63,13 +63,13 @@ i3GEO.mapa = {
 	GEOXML: [],
 	/*
 	Function: insereDobraPagina
-	
+
 	Insere o icone do tipo "dobra de pagina" que permite alterar o renderizador do mapa
-	
+
 	Parametros:
-	
+
 	tipo {string} - tipo de icone googlemaps|openlayers
-	
+
 	imagem {string} - endereco da imagem que sera utilizada no icone
 	*/
 	insereDobraPagina: function(tipo,imagem){
@@ -93,7 +93,7 @@ i3GEO.mapa = {
 	},
 	/*
 	Function: reposicionaDobraPagina
-	
+
 	Reposiciona o icone do tipo "dobra de pagina"
 	*/
 	reposicionaDobraPagina: function(){
@@ -103,12 +103,12 @@ i3GEO.mapa = {
 		}
 		novoel.style.top = i3GEO.parametros.h - 35 + "px";
 		novoel.style.left = i3GEO.parametros.w - 35 + "px";
-	},	
+	},
 	/*
 	Function: ativaAutoResize
-	
+
 	Ativa o redimensionamento automatico do mapa sempre que o navegador for redimensionado
-	
+
 	e definido como um evento do elemento window
 	*/
 	ativaAutoResize: function(){
@@ -121,7 +121,7 @@ i3GEO.mapa = {
 			}
 			if(Math.abs(Dh - i3GEO.tamanhodoc[1]) > 50){
 				r = true;
-			}			
+			}
 			if(r === false)
 			{return;}
 			i3GEO.tamanhodoc = [Dw,Dh];
@@ -181,7 +181,7 @@ i3GEO.mapa = {
 	Altera a variavel i3GEO.temaAtivo e atualiza a interface em funcao do novo tema que for ativado
 
 	O tema anteriormente ativo tem sua cor alterada para a cor normal e o novo tema e destacado com uma cor diferente
-	
+
 	Executa tambem as funcoes armazenadas em i3GEO.eventos.ATIVATEMA
 
 	Parametros:
@@ -470,7 +470,7 @@ i3GEO.mapa = {
 
 	Controla a obtencao da legenda do mapa na forma de uma imagem
 
-	e utilizado principalmente para armazenar as imagens para a funcao de 
+	e utilizado principalmente para armazenar as imagens para a funcao de
 	obtencao do historico do mapa
 	*/
 	legendaIMAGEM:{
@@ -772,9 +772,9 @@ i3GEO.mapa = {
 												eval("var link = ds[s]."+tips[r]+".link");
 												eval("var img = ds[s]."+tips[r]+".img");
 												if (tipotip === "completo" || tipotip === "balao"){
-													if(valor !== "" && link === "") 
+													if(valor !== "" && link === "")
 													{ins += "<span class='tiptexto' style='text-align:left;font-size:8pt'>" + alias + " :" + valor + "</span><br>";}
-													if(valor !== "" && link !== "") 
+													if(valor !== "" && link !== "")
 													{ins += "<span class='tiptexto' style='text-align:left;font-size:8pt'>" + alias + " : <a style='color:blue;cursor:pointer' target=_blanck href='"+link+"' >" + valor + "</a></span><br>";}
 													if(img !== "")
 													{ins += img+"<br>";}
@@ -829,7 +829,7 @@ i3GEO.mapa = {
 											document.body.removeChild(balloon.getEventTarget(e));
 											balloon.hideTooltip();
 										};
-										
+
 									}
 								}
 							}

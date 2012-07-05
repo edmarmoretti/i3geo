@@ -100,11 +100,11 @@ objalignment = [
 $i = function(i)
 {return document.getElementById(i);};
 
-var retorna = function(retorno)
+retorna = function(retorno)
 {
 	fontes = retorno.data;
 };
-var p = "../php/temas.php?funcao=pegaFontes";
+p = "../php/temas.php?funcao=pegaFontes";
 cPaint.call(p,"",retorna);
 
 function iniciaAdmin()
@@ -122,7 +122,7 @@ function montaParametros()
 		$i("arquivoAtivo").innerHTML = ins;
 	};
 	var p = "../php/menutemas.php?funcao=pegaTemas";
-	cPaint.call(p,"",retorna);	
+	cPaint.call(p,"",retorna);
 }
 function adicionarLayer()
 {
@@ -134,7 +134,7 @@ function adicionarLayer()
 			ativaTema(codigoMap);
 		};
 		var p = "../php/temas.php?funcao=criarNovoLayer&codigoMap="+codigoMap;
-		cPaint.call(p,"",retorna);		
+		cPaint.call(p,"",retorna);
 	}
 }
 function criarNovoMap()
@@ -151,7 +151,7 @@ function criarNovoMap()
 			montaParametros();
 		};
 		var p = "../php/temas.php?funcao=criarNovoMap&nome="+nome+"&codigo="+codigo;
-		cPaint.call(p,"",retorna);		
+		cPaint.call(p,"",retorna);
 	}
 }
 function ativaTema(codigoMap)
@@ -183,7 +183,7 @@ function ativaTema(codigoMap)
 	};
 	$i("forms").style.display="block";
 	var p = "../php/temas.php?funcao=pegaLayers&codigoMap="+codigoMap;
-	cPaint.call(p,"",retorna);	
+	cPaint.call(p,"",retorna);
 }
 function pegaClasses(codigoMap,codigoLayer)
 {
@@ -204,7 +204,7 @@ function pegaClasses(codigoMap,codigoLayer)
 					titulo:"name",prefixoid:"name_",id:codigoLayer+"_"+d.id,valor:"name"}
 				]
 			};
-					
+
 			ins += "<br><fieldset><legend>+- "+d.id+"</legend><div style=display:none >";
 			ins += "<p><input onclick=excluirClasse('"+codigoLayer+"','"+d.id+"',this) type=button value='Excluir classe' /></p>";
 			ins += "<br><fieldset><legend>+- status</legend><div style=display:none >";
@@ -214,7 +214,7 @@ function pegaClasses(codigoMap,codigoLayer)
 			ins += "</select>";
 			ins += "<img src=../imagens/02.png style=cursor:pointer title='Aplicar' onclick='salvarClasse(\""+codigoLayer+"_"+d.id+"\",\"status\",this)'/>";
 			ins += "</p></div></fieldset>";
-			
+
 			ins += "<br><fieldset><legend>+- expression</legend><div style=display:none >";
 			ins += "<p class=textoAjuda style='background-color:rgb(250,250,250);'>Four types of expressions are now supported to define class membership. String comparisons, regular expressions, simple logical expressions, and string functions. If no expression is given, then all features are said to belong to this class.<br>String comparisons are case sensitive and are the fastest to evaluate. No special delimiters are necessary although string must be quoted if they contain special characters. (As a matter of good habit, it is recommended you quote all strings).<br>Regular expressions function just like previous versions of MapServer. However, you must now delimit a regular expression using /regex/. No quotes should be used.<br><br>Logical expressions allow you to build fairly complex tests based on one or more attributes and therefore are only available with shapefiles. Logical expressions are delimited by parentheses '(expression)'. Attribute names are delimited by square brackets '[ATTRIBUTE]'. These names are case sensitive and must match the items in the shapefile. For example: EXPRESSION ([POPULATION] > 50000 AND '[LANGUAGE]' eq 'FRENCH') ... The following logical operators are supported: =,>,<,<=,>=,=,or,and,lt,gt,ge,le,eq,ne. As you might expect this level of complexity is slower to process.<br>One string function exists: length(). This obviously computes the length of a string. An example follows:<br>EXPRESSION (length('[NAME_E]') < 8)<br>String comparisons and regular expressions work from the classitem defined at the layer level. You may mix expression types within the different classes of a layer.</p>";
 			ins += "<p><input type=text onchange='this.style.color=\"blue\"' id='expression_"+codigoLayer+"_"+d.id+"' value=\""+d.dados.expression+"\" />";
@@ -246,7 +246,7 @@ function pegaClasses(codigoMap,codigoLayer)
 			ins += (geraLinhas2(d.dados,param,"salvarClasse"));
 			ins += "</fieldset>";
 			//labels
-			ins += "<br><fieldset><legend style=color:brown >+- Label (para ativar, defina LABELITEM em caract. gerais)</legend><div style=display:none >";	
+			ins += "<br><fieldset><legend style=color:brown >+- Label (para ativar, defina LABELITEM em caract. gerais)</legend><div style=display:none >";
 			var param = {
 				"linhas":[
 					{texto:"Color to draw text with.",
@@ -283,7 +283,7 @@ function pegaClasses(codigoMap,codigoLayer)
 			ins += "</select>";
 			ins += "<img src=../imagens/02.png style=cursor:pointer title='Aplicar' onclick='salvarClasseLabel(\""+codigoLayer+"_"+d.id+"\",\".partials\",this)'/>";
 			ins += "</p></div></fieldset>";
-			
+
 			ins += "<br><fieldset><legend>+- force</legend><div style=display:none >";
 			ins += "<p class=textoAjuda style='background-color:rgb(250,250,250);'>Forces labels for a particular class on, regardless of collisions. Available only for cached labels. Default is false.</p>";
 			ins += "<p><select onchange='this.style.color=\"blue\"' id='label_type_"+codigoLayer+"_"+d.id+"' >";
@@ -291,7 +291,7 @@ function pegaClasses(codigoMap,codigoLayer)
 			ins += "</select>";
 			ins += "<img src=../imagens/02.png style=cursor:pointer title='Aplicar' onclick='salvarClasseLabel(\""+codigoLayer+"_"+d.id+"\",\".force\",this)'/>";
 			ins += "</p></div></fieldset>";
-			
+
 			ins += (geraLinhas2(d.dados,param,"salvarClasseLabel"));
 			var param = {
 				"linhas":[
@@ -332,7 +332,7 @@ function pegaClasses(codigoMap,codigoLayer)
 					{texto:"Supported encoding format to be used for labels. If the format is not supported, the label will not be drawn. Requires the iconv library (present on most systems). The library is always detected if present on the system, but if not the label will not be drawn. Required for displaying international characters in MapServer. More information can be found at: http://www.foss4g.org/FOSS4G/MAPSERVER/mpsnf-i18n-en.html.",
 					titulo:"encoding",prefixoid:"label_encoding_",id:codigoLayer+"_"+d.id,valor:"label.encoding"}
 				]
-			};		
+			};
 			ins += "<br><fieldset style=background-color:#f0e68c ><legend style=color:brown >+- Mais...</legend><div style=display:none >";
 			ins += (geraLinhas2(d.dados,param,"salvarClasseLabel"));
 			ins += "</fieldset>";
@@ -384,7 +384,7 @@ function pegaEstilos(codigoMap,codigoLayer)
 				};
 				ins += "<br><fieldset style='background-color:rgb(240,240,240)'><legend>+- "+est+"</legend>";
 				ins += (geraLinhas2(d,param,"salvarEstilo"));
-				
+
 				var param = {
 					"linhas":[
 						{texto:"Height, in pixels, of the symbol/pattern to be used. Only useful with scalable symbols. Default is 1. For symbols of Type HATCH, the SIZE is the distance between hatched lines. For its use with hatched lines, see Example#8 in the SYMBOL examples.",
@@ -402,7 +402,7 @@ function pegaEstilos(codigoMap,codigoLayer)
 						{texto:"Angle, given in degrees, to draw the line work. Default is 0. For symbols of Type HATCH, this is the angle of the hatched lines. For its use with hatched lines, see Example#8 in the SYMBOL examples.",
 						titulo:"angle",prefixoid:"",id:"angle_"+preid,valor:"angle"},
 						{texto:"For MapServer versions <5, this is the attribute/field that stores the angle to be used in rendering. Angle is given in degrees with 0 meaning no rotation.",
-						titulo:"angleitem",prefixoid:"",id:"angleitem_"+preid,valor:"angleitem"},  
+						titulo:"angleitem",prefixoid:"",id:"angleitem_"+preid,valor:"angleitem"},
 						{texto:"For MapServer versions <5, this is the attribute/field that stores the size to be used in rendering. Value is given in pixels.",
 						titulo:"sizeitem",prefixoid:"",id:"sizeitem_"+preid,valor:"sizeitem"}
 					]
@@ -445,7 +445,7 @@ function pegaMetadados(codigoMap,codigoLayer)
 		ins += "<img src=../imagens/02.png style=cursor:pointer title='Aplicar' onclick='salvarMetadados(\""+codigoLayer+"\",\"aplicaextensao\",this)'/>";
 		ins += "</p></div></fieldset>";
 
-				
+
 		ins += "<br><fieldset><legend>+- download</legend><div style=display:none >";
 		ins += "<p class=textoAjuda style='background-color:rgb(250,250,250);'>Indica se o usu&aacute;rio pode fazer download do tema</p>";
 		ins += "<p><select onchange='this.style.color=\"blue\"' id='download_"+codigoLayer+"' >";
@@ -453,7 +453,7 @@ function pegaMetadados(codigoMap,codigoLayer)
 		ins += "</select>";
 		ins += "<img src=../imagens/02.png style=cursor:pointer title='Aplicar' onclick='salvarMetadados(\""+codigoLayer+"\",\"download\",this)'/>";
 		ins += "</p></div></fieldset>";
-		
+
 		var param = {
 			"linhas":[
 				{texto:"Nomes das colunas da tabela de atributos do tema, que ser&atilde;o mostradas na ferramenta de identifica&ccedil;&atilde;o. Se for vazio, todas as colunas ser&atilde;o mostradas. A lista de itens deve ser separada por ',' e grafada em caixa alta no caso de shapefile.",
@@ -499,8 +499,8 @@ function pegaMetadados(codigoMap,codigoLayer)
 		ins += "</select>";
 		ins += "<img src=../imagens/02.png style=cursor:pointer title='Aplicar' onclick='salvarMetadados(\""+codigoLayer+"\",\"escondido\",this)'/>";
 		ins += "</p></div></fieldset>";
-		
-		ins += "<br><fieldset><legend>+- identifica</legend><div style=display:none >";	
+
+		ins += "<br><fieldset><legend>+- identifica</legend><div style=display:none >";
 		ins += "<p class=textoAjuda style='background-color:rgb(250,250,250);'>Indica se o tema ir&aacute; ser mostrado na ferramenta de identifica&ccedil;&atilde;o</p>";
 		ins += "<p><select onchange='this.style.color=\"blue\"' id='identifica_"+codigoLayer+"' >";
 		ins += combosimnao(retorna.data.identifica);
@@ -547,7 +547,7 @@ function pegaCaracteristicasGerais(codigoMap,codigoLayer)
 		ins += "</select>";
 		ins += "<img src=../imagens/02.png style=cursor:pointer title='Aplicar' onclick='salvarLayer(\""+codigoLayer+"\",\"type\",this)'/>";
 		ins += "</p></fieldset>";
-		
+
 		ins += "<br><fieldset><legend>+- connectiontype</legend><div style=display:none >";
 		ins += "<p class=textoAjuda  style='background-color:rgb(250,250,250);' >Type of connection. Default is local.</b></p>";
 		ins += "<p><select onchange='this.style.color=\"blue\"' id='connectiontype_"+codigoLayer+"' >";
@@ -592,9 +592,9 @@ function pegaCaracteristicasGerais(codigoMap,codigoLayer)
 			{texto:"The scale at which symbols and/or text appear full size. This allows for dynamic scaling of objects based on the scale of the map. If not set then this layer will always appear at the same size. Scaling only takes place within the limits of MINSIZE and MAXSIZE as described above. Scale is given as the denominator of the actual scale fraction, for example for a map at a scale of 1:24,000 use 24000.",
 			titulo:"symbolscale",prefixoid:"symbolscale_",id:codigoLayer,valor:"symbolscale"},
 			{texto:"Sensitivity for point based queries (i.e. via mouse and/or map coordinates). Given in TOLERANCEUNITS. If the layer is a POINT or a LINE, the default is 3. For all other layer types, the default is 0. To restrict polygon searches so that the point must occur in the polygon set the tolerance to zero.",
-			titulo:"tolerance",prefixoid:"tolerance_",id:codigoLayer,valor:"tolerance"},			
+			titulo:"tolerance",prefixoid:"tolerance_",id:codigoLayer,valor:"tolerance"},
 			{texto:" ",
-			titulo:"projection",prefixoid:"projection_",id:codigoLayer,valor:"projection"}			
+			titulo:"projection",prefixoid:"projection_",id:codigoLayer,valor:"projection"}
 			]
 		};
 
@@ -608,10 +608,10 @@ function pegaCaracteristicasGerais(codigoMap,codigoLayer)
 		ins += comboObjeto(objmapunits,"valor","texto",retorna.data.sizeunits);
 		ins += "</select>";
 		ins += "<img src=../imagens/02.png style=cursor:pointer title='Aplicar' onclick='salvarLayer(\""+codigoLayer+"\",\"sizeunits\",this)'/>";
-		ins += "</p></div></fieldset>";	
+		ins += "</p></div></fieldset>";
 
 		ins += "</div></fieldset>";
-				
+
 		ins += "</div></fieldset>";
 		$i("geral_"+codigoLayer+"_"+codigoMap).innerHTML = ins;
 	};
@@ -705,7 +705,7 @@ function adicionarClasse(codigoLayer,botao)
 			pegaClasses(codigoMap,codigoLayer);
 		};
 		var p = "../php/temas.php?funcao=adicionarClasse&codigoMap="+codigoMap+"&codigoLayer="+codigoLayer;
-		cPaint.call(p,"",retorna);		
+		cPaint.call(p,"",retorna);
 	}
 }
 function adicionarEstilo(codigoLayer,codigoClasse,botao)
@@ -720,7 +720,7 @@ function adicionarEstilo(codigoLayer,codigoClasse,botao)
 			pegaEstilos(codigoMap,codigoLayer);
 		};
 		var p = "../php/temas.php?funcao=adicionarClasse&codigoMap="+codigoMap+"&codigoLayer="+codigoLayer+"&codigoClasse="+codigoClasse;
-		cPaint.call(p,"",retorna);		
+		cPaint.call(p,"",retorna);
 	}
 }
 function excluirClasse(codigoLayer,codigoClasse,botao)
@@ -737,7 +737,7 @@ function excluirClasse(codigoLayer,codigoClasse,botao)
 				pegaClasses(codigoMap,codigoLayer);
 			};
 			var p = "../php/temas.php?funcao=excluirClasse&codigoMap="+codigoMap+"&codigoLayer="+codigoLayer+"&codigoClasse="+codigoClasse;
-			cPaint.call(p,"",retorna);		
+			cPaint.call(p,"",retorna);
 		}
 	}
 }
@@ -755,7 +755,7 @@ function excluirLayer(codigoLayer,botao)
 				ativaTema(codigoMap);
 			};
 			var p = "../php/temas.php?funcao=excluirLayer&codigoMap="+codigoMap+"&codigoLayer="+codigoLayer;
-			cPaint.call(p,"",retorna);		
+			cPaint.call(p,"",retorna);
 		}
 	}
 }

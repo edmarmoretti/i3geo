@@ -150,10 +150,10 @@ wms_configura = {
 		tipo: 2
 	}
 };
-var ins = "<p>Escolha o servi&ccedil;o de fornecimento de dados (WMS-T)</p>";
+ins = "<p>Escolha o servi&ccedil;o de fornecimento de dados (WMS-T)</p>";
 ins += "<select style='width:353px;border:1px solid gray;' onchange='escolheuServico(this.value)'>";
 ins += "<option value='' >---</option>";
-for(var key in wms_configura){
+for(key in wms_configura){
 	ins += "<option value='"+key+"'>"+wms_configura[key].titulo+"</option>";
 }
 ins += "</select>";
@@ -194,7 +194,7 @@ function escolheuServico(idWMS){
 	servico = wms_configura[idWMS].servico+"&VERSION=1.1.1&REQUEST=GetMap&layers="+wms_configura[idWMS].layers+"&styles="+wms_configura[idWMS].styles+"&srs="+wms_configura[idWMS].srs+"&format="+wms_configura[idWMS].format;
 	$i("iServico").value = servico;
 	$i("WMS_descricao").value = wms_configura[idWMS].descricao;
-	
+
 	$i("WMS_anoinicio").value = wms_configura[idWMS].anoInicio;
 	//if(tipoServico > 1)
 	$i("WMS_mesinicio").value = wms_configura[idWMS].mesInicio;
@@ -254,7 +254,7 @@ function iniciaImagens(){
 
 	intervalo = 1;
 	id = 1;
-	
+
 	ids = new Array();
 	quantasLidas = 0;
 	onde = $i("imagens");
@@ -480,7 +480,7 @@ function adicionaMapa(obj){
 		if (retorno.data.erro)
 		{alert(retorno.data.erro);}
 		else
-		{window.parent.i3GEO.atualiza("");}	
+		{window.parent.i3GEO.atualiza("");}
 	};
 	var p = g_locaplic+"/classesphp/mapa_controle.php?g_sid="+g_sid+"&funcao=adicionatemawms";
 	p += "&servico="+serv.servico;
@@ -500,7 +500,7 @@ function adicionaMapa(obj){
 	var cp = new cpaint();
 	cp.set_response_type("JSON");
 	cp.call(p,"wmstime",fim);
-	
+
 }
 function desativaQuadros(){
 	var n = idsValidos.length;

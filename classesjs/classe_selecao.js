@@ -5,7 +5,7 @@ Esta classe foi depreciada e podera ser removida. Veja i3geo/ferramentas/selecao
 
 */
 if(typeof(i3GEO) === 'undefined'){
-	i3GEO = [];
+	var i3GEO = {};
 }
 i3GEO.selecao = {
 	porxy: function(tema,tipo,tolerancia){

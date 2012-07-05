@@ -1,7 +1,7 @@
 //inicializa
 parametrosURL()
 if(window.parent.i3GEO.parametros.mapscale > 150001){
-	var ins = "<p>A busca &eacute; feita apenas para a regi&atilde;o de abrang&ecirc;ncia do mapa atual, cuja escala deve estar em pelo menos 1:150.000."
+	ins = "<p>A busca &eacute; feita apenas para a regi&atilde;o de abrang&ecirc;ncia do mapa atual, cuja escala deve estar em pelo menos 1:150.000."
 	ins += "<p>A restri&ccedil;ão de escala &eacute; necess&aacute;ria para melhorar a performance da busca."
 	ins += "<p>O mapa atual est&aacute; fora do limite de escala (1:150.000)."
 	ins += "<p><input id=ajustaEscala size=20  type=button value='Ajustar' />"
@@ -9,7 +9,7 @@ if(window.parent.i3GEO.parametros.mapscale > 150001){
 }
 else{
 	if(window.parent.scieloAtivo == false){
-		var ins = "<p>A busca de artigos ainda &eacute; experimental."
+		ins = "<p>A busca de artigos ainda &eacute; experimental."
 		ins += '<p>Os dados não são obtidos diretamente da base Scielo, mas sim do Minist&eacute;rio do Meio Ambiente.'
 		ins += "<p><input id=continuar size=20  type=button value='Continuar' />"
 		$i("resultadoscielo").innerHTML = ins;

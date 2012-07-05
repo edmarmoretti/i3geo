@@ -27,7 +27,7 @@ Free Software Foundation, Inc., no endere&ccedil;o
 59 Temple Street, Suite 330, Boston, MA 02111-1307 USA.
 */
 if(typeof(i3GEO) === 'undefined'){
-	i3GEO = [];
+	var i3GEO = {};
 }
 /*
 Classe: i3GEO.coordenadas
@@ -180,7 +180,7 @@ i3GEO.coordenadas = {
 
 	i3GEO.coordenadas.PARAMETROS.mostraCoordenadas.idhtml = "";
 
-	Nas vers&otilde;es anteriores à 4.5 do i3Geo utilizava-se um 
+	Nas vers&otilde;es anteriores à 4.5 do i3Geo utilizava-se um
 
 	Default:
 
@@ -206,7 +206,7 @@ i3GEO.coordenadas = {
 	},
 	/*
 	Variavel: MODOTEXTO
-	
+
 	Representa&ccedil;&atilde;o das coordenadas no modo texto
 	*/
 	MODOTEXTO: "",
@@ -219,7 +219,7 @@ i3GEO.coordenadas = {
 
 	As coordenadas s&atilde;o obtidas por meio de uma chamada AJAX.
 
-	Se voc&ecirc; n&atilde;o quer essa fun&ccedil;&atilde;o no mapa, elimine o elemento HTML existente no mapa que contenha o 
+	Se voc&ecirc; n&atilde;o quer essa fun&ccedil;&atilde;o no mapa, elimine o elemento HTML existente no mapa que contenha o
 	id definido em i3GEO.coordenadas.PARAMETROS (mostraCoordenadasUTM) ou altere a vari&aacute;vel i3GEO.eventos.MOUSEPARADO
 
 	Se i3GEO.coordenadas.mostraCoordenadasUTM.idhtml for igual a i3GEO.coordenadas.mostraCoordenadasGEO.idhtml
@@ -291,7 +291,7 @@ i3GEO.coordenadas = {
 
 	Obt&eacute;m e mostra as coordenadas Geogr&aacute;ficas da posi&ccedil;&atilde;o do mouse sobre o mapa.
 
-	Se voc&ecirc; n&atilde;o quer essa fun&ccedil;&atilde;o no mapa, elimine o elemento HTML que contenha o 
+	Se voc&ecirc; n&atilde;o quer essa fun&ccedil;&atilde;o no mapa, elimine o elemento HTML que contenha o
 	id definido em i3GEO.coordenadas.PARAMETROS, por default &eacute; "localizarxy"
 
 	Parametro:
@@ -426,7 +426,7 @@ i3GEO.coordenadas = {
 		"<td>"+$inputText("","",prefixo+"X","X","12","00")+"&nbsp;</td>" +
 		"<td>Y:"+$inputText("","",prefixo+"Y","Y","12","00")+"&nbsp;</td>" +
 		"<td>Zn:"+$inputText("","",prefixo+"ZN","Zona","2","--")+"&nbsp;</td>" +
-		
+
 		"</tr></table>";
 		return ins;
 	},
@@ -650,7 +650,7 @@ i3GEO.coordenadas = {
 				if($i(onde))
 				{$i(onde).innerHTML = "";}
 				onde = "i3GEOJanelaCoordenadas_corpo";
-				
+
 				ins += "<br><a href='#' style='cursor:pointer;color:blue' onclick='new YAHOO.util.KeyListener(document.body,{alt:true,keys:67},{fn: function(type, args, obj){alert(i3GEO.coordenadas.MODOTEXTO);}}).enable();' >" +
 					"Clique aqui para ativar Alt+C para poder capturar as coordenadas</a>";
 			}
@@ -672,7 +672,7 @@ i3GEO.coordenadas = {
 				temp = i3GEO.coordenadas.config[tipos[i]];
 				if(temp.ativo === true){
 					if(temp.tipo === "geo"){
-						if(ativaMovimento === true){	
+						if(ativaMovimento === true){
 							if(i3GEO.Interface.TABLET === true){
 								if(i3GEO.eventos.MOUSECLIQUE.toString().search("atualizaLocalizarGeo('"+onde+tipos[i]+"')") < 0)
 								{i3GEO.eventos.MOUSECLIQUE.push("atualizaLocalizarGeo('"+onde+tipos[i]+"')");}
@@ -680,7 +680,7 @@ i3GEO.coordenadas = {
 							else{
 								if(i3GEO.eventos.MOUSEMOVE.toString().search("atualizaLocalizarGeo('"+onde+tipos[i]+"')") < 0)
 								{i3GEO.eventos.MOUSEMOVE.push("atualizaLocalizarGeo('"+onde+tipos[i]+"')");}
-							}								
+							}
 						}
 						if(typeof(x) !== 'undefined'){
 							atualizaLocalizarGeo(onde+tipos[i],i3GEO.calculo.dd2dms(x)[0],i3GEO.calculo.dd2dms(y)[0]);
@@ -695,7 +695,7 @@ i3GEO.coordenadas = {
 							else{
 								if(i3GEO.eventos.MOUSEMOVE.toString().search("i3GEO.coordenadas.atualizaProj4('"+onde+"','"+tipos[i]+"')") < 0)
 								{i3GEO.eventos.MOUSEMOVE.push("i3GEO.coordenadas.atualizaProj4('"+onde+"','"+tipos[i]+"')");}
-							}								
+							}
 						}
 						if(typeof(x) !== 'undefined'){
 							i3GEO.coordenadas.atualizaProj4(onde,tipos[i],x,y);
@@ -711,7 +711,7 @@ i3GEO.coordenadas = {
 				else{
 					if(i3GEO.eventos.MOUSEMOVE.toString().search("i3GEO.coordenadas.limpaModoTexto()") < 0)
 					{i3GEO.eventos.MOUSEMOVE.push("i3GEO.coordenadas.limpaModoTexto()");}
-				}											
+				}
 			}
 			if(i3GEO.coordenadas.formato === "bloco")
 			{i3GEO.coordenadas.ativaBloco(onde);}

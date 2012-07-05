@@ -1,20 +1,17 @@
 g_movedoca = 0;
 wd = 0;
-var novoel = document.createElement("div");
+novoel = document.createElement("div");
 novoel.id = "wdoca";
 novoel.style.zIndex = "5000";
 novoel.style.left="0px";
 novoel.innerHTML = '<table><tr><td width=100% title="click para mover" class="tdclara" style="background-color:gray;cursor:move;" onmouseup="javascript:g_movedoca=0" onmousedown="javascript:if (g_movedoca==1){g_movedoca=0} else{wd = x;g_movedoca=1};movewdocaf()"><span  style="background-color:gray" ></span><span style="color:white" id=textowdoca ></span></tr><tr><td valign="top" ><iframe name=wdocai id=wdocai  valign="top" ></iframe></td></tr></table><div id=wdocadiv ></div>';
 document.body.appendChild(novoel);
 
-var g_sid=window.opener.parent.g_sid;
-var corpo = window.opener.parent.document.getElementById("img").src;
-var legenda = window.opener.g_legendaHTML;
-var escalanumerica = window.opener.parent.i3GEO.parametros.mapscale;
+//var g_sid=window.opener.parent.g_sid;
 
-document.getElementById("mapa").innerHTML = "<img src="+corpo+" />";
-document.getElementById("legenda").innerHTML = legenda;
-document.getElementById("escalanumerica").innerHTML = "1: "+escalanumerica;
+document.getElementById("mapa").innerHTML = "<img src="+window.opener.parent.document.getElementById("img").src+" />";
+document.getElementById("legenda").innerHTML = window.opener.g_legendaHTML;
+document.getElementById("escalanumerica").innerHTML = "1: "+window.opener.parent.i3GEO.parametros.mapscale;
 
 
 function processevent1(exy1)

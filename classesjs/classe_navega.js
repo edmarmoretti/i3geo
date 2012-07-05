@@ -29,7 +29,7 @@ Free Software Foundation, Inc., no endere&ccedil;o
 59 Temple Street, Suite 330, Boston, MA 02111-1307 USA.
 */
 if(typeof(i3GEO) === 'undefined'){
-	i3GEO = [];
+	var i3GEO = {};
 }
 /*
 Classe: i3GEO.navega
@@ -76,11 +76,11 @@ i3GEO.navega = {
 	timerNavega: null,
 	/*
 	Function: centroDoMapa
-	
+
 	Obt&eacute;m as coordenadas geogr&aacute;ficas do centro do mapa
-	
+
 	Retorno:
-	
+
 	{array|false} - false se falhar ou [x,y] se n&atilde;o falhar
 	*/
 	centroDoMapa: function(){
@@ -104,7 +104,7 @@ i3GEO.navega = {
 				break;
 			default:
 				return false;
-		}	
+		}
 	},
 	marcaCentroDoMapa: function(xy){
 		if(typeof(console) !== 'undefined'){console.info("i3GEO.navega.marcaCentroDoMapa()");}
@@ -493,7 +493,7 @@ i3GEO.navega = {
 
 	A rosa permite que o usu&aacute;rio navegue no mapa sem ter de alterar a op&ccedil;&atilde;o atual de navega&ccedil;&atilde;o.
 
-	A rosa &eacute; mostrada apenas se a vari&aacute;vel i3GEO.configura.mostraRosaDosVentos for = a "sim".<b> 
+	A rosa &eacute; mostrada apenas se a vari&aacute;vel i3GEO.configura.mostraRosaDosVentos for = a "sim".<b>
 
 	Para que a rosa seja mostrada, &eacute; necess&aacute;rio que esta fun&ccedil;&atilde;o esteja registrada em
 
@@ -1342,9 +1342,9 @@ i3GEO.navega = {
 		Function: google
 
 		Abre a janela de di&aacute;logo da ferramenta google permitindo a navega&ccedil;&atilde;o integrada com o GoogleMaps
-		
+
 		Parametros:
-		
+
 		coordenadas {array} - array com os pares de coordenadas x,y que ser&atilde;o adicionados ao mapa do google (opcional)
 		*/
 		google: function(coordenadas){

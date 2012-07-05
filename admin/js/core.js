@@ -45,26 +45,26 @@ Retorno:
 
 object - objeto javaScript
 */
-var $i = function(id)
+$i = function(id)
 {return document.getElementById(id);};
 /*
 Variable: $mapfiles
 
 Armazena o objeto com a lista de mapfiles
 */
-var $mapfiles = "";
+$mapfiles = "";
 /*
 Variable: $tags
 
 Armazena o objeto com a lista de tags
 */
-var $tags = "";
+$tags = "";
 /*
 Variable: $perfis
 
 Armazena o objeto com a lista de perfis
 */
-var $perfis = "";
+$perfis = "";
 function cabecalhoGeral(id,excluir){
 	var i,n,temp,
 		ins = "<fieldset class='cabecalhoGeral'><legend>Op&ccedil;&otilde;es principais</legend>",

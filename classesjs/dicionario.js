@@ -1754,6 +1754,13 @@ it:""
 }],
 "x32":[
 {
+pt:"Enviar senha",
+en:"Send password",
+es:"Enviar la contraseña",
+it:""
+}],
+"x33":[
+{
 pt:"",
 en:"",
 es:"",

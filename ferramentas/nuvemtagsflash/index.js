@@ -1,12 +1,12 @@
 //inicializa
 function iniciaNuvem(){
-	YAHOO.example.linksRSS = [ 
-			"http://www.mma.gov.br/webservice/noticias/rss_noticias.php", 
+	YAHOO.example.linksRSS = [
+			"http://www.mma.gov.br/webservice/noticias/rss_noticias.php",
 			"http://www.estadao.com.br/rss/ultimas.xml",
 			"http://www.estadao.com.br/rss/vidae.xml",
 			"http://feeds.folha.uol.com.br/folha/emcimadahora/rss091.xml"
 		];
-		
+
 		YAHOO.example.ACJSArray = new function() {
 		// Instantiate first JS Array DataSource
 		this.oACDS = new YAHOO.widget.DS_JSArray(YAHOO.example.linksRSS);
@@ -34,8 +34,8 @@ function iniciaNuvem(){
 			botao1.on("click", buscarss);
 		}
 		YAHOO.util.Event.onContentReady("botao1", onPushButtonsMarkupReady);
-		
-		
+
+
 	}();
 	aguarde("block");
 	parametrosURL();
@@ -71,7 +71,7 @@ function montaNuvem(r)
 						for (r=0;r<retorno.data[i].noticias.length;r++)
 						{
 							linkrss += "<span><a href='"+retorno.data[i].noticias[r].link+"' target=blanck ><img style=cursor:pointer src='../../imagens/mais.png' title='"+retorno.data[i].noticias[r].titulo+"'/></a></span>" ;
-						}		
+						}
 					}
 					tags += "<span> </span> <span onmouseout='this.style.textDecoration=\"none\"' onmouseover='this.style.textDecoration=\"underline\"' onclick='procurar(\""+retorno.data[i].tag+"\")' style='cursor:pointer;vertical-align:middle;color:rgb("+cor+");font-size:"+h+"pt;'>"+retorno.data[i].tag+"</span>"+linkrss;
 					if(h > 7)
@@ -87,10 +87,10 @@ function montaNuvem(r)
 }
 //pega a lista de tags
 $i("resultado").innerHTML = "Aguarde...";
-var cp = new cpaint();
+cp = new cpaint();
 cp.set_response_type("JSON");
 //cp.set_debug(2)
-var p = "../../classesphp/mapa_controle.php?funcao=listaTags&rss=&nrss=&g_sid="+g_sid;
+p = "../../classesphp/mapa_controle.php?funcao=listaTags&rss=&nrss=&g_sid="+g_sid;
 cp.call(p,"listaTags",montaNuvem);
 
 function procurar(texto)
@@ -112,7 +112,7 @@ function buscarss()
 	cp.set_response_type("JSON");
 	//cp.set_debug(2)
 	var p = g_locaplic+"/classesphp/mapa_controle.php?funcao=listaTags&g_sid="+g_sid+"&rss="+rss+"&nrss="+$i("nrss").value;
-	cp.call(p,"listaTags",montaNuvem);	
+	cp.call(p,"listaTags",montaNuvem);
 }
 function flash()
 {

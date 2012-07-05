@@ -30,7 +30,7 @@ Free Software Foundation, Inc., no endere&ccedil;o
 59 Temple Street, Suite 330, Boston, MA 02111-1307 USA.
 */
 if(typeof(i3GEO) === 'undefined'){
-	i3GEO = [];
+	var i3GEO = {};
 }
 /*
 Classe: i3GEO.arvoreDeTemas
@@ -44,7 +44,7 @@ i3GEO.arvoreDeTemas = {
 	Objeto com a definicao das propriedades que serao utilizadas na inclusao dos icones adicionais de adicao de temas e no item de descricao de cada tema.
 
 	"uploadarquivo" quando "true" indica que sera mostrado o icone de upload de arquivos e o icoe de conexao com servicos
-	
+
 	Example:
 
 	var obj = {
@@ -64,13 +64,13 @@ i3GEO.arvoreDeTemas = {
 		conectarwmst: true,
 
 		conectargeorss: true,
-		
+
 		conectargeojson: true,
 
 		nuvemTags: true,
 
 		nuvemTagsFlash: true,
-		
+
 		carregaKml: true,
 
 		navegacaoDir: false,
@@ -88,7 +88,7 @@ i3GEO.arvoreDeTemas = {
 		refresh: true,
 
 		carousel: true,
-		
+
 		inde: true,
 
 		uploadgpx: false,
@@ -96,13 +96,13 @@ i3GEO.arvoreDeTemas = {
 		comentarios: true,
 
 		bookmark: true,
-		
+
 		importarwmc: true,
-		
+
 		googleearth: true,
-		
+
 		uploadarquivo: true, //upload de GPX, SHAPEFILE, DBF, CSV e KML
-		
+
 		flutuante: true //mostra a opcao que permite abrir o catalogo em uma janela flutuante
 	}
 
@@ -144,7 +144,7 @@ i3GEO.arvoreDeTemas = {
 
 	Valor que sera utilizado para dividir o valor bruto do numero de acessos de cada tema.
 
-	A divisao e utilizada para definir quantas estrelas serao mostradas na arvore de opcoes adicionais.<b> 
+	A divisao e utilizada para definir quantas estrelas serao mostradas na arvore de opcoes adicionais.<b>
 
 	Tipo:
 	{Numeric}
@@ -349,7 +349,7 @@ i3GEO.arvoreDeTemas = {
 	Function: flutuante
 
 	Abre o catalogo em uma janela flutuante
-	*/	
+	*/
 	flutuante: function(){
 		var janela,temp,cabecalho,minimiza,idold,corpo,altura;
 		cabecalho = function(){};
@@ -391,7 +391,7 @@ i3GEO.arvoreDeTemas = {
 		i3GEO.arvoreDeTemas.IDHTML = "i3GEOFcatalogo_corpo";
 		i3GEO.arvoreDeTemas.cria(i3GEO.configura.sid,i3GEO.configura.locaplic,"");
 		i3GEO.arvoreDeTemas.IDHTML = idold;
-	},	
+	},
 	/*
 	Function: listaWMS
 
@@ -416,7 +416,7 @@ i3GEO.arvoreDeTemas = {
 					{html:html,id_ws:raiz[i].id_ws,url:raiz[i].link,nivel:0,expanded:false,enableHighlight:false},
 					node
 				);
-				tempNode.setDynamicLoad(i3GEO.arvoreDeTemas.listaLayersWMS, 1); 
+				tempNode.setDynamicLoad(i3GEO.arvoreDeTemas.listaLayersWMS, 1);
 			}
 			node.loadComplete();
 		};
@@ -546,7 +546,7 @@ i3GEO.arvoreDeTemas = {
 				m = i3GEO.arvoreDeTemas.IDSMENUS.length;
 				for (i=0, j=c; i<j; i += 1){
 					for (k=0, jj=m; k<jj; k +=1 ){
-						if(retorno.data[i].idmenu === i3GEO.arvoreDeTemas.IDSMENUS[k]) 
+						if(retorno.data[i].idmenu === i3GEO.arvoreDeTemas.IDSMENUS[k])
 						{i3GEO.arvoreDeTemas.MENUS.push(retorno.data[i]);}
 					}
 				}
@@ -561,7 +561,7 @@ i3GEO.arvoreDeTemas = {
 
 	Lista os grupos de um menu.
 
-	O resultado e armazenado em i3GEO.arvoreDetemas.GRUPOS 
+	O resultado e armazenado em i3GEO.arvoreDetemas.GRUPOS
 
 	Parametros:
 
@@ -828,7 +828,7 @@ i3GEO.arvoreDeTemas = {
 	/*
 	Function: montaArvore
 
-	Monta a arvore incluindo os nos do primeiro nivel. 
+	Monta a arvore incluindo os nos do primeiro nivel.
 
 	A opcao de carga dinamica dos nos filhos e definida para a montagem dos grupos.
 	*/
@@ -921,7 +921,7 @@ i3GEO.arvoreDeTemas = {
 				},
 				root
 			);
-		}			
+		}
 		//
 		//wms
 		//
@@ -1067,12 +1067,12 @@ i3GEO.arvoreDeTemas = {
 				i3GEO.arvoreDeTemas.ARVORE.draw();
 			};
 			i3GEO.arvoreDeTemas.listaDrives(i3GEO.arvoreDeTemas.SID,i3GEO.arvoreDeTemas.LOCAPLIC,temp);
-		}	
+		}
 	},
 	/*
 	Function: montaGrupos
 
-	Monta a lista de grupos de um no principal da arvore. 
+	Monta a lista de grupos de um no principal da arvore.
 
 	A opcao de carga dinamica dos nos filhos e definida para a montagem dos sub-grupos.
 	*/
@@ -1133,7 +1133,7 @@ i3GEO.arvoreDeTemas = {
 	/*
 	Function: montaSubGrupos
 
-	Monta a lista de sub-grupos de um no do tipo grupo. 
+	Monta a lista de sub-grupos de um no do tipo grupo.
 
 	A opcao de carga dinamica dos nos filhos e definida para a montagem dos temas.
 	*/
@@ -1207,7 +1207,7 @@ i3GEO.arvoreDeTemas = {
 	/*
 	Function: montaTemas
 
-	Monta a lista de temas de um no. 
+	Monta a lista de temas de um no.
 	*/
 	montaTemas: function(node){
 		if(typeof(console) !== 'undefined'){console.info("i3GEO.arvoreDeTemas.montaTemas()");}
@@ -1260,7 +1260,7 @@ i3GEO.arvoreDeTemas = {
 
 	Parametro:
 
-	node {node} - no onde sera criada a lista 
+	node {node} - no onde sera criada a lista
 	*/
 	montaDir: function(node){
 		if(typeof(console) !== 'undefined'){console.info("i3GEO.arvoreDeTemas.montaDir()");}
@@ -1390,7 +1390,7 @@ i3GEO.arvoreDeTemas = {
 				{isLeaf:true,enableHighlight:false,expanded:false,html:html},
 				node
 			);
-		}		
+		}
 		if (node.data.permitecomentario && node.data.permitecomentario !== "nao" && i3GEO.arvoreDeTemas.OPCOESADICIONAIS.comentarios === true){
 			html = "<a href='#' title='' onclick='i3GEO.tema.dialogo.comentario(\""+node.data.idtema+"\",\"comentario\")' >"+$trad("x19")+"</a>";
 			new YAHOO.widget.HTMLNode(
@@ -1462,7 +1462,7 @@ i3GEO.arvoreDeTemas = {
 			if(OPCOESADICIONAIS.carregaKml === true){
 				ins += "<td><img "+estilo("carregarKml")+" onclick='i3GEO.arvoreDeTemas.dialogo.carregaKml()' title='Kml'/></td>";
 				t += 20;
-			}		
+			}
 			if(OPCOESADICIONAIS.conectarwms === true){
 				ins += "<td><img "+estilo("conectarwms")+" onclick='i3GEO.arvoreDeTemas.dialogo.conectarwms()' title='"+$trad("a4")+"'/></td>";
 				t += 20;
@@ -1942,7 +1942,7 @@ i3GEO.arvoreDeTemas = {
 			{ins = "<select id='"+idCombo+"' size="+altura+" style=width:"+largura+"px onchange='"+funcaoOnchange+"("+idGrupo+","+idSubGrupo+",this.value)' ><option value='' >Escolha um tema:</option>";}
 			else
 			{ins = "<select id='"+idCombo+"' size="+altura+" style=width:"+largura+"px onchange='"+funcaoOnchange+"("+idGrupo+",\"\",this.value)' ><option value='' >Escolha um tema:</option>";}
-			
+
 			if(typeof(retorno.data) !== 'undefined')
 			{retorno = retorno.data.temas;}
 			sg = retorno.length;
@@ -2020,7 +2020,7 @@ i3GEO.arvoreDeTemas = {
 				"			<td>KML ou KMZ</td>" +
 				"		</tr>";
 			}
-			ins += "	</table>";			
+			ins += "	</table>";
 			$i(janela[2].id).innerHTML = ins;;
 		},
 		/*
@@ -2055,7 +2055,7 @@ i3GEO.arvoreDeTemas = {
 			ins = "" +
 			"	<p class=paragrafo style='width:90%' ><b>Tipo de conex&aatilde;o</b><br><br>" +
 			"	<table class=lista6 style=left:20px;position:relative >";
-			
+
 			if(OPCOESADICIONAIS.carregaKml === true){
 				ins += "<tr>" +
 				"			<td><input type=radio style=cursor:pointer name=i3GEOFtipoArquivoc onclick='i3GEO.arvoreDeTemas.dialogo.carregaKml()' /></td>" +
@@ -2085,8 +2085,8 @@ i3GEO.arvoreDeTemas = {
 				"			<td><input type=radio style=cursor:pointer name=i3GEOFtipoArquivoc onclick='i3GEO.arvoreDeTemas.dialogo.conectargeojson()' /></td>" +
 				"			<td>GeoJson</td>" +
 				"		</tr>";
-			}			
-			ins += "	</table>";			
+			}
+			ins += "	</table>";
 			$i(janela[2].id).innerHTML = ins;
 		},
 
@@ -2113,7 +2113,7 @@ i3GEO.arvoreDeTemas = {
 		*/
 		buscaInde: function(){
 			i3GEO.util.scriptTag(i3GEO.configura.locaplic+"/ferramentas/buscainde/index.js","i3GEOF.buscainde.criaJanelaFlutuante()","i3GEOF.buscainde_script");
-		},	
+		},
 		/*
 		Function: nuvemTags
 

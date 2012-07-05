@@ -30,7 +30,7 @@ Free Software Foundation, Inc., no endere&ccedil;o
 59 Temple Street, Suite 330, Boston, MA 02111-1307 USA.
 */
 if(typeof(i3GEO) === 'undefined'){
-	i3GEO = [];
+	var i3GEO = {};
 }
 /*
 Classe: i3GEO.analise
@@ -300,7 +300,7 @@ i3GEO.analise = {
 			janela.moveTo(imagemxy[0]+150,imagemxy[1]);
 			if(navm && i3GEO.Interface.ATUAL === "googleearth" ){
 				janela.moveTo(0,0);
-			}	
+			}
 			//
 			//botao que abre a ferramenta de calculo de perfis.
 			//pontosdistobj contem as coordenadas dos pontos
@@ -332,7 +332,7 @@ i3GEO.analise = {
 			if(janela){
 				YAHOO.i3GEO.janela.manager.remove(janela);
 				janela.destroy();
-			}			
+			}
 		},
 		/*
 		Function: clique
@@ -549,10 +549,10 @@ i3GEO.analise = {
 			}
 			else{
 				janela = YAHOO.i3GEO.janela.manager.find("mostraarea");
-			}			
+			}
 			janela.show();
 			imagemxy = i3GEO.util.pegaPosicaoObjeto($i(i3GEO.Interface.IDCORPO));
-			janela.moveTo(imagemxy[0]+150,imagemxy[1]);	
+			janela.moveTo(imagemxy[0]+150,imagemxy[1]);
 		},
 		/*
 		Function: fechaJanela
@@ -571,7 +571,7 @@ i3GEO.analise = {
 			if(janela){
 				YAHOO.i3GEO.janela.manager.remove(janela);
 				janela.destroy();
-			}			
+			}
 		},
 		/*
 		Function: clique
