@@ -87,7 +87,7 @@ i3GEOF.loginusuario = {
 		'<p class="paragrafo" >'+$trad("x28")+':<br>' +
 		'<input id=i3geosenha type=password style="width:250px;" value=""/><br>' +
 		'<p class="paragrafo" ><input id=i3GEOFloginusuario size=20  type=button value="'+$trad("x29")+'" />&nbsp;<input id=i3GEOFlogoutusuario size=20  type=button value="Logout" />' +
-		'<p class="paragrafo" onclick="i3GEOF.loginusuario.recuperarSenha()" style="cursor:pointer;color:blue;">'+$trad("x27")+'</p>';
+		'<p class="paragrafo" onclick="i3GEOF.loginusuario.recuperarSenha()" style="cursor:pointer;color:blue;">'+$trad("x32")+'</p>';
 		return ins;
 	},
 	/*
@@ -105,7 +105,7 @@ i3GEOF.loginusuario = {
 		titulo = "Login &nbsp;&nbsp;&nbsp;";
 		janela = i3GEO.janela.cria(
 			"260px",
-			"180px",
+			"200px",
 			"",
 			"",
 			"",

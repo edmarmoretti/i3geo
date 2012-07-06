@@ -225,6 +225,12 @@ function verificaFilhos()
 			if(count($r) > 0)
 				$res = true;
 		}
+		if($tabela == "i3geoadmin_usuarios")
+		{
+			$r = pegaDados("select * from ".$esquemaadmin."i3geoadmin_papelusuario where id_usuario=$id");
+			if(count($r) > 0)
+				$res = true;
+		}
 		if($tabela == "i3geoadmin_n1")
 		{
 			$r = pegaDados("select * from ".$esquemaadmin."i3geoadmin_n2 where id_n1=$id");

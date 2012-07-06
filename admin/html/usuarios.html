@@ -2,7 +2,7 @@
 <html>
 <head>
 <meta http-equiv="content-type" content="text/html; charset=ISO-8859-1">
-<title>Operacoes</title>
+<title>Usuarios</title>
 <style type="text/css">
 /*margin and padding on body element
           can introduce errors in determining
@@ -15,7 +15,7 @@ body {
 }
 </style>
 <script type="text/javascript" src="../js/core.js"></script>
-<script type="text/javascript" src="../js/operacoes.js"></script>
+<script type="text/javascript" src="../js/usuarios.js"></script>
 <link rel="stylesheet" type="text/css" href="admin.css">
 </head>
 <body class=" yui-skin-sam fundoPonto">
@@ -24,24 +24,20 @@ body {
 		<div class="mascaraPrincipal" id="divGeral">
 			<div id=cabecalhoPrincipal></div>
 			<h1>
-				Administra&ccedil;&atilde;o do i3geo - Opera&ccedil;&otilde;es <img
+				Administra&ccedil;&atilde;o do i3geo - Usu&aacute;rios <img
 					src="../imagens/04.png" style="cursor: pointer" id=botaoAjuda />
 			</h1>
 			<div id="formulario" style="display: none">
 				<div id="ajuda">
 					<div class="hd">Ajuda</div>
 					<div class="bd" style="height: 144px; overflow: auto">
-						<p>Aqui s&atilde;o definidas quais funcionalidades
-							ser&atilde;o controladas e quais pap&eacute;is podem
-							utiliz&aacute;-las
-						<p>Para que o controle funcione, o c&oacute;digo do i3Geo deve ser
-							modificado para que a valida&ccedil;&atilde;o seja realizada.
+						<p>Cada usu&aacute;rio pode possuir pap&eacute;is. Os pap&eacute;is s&atilde;o utilizados para definir as opera&ccedil;&otilde;es que podem ser executadas.
 					</div>
 					<div class="ft"></div>
 				</div>
 				<input onclick="adicionaLinha()" type=button id=adiciona
-					value="Adicionar funcionalidade" /> <br>
-				<p>Funcionalidades cadastradas:</p>
+					value="Adicionar usu&aacute;rio" /> <br>
+				<p>Usu&aacute;rios cadastrados:</p>
 				<div id="tabela" style="left: -5px;"></div>
 				<div id=logajax style="display: block"></div>
 			</div>
@@ -49,15 +45,13 @@ body {
 	</center>
 	<script>
 		/*
-		 Title: Editor das opera&ccedil;&otilde;es sob controle
-
-		 HTML da interface de administra&cceidl;&atilde;o do controle de acesso a funcionalidades
+		 Title: Cadastro de usuarios
 
 		 Veja tamb&eacute;m:
 
 		 <core.js>
 
-		 <operacoes.js>
+		 <usuarios.js>
 
 		 Licenca:
 
@@ -98,7 +92,7 @@ body {
 			document.getElementById("formulario").style.display = "block";
 			initMenu()
 		}
-		i3GEO.login.verificaOperacao("admin/html/operacoes",
+		i3GEO.login.verificaOperacao("admin/html/usuarios",
 				i3GEO.configura.locaplic, temp, "sessao");
 	</script>
 </body>

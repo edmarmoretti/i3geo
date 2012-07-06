@@ -28,6 +28,9 @@ Free Software Foundation, Inc., no endere&ccedil;o
 if(typeof(i3GEO) === 'undefined'){
 	var i3GEO = {};
 }
+if(typeof(i3GEOF) === 'undefined'){
+	var i3GEOF = {};
+}
 /*
 Classe: i3GEO.login
 
@@ -149,6 +152,7 @@ i3GEO.login = {
 			else{
 				if($i(i3GEO.login.divnomelogin)){
 					$i(i3GEO.login.divnomelogin).innerHTML = "";
+					i3GEO.login.anulaCookie();
 				}
 				if(funcaoErro && funcaoErro != "" && resultado === false){
 					funcaoErro.call();

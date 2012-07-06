@@ -1,8 +1,8 @@
 <?php
 /*
-Title: operacoes.php
+Title: usuarios.php
 
-Controle das requisi&ccedil;&otilde;es em Ajax utilizadas para gerenciar operacoes de usu&aacute;rio e controle de acesso
+Controle das requisi&ccedil;&otilde;es em Ajax utilizadas para gerenciar usu&aacute;rio e controle de acesso
 
 Recebe as requisi&ccedil;&otilde;es feitas em JavaScript (AJAX) e retorna o resultado para a interface.
 
@@ -32,7 +32,7 @@ Free Software Foundation, Inc., no endere&ccedil;o
 
 Arquivo:
 
-i3geo/classesphp/operacoes.php
+i3geo/classesphp/usuarios.php
 
 Parametros:
 
@@ -64,74 +64,82 @@ error_reporting(0);
 //
 include_once(__DIR__."/login.php");
 $funcoesEdicao = array(
-		"ALTERAROPERACOES",
-		"ADICIONAPAPELOPERACOES",
-		"EXCLUIRPAPELOPERACAO"
+		"ALTERARUSUARIOS",
+		"EXCLUIRUSUARIO"
 );
 if(in_array(strtoupper($funcao),$funcoesEdicao)){
-	if(verificaOperacaoSessao("admin/html/operacoes") == false){
+	if(verificaOperacaoSessao("admin/html/usuarios") == false){
 		retornaJSON("Vc nao pode realizar essa operacao.");exit;
 	}
 }
 switch (strtoupper($funcao))
 {
-	case "ALTERAROPERACOES":
-		$novo = alterarOperacoes();
-		$sql = "SELECT * from ".$esquemaadmin."i3geoadmin_operacoes WHERE id_operacao = ".$novo;
+	case "ALTERARUSUARIOS":
+		$novo = alterarUsuarios();
+		$sql = "SELECT * from ".$esquemaadmin."i3geoadmin_usuarios WHERE id_usuario = ".$novo;
 		retornaJSON(pegaDados($sql));
 		exit;
 	break;
-	case "PEGAOPERACOES":
-		retornaJSON(pegaDados("SELECT id_operacao,codigo,descricao from ".$esquemaadmin."i3geoadmin_operacoes order by codigo"));
+	case "PEGAUSUARIOS":
+		retornaJSON(pegaDados("SELECT id_usuario,ativo,data_cadastro,email,login,nome_usuario from ".$esquemaadmin."i3geoadmin_usuarios order by nome_usuario"));
 		exit;
 	break;
-	case "PEGAPAPEISOPERACAO":
-		$dados = pegaDados("SELECT P.id_papel, P.nome, P.descricao, OP.id_operacao FROM ".$esquemaadmin."i3geoadmin_operacoes AS O JOIN ".$esquemaadmin."i3geoadmin_operacoespapeis AS OP ON O.id_operacao = OP.id_operacao JOIN ".$esquemaadmin."i3geoadmin_papeis AS P ON OP.id_papel = P.id_papel WHERE O.id_operacao = $id_operacao");
-		$dados[] = array("id_papel"=>1,"nome"=>"admin","descricao"=>"admin");
+	case "PEGAPAPEISUSUARIO":
+		$dados = pegaDados("SELECT P.id_papel, P.nome, P.descricao, UP.id_usuario FROM ".$esquemaadmin."i3geoadmin_usuarios AS U JOIN ".$esquemaadmin."i3geoadmin_papelusuario AS UP ON U.id_usuario = UP.id_usuario JOIN ".$esquemaadmin."i3geoadmin_papeis AS P ON UP.id_papel = P.id_papel WHERE U.id_usuario = $id_usuario");
 		retornaJSON($dados);
 		exit;
 	break;
-	case "PEGADADOSOPERACAO":
-		retornaJSON(pegaDados("SELECT * from ".$esquemaadmin."i3geoadmin_operacoes WHERE id_operacao = $id_operacao"));
+	case "PEGADADOSUSUARIO":
+		retornaJSON(pegaDados("SELECT * from ".$esquemaadmin."i3geoadmin_usuarios WHERE id_usuario = $id_usuario"));
 		exit;
 	break;
-	case "ADICIONAPAPELOPERACOES":
-		adicionaPapelOperacoes();
-		$dados = pegaDados("SELECT P.id_papel, P.nome, P.descricao, OP.id_operacao FROM ".$esquemaadmin."i3geoadmin_operacoes AS O JOIN ".$esquemaadmin."i3geoadmin_operacoespapeis AS OP ON O.id_operacao = OP.id_operacao JOIN ".$esquemaadmin."i3geoadmin_papeis AS P ON OP.id_papel = P.id_papel WHERE O.id_operacao = $id_operacao AND P.id_papel = $id_papel");
+	case "EXCLUIRUSUARIO":
+		$tabela = "i3geoadmin_usuarios";
+		$id = $id_usuario;
+		$f = verificaFilhos();
+		if(!$f){
+			excluirUsuario();
+			retornaJSON("ok");
+		}
+		else
+			retornaJSON("erro");
+		exit;
+	break;
+	case "ADICIONAPAPELUSUARIO":
+		adicionaPapelUsuario();
+		$dados = pegaDados("SELECT P.id_papel, P.nome, P.descricao, UP.id_usuario FROM ".$esquemaadmin."i3geoadmin_usuarios AS U JOIN ".$esquemaadmin."i3geoadmin_papelusuario AS UP ON U.id_usuario = UP.id_usuario JOIN ".$esquemaadmin."i3geoadmin_papeis AS P ON UP.id_papel = P.id_papel WHERE U.id_usuario = $id_usuario");
 		retornaJSON($dados);
 		exit;
 	break;
-	case "EXCLUIRPAPELOPERACAO":
-		excluirPapelOperacao();
-		retornaJSON("ok");
-		exit;
-		break;
+	case "EXCLUIRPAPELUSUARIO":
+		retornaJSON(excluirPapelUsuario());
+	break;
 	case "LISTAPAPEIS":
 		retornaJSON(pegaDados("SELECT * from ".$esquemaadmin."i3geoadmin_papeis order by nome"));
 		exit;
 	break;
 }
 cpjson($retorno);
-function alterarOperacoes()
+function alterarUsuarios()
 {
-	global $id_operacao,$codigo,$descricao;
+	global $id_usuario,$ativo,$data_cadastro,$email,$login,$nome_usuario,$senha;
 	try
 	{
 		include(__DIR__."/conexao.php");
 		if($convUTF){
-			$descricao = utf8_encode($descricao);
+			$nome_usuario = utf8_encode($nome_usuario);
 		}
-		if($id_operacao != ""){
-			$dbhw->query("UPDATE ".$esquemaadmin."i3geoadmin_operacoes SET codigo='$codigo',descricao='$descricao' WHERE id_operacao = $id_operacao");
-			$retorna = $id_operacao;
+		if($id_usuario != ""){
+			$dbhw->query("UPDATE ".$esquemaadmin."i3geoadmin_usuarios SET senha='$senha',nome_usuario='$nome_usuario',login='$login',email='$email',ativo=$ativo,data_cadastro='$data_cadastro' WHERE id_usuario = $id_usuario");
+			$retorna = $id_usuario;
 		}
 		else{
 			$idtemp = (rand (9000,10000)) * -1;
-			$dbhw->query("INSERT INTO ".$esquemaadmin."i3geoadmin_operacoes (codigo,descricao) VALUES ('','$idtemp')");
-			$id = $dbh->query("SELECT id_operacao FROM ".$esquemaadmin."i3geoadmin_operacoes WHERE descricao = '$idtemp'");
+			$dbhw->query("INSERT INTO ".$esquemaadmin."i3geoadmin_usuarios (senha,ativo) VALUES ('$idtemp',0)");
+			$id = $dbh->query("SELECT id_usuario FROM ".$esquemaadmin."i3geoadmin_usuarios WHERE senha = '$idtemp'");
 			$id = $id->fetchAll();
-			$id = $id[0]['id_operacao'];
-			$dbhw->query("UPDATE ".$esquemaadmin."i3geoadmin_operacoes SET descricao = '' WHERE id_operacao = $id AND descricao = '$idtemp'");
+			$id = $id[0]['id_usuario'];
+			//$dbhw->query("UPDATE ".$esquemaadmin."i3geoadmin_usuarios SET nome_usuario = '' WHERE id_usuario = $id AND nome_usuario = '$idtemp'");
 			$retorna = $id;
 		}
 		$dbhw = null;
@@ -142,12 +150,12 @@ function alterarOperacoes()
 		return "Error!: " . $e->getMessage();
 	}
 }
-function adicionaPapelOperacoes(){
-	global $id_operacao,$id_papel;
+function adicionaPapelUsuario(){
+	global $id_usuario,$id_papel;
 	try
 	{
 		include(__DIR__."/conexao.php");
-		$dbhw->query("INSERT INTO ".$esquemaadmin."i3geoadmin_operacoespapeis (id_operacao,id_papel) VALUES ($id_operacao,$id_papel)");
+		$dbhw->query("INSERT INTO ".$esquemaadmin."i3geoadmin_papelusuario (id_usuario,id_papel) VALUES ($id_usuario,$id_papel)");
 		$dbhw = null;
 		$dbh = null;
 		return "ok";
@@ -156,17 +164,37 @@ function adicionaPapelOperacoes(){
 		return "Error!: " . $e->getMessage();
 	}
 }
-function excluirPapelOperacao(){
-	global $id_operacao,$id_papel;
+function excluirUsuario()
+{
+	global $id_usuario;
 	try
 	{
 		include(__DIR__."/conexao.php");
-		$dbhw->query("DELETE from ".$esquemaadmin."i3geoadmin_operacoespapeis WHERE id_operacao = $id_operacao AND id_papel = $id_papel");
+		//echo "DELETE from ".$esquemaadmin."i3geoadmin_usuarios WHERE id_usuario = $id_usuario";exit;
+		$dbhw->query("DELETE FROM ".$esquemaadmin."i3geoadmin_usuarios WHERE id_usuario = $id_usuario ");
 		$dbhw = null;
 		$dbh = null;
 		return "ok";
 	}
-	catch (PDOException $e){
+	catch (PDOException $e)
+	{
+		return "Error!: " . $e->getMessage();
+	}
+}
+function excluirPapelUsuario()
+{
+	global $id_usuario,$id_papel;
+	try
+	{
+		include(__DIR__."/conexao.php");
+		//echo "DELETE from ".$esquemaadmin."i3geoadmin_usuarios WHERE id_usuario = $id_usuario";exit;
+		$dbhw->query("DELETE FROM ".$esquemaadmin."i3geoadmin_papelusuario WHERE id_usuario = $id_usuario AND id_papel = $id_papel ");
+		$dbhw = null;
+		$dbh = null;
+		return "ok";
+	}
+	catch (PDOException $e)
+	{
 		return "Error!: " . $e->getMessage();
 	}
 }
