@@ -164,6 +164,7 @@ function adicionaNosUsuarios(dados,redesenha){
 	for (var i=0, j=dados.length; i<j; i++){
 		var conteudo = "&nbsp;<img style=\"position:relative;cursor:pointer;top:0px\" onclick=\"excluir('usuario','"+dados[i].id_usuario+"')\" title=excluir width='10px' heigth='10px' src=\"../imagens/01.png\" />";
 		conteudo += "&nbsp;<img style=\"position:relative;cursor:pointer;top:2px\" onclick=\"editar('usuario','"+dados[i].id_usuario+"')\" title=editar src=\"../imagens/06.png\" /><b>";
+		conteudo += "&nbsp;<img style=\"position:relative;cursor:pointer;top:2px;width:25px;\" onclick=\"emailsenha('"+dados[i].id_usuario+"')\" title='enviar senha' src=\"../imagens/07.png\" /><b>";
 		if(dados[i].nome_usuario && dados[i].nome_usuario != "")
 		{conteudo += "&nbsp;<span>"+dados[i].nome_usuario+" - "+dados[i].login+" ativo: "+dados[i].ativo+"</span>";}
 		else
@@ -277,6 +278,34 @@ function excluir(tipo,id_usuario,id_papel)
 	}
 	if(sUrl)
 	{core_excluiNoTree(sUrl,no,mensagem);}
+}
+/*
+Function: emailsenha
+
+Enviar senha por email
+*/
+function emailsenha(id_usuario)
+{
+	var callback = {
+  		success:function(o){
+  			try	{
+  				if(YAHOO.lang.JSON.parse(o.responseText) == "erro")	{
+  					core_carregando("<span style=color:red >N&atilde;o foi poss&iacute;vel enviar");
+  					setTimeout("core_carregando('desativa')",3000);
+  				}
+  				else{
+  					core_carregando("desativa");
+  				}
+  			}
+  			catch(e){core_handleFailure(e,o.responseText);}
+  		},
+  		failure:core_handleFailure,
+  		argument: { foo:"foo", bar:"bar" }
+	};
+	core_carregando("ativa");
+	core_carregando("Enviando e-mail");
+	var sUrl = "../php/usuarios.php?funcao=enviarSenhaEmail&id_usuario="+id_usuario;
+	core_makeRequest(sUrl,callback,'POST');
 }
 /*
 Function: gravaDados

@@ -118,8 +118,27 @@ switch (strtoupper($funcao))
 		retornaJSON(pegaDados("SELECT * from ".$esquemaadmin."i3geoadmin_papeis order by nome"));
 		exit;
 	break;
+	case "ENVIARSENHAEMAIL":
+		retornaJSON(enviarSenhaEmail());
+		exit;
+	break;
 }
 cpjson($retorno);
+function enviarSenhaEmail(){
+	global $id_usuario;
+	include(__DIR__."/conexao.php");
+	$dados = pegaDados("select * from ".$esquemaadmin."i3GEOadmin_usuarios where id_usuario = $id_usuario and ativo = 1");
+	if(count($dados) > 0){
+		$to      = $dados[0]["email"];
+		$subject = 'senha i3geo';
+		$message = $dados[0]["senha"];
+		mail($to, $subject, $message);
+		return "Ok";
+	}
+	else{
+		return "erro";
+	}
+}
 function alterarUsuarios()
 {
 	global $id_usuario,$ativo,$data_cadastro,$email,$login,$nome_usuario,$senha;
