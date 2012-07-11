@@ -50,6 +50,31 @@ i3GEOF.carregakml = {
 	*/
 	aguarde: "",
 	/*
+		Para efeitos de compatibilidade antes da vers&atilde;o 4.7 que não tinha dicion&aacute;rio
+	*/
+	criaJanelaFlutuante: function(){
+		i3GEOF.carregakml.iniciaDicionario();
+	},
+	/*
+	Function: iniciaDicionario
+	
+	Carrega o dicion&aacute;rio e chama a fun&ccedil;&atilde;o que inicia a ferramenta
+	
+	O Javascript &eacute; carregado com o id i3GEOF.nomedaferramenta.dicionario_script
+	*/	
+	iniciaDicionario: function(){
+		if(typeof(i3GEOF.carregakml.dicionario) === 'undefined'){
+			i3GEO.util.scriptTag(
+				i3GEO.configura.locaplic+"/ferramentas/carregakml/dicionario.js",
+				"i3GEOF.carregakml.iniciaJanelaFlutuante()",
+				"i3GEOF.carregakml.dicionario_script"
+			);
+		}
+		else{
+			i3GEOF.carregakml.iniciaJanelaFlutuante();
+		}
+	},	
+	/*
 	Function: inicia
 	
 	Inicia a ferramenta. &Eacute; chamado por criaJanelaFlutuante
@@ -101,11 +126,11 @@ i3GEOF.carregakml = {
 		return ins;		
 	},
 	/*
-	Function: criaJanelaFlutuante
+	Function: iniciaJanelaFlutuante
 	
 	Cria a janela flutuante para controle da ferramenta.
 	*/	
-	criaJanelaFlutuante: function(){
+	iniciaJanelaFlutuante: function(){
 		var minimiza,cabecalho,janela,divid,titulo;
 		//cria a janela flutuante
 		cabecalho = function(){

@@ -44,6 +44,31 @@ Classe: i3GEOF.converteKml
 */
 i3GEOF.converteKml = {
 	/*
+		Para efeitos de compatibilidade antes da vers&atilde;o 4.7 que não tinha dicion&aacute;rio
+	*/
+	criaJanelaFlutuante: function(tema,tipo){
+		i3GEOF.converteKml.iniciaDicionario(tema,tipo);
+	},
+	/*
+	Function: iniciaDicionario
+	
+	Carrega o dicion&aacute;rio e chama a fun&ccedil;&atilde;o que inicia a ferramenta
+	
+	O Javascript &eacute; carregado com o id i3GEOF.nomedaferramenta.dicionario_script
+	*/	
+	iniciaDicionario: function(tema,tipo){
+		if(typeof(i3GEOF.converteKml.dicionario) === 'undefined'){
+			i3GEO.util.scriptTag(
+				i3GEO.configura.locaplic+"/ferramentas/convertekml/dicionario.js",
+				"i3GEOF.converteKml.iniciaJanelaFlutuante('"+tema+"','"+tipo+")",
+				"i3GEOF.converteKml.dicionario_script"
+			);
+		}
+		else{
+			i3GEOF.converteKml.iniciaJanelaFlutuante(tema,tipo);
+		}
+	},	
+	/*
 	Function: html
 	
 	Gera o c&oacute;digo html para apresenta&ccedil;ão das op&ccedil;&otilde;es da ferramenta
@@ -72,7 +97,7 @@ i3GEOF.converteKml = {
 		$i(divid).innerHTML += ins;
 	},
 	/*
-	Function: criaJanelaFlutuante
+	Function: iniciaJanelaFlutuante
 	
 	Cria a janela flutuante para controle da ferramenta.
 	
@@ -82,7 +107,7 @@ i3GEOF.converteKml = {
 	
 	tipo {String} - kml|kmz "kml" gera um link para acesso a um WMS e "kmz" gera um link que permite o acesso a um WMS e ao arquivo kmz vetorial
 	*/	
-	criaJanelaFlutuante: function(tema,tipo){
+	iniciaJanelaFlutuante: function(tema,tipo){
 		var janela,divid,titulo;
 		cabecalho = function(){};
 		minimiza = function(){

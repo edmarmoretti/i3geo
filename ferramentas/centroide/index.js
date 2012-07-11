@@ -49,6 +49,31 @@ i3GEOF.centroide = {
 	*/
 	aguarde: "",
 	/*
+		Para efeitos de compatibilidade antes da vers&atilde;o 4.7 que não tinha dicion&aacute;rio
+	*/
+	criaJanelaFlutuante: function(){
+		i3GEOF.centroide.iniciaDicionario();
+	},
+	/*
+	Function: iniciaDicionario
+	
+	Carrega o dicion&aacute;rio e chama a fun&ccedil;&atilde;o que inicia a ferramenta
+	
+	O Javascript &eacute; carregado com o id i3GEOF.nomedaferramenta.dicionario_script
+	*/	
+	iniciaDicionario: function(){
+		if(typeof(i3GEOF.centroide.dicionario) === 'undefined'){
+			i3GEO.util.scriptTag(
+				i3GEO.configura.locaplic+"/ferramentas/centroide/dicionario.js",
+				"i3GEOF.centroide.iniciaJanelaFlutuante()",
+				"i3GEOF.centroide.dicionario_script"
+			);
+		}
+		else{
+			i3GEOF.centroide.iniciaJanelaFlutuante();
+		}
+	},	
+	/*
 	Function: inicia
 	
 	Inicia a ferramenta. &Eacute; chamado por criaJanelaFlutuante
@@ -82,11 +107,11 @@ i3GEOF.centroide = {
 		return ins;
 	},
 	/*
-	Function: criaJanelaFlutuante
+	Function: iniciaJanelaFlutuante
 	
 	Cria a janela flutuante para controle da ferramenta.
 	*/	
-	criaJanelaFlutuante: function(){
+	iniciaJanelaFlutuante: function(){
 		var minimiza,cabecalho,janela,divid,temp,titulo;
 		//cria a janela flutuante
 		titulo = "Centr&oacute;ide <a class=ajuda_usuario target=_blank href='" + i3GEO.configura.locaplic + "/ajuda_usuario.php?idcategoria=3&idajuda=21' >&nbsp;&nbsp;&nbsp;</a>";

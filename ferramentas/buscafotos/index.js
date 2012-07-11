@@ -57,6 +57,31 @@ i3GEOF.buscaFotos = {
 	*/
 	chaveFlicker: "b170cde3c3064ca44b1ae0fbe747575d",
 	/*
+		Para efeitos de compatibilidade antes da vers&atilde;o 4.7 que não tinha dicion&aacute;rio
+	*/
+	criaJanelaFlutuante: function(){
+		i3GEOF.buscaFotos.iniciaDicionario();
+	},
+	/*
+	Function: iniciaDicionario
+	
+	Carrega o dicion&aacute;rio e chama a fun&ccedil;&atilde;o que inicia a ferramenta
+	
+	O Javascript &eacute; carregado com o id i3GEOF.nomedaferramenta.dicionario_script
+	*/	
+	iniciaDicionario: function(){
+		if(typeof(i3GEOF.buscaFotos.dicionario) === 'undefined'){
+			i3GEO.util.scriptTag(
+				i3GEO.configura.locaplic+"/ferramentas/buscafotos/dicionario.js",
+				"i3GEOF.buscaFotos.iniciaJanelaFlutuante()",
+				"i3GEOF.buscaFotos.dicionario_script"
+			);
+		}
+		else{
+			i3GEOF.buscaFotos.iniciaJanelaFlutuante();
+		}
+	},		
+	/*
 	Function: inicia
 	
 	Inicia a ferramenta. &Eacute; chamado por criaJanelaFlutuante
@@ -138,11 +163,11 @@ i3GEOF.buscaFotos = {
 		return ins;
 	},
 	/*
-	Function: criaJanelaFlutuante
+	Function: iniciaJanelaFlutuante
 	
 	Cria a janela flutuante para controle da ferramenta.
 	*/	
-	criaJanelaFlutuante: function(){
+	iniciaJanelaFlutuante: function(){
 		var minimiza,cabecalho,janela,divid,temp,titulo;
 		//funcao que sera executada ao ser clicado no cabe&ccedil;alho da janela
 		cabecalho = function(){

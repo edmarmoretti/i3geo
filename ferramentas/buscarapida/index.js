@@ -197,7 +197,7 @@ i3GEObuscaRapida = {
 				ins += "</table>";
 			}
 		}
-		catch(e){ins = "Nada encontrado nos temas ou nenhum tema permite busca.<br>";}
+		catch(e){ins = $trad("x41")+"<br>";}
 		$i("resultadoTemas").style.display = "block";
 		$i("resultadoTemas").innerHTML = ins;
 		try{aguarde("none");}catch(e){}
@@ -215,7 +215,7 @@ i3GEObuscaRapida = {
 	*/
 	montaResultado: function(retorno){
 		var i,j,layer,
-			ins = "Nada encontrado em "+i3GEObuscaRapida.servicowms+"<br>";
+			ins = $trad("x42")+" "+i3GEObuscaRapida.servicowms+"<br>";
 		try{
 			if(retorno.data){
 				if (retorno.data.geonames){
@@ -238,7 +238,7 @@ i3GEObuscaRapida = {
 				ins += "</table>";
 			}
 		}
-		catch(e){ins = "Erro ao acessar o servi&ccedil;o "+i3GEObuscaRapida.servico+"<br>";}
+		catch(e){ins = $trad("x43")+" "+i3GEObuscaRapida.servico+"<br>";}
 		$i(i3GEObuscaRapida.idresultado).style.display = "block";
 		$i(i3GEObuscaRapida.idresultado).innerHTML = ins;
 		try{aguarde("none");}
@@ -281,7 +281,7 @@ i3GEObuscaRapida = {
 				}
 			}
 		}
-		if (ins != ""){	$i(i3GEObuscaRapida.idresultado).innerHTML += "<br><b>Temas:</b><br>"+ins;}
+		if (ins != ""){	$i(i3GEObuscaRapida.idresultado).innerHTML += "<br><b>"+$trad("a7")+":</b><br>"+ins;}
 	},
 	/*
 	Function: zoom
@@ -314,7 +314,7 @@ i3GEObuscaRapida = {
 		};
 		var ext = i3GEO.util.wkt2ext(wkt,"polygon");
 		if(ext == false){alert("wkt invalido");return;}
-		try{window.parent.i3GEO.janela.abreAguarde("i3GEO.atualiza","Aguarde...");}catch(e){if(typeof(console) !== 'undefined'){console.error(e);}}
+		try{window.parent.i3GEO.janela.abreAguarde("i3GEO.atualiza",$trad("o1"));}catch(e){if(typeof(console) !== 'undefined'){console.error(e);}}
 		i3GEO.php.mudaext(adicionaCamada(layer,gid,nm,ext),window.parent.i3GEO.configura.tipoimagem,ext,i3GEObuscaRapida.locaplic,window.parent.i3GEO.configura.sid);
 	},
 	zoomExt: function(ext){
@@ -346,7 +346,7 @@ i3GEObuscaRapida = {
 	adicionatema:function(obj){
 		if (obj.checked)
 		{
-			window.parent.i3GEO.janela.abreAguarde("i3GEO.atualiza","Aguarde...");
+			window.parent.i3GEO.janela.abreAguarde("i3GEO.atualiza",$trad("o1"));
 			var temp = function()
 			{window.parent.i3GEO.atualiza("");};
 			i3GEO.php.adtema(temp,obj.value,i3GEObuscaRapida.locaplic,window.parent.i3GEO.configura.sid);

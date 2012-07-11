@@ -51,6 +51,31 @@ i3GEOF.aplicarsld = {
 	*/
 	aguarde: "",
 	/*
+		Para efeitos de compatibilidade antes da vers&atilde;o 4.7 que não tinha dicion&aacute;rio
+	*/
+	criaJanelaFlutuante: function(){
+		i3GEOF.aplicarsld.iniciaDicionario();
+	},
+	/*
+	Function: iniciaDicionario
+	
+	Carrega o dicion&aacute;rio e chama a fun&ccedil;&atilde;o que inicia a ferramenta
+	
+	O Javascript &eacute; carregado com o id i3GEOF.nomedaferramenta.dicionario_script
+	*/	
+	iniciaDicionario: function(){
+		if(typeof(i3GEOF.aplicarsld.dicionario) === 'undefined'){
+			i3GEO.util.scriptTag(
+				i3GEO.configura.locaplic+"/ferramentas/aplicarsld/dicionario.js",
+				"i3GEOF.aplicarsld.iniciaJanelaFlutuante()",
+				"i3GEOF.aplicarsld.dicionario_script"
+			);
+		}
+		else{
+			i3GEOF.aplicarsld.iniciaJanelaFlutuante();
+		}
+	},
+	/*
 	Function: inicia
 	
 	Inicia a ferramenta. &Eacute; chamado por criaJanelaFlutuante
@@ -89,11 +114,11 @@ i3GEOF.aplicarsld = {
 		return ins;
 	},
 	/*
-	Function: criaJanelaFlutuante
+	Function: iniciaJanelaFlutuante
 	
 	Cria a janela flutuante para controle da ferramenta.
 	*/	
-	criaJanelaFlutuante: function(){
+	iniciaJanelaFlutuante: function(){
 		var janela,divid,titulo,cabecalho,minimiza;
 		cabecalho = function(){};
 		minimiza = function(){

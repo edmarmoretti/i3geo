@@ -50,6 +50,31 @@ i3GEOF.converteMapaWS = {
 	*/
 	aguarde: "",
 	/*
+		Para efeitos de compatibilidade antes da vers&atilde;o 4.7 que não tinha dicion&aacute;rio
+	*/
+	criaJanelaFlutuante: function(){
+		i3GEOF.carregaMapa.iniciaDicionario();
+	},
+	/*
+	Function: iniciaDicionario
+	
+	Carrega o dicion&aacute;rio e chama a fun&ccedil;&atilde;o que inicia a ferramenta
+	
+	O Javascript &eacute; carregado com o id i3GEOF.nomedaferramenta.dicionario_script
+	*/	
+	iniciaDicionario: function(){
+		if(typeof(i3GEOF.converteMapaWS.dicionario) === 'undefined'){
+			i3GEO.util.scriptTag(
+				i3GEO.configura.locaplic+"/ferramentas/convertews/dicionario.js",
+				"i3GEOF.converteMapaWS.iniciaJanelaFlutuante()",
+				"i3GEOF.converteMapaWS.dicionario_script"
+			);
+		}
+		else{
+			i3GEOF.converteMapaWS.iniciaJanelaFlutuante();
+		}
+	},	
+	/*
 	Function: html
 	
 	Gera o c&oacute;digo html para apresenta&ccedil;ão das op&ccedil;&otilde;es da ferramenta
@@ -74,7 +99,7 @@ i3GEOF.converteMapaWS = {
 		}catch(e){alert(e);i3GEOF.converteMapaWS.aguarde.visibility = "hidden";}
 	},
 	/*
-	Function: criaJanelaFlutuante
+	Function: iniciaJanelaFlutuante
 	
 	Cria a janela flutuante para controle da ferramenta.
 	
@@ -82,7 +107,7 @@ i3GEOF.converteMapaWS = {
 	
 	<CONVERTEWMSWMC>
 	*/	
-	criaJanelaFlutuante: function(){
+	iniciaJanelaFlutuante: function(){
 		var janela,divid,temp,titulo,p,cp;
 		cabecalho = function(){};
 		minimiza = function(){

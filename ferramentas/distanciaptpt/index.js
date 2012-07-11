@@ -51,6 +51,31 @@ i3GEOF.distanciaptpt = {
 	*/
 	aguarde: "",
 	/*
+		Para efeitos de compatibilidade antes da vers&atilde;o 4.7 que não tinha dicion&aacute;rio
+	*/
+	criaJanelaFlutuante: function(){
+		i3GEOF.distanciaptpt.iniciaDicionario();
+	},
+	/*
+	Function: iniciaDicionario
+	
+	Carrega o dicion&aacute;rio e chama a fun&ccedil;&atilde;o que inicia a ferramenta
+	
+	O Javascript &eacute; carregado com o id i3GEOF.nomedaferramenta.dicionario_script
+	*/	
+	iniciaDicionario: function(){
+		if(typeof(i3GEOF.distanciaptpt.dicionario) === 'undefined'){
+			i3GEO.util.scriptTag(
+				i3GEO.configura.locaplic+"/ferramentas/distanciaptpt/dicionario.js",
+				"i3GEOF.distanciaptpt.iniciaJanelaFlutuante()",
+				"i3GEOF.distanciaptpt.dicionario_script"
+			);
+		}
+		else{
+			i3GEOF.distanciaptpt.iniciaJanelaFlutuante();
+		}
+	},	
+	/*
 	Function: inicia
 	
 	Inicia a ferramenta. &Eacute; chamado por criaJanelaFlutuante
@@ -84,11 +109,11 @@ i3GEOF.distanciaptpt = {
 		return ins;
 	},
 	/*
-	Function: criaJanelaFlutuante
+	Function: iniciaJanelaFlutuante
 	
 	Cria a janela flutuante para controle da ferramenta.
 	*/	
-	criaJanelaFlutuante: function(){
+	iniciaJanelaFlutuante: function(){
 		var minimiza,cabecalho,janela,divid,temp,titulo;
 		//cria a janela flutuante
 		titulo = "Dist&acirc;ncia entre pontos <a class=ajuda_usuario target=_blank href='" + i3GEO.configura.locaplic + "/ajuda_usuario.php?idcategoria=3&idajuda=17' >&nbsp;&nbsp;&nbsp;</a>";

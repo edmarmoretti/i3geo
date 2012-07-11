@@ -51,6 +51,31 @@ i3GEOF.animacao = {
 	aguarde: "",
 	tempo: 1000,
 	/*
+		Para efeitos de compatibilidade antes da vers&atilde;o 4.7 que não tinha dicion&aacute;rio
+	*/
+	criaJanelaFlutuante: function(){
+		i3GEOF.animacao.iniciaDicionario();
+	},
+	/*
+	Function: iniciaDicionario
+	
+	Carrega o dicion&aacute;rio e chama a fun&ccedil;&atilde;o que inicia a ferramenta
+	
+	O Javascript &eacute; carregado com o id i3GEOF.nomedaferramenta.dicionario_script
+	*/	
+	iniciaDicionario: function(){
+		if(typeof(i3GEOF.animacao.dicionario) === 'undefined'){
+			i3GEO.util.scriptTag(
+				i3GEO.configura.locaplic+"/ferramentas/animacao/dicionario.js",
+				"i3GEOF.animacao.iniciaJanelaFlutuante()",
+				"i3GEOF.animacao.dicionario_script"
+			);
+		}
+		else{
+			i3GEOF.animacao.iniciaJanelaFlutuante();
+		}
+	},	
+	/*
 	Function: inicia
 	
 	Inicia a ferramenta. &Eacute; chamado por criaJanelaFlutuante
@@ -99,11 +124,11 @@ i3GEOF.animacao = {
 		return ins;
 	},
 	/*
-	Function: criaJanelaFlutuante
+	Function: iniciaJanelaFlutuante
 	
 	Cria a janela flutuante para controle da ferramenta.
 	*/	
-	criaJanelaFlutuante: function(){
+	iniciaJanelaFlutuante: function(){
 		var janela,divid,temp,titulo,cabecalho,minimiza;
 		cabecalho = function(){};
 		minimiza = function(){

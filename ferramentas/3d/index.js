@@ -68,7 +68,31 @@ i3GEOF.t3d = {
 	{3dmap.map}
 	*/
 	dmap: "3dmap.map",
-
+	/*
+		Para efeitos de compatibilidade antes da vers&atilde;o 4.7 que não tinha dicion&aacute;rio
+	*/
+	criaJanelaFlutuante: function(){
+		i3GEOF.t3d.iniciaDicionario();
+	},
+	/*
+	Function: iniciaDicionario
+	
+	Carrega o dicion&aacute;rio e chama a fun&ccedil;&atilde;o que inicia a ferramenta
+	
+	O Javascript &eacute; carregado com o id i3GEOF.nomedaferramenta.dicionario_script
+	*/	
+	iniciaDicionario: function(){
+		if(typeof(i3GEOF.t3d.dicionario) === 'undefined'){
+			i3GEO.util.scriptTag(
+				i3GEO.configura.locaplic+"/ferramentas/3d/dicionario.js",
+				"i3GEOF.t3d.iniciaJanelaFlutuante()",
+				"i3GEOF.t3d.dicionario_script"
+			);
+		}
+		else{
+			i3GEOF.t3d.iniciaJanelaFlutuante();
+		}
+	},	
 	/*
 	Function: inicia
 	
@@ -106,7 +130,7 @@ i3GEOF.t3d = {
 	
 	Cria a janela flutuante para controle da ferramenta.
 	*/	
-	criaJanelaFlutuante: function(){
+	iniciaJanelaFlutuante: function(){
 		var minimiza,cabecalho,janela,divid,temp,titulo;
 		//cria a janela flutuante
 		titulo = "3d <a class=ajuda_usuario target=_blank href='" + i3GEO.configura.locaplic + "/ajuda_usuario.php?idcategoria=7&idajuda=69' >&nbsp;&nbsp;&nbsp;</a>";

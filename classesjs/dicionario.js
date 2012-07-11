@@ -1761,6 +1761,90 @@ it:""
 }],
 "x33":[
 {
+pt:"Escolha um tema da lista",
+en:"",
+es:"",
+it:""
+}],
+"x34":[
+{
+pt:"Lugar",
+en:"",
+es:"",
+it:""
+}],
+"x35":[
+{
+pt:"Escolha um tipo de busca nas propriedades",
+en:"",
+es:"",
+it:""
+}],
+"x36":[
+{
+pt:"Digite uma palavra para busca!",
+en:"",
+es:"",
+it:""
+}],
+"x37":[
+{
+pt:"Onde ser&aacute; feita a busca",
+en:"",
+es:"",
+it:""
+}],
+"x38":[
+{
+pt:"Servi&ccedil;os de busca externos",
+en:"",
+es:"",
+it:""
+}],
+"x39":[
+{
+pt:"Temas existentes no mapa",
+en:"",
+es:"",
+it:""
+}],
+"x40":[
+{
+pt:"Apenas os temas especialmente configurados pelo administrador do i3Geo podem receber opera&ccedil;&otilde;es de busca",
+en:"",
+es:"",
+it:""
+}],
+"x41":[
+{
+pt:"Nada encontrado nos temas ou nenhum tema permite busca",
+en:"",
+es:"",
+it:""
+}],
+"x42":[
+{
+pt:"Nada encontrado em ",
+en:"",
+es:"",
+it:""
+}],
+"x43":[
+{
+pt:"Erro ao acessar o servi&ccedil;o",
+en:"",
+es:"",
+it:""
+}],
+"x44":[
+{
+pt:"",
+en:"",
+es:"",
+it:""
+}],
+"x45":[
+{
 pt:"",
 en:"",
 es:"",

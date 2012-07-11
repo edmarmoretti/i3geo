@@ -95,7 +95,7 @@ i3GEO.idioma = {
 	/*
 	Propriedade: DICIONARIO
 
-	Objeto contendo o dicion&aacute;rio utilizado
+	Objeto contendo o dicion&aacute;rio default utilizado
 
 	Tipo:
 	{object} - veja <dicionario.js>
@@ -178,15 +178,24 @@ i3GEO.idioma = {
 	Parametro:
 
 	id - {String} C&oacute;digo do texto.
+		
+	dic - {string} Objeto que cont&eacute;m o dicion&aacute;. Por default, utiliza i3GEO.idioma.DICIONARIO	
 
 	Returns:
 
 	{String} Texto traduzido.
 	*/
-	traduzir: function(id) {
-		if(i3GEO.idioma.DICIONARIO[id]){
-			var t = i3GEO.idioma.DICIONARIO[id][0];
-			return t[i3GEO.idioma.ATUAL];
+	traduzir: function(id,dic) {
+		if(!dic){
+			dic = i3GEO.idioma.DICIONARIO;
+		}
+		if(dic[id]){
+			var r,t = dic[id][0];
+			r = t[i3GEO.idioma.ATUAL];
+			if(r == ""){
+				r = t["pt"];
+			}
+			return r;
 		}
 		else
 		{return;}
@@ -328,12 +337,18 @@ Parametro:
 
 id - {String} C&oacute;digo do texto.
 
+dic - {string} Objeto que cont&eacute;m o dicion&aacute;. Por default, utiliza i3GEO.idioma.DICIONARIO
+
 Returns:
 
 {String} Texto traduzido.
 */
-$trad = function(id)
-{return (i3GEO.idioma.traduzir(id));};
+$trad = function(id,dic){
+	if(!dic){
+		dic = i3GEO.idioma.DICIONARIO;
+	}
+	return (i3GEO.idioma.traduzir(id,dic));
+};
 //
 (function(){
 	try {

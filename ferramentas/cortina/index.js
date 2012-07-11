@@ -67,6 +67,31 @@ i3GEOF.cortina = {
 	*/
 	janela: "",
 	/*
+		Para efeitos de compatibilidade antes da vers&atilde;o 4.7 que não tinha dicion&aacute;rio
+	*/
+	criaJanelaFlutuante: function(){
+		i3GEOF.cortina.iniciaDicionario();
+	},
+	/*
+	Function: iniciaDicionario
+	
+	Carrega o dicion&aacute;rio e chama a fun&ccedil;&atilde;o que inicia a ferramenta
+	
+	O Javascript &eacute; carregado com o id i3GEOF.nomedaferramenta.dicionario_script
+	*/	
+	iniciaDicionario: function(){
+		if(typeof(i3GEOF.cortina.dicionario) === 'undefined'){
+			i3GEO.util.scriptTag(
+				i3GEO.configura.locaplic+"/ferramentas/cortina/dicionario.js",
+				"i3GEOF.cortina.iniciaJanelaFlutuante()",
+				"i3GEOF.cortina.dicionario_script"
+			);
+		}
+		else{
+			i3GEOF.cortina.iniciaJanelaFlutuante();
+		}
+	},	
+	/*
 	Function: inicia
 	
 	Inicia a ferramenta. &Eacute; chamado por criaJanelaFlutuante
@@ -109,7 +134,7 @@ i3GEOF.cortina = {
 		return ins;
 	},
 	/*
-	Function: criaJanelaFlutuante
+	Function: iniciaJanelaFlutuante
 	
 	Cria a janela flutuante para controle da ferramenta.
 	
@@ -121,7 +146,7 @@ i3GEOF.cortina = {
 	
 	my {numero} - (opcional) posi&ccedil;ão em y para onde a janela ser&aacute; movida ap&oacute;s ser criada
 	*/
-	criaJanelaFlutuante: function(tema,mx,my){
+	iniciaJanelaFlutuante: function(tema,mx,my){
 		if(tema == undefined)
 		{tema = i3GEO.temaAtivo;}
 		else

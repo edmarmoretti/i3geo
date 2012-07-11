@@ -360,7 +360,7 @@ i3GEO.gadgets = {
 			i3geo_buscaRapida = function(){
 				alert("i3geo_buscaRapida foi depreciada");
 			};
-			i = "<form id=i3GEObotaoFormBuscaRapida"+id+" >"+$inputText(id,"256","valorBuscaRapida"+id,"Munic&iacute;pio, cidade, UC, endere&ccedil;o...","20",$trad("o2"))+"</form>";
+			i = "<form id=i3GEObotaoFormBuscaRapida"+id+" >"+$inputText(id,"256","valorBuscaRapida"+id,$trad("x34"),"20",$trad("o2"))+"</form>";
 			ins = "<table><tr><td><a class=ajuda_usuario target=_blank href='"+i3GEO.configura.locaplic+"/ajuda_usuario.php?idcategoria=8&idajuda=71' >&nbsp;&nbsp;&nbsp;</a></td><td>"+i+"</td>";
 			ins += "<td><img src='"+i3GEO.util.$im("branco.gif")+"' title='"+$trad("p13")+"' class='ticPropriedades2' id=i3GEObotaoPropriedadesBuscaRapida"+id+" /></td>";
 			ins += "<td><img src='"+i3GEO.util.$im("branco.gif")+"' class='tic' id=i3GEObotaoBuscaRapida"+id+" /></td></tr></table>";
@@ -368,9 +368,9 @@ i3GEO.gadgets = {
 			if(temp){
 				fbusca = function(){
 					if(i3GEO.gadgets.PARAMETROS.mostraBuscaRapida.servicosexternos === false && i3GEO.gadgets.PARAMETROS.mostraBuscaRapida.temasmapa === false)
-					{alert("Escolha um tipo de busca nas propriedades");return;}
+					{alert($trad("x35"));return;}
 					if ($i("valorBuscaRapida"+id).value === "")
-					{alert("Digite uma palavra para busca!");return;}
+					{alert($trad("x36"));return;}
 					i3GEO.janela.cria("300px","280px",i3GEO.configura.locaplic+"/ferramentas/buscarapida/index.htm","","","Busca rapida");
 					return false;
 				};
@@ -386,12 +386,12 @@ i3GEO.gadgets = {
 					{externo = "checked";}
 					if(i3GEO.gadgets.PARAMETROS.mostraBuscaRapida.temasmapa)
 					{interno = "checked";}
-					ins = "<p class=paragrafo >Onde ser&aacute; feita a busca:</p>" +
+					ins = "<p class=paragrafo >"+$trad("x37")+":</p>" +
 						"<table class=lista3 >" +
-						"<tr><td><input style=cursor:pointer onclick='i3GEO.gadgets.PARAMETROS.mostraBuscaRapida.servicosexternos = this.checked' type=checkbox "+externo+" ></td><td>Servi&ccedil;os de busca externos (Google e MMA)</td></tr>" +
-						"<tr><td><input style=cursor:pointer onclick='i3GEO.gadgets.PARAMETROS.mostraBuscaRapida.temasmapa = this.checked' type=checkbox "+interno+" ></td><td>Temas existentes no mapa</td></tr>" +
+						"<tr><td><input style=cursor:pointer onclick='i3GEO.gadgets.PARAMETROS.mostraBuscaRapida.servicosexternos = this.checked' type=checkbox "+externo+" ></td><td>+"$trad("x38")+"</td></tr>" +
+						"<tr><td><input style=cursor:pointer onclick='i3GEO.gadgets.PARAMETROS.mostraBuscaRapida.temasmapa = this.checked' type=checkbox "+interno+" ></td><td>"+$trad("x39")+"</td></tr>" +
 						"</table><br>" +
-						"<p class=paragrafo >Apenas os temas especialmente configurados pelo administrador do i3Geo podem receber opera&ccedil;&otilde;es de busca.</p>";
+						"<p class=paragrafo >"+$trad("x40")+"</p>";
 					$i("i3GEOpropriedadesBuscaRapida"+id+"_corpo").innerHTML = ins;
 				};
 			}

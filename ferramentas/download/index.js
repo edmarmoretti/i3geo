@@ -43,6 +43,31 @@ Classe: i3GEOF.download
 */
 i3GEOF.download = {
 	/*
+		Para efeitos de compatibilidade antes da vers&atilde;o 4.7 que não tinha dicion&aacute;rio
+	*/
+	criaJanelaFlutuante: function(tema){
+		i3GEOF.download.iniciaDicionario(tema);
+	},
+	/*
+	Function: iniciaDicionario
+	
+	Carrega o dicion&aacute;rio e chama a fun&ccedil;&atilde;o que inicia a ferramenta
+	
+	O Javascript &eacute; carregado com o id i3GEOF.nomedaferramenta.dicionario_script
+	*/	
+	iniciaDicionario: function(tema){
+		if(typeof(i3GEOF.download.dicionario) === 'undefined'){
+			i3GEO.util.scriptTag(
+				i3GEO.configura.locaplic+"/ferramentas/download/dicionario.js",
+				"i3GEOF.download.iniciaJanelaFlutuante('"+tema+"')",
+				"i3GEOF.download.dicionario_script"
+			);
+		}
+		else{
+			i3GEOF.download.iniciaJanelaFlutuante(tema);
+		}
+	},	
+	/*
 	Function: html
 	
 	Gera o c&oacute;digo html para apresenta&ccedil;ão das op&ccedil;&otilde;es da ferramenta
@@ -90,7 +115,7 @@ i3GEOF.download = {
 		cp.call(p,"downloadTema",mostraDownload);		
 	},
 	/*
-	Function: criaJanelaFlutuante
+	Function: iniciaJanelaFlutuante
 	
 	Cria a janela flutuante para controle da ferramenta.
 	
@@ -98,7 +123,7 @@ i3GEOF.download = {
 	
 	tema {String} - c&oacute;digo do tema
 	*/	
-	criaJanelaFlutuante: function(tema){
+	iniciaJanelaFlutuante: function(tema){
 		var janela,divid,titulo;
 		if(arguments.length == 0)
 		{tema = i3GEO.temaAtivo;}

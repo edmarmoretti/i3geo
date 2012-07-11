@@ -94,6 +94,31 @@ i3GEOF.tabela = {
 	*/
 	nomeArquivoGr: "",
 	/*
+		Para efeitos de compatibilidade antes da vers&atilde;o 4.7 que não tinha dicion&aacute;rio
+	*/
+	criaJanelaFlutuante: function(){
+		i3GEOF.tabela.iniciaDicionario();
+	},
+	/*
+	Function: iniciaDicionario
+	
+	Carrega o dicion&aacute;rio e chama a fun&ccedil;&atilde;o que inicia a ferramenta
+	
+	O Javascript &eacute; carregado com o id i3GEOF.nomedaferramenta.dicionario_script
+	*/	
+	iniciaDicionario: function(){
+		if(typeof(i3GEOF.tabela.dicionario) === 'undefined'){
+			i3GEO.util.scriptTag(
+				i3GEO.configura.locaplic+"/ferramentas/tabela/dicionario.js",
+				"i3GEOF.tabela.iniciaJanelaFlutuante()",
+				"i3GEOF.tabela.dicionario_script"
+			);
+		}
+		else{
+			i3GEOF.tabela.iniciaJanelaFlutuante();
+		}
+	},	
+	/*
 	Function: inicia
 	
 	Inicia a ferramenta. &Eacute; chamado por criaJanelaFlutuante
@@ -105,7 +130,7 @@ i3GEOF.tabela = {
 	inicia: function(iddiv){
 		i3GEO.janela.comboCabecalhoTemas("i3GEOFtabelaComboCabeca","i3GEOFtabelaComboCabecaSel","tabela","ligadosComTabela");
 		if(i3GEO.temaAtivo === ""){
-			$i(iddiv).innerHTML = '<img src="../imagens/opcoes.gif" ><p style="position: relative; top: -35px; width: 180px; font-size: 15px; text-align: left; left: 35px;">Escolha um tema da lista</p>';
+			$i(iddiv).innerHTML = '<img src="../imagens/opcoes.gif" ><p style="position: relative; top: -35px; width: 180px; font-size: 15px; text-align: left; left: 35px;">'+$trad("x33")+'</p>';
 			return;
 		}
 		try{
@@ -142,7 +167,7 @@ i3GEOF.tabela = {
 					i3GEOF.tabela.tema,
 					function(retorno){
 		 				if(retorno.tipo === "erro"){
-		 					$i("i3GEOtabelaagrupamento").innerHTML = "<br><br><span style='color:red'>erro ao ler os itens do tema de origem</span><br><br>";
+		 					$i("i3GEOtabelaagrupamento").innerHTML = "<br><br><span style='color:red'>"+$trad(2,i3GEOF.tabela.dicionario)+"</span><br><br>";
 		 				}
 		 				else{
 		 					$i("i3GEOtabelaagrupamento").innerHTML = retorno.dados;
@@ -196,7 +221,7 @@ i3GEOF.tabela = {
 			i3GEO.util.mensagemAjuda("i3GEOtabelamen1",$i("i3GEOtabelamen1").innerHTML);
 
 			if (i3GEO.parametros.r.toLowerCase() !== "sim")
-			{$i("i3GEOtabelaguia4obj").innerHTML = "Op&ccedil;ão não dispon&iacute;vel";}
+			{$i("i3GEOtabelaguia4obj").innerHTML = $trad("x22");}
 			i3GEOF.tabela.pegaRegistros();
 		}
 		catch(erro){alert(erro);}
@@ -214,11 +239,11 @@ i3GEOF.tabela = {
 		var ins = '';//<p class="paragrafo" >
 		ins += '<div id=guiasYUI class="yui-navset" style="top:0px;cursor:pointer;left:0px;">';
 		ins += '<ul class="yui-nav" style="border-width:0pt 0pt 0px;border-color:rgb(240,240,240);border-bottom-color:white;">';
-		ins += '	<li><a href="#ancora"><em><div id="i3GEOtabelaguia6" style="text-align:center;left:0px;" ><img class="ticPropriedades2" style="height:14px" title="Propriedades" src="'+i3GEO.configura.locaplic+'/imagens/visual/default/branco.gif"></div></em></a></li>';
-		ins += '	<li><a href="#ancora"><em><div id="i3GEOtabelaguia1" style="text-align:center;left:0px;" >Registros</div></em></a></li>';
-		ins += '	<li><a href="#ancora"><em><div id="i3GEOtabelaguia3" style="text-align:center;left:0px;" >Estat&iacute;sticas</div></em></a></li>';
-		ins += '	<li><a href="#ancora"><em><div id="i3GEOtabelaguia4" style="text-align:center;left:0px;" >Gr&aacute;ficos</div></em></a></li>';
-		ins += '	<li><a href="#ancora"><em><div id="i3GEOtabelaguia5" style="text-align:center;left:0px;" >Relat&oacute;rios</div></em></a></li>';
+		ins += '	<li><a href="#ancora"><em><div id="i3GEOtabelaguia6" style="text-align:center;left:0px;" ><img class="ticPropriedades2" style="height:14px" title="'+$trad("p13")+'" src="'+i3GEO.configura.locaplic+'/imagens/visual/default/branco.gif"></div></em></a></li>';
+		ins += '	<li><a href="#ancora"><em><div id="i3GEOtabelaguia1" style="text-align:center;left:0px;" >'+$trad(3,i3GEOF.tabela.dicionario)+'</div></em></a></li>';
+		ins += '	<li><a href="#ancora"><em><div id="i3GEOtabelaguia3" style="text-align:center;left:0px;" >'+$trad(4,i3GEOF.tabela.dicionario)+'</div></em></a></li>';
+		ins += '	<li><a href="#ancora"><em><div id="i3GEOtabelaguia4" style="text-align:center;left:0px;" >'+$trad("t37")+'</div></em></a></li>';
+		ins += '	<li><a href="#ancora"><em><div id="i3GEOtabelaguia5" style="text-align:center;left:0px;" >'+$trad(5,i3GEOF.tabela.dicionario)+'</div></em></a></li>';
 		ins += '</ul>';
 		ins += '</div><br>';
 		ins += '	<div id=i3GEOtabelaresultadotab style="background-color:#F2F2F2;position:relative;top:5px;left:0px"></div>';
@@ -226,50 +251,48 @@ i3GEOF.tabela = {
 		ins += '		<table summary="" class=lista2 >';
 		ins += '		<tr>';
 		ins += '			<td><input style="cursor:pointer;border:0px solid white;" onclick="i3GEOF.tabela.pegaRegistros()" type=checkbox id=i3GEOtabelatiporeg CHECKED /></td>';
-		ins += '			<td>Considerar na listagem a regi&atilde;o mostrada no mapa (se essa op&ccedil;ão for desmarcada, ser&aacute; considerada a extens&atilde;o geogr&aacute;fica do mapa inicial)</td>';
+		ins += '			<td>'+$trad(6,i3GEOF.tabela.dicionario)+'</td>';
 		ins += '		</tr>';
 		ins += '		<tr>';
 		ins += '			<td><input style="cursor:pointer;border:0px solid white;" type=checkbox onclick="i3GEOF.tabela.ativaAutoAtualiza(this)"  /></td>';
-		ins += '			<td>Atualiza a tabela ap&oacute;s navegar no mapa</td>';
+		ins += '			<td>'+$trad(7,i3GEOF.tabela.dicionario)+'</td>';
 		ins += '		</tr>';
 		ins += '		<tr>';
 		ins += '			<td><input style="cursor:pointer;border:0px solid white;" onclick="i3GEOF.tabela.pegaRegistros()" type=checkbox id=i3GEOtabelatipolista /></td>';
-		ins += '			<td>Mostrar na listagem apenas os selecionados</td>';
+		ins += '			<td>'+$trad(8,i3GEOF.tabela.dicionario)+'</td>';
 		ins += '		</tr>';
 		ins += '		<tr>';
 		ins += '			<td><input style="cursor:pointer;border:0px solid white;" onclick="i3GEOF.tabela.pegaRegistros()" type=checkbox id=i3GEOtabelalegenda /></td>';
-		ins += '			<td>Mostrar coluna com a legenda da classe</td>';
+		ins += '			<td>'+$trad(9,i3GEOF.tabela.dicionario)+'</td>';
 		ins += '		</tr>';
 		ins += '		</table>';
 		ins += '		</div>';
 		ins += '	<div id=i3GEOtabelaguia1obj style="width:99%">';
 		ins += '		<div id=i3GEOtabelacombot style="position:relative;top:5px;left:0px;">';
 		ins += '		</div>';		
-		ins += '		<br><p class="paragrafo" ><input title="Seleciona no mapa as linhas marcadas" id=i3GEOtabelabotao2 size=25 type=button value="Ativa a sele&ccedil;&atilde;o" />';
-		ins += '		<input title="Limpa a sele&ccedil;ão do mapa" id=i3GEOtabelabotao3 size=25  type=button value="Limpa a sele&ccedil;&atilde;o"/>';
-		ins += '		<input title="Cria um novo tema no mapa contendo a sele&ccedil;ão" id=i3GEOtabelabotao6 size=30  type=button value="Cria um tema novo"/>';
+		ins += '		<br><p class="paragrafo" ><input title="'+$trad(10,i3GEOF.tabela.dicionario)+'" id=i3GEOtabelabotao2 size=25 type=button value="'+$trad(11,i3GEOF.tabela.dicionario)+'" />';
+		ins += '		<input title="'+$trad(12,i3GEOF.tabela.dicionario)+'" id=i3GEOtabelabotao3 size=25  type=button value="'+$trad(13,i3GEOF.tabela.dicionario)+'"/>';
+		ins += '		<input title="'+$trad(14,i3GEOF.tabela.dicionario)+'" id=i3GEOtabelabotao6 size=30  type=button value="'+$trad(15,i3GEOF.tabela.dicionario)+'"/>';
 		ins += '		<div id=i3GEOtabelacontador style="background-color:rgb(240,240,240);width:100%;position:relative;top:15px;left:0px;text-align:left">';
-		ins += '			de <img style=cursor:pointer onclick="i3GEOF.tabela.menos()" src="'+i3GEO.configura.locaplic+'/imagens/minus.gif" />';
+		ins += '			'+$trad(16,i3GEOF.tabela.dicionario)+' <img style=cursor:pointer onclick="i3GEOF.tabela.menos()" src="'+i3GEO.configura.locaplic+'/imagens/minus.gif" />';
 		ins += $inputText("","","i3GEOtabelainicio","",5,"1");
-		ins += '			at&eacute;';
+		ins += '			'+$trad(17,i3GEOF.tabela.dicionario);
 		ins += $inputText("","","i3GEOtabelafim","",5,"20");
 		ins += '			<img style=cursor:pointer onclick="i3GEOF.tabela.mais()" src="'+i3GEO.configura.locaplic+'/imagens/plus.gif" />';
-		ins += '			<input title="Atualiza a lista de registros" id=i3GEOtabelabotaoLista size=25  type=button value="Listar"/>';
+		ins += '			<input title="'+$trad(18,i3GEOF.tabela.dicionario)+'" id=i3GEOtabelabotaoLista size=25  type=button value="'+$trad(19,i3GEOF.tabela.dicionario)+'"/>';
 		ins += '		</div>';
 		ins += '		<div id=i3GEOtabelaregistros style="position:relative;top:20px;left:0px;text-align:left;">';
 		ins += '		</div>';
 		ins += '	</div>';
 		ins += '	<div id=i3GEOtabelaguia3obj style="display:none;width:99%;left:0px" >';
-		ins += '		<p class="paragrafo" >Item para aplicar os c&aacute;lculos: <span id=i3GEOtabelaitensGuia3 ></span>';
-		ins += '		<p class="paragrafo" >Excluir dos c&aacute;lculos o valor:';
+		ins += '		<p class="paragrafo" >'+$trad(20,i3GEOF.tabela.dicionario)+': <span id=i3GEOtabelaitensGuia3 ></span>';
+		ins += '		<p class="paragrafo" >'+$trad(21,i3GEOF.tabela.dicionario)+':';
 		ins += $inputText("","","i3GEOtabelafiltro1","",5,"");
-		ins += '		<p class="paragrafo" ><input id=i3GEOtabelabotao4 size=30  type=button value="Calcular"/>';
+		ins += '		<p class="paragrafo" ><input id=i3GEOtabelabotao4 size=30  type=button value="'+$trad(22,i3GEOF.tabela.dicionario)+'"/>';
 		ins += '		<div id="i3GEOtabelaoperacoes" class=digitar style="text-align:left;position:relative;top:15px;left:0px;"  >';
 		ins += '		</div><br>';
 		ins += '		<div id=i3GEOtabelamen1 style="position:relative;top:25px;left:0px;width:100%" >';
-		ins += '			<p class="paragrafo" >Para que as opera&ccedil;&otilde;es atuem apenas sobre os elementos selecionados ';
-		ins += '			ative a sele&ccedil;&atilde;o no mapa, para isso utilize, na guia "Registros"';
-		ins += '			a op&ccedil;&atilde;o "Ativa a sele&ccedil;&atilde;o"';
+		ins += '			<p class="paragrafo" >'+$trad(23,i3GEOF.tabela.dicionario);
 		ins += '		</div>';
 		ins += '	</div>';
 		ins += '	<div id=i3GEOtabelaguia4obj style="display:none;width:99%;left:0px">';
@@ -278,20 +301,18 @@ i3GEOF.tabela = {
 		ins += '	</div>';
 		
 		ins += '	<div id=i3GEOtabelaguia5obj style="width:99%;display:none">';
-		ins += '		<p class="paragrafo" >Escolha os itens que dever&atilde;o constar no relat&oacute;rio. Voc&ecirc; pode alterar os nomes originais das colunas para melhorar o cabe&ccedil;alho do relat&oacute;rio:';
+		ins += '		<p class="paragrafo" >'+$trad(24,i3GEOF.tabela.dicionario)+':';
 		ins += '		<p class="paragrafo" ><div id=i3GEOtabelaitensrelatorio class=digitar style="text-align:left;overflow:auto;height:100px">';
 		ins += '		</div><br>';
-		ins += '		<p class="paragrafo" >Escolha o item que voc&ecirc; quer utilizar para agrupar valores (opcional):';
+		ins += '		<p class="paragrafo" >'+$trad(25,i3GEOF.tabela.dicionario)+':';
 		ins += '		<p class="paragrafo" ><div id=i3GEOtabelaagrupamento style="text-align:left;">';
 		ins += '		</div>';
-		ins += '		<p class="paragrafo" ><br><input style="cursor:pointer" type=checkbox id=i3GEOtabelacalculaarea />';
-		ins += '			Incluir c&aacute;lculo de &aacute;rea';
-		ins += '		<p class="paragrafo" ><input style="cursor:pointer" type=checkbox id=i3GEOtabelacalculaestat />';
-		ins += '			Incluir c&aacute;lculo de estat&iacute;sticas';
-		ins += '		<p class="paragrafo" >Excluir das estat&iacute;sticas o valor: ';
+		ins += '		<p class="paragrafo" ><br><input style="cursor:pointer" type=checkbox id=i3GEOtabelacalculaarea />'+$trad(26,i3GEOF.tabela.dicionario);
+		ins += '		<p class="paragrafo" ><input style="cursor:pointer" type=checkbox id=i3GEOtabelacalculaestat />'+$trad(27,i3GEOF.tabela.dicionario);
+		ins += '		<p class="paragrafo" >'+$trad(28,i3GEOF.tabela.dicionario)+': ';
 		ins += $inputText("","","i3GEOtabelaexcestat","",10,"");
-		ins += '		<p class="paragrafo" ><input id=i3GEOtabelabotao7 size=30  type=button value="Relat&oacute;rio"/>';
-		ins += '		<input id=i3GEOtabelabotao5 size=25  type=button value="Relat&oacute;rio no formato texto"/>';
+		ins += '		<p class="paragrafo" ><input id=i3GEOtabelabotao7 size=30  type=button value="'+$trad(5,i3GEOF.tabela.dicionario)+'"/>';
+		ins += '		<input id=i3GEOtabelabotao5 size=25  type=button value="'+$trad(29,i3GEOF.tabela.dicionario)+'"/>';
 		ins += '		<form method=post style="display:none" id=i3GEOtabelarelatorio action="'+i3GEO.configura.locaplic+'/ferramentas/tabela/relatorio.php" target="_blank" >';
 		ins += '			<input type=hidden id=i3GEOtabelaarearelh name=arearel value=nao />';
 		ins += '			<input type=hidden id=i3GEOtabelastatrelh name=statrel value=nao />';
@@ -311,7 +332,7 @@ i3GEOF.tabela = {
 	
 	Cria a janela flutuante para controle da ferramenta.
 	*/	
-	criaJanelaFlutuante: function(){
+	iniciaJanelaFlutuante: function(){
 		var minimiza,cabecalho,janela,divid,temp,titulo;
 		if($i("i3GEOF.tabela")){
 			i3GEOF.tabela.tema = i3GEO.temaAtivo;
@@ -325,7 +346,7 @@ i3GEOF.tabela = {
 			i3GEO.janela.minimiza("i3GEOF.tabela");
 		};
 		//cria a janela flutuante
-		titulo = "<div style='z-index:1;position:absolute' id='i3GEOFtabelaComboCabeca' >------</div>&nbsp;&nbsp;&nbsp;Tabela <a class=ajuda_usuario target=_blank href='" + i3GEO.configura.locaplic + "/ajuda_usuario.php?idcategoria=5&idajuda=39' >&nbsp;&nbsp;&nbsp;</a>";
+		titulo = "<div style='z-index:1;position:absolute' id='i3GEOFtabelaComboCabeca' >------</div>&nbsp;&nbsp;&nbsp;"+$trad(1,i3GEOF.tabela.dicionario)+" <a class=ajuda_usuario target=_blank href='" + i3GEO.configura.locaplic + "/ajuda_usuario.php?idcategoria=5&idajuda=39' >&nbsp;&nbsp;&nbsp;</a>";
 		janela = i3GEO.janela.cria(
 			"500px",
 			"400px",
@@ -366,7 +387,7 @@ i3GEOF.tabela = {
 	*/
 	ativaFoco: function(){
 		if(i3GEOF.tabela.tema !== "" && i3GEO.arvoreDeCamadas.pegaTema(i3GEOF.tabela.tema) === "")
-		{alert("O tema ja nao existe mais no mapa");}
+		{alert($trad(30,i3GEOF.tabela.dicionario));}
 		var i = $i("i3GEOF.tabela_c").style;
 		i3GEO.janela.ULTIMOZINDEX++;
 		i.zIndex = 21000 + i3GEO.janela.ULTIMOZINDEX;
@@ -454,12 +475,12 @@ i3GEOF.tabela = {
 			ins += "<tr><td></td><td></td><td></td><td></td>";
 			n = retorno.data[0].itens.length;
 			for (i=0;i<n;i++)
-			{ins += "<td style='background-color:yellow' ><img style=cursor:pointer onclick='i3GEOF.tabela.excluiColuna(this,"+(i * 1 + 3)+")' src='"+i3GEO.configura.locaplic+"/imagens/x.gif' title='excluir' />&nbsp;<img style=cursor:pointer onclick='i3GEOF.tabela.ordenaColuna(this,"+(i * 1 + 3)+")' src='"+i3GEO.configura.locaplic+"/imagens/ordena1.gif' title='ordena' /><br><span title='"+retorno.data[0].itens[i]+"'> "+retorno.data[0].alias[i]+"</span></td>";}
+			{ins += "<td style='background-color:yellow' ><img style=cursor:pointer onclick='i3GEOF.tabela.excluiColuna(this,"+(i * 1 + 3)+")' src='"+i3GEO.configura.locaplic+"/imagens/x.gif' title='"+$trad("t12")+"' />&nbsp;<img style=cursor:pointer onclick='i3GEOF.tabela.ordenaColuna(this,"+(i * 1 + 3)+")' src='"+i3GEO.configura.locaplic+"/imagens/ordena1.gif' title='"+$trad(31,i3GEOF.tabela.dicionario)+"' /><br><span title='"+retorno.data[0].itens[i]+"'> "+retorno.data[0].alias[i]+"</span></td>";}
 			ins += "</tr>";
 			cor = "linha";
 			n = retorno.data[1].registros.length;
 			for (i=0;i<n;i++){
-				ins += "<tr><td><img style=cursor:pointer onclick='i3GEOF.tabela.excluiLinha(this)' src='"+i3GEO.configura.locaplic+"/imagens/x.gif' title='excluir' /></td>";
+				ins += "<tr><td><img style=cursor:pointer onclick='i3GEOF.tabela.excluiLinha(this)' src='"+i3GEO.configura.locaplic+"/imagens/x.gif' title='"+$trad("t12")+"' /></td>";
 				ins += "<td><img style=cursor:pointer onclick='i3GEOF.tabela.zoomLinha(this)' src='"+i3GEO.configura.locaplic+"/imagens/o.gif' title='zoom' ids="+retorno.data[1].registros[i].indice+" /></td>";
 				stat = "";
 				if(retorno.data[1].registros[i].status === "CHECKED")
@@ -719,7 +740,7 @@ i3GEOF.tabela = {
 			tema,
 			function(retorno){
 		 		if(retorno.tipo === "erro"){
-		 			$i("i3GEOtabelaitensGuia3").innerHTML = "<br><br><span style='color:red'>erro ao ler os itens do tema de origem</span><br><br>";
+		 			$i("i3GEOtabelaitensGuia3").innerHTML = "<br><br><span style='color:red'>"+$trad(32,i3GEOF.tabela.dicionario)+"</span><br><br>";
 		 		}
 		 		else{
 		 			$i("i3GEOtabelaitensGuia3").innerHTML = retorno.dados;
@@ -776,10 +797,10 @@ i3GEOF.tabela = {
 	t0: function(){
 		$i("i3GEOtabelaresultado").innerHTML = "";
 		var ins = "";
-		ins += "<p class='paragrafo' >A representa&ccedil;ão gr&aacute;fica dos dados tabulares utiliza todos os elementos da tabela ou os selecionados, se estiverem ativos no mapa.";
-		ins += "<p class='paragrafo' ><a href='http://www.r-project.org/' target=blank >Os gr&aacute;ficos s&atilde;o gerados com o software R,</a> mas vc pode optar por usar a ferramenta de gr&aacute;ficos interativos que possuem outras op&ccedil;&otilde;es e geram gr&aacute;ficos em Flash.";
-		ins += "<p class='paragrafo' ><input type=button value='Gr&aacute;ficos interativos' id=i3GEOtabelaGraficoI /></p>";
-		ins += "<br><br><p class='paragrafo' >Se voc&ecirc; optar por usar o R, nas telas seguintes defina o tipo e as op&ccedil;&otilde;es do gr&aacute;fico.";
+		ins += "<p class='paragrafo' >"+$trad(33,i3GEOF.tabela.dicionario)+".";
+		ins += "<p class='paragrafo' ><a href='http://www.r-project.org/' target=blank >"+$trad(34,i3GEOF.tabela.dicionario);
+		ins += "<p class='paragrafo' ><input type=button value='"+$trad("t37b")+"' id=i3GEOtabelaGraficoI /></p>";
+		ins += "<br><br><p class='paragrafo' >"+$trad(35,i3GEOF.tabela.dicionario)+".";
 
 		i3GEO.util.proximoAnterior("","i3GEOF.tabela.t1()",ins,"i3GEOFtabelat0","i3GEOtabelaresultado");
 		new YAHOO.widget.Button(

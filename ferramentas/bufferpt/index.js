@@ -58,6 +58,31 @@ i3GEOF.bufferpt = {
 	*/
 	aguarde: "",
 	/*
+		Para efeitos de compatibilidade antes da vers&atilde;o 4.7 que não tinha dicion&aacute;rio
+	*/
+	criaJanelaFlutuante: function(){
+		i3GEOF.bufferpt.iniciaDicionario();
+	},
+	/*
+	Function: iniciaDicionario
+	
+	Carrega o dicion&aacute;rio e chama a fun&ccedil;&atilde;o que inicia a ferramenta
+	
+	O Javascript &eacute; carregado com o id i3GEOF.nomedaferramenta.dicionario_script
+	*/	
+	iniciaDicionario: function(){
+		if(typeof(i3GEOF.bufferpt.dicionario) === 'undefined'){
+			i3GEO.util.scriptTag(
+				i3GEO.configura.locaplic+"/ferramentas/bufferpt/dicionario.js",
+				"i3GEOF.bufferpt.iniciaJanelaFlutuante()",
+				"i3GEOF.bufferpt.dicionario_script"
+			);
+		}
+		else{
+			i3GEOF.bufferpt.iniciaJanelaFlutuante();
+		}
+	},		
+	/*
 	Function: inicia
 	
 	Inicia a ferramenta. &Eacute; chamado por criaJanelaFlutuante
@@ -97,7 +122,7 @@ i3GEOF.bufferpt = {
 		return ins;
 	},
 	/*
-	Function: criaJanelaFlutuante
+	Function: iniciaJanelaFlutuante
 	
 	Cria a janela flutuante para controle da ferramenta.
 	
@@ -110,7 +135,7 @@ i3GEOF.bufferpt = {
 	
 	y {dd} - coordenada y (latitude)
 	*/	
-	criaJanelaFlutuante: function(x,y){
+	iniciaJanelaFlutuante: function(x,y){
 		var janela,divid,titulo,cabecalho,minimiza;
 		if(x)
 		{i3GEOF.bufferpt.x = x;}
