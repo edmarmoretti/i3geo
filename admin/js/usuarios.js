@@ -224,7 +224,7 @@ function montaDivUsuario(i){
 		"linhas":[
 	          {titulo:"Nome:",id:"Enome_usuario",size:"50",value:i.nome_usuario,tipo:"text",div:""},
 	          {titulo:"Login:",id:"Elogin",size:"50",value:i.login,tipo:"text",div:""},
-	          {titulo:"Senha:",id:"Esenha",size:"50",value:i.senha,tipo:"text",div:""},
+	          {ajuda:"Se o usu&aacute;rio j&aacute; existir, preencha para alterar a senha. Se for mantido em branco, o sistema gerar&aacute; uma senha aleat&oacute;ria no caso de novos usu&aacute;rios. Envie a senha por e-mail ap&oacute;s o cadastro.",titulo:"Nova senha:",id:"Esenha",size:"50",value:"",tipo:"text",div:""},
 	          {titulo:"E-mail:",id:"Eemail",size:"50",value:i.email,tipo:"text",div:""},
 	          {titulo:"Data de cadastro:",id:"Edata_cadastro",size:"50",value:i.data_cadastro,tipo:"text",div:""},
 	          {titulo:"Ativo:",id:"",size:"50",value:i.ativo,tipo:"text",div:"<div id=cAtivo ></div>"}

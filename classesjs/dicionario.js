@@ -1894,7 +1894,7 @@ it:""
 }],
 "x52":[
 {
-pt:"",
+pt:"Alterar senha",
 en:"",
 es:"",
 it:""

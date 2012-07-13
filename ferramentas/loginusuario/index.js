@@ -108,11 +108,12 @@ i3GEOF.loginusuario = {
 		}
 		ins = '<p class="paragrafo" >'+$trad("x30")+': <b><i>'+u+"</i></b>" +
 		'<p class="paragrafo" >'+$trad("x27")+':<br>' +
-		'<input id=i3geousuario type=text style="width:250px;" value=""/>' +
+		'<input id=i3geousuario type=text style="width:250px;" value="'+i3GEO.util.pegaCookie("i3geousuariologin")+'"/>' +
 		'<p class="paragrafo" >'+$trad("x28")+':<br>' +
 		'<input id=i3geosenha type=password style="width:250px;" value=""/><br>' +
 		'<p class="paragrafo" ><input id=i3GEOFloginusuario size=20  type=button value="'+$trad("x29")+'" />&nbsp;<input id=i3GEOFlogoutusuario size=20  type=button value="Logout" />' +
-		'<p class="paragrafo" onclick="i3GEOF.loginusuario.recuperarSenha()" style="cursor:pointer;color:blue;">'+$trad("x32")+'</p>';
+		'<p class="paragrafo" onclick="i3GEOF.loginusuario.recuperarSenha()" style="cursor:pointer;color:blue;">'+$trad("x32")+'</p>' +
+		'<p class="paragrafo" onclick="i3GEOF.loginusuario.alterarSenha()" style="cursor:pointer;color:blue;">'+$trad("x52")+'</p>';
 		return ins;
 	},
 	/*
@@ -130,7 +131,7 @@ i3GEOF.loginusuario = {
 		titulo = "Login &nbsp;&nbsp;&nbsp;";
 		janela = i3GEO.janela.cria(
 			"260px",
-			"200px",
+			"210px",
 			"",
 			"",
 			"",
@@ -162,9 +163,6 @@ i3GEOF.loginusuario = {
 			i3GEOF.loginusuario.aguarde.visibility = "hidden";
 			return;
 		}
-		/**
-		 * TODO criptografar o envio de usuario e senha
-		 */
 		temp = function(retorno){
 			i3GEOF.loginusuario.aguarde.visibility = "hidden";
 			if(!retorno || !retorno.data || retorno.data == "erro" || retorno.data == "logout"){
@@ -205,16 +203,45 @@ i3GEOF.loginusuario = {
 		var u = $i("i3geousuario").value,
 		temp,cp;
 		if(u == ""){
-			alert($trad("x30"));
+			alert($trad("x27"));
 			return;
 		}
 		temp = function(retorno){
-
+			if(retorno.data == true ){
+				alert("ok");
+			}
+			else{
+				alert($trad("x31"));
+			}
 		};
 		p = i3GEO.configura.locaplic+"/admin/php/login.php?funcao=recuperarSenha";
 		cp = new cpaint();
 		cp.set_transfer_mode("POST");
 		cp.set_response_type("JSON");
 		cp.call(p,"login",temp,"&usuario="+u);
+	},
+	alterarSenha: function(){
+		var u = $i("i3geousuario").value,
+		temp,cp,novaSenha;
+		novaSenha = window.prompt("Nova senha");
+		if(u == ""){
+			alert($trad("x27"));
+			return;
+		}
+		temp = function(retorno){
+			if(retorno.data == true ){
+				alert("ok");
+			}
+			else{
+				alert($trad("x31"));
+			}
+		};
+		if(novaSenha != ""){
+			p = i3GEO.configura.locaplic+"/admin/php/login.php?funcao=alterarSenha";
+			cp = new cpaint();
+			cp.set_transfer_mode("POST");
+			cp.set_response_type("JSON");
+			cp.call(p,"login",temp,"&usuario="+u+"&novaSenha="+novaSenha);
+		}
 	}
 };

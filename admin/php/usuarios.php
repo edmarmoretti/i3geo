@@ -76,7 +76,11 @@ switch (strtoupper($funcao))
 {
 	case "ALTERARUSUARIOS":
 		$novo = alterarUsuarios();
-		$sql = "SELECT * from ".$esquemaadmin."i3geoadmin_usuarios WHERE id_usuario = ".$novo;
+		if($novo == false){
+			retornaJSON(array());
+			exit;
+		}
+		$sql = "SELECT id_usuario,ativo,data_cadastro,email,login,nome_usuario from ".$esquemaadmin."i3geoadmin_usuarios WHERE id_usuario = ".$novo;
 		retornaJSON(pegaDados($sql));
 		exit;
 	break;
@@ -127,11 +131,14 @@ cpjson($retorno);
 function enviarSenhaEmail(){
 	global $id_usuario;
 	include(__DIR__."/conexao.php");
+	$novaSenha = rand(9000,1000000);
 	$dados = pegaDados("select * from ".$esquemaadmin."i3GEOadmin_usuarios where id_usuario = $id_usuario and ativo = 1");
 	if(count($dados) > 0){
+		$senha = md5($novaSenha);
+		$dbhw->query("UPDATE ".$esquemaadmin."i3geoadmin_usuarios SET senha='$senha' WHERE id_usuario = $id_usuario");
 		$to      = $dados[0]["email"];
 		$subject = 'senha i3geo';
-		$message = $dados[0]["senha"];
+		$message = $novaSenha;
 		mail($to, $subject, $message);
 		return "Ok";
 	}
@@ -149,13 +156,28 @@ function alterarUsuarios()
 			$nome_usuario = utf8_encode($nome_usuario);
 		}
 		if($id_usuario != ""){
-			$dbhw->query("UPDATE ".$esquemaadmin."i3geoadmin_usuarios SET senha='$senha',nome_usuario='$nome_usuario',login='$login',email='$email',ativo=$ativo,data_cadastro='$data_cadastro' WHERE id_usuario = $id_usuario");
+			//verifica uniciade de login
+			$dados = pegaDados("select login from ".$esquemaadmin."i3GEOadmin_usuarios where login = '$login'");
+			if(count($dados) > 0){
+				$retorna = false;
+			}
+			//se a senha foi enviada, ela sera trocada
+			if($senha != ""){
+				$senha = md5($senha);
+				$dbhw->query("UPDATE ".$esquemaadmin."i3geoadmin_usuarios SET senha='$senha',nome_usuario='$nome_usuario',login='$login',email='$email',ativo=$ativo,data_cadastro='$data_cadastro' WHERE id_usuario = $id_usuario");
+			}
+			else{
+				$dbhw->query("UPDATE ".$esquemaadmin."i3geoadmin_usuarios SET nome_usuario='$nome_usuario',login='$login',email='$email',ativo=$ativo,data_cadastro='$data_cadastro' WHERE id_usuario = $id_usuario");
+			}
 			$retorna = $id_usuario;
 		}
 		else{
-			$idtemp = (rand (9000,10000)) * -1;
-			$dbhw->query("INSERT INTO ".$esquemaadmin."i3geoadmin_usuarios (senha,ativo) VALUES ('$idtemp',0)");
-			$id = $dbh->query("SELECT id_usuario FROM ".$esquemaadmin."i3geoadmin_usuarios WHERE senha = '$idtemp'");
+			$idtemp = rand (9000,1000000) * -1;
+			if($senha == ""){
+				$senha = md5($idtemp);
+			}
+			$dbhw->query("INSERT INTO ".$esquemaadmin."i3geoadmin_usuarios (senha,nome_usuario,ativo) VALUES ('$senha','$idtemp',0)");
+			$id = $dbh->query("SELECT id_usuario FROM ".$esquemaadmin."i3geoadmin_usuarios WHERE nome_usuario = '$idtemp'");
 			$id = $id->fetchAll();
 			$id = $id[0]['id_usuario'];
 			//$dbhw->query("UPDATE ".$esquemaadmin."i3geoadmin_usuarios SET nome_usuario = '' WHERE id_usuario = $id AND nome_usuario = '$idtemp'");
