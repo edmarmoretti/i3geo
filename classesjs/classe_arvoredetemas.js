@@ -1012,7 +1012,7 @@ i3GEO.arvoreDeTemas = {
 					funcoes = sis[ig].FUNCOES;
 					tempf = funcoes.length;
 					for (ig2=0;ig2<tempf;ig2+=1){
-						abre = "i3GEO.janela.cria('"+(funcoes[ig2].W)+"px','"+(funcoes[ig2].H)+"px','"+(funcoes[ig2].ABRIR)+"','','','Sistemas')";
+						abre = "i3GEO.janela.cria('"+(funcoes[ig2].W)+"px','"+(funcoes[ig2].H)+"px','"+(funcoes[ig2].ABRIR)+"','','',"+$trad("a11")+")";
 						nomeFunc = "<a href='#' onclick=\""+abre+"\">"+funcoes[ig2].NOME+"</a>";
 						new YAHOO.widget.HTMLNode(
 							{html:nomeFunc,expanded:false,enableHighlight:false,isLeaf:true},
@@ -2130,14 +2130,14 @@ i3GEO.arvoreDeTemas = {
 		Essa ferramenta e alternativa a ferramenta nuvemTags, mostrando tbm a nuvem com um aplicativo em flash
 		*/
 		nuvemTagsFlash: function()
-		{i3GEO.janela.cria("550px","350px",i3GEO.configura.locaplic+"/ferramentas/nuvemtagsflash/index.htm","","","Nuvem Flash");},
+		{i3GEO.janela.cria("550px","350px",i3GEO.configura.locaplic+"/ferramentas/nuvemtagsflash/index.htm","","",$trad("x44"));},
 		/*
 		Function: navegacaoDir
 
 		Abre a janela para adicionar temas navegando pelos diretorios do servidor
 		*/
 		navegacaoDir: function()
-		{i3GEO.janela.cria("550px","350px",i3GEO.configura.locaplic+"/ferramentas/navegacaodir/index.htm","","","Diret&oacute;rios");},
+		{i3GEO.janela.cria("550px","350px",i3GEO.configura.locaplic+"/ferramentas/navegacaodir/index.htm","","",$trad("x45"));},
 		/*
 		Function: importarwmc
 
@@ -2151,7 +2151,7 @@ i3GEO.arvoreDeTemas = {
 		Abre a janela para adicionar temas tendo como fonte um web service do tipo wms
 		*/
 		conectarwms: function()
-		{i3GEO.janela.cria("400px","300px",i3GEO.configura.locaplic+"/ferramentas/conectarwms/index.htm","","","Conex&atilde;o WMS <a class=ajuda_usuario target=_blank href='"+i3GEO.configura.locaplic+"/ajuda_usuario.php?idcategoria=4&idajuda=28' >&nbsp;&nbsp;&nbsp;</a>");},
+		{i3GEO.janela.cria("400px","300px",i3GEO.configura.locaplic+"/ferramentas/conectarwms/index.htm","","",$trad("a4")+" <a class=ajuda_usuario target=_blank href='"+i3GEO.configura.locaplic+"/ajuda_usuario.php?idcategoria=4&idajuda=28' >&nbsp;&nbsp;&nbsp;</a>");},
 		/*
 		Function: conectarwmst
 
@@ -2167,7 +2167,7 @@ i3GEO.arvoreDeTemas = {
 			{a = i3GEO.parametros.h + 200;}
 			else
 			{a = 350;}
-			i3GEO.janela.cria(l/2 + "px",a/2 + "px",i3GEO.configura.locaplic+"/ferramentas/wmstime/index.htm","","","Conex&atilde;o WMS-T <a class=ajuda_usuario target=_blank href='"+i3GEO.configura.locaplic+"/ajuda_usuario.php?idcategoria=4&idajuda=76' >&nbsp;&nbsp;&nbsp;</a>");
+			i3GEO.janela.cria(l/2 + "px",a/2 + "px",i3GEO.configura.locaplic+"/ferramentas/wmstime/index.htm","","",+$trad("x46")+" <a class=ajuda_usuario target=_blank href='"+i3GEO.configura.locaplic+"/ajuda_usuario.php?idcategoria=4&idajuda=76' >&nbsp;&nbsp;&nbsp;</a>");
 		},
 		/*
 		Function: conectarwfs
@@ -2190,7 +2190,7 @@ i3GEO.arvoreDeTemas = {
 		Abre a janela para adicionar temas tendo como fonte um georss
 		*/
 		conectargeorss: function()
-		{i3GEO.janela.cria("400px","300px",i3GEO.configura.locaplic+"/ferramentas/conectargeorss/index.htm","","","Conex&atilde;o GeoRSS <a class=ajuda_usuario target=_blank href='"+i3GEO.configura.locaplic+"/ajuda_usuario.php?idcategoria=4&idajuda=29' >&nbsp;&nbsp;&nbsp;</a>");},
+		{i3GEO.janela.cria("400px","300px",i3GEO.configura.locaplic+"/ferramentas/conectargeorss/index.htm","","",$trad("x47")+" <a class=ajuda_usuario target=_blank href='"+i3GEO.configura.locaplic+"/ajuda_usuario.php?idcategoria=4&idajuda=29' >&nbsp;&nbsp;&nbsp;</a>");},
 		/*
 		Function: upload
 

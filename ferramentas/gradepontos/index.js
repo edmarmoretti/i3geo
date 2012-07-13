@@ -47,17 +47,42 @@ Classe: i3GEOF.gradeDePontos
 i3GEOF.gradeDePontos = {
 	/*
 	Variavel: aguarde
-	
+
 	Estilo do objeto DOM com a imagem de aguarde existente no cabe&ccedil;alho da janela.
 	*/
 	aguarde: "",
 	/*
+		Para efeitos de compatibilidade antes da vers&atilde;o 4.7 que não tinha dicion&aacute;rio
+	*/
+	criaJanelaFlutuante: function(){
+		i3GEOF.gradeDePontos.iniciaDicionario();
+	},
+	/*
+	Function: iniciaDicionario
+
+	Carrega o dicion&aacute;rio e chama a fun&ccedil;&atilde;o que inicia a ferramenta
+
+	O Javascript &eacute; carregado com o id i3GEOF.nomedaferramenta.dicionario_script
+	*/
+	iniciaDicionario: function(){
+		if(typeof(i3GEOF.gradeDePontos.dicionario) === 'undefined'){
+			i3GEO.util.scriptTag(
+				i3GEO.configura.locaplic+"/ferramentas/gradepontos/dicionario.js",
+				"i3GEOF.gradeDePontos.iniciaJanelaFlutuante()",
+				"i3GEOF.gradeDePontos.dicionario_script"
+			);
+		}
+		else{
+			i3GEOF.gradeDePontos.iniciaJanelaFlutuante();
+		}
+	},
+	/*
 	Function: inicia
-	
+
 	Inicia a ferramenta. &Eacute; chamado por criaJanelaFlutuante
-	
+
 	Parametro:
-	
+
 	iddiv {String} - id do div que receber&aacute; o conteudo HTML da ferramenta
 	*/
 	inicia: function(iddiv){
@@ -70,11 +95,11 @@ i3GEOF.gradeDePontos = {
 	},
 	/*
 	Function: html
-	
+
 	Gera o c&oacute;digo html para apresenta&ccedil;ão das op&ccedil;&otilde;es da ferramenta
-	
+
 	Retorno:
-	
+
 	String com o c&oacute;digo html
 	*/
 	html:function(){
@@ -86,11 +111,11 @@ i3GEOF.gradeDePontos = {
 		return ins;
 	},
 	/*
-	Function: criaJanelaFlutuante
-	
+	Function: iniciaJanelaFlutuante
+
 	Cria a janela flutuante para controle da ferramenta.
-	*/	
-	criaJanelaFlutuante: function(){
+	*/
+	iniciaJanelaFlutuante: function(){
 		var minimiza,cabecalho,janela,divid,titulo;
 		//cria a janela flutuante
 		titulo = "Grade de pontos <a class=ajuda_usuario target=_blank href='" + i3GEO.configura.locaplic + "/ajuda_usuario.php?idcategoria=3&idajuda=15' >&nbsp;&nbsp;&nbsp;</a>";
@@ -148,7 +173,7 @@ i3GEOF.gradeDePontos = {
 		ins += "Minuto<input onclick='javascript:this.select();' class=digitar id='i3GEOgradedepontosiym' title='minuto'  type=text size=5 value='00'/>";
 		ins += "Segundo<input onclick='javascript:this.select();' class=digitar id='i3GEOgradedepontosiys' title='segundo'  type=text size=5 value='00.00'/>";
 		g_tipoacao = "capturaponto";
-		i3GEO.util.proximoAnterior("i3GEOF.gradeDePontos.t1()","i3GEOF.gradeDePontos.t3()",ins,"i3GEOF.gradeDePontos.t2","i3GEOgradedepontosresultado");	
+		i3GEO.util.proximoAnterior("i3GEOF.gradeDePontos.t1()","i3GEOF.gradeDePontos.t3()",ins,"i3GEOF.gradeDePontos.t2","i3GEOgradedepontosresultado");
 		if(i3GEO.eventos.MOUSECLIQUE.toString().search("i3GEOF.gradeDePontos.capturaPonto()") < 0)
 		{i3GEO.eventos.MOUSECLIQUE.push("i3GEOF.gradeDePontos.capturaPonto()");}
 		temp = function(){
@@ -171,15 +196,15 @@ i3GEOF.gradeDePontos = {
 		new YAHOO.widget.Button(
 			"i3GEOgradedepontosbotao1",
 			{onclick:{fn: i3GEOF.gradeDePontos.criaGrade}}
-		);		
+		);
 	},
 	/*
 	Function: criaGrade
-	
+
 	Cria a grade e adiciona um novo tema ao mapa
-	
+
 	Veja:
-	
+
 	<GRADEDEPONTOS>
 	*/
 	criaGrade: function(){
@@ -191,7 +216,7 @@ i3GEOF.gradeDePontos = {
 			dx = i3GEO.calculo.dms2dd($i("i3GEOgradedepontosxg").value,$i("i3GEOgradedepontosxm").value,$i("i3GEOgradedepontosxs").value);
 			dy = i3GEO.calculo.dms2dd($i("i3GEOgradedepontosyg").value,$i("i3GEOgradedepontosym").value,$i("i3GEOgradedepontosys").value);
 			ix = i3GEO.calculo.dms2dd($i("i3GEOgradedepontosixg").value,$i("i3GEOgradedepontosixm").value,$i("i3GEOgradedepontosixs").value);
-			iy = i3GEO.calculo.dms2dd($i("i3GEOgradedepontosiyg").value,$i("i3GEOgradedepontosiym").value,$i("i3GEOgradedepontosiys").value);	
+			iy = i3GEO.calculo.dms2dd($i("i3GEOgradedepontosiyg").value,$i("i3GEOgradedepontosiym").value,$i("i3GEOgradedepontosiys").value);
 			nptx = $i("i3GEOgradedepontosnptx").value;
 			npty = $i("i3GEOgradedepontosnpty").value;
 			if ((dx == 0) || (dy == 0))
@@ -217,7 +242,7 @@ i3GEOF.gradeDePontos = {
 	},
 	/*
 	Function: capturaPonto
-	
+
 	Captura um ponto no mapa e preenche os campos de coordenadas de in&iacute;cio da grade
 	*/
 	capturaPonto: function(){

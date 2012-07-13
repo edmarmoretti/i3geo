@@ -44,17 +44,42 @@ Classe: i3GEOF.outputformat
 i3GEOF.outputformat = {
 	/*
 	Variavel: aguarde
-	
+
 	Estilo do objeto DOM com a imagem de aguarde existente no cabe&ccedil;alho da janela.
 	*/
 	aguarde: "",
 	/*
+		Para efeitos de compatibilidade antes da vers&atilde;o 4.7 que não tinha dicion&aacute;rio
+	*/
+	criaJanelaFlutuante: function(){
+		i3GEOF.outputformat.iniciaDicionario();
+	},
+	/*
+	Function: iniciaDicionario
+
+	Carrega o dicion&aacute;rio e chama a fun&ccedil;&atilde;o que inicia a ferramenta
+
+	O Javascript &eacute; carregado com o id i3GEOF.nomedaferramenta.dicionario_script
+	*/
+	iniciaDicionario: function(){
+		if(typeof(i3GEOF.outputformat.dicionario) === 'undefined'){
+			i3GEO.util.scriptTag(
+				i3GEO.configura.locaplic+"/ferramentas/outputformat/dicionario.js",
+				"i3GEOF.outputformat.iniciaJanelaFlutuante()",
+				"i3GEOF.outputformat.dicionario_script"
+			);
+		}
+		else{
+			i3GEOF.outputformat.iniciaJanelaFlutuante();
+		}
+	},
+	/*
 	Function: inicia
-	
+
 	Inicia a ferramenta. &Eacute; chamado por criaJanelaFlutuante
-	
+
 	Parametro:
-	
+
 	iddiv {String} - id do div que receber&aacute; o conteudo HTML da ferramenta
 	*/
 	inicia: function(iddiv){
@@ -62,15 +87,15 @@ i3GEOF.outputformat = {
 			$i(iddiv).innerHTML += i3GEOF.outputformat.html();
 		}
 		catch(erro){alert(erro);}
-		
+
 	},
 	/*
 	Function: html
-	
+
 	Gera o c&oacute;digo html para apresenta&ccedil;ão das op&ccedil;&otilde;es da ferramenta
-	
+
 	Retorno:
-	
+
 	String com o c&oacute;digo html
 	*/
 	html:function(){
@@ -91,11 +116,11 @@ i3GEOF.outputformat = {
 		return ins;
 	},
 	/*
-	Function: criaJanelaFlutuante
-	
+	Function: iniciaJanelaFlutuante
+
 	Cria a janela flutuante para controle da ferramenta.
-	*/	
-	criaJanelaFlutuante: function(){
+	*/
+	iniciaJanelaFlutuante: function(){
 		var janela,divid,titulo,cabecalho,minimiza;
 		cabecalho = function(){};
 		minimiza = function(){
@@ -124,11 +149,11 @@ i3GEOF.outputformat = {
 	},
 	/*
 	Function: aplicar
-	
+
 	Aplica tipo de imagem
-	
+
 	Veja:
-	
+
 	<mudaOutputFormat>
 	*/
 	aplicar: function(tipo){

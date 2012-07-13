@@ -44,17 +44,42 @@ Classe: i3GEOF.nptpol
 i3GEOF.nptpol = {
 	/*
 	Variavel: aguarde
-	
+
 	Estilo do objeto DOM com a imagem de aguarde existente no cabe&ccedil;alho da janela.
 	*/
 	aguarde: "",
 	/*
+		Para efeitos de compatibilidade antes da vers&atilde;o 4.7 que não tinha dicion&aacute;rio
+	*/
+	criaJanelaFlutuante: function(){
+		i3GEOF.nptpol.iniciaDicionario();
+	},
+	/*
+	Function: iniciaDicionario
+
+	Carrega o dicion&aacute;rio e chama a fun&ccedil;&atilde;o que inicia a ferramenta
+
+	O Javascript &eacute; carregado com o id i3GEOF.nomedaferramenta.dicionario_script
+	*/
+	iniciaDicionario: function(){
+		if(typeof(i3GEOF.nptpol.dicionario) === 'undefined'){
+			i3GEO.util.scriptTag(
+				i3GEO.configura.locaplic+"/ferramentas/nptpol/dicionario.js",
+				"i3GEOF.nptpol.iniciaJanelaFlutuante()",
+				"i3GEOF.nptpol.dicionario_script"
+			);
+		}
+		else{
+			i3GEOF.nptpol.iniciaJanelaFlutuante();
+		}
+	},
+	/*
 	Function: inicia
-	
+
 	Inicia a ferramenta. &Eacute; chamado por criaJanelaFlutuante
-	
+
 	Parametro:
-	
+
 	iddiv {String} - id do div que receber&aacute; o conteudo HTML da ferramenta
 	*/
 	inicia: function(iddiv){
@@ -66,11 +91,11 @@ i3GEOF.nptpol = {
 	},
 	/*
 	Function: html
-	
+
 	Gera o c&oacute;digo html para apresenta&ccedil;ão das op&ccedil;&otilde;es da ferramenta
-	
+
 	Retorno:
-	
+
 	String com o c&oacute;digo html
 	*/
 	html:function(){
@@ -82,11 +107,11 @@ i3GEOF.nptpol = {
 		return ins;
 	},
 	/*
-	Function: criaJanelaFlutuante
-	
+	Function: iniciaJanelaFlutuante
+
 	Cria a janela flutuante para controle da ferramenta.
-	*/	
-	criaJanelaFlutuante: function(){
+	*/
+	iniciaJanelaFlutuante: function(){
 		var minimiza,cabecalho,janela,divid,temp,titulo;
 		//cria a janela flutuante
 		titulo = "Pontos em pol&iacute;gonos <a class=ajuda_usuario target=_blank href='" + i3GEO.configura.locaplic + "/ajuda_usuario.php?idcategoria=3&idajuda=19' >&nbsp;&nbsp;&nbsp;</a>";
@@ -141,15 +166,15 @@ i3GEOF.nptpol = {
 		new YAHOO.widget.Button(
 			"i3GEOnptpolbotao1",
 			{onclick:{fn: i3GEOF.nptpol.calcula}}
-		);		
+		);
 	},
 	/*
 	Function: calcula
-	
+
 	Faz o cruzamento entre os temas
-	
+
 	Veja:
-	
+
 	<NPTPOL>
 	*/
 	calcula: function(){
@@ -180,11 +205,11 @@ i3GEOF.nptpol = {
 	},
 	/*
 	Function: comboTemasPontos
-	
+
 	Cria um combo com a lista de temas pontuais
-	
+
 	Veja:
-	
+
 	<i3GEO.util.comboTemas>
 	*/
 	comboTemasPontos: function(){
@@ -206,15 +231,15 @@ i3GEOF.nptpol = {
 			"",
 			false,
 			"pontos"
-		);	
+		);
 	},
 	/*
 	Function: comboTemasPoligonos
-	
+
 	Cria um combo com a lista de temas poligonais
-	
+
 	Veja:
-	
+
 	<i3GEO.util.comboTemas>
 	*/
 	comboTemasPoligonos: function(){
@@ -236,6 +261,6 @@ i3GEOF.nptpol = {
 			"",
 			false,
 			"poligonos"
-		);	
+		);
 	}
 };

@@ -49,17 +49,42 @@ Classe: i3GEOF.wiki
 i3GEOF.wiki = {
 	/*
 	Variavel: aguarde
-	
+
 	Estilo do objeto DOM com a imagem de aguarde existente no cabe&ccedil;alho da janela.
 	*/
 	aguarde: "",
 	/*
+		Para efeitos de compatibilidade antes da vers&atilde;o 4.7 que não tinha dicion&aacute;rio
+	*/
+	criaJanelaFlutuante: function(){
+		i3GEOF.wiki.iniciaDicionario();
+	},
+	/*
+	Function: iniciaDicionario
+
+	Carrega o dicion&aacute;rio e chama a fun&ccedil;&atilde;o que inicia a ferramenta
+
+	O Javascript &eacute; carregado com o id i3GEOF.nomedaferramenta.dicionario_script
+	*/
+	iniciaDicionario: function(){
+		if(typeof(i3GEOF.wiki.dicionario) === 'undefined'){
+			i3GEO.util.scriptTag(
+				i3GEO.configura.locaplic+"/ferramentas/wiki/dicionario.js",
+				"i3GEOF.wiki.iniciaJanelaFlutuante()",
+				"i3GEOF.wiki.dicionario_script"
+			);
+		}
+		else{
+			i3GEOF.wiki.iniciaJanelaFlutuante();
+		}
+	},
+	/*
 	Function: inicia
-	
+
 	Inicia a ferramenta. &Eacute; chamado por criaJanelaFlutuante
-	
+
 	Parametro:
-	
+
 	iddiv {String} - id do div que receber&aacute; o conteudo HTML da ferramenta
 	*/
 	inicia: function(iddiv){
@@ -71,22 +96,22 @@ i3GEOF.wiki = {
 			}
 			if(i3GEO.Interface.ATUAL === "googlemaps"){
    				wikiDragend = google.maps.event.addListener(i3GeoMap, "dragend", function() {i3GEOF.wiki.lista();});
-   				wikiZoomend = google.maps.event.addListener(i3GeoMap, "zoomend", function() {i3GEOF.wiki.lista();});						
+   				wikiZoomend = google.maps.event.addListener(i3GeoMap, "zoomend", function() {i3GEOF.wiki.lista();});
 			}
 			if(i3GEO.Interface.ATUAL === "googleearth"){
    				wikiDragend = google.earth.addEventListener(i3GeoMap.getView(), "viewchangeend", function() {i3GEOF.wiki.lista();});
-			}			
+			}
 			i3GEOF.wiki.lista();
 		}
 		catch(erro){if(typeof(console) !== 'undefined'){console.error(erro);}}
 	},
 	/*
 	Function: html
-	
+
 	Gera o c&oacute;digo html para apresenta&ccedil;ão das op&ccedil;&otilde;es da ferramenta
-	
+
 	Retorno:
-	
+
 	String com o c&oacute;digo html
 	*/
 	html:function(){
@@ -95,11 +120,11 @@ i3GEOF.wiki = {
 		return ins;
 	},
 	/*
-	Function: criaJanelaFlutuante
-	
+	Function: iniciaJanelaFlutuante
+
 	Cria a janela flutuante para controle da ferramenta.
-	*/	
-	criaJanelaFlutuante: function(){
+	*/
+	iniciaJanelaFlutuante: function(){
 		var minimiza,cabecalho,janela,divid,temp,titulo;
 		//funcao que sera executada ao ser clicado no cabe&ccedil;alho da janela
 		cabecalho = function(){
@@ -136,13 +161,13 @@ i3GEOF.wiki = {
 			}
 			if(i3GEO.Interface.ATUAL === "googleearth"){
 				google.earth.removeEventListener(wikiDragend);
-			}			
+			}
 		};
-		YAHOO.util.Event.addListener(janela[0].close, "click", temp);		
+		YAHOO.util.Event.addListener(janela[0].close, "click", temp);
 	},
 	/*
 	Function: ativaFoco
-	
+
 	Refaz a interface da ferramenta quando a janela flutuante tem seu foco ativado
 	*/
 	ativaFoco: function(){
@@ -153,11 +178,11 @@ i3GEOF.wiki = {
 	},
 	/*
 	Function: lista
-	
+
 	Lista os artigos
-	
+
 	Veja:
-	
+
 	<LISTAARTIGOS>
 	*/
 	lista: function(){
@@ -181,6 +206,6 @@ i3GEOF.wiki = {
 		{ext = "-49.1774741355 -16.379556709 -47.2737662565 -14.9806872512";} //apenas para exemplo
 		p = i3GEO.configura.locaplic+"/ferramentas/wiki/funcoes.php?funcao=listaartigos&ret="+ext;
 		cp.call(p,"listaartigos",mostrar);
-		
+
 	}
 };

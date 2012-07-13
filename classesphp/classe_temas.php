@@ -40,65 +40,65 @@ class Temas
 {
 	/*
 	Variavel: $mapa
-	
+
 	Objeto mapa
 	*/
 	public $mapa;
 	/*
 	Variavel: $arquivo
-	
+
 	Arquivo map file
 	*/
 	protected $arquivo;
 	/*
 	Variavel: $layer
-	
+
 	Objeto layer
 	*/
 	protected $layer;
 	/*
 	Variavel: $nome
-	
+
 	Nome do layer
 	*/
 	protected $nome;
 	/*
 	Variavel: $grupo
-	
+
 	Array com os temas do grupo, se houver
 	*/
 	protected $grupo;
 	/*
 	Variavel: $visiveis
-	
+
 	Temas do grupo que s&atilde;o vis&iacute;veis em fun&ccedil;&atilde;o da escala
 	*/
 	protected $visiveis;
 	/*
 	Variavel: $indices
-	
+
 	Indices dos layers do grupo
 	*/
-	protected $indices;	
+	protected $indices;
 	/*
 	Variavel: $qyfile
-	
+
 	Nome do arquivo de sele&ccedil;&atilde;o (.qy)
 	*/
 	public $qyfile;
 	/*
 	Variavel: $v
-	
+
 	Vers&atilde;o atual do Mapserver (primeiro d&iacute;gito)
 	*/
 	public $v;
 /*
 function __construct
 
-Cria um objeto map e seta a variavel tema 
+Cria um objeto map e seta a variavel tema
 
 parameters:
-$map_file - Endere&ccedil;o do mapfile no servidor. 
+$map_file - Endere&ccedil;o do mapfile no servidor.
 
 $tema - nome do tema que ser&aacute; processado. (Pode ser uma lista separada por ',' mas só funciona nas fun&ccedil;&otilde;es que trabalham sobre os &iacute;ndices dos layers)
 
@@ -116,13 +116,13 @@ $ext - (opcional) extens&atilde;o geogr&aacute;fica que ser&aacute; aplicada ao 
   		else
   		include_once("funcoes_gerais.php");
 		$this->v = versao();
-		$this->v = $this->v["principal"];		
+		$this->v = $this->v["principal"];
   		$this->locaplic = $locaplic;
   		if($map_file != "")
 		{
 			$this->mapa = ms_newMapObj($map_file);
 			$this->arquivo = $map_file;
-			
+
 			if($tema != "")
 			{
 				$listaTemas = str_replace(" ",",",$tema);
@@ -155,8 +155,8 @@ $ext - (opcional) extens&atilde;o geogr&aacute;fica que ser&aacute; aplicada ao 
 /*
 function: salva
 
-Salva o mapfile atual 
-*/	
+Salva o mapfile atual
+*/
  	function salva()
  	{
 	  	if (connection_aborted()){exit();}
@@ -182,7 +182,7 @@ $lista - lista de processos separados por |
 			$this->layer->setprocessing($processo);
 			$this->layer->setMetaData("cache","");
 		}
-		
+
 		return("ok");
 	}
 /*
@@ -217,7 +217,7 @@ Gera a imagem desenhando apenas um tema na resolu&ccedil;&atilde;o atual.
 		}
 		$i = gravaImagemMapa($this->mapa);
 		return $i["url"];
-	}		
+	}
 /*
 function: alteraRepresentacao
 
@@ -238,7 +238,10 @@ A mudan&ccedil;a &eacute; feita apenas na representa&ccedil;&atilde;o do layer.
 			{$l->set("type",MS_LAYER_LINE);}
 			if (($l->type < 1) || ($l->type > 2))
 			{$retorno = "erro. O tipo desse tema nao pode ser alterado";}
-			$this->layer->setMetaData("cache","");
+			if ($this->layer)
+			{
+				$this->layer->setMetaData("cache","");
+			}
 		}
 		return $retorno;
 	}
@@ -394,14 +397,14 @@ Calcula a extens&atilde;o geogr&aacute;fica de um tema e ajusta o mapa para essa
 		if($this->mapa->getmetadata("interface") == "googlemaps"){
 			$projO = $this->mapa->getProjection();
 			$this->mapa->setProjection("init=epsg:4618,a=6378137,b=6378137");
-		}		
+		}
 		$prjMapa = "";
 		$prjTema = "";
 		if($this->layer->type != MS_LAYER_RASTER)
 		{
 			$prjMapa = $this->mapa->getProjection();
 			$prjTema = $this->layer->getProjection();
-		}	
+		}
 		$extatual = $this->mapa->extent;
 		$ret = $this->layer->getmetadata("extensao");
 		//
@@ -429,7 +432,7 @@ Calcula a extens&atilde;o geogr&aacute;fica de um tema e ajusta o mapa para essa
 			//echo "oi";exit;
 		}
 	  	if($this->mapa->getmetadata("interface") == "googlemaps")
-		{$this->mapa->setProjection($projO);}		
+		{$this->mapa->setProjection($projO);}
 		return("ok");
 	}
 /*
@@ -478,7 +481,7 @@ $testa - Testa o filtro e retorna uma imagem.
 				$filtro = str_replace("("," ",$filtro);
 				$filtro = str_replace(")"," ",$filtro);
 			}
-			if ($filtro == "")       
+			if ($filtro == "")
 			{$layer->setfilter($filtro);}
 			else
 			{
@@ -487,7 +490,7 @@ $testa - Testa o filtro e retorna uma imagem.
 				//corrige bug do mapserver
 				if (($v["completa"] == "4.10.0") && ($layer->connectiontype == MS_POSTGIS))
 				{$layer->setfilter("\"".$filtro."\"");}
-			}        
+			}
 			if ($testa == "")
 			{
 				$layer->setMetaData("cache","");
@@ -556,7 +559,7 @@ Muda o metadata CLASSE, invertendo seu valor
 			$ll->setmetaData("classe",$valor);
 		}
 		return("ok");
-	}	
+	}
 /*
 function: mudaNome
 
@@ -571,7 +574,7 @@ $valor - Novo nome.
 		$valor = str_replace("*","&",$valor);
 		$valor = str_replace("|",";",$valor);
 		$valor = html_entity_decode($valor);
-		
+
 		foreach ($this->grupo as $lg)
 		{
 			$ll = $this->mapa->getlayerbyname($lg);
@@ -754,7 +757,7 @@ $nome - nome que ser&aacute; dado a geometria
 		$this->mapa->setsize(30,30);
 		$ext = $this->mapa->extent;
 		$sb = $this->mapa->scalebar;
-		$sb->set("status",MS_OFF);		
+		$sb->set("status",MS_OFF);
 		$items = pegaItens($this->layer);
 		$final["layer"] = pegaNome($this->layer);
 		$shapes = retornaShapesSelecionados($this->layer,$this->arquivo,$this->mapa);
@@ -771,7 +774,7 @@ $nome - nome que ser&aacute; dado a geometria
 			}
 			$wktgeo=$shape->toWkt();
 			if ($wktgeo != "")
-			{			
+			{
 				$fechou = $this->layer->close();
 				$bounds = $shape->bounds;
 				//gera imagem
@@ -948,7 +951,7 @@ tema - código do tema
 					{
 							foreach($sgrupo->TEMA as $t)
 							{
-									
+
 								$link = ixml($t,"TLINK");
 								$tid = ixml($t,"TID");
 								if($tid == $tema)
@@ -972,7 +975,7 @@ Calcula a extens&atilde;o geogr&aacute;fica dos elementos selecionados de um tem
 		if($this->mapa->getmetadata("interface") == "googlemaps"){
 			$projO = $this->mapa->getProjection();
 			$this->mapa->setProjection("init=epsg:4291");
-		}		
+		}
 		$extatual = $this->mapa->extent;
 		$prjMapa = $this->mapa->getProjection();
 		$prjTema = $this->layer->getProjection();
@@ -1002,7 +1005,7 @@ Calcula a extens&atilde;o geogr&aacute;fica dos elementos selecionados de um tem
 		}
 		$extatual->setextent($ret->minx,$ret->miny,$ret->maxx,$ret->maxy);
 	  	if($this->mapa->getmetadata("interface") == "googlemaps")
-		{$this->mapa->setProjection($projO);}		
+		{$this->mapa->setProjection($projO);}
 		return("ok");
 	}
 /*
@@ -1071,7 +1074,7 @@ Altera o valor do elemento DATA
 function: adicionaLabel
 
 Adiciona LABEL em uma classe de um tema
-*/	
+*/
 	function adicionaLabel($novac,$wrap,$fonte,$tamanho,$angulo,$fundo,$sombra,$cor,$outlinecolor,$shadowcolor,$shadowsizex,$shadowsizey,$force,$mindistance,$minfeaturesize,$offsetx,$offsety,$partials,$position){
 		$label = $novac->label;
 		if($wrap != "")
@@ -1098,7 +1101,7 @@ Adiciona LABEL em uma classe de um tema
 			if ($tamanho >= 12 ){$t = MS_LARGE;}
 			if ($tamanho >= 14 ){$t = MS_GIANT;}
 			$label->set("size",$t);
-		}				
+		}
 		$label->set("angle",$angulo);
 		corE($label,$fundo,"backgroundcolor");
 		corE($label,$sombra,"backgroundshadowcolor",$sombrax,$sombray);
@@ -1115,7 +1118,8 @@ Adiciona LABEL em uma classe de um tema
 		$label->set("partials",$partials);
 		$p = array("MS_AUTO"=>MS_AUTO,"MS_UL"=>MS_UL,"MS_LR"=>MS_LR,"MS_UR"=>MS_UR,"MS_LL"=>MS_LL,"MS_CR"=>MS_CR,"MS_CL"=>MS_CL,"MS_UC"=>MS_UC,"MS_LC"=>MS_LC,"MS_CC"=>MS_CC);
 		$label->set("position",$p[$position]);
-		$this->layer->setMetaData("cache","");
+		if ($this->layer)
+		{$this->layer->setMetaData("cache","");}
 	}
 	function removeLabel($iclasse){
 		$classe = $this->layer->getclass($iclasse);
@@ -1123,7 +1127,8 @@ Adiciona LABEL em uma classe de um tema
 		$label->set("type",MS_TRUETYPE);
 		$label->set("font","arial");
 		$label->set("size",0);
-		$this->layer->setMetaData("cache","");		
-	}	
+		if ($this->layer)
+		{$this->layer->setMetaData("cache","");}
+	}
 }
 ?>

@@ -48,6 +48,31 @@ i3GEOF.salvamapfile = {
 	*/
 	aguarde: "",
 	/*
+		Para efeitos de compatibilidade antes da vers&atilde;o 4.7 que não tinha dicion&aacute;rio
+	*/
+	criaJanelaFlutuante: function(){
+		i3GEOF.salvamapfile.iniciaDicionario();
+	},
+	/*
+	Function: iniciaDicionario
+
+	Carrega o dicion&aacute;rio e chama a fun&ccedil;&atilde;o que inicia a ferramenta
+
+	O Javascript &eacute; carregado com o id i3GEOF.nomedaferramenta.dicionario_script
+	*/
+	iniciaDicionario: function(){
+		if(typeof(i3GEOF.salvamapfile.dicionario) === 'undefined'){
+			i3GEO.util.scriptTag(
+				i3GEO.configura.locaplic+"/ferramentas/salvamapfile/dicionario.js",
+				"i3GEOF.salvamapfile.iniciaJanelaFlutuante()",
+				"i3GEOF.salvamapfile.dicionario_script"
+			);
+		}
+		else{
+			i3GEOF.salvamapfile.iniciaJanelaFlutuante();
+		}
+	},
+	/*
 	Variavel: tema
 
 	c&oacute;digo do tema
@@ -94,11 +119,11 @@ i3GEOF.salvamapfile = {
 		catch(erro){alert(erro);}
 	},
 	/*
-	Function: criaJanelaFlutuante
+	Function: iniciaJanelaFlutuante
 
 	Cria a janela flutuante para controle da ferramenta.
 	*/
-	criaJanelaFlutuante: function(){
+	iniciaJanelaFlutuante: function(){
 		var janela,divid,titulo,cabecalho,minimiza;
 		cabecalho = function(){};
 		minimiza = function(){

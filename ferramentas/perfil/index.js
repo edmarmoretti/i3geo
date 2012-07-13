@@ -45,29 +45,54 @@ Class: i3GEOF.perfil
 i3GEOF.perfil = {
 	/*
 	Variavel: pontos
-	
+
 	Objeto com a lista de pontos iniciais enviadas como parâmetro na inicializa&ccedil;ão da ferramenta
 	*/
 	pontos: "",
 	/*
 	Variavel: dadosGrafico
-	
+
 	Dados no formato aceito pela ferramenta i3GEOF.graficointerativo
 	*/
 	dadosGrafico: [],
 	/*
 	Variavel: aguarde
-	
+
 	Objeto DOM com a imagem de aguarde existente no cabe&ccedil;alho da janela.
 	*/
 	aguarde: "",
 	/*
+		Para efeitos de compatibilidade antes da vers&atilde;o 4.7 que não tinha dicion&aacute;rio
+	*/
+	criaJanelaFlutuante: function(){
+		i3GEOF.perfil.iniciaDicionario();
+	},
+	/*
+	Function: iniciaDicionario
+
+	Carrega o dicion&aacute;rio e chama a fun&ccedil;&atilde;o que inicia a ferramenta
+
+	O Javascript &eacute; carregado com o id i3GEOF.nomedaferramenta.dicionario_script
+	*/
+	iniciaDicionario: function(){
+		if(typeof(i3GEOF.perfil.dicionario) === 'undefined'){
+			i3GEO.util.scriptTag(
+				i3GEO.configura.locaplic+"/ferramentas/perfil/dicionario.js",
+				"i3GEOF.perfil.iniciaJanelaFlutuante()",
+				"i3GEOF.perfil.dicionario_script"
+			);
+		}
+		else{
+			i3GEOF.perfil.iniciaJanelaFlutuante();
+		}
+	},
+	/*
 	Function: inicia
-	
+
 	Inicia a ferramenta. &Eacute; chamado por criaJanelaFlutuante
-	
+
 	Parametro:
-	
+
 	iddiv {String} - id do div que receber&aacute; o conteudo HTML da ferramenta
 	*/
 	inicia: function(iddiv){
@@ -77,17 +102,17 @@ i3GEOF.perfil = {
 			new YAHOO.widget.Button(
 				"i3GEOperfilbotao1",
 				{onclick:{fn: i3GEOF.perfil.criaPerfil}}
-			);		
+			);
 		}
 		catch(erro){alert(erro);}
 	},
 	/*
 	Function: html
-	
+
 	Gera o c&oacute;digo html para apresenta&ccedil;ão das op&ccedil;&otilde;es da ferramenta
-	
+
 	Retorno:
-	
+
 	String com o c&oacute;digo html
 	*/
 	html:function(){
@@ -95,24 +120,24 @@ i3GEOF.perfil = {
 		ins += "<p class='paragrafo' ><input onclick='if(this.checked == true){$i(\"i3GEOFperfilTemasSel\").value = \"\";$i(\"i3GEOFperfilDivComboItens\").innerHTML = \"\";}' style=cursor:pointer checked type=radio name=i3GEOFperfilFonte id=i3GEOFperfilFonteGoogle /> Google ou";
 		ins += "<p class='paragrafo' >um tema do mapa: <div style=text-align:left; id=i3GEOFperfilTemas ></div>";
 		ins += "<div style=text-align:left; id=i3GEOFperfilDivComboItens ></div><br>";
-		
+
 		ins += "<p class='paragrafo' ><input type=text id=i3GEOFperfilAmostragem value=20 size=3 /> N&uacute;mero de pontos que serão obtidos ao longo da linha";
 		ins += "<br><br><input id=i3GEOperfilbotao1 type='buttom' value='Criar gr&aacute;fico' />";
 		ins += "<br><br><div style=text-align:left id=i3GEOperfilfim ></div>";
 		return ins;
 	},
 	/*
-	Function: criaJanelaFlutuante
-	
+	Function: iniciaJanelaFlutuante
+
 	Cria a janela flutuante para controle da ferramenta.
-	
+
 	Parametro:
-	
+
 	pontos {objeto} - cont&eacute;m as coordenadas dos pontos que serão usados nos c&aacute;lculos, como no exemplo
-	
+
 	pontos = {xpt: [],ypt:[]}; //xpt são os valores de x (array) e ypt os valores de y (array)
-	*/	
-	criaJanelaFlutuante: function(pontos){
+	*/
+	iniciaJanelaFlutuante: function(pontos){
 		var minimiza,cabecalho,janela,divid,titulo;
 		i3GEOF.perfil.pontos = pontos;
 		//cria a janela flutuante
@@ -140,11 +165,11 @@ i3GEOF.perfil = {
 	},
 	/*
 	Function: criaPerfil
-	
+
 	Executa a opera&ccedil;ão de gera&ccedil;ão do perfil
-	
+
 	Veja:
-	
+
 	<DADOSPERFILRELEVO>
 	*/
 	criaPerfil: function(){
@@ -166,7 +191,7 @@ i3GEOF.perfil = {
 					//&eacute; obrigado mostrar o mapa do google quando o perfil usa o google
 					if($i("i3GEOFperfilFonteGoogle").checked === true && i3GEO.Interface.ATUAL !== "googlemaps"){
 						i3GEO.navega.dialogo.google(i3GEOF.perfil.listaPontos(true).split(","));
-					}	
+					}
 				}
 			};
 			if($i("i3GEOFperfilFonteGoogle").checked === true){
@@ -183,13 +208,13 @@ i3GEOF.perfil = {
 				i3GEOF.perfil.aguarde.visibility = "visible";
 				i3GEO.php.dadosPerfilRelevo(fim,$i("i3GEOFperfilTemasSel").value,pontos,$i("i3GEOFperfilAmostragem").value,$i("i3GEOFperfilComboItens").value);
 			}
-			
+
 		}
 		catch(e){$i("i3GEOperfilfim").innerHTML = "<p class='paragrafo' >Erro. "+e;i3GEO.janela.fechaAguarde();i3GEOF.perfil.aguarde.visibility = "hidden";}
 	},
 	/*
 	Function: iniciaGrafico
-	
+
 	Inicializa o gr&aacute;fico de perfil definindo os parâmetros da ferramenta i3GEOF.graficointerativo
 	*/
 	iniciaGrafico: function(){
@@ -199,13 +224,13 @@ i3GEOF.perfil = {
 	},
 	/*
 	Function: listaPontos
-	
+
 	Converte o objeto i3GEOF.perfil.pontos em uma string com a lista de pontos
-	
+
 	Parametro:
-	
+
 	normal {booblean} - quando true, retorna x e y, quando falso, retorna y e x
-	
+
 	Retorno:
 	{string}
 	*/
@@ -226,15 +251,15 @@ i3GEOF.perfil = {
 	},
 	/*
 	Function: converteDados
-	
+
 	Converte os dados com a altimetria para o formato aceito pela ferramenta de gr&aacute;ficos
-	
+
 	Parametro:
-	
+
 	google {objeto} - objeto no padrão da API do google veja http://code.google.com/intl/pt-BR/apis/maps/documentation/elevation
-	
+
 	Retorno:
-	
+
 	*/
 	converteDados: function(google){
 		var n = google.length,
@@ -248,11 +273,11 @@ i3GEOF.perfil = {
 	},
 	/*
 	Function: comboTemas
-	
+
 	Cria um combo com a lista de temas
-	
+
 	Veja:
-	
+
 	<i3GEO.util.comboTemas>
 	*/
 	comboTemas: function(){
@@ -288,6 +313,6 @@ i3GEOF.perfil = {
 			"",
 			false,
 			"ligados"
-		);	
-	}	
+		);
+	}
 };

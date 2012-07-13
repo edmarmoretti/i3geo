@@ -45,35 +45,61 @@ Classe: i3GEOF.inseretxt
 i3GEOF.inseretxt = {
 	/*
 	Variavel: aguarde
-	
+
 	Estilo do objeto DOM com a imagem de aguarde existente no cabe&ccedil;alho da janela.
 	*/
 	aguarde: "",
 	/*
 	Variavel: contaPontos
-	
+
 	Conta quantos pontos o usu&aacute;rio clicou na adi&ccedil;ão de um conector
 	*/
 	contaPontos: 0,
 	/*
 	Variavel: pontoi
-	
+
 	Primeiro ponto do conector clicado no mapa em DD
 	*/
 	pontoi: "0,0",
 	/*
 	Variavel: parDefault
-	
+
 	Parâmetros padrão utilizados para formatar o texto
-	*/	
+	*/
 	parDefault: "&inserefeature&&position=MS_UR&partials=1&offsetx=0&offsety=0&minfeaturesize=auto&mindistance=auto&force=0&shadowsizex=1&shadowsizey=1&cor=0 0 0&sombray=1&sombrax=1&angulo=0&tamanho=8&fonte=bitmap&fundo=off&sombra=off&outlinecolor=off&shadowcolor=off&wrap=",
+
+	/*
+		Para efeitos de compatibilidade antes da vers&atilde;o 4.7 que não tinha dicion&aacute;rio
+	*/
+	criaJanelaFlutuante: function(){
+		i3GEOF.inseretxt.iniciaDicionario();
+	},
+	/*
+	Function: iniciaDicionario
+
+	Carrega o dicion&aacute;rio e chama a fun&ccedil;&atilde;o que inicia a ferramenta
+
+	O Javascript &eacute; carregado com o id i3GEOF.nomedaferramenta.dicionario_script
+	*/
+	iniciaDicionario: function(){
+		if(typeof(i3GEOF.inseretxt.dicionario) === 'undefined'){
+			i3GEO.util.scriptTag(
+				i3GEO.configura.locaplic+"/ferramentas/inseretxt/dicionario.js",
+				"i3GEOF.inseretxt.iniciaJanelaFlutuante()",
+				"i3GEOF.inseretxt.dicionario_script"
+			);
+		}
+		else{
+			i3GEOF.inseretxt.iniciaJanelaFlutuante();
+		}
+	},
 	/*
 	Function: inicia
-	
+
 	Inicia a ferramenta. &Eacute; chamado por criaJanelaFlutuante
-	
+
 	Parametro:
-	
+
 	iddiv {String} - id do div que receber&aacute; o conteudo HTML da ferramenta
 	*/
 	inicia: function(iddiv){
@@ -101,7 +127,7 @@ i3GEOF.inseretxt = {
 									function(retorno){
 							 			$i("i3GEOinseretxtDivComboItens").innerHTML = "<p class=paragrafo >"+retorno.dados+"</p>";
 									}
-								);				 				
+								);
 				 			};
 						}
 						if(i3GEO.temaAtivo !== ""){
@@ -113,7 +139,7 @@ i3GEOF.inseretxt = {
 					"",
 					false,
 					"ligados"
-				);	
+				);
 			};
 			$i("i3GEOinseretxtguia3").onclick = function(){
 				//i3GEO.guias.mostraGuiaFerramenta("i3GEOinseretxtguia3","i3GEOinseretxtguia");
@@ -133,11 +159,11 @@ i3GEOF.inseretxt = {
 	},
 	/*
 	Function: html
-	
+
 	Gera o c&oacute;digo html para apresenta&ccedil;ão das op&ccedil;&otilde;es da ferramenta
-	
+
 	Retorno:
-	
+
 	String com o c&oacute;digo html
 	*/
 	html:function(){
@@ -150,7 +176,7 @@ i3GEOF.inseretxt = {
 		'	</ul>' +
 		'</div><br>' +
 		'	<div class=guiaobj id="i3GEOinseretxtguia1obj" style="left:1px;display:none;">' +
-		'		<p class="paragrafo" >Texto que ser&aacute; inserido:<br><br>' +	
+		'		<p class="paragrafo" >Texto que ser&aacute; inserido:<br><br>' +
 		$inputText("","","i3GEOinseretxttexto","",45,"") +
 		'		<br><br>' +
 		'		<input class=inputsb style=cursor:pointer type=checkbox id=i3GEOinseretxttextoconector >&nbsp;Insere com conector' +
@@ -278,17 +304,17 @@ i3GEOF.inseretxt = {
 		'			<tr><td>Caractere usado para indicar uma quebra de texto:</td><td>' +
 		$inputText("","","i3GEOinseretxtwrap_i","",5,"") +
 		'			</td></tr>' +
-		'		</table>' +			
+		'		</table>' +
 		'	</div>' +
 		'</div>	';
-		return ins;		
+		return ins;
 	},
 	/*
-	Function: criaJanelaFlutuante
-	
+	Function: iniciaJanelaFlutuante
+
 	Cria a janela flutuante para controle da ferramenta.
-	*/	
-	criaJanelaFlutuante: function(){
+	*/
+	iniciaJanelaFlutuante: function(){
 		var minimiza,cabecalho,janela,divid,temp,titulo;
 		//cria a janela flutuante
 		cabecalho = function(){
@@ -325,7 +351,7 @@ i3GEOF.inseretxt = {
 	},
 	/*
 	Function: ativaFoco
-	
+
 	Refaz a interface da ferramenta quando a janela flutuante tem seu foco ativado
 	*/
 	ativaFoco: function(){
@@ -339,14 +365,14 @@ i3GEOF.inseretxt = {
 	},
 	/*
 	Function: corj
-	
+
 	Abre a janela para o usu&aacute;rio selecionar uma cor interativamente
 	*/
 	corj: function(obj)
 	{i3GEO.util.abreCor("",obj);},
 	/*
 	Function: pegaPar
-	
+
 	Pega os parâmetros para montar a chamada ajax que cria ou testa a topon&iacute;mia
 	*/
 	pegaPar: function(){
@@ -361,11 +387,11 @@ i3GEOF.inseretxt = {
 	},
 	/*
 	Function: cria
-	
+
 	Cria um tema e insere o texto
-	
+
 	Veja:
-	
+
 	<i3GEO.php.identificaunico>
 	*/
 	cria: function(){
@@ -401,7 +427,7 @@ i3GEOF.inseretxt = {
 				else{
 					i3GEOF.inseretxt.iniciaInsere();
 				}
-				
+
 			}
 		}catch(e){alert("Erro: "+e);i3GEOF.inseretxt.aguarde.visibility = "hidden";}
 	},
@@ -429,19 +455,19 @@ i3GEOF.inseretxt = {
 			}
 			else
 			{i3GEOF.inseretxt.insere(texto);}
-		}	
+		}
 	},
 	/*
 	Function: insere
-	
+
 	Insere um texto no mapa
-	
+
 	Veja:
-	
+
 	<INSEREFEATURE>
-	
+
 	Parametro:
-	
+
 	texto {String}
 	*/
 	insere: function(texto){
@@ -466,15 +492,15 @@ i3GEOF.inseretxt = {
 	},
 	/*
 	Function: insereConector
-	
+
 	Insere um conector de textos
-	
+
 	Veja:
-	
+
 	<INSEREFEATURE>
-	
+
 	Parametro:
-	
+
 	xy {string} - lista de pontos
 	*/
 	insereConector: function(xy,texto){
@@ -493,7 +519,7 @@ i3GEOF.inseretxt = {
 		}
 		else{
 			par += "&tamanho=1";
-			par += "&cor=0 0 0";		
+			par += "&cor=0 0 0";
 		}
 		p = i3GEO.configura.locaplic+"/classesphp/mapa_controle.php?g_sid="+i3GEO.configura.sid+
 				"&funcao=inserefeature&"+par+"&pin="+nometema+"&tipo=LINE&texto="+texto+" (conector)&xy="+xy;

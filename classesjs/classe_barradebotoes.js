@@ -1457,7 +1457,7 @@ i3GEO.barraDeBotoes = {
 				i3GEO.janela.minimiza("i3GEOjanelaEditor");
 			};
 			//cria a janela flutuante
-			titulo = "Editor vetorial";
+			titulo = $trad("u29");
 			janela = i3GEO.janela.cria(
 				"300px",
 				"200px",

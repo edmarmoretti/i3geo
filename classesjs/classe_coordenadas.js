@@ -633,7 +633,7 @@ i3GEO.coordenadas = {
 					"",
 					"",
 					"",
-					"Coordenadas aproximadas",
+					$trad("x49"),
 					"i3GEOJanelaCoordenadas",
 					false,
 					"hd",

@@ -47,17 +47,42 @@ Classe: i3GEOF.inserexy
 i3GEOF.inserexy = {
 	/*
 	Variavel: aguarde
-	
+
 	Estilo do objeto DOM com a imagem de aguarde existente no cabe&ccedil;alho da janela.
 	*/
 	aguarde: "",
 	/*
+		Para efeitos de compatibilidade antes da vers&atilde;o 4.7 que não tinha dicion&aacute;rio
+	*/
+	criaJanelaFlutuante: function(){
+		i3GEOF.inserexy.iniciaDicionario();
+	},
+	/*
+	Function: iniciaDicionario
+
+	Carrega o dicion&aacute;rio e chama a fun&ccedil;&atilde;o que inicia a ferramenta
+
+	O Javascript &eacute; carregado com o id i3GEOF.nomedaferramenta.dicionario_script
+	*/
+	iniciaDicionario: function(){
+		if(typeof(i3GEOF.inserexy.dicionario) === 'undefined'){
+			i3GEO.util.scriptTag(
+				i3GEO.configura.locaplic+"/ferramentas/inserexy/dicionario.js",
+				"i3GEOF.inserexy.iniciaJanelaFlutuante()",
+				"i3GEOF.inserexy.dicionario_script"
+			);
+		}
+		else{
+			i3GEOF.inserexy.iniciaJanelaFlutuante();
+		}
+	},
+	/*
 	Function: inicia
-	
+
 	Inicia a ferramenta. &Eacute; chamado por criaJanelaFlutuante
-	
+
 	Parametro:
-	
+
 	iddiv {String} - id do div que receber&aacute; o conteudo HTML da ferramenta
 	*/
 	inicia: function(iddiv){
@@ -91,7 +116,7 @@ i3GEOF.inserexy = {
 			i3GEO.util.mensagemAjuda("i3GEOinserexymendd",$i("i3GEOinserexymendd").innerHTML);
 			i3GEO.util.mensagemAjuda("i3GEOinserexymen2",$i("i3GEOinserexymen2").innerHTML);
 			i3GEO.util.mensagemAjuda("i3GEOinserexymen3",$i("i3GEOinserexymen3").innerHTML);
-			
+
 			new YAHOO.widget.Button(
 				"i3GEOinserexybotaodd",
 				{onclick:{fn: i3GEOF.inserexy.inserirdd}}
@@ -104,7 +129,7 @@ i3GEOF.inserexy = {
 				"i3GEOinserexybotaoperfil",
 				{onclick:{fn: i3GEOF.inserexy.graficoPerfil}}
 			);
-			
+
 			new YAHOO.widget.Button(
 				"i3GEOinserexybotao2",
 				{onclick:{fn: i3GEOF.inserexy.inserir}}
@@ -139,11 +164,11 @@ i3GEOF.inserexy = {
 	},
 	/*
 	Function: html
-	
+
 	Gera o c&oacute;digo html para apresenta&ccedil;ão das op&ccedil;&otilde;es da ferramenta
-	
+
 	Retorno:
-	
+
 	String com o c&oacute;digo html
 	*/
 	html:function(){
@@ -238,7 +263,7 @@ i3GEOF.inserexy = {
 		'<div class=guiaobj id="i3GEOinserexyguia4obj" style="left:1px;display:none;">' +
 		'	<br><p class=paragrafo >Cole ou digite a lista de coordenadas:</p>' +
 		$inputText("","","i3GEOinserexycolar","pares",50,"") +
-		'	<br><br><p class=paragrafo ><input id=i3GEOinserexybotao6 type="button" size=14 value="Insere"  /></p>' +		
+		'	<br><br><p class=paragrafo ><input id=i3GEOinserexybotao6 type="button" size=14 value="Insere"  /></p>' +
 		'	<div id=i3GEOinserexymen3 style="display:block;left:0px;">' +
 		'		<p class=paragrafo >Cole os valores de X e Y, em d&eacute;cimos de grau, com sinal de negativo para oeste e sul, exemplo:<br> -54.23 -12.5 -50 -5.33<br>' +
 		'	</div>' +
@@ -251,15 +276,15 @@ i3GEOF.inserexy = {
 		'	</div>'+
 		'</div>' +
 		'<div class=guiaobj id="i3GEOinserexyguia6obj" style="left:1px;display:none;">' +
-		'</div>';		
-		return ins;		
+		'</div>';
+		return ins;
 	},
 	/*
-	Function: criaJanelaFlutuante
-	
+	Function: iniciaJanelaFlutuante
+
 	Cria a janela flutuante para controle da ferramenta.
-	*/	
-	criaJanelaFlutuante: function(){
+	*/
+	iniciaJanelaFlutuante: function(){
 		var minimiza,cabecalho,janela,divid,temp,titulo;
 		//cria a janela flutuante
 		cabecalho = function(){
@@ -286,7 +311,7 @@ i3GEOF.inserexy = {
 		i3GEOF.inserexy.aguarde = $i("i3GEOF.inserexy_imagemCabecalho").style;
 		$i("i3GEOF.inserexy_corpo").style.backgroundColor = "white";
 		i3GEOF.inserexy.inicia(divid);
-		
+
 		if(i3GEO.eventos.MOUSECLIQUE.toString().search("i3GEOF.inserexy.adicionaClique()") < 0)
 		{i3GEO.eventos.MOUSECLIQUE.push("i3GEOF.inserexy.adicionaClique()");}
 		temp = function(){
@@ -298,7 +323,7 @@ i3GEOF.inserexy = {
 	},
 	/*
 	Function: ativaFoco
-	
+
 	Refaz a interface da ferramenta quando a janela flutuante tem seu foco ativado
 	*/
 	ativaFoco: function(){
@@ -312,11 +337,11 @@ i3GEOF.inserexy = {
 	},
 	/*
 	Function: montaComboLocal
-	
+
 	Monta o combo com a lista de temas que podem ser editados (temas armazenados no diret&oacute;rio tempor&aacute;rio do i3Geo)
-	
+
 	Veja:
-	
+
 	<i3GEO.util.comboTemas>
 	*/
 	montaComboLocal: function(){
@@ -347,11 +372,11 @@ i3GEOF.inserexy = {
 	},
 	/*
 	Function: criatemaeditavel
-	
+
 	Cria um novo tema local para receber os pontos
-	
+
 	Veja:
-	
+
 	<CRIASHPVAZIO>
 	*/
 	criatemaeditavel: function(){
@@ -384,11 +409,11 @@ i3GEOF.inserexy = {
 	},
 	/*
 	Function: listaPontos
-	
+
 	Lista os pontos existentes no tema escolhido
-	
+
 	Veja:
-	
+
 	<LISTAPONTOSSHAPE>
 	*/
 	listaPontos: function(){
@@ -410,11 +435,11 @@ i3GEOF.inserexy = {
 	},
 	/*
 	Function: listaItens
-	
+
 	Lista os itens do tema escolhido para receber os pontos
-	
+
 	Veja:
-	
+
 	<i3GEO.util.comboItens>
 	*/
 	listaItens: function(){
@@ -426,13 +451,13 @@ i3GEOF.inserexy = {
 		 		$i("i3GEOinserexyopcitens").style.display = "block";
 			},
 			"i3GEOinserexyshapefileitem"
-		);		
+		);
 	},
 	/*
 	Function: adicionaClique
-	
+
 	Adiciona um ponto no mapa no local onde o usu&aacute;rio clicar com o mouse
-	
+
 	As coordenadas são obtidas do objeto objposicaocursor
 	*/
 	adicionaClique: function(){
@@ -440,7 +465,7 @@ i3GEOF.inserexy = {
 	},
 	/*
 	Function: inserirdd
-	
+
 	Insere um ponto com base na dire&ccedil;ão e distância
 	*/
 	inserirdd: function(){
@@ -464,7 +489,7 @@ i3GEOF.inserexy = {
 	},
 	/*
 	Function: inserir
-	
+
 	Insere pontos digitando-se as coordenadas
 	*/
 	inserir: function(){
@@ -494,7 +519,7 @@ i3GEOF.inserexy = {
 					ysv = ysv.replace(regv,".");
 				}
 			}
-			if($i("i3GEOinserexytipodigmascara").checked){		
+			if($i("i3GEOinserexytipodigmascara").checked){
 				xgv = $i("i3GEOinserexyxg").value;
 				xmv = $i("i3GEOinserexyxm").value;
 				xsv = $i("i3GEOinserexyxs").value;
@@ -513,7 +538,7 @@ i3GEOF.inserexy = {
 	},
 	/*
 	Functin: colar
-	
+
 	Captura as coordenadas coladas pelo usu&aacute;rio e insere os pontos
 	*/
 	colar: function(){
@@ -524,7 +549,7 @@ i3GEOF.inserexy = {
 	},
 	/*
 	Function: escolhedig
-	
+
 	Define o tipo de entrada de coordenadas (dms ou dd)
 	*/
 	escolhedig: function(q){
@@ -534,7 +559,7 @@ i3GEOF.inserexy = {
 	},
 	/*
 	Function: pegaProjecao
-	
+
 	Obt&eacute;m o c&oacute;digo da proje&ccedil;ão escolhida
 	*/
 	pegaProjecao: function(){
@@ -549,17 +574,17 @@ i3GEOF.inserexy = {
 	},
 	/*
 	Function: adiciona
-	
+
 	Adiciona um ponto no mapa
-	
+
 	Parametros:
-	
+
 	xy {string} - coordenadas x e y separadas por espa&ccedil;o
-	
+
 	fonte {string} - (opcional) como a coordenada foi obtida. Se for "cliqueMapa" o parametro proje&ccedil;ão ser&aacute; enviado como vazio para o servidor
-	
+
 	Veja:
-	
+
 	<i3GEO.php.insereSHP>
 	*/
 	adiciona: function(xy,fonte){
@@ -575,7 +600,7 @@ i3GEOF.inserexy = {
 				i,
 				xyn,
 				projecao = i3GEOF.inserexy.pegaProjecao();
-				
+
 			xyn = xy.split(" ");
 			n = xyn.length;
 			temp = "";
@@ -605,11 +630,11 @@ i3GEOF.inserexy = {
 	},
 	/*
 	Function: criaLin
-	
+
 	Converte os pontos de um tema em linhas
-	
+
 	Veja:
-	
+
 	<SPHPT2SHP>
 	*/
 	criaLin: function(){
@@ -627,11 +652,11 @@ i3GEOF.inserexy = {
 	},
 	/*
 	Function: criaPol
-	
+
 	Converte os pontos de um tema em poligonos
-	
+
 	Veja:
-	
+
 	<SPHPT2SHP>
 	*/
 	criaPol: function(){
@@ -649,11 +674,11 @@ i3GEOF.inserexy = {
 	},
 	/*
 	Function: wkt
-	
+
 	Converte os pontos em WKT
-	
+
 	Veja:
-	
+
 	<MOSTRAWKT>
 	*/
 	wkt: function(){
@@ -687,7 +712,7 @@ i3GEOF.inserexy = {
 	},
 	/*
 	Function: graficoPerfil
-	
+
 	Cria um gr&aacute;fico de perfil com base nos dados inseridos
 	*/
 	graficoPerfil: function(){
@@ -713,7 +738,7 @@ i3GEOF.inserexy = {
 			i3GEO.util.scriptTag(js,"i3GEOF.perfil.criaJanelaFlutuante(pontosdistobj)","i3GEOF.perfil_script");
 
 		}
-		catch(e){alert("Erro: "+e);}		
+		catch(e){alert("Erro: "+e);}
 	}
 };
 

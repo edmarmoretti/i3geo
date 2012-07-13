@@ -47,17 +47,42 @@ Classe: i3GEOF.pontoEmPoligono
 i3GEOF.pontoEmPoligono = {
 	/*
 	Variavel: aguarde
-	
+
 	Estilo do objeto DOM com a imagem de aguarde existente no cabe&ccedil;alho da janela.
 	*/
 	aguarde: "",
 	/*
+		Para efeitos de compatibilidade antes da vers&atilde;o 4.7 que não tinha dicion&aacute;rio
+	*/
+	criaJanelaFlutuante: function(){
+		i3GEOF.pontoEmPoligono.iniciaDicionario();
+	},
+	/*
+	Function: iniciaDicionario
+
+	Carrega o dicion&aacute;rio e chama a fun&ccedil;&atilde;o que inicia a ferramenta
+
+	O Javascript &eacute; carregado com o id i3GEOF.nomedaferramenta.dicionario_script
+	*/
+	iniciaDicionario: function(){
+		if(typeof(i3GEOF.pontoEmPoligono.dicionario) === 'undefined'){
+			i3GEO.util.scriptTag(
+				i3GEO.configura.locaplic+"/ferramentas/pontoempoligono/dicionario.js",
+				"i3GEOF.pontoEmPoligono.iniciaJanelaFlutuante()",
+				"i3GEOF.pontoEmPoligono.dicionario_script"
+			);
+		}
+		else{
+			i3GEOF.pontoEmPoligono.iniciaJanelaFlutuante();
+		}
+	},
+	/*
 	Function: inicia
-	
+
 	Inicia a ferramenta. &Eacute; chamado por criaJanelaFlutuante
-	
+
 	Parametro:
-	
+
 	iddiv {String} - id do div que receber&aacute; o conteudo HTML da ferramenta
 	*/
 	inicia: function(iddiv){
@@ -69,11 +94,11 @@ i3GEOF.pontoEmPoligono = {
 	},
 	/*
 	Function: html
-	
+
 	Gera o c&oacute;digo html para apresenta&ccedil;ão das op&ccedil;&otilde;es da ferramenta
-	
+
 	Retorno:
-	
+
 	String com o c&oacute;digo html
 	*/
 	html:function(){
@@ -85,11 +110,11 @@ i3GEOF.pontoEmPoligono = {
 		return ins;
 	},
 	/*
-	Function: criaJanelaFlutuante
-	
+	Function: iniciaJanelaFlutuante
+
 	Cria a janela flutuante para controle da ferramenta.
-	*/	
-	criaJanelaFlutuante: function(){
+	*/
+	iniciaJanelaFlutuante: function(){
 		var minimiza,cabecalho,janela,divid,temp,titulo;
 		//cria a janela flutuante
 		titulo = "Ponto em pol&iacute;gono - raster <a class=ajuda_usuario target=_blank href='" + i3GEO.configura.locaplic + "/ajuda_usuario.php?idcategoria=3&idajuda=18' >&nbsp;&nbsp;&nbsp;</a>";
@@ -119,7 +144,7 @@ i3GEOF.pontoEmPoligono = {
 		};
 		YAHOO.util.Event.addListener(janela[0].close, "click", temp);
 		if(i3GEO.eventos.ATUALIZAARVORECAMADAS.toString().search("i3GEOF.pontoEmPoligono.t0()") < 0)
-		{i3GEO.eventos.ATUALIZAARVORECAMADAS.push("i3GEOF.pontoEmPoligono.t0()");}		
+		{i3GEO.eventos.ATUALIZAARVORECAMADAS.push("i3GEOF.pontoEmPoligono.t0()");}
 	},
 	t0: function()
 	{
@@ -149,7 +174,7 @@ i3GEOF.pontoEmPoligono = {
 				ins += "<div id='i3GEOpontoEmPoligonoSelTemasPo' style='text-align:left;font-size:11px'></div>";
 				i3GEO.util.proximoAnterior("i3GEOF.pontoEmPoligono.t1()","i3GEOF.pontoEmPoligono.t3()",ins,"i3GEOF.pontoEmPoligono.t2","i3GEOpontoEmPoligonoresultado");
 				i3GEOF.pontoEmPoligono.comboTemasSelPo();
-			}	
+			}
 		}
 		else
 		{erro.call();}
@@ -161,15 +186,15 @@ i3GEOF.pontoEmPoligono = {
 		new YAHOO.widget.Button(
 			"i3GEOpontoEmPoligonobotao1",
 			{onclick:{fn: i3GEOF.pontoEmPoligono.executa}}
-		);		
+		);
 	},
 	/*
 	Function: executa
-	
+
 	Executa a opera&ccedil;ão de cruzamento
-	
+
 	Veja:
-	
+
 	<PONTOEMPOLIGONO>
 	*/
 	executa: function(){
@@ -211,11 +236,11 @@ i3GEOF.pontoEmPoligono = {
 	},
 	/*
 	Function: comboTemasSelPt
-	
+
 	Cria um combo com a lista de temas do tipo pontos
-	
+
 	Veja:
-	
+
 	<i3GEO.util.comboTemas>
 	*/
 	comboTemasSelPt: function(){
@@ -238,15 +263,15 @@ i3GEOF.pontoEmPoligono = {
 			"",
 			false,
 			"pontos"
-		);	
+		);
 	},
 	/*
 	Function: comboTemasSelPo
-	
+
 	Cria uma lista de temas do tipo poligonal ou raster
-	
+
 	Veja:
-	
+
 	<i3GEO.util.checkTemas>
 	*/
 	comboTemasSelPo: function(){
@@ -261,6 +286,6 @@ i3GEOF.pontoEmPoligono = {
 			"polraster",
 			"i3GEOpontoEmPoligono",
 			40
-		);		
+		);
 	}
 };

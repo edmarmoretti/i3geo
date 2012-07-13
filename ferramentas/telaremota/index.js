@@ -43,16 +43,41 @@ Classe: i3GEOF.telaremota
 */
 i3GEOF.telaremota = {
 	/*
+		Para efeitos de compatibilidade antes da vers&atilde;o 4.7 que não tinha dicion&aacute;rio
+	*/
+	criaJanelaFlutuante: function(tema){
+		i3GEOF.telaremota.iniciaDicionario(tema);
+	},
+	/*
+	Function: iniciaDicionario
+
+	Carrega o dicion&aacute;rio e chama a fun&ccedil;&atilde;o que inicia a ferramenta
+
+	O Javascript &eacute; carregado com o id i3GEOF.nomedaferramenta.dicionario_script
+	*/
+	iniciaDicionario: function(tema){
+		if(typeof(i3GEOF.telaremota.dicionario) === 'undefined'){
+			i3GEO.util.scriptTag(
+				i3GEO.configura.locaplic+"/ferramentas/telaremota/dicionario.js",
+				"i3GEOF.telaremota.iniciaJanelaFlutuante('"+tema+"')",
+				"i3GEOF.telaremota.dicionario_script"
+			);
+		}
+		else{
+			i3GEOF.telaremota.iniciaJanelaFlutuante(tema);
+		}
+	},
+	/*
 	Function: html
-	
+
 	Gera o c&oacute;digo html para apresenta&ccedil;ão das op&ccedil;&otilde;es da ferramenta
-	
+
 	Veja:
-	
+
 	<TELAREMOTA>
 
 	Parametros:
-	
+
 	divid {String} - id do div que receber&aacute; o conteudo HTML da ferramenta
 	*/
 	html:function(divid,tema){
@@ -79,18 +104,18 @@ i3GEOF.telaremota = {
 		p = i3GEO.configura.locaplic+"/classesphp/mapa_controle.php?g_sid="+i3GEO.configura.sid+"&funcao=telaremota";
 		cp = new cpaint();
 		cp.set_response_type("JSON");
-		cp.call(p,"telaremota",mostraLink);		
+		cp.call(p,"telaremota",mostraLink);
 	},
 	/*
-	Function: criaJanelaFlutuante
-	
+	Function: iniciaJanelaFlutuante
+
 	Cria a janela flutuante para controle da ferramenta.
-	
+
 	Parametros:
-	
+
 	tema {String} - c&oacute;digo do tema
-	*/	
-	criaJanelaFlutuante: function(tema){
+	*/
+	iniciaJanelaFlutuante: function(tema){
 		var janela,divid,temp,titulo;
 		if(arguments.length == 0)
 		{tema = i3GEO.temaAtivo;}
@@ -119,7 +144,7 @@ i3GEOF.telaremota = {
 		i3GEOF.telaremota.gravaExtent();
 		temp = function(){
 			if(i3GEO.eventos.NAVEGAMAPA.toString().search("gravaExtent()") > 0)
-			{i3GEO.eventos.NAVEGAMAPA.remove("i3GEOF.telaremota.gravaExtent()");}		
+			{i3GEO.eventos.NAVEGAMAPA.remove("i3GEOF.telaremota.gravaExtent()");}
 		};
 		YAHOO.util.Event.addListener(janela[0].close, "click", temp);
 		if(i3GEO.eventos.NAVEGAMAPA.toString().search("gravaExtent()") < 0)
@@ -127,7 +152,7 @@ i3GEOF.telaremota = {
 	},
 	/*
 	Function: gravaExtent
-	
+
 	Grava a extensão geogr&aacute;fica do mapa atual na section PHP aberta pelo mapa atual.
 	*/
 	gravaExtent: function(){
@@ -136,6 +161,6 @@ i3GEOF.telaremota = {
 		p = i3GEO.configura.locaplic+"/ferramentas/telaremota/recuperamapa.php?funcao=registra&g_sid="+i3GEO.configura.sid+"&ext="+i3GEO.parametros.mapexten;
 		cp = new cpaint();
 		cp.set_response_type("JSON");
-		cp.call(p,"recuperamapa",temp);	
+		cp.call(p,"recuperamapa",temp);
 	}
 };

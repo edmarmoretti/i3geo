@@ -3,7 +3,7 @@
 /*
 Title: Op&ccedil;&otilde;es de filtro de imagem
 
-Abre janela de op&ccedil;&otilde;es para defini&ccedil;ão do tipo de filtro de imagem que ser&aacute; aplicado ao mapa. 
+Abre janela de op&ccedil;&otilde;es para defini&ccedil;ão do tipo de filtro de imagem que ser&aacute; aplicado ao mapa.
 
 Veja:
 
@@ -44,23 +44,48 @@ Classe: i3GEOF.tipoimagem
 i3GEOF.tipoimagem = {
 	/*
 	Variavel: aguarde
-	
+
 	Estilo do objeto DOM com a imagem de aguarde existente no cabe&ccedil;alho da janela.
 	*/
 	aguarde: "",
 	/*
+		Para efeitos de compatibilidade antes da vers&atilde;o 4.7 que não tinha dicion&aacute;rio
+	*/
+	criaJanelaFlutuante: function(){
+		i3GEOF.tipoimagem.iniciaDicionario();
+	},
+	/*
+	Function: iniciaDicionario
+
+	Carrega o dicion&aacute;rio e chama a fun&ccedil;&atilde;o que inicia a ferramenta
+
+	O Javascript &eacute; carregado com o id i3GEOF.nomedaferramenta.dicionario_script
+	*/
+	iniciaDicionario: function(){
+		if(typeof(i3GEOF.tipoimagem.dicionario) === 'undefined'){
+			i3GEO.util.scriptTag(
+				i3GEO.configura.locaplic+"/ferramentas/tipoimagem/dicionario.js",
+				"i3GEOF.tipoimagem.iniciaJanelaFlutuante()",
+				"i3GEOF.tipoimagem.dicionario_script"
+			);
+		}
+		else{
+			i3GEOF.tipoimagem.iniciaJanelaFlutuante();
+		}
+	},
+	/*
 	Function: inicia
-	
+
 	Inicia a ferramenta. &Eacute; chamado por criaJanelaFlutuante
-	
+
 	Parametro:
-	
+
 	iddiv {String} - id do div que receber&aacute; o conteudo HTML da ferramenta
 	*/
 	inicia: function(iddiv){
 		try{
 			var temp,f;
-			
+
 			$i(iddiv).innerHTML += i3GEOF.tipoimagem.html();
 			new YAHOO.widget.Button(
 				"i3GEOFtipoImagemListaDeFiltrosOk",
@@ -69,27 +94,27 @@ i3GEOF.tipoimagem = {
 			temp = $i("i3GEOFtipoImagemListaDeFiltrosOk-button").style;
 			temp.minHeight = "1.5em";
 			temp.padding = "0px 5px";
-			
+
 			f = i3GEO.configura.tipoimagem;
 			if(f == 'nenhum')
 			{f = "";}
 			$i("i3GEOFtipoImagemListaDeFiltros").value = f;
-			
+
 			var temp = function(retorno){
 				g_legendaHTML = retorno.data.legenda;
 			};
 			i3GEO.php.criaLegendaHTML(temp,"","legendaseminput.htm");
 		}
 		catch(erro){alert(erro);}
-		
+
 	},
 	/*
 	Function: html
-	
+
 	Gera o c&oacute;digo html para apresenta&ccedil;ão das op&ccedil;&otilde;es da ferramenta
-	
+
 	Retorno:
-	
+
 	String com o c&oacute;digo html
 	*/
 	html:function(){
@@ -151,11 +176,11 @@ i3GEOF.tipoimagem = {
 		return ins;
 	},
 	/*
-	Function: criaJanelaFlutuante
-	
+	Function: iniciaJanelaFlutuante
+
 	Cria a janela flutuante para controle da ferramenta.
-	*/	
-	criaJanelaFlutuante: function(){
+	*/
+	iniciaJanelaFlutuante: function(){
 		var janela,divid,titulo,cabecalho,minimiza;
 		cabecalho = function(){};
 		minimiza = function(){
@@ -184,7 +209,7 @@ i3GEOF.tipoimagem = {
 	},
 	/*
 	Function: aplicar
-	
+
 	Aplica o filtro de imagem escolhido
 	*/
 	aplicar: function(){
@@ -198,7 +223,7 @@ i3GEOF.tipoimagem = {
 	},
 	/*
 	Function: adicionar
-	
+
 	Adiciona um filtro na lista de filtros que serão aplicados
 	*/
 	adicionar: function(filtro){

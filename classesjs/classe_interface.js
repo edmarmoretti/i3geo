@@ -2281,7 +2281,7 @@ i3GEO.Interface = {
 					"",
 					"",
 					"",
-					"Ferramentas",
+					$trad("u15a"),
 					"i3GEOF.ferramentasGE",
 					false,
 					"hd",

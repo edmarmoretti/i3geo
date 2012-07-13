@@ -48,17 +48,42 @@ Classe: i3GEOF.toponimia
 i3GEOF.toponimia = {
 	/*
 	Variavel: aguarde
-	
+
 	Estilo do objeto DOM com a imagem de aguarde existente no cabe&ccedil;alho da janela.
 	*/
 	aguarde: "",
 	/*
+		Para efeitos de compatibilidade antes da vers&atilde;o 4.7 que não tinha dicion&aacute;rio
+	*/
+	criaJanelaFlutuante: function(){
+		i3GEOF.toponimia.iniciaDicionario();
+	},
+	/*
+	Function: iniciaDicionario
+
+	Carrega o dicion&aacute;rio e chama a fun&ccedil;&atilde;o que inicia a ferramenta
+
+	O Javascript &eacute; carregado com o id i3GEOF.nomedaferramenta.dicionario_script
+	*/
+	iniciaDicionario: function(){
+		if(typeof(i3GEOF.toponimia.dicionario) === 'undefined'){
+			i3GEO.util.scriptTag(
+				i3GEO.configura.locaplic+"/ferramentas/toponimia/dicionario.js",
+				"i3GEOF.toponimia.iniciaJanelaFlutuante()",
+				"i3GEOF.toponimia.dicionario_script"
+			);
+		}
+		else{
+			i3GEOF.toponimia.iniciaJanelaFlutuante();
+		}
+	},
+	/*
 	Function: inicia
-	
+
 	Inicia a ferramenta. &Eacute; chamado por criaJanelaFlutuante
-	
+
 	Parametro:
-	
+
 	iddiv {String} - id do div que receber&aacute; o conteudo HTML da ferramenta
 	*/
 	inicia: function(iddiv){
@@ -102,11 +127,11 @@ i3GEOF.toponimia = {
 	},
 	/*
 	Function: html
-	
+
 	Gera o c&oacute;digo html para apresenta&ccedil;ão das op&ccedil;&otilde;es da ferramenta
-	
+
 	Retorno:
-	
+
 	String com o c&oacute;digo html
 	*/
 	html:function(){
@@ -119,7 +144,7 @@ i3GEOF.toponimia = {
 		'	</ul>' +
 		'</div><br>' +
 		'	<div class=guiaobj id="i3GEOtoponimiaguia1obj" style="left:1px;90%;display:none;">' +
-		'			<p class="paragrafo" >Escolha o item que cont&eacute;m os textos que serão mostrados no mapa<br>' +	
+		'			<p class="paragrafo" >Escolha o item que cont&eacute;m os textos que serão mostrados no mapa<br>' +
 		'			<div id=i3GEOtoponimiaDivListaItens ></div>' +
 		'			<br>' +
 		'			<p class="paragrafo" ><input style="cursor:pointer" type="checkbox" id="i3GEOtoponimianovotema" />&nbsp;Adiciona a topon&iacute;mia no tema atual (deixe desmarcado para criar como uma nova camada)' +
@@ -226,20 +251,20 @@ i3GEOF.toponimia = {
 		'			<tr><td>Caractere usado para indicar uma quebra de texto:</td><td>' +
 		$inputText("","","i3GEOtoponimiawrap_i","",5,"") +
 		'			</td></tr>' +
-		'		</table>' +			
+		'		</table>' +
 		'	</div>' +
 		'	<div class=guiaobj id="i3GEOtoponimiaguia3obj" style="left:1px;90%;display:none;">' +
 		'		<div id=i3GEOtoponimiaTeste style="width:98%;top:15px;left:0px;" ></div>' +
 		'	</div>' +
 		'</div>	';
-		return ins;		
+		return ins;
 	},
 	/*
-	Function: criaJanelaFlutuante
-	
+	Function: iniciaJanelaFlutuante
+
 	Cria a janela flutuante para controle da ferramenta.
-	*/	
-	criaJanelaFlutuante: function(){
+	*/
+	iniciaJanelaFlutuante: function(){
 		varjanela,divid,temp,titulo;
 		if($i("i3GEOF.toponimia")){
 			i3GEOF.toponimia.tema = i3GEO.temaAtivo;
@@ -265,20 +290,20 @@ i3GEOF.toponimia = {
 		i3GEOF.toponimia.inicia(divid);
 		temp = function(){
 			if(i3GEO.eventos.ATUALIZAARVORECAMADAS.toString().search('i3GEO.janela.comboCabecalhoTemas("i3GEOFtoponimiaComboCabeca","i3GEOFtoponimiaComboCabecaSel","toponimia","ligadosComTabela")') > 0)
-			{i3GEO.eventos.ATUALIZAARVORECAMADAS.remove('i3GEO.janela.comboCabecalhoTemas("i3GEOFtoponimiaComboCabeca","i3GEOFtoponimiaComboCabecaSel","toponimia","ligadosComTabela")');}			
+			{i3GEO.eventos.ATUALIZAARVORECAMADAS.remove('i3GEO.janela.comboCabecalhoTemas("i3GEOFtoponimiaComboCabeca","i3GEOFtoponimiaComboCabecaSel","toponimia","ligadosComTabela")');}
 		};
-		YAHOO.util.Event.addListener(janela[0].close, "click", temp);		
+		YAHOO.util.Event.addListener(janela[0].close, "click", temp);
 	},
 	/*
 	Function: corj
-	
+
 	Abre a janela para o usu&aacute;rio selecionar uma cor interativamente
 	*/
 	corj: function(obj)
 	{i3GEO.util.abreCor("",obj);},
 	/*
 	Function: pegaPar
-	
+
 	Pega os parâmetros para montar a chamada ajax que cria ou testa a topon&iacute;mia
 	*/
 	pegaPar: function(){
@@ -291,7 +316,7 @@ i3GEOF.toponimia = {
 		if($i("i3GEOtoponimiasombra_i").value === "")
 		{$i("i3GEOtoponimiasombra_i").value = "off";}
 		if($i("i3GEOtoponimiamascara_i").value === "")
-		{$i("i3GEOtoponimiamascara_i").value = "off";}				
+		{$i("i3GEOtoponimiamascara_i").value = "off";}
 		if($i("i3GEOtoponimiafrentes_i").value === "")
 		{$i("i3GEOtoponimiafrentes_i").value = "off";}
 		if($i("i3GEOtoponimianovotema").checked)
@@ -323,11 +348,11 @@ i3GEOF.toponimia = {
 	},
 	/*
 	Function: cria
-	
+
 	Cria a topon&iacute;mia no tema selecionado
-	
+
 	Veja:
-	
+
 	<CRIATOPONIMIA>
 	*/
 	cria: function(){
@@ -356,11 +381,11 @@ i3GEOF.toponimia = {
 	},
 	/*
 	Function:
-	
+
 	Testa a cria&ccedil;ão da topon&iacute;mia gerando uma imagem tempor&aacute;ria
-	
+
 	Veja:
-	
+
 	<CRIATOPONIMIA>
 	*/
 	testa: function(){

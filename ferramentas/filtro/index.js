@@ -48,23 +48,48 @@ Classe: i3GEOF.filtro
 i3GEOF.filtro = {
 	/*
 	Variavel: aguarde
-	
+
 	Estilo do objeto DOM com a imagem de aguarde existente no cabe&ccedil;alho da janela.
 	*/
 	aguarde: "",
 	/*
 	Variavel: comboTemas
-	
+
 	Armazena o combo com os itens do tema
 	*/
 	comboTemas: "",
 	/*
+		Para efeitos de compatibilidade antes da vers&atilde;o 4.7 que não tinha dicion&aacute;rio
+	*/
+	criaJanelaFlutuante: function(){
+		i3GEOF.filtro.iniciaDicionario();
+	},
+	/*
+	Function: iniciaDicionario
+
+	Carrega o dicion&aacute;rio e chama a fun&ccedil;&atilde;o que inicia a ferramenta
+
+	O Javascript &eacute; carregado com o id i3GEOF.nomedaferramenta.dicionario_script
+	*/
+	iniciaDicionario: function(){
+		if(typeof(i3GEOF.filtro.dicionario) === 'undefined'){
+			i3GEO.util.scriptTag(
+				i3GEO.configura.locaplic+"/ferramentas/filtro/dicionario.js",
+				"i3GEOF.filtro.iniciaJanelaFlutuante()",
+				"i3GEOF.filtro.dicionario_script"
+			);
+		}
+		else{
+			i3GEOF.filtro.iniciaJanelaFlutuante();
+		}
+	},
+	/*
 	Function: inicia
-	
+
 	Inicia a ferramenta. &Eacute; chamado por criaJanelaFlutuante
-	
+
 	Parametro:
-	
+
 	iddiv {String} - id do div que receber&aacute; o conteudo HTML da ferramenta
 	*/
 	inicia: function(iddiv){
@@ -112,11 +137,11 @@ i3GEOF.filtro = {
 	},
 	/*
 	Function: html
-	
+
 	Gera o c&oacute;digo html para apresenta&ccedil;ão das op&ccedil;&otilde;es da ferramenta
-	
+
 	Retorno:
-	
+
 	String com o c&oacute;digo html
 	*/
 	html:function(){
@@ -155,20 +180,20 @@ i3GEOF.filtro = {
 		$inputText("","","i3GEOfiltrofiltro","",65,"") +
 		'</p></div>'+
 		'<div class=guiaobj id="i3GEOfiltroguia3obj" style="left:1px;display:none;">'+
-		'</div>';		
+		'</div>';
 		return ins;
 	},
 	/*
-	Function: criaJanelaFlutuante
-	
+	Function: iniciaJanelaFlutuante
+
 	Cria a janela flutuante para controle da ferramenta.
-	*/	
-	criaJanelaFlutuante: function(){
+	*/
+	iniciaJanelaFlutuante: function(){
 		var janela,divid,temp,titulo;
 		if($i("i3GEOF.filtro")){
 			i3GEOF.filtro.inicia("i3GEOF.tabela_corpo");
 			return;
-		}		
+		}
 		//cria a janela flutuante
 		titulo = "<div style='z-index:1;position:absolute' id='i3GEOFfiltroComboCabeca' >------</div>&nbsp;&nbsp;&nbsp;Filtro <a class=ajuda_usuario target=_blank href='" + i3GEO.configura.locaplic + "/ajuda_usuario.php?idcategoria=5&idajuda=38' >&nbsp;&nbsp;&nbsp;</a>";
 		janela = i3GEO.janela.cria(
@@ -188,13 +213,13 @@ i3GEOF.filtro = {
 		i3GEOF.filtro.inicia(divid);
 		temp = function(){
 			if(i3GEO.eventos.ATUALIZAARVORECAMADAS.toString().search('i3GEO.janela.comboCabecalhoTemas("i3GEOFfiltroComboCabeca","i3GEOFfiltroComboCabecaSel","filtro","ligadosComTabela")') > 0)
-			{i3GEO.eventos.ATUALIZAARVORECAMADAS.remove('i3GEO.janela.comboCabecalhoTemas("i3GEOFfiltroComboCabeca","i3GEOFfiltroComboCabecaSel","filtro","ligadosComTabela")');}			
+			{i3GEO.eventos.ATUALIZAARVORECAMADAS.remove('i3GEO.janela.comboCabecalhoTemas("i3GEOFfiltroComboCabeca","i3GEOFfiltroComboCabecaSel","filtro","ligadosComTabela")');}
 		};
 		YAHOO.util.Event.addListener(janela[0].close, "click", temp);
 	},
 	/*
 	Function: adicionaLinhaFiltro
-	
+
 	Adiciona uma nova linha de filtro
 	*/
 	adicionaLinhaFiltro: function(){
@@ -205,7 +230,7 @@ i3GEOF.filtro = {
 			add.style.cursor="pointer";
 			add.onclick = function()
 			{i3GEOF.filtro.adicionaLinhaFiltro();};
-			
+
 			xis = document.createElement("img");
 			xis.src = i3GEO.configura.locaplic+'/imagens/x.gif';
 			xis.style.cursor="pointer";
@@ -215,7 +240,7 @@ i3GEOF.filtro = {
 				for (i = 0; i < p.childNodes.length;i++)
 				{p.removeChild(p.childNodes[i]);}
 			};
-			
+
 			interrogacao = document.createElement("img");
 			interrogacao.src = i3GEO.configura.locaplic+'/imagens/interrogacao.gif';
 			interrogacao.title='mostra valores';
@@ -233,12 +258,12 @@ i3GEOF.filtro = {
 						if ($i("i3GEOfiltrocbitens")){
 							$i("i3GEOfiltrocbitens").onchange = function()
 							{obj.value = this.value;};
-						}		
+						}
 					},
 					"i3GEOfiltrovalores"
 				);
 			};
-			
+
 			operador = "<select>";
 			operador += "<option value='='>igual</option>";
 			operador += "<option value='!='>dif</option>";
@@ -248,45 +273,45 @@ i3GEOF.filtro = {
 			operador += "<option value='>='>>=</option>";
 			operador += "<option value='in'>in</option>";
 			operador += "<option value='~='>regExp</option></select>";
-			
+
 			conector = "<select>";
 			conector += "<option value='and'>e</option>";
 			conector += "<option value='or'>ou</option>";
 			conector += "<option value='not'>n&atilde;o</option></select>";
-			
+
 			valor = document.createElement("input");
 			valor.type = "text";
 			valor.value = "";
 			valor.size = "20";
-			
+
 			ntb = document.createElement("tbody");
 			ntr = document.createElement("tr");
 			ntad = document.createElement("td");
 			ntad.appendChild(add);
 			ntr.appendChild(ntad);
-			
+
 			ntd = document.createElement("td");
 			ntd.appendChild(xis);
 			ntr.appendChild(ntd);
-			
+
 			ntd1 = document.createElement("td");
 			ntd1.innerHTML = i3GEOF.filtro.comboTemas;
 			ntr.appendChild(ntd1);
-			
+
 			ntd2 = document.createElement("td");
 			ntd2.innerHTML = operador;
 			ntr.appendChild(ntd2);
-			
+
 			ntd3 = document.createElement("td");
 			ntd3.appendChild(valor);
 			ntd3.appendChild(interrogacao);
 			ntr.appendChild(ntd3);
-			
+
 			ntd4 = document.createElement("td");
 			ntd4.innerHTML = conector;
 			ntr.appendChild(ntd4);
 			ntb.appendChild(ntr);
-			
+
 			tabela = $i("i3GEOfiltroparametros");
 			tabela.appendChild(ntb);
 		}
@@ -294,11 +319,11 @@ i3GEOF.filtro = {
 	},
 	/*
 	Function: pegaFiltro
-	
+
 	Pega o filtro atual de um tema
-	
+
 	Veja:
-	
+
 	<PEGAFILTRO>
 	*/
 	pegaFiltro: function(){
@@ -313,11 +338,11 @@ i3GEOF.filtro = {
 	},
 	/*
 	Function: limpaFiltro
-	
+
 	Limpa o filtro de um tema
-	
+
 	Veja:
-	
+
 	<INSEREFILTRO>
 	*/
 	limpaFiltro: function(){
@@ -334,21 +359,21 @@ i3GEOF.filtro = {
 					i3GEO.Interface.atualizaTema(retorno,i3GEO.temaAtivo);
 				};
 			cp.set_response_type("JSON");
-			cp.call(p,"insereFiltro",temp);			
+			cp.call(p,"insereFiltro",temp);
 		}
 		catch(e){alert("Erro: "+e);}
 	},
 	/*
 	Function: aplicaFiltro
-	
+
 	Aplica um filtro ao tema
-	
+
 	Veja:
-	
+
 	<INSEREFILTRO>
-	
+
 	Parametro:
-	
+
 	testa {String} - sim|nao indica a realiza&ccedil;ão de teste ou aplica&ccedil;ão final do filtro
 	*/
 	aplicaFiltro: function(testa){
@@ -365,7 +390,7 @@ i3GEOF.filtro = {
 				re = new RegExp("'","g");
 				filtro = filtro.replace(re,"|");
 				filtro = filtro.replace(re,"");
-				filtro = filtro.replace(re,"");	
+				filtro = filtro.replace(re,"");
 			}
 			else{
 				g = $i("i3GEOfiltroparametros");
@@ -408,7 +433,7 @@ i3GEOF.filtro = {
 					{i3GEO.atualiza(retorno);}
 					i3GEO.Interface.atualizaTema(retorno,i3GEO.temaAtivo);
 			 		i3GEOF.filtro.aguarde.visibility = "hidden";
-			 	};		
+			 	};
 			}
 			cp.call(p,"insereFiltro",temp,"tema="+i3GEO.temaAtivo,"filtro="+filtro,"testa="+testa);
 		}

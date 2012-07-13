@@ -49,40 +49,65 @@ Classe: i3GEOF.nuvemtags
 i3GEOF.nuvemtags = {
 	/*
 	Variavel: aguarde
-	
+
 	Estilo do objeto DOM com a imagem de aguarde existente no cabe&ccedil;alho da janela.
 	*/
 	aguarde: "",
 	/*
 	Variavel: tags
-	
+
 	Objeto JSON com a lista de tags
 	*/
 	tags: "",
 	/*
 	Variavel: inicio
-	
+
 	Valor inicial referente ao n&uacute;mero de ocorr&ecirc;ncias de cada tag que deve ser considerado na montagem da nuvem
 	*/
 	inicio: 0,
 	/*
+		Para efeitos de compatibilidade antes da vers&atilde;o 4.7 que não tinha dicion&aacute;rio
+	*/
+	criaJanelaFlutuante: function(){
+		i3GEOF.nuvemtags.iniciaDicionario();
+	},
+	/*
+	Function: iniciaDicionario
+
+	Carrega o dicion&aacute;rio e chama a fun&ccedil;&atilde;o que inicia a ferramenta
+
+	O Javascript &eacute; carregado com o id i3GEOF.nomedaferramenta.dicionario_script
+	*/
+	iniciaDicionario: function(){
+		if(typeof(i3GEOF.nuvemtags.dicionario) === 'undefined'){
+			i3GEO.util.scriptTag(
+				i3GEO.configura.locaplic+"/ferramentas/nuvemtags/dicionario.js",
+				"i3GEOF.nuvemtags.iniciaJanelaFlutuante()",
+				"i3GEOF.nuvemtags.dicionario_script"
+			);
+		}
+		else{
+			i3GEOF.nuvemtags.iniciaJanelaFlutuante();
+		}
+	},
+	/*
 	Propriedade: listaRSS
-	
+
 	Lista de RSS com not&iacute;cias para fazer o cruzamento com a nuvem
 	*/
-	listaRSS: ["http://www.mma.gov.br/webservice/noticias/rss_noticias.php", 
+	listaRSS: ["http://www.mma.gov.br/webservice/noticias/rss_noticias.php",
 	    "http://www.estadao.com.br/rss/ultimas.xml",
 	    "http://www.estadao.com.br/rss/vidae.xml",
 	    "http://feeds.folha.uol.com.br/folha/emcimadahora/rss091.xml"],
 	/*
 	Function: inicia
-	
+
 	Inicia a ferramenta. &Eacute; chamado por criaJanelaFlutuante
-	
+
 	Parametros:
-	
+
 	iddiv {String} - id do div que receber&aacute; o conteudo HTML da ferramenta
-	
+
 	dados {JSON} - dados para o gr&aacute;fico (opcional)
 	*/
 	inicia: function(iddiv){
@@ -95,7 +120,7 @@ i3GEOF.nuvemtags = {
 			};
 			$i("i3GEOnuvemtagsguia2").onclick = function(){
 				i3GEO.guias.mostraGuiaFerramenta("i3GEOnuvemtagsguia2","i3GEOnuvemtagsguia");
-				
+
 				var i,ins = "<p class=paragrafo >Escolha o RSS para cruzar com a lista de tags ou digite um novo valor</p>",
 					n = i3GEOF.nuvemtags.listaRSS.length;
 				ins += $inputText("","","i3GEOnuvemtagsRSS","",65,"");
@@ -125,7 +150,7 @@ i3GEOF.nuvemtags = {
 							if (rss == ""){alert("Digite um endereco RSS");return;}
 							i3GEOF.nuvemtags.aguarde.visibility = "visible";
 							cp.set_response_type("JSON");
-							cp.call(p,"listaTags",temp);	
+							cp.call(p,"listaTags",temp);
 						}
 					}}
 				);
@@ -137,11 +162,11 @@ i3GEOF.nuvemtags = {
 	},
 	/*
 	Function: html
-	
+
 	Gera o c&oacute;digo html para apresenta&ccedil;ão das op&ccedil;&otilde;es da ferramenta
-	
+
 	Retorno:
-	
+
 	String com o c&oacute;digo html
 	*/
 	html:function(){
@@ -156,18 +181,18 @@ i3GEOF.nuvemtags = {
 		'</div> ' +
 		'<div class=guiaobj id="i3GEOnuvemtagsguia2obj" style="left:1px;display:none;top:-5px">' +
 		'</div>';
-		return ins;		
+		return ins;
 	},
 	/*
-	Function: criaJanelaFlutuante
-	
+	Function: iniciaJanelaFlutuante
+
 	Cria a janela flutuante para controle da ferramenta.
-	
+
 	Parametro
-	
+
 	dados {JSON} - dados para o gr&aacute;fico
-	*/	
-	criaJanelaFlutuante: function(dados){
+	*/
+	iniciaJanelaFlutuante: function(dados){
 		var minimiza,cabecalho,janela,divid,titulo;
 		//cria a janela flutuante
 		cabecalho = function(){
@@ -197,7 +222,7 @@ i3GEOF.nuvemtags = {
 	},
 	/*
 	Function: ativaFoco
-	
+
 	Refaz a interface da ferramenta quando a janela flutuante tem seu foco ativado
 	*/
 	ativaFoco: function(){
@@ -208,11 +233,11 @@ i3GEOF.nuvemtags = {
 	},
 	/*
 	Function: montaNuvem
-	
+
 	Monta a nuvem de tags convencional, com lista de tags
-	
+
 	Parameter:
-	
+
 	r {JSON} - lista de tags
 	*/
 	montaNuvem: function(){
@@ -225,7 +250,7 @@ i3GEOF.nuvemtags = {
 			h,
 			linkrss,
 			r,
-			n; 
+			n;
 		if(retorno.data){
 			tags = "<p class=paragrafo >Clique na TAG para localizar temas relacionados</p>";
 			tags += "<p class=paragrafo ><input type=buttom id=i3GEOnuvemtagsbotao1 value='menos tags' />&nbsp;";
@@ -246,7 +271,7 @@ i3GEOF.nuvemtags = {
 						cor = "255,0,0";
 						for (r=0;r<retorno.data[i].noticias.length;r++){
 							linkrss += "<span><a href='"+retorno.data[i].noticias[r].link+"' target=blanck ><img style=cursor:pointer src='"+i3GEO.configura.locaplic+"/imagens/mais.png' title='"+retorno.data[i].noticias[r].titulo+"'/></a></span>" ;
-						}		
+						}
 					}
 					tags += "<span> </span> <span onmouseout='this.style.textDecoration=\"none\"' onmouseover='this.style.textDecoration=\"underline\"' onclick='i3GEOF.nuvemtags.procurar(\""+retorno.data[i].tag+"\")' style='cursor:pointer;vertical-align:middle;color:rgb("+cor+");font-size:"+h+"pt;'>"+retorno.data[i].tag+"</span>"+linkrss;
 				}
@@ -274,16 +299,16 @@ i3GEOF.nuvemtags = {
 		$i("i3GEOnuvemtagsbotao1-button").style.minHeight = "1em";
 		$i("i3GEOnuvemtagsbotao1-button").style.padding = "0px 15px";
 		$i("i3GEOnuvemtagsbotao2-button").style.minHeight = "1em";
-		$i("i3GEOnuvemtagsbotao2-button").style.padding = "0px 15px";	
+		$i("i3GEOnuvemtagsbotao2-button").style.padding = "0px 15px";
 		i3GEOF.nuvemtags.aguarde.visibility = "hidden";
 	},
 	/*
 	Function: pegaDados
-	
+
 	Pega a lista de tags existentes
-	
+
 	Veja:
-	
+
 	<LISTATAGS>
 	*/
 	pegaDados: function(){
@@ -294,15 +319,15 @@ i3GEOF.nuvemtags = {
 				i3GEOF.nuvemtags.montaNuvem();
 			};
 		cp.set_response_type("JSON");
-		cp.call(p,"listaTags",temp);	
+		cp.call(p,"listaTags",temp);
 	},
 	/*
 	Function: procurar
-	
+
 	Faz a busca de temas
-	
+
 	Veja:
-	
+
 	<i3GEO.arvoreDeTemas.buscaTema>
 	*/
 	procurar: function(texto){

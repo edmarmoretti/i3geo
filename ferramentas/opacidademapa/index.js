@@ -48,26 +48,51 @@ Classe: i3GEOF.opacidademapa
 i3GEOF.opacidademapa = {
 	/*
 	Variavel: aguarde
-	
+
 	Estilo do objeto DOM com a imagem de aguarde existente no cabe&ccedil;alho da janela.
 	*/
 	aguarde: "",
 	/*
 	Variavel: janela
-	
+
 	Janela flutuante criada
-	
+
 	Type:
 	{YAHOO.panel}
 	*/
 	janela: "",
 	/*
+		Para efeitos de compatibilidade antes da vers&atilde;o 4.7 que não tinha dicion&aacute;rio
+	*/
+	criaJanelaFlutuante: function(){
+		i3GEOF.opacidademapa.iniciaDicionario();
+	},
+	/*
+	Function: iniciaDicionario
+
+	Carrega o dicion&aacute;rio e chama a fun&ccedil;&atilde;o que inicia a ferramenta
+
+	O Javascript &eacute; carregado com o id i3GEOF.nomedaferramenta.dicionario_script
+	*/
+	iniciaDicionario: function(){
+		if(typeof(i3GEOF.opacidademapa.dicionario) === 'undefined'){
+			i3GEO.util.scriptTag(
+				i3GEO.configura.locaplic+"/ferramentas/opacidademapa/dicionario.js",
+				"i3GEOF.opacidademapa.iniciaJanelaFlutuante()",
+				"i3GEOF.opacidademapa.dicionario_script"
+			);
+		}
+		else{
+			i3GEOF.opacidademapa.iniciaJanelaFlutuante();
+		}
+	},
+	/*
 	Function: inicia
-	
+
 	Inicia a ferramenta. &Eacute; chamado por criaJanelaFlutuante
-	
+
 	Parametro:
-	
+
 	iddiv {String} - id do div que receber&aacute; o conteudo HTML da ferramenta
 	*/
 	inicia: function(iddiv){
@@ -79,11 +104,11 @@ i3GEOF.opacidademapa = {
 	},
 	/*
 	Function: html
-	
+
 	Gera o c&oacute;digo html para apresenta&ccedil;ão das op&ccedil;&otilde;es da ferramenta
-	
+
 	Retorno:
-	
+
 	String com o c&oacute;digo html
 	*/
 	html:function(){
@@ -101,20 +126,20 @@ i3GEOF.opacidademapa = {
 		return ins;
 	},
 	/*
-	Function: criaJanelaFlutuante
-	
+	Function: iniciaJanelaFlutuante
+
 	Cria a janela flutuante para controle da ferramenta.
-	
+
 	Parametro:
-	
+
 	mx {numero} - (opcional) posi&ccedil;ão em x para onde a janela ser&aacute; movida ap&oacute;s ser criada
-	
+
 	my {numero} - (opcional) posi&ccedil;ão em y para onde a janela ser&aacute; movida ap&oacute;s ser criada
 	*/
-	criaJanelaFlutuante: function(mx,my){
+	iniciaJanelaFlutuante: function(mx,my){
 		minimiza = function(){
 			i3GEO.janela.minimiza("i3GEOF.opacidademapa");
-		};		
+		};
 		var janela,divid,titulo;
 		//cria a janela flutuante
 		titulo = "Opacidade <a class=ajuda_usuario target=_blank href='" + i3GEO.configura.locaplic + "/ajuda_usuario.php?idcategoria=5&idajuda=102' >&nbsp;&nbsp;&nbsp;</a>";
@@ -142,7 +167,7 @@ i3GEOF.opacidademapa = {
 	},
 	/*
 	Function: criaslide
-	
+
 	Cria a barra deslizante com base em YAHOO.widget.Slider
 	*/
 	criaslide: function(){

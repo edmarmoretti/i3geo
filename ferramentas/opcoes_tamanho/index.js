@@ -43,17 +43,42 @@ Classe: i3GEOF.opcoesTamanho
 i3GEOF.opcoesTamanho = {
 	/*
 	Variavel: aguarde
-	
+
 	Estilo do objeto DOM com a imagem de aguarde existente no cabe&ccedil;alho da janela.
 	*/
 	aguarde: "",
 	/*
+		Para efeitos de compatibilidade antes da vers&atilde;o 4.7 que não tinha dicion&aacute;rio
+	*/
+	criaJanelaFlutuante: function(){
+		i3GEOF.opcoesTamanho.iniciaDicionario();
+	},
+	/*
+	Function: iniciaDicionario
+
+	Carrega o dicion&aacute;rio e chama a fun&ccedil;&atilde;o que inicia a ferramenta
+
+	O Javascript &eacute; carregado com o id i3GEOF.nomedaferramenta.dicionario_script
+	*/
+	iniciaDicionario: function(){
+		if(typeof(i3GEOF.opcoesTamanho.dicionario) === 'undefined'){
+			i3GEO.util.scriptTag(
+				i3GEO.configura.locaplic+"/ferramentas/opcoes_tamanho/dicionario.js",
+				"i3GEOF.opcoesTamanho.iniciaJanelaFlutuante()",
+				"i3GEOF.opcoesTamanho.dicionario_script"
+			);
+		}
+		else{
+			i3GEOF.opcoesTamanho.iniciaJanelaFlutuante();
+		}
+	},
+	/*
 	Function: inicia
-	
+
 	Inicia a ferramenta. &Eacute; chamado por criaJanelaFlutuante
-	
+
 	Parametro:
-	
+
 	iddiv {String} - id do div que receber&aacute; o conteudo HTML da ferramenta
 	*/
 	inicia: function(iddiv){
@@ -82,11 +107,11 @@ i3GEOF.opcoesTamanho = {
 	},
 	/*
 	Function: html
-	
+
 	Gera o c&oacute;digo html para apresenta&ccedil;ão das op&ccedil;&otilde;es da ferramenta
-	
+
 	Retorno:
-	
+
 	String com o c&oacute;digo html
 	*/
 	html:function(){
@@ -105,11 +130,11 @@ i3GEOF.opcoesTamanho = {
 		return ins;
 	},
 	/*
-	Function: criaJanelaFlutuante
-	
+	Function: iniciaJanelaFlutuante
+
 	Cria a janela flutuante para controle da ferramenta.
-	*/	
-	criaJanelaFlutuante: function(){
+	*/
+	iniciaJanelaFlutuante: function(){
 		var janela,divid,temp,titulo,cabecalho,minimiza;
 		cabecalho = function(){};
 		minimiza = function(){
@@ -138,16 +163,16 @@ i3GEOF.opcoesTamanho = {
 		temp = function(){
 			i3GEO.util.escondeBox();
 		};
-		YAHOO.util.Event.addListener(janela[0].close, "click", temp);		
+		YAHOO.util.Event.addListener(janela[0].close, "click", temp);
 
 	},
 	/*
 	Function: executa
-	
+
 	Altera o tamanho do mapa
-	
+
 	Veja:
-	
+
 	<MUDATAMANHO>
 	*/
 	executa: function(){
@@ -171,7 +196,7 @@ i3GEOF.opcoesTamanho = {
 			if($i("ferramentas"))
 			{calc += parseInt($i("ferramentas").style.width,10);}
 			if ($i("contemFerramentas"))
-			{calc += parseInt($i("contemFerramentas").style.width,10);}		
+			{calc += parseInt($i("contemFerramentas").style.width,10);}
 			//if($i("mst"))
 			//{$i("mst").style.width = (l * 1) + calc + "px";}
 			if($i("contemImg")){
@@ -186,7 +211,7 @@ i3GEOF.opcoesTamanho = {
 				{i3GEO.guias.guiaMovel.reposiciona();}
 				else
 				{i3GEO.guias.ajustaAltura();}
-				i3GEO.mapa.reposicionaDobraPagina();				
+				i3GEO.mapa.reposicionaDobraPagina();
 			};
 			p = i3GEO.configura.locaplic+"/classesphp/mapa_controle.php?g_sid="+i3GEO.configura.sid+"&funcao=mudatamanho&altura="+a+"&largura="+l;
 			cp = new cpaint();
@@ -196,7 +221,7 @@ i3GEOF.opcoesTamanho = {
 	},
 	/*
 	Function: atualizaBox
-	
+
 	Atualiza o tamanho do box que mostra previamente o tamanho do mapa
 	*/
 	atualizaBox: function(){
@@ -206,5 +231,5 @@ i3GEOF.opcoesTamanho = {
 		box.style.width = l+"px";
 		box.style.height = a+"px";
 	}
-	
+
 };

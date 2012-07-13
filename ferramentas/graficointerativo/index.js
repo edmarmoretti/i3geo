@@ -114,6 +114,32 @@ i3GEOF.graficointerativo = {
 	{false}
 	*/
 	navegacao:false,
+
+	/*
+		Para efeitos de compatibilidade antes da vers&atilde;o 4.7 que não tinha dicion&aacute;rio
+	*/
+	criaJanelaFlutuante: function(dados){
+		i3GEOF.graficointerativo.iniciaDicionario(dados);
+	},
+	/*
+	Function: iniciaDicionario
+
+	Carrega o dicion&aacute;rio e chama a fun&ccedil;&atilde;o que inicia a ferramenta
+
+	O Javascript &eacute; carregado com o id i3GEOF.nomedaferramenta.dicionario_script
+	*/
+	iniciaDicionario: function(dados){
+		if(typeof(i3GEOF.graficointerativo.dicionario) === 'undefined'){
+			i3GEO.util.scriptTag(
+				i3GEO.configura.locaplic+"/ferramentas/graficointerativo/dicionario.js",
+				"i3GEOF.graficointerativo.iniciaJanelaFlutuante('"+dados+"')",
+				"i3GEOF.graficointerativo.dicionario_script"
+			);
+		}
+		else{
+			i3GEOF.graficointerativo.iniciaJanelaFlutuante(dados);
+		}
+	},
 	/*
 	Function: inicia
 
@@ -277,7 +303,7 @@ i3GEOF.graficointerativo = {
 		return ins;
 	},
 	/*
-	Function: criaJanelaFlutuante
+	Function: iniciaJanelaFlutuante
 
 	Cria a janela flutuante para controle da ferramenta.
 
@@ -285,7 +311,7 @@ i3GEOF.graficointerativo = {
 
 	dados {JSON} - dados para o gr&aacute;fico
 	*/
-	criaJanelaFlutuante: function(dados){
+	iniciaJanelaFlutuante: function(dados){
 		var minimiza,cabecalho,janela,divid,temp,titulo;
 		//cria a janela flutuante
 		cabecalho = function(){

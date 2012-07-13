@@ -46,17 +46,42 @@ Classe: i3GEOF.opcoesEscala
 i3GEOF.opcoesEscala = {
 	/*
 	Variavel: aguarde
-	
+
 	Estilo do objeto DOM com a imagem de aguarde existente no cabe&ccedil;alho da janela.
 	*/
 	aguarde: "",
 	/*
+		Para efeitos de compatibilidade antes da vers&atilde;o 4.7 que não tinha dicion&aacute;rio
+	*/
+	criaJanelaFlutuante: function(){
+		i3GEOF.opcoesEscala.iniciaDicionario();
+	},
+	/*
+	Function: iniciaDicionario
+
+	Carrega o dicion&aacute;rio e chama a fun&ccedil;&atilde;o que inicia a ferramenta
+
+	O Javascript &eacute; carregado com o id i3GEOF.nomedaferramenta.dicionario_script
+	*/
+	iniciaDicionario: function(){
+		if(typeof(i3GEOF.opcoesEscala.dicionario) === 'undefined'){
+			i3GEO.util.scriptTag(
+				i3GEO.configura.locaplic+"/ferramentas/opcoes_escala/dicionario.js",
+				"i3GEOF.opcoesEscala.iniciaJanelaFlutuante()",
+				"i3GEOF.opcoesEscala.dicionario_script"
+			);
+		}
+		else{
+			i3GEOF.opcoesEscala.iniciaJanelaFlutuante();
+		}
+	},
+	/*
 	Function: inicia
-	
+
 	Inicia a ferramenta. &Eacute; chamado por criaJanelaFlutuante
-	
+
 	Parametro:
-	
+
 	iddiv {String} - id do div que receber&aacute; o conteudo HTML da ferramenta
 	*/
 	inicia: function(iddiv){
@@ -79,11 +104,11 @@ i3GEOF.opcoesEscala = {
 	},
 	/*
 	Function: html
-	
+
 	Gera o c&oacute;digo html para apresenta&ccedil;ão das op&ccedil;&otilde;es da ferramenta
-	
+
 	Retorno:
-	
+
 	String com o c&oacute;digo html
 	*/
 	html:function(){
@@ -136,11 +161,11 @@ i3GEOF.opcoesEscala = {
 		return ins;
 	},
 	/*
-	Function: criaJanelaFlutuante
-	
+	Function: iniciaJanelaFlutuante
+
 	Cria a janela flutuante para controle da ferramenta.
-	*/	
-	criaJanelaFlutuante: function(){
+	*/
+	iniciaJanelaFlutuante: function(){
 		var janela,divid,titulo,cabecalho,minimiza;
 		cabecalho = function(){};
 		minimiza = function(){
@@ -169,18 +194,18 @@ i3GEOF.opcoesEscala = {
 	},
 	/*
 	Function: corj
-	
+
 	Abre a janela para o usu&aacute;rio selecionar uma cor interativamente
 	*/
 	corj: function(obj)
 	{i3GEO.util.abreCor("",obj);},
 	/*
 	Function: executa
-	
+
 	Aplica os parâmetros definidos
-	
+
 	Veja:
-	
+
 	<MUDAESCALAGRAFICA>
 	*/
 	executa: function(){
@@ -200,11 +225,11 @@ i3GEOF.opcoesEscala = {
 	},
 	/*
 	Function: parametrosAtuais
-	
+
 	Pega os parâmetros atuais da barra de escala
-	
+
 	Veja:
-	
+
 	<ESCALAPARAMETROS>
 	*/
 	parametrosAtuais: function(){
@@ -236,7 +261,7 @@ i3GEOF.opcoesEscala = {
 	},
 	/*
 	Function: parametrosFormulario
-	
+
 	Pega os valores do formul&aacute;rio atual
 	*/
 	parametrosFormulario: function(){
@@ -252,11 +277,11 @@ i3GEOF.opcoesEscala = {
 	},
 	/*
 	Function: testa
-	
+
 	Testa a barra, mostrando uma imagem tempor&aacute;ria
-	
+
 	Veja:
-	
+
 	<TESTAESCALAGRAFICA>
 	*/
 	testa: function(){

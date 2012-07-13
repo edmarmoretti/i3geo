@@ -719,7 +719,7 @@ i3GEO.janela = {
 	},
 	slider: function(funcao,inicial){
 		var scaleFactor,bottomConstraint,topConstraint,janela,novoel,Event,slider = "",bg,thumb;
-		janela = i3GEO.janela.cria(230,200,"","","","Opacidade","opacidadeG");
+		janela = i3GEO.janela.cria(230,200,"","","",$trad("t20"),"opacidadeG");
 		novoel = document.createElement("div");
 		novoel.id = "slider-bg";
 		novoel.tabindex = "-1";

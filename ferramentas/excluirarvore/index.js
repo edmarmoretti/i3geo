@@ -43,36 +43,61 @@ Classe: i3GEOF.excluirarvore
 i3GEOF.excluirarvore = {
 	/*
 	Variavel: aguarde
-	
+
 	Estilo do objeto DOM com a imagem de aguarde existente no cabe&ccedil;alho da janela.
 	*/
 	aguarde: "",
 	/*
 	Variavel: iddiv
-	
+
 	Guarda o id do div definido na fun&ccedil;ão "inicia".
-	*/	
+	*/
 	iddiv: "",
 	/*
+		Para efeitos de compatibilidade antes da vers&atilde;o 4.7 que não tinha dicion&aacute;rio
+	*/
+	criaJanelaFlutuante: function(){
+		i3GEOF.excluirarvore.iniciaDicionario();
+	},
+	/*
+	Function: iniciaDicionario
+
+	Carrega o dicion&aacute;rio e chama a fun&ccedil;&atilde;o que inicia a ferramenta
+
+	O Javascript &eacute; carregado com o id i3GEOF.nomedaferramenta.dicionario_script
+	*/
+	iniciaDicionario: function(){
+		if(typeof(i3GEOF.excluirarvore.dicionario) === 'undefined'){
+			i3GEO.util.scriptTag(
+				i3GEO.configura.locaplic+"/ferramentas/excluirarvore/dicionario.js",
+				"i3GEOF.excluirarvore.iniciaJanelaFlutuante()",
+				"i3GEOF.excluirarvore.dicionario_script"
+			);
+		}
+		else{
+			i3GEOF.excluirarvore.iniciaJanelaFlutuante();
+		}
+	},
+	/*
 	Function: inicia
-	
+
 	Inicia a ferramenta. &Eacute; chamado por criaJanelaFlutuante
-	
+
 	Parametro:
-	
+
 	iddiv {String} - id do div que receber&aacute; o conteudo HTML da ferramenta
 	*/
 	inicia: function(iddiv){
 		var camadas = i3GEO.arvoreDeCamadas.CAMADASINICIAIS,
 			n = camadas.length,
 			temp;
-		i3GEOF.excluirarvore.iddiv = iddiv;	
+		i3GEOF.excluirarvore.iddiv = iddiv;
 		try{
 			$i(iddiv).innerHTML = i3GEOF.excluirarvore.html();
 			new YAHOO.widget.Button(
 				"i3GEOexcluirbotao1",
 				{onclick:{fn: i3GEOF.excluirarvore.lote}}
-			);				
+			);
 		}
 		catch(erro){
 			i3GEO.eventos.ATUALIZAARVORECAMADAS.remove("i3GEOF.excluirarvore.inicia(i3GEOF.excluirarvore.iddiv)");
@@ -86,19 +111,19 @@ i3GEOF.excluirarvore = {
 	},
 	/*
 	Function: html
-	
+
 	Gera o c&oacute;digo html para apresenta&ccedil;ão das op&ccedil;&otilde;es da ferramenta
-	
+
 	Retorno:
-	
+
 	String com o c&oacute;digo html
 	*/
 	html:function(){
 		var camadas = i3GEO.arvoreDeCamadas.CAMADAS,
 			n = camadas.length,
 			ins = "";
-			
-		ins = "<p class=paragrafo ><input id=i3GEOexcluirbotao1 type='buttom' value='Remover do mapa os marcados' /></p>" +			
+
+		ins = "<p class=paragrafo ><input id=i3GEOexcluirbotao1 type='buttom' value='Remover do mapa os marcados' /></p>" +
 			"<table id='i3GEOFexcluirarvoreLista' style='width:95%' class='lista8'>";
 		while(n > 0){
 			n -= 1;
@@ -109,11 +134,11 @@ i3GEOF.excluirarvore = {
 		return ins;
 	},
 	/*
-	Function: criaJanelaFlutuante
-	
+	Function: iniciaJanelaFlutuante
+
 	Cria a janela flutuante para controle da ferramenta.
-	*/	
-	criaJanelaFlutuante: function(){
+	*/
+	iniciaJanelaFlutuante: function(){
 		var janela,divid,temp,titulo,cabecalho,minimiza;
 		cabecalho = function(){};
 		minimiza = function(){
@@ -152,9 +177,9 @@ i3GEOF.excluirarvore = {
 	},
 	/*
 	Function: lote
-	
+
 	Executa uma opera&ccedil;ão em lote sobre as camadas mostradas no mapa
-	
+
 	*/
 	lote: function(objeto){
 		var lista = [],
@@ -169,7 +194,7 @@ i3GEOF.excluirarvore = {
 			temp = $i("excluirC_"+camadas[n].name);
 			if(temp && temp.checked === true)
 			{lista.push(temp.value);}
-		}		
+		}
 		temp = function(){
 			i3GEOF.excluirarvore.aguarde.visibility = "hidden";
 			i3GEO.atualiza();

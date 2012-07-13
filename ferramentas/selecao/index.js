@@ -46,17 +46,42 @@ Classe: i3GEOF.selecao
 i3GEOF.selecao = {
 	/*
 	Variavel: aguarde
-	
+
 	Estilo do objeto DOM com a imagem de aguarde existente no cabe&ccedil;alho da janela.
 	*/
 	aguarde: "",
 	/*
+		Para efeitos de compatibilidade antes da vers&atilde;o 4.7 que não tinha dicion&aacute;rio
+	*/
+	criaJanelaFlutuante: function(){
+		i3GEOF.selecao.iniciaDicionario();
+	},
+	/*
+	Function: iniciaDicionario
+
+	Carrega o dicion&aacute;rio e chama a fun&ccedil;&atilde;o que inicia a ferramenta
+
+	O Javascript &eacute; carregado com o id i3GEOF.nomedaferramenta.dicionario_script
+	*/
+	iniciaDicionario: function(){
+		if(typeof(i3GEOF.selecao.dicionario) === 'undefined'){
+			i3GEO.util.scriptTag(
+				i3GEO.configura.locaplic+"/ferramentas/selecao/dicionario.js",
+				"i3GEOF.selecao.iniciaJanelaFlutuante()",
+				"i3GEOF.selecao.dicionario_script"
+			);
+		}
+		else{
+			i3GEOF.selecao.iniciaJanelaFlutuante();
+		}
+	},
+	/*
 	Function: inicia
-	
+
 	Inicia a ferramenta. &Eacute; chamado por criaJanelaFlutuante
-	
+
 	Parametro:
-	
+
 	iddiv {String} - id do div que receber&aacute; o conteudo HTML da ferramenta
 	*/
 	inicia: function(iddiv){
@@ -111,17 +136,17 @@ i3GEOF.selecao = {
 				ics[i].className = "iconeGuiaMovel";
 				ics[i].onmouseout = function(){this.className = "iconeGuiaMovel iconeGuiaMovelMouseOut";};
 				ics[i].onmouseover = function(){this.className = "iconeGuiaMovel iconeGuiaMovelMouseOver";};
-			}			
+			}
 		}
 		catch(erro){alert(erro);}
 	},
 	/*
 	Function: html
-	
+
 	Gera o c&oacute;digo html para apresenta&ccedil;ão das op&ccedil;&otilde;es da ferramenta
-	
+
 	Retorno:
-	
+
 	String com o c&oacute;digo html
 	*/
 	html:function(){
@@ -149,7 +174,7 @@ i3GEOF.selecao = {
 		'		<p class=paragrafo >' +
 		'		<select title="Tipo de operacao" style=position:relative;top:6px; id=i3GEOselecaotipoOperacao >' +
 		'		<option value="adiciona" >Adicionar à sele&ccedil;ão</option>' +
-		'		<option value="novo" >Nova sele&ccedil;ão</option>' +		
+		'		<option value="novo" >Nova sele&ccedil;ão</option>' +
 		'		<option value="retira" >Retirar da sele&ccedil;ão</option>' +
 		'		</select>' +
 		'		<span id=i3GEOselecaoNsel style="position:relative;top:5px;" >0</span></p>' +
@@ -186,14 +211,14 @@ i3GEOF.selecao = {
 		'	</div>' +
 		'	<br><p class=paragrafo ><input id=i3GEOselecaobotao2 size=10 type=button value="Aplicar">' +
 		'</div>';
-		return ins;		
+		return ins;
 	},
 	/*
-	Function: criaJanelaFlutuante
-	
+	Function: iniciaJanelaFlutuante
+
 	Cria a janela flutuante para controle da ferramenta.
-	*/	
-	criaJanelaFlutuante: function(){
+	*/
+	iniciaJanelaFlutuante: function(){
 		var minimiza,cabecalho,janela,divid,temp,titulo;
 		//cria a janela flutuante
 		cabecalho = function(){
@@ -222,10 +247,10 @@ i3GEOF.selecao = {
 		i3GEOF.selecao.inicia(divid);
 
 		if(i3GEO.eventos.ATUALIZAARVORECAMADAS.toString().search("i3GEOF.selecao.criaCombosTemas()") < 0)
-		{i3GEO.eventos.ATUALIZAARVORECAMADAS.push("i3GEOF.selecao.criaCombosTemas()");}		
+		{i3GEO.eventos.ATUALIZAARVORECAMADAS.push("i3GEOF.selecao.criaCombosTemas()");}
 		if(i3GEO.eventos.MOUSECLIQUE.toString().search("i3GEOF.selecao.clique()") < 0)
 		{i3GEO.eventos.MOUSECLIQUE.push("i3GEOF.selecao.clique()");}
-		
+
 		temp = function(){
 			if(i3GEO.eventos.ATUALIZAARVORECAMADAS.toString().search("i3GEOF.selecao.criaCombosTemas()") > 0)
 			{i3GEO.eventos.ATUALIZAARVORECAMADAS.remove("i3GEOF.selecao.criaCombosTemas()");}
@@ -242,7 +267,7 @@ i3GEOF.selecao = {
 	},
 	/*
 	Function: ativaFoco
-	
+
 	Refaz a interface da ferramenta quando a janela flutuante tem seu foco ativado
 	*/
 	ativaFoco: function(){
@@ -258,11 +283,11 @@ i3GEOF.selecao = {
 		if(i3GEO.Interface.ATUAL == "googlemaps")
 		{i3GEO.Interface.googlemaps.recalcPar();}
 		if(i3GEO.Interface.ATUAL == "googleearth")
-		{i3GEO.Interface.googleearth.recalcPar();}		
+		{i3GEO.Interface.googleearth.recalcPar();}
 	},
 	/*
 	Function: criaCombosTemas
-	
+
 	Cria os combos de sele&ccedil;ão de temas
 	*/
 	criaCombosTemas: function(){
@@ -285,11 +310,11 @@ i3GEOF.selecao = {
 			"",
 			true,
 			"ligados"
-		);	
+		);
 	},
 	/*
 	Function: mudaicone
-	
+
 	Altera as bordas dos &iacute;cones
 	*/
 	mudaicone: function(){
@@ -304,7 +329,7 @@ i3GEOF.selecao = {
 	},
 	/*
 	Function: pegaTemasSel
-	
+
 	Pega a lista de temas escolhidos pelo usu&aacute;rio
 	*/
 	pegaTemasSel: function(){
@@ -321,20 +346,20 @@ i3GEOF.selecao = {
 		if(i3GEO.temaAtivo != ""){
 			nsel = i3GEO.arvoreDeCamadas.pegaTema(i3GEO.temaAtivo);
 			$i("i3GEOselecaoNsel").innerHTML = "Selecionados: "+(nsel.nsel);
-		}		
+		}
 		return selectedArray.toString();
 	},
 	/*
 	Function: operacao
-	
+
 	Executa uma opera&ccedil;ão sobre o conjunto de elementos selecionados
-	
+
 	Veja:
-	
+
 	<i3GEO.php.selecaopt>
-	
+
 	Parametro:
-	
+
 	tipo {String} - tipo de opera&ccedil;ão inverte|limpa
 	*/
 	operacao: function(tipo){
@@ -362,11 +387,11 @@ i3GEOF.selecao = {
 	},
 	/*
 	Function: tiposel
-	
+
 	Executa um tipo de sele&ccedil;ão interativa
-	
+
 	Parameter:
-	
+
 	obj {objeto dom) - objeto que foi clicado para disparar a opera&ccedil;ão. O valor identifica o tipo de opera&ccedil;ão
 	*/
 	tiposel: function(obj){
@@ -384,7 +409,7 @@ i3GEOF.selecao = {
 					{i3GEO.atualiza(retorno);}
 					i3GEO.Interface.atualizaTema(retorno,tema);
 					nsel = i3GEO.arvoreDeCamadas.pegaTema(tema,retorno.data.temas);
-					$i("i3GEOselecaoNsel").innerHTML = "Selecionados: "+(nsel.nsel);					
+					$i("i3GEOselecaoNsel").innerHTML = "Selecionados: "+(nsel.nsel);
 				},
 				tema = i3GEOF.selecao.pegaTemasSel();
 			if (obj.value == "i3GEOselecaoext"){
@@ -404,7 +429,7 @@ i3GEOF.selecao = {
 				obj.style.backgroundColor = "#cedff2";
 				g_tipoacao = "selecao";
 				if(i3GEO.eventos.MOUSECLIQUE.toString().search("i3GEOF.selecao.clique()") < 0)
-				{i3GEO.eventos.MOUSECLIQUE.push("i3GEOF.selecao.clique()");}	
+				{i3GEO.eventos.MOUSECLIQUE.push("i3GEOF.selecao.clique()");}
 			}
 			if (obj.value == "i3GEOselecaopoli"){
 				i3GEOF.selecao.mudaicone();
@@ -417,13 +442,13 @@ i3GEOF.selecao = {
 	},
 	/*
 	Classe: i3GEOF.selecao.box
-	
+
 	Controla o desenho do box para a sele&ccedil;ão e executa a opera&ccedil;ão de sele&ccedil;ão
 	*/
 	box:{
 		/*
 		Function: inicia
-		
+
 		Marca o in&iacute;cio do desenho do box, capturando a posi&ccedil;ão do mouse
 		*/
 		inicia: function(){
@@ -451,7 +476,7 @@ i3GEOF.selecao = {
 		},
 		/*
 		Function: criaBox
-		
+
 		Cria o DIV que ser&aacute; utilizado para desenhar o box no mapa
 		*/
 		criaBox: function(){
@@ -473,7 +498,7 @@ i3GEOF.selecao = {
 				YAHOO.util.Dom.setStyle(novoel,"opacity",0.25);
 				novoel.style.backgroundColor = "#cedff2";
 				novoel.style.position="absolute";
-				novoel.style.border = "2px solid #ff0000";		
+				novoel.style.border = "2px solid #ff0000";
 				novoel.onmousemove = function(){
 					var b,wb,hb;
 					b = $i("i3geoboxSel").style;
@@ -497,7 +522,7 @@ i3GEOF.selecao = {
 		},
 		/*
 		Function: desloca
-		
+
 		Desloca o box conforme o mouse &eacute; movimentado
 		*/
 		desloca: function(){
@@ -509,7 +534,7 @@ i3GEOF.selecao = {
 			{return;}
 			ppx = objposicaocursor.imgx + adicionaxyBox[0];
 			py = objposicaocursor.imgy + adicionaxyBox[1];
-			
+
 			if ((ppx > boxxini) && ((ppx - boxxini - 2) > 0))
 			{bxs.width = ppx - boxxini - 2 + "px";}
 			if ((py > boxyini) && ((py - boxyini - 2) > 0))
@@ -521,7 +546,7 @@ i3GEOF.selecao = {
 		},
 		/*
 		Function: termina
-		
+
 		Para o desenho do box, captura seu tamanho e faz o zoom no mapa
 		*/
 		termina: function(){
@@ -532,7 +557,7 @@ i3GEOF.selecao = {
 				bxs.visibility="hidden";
 				bxs.width = "0px";
 				bxs.height = "0px";
-			};			
+			};
 			try{
 				valor = i3GEO.calculo.rect2ext("i3geoboxSel",i3GEO.parametros.mapexten,i3GEO.parametros.pixelsize);
 				v = valor[0];
@@ -561,15 +586,15 @@ i3GEOF.selecao = {
 	},
 	/*
 	Function: porbox
-	
+
 	Seleciona elementos de um tema com base em um retângulo
-	
+
 	Parametros:
-	
+
 	tema {String} - c&oacute;digo do tema
-	
+
 	tipo {String} - tipo de opera&ccedil;ão adiciona|retira
-	
+
 	box {String} - xmin ymin xmax ymax
 	*/
 	porbox: function(tema,tipo,box){
@@ -588,7 +613,7 @@ i3GEOF.selecao = {
 	},
 	/*
 	Function: clique
-	
+
 	Seleciona elementos clicando no mapa
 	*/
 	clique: function(){
@@ -600,20 +625,20 @@ i3GEOF.selecao = {
 			var tipo,tolerancia;
 			tipo = $i("i3GEOselecaotipoOperacao").value;
 			tolerancia = $i("i3GEOselecaotoleranciapt").value;
-			i3GEOF.selecao.porxy(i3GEO.temaAtivo,tipo,tolerancia);		
+			i3GEOF.selecao.porxy(i3GEO.temaAtivo,tipo,tolerancia);
 		}
 	},
 	/*
 	Function: porxy
-	
+
 	Executa a sele&ccedil;ão de elementos de um tema com base em um par de coordenadas xy
-	
+
 	Parametros:
-	
+
 	tema {String} - c&oacute;digo do tema
-	
+
 	tipo {String} - tipo de opera&ccedil;ão adiciona|retira
-	
+
 	tolerancia {Integer} - tolerância de busca
 	*/
 	porxy: function(tema,tipo,tolerancia){
@@ -631,13 +656,13 @@ i3GEOF.selecao = {
 	},
 	/*
 	Classe: i3GEOF.selecao.poligono
-	
+
 	Realiza a sele&ccedil;ão desenhando um pol&iacute;gono no mapa
 	*/
 	poligono:{
 		/*
 		Function: inicia
-		
+
 		Inicia o desenho do pol&iacute;gono
 		*/
 		inicia: function(){
@@ -660,7 +685,7 @@ i3GEOF.selecao = {
 		},
 		/*
 		Function: move
-		
+
 		Modifica o pol&iacute;gono conforme o usu&aacute;rio cria v&eacute;rtices
 		*/
 		move: function(){
@@ -678,7 +703,7 @@ i3GEOF.selecao = {
 		},
 		/*
 		Function: clique
-		
+
 		Inclui um novo v&eacute;rtice no pol&iacute;gono
 		*/
 		clique: function(){
@@ -692,7 +717,7 @@ i3GEOF.selecao = {
 			pontosdistobj.ximg[n] = objposicaocursor.imgx;
 			pontosdistobj.yimg[n] = objposicaocursor.imgy;
 			pontosdistobj.dist[n] = 0;
-			//inclui a linha para ligar com o ponto inicial		
+			//inclui a linha para ligar com o ponto inicial
 			if (n === 0){
 				try	{
 					if (navn)
@@ -704,7 +729,7 @@ i3GEOF.selecao = {
 			}
 			else{
 				if(navm)
-				{pontosdistobj.linhas[n] = i3GEO.desenho.richdraw.renderer.create(i3GEO.desenho.richdraw.mode, i3GEO.desenho.richdraw.fillColor, i3GEO.desenho.richdraw.lineColor, i3GEO.desenho.richdraw.lineWidth, (pontosdistobj.ximg[n-1])-(i3GEO.parametros.w/2),pontosdistobj.yimg[n-1],(pontosdistobj.ximg[n])-(i3GEO.parametros.w/2),pontosdistobj.yimg[n]);}				
+				{pontosdistobj.linhas[n] = i3GEO.desenho.richdraw.renderer.create(i3GEO.desenho.richdraw.mode, i3GEO.desenho.richdraw.fillColor, i3GEO.desenho.richdraw.lineColor, i3GEO.desenho.richdraw.lineWidth, (pontosdistobj.ximg[n-1])-(i3GEO.parametros.w/2),pontosdistobj.yimg[n-1],(pontosdistobj.ximg[n])-(i3GEO.parametros.w/2),pontosdistobj.yimg[n]);}
 			}
 			try{
 				if (navn)
@@ -720,7 +745,7 @@ i3GEOF.selecao = {
 		},
 		/*
 		Function: termina
-		
+
 		Termina o desenho do pol&iacute;gono e executa a opera&ccedil;ão de sele&ccedil;ão
 		*/
 		termina: function(){
@@ -750,7 +775,7 @@ i3GEOF.selecao = {
 	},
 	/*
 	Function: criatema
-	
+
 	Cria um novo tema com a sele&ccedil;ão atual
 	*/
 	criatema: function(){
@@ -770,7 +795,7 @@ i3GEOF.selecao = {
 	},
 	/*
 	Function: adicionaLinhaFiltro
-	
+
 	Adiciona uma nova linha de filtro
 	*/
 	adicionaLinhaFiltro: function(){
@@ -781,7 +806,7 @@ i3GEOF.selecao = {
 			add.style.cursor="pointer";
 			add.onclick = function()
 			{i3GEOF.selecao.adicionaLinhaFiltro();};
-			
+
 			xis = document.createElement("img");
 			xis.src = i3GEO.configura.locaplic+'/imagens/x.gif';
 			xis.style.cursor="pointer";
@@ -791,7 +816,7 @@ i3GEOF.selecao = {
 				for (i = 0; i < p.childNodes.length;i++)
 				{p.removeChild(p.childNodes[i]);}
 			};
-			
+
 			interrogacao = document.createElement("img");
 			interrogacao.src = i3GEO.configura.locaplic+'/imagens/interrogacao.gif';
 			interrogacao.title='mostra valores';
@@ -808,12 +833,12 @@ i3GEOF.selecao = {
 						if ($i("i3GEOselecaocbitens")){
 							$i("i3GEOselecaocbitens").onchange = function()
 							{obj.value = this.value;};
-						}		
+						}
 					},
 					"i3GEOselecaovalores"
 				);
 			};
-			
+
 			operador = "<select>";
 			operador += "<option value='='>igual</option>";
 			operador += "<option value='!='>dif</option>";
@@ -823,26 +848,26 @@ i3GEOF.selecao = {
 			operador += "<option value='>='>>=</option>";
 			operador += "<option value='in'>in</option>";
 			operador += "<option value='~='>regExp</option></select>";
-			
+
 			conector = "<select>";
 			conector += "<option value='and'>e</option>";
 			conector += "<option value='or'>ou</option>";
 			conector += "<option value='not'>n&atilde;o</option></select>";
-			
+
 			valor = document.createElement("input");
 			valor.type = "text";
 			valor.value = "";
 			valor.size = "15";
-			
+
 			ntr = document.createElement("tr");
 			ntad = document.createElement("td");
 			ntad.appendChild(add);
 			ntr.appendChild(ntad);
-			
+
 			ntd = document.createElement("td");
 			ntd.appendChild(xis);
 			ntr.appendChild(ntd);
-			
+
 			ntd1 = document.createElement("td");
 			i3GEO.util.comboItens(
 				"none",
@@ -852,11 +877,11 @@ i3GEOF.selecao = {
 				}
 			);
 			ntr.appendChild(ntd1);
-			
+
 			ntd2 = document.createElement("td");
 			ntd2.innerHTML = operador;
 			ntr.appendChild(ntd2);
-			
+
 			ntd3 = document.createElement("td");
 			ntd3.appendChild(valor);
 			ntr.appendChild(ntd3);
@@ -864,11 +889,11 @@ i3GEOF.selecao = {
 			ntd4 = document.createElement("td");
 			ntd4.appendChild(interrogacao);
 			ntr.appendChild(ntd4);
-			
+
 			ntd5 = document.createElement("td");
 			ntd5.innerHTML = conector;
 			ntr.appendChild(ntd5);
-			
+
 			//ntb = document.createElement("tbody");
 			//ntb.appendChild(ntr);
 			if(navm)
@@ -881,7 +906,7 @@ i3GEOF.selecao = {
 	},
 	/*
 	Function: atributo
-	
+
 	Seleciona por atributo
 	*/
 	atributo: function(){
@@ -932,7 +957,7 @@ i3GEOF.selecao = {
 				i3GEO.Interface.atualizaTema(retorno,i3GEO.temaAtivo);
 				nsel = i3GEO.arvoreDeCamadas.pegaTema(tema,retorno.data.temas);
 				$i("i3GEOselecaoNsel").innerHTML = "Selecionados: "+(nsel.nsel);
-		 	};		
+		 	};
 			i3GEO.php.selecaoatrib2(temp,i3GEO.temaAtivo,filtro,$i("i3GEOselecaotipoOperacao").value);
 		}
 		catch(e){
@@ -942,7 +967,7 @@ i3GEOF.selecao = {
 	},
 	/*
 	Function: aplicaselecaoTema
-	
+
 	Realiza a sele&ccedil;ão cruzando um tema com outro
 	*/
 	aplicaselecaoTema: function(){
@@ -974,7 +999,7 @@ i3GEOF.selecao = {
 	},
 	/*
 	Function: grafico
-	
+
 	Abre uma janela flutuante para criar gr&aacute;ficos
 	*/
 	grafico: function(){
@@ -982,7 +1007,7 @@ i3GEOF.selecao = {
 	},
 	/*
 	Function: graficoPerfil
-	
+
 	Abre uma janela flutuante para criar gr&aacute;ficos de perfil
 	*/
 	graficoPerfil: function(){
@@ -1012,7 +1037,7 @@ i3GEOF.selecao = {
 						ypt: y
 					};
 					i3GEO.util.scriptTag(js,"i3GEOF.perfil.criaJanelaFlutuante(pontosdistobj)","i3GEOF.perfil_script");
-				}		
+				}
 		 	};
 			cp = new cpaint();
 			cp.set_response_type("JSON");

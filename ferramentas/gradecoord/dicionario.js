@@ -1,5 +1,5 @@
-//+$trad(1,i3GEOF.gradecoord.dicionario)+
-i3GEOF.gradecoord.dicionario = {
+//+$trad(1,i3GEOF.gradeCoord.dicionario)+
+i3GEOF.gradeCoord.dicionario = {
 1: [{
 pt:"",
 en:"",

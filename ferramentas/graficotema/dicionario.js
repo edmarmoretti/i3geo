@@ -1,5 +1,5 @@
-//+$trad(1,i3GEOF.graficotema.dicionario)+
-i3GEOF.graficotema.dicionario = {
+//+$trad(1,i3GEOF.graficoTema.dicionario)+
+i3GEOF.graficoTema.dicionario = {
 1: [{
 pt:"",
 en:"",

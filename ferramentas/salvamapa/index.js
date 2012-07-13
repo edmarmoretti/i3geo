@@ -35,22 +35,47 @@ if(typeof(i3GEOF) === 'undefined'){
 	i3GEOF = [];
 }
 /*
-Classe: i3GEOF.carregaMapa
+Classe: i3GEOF.salvaMapa
 */
 i3GEOF.salvaMapa = {
 	/*
 	Variavel: aguarde
-	
+
 	Estilo do objeto DOM com a imagem de aguarde existente no cabe&ccedil;alho da janela.
 	*/
 	aguarde: "",
 	/*
+		Para efeitos de compatibilidade antes da vers&atilde;o 4.7 que não tinha dicion&aacute;rio
+	*/
+	criaJanelaFlutuante: function(){
+		i3GEOF.salvaMapa.iniciaDicionario();
+	},
+	/*
+	Function: iniciaDicionario
+
+	Carrega o dicion&aacute;rio e chama a fun&ccedil;&atilde;o que inicia a ferramenta
+
+	O Javascript &eacute; carregado com o id i3GEOF.nomedaferramenta.dicionario_script
+	*/
+	iniciaDicionario: function(){
+		if(typeof(i3GEOF.salvaMapa.dicionario) === 'undefined'){
+			i3GEO.util.scriptTag(
+				i3GEO.configura.locaplic+"/ferramentas/salvamapa/dicionario.js",
+				"i3GEOF.salvaMapa.iniciaJanelaFlutuante()",
+				"i3GEOF.salvaMapa.dicionario_script"
+			);
+		}
+		else{
+			i3GEOF.salvaMapa.iniciaJanelaFlutuante();
+		}
+	},
+	/*
 	Function: inicia
-	
+
 	Inicia a ferramenta. &Eacute; chamado por criaJanelaFlutuante
-	
+
 	Parametro:
-	
+
 	iddiv {String} - id do div que receber&aacute; o conteudo HTML da ferramenta
 	*/
 	inicia: function(iddiv){
@@ -59,7 +84,7 @@ i3GEOF.salvaMapa = {
 				var teste,
 					map_file = i3GEO.parametros.mapfile,
 					local = map_file.split("ms_tmp");
-				teste = i3GEO.configura.locaplic+"/testamapfile.php?map="+map_file;	
+				teste = i3GEO.configura.locaplic+"/testamapfile.php?map="+map_file;
 				local = i3GEO.util.protocolo()+"://"+window.location.host+"/ms_tmp"+local[1];
 				$i(iddiv).innerHTML += i3GEOF.salvaMapa.html()+"<a href='"+local+"' target='_blank' >Clique aqui para baixar o arquivo</a><br>";
 				$i(iddiv).innerHTML += "<a href='"+teste+"' target='_blank' >Clique aqui para testar</a>";
@@ -76,11 +101,11 @@ i3GEOF.salvaMapa = {
 	},
 	/*
 	Function: html
-	
+
 	Gera o c&oacute;digo html para apresenta&ccedil;ão das op&ccedil;&otilde;es da ferramenta
-	
+
 	Retorno:
-	
+
 	String com o c&oacute;digo html
 	*/
 	html:function(){
@@ -91,11 +116,11 @@ i3GEOF.salvaMapa = {
 		return ins;
 	},
 	/*
-	Function: criaJanelaFlutuante
-	
+	Function: iniciaJanelaFlutuante
+
 	Cria a janela flutuante para controle da ferramenta.
-	*/	
-	criaJanelaFlutuante: function(){
+	*/
+	iniciaJanelaFlutuante: function(){
 		var janela,divid,titulo;
 		titulo = "Salva o mapa <a class=ajuda_usuario target=_blank href='" + i3GEO.configura.locaplic + "/ajuda_usuario.php?idcategoria=2&idajuda=10' >&nbsp;&nbsp;&nbsp;</a>";
 		janela = i3GEO.janela.cria(

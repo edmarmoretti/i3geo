@@ -43,17 +43,42 @@ Classe: i3GEOF.insereGrafico
 i3GEOF.insereGrafico = {
 	/*
 	Variavel: aguarde
-	
+
 	Estilo do objeto DOM com a imagem de aguarde existente no cabe&ccedil;alho da janela.
 	*/
 	aguarde: "",
 	/*
+		Para efeitos de compatibilidade antes da vers&atilde;o 4.7 que não tinha dicion&aacute;rio
+	*/
+	criaJanelaFlutuante: function(){
+		i3GEOF.insereGrafico.iniciaDicionario();
+	},
+	/*
+	Function: iniciaDicionario
+
+	Carrega o dicion&aacute;rio e chama a fun&ccedil;&atilde;o que inicia a ferramenta
+
+	O Javascript &eacute; carregado com o id i3GEOF.nomedaferramenta.dicionario_script
+	*/
+	iniciaDicionario: function(){
+		if(typeof(i3GEOF.insereGrafico.dicionario) === 'undefined'){
+			i3GEO.util.scriptTag(
+				i3GEO.configura.locaplic+"/ferramentas/inseregrafico/dicionario.js",
+				"i3GEOF.insereGrafico.iniciaJanelaFlutuante()",
+				"i3GEOF.insereGrafico.dicionario_script"
+			);
+		}
+		else{
+			i3GEOF.insereGrafico.iniciaJanelaFlutuante();
+		}
+	},
+	/*
 	Function: inicia
-	
+
 	Inicia a ferramenta. &Eacute; chamado por criaJanelaFlutuante
-	
+
 	Parametro:
-	
+
 	iddiv {String} - id do div que receber&aacute; o conteudo HTML da ferramenta
 	*/
 	inicia: function(iddiv){
@@ -69,7 +94,7 @@ i3GEOF.insereGrafico = {
 				"i3GEOinseregraficobotao1",
 				{onclick:{fn: i3GEOF.insereGrafico.legenda}}
 			);
-			i3GEO.util.mensagemAjuda("i3GEOinseregraficomen1",$i("i3GEOinseregraficomen1").innerHTML);		
+			i3GEO.util.mensagemAjuda("i3GEOinseregraficomen1",$i("i3GEOinseregraficomen1").innerHTML);
 			//i3GEO.php.listaItensTema(i3GEOF.graficoTema.montaListaItens,i3GEO.temaAtivo);
 			i3GEOF.insereGrafico.ativaFoco();
 		}
@@ -77,11 +102,11 @@ i3GEOF.insereGrafico = {
 	},
 	/*
 	Function: html
-	
+
 	Gera o c&oacute;digo html para apresenta&ccedil;ão das op&ccedil;&otilde;es da ferramenta
-	
+
 	Retorno:
-	
+
 	String com o c&oacute;digo html
 	*/
 	html:function(){
@@ -95,7 +120,7 @@ i3GEOF.insereGrafico = {
 		ins += '	<div class=guiaobj id="i3GEOinseregraficoguia1obj" style="left:1px;display:none;">';
 		ins += '		<p class="paragrafo">Escolha o tema com os dados:';
 		ins += '		<div id=i3GEOinseregraficotemasi style="display:block;position:relative;top:10px;left:0px;text-align:left;">Aguarde...';
-		ins += '		</div>';	
+		ins += '		</div>';
 		ins += '		<div id=i3GEOinseregraficolistai class=digitar style="left:0px;top:20px;330px;height:80px;overflow:auto;display:block;">Escolha o tema para ver a lista de itens</div>';
 		ins += '		<br><br><br>';
 		ins += '		<p class="paragrafo"><input id=i3GEOinseregraficobotao1 size=35  type=button value="mostrar legenda no mapa" />';
@@ -118,17 +143,17 @@ i3GEOF.insereGrafico = {
 		ins += '			<td>';
 		ins += $inputText("","","i3GEOinseregraficosombra","",4,"5")+'</td>';
 		ins += '		</tr><tr><td></td><td>&nbsp;</td></tr>';
-		ins += '		</table>';			
+		ins += '		</table>';
 		ins += '	</div>';
 		ins += '</div>	';
 		return ins;
 	},
 	/*
-	Function: criaJanelaFlutuante
-	
+	Function: iniciaJanelaFlutuante
+
 	Cria a janela flutuante para controle da ferramenta.
-	*/	
-	criaJanelaFlutuante: function(){
+	*/
+	iniciaJanelaFlutuante: function(){
 		var minimiza,cabecalho,janela,divid,temp,titulo;
 		//funcao que sera executada ao ser clicado no cabe&ccedil;alho da janela
 		cabecalho = function(){
@@ -164,12 +189,12 @@ i3GEOF.insereGrafico = {
 		};
 		YAHOO.util.Event.addListener(janela[0].close, "click", temp);
 		//if(i3GEO.eventos.ATUALIZAARVORECAMADAS.toString().search("i3GEOF.insereGrafico.comboTemas()") < 0)
-		//{i3GEO.eventos.ATUALIZAARVORECAMADAS.push("i3GEOF.insereGrafico.comboTemas()");}		
+		//{i3GEO.eventos.ATUALIZAARVORECAMADAS.push("i3GEOF.insereGrafico.comboTemas()");}
 		i3GEOF.insereGrafico.inicia(divid);
 	},
 	/*
 	Function: ativaFoco
-	
+
 	Refaz a interface da ferramenta quando a janela flutuante tem seu foco ativado
 	*/
 	ativaFoco: function(){
@@ -185,17 +210,17 @@ i3GEOF.insereGrafico = {
 			var i = $i("i3GEOF.insereGrafico_c").style;
 			i3GEO.janela.ULTIMOZINDEX++;
 			i.zIndex = 21000 + i3GEO.janela.ULTIMOZINDEX;
-		}			
+		}
 	},
 	/*
 	Function: insere
-	
+
 	Insere um grafico no mapa na posi&ccedil;ão clicada
 
 	O ponto &eacute; obtidos do objeto objposicaocursor e os demais parâmetros da janela interna aberta no iframe "wdocai"
-	
+
 	Veja:
-	
+
 	<i3GEO.php.insereSHPgrafico>
 	*/
 	insere: function(){
@@ -225,11 +250,11 @@ i3GEOF.insereGrafico = {
 	},
 	/*
 	Function: comboTemas
-	
+
 	Cria o combo com os temas dispon&iacute;veis (temas ligados) para adi&ccedil;ão dos gr&aacute;ficos.
-	
+
 	Veja:
-	
+
 	<i3GEO.util.comboTemas>
 	*/
 	comboTemas: function(){
@@ -257,11 +282,11 @@ i3GEOF.insereGrafico = {
 	},
 	/*
 	Function: listaItens
-	
+
 	Monta a listagem de itens de um tema com a op&ccedil;ão de sele&ccedil;ão de cor
-	
+
 	Parametro:
-	
+
 	retorno {JSON}
 	*/
 	listaItens: function(retorno){
@@ -285,14 +310,14 @@ i3GEOF.insereGrafico = {
 	},
 	/*
 	Function: corj
-	
+
 	Abre a janela para o usu&aacute;rio selecionar uma cor interativamente
 	*/
 	corj: function(obj)
 	{i3GEO.util.abreCor("",obj);},
 	/*
 	Function: pegaItensMarcados
-	
+
 	Recupera os itens que foram marcados e monta uma lista para enviar como parâmetro para a fun&ccedil;ão de gera&ccedil;ão dos gr&aacute;ficos
 	*/
 	pegaItensMarcados: function(){
@@ -316,7 +341,7 @@ i3GEOF.insereGrafico = {
 	},
 	/*
 	Function: legenda
-	
+
 	Mostra a legenda no mapa do &uacute;ltimo gr&aacute;fico inserido
 	*/
 	legenda: function(){

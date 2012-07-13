@@ -47,17 +47,42 @@ Classe: i3GEOF.gradeDePoligonos
 i3GEOF.gradeDePoligonos = {
 	/*
 	Variavel: aguarde
-	
+
 	Estilo do objeto DOM com a imagem de aguarde existente no cabe&ccedil;alho da janela.
 	*/
 	aguarde: "",
 	/*
+		Para efeitos de compatibilidade antes da vers&atilde;o 4.7 que não tinha dicion&aacute;rio
+	*/
+	criaJanelaFlutuante: function(){
+		i3GEOF.distanciaptpt.iniciaDicionario();
+	},
+	/*
+	Function: iniciaDicionario
+
+	Carrega o dicion&aacute;rio e chama a fun&ccedil;&atilde;o que inicia a ferramenta
+
+	O Javascript &eacute; carregado com o id i3GEOF.nomedaferramenta.dicionario_script
+	*/
+	iniciaDicionario: function(){
+		if(typeof(i3GEOF.gradeDePoligonos.dicionario) === 'undefined'){
+			i3GEO.util.scriptTag(
+				i3GEO.configura.locaplic+"/ferramentas/gradepol/dicionario.js",
+				"i3GEOF.gradeDePoligonos.iniciaJanelaFlutuante()",
+				"i3GEOF.gradeDePoligonos.dicionario_script"
+			);
+		}
+		else{
+			i3GEOF.gradeDePoligonos.iniciaJanelaFlutuante();
+		}
+	},
+	/*
 	Function: inicia
-	
+
 	Inicia a ferramenta. &Eacute; chamado por criaJanelaFlutuante
-	
+
 	Parametro:
-	
+
 	iddiv {String} - id do div que receber&aacute; o conteudo HTML da ferramenta
 	*/
 	inicia: function(iddiv){
@@ -70,11 +95,11 @@ i3GEOF.gradeDePoligonos = {
 	},
 	/*
 	Function: html
-	
+
 	Gera o c&oacute;digo html para apresenta&ccedil;ão das op&ccedil;&otilde;es da ferramenta
-	
+
 	Retorno:
-	
+
 	String com o c&oacute;digo html
 	*/
 	html:function(){
@@ -86,11 +111,11 @@ i3GEOF.gradeDePoligonos = {
 		return ins;
 	},
 	/*
-	Function: criaJanelaFlutuante
-	
+	Function: iniciaJanelaFlutuante
+
 	Cria a janela flutuante para controle da ferramenta.
-	*/	
-	criaJanelaFlutuante: function(){
+	*/
+	iniciaJanelaFlutuante: function(){
 		var minimiza,cabecalho,janela,divid,titulo;
 		//cria a janela flutuante
 		titulo = "Grade de pol&iacute;gonos <a class=ajuda_usuario target=_blank href='" + i3GEO.configura.locaplic + "/ajuda_usuario.php?idcategoria=3&idajuda=14' >&nbsp;&nbsp;&nbsp;</a>";
@@ -148,10 +173,10 @@ i3GEOF.gradeDePoligonos = {
 		ins += "Minuto<input onclick='javascript:this.select();' class=digitar id='i3GEOgradedepoligonosiym' title='minuto'  type=text size=5 value='00'/>";
 		ins += "Segundo<input onclick='javascript:this.select();' class=digitar id='i3GEOgradedepoligonosiys' title='segundo'  type=text size=5 value='00.00'/>";
 		g_tipoacao = "capturaponto";
-		i3GEO.util.proximoAnterior("i3GEOF.gradeDePoligonos.t1()","i3GEOF.gradeDePoligonos.t3()",ins,"i3GEOF.gradeDePoligonos.t2","i3GEOgradedepoligonosresultado");	
+		i3GEO.util.proximoAnterior("i3GEOF.gradeDePoligonos.t1()","i3GEOF.gradeDePoligonos.t3()",ins,"i3GEOF.gradeDePoligonos.t2","i3GEOgradedepoligonosresultado");
 
 		if(i3GEO.eventos.MOUSECLIQUE.toString().search("i3GEOF.gradeDePoligonos.capturaPonto()") < 0)
-		{i3GEO.eventos.MOUSECLIQUE.push("i3GEOF.gradeDePoligonos.capturaPonto()");}		
+		{i3GEO.eventos.MOUSECLIQUE.push("i3GEOF.gradeDePoligonos.capturaPonto()");}
 		temp = function(){
 			i3GEO.eventos.MOUSECLIQUE.remove("i3GEOF.gradeDePoligonos.capturaPonto()");
 		};
@@ -172,15 +197,15 @@ i3GEOF.gradeDePoligonos = {
 		new YAHOO.widget.Button(
 			"i3GEOgradedepoligonosbotao1",
 			{onclick:{fn: i3GEOF.gradeDePoligonos.criaGrade}}
-		);		
+		);
 	},
 	/*
 	Function: criaGrade
-	
+
 	Cria a grade e adiciona um novo tema ao mapa
-	
+
 	Veja:
-	
+
 	<GRADEDEPOL>
 	*/
 	criaGrade: function(){
@@ -192,7 +217,7 @@ i3GEOF.gradeDePoligonos = {
 			dx = i3GEO.calculo.dms2dd($i("i3GEOgradedepoligonosxg").value,$i("i3GEOgradedepoligonosxm").value,$i("i3GEOgradedepoligonosxs").value);
 			dy = i3GEO.calculo.dms2dd($i("i3GEOgradedepoligonosyg").value,$i("i3GEOgradedepoligonosym").value,$i("i3GEOgradedepoligonosys").value);
 			ix = i3GEO.calculo.dms2dd($i("i3GEOgradedepoligonosixg").value,$i("i3GEOgradedepoligonosixm").value,$i("i3GEOgradedepoligonosixs").value);
-			iy = i3GEO.calculo.dms2dd($i("i3GEOgradedepoligonosiyg").value,$i("i3GEOgradedepoligonosiym").value,$i("i3GEOgradedepoligonosiys").value);	
+			iy = i3GEO.calculo.dms2dd($i("i3GEOgradedepoligonosiyg").value,$i("i3GEOgradedepoligonosiym").value,$i("i3GEOgradedepoligonosiys").value);
 			nptx = $i("i3GEOgradedepoligonosnptx").value;
 			npty = $i("i3GEOgradedepoligonosnpty").value;
 			if ((dx == 0) || (dy == 0))
@@ -218,7 +243,7 @@ i3GEOF.gradeDePoligonos = {
 	},
 	/*
 	Function: capturaPonto
-	
+
 	Captura um ponto no mapa e preenche os campos de coordenadas de in&iacute;cio da grade
 	*/
 	capturaPonto: function(){

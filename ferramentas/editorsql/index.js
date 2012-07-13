@@ -47,17 +47,43 @@ Classe: i3GEOF.editorsql
 i3GEOF.editorsql = {
 	/*
 	Variavel: aguarde
-	
+
 	Estilo do objeto DOM com a imagem de aguarde existente no cabe&ccedil;alho da janela.
 	*/
 	aguarde: "",
+
+	/*
+		Para efeitos de compatibilidade antes da vers&atilde;o 4.7 que não tinha dicion&aacute;rio
+	*/
+	criaJanelaFlutuante: function(){
+		i3GEOF.editorsql.iniciaDicionario();
+	},
+	/*
+	Function: iniciaDicionario
+
+	Carrega o dicion&aacute;rio e chama a fun&ccedil;&atilde;o que inicia a ferramenta
+
+	O Javascript &eacute; carregado com o id i3GEOF.nomedaferramenta.dicionario_script
+	*/
+	iniciaDicionario: function(){
+		if(typeof(i3GEOF.editorsql.dicionario) === 'undefined'){
+			i3GEO.util.scriptTag(
+				i3GEO.configura.locaplic+"/ferramentas/editorsql/dicionario.js",
+				"i3GEOF.editorsql.iniciaJanelaFlutuante()",
+				"i3GEOF.editorsql.dicionario_script"
+			);
+		}
+		else{
+			i3GEOF.editorsql.iniciaJanelaFlutuante();
+		}
+	},
 	/*
 	Function: inicia
-	
+
 	Inicia a ferramenta. &Eacute; chamado por criaJanelaFlutuante
-	
+
 	Parametro:
-	
+
 	iddiv {String} - id do div que receber&aacute; o conteudo HTML da ferramenta
 	*/
 	inicia: function(iddiv){
@@ -68,7 +94,7 @@ i3GEOF.editorsql = {
 				{onclick:{fn: i3GEOF.editorsql.altera}}
 			);
 			i3GEOF.editorsql.pega();
-			
+
 			i3GEO.util.comboItens(
 				"i3GEOeditorsqlItem",
 				i3GEO.temaAtivo,
@@ -84,7 +110,7 @@ i3GEOF.editorsql = {
 							},
 							"i3GEOeditorsqlvalores"
 						);
-			 		
+
 			 		};
 				},
 				"i3GEOeditorsqlDivItem"
@@ -95,11 +121,11 @@ i3GEOF.editorsql = {
 	},
 	/*
 	Function: html
-	
+
 	Gera o c&oacute;digo html para apresenta&ccedil;ão das op&ccedil;&otilde;es da ferramenta
-	
+
 	Retorno:
-	
+
 	String com o c&oacute;digo html
 	*/
 	html:function(){
@@ -112,11 +138,11 @@ i3GEOF.editorsql = {
 		return ins;
 	},
 	/*
-	Function: criaJanelaFlutuante
-	
+	Function: iniciaJanelaFlutuante
+
 	Cria a janela flutuante para controle da ferramenta.
-	*/	
-	criaJanelaFlutuante: function(){
+	*/
+	iniciaJanelaFlutuante: function(){
 		var janela,divid,titulo;
 		//cria a janela flutuante
 		titulo = "Altera SQL <a class=ajuda_usuario target=_blank href='" + i3GEO.configura.locaplic + "/ajuda_usuario.php?idcategoria=5&idajuda=86' >&nbsp;&nbsp;&nbsp;</a>";
@@ -139,11 +165,11 @@ i3GEOF.editorsql = {
 	},
 	/*
 	Function: pega
-	
+
 	Pega o SQL
-	
+
 	Veja:
-	
+
 	<i3GEO.php.pegaData>
 	*/
 	pega: function(){
@@ -158,11 +184,11 @@ i3GEOF.editorsql = {
 	},
 	/*
 	Function: altera
-	
+
 	Altera o SQL
-	
+
 	Veja:
-	
+
 	<i3GEO.php.alteraData>
 	*/
 	altera: function(){

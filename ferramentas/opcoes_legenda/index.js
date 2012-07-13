@@ -46,17 +46,42 @@ Classe: i3GEOF.opcoesLegenda
 i3GEOF.opcoesLegenda = {
 	/*
 	Variavel: aguarde
-	
+
 	Estilo do objeto DOM com a imagem de aguarde existente no cabe&ccedil;alho da janela.
 	*/
 	aguarde: "",
 	/*
+		Para efeitos de compatibilidade antes da vers&atilde;o 4.7 que não tinha dicion&aacute;rio
+	*/
+	criaJanelaFlutuante: function(){
+		i3GEOF.opcoesLegenda.iniciaDicionario();
+	},
+	/*
+	Function: iniciaDicionario
+
+	Carrega o dicion&aacute;rio e chama a fun&ccedil;&atilde;o que inicia a ferramenta
+
+	O Javascript &eacute; carregado com o id i3GEOF.nomedaferramenta.dicionario_script
+	*/
+	iniciaDicionario: function(){
+		if(typeof(i3GEOF.opcoesLegenda.dicionario) === 'undefined'){
+			i3GEO.util.scriptTag(
+				i3GEO.configura.locaplic+"/ferramentas/opcoes_legenda/dicionario.js",
+				"i3GEOF.opcoesLegenda.iniciaJanelaFlutuante()",
+				"i3GEOF.opcoesLegenda.dicionario_script"
+			);
+		}
+		else{
+			i3GEOF.opcoesLegenda.iniciaJanelaFlutuante();
+		}
+	},
+	/*
 	Function: inicia
-	
+
 	Inicia a ferramenta. &Eacute; chamado por criaJanelaFlutuante
-	
+
 	Parametro:
-	
+
 	iddiv {String} - id do div que receber&aacute; o conteudo HTML da ferramenta
 	*/
 	inicia: function(iddiv){
@@ -79,11 +104,11 @@ i3GEOF.opcoesLegenda = {
 	},
 	/*
 	Function: html
-	
+
 	Gera o c&oacute;digo html para apresenta&ccedil;ão das op&ccedil;&otilde;es da ferramenta
-	
+
 	Retorno:
-	
+
 	String com o c&oacute;digo html
 	*/
 	html:function(){
@@ -132,11 +157,11 @@ i3GEOF.opcoesLegenda = {
 			'<tr><td>Tamanho do s&iacute;mb. X:</td><td>' +
 			$inputText("","","i3GEOopcoesLegendakeysizex","",4,"") +
 			'<td></tr>' +
-			'<tr><td>&nbsp;</td><td></td></tr>' +			
+			'<tr><td>&nbsp;</td><td></td></tr>' +
 			'<tr><td>Tamanho do texto:</td><td>' +
 			$inputText("","","i3GEOopcoesLegendalabelsize","",4,"") +
 			'<td></tr>' +
-			'<tr><td>&nbsp;</td><td></td></tr>' +			
+			'<tr><td>&nbsp;</td><td></td></tr>' +
 			'<tr><td>Fonte: (teste a fonte mais adequada para apresenta&ccedil;ão correta da acentua&ccedil;ão)</td>' +
 			'	<td id=i3GEOopcoesLegendafontef >aguarde...</td>' +
 			'</tr></table><br>'+
@@ -147,11 +172,11 @@ i3GEOF.opcoesLegenda = {
 		return ins;
 	},
 	/*
-	Function: criaJanelaFlutuante
-	
+	Function: iniciaJanelaFlutuante
+
 	Cria a janela flutuante para controle da ferramenta.
-	*/	
-	criaJanelaFlutuante: function(){
+	*/
+	iniciaJanelaFlutuante: function(){
 		var janela,divid,titulo,cabecalho,minimiza;
 		cabecalho = function(){};
 		minimiza = function(){
@@ -180,18 +205,18 @@ i3GEOF.opcoesLegenda = {
 	},
 	/*
 	Function: corj
-	
+
 	Abre a janela para o usu&aacute;rio selecionar uma cor interativamente
 	*/
 	corj: function(obj)
 	{i3GEO.util.abreCor("",obj);},
 	/*
 	Function: executa
-	
+
 	Altera a legenda
-	
+
 	Veja:
-	
+
 	<APLICAPARAMETROSLEGIMG>
 	*/
 	executa: function(){
@@ -211,11 +236,11 @@ i3GEOF.opcoesLegenda = {
 	},
 	/*
 	Function: parametrosAtuais
-	
+
 	Pega os parâmetros atuais da legenda
-	
+
 	Veja:
-	
+
 	<PEGAPARAMETROSLEGIMG>
 	*/
 	parametrosAtuais: function(){
@@ -247,7 +272,7 @@ i3GEOF.opcoesLegenda = {
 	},
 	/*
 	Function: parametrosFormulario
-	
+
 	Pega os valores do formul&aacute;rio atual
 	*/
 	parametrosFormulario: function(){
@@ -274,11 +299,11 @@ i3GEOF.opcoesLegenda = {
 	},
 	/*
 	Function: testa
-	
+
 	Testa a legenda, mostrando uma imagem tempor&aacute;ria
-	
+
 	Veja:
-	
+
 	<TESTALEGENDA>
 	*/
 	testa: function(){

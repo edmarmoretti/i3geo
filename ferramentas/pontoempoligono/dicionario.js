@@ -1,5 +1,5 @@
-//+$trad(1,i3GEOF.pontoempoligono.dicionario)+
-i3GEOF.pontoempoligono.dicionario = {
+//+$trad(1,i3GEOF.pontoEmPoligono.dicionario)+
+i3GEOF.pontoEmPoligono.dicionario = {
 1: [{
 pt:"",
 en:"",

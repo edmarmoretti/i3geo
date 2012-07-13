@@ -670,7 +670,7 @@ i3GEO.configura = {
 						"",
 						"",
 						"",
-						"Busca r&aacute;pida",
+						$trad("o2"),
 						"janelaBuscaRapida",
 						false,
 						"hd",
@@ -1133,7 +1133,7 @@ i3GEO.configura = {
 						pontoRota2 = latlng;
 						counterClick = 0;
 						GEvent.removeListener(rotaEvento);
-						janela = i3GEO.janela.cria("300px","300px","","center","","Rota");
+						janela = i3GEO.janela.cria("300px","300px","","center","",$trad("x48"));
 						janela[2].style.overflow = "auto";
 						janela[2].style.height = "300px";
 						directions = new GDirections(i3GeoMap,janela[2]);

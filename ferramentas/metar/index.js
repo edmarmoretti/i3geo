@@ -50,17 +50,42 @@ Classe: i3GEOF.metar
 i3GEOF.metar = {
 	/*
 	Variavel: aguarde
-	
+
 	Estilo do objeto DOM com a imagem de aguarde existente no cabe&ccedil;alho da janela.
 	*/
 	aguarde: "",
 	/*
+		Para efeitos de compatibilidade antes da vers&atilde;o 4.7 que não tinha dicion&aacute;rio
+	*/
+	criaJanelaFlutuante: function(){
+		i3GEOF.metar.iniciaDicionario();
+	},
+	/*
+	Function: iniciaDicionario
+
+	Carrega o dicion&aacute;rio e chama a fun&ccedil;&atilde;o que inicia a ferramenta
+
+	O Javascript &eacute; carregado com o id i3GEOF.nomedaferramenta.dicionario_script
+	*/
+	iniciaDicionario: function(){
+		if(typeof(i3GEOF.metar.dicionario) === 'undefined'){
+			i3GEO.util.scriptTag(
+				i3GEO.configura.locaplic+"/ferramentas/metar/dicionario.js",
+				"i3GEOF.metar.iniciaJanelaFlutuante()",
+				"i3GEOF.metar.dicionario_script"
+			);
+		}
+		else{
+			i3GEOF.metar.iniciaJanelaFlutuante();
+		}
+	},
+	/*
 	Function: inicia
-	
+
 	Inicia a ferramenta. &Eacute; chamado por criaJanelaFlutuante
-	
+
 	Parametro:
-	
+
 	iddiv {String} - id do div que receber&aacute; o conteudo HTML da ferramenta
 	*/
 	inicia: function(iddiv){
@@ -72,22 +97,22 @@ i3GEOF.metar = {
 			}
 			if(i3GEO.Interface.ATUAL === "googlemaps"){
    				metarDragend = google.maps.event.addListener(i3GeoMap, "dragend", function() {i3GEOF.metar.lista();});
-   				metarZoomend = google.maps.event.addListener(i3GeoMap, "zoomend", function() {i3GEOF.metar.lista();});						
+   				metarZoomend = google.maps.event.addListener(i3GeoMap, "zoomend", function() {i3GEOF.metar.lista();});
 			}
 			if(i3GEO.Interface.ATUAL === "googleearth"){
    				metarDragend = google.earth.addEventListener(i3GeoMap.getView(), "viewchangeend", function() {i3GEOF.metar.lista();});
-			}			
+			}
 			i3GEOF.metar.lista();
 		}
 		catch(erro){alert(erro);}
 	},
 	/*
 	Function: html
-	
+
 	Gera o c&oacute;digo html para apresenta&ccedil;ão das op&ccedil;&otilde;es da ferramenta
-	
+
 	Retorno:
-	
+
 	String com o c&oacute;digo html
 	*/
 	html:function(){
@@ -96,11 +121,11 @@ i3GEOF.metar = {
 		return ins;
 	},
 	/*
-	Function: criaJanelaFlutuante
-	
+	Function: iniciaJanelaFlutuante
+
 	Cria a janela flutuante para controle da ferramenta.
-	*/	
-	criaJanelaFlutuante: function(){
+	*/
+	iniciaJanelaFlutuante: function(){
 		var minimiza,cabecalho,janela,divid,temp,titulo;
 		//funcao que sera executada ao ser clicado no cabe&ccedil;alho da janela
 		cabecalho = function(){
@@ -137,13 +162,13 @@ i3GEOF.metar = {
 			}
 			if(i3GEO.Interface.ATUAL === "googleearth"){
 				google.earth.removeEventListener(metarDragend);
-			}			
+			}
 		};
-		YAHOO.util.Event.addListener(janela[0].close, "click", temp);		
+		YAHOO.util.Event.addListener(janela[0].close, "click", temp);
 	},
 	/*
 	Function: ativaFoco
-	
+
 	Refaz a interface da ferramenta quando a janela flutuante tem seu foco ativado
 	*/
 	ativaFoco: function(){
@@ -154,7 +179,7 @@ i3GEOF.metar = {
 	},
 	/*
 	Function: lista
-	
+
 	Lista as esta&ccedil;&otilde;es consultando o webservice http://ws.geonames.org/weatherJSON
 	*/
 	lista: function(){
@@ -186,7 +211,7 @@ i3GEOF.metar = {
 								"<tr><td>humidade</td><td>" + dados[i].humidity + " %</td></tr>" +
 								"<tr><td>data</td><td>" + dados[i].datetime + "</td></tr>" +
 								"<tr><td>pressão</td><td>" + dados[i].hectoPascAltimeter +" hpa</td></tr>" +
-								"<tr><td>ICAO</td><td>" + dados[i].ICAO + "</td></tr>";					
+								"<tr><td>ICAO</td><td>" + dados[i].ICAO + "</td></tr>";
 					}
 					$i("i3GEOmetarLista").innerHTML = ins+"</table>";
 				}
@@ -195,7 +220,7 @@ i3GEOF.metar = {
 	  		failure: function(o){
 	 			$i("i3GEOmetarLista").innerHTML = "Erro. A opera&ccedil;ão demorou muito.";
 	 			i3GEOF.metar.aguarde.visibility = "hidden";
-				return; 		  		
+				return;
 	  		},
 	  		argument: { foo:"foo", bar:"bar" }
 		};
@@ -204,17 +229,17 @@ i3GEOF.metar = {
 		else
 		{ext = "-49.1774741355 -16.379556709 -47.2737662565 -14.9806872512";} //apenas para exemplo
 		p = i3GEO.configura.locaplic+"/ferramentas/metar/metarextensao.php?ret="+ext;
-		YAHOO.util.Connect.asyncRequest("GET", p, montaResultado);		
+		YAHOO.util.Connect.asyncRequest("GET", p, montaResultado);
 	},
 	/*
 	Function: mostraxy
-	
+
 	Indica no mapa a localiza&ccedil;ão de uma esta&ccedil;ão
-	
+
 	Parametros:
-	
+
 	x {Numero} - longitude em dd
-	
+
 	y {Numero} - latitude em dd
 	*/
 	mostraxy: function(x,y){

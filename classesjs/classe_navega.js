@@ -1052,7 +1052,7 @@ i3GEO.navega = {
 			i3GEO.navega.destacaTema.TEMA = tema;
 			i3GEO.navega.destacaTema.ESTAATIVO = "sim";
 			i3GEO.navega.destacaTema.atualiza();
-			janela = i3GEO.janela.cria(160,0,"","center","center","Feche para parar destaque&nbsp;&nbsp;","ativadesativaDestaque");
+			janela = i3GEO.janela.cria(160,0,"","center","center",$trad("x50")+"&nbsp;&nbsp;","ativadesativaDestaque");
 			YAHOO.util.Event.addListener(janela[0].close, "click", i3GEO.navega.destacaTema.desativa);
 			if(i3GEO.eventos.NAVEGAMAPA.toString().search("i3GEO.navega.destacaTema.atualiza()") < 0)
 			{i3GEO.eventos.NAVEGAMAPA.push("i3GEO.navega.destacaTema.atualiza()");}

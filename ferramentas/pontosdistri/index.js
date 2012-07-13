@@ -41,17 +41,42 @@ Classe: i3GEOF.pontosDistri
 i3GEOF.pontosDistri = {
 	/*
 	Variavel: aguarde
-	
+
 	Estilo do objeto DOM com a imagem de aguarde existente no cabe&ccedil;alho da janela.
 	*/
 	aguarde: "",
 	/*
+		Para efeitos de compatibilidade antes da vers&atilde;o 4.7 que não tinha dicion&aacute;rio
+	*/
+	criaJanelaFlutuante: function(){
+		i3GEOF.pontosDistri.iniciaDicionario();
+	},
+	/*
+	Function: iniciaDicionario
+
+	Carrega o dicion&aacute;rio e chama a fun&ccedil;&atilde;o que inicia a ferramenta
+
+	O Javascript &eacute; carregado com o id i3GEOF.nomedaferramenta.dicionario_script
+	*/
+	iniciaDicionario: function(){
+		if(typeof(i3GEOF.pontosDistri.dicionario) === 'undefined'){
+			i3GEO.util.scriptTag(
+				i3GEO.configura.locaplic+"/ferramentas/pontosdistri/dicionario.js",
+				"i3GEOF.pontosDistri.iniciaJanelaFlutuante()",
+				"i3GEOF.pontosDistri.dicionario_script"
+			);
+		}
+		else{
+			i3GEOF.pontosDistri.iniciaJanelaFlutuante();
+		}
+	},
+	/*
 	Function: inicia
-	
+
 	Inicia a ferramenta. &Eacute; chamado por criaJanelaFlutuante
-	
+
 	Parametro:
-	
+
 	iddiv {String} - id do div que receber&aacute; o conteudo HTML da ferramenta
 	*/
 	inicia: function(iddiv){
@@ -78,7 +103,7 @@ i3GEOF.pontosDistri = {
 			new YAHOO.widget.Button(
 				"i3GEOpontosDistribotao3",
 				{onclick:{fn: i3GEOF.pontosDistri.analiseRelatorio}}
-			);			
+			);
 			new YAHOO.widget.Button(
 				"i3GEOpontosDistribotaokernel",
 				{onclick:{fn: i3GEOF.pontosDistri.analiseKernel}}
@@ -93,11 +118,11 @@ i3GEOF.pontosDistri = {
 	},
 	/*
 	Function: html
-	
+
 	Gera o c&oacute;digo html para apresenta&ccedil;ão das op&ccedil;&otilde;es da ferramenta
-	
+
 	Retorno:
-	
+
 	String com o c&oacute;digo html
 	*/
 	html:function(){
@@ -129,8 +154,8 @@ i3GEOF.pontosDistri = {
 		ins += '</div>';
 		ins += '<div class=guiaobj id="i3GEOpontosDistriguia2obj" style="left:1px;display:none;">';
 		ins += '		<p class="paragrafo" >Op&ccedil;&otilde;es de cores e classes do tema resultante:</p><br>';
-		ins += '		<table summary="" class=lista2 style= >'; 
-		ins += '			<tr>';  
+		ins += '		<table summary="" class=lista2 style= >';
+		ins += '			<tr>';
 		ins += '				<td>N&uacute;mero de classes:</td>';
 		ins += '				<td>';
 		ins += $inputText("","","i3GEOpontosDistrinumclasses","",4,"50");
@@ -148,7 +173,7 @@ i3GEOF.pontosDistri = {
 		ins += $inputText("","","i3GEOpontosDistricorf","",12,"255,255,255");
 		ins += '				<img alt="aquarela.gif" style=cursor:pointer src="'+i3GEO.configura.locaplic+'/imagens/aquarela.gif" onclick="i3GEOF.pontosDistri.corj(\'i3GEOpontosDistricorf\')" /></td>';
 		ins += '			</tr>';
-		ins += '		</table>';			
+		ins += '		</table>';
 		ins += '	<br><p class=paragrafo ><input id=i3GEOpontosDistribotao4 size=15  type=button value="Ver cores" />';
 		ins += '	<div id=i3GEOpontosDistrimostracores style="display:block;" ></div>';
 		ins += '</div>';
@@ -157,11 +182,11 @@ i3GEOF.pontosDistri = {
 		return ins;
 	},
 	/*
-	Function: criaJanelaFlutuante
-	
+	Function: iniciaJanelaFlutuante
+
 	Cria a janela flutuante para controle da ferramenta.
-	*/	
-	criaJanelaFlutuante: function(){
+	*/
+	iniciaJanelaFlutuante: function(){
 		var minimiza,cabecalho,janela,divid,temp,titulo;
 		//funcao que sera executada ao ser clicado no cabe&ccedil;alho da janela
 		cabecalho = function(){
@@ -199,7 +224,7 @@ i3GEOF.pontosDistri = {
 	},
 	/*
 	Function: ativaFoco
-	
+
 	Refaz a interface da ferramenta quando a janela flutuante tem seu foco ativado
 	*/
 	ativaFoco: function(){
@@ -229,18 +254,18 @@ i3GEOF.pontosDistri = {
 	},
 	/*
 	Function: corj
-	
+
 	Abre a janela para o usu&aacute;rio selecionar uma cor interativamente
 	*/
 	corj: function(obj)
 	{i3GEO.util.abreCor("",obj);},
 	/*
 	Function: verCores
-	
+
 	Mostra as cores definidas nos intervalos de defini&ccedil;ão da paleta
-	
+
 	Veja:
-	
+
 	<VERPALETA>
 	*/
 	verCores: function(){
@@ -261,7 +286,7 @@ i3GEOF.pontosDistri = {
 						ins += "<div style=background-color:rgb("+retorno[i]+") >"+retorno[i]+"</div>";
 					}
 					$i("i3GEOpontosDistrimostracores").innerHTML = ins;
-					i3GEOF.pontosDistri.aguarde.visibility = "hidden";			
+					i3GEOF.pontosDistri.aguarde.visibility = "hidden";
 				};
 			cp.set_response_type("JSON");
 			cp.call(p,"verPaleta",mostraopcoes);
@@ -269,11 +294,11 @@ i3GEOF.pontosDistri = {
 	},
 	/*
 	Function: analiseDistancia
-	
+
 	Executa a an&aacute;lise de distribui&ccedil;ão de pontos
-	
+
 	Veja:
-	
+
 	<ANALISEDISTRIPT>
 	*/
 	analiseDistancia: function(){
@@ -305,11 +330,11 @@ i3GEOF.pontosDistri = {
 	},
 	/*
 	Function: analiseDensidade
-	
+
 	Executa a an&aacute;lise de densidade
-	
+
 	Veja:
-	
+
 	<ANALISEDISTRIPT>
 	*/
 	analiseDensidade: function(){
@@ -341,11 +366,11 @@ i3GEOF.pontosDistri = {
 	},
 	/*
 	Function: analiseKernel
-	
+
 	Executa a an&aacute;lise de kernel
 
 	Veja:
-	
+
 	<ANALISEDISTRIPT>
 	*/
 	analiseKernel: function(){
@@ -373,15 +398,15 @@ i3GEOF.pontosDistri = {
 			cp.set_response_type("JSON");
 			cp.call(p,"analiseDistriPt",temp);
 		}
-		catch(e){alert(e);i3GEOF.pontosDistri.aguarde.visibility = "hidden";}	
+		catch(e){alert(e);i3GEOF.pontosDistri.aguarde.visibility = "hidden";}
 	},
 	/*
 	Function: analiseDeldir
-	
+
 	Executa a an&aacute;lise de triangula&ccedil;ão
 
 	Veja:
-	
+
 	<ANALISEDISTRIPT>
 
 	*/
@@ -407,15 +432,15 @@ i3GEOF.pontosDistri = {
 			cp.set_response_type("JSON");
 			cp.call(p,"analiseDistriPt",temp);
 		}
-		catch(e){alert(e);i3GEOF.pontosDistri.aguarde.visibility = "hidden";}		
+		catch(e){alert(e);i3GEOF.pontosDistri.aguarde.visibility = "hidden";}
 	},
 	/*
 	Function: analiseRelatorio
-	
+
 	Abre o relat&oacute;rio de an&aacute;lise
 
 	Veja:
-	
+
 	<ANALISEDISTRIPT>
 
 	*/
@@ -444,6 +469,6 @@ i3GEOF.pontosDistri = {
 			cp.set_response_type("JSON");
 			cp.call(p,"analiseDistriPt",temp);
 		}
-		catch(e){alert(e);i3GEOF.pontosDistri.aguarde.visibility = "hidden";}	
+		catch(e){alert(e);i3GEOF.pontosDistri.aguarde.visibility = "hidden";}
 	}
 };

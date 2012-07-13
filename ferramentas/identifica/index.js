@@ -42,86 +42,112 @@ Classe: i3GEOF.identifica
 i3GEOF.identifica = {
 	/*
 	Propriedade: mostraLinkGeohack
-	
+
 	Mostra ou não o link para abrir o site GeoHack.
-	
+
 	Este site permite o uso de v&aacute;rios buscadores dispon&iacute;veis na internet.
-	
+
 	Type:
 	{boolean}
 	*/
 	mostraLinkGeohack: true,
 	/*
 	Propriedade: mostraSistemasAdicionais
-	
+
 	Mostra ou não a lista de sistemas adicionais de busca de dados.
 
 	Type:
 	{boolean}
-	*/	
+	*/
 	mostraSistemasAdicionais: true,
 	/*
 	Variavel: tema
-	
+
 	C&oacute;digo do tema que ser&aacute; pesquisado
-	
+
 	Type:
 	{String}
 	*/
 	tema: "",
 	/*
 	Variavel: x
-	
+
 	Coordenada x
-	
+
 	Type:
 	{Numeric}
 	*/
 	x: 0,
 	/*
 	Variavel: y
-	
+
 	Coordenada y
-	
+
 	Type:
 	{Numeric}
 	*/
 	y: 0,
 	/*
 	Variavel: sistemasAdicionais
-	
+
 	Guarda a lista de sistemas adicionais que são inclu&iacute;dos na sele&ccedil;ão de temas
-	
+
 	Type:
 	{Array}
 	*/
 	sistemasAdicionais: [],
 	/*
 	Variavel: dadosIdentifica
-	
+
 	Guarda os dados obtidos com a chamada em AJAX de identifica&ccedil;ão
-	
+
 	Type:
 	{Array}
 	*/
-	dadosIdentifica: [],	
+	dadosIdentifica: [],
+
+	/*
+		Para efeitos de compatibilidade antes da vers&atilde;o 4.7 que não tinha dicion&aacute;rio
+	*/
+	criaJanelaFlutuante: function(){
+		i3GEOF.identifica.iniciaDicionario();
+	},
+	/*
+	Function: iniciaDicionario
+
+	Carrega o dicion&aacute;rio e chama a fun&ccedil;&atilde;o que inicia a ferramenta
+
+	O Javascript &eacute; carregado com o id i3GEOF.nomedaferramenta.dicionario_script
+	*/
+	iniciaDicionario: function(){
+		if(typeof(i3GEOF.identifica.dicionario) === 'undefined'){
+			i3GEO.util.scriptTag(
+				i3GEO.configura.locaplic+"/ferramentas/identifica/dicionario.js",
+				"i3GEOF.identifica.iniciaJanelaFlutuante()",
+				"i3GEOF.identifica.dicionario_script"
+			);
+		}
+		else{
+			i3GEOF.identifica.iniciaJanelaFlutuante();
+		}
+	},
 	/*
 	Function: inicia
-	
+
 	Inicia a janela de informa&ccedil;&otilde;es
-	
+
 	Parameters:
-	
+
 	tema {String} - c&oacute;digo do tema, existente no mapfile armazenado na se&ccedil;ão, que ser&aacute; consultado j&aacute; na inicializa&ccedil;ão
 
 	x {Numeric} - coordenada x do ponto que ser&aacute; utilizado para busca dos atributos
-	
+
 	y {Numeric} - coordenada y do ponto
-	
+
 	iddiv {String} - id do elemento html onde o conte&uacute;do da ferramenta ser&aacute; incluido
-	
+
 	mostraLinkGeohack {boolean} - mostra ou não o link para o site geohacks
-	
+
 	mostraSistemasAdicionais {boolean} - mostra ou não os sistemas adicionais de busca de dados
 	*/
 	inicia: function(tema,x,y,iddiv,mostraLinkGeohack,mostraSistemasAdicionais){
@@ -169,7 +195,7 @@ i3GEOF.identifica = {
 							i3GEO.util.scriptTag(js,"i3GEOF.bufferpt.criaJanelaFlutuante("+i3GEOF.identifica.x+","+i3GEOF.identifica.y+")","i3GEOF.bufferpt_script");
 						}
 					}
-				});				
+				});
 				i3GEO.coordenadas.formato = "lista";
 				i3GEO.coordenadas.mostraCoordenadas(false,"i3GEOidentificacoordtexto",i3GEOF.identifica.x,i3GEOF.identifica.y);
 				$i("i3GEOidentificacoordtexto").innerHTML = i3GEO.coordenadas.MODOTEXTO+"</span>";
@@ -208,22 +234,22 @@ i3GEOF.identifica = {
 			if(navm){
 				$i("yui-gen6").style.height = "250px";
 				$i("yui-gen6").style.width = "5px";
-			}			
+			}
         });
         resize.resize(null, null, null, 0, 0, true);
 	},
 	atualizaSistemas: function(){
 		if(i3GEOF.identifica.mostraSistemasAdicionais === true){
 			var p = i3GEO.configura.locaplic+"/classesphp/mapa_controle.php?funcao=pegaSistemasIdentificacao&g_sid="+i3GEO.configura.sid;
-			cpJSON.call(p,"foo",i3GEOF.identifica.montaListaSistemas);	
-		}	
+			cpJSON.call(p,"foo",i3GEOF.identifica.montaListaSistemas);
+		}
 	},
 	/*
-	Function: criaJanelaFlutuante
-	
+	Function: iniciaJanelaFlutuante
+
 	Cria a janela flutuante para controle da ferramenta.
 	*/
-	criaJanelaFlutuante: function(){
+	iniciaJanelaFlutuante: function(){
 		var minimiza,cabecalho,janela,divid,temp,titulo;
 		//funcao que sera executada ao ser clicado no cabe&ccedil;alho da janela
 		cabecalho = function(){
@@ -278,7 +304,7 @@ i3GEOF.identifica = {
 	},
 	/*
 	Function: ativaFoco
-	
+
 	Refaz a interface da ferramenta quando a janela flutuante tem seu foco ativado
 	*/
 	ativaFoco: function(){
@@ -293,11 +319,11 @@ i3GEOF.identifica = {
 	},
 	/*
 	Function: html
-	
+
 	Gera o c&oacute;digo html para apresenta&ccedil;ão das op&ccedil;&otilde;es da ferramenta
-	
+
 	Retorno:
-	
+
 	String com o c&oacute;digo html
 	*/
 	html:function(){
@@ -333,21 +359,21 @@ i3GEOF.identifica = {
 		ins += '		<div id=i3GEOidentificacoord ></div><br>';
 		ins += '		<div id=i3GEOidentificacoordtexto style=text-align:left ></div>';
 		ins += '		<br><br><input id=i3GEOidentificabotao2 size=20  type=button value="Criar entorno (buffer)" />';
-		ins += '	</div>';		
+		ins += '	</div>';
 		//ins += '</div>	';
 		return ins;
 	},
 	/*
 	Function: listaTemas
-	
+
 	Inclu&iacute; a lista de temas para o usu&aacute;rio escolher
-	
+
 	Veja:
-	
+
 	<i3GEO.php.listaTemas>
-	
+
 	Parametros:
-	
+
 	tipo {String} - ligados|todos lista apenas os temas que estão vis&iacute;veis no mapa ou todos os temas
 	*/
 	listaTemas: function(tipo){
@@ -360,17 +386,17 @@ i3GEOF.identifica = {
 			i3GEOF.identifica.montaListaTemas(lista);
 		}
 		else
-		{i3GEO.php.listaTemas(i3GEOF.identifica.montaListaTemas,tipo,i3GEO.configura.locaplic,i3GEO.configura.sid);}		
+		{i3GEO.php.listaTemas(i3GEOF.identifica.montaListaTemas,tipo,i3GEO.configura.locaplic,i3GEO.configura.sid);}
 	},
 	/*
 	Function: montaListaTemas
-	
+
 	Monta a lista de temas na forma de bot&otilde;es 'radio'
-	
+
 	O resultado &eacute; inserido no div com id "listaTemas"
-	
+
 	Parametros:
-	
+
 	retorno {JSON} - objeto retornado por i3GEO.php.listaTemas ou por i3GEO.arvoreDeCamadas.filtraCamadas
 	*/
 	montaListaTemas: function(retorno){
@@ -388,7 +414,7 @@ i3GEOF.identifica = {
 		{linhas = "";}
 		//
 		//monta a lista de temas
-		//	
+		//
 		linhas += "<span style=color:gray; >Clique no tema para ver os dados</span>";
 		linhas1 = "";
 		for (l=0;l<lista.length;l++)
@@ -413,11 +439,11 @@ i3GEOF.identifica = {
 	},
 	/*
 	Function: montaLinkGeohack
-	
+
 	Monta o link para o site geohack
-	
+
 	Return:
-	
+
 	{String}
 	*/
 	montaLinkGeohack: function(){
@@ -444,13 +470,13 @@ i3GEOF.identifica = {
 	},
 	/*
 	Function: montaListaSistemas
-	
+
 	Obt&eacute;m a lista de sistemas especiais de consulta.
-	
+
 	O resultado &eacute; inserido no div com id "listaSistemas".
-	
+
 	Cada sistema consiste em uma URL para a qual serão passados os parâmetros x e y.
-	
+
 	*/
 	montaListaSistemas: function(retorno){
 		var l,divins,ig,sistema,pub,exec,temp,t,linhas,ltema;
@@ -459,7 +485,7 @@ i3GEOF.identifica = {
 			divins = $i("i3GEOidentificalistaSistemas");
 			sis = retorno.data;
 			for (ig=0;ig<sis.length;ig++)
-			{	
+			{
 				sistema = sis[ig].NOME;
 				if(sis[ig].PUBLICADO)
 				{
@@ -490,7 +516,7 @@ i3GEOF.identifica = {
 					ltema = i3GEOF.identifica.sistemasAdicionais[l].split(",");
 					if (ltema.length > 1)
 					{linhas += "<tr><td style='border-top:1px solid beige;'><input onclick='i3GEOF.identifica.mostraDadosSistema("+ltema[1]+",\""+ltema[2]+"\")' style='border:0px solid white;cursor:pointer' type=radio name=i3GEOidentificatema /></td><td style='border-top:1px solid beige;' >"+ltema[0]+"</td></tr>";}
-					
+
 				}
 				if(divins){
 					if(i3GEO.parametros.editor.toLowerCase() == "sim"){
@@ -507,13 +533,13 @@ i3GEOF.identifica = {
 	},
 	/*
 	Function: buscaDadosTema
-	
+
 	Obt&eacute;m os dados de um tema para o ponto de coordenadas clicado no mapa
-	
+
 	Veja:
-	
+
 	<i3GEO.php.identifica2>
-	*/	
+	*/
 	buscaDadosTema: function(tema){
 		var res,opcao,resolucao,listaDeTemas="",temp;
 		try{
@@ -542,15 +568,15 @@ i3GEOF.identifica = {
 	},
 	/*
 	Function: mostraDadosSistema
-	
+
 	Obt&eacute;m os dados de um sistema para o ponto de coordenadas clicado no mapa
-	
+
 	Parametros:
-	
+
 	exec {String} - url que ser&aacute; aberta
-	
-	target {String} (depreciado) - _self|self| onde a url ser&aacute; aberta. Se for "self", ser&aacute; aberta na mesma janela, caso contr&aacute;rio, em uma nova p&aacute;gina do navegador 
-	*/	
+
+	target {String} (depreciado) - _self|self| onde a url ser&aacute; aberta. Se for "self", ser&aacute; aberta na mesma janela, caso contr&aacute;rio, em uma nova p&aacute;gina do navegador
+	*/
 	mostraDadosSistema: function(exec,target){
 		exec += "&x="+i3GEOF.identifica.x+"&y="+i3GEOF.identifica.y;
 		if(target === "target")
@@ -560,19 +586,19 @@ i3GEOF.identifica = {
 		}
 		var i = $i("i3GEOmarcaIdentifica");
 		if(i)
-		{i.style.display = "block";}		
+		{i.style.display = "block";}
 	},
 	/*
 	Function abrejanelaIframe
-	
+
 	Abre uma janela flutuante contendo um iframe
-	
+
 	Parametros:
-	
+
 	w {string} - largura
-	
+
 	h {string} - altura
-	
+
 	s {string} - src do iframe
 	*/
 	abrejanelaIframe: function(w,h,s){
@@ -585,18 +611,18 @@ i3GEOF.identifica = {
 	},
 	/*
 	Function: mostraDadosTema
-	
+
 	Mostra os dados obtidos de um ou mais temas.
-	
+
 	Recebe o resultado em JSON da opera&ccedil;ão de consulta realizada pelo servidor e formata os dados para apresenta&ccedil;ão na tela.
-	
+
 	Parametros:
-	
+
 	retorno {JSON} - objeto JSON com os dados <i3GEO.php.identifica2>
 	*/
 	mostraDadosTema: function(retorno){
 		var i,res="",ntemas,resultados,nres,cor,j,nitens,k,atualN = "todas",inicio=0,numResultados = 0,tip,link;
-		
+
 		if($i("i3GEOFidentificaNocorrencias"))
 		{atualN = $i("i3GEOFidentificaNocorrencias").value;}
 		$i("i3GEOF.identifica_corpo").scrollTop = 0;
@@ -604,7 +630,7 @@ i3GEOF.identifica = {
 		{$i("i3GEOidentificaocorrencia").innerHTML="Nada encontrado";return;}
 		i = $i("i3GEOmarcaIdentifica");
 		if(i)
-		{i.style.display = "block";}		
+		{i.style.display = "block";}
 		if (retorno !== undefined)
 		{
 			$i("i3GEOidentificaocorrencia").innerHTML="";
@@ -612,7 +638,7 @@ i3GEOF.identifica = {
 			for(i=0;i<ntemas;i++)
 			{
 				resultados = retorno[i].resultado;
-				res += "<div style='padding-top:6px;left:2px;text-align:left;width:100%;' >"+retorno[i].nome+"</div>";	
+				res += "<div style='padding-top:6px;left:2px;text-align:left;width:100%;' >"+retorno[i].nome+"</div>";
 				if(resultados[0] !== " ")
 				{
 					nres = resultados.length;
@@ -632,7 +658,7 @@ i3GEOF.identifica = {
 							}
 							else{
 								tip = "<img style='margin-right:2px;position:relative;top:3px;width:12px;' src='"+i3GEO.configura.locaplic+"/imagens/branco.gif' title='' />";
-							}							
+							}
 							if(resultados[j][k].link === "")
 							{res +=  "<div style='width:100%;text-align:left;background-color:"+cor+"' >"+tip+resultados[j][k].alias+":&nbsp;"+resultados[j][k].valor+"</div>";}
 							else{
@@ -670,7 +696,7 @@ i3GEOF.identifica = {
 		{sel = "SELECTED";}
 		select += "<option value='todas' "+sel+" >todas</option>";
 		nocor = nres + 1;
-		for(i=1;i<nocor;i++)		
+		for(i=1;i<nocor;i++)
 		{
 			sel = "";
 			if(atual == i)

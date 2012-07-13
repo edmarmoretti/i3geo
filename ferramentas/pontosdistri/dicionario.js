@@ -1,5 +1,5 @@
-//+$trad(1,i3GEOF.pontosdistri.dicionario)+
-i3GEOF.pontosdistri.dicionario = {
+//+$trad(1,i3GEOF.pontosDistri.dicionario)+
+i3GEOF.pontosDistri.dicionario = {
 1: [{
 pt:"",
 en:"",

@@ -44,26 +44,51 @@ Classe: i3GEOF.tme
 i3GEOF.tme = {
 	/*
 	Variavel: tema
-	
+
 	Tema que ser&aacute; utilizado
-	
+
 	Type:
 	{string}
 	*/
 	tema: i3GEO.temaAtivo,
 	/*
 	Variavel: aguarde
-	
+
 	Estilo do objeto DOM com a imagem de aguarde existente no cabe&ccedil;alho da janela.
 	*/
 	aguarde: "",
 	/*
+		Para efeitos de compatibilidade antes da vers&atilde;o 4.7 que não tinha dicion&aacute;rio
+	*/
+	criaJanelaFlutuante: function(){
+		i3GEOF.tme.iniciaDicionario();
+	},
+	/*
+	Function: iniciaDicionario
+
+	Carrega o dicion&aacute;rio e chama a fun&ccedil;&atilde;o que inicia a ferramenta
+
+	O Javascript &eacute; carregado com o id i3GEOF.nomedaferramenta.dicionario_script
+	*/
+	iniciaDicionario: function(){
+		if(typeof(i3GEOF.tme.dicionario) === 'undefined'){
+			i3GEO.util.scriptTag(
+				i3GEO.configura.locaplic+"/ferramentas/tme/dicionario.js",
+				"i3GEOF.tme.iniciaJanelaFlutuante()",
+				"i3GEOF.tme.dicionario_script"
+			);
+		}
+		else{
+			i3GEOF.tme.iniciaJanelaFlutuante();
+		}
+	},
+	/*
 	Function: inicia
-	
+
 	Inicia a ferramenta. &Eacute; chamado por criaJanelaFlutuante
-	
+
 	Parametro:
-	
+
 	iddiv {String} - id do div que receber&aacute; o conteudo HTML da ferramenta
 	*/
 	inicia: function(iddiv){
@@ -86,7 +111,7 @@ i3GEOF.tme = {
 			 		{$i("i3GEOTMEregioeslista").innerHTML = retorno.dados;}
 				},
 				"i3GEOTMEregioeslista"
-			);			
+			);
 			i3GEO.util.mensagemAjuda("i3GEOtmemen1",$i("i3GEOtmemen1").innerHTML);
 			i3GEOF.tme.ativaFoco();
 		}
@@ -94,11 +119,11 @@ i3GEOF.tme = {
 	},
 	/*
 	Function: html
-	
+
 	Gera o c&oacute;digo html para apresenta&ccedil;ão das op&ccedil;&otilde;es da ferramenta
-	
+
 	Retorno:
-	
+
 	String com o c&oacute;digo html
 	*/
 	html:function(){
@@ -112,7 +137,7 @@ i3GEOF.tme = {
 		'<br><br>Coluna que cont&eacute;m os nomes das regi&otilde;es (exemplo: nomes dos Estados ou nomes dos munic&iacute;pios):' +
 		'<div id="i3GEOTMEregioeslista" style="text-align:left;" ></div>' +
 		'<p class="paragrafo" >' +
-		'<br>Escolha uma ou mais colunas que cont&eacute;m os dados estat&iacute;sticos que serão representados:' +	
+		'<br>Escolha uma ou mais colunas que cont&eacute;m os dados estat&iacute;sticos que serão representados:' +
 		'<div id=i3GEOtmelistai class=digitar style="text-align:left;left:0px;top:0px;330px;height:80px;overflow:auto;display:block;"></div>' +
 		'<br>' +
 		'<input id=i3GEOtmebotao1 size=35  type=button value="Aplicar" />' +
@@ -120,11 +145,11 @@ i3GEOF.tme = {
 		return ins;
 	},
 	/*
-	Function: criaJanelaFlutuante
-	
+	Function: iniciaJanelaFlutuante
+
 	Cria a janela flutuante para controle da ferramenta.
 	*/
-	criaJanelaFlutuante: function(){
+	iniciaJanelaFlutuante: function(){
 		var minimiza,cabecalho,janela,divid,temp,titulo;
 		if($i("i3GEOF.tme")){
 			i3GEOF.tme.inicia("i3GEOF.tme_corpo");
@@ -157,13 +182,13 @@ i3GEOF.tme = {
 		i3GEOF.tme.inicia(divid);
 		temp = function(){
 			if(i3GEO.eventos.ATUALIZAARVORECAMADAS.toString().search('i3GEO.janela.comboCabecalhoTemas("i3GEOFtmeComboCabeca","i3GEOFtmeComboCabecaSel","tme","ligadosComTabela")') > 0)
-			{i3GEO.eventos.ATUALIZAARVORECAMADAS.remove('i3GEO.janela.comboCabecalhoTemas("i3GEOFtmeComboCabeca","i3GEOFtmeComboCabecaSel","tme","ligadosComTabela")');}			
+			{i3GEO.eventos.ATUALIZAARVORECAMADAS.remove('i3GEO.janela.comboCabecalhoTemas("i3GEOFtmeComboCabeca","i3GEOFtmeComboCabecaSel","tme","ligadosComTabela")');}
 		};
 		YAHOO.util.Event.addListener(janela[0].close, "click", temp);
 	},
 	/*
 	Function: ativaFoco
-	
+
 	Refaz a interface da ferramenta quando a janela flutuante tem seu foco ativado
 	*/
 	ativaFoco: function(){
@@ -174,11 +199,11 @@ i3GEOF.tme = {
 	},
 	/*
 	Function: montaListaItens
-	
+
 	Monta a lista de itens que poderão ser escolhidos para compor o mapa.
-	
+
 	A lista &eacute; inserida no elemento html com id "i3GEOtmelistai"
-	
+
 	TODO marcar os itens existentes
 	*/
 	montaListaItens: function(retorno){
@@ -196,11 +221,11 @@ i3GEOF.tme = {
 			ins.push("</table>");
 		}
 		catch(e)
-		{$i("i3GEOtmelistai").innerHTML = "<p style=color:red >Ocorreu um erro<br>"+e;}	
+		{$i("i3GEOtmelistai").innerHTML = "<p style=color:red >Ocorreu um erro<br>"+e;}
 	},
 	/*
 	Function: pegaItensMarcados
-	
+
 	Recupera os itens que foram marcados e monta uma lista para enviar como parâmetro para a fun&ccedil;ão de gera&ccedil;ão dos gr&aacute;ficos
 	*/
 	pegaItensMarcados: function(){
@@ -220,11 +245,11 @@ i3GEOF.tme = {
 	},
 	/*
 	Function: ativa
-	
+
 	Cria o arquivo KML com os itens marcados
-	
+
 	Veja:
-	
+
 	<ATIVAtme>
 	*/
 	ativa: function(){
@@ -246,7 +271,7 @@ i3GEOF.tme = {
 				var ins = "<p class=paragrafo >Clique no arquivo para fazer o download:<br><a href='"+retorno.data.url+"' target=new >"+retorno.data.url+"</a><br>";
 				ins += "<br>Ou clique para abrir no i3Geo:<br><a href='"+i3GEO.configura.locaplic+"/ms_criamapa.php?interface=googleearth.phtml&kmlurl="+retorno.data.url+"' target='new' >interface Google Earth</a><br>";
 				$i("i3GEOTMEresultado").innerHTML = ins;
-				
+
 			};
 			p = i3GEO.configura.locaplic+"/pacotes/tme/TME_i3geo.php?sid="+i3GEO.configura.sid+"&nomelayer="+i3GEO.temaAtivo+"&colunasvalor="+lista.toString(",")+"&colunanomeregiao="+colunanomeregiao+"&titulo="+$i("i3GEOTMEtitulo").value+"&descricao="+$i("i3GEOTMEdesc").value;
 			cp.set_response_type("JSON");

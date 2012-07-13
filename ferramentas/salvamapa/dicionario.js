@@ -1,5 +1,5 @@
-//+$trad(1,i3GEOF.salvamapa.dicionario)+
-i3GEOF.salvamapa.dicionario = {
+//+$trad(1,i3GEOF.salvaMapa.dicionario)+
+i3GEOF.salvaMapa.dicionario = {
 1: [{
 pt:"",
 en:"",

@@ -371,7 +371,7 @@ i3GEO.gadgets = {
 					{alert($trad("x35"));return;}
 					if ($i("valorBuscaRapida"+id).value === "")
 					{alert($trad("x36"));return;}
-					i3GEO.janela.cria("300px","280px",i3GEO.configura.locaplic+"/ferramentas/buscarapida/index.htm","","","Busca rapida");
+					i3GEO.janela.cria("300px","280px",i3GEO.configura.locaplic+"/ferramentas/buscarapida/index.htm","","",$trad("o2"));
 					return false;
 				};
 				temp.innerHTML = ins;
@@ -381,14 +381,16 @@ i3GEO.gadgets = {
 					var ins,
 						interno = "",
 						externo = "";
-					i3GEO.janela.cria("300px","150px","","","","Propriedades","i3GEOpropriedadesBuscaRapida"+id);
+					i3GEO.janela.cria("300px","150px","","","",$trad("s5"),"i3GEOpropriedadesBuscaRapida"+id);
 					if(i3GEO.gadgets.PARAMETROS.mostraBuscaRapida.servicosexternos)
 					{externo = "checked";}
 					if(i3GEO.gadgets.PARAMETROS.mostraBuscaRapida.temasmapa)
 					{interno = "checked";}
 					ins = "<p class=paragrafo >"+$trad("x37")+":</p>" +
 						"<table class=lista3 >" +
-						"<tr><td><input style=cursor:pointer onclick='i3GEO.gadgets.PARAMETROS.mostraBuscaRapida.servicosexternos = this.checked' type=checkbox "+externo+" ></td><td>+"$trad("x38")+"</td></tr>" +
+						"<tr><td><input style=cursor:pointer onclick='i3GEO.gadgets.PARAMETROS.mostraBuscaRapida.servicosexternos = this.checked' type=checkbox " +
+						externo + " ></td><td> " +
+						$trad("x38") + "</td></tr>" +
 						"<tr><td><input style=cursor:pointer onclick='i3GEO.gadgets.PARAMETROS.mostraBuscaRapida.temasmapa = this.checked' type=checkbox "+interno+" ></td><td>"+$trad("x39")+"</td></tr>" +
 						"</table><br>" +
 						"<p class=paragrafo >"+$trad("x40")+"</p>";

@@ -47,17 +47,42 @@ Classe: i3GEOF.gradeDeHex
 i3GEOF.gradeDeHex = {
 	/*
 	Variavel: aguarde
-	
+
 	Estilo do objeto DOM com a imagem de aguarde existente no cabe&ccedil;alho da janela.
 	*/
 	aguarde: "",
 	/*
+		Para efeitos de compatibilidade antes da vers&atilde;o 4.7 que não tinha dicion&aacute;rio
+	*/
+	criaJanelaFlutuante: function(){
+		i3GEOF.gradeDeHex.iniciaDicionario();
+	},
+	/*
+	Function: iniciaDicionario
+
+	Carrega o dicion&aacute;rio e chama a fun&ccedil;&atilde;o que inicia a ferramenta
+
+	O Javascript &eacute; carregado com o id i3GEOF.nomedaferramenta.dicionario_script
+	*/
+	iniciaDicionario: function(){
+		if(typeof(i3GEOF.gradeDeHex.dicionario) === 'undefined'){
+			i3GEO.util.scriptTag(
+				i3GEO.configura.locaplic+"/ferramentas/gradehex/dicionario.js",
+				"i3GEOF.gradeDeHex.iniciaJanelaFlutuante()",
+				"i3GEOF.gradeDeHex.dicionario_script"
+			);
+		}
+		else{
+			i3GEOF.gradeDeHex.iniciaJanelaFlutuante();
+		}
+	},
+	/*
 	Function: inicia
-	
+
 	Inicia a ferramenta. &Eacute; chamado por criaJanelaFlutuante
-	
+
 	Parametro:
-	
+
 	iddiv {String} - id do div que receber&aacute; o conteudo HTML da ferramenta
 	*/
 	inicia: function(iddiv){
@@ -70,11 +95,11 @@ i3GEOF.gradeDeHex = {
 	},
 	/*
 	Function: html
-	
+
 	Gera o c&oacute;digo html para apresenta&ccedil;ão das op&ccedil;&otilde;es da ferramenta
-	
+
 	Retorno:
-	
+
 	String com o c&oacute;digo html
 	*/
 	html:function(){
@@ -86,11 +111,11 @@ i3GEOF.gradeDeHex = {
 		return ins;
 	},
 	/*
-	Function: criaJanelaFlutuante
-	
+	Function: iniciaJanelaFlutuante
+
 	Cria a janela flutuante para controle da ferramenta.
-	*/	
-	criaJanelaFlutuante: function(){
+	*/
+	iniciaJanelaFlutuante: function(){
 		var minimiza,cabecalho,janela,divid,titulo;
 		//cria a janela flutuante
 		titulo = "Grade de hex&aacute;gonos <a class=ajuda_usuario target=_blank href='" + i3GEO.configura.locaplic + "/ajuda_usuario.php?idcategoria=3&idajuda=16' >&nbsp;&nbsp;&nbsp;</a>";
@@ -148,7 +173,7 @@ i3GEOF.gradeDeHex = {
 		ins += "Minuto<input onclick='javascript:this.select();' class=digitar id='i3GEOgradedehexiym' title='minuto'  type=text size=5 value='00'/>";
 		ins += "Segundo<input onclick='javascript:this.select();' class=digitar id='i3GEOgradedehexiys' title='segundo'  type=text size=5 value='00.00'/>";
 		g_tipoacao = "capturaponto";
-		i3GEO.util.proximoAnterior("i3GEOF.gradeDeHex.t1()","i3GEOF.gradeDeHex.t3()",ins,"i3GEOF.gradeDeHex.t2","i3GEOgradedehexresultado");	
+		i3GEO.util.proximoAnterior("i3GEOF.gradeDeHex.t1()","i3GEOF.gradeDeHex.t3()",ins,"i3GEOF.gradeDeHex.t2","i3GEOgradedehexresultado");
 		if(i3GEO.eventos.MOUSECLIQUE.toString().search("i3GEOF.gradeDeHex.capturaPonto()") < 0)
 		{i3GEO.eventos.MOUSECLIQUE.push("i3GEOF.gradeDeHex.capturaPonto()");}
 		temp = function(){
@@ -171,15 +196,15 @@ i3GEOF.gradeDeHex = {
 		new YAHOO.widget.Button(
 			"i3GEOgradedehexbotao1",
 			{onclick:{fn: i3GEOF.gradeDeHex.criaGrade}}
-		);		
+		);
 	},
 	/*
 	Function: criaGrade
-	
+
 	Cria a grade e adiciona um novo tema ao mapa
-	
+
 	Veja:
-	
+
 	<GRADEDEHEX>
 	*/
 	criaGrade: function(){
@@ -191,7 +216,7 @@ i3GEOF.gradeDeHex = {
 			dx = i3GEO.calculo.dms2dd($i("i3GEOgradedehexxg").value,$i("i3GEOgradedehexxm").value,$i("i3GEOgradedehexxs").value);
 			dy = i3GEO.calculo.dms2dd($i("i3GEOgradedehexyg").value,$i("i3GEOgradedehexym").value,$i("i3GEOgradedehexys").value);
 			ix = i3GEO.calculo.dms2dd($i("i3GEOgradedehexixg").value,$i("i3GEOgradedehexixm").value,$i("i3GEOgradedehexixs").value);
-			iy = i3GEO.calculo.dms2dd($i("i3GEOgradedehexiyg").value,$i("i3GEOgradedehexiym").value,$i("i3GEOgradedehexiys").value);	
+			iy = i3GEO.calculo.dms2dd($i("i3GEOgradedehexiyg").value,$i("i3GEOgradedehexiym").value,$i("i3GEOgradedehexiys").value);
 			nptx = $i("i3GEOgradedehexnptx").value;
 			npty = $i("i3GEOgradedehexnpty").value;
 			if ((dx == 0) || (dy == 0))
@@ -217,7 +242,7 @@ i3GEOF.gradeDeHex = {
 	},
 	/*
 	Function: capturaPonto
-	
+
 	Captura um ponto no mapa e preenche os campos de coordenadas de in&iacute;cio da grade
 	*/
 	capturaPonto: function(){

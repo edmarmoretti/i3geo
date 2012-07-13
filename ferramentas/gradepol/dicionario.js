@@ -1,5 +1,5 @@
-//+$trad(1,i3GEOF.gradepol.dicionario)+
-i3GEOF.gradepol.dicionario = {
+//+$trad(1,i3GEOF.gradeDePoligonos.dicionario)+
+i3GEOF.gradeDePoligonos.dicionario = {
 1: [{
 pt:"",
 en:"",

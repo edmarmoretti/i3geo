@@ -39,17 +39,42 @@ Classe: i3GEOF.proplabel
 i3GEOF.proplabel = {
 	/*
 	Variavel: aguarde
-	
+
 	Estilo do objeto DOM com a imagem de aguarde existente no cabe&ccedil;alho da janela.
 	*/
 	aguarde: "",
 	/*
+		Para efeitos de compatibilidade antes da vers&atilde;o 4.7 que não tinha dicion&aacute;rio
+	*/
+	criaJanelaFlutuante: function(){
+		i3GEOF.distanciaptpt.iniciaDicionario();
+	},
+	/*
+	Function: iniciaDicionario
+
+	Carrega o dicion&aacute;rio e chama a fun&ccedil;&atilde;o que inicia a ferramenta
+
+	O Javascript &eacute; carregado com o id i3GEOF.nomedaferramenta.dicionario_script
+	*/
+	iniciaDicionario: function(){
+		if(typeof(i3GEOF.proplabel.dicionario) === 'undefined'){
+			i3GEO.util.scriptTag(
+				i3GEO.configura.locaplic+"/ferramentas/opcoes_label/dicionario.js",
+				"i3GEOF.proplabel.iniciaJanelaFlutuante()",
+				"i3GEOF.proplabel.dicionario_script"
+			);
+		}
+		else{
+			i3GEOF.proplabel.iniciaJanelaFlutuante();
+		}
+	},
+	/*
 	Function: inicia
-	
+
 	Inicia a ferramenta. &Eacute; chamado por criaJanelaFlutuante
-	
+
 	Parametro:
-	
+
 	iddiv {String} - id do div que receber&aacute; o conteudo HTML da ferramenta
 	*/
 	inicia: function(iddiv,conector){
@@ -58,15 +83,15 @@ i3GEOF.proplabel = {
 	},
 	/*
 	Function: html
-	
+
 	Gera o c&oacute;digo html para apresenta&ccedil;ão das op&ccedil;&otilde;es da ferramenta
-	
+
 	Parametros:
-	
+
 	conector - {boolean} insere ou não as op&ccedil;&otilde;es de conector de textos
-	
+
 	Retorno:
-	
+
 	String com o c&oacute;digo html
 	*/
 	html:function(conector){
@@ -181,14 +206,14 @@ i3GEOF.proplabel = {
 		$inputText("","","i3GEOproplabelwrap_i","",5,"") +
 		'			</td></tr>' +
 		'		</table>';
-		return ins;		
+		return ins;
 	},
 	/*
-	Function: criaJanelaFlutuante
-	
+	Function: iniciaJanelaFlutuante
+
 	Cria a janela flutuante para controle da ferramenta.
-	*/	
-	criaJanelaFlutuante: function(conector){
+	*/
+	iniciaJanelaFlutuante: function(conector){
 		var minimiza,cabecalho,janela,divid,titulo;
 		//cria a janela flutuante
 		cabecalho = function(){
@@ -218,21 +243,21 @@ i3GEOF.proplabel = {
 	},
 	/*
 	Function: ativaFoco
-	
+
 	Refaz a interface da ferramenta quando a janela flutuante tem seu foco ativado
 	*/
 	ativaFoco: function(){
 	},
 	/*
 	Function: corj
-	
+
 	Abre a janela para o usu&aacute;rio selecionar uma cor interativamente
 	*/
 	corj: function(obj)
 	{i3GEO.util.abreCor("",obj);},
 	/*
 	Function: pegaPar
-	
+
 	Pega os parâmetros para montar a chamada ajax que cria ou testa a topon&iacute;mia
 	*/
 	pegaPar: function(){
@@ -241,7 +266,7 @@ i3GEOF.proplabel = {
 		if($i("i3GEOproplabelsombra_i").value === "")
 		{$i("i3GEOproplabelsombra_i").value = "off";}
 		if($i("i3GEOproplabelmascara_i").value === "")
-		{$i("i3GEOproplabelmascara_i").value = "off";}				
+		{$i("i3GEOproplabelmascara_i").value = "off";}
 		if($i("i3GEOproplabelfrentes_i").value === "")
 		{$i("i3GEOproplabelfrentes_i").value = "off";}
 		var par = "&position="+$i("i3GEOproplabelposition_i").value +

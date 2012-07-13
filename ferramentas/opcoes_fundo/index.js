@@ -43,17 +43,42 @@ Classe: i3GEOF.opcoesFundo
 i3GEOF.opcoesFundo = {
 	/*
 	Variavel: aguarde
-	
+
 	Estilo do objeto DOM com a imagem de aguarde existente no cabe&ccedil;alho da janela.
 	*/
 	aguarde: "",
 	/*
+		Para efeitos de compatibilidade antes da vers&atilde;o 4.7 que não tinha dicion&aacute;rio
+	*/
+	criaJanelaFlutuante: function(){
+		i3GEOF.opcoesFundo.iniciaDicionario();
+	},
+	/*
+	Function: iniciaDicionario
+
+	Carrega o dicion&aacute;rio e chama a fun&ccedil;&atilde;o que inicia a ferramenta
+
+	O Javascript &eacute; carregado com o id i3GEOF.nomedaferramenta.dicionario_script
+	*/
+	iniciaDicionario: function(){
+		if(typeof(i3GEOF.opcoesFundo.dicionario) === 'undefined'){
+			i3GEO.util.scriptTag(
+				i3GEO.configura.locaplic+"/ferramentas/opcoes_fundo/dicionario.js",
+				"i3GEOF.opcoesFundo.iniciaJanelaFlutuante()",
+				"i3GEOF.opcoesFundo.dicionario_script"
+			);
+		}
+		else{
+			i3GEOF.opcoesFundo.iniciaJanelaFlutuante();
+		}
+	},
+	/*
 	Function: inicia
-	
+
 	Inicia a ferramenta. &Eacute; chamado por criaJanelaFlutuante
-	
+
 	Parametro:
-	
+
 	iddiv {String} - id do div que receber&aacute; o conteudo HTML da ferramenta
 	*/
 	inicia: function(iddiv){
@@ -80,11 +105,11 @@ i3GEOF.opcoesFundo = {
 	},
 	/*
 	Function: html
-	
+
 	Gera o c&oacute;digo html para apresenta&ccedil;ão das op&ccedil;&otilde;es da ferramenta
-	
+
 	Retorno:
-	
+
 	String com o c&oacute;digo html
 	*/
 	html:function(){
@@ -95,11 +120,11 @@ i3GEOF.opcoesFundo = {
 		return ins;
 	},
 	/*
-	Function: criaJanelaFlutuante
-	
+	Function: iniciaJanelaFlutuante
+
 	Cria a janela flutuante para controle da ferramenta.
-	*/	
-	criaJanelaFlutuante: function(){
+	*/
+	iniciaJanelaFlutuante: function(){
 		var janela,divid,titulo,cabecalho,minimiza;
 		cabecalho = function(){};
 		minimiza = function(){
@@ -128,16 +153,16 @@ i3GEOF.opcoesFundo = {
 	},
 	/*
 	Function: corj
-	
+
 	Abre a janela para o usu&aacute;rio selecionar uma cor interativamente
 	*/
 	corj: function(obj)
 	{i3GEO.util.abreCor("",obj);},
 	/*
 	Function: executa
-	
+
 	Aplica a nova cor
-	
+
 	A cor do fundo na interface Openlayers &eacute; definida por meio de estilo, mas &eacute; necess&aacute;rio persistir a cor no mapfile existente no servidor.
 	*/
 	executa: function(){
@@ -151,7 +176,7 @@ i3GEOF.opcoesFundo = {
 					//layer.mergeNewParams({"DESLIGACACHE":"sim"});
 					//layer.mergeNewParams({r:Math.random()});
 					if($i(i3geoOL.id+"_events"))
-					{$i(i3geoOL.id+"_events").style.backgroundColor = "rgb("+$i("i3GEOopcoesFundocor").value+")";}					
+					{$i(i3geoOL.id+"_events").style.backgroundColor = "rgb("+$i("i3GEOopcoesFundocor").value+")";}
 				}
 				i3GEO.atualiza();
 			},

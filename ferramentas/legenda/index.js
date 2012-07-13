@@ -46,65 +46,90 @@ Classe: i3GEOF.legenda
 i3GEOF.legenda = {
 	/*
 	Variavel: parDefault
-	
+
 	Parâmetros padrão utilizados para formatar os labels
-	*/	
+	*/
 	parDefault: "&position=MS_UR&partials=1&offsetx=0&offsety=0&minfeaturesize=auto&mindistance=auto&force=0&shadowsizex=1&shadowsizey=1&cor=0 0 0&sombray=1&sombrax=1&angulo=0&tamanho=8&fonte=bitmap&fundo=off&sombra=off&outlinecolor=off&shadowcolor=off&wrap=",
 	/*
 	Variavel: aviso
-	
+
 	Indica que uma altera&ccedil;ão ainda não foi salva
-	
+
 	Type:
 	{boolean}
 	*/
 	aviso: false,
 	/*
 	Variavel: tema
-	
+
 	Tema que ser&aacute; utilizado
-	
+
 	Type:
 	{string}
 	*/
 	tema: i3GEO.temaAtivo,
 	/*
 	Variavel: dadosGrafico
-	
+
 	Dados utilizados no gr&aacute;fico no formato da ferramenta graficointerativo
 	*/
 	dadosGrafico: "",
 	/*
 	Variavel: aguarde
-	
+
 	Estilo do objeto DOM com a imagem de aguarde existente no cabe&ccedil;alho da janela.
 	*/
 	aguarde: "",
 	/*
 	Variavel: estilos
-	
+
 	Estilos existentes em um s&iacute;mbolo de uma classe
 	*/
 	estilos: "",
 	/*
 	Variavel: estilo
-	
+
 	Último estilo selecionado
 	*/
 	estilo: "",
 	/*
 	Variavel: classe
-	
+
 	Última classe selecionado
 	*/
 	classe: "",
 	/*
+		Para efeitos de compatibilidade antes da vers&atilde;o 4.7 que não tinha dicion&aacute;rio
+	*/
+	criaJanelaFlutuante: function(){
+		i3GEOF.legenda.iniciaDicionario();
+	},
+	/*
+	Function: iniciaDicionario
+
+	Carrega o dicion&aacute;rio e chama a fun&ccedil;&atilde;o que inicia a ferramenta
+
+	O Javascript &eacute; carregado com o id i3GEOF.nomedaferramenta.dicionario_script
+	*/
+	iniciaDicionario: function(){
+		if(typeof(i3GEOF.legenda.dicionario) === 'undefined'){
+			i3GEO.util.scriptTag(
+				i3GEO.configura.locaplic+"/ferramentas/legenda/dicionario.js",
+				"i3GEOF.legenda.iniciaJanelaFlutuante()",
+				"i3GEOF.legenda.dicionario_script"
+			);
+		}
+		else{
+			i3GEOF.legenda.iniciaJanelaFlutuante();
+		}
+	},
+	/*
 	Function: inicia
-	
+
 	Inicia a ferramenta. &Eacute; chamado por criaJanelaFlutuante
-	
+
 	Parametro:
-	
+
 	iddiv {String} - id do div que receber&aacute; o conteudo HTML da ferramenta
 	*/
 	inicia: function(iddiv){
@@ -118,7 +143,7 @@ i3GEOF.legenda = {
 			i3GEO.guias.mostraGuiaFerramenta("i3GEOlegendaguia1","i3GEOlegendaguia");
 			//eventos das guias
 			$i("i3GEOlegendaguia6").onclick = function()
-			{i3GEO.guias.mostraGuiaFerramenta("i3GEOlegendaguia6","i3GEOlegendaguia");};			
+			{i3GEO.guias.mostraGuiaFerramenta("i3GEOlegendaguia6","i3GEOlegendaguia");};
 			$i("i3GEOlegendaguia1").onclick = function(){
 				i3GEOF.legenda.mostralegenda();
 				i3GEO.guias.mostraGuiaFerramenta("i3GEOlegendaguia1","i3GEOlegendaguia");
@@ -146,7 +171,7 @@ i3GEOF.legenda = {
 			);
 			//if(navm)
 			//{$i("i3GEOlegendabotao2-button").style.width = "0px";}
-			
+
 			new YAHOO.widget.Button(
 				"i3GEOlegendabotao3",
 				{onclick:{fn: i3GEOF.legenda.adicionaConta},width:"100px"}
@@ -180,7 +205,7 @@ i3GEOF.legenda = {
 				"i3GEOlegendabotao6",
 				{onclick:{fn: i3GEOF.legenda.valorU}}
 			);
-			$i("i3GEOlegendabotao6-button").style.width = "200px";			
+			$i("i3GEOlegendabotao6-button").style.width = "200px";
 			new YAHOO.widget.Button(
 				"i3GEOlegendabotao7",
 				{onclick:{fn: i3GEOF.legenda.representacao}}
@@ -196,13 +221,13 @@ i3GEOF.legenda = {
 				{onclick:{fn: i3GEOF.legenda.valorQ}}
 			);
 			$i("i3GEOlegendabotao9-button").style.width = "200px";
-			
+
 			new YAHOO.widget.Button(
 				"i3GEOlegendabotao10",
 				{onclick:{fn: i3GEOF.legenda.aplicaEstilo}}
 			);
 			if(navm)
-			{$i("i3GEOlegendabotao10-button").style.width = "0px";}			
+			{$i("i3GEOlegendabotao10-button").style.width = "0px";}
 			new YAHOO.widget.Button(
 				"i3GEOlegendabotao17",
 				{onclick:{fn: i3GEOF.legenda.alteraGeometriaTema}}
@@ -234,14 +259,14 @@ i3GEOF.legenda = {
 						i3GEOF.legenda.aguarde.visibility = "hidden";
 						i3GEOF.legenda.aposAlterarLegenda();
 						i3GEOF.legenda.aguarde.visibility = "hidden";
-					};					
+					};
 					p = i3GEO.configura.locaplic+"/classesphp/mapa_controle.php?g_sid="+i3GEO.configura.sid+"&funcao=adicionaLabelClasse&tema="+i3GEOF.legenda.tema+"&classe="+i3GEOF.legenda.classe+par;
 					p += "&item="+$i("i3GEOlegendaSelItemLabel").value;
 					cp = new cpaint();
 					cp.set_response_type("JSON");
-					cp.call(p,"foo",temp);				
+					cp.call(p,"foo",temp);
 				}}}
-			);			
+			);
 			new YAHOO.widget.Button(
 				"i3GEOlegendabotaoExcluirLabel",
 				{onclick:{fn: function(){
@@ -251,13 +276,13 @@ i3GEOF.legenda = {
 						i3GEOF.legenda.aguarde.visibility = "hidden";
 						i3GEOF.legenda.aposAlterarLegenda();
 						i3GEOF.legenda.aguarde.visibility = "hidden";
-					};					
+					};
 					p = i3GEO.configura.locaplic+"/classesphp/mapa_controle.php?g_sid="+i3GEO.configura.sid+"&funcao=removeLabelClasse&tema="+i3GEOF.legenda.tema+"&classe="+i3GEOF.legenda.classe;
 					cp = new cpaint();
 					cp.set_response_type("JSON");
-					cp.call(p,"foo",temp);					
+					cp.call(p,"foo",temp);
 				}}}
-			);			
+			);
 			new YAHOO.widget.Button(
 				"i3GEOlegendabotaoPropriedadeLabel",
 				{onclick:{fn: function(){
@@ -268,7 +293,7 @@ i3GEOF.legenda = {
 						false
 					);
 				}}}
-			);			
+			);
 			i3GEOF.legenda.ativaFoco();
 			i3GEOF.legenda.mostralegenda();
 			i3GEO.util.comboItens(
@@ -288,11 +313,11 @@ i3GEOF.legenda = {
 	},
 	/*
 	Function: html
-	
+
 	Gera o c&oacute;digo html para apresenta&ccedil;ão das op&ccedil;&otilde;es da ferramenta
-	
+
 	Retorno:
-	
+
 	String com o c&oacute;digo html
 	*/
 	html:function(){
@@ -313,7 +338,7 @@ i3GEOF.legenda = {
 		'	<p class=paragrafo ><input id=i3GEOlegendabotao15 type="button" value="Aplica opacidade vari&aacute;vel" title="aplicar opacidade nas classes existente, variando de 10 at&eacute; 100"></p>' +
 		'	<p class=paragrafo ><input id=i3GEOlegendabotaoRamp type="button" size=15 value="Escolher paleta de cores" title="escolher e aplicar as varia&ccedil;&otilde;es de cores, entre dois extremos, nas classes existentes"></p>' +
 		'	<p class=paragrafo >Gerar cores</p>' +
-		'	<table summary="" class=lista5 >' + 
+		'	<table summary="" class=lista5 >' +
 		'		<tr>' +
 		'			<td>de:</td>' +
 		'			<td>' +
@@ -327,7 +352,7 @@ i3GEOF.legenda = {
 		'			</td>' +
 		'			<td><img alt="aquarela.gif" style=cursor:pointer src="'+i3GEO.configura.locaplic+'/imagens/aquarela.gif" onclick="i3GEOF.legenda.corj(\'i3GEOlegendaacorf\')" /> ' +
 		'			</td>' +
-		'			<td><input id=i3GEOlegendabotao4 type="button" size=15 value="Aplicar" title="aplicar varia&ccedil;&otilde;es de cores, entre dois extremos, nas classes existentes"></td>' +		
+		'			<td><input id=i3GEOlegendabotao4 type="button" size=15 value="Aplicar" title="aplicar varia&ccedil;&otilde;es de cores, entre dois extremos, nas classes existentes"></td>' +
 		'		</tr>' +
 		'	</table>' +
 		'</div>' +
@@ -347,7 +372,7 @@ i3GEOF.legenda = {
 		'	<hr><p class=paragrafo >Transforma a representa&ccedil;ão geom&eacute;trica dos elementos do tema. Ap&oacute;s alterar esse parâmetro, pode ser necess&aacute;rio modificar as caracter&iacute;sticas do s&iacute;mbolo.</p>'+
 		'	<p class=paragrafo >' +
 		'	<select id=i3GEOlegentaTipoGeo >'+
-		'		<option value="">nenhuma transforma&ccedil;ão</option>'+		
+		'		<option value="">nenhuma transforma&ccedil;ão</option>'+
 		'		<option value="centroid">centr&oacute;ide</option>'+
 		'		<option value="bbox">box</option>'+
 		'		<option value="vertices">v&eacute;rtices</option>'+
@@ -404,17 +429,17 @@ i3GEOF.legenda = {
 		'	<p class=paragrafo >Gera um arquivo XML, no padrão SLD, contendo a legenda atual da camada. Para maiores informa&ccedil;&otilde;es, veja <a href="http://mapserver.org/ogc/sld.html#sld" target=_blank >Mapserver SLD</a> (O SLD s&oacute; &eacute; gerado ou aplicado corretamente em camadas que utilizam express&otilde;es simples e o elemento CLASSITEM)'+
 		'	<p class=paragrafo ><input id=i3GEOlegendabotaoSLDe size="25" type="button" value="Exportar SLD"></p>'+
 		'	<p class=paragrafo >Aplica um arquivo SLD à camada ativa' +
-		'	<p class=paragrafo ><input id=i3GEOlegendabotaoSLDi size="25" type="button" value="Aplicar SLD"></p>'+		
+		'	<p class=paragrafo ><input id=i3GEOlegendabotaoSLDi size="25" type="button" value="Aplicar SLD"></p>'+
 		'</div>' +
 		'<input type=hidden  value="" id="listaColourRamp" onchange="javascript:i3GEOF.legenda.aplicaColourRamp()" />'; //utilizado pelo seletor de colourramp
 		return ins;
 	},
 	/*
-	Function: criaJanelaFlutuante
-	
+	Function: iniciaJanelaFlutuante
+
 	Cria a janela flutuante para controle da ferramenta.
-	*/	
-	criaJanelaFlutuante: function(){
+	*/
+	iniciaJanelaFlutuante: function(){
 		var minimiza,cabecalho,janela,divid,temp,titulo;
 		if($i("i3GEOF.legenda")){
 			i3GEOF.legenda.tema = i3GEO.temaAtivo;
@@ -448,13 +473,13 @@ i3GEOF.legenda = {
 		i3GEOF.legenda.inicia(divid);
 		temp = function(){
 			if(i3GEO.eventos.ATUALIZAARVORECAMADAS.toString().search('i3GEO.janela.comboCabecalhoTemas("i3GEOFlegendaComboCabeca","i3GEOFlegendaComboCabecaSel","legenda","ligados")') > 0)
-			{i3GEO.eventos.ATUALIZAARVORECAMADAS.remove('i3GEO.janela.comboCabecalhoTemas("i3GEOFlegendaComboCabeca","i3GEOFlegendaComboCabecaSel","legenda","ligados")');}			
+			{i3GEO.eventos.ATUALIZAARVORECAMADAS.remove('i3GEO.janela.comboCabecalhoTemas("i3GEOFlegendaComboCabeca","i3GEOFlegendaComboCabecaSel","legenda","ligados")');}
 		};
 		YAHOO.util.Event.addListener(janela[0].close, "click", temp);
 	},
 	/*
 	Function: ativaFoco
-	
+
 	Refaz a interface da ferramenta quando a janela flutuante tem seu foco ativado
 	*/
 	ativaFoco: function(){
@@ -466,7 +491,7 @@ i3GEOF.legenda = {
 	},
 	/*
 	Function: aposAlterarLegenda
-	
+
 	Fun&ccedil;ão executada ap&oacute;s ocorrer alguma altera&ccedil;ão efetiva da legenda do mapa
 	*/
 	aposAlterarLegenda: function(){
@@ -477,11 +502,11 @@ i3GEOF.legenda = {
 	},
 	/*
 	Function: mostralegenda
-	
+
 	Pega os dados da legenda do mapa atual e mostra na tela
-	
+
 	Veja:
-	
+
 	<EDITALEGENDA>
 	*/
 	mostralegenda: function(){
@@ -496,11 +521,11 @@ i3GEOF.legenda = {
 	},
 	/*
 	Function: montaLegenda
-	
+
 	Formata a tabela de edi&ccedil;ão da legenda
-	
+
 	Parametro:
-	
+
 	retorno - objeto contendo os dados para formata&ccedil;ão da legenda
 	*/
 	montaLegenda: function(retorno){
@@ -578,9 +603,9 @@ i3GEOF.legenda = {
 	},
 	/*
 	Function: aviso
-	
+
 	Mostra um alerta ao usu&aacute;rio quando um campo da tabela que cont&eacute;m os dados da legenda &eacute; alterado
-	
+
 	O aviso &eacute; mostrado apenas uma vez
 	*/
 	aviso: function(){
@@ -591,7 +616,7 @@ i3GEOF.legenda = {
 	},
 	/*
 	Function: aplicaColourRamp
-	
+
 	Aplica às classes da legenda as cores escolhidas no seletor de cores
 	*/
 	aplicaColourRamp: function(){
@@ -614,14 +639,14 @@ i3GEOF.legenda = {
 	},
 	/*
 	Function: corj
-	
+
 	Abre a janela para o usu&aacute;rio selecionar uma cor interativamente
 	*/
 	corj: function(obj)
 	{i3GEO.util.abreCor("",obj);},
 	/*
 	Function: modificaCor
-	
+
 	Modifica a cor de uma classe
 	*/
 	modificaCor: function(id){
@@ -653,11 +678,11 @@ i3GEOF.legenda = {
 	},
 	/*
 	Function: mudaLegenda
-	
+
 	Altera a legenda conforme os valores existentes na tabela de propriedades (expressão e nome da classe)
-	
+
 	Veja:
-	
+
 	<ALTERACLASSE>
 	*/
 	mudaLegenda: function(){
@@ -719,11 +744,11 @@ i3GEOF.legenda = {
 	},
 	/*
 	Function: alteraGeometria
-	
+
 	Altera o tipo de representa&ccedil;ão geom&eacute;trica dos elementos de um layer
-	
+
 	Veja:
-	
+
 	<ALTERACLASSE>
 	*/
 	alteraGeometriaTema: function(){
@@ -739,14 +764,14 @@ i3GEOF.legenda = {
 			cp = new cpaint();
 		cp.set_response_type("JSON");
 		cp.call(p,"",retorna);
-	},	
+	},
 	/*
 	Function: adicionaConta
-	
+
 	Adiciona ao nome de cada classe o n&uacute;mero de ocorr&ecirc;ncias em cada uma
-	
+
 	Veja:
-	
+
 	<CONTAGEMCLASSE>
 	*/
 	adicionaConta: function(){
@@ -761,11 +786,11 @@ i3GEOF.legenda = {
 	},
 	/*
 	Function: adicionaClasse
-	
+
 	Adiciona uma nova classe ao tema
-	
+
 	Veja:
-	
+
 	<ALTERACLASSE>
 	*/
 	adicionaClasse: function(){
@@ -778,11 +803,11 @@ i3GEOF.legenda = {
 	},
 	/*
 	Function: adicionaOpacidade
-	
+
 	Adiciona opacidade vari&aacute;vel em cada classe
-	
+
 	Veja:
-	
+
 	<ALTERACLASSE>
 	*/
 	adicionaOpacidade: function(){
@@ -797,14 +822,14 @@ i3GEOF.legenda = {
 		cp = new cpaint();
 		cp.set_response_type("JSON");
 		cp.call(p,"alteraclasse",retorna);
-	},	
+	},
 	/*
 	Function: paleta
-	
+
 	Gera as cores para as classes considerando um RGB inicial e um final
-	
+
 	Veja:
-	
+
 	<ALTERACORESCLASSES>
 	*/
 	paleta: function(){
@@ -828,11 +853,11 @@ i3GEOF.legenda = {
 	},
 	/*
 	Function: inverteCores
-	
+
 	Inverte as cores utilizadas nos s&iacute;mbolos das classes
-	
+
 	Veja:
-	
+
 	<INVERTECORESCLASSES>
 	*/
 	inverteCores: function(){
@@ -854,18 +879,18 @@ i3GEOF.legenda = {
 	},
 	/*
 	Function: calculaTamanho
-	
+
 	Muda o s&iacute;mbolo de cada classe aplicando tamanhos diferentes e lineares
-	
+
 	Veja:
-	
+
 	<CALCULATAMANHOCLASSES>
 	*/
 	calculaTamanho: function(){
 		try{
 			if(i3GEOF.legenda.aguarde.visibility === "visible")
 			{return;}
-			i3GEOF.legenda.aguarde.visibility = "visible";	
+			i3GEOF.legenda.aguarde.visibility = "visible";
 			var retornapaleta = function(){
 					i3GEOF.legenda.aposAlterarLegenda();
 					i3GEOF.legenda.aguarde.visibility = "hidden";
@@ -880,7 +905,7 @@ i3GEOF.legenda = {
 	},
 	/*
 	Function: excluilinhaf
-	
+
 	Exclui uma linha da tabela de edi&ccedil;ão de classes da legendda
 	*/
 	excluilinhaf: function(celula){
@@ -893,7 +918,7 @@ i3GEOF.legenda = {
 	},
 	/*
 	Function: sobelinhaf
-	
+
 	Sobe uma linha na tabela de edi&ccedil;ão de classes da legendda
 	*/
 	sobelinhaf: function(idclasse){
@@ -911,7 +936,7 @@ i3GEOF.legenda = {
 	},
 	/*
 	Function: descelinhaf
-	
+
 	Desce uma linha na tabela de edi&ccedil;ão de classes da legendda
 	*/
 	descelinhaf: function(idclasse){
@@ -926,14 +951,14 @@ i3GEOF.legenda = {
 			};;
 		cp.set_response_type("JSON");
 		cp.call(p,"foo",temp);
-	},	
+	},
 	/*
 	Function: editaSimbolo
-	
+
 	Abre o editor de s&iacute;mbolos
-	
+
 	Veja:
-	
+
 	<EDITASIMBOLO>
 	*/
 	editaSimbolo: function(id){
@@ -954,11 +979,11 @@ i3GEOF.legenda = {
 	},
 	/*
 	Function: simbU
-	
+
 	Altera a leganda do tema para o tipo s&iacute;mbolo &uacute;nico
-	
+
 	Veja:
-	
+
 	<ALTERACLASSE>
 	*/
 	simbU: function(){
@@ -971,7 +996,7 @@ i3GEOF.legenda = {
 				fim = function(){
 					i3GEOF.legenda.aposAlterarLegenda();
 					i3GEOF.legenda.aguarde.visibility = "hidden";
-				};	
+				};
 			cp.set_response_type("JSON");
 			cp.call(p,"alteraclasse",fim);
 		}
@@ -979,11 +1004,11 @@ i3GEOF.legenda = {
 	},
 	/*
 	Function: valorU
-	
+
 	Altera a leganda do tema para o tipo valor &uacute;nico
-	
+
 	Veja:
-	
+
 	<ALTERACLASSE>
 	*/
 	valorU: function(){
@@ -996,7 +1021,7 @@ i3GEOF.legenda = {
 				fim = function(){
 					i3GEOF.legenda.aposAlterarLegenda();
 					i3GEOF.legenda.aguarde.visibility = "hidden";
-				};	
+				};
 			if($i("i3GEOFlegendaaplicaextent").checked === true){
 				p += "&ext="+i3GEO.parametros.mapexten;
 			}
@@ -1014,11 +1039,11 @@ i3GEOF.legenda = {
 	},
 	/*
 	Function: valorC
-	
+
 	Altera a leganda do tema com um n&uacute;mero espec&iacute;fico de classes
 
 	Veja:
-	
+
 	<ALTERACLASSE>
 	*/
 	valorC: function(){
@@ -1043,11 +1068,11 @@ i3GEOF.legenda = {
 	},
 	/*
 	Function: valorQ
-	
+
 	Altera a leganda do tema claculando as classes pelo m&eacute;todo quartil
 
 	Veja:
-	
+
 	<ALTERACLASSE>
 	*/
 	valorQ: function(){
@@ -1060,7 +1085,7 @@ i3GEOF.legenda = {
 				fim = function(){
 					i3GEOF.legenda.aposAlterarLegenda();
 					i3GEOF.legenda.aguarde.visibility = "hidden";
-				};	
+				};
 			if (item == "")
 			{alert("Selecione um item!");return;}
 			i3GEOF.legenda.aguarde.visibility = "visible";
@@ -1071,11 +1096,11 @@ i3GEOF.legenda = {
 	},
 	/*
 	Function: representacao
-	
+
 	Altera o tipo de representa&ccedil;ão do tema (linear ou poligonoal)
-	
+
 	Veja:
-	
+
 	<ALTERAREPRESENTACAO>
 
 	*/
@@ -1097,7 +1122,7 @@ i3GEOF.legenda = {
 	},
 	/*
 	Function: montaEditor
-	
+
 	Monta o editor de s&iacute;mbolos quando o usu&aacute;rio clica em um s&iacute;mbolo na legenda
 	*/
 	montaEditor: function(retorno){
@@ -1142,7 +1167,7 @@ i3GEOF.legenda = {
 							cp.set_response_type("JSON");
 							cp.call(p,"editasimbolo",i3GEOF.legenda.reMontaEditor);
 						}
-						catch(e){alert("Erro: "+ e);i3GEOF.legenda.aguarde.visibility = "hidden";}						
+						catch(e){alert("Erro: "+ e);i3GEOF.legenda.aguarde.visibility = "hidden";}
 					}}}
 				);
 				new YAHOO.widget.Button(
@@ -1157,7 +1182,7 @@ i3GEOF.legenda = {
 							cp.set_response_type("JSON");
 							cp.call(p,"editasimbolo",i3GEOF.legenda.reMontaEditor);
 						}
-						catch(e){alert("Erro: "+ e);i3GEOF.legenda.aguarde.visibility = "hidden";}						
+						catch(e){alert("Erro: "+ e);i3GEOF.legenda.aguarde.visibility = "hidden";}
 					}}}
 				);
 				new YAHOO.widget.Button(
@@ -1172,7 +1197,7 @@ i3GEOF.legenda = {
 							cp.set_response_type("JSON");
 							cp.call(p,"editasimbolo",i3GEOF.legenda.reMontaEditor);
 						}
-						catch(e){alert("Erro: "+ e);i3GEOF.legenda.aguarde.visibility = "hidden";}						
+						catch(e){alert("Erro: "+ e);i3GEOF.legenda.aguarde.visibility = "hidden";}
 					}}}
 				);
 				new YAHOO.widget.Button(
@@ -1187,7 +1212,7 @@ i3GEOF.legenda = {
 							cp.set_response_type("JSON");
 							cp.call(p,"editasimbolo",i3GEOF.legenda.reMontaEditor);
 						}
-						catch(e){alert("Erro: "+ e);i3GEOF.legenda.aguarde.visibility = "hidden";}						
+						catch(e){alert("Erro: "+ e);i3GEOF.legenda.aguarde.visibility = "hidden";}
 					}}}
 				);
 				i3GEOF.legenda.aguarde.visibility = "hidden";
@@ -1202,7 +1227,7 @@ i3GEOF.legenda = {
 	},
 	/*
 	Function: mostraEstilo
-	
+
 	Mostra as propriedades de um estilo de um s&iacute;mbolo
 	*/
 	mostraEstilo: function(e){
@@ -1227,10 +1252,10 @@ i3GEOF.legenda = {
 			"</td><td></td></tr>" +
 			"<tr><td style='text-align:left;'>Espessura:</td><td>"+
 			$inputText("","","i3GEOlegendawidth","",12,linha[8]) +
-			"</td><td></td></tr>" +	
+			"</td><td></td></tr>" +
 			"<tr><td style='text-align:left;'>Padrão de repeti&ccedil;ão:</td><td>"+
 			$inputText("","","i3GEOlegendapattern","",12,linha[9]) +
-			"</td><td></td></tr>" +				
+			"</td><td></td></tr>" +
 			"<tr><td style='text-align:left;'>Opacidade:</td><td>"+
 			$inputText("","","i3GEOlegendaopacidade","",3,linha[7]) +
 			"</td><td></td></tr>" +
@@ -1251,7 +1276,7 @@ i3GEOF.legenda = {
 	},
 	/*
 	Function: listaSimbolos
-	
+
 	Monta a lista de s&iacute;mbolos com imagem
 	*/
 	listaSimbolos: function(retorno){
@@ -1269,18 +1294,18 @@ i3GEOF.legenda = {
 	},
 	/*
 	Function: aplicaSimbolo
-	
+
 	Muda o valor do campo com o c&oacute;digo do s&iacute;mbolo escolhido
 	*/
 	aplicaSimbolo: function(s)
 	{$i("i3GEOlegendasymbolname").value = s.title;},
 	/*
 	Function: aplicaEstilo
-	
+
 	Aplica ao estilo as propriedades definidas
-	
+
 	Veja:
-	
+
 	<EDITASIMBOLO>
 	*/
 	aplicaEstilo: function(){
@@ -1324,7 +1349,7 @@ i3GEOF.legenda = {
 	},
 	/*
 	Function: reMontaEditor
-	
+
 	Gera novamente o editor de s&iacute;mbolo ap&oacute;s ter sido feita alguma altera&ccedil;ão nos estilos
 	*/
 	reMontaEditor: function(){
@@ -1333,11 +1358,11 @@ i3GEOF.legenda = {
 	},
 	/*
 	Function: mostraGrafico
-	
+
 	Mostra um gr&aacute;fico com a contegem de elementos em caada classe
-	
+
 	Veja:
-	
+
 	<CONTAGEMCLASSE>
 	*/
 	mostraGrafico: function(){
@@ -1399,17 +1424,17 @@ i3GEOF.legenda = {
 			"data":{
 				"dados":i3GEOF.legenda.dadosGrafico
 			}
-		};		
+		};
 		i3GEOF.graficointerativo.tipo = "pizza2d";
 		i3GEOF.graficointerativo.criaJanelaFlutuante(dados);
 	},
 	/*
 	Function: aplicaProcessos
-	
+
 	Aplica processos de ajuste em imagens de sat&eacute;lite
-	
+
 	Veja:
-	
+
 	<APLICAPROCESSOS>
 	*/
 	aplicaProcessos: function(){
@@ -1441,7 +1466,7 @@ i3GEOF.legenda = {
 	},
 	/*
 	Function: adicionaProcesso
-	
+
 	Adiciona um novo processo na lista de processos
 	*/
 	adicionaProcesso: function(s){

@@ -1,5 +1,5 @@
-//+$trad(1,i3GEOF.gradepontos.dicionario)+
-i3GEOF.gradepontos.dicionario = {
+//+$trad(1,i3GEOF.gradeDePontos.dicionario)+
+i3GEOF.gradeDePontos.dicionario = {
 1: [{
 pt:"",
 en:"",

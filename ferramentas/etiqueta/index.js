@@ -44,17 +44,42 @@ Classe: i3GEOF.etiqueta
 i3GEOF.etiqueta = {
 	/*
 	Variavel: aguarde
-	
+
 	Estilo do objeto DOM com a imagem de aguarde existente no cabe&ccedil;alho da janela.
 	*/
 	aguarde: "",
 	/*
+		Para efeitos de compatibilidade antes da vers&atilde;o 4.7 que não tinha dicion&aacute;rio
+	*/
+	criaJanelaFlutuante: function(){
+		i3GEOF.etiqueta.iniciaDicionario();
+	},
+	/*
+	Function: iniciaDicionario
+
+	Carrega o dicion&aacute;rio e chama a fun&ccedil;&atilde;o que inicia a ferramenta
+
+	O Javascript &eacute; carregado com o id i3GEOF.nomedaferramenta.dicionario_script
+	*/
+	iniciaDicionario: function(){
+		if(typeof(i3GEOF.etiqueta.dicionario) === 'undefined'){
+			i3GEO.util.scriptTag(
+				i3GEO.configura.locaplic+"/ferramentas/etiqueta/dicionario.js",
+				"i3GEOF.etiqueta.iniciaJanelaFlutuante()",
+				"i3GEOF.etiqueta.dicionario_script"
+			);
+		}
+		else{
+			i3GEOF.etiqueta.iniciaJanelaFlutuante();
+		}
+	},
+	/*
 	Function: inicia
-	
+
 	Inicia a ferramenta. &Eacute; chamado por criaJanelaFlutuante
-	
+
 	Parametro:
-	
+
 	iddiv {String} - id do div que receber&aacute; o conteudo HTML da ferramenta
 	*/
 	inicia: function(iddiv){
@@ -79,16 +104,16 @@ i3GEOF.etiqueta = {
 	},
 	/*
 	Function: html
-	
+
 	Gera o c&oacute;digo html para apresenta&ccedil;ão das op&ccedil;&otilde;es da ferramenta
-	
+
 	Retorno:
-	
+
 	String com o c&oacute;digo html
 	*/
 	html:function(){
 		var ins = '';
-		ins += '<p class="paragrafo" >Escolha o item que ser&aacute; utilizado como fonte de dados para mostrar na etiqueta:<br>';	
+		ins += '<p class="paragrafo" >Escolha o item que ser&aacute; utilizado como fonte de dados para mostrar na etiqueta:<br>';
 		ins += '<div id=i3GEOetiquetalistai class=digitar style="text-align:left;left:0px;top:0px;330px;height:80px;overflow:auto;display:block;"></div>';
 		ins += '<br>';
 		ins += '<p class="paragrafo" >';
@@ -97,11 +122,11 @@ i3GEOF.etiqueta = {
 		return ins;
 	},
 	/*
-	Function: criaJanelaFlutuante
-	
+	Function: iniciaJanelaFlutuante
+
 	Cria a janela flutuante para controle da ferramenta.
-	*/	
-	criaJanelaFlutuante: function(){
+	*/
+	iniciaJanelaFlutuante: function(){
 		var minimiza,cabecalho,janela,divid,temp,titulo;
 		if($i("i3GEOF.etiqueta")){
 			i3GEOF.etiqueta.inicia("i3GEOF.etiqueta_corpo");
@@ -134,13 +159,13 @@ i3GEOF.etiqueta = {
 		i3GEOF.etiqueta.inicia(divid);
 		temp = function(){
 			if(i3GEO.eventos.ATUALIZAARVORECAMADAS.toString().search('i3GEO.janela.comboCabecalhoTemas("i3GEOFetiquetaComboCabeca","i3GEOFetiquetaComboCabecaSel","etiqueta","ligadosComTabela")') > 0)
-			{i3GEO.eventos.ATUALIZAARVORECAMADAS.remove('i3GEO.janela.comboCabecalhoTemas("i3GEOFetiquetaComboCabeca","i3GEOFetiquetaComboCabecaSel","etiqueta","ligadosComTabela")');}			
+			{i3GEO.eventos.ATUALIZAARVORECAMADAS.remove('i3GEO.janela.comboCabecalhoTemas("i3GEOFetiquetaComboCabeca","i3GEOFetiquetaComboCabecaSel","etiqueta","ligadosComTabela")');}
 		};
 		YAHOO.util.Event.addListener(janela[0].close, "click", temp);
 	},
 	/*
 	Function: ativaFoco
-	
+
 	Refaz a interface da ferramenta quando a janela flutuante tem seu foco ativado
 	*/
 	ativaFoco: function(){
@@ -151,11 +176,11 @@ i3GEOF.etiqueta = {
 	},
 	/*
 	Function: montaListaItens
-	
+
 	Monta a lista de itens que poderão ser escolhidos para compor o mapa.
-	
+
 	A lista &eacute; inserida no elemento html com id "i3GEOetiquetalistai"
-	
+
 	@TODO verificar quando um item ja esta na lista e marca-lo no checkbox
 	*/
 	montaListaItens: function(retorno){
@@ -181,11 +206,11 @@ i3GEOF.etiqueta = {
 			ins.push("</table>");
 		}
 		catch(e)
-		{$i("i3GEOetiquetalistai").innerHTML = "<p style=color:red >Ocorreu um erro<br>"+e;}	
+		{$i("i3GEOetiquetalistai").innerHTML = "<p style=color:red >Ocorreu um erro<br>"+e;}
 	},
 	/*
 	Function: pegaItensMarcados
-	
+
 	Recupera os itens que foram marcados e monta uma lista para enviar como parâmetro para a fun&ccedil;ão de gera&ccedil;ão dos gr&aacute;ficos
 	*/
 	pegaItensMarcados: function(){
@@ -204,11 +229,11 @@ i3GEOF.etiqueta = {
 	},
 	/*
 	Function: ativa
-	
+
 	Ativa a etiqueta com os itens marcados
-	
+
 	Veja:
-	
+
 	<ATIVAETIQUETAS>
 	*/
 	ativa: function(){
@@ -233,11 +258,11 @@ i3GEOF.etiqueta = {
 	},
 	/*
 	Function: desativa
-	
+
 	Desativa as etiqueta do tema ativo
-	
+
 	Veja:
-	
+
 	<REMOVEETIQUETAS>
 	*/
 	desativa: function(){

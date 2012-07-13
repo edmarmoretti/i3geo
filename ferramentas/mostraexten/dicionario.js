@@ -1,5 +1,5 @@
-//+$trad(1,i3GEOF.mostraexten.dicionario)+
-i3GEOF.mostraexten.dicionario = {
+//+$trad(1,i3GEOF.mostraExten.dicionario)+
+i3GEOF.mostraExten.dicionario = {
 1: [{
 pt:"",
 en:"",
