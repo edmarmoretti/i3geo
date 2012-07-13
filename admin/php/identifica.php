@@ -178,42 +178,4 @@ function excluirFuncoes()
 		return "Error!: " . $e->getMessage();
 	}
 }
-function importarXmlI()
-{
-	global $xml,$esquemaadmin;
-	if(!file_exists($xml))
-	{
-		return "<br><b>Arquivo $xml n&atilde;o encontrado";
-	}
-	include_once("../../classesphp/funcoes_gerais.php");
-	include("conexao.php");
-	$xml = simplexml_load_file($xml);
-	//
-	//importa os grupos
-	//
-	$wsExistentes = array();
-	$q = $dbh->query("select * from ".$esquemaadmin."i3geoadmin_identifica");
-	$resultado = $q->fetchAll();
-	foreach($resultado as $r)
-	{
-		$iExistentes[$r["nome_i"]] = 0;
-	}
-	foreach($xml->FUNCAO as $item)
-	{
-		$nome_i = html_entity_decode(ixml($item,"NOMESIS"));
-		if($convUTF)
-		{
-			$nome_i = utf8_encode($nome_i);
-		}
-		$target_i = ixml($item,"TARGET");
-		$abrir_i = ixml($item,"ABRIR");
-		if(!isset($iExistentes[$nome_i]))
-			$dbhw->query("INSERT INTO ".$esquemaadmin."i3geoadmin_identifica (publicado_i,nome_i,target_i,abrir_i) VALUES ('','$nome_i','$target_i','$abrir_i')");
-		$iExistentes[$nome_i] = 0;
-	}
-	$dbhw = null;
-	$dbh = null;
-	return "Dados importados.";
-}
-
 ?>

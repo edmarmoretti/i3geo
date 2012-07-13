@@ -336,52 +336,5 @@ function excluirSistemas()
     	return "Error!: " . $e->getMessage();
 	}
 }
-function importarXmlSistemas()
-{
-	global $xml,$tipo,$esquemaadmin;
-	if(!file_exists($xml))
-	{return "<br><b>Arquivo $xml n&atilde;o encontrado";}
-	include_once("../../classesphp/funcoes_gerais.php");
-	include("conexao.php");
-	$xml = simplexml_load_file($xml);
-	//
-	//importa os grupos
-	//
-	$sistemasExistentes = array();
-	$q = $dbh->query("select * from ".$esquemaadmin."i3geoadmin_sistemas");
-	$resultado = $q->fetchAll();
-	foreach($resultado as $r)
-	{$sistemasExistentes[$r["nome_sistema"]] = 0;}
-	foreach($xml->SISTEMA as $item)
-	{
-		$nome = html_entity_decode(ixml($item,"NOMESIS"));
-		if($convUTF)
-		{
-			$nome = utf8_encode($nome);
-		}
-		$perfil = ixml($item,"PERFIL");
-		if(!isset($sistemasExistentes[$nome]))
-		$dbhw->query("INSERT INTO ".$esquemaadmin."i3geoadmin_sistemas (publicado_sistema,nome_sistema,perfil_sistema) VALUES ('','$nome','$perfil')");
-		$sistemasExistentes[$nome] = 0;
-		$id_sistema = $dbh->query("SELECT id_sistema FROM ".$esquemaadmin."i3geoadmin_sistemas");
-		$id_sistema = $id_sistema->fetchAll();
-		$id_sistema = intval($id_sistema[count($id_sistema)-1]['id_sistema']);
-		foreach ($item->FUNCAO as $funcao)
-		{
-			$abrir_funcao = ixml($funcao,"ABRIR");
-			$nome_funcao = html_entity_decode(ixml($funcao,"NOMEFUNCAO"));
-			if($convUTF)
-			{
-				$nome_funcao = utf8_encode($nome_funcao);
-			}
-			$w_funcao = ixml($funcao,"JANELAW");
-			$h_funcao = ixml($funcao,"JANELAH");
-			$perfil_funcao = ixml($funcao,"PERFIL");
-			$dbhw->query("INSERT INTO ".$esquemaadmin."i3geoadmin_sistemasf (nome_funcao,abrir_funcao,perfil_funcao,w_funcao,h_funcao,id_sistema) VALUES ('$nome_funcao','$abrir_funcao','$perfil_funcao','$w_funcao','$h_funcao','$id_sistema')");
-		}
-	}
-	$dbhw = null;
-	$dbh = null;
-	return "Dados importados.";
-}
+
 ?>
