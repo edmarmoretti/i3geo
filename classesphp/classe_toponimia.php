@@ -43,35 +43,35 @@ class Toponimia
 {
 	/*
 	Variavel: $mapa
-	
+
 	Objeto mapa
 	*/
 	protected $mapa;
 	/*
 	Variavel: $map_file
-	
+
 	Arquivo map file
 	*/
 	protected $map_file;
 	/*
 	Variavel: $layer
-	
+
 	Objeto layer
 	*/
 	protected $layer;
 	/*
 	Variavel: $nome
-	
+
 	Nome do layer
 	*/
 	protected $nome;
 /*
 function __construct
 
-Cria um objeto map e seta a variavel tema 
+Cria um objeto map e seta a variavel tema
 
 parameters:
-$map_file - Endere&ccedil;o do mapfile no servidor. 
+$map_file - Endere&ccedil;o do mapfile no servidor.
 
 $tema - nome do tema que ser&aacute; processado
 */
@@ -83,7 +83,7 @@ $tema - nome do tema que ser&aacute; processado
   		else
   		include_once("funcoes_gerais.php");
 		$this->v = versao();
-		$this->v = $this->v["principal"];		
+		$this->v = $this->v["principal"];
   		$this->mapa = ms_newMapObj($map_file);
   		$this->arquivo = $map_file;
   		if($tema != "" && @$this->mapa->getlayerbyname($tema))
@@ -93,8 +93,8 @@ $tema - nome do tema que ser&aacute; processado
 /*
 function: salva
 
-Salva o mapfile atual 
-*/		
+Salva o mapfile atual
+*/
  	function salva()
  	{
 	  	if (connection_aborted()){exit();}
@@ -180,6 +180,8 @@ Retorno:
 				$novac = ms_newClassObj($novolayer);
 				$novolayer->set("status",MS_DEFAULT);
 				$novolayer->setmetadata("tema","texto de ".$nome);
+				$novolayer->setmetadata("tip","");
+				$novolayer->setmetadata("identifica","nao");
 			}
 			else{
 				$nomer = $this->layer->name;
@@ -233,7 +235,7 @@ Retorno:
 			{
 				$label->updatefromstring("LABEL ANGLE FOLLOW END");
 			}
-			corE($label,$cor,"color");	
+			corE($label,$cor,"color");
 			corE($label,$fundo,"backgroundcolor");
 			corE($label,$sombra,"backgroundshadowcolor",$sombrax,$sombray);
 			//$label->set("backgroundshadowsizex",$sombrax);
@@ -264,7 +266,7 @@ function: ativaEtiquetas
 ativa a inclus&atilde;o de etiquetas em um tema
 
 parameter:
-$item Lista de Itens separados por v&iacute;rgula que ser&atilde;o utilizados.	
+$item Lista de Itens separados por v&iacute;rgula que ser&atilde;o utilizados.
 */
 	function ativaEtiquetas($item)
 	{

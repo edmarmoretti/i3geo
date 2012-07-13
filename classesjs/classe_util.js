@@ -1399,13 +1399,23 @@ i3GEO.util = {
 			n = s.length,
 			i,
 			t;
-		for (i=0;i < n;i++){
-			t = s[i].id;
-			t = t.split(".");
-			if(t[0] === texto)
-			{return true;}
+		try{
+			for (i=0;i < n;i++){
+				t = s[i].id;
+				t = t.split(".");
+				//
+				//dicionario_script pode ter sido incluido por alguma ferramenta e nao foi removido
+				//por isso, caso seja encontrado a funcao retorna false como se o script procurado nao existisse
+				//
+				if(t[2] && t[2] == "dicionario_script"){
+					return false;
+				}
+				if(t[0] === texto)
+				{return true;}
+			}
+			return false;
 		}
-		return false;
+		catch(e){return false;}
 	},
 	/*
 	Function: mensagemAjuda
