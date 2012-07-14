@@ -305,6 +305,18 @@ if (strtoupper(substr(PHP_OS, 0, 3) == 'WIN'))
 	{string}
 	*/
 	$R_path = "c:/r/win/bin/R.exe";
+	/**
+	 * TODO listar aqui os nomes das bibliotecas
+	 **/
+	/*
+	Variable: R_pathlib
+
+	Onde ficam as bibliotecas adicionais necess&aacute;rias ao funcionamento do R
+
+	Tipo:
+	{string}
+	*/
+	$R_libpath = "c:/r/win/library";
 	/*
 	Variable: postgis_mapa
 
@@ -482,6 +494,10 @@ else //se for linux
 						);
 	$locmapserv = "/cgi-bin/mapserv";
 	$R_path = "R";//se vc n&atilde;o instalou o R no seu servidor, tente o endere&ccedil;o $R_path = $locaplic."/pacotes/r/linux/r";
+/**
+ * TODO verificar qual o endereco padrao no Ubuntu
+ */
+	$R_libpath = "";
 	$postgis_mapa = "";
 	$utilizacgi = "nao";
 	$expoeMapfile = "sim";

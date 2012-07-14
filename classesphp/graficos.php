@@ -36,7 +36,7 @@ i3geo/classesphp/graficos.php
 */
 function graficoPizza()
 {
-	global $cp,$map_file,$itemvalores,$itemclasses,$tema,$exclui,$tipo,$R_path;
+	global $cp,$map_file,$itemvalores,$itemclasses,$tema,$exclui,$tipo,$R_path,$R_libpath;
 	global $percentual,$nome,$margem,$margemexterna,$margeminterna,$border,$las,$radius,$lwd,$lty,$fontsub,$fontmain,$locaplic,$dir_tmp,$gw,$gh,$res,$bg,$fg,$colmain,$font,$cex,$nval,$main,$cexmain,$sub,$cexsub;
 	//error_reporting(E_ALL);
 	//gera os nomes dos arquivos com os dados
@@ -49,7 +49,7 @@ function graficoPizza()
 		gravaDados($nnval,$nome);
 	}
 	$gfile_name = nomeRandomico(20);
-	$rcode = iniciaParGrafico($gw,$gh,$res,$dir_tmp,$gfile_name,$margem,$margemexterna,$margeminterna,$locaplic);
+	$rcode = iniciaParGrafico($gw,$gh,$res,$dir_tmp,$gfile_name,$margem,$margemexterna,$margeminterna,$locaplic,$R_libpath);
 	$rcode[] =  'valores=read.table("'.$nome.'",header=TRUE,sep=";")';
 	$rcode[] =  'attach(valores)';
 	$parametros = 'border='.$border.',radius='.$radius.',lty='.$lty.',font.sub='.$fontsub.',font.main='.$fontmain.',pty="m",font='.$font.',col.main='.$colmain.',cex='.$cex.',col=terrain.colors(NROW(x)),cex.main='.$cexmain.',cex.sub='.$cexsub;
@@ -72,7 +72,7 @@ function graficoPizza()
 */
 function graficoBarras()
 {
-	global $map_file,$itemvalores,$itemclasses,$tema,$exclui,$tipo,$R_path;
+	global $map_file,$itemvalores,$itemclasses,$tema,$exclui,$tipo,$R_path,$R_libpath;
 	global $setasdv,$percentual,$nome,$margem,$margemexterna,$margeminterna,$grid,$border,$cexaxis,$las,$space,$lwd,$fontlab,$collab,$cexlab,$xlab,$ylab,$fontsub,$fontmain,$locaplic,$dir_tmp,$gw,$gh,$res,$bg,$fg,$colmain,$font,$main,$cexmain,$sub,$cexsub;
 	//pega os valores
 	$dir = dirname(dirname($map_file));
@@ -84,7 +84,7 @@ function graficoBarras()
 		gravaDados($nnval,$nome);
 	}
 	$gfile_name = nomeRandomico(20);
-	$rcode = iniciaParGrafico($gw,$gh,$res,$dir_tmp,$gfile_name,$margem,$margemexterna,$margeminterna,$locaplic);
+	$rcode = iniciaParGrafico($gw,$gh,$res,$dir_tmp,$gfile_name,$margem,$margemexterna,$margeminterna,$locaplic,$R_libpath);
 	$rcode[] =  'valores=read.table("'.$nome.'",header=TRUE,sep=";")';
 	$rcode[] =  'attach(valores)';
 	$rcode[] = 'names(x)= n';
@@ -122,7 +122,7 @@ function graficoBarras()
 */
 function graficoHist()
 {
-	global $map_file,$itemvalores,$itemclasses,$tema,$exclui,$tipo,$R_path;
+	global $map_file,$itemvalores,$itemclasses,$tema,$exclui,$tipo,$R_path,$R_libpath;
 	global $densidade,$percentual,$nome,$margem,$margemexterna,$margeminterna,$corbarras,$grid,$breaks,$border,$cexaxis,$las,$lwd,$fontlab,$collab,$cexlab,$xlab,$ylab,$fontsub,$fontmain,$locaplic,$dir_tmp,$gw,$gh,$res,$bg,$fg,$colmain,$font,$main,$cexmain,$sub,$cexsub;
 	$dir = dirname(dirname($map_file));
 	if($nome == "")
@@ -134,7 +134,7 @@ function graficoHist()
 		gravaDados($nnval,$nome);
 	}
 	$gfile_name = nomeRandomico(20);
-	$rcode = iniciaParGrafico($gw,$gh,$res,$dir_tmp,$gfile_name,$margem,$margemexterna,$margeminterna,$locaplic);
+	$rcode = iniciaParGrafico($gw,$gh,$res,$dir_tmp,$gfile_name,$margem,$margemexterna,$margeminterna,$locaplic,$R_libpath);
 	$rcode[] =  'valores=read.table("'.$nome.'",header=TRUE,sep=";")';
 	$rcode[] =  'attach(valores)';
 	$parametros = 'cex.axis='.$cexaxis.',breaks='.$breaks.',border='.$border.',las='.$las.',lwd='.$lwd.',font.lab='.$fontlab.',col.lab='.$collab.',cex.lab='.$cexlab.',font.sub='.$fontsub.',font.main='.$fontmain.',pty="m",font='.$font.',col.main='.$colmain.',cex.main='.$cexmain.',cex.sub='.$cexsub;
@@ -171,7 +171,7 @@ function graficoHist()
 */
 function graficoLinhas()
 {
-	global $map_file,$itemvalores,$itemclasses,$tema,$exclui,$tipo,$R_path;
+	global $map_file,$itemvalores,$itemclasses,$tema,$exclui,$tipo,$R_path,$R_libpath;
 	global $percentual,$nome,$margem,$margemexterna,$margeminterna,$xlab,$ylab,$grid,$ppontos,$spline,$locaplic,$dir_tmp,$gw,$gh,$res,$bg,$collab,$colaxis,$cexlab,$cexaxis,$fontlab,$las,$tck,$cexmain,$border,$lty,$lwd,$lty,$lwd,$pch,$tpt,$main,$colmain,$fontmain,$nome;
 	//pega os valores
 	$dir = dirname(dirname($map_file));
@@ -183,7 +183,7 @@ function graficoLinhas()
 		gravaDados($nnval,$nome);
 	}
 	$gfile_name = nomeRandomico(20);
-	$rcode = iniciaParGrafico($gw,$gh,$res,$dir_tmp,$gfile_name,$margem,$margemexterna,$margeminterna,$locaplic);
+	$rcode = iniciaParGrafico($gw,$gh,$res,$dir_tmp,$gfile_name,$margem,$margemexterna,$margeminterna,$locaplic,$R_libpath);
 	$rcode[] =  'valores=read.table("'.$nome.'",header=TRUE,sep=";")';
 	$rcode[] =  'attach(valores)';
 	$rcode[] = 'names(x)= n';
@@ -217,7 +217,7 @@ function graficoLinhas()
 */
 function graficoScatter()
 {
-	global $map_file,$itemvalores,$itemclasses,$tema,$exclui,$tipo,$R_path;
+	global $map_file,$itemvalores,$itemclasses,$tema,$exclui,$tipo,$R_path,$R_libpath;
 	global $percentual,$nome,$margem,$margemexterna,$margeminterna,$corlinha,$grid,$ppontos,$locaplic,$dir_tmp,$gw,$gh,$res,$bg,$collab,$colaxis,$cexlab,$cexaxis,$fontlab,$las,$tck,$cexmain,$border,$lty,$lwd,$lty,$lwd,$pch,$tpt,$main,$colmain,$fontmain,$ylab,$xlab;
 	//pega os valores
 	$dir = dirname(dirname($map_file));
@@ -229,7 +229,7 @@ function graficoScatter()
 		gravaDados($nnval,$nome);
 	}
 	$gfile_name = nomeRandomico(20);
-	$rcode = iniciaParGrafico($gw,$gh,$res,$dir_tmp,$gfile_name,$margem,$margemexterna,$margeminterna,$locaplic);
+	$rcode = iniciaParGrafico($gw,$gh,$res,$dir_tmp,$gfile_name,$margem,$margemexterna,$margeminterna,$locaplic,$R_libpath);
 	$rcode[] =  'valores=read.table("'.$nome.'",header=TRUE,sep=";")';
 	$rcode[] =  'attach(valores)';
 	$parametros = 'pty="m",main = "'.$main.'",col.main='.$colmain.',font.main='.$fontmain.',ylab = "'.$ylab.'",xlab = "'.$xlab.'",cex ='.$tpt.',pch ="'.$pch.'",lty='.$lty.',lwd='.$lwd.',col.lab='.$collab.',col.axis='.$colaxis.',cex.lab='.$cexlab.',cex.axis='.$cexaxis.',font.lab='.$fontlab.',las='.$las.',tck='.$tck.',cex.main='.$cexmain;
@@ -249,7 +249,7 @@ function graficoScatter()
 */
 function graficoScatterBins()
 {
-	global $map_file,$itemvalores,$itemclasses,$tema,$exclui,$tipo,$R_path;
+	global $map_file,$itemvalores,$itemclasses,$tema,$exclui,$tipo,$R_path,$R_libpath;
 	global $plota3d,$nbins,$percentual,$nome,$margem,$margemexterna,$margeminterna,$corlinha,$grid,$ppontos,$locaplic,$dir_tmp,$gw,$gh,$res,$bg,$collab,$colaxis,$cexlab,$cexaxis,$fontlab,$las,$tck,$cexmain,$border,$lty,$lwd,$lty,$lwd,$pch,$tpt,$main,$colmain,$fontmain,$ylab,$xlab;
 	//pega os valores
 	$dir = dirname(dirname($map_file));
@@ -261,7 +261,7 @@ function graficoScatterBins()
 		gravaDados($nnval,$nome);
 	}
 	$gfile_name = nomeRandomico(20);
-	$rcode = iniciaParGrafico($gw,$gh,$res,$dir_tmp,$gfile_name,$margem,$margemexterna,$margeminterna,$locaplic);
+	$rcode = iniciaParGrafico($gw,$gh,$res,$dir_tmp,$gfile_name,$margem,$margemexterna,$margeminterna,$locaplic,$R_libpath);
 	$rcode[] =  'valores=read.table("'.$nome.'",header=TRUE,sep=";")';
 	$rcode[] =  'attach(valores)';
 	$rcode[] = 'library(gplots)';
@@ -269,8 +269,8 @@ function graficoScatterBins()
 	if($plota3d == "FALSE")
 	{
 		$rcode[] = "hist2d(x,y, nbins=".$nbins.", col = c('white',heat.colors(16)),".$parametros.")";
-		$rcode[] = "rug(x,side=1)"; 
-		$rcode[] = "rug(y,side=2)"; 
+		$rcode[] = "rug(x,side=1)";
+		$rcode[] = "rug(y,side=2)";
 		$rcode[] = "grid()";
 		$rcode[] = "box()";
 	}
@@ -293,7 +293,7 @@ function graficoScatterBins()
 */
 function graficoEstrela()
 {
-	global $map_file,$itemvalores,$itemclasses,$tema,$exclui,$tipo,$R_path;
+	global $map_file,$itemvalores,$itemclasses,$tema,$exclui,$tipo,$R_path,$R_libpath;
 	global $font,$cex,$grid,$ppontos,$locaplic,$dir_tmp,$w,$h,$res,$bg,$collab,$colaxis,$cexlab,$cexaxis,$fontlab,$las,$tck,$cexmain,$border,$lty,$lwd,$lty,$lwd,$pch,$tpt,$main,$colmain,$fontmain,$ylab,$xlab;
 	//pega os valores
 	$map = ms_newMapObj($map_file);
@@ -334,8 +334,10 @@ function graficoEstrela()
 	$url = dirname($webo->imageurl)."/";
 	return($url.$gfile_name.".png,".$url.(basename($nomeV)));
 }
-function iniciaParGrafico($gw,$gh,$res,$dir_tmp,$gfile_name,$margem,$margemexterna,$margeminterna,$locaplic)
+function iniciaParGrafico($gw,$gh,$res,$dir_tmp,$gfile_name,$margem,$margemexterna,$margeminterna,$locaplic,$R_libpath)
 {
+	$lib = '.libPaths("'.$R_libpath.'")';
+	/*
 	if (strtoupper(substr(PHP_OS, 0, 3) == 'WIN'))
 	{$lib = '.libPaths("'.$locaplic.'/pacotes/rlib/win")';}
 	else
@@ -343,6 +345,7 @@ function iniciaParGrafico($gw,$gh,$res,$dir_tmp,$gfile_name,$margem,$margemexter
 		if(file_exists($locaplic."/pacotes/rlib/linux"))
 		$lib = '.libPaths("'.$locaplic.'/pacotes/rlib/linux")';
 	}
+	*/
 	$rcode[] = $lib;
 	$graf = "png";
 	if (strtoupper(substr(PHP_OS, 0, 3) != 'WIN'))
@@ -369,7 +372,7 @@ function iniciaParGrafico($gw,$gh,$res,$dir_tmp,$gfile_name,$margem,$margemexter
 		$rcode[] = 'box("plot", lty="dashed")';
 	}
 	$rcode[] = 'screen(1, new=FALSE)';
-	return $rcode;	
+	return $rcode;
 }
 function iniciaDadosGrafico($map_file,$tema,$exclui,$itemclasses,$itemvalores,$tipo,$percentual,$ext="",$incluicores=true,$ordenax="nao")
 {
@@ -388,14 +391,14 @@ function iniciaDadosGrafico($map_file,$tema,$exclui,$itemclasses,$itemvalores,$t
 		$extatual->setextent((min($e[0],$e[2])),(min($e[1],$e[3])),(max($e[0],$e[2])),(max($e[1],$e[3])));
 	}
 	$layer = $map->getLayerByName($tema);
-	$selecionados = carregaquery2($map_file,$layer,$map);	
+	$selecionados = carregaquery2($map_file,$layer,$map);
 	if ($exclui == ""){$exclui = "nulo";}
 	$valores = pegaValoresM($map,$layer,array($itemclasses,$itemvalores),$exclui,$selecionados);
 	$dados = agrupaValores($valores,0,1,$tipo);
 	foreach($valores as $valor){
 		$cores[$valor[0]] = $valor["cores"];
 	}
-	//calcula os parametros para o grafico	
+	//calcula os parametros para o grafico
 	$nval = count($dados);
 	$max = max($dados);
 	$soma = array_sum($dados);
@@ -411,11 +414,11 @@ function iniciaDadosGrafico($map_file,$tema,$exclui,$itemclasses,$itemvalores,$t
 				$pp = ($dados[$tempm[$i]] * 100) / $soma;
 				if ($percentual == "TRUE")
 				{
-					
+
 					$temp = "'".$tempm[$i]." (".round($pp,0)."%)';".$dados[$tempm[$i]];
 					if($incluicores == true)
 					{$temp = $temp.";".$cores[$tempm[$i]];}
-				}		
+				}
 				else
 				{
 					$temp = "'".$tempm[$i]."';".$dados[$tempm[$i]];
@@ -456,7 +459,7 @@ function dadosLinhaDoTempo($map_file,$tema,$ext="")
 	$itens = array();
 	if($layer->getmetadata("ltempoformatodata") == "")
 	{return "Nao esta definido o metadata com o formato do campo";}
-	
+
 	if($layer->getmetadata("ltempoiteminicio") != ""){
 		$iteminicio = $layer->getmetadata("ltempoiteminicio");
 		$itens[] = $iteminicio;
@@ -473,7 +476,7 @@ function dadosLinhaDoTempo($map_file,$tema,$ext="")
 	if($layer->getmetadata("ltempoitemicone") != ""){
 		$itemicone = $layer->getmetadata("ltempoitemicone");
 		$itens[] = $itemicone;
-	}	
+	}
 	$itemfim = "";
 	if($layer->getmetadata("ltempoitemfim") != ""){
 		$itemfim = $layer->getmetadata("ltempoitemfim");
@@ -543,7 +546,7 @@ function dadosLinhaDoTempo($map_file,$tema,$ext="")
 	return array(
 		"dateTimeFormat"=>$layer->getmetadata("ltempoformatodata"),
 		"wikiURL"=>"",
-		"wikiSection"=>"",		
+		"wikiSection"=>"",
 		"events"=>$eventos,
 		"menorano"=>min($anos),
 		"maiorano"=>max($anos)
@@ -564,7 +567,7 @@ function dadosPerfilRelevo($pontos,$opcao,$amostragem,$item="",$map_file=""){
 	curl_close ($curl);
 	$result = json_decode( $result, true );
 	$pontos = array();
-	
+
 	if($opcao != "google"){
 		include_once("classe_atributos.php");
 		$m = New Atributos($map_file,$opcao);

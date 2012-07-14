@@ -24,11 +24,13 @@ Para a versão 4.7
 - O mapa com os estados do Brasil foi comentado nos mapfiles de inicialização. Para reativá-lo, deve-se remover os comentários do layer brasil existentes nos arquivos .map existentes em i3Geo/aplicmap
 - O layer com os limites estaduais não são mais carregados automaticamente, o layer estadosl está agora nos mapfiles de inicialização, porém, comentado para não ser ativado automaticamente
 - Os layers com a ZEE e base raster do MMA foram removidos dos mapfiles de inicialização
+- ms_configura.php
+	- Nova variável de configuração para indicar o local das bibliotecas adicionais do software R: R_libpath
 -------------------------------------------------------------------------------------------------
 Para a versão 4.6
 
 	Simbologia
-	
+
 		Verifique o uso de símbolos lineares.
 			Utilize WIDTH no lugar de SIZE
 			No símbolo chamado "linhas", utilize um símbolo simples, exemplo:
@@ -37,7 +39,7 @@ Para a versão 4.6
 					COLOR 255 0 0
 				END
 	Layout
-	
+
 		Para utilizar o padrão CSS3 foi incluído nas páginas o doctype:
 		<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 
@@ -47,7 +49,7 @@ Para a versão 4.6
 Para a versão 4.5 + SP11
 
 	Mudanças que foram feitas para uso da versão 6 do Mapserver:
-		
+
 		Os mapfiles de inicialização geral1.map, geral1debian.map e geral1windows.map, existentes em i3geo/aplicmap,
 		foram mantidos para efeitos de compatibilidade. Os novos mapfiles de inicialização agora são:
 			geral1v5.map
@@ -57,8 +59,8 @@ Para a versão 4.5 + SP11
 			geral1windowsv5.map
 			gral1windowsv6.map
 		"vX" indica a versão do Mapserver
-		
-		Caso o i3Geo seja inicializado com um mapfile diferente dos que são padrão, existentes em i3geo/aplicmap, é 
+
+		Caso o i3Geo seja inicializado com um mapfile diferente dos que são padrão, existentes em i3geo/aplicmap, é
 		necessário alterar esse mapfile para compatibilizá-lo com a versão 6 do Mapserver.
 		Utilize o arquivo i3geo/aplicmap/geral1.map ou geral1windows.map para copiar
 		os elementos iniciais (de MAP até o primeiro LAYER) para o mapfile de inicialização desejado.
@@ -67,7 +69,7 @@ Para a versão 4.5 + SP11
 			i3geo/symbols/simbolos.sym não deve mais ser usado, continua a existir apenas para compatibilidade
 			novos símbolos devem ser inseridos em i3geo/symbols/simbolosv5.sym ou em i3geo/symbols/simbolosv6.sym,
 			conforme a versão do Mapserver em uso
-			
+
 			Nos mapfiles existentes em i3geo/temas, deve-se substituir a linha
 			SYMBOLSET ../symbols/simbolos.sym
 			por
@@ -77,8 +79,8 @@ Para a versão 4.5 + SP11
 			conforme a versão do Mapserver em uso
 			Sem essa mudança, o i3Geo continuará a funcionar, mas se forem criados novos símbolos em um arquivo
 			simbolosv5.sym ou simbolosv6.sym, deve-se fazer o mesmo em simbolos.sym
-			
-			
+
+
 Para a versão 4.5 + SP8
 
 	As interfaces Openlayers e Googlemaps por default passaram a utilizar as guias na forma "retrátil"
@@ -88,26 +90,26 @@ Para a versão 4.5
 
 	Os arquivos com as interfaces HTML dos diferentes mapas do i3Geo foram movidos do diretório
 	i3geo/aplicmap para o diretório i3geo/interface. Caso existam links apontando diretamente para
-	esses arquivos, vc pode simplesmente copiar os arquivos existentes na nova pasta (i3geo/interface) 
+	esses arquivos, vc pode simplesmente copiar os arquivos existentes na nova pasta (i3geo/interface)
 	para a antiga (i3geo/aplicmap).
 
 	As variáveis de configuração $temasdir e $temasaplic foram removidas. Se vc desenvolveu programas em PHP,
-	no lugar dessas variáveis utilize $locaplic e o local fixo dos arquivos, por exemplo $locaplic."/temas" 
+	no lugar dessas variáveis utilize $locaplic e o local fixo dos arquivos, por exemplo $locaplic."/temas"
 	e $locaplic."/aplicmap"
-	
+
 	A opção de administração com base em arquivos XML em disco foi removida. Agora, deve-se sempre utilizar o banco de dados
 	de admnistração.
-	
+
 	O banco de dados de administração sofreu alterações. Veja em "Outras opções", no sistema de admnistração.
-	
+
 	O arquivo admin.db (banco de dados de admnistração default) foi movido de i3geo/menutemas para i3geo/admin
-	
+
 	O "alias" para a interface "zerocal" foi removido, utilize em seu lugar:
 	http://localhost/i3geo/ms_criamapa.php?interface=zerocal.htm ou
 	http://localhost/i3geo/interface/zerocal.htm
-	
+
 	A pasta "images" foi removida e as imagens movidas para a pasta "imagens\depreciado"
-	
+
 	Opção de comentários em temas
 		Foram acrescentadas novas variáveis em ms_configura.php. Veja esse arquivo para editar as variáveis e registrar
 		as APIs das redes sociais como Twitter e Facebook
@@ -115,28 +117,28 @@ Para a versão 4.5
 		utilize o editor de mapfiles do sistema de admnistração para bloquear essa opção em cada tema
 		Os comentários são armazenados em uma tabela no banco de dados de administração. Essa tabela precisa ser criada no banco.
 		Para criar a tabela veja o item "Outras opções" em http://localhost/i3geo/admin
-		
+
 	Contagem do número de acessos de cada tema
 		Foi criada uma nova tabela no sistema de administração para guardar o número de vezes que um tema é acessado. Antes
 		a contagem era mantida na tabela i3geoadmin_temas, cuja coluna nacessos foi depreciada. Essa nova tabela guarda também o dia do acesso.
 		Para criar a tabela veja o item "Outras opções" em http://localhost/i3geo/admin
-		
+
 	O nome dos arquivos js e ccs compactados foram renomeados, incluindo o valor da versão no final. Isso foi feito para se
 	evitar problemas de cache de versões antigas. Os arquivos renomeados foram:
 		classesjs/i3geo_tudo_compacto45.js
 		css/i3geo_ferramentas45.css
-		
+
 	Testado o uso de zlib.output_compression = On no php.ini
-	
+
 	Variáveis ou funções removidas
 		i3GEO.interface (utilize i3GEO.Interface, com "I" maiúsculo)
 		g_postpx
 		g_tipotop
 		g_tipoleft
-		
-	A inicialização da interface Google Earth (interface/googleearth.phtml) foi incluida na tag "body": 
+
+	A inicialização da interface Google Earth (interface/googleearth.phtml) foi incluida na tag "body":
 		<body id="i3geo" onload='i3GEO.inicia();'>
-		
+
 	e-mail institucional (incluido no arquivo de correções SP7)
 		em ms_configura.php pode ser definido um e-mail padrão que é utilizado nas interfaces dos mapas
 		Para que o e-mail definido seja mostrado, é necessário adicionar um elemento HTML com id=emailInstituicao no mapa
@@ -147,20 +149,20 @@ Para a versão 4.4
 	Verifique se o PHP está configurado (php.ini) para permitir a passagem de parâmetros por referência
 	(dependendo da versão do PHP, esse parâmetro é definido como "Off" por default):
 	allow_call_time_pass_reference = On
-	
+
 	Foi acrescentado um novo LAYER em i3geo/aplicmp/geral1.map e geral1windows.map com dados do Open Street Map. Caso vc não
 	queira que essa camada nova apareça, basta removê-las desses arquivos.
-	
+
 	Foi incluida a remoção de cookies no ms_criamapa.php, que inicializa o i3geo ($_COOKIE = array();). Se vc precisa definir cookies,
 	considere a necessidade de comentar a linha de código do ms_criamapa.php.
-	
+
 	Por default, o i3Geo passou a usar a interface openlayers.htm. Se vc quiser modificar isso, altere o ms_configura.php.
 -------------------------------------------------------------------------------------------------
 Para a versão 4.3
 
 	O banco de dados de administração sofreu as seguintes alterações (vc deve incluir as novas colunas
 	para que o i3Geo funcione corretamente:
-	
+
 	- acréscimo das colunas en,es,it nas tabelas (tipo texto)
 		i3geoadmin_menus
 		i3geoadmin_temas
@@ -168,7 +170,7 @@ Para a versão 4.3
 		i3geoadmin_subgrupos
 
 	- acréscimo da coluna kmz_tema em i3geoadmin_temas (tipo texto)
-		
+
 	Foi incluida uma nova opção que permite ao usuário alterar o SQL que faz o acesso aos dados em
 	um LAYER (elemento DATA do mapfile). Mostrar ou não essa opção é controlado por um metadata
 	em cada LAYER. Por default, o i3Geo entende que esse metadata é marcado como SIM. Se vc não quer
@@ -181,92 +183,92 @@ Para a versão 4.1
 Sistema de administração
 
 	A administração do i3geo pode ser feita através de um sistema de formulários  web desde que vc opte por isso.
-	
+
 	Se vc quiser continuar usando os arquivos XML existentes em i3geo/menutemas, não tem problema, mas nesse
 	caso o sistema de administração não lhe será útil.
-	
+
 	A opção pelo uso do sistema de administração é default na versão 4.1. Se vc não quiser usá-la, deverá
 	editar o arquivo i3geo/ms_configura.php e colocar os nomes dos arquivos XML nas opções desejadas. Esse
 	arquivo está documentado, basta ler para entender o que deve ser feito.
-	
+
 	O sistema de administração é acessível no endereço i3geo/admin (http://localhost/i3geo/admin). Apenas editores
 	cadastrados podem usar esse sistema. O cadastramento é feito por número IP (veja i3geo/ms_configura.php).
 	Por default, "localhost" é um editor cadastrado.
-	
+
 	Os arquivos mapfiles existentes em i3geo/temas continuam sendo necessários e vc pode editá-los manualmente
 	ou por meio do sistema de administração.
-	
+
 	Os arquivos XML que vc já possuí em i3geo/menutemas devem ser importados para o sistema de administração.
 	Utilize as opções existentes em i3geo/admin para fazer isso.
-	
+
 	O banco de dados default do i3geo é em SQLITE e fica em i3geo/menutemas/admin.db.
 	Vc deve apagar esse arquivo e criar outro antes de importar seus arquivos XML. No sistema de administração
 	existe uma opção para criar o banco, o que deve ser feito depois que vc apagar o arquivo que vai com o i3geo.
-	
+
 	Se vc não quiser usar o SQLITE vc deve criar um arquivo de conexão com seu banco de dados e registrar o endereço
 	desse arquivo em uma variável no i3geo/ms_configura.php. Um exemplo de arquivo de configuração para POSTGRE
 	pode ser visto em i3geo/admin/php/conexaomm.php. Ao usar a opção de criação do banco existente no sistema
 	de administração, as tabelas serão criadas no banco de dados indicado.
-	
+
 PHP
 
 	O sistema de administração do i3geo é baseado na biblioteca PHP chamada "PDO". Nas versões mais recentes do
 	PHP e no MS4W essa biblioteca já vem habilitada. Se no seu PHP não existir o PDO vc deverá instalá-lo.
-	
+
 YAHOO
 
 	A bibblioteca do YAHOO (YUI) foi atualizada. A versão antiga continua em i3geo/pacotes. Se vc desenvolveu
 	programas baseados na versão antiga, é bom verificar se tudo funcionará corretamente pois o arquivo
 	i3geo/classesjs/i3geo.js agora utiliza essa nova versão da YUI.
-	
+
 JSOBJECTS
 
 	Essa biblioteca não será mais utilizada pelo i3geo, sendo substituída pelo YUI. Se vc utilizava as funcionalidades
 	dessa biblioteca, embutida no i3geo.js, deverá verificar seu código ou então embutir novamente essa
 	biblioteca no i3geo.js. Para isso vc deve alterar o programa i3geo/classesjs/compactajs.php e executá-lo
 	para gerar os arquivos compactados do i3geo.
-	
+
 Classes JS e namespaces
 
 	O modelo de desenvolvimento dos programas javascript estão sendo migrados aos poucos para estruturas
 	baseadas em classes. Isso facilitará a compreensão dos códigos e sua documentação, facilitando a vida
 	dos desenvolvedores e permitindo uma melhor evolução dos códigos.
-	
+
 	As classes desenvolvidas ficarão em arquivos únicos de cada classe e devem usar o namespace i3GEO. Essa
 	regra evitará conflitos entre bibliotecas javascript adicionadas ao i3geo.
 	Exemplo, para remover a acentuação de uma palavra vc pode usar a classe i3GEO.util:
-	
+
 	var palavraAcentuada = "coração";
 	var palavraSemAcento = i3GEO.util.removeAcentos(palavraAcentuada);
-	
+
 Googlemaps
 
 	A chave de registro da API do Google agora deve ser incluída no arquivo i3geo/ms_configura.php na
 	variável $googleApiKey.
-	
+
 	Isso foi necessário porque a API do Google será utilizada em outras ferramentas do i3geo.
-	
+
 	A ferramenta googlemaps agora é chamada com ferramentas/googlemaps/index.php
 
 Idiomas
 
 	A lista de palavras e suas traduções foram retiradas do arquivo i3geo/classesjs/configura.js e incluidas no
 	novo arquivo i3geo/classesjs/dicionario.js
-	
+
 	Foi criada uma classe específica para manipular a internacionalização. Veja a documentação em
 	http://localhost/i3geo/documentacao/files/classesjs/classe_idioma-js.html
-	
+
 Árvore de temas
 
 	A árvore de temas, que aparece na guia "Mapa", agora é montada com a biblioteca YUI. Foi criada uma classe
-	javascript específica para manipular essa árvore. Veja a documentação em 
+	javascript específica para manipular essa árvore. Veja a documentação em
 	http://localhost/i3geo/documentacao/files/classesjs/classe_arvoredecamadas-js.html
 	Os aplicativos que usam árvores também utilizam agora essa classe, como o i3geo/datadownload.htm
 
 Árvore de camadas
 
 	A árvore de camadas, que aparece na guia "+ temas", agora é montada com a biblioteca YUI. Foi criada uma classe
-	javascript específica para manipular essa árvore. Veja a documentação em 
+	javascript específica para manipular essa árvore. Veja a documentação em
 	http://localhost/i3geo/documentacao/files/classesjs/classe_arvoredetemas-js.html
 
 Utilitários
@@ -294,9 +296,9 @@ Variáveis de configuração
 	de configuração do mapa ficam agora na classe i3GEO.configura
 	Por exemplo, para obter o diretório onde o i3geo está instalado, antes utilizava-se g_locaplic, agora utiliza-se
 	i3GEO.configura.locaplic
-	
+
 Chamada aos programas PHP
 
 	Todas as chamadas a programas PHP via AJAX foram concentradas na classe classe_php.js.
 
-	
+
