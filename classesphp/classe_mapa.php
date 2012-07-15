@@ -37,43 +37,43 @@ class Mapa
 {
 	/*
 	Variavel: $mapa
-	
+
 	Objeto mapa
 	*/
 	public $mapa;
 	/*
 	Variavel: $arquivo
-	
+
 	Arquivo map file
 	*/
 	public $arquivo;
 	/*
 	Variavel: $layers
-	
+
 	Objetos layers
 	*/
 	public $layers;
 	/*
 	Variavel: $qyfile
-	
+
 	Nome do arquivo de sele&ccedil;&atilde;o (.qy)
 	*/
-	public $qyfile;	
+	public $qyfile;
 	/*
 	Variavel: $v
-	
+
 	Vers&atilde;o atual do Mapserver (primeiro d&iacute;gito)
 	*/
-	public $v;	
+	public $v;
 /*
 Function: __construct
 
-Cria um objeto mapa 
+Cria um objeto mapa
 
 parameters:
 
 $map_file - Endere&ccedil;o do mapfile no servidor.
-*/  	
+*/
 	function __construct($map_file,$locaplic="")
 	{
   		error_reporting(E_ALL);
@@ -83,7 +83,7 @@ $map_file - Endere&ccedil;o do mapfile no servidor.
   		else
   		include_once("funcoes_gerais.php");
 		$this->v = versao();
-		$this->v = $this->v["principal"];		
+		$this->v = $this->v["principal"];
 		$this->qyfile = str_replace(".map",".qy",$map_file);
   		$this->locaplic = $locaplic;
   		if(!file_exists($map_file))
@@ -103,8 +103,8 @@ $map_file - Endere&ccedil;o do mapfile no servidor.
 /*
 Method: salva
 
-Salva o mapfile atual 
-*/	
+Salva o mapfile atual
+*/
  	function salva()
  	{
 	  	if (connection_aborted()){exit();}
@@ -140,8 +140,8 @@ Muda o OUTPUTFORMAT
 
 Parametro:
 
-tipo {string} - OUTPUTFORMAT que ser&aacute; aplicado. deve existir no mapfile b&aacute;sico que iniciou o i3Geo 
-*/	
+tipo {string} - OUTPUTFORMAT que ser&aacute; aplicado. deve existir no mapfile b&aacute;sico que iniciou o i3Geo
+*/
  	function mudaoutputformat($tipo)
  	{
 		foreach($this->layers as $l)
@@ -211,7 +211,7 @@ string - javascript com os parametros
 				$handle = fopen ($arqS, "r");
 				$conteudo = fread ($handle, filesize ($arqS));
 				fclose ($handle);
-				$nSel = count(unserialize($conteudo)); 
+				$nSel = count(unserialize($conteudo));
 			}
 			$escondido = $oLayer->getmetadata("escondido");
 			if($escondido == "")
@@ -237,7 +237,7 @@ string - javascript com os parametros
 				//
 				$usasld = "nao";
 				if($oLayer->getmetadata("wms_sld_body") !== "" || $oLayer->getmetadata("wms_sld_url") !== "")
-				{$usasld = "sim";}				
+				{$usasld = "sim";}
 				//
 				//verifica se o tema pode receber a opera&ccedil;&atilde;o de zoom para o tema
 				//
@@ -288,10 +288,12 @@ string - javascript com os parametros
 				$wmsurl = "";
 				$wmsformat = "";
 				$wmssrs = "";
+				$wmstile = "";
 				if($ct == 7 && strtoupper($oLayer->getmetadata("cache")) != "SIM"){
 					$wmsurl = ($oLayer->connection)."&layers=".($oLayer->getmetadata("wms_name"))."&style=".($oLayer->getmetadata("wms_style"));
 					$wmsformat = $oLayer->getmetadata("wms_format");
 					$wmssrs = $oLayer->getmetadata("wms_srs");
+					$wmstile = $oLayer->getmetadata("wms_tile");
 				}
 				$tiles = "";
 				if($oLayer->labelitem != "")
@@ -324,6 +326,7 @@ string - javascript com os parametros
 					"wmsurl"=>$wmsurl,
 					"wmsformat"=>$wmsformat,
 					"wmssrs"=>$wmssrs,
+					"wmstile"=>$wmstile,
 					"tiles"=>$tiles,
 					"temporizador"=>($oLayer->getmetadata("temporizador")),
 					"permiteogc"=>($oLayer->getmetadata("permiteogc")),
@@ -389,7 +392,7 @@ Include:
 					}
 				}
 			}
-		}			
+		}
 		$nome = nomeRandomico();
 		//
 		//gera a imagem do mapa
@@ -421,13 +424,13 @@ Include:
 				$mensagemErro .= $error->routine." ".$error->message;
 				$error = $error->next();
 			}
-			ms_ResetErrorList();			
+			ms_ResetErrorList();
 			$mensagemErro = str_replace("'"," ",$mensagemErro);
 			$mensagemErro = str_replace(":"," ",$mensagemErro);
 			$mensagemErro = str_replace("\n"," ",$mensagemErro);
 			$nomer = ($imgo->imagepath)."mapa".$nome.".png";
 			$imgo->saveImage($nomer);
-			
+
 			//
 			//aplica o filtro de imagem se estiver definido em $tipoimagem
 			//
@@ -474,7 +477,7 @@ Include:
 		$res["w"] = $imgo->width;
 		$res["h"] = $imgo->height;
 		$res["mappath"] = $imgo->imagepath;
-		$res["mapurl"] = $imgo->imageurl;		
+		$res["mapurl"] = $imgo->imageurl;
 		$res["erro"] = $mensagemErro;
 		return $res;
 	}
@@ -525,7 +528,7 @@ Ativa/desativa legenda, incluindo ou n&atilde;o no corpo do mapa.
 	function ativalegenda()
 	{
 		$legenda = $this->mapa->legend;
-		$legenda->status == MS_EMBED ? $legenda->set("status",MS_OFF) : $legenda->set("status",MS_EMBED) ; 
+		$legenda->status == MS_EMBED ? $legenda->set("status",MS_OFF) : $legenda->set("status",MS_EMBED) ;
 		return "ok";
 	}
 /*
@@ -671,7 +674,7 @@ nome
 				{
 					$res_count = $layer->getNumresults();
 					if ($res_count > 0)
-					{$final[] = array("tema"=>$layer->name,"nome"=>(pegaNome($layer,"UTF-8")));}					
+					{$final[] = array("tema"=>$layer->name,"nome"=>(pegaNome($layer,"UTF-8")));}
 				}
 				else
 				{$final[] = array("tema"=>$layer->name,"nome"=>(pegaNome($layer,"UTF-8")));}
@@ -853,9 +856,9 @@ $incluitexto - sim|nao
 		//echo $corlinha;
 		//if (file_exists($this->qyfile))
 		//{unlink ($this->qyfile);}
-		//tem erro na vers&atilde;o 6 do Mapserver. J&aacute; abri um ticket no trac da OSGEO 
+		//tem erro na vers&atilde;o 6 do Mapserver. J&aacute; abri um ticket no trac da OSGEO
 		$nlayer = criaLayer($this->mapa,MS_LAYER_LINE,MS_DEFAULT,"Grade de coordenadas","SIM");
-		ms_newgridobj($nlayer);	
+		ms_newgridobj($nlayer);
 		$nlayer->grid->set("labelformat", "DDMMSS");
 		$nlayer->grid->set("maxinterval", $intervalo);
 		$classe = $nlayer->getclass(0);
@@ -944,7 +947,7 @@ $random - indica se os nomes dos novos layers ser&atilde;o modificados ou nao
 			if ((file_exists($locaplic."/temas/".$nome.".php")) || (file_exists($nome.".php"))){
 				include_once($locaplic."/temas/".$nome.".php");
 				if(function_exists($nome)){
-					eval($nome."(\$this->mapa);");	
+					eval($nome."(\$this->mapa);");
 				}
 			}
 			else
@@ -1002,7 +1005,7 @@ $random - indica se os nomes dos novos layers ser&atilde;o modificados ou nao
 							if($sld != "")
 							$nlayer->setmetadata("wms_sld_body",str_replace('"',"'",$sld));
 							$nlayer->set("type",$tipotemp);
-						}						
+						}
 						ms_newLayerObj($this->mapa, $nlayer);
 						$l = $this->mapa->getlayerbyname($nlayer->name);
 						//reposiciona o layer se for o caso
@@ -1117,7 +1120,7 @@ $adicionar - sim|nao for&ccedil;a a adi&ccedil;&atilde;o de um tema se ele n&ati
 			{
 				$this->adicionaTema(implode(",",$adicionar),$this->locaplic,$random="sim");
 				$this->salva();
-				$this->mapa = ms_newMapObj($this->arquivo); 
+				$this->mapa = ms_newMapObj($this->arquivo);
 				$c = $this->mapa->numlayers;
 				for ($i=0;$i < $c;++$i)
 				{$this->layers[] = $this->mapa->getlayer($i);}
@@ -1126,7 +1129,7 @@ $adicionar - sim|nao for&ccedil;a a adi&ccedil;&atilde;o de um tema se ele n&ati
 		if($desligar == "todos")
 		{
 			$desligar = $this->mapa->getalllayernames();
-			$desligar = implode(",",$desligar);	
+			$desligar = implode(",",$desligar);
 		}
 		if ($ligar != "")
 		{
@@ -1192,12 +1195,13 @@ $tiporep - tipo de representa&ccedil;&atilde;o das fei&ccedil;&otilde;es do mapa
 $suportasld - Suporta SLD sim|nao.
 $formatosinfo - lista de formatos da requisi&ccedil;&atilde;o de atributos para a fun&ccedil;&atilde;o getfeatureinfo (default text/plain)
 $time - espec&iacute;fico para WMS-T (par&acirc;mentro wms_time)
+$tile - indica se o WMS e do tipo TILE ou nao (0 ou 1)
 Include:
 <wmswfs.php>
 */
-	function adicionatemawms($tema,$servico,$nome,$proj,$formato,$locaplic,$tipo="",$versao,$nomecamada,$dir_tmp,$imgdir,$imgurl,$tiporep,$suportasld,$formatosinfo="text/plain",$time="")
+	function adicionatemawms($tema,$servico,$nome,$proj,$formato,$locaplic,$tipo="",$versao,$nomecamada,$dir_tmp,$imgdir,$imgurl,$tiporep,$suportasld,$formatosinfo="text/plain",$time="",$tile=0)
 	{
-		//echo $servico;return;
+		//echo $tile;exit;
 		if(file_exists($this->locaplic."/classesphp/wmswfs.php"))
 		include_once($this->locaplic."/classesphp/wmswfs.php");
 		else
@@ -1210,7 +1214,7 @@ Include:
 		if($nomecamada == "default")
 		$nomecamada = $tema;
 		$layer->setmetadata("CLASSE","SIM");
-		$layer->setmetadata("TEXTO","NAO");		
+		$layer->setmetadata("TEXTO","NAO");
 		$layer->setmetadata("tema",$nomecamada);
 		$layer->setmetadata("nomeoriginal",$tema); //nome original do layer no web service
 		$layer->setmetadata("tipooriginal",$tiporep);
@@ -1235,12 +1239,12 @@ Include:
 		$layer->set("name",nomeRandomico());
 		$layer->set("type",MS_LAYER_RASTER);
 		$layer->set("connection",$servico);
-		
+
 		if(ms_GetVersionInt() > 50201)
 		{$layer->setconnectiontype(MS_WMS);}
 		else
 		{$layer->set("connectiontype",MS_WMS);}
-		
+
 		$epsg = "EPSG:4618";
 		$e4291 = "nao";
 		$ecrs = "nao";
@@ -1273,6 +1277,8 @@ Include:
 		$layer->setmetadata("wms_style",$nome);
 		$layer->setmetadata("wms_connectiontimeout","30");
 		$layer->setmetadata("wms_force_separate_request","1");
+		//esse parametro e especifico do i3geo. Se for 1 indica um servico do tipo tile
+		$layer->setmetadata("wms_tile",$tile);
 		if($time != "")
 		$layer->setmetadata("wms_time",$time);
 		//pega o tipo de formato de imagem que deve ser requisitado
@@ -1434,7 +1440,7 @@ Endere&ccedil;o do WMC
 		$eb->set("status",MS_OFF);
 		$this->mapa->save($nomews);
 		return($nomeurl."&service=WMS&request=GetContext&version=1.1.0");
-	}	
+	}
 /*
 Method: adicionaTemaGeoJson
 
@@ -1628,11 +1634,11 @@ $canal - Identificador do canal (ordem em que est&aacute; no RSS)
 				$classe = $layer->getclass(0);
 				$estilo = $classe->getstyle(0);
 				$estilo->set("symbolname","p4");
-				$estilo->set("size",5);		
+				$estilo->set("size",5);
 				$cor = $estilo->color;
 				$cor->setrgb(255,0,0);
 				$coro = $estilo->outlinecolor;
-				$coro->setrgb(255,0,0);				
+				$coro->setrgb(255,0,0);
 			}
 			//$layer->set("transparency",50);
 			$layer->setmetadata("nomeoriginal",basename($nomeshp));

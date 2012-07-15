@@ -212,6 +212,9 @@ function montaDiv(i)
 	ins += "<option value='WMS' ";
 	if (i.tipo_ws == "WMS"){ins += "selected";}
 	ins += " >WMS</option>";
+	ins += "<option value='WMS-Tile' ";
+	if (i.tipo_ws == "WMS-Tile"){ins += "selected";}
+	ins += " >WMS-Tile</option>";
 	ins += "<option value='GEORSS' ";
 	if (i.tipo_ws == "GEORSS"){ins += "selected";}
 	ins += " >GEORSS</option>";

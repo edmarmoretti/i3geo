@@ -1098,7 +1098,7 @@ Acrescenta um novo tema em um arquivo map file tendo como fonte um WMS.
 		include_once("classe_mapa.php");
 		copiaSeguranca($map_file);
 		$m = new Mapa($map_file);
-	 	$m->adicionatemawms($tema,$servico,$nome,$proj,$formato,$locaplic,$tipo,$versao,$nomecamada,$dir_tmp,$imgdir,$imgurl,$tiporep,$suportasld,$formatosinfo,$time);
+	 	$m->adicionatemawms($tema,$servico,$nome,$proj,$formato,$locaplic,$tipo,$versao,$nomecamada,$dir_tmp,$imgdir,$imgurl,$tiporep,$suportasld,$formatosinfo,$time,$tile);
 		$teste = "ok";//testaMapa($map_file,$postgis_mapa);
 		if ($teste == "ok")
 		{$retorno = "ok";$_SESSION["contadorsalva"]++;}

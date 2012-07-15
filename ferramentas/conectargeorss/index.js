@@ -38,7 +38,7 @@ Free Software Foundation, Inc., no endere&ccedil;o
 59 Temple Street, Suite 330, Boston, MA 02111-1307 USA.
 */
 
-parametrosURL();
+//parametrosURL();
 ativaGuias("");
 mostraGuia("guia1");
 //variaveis globais

@@ -2,7 +2,7 @@
 <head>
 <META HTTP-EQUIV="Content-Type" CONTENT="text/html; charset=ISO-8859-1">
 <link rel="stylesheet" type="text/css" href="../../css/i3geo_ferramentas45.css">
-<title></title> 
+<title></title>
 <style type="text/css" >button{background:url(../../imagens/tic.png) 98% 50% no-repeat;}</style>
 <link rel="stylesheet" type="text/css" href="../../pacotes/yui290/build/button/assets/skins/sam/button.css"/>
 <style type="text/css">
@@ -12,12 +12,12 @@ body {
 }
 </style>
 </head>
-<body name="ancora" class="yui-skin-sam" >
+<body class="yui-skin-sam" >
 	<div id=guiasYUI class="yui-navset" style="top:0px;cursor:pointer;left:0px;">
 		<ul class="yui-nav" style="border-width:0pt 0pt 0px;border-color:rgb(240,240,240);border-bottom-color:white;">
-			<li><a href="#ancora"><em><div id="guia1" style="text-align:center;font-size:10px;left:0px;" >Servi&ccedil;os</div></em></a></li>
-			<li><a href="#ancora"><em><div id="guia2" style="text-align:center;font-size:10px;left:0px;" >Metadados</div></em></a></li>
-			<li><a href="#ancora"><em><div id="guia3" style="text-align:center;font-size:10px;left:0px;" >Temas</div></em></a></li>
+			<li><a href="#ancora"><em><span id="guia1" style="text-align:center;font-size:10px;left:0px;" >Servi&ccedil;os</span></em></a></li>
+			<li><a href="#ancora"><em><span id="guia2" style="text-align:center;font-size:10px;left:0px;" >Metadados</span></em></a></li>
+			<li><a href="#ancora"><em><span id="guia3" style="text-align:center;font-size:10px;left:0px;" >Temas</span></em></a></li>
 		</ul>
 	</div>
 	<div id=geral style="left:0px;top:0px;">
@@ -33,7 +33,7 @@ body {
 			<div id=RSSwms style="text-align:left;color:navy;cursor:pointer;"></div>
 		</div>
 		<div class=guiaobj id="guia2obj" style="display:none;left:0px;top:00px">
-			<br><input class=executar type=buttom value="getCapabilities" size=20 onclick="getcapabilities()" /><br>
+			<br><input class=executar type=button value="getCapabilities" size=20 onclick="getcapabilities()" /><br>
 			<div id=resultadoget style="display:block;position:relative;top:5px;left:1px">
 			</div>
 		</div>
@@ -52,7 +52,7 @@ body {
 				<option value="pontual">pontual</option>
 				</select>
 				</div>
-				 
+
 			</div>
 			<div id=listatemas style="display:block;position:relative;top:10px;left:0px;">
 			</div>
@@ -63,7 +63,7 @@ body {
 	</div>
 
 <script src="../i3geo_tudo_compacto.js.php" type="text/javascript"></script>
-<script language="JavaScript" type="text/javascript" src="index.js"></script>
+<script type="text/javascript" src="index.js"></script>
 <script type="text/javascript" >
 //mensagemAjuda("men1",document.getElementById("men1").innerHTML)
 //mensagemAjuda("men2",document.getElementById("men2").innerHTML)
@@ -76,7 +76,7 @@ iniciaListaWS()
 function iniciaListaWS(){
 	g_RSSwms = new Array("")
 	aguarde("block")
-	
+
 	if (document.getElementById("RSSwms"))
 	{
 		if (g_RSSwms.length > 0)
@@ -103,7 +103,7 @@ function mostraRetornowmsRSS(retorno)
 	for (i=0;i<ncanais; i++)
 	{
 		var caso = canais[i]
-		ins += "\<p class=clique onclick=\"registraws('"+caso.link+"','"+caso.id_ws+"')\" \>\<b\>"+caso.title+"\<\/b\>&nbsp;"+caso.description+"&nbsp;("+caso.author+")"
+		ins += "\<p class=clique onclick=\"registraws('"+caso.link+"','"+caso.id_ws+"','"+caso.tipo_ws+"')\" \>\<b\>"+caso.title+"\<\/b\>&nbsp;"+caso.description+"&nbsp;("+caso.author+")"
 		if(caso.nacessos > 0)
 		{
 			var pc = (parseInt(caso.nacessosok) * 100) / parseInt(caso.nacessos)

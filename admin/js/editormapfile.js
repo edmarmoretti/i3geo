@@ -1,4 +1,4 @@
-/* 
+/*
 Title: editormapfile.js
 
 Fun&ccedil;&otilde;es que controlam a interface do editor de mapfiles (temas)
@@ -297,14 +297,14 @@ function montaRaizTema(no,dados)
 		var d = {tipo:"etiqueta",etiquetaLayers:no.data.codigoMap,html:"<i>Layers</i>"};
 		tempNodeR = new YAHOO.widget.HTMLNode(d, no, true,true);
 		tempNodeR.isLeaf = false;
-		
+
 		var conteudo = "<span style=\"cursor:pointer;\" onclick=\"adicionaNovoLayer('"+no.data.codigoMap+"')\" ><img style='position:relative;top:2px' src=\"../imagens/05.png\" /><i>Adicionar um novo</i></span>";
 		var d = {html:conteudo};
 		var tempNode = new YAHOO.widget.HTMLNode(d, tempNodeR, false,true);
-		tempNode.isLeaf = true;		
+		tempNode.isLeaf = true;
 	}
 	for (var i=0, j=dados.layers.length; i<j; i++)
-	{		
+	{
 		tempNode = new YAHOO.widget.HTMLNode(montaNoLayer(no.data.codigoMap,dados.layers[i]), tempNodeR, false,true);
 		tempNode.setDynamicLoad(loadLayerData, 0);
 		tempNode.isLeaf = false;
@@ -384,14 +384,14 @@ function montaParametrosTemas(no,dados,redesenha)
 		var tempNode = new YAHOO.widget.HTMLNode(d, no, false,true);
 		tempNode.isLeaf = true;
 	}
-	
+
     if(!tree.getNodeByProperty("etiquetaDispo",id))
     {
 		conteudo = "<span style=cursor:pointer; onclick=\"editorDispo('"+codigoMap+"','"+codigoLayer+"')\" ><img width='10px' heigth='10px' style=\"position:relative;top:0px\" title='' src=\"../imagens/06.png\" /> Disponibilidade (download, wms,...)</span>";
 		var d = {tipo:"etiquetaDispo",etiquetaDispo:id,html:conteudo};
 		var tempNode = new YAHOO.widget.HTMLNode(d, no, false,true);
 		tempNode.isLeaf = true;
-	}		
+	}
 //rever
     if(!tree.getNodeByProperty("etiquetaMetadados",id))
     {
@@ -410,12 +410,12 @@ function montaParametrosTemas(no,dados,redesenha)
 		var d = {html:conteudo};
 		var tempNode = new YAHOO.widget.HTMLNode(d, tempNodeR, false,true);
 		tempNode.isLeaf = true;
-		
+
 		conteudo = "<span style='cursor:pointer;' onclick=\"classesAuto('"+codigoMap+"','"+codigoLayer+"')\" ><img style='position:relative;top:2px' src=\"../imagens/classificar.gif\" /> Criar classes automaticamente</span>";
 		var d = {html:conteudo};
 		var tempNode = new YAHOO.widget.HTMLNode(d, tempNodeR, false,true);
 		tempNode.isLeaf = true;
-		
+
 		conteudo = "<span style='cursor:pointer;' onclick=\"window.open('../../testamapfile.php?solegenda=sim&map="+no.data.codigoMap+"')\" > <img style='position:relative;top:2px' src=\"../imagens/41.png\" /> Testar</span>";
 		var d = {html:conteudo};
 		var tempNode = new YAHOO.widget.HTMLNode(d, tempNodeR, false,true);
@@ -488,7 +488,7 @@ function montaParametrosClasses(no,dados,redesenha)
 		var d = {tipo:"etiquetaEstilo",etiquetaEstilo:codigoMap+"_"+codigoLayer+"_"+indiceClasse,html:"<i>Estilos</i>"};
 		tempNodeR = new YAHOO.widget.HTMLNode(d, no, false,true);
 		tempNodeR.isLeaf = false;
-		
+
 		conteudo = "<span onclick=\"adicionaNovoEstilo('"+codigoMap+"','"+codigoLayer+"','"+indiceClasse+"')\" style=\"cursor:pointer;\" ><img style=\"position:relative;top:2px\" src=\"../imagens/05.png\" /> Adicionar um novo</span>";
 		var d = {tipo:"etiquetaEstilo",etiquetaEstilo:codigoMap+"_"+codigoLayer+"_"+indiceClasse,html:conteudo};
 		tempNode = new YAHOO.widget.HTMLNode(d, tempNodeR, false,true);
@@ -549,7 +549,7 @@ function editorDeTexto(codigoMap)
 		},
 		failure:core_handleFailure,
 		argument: { foo:"foo", bar:"bar" }
-	}; 
+	};
 	core_makeRequest(sUrl,callback);
 }
 /*
@@ -596,13 +596,13 @@ function verificaOrfaos()
 		},
 		failure:core_handleFailure,
 		argument: { foo:"foo", bar:"bar" }
-	}; 
+	};
 	core_makeRequest(sUrl,callback);
 }
 function excluirOrfao(codigo_tema){
 	excluirMapfile(codigo_tema);
 	YAHOO.example.container.panelEditor.destroy();
-	YAHOO.example.container.panelEditor = null;			
+	YAHOO.example.container.panelEditor = null;
 }
 /*
 Function: adicionaNovoMapfile
@@ -646,7 +646,7 @@ function adicionaNovoMapfile()
 		},
 		failure:core_handleFailure,
 		argument: { foo:"foo", bar:"bar" }
-	}; 
+	};
 	core_makeRequest(sUrl,callback);
 }
 /*
@@ -675,7 +675,7 @@ function adicionaNovoLayer(codigoMap)
 				else
 				{
 					var dados = YAHOO.lang.JSON.parse(o.responseText);
-					var no = tree.getNodeByProperty("etiquetaLayers",codigoMap);					
+					var no = tree.getNodeByProperty("etiquetaLayers",codigoMap);
 					var tempNode = new YAHOO.widget.HTMLNode(montaNoLayer(codigoMap,dados.layers[0]), no, false,true);
 					tempNode.setDynamicLoad(loadLayerData, iconMode);
 					tempNode.isLeaf = false;
@@ -688,7 +688,7 @@ function adicionaNovoLayer(codigoMap)
 		},
 		failure:core_handleFailure,
 		argument: { foo:"foo", bar:"bar" }
-	}; 
+	};
 	core_makeRequest(sUrl,callback);
 }
 /*
@@ -721,8 +721,8 @@ function adicionaNovaClasse(codigoMap,codigoLayer,indiceClasse)
 					var d = conteudoNoClasse(codigoMap,codigoLayer,dados[0].indice,"");
 					var tempNode = new YAHOO.widget.HTMLNode(d,no, false,true);
 					tempNode.setDynamicLoad(loadClasseData, iconMode);
-					tempNode.isLeaf = false;					
-					tree.draw();					
+					tempNode.isLeaf = false;
+					tree.draw();
 					core_carregando("desativa");
 				}
 			}
@@ -730,7 +730,7 @@ function adicionaNovaClasse(codigoMap,codigoLayer,indiceClasse)
 		},
 		failure:core_handleFailure,
 		argument: { foo:"foo", bar:"bar" }
-	}; 
+	};
 	core_makeRequest(sUrl,callback);
 }
 /*
@@ -759,7 +759,7 @@ function classesAuto(codigoMap,codigoLayer)
   				{
   					try
   					{
-						var dados = YAHOO.lang.JSON.parse(o.responseText);			
+						var dados = YAHOO.lang.JSON.parse(o.responseText);
 						var nos = tree.getNodesByProperty("classes",codigoMap+"_"+codigoLayer);
 						if(nos){
 							for (var i=0, j=nos.length; i<j; i++)
@@ -775,7 +775,7 @@ function classesAuto(codigoMap,codigoLayer)
   				},
   				failure:core_handleFailure,
   				argument: { foo:"foo", bar:"bar" }
-			};		
+			};
 			core_makeRequest(sUrl,callback2);
 		}
 		else
@@ -798,7 +798,7 @@ function classesAuto(codigoMap,codigoLayer)
             { label: "Criar classes", value: "OK", checked: false},
             { label: "Cancela", value: "CANCEL", checked: false }
         ]);
-		editorBotoes.on("checkedButtonChange", on_editorCheckBoxChange);	
+		editorBotoes.on("checkedButtonChange", on_editorCheckBoxChange);
 		YAHOO.example.container.panelEditorAutoClasses = new YAHOO.widget.Panel("janela_editor_auto", { fixedcenter:true,close:true,width:"400px", height:"400px",overflow:"auto", visible:false,constraintoviewport:true } );
 		YAHOO.example.container.panelEditorAutoClasses.render();
 		var sUrl = "../php/editormapfile.php?funcao=pegaItensLayer&codigoMap="+codigoMap+"&codigoLayer="+codigoLayer;
@@ -824,7 +824,7 @@ function classesAuto(codigoMap,codigoLayer)
   			},
   			failure:core_handleFailure,
   			argument: { foo:"foo", bar:"bar" }
-		};		
+		};
 		core_makeRequest(sUrl,callback);
 	}
 	YAHOO.example.container.panelEditorAutoClasses.show();
@@ -858,16 +858,16 @@ function adicionaNovoEstilo(codigoMap,codigoLayer,indiceClasse)
 					var dados = YAHOO.lang.JSON.parse(o.responseText);
 					var d = conteudoNoEstilo(codigoMap,codigoLayer,indiceClasse,dados[0].estilo);
 					var tempNode = new YAHOO.widget.HTMLNode(d,no, false,true);
-					tempNode.isLeaf = true;					
-					tree.draw();					
-					core_carregando("desativa");		
+					tempNode.isLeaf = true;
+					tree.draw();
+					core_carregando("desativa");
 				}
 			}
 			catch(e){core_handleFailure(e,o.responseText);}
 		},
 		failure:core_handleFailure,
 		argument: { foo:"foo", bar:"bar" }
-	}; 
+	};
 	core_makeRequest(sUrl,callback);
 }
 /*
@@ -896,7 +896,7 @@ function limparCacheMapfile(codigoMap)
   			},
   			failure:core_handleFailure,
   			argument: { foo:"foo", bar:"bar" }
-		}; 
+		};
 		core_makeRequest(sUrl,callback);
 	};
 	var handleNo = function()
@@ -950,7 +950,7 @@ function clonarMapfile(codigoMap)
   			},
   			failure:core_handleFailure,
   			argument: { foo:"foo", bar:"bar" }
-		}; 
+		};
 		core_makeRequest(sUrl+"&novomap="+novonome,callback);
 	};
 	var handleNo = function()
@@ -1004,7 +1004,7 @@ function excluirClasse(codigoMap,codigoLayer,indiceClasse)
 			},
 			failure:core_handleFailure,
 			argument: { foo:"foo", bar:"bar" }
-		};	
+		};
 		core_makeRequest(sUrl,callback);
 	};
 	var handleNo = function()
@@ -1044,7 +1044,7 @@ function excluirEstilo(codigoMap,codigoLayer,indiceClasse,indiceEstilo)
 			},
 			failure:core_handleFailure,
 			argument: { foo:"foo", bar:"bar" }
-		};	
+		};
 		core_makeRequest(sUrl,callback);
 	};
 	var handleNo = function()
@@ -1179,7 +1179,7 @@ function montaEditorComport(dados)
 	var param = {
 		"linhas":[
 			{ajuda:"Sets the current status of the layer. Often modified by MapServer itself. Default turns the layer on permanently",
-			titulo:"Status",id:"",value:dados.status,tipo:"text",div:"<div id=cStatus ></div>"},		
+			titulo:"Status",id:"",value:dados.status,tipo:"text",div:"<div id=cStatus ></div>"},
 			{ajuda:"Indica se o tema ir&aacute; ser mostrado na ferramenta de identifica&ccedil;&atilde;o",
 			titulo:"Identifica (IDENTIFICA)",id:"",value:dados.identifica,tipo:"text",div:"<div id=cIdentifica ></div>"},
 			{ajuda:"Sets the opacity level (or the inability to see through the layer) of all classed pixels for a given layer. The value can either be an integer in the range (0-100) or the named symbol 'ALPHA'. A value of 100 is opaque and 0 is fully transparent. Implemented in MapServer 5.0, to replace the deprecated TRANSPARENCY parameter.The 'ALPHA' symbol directs the MapServer rendering code to honor the indexed or alpha transparency of pixmap symbols used to style a layer. This is only needed in the case of RGB output formats, and should be used only when necessary as it is expensive to render transparent pixmap symbols onto an RGB map image.",
@@ -1197,7 +1197,7 @@ function montaEditorComport(dados)
 			{ajuda:"Indica se o tema &eacute; mostrado no mapa mas n&atilde;o nas listas da legenda e na guia 'temas'",
 			titulo:"Escondido (ESCONDIDO)",id:"",value:dados.escondido,tipo:"text",div:"<div id=cEscondido ></div>"},
 			{ajuda:"Aplica efeitos de transi&ccedil;&atilde;o nas opera&ccedil;&otilde;es de zoom e pan na interface Openlayers",
-			titulo:"Efeitos de transi&ccedil;&atilde;o zoom (TRANSITIONEFFECT)",id:"",value:dados.transitioneffect,tipo:"text",div:"<div id=cTransitioneffect ></div>"},		
+			titulo:"Efeitos de transi&ccedil;&atilde;o zoom (TRANSITIONEFFECT)",id:"",value:dados.transitioneffect,tipo:"text",div:"<div id=cTransitioneffect ></div>"},
 			{ajuda:"Sets the color index to treat as transparent for raster layers.",
 			titulo:"Offsite (R,G,B) (utilize -1,-1,-1 para anular o valor)",id:"offsite",value:dados.offsite,tipo:"text"},
 			{ajuda:"Maximum scale at which this LAYER is drawn. Scale is given as the denominator of the actual scale fraction, for example for a map at a scale of 1:24,000 use 24000.",
@@ -1213,11 +1213,11 @@ function montaEditorComport(dados)
 			{ajuda:"The scale at which symbols and/or text appear full size. This allows for dynamic scaling of objects based on the scale of the map. If not set then this layer will always appear at the same size. Scaling only takes place within the limits of MINSIZE and MAXSIZE as described above. Scale is given as the denominator of the actual scale fraction, for example for a map at a scale of 1:24,000 use 24000.",
 			titulo:"Symbolscale (utilize -1 para anular o valor)",id:"symbolscale",value:dados.symbolscale,tipo:"text"},
 			{ajuda:"Sensitivity for point based queries (i.e. via mouse and/or map coordinates). Given in TOLERANCEUNITS. If the layer is a POINT or a LINE, the default is 3. For all other layer types, the default is 0. To restrict polygon searches so that the point must occur in the polygon set the tolerance to zero.",
-			titulo:"Tolerance",id:"tolerance",value:dados.tolerance,tipo:"text"},			
+			titulo:"Tolerance",id:"tolerance",value:dados.tolerance,tipo:"text"},
 			{ajuda:" ",
-			titulo:"Tolerance units",id:"",value:dados.toleranceunits,tipo:"text",div:"<div id=cToleranceunits ></div>"},			
+			titulo:"Tolerance units",id:"",value:dados.toleranceunits,tipo:"text",div:"<div id=cToleranceunits ></div>"},
 			{ajuda:"Sets the unit of CLASS object SIZE values (default is pixels). Useful for simulating buffering",
-			titulo:"Sizeunits",id:"",value:dados.sizeunits,tipo:"text",div:"<div id=cSizeunits ></div>"}		
+			titulo:"Sizeunits",id:"",value:dados.sizeunits,tipo:"text",div:"<div id=cSizeunits ></div>"}
 		]
 	};
 	var ins = "<input type=button title='Salvar' value='Salvar' id=salvarEditor />";
@@ -1265,7 +1265,7 @@ function montaEditorComport(dados)
 	temp += core_comboObjeto(objstatus,"valor","texto",dados.status);
 	temp += "</select>";
 	$i("cStatus").innerHTML = temp;
-	
+
 	temp = "<select id='sizeunits' >";
 	temp += core_comboObjeto(objmapunits,"valor","texto",dados.sizeunits);
 	temp += "</select>";
@@ -1304,7 +1304,7 @@ function montaEditorTitulo(dados)
 	ins += core_geraLinhas(param);
 	ins += "<br><br><br>";
 	$i("editor_bd").innerHTML = ins;
-		
+
 	var temp = function()
 	{salvarDadosEditor('titulo',dados.codigoMap,dados.codigoLayer,false);};
 	new YAHOO.widget.Button("salvarEditor",{ onclick: { fn: temp }});
@@ -1330,7 +1330,7 @@ function montaEditorDispo(dados)
 		temp += core_combosimnao(dados.download);
 		temp += "</select>";
 		$i("cDownload").innerHTML = temp;
-	}		
+	}
 	var temp = function()
 	{salvarDadosEditor('dispo',dados.codigoMap,dados.codigoLayer,false);};
 	new YAHOO.widget.Button("salvarEditor",{ onclick: { fn: temp }});
@@ -1354,7 +1354,7 @@ function montaEditorDados(dados)
 		{ajuda:"Ativa ou n&atilde;o a manuten&ccedil;&atilde;o de um cache para armazenar as imagens geradas para montar o mapa. Essa op&ccedil;&atilde;o afeta apenas as interfaces do i3Geo que utilizam o modo TILE (como a interface OpenLayers). O cache &eacute; mantido no diretório tempor&aacute;rio utilizado pelo i3Geo, na pasta chamada cache. Para cada camada &eacute; criada uma sub-pasta. Para limpar o cache, utilize a op&ccedil;&atilde;o existente junto ao nó principal desse mapfile",
 		titulo:"Cache de mapas. Camadas WMS s&atilde;o acessadas diretamente do servidor de origem quando o cache estiver inativo. (CACHE)",id:"",value:dados.cache,tipo:"text",div:"<div id=cCache ></div>"},
 		{ajuda:"Proje&ccedil;&atilde;o",
-		titulo:"Projection",id:"projection",value:dados.projection,tipo:"text"},		
+		titulo:"Projection",id:"projection",value:dados.projection,tipo:"text"},
 		{ajuda:"This parameter allows for data specific attribute filtering that is done at the same time spatial filtering is done, but before any CLASS expressions are evaluated. For OGR and shapefiles the string is simply a mapserver regular expression. For spatial databases the string is a SQL WHERE clause that is valid with respect to the underlying database.For example: FILTER type='road' and size <2",
 		titulo:"Filter",id:"filter",value:dados.filter,tipo:"text"},
 		{ajuda:"Item to use with simple FILTER expressions. OGR and shapefiles only.",
@@ -1380,7 +1380,7 @@ function montaEditorDados(dados)
 	{
 		ins += "<p>O layer possu&iacute; as seguintes colunas na tabela de atributos: ";
 		ins += dados.colunas+"</p><br>";
-	}	
+	}
 	ins += core_geraLinhas(param);
 	ins += "<br><br><br>";
 	$i("editor_bd").innerHTML = ins;
@@ -1395,13 +1395,13 @@ function montaEditorDados(dados)
 		temp += core_comboObjeto(objtipooriginal,"valor","texto",dados.tipooriginal);
 		temp += "</select>";
 		$i("cTipooriginal").innerHTML = temp;
-	}	
-	
+	}
+
 	temp = "<select id='connectiontype' >";
 	temp += core_comboObjeto(objcontype,"valor","texto",dados.connectiontype);
 	temp += "</select>";
 	$i("cConnectiontype").innerHTML = temp;
-	
+
 	temp = "<select id='type' >";
 	temp += core_comboObjeto(objlayertypes,"valor","texto",dados.type);
 	temp += "</select>";
@@ -1412,8 +1412,8 @@ function montaEditorDados(dados)
 		temp += core_combosimnao(dados.convcaracter);
 		temp += "</select>";
 		$i("cConvcaracter").innerHTML = temp;
-	}	
-	
+	}
+
 	var temp = function()
 	{salvarDadosEditor('conexao',dados.codigoMap,dados.codigoLayer,false);};
 	new YAHOO.widget.Button("salvarEditor",{ onclick: { fn: temp }});
@@ -1421,7 +1421,7 @@ function montaEditorDados(dados)
 	var temp = function()
 	{salvarDadosEditor('conexao',dados.codigoMap,dados.codigoLayer,"","",true);};
 	new YAHOO.widget.Button("testarEditor",{ onclick: { fn: temp }});
-	
+
 	core_desativaforms(idsForms);
 	$i("connectiontype").onchange = function(){
 		core_desativaforms(idsForms);
@@ -1511,7 +1511,7 @@ function montaEditorMetadados(dados)
 			titulo:"Etiqueta (TIP)",id:"tip",value:dados.tip,tipo:"text"}
 		]
 	};
-	
+
 	var paramOWS = {
 		"linhas":[
 			{ajuda:"space-delimited list of EPSG projection codes supported by the remote server. You normally get this from the server’s capabilities output. This value should be upper case (EPSG:4236.....not epsg:4236) to avoid problems with case sensitive platforms. The value is used to set the SRS WMS URL parameter",
@@ -1530,7 +1530,7 @@ function montaEditorMetadados(dados)
 			titulo:"wms_auth_type",id:"wms_auth_type",value:dados.wms_auth_type,tipo:"text"},
 			{ajuda:"the maximum time to wait for a remote WMS layer to load, set in seconds (default is 30 seconds). This metadata can be added at the layer level so that it affects only that layer, or it can be added at the map level (in the web object) so that it affects all of the layers. Note that wms_connectiontimeout at the layer level has priority over the map level.",
 			titulo:"wms_connectiontimeout",id:"wms_connectiontimeout",value:dados.wms_connectiontimeout,tipo:"text"},
-			{ajuda:"the bounding box of this layer in geographic coordinates in the format “lon_min lat_min lon_max lat_max”. If it is set then MapServer will request the layer only when the map view overlaps that bounding box. You normally get this from the servers capabilities output.",
+			{ajuda:"the bounding box of this layer in geographic coordinates in the format lon_min lat_min lon_max lat_max. If it is set then MapServer will request the layer only when the map view overlaps that bounding box. You normally get this from the servers capabilities output.",
 			titulo:"wms_latlonboundingbox",id:"wms_latlonboundingbox",value:dados.wms_latlonboundingbox,tipo:"text"},
 			{ajuda:"",
 			titulo:"wms_proxy_auth_type",id:"wms_proxy_auth_type",value:dados.wms_proxy_auth_type,tipo:"text"},
@@ -1538,7 +1538,7 @@ function montaEditorMetadados(dados)
 			titulo:"wms_proxy_host",id:"wms_proxy_host",value:dados.wms_proxy_host,tipo:"text"},
 			{ajuda:"",
 			titulo:"wms_proxy_port",id:"wms_proxy_port",value:dados.wms_proxy_port,tipo:"text"},
-			{ajuda:"the type of the proxy connection. Valid values are ‘http’ and ‘socks5’, which are case sensitive",
+			{ajuda:"the type of the proxy connection. Valid values are http and socks5, which are case sensitive",
 			titulo:"wms_proxy_type",id:"wms_proxy_type",value:dados.wms_proxy_type,tipo:"text"},
 			{ajuda:"",
 			titulo:"wms_proxy_username",id:"wms_proxy_username",value:dados.wms_proxy_username,tipo:"text"},
@@ -1555,7 +1555,9 @@ function montaEditorMetadados(dados)
 			{ajuda:"specifies whether the map background is to be made transparent or not. TRANSPARENT can take on two values, 'TRUE' or 'FALSE'. If not specified, MapServer sets default to 'TRUE'",
 			titulo:"wms_transparent",id:"wms_transparent",value:dados.wms_transparent,tipo:"text"},
 			{ajuda:"value to use for the TIME parameter in GetMap requests for this layer",
-			titulo:"wms_time",id:"wms_time",value:dados.wms_time,tipo:"text"}
+			titulo:"wms_time",id:"wms_time",value:dados.wms_time,tipo:"text"},
+			{ajuda:"Metadata espec&iacut;fico do i3Geo. Indica se o layer &eacute; do tipo TILECACHE",
+			titulo:"&Eacute; do tipo TileCache (0 ou 1 indicam n&atilde;o ou sim) - wms_tile",id:"wms_tile",value:dados.wms_tile,tipo:"text"}
 		]
 	};
 	var ins = "<input type=button title='Salvar' value='Salvar' id=salvarEditor />";
@@ -1570,12 +1572,12 @@ function montaEditorMetadados(dados)
 	if(dados.connectiontype !== 7 && dados.connectiontype !== 9)
 	{ins += core_geraLinhas(paramNaoOWS);}
 	if(dados.type === 3)
-	{ins += core_geraLinhas(paramRaster);}	
+	{ins += core_geraLinhas(paramRaster);}
 	if(dados.connectiontype === 7 || dados.connectiontype === 9)
 	{ins += core_geraLinhas(paramOWS);}
 	ins += "<br><br><br>";
 	$i("editor_bd").innerHTML = ins;
-	
+
 	if($i("cEditorsql")){
 		temp = "<select id='editorsql' >";
 		temp += core_combosimnao(dados.editorsql);
@@ -1587,7 +1589,7 @@ function montaEditorMetadados(dados)
 		temp += core_combosimnao(dados.ltempoconvencode);
 		temp += "</select>";
 		$i("cLtempoconvencode").innerHTML = temp;
-	}	
+	}
 	var temp = function()
 	{salvarDadosEditor('metadados',dados.codigoMap,dados.codigoLayer);};
 	new YAHOO.widget.Button("salvarEditor",{ onclick: { fn: temp }});
@@ -1629,7 +1631,7 @@ function montaEditorClasseGeral(dados)
 	ins += core_geraLinhas(param);
 	ins += "<br><br><br>";
 	$i("editor_bd").innerHTML = ins;
-		
+
 	temp = "<select id='status' >";
 	temp += core_comboObjeto(objstatus,"valor","texto",dados.status);
 	temp += "</select>";
@@ -1713,12 +1715,12 @@ function montaEditorClasseLabel(dados)
 	temp += core_comboObjeto(dados.fontes,"","",dados.font);
 	temp += "</select>";
 	$i("cFont").innerHTML = temp;
-	
+
 	temp = "<select id='type' >";
 	temp += core_comboObjeto(objfonttypes,"valor","texto",dados.type);
 	temp += "</select>";
 	$i("cType").innerHTML = temp;
-	
+
 	temp = "<select id='partials' >";
 	temp += core_comboObjeto(objbool_tf,"valor","texto",dados.partials);
 	temp += "</select>";
@@ -1775,12 +1777,12 @@ function montaEditorEstilo(dados)
 	var ins = "<input type=button title='Salvar' value='Salvar' id=salvarEditor />";
 	ins += core_geraLinhas(param);
 	ins += "<br><br><br>";
-	$i("editor_bd").innerHTML = ins;	
+	$i("editor_bd").innerHTML = ins;
 
 	temp = "<input type='text' value='"+dados.symbolname+"' id='symbolname' size='50'>";
 	temp += "<div id='listaSimbolos' style='overflow:auto;width:400px;height:50px;'></div>";
 	$i("cSymbolname").innerHTML = temp;
-	
+
 	var temp = function()
 	{salvarDadosEditor('estilo',dados.codigoMap,dados.codigoLayer,dados.indiceClasse,dados.indiceEstilo);};
 	new YAHOO.widget.Button("salvarEditor",{ onclick: { fn: temp }});
@@ -1806,7 +1808,7 @@ function montaEditorEstilo(dados)
   		},
   		failure:core_handleFailure,
   		argument: { foo:"foo", bar:"bar" }
-	}; 
+	};
 	core_makeRequest(sUrl,callback,'POST');
 }
 /*
@@ -1874,7 +1876,7 @@ function salvarDadosEditor(tipo,codigoMap,codigoLayer,indiceClasse,indiceEstilo,
 	}
 	if(tipo == "metadados")
 	{
-		campos = new Array("legendaimg","wms_srs","wms_name","wms_server_version","wms_format","wms_auth_username","wms_auth_password","wms_auth_type","wms_connectiontimeout","wms_latlonboundingbox","wms_proxy_auth_type","wms_proxy_host","wms_proxy_port","wms_proxy_type","wms_proxy_username","wms_proxy_password","wms_sld_body","wms_sld_url","wms_style","wms_bgcolor","wms_transparent","wms_time","itembuscarapida","ltempoformatodata","ltempoiteminicio","ltempoitemfim","ltempoitemtitulo","ltempoitemdescricao","ltempoitemtip","ltempoitemimagem","ltempoitemicone","ltempoitemlink","editorsql","ltempoconvencode","description_template","palletefile","palletestep","classestamanho","classessimbolo","classescor","classesnome","classesitem","identifica","transitioneffect","extensao","escondido","classe","tip","itenslink","itens","itensdesc");
+		campos = new Array("wms_tile","legendaimg","wms_srs","wms_name","wms_server_version","wms_format","wms_auth_username","wms_auth_password","wms_auth_type","wms_connectiontimeout","wms_latlonboundingbox","wms_proxy_auth_type","wms_proxy_host","wms_proxy_port","wms_proxy_type","wms_proxy_username","wms_proxy_password","wms_sld_body","wms_sld_url","wms_style","wms_bgcolor","wms_transparent","wms_time","itembuscarapida","ltempoformatodata","ltempoiteminicio","ltempoitemfim","ltempoitemtitulo","ltempoitemdescricao","ltempoitemtip","ltempoitemimagem","ltempoitemicone","ltempoitemlink","editorsql","ltempoconvencode","description_template","palletefile","palletestep","classestamanho","classessimbolo","classescor","classesnome","classesitem","identifica","transitioneffect","extensao","escondido","classe","tip","itenslink","itens","itensdesc");
 		par = "&codigoMap="+codigoMap+"&codigoLayer="+codigoLayer;
 		prog = "../php/editormapfile.php?funcao=alterarMetadados";
 	}
@@ -1935,7 +1937,7 @@ function salvarDadosEditor(tipo,codigoMap,codigoLayer,indiceClasse,indiceEstilo,
   						if(tipo=="dispo")
   						{montaEditorDispo(YAHOO.lang.JSON.parse(o.responseText));}
   						if(tipo=="titulo")
-  						{montaEditorTitulo(YAHOO.lang.JSON.parse(o.responseText));}						
+  						{montaEditorTitulo(YAHOO.lang.JSON.parse(o.responseText));}
   						if(tipo=="metadados")
   						{montaEditorMetadados(YAHOO.lang.JSON.parse(o.responseText));}
   						if(tipo=="geral")
@@ -1946,7 +1948,7 @@ function salvarDadosEditor(tipo,codigoMap,codigoLayer,indiceClasse,indiceEstilo,
   							{
   								core_pegaMapfiles("montaArvore()");
 								YAHOO.example.container.panelEditor.destroy();
-								YAHOO.example.container.panelEditor = null;  							
+								YAHOO.example.container.panelEditor = null;
   							}
   						}
   						if(tipo=="classeGeral")
@@ -1966,7 +1968,7 @@ function salvarDadosEditor(tipo,codigoMap,codigoLayer,indiceClasse,indiceEstilo,
   		},
   		failure:core_handleFailure,
   		argument: { foo:"foo", bar:"bar" }
-	}; 
+	};
 	core_makeRequest(sUrl,callback,'POST');
 }
 function sobeDesce(movimento,tipo,codigoMap,codigoLayer,indiceClasse,indiceEstilo)
@@ -2006,7 +2008,7 @@ function sobeDesce(movimento,tipo,codigoMap,codigoLayer,indiceClasse,indiceEstil
 			if(tipo == "estilo")
 			{
 				no = tree.getNodeByProperty("id",codigoMap+"_"+codigoLayer+"_"+indiceClasse);
-				tree.removeChildren(no); 
+				tree.removeChildren(no);
 				no.expand();
 			}
 
@@ -2016,7 +2018,7 @@ function sobeDesce(movimento,tipo,codigoMap,codigoLayer,indiceClasse,indiceEstil
 	};
 	if(movimenta)
 	{
-		var sUrl = "../php/editormapfile.php?funcao=movimentaNo&tipo="+tipo+"&movimento="+movimento+"&codigoMap="+codigoMap+"&codigoLayer="+codigoLayer+"&indiceClasse="+indiceClasse+"&indiceEstilo="+indiceEstilo;		
+		var sUrl = "../php/editormapfile.php?funcao=movimentaNo&tipo="+tipo+"&movimento="+movimento+"&codigoMap="+codigoMap+"&codigoLayer="+codigoLayer+"&indiceClasse="+indiceClasse+"&indiceEstilo="+indiceEstilo;
 		core_carregando("ativa");
 		core_carregando(" modificando a ordem");
 		core_makeRequest(sUrl,callback);

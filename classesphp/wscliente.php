@@ -77,7 +77,7 @@ $tipo {string} - Tipo do servi&ccedil;o WMS|WFS.
 
 Retorno:
 
-{JSON} - Objeto JSON com as marca&ccedil;&otilde;es do XML resultante convertidas para HTML 
+{JSON} - Objeto JSON com as marca&ccedil;&otilde;es do XML resultante convertidas para HTML
 */
 function getcapabilities()
 {
@@ -250,7 +250,7 @@ function dadosWS()
 		$linhas = explode("|",$param);
 		if (count($linhas) == 0){$linhas[] = $param;}
 		foreach($linhas as $linha)
-		{	
+		{
 			$p = explode("*",$linha);
 			if (($p[1] == "null") || ($p[1] == "")){$p[1] = null;}
 			$parametros = array_merge(array($p[0]=>$p[1]),$parametros);
@@ -277,7 +277,7 @@ function dadosWS()
 	}
 	if (function_exists("mb_convert_encoding"))
 	{$cp->set_data(mb_convert_encoding($retorna,"UTF-8","ISO-88591"));}
-	else 
+	else
 	{$cp->set_data($retorna);}
 }
 //le par&acirc;metros de uma fun&ccedil;&atilde;o de um WS
@@ -344,7 +344,7 @@ function parFuncoesws()
 									{
 										$t = explode(":",$xx['parts'][$v]);
 										$retorna[] = $v."#".$t[2];
-									}									
+									}
 								}
 							}
 						}
@@ -357,7 +357,7 @@ function parFuncoesws()
 	{$cp->set_data(implode("|",$retorna));}
 	else
 	{$cp->set_data("");}
-	
+
 }
 //le links de RSS para ws
 if ($funcao == "listaRSSws")
@@ -412,7 +412,7 @@ function listaRSSws2()
 				$canali = simplexml_load_string(geraXmlGeorss($locaplic));
 				$endereco = "admin/xmlgeorss.php";
 			}
-			if($tipo == "WMS")
+			if($tipo == "WMS" || $tipo == "WMS-Tile")
 			{
 				$canali = simplexml_load_string(geraXmlWMS($locaplic));
 				$endereco = "admin/xmlservicoswms.php";
@@ -430,7 +430,7 @@ function listaRSSws2()
 		}
 		else
 		{$canali = simplexml_load_file($rss);}
-		$linhas[] = "<a href='".$endereco."' target=blank ><img style='border:0px solid white' src='imagens/rss.gif' /></a>####";
+		$linhas[] = "<a href='".$endereco."' target=blank ><img style='border:0px solid white' src='../../imagens/rss.gif' /></a>####";
 		//var_dump($canali);
 		foreach ($canali->channel->item as $item)
 		{
@@ -482,7 +482,7 @@ function listaRSSwsARRAY()
 	{
 		if($r == "" || $r == " ")
 		{
-			
+
 			if($tipo == "GEORSS")
 			{
 				$canali = simplexml_load_string(geraXmlGeorss($locaplic));
@@ -493,7 +493,7 @@ function listaRSSwsARRAY()
 				$canali = simplexml_load_string(geraXmlKmlrss($locaplic));
 				$linkrss = $urli3geo."/admin/xmlkmlrss.php";
 			}
-			if($tipo == "WMS")
+			if($tipo == "WMS" || $tipo == "WMS-Tile")
 			{
 				$canali = simplexml_load_string(geraXmlWMS($locaplic));
 				$linkrss = $urli3geo."/admin/xmlservicoswms.php";
@@ -502,7 +502,7 @@ function listaRSSwsARRAY()
 			{
 				$canali = simplexml_load_string(geraXmlWS($locaplic));
 				$linkrss = $urli3geo."/admin/xmlservicosws.php";
-			}	
+			}
 			if($tipo == "DOWNLOAD")
 			{
 				$canali = simplexml_load_string(geraXmlDownload($locaplic));
@@ -512,16 +512,16 @@ function listaRSSwsARRAY()
 		else
 		{$canali = simplexml_load_file($rss);}
 		if($r != "")
-		$linhas["rss"] = "<a href='".$r."' target=blank ><img style='border:0px solid white;' src='imagens/rss.gif' /></a>";
+		$linhas["rss"] = "<a href='".$r."' target=blank ><img style='border:0px solid white;' src='../../imagens/rss.gif' /></a>";
 		else
 		{
-			$linhas["rss"] = "<a href='".$linkrss."' target=blank ><img style='border:0px solid white;' src='imagens/rss.gif' /></a>";			
+			$linhas["rss"] = "<a href='".$linkrss."' target=blank ><img style='border:0px solid white;' src='../../imagens/rss.gif' /></a>";
 		}
 		//var_dump($canali);
 		$canais = array();
 		foreach ($canali->channel->item as $item)
 		{
-			$canais[] = array("id_ws"=>(ixml($item,"id")),"title"=>(ixml($item,"title")),"description"=>(ixml($item,"description")),"link"=>(ixml($item,"link")),"author"=>(ixml($item,"author")),"nacessos"=>(ixml($item,"nacessos")),"nacessosok"=>(ixml($item,"nacessosok")));
+			$canais[] = array("id_ws"=>(ixml($item,"id")),"title"=>(ixml($item,"title")),"description"=>(ixml($item,"description")),"link"=>(ixml($item,"link")),"author"=>(ixml($item,"author")),"nacessos"=>(ixml($item,"nacessos")),"nacessosok"=>(ixml($item,"nacessosok")),"tipo_ws"=>(ixml($item,"tipo")));
 		}
 		$linhas["canais"] = $canais;
 	}
@@ -575,7 +575,7 @@ function listaRSSws()
 		$retorna = str_replace("\n","",$retorna);
 		if (function_exists("mb_convert_encoding"))
 		{$retorna = mb_convert_encoding($retorna,"UTF-8","ISO-88591");}
-		else 
+		else
 		{$retorna = $retorna;}
 	}
 	else {$retorna = $erro;}

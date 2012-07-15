@@ -1625,12 +1625,13 @@ function pegaMetadados()
 		$dados["wms_bgcolor"] = $layer->getmetadata("wms_bgcolor");
 		$dados["wms_transparent"] = $layer->getmetadata("wms_transparent");
 		$dados["wms_time"] = $layer->getmetadata("wms_time");
+		$dados["wms_tile"] = $layer->getmetadata("wms_tile");
 	}
 	return $dados;
 }
 function alterarMetadados()
 {
-	global $tipooriginal,$wms_srs,$wms_name,$wms_server_version,$wms_format,$wms_auth_username,$wms_auth_password,$wms_auth_type,$wms_connectiontimeout,$wms_latlonboundingbox,$wms_proxy_auth_type,$wms_proxy_host,$wms_proxy_port,$wms_proxy_type,$wms_proxy_username,$wms_proxy_password,$wms_sld_body,$wms_sld_url,$wms_style,$wms_bgcolor,$wms_transparent,$wms_time,$itembuscarapida,$iconetema,$ltempoformatodata,$ltempoconvencode,$ltempoiteminicio,$ltempoitemfim,$ltempoitemtitulo,$ltempoitemdescricao,$ltempoitemtip,$ltempoitemimagem,$ltempoitemicone,$ltempoitemlink,$description_template,$palletestep,$palletefile,$codigoMap,$codigoLayer,$locaplic,$classestamanho,$classessimbolo,$classescor,$classesnome,$classesitem,$mensagem,$extensao,$tip,$itenslink,$itens,$itensdesc,$editorsql;
+	global $tipooriginal,$wms_srs,$wms_name,$wms_server_version,$wms_format,$wms_auth_username,$wms_auth_password,$wms_auth_type,$wms_connectiontimeout,$wms_latlonboundingbox,$wms_proxy_auth_type,$wms_proxy_host,$wms_proxy_port,$wms_proxy_type,$wms_proxy_username,$wms_proxy_password,$wms_sld_body,$wms_sld_url,$wms_style,$wms_bgcolor,$wms_transparent,$wms_time,$wms_tile,$itembuscarapida,$iconetema,$ltempoformatodata,$ltempoconvencode,$ltempoiteminicio,$ltempoitemfim,$ltempoitemtitulo,$ltempoitemdescricao,$ltempoitemtip,$ltempoitemimagem,$ltempoitemicone,$ltempoitemlink,$description_template,$palletestep,$palletefile,$codigoMap,$codigoLayer,$locaplic,$classestamanho,$classessimbolo,$classescor,$classesnome,$classesitem,$mensagem,$extensao,$tip,$itenslink,$itens,$itensdesc,$editorsql;
 	$dados = array();
 	$mapfile = $locaplic."/temas/".$codigoMap.".map";
 	$mapa = ms_newMapObj($mapfile);
@@ -1698,6 +1699,8 @@ function alterarMetadados()
 			$layer->setmetadata("wms_transparent",$wms_transparent);
 		if($wms_time != "")
 			$layer->setmetadata("wms_time",$wms_time);
+		if($wms_tile != "")
+			$layer->setmetadata("wms_tile",$wms_tile);
 		$layer->setmetadata("tipooriginal",$tipooriginal);
 	}
 	$mapa->save($mapfile);

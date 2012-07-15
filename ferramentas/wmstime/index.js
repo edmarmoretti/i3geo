@@ -34,7 +34,7 @@ GNU junto com este programa; se não, escreva para a
 Free Software Foundation, Inc., no endere&ccedil;o
 59 Temple Street, Suite 330, Boston, MA 02111-1307 USA.
 */
-parametrosURL();
+//parametrosURL();
 //tipo = 1 anual, 2 mensal, 3 diario
 wms_configura = {
 	"1": {

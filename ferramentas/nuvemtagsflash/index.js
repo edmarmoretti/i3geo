@@ -38,7 +38,7 @@ function iniciaNuvem(){
 
 	}();
 	aguarde("block");
-	parametrosURL();
+	//parametrosURL();
 	inicio = 0;
 	tagsFlash;
 	palavra = "";

@@ -115,7 +115,7 @@ function geraXmlSistemas($perfil,$locaplic,$editores)
 	$xml .= "</SISTEMAS>\n";
 	$dbh = null;
 	$dbhw = null;
-	return $xml;	
+	return $xml;
 }
 /*
 Function: geraRSScomentariosTemas
@@ -135,7 +135,7 @@ RSS
 function geraRSScomentariosTemas($locaplic,$id_tema="")
 {
 	global $esquemaadmin;
-	$sql = "select b.nome_tema||' '||a.data as nome_ws,a.openidnome||' '||a.openidurl||' &amp;lt;br&amp;gt;'||a.comentario as desc_ws, a.openidnome as autor_ws, b.link_tema as link_ws from ".$esquemaadmin."i3geoadmin_comentarios as a,".$esquemaadmin."i3geoadmin_temas as b where a.id_tema = b.id_tema ";
+	$sql = "select '' as tipo_ws, b.nome_tema||' '||a.data as nome_ws,a.openidnome||' '||a.openidurl||' &amp;lt;br&amp;gt;'||a.comentario as desc_ws, a.openidnome as autor_ws, b.link_tema as link_ws from ".$esquemaadmin."i3geoadmin_comentarios as a,".$esquemaadmin."i3geoadmin_temas as b where a.id_tema = b.id_tema ";
 	if($id_tema != "")
 	{$sql .= " and a.id_tema = $id_tema ";}
 	return geraXmlRSS($locaplic,$sql,"Lista de comentarios");
@@ -158,7 +158,7 @@ RSS
 function geraRSStemas($locaplic,$id_n2)
 {
 	global $esquemaadmin;
-	$sql = "select t.codigo_tema as id_ws,t.nome_tema as nome_ws,'' as desc_ws,'php/parsemapfile.php?id='||t.codigo_tema as link_ws,t.link_tema as autor_ws from ".$esquemaadmin."i3geoadmin_n3 as n3,".$esquemaadmin."i3geoadmin_temas as t where t.id_tema = n3.id_tema and n3.id_n2 = '$id_n2' and n3.n3_perfil = '' order by nome_ws"; 
+	$sql = "select '' as tipo_ws, t.codigo_tema as id_ws,t.nome_tema as nome_ws,'' as desc_ws,'php/parsemapfile.php?id='||t.codigo_tema as link_ws,t.link_tema as autor_ws from ".$esquemaadmin."i3geoadmin_n3 as n3,".$esquemaadmin."i3geoadmin_temas as t where t.id_tema = n3.id_tema and n3.id_n2 = '$id_n2' and n3.n3_perfil = '' order by nome_ws";
 	return geraXmlRSS($locaplic,$sql,"Lista de temas");
 }
 /*
@@ -181,7 +181,7 @@ RSS
 function geraRSStemasRaiz($locaplic,$id,$nivel)
 {
 	global $esquemaadmin;
-	$sql = "select t.codigo_tema as id_ws,t.nome_tema as nome_ws,'' as desc_ws,'php/parsemapfile.php?id='||t.codigo_tema as link_ws,t.link_tema as autor_ws from ".$esquemaadmin."i3geoadmin_raiz as r,".$esquemaadmin."i3geoadmin_temas as t where t.id_tema = r.id_tema and r.nivel = '$nivel' and r.id_nivel = '$id' order by nome_ws"; 
+	$sql = "select '' as tipo_ws, t.codigo_tema as id_ws,t.nome_tema as nome_ws,'' as desc_ws,'php/parsemapfile.php?id='||t.codigo_tema as link_ws,t.link_tema as autor_ws from ".$esquemaadmin."i3geoadmin_raiz as r,".$esquemaadmin."i3geoadmin_temas as t where t.id_tema = r.id_tema and r.nivel = '$nivel' and r.id_nivel = '$id' order by nome_ws";
 	return geraXmlRSS($locaplic,$sql,"Temas na raiz");
 }
 /*
@@ -202,7 +202,7 @@ RSS
 function geraRSSsubgrupos($locaplic,$id_n1)
 {
 	global $esquemaadmin;
-	$sql = "select n2.id_n2 as id_ws,g.nome_subgrupo as nome_ws,'' as desc_ws,'rsstemas.php?id='||n2.id_n2 as link_ws,'' as autor_ws from ".$esquemaadmin."i3geoadmin_n2 as n2,".$esquemaadmin."i3geoadmin_subgrupos as g where g.id_subgrupo = n2.id_subgrupo and n2.id_n1 = '$id_n1' and n2.n2_perfil = '' order by nome_ws"; 
+	$sql = "select '' as tipo_ws, n2.id_n2 as id_ws,g.nome_subgrupo as nome_ws,'' as desc_ws,'rsstemas.php?id='||n2.id_n2 as link_ws,'' as autor_ws from ".$esquemaadmin."i3geoadmin_n2 as n2,".$esquemaadmin."i3geoadmin_subgrupos as g where g.id_subgrupo = n2.id_subgrupo and n2.id_n1 = '$id_n1' and n2.n2_perfil = '' order by nome_ws";
 	return geraXmlRSS($locaplic,$sql,"Lista de sub-grupos");
 }
 /*
@@ -221,7 +221,7 @@ RSS
 function geraRSSgrupos($locaplic)
 {
 	global $esquemaadmin;
-	$sql = "select n1.id_n1 as id_ws, g.nome_grupo as nome_ws,'rsstemasraiz.php?nivel=1&id='||n1.id_n1 as desc_ws,'rsssubgrupos.php?id='||n1.id_n1 as link_ws,'' as autor_ws "; 
+	$sql = "select '' as tipo_ws, n1.id_n1 as id_ws, g.nome_grupo as nome_ws,'rsstemasraiz.php?nivel=1&id='||n1.id_n1 as desc_ws,'rsssubgrupos.php?id='||n1.id_n1 as link_ws,'' as autor_ws ";
 	$sql .= "from ".$esquemaadmin."i3geoadmin_n1 as n1,".$esquemaadmin."i3geoadmin_grupos as g ";
 	$sql .= "where g.id_grupo = n1.id_grupo and n1.n1_perfil = '' group by nome_ws,desc_ws,link_ws,autor_ws order by nome_ws";
 	return geraXmlRSS($locaplic,$sql,"Lista de grupos");
@@ -299,7 +299,7 @@ RSS
 function geraXmlWMS($locaplic)
 {
 	global $esquemaadmin;
-	$sql = "select * from ".$esquemaadmin."i3geoadmin_ws where tipo_ws = 'WMS' and nome_ws <> '' order by nome_ws";
+	$sql = "select * from ".$esquemaadmin."i3geoadmin_ws where (tipo_ws = 'WMS' or tipo_ws = 'WMS-Tile') and nome_ws <> '' order by nome_ws";
 	return geraXmlRSS($locaplic,$sql,"Web services WMS-OGC");
 }
 /*
@@ -339,18 +339,18 @@ function geraRSStemasDownload($locaplic)
 	global $esquemaadmin;
 	$protocolo = explode("/",$_SERVER['SERVER_PROTOCOL']);
 	$url = strtolower($protocolo[0])."://".$_SERVER['HTTP_HOST'].(str_replace("/admin/rsstemasdownload.php","",$_SERVER['PHP_SELF']));
-	$sql = "select '".$url."/datadownload.htm?'||codigo_tema as link_ws, g.nome_grupo||' -> '||sg.nome_subgrupo||' -> '||nome_tema as nome_ws, desc_tema as desc_ws, link_tema as autor_ws ";
+	$sql = "select '' as tipo_ws,'".$url."/datadownload.htm?'||codigo_tema as link_ws, g.nome_grupo||' -> '||sg.nome_subgrupo||' -> '||nome_tema as nome_ws, desc_tema as desc_ws, link_tema as autor_ws ";
 	$sql .= "
 		from ".$esquemaadmin."i3geoadmin_temas as t,".$esquemaadmin."i3geoadmin_n3 as n3, ".$esquemaadmin."i3geoadmin_n2 as n2, ".$esquemaadmin."i3geoadmin_n1 as n1, ".$esquemaadmin."i3geoadmin_grupos as g, ".$esquemaadmin."i3geoadmin_subgrupos as sg
-		where 
-		t.id_tema = n3.id_tema 
-		and n3.id_n2 = n2.id_n2 
+		where
+		t.id_tema = n3.id_tema
+		and n3.id_n2 = n2.id_n2
 		and n2.id_subgrupo = sg.id_subgrupo
-		and n2.id_n1 = n1.id_n1 
+		and n2.id_n1 = n1.id_n1
 		and n1.id_grupo = g.id_grupo
-		and (t.download_tema != 'nao' and t.download_tema != 'NAO') 
-		and t.tipoa_tema != 'WMS' 
-		and n3.n3_perfil = '' 
+		and (t.download_tema != 'nao' and t.download_tema != 'NAO')
+		and t.tipoa_tema != 'WMS'
+		and n3.n3_perfil = ''
 		and n2.n2_perfil = ''
 		and n1.n1_perfil = ''
 	";
@@ -375,17 +375,17 @@ function geraRSStemasKml($locaplic)
 	global $esquemaadmin;
 	$protocolo = explode("/",$_SERVER['SERVER_PROTOCOL']);
 	$url = strtolower($protocolo[0])."://".$_SERVER['HTTP_HOST'].(str_replace("/admin/rsstemaskml.php","",$_SERVER['PHP_SELF']));
-	$sql = "select '".$url."/pacotes/kmlmapserver/kmlservice.php?request=kml&map='||codigo_tema||'&typename='||codigo_tema as link_ws, g.nome_grupo||' -> '||sg.nome_subgrupo||' -> '||nome_tema as nome_ws, desc_tema as desc_ws, link_tema as autor_ws ";
+	$sql = "select '' as tipo_ws,'".$url."/pacotes/kmlmapserver/kmlservice.php?request=kml&map='||codigo_tema||'&typename='||codigo_tema as link_ws, g.nome_grupo||' -> '||sg.nome_subgrupo||' -> '||nome_tema as nome_ws, desc_tema as desc_ws, link_tema as autor_ws ";
 	$sql .= "
 		from ".$esquemaadmin."i3geoadmin_temas as t,".$esquemaadmin."i3geoadmin_n3 as n3, ".$esquemaadmin."i3geoadmin_n2 as n2, ".$esquemaadmin."i3geoadmin_n1 as n1, ".$esquemaadmin."i3geoadmin_grupos as g, ".$esquemaadmin."i3geoadmin_subgrupos as sg
-		where 
-		t.id_tema = n3.id_tema 
-		and n3.id_n2 = n2.id_n2 
+		where
+		t.id_tema = n3.id_tema
+		and n3.id_n2 = n2.id_n2
 		and n2.id_subgrupo = sg.id_subgrupo
-		and n2.id_n1 = n1.id_n1 
+		and n2.id_n1 = n1.id_n1
 		and n1.id_grupo = g.id_grupo
 		and (t.kml_tema != 'nao' and t.kml_tema != 'NAO')
-		and n3.n3_perfil = '' 
+		and n3.n3_perfil = ''
 		and n2.n2_perfil = ''
 		and n1.n1_perfil = ''
 	";
@@ -410,18 +410,18 @@ function geraRSStemasOgc($locaplic)
 	global $esquemaadmin;
 	$protocolo = explode("/",$_SERVER['SERVER_PROTOCOL']);
 	$url = strtolower($protocolo[0])."://".$_SERVER['HTTP_HOST'].(str_replace("/admin/rsstemasogc.php","",$_SERVER['PHP_SELF']));
-	$sql = "select '".$url."/ogc.php?request=getcapabilities&service=wms&tema='||codigo_tema as link_ws, g.nome_grupo||' -> '||sg.nome_subgrupo||' -> '||nome_tema as nome_ws, desc_tema as desc_ws, link_tema as autor_ws ";
+	$sql = "select '' as tipo_ws,'".$url."/ogc.php?request=getcapabilities&service=wms&tema='||codigo_tema as link_ws, g.nome_grupo||' -> '||sg.nome_subgrupo||' -> '||nome_tema as nome_ws, desc_tema as desc_ws, link_tema as autor_ws ";
 	$sql .= "
 		from ".$esquemaadmin."i3geoadmin_temas as t,".$esquemaadmin."i3geoadmin_n3 as n3, ".$esquemaadmin."i3geoadmin_n2 as n2, ".$esquemaadmin."i3geoadmin_n1 as n1, ".$esquemaadmin."i3geoadmin_grupos as g, ".$esquemaadmin."i3geoadmin_subgrupos as sg
-		where 
-		t.id_tema = n3.id_tema 
-		and n3.id_n2 = n2.id_n2 
+		where
+		t.id_tema = n3.id_tema
+		and n3.id_n2 = n2.id_n2
 		and n2.id_subgrupo = sg.id_subgrupo
-		and n2.id_n1 = n1.id_n1 
+		and n2.id_n1 = n1.id_n1
 		and n1.id_grupo = g.id_grupo
-		and (t.ogc_tema != 'nao' or t.ogc_tema != 'NAO') 
-		and t.tipoa_tema != 'WMS' 
-		and n3.n3_perfil = '' 
+		and (t.ogc_tema != 'nao' or t.ogc_tema != 'NAO')
+		and t.tipoa_tema != 'WMS'
+		and n3.n3_perfil = ''
 		and n2.n2_perfil = ''
 		and n1.n1_perfil = ''
 	";
@@ -481,6 +481,7 @@ function geraXmlRSS($locaplic,$sql,$descricao)
 		$xml .= "<nacessos></nacessos>\n";
 		$xml .= "<nacessosok></nacessosok>\n";
 		$xml .= "<id>".xmlTexto_prepara($row["id_ws"])."</id>\n";
+		$xml .= "<tipo>".$row["tipo_ws"]."</tipo>\n";
 		$xml .= "</item>\n";
 	}
 	$xml .= "</channel></rss>\n";
@@ -501,7 +502,7 @@ function geraXmlAtlas($locaplic,$editores)
 	$xml .= "\n<RAIZ>\n";
 	//$q = "select * from i3geoadmin_atlas";
 	$qatlas = $dbh->query("select * from ".$esquemaadmin."i3geoadmin_atlas");
-	
+
 	$editor = verificaEditores($editores);
 	foreach($qatlas as $row)
 	{
@@ -509,7 +510,7 @@ function geraXmlAtlas($locaplic,$editores)
 		if(strtolower($row["publicado_atlas"] == "nao"))
 		{$mostra = false;}
 		if($editor)
-		{$mostra = true;}	
+		{$mostra = true;}
 		if($mostra)
 		{
 			$xml .= "<ATLAS>\n";
@@ -534,7 +535,7 @@ function geraXmlAtlas($locaplic,$editores)
 	$xml .= "</RAIZ>\n";
 	$dbh = null;
 	$dbhw = null;
-	return $xml;	
+	return $xml;
 }
 function geraXmlIdentifica($perfil,$locaplic,$editores)
 {
@@ -558,7 +559,7 @@ function geraXmlIdentifica($perfil,$locaplic,$editores)
 		if(strtolower($row["publicado_i"] == "nao"))
 		{$mostra = false;}
 		if($editor)
-		{$mostra = true;}	
+		{$mostra = true;}
 		if($mostra)
 		{
 			$xml .= " <FUNCAO>\n";
@@ -574,7 +575,7 @@ function geraXmlIdentifica($perfil,$locaplic,$editores)
 	$xml .= "</SISTEMAS>\n";
 	$dbh = null;
 	$dbhw = null;
-	return $xml;	
+	return $xml;
 }
 function geraXmlMapas($perfil,$locaplic,$editores)
 {
@@ -601,13 +602,13 @@ function geraXmlMapas($perfil,$locaplic,$editores)
 		{
 			$perfilMapa = explode(" ",str_replace(","," ",$row["perfil_mapa"]));
 			$mostraMapa = array_in_array($perfil,$perfilMapa);
-		}	
+		}
 		if(strtolower($row["publicado_mapa"] == "nao"))
 		{$mostraMapa = false;}
 		if($editor)
-		{$mostraMapa = true;}	
+		{$mostraMapa = true;}
 		if($mostraMapa)
-		{	
+		{
 			$xml .= "<MAPA>\n";
 			$xml .= " <PERFIL>".$row["perfil_mapa"]."</PERFIL>\n";
 			$xml .= " <NOME>".xmlTexto_prepara($row["nome_mapa"])."</NOME>\n";
@@ -837,7 +838,7 @@ function array_in_array($needle, $haystack)
 }
 function xmlTexto_prepara($texto)
 {
-	return str_replace("&","&amp;",$texto);	
+	return str_replace("&","&amp;",$texto);
 }
 function entity_decode($texto)
 {
