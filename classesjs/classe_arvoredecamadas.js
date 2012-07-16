@@ -380,7 +380,9 @@ i3GEO.arvoreDeCamadas = {
 
 			"permitecomentario":"",
 
-			"exttema":""
+			"exttema":"",
+
+			"nomeoriginal":""
 		}
 	]
 

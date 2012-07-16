@@ -38,7 +38,7 @@
 	"../pacotes/balloon-tooltips/htdocs/js/balloon.config.js",
 	"../pacotes/balloon-tooltips/htdocs/js/balloon.js",
 	"../pacotes/eudock/js/euDock.2.0.js",
-    "../pacotes/eudock/js/euDock.Image.js",	
+    "../pacotes/eudock/js/euDock.Image.js",
 	"classe_i3geo.js",
 	"classe_util.js",
 	"dicionario.js",
@@ -69,7 +69,7 @@
 	);
 	for (i = 0; i < jsfiles.length; i++)
 	{
-		var currentScriptTag = "<script src='" + scriptLocation + jsfiles[i] + "'></script>";
+		var currentScriptTag = "<script type='text/javascript' src='" + scriptLocation + jsfiles[i] + "'></script>";
 		allScriptTags += currentScriptTag;
 	}
 	//css

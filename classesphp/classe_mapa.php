@@ -294,12 +294,16 @@ string - javascript com os parametros
 					$wmsformat = $oLayer->getmetadata("wms_format");
 					$wmssrs = $oLayer->getmetadata("wms_srs");
 					$wmstile = $oLayer->getmetadata("wms_tile");
+					if($wmstile == 1){
+						$wmsurl = ($oLayer->connection);
+					}
 				}
 				$tiles = "";
 				if($oLayer->labelitem != "")
 				{$tiles = "nao";}
 				$temas[] = array(
 					"name"=>($oLayer->name),
+					"nomeoriginal"=>($oLayer->getmetadata("nomeoriginal")),
 					"status"=>($oLayer->status),
 					"tema"=>(mb_convert_encoding(($oLayer->getmetadata("tema")),"UTF-8","ISO-8859-1")),
 					"transparency"=>($oLayer->opacity),

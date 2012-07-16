@@ -592,7 +592,7 @@ i3GEO.Interface = {
 				bb.INCLUIBOTAO.zoomtot = true;
 				i3geoOL = new OpenLayers.Map('openlayers', {
 					controls: [],
-					fractionalZoom: true,
+					fractionalZoom: false,
 					minResolution: "auto",
 					minExtent: new OpenLayers.Bounds(mi[0],mi[1],mi[2],mi[3]),
 					maxResolution: "auto",
@@ -953,9 +953,11 @@ i3GEO.Interface = {
 						//
 						if(camada.connectiontype === 7 && camada.wmsurl !== "" && camada.usasld.toLowerCase() != "sim"){
 							urllayer = camada.wmsurl+"&r="+Math.random();
+							/**
+							 * TODO não funciona
+							 */
 							if(camada.wmstile == 1){
-								//opcoes.tileSize = new OpenLayers.Size(512,512);
-								layer = new OpenLayers.Layer.TileCache(camada.name, urllayer,{LAYERS:camada.name,format:camada.wmsformat,transparent:true},opcoes);
+								layer = new OpenLayers.Layer.TMS(camada.name, camada.wmsurl,{layername:camada.nomeoriginal,type:'png'});
 							}
 							else{
 								layer = new OpenLayers.Layer.WMS(camada.name, urllayer,{LAYERS:camada.name,format:camada.wmsformat,transparent:true},opcoes);
