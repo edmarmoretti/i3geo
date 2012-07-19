@@ -236,8 +236,8 @@ function montaDivUsuario(i){
 	$i("editor_bd").innerHTML = ins;
 	if($i("cAtivo")){
 		temp = "<select id='Eativo' >";
-		temp += "<option value='1' >Sim</option>";
-		temp += "<option value='0' >N&atilde;o</option>";
+		temp += "<option value='0' >Sim</option>";
+		temp += "<option value='1' >N&atilde;o</option>";
 		temp += "</select>";
 		$i("cAtivo").innerHTML = temp;
 		$i("Eativo").value = i.ativo;

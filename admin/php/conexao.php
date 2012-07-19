@@ -75,7 +75,7 @@ if(!isset($conexaoadmin))
 {
 	$conexaoadmin = "";
 }
-if(!isset($conexaoadmin))
+if(!isset($esquemaadmin))
 {
 	$esquemaadmin = "";
 }

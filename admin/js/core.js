@@ -65,6 +65,50 @@ Variable: $perfis
 Armazena o objeto com a lista de perfis
 */
 $perfis = "";
+function cabecalhoUsuarios(id,excluir){
+	var i,n,temp,
+		ins = "<fieldset class='cabecalhoGeral'><legend>Op&ccedil;&otilde;es principais</legend>",
+		u = i3GEO.util.pegaCookie("i3geousuarionome"),
+		botoes = [
+			{id:"principal",titulo:"In&iacute;cio",link:"../index.html"},
+			{id:"operacoes",titulo:"Opera&ccedil;&otilde;es",link:"operacoes.html"},
+			{id:"usuarios",titulo:"Usu&aacute;rios",link:"usuarios.html"},
+			{id:"login",titulo:"Login",js:"i3GEO.login.dialogo.abreLogin()"}
+		];
+	n = botoes.length;
+	for(i=0;i<n;i++){
+		if(botoes[i].id !== excluir){
+			ins += '<input type=button id="'+botoes[i].id+'" value="'+botoes[i].titulo+'" />';
+		}
+	}
+	if(!u){
+		u = "-";
+	}
+	ins += "<div id='i3GEONomeLogin' > Login: "+u+"</div>";
+	ins += "</fieldset>";
+	temp = $i(id);
+	temp.innerHTML = ins;
+	for(i=0;i<n;i++){
+		if(excluir === "principal" && botoes[i].link)
+		{botoes[i].link = "html/"+botoes[i].link;}
+		if(botoes[i].id !== excluir){
+			new YAHOO.widget.Button(botoes[i].id);
+			if(botoes[i].link){
+				eval('$i("'+botoes[i].id+'-button'+'").onclick = function(){window.location = \''+botoes[i].link+'\';}');
+			}
+			else{
+				eval('$i("'+botoes[i].id+'-button'+'").onclick = function(){'+botoes[i].js+';}');
+			}
+
+		}
+	}
+	try{
+		i3GEO.login.recarrega = true;
+	}
+	catch(e){ }
+	//temp.style.border = "solid 1px gray";
+	//temp.style.padding = "10px";
+}
 function cabecalhoGeral(id,excluir){
 	var i,n,temp,
 		ins = "<fieldset class='cabecalhoGeral'><legend>Op&ccedil;&otilde;es principais</legend>",

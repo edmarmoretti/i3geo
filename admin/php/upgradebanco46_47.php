@@ -20,6 +20,8 @@ i3geo/admin/admin.db ou fa&ccedil;a uma cópia. Depois &eacute; só executar o pro
 Se a configura&ccedil;&atilde;o do arquivo de conex&atilde;o foi alterada (veja ms_configura.php), o novo
 banco ir&aacute; ser criado conforme a nova string de conex&atilde;o.
 
+Ver MER i3geo/documentacao/diagramas/cadastrodeusuarios.erm
+
 Licenca:
 
 GPL2
@@ -49,6 +51,10 @@ i3geo/admin/php/criabanco.php
 /**
  *
  * TODO verificar se as tabelas estão ok para o novo sistema de admin de usuarios
+ */
+
+/**
+ * TODO incluir a base de dados de testes no erm
  */
 $funcao = "";
 $locaplic = __DIR__."/../..";
