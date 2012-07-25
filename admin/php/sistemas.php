@@ -143,8 +143,6 @@ switch (strtoupper($funcao))
 	{JSON}
 	*/
 	case "ALTERARSISTEMAS":
-		if(verificaEditores($editores) == "nao")
-		{echo "Vc nao e um editor cadastrado. Apenas os editores definidos em i3geo/ms_configura.php podem acessar o sistema de administracao.";exit;}
 		$novo = alterarSistemas();
 		$sql = "SELECT * from ".$esquemaadmin."i3geoadmin_sistemas WHERE id_sistema = '".$novo."'";
 		retornaJSON(pegaDados($sql));
@@ -176,8 +174,6 @@ switch (strtoupper($funcao))
 	{JSON}
 	*/
 	case "ALTERARFUNCOES":
-		if(verificaEditores($editores) == "nao")
-		{echo "Vc nao e um editor cadastrado. Apenas os editores definidos em i3geo/ms_configura.php podem acessar o sistema de administracao.";exit;}
 		$novo = alterarFuncoes();
 		$sql = "SELECT * from ".$esquemaadmin."i3geoadmin_sistemasf WHERE id_funcao = '".$novo."'";
 		retornaJSON(pegaDados($sql));
@@ -197,8 +193,6 @@ switch (strtoupper($funcao))
 	{JSON}
 	*/
 	case "EXCLUIRSISTEMA":
-		if(verificaEditores($editores) == "nao")
-		{echo "Vc nao e um editor cadastrado. Apenas os editores definidos em i3geo/ms_configura.php podem acessar o sistema de administracao.";exit;}
 		$tabela = "i3geoadmin_sistemas";
 		$f = verificaFilhos();
 		if(!$f)
@@ -226,8 +220,6 @@ switch (strtoupper($funcao))
 	{JSON}
 	*/
 	case "EXCLUIRFUNCAO":
-		if(verificaEditores($editores) == "nao")
-		{echo "Vc nao e um editor cadastrado. Apenas os editores definidos em i3geo/ms_configura.php podem acessar o sistema de administracao.";exit;}
 		retornaJSON(excluirFuncoes());
 		exit;
 	break;

@@ -219,6 +219,18 @@ function verificaFilhos()
 	try
 	{
 		$res = false;
+		if($tabela == "i3geoestat_variavel")
+		{
+			$r = pegaDados("select * from ".$esquemaadmin."i3geoestat_medida_variavel where codigo_variavel=$id");
+			if(count($r) > 0)
+				$res = true;
+		}
+		if($tabela == "i3geoestat_medida_variavel")
+		{
+			$r = pegaDados("select * from ".$esquemaadmin."i3geoestat_medidadimensao where id_medida_variavel=$id");
+			if(count($r) > 0)
+				$res = true;
+		}
 		if($tabela == "i3geoadmin_n2")
 		{
 			$r = pegaDados("select * from ".$esquemaadmin."i3geoadmin_n3 where id_n2=$id");

@@ -49,15 +49,12 @@
 
 		/**
 		 *
-		 * TODO verificar se as tabelas estao corretas em funcao do sistema de administracao
+		 * TODO verificar se as tabelas estao corretas em funcao do sistema de administracao e incluir o login e senha
 		 */
 		$funcao = "";
 		include_once("admin.php");
 		error_reporting(E_ALL);
-		if(verificaEditores($editores) == "nao")
-		{
-			echo "Vc nao e um administrador. Apenas usuarios cadastrados, ou registrados no i3geo/ms_configura.php, e com o papel de administradores podem criar um banco de dados.";exit;
-		}
+
 
 		$tabelas = array(
 				"CREATE TABLE ".$esquemaadmin."i3geoadmin_grupos (desc_grupo TEXT, id_grupo INTEGER PRIMARY KEY, nome_grupo TEXT, it TEXT, es TEXT, en TEXT)",

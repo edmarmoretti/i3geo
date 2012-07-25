@@ -2,7 +2,7 @@
 <html>
 <head>
 <meta http-equiv="content-type" content="text/html; charset=ISO-8859-1">
-<title>Usuarios</title>
+<title>Variaveis</title>
 <style type="text/css">
 /*margin and padding on body element
           can introduce errors in determining
@@ -15,7 +15,7 @@ body {
 }
 </style>
 <script type="text/javascript" src="../js/core.js"></script>
-<script type="text/javascript" src="../js/usuarios.js"></script>
+<script type="text/javascript" src="../js/estat_variavel.js"></script>
 <link rel="stylesheet" type="text/css" href="admin.css">
 </head>
 <body class=" yui-skin-sam fundoPonto">
@@ -24,20 +24,20 @@ body {
 		<div class="mascaraPrincipal" id="divGeral">
 			<div id=cabecalhoPrincipal></div>
 			<h1>
-				Administra&ccedil;&atilde;o do i3geo - Usu&aacute;rios <img
+				Metadados estat&iacute;sticos do i3geo - Vari&aacute;veis <img
 					src="../imagens/04.png" style="cursor: pointer" id=botaoAjuda />
 			</h1>
 			<div id="formulario" style="display: none">
 				<div id="ajuda">
 					<div class="hd">Ajuda</div>
 					<div class="bd" style="height: 144px; overflow: auto">
-						<p>Cada usu&aacute;rio pode possuir pap&eacute;is. Os pap&eacute;is s&atilde;o utilizados para definir as opera&ccedil;&otilde;es que podem ser executadas.
+						<p>
 					</div>
 					<div class="ft"></div>
 				</div>
 				<input onclick="adicionaLinha()" type=button id=adiciona
-					value="Adicionar usu&aacute;rio" /> <br>
-				<p>Usu&aacute;rios cadastrados:</p>
+					value="Adicionar vari&aacute;vel" /> <br>
+				<p>Vari&aacute;veis cadastradas:</p>
 				<div id="tabela" style="left: -5px;"></div>
 				<div id=logajax style="display: block"></div>
 			</div>
@@ -45,13 +45,13 @@ body {
 	</center>
 	<script>
 		/*
-		 Title: Cadastro de usuarios
+		 Title: Cadatro de vari&aacute;veis estat&iacute;sticas
 
 		 Veja tamb&eacute;m:
 
 		 <core.js>
 
-		 <usuarios.js>
+		 <estat_variaveis.js>
 
 		 Licenca:
 
@@ -77,7 +77,7 @@ body {
 
 		 Arquivo:
 
-		 i3geo/admin/html/usuarios.html
+		 i3geo/admin/html/estat_variaveis.html
 		 */
 		if (screen.availWidth > 700) {
 			document.getElementById("divGeral").style.width = "700px";
@@ -87,12 +87,14 @@ body {
 			locaplic : "../.."
 		};
 		//
-		cabecalhoUsuarios("cabecalhoPrincipal", "usuarios");
+		cabecalhoMetaestat("cabecalhoPrincipal", "arvore");
 		temp = function() {
 			document.getElementById("formulario").style.display = "block";
 			initMenu();
 		};
-		i3GEO.login.verificaOperacao("admin/html/usuarios",
-				i3GEO.configura.locaplic, temp, "sessao");
+		temp();
+		/*
+		i3GEO.login.verificaOperacao("admin/html/usuarios",	i3GEO.configura.locaplic, temp, "sessao");
+		*/
 	</script>
 </body>

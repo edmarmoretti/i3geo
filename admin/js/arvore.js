@@ -65,21 +65,21 @@ function initMenu()
 	var editorDeMenus = function()
 	{
 		if($i("editor_bd")){return;}
-		core_montaEditor("","600px","500px","pegaMenus");
+		core_montaEditor("","600px","500px","pegaMenus","Menu");
 		$i("editor_bd").innerHTML = '<input type=button id=adicionaNovoMenu value="Adicionar um novo menu" style="left:-5px;" /><br><br><div id="tabela" style="left:-5px;"> </div>';
 		initEditorMenu();
 	};
 	var editorDeGrupos = function()
 	{
 		if($i("editor_bd")){return;}
-		core_montaEditor("","600px","500px");
-		$i("editor_bd").innerHTML = '<p class=paragrafo >Clique nas c�lulas da tabela para editar a caracter�stica de cada item. Finalize com "enter". Ap�s editar, salve o item.</p><p class=paragrafo ><input type=button id=adicionaNovoGrupo value="Adicionar um novo grupo" style="left:-5px;" /></p><p><br><div id="tabela" style="left:-5px;"> </div>';
+		core_montaEditor("","600px","500px","","Grupos");
+		$i("editor_bd").innerHTML = '<p class=paragrafo >Clique nas c&eacute;lulas da tabela para editar a caracter&iacute;stica de cada item. Finalize com "enter". Ap&oacute;s editar, salve o item.</p><p class=paragrafo ><input type=button id=adicionaNovoGrupo value="Adicionar um novo grupo" style="left:-5px;" /></p><p><br><div id="tabela" style="left:-5px;"> </div>';
 		initEditorGrupos();
 	};
 	var editorDeSubGrupos = function()
 	{
 		if($i("editor_bd")){return;}
-		core_montaEditor("","600px","500px");
+		core_montaEditor("","600px","500px","","Subgrupos");
 		$i("editor_bd").innerHTML = '<p class=paragrafo >Clique nas c�lulas da tabela para editar a caracter�stica de cada item. Finalize com "enter". Ap�s editar, salve o item.</p><p class=paragrafo ><input type=button id=adicionaNovoSubGrupo value="Adicionar um novo sub-grupo" style="left:-5px;" /></p><br><div id="tabela" style="left:-5px;"> </div>';
 		initEditorSubGrupos();
 	};

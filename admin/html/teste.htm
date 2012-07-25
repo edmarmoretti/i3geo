@@ -33,9 +33,9 @@ alert(YAHOO.lang.isNumber(s))
 */
 /*
 alert(YAHOO.lang.substitute('Hello {world}', {'world':'earth'}))
-var processText = function(key, value) {  
-return value.toUpperCase();  
-};  
+var processText = function(key, value) {
+return value.toUpperCase();
+};
 alert(YAHOO.lang.substitute('Hello {world}', {'world':'earth'}, processText))
 */
 /*
@@ -48,7 +48,7 @@ var foo = {
     }
     document.getElementById("teste").innerHTML += this.count;
   }
-}  
+}
 var timer = YAHOO.lang.later(100, foo, 'method', [{data:'bar', data2:'zeta'}], true);
 */
 //YAHOO.util.Dom.batch(document.getElementsByTagName("div"),function(d){d.style.color="red";})
@@ -58,14 +58,14 @@ Array getChildrenBy ( node , method )
 Returns an array of HTMLElement childNodes that pass the test method.
 
 Parameters:
-    node <HTMLElement> The HTMLElement to start from 
-    method <Function> A boolean function used to test children that receives the node being tested as its only argument 
+    node <HTMLElement> The HTMLElement to start from
+    method <Function> A boolean function used to test children that receives the node being tested as its only argument
 
 Returns: Array
     A static array of HTMLElements
 
 */
-alert(YAHOO.util.Dom.getViewportHeight()) //getViewportWidth
+alert(YAHOO.util.Dom.getViewportHeight()); //getViewportWidth
 
 </script>
 </body>

@@ -38,10 +38,6 @@ body {
 				echo "Vc nao pode realizar essa operacao.";exit;
 			}
 			error_reporting(0);
-			if(verificaEditores($editores) == "nao")
-			{
-				echo "Vc nao e um editor cadastrado. Apenas os editores definidos em i3geo/ms_configura.php podem acessar o sistema de administracao.";exit;
-			}
 			$mapfile = $locaplic."/temas/".$_GET["mapfile"].".map";
 			if(!file_exists($mapfile))
 			{

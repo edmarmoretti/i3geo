@@ -154,7 +154,7 @@ function initMenu()
 function ativaBotaoVerificarOrfaos(idBotao)
 {
 	var temp = function(){
-		core_montaEditor("","450px","660px");
+		core_montaEditor("","450px","660px","","Verificar");
 		verificaOrfaos();
 	};
 	//cria o bot&atilde;o de adi&ccedil;&atilde;o de um novo menu
@@ -164,7 +164,7 @@ function ativaBotaoAdicionaMapfile(idBotao)
 {
 	var adiciona = function()
 	{
-		core_montaEditor("adicionaNovoMapfile()","450px","660px");
+		core_montaEditor("adicionaNovoMapfile()","450px","660px","","","Mapfile");
 		ins = "<p><b>Nome do novo arquivo mapfile (sem .map) </b>n&atilde;o utilize caracteres acentuados ou espa&ccedil;os em branco</p>";
 		ins += "<input size=50 type=text id='Ecodigo' value='' /></p>";
 		ins += "<p><b>T&iacute;tulo do novo tema</b></p>";
@@ -519,7 +519,7 @@ function editorDeTexto(codigoMap)
 	{
 		success:function(o)
 		{
-			core_montaEditor("","600px","800px");
+			core_montaEditor("","600px","800px","","Editor");
 			var ins = "<input type=button id=salvarTexto value='Salvar' />";
 			ins += "<textarea id='editorArea' rows='19' cols='70'>"+YAHOO.lang.JSON.parse(o.responseText)+"</textarea>";
 			var temp = function()
@@ -1062,7 +1062,7 @@ Abre o editor de conex&atilde;o com a fonte dos dados de um layer
 */
 function editorDados(codigoMap,codigoLayer)
 {
-	core_montaEditor("","450px","650px");
+	core_montaEditor("","450px","650px","","Conex&atilde;o");
 	var sUrl = "../php/editormapfile.php?funcao=pegaConexao&codigoMap="+codigoMap+"&codigoLayer="+codigoLayer;
 	core_pegaDados("Obtendo dados...",sUrl,"montaEditorDados");
 }
@@ -1075,7 +1075,7 @@ Abre o editor das op&ccedil;&otilde;es que controlam o comportamento do layer no
 */
 function editorComport(codigoMap,codigoLayer)
 {
-	core_montaEditor("","450px","650px");
+	core_montaEditor("","450px","650px","","Comportamento");
 	var sUrl = "../php/editormapfile.php?funcao=pegaComport&codigoMap="+codigoMap+"&codigoLayer="+codigoLayer;
 	core_pegaDados("Obtendo dados...",sUrl,"montaEditorComport");
 }
@@ -1089,7 +1089,7 @@ Abre o editor de t&iacute;tulo e descri&ccedil;&atilde;o
 */
 function editorTitulo(codigoMap,codigoLayer)
 {
-	core_montaEditor("","450px","650px");
+	core_montaEditor("","450px","650px","","T&iacute;tulo");
 	var sUrl = "../php/editormapfile.php?funcao=pegaTitulo&codigoMap="+codigoMap+"&codigoLayer="+codigoLayer;
 	core_pegaDados("Obtendo dados...",sUrl,"montaEditorTitulo");
 }
@@ -1102,7 +1102,7 @@ Abre o editor que define a disponibilidade dos dados
 */
 function editorDispo(codigoMap,codigoLayer)
 {
-	core_montaEditor("","450px","650px");
+	core_montaEditor("","450px","650px","","Disponibilidade");
 	var sUrl = "../php/editormapfile.php?funcao=pegaDispo&codigoMap="+codigoMap+"&codigoLayer="+codigoLayer;
 	core_pegaDados("Obtendo dados...",sUrl,"montaEditorDispo");
 }
@@ -1118,7 +1118,7 @@ Abre o editor de metadados
 */
 function editorMetadados(codigoMap,codigoLayer)
 {
-	core_montaEditor("","450px","500px");
+	core_montaEditor("","450px","500px","","Metadados");
 	var sUrl = "../php/editormapfile.php?funcao=pegaMetadados&codigoMap="+codigoMap+"&codigoLayer="+codigoLayer;
 	core_pegaDados("Obtendo dados...",sUrl,"montaEditorMetadados");
 }
@@ -1131,7 +1131,7 @@ Abre o editor de dados gerais de um layer
 */
 function editorGeral(codigoMap,codigoLayer)
 {
-	core_montaEditor("","450px","500px");
+	core_montaEditor("","450px","500px","","Geral");
 	var sUrl = "../php/editormapfile.php?funcao=pegaGeral&codigoMap="+codigoMap+"&codigoLayer="+codigoLayer;
 	core_pegaDados("Obtendo dados...",sUrl,"montaEditorGeral");
 }
@@ -1144,7 +1144,7 @@ Abre o editor de dados gerais de uma classe
 */
 function editorClasseGeral(codigoMap,codigoLayer,indiceClasse)
 {
-	core_montaEditor("","450px","500px");
+	core_montaEditor("","450px","500px","","Classe");
 	var sUrl = "../php/editormapfile.php?funcao=pegaClasseGeral&codigoMap="+codigoMap+"&codigoLayer="+codigoLayer+"&indiceClasse="+indiceClasse;
 	core_pegaDados("Obtendo dados...",sUrl,"montaEditorClasseGeral");
 }
@@ -1157,7 +1157,7 @@ Abre o editor dos labels de um layer
 */
 function editorClasseLabel(codigoMap,codigoLayer,indiceClasse)
 {
-	core_montaEditor("","450px","500px");
+	core_montaEditor("","450px","500px","","Label");
 	var sUrl = "../php/editormapfile.php?funcao=pegaClasseLabel&codigoMap="+codigoMap+"&codigoLayer="+codigoLayer+"&indiceClasse="+indiceClasse;
 	core_pegaDados("Obtendo dados...",sUrl,"montaEditorClasseLabel");
 }
@@ -1170,7 +1170,7 @@ Abre o editor de dados gerais de um estilo
 */
 function editorEstilo(codigoMap,codigoLayer,indiceClasse,indiceEstilo)
 {
-	core_montaEditor("","450px","500px");
+	core_montaEditor("","450px","500px","","Estilo");
 	var sUrl = "../php/editormapfile.php?funcao=pegaEstilo&codigoMap="+codigoMap+"&codigoLayer="+codigoLayer+"&indiceClasse="+indiceClasse+"&indiceEstilo="+indiceEstilo;
 	core_pegaDados("Obtendo dados...",sUrl,"montaEditorEstilo");
 }

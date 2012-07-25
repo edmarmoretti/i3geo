@@ -40,24 +40,24 @@ Cada opera&ccedil;&atilde;o possu&iacute; seus próprios par&acirc;metros, que de
 
 */
 include_once("admin.php");
-if(verificaEditores($editores) == "nao")
-{echo "Vc nao e um editor cadastrado. Apenas os editores definidos em i3geo/ms_configura.php podem acessar o sistema de administracao.";exit;}
-
+/**
+ * TODO depreciar
+ */
 //faz a busca da fun&ccedil;&atilde;o que deve ser executada
 switch (strtoupper($funcao))
 {
 	/*
 	Note:
-	
+
 	Valores que o par&acirc;metro &funcao pode receber. Os par&acirc;metros devem ser enviados na requisi&ccedil;&atilde;o em AJAX.
 	*/
 	/*
 	Valor: PEGAPARAMETROSCONFIGURA
-	
+
 	Lista os valores atuais das vari&aacute;veis registradas no ms_configura
-	
+
 	Retorno:
-	
+
 	{JSON}
 	*/
 	case "PEGAPARAMETROSCONFIGURA":
@@ -91,7 +91,7 @@ switch (strtoupper($funcao))
 	break;
 	/*
 	Valor: SALVACONFIGURA
-	
+
 	Salva um novo valor de uma vari&aacute;vel no ms_configura.php
 
 	Parameters:
@@ -99,9 +99,9 @@ switch (strtoupper($funcao))
 	variavel - nome da vari&aacute;vel
 
 	valor - novo valor
-	
+
 	Retorno:
-	
+
 	{JSON}
 	*/
 	case "SALVACONFIGURA":

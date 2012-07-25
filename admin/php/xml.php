@@ -33,7 +33,9 @@ Arquivo:
 
 i3geo/admin/php/xml.php
 */
-
+/**
+ * TODO verificar login para mostrar ou não o q não estiver publicado
+ */
 if(!function_exists("verificaEditores")){
 	include_once(__DIR__."/../../classesphp/funcoes_gerais.php");
 	/*

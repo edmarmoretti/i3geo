@@ -4,7 +4,7 @@
 <META HTTP-EQUIV="Content-Type" CONTENT="text/html; charset=ISO-8859-1">
 <style>
 div {left: 0px;}
-body 
+body
 {COLOR: #2F4632;text-align: justify;font-size: 12px;font-family: Verdana, Arial, Helvetica, sans-serif;}
 </style>
 <link rel="stylesheet" type="text/css" href="admin/html/admin.css">
@@ -24,7 +24,7 @@ Title: geraminiatura.php
 
 Gera as miniaturas dos mapas baseado nos mapfiles existentes em i3geo/temas. As miniaturas s&atilde;o utilizadas no i3geo na guia temas para mostrar um preview de cada tema.
 
-Por padr&atilde;o, as imagens s&atilde;o armazenadas no diretório tempor&aacute;rio do i3geo e devem ser movidas para o diretório i3geo/temas/miniaturas 
+Por padr&atilde;o, as imagens s&atilde;o armazenadas no diretório tempor&aacute;rio do i3geo e devem ser movidas para o diretório i3geo/temas/miniaturas
 para poderem ser utilizadas. O programa verifica se a miniatura j&aacute; existe no diretório temas/miniaturas e gera apenas as que faltarem.
 
 &Eacute; utilizado tamb&eacute;m como um include pelo sistema de administra&ccedil;&atilde;o, permitindo armazenar as miniaturas no local correto.
@@ -79,8 +79,7 @@ if (!function_exists('ms_GetVersion'))
 	{dl('php_mapscript.so');}
 }
 //para o caso de ser feito um include desse programa
-if(!isset($locaplic))
-{$locaplic = "";}
+$locaplic = __DIR__;
 include($locaplic."/ms_configura.php");
 if(!function_exists("versao"))
 {include($locaplic."/classesphp/funcoes_gerais.php");}
@@ -125,7 +124,7 @@ if($tipo == "mini" || $tipo == "todos" || $tipo == "grande" || $tipo == "")
 		ob_end_flush();
 		ob_flush();
 		flush();
-		ob_start(); 
+		ob_start();
 	}
 }
 //
@@ -136,7 +135,7 @@ function verificaMiniatura($map,$tipo,$admin=false)
 	global $locaplic,$versao,$base;
 	if($versao == ""){
 		$versao = versao();
-		$versao = $versao["principal"];	
+		$versao = $versao["principal"];
 	}
 	//echo $map."<br>";return;
 	ms_ResetErrorList();
@@ -199,7 +198,7 @@ function verificaMiniatura($map,$tipo,$admin=false)
 			{$dados = $layern->connection;}
 			else
 			{$dados = $layern->data;}
-			$pegarext = $teman;	
+			$pegarext = $teman;
 		}
 		if (isset($postgis_mapa))
 		{
@@ -218,10 +217,10 @@ function verificaMiniatura($map,$tipo,$admin=false)
 					}
 				}
 			}
-		}	
+		}
 		zoomTemaMiniatura($pegarext,$mapa);
 		if ($tipo == "mini"  || $tipo == "todos")
-		{	
+		{
 			$mapa->setsize(50,50);
 			$sca = $mapa->scalebar;
 			$sca->set("status",MS_OFF);
@@ -245,14 +244,14 @@ function verificaMiniatura($map,$tipo,$admin=false)
 		if($tipo=="mini" || $tipo == "todos")
 		{
 			if($objImagemM->imagepath == "")
-			{echo "Erro IMAGEPATH vazio";return;}			
+			{echo "Erro IMAGEPATH vazio";return;}
 			$nomecM = ($objImagemM->imagepath).$map.".mini.png";
 			$objImagemM->saveImage($nomecM);
 		}
 		if($tipo=="grande" || $tipo == "todos")
 		{
 			if($objImagemG->imagepath == "")
-			{echo "Erro IMAGEPATH vazio";return;}			
+			{echo "Erro IMAGEPATH vazio";return;}
 			$nomecG = ($objImagemG->imagepath).$map.".grande.png";
 			$objImagemG->saveImage($nomecG);
 		}

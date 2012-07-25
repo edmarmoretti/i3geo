@@ -70,9 +70,9 @@ function ativaBotaoAdicionaUsuario(sUrl,idBotao){
 /*
 Function: pegaOperacoes
 
-Obt&eacute;m a lista de atlas
+Obt&eacute;m a lista de operacoes
 
-<PEGAATLAS>
+<PEGAOPERACOES>
 */
 function pegaUsuarios(){
 	core_pegaDados("buscando usu&aacute;rios...","../php/usuarios.php?funcao=pegaUsuarios","montaArvore");
@@ -193,7 +193,7 @@ function editar(tipo,id)
 				if(tipo == "usuario")
 				{
 					var dados = YAHOO.lang.JSON.parse(o.responseText)[0];
-					core_montaEditor("","450px","380px");
+					core_montaEditor("","450px","380px","","Usu&aacute;rio");
 					montaDivUsuario(dados);
 					core_carregando("desativa");
 				}
@@ -236,8 +236,8 @@ function montaDivUsuario(i){
 	$i("editor_bd").innerHTML = ins;
 	if($i("cAtivo")){
 		temp = "<select id='Eativo' >";
-		temp += "<option value='0' >Sim</option>";
-		temp += "<option value='1' >N&atilde;o</option>";
+		temp += "<option value='1' >Sim</option>";
+		temp += "<option value='0' >N&atilde;o</option>";
 		temp += "</select>";
 		$i("cAtivo").innerHTML = temp;
 		$i("Eativo").value = i.ativo;

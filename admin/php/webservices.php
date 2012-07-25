@@ -121,8 +121,6 @@ switch (strtoupper($funcao))
 	{JSON}
 	*/
 	case "ALTERARWS":
-		if(verificaEditores($editores) == "nao")
-		{echo "Vc nao e um editor cadastrado. Apenas os editores definidos em i3geo/ms_configura.php podem acessar o sistema de administracao.";exit;}
 		$novo = alterarWS();
 		$sql = "SELECT * from ".$esquemaadmin."i3geoadmin_ws WHERE id_ws = '".$novo."'";
 		retornaJSON(pegaDados($sql));
@@ -142,8 +140,6 @@ switch (strtoupper($funcao))
 	{JSON}
 	*/
 	case "EXCLUIR":
-		if(verificaEditores($editores) == "nao")
-		{echo "Vc nao e um editor cadastrado. Apenas os editores definidos em i3geo/ms_configura.php podem acessar o sistema de administracao.";exit;}
 		retornaJSON(excluirWS());
 		exit;
 	break;

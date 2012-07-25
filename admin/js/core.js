@@ -65,6 +65,51 @@ Variable: $perfis
 Armazena o objeto com a lista de perfis
 */
 $perfis = "";
+function cabecalhoMetaestat(id,excluir){
+	var i,n,temp,
+		ins = "<fieldset class='cabecalhoGeral'><legend>Op&ccedil;&otilde;es principais</legend>",
+		u = i3GEO.util.pegaCookie("i3geousuarionome"),
+		botoes = [
+			{id:"principal",titulo:"In&iacute;cio",link:"../index.html"},
+			{id:"arvore",titulo:"&Aacute;rvore completa",link:"estat_variavel.html"},
+			{id:"unidade_medida",titulo:"Unidades de medida",link:"estat_unidade_medida.html"},
+			{id:"login",titulo:"Login",js:"i3GEO.login.dialogo.abreLogin()"}
+		];
+	n = botoes.length;
+	for(i=0;i<n;i++){
+		if(botoes[i].id !== excluir){
+			ins += '<input type=button id="'+botoes[i].id+'" value="'+botoes[i].titulo+'" />';
+		}
+	}
+	if(!u){
+		u = "-";
+	}
+	ins += "<div id='i3GEONomeLogin' > Login: "+u+"</div>";
+	ins += "</fieldset>";
+	temp = $i(id);
+	temp.innerHTML = ins;
+	for(i=0;i<n;i++){
+		if(excluir === "principal" && botoes[i].link)
+		{botoes[i].link = "html/"+botoes[i].link;}
+		if(botoes[i].id !== excluir){
+			new YAHOO.widget.Button(botoes[i].id);
+			if(botoes[i].link){
+				eval('$i("'+botoes[i].id+'-button'+'").onclick = function(){window.location = \''+botoes[i].link+'\';}');
+			}
+			else{
+				eval('$i("'+botoes[i].id+'-button'+'").onclick = function(){'+botoes[i].js+';}');
+			}
+
+		}
+	}
+	try{
+		i3GEO.login.recarrega = true;
+	}
+	catch(e){ }
+	//temp.style.border = "solid 1px gray";
+	//temp.style.padding = "10px";
+}
+
 function cabecalhoUsuarios(id,excluir){
 	var i,n,temp,
 		ins = "<fieldset class='cabecalhoGeral'><legend>Op&ccedil;&otilde;es principais</legend>",
@@ -276,8 +321,10 @@ sUrl - url que ser&aacute; executada
 callback - fun&ccedil;&atilde;o que processar&aacute; o retorno
 
 tipo - GET ou POST
+
+postpar - parametros quando o tipo for post
 */
-function core_makeRequest(sUrl,callback,tipo)
+function core_makeRequest(sUrl,callback,tipo,postpar)
 {
 	sUrl = escape(sUrl);
 	var re = new RegExp("%3F", "g");
@@ -289,7 +336,13 @@ function core_makeRequest(sUrl,callback,tipo)
 	//alert(sUrl)
 	if(arguments.length == 2)
 	{tipo = "GET";}
-	YAHOO.util.Connect.asyncRequest(tipo, sUrl, callback);
+	if(postpar){
+		//YAHOO.util.Connect.setDefaultPostHeader('application/json;charset=ISO-8859-1');
+		YAHOO.util.Connect.asyncRequest('POST', sUrl, callback, postpar);
+	}
+	else{
+		YAHOO.util.Connect.asyncRequest(tipo, sUrl, callback);
+	}
 }
 /*
 Function: core_carregando
@@ -1293,9 +1346,11 @@ Parameters:
 
 funcaoOK - string com o nome da fun&ccedil;&atilde;o que ser&aacute; executada quando o bot&atilde;o OK for pressionado.
 
-funcaoClose - nome da funcao que ser&aacute; executada quando a janela for fechada
+funcaoClose - nome da funcao que ser&aacute; executada quando a janela for fechada. Pode ser "" para escapar.
+
+titulo - titulo da janela
 */
-function core_montaEditor(funcaoOK,w,h,funcaoClose)
+function core_montaEditor(funcaoOK,w,h,funcaoClose,titulo)
 {
 	if(arguments.length == 0)
 	{
@@ -1308,11 +1363,17 @@ function core_montaEditor(funcaoOK,w,h,funcaoClose)
 		w = "400px";
 		h = "354px";
 	}
+	if(!titulo){
+		titulo = "Editor";
+	}
+	if(!funcaoClose){
+		funcaoClose = "";
+	}
 	if(!$i("janela_editor"))
 	{
 		var novoel = document.createElement("div");
 		novoel.id =  "janela_editor";
-		var ins = '<div class="hd">Editor</div>';
+		var ins = '<div class="hd">'+titulo+'</div>';
 		ins += "<div class='bd' style='height:"+h+";overflow:auto'>";
 		ins += "<div id='okcancel_checkbox'></div>";
 		ins += "<div id='editor_bd'></div>";
@@ -1352,7 +1413,8 @@ function core_montaEditor(funcaoOK,w,h,funcaoClose)
 		}
 		catch(e){}
 		try{
-			eval(funcaoClose+"()");
+			if(funcaoClose != "")
+			{eval(funcaoClose+"()");}
 		}
 		catch(e){};
 	};

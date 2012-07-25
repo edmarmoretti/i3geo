@@ -55,6 +55,9 @@ if($idioma == "")
 	$idioma = "pt";
 }
 //faz a busca da fun&ccedil;&atilde;o que deve ser executada
+/**
+ * TODO incluir verificacao de login
+ */
 switch (strtoupper($funcao))
 {
 	/*
@@ -62,10 +65,7 @@ switch (strtoupper($funcao))
 
 	Valores que o par&acirc;metro &funcao pode receber. Os par&acirc;metros devem ser enviados na requisi&ccedil;&atilde;o em AJAX.
 	*/
-	case "VERIFICAEDITORES":
-		retornaJSON(verificaEditores($editores));
-		exit;
-		break;
+
 		/*
 		 Valor: PEGAMENUS
 
@@ -217,10 +217,6 @@ switch (strtoupper($funcao))
 		{JSON}
 		*/
 	case "ALTERAMENUS":
-		if(verificaEditores($editores) == "nao")
-		{
-			echo "Vc nao e um editor cadastrado. Apenas os editores definidos em i3geo/ms_configura.php podem acessar o sistema de administracao.";exit;
-		}
 		alteraMenus();
 		if(isset($id_menu) && $id_menu != "")
 		{
@@ -293,10 +289,6 @@ switch (strtoupper($funcao))
 		{JSON}
 		*/
 	case "ALTERAGRUPOS":
-		if(verificaEditores($editores) == "nao")
-		{
-			echo "Vc nao e um editor cadastrado. Apenas os editores definidos em i3geo/ms_configura.php podem acessar o sistema de administracao.";exit;
-		}
 		retornaJSON(alteraGrupos());
 		exit;
 		break;
@@ -357,10 +349,6 @@ switch (strtoupper($funcao))
 		{JSON}
 		*/
 	case "ALTERASUBGRUPOS":
-		if(verificaEditores($editores) == "nao")
-		{
-			echo "Vc nao e um editor cadastrado. Apenas os editores definidos em i3geo/ms_configura.php podem acessar o sistema de administracao.";exit;
-		}
 		retornaJSON(alteraSubGrupos());
 		exit;
 		break;
@@ -435,10 +423,6 @@ switch (strtoupper($funcao))
 		{JSON}
 		*/
 	case "ATUALIZAMINIATURA":
-		if(verificaEditores($editores) == "nao")
-		{
-			echo "Vc nao e um editor cadastrado. Apenas os editores definidos em i3geo/ms_configura.php podem acessar o sistema de administracao.";exit;
-		}
 		retornaJSON(atualizaMiniatura($tema));
 		exit;
 		break;
@@ -479,10 +463,6 @@ switch (strtoupper($funcao))
 		*/
 	case "ALTERATEMAS":
 		//$r ser&aacute; igual ao novo id criado, no caso de inser&ccedil;&atilde;o de um novo tema
-		if(verificaEditores($editores) == "nao")
-		{
-			echo "Vc nao e um editor cadastrado. Apenas os editores definidos em i3geo/ms_configura.php podem acessar o sistema de administracao.";exit;
-		}
 		$r = alteraTemas();
 		if($id == "")
 		{
@@ -509,10 +489,6 @@ switch (strtoupper($funcao))
 		{JSON}
 		*/
 	case "ALTERATAGS":
-		if(verificaEditores($editores) == "nao")
-		{
-			echo "Vc nao e um editor cadastrado. Apenas os editores definidos em i3geo/ms_configura.php podem acessar o sistema de administracao.";exit;
-		}
 		$novo = alteraTags();
 		$sql = "SELECT * from ".$esquemaadmin."i3geoadmin_tags WHERE id_tag = '".$novo."'";
 		retornaJSON(pegaDados($sql));
@@ -534,10 +510,6 @@ switch (strtoupper($funcao))
 		{JSON}
 		*/
 	case "ALTERAPERFIS":
-		if(verificaEditores($editores) == "nao")
-		{
-			echo "Vc nao e um editor cadastrado. Apenas os editores definidos em i3geo/ms_configura.php podem acessar o sistema de administracao.";exit;
-		}
 		$novo = alteraPerfis();
 		$sql = "SELECT * from ".$esquemaadmin."i3geoadmin_perfis WHERE id_perfil = '".$novo."'";
 		retornaJSON(pegaDados($sql));
@@ -545,10 +517,6 @@ switch (strtoupper($funcao))
 		break;
 
 	case "EXCLUIRREGISTRO":
-		if(verificaEditores($editores) == "nao")
-		{
-			echo "Vc nao e um editor cadastrado. Apenas os editores definidos em i3geo/ms_configura.php podem acessar o sistema de administracao.";exit;
-		}
 		if($tabela == "grupos")
 		{
 			$tabela = "i3geoadmin_grupos";
@@ -1169,7 +1137,7 @@ function alteraTemas()
 		}
 		//verifica se &eacute; necess&aacute;rio adicionar algum tag novo
 		$tags = explode(" ",$tags);
-		 
+
 		foreach($tags as $tag)
 		{
 			if(!(verificaDuplicados("select * from ".$esquemaadmin."i3geoadmin_tags where nome = '$tag'",$dbh)))

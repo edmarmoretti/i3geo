@@ -198,7 +198,7 @@ function editar(tipo,id)
 				if(tipo == "papel")
 				{
 					var dados = YAHOO.lang.JSON.parse(o.responseText);
-					core_montaEditor("gravaDados('papel','"+id+"')","250px","100px");
+					core_montaEditor("gravaDados('papel','"+id+"')","250px","100px","","Papel");
 					$i("editor_bd").innerHTML = montaDivPapel(dados);
 					document.getElementById("Eid_papel").style.width = "200px";
 					core_carregando("desativa");

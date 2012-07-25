@@ -173,10 +173,10 @@ body {
 					+ "</select>";
 			ins += "&nbsp;<input onclick='filtraLetra(\""
 					+ letraAtual
-					+ "\")' type=checkbox id=mostraMini style=position:relative;top:2px; />Mostra a miniatura se houver"
+					+ "\")' type=checkbox id=mostraMini style=position:relative;top:2px; />Mostra a miniatura se houver";
 
 			ins += "<p>";
-			for (i = 0; i < nletras; i++) {
+			for (var i = 0; i < nletras; i++) {
 				ins += "<span onclick='filtraLetra(\""
 						+ letras[i]
 						+ "\")' style='color:blue;cursor:pointer;padding:1px;border: 1px solid #C8C8FA'>"

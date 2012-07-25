@@ -42,6 +42,9 @@ Cada opera&ccedil;&atilde;o possu&iacute; seus próprios par&acirc;metros, que de
 
 */
 require_once("admin.php");
+/**
+ * TODO incluir verificacao de login
+ */
 //faz a busca da fun&ccedil;&atilde;o que deve ser executada
 switch (strtoupper($funcao))
 {
@@ -108,10 +111,6 @@ switch (strtoupper($funcao))
 		{JSON}
 		*/
 	case "SALVACONFIGURA":
-		if(verificaEditores($editores) == "nao")
-		{
-			echo "Vc nao e um editor cadastrado. Apenas os editores definidos em i3geo/ms_configura.php podem acessar o sistema de administracao.";exit;
-		}
 		salvaConfigura($variavel,$valor,$mapfile,$locaplic);
 		retornaJSON("ok");
 		exit;
