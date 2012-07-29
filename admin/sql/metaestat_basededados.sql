@@ -8,7 +8,7 @@ INSERT INTO i3geoestat_tipo_periodo (codigo_tipo_periodo, nome, descricao) VALUE
 
 
 -- i3geoestat_tipo_regiao
-INSERT INTO i3geoestat_tipo_regiao (codigo_tipo_regiao, nome_tipo_regiao, descricao_tipo_regiao, codigo_estat_conexao, esquemadb, tabela, colunageo, data, identificador, colunanomeregiao) VALUES ('1', 'Município', 'Limites municipais', '1', 'public', '', '', '', '', '');
+INSERT INTO i3geoestat_tipo_regiao (codigo_tipo_regiao, nome_tipo_regiao, descricao_tipo_regiao, codigo_estat_conexao, esquemadb, tabela, colunageo, data, identificador, colunanomeregiao, srid) VALUES ('1', 'Município', 'Limites municipais', '1', 'public', 'tb_ibge', 'the_geom', '', 'ibge', 'no_cidade', '4326');
 
 
 -- i3geoestat_unidade_medida
@@ -26,4 +26,5 @@ INSERT INTO i3geoestat_dimensao_medida (id_dimensao_medida, coluna, nomedimensao
 
 -- i3geoestat_variavel
 INSERT INTO i3geoestat_variavel (codigo_variavel, nome, descricao) VALUES ('1', 'Farmácias populares existentes', 'Quantidade de farmácias populares existentes');
+
 

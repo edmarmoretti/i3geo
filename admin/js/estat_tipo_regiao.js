@@ -1,11 +1,11 @@
 function initEditor(){
 	YAHOO.namespace("example.container");
-	core_ativaBotaoAdicionaLinha("../php/metaestat.php?funcao=alterarUnidadeMedida","adicionaNovaLinha","pegaDados");
+	core_ativaBotaoAdicionaLinha("../php/metaestat.php?funcao=alterarTipoRegiao","adicionaNovaLinha","pegaDados");
 	pegaDados();
 }
 function pegaDados(){
 	core_carregando("ativa");
-	core_pegaDados("buscando dados...","../php/metaestat.php?funcao=listaUnidadeMedida","montaTabela");
+	core_pegaDados("buscando dados...","../php/metaestat.php?funcao=listaTipoRegiao","montaTabela");
 }
 function montaTabela(dados){
 	YAHOO.example.InlineCellEditing = new function()	{
@@ -25,18 +25,23 @@ function montaTabela(dados){
 		myColumnDefs = [
 		                {key:"excluir",label:"excluir",formatter:formatExclui},
 		                {key:"mais",label:"editar",formatter:formatMais},
-		                {label:"c&oacute;digo",key:"codigo_unidade_medida", formatter:formatTexto},
-		                {label:"Nome",resizeable:true,key:"nome", formatter:formatTexto,editor:new YAHOO.widget.TextboxCellEditor({disableBtns:true})},
-		                {label:"Sigla",resizeable:true,key:"sigla", formatter:formatTexto,editor:new YAHOO.widget.TextboxCellEditor({disableBtns:true})},
-		                {label:"Permite soma?",key:"permitesoma",editor:"radio" ,editorOptions:{radioOptions:["SIM","NAO"],disableBtns:false,LABEL_SAVE:"OK"}},
-		                {label:"Permite m&eacute;dia?",key:"permitemedia",editor:"radio" ,editorOptions:{radioOptions:["SIM","NAO"],disableBtns:false,LABEL_SAVE:"OK"}}
+		                {label:"c&oacute;digo",key:"codigo_tipo_regiao", formatter:formatTexto},
+		                {label:"Nome",resizeable:true,key:"nome_tipo_regiao", formatter:formatTexto},
+		                {label:"Descri&ccedil;&atilde;o",resizeable:true,key:"descricao_tipo_regiao", formatter:formatTexto},
+		                {label:"Esquema",key:"esquemadb",formatter:formatTexto},
+		                {label:"Tabela",key:"tabela",formatter:formatTexto},
+		                {label:"Coluna",key:"colunageo",formatter:formatTexto},
+		                {label:"Data",key:"data",formatter:formatTexto},
+		                {label:"C&oacute;digo",key:"identificador",formatter:formatTexto},
+		                {label:"Coluna com os nomes de cada regi&atilde;o",key:"colunanomeregiao",formatter:formatTexto},
+		                {label:"C&oacute;digo SRID da proje&ccedil;&atilde;o",key:"srid",formatter:formatTexto}
 		                ];
 		myDataSource = new YAHOO.util.DataSource(dados);
 		myDataTable = new YAHOO.widget.DataTable("tabela", myColumnDefs, myDataSource);
 
 		myDataSource.responseType = YAHOO.util.DataSource.TYPE_JSARRAY;
 		myDataSource.responseSchema = {
-				fields: ["codigo_unidade_medida","nome","sigla","permitesoma","permitemedia"]
+				fields: ["codigo_tipo_regiao","nome_tipo_regiao","descricao_tipo_regiao","esquemadb","tabela","colunageo","data","identificador","colunanomeregiao","srid"]
 		};
 		myDataTable.subscribe(
 			'cellClickEvent',
@@ -50,15 +55,15 @@ function montaTabela(dados){
 				}
 				if (column.key == 'excluir'){
 					record = this.getRecord(target);
-					excluiLinha(record.getData('codigo_unidade_medida'),target);
+					excluiLinha(record.getData('codigo_tipo_regiao'),target);
 				}
 				if (column.key == 'mais'){
 					record = this.getRecord(target);
 					core_carregando("ativa");
 					core_carregando("buscando dados...");
-					$clicouId = record.getData('codigo_unidade_medida');
+					$clicouId = record.getData('codigo_tipo_regiao');
 					$recordid = record.getId();
-					sUrl = "../php/metaestat.php?funcao=listaUnidadeMedida&codigo_unidade_medida="+record.getData('codigo_unidade_medida');
+					sUrl = "../php/metaestat.php?funcao=listaTipoRegiao&codigo_tipo_regiao="+record.getData('codigo_tipo_regiao');
 					callback = {
 							success:function(o){
 								try{
@@ -109,45 +114,26 @@ function montaEditor(dados,id,recordid){
 }
 function montaDiv(i){
 	var param = {
-			"linhas":[{
-				titulo:"Nome:",id:"Enome",size:"50",value:i.nome,tipo:"text",div:""
-			},{
-				titulo:"Sigla:",id:"Esigla",size:"50",value:i.sigla,tipo:"text",div:""
-			}]
+			"linhas":[
+			{titulo:"Nome:",id:"Enome_tipo_regiao",size:"50",value:i.nome_tipo_regiao,tipo:"text",div:""},
+			{titulo:"Descri&ccedil;&atilde;o:",id:"Edescricao_tipo_regiao",size:"50",value:i.descricao_tipo_regiao,tipo:"text",div:""},
+			{titulo:"Esquema no banco de dados:",id:"Eesquemadb",size:"50",value:i.esquemadb,tipo:"text",div:""},
+			{titulo:"Tabela:",id:"Etabela",size:"50",value:i.tabela,tipo:"text",div:""},
+			{titulo:"Coluna com a geometria:",id:"Ecolunageo",size:"50",value:i.colunageo,tipo:"text",div:""},
+			{titulo:"Data a qual se referem os dados:",id:"Edata",size:"50",value:i.data,tipo:"text",div:""},
+			{titulo:"Coluna com o c&oacute;digo de cada registro:",id:"Eidentificador",size:"50",value:i.identificador,tipo:"text",div:""},
+			{titulo:"Coluna com o nome da regi&atilde;o:",id:"Ecolunanomeregiao",size:"50",value:i.colunanomeregiao,tipo:"text",div:""},
+			{titulo:"C&oacute;digo SRID:",id:"Esrid",size:"50",value:i.srid,tipo:"text",div:""}
+			]
 		},
 		ins = "";
 
 	ins += core_geraLinhas(param);
-	ins += "<p>Possibilita somar os valores?<br>";
-	ins += "<select  id='Epermitesoma' />";
-	ins += "<option value='' ";
-	if (i.permitesoma == ""){ins += "selected";}
-	ins += ">---</option>";
-	ins += "<option value='1' ";
-	if (i.permitesoma == 1){ins += "selected";}
-	ins += " >sim</option>";
-	ins += "<option value='0' ";
-	if (i.permitesoma == 0 ){ins += "selected";}
-	ins += " >n&atilde;o</option>";
-	ins += "</select></p>";
-
-	ins += "<p>Possibilita calcular m&eacute;dia?<br>";
-	ins += "<select  id='Epermitemedia' />";
-	ins += "<option value='' ";
-	if (i.permitemedia == ""){ins += "selected";}
-	ins += ">---</option>";
-	ins += "<option value='1' ";
-	if (i.permitemedia == 1){ins += "selected";}
-	ins += " >sim</option>";
-	ins += "<option value='0' ";
-	if (i.permitemedia == 0 ){ins += "selected";}
-	ins += " >n&atilde;o</option>";
-	ins += "</select></p>";
 	return(ins);
 }
 
 function gravaDados(id,recordid){
-	var campos = new Array("nome","sigla","permitesoma","permitemedia"),
+	var campos = new Array("nome_tipo_regiao","descricao_tipo_regiao","esquemadb","tabela","colunageo","data","identificador","colunanomeregiao","srid"),
 		par = "",
 		i = 0,
 		sUrl,callback;
@@ -155,10 +141,10 @@ function gravaDados(id,recordid){
 	for (i=0;i<campos.length;i++){
 		par += "&"+campos[i]+"="+($i("E"+campos[i]).value);
 	}
-	par += "&codigo_unidade_medida="+id;
+	par += "&codigo_tipo_regiao="+id;
 	core_carregando("ativa");
 	core_carregando(" gravando o registro do id= "+id);
-	sUrl = "../php/metaestat.php?funcao=alterarUnidadeMedida"+par;
+	sUrl = "../php/metaestat.php?funcao=alterarTipoRegiao"+par;
 	callback = {
 			success:function(o){
 				try	{
@@ -181,7 +167,7 @@ function gravaDados(id,recordid){
 }
 function excluiLinha(id,row){
 	var mensagem = " excluindo o registro do id= "+id,
-		sUrl = "../php/metaestat.php?funcao=excluirUnidadeMedida&codigo_unidade_medida="+id;
+		sUrl = "../php/metaestat.php?funcao=excluirTipoRegiao&codigo_tipo_regiao="+id;
 	core_excluiLinha(sUrl,row,mensagem);
 }
 //YAHOO.util.Event.addListener(window, "load", initMenu);

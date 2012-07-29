@@ -74,7 +74,7 @@ switch (strtoupper($funcao))
 	*/
 	case "LISTACONEXAO":
 		$m = new Metaestat();
-		retornaJSON($m->listaConexao($id_conexao));
+		retornaJSON($m->listaConexao($codigo_estat_conexao));
 		exit;
 	break;
 	/*
@@ -220,7 +220,87 @@ switch (strtoupper($funcao))
 		}
 		retornaJSON($m->listaDimensao($id_medida_variavel,$id_dimensao_medida));
 		exit;
-		break;
+	break;
+	/*
+	 Valor: ALTERARUNIDADEMEDIDA
+
+	Altera a tabela de unidades de medida
+
+	Retorno:
+
+	{JSON}
+	*/
+	case "ALTERARUNIDADEMEDIDA":
+		$m = new Metaestat();
+		if(empty($codigo_unidade_medida)){
+			$codigo_unidade_medida = $m->alteraUnidadeMedida();
+		}
+		else{
+			$codigo_unidade_medida = $m->alteraUnidadeMedida($codigo_unidade_medida,$nome,$sigla,$permitesoma,$permitemedia);
+		}
+		retornaJSON($m->listaUnidadeMedida($codigo_unidade_medida));
+		exit;
+	break;
+	/*
+	 Valor: ALTERARCONEXAO
+
+	Altera a tabela de conexoes
+
+	Retorno:
+
+	{JSON}
+	*/
+	case "ALTERARCONEXAO":
+		$m = new Metaestat();
+		if(empty($codigo_estat_conexao)){
+			$codigo_estat_conexao = $m->alteraConexao();
+		}
+		else{
+			$codigo_estat_conexao = $m->alteraConexao($codigo_estat_conexao,$bancodedados,$host,$porta,$usuario);
+		}
+		retornaJSON($m->listaConexao($codigo_estat_conexao));
+		exit;
+	break;
+	/*
+	 Valor: ALTERARTIPOREGIAO
+
+	Altera a tabela de regioes
+
+	Retorno:
+
+	{JSON}
+	*/
+	case "ALTERARTIPOREGIAO":
+		$m = new Metaestat();
+		if(empty($codigo_tipo_regiao)){
+			$codigo_tipo_regiao = $m->alteraTipoRegiao();
+		}
+		else{
+			$codigo_tipo_regiao = $m->alteraTipoRegiao($codigo_tipo_regiao,$nome_tipo_regiao,$descricao_tipo_regiao,$esquemadb,$tabela,$colunageo,$data,$identificador,$colunanomeregiao,$srid);
+		}
+		retornaJSON($m->listaTipoRegiao($codigo_tipo_regiao));
+		exit;
+	break;
+	/*
+	 Valor: ALTERARTIPOPERIODO
+
+	Altera a tabela de tipos de periodo
+
+	Retorno:
+
+	{JSON}
+	*/
+	case "ALTERARTIPOPERIODO":
+		$m = new Metaestat();
+		if(empty($codigo_tipo_periodo)){
+			$codigo_tipo_periodo = $m->alteraTipoPeriodo();
+		}
+		else{
+			$codigo_unidade_medida = $m->alteraTipoPeriodo($codigo_tipo_periodo,$nome,$descricao);
+		}
+		retornaJSON($m->listaTipoPeriodo($codigo_tipo_periodo));
+		exit;
+	break;
 	/*
 	Valor: EXCLUIRVARIAVEL
 
@@ -241,6 +321,95 @@ switch (strtoupper($funcao))
 		if(!$f){
 			$m = new Metaestat();
 			retornaJSON($m->excluirRegistro("i3geoestat_variavel","codigo_variavel",$id));
+		}
+		else
+			retornaJSON("erro");
+		exit;
+	break;
+	/*
+	 Valor: EXCLUIRTIPOPERIODO
+
+	Exclui uma variavel
+
+	Parametros:
+
+	codigo_variavel
+
+	Retorno:
+
+	{JSON}
+	*/
+	case "EXCLUIRTIPOPERIODO":
+		$tabela = "i3geoestat_tipo_periodo";
+		$id = $codigo_tipo_periodo;
+		$f = verificaFilhos();
+		if(!$f){
+			$m = new Metaestat();
+			retornaJSON($m->excluirRegistro("i3geoestat_tipo_periodo","codigo_tipo_periodo",$id));
+		}
+		else
+			retornaJSON("erro");
+		exit;
+	break;
+	/*
+	 Valor: EXCLUIRUNIDADEMEDIDA
+
+	Exclui uma unidade de medida
+
+	Retorno:
+
+	{JSON}
+	*/
+	case "EXCLUIRUNIDADEMEDIDA":
+		$tabela = "i3geoestat_unidade_medida";
+		$id = $codigo_unidade_medida;
+		$f = verificaFilhos();
+
+		if(!$f){
+			$m = new Metaestat();
+			retornaJSON($m->excluirRegistro("i3geoestat_unidade_medida","codigo_unidade_medida",$id));
+		}
+		else
+			retornaJSON("erro");
+		exit;
+	break;
+	/*
+	 Valor: EXCLUIRCONEXAO
+
+	Exclui uma conexao
+
+	Retorno:
+
+	{JSON}
+	*/
+	case "EXCLUIRCONEXAO":
+		$tabela = "i3geoestat_conexao";
+		$id = $codigo_estat_conexao;
+		$f = verificaFilhos();
+		if(!$f){
+			$m = new Metaestat();
+			retornaJSON($m->excluirRegistro("i3geoestat_conexao","codigo_estat_conexao",$id));
+		}
+		else
+			retornaJSON("erro");
+		exit;
+	break;
+	/*
+	 Valor: EXCLUIRTIPOREGIAO
+
+	Exclui uma regiao
+
+	Retorno:
+
+	{JSON}
+	*/
+	case "EXCLUIRTIPOREGIAO":
+		$tabela = "i3geoestat_tipo_regiao";
+		$id = $codigo_tipo_regiao;
+		$f = verificaFilhos();
+		if(!$f){
+			$m = new Metaestat();
+			retornaJSON($m->excluirRegistro("i3geoestat_tipo_regiao","codigo_tipo_regiao",$id));
 		}
 		else
 			retornaJSON("erro");
@@ -332,6 +501,8 @@ switch (strtoupper($funcao))
 
 	filtro
 
+	agruparpor
+
 	todasascolunas - 0 ou 1
 
 	Retorno:
@@ -341,7 +512,127 @@ switch (strtoupper($funcao))
 	case "DADOSMEDIDAVARIAVEL":
 		$m = new Metaestat();
 		if($formato == "json"){
-			retornaJSON($m->dadosMedidaVariavel($id_medida_variavel,$filtro,$todasascolunas));
+			retornaJSON($m->dadosMedidaVariavel($id_medida_variavel,$filtro,$todasascolunas,$agruparpor));
+		}
+		exit;
+	break;
+	/*
+	Valor: SUMARIOMEDIDAVARIAVEL
+
+	Sumario estatistico media de uma variavel
+
+	Parametros:
+
+	formato
+
+	filtro
+
+	Retorno:
+
+	{JSON}
+	*/
+	case "SUMARIOMEDIDAVARIAVEL":
+		$m = new Metaestat();
+		if($formato == "json"){
+			retornaJSON($m->sumarioMedidaVariavel($id_medida_variavel,$filtro,$agruparpor));
+		}
+		exit;
+	break;
+	/*
+	Valor: ESQUEMASCONEXAO
+
+	Lista os esquemas de uma conexao
+
+	Parametros:
+
+	formato
+
+	codigo_estat_conexao
+
+	Retorno:
+
+	{JSON}
+	*/
+	case "ESQUEMASCONEXAO":
+		$m = new Metaestat();
+		if($formato == "json"){
+			retornaJSON($m->esquemasConexao($codigo_estat_conexao));
+		}
+		exit;
+	break;
+	/*
+	Valor: TABELASESQUEMA
+
+	Lista as tabelas de um esquema
+
+	Parametros:
+
+	formato
+
+	codigo_estat_conexao
+
+	nome_esquema
+
+	Retorno:
+
+	{JSON}
+	*/
+	case "TABELASESQUEMA":
+		$m = new Metaestat();
+		if($formato == "json"){
+			retornaJSON($m->tabelasEsquema($codigo_estat_conexao,$nome_esquema));
+		}
+		exit;
+	break;
+	/*
+	 Valor: COLUNASTABELA
+
+	Lista as colunas de uma tabela
+
+	Parametros:
+
+	formato
+
+	codigo_estat_conexao
+
+	nome_esquema
+
+	nome_tabela
+
+	Retorno:
+
+	{JSON}
+	*/
+	case "COLUNASTABELA":
+		$m = new Metaestat();
+		if($formato == "json"){
+			retornaJSON($m->colunasTabela($codigo_estat_conexao,$nome_esquema,$nome_tabela));
+		}
+		exit;
+	break;
+	/*
+	 Valor: DESCREVECOLUNASTABELA
+
+	Lista as colunas de uma tabela
+
+	Parametros:
+
+	formato
+
+	codigo_estat_conexao
+
+	nome_esquema
+
+	nome_tabela
+
+	Retorno:
+
+	{JSON}
+	*/
+	case "DESCREVECOLUNASTABELA":
+		$m = new Metaestat();
+		if($formato == "json"){
+			retornaJSON($m->descreveColunasTabela($codigo_estat_conexao,$nome_esquema,$nome_tabela));
 		}
 		exit;
 	break;

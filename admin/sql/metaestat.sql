@@ -14,28 +14,62 @@ drop table i3geoestat_variavel;
 
 /* create tables */
 
+-- lista controlada dos parâmetros de conexão com o banco de dados onde residem dados
 create table i3geoestat_conexao
 (
 	codigo_estat_conexao integer not null unique primary key autoincrement,
+	-- nome do banco de dados
 	bancodedados text,
+	-- endereço do servidor
 	host text,
+	-- porta de comunicação
 	porta text,
+	-- nome do usuário que pode acessar o banco
 	usuario text,
+	-- senha do usuário que pode acessar o banco
 	senha text
 );
 
 
-create table i3geoestat_variavel
+-- identifica as tabelas que possuem colunas com geometrias de determinado local ou região
+create table i3geoestat_tipo_regiao
 (
-	codigo_variavel integer not null unique primary key autoincrement,
+	codigo_tipo_regiao integer not null unique primary key autoincrement,
+	nome_tipo_regiao text,
+	descricao_tipo_regiao text,
+	codigo_estat_conexao integer,
+	-- esquema onde encontra-se a tabela com a geometria
+	esquemadb text,
+	-- tabela que contém a coluna com a geometria
+	tabela text,
+	-- coluna com a geometria da região
+	colunageo text,
+	-- data do mapeamento da região
+	data text,
+	-- id da tabela onde está a coluna com a geometria e que identifica a região de forma única
+	identificador integer,
+	-- coluna que contém o nome de cada região ou local
+	colunanomeregiao text,
+	-- código srid correspondente à projeção cartográfica da coluna com a geometria
+	srid text default '4326',
+	foreign key (codigo_estat_conexao)
+	references i3geoestat_conexao (codigo_estat_conexao)
+);
+
+
+-- lista controlada de tipos de período de tempo
+create table i3geoestat_tipo_periodo
+(
+	codigo_tipo_periodo integer not null unique primary key autoincrement,
 	nome text,
 	descricao text
 );
 
 
-create table i3geoestat_tipo_periodo
+-- tabela com o nome e descrição de uma variável variável
+create table i3geoestat_variavel
 (
-	codigo_tipo_periodo integer not null unique primary key autoincrement,
+	codigo_variavel integer not null unique primary key autoincrement,
 	nome text,
 	descricao text
 );
@@ -50,30 +84,6 @@ create table i3geoestat_unidade_medida
 	permitesoma integer default 0,
 	-- o tipo de unidade permite o cálculo de média aritmética? (0 ou 1)
 	permitemedia integer default 0
-);
-
-
--- identifica as tabelas que possuem colunas com geometrias de determinado local ou região
-create table i3geoestat_tipo_regiao
-(
-	codigo_tipo_regiao integer not null unique primary key autoincrement,
-	nome_tipo_regiao text not null unique,
-	descricao_tipo_regiao text,
-	codigo_estat_conexao integer not null unique,
-	-- esquema onde encontra-se a tabela com a geometria
-	esquemadb text,
-	-- tabela que contém a coluna com a geometria
-	tabela text,
-	-- coluna com a geometria da região
-	colunageo text,
-	-- data do mapeamento da região
-	data text,
-	-- id da tabela onde está a coluna com a geometria e que identifica a região de forma única
-	identificador integer,
-	-- coluna que contém o nome de cada região ou local
-	colunanomeregiao text,
-	foreign key (codigo_estat_conexao)
-	references i3geoestat_conexao (codigo_estat_conexao)
 );
 
 
@@ -98,16 +108,16 @@ create table i3geoestat_medida_variavel
 	filtro text,
 	-- titulo da medida
 	nomemedida text,
-	foreign key (codigo_variavel)
-	references i3geoestat_variavel (codigo_variavel),
-	foreign key (codigo_estat_conexao)
-	references i3geoestat_conexao (codigo_estat_conexao),
+	foreign key (codigo_tipo_regiao)
+	references i3geoestat_tipo_regiao (codigo_tipo_regiao),
 	foreign key (codigo_tipo_periodo)
 	references i3geoestat_tipo_periodo (codigo_tipo_periodo),
+	foreign key (codigo_estat_conexao)
+	references i3geoestat_conexao (codigo_estat_conexao),
+	foreign key (codigo_variavel)
+	references i3geoestat_variavel (codigo_variavel),
 	foreign key (codigo_unidade_medida)
-	references i3geoestat_unidade_medida (codigo_unidade_medida),
-	foreign key (codigo_tipo_regiao)
-	references i3geoestat_tipo_regiao (codigo_tipo_regiao)
+	references i3geoestat_unidade_medida (codigo_unidade_medida)
 );
 
 

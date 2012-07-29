@@ -39,9 +39,8 @@ GNU junto com este programa; se não, escreva para a
 Free Software Foundation, Inc., no endere&ccedil;o
 59 Temple Street, Suite 330, Boston, MA 02111-1307 USA.
 */
-
 if(typeof(i3GEOF) === 'undefined'){
-	i3GEOF = [];
+	var i3GEOF = {};
 }
 /*
 Classe: i3GEOF.graficointerativo
@@ -54,6 +53,15 @@ i3GEOF.graficointerativo = {
 	Estilo do objeto DOM com a imagem de aguarde existente no cabe&ccedil;alho da janela.
 	*/
 	aguarde: "",
+	/*
+	Propriedade: dados
+
+	Dados que serao utilizados. Pode ser passado como parametro.
+
+	Default:
+	{false}
+	*/
+	dados:false,
 	/*
 	Propriedade: titulo
 
@@ -119,7 +127,10 @@ i3GEOF.graficointerativo = {
 		Para efeitos de compatibilidade antes da vers&atilde;o 4.7 que não tinha dicion&aacute;rio
 	*/
 	criaJanelaFlutuante: function(dados){
-		i3GEOF.graficointerativo.iniciaDicionario(dados);
+		if(dados){
+			i3GEOF.graficointerativo.dados = dados;
+		}
+		i3GEOF.graficointerativo.iniciaDicionario();
 	},
 	/*
 	Function: iniciaDicionario
@@ -129,10 +140,13 @@ i3GEOF.graficointerativo = {
 	O Javascript &eacute; carregado com o id i3GEOF.nomedaferramenta.dicionario_script
 	*/
 	iniciaDicionario: function(dados){
+		if(dados){
+			i3GEOF.graficointerativo.dados = dados;
+		}
 		if(typeof(i3GEOF.graficointerativo.dicionario) === 'undefined'){
 			i3GEO.util.scriptTag(
 				i3GEO.configura.locaplic+"/ferramentas/graficointerativo/dicionario.js",
-				"i3GEOF.graficointerativo.iniciaJanelaFlutuante('"+dados+"')",
+				"i3GEOF.graficointerativo.iniciaJanelaFlutuante()",
 				"i3GEOF.graficointerativo.dicionario_script"
 			);
 		}
@@ -151,7 +165,7 @@ i3GEOF.graficointerativo = {
 
 	dados {JSON} - dados para o gr&aacute;fico (opcional) exemplo ["n;x","'Argentina';33796870","'Paraguay';4773464","'Brazil';151525400","'Chile';13772710"]
 	*/
-	inicia: function(iddiv,dados){
+	inicia: function(iddiv){
 		//try{
 			$i(iddiv).innerHTML += i3GEOF.graficointerativo.html();
 			$i("i3GEOgraficointerativoAcumula").checked = i3GEOF.graficointerativo.acumula;
@@ -159,7 +173,6 @@ i3GEOF.graficointerativo = {
 			$i("i3GEOgraficointerativoDadosPuros").checked = i3GEOF.graficointerativo.dadospuros;
 			if(i3GEOF.graficointerativo.navegacao === true)
 			{i3GEOF.graficointerativo.ativaNavegacao(true);}
-			i3GEO.guias.mostraGuiaFerramenta("i3GEOgraficointerativoguia1","i3GEOgraficointerativoguia");
 			//eventos das guias
 			$i("i3GEOgraficointerativoguia1").onclick = function(){
 				i3GEO.guias.mostraGuiaFerramenta("i3GEOgraficointerativoguia1","i3GEOgraficointerativoguia");
@@ -207,12 +220,13 @@ i3GEOF.graficointerativo = {
 				"i3GEOgraficointerativobotao1",
 				{onclick:{fn: i3GEOF.graficointerativo.obterDados}}
 			);
-			if(arguments.length === 2){
+			if(i3GEOF.graficointerativo.dados && i3GEOF.graficointerativo.dados != "undefined"){
 				//i3GEOF.graficointerativo.tipo = "pizza2d";
 				//var retorno = {"attributes":{"id":""},"data":{"dados":["n;x","'4';3839572","'8';81710320","'7';24631314","'2';10967753","'1';24496400","'3';18752482","'5';13574480","'6';216507515"]}};
-				i3GEOF.graficointerativo.montaTabelaDados(dados);
+				i3GEOF.graficointerativo.montaTabelaDados(i3GEOF.graficointerativo.dados);
 				$i("i3GEOgraficointerativoguia4").onclick.call();
 			}
+			i3GEO.guias.mostraGuiaFerramenta("i3GEOgraficointerativoguia1","i3GEOgraficointerativoguia");
 		//}
 		//catch(erro){alert(erro);}
 	},
@@ -312,6 +326,9 @@ i3GEOF.graficointerativo = {
 	dados {JSON} - dados para o gr&aacute;fico
 	*/
 	iniciaJanelaFlutuante: function(dados){
+		if(dados){
+			i3GEOF.graficointerativo.dados = dados;
+		}
 		var minimiza,cabecalho,janela,divid,temp,titulo;
 		//cria a janela flutuante
 		cabecalho = function(){
@@ -320,10 +337,10 @@ i3GEOF.graficointerativo = {
 		minimiza = function(){
 			i3GEO.janela.minimiza("i3GEOF.graficointerativo");
 		};
-		titulo = "Gr&aacute;ficos interativos <a class=ajuda_usuario target=_blank href='" + i3GEO.configura.locaplic + "/ajuda_usuario.php?idcategoria=3&idajuda=84' >&nbsp;&nbsp;&nbsp;</a>";
+		titulo = "&nbsp;&nbsp;&nbsp;Gr&aacute;ficos interativos <a class=ajuda_usuario target=_blank href='" + i3GEO.configura.locaplic + "/ajuda_usuario.php?idcategoria=3&idajuda=84' >&nbsp;&nbsp;&nbsp;</a>";
 		janela = i3GEO.janela.cria(
 			"380px",
-			"280px",
+			"300px",
 			"",
 			"",
 			"",
@@ -337,27 +354,27 @@ i3GEOF.graficointerativo = {
 		divid = janela[2].id;
 		i3GEOF.graficointerativo.aguarde = $i("i3GEOF.graficointerativo_imagemCabecalho").style;
 		$i("i3GEOF.graficointerativo_corpo").style.backgroundColor = "white";
-		if(arguments.length === 0)
-		{i3GEOF.graficointerativo.inicia(divid);}
-		else
-		{i3GEOF.graficointerativo.inicia(divid,dados);}
-		temp = function(){
-			if(i3GEO.Interface.ATUAL !== "googlemaps" && i3GEO.Interface.ATUAL !== "googleearth"){
-				i3GEO.eventos.NAVEGAMAPA.remove("i3GEOF.graficointerativo.obterDados()");
-			}
-			if(i3GEO.Interface.ATUAL == "googlemaps"){
-				google.maps.event.removeListener(graficointerativoDragend);
-				google.maps.event.removeListener(graficointerativoZoomend);
-			}
-			if(i3GEO.Interface.ATUAL === "googleearth"){
-   				google.earth.removeEventListener(graficointerativoDragend);
-			}
-			if(i3GEO.eventos.ATUALIZAARVORECAMADAS.toString().search("i3GEOF.graficointerativo.comboTemas()") > 0)
-			{i3GEO.eventos.ATUALIZAARVORECAMADAS.remove("i3GEOF.graficointerativo.comboTemas()");}
-		};
-		YAHOO.util.Event.addListener(janela[0].close, "click", temp);
-		if(i3GEO.eventos.ATUALIZAARVORECAMADAS.toString().search("i3GEOF.graficointerativo.comboTemas()") < 0)
-		{i3GEO.eventos.ATUALIZAARVORECAMADAS.push("i3GEOF.graficointerativo.comboTemas()");}
+		$i("i3GEOF.graficointerativo_corpo").style.overflow = "auto";
+		i3GEOF.graficointerativo.inicia(divid);
+		if(i3GEO.Interface){
+			temp = function(){
+				if(i3GEO.Interface.ATUAL !== "googlemaps" && i3GEO.Interface.ATUAL !== "googleearth"){
+					i3GEO.eventos.NAVEGAMAPA.remove("i3GEOF.graficointerativo.obterDados()");
+				}
+				if(i3GEO.Interface.ATUAL == "googlemaps"){
+					google.maps.event.removeListener(graficointerativoDragend);
+					google.maps.event.removeListener(graficointerativoZoomend);
+				}
+				if(i3GEO.Interface.ATUAL === "googleearth"){
+	   				google.earth.removeEventListener(graficointerativoDragend);
+				}
+				if(i3GEO.eventos.ATUALIZAARVORECAMADAS.toString().search("i3GEOF.graficointerativo.comboTemas()") > 0)
+				{i3GEO.eventos.ATUALIZAARVORECAMADAS.remove("i3GEOF.graficointerativo.comboTemas()");}
+			};
+			YAHOO.util.Event.addListener(janela[0].close, "click", temp);
+			if(i3GEO.eventos.ATUALIZAARVORECAMADAS.toString().search("i3GEOF.graficointerativo.comboTemas()") < 0)
+			{i3GEO.eventos.ATUALIZAARVORECAMADAS.push("i3GEOF.graficointerativo.comboTemas()");}
+		}
 	},
 	/*
 	Function: ativaFoco
@@ -365,7 +382,9 @@ i3GEOF.graficointerativo = {
 	Refaz a interface da ferramenta quando a janela flutuante tem seu foco ativado
 	*/
 	ativaFoco: function(){
-		i3GEO.barraDeBotoes.ativaIcone("graficointerativo");
+		if(i3GEO.Interface){
+			i3GEO.barraDeBotoes.ativaIcone("graficointerativo");
+		}
 		var i = $i("i3GEOF.graficointerativo_c").style;
 		i3GEO.janela.ULTIMOZINDEX++;
 		i.zIndex = i3GEO.janela.ULTIMOZINDEX;
@@ -376,6 +395,7 @@ i3GEOF.graficointerativo = {
 	Monta o combo para escolha do tema que ser&aacute; utilizado no gr&aacute;fico
 	*/
 	comboTemas: function(){
+		if(!i3GEO.Interface){return;}
 		i3GEO.util.comboTemas(
 			"i3GEOgraficointerativoComboTemasId",
 			function(retorno){
@@ -405,7 +425,7 @@ i3GEOF.graficointerativo = {
 	*/
 	ativaTipo: function(obj){
 		i3GEOF.graficointerativo.tipo = obj.value;
-		if($i("i3GEOgraficointerativoGrafico").innerHTML === "")
+		if($i("i3GEOgraficointerativoGrafico").innerHTML === "" || $i("i3GEOgraficointerativotabeladados").innerHTML == "")
 		{$i("i3GEOgraficointerativoguia2").onclick.call();}
 		else
 		{$i("i3GEOgraficointerativoguia4").onclick.call();}
@@ -416,8 +436,7 @@ i3GEOF.graficointerativo = {
 	Configura o formul&aacute;rio para obten&ccedil;ão dos dados para cada tipo de gr&aacute;fico
 	*/
 	configuraDados: function(){
-		var radios = $i("i3GEOgraficointerativoguia1obj").getElementsByTagName("input"),
-			ativa = function(comboxlinha,comboylinha,ajudapizza){
+		var ativa = function(comboxlinha,comboylinha,ajudapizza){
 				try{
 					$i("i3GEOgraficointerativoComboXlinha").style.display = comboxlinha;
 					$i("i3GEOgraficointerativoComboYlinha").style.display = comboylinha;
@@ -472,6 +491,9 @@ i3GEOF.graficointerativo = {
 	<GRAFICOSELECAO>
 	*/
 	obterDados: function(){
+		if(!i3GEO.Interface){
+			return;
+		}
 		if(i3GEOF.graficointerativo.aguarde.visibility === "visible")
 		{return;}
 		var tema = $i("i3GEOgraficointerativoComboTemasId").value,
@@ -581,8 +603,8 @@ i3GEOF.graficointerativo = {
 			acum,
 			nomes = [],
 			cores = [],
-			indice = $i("i3GEOgraficointerativoComboTemasId").options.selectedIndex,
-			titulo = $i("i3GEOgraficointerativoComboTemasId").options[indice].text,
+			indice = "",
+			titulo = "",
 			par = [],
 			parcor = [],
 			soma = 0,
@@ -606,6 +628,10 @@ i3GEOF.graficointerativo = {
 			legendaY = "",
 			fill = "#C4B86A",
 			pointSize = 4;
+		if($i("i3GEOgraficointerativoComboTemasId")){
+			indice = $i("i3GEOgraficointerativoComboTemasId").options.selectedIndex;
+			titulo = $i("i3GEOgraficointerativoComboTemasId").options[indice].text;
+		}
 		if(i3GEOF.graficointerativo.titulo != "")
 		{titulo = i3GEOF.graficointerativo.titulo;}
 		if($i("i3GEOgraficointerativoComboXid"))
@@ -650,8 +676,8 @@ i3GEOF.graficointerativo = {
 		}
 		if(legendaX == legendaY){
 			menor = 0;
-			legendaX += " (ocorr&ecirc;ncias)";
-			legendaY += " (n. de ocorr&ecirc;ncias)";
+			legendaX += " (casos)";
+			legendaY += " (n. de casos)";
 		}
 		if($i("i3GEOgraficointerativoRelativa").checked){
 			n = valores.length;
@@ -897,6 +923,9 @@ i3GEOF.graficointerativo = {
 	Ativa ou desativa a atualiza&ccedil;ão autom&aacute;tica ao navegar no mapa
 	*/
 	ativaNavegacao: function(obj){
+		if(!i3GEO.Interface){
+			return;
+		}
 		if(obj === true){
 			if(i3GEO.Interface.ATUAL !== "googlemaps" && i3GEO.Interface.ATUAL !== "googleearth"){
 				i3GEO.eventos.NAVEGAMAPA.push("i3GEOF.graficointerativo.obterDados()");

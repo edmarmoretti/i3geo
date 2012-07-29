@@ -219,6 +219,24 @@ function verificaFilhos()
 	try
 	{
 		$res = false;
+		if($tabela == "i3geoestat_conexao")
+		{
+			$r = pegaDados("select * from ".$esquemaadmin."i3geoestat_medida_variavel where codigo_estat_conexao=$id");
+			if(count($r) > 0)
+				$res = true;
+		}
+		if($tabela == "i3geoestat_tipo_periodo")
+		{
+			$r = pegaDados("select * from ".$esquemaadmin."i3geoestat_medida_variavel where codigo_tipo_periodo=$id");
+			if(count($r) > 0)
+				$res = true;
+		}
+		if($tabela == "i3geoestat_unidade_medida")
+		{
+			$r = pegaDados("select * from ".$esquemaadmin."i3geoestat_medida_variavel where codigo_unidade_medida=$id");
+			if(count($r) > 0)
+				$res = true;
+		}
 		if($tabela == "i3geoestat_variavel")
 		{
 			$r = pegaDados("select * from ".$esquemaadmin."i3geoestat_medida_variavel where codigo_variavel=$id");

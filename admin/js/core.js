@@ -73,6 +73,9 @@ function cabecalhoMetaestat(id,excluir){
 			{id:"principal",titulo:"In&iacute;cio",link:"../index.html"},
 			{id:"arvore",titulo:"&Aacute;rvore completa",link:"estat_variavel.html"},
 			{id:"unidade_medida",titulo:"Unidades de medida",link:"estat_unidade_medida.html"},
+			{id:"periodo_tempo",titulo:"Per&iacute;odos de tempo",link:"estat_tipo_periodo.html"},
+			{id:"conexao",titulo:"Conex&otilde;es",link:"estat_conexao.html"},
+			{id:"tipo_regiao",titulo:"Regi&otilde;es",link:"estat_tipo_regiao.html"},
 			{id:"login",titulo:"Login",js:"i3GEO.login.dialogo.abreLogin()"}
 		];
 	n = botoes.length;
@@ -1500,12 +1503,14 @@ function core_ativaforms(lista){
 	"../../classesjs/compactados/classe_janela_compacto.js",
 	"../../classesjs/compactados/dicionario_compacto.js",
 	"../../classesjs/compactados/classe_idioma_compacto.js",
+	"../../classesjs/compactados/classe_guias_compacto.js",
 	"../../pacotes/cpaint/cpaint2.inc.compressed.js"
 	);
 	//
 	//arquivos css
 	//
 	var cssfiles =new Array(
+	"../../pacotes/yui290/build/tabview/assets/skins/sam/tabview.css",
 	"../html/admin.css",
 	"../../pacotes/yui290/build/fonts/fonts-min.css",
 	"../../pacotes/yui290/build/datatable/assets/skins/sam/datatable.css",

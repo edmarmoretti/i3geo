@@ -37,7 +37,7 @@ Classe: Metaestat
 */
 class Metaestat{
 	protected $esquemaadmin;
-	protected $dbh;
+	public $dbh;
 	protected $dbhw;
 	protected $convUTF;
 	/*
@@ -68,28 +68,36 @@ class Metaestat{
 	}
 	//aceita string ou array
 	function converteTextoArray($texto){
-		if(empty($texto) || strtoupper($texto) == "NULL"){
-			return "";
-		}
-		$chaves = array_keys($texto);
-		if($chaves[0] != "0"){
-			foreach($chaves as $chave){
-				$texto[$chave] = $this->converteTexto($texto[$chave]);
+		try	{
+			if(empty($texto) || strtoupper($texto) == "NULL"){
+				return "";
 			}
-		}
-		else{
-			$n = count($texto);
-			for($i=0;$i<$n;$i++){
-				$chaves = array_keys($texto[$i]);
+			$chaves = array_keys($texto);
+			if($chaves[0] != "0"){
 				foreach($chaves as $chave){
-					$texto[$i][$chave] = $this->converteTexto($texto[$i][$chave]);
+					$texto[$chave] = $this->converteTexto($texto[$chave]);
 				}
 			}
+			else{
+				$n = count($texto);
+				for($i=0;$i<$n;$i++){
+					$chaves = array_keys($texto[$i]);
+					foreach($chaves as $chave){
+						if(is_string($texto[$i][$chave])){
+							$t = $this->converteTexto($texto[$i][$chave]);
+							$texto[$i][$chave] = $t;
+						}
+					}
+				}
+			}
+			return $texto;
 		}
-		return $texto;
+		catch (Exception $e)	{
+			return $texto;
+		}
 	}
 	function converteTexto($texto){
-		if(empty($texto) || strtoupper($texto) == "NULL"){
+		if(empty($texto)){
 			return "";
 		}
 		if($this->convUTF == true){
@@ -167,49 +175,111 @@ class Metaestat{
 		}
 	}
 	/*
-	Function: listaConexao
+	 Function: sqlMedidaVariavel
 
-	Lista as conexoes cadastradas ou uma unica conexao
+	Monta o sql que permite acessar os dados de uma media de uma variavel
 
 	Parametros:
 
-	$id {string} - opcional
+	$id_medida_variavel - opcional
 
-	$senha {boolean} - mostra ou nao a senha - opcional
+	$todasascolunas - opcional
 	*/
-	function listaConexao($id_conexao="",$senha=false){
-		if($senha){
-			$colunas = "codigo_estat_conexao, bancodedados, host, porta, usuario, senha";
+	function sqlMedidaVariavel($id_medida_variavel,$todasascolunas){
+		$filtro = false;
+		$dados = $this->listaMedidaVariavel("",$id_medida_variavel);
+		$dadosgeo = $this->listaTipoRegiao($dados["codigo_tipo_regiao"]);
+
+		if($todasascolunas == 0){
+			$sql = " SELECT d.".$dados["colunavalor"].",d.".$dados["colunaidgeo"];
+			$sqlgeo = $sql.",g.".$dadosgeo["colunageo"];
 		}
 		else{
-			$colunas = "codigo_estat_conexao, bancodedados, host, porta, usuario";
+			$sql = " SELECT d.* ";
+			$sqlgeo = " SELECT ".$dados["tabela"].".*,g.".$dados["colunaidgeo"];
 		}
-		$sql = "select $colunas from ".$this->esquemaadmin."i3geoestat_conexao ";
-		if($id != ""){
-			$sql .= "WHERE codigo_estat_conexao = $id_conexao ";
+		$sql .= " FROM ".$dados["esquemadb"].".".$dados["tabela"]." as d ";
+		$sqlgeo .= " FROM ".$dados["esquemadb"].".".$dados["tabela"]." as d,".$dadosgeo["esquemadb"].".".$dadosgeo["tabela"]." as g ";
+		if(!empty($dados["filtro"])){
+			$sql .= " WHERE ".$dados["filtro"];
+			$sqlgeo .= " WHERE ".$dados["filtro"];
+			$filtro = true;
 		}
-		$sql .= "ORDER BY bancodedados,host,usuario";
-		return $this->execSQL($sql,$id_conexao);
+		//join com a tabela geo
+		$j = " d.".$dados["colunaidgeo"]." = g.".$dadosgeo["identificador"];
+		if($filtro){
+			$sqlgeo .= " AND ".$j;
+		}
+		else{
+			$sqlgeo .= " WHERE ".$j;
+		}
+		$sqlgeo = $dadosgeo["colunageo"]." from ($sqlgeo) as foo using unique ".$dados["colunaidgeo"]." using srid= ".$dadosgeo["srid"];
+		return array("sql"=>$sql,"sqlmapserver"=>$sqlgeo,"filtro"=>$filtro);
+	}
+	function dadosMedidaVariavel($id_medida_variavel,$filtro="",$todasascolunas = 0,$agruparpor = ""){
+		$sql = $this->sqlMedidaVariavel($id_medida_variavel,$todasascolunas);
+		$sqlf = $sql["sql"];
+		if($sql["filtro"] == true){
+			if(!empty($filtro)){
+				$sqlf .= $sqlf." AND ".$filtro;
+			}
+		}
+		elseif(!empty($filtro)){
+			$sqlf .= " WHERE ".$filtro;
+		}
+		//echo $sqlf;exit;
+		$metaVariavel = $this->listaMedidaVariavel("",$id_medida_variavel);
+		if(!empty($metaVariavel["codigo_estat_conexao"])){
+			$c = $this->listaConexao($metaVariavel["codigo_estat_conexao"],true);
+			$dbhold = $this->dbh;
+			$dbh = new PDO('pgsql:dbname='.$c["bancodedados"].';user='.$c["usuario"].';password='.$c["senha"].';host='.$c["host"].';port='.$c["porta"]);
+			$this->dbh = $dbh;
+			$res = $this->execSQL($sqlf);
+			$this->dbh = $dbhold;
+			return $res;
+		}
+		return false;
+	}
+	function sumarioMedidaVariavel($id_medida_variavel,$filtro=""){
+		$dados = $this->dadosMedidaVariavel($id_medida_variavel,$filtro,0);
+		if($dados){
+			$metaVariavel = $this->listaMedidaVariavel("",$id_medida_variavel);
+			$un = $this->listaUnidadeMedida($metaVariavel["codigo_unidade_medida"]);
+			foreach($dados as $d){
+				$valores[] = $d[$metaVariavel["colunavalor"]];
+			}
+			$soma = "";
+			$media = "";
+			$min = "";
+			$max = "";
+			$quantidade = count($valores);
+
+			if($un["permitesoma"] == "1"){
+				$soma = array_sum($valores);
+			}
+			if($un["permitemedia"] == "1"){
+				$media = $soma / $quantidade;
+			}
+			if($un["permitesoma"] == "1" || $un["permitemedia"] == "1"){
+				sort($valores);
+				$min = $valores[0];
+				$max = $valores[$quantidade - 1];
+			}
+			$histograma = array_count_values($valores);
+			return array(
+						"soma"=>$soma,
+						"media"=>$media,
+						"menor"=>$min,
+						"maior"=>$max,
+						"quantidade"=>$quantidade,
+						"histograma"=>$histograma,
+						"unidademedida"=>$un
+					);
+		}
+		return false;
 	}
 	/*
-	Function: listaVariavel
-
-	Lista as variaveis cadastradas ou uma unica variavel
-
-	Parametros:
-
-	$codigo_variavel - opcional
-	*/
-	function listaVariavel($codigo_variavel=""){
-		$sql = "select * from ".$this->esquemaadmin."i3geoestat_variavel ";
-		if($codigo_variavel != ""){
-			$sql .= "WHERE codigo_variavel = $codigo_variavel ";
-		}
-		$sql .= "ORDER BY nome";
-		return $this->execSQL($sql,$codigo_variavel);
-	}
-	/*
-	Function: alteraVariavel
+	 Function: alteraVariavel
 
 	Altera uma variavel ou cria uma nova
 
@@ -237,86 +307,7 @@ class Metaestat{
 		}
 	}
 	/*
-	Function: listaMedidaVariavel
-
-	Lista as medidas das variaveis cadastradas para uma variavel ou uma unica medida
-
-	Parametros:
-
-	$codigo_variavel
-
-	$id_medida_variavel - opcional
-	*/
-	function listaMedidaVariavel($codigo_variavel,$id_medida_variavel=""){
-		$sql = "SELECT i3geoestat_medida_variavel.* ";
-		$sql .= "FROM ".$this->esquemaadmin."i3geoestat_variavel ";
-		//$sql .= "INNER JOIN ".$this->esquemaadmin."i3geoestat_unidade_medida ";
-		//$sql .= "ON i3geoestat_medida_variavel.codigo_unidade_medida = i3geoestat_unidade_medida.codigo_unidade_medida ";
-		$sql .= "INNER JOIN ".$this->esquemaadmin."i3geoestat_medida_variavel ";
-		$sql .= "ON i3geoestat_variavel.codigo_variavel = i3geoestat_medida_variavel.codigo_variavel ";
-		if($codigo_variavel != ""){
-			$sql .= "WHERE i3geoestat_variavel.codigo_variavel = $codigo_variavel ";
-			if($id_medida_variavel != ""){
-				$sql .= "AND i3geoestat_medida_variavel.id_medida_variavel = $id_medida_variavel ";
-			}
-		}
-		else{
-			$sql .= "WHERE i3geoestat_medida_variavel.id_medida_variavel = $id_medida_variavel ";
-		}
-		return $this->execSQL($sql,$id_medida_variavel);
-	}
-	/*
-	 Function: sqlMedidaVariavel
-
-	Monta o sql que permite acessar os dados de uma media de uma variavel
-
-	Parametros:
-
-	$id_medida_variavel - opcional
-
-	$todasascolunas - opcional
-	*/
-	function sqlMedidaVariavel($id_medida_variavel,$todasascolunas){
-		$filtro = false;
-		$dados = $this->listaMedidaVariavel("",$id_medida_variavel);
-		if($todasascolunas == 0){
-			$sql = " SELECT ".$dados["colunavalor"].",".$dados["colunaidgeo"];
-		}
-		else{
-			$sql = " SELECT * ";
-		}
-		$sql .= " FROM ".$dados["esquemadb"].".".$dados["tabela"];
-		if(!empty($dados["filtro"])){
-			$sql .= " WHERE ".$dados["filtro"];
-			$filtro = true;
-		}
-		else{
-			$dados["filtro"] = "";
-		}
-		return array("sql"=>$sql,"sqlmapserver"=>"","filtro"=>$filtro);
-	}
-	function dadosMedidaVariavel($id_medida_variavel,$filtro="",$todasascolunas = 0){
-		$sql = $this->sqlMedidaVariavel($id_medida_variavel,$todasascolunas);
-		$sqlf = $sql["sql"];
-		if($sql["filtro"] == true){
-			if(!empty($filtro)){
-				$sqlf .= $sqlf." AND ".$filtro;
-			}
-		}
-		elseif(!empty($filtro)){
-			$sqlf .= " WHERE ".$filtro;
-		}
-		$metaVariavel = $this->listaMedidaVariavel("",$id_medida_variavel);
-		if(!empty($metaVariavel["codigo_estat_conexao"])){
-			$c = $this->listaConexao($metaVariavel["codigo_estat_conexao"],true);
-			$dbh = new PDO('pgsql:dbname='.$c["bancodedados"].';user='.$c["usuario"].';password='.$c["senha"].';host='.$c["host"].';port='.$c["porta"]);
-			$this->dbh = $dbh;
-			return $this->execSQL($sqlf);
-		}
-		return false;
-	}
-	/*
-	 Function: alteraMedidaVariavel
+	Function: alteraMedidaVariavel
 
 	Altera uma medida de uma variavel ou cria uma nova
 	*/
@@ -342,32 +333,95 @@ class Metaestat{
 		}
 	}
 	/*
-	 Function: listaDimensao
+	 Function: alteraUnidadeMedida
 
-	Lista as variaveis cadastradas ou uma unica variavel
-
-	Parametros:
-
-	$id_medida_variavel
-
-	$id_dimensao_variavel - opcional
+	Altera uma medida de uma variavel ou cria uma nova
 	*/
-	function listaDimensao($id_medida_variavel,$id_dimensao_medida=""){
-		$sql = "SELECT i3geoestat_dimensao_medida.* ";
-		$sql .= "FROM ".$this->esquemaadmin."i3geoestat_dimensao_medida ";
-		$sql .= "INNER JOIN ".$this->esquemaadmin."i3geoestat_medida_variavel ";
-		$sql .= "ON i3geoestat_dimensao_medida.id_medida_variavel = i3geoestat_medida_variavel.id_medida_variavel ";
-		if($id_medida_variavel != ""){
-			$sql .= "WHERE i3geoestat_dimensao_medida.id_medida_variavel = $id_medida_variavel ";
-			if($id_dimensao_medida != ""){
-				$sql .= "AND i3geoestat_dimensao_medida.id_dimensao_medida = $id_dimensao_medida ";
+	function alteraUnidadeMedida($codigo_unidade_medida,$nome,$sigla,$permitesoma,$permitemedia){
+		try	{
+			if($codigo_unidade_medida != ""){
+				if($this->convUTF){
+					$nome = utf8_encode($nome);
+				}
+				$this->dbhw->query("UPDATE ".$this->esquemaadmin."i3geoestat_unidade_medida SET nome = '$nome', sigla = '$sigla', permitesoma = '$permitesoma', permitemedia = '$permitemedia' WHERE codigo_unidade_medida = $codigo_unidade_medida");
+				$retorna = $codigo_unidade_medida;
 			}
+			else{
+				$retorna = $this->insertId("i3geoestat_unidade_medida","nome","codigo_unidade_medida");
+			}
+			return $retorna;
 		}
-		else{
-			$sql .= "WHERE i3geoestat_dimensao_medida.id_dimensao_medida = $id_dimensao_medida ";
+		catch (PDOException $e)	{
+			return "Error!: " . $e->getMessage();
 		}
-		//echo $sql;exit;
-		return $this->execSQL($sql,$id_dimensao_medida);
+	}
+	/*
+	 Function: alteraTipoPeriodo
+
+	Altera um tipo de periodo de tempo
+	*/
+	function alteraTipoPeriodo($codigo_tipo_periodo,$nome,$descricao){
+		try	{
+			if($codigo_tipo_periodo != ""){
+				if($this->convUTF){
+					$nome = utf8_encode($nome);
+					$descricao = utf8_encode($descricao);
+				}
+				$this->dbhw->query("UPDATE ".$this->esquemaadmin."i3geoestat_tipo_periodo SET nome = '$nome', descricao = '$descricao' WHERE codigo_tipo_periodo = $codigo_tipo_periodo");
+				$retorna = $codigo_tipo_periodo;
+			}
+			else{
+				$retorna = $this->insertId("i3geoestat_tipo_periodo","nome","codigo_tipo_periodo");
+			}
+			return $retorna;
+		}
+		catch (PDOException $e)	{
+			return "Error!: " . $e->getMessage();
+		}
+	}
+	/*
+	Function: alteraConexao
+
+	Altera uma conexao
+	*/
+	function alteraConexao($codigo_estat_conexao,$bancodedados,$host,$porta,$usuario){
+		try	{
+			if($codigo_estat_conexao != ""){
+				$this->dbhw->query("UPDATE ".$this->esquemaadmin."i3geoestat_conexao SET usuario = '$usuario',porta = '$porta',host = '$host',bancodedados = '$bancodedados' WHERE codigo_estat_conexao = $codigo_estat_conexao");
+				$retorna = $codigo_estat_conexao;
+			}
+			else{
+				$retorna = $this->insertId("i3geoestat_conexao","bancodedados","codigo_estat_conexao");
+			}
+			return $retorna;
+		}
+		catch (PDOException $e)	{
+			return "Error!: " . $e->getMessage();
+		}
+	}
+	/*
+	 Function: alteraTipoRegiao
+
+	Altera uma regiao
+	*/
+	function alteraTipoRegiao($codigo_tipo_regiao,$nome_tipo_regiao,$descricao_tipo_regiao,$esquemadb,$tabela,$colunageo,$data,$identificador,$colunanomeregiao,$srid){
+		try	{
+			if($codigo_tipo_regiao != ""){
+				if($this->convUTF){
+					$nome_tipo_regiao = utf8_encode($nome_tipo_regiao);
+					$descricao_tipo_regiao = utf8_encode($descricao_tipo_regiao);
+				}
+				$this->dbhw->query("UPDATE ".$this->esquemaadmin."i3geoestat_tipo_regiao SET nome_tipo_regiao = '$nome_tipo_regiao',descricao_tipo_regiao = '$descricao_tipo_regiao',esquemadb = '$esquemadb',tabela = '$tabela',colunageo = '$colunageo',data = '$data',identificador = '$identificador',colunanomeregiao = '$colunanomeregiao', srid = '$srid' WHERE codigo_tipo_regiao = $codigo_tipo_regiao");
+				$retorna = $codigo_tipo_regiao;
+			}
+			else{
+				$retorna = $this->insertId("i3geoestat_tipo_regiao","nome_tipo_regiao","codigo_tipo_regiao");
+			}
+			return $retorna;
+		}
+		catch (PDOException $e)	{
+			return "Error!: " . $e->getMessage();
+		}
 	}
 	/*
 	 Function: alteraDimensaoMedida
@@ -409,12 +463,112 @@ class Metaestat{
 	*/
 	function listaUnidadeMedida($codigo_unidade_medida=""){
 		$sql = "select * from ".$this->esquemaadmin."i3geoestat_unidade_medida ";
-		if($id != ""){
+		if($codigo_unidade_medida != ""){
 			$sql .= "WHERE codigo_unidade_medida = $codigo_unidade_medida ";
 		}
 		$sql .= "ORDER BY nome";
 		return $this->execSQL($sql,$codigo_unidade_medida);
 	}
+	/*
+	 Function: listaVariavel
+
+	Lista as variaveis cadastradas ou uma unica variavel
+
+	Parametros:
+
+	$codigo_variavel - opcional
+	*/
+	function listaVariavel($codigo_variavel=""){
+		$sql = "select * from ".$this->esquemaadmin."i3geoestat_variavel ";
+		if($codigo_variavel != ""){
+			$sql .= "WHERE codigo_variavel = $codigo_variavel ";
+		}
+		$sql .= "ORDER BY nome";
+		return $this->execSQL($sql,$codigo_variavel);
+	}
+	/*
+	Function: listaMedidaVariavel
+
+	Lista as medidas das variaveis cadastradas para uma variavel ou uma unica medida
+
+	Parametros:
+
+	$codigo_variavel
+
+	$id_medida_variavel - opcional
+	*/
+	function listaMedidaVariavel($codigo_variavel,$id_medida_variavel=""){
+		$sql = "SELECT i3geoestat_medida_variavel.* ";
+		$sql .= "FROM ".$this->esquemaadmin."i3geoestat_variavel ";
+		//$sql .= "INNER JOIN ".$this->esquemaadmin."i3geoestat_unidade_medida ";
+		//$sql .= "ON i3geoestat_medida_variavel.codigo_unidade_medida = i3geoestat_unidade_medida.codigo_unidade_medida ";
+		$sql .= "INNER JOIN ".$this->esquemaadmin."i3geoestat_medida_variavel ";
+		$sql .= "ON i3geoestat_variavel.codigo_variavel = i3geoestat_medida_variavel.codigo_variavel ";
+		if($codigo_variavel != ""){
+			$sql .= "WHERE i3geoestat_variavel.codigo_variavel = $codigo_variavel ";
+			if($id_medida_variavel != ""){
+				$sql .= "AND i3geoestat_medida_variavel.id_medida_variavel = $id_medida_variavel ";
+			}
+		}
+		else{
+			$sql .= "WHERE i3geoestat_medida_variavel.id_medida_variavel = $id_medida_variavel ";
+		}
+		return $this->execSQL($sql,$id_medida_variavel);
+	}
+	/*
+	 Function: listaConexao
+
+	Lista as conexoes cadastradas ou uma unica conexao
+
+	Parametros:
+
+	$id {string} - opcional
+
+	$senha {boolean} - mostra ou nao a senha - opcional
+	*/
+	function listaConexao($codigo_estat_conexao="",$senha=false){
+		if($senha){
+			$colunas = "codigo_estat_conexao, bancodedados, host, porta, usuario, senha";
+		}
+		else{
+			$colunas = "codigo_estat_conexao, bancodedados, host, porta, usuario";
+		}
+		$sql = "select $colunas from ".$this->esquemaadmin."i3geoestat_conexao ";
+		if($codigo_estat_conexao != ""){
+			$sql .= "WHERE codigo_estat_conexao = $codigo_estat_conexao ";
+		}
+		$sql .= "ORDER BY bancodedados,host,usuario";
+		return $this->execSQL($sql,$codigo_estat_conexao);
+	}
+	/*
+	 Function: listaDimensao
+
+	Lista as variaveis cadastradas ou uma unica variavel
+
+	Parametros:
+
+	$id_medida_variavel
+
+	$id_dimensao_variavel - opcional
+	*/
+	function listaDimensao($id_medida_variavel,$id_dimensao_medida=""){
+		$sql = "SELECT i3geoestat_dimensao_medida.* ";
+		$sql .= "FROM ".$this->esquemaadmin."i3geoestat_dimensao_medida ";
+		$sql .= "INNER JOIN ".$this->esquemaadmin."i3geoestat_medida_variavel ";
+		$sql .= "ON i3geoestat_dimensao_medida.id_medida_variavel = i3geoestat_medida_variavel.id_medida_variavel ";
+		if($id_medida_variavel != ""){
+			$sql .= "WHERE i3geoestat_dimensao_medida.id_medida_variavel = $id_medida_variavel ";
+			if($id_dimensao_medida != ""){
+				$sql .= "AND i3geoestat_dimensao_medida.id_dimensao_medida = $id_dimensao_medida ";
+			}
+		}
+		else{
+			$sql .= "WHERE i3geoestat_dimensao_medida.id_dimensao_medida = $id_dimensao_medida ";
+		}
+		//echo $sql;exit;
+		return $this->execSQL($sql,$id_dimensao_medida);
+	}
+
 	/*
 	 Function: listaTipoPeriodo
 
@@ -426,7 +580,7 @@ class Metaestat{
 	*/
 	function listaTipoPeriodo($codigo_tipo_periodo=""){
 		$sql = "select * from ".$this->esquemaadmin."i3geoestat_tipo_periodo ";
-		if($id != ""){
+		if($codigo_tipo_periodo != ""){
 			$sql .= "WHERE codigo_tipo_periodo = $codigo_tipo_periodo ";
 		}
 		$sql .= "ORDER BY nome";
@@ -443,11 +597,47 @@ class Metaestat{
 	*/
 	function listaTipoRegiao($codigo_tipo_regiao=""){
 		$sql = "select * from ".$this->esquemaadmin."i3geoestat_tipo_regiao ";
-		if($id != ""){
+		if($codigo_tipo_regiao != ""){
 			$sql .= "WHERE codigo_tipo_regiao = $codigo_tipo_regiao ";
 		}
 		$sql .= "ORDER BY nome_tipo_regiao";
 		return $this->execSQL($sql,$codigo_tipo_regiao);
+	}
+	function esquemasConexao($codigo_estat_conexao){
+		$c = $this->listaConexao($codigo_estat_conexao,true);
+		$dbhold = $this->dbh;
+		$dbh = new PDO('pgsql:dbname='.$c["bancodedados"].';user='.$c["usuario"].';password='.$c["senha"].';host='.$c["host"].';port='.$c["porta"]);
+		$this->dbh = $dbh;
+		$res = $this->execSQL("SELECT oid,nspname as esquema FROM pg_namespace group by table_schema");
+		$this->dbh = $dbhold;
+		return $res;
+	}
+	function tabelasEsquema($codigo_estat_conexao,$nome_esquema){
+		$c = $this->listaConexao($codigo_estat_conexao,true);
+		$dbhold = $this->dbh;
+		$dbh = new PDO('pgsql:dbname='.$c["bancodedados"].';user='.$c["usuario"].';password='.$c["senha"].';host='.$c["host"].';port='.$c["porta"]);
+		$this->dbh = $dbh;
+		$res = $this->execSQL("SELECT table_name as tabela FROM information_schema.tables where table_schema = '$nome_esquema'");
+		$this->dbh = $dbhold;
+		return $res;
+	}
+	function colunasTabela($codigo_estat_conexao,$nome_esquema,$nome_tabela){
+		$c = $this->listaConexao($codigo_estat_conexao,true);
+		$dbhold = $this->dbh;
+		$dbh = new PDO('pgsql:dbname='.$c["bancodedados"].';user='.$c["usuario"].';password='.$c["senha"].';host='.$c["host"].';port='.$c["porta"]);
+		$this->dbh = $dbh;
+		$res = $this->execSQL("SELECT column_name as coluna FROM information_schema.columns where table_schema = '$nome_esquema' and table_name = '$nome_tabela'");
+		$this->dbh = $dbhold;
+		return $res;
+	}
+	function descreveColunasTabela($codigo_estat_conexao,$nome_esquema,$nome_tabela){
+		$c = $this->listaConexao($codigo_estat_conexao,true);
+		$dbhold = $this->dbh;
+		$dbh = new PDO('pgsql:dbname='.$c["bancodedados"].';user='.$c["usuario"].';password='.$c["senha"].';host='.$c["host"].';port='.$c["porta"]);
+		$this->dbh = $dbh;
+		$res = $this->execSQL("SELECT a.attnum,a.attname AS field,t.typname AS type,a.attlen AS length,a.atttypmod AS lengthvar,a.attnotnull AS notnull,p.nspname as esquema FROM pg_class c,pg_attribute a,pg_type t,pg_namespace p WHERE c.relname = '$nome_tabela' and p.nspname = '$nome_esquema' and a.attnum > 0 and a.attrelid = c.oid and a.atttypid = t.oid and c.relnamespace = p.oid ORDER BY a.attname");
+		$this->dbh = $dbhold;
+		return $res;
 	}
 }
 ?>

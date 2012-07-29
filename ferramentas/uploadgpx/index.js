@@ -38,7 +38,7 @@ Free Software Foundation, Inc., no endere&ccedil;o
 
 
 if(typeof(i3GEOF) === 'undefined'){
-	i3GEOF = [];
+	var i3GEOF = {};
 }
 /*
 Classe: i3GEOF.uploadgpx

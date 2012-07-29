@@ -1,11 +1,11 @@
 function initEditor(){
 	YAHOO.namespace("example.container");
-	core_ativaBotaoAdicionaLinha("../php/metaestat.php?funcao=alterarUnidadeMedida","adicionaNovaLinha","pegaDados");
+	core_ativaBotaoAdicionaLinha("../php/metaestat.php?funcao=alterarTipoPeriodo","adicionaNovaLinha","pegaDados");
 	pegaDados();
 }
 function pegaDados(){
 	core_carregando("ativa");
-	core_pegaDados("buscando dados...","../php/metaestat.php?funcao=listaUnidadeMedida","montaTabela");
+	core_pegaDados("buscando dados...","../php/metaestat.php?funcao=listaTipoPeriodo","montaTabela");
 }
 function montaTabela(dados){
 	YAHOO.example.InlineCellEditing = new function()	{
@@ -25,18 +25,16 @@ function montaTabela(dados){
 		myColumnDefs = [
 		                {key:"excluir",label:"excluir",formatter:formatExclui},
 		                {key:"mais",label:"editar",formatter:formatMais},
-		                {label:"c&oacute;digo",key:"codigo_unidade_medida", formatter:formatTexto},
+		                {label:"c&oacute;digo",key:"codigo_tipo_periodo", formatter:formatTexto},
 		                {label:"Nome",resizeable:true,key:"nome", formatter:formatTexto,editor:new YAHOO.widget.TextboxCellEditor({disableBtns:true})},
-		                {label:"Sigla",resizeable:true,key:"sigla", formatter:formatTexto,editor:new YAHOO.widget.TextboxCellEditor({disableBtns:true})},
-		                {label:"Permite soma?",key:"permitesoma",editor:"radio" ,editorOptions:{radioOptions:["SIM","NAO"],disableBtns:false,LABEL_SAVE:"OK"}},
-		                {label:"Permite m&eacute;dia?",key:"permitemedia",editor:"radio" ,editorOptions:{radioOptions:["SIM","NAO"],disableBtns:false,LABEL_SAVE:"OK"}}
+		                {label:"Descricao",resizeable:true,key:"descricao", formatter:formatTexto,editor:new YAHOO.widget.TextboxCellEditor({disableBtns:true})}
 		                ];
 		myDataSource = new YAHOO.util.DataSource(dados);
 		myDataTable = new YAHOO.widget.DataTable("tabela", myColumnDefs, myDataSource);
 
 		myDataSource.responseType = YAHOO.util.DataSource.TYPE_JSARRAY;
 		myDataSource.responseSchema = {
-				fields: ["codigo_unidade_medida","nome","sigla","permitesoma","permitemedia"]
+				fields: ["codigo_tipo_periodo","nome","descricao"]
 		};
 		myDataTable.subscribe(
 			'cellClickEvent',
@@ -50,15 +48,15 @@ function montaTabela(dados){
 				}
 				if (column.key == 'excluir'){
 					record = this.getRecord(target);
-					excluiLinha(record.getData('codigo_unidade_medida'),target);
+					excluiLinha(record.getData('codigo_tipo_periodo'),target);
 				}
 				if (column.key == 'mais'){
 					record = this.getRecord(target);
 					core_carregando("ativa");
 					core_carregando("buscando dados...");
-					$clicouId = record.getData('codigo_unidade_medida');
+					$clicouId = record.getData('codigo_tipo_periodo');
 					$recordid = record.getId();
-					sUrl = "../php/metaestat.php?funcao=listaUnidadeMedida&codigo_unidade_medida="+record.getData('codigo_unidade_medida');
+					sUrl = "../php/metaestat.php?funcao=listaTipoPeriodo&codigo_tipo_periodo="+record.getData('codigo_tipo_periodo');
 					callback = {
 							success:function(o){
 								try{
@@ -112,42 +110,17 @@ function montaDiv(i){
 			"linhas":[{
 				titulo:"Nome:",id:"Enome",size:"50",value:i.nome,tipo:"text",div:""
 			},{
-				titulo:"Sigla:",id:"Esigla",size:"50",value:i.sigla,tipo:"text",div:""
+				titulo:"Descricao:",id:"Edescricao",size:"50",value:i.descricao,tipo:"text",div:""
 			}]
 		},
 		ins = "";
 
 	ins += core_geraLinhas(param);
-	ins += "<p>Possibilita somar os valores?<br>";
-	ins += "<select  id='Epermitesoma' />";
-	ins += "<option value='' ";
-	if (i.permitesoma == ""){ins += "selected";}
-	ins += ">---</option>";
-	ins += "<option value='1' ";
-	if (i.permitesoma == 1){ins += "selected";}
-	ins += " >sim</option>";
-	ins += "<option value='0' ";
-	if (i.permitesoma == 0 ){ins += "selected";}
-	ins += " >n&atilde;o</option>";
-	ins += "</select></p>";
-
-	ins += "<p>Possibilita calcular m&eacute;dia?<br>";
-	ins += "<select  id='Epermitemedia' />";
-	ins += "<option value='' ";
-	if (i.permitemedia == ""){ins += "selected";}
-	ins += ">---</option>";
-	ins += "<option value='1' ";
-	if (i.permitemedia == 1){ins += "selected";}
-	ins += " >sim</option>";
-	ins += "<option value='0' ";
-	if (i.permitemedia == 0 ){ins += "selected";}
-	ins += " >n&atilde;o</option>";
-	ins += "</select></p>";
 	return(ins);
 }
 
 function gravaDados(id,recordid){
-	var campos = new Array("nome","sigla","permitesoma","permitemedia"),
+	var campos = new Array("nome","descricao"),
 		par = "",
 		i = 0,
 		sUrl,callback;
@@ -155,10 +128,10 @@ function gravaDados(id,recordid){
 	for (i=0;i<campos.length;i++){
 		par += "&"+campos[i]+"="+($i("E"+campos[i]).value);
 	}
-	par += "&codigo_unidade_medida="+id;
+	par += "&codigo_tipo_periodo="+id;
 	core_carregando("ativa");
 	core_carregando(" gravando o registro do id= "+id);
-	sUrl = "../php/metaestat.php?funcao=alterarUnidadeMedida"+par;
+	sUrl = "../php/metaestat.php?funcao=alterarTipoPeriodo"+par;
 	callback = {
 			success:function(o){
 				try	{
@@ -181,7 +154,7 @@ function gravaDados(id,recordid){
 }
 function excluiLinha(id,row){
 	var mensagem = " excluindo o registro do id= "+id,
-		sUrl = "../php/metaestat.php?funcao=excluirUnidadeMedida&codigo_unidade_medida="+id;
+		sUrl = "../php/metaestat.php?funcao=excluirTipoPeriodo&codigo_tipo_periodo="+id;
 	core_excluiLinha(sUrl,row,mensagem);
 }
 //YAHOO.util.Event.addListener(window, "load", initMenu);
