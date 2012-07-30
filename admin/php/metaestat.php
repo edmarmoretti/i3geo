@@ -52,9 +52,8 @@ if(in_array(strtoupper($funcao),$funcoesEdicao)){
 	}
 }
 */
-error_reporting(E_ALL);
 include(__DIR__."/classe_metaestat.php");
-
+error_reporting(0);
 //faz a busca da fun&ccedil;&atilde;o que deve ser executada
 switch (strtoupper($funcao))
 {

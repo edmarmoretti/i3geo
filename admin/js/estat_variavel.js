@@ -451,7 +451,10 @@ function sql(tipo,id) {
 							callback = 	{
 							    	success: function(oResponse){
 										var dados = YAHOO.lang.JSON.parse(oResponse.responseText);
-										dados = dados.histograma;
+										dados = dados.grupos;
+										if(dados == ""){
+											dados = dados.histograma;
+										}
 										//converte os dados para o padrao usado no grafico
 										abreDados = function(){
 											i3GEOF.graficointerativo.dados = dados;
@@ -494,7 +497,13 @@ function sql(tipo,id) {
 													i++;
 												}
 												ins.push("</table><br>");
+												//ins.push("<input type=hidden id=i3GEOgraficointerativoComboXid />");
+												//ins.push("<input type=hidden id=i3GEOgraficointerativoComboYid />");
 												$i("i3GEOgraficointerativoDados").innerHTML = ins.join("");
+												if($i("agruparsql").value != ""){
+													//$i("i3GEOgraficointerativoComboXid").value = $i("agruparsql").value;
+													//$i("i3GEOgraficointerativoComboYid").value = "Soma";
+												}
 											};
 											i3GEOF.graficointerativo.criaJanelaFlutuante();
 											core_carregando("desativa");

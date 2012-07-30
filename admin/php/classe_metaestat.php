@@ -46,7 +46,7 @@ class Metaestat{
 	Cria um objeto Metaestat
 	*/
 	function __construct(){
-		error_reporting(E_ALL);
+		error_reporting(0);
 		include(__DIR__."/conexao.php");
 		if(!isset($convUTF)){
 			$convUTF = true;
@@ -189,7 +189,6 @@ class Metaestat{
 		$filtro = false;
 		$dados = $this->listaMedidaVariavel("",$id_medida_variavel);
 		$dadosgeo = $this->listaTipoRegiao($dados["codigo_tipo_regiao"]);
-
 		if($todasascolunas == 0){
 			$sql = " SELECT d.".$dados["colunavalor"].",d.".$dados["colunaidgeo"];
 			$sqlgeo = $sql.",g.".$dadosgeo["colunageo"];
@@ -216,7 +215,7 @@ class Metaestat{
 		$sqlgeo = $dadosgeo["colunageo"]." from ($sqlgeo) as foo using unique ".$dados["colunaidgeo"]." using srid= ".$dadosgeo["srid"];
 		return array("sql"=>$sql,"sqlmapserver"=>$sqlgeo,"filtro"=>$filtro);
 	}
-	function dadosMedidaVariavel($id_medida_variavel,$filtro="",$todasascolunas = 0,$agruparpor = ""){
+	function dadosMedidaVariavel($id_medida_variavel,$filtro="",$todasascolunas = 0){
 		$sql = $this->sqlMedidaVariavel($id_medida_variavel,$todasascolunas);
 		$sqlf = $sql["sql"];
 		if($sql["filtro"] == true){
@@ -240,20 +239,37 @@ class Metaestat{
 		}
 		return false;
 	}
-	function sumarioMedidaVariavel($id_medida_variavel,$filtro=""){
+	function sumarioMedidaVariavel($id_medida_variavel,$filtro="",$agruparpor=""){
 		$dados = $this->dadosMedidaVariavel($id_medida_variavel,$filtro,0);
+		if(!empty($agruparpor)){
+			$dados = $this->dadosMedidaVariavel($id_medida_variavel,$filtro,1);
+		}
 		if($dados){
 			$metaVariavel = $this->listaMedidaVariavel("",$id_medida_variavel);
 			$un = $this->listaUnidadeMedida($metaVariavel["codigo_unidade_medida"]);
+			$agrupamento = "";
 			foreach($dados as $d){
 				$valores[] = $d[$metaVariavel["colunavalor"]];
+			}
+			if(!empty($agruparpor)){
+				$agrupamento = array();
+				foreach($dados as $d){
+					$g = $d[$agruparpor];
+					//var_dump($d);exit;
+					if(!empty($agrupamento[$g])){
+						$agrupamento[$g] += $d[$metaVariavel["colunavalor"]];
+					}
+					else{
+						$agrupamento[$g] = $d[$metaVariavel["colunavalor"]];
+					}
+				}
+				natsort($agrupamento);
 			}
 			$soma = "";
 			$media = "";
 			$min = "";
 			$max = "";
 			$quantidade = count($valores);
-
 			if($un["permitesoma"] == "1"){
 				$soma = array_sum($valores);
 			}
@@ -273,6 +289,7 @@ class Metaestat{
 						"maior"=>$max,
 						"quantidade"=>$quantidade,
 						"histograma"=>$histograma,
+						"grupos"=>$agrupamento,
 						"unidademedida"=>$un
 					);
 		}
