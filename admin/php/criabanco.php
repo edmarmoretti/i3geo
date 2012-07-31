@@ -76,11 +76,11 @@
 				"CREATE TABLE ".$esquemaadmin."i3geoadmin_n2 (publicado TEXT, ordem NUMERIC, id_n1 NUMERIC, id_n2 INTEGER PRIMARY KEY, id_subgrupo NUMERIC, n2_perfil TEXT)",
 				"CREATE TABLE ".$esquemaadmin."i3geoadmin_n3 (publicado TEXT, ordem NUMERIC, id_n2 NUMERIC, id_n3 INTEGER PRIMARY KEY, id_tema NUMERIC, n3_perfil TEXT)",
 				"CREATE TABLE ".$esquemaadmin."i3geoadmin_comentarios (comentario TEXT, data TEXT, openidnome TEXT, openidimagem TEXT, openidservico TEXT, openidusuario TEXT, openidurl TEXT, id_tema NUMERIC)",
-				"CREATE TABLE ".$esquemaadmin."i3geoadmin_usuarios (ativo NUMERIC, data_cadastro TEXT, email TEXT, id_usuario INTEGER PRIMARY KEY, login TEXT, nome_usuario TEXT, senha TEXT)",
-				"CREATE TABLE ".$esquemaadmin."i3geoadmin_papelusuario (papel_id NUMERIC, usuario_id NUMERIC)",
-				"CREATE TABLE ".$esquemaadmin."i3geoadmin_papeis (descricao TEXT, id_papel INTEGER PRIMARY KEY, nome TEXT)",
-				"CREATE TABLE ".$esquemaadmin."i3geoadmin_operacoes (id_operacao INTEGER PRIMARY KEY, codigo TEXT, descricao TEXT)",
-				"CREATE TABLE ".$esquemaadmin."i3geoadmin_operacoespapeis (id_operacao NUMERIC, id_papel NUMERIC)"
+				"CREATE TABLE ".$esquemaadmin."i3geousr_usuarios (ativo NUMERIC, data_cadastro TEXT, email TEXT, id_usuario INTEGER PRIMARY KEY, login TEXT, nome_usuario TEXT, senha TEXT)",
+				"CREATE TABLE ".$esquemaadmin."i3geousr_papelusuario (papel_id NUMERIC, usuario_id NUMERIC)",
+				"CREATE TABLE ".$esquemaadmin."i3geousr_papeis (descricao TEXT, id_papel INTEGER PRIMARY KEY, nome TEXT)",
+				"CREATE TABLE ".$esquemaadmin."i3geousr_operacoes (id_operacao INTEGER PRIMARY KEY, codigo TEXT, descricao TEXT)",
+				"CREATE TABLE ".$esquemaadmin."i3geousr_operacoespapeis (id_operacao NUMERIC, id_papel NUMERIC)"
 		);
 		if($conexaoadmin == "")
 		{
@@ -122,37 +122,37 @@
 			//echo $tabela."<br>";
 			$q = $dbhw->query($tabela);
 		}
-		$dbhw->query("INSERT INTO ".$esquemaadmin."i3geoadmin_papeis VALUES('Podem executar qualquer tarefa, inclusive cadastrar novos administradores',1,'admin')");
-		$dbhw->query("INSERT INTO ".$esquemaadmin."i3geoadmin_papeis VALUES('Podem criar/editar qualquer tema (mapfile) mas nao podem editar a arvore do catalogo de temas',2,'editores')");
-		$dbhw->query("INSERT INTO ".$esquemaadmin."i3geoadmin_papeis VALUES('Podem alterar a arvore do catalogo e dos atlas',3,'publicadores')");
-		$dbhw->query("INSERT INTO ".$esquemaadmin."i3geoadmin_papeis VALUES('Podem editar dados geograficos',4,'editoresgeo')");
-		$dbhw->query("INSERT INTO ".$esquemaadmin."i3geoadmin_usuarios VALUES(1,'','',1,'admin','admin','admin')");
-		$dbhw->query("INSERT INTO ".$esquemaadmin."i3geoadmin_papelusuario VALUES(1,1)");
+		$dbhw->query("INSERT INTO ".$esquemaadmin."i3geousr_papeis VALUES('Podem executar qualquer tarefa, inclusive cadastrar novos administradores',1,'admin')");
+		$dbhw->query("INSERT INTO ".$esquemaadmin."i3geousr_papeis VALUES('Podem criar/editar qualquer tema (mapfile) mas nao podem editar a arvore do catalogo de temas',2,'editores')");
+		$dbhw->query("INSERT INTO ".$esquemaadmin."i3geousr_papeis VALUES('Podem alterar a arvore do catalogo e dos atlas',3,'publicadores')");
+		$dbhw->query("INSERT INTO ".$esquemaadmin."i3geousr_papeis VALUES('Podem editar dados geograficos',4,'editoresgeo')");
+		$dbhw->query("INSERT INTO ".$esquemaadmin."i3geousr_usuarios VALUES(1,'','',1,'admin','admin','admin')");
+		$dbhw->query("INSERT INTO ".$esquemaadmin."i3geousr_papelusuario VALUES(1,1)");
 
-		$dbhw->query("INSERT INTO ".$esquemaadmin."i3geoadmin_operacoes VALUES(1,'admin/html/editormapfile','editor de mapfiles do sistema de administracao')");
-		$dbhw->query("INSERT INTO ".$esquemaadmin."i3geoadmin_operacoes VALUES(2,'admin/html/operacoes','abre o editor de operacoes')");
-		$dbhw->query("INSERT INTO ".$esquemaadmin."i3geoadmin_operacoes VALUES(3,'teste/','teste')");
-		$dbhw->query("INSERT INTO ".$esquemaadmin."i3geoadmin_operacoes VALUES(4,'admin/html/arvore','edicao da arvore do catalogo de temas')");
-		$dbhw->query("INSERT INTO ".$esquemaadmin."i3geoadmin_operacoes VALUES(5,'admin/html/menus','edicao da lista de menus')");
-		$dbhw->query("INSERT INTO ".$esquemaadmin."i3geoadmin_operacoes VALUES(6,'admin/html/ogcws','edicao das preferencias do servico WMS')");
-		$dbhw->query("INSERT INTO ".$esquemaadmin."i3geoadmin_operacoes VALUES(7,'admin/html/atlas','edicao de atlas')");
-		$dbhw->query("INSERT INTO ".$esquemaadmin."i3geoadmin_operacoes VALUES(8,'admin/html/identifica','lista de sistemas incluidos na ferramenta de identificacao')");
-		$dbhw->query("INSERT INTO ".$esquemaadmin."i3geoadmin_operacoes VALUES(9,'admin/html/incluimap','adapta mapfiles antigos para versoes novas do Mapserver')");
-		$dbhw->query("INSERT INTO ".$esquemaadmin."i3geoadmin_operacoes VALUES(10,'admin/html/mapas','lista de links para mapas')");
-		$dbhw->query("INSERT INTO ".$esquemaadmin."i3geoadmin_operacoes VALUES(11,'admin/html/perfis','lista controlada de perfis')");
-		$dbhw->query("INSERT INTO ".$esquemaadmin."i3geoadmin_operacoes VALUES(12,'admin/html/sistemas','lista de sistemas complementares que sao mostrados no catalogo')");
-		$dbhw->query("INSERT INTO ".$esquemaadmin."i3geoadmin_operacoes VALUES(13,'admin/html/subirshapefile','upload de shapefile para uma pasta especifica no servidor')");
-		$dbhw->query("INSERT INTO ".$esquemaadmin."i3geoadmin_operacoes VALUES(14,'admin/html/tags','edicao da lista controlada de tags')");
-		$dbhw->query("INSERT INTO ".$esquemaadmin."i3geoadmin_operacoes VALUES(15,'admin/html/webservices','cadastro de links para webservices')");
-		$dbhw->query("INSERT INTO ".$esquemaadmin."i3geoadmin_operacoespapeis VALUES(1,2)");
-		$dbhw->query("INSERT INTO ".$esquemaadmin."i3geoadmin_operacoespapeis VALUES(1,3)");
-		$dbhw->query("INSERT INTO ".$esquemaadmin."i3geoadmin_operacoespapeis VALUES(4,3)");
-		$dbhw->query("INSERT INTO ".$esquemaadmin."i3geoadmin_operacoespapeis VALUES(5,3)");
-		$dbhw->query("INSERT INTO ".$esquemaadmin."i3geoadmin_operacoespapeis VALUES(7,3)");
-		$dbhw->query("INSERT INTO ".$esquemaadmin."i3geoadmin_operacoespapeis VALUES(10,3)");
-		$dbhw->query("INSERT INTO ".$esquemaadmin."i3geoadmin_operacoespapeis VALUES(13,2)");
-		$dbhw->query("INSERT INTO ".$esquemaadmin."i3geoadmin_operacoespapeis VALUES(13,4)");
-		$dbhw->query("INSERT INTO ".$esquemaadmin."i3geoadmin_operacoespapeis VALUES(15,3)");
+		$dbhw->query("INSERT INTO ".$esquemaadmin."i3geousr_operacoes VALUES(1,'admin/html/editormapfile','editor de mapfiles do sistema de administracao')");
+		$dbhw->query("INSERT INTO ".$esquemaadmin."i3geousr_operacoes VALUES(2,'admin/html/operacoes','abre o editor de operacoes')");
+		$dbhw->query("INSERT INTO ".$esquemaadmin."i3geousr_operacoes VALUES(3,'teste/','teste')");
+		$dbhw->query("INSERT INTO ".$esquemaadmin."i3geousr_operacoes VALUES(4,'admin/html/arvore','edicao da arvore do catalogo de temas')");
+		$dbhw->query("INSERT INTO ".$esquemaadmin."i3geousr_operacoes VALUES(5,'admin/html/menus','edicao da lista de menus')");
+		$dbhw->query("INSERT INTO ".$esquemaadmin."i3geousr_operacoes VALUES(6,'admin/html/ogcws','edicao das preferencias do servico WMS')");
+		$dbhw->query("INSERT INTO ".$esquemaadmin."i3geousr_operacoes VALUES(7,'admin/html/atlas','edicao de atlas')");
+		$dbhw->query("INSERT INTO ".$esquemaadmin."i3geousr_operacoes VALUES(8,'admin/html/identifica','lista de sistemas incluidos na ferramenta de identificacao')");
+		$dbhw->query("INSERT INTO ".$esquemaadmin."i3geousr_operacoes VALUES(9,'admin/html/incluimap','adapta mapfiles antigos para versoes novas do Mapserver')");
+		$dbhw->query("INSERT INTO ".$esquemaadmin."i3geousr_operacoes VALUES(10,'admin/html/mapas','lista de links para mapas')");
+		$dbhw->query("INSERT INTO ".$esquemaadmin."i3geousr_operacoes VALUES(11,'admin/html/perfis','lista controlada de perfis')");
+		$dbhw->query("INSERT INTO ".$esquemaadmin."i3geousr_operacoes VALUES(12,'admin/html/sistemas','lista de sistemas complementares que sao mostrados no catalogo')");
+		$dbhw->query("INSERT INTO ".$esquemaadmin."i3geousr_operacoes VALUES(13,'admin/html/subirshapefile','upload de shapefile para uma pasta especifica no servidor')");
+		$dbhw->query("INSERT INTO ".$esquemaadmin."i3geousr_operacoes VALUES(14,'admin/html/tags','edicao da lista controlada de tags')");
+		$dbhw->query("INSERT INTO ".$esquemaadmin."i3geousr_operacoes VALUES(15,'admin/html/webservices','cadastro de links para webservices')");
+		$dbhw->query("INSERT INTO ".$esquemaadmin."i3geousr_operacoespapeis VALUES(1,2)");
+		$dbhw->query("INSERT INTO ".$esquemaadmin."i3geousr_operacoespapeis VALUES(1,3)");
+		$dbhw->query("INSERT INTO ".$esquemaadmin."i3geousr_operacoespapeis VALUES(4,3)");
+		$dbhw->query("INSERT INTO ".$esquemaadmin."i3geousr_operacoespapeis VALUES(5,3)");
+		$dbhw->query("INSERT INTO ".$esquemaadmin."i3geousr_operacoespapeis VALUES(7,3)");
+		$dbhw->query("INSERT INTO ".$esquemaadmin."i3geousr_operacoespapeis VALUES(10,3)");
+		$dbhw->query("INSERT INTO ".$esquemaadmin."i3geousr_operacoespapeis VALUES(13,2)");
+		$dbhw->query("INSERT INTO ".$esquemaadmin."i3geousr_operacoespapeis VALUES(13,4)");
+		$dbhw->query("INSERT INTO ".$esquemaadmin."i3geousr_operacoespapeis VALUES(15,3)");
 
 
 

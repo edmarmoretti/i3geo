@@ -1,0 +1,98 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
+<html>
+<head>
+<meta http-equiv="content-type" content="text/html; charset=ISO-8859-1">
+<title>Usuarios</title>
+<style type="text/css">
+/*margin and padding on body element
+          can introduce errors in determining
+          element position and are not recommended;
+          we turn them off as a foundation for YUI
+          CSS treatments. */
+body {
+	margin: 0;
+	padding: 0;
+}
+</style>
+<script type="text/javascript" src="../js/core.js"></script>
+<script type="text/javascript" src="../js/gruposusuarios.js"></script>
+<link rel="stylesheet" type="text/css" href="admin.css">
+</head>
+<body class=" yui-skin-sam fundoPonto">
+	<center>
+		<div class="bordaSuperior">&nbsp;</div>
+		<div class="mascaraPrincipal" id="divGeral">
+			<div id=cabecalhoPrincipal></div>
+			<h1>
+				Administra&ccedil;&atilde;o do i3geo - Grupos de usu&aacute;rios <img
+					src="../imagens/04.png" style="cursor: pointer" id=botaoAjuda />
+			</h1>
+			<div id="formulario" style="display: none">
+				<div id="ajuda">
+					<div class="hd">Ajuda</div>
+					<div class="bd" style="height: 144px; overflow: auto">
+						<p>Cada usu&aacute;rio pode pertencer a um ou mais grupos. Os grupos s&atilde;o utilizados na defini&ccedil;&atilde;o das permiss&otilde;es de usu&aacute;rios para acesso a dados ou mapas
+					</div>
+					<div class="ft"></div>
+				</div>
+				<input onclick="adicionaLinha()" type=button id=adiciona
+					value="Adicionar grupo" /> <br>
+				<p>Grupos cadastrados:</p>
+				<div id="tabela" style="left: -5px;"></div>
+				<div id=logajax style="display: block"></div>
+			</div>
+		</div>
+	</center>
+	<script>
+		/*
+		 Title: Cadastro de grupos de usuarios
+
+		 Veja tamb&eacute;m:
+
+		 <core.js>
+
+		 <usuarios.js>
+
+		 Licenca:
+
+		 GPL2
+
+		 i3Geo Interface Integrada de Ferramentas de Geoprocessamento para Internet
+
+		 Direitos Autorais Reservados (c) 2006 Minist&eacute;rio do Meio Ambiente Brasil
+		 Desenvolvedor: Edmar Moretti edmar.moretti@mma.gov.br
+
+		 Este programa &eacute; software livre; voc&ecirc; pode redistribu&iacute;-lo
+		 e/ou modific&aacute;-lo sob os termos da Licen&ccedil;a P&uacute;blica Geral
+		 GNU conforme publicada pela Free Software Foundation;
+
+		 Este programa &eacute; distribu&iacute;do na expectativa de que seja &uacute;til,
+		 por&eacute;m, SEM NENHUMA GARANTIA; nem mesmo a garantia impl&iacute;cita
+		 de COMERCIABILIDADE OU ADEQUA&Ccedil;&Atilde;O A UMA FINALIDADE ESPEC&Iacute;FICA.
+		 Consulte a Licen&ccedil;a P&uacute;blica Geral do GNU para mais detalhes.
+		 Voc&ecirc; deve ter recebido uma cópia da Licen&ccedil;a P&uacute;blica Geral do
+		 GNU junto com este programa; se n&atilde;o, escreva para a
+		 Free Software Foundation, Inc., no endere&ccedil;o
+		 59 Temple Street, Suite 330, Boston, MA 02111-1307 USA.
+
+		 Arquivo:
+
+		 i3geo/admin/html/gruposusuarios.html
+		 */
+		if (screen.availWidth > 700) {
+			document.getElementById("divGeral").style.width = "700px";
+		}
+		//necessario para a ferramenta login e outras
+		i3GEO.configura = {
+			locaplic : "../.."
+		};
+		//
+		cabecalhoUsuarios("cabecalhoPrincipal", "gruposusuarios");
+		temp = function() {
+			document.getElementById("formulario").style.display = "block";
+			initMenu();
+		};
+		i3GEO.login.verificaOperacao("admin/html/usuarios",
+				i3GEO.configura.locaplic, temp, "sessao");
+	</script>
+</body>

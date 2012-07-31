@@ -163,9 +163,9 @@ switch (strtoupper($funcao))
 function alterarSenha(){
 	global $usuario,$novaSenha;
 	include(__DIR__."/conexao.php");
-	$dados = pegaDados("select * from ".$esquemaadmin."i3GEOadmin_usuarios where senha = '".md5($_SESSION["senha"])."' and login = '$usuario' and ativo = 1",$locaplic);
+	$dados = pegaDados("select * from ".$esquemaadmin."i3geousr_usuarios where senha = '".md5($_SESSION["senha"])."' and login = '$usuario' and ativo = 1",$locaplic);
 	if(count($dados) > 0){
-		$dbhw->query("UPDATE ".$esquemaadmin."i3geoadmin_usuarios SET senha='".md5($novaSenha)."' WHERE login = '$usuario'");
+		$dbhw->query("UPDATE ".$esquemaadmin."i3geousr_usuarios SET senha='".md5($novaSenha)."' WHERE login = '$usuario'");
 		$_SESSION["senha"] = $novaSenha;
 		$to      = $dados[0]["email"];
 		$subject = 'nova senha i3geo';
@@ -181,9 +181,9 @@ function recuperarSenha(){
 	global $usuario,$novaSenha;
 	include(__DIR__."/conexao.php");
 	$novaSenha = rand(9000,1000000);
-	$dados = pegaDados("select * from ".$esquemaadmin."i3GEOadmin_usuarios where login = '$usuario' and ativo = 1",$locaplic);
+	$dados = pegaDados("select * from ".$esquemaadmin."i3geousr_usuarios where login = '$usuario' and ativo = 1",$locaplic);
 	if(count($dados) > 0){
-		$dbhw->query("UPDATE ".$esquemaadmin."i3geoadmin_usuarios SET senha='$novaSenha' WHERE login = '$usuario'");
+		$dbhw->query("UPDATE ".$esquemaadmin."i3geousr_usuarios SET senha='$novaSenha' WHERE login = '$usuario'");
 		$to      = $dados[0]["email"];
 		$subject = 'nova senha i3geo';
 		$message = $novaSenha;
@@ -234,10 +234,10 @@ function validaSessao(){
 function autenticaUsuario($usuario,$senha){
 	include(__DIR__."/conexao.php");
 	$senhamd5 = md5($senha);
-	$dados = pegaDados("select * from ".$esquemaadmin."i3GEOadmin_usuarios where login = '$usuario' and (senha = '$senhamd5' or senha = '$senha') and ativo = 1",$locaplic);
+	$dados = pegaDados("select * from ".$esquemaadmin."i3geousr_usuarios where login = '$usuario' and (senha = '$senhamd5' or senha = '$senha') and ativo = 1",$locaplic);
 	if(count($dados) > 0){
-		$pa = pegaDados("select * from ".$esquemaadmin."i3geoadmin_papelusuario where id_usuario = ".$dados[0]["id_usuario"],$locaplic);
-		$op = pegadados("SELECT O.codigo, PU.id_usuario FROM ".$esquemaadmin."i3geoadmin_operacoes AS O JOIN ".$esquemaadmin."i3geoadmin_operacoespapeis AS OP ON O.id_operacao = OP.id_operacao JOIN ".$esquemaadmin."i3geoadmin_papelusuario AS PU ON OP.id_papel = PU.id_papel	WHERE id_usuario = ".$dados[0]["id_usuario"],$locaplic);
+		$pa = pegaDados("select * from ".$esquemaadmin."i3geousr_papelusuario where id_usuario = ".$dados[0]["id_usuario"],$locaplic);
+		$op = pegadados("SELECT O.codigo, PU.id_usuario FROM ".$esquemaadmin."i3geousr_operacoes AS O JOIN ".$esquemaadmin."i3geousr_operacoespapeis AS OP ON O.id_operacao = OP.id_operacao JOIN ".$esquemaadmin."i3geousr_papelusuario AS PU ON OP.id_papel = PU.id_papel	WHERE id_usuario = ".$dados[0]["id_usuario"],$locaplic);
 		$operacoes = array();
 		foreach($op as $o){
 			$operacoes[$o["codigo"]] = true;

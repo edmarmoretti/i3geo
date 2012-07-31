@@ -121,6 +121,7 @@ function cabecalhoUsuarios(id,excluir){
 			{id:"principal",titulo:"In&iacute;cio",link:"../index.html"},
 			{id:"operacoes",titulo:"Opera&ccedil;&otilde;es",link:"operacoes.html"},
 			{id:"usuarios",titulo:"Usu&aacute;rios",link:"usuarios.html"},
+			{id:"gruposusuarios",titulo:"Grupos e Usu&aacute;rios",link:"gruposusuarios.html"},
 			{id:"login",titulo:"Login",js:"i3GEO.login.dialogo.abreLogin()"}
 		];
 	n = botoes.length;

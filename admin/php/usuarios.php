@@ -25,7 +25,7 @@ Este programa &eacute; distribu&iacute;do na expectativa de que seja &uacute;til
 por&eacute;m, SEM NENHUMA GARANTIA; nem mesmo a garantia impl&iacute;cita
 de COMERCIABILIDADE OU ADEQUA&Ccedil;&Atilde;O A UMA FINALIDADE ESPEC&Iacute;FICA.
 Consulte a Licen&ccedil;a P&uacute;blica Geral do GNU para mais detalhes.
-Voc&ecirc; deve ter recebido uma c�pia da Licen&ccedil;a P&uacute;blica Geral do
+Voc&ecirc; deve ter recebido uma copia da Licen&ccedil;a P&uacute;blica Geral do
 GNU junto com este programa; se n&atilde;o, escreva para a
 Free Software Foundation, Inc., no endere&ccedil;o
 59 Temple Street, Suite 330, Boston, MA 02111-1307 USA.
@@ -80,25 +80,25 @@ switch (strtoupper($funcao))
 			retornaJSON(array());
 			exit;
 		}
-		$sql = "SELECT id_usuario,ativo,data_cadastro,email,login,nome_usuario from ".$esquemaadmin."i3geoadmin_usuarios WHERE id_usuario = ".$novo;
+		$sql = "SELECT id_usuario,ativo,data_cadastro,email,login,nome_usuario from ".$esquemaadmin."i3geousr_usuarios WHERE id_usuario = ".$novo;
 		retornaJSON(pegaDados($sql));
 		exit;
 	break;
 	case "PEGAUSUARIOS":
-		retornaJSON(pegaDados("SELECT id_usuario,ativo,data_cadastro,email,login,nome_usuario from ".$esquemaadmin."i3geoadmin_usuarios order by nome_usuario"));
+		retornaJSON(pegaDados("SELECT id_usuario,ativo,data_cadastro,email,login,nome_usuario from ".$esquemaadmin."i3geousr_usuarios order by nome_usuario"));
 		exit;
 	break;
 	case "PEGAPAPEISUSUARIO":
-		$dados = pegaDados("SELECT P.id_papel, P.nome, P.descricao, UP.id_usuario FROM ".$esquemaadmin."i3geoadmin_usuarios AS U JOIN ".$esquemaadmin."i3geoadmin_papelusuario AS UP ON U.id_usuario = UP.id_usuario JOIN ".$esquemaadmin."i3geoadmin_papeis AS P ON UP.id_papel = P.id_papel WHERE U.id_usuario = $id_usuario");
+		$dados = pegaDados("SELECT P.id_papel, P.nome, P.descricao, UP.id_usuario FROM ".$esquemaadmin."i3geousr_usuarios AS U JOIN ".$esquemaadmin."i3geousr_papelusuario AS UP ON U.id_usuario = UP.id_usuario JOIN ".$esquemaadmin."i3geousr_papeis AS P ON UP.id_papel = P.id_papel WHERE U.id_usuario = $id_usuario");
 		retornaJSON($dados);
 		exit;
 	break;
 	case "PEGADADOSUSUARIO":
-		retornaJSON(pegaDados("SELECT * from ".$esquemaadmin."i3geoadmin_usuarios WHERE id_usuario = $id_usuario"));
+		retornaJSON(pegaDados("SELECT * from ".$esquemaadmin."i3geousr_usuarios WHERE id_usuario = $id_usuario"));
 		exit;
 	break;
 	case "EXCLUIRUSUARIO":
-		$tabela = "i3geoadmin_usuarios";
+		$tabela = "i3geousr_usuarios";
 		$id = $id_usuario;
 		$f = verificaFilhos();
 		if(!$f){
@@ -111,7 +111,7 @@ switch (strtoupper($funcao))
 	break;
 	case "ADICIONAPAPELUSUARIO":
 		adicionaPapelUsuario();
-		$dados = pegaDados("SELECT P.id_papel, P.nome, P.descricao, UP.id_usuario FROM ".$esquemaadmin."i3geoadmin_usuarios AS U JOIN ".$esquemaadmin."i3geoadmin_papelusuario AS UP ON U.id_usuario = UP.id_usuario JOIN ".$esquemaadmin."i3geoadmin_papeis AS P ON UP.id_papel = P.id_papel WHERE U.id_usuario = $id_usuario");
+		$dados = pegaDados("SELECT P.id_papel, P.nome, P.descricao, UP.id_usuario FROM ".$esquemaadmin."i3geousr_usuarios AS U JOIN ".$esquemaadmin."i3geousr_papelusuario AS UP ON U.id_usuario = UP.id_usuario JOIN ".$esquemaadmin."i3geousr_papeis AS P ON UP.id_papel = P.id_papel WHERE U.id_usuario = $id_usuario");
 		retornaJSON($dados);
 		exit;
 	break;
@@ -119,7 +119,7 @@ switch (strtoupper($funcao))
 		retornaJSON(excluirPapelUsuario());
 	break;
 	case "LISTAPAPEIS":
-		retornaJSON(pegaDados("SELECT * from ".$esquemaadmin."i3geoadmin_papeis order by nome"));
+		retornaJSON(pegaDados("SELECT * from ".$esquemaadmin."i3geousr_papeis order by nome"));
 		exit;
 	break;
 	case "ENVIARSENHAEMAIL":
@@ -132,10 +132,10 @@ function enviarSenhaEmail(){
 	global $id_usuario;
 	include(__DIR__."/conexao.php");
 	$novaSenha = rand(9000,1000000);
-	$dados = pegaDados("select * from ".$esquemaadmin."i3GEOadmin_usuarios where id_usuario = $id_usuario and ativo = 1");
+	$dados = pegaDados("select * from ".$esquemaadmin."i3geousr_usuarios where id_usuario = $id_usuario and ativo = 1");
 	if(count($dados) > 0){
 		$senha = md5($novaSenha);
-		$dbhw->query("UPDATE ".$esquemaadmin."i3geoadmin_usuarios SET senha='$senha' WHERE id_usuario = $id_usuario");
+		$dbhw->query("UPDATE ".$esquemaadmin."i3geousr_usuarios SET senha='$senha' WHERE id_usuario = $id_usuario");
 		$to      = $dados[0]["email"];
 		$subject = 'senha i3geo';
 		$message = $novaSenha;
@@ -157,17 +157,17 @@ function alterarUsuarios()
 		}
 		if($id_usuario != ""){
 			//verifica uniciade de login
-			$dados = pegaDados("select login from ".$esquemaadmin."i3GEOadmin_usuarios where login = '$login'");
+			$dados = pegaDados("select login from ".$esquemaadmin."i3geousr_usuarios where login = '$login'");
 			if(count($dados) > 0){
 				$retorna = false;
 			}
 			//se a senha foi enviada, ela sera trocada
 			if($senha != ""){
 				$senha = md5($senha);
-				$dbhw->query("UPDATE ".$esquemaadmin."i3geoadmin_usuarios SET senha='$senha',nome_usuario='$nome_usuario',login='$login',email='$email',ativo=$ativo,data_cadastro='$data_cadastro' WHERE id_usuario = $id_usuario");
+				$dbhw->query("UPDATE ".$esquemaadmin."i3geousr_usuarios SET senha='$senha',nome_usuario='$nome_usuario',login='$login',email='$email',ativo=$ativo,data_cadastro='$data_cadastro' WHERE id_usuario = $id_usuario");
 			}
 			else{
-				$dbhw->query("UPDATE ".$esquemaadmin."i3geoadmin_usuarios SET nome_usuario='$nome_usuario',login='$login',email='$email',ativo=$ativo,data_cadastro='$data_cadastro' WHERE id_usuario = $id_usuario");
+				$dbhw->query("UPDATE ".$esquemaadmin."i3geousr_usuarios SET nome_usuario='$nome_usuario',login='$login',email='$email',ativo=$ativo,data_cadastro='$data_cadastro' WHERE id_usuario = $id_usuario");
 			}
 			$retorna = $id_usuario;
 		}
@@ -176,11 +176,11 @@ function alterarUsuarios()
 			if($senha == ""){
 				$senha = md5($idtemp);
 			}
-			$dbhw->query("INSERT INTO ".$esquemaadmin."i3geoadmin_usuarios (senha,nome_usuario,ativo) VALUES ('$senha','$idtemp',0)");
-			$id = $dbh->query("SELECT id_usuario FROM ".$esquemaadmin."i3geoadmin_usuarios WHERE nome_usuario = '$idtemp'");
+			$dbhw->query("INSERT INTO ".$esquemaadmin."i3geousr_usuarios (senha,nome_usuario,ativo) VALUES ('$senha','$idtemp',0)");
+			$id = $dbh->query("SELECT id_usuario FROM ".$esquemaadmin."i3geousr_usuarios WHERE nome_usuario = '$idtemp'");
 			$id = $id->fetchAll();
 			$id = $id[0]['id_usuario'];
-			//$dbhw->query("UPDATE ".$esquemaadmin."i3geoadmin_usuarios SET nome_usuario = '' WHERE id_usuario = $id AND nome_usuario = '$idtemp'");
+			//$dbhw->query("UPDATE ".$esquemaadmin."i3geousr_usuarios SET nome_usuario = '' WHERE id_usuario = $id AND nome_usuario = '$idtemp'");
 			$retorna = $id;
 		}
 		$dbhw = null;
@@ -196,7 +196,7 @@ function adicionaPapelUsuario(){
 	try
 	{
 		include(__DIR__."/conexao.php");
-		$dbhw->query("INSERT INTO ".$esquemaadmin."i3geoadmin_papelusuario (id_usuario,id_papel) VALUES ($id_usuario,$id_papel)");
+		$dbhw->query("INSERT INTO ".$esquemaadmin."i3geousr_papelusuario (id_usuario,id_papel) VALUES ($id_usuario,$id_papel)");
 		$dbhw = null;
 		$dbh = null;
 		return "ok";
@@ -211,8 +211,8 @@ function excluirUsuario()
 	try
 	{
 		include(__DIR__."/conexao.php");
-		//echo "DELETE from ".$esquemaadmin."i3geoadmin_usuarios WHERE id_usuario = $id_usuario";exit;
-		$dbhw->query("DELETE FROM ".$esquemaadmin."i3geoadmin_usuarios WHERE id_usuario = $id_usuario ");
+		//echo "DELETE from ".$esquemaadmin."i3geousr_usuarios WHERE id_usuario = $id_usuario";exit;
+		$dbhw->query("DELETE FROM ".$esquemaadmin."i3geousr_usuarios WHERE id_usuario = $id_usuario ");
 		$dbhw = null;
 		$dbh = null;
 		return "ok";
@@ -228,8 +228,8 @@ function excluirPapelUsuario()
 	try
 	{
 		include(__DIR__."/conexao.php");
-		//echo "DELETE from ".$esquemaadmin."i3geoadmin_usuarios WHERE id_usuario = $id_usuario";exit;
-		$dbhw->query("DELETE FROM ".$esquemaadmin."i3geoadmin_papelusuario WHERE id_usuario = $id_usuario AND id_papel = $id_papel ");
+		//echo "DELETE from ".$esquemaadmin."i3geousr_usuarios WHERE id_usuario = $id_usuario";exit;
+		$dbhw->query("DELETE FROM ".$esquemaadmin."i3geousr_papelusuario WHERE id_usuario = $id_usuario AND id_papel = $id_papel ");
 		$dbhw = null;
 		$dbh = null;
 		return "ok";

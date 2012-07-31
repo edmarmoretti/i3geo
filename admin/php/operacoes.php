@@ -77,27 +77,27 @@ switch (strtoupper($funcao))
 {
 	case "ALTERAROPERACOES":
 		$novo = alterarOperacoes();
-		$sql = "SELECT * from ".$esquemaadmin."i3geoadmin_operacoes WHERE id_operacao = ".$novo;
+		$sql = "SELECT * from ".$esquemaadmin."i3geousr_operacoes WHERE id_operacao = ".$novo;
 		retornaJSON(pegaDados($sql));
 		exit;
 	break;
 	case "PEGAOPERACOES":
-		retornaJSON(pegaDados("SELECT id_operacao,codigo,descricao from ".$esquemaadmin."i3geoadmin_operacoes order by codigo"));
+		retornaJSON(pegaDados("SELECT id_operacao,codigo,descricao from ".$esquemaadmin."i3geousr_operacoes order by codigo"));
 		exit;
 	break;
 	case "PEGAPAPEISOPERACAO":
-		$dados = pegaDados("SELECT P.id_papel, P.nome, P.descricao, OP.id_operacao FROM ".$esquemaadmin."i3geoadmin_operacoes AS O JOIN ".$esquemaadmin."i3geoadmin_operacoespapeis AS OP ON O.id_operacao = OP.id_operacao JOIN ".$esquemaadmin."i3geoadmin_papeis AS P ON OP.id_papel = P.id_papel WHERE O.id_operacao = $id_operacao");
+		$dados = pegaDados("SELECT P.id_papel, P.nome, P.descricao, OP.id_operacao FROM ".$esquemaadmin."i3geousr_operacoes AS O JOIN ".$esquemaadmin."i3geousr_operacoespapeis AS OP ON O.id_operacao = OP.id_operacao JOIN ".$esquemaadmin."i3geousr_papeis AS P ON OP.id_papel = P.id_papel WHERE O.id_operacao = $id_operacao");
 		$dados[] = array("id_papel"=>1,"nome"=>"admin","descricao"=>"admin");
 		retornaJSON($dados);
 		exit;
 	break;
 	case "PEGADADOSOPERACAO":
-		retornaJSON(pegaDados("SELECT * from ".$esquemaadmin."i3geoadmin_operacoes WHERE id_operacao = $id_operacao"));
+		retornaJSON(pegaDados("SELECT * from ".$esquemaadmin."i3geousr_operacoes WHERE id_operacao = $id_operacao"));
 		exit;
 	break;
 	case "ADICIONAPAPELOPERACOES":
 		adicionaPapelOperacoes();
-		$dados = pegaDados("SELECT P.id_papel, P.nome, P.descricao, OP.id_operacao FROM ".$esquemaadmin."i3geoadmin_operacoes AS O JOIN ".$esquemaadmin."i3geoadmin_operacoespapeis AS OP ON O.id_operacao = OP.id_operacao JOIN ".$esquemaadmin."i3geoadmin_papeis AS P ON OP.id_papel = P.id_papel WHERE O.id_operacao = $id_operacao AND P.id_papel = $id_papel");
+		$dados = pegaDados("SELECT P.id_papel, P.nome, P.descricao, OP.id_operacao FROM ".$esquemaadmin."i3geousr_operacoes AS O JOIN ".$esquemaadmin."i3geousr_operacoespapeis AS OP ON O.id_operacao = OP.id_operacao JOIN ".$esquemaadmin."i3geousr_papeis AS P ON OP.id_papel = P.id_papel WHERE O.id_operacao = $id_operacao AND P.id_papel = $id_papel");
 		retornaJSON($dados);
 		exit;
 	break;
@@ -107,7 +107,7 @@ switch (strtoupper($funcao))
 		exit;
 		break;
 	case "LISTAPAPEIS":
-		retornaJSON(pegaDados("SELECT * from ".$esquemaadmin."i3geoadmin_papeis order by nome"));
+		retornaJSON(pegaDados("SELECT * from ".$esquemaadmin."i3geousr_papeis order by nome"));
 		exit;
 	break;
 }
@@ -122,16 +122,16 @@ function alterarOperacoes()
 			$descricao = utf8_encode($descricao);
 		}
 		if($id_operacao != ""){
-			$dbhw->query("UPDATE ".$esquemaadmin."i3geoadmin_operacoes SET codigo='$codigo',descricao='$descricao' WHERE id_operacao = $id_operacao");
+			$dbhw->query("UPDATE ".$esquemaadmin."i3geousr_operacoes SET codigo='$codigo',descricao='$descricao' WHERE id_operacao = $id_operacao");
 			$retorna = $id_operacao;
 		}
 		else{
 			$idtemp = (rand (9000,10000)) * -1;
-			$dbhw->query("INSERT INTO ".$esquemaadmin."i3geoadmin_operacoes (codigo,descricao) VALUES ('','$idtemp')");
-			$id = $dbh->query("SELECT id_operacao FROM ".$esquemaadmin."i3geoadmin_operacoes WHERE descricao = '$idtemp'");
+			$dbhw->query("INSERT INTO ".$esquemaadmin."i3geousr_operacoes (codigo,descricao) VALUES ('','$idtemp')");
+			$id = $dbh->query("SELECT id_operacao FROM ".$esquemaadmin."i3geousr_operacoes WHERE descricao = '$idtemp'");
 			$id = $id->fetchAll();
 			$id = $id[0]['id_operacao'];
-			$dbhw->query("UPDATE ".$esquemaadmin."i3geoadmin_operacoes SET descricao = '' WHERE id_operacao = $id AND descricao = '$idtemp'");
+			$dbhw->query("UPDATE ".$esquemaadmin."i3geousr_operacoes SET descricao = '' WHERE id_operacao = $id AND descricao = '$idtemp'");
 			$retorna = $id;
 		}
 		$dbhw = null;
@@ -147,7 +147,7 @@ function adicionaPapelOperacoes(){
 	try
 	{
 		include(__DIR__."/conexao.php");
-		$dbhw->query("INSERT INTO ".$esquemaadmin."i3geoadmin_operacoespapeis (id_operacao,id_papel) VALUES ($id_operacao,$id_papel)");
+		$dbhw->query("INSERT INTO ".$esquemaadmin."i3geousr_operacoespapeis (id_operacao,id_papel) VALUES ($id_operacao,$id_papel)");
 		$dbhw = null;
 		$dbh = null;
 		return "ok";
@@ -161,7 +161,7 @@ function excluirPapelOperacao(){
 	try
 	{
 		include(__DIR__."/conexao.php");
-		$dbhw->query("DELETE from ".$esquemaadmin."i3geoadmin_operacoespapeis WHERE id_operacao = $id_operacao AND id_papel = $id_papel");
+		$dbhw->query("DELETE from ".$esquemaadmin."i3geousr_operacoespapeis WHERE id_operacao = $id_operacao AND id_papel = $id_papel");
 		$dbhw = null;
 		$dbh = null;
 		return "ok";

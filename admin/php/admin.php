@@ -255,9 +255,15 @@ function verificaFilhos()
 			if(count($r) > 0)
 				$res = true;
 		}
-		if($tabela == "i3geoadmin_usuarios")
+		if($tabela == "i3geousr_grupos")
 		{
-			$r = pegaDados("select * from ".$esquemaadmin."i3geoadmin_papelusuario where id_usuario=$id");
+			$r = pegaDados("select * from ".$esquemaadmin."i3geousr_gruposusuario where id_grupo=$id");
+			if(count($r) > 0)
+				$res = true;
+		}
+		if($tabela == "i3geousr_usuarios")
+		{
+			$r = pegaDados("select * from ".$esquemaadmin."i3geousr_papelusuario where id_usuario=$id");
 			if(count($r) > 0)
 				$res = true;
 		}
