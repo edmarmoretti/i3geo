@@ -102,7 +102,7 @@ if (isset($map) && $map != "")
 	if(!isset($solegenda)){$solegenda = "nao";}
 	if ($map == "todos")
 	{
-		$tipo = "todos";	
+		$tipo = "todos";
 		$conta = 0;
 		echo "<br>N&uacute;mero de mapas = ".(count($arqs["arquivos"]))." Faltam= ".(count($arqs["arquivos"])-$iniciar-10)."<br>";
 		if (!isset($iniciar)){$iniciar = 0;}
@@ -121,7 +121,7 @@ if (isset($map) && $map != "")
 		echo "<hr><br><br><a href='testamapfile.php?map=todos&iniciar=".($iniciar+10)."' >Próximos mapas</a>";
 	}
 	else
-	{verifica($map,$solegenda);}	
+	{verifica($map,$solegenda);}
 }
 echo '</div>';
 echo '<script>if(screen.availWidth > 700){document.getElementById("divGeral").style.width = "700px";}</script>';
@@ -134,20 +134,20 @@ function verifica($map,$solegenda)
 	{
 		Header("Content-type: image/png");
 		ImagePng(ImageCreateFromPNG('temas/miniaturas/'.$map.".mini.png"));
-		exit;		
+		exit;
 	}
 	if ($tipo == "grande" && file_exists('temas/miniaturas/'.$map.".grande.png"))
 	{
 		Header("Content-type: image/png");
 		ImagePng(ImageCreateFromPNG('temas/miniaturas/'.$map.".grande.png"));
-		exit;		
+		exit;
 	}
 	ms_ResetErrorList();
 	$tema = "";
 	if(file_exists($map))
 	{$tema = $map;}
 	else
-	{	
+	{
 		$map = str_replace("\\","/",$map);
 		$map = basename($map);
 		if (file_exists('temas/'.$map))
@@ -174,13 +174,13 @@ function verifica($map,$solegenda)
 				if($base == "" && file_exists('/var/www/i3geo/aplicmap/geral1debianv'.$versao.'.map')){
 					$base = "/var/www/i3geo/aplicmap/geral1debianv".$versao.".map";
 				}
-				if($f == "" && file_exists('/var/www/html/i3geo/aplicmap/geral1fedorav'.$versao.'.map')){
+				if($base == "" && file_exists('/var/www/html/i3geo/aplicmap/geral1fedorav'.$versao.'.map')){
 					$base = "/var/www/html/i3geo/aplicmap/geral1fedorav".$versao.".map";
 				}
-				if($f == "" && file_exists('/opt/www/html/i3geo/aplicmap/geral1fedorav'.$versao.'.map')){
+				if($base == "" && file_exists('/opt/www/html/i3geo/aplicmap/geral1fedorav'.$versao.'.map')){
 					$base = "/opt/www/html/i3geo/aplicmap/geral1v".$versao.".map";
 				}
-				if($f == "")
+				if($base == "")
 				{$base = $locaplic."/aplicmap/geral1v".$versao.".map";}
 			}
 		}
@@ -188,6 +188,7 @@ function verifica($map,$solegenda)
 			if(!file_exists($base))
 			{$base = $locaplic."/aplicmap/".$base;}
 		}
+		//echo $base;exit;
 		$mapa = ms_newMapObj($base);
 		error_reporting(0);
 		$temasn = $mapa->getAllLayerNames();
@@ -204,7 +205,7 @@ function verifica($map,$solegenda)
 						if(($lcon == " ") || ($lcon == "")) //para efeitos de compatibilidade
 						{$layern->set("connection",$postgis_mapa);}
 						else
-						{$layern->set("connection",$postgis_mapa[$lcon]);}					
+						{$layern->set("connection",$postgis_mapa[$lcon]);}
 					}
 				}
 			}
@@ -251,13 +252,13 @@ function verifica($map,$solegenda)
 					if ($layern->connectiontype == MS_POSTGIS)
 					{
 						$lcon = $layern->connection;
-						error_reporting(0);						
+						error_reporting(0);
 						if (($lcon == " ") || ($lcon == "") || (in_array($lcon,array_keys($postgis_mapa))))
 						{
 							if(($lcon == " ") || ($lcon == "")) //para efeitos de compatibilidade
 							{$layern->set("connection",$postgis_mapa);}
 							else
-							{$layern->set("connection",$postgis_mapa[$lcon]);}					
+							{$layern->set("connection",$postgis_mapa[$lcon]);}
 						}
 					}
 				}
@@ -281,7 +282,7 @@ function verifica($map,$solegenda)
 				$dados = $layern->connection;
 				else
 				$dados = $layern->data;
-				$pegarext = $teman;	
+				$pegarext = $teman;
 			}
 		}
 		zoomTema($pegarext,$mapa);
@@ -322,7 +323,7 @@ function verifica($map,$solegenda)
 		$nomec = ($objImagem->imagepath).nomeRandomico()."teste.png";
 		$objImagem->saveImage($nomec);
 		$nomer = ($objImagem->imageurl).basename($nomec);
-		
+
 		$nomel = ($objImagemLegenda->imagepath).nomeRandomico()."testel.png";
 		$objImagemLegenda->saveImage($nomel);
 		$nomerl = ($objImagemLegenda->imageurl).basename($nomel);
@@ -346,7 +347,7 @@ function verifica($map,$solegenda)
 					$error = $error->next();
 				}
 			}
-				
+
 		}
 		else
 		{
@@ -360,7 +361,7 @@ function zoomTema($nomelayer,&$mapa)
 {
 	$layer = $mapa->getlayerbyname($nomelayer);
 	if($layer->data == "" && $layer->connection == "")
-	{return;}	
+	{return;}
 	$prjMapa = $mapa->getProjection();
 	$prjTema = $layer->getProjection();
 	$extatual = $mapa->extent;

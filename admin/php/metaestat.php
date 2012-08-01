@@ -511,7 +511,33 @@ switch (strtoupper($funcao))
 	case "DADOSMEDIDAVARIAVEL":
 		$m = new Metaestat();
 		if($formato == "json"){
-			retornaJSON($m->dadosMedidaVariavel($id_medida_variavel,$filtro,$todasascolunas,$agruparpor));
+			retornaJSON($m->dadosMedidaVariavel($id_medida_variavel,$filtro,$todasascolunas));
+		}
+		exit;
+	break;
+	/*
+	 Valor: MAPFILEMEDIDAVARIAVEL
+
+	Cria o mapfile de uma media de uma variavel
+
+	Parametros:
+
+	formato
+
+	filtro
+
+	agruparpor
+
+	todasascolunas - 0 ou 1
+
+	Retorno:
+
+	{JSON}
+	*/
+	case "MAPFILEMEDIDAVARIAVEL":
+		$m = new Metaestat();
+		if($formato == "json"){
+			retornaJSON($m->mapfileMedidaVariavel($id_medida_variavel,$filtro,$todasascolunas,$tipolayer,$titulolayer));
 		}
 		exit;
 	break;

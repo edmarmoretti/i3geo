@@ -1144,7 +1144,7 @@ function criarNovoMap()
 	if(!file_exists($arq))
 	{
 		$dados[] = "MAP";
-		$dados[] = "SYMBOLSET ../symbols/simbolos.sym";
+		$dados[] = "SYMBOLSET ../symbols/simbolosv6.sym";
 		$dados[] = 'FONTSET   "../symbols/fontes.txt"';
 		$dados[] = "LAYER";
 		$dados[] = "	NAME $codigo";

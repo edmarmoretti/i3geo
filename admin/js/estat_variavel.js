@@ -429,9 +429,13 @@ function sql(tipo,id) {
 						ins += "<input type=text value='' id='filtrosql' />";
 						ins +="<p>Agrupar pela coluna<br>";
 						ins += "<input type=text value='' id='agruparsql' />";
+						ins +="<p>Tipo de layer (para o caso de mapas ou mapfiles, podendo ser point,line ou polygon)<br>";
+						ins += "<input type=text value='' id='tipolayer' />";
 						ins += '<p><input type=button id="sqljson" value="JSON" />';
 						ins += '  <input type=button id="sumarioestat" value="Sum&aacute;rio" />';
 						ins += '  <input type=button id="graficoestat" value="Gr&aacute;fico" />';
+						ins += '  <input type=button id="mapfileestat" value="Mapfile" />';
+						ins += '  <input type=button id="i3geoestat" value="i3Geo" />';
 
 						$i("editor_bd").innerHTML = ins;
 						new YAHOO.widget.Button("sqljson");
@@ -440,15 +444,42 @@ function sql(tipo,id) {
 							if($i("incluirtodascolunas").checked === true){
 								colunas = 1;
 							}
-							window.open('../php/metaestat.php?funcao=dadosMedidaVariavel&formato=json&id_medida_variavel='+id+"&agruparpor="+$i("agruparsql").value+"&filtro="+$i("filtrosql").value+"&todasascolunas="+colunas);
+							window.open('../php/metaestat.php?funcao=dadosMedidaVariavel&formato=json&id_medida_variavel='+id+"&filtro="+$i("filtrosql").value+"&todasascolunas="+colunas);
 						};
 						new YAHOO.widget.Button("sumarioestat");
 						$i("sumarioestat-button").onclick = function(){
 							window.open('../php/metaestat.php?funcao=sumarioMedidaVariavel&formato=json&id_medida_variavel='+id+"&agruparpor="+$i("agruparsql").value+"&filtro="+$i("filtrosql").value);
 						};
+						new YAHOO.widget.Button("mapfileestat");
+						$i("mapfileestat-button").onclick = function(){
+							var colunas = 0;
+							if($i("incluirtodascolunas").checked === true){
+								colunas = 1;
+							}
+							window.open('../php/metaestat.php?funcao=mapfileMedidaVariavel&formato=json&id_medida_variavel='+id+"&filtro="+$i("filtrosql").value+"&todasascolunas="+colunas+"&tipolayer="+$i("tipolayer").value);
+						};
+						new YAHOO.widget.Button("i3geoestat");
+						$i("i3geoestat-button").onclick = function(){
+							var callback = 	{
+							    	success: function(oResponse){
+										var dados = YAHOO.lang.JSON.parse(oResponse.responseText);
+										window.open("../../ms_criamapa.php?temasa="+dados.mapfile+"&layers="+dados.layer);
+										core_carregando("desativa");
+									},
+							  		failure:core_handleFailure,
+							  		argument: { foo:"foo", bar:"bar" }
+								},
+								colunas = 0;
+							if($i("incluirtodascolunas").checked === true){
+								colunas = 1;
+							}
+							sUrl = '../php/metaestat.php?funcao=mapfileMedidaVariavel&formato=json&id_medida_variavel='+id+"&filtro="+$i("filtrosql").value+"&todasascolunas="+colunas+"&tipolayer="+$i("tipolayer").value;
+							core_carregando("ativa");
+							core_makeRequest(sUrl,callback);
+						};
 						new YAHOO.widget.Button("graficoestat");
 						$i("graficoestat-button").onclick = function(){
-							callback = 	{
+							var callback = 	{
 							    	success: function(oResponse){
 										var dados = YAHOO.lang.JSON.parse(oResponse.responseText);
 										dados = dados.grupos;
@@ -516,8 +547,8 @@ function sql(tipo,id) {
 									},
 							  		failure:core_handleFailure,
 							  		argument: { foo:"foo", bar:"bar" }
-								};
-							sUrl = '../php/metaestat.php?funcao=sumarioMedidaVariavel&formato=json&id_medida_variavel='+id+"&agruparpor="+$i("agruparsql").value+"&filtro="+document.getElementById("filtrosql").value;
+								},
+								sUrl = '../php/metaestat.php?funcao=sumarioMedidaVariavel&formato=json&id_medida_variavel='+id+"&agruparpor="+$i("agruparsql").value+"&filtro="+document.getElementById("filtrosql").value;
 							core_carregando("ativa");
 							core_makeRequest(sUrl,callback);
 						};

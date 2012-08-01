@@ -40,6 +40,7 @@ class Metaestat{
 	public $dbh;
 	protected $dbhw;
 	protected $convUTF;
+	public $dir_tmp;
 	/*
 	Function: __construct
 
@@ -48,6 +49,9 @@ class Metaestat{
 	function __construct(){
 		error_reporting(0);
 		include(__DIR__."/conexao.php");
+		//vem do include
+		$this->dir_tmp = $dir_tmp;
+		$this->locaplic = $locaplic;
 		if(!isset($convUTF)){
 			$convUTF = true;
 		}
@@ -61,6 +65,16 @@ class Metaestat{
 	}
 	function __destruct(){
 		$this->fechaConexao;
+	}
+	function nomeRandomico($n=10){
+		$nomes = "";
+		$a = 'azertyuiopqsdfghjklmwxcvbnABCDEFGHIJKLMNOPQRSTUVWXYZ';
+		$max = 51;
+		for($i=0; $i < $n; ++$i)
+		{
+			$nomes .= $a{mt_rand(0, $max)};
+		}
+		return $nomes;
 	}
 	function fechaConexao(){
 		$this->dbh = null;
@@ -195,7 +209,7 @@ class Metaestat{
 		}
 		else{
 			$sql = " SELECT d.* ";
-			$sqlgeo = " SELECT ".$dados["tabela"].".*,g.".$dados["colunaidgeo"];
+			$sqlgeo = $sql.",g.".$dadosgeo["colunageo"];
 		}
 		$sql .= " FROM ".$dados["esquemadb"].".".$dados["tabela"]." as d ";
 		$sqlgeo .= " FROM ".$dados["esquemadb"].".".$dados["tabela"]." as d,".$dadosgeo["esquemadb"].".".$dadosgeo["tabela"]." as g ";
@@ -212,8 +226,56 @@ class Metaestat{
 		else{
 			$sqlgeo .= " WHERE ".$j;
 		}
-		$sqlgeo = $dadosgeo["colunageo"]." from ($sqlgeo) as foo using unique ".$dados["colunaidgeo"]." using srid= ".$dadosgeo["srid"];
+		//atencao: cuidado ao alterar essa string pois ') as foo' pode ser usado para replace em outras funcoes
+		$sqlgeo = $dadosgeo["colunageo"]." from ($sqlgeo) as foo using unique ".$dados["colunaidgeo"]." using srid=".$dadosgeo["srid"];
 		return array("sql"=>$sql,"sqlmapserver"=>$sqlgeo,"filtro"=>$filtro);
+	}
+	function mapfileMedidaVariavel($id_medida_variavel,$filtro="",$todasascolunas = 0,$tipolayer="polygon",$titulolayer=""){
+		if(empty($tipolayer)){
+			$tipolayer = "polygon";
+		}
+		$meta = $this->listaMedidaVariavel("",$id_medida_variavel);
+		if($titulolayer == ""){
+			$titulolayer = $meta["nomemedida"];
+		}
+		$conexao = $this->listaConexao($meta["codigo_estat_conexao"],true);
+		$conexao = "user=".$conexao["usuario"]." password=".$conexao["senha"]." dbname=".$conexao["bancodedados"]." host=".$conexao["host"]." port=".$conexao["porta"]."";
+		//echo $conexao;exit;
+		$sql = $this->sqlMedidaVariavel($id_medida_variavel,$todasascolunas);
+		$sqlf = $sql["sqlmapserver"];
+		if(!empty($filtro)){
+			$sqlf = str_replace(") as foo"," AND ".$filtro." ) foo",$sqlf);
+		}
+		//echo $sqlf;exit;
+		$rand = $this->nomeRandomico();
+		$arq = $this->dir_tmp."/".$rand.".map";
+		$dados[] = "MAP";
+		$dados[] = "SYMBOLSET ".$this->locaplic."/symbols/simbolosv6.sym";
+		$dados[] = 'FONTSET   "'.$this->locaplic.'/symbols/fontes.txt"';
+		$dados[] = "LAYER";
+		$dados[] = '	NAME "'.$rand.'"';
+		$dados[] = "	TYPE $tipolayer";
+		$dados[] = '	DATA "'.$sqlf.'"';
+		$dados[] = '	CONNECTION "'.$conexao.'"';
+		$dados[] = '	CONNECTIONTYPE POSTGIS';
+		$dados[] = '	STATUS OFF';
+		$dados[] = '	METADATA';
+		$dados[] = '		TEMA "'.$titulolayer.'"';
+		$dados[] = '		CLASSE "SIM"';
+		$dados[] = '	END';
+		$dados[] = '    CLASS';
+		$dados[] = '        NAME ""';
+		$dados[] = '        STYLE';
+		$dados[] = '        	COLOR 200 0 0';
+		$dados[] = '        END';
+		$dados[] = '    END';
+		$dados[] = "END";
+		$dados[] = "END";
+		$fp = fopen($arq,"w");
+		foreach ($dados as $dado){
+			fwrite($fp,$dado."\n");
+		}
+		return array("mapfile"=>$arq,"layer"=>$rand,"titulolayer"=>$titulolayer);
 	}
 	function dadosMedidaVariavel($id_medida_variavel,$filtro="",$todasascolunas = 0){
 		$sql = $this->sqlMedidaVariavel($id_medida_variavel,$todasascolunas);

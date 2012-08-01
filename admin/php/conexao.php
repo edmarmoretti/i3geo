@@ -41,42 +41,16 @@ Free Software Foundation, Inc., no endere&ccedil;o
 Arquivo: i3geo/admin/php/conexao.php
 
 */
-if(isset($locaplic) && $locaplic != "")
-{
+if(isset($locaplic) && $locaplic != ""){
 	include($locaplic."/ms_configura.php");
 }
-else
-{
-	if (file_exists("../../../ms_configura.php"))
-	{
-		include("../../../ms_configura.php");
-	}
-	else
-	{
-		if (file_exists("../../ms_configura.php"))
-		{
-			include("../../ms_configura.php");
-		}
-		else
-		{
-			if (file_exists("../ms_configura.php"))
-			{
-				include("../ms_configura.php");
-			}
-			else
-				if (file_exists("ms_configura.php"))
-				{
-					include("ms_configura.php");
-				}
-		}
-	}
+else{
+	include(__DIR__."/../../ms_configura.php");
 }
-if(!isset($conexaoadmin))
-{
+if(!isset($conexaoadmin)){
 	$conexaoadmin = "";
 }
-if(!isset($esquemaadmin))
-{
+if(!isset($esquemaadmin)){
 	$esquemaadmin = "";
 }
 //
@@ -84,11 +58,9 @@ if(!isset($esquemaadmin))
 //
 $convUTF = true;
 
-if($conexaoadmin == "")
-{
+if($conexaoadmin == ""){
 	$arquivosqlite = $locaplic."/admin/admin.db";
-	if(!file_exists($arquivosqlite))
-	{
+	if(!file_exists($arquivosqlite)){
 		echo "O arquivo admin.db n&atilde;o existe. Utilize i3geo/admin/criabanco.php para criar o banco de dados SQLITE.";
 		exit;
 	}
@@ -97,15 +69,13 @@ if($conexaoadmin == "")
 	if(!extension_loaded("PDO")){
 		echo "A extensao do PHP 'PDO' nao esta instalada.";
 	}
-	try
-	{
+	try	{
 		//para escrita
 		$dbhw = new PDO($conAdminw);
 		//para leitura
 		$dbh = new PDO($conAdmin);
 	}
-	catch (PDOException $e)
-	{
+	catch (PDOException $e)	{
 		print "Erro ao criar o objeto PDO!: " . $e->getMessage() . "<br/> Talvez exista alguma incompatibilidade entre o PHP e o banco admin.db. Vc pode apagar o arquivo menutemas/admin.db e recria-lo com admin/php/criasqlite.php";
 		die();
 	}
