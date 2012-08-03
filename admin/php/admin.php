@@ -219,6 +219,12 @@ function verificaFilhos()
 	try
 	{
 		$res = false;
+		if($tabela == "i3geoestat_classificacao")
+		{
+			$r = pegaDados("select * from ".$esquemaadmin."i3geoestat_classes where id_classificacao=$id");
+			if(count($r) > 0)
+				$res = true;
+		}
 		if($tabela == "i3geoestat_conexao")
 		{
 			$r = pegaDados("select * from ".$esquemaadmin."i3geoestat_medida_variavel where codigo_estat_conexao=$id");
@@ -245,7 +251,7 @@ function verificaFilhos()
 		}
 		if($tabela == "i3geoestat_medida_variavel")
 		{
-			$r = pegaDados("select * from ".$esquemaadmin."i3geoestat_medidadimensao where id_medida_variavel=$id");
+			$r = pegaDados("select * from ".$esquemaadmin."i3geoestat_dimensao_medida where id_medida_variavel=$id");
 			if(count($r) > 0)
 				$res = true;
 		}

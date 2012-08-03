@@ -106,7 +106,12 @@ function montaArvore(dados){
 	                },
 	                timeout: 25000
             	};
-            YAHOO.util.Connect.asyncRequest('GET', sUrl, callback);
+            if(node.data.codigo_variavel){
+            	YAHOO.util.Connect.asyncRequest('GET', sUrl, callback);
+            }
+            else{
+            	fnLoadComplete.call();
+            }
         }
         function buildTree(){
 			tree = new YAHOO.widget.TreeView("tabela");
@@ -130,14 +135,14 @@ Mostra os nós de uma medida
 */
 function adicionaNosMedidas(no,dados,redesenha)
 {
-	var tempNode,i,conteudo,d,j;
+	var tempNode,tempNode1,tempNode2,i,conteudo,d,j;
 	function temaIconMode(){
 		var newVal = parseInt(this.value);
 		if (newVal != currentIconMode)
 		{currentIconMode = newVal;}
 	}
     function loadNodeData(node, fnLoadComplete){
-    	var sUrl = "../php/metaestat.php?funcao=listaDimensao&id_medida_variavel="+node.data.id_medida_variavel,
+    	var sUrl = "../php/metaestat.php?funcao=listaDimensao&id_medida_variavel="+node.data.no_dimensoes,
 			callback = {
 	            success: function(oResponse){
 	                var dados = YAHOO.lang.JSON.parse(oResponse.responseText);
@@ -154,12 +159,31 @@ function adicionaNosMedidas(no,dados,redesenha)
 	            timeout: 25000
         	};
         YAHOO.util.Connect.asyncRequest('GET', sUrl, callback);
-    }
-    if(!redesenha){
+    };
+    function loadNodeData1(node, fnLoadComplete){
+    	var sUrl = "../php/metaestat.php?funcao=listaClassificacaoMedida&id_medida_variavel="+node.data.no_classificacao,
+			callback = {
+	            success: function(oResponse){
+	                var dados = YAHOO.lang.JSON.parse(oResponse.responseText);
+					adicionaNosClassificacao(node,dados,false);
+	                oResponse.argument.fnLoadComplete();
+	            },
+	            failure: function(oResponse){
+	                oResponse.argument.fnLoadComplete();
+	            },
+	            argument:{
+	                "node": node,
+	                "fnLoadComplete": fnLoadComplete
+	            },
+	            timeout: 25000
+        	};
+        YAHOO.util.Connect.asyncRequest('GET', sUrl, callback);
+    };
+    if(!redesenha && !(tree.getNodeByProperty("etiqueta_adiciona_variavel",no.data.codigo_variavel))){
 		tempNode = new YAHOO.widget.HTMLNode(
 				{
 					html:"<span style=\"cursor:pointer;\" onclick=\"adicionarMedidaVariavel('"+no.data.codigo_variavel+"')\" ><img style=\"position:relative;top:2px\" src=\"../imagens/05.png\" /><i>Adicionar nova medida da vari&aacute;vel</i></span>",
-					codigo_variavel:no.data.codigo_variavel
+					etiqueta_adiciona_variavel:no.data.codigo_variavel
 				},
 				no,
 				false,
@@ -177,18 +201,27 @@ function adicionaNosMedidas(no,dados,redesenha)
 		else
 		{conteudo += "&nbsp;<span style=color:red >Edite para definir a nova medida!!!</span>";}
 		d = {html:conteudo,id_medida_variavel:dados[i].id_medida_variavel,tipo:"medida"};
-		tempNode = new YAHOO.widget.HTMLNode(d, no, false,true);
-		tempNode.isLeaf = false;
-		tempNode.setDynamicLoad(loadNodeData, 1);
+		tempNode1 = new YAHOO.widget.HTMLNode(d, no, false,true);
+		tempNode1.isLeaf = false;
+		//tempNode1.setDynamicLoad(temp, 1);
+		conteudo = "&nbsp;Dimens&otilde;es";
+		d = {html:conteudo,no_dimensoes:dados[i].id_medida_variavel};
+		tempNode2 = new YAHOO.widget.HTMLNode(d, tempNode1, false,true);
+		tempNode2.isLeaf = false;
+		tempNode2.setDynamicLoad(loadNodeData, 1);
+		conteudo = "&nbsp;Classifica&ccedil;&otilde;es";
+		d = {html:conteudo,no_classificacao:dados[i].id_medida_variavel};
+		tempNode3 = new YAHOO.widget.HTMLNode(d, tempNode1, false,true);
+		tempNode3.isLeaf = false;
+		tempNode3.setDynamicLoad(loadNodeData1, 1);
 	}
+
 	if(redesenha){tree.draw();}
 }
 /*
 Function: adicionaNosDimensao
 
 Mostra os nós de uma dimensao
-
-<PEGATEMAS>
 */
 function adicionaNosDimensao(no,dados,redesenha){
 	var tempNode,i,j,conteudo,d;
@@ -200,7 +233,7 @@ function adicionaNosDimensao(no,dados,redesenha){
     if(!redesenha)    {
 		tempNode = new YAHOO.widget.HTMLNode(
 				{
-					html:"<span style=\"cursor:pointer;\" onclick=\"adicionarDimensaoMedida('"+no.data.id_medida_variavel+"')\" ><img style=\"position:relative;top:2px\" src=\"../imagens/05.png\" /><i>Adicionar nova dimens&atilde;o</i></span>"
+					html:"<span style=\"cursor:pointer;\" onclick=\"adicionarDimensaoMedida('"+no.data.no_dimensoes+"')\" ><img style=\"position:relative;top:2px\" src=\"../imagens/05.png\" /><i>Adicionar nova dimens&atilde;o</i></span>"
 				},
 				no,
 				false,
@@ -221,6 +254,99 @@ function adicionaNosDimensao(no,dados,redesenha){
 	}
 	if(redesenha){tree.draw();}
 }
+/*
+Function: adicionaNosClassificacao
+
+Mostra os nós de uma dimensao
+*/
+function adicionaNosClassificacao(no,dados,redesenha){
+	var tempNode,i,j,conteudo,d;
+	function temaIconMode()	{
+		var newVal = parseInt(this.value);
+		if (newVal != currentIconMode)
+		{currentIconMode = newVal;}
+	}
+    function loadNodeData(node, fnLoadComplete){
+    	var sUrl = "../php/metaestat.php?funcao=listaClasseClassificacao&id_classificacao="+node.data.id_classificacao,
+			callback = {
+	            success: function(oResponse){
+	                var dados = YAHOO.lang.JSON.parse(oResponse.responseText);
+					adicionaNosClasses(node,dados,false);
+	                oResponse.argument.fnLoadComplete();
+	            },
+	            failure: function(oResponse){
+	                oResponse.argument.fnLoadComplete();
+	            },
+	            argument:{
+	                "node": node,
+	                "fnLoadComplete": fnLoadComplete
+	            },
+	            timeout: 25000
+        	};
+        YAHOO.util.Connect.asyncRequest('GET', sUrl, callback);
+    };
+    if(!redesenha)    {
+		tempNode = new YAHOO.widget.HTMLNode(
+				{
+					html:"<span style=\"cursor:pointer;\" onclick=\"adicionarClassificacaoMedida('"+no.data.no_classificacao+"')\" ><img style=\"position:relative;top:2px\" src=\"../imagens/05.png\" /><i>Adicionar nova classifica&ccedil;&atilde;o</i></span>"
+				},
+				no,
+				false,
+				true
+			);
+		tempNode.isLeaf = true;
+	}
+	for (i=0, j=dados.length; i<j; i++)	{
+		conteudo = "&nbsp;<img style=\"position:relative;cursor:pointer;top:0px\" onclick=\"excluir('classificacaoMedida','"+dados[i].id_classificacao+"')\" title=excluir width='10px' heigth='10px' src=\"../imagens/01.png\" />";
+		conteudo += "&nbsp;<img style=\"position:relative;cursor:pointer;top:2px\" onclick=\"editar('classificacaoMedida','"+dados[i].id_classificacao+"')\" title=editar src=\"../imagens/06.png\" /><b>";
+		if(dados[i].nomedimensao != "")
+		{conteudo += "&nbsp;<span><b>"+dados[i].nome+"</b><span style=color:gray > id: "+dados[i].id_classificacao+"</span></span>";}
+		else
+		{conteudo += "&nbsp;<span style=color:red >Edite para definir a nova classifica&ccedil;&atilde;o!!!</span>";}
+		d = {html:conteudo,id_classificacao:dados[i].id_classificacao,tipo:"classificacao"};
+		tempNode = new YAHOO.widget.HTMLNode(d, no, false,true);
+		tempNode.isLeaf = false;
+		tempNode.setDynamicLoad(loadNodeData, 1);
+	}
+	if(redesenha){tree.draw();}
+}
+/*
+Function: adicionaNosClasses
+
+Mostra os nós de uma classificacao
+*/
+function adicionaNosClasses(no,dados,redesenha){
+	var tempNode,i,j,conteudo,d;
+	function temaIconMode()	{
+		var newVal = parseInt(this.value);
+		if (newVal != currentIconMode)
+		{currentIconMode = newVal;}
+	}
+    if(!redesenha)    {
+		tempNode = new YAHOO.widget.HTMLNode(
+				{
+					html:"<span style=\"cursor:pointer;\" onclick=\"adicionarClasseClassificacao('"+no.data.id_classificacao+"')\" ><img style=\"position:relative;top:2px\" src=\"../imagens/05.png\" /><i>Adicionar nova classe</i></span>"
+				},
+				no,
+				false,
+				true
+			);
+		tempNode.isLeaf = true;
+	}
+	for (i=0, j=dados.length; i<j; i++)	{
+		conteudo = "&nbsp;<img style=\"position:relative;cursor:pointer;top:0px\" onclick=\"excluir('classeClassificacao','"+dados[i].id_classe+"')\" title=excluir width='10px' heigth='10px' src=\"../imagens/01.png\" />";
+		conteudo += "&nbsp;<img style=\"position:relative;cursor:pointer;top:2px\" onclick=\"editar('classeClassificacao','"+dados[i].id_classe+"')\" title=editar src=\"../imagens/06.png\" /><b>";
+		if(dados[i].nomedimensao != "")
+		{conteudo += "&nbsp;<span><b>"+dados[i].titulo+"</b><span style=color:gray >  id: "+dados[i].id_classe+"</span></span>";}
+		else
+		{conteudo += "&nbsp;<span style=color:red >Edite para definir a nova classe!!!</span>";}
+		d = {html:conteudo,id_classe:dados[i].id_classe,tipo:"classeClassificacao"};
+		tempNode = new YAHOO.widget.HTMLNode(d, no, false,true);
+		tempNode.isLeaf = true;
+	}
+	if(redesenha){tree.draw();}
+}
+
 function adicionaNosVariaveis(dados,redesenha){
 	var i,j,d,conteudo,
 		root = tree.getRoot();
@@ -312,6 +438,32 @@ function montaDivDimensaoMedida(i){
 		$i("Cagregavalores").innerHTML = temp;
 	}
 }
+function montaDivClassificacaoMedida(i){
+	var ins = "",
+		param = {
+			"linhas":[
+		          {titulo:"Nome:",id:"Enome",size:"50",value:i.nome,tipo:"text",div:""}
+			]
+		};
+	ins += core_geraLinhas(param);
+	ins += "<br><br><br>";
+	$i("editor_bd").innerHTML = ins;
+}
+function montaDivClasseClassificacao(i){
+	var ins = "",
+		param = {
+			"linhas":[
+		          {titulo:"T&iacute;tulo:",id:"Etitulo",size:"50",value:i.titulo,tipo:"text",div:""},
+		          {titulo:"Express&atilde;o (no estilo Mapserver)<br> exemplo (([nu_farm_funcionando] > 0) and ([nu_farm_funcionando] < 5)):",id:"Eexpressao",size:"50",value:i.expressao,tipo:"text",div:""},
+		          {titulo:"Vermelho:",id:"Evermelho",size:"10",value:i.vermelho,tipo:"text",div:""},
+		          {titulo:"Verde:",id:"Everde",size:"10",value:i.verde,tipo:"text",div:""},
+		          {titulo:"Azul:",id:"Eazul",size:"10",value:i.azul,tipo:"text",div:""}
+			]
+		};
+	ins += core_geraLinhas(param);
+	ins += "<br><br><br>";
+	$i("editor_bd").innerHTML = ins;
+}
 /*
 Function: adicionarMedidaVariavel
 
@@ -323,8 +475,7 @@ function adicionarMedidaVariavel(codigo_variavel){
 	var no = tree.getNodeByProperty("codigo_variavel",codigo_variavel),
 		sUrl = "../php/metaestat.php?funcao=alteraMedidaVariavel&codigo_variavel="+codigo_variavel,
 		callback = {
-	    	success: function(oResponse)
-			{
+	    	success: function(oResponse){
 				var dados = YAHOO.lang.JSON.parse(oResponse.responseText);
 				adicionaNosMedidas(no,[dados],true);
 				editar('medidaVariavel',dados.id_medida_variavel);
@@ -344,11 +495,49 @@ Adiciona uma nova dimensao a uma medida de variavel
 function adicionarDimensaoMedida(id_medida_variavel){
 	var no = tree.getNodeByProperty("id_medida_variavel",id_medida_variavel),
 		sUrl = "../php/metaestat.php?funcao=alteraDimensaoMedida&id_medida_variavel="+id_medida_variavel,
-	callback = 	{
+		callback = 	{
 	    	success: function(oResponse){
 				var dados = YAHOO.lang.JSON.parse(oResponse.responseText);
 				adicionaNosDimensao(no,[dados],true);
 				editar('dimensaoMedida',dados.id_dimensao_medida);
+			},
+	  		failure:core_handleFailure,
+	  		argument: { foo:"foo", bar:"bar" }
+		};
+	core_makeRequest(sUrl,callback);
+}
+/*
+Function: adicionarClassificacaoMedida
+
+Adiciona uma nova classificacao a uma medida de variavel
+*/
+function adicionarClassificacaoMedida(id_medida_variavel){
+	var no = tree.getNodeByProperty("no_classificacao",id_medida_variavel),
+		sUrl = "../php/metaestat.php?funcao=alteraClassificacaoMedida&id_medida_variavel="+id_medida_variavel,
+		callback = 	{
+	    	success: function(oResponse){
+				var dados = YAHOO.lang.JSON.parse(oResponse.responseText);
+				adicionaNosClassificacao(no,[dados],true);
+				editar('classificacaoMedida',dados.id_classificacao);
+			},
+	  		failure:core_handleFailure,
+	  		argument: { foo:"foo", bar:"bar" }
+		};
+	core_makeRequest(sUrl,callback);
+}
+/*
+Function: adicionarClasseClassificacao
+
+Adiciona uma nova classe a uma classificacao
+*/
+function adicionarClasseClassificacao(id_classificacao){
+	var no = tree.getNodeByProperty("id_classificacao",id_classificacao),
+		sUrl = "../php/metaestat.php?funcao=alteraClasseClassificacao&id_classificacao="+id_classificacao,
+		callback = 	{
+	    	success: function(oResponse){
+				var dados = YAHOO.lang.JSON.parse(oResponse.responseText);
+				adicionaNosClasses(no,[dados],true);
+				editar('classeClassificacao',dados.id_classe);
 			},
 	  		failure:core_handleFailure,
 	  		argument: { foo:"foo", bar:"bar" }
@@ -386,6 +575,18 @@ function editar(tipo,id) {
 						montaDivDimensaoMedida(dados);
 						//document.getElementById("Eid_variavel").style.width = "200px";
 					}
+					if(tipo == "classificacaoMedida"){
+						dados = YAHOO.lang.JSON.parse(o.responseText);
+						core_montaEditor("gravaDados('classificacaoMedida','"+id+"')","450px","200px","","Editor de classifica&ccedil;&atilde;o");
+						montaDivClassificacaoMedida(dados);
+						//document.getElementById("Eid_variavel").style.width = "200px";
+					}
+					if(tipo == "classeClassificacao"){
+						dados = YAHOO.lang.JSON.parse(o.responseText);
+						core_montaEditor("gravaDados('classeClassificacao','"+id+"')","450px","200px","","Editor de classe");
+						montaDivClasseClassificacao(dados);
+						//document.getElementById("Eid_variavel").style.width = "200px";
+					}
 					core_carregando("desativa");
 				}
 				catch(e){core_handleFailure(e,o.responseText);}
@@ -401,6 +602,12 @@ function editar(tipo,id) {
 	}
 	if(tipo == "dimensaoMedida"){
 		sUrl = "../php/metaestat.php?funcao=listaDimensao&id_dimensao_medida="+id;
+	}
+	if(tipo == "classificacaoMedida"){
+		sUrl = "../php/metaestat.php?funcao=listaClassificacaoMedida&id_classificacao="+id;
+	}
+	if(tipo == "classeClassificacao"){
+		sUrl = "../php/metaestat.php?funcao=listaClasseClassificacao&id_classe="+id;
 	}
 	if(sUrl){
 		core_makeRequest(sUrl,callback);
@@ -421,9 +628,10 @@ function sql(tipo,id) {
 					if(tipo == "medidaVariavel"){
 						var ins = "",
 							dados = YAHOO.lang.JSON.parse(o.responseText);
-						core_montaEditor("","450px","200px","","SQL");
-						ins = "<p><b>Select:</b><p>"+dados.sql;
-						ins += "<p><b>Mapserver:</b><p>"+dados.sqlmapserver;
+						core_montaEditor("","480px","300px","","SQL");
+						ins = "<p><b>Select simples:</b> "+dados.sql;
+						ins += "<p><b>Mapserver:</b> "+dados.sqlmapserver;
+						ins += "<p><b>Colunas:</b> "+dados.colunas;
 						ins +="<p><input style='position:relative;top:2px' type='checkbox' id='incluirtodascolunas' />Incluir todas as colunas no resultado";
 						ins +="<p>Filtro opcional (exemplo: valor = 1)<br>";
 						ins += "<input type=text value='' id='filtrosql' />";
@@ -431,7 +639,9 @@ function sql(tipo,id) {
 						ins += "<input type=text value='' id='agruparsql' />";
 						ins +="<p>Tipo de layer (para o caso de mapas ou mapfiles, podendo ser point,line ou polygon)<br>";
 						ins += "<input type=text value='' id='tipolayer' />";
-						ins += '<p><input type=button id="sqljson" value="JSON" />';
+						ins +="<p>Codigo da classifica&ccedil;&atilde;o que ser&aacute; usada para mostrar o mapa<br>";
+						ins += "<input type=text value='' id='classificacao' />";
+						ins += '  <p><input type=button id="sqljson" value="JSON" />';
 						ins += '  <input type=button id="sumarioestat" value="Sum&aacute;rio" />';
 						ins += '  <input type=button id="graficoestat" value="Gr&aacute;fico" />';
 						ins += '  <input type=button id="mapfileestat" value="Mapfile" />';
@@ -444,7 +654,7 @@ function sql(tipo,id) {
 							if($i("incluirtodascolunas").checked === true){
 								colunas = 1;
 							}
-							window.open('../php/metaestat.php?funcao=dadosMedidaVariavel&formato=json&id_medida_variavel='+id+"&filtro="+$i("filtrosql").value+"&todasascolunas="+colunas);
+							window.open('../php/metaestat.php?funcao=dadosMedidaVariavel&formato=json&id_medida_variavel='+id+"&filtro="+$i("filtrosql").value+"&todasascolunas="+colunas+"&agruparpor="+$i("agruparsql").value);
 						};
 						new YAHOO.widget.Button("sumarioestat");
 						$i("sumarioestat-button").onclick = function(){
@@ -456,11 +666,11 @@ function sql(tipo,id) {
 							if($i("incluirtodascolunas").checked === true){
 								colunas = 1;
 							}
-							window.open('../php/metaestat.php?funcao=mapfileMedidaVariavel&formato=json&id_medida_variavel='+id+"&filtro="+$i("filtrosql").value+"&todasascolunas="+colunas+"&tipolayer="+$i("tipolayer").value);
+							window.open('../php/metaestat.php?funcao=mapfileMedidaVariavel&formato=json&id_medida_variavel='+id+"&filtro="+$i("filtrosql").value+"&todasascolunas="+colunas+"&tipolayer="+$i("tipolayer").value+"&id_classificacao="+$i("classificacao").value+"&agruparpor="+$i("agruparsql").value);
 						};
 						new YAHOO.widget.Button("i3geoestat");
 						$i("i3geoestat-button").onclick = function(){
-							var callback = 	{
+							var sUrl,callback = 	{
 							    	success: function(oResponse){
 										var dados = YAHOO.lang.JSON.parse(oResponse.responseText);
 										window.open("../../ms_criamapa.php?temasa="+dados.mapfile+"&layers="+dados.layer);
@@ -473,7 +683,7 @@ function sql(tipo,id) {
 							if($i("incluirtodascolunas").checked === true){
 								colunas = 1;
 							}
-							sUrl = '../php/metaestat.php?funcao=mapfileMedidaVariavel&formato=json&id_medida_variavel='+id+"&filtro="+$i("filtrosql").value+"&todasascolunas="+colunas+"&tipolayer="+$i("tipolayer").value;
+							sUrl = '../php/metaestat.php?funcao=mapfileMedidaVariavel&formato=json&id_medida_variavel='+id+"&filtro="+$i("filtrosql").value+"&todasascolunas="+colunas+"&tipolayer="+$i("tipolayer").value+"&id_classificacao="+$i("classificacao").value+"&agruparpor="+$i("agruparsql").value;
 							core_carregando("ativa");
 							core_makeRequest(sUrl,callback);
 						};
@@ -554,10 +764,7 @@ function sql(tipo,id) {
 						};
 					}
 					if(tipo == "dimensaoMedida"){
-						var dados = YAHOO.lang.JSON.parse(o.responseText);
-						core_montaEditor("gravaDados('dimensaoMedida','"+id+"')","500px","300px","","Editor de dimens&oatilde;es");
-						montaDivDimensaoMedida(dados);
-						//document.getElementById("Eid_variavel").style.width = "200px";
+
 					}
 					core_carregando("desativa");
 				}
@@ -598,6 +805,14 @@ function excluir(tipo,id){
 		no = tree.getNodeByProperty("id_dimensao_medida",id);
 		sUrl = "../php/metaestat.php?funcao=excluirDimensaoMedida&id_dimensao_medida="+id;
 	}
+	if(tipo == "classificacaoMedida")	{
+		no = tree.getNodeByProperty("id_classificacao",id);
+		sUrl = "../php/metaestat.php?funcao=excluirClassificacaoMedida&id_classificacao="+id;
+	}
+	if(tipo == "classeClassificacao")	{
+		no = tree.getNodeByProperty("id_classe",id);
+		sUrl = "../php/metaestat.php?funcao=excluirClasseClassificacao&id_classe="+id;
+	}
 	if(sUrl)
 	{core_excluiNoTree(sUrl,no,mensagem);}
 }
@@ -631,6 +846,17 @@ function gravaDados(tipo,id){
 		par = "&id_dimensao_medida="+id;
 		prog = "../php/metaestat.php?funcao=alteraDimensaoMedida";
 	}
+	if(tipo == "classificacaoMedida"){
+		campos = new Array("nome");
+		par = "&id_classificacao="+id;
+		prog = "../php/metaestat.php?funcao=alteraClassificacaoMedida";
+	}
+	if(tipo == "classeClassificacao"){
+		campos = new Array("titulo","expressao","azul","verde","vermelho");
+		par = "&id_classe="+id;
+		prog = "../php/metaestat.php?funcao=alteraClasseClassificacao";
+	}
+
 	for (i=0;i<campos.length;i++)
 	{par += "&"+campos[i]+"="+($i("E"+campos[i]).value);}
 
@@ -658,6 +884,18 @@ function gravaDados(tipo,id){
   					if(tipo == "dimensaoMedida"){
   						no = tree.getNodeByProperty("id_dimensao_medida",id);
   						no.getContentEl().getElementsByTagName("span")[0].innerHTML = "<b>"+document.getElementById("Enomedimensao").value+"</b><span style=color:gray > - "+document.getElementById("Edescricao").value+" id: "+id+"</span>";
+						no.getContentEl().getElementsByTagName("span")[0].style.color = "";
+  						no.html = no.getContentEl().innerHTML;
+  					}
+  					if(tipo == "classificacaoMedida"){
+  						no = tree.getNodeByProperty("id_classificacao",id);
+  						no.getContentEl().getElementsByTagName("span")[0].innerHTML = "<b>"+document.getElementById("Enome").value+"</b><span style=color:gray > id: "+id+"</span>";
+						no.getContentEl().getElementsByTagName("span")[0].style.color = "";
+  						no.html = no.getContentEl().innerHTML;
+  					}
+  					if(tipo == "classeClassificacao"){
+  						no = tree.getNodeByProperty("id_classe",id);
+  						no.getContentEl().getElementsByTagName("span")[0].innerHTML = "<b>"+document.getElementById("Etitulo").value+"</b><span style=color:gray > id: "+id+"</span>";
 						no.getContentEl().getElementsByTagName("span")[0].style.color = "";
   						no.html = no.getContentEl().innerHTML;
   					}

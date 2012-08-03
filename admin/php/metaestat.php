@@ -91,6 +91,34 @@ switch (strtoupper($funcao))
 		exit;
 	break;
 	/*
+	Valor: LISTACLASSIFICACAOMEDIDA
+
+	Lista as classificacoes de uma medida de uma variavel
+
+	Retorno:
+
+	{JSON}
+	*/
+	case "LISTACLASSIFICACAOMEDIDA":
+		$m = new Metaestat();
+		retornaJSON($m->listaClassificacaoMedida($id_medida_variavel,$id_classificacao));
+		exit;
+	break;
+	/*
+	 Valor: LISTACLASSECLASSIFICACAO
+
+	Lista as classes de uma classificacoes
+
+	Retorno:
+
+	{JSON}
+	*/
+	case "LISTACLASSECLASSIFICACAO":
+		$m = new Metaestat();
+		retornaJSON($m->listaClasseClassificacao($id_classificacao,$id_classe));
+		exit;
+	break;
+	/*
 	 Valor: LISTAMEDIDAVARIAVEL
 
 	Lista das medidas de uma variavel
@@ -218,6 +246,46 @@ switch (strtoupper($funcao))
 			$m->alteraDimensaoMedida("",$id_dimensao_medida,$nomedimensao,$descricao,$coluna,$agregavalores);
 		}
 		retornaJSON($m->listaDimensao($id_medida_variavel,$id_dimensao_medida));
+		exit;
+	break;
+	/*
+	 Valor: ALTERACLASSIFICACAOMEDIDA
+
+	Altera os dados de uma classificacao de uma medida
+
+	Retorno:
+
+	{JSON}
+	*/
+	case "ALTERACLASSIFICACAOMEDIDA":
+		$m = new Metaestat();
+		if(empty($id_classificacao)){
+			$id_classificacao = $m->alteraClassificacaoMedida($id_medida_variavel);
+		}
+		else{
+			$m->alteraClassificacaoMedida("",$id_classificacao,$nome);
+		}
+		retornaJSON($m->listaClassificacaoMedida($id_medida_variavel,$id_classificacao));
+		exit;
+	break;
+	/*
+	 Valor: ALTERACLASSECLASSIFICACAO
+
+	Altera os dados de uma classe de uma classificacao
+
+	Retorno:
+
+	{JSON}
+	*/
+	case "ALTERACLASSECLASSIFICACAO":
+		$m = new Metaestat();
+		if(empty($id_classe)){
+			$id_classe = $m->alteraClasseClassificacao($id_classificacao);
+		}
+		else{
+			$m->alteraClasseClassificacao("",$id_classe,$titulo,$expressao,$vermelho,$verde,$azul);
+		}
+		retornaJSON($m->listaClasseClassificacao($id_classificacao,$id_classe));
 		exit;
 	break;
 	/*
@@ -431,6 +499,7 @@ switch (strtoupper($funcao))
 		$tabela = "i3geoestat_medida_variavel";
 		$id = $id_medida_variavel;
 		$f = verificaFilhos();
+
 		if(!$f){
 			$m = new Metaestat();
 			retornaJSON($m->excluirRegistro("i3geoestat_medida_variavel","id_medida_variavel",$id));
@@ -440,13 +509,13 @@ switch (strtoupper($funcao))
 		exit;
 	break;
 	/*
-	 Valor: EXCLUIRDIMENSAOMEDIDA
+	Valor: EXCLUIRDIMENSAOMEDIDA
 
 	Exclui uma medida da variavel
 
 	Parametros:
 
-	codigo_variavel
+	id_dimensao_medida
 
 	Retorno:
 
@@ -457,6 +526,49 @@ switch (strtoupper($funcao))
 		retornaJSON($m->excluirRegistro("i3geoestat_dimensao_medida","id_dimensao_medida",$id_dimensao_medida));
 		exit;
 	break;
+	/*
+	 Valor: EXCLUIRCLASSIFICACAOMEDIDA
+
+	Exclui uma classificacao de uma medida da variavel
+
+	Parametros:
+
+	id_dimensao_medida
+
+	Retorno:
+
+	{JSON}
+	*/
+	case "EXCLUIRCLASSIFICACAOMEDIDA":
+		$tabela = "i3geoestat_classificacao";
+		$id = $id_classificacao;
+		$f = verificaFilhos();
+		if(!$f){
+			$m = new Metaestat();
+			retornaJSON($m->excluirRegistro("i3geoestat_classificacao","id_classificacao",$id));
+		}
+		else
+			retornaJSON("erro");
+		exit;
+	break;
+	/*
+	 Valor: EXCLUIRCLASSECLASSIFICACAO
+
+	Exclui uma classe de uma classificacao
+
+	Parametros:
+
+	id_classe
+
+	Retorno:
+
+	{JSON}
+	*/
+	case "EXCLUIRCLASSECLASSIFICACAO":
+		$m = new Metaestat();
+		retornaJSON($m->excluirRegistro("i3geoestat_classes","id_classe",$id_classe));
+		exit;
+		break;
 	/*
 	Valor: LISTADADOSTABELASAUXILIARES
 
@@ -511,7 +623,7 @@ switch (strtoupper($funcao))
 	case "DADOSMEDIDAVARIAVEL":
 		$m = new Metaestat();
 		if($formato == "json"){
-			retornaJSON($m->dadosMedidaVariavel($id_medida_variavel,$filtro,$todasascolunas));
+			retornaJSON($m->dadosMedidaVariavel($id_medida_variavel,$filtro,$todasascolunas,$agruparpor));
 		}
 		exit;
 	break;
@@ -537,7 +649,7 @@ switch (strtoupper($funcao))
 	case "MAPFILEMEDIDAVARIAVEL":
 		$m = new Metaestat();
 		if($formato == "json"){
-			retornaJSON($m->mapfileMedidaVariavel($id_medida_variavel,$filtro,$todasascolunas,$tipolayer,$titulolayer));
+			retornaJSON($m->mapfileMedidaVariavel($id_medida_variavel,$filtro,$todasascolunas,$tipolayer,$titulolayer,$id_classificacao,$agruparpor));
 		}
 		exit;
 	break;

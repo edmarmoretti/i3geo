@@ -1,6 +1,8 @@
 
 /* drop tables */
 
+drop table i3geoestat_classes;
+drop table i3geoestat_classificacao;
 drop table i3geoestat_dimensao_medida;
 drop table i3geoestat_medida_variavel;
 drop table i3geoestat_tipo_regiao;
@@ -13,6 +15,15 @@ drop table i3geoestat_variavel;
 
 
 /* create tables */
+
+-- lista controlada de tipos de período de tempo
+create table i3geoestat_tipo_periodo
+(
+	codigo_tipo_periodo integer not null unique primary key autoincrement,
+	nome text,
+	descricao text
+);
+
 
 -- lista controlada dos parâmetros de conexão com o banco de dados onde residem dados
 create table i3geoestat_conexao
@@ -54,15 +65,6 @@ create table i3geoestat_tipo_regiao
 	srid text default '4326',
 	foreign key (codigo_estat_conexao)
 	references i3geoestat_conexao (codigo_estat_conexao)
-);
-
-
--- lista controlada de tipos de período de tempo
-create table i3geoestat_tipo_periodo
-(
-	codigo_tipo_periodo integer not null unique primary key autoincrement,
-	nome text,
-	descricao text
 );
 
 
@@ -108,16 +110,47 @@ create table i3geoestat_medida_variavel
 	filtro text,
 	-- titulo da medida
 	nomemedida text,
-	foreign key (codigo_tipo_regiao)
-	references i3geoestat_tipo_regiao (codigo_tipo_regiao),
 	foreign key (codigo_tipo_periodo)
 	references i3geoestat_tipo_periodo (codigo_tipo_periodo),
+	foreign key (codigo_tipo_regiao)
+	references i3geoestat_tipo_regiao (codigo_tipo_regiao),
 	foreign key (codigo_estat_conexao)
 	references i3geoestat_conexao (codigo_estat_conexao),
 	foreign key (codigo_variavel)
 	references i3geoestat_variavel (codigo_variavel),
 	foreign key (codigo_unidade_medida)
 	references i3geoestat_unidade_medida (codigo_unidade_medida)
+);
+
+
+-- lista de classificacoes de uma medida de variável
+create table i3geoestat_classificacao
+(
+	id_classificacao integer not null unique primary key autoincrement,
+	nome text,
+	id_medida_variavel integer,
+	foreign key (id_medida_variavel)
+	references i3geoestat_medida_variavel (id_medida_variavel)
+);
+
+
+-- classes pertencentes a uma classificação
+create table i3geoestat_classes
+(
+	id_classe integer not null unique primary key autoincrement,
+	-- expressao no formato válido do mapserver que define os componentes da classe
+	expressao text,
+	-- título da classe
+	titulo text,
+	-- componente r da cor utilizada para representar a classe
+	vermelho text,
+	-- componente g da cor utilizada para representar a classe
+	verde text,
+	-- componente b da cor utilizada para representar a classe
+	azul text,
+	id_classificacao integer,
+	foreign key (id_classificacao)
+	references i3geoestat_classificacao (id_classificacao)
 );
 
 

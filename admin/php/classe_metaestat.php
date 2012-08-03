@@ -111,6 +111,9 @@ class Metaestat{
 		}
 	}
 	function converteTexto($texto){
+		if($texto == "0"){
+			return "0";
+		}
 		if(empty($texto)){
 			return "";
 		}
@@ -199,20 +202,29 @@ class Metaestat{
 
 	$todasascolunas - opcional
 	*/
-	function sqlMedidaVariavel($id_medida_variavel,$todasascolunas){
+	function sqlMedidaVariavel($id_medida_variavel,$todasascolunas,$agruparpor=""){
 		$filtro = false;
 		$dados = $this->listaMedidaVariavel("",$id_medida_variavel);
 		$dadosgeo = $this->listaTipoRegiao($dados["codigo_tipo_regiao"]);
 		if($todasascolunas == 0){
 			$sql = " SELECT d.".$dados["colunavalor"].",d.".$dados["colunaidgeo"];
+			if(!empty($agruparpor)){
+				$sql .= ",d.".$agruparpor;
+			}
 			$sqlgeo = $sql.",g.".$dadosgeo["colunageo"];
 		}
 		else{
 			$sql = " SELECT d.* ";
 			$sqlgeo = $sql.",g.".$dadosgeo["colunageo"];
 		}
-		$sql .= " FROM ".$dados["esquemadb"].".".$dados["tabela"]." as d ";
-		$sqlgeo .= " FROM ".$dados["esquemadb"].".".$dados["tabela"]." as d,".$dadosgeo["esquemadb"].".".$dadosgeo["tabela"]." as g ";
+		if(empty($agruparpor)){
+			$sql .= " FROM ".$dados["esquemadb"].".".$dados["tabela"]." as d ";
+			$sqlgeo .= " FROM ".$dados["esquemadb"].".".$dados["tabela"]." as d,".$dadosgeo["esquemadb"].".".$dadosgeo["tabela"]." as g ";
+		}
+		else{
+			$sqlgeo .= " FROM (SELECT sum(".$dados["colunavalor"].") as ".$dados["colunavalor"].",".$dados["colunaidgeo"].",".$agruparpor." FROM ".$dados["esquemadb"].".".$dados["tabela"] ." group by ".$agruparpor.",".$dados["colunaidgeo"].") as d, ".$dadosgeo["esquemadb"].".".$dadosgeo["tabela"]." as g";
+			$sql .= " FROM (SELECT sum(".$dados["colunavalor"].") as ".$dados["colunavalor"].",".$dados["colunaidgeo"].",".$agruparpor." FROM ".$dados["esquemadb"].".".$dados["tabela"] ." group by ".$agruparpor.",".$dados["colunaidgeo"].") as d ";
+		}
 		if(!empty($dados["filtro"])){
 			$sql .= " WHERE ".$dados["filtro"];
 			$sqlgeo .= " WHERE ".$dados["filtro"];
@@ -228,9 +240,10 @@ class Metaestat{
 		}
 		//atencao: cuidado ao alterar essa string pois ') as foo' pode ser usado para replace em outras funcoes
 		$sqlgeo = $dadosgeo["colunageo"]." from ($sqlgeo) as foo using unique ".$dados["colunaidgeo"]." using srid=".$dadosgeo["srid"];
-		return array("sql"=>$sql,"sqlmapserver"=>$sqlgeo,"filtro"=>$filtro);
+		$colunas = $this->colunasTabela($dados["codigo_estat_conexao"],$dados["esquemadb"],$dados["tabela"]);
+		return array("sql"=>$sql,"sqlmapserver"=>$sqlgeo,"filtro"=>$filtro,"colunas"=>$colunas);
 	}
-	function mapfileMedidaVariavel($id_medida_variavel,$filtro="",$todasascolunas = 0,$tipolayer="polygon",$titulolayer=""){
+	function mapfileMedidaVariavel($id_medida_variavel,$filtro="",$todasascolunas = 0,$tipolayer="polygon",$titulolayer="",$id_classificacao="",$agruparpor=""){
 		if(empty($tipolayer)){
 			$tipolayer = "polygon";
 		}
@@ -238,15 +251,19 @@ class Metaestat{
 		if($titulolayer == ""){
 			$titulolayer = $meta["nomemedida"];
 		}
+		$titulolayer = mb_convert_encoding($titulolayer,"ISO-8859-1",mb_detect_encoding($titulolayer));
 		$conexao = $this->listaConexao($meta["codigo_estat_conexao"],true);
 		$conexao = "user=".$conexao["usuario"]." password=".$conexao["senha"]." dbname=".$conexao["bancodedados"]." host=".$conexao["host"]." port=".$conexao["porta"]."";
 		//echo $conexao;exit;
-		$sql = $this->sqlMedidaVariavel($id_medida_variavel,$todasascolunas);
+		$sql = $this->sqlMedidaVariavel($id_medida_variavel,$todasascolunas,$agruparpor);
 		$sqlf = $sql["sqlmapserver"];
 		if(!empty($filtro)){
-			$sqlf = str_replace(") as foo"," AND ".$filtro." ) foo",$sqlf);
+			$sqlf = str_replace(") as foo"," AND ".$filtro." ) as foo",$sqlf);
 		}
-		//echo $sqlf;exit;
+		$classes = "";
+		if(!empty($id_classificacao)){
+			$classes = $this->listaClasseClassificacao($id_classificacao);
+		}
 		$rand = $this->nomeRandomico();
 		$arq = $this->dir_tmp."/".$rand.".map";
 		$dados[] = "MAP";
@@ -263,12 +280,25 @@ class Metaestat{
 		$dados[] = '		TEMA "'.$titulolayer.'"';
 		$dados[] = '		CLASSE "SIM"';
 		$dados[] = '	END';
-		$dados[] = '    CLASS';
-		$dados[] = '        NAME ""';
-		$dados[] = '        STYLE';
-		$dados[] = '        	COLOR 200 0 0';
-		$dados[] = '        END';
-		$dados[] = '    END';
+		if($classes == ""){
+			$dados[] = '    CLASS';
+			$dados[] = '        NAME ""';
+			$dados[] = '        STYLE';
+			$dados[] = '        	COLOR 200 0 0';
+			$dados[] = '        END';
+			$dados[] = '    END';
+		}
+		else{
+			foreach($classes as $classe){
+				$dados[] = '    CLASS';
+				$dados[] = '        NAME "'.mb_convert_encoding($classe["titulo"],"ISO-8859-1",mb_detect_encoding($titulolayer)).'"';
+				$dados[] = '        EXPRESSION '.$classe["expressao"];
+				$dados[] = '        STYLE';
+				$dados[] = '        	COLOR '.$classe["vermelho"].' '.$classe["verde"].' '.$classe["azul"];
+				$dados[] = '        END';
+				$dados[] = '    END';
+			}
+		}
 		$dados[] = "END";
 		$dados[] = "END";
 		$fp = fopen($arq,"w");
@@ -277,8 +307,8 @@ class Metaestat{
 		}
 		return array("mapfile"=>$arq,"layer"=>$rand,"titulolayer"=>$titulolayer);
 	}
-	function dadosMedidaVariavel($id_medida_variavel,$filtro="",$todasascolunas = 0){
-		$sql = $this->sqlMedidaVariavel($id_medida_variavel,$todasascolunas);
+	function dadosMedidaVariavel($id_medida_variavel,$filtro="",$todasascolunas = 0,$agruparpor = ""){
+		$sql = $this->sqlMedidaVariavel($id_medida_variavel,$todasascolunas,$agruparpor);
 		$sqlf = $sql["sql"];
 		if($sql["filtro"] == true){
 			if(!empty($filtro)){
@@ -503,7 +533,7 @@ class Metaestat{
 		}
 	}
 	/*
-	 Function: alteraDimensaoMedida
+	Function: alteraDimensaoMedida
 
 	Altera uma dimensao de uma medida ou cria uma nova
 	*/
@@ -530,7 +560,59 @@ class Metaestat{
 			return "Error!: " . $e->getMessage();
 		}
 	}
+	/*
+	Function: alteraDimensaoMedida
 
+	Altera uma dimensao de uma medida ou cria uma nova
+	*/
+	function alteraClassificacaoMedida($id_medida_variavel,$id_classificacao="",$nome){
+		try	{
+			if($id_classificacao != ""){
+				if($this->convUTF){
+					$nome = utf8_encode($nome);
+				}
+				$this->dbhw->query("UPDATE ".$this->esquemaadmin."i3geoestat_classificacao SET nome = '$nome' WHERE id_classificacao = $id_classificacao");
+				$retorna = $id_dimensao_medida;
+			}
+			else{
+				$retorna = $this->insertId("i3geoestat_classificacao","nome","id_classificacao");
+				if($retorna){
+					$this->dbhw->query("UPDATE ".$this->esquemaadmin."i3geoestat_classificacao SET id_medida_variavel = $id_medida_variavel WHERE id_classificacao = $retorna");
+				}
+			}
+			return $retorna;
+		}
+		catch (PDOException $e)	{
+			return "Error!: " . $e->getMessage();
+		}
+	}
+	/*
+	 Function: alteraClasseClassificacao
+
+	Altera uma classe de uma classificacao
+	*/
+	function alteraClasseClassificacao($id_classificacao,$id_classe="",$titulo="",$expressao="",$vermelho="",$verde="",$azul=""){
+		try	{
+			if($id_classe != ""){
+				if($this->convUTF){
+					$nome = utf8_encode($nome);
+				}
+				//echo "UPDATE ".$this->esquemaadmin."i3geoestat_classe SET azul = '$azul', verde = '$verde', vermelho = '$vermelho',expressao = '$expressao', titulo = '$titulo' WHERE id_classe = $id_classe";exit;
+				$this->dbhw->query("UPDATE ".$this->esquemaadmin."i3geoestat_classes SET azul = '$azul', verde = '$verde', vermelho = '$vermelho',expressao = '$expressao', titulo = '$titulo' WHERE id_classe = $id_classe");
+				$retorna = $id_classe;
+			}
+			else{
+				$retorna = $this->insertId("i3geoestat_classes","titulo","id_classe");
+				if($retorna){
+					$this->dbhw->query("UPDATE ".$this->esquemaadmin."i3geoestat_classes SET id_classificacao = $id_classificacao WHERE id_classe = $retorna");
+				}
+			}
+			return $retorna;
+		}
+		catch (PDOException $e)	{
+			return "Error!: " . $e->getMessage();
+		}
+	}
 	/*
 	 Function: listaUnidadeMedida
 
@@ -566,6 +648,38 @@ class Metaestat{
 		return $this->execSQL($sql,$codigo_variavel);
 	}
 	/*
+	 Function: listaClassificacaoMedida
+
+	Lista as classificacoes de uma medida de uma variavel
+
+	Parametros:
+
+	$id_medida_variavel
+	*/
+	function listaClassificacaoMedida($id_medida_variavel,$id_classificacao=""){
+		if(!empty($id_medida_variavel)){
+			$sql = "SELECT * from ".$this->esquemaadmin."i3geoestat_classificacao WHERE id_medida_variavel = $id_medida_variavel";
+		}
+		if(!empty($id_classificacao)){
+			$sql = "SELECT * from ".$this->esquemaadmin."i3geoestat_classificacao WHERE id_classificacao = $id_classificacao";
+		}
+		return $this->execSQL($sql,$id_classificacao);
+	}
+	/*
+	 Function: listaClasseClassificacao
+
+	Lista as classes de uma classificacao
+	*/
+	function listaClasseClassificacao($id_classificacao,$id_classe=""){
+		if(!empty($id_classificacao)){
+			$sql = "SELECT * from ".$this->esquemaadmin."i3geoestat_classes WHERE id_classificacao = $id_classificacao";
+		}
+		if(!empty($id_classe)){
+			$sql = "SELECT * from ".$this->esquemaadmin."i3geoestat_classes WHERE id_classe = $id_classe";
+		}
+		return $this->execSQL($sql,$id_classe);
+	}
+	/*
 	Function: listaMedidaVariavel
 
 	Lista as medidas das variaveis cadastradas para uma variavel ou uma unica medida
@@ -579,8 +693,6 @@ class Metaestat{
 	function listaMedidaVariavel($codigo_variavel,$id_medida_variavel=""){
 		$sql = "SELECT i3geoestat_medida_variavel.* ";
 		$sql .= "FROM ".$this->esquemaadmin."i3geoestat_variavel ";
-		//$sql .= "INNER JOIN ".$this->esquemaadmin."i3geoestat_unidade_medida ";
-		//$sql .= "ON i3geoestat_medida_variavel.codigo_unidade_medida = i3geoestat_unidade_medida.codigo_unidade_medida ";
 		$sql .= "INNER JOIN ".$this->esquemaadmin."i3geoestat_medida_variavel ";
 		$sql .= "ON i3geoestat_variavel.codigo_variavel = i3geoestat_medida_variavel.codigo_variavel ";
 		if($codigo_variavel != ""){
@@ -701,13 +813,17 @@ class Metaestat{
 		return $res;
 	}
 	function colunasTabela($codigo_estat_conexao,$nome_esquema,$nome_tabela){
+		$colunas = array();
 		$c = $this->listaConexao($codigo_estat_conexao,true);
 		$dbhold = $this->dbh;
 		$dbh = new PDO('pgsql:dbname='.$c["bancodedados"].';user='.$c["usuario"].';password='.$c["senha"].';host='.$c["host"].';port='.$c["porta"]);
 		$this->dbh = $dbh;
 		$res = $this->execSQL("SELECT column_name as coluna FROM information_schema.columns where table_schema = '$nome_esquema' and table_name = '$nome_tabela'");
 		$this->dbh = $dbhold;
-		return $res;
+		foreach($res as $c){
+			$colunas[] = $c["coluna"];
+		}
+		return $colunas;
 	}
 	function descreveColunasTabela($codigo_estat_conexao,$nome_esquema,$nome_tabela){
 		$c = $this->listaConexao($codigo_estat_conexao,true);
