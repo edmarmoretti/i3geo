@@ -123,7 +123,7 @@ class LayerServer {
     *
     */
     function LayerServer(){
-        $this->errors = array();
+    	$this->errors = array();
         // Load request parameters
         $this->get_request();
 
@@ -131,7 +131,7 @@ class LayerServer {
 
         // Load map
         if(!$this->has_error()) {
-             $this->load_map();
+        	$this->load_map();
         }
 
     }
@@ -157,7 +157,23 @@ class LayerServer {
         } else {
             $this->_networklink = false;
         }
-        $this->_xml = new SimpleXMLElement('<kml xmlns="http://earth.google.com/kml/2.0"><Document ></Document></kml>');
+
+        $imageObj = $this->map_object->drawlegend();
+        $url = $imageObj->saveWebImage();
+        $protocolo = explode("/",$_SERVER['SERVER_PROTOCOL']);
+        $url = strtolower($protocolo[0]."://".$_SERVER['HTTP_HOST']).$url;
+
+        $legenda = "    <ScreenOverlay>" . PHP_EOL
+        . "      <name>Legenda</name>" . PHP_EOL
+        . "      <Icon>" . PHP_EOL
+        . "        <href>".$url."</href>" . PHP_EOL
+        . "      </Icon>" . PHP_EOL
+        . "      <overlayXY x='0.01' y='0.14' xunits='fraction' yunits='fraction'/>" . PHP_EOL
+        . "      <screenXY x='0.01' y='0.14' xunits='fraction' yunits='fraction'/>" . PHP_EOL
+        . "      <size x='-1' y='-1' xunits='pixels' yunits='pixels'/>" . PHP_EOL
+        . "    </ScreenOverlay>" . PHP_EOL;
+
+        $this->_xml = new SimpleXMLElement('<kml xmlns="http://earth.google.com/kml/2.0"><Document >'.$legenda.'</Document></kml>');
         // Prepare projection
         $this->in_proj  = ms_newProjectionObj($this->map_object->getProjection());
         // Set projection to GOOGLE earth's projection
@@ -174,6 +190,7 @@ class LayerServer {
         if($this->has_error()){
             $this->add_errors();
         }
+
         return $this->send_stream($this->get_kml());
      }
 
@@ -239,7 +256,8 @@ class LayerServer {
             }
         } else {
             foreach($layers as $layer){
-                $this->process_layer_request($layer);
+            	//echo "Oi";exit;
+            	$this->process_layer_request($layer);
             }
         }
     }
@@ -264,12 +282,10 @@ class LayerServer {
     */
     function process_layer_request(&$layer_name){
 		error_reporting(0);
-
 		$v = "5.0.0";
 		$vs = explode(" ",ms_GetVersion());
 		$cvs = count($vs);
-		for ($i=0;$i<$cvs;++$i)
-		{
+		for ($i=0;$i<$cvs;++$i)	{
 			if(trim(strtolower($vs[$i])) == "version")
 			{$v = $vs[$i+1];}
 		}
@@ -283,16 +299,12 @@ class LayerServer {
             $this->set_error('Nenhum layer com esse nome foi encontrado no mapfile ' . $layer_name, $layer_name);
             return false;
         }
-
         // Add to layer list
         $this->layers[$layer_name] =&  $layer;
-
         // Get custom template if any
         $description_template = $layer->getMetadata('DESCRIPTION_TEMPLATE');
-
         // Set on
         $layer->set( 'status', MS_DEFAULT );
-
         // Set kml title from layer description (default to layer name)
         $layer_desc = $this->get_layer_description($layer);
 
@@ -318,10 +330,10 @@ class LayerServer {
             //simplexml_addChild($parent, $name, $value='')
             //$folder->addChild('description', $this->get_layer_description($layer));
             $this->simplexml_addChild($folder,'name',$layer_desc);
+
             //$folder->addChild('name', $layer_desc);
             $this->add_wms_link($folder, $layer, $wms_link);
         } else {
-
             // Apply filter
             if($this->filter){
                 // Try loading as XML
@@ -389,12 +401,15 @@ class LayerServer {
                     {
                         // get next shape row
 						if($versao == 6)
-						{$shape  =  $layer->getShape($layer->getResult($j));}
+						{
+							$result = $layer->getResult($j);
+							$shape  =  $layer->getShape($result);
+						}
 						else{
 							$result = $layer->getResult($j);
 							$shape  = $layer->getFeature($result->shapeindex,$result->tileindex);
 						}
-                        $shape->classindex = $result->classindex;
+						$shape->classindex = $result->classindex;
                         $this->process_shape($layer, $shape, $class_list, $folder, $namecol);
                     }
                     if($n == 0) {
@@ -422,7 +437,7 @@ class LayerServer {
         $shape->project($this->in_proj, $this->out_proj);
         // Assign style
         if($layer->classitem){
-            $style_id = $this->get_shape_class($layer->classitem, $shape->values, $class_list);
+            //$style_id = $this->get_shape_class($layer->classitem, $shape->values, $class_list);
         }
         if(!isset($style_id)){
             // Get first class
@@ -572,7 +587,7 @@ class LayerServer {
 
     /**
     * Add a multipolygon
-    * FIXME: untested, should take holes into account
+    * fixme: untested, should take holes into account
     */
     function add_multipolygon(&$wkt, &$element, $featurename){
         $ml = $element->addChild('MultiGeometry');
@@ -664,7 +679,7 @@ class LayerServer {
 
     /**
     * Return a CSV list of all layer names in the mapfile
-    * FIXME: filter out ANNOTATIONS and other "strange" layers
+    * fixme: filter out ANNOTATIONS and other "strange" layers
     */
     function get_layer_list(){
         $layer_list = array();
@@ -700,13 +715,13 @@ class LayerServer {
     */
     function add_style(&$layer, &$folder, $style_id, &$style_data){
         // Calculare style URL
-        
+
         if($style_data['description_template']){
             $this->style_counter++;
             $style_id .= '_'.$this->style_counter;
             $balloon_data = $this->get_feature_description($attributes[$namecol], $attributes, $style_data['description_template']);
         }
-        
+
         // Check if the style already exists
         $expr = '//*[@id=\''.$style_id.'\']';
         if($folder->xpath($expr)) {
@@ -759,13 +774,20 @@ class LayerServer {
         if($style_data['icon']){
             $st =& $new_style->addChild('IconStyle');
 			if($style_data['width'] && $style_data['icon_width'] != 32){
-                $st->addChild('scale', $style_data['icon_width'] / 32);
+				/**
+				 * TODO
+				 */
+				//$st->addChild('scale', $style_data['icon_width'] / 32);
+				$st->addChild('scale', 1);
             }
 			else
 			{$st->addChild('scale', 1);}
             $icon =& $st->addChild('Icon');
             $icon->addChild('href', htmlentities($style_data['icon']));
+
         }
+        $ls =& $new_style->addChild('LabelStyle');
+        $ls->addChild('scale', $style_data['label_size'] / 32);
         // Add the balloon style if description_template is set
         /*
         if($style_data['description_template']){
@@ -837,12 +859,18 @@ class LayerServer {
         $classe = $layer->getclass($classindex);
         $estilo = $classe->getstyle(0);
         $url = "";
-       	$imageObj = $classe->createLegendIcon($estilo->size, $estilo->size);
+       	$imageObj = $classe->createLegendIcon(30,30);
        	if($imageObj)
 		{
 			$url = $imageObj->saveWebImage();
 			$protocolo = explode("/",$_SERVER['SERVER_PROTOCOL']);
 			$url = strtolower($protocolo[0]."://".$_SERVER['HTTP_HOST']).$url;
+			$nome = $imageObj->imagepath . basename($url);
+
+			$img = imagecreatefrompng($nome);
+			$index = imagecolorexact($img, 255, 255, 255);
+			imagecolortransparent($img, $index);
+			imagepng($img, $nome);
 		}
         return $url; //$this->endpoint . '?service=icon&map=' . $this->map . '&typename=' . urlencode($layer->name) . '&classname=' . urlencode($classname);
     }
@@ -867,6 +895,7 @@ class LayerServer {
         if(!$description){
             $description = $layer->name;
         }
+        $description = mb_convert_encoding($description,"UTF-8",mb_detect_encoding($description,"UTF-8,ISO-8859-1"));
         return $description;
     }
 
@@ -917,14 +946,14 @@ class LayerServer {
 			$protocolo = explode("/",$_SERVER['SERVER_PROTOCOL']);
 			$servidor = strtolower($protocolo[0])."://".$_SERVER['HTTP_HOST'];
 			$temp = $this->map;
-			if(!file_exists($this->map))
-			{
-				if(file_exists("ms_configura.php"))
-				{include("ms_configura.php");}
-				else
-				{include("../../ms_configura.php");}
+			if(file_exists(__DIR__."/ms_configura.php")){
+				include(__DIR__."/ms_configura.php");
+			}
+			else{
+				include("../../ms_configura.php");
+			}
+			if(!file_exists($this->map)){
 				$maptemp = ms_newMapObj($locaplic."/temas/".$this->map.".map");
-
 				//if (strtoupper(substr(PHP_OS, 0, 3) == 'WIN'))
 				//{$this->map = $locaplic."/aplicmap/geral1windows.map";}
 				//else
@@ -952,10 +981,12 @@ class LayerServer {
 					}
 				}
 				$this->map = $base;
-				
+
             	$this->map_object = ms_newMapObj($this->map);
-            	if(!$this->_zipped)
-            	$this->map_object->setmetadata('wms_onlineresource',$servidor.":80/i3geo/ogc.php?tema=".$temp."&width=1500&height=1500&");
+            	if(!$this->_zipped){
+            		$this->map_object->setmetadata('wms_onlineresource',$servidor.":80/i3geo/ogc.php?tema=".$temp."&width=1500&height=1500&");
+            		$this->map_object->setmetadata("ows_enable_request","*");
+            	}
             	$n = $this->map_object->numlayers;
             	for ($i=0;$i < $n;$i++)
 				{
@@ -971,19 +1002,17 @@ class LayerServer {
 					{
 						$l->set("type",MS_LAYER_RASTER);
 						$l->setmetadata('wms_onlineresource',"../../ogc.php?tema=".$temp."&width=500&height=500&");
+						$l->setmetadata("ows_enable_request","*");
 					}
 					ms_newLayerObj($this->map_object, $l);
 				}
 			}
-			else
-			{
+			else{
 				$this->map_object = ms_newMapObj($this->map);
-				if(file_exists("ms_configura.php"))
-				{include("ms_configura.php");}
-				else
-				{include("../../ms_configura.php");}
-				if(!$this->_zipped)
-				$this->map_object->setmetadata('wms_onlineresource',$servidor.":80".$locmapserv."?map=".$temp."&width=1500&height=1500&");
+				if(!$this->_zipped){
+					$this->map_object->setmetadata('wms_onlineresource',$servidor.":80".$locmapserv."?map=".$temp."&width=1500&height=1500&");
+					$this->map_object->setmetadata("ows_enable_request","*");
+				}
 				$n = $this->map_object->numlayers;
 				for ($i=0;$i < $n;$i++)
 				{
@@ -1037,7 +1066,8 @@ class LayerServer {
     * Send header
     */
     function send_header(){
-        header('Content-type: application/vnd.google-earth.km'.($this->_zipped ? 'z' : 'l').'+XML');
+    	header('Content-Disposition: attachment; filename=kml.km'.($this->_zipped ? 'z' : 'l'));
+    	header('Content-type: application/vnd.google-earth.km'.($this->_zipped ? 'z' : 'l').'+XML');
     }
 
     /**
@@ -1052,7 +1082,7 @@ class LayerServer {
 		if($k != ""){
 			return $k;
 		}
-		include("../../ms_configura.php");
+		include(__DIR__."/../../ms_configura.php");
         return  $dir_tmp.'/'. md5($_SERVER['QUERY_STRING']) . ($this->_zipped ? '.kmz' : '.kml');
     }
 
@@ -1062,12 +1092,14 @@ class LayerServer {
     function send_stream($data){
 		$this->send_header();
         // Compress data
+
         if($this->_zipped){
             include("zip.class.php");
             $ziper = new zipfile();
             $ziper->addFile($data, 'doc.kml');
             $data = $ziper->file();
         }
+
         // Create cache if needed
         if(ENABLE_CACHE && count($this->layers) == 1) {
             //error_log( 'creating cache ' . $this->get_cache_file_name() );

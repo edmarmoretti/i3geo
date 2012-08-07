@@ -8,11 +8,11 @@ INSERT INTO i3geoestat_tipo_periodo (codigo_tipo_periodo, nome, descricao) VALUE
 
 
 -- i3geoestat_tipo_regiao
-INSERT INTO i3geoestat_tipo_regiao (codigo_tipo_regiao, nome_tipo_regiao, descricao_tipo_regiao, codigo_estat_conexao, esquemadb, tabela, colunageo, data, identificador, colunanomeregiao, srid) VALUES ('1', 'Município', 'Limites municipais', '1', 'public', 'tb_ibge', 'the_geom', '', 'ibge', 'no_cidade', '4326');
+INSERT INTO i3geoestat_tipo_regiao (codigo_tipo_regiao, nome_tipo_regiao, descricao_tipo_regiao, codigo_estat_conexao, esquemadb, tabela, colunageo, data, identificador, colunanomeregiao, srid, colunacentroide) VALUES ('1', 'Município', 'Limites municipais', '1', 'public', 'tb_ibge', 'the_geom', '', 'ibge', 'no_cidade', '4326', 'the_geom2');
 
 
 -- i3geoestat_unidade_medida
-INSERT INTO i3geoestat_unidade_medida (codigo_unidade_medida, nome, sigla, permitesoma, permitemedia) VALUES ('1', 'Unidade', 'Un', '', '');
+INSERT INTO i3geoestat_unidade_medida (codigo_unidade_medida, nome, sigla, permitesoma, permitemedia) VALUES ('1', 'Unidade', 'Un', '1', '1');
 
 
 -- i3geoestat_medida_variavel
@@ -26,5 +26,15 @@ INSERT INTO i3geoestat_dimensao_medida (id_dimensao_medida, coluna, nomedimensao
 
 -- i3geoestat_variavel
 INSERT INTO i3geoestat_variavel (codigo_variavel, nome, descricao) VALUES ('1', 'Farmácias populares existentes', 'Quantidade de farmácias populares existentes');
+
+
+-- i3geoestat_classificacao
+INSERT INTO i3geoestat_classificacao (id_classificacao, nome, id_medida_variavel, observacao) VALUES ('1', 'Pela média', '1', '');
+
+
+-- i3geoestat_classes
+INSERT INTO i3geoestat_classes (id_classe, expressao, titulo, vermelho, verde, azul, id_classificacao, tamanho, simbolo, overmelho, overde, oazul, otamanho) VALUES ('1', '([nu_farm_funcionando] < 1)', 'Nenhuma', '255', '0', '0', '1', '', '', '0', '0', '0', '');
+INSERT INTO i3geoestat_classes (id_classe, expressao, titulo, vermelho, verde, azul, id_classificacao, tamanho, simbolo, overmelho, overde, oazul, otamanho) VALUES ('2', '([nu_farm_funcionando] = 1)', 'Uma', '0', '255', '0', '1', '', '', '', '', '', '');
+INSERT INTO i3geoestat_classes (id_classe, expressao, titulo, vermelho, verde, azul, id_classificacao, tamanho, simbolo, overmelho, overde, oazul, otamanho) VALUES ('3', '([nu_farm_funcionando] > 1)', 'Mais de uma', '0', '0', '255', '1', '', '', '', '', '', '');
 
 

@@ -36,7 +36,7 @@ Arquivo: i3geo/admin/php/conexaomma.php
 try
 {
 	$dbh = new PDO('pgsql:dbname=geodados;user=geodados;password=geodados;host=pgsql1.mma.gov.br');
-	$dbhw = new PDO('pgsql:dbname=geodados;user=pgsql;password=pgsql;host=pgsql1.mma.gov.br');
+	$dbhw = new PDO('');
 }
 catch (PDOException $e)
 {

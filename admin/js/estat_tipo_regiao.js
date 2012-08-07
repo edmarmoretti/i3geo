@@ -30,7 +30,8 @@ function montaTabela(dados){
 		                {label:"Descri&ccedil;&atilde;o",resizeable:true,key:"descricao_tipo_regiao", formatter:formatTexto},
 		                {label:"Esquema",key:"esquemadb",formatter:formatTexto},
 		                {label:"Tabela",key:"tabela",formatter:formatTexto},
-		                {label:"Coluna",key:"colunageo",formatter:formatTexto},
+		                {label:"Coluna geo",key:"colunageo",formatter:formatTexto},
+		                {label:"Centr&oacute;ide",key:"colunacentroide",formatter:formatTexto},
 		                {label:"Data",key:"data",formatter:formatTexto},
 		                {label:"C&oacute;digo",key:"identificador",formatter:formatTexto},
 		                {label:"Coluna com os nomes de cada regi&atilde;o",key:"colunanomeregiao",formatter:formatTexto},
@@ -41,7 +42,7 @@ function montaTabela(dados){
 
 		myDataSource.responseType = YAHOO.util.DataSource.TYPE_JSARRAY;
 		myDataSource.responseSchema = {
-				fields: ["codigo_tipo_regiao","nome_tipo_regiao","descricao_tipo_regiao","esquemadb","tabela","colunageo","data","identificador","colunanomeregiao","srid"]
+				fields: ["codigo_tipo_regiao","nome_tipo_regiao","descricao_tipo_regiao","esquemadb","tabela","colunageo","colunacentroide","data","identificador","colunanomeregiao","srid"]
 		};
 		myDataTable.subscribe(
 			'cellClickEvent',
@@ -119,7 +120,8 @@ function montaDiv(i){
 			{titulo:"Descri&ccedil;&atilde;o:",id:"Edescricao_tipo_regiao",size:"50",value:i.descricao_tipo_regiao,tipo:"text",div:""},
 			{titulo:"Esquema no banco de dados:",id:"Eesquemadb",size:"50",value:i.esquemadb,tipo:"text",div:""},
 			{titulo:"Tabela:",id:"Etabela",size:"50",value:i.tabela,tipo:"text",div:""},
-			{titulo:"Coluna com a geometria:",id:"Ecolunageo",size:"50",value:i.colunageo,tipo:"text",div:""},
+			{titulo:"Coluna com a geometria principal (normalmente poligonal):",id:"Ecolunageo",size:"50",value:i.colunageo,tipo:"text",div:""},
+			{titulo:"Coluna com pontos (pode ser a mesmo que a anterior):",id:"Ecolunacentroide",size:"50",value:i.colunacentroide,tipo:"text",div:""},
 			{titulo:"Data a qual se referem os dados:",id:"Edata",size:"50",value:i.data,tipo:"text",div:""},
 			{titulo:"Coluna com o c&oacute;digo de cada registro:",id:"Eidentificador",size:"50",value:i.identificador,tipo:"text",div:""},
 			{titulo:"Coluna com o nome da regi&atilde;o:",id:"Ecolunanomeregiao",size:"50",value:i.colunanomeregiao,tipo:"text",div:""},
@@ -133,7 +135,7 @@ function montaDiv(i){
 }
 
 function gravaDados(id,recordid){
-	var campos = new Array("nome_tipo_regiao","descricao_tipo_regiao","esquemadb","tabela","colunageo","data","identificador","colunanomeregiao","srid"),
+	var campos = new Array("nome_tipo_regiao","descricao_tipo_regiao","esquemadb","tabela","colunageo","colunacentroide","data","identificador","colunanomeregiao","srid"),
 		par = "",
 		i = 0,
 		sUrl,callback;

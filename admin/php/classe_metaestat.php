@@ -52,6 +52,7 @@ class Metaestat{
 		//vem do include
 		$this->dir_tmp = $dir_tmp;
 		$this->locaplic = $locaplic;
+		$this->base = $base;
 		if(!isset($convUTF)){
 			$convUTF = true;
 		}
@@ -202,20 +203,27 @@ class Metaestat{
 
 	$todasascolunas - opcional
 	*/
-	function sqlMedidaVariavel($id_medida_variavel,$todasascolunas,$agruparpor=""){
+	function sqlMedidaVariavel($id_medida_variavel,$todasascolunas,$agruparpor="",$tipolayer="polygon"){
 		$filtro = false;
 		$dados = $this->listaMedidaVariavel("",$id_medida_variavel);
 		$dadosgeo = $this->listaTipoRegiao($dados["codigo_tipo_regiao"]);
+		if($tipolayer != "point"){
+			$colunageo = $dadosgeo["colunageo"];
+		}
+		else{
+			$colunageo = $dadosgeo["colunacentroide"];
+		}
+
 		if($todasascolunas == 0){
 			$sql = " SELECT d.".$dados["colunavalor"].",d.".$dados["colunaidgeo"];
 			if(!empty($agruparpor)){
 				$sql .= ",d.".$agruparpor;
 			}
-			$sqlgeo = $sql.",g.".$dadosgeo["colunageo"];
+			$sqlgeo = $sql.",g.".$colunageo;
 		}
 		else{
 			$sql = " SELECT d.* ";
-			$sqlgeo = $sql.",g.".$dadosgeo["colunageo"];
+			$sqlgeo = $sql.",g.".$colunageo;
 		}
 		if(empty($agruparpor)){
 			$sql .= " FROM ".$dados["esquemadb"].".".$dados["tabela"]." as d ";
@@ -239,7 +247,7 @@ class Metaestat{
 			$sqlgeo .= " WHERE ".$j;
 		}
 		//atencao: cuidado ao alterar essa string pois ') as foo' pode ser usado para replace em outras funcoes
-		$sqlgeo = $dadosgeo["colunageo"]." from ($sqlgeo) as foo using unique ".$dados["colunaidgeo"]." using srid=".$dadosgeo["srid"];
+		$sqlgeo = $colunageo." from ($sqlgeo) as foo using unique ".$dados["colunaidgeo"]." using srid=".$dadosgeo["srid"];
 		$colunas = $this->colunasTabela($dados["codigo_estat_conexao"],$dados["esquemadb"],$dados["tabela"]);
 		return array("sql"=>$sql,"sqlmapserver"=>$sqlgeo,"filtro"=>$filtro,"colunas"=>$colunas);
 	}
@@ -255,7 +263,7 @@ class Metaestat{
 		$conexao = $this->listaConexao($meta["codigo_estat_conexao"],true);
 		$conexao = "user=".$conexao["usuario"]." password=".$conexao["senha"]." dbname=".$conexao["bancodedados"]." host=".$conexao["host"]." port=".$conexao["porta"]."";
 		//echo $conexao;exit;
-		$sql = $this->sqlMedidaVariavel($id_medida_variavel,$todasascolunas,$agruparpor);
+		$sql = $this->sqlMedidaVariavel($id_medida_variavel,$todasascolunas,$agruparpor,$tipolayer);
 		$sqlf = $sql["sqlmapserver"];
 		if(!empty($filtro)){
 			$sqlf = str_replace(") as foo"," AND ".$filtro." ) as foo",$sqlf);
@@ -290,11 +298,24 @@ class Metaestat{
 		}
 		else{
 			foreach($classes as $classe){
+				//var_dump($classe);exit;
 				$dados[] = '    CLASS';
 				$dados[] = '        NAME "'.mb_convert_encoding($classe["titulo"],"ISO-8859-1",mb_detect_encoding($titulolayer)).'"';
 				$dados[] = '        EXPRESSION '.$classe["expressao"];
 				$dados[] = '        STYLE';
 				$dados[] = '        	COLOR '.$classe["vermelho"].' '.$classe["verde"].' '.$classe["azul"];
+				if(!empty($classe["tamanho"])){
+					$dados[] = '        SIZE '.$classe["tamanho"];
+				}
+				if(!empty($classe["simbolo"])){
+					$dados[] = '        SYMBOL '.$classe["simbolo"];
+				}
+				if(!empty($classe["otamanho"])){
+					$dados[] = '        OUTLINEWIDTH '.$classe["otamanho"];
+				}
+				if(!empty($classe["overmelho"]) || $classe["overmelho"] == "0"){
+					$dados[] = '        OUTLINECOLOR '.$classe["overmelho"].' '.$classe["overde"].' '.$classe["oazul"];
+				}
 				$dados[] = '        END';
 				$dados[] = '    END';
 			}
@@ -306,6 +327,50 @@ class Metaestat{
 			fwrite($fp,$dado."\n");
 		}
 		return array("mapfile"=>$arq,"layer"=>$rand,"titulolayer"=>$titulolayer);
+	}
+	function mapfileCompleto($mapfile){
+		$f = $this->base;
+		if($f == ""){
+			include_once($this->locaplic."/classesphp/funcoes_gerais.php");
+			$versao = versao();
+			$versao = $versao["principal"];
+			$f = "";
+			if (strtoupper(substr(PHP_OS, 0, 3) == 'WIN')){
+				$f = $locaplic."/aplicmap/geral1windowsv".$versao.".map";
+			}
+			else{
+				if($f == "" && file_exists('/var/www/i3geo/aplicmap/geral1debianv'.$versao.'.map')){
+					$f = "/var/www/i3geo/aplicmap/geral1debianv".$versao.".map";
+				}
+				if($f == "" && file_exists('/var/www/html/i3geo/aplicmap/geral1fedorav'.$versao.'.map')){
+					$f = "/var/www/html/i3geo/aplicmap/geral1fedorav".$versao.".map";
+				}
+				if($f == "" && file_exists('/opt/www/html/i3geo/aplicmap/geral1fedorav'.$versao.'.map')){
+					$f = "/opt/www/html/i3geo/aplicmap/geral1v".$versao.".map";
+				}
+				if($f == "")				{
+					$f = $this->locaplic."/aplicmap/geral1v".$versao.".map";
+				}
+			}
+		}
+		$mapa = ms_newMapObj($f);
+		$n = $mapa->numlayers;
+		for($i=0;$i<$n;$i++){
+			$l = $mapa->getlayer($i);
+			$l->set("status",MS_DELETE);
+		}
+		$mapatemp = ms_newMapObj($mapfile);
+		$l = $mapatemp->getlayer(0);
+
+		$l->set("status",MS_DEFAULT);
+		$novonome = str_replace(".map","completo.map",$mapfile);
+		//necessario para o kml
+		$mapa->setmetadata("ows_enable_request","*");
+		$listaepsg = "EPSG:4618 EPSG:4291 EPSG:4326 EPSG:22521 EPSG:22522 EPSG:22523 EPSG:22524 EPSG:22525 EPSG:29101 EPSG:29119 EPSG:29120 EPSG:29121 EPSG:29122 EPSG:29177 EPSG:29178 EPSG:29179 EPSG:29180 EPSG:29181 EPSG:29182 EPSG:29183 EPSG:29184 EPSG:29185";
+		$l->setmetadata("ows_srs",$listaepsg);
+		$temp = ms_newLayerObj($mapa,$l);
+		$mapa->save($novonome);
+		return $novonome;
 	}
 	function dadosMedidaVariavel($id_medida_variavel,$filtro="",$todasascolunas = 0,$agruparpor = ""){
 		$sql = $this->sqlMedidaVariavel($id_medida_variavel,$todasascolunas,$agruparpor);
@@ -332,9 +397,11 @@ class Metaestat{
 		return false;
 	}
 	function sumarioMedidaVariavel($id_medida_variavel,$filtro="",$agruparpor=""){
-		$dados = $this->dadosMedidaVariavel($id_medida_variavel,$filtro,0);
 		if(!empty($agruparpor)){
 			$dados = $this->dadosMedidaVariavel($id_medida_variavel,$filtro,1);
+		}
+		else{
+			$dados = $this->dadosMedidaVariavel($id_medida_variavel,$filtro,0);
 		}
 		if($dados){
 			$metaVariavel = $this->listaMedidaVariavel("",$id_medida_variavel);
@@ -513,14 +580,14 @@ class Metaestat{
 
 	Altera uma regiao
 	*/
-	function alteraTipoRegiao($codigo_tipo_regiao,$nome_tipo_regiao,$descricao_tipo_regiao,$esquemadb,$tabela,$colunageo,$data,$identificador,$colunanomeregiao,$srid){
+	function alteraTipoRegiao($codigo_tipo_regiao,$nome_tipo_regiao,$descricao_tipo_regiao,$esquemadb,$tabela,$colunageo,$colunacentroide,$data,$identificador,$colunanomeregiao,$srid){
 		try	{
 			if($codigo_tipo_regiao != ""){
 				if($this->convUTF){
 					$nome_tipo_regiao = utf8_encode($nome_tipo_regiao);
 					$descricao_tipo_regiao = utf8_encode($descricao_tipo_regiao);
 				}
-				$this->dbhw->query("UPDATE ".$this->esquemaadmin."i3geoestat_tipo_regiao SET nome_tipo_regiao = '$nome_tipo_regiao',descricao_tipo_regiao = '$descricao_tipo_regiao',esquemadb = '$esquemadb',tabela = '$tabela',colunageo = '$colunageo',data = '$data',identificador = '$identificador',colunanomeregiao = '$colunanomeregiao', srid = '$srid' WHERE codigo_tipo_regiao = $codigo_tipo_regiao");
+				$this->dbhw->query("UPDATE ".$this->esquemaadmin."i3geoestat_tipo_regiao SET colunacentroide = '$colunacentroide',nome_tipo_regiao = '$nome_tipo_regiao',descricao_tipo_regiao = '$descricao_tipo_regiao',esquemadb = '$esquemadb',tabela = '$tabela',colunageo = '$colunageo',data = '$data',identificador = '$identificador',colunanomeregiao = '$colunanomeregiao', srid = '$srid' WHERE codigo_tipo_regiao = $codigo_tipo_regiao");
 				$retorna = $codigo_tipo_regiao;
 			}
 			else{
@@ -565,13 +632,14 @@ class Metaestat{
 
 	Altera uma dimensao de uma medida ou cria uma nova
 	*/
-	function alteraClassificacaoMedida($id_medida_variavel,$id_classificacao="",$nome){
+	function alteraClassificacaoMedida($id_medida_variavel,$id_classificacao="",$nome="",$observacao=""){
 		try	{
 			if($id_classificacao != ""){
 				if($this->convUTF){
 					$nome = utf8_encode($nome);
+					$observacao = utf8_encode($observacao);
 				}
-				$this->dbhw->query("UPDATE ".$this->esquemaadmin."i3geoestat_classificacao SET nome = '$nome' WHERE id_classificacao = $id_classificacao");
+				$this->dbhw->query("UPDATE ".$this->esquemaadmin."i3geoestat_classificacao SET observacao = '$observacao',nome = '$nome' WHERE id_classificacao = $id_classificacao");
 				$retorna = $id_dimensao_medida;
 			}
 			else{
@@ -591,14 +659,14 @@ class Metaestat{
 
 	Altera uma classe de uma classificacao
 	*/
-	function alteraClasseClassificacao($id_classificacao,$id_classe="",$titulo="",$expressao="",$vermelho="",$verde="",$azul=""){
+	function alteraClasseClassificacao($id_classificacao,$id_classe="",$titulo="",$expressao="",$vermelho="",$verde="",$azul="",$tamanho="",$simbolo="",$overmelho="",$overde="",$oazul="",$otamanho=""){
 		try	{
 			if($id_classe != ""){
 				if($this->convUTF){
-					$nome = utf8_encode($nome);
+					$titulo = utf8_encode($titulo);
 				}
 				//echo "UPDATE ".$this->esquemaadmin."i3geoestat_classe SET azul = '$azul', verde = '$verde', vermelho = '$vermelho',expressao = '$expressao', titulo = '$titulo' WHERE id_classe = $id_classe";exit;
-				$this->dbhw->query("UPDATE ".$this->esquemaadmin."i3geoestat_classes SET azul = '$azul', verde = '$verde', vermelho = '$vermelho',expressao = '$expressao', titulo = '$titulo' WHERE id_classe = $id_classe");
+				$this->dbhw->query("UPDATE ".$this->esquemaadmin."i3geoestat_classes SET tamanho='$tamanho',simbolo='$simbolo',overmelho='$overmelho',overde='$overde',oazul='$oazul',otamanho='$otamanho',azul = '$azul', verde = '$verde', vermelho = '$vermelho',expressao = '$expressao', titulo = '$titulo' WHERE id_classe = $id_classe");
 				$retorna = $id_classe;
 			}
 			else{

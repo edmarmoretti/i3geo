@@ -51,7 +51,7 @@ class DataConnector
 			else
 			{dl('php_mapscript.so');}
 		}
-		include("../../classesphp/carrega_ext.php");
+		//include("../../classesphp/carrega_ext.php");
 		//verificação de segurança
 		$_SESSION = array();
 		session_name("i3GeoPHP");
@@ -110,9 +110,9 @@ class DataConnector
 
     // Make data store
     function getDataStore($nomelayer,$colunasvalor,$colunanomeregiao,$titulo,$descricao,$ext=""){ //$indicatorID, $year, $region){
-		include("../../classesphp/funcoes_gerais.php");
+		include(__DIR__."/../../classesphp/funcoes_gerais.php");
 		$versao = versao();
-		$versao = $versao["principal"];			
+		$versao = $versao["principal"];
 		$mapa = ms_newMapObj($this->map_file);
 		if($ext == "")
 		{$mapa = extPadrao($mapa);}
@@ -120,7 +120,7 @@ class DataConnector
 			$e = str_replace(","," ",$ext);
 			$e = explode(" ",$ext);
 			$extatual = $mapa->extent;
-			$extatual->setextent((min($e[0],$e[2])),(min($e[1],$e[3])),(max($e[0],$e[2])),(max($e[1],$e[3])));		
+			$extatual->setextent((min($e[0],$e[2])),(min($e[1],$e[3])),(max($e[0],$e[2])),(max($e[1],$e[3])));
 		}
 		$layer = $mapa->getlayerbyname($nomelayer);
 		$layer->set("template","none.html");
@@ -160,7 +160,7 @@ class DataConnector
 			$valitem = array();
 			if($versao == 6)
 			{$shape = $layer->getShape($layer->getResult($i));}
-			else{$shape = $layer->getFeature($layer->getResult($i)->shapeindex);}	
+			else{$shape = $layer->getFeature($layer->getResult($i)->shapeindex);}
 			$pt = $shape->getCentroid();
 			$dataStore['features'][$i] = array(
 				"featureID"=>$i,
@@ -172,7 +172,7 @@ class DataConnector
 			//[0] é o ano
 			foreach($colunasvalor as $colunavalor){
 				$valor = $shape->values[$colunavalor];
-				
+
 				settype($valor,"float");
 				//echo $valor;
 				if(is_numeric($valor)){

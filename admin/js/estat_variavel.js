@@ -300,7 +300,7 @@ function adicionaNosClassificacao(no,dados,redesenha){
 		conteudo = "&nbsp;<img style=\"position:relative;cursor:pointer;top:0px\" onclick=\"excluir('classificacaoMedida','"+dados[i].id_classificacao+"')\" title=excluir width='10px' heigth='10px' src=\"../imagens/01.png\" />";
 		conteudo += "&nbsp;<img style=\"position:relative;cursor:pointer;top:2px\" onclick=\"editar('classificacaoMedida','"+dados[i].id_classificacao+"')\" title=editar src=\"../imagens/06.png\" /><b>";
 		if(dados[i].nomedimensao != "")
-		{conteudo += "&nbsp;<span><b>"+dados[i].nome+"</b><span style=color:gray > id: "+dados[i].id_classificacao+"</span></span>";}
+		{conteudo += "&nbsp;<span><b>"+dados[i].nome+"</b><span style=color:gray > Obs.: "+dados[i].nome+" id: "+dados[i].id_classificacao+"</span></span>";}
 		else
 		{conteudo += "&nbsp;<span style=color:red >Edite para definir a nova classifica&ccedil;&atilde;o!!!</span>";}
 		d = {html:conteudo,id_classificacao:dados[i].id_classificacao,tipo:"classificacao"};
@@ -442,7 +442,8 @@ function montaDivClassificacaoMedida(i){
 	var ins = "",
 		param = {
 			"linhas":[
-		          {titulo:"Nome:",id:"Enome",size:"50",value:i.nome,tipo:"text",div:""}
+		          {titulo:"Nome:",id:"Enome",size:"50",value:i.nome,tipo:"text",div:""},
+		          {titulo:"Observa&ccedil;&atilde;o:",id:"Eobservacao",size:"50",value:i.observacao,tipo:"text",div:""}
 			]
 		};
 	ins += core_geraLinhas(param);
@@ -455,9 +456,15 @@ function montaDivClasseClassificacao(i){
 			"linhas":[
 		          {titulo:"T&iacute;tulo:",id:"Etitulo",size:"50",value:i.titulo,tipo:"text",div:""},
 		          {titulo:"Express&atilde;o (no estilo Mapserver)<br> exemplo (([nu_farm_funcionando] > 0) and ([nu_farm_funcionando] < 5)):",id:"Eexpressao",size:"50",value:i.expressao,tipo:"text",div:""},
+		          {titulo:"S&iacute;mbolo:",id:"Esimbolo",size:"10",value:i.simbolo,tipo:"text",div:""},
+		          {titulo:"Tamanho do s&iacute;mbolo:",id:"Etamanho",size:"10",value:i.tamanho,tipo:"text",div:""},
 		          {titulo:"Vermelho:",id:"Evermelho",size:"10",value:i.vermelho,tipo:"text",div:""},
 		          {titulo:"Verde:",id:"Everde",size:"10",value:i.verde,tipo:"text",div:""},
-		          {titulo:"Azul:",id:"Eazul",size:"10",value:i.azul,tipo:"text",div:""}
+		          {titulo:"Azul:",id:"Eazul",size:"10",value:i.azul,tipo:"text",div:""},
+		          {titulo:"Contorno - tamanho do s&iacute;mbolo:",id:"Eotamanho",size:"10",value:i.otamanho,tipo:"text",div:""},
+		          {titulo:"Contorno - Vermelho:",id:"Eovermelho",size:"10",value:i.overmelho,tipo:"text",div:""},
+		          {titulo:"Contorno - Verde:",id:"Eoverde",size:"10",value:i.overde,tipo:"text",div:""},
+		          {titulo:"Contorno - Azul:",id:"Eoazul",size:"10",value:i.oazul,tipo:"text",div:""}
 			]
 		};
 	ins += core_geraLinhas(param);
@@ -645,7 +652,9 @@ function sql(tipo,id) {
 						ins += '  <input type=button id="sumarioestat" value="Sum&aacute;rio" />';
 						ins += '  <input type=button id="graficoestat" value="Gr&aacute;fico" />';
 						ins += '  <input type=button id="mapfileestat" value="Mapfile" />';
-						ins += '  <input type=button id="i3geoestat" value="i3Geo" />';
+						ins += '  <input type=button id="i3geoestat" value="i3Geo" /><br><br>';
+						ins += '  <input type=button id="kmzestat" value="Kmz (vetorial)" />';
+						ins += '  <input type=button id="kmlestat" value="Kml (wms)" />';
 
 						$i("editor_bd").innerHTML = ins;
 						new YAHOO.widget.Button("sqljson");
@@ -667,6 +676,22 @@ function sql(tipo,id) {
 								colunas = 1;
 							}
 							window.open('../php/metaestat.php?funcao=mapfileMedidaVariavel&formato=json&id_medida_variavel='+id+"&filtro="+$i("filtrosql").value+"&todasascolunas="+colunas+"&tipolayer="+$i("tipolayer").value+"&id_classificacao="+$i("classificacao").value+"&agruparpor="+$i("agruparsql").value);
+						};
+						new YAHOO.widget.Button("kmzestat");
+						$i("kmzestat-button").onclick = function(){
+							var colunas = 0;
+							if($i("incluirtodascolunas").checked === true){
+								colunas = 1;
+							}
+							window.open('../php/metaestat.php?funcao=kmlmedidavariavel&id_medida_variavel='+id+"&filtro="+$i("filtrosql").value+"&todasascolunas="+colunas+"&tipolayer="+$i("tipolayer").value+"&id_classificacao="+$i("classificacao").value+"&agruparpor="+$i("agruparsql").value+"&formato=kmz");
+						};
+						new YAHOO.widget.Button("kmlestat");
+						$i("kmlestat-button").onclick = function(){
+							var colunas = 0;
+							if($i("incluirtodascolunas").checked === true){
+								colunas = 1;
+							}
+							window.open('../php/metaestat.php?funcao=kmlmedidavariavel&id_medida_variavel='+id+"&filtro="+$i("filtrosql").value+"&todasascolunas="+colunas+"&tipolayer="+$i("tipolayer").value+"&id_classificacao="+$i("classificacao").value+"&agruparpor="+$i("agruparsql").value+"&formato=kml");
 						};
 						new YAHOO.widget.Button("i3geoestat");
 						$i("i3geoestat-button").onclick = function(){
@@ -847,12 +872,12 @@ function gravaDados(tipo,id){
 		prog = "../php/metaestat.php?funcao=alteraDimensaoMedida";
 	}
 	if(tipo == "classificacaoMedida"){
-		campos = new Array("nome");
+		campos = new Array("nome","observacao");
 		par = "&id_classificacao="+id;
 		prog = "../php/metaestat.php?funcao=alteraClassificacaoMedida";
 	}
 	if(tipo == "classeClassificacao"){
-		campos = new Array("titulo","expressao","azul","verde","vermelho");
+		campos = new Array("titulo","expressao","azul","verde","vermelho","tamanho","simbolo","otamanho","overde","oazul","overmelho");
 		par = "&id_classe="+id;
 		prog = "../php/metaestat.php?funcao=alteraClasseClassificacao";
 	}
@@ -889,7 +914,7 @@ function gravaDados(tipo,id){
   					}
   					if(tipo == "classificacaoMedida"){
   						no = tree.getNodeByProperty("id_classificacao",id);
-  						no.getContentEl().getElementsByTagName("span")[0].innerHTML = "<b>"+document.getElementById("Enome").value+"</b><span style=color:gray > id: "+id+"</span>";
+  						no.getContentEl().getElementsByTagName("span")[0].innerHTML = "<b>"+document.getElementById("Enome").value+"</b><span style=color:gray > Obs.: "+document.getElementById("Eobservacao").value+" id: "+id+"</span>";
 						no.getContentEl().getElementsByTagName("span")[0].style.color = "";
   						no.html = no.getContentEl().innerHTML;
   					}

@@ -24,10 +24,9 @@
 
 
 // Can be changed to another data connector class
-require_once ('TME_i3geo_DataConnector.php');
-
+require_once (__DIR__.'/TME_i3geo_DataConnector.php');
 // Include engine class
-require_once ('TME_Engine.php');
+require_once (__DIR__.'/TME_Engine.php');
 if(!isset($_GET["sid"]))
 {echo "Erro. Acesso não permitido";exit;}
 $dataConnector = new DataConnector($_GET["sid"]);
@@ -42,7 +41,7 @@ if(count($colunas) == 1){
 	$tipo = "year";
 }
 if(!isset($dir_tmp)){
-	include("../../ms_configura.php");
+	include(__DIR__."/../../ms_configura.php");
 }
 $parameters = array( 'mapType'        => 'bar',
    			  	     'indicator'      => 'valores',
@@ -57,9 +56,8 @@ $parameters = array( 'mapType'        => 'bar',
 $map = new ThematicMap($dataStore, $parameters);
 $file = $map->getKML($dataConnector->url);
 if(!function_exists("cpjson"))
-{require("../../classesphp/funcoes_gerais.php");}
+{require(__DIR__."/../../classesphp/funcoes_gerais.php");}
 
 cpjson(array('url' => $file));
 //echo "<p><a href='$file'>$file</a>";
-
 ?>

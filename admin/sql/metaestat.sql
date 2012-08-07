@@ -16,10 +16,10 @@ drop table i3geoestat_variavel;
 
 /* create tables */
 
--- lista controlada de tipos de período de tempo
-create table i3geoestat_tipo_periodo
+-- tabela com o nome e descrição de uma variável variável
+create table i3geoestat_variavel
 (
-	codigo_tipo_periodo integer not null unique primary key autoincrement,
+	codigo_variavel integer not null unique primary key autoincrement,
 	nome text,
 	descricao text
 );
@@ -39,6 +39,27 @@ create table i3geoestat_conexao
 	usuario text,
 	-- senha do usuário que pode acessar o banco
 	senha text
+);
+
+
+create table i3geoestat_unidade_medida
+(
+	codigo_unidade_medida integer not null unique primary key autoincrement,
+	nome text,
+	sigla text,
+	-- o tipo de unidade permite que os valores sejam somados? (0 ou 1)
+	permitesoma integer default 0,
+	-- o tipo de unidade permite o cálculo de média aritmética? (0 ou 1)
+	permitemedia integer default 0
+);
+
+
+-- lista controlada de tipos de período de tempo
+create table i3geoestat_tipo_periodo
+(
+	codigo_tipo_periodo integer not null unique primary key autoincrement,
+	nome text,
+	descricao text
 );
 
 
@@ -63,29 +84,10 @@ create table i3geoestat_tipo_regiao
 	colunanomeregiao text,
 	-- código srid correspondente à projeção cartográfica da coluna com a geometria
 	srid text default '4326',
+	-- coluna que contém um ponto que representa cada local.  pode ser o mesmo que colunageo
+	colunacentroide text,
 	foreign key (codigo_estat_conexao)
 	references i3geoestat_conexao (codigo_estat_conexao)
-);
-
-
--- tabela com o nome e descrição de uma variável variável
-create table i3geoestat_variavel
-(
-	codigo_variavel integer not null unique primary key autoincrement,
-	nome text,
-	descricao text
-);
-
-
-create table i3geoestat_unidade_medida
-(
-	codigo_unidade_medida integer not null unique primary key autoincrement,
-	nome text,
-	sigla text,
-	-- o tipo de unidade permite que os valores sejam somados? (0 ou 1)
-	permitesoma integer default 0,
-	-- o tipo de unidade permite o cálculo de média aritmética? (0 ou 1)
-	permitemedia integer default 0
 );
 
 
@@ -110,16 +112,16 @@ create table i3geoestat_medida_variavel
 	filtro text,
 	-- titulo da medida
 	nomemedida text,
+	foreign key (codigo_variavel)
+	references i3geoestat_variavel (codigo_variavel),
+	foreign key (codigo_estat_conexao)
+	references i3geoestat_conexao (codigo_estat_conexao),
+	foreign key (codigo_unidade_medida)
+	references i3geoestat_unidade_medida (codigo_unidade_medida),
 	foreign key (codigo_tipo_periodo)
 	references i3geoestat_tipo_periodo (codigo_tipo_periodo),
 	foreign key (codigo_tipo_regiao)
-	references i3geoestat_tipo_regiao (codigo_tipo_regiao),
-	foreign key (codigo_estat_conexao)
-	references i3geoestat_conexao (codigo_estat_conexao),
-	foreign key (codigo_variavel)
-	references i3geoestat_variavel (codigo_variavel),
-	foreign key (codigo_unidade_medida)
-	references i3geoestat_unidade_medida (codigo_unidade_medida)
+	references i3geoestat_tipo_regiao (codigo_tipo_regiao)
 );
 
 
@@ -129,6 +131,8 @@ create table i3geoestat_classificacao
 	id_classificacao integer not null unique primary key autoincrement,
 	nome text,
 	id_medida_variavel integer,
+	-- observacao sobre a classificação
+	observacao text,
 	foreign key (id_medida_variavel)
 	references i3geoestat_medida_variavel (id_medida_variavel)
 );
@@ -149,6 +153,18 @@ create table i3geoestat_classes
 	-- componente b da cor utilizada para representar a classe
 	azul text,
 	id_classificacao integer,
+	-- tamanho do símbolo (item size do mapfile)
+	tamanho text,
+	-- symbol name
+	simbolo text,
+	-- componente vermelho da cor do outline
+	overmelho text,
+	-- componente verde da cor do outline
+	overde text,
+	-- componente azul da cor do outline
+	oazul text,
+	-- largura da linha do outline
+	otamanho text,
 	foreign key (id_classificacao)
 	references i3geoestat_classificacao (id_classificacao)
 );

@@ -263,7 +263,7 @@ switch (strtoupper($funcao))
 			$id_classificacao = $m->alteraClassificacaoMedida($id_medida_variavel);
 		}
 		else{
-			$m->alteraClassificacaoMedida("",$id_classificacao,$nome);
+			$m->alteraClassificacaoMedida("",$id_classificacao,$nome,$observacao);
 		}
 		retornaJSON($m->listaClassificacaoMedida($id_medida_variavel,$id_classificacao));
 		exit;
@@ -283,7 +283,7 @@ switch (strtoupper($funcao))
 			$id_classe = $m->alteraClasseClassificacao($id_classificacao);
 		}
 		else{
-			$m->alteraClasseClassificacao("",$id_classe,$titulo,$expressao,$vermelho,$verde,$azul);
+			$m->alteraClasseClassificacao("",$id_classe,$titulo,$expressao,$vermelho,$verde,$azul,$tamanho,$simbolo,$overmelho,$overde,$oazul,$otamanho);
 		}
 		retornaJSON($m->listaClasseClassificacao($id_classificacao,$id_classe));
 		exit;
@@ -343,7 +343,7 @@ switch (strtoupper($funcao))
 			$codigo_tipo_regiao = $m->alteraTipoRegiao();
 		}
 		else{
-			$codigo_tipo_regiao = $m->alteraTipoRegiao($codigo_tipo_regiao,$nome_tipo_regiao,$descricao_tipo_regiao,$esquemadb,$tabela,$colunageo,$data,$identificador,$colunanomeregiao,$srid);
+			$codigo_tipo_regiao = $m->alteraTipoRegiao($codigo_tipo_regiao,$nome_tipo_regiao,$descricao_tipo_regiao,$esquemadb,$tabela,$colunageo,$colunacentroide,$data,$identificador,$colunanomeregiao,$srid);
 		}
 		retornaJSON($m->listaTipoRegiao($codigo_tipo_regiao));
 		exit;
@@ -651,6 +651,27 @@ switch (strtoupper($funcao))
 		if($formato == "json"){
 			retornaJSON($m->mapfileMedidaVariavel($id_medida_variavel,$filtro,$todasascolunas,$tipolayer,$titulolayer,$id_classificacao,$agruparpor));
 		}
+		exit;
+	break;
+	/*
+	 Valor: KMLMEDIDAVARIAVEL
+
+	Gera um arquivo kml que pode ser aberto no googleearth
+
+	*/
+	case "KMLMEDIDAVARIAVEL":
+		$m = new Metaestat();
+		$r = $m->mapfileMedidaVariavel($id_medida_variavel,$filtro,$todasascolunas,$tipolayer,$titulolayer,$id_classificacao,$agruparpor);
+		//cria um mapfile completo, que inclui a camada no mapfile de inicializacao do i3geo
+		$mapfile = $m->mapfileCompleto($r["mapfile"]);
+		//define as variaveis necessarias ao pacote kmlserver
+		set_time_limit(0);
+		$_REQUEST["map"] = $mapfile;
+		$_REQUEST["typename"] = $r["layer"];
+		$_REQUEST["request"] = $formato;
+		//$_REQUEST["service"] = "icon";
+		include (__DIR__."/../../pacotes/kmlmapserver/classes/kmlserver.class.php");
+		$server = new KmlServer();
 		exit;
 	break;
 	/*
