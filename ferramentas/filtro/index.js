@@ -195,7 +195,7 @@ i3GEOF.filtro = {
 			return;
 		}
 		//cria a janela flutuante
-		titulo = "<div style='z-index:1;position:absolute' id='i3GEOFfiltroComboCabeca' >------</div>&nbsp;&nbsp;&nbsp;Filtro <a class=ajuda_usuario target=_blank href='" + i3GEO.configura.locaplic + "/ajuda_usuario.php?idcategoria=5&idajuda=38' >&nbsp;&nbsp;&nbsp;</a>";
+		titulo = "<div style='z-index:1;position:absolute' id='i3GEOFfiltroComboCabeca' >------</div>&nbsp;&nbsp;&nbsp;"$trad("t29")+" <a class=ajuda_usuario target=_blank href='" + i3GEO.configura.locaplic + "/ajuda_usuario.php?idcategoria=5&idajuda=38' >&nbsp;&nbsp;&nbsp;</a>";
 		janela = i3GEO.janela.cria(
 			"480px",
 			"250px",

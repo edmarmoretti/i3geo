@@ -45,7 +45,7 @@ Classe: i3GEOF.dissolve
 i3GEOF.dissolve = {
 	/*
 	Variavel: aguarde
-	
+
 	Estilo do objeto DOM com a imagem de aguarde existente no cabe&ccedil;alho da janela.
 	*/
 	aguarde: "",
@@ -57,11 +57,11 @@ i3GEOF.dissolve = {
 	},
 	/*
 	Function: iniciaDicionario
-	
+
 	Carrega o dicion&aacute;rio e chama a fun&ccedil;&atilde;o que inicia a ferramenta
-	
+
 	O Javascript &eacute; carregado com o id i3GEOF.nomedaferramenta.dicionario_script
-	*/	
+	*/
 	iniciaDicionario: function(){
 		if(typeof(i3GEOF.dissolve.dicionario) === 'undefined'){
 			i3GEO.util.scriptTag(
@@ -73,14 +73,14 @@ i3GEOF.dissolve = {
 		else{
 			i3GEOF.dissolve.iniciaJanelaFlutuante();
 		}
-	},	
+	},
 	/*
 	Function: inicia
-	
+
 	Inicia a ferramenta. &Eacute; chamado por criaJanelaFlutuante
-	
+
 	Parametro:
-	
+
 	iddiv {String} - id do div que receber&aacute; o conteudo HTML da ferramenta
 	*/
 	inicia: function(iddiv){
@@ -92,11 +92,11 @@ i3GEOF.dissolve = {
 	},
 	/*
 	Function: html
-	
+
 	Gera o c&oacute;digo html para apresenta&ccedil;ão das op&ccedil;&otilde;es da ferramenta
-	
+
 	Retorno:
-	
+
 	String com o c&oacute;digo html
 	*/
 	html:function(){
@@ -109,13 +109,13 @@ i3GEOF.dissolve = {
 	},
 	/*
 	Function: iniciaJanelaFlutuante
-	
+
 	Cria a janela flutuante para controle da ferramenta.
-	*/	
+	*/
 	iniciaJanelaFlutuante: function(){
 		var minimiza,cabecalho,janela,divid,temp,titulo;
 		//cria a janela flutuante
-		titulo = "Dissolve <a class=ajuda_usuario target=_blank href='" + i3GEO.configura.locaplic + "/ajuda_usuario.php?idcategoria=3&idajuda=22' >&nbsp;&nbsp;&nbsp;</a>";
+		titulo = $trad("u25")+" <a class=ajuda_usuario target=_blank href='" + i3GEO.configura.locaplic + "/ajuda_usuario.php?idcategoria=3&idajuda=22' >&nbsp;&nbsp;&nbsp;</a>";
 		cabecalho = function(){};
 		minimiza = function(){
 			i3GEO.janela.minimiza("i3GEOF.dissolve");
@@ -158,7 +158,7 @@ i3GEOF.dissolve = {
 	t2: function(){
 		var ins = "<p class='paragrafo' >Escolha o item que ser&aacute; utilizado (opcional)</p>";
 		ins += "<div style='text-align:left;' id='i3GEOdissolveDivItem' >Aguarde...</div>";
-		i3GEO.util.proximoAnterior("i3GEOF.dissolve.t1()","i3GEOF.dissolve.t3()",ins,"i3GEOF.dissolve.t2","i3GEOdissolveresultado");	
+		i3GEO.util.proximoAnterior("i3GEOF.dissolve.t1()","i3GEOF.dissolve.t3()",ins,"i3GEOF.dissolve.t2","i3GEOdissolveresultado");
 		i3GEOF.dissolve.comboItem();
 	},
 	t3: function(){
@@ -168,15 +168,15 @@ i3GEOF.dissolve = {
 		new YAHOO.widget.Button(
 			"i3GEOdissolvebotao1",
 			{onclick:{fn: i3GEOF.dissolve.criadissolve}}
-		);		
+		);
 	},
 	/*
 	Function: criadissolve
-	
+
 	Executa a opera&ccedil;ão de dissolve
-	
+
 	Veja:
-	
+
 	<DISSOLVEPOLIGONO>
 	*/
 	criadissolve: function(){
@@ -205,11 +205,11 @@ i3GEOF.dissolve = {
 	},
 	/*
 	Function: comboTemasSel
-	
+
 	Cria um combo com a lista de temas com elementos selecionados
 
 	Veja:
-	
+
 	<i3GEO.util.comboTemas>
 
 	*/
@@ -232,15 +232,15 @@ i3GEOF.dissolve = {
 			"",
 			false,
 			"poligonosSelecionados"
-		);	
+		);
 	},
 	/*
 	Function: comboItem
-	
+
 	Cria um combo para escolha de um item do tema de origem
 
 	Veja:
-	
+
 	<i3GEO.util.comboItens>
 
 	*/

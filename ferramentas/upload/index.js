@@ -139,7 +139,7 @@ i3GEOF.upload = {
 		minimiza = function(){
 			i3GEO.janela.minimiza("i3GEOF.upload");
 		};
-		titulo = "Upload de shapefile <a class=ajuda_usuario target=_blank href='" + i3GEO.configura.locaplic + "/ajuda_usuario.php?idcategoria=4&idajuda=27' >&nbsp;&nbsp;&nbsp;</a>";
+		titulo = $trad("a2")+" <a class=ajuda_usuario target=_blank href='" + i3GEO.configura.locaplic + "/ajuda_usuario.php?idcategoria=4&idajuda=27' >&nbsp;&nbsp;&nbsp;</a>";
 		janela = i3GEO.janela.cria(
 			"355px",
 			"470px",

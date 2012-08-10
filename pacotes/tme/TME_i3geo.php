@@ -27,37 +27,52 @@
 require_once (__DIR__.'/TME_i3geo_DataConnector.php');
 // Include engine class
 require_once (__DIR__.'/TME_Engine.php');
-if(!isset($_GET["sid"]))
-{echo "Erro. Acesso não permitido";exit;}
-$dataConnector = new DataConnector($_GET["sid"]);
-$colunas = str_replace(","," ",$_GET["colunasvalor"]);
-$colunas = explode(" ",$colunas);
-$dataStore = $dataConnector->getDataStore($_GET["nomelayer"],$colunas,$_GET["colunanomeregiao"],$_GET["titulo"],$_GET["descricao"],"");
-//choropleth,prism,bar,symbol
-$ano = "";
-$tipo = "slider";
-if(count($colunas) == 1){
-	$ano = $colunas[0];
-	$tipo = "year";
+//
+//este programa pode ser incluido em outros que nao tenham sid aberto
+//nesse caso e necessario forcar o uso e evitar o bloqueio do programa
+//para isso, o programa que faz o include deve ter a variavel $verificaSID = false definida antes de fazer o include
+//
+if(!isset($verificaSID)){
+	$verificaSID = true;
 }
+if(!isset($download)){
+	$download = false;
+}
+if(!isset($_GET["sid"]) && $verificaSID == true)
+{echo "Erro. Acesso não permitido";exit;}
 if(!isset($dir_tmp)){
 	include(__DIR__."/../../ms_configura.php");
 }
-$parameters = array( 'mapType'        => 'bar',
-   			  	     'indicator'      => 'valores',
-				     'year'           => $ano,
-				     'classification' => 'equal',
-					 'mapTitle' => $_GET["titulo"],
-					 'timeType' => $tipo, //para mais de um ano, escolha slider ou series
-					 'dirtmp' => $dir_tmp
-                   );
+$colunas = str_replace(","," ",$_GET["colunasvalor"]);
+$colunas = explode(" ",$colunas);
+if(!isset($parametersTME)){
 
+	//choropleth,prism,bar,symbol
+	$ano = "";
+	$tipo = "slider";
+	if(count($colunas) == 1){
+		$ano = $colunas[0];
+		$tipo = "year";
+	}
+	$parametersTME = array( 'mapType'        => 'bar',
+	   			  	     'indicator'      => 'valores',
+					     'year'           => $ano,
+					     'classification' => 'equal',
+						 'mapTitle' => $_GET["titulo"],
+						 'timeType' => $tipo, //para mais de um ano, escolha slider ou series
+						 'dirtmp' => $dir_tmp
+	                   );
+}
+$dataConnector = new DataConnector($_GET["sid"],$verificaSID);
+$dataStore = $dataConnector->getDataStore($_GET["nomelayer"],$colunas,$_GET["colunanomeregiao"],$_GET["titulo"],$_GET["descricao"],"");
 // Create thematic map object
-$map = new ThematicMap($dataStore, $parameters);
-$file = $map->getKML($dataConnector->url);
-if(!function_exists("cpjson"))
-{require(__DIR__."/../../classesphp/funcoes_gerais.php");}
+$map = new ThematicMap($dataStore, $parametersTME);
 
-cpjson(array('url' => $file));
+$file = $map->getKML($dataConnector->url,$download);
+if(!$download){
+	if(!function_exists("cpjson"))
+	{require(__DIR__."/../../classesphp/funcoes_gerais.php");}
+	cpjson(array('url' => $file));
+}
 //echo "<p><a href='$file'>$file</a>";
 ?>

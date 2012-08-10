@@ -45,7 +45,7 @@ Classe: i3GEOF.animacao
 i3GEOF.animacao = {
 	/*
 	Variavel: aguarde
-	
+
 	Estilo do objeto DOM com a imagem de aguarde existente no cabe&ccedil;alho da janela.
 	*/
 	aguarde: "",
@@ -58,11 +58,11 @@ i3GEOF.animacao = {
 	},
 	/*
 	Function: iniciaDicionario
-	
+
 	Carrega o dicion&aacute;rio e chama a fun&ccedil;&atilde;o que inicia a ferramenta
-	
+
 	O Javascript &eacute; carregado com o id i3GEOF.nomedaferramenta.dicionario_script
-	*/	
+	*/
 	iniciaDicionario: function(){
 		if(typeof(i3GEOF.animacao.dicionario) === 'undefined'){
 			i3GEO.util.scriptTag(
@@ -74,14 +74,14 @@ i3GEOF.animacao = {
 		else{
 			i3GEOF.animacao.iniciaJanelaFlutuante();
 		}
-	},	
+	},
 	/*
 	Function: inicia
-	
+
 	Inicia a ferramenta. &Eacute; chamado por criaJanelaFlutuante
-	
+
 	Parametro:
-	
+
 	iddiv {String} - id do div que receber&aacute; o conteudo HTML da ferramenta
 	*/
 	inicia: function(iddiv){
@@ -92,25 +92,25 @@ i3GEOF.animacao = {
 	},
 	/*
 	Function: html
-	
+
 	Gera o c&oacute;digo html para apresenta&ccedil;ão das op&ccedil;&otilde;es da ferramenta
-	
+
 	Retorno:
-	
+
 	String com o c&oacute;digo html
 	*/
 	html:function(){
 		var camadas = i3GEO.arvoreDeCamadas.CAMADAS,
 			n = camadas.length,
 			ins = "";
-			
+
 		ins += "" +
 			"<div style='text-align:center;position:relative;cursor:pointer'  >" +
 			"	<img title='inicia' src='"+i3GEO.configura.locaplic+"/imagens/player_inicia.png' onclick='i3GEOF.animacao.dispara()' />&nbsp;" +
 			"	<img title='rebobina' src='"+i3GEO.configura.locaplic+"/imagens/player_para.png' onclick='i3GEOF.animacao.termina()' />&nbsp;" +
 			"	<img title='mais rapido' src='"+i3GEO.configura.locaplic+"/imagens/player_avanca.png' onclick='i3GEOF.animacao.maisrapido()' />&nbsp;" +
 			"	<img title='mais lento' src='"+i3GEO.configura.locaplic+"/imagens/player_volta.png' onclick='i3GEOF.animacao.maislento()' />&nbsp;" +
-			"</div>" +			
+			"</div>" +
 			"<table id='i3GEOFanimacaoLista' style='width:95%' class='lista8'>";
 		while(n > 0){
 			n -= 1;
@@ -120,14 +120,14 @@ i3GEOF.animacao = {
 		ins += "</table><br>" +
 			'	<div id=i3GEOanimacaomen1 style="display:block;left:0px;">' +
 			'		<p class=paragrafo >Marque as camadas que serão inclu&iacute;das na anima&ccedil;ão e depois clique no botão "inicia"</p>' +
-			'	</div>';		
+			'	</div>';
 		return ins;
 	},
 	/*
 	Function: iniciaJanelaFlutuante
-	
+
 	Cria a janela flutuante para controle da ferramenta.
-	*/	
+	*/
 	iniciaJanelaFlutuante: function(){
 		var janela,divid,temp,titulo,cabecalho,minimiza;
 		cabecalho = function(){};
@@ -135,7 +135,7 @@ i3GEOF.animacao = {
 			i3GEO.janela.minimiza("i3GEOF.animacao");
 		};
 		//cria a janela flutuante
-		titulo = "Anima&ccedil;&atilde;o <a class=ajuda_usuario target=_blank href='" + i3GEO.configura.locaplic + "/ajuda_usuario.php?idcategoria=1&idajuda=107' >&nbsp;&nbsp;&nbsp;</a>";
+		titulo = $trad("p21")+" <a class=ajuda_usuario target=_blank href='" + i3GEO.configura.locaplic + "/ajuda_usuario.php?idcategoria=1&idajuda=107' >&nbsp;&nbsp;&nbsp;</a>";
 		janela = i3GEO.janela.cria(
 			"210px",
 			"80px",
@@ -157,14 +157,14 @@ i3GEOF.animacao = {
 		temp = function(){
 			i3GEOF.animacao.termina();
 		};
-		YAHOO.util.Event.addListener(janela[0].close, "click", temp);		
+		YAHOO.util.Event.addListener(janela[0].close, "click", temp);
 	},
 	codigos: [],
 	/*
 	Function: anima
-	
+
 	Inicia a anima&ccedil;ão
-	
+
 	*/
 	dispara: function(){
 		if(i3GEOF.animacao.aguarde.visibility === "visible")
@@ -182,7 +182,7 @@ i3GEOF.animacao = {
 	},
 	maislento: function(){
 		i3GEOF.animacao.tempo += 100;
-	},	
+	},
 	anima: function(c){
 		if(i3GEOF.animacao.codigos.length === 0)
 		{return;}
@@ -230,8 +230,8 @@ i3GEOF.animacao = {
 				{layer.style.visibility = "visible";}
 				if(tipo === "desliga")
 				{layer.style.visibility = "hidden";}
-				break;				
-		};	
+				break;
+		};
 	},
 	termina: function(){
 		i3GEOF.animacao.codigos = [];
@@ -263,7 +263,7 @@ i3GEOF.animacao = {
 			while(n > 0){
 				n -= 1;
 				i3GEOF.animacao.ligaDesliga(temas[n].name,"desliga");
-			}			
+			}
 		}
 	},
 	retornaCoresInicial: function(){
@@ -272,6 +272,6 @@ i3GEOF.animacao = {
 		while(n > 0){
 			n -= 1;
 			$i("i3GEOanima"+cs[n].value).style.backgroundColor = "white";
-		}		
+		}
 	}
 };

@@ -45,7 +45,7 @@ Classe: i3GEOF.confluence
 i3GEOF.confluence = {
 	/*
 	Variavel: aguarde
-	
+
 	Estilo do objeto DOM com a imagem de aguarde existente no cabe&ccedil;alho da janela.
 	*/
 	aguarde: "",
@@ -57,11 +57,11 @@ i3GEOF.confluence = {
 	},
 	/*
 	Function: iniciaDicionario
-	
+
 	Carrega o dicion&aacute;rio e chama a fun&ccedil;&atilde;o que inicia a ferramenta
-	
+
 	O Javascript &eacute; carregado com o id i3GEOF.nomedaferramenta.dicionario_script
-	*/	
+	*/
 	iniciaDicionario: function(){
 		if(typeof(i3GEOF.confluence.dicionario) === 'undefined'){
 			i3GEO.util.scriptTag(
@@ -73,14 +73,14 @@ i3GEOF.confluence = {
 		else{
 			i3GEOF.confluence.iniciaJanelaFlutuante();
 		}
-	},	
+	},
 	/*
 	Function: inicia
-	
+
 	Inicia a ferramenta. &Eacute; chamado por criaJanelaFlutuante
-	
+
 	Parametro:
-	
+
 	iddiv {String} - id do div que receber&aacute; o conteudo HTML da ferramenta
 	*/
 	inicia: function(iddiv){
@@ -92,22 +92,22 @@ i3GEOF.confluence = {
 			}
 			if(i3GEO.Interface.ATUAL === "googlemaps"){
    				confluenceDragend = google.maps.event.addListener(i3GeoMap, "dragend", function() {i3GEOF.confluence.lista();});
-   				confluenceZoomend = google.maps.event.addListener(i3GeoMap, "zoomend", function() {i3GEOF.confluence.lista();});						
+   				confluenceZoomend = google.maps.event.addListener(i3GeoMap, "zoomend", function() {i3GEOF.confluence.lista();});
 			}
 			if(i3GEO.Interface.ATUAL === "googleearth"){
    				confluenceDragend = google.earth.addEventListener(i3GeoMap.getView(), "viewchangeend", function() {i3GEOF.confluence.lista();});
-			}			
+			}
 			i3GEOF.confluence.lista();
 		}
 		catch(erro){alert(erro);}
 	},
 	/*
 	Function: html
-	
+
 	Gera o c&oacute;digo html para apresenta&ccedil;ão das op&ccedil;&otilde;es da ferramenta
-	
+
 	Retorno:
-	
+
 	String com o c&oacute;digo html
 	*/
 	html:function(){
@@ -117,9 +117,9 @@ i3GEOF.confluence = {
 	},
 	/*
 	Function: iniciaJanelaFlutuante
-	
+
 	Cria a janela flutuante para controle da ferramenta.
-	*/	
+	*/
 	iniciaJanelaFlutuante: function(){
 		var minimiza,cabecalho,janela,divid,temp,titulo;
 		//funcao que sera executada ao ser clicado no cabe&ccedil;alho da janela
@@ -130,7 +130,7 @@ i3GEOF.confluence = {
 			i3GEO.janela.minimiza("i3GEOF.confluence");
 		};
 		//cria a janela flutuante
-		titulo = "Conflu&ecirc;ncias <a class=ajuda_usuario target=_blank href='" + i3GEO.configura.locaplic + "/ajuda_usuario.php?idcategoria=8&idajuda=75' >&nbsp;&nbsp;&nbsp;</a>";
+		titulo = "Confluence <a class=ajuda_usuario target=_blank href='" + i3GEO.configura.locaplic + "/ajuda_usuario.php?idcategoria=8&idajuda=75' >&nbsp;&nbsp;&nbsp;</a>";
 		janela = i3GEO.janela.cria(
 			"250px",
 			"190px",
@@ -159,11 +159,11 @@ i3GEOF.confluence = {
 				google.earth.removeEventListener(confluenceDragend);
 			}
 		};
-		YAHOO.util.Event.addListener(janela[0].close, "click", temp);		
+		YAHOO.util.Event.addListener(janela[0].close, "click", temp);
 	},
 	/*
 	Function: ativaFoco
-	
+
 	Refaz a interface da ferramenta quando a janela flutuante tem seu foco ativado
 	*/
 	ativaFoco: function(){
@@ -175,7 +175,7 @@ i3GEOF.confluence = {
 	},
 	/*
 	Function: escondexy
-	
+
 	Esconde a marca mostrada no mapa
 	*/
 	escondexy: function(){
@@ -188,7 +188,7 @@ i3GEOF.confluence = {
 	},
 	/*
 	Function: mostraxy
-	
+
 	Indica a conflu&ecirc;ncia no mapa
 	*/
 	mostraxy: function(xy){
@@ -205,7 +205,7 @@ i3GEOF.confluence = {
 	},
 	/*
 	Function: lista
-	
+
 	Lista os pontos de conflu&ecirc;ncia
 	*/
 	lista: function(){

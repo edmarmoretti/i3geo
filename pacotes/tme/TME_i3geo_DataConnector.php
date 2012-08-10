@@ -39,7 +39,7 @@ class DataConnector
     private $dbc;
 
     // Constructor
-    function __construct($sid)
+    function __construct($sid,$verificaSID = true)
     {
 		if (!function_exists('ms_GetVersion'))
 		{
@@ -53,18 +53,20 @@ class DataConnector
 		}
 		//include("../../classesphp/carrega_ext.php");
 		//verificação de segurança
-		$_SESSION = array();
-		session_name("i3GeoPHP");
-		session_id($sid);
-		session_start();
-		if(@$_SESSION["fingerprint"])
-		{
-			$f = explode(",",$_SESSION["fingerprint"]);
-			if (md5('I3GEOSEC' . $_SERVER['HTTP_USER_AGENT'] . session_id()) != $f[0] && !in_array($_GET["telaR"],$f) )
+		if($verificaSID == true){
+			$_SESSION = array();
+			session_name("i3GeoPHP");
+			session_id($sid);
+			session_start();
+			if(@$_SESSION["fingerprint"])
+			{
+				$f = explode(",",$_SESSION["fingerprint"]);
+				if (md5('I3GEOSEC' . $_SERVER['HTTP_USER_AGENT'] . session_id()) != $f[0] && !in_array($_GET["telaR"],$f) )
+				{exit;}
+			}
+			else
 			{exit;}
 		}
-		else
-		{exit;}
 		if(!isset($_SESSION["map_file"]))
 		{exit;}
 		$this->map_file = $_SESSION["map_file"];
@@ -110,10 +112,14 @@ class DataConnector
 
     // Make data store
     function getDataStore($nomelayer,$colunasvalor,$colunanomeregiao,$titulo,$descricao,$ext=""){ //$indicatorID, $year, $region){
-		include(__DIR__."/../../classesphp/funcoes_gerais.php");
+    	if(!function_exists("versao")){
+    		include(__DIR__."/../../classesphp/funcoes_gerais.php");
+    	}
+
 		$versao = versao();
 		$versao = $versao["principal"];
 		$mapa = ms_newMapObj($this->map_file);
+
 		if($ext == "")
 		{$mapa = extPadrao($mapa);}
 		else{
@@ -139,6 +145,7 @@ class DataConnector
 				}
 			}
 		}
+
 		$itens = pegaItens($layer,$mapa);
 		carregaquery2($this->map_file,$layer,$mapa);
 		if ($layer->getNumresults() > 0){$existesel = "sim";}

@@ -163,7 +163,7 @@ i3GEOF.insereGrafico = {
 			i3GEO.janela.minimiza("i3GEOF.insereGrafico");
 		};
 		//cria a janela flutuante
-		titulo = "Insere grafico <a class=ajuda_usuario target=_blank href='" + i3GEO.configura.locaplic + "/ajuda_usuario.php?idcategoria=8&idajuda=80' >&nbsp;&nbsp;&nbsp;</a>";
+		titulo = $trad("t37")+" <a class=ajuda_usuario target=_blank href='" + i3GEO.configura.locaplic + "/ajuda_usuario.php?idcategoria=8&idajuda=80' >&nbsp;&nbsp;&nbsp;</a>";
 		janela = i3GEO.janela.cria(
 			"400px",
 			"320px",

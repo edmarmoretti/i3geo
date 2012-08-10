@@ -146,7 +146,7 @@ i3GEOF.bufferpt = {
 			i3GEO.janela.minimiza("i3GEOF.bufferpt");
 		};
 		//cria a janela flutuante
-		titulo = "Entorno de um ponto <a class=ajuda_usuario target=_blank href='" + i3GEO.configura.locaplic + "/ajuda_usuario.php?idcategoria=24&idajuda=3' >&nbsp;&nbsp;&nbsp;</a>";
+		titulo = $trad("u10")+" <a class=ajuda_usuario target=_blank href='" + i3GEO.configura.locaplic + "/ajuda_usuario.php?idcategoria=24&idajuda=3' >&nbsp;&nbsp;&nbsp;</a>";
 		janela = i3GEO.janela.cria(
 			"210px",
 			"110px",

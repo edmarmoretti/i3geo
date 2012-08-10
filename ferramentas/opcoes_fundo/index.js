@@ -131,7 +131,7 @@ i3GEOF.opcoesFundo = {
 			i3GEO.janela.minimiza("i3GEOF.opcoesFundo");
 		};
 		//cria a janela flutuante
-		titulo = "Cor do fundo <a class=ajuda_usuario target=_blank href='" + i3GEO.configura.locaplic + "/ajuda_usuario.php?idcategoria=1&idajuda=6' >&nbsp;&nbsp;&nbsp;</a>";
+		titulo = $trad("p9")+" <a class=ajuda_usuario target=_blank href='" + i3GEO.configura.locaplic + "/ajuda_usuario.php?idcategoria=1&idajuda=6' >&nbsp;&nbsp;&nbsp;</a>";
 		janela = i3GEO.janela.cria(
 			"210px",
 			"80px",

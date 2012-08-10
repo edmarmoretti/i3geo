@@ -15,7 +15,7 @@ Veja:
 
 <i3GEO.analise.dialogo.analisaGeometrias>
 
-Arquivo: 
+Arquivo:
 
 i3geo/ferramentas/analisageometrias/index.js.php
 
@@ -48,7 +48,7 @@ Classe: i3GEOF.analisaGeometrias
 i3GEOF.analisaGeometrias = {
 	/*
 	Variavel: aguarde
-	
+
 	Objeto DOM com a imagem de aguarde existente no cabe&ccedil;alho da janela.
 	*/
 	aguarde: "",
@@ -60,11 +60,11 @@ i3GEOF.analisaGeometrias = {
 	},
 	/*
 	Function: iniciaDicionario
-	
+
 	Carrega o dicion&aacute;rio e chama a fun&ccedil;&atilde;o que inicia a ferramenta
-	
+
 	O Javascript &eacute; carregado com o id i3GEOF.nomedaferramenta.dicionario_script
-	*/	
+	*/
 	iniciaDicionario: function(){
 		if(typeof(i3GEOF.analisaGeometrias.dicionario) === 'undefined'){
 			i3GEO.util.scriptTag(
@@ -76,14 +76,14 @@ i3GEOF.analisaGeometrias = {
 		else{
 			i3GEOF.analisaGeometrias.iniciaJanelaFlutuante();
 		}
-	},	
+	},
 	/*
 	Function: inicia
-	
+
 	Inicia a ferramenta. &Eacute; chamado por criaJanelaFlutuante
-	
+
 	Parametro:
-	
+
 	iddiv {String} - id do div que receber&aacute; o conteudo HTML da ferramenta
 	*/
 	inicia: function(iddiv){
@@ -114,7 +114,7 @@ i3GEOF.analisaGeometrias = {
 			temp = $i("i3GEOanalisageometriasbotaocalculo-button").style;
 			temp.minHeight = "1.5em";
 			temp.padding = "0px 5px";
-			
+
 			new YAHOO.widget.Button(
 				"i3GEOanalisageometriasbotaofuncoes",
 				{onclick:{fn: i3GEOF.analisaGeometrias.funcoes}}
@@ -122,7 +122,7 @@ i3GEOF.analisaGeometrias = {
 			temp = $i("i3GEOanalisageometriasbotaofuncoes-button").style;
 			temp.minHeight = "1.5em";
 			temp.padding = "0px 5px";
-			
+
 			new YAHOO.widget.Button(
 				"i3GEOanalisageometriasbotaofuncoes1",
 				{onclick:{fn: i3GEOF.analisaGeometrias.funcoes1}}
@@ -130,7 +130,7 @@ i3GEOF.analisaGeometrias = {
 			temp = $i("i3GEOanalisageometriasbotaofuncoes1-button").style;
 			temp.minHeight = "1.5em";
 			temp.padding = "0px 5px";
-			
+
 			i3GEO.util.mensagemAjuda("i3GEOanalisageometriasmen1",$i("i3GEOanalisageometriasmen1").innerHTML);
 			i3GEO.util.mensagemAjuda("i3GEOanalisageometriasmen2",$i("i3GEOanalisageometriasmen2").innerHTML);
 			i3GEO.util.mensagemAjuda("i3GEOanalisageometriasmen3",$i("i3GEOanalisageometriasmen3").innerHTML);
@@ -151,11 +151,11 @@ i3GEOF.analisaGeometrias = {
 	},
 	/*
 	Function: html
-	
+
 	Gera o c&oacute;digo html para apresenta&ccedil;ão das op&ccedil;&otilde;es da ferramenta
-	
+
 	Retorno:
-	
+
 	String com o c&oacute;digo html
 	*/
 	html:function(){
@@ -220,9 +220,9 @@ i3GEOF.analisaGeometrias = {
 	},
 	/*
 	Function: iniciaJanelaFlutuante
-	
+
 	Cria a janela flutuante para controle da ferramenta.
-	*/	
+	*/
 	iniciaJanelaFlutuante: function(){
 		var minimiza,cabecalho,janela,divid,temp,titulo;
 		//funcao que sera executada ao ser clicado no cabe&ccedil;alho da janela
@@ -233,7 +233,7 @@ i3GEOF.analisaGeometrias = {
 			i3GEO.janela.minimiza("i3GEOF.analisaGeometrias");
 		};
 		//cria a janela flutuante
-		titulo = "An&aacute;lise de geometrias <a class=ajuda_usuario target=_blank href='" + i3GEO.configura.locaplic + "/ajuda_usuario.php?idcategoria=3&idajuda=23' >&nbsp;&nbsp;&nbsp;</a>";
+		titulo = $trad("u6")+" <a class=ajuda_usuario target=_blank href='" + i3GEO.configura.locaplic + "/ajuda_usuario.php?idcategoria=3&idajuda=23' >&nbsp;&nbsp;&nbsp;</a>";
 		janela = i3GEO.janela.cria(
 			"500px",
 			"300px",
@@ -253,19 +253,19 @@ i3GEOF.analisaGeometrias = {
 		if(i3GEO.eventos.MOUSECLIQUE.toString().search("i3GEOF.analisaGeometrias.selecionaElemento()") < 0)
 		{i3GEO.eventos.MOUSECLIQUE.push("i3GEOF.analisaGeometrias.selecionaElemento()");}
 		if(i3GEO.eventos.ATUALIZAARVORECAMADAS.toString().search("i3GEOF.analisaGeometrias.comboTemas()") < 0)
-		{i3GEO.eventos.ATUALIZAARVORECAMADAS.push("i3GEOF.analisaGeometrias.comboTemas()");}		
+		{i3GEO.eventos.ATUALIZAARVORECAMADAS.push("i3GEOF.analisaGeometrias.comboTemas()");}
 		temp = function(){
 			i3GEO.eventos.MOUSECLIQUE.remove("i3GEOF.analisaGeometrias.selecionaElemento()");
 			if(i3GEO.eventos.ATUALIZAARVORECAMADAS.toString().search("i3GEOF.analisaGeometrias.comboTemas()") > 0)
 			{i3GEO.eventos.ATUALIZAARVORECAMADAS.remove("i3GEOF.analisaGeometrias.comboTemas()");}
 		};
-		YAHOO.util.Event.addListener(janela[0].close, "click", temp);		
+		YAHOO.util.Event.addListener(janela[0].close, "click", temp);
 		i3GEOF.analisaGeometrias.inicia(divid);
 		i3GEO.util.mudaCursor(i3GEO.configura.cursores,"pointer",i3GEO.Interface.IDMAPA,i3GEO.configura.locaplic);
 	},
 	/*
 	Function: ativaFoco
-	
+
 	Refaz a interface da ferramenta quando a janela flutuante tem seu foco ativado
 	*/
 	ativaFoco: function(){
@@ -287,13 +287,13 @@ i3GEOF.analisaGeometrias = {
 	},
 	/*
 	Function: selecionaElemento
-	
+
 	Seleciona um elemento do tema ativo quando o usu&aacute;rio clica no mapa
-	
+
 	&Eacute; executado no evento de clique no mapa, definido na inicializa&ccedil;ão da ferramenta.
-	
+
 	Veja:
-	
+
 	<i3GEO.php.selecaopt>
 	*/
 	selecionaElemento: function(){
@@ -304,16 +304,16 @@ i3GEOF.analisaGeometrias = {
 				i3GEO.Interface.atualizaTema(retorno,i3GEO.temaAtivo);
 			};
 			i3GEO.janela.abreAguarde("i3GEO.atualiza",$trad("o1"));
-			i3GEO.php.selecaopt(retorna,i3GEO.temaAtivo,objposicaocursor.ddx+" "+objposicaocursor.ddy,$i("i3GEOanalisageometriastipoOperacao").value,5);		
+			i3GEO.php.selecaopt(retorna,i3GEO.temaAtivo,objposicaocursor.ddx+" "+objposicaocursor.ddy,$i("i3GEOanalisageometriastipoOperacao").value,5);
 		}
 	},
 	/*
 	Function: comboTemas
-	
+
 	Cria o combo com os temas dispon&iacute;veis (temas ligados) para sele&ccedil;ão.
-	
+
 	Veja:
-	
+
 	<i3GEO.util.comboTemas>
 	*/
 	comboTemas: function(){
@@ -339,13 +339,13 @@ i3GEOF.analisaGeometrias = {
 	},
 	/*
 	Function: capturaGeo
-	
+
 	Captura as geometrias selecionadas. As geometrias capturadas são armazenadas como objetos
 	serializados no servidor, e podem ser utilizadas nas opera&ccedil;&otilde;es de an&aacute;lise. A captura &eacute; feita sob o tema ativo e os
 	elementos selecionados.
-	
+
 	Veja:
-	
+
 	<CAPTURAGEOMETRIAS>
 	*/
 	capturageo:function(){
@@ -376,11 +376,11 @@ i3GEOF.analisaGeometrias = {
 	},
 	/*
 	Function: listaGeo
-	
+
 	Obt&eacute;m a lista de geometrias j&aacute; capturadas e monta a lista que &eacute; apresentada ao usu&aacute;rio.
-	
+
 	Veja:
-	
+
 	<LISTAGEOMETRIAS>
 	*/
 	listaGeo: function(){
@@ -425,24 +425,24 @@ i3GEOF.analisaGeometrias = {
 					"i3GEOanalisageometriasbotao5",
 					{onclick:{fn: i3GEOF.analisaGeometrias.incluirNoMapa}}
 				);
-				i3GEOF.analisaGeometrias.aguarde.visibility = "hidden";			
+				i3GEOF.analisaGeometrias.aguarde.visibility = "hidden";
 			}
 			else{
-				
+
 				$i("i3GEOanalisageometriaslistadegeometrias").innerHTML = "<p class=paragrafo >Nenhuma geometria dispon&iacute;vel.";
 				i3GEOF.analisaGeometrias.aguarde.visibility = "hidden";
 			}
 		};
 		cp.set_response_type("JSON");
-		cp.call(p,"listageometrias",montalistageometrias);	
+		cp.call(p,"listageometrias",montalistageometrias);
 	},
 	/*
 	Function: excluirGeo
-	
+
 	Exclui do servidor as geometrias marcadas na lista de geometrias.
-	
+
 	Veja:
-	
+
 	<REMOVERGEOMETRIAS>
 	*/
 	excluirGeo: function(){
@@ -466,11 +466,11 @@ i3GEOF.analisaGeometrias = {
 	},
 	/*
 	Function: incluirNoMapa
-	
+
 	Inclui no mapa as geometrias marcadas na lista de geometrias.
 
 	Veja:
-	
+
 	<INCMAPAGEOMETRIAS>
 	*/
 	incluirNoMapa:function(){
@@ -496,7 +496,7 @@ i3GEOF.analisaGeometrias = {
 	},
 	/*
 	Function: pegaGeometriasMarcadas
-	
+
 	Retorna uma lista com os ids das geometrias que estão marcadas (checkbox)
 	*/
 	pegaGeometriasMarcadas:function(){
@@ -507,15 +507,15 @@ i3GEOF.analisaGeometrias = {
 			if (inputs[i].checked === true)
 			{listai.push(inputs[i].id);}
 		}
-		return (listai.join(","));	
+		return (listai.join(","));
 	},
 	/*
 	Function: calculo
-	
+
 	Realiza c&aacute;lculos do tipo &aacute;rea e per&iacute;metro sobre as geometrias marcadas
-	
+
 	Veja:
-	
+
 	<CALCULAGEOMETRIAS>
 	*/
 	calculo: function(){
@@ -524,7 +524,7 @@ i3GEOF.analisaGeometrias = {
 			cp = new cpaint(),
 			p,
 			obj = $i("i3GEOanalisageometriasselecaocalculo");
-		
+
 		if (obj.value !== ""){
 			if(i3GEOF.analisaGeometrias.aguarde.visibility === "visible")
 			{return;}
@@ -547,11 +547,11 @@ i3GEOF.analisaGeometrias = {
 	},
 	/*
 	Function: funcoes
-	
+
 	Realiza opera&ccedil;&otilde;es geom&eacute;tricas de cruzamento entre geometrias
-	
+
 	Veja:
-	
+
 	<FUNCOESGEOMETRIAS>
 	*/
 	funcoes: function(){
@@ -566,7 +566,7 @@ i3GEOF.analisaGeometrias = {
 			{return;}
 			else
 			{i3GEOF.analisaGeometrias.aguarde.visibility = "visible";}
-			
+
 			lista = i3GEOF.analisaGeometrias.pegaGeometriasMarcadas();
 			if(lista == ""){
 				alert("Nenhuma geometria foi marcada");
@@ -574,22 +574,22 @@ i3GEOF.analisaGeometrias = {
 				return;
 			}
 			p = i3GEO.configura.locaplic+"/classesphp/mapa_controle.php?g_sid="+i3GEO.configura.sid+"&funcao=funcoesGeometrias&operacao="+obj.value+"&lista="+lista+"&recalcareaper="+$i("i3geoanalisageometriassemprecalcula").checked;
-			
+
 			temp = function(){
 				i3GEOF.analisaGeometrias.aguarde.visibility = "hidden";
 				$i("i3GEOanalisageometrias2").onclick.call();
 			};
 			cp.set_response_type("JSON");
 			cp.call(p,"funcoesGeometrias",temp);
-		}	
+		}
 	},
 	/*
 	Function: funcoes1
-	
+
 	Realiza opera&ccedil;&otilde;es geom&eacute;tricas em uma &uacute;nica geometria
-	
+
 	Veja:
-	
+
 	<FUNCOESGEOMETRIAS>
 	*/
 	funcoes1: function(){
@@ -598,7 +598,7 @@ i3GEOF.analisaGeometrias = {
 			cp = new cpaint(),
 			p,
 			obj = $i("i3GEOanalisageometriasselecaofuncoes1");
-			
+
 		if (obj.value !== ""){
 			if(i3GEOF.analisaGeometrias.aguarde.visibility === "visible")
 			{return;}

@@ -227,7 +227,7 @@ i3GEOF.selecao = {
 		minimiza = function(){
 			i3GEO.janela.minimiza("i3GEOF.selecao");
 		};
-		titulo = "Sele&ccedil;ão <a class=ajuda_usuario target=_blank href='" + i3GEO.configura.locaplic + "/ajuda_usuario.php?idcategoria=5&idajuda=48a' >&nbsp;&nbsp;&nbsp;</a>";
+		titulo = $trad("x51")+" <a class=ajuda_usuario target=_blank href='" + i3GEO.configura.locaplic + "/ajuda_usuario.php?idcategoria=5&idajuda=48a' >&nbsp;&nbsp;&nbsp;</a>";
 		janela = i3GEO.janela.cria(
 			"470px",
 			"200px",

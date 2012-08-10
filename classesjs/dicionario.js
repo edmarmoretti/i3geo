@@ -257,7 +257,7 @@ it:"Geometrie"
 }],
 "u7": [
 {
-pt: "Grade de poligonos",
+pt: "Grade de pol&iacute;gonos",
 en:"Polygon grid",
 es:"Grado de pol&iacute;gonos",
 it:"Reticolo poligonale"
@@ -560,7 +560,7 @@ it: "La scala del tema non è conosciuta"
 }],
 "t12":[
 {
-pt:"excluir",
+pt:"Excluir",
 en:"Delete",
 es:"Eliminar",
 it:"Eliminare"
@@ -1180,7 +1180,7 @@ it:"Mostra gli informazioni su un punto sulla mappa. Dopo averla attivata, fare 
 }],
 "d7t":[
 {
-pt:"clique para identificar",
+pt:"Clique para identificar",
 en:"Click to identify",
 es:"Click para identificar",
 it:"clique para identificar"
@@ -1208,7 +1208,7 @@ it:"Mostra la estensione geografica corrente in coordinate geografiche"
 }],
 "d8t":[
 {
-pt:"extens&atilde;o atual",
+pt:"Extens&atilde;o atual",
 en:"Actual extent",
 es:"Extensi&oacute; actual",
 it:"extens&atilde;o atual"
@@ -1901,12 +1901,54 @@ it:""
 }],
 "x53":[
 {
-pt:"",
+pt:"Upload de WMC",
 en:"",
 es:"",
 it:""
 }],
 "x54":[
+{
+pt:"Perfil",
+en:"",
+es:"",
+it:""
+}],
+"x55":[
+{
+pt:"Salva o tema",
+en:"",
+es:"",
+it:""
+}],
+"x56":[
+{
+pt:"Topon&iacute;mia",
+en:"",
+es:"",
+it:""
+}],
+"x57":[
+{
+pt:"",
+en:"",
+es:"",
+it:""
+}],
+"x58":[
+{
+pt:"",
+en:"",
+es:"",
+it:""
+}],
+"x59":[
+{
+pt:"",
+en:"",
+es:"",
+it:""
+}],
+"x60":[
 {
 pt:"",
 en:"",

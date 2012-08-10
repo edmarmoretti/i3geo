@@ -45,7 +45,7 @@ Classe: i3GEOF.agrupaElementos
 i3GEOF.agrupaElementos = {
 	/*
 	Variavel: aguarde
-	
+
 	Estilo do objeto DOM com a imagem de aguarde existente no cabe&ccedil;alho da janela.
 	*/
 	aguarde: "",
@@ -57,11 +57,11 @@ i3GEOF.agrupaElementos = {
 	},
 	/*
 	Function: iniciaDicionario
-	
+
 	Carrega o dicion&aacute;rio e chama a fun&ccedil;&atilde;o que inicia a ferramenta
-	
+
 	O Javascript &eacute; carregado com o id i3GEOF.nomedaferramenta.dicionario_script
-	*/	
+	*/
 	iniciaDicionario: function(){
 		if(typeof(i3GEOF.agrupaElementos.dicionario) === 'undefined'){
 			i3GEO.util.scriptTag(
@@ -73,14 +73,14 @@ i3GEOF.agrupaElementos = {
 		else{
 			i3GEOF.agrupaElementos.iniciaJanelaFlutuante();
 		}
-	},	
+	},
 	/*
 	Function: inicia
-	
+
 	Inicia a ferramenta. &Eacute; chamado por criaJanelaFlutuante
-	
+
 	Parametro:
-	
+
 	iddiv {String} - id do div que receber&aacute; o conteudo HTML da ferramenta
 	*/
 	inicia: function(iddiv){
@@ -92,11 +92,11 @@ i3GEOF.agrupaElementos = {
 	},
 	/*
 	Function: html
-	
+
 	Gera o c&oacute;digo html para apresenta&ccedil;ão das op&ccedil;&otilde;es da ferramenta
-	
+
 	Retorno:
-	
+
 	String com o c&oacute;digo html
 	*/
 	html:function(){
@@ -109,17 +109,17 @@ i3GEOF.agrupaElementos = {
 	},
 	/*
 	Function: criaJanelaFlutuante
-	
+
 	Cria a janela flutuante para controle da ferramenta.
-	*/	
+	*/
 	iniciaJanelaFlutuante: function(){
 		var minimiza,cabecalho,janela,divid,temp,titulo;
 		//cria a janela flutuante
-		titulo = "Agrupa <a class=ajuda_usuario target=_blank href='" + i3GEO.configura.locaplic + "/ajuda_usuario.php?idcategoria=3&idajuda=25' >&nbsp;&nbsp;&nbsp;</a>";
+		titulo = $trad("u26")+" <a class=ajuda_usuario target=_blank href='" + i3GEO.configura.locaplic + "/ajuda_usuario.php?idcategoria=3&idajuda=25' >&nbsp;&nbsp;&nbsp;</a>";
 		cabecalho = function(){};
 		minimiza = function(){
 			i3GEO.janela.minimiza("i3GEOF.agrupaElementos");
-		};	
+		};
 		janela = i3GEO.janela.cria(
 			"400px",
 			"270px",
@@ -161,7 +161,7 @@ i3GEOF.agrupaElementos = {
 	t2: function(){
 		var ins = "<p class='paragrafo' >Escolha o item da tabela de atributos que ser&aacute; utilizado para agregar. (opcional)";
 		ins += "<div id='i3GEOagrupaelementosSelItens' style='text-align:left;font-size:11px;'></div>";
-		i3GEO.util.proximoAnterior("i3GEOF.agrupaElementos.t1()","i3GEOF.agrupaElementos.t3()",ins,"i3GEOF.agrupaElementos.t2","i3GEOagrupaelementosresultado");	
+		i3GEO.util.proximoAnterior("i3GEOF.agrupaElementos.t1()","i3GEOF.agrupaElementos.t3()",ins,"i3GEOF.agrupaElementos.t2","i3GEOagrupaelementosresultado");
 		$i("i3GEOagrupaelementosSelItens").style.display = "block";
 		i3GEOF.agrupaElementos.comboItensSel();
 	},
@@ -172,15 +172,15 @@ i3GEOF.agrupaElementos = {
 		new YAHOO.widget.Button(
 			"i3GEOagrupaelementosbotao1",
 			{onclick:{fn: i3GEOF.agrupaElementos.criaAgrupamento}}
-		);		
+		);
 	},
 	/*
 	Function: criaAgrupamento
-	
+
 	Executa a opera&ccedil;ão de agrupamento
-	
+
 	Veja:
-	
+
 	<AGRUPAELEMENTOS>
 	*/
 	criaAgrupamento: function(){
@@ -214,11 +214,11 @@ i3GEOF.agrupaElementos = {
 	},
 	/*
 	Function: comboTemasSel
-	
+
 	Cria um combo com a lista de temas com elementos selecionados
-	
+
 	Veja:
-	
+
 	<i3GEO.util.comboTemas>
 	*/
 	comboTemasSel: function(){
@@ -241,15 +241,15 @@ i3GEOF.agrupaElementos = {
 			"",
 			false,
 			"selecionados"
-		);	
+		);
 	},
 	/*
 	Function: comboItensSel
-	
+
 	Cria um combo para selecionar os itens do tema escolhido
-	
+
 	Veja:
-	
+
 	<i3GEO.util.comboItens>
 	*/
 	comboItensSel: function(){

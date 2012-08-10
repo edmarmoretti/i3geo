@@ -453,7 +453,7 @@ i3GEOF.legenda = {
 			i3GEO.janela.minimiza("i3GEOF.legenda");
 		};
 		//cria a janela flutuante
-		titulo = "<div style='z-index:1;position:absolute' id='i3GEOFlegendaComboCabeca' >------</div>&nbsp;&nbsp;&nbsp;Editor de legenda <a class=ajuda_usuario target=_blank href='" + i3GEO.configura.locaplic + "/ajuda_usuario.php?idcategoria=5&idajuda=41' >&nbsp;&nbsp;&nbsp;</a>";
+		titulo = "<div style='z-index:1;position:absolute' id='i3GEOFlegendaComboCabeca' >------</div>&nbsp;&nbsp;&nbsp;"+$trad("t33")+" <a class=ajuda_usuario target=_blank href='" + i3GEO.configura.locaplic + "/ajuda_usuario.php?idcategoria=5&idajuda=41' >&nbsp;&nbsp;&nbsp;</a>";
 		janela = i3GEO.janela.cria(
 			"490px",
 			"340px",

@@ -293,7 +293,7 @@ i3GEOF.inserexy = {
 		minimiza = function(){
 			i3GEO.janela.minimiza("i3GEOF.inserexy");
 		};
-		titulo = "Inserir pontos <a class=ajuda_usuario target=_blank href='" + i3GEO.configura.locaplic + "/ajuda_usuario.php?idcategoria=5&idajuda=83' >&nbsp;&nbsp;&nbsp;</a>";
+		titulo = $trad("d22t")+" <a class=ajuda_usuario target=_blank href='" + i3GEO.configura.locaplic + "/ajuda_usuario.php?idcategoria=5&idajuda=83' >&nbsp;&nbsp;&nbsp;</a>";
 		janela = i3GEO.janela.cria(
 			"500px",
 			"300px",

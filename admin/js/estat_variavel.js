@@ -300,7 +300,7 @@ function adicionaNosClassificacao(no,dados,redesenha){
 		conteudo = "&nbsp;<img style=\"position:relative;cursor:pointer;top:0px\" onclick=\"excluir('classificacaoMedida','"+dados[i].id_classificacao+"')\" title=excluir width='10px' heigth='10px' src=\"../imagens/01.png\" />";
 		conteudo += "&nbsp;<img style=\"position:relative;cursor:pointer;top:2px\" onclick=\"editar('classificacaoMedida','"+dados[i].id_classificacao+"')\" title=editar src=\"../imagens/06.png\" /><b>";
 		if(dados[i].nomedimensao != "")
-		{conteudo += "&nbsp;<span><b>"+dados[i].nome+"</b><span style=color:gray > Obs.: "+dados[i].nome+" id: "+dados[i].id_classificacao+"</span></span>";}
+		{conteudo += "&nbsp;<span><b>"+dados[i].nome+"</b><span style=color:gray > Obs.: "+dados[i].observacao+" id: "+dados[i].id_classificacao+"</span></span>";}
 		else
 		{conteudo += "&nbsp;<span style=color:red >Edite para definir a nova classifica&ccedil;&atilde;o!!!</span>";}
 		d = {html:conteudo,id_classificacao:dados[i].id_classificacao,tipo:"classificacao"};
@@ -655,6 +655,7 @@ function sql(tipo,id) {
 						ins += '  <input type=button id="i3geoestat" value="i3Geo" /><br><br>';
 						ins += '  <input type=button id="kmzestat" value="Kmz (vetorial)" />';
 						ins += '  <input type=button id="kmlestat" value="Kml (wms)" />';
+						ins += '  <input type=button id="kml3destat" value="Kml 3d" />';
 
 						$i("editor_bd").innerHTML = ins;
 						new YAHOO.widget.Button("sqljson");
@@ -692,6 +693,14 @@ function sql(tipo,id) {
 								colunas = 1;
 							}
 							window.open('../php/metaestat.php?funcao=kmlmedidavariavel&id_medida_variavel='+id+"&filtro="+$i("filtrosql").value+"&todasascolunas="+colunas+"&tipolayer="+$i("tipolayer").value+"&id_classificacao="+$i("classificacao").value+"&agruparpor="+$i("agruparsql").value+"&formato=kml");
+						};
+						new YAHOO.widget.Button("kml3destat");
+						$i("kml3destat-button").onclick = function(){
+							var colunas = 0;
+							if($i("incluirtodascolunas").checked === true){
+								colunas = 1;
+							}
+							window.open('../php/metaestat.php?funcao=kmlmedidavariavel&id_medida_variavel='+id+"&filtro="+$i("filtrosql").value+"&todasascolunas="+colunas+"&tipolayer="+$i("tipolayer").value+"&id_classificacao="+$i("classificacao").value+"&agruparpor="+$i("agruparsql").value+"&formato=kml3d");
 						};
 						new YAHOO.widget.Button("i3geoestat");
 						$i("i3geoestat-button").onclick = function(){

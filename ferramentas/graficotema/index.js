@@ -183,7 +183,7 @@ i3GEOF.graficoTema = {
 			return;
 		}
 		//cria a janela flutuante
-		titulo = "<div style='z-index:1;position:absolute' id='i3GEOFgraficotemaComboCabeca' >------</div><span style=margin-left:60px>Graficos</span><a class=ajuda_usuario target=_blank href='" + i3GEO.configura.locaplic + "/ajuda_usuario.php?idcategoria=8&idajuda=40' >&nbsp;&nbsp;&nbsp;</a>";
+		titulo = "<div style='z-index:1;position:absolute' id='i3GEOFgraficotemaComboCabeca' >------</div><span style=margin-left:60px>"+$trad("37")+"</span><a class=ajuda_usuario target=_blank href='" + i3GEO.configura.locaplic + "/ajuda_usuario.php?idcategoria=8&idajuda=40' >&nbsp;&nbsp;&nbsp;</a>";
 		janela = i3GEO.janela.cria(
 			"400px",
 			"320px",

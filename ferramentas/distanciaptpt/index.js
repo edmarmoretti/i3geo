@@ -46,7 +46,7 @@ Classe: i3GEOF.distanciaptpt
 i3GEOF.distanciaptpt = {
 	/*
 	Variavel: aguarde
-	
+
 	Estilo do objeto DOM com a imagem de aguarde existente no cabe&ccedil;alho da janela.
 	*/
 	aguarde: "",
@@ -58,11 +58,11 @@ i3GEOF.distanciaptpt = {
 	},
 	/*
 	Function: iniciaDicionario
-	
+
 	Carrega o dicion&aacute;rio e chama a fun&ccedil;&atilde;o que inicia a ferramenta
-	
+
 	O Javascript &eacute; carregado com o id i3GEOF.nomedaferramenta.dicionario_script
-	*/	
+	*/
 	iniciaDicionario: function(){
 		if(typeof(i3GEOF.distanciaptpt.dicionario) === 'undefined'){
 			i3GEO.util.scriptTag(
@@ -74,14 +74,14 @@ i3GEOF.distanciaptpt = {
 		else{
 			i3GEOF.distanciaptpt.iniciaJanelaFlutuante();
 		}
-	},	
+	},
 	/*
 	Function: inicia
-	
+
 	Inicia a ferramenta. &Eacute; chamado por criaJanelaFlutuante
-	
+
 	Parametro:
-	
+
 	iddiv {String} - id do div que receber&aacute; o conteudo HTML da ferramenta
 	*/
 	inicia: function(iddiv){
@@ -93,11 +93,11 @@ i3GEOF.distanciaptpt = {
 	},
 	/*
 	Function: html
-	
+
 	Gera o c&oacute;digo html para apresenta&ccedil;ão das op&ccedil;&otilde;es da ferramenta
-	
+
 	Retorno:
-	
+
 	String com o c&oacute;digo html
 	*/
 	html:function(){
@@ -110,17 +110,17 @@ i3GEOF.distanciaptpt = {
 	},
 	/*
 	Function: iniciaJanelaFlutuante
-	
+
 	Cria a janela flutuante para controle da ferramenta.
-	*/	
+	*/
 	iniciaJanelaFlutuante: function(){
 		var minimiza,cabecalho,janela,divid,temp,titulo;
 		//cria a janela flutuante
-		titulo = "Dist&acirc;ncia entre pontos <a class=ajuda_usuario target=_blank href='" + i3GEO.configura.locaplic + "/ajuda_usuario.php?idcategoria=3&idajuda=17' >&nbsp;&nbsp;&nbsp;</a>";
+		titulo = $trad("u11a")+" <a class=ajuda_usuario target=_blank href='" + i3GEO.configura.locaplic + "/ajuda_usuario.php?idcategoria=3&idajuda=17' >&nbsp;&nbsp;&nbsp;</a>";
 		cabecalho = function(){};
 		minimiza = function(){
 			i3GEO.janela.minimiza("i3GEOF.distanciaptpt");
-		};	
+		};
 		janela = i3GEO.janela.cria(
 			"400px",
 			"230px",
@@ -180,15 +180,15 @@ i3GEOF.distanciaptpt = {
 		new YAHOO.widget.Button(
 			"i3GEOdistanciaptptbotao1",
 			{onclick:{fn: i3GEOF.distanciaptpt.calcula}}
-		);		
+		);
 	},
 	/*
 	Function: calcula
-	
+
 	Executa a opera&ccedil;ão de c&aacute;lculo das distâncias
-	
+
 	Veja:
-	
+
 	<DISTANCIAPTPT>
 	*/
 	calcula: function(){
@@ -222,13 +222,13 @@ i3GEOF.distanciaptpt = {
 	},
 	/*
 	Function: comboTemasOrigem
-	
+
 	Cria um combo com a lista de temas pontuais com elementos selecionados
-	
+
 	Veja:
-	
+
 	<i3GEO.util.comboTemas>
-	
+
 	*/
 	comboTemasOrigem: function(){
 		i3GEO.util.comboTemas(
@@ -249,15 +249,15 @@ i3GEOF.distanciaptpt = {
 			"",
 			false,
 			"pontosSelecionados"
-		);	
+		);
 	},
 	/*
 	Function: comboTemasDestino
-	
+
 	Cria um combo com a lista de temas pontuais com elementos destino
 
 	Veja:
-	
+
 	<i3GEO.util.comboTemas>
 
 	*/
@@ -280,15 +280,15 @@ i3GEOF.distanciaptpt = {
 			"",
 			false,
 			"pontos"
-		);	
+		);
 	},
 	/*
 	Function: comboItensOrigem
-	
+
 	Cria um combo para escolha de um item do tema de origem
 
 	Veja:
-	
+
 	<i3GEO.util.comboItens>
 
 	*/
@@ -305,11 +305,11 @@ i3GEOF.distanciaptpt = {
 	},
 	/*
 	Function: comboItensDestino
-	
+
 	Cria um combo para escolha de um item do tema de destino
 
 	Veja:
-	
+
 	<i3GEO.util.comboItens>
 
 	*/

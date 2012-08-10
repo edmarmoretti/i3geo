@@ -43,7 +43,7 @@ Classe: i3GEOF.carregaMapa
 i3GEOF.carregaMapa = {
 	/*
 	Variavel: aguarde
-	
+
 	Estilo do objeto DOM com a imagem de aguarde existente no cabe&ccedil;alho da janela.
 	*/
 	aguarde: "",
@@ -55,11 +55,11 @@ i3GEOF.carregaMapa = {
 	},
 	/*
 	Function: iniciaDicionario
-	
+
 	Carrega o dicion&aacute;rio e chama a fun&ccedil;&atilde;o que inicia a ferramenta
-	
+
 	O Javascript &eacute; carregado com o id i3GEOF.nomedaferramenta.dicionario_script
-	*/	
+	*/
 	iniciaDicionario: function(){
 		if(typeof(i3GEOF.carregaMapa.dicionario) === 'undefined'){
 			i3GEO.util.scriptTag(
@@ -71,14 +71,14 @@ i3GEOF.carregaMapa = {
 		else{
 			i3GEOF.carregaMapa.iniciaJanelaFlutuante();
 		}
-	},	
+	},
 	/*
 	Function: inicia
-	
+
 	Inicia a ferramenta. &Eacute; chamado por criaJanelaFlutuante
-	
+
 	Parametro:
-	
+
 	iddiv {String} - id do div que receber&aacute; o conteudo HTML da ferramenta
 	*/
 	inicia: function(iddiv){
@@ -87,17 +87,17 @@ i3GEOF.carregaMapa = {
 			new YAHOO.widget.Button(
 				"i3GEOcarregamapabotao1",
 				{onclick:{fn: i3GEOF.carregaMapa.submete}}
-			);			
+			);
 		}
 		catch(erro){alert(erro);}
 	},
 	/*
 	Function: html
-	
+
 	Gera o c&oacute;digo html para apresenta&ccedil;ão das op&ccedil;&otilde;es da ferramenta
-	
+
 	Retorno:
-	
+
 	String com o c&oacute;digo html
 	*/
 	html:function(){
@@ -117,12 +117,12 @@ i3GEOF.carregaMapa = {
 	},
 	/*
 	Function: iniciaJanelaFlutuante
-	
+
 	Cria a janela flutuante para controle da ferramenta.
-	*/	
+	*/
 	iniciaJanelaFlutuante: function(){
 		var janela,divid,titulo;
-		titulo = "Carrega mapa <a class=ajuda_usuario target=_blank href='" + i3GEO.configura.locaplic + "/ajuda_usuario.php?idcategoria=2&idajuda=11' >&nbsp;&nbsp;&nbsp;</a>";
+		titulo = $trad("u18")+" <a class=ajuda_usuario target=_blank href='" + i3GEO.configura.locaplic + "/ajuda_usuario.php?idcategoria=2&idajuda=11' >&nbsp;&nbsp;&nbsp;</a>";
 		janela = i3GEO.janela.cria(
 			"340px",
 			"240px",
@@ -140,7 +140,7 @@ i3GEOF.carregaMapa = {
 	},
 	/*
 	Function: submete
-	
+
 	Envia o arquivo para o servidor
 	*/
 	submete: function(){

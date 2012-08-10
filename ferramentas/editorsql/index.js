@@ -145,7 +145,7 @@ i3GEOF.editorsql = {
 	iniciaJanelaFlutuante: function(){
 		var janela,divid,titulo;
 		//cria a janela flutuante
-		titulo = "Altera SQL <a class=ajuda_usuario target=_blank href='" + i3GEO.configura.locaplic + "/ajuda_usuario.php?idcategoria=5&idajuda=86' >&nbsp;&nbsp;&nbsp;</a>";
+		titulo = $trad("t41")+" <a class=ajuda_usuario target=_blank href='" + i3GEO.configura.locaplic + "/ajuda_usuario.php?idcategoria=5&idajuda=86' >&nbsp;&nbsp;&nbsp;</a>";
 		janela = i3GEO.janela.cria(
 			"300px",
 			"260px",

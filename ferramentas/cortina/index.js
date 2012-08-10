@@ -47,21 +47,21 @@ Classe: i3GEOF.cortina
 i3GEOF.cortina = {
 	/*
 	Variavel: aguarde
-	
+
 	Estilo do objeto DOM com a imagem de aguarde existente no cabe&ccedil;alho da janela.
 	*/
 	aguarde: "",
 	/*
 	Variavel: tema
-	
+
 	C&oacute;digo do tema definido na inicializa&ccedil;ão da janela e que ser&aacute; alvo da cortina.
 	*/
 	tema: "",
 	/*
 	Variavel: janela
-	
+
 	Janela flutuante criada
-	
+
 	Type:
 	{YAHOO.panel}
 	*/
@@ -74,11 +74,11 @@ i3GEOF.cortina = {
 	},
 	/*
 	Function: iniciaDicionario
-	
+
 	Carrega o dicion&aacute;rio e chama a fun&ccedil;&atilde;o que inicia a ferramenta
-	
+
 	O Javascript &eacute; carregado com o id i3GEOF.nomedaferramenta.dicionario_script
-	*/	
+	*/
 	iniciaDicionario: function(){
 		if(typeof(i3GEOF.cortina.dicionario) === 'undefined'){
 			i3GEO.util.scriptTag(
@@ -90,14 +90,14 @@ i3GEOF.cortina = {
 		else{
 			i3GEOF.cortina.iniciaJanelaFlutuante();
 		}
-	},	
+	},
 	/*
 	Function: inicia
-	
+
 	Inicia a ferramenta. &Eacute; chamado por criaJanelaFlutuante
-	
+
 	Parametro:
-	
+
 	iddiv {String} - id do div que receber&aacute; o conteudo HTML da ferramenta
 	*/
 	inicia: function(iddiv){
@@ -112,11 +112,11 @@ i3GEOF.cortina = {
 	},
 	/*
 	Function: html
-	
+
 	Gera o c&oacute;digo html para apresenta&ccedil;ão das op&ccedil;&otilde;es da ferramenta
-	
+
 	Retorno:
-	
+
 	String com o c&oacute;digo html
 	*/
 	html:function(){
@@ -135,15 +135,15 @@ i3GEOF.cortina = {
 	},
 	/*
 	Function: iniciaJanelaFlutuante
-	
+
 	Cria a janela flutuante para controle da ferramenta.
-	
+
 	Parametro:
-	
+
 	tema {string} - codigo do tema
-	
+
 	mx {numero} - (opcional) posi&ccedil;ão em x para onde a janela ser&aacute; movida ap&oacute;s ser criada
-	
+
 	my {numero} - (opcional) posi&ccedil;ão em y para onde a janela ser&aacute; movida ap&oacute;s ser criada
 	*/
 	iniciaJanelaFlutuante: function(tema,mx,my){
@@ -154,11 +154,11 @@ i3GEOF.cortina = {
 		minimiza = function(){
 			i3GEO.janela.minimiza("i3GEOF.cortina");
 			//i3GEOF.cortina.slider.setValue(0,false);
-		};		
+		};
 		var janela,divid,temp,titulo;
 		i3GEOF.cortina.tema = tema;
 		//cria a janela flutuante
-		titulo = "Cortina <a class=ajuda_usuario target=_blank href='" + i3GEO.configura.locaplic + "/ajuda_usuario.php?idcategoria=5&idajuda=86' >&nbsp;&nbsp;&nbsp;</a>";
+		titulo = $trad("t42")+" <a class=ajuda_usuario target=_blank href='" + i3GEO.configura.locaplic + "/ajuda_usuario.php?idcategoria=5&idajuda=86' >&nbsp;&nbsp;&nbsp;</a>";
 		janela = i3GEO.janela.cria(
 			"230px",
 			"60px",
@@ -204,7 +204,7 @@ i3GEOF.cortina = {
 	},
 	/*
 	Function: criaslide
-	
+
 	Cria a barra deslizante com base em YAHOO.widget.Slider
 	*/
 	criaslide: function(){
@@ -238,7 +238,7 @@ i3GEOF.cortina = {
 	},
 	/*
 	Function: reiniciaSlide
-	
+
 	Zera a barra do slide
 	*/
 	reiniciaSlide: function(){
@@ -266,11 +266,11 @@ i3GEOF.cortina = {
 	},
 	/*
 	Function: comboTemas
-	
+
 	Cria um combo com a lista de temas
-	
+
 	Veja:
-	
+
 	<i3GEO.util.comboTemas>
 	*/
 	comboTemas: function(){
@@ -299,6 +299,6 @@ i3GEOF.cortina = {
 			"",
 			false,
 			"ligados"
-		);	
+		);
 	}
 };

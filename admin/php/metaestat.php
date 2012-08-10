@@ -664,14 +664,43 @@ switch (strtoupper($funcao))
 		$r = $m->mapfileMedidaVariavel($id_medida_variavel,$filtro,$todasascolunas,$tipolayer,$titulolayer,$id_classificacao,$agruparpor);
 		//cria um mapfile completo, que inclui a camada no mapfile de inicializacao do i3geo
 		$mapfile = $m->mapfileCompleto($r["mapfile"]);
-		//define as variaveis necessarias ao pacote kmlserver
-		set_time_limit(0);
-		$_REQUEST["map"] = $mapfile;
-		$_REQUEST["typename"] = $r["layer"];
-		$_REQUEST["request"] = $formato;
-		//$_REQUEST["service"] = "icon";
-		include (__DIR__."/../../pacotes/kmlmapserver/classes/kmlserver.class.php");
-		$server = new KmlServer();
+		if($formato == "kml" || $formato == "kmz"){
+			//define as variaveis necessarias ao pacote kmlserver
+			set_time_limit(0);
+			$_REQUEST["map"] = $mapfile;
+			$_REQUEST["typename"] = $r["layer"];
+			$_REQUEST["request"] = $formato;
+			//$_REQUEST["service"] = "icon";
+			include (__DIR__."/../../pacotes/kmlmapserver/classes/kmlserver.class.php");
+			$server = new KmlServer();
+		}else{
+			if(!isset($dir_tmp)){
+				include(__DIR__."/../../ms_configura.php");
+			}
+			$verificaSID = false;
+			$mv = $m->listaMedidaVariavel("",$id_medida_variavel);
+			$reg = $m->listaTipoRegiao($mv["codigo_tipo_regiao"]);
+			$_GET["nomelayer"] = $r["layer"];
+			$_GET["colunasvalor"] = $mv["colunavalor"];
+			$_GET["colunanomeregiao"] = $reg["colunanomeregiao"];
+			$_GET["titulo"] = $r["titulolayer"];
+			$_GET["descricao"] = $mv["colunavalor"];
+			$_SESSION["map_file"] = $mapfile;
+			$_SESSION["postgis_mapa"] = "";
+			$_SESSION["tmpurl"] = "";
+			$_SESSION["mapext"] = "";
+			$download = true;
+			$parametersTME = array(
+					'mapType'        => 'bar',
+					'indicator'      => 'valores',
+					'year'           => "",
+					'classification' => 'equal',
+					'mapTitle' => $r["titulolayer"],
+					'timeType' => "slider", //para mais de um ano, escolha slider ou series
+					'dirtmp' => $dir_tmp
+			);
+			include (__DIR__."/../../pacotes/tme/TME_i3geo.php");
+		}
 		exit;
 	break;
 	/*

@@ -272,7 +272,7 @@ i3GEOF.toponimia = {
 			return;
 		}
 		//cria a janela flutuante
-		titulo = "<div style='z-index:1;position:absolute' id='i3GEOFtoponimiaComboCabeca' >------</div><span style=margin-left:60px>Topon&iacute;mia</span><a class=ajuda_usuario target=_blank href='" + i3GEO.configura.locaplic + "/ajuda_usuario.php?idcategoria=5&idajuda=36' >&nbsp;&nbsp;&nbsp;</a>";
+		titulo = "<div style='z-index:1;position:absolute' id='i3GEOFtoponimiaComboCabeca' >------</div><span style=margin-left:60px>"+$trad("x56")+"</span><a class=ajuda_usuario target=_blank href='" + i3GEO.configura.locaplic + "/ajuda_usuario.php?idcategoria=5&idajuda=36' >&nbsp;&nbsp;&nbsp;</a>";
 		janela = i3GEO.janela.cria(
 			"390px",
 			"190px",

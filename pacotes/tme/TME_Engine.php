@@ -157,18 +157,22 @@ class ThematicMap
     // Function
     // @access protected
     //
-    public function getKML($url)
+    public function getKML($url,$download = false)
     {
 
         // Create KMZ archieve
         $file = $this->dirtmp."/tme". time(). ".kmz";
+
+        /*
         $zip = new ZipArchive();
         if ($zip->open($file, ZIPARCHIVE::CREATE)!==TRUE) {
-            exit("cannot open <$file>\n");
+        	exit("cannot open <$file>\n");
         }
-
+		*/
+        include(__DIR__."/../kmlmapserver/classes/zip.class.php");
+        $zip = new zipfile();
         // Add balloon logo to archieve (300 x 30 px)
-        $zip->addFile($this->logoline, 'files/balloonlogo.png');
+       	$zip->addFile($this->logoline, 'files/balloonlogo.png');
 
         // KML header
         $kml = "<?xml version='1.0' encoding='UTF-8'?>" . PHP_EOL
@@ -267,7 +271,7 @@ class ThematicMap
                         $kmlStyles .= "      <IconStyle>" . PHP_EOL
 			                        . "        $kmlSingleColour" . PHP_EOL
 			                        . "        <Icon>" . PHP_EOL
-				                    . "          <href>files/symbol.png</href>" . PHP_EOL
+				                    . "          <href>".$url."/symbol.png</href>" . PHP_EOL
 			                        . "        </Icon>" . PHP_EOL
 		                            . "      </IconStyle>" . PHP_EOL;
                         break;
@@ -388,7 +392,7 @@ class ThematicMap
 
             // Add timespan if time animation
             if ($this->timeType == 'slider') {
-                
+
 				$end = '';
                 // Check if there is more years
                 if (array_key_exists($key+1, $this->yearArray)) {
@@ -397,7 +401,7 @@ class ThematicMap
                 $kmlFolder .= "        <TimeSpan>" . PHP_EOL
                             . "          <begin>$year-01-01</begin>$end" . PHP_EOL
                             . "        </TimeSpan>" . PHP_EOL;
-							
+
             }
 
             // Loop thorough all features (values without features will not be shown)
@@ -405,7 +409,7 @@ class ThematicMap
             {
     			$name = $feature['name'];
 				//if (!mb_detect_encoding($name,"UTF-8",true))
-				//{$name = mb_convert_encoding($name,"UTF-8","ISO-8859-1");}				
+				//{$name = mb_convert_encoding($name,"UTF-8","ISO-8859-1");}
 				$name = "<![CDATA[ ".$name." ]]>";
                 $value = ''; // use null?
                 $valueText = 'no data';
@@ -494,7 +498,10 @@ class ThematicMap
 
                             switch($this->symbolType){
 
-                                case 'image':
+                                case 'im$z = new ZipArchive();
+$z->open("test.zip", ZIPARCHIVE::CREATE);
+folderToZip("storeThisFolder", $z);
+$z->close();age':
                        			    //$symbolSize = round(self::getSymbolSize($value, $this->symbolShape),2);
                         		    $symbolSize = round($this->symbolMaxSize * sqrt($value/$this->maxValue), 2);
 
@@ -636,14 +643,14 @@ class ThematicMap
 
         $kml .= "  </Document>" . PHP_EOL
               . "</kml>" . PHP_EOL;
-        //echo($kml);
 
 
 // Open archive if collada
 
 
         // Add kml to archieve
-        $zip->addFromString("doc.kml", $kml);
+        //$zip->addFromString("doc.kml", $kml);
+        $zip->addFile($kml, 'doc.kml');//edmar
 
         // Create logo with title and source and add to archieve
         if ($this->showTitle) {
@@ -652,11 +659,18 @@ class ThematicMap
         else {
             $zip->addFile($this->logo, 'files/brand.png');
         }
-
-
-        $zip->close();
-
-        return $url.basename($file);
+        //$zip->close();
+        $zip->output($file);//edmar
+        if($download){
+        	ob_end_clean();
+        	header('Content-Type: application/vnd.google-earth.kml+xml');
+        	header('Content-Disposition: attachment; filename='.basename($file));
+			print $file;
+			exit;
+        }
+        else{
+        	return $url.basename($file);
+        }
     }
 
 

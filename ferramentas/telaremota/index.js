@@ -123,7 +123,7 @@ i3GEOF.telaremota = {
 		minimiza = function(){
 			i3GEO.janela.minimiza("i3GEOF.telaremota");
 		};
-		titulo = "Tela remota <a class=ajuda_usuario target=_blank href='" + i3GEO.configura.locaplic + "/ajuda_usuario.php?idcategoria=7&idajuda=99' >&nbsp;&nbsp;&nbsp;</a>";
+		titulo = $trad("p20")+" <a class=ajuda_usuario target=_blank href='" + i3GEO.configura.locaplic + "/ajuda_usuario.php?idcategoria=7&idajuda=99' >&nbsp;&nbsp;&nbsp;</a>";
 		janela = i3GEO.janela.cria(
 			"400px",
 			"350px",

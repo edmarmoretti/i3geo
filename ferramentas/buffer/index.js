@@ -47,7 +47,7 @@ Class: i3GEOF.buffer
 i3GEOF.buffer = {
 	/*
 	Variavel: aguarde
-	
+
 	Objeto DOM com a imagem de aguarde existente no cabe&ccedil;alho da janela.
 	*/
 	aguarde: "",
@@ -59,11 +59,11 @@ i3GEOF.buffer = {
 	},
 	/*
 	Function: iniciaDicionario
-	
+
 	Carrega o dicion&aacute;rio e chama a fun&ccedil;&atilde;o que inicia a ferramenta
-	
+
 	O Javascript &eacute; carregado com o id i3GEOF.nomedaferramenta.dicionario_script
-	*/	
+	*/
 	iniciaDicionario: function(){
 		if(typeof(i3GEOF.buffer.dicionario) === 'undefined'){
 			i3GEO.util.scriptTag(
@@ -75,14 +75,14 @@ i3GEOF.buffer = {
 		else{
 			i3GEOF.buffer.iniciaJanelaFlutuante();
 		}
-	},	
+	},
 	/*
 	Function: inicia
-	
+
 	Inicia a ferramenta. &Eacute; chamado por criaJanelaFlutuante
-	
+
 	Parametro:
-	
+
 	iddiv {String} - id do div que receber&aacute; o conteudo HTML da ferramenta
 	*/
 	inicia: function(iddiv){
@@ -94,11 +94,11 @@ i3GEOF.buffer = {
 	},
 	/*
 	Function: html
-	
+
 	Gera o c&oacute;digo html para apresenta&ccedil;ão das op&ccedil;&otilde;es da ferramenta
-	
+
 	Retorno:
-	
+
 	String com o c&oacute;digo html
 	*/
 	html:function(){
@@ -111,13 +111,13 @@ i3GEOF.buffer = {
 	},
 	/*
 	Function: iniciaJanelaFlutuante
-	
+
 	Cria a janela flutuante para controle da ferramenta.
-	*/	
+	*/
 	iniciaJanelaFlutuante: function(){
 		var janela,divid,temp,titulo;
 		//cria a janela flutuante
-		titulo = "Entorno <a class=ajuda_usuario target=_blank href='" + i3GEO.configura.locaplic + "/ajuda_usuario.php?idcategoria=3&idajuda=24' >&nbsp;&nbsp;&nbsp;</a>";
+		titulo = $trad("u10")+" <a class=ajuda_usuario target=_blank href='" + i3GEO.configura.locaplic + "/ajuda_usuario.php?idcategoria=3&idajuda=24' >&nbsp;&nbsp;&nbsp;</a>";
 		cabecalho = function(){};
 		janela = i3GEO.janela.cria(
 			"400px",
@@ -162,7 +162,7 @@ i3GEOF.buffer = {
 		ins += "<br><br><input onclick='javascript:this.select();' class=digitar id='i3GEObufferd' type=text size=10 value='0'/><br>";
 		ins += "<p class='paragrafo'>Considerar os elementos selecionados como se fossem um s&oacute;?";
 		ins += "<br><br><select id=i3GEObufferunir ><option value=nao selected >n&atilde;o</option><option value=sim >sim</option></select>";
-		i3GEO.util.proximoAnterior("i3GEOF.buffer.t1()","i3GEOF.buffer.t3()",ins,"i3GEOF.buffer.t2","i3GEObufferresultado");	
+		i3GEO.util.proximoAnterior("i3GEOF.buffer.t1()","i3GEOF.buffer.t3()",ins,"i3GEOF.buffer.t2","i3GEObufferresultado");
 	},
 	t3: function(){
 		var ins = "<p class='paragrafo'>O tema com o entorno ser&aacute; adicionado ao mapa atual.";
@@ -171,15 +171,15 @@ i3GEOF.buffer = {
 		new YAHOO.widget.Button(
 			"i3GEObufferbotao1",
 			{onclick:{fn: i3GEOF.buffer.criaBuffer}}
-		);		
+		);
 	},
 	/*
 	Function: criaBuffer
-	
+
 	Executa a opera&ccedil;ão de gera&ccedil;ão do buffer
-	
+
 	Veja:
-	
+
 	<CRIABUFFER>
 	*/
 	criaBuffer: function(){
@@ -213,11 +213,11 @@ i3GEOF.buffer = {
 	},
 	/*
 	Function: comboTemasSel
-	
+
 	Cria um combo com a lista de temas com elementos selecionados
-	
+
 	Veja:
-	
+
 	<i3GEO.util.comboTemas>
 	*/
 	comboTemasSel: function(){
@@ -240,6 +240,6 @@ i3GEOF.buffer = {
 			"",
 			false,
 			"selecionados"
-		);	
+		);
 	}
 };

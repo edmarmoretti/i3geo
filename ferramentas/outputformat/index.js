@@ -127,7 +127,7 @@ i3GEOF.outputformat = {
 			i3GEO.janela.minimiza("i3GEOF.outputformat");
 		};
 		//cria a janela flutuante
-		titulo = "Formato da imagem <a class=ajuda_usuario target=_blank href='" + i3GEO.configura.locaplic + "/ajuda_usuario.php?idcategoria=1&idajuda=89' >&nbsp;&nbsp;&nbsp;</a>";
+		titulo = $trad("p15")+" <a class=ajuda_usuario target=_blank href='" + i3GEO.configura.locaplic + "/ajuda_usuario.php?idcategoria=1&idajuda=89' >&nbsp;&nbsp;&nbsp;</a>";
 		janela = i3GEO.janela.cria(
 			"300px",
 			"260px",

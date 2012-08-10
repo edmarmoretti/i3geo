@@ -44,7 +44,7 @@ Class: i3GEOF.centroide
 i3GEOF.centroide = {
 	/*
 	Variavel: aguarde
-	
+
 	Estilo do objeto DOM com a imagem de aguarde existente no cabe&ccedil;alho da janela.
 	*/
 	aguarde: "",
@@ -56,11 +56,11 @@ i3GEOF.centroide = {
 	},
 	/*
 	Function: iniciaDicionario
-	
+
 	Carrega o dicion&aacute;rio e chama a fun&ccedil;&atilde;o que inicia a ferramenta
-	
+
 	O Javascript &eacute; carregado com o id i3GEOF.nomedaferramenta.dicionario_script
-	*/	
+	*/
 	iniciaDicionario: function(){
 		if(typeof(i3GEOF.centroide.dicionario) === 'undefined'){
 			i3GEO.util.scriptTag(
@@ -72,14 +72,14 @@ i3GEOF.centroide = {
 		else{
 			i3GEOF.centroide.iniciaJanelaFlutuante();
 		}
-	},	
+	},
 	/*
 	Function: inicia
-	
+
 	Inicia a ferramenta. &Eacute; chamado por criaJanelaFlutuante
-	
+
 	Parametro:
-	
+
 	iddiv {String} - id do div que receber&aacute; o conteudo HTML da ferramenta
 	*/
 	inicia: function(iddiv){
@@ -91,11 +91,11 @@ i3GEOF.centroide = {
 	},
 	/*
 	Function: html
-	
+
 	Gera o c&oacute;digo html para apresenta&ccedil;ão das op&ccedil;&otilde;es da ferramenta
-	
+
 	Retorno:
-	
+
 	String com o c&oacute;digo html
 	*/
 	html:function(){
@@ -108,13 +108,13 @@ i3GEOF.centroide = {
 	},
 	/*
 	Function: iniciaJanelaFlutuante
-	
+
 	Cria a janela flutuante para controle da ferramenta.
-	*/	
+	*/
 	iniciaJanelaFlutuante: function(){
 		var minimiza,cabecalho,janela,divid,temp,titulo;
 		//cria a janela flutuante
-		titulo = "Centr&oacute;ide <a class=ajuda_usuario target=_blank href='" + i3GEO.configura.locaplic + "/ajuda_usuario.php?idcategoria=3&idajuda=21' >&nbsp;&nbsp;&nbsp;</a>";
+		titulo = $trad("u11")+" <a class=ajuda_usuario target=_blank href='" + i3GEO.configura.locaplic + "/ajuda_usuario.php?idcategoria=3&idajuda=21' >&nbsp;&nbsp;&nbsp;</a>";
 		cabecalho = function(){};
 		minimiza = function(){
 			i3GEO.janela.minimiza("i3GEOF.centroide");
@@ -161,15 +161,15 @@ i3GEOF.centroide = {
 		new YAHOO.widget.Button(
 			"i3GEOcentroidebotao1",
 			{onclick:{fn: i3GEOF.centroide.criacentroide}}
-		);		
+		);
 	},
 	/*
 	Function: criacentroide
-	
+
 	Executa a opera&ccedil;ão de c&aacute;lculo dos centr&oacute;ides
-	
+
 	Veja:
-	
+
 	<CRIACENTROIDE>
 	*/
 	criacentroide: function(){
@@ -197,11 +197,11 @@ i3GEOF.centroide = {
 	},
 	/*
 	Function: comboTemasSel
-	
+
 	Cria um combo com a lista de temas com elementos selecionados
-	
+
 	Veja:
-	
+
 	<i3GEO.util.comboTemas>
 	*/
 	comboTemasSel: function(){
@@ -224,6 +224,6 @@ i3GEOF.centroide = {
 			"",
 			false,
 			"selecionados"
-		);	
+		);
 	}
 };

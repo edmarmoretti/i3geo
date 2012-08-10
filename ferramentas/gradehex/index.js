@@ -118,7 +118,7 @@ i3GEOF.gradeDeHex = {
 	iniciaJanelaFlutuante: function(){
 		var minimiza,cabecalho,janela,divid,titulo;
 		//cria a janela flutuante
-		titulo = "Grade de hex&aacute;gonos <a class=ajuda_usuario target=_blank href='" + i3GEO.configura.locaplic + "/ajuda_usuario.php?idcategoria=3&idajuda=16' >&nbsp;&nbsp;&nbsp;</a>";
+		titulo = $trad("u9")+" <a class=ajuda_usuario target=_blank href='" + i3GEO.configura.locaplic + "/ajuda_usuario.php?idcategoria=3&idajuda=16' >&nbsp;&nbsp;&nbsp;</a>";
 		cabecalho = function(){
 			i3GEO.barraDeBotoes.execBotao("pan");
 		};
