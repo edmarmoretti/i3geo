@@ -29,7 +29,7 @@ Arquivo:
 
 i3geo/admin/js/subgrupos.js
 */
-//YAHOO.namespace("example.container");
+//YAHOO.namespace("admin.container");
 /*
 Function: initEditorSubGrupos
 
@@ -121,10 +121,10 @@ function montaTabela_S(dados)
 		{
 			var target = YAHOO.util.Event.getTarget(ev);
 			var column = this.getColumn(target);
-			if(YAHOO.example.container.panelCK)
+			if(YAHOO.admin.container.panelCK)
 			{
-				YAHOO.example.container.panelCK.destroy();
-				YAHOO.example.container.panelCK = null;
+				YAHOO.admin.container.panelCK.destroy();
+				YAHOO.admin.container.panelCK = null;
 			}
 			if (column.key == 'excluir')
 			{

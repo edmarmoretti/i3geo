@@ -37,53 +37,48 @@ Arquivo:
 
 i3geo/admin/js/arvore.js
 */
-YAHOO.namespace("example.container");
 //
 //obtem os parametros da url
 //
+YAHOO.namespace("admin.container");
 (function(){
-$id_menu = "";
-$id_grupo = "";
-$id_subgrupo = "";
-try{
-	var u = window.location.href.split("?")[1];
-	u = u.split("&");
-	for(var i=0;i<u.length;i++){
-		var p = u[i].split("=");
-		eval("$"+p[0]+"='"+p[1]+"';");
+	$id_menu = "";
+	$id_grupo = "";
+	$id_subgrupo = "";
+	try{
+		var i,p,u = window.location.href.split("?")[1];
+		u = u.split("&");
+		for(i=0;i<u.length;i++){
+			p = u[i].split("=");
+			eval("$"+p[0]+"='"+p[1]+"';");
+		}
 	}
-}
-catch(e){}
+	catch(e){}
 })();
 /*
 Function: initMenu
 
 Inicializa a �rvore
 */
-function initMenu()
-{
-	var editorDeMenus = function()
-	{
-		if($i("editor_bd")){return;}
-		core_montaEditor("","600px","500px","pegaMenus","Menu");
-		$i("editor_bd").innerHTML = '<input type=button id=adicionaNovoMenu value="Adicionar um novo menu" style="left:-5px;" /><br><br><div id="tabela" style="left:-5px;"> </div>';
-		initEditorMenu();
-	};
-	var editorDeGrupos = function()
-	{
-		if($i("editor_bd")){return;}
-		core_montaEditor("","600px","500px","","Grupos");
-		$i("editor_bd").innerHTML = '<p class=paragrafo >Clique nas c&eacute;lulas da tabela para editar a caracter&iacute;stica de cada item. Finalize com "enter". Ap&oacute;s editar, salve o item.</p><p class=paragrafo ><input type=button id=adicionaNovoGrupo value="Adicionar um novo grupo" style="left:-5px;" /></p><p><br><div id="tabela" style="left:-5px;"> </div>';
-		initEditorGrupos();
-	};
-	var editorDeSubGrupos = function()
-	{
-		if($i("editor_bd")){return;}
-		core_montaEditor("","600px","500px","","Subgrupos");
-		$i("editor_bd").innerHTML = '<p class=paragrafo >Clique nas c�lulas da tabela para editar a caracter�stica de cada item. Finalize com "enter". Ap�s editar, salve o item.</p><p class=paragrafo ><input type=button id=adicionaNovoSubGrupo value="Adicionar um novo sub-grupo" style="left:-5px;" /></p><br><div id="tabela" style="left:-5px;"> </div>';
-		initEditorSubGrupos();
-	};
-
+function initMenu(){
+	var editorDeMenus = function()	{
+			if($i("editor_bd")){return;}
+			core_montaEditor("","600px","500px","pegaMenus","Menu");
+			$i("editor_bd").innerHTML = '<input type=button id=adicionaNovoMenu value="Adicionar um novo menu" style="left:-5px;" /><br><br><div id="tabela" style="left:-5px;"> </div>';
+			initEditorMenu();
+		},
+		editorDeGrupos = function(){
+			if($i("editor_bd")){return;}
+			core_montaEditor("","600px","500px","","Grupos");
+			$i("editor_bd").innerHTML = '<p class=paragrafo >Clique nas c&eacute;lulas da tabela para editar a caracter&iacute;stica de cada item. Finalize com "enter". Ap&oacute;s editar, salve o item.</p><p class=paragrafo ><input type=button id=adicionaNovoGrupo value="Adicionar um novo grupo" style="left:-5px;" /></p><p><br><div id="tabela" style="left:-5px;"> </div>';
+			initEditorGrupos();
+		},
+		editorDeSubGrupos = function()	{
+			if($i("editor_bd")){return;}
+			core_montaEditor("","600px","500px","","Subgrupos");
+			$i("editor_bd").innerHTML = '<p class=paragrafo >Clique nas c�lulas da tabela para editar a caracter�stica de cada item. Finalize com "enter". Ap�s editar, salve o item.</p><p class=paragrafo ><input type=button id=adicionaNovoSubGrupo value="Adicionar um novo sub-grupo" style="left:-5px;" /></p><br><div id="tabela" style="left:-5px;"> </div>';
+			initEditorSubGrupos();
+		};
 	new YAHOO.widget.Button("botaoEditorMenu",{ onclick: { fn: editorDeMenus } });
 	new YAHOO.widget.Button("botaoEditorGrupo",{ onclick: { fn: editorDeGrupos } });
 	new YAHOO.widget.Button("botaoEditorSubGrupo",{ onclick: { fn: editorDeSubGrupos } });
@@ -102,7 +97,7 @@ Obt�m a lista de menus e monta os n�s principais da �rvore
 function pegaMenus()
 {
 	try
-	{YAHOO.util.Event.removeListener(YAHOO.example.container.panelEditor.close, "click");}
+	{YAHOO.util.Event.removeListener(YAHOO.admin.container.panelEditor.close, "click");}
 	catch(e){}
 	core_pegaDados("buscando menus...","../php/menutemas.php?funcao=pegaMenus2&idioma="+idiomaSel(),"montaArvore");
 }
@@ -115,8 +110,7 @@ Monta a �rvore de temas
 */
 function montaArvore(dados)
 {
-
-	YAHOO.example.treeExample = new function()
+	YAHOO.tree = new function()
 	{
 		tree = "";
 		function changeIconMode()
@@ -810,12 +804,9 @@ function gravaDados(tipo,id)
   				{
   					if(tipo == "grupo")
   					{
-  						var obj = document.getElementById("Eid_grupo");
   						var texto = obj.options[obj.selectedIndex].text;
-
   						var objpub = document.getElementById("Epublicado");
   						var publicado = objpub.options[objpub.selectedIndex].value;
-
   						var no = tree.getNodeByProperty("id_n1",id);
   						no.getContentEl().getElementsByTagName("span")[0].innerHTML = texto;
 
@@ -828,7 +819,6 @@ function gravaDados(tipo,id)
   					}
   					if(tipo == "subgrupo")
   					{
-  						var obj = document.getElementById("Eid_subgrupo");
   						var texto = obj.options[obj.selectedIndex].text;
 
   						var objpub = document.getElementById("Epublicado");
@@ -846,7 +836,6 @@ function gravaDados(tipo,id)
   					}
   					if(tipo == "tema")
   					{
-  						var obj = document.getElementById("Eid_tema");
   						var texto = obj.options[obj.selectedIndex].text;
 
   						var objpub = document.getElementById("Epublicado");
@@ -865,7 +854,6 @@ function gravaDados(tipo,id)
   					}
 					if(tipo == "raizmenu" || tipo == "raizgrupo")
   					{
-  						var obj = document.getElementById("Eid_tema");
   						var texto = obj.options[obj.selectedIndex].text;
   						var no = tree.getNodeByProperty("id_raiz",id);
   						no.getContentEl().getElementsByTagName("span")[0].innerHTML = texto;
@@ -873,8 +861,8 @@ function gravaDados(tipo,id)
   					}
   					core_carregando("desativa");
   				}
-				YAHOO.example.container.panelEditor.destroy();
-				YAHOO.example.container.panelEditor = null;
+				YAHOO.admin.container.panelEditor.destroy();
+				YAHOO.admin.container.panelEditor = null;
   			}
   			catch(e){core_handleFailure(e,o.responseText);}
   		},

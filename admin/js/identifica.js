@@ -30,7 +30,7 @@ Arquivo:
 i3geo/admin/js/identifica.js
 */
 
-YAHOO.namespace("example.container");
+YAHOO.namespace("admin.container");
 function initMenu()
 {
 	core_ativaBotaoAdicionaLinha("../php/identifica.php?funcao=alterarFuncoes");
@@ -79,10 +79,10 @@ function montaTabela(dados)
 		{
 			var target = YAHOO.util.Event.getTarget(ev);
 			var column = this.getColumn(target);
-			if(YAHOO.example.container.panelCK)
+			if(YAHOO.admin.container.panelCK)
 			{
-				YAHOO.example.container.panelCK.destroy();
-				YAHOO.example.container.panelCK = null;
+				YAHOO.admin.container.panelCK.destroy();
+				YAHOO.admin.container.panelCK = null;
 			}
 			if (column.key == 'excluir')
 			{
@@ -127,11 +127,11 @@ function montaEditor(dados,id,recordid)
 		}
 		else
 		{
-			YAHOO.example.container.panelEditor.destroy();
-			YAHOO.example.container.panelEditor = null;
+			YAHOO.admin.container.panelEditor.destroy();
+			YAHOO.admin.container.panelEditor = null;
 		}
 	};
-	if(!YAHOO.example.container.panelEditor)
+	if(!YAHOO.admin.container.panelEditor)
 	{
 		var novoel = document.createElement("div");
 		novoel.id =  "janela_editor";
@@ -146,10 +146,10 @@ function montaEditor(dados,id,recordid)
             { label: "Cancela", value: "CANCEL", checked: false }
         ]);
 		editorBotoes.on("checkedButtonChange", on_editorCheckBoxChange);
-		YAHOO.example.container.panelEditor = new YAHOO.widget.Panel("janela_editor", { fixedcenter:true,close:false,width:"400px", height:"400px",overflow:"auto", visible:false,constraintoviewport:true } );
-		YAHOO.example.container.panelEditor.render();
+		YAHOO.admin.container.panelEditor = new YAHOO.widget.Panel("janela_editor", { fixedcenter:true,close:false,width:"400px", height:"400px",overflow:"auto", visible:false,constraintoviewport:true } );
+		YAHOO.admin.container.panelEditor.render();
 	}
-	YAHOO.example.container.panelEditor.show();
+	YAHOO.admin.container.panelEditor.show();
 	//carrega os dados na janela
 	$i("editor_bd").innerHTML = montaDiv(dados[0]);
 	core_carregando("desativa");
@@ -214,8 +214,8 @@ function gravaDados(id,recordid)
   					myDataTable.updateRow(rec,YAHOO.lang.JSON.parse(o.responseText)[0]);
   					core_carregando("desativa");
   				}
-				YAHOO.example.container.panelEditor.destroy();
-				YAHOO.example.container.panelEditor = null;
+				YAHOO.admin.container.panelEditor.destroy();
+				YAHOO.admin.container.panelEditor = null;
   			}
   			catch(e){core_handleFailure(e,o.responseText);}
   		},

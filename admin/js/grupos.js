@@ -119,10 +119,10 @@ function montaTabela_G(dados)
 		{
 			var target = YAHOO.util.Event.getTarget(ev);
 			var column = this.getColumn(target);
-			if(YAHOO.example.container.panelCK)
+			if(YAHOO.admin.container.panelCK)
 			{
-				YAHOO.example.container.panelCK.destroy();
-				YAHOO.example.container.panelCK = null;
+				YAHOO.admin.container.panelCK.destroy();
+				YAHOO.admin.container.panelCK = null;
 			}
 			if (column.key == 'excluir')
 			{

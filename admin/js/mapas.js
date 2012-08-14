@@ -29,7 +29,7 @@ Arquivo:
 
 i3geo/admin/js/mapas.js
 */
-YAHOO.namespace("example.container");
+YAHOO.namespace("admin.container");
 /*
 Function: initMenu
 
@@ -154,11 +154,11 @@ function montaEditorMapa(dados,id,recordid)
 		}
 		else
 		{
-			YAHOO.example.container.panelEditorMapa.destroy();
-			YAHOO.example.container.panelEditorMapa = null;
+			YAHOO.admin.container.panelEditorMapa.destroy();
+			YAHOO.admin.container.panelEditorMapa = null;
 		}
 	};
-	if(!YAHOO.example.container.panelEditorMapa)
+	if(!YAHOO.admin.container.panelEditorMapa)
 	{
 		var novoel = document.createElement("div");
 		novoel.id =  "janela_editor";
@@ -173,10 +173,10 @@ function montaEditorMapa(dados,id,recordid)
             { label: "Cancela", value: "CANCEL", checked: false }
         ]);
 		editorBotoes.on("checkedButtonChange", on_editorCheckBoxChange);
-		YAHOO.example.container.panelEditorMapa = new YAHOO.widget.Panel("janela_editor", { fixedcenter:true,close:false,width:"400px", height:"400px",overflow:"auto", visible:false,constraintoviewport:true } );
-		YAHOO.example.container.panelEditorMapa.render();
+		YAHOO.admin.container.panelEditorMapa = new YAHOO.widget.Panel("janela_editor", { fixedcenter:true,close:false,width:"400px", height:"400px",overflow:"auto", visible:false,constraintoviewport:true } );
+		YAHOO.admin.container.panelEditorMapa.render();
 	}
-	YAHOO.example.container.panelEditorMapa.show();
+	YAHOO.admin.container.panelEditorMapa.show();
 	//carrega os dados na janela
 	$i("editor_bd").innerHTML = montaDivMapas(dados[0]);
 	core_carregando("desativa");
@@ -293,8 +293,8 @@ function gravaDadosMapa(id,recordid)
   					myDataTable.updateRow(rec,YAHOO.lang.JSON.parse(o.responseText)[0]);
   					core_carregando("desativa");
   				}
-				YAHOO.example.container.panelEditorMapa.destroy();
-				YAHOO.example.container.panelEditorMapa = null;
+				YAHOO.admin.container.panelEditorMapa.destroy();
+				YAHOO.admin.container.panelEditorMapa = null;
   			}
   			catch(e){core_handleFailure(e,o.responseText);}
   		},

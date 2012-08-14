@@ -29,7 +29,7 @@ Arquivo:
 
 i3geo/admin/js/ogcws.js
 */
-YAHOO.namespace("example.container");
+YAHOO.namespace("admin.container");
 /*
 Function: initMenu
 

@@ -38,7 +38,7 @@ Inicializa o editor
 */
 function initEditorMenu()
 {
-	YAHOO.namespace("example.container");
+	YAHOO.namespace("admin.container");
 	core_ativaBotaoAdicionaLinha("../php/menutemas.php?funcao=alteraMenus&publicado_menu=&perfil=&nome=&desc=&id=&aberto=","adicionaNovoMenu","pegaMenus_M");
 	pegaMenus_M();
 }
@@ -99,10 +99,10 @@ function montaTabela_M(dados)
 		{
 			var target = YAHOO.util.Event.getTarget(ev);
 			var column = this.getColumn(target);
-			if(YAHOO.example.container.panelCK)
+			if(YAHOO.admin.container.panelCK)
 			{
-				YAHOO.example.container.panelCK.destroy();
-				YAHOO.example.container.panelCK = null;
+				YAHOO.admin.container.panelCK.destroy();
+				YAHOO.admin.container.panelCK = null;
 			}
 			if (column.key == 'excluir')
 			{
@@ -144,8 +144,8 @@ function montaEditor_M(dados,id,recordid)
 		{
 			gravaDados_M(id,recordid);
 		}
-		YAHOO.example.container.panelEditor2.destroy();
-		YAHOO.example.container.panelEditor2 = null;
+		YAHOO.admin.container.panelEditor2.destroy();
+		YAHOO.admin.container.panelEditor2 = null;
 	};
 	if(!$i("janela_editor2"))
 	{
@@ -162,10 +162,10 @@ function montaEditor_M(dados,id,recordid)
             { label: "Cancela", value: "CANCEL", checked: false }
         ]);
 		editorBotoes.on("checkedButtonChange", on_editorCheckBoxChange);	
-		YAHOO.example.container.panelEditor2 = new YAHOO.widget.Panel("janela_editor2", { fixedcenter:true,close:false,width:"400px", height:"480px",overflow:"auto", visible:false,constraintoviewport:true } );
-		YAHOO.example.container.panelEditor2.render();
+		YAHOO.admin.container.panelEditor2 = new YAHOO.widget.Panel("janela_editor2", { fixedcenter:true,close:false,width:"400px", height:"480px",overflow:"auto", visible:false,constraintoviewport:true } );
+		YAHOO.admin.container.panelEditor2.render();
 	}
-	YAHOO.example.container.panelEditor2.show();
+	YAHOO.admin.container.panelEditor2.show();
 	$i("editor_bd2").innerHTML = montaDiv_M(dados[0]);
 	core_carregando("desativa");
 }

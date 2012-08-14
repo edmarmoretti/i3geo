@@ -304,14 +304,14 @@ function core_handleFailure(o,texto)
 			log.innerHTML += "<li>PHP message: " + texto + "</li></ul>";
 		}
 	}
-	if (!YAHOO.example.container.wait)
+	if (!YAHOO.carregando.container.wait)
 	{
-    	YAHOO.example.container.wait = new YAHOO.widget.Panel("wait",{width: "240px",fixedcenter: true,close: true,draggable: false,zindex:4,modal: true,visible: false});
-		YAHOO.example.container.wait.setHeader("Aguarde...");
-		YAHOO.example.container.wait.render(document.body);
+    	YAHOO.carregando.container.wait = new YAHOO.widget.Panel("wait",{width: "240px",fixedcenter: true,close: true,draggable: false,zindex:4,modal: true,visible: false});
+		YAHOO.carregando.container.wait.setHeader("Aguarde...");
+		YAHOO.carregando.container.wait.render(document.body);
 	}
 	else
-	{YAHOO.example.container.wait.setBody(log.innerHTML);}
+	{YAHOO.carregando.container.wait.setBody(log.innerHTML);}
 }
 /*
 Function: core_makeRequest
@@ -359,22 +359,23 @@ tipo - ativa|desativa|string com uma mensagem
 */
 function core_carregando(tipo)
 {
-	if (!YAHOO.example.container.wait)
+	YAHOO.namespace("carregando.container");
+	if (!YAHOO.carregando.container.wait)
 	{
-    	YAHOO.example.container.wait = new YAHOO.widget.Panel("wait",{width: "240px",fixedcenter: true,close: true,draggable: false,zindex:4,modal: true,visible: false});
-		YAHOO.example.container.wait.setHeader("Aguarde...");
-		YAHOO.example.container.wait.setBody("<img src=\"../../imagens/aguarde.gif\"/>");
-		YAHOO.example.container.wait.render(document.body);
+    	YAHOO.carregando.container.wait = new YAHOO.widget.Panel("wait",{width: "240px",fixedcenter: true,close: true,draggable: false,zindex:4,modal: true,visible: false});
+		YAHOO.carregando.container.wait.setHeader("Aguarde...");
+		YAHOO.carregando.container.wait.setBody("<img src=\"../../imagens/aguarde.gif\"/>");
+		YAHOO.carregando.container.wait.render(document.body);
 	}
 	else
-	{YAHOO.example.container.wait.show();}
-	YAHOO.example.container.wait.setBody("<img src=\"../../imagens/aguarde.gif\"/>");
+	{YAHOO.carregando.container.wait.show();}
+	YAHOO.carregando.container.wait.setBody("<img src=\"../../imagens/aguarde.gif\"/>");
 	if(tipo == "ativa")
-	{YAHOO.example.container.wait.show();}
+	{YAHOO.carregando.container.wait.show();}
 	if(tipo == "desativa")
-	{YAHOO.example.container.wait.hide();}
+	{YAHOO.carregando.container.wait.hide();}
 	if(tipo != "ativa" && tipo != "desativa")
-	{YAHOO.example.container.wait.setBody("<img src=\"../../imagens/aguarde.gif\"/> "+tipo);}
+	{YAHOO.carregando.container.wait.setBody("<img src=\"../../imagens/aguarde.gif\"/> "+tipo);}
 }
 /*
 Function: core_dialogoContinua
@@ -465,15 +466,15 @@ botao - id do elemento que dever&aacute; ser lcicado para abrir o painel
 function core_ativaPainelAjuda(id,botao)
 {
 	$i(id).style.display = "block";
-	if(!YAHOO.example.container.panelAjuda)
+	if(!YAHOO.admin.container.panelAjuda)
 	{
-		YAHOO.example.container.panelAjuda = new YAHOO.widget.Panel(id, { width:"350px", height:"200px",overflow:"auto", visible:false,constraintoviewport:true } );
-		YAHOO.example.container.panelAjuda.render();
+		YAHOO.admin.container.panelAjuda = new YAHOO.widget.Panel(id, { width:"350px", height:"200px",overflow:"auto", visible:false,constraintoviewport:true } );
+		YAHOO.admin.container.panelAjuda.render();
 	}
 	if(arguments.length == 2)
-	YAHOO.util.Event.addListener(botao, "click", YAHOO.example.container.panelAjuda.show, YAHOO.example.container.panelAjuda, true);
+	YAHOO.util.Event.addListener(botao, "click", YAHOO.admin.container.panelAjuda.show, YAHOO.admin.container.panelAjuda, true);
 	else
-	YAHOO.example.container.panelAjuda.show();
+	YAHOO.admin.container.panelAjuda.show();
 }
 /*
 Function: core_ativaPainelTexto
@@ -484,9 +485,9 @@ id - id do elemento que receber&aacute; o painel
 */
 function core_ativaPainelTexto(id)
 {
-	YAHOO.example.container.panelTexto = new YAHOO.widget.Panel(id, { width:"350px", height:"200px",overflow:"auto", visible:false,constraintoviewport:true } );
-	YAHOO.example.container.panelTexto.render();
-	YAHOO.example.container.panelTexto.show();
+	YAHOO.admin.container.panelTexto = new YAHOO.widget.Panel(id, { width:"350px", height:"200px",overflow:"auto", visible:false,constraintoviewport:true } );
+	YAHOO.admin.container.panelTexto.render();
+	YAHOO.admin.container.panelTexto.show();
 }
 /*
 function: core_pegaPerfis
@@ -917,10 +918,10 @@ function core_menuCheckBox(valores,textos,selecionados,target,record,key)
 			target.innerHTML = "<pre ><p>"+ins.toString()+"</pre>";
 			record.setData(key,ins.toString());
 		}
-		YAHOO.example.container.panelCK.destroy();
-		YAHOO.example.container.panelCK = null;
+		YAHOO.admin.container.panelCK.destroy();
+		YAHOO.admin.container.panelCK = null;
 	};
-	if(!YAHOO.example.container.panelCK)
+	if(!YAHOO.admin.container.panelCK)
 	{
 		var novoel = document.createElement("div");
 		novoel.id =  "core_menuCK";
@@ -937,8 +938,8 @@ function core_menuCheckBox(valores,textos,selecionados,target,record,key)
             { label: "Cancel", value: "CANCEL", checked: false }
         ]);
 		og_core.on("checkedButtonChange", on_menuCheckBoxChange);
-		YAHOO.example.container.panelCK = new YAHOO.widget.Overlay("core_menuCK", { zindex:"100",close:false,underlay:false,width:"200px", height:"200px",overflow:"auto", visible:false,constraintoviewport:true } );
-		YAHOO.example.container.panelCK.render();
+		YAHOO.admin.container.panelCK = new YAHOO.widget.Overlay("core_menuCK", { zindex:"100",close:false,underlay:false,width:"200px", height:"200px",overflow:"auto", visible:false,constraintoviewport:true } );
+		YAHOO.admin.container.panelCK.render();
 	}
 	var onde = $i("core_menuCK_bd");
 	onde.innerHTML = "";
@@ -955,8 +956,8 @@ function core_menuCheckBox(valores,textos,selecionados,target,record,key)
 		novoCK.innerHTML = ins;
 		onde.appendChild(novoCK);
 	}
-	YAHOO.example.container.panelCK.moveTo(YAHOO.util.Dom.getX(target),YAHOO.util.Dom.getY(target));
-	YAHOO.example.container.panelCK.show();
+	YAHOO.admin.container.panelCK.moveTo(YAHOO.util.Dom.getX(target),YAHOO.util.Dom.getY(target));
+	YAHOO.admin.container.panelCK.show();
 }
 /*
 Function: core_combosimnao
@@ -1396,13 +1397,13 @@ function core_montaEditor(funcaoOK,w,h,funcaoClose,titulo)
 			new YAHOO.widget.Button(
 				"okcancel_checkboxCANCEL",
 				{onclick:{fn: function(){
-					YAHOO.example.container.panelEditor.destroy();
-					YAHOO.example.container.panelEditor = null;
+					YAHOO.admin.container.panelEditor.destroy();
+					YAHOO.admin.container.panelEditor = null;
 				}}}
 			);
 		}
-		YAHOO.example.container.panelEditor = new YAHOO.widget.Panel("janela_editor", { fixedcenter:true,close:true,width:w, overflow:"auto",modal: false,visible:false,constraintoviewport:true } );
-		YAHOO.example.container.panelEditor.render();
+		YAHOO.admin.container.panelEditor = new YAHOO.widget.Panel("janela_editor", { fixedcenter:true,close:true,width:w, overflow:"auto",modal: false,visible:false,constraintoviewport:true } );
+		YAHOO.admin.container.panelEditor.render();
 	}
 	else
 	{
@@ -1412,8 +1413,8 @@ function core_montaEditor(funcaoOK,w,h,funcaoClose,titulo)
 	var fecha = function()
 	{
 		try{
-			YAHOO.example.container.panelEditor.destroy();
-			YAHOO.example.container.panelEditor = null;
+			YAHOO.admin.container.panelEditor.destroy();
+			YAHOO.admin.container.panelEditor = null;
 		}
 		catch(e){}
 		try{
@@ -1422,8 +1423,8 @@ function core_montaEditor(funcaoOK,w,h,funcaoClose,titulo)
 		}
 		catch(e){};
 	};
-	YAHOO.util.Event.addListener(YAHOO.example.container.panelEditor.close, "click", fecha);
-	YAHOO.example.container.panelEditor.show();
+	YAHOO.util.Event.addListener(YAHOO.admin.container.panelEditor.close, "click", fecha);
+	YAHOO.admin.container.panelEditor.show();
 }
 /*
 Function idiomaSel

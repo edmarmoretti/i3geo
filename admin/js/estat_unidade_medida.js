@@ -1,5 +1,5 @@
 function initEditor(){
-	YAHOO.namespace("example.container");
+	YAHOO.namespace("admin.container");
 	core_ativaBotaoAdicionaLinha("../php/metaestat.php?funcao=alterarUnidadeMedida","adicionaNovaLinha","pegaDados");
 	pegaDados();
 }
@@ -44,9 +44,9 @@ function montaTabela(dados){
 				var record,$clicouId,$recordid,sUrl,callback,
 				target = YAHOO.util.Event.getTarget(ev),
 				column = this.getColumn(target);
-				if(YAHOO.example.container.panelCK){
-					YAHOO.example.container.panelCK.destroy();
-					YAHOO.example.container.panelCK = null;
+				if(YAHOO.admin.container.panelCK){
+					YAHOO.admin.container.panelCK.destroy();
+					YAHOO.admin.container.panelCK = null;
 				}
 				if (column.key == 'excluir'){
 					record = this.getRecord(target);
@@ -81,8 +81,8 @@ function montaEditor(dados,id,recordid){
 		if(p_oEvent.newValue.get("value") == "OK"){
 			gravaDados(id,recordid);
 		}
-		YAHOO.example.container.panelEditor2.destroy();
-		YAHOO.example.container.panelEditor2 = null;
+		YAHOO.admin.container.panelEditor2.destroy();
+		YAHOO.admin.container.panelEditor2 = null;
 	};
 	if(!$i("janela_editor2")){
 		var ins,editorBotoes,
@@ -100,10 +100,10 @@ function montaEditor(dados,id,recordid){
 		                         { label: "Cancela", value: "CANCEL", checked: false }
 		                         ]);
 		editorBotoes.on("checkedButtonChange", on_editorCheckBoxChange);
-		YAHOO.example.container.panelEditor2 = new YAHOO.widget.Panel("janela_editor2", { fixedcenter:true,close:false,width:"400px", height:"380px",overflow:"auto", visible:false,constraintoviewport:true } );
-		YAHOO.example.container.panelEditor2.render();
+		YAHOO.admin.container.panelEditor2 = new YAHOO.widget.Panel("janela_editor2", { fixedcenter:true,close:false,width:"400px", height:"380px",overflow:"auto", visible:false,constraintoviewport:true } );
+		YAHOO.admin.container.panelEditor2.render();
 	}
-	YAHOO.example.container.panelEditor2.show();
+	YAHOO.admin.container.panelEditor2.show();
 	$i("editor_bd2").innerHTML = montaDiv(dados);
 	core_carregando("desativa");
 }

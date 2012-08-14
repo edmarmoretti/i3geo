@@ -30,7 +30,7 @@ Arquivo:
 i3geo/admin/js/importar.js
 */
 
-YAHOO.namespace("example.container");
+YAHOO.namespace("admin.container");
 function fim ()
 {
 	core_carregando("desativa");

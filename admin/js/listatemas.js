@@ -17,11 +17,11 @@ function montaEditorTema(dados)
 		}
 		else
 		{
-			YAHOO.example.container.panelEditorTema.destroy();
-			YAHOO.example.container.panelEditorTema = null;
+			YAHOO.admin.container.panelEditorTema.destroy();
+			YAHOO.admin.container.panelEditorTema = null;
 		}
 	};
-	if(!YAHOO.example.container.panelEditorTema)
+	if(!YAHOO.admin.container.panelEditorTema)
 	{
 		var novoel = document.createElement("div");
 		novoel.id =  "janela_editor_tema";
@@ -36,16 +36,16 @@ function montaEditorTema(dados)
             { label: "Cancela", value: "CANCEL", checked: false }
         ]);
 		editorBotoes.on("checkedButtonChange", on_editorCheckBoxChange);	
-		YAHOO.example.container.panelEditorTema = new YAHOO.widget.Panel("janela_editor_tema", { fixedcenter:true,close:true,width:"400px", height:"400px",overflow:"auto", visible:false,constraintoviewport:true } );
-		YAHOO.example.container.panelEditorTema.render();
+		YAHOO.admin.container.panelEditorTema = new YAHOO.widget.Panel("janela_editor_tema", { fixedcenter:true,close:true,width:"400px", height:"400px",overflow:"auto", visible:false,constraintoviewport:true } );
+		YAHOO.admin.container.panelEditorTema.render();
 		var fecha = function()
 		{
-			YAHOO.example.container.panelEditorTema.destroy();
-			YAHOO.example.container.panelEditorTema = null;
+			YAHOO.admin.container.panelEditorTema.destroy();
+			YAHOO.admin.container.panelEditorTema = null;
 		};
-		YAHOO.util.Event.addListener(YAHOO.example.container.panelEditorTema.close, "click", fecha);
+		YAHOO.util.Event.addListener(YAHOO.admin.container.panelEditorTema.close, "click", fecha);
 	}
-	YAHOO.example.container.panelEditorTema.show();
+	YAHOO.admin.container.panelEditorTema.show();
 	//carrega os dados na janela
 	$i("editor_bd").innerHTML = montaDivTemas(dados[0]);
 	core_carregando("desativa");
@@ -183,8 +183,8 @@ function gravaDadosTema(id)
   					//myDataTable.updateRow(rec,YAHOO.lang.JSON.parse(o.responseText)[0])
   					core_carregando("desativa");
   				}
-				YAHOO.example.container.panelEditorTema.destroy();
-				YAHOO.example.container.panelEditorTema = null;
+				YAHOO.admin.container.panelEditorTema.destroy();
+				YAHOO.admin.container.panelEditorTema = null;
   			}
   			catch(e){core_handleFailure(e,o.responseText);}
   		},

@@ -29,7 +29,7 @@ Arquivo:
 
 i3geo/admin/js/usuarios.js
 */
-YAHOO.namespace("example.container");
+YAHOO.namespace("admin.container");
 /*
 Function: initMenu
 
@@ -356,8 +356,8 @@ function gravaDados(tipo,id)
   					}
   					core_carregando("desativa");
   				}
-				YAHOO.example.container.panelEditor.destroy();
-				YAHOO.example.container.panelEditor = null;
+				YAHOO.admin.container.panelEditor.destroy();
+				YAHOO.admin.container.panelEditor = null;
   			}
   			catch(e){core_handleFailure(e,o.responseText);}
   		},

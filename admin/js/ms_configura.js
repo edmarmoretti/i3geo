@@ -29,7 +29,7 @@ Arquivo:
 
 i3geo/admin/js/ms_configura.js
 */
-YAHOO.namespace("example.container");
+YAHOO.namespace("admin.container");
 /*
 Function: initMenu
 

@@ -132,7 +132,7 @@ objtipooriginal = [
 	{texto:"pontual",valor:"pontual"}
 ];
 
-YAHOO.namespace("example.container");
+YAHOO.namespace("admin.container");
 /*
 Function: initMenu
 
@@ -601,8 +601,8 @@ function verificaOrfaos()
 }
 function excluirOrfao(codigo_tema){
 	excluirMapfile(codigo_tema);
-	YAHOO.example.container.panelEditor.destroy();
-	YAHOO.example.container.panelEditor = null;
+	YAHOO.admin.container.panelEditor.destroy();
+	YAHOO.admin.container.panelEditor = null;
 }
 /*
 Function: adicionaNovoMapfile
@@ -637,8 +637,8 @@ function adicionaNovoMapfile()
 				}
 				else
 				{
-					YAHOO.example.container.panelEditor.destroy();
-					YAHOO.example.container.panelEditor = null;
+					YAHOO.admin.container.panelEditor.destroy();
+					YAHOO.admin.container.panelEditor = null;
 					core_pegaMapfiles("montaArvore()");
 				}
 			}
@@ -768,8 +768,8 @@ function classesAuto(codigoMap,codigoLayer)
 						var no = tree.getNodeByProperty("etiquetaClasses",codigoMap+"_"+codigoLayer);
 						montaParametrosTemas(no,dados);
   						core_carregando("desativa");
-						YAHOO.example.container.panelEditorAutoClasses.destroy();
-						YAHOO.example.container.panelEditorAutoClasses = null;
+						YAHOO.admin.container.panelEditorAutoClasses.destroy();
+						YAHOO.admin.container.panelEditorAutoClasses = null;
   					}
   					catch(e){core_handleFailure(o,o.responseText);core_carregando("desativa");}
   				},
@@ -780,11 +780,11 @@ function classesAuto(codigoMap,codigoLayer)
 		}
 		else
 		{
-			YAHOO.example.container.panelEditorAutoClasses.destroy();
-			YAHOO.example.container.panelEditorAutoClasses = null;
+			YAHOO.admin.container.panelEditorAutoClasses.destroy();
+			YAHOO.admin.container.panelEditorAutoClasses = null;
 		}
 	};
-	if(!YAHOO.example.container.panelEditorAutoClasses)
+	if(!YAHOO.admin.container.panelEditorAutoClasses)
 	{
 		var novoel = document.createElement("div");
 		novoel.id =  "janela_editor_auto";
@@ -799,8 +799,8 @@ function classesAuto(codigoMap,codigoLayer)
             { label: "Cancela", value: "CANCEL", checked: false }
         ]);
 		editorBotoes.on("checkedButtonChange", on_editorCheckBoxChange);
-		YAHOO.example.container.panelEditorAutoClasses = new YAHOO.widget.Panel("janela_editor_auto", { fixedcenter:true,close:true,width:"400px", height:"400px",overflow:"auto", visible:false,constraintoviewport:true } );
-		YAHOO.example.container.panelEditorAutoClasses.render();
+		YAHOO.admin.container.panelEditorAutoClasses = new YAHOO.widget.Panel("janela_editor_auto", { fixedcenter:true,close:true,width:"400px", height:"400px",overflow:"auto", visible:false,constraintoviewport:true } );
+		YAHOO.admin.container.panelEditorAutoClasses.render();
 		var sUrl = "../php/editormapfile.php?funcao=pegaItensLayer&codigoMap="+codigoMap+"&codigoLayer="+codigoLayer;
 		var callback =
 		{
@@ -827,7 +827,7 @@ function classesAuto(codigoMap,codigoLayer)
 		};
 		core_makeRequest(sUrl,callback);
 	}
-	YAHOO.example.container.panelEditorAutoClasses.show();
+	YAHOO.admin.container.panelEditorAutoClasses.show();
 }
 /*
 Function: adicionaNovoEstilo
@@ -1947,8 +1947,8 @@ function salvarDadosEditor(tipo,codigoMap,codigoLayer,indiceClasse,indiceEstilo,
   							if(d.name != codigoLayer)
   							{
   								core_pegaMapfiles("montaArvore()");
-								YAHOO.example.container.panelEditor.destroy();
-								YAHOO.example.container.panelEditor = null;
+								YAHOO.admin.container.panelEditor.destroy();
+								YAHOO.admin.container.panelEditor = null;
   							}
   						}
   						if(tipo=="classeGeral")
