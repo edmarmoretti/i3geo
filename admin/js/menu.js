@@ -51,12 +51,34 @@ Obt&eacute;m a lista de menus
 */
 function pegaMenus_M()
 {
+	dados_M = "";
 	core_carregando("ativa");
 	core_pegaDados("buscando menus...","../php/menutemas.php?funcao=pegaMenus","montaTabela_M");
 }
+function filtraDadosLetras_M(letra){
+	var i,temp,
+		n = dados_M.length,
+		novo = [];
+	if(letra == "Todos"){
+		novo = dados_M;
+	}
+	else{
+		for(i=0;i<n;i++){
+			temp = dados_M[i].nome_menu;
+			if(temp.charAt(0).toUpperCase() == letra.toUpperCase()){
+				novo.push(dados_M[i]);
+			}
+		}
+	}
+	montaTabela_M(novo);
+}
 function montaTabela_M(dados)
 {
-    YAHOO.example.InlineCellEditing = new function()
+    if(dados_M == ""){
+    	dados_M = dados;
+    }
+    core_listaDeLetras("letras_M","filtraDadosLetras_M");
+	YAHOO.example.InlineCellEditing = new function()
     {
         // Custom formatter for "address" column to preserve line breaks
         var formatTexto = function(elCell, oRecord, oColumn, oData)
@@ -129,7 +151,7 @@ function montaTabela_M(dados)
   					},
   					failure:core_handleFailure,
   					argument: { foo:"foo", bar:"bar" }
-				}; 
+				};
 				core_makeRequest(sUrl,callback);
 			}
 		});
@@ -154,14 +176,16 @@ function montaEditor_M(dados,id,recordid)
 		var ins = '<div class="hd">Editor</div>';
 		ins += "<div class='bd' style='height:354px;overflow:auto'>";
 		ins += "<div id='okcancel_checkbox2'></div><div id='editor_bd2'></div>";
+		ins += "<div id='letras_M'></div>";
 		novoel.innerHTML = ins;
+
 		document.body.appendChild(novoel);
 		var editorBotoes = new YAHOO.widget.ButtonGroup({id:"okcancel_checkbox_id2", name:  "okcancel_checkbox_id2", container:  "okcancel_checkbox2" });
 		editorBotoes.addButtons([
             { label: "Salva", value: "OK", checked: false},
             { label: "Cancela", value: "CANCEL", checked: false }
         ]);
-		editorBotoes.on("checkedButtonChange", on_editorCheckBoxChange);	
+		editorBotoes.on("checkedButtonChange", on_editorCheckBoxChange);
 		YAHOO.admin.container.panelEditor2 = new YAHOO.widget.Panel("janela_editor2", { fixedcenter:true,close:false,width:"400px", height:"480px",overflow:"auto", visible:false,constraintoviewport:true } );
 		YAHOO.admin.container.panelEditor2.render();
 	}
@@ -250,7 +274,7 @@ function gravaDados_M(id,recordid)
   		},
   		failure:core_handleFailure,
   		argument: { foo:"foo", bar:"bar" }
-	}; 
+	};
 	core_makeRequest(sUrl,callback);
 }
 function excluiLinha_M(id,row)

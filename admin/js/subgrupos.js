@@ -51,12 +51,34 @@ Obt&eacute;m a lista de subgrupos
 */
 function pegaSubGrupos_S()
 {
+	dados_S = "";
 	core_carregando("ativa");
 	core_pegaDados("buscando sub-grupos...","../php/menutemas.php?funcao=pegaSubGrupos","montaTabela_S");
 }
+function filtraDadosLetras_S(letra){
+	var i,temp,
+		n = dados_S.length,
+		novo = [];
+	if(letra == "Todos"){
+		novo = dados_S;
+	}
+	else{
+		for(i=0;i<n;i++){
+			temp = dados_S[i].nome_subgrupo;
+			if(temp.charAt(0).toUpperCase() == letra.toUpperCase()){
+				novo.push(dados_S[i]);
+			}
+		}
+	}
+	montaTabela_S(novo);
+}
 function montaTabela_S(dados)
 {
-    YAHOO.example.InlineCellEditing = new function()
+    if(dados_S == ""){
+    	dados_S = dados;
+    }
+    core_listaDeLetras("letras_S","filtraDadosLetras_S");
+	YAHOO.example.InlineCellEditing = new function()
     {
         // Custom formatter for "address" column to preserve line breaks
         var formatTexto = function(elCell, oRecord, oColumn, oData)
@@ -140,7 +162,7 @@ function montaTabela_S(dados)
             if(oArgs.editor.column.key === "active")
             {
                 this.saveCellEditor();
-                
+
             }
         });
         myDataTable.subscribe("editorBlurEvent", function(oArgs)
