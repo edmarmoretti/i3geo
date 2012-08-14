@@ -1460,6 +1460,35 @@ function core_ativaforms(lista){
 		$i(lista[i]).style.background = "white";
 	}
 }
+function core_listaDeLetras(onde,nomeFuncao){
+	//letraAtual guarda a última letra clicada
+	var o,i,ins= "",
+		letras = ["Todos","A","B","C","D","E","F","G","H","I","J","K","L","M","N","O","P","Q","R","S","T","U","V","X","Y","Z","_","1","2","3","4","5","6","7","8","9"],
+		nletras = letras.length;
+	if(!i3GEO.util){
+		alert("Erro i3GEO.util ???");
+		return;
+	}
+	letraAtual = "";
+	if(i3GEO.util.pegaCookie("I3GEOletraAdmin")) {
+		letraAtual = i3GEO.util.pegaCookie("I3GEOletraAdmin");
+	}
+	for (i = 0; i < nletras; i++) {
+		ins += "<span onclick='"+nomeFuncao+"(\""
+				+ letras[i]
+				+ "\")' style='color:blue;cursor:pointer;padding:1px;border: 1px solid #C8C8FA'>"
+				+ letras[i] + "</span>&nbsp;";
+	}
+	if(onde != ""){
+		o = document.getElementById(onde);
+		if(o){
+			o.innerHTML = ins;
+		}
+	}
+	else{
+		return ins;
+	}
+}
 //
 //carregador de javascript
 //
