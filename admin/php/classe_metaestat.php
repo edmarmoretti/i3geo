@@ -285,7 +285,7 @@ class Metaestat{
 		$rand = $this->nomeRandomico();
 		$arq = $this->dir_tmp."/".$rand.".map";
 		$dados[] = "MAP";
-		$dados[] = "SYMBOLSET ".$this->locaplic."/symbols/simbolosv6.sym";
+		$dados[] = 'SYMBOLSET "'.$this->locaplic.'/symbols/simbolosv6.sym"';
 		$dados[] = 'FONTSET   "'.$this->locaplic.'/symbols/fontes.txt"';
 		$dados[] = "LAYER";
 		$dados[] = '	NAME "'.$rand.'"';
@@ -346,7 +346,7 @@ class Metaestat{
 			$versao = $versao["principal"];
 			$f = "";
 			if (strtoupper(substr(PHP_OS, 0, 3) == 'WIN')){
-				$f = $locaplic."/aplicmap/geral1windowsv".$versao.".map";
+				$f = $this->locaplic."/aplicmap/geral1windowsv".$versao.".map";
 			}
 			else{
 				if($f == "" && file_exists('/var/www/i3geo/aplicmap/geral1debianv'.$versao.'.map')){

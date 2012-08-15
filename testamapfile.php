@@ -190,6 +190,7 @@ function verifica($map,$solegenda)
 		}
 		//echo $base;exit;
 		$mapa = ms_newMapObj($base);
+		
 		error_reporting(0);
 		$temasn = $mapa->getAllLayerNames();
 		foreach ($temasn as $teman)
@@ -210,6 +211,7 @@ function verifica($map,$solegenda)
 				}
 			}
 		}
+		
 		if(!stristr($tema, '.php') === FALSE){
 			echo "<br>Arquivo <i>$tema</i> &eacute; um programa PHP. O teste pode n&atilde;o funcionar.<br>";
 			include_once($locaplic."/".$tema);
@@ -221,8 +223,20 @@ function verifica($map,$solegenda)
 			eval($pegarext."(\$mapa);");
 		}
 		else{
-			if(file_exists($mapUrl))
-			{$nmapa = ms_newMapObj($mapUrl);}
+			if(file_exists($mapUrl)){
+				if(@ms_newMapObj($mapUrl))
+				{$nmapa = ms_newMapObj($mapUrl);}
+				else{
+					echo "Erro no arquivo $mapUrl <br>";
+					$error = ms_GetErrorObj();
+					while($error && $error->code != MS_NOERR)
+					{
+						printf("<br>Error in %s: %s<br>\n", $error->routine, $error->message);
+						$error = $error->next();
+					}
+					return;					
+				}
+			}
 			else{
 				if(@ms_newMapObj($locaplic."/".$tema))
 				{

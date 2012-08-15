@@ -767,6 +767,7 @@ switch (strtoupper($funcao))
 					'dirtmp' => $dir_tmp,
 					'barSize'=> 5000
 			);
+			
 			include (__DIR__."/../../pacotes/tme/TME_i3geo.php");
 		}
 		exit;
