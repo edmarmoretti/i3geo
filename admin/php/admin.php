@@ -39,6 +39,9 @@ if(!isset($locaplic))
 	$locaplic = "";
 	include(__DIR__."/../../ms_configura.php");
 }
+if(!file_exists($dir_tmp)){
+	@mkdir ($dir_tmp,0777);
+}
 include_once($locaplic."/classesphp/pega_variaveis.php");
 error_reporting(0);
 //

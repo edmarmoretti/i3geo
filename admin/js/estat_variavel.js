@@ -40,6 +40,7 @@ Inicializa o editor
 function initMenu(){
 	listaDadosAuxiliares();
 	ativaBotaoAdicionaVariavel("../php/metaestat.php?funcao=alteraVariavel","adiciona");
+	ativaBotaoRelatorioCompleto("../php/metaestat.php?funcao=relatorioCompleto","relatorioCompleto");
 	core_carregando("ativa");
 	core_ativaPainelAjuda("ajuda","botaoAjuda");
 	pegaVariaveis();
@@ -64,6 +65,27 @@ function ativaBotaoAdicionaVariavel(sUrl,idBotao){
 		core_makeRequest(sUrl,callback);
 	};
 	//cria o bot&atilde;o de adi&ccedil;&atilde;o de um novo menu
+	new YAHOO.widget.Button(idBotao,{ onclick: { fn: adiciona } });
+}
+function ativaBotaoRelatorioCompleto(sUrl,idBotao){
+	var adiciona = function(){
+		core_carregando("ativa");
+		core_carregando(" Aguarde");
+		var callback = {
+  			success:function(o){
+  				try	{
+  					core_carregando("desativa");
+  					var j = YAHOO.lang.JSON.parse(o.responseText);
+					core_montaEditor("","650px","500px","","Relat&oacute;rio");
+					$i("editor_bd").innerHTML = j;
+  				}
+  				catch(e){core_handleFailure(e,o.responseText);}
+  			},
+  			failure:core_handleFailure,
+  			argument: { foo:"foo", bar:"bar" }
+		};
+		core_makeRequest(sUrl,callback);
+	};
 	new YAHOO.widget.Button(idBotao,{ onclick: { fn: adiciona } });
 }
 /*

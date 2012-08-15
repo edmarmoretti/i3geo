@@ -1020,5 +1020,61 @@ class Metaestat{
 		$this->dbh = $dbhold;
 		return $res;
 	}
+	function relatorioCompleto(){
+		$dados = array();
+		$vs = $this->listaVariavel();
+		foreach($vs as $v){
+			$nivel1["id"] = $v["codigo_variavel"];
+			$nivel1["titulo"] = $v["nome"];
+			$nivel1["descricao"] = $v["descricao"];
+			$ms = $this->listaMedidaVariavel($v["codigo_variavel"]);
+			foreach($ms as $m){
+				$nivel2["id"] = $m["id_medida_variavel"];
+				$nivel2["titulo"] = $m["nomemedida"];
+				$unidade = $this->listaUnidadeMedida($m["codigo_unidade_medida"]);
+				$unidade = "Unidade de medida: ".$unidade["nome"];
+				$periodo = $this->listaTipoPeriodo($m["codigo_tipo_periodo"]);
+				$periodo = "Per&iacute;odo de tempo: ".$periodo["nome"];
+				$regiao = $this->listaTipoRegiao($m["codigo_tipo_regiao"]);
+				$regiao = "Regi&atilde;o: ".$regiao["nome_tipo_regiao"];
+				$nivel2["descricao"] = $unidade.", ".$periodo.", ".$regiao;
+				$nivel2["fontes"] = $this->listaFonteinfoMedida($m["id_medida_variavel"]);
+				$nivel2["links"] = $this->listaLinkMedida($m["id_medida_variavel"]);
+
+				$nivel1["filho"] = $nivel2;
+			}
+			$dados[] = $nivel1;
+		}
+		return $dados;
+	}
+	function formataRelatorioHtml($dados){
+		$html = "<div class='var_div_relatorio'>";
+		$var_cor = "var_cor1";
+		foreach($dados as $variavel){
+			$html .= "<div class='".$var_cor."'>";
+			$html .= "<h1>".$variavel["titulo"]."</h1>";
+			$html .= "<p><i>".$variavel["descricao"]."</i></p>";
+			$f = $variavel["filho"];
+			$html .= "<h2>".$f["titulo"]."</h2>";
+			$html .= "<p><i>".$f["descricao"]."</i></p>";
+			$html .= "<p><b>Fontes:</b></p>";
+			foreach($f["fontes"] as $fonte){
+				$html .= "<p><a href='".$fonte["link"]."' >".$fonte["titulo"]."</a></p>";
+			}
+			$html .= "<p><b>Links:</b></p>";
+			foreach($f["links"] as $link){
+				$html .= "<p><a href='".$link["link"]."' >".$link["nome"]."</a></p>";
+			}
+			$html .= "</div>";
+			if($var_cor == "var_cor1"){
+				$var_cor = "var_cor2";
+			}
+			else{
+				$var_cor = "var_cor1";
+			}
+		}
+		$html .= "</div>";
+		return $html;
+	}
 }
 ?>

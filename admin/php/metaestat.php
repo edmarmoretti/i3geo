@@ -740,7 +740,7 @@ switch (strtoupper($funcao))
 			//$_REQUEST["service"] = "icon";
 			include (__DIR__."/../../pacotes/kmlmapserver/classes/kmlserver.class.php");
 			$server = new KmlServer();
-		}else{
+		}else{//3d com tme
 			if(!isset($dir_tmp)){
 				include(__DIR__."/../../ms_configura.php");
 			}
@@ -764,7 +764,8 @@ switch (strtoupper($funcao))
 					'classification' => 'equal',
 					'mapTitle' => $r["titulolayer"],
 					'timeType' => "slider", //para mais de um ano, escolha slider ou series
-					'dirtmp' => $dir_tmp
+					'dirtmp' => $dir_tmp,
+					'barSize'=> 5000
 			);
 			include (__DIR__."/../../pacotes/tme/TME_i3geo.php");
 		}
@@ -888,6 +889,13 @@ switch (strtoupper($funcao))
 		if($formato == "json"){
 			retornaJSON($m->descreveColunasTabela($codigo_estat_conexao,$nome_esquema,$nome_tabela));
 		}
+		exit;
+	break;
+	case "RELATORIOCOMPLETO":
+		$m = new Metaestat();
+		$dados = $m->relatorioCompleto();
+		$dados = $m->formataRelatorioHtml($dados);
+		retornaJSON($dados);
 		exit;
 	break;
 }
