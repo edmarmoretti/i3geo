@@ -192,6 +192,16 @@ class Metaestat{
 			return "Error!: " . $e->getMessage();
 		}
 	}
+	function excluirFonteinfoMedida($id_medida_variavel,$id_fonteinfo)
+	{
+		try	{
+			$this->dbhw->query("DELETE from ".$this->esquemaadmin."i3geoestat_fonteinfo_medida WHERE id_medida_variavel = $id_medida_variavel and id_fonteinfo = $id_fonteinfo");
+			return "ok";
+		}
+		catch (PDOException $e)	{
+			return "Error!: " . $e->getMessage();
+		}
+	}
 	/*
 	 Function: sqlMedidaVariavel
 
@@ -509,6 +519,67 @@ class Metaestat{
 		}
 	}
 	/*
+	 Function: alteraLinkMedida
+
+	Altera um link
+
+	*/
+	function alteraLinkMedida($id_medida_variavel,$id_link="",$nome,$link){
+		try	{
+			if($id_link != ""){
+				if($this->convUTF){
+					$nome = utf8_encode($nome);
+				}
+				$this->dbhw->query("UPDATE ".$this->esquemaadmin."i3geoestat_medida_variavel_link SET nome='$nome',link='$link' WHERE id_link = $id_link");
+				$retorna = $id_link;
+			}
+			else{
+				$retorna = $this->insertId("i3geoestat_medida_variavel_link","link","id_link");
+				if($retorna){
+					$this->dbhw->query("UPDATE ".$this->esquemaadmin."i3geoestat_medida_variavel_link SET id_medida_variavel = $id_medida_variavel WHERE id_link = $retorna");
+				}
+			}
+			return $retorna;
+		}
+		catch (PDOException $e)	{
+			return "Error!: " . $e->getMessage();
+		}
+	}
+	/*
+	Function: alteraFonteinfo
+
+	Altera uma fonte
+
+	*/
+	function alteraFonteinfo($id_fonteinfo="",$titulo,$link){
+		try	{
+			if($id_fonteinfo != ""){
+				if($this->convUTF){
+					$titulo = utf8_encode($titulo);
+				}
+				$this->dbhw->query("UPDATE ".$this->esquemaadmin."i3geoestat_fonteinfo SET titulo='$titulo',link='$link' WHERE id_fonteinfo = $id_fonteinfo");
+				$retorna = $id_fonteinfo;
+			}
+			else{
+				$retorna = $this->insertId("i3geoestat_fonteinfo","link","id_fonteinfo");
+			}
+			return $retorna;
+		}
+		catch (PDOException $e)	{
+			return "Error!: " . $e->getMessage();
+		}
+	}
+	/*
+	Function: adicinaFonteinfoMedida
+
+	Adiciona um fonte a uma medida
+
+	*/
+	function adicinaFonteinfoMedida($id_medida_variavel,$id_fonteinfo){
+		//echo "INSERT INTO ".$this->esquemaadmin."i3geoestat_fonteinfo_medida (id_medida_variavel,id_fonteinfo) VALUES ('$id_medida_variavel','$id_fonteinfo')";exit;
+		$this->dbhw->query("INSERT INTO ".$this->esquemaadmin."i3geoestat_fonteinfo_medida (id_medida_variavel,id_fonteinfo) VALUES ('$id_medida_variavel','$id_fonteinfo')");
+	}
+	/*
 	 Function: alteraUnidadeMedida
 
 	Altera uma medida de uma variavel ou cria uma nova
@@ -699,6 +770,35 @@ class Metaestat{
 		return $this->execSQL($sql,$codigo_unidade_medida);
 	}
 	/*
+	 Function: listaFonteinfo
+
+	Lista as fontes cadastradas ou uma unica unidade
+
+	*/
+	function listaFonteinfo($id_fonteinfo=""){
+		$sql = "select * from ".$this->esquemaadmin."i3geoestat_fonteinfo ";
+		if($id_fonteinfo != ""){
+			$sql .= "WHERE id_fonteinfo = $id_fonteinfo ";
+		}
+		$sql .= "ORDER BY titulo";
+		return $this->execSQL($sql,$id_fonteinfo);
+	}
+	/*
+	 Function: listaFonteinfoMedida
+
+	Lista as fontes cadastradas ou uma unica unidade
+
+	*/
+	function listaFonteinfoMedida($id_medida_variavel){
+		$sql = "SELECT i3geoestat_fonteinfo.* ";
+		$sql .= "FROM ".$this->esquemaadmin."i3geoestat_fonteinfo ";
+		$sql .= "INNER JOIN ".$this->esquemaadmin."i3geoestat_fonteinfo_medida ";
+		$sql .= "ON i3geoestat_fonteinfo.id_fonteinfo = i3geoestat_fonteinfo_medida.id_fonteinfo ";
+		$sql .= "WHERE i3geoestat_fonteinfo_medida.id_medida_variavel = $id_medida_variavel ";
+		$sql .= "ORDER BY titulo";
+		return $this->execSQL($sql,$id_fonteinfo);
+	}
+	/*
 	 Function: listaVariavel
 
 	Lista as variaveis cadastradas ou uma unica variavel
@@ -716,7 +816,7 @@ class Metaestat{
 		return $this->execSQL($sql,$codigo_variavel);
 	}
 	/*
-	 Function: listaClassificacaoMedida
+	Function: listaClassificacaoMedida
 
 	Lista as classificacoes de uma medida de uma variavel
 
@@ -732,6 +832,24 @@ class Metaestat{
 			$sql = "SELECT * from ".$this->esquemaadmin."i3geoestat_classificacao WHERE id_classificacao = $id_classificacao";
 		}
 		return $this->execSQL($sql,$id_classificacao);
+	}
+	/*
+	 Function: listaLinkMedida
+
+	Lista os links de uma medida de uma variavel
+
+	Parametros:
+
+	$id_medida_variavel
+	*/
+	function listaLinkMedida($id_medida_variavel,$id_link=""){
+		if(!empty($id_medida_variavel)){
+			$sql = "SELECT * from ".$this->esquemaadmin."i3geoestat_medida_variavel_link WHERE id_medida_variavel = $id_medida_variavel";
+		}
+		if(!empty($id_link)){
+			$sql = "SELECT * from ".$this->esquemaadmin."i3geoestat_medida_variavel_link WHERE id_link = $id_link";
+		}
+		return $this->execSQL($sql,$id_link);
 	}
 	/*
 	 Function: listaClasseClassificacao

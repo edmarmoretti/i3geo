@@ -135,7 +135,7 @@ Mostra os nós de uma medida
 */
 function adicionaNosMedidas(no,dados,redesenha)
 {
-	var tempNode,tempNode1,tempNode2,i,conteudo,d,j;
+	var tempNode,tempNode1,tempNode2,tempNode3,tempNode4,tempNode5,i,conteudo,d,j;
 	function temaIconMode(){
 		var newVal = parseInt(this.value);
 		if (newVal != currentIconMode)
@@ -160,12 +160,50 @@ function adicionaNosMedidas(no,dados,redesenha)
         	};
         YAHOO.util.Connect.asyncRequest('GET', sUrl, callback);
     };
-    function loadNodeData1(node, fnLoadComplete){
+    function loadNodeDataClasses(node, fnLoadComplete){
     	var sUrl = "../php/metaestat.php?funcao=listaClassificacaoMedida&id_medida_variavel="+node.data.no_classificacao,
 			callback = {
 	            success: function(oResponse){
 	                var dados = YAHOO.lang.JSON.parse(oResponse.responseText);
 					adicionaNosClassificacao(node,dados,false);
+	                oResponse.argument.fnLoadComplete();
+	            },
+	            failure: function(oResponse){
+	                oResponse.argument.fnLoadComplete();
+	            },
+	            argument:{
+	                "node": node,
+	                "fnLoadComplete": fnLoadComplete
+	            },
+	            timeout: 25000
+        	};
+        YAHOO.util.Connect.asyncRequest('GET', sUrl, callback);
+    };
+    function loadNodeDataLinks(node, fnLoadComplete){
+    	var sUrl = "../php/metaestat.php?funcao=listaLinkMedida&id_medida_variavel="+node.data.no_link,
+			callback = {
+	            success: function(oResponse){
+	                var dados = YAHOO.lang.JSON.parse(oResponse.responseText);
+					adicionaNosLink(node,dados,false);
+	                oResponse.argument.fnLoadComplete();
+	            },
+	            failure: function(oResponse){
+	                oResponse.argument.fnLoadComplete();
+	            },
+	            argument:{
+	                "node": node,
+	                "fnLoadComplete": fnLoadComplete
+	            },
+	            timeout: 25000
+        	};
+        YAHOO.util.Connect.asyncRequest('GET', sUrl, callback);
+    };
+    function loadNodeDataFonteinfo(node, fnLoadComplete){
+    	var sUrl = "../php/metaestat.php?funcao=listaFonteinfoMedida&id_medida_variavel="+node.data.no_fonteinfo,
+			callback = {
+	            success: function(oResponse){
+	            	var dados = YAHOO.lang.JSON.parse(oResponse.responseText);
+					adicionaNosFonteinfo(node,dados,false);
 	                oResponse.argument.fnLoadComplete();
 	            },
 	            failure: function(oResponse){
@@ -213,7 +251,17 @@ function adicionaNosMedidas(no,dados,redesenha)
 		d = {html:conteudo,no_classificacao:dados[i].id_medida_variavel};
 		tempNode3 = new YAHOO.widget.HTMLNode(d, tempNode1, false,true);
 		tempNode3.isLeaf = false;
-		tempNode3.setDynamicLoad(loadNodeData1, 1);
+		tempNode3.setDynamicLoad(loadNodeDataClasses, 1);
+		conteudo = "&nbsp;Links";
+		d = {html:conteudo,no_link:dados[i].id_medida_variavel};
+		tempNode4 = new YAHOO.widget.HTMLNode(d, tempNode1, false,true);
+		tempNode4.isLeaf = false;
+		tempNode4.setDynamicLoad(loadNodeDataLinks, 1);
+		conteudo = "&nbsp;Fontes";
+		d = {html:conteudo,no_fonteinfo:dados[i].id_medida_variavel};
+		tempNode5 = new YAHOO.widget.HTMLNode(d, tempNode1, false,true);
+		tempNode5.isLeaf = false;
+		tempNode5.setDynamicLoad(loadNodeDataFonteinfo, 1);
 	}
 
 	if(redesenha){tree.draw();}
@@ -346,7 +394,77 @@ function adicionaNosClasses(no,dados,redesenha){
 	}
 	if(redesenha){tree.draw();}
 }
+/*
+Function: adicionaNosLink
 
+Mostra os nós de links
+*/
+function adicionaNosLink(no,dados,redesenha){
+	var tempNode,i,j,conteudo,d;
+	function temaIconMode()	{
+		var newVal = parseInt(this.value);
+		if (newVal != currentIconMode)
+		{currentIconMode = newVal;}
+	}
+    if(!redesenha)    {
+		tempNode = new YAHOO.widget.HTMLNode(
+				{
+					html:"<span style=\"cursor:pointer;\" onclick=\"adicionarLinkMedida('"+no.data.no_link+"')\" ><img style=\"position:relative;top:2px\" src=\"../imagens/05.png\" /><i>Adicionar novo link</i></span>"
+				},
+				no,
+				false,
+				true
+			);
+		tempNode.isLeaf = true;
+	}
+	for (i=0, j=dados.length; i<j; i++)	{
+		conteudo = "&nbsp;<img style=\"position:relative;cursor:pointer;top:0px\" onclick=\"excluir('linkMedida','"+dados[i].id_link+"')\" title=excluir width='10px' heigth='10px' src=\"../imagens/01.png\" />";
+		conteudo += "&nbsp;<img style=\"position:relative;cursor:pointer;top:2px\" onclick=\"editar('linkMedida','"+dados[i].id_link+"')\" title=editar src=\"../imagens/06.png\" /><b>";
+		if(dados[i].nome != "")
+		{conteudo += "&nbsp;<span><a href='"+dados[i].link+"' >"+dados[i].nome+"</a><span style=color:gray > - "+dados[i].link+" - id: "+dados[i].id_link+"</span></span>";}
+		else
+		{conteudo += "&nbsp;<span style=color:red >Edite para definir o novo link!!!</span>";}
+		d = {html:conteudo,id_link:dados[i].id_link,tipo:"link"};
+		tempNode = new YAHOO.widget.HTMLNode(d, no, false,true);
+		tempNode.isLeaf = true;
+	}
+	if(redesenha){tree.draw();}
+}
+/*
+Function: adicionaNosFonteinfo
+
+Mostra os nós de fontes
+*/
+function adicionaNosFonteinfo(no,dados,redesenha){
+	var tempNode,i,j,conteudo,d;
+	function temaIconMode()	{
+		var newVal = parseInt(this.value);
+		if (newVal != currentIconMode)
+		{currentIconMode = newVal;}
+	}
+    if(!redesenha)    {
+		tempNode = new YAHOO.widget.HTMLNode(
+				{
+					html:"<span style=\"cursor:pointer;\" onclick=\"editar('fonteinfo','"+no.data.no_fonteinfo+"')\" ><img style=\"position:relative;top:2px\" src=\"../imagens/05.png\" /><i>Adicionar nova fonte</i></span>"
+				},
+				no,
+				false,
+				true
+			);
+		tempNode.isLeaf = true;
+	}
+	for (i=0, j=dados.length; i<j; i++)	{
+		conteudo = "&nbsp;<img style=\"position:relative;cursor:pointer;top:0px\" onclick=\"excluir('fonteinfo','"+dados[i].id_fonteinfo+"')\" title=excluir width='10px' heigth='10px' src=\"../imagens/01.png\" />";
+		if(dados[i].titulo != "")
+		{conteudo += "&nbsp;<span><a href='"+dados[i].link+"' >"+dados[i].titulo+"</a><span style=color:gray > - "+dados[i].link+" - id: "+dados[i].id_fonteinfo+"</span></span>";}
+		else
+		{conteudo += "&nbsp;<span style=color:red >Edite para definir a nova fonte!!!</span>";}
+		d = {html:conteudo,id_medida_variavel_fonteinfo:no.data.no_fonteinfo,id_fonteinfo:dados[i].id_fonteinfo,tipo:"fonteinfo"};
+		tempNode = new YAHOO.widget.HTMLNode(d, no, false,true);
+		tempNode.isLeaf = true;
+	}
+	if(redesenha){tree.draw();}
+}
 function adicionaNosVariaveis(dados,redesenha){
 	var i,j,d,conteudo,
 		root = tree.getRoot();
@@ -450,6 +568,7 @@ function montaDivClassificacaoMedida(i){
 	ins += "<br><br><br>";
 	$i("editor_bd").innerHTML = ins;
 }
+
 function montaDivClasseClassificacao(i){
 	var ins = "",
 		param = {
@@ -469,6 +588,25 @@ function montaDivClasseClassificacao(i){
 		};
 	ins += core_geraLinhas(param);
 	ins += "<br><br><br>";
+	$i("editor_bd").innerHTML = ins;
+}
+function montaDivLinkMedida(i){
+	var ins = "",
+		param = {
+			"linhas":[
+		          {titulo:"Nome:",id:"Enome",size:"50",value:i.nome,tipo:"text",div:""},
+		          {titulo:"Link:",id:"Elink",size:"50",value:i.link,tipo:"text",div:""}
+			]
+		};
+	ins += core_geraLinhas(param);
+	ins += "<br><br><br>";
+	$i("editor_bd").innerHTML = ins;
+}
+function montaDivFonteinfo(dados){
+	ins = "<br><b>Escolha a Fonte:</b><br><br>";
+	ins += "<select style='width:400px;' id='Eid_fonteinfo' >";
+	ins += core_comboObjeto(dadosAuxiliares.fonteinfo,"id_fonteinfo","titulo");
+	ins += "</select>";
 	$i("editor_bd").innerHTML = ins;
 }
 /*
@@ -507,6 +645,34 @@ function adicionarDimensaoMedida(id_medida_variavel){
 				var dados = YAHOO.lang.JSON.parse(oResponse.responseText);
 				adicionaNosDimensao(no,[dados],true);
 				editar('dimensaoMedida',dados.id_dimensao_medida);
+			},
+	  		failure:core_handleFailure,
+	  		argument: { foo:"foo", bar:"bar" }
+		};
+	core_makeRequest(sUrl,callback);
+}
+function adicionarLinkMedida(id_medida_variavel){
+	var no = tree.getNodeByProperty("no_link",id_medida_variavel),
+		sUrl = "../php/metaestat.php?funcao=alteraLinkMedida&id_medida_variavel="+id_medida_variavel,
+		callback = 	{
+	    	success: function(oResponse){
+				var dados = YAHOO.lang.JSON.parse(oResponse.responseText);
+				adicionaNosLink(no,[dados],true);
+				editar('linkMedida',dados.id_link);
+			},
+	  		failure:core_handleFailure,
+	  		argument: { foo:"foo", bar:"bar" }
+		};
+	core_makeRequest(sUrl,callback);
+}
+function adicionarFonteinfoMedida(id_medida_variavel,id_fonteinfo){
+	var no = tree.getNodeByProperty("no_fonteinfo",id_medida_variavel),
+		sUrl = "../php/metaestat.php?funcao=alteraFonteinfo&id_medida_variavel="+id_medida_variavel,
+		callback = 	{
+	    	success: function(oResponse){
+				var dados = YAHOO.lang.JSON.parse(oResponse.responseText);
+				adicionaNosLink(no,[dados],true);
+				editar('fonteinfo',dados.id_fonteinfo);
 			},
 	  		failure:core_handleFailure,
 	  		argument: { foo:"foo", bar:"bar" }
@@ -568,31 +734,31 @@ function editar(tipo,id) {
 						dados = YAHOO.lang.JSON.parse(o.responseText);
 						core_montaEditor("gravaDados('variavel','"+id+"')","450px","200px","","Editor de vari&aacute;vel");
 						montaDivVariavel(dados);
-						//document.getElementById("Eid_variavel").style.width = "200px";
 					}
 					if(tipo == "medidaVariavel"){
 						dados = YAHOO.lang.JSON.parse(o.responseText);
 						core_montaEditor("gravaDados('medidaVariavel','"+id+"')","450px","200px","","Editor de medidas");
 						montaDivMedidaVariavel(dados);
-						//document.getElementById("Eid_variavel").style.width = "200px";
 					}
 					if(tipo == "dimensaoMedida"){
 						dados = YAHOO.lang.JSON.parse(o.responseText);
 						core_montaEditor("gravaDados('dimensaoMedida','"+id+"')","450px","200px","","Editor de dimens&oatilde;es");
 						montaDivDimensaoMedida(dados);
-						//document.getElementById("Eid_variavel").style.width = "200px";
 					}
 					if(tipo == "classificacaoMedida"){
 						dados = YAHOO.lang.JSON.parse(o.responseText);
 						core_montaEditor("gravaDados('classificacaoMedida','"+id+"')","450px","200px","","Editor de classifica&ccedil;&atilde;o");
 						montaDivClassificacaoMedida(dados);
-						//document.getElementById("Eid_variavel").style.width = "200px";
 					}
 					if(tipo == "classeClassificacao"){
 						dados = YAHOO.lang.JSON.parse(o.responseText);
 						core_montaEditor("gravaDados('classeClassificacao','"+id+"')","450px","200px","","Editor de classe");
 						montaDivClasseClassificacao(dados);
-						//document.getElementById("Eid_variavel").style.width = "200px";
+					}
+					if(tipo == "linkMedida"){
+						dados = YAHOO.lang.JSON.parse(o.responseText);
+						core_montaEditor("gravaDados('linkMedida','"+id+"')","450px","200px","","Editor de links");
+						montaDivLinkMedida(dados);
 					}
 					core_carregando("desativa");
 				}
@@ -616,6 +782,14 @@ function editar(tipo,id) {
 	if(tipo == "classeClassificacao"){
 		sUrl = "../php/metaestat.php?funcao=listaClasseClassificacao&id_classe="+id;
 	}
+	if(tipo == "linkMedida"){
+		sUrl = "../php/metaestat.php?funcao=listaLinkMedida&id_link="+id;
+	}
+	if(tipo == "fonteinfo"){
+		core_montaEditor("gravaDados('fonteinfo','"+id+"')","450px","200px","","Editor de fontes");
+		montaDivFonteinfo();
+		core_carregando("desativa");
+	}
 	if(sUrl){
 		core_makeRequest(sUrl,callback);
 	}
@@ -638,6 +812,7 @@ function sql(tipo,id) {
 						core_montaEditor("","480px","300px","","SQL");
 						ins = "<p><b>Select simples:</b> "+dados.sql;
 						ins += "<p><b>Mapserver:</b> "+dados.sqlmapserver;
+						ins += "<p><b>Última URL:</b><div id='ultimaUrl'></div> ";
 						ins += "<p><b>Colunas:</b> "+dados.colunas;
 						ins +="<p><input style='position:relative;top:2px' type='checkbox' id='incluirtodascolunas' />Incluir todas as colunas no resultado";
 						ins +="<p>Filtro opcional (exemplo: valor = 1)<br>";
@@ -660,54 +835,68 @@ function sql(tipo,id) {
 						$i("editor_bd").innerHTML = ins;
 						new YAHOO.widget.Button("sqljson");
 						document.getElementById("sqljson-button").onclick = function(){
-							var colunas = 0;
+							var u,colunas = 0;
 							if($i("incluirtodascolunas").checked === true){
 								colunas = 1;
 							}
-							window.open('../php/metaestat.php?funcao=dadosMedidaVariavel&formato=json&id_medida_variavel='+id+"&filtro="+$i("filtrosql").value+"&todasascolunas="+colunas+"&agruparpor="+$i("agruparsql").value);
+							u = i3GEO.configura.locaplic+'/admin/php/metaestat.php?funcao=dadosMedidaVariavel&formato=json&id_medida_variavel='+id+"&filtro="+$i("filtrosql").value+"&todasascolunas="+colunas+"&agruparpor="+$i("agruparsql").value;
+							$i("ultimaUrl").innerHTML = u;
+							window.open(u);
 						};
 						new YAHOO.widget.Button("sumarioestat");
 						$i("sumarioestat-button").onclick = function(){
-							window.open('../php/metaestat.php?funcao=sumarioMedidaVariavel&formato=json&id_medida_variavel='+id+"&agruparpor="+$i("agruparsql").value+"&filtro="+$i("filtrosql").value);
+							var u = i3GEO.configura.locaplic+'/admin/php/metaestat.php?funcao=sumarioMedidaVariavel&formato=json&id_medida_variavel='+id+"&agruparpor="+$i("agruparsql").value+"&filtro="+$i("filtrosql").value;
+							$i("ultimaUrl").innerHTML = u;
+							window.open(u);
 						};
 						new YAHOO.widget.Button("mapfileestat");
 						$i("mapfileestat-button").onclick = function(){
-							var colunas = 0;
+							var u,colunas = 0;
 							if($i("incluirtodascolunas").checked === true){
 								colunas = 1;
 							}
-							window.open('../php/metaestat.php?funcao=mapfileMedidaVariavel&formato=json&id_medida_variavel='+id+"&filtro="+$i("filtrosql").value+"&todasascolunas="+colunas+"&tipolayer="+$i("tipolayer").value+"&id_classificacao="+$i("classificacao").value+"&agruparpor="+$i("agruparsql").value);
+							u = i3GEO.configura.locaplic+'/admin/php/metaestat.php?funcao=mapfileMedidaVariavel&formato=json&id_medida_variavel='+id+"&filtro="+$i("filtrosql").value+"&todasascolunas="+colunas+"&tipolayer="+$i("tipolayer").value+"&id_classificacao="+$i("classificacao").value+"&agruparpor="+$i("agruparsql").value;
+							$i("ultimaUrl").innerHTML = u;
+							window.open(u);
 						};
 						new YAHOO.widget.Button("kmzestat");
 						$i("kmzestat-button").onclick = function(){
-							var colunas = 0;
+							var u,colunas = 0;
 							if($i("incluirtodascolunas").checked === true){
 								colunas = 1;
 							}
-							window.open('../php/metaestat.php?funcao=kmlmedidavariavel&id_medida_variavel='+id+"&filtro="+$i("filtrosql").value+"&todasascolunas="+colunas+"&tipolayer="+$i("tipolayer").value+"&id_classificacao="+$i("classificacao").value+"&agruparpor="+$i("agruparsql").value+"&formato=kmz");
+							u = i3GEO.configura.locaplic+'/admin/php/metaestat.php?funcao=kmlmedidavariavel&id_medida_variavel='+id+"&filtro="+$i("filtrosql").value+"&todasascolunas="+colunas+"&tipolayer="+$i("tipolayer").value+"&id_classificacao="+$i("classificacao").value+"&agruparpor="+$i("agruparsql").value+"&formato=kmz";
+							$i("ultimaUrl").innerHTML = u;
+							window.open(u);
 						};
 						new YAHOO.widget.Button("kmlestat");
 						$i("kmlestat-button").onclick = function(){
-							var colunas = 0;
+							var u,colunas = 0;
 							if($i("incluirtodascolunas").checked === true){
 								colunas = 1;
 							}
-							window.open('../php/metaestat.php?funcao=kmlmedidavariavel&id_medida_variavel='+id+"&filtro="+$i("filtrosql").value+"&todasascolunas="+colunas+"&tipolayer="+$i("tipolayer").value+"&id_classificacao="+$i("classificacao").value+"&agruparpor="+$i("agruparsql").value+"&formato=kml");
+							u = i3GEO.configura.locaplic+'/admin/php/metaestat.php?funcao=kmlmedidavariavel&id_medida_variavel='+id+"&filtro="+$i("filtrosql").value+"&todasascolunas="+colunas+"&tipolayer="+$i("tipolayer").value+"&id_classificacao="+$i("classificacao").value+"&agruparpor="+$i("agruparsql").value+"&formato=kml";
+							$i("ultimaUrl").innerHTML = u;
+							window.open(u);
 						};
 						new YAHOO.widget.Button("kml3destat");
 						$i("kml3destat-button").onclick = function(){
-							var colunas = 0;
+							var u,colunas = 0;
 							if($i("incluirtodascolunas").checked === true){
 								colunas = 1;
 							}
-							window.open('../php/metaestat.php?funcao=kmlmedidavariavel&id_medida_variavel='+id+"&filtro="+$i("filtrosql").value+"&todasascolunas="+colunas+"&tipolayer="+$i("tipolayer").value+"&id_classificacao="+$i("classificacao").value+"&agruparpor="+$i("agruparsql").value+"&formato=kml3d");
+							u = i3GEO.configura.locaplic+'/admin/php/metaestat.php?funcao=kmlmedidavariavel&id_medida_variavel='+id+"&filtro="+$i("filtrosql").value+"&todasascolunas="+colunas+"&tipolayer="+$i("tipolayer").value+"&id_classificacao="+$i("classificacao").value+"&agruparpor="+$i("agruparsql").value+"&formato=kml3d";
+							$i("ultimaUrl").innerHTML = u;
+							window.open(u);
 						};
 						new YAHOO.widget.Button("i3geoestat");
 						$i("i3geoestat-button").onclick = function(){
-							var sUrl,callback = 	{
+							var u,sUrl,callback = 	{
 							    	success: function(oResponse){
 										var dados = YAHOO.lang.JSON.parse(oResponse.responseText);
-										window.open("../../ms_criamapa.php?temasa="+dados.mapfile+"&layers="+dados.layer);
+										u = i3GEO.configura.locaplic+"/ms_criamapa.php?temasa="+dados.mapfile+"&layers="+dados.layer;
+										$i("ultimaUrl").innerHTML = u;
+										window.open(u);
 										core_carregando("desativa");
 									},
 							  		failure:core_handleFailure,
@@ -717,7 +906,7 @@ function sql(tipo,id) {
 							if($i("incluirtodascolunas").checked === true){
 								colunas = 1;
 							}
-							sUrl = '../php/metaestat.php?funcao=mapfileMedidaVariavel&formato=json&id_medida_variavel='+id+"&filtro="+$i("filtrosql").value+"&todasascolunas="+colunas+"&tipolayer="+$i("tipolayer").value+"&id_classificacao="+$i("classificacao").value+"&agruparpor="+$i("agruparsql").value;
+							sUrl = i3GEO.configura.locaplic+'/admin/php/metaestat.php?funcao=mapfileMedidaVariavel&formato=json&id_medida_variavel='+id+"&filtro="+$i("filtrosql").value+"&todasascolunas="+colunas+"&tipolayer="+$i("tipolayer").value+"&id_classificacao="+$i("classificacao").value+"&agruparpor="+$i("agruparsql").value;
 							core_carregando("ativa");
 							core_makeRequest(sUrl,callback);
 						};
@@ -847,6 +1036,14 @@ function excluir(tipo,id){
 		no = tree.getNodeByProperty("id_classe",id);
 		sUrl = "../php/metaestat.php?funcao=excluirClasseClassificacao&id_classe="+id;
 	}
+	if(tipo == "linkMedida")	{
+		no = tree.getNodeByProperty("id_link",id);
+		sUrl = "../php/metaestat.php?funcao=excluirLinkMedida&id_link="+id;
+	}
+	if(tipo == "fonteinfo")	{
+		no = tree.getNodeByProperty("id_fonteinfo",id);
+		sUrl = "../php/metaestat.php?funcao=excluirFonteinfoMedida&id_fonteinfo="+id+"&id_medida_variavel="+no.data.id_medida_variavel_fonteinfo;
+	}
 	if(sUrl)
 	{core_excluiNoTree(sUrl,no,mensagem);}
 }
@@ -890,7 +1087,16 @@ function gravaDados(tipo,id){
 		par = "&id_classe="+id;
 		prog = "../php/metaestat.php?funcao=alteraClasseClassificacao";
 	}
-
+	if(tipo == "linkMedida"){
+		campos = new Array("nome","link");
+		par = "&id_link="+id;
+		prog = "../php/metaestat.php?funcao=alteraLinkMedida";
+	}
+	if(tipo == "fonteinfo"){
+		campos = new Array("id_fonteinfo");
+		par = "&id_medida_variavel="+id;
+		prog = "../php/metaestat.php?funcao=adicionaFonteinfoMedida";
+	}
 	for (i=0;i<campos.length;i++)
 	{par += "&"+campos[i]+"="+($i("E"+campos[i]).value);}
 
@@ -932,6 +1138,19 @@ function gravaDados(tipo,id){
   						no.getContentEl().getElementsByTagName("span")[0].innerHTML = "<b>"+document.getElementById("Etitulo").value+"</b><span style=color:gray > id: "+id+"</span>";
 						no.getContentEl().getElementsByTagName("span")[0].style.color = "";
   						no.html = no.getContentEl().innerHTML;
+  					}
+  					if(tipo == "linkMedida"){
+  						no = tree.getNodeByProperty("id_link",id);
+  						no.getContentEl().getElementsByTagName("span")[0].innerHTML = "<a href='"+document.getElementById("Elink").value+"' >"+document.getElementById("Enome").value+"</a><span style=color:gray > - "+document.getElementById("Elink").value+" - id: "+id+"</span>";
+						no.getContentEl().getElementsByTagName("span")[0].style.color = "";
+  						no.html = no.getContentEl().innerHTML;
+  					}
+  					if(tipo == "fonteinfo"){
+  						no = tree.getNodeByProperty("no_fonteinfo",id);
+  						adicionaNosFonteinfo(no,[YAHOO.lang.JSON.parse(o.responseText)],true);
+  						//no.getContentEl().getElementsByTagName("span")[0].innerHTML = "<a href='"+document.getElementById("Elink").value+"' >"+document.getElementById("Etitulo").value+"</a><span style=color:gray > - "+document.getElementById("Elink").value+" - id: "+id+"</span>";
+						//no.getContentEl().getElementsByTagName("span")[0].style.color = "";
+  						//no.html = no.getContentEl().innerHTML;
   					}
   					core_carregando("desativa");
   				}

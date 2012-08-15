@@ -73,9 +73,10 @@ function cabecalhoMetaestat(id,excluir){
 			{id:"principal",titulo:"In&iacute;cio",link:"../index.html"},
 			{id:"arvore",titulo:"&Aacute;rvore completa",link:"estat_variavel.html"},
 			{id:"unidade_medida",titulo:"Unidades de medida",link:"estat_unidade_medida.html"},
-			{id:"periodo_tempo",titulo:"Per&iacute;odos de tempo",link:"estat_tipo_periodo.html"},
+			{id:"periodo_tempo",titulo:"Per&iacute;odos",link:"estat_tipo_periodo.html"},
 			{id:"conexao",titulo:"Conex&otilde;es",link:"estat_conexao.html"},
 			{id:"tipo_regiao",titulo:"Regi&otilde;es",link:"estat_tipo_regiao.html"},
+			{id:"fonteinfo",titulo:"Fonte",link:"estat_fonteinfo.html"},
 			{id:"login",titulo:"Login",js:"i3GEO.login.dialogo.abreLogin()"}
 		];
 	n = botoes.length;

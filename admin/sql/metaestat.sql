@@ -4,9 +4,12 @@
 drop table i3geoestat_classes;
 drop table i3geoestat_classificacao;
 drop table i3geoestat_dimensao_medida;
+drop table i3geoestat_fonteinfo_medida;
+drop table i3geoestat_medida_variavel_link;
 drop table i3geoestat_medida_variavel;
 drop table i3geoestat_tipo_regiao;
 drop table i3geoestat_conexao;
+drop table i3geoestat_fonteinfo;
 drop table i3geoestat_tipo_periodo;
 drop table i3geoestat_unidade_medida;
 drop table i3geoestat_variavel;
@@ -15,15 +18,6 @@ drop table i3geoestat_variavel;
 
 
 /* create tables */
-
--- tabela com o nome e descrição de uma variável variável
-create table i3geoestat_variavel
-(
-	codigo_variavel integer not null unique primary key autoincrement,
-	nome text,
-	descricao text
-);
-
 
 -- lista controlada dos parâmetros de conexão com o banco de dados onde residem dados
 create table i3geoestat_conexao
@@ -39,27 +33,6 @@ create table i3geoestat_conexao
 	usuario text,
 	-- senha do usuário que pode acessar o banco
 	senha text
-);
-
-
-create table i3geoestat_unidade_medida
-(
-	codigo_unidade_medida integer not null unique primary key autoincrement,
-	nome text,
-	sigla text,
-	-- o tipo de unidade permite que os valores sejam somados? (0 ou 1)
-	permitesoma integer default 0,
-	-- o tipo de unidade permite o cálculo de média aritmética? (0 ou 1)
-	permitemedia integer default 0
-);
-
-
--- lista controlada de tipos de período de tempo
-create table i3geoestat_tipo_periodo
-(
-	codigo_tipo_periodo integer not null unique primary key autoincrement,
-	nome text,
-	descricao text
 );
 
 
@@ -91,6 +64,36 @@ create table i3geoestat_tipo_regiao
 );
 
 
+create table i3geoestat_unidade_medida
+(
+	codigo_unidade_medida integer not null unique primary key autoincrement,
+	nome text,
+	sigla text,
+	-- o tipo de unidade permite que os valores sejam somados? (0 ou 1)
+	permitesoma integer default 0,
+	-- o tipo de unidade permite o cálculo de média aritmética? (0 ou 1)
+	permitemedia integer default 0
+);
+
+
+-- tabela com o nome e descrição de uma variável variável
+create table i3geoestat_variavel
+(
+	codigo_variavel integer not null unique primary key autoincrement,
+	nome text,
+	descricao text
+);
+
+
+-- lista controlada de tipos de período de tempo
+create table i3geoestat_tipo_periodo
+(
+	codigo_tipo_periodo integer not null unique primary key autoincrement,
+	nome text,
+	descricao text
+);
+
+
 -- descreve as colunas que contém valores de algum tipo de medida, por exemplo população residente
 create table i3geoestat_medida_variavel
 (
@@ -112,16 +115,16 @@ create table i3geoestat_medida_variavel
 	filtro text,
 	-- titulo da medida
 	nomemedida text,
+	foreign key (codigo_tipo_regiao)
+	references i3geoestat_tipo_regiao (codigo_tipo_regiao),
+	foreign key (codigo_unidade_medida)
+	references i3geoestat_unidade_medida (codigo_unidade_medida),
 	foreign key (codigo_variavel)
 	references i3geoestat_variavel (codigo_variavel),
 	foreign key (codigo_estat_conexao)
 	references i3geoestat_conexao (codigo_estat_conexao),
-	foreign key (codigo_unidade_medida)
-	references i3geoestat_unidade_medida (codigo_unidade_medida),
 	foreign key (codigo_tipo_periodo)
-	references i3geoestat_tipo_periodo (codigo_tipo_periodo),
-	foreign key (codigo_tipo_regiao)
-	references i3geoestat_tipo_regiao (codigo_tipo_regiao)
+	references i3geoestat_tipo_periodo (codigo_tipo_periodo)
 );
 
 
@@ -179,6 +182,37 @@ create table i3geoestat_dimensao_medida
 	-- (0 ou 1) indica se a coluna de valores da variável deve ser agregada ou não (soma dos valores ou média) conforme o tipo de unidade de medida
 	agregavalores integer default 0,
 	id_medida_variavel integer,
+	foreign key (id_medida_variavel)
+	references i3geoestat_medida_variavel (id_medida_variavel)
+);
+
+
+create table i3geoestat_fonteinfo
+(
+	id_fonteinfo integer not null unique primary key autoincrement,
+	-- título completo da fonte, devendo conter o ano quando for o caso
+	titulo text unique,
+	link text
+);
+
+
+create table i3geoestat_fonteinfo_medida
+(
+	id_medida_variavel integer not null,
+	id_fonteinfo integer not null,
+	foreign key (id_medida_variavel)
+	references i3geoestat_medida_variavel (id_medida_variavel),
+	foreign key (id_fonteinfo)
+	references i3geoestat_fonteinfo (id_fonteinfo)
+);
+
+
+create table i3geoestat_medida_variavel_link
+(
+	link text,
+	id_medida_variavel integer,
+	nome text,
+	id_link integer not null unique primary key autoincrement,
 	foreign key (id_medida_variavel)
 	references i3geoestat_medida_variavel (id_medida_variavel)
 );

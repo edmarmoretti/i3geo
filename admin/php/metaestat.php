@@ -104,6 +104,11 @@ switch (strtoupper($funcao))
 		retornaJSON($m->listaClassificacaoMedida($id_medida_variavel,$id_classificacao));
 		exit;
 	break;
+	case "LISTALINKMEDIDA":
+		$m = new Metaestat();
+		retornaJSON($m->listaLinkMedida($id_medida_variavel,$id_link));
+		exit;
+	break;
 	/*
 	 Valor: LISTACLASSECLASSIFICACAO
 
@@ -158,6 +163,16 @@ switch (strtoupper($funcao))
 	case "LISTAUNIDADEMEDIDA":
 		$m = new Metaestat();
 		retornaJSON($m->listaUnidadeMedida($codigo_unidade_medida));
+		exit;
+	break;
+	case "LISTAFONTEINFO":
+		$m = new Metaestat();
+		retornaJSON($m->listaFonteinfo($id_fonteinfo));
+		exit;
+	break;
+	case "LISTAFONTEINFOMEDIDA":
+		$m = new Metaestat();
+		retornaJSON($m->listaFonteinfoMedida($id_medida_variavel));
 		exit;
 	break;
 	/*
@@ -286,6 +301,34 @@ switch (strtoupper($funcao))
 			$m->alteraClasseClassificacao("",$id_classe,$titulo,$expressao,$vermelho,$verde,$azul,$tamanho,$simbolo,$overmelho,$overde,$oazul,$otamanho);
 		}
 		retornaJSON($m->listaClasseClassificacao($id_classificacao,$id_classe));
+		exit;
+	break;
+	case "ALTERALINKMEDIDA":
+		$m = new Metaestat();
+		if(empty($id_link)){
+			$id_link = $m->alteraLinkMedida($id_medida_variavel);
+		}
+		else{
+			$m->alteraLinkMedida("",$id_link,$nome,$link);
+		}
+		retornaJSON($m->listaLinkMedida($id_medida_variavel,$id_link));
+		exit;
+	break;
+	case "ALTERARFONTEINFO":
+		$m = new Metaestat();
+		if(empty($id_fonteinfo)){
+			$id_fonteinfo = $m->alteraFonteinfo();
+		}
+		else{
+			$m->alteraFonteinfo($id_fonteinfo,$titulo,$link);
+		}
+		retornaJSON($m->listaFonteinfo($id_fonteinfo));
+		exit;
+	break;
+	case "ADICIONAFONTEINFOMEDIDA":
+		$m = new Metaestat();
+		$m->adicinaFonteinfoMedida($id_medida_variavel,$id_fonteinfo);
+		retornaJSON($m->listaFonteInfo($id_fonteinfo));
 		exit;
 	break;
 	/*
@@ -440,8 +483,26 @@ switch (strtoupper($funcao))
 			retornaJSON("erro");
 		exit;
 	break;
+	case "EXCLUIRFONTEINFO":
+		$tabela = "i3geoestat_fonteinfo";
+		$id = $id_fonteinfo;
+		$f = verificaFilhos();
+
+		if(!$f){
+			$m = new Metaestat();
+			retornaJSON($m->excluirRegistro("i3geoestat_fonteinfo","id_fonteinfo",$id));
+		}
+		else
+			retornaJSON("erro");
+		exit;
+	break;
+	case "EXCLUIRFONTEINFOMEDIDA":
+		$m = new Metaestat();
+		retornaJSON($m->excluirFonteinfoMedida($id_medida_variavel,$id_fonteinfo));
+		exit;
+	break;
 	/*
-	 Valor: EXCLUIRCONEXAO
+	Valor: EXCLUIRCONEXAO
 
 	Exclui uma conexao
 
@@ -568,7 +629,12 @@ switch (strtoupper($funcao))
 		$m = new Metaestat();
 		retornaJSON($m->excluirRegistro("i3geoestat_classes","id_classe",$id_classe));
 		exit;
-		break;
+	break;
+	case "EXCLUIRLINKMEDIDA":
+		$m = new Metaestat();
+		retornaJSON($m->excluirRegistro("i3geoestat_medida_variavel_link","id_link",$id_link));
+		exit;
+	break;
 	/*
 	Valor: LISTADADOSTABELASAUXILIARES
 
@@ -585,6 +651,7 @@ switch (strtoupper($funcao))
 		$resultado["unidade_medida"] = $m->listaUnidadeMedida();
 		$resultado["tipo_regiao"] = $m->listaTipoRegiao();
 		$resultado["conexao"] = $m->listaConexao();
+		$resultado["fonteinfo"] = $m->listaFonteinfo();
 		retornaJSON($resultado);
 	break;
 	/*

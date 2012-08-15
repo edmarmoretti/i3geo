@@ -38,3 +38,15 @@ INSERT INTO i3geoestat_classes (id_classe, expressao, titulo, vermelho, verde, a
 INSERT INTO i3geoestat_classes (id_classe, expressao, titulo, vermelho, verde, azul, id_classificacao, tamanho, simbolo, overmelho, overde, oazul, otamanho) VALUES ('3', '([nu_farm_funcionando] > 1)', 'Mais de uma', '0', '0', '255', '1', '', '', '', '', '', '');
 
 
+-- i3geoestat_medida_variavel_link
+INSERT INTO i3geoestat_medida_variavel_link (link, id_medida_variavel, nome, id_link) VALUES ('http://portal.saude.gov.br/portal/saude/area.cfm?id_area=1095', '1', 'Site das Fármacias Populares', '1');
+
+
+-- i3geoestat_fontinfo_medida
+INSERT INTO i3geoestat_fonteinfo_medida (id_medida_variavel, id_fonteinfo) VALUES ('1', '1');
+
+
+-- i3geoestat_fonteinfo
+INSERT INTO i3geoestat_fonteinfo (id_fonteinfo, titulo, link) VALUES ('1', 'Ministério da Saúde', 'http://saude.gov.br');
+
+

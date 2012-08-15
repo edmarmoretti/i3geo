@@ -243,6 +243,12 @@ function verificaFilhos()
 			if(count($r) > 0)
 				$res = true;
 		}
+		if($tabela == "i3geoestat_fonteinfo")
+		{
+			$r = pegaDados("select * from ".$esquemaadmin."i3geoestat_fonteinfo_medida where id_fonteinfo=$id");
+			if(count($r) > 0)
+				$res = true;
+		}
 		if($tabela == "i3geoestat_variavel")
 		{
 			$r = pegaDados("select * from ".$esquemaadmin."i3geoestat_medida_variavel where codigo_variavel=$id");
