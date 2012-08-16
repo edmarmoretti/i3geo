@@ -164,11 +164,11 @@ function adicionaNosMedidas(no,dados,redesenha)
 		{currentIconMode = newVal;}
 	}
     function loadNodeData(node, fnLoadComplete){
-    	var sUrl = "../php/metaestat.php?funcao=listaDimensao&id_medida_variavel="+node.data.no_dimensoes,
+    	var sUrl = "../php/metaestat.php?funcao=listaParametro&id_medida_variavel="+node.data.no_parametros,
 			callback = {
 	            success: function(oResponse){
 	                var dados = YAHOO.lang.JSON.parse(oResponse.responseText);
-					adicionaNosDimensao(node,dados,false);
+					adicionaNosParametro(node,dados,false);
 	                oResponse.argument.fnLoadComplete();
 	            },
 	            failure: function(oResponse){
@@ -264,8 +264,8 @@ function adicionaNosMedidas(no,dados,redesenha)
 		tempNode1 = new YAHOO.widget.HTMLNode(d, no, false,true);
 		tempNode1.isLeaf = false;
 		//tempNode1.setDynamicLoad(temp, 1);
-		conteudo = "&nbsp;Dimens&otilde;es";
-		d = {html:conteudo,no_dimensoes:dados[i].id_medida_variavel};
+		conteudo = "&nbsp;Par&acirc;metros";
+		d = {html:conteudo,no_parametros:dados[i].id_medida_variavel};
 		tempNode2 = new YAHOO.widget.HTMLNode(d, tempNode1, false,true);
 		tempNode2.isLeaf = false;
 		tempNode2.setDynamicLoad(loadNodeData, 1);
@@ -289,11 +289,11 @@ function adicionaNosMedidas(no,dados,redesenha)
 	if(redesenha){tree.draw();}
 }
 /*
-Function: adicionaNosDimensao
+Function: adicionaNosParametro
 
-Mostra os nós de uma dimensao
+Mostra os nós de uma parametro
 */
-function adicionaNosDimensao(no,dados,redesenha){
+function adicionaNosParametro(no,dados,redesenha){
 	var tempNode,i,j,conteudo,d;
 	function temaIconMode()	{
 		var newVal = parseInt(this.value);
@@ -303,7 +303,7 @@ function adicionaNosDimensao(no,dados,redesenha){
     if(!redesenha)    {
 		tempNode = new YAHOO.widget.HTMLNode(
 				{
-					html:"<span style=\"cursor:pointer;\" onclick=\"adicionarDimensaoMedida('"+no.data.no_dimensoes+"')\" ><img style=\"position:relative;top:2px\" src=\"../imagens/05.png\" /><i>Adicionar nova dimens&atilde;o</i></span>"
+					html:"<span style=\"cursor:pointer;\" onclick=\"adicionarParametroMedida('"+no.data.no_parametros+"')\" ><img style=\"position:relative;top:2px\" src=\"../imagens/05.png\" /><i>Adicionar novo par&acirc;metro</i></span>"
 				},
 				no,
 				false,
@@ -312,13 +312,13 @@ function adicionaNosDimensao(no,dados,redesenha){
 		tempNode.isLeaf = true;
 	}
 	for (i=0, j=dados.length; i<j; i++)	{
-		conteudo = "&nbsp;<img style=\"position:relative;cursor:pointer;top:0px\" onclick=\"excluir('dimensaoMedida','"+dados[i].id_dimensao_medida+"')\" title=excluir width='10px' heigth='10px' src=\"../imagens/01.png\" />";
-		conteudo += "&nbsp;<img style=\"position:relative;cursor:pointer;top:2px\" onclick=\"editar('dimensaoMedida','"+dados[i].id_dimensao_medida+"')\" title=editar src=\"../imagens/06.png\" /><b>";
-		if(dados[i].nomedimensao != "")
-		{conteudo += "&nbsp;<span><b>"+dados[i].nomedimensao+"</b><span style=color:gray > - "+dados[i].descricao+" id: "+dados[i].id_dimensao_medida+"</span></span>";}
+		conteudo = "&nbsp;<img style=\"position:relative;cursor:pointer;top:0px\" onclick=\"excluir('parametroMedida','"+dados[i].id_parametro_medida+"')\" title=excluir width='10px' heigth='10px' src=\"../imagens/01.png\" />";
+		conteudo += "&nbsp;<img style=\"position:relative;cursor:pointer;top:2px\" onclick=\"editar('parametroMedida','"+dados[i].id_parametro_medida+"')\" title=editar src=\"../imagens/06.png\" /><b>";
+		if(dados[i].nome != "")
+		{conteudo += "&nbsp;<span><b>"+dados[i].nome+"</b><span style=color:gray > - "+dados[i].descricao+" id: "+dados[i].id_parametro_medida+"</span></span>";}
 		else
 		{conteudo += "&nbsp;<span style=color:red >Edite para definir a nova medida!!!</span>";}
-		d = {html:conteudo,id_dimensao_medida:dados[i].id_dimensao_medida,tipo:"dimensao"};
+		d = {html:conteudo,id_parametro_medida:dados[i].id_parametro_medida,tipo:"parametro"};
 		tempNode = new YAHOO.widget.HTMLNode(d, no, false,true);
 		tempNode.isLeaf = true;
 	}
@@ -327,7 +327,7 @@ function adicionaNosDimensao(no,dados,redesenha){
 /*
 Function: adicionaNosClassificacao
 
-Mostra os nós de uma dimensao
+Mostra os nós de um parametro
 */
 function adicionaNosClassificacao(no,dados,redesenha){
 	var tempNode,i,j,conteudo,d;
@@ -369,7 +369,7 @@ function adicionaNosClassificacao(no,dados,redesenha){
 	for (i=0, j=dados.length; i<j; i++)	{
 		conteudo = "&nbsp;<img style=\"position:relative;cursor:pointer;top:0px\" onclick=\"excluir('classificacaoMedida','"+dados[i].id_classificacao+"')\" title=excluir width='10px' heigth='10px' src=\"../imagens/01.png\" />";
 		conteudo += "&nbsp;<img style=\"position:relative;cursor:pointer;top:2px\" onclick=\"editar('classificacaoMedida','"+dados[i].id_classificacao+"')\" title=editar src=\"../imagens/06.png\" /><b>";
-		if(dados[i].nomedimensao != "")
+		if(dados[i].nome != "")
 		{conteudo += "&nbsp;<span><b>"+dados[i].nome+"</b><span style=color:gray > Obs.: "+dados[i].observacao+" id: "+dados[i].id_classificacao+"</span></span>";}
 		else
 		{conteudo += "&nbsp;<span style=color:red >Edite para definir a nova classifica&ccedil;&atilde;o!!!</span>";}
@@ -406,7 +406,7 @@ function adicionaNosClasses(no,dados,redesenha){
 	for (i=0, j=dados.length; i<j; i++)	{
 		conteudo = "&nbsp;<img style=\"position:relative;cursor:pointer;top:0px\" onclick=\"excluir('classeClassificacao','"+dados[i].id_classe+"')\" title=excluir width='10px' heigth='10px' src=\"../imagens/01.png\" />";
 		conteudo += "&nbsp;<img style=\"position:relative;cursor:pointer;top:2px\" onclick=\"editar('classeClassificacao','"+dados[i].id_classe+"')\" title=editar src=\"../imagens/06.png\" /><b>";
-		if(dados[i].nomedimensao != "")
+		if(dados[i].nome != "")
 		{conteudo += "&nbsp;<span><b>"+dados[i].titulo+"</b><span style=color:gray >  id: "+dados[i].id_classe+"</span></span>";}
 		else
 		{conteudo += "&nbsp;<span style=color:red >Edite para definir a nova classe!!!</span>";}
@@ -558,25 +558,19 @@ function montaDivMedidaVariavel(i){
 		$i("Ccodigo_estat_conexao").innerHTML = temp;
 	}
 }
-function montaDivDimensaoMedida(i){
+function montaDivParametroMedida(i){
 	var temp,ins = "",
 		param = {
 			"linhas":[
-		          {titulo:"Nome:",id:"Enomedimensao",size:"50",value:i.nomedimensao,tipo:"text",div:""},
+		          {titulo:"Nome:",id:"Enome",size:"50",value:i.nome,tipo:"text",div:""},
 		          {titulo:"Descri&ccedil;&atilde;o:",id:"Edescricao",size:"50",value:i.descricao,tipo:"text",div:""},
 		          {titulo:"Coluna:",id:"Ecoluna",size:"50",value:i.coluna,tipo:"text",div:""},
-		          {titulo:"Agrega valores:",id:"",size:"50",value:i.agregavalores,tipo:"text",div:"<div id=Cagregavalores ></div>"}
+		          {titulo:"id_pai:",id:"Eid_pai",size:"50",value:i.id_pai,tipo:"text",div:""}
 			]
 		};
 	ins += core_geraLinhas(param);
 	ins += "<br><br><br>";
 	$i("editor_bd").innerHTML = ins;
-	if($i("Cagregavalores")){
-		temp = "<select id='Eagregavalores' >";
-		temp += core_comboObjeto([{"nome":"sim","valor":"1"},{"nome":"nao","valor":"0"}],"valor","nome",i.agregavalores);
-		temp += "</select>";
-		$i("Cagregavalores").innerHTML = temp;
-	}
 }
 function montaDivClassificacaoMedida(i){
 	var ins = "",
@@ -653,20 +647,20 @@ function adicionarMedidaVariavel(codigo_variavel){
 	core_makeRequest(sUrl,callback);
 }
 /*
-Function: adicionarDimensaoMedida
+Function: adicionarParametroMedida
 
-Adiciona uma nova dimensao a uma medida de variavel
+Adiciona uma nova parametro a uma medida de variavel
 
-<ADICIONARDIMENSAOMedida>
+<ADICIONARPARAMETROMedida>
 */
-function adicionarDimensaoMedida(id_medida_variavel){
+function adicionarParametroMedida(id_medida_variavel){
 	var no = tree.getNodeByProperty("id_medida_variavel",id_medida_variavel),
-		sUrl = "../php/metaestat.php?funcao=alteraDimensaoMedida&id_medida_variavel="+id_medida_variavel,
+		sUrl = "../php/metaestat.php?funcao=alteraParametroMedida&id_medida_variavel="+id_medida_variavel,
 		callback = 	{
 	    	success: function(oResponse){
 				var dados = YAHOO.lang.JSON.parse(oResponse.responseText);
-				adicionaNosDimensao(no,[dados],true);
-				editar('dimensaoMedida',dados.id_dimensao_medida);
+				adicionaNosParametro(no,[dados],true);
+				editar('parametroMedida',dados.id_parametro_medida);
 			},
 	  		failure:core_handleFailure,
 	  		argument: { foo:"foo", bar:"bar" }
@@ -762,10 +756,10 @@ function editar(tipo,id) {
 						core_montaEditor("gravaDados('medidaVariavel','"+id+"')","450px","200px","","Editor de medidas");
 						montaDivMedidaVariavel(dados);
 					}
-					if(tipo == "dimensaoMedida"){
+					if(tipo == "parametroMedida"){
 						dados = YAHOO.lang.JSON.parse(o.responseText);
-						core_montaEditor("gravaDados('dimensaoMedida','"+id+"')","450px","200px","","Editor de dimens&oatilde;es");
-						montaDivDimensaoMedida(dados);
+						core_montaEditor("gravaDados('parametroMedida','"+id+"')","450px","200px","","Editor de par&acirc;metros");
+						montaDivParametroMedida(dados);
 					}
 					if(tipo == "classificacaoMedida"){
 						dados = YAHOO.lang.JSON.parse(o.responseText);
@@ -795,8 +789,8 @@ function editar(tipo,id) {
 	if(tipo == "medidaVariavel"){
 		sUrl = "../php/metaestat.php?funcao=listaMedidaVariavel&id_medida_variavel="+id;
 	}
-	if(tipo == "dimensaoMedida"){
-		sUrl = "../php/metaestat.php?funcao=listaDimensao&id_dimensao_medida="+id;
+	if(tipo == "parametroMedida"){
+		sUrl = "../php/metaestat.php?funcao=listaParametro&id_parametro_medida="+id;
 	}
 	if(tipo == "classificacaoMedida"){
 		sUrl = "../php/metaestat.php?funcao=listaClassificacaoMedida&id_classificacao="+id;
@@ -1008,7 +1002,7 @@ function sql(tipo,id) {
 							core_makeRequest(sUrl,callback);
 						};
 					}
-					if(tipo == "dimensaoMedida"){
+					if(tipo == "parametroMedida"){
 
 					}
 					core_carregando("desativa");
@@ -1021,8 +1015,8 @@ function sql(tipo,id) {
 	if(tipo == "medidaVariavel"){
 		sUrl = "../php/metaestat.php?funcao=sqlMedidaVariavel&id_medida_variavel="+id;
 	}
-	if(tipo == "dimensaoMedida"){
-		sUrl = "../php/metaestat.php?funcao=listaDimensao&id_dimensao_medida="+id;
+	if(tipo == "parametroMedida"){
+		sUrl = "../php/metaestat.php?funcao=listaParametro&id_parametro_medida="+id;
 	}
 	if(sUrl){
 		core_makeRequest(sUrl,callback);
@@ -1046,9 +1040,9 @@ function excluir(tipo,id){
 		no = tree.getNodeByProperty("id_medida_variavel",id);
 		sUrl = "../php/metaestat.php?funcao=excluirMedidaVariavel&id_medida_variavel="+id;
 	}
-	if(tipo == "dimensaoMedida")	{
-		no = tree.getNodeByProperty("id_dimensao_medida",id);
-		sUrl = "../php/metaestat.php?funcao=excluirDimensaoMedida&id_dimensao_medida="+id;
+	if(tipo == "parametroMedida")	{
+		no = tree.getNodeByProperty("id_parametro_medida",id);
+		sUrl = "../php/metaestat.php?funcao=excluirParametroMedida&id_parametro_medida="+id;
 	}
 	if(tipo == "classificacaoMedida")	{
 		no = tree.getNodeByProperty("id_classificacao",id);
@@ -1094,10 +1088,10 @@ function gravaDados(tipo,id){
 		par = "&id_medida_variavel="+id;
 		prog = "../php/metaestat.php?funcao=alteraMedidaVariavel";
 	}
-	if(tipo == "dimensaoMedida"){
-		campos = new Array("nomedimensao","descricao","coluna","agregavalores");
-		par = "&id_dimensao_medida="+id;
-		prog = "../php/metaestat.php?funcao=alteraDimensaoMedida";
+	if(tipo == "parametroMedida"){
+		campos = new Array("nome","descricao","coluna","id_pai");
+		par = "&id_parametro_medida="+id;
+		prog = "../php/metaestat.php?funcao=alteraParametroMedida";
 	}
 	if(tipo == "classificacaoMedida"){
 		campos = new Array("nome","observacao");
@@ -1143,9 +1137,9 @@ function gravaDados(tipo,id){
 						no.getContentEl().getElementsByTagName("span")[0].style.color = "";
   						no.html = no.getContentEl().innerHTML;
   					}
-  					if(tipo == "dimensaoMedida"){
-  						no = tree.getNodeByProperty("id_dimensao_medida",id);
-  						no.getContentEl().getElementsByTagName("span")[0].innerHTML = "<b>"+document.getElementById("Enomedimensao").value+"</b><span style=color:gray > - "+document.getElementById("Edescricao").value+" id: "+id+"</span>";
+  					if(tipo == "parametroMedida"){
+  						no = tree.getNodeByProperty("id_parametro_medida",id);
+  						no.getContentEl().getElementsByTagName("span")[0].innerHTML = "<b>"+document.getElementById("Enome").value+"</b><span style=color:gray > - "+document.getElementById("Edescricao").value+" id: "+id+"</span>";
 						no.getContentEl().getElementsByTagName("span")[0].style.color = "";
   						no.html = no.getContentEl().innerHTML;
   					}

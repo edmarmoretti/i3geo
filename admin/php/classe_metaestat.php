@@ -671,25 +671,25 @@ class Metaestat{
 		}
 	}
 	/*
-	Function: alteraDimensaoMedida
+	Function: alteraParametroMedida
 
-	Altera uma dimensao de uma medida ou cria uma nova
+	Altera uma parametro de uma medida ou cria uma nova
 	*/
-	function alteraDimensaoMedida($id_medida_variavel,$id_dimensao_medida="",$nomedimensao,$descricao,$coluna,$agregavalores){
+	function alteraParametroMedida($id_medida_variavel,$id_parametro_medida="",$nome,$descricao,$coluna,$id_pai){
 		try	{
-			if($id_dimensao_medida != ""){
+			if($id_parametro_medida != ""){
 				if($this->convUTF){
-					$nomedimensao = utf8_encode($nomedimensao);
+					$nomeparametro = utf8_encode($nomeparametro);
 					$descricao = utf8_encode($descricao);
 				}
-				//echo "UPDATE ".$this->esquemaadmin."i3geoestat_dimensao_medida SET nomedimensao = '$nomedimensao',descricao = '$descricao',coluna = '$coluna',agregavalores = '$agregavalores' WHERE id_dimensao_medida = $id_dimensao_medida";exit;
-				$this->dbhw->query("UPDATE ".$this->esquemaadmin."i3geoestat_dimensao_medida SET nomedimensao = '$nomedimensao',descricao = '$descricao',coluna = '$coluna',agregavalores = '$agregavalores' WHERE id_dimensao_medida = $id_dimensao_medida");
-				$retorna = $id_dimensao_medida;
+				//echo "UPDATE ".$this->esquemaadmin."i3geoestat_parametro_medida SET nomeparametro = '$nomeparametro',descricao = '$descricao',coluna = '$coluna',agregavalores = '$agregavalores' WHERE id_parametro_medida = $id_parametro_medida";exit;
+				$this->dbhw->query("UPDATE ".$this->esquemaadmin."i3geoestat_parametro_medida SET nome = '$nome',descricao = '$descricao',coluna = '$coluna',id_pai = '$id_pai' WHERE id_parametro_medida = $id_parametro_medida");
+				$retorna = $id_parametro_medida;
 			}
 			else{
-				$retorna = $this->insertId("i3geoestat_dimensao_medida","nomedimensao","id_dimensao_medida");
+				$retorna = $this->insertId("i3geoestat_parametro_medida","nome","id_parametro_medida");
 				if($retorna){
-					$this->dbhw->query("UPDATE ".$this->esquemaadmin."i3geoestat_dimensao_medida SET id_medida_variavel = $id_medida_variavel WHERE id_dimensao_medida = $retorna");
+					$this->dbhw->query("UPDATE ".$this->esquemaadmin."i3geoestat_parametro_medida SET id_medida_variavel = $id_medida_variavel WHERE id_parametro_medida = $retorna");
 				}
 			}
 			return $retorna;
@@ -699,9 +699,9 @@ class Metaestat{
 		}
 	}
 	/*
-	Function: alteraDimensaoMedida
+	Function: alteraParametroMedida
 
-	Altera uma dimensao de uma medida ou cria uma nova
+	Altera uma parametro de uma medida ou cria uma nova
 	*/
 	function alteraClassificacaoMedida($id_medida_variavel,$id_classificacao="",$nome="",$observacao=""){
 		try	{
@@ -711,7 +711,7 @@ class Metaestat{
 					$observacao = utf8_encode($observacao);
 				}
 				$this->dbhw->query("UPDATE ".$this->esquemaadmin."i3geoestat_classificacao SET observacao = '$observacao',nome = '$nome' WHERE id_classificacao = $id_classificacao");
-				$retorna = $id_dimensao_medida;
+				$retorna = $id_parametro_medida;
 			}
 			else{
 				$retorna = $this->insertId("i3geoestat_classificacao","nome","id_classificacao");
@@ -918,7 +918,7 @@ class Metaestat{
 		return $this->execSQL($sql,$codigo_estat_conexao);
 	}
 	/*
-	 Function: listaDimensao
+	 Function: listaParametro
 
 	Lista as variaveis cadastradas ou uma unica variavel
 
@@ -926,24 +926,24 @@ class Metaestat{
 
 	$id_medida_variavel
 
-	$id_dimensao_variavel - opcional
+	$id_parametro_variavel - opcional
 	*/
-	function listaDimensao($id_medida_variavel,$id_dimensao_medida=""){
-		$sql = "SELECT i3geoestat_dimensao_medida.* ";
-		$sql .= "FROM ".$this->esquemaadmin."i3geoestat_dimensao_medida ";
+	function listaParametro($id_medida_variavel,$id_parametro_medida=""){
+		$sql = "SELECT i3geoestat_parametro_medida.* ";
+		$sql .= "FROM ".$this->esquemaadmin."i3geoestat_parametro_medida ";
 		$sql .= "INNER JOIN ".$this->esquemaadmin."i3geoestat_medida_variavel ";
-		$sql .= "ON i3geoestat_dimensao_medida.id_medida_variavel = i3geoestat_medida_variavel.id_medida_variavel ";
+		$sql .= "ON i3geoestat_parametro_medida.id_medida_variavel = i3geoestat_medida_variavel.id_medida_variavel ";
 		if($id_medida_variavel != ""){
-			$sql .= "WHERE i3geoestat_dimensao_medida.id_medida_variavel = $id_medida_variavel ";
-			if($id_dimensao_medida != ""){
-				$sql .= "AND i3geoestat_dimensao_medida.id_dimensao_medida = $id_dimensao_medida ";
+			$sql .= "WHERE i3geoestat_parametro_medida.id_medida_variavel = $id_medida_variavel ";
+			if($id_parametro_medida != ""){
+				$sql .= "AND i3geoestat_parametro_medida.id_parametro_medida = $id_parametro_medida ";
 			}
 		}
 		else{
-			$sql .= "WHERE i3geoestat_dimensao_medida.id_dimensao_medida = $id_dimensao_medida ";
+			$sql .= "WHERE i3geoestat_parametro_medida.id_parametro_medida = $id_parametro_medida ";
 		}
 		//echo $sql;exit;
-		return $this->execSQL($sql,$id_dimensao_medida);
+		return $this->execSQL($sql,$id_parametro_medida);
 	}
 
 	/*

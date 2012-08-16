@@ -663,7 +663,7 @@ $z->close();age':
         $zip->output($file);//edmar
         if($download){
         	ob_end_clean();
-        	header('Content-Type: application/vnd.google-earth.kml+xml');
+        	//header('Content-Type: application/vnd.google-earth.kml+xml');
         	header('Content-Disposition: attachment; filename='.basename($file));
 			print $file;
 			exit;

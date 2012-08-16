@@ -138,17 +138,17 @@ switch (strtoupper($funcao))
 		exit;
 	break;
 	/*
-	 Valor: LISTADIMENSAO
+	 Valor: LISTAPARAMETRO
 
-	Lista de dimensoes
+	Lista de parametros
 
 	Retorno:
 
 	{JSON}
 	*/
-	case "LISTADIMENSAO":
+	case "LISTAPARAMETRO":
 		$m = new Metaestat();
-		retornaJSON($m->listaDimensao($id_medida_variavel,$id_dimensao_medida));
+		retornaJSON($m->listaParametro($id_medida_variavel,$id_parametro_medida));
 		exit;
 	break;
 	/*
@@ -244,23 +244,23 @@ switch (strtoupper($funcao))
 		exit;
 	break;
 	/*
-	 Valor: ALTERADIMENSAOMEDIDA
+	 Valor: ALTERAPARAMETROMEDIDA
 
-	Altera os dados de uma dimensao de uma medida
+	Altera os dados de uma parametro de uma medida
 
 	Retorno:
 
 	{JSON}
 	*/
-	case "ALTERADIMENSAOMEDIDA":
+	case "ALTERAPARAMETROMEDIDA":
 		$m = new Metaestat();
-		if(empty($id_dimensao_medida)){
-			$id_dimensao_medida = $m->alteraDimensaoMedida($id_medida_variavel);
+		if(empty($id_parametro_medida)){
+			$id_parametro_medida = $m->alteraParametroMedida($id_medida_variavel);
 		}
 		else{
-			$m->alteraDimensaoMedida("",$id_dimensao_medida,$nomedimensao,$descricao,$coluna,$agregavalores);
+			$m->alteraParametroMedida("",$id_parametro_medida,$nome,$descricao,$coluna,$id_pai);
 		}
-		retornaJSON($m->listaDimensao($id_medida_variavel,$id_dimensao_medida));
+		retornaJSON($m->listaParametro($id_medida_variavel,$id_parametro_medida));
 		exit;
 	break;
 	/*
@@ -570,21 +570,21 @@ switch (strtoupper($funcao))
 		exit;
 	break;
 	/*
-	Valor: EXCLUIRDIMENSAOMEDIDA
+	Valor: EXCLUIRPARAMETROMEDIDA
 
 	Exclui uma medida da variavel
 
 	Parametros:
 
-	id_dimensao_medida
+	id_parametro_medida
 
 	Retorno:
 
 	{JSON}
 	*/
-	case "EXCLUIRDIMENSAOMEDIDA":
+	case "EXCLUIRPARAMETROMEDIDA":
 		$m = new Metaestat();
-		retornaJSON($m->excluirRegistro("i3geoestat_dimensao_medida","id_dimensao_medida",$id_dimensao_medida));
+		retornaJSON($m->excluirRegistro("i3geoestat_parametro_medida","id_parametro_medida",$id_parametro_medida));
 		exit;
 	break;
 	/*
@@ -594,7 +594,7 @@ switch (strtoupper($funcao))
 
 	Parametros:
 
-	id_dimensao_medida
+	id_classificacao
 
 	Retorno:
 
@@ -767,7 +767,7 @@ switch (strtoupper($funcao))
 					'dirtmp' => $dir_tmp,
 					'barSize'=> 5000
 			);
-			
+
 			include (__DIR__."/../../pacotes/tme/TME_i3geo.php");
 		}
 		exit;
