@@ -559,7 +559,7 @@ function montaDivMedidaVariavel(i){
 	}
 }
 function montaDivParametroMedida(i){
-	var temp,ins = "",
+	var ins = "",
 		param = {
 			"linhas":[
 		          {titulo:"Nome:",id:"Enome",size:"50",value:i.nome,tipo:"text",div:""},
@@ -840,10 +840,12 @@ function sql(tipo,id) {
 						ins +="<p>Codigo da classifica&ccedil;&atilde;o que ser&aacute; usada para mostrar o mapa<br>";
 						ins += "<input type=text value='' id='classificacao' />";
 						ins += '  <p><input type=button id="sqljson" value="JSON" />';
+						ins += '  <input type=button id="xmlestat" value="XML" />';
 						ins += '  <input type=button id="sumarioestat" value="Sum&aacute;rio" />';
+						ins += '  <input type=button id="sumarioxmlestat" value="Sum&aacute;rio XML" />';
 						ins += '  <input type=button id="graficoestat" value="Gr&aacute;fico" />';
-						ins += '  <input type=button id="mapfileestat" value="Mapfile" />';
-						ins += '  <input type=button id="i3geoestat" value="i3Geo" /><br><br>';
+						ins += '  <input type=button id="mapfileestat" value="Mapfile" /><br><br>';
+						ins += '  <input type=button id="i3geoestat" value="i3Geo" />';
 						ins += '  <input type=button id="kmzestat" value="Kmz (vetorial)" />';
 						ins += '  <input type=button id="kmlestat" value="Kml (wms)" />';
 						ins += '  <input type=button id="kml3destat" value="Kml 3d" />';
@@ -859,9 +861,25 @@ function sql(tipo,id) {
 							$i("ultimaUrl").innerHTML = u;
 							window.open(u);
 						};
+						new YAHOO.widget.Button("xmlestat");
+						document.getElementById("xmlestat-button").onclick = function(){
+							var u,colunas = 0;
+							if($i("incluirtodascolunas").checked === true){
+								colunas = 1;
+							}
+							u = i3GEO.configura.locaplic+'/admin/php/metaestat.php?funcao=dadosMedidaVariavel&formato=xml&id_medida_variavel='+id+"&filtro="+$i("filtrosql").value+"&todasascolunas="+colunas+"&agruparpor="+$i("agruparsql").value;
+							$i("ultimaUrl").innerHTML = u;
+							window.open(u);
+						};
 						new YAHOO.widget.Button("sumarioestat");
 						$i("sumarioestat-button").onclick = function(){
 							var u = i3GEO.configura.locaplic+'/admin/php/metaestat.php?funcao=sumarioMedidaVariavel&formato=json&id_medida_variavel='+id+"&agruparpor="+$i("agruparsql").value+"&filtro="+$i("filtrosql").value;
+							$i("ultimaUrl").innerHTML = u;
+							window.open(u);
+						};
+						new YAHOO.widget.Button("sumarioxmlestat");
+						$i("sumarioxmlestat-button").onclick = function(){
+							var u = i3GEO.configura.locaplic+'/admin/php/metaestat.php?funcao=sumarioMedidaVariavel&formato=xml&id_medida_variavel='+id+"&agruparpor="+$i("agruparsql").value+"&filtro="+$i("filtrosql").value;
 							$i("ultimaUrl").innerHTML = u;
 							window.open(u);
 						};

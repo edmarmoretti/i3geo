@@ -1047,6 +1047,7 @@ class Metaestat{
 		}
 		return $dados;
 	}
+	//$dados vem de relatorioCompleto
 	function formataRelatorioHtml($dados){
 		$html = "<div class='var_div_relatorio'>";
 		$var_cor = "var_cor1";
@@ -1075,6 +1076,33 @@ class Metaestat{
 		}
 		$html .= "</div>";
 		return $html;
+	}
+	function formataXML($dados){
+		$chaves = array_keys($dados[0]);
+		if(count($chaves) == 0){
+			$chaves = false;
+		}
+		$xml = "<"."\x3F"."xml version='1.0' encoding='UTF-8' "."\x3F".">" . PHP_EOL;
+		$xml .= '<result-set>' . PHP_EOL;
+		if($chaves){
+			foreach($dados as $d){
+				$xml .= "<row>" . PHP_EOL;
+				foreach($chaves as $c){
+					$xml .= "<".$c.">".$d[$c]."</".$c.">" . PHP_EOL;
+				}
+				$xml .= "</row>" . PHP_EOL;
+			}
+		}
+		else{
+			while (list($key, $val) = each($dados)) {
+				$xml .= "<row>" . PHP_EOL;
+				$xml .= "<nome>".$key."</nome>" . PHP_EOL;
+				$xml .= "<valor>".$val."</valor>" . PHP_EOL;
+				$xml .= "</row>" . PHP_EOL;
+			}
+		}
+		$xml .= '</result-set>' . PHP_EOL;
+		return $xml;
 	}
 }
 ?>

@@ -665,7 +665,8 @@ switch (strtoupper($funcao))
 	*/
 	case "SQLMEDIDAVARIAVEL":
 		$m = new Metaestat();
-		retornaJSON($m->sqlMedidaVariavel($id_medida_variavel));
+		$dados = $m->sqlMedidaVariavel($id_medida_variavel);
+		retornaJSON($dados);
 		exit;
 	break;
 	/*
@@ -689,8 +690,13 @@ switch (strtoupper($funcao))
 	*/
 	case "DADOSMEDIDAVARIAVEL":
 		$m = new Metaestat();
+		$dados = $m->dadosMedidaVariavel($id_medida_variavel,$filtro,$todasascolunas,$agruparpor);
 		if($formato == "json"){
-			retornaJSON($m->dadosMedidaVariavel($id_medida_variavel,$filtro,$todasascolunas,$agruparpor));
+			retornaJSON($dados);
+		}
+		if($formato == "xml"){
+			header("Content-type: application/xml");
+			echo($m->formataXML($dados));
 		}
 		exit;
 	break;
@@ -789,8 +795,13 @@ switch (strtoupper($funcao))
 	*/
 	case "SUMARIOMEDIDAVARIAVEL":
 		$m = new Metaestat();
+		$dados = $m->sumarioMedidaVariavel($id_medida_variavel,$filtro,$agruparpor);
 		if($formato == "json"){
-			retornaJSON($m->sumarioMedidaVariavel($id_medida_variavel,$filtro,$agruparpor));
+			retornaJSON($dados);
+		}
+		if($formato == "xml"){
+			header("Content-type: application/xml");
+			echo($m->formataXML($dados["grupos"]));
 		}
 		exit;
 	break;
