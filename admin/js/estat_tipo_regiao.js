@@ -22,8 +22,12 @@ function montaTabela(dados){
 		formatMais = function(elCell, oRecord, oColumn){
 			elCell.innerHTML = "<div class=editar style='text-align:center' ></div>";
 		},
+		formatRel = function(elCell, oRecord, oColumn){
+			elCell.innerHTML = "<div class=editar style='text-align:center' ></div>";
+		},
 		myColumnDefs = [
 		                {key:"excluir",label:"excluir",formatter:formatExclui},
+		                {key:"rel",label:"agrega&ccedil;&otilde;es",formatter:formatRel},
 		                {key:"mais",label:"editar",formatter:formatMais},
 		                {label:"c&oacute;digo",key:"codigo_tipo_regiao", formatter:formatTexto},
 		                {label:"Nome",resizeable:true,key:"nome_tipo_regiao", formatter:formatTexto},
@@ -77,10 +81,32 @@ function montaTabela(dados){
 					};
 					core_makeRequest(sUrl,callback);
 				}
+				if (column.key == 'rel'){
+					record = this.getRecord(target);
+					core_carregando("ativa");
+					core_carregando("buscando dados...");
+					$clicouId = record.getData('codigo_tipo_regiao');
+					$recordid = record.getId();
+					sUrl = "../php/metaestat.php?funcao=listaAgregaRegiao&codigo_tipo_regiao="+record.getData('codigo_tipo_regiao');
+					callback = {
+							success:function(o){
+								try{
+									montaTabelaAgregacoes(YAHOO.lang.JSON.parse(o.responseText),$clicouId,$recordid);
+								}
+								catch(e){core_handleFailure(e,o.responseText);}
+							},
+							failure:core_handleFailure,
+							argument: { foo:"foo", bar:"bar" }
+					};
+					core_makeRequest(sUrl,callback);
+				}
 			}
 		);
 	};
 	core_carregando("desativa");
+}
+function montaTabelaAgregacoes(){
+
 }
 function montaEditor(dados,id,recordid){
 	function on_editorCheckBoxChange(p_oEvent){

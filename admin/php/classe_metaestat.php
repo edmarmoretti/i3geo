@@ -1084,23 +1084,56 @@ class Metaestat{
 		}
 		$xml = "<"."\x3F"."xml version='1.0' encoding='UTF-8' "."\x3F".">" . PHP_EOL;
 		$xml .= '<result-set>' . PHP_EOL;
+		//tenta descobrir o tipo de coluna
+		//$xml .= '<!--java.lang.String,java.lang.Integer-->' . PHP_EOL;
+		$xmldados = "";
 		if($chaves){
 			foreach($dados as $d){
-				$xml .= "<row>" . PHP_EOL;
+				$xmldados .= "<row>" . PHP_EOL;
 				foreach($chaves as $c){
-					$xml .= "<".$c.">".$d[$c]."</".$c.">" . PHP_EOL;
+					$xmldados .= "<".$c.">".$d[$c]."</".$c.">" . PHP_EOL;
 				}
-				$xml .= "</row>" . PHP_EOL;
+				$xmldados .= "</row>" . PHP_EOL;
 			}
+			$tipos = array();
+			$d = $dados[0];
+			foreach($chaves as $c){
+				if(is_numeric($d[$c])){
+					$tipos[] = "java.lang.Integer";
+				}
+				else{
+					$tipos[] = "java.lang.String";
+				}			
+			}
+			$xml .= '<!--'.implode($tipos,",").'-->' . PHP_EOL;
 		}
 		else{
 			while (list($key, $val) = each($dados)) {
-				$xml .= "<row>" . PHP_EOL;
-				$xml .= "<nome>".$key."</nome>" . PHP_EOL;
-				$xml .= "<valor>".$val."</valor>" . PHP_EOL;
-				$xml .= "</row>" . PHP_EOL;
+				$xmldados .= "<row>" . PHP_EOL;
+				$xmldados .= "<nome>".$key."</nome>" . PHP_EOL;
+				$xmldados .= "<valor>".$val."</valor>" . PHP_EOL;
+				$xmldados .= "</row>" . PHP_EOL;
 			}
+			reset($dados);
+			$tipos = array();
+			while (list($key, $val) = each($dados)) {
+				if(is_numeric($val)){
+					$tipos[] = "java.lang.Integer";
+				}
+				else{
+					$tipos[] = "java.lang.String";
+				}
+				if(is_numeric($key)){
+					$tipos[] = "java.lang.Integer";
+				}
+				else{
+					$tipos[] = "java.lang.String";
+				}	
+				break;
+			}
+			$xml .= '<!--'.implode($tipos,",").'-->' . PHP_EOL;
 		}
+		$xml .= $xmldados;
 		$xml .= '</result-set>' . PHP_EOL;
 		return $xml;
 	}
