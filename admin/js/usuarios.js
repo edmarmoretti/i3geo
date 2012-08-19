@@ -92,34 +92,34 @@ function montaArvore(dados){
 		{
 			buildTree();
 		}
-        function loadNodeData(node, fnLoadComplete){
-        	var sUrl = "../php/usuarios.php?funcao=pegaPapeisUsuario&id_usuario="+node.data.id_usuario;
+		function loadNodeData(node, fnLoadComplete){
+			var sUrl = "../php/usuarios.php?funcao=pegaPapeisUsuario&id_usuario="+node.data.id_usuario;
 			var callback = {
-                success: function(oResponse){
-                    var dados = YAHOO.lang.JSON.parse(oResponse.responseText);
+				success: function(oResponse){
+					var dados = YAHOO.lang.JSON.parse(oResponse.responseText);
 					adicionaNosPapeis(node,dados,false);
-                    oResponse.argument.fnLoadComplete();
-                },
-                failure: function(oResponse){
-                    oResponse.argument.fnLoadComplete();
-                },
-                argument:{
-                    "node": node,
-                    "fnLoadComplete": fnLoadComplete
-                },
-                timeout: 25000
-            };
-            YAHOO.util.Connect.asyncRequest('GET', sUrl, callback);
-        }
-        function buildTree(){
+					oResponse.argument.fnLoadComplete();
+				},
+				failure: function(oResponse){
+					oResponse.argument.fnLoadComplete();
+				},
+				argument:{
+					"node": node,
+					"fnLoadComplete": fnLoadComplete
+				},
+				timeout: 25000
+			};
+			YAHOO.util.Connect.asyncRequest('GET', sUrl, callback);
+		}
+		function buildTree(){
 			tree = new YAHOO.widget.TreeView("tabela");
 			tree.setDynamicLoad(loadNodeData, 1);
 			var root = tree.getRoot();
 			var tempNode = new YAHOO.widget.TextNode('', root, false);
 			tempNode.isLeaf = true;
 			core_carregando("desativa");
-        }
-    	buildTree();
+		}
+		buildTree();
 	}();
    	adicionaNosUsuarios(dados);
    	tree.draw();
@@ -139,8 +139,8 @@ function adicionaNosPapeis(no,dados,redesenha)
 		if (newVal != currentIconMode)
 		{currentIconMode = newVal;}
 	}
-    if(!redesenha)
-    {
+	if(!redesenha)
+	{
 		var conteudo = "<span style=\"cursor:pointer;\" onclick=\"editar('papel','"+no.data.id_usuario+"')\" ><img style=\"position:relative;top:2px\" src=\"../imagens/05.png\" /><i>Adicionar novo papel</i></span>";
 		var d = {html:conteudo};
 		var tempNode = new YAHOO.widget.HTMLNode(d, no, false,true);
@@ -222,12 +222,12 @@ function editar(tipo,id)
 function montaDivUsuario(i){
 	var param = {
 		"linhas":[
-	          {titulo:"Nome:",id:"Enome_usuario",size:"50",value:i.nome_usuario,tipo:"text",div:""},
-	          {titulo:"Login:",id:"Elogin",size:"50",value:i.login,tipo:"text",div:""},
-	          {ajuda:"Se o usu&aacute;rio j&aacute; existir, preencha para alterar a senha. Se for mantido em branco, o sistema gerar&aacute; uma senha aleat&oacute;ria no caso de novos usu&aacute;rios. Envie a senha por e-mail ap&oacute;s o cadastro.",titulo:"Nova senha:",id:"Esenha",size:"50",value:"",tipo:"text",div:""},
-	          {titulo:"E-mail:",id:"Eemail",size:"50",value:i.email,tipo:"text",div:""},
-	          {titulo:"Data de cadastro:",id:"Edata_cadastro",size:"50",value:i.data_cadastro,tipo:"text",div:""},
-	          {titulo:"Ativo:",id:"",size:"50",value:i.ativo,tipo:"text",div:"<div id=cAtivo ></div>"}
+			  {titulo:"Nome:",id:"Enome_usuario",size:"50",value:i.nome_usuario,tipo:"text",div:""},
+			  {titulo:"Login:",id:"Elogin",size:"50",value:i.login,tipo:"text",div:""},
+			  {ajuda:"Se o usu&aacute;rio j&aacute; existir, preencha para alterar a senha. Se for mantido em branco, o sistema gerar&aacute; uma senha aleat&oacute;ria no caso de novos usu&aacute;rios. Envie a senha por e-mail ap&oacute;s o cadastro.",titulo:"Nova senha:",id:"Esenha",size:"50",value:"",tipo:"text",div:""},
+			  {titulo:"E-mail:",id:"Eemail",size:"50",value:i.email,tipo:"text",div:""},
+			  {titulo:"Data de cadastro:",id:"Edata_cadastro",size:"50",value:i.data_cadastro,tipo:"text",div:""},
+			  {titulo:"Ativo:",id:"",size:"50",value:i.ativo,tipo:"text",div:"<div id=cAtivo ></div>"}
 		]
 	};
 	var ins = "<input type=button title='Salvar' value='Salvar' id=salvarEditorUsuario />";

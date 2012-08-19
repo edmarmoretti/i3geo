@@ -53,7 +53,7 @@ Obt&eacute;m a lista de WS
 */
 function pegaWS()
 {
-    //
+	//
 	//pega o tipo de WS que ser&aacute; listado se tiver sido definido na url
 	//
 	var tipows = "",u;
@@ -75,33 +75,33 @@ Monta a tabela de edi&ccedil;&atilde;o
 function montaTabela(dados)
 {
 	YAHOO.example.InlineCellEditing = new function()
-    {
-        // Custom formatter for "address" column to preserve line breaks
-        var formatTextoId = function(elCell, oRecord, oColumn, oData)
-        {
-            elCell.innerHTML = "<p>" + oData + "</p>";
-        };
-        var formatMais = function(elCell, oRecord, oColumn)
-        {
-            elCell.innerHTML = "<div class=editar style='text-align:center' ></div>";
-        };
-        var formatExclui = function(elCell, oRecord, oColumn)
-        {
-            elCell.innerHTML = "<div class=excluir style='text-align:center' ></div>";
-        };
-        var myColumnDefs = [
-            {key:"excluir",label:"excluir",formatter:formatExclui},
-            {key:"mais",label:"editar",formatter:formatMais},
-            {label:"id",key:"id_ws", formatter:formatTextoId},
-            {label:"tipo",key:"tipo_ws", formatter:formatTextoId},
-            {label:"nome",key:"nome_ws", formatter:formatTextoId},
-        ];
-        myDataSource = new YAHOO.util.DataSource(dados);
-        myDataSource.responseType = YAHOO.util.DataSource.TYPE_JSARRAY;
-        myDataSource.responseSchema =
-        {fields: ["id_ws","nome_ws","tipo_ws"]};
-        myDataTable = new YAHOO.widget.DataTable("tabela", myColumnDefs, myDataSource);
-        // Set up editing flow
+	{
+		// Custom formatter for "address" column to preserve line breaks
+		var formatTextoId = function(elCell, oRecord, oColumn, oData)
+		{
+			elCell.innerHTML = "<p>" + oData + "</p>";
+		};
+		var formatMais = function(elCell, oRecord, oColumn)
+		{
+			elCell.innerHTML = "<div class=editar style='text-align:center' ></div>";
+		};
+		var formatExclui = function(elCell, oRecord, oColumn)
+		{
+			elCell.innerHTML = "<div class=excluir style='text-align:center' ></div>";
+		};
+		var myColumnDefs = [
+			{key:"excluir",label:"excluir",formatter:formatExclui},
+			{key:"mais",label:"editar",formatter:formatMais},
+			{label:"id",key:"id_ws", formatter:formatTextoId},
+			{label:"tipo",key:"tipo_ws", formatter:formatTextoId},
+			{label:"nome",key:"nome_ws", formatter:formatTextoId},
+		];
+		myDataSource = new YAHOO.util.DataSource(dados);
+		myDataSource.responseType = YAHOO.util.DataSource.TYPE_JSARRAY;
+		myDataSource.responseSchema =
+		{fields: ["id_ws","nome_ws","tipo_ws"]};
+		myDataTable = new YAHOO.widget.DataTable("tabela", myColumnDefs, myDataSource);
+		// Set up editing flow
 		myDataTable.subscribe('cellClickEvent',function(ev)
 		{
 			var target = YAHOO.util.Event.getTarget(ev);
@@ -136,20 +136,20 @@ function montaTabela(dados)
 			}
 
 		});
-        // Hook into custom event to customize save-flow of "radio" editor
-        myDataTable.subscribe("editorUpdateEvent", function(oArgs)
-        {
-            if(oArgs.editor.column.key === "active")
-            {
-                this.saveCellEditor();
-            }
-        });
-        myDataTable.subscribe("editorBlurEvent", function(oArgs)
-        {
-            this.cancelCellEditor();
-        });
-    };
-    core_carregando("desativa");
+		// Hook into custom event to customize save-flow of "radio" editor
+		myDataTable.subscribe("editorUpdateEvent", function(oArgs)
+		{
+			if(oArgs.editor.column.key === "active")
+			{
+				this.saveCellEditor();
+			}
+		});
+		myDataTable.subscribe("editorBlurEvent", function(oArgs)
+		{
+			this.cancelCellEditor();
+		});
+	};
+	core_carregando("desativa");
 }
 function montaEditor(dados,id,recordid)
 {
@@ -176,9 +176,9 @@ function montaEditor(dados,id,recordid)
 		document.body.appendChild(novoel);
 		var editorBotoes = new YAHOO.widget.ButtonGroup({id:"okcancel_checkbox_id", name:  "okcancel_checkbox_id", container:  "okcancel_checkbox" });
 		editorBotoes.addButtons([
-            { label: "Salva", value: "OK", checked: false},
-            { label: "Cancela", value: "CANCEL", checked: false }
-        ]);
+			{ label: "Salva", value: "OK", checked: false},
+			{ label: "Cancela", value: "CANCEL", checked: false }
+		]);
 		editorBotoes.on("checkedButtonChange", on_editorCheckBoxChange);
 		YAHOO.admin.container.panelEditor = new YAHOO.widget.Panel("janela_editor", { fixedcenter:true,close:false,width:"400px", height:"400px",overflow:"auto", visible:false,constraintoviewport:true } );
 		YAHOO.admin.container.panelEditor.render();

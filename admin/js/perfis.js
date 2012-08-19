@@ -57,59 +57,59 @@ function pegaPerfis()
 }
 function montaTabela(dados)
 {
-    YAHOO.example.InlineCellEditing = new function()
-    {
-        // Custom formatter for "address" column to preserve line breaks
-        var formatTexto = function(elCell, oRecord, oColumn, oData)
-        {
-            elCell.innerHTML = "<p style=width:250px >" + oData + "</p>";
-        };
-        var formatTextoId = function(elCell, oRecord, oColumn, oData)
-        {
-            elCell.innerHTML = "<p style=width:20px >" + oData + "</p>";
-        };
+	YAHOO.example.InlineCellEditing = new function()
+	{
+		// Custom formatter for "address" column to preserve line breaks
+		var formatTexto = function(elCell, oRecord, oColumn, oData)
+		{
+			elCell.innerHTML = "<p style=width:250px >" + oData + "</p>";
+		};
+		var formatTextoId = function(elCell, oRecord, oColumn, oData)
+		{
+			elCell.innerHTML = "<p style=width:20px >" + oData + "</p>";
+		};
 
-        var formatSalva = function(elCell, oRecord, oColumn)
-        {
-            elCell.innerHTML = "<div class=salvar style='text-align:center' onclick='gravaLinha(\""+oRecord._sId+"\")'></div>";
-        };
-        var formatExclui = function(elCell, oRecord, oColumn)
-        {
-            elCell.innerHTML = "<div class=excluir style='text-align:center' ></div>";
-        };
-        var myColumnDefs = [
-            {key:"excluir",label:"excluir",formatter:formatExclui},
-            {label:"salvar",formatter:formatSalva},
-            {label:"id",key:"id_perfil", formatter:formatTextoId},
+		var formatSalva = function(elCell, oRecord, oColumn)
+		{
+			elCell.innerHTML = "<div class=salvar style='text-align:center' onclick='gravaLinha(\""+oRecord._sId+"\")'></div>";
+		};
+		var formatExclui = function(elCell, oRecord, oColumn)
+		{
+			elCell.innerHTML = "<div class=excluir style='text-align:center' ></div>";
+		};
+		var myColumnDefs = [
+			{key:"excluir",label:"excluir",formatter:formatExclui},
+			{label:"salvar",formatter:formatSalva},
+			{label:"id",key:"id_perfil", formatter:formatTextoId},
 			{label:"nome",resizeable:true,key:"perfil", formatter:formatTexto, editor:new YAHOO.widget.TextboxCellEditor({disableBtns:true})}
-        ];
-        myDataSource = new YAHOO.util.DataSource(dados);
-        myDataSource.responseType = YAHOO.util.DataSource.TYPE_JSARRAY;
-        myDataSource.responseSchema =
-        {
-            fields: ["id_perfil","perfil"]
-        };
-        myDataTable = new YAHOO.widget.DataTable("tabela", myColumnDefs, myDataSource);
-        // Set up editing flow
-        myDataTable.highlightEditableCell = function(oArgs)
-        {
-            var elCell = oArgs.target;
-            var column = myDataTable.getColumn(oArgs.target);
-            if(!YAHOO.lang.isNull(column.editor))
-            {
+		];
+		myDataSource = new YAHOO.util.DataSource(dados);
+		myDataSource.responseType = YAHOO.util.DataSource.TYPE_JSARRAY;
+		myDataSource.responseSchema =
+		{
+			fields: ["id_perfil","perfil"]
+		};
+		myDataTable = new YAHOO.widget.DataTable("tabela", myColumnDefs, myDataSource);
+		// Set up editing flow
+		myDataTable.highlightEditableCell = function(oArgs)
+		{
+			var elCell = oArgs.target;
+			var column = myDataTable.getColumn(oArgs.target);
+			if(!YAHOO.lang.isNull(column.editor))
+			{
 				YAHOO.util.Dom.addClass(elCell,'yui-dt-highlighted');
-            }
-        };
-        myDataTable.unhighlightEditableCell = function(oArgs)
-        {
-            var elCell = oArgs.target;
-            if(elCell.style.cursor="pointer")
-            {
+			}
+		};
+		myDataTable.unhighlightEditableCell = function(oArgs)
+		{
+			var elCell = oArgs.target;
+			if(elCell.style.cursor="pointer")
+			{
 				YAHOO.util.Dom.removeClass(elCell,'yui-dt-highlighted');
-            }
-        };
-        myDataTable.subscribe("cellMouseoverEvent", myDataTable.highlightEditableCell);
-        myDataTable.subscribe("cellMouseoutEvent", myDataTable.unhighlightEditableCell);
+			}
+		};
+		myDataTable.subscribe("cellMouseoverEvent", myDataTable.highlightEditableCell);
+		myDataTable.subscribe("cellMouseoutEvent", myDataTable.unhighlightEditableCell);
 		myDataTable.subscribe('cellClickEvent',function(ev)
 		{
 			var target = YAHOO.util.Event.getTarget(ev);
@@ -129,29 +129,29 @@ function montaTabela(dados)
 				this.onEventShowCellEditor(ev);
 			}
 		});
-        // Hook into custom event to customize save-flow of "radio" editor
-        myDataTable.subscribe("editorUpdateEvent", function(oArgs)
-        {
-            if(oArgs.editor.column.key === "active")
-            {
-                this.saveCellEditor();
-            }
-        });
-        myDataTable.subscribe("editorSaveEvent", function(oArgs)
-        {
+		// Hook into custom event to customize save-flow of "radio" editor
+		myDataTable.subscribe("editorUpdateEvent", function(oArgs)
+		{
+			if(oArgs.editor.column.key === "active")
+			{
+				this.saveCellEditor();
+			}
+		});
+		myDataTable.subscribe("editorSaveEvent", function(oArgs)
+		{
 			if(oArgs.newData != oArgs.oldData){
 				var linha = myDataTable.getTrEl(oArgs.editor.getRecord());
 				linha.style.color = "blue";
 				linha.style.textDecoration = "blink";
 			}
-        });
+		});
 
-        myDataTable.subscribe("editorBlurEvent", function(oArgs)
-        {
-            this.cancelCellEditor();
-        });
-    };
-    core_carregando("desativa");
+		myDataTable.subscribe("editorBlurEvent", function(oArgs)
+		{
+			this.cancelCellEditor();
+		});
+	};
+	core_carregando("desativa");
 }
 /*
 Function: gravaLinha

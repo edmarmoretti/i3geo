@@ -307,7 +307,7 @@ function core_handleFailure(o,texto)
 	}
 	if (!YAHOO.carregando.container.wait)
 	{
-    	YAHOO.carregando.container.wait = new YAHOO.widget.Panel("wait",{width: "240px",fixedcenter: true,close: true,draggable: false,zindex:4,modal: true,visible: false});
+		YAHOO.carregando.container.wait = new YAHOO.widget.Panel("wait",{width: "240px",fixedcenter: true,close: true,draggable: false,zindex:4,modal: true,visible: false});
 		YAHOO.carregando.container.wait.setHeader("Aguarde...");
 		YAHOO.carregando.container.wait.render(document.body);
 	}
@@ -363,7 +363,7 @@ function core_carregando(tipo)
 	YAHOO.namespace("carregando.container");
 	if (!YAHOO.carregando.container.wait)
 	{
-    	YAHOO.carregando.container.wait = new YAHOO.widget.Panel("wait",{width: "240px",fixedcenter: true,close: true,draggable: false,zindex:4,modal: true,visible: false});
+		YAHOO.carregando.container.wait = new YAHOO.widget.Panel("wait",{width: "240px",fixedcenter: true,close: true,draggable: false,zindex:4,modal: true,visible: false});
 		YAHOO.carregando.container.wait.setHeader("Aguarde...");
 		YAHOO.carregando.container.wait.setBody("<img src=\"../../imagens/aguarde.gif\"/>");
 		YAHOO.carregando.container.wait.render(document.body);
@@ -935,9 +935,9 @@ function core_menuCheckBox(valores,textos,selecionados,target,record,key)
 		document.body.appendChild(novoel);
 		var og_core = new YAHOO.widget.ButtonGroup({id:"okcancel_checkbox_id", name:"okcancel_checkbox_id", container:"core_menuCK_bd" });
 		og_core.addButtons([
-            { label: "OK", value: "OK", checked: false},
-            { label: "Cancel", value: "CANCEL", checked: false }
-        ]);
+			{ label: "OK", value: "OK", checked: false},
+			{ label: "Cancel", value: "CANCEL", checked: false }
+		]);
 		og_core.on("checkedButtonChange", on_menuCheckBoxChange);
 		YAHOO.admin.container.panelCK = new YAHOO.widget.Overlay("core_menuCK", { zindex:"100",close:false,underlay:false,width:"200px", height:"200px",overflow:"auto", visible:false,constraintoviewport:true } );
 		YAHOO.admin.container.panelCK.render();

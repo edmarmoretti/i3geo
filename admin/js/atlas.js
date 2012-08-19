@@ -96,40 +96,40 @@ function montaArvore(dados)
 		{
 			buildTree();
 		}
-        function loadNodeData(node, fnLoadComplete)
-        {
+		function loadNodeData(node, fnLoadComplete)
+		{
 			var sUrl = "../php/atlas.php?funcao=pegaPranchas&id_atlas="+node.data.id_atlas;
 			var callback =
 			{
-                success: function(oResponse)
-                {
-                    var dados = YAHOO.lang.JSON.parse(oResponse.responseText);
+				success: function(oResponse)
+				{
+					var dados = YAHOO.lang.JSON.parse(oResponse.responseText);
 					adicionaNosPranchas(node,dados,false);
-                    oResponse.argument.fnLoadComplete();
-                },
-                failure: function(oResponse)
-                {
-                    oResponse.argument.fnLoadComplete();
-                },
-                argument:
-                {
-                    "node": node,
-                    "fnLoadComplete": fnLoadComplete
-                },
-                timeout: 25000
-            };
-            YAHOO.util.Connect.asyncRequest('GET', sUrl, callback);
-        }
-        function buildTree()
-        {
+					oResponse.argument.fnLoadComplete();
+				},
+				failure: function(oResponse)
+				{
+					oResponse.argument.fnLoadComplete();
+				},
+				argument:
+				{
+					"node": node,
+					"fnLoadComplete": fnLoadComplete
+				},
+				timeout: 25000
+			};
+			YAHOO.util.Connect.asyncRequest('GET', sUrl, callback);
+		}
+		function buildTree()
+		{
 			tree = new YAHOO.widget.TreeView("tabela");
 			tree.setDynamicLoad(loadNodeData, 1);
 			var root = tree.getRoot();
 			var tempNode = new YAHOO.widget.TextNode('', root, false);
 			tempNode.isLeaf = true;
 			core_carregando("desativa");
-        }
-    	buildTree();
+		}
+		buildTree();
 	}();
    	adicionaNosAtlas(dados);
    	tree.draw();
@@ -181,32 +181,32 @@ function adicionaNosPranchas(no,dados,redesenha)
 		if (newVal != currentIconMode)
 		{currentIconMode = newVal;}
 	}
-    function loadTemasData(node, fnLoadComplete)
-    {
+	function loadTemasData(node, fnLoadComplete)
+	{
 		var sUrl = "../php/atlas.php?funcao=pegaTemas&id_prancha="+node.data.id_prancha;
 		var callback =
 		{
-            success: function(oResponse)
-            {
-                var dados = YAHOO.lang.JSON.parse(oResponse.responseText);
+			success: function(oResponse)
+			{
+				var dados = YAHOO.lang.JSON.parse(oResponse.responseText);
 				adicionaNosTemas(node,dados,false);
-                oResponse.argument.fnLoadComplete();
-            },
-            failure: function(oResponse)
-            {
-                oResponse.argument.fnLoadComplete();
-            },
-            argument:
-            {
-                "node": node,
-                "fnLoadComplete": fnLoadComplete
-            },
-            timeout: 7000
-        };
-        YAHOO.util.Connect.asyncRequest('GET', sUrl, callback);
-    }
-    if(!redesenha)
-    {
+				oResponse.argument.fnLoadComplete();
+			},
+			failure: function(oResponse)
+			{
+				oResponse.argument.fnLoadComplete();
+			},
+			argument:
+			{
+				"node": node,
+				"fnLoadComplete": fnLoadComplete
+			},
+			timeout: 7000
+		};
+		YAHOO.util.Connect.asyncRequest('GET', sUrl, callback);
+	}
+	if(!redesenha)
+	{
 		var conteudo = "<span style=\"cursor:pointer;\" onclick=\"adicionarPrancha('"+no.data.id_atlas+"')\" ><img style=\"position:relative;top:2px\" src=\"../imagens/05.png\" /><i>Adicionar nova prancha</i></span>";
 		var d = {html:conteudo};
 		var tempNode = new YAHOO.widget.HTMLNode(d, no, false,true);
@@ -400,7 +400,7 @@ function sobeDesce(movimento,tipo,id)
 	}
 	var callback =
 	{
-    	success: function(oResponse)
+		success: function(oResponse)
 		{core_carregando("desativa");},
   		failure:core_handleFailure,
   		argument: { foo:"foo", bar:"bar" }
@@ -460,7 +460,7 @@ function adicionarTema(id)
 	var sUrl = "../php/atlas.php?funcao=alterarTema&id_prancha="+id;
 	var callback =
 	{
-    	success: function(oResponse)
+		success: function(oResponse)
 		{
 			var dados = YAHOO.lang.JSON.parse(oResponse.responseText);
 			adicionaNosTemas(no,dados,true);
@@ -484,7 +484,7 @@ function adicionarPrancha(id)
 	var sUrl = "../php/atlas.php?funcao=alterarPrancha&id_atlas="+id;
 	var callback =
 	{
-    	success: function(oResponse)
+		success: function(oResponse)
 		{
 			var dados = YAHOO.lang.JSON.parse(oResponse.responseText);
 			adicionaNosPranchas(no,dados,true);

@@ -32,9 +32,9 @@ function montaEditorTema(dados)
 		document.body.appendChild(novoel);
 		var editorBotoes = new YAHOO.widget.ButtonGroup({id:"okcancel_checkbox_id", name:  "okcancel_checkbox_id", container:  "okcancel_checkbox" });
 		editorBotoes.addButtons([
-            { label: "Salva", value: "OK", checked: false},
-            { label: "Cancela", value: "CANCEL", checked: false }
-        ]);
+			{ label: "Salva", value: "OK", checked: false},
+			{ label: "Cancela", value: "CANCEL", checked: false }
+		]);
 		editorBotoes.on("checkedButtonChange", on_editorCheckBoxChange);	
 		YAHOO.admin.container.panelEditorTema = new YAHOO.widget.Panel("janela_editor_tema", { fixedcenter:true,close:true,width:"400px", height:"400px",overflow:"auto", visible:false,constraintoviewport:true } );
 		YAHOO.admin.container.panelEditorTema.render();

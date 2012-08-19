@@ -203,6 +203,14 @@ switch (strtoupper($funcao))
 		retornaJSON($m->listaTipoRegiao($codigo_tipo_regiao));
 		exit;
 	break;
+	case "LISTAAGREGAREGIAO":
+		$m = new Metaestat();
+		if(empty($codigo_tipo_regiao)){
+			$codigo_tipo_regiao = "";
+		}
+		retornaJSON($m->listaAgregaRegiao($codigo_tipo_regiao,$id_agregaregiao));
+		exit;
+	break;
 	/*
 	Valor: ALTERARVARIAVEL
 
@@ -386,9 +394,21 @@ switch (strtoupper($funcao))
 			$codigo_tipo_regiao = $m->alteraTipoRegiao();
 		}
 		else{
-			$codigo_tipo_regiao = $m->alteraTipoRegiao($codigo_tipo_regiao,$nome_tipo_regiao,$descricao_tipo_regiao,$esquemadb,$tabela,$colunageo,$colunacentroide,$data,$identificador,$colunanomeregiao,$srid);
+			$codigo_tipo_regiao = $m->alteraTipoRegiao($codigo_tipo_regiao,$nome_tipo_regiao,$descricao_tipo_regiao,$esquemadb,$tabela,$colunageo,$colunacentroide,$data,$identificador,$colunanomeregiao,$srid,$codigo_estat_conexao);
 		}
 		retornaJSON($m->listaTipoRegiao($codigo_tipo_regiao));
+		exit;
+	break;
+	case "ALTERAAGREGAREGIAO":
+		$m = new Metaestat();
+		if(empty($id_agregaregiao)){
+			$id_agregaregiao = $m->alteraAgregaRegiao($codigo_tipo_regiao);
+		}
+		else{
+			$id_agregaregiao = $m->alteraAgregaRegiao("",$id_agregaregiao,$codigo_tipo_regiao_pai,$coluna_ligacao_regiaopai);
+			$codigo_tipo_regiao = "";
+		}
+		retornaJSON($m->listaAgregaRegiao($codigo_tipo_regiao,$id_agregaregiao));
 		exit;
 	break;
 	/*
@@ -541,6 +561,13 @@ switch (strtoupper($funcao))
 		}
 		else
 			retornaJSON("erro");
+		exit;
+	break;
+	case "EXCLUIRAGREGAREGIAO":
+		$tabela = "i3geoestat_agregaregiao";
+		$id = $id_agregaregiao;
+		$m = new Metaestat();
+		retornaJSON($m->excluirRegistro("i3geoestat_agregaregiao","id_agregaregiao",$id));
 		exit;
 	break;
 	/*

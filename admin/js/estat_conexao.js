@@ -26,15 +26,15 @@ function montaTabela(dados){
 			elCell.innerHTML = "a senha deve ser editada<br>diretamente no banco de dados";
 		},
 		myColumnDefs = [
-		                {key:"excluir",label:"excluir",formatter:formatExclui},
-		                {key:"mais",label:"editar",formatter:formatMais},
-		                {label:"c&oacute;digo",key:"codigo_estat_conexao", formatter:formatTexto},
-		                {label:"Banco de dados",resizeable:true,key:"bancodedados", formatter:formatTexto},
-		                {label:"Host",resizeable:true,key:"host", formatter:formatTexto},
-		                {label:"Porta",key:"porta",formatter:formatTexto},
-		                {label:"Usu&aacute;rio",key:"usuario",formatter:formatTexto},
-   		                {label:"Senha",key:"senha",formatter:formatSenha}
-		                ];
+						{key:"excluir",label:"excluir",formatter:formatExclui},
+						{key:"mais",label:"editar",formatter:formatMais},
+						{label:"c&oacute;digo",key:"codigo_estat_conexao", formatter:formatTexto},
+						{label:"Banco de dados",resizeable:true,key:"bancodedados", formatter:formatTexto},
+						{label:"Host",resizeable:true,key:"host", formatter:formatTexto},
+						{label:"Porta",key:"porta",formatter:formatTexto},
+						{label:"Usu&aacute;rio",key:"usuario",formatter:formatTexto},
+   						{label:"Senha",key:"senha",formatter:formatSenha}
+						];
 		myDataSource = new YAHOO.util.DataSource(dados);
 		myDataTable = new YAHOO.widget.DataTable("tabela", myColumnDefs, myDataSource);
 
@@ -100,9 +100,9 @@ function montaEditor(dados,id,recordid){
 		document.body.appendChild(novoel);
 		editorBotoes = new YAHOO.widget.ButtonGroup({id:"okcancel_checkbox_id2", name:  "okcancel_checkbox_id2", container:  "okcancel_checkbox2" });
 		editorBotoes.addButtons([
-		                         { label: "Salva", value: "OK", checked: false},
-		                         { label: "Cancela", value: "CANCEL", checked: false }
-		                         ]);
+								 { label: "Salva", value: "OK", checked: false},
+								 { label: "Cancela", value: "CANCEL", checked: false }
+								 ]);
 		editorBotoes.on("checkedButtonChange", on_editorCheckBoxChange);
 		YAHOO.admin.container.panelEditor2 = new YAHOO.widget.Panel("janela_editor2", { fixedcenter:true,close:false,width:"400px", height:"380px",overflow:"auto", visible:false,constraintoviewport:true } );
 		YAHOO.admin.container.panelEditor2.render();

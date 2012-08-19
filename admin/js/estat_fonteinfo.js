@@ -14,7 +14,7 @@ function montaTabela(dados){
 			if(oData === ""){
 				oData = "<span style='color:gray' ></span>";
 			}
-			elCell.innerHTML = "<pre ><p style=cursor:pointer title='clique para editar'>" + oData + "</pre>";
+			elCell.innerHTML = "<pre ><p>" + oData + "</pre>";
 		},
 		formatExclui = function(elCell, oRecord, oColumn){
 			elCell.innerHTML = "<div class=excluir title='exclui' style='text-align:center' ></div>";
@@ -23,12 +23,12 @@ function montaTabela(dados){
 			elCell.innerHTML = "<div class=editar style='text-align:center' ></div>";
 		},
 		myColumnDefs = [
-		                {key:"excluir",label:"excluir",formatter:formatExclui},
-		                {key:"mais",label:"editar",formatter:formatMais},
-		                {label:"Id",resizeable:true,key:"id_fonteinfo", formatter:formatTexto,editor:new YAHOO.widget.TextboxCellEditor({disableBtns:true})},
-		                {label:"T&iacute;tulo",resizeable:true,key:"titulo", formatter:formatTexto,editor:new YAHOO.widget.TextboxCellEditor({disableBtns:true})},
-		                {label:"Link",resizeable:true,key:"link", formatter:formatTexto,editor:new YAHOO.widget.TextboxCellEditor({disableBtns:true})}
-		                ];
+						{key:"excluir",label:"excluir",formatter:formatExclui},
+						{key:"mais",label:"editar",formatter:formatMais},
+						{label:"Id",resizeable:true,key:"id_fonteinfo", formatter:formatTexto,editor:new YAHOO.widget.TextboxCellEditor({disableBtns:true})},
+						{label:"T&iacute;tulo",resizeable:true,key:"titulo", formatter:formatTexto,editor:new YAHOO.widget.TextboxCellEditor({disableBtns:true})},
+						{label:"Link",resizeable:true,key:"link", formatter:formatTexto,editor:new YAHOO.widget.TextboxCellEditor({disableBtns:true})}
+						];
 		myDataSource = new YAHOO.util.DataSource(dados);
 		myDataTable = new YAHOO.widget.DataTable("tabela", myColumnDefs, myDataSource);
 
@@ -94,9 +94,9 @@ function montaEditor(dados,id,recordid){
 		document.body.appendChild(novoel);
 		editorBotoes = new YAHOO.widget.ButtonGroup({id:"okcancel_checkbox_id2", name:  "okcancel_checkbox_id2", container:  "okcancel_checkbox2" });
 		editorBotoes.addButtons([
-		                         { label: "Salva", value: "OK", checked: false},
-		                         { label: "Cancela", value: "CANCEL", checked: false }
-		                         ]);
+								 { label: "Salva", value: "OK", checked: false},
+								 { label: "Cancela", value: "CANCEL", checked: false }
+								 ]);
 		editorBotoes.on("checkedButtonChange", on_editorCheckBoxChange);
 		YAHOO.admin.container.panelEditor2 = new YAHOO.widget.Panel("janela_editor2", { fixedcenter:true,close:false,width:"400px", height:"380px",overflow:"auto", visible:false,constraintoviewport:true } );
 		YAHOO.admin.container.panelEditor2.render();

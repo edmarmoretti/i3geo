@@ -195,8 +195,8 @@ function montaArvore()
 		tree = "";
 		function changeIconMode()
 		{buildTree();}
-        function loadNodeData(node, fnLoadComplete)
-        {
+		function loadNodeData(node, fnLoadComplete)
+		{
 			if(node.data.codigoMap == undefined){
 				fnLoadComplete.call();
 				return;
@@ -204,27 +204,27 @@ function montaArvore()
 			var sUrl = "../php/editormapfile.php?funcao=pegaLayers&codigoMap="+node.data.codigoMap;
 			var callback =
 			{
-                success: function(oResponse)
-                {
-                    var dados = YAHOO.lang.JSON.parse(oResponse.responseText);
+				success: function(oResponse)
+				{
+					var dados = YAHOO.lang.JSON.parse(oResponse.responseText);
 					montaRaizTema(node,dados);
-                    oResponse.argument.fnLoadComplete();
-                },
-                failure: function(oResponse)
-                {
-                    oResponse.argument.fnLoadComplete();
-                },
-                argument:
-                {
-                    "node": node,
-                    "fnLoadComplete": fnLoadComplete
-                },
-                timeout: 25000
-            };
-            YAHOO.util.Connect.asyncRequest('GET', sUrl, callback);
-        }
-        function buildTree()
-        {
+					oResponse.argument.fnLoadComplete();
+				},
+				failure: function(oResponse)
+				{
+					oResponse.argument.fnLoadComplete();
+				},
+				argument:
+				{
+					"node": node,
+					"fnLoadComplete": fnLoadComplete
+				},
+				timeout: 25000
+			};
+			YAHOO.util.Connect.asyncRequest('GET', sUrl, callback);
+		}
+		function buildTree()
+		{
 			tree = new YAHOO.widget.TreeView("tabela");
 			tree.setDynamicLoad(loadNodeData, 0);
 			var root = tree.getRoot();
@@ -237,8 +237,8 @@ function montaArvore()
 				tempNode.isLeaf = true;
 			}
 			core_carregando("desativa");
-        }
-    	buildTree();
+		}
+		buildTree();
 	}();
    	montaNosRaiz("nao");
    	tree.draw();
@@ -291,9 +291,9 @@ Monta as op&ccedil;&otilde;es de edi&ccedil;&atilde;o b&aacute;sicas de um LAYER
 */
 function montaRaizTema(no,dados)
 {
-    var tempNodeR = "";
+	var tempNodeR = "";
 	if(!tree.getNodeByProperty("etiquetaLayers",no.data.codigoMap))
-    {
+	{
 		var d = {tipo:"etiqueta",etiquetaLayers:no.data.codigoMap,html:"<i>Layers</i>"};
 		tempNodeR = new YAHOO.widget.HTMLNode(d, no, true,true);
 		tempNodeR.isLeaf = false;
@@ -363,45 +363,45 @@ function montaParametrosTemas(no,dados,redesenha)
 	var id = codigoMap+"_"+codigoLayer;
 	var conteudo = "";
 	var tempNodeR = "";
-    if(!tree.getNodeByProperty("etiquetaDados",id))
-    {
+	if(!tree.getNodeByProperty("etiquetaDados",id))
+	{
 		conteudo = "<span style=cursor:pointer; onclick=\"editorDados('"+codigoMap+"','"+codigoLayer+"')\" ><img width='10px' heigth='10px' style=\"position:relative;top:0px\" title='' src=\"../imagens/06.png\" /> Conex&atilde;o com os dados</span>";
 		var d = {tipo:"etiquetaDados",etiquetaDados:id,html:conteudo};
 		var tempNode = new YAHOO.widget.HTMLNode(d, no, false,true);
 		tempNode.isLeaf = true;
 	}
-    if(!tree.getNodeByProperty("etiquetaTitulo",id))
-    {
+	if(!tree.getNodeByProperty("etiquetaTitulo",id))
+	{
 		conteudo = "<span style=cursor:pointer; onclick=\"editorTitulo('"+codigoMap+"','"+codigoLayer+"')\" ><img width='10px' heigth='10px' style=\"position:relative;top:0px\" title='' src=\"../imagens/06.png\" /> T&iacute;tulo, escala, extens&atilde;o</span>";
 		var d = {tipo:"etiquetaTitulo",etiquetaTitulo:id,html:conteudo};
 		var tempNode = new YAHOO.widget.HTMLNode(d, no, false,true);
 		tempNode.isLeaf = true;
 	}
-    if(!tree.getNodeByProperty("etiquetaComport",id))
-    {
+	if(!tree.getNodeByProperty("etiquetaComport",id))
+	{
 		conteudo = "<span style=cursor:pointer; onclick=\"editorComport('"+codigoMap+"','"+codigoLayer+"')\" ><img width='10px' heigth='10px' style=\"position:relative;top:0px\" title='' src=\"../imagens/06.png\" /> Comportamento no mapa</span>";
 		var d = {tipo:"etiquetaComport",etiquetaComport:id,html:conteudo};
 		var tempNode = new YAHOO.widget.HTMLNode(d, no, false,true);
 		tempNode.isLeaf = true;
 	}
 
-    if(!tree.getNodeByProperty("etiquetaDispo",id))
-    {
+	if(!tree.getNodeByProperty("etiquetaDispo",id))
+	{
 		conteudo = "<span style=cursor:pointer; onclick=\"editorDispo('"+codigoMap+"','"+codigoLayer+"')\" ><img width='10px' heigth='10px' style=\"position:relative;top:0px\" title='' src=\"../imagens/06.png\" /> Disponibilidade (download, wms,...)</span>";
 		var d = {tipo:"etiquetaDispo",etiquetaDispo:id,html:conteudo};
 		var tempNode = new YAHOO.widget.HTMLNode(d, no, false,true);
 		tempNode.isLeaf = true;
 	}
 //rever
-    if(!tree.getNodeByProperty("etiquetaMetadados",id))
-    {
+	if(!tree.getNodeByProperty("etiquetaMetadados",id))
+	{
 		conteudo = "<span style=cursor:pointer; onclick=\"editorMetadados('"+codigoMap+"','"+codigoLayer+"')\" ><img width='10px' heigth='10px' style=\"position:relative;top:0px\" title='edita metadados' src=\"../imagens/06.png\" /> Miscel&acirc;nea</span>";
 		var d = {tipo:"etiquetaMetadados",etiquetaMetadados:id,html:conteudo};
 		var tempNode = new YAHOO.widget.HTMLNode(d, no, false,true);
 		tempNode.isLeaf = true;
 	}
-    if(!tree.getNodeByProperty("etiquetaClasses",id))
-    {
+	if(!tree.getNodeByProperty("etiquetaClasses",id))
+	{
 		var d = {id:id,codigoMap:codigoMap,codigoLayer:codigoLayer,tipo:"etiquetaClasses",etiquetaClasses:id,html:"<i>&nbsp;Classes</i>"};
 		tempNodeR = new YAHOO.widget.HTMLNode(d, no, false,true);
 		tempNodeR.isLeaf = false;
@@ -469,22 +469,22 @@ function montaParametrosClasses(no,dados,redesenha)
 	var conteudo = "";
 	var tempNode = "";
 	var tempNodeR = "";
-    if(!tree.getNodeByProperty("etiquetaClasseGeral",no.data.id))
-    {
+	if(!tree.getNodeByProperty("etiquetaClasseGeral",no.data.id))
+	{
 		conteudo = "<span style=cursor:pointer; onclick=\"editorClasseGeral('"+codigoMap+"','"+codigoLayer+"','"+indiceClasse+"')\"  ><img width='10px' heigth='10px' style=\"position:relative;top:0px\" title='edita caracter&iacute;sticas da classe' src=\"../imagens/06.png\" /> Editar caracter&iacute;sticas gerais</span>";
 		var d = {tipo:"etiquetaClasseGeral",etiquetaClasseGeral:codigoMap+"_"+codigoLayer+"_"+indiceClasse,html:conteudo};
 		tempNode = new YAHOO.widget.HTMLNode(d, no, false,true);
 		tempNode.isLeaf = true;
 	}
-    if(!tree.getNodeByProperty("etiquetaClasseLabel",no.data.id))
-    {
+	if(!tree.getNodeByProperty("etiquetaClasseLabel",no.data.id))
+	{
 		conteudo = "<span style=cursor:pointer; onclick=\"editorClasseLabel('"+codigoMap+"','"+codigoLayer+"','"+indiceClasse+"')\" ><img width='10px' heigth='10px' style=\"position:relative;top:0px\" title='edita identificadores de texto' src=\"../imagens/06.png\" /> Editar topon&iacute;mia</span>";
 		var d = {tipo:"etiquetaClasseLabel",etiquetaClasseLabel:codigoMap+"_"+codigoLayer+"_"+indiceClasse,html:conteudo};
 		tempNode = new YAHOO.widget.HTMLNode(d, no, false,true);
 		tempNode.isLeaf = true;
 	}
-    if(!tree.getNodeByProperty("etiquetaEstilo",no.data.id))
-    {
+	if(!tree.getNodeByProperty("etiquetaEstilo",no.data.id))
+	{
 		var d = {tipo:"etiquetaEstilo",etiquetaEstilo:codigoMap+"_"+codigoLayer+"_"+indiceClasse,html:"<i>Estilos</i>"};
 		tempNodeR = new YAHOO.widget.HTMLNode(d, no, false,true);
 		tempNodeR.isLeaf = false;
@@ -795,9 +795,9 @@ function classesAuto(codigoMap,codigoLayer)
 		document.body.appendChild(novoel);
 		var editorBotoes = new YAHOO.widget.ButtonGroup({id:"okcancel_checkbox_id", name:  "okcancel_checkbox_id", container:  "okcancel_checkbox" });
 		editorBotoes.addButtons([
-            { label: "Criar classes", value: "OK", checked: false},
-            { label: "Cancela", value: "CANCEL", checked: false }
-        ]);
+			{ label: "Criar classes", value: "OK", checked: false},
+			{ label: "Cancela", value: "CANCEL", checked: false }
+		]);
 		editorBotoes.on("checkedButtonChange", on_editorCheckBoxChange);
 		YAHOO.admin.container.panelEditorAutoClasses = new YAHOO.widget.Panel("janela_editor_auto", { fixedcenter:true,close:true,width:"400px", height:"400px",overflow:"auto", visible:false,constraintoviewport:true } );
 		YAHOO.admin.container.panelEditorAutoClasses.render();
@@ -1995,7 +1995,7 @@ function sobeDesce(movimento,tipo,codigoMap,codigoLayer,indiceClasse,indiceEstil
 
 	var callback =
 	{
-    	success: function(o)
+		success: function(o)
 		{
 			core_carregando("desativa");
 			var no = "";

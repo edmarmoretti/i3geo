@@ -44,37 +44,37 @@ function pegaFuncoes()
 }
 function montaTabela(dados)
 {
-    YAHOO.example.InlineCellEditing = new function()
-    {
-        // Custom formatter for "address" column to preserve line breaks
-        var formatMais = function(elCell, oRecord, oColumn)
-        {
-            elCell.innerHTML = "<div class=editar style='text-align:center' ></div>";
-        };
-        var formatTexto = function(elCell, oRecord, oColumn, oData)
-        {
-            elCell.innerHTML = "<pre ><p>" + oData + "</pre>";
-        };
-        var formatExclui = function(elCell, oRecord, oColumn)
-        {
-            elCell.innerHTML = "<div class=excluir style='text-align:center' ></div>";//onclick='excluiLinha(\""+oRecord.getData("id_menu")+"\",\""+oRecord.getId()+"\")'></div>";
-        };
-        var myColumnDefs = [
-            {key:"excluir",label:"excluir",formatter:formatExclui},
+	YAHOO.example.InlineCellEditing = new function()
+	{
+		// Custom formatter for "address" column to preserve line breaks
+		var formatMais = function(elCell, oRecord, oColumn)
+		{
+			elCell.innerHTML = "<div class=editar style='text-align:center' ></div>";
+		};
+		var formatTexto = function(elCell, oRecord, oColumn, oData)
+		{
+			elCell.innerHTML = "<pre ><p>" + oData + "</pre>";
+		};
+		var formatExclui = function(elCell, oRecord, oColumn)
+		{
+			elCell.innerHTML = "<div class=excluir style='text-align:center' ></div>";//onclick='excluiLinha(\""+oRecord.getData("id_menu")+"\",\""+oRecord.getId()+"\")'></div>";
+		};
+		var myColumnDefs = [
+			{key:"excluir",label:"excluir",formatter:formatExclui},
 			{key:"mais",label:"editar",formatter:formatMais},
-            {label:"id",key:"id_i", formatter:formatTexto},
+			{label:"id",key:"id_i", formatter:formatTexto},
 			{label:"nome",resizeable:true,key:"nome_i", formatter:formatTexto, editor:"textbox"},
 			{label:"publicado?",key:"publicado_i",editor:"radio" ,editorOptions:{radioOptions:["SIM","NAO"],disableBtns:false}},
 			{label:"programa",resizeable:true,key:"abrir_i", formatter:formatTexto, editor:"textbox"},
 			{label:"abrir como?",key:"target_i", formatter:formatTexto,editor:"dropdown" ,editorOptions:{dropdownOptions:["self","target"],disableBtns:false}}
-        ];
-        myDataSource = new YAHOO.util.DataSource(dados);
-        myDataSource.responseType = YAHOO.util.DataSource.TYPE_JSARRAY;
-        myDataSource.responseSchema =
-        {
-            fields: ["publicado_i","abrir_i","id_i","nome_i","target_i"]
-        };
-        myDataTable = new YAHOO.widget.DataTable("tabela", myColumnDefs, myDataSource);
+		];
+		myDataSource = new YAHOO.util.DataSource(dados);
+		myDataSource.responseType = YAHOO.util.DataSource.TYPE_JSARRAY;
+		myDataSource.responseSchema =
+		{
+			fields: ["publicado_i","abrir_i","id_i","nome_i","target_i"]
+		};
+		myDataTable = new YAHOO.widget.DataTable("tabela", myColumnDefs, myDataSource);
 		myDataTable.subscribe('cellClickEvent',function(ev)
 		{
 			var target = YAHOO.util.Event.getTarget(ev);
@@ -114,8 +114,8 @@ function montaTabela(dados)
 			}
 		});
 
-    };
-    core_carregando("desativa");
+	};
+	core_carregando("desativa");
 }
 function montaEditor(dados,id,recordid)
 {
@@ -142,9 +142,9 @@ function montaEditor(dados,id,recordid)
 		document.body.appendChild(novoel);
 		var editorBotoes = new YAHOO.widget.ButtonGroup({id:"okcancel_checkbox_id", name:  "okcancel_checkbox_id", container:  "okcancel_checkbox" });
 		editorBotoes.addButtons([
-            { label: "Salva", value: "OK", checked: false},
-            { label: "Cancela", value: "CANCEL", checked: false }
-        ]);
+			{ label: "Salva", value: "OK", checked: false},
+			{ label: "Cancela", value: "CANCEL", checked: false }
+		]);
 		editorBotoes.on("checkedButtonChange", on_editorCheckBoxChange);
 		YAHOO.admin.container.panelEditor = new YAHOO.widget.Panel("janela_editor", { fixedcenter:true,close:false,width:"400px", height:"400px",overflow:"auto", visible:false,constraintoviewport:true } );
 		YAHOO.admin.container.panelEditor.render();

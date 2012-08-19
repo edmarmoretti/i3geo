@@ -74,32 +74,32 @@ function filtraDadosLetras_M(letra){
 }
 function montaTabela_M(dados)
 {
-    if(dados_M == ""){
-    	dados_M = dados;
-    }
-    core_listaDeLetras("letras_M","filtraDadosLetras_M");
+	if(dados_M == ""){
+		dados_M = dados;
+	}
+	core_listaDeLetras("letras_M","filtraDadosLetras_M");
 	YAHOO.example.InlineCellEditing = new function()
-    {
-        // Custom formatter for "address" column to preserve line breaks
-        var formatTexto = function(elCell, oRecord, oColumn, oData)
-        {
-            if(oData === ""){
+	{
+		// Custom formatter for "address" column to preserve line breaks
+		var formatTexto = function(elCell, oRecord, oColumn, oData)
+		{
+			if(oData === ""){
 				oData = "<span style='color:gray' ></span>";
 			}
 			elCell.innerHTML = "<pre ><p style=cursor:pointer title='clique para editar'>" + oData + "</pre>";
-        };
-        var formatExclui = function(elCell, oRecord, oColumn)
-        {
-            elCell.innerHTML = "<div class=excluir title='exclui' style='text-align:center' ></div>";//onclick='excluiLinha_M(\""+oRecord.getData("id_menu")+"\",\""+oRecord.getId()+"\")'></div>";
-        };
-        var formatMais = function(elCell, oRecord, oColumn)
-        {
-            elCell.innerHTML = "<div class=editar style='text-align:center' ></div>";
-        };
-        var myColumnDefs = [
-            {key:"excluir",label:"excluir",formatter:formatExclui},
+		};
+		var formatExclui = function(elCell, oRecord, oColumn)
+		{
+			elCell.innerHTML = "<div class=excluir title='exclui' style='text-align:center' ></div>";//onclick='excluiLinha_M(\""+oRecord.getData("id_menu")+"\",\""+oRecord.getId()+"\")'></div>";
+		};
+		var formatMais = function(elCell, oRecord, oColumn)
+		{
+			elCell.innerHTML = "<div class=editar style='text-align:center' ></div>";
+		};
+		var myColumnDefs = [
+			{key:"excluir",label:"excluir",formatter:formatExclui},
 			{key:"mais",label:"editar",formatter:formatMais},
-            {label:"id",key:"id_menu", formatter:formatTexto},
+			{label:"id",key:"id_menu", formatter:formatTexto},
 			{label:"nome padr&atilde;o do menu",resizeable:true,key:"nome_menu", formatter:formatTexto,editor:new YAHOO.widget.TextboxCellEditor({disableBtns:true})},
 			{label:"nome em ingl&ecirc;s (opcional)",resizeable:true,key:"en", formatter:formatTexto,editor:new YAHOO.widget.TextboxCellEditor({disableBtns:true})},
 			{label:"nome em espanhol (opcional)",resizeable:true,key:"es", formatter:formatTexto,editor:new YAHOO.widget.TextboxCellEditor({disableBtns:true})},
@@ -108,15 +108,15 @@ function montaTabela_M(dados)
 			{label:"perfis",resizeable:true,key:"perfil_menu", formatter:formatTexto,editor:"textbox",editorOptions:{LABEL_SAVE:"OK"}},
 			{label:"inicia aberto?",key:"aberto", editor:"radio" ,editorOptions:{radioOptions:["SIM","NAO"],disableBtns:false,LABEL_SAVE:"OK"}},
 			{label:"descri&ccedil;&atilde;o",resizeable:true,key:"desc_menu", formatter:formatTexto,editor:new YAHOO.widget.TextboxCellEditor({disableBtns:true})}
-        ];
+		];
 		//YAHOO.widget.CellEditor.LABEL_SAVE = "Aplicar";
-        myDataSource = new YAHOO.util.DataSource(dados);
-        myDataSource.responseType = YAHOO.util.DataSource.TYPE_JSARRAY;
-        myDataSource.responseSchema =
-        {
-            fields: ["it","es","en","publicado_menu","perfil_menu","aberto","desc_menu","id_menu","nome_menu"]
-        };
-        myDataTable = new YAHOO.widget.DataTable("tabela", myColumnDefs, myDataSource);
+		myDataSource = new YAHOO.util.DataSource(dados);
+		myDataSource.responseType = YAHOO.util.DataSource.TYPE_JSARRAY;
+		myDataSource.responseSchema =
+		{
+			fields: ["it","es","en","publicado_menu","perfil_menu","aberto","desc_menu","id_menu","nome_menu"]
+		};
+		myDataTable = new YAHOO.widget.DataTable("tabela", myColumnDefs, myDataSource);
 		myDataTable.subscribe('cellClickEvent',function(ev)
 		{
 			var target = YAHOO.util.Event.getTarget(ev);
@@ -155,8 +155,8 @@ function montaTabela_M(dados)
 				core_makeRequest(sUrl,callback);
 			}
 		});
-    };
-    core_carregando("desativa");
+	};
+	core_carregando("desativa");
 }
 function montaEditor_M(dados,id,recordid)
 {
@@ -182,9 +182,9 @@ function montaEditor_M(dados,id,recordid)
 		document.body.appendChild(novoel);
 		var editorBotoes = new YAHOO.widget.ButtonGroup({id:"okcancel_checkbox_id2", name:  "okcancel_checkbox_id2", container:  "okcancel_checkbox2" });
 		editorBotoes.addButtons([
-            { label: "Salva", value: "OK", checked: false},
-            { label: "Cancela", value: "CANCEL", checked: false }
-        ]);
+			{ label: "Salva", value: "OK", checked: false},
+			{ label: "Cancela", value: "CANCEL", checked: false }
+		]);
 		editorBotoes.on("checkedButtonChange", on_editorCheckBoxChange);
 		YAHOO.admin.container.panelEditor2 = new YAHOO.widget.Panel("janela_editor2", { fixedcenter:true,close:false,width:"400px", height:"480px",overflow:"auto", visible:false,constraintoviewport:true } );
 		YAHOO.admin.container.panelEditor2.render();

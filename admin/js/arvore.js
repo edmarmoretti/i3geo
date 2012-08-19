@@ -117,8 +117,8 @@ function montaArvore(dados)
 		{
 			buildTree();
 		}
-        function loadNodeData(node, fnLoadComplete)
-        {
+		function loadNodeData(node, fnLoadComplete)
+		{
 			if(node.data.id_menu == undefined){
 				fnLoadComplete.call();
 				return;
@@ -126,35 +126,35 @@ function montaArvore(dados)
 			var sUrl = "../php/arvore.php?funcao=pegaGrupos&id_menu="+node.data.id_menu+"&idioma="+idiomaSel();
 			var callback =
 			{
-                success: function(oResponse)
-                {
-                    var dados = YAHOO.lang.JSON.parse(oResponse.responseText);
+				success: function(oResponse)
+				{
+					var dados = YAHOO.lang.JSON.parse(oResponse.responseText);
 					montaNosGrupos(node.data.id_menu,node,dados,true);
-                    oResponse.argument.fnLoadComplete();
-                },
-                failure: function(oResponse)
-                {
-                    oResponse.argument.fnLoadComplete();
-                },
-                argument:
-                {
-                    "node": node,
-                    "fnLoadComplete": fnLoadComplete
-                },
-                timeout: 25000
-            };
-            YAHOO.util.Connect.asyncRequest('GET', sUrl, callback);
-        }
-        function buildTree()
-        {
+					oResponse.argument.fnLoadComplete();
+				},
+				failure: function(oResponse)
+				{
+					oResponse.argument.fnLoadComplete();
+				},
+				argument:
+				{
+					"node": node,
+					"fnLoadComplete": fnLoadComplete
+				},
+				timeout: 25000
+			};
+			YAHOO.util.Connect.asyncRequest('GET', sUrl, callback);
+		}
+		function buildTree()
+		{
 			tree = new YAHOO.widget.TreeView("arvoreMenus");
 			tree.setDynamicLoad(loadNodeData, 1);
 			var root = tree.getRoot();
 			var tempNode = new YAHOO.widget.TextNode('', root, false);
 			tempNode.isLeaf = true;
 			core_carregando("desativa");
-        }
-    	buildTree();
+		}
+		buildTree();
 	}();
    	montaNosMenus(dados);
    	tree.draw();
@@ -200,15 +200,15 @@ Monta os n�s com os grupos e permite abrir os subgrupos
 */
 function montaNosGrupos(idmenu,no,dados,redesenha)
 {
-    var tempNodeR = null;
+	var tempNodeR = null;
 	//pega os temas que ficam na raiz da �rvore
 	if(!tree.getNodeByProperty("etiquetaTemasRaiz","menu_"+idmenu))
 	{montaTemasRaiz(no,dados,true);}
 	//pega os grupos do menu
-    if(idmenu == undefined)
+	if(idmenu == undefined)
 	{return;}
 	if(!tree.getNodeByProperty("etiquetaGrupo","menu_"+idmenu))
-    {
+	{
 		var temp = "menu_"+idmenu;
 		var d = {tipo:"etiqueta","etiquetaGrupo":temp,html:"<i style=color:gray >Grupos</i>"};
 		tempNodeR = new YAHOO.widget.HTMLNode(d, no, false,true);
@@ -297,10 +297,10 @@ Monta os n�s com os temas
 */
 function montaNosSubgrupos(idmenu,no,dados,redesenha)
 {
-    var tempNodeR = null;
+	var tempNodeR = null;
 	if(!tree.getNodeByProperty("etiquetaTemasGrupo","grupo_"+no.data.id_n1))
 	montaTemasRaizGrupo(idmenu,no,dados,true);
-    if(idmenu == undefined)
+	if(idmenu == undefined)
 	{return;}
 	if(!tree.getNodeByProperty("etiquetaTemasSubGrupo",no.data.id_n1))
 	{
@@ -373,7 +373,7 @@ function montaTemasRaiz(no,dados,redesenha)
 	if(no.data.id_menu == undefined)
 	{return;}
 	if(!tree.getNodeByProperty("etiquetaTemasRaiz","menu_"+no.data.id_menu))
-    {
+	{
 		var temp = "menu_"+no.data.id_menu;
 		var d = {id_menu:no.data.id_menu,tipo:"etiqueta",etiquetaTemasRaiz:temp,html:"<i style=color:gray >Temas na raiz do menu</i>"};
 		tempNodeR = new YAHOO.widget.HTMLNode(d, no, false,true);
@@ -402,7 +402,7 @@ function montaTemasRaizGrupo(idmenu,no,dados,redesenha)
 	if(no.data.id_n1 == undefined)
 	{return;}
 	if(!tree.getNodeByProperty("etiquetaTemasGrupo","grupo_"+no.data.id_n1))
-    {
+	{
 		var temp = "grupo_"+no.data.id_n1;
 		var d = {etiquetaTemasGrupo:temp,tipo:"etiqueta",html:"<i style=color:gray >Temas na raiz do grupo:</i>"};
 		tempNodeR = new YAHOO.widget.HTMLNode(d, no, false,true);
@@ -437,7 +437,7 @@ function novoTemaRaiz(id)
 	var sUrl = "../php/arvore.php?funcao=adicionarTemaRaiz&id_menu="+id+"&idioma="+idiomaSel();
 	var callback =
 	{
-    	success: function(oResponse)
+		success: function(oResponse)
 		{
 			var dados = YAHOO.lang.JSON.parse(oResponse.responseText);
 			dados = dados.raiz[0];
@@ -469,7 +469,7 @@ function novoTemaRaizGrupo(idmenu,id)
 	var sUrl = "../php/arvore.php?funcao=adicionarTemaRaizGrupo&id_n1="+id+"&id_menu="+idmenu+"&idioma="+idiomaSel();
 	var callback =
 	{
-    	success: function(oResponse)
+		success: function(oResponse)
 		{
 			var dados = YAHOO.lang.JSON.parse(oResponse.responseText);
 			dados = dados.raiz[0];
@@ -500,7 +500,7 @@ function novoGrupo(id_menu)
 	var sUrl = "../php/arvore.php?funcao=adicionarGrupo&id_menu="+id_menu+"&idioma="+idiomaSel();
 	var callback =
 	{
-    	success: function(oResponse)
+		success: function(oResponse)
 		{
 			var no = tree.getNodeByProperty("etiquetaGrupo","menu_"+id_menu);
 			var dados = YAHOO.lang.JSON.parse(oResponse.responseText);
@@ -534,7 +534,7 @@ function novoSubGrupo(id_menu,id_n1)
 	var sUrl = "../php/arvore.php?funcao=adicionarSubGrupo&id_n1="+id_n1+"&idioma="+idiomaSel();
 	var callback =
 	{
-    	success: function(oResponse)
+		success: function(oResponse)
 		{
 			var no = tree.getNodeByProperty("etiquetaTemasSubGrupo",id_n1);
 			var dados = YAHOO.lang.JSON.parse(oResponse.responseText);
@@ -568,7 +568,7 @@ function novoTema(id_menu,id_n2)
 	var sUrl = "../php/arvore.php?funcao=adicionarTema&id_n2="+id_n2+"&idioma="+idiomaSel();
 	var callback =
 	{
-    	success: function(oResponse)
+		success: function(oResponse)
 		{
 			var no = tree.getNodeByProperty("etiquetaTemas",id_n2);
 			var dados = YAHOO.lang.JSON.parse(oResponse.responseText);
@@ -897,7 +897,7 @@ function sobeDesce(movimento,tipo,id)
 	}
 	var callback =
 	{
-    	success: function(oResponse)
+		success: function(oResponse)
 		{core_carregando("desativa");},
   		failure:core_handleFailure,
   		argument: { foo:"foo", bar:"bar" }

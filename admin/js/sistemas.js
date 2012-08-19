@@ -96,40 +96,40 @@ function montaArvore(dados)
 		{
 			buildTree();
 		}
-        function loadNodeData(node, fnLoadComplete)
-        {
+		function loadNodeData(node, fnLoadComplete)
+		{
 			var sUrl = "../php/sistemas.php?funcao=pegaFuncoes&id_sistema="+node.data.id_sistema;
 			var callback =
 			{
-                success: function(oResponse)
-                {
-                    var dados = YAHOO.lang.JSON.parse(oResponse.responseText);
+				success: function(oResponse)
+				{
+					var dados = YAHOO.lang.JSON.parse(oResponse.responseText);
 					adicionaNos(node,dados,false);
-                    oResponse.argument.fnLoadComplete();
-                },
-                failure: function(oResponse)
-                {
-                    oResponse.argument.fnLoadComplete();
-                },
-                argument:
-                {
-                    "node": node,
-                    "fnLoadComplete": fnLoadComplete
-                },
-                timeout: 25000
-            };
-            YAHOO.util.Connect.asyncRequest('GET', sUrl, callback);
-        }
-        function buildTree()
-        {
+					oResponse.argument.fnLoadComplete();
+				},
+				failure: function(oResponse)
+				{
+					oResponse.argument.fnLoadComplete();
+				},
+				argument:
+				{
+					"node": node,
+					"fnLoadComplete": fnLoadComplete
+				},
+				timeout: 25000
+			};
+			YAHOO.util.Connect.asyncRequest('GET', sUrl, callback);
+		}
+		function buildTree()
+		{
 			tree = new YAHOO.widget.TreeView("tabela");
 			tree.setDynamicLoad(loadNodeData, 0);
 			var root = tree.getRoot();
 			var tempNode = new YAHOO.widget.TextNode('', root, false);
 			tempNode.isLeaf = true;
 			core_carregando("desativa");
-        }
-    	buildTree();
+		}
+		buildTree();
 	}();
    	adicionaNosRaiz(dados);
    	tree.draw();
@@ -307,7 +307,7 @@ function adicionarFuncao(id)
 	var sUrl = "../php/sistemas.php?funcao=alterarFuncoes&id_sistema="+id;
 	var callback =
 	{
-    	success: function(oResponse)
+		success: function(oResponse)
 		{
 			var dados = YAHOO.lang.JSON.parse(oResponse.responseText);
 			adicionaNos(no,dados,true);

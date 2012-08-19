@@ -156,16 +156,16 @@ class Metaestat{
 						$r = $r[0];
 					}
 					else{
-						$r = false;
+						$r = array();
 					}
 				}
-				if($r != false)
+				if($r != false && count($r) > 0){
 					$r = $this->converteTextoArray($r);
-
+				}
 				return $r;
 			}
 			else{
-				return false;
+				return array();
 			}
 		}
 		else{
@@ -651,18 +651,34 @@ class Metaestat{
 
 	Altera uma regiao
 	*/
-	function alteraTipoRegiao($codigo_tipo_regiao,$nome_tipo_regiao,$descricao_tipo_regiao,$esquemadb,$tabela,$colunageo,$colunacentroide,$data,$identificador,$colunanomeregiao,$srid){
+	function alteraTipoRegiao($codigo_tipo_regiao,$nome_tipo_regiao,$descricao_tipo_regiao,$esquemadb,$tabela,$colunageo,$colunacentroide,$data,$identificador,$colunanomeregiao,$srid,$codigo_estat_conexao){
 		try	{
 			if($codigo_tipo_regiao != ""){
 				if($this->convUTF){
 					$nome_tipo_regiao = utf8_encode($nome_tipo_regiao);
 					$descricao_tipo_regiao = utf8_encode($descricao_tipo_regiao);
 				}
-				$this->dbhw->query("UPDATE ".$this->esquemaadmin."i3geoestat_tipo_regiao SET colunacentroide = '$colunacentroide',nome_tipo_regiao = '$nome_tipo_regiao',descricao_tipo_regiao = '$descricao_tipo_regiao',esquemadb = '$esquemadb',tabela = '$tabela',colunageo = '$colunageo',data = '$data',identificador = '$identificador',colunanomeregiao = '$colunanomeregiao', srid = '$srid' WHERE codigo_tipo_regiao = $codigo_tipo_regiao");
+				$this->dbhw->query("UPDATE ".$this->esquemaadmin."i3geoestat_tipo_regiao SET codigo_estat_conexao = '$codigo_estat_conexao', colunacentroide = '$colunacentroide',nome_tipo_regiao = '$nome_tipo_regiao',descricao_tipo_regiao = '$descricao_tipo_regiao',esquemadb = '$esquemadb',tabela = '$tabela',colunageo = '$colunageo',data = '$data',identificador = '$identificador',colunanomeregiao = '$colunanomeregiao', srid = '$srid' WHERE codigo_tipo_regiao = $codigo_tipo_regiao");
 				$retorna = $codigo_tipo_regiao;
 			}
 			else{
 				$retorna = $this->insertId("i3geoestat_tipo_regiao","nome_tipo_regiao","codigo_tipo_regiao");
+			}
+			return $retorna;
+		}
+		catch (PDOException $e)	{
+			return "Error!: " . $e->getMessage();
+		}
+	}
+	function alteraAgregaRegiao($codigo_tipo_regiao,$id_agregaregiao="",$codigo_tipo_regiao_pai="",$coluna_ligacao_regiaopai=""){
+		try	{
+			if($id_agregaregiao != ""){
+				$this->dbhw->query("UPDATE ".$this->esquemaadmin."i3geoestat_agregaregiao SET colunaligacao_regiaopai = '$colunaligacao_regiaopai', codigo_tipo_regiao_pai = '$codigo_tipo_regiao_pai' WHERE id_agregaregiao = $id_agregaregiao");
+				$retorna = $id_agregaregiao;
+			}
+			else{
+				$retorna = $this->insertId("i3geoestat_agregaregiao","colunaligacao_regiaopai","id_agregaregiao");
+				$this->dbhw->query("UPDATE ".$this->esquemaadmin."i3geoestat_agregaregiao SET codigo_tipo_regiao = '$codigo_tipo_regiao' WHERE id_agregaregiao = $retorna");
 			}
 			return $retorna;
 		}
@@ -980,6 +996,18 @@ class Metaestat{
 		$sql .= "ORDER BY nome_tipo_regiao";
 		return $this->execSQL($sql,$codigo_tipo_regiao);
 	}
+	function listaAgregaRegiao($codigo_tipo_regiao,$id_agregaregiao=""){
+		$sql = "select * from ".$this->esquemaadmin."i3geoestat_agregaregiao ";
+		if($id_agregaregiao != ""){
+			$sql .= "WHERE id_agregaregiao = $id_agregaregiao ";
+		}
+		else{
+			$sql .= "WHERE codigo_tipo_regiao = $codigo_tipo_regiao";
+		}
+		$sql .= " ORDER BY colunaligacao_regiaopai";
+		//echo $sql;exit;
+		return $this->execSQL($sql,$id_agregaregiao);
+	}
 	function esquemasConexao($codigo_estat_conexao){
 		$c = $this->listaConexao($codigo_estat_conexao,true);
 		$dbhold = $this->dbh;
@@ -1103,7 +1131,7 @@ class Metaestat{
 				}
 				else{
 					$tipos[] = "java.lang.String";
-				}			
+				}
 			}
 			$xml .= '<!--'.implode($tipos,",").'-->' . PHP_EOL;
 		}
@@ -1128,7 +1156,7 @@ class Metaestat{
 				}
 				else{
 					$tipos[] = "java.lang.String";
-				}	
+				}
 				break;
 			}
 			$xml .= '<!--'.implode($tipos,",").'-->' . PHP_EOL;

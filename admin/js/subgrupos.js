@@ -74,71 +74,71 @@ function filtraDadosLetras_S(letra){
 }
 function montaTabela_S(dados)
 {
-    if(dados_S == ""){
-    	dados_S = dados;
-    }
-    core_listaDeLetras("letras_S","filtraDadosLetras_S");
+	if(dados_S == ""){
+		dados_S = dados;
+	}
+	core_listaDeLetras("letras_S","filtraDadosLetras_S");
 	YAHOO.example.InlineCellEditing = new function()
-    {
-        // Custom formatter for "address" column to preserve line breaks
-        var formatTexto = function(elCell, oRecord, oColumn, oData)
-        {
-            if(oData === ""){
+	{
+		// Custom formatter for "address" column to preserve line breaks
+		var formatTexto = function(elCell, oRecord, oColumn, oData)
+		{
+			if(oData === ""){
 				oData = "<span style='color:gray' >Clique para editar, tecle enter e depois salve</span>";
 			}
 			elCell.innerHTML = "<p style=width:250px;cursor:pointer title='clique para editar'>" + oData + "</p>";
-        };
-        var formatTextoId = function(elCell, oRecord, oColumn, oData)
-        {
-            elCell.innerHTML = "<p style=width:20px >" + oData + "</p>";
-        };
+		};
+		var formatTextoId = function(elCell, oRecord, oColumn, oData)
+		{
+			elCell.innerHTML = "<p style=width:20px >" + oData + "</p>";
+		};
 
-        var formatSalva = function(elCell, oRecord, oColumn)
-        {
-            elCell.innerHTML = "<div title='salva' class=salvar style='text-align:center' onclick='gravaLinha_S(\""+oRecord._sId+"\")'></div>";
-        };
-        var formatExclui = function(elCell, oRecord, oColumn)
-        {
-            elCell.innerHTML = "<div title='exclui' class=excluir style='text-align:center' ></div>";
-        };
-        var myColumnDefs = [
-            {key:"excluir",label:"excluir",formatter:formatExclui},
-            {label:"salvar",formatter:formatSalva},
-            {label:"id",key:"id_subgrupo", formatter:formatTextoId},
+		var formatSalva = function(elCell, oRecord, oColumn)
+		{
+			elCell.innerHTML = "<div title='salva' class=salvar style='text-align:center' onclick='gravaLinha_S(\""+oRecord._sId+"\")'></div>";
+		};
+		var formatExclui = function(elCell, oRecord, oColumn)
+		{
+			elCell.innerHTML = "<div title='exclui' class=excluir style='text-align:center' ></div>";
+		};
+		var myColumnDefs = [
+			{key:"excluir",label:"excluir",formatter:formatExclui},
+			{label:"salvar",formatter:formatSalva},
+			{label:"id",key:"id_subgrupo", formatter:formatTextoId},
 			{label:"nome",resizeable:true,key:"nome_subgrupo", formatter:formatTexto, editor:new YAHOO.widget.TextboxCellEditor({disableBtns:true})},
 			{label:"descri&ccedil;&atilde;o",resizeable:true,key:"desc_subgrupo", formatter:formatTexto, editor:new YAHOO.widget.TextboxCellEditor({disableBtns:true})},
 			{label:"en",resizeable:true,key:"en", formatter:formatTexto, editor:new YAHOO.widget.TextboxCellEditor({disableBtns:true})},
 			{label:"es",resizeable:true,key:"es", formatter:formatTexto, editor:new YAHOO.widget.TextboxCellEditor({disableBtns:true})},
 			{label:"it",resizeable:true,key:"it", formatter:formatTexto, editor:new YAHOO.widget.TextboxCellEditor({disableBtns:true})}
-        ];
-        myDataSource = new YAHOO.util.DataSource(dados);
-        myDataSource.responseType = YAHOO.util.DataSource.TYPE_JSARRAY;
-        myDataSource.responseSchema =
-        {
-            fields: ["it","es","en","desc_subgrupo","id_subgrupo","nome_subgrupo"]
-        };
-        myDataTable = new YAHOO.widget.DataTable("tabela", myColumnDefs, myDataSource);
-        // Set up editing flow
-        myDataTable.highlightEditableCell = function(oArgs)
-        {
-            var elCell = oArgs.target;
-            var column = myDataTable.getColumn(oArgs.target);
-            //if(column.editor != "null")
-            if(!YAHOO.lang.isNull(column.editor))
-            {
+		];
+		myDataSource = new YAHOO.util.DataSource(dados);
+		myDataSource.responseType = YAHOO.util.DataSource.TYPE_JSARRAY;
+		myDataSource.responseSchema =
+		{
+			fields: ["it","es","en","desc_subgrupo","id_subgrupo","nome_subgrupo"]
+		};
+		myDataTable = new YAHOO.widget.DataTable("tabela", myColumnDefs, myDataSource);
+		// Set up editing flow
+		myDataTable.highlightEditableCell = function(oArgs)
+		{
+			var elCell = oArgs.target;
+			var column = myDataTable.getColumn(oArgs.target);
+			//if(column.editor != "null")
+			if(!YAHOO.lang.isNull(column.editor))
+			{
 				YAHOO.util.Dom.addClass(elCell,'yui-dt-highlighted');
-            }
-        };
-        myDataTable.unhighlightEditableCell = function(oArgs)
-        {
-            var elCell = oArgs.target;
-            if(elCell.style.cursor="pointer")
-            {
+			}
+		};
+		myDataTable.unhighlightEditableCell = function(oArgs)
+		{
+			var elCell = oArgs.target;
+			if(elCell.style.cursor="pointer")
+			{
 				YAHOO.util.Dom.removeClass(elCell,'yui-dt-highlighted');
-            }
-        };
-        myDataTable.subscribe("cellMouseoverEvent", myDataTable.highlightEditableCell);
-        myDataTable.subscribe("cellMouseoutEvent", myDataTable.unhighlightEditableCell);
+			}
+		};
+		myDataTable.subscribe("cellMouseoverEvent", myDataTable.highlightEditableCell);
+		myDataTable.subscribe("cellMouseoutEvent", myDataTable.unhighlightEditableCell);
 		myDataTable.subscribe('cellClickEvent',function(ev)
 		{
 			var target = YAHOO.util.Event.getTarget(ev);
@@ -156,30 +156,30 @@ function montaTabela_S(dados)
 			else
 			{this.onEventShowCellEditor(ev);}
 		});
-        // Hook into custom event to customize save-flow of "radio" editor
-        myDataTable.subscribe("editorUpdateEvent", function(oArgs)
-        {
-            if(oArgs.editor.column.key === "active")
-            {
-                this.saveCellEditor();
+		// Hook into custom event to customize save-flow of "radio" editor
+		myDataTable.subscribe("editorUpdateEvent", function(oArgs)
+		{
+			if(oArgs.editor.column.key === "active")
+			{
+				this.saveCellEditor();
 
-            }
-        });
-        myDataTable.subscribe("editorBlurEvent", function(oArgs)
-        {
-            this.cancelCellEditor();
-        });
-        myDataTable.subscribe("editorSaveEvent", function(oArgs)
-        {
+			}
+		});
+		myDataTable.subscribe("editorBlurEvent", function(oArgs)
+		{
+			this.cancelCellEditor();
+		});
+		myDataTable.subscribe("editorSaveEvent", function(oArgs)
+		{
 			if(oArgs.newData != oArgs.oldData){
 				var linha = myDataTable.getTrEl(oArgs.editor.getRecord());
 				linha.style.color = "blue";
 				linha.style.textDecoration = "blink";
 			}
-        });
+		});
 
-    };
-    core_carregando("desativa");
+	};
+	core_carregando("desativa");
 }
 /*
 Function: gravaLinha_S

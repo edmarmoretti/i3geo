@@ -424,7 +424,7 @@ function pegaMetadados(codigoMap,codigoLayer)
 	var ins = "<br><fieldset><legend>+- Metadados</legend><div style=display:none >";
 	var retorna = function(retorna)
 	{
-	    ins += "";
+		ins += "";
 		var param = {
 			"linhas":[
 				{texto:"Nome que ser&aacute; utilizado na legenda do mapa e na guia 'Temas'",

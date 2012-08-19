@@ -83,34 +83,34 @@ function montaArvore(dados){
 		function changeIconMode(){
 			buildTree();
 		}
-        function loadNodeData(node, fnLoadComplete){
-        	var sUrl = "../php/gruposusuarios.php?funcao=pegaUsuariosGrupo&id_grupo="+node.data.id_grupo;
+		function loadNodeData(node, fnLoadComplete){
+			var sUrl = "../php/gruposusuarios.php?funcao=pegaUsuariosGrupo&id_grupo="+node.data.id_grupo;
 			var callback = {
-                success: function(oResponse){
-                    var dados = YAHOO.lang.JSON.parse(oResponse.responseText);
+				success: function(oResponse){
+					var dados = YAHOO.lang.JSON.parse(oResponse.responseText);
 					adicionaNosUsuarios(node,dados,false);
-                    oResponse.argument.fnLoadComplete();
-                },
-                failure: function(oResponse){
-                    oResponse.argument.fnLoadComplete();
-                },
-                argument:{
-                    "node": node,
-                    "fnLoadComplete": fnLoadComplete
-                },
-                timeout: 25000
-            };
-            YAHOO.util.Connect.asyncRequest('GET', sUrl, callback);
-        }
-        function buildTree(){
+					oResponse.argument.fnLoadComplete();
+				},
+				failure: function(oResponse){
+					oResponse.argument.fnLoadComplete();
+				},
+				argument:{
+					"node": node,
+					"fnLoadComplete": fnLoadComplete
+				},
+				timeout: 25000
+			};
+			YAHOO.util.Connect.asyncRequest('GET', sUrl, callback);
+		}
+		function buildTree(){
 			tree = new YAHOO.widget.TreeView("tabela");
 			tree.setDynamicLoad(loadNodeData, 1);
 			var root = tree.getRoot();
 			var tempNode = new YAHOO.widget.TextNode('', root, false);
 			tempNode.isLeaf = true;
 			core_carregando("desativa");
-        }
-    	buildTree();
+		}
+		buildTree();
 	}();
    	adicionaNosGrupos(dados);
    	tree.draw();
@@ -122,7 +122,7 @@ function adicionaNosUsuarios(no,dados,redesenha)
 		if (newVal != currentIconMode)
 		{currentIconMode = newVal;}
 	}
-    if(!redesenha){
+	if(!redesenha){
 		var conteudo = "<span style=\"cursor:pointer;\" onclick=\"editar('usuario','"+no.data.id_grupo+"')\" ><img style=\"position:relative;top:2px\" src=\"../imagens/05.png\" /><i>Adicionar novo usu&aacute;rio</i></span>";
 		var d = {html:conteudo};
 		var tempNode = new YAHOO.widget.HTMLNode(d, no, false,true);
@@ -196,8 +196,8 @@ function editar(tipo,id){
 function montaDivGrupo(i){
 	var param = {
 		"linhas":[
-	          {titulo:"Nome:",id:"Enome",size:"50",value:i.nome,tipo:"text",div:""},
-	          {titulo:"Descri&ccedil;&atilde;o:",id:"Edescricao",size:"50",value:i.descricao,tipo:"text",div:""}
+			  {titulo:"Nome:",id:"Enome",size:"50",value:i.nome,tipo:"text",div:""},
+			  {titulo:"Descri&ccedil;&atilde;o:",id:"Edescricao",size:"50",value:i.descricao,tipo:"text",div:""}
 		]
 	};
 	var ins = "<input type=button title='Salvar' value='Salvar' id=salvarEditorGrupo />";

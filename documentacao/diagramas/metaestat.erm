@@ -11,8 +11,8 @@
 	</page_setting>
 	<category_index>0</category_index>
 	<zoom>1.0</zoom>
-	<x>155</x>
-	<y>111</y>
+	<x>-372</x>
+	<y>275</y>
 	<default_color>
 		<r>255</r>
 		<g>128</g>
@@ -41,7 +41,7 @@
 		<suspend_validator>false</suspend_validator>
 		<export_setting>
 			<category_name_to_export>All</category_name_to_export>
-			<ddl_output>C:\ms4w\Apache\htdocs\i3geo\admin\sql\metaestat.sql</ddl_output>
+			<ddl_output>/var/www/i3geo/admin/sql/metaestat.sql</ddl_output>
 			<excel_output></excel_output>
 			<excel_template></excel_template>
 			<image_output></image_output>
@@ -97,7 +97,7 @@
 			<id></id>
 			<height>-1</height>
 			<width>-1</width>
-				<font_name>Segoe UI</font_name>
+				<font_name>Ubuntu</font_name>
 				<font_size>9</font_size>
 			<x>50</x>
 			<y>50</y>
@@ -110,7 +110,7 @@
 			</connections>
 			<display>false</display>
 			<creation_date>2012-07-17 15:03:53</creation_date>
-			<updated_date>2012-08-16 11:27:59</updated_date>
+			<updated_date>2012-08-18 09:59:03</updated_date>
 			<model_property>
 				<name>Project Name</name>
 				<value></value>
@@ -1068,7 +1068,7 @@
 					</sequence>
 				</normal_column>
 				<normal_column>
-					<word_id>36</word_id>
+					<word_id>38</word_id>
 					<id>1</id>
 					<description></description>
 					<unique_key_name></unique_key_name>
@@ -1259,7 +1259,7 @@
 					</sequence>
 				</normal_column>
 				<normal_column>
-					<word_id>40</word_id>
+					<word_id>41</word_id>
 					<id>6</id>
 					<description></description>
 					<unique_key_name></unique_key_name>
@@ -1386,7 +1386,7 @@
 					</sequence>
 				</normal_column>
 				<normal_column>
-					<word_id>38</word_id>
+					<word_id>37</word_id>
 					<id>9</id>
 					<description></description>
 					<unique_key_name></unique_key_name>
@@ -1753,7 +1753,7 @@
 					</sequence>
 				</normal_column>
 				<normal_column>
-					<word_id>37</word_id>
+					<word_id>39</word_id>
 					<id>18</id>
 					<description></description>
 					<unique_key_name></unique_key_name>
@@ -2466,7 +2466,7 @@
 			<connections>
 				<relation>
 					<id>2</id>
-					<source>2</source>
+					<source>13</source>
 					<target>9</target>
 					<child_cardinality>1..n</child_cardinality>
 					<parent_cardinality>1</parent_cardinality>
@@ -2483,7 +2483,7 @@
 				</relation>
 				<relation>
 					<id>3</id>
-					<source>4</source>
+					<source>3</source>
 					<target>9</target>
 					<child_cardinality>1..n</child_cardinality>
 					<parent_cardinality>1</parent_cardinality>
@@ -2500,7 +2500,7 @@
 				</relation>
 				<relation>
 					<id>4</id>
-					<source>13</source>
+					<source>4</source>
 					<target>9</target>
 					<child_cardinality>1..n</child_cardinality>
 					<parent_cardinality>1</parent_cardinality>
@@ -2534,7 +2534,7 @@
 				</relation>
 				<relation>
 					<id>6</id>
-					<source>3</source>
+					<source>2</source>
 					<target>9</target>
 					<child_cardinality>1..n</child_cardinality>
 					<parent_cardinality>1</parent_cardinality>
@@ -2592,7 +2592,7 @@
 				<normal_column>
 					<id>38</id>
 					<referenced_column>0</referenced_column>
-					<relation>2</relation>
+					<relation>6</relation>
 					<description></description>
 					<unique_key_name></unique_key_name>
 					<logical_name></logical_name>
@@ -2625,7 +2625,7 @@
 				<normal_column>
 					<id>39</id>
 					<referenced_column>5</referenced_column>
-					<relation>6</relation>
+					<relation>3</relation>
 					<description></description>
 					<unique_key_name></unique_key_name>
 					<logical_name></logical_name>
@@ -2658,7 +2658,7 @@
 				<normal_column>
 					<id>40</id>
 					<referenced_column>8</referenced_column>
-					<relation>3</relation>
+					<relation>4</relation>
 					<description></description>
 					<unique_key_name></unique_key_name>
 					<logical_name></logical_name>
@@ -2691,7 +2691,7 @@
 				<normal_column>
 					<id>41</id>
 					<referenced_column>61</referenced_column>
-					<relation>4</relation>
+					<relation>2</relation>
 					<description></description>
 					<unique_key_name></unique_key_name>
 					<logical_name></logical_name>
@@ -3060,7 +3060,7 @@
 					</sequence>
 				</normal_column>
 				<normal_column>
-					<word_id>41</word_id>
+					<word_id>40</word_id>
 					<id>51</id>
 					<description></description>
 					<unique_key_name></unique_key_name>
@@ -3148,7 +3148,7 @@
 			<connections>
 				<relation>
 					<id>8</id>
-					<source>9</source>
+					<source>8</source>
 					<target>11</target>
 					<child_cardinality>1..n</child_cardinality>
 					<parent_cardinality>1</parent_cardinality>
@@ -3165,7 +3165,7 @@
 				</relation>
 				<relation>
 					<id>9</id>
-					<source>8</source>
+					<source>9</source>
 					<target>11</target>
 					<child_cardinality>1..n</child_cardinality>
 					<parent_cardinality>1</parent_cardinality>
@@ -3191,7 +3191,7 @@
 				<normal_column>
 					<id>53</id>
 					<referenced_column>37</referenced_column>
-					<relation>8</relation>
+					<relation>9</relation>
 					<description></description>
 					<unique_key_name></unique_key_name>
 					<logical_name></logical_name>
@@ -3224,7 +3224,7 @@
 				<normal_column>
 					<id>54</id>
 					<referenced_column>34</referenced_column>
-					<relation>9</relation>
+					<relation>8</relation>
 					<description></description>
 					<unique_key_name></unique_key_name>
 					<logical_name></logical_name>
@@ -3367,7 +3367,7 @@
 					</sequence>
 				</normal_column>
 				<normal_column>
-					<word_id>39</word_id>
+					<word_id>36</word_id>
 					<id>57</id>
 					<description></description>
 					<unique_key_name></unique_key_name>
@@ -4381,6 +4381,56 @@
 							<column_data>
 								<column_id>72</column_id>
 								<value>the_geom2</value>
+							</column_data>
+						</data>
+						<data>
+							<column_data>
+								<column_id>61</column_id>
+								<value>3</value>
+							</column_data>
+							<column_data>
+								<column_id>62</column_id>
+								<value>Estados</value>
+							</column_data>
+							<column_data>
+								<column_id>63</column_id>
+								<value>Limites estaduais</value>
+							</column_data>
+							<column_data>
+								<column_id>64</column_id>
+								<value>1</value>
+							</column_data>
+							<column_data>
+								<column_id>65</column_id>
+								<value>public</value>
+							</column_data>
+							<column_data>
+								<column_id>66</column_id>
+								<value>tb_ibge_estados</value>
+							</column_data>
+							<column_data>
+								<column_id>67</column_id>
+								<value>the_geom</value>
+							</column_data>
+							<column_data>
+								<column_id>68</column_id>
+								<value></value>
+							</column_data>
+							<column_data>
+								<column_id>69</column_id>
+								<value>co_ibge_uf</value>
+							</column_data>
+							<column_data>
+								<column_id>70</column_id>
+								<value>no_uf</value>
+							</column_data>
+							<column_data>
+								<column_id>71</column_id>
+								<value>4326</value>
+							</column_data>
+							<column_data>
+								<column_id>72</column_id>
+								<value>the_geom</value>
 							</column_data>
 						</data>
 					</direct_test_data>

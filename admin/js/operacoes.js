@@ -92,34 +92,34 @@ function montaArvore(dados){
 		{
 			buildTree();
 		}
-        function loadNodeData(node, fnLoadComplete){
-        	var sUrl = "../php/operacoes.php?funcao=pegaPapeisOperacao&id_operacao="+node.data.id_operacao;
+		function loadNodeData(node, fnLoadComplete){
+			var sUrl = "../php/operacoes.php?funcao=pegaPapeisOperacao&id_operacao="+node.data.id_operacao;
 			var callback = {
-                success: function(oResponse){
-                    var dados = YAHOO.lang.JSON.parse(oResponse.responseText);
+				success: function(oResponse){
+					var dados = YAHOO.lang.JSON.parse(oResponse.responseText);
 					adicionaNosPapeis(node,dados,false);
-                    oResponse.argument.fnLoadComplete();
-                },
-                failure: function(oResponse){
-                    oResponse.argument.fnLoadComplete();
-                },
-                argument:{
-                    "node": node,
-                    "fnLoadComplete": fnLoadComplete
-                },
-                timeout: 25000
-            };
-            YAHOO.util.Connect.asyncRequest('GET', sUrl, callback);
-        }
-        function buildTree(){
+					oResponse.argument.fnLoadComplete();
+				},
+				failure: function(oResponse){
+					oResponse.argument.fnLoadComplete();
+				},
+				argument:{
+					"node": node,
+					"fnLoadComplete": fnLoadComplete
+				},
+				timeout: 25000
+			};
+			YAHOO.util.Connect.asyncRequest('GET', sUrl, callback);
+		}
+		function buildTree(){
 			tree = new YAHOO.widget.TreeView("tabela");
 			tree.setDynamicLoad(loadNodeData, 1);
 			var root = tree.getRoot();
 			var tempNode = new YAHOO.widget.TextNode('', root, false);
 			tempNode.isLeaf = true;
 			core_carregando("desativa");
-        }
-    	buildTree();
+		}
+		buildTree();
 	}();
    	adicionaNosOperacoes(dados);
    	tree.draw();
@@ -139,8 +139,8 @@ function adicionaNosPapeis(no,dados,redesenha)
 		if (newVal != currentIconMode)
 		{currentIconMode = newVal;}
 	}
-    if(!redesenha)
-    {
+	if(!redesenha)
+	{
 		var conteudo = "<span style=\"cursor:pointer;\" onclick=\"editar('papel','"+no.data.id_operacao+"')\" ><img style=\"position:relative;top:2px\" src=\"../imagens/05.png\" /><i>Adicionar novo papel</i></span>";
 		var d = {html:conteudo};
 		var tempNode = new YAHOO.widget.HTMLNode(d, no, false,true);
