@@ -138,6 +138,7 @@ i3GEOF.buffer = {
 		i3GEOF.buffer.aguarde = $i("i3GEOF.buffer_imagemCabecalho").style;
 		i3GEOF.buffer.inicia(divid);
 		temp = function(){
+			//alert("oi");
 			if(i3GEO.eventos.ATUALIZAARVORECAMADAS.toString().search("i3GEOF.buffer.t0()") > 0)
 			{i3GEO.eventos.ATUALIZAARVORECAMADAS.remove("i3GEOF.buffer.t0()");}
 		};

@@ -94,6 +94,7 @@ i3GEO.coordenadas = {
 
 	Para desativar a apresenta&ccedil;&atilde;o de uma proje&ccedil;&atilde;o altere o valor de "ativo".
 	*/
+	//TODO incluir documentacao sobre como alterar isso
 	config: {
 		"geoProj":{
 			idhtml: "localizarxy",
@@ -361,13 +362,13 @@ i3GEO.coordenadas = {
 	{string} - html com a tabela
 	*/
 	criaMascaraDMS: function(prefixo,titulo,caixa){
-		var ins = '<table id='+prefixo+' style=display:block;text-align:center;width:295px ><tr style="border-bottom:2px solid white" >' +
+		var ins = '<table id='+prefixo+' style=display:block;text-align:center;width:315px ><tr style="border-bottom:2px solid white" >' +
 				"<td>"+caixa+"&nbsp;</td>" +
 				'<td style=width:10px;text-align:right > X:</td>' +
 				'<td>'+$inputText('','',prefixo+'xg','grau','3','-00')+'</td>' +
 				'<td>'+$inputText('','',prefixo+'xm','minuto','2','00')+'</td>' +
 				'<td>'+$inputText('','',prefixo+'xs','segundo','4','00.00')+'</td>' +
-				'<td>Y:'+$inputText('','',prefixo+'yg','grau','3','-00')+'</td>' +
+				'<td> Y:'+$inputText('','',prefixo+'yg','grau','3','-00')+'</td>' +
 				'<td>'+$inputText('','',prefixo+'ym','minuto','2','00')+'</td>' +
 				'<td>'+$inputText('','',prefixo+'ys','segundo','4','00.00')+'</td>',
 			temp = 'var '+prefixo+'xxx = i3GEO.calculo.dms2dd($i(\''+prefixo+'xg\').value,$i(\''+prefixo+'xm\').value,$i(\''+prefixo+'xs\').value);' +

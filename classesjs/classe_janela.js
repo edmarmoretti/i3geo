@@ -453,7 +453,10 @@ i3GEO.janela = {
 		i3GEO.util.removeScriptTag(id+"_script");
 		if(janela){
 			YAHOO.i3GEO.janela.manager.remove(janela);
-			janela.destroy();
+			//janela.destroy();
+			//destroy remove os listeners!!!!
+			janela = $i(id+"_c");
+			janela.parentNode.removeChild(janela);
 		}
 	},
 	/*
@@ -825,8 +828,7 @@ i3GEO.janela = {
 };
 try{
 	//controle dos pain&eacute;is que podem ser redimensionados
-	YAHOO.widget.ResizePanel = function(el, userConfig)
-	{
+	YAHOO.widget.ResizePanel = function(el, userConfig)	{
 		if (arguments.length > 0)
 		{YAHOO.widget.ResizePanel.superclass.constructor.call(this, el, userConfig);}
 	};
@@ -862,6 +864,7 @@ try{
 					this.ddResize = new YAHOO.util.DragDrop(sResizeHandleId, this.id);
 					this.ddResize.setHandleElId(sResizeHandleId);
 					this.ddResize.onMouseDown = function(e){
+						//if(typeof(console) !== 'undefined'){console.error("down");}
 						nStartWidth = oInnerElement.offsetWidth;
 						nStartHeight = oInnerElement.offsetHeight;
 						if (YAHOO.env.ua.ie && document.compatMode  === "BackCompat")
@@ -877,10 +880,10 @@ try{
 						//ajusta o tamanho do body no IE qd a janela &eacute; redimensionada
 						//
 						me.cfg.setProperty("width", nStartWidth + "px");
-						aStartPos = [Event.getPageX(e), Event.getPageY(e)];
+						aStartPos = [YAHOO.util.Event.getPageX(e), YAHOO.util.Event.getPageY(e)];
 					};
 					this.ddResize.onDrag = function(e){
-						var aNewPos = [Event.getPageX(e), Event.getPageY(e)],
+						var aNewPos = [YAHOO.util.Event.getPageX(e), YAHOO.util.Event.getPageY(e)],
 							nOffsetX = aNewPos[0] - aStartPos[0],
 							nOffsetY = aNewPos[1] - aStartPos[1],
 							nNewWidth = Math.max(nStartWidth + nOffsetX, 10),

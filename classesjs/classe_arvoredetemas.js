@@ -378,7 +378,7 @@ i3GEO.arvoreDeTemas = {
 		temp = function(){
 			delete(i3GEO.arvoreDeTemas.ARVORE);
 		};
-		YAHOO.util.Event.addListener(janela[0].close, "click", temp,janela[0].panel,{id:janela[0].id},true);
+		YAHOO.util.Event.addListener(janela[0].close, "click", temp);
 		corpo = $i("i3GEOFcatalogo_corpo");
 		corpo.style.backgroundColor = "white";
 		corpo.innerHTML = $trad("o1");
@@ -390,7 +390,7 @@ i3GEO.arvoreDeTemas = {
 		delete(i3GEO.arvoreDeTemas.ARVORE);
 		i3GEO.arvoreDeTemas.IDHTML = "i3GEOFcatalogo_corpo";
 		i3GEO.arvoreDeTemas.cria(i3GEO.configura.sid,i3GEO.configura.locaplic,"");
-		i3GEO.arvoreDeTemas.IDHTML = idold;
+		window.setTimeout("i3GEO.arvoreDeTemas.IDHTML = '"+idold+"';",520);
 	},
 	/*
 	Function: listaWMS
@@ -1557,8 +1557,7 @@ i3GEO.arvoreDeTemas = {
 		if(palavra === ""){return;}
 		if(typeof(console) !== 'undefined'){console.info("i3GEO.arvoreDeTemas.buscaTema()");}
 		var busca,root,nodePalavra = "";
-		resultadoProcurar = function(retorno)
-		{
+		resultadoProcurar = function(retorno){
 			var mostra,tempNode,d,conta,ig,ngSgrupo,tempn,sg,ngTema,tempng,st,lk = "";
 			if(!retorno.data)
 			{alert("Ocorreu um erro");}

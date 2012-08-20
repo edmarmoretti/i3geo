@@ -443,7 +443,7 @@ i3GEO.analise = {
 						mostra = $i("mostradistancia_calculo");
 						if (mostra){
 							texto = " Dist acum.= "+da+" km <br>atual= "+d+" km <br> "+$trad("x23")+" (DMS)= "+r;
-							texto += "<br>"+$trad("x24")+": "+calculo.metododistancia;
+							texto += "<br>"+$trad("x25")+": "+calculo.metododistancia;
 							mostra.innerHTML = texto;
 						}
 						if(i3GEO.Interface.ATUAL !== "googleearth" && navn)
