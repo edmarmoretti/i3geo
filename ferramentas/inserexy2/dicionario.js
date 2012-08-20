@@ -1,5 +1,5 @@
-//+$trad(1,i3GEOF.inserexy2.dicionario)+
-i3GEOF.inserexy2.dicionario = {
+//+$trad(1,i3GEOF.inserexy.dicionario)+
+i3GEOF.inserexy.dicionario = {
 1: [{
 pt:"",
 en:"",

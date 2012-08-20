@@ -651,7 +651,7 @@ i3GEOF.selecao = {
 			nsel = i3GEO.arvoreDeCamadas.pegaTema(tema,retorno.data.temas);
 			$i("i3GEOselecaoNsel").innerHTML = "Selecionados: "+(nsel.nsel);
 		};
-		i3GEO.janela.abreAguarde("i3GEO.atualiza",$trad("o1"));
+		//i3GEO.janela.abreAguarde("i3GEO.atualiza",$trad("o1"));
 		i3GEO.php.selecaopt(retorna,tema,objposicaocursor.ddx+" "+objposicaocursor.ddy,tipo,tolerancia);
 	},
 	/*

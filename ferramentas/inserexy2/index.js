@@ -67,7 +67,7 @@ i3GEOF.inserexy = {
 	iniciaDicionario: function(){
 		if(typeof(i3GEOF.inserexy.dicionario) === 'undefined'){
 			i3GEO.util.scriptTag(
-				i3GEO.configura.locaplic+"/ferramentas/inserexy/dicionario.js",
+				i3GEO.configura.locaplic+"/ferramentas/inserexy2/dicionario.js",
 				"i3GEOF.inserexy.iniciaJanelaFlutuante()",
 				"i3GEOF.inserexy.dicionario_script"
 			);
