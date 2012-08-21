@@ -1235,7 +1235,7 @@ row - objeto row de um datatable
 
 mensagem -
 */
-function core_excluiLinha(sUrl,row,mensagem,cabecalho)
+function core_excluiLinha(sUrl,row,mensagem,cabecalho,tabela)
 {
 	if(!cabecalho){
 		cabecalho = "";
@@ -1260,7 +1260,12 @@ function core_excluiLinha(sUrl,row,mensagem,cabecalho)
   					}
   					else
   					{
-  						myDataTable.deleteRow(row);
+  						if(tabela){
+  							tabela.deleteRow(row);
+  						}
+  						else{
+  							myDataTable.deleteRow(row);
+  						}
   						core_carregando("desativa");
   					}
   				}
@@ -1271,8 +1276,7 @@ function core_excluiLinha(sUrl,row,mensagem,cabecalho)
 		};
 		core_makeRequest(sUrl,callback);
 	};
-	var handleNo = function()
-	{
+	var handleNo = function(){
 		this.hide();
 	};
 	var mensagem = "Exclui o registro?";

@@ -80,8 +80,8 @@ switch (strtoupper($funcao))
 		{
 			$dados = pegaDados("SELECT * from ".$esquemaadmin."i3geoadmin_menus where id_menu = $id_menu order by nome_menu");
 		}
-		else
-		{$dados = pegaDados("SELECT * from ".$esquemaadmin."i3geoadmin_menus order by nome_menu");
+		else{
+			$dados = pegaDados("SELECT * from ".$esquemaadmin."i3geoadmin_menus order by nome_menu");
 		}
 		retornaJSON($dados);
 		exit;
@@ -237,12 +237,13 @@ switch (strtoupper($funcao))
 		{JSON}
 		*/
 	case "PEGAGRUPOS":
-		$nome = "nome_grupo";
-		if($idioma != "pt")
+		if(isset($id_grupo) && $id_grupo != "")
 		{
-			$nome = $idioma;
+			$dados = pegaDados("SELECT * from ".$esquemaadmin."i3geoadmin_grupos WHERE id_grupo = $id_grupo order by nome_grupo");
 		}
-		$dados = pegaDados("SELECT * from ".$esquemaadmin."i3geoadmin_grupos order by $nome");
+		else{
+			$dados = pegaDados("SELECT * from ".$esquemaadmin."i3geoadmin_grupos order by nome_grupo");
+		}
 		retornaJSON($dados);
 		exit;
 		break;
@@ -257,8 +258,7 @@ switch (strtoupper($funcao))
 		*/
 	case "PEGAGRUPOS2":
 		$nome = "nome_grupo";
-		if($idioma != "pt")
-		{
+		if($idioma != "pt"){
 			$nome = $idioma;
 		}
 		$dados = pegaDados("SELECT desc_grupo,id_grupo,$nome as 'nome_grupo' from ".$esquemaadmin."i3geoadmin_grupos order by $nome");
@@ -289,7 +289,13 @@ switch (strtoupper($funcao))
 		{JSON}
 		*/
 	case "ALTERAGRUPOS":
-		retornaJSON(alteraGrupos());
+		alteraGrupos();
+		if(isset($id_grupo) && $id_grupo != "")	{
+			retornaJSON(pegaDados("SELECT * from ".$esquemaadmin."i3geoadmin_grupos WHERE id_grupo = $id_grupo"));
+		}
+		else{
+			retornaJSON("ok");
+		}
 		exit;
 		break;
 		/*
@@ -811,6 +817,9 @@ function alteraMenus()
 		{
 			$nome_menu = utf8_encode($nome_menu);
 			$desc_menu = utf8_encode($desc_menu);
+			$en = utf8_encode($en);
+			$es = utf8_encode($es);
+			$it = utf8_encode($it);
 		}
 		if($id_menu != "")
 		{
@@ -985,18 +994,21 @@ function alteraTags()
 */
 function alteraGrupos()
 {
-	global $nome,$desc,$id,$en,$es,$it,$esquemaadmin;
+	global $nome_grupo,$desc_grupo,$id_grupo,$en,$es,$it,$esquemaadmin;
 	try
 	{
-		include("conexao.php");
+		require_once("conexao.php");
 		if($convUTF)
 		{
-			$nome = utf8_encode($nome);
-			$desc = utf8_encode($desc);
+			$nome_grupo = utf8_encode($nome_grupo);
+			$desc_grupo = utf8_encode($desc_grupo);
+			$en = utf8_encode($en);
+			$es = utf8_encode($es);
+			$it = utf8_encode($it);
 		}
-		if($id != "")
+		if($id_grupo != "")
 		{
-			$dbhw->query("UPDATE ".$esquemaadmin."i3geoadmin_grupos SET en = '$en', es = '$es', it = '$it', nome_grupo = '$nome', desc_grupo = '$desc' WHERE id_grupo = $id");
+			$dbhw->query("UPDATE ".$esquemaadmin."i3geoadmin_grupos SET en = '$en', es = '$es', it = '$it', nome_grupo = '$nome_grupo', desc_grupo = '$desc_grupo' WHERE id_grupo = $id_grupo");
 		}
 		else
 		{
@@ -1024,6 +1036,9 @@ function alteraSubGrupos()
 		{
 			$nome = utf8_encode($nome);
 			$desc = utf8_encode($desc);
+			$en = utf8_encode($en);
+			$es = utf8_encode($es);
+			$it = utf8_encode($it);
 		}
 		$retorna = "";
 		if($id != "")
@@ -1085,6 +1100,9 @@ function alteraTemas()
 			$nome = utf8_encode($nome);
 			$desc = utf8_encode($desc);
 			$tags = utf8_encode($tags);
+			$en = utf8_encode($en);
+			$es = utf8_encode($es);
+			$it = utf8_encode($it);
 		}
 		if($id != "")
 		{

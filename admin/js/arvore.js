@@ -65,13 +65,13 @@ function initMenu(){
 			if($i("editor_bd")){return;}
 			core_montaEditor("","600px","500px","pegaMenus","Menu");
 			$i("editor_bd").innerHTML = '<input type=button id=adicionaNovoMenu value="Adicionar um novo menu" style="left:-5px;" /><br><br><div id="letras_M" ></div><br><br><div id="tabela" style="left:-5px;"> </div>';
-			initEditorMenu();
+			i3GEOadmin.menus.inicia();
 		},
 		editorDeGrupos = function(){
 			if($i("editor_bd")){return;}
 			core_montaEditor("","600px","500px","","Grupos");
 			$i("editor_bd").innerHTML = '<p class=paragrafo >Clique nas c&eacute;lulas da tabela para editar a caracter&iacute;stica de cada item. Finalize com "enter". Ap&oacute;s editar, salve o item.</p><p class=paragrafo ><input type=button id=adicionaNovoGrupo value="Adicionar um novo grupo" style="left:-5px;" /></p><p><br><br><div id="letras_G" ></div><br><div id="tabela" style="left:-5px;"> </div>';
-			initEditorGrupos();
+			i3GEOadmin.grupos.inicia();
 		},
 		editorDeSubGrupos = function()	{
 			if($i("editor_bd")){return;}

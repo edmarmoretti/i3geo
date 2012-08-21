@@ -29,164 +29,237 @@ Arquivo:
 
 i3geo/admin/js/grupos.js
 */
+
 /*
-Function: initEditorGrupos
+Title: menu.js
 
-Inicializa o editor
+Fun&ccedil;&otilde;es que controlam a interface do editor de menus
 
-<ALTERAGRUPOS>
+Licenca:
+
+GPL2
+
+i3Geo Interface Integrada de Ferramentas de Geoprocessamento para Internet
+
+Direitos Autorais Reservados (c) 2006 Minist&eacute;rio do Meio Ambiente Brasil
+Desenvolvedor: Edmar Moretti edmar.moretti@mma.gov.br
+
+Este programa &eacute; software livre; voc&ecirc; pode redistribu&iacute;-lo
+e/ou modific&aacute;-lo sob os termos da Licen&ccedil;a P&uacute;blica Geral
+GNU conforme publicada pela Free Software Foundation;
+
+Este programa &eacute; distribu&iacute;do na expectativa de que seja &uacute;til,
+por&eacute;m, SEM NENHUMA GARANTIA; nem mesmo a garantia impl&iacute;cita
+de COMERCIABILIDADE OU ADEQUA&Ccedil;&Atilde;O A UMA FINALIDADE ESPEC&Iacute;FICA.
+Consulte a Licen&ccedil;a P&uacute;blica Geral do GNU para mais detalhes.
+Voc&ecirc; deve ter recebido uma cópia da Licen&ccedil;a P&uacute;blica Geral do
+GNU junto com este programa; se n&atilde;o, escreva para a
+Free Software Foundation, Inc., no endere&ccedil;o
+59 Temple Street, Suite 330, Boston, MA 02111-1307 USA.
+
+Arquivo:
+
+i3geo/admin/js/menus.js
 */
-function initEditorGrupos()
-{
-	core_ativaBotaoAdicionaLinha("../php/menutemas.php?funcao=alteraGrupos","adicionaNovoGrupo","pegaGrupos_G");
-	pegaGrupos_G();
-}
-/*
-Function: pegaGrupos_G
 
-Obt&eacute;m a lista de grupos
-
-<PEGAGRUPOS>
-*/
-function pegaGrupos_G()
-{
-	dados_G = "";
-	core_carregando("ativa");
-	core_pegaDados("buscando grupos...","../php/menutemas.php?funcao=pegaGrupos","montaTabela_G");
+if(typeof(i3GEOadmin) === 'undefined'){
+	var i3GEOadmin = {};
 }
-function filtraDadosLetras_G(letra){
-	var i,temp,
-		n = dados_G.length,
-		novo = [];
-	if(letra == "Todos"){
-		novo = dados_G;
-	}
-	else{
-		for(i=0;i<n;i++){
-			temp = dados_G[i].nome_grupo;
-			if(temp.charAt(0).toUpperCase() == letra.toUpperCase()){
-				novo.push(dados_G[i]);
+i3GEOadmin.grupos = {
+	dados: "",
+	dataTable: null,
+	colunas: ["it","es","en","desc_grupo","id_grupo","nome_grupo"],
+	formatTexto: function(elCell, oRecord, oColumn, oData){
+		if(oData === ""){
+			oData = "<span style='color:gray' ></span>";
+		}
+		elCell.innerHTML = "<pre ><p style=cursor:default >" + oData + "</pre>";
+	},
+	formatSalva: function(elCell, oRecord, oColumn){
+		elCell.innerHTML = "<div title='salva' class=salvar style='text-align:center' onclick='gravaLinha_G(\""+oRecord._sId+"\")'></div>";
+	},
+	formatExclui: function(elCell, oRecord, oColumn){
+		elCell.innerHTML = "<div title='exclui' class=excluir style='text-align:center' ></div>";
+	},
+	formatMais: function(elCell, oRecord, oColumn){
+		elCell.innerHTML = "<div class=editar style='text-align:center' ></div>";
+	},
+	defColunas: function(){
+		return [
+			{key:"excluir",label:"excluir",formatter:i3GEOadmin.grupos.formatExclui},
+			{key:"mais",label:"editar",formatter:i3GEOadmin.grupos.formatMais},
+			{label:"id",key:"id_grupo", formatter:i3GEOadmin.grupos.formatTexto},
+			{label:"nome",resizeable:true,key:"nome_grupo", formatter:i3GEOadmin.grupos.formatTexto},
+			{label:"descri&ccedil;&atilde;o",resizeable:true,key:"desc_grupo", formatter:i3GEOadmin.grupos.formatTexto},
+			{label:"en",resizeable:true,key:"en", formatter:i3GEOadmin.grupos.formatTexto},
+			{label:"es",resizeable:true,key:"es", formatter:i3GEOadmin.grupos.formatTexto},
+			{label:"it",resizeable:true,key:"it", formatter:i3GEOadmin.grupos.formatTexto}
+		];
+	},
+	/*
+	 * Inicializa o menu
+	 */
+	inicia: function(){
+		YAHOO.namespace("grupos");
+		core_ativaBotaoAdicionaLinha("../php/menutemas.php?funcao=alteraGrupos","adicionaNovoGrupo","i3GEOadmin.grupos.obtem");
+		i3GEOadmin.grupos.obtem();
+	},
+	/*
+	 * Obt&eacute;m a lista de menus
+	 */
+	obtem: function(){
+		i3GEOadmin.grupos.dados = "";
+		core_carregando("ativa");
+		core_pegaDados("buscando grupos...","../php/menutemas.php?funcao=pegaGrupos","i3GEOadmin.grupos.tabela");
+	},
+	tabela: function(dados){
+		if(i3GEOadmin.grupos.dados == ""){
+			i3GEOadmin.grupos.dados = dados;
+		}
+		core_listaDeLetras("letras_G","i3GEOadmin.grupos.filtra");
+		YAHOO.example.InlineCellEditing = new function(){
+			// Custom formatter for "address" column to preserve line breaks
+			var myDataSource = new YAHOO.util.DataSource(dados);
+			myDataSource.responseType = YAHOO.util.DataSource.TYPE_JSARRAY;
+			myDataSource.responseSchema = {
+				fields: i3GEOadmin.grupos.colunas
+			};
+			i3GEOadmin.grupos.dataTable = new YAHOO.widget.DataTable("tabela", i3GEOadmin.grupos.defColunas(), myDataSource);
+			i3GEOadmin.grupos.dataTable.subscribe('cellClickEvent',function(ev){
+				var sUrl, callback,$clicouId, $recordid,
+					target = YAHOO.util.Event.getTarget(ev),
+					column = this.getColumn(target),
+					registro = this.getRecord(target);
+				if(YAHOO.grupos.panelCK)	{
+					YAHOO.grupos.panelCK.destroy();
+					YAHOO.grupos.panelCK = null;
+				}
+				if (column.key == 'excluir'){
+					i3GEOadmin.grupos.exclui(registro.getData('id_grupo'),target);
+				}
+				if (column.key == 'mais'){
+					core_carregando("ativa");
+					core_carregando("buscando dados...");
+					$clicouId = registro.getData('id_grupo');
+					$recordid = registro.getId();
+					sUrl = "../php/menutemas.php?funcao=pegaGrupos&id_grupo="+$clicouId;
+					callback = {
+	  					success:function(o){
+	  						try{
+	  							i3GEOadmin.grupos.editor(YAHOO.lang.JSON.parse(o.responseText),$clicouId,$recordid);
+	  						}
+	  						catch(e){core_handleFailure(e,o.responseText);}
+	  					},
+	  					failure:core_handleFailure,
+	  					argument: { foo:"foo", bar:"bar" }
+					};
+					core_makeRequest(sUrl,callback);
+				}
+			});
+		};
+		core_carregando("desativa");
+	},
+	editor: function(dados,id,recordid){
+		function on_editorCheckBoxChange(p_oEvent){
+			if(p_oEvent.newValue.get("value") == "OK"){
+				i3GEOadmin.grupos.salva(id,recordid);
+			}
+			YAHOO.grupos.panelEditor2.destroy();
+			YAHOO.grupos.panelEditor2 = null;
+		};
+		if(!$i("janela_editor2")){
+			var editorBotoes,ins,
+				novoel = document.createElement("div");
+			novoel.id =  "janela_editor2";
+			ins = '<div class="hd">Editor</div>';
+			ins += "<div class='bd' style='height:354px;overflow:auto'>";
+			ins += "<div id='okcancel_checkbox2'></div><div id='editor_bd2'></div>";
+			ins += "<div id='letras_M'></div>";
+			novoel.innerHTML = ins;
+
+			document.body.appendChild(novoel);
+			editorBotoes = new YAHOO.widget.ButtonGroup({id:"okcancel_checkbox_id2", name:  "okcancel_checkbox_id2", container:  "okcancel_checkbox2" });
+			editorBotoes.addButtons([
+				{ label: "Salva", value: "OK", checked: false},
+				{ label: "Cancela", value: "CANCEL", checked: false }
+			]);
+			editorBotoes.on("checkedButtonChange", on_editorCheckBoxChange);
+			YAHOO.grupos.panelEditor2 = new YAHOO.widget.Panel("janela_editor2", { modal:true,fixedcenter:true,close:false,width:"400px", height:"480px",overflow:"auto", visible:false,constraintoviewport:true } );
+			YAHOO.grupos.panelEditor2.render();
+		}
+		YAHOO.grupos.panelEditor2.show();
+		$i("editor_bd2").innerHTML = i3GEOadmin.grupos.formulario(dados[0]);
+		core_carregando("desativa");
+	},
+	formulario: function(i){
+		var param = {
+				"linhas":[
+					{titulo:"Nome padr&atilde;o:",id:"Enome_grupo",size:"50",value:i.nome_grupo,tipo:"text",div:""},
+					{titulo:"Descricao (opcional):",id:"Edesc_grupo",size:"50",value:i.desc_grupo,tipo:"text",div:""},
+					{titulo:"Nome em ingl&ecirc;s (opcional):",id:"Een",size:"50",value:i.en,tipo:"text",div:""},
+					{titulo:"Espanhol (opcional):",id:"Ees",size:"50",value:i.es,tipo:"text",div:""},
+					{titulo:"Italiano (opcional):",id:"Eit",size:"50",value:i.it,tipo:"text",div:""}
+				]
+			},
+			ins = "";
+		ins += core_geraLinhas(param);
+		return(ins);
+	},
+	filtra: function(letra){
+		var i,temp,
+			n = i3GEOadmin.grupos.dados.length,
+			novo = [];
+		if(letra == "Todos"){
+			novo = i3GEOadmin.grupos.dados;
+		}
+		else{
+			for(i=0;i<n;i++){
+				temp = i3GEOadmin.grupos.dados[i].nome_grupo;
+				if(temp.charAt(0).toUpperCase() == letra.toUpperCase()){
+					novo.push(i3GEOadmin.grupos.dados[i]);
+				}
 			}
 		}
+		i3GEOadmin.grupos.tabela(novo);
+	},
+	exclui: function(id,row){
+		var mensagem = " excluindo o registro do id= "+id,
+			sUrl = "../php/menutemas.php?funcao=excluirRegistro&id="+id+"&tabela=grupos";
+		core_excluiLinha(sUrl,row,mensagem,"",i3GEOadmin.grupos.dataTable);
+	},
+	salva: function(id,recordid){
+		var i,c,sUrl, callback,
+			campos = i3GEOadmin.grupos.colunas,
+			par = "",
+			n = campos.length;
+		for (i=0;i<n;i++){
+			c = $i("E"+campos[i].key);
+			if(c){
+				par += "&"+campos[i].key+"="+(c.value);
+			}
+		}
+		par += "&id_grupo="+id;
+		core_carregando("ativa");
+		core_carregando(" gravando o registro do id= "+id);
+		sUrl = "../php/menutemas.php?funcao=alteraGrupos"+par;
+		callback = {
+	  		success:function(o){
+	  			try	{
+	  				if(YAHOO.lang.JSON.parse(o.responseText) == "erro")	{
+	  					core_carregando("<span style=color:red >N&atilde;o foi poss&iacute;vel excluir. Verifique se n&atilde;o existem registros vinculados</span>");
+	  					setTimeout("core_carregando('desativa')",3000);
+	  				}
+	  				else{
+	  					var rec = i3GEOadmin.grupos.dataTable.getRecordSet().getRecord(recordid);
+	  					i3GEOadmin.grupos.dataTable.updateRow(rec,YAHOO.lang.JSON.parse(o.responseText)[0]);
+	  					core_carregando("desativa");
+	  				}
+	  			}
+	  			catch(e){core_handleFailure(e,o.responseText);}
+	  		},
+	  		failure:core_handleFailure,
+	  		argument: { foo:"foo", bar:"bar" }
+		};
+		core_makeRequest(sUrl,callback);
 	}
-	montaTabela_G(novo);
-}
-function montaTabela_G(dados)
-{
-	if(dados_G == ""){
-		dados_G = dados;
-	}
-	core_listaDeLetras("letras_G","filtraDadosLetras_G");
-	YAHOO.example.InlineCellEditing = new function(){
-		// Custom formatter for "address" column to preserve line breaks
-		var formatTexto = function(elCell, oRecord, oColumn, oData){
-				if(oData === ""){
-					oData = "<span style='color:gray' >Clique para editar, tecle enter e depois salve</span>";
-				}
-				elCell.innerHTML = "<p style=width:250px;cursor:pointer title='clique para editar'>" + oData + "</p>";
-			},
-			formatTextoId = function(elCell, oRecord, oColumn, oData){
-				elCell.innerHTML = "<p style=width:20px >" + oData + "</p>";
-			},
-			formatSalva = function(elCell, oRecord, oColumn){
-				elCell.innerHTML = "<div title='salva' class=salvar style='text-align:center' onclick='gravaLinha_G(\""+oRecord._sId+"\")'></div>";
-			},
-			formatExclui = function(elCell, oRecord, oColumn){
-				elCell.innerHTML = "<div title='exclui' class=excluir style='text-align:center' ></div>";
-			},
-			myColumnDefs = [
-				{key:"excluir",label:"excluir",formatter:formatExclui},
-				{label:"salvar",formatter:formatSalva},
-				{label:"id",key:"id_grupo", formatter:formatTextoId},
-				{label:"nome",resizeable:true,key:"nome_grupo", formatter:formatTexto, editor:new YAHOO.widget.TextboxCellEditor({disableBtns:true})},
-				{label:"descri&ccedil;&atilde;o",resizeable:true,key:"desc_grupo", formatter:formatTexto, editor:new YAHOO.widget.TextboxCellEditor({disableBtns:true})},
-				{label:"en",resizeable:true,key:"en", formatter:formatTexto, editor:new YAHOO.widget.TextboxCellEditor({disableBtns:true})},
-				{label:"es",resizeable:true,key:"es", formatter:formatTexto, editor:new YAHOO.widget.TextboxCellEditor({disableBtns:true})},
-				{label:"it",resizeable:true,key:"it", formatter:formatTexto, editor:new YAHOO.widget.TextboxCellEditor({disableBtns:true})}
-			];
-		myDataSource = new YAHOO.util.DataSource(dados);
-		myDataSource.responseType = YAHOO.util.DataSource.TYPE_JSARRAY;
-		myDataSource.responseSchema = {
-			fields: ["it","es","en","desc_grupo","id_grupo","nome_grupo"]
-		};
-		myDataTable = new YAHOO.widget.DataTable("tabela", myColumnDefs, myDataSource);
-		// Set up editing flow
-		myDataTable.highlightEditableCell = function(oArgs) {
-			var elCell = oArgs.target,
-				column = myDataTable.getColumn(oArgs.target);
-			//if(column.editor != "null")
-			if(!YAHOO.lang.isNull(column.editor)){
-				YAHOO.util.Dom.addClass(elCell,'yui-dt-highlighted');
-			}
-		};
-		myDataTable.unhighlightEditableCell = function(oArgs){
-			var elCell = oArgs.target;
-			if(elCell.style.cursor="pointer"){
-				YAHOO.util.Dom.removeClass(elCell,'yui-dt-highlighted');
-			}
-		};
-		myDataTable.subscribe("cellMouseoverEvent", myDataTable.highlightEditableCell);
-		myDataTable.subscribe("cellMouseoutEvent", myDataTable.unhighlightEditableCell);
-		myDataTable.subscribe('cellClickEvent',function(ev){
-			var record,target = YAHOO.util.Event.getTarget(ev),
-				column = this.getColumn(target);
-			if(YAHOO.admin.container.panelCK){
-				YAHOO.admin.container.panelCK.destroy();
-				YAHOO.admin.container.panelCK = null;
-			}
-			if (column.key == 'excluir'){
-				record = this.getRecord(target);
-				excluiLinha_G(record.getData('id_grupo'),target);
-			}
-			else
-			{this.onEventShowCellEditor(ev);}
-		});
-		// Hook into custom event to customize save-flow of "radio" editor
-		myDataTable.subscribe("editorUpdateEvent", function(oArgs){
-			if(oArgs.editor.column.key === "active"){
-				this.saveCellEditor();
-			}
-		});
-		myDataTable.subscribe("editorBlurEvent", function(oArgs){
-			this.cancelCellEditor();
-		});
-		myDataTable.subscribe("editorSaveEvent", function(oArgs){
-			if(oArgs.newData != oArgs.oldData){
-				var linha = myDataTable.getTrEl(oArgs.editor.getRecord());
-				if(linha){
-					linha.style.color = "blue";
-					linha.style.textDecoration = "blink";
-				}
-			}
-		});
-	};
-	core_carregando("desativa");
-}
-/*
-Function: gravaLinha_G
-
-Aplica as altera&ccedil;&otilde;es feitas em um registro
-
-<ALTERAGRUPOS>
-*/
-function gravaLinha_G(row)
-{
-	var r = myDataTable.getRecordSet().getRecord(row);
-	var id_grupo = r.getData("id_grupo");
-	var nome_grupo = r.getData("nome_grupo");
-	var desc_grupo = r.getData("desc_grupo");
-	var en = r.getData("en");
-	var es = r.getData("es");
-	var it = r.getData("it");
-	core_carregando("ativa");
-	var mensagem = " gravando registro do id= "+id_grupo;
-	var sUrl = "../php/menutemas.php?funcao=alteraGrupos&nome="+nome_grupo+"&desc="+desc_grupo+"&id="+id_grupo+"&en="+en+"&es="+es+"&it="+it;
-	core_gravaLinha(mensagem,row,sUrl,"pegaGrupos_G");
-}
-function excluiLinha_G(id,row)
-{
-	var mensagem = " excluindo o registro do id= "+id;
-	var sUrl = "../php/menutemas.php?funcao=excluirRegistro&id="+id+"&tabela=grupos";
-	core_excluiLinha(sUrl,row,mensagem);
-}
-//YAHOO.util.Event.addListener(window, "load", initMenu);
+};

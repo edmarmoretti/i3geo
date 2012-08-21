@@ -122,7 +122,7 @@ body {
 		cabecalhoGeral("cabecalhoPrincipal", "menus");
 		temp = function() {
 			document.getElementById("formulario").style.display = "block";
-			initEditorMenu();
+			i3GEOadmin.menus.inicia();
 		};
 		i3GEO.login.verificaOperacao("admin/html/menus",
 				i3GEO.configura.locaplic, temp, "sessao");
