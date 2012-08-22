@@ -70,14 +70,14 @@ function initMenu(){
 		editorDeGrupos = function(){
 			if($i("editor_bd")){return;}
 			core_montaEditor("","600px","500px","","Grupos");
-			$i("editor_bd").innerHTML = '<p class=paragrafo >Clique nas c&eacute;lulas da tabela para editar a caracter&iacute;stica de cada item. Finalize com "enter". Ap&oacute;s editar, salve o item.</p><p class=paragrafo ><input type=button id=adicionaNovoGrupo value="Adicionar um novo grupo" style="left:-5px;" /></p><p><br><br><div id="letras_G" ></div><br><div id="tabela" style="left:-5px;"> </div>';
+			$i("editor_bd").innerHTML = '<p class=paragrafo ><input type=button id=adicionaNovoGrupo value="Adicionar um novo grupo" style="left:-5px;" /></p><p><br><br><div id="letras_G" ></div><br><div id="tabela" style="left:-5px;"> </div>';
 			i3GEOadmin.grupos.inicia();
 		},
 		editorDeSubGrupos = function()	{
 			if($i("editor_bd")){return;}
 			core_montaEditor("","600px","500px","","Subgrupos");
-			$i("editor_bd").innerHTML = '<p class=paragrafo >Clique nas c&eacute;lulas da tabela para editar a caracter&iacutre;stica de cada item. Finalize com "enter". Ap&oacute;s editar, salve o item.</p><p class=paragrafo ><input type=button id=adicionaNovoSubGrupo value="Adicionar um novo sub-grupo" style="left:-5px;" /></p><br><br><div id="letras_S" ></div><br><div id="tabela" style="left:-5px;"> </div>';
-			initEditorSubGrupos();
+			$i("editor_bd").innerHTML = '<p class=paragrafo ><input type=button id=adicionaNovoSubGrupo value="Adicionar um novo subgrupo" style="left:-5px;" /></p><br><br><div id="letras_SG" ></div><br><div id="tabela" style="left:-5px;"> </div>';
+			i3GEOadmin.subgrupos.inicia();
 		};
 	new YAHOO.widget.Button("botaoEditorMenu",{ onclick: { fn: editorDeMenus } });
 	new YAHOO.widget.Button("botaoEditorGrupo",{ onclick: { fn: editorDeGrupos } });

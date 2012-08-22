@@ -26,7 +26,7 @@ body {
 			<h1>Administra&ccedil;&atilde;o do i3geo - sistemas de
 				identifica&ccedil;&atilde;o</h1>
 			<div id="formulario" style="display: none">
-				<div id="ajuda">
+				<div id="ajuda" style="display: none">
 					<div class="hd">Ajuda</div>
 					<div class="bd" style="height: 144px; overflow: auto">
 						Este programa permite editar a lista de sistemas de
@@ -45,9 +45,10 @@ body {
 					</div>
 					<div class="ft"></div>
 				</div>
-				<input onclick="adicionaLinha()" type=button id=adiciona
+				<input type=button id=adicionaNovoIdentifica
 					value="Adicionar um novo sistema" /> <br>
 				<p></p>
+				<div id="letras_I" ></div><br>
 				<div id="tabela" style="left: -5px;"></div>
 				<div id=logajax style="display: block"></div>
 				<div id=dialogoContinua style="display: block"></div>
@@ -103,7 +104,7 @@ body {
 		cabecalhoGeral("cabecalhoPrincipal", "");
 		temp = function() {
 			document.getElementById("formulario").style.display = "block";
-			initMenu();
+			i3GEOadmin.identifica.inicia();
 		};
 		i3GEO.login.verificaOperacao("admin/html/identifica",
 				i3GEO.configura.locaplic, temp, "sessao");

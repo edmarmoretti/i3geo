@@ -28,7 +28,7 @@ body {
 					src="../imagens/04.png" style="cursor: pointer" id=botaoAjuda />
 			</h1>
 			<div id="formulario" style="display: none">
-				<div id="ajuda">
+				<div id="ajuda" style="display: none">
 					<div class="hd">Ajuda</div>
 					<div class="bd" style="height: 144px; overflow: auto">
 						<p>Vc pode registrar qualquer link para ser utilizado. A
@@ -37,14 +37,13 @@ body {
 							utilizados em i3geo/ms_criamapa.php. Voc&ecirc; pode desprezar
 							todos os campos do formul&aacute;rio e incluir apenas o link
 							direto desejado.
-						<p>A lista de links &eacute; utilizada tamb&eacute;m na
-							interface mobile do i3geo.
 					</div>
 					<div class="ft"></div>
 				</div>
-				<input onclick="adicionaLinha()" type=button id=adiciona
+				<input type=button id=adicionaNovoMapa
 					value="Adicionar um novo link" /> <br>
 				<p>Links existentes:</p>
+				<div id="letras_Mp" ></div><br>
 				<div id="tabela" style="left: -5px;"></div>
 				<div id=logajax style="display: block"></div>
 			</div>
@@ -99,7 +98,7 @@ body {
 		cabecalhoGeral("cabecalhoPrincipal", "");
 		temp = function() {
 			document.getElementById("formulario").style.display = "block";
-			initMenu();
+			i3GEOadmin.mapas.inicia();
 		};
 		i3GEO.login.verificaOperacao("admin/html/mapas",
 				i3GEO.configura.locaplic, temp, "sessao");

@@ -74,6 +74,8 @@ i3GEOadmin.menus = {
 	 * Inicializa o menu
 	 */
 	inicia: function(){
+		YAHOO.namespace("admin.container");
+		core_ativaPainelAjuda("ajuda","botaoAjuda");
 		YAHOO.namespace("menus");
 		core_ativaBotaoAdicionaLinha("../php/menutemas.php?funcao=alteraMenus&publicado_menu=&perfil=&nome=&desc=&id=&aberto=","adicionaNovoMenu","i3GEOadmin.menus.obtem");
 		i3GEOadmin.menus.obtem();

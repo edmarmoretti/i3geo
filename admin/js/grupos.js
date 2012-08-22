@@ -75,9 +75,6 @@ i3GEOadmin.grupos = {
 		}
 		elCell.innerHTML = "<pre ><p style=cursor:default >" + oData + "</pre>";
 	},
-	formatSalva: function(elCell, oRecord, oColumn){
-		elCell.innerHTML = "<div title='salva' class=salvar style='text-align:center' onclick='gravaLinha_G(\""+oRecord._sId+"\")'></div>";
-	},
 	formatExclui: function(elCell, oRecord, oColumn){
 		elCell.innerHTML = "<div title='exclui' class=excluir style='text-align:center' ></div>";
 	},
@@ -101,6 +98,8 @@ i3GEOadmin.grupos = {
 	 */
 	inicia: function(){
 		YAHOO.namespace("grupos");
+		YAHOO.namespace("admin.container");
+		core_ativaPainelAjuda("ajuda","botaoAjuda");
 		core_ativaBotaoAdicionaLinha("../php/menutemas.php?funcao=alteraGrupos","adicionaNovoGrupo","i3GEOadmin.grupos.obtem");
 		i3GEOadmin.grupos.obtem();
 	},
@@ -174,7 +173,7 @@ i3GEOadmin.grupos = {
 			ins = '<div class="hd">Editor</div>';
 			ins += "<div class='bd' style='height:354px;overflow:auto'>";
 			ins += "<div id='okcancel_checkbox2'></div><div id='editor_bd2'></div>";
-			ins += "<div id='letras_M'></div>";
+			ins += "<div id='letras_G'></div>";
 			novoel.innerHTML = ins;
 
 			document.body.appendChild(novoel);

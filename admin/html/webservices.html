@@ -25,7 +25,7 @@ body {
 			<div id=cabecalhoPrincipal></div>
 			<h1>Administra&ccedil;&atilde;o do i3geo - web Services</h1>
 			<div id="formulario" style="display: none">
-				<div id="ajuda">
+				<div id="ajuda" style="display: none">
 					<div class="hd">Ajuda</div>
 					<div class="bd" style="height: 144px; overflow: auto">
 						Este programa permite editar o cadastro de Web Services.<br>
@@ -45,9 +45,10 @@ body {
 					</div>
 					<div class="ft"></div>
 				</div>
-				<input onclick="adicionaLinha()" type=button id=adiciona
+				<input type=button id=adicionaNovoWebservice
 					value="Adicionar um novo endere&ccedil;o" /> <br>
-				<p>Temas existentes:</p>
+				<p>Endere&ccedil;os cadastrados:</p>
+				<div id="letras_W" ></div><br>
 				<div id="tabela" style="left: -5px;"></div>
 				<div id=logajax style="display: block"></div>
 			</div>
@@ -102,7 +103,7 @@ body {
 		cabecalhoGeral("cabecalhoPrincipal", "");
 		temp = function() {
 			document.getElementById("formulario").style.display = "block";
-			initMenu();
+			i3GEOadmin.webservices.inicia();
 		};
 		i3GEO.login.verificaOperacao("admin/html/webservices",
 				i3GEO.configura.locaplic, temp, "sessao");

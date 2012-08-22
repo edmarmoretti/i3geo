@@ -29,256 +29,235 @@ Arquivo:
 
 i3geo/admin/js/webservices.js
 */
-YAHOO.namespace("admin.container");
-/*
-Function: initMenu
-
-Inicializa o editor
-
-<ALTERARWS>
-*/
-function initMenu()
-{
-	core_ativaBotaoAdicionaLinha("../php/webservices.php?funcao=alterarWS","adiciona");
-	core_carregando("ativa");
-	core_ativaPainelAjuda("ajuda","botaoAjuda");
-	pegaWS();
+if(typeof(i3GEOadmin) === 'undefined'){
+	var i3GEOadmin = {};
 }
-/*
-Function: pegaWS
-
-Obt&eacute;m a lista de WS
-
-<PEGAWS>
-*/
-function pegaWS()
-{
-	//
-	//pega o tipo de WS que ser&aacute; listado se tiver sido definido na url
-	//
-	var tipows = "",u;
-	try{
-		u = window.location.href.split("?");
-		u = u[1].split("=");
-		tipows = u[1];
-	}
-	catch(e){tipows = "";}
-	core_pegaDados("buscando endere&ccedil;os...","../php/webservices.php?funcao=pegaWS&tipows="+tipows,"montaTabela");
-}
-/*
-Function: montaTabela
-
-Monta a tabela de edi&ccedil;&atilde;o
-
-<PEGADADOS>
-*/
-function montaTabela(dados)
-{
-	YAHOO.example.InlineCellEditing = new function()
-	{
-		// Custom formatter for "address" column to preserve line breaks
-		var formatTextoId = function(elCell, oRecord, oColumn, oData)
-		{
-			elCell.innerHTML = "<p>" + oData + "</p>";
-		};
-		var formatMais = function(elCell, oRecord, oColumn)
-		{
-			elCell.innerHTML = "<div class=editar style='text-align:center' ></div>";
-		};
-		var formatExclui = function(elCell, oRecord, oColumn)
-		{
-			elCell.innerHTML = "<div class=excluir style='text-align:center' ></div>";
-		};
-		var myColumnDefs = [
-			{key:"excluir",label:"excluir",formatter:formatExclui},
-			{key:"mais",label:"editar",formatter:formatMais},
-			{label:"id",key:"id_ws", formatter:formatTextoId},
-			{label:"tipo",key:"tipo_ws", formatter:formatTextoId},
-			{label:"nome",key:"nome_ws", formatter:formatTextoId},
+i3GEOadmin.webservices = {
+	dados: "",
+	dataTable: null,
+	colunas: ["id_ws","desc_ws","nome_ws","link_ws","tipo_ws","autor_ws"],
+	formatTexto: function(elCell, oRecord, oColumn, oData){
+		if(oData === ""){
+			oData = "<span style='color:gray' ></span>";
+		}
+		elCell.innerHTML = "<pre ><p style=cursor:default >" + oData + "</pre>";
+	},
+	formatExclui: function(elCell, oRecord, oColumn){
+		elCell.innerHTML = "<div title='exclui' class=excluir style='text-align:center' ></div>";
+	},
+	formatMais: function(elCell, oRecord, oColumn){
+		elCell.innerHTML = "<div class=editar style='text-align:center' ></div>";
+	},
+	defColunas: function(){
+		return [
+			{key:"excluir",label:"excluir",formatter:i3GEOadmin.webservices.formatExclui},
+			{key:"mais",label:"editar",formatter:i3GEOadmin.webservices.formatMais},
+			{label:"id",key:"id_ws", formatter:i3GEOadmin.webservices.formatTexto},
+			{label:"nome",resizeable:true,key:"nome_ws", formatter:i3GEOadmin.webservices.formatTexto},
+			{label:"tipo",resizeable:true,key:"tipo_ws", formatter:i3GEOadmin.webservices.formatTexto}
 		];
-		myDataSource = new YAHOO.util.DataSource(dados);
-		myDataSource.responseType = YAHOO.util.DataSource.TYPE_JSARRAY;
-		myDataSource.responseSchema =
-		{fields: ["id_ws","nome_ws","tipo_ws"]};
-		myDataTable = new YAHOO.widget.DataTable("tabela", myColumnDefs, myDataSource);
-		// Set up editing flow
-		myDataTable.subscribe('cellClickEvent',function(ev)
-		{
-			var target = YAHOO.util.Event.getTarget(ev);
-			var column = this.getColumn(target);
-			if (column.key == 'excluir')
-			{
-				var record = this.getRecord(target);
-				excluiLinha(record.getData('id_ws'),target);
+	},
+	/*
+	 * Inicializa o menu
+	 */
+	inicia: function(){
+		YAHOO.namespace("webservices");
+		YAHOO.namespace("admin.container");
+		core_ativaPainelAjuda("ajuda","botaoAjuda");
+		core_ativaBotaoAdicionaLinha("../php/webservices.php?funcao=alterarWS","adicionaNovoWebservice","i3GEOadmin.webservices.obtem");
+		i3GEOadmin.webservices.obtem();
+	},
+	/*
+	 * Obt&eacute;m a lista de menus
+	 */
+	obtem: function(){
+		i3GEOadmin.webservices.dados = "";
+		core_carregando("ativa");
+		var tipows = "",u;
+		try{
+			u = window.location.href.split("?");
+			u = u[1].split("=");
+			tipows = u[1];
+		}
+		catch(e){tipows = "";}
+		core_pegaDados("buscando endere&ccedil;os...","../php/webservices.php?funcao=pegaWS&tipows="+tipows,"i3GEOadmin.webservices.tabela");
+	},
+	tabela: function(dados){
+		if(i3GEOadmin.webservices.dados == ""){
+			i3GEOadmin.webservices.dados = dados;
+		}
+		core_listaDeLetras("letras_W","i3GEOadmin.webservices.filtra");
+		YAHOO.example.InlineCellEditing = new function(){
+			// Custom formatter for "address" column to preserve line breaks
+			var myDataSource = new YAHOO.util.DataSource(dados);
+			myDataSource.responseType = YAHOO.util.DataSource.TYPE_JSARRAY;
+			myDataSource.responseSchema = {
+				fields: i3GEOadmin.webservices.colunas
+			};
+			i3GEOadmin.webservices.dataTable = new YAHOO.widget.DataTable("tabela", i3GEOadmin.webservices.defColunas(), myDataSource);
+			i3GEOadmin.webservices.dataTable.subscribe('cellClickEvent',function(ev){
+				var sUrl, callback,$clicouId, $recordid,
+					target = YAHOO.util.Event.getTarget(ev),
+					column = this.getColumn(target),
+					registro = this.getRecord(target);
+				if(YAHOO.webservices.panelCK)	{
+					YAHOO.webservices.panelCK.destroy();
+					YAHOO.webservices.panelCK = null;
+				}
+				if (column.key == 'excluir'){
+					i3GEOadmin.webservices.exclui(registro.getData('id_ws'),target);
+				}
+				if (column.key == 'mais'){
+					core_carregando("ativa");
+					core_carregando("buscando dados...");
+					$clicouId = registro.getData('id_ws');
+					$recordid = registro.getId();
+					sUrl = "../php/webservices.php?funcao=pegaDados&id_ws="+$clicouId;
+					callback = {
+	  					success:function(o){
+	  						try{
+	  							i3GEOadmin.webservices.editor(YAHOO.lang.JSON.parse(o.responseText),$clicouId,$recordid);
+	  						}
+	  						catch(e){core_handleFailure(e,o.responseText);}
+	  					},
+	  					failure:core_handleFailure,
+	  					argument: { foo:"foo", bar:"bar" }
+					};
+					core_makeRequest(sUrl,callback);
+				}
+			});
+		};
+		core_carregando("desativa");
+	},
+	editor: function(dados,id,recordid){
+		function on_editorCheckBoxChange(p_oEvent){
+			if(p_oEvent.newValue.get("value") == "OK"){
+				i3GEOadmin.webservices.salva(id,recordid);
 			}
-			if (column.key == 'mais')
-			{
-				var record = this.getRecord(target);
-				core_carregando("ativa");
-				core_carregando("buscando dados...");
-				$clicouId = record.getData('id_ws');
-				$recordid = record.getId();
-				var sUrl = "../php/webservices.php?funcao=pegaDados&id_ws="+record.getData('id_ws');
-				var callback =
-				{
-  					success:function(o)
-  					{
-  						try
-  						{
-  							montaEditor(YAHOO.lang.JSON.parse(o.responseText),$clicouId,$recordid);
-  						}
-  						catch(e){core_handleFailure(e,o.responseText);}
-  					},
-  					failure:core_handleFailure,
-  					argument: { foo:"foo", bar:"bar" }
-				};
-				core_makeRequest(sUrl,callback);
-			}
+			YAHOO.webservices.panelEditor2.destroy();
+			YAHOO.webservices.panelEditor2 = null;
+		};
+		if(!$i("janela_editor2")){
+			var editorBotoes,ins,
+				novoel = document.createElement("div");
+			novoel.id =  "janela_editor2";
+			ins = '<div class="hd">Editor</div>';
+			ins += "<div class='bd' style='height:354px;overflow:auto'>";
+			ins += "<div id='okcancel_checkbox2'></div><div id='editor_bd2'></div>";
+			ins += "<div id='letras_W'></div>";
+			novoel.innerHTML = ins;
 
-		});
-		// Hook into custom event to customize save-flow of "radio" editor
-		myDataTable.subscribe("editorUpdateEvent", function(oArgs)
-		{
-			if(oArgs.editor.column.key === "active")
-			{
-				this.saveCellEditor();
+			document.body.appendChild(novoel);
+			editorBotoes = new YAHOO.widget.ButtonGroup({id:"okcancel_checkbox_id2", name:  "okcancel_checkbox_id2", container:  "okcancel_checkbox2" });
+			editorBotoes.addButtons([
+				{ label: "Salva", value: "OK", checked: false},
+				{ label: "Cancela", value: "CANCEL", checked: false }
+			]);
+			editorBotoes.on("checkedButtonChange", on_editorCheckBoxChange);
+			YAHOO.webservices.panelEditor2 = new YAHOO.widget.Panel("janela_editor2", { modal:true,fixedcenter:true,close:false,width:"400px", height:"480px",overflow:"auto", visible:false,constraintoviewport:true } );
+			YAHOO.webservices.panelEditor2.render();
+		}
+		YAHOO.webservices.panelEditor2.show();
+		$i("editor_bd2").innerHTML = i3GEOadmin.webservices.formulario(dados[0]);
+		core_carregando("desativa");
+	},
+	formulario: function(i){
+		var param = {
+			"linhas":[
+			{titulo:"Nome:",id:"Enome_ws",size:"50",value:i.nome_ws,tipo:"text",div:""},
+			{titulo:"Descri&ccedil;&atilde;o:",id:"Edesc_ws",size:"50",value:i.desc_ws,tipo:"text",div:""},
+			{titulo:"Autor:",id:"Eautor_ws",size:"50",value:i.autor_ws,tipo:"text",div:""},
+			{titulo:"Endere&ccedil;o:",id:"Elink_ws",size:"50",value:i.link_ws,tipo:"text",div:""}
+			]
+		};
+		var ins = "";
+		ins += core_geraLinhas(param);
+
+		ins += "<p>Tipo:<br>";
+		ins += "<select  id='Etipo_ws' />";
+		ins += "<option value='' ";
+		if (i.tipo_ws == ""){ins += "selected";}
+		ins += ">---</option>";
+		ins += "<option value='KML' ";
+		if (i.tipo_ws == "KML"){ins += "selected";}
+		ins += " >KML</option>";
+		ins += "<option value='WMS' ";
+		if (i.tipo_ws == "WMS"){ins += "selected";}
+		ins += " >WMS</option>";
+		ins += "<option value='WMS-Tile' ";
+		if (i.tipo_ws == "WMS-Tile"){ins += "selected";}
+		ins += " >WMS-Tile</option>";
+		ins += "<option value='GEORSS' ";
+		if (i.tipo_ws == "GEORSS"){ins += "selected";}
+		ins += " >GEORSS</option>";
+		ins += "<option value='WS' ";
+		if (i.tipo_ws == "WS"){ins += "selected";}
+		ins += " >WS</option>";
+		ins += "<option value='DOWNLOAD' ";
+		if (i.tipo_ws == "DOWNLOAD"){ins += "selected";}
+		ins += " >DOWNLOAD</option>";
+		ins += "<option value='GEOJSON' ";
+		if (i.tipo_ws == "GEOJSON"){ins += "selected";}
+		ins += " >GEOJSON</option>";
+
+		ins += "</select></p>";
+		return(ins);
+	},
+	filtra: function(letra){
+		var i,temp,
+			n = i3GEOadmin.webservices.dados.length,
+			novo = [];
+		if(letra == "Todos"){
+			novo = i3GEOadmin.webservices.dados;
+		}
+		else{
+			for(i=0;i<n;i++){
+				temp = i3GEOadmin.webservices.dados[i].nome_ws;
+				if(temp.charAt(0).toUpperCase() == letra.toUpperCase()){
+					novo.push(i3GEOadmin.webservices.dados[i]);
+				}
 			}
-		});
-		myDataTable.subscribe("editorBlurEvent", function(oArgs)
-		{
-			this.cancelCellEditor();
-		});
-	};
-	core_carregando("desativa");
-}
-function montaEditor(dados,id,recordid)
-{
-	function on_editorCheckBoxChange(p_oEvent)
-	{
-		if(p_oEvent.newValue.get("value") == "OK")
-		{
-			gravaDados(id,recordid);
 		}
-		else
-		{
-			YAHOO.admin.container.panelEditor.destroy();
-			YAHOO.admin.container.panelEditor = null;
+		i3GEOadmin.webservices.tabela(novo);
+	},
+	exclui: function(id,row){
+		var mensagem = " excluindo o registro do id= "+id,
+			sUrl = "../php/webservices.php?funcao=excluir&id="+id;
+		core_excluiLinha(sUrl,row,mensagem,"",i3GEOadmin.webservices.dataTable);
+	},
+	salva: function(id,recordid){
+		var i,c,sUrl, callback,
+			campos = i3GEOadmin.webservices.colunas,
+			par = "",
+			n = campos.length;
+		for (i=0;i<n;i++){
+			c = $i("E"+campos[i].key);
+			if(c){
+				par += "&"+campos[i].key+"="+(c.value);
+			}
 		}
-	};
-	if(!YAHOO.admin.container.panelEditor)
-	{
-		var novoel = document.createElement("div");
-		novoel.id =  "janela_editor";
-		var ins = '<div class="hd">Editor</div>';
-		ins += "<div class='bd' style='height:354px;overflow:auto'>";
-		ins += "<div id='okcancel_checkbox'></div><div id='editor_bd'></div>";
-		novoel.innerHTML = ins;
-		document.body.appendChild(novoel);
-		var editorBotoes = new YAHOO.widget.ButtonGroup({id:"okcancel_checkbox_id", name:  "okcancel_checkbox_id", container:  "okcancel_checkbox" });
-		editorBotoes.addButtons([
-			{ label: "Salva", value: "OK", checked: false},
-			{ label: "Cancela", value: "CANCEL", checked: false }
-		]);
-		editorBotoes.on("checkedButtonChange", on_editorCheckBoxChange);
-		YAHOO.admin.container.panelEditor = new YAHOO.widget.Panel("janela_editor", { fixedcenter:true,close:false,width:"400px", height:"400px",overflow:"auto", visible:false,constraintoviewport:true } );
-		YAHOO.admin.container.panelEditor.render();
+		par += "&id_ws="+id;
+		core_carregando("ativa");
+		core_carregando(" gravando o registro do id= "+id);
+		sUrl = "../php/webservices.php?funcao=alterarWS"+par;
+		callback = {
+	  		success:function(o){
+	  			try	{
+	  				if(YAHOO.lang.JSON.parse(o.responseText) == "erro")	{
+	  					core_carregando("<span style=color:red >N&atilde;o foi poss&iacute;vel excluir. Verifique se n&atilde;o existem registros vinculados</span>");
+	  					setTimeout("core_carregando('desativa')",3000);
+	  				}
+	  				else{
+	  					var rec = i3GEOadmin.webservices.dataTable.getRecordSet().getRecord(recordid);
+	  					i3GEOadmin.webservices.dataTable.updateRow(rec,YAHOO.lang.JSON.parse(o.responseText)[0]);
+	  					core_carregando("desativa");
+	  				}
+	  			}
+	  			catch(e){core_handleFailure(e,o.responseText);}
+	  		},
+	  		failure:core_handleFailure,
+	  		argument: { foo:"foo", bar:"bar" }
+		};
+		core_makeRequest(sUrl,callback);
 	}
-	YAHOO.admin.container.panelEditor.show();
-	//carrega os dados na janela
-	$i("editor_bd").innerHTML = montaDiv(dados[0]);
-	core_carregando("desativa");
-}
-function montaDiv(i)
-{
-	var param = {
-		"linhas":[
-		{titulo:"Nome:",id:"Enome_ws",size:"50",value:i.nome_ws,tipo:"text",div:""},
-		{titulo:"Descri&ccedil;&atilde;o:",id:"Edesc_ws",size:"50",value:i.desc_ws,tipo:"text",div:""},
-		{titulo:"Autor:",id:"Eautor_ws",size:"50",value:i.autor_ws,tipo:"text",div:""},
-		{titulo:"Endere&ccedil;o:",id:"Elink_ws",size:"50",value:i.link_ws,tipo:"text",div:""}
-		]
-	};
-	var ins = "";
-	ins += core_geraLinhas(param);
-
-	ins += "<p>Tipo:<br>";
-	ins += "<select  id='Etipo_ws' />";
-	ins += "<option value='' ";
-	if (i.tipo_ws == ""){ins += "selected";}
-	ins += ">---</option>";
-	ins += "<option value='KML' ";
-	if (i.tipo_ws == "KML"){ins += "selected";}
-	ins += " >KML</option>";
-	ins += "<option value='WMS' ";
-	if (i.tipo_ws == "WMS"){ins += "selected";}
-	ins += " >WMS</option>";
-	ins += "<option value='WMS-Tile' ";
-	if (i.tipo_ws == "WMS-Tile"){ins += "selected";}
-	ins += " >WMS-Tile</option>";
-	ins += "<option value='GEORSS' ";
-	if (i.tipo_ws == "GEORSS"){ins += "selected";}
-	ins += " >GEORSS</option>";
-	ins += "<option value='WS' ";
-	if (i.tipo_ws == "WS"){ins += "selected";}
-	ins += " >WS</option>";
-	ins += "<option value='DOWNLOAD' ";
-	if (i.tipo_ws == "DOWNLOAD"){ins += "selected";}
-	ins += " >DOWNLOAD</option>";
-	ins += "<option value='GEOJSON' ";
-	if (i.tipo_ws == "GEOJSON"){ins += "selected";}
-	ins += " >GEOJSON</option>";
-
-	ins += "</select></p>";
-	return(ins);
-}
-function excluiLinha(id,row)
-{
-	var mensagem = " excluindo o registro do id= "+id;
-	var sUrl = "../php/webservices.php?funcao=excluir&id="+id;
-	core_excluiLinha(sUrl,row,mensagem);
-}
-/*
-Function: gravaDados
-
-Aplica as altera&ccedil;&otilde;es feitas em um WS
-
-<ALTERARWS>
-*/
-function gravaDados(id,recordid)
-{
-	var campos = new Array("desc","nome","link","tipo","autor"),
-		par = "",
-		i;
-	for (i=0;i<campos.length;i++)
-	{par += "&"+campos[i]+"_ws="+($i("E"+campos[i]+"_ws").value);}
-	par += "&id_ws="+id;
-	core_carregando("ativa");
-	core_carregando(" gravando o registro do id= "+id);
-	var sUrl = "../php/webservices.php?funcao=alterarWS"+par;
-	var callback =
-	{
-  		success:function(o)
-  		{
-  			try
-  			{
-  				if(YAHOO.lang.JSON.parse(o.responseText) == "erro")
-  				{
-  					core_carregando("<span style=color:red >N&atilde;o foi poss&iacute;vel excluir. Verifique se n&atilde;o existem registros vinculados</span>");
-  					setTimeout("core_carregando('desativa')",3000);
-  				}
-  				else
-  				{
-  					var rec = myDataTable.getRecordSet().getRecord(recordid);
-  					myDataTable.updateRow(rec,YAHOO.lang.JSON.parse(o.responseText)[0]);
-  					core_carregando("desativa");
-  				}
-				YAHOO.admin.container.panelEditor.destroy();
-				YAHOO.admin.container.panelEditor = null;
-  			}
-  			catch(e){core_handleFailure(e,o.responseText);}
-  		},
-  		failure:core_handleFailure,
-  		argument: { foo:"foo", bar:"bar" }
-	};
-	core_makeRequest(sUrl,callback);
-}
+};

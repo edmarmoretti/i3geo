@@ -308,7 +308,12 @@ switch (strtoupper($funcao))
 		{JSON}
 		*/
 	case "PEGASUBGRUPOS":
-		$dados = pegaDados("SELECT * from ".$esquemaadmin."i3geoadmin_subgrupos order by nome_subgrupo");
+		if(isset($id_grupo) && $id_grupo != "")	{
+			$dados = pegaDados("SELECT * from ".$esquemaadmin."i3geoadmin_subgrupos WHERE id_subgrupo = $id_subgrupo order by nome_subgrupo");
+		}
+		else{
+			$dados = pegaDados("SELECT * from ".$esquemaadmin."i3geoadmin_subgrupos order by nome_subgrupo");
+		}
 		retornaJSON($dados);
 		exit;
 		break;
@@ -355,7 +360,13 @@ switch (strtoupper($funcao))
 		{JSON}
 		*/
 	case "ALTERASUBGRUPOS":
-		retornaJSON(alteraSubGrupos());
+		alteraSubGrupos();
+		if(isset($id_subgrupo) && $id_subgrupo != "")	{
+			retornaJSON(pegaDados("SELECT * from ".$esquemaadmin."i3geoadmin_subgrupos WHERE id_subgrupo = $id_subgrupo"));
+		}
+		else{
+			retornaJSON("ok");
+		}
 		exit;
 		break;
 		/*
@@ -1028,25 +1039,21 @@ function alteraGrupos()
 */
 function alteraSubGrupos()
 {
-	global $nome,$desc,$id,$en,$es,$it,$esquemaadmin;
-	try
-	{
+	global $nome_subgrupo,$desc_subgrupo,$id_subgrupo,$en,$es,$it,$esquemaadmin;
+	try{
 		require_once("conexao.php");
-		if($convUTF)
-		{
-			$nome = utf8_encode($nome);
-			$desc = utf8_encode($desc);
+		if($convUTF){
+			$nome_subgrupo = utf8_encode($nome_subgrupo);
+			$desc_subgrupo = utf8_encode($desc_subgrupo);
 			$en = utf8_encode($en);
 			$es = utf8_encode($es);
 			$it = utf8_encode($it);
 		}
 		$retorna = "";
-		if($id != "")
-		{
-			$dbhw->query("UPDATE ".$esquemaadmin."i3geoadmin_subgrupos SET en = '$en', es = '$es', it = '$it', nome_subgrupo = '$nome', desc_subgrupo = '$desc' WHERE id_subgrupo = $id");
+		if($id_subgrupo != ""){
+			$dbhw->query("UPDATE ".$esquemaadmin."i3geoadmin_subgrupos SET en = '$en', es = '$es', it = '$it', nome_subgrupo = '$nome_subgrupo', desc_subgrupo = '$desc_subgrupo' WHERE id_subgrupo = $id_subgrupo");
 		}
-		else
-		{
+		else{
 			$dbhw->query("INSERT INTO ".$esquemaadmin."i3geoadmin_subgrupos (nome_subgrupo, desc_subgrupo, en, es, it) VALUES ('', '','','','')");
 		}
 		$dbhw = null;

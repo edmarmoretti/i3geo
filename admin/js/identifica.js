@@ -29,205 +29,213 @@ Arquivo:
 
 i3geo/admin/js/identifica.js
 */
-
-YAHOO.namespace("admin.container");
-function initMenu()
-{
-	core_ativaBotaoAdicionaLinha("../php/identifica.php?funcao=alterarFuncoes");
-	core_carregando("ativa");
-	core_ativaPainelAjuda("ajuda","botaoAjuda");
-	pegaFuncoes();
+if(typeof(i3GEOadmin) === 'undefined'){
+	var i3GEOadmin = {};
 }
-function pegaFuncoes()
-{
-	core_pegaDados("buscando fun&ccedil;&otilde;es...","../php/identifica.php?funcao=pegaFuncoes","montaTabela");
-}
-function montaTabela(dados)
-{
-	YAHOO.example.InlineCellEditing = new function()
-	{
-		// Custom formatter for "address" column to preserve line breaks
-		var formatMais = function(elCell, oRecord, oColumn)
-		{
-			elCell.innerHTML = "<div class=editar style='text-align:center' ></div>";
-		};
-		var formatTexto = function(elCell, oRecord, oColumn, oData)
-		{
-			elCell.innerHTML = "<pre ><p>" + oData + "</pre>";
-		};
-		var formatExclui = function(elCell, oRecord, oColumn)
-		{
-			elCell.innerHTML = "<div class=excluir style='text-align:center' ></div>";//onclick='excluiLinha(\""+oRecord.getData("id_menu")+"\",\""+oRecord.getId()+"\")'></div>";
-		};
-		var myColumnDefs = [
-			{key:"excluir",label:"excluir",formatter:formatExclui},
-			{key:"mais",label:"editar",formatter:formatMais},
-			{label:"id",key:"id_i", formatter:formatTexto},
-			{label:"nome",resizeable:true,key:"nome_i", formatter:formatTexto, editor:"textbox"},
-			{label:"publicado?",key:"publicado_i",editor:"radio" ,editorOptions:{radioOptions:["SIM","NAO"],disableBtns:false}},
-			{label:"programa",resizeable:true,key:"abrir_i", formatter:formatTexto, editor:"textbox"},
-			{label:"abrir como?",key:"target_i", formatter:formatTexto,editor:"dropdown" ,editorOptions:{dropdownOptions:["self","target"],disableBtns:false}}
+i3GEOadmin.identifica = {
+	dados: "",
+	dataTable: null,
+	colunas: ["publicado_i","abrir_i","id_i","nome_i","target_i"],
+	formatTexto: function(elCell, oRecord, oColumn, oData){
+		if(oData === ""){
+			oData = "<span style='color:gray' ></span>";
+		}
+		elCell.innerHTML = "<pre ><p style=cursor:default >" + oData + "</pre>";
+	},
+	formatExclui: function(elCell, oRecord, oColumn){
+		elCell.innerHTML = "<div title='exclui' class=excluir style='text-align:center' ></div>";
+	},
+	formatMais: function(elCell, oRecord, oColumn){
+		elCell.innerHTML = "<div class=editar style='text-align:center' ></div>";
+	},
+	defColunas: function(){
+		return [
+			{key:"excluir",label:"excluir",formatter:i3GEOadmin.identifica.formatExclui},
+			{key:"mais",label:"editar",formatter:i3GEOadmin.identifica.formatMais},
+			{label:"id",key:"id_i", formatter:i3GEOadmin.identifica.formatTexto},
+			{label:"nome",resizeable:true,key:"nome_i", formatter:i3GEOadmin.identifica.formatTexto},
+			{label:"publicado?",resizeable:true,key:"publicado_i", formatter:i3GEOadmin.identifica.formatTexto},
+			{label:"programa",resizeable:true,key:"programa_i", formatter:i3GEOadmin.identifica.formatTexto},
+			{label:"abrir como?",resizeable:true,key:"target_i", formatter:i3GEOadmin.identifica.formatTexto}
 		];
-		myDataSource = new YAHOO.util.DataSource(dados);
-		myDataSource.responseType = YAHOO.util.DataSource.TYPE_JSARRAY;
-		myDataSource.responseSchema =
-		{
-			fields: ["publicado_i","abrir_i","id_i","nome_i","target_i"]
+	},
+	/*
+	 * Inicializa o menu
+	 */
+	inicia: function(){
+		YAHOO.namespace("identifica");
+		YAHOO.namespace("admin.container");
+		core_ativaPainelAjuda("ajuda","botaoAjuda");
+		core_ativaBotaoAdicionaLinha("../php/identifica.php?funcao=alterarFuncoes","adicionaNovoIdentifica","i3GEOadmin.identifica.obtem");
+		i3GEOadmin.identifica.obtem();
+	},
+	/*
+	 * Obt&eacute;m a lista de menus
+	 */
+	obtem: function(){
+		i3GEOadmin.identifica.dados = "";
+		core_carregando("ativa");
+		core_pegaDados("buscando endere&ccedil;os...","../php/identifica.php?funcao=pegaFuncoes","i3GEOadmin.identifica.tabela");
+	},
+	tabela: function(dados){
+		if(i3GEOadmin.identifica.dados == ""){
+			i3GEOadmin.identifica.dados = dados;
+		}
+		core_listaDeLetras("letras_I","i3GEOadmin.identifica.filtra");
+		YAHOO.example.InlineCellEditing = new function(){
+			// Custom formatter for "address" column to preserve line breaks
+			var myDataSource = new YAHOO.util.DataSource(dados);
+			myDataSource.responseType = YAHOO.util.DataSource.TYPE_JSARRAY;
+			myDataSource.responseSchema = {
+				fields: i3GEOadmin.identifica.colunas
+			};
+			i3GEOadmin.identifica.dataTable = new YAHOO.widget.DataTable("tabela", i3GEOadmin.identifica.defColunas(), myDataSource);
+			i3GEOadmin.identifica.dataTable.subscribe('cellClickEvent',function(ev){
+				var sUrl, callback,$clicouId, $recordid,
+					target = YAHOO.util.Event.getTarget(ev),
+					column = this.getColumn(target),
+					registro = this.getRecord(target);
+				if(YAHOO.identifica.panelCK)	{
+					YAHOO.identifica.panelCK.destroy();
+					YAHOO.identifica.panelCK = null;
+				}
+				if (column.key == 'excluir'){
+					i3GEOadmin.identifica.exclui(registro.getData('id_i'),target);
+				}
+				if (column.key == 'mais'){
+					core_carregando("ativa");
+					core_carregando("buscando dados...");
+					$clicouId = registro.getData('id_i');
+					$recordid = registro.getId();
+					sUrl = "../php/identifica.php?funcao=pegafuncoes&id_i="+$clicouId;
+					callback = {
+	  					success:function(o){
+	  						try{
+	  							i3GEOadmin.identifica.editor(YAHOO.lang.JSON.parse(o.responseText),$clicouId,$recordid);
+	  						}
+	  						catch(e){core_handleFailure(e,o.responseText);}
+	  					},
+	  					failure:core_handleFailure,
+	  					argument: { foo:"foo", bar:"bar" }
+					};
+					core_makeRequest(sUrl,callback);
+				}
+			});
 		};
-		myDataTable = new YAHOO.widget.DataTable("tabela", myColumnDefs, myDataSource);
-		myDataTable.subscribe('cellClickEvent',function(ev)
-		{
-			var target = YAHOO.util.Event.getTarget(ev);
-			var column = this.getColumn(target);
-			if(YAHOO.admin.container.panelCK)
-			{
-				YAHOO.admin.container.panelCK.destroy();
-				YAHOO.admin.container.panelCK = null;
+		core_carregando("desativa");
+	},
+	editor: function(dados,id,recordid){
+		function on_editorCheckBoxChange(p_oEvent){
+			if(p_oEvent.newValue.get("value") == "OK"){
+				i3GEOadmin.identifica.salva(id,recordid);
 			}
-			if (column.key == 'excluir')
-			{
-				var record = this.getRecord(target);
-				excluiLinha(record.getData('id_i'),target);
-			}
-			if (column.key == 'mais')
-			{
-				var record = this.getRecord(target);
-				core_carregando("ativa");
-				core_carregando("buscando dados...");
-				$clicouId = record.getData('id_i');
-				$recordid = record.getId();
-				var sUrl = "../php/identifica.php?funcao=pegafuncoes&id_i="+record.getData('id_i');
-				var callback =
-				{
-  					success:function(o)
-  					{
-  						try
-  						{
-  							montaEditor(YAHOO.lang.JSON.parse(o.responseText),$clicouId,$recordid);
-  						}
-  						catch(e){core_handleFailure(e,o.responseText);}
-  					},
-  					failure:core_handleFailure,
-  					argument: { foo:"foo", bar:"bar" }
-				};
-				core_makeRequest(sUrl,callback);
-			}
-		});
+			YAHOO.identifica.panelEditor2.destroy();
+			YAHOO.identifica.panelEditor2 = null;
+		};
+		if(!$i("janela_editor2")){
+			var editorBotoes,ins,
+				novoel = document.createElement("div");
+			novoel.id =  "janela_editor2";
+			ins = '<div class="hd">Editor</div>';
+			ins += "<div class='bd' style='height:354px;overflow:auto'>";
+			ins += "<div id='okcancel_checkbox2'></div><div id='editor_bd2'></div>";
+			ins += "<div id='letras_I'></div>";
+			novoel.innerHTML = ins;
 
-	};
-	core_carregando("desativa");
-}
-function montaEditor(dados,id,recordid)
-{
-	function on_editorCheckBoxChange(p_oEvent)
-	{
-		if(p_oEvent.newValue.get("value") == "OK")
-		{
-			gravaDados(id,recordid);
+			document.body.appendChild(novoel);
+			editorBotoes = new YAHOO.widget.ButtonGroup({id:"okcancel_checkbox_id2", name:  "okcancel_checkbox_id2", container:  "okcancel_checkbox2" });
+			editorBotoes.addButtons([
+				{ label: "Salva", value: "OK", checked: false},
+				{ label: "Cancela", value: "CANCEL", checked: false }
+			]);
+			editorBotoes.on("checkedButtonChange", on_editorCheckBoxChange);
+			YAHOO.identifica.panelEditor2 = new YAHOO.widget.Panel("janela_editor2", { modal:true,fixedcenter:true,close:false,width:"400px", height:"480px",overflow:"auto", visible:false,constraintoviewport:true } );
+			YAHOO.identifica.panelEditor2.render();
 		}
-		else
-		{
-			YAHOO.admin.container.panelEditor.destroy();
-			YAHOO.admin.container.panelEditor = null;
+		YAHOO.identifica.panelEditor2.show();
+		$i("editor_bd2").innerHTML = i3GEOadmin.identifica.formulario(dados[0]);
+		core_carregando("desativa");
+	},
+	formulario: function(i){
+		var param = {
+			"linhas":[
+			{titulo:"Nome:",id:"Enome_i",size:"50",value:i.nome_i,tipo:"text",div:""},
+			{titulo:"Programa: o i3Geo ir&aacute; adicionar automaticamente os par&acirc;metros &x e &y no final do endere&ccedil;o",id:"Eabrir_i",size:"50",value:i.abrir_i,tipo:"text",div:""},
+			{titulo:"Abrir como: escreva 'self' para abrir na mesma janela ou 'blank' para abrir em uma nova aba",id:"Etarget_i",size:"50",value:i.target_i,tipo:"text",div:""}
+			]
+		};
+		var ins = "";
+		ins += core_geraLinhas(param)	;
+
+		ins += "<p><b>Publicado?</b><br>";
+		ins += "<select  id='Epublicado_i' />";
+		ins += "<option value='' ";
+		if (i.publicado_i == ""){ins += "selected";}
+		ins += ">---</option>";
+		ins += "<option value='SIM' ";
+		if (i.publicado_i == "SIM"){ins += "selected";}
+		ins += " >sim</option>";
+		ins += "<option value='NAO' ";
+		if (i.publicado_i == "NAO"){ins += "selected";}
+		ins += " >n&atilde;o</option>";
+		ins += "</select></p>";
+		return(ins);
+	},
+	filtra: function(letra){
+		var i,temp,
+			n = i3GEOadmin.identifica.dados.length,
+			novo = [];
+		if(letra == "Todos"){
+			novo = i3GEOadmin.identifica.dados;
 		}
-	};
-	if(!YAHOO.admin.container.panelEditor)
-	{
-		var novoel = document.createElement("div");
-		novoel.id =  "janela_editor";
-		var ins = '<div class="hd">Editor</div>';
-		ins += "<div class='bd' style='height:354px;overflow:auto'>";
-		ins += "<div id='okcancel_checkbox'></div><div id='editor_bd'></div>";
-		novoel.innerHTML = ins;
-		document.body.appendChild(novoel);
-		var editorBotoes = new YAHOO.widget.ButtonGroup({id:"okcancel_checkbox_id", name:  "okcancel_checkbox_id", container:  "okcancel_checkbox" });
-		editorBotoes.addButtons([
-			{ label: "Salva", value: "OK", checked: false},
-			{ label: "Cancela", value: "CANCEL", checked: false }
-		]);
-		editorBotoes.on("checkedButtonChange", on_editorCheckBoxChange);
-		YAHOO.admin.container.panelEditor = new YAHOO.widget.Panel("janela_editor", { fixedcenter:true,close:false,width:"400px", height:"400px",overflow:"auto", visible:false,constraintoviewport:true } );
-		YAHOO.admin.container.panelEditor.render();
+		else{
+			for(i=0;i<n;i++){
+				temp = i3GEOadmin.identifica.dados[i].nome_i;
+				if(temp.charAt(0).toUpperCase() == letra.toUpperCase()){
+					novo.push(i3GEOadmin.identifica.dados[i]);
+				}
+			}
+		}
+		i3GEOadmin.identifica.tabela(novo);
+	},
+	exclui: function(id,row){
+		var mensagem = " excluindo o registro do id= "+id,
+			sUrl = "../php/identifica.php?funcao=excluir&id="+id;
+		core_excluiLinha(sUrl,row,mensagem,"",i3GEOadmin.identifica.dataTable);
+	},
+	salva: function(id,recordid){
+		var i,c,sUrl, callback,
+			campos = i3GEOadmin.identifica.colunas,
+			par = "",
+			n = campos.length;
+		for (i=0;i<n;i++){
+			c = $i("E"+campos[i].key);
+			if(c){
+				par += "&"+campos[i].key+"="+(c.value);
+			}
+		}
+		par += "&id_i="+id;
+		core_carregando("ativa");
+		core_carregando(" gravando o registro do id= "+id);
+		sUrl = "../php/identifica.php?funcao=alterarFuncoes"+par;
+		callback = {
+	  		success:function(o){
+	  			try	{
+	  				if(YAHOO.lang.JSON.parse(o.responseText) == "erro")	{
+	  					core_carregando("<span style=color:red >N&atilde;o foi poss&iacute;vel excluir. Verifique se n&atilde;o existem registros vinculados</span>");
+	  					setTimeout("core_carregando('desativa')",3000);
+	  				}
+	  				else{
+	  					var rec = i3GEOadmin.identifica.dataTable.getRecordSet().getRecord(recordid);
+	  					i3GEOadmin.identifica.dataTable.updateRow(rec,YAHOO.lang.JSON.parse(o.responseText)[0]);
+	  					core_carregando("desativa");
+	  				}
+	  			}
+	  			catch(e){core_handleFailure(e,o.responseText);}
+	  		},
+	  		failure:core_handleFailure,
+	  		argument: { foo:"foo", bar:"bar" }
+		};
+		core_makeRequest(sUrl,callback);
 	}
-	YAHOO.admin.container.panelEditor.show();
-	//carrega os dados na janela
-	$i("editor_bd").innerHTML = montaDiv(dados[0]);
-	core_carregando("desativa");
-}
-function montaDiv(i)
-{
-	var param = {
-		"linhas":[
-		{titulo:"Nome:",id:"Enome_i",size:"50",value:i.nome_i,tipo:"text",div:""},
-		{titulo:"Programa: o i3Geo ir&aacute; adicionar automaticamente os par&acirc;metros &x e &y no final do endere&ccedil;o",id:"Eabrir_i",size:"50",value:i.abrir_i,tipo:"text",div:""},
-		{titulo:"Abrir como: escreva 'self' para abrir na mesma janela ou 'blank' para abrir em uma nova aba",id:"Etarget_i",size:"50",value:i.target_i,tipo:"text",div:""}
-		]
-	};
-	var ins = "";
-	ins += core_geraLinhas(param)	;
-
-	ins += "<p><b>Publicado?</b><br>";
-	ins += "<select  id='Epublicado_i' />";
-	ins += "<option value='' ";
-	if (i.publicado_i == ""){ins += "selected";}
-	ins += ">---</option>";
-	ins += "<option value='SIM' ";
-	if (i.publicado_i == "SIM"){ins += "selected";}
-	ins += " >sim</option>";
-	ins += "<option value='NAO' ";
-	if (i.publicado_i == "NAO"){ins += "selected";}
-	ins += " >n&atilde;o</option>";
-	ins += "</select></p>";
-	return(ins);
-}
-/*
-Function: gravaDados
-
-Salva as altera&ccedil;&otilde;es feitas
-
-<ALTERARFUNCOES>
-*/
-function gravaDados(id,recordid)
-{
-	var campos = new Array("nome","publicado","abrir","target");
-	var par = "";
-	for (var i=0;i<campos.length;i++)
-	{par += "&"+campos[i]+"_i="+($i("E"+campos[i]+"_i").value);}
-	par += "&id_i="+id;
-	core_carregando("ativa");
-	core_carregando(" gravando o registro do id= "+id);
-	var sUrl = "../php/identifica.php?funcao=alterarFuncoes"+par;
-	var callback =
-	{
-  		success:function(o)
-  		{
-  			try
-  			{
-  				if(YAHOO.lang.JSON.parse(o.responseText) == "erro")
-  				{
-  					core_carregando("<span style=color:red >N&atilde;o foi poss&iacute;vel excluir. Verifique se n&atilde;o existem registros vinculados</span>");
-  					setTimeout("core_carregando('desativa')",3000);
-  				}
-  				else
-  				{
-  					var rec = myDataTable.getRecordSet().getRecord(recordid);
-  					myDataTable.updateRow(rec,YAHOO.lang.JSON.parse(o.responseText)[0]);
-  					core_carregando("desativa");
-  				}
-				YAHOO.admin.container.panelEditor.destroy();
-				YAHOO.admin.container.panelEditor = null;
-  			}
-  			catch(e){core_handleFailure(e,o.responseText);}
-  		},
-  		failure:core_handleFailure,
-  		argument: { foo:"foo", bar:"bar" }
-	};
-	core_makeRequest(sUrl,callback);
-}
-
-function excluiLinha(id,row)
-{
-	var mensagem = " excluindo o registro do id= "+id;
-	var sUrl = "../php/identifica.php?funcao=excluir&id="+id;
-	core_excluiLinha(sUrl,row,mensagem);
-}
+};
