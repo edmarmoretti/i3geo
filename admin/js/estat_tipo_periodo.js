@@ -2,6 +2,7 @@ if(typeof(i3GEOadmin) === 'undefined'){
 	var i3GEOadmin = {};
 }
 i3GEOadmin.periodo = {
+	letra: "",
 	dados: "",
 	dataTable: null,
 	colunas: ["codigo_tipo_periodo","nome","descricao"],
@@ -135,7 +136,17 @@ i3GEOadmin.periodo = {
 		ins += core_geraLinhas(param);
 		return(ins);
 	},
+	atualizaFiltro: function(dados){
+		i3GEOadmin.periodo.dados = dados;
+		i3GEOadmin.periodo.filtra(i3GEOadmin.periodo.letra);
+	},
 	filtra: function(letra){
+		i3GEOadmin.periodo.letra = letra;
+		if(i3GEOadmin.periodo.dados == ""){
+			core_carregando("ativa");
+			core_pegaDados("buscando endere&ccedil;os...","../php/metaestat.php?funcao=listaTipoPeriodo","i3GEOadmin.periodo.atualizaFiltro");
+			return;
+		}
 		var i,temp,
 			n = i3GEOadmin.periodo.dados.length,
 			novo = [];
@@ -156,6 +167,7 @@ i3GEOadmin.periodo = {
 		var mensagem = " excluindo o registro do id= "+id,
 			sUrl = "../php/metaestat.php?funcao=excluirTipoPeriodo&codigo_tipo_periodo="+id;
 		core_excluiLinha(sUrl,row,mensagem,"",i3GEOadmin.periodo.dataTable);
+		i3GEOadmin.periodo.dados = "";
 	},
 	salva: function(id,recordid){
 		var i,c,sUrl, callback,
@@ -182,6 +194,7 @@ i3GEOadmin.periodo = {
 	  				else{
 	  					var rec = i3GEOadmin.periodo.dataTable.getRecordSet().getRecord(recordid);
 	  					i3GEOadmin.periodo.dataTable.updateRow(rec,YAHOO.lang.JSON.parse(o.responseText));
+	  					i3GEOadmin.periodo.dados = "";
 	  					core_carregando("desativa");
 	  				}
 	  			}

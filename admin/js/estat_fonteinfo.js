@@ -3,6 +3,7 @@ if(typeof(i3GEOadmin) === 'undefined'){
 }
 i3GEOadmin.fonteinfo = {
 	dados: "",
+	letra: "",
 	dataTable: null,
 	colunas: ["id_fonteinfo","titulo","link"],
 	formatTexto: function(elCell, oRecord, oColumn, oData){
@@ -135,7 +136,17 @@ i3GEOadmin.fonteinfo = {
 		ins += core_geraLinhas(param);
 		return(ins);
 	},
+	atualizaFiltro: function(dados){
+		i3GEOadmin.fonteinfo.dados = dados;
+		i3GEOadmin.fonteinfo.filtra(i3GEOadmin.fonteinfo.letra);
+	},
 	filtra: function(letra){
+		i3GEOadmin.fonteinfo.letra = letra;
+		if(i3GEOadmin.fonteinfo.dados == ""){
+			core_carregando("ativa");
+			core_pegaDados("buscando endere&ccedil;os...","../php/metaestat.php?funcao=listaFonteinfo","i3GEOadmin.fonteinfo.atualizaFiltro");
+			return;
+		}
 		var i,temp,
 			n = i3GEOadmin.fonteinfo.dados.length,
 			novo = [];
@@ -156,6 +167,7 @@ i3GEOadmin.fonteinfo = {
 		var mensagem = " excluindo o registro do id= "+id,
 			sUrl = "../php/metaestat.php?funcao=excluirFonteinfo&id_fonteinfo="+id;
 		core_excluiLinha(sUrl,row,mensagem,"",i3GEOadmin.fonteinfo.dataTable);
+		i3GEOadmin.fonteinfo.dados = "";
 	},
 	salva: function(id,recordid){
 		var i,c,sUrl, callback,
@@ -182,6 +194,7 @@ i3GEOadmin.fonteinfo = {
 	  				else{
 	  					var rec = i3GEOadmin.fonteinfo.dataTable.getRecordSet().getRecord(recordid);
 	  					i3GEOadmin.fonteinfo.dataTable.updateRow(rec,YAHOO.lang.JSON.parse(o.responseText));
+	  					i3GEOadmin.fonteinfo.dados = "";
 	  					core_carregando("desativa");
 	  				}
 	  			}

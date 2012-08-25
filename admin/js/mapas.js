@@ -34,6 +34,7 @@ if(typeof(i3GEOadmin) === 'undefined'){
 }
 i3GEOadmin.mapas = {
 	dados: "",
+	letra: "",
 	dataTable: null,
 	colunas: ["id_mapa","publicado_mapa","ordem_mapa","perfil_mapa","ligados_mapa","temas_mapa","desc_mapa","ext_mapa","imagem_mapa","linkdireto_mapa","nome_mapa","outros_mapa"],
 	formatTexto: function(elCell, oRecord, oColumn, oData){
@@ -201,7 +202,17 @@ i3GEOadmin.mapas = {
 		ins += "<br><br><br>";
 		return(ins);
 	},
+	atualizaFiltro: function(dados){
+		i3GEOadmin.mapas.dados = dados;
+		i3GEOadmin.mapas.filtra(i3GEOadmin.mapas.letra);
+	},
 	filtra: function(letra){
+		i3GEOadmin.mapas.letra = letra;
+		if(i3GEOadmin.mapas.dados == ""){
+			core_carregando("ativa");
+			core_pegaDados("buscando dados...","../php/mapas.php?funcao=pegaMapas","i3GEOadmin.mapas.atualizaFiltro");
+			return;
+		}
 		var i,temp,
 			n = i3GEOadmin.mapas.dados.length,
 			novo = [];
@@ -222,6 +233,7 @@ i3GEOadmin.mapas = {
 		var mensagem = " excluindo o registro do id= "+id,
 			sUrl = "../php/mapas.php?funcao=excluirMapa&id="+id;
 		core_excluiLinha(sUrl,row,mensagem,"",i3GEOadmin.mapas.dataTable);
+		i3GEOadmin.mapas.dados = "";
 	},
 	salva: function(id,recordid){
 		var i,c,sUrl, callback,
@@ -248,6 +260,7 @@ i3GEOadmin.mapas = {
 	  				else{
 	  					var rec = i3GEOadmin.mapas.dataTable.getRecordSet().getRecord(recordid);
 	  					i3GEOadmin.mapas.dataTable.updateRow(rec,YAHOO.lang.JSON.parse(o.responseText)[0]);
+	  					i3GEOadmin.mapas.dados = "";
 	  					core_carregando("desativa");
 	  				}
 	  			}

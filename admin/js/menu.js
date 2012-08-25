@@ -40,6 +40,7 @@ if(typeof(i3GEOadmin) === 'undefined'){
 	var i3GEOadmin = {};
 }
 i3GEOadmin.menus = {
+	letra: "",
 	dados: "",
 	dataTable: null,
 	colunas: ["it","es","en","publicado_menu","perfil_menu","aberto","desc_menu","id_menu","nome_menu"],
@@ -206,7 +207,17 @@ i3GEOadmin.menus = {
 		ins += "</select></p>";
 		return(ins);
 	},
+	atualizaFiltro: function(dados){
+		i3GEOadmin.menus.dados = dados;
+		i3GEOadmin.menus.filtra(i3GEOadmin.menus.letra);
+	},
 	filtra: function(letra){
+		i3GEOadmin.menus.letra = letra;
+		if(i3GEOadmin.menus.dados == ""){
+			core_carregando("ativa");
+			core_pegaDados("buscando menus...","../php/menutemas.php?funcao=pegaMenus","i3GEOadmin.menus.atualizaFiltro");
+			return;
+		}
 		var i,temp,
 			n = i3GEOadmin.menus.dados.length,
 			novo = [];
@@ -227,6 +238,7 @@ i3GEOadmin.menus = {
 		var mensagem = " excluindo o registro do id= "+id,
 			sUrl = "../php/menutemas.php?funcao=excluirRegistro&id="+id+"&tabela=menus";
 		core_excluiLinha(sUrl,row,mensagem,"",i3GEOadmin.menus.dataTable);
+		i3GEOadmin.menus.dados = "";
 	},
 	salva: function(id,recordid){
 		var i,c,sUrl, callback,
@@ -253,6 +265,7 @@ i3GEOadmin.menus = {
 	  				else{
 	  					var rec = i3GEOadmin.menus.dataTable.getRecordSet().getRecord(recordid);
 	  					i3GEOadmin.menus.dataTable.updateRow(rec,YAHOO.lang.JSON.parse(o.responseText)[0]);
+	  					i3GEOadmin.menus.dados = "";
 	  					core_carregando("desativa");
 	  				}
 	  			}

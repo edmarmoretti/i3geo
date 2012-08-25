@@ -3,6 +3,7 @@ if(typeof(i3GEOadmin) === 'undefined'){
 }
 i3GEOadmin.conexao = {
 	dados: "",
+	letra: "",
 	dataTable: null,
 	colunas: ["codigo_estat_conexao","bancodedados","host","porta","usuario","senha"],
 	formatTexto: function(elCell, oRecord, oColumn, oData){
@@ -142,7 +143,17 @@ i3GEOadmin.conexao = {
 		ins += core_geraLinhas(param);
 		return(ins);
 	},
+	atualizaFiltro: function(dados){
+		i3GEOadmin.conexao.dados = dados;
+		i3GEOadmin.conexao.filtra(i3GEOadmin.conexao.letra);
+	},
 	filtra: function(letra){
+		i3GEOadmin.conexao.letra = letra;
+		if(i3GEOadmin.conexao.dados == ""){
+			core_carregando("ativa");
+			core_pegaDados("buscando endere&ccedil;os...","../php/metaestat.php?funcao=listaConexao","i3GEOadmin.conexao.atualizaFiltro");
+			return;
+		}
 		var i,temp,
 			n = i3GEOadmin.conexao.dados.length,
 			novo = [];
@@ -163,6 +174,7 @@ i3GEOadmin.conexao = {
 		var mensagem = " excluindo o registro do id= "+id,
 			sUrl = "../php/metaestat.php?funcao=excluirConexao&codigo_estat_conexao="+id;
 		core_excluiLinha(sUrl,row,mensagem,"",i3GEOadmin.conexao.dataTable);
+		i3GEOadmin.conexao.dados = "";
 	},
 	salva: function(id,recordid){
 		var i,c,sUrl, callback,
@@ -189,6 +201,7 @@ i3GEOadmin.conexao = {
 	  				else{
 	  					var rec = i3GEOadmin.conexao.dataTable.getRecordSet().getRecord(recordid);
 	  					i3GEOadmin.conexao.dataTable.updateRow(rec,YAHOO.lang.JSON.parse(o.responseText));
+	  					i3GEOadmin.conexao.dados = "";
 	  					core_carregando("desativa");
 	  				}
 	  			}

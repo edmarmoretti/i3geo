@@ -34,6 +34,7 @@ if(typeof(i3GEOadmin) === 'undefined'){
 }
 i3GEOadmin.webservices = {
 	dados: "",
+	letra: "",
 	dataTable: null,
 	colunas: ["id_ws","desc_ws","nome_ws","link_ws","tipo_ws","autor_ws"],
 	formatTexto: function(elCell, oRecord, oColumn, oData){
@@ -203,7 +204,23 @@ i3GEOadmin.webservices = {
 		ins += "</select></p>";
 		return(ins);
 	},
+	atualizaFiltro: function(dados){
+		i3GEOadmin.webservices.dados = dados;
+		i3GEOadmin.webservices.filtra(i3GEOadmin.webservices.letra);
+	},
 	filtra: function(letra){
+		i3GEOadmin.webservices.letra = letra;
+		if(i3GEOadmin.webservices.dados == ""){
+			var tipows = "",u;
+			try{
+				u = window.location.href.split("?");
+				u = u[1].split("=");
+				tipows = u[1];
+			}
+			catch(e){tipows = "";}
+			core_pegaDados("buscando endere&ccedil;os...","../php/webservices.php?funcao=pegaWS&tipows="+tipows,"i3GEOadmin.webservices.atualizaFiltro");
+			return;
+		}
 		var i,temp,
 			n = i3GEOadmin.webservices.dados.length,
 			novo = [];
@@ -224,6 +241,7 @@ i3GEOadmin.webservices = {
 		var mensagem = " excluindo o registro do id= "+id,
 			sUrl = "../php/webservices.php?funcao=excluir&id="+id;
 		core_excluiLinha(sUrl,row,mensagem,"",i3GEOadmin.webservices.dataTable);
+		i3GEOadmin.webservices.dados = "";
 	},
 	salva: function(id,recordid){
 		var i,c,sUrl, callback,
@@ -250,6 +268,7 @@ i3GEOadmin.webservices = {
 	  				else{
 	  					var rec = i3GEOadmin.webservices.dataTable.getRecordSet().getRecord(recordid);
 	  					i3GEOadmin.webservices.dataTable.updateRow(rec,YAHOO.lang.JSON.parse(o.responseText)[0]);
+	  					i3GEOadmin.webservices.dados = "";
 	  					core_carregando("desativa");
 	  				}
 	  			}

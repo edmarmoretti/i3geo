@@ -3,6 +3,7 @@ if(typeof(i3GEOadmin) === 'undefined'){
 }
 i3GEOadmin.umedida = {
 	dados: "",
+	letra: "",
 	dataTable: null,
 	colunas: ["codigo_unidade_medida","nome","sigla","permitesoma","permitemedia"],
 	formatTexto: function(elCell, oRecord, oColumn, oData){
@@ -162,7 +163,17 @@ i3GEOadmin.umedida = {
 		ins += "</select></p>";
 		return(ins);
 	},
+	atualizaFiltro: function(dados){
+		i3GEOadmin.umedida.dados = dados;
+		i3GEOadmin.umedida.filtra(i3GEOadmin.umedida.letra);
+	},
 	filtra: function(letra){
+		i3GEOadmin.umedida.letra = letra;
+		if(i3GEOadmin.umedida.dados == ""){
+			core_carregando("ativa");
+			core_pegaDados("buscando endere&ccedil;os...","../php/metaestat.php?funcao=listaUnidadeMedida","i3GEOadmin.umedida.atualizaFiltro");
+			return;
+		}
 		var i,temp,
 			n = i3GEOadmin.umedida.dados.length,
 			novo = [];
@@ -183,6 +194,7 @@ i3GEOadmin.umedida = {
 		var mensagem = " excluindo o registro do id= "+id,
 			sUrl = "../php/metaestat.php?funcao=excluirUnidadeMedida&codigo_unidade_medida="+id;
 		core_excluiLinha(sUrl,row,mensagem,"",i3GEOadmin.umedida.dataTable);
+		i3GEOadmin.umedida.dados = "";
 	},
 	salva: function(id,recordid){
 		var i,c,sUrl, callback,
@@ -209,6 +221,7 @@ i3GEOadmin.umedida = {
 	  				else{
 	  					var rec = i3GEOadmin.umedida.dataTable.getRecordSet().getRecord(recordid);
 	  					i3GEOadmin.umedida.dataTable.updateRow(rec,YAHOO.lang.JSON.parse(o.responseText));
+	  					i3GEOadmin.umedida.dados = "";
 	  					core_carregando("desativa");
 	  				}
 	  			}
