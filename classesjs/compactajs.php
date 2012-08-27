@@ -118,6 +118,7 @@ packer("classe_interface.js","compactados/classe_interface_compacto.js","Normal"
 packer("classe_i3geo.js","compactados/classe_i3geo_compacto.js","Normal");
 packer("dicionario_ajuda.js","compactados/dicionario_ajuda_compacto.js","Normal");
 packer("classe_social.js","compactados/classe_social_compacto.js","Normal");
+packer("classe_cartograma.js","compactados/classe_cartograma_compacto.js","Normal");
 //packer("../ferramentas/funcoes.js","../ferramentas/funcoes_compacto.js","Normal");
 packer("../pacotes/yui290/build/container/container.js","../pacotes/yui290/build/container/container_compacto.js","Normal");
 packer("../pacotes/yui290/build/container/container_core.js","../pacotes/yui290/build/container/container_core_compacto.js","Normal");
@@ -186,6 +187,7 @@ $jsfiles = array(
 "compactados/classe_gadgets_compacto.js",
 "compactados/classe_social_compacto.js",
 "compactados/classe_login_compacto.js",
+"compactados/classe_cartograma_compacto.js",
 "../pacotes/eudock/js/euDock.2.0.js",
 "../pacotes/eudock/js/euDock.Image.js"
 );

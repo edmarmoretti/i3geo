@@ -1929,14 +1929,14 @@ it:""
 }],
 "x57":[
 {
-pt:"",
+pt:"Cartogramas",
 en:"",
 es:"",
 it:""
 }],
 "x58":[
 {
-pt:"",
+pt:"Escolha uma vari&aacute;vel para compor o mapa",
 en:"",
 es:"",
 it:""

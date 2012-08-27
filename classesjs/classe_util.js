@@ -2515,6 +2515,24 @@ i3GEO.util = {
 			}
 		}
 		return ret;
+	},
+	ajaxGet: function(sUrl,funcaoRetorno){
+		var falhou = function(e){
+				alert(e);
+			},
+			callback = {
+		  		success:function(o){
+		  			try	{
+		  				funcaoRetorno.call("",YAHOO.lang.JSON.parse(o.responseText));
+		  			}
+		  			catch(e){
+		  				falhou(e);
+		  			}
+		  		},
+		  		failure:falhou,
+		  		argument: { foo:"foo", bar:"bar" }
+			};
+		YAHOO.util.Connect.asyncRequest("GET", sUrl, callback);
 	}
 };
 //

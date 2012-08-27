@@ -58,6 +58,7 @@ Return:
 cpJSON = new cpaint();
 cpJSON.set_response_type("JSON");
 cpJSON.set_transfer_mode("POST");
+
 /*
 Classe: i3GEO.php
 
@@ -1418,5 +1419,14 @@ i3GEO.php = {
 		cp.set_transfer_mode('POST');
 		cp.set_response_type("JSON");
 		cp.call(p,"foo",funcao,"&geometrias="+listaWkt);
-	}
+	},
+	/*
+	Function: listaVariavel
+
+	Obt&eacute;m a lista de vari&aacute;veis do sistema de metadados estat&iacute;sticos
+	*/
+	listaVariavel: function(funcao){
+		var p = i3GEO.configura.locaplic+"/admin/php/metaestat.php?funcao=listaVariavel&g_sid="+i3GEO.configura.sid;
+		i3GEO.util.ajaxGet(p,funcao);
+	},
 };
