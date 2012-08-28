@@ -39,8 +39,8 @@ i3GEO.cartograma = {
 	INTERFACE: "flutuante",
 	TOP: 50,
 	LEFT: 100,
-	LARGURA: 250,
-	ALTURA: 100,
+	LARGURA: 260,
+	ALTURA: 300,
 	inicia: function(iddiv){
 		if(!iddiv){
 			iddiv = "i3geoCartoParametros_corpo";
@@ -58,9 +58,9 @@ i3GEO.cartograma = {
 		var onde = $i("i3geoCartoVariaveis"),
 			temp = function(dados){
 				var n = dados.length,
-					ins = "",
+					ins = '<p class="paragrafo" >'+$trad("x58")+'</p>',
 					i;
-				ins = "<select style='width:"+(i3GEO.cartograma.LARGURA - 10)+"px' onchange=''><option value=''>---</option>";
+				ins += "<select style='width:"+(i3GEO.cartograma.LARGURA - 20)+"px' onchange='i3GEO.cartograma.comboVariaveisOnchange(this)'><option value=''>---</option>";
 				for(i=0;i<n;i++){
 					ins += "<option title='"+dados[i].descricao+"' value='"+dados[i].codigo_variavel+"'>"+dados[i].nome+"</option>";
 				}
@@ -73,10 +73,142 @@ i3GEO.cartograma = {
 		i3GEO.cartograma.aguarde(onde);
 		i3GEO.php.listaVariavel(temp);
 	},
+	comboVariaveisOnchange: function(combo){
+		if(combo.value != ""){
+			i3GEO.cartograma.comboMedidasVariavel(combo.value);
+		}
+		else{
+			$i("i3geoCartoMedidasVariavel").innerHTML = "";
+			$i("i3geoCartoParametrosMedidasVariavel").innerHTML = "";
+		}
+	},
+	comboMedidasVariavel: function(codigo_variavel){
+		var onde = $i("i3geoCartoMedidasVariavel"),
+			temp = function(dados){
+				var n = dados.length,
+					ins = '<p class="paragrafo" >'+$trad("x59")+'</p>',
+					i;
+				ins += "<select style='width:"+(i3GEO.cartograma.LARGURA - 20)+"px' onchange='i3GEO.cartograma.comboMedidaVariavelOnchange(this)'><option value=''>---</option>";
+				for(i=0;i<n;i++){
+					ins += "<option value='"+dados[i].id_medida_variavel+"'>"+dados[i].nomemedida+"</option>";
+				}
+				ins += "</select>";
+				if(onde){
+					onde.innerHTML = ins;
+				}
+				return ins;
+			};
+		i3GEO.cartograma.aguarde(onde);
+		i3GEO.php.listaMedidaVariavel(codigo_variavel,temp);
+	},
+	comboMedidaVariavelOnchange: function(combo){
+		if(combo.value != ""){
+			i3GEO.cartograma.parametros.lista(combo.value);
+		}
+		else{
+			$i("i3geoCartoParametrosMedidasVariavel").innerHTML = "";
+		}
+	},
+	parametros: {
+		//guarda a lista de parametros
+		dados: [],
+		//obtem a lista com os parametros da medida
+		//cria os combos para os parametros que sao pai de todos
+		lista: function(id_medida_variavel){
+			var temp = function(dados){
+					i3GEO.cartograma.parametros.dados = dados;
+					i3GEO.cartograma.parametros.combos("0");
+				};
+			i3GEO.php.listaParametrosMedidaVariavel(id_medida_variavel,temp);
+		},
+		//cria um combo para escolher os valores de um parametro
+		combos: function(nivel){
+			var dados = i3GEO.cartograma.parametros.dados,
+				n = dados.length,
+				onde = $i("i3geoCartoParametrosMedidasVariavel"),
+				idpar,idcombo,i,novoel,teste;
+			//cria o combo para o parametro cujo id_pai for do nivel escolhido
+			for(i=0;i<n;i++){
+				if(dados[i].id_pai == nivel){
+					idpar = "parametro_"+dados[i].id_parametro_medida;
+					idcombo = "parametro_"+dados[i].id_parametro_medida+"_"+nivel;
+					teste = i3GEO.cartograma.parametros.retornaIdPai(dados[i].id_parametro_medida);
+					if(teste != false){
+						idpar = "parametro_"+teste;
+					}
+					if(!$i(idpar)){
+						novoel = document.createElement("div");
+						novoel.id = idpar;
+						novoel.className = "paragrafo";
+						onde.appendChild(novoel);
+						onde = novoel;
+					}
+					onde = $i(idpar);
+					if(!$i(idcombo)){
+						novoel = document.createElement("div");
+						novoel.id = idcombo;
+						novoel.className = "paragrafo";
+						onde.appendChild(novoel);
+						i3GEO.cartograma.parametros.valoresCombo(dados[i].id_parametro_medida,dados[i].nome,nivel,onde);
+					}
+				}
+			}
+		},
+		valoresCombo: function(id_parametro_medida,titulo,nivel,onde){
+			var temp = function(dados){
+				var n = dados.length,
+					ins = "",
+					oc = "'i3GEO.cartograma.parametros.combos(\""+id_parametro_medida+"\")'",
+					filho = i3GEO.cartograma.parametros.retornaIdFilho(id_parametro_medida),
+					i,novoel;
+				if(filho == false){
+					oc = "";
+				}
+				ins = "<p class=paragrafo >"+titulo+"</p>";
+				ins += "<select style='background:beige;width:"+(i3GEO.cartograma.LARGURA - 20)+"px' onchange="+oc+" ><option value=''>---</option>";
+				for(i=0;i<n;i++){
+					ins += "<option value='"+dados[i]+"'>"+dados[i]+"</option>";
+				}
+				ins += "</select>";
+				novoel = document.createElement("div");
+				novoel.className = "paragrafo";
+				novoel.innerHTML = ins;
+				onde.appendChild(novoel);
+			};
+			i3GEO.php.listaValoresParametroMedidaVariavel(id_parametro_medida,temp);
+		},
+		//retorna o id do parametro que e filho de um outro parametro
+		retornaIdFilho:function(pai){
+			var dados = i3GEO.cartograma.parametros.dados,
+				n = dados.length,
+				i;
+			for(i=0;i<n;i++){
+				if(dados[i].id_pai == pai){
+					return dados[i].id_parametro_medida;
+				}
+			}
+			return false;
+		},
+		//retorna o id do parametro que e pai de um outro parametro
+		retornaIdPai:function(filho){
+			var dados = i3GEO.cartograma.parametros.dados,
+				n = dados.length,
+				i;
+			for(i=0;i<n;i++){
+				if(dados[i].id_parametro_medida == filho){
+					return dados[i].id_pai;
+				}
+			}
+			return false;
+		}
+	},
 	html: function(){
 		var ins = '<div id="i3geoCartoVariaveisContainer" >' +
-			'<p class="paragrafo" >'+$trad("x58")+'</p>' +
 			'<div class="paragrafo" id="i3geoCartoVariaveis" >' +
+			'</div>' +
+			'<div class="paragrafo" id="i3geoCartoMedidasVariavel" >' +
+			'</div>' +
+			'<div class="paragrafo" id="i3geoCartoParametrosMedidasVariavel" >' +
 			'</div>' +
 			'</div>';
 		return ins;

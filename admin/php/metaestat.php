@@ -151,6 +151,11 @@ switch (strtoupper($funcao))
 		retornaJSON($m->listaParametro($id_medida_variavel,$id_parametro_medida));
 		exit;
 	break;
+	case "LISTAVALORESPARAMETRO":
+		$m = new Metaestat();
+		retornaJSON($m->listaValoresParametro($id_parametro_medida));
+		exit;
+	break;
 	/*
 	 Valor: LISTAUNIDADEMEDIDA
 

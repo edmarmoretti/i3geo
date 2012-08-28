@@ -1429,4 +1429,31 @@ i3GEO.php = {
 		var p = i3GEO.configura.locaplic+"/admin/php/metaestat.php?funcao=listaVariavel&g_sid="+i3GEO.configura.sid;
 		i3GEO.util.ajaxGet(p,funcao);
 	},
+	/*
+	Function: listaMedidaVariavel
+
+	Obt&eacute;m a lista medidas de uma vari&aacute;vel do sistema de metadados estat&iacute;sticos
+	*/
+	listaMedidaVariavel: function(codigo_variavel,funcao){
+		var p = i3GEO.configura.locaplic+"/admin/php/metaestat.php?funcao=listaMedidaVariavel&codigo_variavel="+codigo_variavel+"&g_sid="+i3GEO.configura.sid;
+		i3GEO.util.ajaxGet(p,funcao);
+	},
+	/*
+	Function: listaParametrosMedidaVariavel
+
+	Obt&eacute;m a lista de par&acirc;metros de uma medida de uma vari&aacute;vel do sistema de metadados estat&iacute;sticos
+	*/
+	listaParametrosMedidaVariavel: function(id_medida_variavel,funcao){
+		var p = i3GEO.configura.locaplic+"/admin/php/metaestat.php?funcao=listaParametro&id_medida_variavel="+id_medida_variavel+"&g_sid="+i3GEO.configura.sid;
+		i3GEO.util.ajaxGet(p,funcao);
+	},
+	/*
+	Function: listaValoresParametroMedidaVariavel
+
+	Obt&eacute;m a lista de valores de um par&acirc;metro de uma medida de uma vari&aacute;vel do sistema de metadados estat&iacute;sticos
+	*/
+	listaValoresParametroMedidaVariavel: function(id_parametro_medida,funcao){
+		var p = i3GEO.configura.locaplic+"/admin/php/metaestat.php?funcao=listaValoresParametro&id_parametro_medida="+id_parametro_medida+"&g_sid="+i3GEO.configura.sid;
+		i3GEO.util.ajaxGet(p,funcao);
+	}
 };

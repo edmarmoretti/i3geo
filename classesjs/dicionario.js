@@ -1943,7 +1943,7 @@ it:""
 }],
 "x59":[
 {
-pt:"",
+pt:"Escolha uma medida da vari&aacute;vel",
 en:"",
 es:"",
 it:""

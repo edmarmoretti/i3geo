@@ -223,7 +223,6 @@ class Metaestat{
 		else{
 			$colunageo = $dadosgeo["colunacentroide"];
 		}
-
 		if($todasascolunas == 0){
 			$sql = " SELECT d.".$dados["colunavalor"].",d.".$dados["colunaidgeo"];
 			if(!empty($agruparpor)){
@@ -240,6 +239,7 @@ class Metaestat{
 			$sqlgeo .= " FROM ".$dados["esquemadb"].".".$dados["tabela"]." as d,".$dadosgeo["esquemadb"].".".$dadosgeo["tabela"]." as g ";
 		}
 		else{
+			$sqlagrupamento = " SELECT d.".$agruparpor." FROM ".$dados["esquemadb"].".".$dados["tabela"]." as d group by ".$agruparpor." order by ".$agruparpor;
 			$sqlgeo .= " FROM (SELECT sum(".$dados["colunavalor"].") as ".$dados["colunavalor"].",".$dados["colunaidgeo"].",".$agruparpor." FROM ".$dados["esquemadb"].".".$dados["tabela"] ." group by ".$agruparpor.",".$dados["colunaidgeo"].") as d, ".$dadosgeo["esquemadb"].".".$dadosgeo["tabela"]." as g";
 			$sql .= " FROM (SELECT sum(".$dados["colunavalor"].") as ".$dados["colunavalor"].",".$dados["colunaidgeo"].",".$agruparpor." FROM ".$dados["esquemadb"].".".$dados["tabela"] ." group by ".$agruparpor.",".$dados["colunaidgeo"].") as d ";
 		}
@@ -259,7 +259,7 @@ class Metaestat{
 		//atencao: cuidado ao alterar essa string pois ') as foo' pode ser usado para replace em outras funcoes
 		$sqlgeo = $colunageo." from ($sqlgeo) as foo using unique ".$dados["colunaidgeo"]." using srid=".$dadosgeo["srid"];
 		$colunas = $this->colunasTabela($dados["codigo_estat_conexao"],$dados["esquemadb"],$dados["tabela"]);
-		return array("sql"=>$sql,"sqlmapserver"=>$sqlgeo,"filtro"=>$filtro,"colunas"=>$colunas);
+		return array("sqlagrupamento"=>$sqlagrupamento,"sql"=>$sql,"sqlmapserver"=>$sqlgeo,"filtro"=>$filtro,"colunas"=>$colunas);
 	}
 	function mapfileMedidaVariavel($id_medida_variavel,$filtro="",$todasascolunas = 0,$tipolayer="polygon",$titulolayer="",$id_classificacao="",$agruparpor=""){
 		if(empty($tipolayer)){
@@ -394,6 +394,21 @@ class Metaestat{
 			$sqlf .= " WHERE ".$filtro;
 		}
 		//echo $sqlf;exit;
+		$metaVariavel = $this->listaMedidaVariavel("",$id_medida_variavel);
+		if(!empty($metaVariavel["codigo_estat_conexao"])){
+			$c = $this->listaConexao($metaVariavel["codigo_estat_conexao"],true);
+			$dbhold = $this->dbh;
+			$dbh = new PDO('pgsql:dbname='.$c["bancodedados"].';user='.$c["usuario"].';password='.$c["senha"].';host='.$c["host"].';port='.$c["porta"]);
+			$this->dbh = $dbh;
+			$res = $this->execSQL($sqlf);
+			$this->dbh = $dbhold;
+			return $res;
+		}
+		return false;
+	}
+	function valorUnicoMedidaVariavel($id_medida_variavel,$coluna){
+		$sqlf = $this->sqlMedidaVariavel($id_medida_variavel,0,$coluna);
+		$sqlf = $sqlf["sqlagrupamento"];
 		$metaVariavel = $this->listaMedidaVariavel("",$id_medida_variavel);
 		if(!empty($metaVariavel["codigo_estat_conexao"])){
 			$c = $this->listaConexao($metaVariavel["codigo_estat_conexao"],true);
@@ -961,7 +976,17 @@ class Metaestat{
 		//echo $sql;exit;
 		return $this->execSQL($sql,$id_parametro_medida);
 	}
-
+	function listaValoresParametro($id_parametro_medida){
+		$parametro = $this->listaParametro("",$id_parametro_medida);
+		//$medida = $this->listaMedidaVariavel("",$parametro["id_medida_variavel"]);
+		$sm = $this->valorUnicoMedidaVariavel($parametro["id_medida_variavel"],$parametro["coluna"]);
+		$nsm = array();
+		foreach($sm as $s){
+			$nsm[] = $s[$parametro["coluna"]];
+		}
+		return $nsm;
+		exit;
+	}
 	/*
 	 Function: listaTipoPeriodo
 
