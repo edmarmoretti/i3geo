@@ -937,7 +937,10 @@ switch (strtoupper($funcao))
 	break;
 	case "RELATORIOCOMPLETO":
 		$m = new Metaestat();
-		$dados = $m->relatorioCompleto();
+		if(empty($codigo_variavel)){
+			$codigo_variavel = "";
+		}
+		$dados = $m->relatorioCompleto($codigo_variavel);
 		$dados = $m->formataRelatorioHtml($dados);
 		retornaJSON($dados);
 		exit;

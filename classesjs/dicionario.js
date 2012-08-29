@@ -1950,6 +1950,27 @@ it:""
 }],
 "x60":[
 {
+pt:"Mais informa&ccedil;&otilde;es sobre a vari&aacute;vel escolhida",
+en:"",
+es:"",
+it:""
+}],
+"x61":[
+{
+pt:"Escolha uma variavel",
+en:"",
+es:"",
+it:""
+}],
+"x62":[
+{
+pt:"Relat&oacute;rio",
+en:"",
+es:"",
+it:""
+}],
+"x63":[
+{
 pt:"",
 en:"",
 es:"",

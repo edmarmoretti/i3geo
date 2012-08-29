@@ -710,7 +710,7 @@ class Metaestat{
 		try	{
 			if($id_parametro_medida != ""){
 				if($this->convUTF){
-					$nomeparametro = utf8_encode($nomeparametro);
+					$nome = utf8_encode($nome);
 					$descricao = utf8_encode($descricao);
 				}
 				//echo "UPDATE ".$this->esquemaadmin."i3geoestat_parametro_medida SET nomeparametro = '$nomeparametro',descricao = '$descricao',coluna = '$coluna',agregavalores = '$agregavalores' WHERE id_parametro_medida = $id_parametro_medida";exit;
@@ -1073,9 +1073,15 @@ class Metaestat{
 		$this->dbh = $dbhold;
 		return $res;
 	}
-	function relatorioCompleto(){
+	function relatorioCompleto($codigo_variavel=""){
 		$dados = array();
-		$vs = $this->listaVariavel();
+
+		if($codigo_variavel != "" || !empty($codigo_variavel)){
+			$vs[] = $this->listaVariavel($codigo_variavel);;
+		}
+		else{
+			$vs = $this->listaVariavel();
+		}
 		foreach($vs as $v){
 			$nivel1["id"] = $v["codigo_variavel"];
 			$nivel1["titulo"] = $v["nome"];
@@ -1093,7 +1099,6 @@ class Metaestat{
 				$nivel2["descricao"] = $unidade.", ".$periodo.", ".$regiao;
 				$nivel2["fontes"] = $this->listaFonteinfoMedida($m["id_medida_variavel"]);
 				$nivel2["links"] = $this->listaLinkMedida($m["id_medida_variavel"]);
-
 				$nivel1["filho"] = $nivel2;
 			}
 			$dados[] = $nivel1;

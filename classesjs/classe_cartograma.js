@@ -54,13 +54,57 @@ i3GEO.cartograma = {
 	aguarde: function(obj){
 		obj.innerHTML = "<img id='"+obj.id+"_imagem' style='z-index:2' src=\'"+i3GEO.configura.locaplic+"/imagens/aguarde.gif\' />";
 	},
+	maisInfo: function(){
+		var temp = "",
+			v = $i("i3geoCartoComboVariavel");
+		if(!v || v.value === ""){
+			alert($trad("x61"));
+		}
+		else{
+			temp = function(retorno){
+				var cabecalho,minimiza,janela;
+				if (!$i("i3geoCartoMaisInfo")){
+					cabecalho = function(){
+					};
+					minimiza = function(){
+						i3GEO.janela.minimiza("i3geoCartoMaisInfo");
+					};
+					janela = i3GEO.janela.cria(
+						"400px",
+						"300px",
+						"",
+						"",
+						"",
+						$trad("x62"),
+						"i3geoCartoMaisInfo",
+						false,
+						"hd",
+						cabecalho,
+						minimiza
+					);
+					janela = janela[0];
+					YAHOO.i3GEO.janela.manager.register(janela);
+					janela.render();
+					//YAHOO.util.Event.addListener(janela.close, "click", i3GEO.cartograma.fechaJanelaParametros);
+				}
+				else{
+					janela = YAHOO.i3GEO.janela.manager.find("i3geoCartoMaisInfo");
+				}
+				janela.setBody(retorno);
+				janela.show();
+				//imagemxy = i3GEO.util.pegaPosicaoObjeto($i(i3GEO.Interface.IDCORPO));
+				//janela.moveTo(imagemxy[0]+i3GEO.cartograma.LEFT,imagemxy[1]+i3GEO.cartograma.TOP);
+			};
+			i3GEO.php.relatorioVariavel(v.value,temp);
+		}
+	},
 	comboVariaveis: function(){
 		var onde = $i("i3geoCartoVariaveis"),
 			temp = function(dados){
 				var n = dados.length,
-					ins = '<p class="paragrafo" >'+$trad("x58")+'</p>',
+					ins = '<p onclick="i3GEO.cartograma.maisInfo()" class="paragrafo" style="cursor:pointer;color:blue">'+$trad("x60")+'</p><p class="paragrafo" >'+$trad("x58")+'</p>',
 					i;
-				ins += "<select style='width:"+(i3GEO.cartograma.LARGURA - 20)+"px' onchange='i3GEO.cartograma.comboVariaveisOnchange(this)'><option value=''>---</option>";
+				ins += "<select id='i3geoCartoComboVariavel' style='box-shadow:0 1px 5px gray;width:"+(i3GEO.cartograma.LARGURA - 20)+"px' onchange='i3GEO.cartograma.comboVariaveisOnchange(this)'><option value=''>---</option>";
 				for(i=0;i<n;i++){
 					ins += "<option title='"+dados[i].descricao+"' value='"+dados[i].codigo_variavel+"'>"+dados[i].nome+"</option>";
 				}

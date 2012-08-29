@@ -1455,5 +1455,14 @@ i3GEO.php = {
 	listaValoresParametroMedidaVariavel: function(id_parametro_medida,funcao){
 		var p = i3GEO.configura.locaplic+"/admin/php/metaestat.php?funcao=listaValoresParametro&id_parametro_medida="+id_parametro_medida+"&g_sid="+i3GEO.configura.sid;
 		i3GEO.util.ajaxGet(p,funcao);
+	},
+	/*
+	Function: relatorioVariavel
+
+	Relatorio descritivo de uma vari&aacute;vel do sistema de metadados estat&iacute;sticos
+	*/
+	relatorioVariavel: function(codigo_variavel,funcao){
+		var p = i3GEO.configura.locaplic+"/admin/php/metaestat.php?funcao=relatorioCompleto&codigo_variavel="+codigo_variavel+"&g_sid="+i3GEO.configura.sid;
+		i3GEO.util.ajaxGet(p,funcao);
 	}
 };
