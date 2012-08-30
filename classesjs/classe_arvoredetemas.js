@@ -848,7 +848,7 @@ i3GEO.arvoreDeTemas = {
 		root = i3GEO.arvoreDeTemas.ARVORE.getRoot();
 		if(i3GEO.arvoreDeTemas.OPCOESADICIONAIS.incluibusca === true){
 			insp = "<br><br><table><tr>" +
-			"<td><span style='font-size:12px'>&nbsp;"+$trad("a1")+" <a class=ajuda_usuario target=_blank href='"+i3GEO.configura.locaplic+"/ajuda_usuario.php?idcategoria=4&idajuda=31' >&nbsp;&nbsp;&nbsp;</a></span></td>" +
+			"<td><span style='font-size:12px'>&nbsp;"+$trad("a1")+" <a class=ajuda_usuario target=_blank href='"+i3GEO.configura.locaplic+"/ajuda_usuario.php?idcategoria=4&idajuda=31' >&nbsp;&nbsp;&nbsp;&nbsp;</a></span></td>" +
 			"<td><input onclick='javascript:this.select();' class='digitar' type='text' id='i3geo_buscatema' size='15' value=''  /></td>" +
 			"<td><img  class='tic' ";
 			if(navm){insp += "style='top:0px;'";}

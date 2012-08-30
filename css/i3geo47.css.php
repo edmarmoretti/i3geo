@@ -59,7 +59,10 @@ td
 input
 {font-family: Verdana, Arial, Helvetica, sans-serif;font-size: 10px;color: #2F4632;background-color: #FFFFFF;padding: 0;border: 1px solid gray;text-align: center;cursor: text;}
 select
-{font-family: Verdana, Arial, Helvetica, sans-serif;font-size: 10px;color: #2F4632;background-color: #FFFFFF;padding: 0;border: 1px solid gray;text-align: left;cursor: pointer;}
+{box-shadow:0 1px 5px gray;font-family: Verdana, Arial, Helvetica, sans-serif;font-size: 10px;color: #2F4632;background-color: #FFFFFF;padding: 0;border: 1px solid rgb(250,250,250);text-align: left;cursor: pointer;}
+select option:hover {
+background-color: #CCFFFF;
+}
 .ajuda_usuario
 {
 background-image:url(../imagens/external.png);
@@ -68,6 +71,8 @@ background-repeat:no-repeat;
 margin-left:0;
 text-decoration:none;
 cursor:help;
+position:relative;
+top:2px;
 }
 .executar
 {cursor:pointer;color:white;text-align:left;background-color:gray;background-image:URL('../imagens/tic.png');background-repeat:no-repeat;border-style:outset;background-position: right;font-family: Verdana, Arial, Helvetica, sans-serif;font-size: 10px;}
@@ -110,10 +115,10 @@ cursor:help;
 .aplicar
 {visibility:visible;color: #2F4632;background:rgb(240,240,240);text-align: center;font-family: Verdana, Arial, Helvetica, sans-serif;font-size: 12px;border-style:outset;border-width:2px;border-color:#cc0000;cursor:pointer;z-index:1000;}
 .digitar
-{margin:0px;color:#426252;background-color:#F6F6F6;border:none; border-bottom: 1px solid #CBCBCB;font-size: 10px;font-family: Verdana, Arial, Helvetica, sans-serif;}
+{box-shadow:0 1px 5px gray;margin:0px;color:#426252;background-color:white;border:1px solid rgb(250,250,250); font-size: 10px;font-family: Verdana, Arial, Helvetica, sans-serif;}
 .digitarOver
 {
-margin:0px;color:#426252;background-color:#F6F6F6;border:none;border-bottom:1px solid gray;font-size: 10px;font-family: Verdana, Arial, Helvetica, sans-serif;
+margin:0px;color:#426252;background-color:#F6F6F6;border:1px solid rgb(250,250,250);font-size: 10px;font-family: Verdana, Arial, Helvetica, sans-serif;
 box-shadow:0px 1px 3px #3CA5EB;
 }
 .digitarMouseclick
@@ -144,7 +149,7 @@ box-shadow:0px 1px 3px #3CA5EB;
 {padding: 0px;border-spacing:0px;width:100%;font-family: Verdana, Arial, Helvetica, sans-serif;z-index:1000;position:relative;}
 #ferramentas table td
 {border: 0px solid #ebf8e9;font-size: 12px;background-color:white;font-family: Verdana, Arial, Helvetica, sans-serif;z-index:1000;}
-#listaTemas,#legenda,#legendai,#corpoLegi,#listaPropriedades,
+#listaTemas,#legenda,#legendai,#corpoLegi,#listaPropriedades
 {overflow:auto;background-color:white;text-align:left;}
 #ferr1
 {background-color:rgb(255,255,255);}
@@ -549,6 +554,8 @@ cursor:pointer;
 height:14px;
 text-align:center;
 width:25px;
+box-shadow:0 1px 5px gray;
+margin-left:1px;
 }
 .x
 {

@@ -336,6 +336,8 @@
 	height:14px;
 	text-align:center;
 	width:25px;
+	box-shadow:0 1px 5px gray;
+	margin-left:1px;
 }
 .x
 {
@@ -441,8 +443,8 @@
 {
 	cursor:pointer;
 	position:relative;
-	top:-1px; 
-	width:18px; 
+	top:-1px;
+	width:18px;
 	background:url('../imagens/visual/default/sprite.png');
 	background-position: 0px -950px;
 	height:18px;

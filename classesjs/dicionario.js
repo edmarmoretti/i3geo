@@ -1936,7 +1936,7 @@ it:""
 }],
 "x58":[
 {
-pt:"Escolha uma vari&aacute;vel para compor o mapa",
+pt:"Escolha uma vari&aacute;vel para o mapa",
 en:"",
 es:"",
 it:""
@@ -1950,14 +1950,14 @@ it:""
 }],
 "x60":[
 {
-pt:"Mais informa&ccedil;&otilde;es sobre a vari&aacute;vel escolhida",
+pt:"Mais informa&ccedil;&otilde;es sobre a vari&aacute;vel&nbsp;",
 en:"",
 es:"",
 it:""
 }],
 "x61":[
 {
-pt:"Escolha uma variavel",
+pt:"Escolha uma variavel primeiro",
 en:"",
 es:"",
 it:""
@@ -1970,6 +1970,13 @@ es:"",
 it:""
 }],
 "x63":[
+{
+pt:"Classes",
+en:"",
+es:"",
+it:""
+}],
+"x64":[
 {
 pt:"",
 en:"",
