@@ -745,11 +745,14 @@ i3GEO.arvoreDeCamadas = {
 		n = lista.length;
 		for(i=0;i<n;i+=1){
 			c = i3GEO.arvoreDeCamadas.capturaCheckBox(lista[i]);
-			if(c.checked !== status)
-			{aplica = true;}
-			c.checked = status;
-			if(aplica === true)
-			{c.onclick.call();}
+			if(c){
+				if(c.checked !== status)
+				{aplica = true;}
+				c.checked = status;
+				//TODO isso funciona no IE?
+				if(aplica === true)
+				{c.onclick();}
+			}
 		}
 	},
 	/*

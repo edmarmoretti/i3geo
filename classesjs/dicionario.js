@@ -1978,6 +1978,27 @@ it:""
 }],
 "x64":[
 {
+pt:"Adicionar camada ao mapa",
+en:"",
+es:"",
+it:""
+}],
+"x65":[
+{
+pt:"Como os dados ser&atilde;o representados",
+en:"",
+es:"",
+it:""
+}],
+"x66":[
+{
+pt:"Escolha um tipo de classifica&ccedil;&atilde;o",
+en:"",
+es:"",
+it:""
+}],
+"x67":[
+{
 pt:"",
 en:"",
 es:"",

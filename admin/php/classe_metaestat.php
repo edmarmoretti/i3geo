@@ -41,6 +41,7 @@ class Metaestat{
 	protected $dbhw;
 	protected $convUTF;
 	public $dir_tmp;
+	public $nomecache;
 	/*
 	Function: __construct
 
@@ -63,9 +64,13 @@ class Metaestat{
 		if(!empty($esquemaadmin)){
 			$this->esquemaadmin = $esquemaadmin.".";
 		}
+		$this->nomecache = $this->nomeCache();
 	}
 	function __destruct(){
 		$this->fechaConexao;
+	}
+	function nomeCache(){
+		return md5(implode("x",$_REQUEST));
 	}
 	function nomeRandomico($n=10){
 		$nomes = "";
@@ -262,81 +267,83 @@ class Metaestat{
 		return array("sqlagrupamento"=>$sqlagrupamento,"sql"=>$sql,"sqlmapserver"=>$sqlgeo,"filtro"=>$filtro,"colunas"=>$colunas);
 	}
 	function mapfileMedidaVariavel($id_medida_variavel,$filtro="",$todasascolunas = 0,$tipolayer="polygon",$titulolayer="",$id_classificacao="",$agruparpor=""){
-		if(empty($tipolayer)){
-			$tipolayer = "polygon";
-		}
-		$meta = $this->listaMedidaVariavel("",$id_medida_variavel);
-		if($titulolayer == ""){
-			$titulolayer = $meta["nomemedida"];
-		}
-		$titulolayer = mb_convert_encoding($titulolayer,"ISO-8859-1",mb_detect_encoding($titulolayer));
-		$conexao = $this->listaConexao($meta["codigo_estat_conexao"],true);
-		$conexao = "user=".$conexao["usuario"]." password=".$conexao["senha"]." dbname=".$conexao["bancodedados"]." host=".$conexao["host"]." port=".$conexao["porta"]."";
-		//echo $conexao;exit;
-		$sql = $this->sqlMedidaVariavel($id_medida_variavel,$todasascolunas,$agruparpor,$tipolayer);
-		$sqlf = $sql["sqlmapserver"];
-		if(!empty($filtro)){
-			$sqlf = str_replace(") as foo"," AND ".$filtro." ) as foo",$sqlf);
-		}
-		$classes = "";
-		if(!empty($id_classificacao)){
-			$classes = $this->listaClasseClassificacao($id_classificacao);
-		}
-		$rand = $this->nomeRandomico();
-		$arq = $this->dir_tmp."/".$rand.".map";
-		$dados[] = "MAP";
-		$dados[] = 'SYMBOLSET "'.$this->locaplic.'/symbols/simbolosv6.sym"';
-		$dados[] = 'FONTSET   "'.$this->locaplic.'/symbols/fontes.txt"';
-		$dados[] = "LAYER";
-		$dados[] = '	NAME "'.$rand.'"';
-		$dados[] = "	TYPE $tipolayer";
-		$dados[] = '	DATA "'.$sqlf.'"';
-		$dados[] = '	CONNECTION "'.$conexao.'"';
-		$dados[] = '	CONNECTIONTYPE POSTGIS';
-		$dados[] = '	STATUS OFF';
-		$dados[] = '	METADATA';
-		$dados[] = '		TEMA "'.$titulolayer.'"';
-		$dados[] = '		CLASSE "SIM"';
-		$dados[] = '	END';
-		if($classes == ""){
-			$dados[] = '    CLASS';
-			$dados[] = '        NAME ""';
-			$dados[] = '        STYLE';
-			$dados[] = '        	COLOR 200 0 0';
-			$dados[] = '        END';
-			$dados[] = '    END';
-		}
-		else{
-			foreach($classes as $classe){
-				//var_dump($classe);exit;
+		//$rand = $this->nomeRandomico();
+		$arq = $this->dir_tmp."/".$this->nomecache.".map";
+		if(!file_exists($arq)){
+			if(empty($tipolayer)){
+				$tipolayer = "polygon";
+			}
+			$meta = $this->listaMedidaVariavel("",$id_medida_variavel);
+			if($titulolayer == ""){
+				$titulolayer = $meta["nomemedida"];
+			}
+			$titulolayer = mb_convert_encoding($titulolayer,"ISO-8859-1",mb_detect_encoding($titulolayer));
+			$conexao = $this->listaConexao($meta["codigo_estat_conexao"],true);
+			$conexao = "user=".$conexao["usuario"]." password=".$conexao["senha"]." dbname=".$conexao["bancodedados"]." host=".$conexao["host"]." port=".$conexao["porta"]."";
+			//echo $conexao;exit;
+			$sql = $this->sqlMedidaVariavel($id_medida_variavel,$todasascolunas,$agruparpor,$tipolayer);
+			$sqlf = $sql["sqlmapserver"];
+			if(!empty($filtro)){
+				$sqlf = str_replace(") as foo"," AND ".$filtro." ) as foo",$sqlf);
+			}
+			$classes = "";
+			if(!empty($id_classificacao)){
+				$classes = $this->listaClasseClassificacao($id_classificacao);
+			}
+			$dados[] = "MAP";
+			$dados[] = 'SYMBOLSET "'.$this->locaplic.'/symbols/simbolosv6.sym"';
+			$dados[] = 'FONTSET   "'.$this->locaplic.'/symbols/fontes.txt"';
+			$dados[] = "LAYER";
+			$dados[] = '	NAME "'.$this->nomecache.'"';
+			$dados[] = "	TYPE $tipolayer";
+			$dados[] = '	DATA "'.$sqlf.'"';
+			$dados[] = '	CONNECTION "'.$conexao.'"';
+			$dados[] = '	CONNECTIONTYPE POSTGIS';
+			$dados[] = '	STATUS OFF';
+			$dados[] = '	METADATA';
+			$dados[] = '		TEMA "'.$titulolayer.'"';
+			$dados[] = '		CLASSE "SIM"';
+			$dados[] = '	END';
+			if($classes == ""){
 				$dados[] = '    CLASS';
-				$dados[] = '        NAME "'.mb_convert_encoding($classe["titulo"],"ISO-8859-1",mb_detect_encoding($titulolayer)).'"';
-				$dados[] = '        EXPRESSION '.$classe["expressao"];
+				$dados[] = '        NAME ""';
 				$dados[] = '        STYLE';
-				$dados[] = '        	COLOR '.$classe["vermelho"].' '.$classe["verde"].' '.$classe["azul"];
-				if(!empty($classe["tamanho"])){
-					$dados[] = '        SIZE '.$classe["tamanho"];
-				}
-				if(!empty($classe["simbolo"])){
-					$dados[] = '        SYMBOL '.$classe["simbolo"];
-				}
-				if(!empty($classe["otamanho"])){
-					$dados[] = '        OUTLINEWIDTH '.$classe["otamanho"];
-				}
-				if(!empty($classe["overmelho"]) || $classe["overmelho"] == "0"){
-					$dados[] = '        OUTLINECOLOR '.$classe["overmelho"].' '.$classe["overde"].' '.$classe["oazul"];
-				}
+				$dados[] = '        	COLOR 200 0 0';
 				$dados[] = '        END';
 				$dados[] = '    END';
 			}
+			else{
+				foreach($classes as $classe){
+					//var_dump($classe);exit;
+					$dados[] = '    CLASS';
+					$dados[] = '        NAME "'.mb_convert_encoding($classe["titulo"],"ISO-8859-1",mb_detect_encoding($titulolayer)).'"';
+					$dados[] = '        EXPRESSION '.$classe["expressao"];
+					$dados[] = '        STYLE';
+					$dados[] = '        	COLOR '.$classe["vermelho"].' '.$classe["verde"].' '.$classe["azul"];
+					if(!empty($classe["tamanho"])){
+						$dados[] = '        SIZE '.$classe["tamanho"];
+					}
+					if(!empty($classe["simbolo"])){
+						$dados[] = '        SYMBOL '.$classe["simbolo"];
+					}
+					if(!empty($classe["otamanho"])){
+						$dados[] = '        OUTLINEWIDTH '.$classe["otamanho"];
+					}
+					if(!empty($classe["overmelho"]) || $classe["overmelho"] == "0"){
+						$dados[] = '        OUTLINECOLOR '.$classe["overmelho"].' '.$classe["overde"].' '.$classe["oazul"];
+					}
+					$dados[] = '        END';
+					$dados[] = '    END';
+				}
+			}
+			$dados[] = "END";
+			$dados[] = "END";
+			$fp = fopen($arq,"w");
+			foreach ($dados as $dado){
+				fwrite($fp,$dado."\n");
+			}
 		}
-		$dados[] = "END";
-		$dados[] = "END";
-		$fp = fopen($arq,"w");
-		foreach ($dados as $dado){
-			fwrite($fp,$dado."\n");
-		}
-		return array("mapfile"=>$arq,"layer"=>$rand,"titulolayer"=>$titulolayer);
+		return array("mapfile"=>$arq,"layer"=>$this->nomecache,"titulolayer"=>$titulolayer);
 	}
 	function mapfileCompleto($mapfile){
 		$f = $this->base;

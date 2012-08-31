@@ -1464,5 +1464,23 @@ i3GEO.php = {
 	relatorioVariavel: function(codigo_variavel,funcao){
 		var p = i3GEO.configura.locaplic+"/admin/php/metaestat.php?funcao=relatorioCompleto&codigo_variavel="+codigo_variavel+"&g_sid="+i3GEO.configura.sid;
 		i3GEO.util.ajaxGet(p,funcao);
+	},
+	/*
+	Function: listaClassificacaoMedida
+
+	Lista as classificacoes de uma medida de variavel do sistema de metadados estat&iacute;sticos
+	*/
+	listaClassificacaoMedida: function(id_medida_variavel,funcao){
+		var p = i3GEO.configura.locaplic+"/admin/php/metaestat.php?funcao=listaClassificacaoMedida&id_medida_variavel="+id_medida_variavel+"&g_sid="+i3GEO.configura.sid;
+		i3GEO.util.ajaxGet(p,funcao);
+	},
+	/*
+	Function: mapfileMedidaVariavel
+
+	Adiciona uma camada ao mapa baseado no sistema de metadados estat&iacute;sticos
+	*/
+	mapfileMedidaVariavel: function(funcao,id_medida_variavel,filtro,todasascolunas,tipolayer,titulolayer,id_classificacao,agruparpor){
+		var p = i3GEO.configura.locaplic+"/admin/php/metaestat.php?funcao=mapfileMedidaVariavel&formato=json&id_medida_variavel="+id_medida_variavel+"&filtro="+filtro+"&todasascolunas="+todasascolunas+"&tipolayer="+tipolayer+"&titulolayer="+titulolayer+"&id_classificacao="+id_classificacao+"&agruparpor="+agruparpor+"&g_sid="+i3GEO.configura.sid;
+		i3GEO.util.ajaxGet(p,funcao);
 	}
 };
