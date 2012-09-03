@@ -174,8 +174,15 @@ if(!in_array($teste,'13-4'))
 	$dbhw->query("INSERT INTO ".$esquemaadmin."i3geousr_operacoespapeis VALUES(13,4)");
 if(!in_array($teste,'15-3'))
 	$dbhw->query("INSERT INTO ".$esquemaadmin."i3geousr_operacoespapeis VALUES(15,3)");
-
-echo "Feito!";
+//cria o banco de dados de metadados estatisticos
+if(file_exists("../../admin/metaestat.db"))	{
+	echo "<br>Arquivo admin/metaestat.db ja existe. Vc deve apag&aacute;-lo para poder cri&aacute;-lo novamente caso precise";
+}
+else{
+	$banco = sqlite_open("../../admin/metaestat.db",0666);
+	$banco = null;
+}
+echo "<br>Feito!";
 function lista($sql,$coluna,$coluna1=""){
 	global $dbh;
 	$lista = array();

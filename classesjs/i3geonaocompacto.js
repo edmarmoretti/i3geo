@@ -65,8 +65,7 @@
 	"../pacotes/richdraw/richdraw_tudo_compacto.js",
 	"classe_coordenadas.js",
 	"classe_gadgets.js",
-	"classe_login.js",
-	"classe_cartograma.js"
+	"classe_login.js"
 	);
 	for (i = 0; i < jsfiles.length; i++)
 	{

@@ -46,16 +46,14 @@
 
 		i3geo/admin/php/criabanco.php
 		*/
-
 		/**
 		 *
 		 * TODO verificar se as tabelas estao corretas em funcao do sistema de administracao e incluir o login e senha
 		 */
 		$funcao = "";
-		include_once("admin.php");
+		//echo __DIR__;
+		include("admin.php");
 		error_reporting(E_ALL);
-
-
 		$tabelas = array(
 				"CREATE TABLE ".$esquemaadmin."i3geoadmin_grupos (desc_grupo TEXT, id_grupo INTEGER PRIMARY KEY, nome_grupo TEXT, it TEXT, es TEXT, en TEXT)",
 				"CREATE TABLE ".$esquemaadmin."i3geoadmin_sistemasf (abrir_funcao TEXT, h_funcao NUMERIC, id_funcao INTEGER PRIMARY KEY, id_sistema NUMERIC, nome_funcao TEXT, perfil_funcao TEXT, w_funcao NUMERIC)",
@@ -82,14 +80,9 @@
 				"CREATE TABLE ".$esquemaadmin."i3geousr_operacoes (id_operacao INTEGER PRIMARY KEY, codigo TEXT, descricao TEXT)",
 				"CREATE TABLE ".$esquemaadmin."i3geousr_operacoespapeis (id_operacao NUMERIC, id_papel NUMERIC)"
 		);
-		if($conexaoadmin == "")
-		{
-			if(file_exists("../../admin/admin.db"))
-			{
-				echo "Arquivo admin/admin.db ja existe. Vc deve apag&aacute;-lo para poder cri&aacute;-lo novamente";exit;
-			}
+		if($conexaoadmin == ""){
 			if(empty($_POST["senha"]) || empty($_POST["usuario"])){
-				formularioLoginMaster("criabanco.php");
+				criabancoformularioLoginMaster("criabanco.php");
 				exit;
 			}
 			else{
@@ -99,80 +92,92 @@
 					exit;
 				}
 			}
-			if(function_exists("sqlite_open")){
-				$banco = sqlite_open("../../admin/admin.db",0666);
-				$banco = null;
-				$dbhw = new PDO('sqlite:../../admin/admin.db');
+			if(file_exists("../../admin/admin.db"))	{
+				echo "<br>Arquivo admin/admin.db ja existe. Vc deve apag&aacute;-lo para poder cri&aacute;-lo novamente caso precise";
 			}
 			else{
-				echo "A fun&ccedil;&atilde;o de cria&ccedil;&atilde;o do banco sqlite n&atilde;o existe no PHP. Vc pode usar o arquivo i3geo/admin/adminvazio.db e renome&aacute;-lo para admin.db.";
-				exit;
+				if(function_exists("sqlite_open")){
+					//cria o banco de dados de administracao
+					$banco = sqlite_open("../../admin/admin.db",0666);
+					$banco = null;
+					$dbhw = new PDO('sqlite:../../admin/admin.db');
+				}
+				else{
+					//TODO esse arquivo vazio existe mesmo?
+					echo "<br>A fun&ccedil;&atilde;o de cria&ccedil;&atilde;o do banco sqlite n&atilde;o existe no PHP. Vc pode usar o arquivo i3geo/admin/adminvazio.db e renome&aacute;-lo para admin.db.";
+				}
+			}
+			if(file_exists("../../admin/metaestat.db"))	{
+				echo "<br>Arquivo admin/metaestat.db ja existe. Vc deve apag&aacute;-lo para poder cri&aacute;-lo novamente caso precise";
+			}
+			else{
+				//TODO nao funciona
+				//if(function_exists("SQLite3")){
+				//cria o banco de dados de metadados estatisticos
+				//$banco = new SQLite3("../../admin/metaestat.db",SQLITE3_OPEN_CREATE);
+				//$banco->close();
+				//}
+				//else{
+					//echo "<br>A fun&ccedil;&atilde;o de cria&ccedil;&atilde;o do banco sqlite3 n&atilde;o existe no PHP. N&atilde;o foi poss&iacute;vel criar o bando para o sistema de metadados.";
+					//exit;
+				//}
 			}
 		}
-		else
-		{
+		else{
 			include($conexaoadmin);
 		}
-		foreach($tabelas as $tabela)
-		{
-			if($dbhw->getAttribute(PDO::ATTR_DRIVER_NAME) == "pgsql")
-			{
+		if(empty($dbhw)){
+			echo "<br>Fim";
+		}
+		foreach($tabelas as $tabela){
+			if($dbhw->getAttribute(PDO::ATTR_DRIVER_NAME) == "pgsql"){
 				$tabela = str_replace("INTEGER PRIMARY KEY","SERIAL PRIMARY KEY NOT NULL",$tabela);
 			}
 			//echo $tabela."<br>";
 			$q = $dbhw->query($tabela);
 		}
-		$dbhw->query("INSERT INTO ".$esquemaadmin."i3geousr_papeis VALUES('Podem executar qualquer tarefa, inclusive cadastrar novos administradores',1,'admin')");
-		$dbhw->query("INSERT INTO ".$esquemaadmin."i3geousr_papeis VALUES('Podem criar/editar qualquer tema (mapfile) mas nao podem editar a arvore do catalogo de temas',2,'editores')");
-		$dbhw->query("INSERT INTO ".$esquemaadmin."i3geousr_papeis VALUES('Podem alterar a arvore do catalogo e dos atlas',3,'publicadores')");
-		$dbhw->query("INSERT INTO ".$esquemaadmin."i3geousr_papeis VALUES('Podem editar dados geograficos',4,'editoresgeo')");
-		$dbhw->query("INSERT INTO ".$esquemaadmin."i3geousr_usuarios VALUES(1,'','',1,'admin','admin','admin')");
-		$dbhw->query("INSERT INTO ".$esquemaadmin."i3geousr_papelusuario VALUES(1,1)");
+		if(!empty($banco)){
+			$dbhw->query("INSERT INTO ".$esquemaadmin."i3geousr_papeis VALUES('Podem executar qualquer tarefa, inclusive cadastrar novos administradores',1,'admin')");
+			$dbhw->query("INSERT INTO ".$esquemaadmin."i3geousr_papeis VALUES('Podem criar/editar qualquer tema (mapfile) mas nao podem editar a arvore do catalogo de temas',2,'editores')");
+			$dbhw->query("INSERT INTO ".$esquemaadmin."i3geousr_papeis VALUES('Podem alterar a arvore do catalogo e dos atlas',3,'publicadores')");
+			$dbhw->query("INSERT INTO ".$esquemaadmin."i3geousr_papeis VALUES('Podem editar dados geograficos',4,'editoresgeo')");
+			$dbhw->query("INSERT INTO ".$esquemaadmin."i3geousr_usuarios VALUES(1,'','',1,'admin','admin','admin')");
+			$dbhw->query("INSERT INTO ".$esquemaadmin."i3geousr_papelusuario VALUES(1,1)");
 
-		$dbhw->query("INSERT INTO ".$esquemaadmin."i3geousr_operacoes VALUES(1,'admin/html/editormapfile','editor de mapfiles do sistema de administracao')");
-		$dbhw->query("INSERT INTO ".$esquemaadmin."i3geousr_operacoes VALUES(2,'admin/html/operacoes','abre o editor de operacoes')");
-		$dbhw->query("INSERT INTO ".$esquemaadmin."i3geousr_operacoes VALUES(3,'teste/','teste')");
-		$dbhw->query("INSERT INTO ".$esquemaadmin."i3geousr_operacoes VALUES(4,'admin/html/arvore','edicao da arvore do catalogo de temas')");
-		$dbhw->query("INSERT INTO ".$esquemaadmin."i3geousr_operacoes VALUES(5,'admin/html/menus','edicao da lista de menus')");
-		$dbhw->query("INSERT INTO ".$esquemaadmin."i3geousr_operacoes VALUES(6,'admin/html/ogcws','edicao das preferencias do servico WMS')");
-		$dbhw->query("INSERT INTO ".$esquemaadmin."i3geousr_operacoes VALUES(7,'admin/html/atlas','edicao de atlas')");
-		$dbhw->query("INSERT INTO ".$esquemaadmin."i3geousr_operacoes VALUES(8,'admin/html/identifica','lista de sistemas incluidos na ferramenta de identificacao')");
-		$dbhw->query("INSERT INTO ".$esquemaadmin."i3geousr_operacoes VALUES(9,'admin/html/incluimap','adapta mapfiles antigos para versoes novas do Mapserver')");
-		$dbhw->query("INSERT INTO ".$esquemaadmin."i3geousr_operacoes VALUES(10,'admin/html/mapas','lista de links para mapas')");
-		$dbhw->query("INSERT INTO ".$esquemaadmin."i3geousr_operacoes VALUES(11,'admin/html/perfis','lista controlada de perfis')");
-		$dbhw->query("INSERT INTO ".$esquemaadmin."i3geousr_operacoes VALUES(12,'admin/html/sistemas','lista de sistemas complementares que sao mostrados no catalogo')");
-		$dbhw->query("INSERT INTO ".$esquemaadmin."i3geousr_operacoes VALUES(13,'admin/html/subirshapefile','upload de shapefile para uma pasta especifica no servidor')");
-		$dbhw->query("INSERT INTO ".$esquemaadmin."i3geousr_operacoes VALUES(14,'admin/html/tags','edicao da lista controlada de tags')");
-		$dbhw->query("INSERT INTO ".$esquemaadmin."i3geousr_operacoes VALUES(15,'admin/html/webservices','cadastro de links para webservices')");
-		$dbhw->query("INSERT INTO ".$esquemaadmin."i3geousr_operacoespapeis VALUES(1,2)");
-		$dbhw->query("INSERT INTO ".$esquemaadmin."i3geousr_operacoespapeis VALUES(1,3)");
-		$dbhw->query("INSERT INTO ".$esquemaadmin."i3geousr_operacoespapeis VALUES(4,3)");
-		$dbhw->query("INSERT INTO ".$esquemaadmin."i3geousr_operacoespapeis VALUES(5,3)");
-		$dbhw->query("INSERT INTO ".$esquemaadmin."i3geousr_operacoespapeis VALUES(7,3)");
-		$dbhw->query("INSERT INTO ".$esquemaadmin."i3geousr_operacoespapeis VALUES(10,3)");
-		$dbhw->query("INSERT INTO ".$esquemaadmin."i3geousr_operacoespapeis VALUES(13,2)");
-		$dbhw->query("INSERT INTO ".$esquemaadmin."i3geousr_operacoespapeis VALUES(13,4)");
-		$dbhw->query("INSERT INTO ".$esquemaadmin."i3geousr_operacoespapeis VALUES(15,3)");
-
-
-
-
-		$banco = null;
-		echo "Banco criado!!! administrador: admin / admin  - n&atilde;o esque&ccedil;a de alterar essa senha na op&ccedil;&atilde;o de edi&ccedil;&atilde;o do cadastro de usu&aacute;rios";
-		function formularioLoginMaster($action){
+			$dbhw->query("INSERT INTO ".$esquemaadmin."i3geousr_operacoes VALUES(1,'admin/html/editormapfile','editor de mapfiles do sistema de administracao')");
+			$dbhw->query("INSERT INTO ".$esquemaadmin."i3geousr_operacoes VALUES(2,'admin/html/operacoes','abre o editor de operacoes')");
+			$dbhw->query("INSERT INTO ".$esquemaadmin."i3geousr_operacoes VALUES(3,'teste/','teste')");
+			$dbhw->query("INSERT INTO ".$esquemaadmin."i3geousr_operacoes VALUES(4,'admin/html/arvore','edicao da arvore do catalogo de temas')");
+			$dbhw->query("INSERT INTO ".$esquemaadmin."i3geousr_operacoes VALUES(5,'admin/html/menus','edicao da lista de menus')");
+			$dbhw->query("INSERT INTO ".$esquemaadmin."i3geousr_operacoes VALUES(6,'admin/html/ogcws','edicao das preferencias do servico WMS')");
+			$dbhw->query("INSERT INTO ".$esquemaadmin."i3geousr_operacoes VALUES(7,'admin/html/atlas','edicao de atlas')");
+			$dbhw->query("INSERT INTO ".$esquemaadmin."i3geousr_operacoes VALUES(8,'admin/html/identifica','lista de sistemas incluidos na ferramenta de identificacao')");
+			$dbhw->query("INSERT INTO ".$esquemaadmin."i3geousr_operacoes VALUES(9,'admin/html/incluimap','adapta mapfiles antigos para versoes novas do Mapserver')");
+			$dbhw->query("INSERT INTO ".$esquemaadmin."i3geousr_operacoes VALUES(10,'admin/html/mapas','lista de links para mapas')");
+			$dbhw->query("INSERT INTO ".$esquemaadmin."i3geousr_operacoes VALUES(11,'admin/html/perfis','lista controlada de perfis')");
+			$dbhw->query("INSERT INTO ".$esquemaadmin."i3geousr_operacoes VALUES(12,'admin/html/sistemas','lista de sistemas complementares que sao mostrados no catalogo')");
+			$dbhw->query("INSERT INTO ".$esquemaadmin."i3geousr_operacoes VALUES(13,'admin/html/subirshapefile','upload de shapefile para uma pasta especifica no servidor')");
+			$dbhw->query("INSERT INTO ".$esquemaadmin."i3geousr_operacoes VALUES(14,'admin/html/tags','edicao da lista controlada de tags')");
+			$dbhw->query("INSERT INTO ".$esquemaadmin."i3geousr_operacoes VALUES(15,'admin/html/webservices','cadastro de links para webservices')");
+			$dbhw->query("INSERT INTO ".$esquemaadmin."i3geousr_operacoespapeis VALUES(1,2)");
+			$dbhw->query("INSERT INTO ".$esquemaadmin."i3geousr_operacoespapeis VALUES(1,3)");
+			$dbhw->query("INSERT INTO ".$esquemaadmin."i3geousr_operacoespapeis VALUES(4,3)");
+			$dbhw->query("INSERT INTO ".$esquemaadmin."i3geousr_operacoespapeis VALUES(5,3)");
+			$dbhw->query("INSERT INTO ".$esquemaadmin."i3geousr_operacoespapeis VALUES(7,3)");
+			$dbhw->query("INSERT INTO ".$esquemaadmin."i3geousr_operacoespapeis VALUES(10,3)");
+			$dbhw->query("INSERT INTO ".$esquemaadmin."i3geousr_operacoespapeis VALUES(13,2)");
+			$dbhw->query("INSERT INTO ".$esquemaadmin."i3geousr_operacoespapeis VALUES(13,4)");
+			$dbhw->query("INSERT INTO ".$esquemaadmin."i3geousr_operacoespapeis VALUES(15,3)");
+			$banco = null;
+			echo "Banco criado!!! administrador: admin / admin  - n&atilde;o esque&ccedil;a de alterar essa senha na op&ccedil;&atilde;o de edi&ccedil;&atilde;o do cadastro de usu&aacute;rios";
+		}
+		function criabancoformularioLoginMaster($action){
 			echo "<form method=post action=$action >";
 			echo "<br>Essa conex&atilde;o pode n&atilde;o ser segura e os dados de usu&aacute;rio/senha podem ser descobertos<br><br>";
 			echo "Nome do usu&aacute;rio master cadastrado em ms_configura.php:<br> <input type=text name=usuario /><br>";
 			echo "Senha:<br> <input type=password name=senha /><br>";
 			echo "<input type=submit />";
 		}
-		function verificaMaster($usuario,$senha,$i3geomaster){
-			foreach($i3geomaster as $teste){
-				if(!empty($usuario) && !empty($senha) && $teste["usuario"] == $usuario && $teste["senha"] == $senha){
-					return true;
-				}
-			}
-			return false;
-		}
+
 		?>
 	</div>

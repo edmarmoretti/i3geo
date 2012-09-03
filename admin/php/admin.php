@@ -33,9 +33,7 @@ Arquivo:
 
 i3geo/admin/php/admin.php
 */
-
-if(!isset($locaplic))
-{
+if(!isset($locaplic)){
 	$locaplic = "";
 	include(__DIR__."/../../ms_configura.php");
 }
@@ -44,6 +42,7 @@ if(!file_exists($dir_tmp)){
 }
 include_once($locaplic."/classesphp/pega_variaveis.php");
 error_reporting(0);
+
 //
 //carrega o phpmapscript
 //

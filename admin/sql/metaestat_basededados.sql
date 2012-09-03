@@ -1,5 +1,6 @@
 -- i3geoestat_conexao
 INSERT INTO i3geoestat_conexao (codigo_estat_conexao, bancodedados, host, porta, usuario, senha) VALUES ('1', 'dbspo', 'localhost', '5432', 'postgres', 'postgres');
+INSERT INTO i3geoestat_conexao (codigo_estat_conexao, bancodedados, host, porta, usuario, senha) VALUES ('0', 'default', '', '', '', '');
 
 
 -- i3geoestat_tipo_periodo
@@ -9,6 +10,7 @@ INSERT INTO i3geoestat_tipo_periodo (codigo_tipo_periodo, nome, descricao) VALUE
 
 -- i3geoestat_tipo_regiao
 INSERT INTO i3geoestat_tipo_regiao (codigo_tipo_regiao, nome_tipo_regiao, descricao_tipo_regiao, codigo_estat_conexao, esquemadb, tabela, colunageo, data, identificador, colunanomeregiao, srid, colunacentroide) VALUES ('1', 'Município', 'Limites municipais', '1', 'public', 'tb_ibge', 'the_geom', '', 'ibge', 'no_cidade', '4326', 'the_geom2');
+INSERT INTO i3geoestat_tipo_regiao (codigo_tipo_regiao, nome_tipo_regiao, descricao_tipo_regiao, codigo_estat_conexao, esquemadb, tabela, colunageo, data, identificador, colunanomeregiao, srid, colunacentroide) VALUES ('3', 'Estados', 'Limites estaduais', '1', 'public', 'tb_ibge_estados', 'the_geom', '', 'co_ibge_uf', 'no_uf', '4326', 'the_geom');
 
 
 -- i3geoestat_unidade_medida

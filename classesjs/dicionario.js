@@ -1936,69 +1936,6 @@ it:""
 }],
 "x58":[
 {
-pt:"Escolha uma vari&aacute;vel para o mapa",
-en:"",
-es:"",
-it:""
-}],
-"x59":[
-{
-pt:"Escolha uma medida da vari&aacute;vel",
-en:"",
-es:"",
-it:""
-}],
-"x60":[
-{
-pt:"Mais informa&ccedil;&otilde;es sobre a vari&aacute;vel&nbsp;",
-en:"",
-es:"",
-it:""
-}],
-"x61":[
-{
-pt:"Escolha uma variavel primeiro",
-en:"",
-es:"",
-it:""
-}],
-"x62":[
-{
-pt:"Relat&oacute;rio",
-en:"",
-es:"",
-it:""
-}],
-"x63":[
-{
-pt:"Classes",
-en:"",
-es:"",
-it:""
-}],
-"x64":[
-{
-pt:"Adicionar camada ao mapa",
-en:"",
-es:"",
-it:""
-}],
-"x65":[
-{
-pt:"Como os dados ser&atilde;o representados",
-en:"",
-es:"",
-it:""
-}],
-"x66":[
-{
-pt:"Escolha um tipo de classifica&ccedil;&atilde;o",
-en:"",
-es:"",
-it:""
-}],
-"x67":[
-{
 pt:"",
 en:"",
 es:"",
