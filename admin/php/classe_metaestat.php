@@ -942,7 +942,7 @@ class Metaestat{
 	$senha {boolean} - mostra ou nao a senha - opcional
 	*/
 	function listaConexao($codigo_estat_conexao="",$senha=false){
-		if($senha){
+		if($senha == true){
 			$colunas = "codigo_estat_conexao, bancodedados, host, porta, usuario, senha";
 		}
 		else{
@@ -1045,7 +1045,7 @@ class Metaestat{
 		$dbhold = $this->dbh;
 		$dbh = new PDO('pgsql:dbname='.$c["bancodedados"].';user='.$c["usuario"].';password='.$c["senha"].';host='.$c["host"].';port='.$c["porta"]);
 		$this->dbh = $dbh;
-		$res = $this->execSQL("SELECT oid,nspname as esquema FROM pg_namespace group by table_schema");
+		$res = $this->execSQL("SELECT oid,nspname as esquema FROM pg_namespace group by nspname,oid order by nspname");
 		$this->dbh = $dbhold;
 		return $res;
 	}

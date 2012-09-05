@@ -114,8 +114,8 @@
 				//TODO nao funciona
 				//if(function_exists("SQLite3")){
 				//cria o banco de dados de metadados estatisticos
-				$banco = new SQLite3("../../admin/metaestat.db",SQLITE3_OPEN_CREATE);
-				$banco->close();
+				//$banco = new SQLite3("../../admin/metaestat.db",SQLITE3_OPEN_CREATE);
+				//$banco->close();
 				//}
 				//else{
 					//echo "<br>A fun&ccedil;&atilde;o de cria&ccedil;&atilde;o do banco sqlite3 n&atilde;o existe no PHP. N&atilde;o foi poss&iacute;vel criar o bando para o sistema de metadados.";

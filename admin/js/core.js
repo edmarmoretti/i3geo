@@ -903,60 +903,64 @@ record - objeto record
 
 key - chave (nome do item)
 */
-function core_menuCheckBox(valores,textos,selecionados,target,record,key)
-{
-	function on_menuCheckBoxChange(p_oEvent)
-	{
-		if(p_oEvent.newValue.get("value") == "OK")
-		{
-			var cks = $i("core_menuCK_bd").getElementsByTagName("input");
-			var ins = [];
-			for (var i=0;i<cks.length;i++)
-			{
-				if(cks[i].checked)
-				ins.push(cks[i].value);
+function core_menuCheckBox(valores,textos,selecionados,target,record,key){
+	function on_menuCheckBoxChange(p_oEvent){
+		var cks,i,
+		ins = [];
+		if(p_oEvent.newValue.get("value") == "OK")	{
+			cks = $i("core_menuCK_bd").getElementsByTagName("input");
+			ins = [];
+			for (i=0;i<cks.length;i++){
+				if(cks[i].checked){
+					ins.push(cks[i].value);
+				}
 			}
-			target.innerHTML = "<pre ><p>"+ins.toString()+"</pre>";
-			record.setData(key,ins.toString());
+			if(record){
+				target.innerHTML = "<pre ><p>"+ins.toString()+"</pre>";
+				record.setData(key,ins.toString());
+			}
+			else{
+				target.value = ins.toString();
+			}
 		}
 		YAHOO.admin.container.panelCK.destroy();
 		YAHOO.admin.container.panelCK = null;
 	};
-	if(!YAHOO.admin.container.panelCK)
-	{
-		var novoel = document.createElement("div");
+	var novoel,ndiv,og_core,onde,ins,i,novoCK,ck,j;
+	if(!YAHOO.admin.container.panelCK){
+		novoel = document.createElement("div");
 		novoel.id =  "core_menuCK";
-		var ndiv = document.createElement("div");
+		ndiv = document.createElement("div");
 		ndiv.className= "yui-dt-editor";
 		ndiv.style.height = "144px";
 		ndiv.style.overflow = "auto";
 		ndiv.innerHTML = "<div id='core_menuCK_bd'></div>";
 		novoel.appendChild(ndiv);
 		document.body.appendChild(novoel);
-		var og_core = new YAHOO.widget.ButtonGroup({id:"okcancel_checkbox_id", name:"okcancel_checkbox_id", container:"core_menuCK_bd" });
+		og_core = new YAHOO.widget.ButtonGroup({id:"okcancel_checkbox_id", name:"okcancel_checkbox_id", container:"core_menuCK_bd" });
 		og_core.addButtons([
 			{ label: "OK", value: "OK", checked: false},
 			{ label: "Cancel", value: "CANCEL", checked: false }
 		]);
 		og_core.on("checkedButtonChange", on_menuCheckBoxChange);
-		YAHOO.admin.container.panelCK = new YAHOO.widget.Overlay("core_menuCK", { zindex:"100",close:false,underlay:false,width:"200px", height:"200px",overflow:"auto", visible:false,constraintoviewport:true } );
+		YAHOO.admin.container.panelCK = new YAHOO.widget.Overlay("core_menuCK", { zindex:"100",close:false,underlay:false,width:"300px", height:"200px",overflow:"auto", visible:false,constraintoviewport:true } );
 		YAHOO.admin.container.panelCK.render();
 	}
-	var onde = $i("core_menuCK_bd");
+	onde = $i("core_menuCK_bd");
+	ins = [];
 	onde.innerHTML = "";
-	for (var i=0;i<valores.length;i++)
-	{
-		var novoCK = document.createElement("div");
-		var ck = "";
-		for(var j=0;j<selecionados.length;j++)
-		{
+	for (i=0;i<valores.length;i++){
+		novoCK = document.createElement("div");
+		ck = "";
+		for(j=0;j<selecionados.length;j++){
 			if(selecionados[j] == valores[i])
 			ck = "CHECKED";
 		}
-		var ins = "<input type=checkbox id='CK_"+valores[i]+"' value='"+valores[i]+"' "+ck+" />"+textos[i]+"<br>";
-		novoCK.innerHTML = ins;
-		onde.appendChild(novoCK);
+		ins.push("<input type=checkbox id='CK_"+valores[i]+"' value='"+valores[i]+"' "+ck+" />"+textos[i]+"<br>");
 	}
+	ins.push("<br>");
+	novoCK.innerHTML = ins.join(" ");
+	onde.appendChild(novoCK);
 	YAHOO.admin.container.panelCK.moveTo(YAHOO.util.Dom.getX(target),YAHOO.util.Dom.getY(target));
 	YAHOO.admin.container.panelCK.show();
 }

@@ -105,7 +105,7 @@ i3GEOadmin.grupos = {
 		i3GEOadmin.grupos.obtem();
 	},
 	/*
-	 * Obt&eacute;m a lista de menus
+	 * Obt&eacute;m a lista de grupos
 	 */
 	obtem: function(){
 		i3GEOadmin.grupos.dados = "";
