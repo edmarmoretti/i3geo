@@ -883,6 +883,33 @@ switch (strtoupper($funcao))
 		}
 		exit;
 	break;
+	case "CRIATABELADB":
+		$m = new Metaestat();
+		if($nome_esquema != "i3geo_metaestat"){
+			retornaJSON("erro");
+			exit;
+		}
+		retornaJSON($m->criaTabelaDB($codigo_estat_conexao,$nome_esquema,$nome_tabela));
+		exit;
+	break;
+	case "ALTERANOMETABELADB":
+		$m = new Metaestat();
+		if($nome_esquema != "i3geo_metaestat"){
+			retornaJSON("erro");
+			exit;
+		}
+		retornaJSON($m->alteraNomeTabelaDB($codigo_estat_conexao,$nome_esquema,$nome_tabela,$novonome_tabela));
+		exit;
+	break;
+	case "COPIATABELADB":
+		$m = new Metaestat();
+		if($nome_esquema != "i3geo_metaestat"){
+			retornaJSON("erro");
+			exit;
+		}
+		retornaJSON($m->copiaTabelaDB($codigo_estat_conexao,$nome_esquema,$nome_tabela,$novonome_tabela));
+		exit;
+	break;
 	/*
 	 Valor: COLUNASTABELA
 

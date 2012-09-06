@@ -134,7 +134,7 @@ class Metaestat{
 	/*
 	Function: execSQL
 
-	Executa um SQL no banco
+	Executa um SQL no banco de administracao
 
 	Parametros:
 
@@ -146,7 +146,7 @@ class Metaestat{
 
 	{array}
 	*/
-	function execSQL($sql,$id=""){
+	function execSQL($sql,$id="",$convTexto=true){
 		try	{
 			$q = $this->dbh->query($sql,PDO::FETCH_ASSOC);
 		}
@@ -155,6 +155,9 @@ class Metaestat{
 		}
 		if($q){
 			$r = $q->fetchAll();
+			if($convTexto == false){
+				return $r;
+			}
 			if($r){
 				if($id != ""){
 					if(count($r) == 1){
@@ -176,6 +179,20 @@ class Metaestat{
 		else{
 			return false;
 		}
+	}
+	/*
+	 Function: execSQLDB
+
+	Executa um SQL no banco de dados definido em uma conexao
+	*/
+	function execSQLDB($codigo_estat_conexao,$sql){
+		$c = $this->listaConexao($codigo_estat_conexao,true);
+		$dbhold = $this->dbh;
+		$dbh = new PDO('pgsql:dbname='.$c["bancodedados"].';user='.$c["usuario"].';password='.$c["senha"].';host='.$c["host"].';port='.$c["porta"]);
+		$this->dbh = $dbh;
+		$res = $this->execSQL($sql,"",false);
+		$this->dbh = $dbhold;
+		return $res;
 	}
 	function insertId($tabela,$colunatemp,$colunaid){
 		$idtemp = (rand (9000,10000)) * -1;
@@ -1041,44 +1058,41 @@ class Metaestat{
 		return $this->execSQL($sql,$id_agregaregiao);
 	}
 	function esquemasConexao($codigo_estat_conexao){
-		$c = $this->listaConexao($codigo_estat_conexao,true);
-		$dbhold = $this->dbh;
-		$dbh = new PDO('pgsql:dbname='.$c["bancodedados"].';user='.$c["usuario"].';password='.$c["senha"].';host='.$c["host"].';port='.$c["porta"]);
-		$this->dbh = $dbh;
-		$res = $this->execSQL("SELECT oid,nspname as esquema FROM pg_namespace group by nspname,oid order by nspname");
-		$this->dbh = $dbhold;
-		return $res;
+		return $this->execSQLDB($codigo_estat_conexao,"SELECT oid,nspname as esquema FROM pg_namespace group by nspname,oid order by nspname");
+	}
+	function criaEsquemaDB($codigo_estat_conexao,$nome_esquema){
+		return $this->execSQLDB($codigo_estat_conexao,"create schema $nome_esquema");
 	}
 	function tabelasEsquema($codigo_estat_conexao,$nome_esquema){
-		$c = $this->listaConexao($codigo_estat_conexao,true);
-		$dbhold = $this->dbh;
-		$dbh = new PDO('pgsql:dbname='.$c["bancodedados"].';user='.$c["usuario"].';password='.$c["senha"].';host='.$c["host"].';port='.$c["porta"]);
-		$this->dbh = $dbh;
-		$res = $this->execSQL("SELECT table_name as tabela FROM information_schema.tables where table_schema = '$nome_esquema'");
-		$this->dbh = $dbhold;
+		return $this->execSQLDB($codigo_estat_conexao,"SELECT table_name as tabela FROM information_schema.tables where table_schema = '$nome_esquema'");
+	}
+	function criaTabelaDB($codigo_estat_conexao,$nome_esquema,$nome_tabela){
+		return $this->execSQLDB($codigo_estat_conexao,"create table ".$nome_esquema.".".$nome_tabela." (gid serial, CONSTRAINT ".$nome_tabela."_pkey PRIMARY KEY (gid ))");
+	}
+	function alteraNomeTabelaDB($codigo_estat_conexao,$nome_esquema,$nome_tabela,$novonome_tabela){
+		$res = $this->execSQLDB($codigo_estat_conexao,"ALTER TABLE ".$nome_esquema.".".$nome_tabela." RENAME TO ".$novonome_tabela );
+		$tabela = $this->execSQLDB($codigo_estat_conexao,"SELECT table_name FROM information_schema.tables where table_name = '$novonome_tabela' and table_schema = '$nome_esquema'");
+		if(count($tabela) > 0){
+			$sql = "UPDATE i3geoestat_medida_variavel SET tabela = '$novonome_tabela' WHERE esquemadb = '$nome_esquema' and tabela = '$nome_tabela'";
+			$this->execSQL($sql,"",false);
+			$sql = "UPDATE i3geoestat_tipo_regiao SET tabela = '$novonome_tabela' WHERE esquemadb = '$nome_esquema' and tabela = '$nome_tabela'";
+			$this->execSQL($sql,"",false);
+		}
 		return $res;
+	}
+	function copiaTabelaDB($codigo_estat_conexao,$nome_esquema,$nome_tabela,$novonome_tabela){
+		return $this->execSQLDB($codigo_estat_conexao,"CREATE TABLE ".$nome_esquema.".".$novonome_tabela." AS select * from ".$nome_esquema.".".$nome_tabela );
 	}
 	function colunasTabela($codigo_estat_conexao,$nome_esquema,$nome_tabela){
 		$colunas = array();
-		$c = $this->listaConexao($codigo_estat_conexao,true);
-		$dbhold = $this->dbh;
-		$dbh = new PDO('pgsql:dbname='.$c["bancodedados"].';user='.$c["usuario"].';password='.$c["senha"].';host='.$c["host"].';port='.$c["porta"]);
-		$this->dbh = $dbh;
-		$res = $this->execSQL("SELECT column_name as coluna FROM information_schema.columns where table_schema = '$nome_esquema' and table_name = '$nome_tabela'");
-		$this->dbh = $dbhold;
+		$res = $this->execSQLDB($codigo_estat_conexao,"SELECT column_name as coluna FROM information_schema.columns where table_schema = '$nome_esquema' and table_name = '$nome_tabela'");
 		foreach($res as $c){
 			$colunas[] = $c["coluna"];
 		}
 		return $colunas;
 	}
 	function descreveColunasTabela($codigo_estat_conexao,$nome_esquema,$nome_tabela){
-		$c = $this->listaConexao($codigo_estat_conexao,true);
-		$dbhold = $this->dbh;
-		$dbh = new PDO('pgsql:dbname='.$c["bancodedados"].';user='.$c["usuario"].';password='.$c["senha"].';host='.$c["host"].';port='.$c["porta"]);
-		$this->dbh = $dbh;
-		$res = $this->execSQL("SELECT a.attnum,a.attname AS field,t.typname AS type,a.attlen AS length,a.atttypmod AS lengthvar,a.attnotnull AS notnull,p.nspname as esquema FROM pg_class c,pg_attribute a,pg_type t,pg_namespace p WHERE c.relname = '$nome_tabela' and p.nspname = '$nome_esquema' and a.attnum > 0 and a.attrelid = c.oid and a.atttypid = t.oid and c.relnamespace = p.oid ORDER BY a.attname");
-		$this->dbh = $dbhold;
-		return $res;
+		return $this->execSQLDB($codigo_estat_conexao,"SELECT a.attnum,a.attname AS field,t.typname AS type,a.attlen AS length,a.atttypmod AS lengthvar,a.attnotnull AS notnull,p.nspname as esquema FROM pg_class c,pg_attribute a,pg_type t,pg_namespace p WHERE c.relname = '$nome_tabela' and p.nspname = '$nome_esquema' and a.attnum > 0 and a.attrelid = c.oid and a.atttypid = t.oid and c.relnamespace = p.oid ORDER BY a.attname");
 	}
 	function relatorioCompleto($codigo_variavel=""){
 		$dados = array();

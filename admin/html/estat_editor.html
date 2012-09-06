@@ -1,0 +1,99 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
+<html>
+<head>
+<meta http-equiv="content-type" content="text/html; charset=ISO-8859-1">
+<title>Conexao com banco de dados</title>
+<style type="text/css">
+/*margin and padding on body element
+          can introduce errors in determining
+          element position and are not recommended;
+          we turn them off as a foundation for YUI
+          CSS treatments. */
+body {
+	margin: 0;
+	padding: 0;
+}
+</style>
+<script type="text/javascript" src="../js/core.js"></script>
+<script type="text/javascript" src="../js/estat_editor.js"></script>
+<link rel="stylesheet" type="text/css" href="admin.css">
+
+</head>
+<body class=" yui-skin-sam fundoPonto">
+	<div class="bordaSuperior">&nbsp;</div>
+	<div class="mascaraPrincipal" id="divGeral">
+		<div id=cabecalhoPrincipal></div>
+		<h1>
+			Metadados estat&iacute;sticos - editor de tabelas
+			de dados <img src="../imagens/04.png" style="cursor: pointer"
+				id=botaoAjuda />
+		</h1>
+
+		<div id="formulario" style="display: none">
+			<div id="ajuda" style="display: none">
+				<div class="hd">Ajuda</div>
+				<div class="bd" style="height: 144px; overflow: auto">
+					<p>Este formul&aacute;rio permite editar as tabelas de dados utilizadas pelo
+						sistema de metadados estat&iacute;sticos
+				</div>
+				<div class="ft"></div>
+			</div>
+			<p><br>
+			Aten&ccedil;&atilde;o: para poder editar o banco de dados, o usu&aacute;rio da conex&atilde;o escolhida deve ter direitos de edi&ccedil;&atilde;o<br>
+			Apenas as tabelas e os dados existentes no esquema i3geo_metaestat podem ser editados<br>
+			<div id="i3GEOadminEditorConexao" style="left: -5px;"></div><br>
+			<div id="i3GEOadminEditorEsquema" style="left: -5px;"></div>
+			<div id="i3GEOadminEditorTabela" style="left: -5px;"></div>
+			<div id="i3GEOadminEditorColuna" style="left: -5px;"></div>
+		</div>
+	</div>
+	<div id=logajax style="display: block"></div>
+	<script>
+		/*
+		 Title: Editor de tabelas do sistema de metadados estat&iacute;sticos
+
+		 Licenca:
+
+		 GPL2
+
+		 i3Geo Interface Integrada de Ferramentas de Geoprocessamento para Internet
+
+		 Direitos Autorais Reservados (c) 2006 Minist&eacute;rio do Meio Ambiente Brasil
+		 Desenvolvedor: Edmar Moretti edmar.moretti@mma.gov.br
+
+		 Este programa &eacute; software livre; voc&ecirc; pode redistribu&iacute;-lo
+		 e/ou modific&aacute;-lo sob os termos da Licen&ccedil;a P&uacute;blica Geral
+		 GNU conforme publicada pela Free Software Foundation;
+
+		 Este programa &eacute; distribu&iacute;do na expectativa de que seja &uacute;til,
+		 por&eacute;m, SEM NENHUMA GARANTIA; nem mesmo a garantia impl&iacute;cita
+		 de COMERCIABILIDADE OU ADEQUA&Ccedil;&Atilde;O A UMA FINALIDADE ESPEC&Iacute;FICA.
+		 Consulte a Licen&ccedil;a P&uacute;blica Geral do GNU para mais detalhes.
+		 Voc&ecirc; deve ter recebido uma cópia da Licen&ccedil;a P&uacute;blica Geral do
+		 GNU junto com este programa; se n&atilde;o, escreva para a
+		 Free Software Foundation, Inc., no endere&ccedil;o
+		 59 Temple Street, Suite 330, Boston, MA 02111-1307 USA.
+
+		 Arquivo:
+
+		 i3geo/admin/html/estat_editor.html
+		 */
+		if (screen.availWidth > 700) {
+			document.getElementById("divGeral").style.width = "700px";
+		}
+		//necessario para a ferramenta login e outras
+		i3GEO.configura = {
+			locaplic : "../.."
+		};
+		cabecalhoMetaestat("cabecalhoPrincipal", "editor");
+		document.getElementById("formulario").style.display = "block";
+		i3GEOadmin.editor.inicia();
+		/*
+		temp = function() {
+			document.getElementById("formulario").style.display = "block";
+			initEditor();
+		};
+		i3GEO.login.verificaOperacao("admin/html/menus",i3GEO.configura.locaplic, temp, "sessao");
+		 */
+	</script>
+</body>
