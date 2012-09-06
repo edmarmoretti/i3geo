@@ -220,15 +220,14 @@ switch (strtoupper($funcao))
 	Valor: ALTERARVARIAVEL
 
 	Altera os dados de uma variavel
-
-	Retorno:
-
-	{JSON}
 	*/
 	case "ALTERAVARIAVEL":
 		$m = new Metaestat();
 		if(empty($codigo_variavel)){
 			$codigo_variavel = $m->alteraVariavel();
+			if(!empty($nome)){
+				$m->alteraVariavel($codigo_variavel,$nome,$descricao);
+			}
 		}
 		else{
 			$codigo_variavel = $m->alteraVariavel($codigo_variavel,$nome,$descricao);
@@ -934,6 +933,24 @@ switch (strtoupper($funcao))
 		if($formato == "json"){
 			retornaJSON($m->colunasTabela($codigo_estat_conexao,$nome_esquema,$nome_tabela));
 		}
+		exit;
+	break;
+	case "CRIACOLUNADB":
+		$m = new Metaestat();
+		if($nome_esquema != "i3geo_metaestat"){
+			retornaJSON("erro");
+			exit;
+		}
+		retornaJSON($m->criaColunaDB($codigo_estat_conexao,$nome_esquema,$nome_tabela,$nova_coluna,$tipo));
+		exit;
+	break;
+	case "ALTERANOMECOLUNADB":
+		$m = new Metaestat();
+		if($nome_esquema != "i3geo_metaestat"){
+			retornaJSON("erro");
+			exit;
+		}
+		retornaJSON($m->alteraNomeColunaDB($codigo_estat_conexao,$nome_esquema,$nome_tabela,$nome_coluna,$novonome_coluna));
 		exit;
 	break;
 	/*

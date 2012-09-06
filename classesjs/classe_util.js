@@ -2024,15 +2024,17 @@ i3GEO.util = {
 
 	container {String} - id do elemento DIV ja existente que recebera as telas.
 	*/
-	proximoAnterior: function(anterior,proxima,texto,idatual,container){
+	proximoAnterior: function(anterior,proxima,texto,idatual,container,mantem){
 		if(typeof(console) !== 'undefined'){console.info("i3GEO.util.proximoAnterior()");}
 		var temp = $i(idatual),
 			ndiv = document.createElement("div"),
 			nids,
 			i,
 			fundo;
-
-		if(temp){$i(container).removeChild(temp);}
+		if(!mantem){
+			mantem = false;
+		}
+		if(temp && mantem == false){$i(container).removeChild(temp);}
 		if (!document.getElementById(idatual))
 		{
 			fundo = $i(container).style.backgroundColor;

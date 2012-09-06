@@ -1091,6 +1091,31 @@ class Metaestat{
 		}
 		return $colunas;
 	}
+	function criaColunaDB($codigo_estat_conexao,$nome_esquema,$nome_tabela,$nova_coluna,$tipo){
+		return $this->execSQLDB($codigo_estat_conexao,"ALTER TABLE ".$nome_esquema.".".$nome_tabela." ADD COLUMN $nova_coluna $tipo ");
+	}
+	function alteraNomeColunaDB($codigo_estat_conexao,$nome_esquema,$nome_tabela,$nome_coluna,$novonome_coluna){
+		$res = $this->execSQLDB($codigo_estat_conexao,"ALTER TABLE ".$nome_esquema.".".$nome_tabela." RENAME COLUMN $nome_coluna TO ".$novonome_coluna );
+		$coluna = $this->execSQLDB($codigo_estat_conexao,"SELECT column_name FROM information_schema.columns where table_name = '$novonome_tabela' and table_schema = '$nome_esquema' and column_name = '$novonome_coluna'");
+		if(count($coluna) > 0){
+			$sql = "UPDATE i3geoestat_medida_variavel SET colunavalor = '$novonome_coluna' WHERE esquemadb = '$nome_esquema' and tabela = '$nome_tabela' and colunavalor = '$nome_coluna'";
+			$this->execSQL($sql,"",false);
+			$sql = "UPDATE i3geoestat_medida_variavel SET colunaidgeo = '$novonome_coluna' WHERE esquemadb = '$nome_esquema' and tabela = '$nome_tabela' and colunaidgeo = '$nome_coluna'";
+			$this->execSQL($sql,"",false);
+			$sql = "UPDATE i3geoestat_tipo_regiao SET colunageo = '$novonome_coluna' WHERE esquemadb = '$nome_esquema' and tabela = '$nome_tabela' ' and colunageo = '$nome_coluna'";
+			$this->execSQL($sql,"",false);
+			$sql = "UPDATE i3geoestat_tipo_regiao SET colunanomeregiao = '$novonome_coluna' WHERE esquemadb = '$nome_esquema' and tabela = '$nome_tabela' ' and colunanomeregiao = '$nome_coluna'";
+			$this->execSQL($sql,"",false);
+			$sql = "UPDATE i3geoestat_tipo_regiao SET colunacentroide = '$novonome_coluna' WHERE esquemadb = '$nome_esquema' and tabela = '$nome_tabela' ' and colunacentroide = '$nome_coluna'";
+			$this->execSQL($sql,"",false);
+
+			$sql = "UPDATE i3geoestat_parametro_medida SET coluna = '$novonome_coluna' FROM i3geoestat_medida_variavel WHERE i3geoestat_parametro_medida.id_medida_variavel = i3geoestat_medida_variavel.id_medida_variavel and esquemadb = '$nome_esquema' and tabela = '$nome_tabela' and coluna = '$nome_coluna'";
+			$this->execSQL($sql,"",false);
+			$sql = "UPDATE i3geoestat_agregaregiao SET colunaligacao_regiaopai = '$novonome_coluna' FROM i3geoestat_tipo_regiao WHERE i3geoestat_agregaregiao.codigo_tipo_regiao = i3geoestat_tipo_regiao.codigo_tipo_regiao and esquemadb = '$nome_esquema' and tabela = '$nome_tabela' and colunaligacao_regiaopai = '$nome_coluna'";
+			$this->execSQL($sql,"",false);
+		}
+		return $res;
+	}
 	function descreveColunasTabela($codigo_estat_conexao,$nome_esquema,$nome_tabela){
 		return $this->execSQLDB($codigo_estat_conexao,"SELECT a.attnum,a.attname AS field,t.typname AS type,a.attlen AS length,a.atttypmod AS lengthvar,a.attnotnull AS notnull,p.nspname as esquema FROM pg_class c,pg_attribute a,pg_type t,pg_namespace p WHERE c.relname = '$nome_tabela' and p.nspname = '$nome_esquema' and a.attnum > 0 and a.attrelid = c.oid and a.atttypid = t.oid and c.relnamespace = p.oid ORDER BY a.attname");
 	}

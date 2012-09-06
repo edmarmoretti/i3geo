@@ -2,7 +2,7 @@
 i3GEOF.metaestat.dicionario = {
 "1":[
 {
-pt:"Escolha uma vari&aacute;vel para o mapa",
+pt:"Escolha uma vari&aacute;vel",
 en:"",
 es:"",
 it:""
@@ -16,7 +16,7 @@ it:""
 }],
 "3":[
 {
-pt:"Mais informa&ccedil;&otilde;es sobre a vari&aacute;vel&nbsp;",
+pt:"Mais info",
 en:"",
 es:"",
 it:""
@@ -73,6 +73,13 @@ it:""
 "11":[
 {
 pt:"An&aacute;lise",
+en:"",
+es:"",
+it:""
+}],
+"12":[
+{
+pt:"Edi&ccedil;&atilde;o",
 en:"",
 es:"",
 it:""
