@@ -1221,49 +1221,63 @@ function listaMapsTemas()
 	}
 	sort($arquivos);
 	//
-	//pega o nome de cada tema
+	//pega o nome de cada tema filtrando a listagem se for o caso
 	//
 	$sql = "select * from ".$esquemaadmin."i3geoadmin_temas ";
-	if(isset($filtro) && $filtro != "")
-	{
+	if(isset($filtro) && $filtro != ""){
 		$filtro = explode(",",$filtro);
 		$filtro = $filtro[0]." ".$filtro[1]." '".$filtro[2]."' or ".$filtro[0]." ".$filtro[1]." '".strtoupper($filtro[2])."'";
 		$sql .= "where $filtro";
 	}
-
 	$dbh = "";
 	include($locaplic."/admin/php/conexao.php");
 	$q = $dbh->query($sql,PDO::FETCH_ASSOC);
 	$regs = $q->fetchAll();
-	//echo $sql;exit;
+	//pega os grupos de usuarios que podem acessar o tema
+	$grpids = array();
+	$sql = "select nome,descricao,a.id_grupo,id_tema from ".$esquemaadmin."i3geousr_grupotema as a,".$esquemaadmin."i3geousr_grupos as b where a.id_grupo = b.id_grupo";
+	$q = $dbh->query($sql,PDO::FETCH_ASSOC);
+	if($q){
+		$gs = $q->fetchAll();
+		//agrupa o array
+		foreach($gps as $g){
+			array_push($grpids[$g["id_tema"]],array("id_grupo"=>$g["id_grupo"],"nome"=>$g["nome"],"descricao"=>$g["descricao"]));
+		}
+	}
 	$nomes = array();
+	$ids = array();
 	foreach($regs as $reg){
 		$nomes[$reg["codigo_tema"]] = $reg["nome_tema"];
+		$ids[$reg["codigo_tema"]] = $reg["id_tema"];
 		//$outros[$reg["codigo_tema"]] = array("kmz"=>$reg["kmz_tema"],"kml"=>$reg["kml_tema"],"ogc"=>$reg["ogc_tema"],"download"=>$reg["download_tema"],"link"=>$reg["link_tema"]);
 	}
 	$lista = array();
-	foreach($arquivos as $arq)
-	{
+	foreach($arquivos as $arq){
 		$extensao = $arq["extensao"];
 		$arq = $arq["nome"];
-		$n = explode(".",$arq);
-		$n = $nomes[$n[0]];
-		if(!$n)
-		{
+		$nT = explode(".",$arq);
+		$n = $nomes[$nT[0]];
+		if(!$n){
 			$n = "";
 		}
+		$id = $ids[$nT[0]];
+		if(!$id){
+			$id = "";
+		}
+		//pega os grupos de usuarios
+		$grupousr = $grpids[$id];
+		if(!$grupousr){
+			$grupousr = "";
+		}
 		$imagem = "";
-		if(file_exists($locaplic."/temas/miniaturas/".$arq.".map.mini.png"))
-		{
+		if(file_exists($locaplic."/temas/miniaturas/".$arq.".map.mini.png")){
 			$imagem = $arq.".map.mini.png";
 		}
-		if(isset($filtro) && $filtro != "" && $n != "")
-		{
-			$lista[] = array("nome"=>$n,"codigo"=>$arq,"imagem"=>$imagem,"extensao"=>$extensao);
+		if(isset($filtro) && $filtro != "" && $n != ""){
+			$lista[] = array("grupousr"=>$grupousr,"id_tema"=>$id,"nome"=>$n,"codigo"=>$arq,"imagem"=>$imagem,"extensao"=>$extensao);
 		}
-		if(!isset($filtro) || $filtro == "")
-		{
-			$lista[] = array("nome"=>$n,"codigo"=>$arq,"imagem"=>$imagem,"extensao"=>$extensao);
+		if(!isset($filtro) || $filtro == ""){
+			$lista[] = array("grupousr"=>$grupousr,"id_tema"=>$id,"nome"=>$n,"codigo"=>$arq,"imagem"=>$imagem,"extensao"=>$extensao);
 		}
 	}
 	return $lista;

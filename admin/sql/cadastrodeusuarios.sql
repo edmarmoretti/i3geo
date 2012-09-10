@@ -1,6 +1,7 @@
 
 /* drop tables */
 
+drop table i3geousr_grupotema;
 drop table i3geousr_grupousuario;
 drop table i3geousr_grupos;
 drop table i3geousr_operacoespapeis;
@@ -23,6 +24,18 @@ create table i3geousr_grupos
 	nome text,
 	-- descricao do grupo
 	descricao text
+);
+
+
+-- define os grupos que podem utilizar os temas (mapfiles)
+create table i3geousr_grupotema
+(
+	-- identificador único do grupo
+	id_grupo integer not null,
+	-- código do tema na tabela i3geoadmin_temas
+	id_tema integer not null,
+	foreign key (id_grupo)
+	references i3geousr_grupos (id_grupo)
 );
 
 

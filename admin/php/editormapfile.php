@@ -1042,6 +1042,14 @@ switch (strtoupper($funcao))
 		retornaJSON($res);
 		exit;
 		break;
+	case "ADICIONAGRUPOUSRTEMA":
+		retornaJSON(adicionaGrupoUsrTema());
+		exit;
+		break;
+	case "EXCLUIRGRUPOUSRTEMA":
+		retornaJSON(excluirGrupoUsrTema());
+		exit;
+		break;
 }
 function clonarMapfile()
 {
@@ -1267,14 +1275,53 @@ function pegaItensLayer()
 	$dados["itens"] = $itens;
 	return $dados;
 }
+function adicionaGrupoUsrTema(){
+	global $id_tema,$id_grupo,$locaplic,$esquemaadmin;
+	include($locaplic."/admin/php/conexao.php");
+	$sql = "select * from ".$esquemaadmin."i3geousr_grupotema where id_tema = $id_tema and id_grupo = $id_grupo";
+	$q = $dbh->query($sql,PDO::FETCH_ASSOC);
+	if($q){
+		$teste = $q->fetchAll();
+		if(count($teste) == 0){
+			$dbhw->query("INSERT INTO ".$esquemaadmin."i3geousr_grupotema (id_tema,id_grupo) VALUES ($id_tema,$id_grupo)");
+		}
+	}
+	return "ok";
+}
+function excluirGrupoUsrTema(){
+	global $id_tema,$id_grupo,$locaplic,$esquemaadmin;
+	include($locaplic."/admin/php/conexao.php");
+	$q = $dbhw->query("delete from ".$esquemaadmin."i3geousr_grupotema where id_tema = $id_tema and id_grupo = $id_grupo ");
+	return "ok";
+}
 function pegaLayers()
 {
-	global $codigoMap,$locaplic;
+	global $codigoMap,$locaplic,$esquemaadmin;
 	$dados = array();
 	$mapfile = $locaplic."/temas/".$codigoMap.".map";
 	$mapa = ms_newMapObj($mapfile);
 	$layers = $mapa->getalllayernames();
 	$dados["layers"] = $layers;
+	//lista de grupo de usuarios
+	$gruposusr = array();
+	include($locaplic."/admin/php/conexao.php");
+	$sql = "
+		select ".$esquemaadmin."i3geoadmin_temas.codigo_tema, ".$esquemaadmin."i3geousr_grupos.id_grupo,
+		".$esquemaadmin."i3geousr_grupos.nome, ".$esquemaadmin."i3geousr_grupos.descricao,
+		".$esquemaadmin."i3geousr_grupotema.id_tema
+		from
+		".$esquemaadmin."i3geoadmin_temas
+		join ".$esquemaadmin."i3geousr_grupotema
+		on ".$esquemaadmin."i3geousr_grupotema.id_grupo = ".$esquemaadmin."i3geousr_grupos.id_grupo
+		join ".$esquemaadmin."i3geousr_grupos
+		on ".$esquemaadmin."i3geoadmin_temas.id_tema = ".$esquemaadmin."i3geousr_grupotema.id_tema
+		where codigo_tema = '".$codigoMap."'
+	";
+	$q = $dbh->query($sql,PDO::FETCH_ASSOC);
+	if($q){
+		$gruposusr = $q->fetchAll();
+	}
+	$dados["gruposusr"] = $gruposusr;
 	return $dados;
 }
 function listaClasses()

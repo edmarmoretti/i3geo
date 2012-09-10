@@ -11,7 +11,7 @@
 	</page_setting>
 	<category_index>0</category_index>
 	<zoom>1.0</zoom>
-	<x>7</x>
+	<x>193</x>
 	<y>0</y>
 	<default_color>
 		<r>230</r>
@@ -41,7 +41,7 @@
 		<suspend_validator>false</suspend_validator>
 		<export_setting>
 			<category_name_to_export>All</category_name_to_export>
-			<ddl_output>/var/www/i3geo/admin/sql/cadastrodeusuarios.sql</ddl_output>
+			<ddl_output>c:\ms4w\apache\htdocs\i3geo\admin\sql\cadastrodeusuarios.sql</ddl_output>
 			<excel_output></excel_output>
 			<excel_template></excel_template>
 			<image_output></image_output>
@@ -97,7 +97,7 @@
 			<id></id>
 			<height>-1</height>
 			<width>-1</width>
-				<font_name>Ubuntu</font_name>
+				<font_name>Segoe UI</font_name>
 				<font_size>9</font_size>
 			<x>50</x>
 			<y>50</y>
@@ -110,7 +110,7 @@
 			</connections>
 			<display>false</display>
 			<creation_date>2012-07-19 01:51:14</creation_date>
-			<updated_date>2012-07-30 22:24:51</updated_date>
+			<updated_date>2012-09-09 13:19:23</updated_date>
 			<model_property>
 				<name>Project Name</name>
 				<value></value>
@@ -281,13 +281,26 @@
 			<array_dimension>null</array_dimension>
 			<unsigned>false</unsigned>
 			<args></args>
+			<description>código do tema na tabela i3geoadmin_temas</description>
+			<logical_name>id_tema</logical_name>
+			<physical_name>id_tema</physical_name>
+			<type>integer</type>
+		</word>
+		<word>
+			<id>11</id>
+			<length>null</length>
+			<decimal>null</decimal>
+			<array>false</array>
+			<array_dimension>null</array_dimension>
+			<unsigned>false</unsigned>
+			<args></args>
 			<description></description>
 			<logical_name>id_usuario</logical_name>
 			<physical_name>id_usuario</physical_name>
 			<type>integer</type>
 		</word>
 		<word>
-			<id>11</id>
+			<id>12</id>
 			<length>null</length>
 			<decimal>null</decimal>
 			<array>false</array>
@@ -300,7 +313,7 @@
 			<type>text</type>
 		</word>
 		<word>
-			<id>12</id>
+			<id>13</id>
 			<length>null</length>
 			<decimal>null</decimal>
 			<array>false</array>
@@ -313,7 +326,7 @@
 			<type>text</type>
 		</word>
 		<word>
-			<id>13</id>
+			<id>14</id>
 			<length>null</length>
 			<decimal>null</decimal>
 			<array>false</array>
@@ -326,7 +339,7 @@
 			<type>text</type>
 		</word>
 		<word>
-			<id>14</id>
+			<id>15</id>
 			<length>null</length>
 			<decimal>null</decimal>
 			<array>false</array>
@@ -339,7 +352,7 @@
 			<type>text</type>
 		</word>
 		<word>
-			<id>15</id>
+			<id>16</id>
 			<length>null</length>
 			<decimal>null</decimal>
 			<array>false</array>
@@ -395,7 +408,7 @@
 			<option></option>
 			<columns>
 				<normal_column>
-					<word_id>10</word_id>
+					<word_id>11</word_id>
 					<id>0</id>
 					<description></description>
 					<unique_key_name></unique_key_name>
@@ -523,7 +536,7 @@
 					</sequence>
 				</normal_column>
 				<normal_column>
-					<word_id>11</word_id>
+					<word_id>12</word_id>
 					<id>4</id>
 					<description></description>
 					<unique_key_name></unique_key_name>
@@ -555,7 +568,7 @@
 					</sequence>
 				</normal_column>
 				<normal_column>
-					<word_id>14</word_id>
+					<word_id>15</word_id>
 					<id>5</id>
 					<description></description>
 					<unique_key_name></unique_key_name>
@@ -587,7 +600,7 @@
 					</sequence>
 				</normal_column>
 				<normal_column>
-					<word_id>15</word_id>
+					<word_id>16</word_id>
 					<id>6</id>
 					<description></description>
 					<unique_key_name></unique_key_name>
@@ -816,7 +829,7 @@
 			<columns>
 				<normal_column>
 					<id>9</id>
-					<referenced_column>17</referenced_column>
+					<referenced_column>16</referenced_column>
 					<relation>2</relation>
 					<description></description>
 					<unique_key_name></unique_key_name>
@@ -944,7 +957,7 @@
 					</sequence>
 				</normal_column>
 				<normal_column>
-					<word_id>12</word_id>
+					<word_id>13</word_id>
 					<id>12</id>
 					<description></description>
 					<unique_key_name></unique_key_name>
@@ -1018,29 +1031,64 @@
 		</table>
 		<table>
 			<id>5</id>
-			<height>107</height>
-			<width>203</width>
+			<height>86</height>
+			<width>220</width>
 				<font_name>Ubuntu</font_name>
 				<font_size>9</font_size>
-			<x>502</x>
-			<y>308</y>
+			<x>532</x>
+			<y>321</y>
 			<color>
 				<r>230</r>
 				<g>230</g>
 				<b>250</b>
 			</color>
 			<connections>
+				<relation>
+					<id>4</id>
+					<source>1</source>
+					<target>5</target>
+					<child_cardinality>1..n</child_cardinality>
+					<parent_cardinality>1</parent_cardinality>
+					<reference_for_pk>true</reference_for_pk>
+					<name></name>
+					<on_delete_action>RESTRICT</on_delete_action>
+					<on_update_action>RESTRICT</on_update_action>
+					<source_xp>-1</source_xp>
+					<source_yp>-1</source_yp>
+					<target_xp>-1</target_xp>
+					<target_yp>-1</target_yp>
+					<referenced_column>null</referenced_column>
+					<referenced_complex_unique_key>null</referenced_complex_unique_key>
+				</relation>
+				<relation>
+					<id>5</id>
+					<source>7</source>
+					<target>5</target>
+					<child_cardinality>1..n</child_cardinality>
+					<parent_cardinality>1</parent_cardinality>
+					<reference_for_pk>true</reference_for_pk>
+					<name></name>
+					<on_delete_action>RESTRICT</on_delete_action>
+					<on_update_action>RESTRICT</on_update_action>
+					<source_xp>-1</source_xp>
+					<source_yp>-1</source_yp>
+					<target_xp>-1</target_xp>
+					<target_yp>-1</target_yp>
+					<referenced_column>null</referenced_column>
+					<referenced_complex_unique_key>null</referenced_complex_unique_key>
+				</relation>
 			</connections>
-			<physical_name>i3geousr_grupos</physical_name>
-			<logical_name>i3geousr_grupos</logical_name>
-			<description>Grupos de usuários</description>
+			<physical_name>i3geousr_grupousuario</physical_name>
+			<logical_name>i3geousr_grupousuario</logical_name>
+			<description></description>
 			<constraint></constraint>
 			<primary_key_name></primary_key_name>
 			<option></option>
 			<columns>
 				<normal_column>
-					<word_id>7</word_id>
 					<id>14</id>
+					<referenced_column>0</referenced_column>
+					<relation>4</relation>
 					<description></description>
 					<unique_key_name></unique_key_name>
 					<logical_name></logical_name>
@@ -1048,41 +1096,9 @@
 					<type>integer</type>
 					<constraint></constraint>
 					<default_value></default_value>
-					<auto_increment>true</auto_increment>
-					<foreign_key>false</foreign_key>
-					<not_null>true</not_null>
-					<primary_key>true</primary_key>
-					<unique_key>true</unique_key>
-					<character_set></character_set>
-					<collation></collation>
-					<sequence>
-						<name></name>
-						<schema></schema>
-						<increment></increment>
-						<min_value></min_value>
-						<max_value></max_value>
-						<start></start>
-						<cache></cache>
-						<cycle>false</cycle>
-						<order>false</order>
-						<description></description>
-						<data_type></data_type>
-						<decimal_size>0</decimal_size>
-					</sequence>
-				</normal_column>
-				<normal_column>
-					<word_id>13</word_id>
-					<id>15</id>
-					<description></description>
-					<unique_key_name></unique_key_name>
-					<logical_name></logical_name>
-					<physical_name></physical_name>
-					<type>text</type>
-					<constraint></constraint>
-					<default_value></default_value>
 					<auto_increment>false</auto_increment>
-					<foreign_key>false</foreign_key>
-					<not_null>false</not_null>
+					<foreign_key>true</foreign_key>
+					<not_null>true</not_null>
 					<primary_key>false</primary_key>
 					<unique_key>false</unique_key>
 					<character_set></character_set>
@@ -1103,18 +1119,19 @@
 					</sequence>
 				</normal_column>
 				<normal_column>
-					<word_id>5</word_id>
-					<id>16</id>
+					<id>15</id>
+					<referenced_column>19</referenced_column>
+					<relation>5</relation>
 					<description></description>
 					<unique_key_name></unique_key_name>
 					<logical_name></logical_name>
 					<physical_name></physical_name>
-					<type>text</type>
+					<type>integer</type>
 					<constraint></constraint>
 					<default_value></default_value>
 					<auto_increment>false</auto_increment>
-					<foreign_key>false</foreign_key>
-					<not_null>false</not_null>
+					<foreign_key>true</foreign_key>
+					<not_null>true</not_null>
 					<primary_key>false</primary_key>
 					<unique_key>false</unique_key>
 					<character_set></character_set>
@@ -1146,11 +1163,11 @@
 		<table>
 			<id>6</id>
 			<height>107</height>
-			<width>226</width>
+			<width>235</width>
 				<font_name>Ubuntu</font_name>
 				<font_size>9</font_size>
-			<x>782</x>
-			<y>176</y>
+			<x>851</x>
+			<y>251</y>
 			<color>
 				<r>128</r>
 				<g>128</g>
@@ -1167,7 +1184,7 @@
 			<columns>
 				<normal_column>
 					<word_id>8</word_id>
-					<id>17</id>
+					<id>16</id>
 					<description></description>
 					<unique_key_name></unique_key_name>
 					<logical_name></logical_name>
@@ -1199,7 +1216,7 @@
 				</normal_column>
 				<normal_column>
 					<word_id>1</word_id>
-					<id>18</id>
+					<id>17</id>
 					<description></description>
 					<unique_key_name></unique_key_name>
 					<logical_name></logical_name>
@@ -1231,7 +1248,7 @@
 				</normal_column>
 				<normal_column>
 					<word_id>4</word_id>
-					<id>19</id>
+					<id>18</id>
 					<description></description>
 					<unique_key_name></unique_key_name>
 					<logical_name></logical_name>
@@ -1272,12 +1289,139 @@
 		</table>
 		<table>
 			<id>7</id>
-			<height>86</height>
+			<height>107</height>
 			<width>213</width>
 				<font_name>Ubuntu</font_name>
 				<font_size>9</font_size>
-			<x>508</x>
-			<y>103</y>
+			<x>524</x>
+			<y>48</y>
+			<color>
+				<r>230</r>
+				<g>230</g>
+				<b>250</b>
+			</color>
+			<connections>
+			</connections>
+			<physical_name>i3geousr_grupos</physical_name>
+			<logical_name>i3geousr_grupos</logical_name>
+			<description>Grupos de usuários</description>
+			<constraint></constraint>
+			<primary_key_name></primary_key_name>
+			<option></option>
+			<columns>
+				<normal_column>
+					<word_id>7</word_id>
+					<id>19</id>
+					<description></description>
+					<unique_key_name></unique_key_name>
+					<logical_name></logical_name>
+					<physical_name></physical_name>
+					<type>integer</type>
+					<constraint></constraint>
+					<default_value></default_value>
+					<auto_increment>true</auto_increment>
+					<foreign_key>false</foreign_key>
+					<not_null>true</not_null>
+					<primary_key>true</primary_key>
+					<unique_key>true</unique_key>
+					<character_set></character_set>
+					<collation></collation>
+					<sequence>
+						<name></name>
+						<schema></schema>
+						<increment></increment>
+						<min_value></min_value>
+						<max_value></max_value>
+						<start></start>
+						<cache></cache>
+						<cycle>false</cycle>
+						<order>false</order>
+						<description></description>
+						<data_type></data_type>
+						<decimal_size>0</decimal_size>
+					</sequence>
+				</normal_column>
+				<normal_column>
+					<word_id>14</word_id>
+					<id>20</id>
+					<description></description>
+					<unique_key_name></unique_key_name>
+					<logical_name></logical_name>
+					<physical_name></physical_name>
+					<type>text</type>
+					<constraint></constraint>
+					<default_value></default_value>
+					<auto_increment>false</auto_increment>
+					<foreign_key>false</foreign_key>
+					<not_null>false</not_null>
+					<primary_key>false</primary_key>
+					<unique_key>false</unique_key>
+					<character_set></character_set>
+					<collation></collation>
+					<sequence>
+						<name></name>
+						<schema></schema>
+						<increment></increment>
+						<min_value></min_value>
+						<max_value></max_value>
+						<start></start>
+						<cache></cache>
+						<cycle>false</cycle>
+						<order>false</order>
+						<description></description>
+						<data_type></data_type>
+						<decimal_size>0</decimal_size>
+					</sequence>
+				</normal_column>
+				<normal_column>
+					<word_id>5</word_id>
+					<id>21</id>
+					<description></description>
+					<unique_key_name></unique_key_name>
+					<logical_name></logical_name>
+					<physical_name></physical_name>
+					<type>text</type>
+					<constraint></constraint>
+					<default_value></default_value>
+					<auto_increment>false</auto_increment>
+					<foreign_key>false</foreign_key>
+					<not_null>false</not_null>
+					<primary_key>false</primary_key>
+					<unique_key>false</unique_key>
+					<character_set></character_set>
+					<collation></collation>
+					<sequence>
+						<name></name>
+						<schema></schema>
+						<increment></increment>
+						<min_value></min_value>
+						<max_value></max_value>
+						<start></start>
+						<cache></cache>
+						<cycle>false</cycle>
+						<order>false</order>
+						<description></description>
+						<data_type></data_type>
+						<decimal_size>0</decimal_size>
+					</sequence>
+				</normal_column>
+			</columns>
+			<indexes>
+			</indexes>
+			<complex_unique_key_list>
+			</complex_unique_key_list>
+			<table_properties>
+				<schema></schema>
+			</table_properties>
+		</table>
+		<table>
+			<id>8</id>
+			<height>86</height>
+			<width>197</width>
+				<font_name>Segoe UI</font_name>
+				<font_size>9</font_size>
+			<x>838</x>
+			<y>72</y>
 			<color>
 				<r>230</r>
 				<g>230</g>
@@ -1285,26 +1429,9 @@
 			</color>
 			<connections>
 				<relation>
-					<id>4</id>
-					<source>1</source>
-					<target>7</target>
-					<child_cardinality>1..n</child_cardinality>
-					<parent_cardinality>1</parent_cardinality>
-					<reference_for_pk>true</reference_for_pk>
-					<name></name>
-					<on_delete_action>RESTRICT</on_delete_action>
-					<on_update_action>RESTRICT</on_update_action>
-					<source_xp>-1</source_xp>
-					<source_yp>-1</source_yp>
-					<target_xp>-1</target_xp>
-					<target_yp>-1</target_yp>
-					<referenced_column>null</referenced_column>
-					<referenced_complex_unique_key>null</referenced_complex_unique_key>
-				</relation>
-				<relation>
-					<id>5</id>
-					<source>5</source>
-					<target>7</target>
+					<id>6</id>
+					<source>7</source>
+					<target>8</target>
 					<child_cardinality>1..n</child_cardinality>
 					<parent_cardinality>1</parent_cardinality>
 					<reference_for_pk>true</reference_for_pk>
@@ -1319,17 +1446,17 @@
 					<referenced_complex_unique_key>null</referenced_complex_unique_key>
 				</relation>
 			</connections>
-			<physical_name>i3geousr_grupousuario</physical_name>
-			<logical_name>i3geousr_grupousuario</logical_name>
-			<description></description>
+			<physical_name>i3geousr_grupotema</physical_name>
+			<logical_name>i3geousr_grupotema</logical_name>
+			<description>Define os grupos que podem utilizar os temas (mapfiles)</description>
 			<constraint></constraint>
 			<primary_key_name></primary_key_name>
 			<option></option>
 			<columns>
 				<normal_column>
-					<id>20</id>
-					<referenced_column>0</referenced_column>
-					<relation>4</relation>
+					<id>22</id>
+					<referenced_column>19</referenced_column>
+					<relation>6</relation>
 					<description></description>
 					<unique_key_name></unique_key_name>
 					<logical_name></logical_name>
@@ -1360,9 +1487,8 @@
 					</sequence>
 				</normal_column>
 				<normal_column>
-					<id>21</id>
-					<referenced_column>14</referenced_column>
-					<relation>5</relation>
+					<word_id>10</word_id>
+					<id>23</id>
 					<description></description>
 					<unique_key_name></unique_key_name>
 					<logical_name></logical_name>
@@ -1371,7 +1497,7 @@
 					<constraint></constraint>
 					<default_value></default_value>
 					<auto_increment>false</auto_increment>
-					<foreign_key>true</foreign_key>
+					<foreign_key>false</foreign_key>
 					<not_null>true</not_null>
 					<primary_key>false</primary_key>
 					<unique_key>false</unique_key>
@@ -1648,239 +1774,239 @@
 					<direct_test_data>
 						<data>
 							<column_data>
-								<column_id>17</column_id>
+								<column_id>16</column_id>
 								<value>1</value>
 							</column_data>
 							<column_data>
-								<column_id>18</column_id>
+								<column_id>17</column_id>
 								<value>admin/html/editormapfile</value>
 							</column_data>
 							<column_data>
-								<column_id>19</column_id>
+								<column_id>18</column_id>
 								<value>editor de mapfiles do sistema de administracao</value>
 							</column_data>
 						</data>
 						<data>
 							<column_data>
-								<column_id>17</column_id>
+								<column_id>16</column_id>
 								<value>2</value>
 							</column_data>
 							<column_data>
-								<column_id>18</column_id>
+								<column_id>17</column_id>
 								<value>admin/html/operacoes</value>
 							</column_data>
 							<column_data>
-								<column_id>19</column_id>
+								<column_id>18</column_id>
 								<value>abre o editor de operacoes</value>
 							</column_data>
 						</data>
 						<data>
 							<column_data>
-								<column_id>17</column_id>
+								<column_id>16</column_id>
 								<value>3</value>
 							</column_data>
 							<column_data>
-								<column_id>18</column_id>
+								<column_id>17</column_id>
 								<value>teste/</value>
 							</column_data>
 							<column_data>
-								<column_id>19</column_id>
+								<column_id>18</column_id>
 								<value>teste</value>
 							</column_data>
 						</data>
 						<data>
 							<column_data>
-								<column_id>17</column_id>
+								<column_id>16</column_id>
 								<value>4</value>
 							</column_data>
 							<column_data>
-								<column_id>18</column_id>
+								<column_id>17</column_id>
 								<value>admin/html/arvore</value>
 							</column_data>
 							<column_data>
-								<column_id>19</column_id>
+								<column_id>18</column_id>
 								<value>edicao da arvore do catalogo de temas</value>
 							</column_data>
 						</data>
 						<data>
 							<column_data>
-								<column_id>17</column_id>
+								<column_id>16</column_id>
 								<value>5</value>
 							</column_data>
 							<column_data>
-								<column_id>18</column_id>
+								<column_id>17</column_id>
 								<value>admin/html/menus</value>
 							</column_data>
 							<column_data>
-								<column_id>19</column_id>
+								<column_id>18</column_id>
 								<value>edicao da lista de menus</value>
 							</column_data>
 						</data>
 						<data>
 							<column_data>
-								<column_id>17</column_id>
+								<column_id>16</column_id>
 								<value>6</value>
 							</column_data>
 							<column_data>
-								<column_id>18</column_id>
+								<column_id>17</column_id>
 								<value>admin/html/ogcws</value>
 							</column_data>
 							<column_data>
-								<column_id>19</column_id>
+								<column_id>18</column_id>
 								<value>edicao das preferencias do servico WMS</value>
 							</column_data>
 						</data>
 						<data>
 							<column_data>
-								<column_id>17</column_id>
+								<column_id>16</column_id>
 								<value>7</value>
 							</column_data>
 							<column_data>
-								<column_id>18</column_id>
+								<column_id>17</column_id>
 								<value>admin/html/atlas</value>
 							</column_data>
 							<column_data>
-								<column_id>19</column_id>
+								<column_id>18</column_id>
 								<value>edicao de atlas</value>
 							</column_data>
 						</data>
 						<data>
 							<column_data>
-								<column_id>17</column_id>
+								<column_id>16</column_id>
 								<value>8</value>
 							</column_data>
 							<column_data>
-								<column_id>18</column_id>
+								<column_id>17</column_id>
 								<value>admin/html/identifica</value>
 							</column_data>
 							<column_data>
-								<column_id>19</column_id>
+								<column_id>18</column_id>
 								<value>lista de sistemas incluidos na ferramenta de identificacao</value>
 							</column_data>
 						</data>
 						<data>
 							<column_data>
-								<column_id>17</column_id>
+								<column_id>16</column_id>
 								<value>9</value>
 							</column_data>
 							<column_data>
-								<column_id>18</column_id>
+								<column_id>17</column_id>
 								<value>admin/html/incluimap</value>
 							</column_data>
 							<column_data>
-								<column_id>19</column_id>
+								<column_id>18</column_id>
 								<value>adapta mapfiles antigos para versoes novas do Mapserver</value>
 							</column_data>
 						</data>
 						<data>
 							<column_data>
-								<column_id>17</column_id>
+								<column_id>16</column_id>
 								<value>10</value>
 							</column_data>
 							<column_data>
-								<column_id>18</column_id>
+								<column_id>17</column_id>
 								<value>admin/html/mapas</value>
 							</column_data>
 							<column_data>
-								<column_id>19</column_id>
+								<column_id>18</column_id>
 								<value>lista de links para mapas</value>
 							</column_data>
 						</data>
 						<data>
 							<column_data>
-								<column_id>17</column_id>
+								<column_id>16</column_id>
 								<value>11</value>
 							</column_data>
 							<column_data>
-								<column_id>18</column_id>
+								<column_id>17</column_id>
 								<value>admin/html/perfis</value>
 							</column_data>
 							<column_data>
-								<column_id>19</column_id>
+								<column_id>18</column_id>
 								<value>lista controlada de perfis</value>
 							</column_data>
 						</data>
 						<data>
 							<column_data>
-								<column_id>17</column_id>
+								<column_id>16</column_id>
 								<value>12</value>
 							</column_data>
 							<column_data>
-								<column_id>18</column_id>
+								<column_id>17</column_id>
 								<value>admin/html/sistemas</value>
 							</column_data>
 							<column_data>
-								<column_id>19</column_id>
+								<column_id>18</column_id>
 								<value>lista de sistemas complementares adicionados ao catalogo de camadas</value>
 							</column_data>
 						</data>
 						<data>
 							<column_data>
-								<column_id>17</column_id>
+								<column_id>16</column_id>
 								<value>13</value>
 							</column_data>
 							<column_data>
-								<column_id>18</column_id>
+								<column_id>17</column_id>
 								<value>admin/html/subirshapefile</value>
 							</column_data>
 							<column_data>
-								<column_id>19</column_id>
+								<column_id>18</column_id>
 								<value>upload de shapefile para uma pasta específica no servidor</value>
 							</column_data>
 						</data>
 						<data>
 							<column_data>
-								<column_id>17</column_id>
+								<column_id>16</column_id>
 								<value>14</value>
 							</column_data>
 							<column_data>
-								<column_id>18</column_id>
+								<column_id>17</column_id>
 								<value>admin/html/tags</value>
 							</column_data>
 							<column_data>
-								<column_id>19</column_id>
+								<column_id>18</column_id>
 								<value>lista controlada de tags</value>
 							</column_data>
 						</data>
 						<data>
 							<column_data>
-								<column_id>17</column_id>
+								<column_id>16</column_id>
 								<value>15</value>
 							</column_data>
 							<column_data>
-								<column_id>18</column_id>
+								<column_id>17</column_id>
 								<value>admin/html/webservices</value>
 							</column_data>
 							<column_data>
-								<column_id>19</column_id>
+								<column_id>18</column_id>
 								<value>cadastro de links para webservices</value>
 							</column_data>
 						</data>
 						<data>
 							<column_data>
-								<column_id>17</column_id>
+								<column_id>16</column_id>
 								<value>16</value>
 							</column_data>
 							<column_data>
-								<column_id>18</column_id>
+								<column_id>17</column_id>
 								<value>admin/php/editortexto</value>
 							</column_data>
 							<column_data>
-								<column_id>19</column_id>
+								<column_id>18</column_id>
 								<value>editor de textos para edicao de mapfiles</value>
 							</column_data>
 						</data>
 						<data>
 							<column_data>
-								<column_id>17</column_id>
+								<column_id>16</column_id>
 								<value>17</value>
 							</column_data>
 							<column_data>
-								<column_id>18</column_id>
+								<column_id>17</column_id>
 								<value>admin/html/usuarios</value>
 							</column_data>
 							<column_data>
-								<column_id>19</column_id>
+								<column_id>18</column_id>
 								<value>cadastro de usuarios</value>
 							</column_data>
 						</data>
@@ -1889,7 +2015,7 @@
 						<test_data_num>0</test_data_num>
 						<data_def_list>
 							<data_def>
-								<column_id>17</column_id>
+								<column_id>16</column_id>
 								<type>Format</type>
 								<repeat_num>1</repeat_num>
 								<template>%</template>
@@ -1904,7 +2030,7 @@
 								</modified_values>
 							</data_def>
 							<data_def>
-								<column_id>18</column_id>
+								<column_id>17</column_id>
 								<type>Format</type>
 								<repeat_num>1</repeat_num>
 								<template>codigo%</template>
@@ -1919,7 +2045,7 @@
 								</modified_values>
 							</data_def>
 							<data_def>
-								<column_id>19</column_id>
+								<column_id>18</column_id>
 								<type>Format</type>
 								<repeat_num>1</repeat_num>
 								<template>descricao%</template>
