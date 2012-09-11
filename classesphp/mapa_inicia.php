@@ -103,6 +103,14 @@ Retorno:
 function iniciaMapa()
 {
 	global $emailInstituicao,$openid,$interfacePadrao,$mensagemInicia,$kmlurl,$tituloInstituicao,$tempo,$navegadoresLocais,$locaplic,$embedLegenda,$map_file,$mapext,$w,$h,$R_path,$locmapserv,$utilizacgi,$expoeMapfile,$interface;
+	//
+	//verifica se algum tema e restrito a determinado usuario
+	//as funcoes de validacao encontram-se em funcoes_gerais.php
+	//
+	if(!function_exists("validaAcessoTemas")){
+		include_once("funcoes_gerais.php");
+	}
+	validaAcessoTemas($_SESSION["map_file"]);
 	if(!isset($kmlurl))
 	{$kmlurl = "";}
 	error_reporting(0);

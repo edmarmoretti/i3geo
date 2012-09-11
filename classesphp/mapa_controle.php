@@ -159,7 +159,9 @@ if (isset($debug) && strtolower($debug) == "sim")
 //se as extens&otilde;es j&aacute; estiverem carregadas no PHP, vc pode comentar essa linha para que o processamento fique mais r&aacute;pido
 //
 include_once ("carrega_ext.php");
-include_once("funcoes_gerais.php");
+if(!function_exists("sobeAnno")){
+	include_once("funcoes_gerais.php");
+}
 if ($funcao == "criaMapa")
 {
 	session_name("i3GeoPHP");
@@ -182,6 +184,8 @@ if ($funcao == "criaMapa")
 	include_once("ms_criamapa.php");
 	$_SESSION["interface"] = $interfaceTemp;
 	cpjson(session_id());
+	//ver funcoes_gerais.php
+	validaAcessoTemas($_SESSION("map_file"));
 	return;
 }
 if (!isset($map_file))
@@ -247,20 +251,6 @@ Inicia o mapa, pegando os par&acirc;metros necess&aacute;rios para a montagem in
 	case "INICIA":
 		include_once("mapa_inicia.php");
 		iniciaMapa();
-	break;
-/*
-Valor: MONTAFLAMINGO
-
-Gera o arquivo xml de configura&ccedil;&atilde;o para a interface Flamingo.
-
-O arquivo xml &eacute; gravado no diretório tempor&aacute;rio do mapserver e cont&eacute;m a string de conex&atilde;o com o gerador de webservices classesphp/flamingoogc.php
-Esse gerador, recebe como par&acirc;metro o id da se&ccedil;&atilde;o atual e transforma o mapfile atual em um webservcie capaz de ser entendido pelo flamingo.
-
-<flamingo.inc>
-*/
-	case "MONTAFLAMINGO":
-		include("flamingo.inc");
-		$retorno = $host."/ms_tmp/".basename(dirname($map_file))."/flamingo.xml";
 	break;
 /*
 Valor: OPENLAYERS
@@ -1055,11 +1045,11 @@ Adiciona um novo tema ao mapa.
 		copiaSeguranca($map_file);
 		$m = new Mapa($map_file);
 		$salvar = $m->adicionaTema($temas,$locaplic);
-		if($salvar)
-		{
+		if($salvar){
 			$m->salva();
 			$_SESSION["contadorsalva"]++;
 		}
+		validaAcessoTemas($map_file);
 		$retorno = "ok";
 		/*
 		if($interface != "openlayers"){

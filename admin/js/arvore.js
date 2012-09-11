@@ -854,10 +854,13 @@ function gravaDados(tipo,id)
   					}
 					if(tipo == "raizmenu" || tipo == "raizgrupo")
   					{
-  						var texto = obj.options[obj.selectedIndex].text;
-  						var no = tree.getNodeByProperty("id_raiz",id);
-  						no.getContentEl().getElementsByTagName("span")[0].innerHTML = texto;
-  						no.html = no.getContentEl().innerHTML;
+  						var obje = document.getElementById("Eid_tema");
+  						if(obje){
+  							var texto = obje.options[obje.selectedIndex].text;
+  							var no = tree.getNodeByProperty("id_raiz",id);
+  							no.getContentEl().getElementsByTagName("span")[0].innerHTML = texto;
+  							no.html = no.getContentEl().innerHTML;
+  						}
   					}
   					core_carregando("desativa");
   				}

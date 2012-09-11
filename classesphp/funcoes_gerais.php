@@ -3049,4 +3049,109 @@ function permissoesarquivo($arquivo){
 
 	return $info;
 }
+/*
+Function: validaAcessoTemas
+
+Remocao dos layers com restricoes de acesso registradas no sistema de controle de usuarios
+*/
+function validaAcessoTemas($map_file){
+	$indevidos = listaLayersIndevidos($map_file);
+	if(count($indevidos) > 0){
+		$m = ms_newMapObj($map_file);
+		foreach($indevidos as $i){
+			$l = $m->getlayerbyname($i);
+			$l->set("status",MS_DELETE);
+		}
+		$m->save($map_file);
+	}
+	return;
+}
+/*
+Function: listaTemasRestritos
+
+Lista os temas que possuem restricao de acesso para apenas alguns grupos de usuarios
+
+O retorno e um array com a chave sendo o codigo do tema e o valor um array com a lista de ids de grupos que podem acessar
+*/
+function listaTemasRestritos(){
+	include_once(__DIR__."/../admin/php/admin.php");
+	$res = pegaDados("select id_grupo,codigo_tema from ".$esquemaadmin."i3geousr_grupotema as gt,".$esquemaadmin."i3geoadmin_temas as te where gt.id_tema = te.id_tema");
+	$restritos = array();
+	foreach ($res as $r){
+		if($restritos[$r["codigo_tema"]]){
+			array_push($restritos[$r["codigo_tema"]],$r["id_grupo"]);
+		}
+		else{
+			$restritos[$r["codigo_tema"]] = array($r["id_grupo"]);
+		}
+	}
+	return $restritos;
+}
+/*
+Function: listaLayersIndevidos
+
+Lista os layers de um mapfile que sao restritos e que nao sao permitidos ao usuario logado
+*/
+function listaLayersIndevidos($map_file){
+	$indevidos = array();
+	$restritos = listaTemasRestritos();
+	if(count($restritos) > 0){
+		$gruposusr = listaGruposUsrLogin();
+		$m = ms_newMapObj($map_file);
+		$c = $m->numlayers;
+		for ($i=0;$i < $c;++$i)	{
+			$layer = $m->getlayer($i);
+			$meta = $layer->getmetadata("temaoriginal");
+			if($meta != ""){
+				$t = $restritos[$meta];
+				if(!in_array($t,$gruposusr)){
+					array_push($indevidos,$layer->name);
+				}
+			}
+		}
+	}
+	return $indevidos;
+}
+/*
+ Function: listaTemasIndevidos
+
+Lista os temas que sao restritos e que nao sao permitidos ao usuario logado
+*/
+function listaTemasIndevidos(){
+	$indevidos = array();
+	$restritos = listaTemasRestritos();
+	if(count($restritos) > 0){
+		$gruposusr = listaGruposUsrLogin();
+		$c = count($gruposusr);
+		reset($restritos);
+		while (list($key, $val) = each($restritos)) {
+			//var_dump($val);var_dump($gruposusr);exit;
+			if(array_search($gruposusr,$val) === true || $c == 0){
+				array_push($indevidos,$key);
+			}
+		}
+	}
+	return $indevidos;
+}
+/*
+ Function: listaGruposUsrLogin
+
+Lista os os grupos ao qual pertence o usuario atualmente logado
+*/
+function listaGruposUsrLogin(){
+	if(empty($_COOKIE["i3geocodigologin"])){
+		return array();
+	}
+	session_write_close();
+	$nameatual = session_name();
+	$idatual = session_id();
+	session_name("i3GeoLogin");
+	session_id($_COOKIE["i3geocodigologin"]);
+	session_start();
+	$res = $_SESSION["gruposusr"];
+	session_name("$nameatual");
+	session_id($idatual);
+	session_start();
+	return $res;
+}
 ?>

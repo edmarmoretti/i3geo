@@ -1080,6 +1080,7 @@ function refazerLayer()
 		$nl = ms_newLayerObj($mapatema,$layernovo);
 		$nl->set("name",$codigomap);
 		$nl->setmetadata("nomeoriginal","");
+		$nl->setmetadata("temaoriginal","");
 		$nl->setmetadata("olopacity","");
 		$nl->setmetadata("olstatus","");
 		$nl->setmetadata("gmopacity","");
@@ -1283,7 +1284,7 @@ function adicionaGrupoUsrTema(){
 	if($q){
 		$teste = $q->fetchAll();
 		if(count($teste) == 0){
-			$dbhw->query("INSERT INTO ".$esquemaadmin."i3geousr_grupotema (id_tema,id_grupo) VALUES ($id_tema,$id_grupo)");
+			$dbhw->query("INSERT INTO ".$esquemaadmin."i3geousr_grupotema (id_tema,id_grupo) VALUES ($id_tema , $id_grupo)");
 		}
 	}
 	return "ok";

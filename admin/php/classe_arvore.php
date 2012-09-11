@@ -39,6 +39,8 @@ Classe utilizada para compor a &aacute;rvore de temas ou obter dados espec&iacut
 */
 class Arvore
 {
+	//temas com acesso restrito e que nao podem ser acessados pelo usuario que esta logado
+	public $temassindevidos;
 	protected $locaplic;
 	//subgrupos que tem pelo menos um tema
 	//public $sql_subgrupos = "select i3geoadmin_subgrupos.nome_subgrupo,i3geoadmin_n2.id_n2,i3geoadmin_n2.publicado,i3geoadmin_n2.n2_perfil from i3geoadmin_n2 LEFT JOIN i3geoadmin_subgrupos ON i3geoadmin_n2.id_subgrupo = i3geoadmin_subgrupos.id_subgrupo ";
@@ -73,40 +75,36 @@ class Arvore
 		if(!empty($esquemaadmin)){
 			$this->esquemaadmin = $esquemaadmin.".";
 		}
-		if(!isset($convUTF))
-		{
+		if(!isset($convUTF)){
 			$convUTF = true;
 		}
 		$this->convUTF = $convUTF;
 		$this->dbh = $dbh;
 
 		$this->idioma = $idioma;
-		if($idioma == "pt")
-		{
+		if($idioma == "pt"){
 			$coluna = "nome_grupo";
 		}
-		else
-		{$coluna = $idioma;
+		else{
+			$coluna = $idioma;
 		}
 		$this->sql_grupos = "select i3geoadmin_grupos.$coluna as nome_grupo,id_n1,id_menu,i3geoadmin_n1.publicado,n1_perfil from ".$this->esquemaadmin."i3geoadmin_n1 LEFT JOIN ".$this->esquemaadmin."i3geoadmin_grupos ON i3geoadmin_n1.id_grupo = i3geoadmin_grupos.id_grupo ";
 
-		if($idioma == "pt")
-		{
+		if($idioma == "pt"){
 			$coluna = "nome_subgrupo";
 		}
-		else
-		{$coluna = $idioma;
+		else{
+			$coluna = $idioma;
 		}
 		$this->sql_subgrupos = "select i3geoadmin_subgrupos.$coluna as nome_subgrupo,i3geoadmin_n2.id_n2,i3geoadmin_n2.publicado,i3geoadmin_n2.n2_perfil from ".$this->esquemaadmin."i3geoadmin_n2 LEFT JOIN ".$this->esquemaadmin."i3geoadmin_subgrupos ON i3geoadmin_n2.id_subgrupo = i3geoadmin_subgrupos.id_subgrupo ";
 
-		if($idioma == "pt")
-		{
+		if($idioma == "pt"){
 			$coluna = "nome_tema";
 		}
-		else
-		{$coluna = $idioma;
+		else{
+			$coluna = $idioma;
 		}
-		$this->sql_temasraiz = "select id_raiz,i3geoadmin_raiz.id_tema,$coluna as nome_tema,tipoa_tema,perfil FROM ".$this->esquemaadmin."i3geoadmin_raiz LEFT JOIN ".$this->esquemaadmin."i3geoadmin_temas ON i3geoadmin_temas.id_tema = i3geoadmin_raiz.id_tema ";
+		$this->sql_temasraiz = "select codigo_tema,id_raiz,i3geoadmin_raiz.id_tema,$coluna as nome_tema,tipoa_tema,perfil FROM ".$this->esquemaadmin."i3geoadmin_raiz LEFT JOIN ".$this->esquemaadmin."i3geoadmin_temas ON i3geoadmin_temas.id_tema = i3geoadmin_raiz.id_tema ";
 		$this->sql_temasSubgrupo = "select i3geoadmin_temas.tipoa_tema, i3geoadmin_temas.codigo_tema,i3geoadmin_temas.tags_tema,i3geoadmin_n3.id_n3,i3geoadmin_temas.$coluna as nome_tema,i3geoadmin_n3.publicado,i3geoadmin_n3.n3_perfil,i3geoadmin_n3.id_tema,i3geoadmin_temas.download_tema,i3geoadmin_temas.ogc_tema from ".$this->esquemaadmin."i3geoadmin_n3 LEFT JOIN ".$this->esquemaadmin."i3geoadmin_temas ON i3geoadmin_n3.id_tema = i3geoadmin_temas.id_tema ";
 
 		//$this->sql_temas = "select kmz_tema,nacessos,id_tema,kml_tema,ogc_tema,download_tema,tags_tema,tipoa_tema,link_tema,desc_tema,$coluna as nome_tema,codigo_tema from i3geoadmin_temas ";
@@ -120,15 +118,32 @@ class Arvore
 		$this->editor = false;
 		$this->editor = $this->verificaOperacaoSessao("admin/php/classe_arvore/editor");
 		$this->pubsql = " (publicado != 'NAO' or publicado isnull) and ";
-		if($this->editor)
-		{
+		if($this->editor){
 			$this->pubsql = "";
 		}
+		if(!function_exists("listaTemasIndevidos")){
+			include_once(__DIR__."/../../classesphp/funcoes_gerais.php");
+		}
+		$this->temasindevidos = listaTemasIndevidos();
 	}
 	function __destruct()
 	{
 		$this->dbh = null;
 		$this->dbhw = null;
+	}
+	/*
+	 Function: validaTemas
+
+	 Remove de um array os temas que nao sao permitidos ao usuario atualmente logado
+	 */
+	function validaTemas($linhas,$id){
+		$res = array();
+		foreach($linhas as $l){
+			if(!in_array($l[$id],$this->temasindevidos)){
+				array_push($res,$l);
+			}
+		}
+		return $res;
 	}
 	/*
 	 Function: pegaListaDeMenus
@@ -145,20 +160,20 @@ class Arvore
 	*/
 	function pegaListaDeMenus($perfil)
 	{
-		if($this->idioma == "pt")
-		{
+		if($this->idioma == "pt"){
 			$coluna = "nome_menu";
 		}
-		else
-		{$coluna = $this->idioma;
+		else{
+			$coluna = $this->idioma;
 		}
 		if($this->editor == true)
 		{
 			$perfil = "";
 			$sql = "SELECT publicado_menu,'' as perfil_menu,aberto,desc_menu,id_menu,$coluna as nome_menu from ".$this->esquemaadmin."i3geoadmin_menus order by nome_menu";
 		}
-		else
+		else{
 			$sql = "SELECT publicado_menu,perfil_menu,aberto,desc_menu,id_menu,$coluna as nome_menu from ".$this->esquemaadmin."i3geoadmin_menus where publicado_menu != 'NAO' or publicado_menu isnull order by nome_menu";
+		}
 		$regs = $this->execSQL($sql);
 		$resultado = array();
 		foreach($regs as $reg)
@@ -460,10 +475,10 @@ class Arvore
 
 	{array}
 	*/
-	function pegaGruposMenu($id_menu)
-	{
+	function pegaGruposMenu($id_menu){
 		$grupos = $this->execSQL($this->sql_grupos."where ".$this->pubsql." id_menu='$id_menu' order by ordem");
 		$raiz = $this->execSQL($this->sql_temasraiz."where i3geoadmin_raiz.id_menu='$id_menu' and i3geoadmin_raiz.nivel = 0 order by ordem");
+		$raiz = $this->validaTemas($raiz,"codigo_tema");
 		return array("raiz"=>$raiz,"grupos"=>$grupos);
 	}
 	/*
@@ -485,6 +500,7 @@ class Arvore
 	{
 		$subgrupos = $this->execSQL($this->sql_subgrupos."where ".$this->pubsql." i3geoadmin_n2.id_n1='$id_n1' order by ordem");
 		$raiz = $this->execSQL($this->sql_temasraiz."where i3geoadmin_raiz.nivel = 1 and i3geoadmin_raiz.id_nivel = $id_n1 order by ordem");
+		$raiz = $this->validaTemas($raiz,"codigo_tema");
 		return array("raiz"=>$raiz,"subgrupos"=>$subgrupos);
 	}
 	/*
@@ -504,7 +520,9 @@ class Arvore
 	*/
 	function pegaTemasRaizGrupo($id_menu,$id_n1)
 	{
-		return $this->execSQL($this->sql_temasraiz."where i3geoadmin_raiz.nivel = 1 and i3geoadmin_raiz.id_nivel = $id_n1 order by ordem");
+		$raiz = $this->execSQL($this->sql_temasraiz."where i3geoadmin_raiz.nivel = 1 and i3geoadmin_raiz.id_nivel = $id_n1 order by ordem");
+		$raiz = $this->validaTemas($raiz,"codigo_tema");
+		return $raiz;
 	}
 	/*
 	 Function: pegaTema
@@ -548,7 +566,9 @@ class Arvore
 	*/
 	function pegaTemasSubGrupo($id_n2)
 	{
-		return $this->execSQL($this->sql_temasSubgrupo."where ".$this->pubsql." i3geoadmin_n3.id_n2='$id_n2' order by ordem");
+		$temas = $this->execSQL($this->sql_temasSubgrupo."where ".$this->pubsql." i3geoadmin_n3.id_n2='$id_n2' order by ordem");
+		$temas = $this->validaTemas($temas,"codigo_tema");
+		return $temas;
 	}
 	/*
 	 Function: formataGruposMenu
@@ -573,12 +593,10 @@ class Arvore
 		$dados = $this->pegaGruposMenu($id_menu);
 		$resultado = array();
 		$temasraiz = array();
-		foreach($dados["raiz"] as $temar)
-		{
+		foreach($dados["raiz"] as $temar){
 			$temasraiz[] = $this->formataTema($temar["id_tema"]);
 		}
-		if(count($dados["grupos"]) == 0)
-		{
+		if(count($dados["grupos"]) == 0){
 			$grupos[] = array();
 		}
 		foreach($dados["grupos"] as $grupo)

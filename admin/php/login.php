@@ -106,6 +106,7 @@ switch (strtoupper($funcao))
 			$_SESSION["senha"] = $senha;
 			$_SESSION["papeis"] = $teste["papeis"];
 			$_SESSION["operacoes"] = $teste["operacoes"];
+			$_SESSION["gruposusr"] = $teste["gruposusr"];
 			$fingerprint = 'I3GEOLOGIN' . $_SERVER['HTTP_USER_AGENT'];
 			//var_dump($_SESSION["operacoes"]);exit;
 			$_SESSION['fingerprint'] = md5($fingerprint . session_id());
@@ -238,6 +239,7 @@ function autenticaUsuario($usuario,$senha){
 	if(count($dados) > 0){
 		$pa = pegaDados("select * from ".$esquemaadmin."i3geousr_papelusuario where id_usuario = ".$dados[0]["id_usuario"],$locaplic);
 		$op = pegadados("SELECT O.codigo, PU.id_usuario FROM ".$esquemaadmin."i3geousr_operacoes AS O JOIN ".$esquemaadmin."i3geousr_operacoespapeis AS OP ON O.id_operacao = OP.id_operacao JOIN ".$esquemaadmin."i3geousr_papelusuario AS PU ON OP.id_papel = PU.id_papel	WHERE id_usuario = ".$dados[0]["id_usuario"],$locaplic);
+		$gr = pegadados("SELECT * from ".$esquemaadmin."i3geousr_grupousuario where id_usuario = ".$dados[0]["id_usuario"]);
 		$operacoes = array();
 		foreach($op as $o){
 			$operacoes[$o["codigo"]] = true;
@@ -246,7 +248,11 @@ function autenticaUsuario($usuario,$senha){
 		foreach($pa as $p){
 			$papeis[] = $p["id_papel"];
 		}
-		$r = array("usuario"=>$dados[0],"papeis"=>$papeis,"operacoes"=>$operacoes);
+		$gruposusr = array();
+		foreach($gr as $p){
+			$gruposusr[] = $p["id_grupo"];
+		}
+		$r = array("usuario"=>$dados[0],"papeis"=>$papeis,"operacoes"=>$operacoes,"gruposusr"=>$gruposusr);
 		return $r;
 	}
 	else{
