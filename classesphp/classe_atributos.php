@@ -41,46 +41,46 @@ class Atributos
 {
 	/*
 	Variavel: $mapa
-	
+
 	Objeto mapa
 	*/
 	public $mapa;
 	/*
 	Variavel: $arquivo
-	
+
 	Arquivo map file
 	*/
 	protected $arquivo;
 	/*
 	Variavel: $layer
-	
+
 	Objeto layer
 	*/
 	protected $layer;
 	/*
 	Variavel: $nome
-	
+
 	Nome do layer
 	*/
 	protected $nome;
 	/*
 	Variavel: $qyfile
-	
+
 	Nome do arquivo de sele&ccedil;&atilde;o (.qy)
 	*/
 	public $qyfile;
 	/*
 	Variavel: $projO
-	
+
 	Objeto projection original do mapa. Obtido apenas na interface Googlemaps
 	*/
 	public $projO;
 	/*
 	Variavel: $v
-	
+
 	Vers&atilde;o atual do Mapserver (primeiro d&iacute;gito)
 	*/
-	public $v;		
+	public $v;
 /*
 Function: __construct
 
@@ -126,15 +126,15 @@ $ext - (opcional) extens&atilde;o geogr&aacute;fica que ser&aacute; aplicada ao 
 			if($this->mapa->getmetadata("interface") == "googlemaps"){
 				$this->projO = $this->mapa->getProjection();
 				$this->mapa->setProjection("init=epsg:4618,a=6378137,b=6378137");
-			}			
+			}
 		}
 	}
 /*
 function: salva
 
 Salva o mapfile atual
- 
-*/	
+
+*/
  	function salva()
  	{
 	  	if (connection_aborted()){exit();}
@@ -171,7 +171,7 @@ xmin ymin xmax ymax separados por espa&ccedil;o.
 				$projInObj = ms_newprojectionobj($prjTema);
 				$projOutObj = ms_newprojectionobj($prjMapa);
 				$ret->project($projInObj, $projOutObj);
-			}		
+			}
 		}
 		$ext = $ret->minx." ".$ret->miny." ".$ret->maxx." ".$ret->maxy;
 		if (($shape->type == MS_SHP_POINT) || ($shape->type == 0))
@@ -207,7 +207,7 @@ $registro - &Iacute;ndice do registro que ser&aacute; consultado.
 		if($this->v == 6){
 			$this->layer->open();
 			$shape = $this->layer->getShape(new resultObj($registro));
-		}		
+		}
 		else{
 			if (@$this->layer->open() == MS_SUCCESS)
 			{
@@ -218,7 +218,7 @@ $registro - &Iacute;ndice do registro que ser&aacute; consultado.
 					$shape = $this->layer->getfeature($registro,-1);
 					$fechou = $this->layer->close();
 				}
-			}		
+			}
 		}
 		$ext = $this->extensaoShape($shape);
 		return($ext);
@@ -274,7 +274,7 @@ $tipo - Tipo de busca brasil|null
 		$this->layer->setfilter("");
 		//le o arquivo de query se existir e checa se existe sele&ccedil;&atilde;o para o tema
 		$items = pegaItens($this->layer,$this->mapa);
-		
+
 		$shapes = retornaShapesSelecionados($this->layer,$this->arquivo,$this->mapa);
 		if(count($shapes) == 0){
 			$shapes = retornaShapesMapext($this->layer,$this->mapa);
@@ -348,12 +348,12 @@ $dadosDaClasse - sim|nao Indica se ser&atilde;o obtidos os dados que descrevem a
 		if($this->layer->getmetadata("itensdesc") != ""){
 			$alias = array();
 			$aliasdesc = explode(",",$this->layer->getmetadata("itensdesc"));
-			$aliasitens = explode(",",$this->layer->getmetadata("itens"));			
+			$aliasitens = explode(",",$this->layer->getmetadata("itens"));
 			$aliasc = array_combine($aliasitens,$aliasdesc);
 			if(strtoupper($this->layer->getmetadata("convcaracter")) == "NAO")
 			{$convC = false;}
 			else
-			{$convC = true;}			
+			{$convC = true;}
 			foreach($items as $i){
 				if($aliasc[$i]){
 					if($convC)
@@ -377,14 +377,14 @@ $dadosDaClasse - sim|nao Indica se ser&atilde;o obtidos os dados que descrevem a
 		if(strtoupper($this->layer->getmetadata("convcaracter")) == "NAO")
 		{$convC = false;}
 		else
-		{$convC = true;}		
+		{$convC = true;}
 		if ($tipolista == "selecionados")
 		{
 			$chk = "CHECKED";
 			if ($fim != "")
 			{
 				if (($res_count >= $fim) && ($fim < $res_count))
-				{$res_count = $fim;}		
+				{$res_count = $fim;}
 			}
 			for ($i = $inicio; $i < $res_count; ++$i)
 			{
@@ -408,7 +408,7 @@ $dadosDaClasse - sim|nao Indica se ser&atilde;o obtidos os dados que descrevem a
 				}
 				$registros[] = array("indice"=>$indx,"valores"=>$valitem,"status"=>$chk,"classe"=>$classe);
 			}
-			$resultadoFinal[] = array("registros"=>$registros);	 	
+			$resultadoFinal[] = array("registros"=>$registros);
 		}
 		if ($tipolista == "tudo")
 		{
@@ -425,7 +425,7 @@ $dadosDaClasse - sim|nao Indica se ser&atilde;o obtidos os dados que descrevem a
 				if ($fim != "")
 				{
 					if (($res_count >= $fim) && ($fim < $res_count))
-					{$res_count = $fim;}		
+					{$res_count = $fim;}
 				}
 				$sopen = $this->layer->open();
 				if($sopen == MS_FAILURE){return "erro";}
@@ -439,10 +439,10 @@ $dadosDaClasse - sim|nao Indica se ser&atilde;o obtidos os dados que descrevem a
 					else{
 						$result = $this->layer->getResult($i);
 						$indx  = $result->shapeindex;
-						$shape = $this->layer->getfeature($indx,-1);						
-					}						
+						$shape = $this->layer->getfeature($indx,-1);
+					}
 					foreach ($items as $item)
-					{						
+					{
 						$valori = "";
 						if(@$shape->values[$item])
 						{
@@ -528,7 +528,7 @@ $onde - Tipo de abrang&ecirc;ncia espacial (brasil ou mapa)
 			if(strtoupper($l->getmetadata("convcaracter")) == "NAO")
 			{$convC = false;}
 			else
-			{$convC = true;}			
+			{$convC = true;}
 			$filtro = $l->getfilterstring();
 			if ($filtro != ""){$l->setfilter("");}
 			$buscas = "&Aacute;&Atilde;У&Otilde;&Ocirc;&aacute;а&atilde;&acirc;ут&ocirc;&otilde;&uacute;ы&iacute;&eacute;&ecirc;&ccedil;";
@@ -649,7 +649,7 @@ $onde - Tipo de abrang&ecirc;ncia espacial (brasil ou mapa)
 						$ret = $this->extensaoShape($shape,$l);
 						if (($prjTema != "") && ($prjMapa != $prjTema))
 						{$ret->project($projInObj, $projOutObj);}
-						$novoreg["box"] = $ret;			
+						$novoreg["box"] = $ret;
 						$novoreg["valores"] = $r;
 						$encontrado = "nao";
 						$fr[] = $novoreg;
@@ -687,7 +687,7 @@ Include:
 		$shapes = retornaShapesSelecionados($this->layer,$this->arquivo,$this->mapa);
 		if(count($shapes) == 0){
 			$shapes = retornaShapesMapext($this->layer,$this->mapa);
-		}		
+		}
 		//pega os valores
 		foreach($shapes as $shape)
 		{
@@ -715,7 +715,7 @@ Include:
 		//faz os calculos
 		if(file_exists($this->locaplic."/classe_estatistica.php"))
 		include_once($this->locaplic."/classe_estatistica.php");
-		else	
+		else
 		include_once("classe_estatistica.php");
 		$estat = new estatistica();
 		$resultado = $estat->calcula($valoresn);
@@ -873,34 +873,36 @@ $wkt - (opcional) {boolean} inclui ou n&atilde;o o valor do wkt da geometria
 */
 	function identifica2($opcao,$xy,$resolucao,$ext="",$listaDeTemas="",$wkt="nao")
 	{
-		if($listaDeTemas != "")
-		{
-			$listaDeTemas = str_replace(" ",",",$listaDeTemas);
-			$temas = explode(",",$listaDeTemas);
-		}
-		else
-		{$temas = $this->mapa->getalllayernames();}
-		foreach ($temas as $tem)
-		{
-			$vermultilayer = new vermultilayer();
-			$vermultilayer->verifica($this->arquivo,$tem);
-			if ($vermultilayer->resultado == 1) // o tema e multi layer
+		if ($opcao != "tema"){
+			if($listaDeTemas != "")
 			{
-				foreach (($vermultilayer->temasvisiveis) as $tv)
-				{
-					$l = $this->mapa->getlayerbyname($tv);
-					if ($l->getmetadata("identifica") != "nao")
-					{$listatemas[] = $tv;}
-				}
+				$listaDeTemas = str_replace(" ",",",$listaDeTemas);
+				$temas = explode(",",$listaDeTemas);
 			}
 			else
+			{$temas = $this->mapa->getalllayernames();}
+			foreach ($temas as $tem)
 			{
-		 		$l = $this->mapa->getlayerbyname($tem);
-				if (($l->getmetadata("escondido") == "") && ($l->getmetadata("identifica") != "nao"))
-				{$listatemas[] = $tem;}
+				$vermultilayer = new vermultilayer();
+				$vermultilayer->verifica($this->arquivo,$tem);
+				if ($vermultilayer->resultado == 1) // o tema e multi layer
+				{
+					foreach (($vermultilayer->temasvisiveis) as $tv)
+					{
+						$l = $this->mapa->getlayerbyname($tv);
+						if ($l->getmetadata("identifica") != "nao")
+						{$listatemas[] = $tv;}
+					}
+				}
+				else
+				{
+			 		$l = $this->mapa->getlayerbyname($tem);
+					if (($l->getmetadata("escondido") == "") && ($l->getmetadata("identifica") != "nao"))
+					{$listatemas[] = $tem;}
+				}
 			}
+			$listatemas = array_unique($listatemas);
 		}
-		$listatemas = array_unique($listatemas);
 		$xyarray = explode(",",$xy);
 		$resultados = array();
 		//pesquisa um tema
@@ -1086,7 +1088,7 @@ $wkt - (opcional) {boolean} inclui ou n&atilde;o o valor do wkt da geometria
 
 	$item - Item &uacute;nico que ser&aacute; identificado.
 
-	$tiporetorno - Tipo de retorno dos dados. Se for vazio, o retorno &eacute; formatado como string, se for shape, retorna o objeto shape 
+	$tiporetorno - Tipo de retorno dos dados. Se for vazio, o retorno &eacute; formatado como string, se for shape, retorna o objeto shape
 	*/
 	function identificaQBP($tema,$x,$y,$map_file,$resolucao,$item="",$tiporetorno="")
 	{
@@ -1131,7 +1133,7 @@ $wkt - (opcional) {boolean} inclui ou n&atilde;o o valor do wkt da geometria
 					if(strtoupper($f) == "TEXT/PLAIN")
 					{$formatoinfo = "text/plain";}
 				}
-						
+
 			}
 			$srs = $layer->getmetadata("wms_srs");
 			$srss = explode(" ",$srs);
@@ -1160,7 +1162,7 @@ $wkt - (opcional) {boolean} inclui ou n&atilde;o o valor do wkt da geometria
 				$resposta = str_ireplace(">","zzzzzzzzzz",$resposta);
 			}
 			$resultado[] = $resposta;
-			return $resultado;		
+			return $resultado;
 		}
 		if(($layer->connectiontype != MS_WMS) && ($layer->type == MS_LAYER_RASTER))
 		{
@@ -1223,7 +1225,7 @@ $wkt - (opcional) {boolean} inclui ou n&atilde;o o valor do wkt da geometria
 			{
 				$valori = array();
 				$shape = $layer->getShape($layer->getResult($i));
-				
+
 				if ($tiporetorno == "shape")
 				{
 					$layer->close();
@@ -1321,7 +1323,7 @@ $wkt - (opcional) {boolean} inclui ou n&atilde;o o valor do wkt da geometria
 		if(strtoupper($layer->getmetadata("convcaracter")) == "NAO")
 		{$convC = false;}
 		else
-		{$convC = true;}		
+		{$convC = true;}
 		//
 		//opera&ccedil;&atilde;o especial para o caso de wms
 		//
@@ -1345,7 +1347,7 @@ $wkt - (opcional) {boolean} inclui ou n&atilde;o o valor do wkt da geometria
 				{
 					if(strtoupper($f) == "TEXT/PLAIN")
 					{$formatoinfo = "text/plain";}
-				}						
+				}
 			}
 			else
 			{
@@ -1359,7 +1361,7 @@ $wkt - (opcional) {boolean} inclui ou n&atilde;o o valor do wkt da geometria
 			$res = str_replace("INFOFORMAT","INFO_FORMAT",$res);
 			$res2 = $layer->getWMSFeatureInfoURL($ptimg->x, $ptimg->y, 1,"MIME");
 			$res2 = str_replace("INFOFORMAT","INFO_FORMAT",$res2);
-			
+
 			$resposta = file($res);
 			$n = array();
 			if(strtoupper($formatoinfo) == "TEXT/HTML")
@@ -1388,7 +1390,7 @@ $wkt - (opcional) {boolean} inclui ou n&atilde;o o valor do wkt da geometria
 					$resposta = file($res);
 					$cabecalho = str_replace('"   "','"|"',$resposta[0]);
 					$cabecalho = explode("|",$cabecalho);
-					
+
 					$linha = str_replace('"  "','"|"',$resposta[1]);
 					$linha = explode("|",$linha);
 					for($i=0;$i < count($cabecalho);++$i)
@@ -1417,22 +1419,22 @@ $wkt - (opcional) {boolean} inclui ou n&atilde;o o valor do wkt da geometria
 		{$itens = $itensLayer;}
 		else
 		{$itens = explode(",",$itens);}
-		
+
 		if($itensdesc == "")
 		{$itensdesc = $itensLayer;}//array_fill(0, $nitens-1,'');}
 		else
 		{$itensdesc = explode(",",$itensdesc);}
-		
+
 		if($lks == "")
 		{$lks = array_fill(0, $nitens-1,'');}
 		else
 		{$lks = explode(",",$lks);}
-				
+
 		if($itemimg == "")
 		{$itemimg = array_fill(0, $nitens-1,'');}
 		else
-		{$itemimg = explode(",",$itemimg);}	
-			
+		{$itemimg = explode(",",$itemimg);}
+
 		if($locimg == "")
 		{$locimg = array_fill(0, $nitens-1,'');}
 		else
@@ -1465,7 +1467,7 @@ $wkt - (opcional) {boolean} inclui ou n&atilde;o o valor do wkt da geometria
 			$wkt = "nao";
 			$layer->set("toleranceunits",MS_PIXELS);
 			$layer->set("tolerance",$resolucao);
-			$ident = @$layer->queryByPoint($pt, 0, 0); //0.01);	
+			$ident = @$layer->queryByPoint($pt, 0, 0); //0.01);
 		}
 		if (($layer->type == MS_LAYER_POINT) || ($layer->type == MS_LAYER_LINE) || ($layer->type == MS_LAYER_CHART))
 		{
@@ -1487,7 +1489,7 @@ $wkt - (opcional) {boolean} inclui ou n&atilde;o o valor do wkt da geometria
 			if(strtoupper($layer->getmetadata("convcaracter")) == "NAO")
 			{$convC = false;}
 			else
-			{$convC = true;}			
+			{$convC = true;}
 			if($sopen == MS_FAILURE){return "erro";}
 			for ($i = 0; $i < $res_count; ++$i)
 			{
@@ -1497,7 +1499,7 @@ $wkt - (opcional) {boolean} inclui ou n&atilde;o o valor do wkt da geometria
 				else{
 					$result = $layer->getResult($i);
 					$shp_index  = $result->shapeindex;
-					$shape = $layer->getfeature($shp_index,-1);								
+					$shape = $layer->getfeature($shp_index,-1);
 				}
 				$conta = 0;
 				//var_dump($itens);exit;
@@ -1537,7 +1539,7 @@ $wkt - (opcional) {boolean} inclui ou n&atilde;o o valor do wkt da geometria
 							{$img = "<img src='".$locimg[$conta]."//".$shape->values[$itemimg[$conta]]."' //>";}
 							else
 							if($itemimg[$conta] != "")
-							{$img = "<img src='".$shape->values[$itemimg[$conta]]."' //>";}					
+							{$img = "<img src='".$shape->values[$itemimg[$conta]]."' //>";}
 							//indica se o item &eacute; tbm uma etiqueta
 							$etiqueta = "nao";
 							if(in_array($it,$tips))
@@ -1572,15 +1574,15 @@ $wkt - (opcional) {boolean} inclui ou n&atilde;o o valor do wkt da geometria
 	}
 	/*
 	Function: converte
-	
+
 	Converte uma string de ISO-8859-1 para UTF-8
-	
+
 	Parametro:
-	
+
 	$texto - string que ser&aacute; convertida
-	
+
 	Return:
-	
+
 	{string}
 	*/
 	function converte($texto)
