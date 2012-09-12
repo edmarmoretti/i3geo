@@ -873,7 +873,7 @@ $wkt - (opcional) {boolean} inclui ou n&atilde;o o valor do wkt da geometria
 */
 	function identifica2($opcao,$xy,$resolucao,$ext="",$listaDeTemas="",$wkt="nao")
 	{
-		if ($opcao != "tema"){
+		if ($opcao != "tema" && $opcao != "tip"){
 			if($listaDeTemas != "")
 			{
 				$listaDeTemas = str_replace(" ",",",$listaDeTemas);
@@ -971,6 +971,7 @@ $wkt - (opcional) {boolean} inclui ou n&atilde;o o valor do wkt da geometria
 		if ($opcao == "tip")
 		{
 			$ltemp = array();
+			$listatemas = $this->mapa->getalllayernames();
 			foreach ($listatemas as $tema)
 			{
 				$tl = $this->mapa->getlayerbyname($tema);
