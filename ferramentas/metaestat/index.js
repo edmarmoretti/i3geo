@@ -51,7 +51,7 @@ i3GEOF.metaestat = {
 	},
 	analise: {
 		inicia: function(iddiv){
-			if(!iddiv){
+			if(!iddiv || !$i(iddiv)){
 				iddiv = "i3geoCartoAnalise_corpo";
 			}
 			if(i3GEOF.metaestat.INTERFACE == "flutuante"){
@@ -103,7 +103,7 @@ i3GEOF.metaestat = {
 				alert("erro: i3geoCartoComboMedidasVariavel???");
 				return;
 			}
-			if(!iddiv){
+			if(!iddiv || !$i(iddiv)){
 				iddiv = "i3geoCartoClasses_corpo";
 			}
 			if(i3GEOF.metaestat.INTERFACE == "flutuante"){
@@ -154,6 +154,13 @@ i3GEOF.metaestat = {
 				'</div>';
 			return ins;
 		},
+		botaoAdicionarCamada: function(){
+			new YAHOO.widget.Button(
+				"i3GEOcartoBotaoAdicionarCamada",
+				{onclick:{fn: i3GEOF.metaestat.comum.adicionaCamada}}
+			);
+			$i("i3GEOcartoBotaoAdicionarCamada-button").style.width = i3GEOF.metaestat.LARGURA - 25 + "px";
+		},
 		comboTipoRep: function(){
 			var onde = $i("i3geoCartoTipoRep"),
 				ins,i,
@@ -171,11 +178,7 @@ i3GEOF.metaestat = {
 			ins += "</select>";
 			if(onde){
 				onde.innerHTML = ins;
-				new YAHOO.widget.Button(
-					"i3GEOcartoBotaoAdicionarCamada",
-					{onclick:{fn: i3GEOF.metaestat.comum.adicionaCamada}}
-				);
-				$i("i3GEOcartoBotaoAdicionarCamada-button").style.width = i3GEOF.metaestat.LARGURA - 25 + "px";
+				i3GEOF.metaestat.classes.botaoAdicionarCamada();
 			}
 			return ins;
 		},
@@ -590,7 +593,7 @@ i3GEOF.metaestat = {
 	},
 	principal: {
 		inicia: function(iddiv){
-			if(!iddiv){
+			if(!iddiv || !$i(iddiv)){
 				iddiv = "i3geoCartoParametros_corpo";
 			}
 			if(i3GEOF.metaestat.INTERFACE == "flutuante"){
@@ -696,6 +699,34 @@ i3GEOF.metaestat = {
 			ins += "</select>";
 			return ins;
 		},
+		botaoInfo: function(){
+			new YAHOO.widget.Button(
+				"i3GEOcartoBotaoInfo",
+				{onclick:{fn: i3GEOF.metaestat.principal.maisInfo}}
+			);
+			$i("i3GEOcartoBotaoInfo-button").style.width = (i3GEOF.metaestat.LARGURA / 2) - 15 + "px";
+		},
+		botaoJanelaEditor: function(){
+			new YAHOO.widget.Button(
+				"i3GEOcartoBotaoEditor",
+				{onclick:{fn: i3GEOF.metaestat.editor.inicia}}
+			);
+			$i("i3GEOcartoBotaoEditor-button").style.width = (i3GEOF.metaestat.LARGURA / 2) - 15 + "px";
+		},
+		botaoJanelaClasses: function(){
+			new YAHOO.widget.Button(
+				"i3GEOcartoBotaoClasses",
+				{onclick:{fn: i3GEOF.metaestat.classes.inicia}}
+			);
+			$i("i3GEOcartoBotaoClasses-button").style.width = (i3GEOF.metaestat.LARGURA / 2) - 15 + "px";
+		},
+		botaoJanelaAnalise: function(){
+			new YAHOO.widget.Button(
+				"i3GEOcartoBotaoAnalise",
+				{onclick:{fn: i3GEOF.metaestat.analise.inicia}}
+			);
+			$i("i3GEOcartoBotaoAnalise-button").style.width = (i3GEOF.metaestat.LARGURA / 2) - 15 + "px";
+		},
 		opcoesVariaveis: function(){
 			var onde = $i("i3geoCartoVariaveis"),
 				temp = function(dados){
@@ -709,26 +740,10 @@ i3GEOF.metaestat = {
 					ins += i3GEOF.metaestat.principal.comboVariaveis(dados,"i3geoCartoComboVariavel","i3GEOF.metaestat.principal.comboVariaveisOnchange");
 					if(onde){
 						onde.innerHTML = ins;
-						new YAHOO.widget.Button(
-							"i3GEOcartoBotaoInfo",
-							{onclick:{fn: i3GEOF.metaestat.principal.maisInfo}}
-						);
-						$i("i3GEOcartoBotaoInfo-button").style.width = (i3GEOF.metaestat.LARGURA / 2) - 15 + "px";
-						new YAHOO.widget.Button(
-							"i3GEOcartoBotaoEditor",
-							{onclick:{fn: i3GEOF.metaestat.editor.inicia}}
-						);
-						$i("i3GEOcartoBotaoEditor-button").style.width = (i3GEOF.metaestat.LARGURA / 2) - 15 + "px";
-						new YAHOO.widget.Button(
-							"i3GEOcartoBotaoClasses",
-							{onclick:{fn: i3GEOF.metaestat.classes.inicia}}
-						);
-						$i("i3GEOcartoBotaoClasses-button").style.width = (i3GEOF.metaestat.LARGURA / 2) - 15 + "px";
-						new YAHOO.widget.Button(
-							"i3GEOcartoBotaoAnalise",
-							{onclick:{fn: i3GEOF.metaestat.analise.inicia}}
-						);
-						$i("i3GEOcartoBotaoAnalise-button").style.width = (i3GEOF.metaestat.LARGURA / 2) - 15 + "px";
+						i3GEOF.metaestat.principal.botaoInfo();
+						i3GEOF.metaestat.principal.botaoJanelaEditor();
+						i3GEOF.metaestat.principal.botaoJanelaClasses();
+						i3GEOF.metaestat.principal.botaoJanelaAnalise();
 					}
 					return ins;
 				};
