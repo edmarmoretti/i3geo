@@ -40,48 +40,48 @@ class vermultilayer
 {
 	/*
 	Variavel: $resultado
-	
+
 	Indica se &eacute; multi-layer ou n&atilde;o (0 ou 1)
 	*/
 	var $resultado;
 	/*
 	Variavel: $temas
-	
+
 	Lista de códigos dos temas
 	*/
 	var $temas; //lista de nomes de temas se for um grupo
 	/*
 	Variavel: $layers
-	
+
 	Lista de objetos layers
 	*/
 	var $layers; //lista de objetos temas se for um grupo
 	/*
 	Variavel: $nomes
-	
+
 	Lista de nomes dos temas
 	*/
 	var $nomes; //lista de nomes se for um grupo
 	/*
 	Variavel: $nomesvisiveis
-	
+
 	Lista dos nomes dos temas vis&iacute;veis
 	*/
 	var $nomesvisiveis; //nomes dos temas vis&iacute;veis na escala
 	/*
 	Variavel: $temasvisiveis
-	
+
 	Lista com os códigos dos temas vis&iacute;veis
 	*/
 	var $temasvisiveis; //temas vi'siveis na escala
 	/*
 	function: verifica
-	
+
 	Verifica se um tema &eacute; multilayer
-	
+
 	parameters:
 	$mapfile - arquivo mapfile
-	
+
 	$tema - código do tema que ser&aacute; verificado
 	*/
 	function verifica($mapfile,$tema) //$mapfile = arquivo .map, $tema = nome do layer
@@ -89,16 +89,17 @@ class vermultilayer
 		$map = ms_newMapObj($mapfile);
 		$map->preparequery();
 		$escala = $map->scaledenom ;
-		$todoslayers = $map->getAlllayernames();
 		$multilayer = 0;
 		$temas = array();
 		$layers = array();
 		$nomes = array();
 		$nomesvisiveis = array();
 		$temasvisiveis = array();
-		foreach ($todoslayers as $temai)
+
+		$numlayers = $map->numlayers;
+		for ($i=0;$i < $numlayers;$i++)
 		{
-			$layer = $map->getlayerbyname($temai);
+			$layer = $map->getlayer($i);
 			$testa = 0;
 			//verifica se o tema &eacute; visivel na escala
 			$mins = $layer->minscaledenom;
@@ -131,10 +132,11 @@ class vermultilayer
 					$multilayer = 1;
 					$temas[] = $temai;
 					$layers[] = $layer;
-					$nomes[] = pegaNome($layer);
+					$pn = pegaNome($layer);
+					$nomes[] = $pn;
 					if ($testa == 0)
 					{
-						$nomesvisiveis[] = pegaNome($layer);
+						$nomesvisiveis[] = $pn;
 						$temasvisiveis[] = $temai;
 					}
 				}

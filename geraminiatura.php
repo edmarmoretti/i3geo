@@ -186,11 +186,11 @@ function verificaMiniatura($map,$tipo,$admin=false)
 			echo "erro no arquivo $tema <br>";
 			return;
 		}
-		$temasn = $nmapa->getAllLayerNames();
 		$dados = "";
-		foreach ($temasn as $teman)
+		$numlayers = $nmapa->numlayers;
+		for ($i=0;$i < $numlayers;$i++)
 		{
-			$layern = $nmapa->getLayerByName($teman);
+			$layern = $nmapa->getlayer($i);
 			$layern->set("status",MS_DEFAULT);
 			ms_newLayerObj($mapa, $layern);
 			autoClasses($layern,$mapa,$locaplic);

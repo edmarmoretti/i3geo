@@ -116,19 +116,20 @@ function retornaWms($map_fileX,$postgis_mapa){
 	//
 	$qyfile = dirname($map_fileX)."/".$_GET["layer"].".php";
 	$qy = file_exists($qyfile);
-	$layersNames = $mapa->getalllayernames();
 	$o = $mapa->outputformat;
 	$o->set("imagemode",MS_IMAGEMODE_RGBA);
 	if(!isset($_GET["telaR"])){//no caso de projecoes remotas, o mapfile nao´e alterado
-		foreach ($layersNames as $layerName)
+		$numlayers = $mapa->numlayers;
+		for ($i=0;$i < $numlayers;$i++)
 		{
-			$l = $mapa->getLayerByname($layerName);
+			$l = $mapa->getlayer($i);
 			if ($l->getmetadata("classesnome") != "")
 			{
 				if(!function_exists("autoClasses"))
 				{include_once("funcoes_gerais.php");}
 				autoClasses($l,$mapa);
 			}
+			$layerName = $l->name;
 			if($layerName != $_GET["layer"])
 			{$l->set("status",MS_OFF);}
 			if($layerName == $_GET["layer"] || $l->group == $_GET["layer"] && $l->group != "")
@@ -213,7 +214,7 @@ function retornaWms($map_fileX,$postgis_mapa){
 			$cor = $classe0->getstyle(0)->color;
 			$cor->setrgb($c->red,$c->green,$c->blue);
 			$cor = $classe0->getstyle(0)->outlinecolor;
-			$cor->setrgb($c->red,$c->green,$c->blue);	
+			$cor->setrgb($c->red,$c->green,$c->blue);
 			$status = $l->open();
 			$status = $l->whichShapes($mapa->extent);
 			while ($shape = $l->nextShape())

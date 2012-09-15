@@ -41,68 +41,68 @@ class Legenda
 {
 	/*
 	Variavel: $mapa
-	
+
 	Objeto mapa
 	*/
 	protected $mapa;
 	/*
 	Variavel: $arquivo
-	
+
 	Arquivo map file
 	*/
 	protected $arquivo;
 	/*
 	Variavel: $layer
-	
+
 	Objeto layer
 	*/
 	protected $layer;
 	/*
 	Variavel: $nome
-	
+
 	Nome do layer
 	*/
 	protected $nome;
 	/*
 	Variavel: $grupo
-	
+
 	Array com os temas do grupo, se houver
 	*/
 	protected $grupo;
 	/*
 	Variavel: $visiveis
-	
+
 	Temas do grupo que s&atilde;o vis&iacute;veis em fun&ccedil;&atilde;o da escala
 	*/
 	protected $visiveis;
 	/*
 	Variavel: $indices
-	
+
 	Indices dos layers do grupo
 	*/
 	protected $indices;
 	/*
 	Variavel: $templateleg
-	
+
 	Template da legenda
 	*/
-	protected $templateleg;	
+	protected $templateleg;
 	/*
 	Variavel: $localaplicacao
-	
+
 	Localiza&ccedil;&atilde;o da aplica&ccedil;&atilde;o
 	*/
 	protected $localaplicacao;
 	/*
 	Variavel: $v
-	
+
 	Vers&atilde;o atual do Mapserver (primeiro d&iacute;gito)
 	*/
-	public $v;	
+	public $v;
 /*
 Function: __construct
 
-Cria um objeto Legenda 
+Cria um objeto Legenda
 
 parameters:
 
@@ -126,7 +126,7 @@ $template - nome do template para processar a legenda
 		$this->v = $this->v["principal"];
 		$this->localaplicacao = $locaplic;
   		if($map_file == "")
-		{return;}		
+		{return;}
 		$this->mapa = ms_newMapObj($map_file);
   		$this->arquivo = $map_file;
    		if($tema != "" && @$this->mapa->getlayerbyname($tema))
@@ -166,8 +166,8 @@ $template - nome do template para processar a legenda
 /*
 function: salva
 
-Salva o mapfile atual 
-*/	
+Salva o mapfile atual
+*/
  	function salva()
  	{
 	  	if (connection_aborted()){exit();}
@@ -194,7 +194,7 @@ Constrói o SLD que &eacute; aplicado ao metadata wms_sld_body. O SLD resultante 
 			if($sld != "")
 			{$this->layer->setmetadata("wms_sld_body",str_replace('"',"'",$sld));}
 			$this->layer->set("type",$tipotemp);
-		}	
+		}
 	}
 
 /*
@@ -248,7 +248,7 @@ string com a legenda HTML
 					{$desligar[] = $conta;}
 					$conta = $conta + 1;
 				}
-			} 
+			}
 		}
 		$legenda = $this->mapa->legend;
 		$legenda->set("template",$this->templateleg);
@@ -269,10 +269,10 @@ string de variaveis no formato javascript que permitem montar a legenda.
 */
 	function legendaGrafica()
 	{
-		$nomeslayers = $this->mapa->getalllayernames();
-		foreach ($nomeslayers as $nomelayer)
+		$numlayers = $mapa->numlayers;
+		for ($i=0;$i < $numlayers;$i++)
 		{
-			$layer = $this->mapa->getlayerbyname($nomelayer);
+			$layer = $mapa->getlayer($i);
 			if (($layer->data != "") && (strtoupper($layer->getmetadata("escondido")) != "SIM") && (strtoupper($layer->getmetadata("tema")) != "NAO"))
 			{
 				if ($layer->numclasses > 0)
@@ -286,7 +286,7 @@ string de variaveis no formato javascript que permitem montar a legenda.
 		$nomeImagem = nomeRandomico();
 		$imgo = $this->mapa->drawlegend();
 		if($imgo->imagepath == "")
-		{echo "Erro IMAGEPATH vazio";exit;}		
+		{echo "Erro IMAGEPATH vazio";exit;}
 		$nomer = ($imgo->imagepath)."leg".$nomeImagem.".png";
 		$imgo->saveImage($nomer);
 		$nomer = ($imgo->imageurl).basename($nomer);
@@ -314,11 +314,11 @@ array
 			$layer = $this->mapa->getlayerbyname($l);
 			//verifica se &eacute; wms ou wfs
 			$c = $layer->connectiontype;
-			
+
 			$s = $layer->getmetadata("wms_sld_url");
 			$im = $layer->getmetadata("legendaimg");
 			$nc = $layer->numclasses;
-								
+
 			//
 			//se for wms e tiver classes define o tipo de layer para poder gerar a legenda corretamente
 			//
@@ -329,7 +329,7 @@ array
 				if($tiporep == "linear")
 				{$layer->set("type",MS_LAYER_LINE);}
 				if ($tiporep == "pontual")
-				{$layer->set("type",MS_LAYER_POINT);}						
+				{$layer->set("type",MS_LAYER_POINT);}
 			}
 			//
 			//se for WMS e n&atilde;o tiver classes, tenta pegar a legenda via requisi&ccedil;&atilde;o WMS
@@ -506,7 +506,7 @@ Retorna uma lista de s&iacute;mbolos clic&aacute;veis no formato HTML.
 
 Para cada tipo de simbologia deve haver um arquivo .map com as defini&ccedil;&otilde;es b&aacute;sicas.
 
-Todos os s&iacute;mbolos do arquivo symbols/simbolos ser&atilde;o retornados como imagens. 
+Todos os s&iacute;mbolos do arquivo symbols/simbolos ser&atilde;o retornados como imagens.
 
 parameters:
 
@@ -570,7 +570,7 @@ String no formato HTML com as imagens dos s&iacute;mbolos
 				$nomel = $l->name;
 				$tematemp= $this->mapa->getlayerbyname($nomel);
 				$c = $tematemp->getClass(0);
-				$e = $c->getstyle(0);				
+				$e = $c->getstyle(0);
 				$e->set("symbolname",$nomes);
 				$e->set("size",$tamanho);
 				$e->set("width",$width);
@@ -654,7 +654,7 @@ $symbolname - Nome do s&iacute;mbolo.
 
 $size - Tamanho que ser&aacute; aplicado ao s&iacute;mbolo.
 
-$opacidade - Opacidade 
+$opacidade - Opacidade
 */
 	function aplicaParametro($classe,$estilo,$outlinecolor,$backgroundcolor,$color,$symbolname,$size,$opacidade,$width,$pattern,$angle)
 	{
@@ -755,7 +755,7 @@ array - "imagecolor"=>$imagecolor,"transparent"=>transparent,"position"=>$positi
 		}
 		else
 		$labelsize = $label->size;
-		
+
 		$tipofonte = $label->type;
 		return(array("tipofonte"=>$tipofonte,"font"=>$font,"imagecolor"=>$imagecolor,"transparent"=>transparent,"position"=>$position,"status"=>$status,"outlinecolor"=>$outlinecolor,"keyspacingy"=>$keyspacingy,"keyspacingx"=>$keyspacingx,"keysizey"=>$keysizey,"keysizex"=>$keysizex,"height"=>$height,"width"=>$width,"labelsize"=>$labelsize));
 	}
@@ -812,7 +812,7 @@ $width
 		$cor = explode(",",$imagecolor);
 		$corres->setRGB($cor[0],$cor[1],$cor[2]);
 		$label = $legenda->label;
-		
+
 		if ($fonte != "bitmap")
 		{
 			$label->set("type",MS_TRUETYPE);

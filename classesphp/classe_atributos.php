@@ -742,9 +742,11 @@ $resolucao - Resolucao de busca.
 */
 	function identifica($opcao,$xy,$resolucao)
 	{
-		$temas = $this->mapa->getalllayernames();
-		foreach ($temas as $tem)
+		$numlayers = $mapa->numlayers;
+		for ($i=0;$i < $numlayers;$i++)
 		{
+			$layer = $mapa->getlayer($i);
+			$tem = $l->name;
 			$vermultilayer = new vermultilayer();
 			$vermultilayer->verifica($this->arquivo,$tem);
 			if ($vermultilayer->resultado == 1) // o tema e multi layer
@@ -758,8 +760,7 @@ $resolucao - Resolucao de busca.
 			}
 			else
 			{
-		 		$l = $this->mapa->getlayerbyname($tem);
-				if (($l->getmetadata("escondido") == "") && ($l->getmetadata("identifica") != "nao"))
+				if (($layer->getmetadata("escondido") == "") && ($layer->getmetadata("identifica") != "nao"))
 				{$listatemas[] = $tem;}
 			}
 		}
@@ -971,10 +972,11 @@ $wkt - (opcional) {boolean} inclui ou n&atilde;o o valor do wkt da geometria
 		if ($opcao == "tip")
 		{
 			$ltemp = array();
-			$listatemas = $this->mapa->getalllayernames();
-			foreach ($listatemas as $tema)
+			$numlayers = $this->mapa->numlayers;
+			for ($i=0;$i < $numlayers;$i++)
 			{
-				$tl = $this->mapa->getlayerbyname($tema);
+				$tl = $mapa->getlayer($i);
+				$tema = $tl->name;
 				$itemtip = $tl->getmetadata("TIP");
 				if ($itemtip != "")
 				{

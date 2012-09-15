@@ -190,12 +190,12 @@ function verifica($map,$solegenda)
 		}
 		//echo $base;exit;
 		$mapa = ms_newMapObj($base);
-		
+
 		error_reporting(0);
-		$temasn = $mapa->getAllLayerNames();
-		foreach ($temasn as $teman)
+		$numlayers = $mapa->numlayers;
+		for ($i=0;$i < $numlayers;$i++)
 		{
-			$layern = $mapa->getLayerByName($teman);
+			$layern = $mapa->getlayer($i);
 			if (!empty($postgis_mapa))
 			{
 				if ($layern->connectiontype == MS_POSTGIS)
@@ -211,7 +211,7 @@ function verifica($map,$solegenda)
 				}
 			}
 		}
-		
+
 		if(!stristr($tema, '.php') === FALSE){
 			echo "<br>Arquivo <i>$tema</i> &eacute; um programa PHP. O teste pode n&atilde;o funcionar.<br>";
 			include_once($locaplic."/".$tema);
@@ -234,7 +234,7 @@ function verifica($map,$solegenda)
 						printf("<br>Error in %s: %s<br>\n", $error->routine, $error->message);
 						$error = $error->next();
 					}
-					return;					
+					return;
 				}
 			}
 			else{
@@ -255,11 +255,11 @@ function verifica($map,$solegenda)
 					return;
 				}
 			}
-			$temasn = $nmapa->getAllLayerNames();
+			$numlayers = $nmapa->numlayers;
 			$dados = "";
-			foreach ($temasn as $teman)
+			for ($i=0;$i < $numlayers;$i++)
 			{
-				$layern = $nmapa->getLayerByName($teman);
+				$layern = $mapa->getlayer($i);
 				$layern->set("status",MS_DEFAULT);
 				if (!empty($postgis_mapa))
 				{

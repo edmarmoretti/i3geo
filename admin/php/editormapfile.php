@@ -212,12 +212,11 @@ switch (strtoupper($funcao))
 		$mapfile = $locaplic."/temas/".$codigoMap.".map";
 		$mapa = ms_newMapObj($mapfile);
 		$nomes = $mapa->getalllayernames();
-		if($cachedir != "")
-		{
+		if($cachedir != ""){
 			$d = $cachedir;
 		}
-		else
-		{$d = $dir_tmp."/cache";
+		else{
+			$d = $dir_tmp."/cache";
 		}
 		foreach($nomes as $nome)
 		{
@@ -1080,7 +1079,7 @@ function refazerLayer()
 		$nl = ms_newLayerObj($mapatema,$layernovo);
 		$nl->set("name",$codigomap);
 		$nl->setmetadata("nomeoriginal","");
-		$nl->setmetadata("temaoriginal","");
+		$nl->setmetadata("arquivotemaoriginal","");
 		$nl->setmetadata("olopacity","");
 		$nl->setmetadata("olstatus","");
 		$nl->setmetadata("gmopacity","");
@@ -1216,17 +1215,17 @@ function autoClassesLayer()
 	{$geral = $locaplic."/aplicmap/geral1.map";
 	}
 	$mapageral = ms_newMapObj($geral);
-	$nomestemp = $mapageral->getalllayernames();
-	foreach($nomestemp as $l)
+	$numlayers = $mapageral->numlayers;
+	for ($i=0;$i < $numlayers;$i++)
 	{
-		$layertemp = $mapageral->getlayerbyname($l);
+		$layertemp = $mapageral->getlayer($i);
 		$layertemp->set("status",MS_DELETE);
 	}
 	$mapatemp = ms_newMapObj($mapfile);
-	$nomestemp = $mapatemp->getalllayernames();
-	foreach($nomestemp as $l)
+	$numlayers = $mapatemp->numlayers;
+	for ($i=0;$i < $numlayers;$i++)
 	{
-		$layertemp = $mapatemp->getlayerbyname($l);
+		$layertemp = $mapatemp->getlayer($i);
 		ms_newLayerObj($mapageral, $layertemp);
 	}
 	$mapageral->save($nometemp);

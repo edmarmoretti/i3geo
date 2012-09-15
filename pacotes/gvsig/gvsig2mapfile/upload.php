@@ -47,9 +47,10 @@ if (isset($_FILES['i3GEOuploadfile']['name']))
 		$gm = new gvsig2mapfile($Arquivon);
 		$views = $gm->getViewsNames();
 		$dataView = $gm->getViewData($views[0]);
-		$lnames = $mapn->getalllayernames();
-		foreach($lnames as $name){
-			$layer = $mapn->getlayerbyname($name);
+		$numlayers = $mapn->numlayers;
+		for ($i=0;$i < $numlayers;$i++)
+		{
+			$layer = $mapn->getlayer($i);
 			$layer->set("status",MS_DELETE);
 		}
 		$next = $dataView["extent"];
@@ -59,7 +60,7 @@ if (isset($_FILES['i3GEOuploadfile']['name']))
 		$mapn->save(str_replace(".gvp",".map",$Arquivon));
 		$handle = fopen(str_replace(".gvp",".map",$Arquivon), "r");
 		echo "<html>";
-		while (!feof($handle)) 
+		while (!feof($handle))
     	{
         	$linha = fgets($handle);
 			echo $linha."<br>";

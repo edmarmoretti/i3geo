@@ -1130,10 +1130,10 @@ function alteraTemas()
 			if($mapa = @ms_newMapObj($mapfile))
 			{
 				$mapa = ms_newMapObj($mapfile);
-				$nomes = $mapa->getalllayernames();
-				foreach($nomes as $n)
+				$numlayers = $mapa->numlayers;
+				for ($i=0;$i < $numlayers;$i++)
 				{
-					$layer = $mapa->getlayerbyname($n);
+					$layer = $mapa->getlayer($i);
 					$layer->setmetadata("permitedownload",strtolower($download));
 					$layer->setmetadata("permiteogc",strtolower($ogc));
 					$layer->setmetadata("permitekml",strtolower($kml));

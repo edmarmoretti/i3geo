@@ -107,7 +107,7 @@ Salva o mapfile atual
 */
  	function salva()
  	{
-	  	if (connection_aborted()){exit();}
+	  	if(connection_aborted()){exit();}
 	  	$this->mapa->save($this->arquivo);
 	}
 /*
@@ -928,7 +928,7 @@ Os layers que formam grupos tamb&eacute;m s&atilde;o processados, tendo seus nom
 Cada novo layer receber&aacute; um novo nome, definido de forma aleatória.
 Os nomes dos temas podem conter o caminho completo do mapfile.
 O nome original do LAYER (NAME) sera armazenado no metadata nomeoriginal
-O nome do tema (mapfile) original sera armazenado no metadata temaoriginal
+O nome do tema (mapfile) original sera armazenado no metadata arquivotemaoriginal
 
 Parametros:
 
@@ -985,8 +985,9 @@ $random - indica se os nomes dos novos layers ser&atilde;o modificados ou nao
 						{$nlayer->setmetadata("classe","");}
 						autoClasses($nlayer,$this->mapa);
 						$nlayer->set("status",MS_DEFAULT);
+						$nNome = str_replace(".map","",basename($nomemap));
+						$nlayer->setmetadata("arquivotemaoriginal",$nNome);
 						$nlayer->setmetadata("nomeoriginal",$nlayer->name);
-						$nlayer->setmetadata("temaoriginal",str_replace(".map","",basename($nomemap)));
 						$nlayer->set("name",$nomeunico[$n]);
 						//altera o nome do grupo se existir
 						if ($nlayer->group != " " && $nlayer->group != "" )

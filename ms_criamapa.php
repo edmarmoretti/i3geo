@@ -480,7 +480,8 @@ function adaptaLayers(){
 	global $tmpfname;
 	$mapa = ms_newMapObj($tmpfname);
 	$path = $mapa->shapepath;
-	for($i=0;$i<($mapa->numlayers);++$i)
+	$numlayers = $mapa->numlayers;
+	for($i=0;$i<$numlayers;++$i)
 	{
 		$layer = $mapa->getLayer($i);
 		$ok = true;
@@ -648,7 +649,8 @@ function incluiTemasIniciais()
 						if ($layern->name == "estadosl")
 						{$layern->set("data",$locaplic."/aplicmap/dados/estados.shp");}
 						$layern->setmetadata("nomeoriginal",$layern->name);
-						$layern->setmetadata("temaoriginal",str_replace(".map","",basename($arqtemp)));
+						$nNome = str_replace(".map","",basename($arqtemp)).
+						$layern->setmetadata("arquivotemaoriginal",$nNome);
 						autoClasses($layern,$mapn);
 						//
 						//necess&aacute;rio para n&atilde;o alterar a extens&atilde;o do mapa por esse par&acirc;metro
@@ -1103,9 +1105,10 @@ function incluiMapaGvsig($gvsiggvp,$gvsigview){
 	$gm = new gvsig2mapfile($gvsiggvp);
 	$dataView = $gm->getViewData($gvsigview);
 	//var_dump($dataView);exit;
-	$lnames = $mapn->getalllayernames();
-	foreach($lnames as $name){
-		$layer = $mapn->getlayerbyname($name);
+	$numlayers = $mapn->numlayers;
+	for ($i=0;$i < $numlayers;$i++)
+	{
+		$layer = $mapn->getlayer($i);
 		$layer->set("status",MS_DELETE);
 	}
 	$next = $dataView["extent"];

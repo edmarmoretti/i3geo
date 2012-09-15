@@ -40,12 +40,12 @@ class Atlas
 /*
 Function: __construct
 
-Cria um objeto atlas 
+Cria um objeto atlas
 
 parameters:
 
 $atlasxml - Objeto xml com o atlas.
-*/  	
+*/
 	function __construct($xml)
 	{
   		error_reporting(E_ALL);
@@ -152,10 +152,10 @@ locaplic - localiza&ccedil;&atilde;o do i3geo no servidor
 		$temasa = array();
 		$layers = array();
 		$mapa = ms_newMapObj($map_file);
-		$nomes = $mapa->getalllayernames();
-		foreach ($nomes as $n)
+		$numlayers = $mapa->numlayers;
+		for ($i=0;$i < $numlayers;$i++)
 		{
-			$l = $mapa->getlayerbyname($n);
+			$l = $mapa->getlayer($i);
 			if (($l->getmetadata("ATLAS")) != "nao")
 			{$l->set("status",MS_DELETE);}
 		}
@@ -203,12 +203,12 @@ locaplic - localiza&ccedil;&atilde;o do i3geo no servidor
 			$m = new Mapa($map_file);
 			$m->adicionaTema((implode(",",$temasa)),$locaplic,"nao");
 			$m->salva();
-			
+
 			$mapa = ms_newMapObj($map_file);
-			$nomes = $mapa->getalllayernames();
-			foreach ($nomes as $n)
+			$numlayers = $mapa->numlayers;
+			for ($i=0;$i < $numlayers;$i++)
 			{
-				$l = $mapa->getlayerbyname($n);
+				$l = $mapa->getlayer($i);
 				if (($l->getmetadata("ATLAS")) != "nao")
 				{$l->set("status",MS_OFF);}
 			}
@@ -233,12 +233,12 @@ locaplic - localiza&ccedil;&atilde;o do i3geo no servidor
 			}
 			if (count($newext) == 4)
 			{$ext->setextent($newext[0], $newext[1], $newext[2], $newext[3]);}
-			$mapa->save($map_file);	
+			$mapa->save($map_file);
 		}
 		if(!function_exists("sobeAnno")){
 			include_once("funcoes_gerais.php");
 		}
-		sobeAnno($map_file);		
+		sobeAnno($map_file);
 		if ($w == ""){$w = 300;}
 		if($h == ""){$h = 300;}
 		return (array("link"=>$link,"w"=>$w,"h"=>$h,"mapexten"=>implode(" ",$newext)));

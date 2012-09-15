@@ -2100,10 +2100,10 @@ function downloadTema2($map_file,$tema,$locaplic,$dir_tmp,$postgis_mapa)
 	if($teste == "")
 	{
 		$maptemp = ms_newMapObj($temasdir."/".$tema.".map");
-		$temastemp = $maptemp->getalllayernames();
-		foreach ($temastemp as $tt)
+		$numlayers = $maptemp->numlayers;
+		for ($i=0;$i < $numlayers;$i++)
 		{
-			$ll = $maptemp->getlayerbyname($tt);
+			$ll = $maptemp->getlayer($i);
 			$permite = $ll->getmetadata("permitedownload");
 			if($permite != "nao")
 			{ms_newLayerObj($map, $ll);}
@@ -2255,10 +2255,10 @@ function downloadTema2($map_file,$tema,$locaplic,$dir_tmp,$postgis_mapa)
 	$nomemapfileurl = "";
 	if(file_exists($temasdir."/".$tema.".map")){
 		$maptemp = ms_newMapObj($temasdir."/".$tema.".map");
-		$temas = $maptemp->getAllLayerNames();
-		foreach ($temas as $l)
+		$numlayers = $maptemp->numlayers;
+		for ($i=0;$i < $numlayers;$i++)
 		{
-			$gl = $maptemp->getlayerbyname($l);
+			$gl = $maptemp->getlayer($i);
 			$gl->set("data","");
 			$gl->set("connection","");
 		}
@@ -3101,10 +3101,10 @@ function listaLayersIndevidos($map_file){
 		$c = $m->numlayers;
 		for ($i=0;$i < $c;++$i)	{
 			$layer = $m->getlayer($i);
-			$meta = $layer->getmetadata("temaoriginal");
+			$meta = $layer->getmetadata("arquivotemaoriginal");
 			if($meta != ""){
 				$t = $restritos[$meta];
-				if(!in_array($t,$gruposusr)){
+				if($t && !in_array($t,$gruposusr)){
 					array_push($indevidos,$layer->name);
 				}
 			}

@@ -3,7 +3,7 @@ body
 {margin:20px;font-family: Verdana, Arial, Helvetica, sans-serif;font-size: 14px;width:300px}
 A
 {text-align:left;font-family: Verdana, Arial, Helvetica, sans-serif;color: #2F4632;}
-A:hover 
+A:hover
 {color: #4142ff;font-weight: normal;font-family: Verdana, Arial, Helvetica, sans-serif;}
 </style>
 <body>
@@ -75,10 +75,10 @@ if($leb->type == "MS_BITMAP"){
 	$leb->set("font","Arial");
 }
 //altera o nome das classes vazias
-$temas = $map->getalllayernames();
-foreach ($temas as $tema)
+$numlayers = $map->numlayers;
+for ($i=0;$i < $numlayers;$i++)
 {
-	$layer = $map->getlayerbyname($tema);
+	$layer = $map->getlayer($i);
 	if (($layer->data != "") && (strtolower($layer->getmetadata("escondido")) != "sim") && (strtolower($layer->getmetadata("tema")) != "sim"))
 	{
 		if ($layer->numclasses > 0)

@@ -126,13 +126,14 @@ $mapa = ms_newMapObj($map_fileX);
 $ret = $mapa->extent;
 $qyfile = dirname($map_fileX)."/".$_GET["layer"].".php";
 $qy = file_exists($qyfile);
-
-$layersNames = $mapa->getalllayernames();
 $cache = false;
 if(!isset($_GET["telaR"])){//no caso de projecoes remotas, o mapfile nao´e alterado
-	foreach ($layersNames as $layerName)
+
+	$numlayers = $mapa->numlayers;
+	for ($i=0;$i < $numlayers;$i++)
 	{
-		$l = $mapa->getLayerByname($layerName);
+		$l = $mapa->getlayer($i);
+		$layerName = $l->name;
 		if ($l->getmetadata("classesnome") != "")
 		{
 			if(!function_exists("autoClasses"))
@@ -176,8 +177,10 @@ if(!isset($_GET["telaR"])){//no caso de projecoes remotas, o mapfile nao´e alter
 }
 else{
 	$mapa->setProjection("proj=merc,a=6378137,b=6378137,lat_ts=0.0,lon_0=0.0,x_0=0.0,y_0=0,k=1.0,units=m");
-	foreach ($layersNames as $layerName){
-		$l = $mapa->getLayerByname($layerName);
+	$numlayers = $mapa->numlayers;
+	for ($i=0;$i < $numlayers;$i++)
+	{
+		$l = $mapa->getlayer($i);
 		if($l->getProjection() == "" )
 		{$l->setProjection("proj=latlong,a=6378137,b=6378137");}
 	}
@@ -260,7 +263,7 @@ else
 		}
 		$l->close();
 	}
-	
+
 }
 if (!function_exists('imagepng'))
 {
@@ -297,7 +300,7 @@ else{
 	header('Content-Length: '.filesize($nomer));
 	header('Content-Type: image/png');
 	fpassthru(fopen($nomer, 'rb'));
-	exit;	
+	exit;
 }
 function salvaCacheImagem($cachedir,$bbox,$layer,$map,$w,$h){
 	global $img,$map_size;
@@ -333,7 +336,7 @@ function carregaCacheImagem($cachedir,$bbox,$layer,$map,$w,$h){
 		header('Content-Type: image/png');
 		fpassthru(fopen($nome, 'rb'));
 		exit;
-	}	
+	}
 }
 function nomeRand($n=10)
 {
