@@ -269,10 +269,10 @@ string de variaveis no formato javascript que permitem montar a legenda.
 */
 	function legendaGrafica()
 	{
-		$numlayers = $mapa->numlayers;
+		$numlayers = $this->$mapa->numlayers;
 		for ($i=0;$i < $numlayers;$i++)
 		{
-			$layer = $mapa->getlayer($i);
+			$layer = $this->$mapa->getlayer($i);
 			if (($layer->data != "") && (strtoupper($layer->getmetadata("escondido")) != "SIM") && (strtoupper($layer->getmetadata("tema")) != "NAO"))
 			{
 				if ($layer->numclasses > 0)

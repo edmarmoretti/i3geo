@@ -975,7 +975,7 @@ $wkt - (opcional) {boolean} inclui ou n&atilde;o o valor do wkt da geometria
 			$numlayers = $this->mapa->numlayers;
 			for ($i=0;$i < $numlayers;$i++)
 			{
-				$tl = $mapa->getlayer($i);
+				$tl = $this->mapa->getlayer($i);
 				$tema = $tl->name;
 				$itemtip = $tl->getmetadata("TIP");
 				if ($itemtip != "")

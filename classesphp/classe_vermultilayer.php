@@ -100,6 +100,7 @@ class vermultilayer
 		for ($i=0;$i < $numlayers;$i++)
 		{
 			$layer = $map->getlayer($i);
+			$temai = $layer->name;
 			$testa = 0;
 			//verifica se o tema &eacute; visivel na escala
 			$mins = $layer->minscaledenom;
