@@ -120,7 +120,7 @@ cores {array} - array com a lista de valores RGB
 		$numclasses = $this->layer->numclasses;
 		if ($numclasses > 0)
 		{
-			for ($i=0; $i < $numclasses; $i++)
+			for ($i=0; $i < $numclasses; ++$i)
 			{
 				$classe = $this->layer->getClass($i);
 				$estilo = $classe->getstyle(0);

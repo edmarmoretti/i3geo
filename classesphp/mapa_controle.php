@@ -153,7 +153,7 @@ if (isset($debug) && strtolower($debug) == "sim")
 //
 //teste de timeout
 //
-//for($i==0;$i<5000000000;$i++){}
+//for($i==0;$i<5000000000;++$i){}
 //
 //ativa o php mapscript e as extens&otilde;es necess&aacute;rias
 //se as extens&otilde;es j&aacute; estiverem carregadas no PHP, vc pode comentar essa linha para que o processamento fique mais r&aacute;pido

@@ -109,12 +109,12 @@ function graficopizza($data,$width,$inclinacao,$shadow_height,$cores,$map_file,$
 	}
 	for ($i=$centerY+$shadow_height; $i>$centerY; $i--)
 	{
-		for ($j = 0; $j < count($slice); $j++)
+		for ($j = 0; $j < count($slice); ++$j)
 		{
 			ImageFilledArc($img, $centerX, $i, $diameterX, $diameterY, $slice[$j][0], $slice[$j][1], $slice[$j][2], IMG_ARC_PIE);
 		}
 	}
-	for ($j = 0; $j < count($slice); $j++)
+	for ($j = 0; $j < count($slice); ++$j)
 	{
 		ImageFilledArc($img, $centerX, $centerY, $diameterX, $diameterY, $slice[$j][0], $slice[$j][1], $slice[$j][3], IMG_ARC_PIE);
 	}

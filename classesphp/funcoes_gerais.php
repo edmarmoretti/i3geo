@@ -204,7 +204,7 @@ function criaImagemR($nomearq)
 	$trans = 250 / ($maxpixel - $minpixel);
 	$img = imagecreatetruecolor($wh[0],$wh[1]);
 	$celula = 0;
-	for ($x = 0; $x < $wh[0]; $x++)
+	for ($x = 0; $x < $wh[0]; ++$x)
 	{
 		for ($y = ($wh[1] - 1); $y >= 0; $y--)
 		{
@@ -2101,7 +2101,7 @@ function downloadTema2($map_file,$tema,$locaplic,$dir_tmp,$postgis_mapa)
 	{
 		$maptemp = ms_newMapObj($temasdir."/".$tema.".map");
 		$numlayers = $maptemp->numlayers;
-		for ($i=0;$i < $numlayers;$i++)
+		for ($i=0;$i < $numlayers;++$i)
 		{
 			$ll = $maptemp->getlayer($i);
 			$permite = $ll->getmetadata("permitedownload");
@@ -2256,7 +2256,7 @@ function downloadTema2($map_file,$tema,$locaplic,$dir_tmp,$postgis_mapa)
 	if(file_exists($temasdir."/".$tema.".map")){
 		$maptemp = ms_newMapObj($temasdir."/".$tema.".map");
 		$numlayers = $maptemp->numlayers;
-		for ($i=0;$i < $numlayers;$i++)
+		for ($i=0;$i < $numlayers;++$i)
 		{
 			$gl = $maptemp->getlayer($i);
 			$gl->set("data","");
@@ -2916,7 +2916,7 @@ $map_file - arquivo mapfile que ser&aacute; processado
 function sobeAnno($map_file){
 	$mapa = ms_newMapObj($map_file);
 	$numlayers = $mapa->numlayers;
-	for ($i=0;$i<$numlayers;$i++){
+	for ($i=0;$i<$numlayers;++$i){
 		$layer = $mapa->getlayer($i);
 		if($layer->type == 4){
 			$temp = ms_newLayerObj($mapa,$layer);

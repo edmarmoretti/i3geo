@@ -39,26 +39,26 @@ class Imagem
 {
 	/*
 	Variavel: $arquivoimg
-	
+
 	Arquivo de imagem
 	*/
 	protected $arquivoimg;
 	/*
 	Variavel: $img
-	
+
 	Objeto imagem
 	*/
 	protected $img;
-	
+
 /*
 Function: __construct
 
-Cria um objeto imagem 
+Cria um objeto imagem
 
 parameters:
 
 $arquivo - Nome completo da imagem em disco.
-*/  	
+*/
 	function __construct($arquivo)
 	{
   		//error_reporting(E_ALL);
@@ -67,7 +67,7 @@ $arquivo - Nome completo da imagem em disco.
   			$this->arquivoimg = $arquivo;
   			$this->img = imagecreatefrompng($arquivo);
 			imagealphablending($this->img, false);
-			imagesavealpha($this->img, true);				
+			imagesavealpha($this->img, true);
   		}
   		else
   		{return null;}
@@ -75,12 +75,12 @@ $arquivo - Nome completo da imagem em disco.
 /*
 function: fundeIm
 
-Funde duas imagens 
+Funde duas imagens
 
 parameters:
 
 $ims: arquivo com a imagem que ser&aacute; sobreposta a atual
-*/ 
+*/
 	function fundeIm($ims)
 	{
   		if (file_exists($ims))
@@ -102,8 +102,8 @@ $ims: arquivo com a imagem que ser&aacute; sobreposta a atual
 /*
 function: cortaBorda
 
-Corta as bordas da imagem baseando-se no primeiro pixel 
-*/ 
+Corta as bordas da imagem baseando-se no primeiro pixel
+*/
 	function cortaBorda()
 	{
 		$sx = imagesx($this->img);
@@ -111,9 +111,9 @@ Corta as bordas da imagem baseando-se no primeiro pixel
 		$corBase = imagecolorat($this->img, 0, 0);
 		$linhai = 0;
 		//pega a linha inicial
-		for ($y = 0; $y < $sy; $y++)
+		for ($y = 0; $y < $sy; ++$y)
 		{
-			for ($x = 0; $x < $sx; $x++)
+			for ($x = 0; $x < $sx; ++$x)
 			{
 				if (imagecolorat($this->img, $x, $y) != $corBase)
 				{$linhai = $y - 1;break;}
@@ -121,9 +121,9 @@ Corta as bordas da imagem baseando-se no primeiro pixel
 			if ($linhai != 0){break;}
 		}
 		//pega a coluna inicial
-		for ($x = 0; $x < $sx; $x++)
+		for ($x = 0; $x < $sx; ++$x)
 		{
-			for ($y = 0; $y < $sy; $y++)
+			for ($y = 0; $y < $sy; ++$y)
 			{
 				if (imagecolorat($this->img, $x, $y) != $corBase)
 				{$colunai = $x - 1;break;}
@@ -133,7 +133,7 @@ Corta as bordas da imagem baseando-se no primeiro pixel
 		//pega a linha final
 		for ($y = $sy - 1; $y > 0; $y--)
 		{
-			for ($x = 0; $x < $sx; $x++)
+			for ($x = 0; $x < $sx; ++$x)
 			{
 				if (imagecolorat($this->img, $x, $y) != $corBase)
 				{$linhaf = $y + 1;break;}
@@ -143,7 +143,7 @@ Corta as bordas da imagem baseando-se no primeiro pixel
 		//pega a coluna final
 		for ($x = $sx - 1; $x > 0; $x--)
 		{
-			for ($y = 0; $y < $sy; $y++)
+			for ($y = 0; $y < $sy; ++$y)
 			{
 				if (imagecolorat($this->img, $x, $y) != $corBase)
 				{$colunaf = $x + 15;break;}
@@ -159,7 +159,7 @@ function: cinzaNormal
 
 Converte a imagem atual em tons de cinza
 
-*/		
+*/
 	function cinzaNormal()
 	{
 		imagefilter($this->img, IMG_FILTER_GRAYSCALE);
@@ -174,9 +174,9 @@ Converte para s&eacute;pia clara
 	{
 		$sx = imagesx($this->img);
 		$sy = imagesy($this->img);
-		for ($x = 0; $x < $sx; $x++)
+		for ($x = 0; $x < $sx; ++$x)
 		{
-			for ($y = 0; $y < $sy; $y++)
+			for ($y = 0; $y < $sy; ++$y)
 			{
 				$rgb = imagecolorat($this->img, $x, $y);
 				$n = min(255,abs((($rgb >> 16) & 0xFF) * .229 + (($rgb >> 8) & 0xFF) * .587 + ($rgb & 0xFF) * .114) + 20);
@@ -197,9 +197,9 @@ Converte para s&eacute;pia normal
 	{
 		$sx = imagesx($this->img);
 		$sy = imagesy($this->img);
-		for ($x = 0; $x < $sx; $x++)
+		for ($x = 0; $x < $sx; ++$x)
 		{
-			for ($y = 0; $y < $sy; $y++)
+			for ($y = 0; $y < $sy; ++$y)
 			{
 				$rgb = imagecolorat($this->img, $x, $y);
 				$n = min(255,abs((($rgb >> 16) & 0xFF) * .229 + (($rgb >> 8) & 0xFF) * .587 + ($rgb & 0xFF) * .114) + 3);

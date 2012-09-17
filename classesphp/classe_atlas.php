@@ -153,7 +153,7 @@ locaplic - localiza&ccedil;&atilde;o do i3geo no servidor
 		$layers = array();
 		$mapa = ms_newMapObj($map_file);
 		$numlayers = $mapa->numlayers;
-		for ($i=0;$i < $numlayers;$i++)
+		for ($i=0;$i < $numlayers;++$i)
 		{
 			$l = $mapa->getlayer($i);
 			if (($l->getmetadata("ATLAS")) != "nao")
@@ -206,7 +206,7 @@ locaplic - localiza&ccedil;&atilde;o do i3geo no servidor
 
 			$mapa = ms_newMapObj($map_file);
 			$numlayers = $mapa->numlayers;
-			for ($i=0;$i < $numlayers;$i++)
+			for ($i=0;$i < $numlayers;++$i)
 			{
 				$l = $mapa->getlayer($i);
 				if (($l->getmetadata("ATLAS")) != "nao")

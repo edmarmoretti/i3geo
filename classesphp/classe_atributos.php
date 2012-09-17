@@ -553,7 +553,7 @@ $onde - Tipo de abrang&ecirc;ncia espacial (brasil ou mapa)
 			if (@$l->queryByrect($ret) == MS_SUCCESS)
 			{
 				$res_count = $l->getNumresults();
-				for ($i = 0; $i < $res_count; $i++)
+				for ($i = 0; $i < $res_count; ++$i)
 				{
 					$valitem = array();
 					if($this->v == 6){
@@ -743,7 +743,7 @@ $resolucao - Resolucao de busca.
 	function identifica($opcao,$xy,$resolucao)
 	{
 		$numlayers = $mapa->numlayers;
-		for ($i=0;$i < $numlayers;$i++)
+		for ($i=0;$i < $numlayers;++$i)
 		{
 			$layer = $mapa->getlayer($i);
 			$tem = $l->name;
@@ -973,7 +973,7 @@ $wkt - (opcional) {boolean} inclui ou n&atilde;o o valor do wkt da geometria
 		{
 			$ltemp = array();
 			$numlayers = $this->mapa->numlayers;
-			for ($i=0;$i < $numlayers;$i++)
+			for ($i=0;$i < $numlayers;++$i)
 			{
 				$tl = $this->mapa->getlayer($i);
 				$tema = $tl->name;

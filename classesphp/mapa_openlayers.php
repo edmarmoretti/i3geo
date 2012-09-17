@@ -84,7 +84,7 @@ $qy = file_exists($qyfile);
 if(!isset($_GET["telaR"])){//no caso de projecoes remotas, o mapfile nao e alterado
 	$numlayers = $mapa->numlayers;
 	$cache = false;
-	for($i = 0;$i < $numlayers;$i++)
+	for($i = 0;$i < $numlayers;++$i)
 	{
 		$l = $mapa->getLayer($i);
 		if ($l->getmetadata("classesnome") != "")

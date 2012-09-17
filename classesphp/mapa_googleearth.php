@@ -120,7 +120,7 @@ function retornaWms($map_fileX,$postgis_mapa){
 	$o->set("imagemode",MS_IMAGEMODE_RGBA);
 	if(!isset($_GET["telaR"])){//no caso de projecoes remotas, o mapfile nao´e alterado
 		$numlayers = $mapa->numlayers;
-		for ($i=0;$i < $numlayers;$i++)
+		for ($i=0;$i < $numlayers;++$i)
 		{
 			$l = $mapa->getlayer($i);
 			if ($l->getmetadata("classesnome") != "")

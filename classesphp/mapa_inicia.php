@@ -244,7 +244,7 @@ function iniciaMapa()
 	$m->mapa->save($nomefundo);
 	$mf = ms_newMapObj($nomefundo);
 	$numlayers = $mf->numlayers;
-	for($i = 0;$i < $numlayers;$i++)
+	for($i = 0;$i < $numlayers;++$i)
 	{
 		$l = $mf->getLayer($i);
 		$l->set("status",MS_DELETE);

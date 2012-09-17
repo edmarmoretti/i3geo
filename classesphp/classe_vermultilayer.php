@@ -97,7 +97,7 @@ class vermultilayer
 		$temasvisiveis = array();
 
 		$numlayers = $map->numlayers;
-		for ($i=0;$i < $numlayers;$i++)
+		for ($i=0;$i < $numlayers;++$i)
 		{
 			$layer = $map->getlayer($i);
 			$temai = $layer->name;
