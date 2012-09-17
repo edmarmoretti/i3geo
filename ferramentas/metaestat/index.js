@@ -591,6 +591,29 @@ i3GEOF.metaestat = {
 			return false;
 		}
 	},
+	regioes: {
+		//guarda a lista de parametros
+		dados: [],
+		//obtem a lista com as regioes da medida
+		lista: function(id_medida_variavel){
+			i3GEOF.metaestat.comum.aguarde($i("i3geoCartoRegioesMedidasVariavel"));
+			var temp = function(dados){
+					i3GEOF.metaestat.regioes.dados = dados;
+					i3GEOF.metaestat.regioes.combo();
+					i3GEOF.metaestat.comum.aguarde($i("i3geoCartoRegioesMedidasVariavel"));
+				};
+			i3GEO.php.listaRegioesMedidaVariavel(id_medida_variavel,temp);
+		},
+		combo: function(){
+			var dados = i3GEOF.metaestat.parametros.dados,
+				n = dados.length,
+				onde = $i("i3geoCartoRegioesMedidasVariavel"),
+				idpar,idcombo,i,novoel,teste;
+			for(i=0;i<n;i++){
+
+			}
+		}
+	},
 	principal: {
 		inicia: function(iddiv){
 			if(!iddiv || !$i(iddiv)){

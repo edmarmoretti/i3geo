@@ -948,6 +948,14 @@ class Metaestat{
 		return $this->execSQL($sql,$id_medida_variavel);
 	}
 	/*
+	 Function: listaRegioesMedidaVariavel
+
+	Lista as regioes de uma medida variavel
+	*/
+	function listaRegioesMedidaVariavel($id_medida_variavel){
+
+	}
+	/*
 	 Function: listaConexao
 
 	Lista as conexoes cadastradas ou uma unica conexao

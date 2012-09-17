@@ -208,6 +208,11 @@ switch (strtoupper($funcao))
 		retornaJSON($m->listaTipoRegiao($codigo_tipo_regiao));
 		exit;
 	break;
+	case "LISTAREGIOESMEDIDAVARIAVEL":
+		$m = new Metaestat();
+		retornaJSON($m->listaRegioesMedidaVariavel($id_medida_variavel));
+		exit;
+		break;
 	case "LISTAAGREGAREGIAO":
 		$m = new Metaestat();
 		if(empty($codigo_tipo_regiao)){

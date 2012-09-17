@@ -1448,6 +1448,15 @@ i3GEO.php = {
 		i3GEO.util.ajaxGet(p,funcao);
 	},
 	/*
+	Function: listaRegioesMedidaVariavel
+
+	Obt&eacute;m a lista de regioes de uma medida de uma vari&aacute;vel do sistema de metadados estat&iacute;sticos
+	*/
+	listaRegioesMedidaVariavel: function(id_medida_variavel,funcao){
+		var p = i3GEO.configura.locaplic+"/admin/php/metaestat.php?funcao=listaRegioesMedidaVariavel&id_medida_variavel="+id_medida_variavel+"&g_sid="+i3GEO.configura.sid;
+		i3GEO.util.ajaxGet(p,funcao);
+	},
+	/*
 	Function: listaValoresParametroMedidaVariavel
 
 	Obt&eacute;m a lista de valores de um par&acirc;metro de uma medida de uma vari&aacute;vel do sistema de metadados estat&iacute;sticos
