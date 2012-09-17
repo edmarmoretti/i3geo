@@ -235,10 +235,15 @@ class Metaestat{
 
 	$todasascolunas - opcional
 	*/
-	function sqlMedidaVariavel($id_medida_variavel,$todasascolunas,$agruparpor="",$tipolayer="polygon"){
+	function sqlMedidaVariavel($id_medida_variavel,$todasascolunas,$agruparpor="",$tipolayer="polygon",$codigo_tipo_regiao = ""){
 		$filtro = false;
 		$dados = $this->listaMedidaVariavel("",$id_medida_variavel);
 		$dadosgeo = $this->listaTipoRegiao($dados["codigo_tipo_regiao"]);
+		$agregaregiao = false;
+		if($dados["codigo_tipo_regiao"] != $codigo_tipo_regiao){
+			$agregaregiao = true;
+			$dadosgeoagregada = $this->listaTipoRegiao($codigo_tipo_regiao);
+		}
 		if($tipolayer != "point"){
 			$colunageo = $dadosgeo["colunageo"];
 		}
@@ -250,11 +255,15 @@ class Metaestat{
 			if(!empty($agruparpor)){
 				$sql .= ",d.".$agruparpor;
 			}
-			$sqlgeo = $sql.",g.".$colunageo;
 		}
 		else{
 			$sql = " SELECT d.* ";
-			$sqlgeo = $sql.",g.".$colunageo;
+		}
+		$sqlgeo = $sql.",g.".$colunageo;
+		//
+		if($agregaregiao == true){
+			$dadosAgregacao = $this->listaAgregaRegiaoFilho($dados["codigo_tipo_regiao"], $codigo_tipo_regiao);
+			$sqlgeo = "g.".$dadosAgregacao["colunaligacao_regiaopai"].",sum(d.".$dados["colunavalor"].") as ".$dados["colunavalor"];
 		}
 		if(empty($agruparpor)){
 			$sql .= " FROM ".$dados["esquemadb"].".".$dados["tabela"]." as d ";
@@ -279,11 +288,18 @@ class Metaestat{
 			$sqlgeo .= " WHERE ".$j;
 		}
 		//atencao: cuidado ao alterar essa string pois ') as foo' pode ser usado para replace em outras funcoes
-		$sqlgeo = $colunageo." from ($sqlgeo) as foo using unique ".$dados["colunaidgeo"]." using srid=".$dadosgeo["srid"];
 		$colunas = $this->colunasTabela($dados["codigo_estat_conexao"],$dados["esquemadb"],$dados["tabela"]);
+		//agregacao com uma regiao maior TODO
+		if($agregaregiao == true){
+			$sqlgeo = "select pg.*,".$dados["colunavalor"]." from (select ".$sqlgeo." __filtro__ group by g.".$dadosAgregacao["colunaligacao_regiaopai"].") as fg, ".$dadosgeoagregada["esquemadb"].".".$dadosgeoagregada["tabela"]." as pg where fg.".$dadosAgregacao["colunaligacao_regiaopai"]." = pg.".$dadosgeoagregada["identificador"];
+			$sqlgeo = $colunageo." from ( $sqlgeo ) as foo using unique ".$dadosAgregacao["colunaligacao_regiaopai"]." using srid=".$dadosgeo["srid"];
+		}
+		else{
+			$sqlgeo = $colunageo." from (".$sqlgeo." __filtro__ ) as foo using unique ".$dados["colunaidgeo"]." using srid=".$dadosgeo["srid"];
+		}
 		return array("sqlagrupamento"=>$sqlagrupamento,"sql"=>$sql,"sqlmapserver"=>$sqlgeo,"filtro"=>$filtro,"colunas"=>$colunas);
 	}
-	function mapfileMedidaVariavel($id_medida_variavel,$filtro="",$todasascolunas = 0,$tipolayer="polygon",$titulolayer="",$id_classificacao="",$agruparpor=""){
+	function mapfileMedidaVariavel($id_medida_variavel,$filtro="",$todasascolunas = 0,$tipolayer="polygon",$titulolayer="",$id_classificacao="",$agruparpor="",$codigo_tipo_regiao=""){
 		//$rand = $this->nomeRandomico();
 		$arq = $this->dir_tmp."/".$this->nomecache.".map";
 		if(!file_exists($arq)){
@@ -298,10 +314,13 @@ class Metaestat{
 			$conexao = $this->listaConexao($meta["codigo_estat_conexao"],true);
 			$conexao = "user=".$conexao["usuario"]." password=".$conexao["senha"]." dbname=".$conexao["bancodedados"]." host=".$conexao["host"]." port=".$conexao["porta"]."";
 			//echo $conexao;exit;
-			$sql = $this->sqlMedidaVariavel($id_medida_variavel,$todasascolunas,$agruparpor,$tipolayer);
+			$sql = $this->sqlMedidaVariavel($id_medida_variavel,$todasascolunas,$agruparpor,$tipolayer,$codigo_tipo_regiao);
 			$sqlf = $sql["sqlmapserver"];
 			if(!empty($filtro)){
-				$sqlf = str_replace(") as foo"," AND ".$filtro." ) as foo",$sqlf);
+				$sqlf = str_replace("__filtro__"," AND ".$filtro,$sqlf);
+			}
+			else{
+				$sqlf = str_replace("__filtro__","",$sqlf);
 			}
 			$classes = "";
 			if(!empty($id_classificacao)){
@@ -709,7 +728,7 @@ class Metaestat{
 			return "Error!: " . $e->getMessage();
 		}
 	}
-	function alteraAgregaRegiao($codigo_tipo_regiao,$id_agregaregiao="",$codigo_tipo_regiao_pai="",$coluna_ligacao_regiaopai=""){
+	function alteraAgregaRegiao($codigo_tipo_regiao,$id_agregaregiao="",$codigo_tipo_regiao_pai="",$colunaligacao_regiaopai=""){
 		try	{
 			if($id_agregaregiao != ""){
 				$this->dbhw->query("UPDATE ".$this->esquemaadmin."i3geoestat_agregaregiao SET colunaligacao_regiaopai = '$colunaligacao_regiaopai', codigo_tipo_regiao_pai = '$codigo_tipo_regiao_pai' WHERE id_agregaregiao = $id_agregaregiao");
@@ -948,12 +967,19 @@ class Metaestat{
 		return $this->execSQL($sql,$id_medida_variavel);
 	}
 	/*
-	 Function: listaRegioesMedidaVariavel
+	 Function: listaRegioesMedida
 
 	Lista as regioes de uma medida variavel
 	*/
-	function listaRegioesMedidaVariavel($id_medida_variavel){
-
+	function listaRegioesMedida($id_medida_variavel){
+		$variavel = $this->listaMedidaVariavel("",$id_medida_variavel);
+		$codigo_tipo_regiao = $variavel["codigo_tipo_regiao"];
+		$regioes[] = $this->listaTipoRegiao($codigo_tipo_regiao);
+		$agregacoes = $this->listaAgregaRegiao($codigo_tipo_regiao);
+		foreach($agregacoes as $a){
+			$regioes[] = $this->listaTipoRegiao($a["codigo_tipo_regiao_pai"]);
+		}
+		return $regioes;
 	}
 	/*
 	 Function: listaConexao
@@ -1039,7 +1065,7 @@ class Metaestat{
 	/*
 	Function: listaTipoRegiao
 
-	Lista os tipos de períodos de tempo cadastrados ou um único período
+	Lista os tipos de regiao cadastrados ou uma unica
 
 	Parametros:
 
@@ -1064,6 +1090,12 @@ class Metaestat{
 		$sql .= " ORDER BY colunaligacao_regiaopai";
 		//echo $sql;exit;
 		return $this->execSQL($sql,$id_agregaregiao);
+	}
+	function listaAgregaRegiaoFilho($codigo_tipo_regiao,$codigo_tipo_regiao_pai){
+		$sql = "select * from ".$this->esquemaadmin."i3geoestat_agregaregiao ";
+		$sql .= "WHERE codigo_tipo_regiao_pai = $codigo_tipo_regiao_pai ";
+		$sql .= "AND codigo_tipo_regiao = $codigo_tipo_regiao";
+		return $this->execSQL($sql,$codigo_tipo_regiao_pai);
 	}
 	function esquemasConexao($codigo_estat_conexao){
 		return $this->execSQLDB($codigo_estat_conexao,"SELECT oid,nspname as esquema FROM pg_namespace group by nspname,oid order by nspname");

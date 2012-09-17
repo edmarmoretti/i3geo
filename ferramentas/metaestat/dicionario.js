@@ -83,5 +83,12 @@ pt:"Edi&ccedil;&atilde;o",
 en:"",
 es:"",
 it:""
-}]
+}],
+"13":[
+{
+pt:"Escolha um tipo de regi&atilde;o",
+en:"",
+es:"",
+it:""
+}],
 };

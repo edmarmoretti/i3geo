@@ -1453,7 +1453,7 @@ i3GEO.php = {
 	Obt&eacute;m a lista de regioes de uma medida de uma vari&aacute;vel do sistema de metadados estat&iacute;sticos
 	*/
 	listaRegioesMedidaVariavel: function(id_medida_variavel,funcao){
-		var p = i3GEO.configura.locaplic+"/admin/php/metaestat.php?funcao=listaRegioesMedidaVariavel&id_medida_variavel="+id_medida_variavel+"&g_sid="+i3GEO.configura.sid;
+		var p = i3GEO.configura.locaplic+"/admin/php/metaestat.php?funcao=listaRegioesMedida&id_medida_variavel="+id_medida_variavel+"&g_sid="+i3GEO.configura.sid;
 		i3GEO.util.ajaxGet(p,funcao);
 	},
 	/*
@@ -1488,8 +1488,8 @@ i3GEO.php = {
 
 	Adiciona uma camada ao mapa baseado no sistema de metadados estat&iacute;sticos
 	*/
-	mapfileMedidaVariavel: function(funcao,id_medida_variavel,filtro,todasascolunas,tipolayer,titulolayer,id_classificacao,agruparpor){
-		var p = i3GEO.configura.locaplic+"/admin/php/metaestat.php?funcao=mapfileMedidaVariavel&formato=json&id_medida_variavel="+id_medida_variavel+"&filtro="+filtro+"&todasascolunas="+todasascolunas+"&tipolayer="+tipolayer+"&titulolayer="+titulolayer+"&id_classificacao="+id_classificacao+"&agruparpor="+agruparpor+"&g_sid="+i3GEO.configura.sid;
+	mapfileMedidaVariavel: function(funcao,id_medida_variavel,filtro,todasascolunas,tipolayer,titulolayer,id_classificacao,agruparpor,codigo_tipo_regiao){
+		var p = i3GEO.configura.locaplic+"/admin/php/metaestat.php?funcao=mapfileMedidaVariavel&formato=json&codigo_tipo_regiao="+codigo_tipo_regiao+"&id_medida_variavel="+id_medida_variavel+"&filtro="+filtro+"&todasascolunas="+todasascolunas+"&tipolayer="+tipolayer+"&titulolayer="+titulolayer+"&id_classificacao="+id_classificacao+"&agruparpor="+agruparpor+"&g_sid="+i3GEO.configura.sid;
 		i3GEO.util.ajaxGet(p,funcao);
 	}
 };

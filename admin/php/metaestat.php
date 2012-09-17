@@ -208,9 +208,9 @@ switch (strtoupper($funcao))
 		retornaJSON($m->listaTipoRegiao($codigo_tipo_regiao));
 		exit;
 	break;
-	case "LISTAREGIOESMEDIDAVARIAVEL":
+	case "LISTAREGIOESMEDIDA":
 		$m = new Metaestat();
-		retornaJSON($m->listaRegioesMedidaVariavel($id_medida_variavel));
+		retornaJSON($m->listaRegioesMedida($id_medida_variavel));
 		exit;
 		break;
 	case "LISTAAGREGAREGIAO":
@@ -414,7 +414,7 @@ switch (strtoupper($funcao))
 			$id_agregaregiao = $m->alteraAgregaRegiao($codigo_tipo_regiao);
 		}
 		else{
-			$id_agregaregiao = $m->alteraAgregaRegiao("",$id_agregaregiao,$codigo_tipo_regiao_pai,$coluna_ligacao_regiaopai);
+			$id_agregaregiao = $m->alteraAgregaRegiao("",$id_agregaregiao,$codigo_tipo_regiao_pai,$colunaligacao_regiaopai);
 			$codigo_tipo_regiao = "";
 		}
 		retornaJSON($m->listaAgregaRegiao($codigo_tipo_regiao,$id_agregaregiao));
@@ -757,8 +757,11 @@ switch (strtoupper($funcao))
 	*/
 	case "MAPFILEMEDIDAVARIAVEL":
 		$m = new Metaestat();
+		if(!isset($codigo_tipo_regiao)){
+			$codigo_tipo_regiao = "";
+		}
 		if($formato == "json"){
-			retornaJSON($m->mapfileMedidaVariavel($id_medida_variavel,$filtro,$todasascolunas,$tipolayer,$titulolayer,$id_classificacao,$agruparpor));
+			retornaJSON($m->mapfileMedidaVariavel($id_medida_variavel,$filtro,$todasascolunas,$tipolayer,$titulolayer,$id_classificacao,$agruparpor,$codigo_tipo_regiao));
 		}
 		exit;
 	break;
