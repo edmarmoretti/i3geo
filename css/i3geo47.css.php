@@ -209,6 +209,59 @@ See http://ie.microsoft.com/testdrive/HTML5/msUserSelect/
 -ms-user-select: none;
 user-select: none;
 }
+/* utilizado pela ferramenta de cartogramas */
+.var_div_relatorio h1{
+font-size: 16px;
+text-align:left;
+}
+.var_div_relatorio h2{
+font-size: 14px;
+text-align:left;
+}
+.var_div_relatorio p{
+font-size:12px;
+line-height:15px;
+margin-bottom:9px;
+text-align:left;
+}
+.var_div_relatorio i{
+font-size:12px;
+line-height:15px;
+margin-bottom:9px;
+text-align:left;
+background-color: white;
+}
+.var_cor1 {
+background-color: rgb(250,250,250);
+width: 95%;
+padding: 5px;
+}
+.var_cor2 {
+background-color: rgb(220,220,220);
+width: 95%;
+padding: 5px;
+}
+#i3geoCartoParametros_corpo select {
+box-shadow:0 1px 5px gray;
+height: 20px;
+}
+.bd div{
+text-align:left;
+}
+.bd p{
+text-align:left;
+}
+#editor_bd p {
+margin-top: 15px;
+}
+#editor_bd input {
+background-color: #F6F6F6;
+border: 1px solid #FAFAFA;
+box-shadow: 0 1px 3px gray;
+color: #426252;
+font-family: Verdana,Arial,Helvetica,sans-serif;
+font-size: 10px;
+}
 /*hack opera */
 @media all and (-webkit-min-device-pixel-ratio:10000), not all and (-webkit-min-device-pixel-ratio:0)
 { .inputsb {border:1px solid black} }

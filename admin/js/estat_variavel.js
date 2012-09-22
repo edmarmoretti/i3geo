@@ -1,75 +1,98 @@
 if(typeof(i3GEOadmin) === 'undefined'){
 	var i3GEOadmin = {};
 }
+//
+//esse script tambem e utilizado em i3geo/ferramentas/metaestat
+//
 i3GEOadmin.variaveis = {
 	/*
 	 * armazena os dados das tabelas auxiliares, como tipos de unidades de medida, etc
 	 */
 	dadosAuxiliares: [],
+	/*
+	 * Funcao que sera executada apos um registro ser atuallizado
+	 * Essa funcao e utilizada para modificar o comportamento dos formularios, ou seja, apos o usuario clicar no botao salvar
+	 * essa funcao e executada no retorno da operacao de alteracao do resgistro no banco de dados
+	 * E utilizado por i3geo/ferramentas/metaestat para customizar os formularios do ajudante de criacao de variaveis
+	 */
+	aposGravar: function(args){
+	},
 	inicia: function(){
+		tree = "";
 		YAHOO.namespace("admin.container");
 		i3GEOadmin.variaveis.listaDadosAuxiliares();
-		i3GEOadmin.variaveis.ativaBotaoAdicionaVariavel("../php/metaestat.php?funcao=alteraVariavel","adiciona");
-		i3GEOadmin.variaveis.ativaBotaoRelatorioCompleto("../php/metaestat.php?funcao=relatorioCompleto","relatorioCompleto");
-		core_carregando("ativa");
-		core_ativaPainelAjuda("ajuda","botaoAjuda");
-		i3GEOadmin.variaveis.arvore.inicia();
-	},
-	ativaBotaoAdicionaVariavel: function(sUrl,idBotao){
-		var adiciona = function(){
+		i3GEOadmin.variaveis.ativaBotaoAdicionaVariavel("estatVariavelAdiciona");
+		i3GEOadmin.variaveis.ativaBotaoRelatorioCompleto("estatVariavelrelatorioCompleto");
+		if($i("estatVariavelajuda")){
+			core_ativaPainelAjuda("estatVariavelajuda","botaoAjuda");
+		}
+		if($i("estatVariavelArvore")){
 			core_carregando("ativa");
-			core_carregando(" adicionando um novo registro");
-			var callback = {
-					success:function(o){
-						try	{
-							core_carregando("desativa");
-							var j = YAHOO.lang.JSON.parse(o.responseText);
-							i3GEOadmin.variaveis.arvore.adicionaNos([j],true);
-							i3GEOadmin.variaveis.editar("variavel",j.codigo_variavel);
-						}
-						catch(e){core_handleFailure(e,o.responseText);}
-					},
-					failure:core_handleFailure,
-					argument: { foo:"foo", bar:"bar" }
-			};
+			i3GEOadmin.variaveis.arvore.inicia();
+		}
+	},
+	ativaBotaoAdicionaVariavel: function(idBotao){
+		if(!$i(idBotao)){
+			return;
+		}
+		var sUrl = i3GEO.configura.locaplic+"/admin/php/metaestat.php?funcao=alteraVariavel",
+			adiciona = function(){
+				core_carregando("ativa");
+				core_carregando(" adicionando um novo registro");
+				var callback = {
+						success:function(o){
+							try	{
+								core_carregando("desativa");
+								var j = YAHOO.lang.JSON.parse(o.responseText);
+								i3GEOadmin.variaveis.arvore.adicionaNos([j],true);
+								i3GEOadmin.variaveis.editar("variavel",j.codigo_variavel);
+							}
+							catch(e){core_handleFailure(e,o.responseText);}
+						},
+						failure:core_handleFailure,
+						argument: { foo:"foo", bar:"bar" }
+				};
 			core_makeRequest(sUrl,callback);
 		};
 		//cria o bot&atilde;o de adi&ccedil;&atilde;o de um novo menu
 		new YAHOO.widget.Button(idBotao,{ onclick: { fn: adiciona } });
 	},
-	ativaBotaoRelatorioCompleto: function(sUrl,idBotao){
-		var adiciona = function(){
-			core_carregando("ativa");
-			core_carregando(" Aguarde");
-			var callback = {
-					success:function(o){
-						try	{
-							core_carregando("desativa");
-							var j = YAHOO.lang.JSON.parse(o.responseText);
-							core_montaEditor("","650px","500px","","Relat&oacute;rio");
-							$i("editor_bd").innerHTML = j;
-						}
-						catch(e){core_handleFailure(e,o.responseText);}
-					},
-					failure:core_handleFailure,
-					argument: { foo:"foo", bar:"bar" }
+	ativaBotaoRelatorioCompleto: function(idBotao){
+		if(!$i(idBotao)){
+			return;
+		}
+		var sUrl = i3GEO.configura.locaplic+"/admin/php/metaestat.php?funcao=relatorioCompleto",
+			adiciona = function(){
+				core_carregando("ativa");
+				core_carregando(" Aguarde");
+				var callback = {
+						success:function(o){
+							try	{
+								core_carregando("desativa");
+								var j = YAHOO.lang.JSON.parse(o.responseText);
+								core_montaEditor("","650px","500px","","Relat&oacute;rio");
+								$i("editor_bd").innerHTML = j;
+							}
+							catch(e){core_handleFailure(e,o.responseText);}
+						},
+						failure:core_handleFailure,
+						argument: { foo:"foo", bar:"bar" }
+				};
+				core_makeRequest(sUrl,callback);
 			};
-			core_makeRequest(sUrl,callback);
-		};
 		new YAHOO.widget.Button(idBotao,{ onclick: { fn: adiciona } });
 	},
 	arvore:{
 		inicia:function(){
-			core_pegaDados("buscando vari&aacute;veis...","../php/metaestat.php?funcao=listaVariavel","i3GEOadmin.variaveis.arvore.monta");
+			core_pegaDados("buscando vari&aacute;veis...",i3GEO.configura.locaplic+"/admin/php/metaestat.php?funcao=listaVariavel","i3GEOadmin.variaveis.arvore.monta");
 		},
 		monta: function(dados){
 			YAHOO.example.treeExample = new function()	{
-				tree = "";
 				function changeIconMode(){
 					buildTree();
 				}
 				function loadNodeData(node, fnLoadComplete){
-					var sUrl = "../php/metaestat.php?funcao=listaMedidaVariavel&codigo_variavel="+node.data.codigo_variavel,
+					var sUrl = i3GEO.configura.locaplic+"/admin/php/metaestat.php?funcao=listaMedidaVariavel&codigo_variavel="+node.data.codigo_variavel,
 					callback = {
 							success: function(oResponse){
 								var dados = YAHOO.lang.JSON.parse(oResponse.responseText);
@@ -93,7 +116,7 @@ i3GEOadmin.variaveis = {
 					}
 				}
 				function buildTree(){
-					tree = new YAHOO.widget.TreeView("tabela");
+					tree = new YAHOO.widget.TreeView("estatVariavelArvore");
 					tree.setDynamicLoad(loadNodeData, 1);
 					var root = tree.getRoot(),
 					tempNode = new YAHOO.widget.TextNode('', root, false);
@@ -130,7 +153,7 @@ i3GEOadmin.variaveis = {
 				{currentIconMode = newVal;}
 			}
 			function loadNodeData(node, fnLoadComplete){
-				var sUrl = "../php/metaestat.php?funcao=listaParametro&id_medida_variavel="+node.data.no_parametros,
+				var sUrl = i3GEO.configura.locaplic+"/admin/php/metaestat.php?funcao=listaParametro&id_medida_variavel="+node.data.no_parametros,
 				callback = {
 						success: function(oResponse){
 							var dados = YAHOO.lang.JSON.parse(oResponse.responseText);
@@ -149,7 +172,7 @@ i3GEOadmin.variaveis = {
 				YAHOO.util.Connect.asyncRequest('GET', sUrl, callback);
 			};
 			function loadNodeDataClasses(node, fnLoadComplete){
-				var sUrl = "../php/metaestat.php?funcao=listaClassificacaoMedida&id_medida_variavel="+node.data.no_classificacao,
+				var sUrl = i3GEO.configura.locaplic+"/admin/php/metaestat.php?funcao=listaClassificacaoMedida&id_medida_variavel="+node.data.no_classificacao,
 				callback = {
 						success: function(oResponse){
 							var dados = YAHOO.lang.JSON.parse(oResponse.responseText);
@@ -168,7 +191,7 @@ i3GEOadmin.variaveis = {
 				YAHOO.util.Connect.asyncRequest('GET', sUrl, callback);
 			};
 			function loadNodeDataLinks(node, fnLoadComplete){
-				var sUrl = "../php/metaestat.php?funcao=listaLinkMedida&id_medida_variavel="+node.data.no_link,
+				var sUrl = i3GEO.configura.locaplic+"/admin/php/metaestat.php?funcao=listaLinkMedida&id_medida_variavel="+node.data.no_link,
 				callback = {
 						success: function(oResponse){
 							var dados = YAHOO.lang.JSON.parse(oResponse.responseText);
@@ -187,7 +210,7 @@ i3GEOadmin.variaveis = {
 				YAHOO.util.Connect.asyncRequest('GET', sUrl, callback);
 			};
 			function loadNodeDataFonteinfo(node, fnLoadComplete){
-				var sUrl = "../php/metaestat.php?funcao=listaFonteinfoMedida&id_medida_variavel="+node.data.no_fonteinfo,
+				var sUrl = i3GEO.configura.locaplic+"/admin/php/metaestat.php?funcao=listaFonteinfoMedida&id_medida_variavel="+node.data.no_fonteinfo,
 				callback = {
 						success: function(oResponse){
 							var dados = YAHOO.lang.JSON.parse(oResponse.responseText);
@@ -256,7 +279,7 @@ i3GEOadmin.variaveis = {
 		},
 		adicionar: function(codigo_variavel){
 			var no = tree.getNodeByProperty("codigo_variavel",codigo_variavel),
-			sUrl = "../php/metaestat.php?funcao=alteraMedidaVariavel&codigo_variavel="+codigo_variavel,
+			sUrl = i3GEO.configura.locaplic+"/admin/php/metaestat.php?funcao=alteraMedidaVariavel&codigo_variavel="+codigo_variavel,
 			callback = {
 				success: function(oResponse){
 					var dados = YAHOO.lang.JSON.parse(oResponse.responseText);
@@ -286,6 +309,8 @@ i3GEOadmin.variaveis = {
 			};
 			ins += core_geraLinhas(param);
 			ins += "<br><br><br>";
+			//utilizado para passar o codigo da variavel qd for necessario
+			ins += "<input type=hidden id='Ecodigo_variavel' value='' />";
 			$i("editor_bd").innerHTML = ins;
 			if($i("Ccodigo_unidade_medida")){
 				temp = "<select id='Ecodigo_unidade_medida' >";
@@ -322,7 +347,7 @@ i3GEOadmin.variaveis = {
 				{currentIconMode = newVal;}
 			}
 			function loadNodeData(node, fnLoadComplete){
-				var sUrl = "../php/metaestat.php?funcao=listaClasseClassificacao&id_classificacao="+node.data.id_classificacao,
+				var sUrl = i3GEO.configura.locaplic+"/admin/php/metaestat.php?funcao=listaClasseClassificacao&id_classificacao="+node.data.id_classificacao,
 				callback = {
 						success: function(oResponse){
 							var dados = YAHOO.lang.JSON.parse(oResponse.responseText);
@@ -367,7 +392,7 @@ i3GEOadmin.variaveis = {
 		},
 		adicionar: function(id_medida_variavel){
 			var no = tree.getNodeByProperty("no_classificacao",id_medida_variavel),
-			sUrl = "../php/metaestat.php?funcao=alteraClassificacaoMedida&id_medida_variavel="+id_medida_variavel,
+			sUrl = i3GEO.configura.locaplic+"/admin/php/metaestat.php?funcao=alteraClassificacaoMedida&id_medida_variavel="+id_medida_variavel,
 			callback = 	{
 				success: function(oResponse){
 					var dados = YAHOO.lang.JSON.parse(oResponse.responseText);
@@ -426,7 +451,7 @@ i3GEOadmin.variaveis = {
 		},
 		adicionar: function(id_classificacao){
 			var no = tree.getNodeByProperty("id_classificacao",id_classificacao),
-			sUrl = "../php/metaestat.php?funcao=alteraClasseClassificacao&id_classificacao="+id_classificacao,
+			sUrl = i3GEO.configura.locaplic+"/admin/php/metaestat.php?funcao=alteraClasseClassificacao&id_classificacao="+id_classificacao,
 			callback = 	{
 				success: function(oResponse){
 					var dados = YAHOO.lang.JSON.parse(oResponse.responseText);
@@ -494,7 +519,7 @@ i3GEOadmin.variaveis = {
 		},
 		adicionar: function(id_medida_variavel){
 			var no = tree.getNodeByProperty("id_medida_variavel",id_medida_variavel),
-			sUrl = "../php/metaestat.php?funcao=alteraParametroMedida&id_medida_variavel="+id_medida_variavel,
+			sUrl = i3GEO.configura.locaplic+"/admin/php/metaestat.php?funcao=alteraParametroMedida&id_medida_variavel="+id_medida_variavel,
 			callback = 	{
 				success: function(oResponse){
 					var dados = YAHOO.lang.JSON.parse(oResponse.responseText);
@@ -555,7 +580,7 @@ i3GEOadmin.variaveis = {
 		},
 		adicionar: function(id_medida_variavel){
 			var no = tree.getNodeByProperty("no_link",id_medida_variavel),
-			sUrl = "../php/metaestat.php?funcao=alteraLinkMedida&id_medida_variavel="+id_medida_variavel,
+			sUrl = i3GEO.configura.locaplic+"/admin/php/metaestat.php?funcao=alteraLinkMedida&id_medida_variavel="+id_medida_variavel,
 			callback = 	{
 				success: function(oResponse){
 					var dados = YAHOO.lang.JSON.parse(oResponse.responseText);
@@ -613,7 +638,7 @@ i3GEOadmin.variaveis = {
 		},
 		adicionar: function(id_medida_variavel,id_fonteinfo){
 			var no = tree.getNodeByProperty("no_fonteinfo",id_medida_variavel),
-			sUrl = "../php/metaestat.php?funcao=alteraFonteinfo&id_medida_variavel="+id_medida_variavel,
+			sUrl = i3GEO.configura.locaplic+"/admin/php/metaestat.php?funcao=alteraFonteinfo&id_medida_variavel="+id_medida_variavel,
 			callback = 	{
 				success: function(oResponse){
 					var dados = YAHOO.lang.JSON.parse(oResponse.responseText);
@@ -633,8 +658,6 @@ i3GEOadmin.variaveis = {
 			$i("editor_bd").innerHTML = ins;
 		}
 	},
-
-
 	montaDivVariavel: function(i){
 		var ins = "",
 		param = {
@@ -654,61 +677,58 @@ i3GEOadmin.variaveis = {
 		callback = {
 				success:function(o) {
 					try	{
-						var dados;
-						if(tipo == "variavel"){
+						var dados = "";
+						if(o){
 							dados = YAHOO.lang.JSON.parse(o.responseText);
-							core_montaEditor("gravaDados('variavel','"+id+"')","450px","200px","","Editor de vari&aacute;vel");
+						}
+						if(tipo == "variavel"){
+							core_montaEditor("i3GEOadmin.variaveis.gravaDados('variavel','"+id+"')","450px","200px","","Editor de vari&aacute;vel");
 							i3GEOadmin.variaveis.montaDivVariavel(dados);
 						}
 						if(tipo == "medidaVariavel"){
-							dados = YAHOO.lang.JSON.parse(o.responseText);
-							core_montaEditor("gravaDados('medidaVariavel','"+id+"')","450px","200px","","Editor de medidas");
+							core_montaEditor("i3GEOadmin.variaveis.gravaDados('medidaVariavel','"+id+"')","450px","200px","","Editor de medidas");
 							i3GEOadmin.variaveis.medidas.montaDiv(dados);
 						}
 						if(tipo == "parametroMedida"){
-							dados = YAHOO.lang.JSON.parse(o.responseText);
-							core_montaEditor("gravaDados('parametroMedida','"+id+"')","450px","200px","","Editor de par&acirc;metros");
+							core_montaEditor("i3GEOadmin.variaveis.gravaDados('parametroMedida','"+id+"')","450px","200px","","Editor de par&acirc;metros");
 							i3GEOadmin.variaveis.parametro.montaDiv(dados);
 						}
 						if(tipo == "classificacaoMedida"){
-							dados = YAHOO.lang.JSON.parse(o.responseText);
-							core_montaEditor("gravaDados('classificacaoMedida','"+id+"')","450px","200px","","Editor de classifica&ccedil;&atilde;o");
+							core_montaEditor("i3GEOadmin.variaveis.gravaDados('classificacaoMedida','"+id+"')","450px","200px","","Editor de classifica&ccedil;&atilde;o");
 							i3GEOadmin.variaveis.classificacao.montaDiv(dados);
 						}
 						if(tipo == "classeClassificacao"){
-							dados = YAHOO.lang.JSON.parse(o.responseText);
-							core_montaEditor("gravaDados('classeClassificacao','"+id+"')","450px","200px","","Editor de classe");
+							core_montaEditor("i3GEOadmin.variaveis.gravaDados('classeClassificacao','"+id+"')","450px","200px","","Editor de classe");
 							i3GEOadmin.variaveis.classes.montaDiv(dados);
 						}
 						if(tipo == "linkMedida"){
-							dados = YAHOO.lang.JSON.parse(o.responseText);
-							core_montaEditor("gravaDados('linkMedida','"+id+"')","450px","200px","","Editor de links");
+							core_montaEditor("i3GEOadmin.variaveis.gravaDados('linkMedida','"+id+"')","450px","200px","","Editor de links");
 							i3GEO.variaveis.link.montaDiv(dados);
 						}
 						core_carregando("desativa");
 					}
-					catch(e){core_handleFailure(e,o.responseText);}
+					catch(e){core_handleFailure(e,"");}
 				},
 				failure:core_handleFailure,
 				argument: { foo:"foo", bar:"bar" }
 		};
 		if(tipo == "variavel"){
-			sUrl = "../php/metaestat.php?funcao=listaVariavel&codigo_variavel="+id;
+			sUrl = i3GEO.configura.locaplic+"/admin/php/metaestat.php?funcao=listaVariavel&codigo_variavel="+id;
 		}
 		if(tipo == "medidaVariavel"){
-			sUrl = "../php/metaestat.php?funcao=listaMedidaVariavel&id_medida_variavel="+id;
+			sUrl = i3GEO.configura.locaplic+"/admin/php/metaestat.php?funcao=listaMedidaVariavel&id_medida_variavel="+id;
 		}
 		if(tipo == "parametroMedida"){
-			sUrl = "../php/metaestat.php?funcao=listaParametro&id_parametro_medida="+id;
+			sUrl = i3GEO.configura.locaplic+"/admin/php/metaestat.php?funcao=listaParametro&id_parametro_medida="+id;
 		}
 		if(tipo == "classificacaoMedida"){
-			sUrl = "../php/metaestat.php?funcao=listaClassificacaoMedida&id_classificacao="+id;
+			sUrl = i3GEO.configura.locaplic+"/admin/php/metaestat.php?funcao=listaClassificacaoMedida&id_classificacao="+id;
 		}
 		if(tipo == "classeClassificacao"){
-			sUrl = "../php/metaestat.php?funcao=listaClasseClassificacao&id_classe="+id;
+			sUrl = i3GEO.configura.locaplic+"/admin/php/metaestat.php?funcao=listaClasseClassificacao&id_classe="+id;
 		}
 		if(tipo == "linkMedida"){
-			sUrl = "../php/metaestat.php?funcao=listaLinkMedida&id_link="+id;
+			sUrl = i3GEO.configura.locaplic+"/admin/php/metaestat.php?funcao=listaLinkMedida&id_link="+id;
 		}
 		if(tipo == "fonteinfo"){
 			core_montaEditor("gravaDados('fonteinfo','"+id+"')","450px","200px","","Editor de fontes");
@@ -716,7 +736,14 @@ i3GEOadmin.variaveis = {
 			core_carregando("desativa");
 		}
 		if(sUrl){
-			core_makeRequest(sUrl,callback);
+			//se id for vazio, o editor e montado vazio
+			//caso contrario, os dados sao obtidos via ajax
+			if(id == ""){
+				callback.success();
+			}
+			else{
+				core_makeRequest(sUrl,callback);
+			}
 		}
 	},
 	sql: function(tipo,id) {
@@ -950,31 +977,31 @@ i3GEOadmin.variaveis = {
 		sUrl = null;
 		if(tipo == "variavel")	{
 			no = tree.getNodeByProperty("codigo_variavel",id);
-			sUrl = "../php/metaestat.php?funcao=excluirVariavel&codigo_variavel="+id;
+			sUrl = i3GEO.configura.locaplic+"/admin/php/metaestat.php?funcao=excluirVariavel&codigo_variavel="+id;
 		}
 		if(tipo == "medidaVariavel")	{
 			no = tree.getNodeByProperty("id_medida_variavel",id);
-			sUrl = "../php/metaestat.php?funcao=excluirMedidaVariavel&id_medida_variavel="+id;
+			sUrl = i3GEO.configura.locaplic+"/admin/php/metaestat.php?funcao=excluirMedidaVariavel&id_medida_variavel="+id;
 		}
 		if(tipo == "parametroMedida")	{
 			no = tree.getNodeByProperty("id_parametro_medida",id);
-			sUrl = "../php/metaestat.php?funcao=excluirParametroMedida&id_parametro_medida="+id;
+			sUrl = i3GEO.configura.locaplic+"/admin/php/metaestat.php?funcao=excluirParametroMedida&id_parametro_medida="+id;
 		}
 		if(tipo == "classificacaoMedida")	{
 			no = tree.getNodeByProperty("id_classificacao",id);
-			sUrl = "../php/metaestat.php?funcao=excluirClassificacaoMedida&id_classificacao="+id;
+			sUrl = i3GEO.configura.locaplic+"/admin/php/metaestat.php?funcao=excluirClassificacaoMedida&id_classificacao="+id;
 		}
 		if(tipo == "classeClassificacao")	{
 			no = tree.getNodeByProperty("id_classe",id);
-			sUrl = "../php/metaestat.php?funcao=excluirClasseClassificacao&id_classe="+id;
+			sUrl = i3GEO.configura.locaplic+"/admin/php/metaestat.php?funcao=excluirClasseClassificacao&id_classe="+id;
 		}
 		if(tipo == "linkMedida")	{
 			no = tree.getNodeByProperty("id_link",id);
-			sUrl = "../php/metaestat.php?funcao=excluirLinkMedida&id_link="+id;
+			sUrl = i3GEO.configura.locaplic+"/admin/php/metaestat.php?funcao=excluirLinkMedida&id_link="+id;
 		}
 		if(tipo == "fonteinfo")	{
 			no = tree.getNodeByProperty("id_fonteinfo",id);
-			sUrl = "../php/metaestat.php?funcao=excluirFonteinfoMedida&id_fonteinfo="+id+"&id_medida_variavel="+no.data.id_medida_variavel_fonteinfo;
+			sUrl = i3GEO.configura.locaplic+"/admin/php/metaestat.php?funcao=excluirFonteinfoMedida&id_fonteinfo="+id+"&id_medida_variavel="+no.data.id_medida_variavel_fonteinfo;
 		}
 		if(sUrl)
 		{core_excluiNoTree(sUrl,no,mensagem);}
@@ -986,37 +1013,37 @@ i3GEOadmin.variaveis = {
 		if(tipo == "variavel"){
 			campos = new Array("nome","descricao");
 			par = "&codigo_variavel="+id;
-			prog = "../php/metaestat.php?funcao=alteraVariavel";
+			prog = i3GEO.configura.locaplic+"/admin/php/metaestat.php?funcao=alteraVariavel";
 		}
 		if(tipo == "medidaVariavel"){
-			campos = new Array(	"codigo_unidade_medida","codigo_tipo_periodo","codigo_tipo_regiao","codigo_estat_conexao","esquemadb","tabela","colunavalor","colunaidgeo","filtro","nomemedida");
+			campos = new Array("codigo_variavel","codigo_unidade_medida","codigo_tipo_periodo","codigo_tipo_regiao","codigo_estat_conexao","esquemadb","tabela","colunavalor","colunaidgeo","filtro","nomemedida");
 			par = "&id_medida_variavel="+id;
-			prog = "../php/metaestat.php?funcao=alteraMedidaVariavel";
+			prog = i3GEO.configura.locaplic+"/admin/php/metaestat.php?funcao=alteraMedidaVariavel";
 		}
 		if(tipo == "parametroMedida"){
 			campos = new Array("nome","descricao","coluna","id_pai");
 			par = "&id_parametro_medida="+id;
-			prog = "../php/metaestat.php?funcao=alteraParametroMedida";
+			prog = i3GEO.configura.locaplic+"/admin/php/metaestat.php?funcao=alteraParametroMedida";
 		}
 		if(tipo == "classificacaoMedida"){
 			campos = new Array("nome","observacao");
 			par = "&id_classificacao="+id;
-			prog = "../php/metaestat.php?funcao=alteraClassificacaoMedida";
+			prog = i3GEO.configura.locaplic+"/admin/php/metaestat.php?funcao=alteraClassificacaoMedida";
 		}
 		if(tipo == "classeClassificacao"){
 			campos = new Array("titulo","expressao","azul","verde","vermelho","tamanho","simbolo","otamanho","overde","oazul","overmelho");
 			par = "&id_classe="+id;
-			prog = "../php/metaestat.php?funcao=alteraClasseClassificacao";
+			prog = i3GEO.configura.locaplic+"/admin/php/metaestat.php?funcao=alteraClasseClassificacao";
 		}
 		if(tipo == "linkMedida"){
 			campos = new Array("nome","link");
 			par = "&id_link="+id;
-			prog = "../php/metaestat.php?funcao=alteraLinkMedida";
+			prog = i3GEO.configura.locaplic+"/admin/php/metaestat.php?funcao=alteraLinkMedida";
 		}
 		if(tipo == "fonteinfo"){
 			campos = new Array("id_fonteinfo");
 			par = "&id_medida_variavel="+id;
-			prog = "../php/metaestat.php?funcao=adicionaFonteinfoMedida";
+			prog = i3GEO.configura.locaplic+"/admin/php/metaestat.php?funcao=adicionaFonteinfoMedida";
 		}
 		for (i=0;i<campos.length;i++)
 		{par += "&"+campos[i]+"="+($i("E"+campos[i]).value);}
@@ -1031,42 +1058,77 @@ i3GEOadmin.variaveis = {
 						}
 						else{
 							if(tipo == "variavel"){
+								i3GEOadmin.variaveis.aposGravar.call([tipo,id]);
+								if(!YAHOO.lang.isObject(tree)){
+									core_carregando("desativa");
+									return;
+								}
 								no = tree.getNodeByProperty("codigo_variavel",id);
 								no.getContentEl().getElementsByTagName("span")[0].innerHTML = "<b>"+document.getElementById("Enome").value+"</b> - <span style='color:gray;'>"+document.getElementById("Edescricao").value+" id: "+id+"</span>";
 								no.getContentEl().getElementsByTagName("span")[0].style.color = "";
 								no.html = no.getContentEl().innerHTML;
 							}
 							if(tipo == "medidaVariavel"){
+								i3GEOadmin.variaveis.aposGravar.call([tipo,id]);
+								if(!YAHOO.lang.isObject(tree)){
+									core_carregando("desativa");
+									return;
+								}
 								no = tree.getNodeByProperty("id_medida_variavel",id);
 								no.getContentEl().getElementsByTagName("span")[0].innerHTML = "<b>"+document.getElementById("Enomemedida").value+"</b> - <span style='color:gray;'>"+document.getElementById("Eesquemadb").value+" - "+document.getElementById("Etabela").value+" - "+document.getElementById("Ecolunavalor").value+" id: "+id+"</span>";
 								no.getContentEl().getElementsByTagName("span")[0].style.color = "";
 								no.html = no.getContentEl().innerHTML;
 							}
 							if(tipo == "parametroMedida"){
+								i3GEOadmin.variaveis.aposGravar.call([tipo,id]);
+								if(!YAHOO.lang.isObject(tree)){
+									core_carregando("desativa");
+									return;
+								}
 								no = tree.getNodeByProperty("id_parametro_medida",id);
 								no.getContentEl().getElementsByTagName("span")[0].innerHTML = "<b>"+document.getElementById("Enome").value+"</b><span style=color:gray > - "+document.getElementById("Edescricao").value+" id: "+id+"</span>";
 								no.getContentEl().getElementsByTagName("span")[0].style.color = "";
 								no.html = no.getContentEl().innerHTML;
 							}
 							if(tipo == "classificacaoMedida"){
+								i3GEOadmin.variaveis.aposGravar.call([tipo,id]);
+								if(!YAHOO.lang.isObject(tree)){
+									core_carregando("desativa");
+									return;
+								}
 								no = tree.getNodeByProperty("id_classificacao",id);
 								no.getContentEl().getElementsByTagName("span")[0].innerHTML = "<b>"+document.getElementById("Enome").value+"</b><span style=color:gray > Obs.: "+document.getElementById("Eobservacao").value+" id: "+id+"</span>";
 								no.getContentEl().getElementsByTagName("span")[0].style.color = "";
 								no.html = no.getContentEl().innerHTML;
 							}
 							if(tipo == "classeClassificacao"){
+								i3GEOadmin.variaveis.aposGravar.call([tipo,id]);
+								if(!YAHOO.lang.isObject(tree)){
+									core_carregando("desativa");
+									return;
+								}
 								no = tree.getNodeByProperty("id_classe",id);
 								no.getContentEl().getElementsByTagName("span")[0].innerHTML = "<b>"+document.getElementById("Etitulo").value+"</b><span style=color:gray > id: "+id+"</span>";
 								no.getContentEl().getElementsByTagName("span")[0].style.color = "";
 								no.html = no.getContentEl().innerHTML;
 							}
 							if(tipo == "linkMedida"){
+								i3GEOadmin.variaveis.aposGravar.call([tipo,id]);
+								if(!YAHOO.lang.isObject(tree)){
+									core_carregando("desativa");
+									return;
+								}
 								no = tree.getNodeByProperty("id_link",id);
 								no.getContentEl().getElementsByTagName("span")[0].innerHTML = "<a href='"+document.getElementById("Elink").value+"' >"+document.getElementById("Enome").value+"</a><span style=color:gray > - "+document.getElementById("Elink").value+" - id: "+id+"</span>";
 								no.getContentEl().getElementsByTagName("span")[0].style.color = "";
 								no.html = no.getContentEl().innerHTML;
 							}
 							if(tipo == "fonteinfo"){
+								i3GEOadmin.variaveis.aposGravar.call([tipo,id]);
+								if(!YAHOO.lang.isObject(tree)){
+									core_carregando("desativa");
+									return;
+								}
 								no = tree.getNodeByProperty("no_fonteinfo",id);
 								i3GEOadmin.variaveis.fonte.adicionaNos(no,[YAHOO.lang.JSON.parse(o.responseText)],true);
 								//no.getContentEl().getElementsByTagName("span")[0].innerHTML = "<a href='"+document.getElementById("Elink").value+"' >"+document.getElementById("Etitulo").value+"</a><span style=color:gray > - "+document.getElementById("Elink").value+" - id: "+id+"</span>";
@@ -1101,7 +1163,7 @@ i3GEOadmin.variaveis = {
 				failure:core_handleFailure,
 				argument: { foo:"foo", bar:"bar" }
 		};
-		core_makeRequest("../php/metaestat.php?funcao=listaDadosTabelasAuxiliares",callback);
+		core_makeRequest(i3GEO.configura.locaplic+"/admin/php/metaestat.php?funcao=listaDadosTabelasAuxiliares",callback);
 	},
 	selEsquema: function(idEleValue,idEleCodigoConexao){
 		var eleValue = $i(idEleValue),
@@ -1129,7 +1191,7 @@ i3GEOadmin.variaveis = {
 		if(!eleValue || !eleCodigoConexao){
 			return;
 		}
-		core_makeRequest("../php/metaestat.php?funcao=esquemasConexao&formato=json&codigo_estat_conexao="+eleCodigoConexao.value,callback);
+		core_makeRequest(i3GEO.configura.locaplic+"/admin/php/metaestat.php?funcao=esquemasConexao&formato=json&codigo_estat_conexao="+eleCodigoConexao.value,callback);
 	},
 	selTabela: function(idEleValue,idEleCodigoConexao,idEleNomeEsquema){
 		var eleValue = $i(idEleValue),
@@ -1158,7 +1220,7 @@ i3GEOadmin.variaveis = {
 		if(!eleValue || !eleCodigoConexao || !eleNomeEsquema){
 			return;
 		}
-		core_makeRequest("../php/metaestat.php?funcao=tabelasEsquema&formato=json&codigo_estat_conexao="+eleCodigoConexao.value+"&nome_esquema="+eleNomeEsquema.value,callback);
+		core_makeRequest(i3GEO.configura.locaplic+"/admin/php/metaestat.php?funcao=tabelasEsquema&formato=json&codigo_estat_conexao="+eleCodigoConexao.value+"&nome_esquema="+eleNomeEsquema.value,callback);
 	},
 	selColuna: function(idEleValue,idEleCodigoConexao,idEleNomeEsquema,idEleNomeTabela){
 		var eleValue = $i(idEleValue),
@@ -1188,7 +1250,7 @@ i3GEOadmin.variaveis = {
 		if(!eleValue || !eleCodigoConexao || !eleNomeEsquema || !eleNomeTabela){
 			return;
 		}
-		core_makeRequest("../php/metaestat.php?funcao=colunasTabela&formato=json&codigo_estat_conexao="+eleCodigoConexao.value+"&nome_esquema="+eleNomeEsquema.value+"&nome_tabela="+eleNomeTabela.value,callback);
+		core_makeRequest(i3GEO.configura.locaplic+"/admin/php/metaestat.php?funcao=colunasTabela&formato=json&codigo_estat_conexao="+eleCodigoConexao.value+"&nome_esquema="+eleNomeEsquema.value+"&nome_tabela="+eleNomeTabela.value,callback);
 	}
 
 

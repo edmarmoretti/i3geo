@@ -1,4 +1,4 @@
-//+$trad(1,i3GEOF.metaestat.dicionario)+
+//+$trad(1,i3GEOF.metaestat.dicionario1)+
 i3GEOF.metaestat.dicionario1 = {
 "1":[
 {
@@ -30,14 +30,14 @@ it:""
 }],
 "5":[
 {
-pt:"Ou digite um nome para criar uma nova",
+pt:"Ou crie uma nova",
 en:"",
 es:"",
 it:""
 }],
 "6":[
 {
-pt:"",
+pt:"Criar",
 en:"",
 es:"",
 it:""

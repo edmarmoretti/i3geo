@@ -45,20 +45,20 @@ body {
 					src="../imagens/04.png" style="cursor: pointer" id=botaoAjuda />
 			</h1>
 			<div id="formulario" style="display: none">
-				<div id="ajuda">
+				<div id="estatVariavelajuda">
 					<div class="hd">Ajuda</div>
 					<div class="bd" style="height: 144px; overflow: auto">
 						<p>
 					</div>
 					<div class="ft"></div>
 				</div>
-				<input onclick="adicionaLinha()" type=button id=adiciona
+				<input onclick="adicionaLinha()" type=button id=estatVariavelAdiciona
 					value="Adicionar vari&aacute;vel" />
-				<input onclick="relatorioCompleto()" type=button id=relatorioCompleto
+				<input onclick="relatorioCompleto()" type=button id=estatVariavelrelatorioCompleto
 					value="Relat&oacute;rio" />
 					<br>
 				<p>Vari&aacute;veis cadastradas:</p>
-				<div id="tabela" style="left: -5px;"></div>
+				<div id="estatVariavelArvore" style="left: -5px;"></div>
 				<div id=logajax style="display: block"></div>
 			</div>
 		</div>
@@ -104,7 +104,7 @@ body {
 		}
 		//necessario para a ferramenta login e outras
 		i3GEO.configura = {
-			locaplic : "../.."
+			locaplic : window.location.href.replace("/admin/html/estat_variavel.html","")
 		};
 		//
 		cabecalhoMetaestat("cabecalhoPrincipal", "arvore");

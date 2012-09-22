@@ -332,6 +332,7 @@ postpar - parametros quando o tipo for post
 */
 function core_makeRequest(sUrl,callback,tipo,postpar)
 {
+	/*
 	sUrl = escape(sUrl);
 	var re = new RegExp("%3F", "g");
 	sUrl = sUrl.replace(re,'?');
@@ -339,6 +340,7 @@ function core_makeRequest(sUrl,callback,tipo,postpar)
 	sUrl = sUrl.replace(re,'=');
 	re = new RegExp("%26", "g");
 	sUrl = sUrl.replace(re,'&');
+	*/
 	//alert(sUrl)
 	if(arguments.length == 2)
 	{tipo = "GET";}
@@ -361,23 +363,28 @@ tipo - ativa|desativa|string com uma mensagem
 */
 function core_carregando(tipo)
 {
+	var img = "../../imagens/aguarde.gif";
+	if(i3GEO && i3GEO.configura.locaplic){
+		img = i3GEO.configura.locaplic+"/imagens/aguarde.gif";
+	}
 	YAHOO.namespace("carregando.container");
 	if (!YAHOO.carregando.container.wait)
 	{
 		YAHOO.carregando.container.wait = new YAHOO.widget.Panel("wait",{width: "240px",fixedcenter: true,close: true,draggable: false,zindex:4,modal: true,visible: false});
 		YAHOO.carregando.container.wait.setHeader("Aguarde...");
-		YAHOO.carregando.container.wait.setBody("<img src=\"../../imagens/aguarde.gif\"/>");
+
+		YAHOO.carregando.container.wait.setBody("<img src=\""+img+"\"/>");
 		YAHOO.carregando.container.wait.render(document.body);
 	}
 	else
 	{YAHOO.carregando.container.wait.show();}
-	YAHOO.carregando.container.wait.setBody("<img src=\"../../imagens/aguarde.gif\"/>");
+	YAHOO.carregando.container.wait.setBody("<img src=\""+img+"\"/>");
 	if(tipo == "ativa")
 	{YAHOO.carregando.container.wait.show();}
 	if(tipo == "desativa")
 	{YAHOO.carregando.container.wait.hide();}
 	if(tipo != "ativa" && tipo != "desativa")
-	{YAHOO.carregando.container.wait.setBody("<img src=\"../../imagens/aguarde.gif\"/> "+tipo);}
+	{YAHOO.carregando.container.wait.setBody("<img src=\""+img+"\"/> "+tipo);}
 }
 /*
 Function: core_dialogoContinua
@@ -1010,7 +1017,7 @@ function core_comboObjeto(obj,valor,texto,marcar,texto2)
 		}
 
 		ins += "<option value='"+v+"' ";
-		if (marcar == v){ins += "selected";}
+		if (marcar && marcar == v){ins += "selected";}
 		ins += " title='"+t+"'  >"+t+"</option>";
 	}
 	return(ins);
@@ -1412,7 +1419,7 @@ function core_montaEditor(funcaoOK,w,h,funcaoClose,titulo)
 				}}}
 			);
 		}
-		YAHOO.admin.container.panelEditor = new YAHOO.widget.Panel("janela_editor", { fixedcenter:true,close:true,width:w, overflow:"auto",modal: false,visible:false,constraintoviewport:true } );
+		YAHOO.admin.container.panelEditor = new YAHOO.widget.Panel("janela_editor", { fixedcenter:true,close:true,width:w, overflow:"auto",modal: true,visible:false,constraintoviewport:true } );
 		YAHOO.admin.container.panelEditor.render();
 	}
 	else

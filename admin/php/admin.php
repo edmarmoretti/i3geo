@@ -259,8 +259,10 @@ function verificaFilhos()
 		}
 		if($tabela == "i3geoestat_medida_variavel")
 		{
-			$r = pegaDados("select * from ".$esquemaadmin."i3geoestat_dimensao_medida where id_medida_variavel=$id");
-			if(count($r) > 0)
+			$link = pegaDados("select * from ".$esquemaadmin."i3geoestat_medida_variavel_link where id_medida_variavel=$id");
+			$parametro = pegaDados("select * from ".$esquemaadmin."i3geoestat_parametro_medida where id_medida_variavel=$id");
+			$fonte = pegaDados("select * from ".$esquemaadmin."i3geoestat_fonteinfo_medida where id_medida_variavel=$id");
+			if(count($link) > 0 || count($parametro) > 0 || count($fonte) > 0)
 				$res = true;
 		}
 		if($tabela == "i3geoadmin_n2")

@@ -197,6 +197,7 @@ i3GEO.configura = {
 			{ id:"omenudataFerramentas7b",text: $trad("t42"), url: "javascript:i3GEO.tema.dialogo.cortina()"},
 			{ id:"omenudataFerramentas8b",text: $trad("t37a"), url: "javascript:i3GEO.tema.dialogo.graficotema()"},
 			{ id:"omenudataFerramentas9b",text: $trad("t37b"), url: "javascript:i3GEO.analise.dialogo.graficoInterativo()" },
+			{ id:"omenudataFerramentas11b",text: $trad("x57"), url: "javascript:i3GEO.mapa.dialogo.metaestat()"},
 			{ id:"omenudataFerramentas10b",text: $trad("t49"), url: "javascript:i3GEO.tema.dialogo.tme()"},
 			{ id:"omenudataFerramentas0c",text: '<span style=color:gray;text-decoration:underline; ><b>'+$trad("a15")+'</b></span>',url: "#"},
 			{ id:"omenudataFerramentas1c",text: $trad("a16"), url: "javascript:i3GEO.arvoreDeTemas.dialogo.conectaservico()"},

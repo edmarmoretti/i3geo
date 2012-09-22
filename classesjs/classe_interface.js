@@ -1636,19 +1636,20 @@ i3GEO.Interface = {
 				//reordena a lista. Necess&aacute;rio nas interfaces que utilizam grupos na &aacute;rvore de camadas
 				n = i3GEO.arvoreDeCamadas.CAMADAS.length;
 				for(i=0;i<n;i++){
-					if(i3GEO.util.in_array(i3GEO.arvoreDeCamadas.CAMADAS[i],listatemp)){
-						lista.push(i3GEO.arvoreDeCamadas.CAMADAS[i]);
+					if(i3GEO.util.in_array(i3GEO.arvoreDeCamadas.CAMADAS[i].name,listatemp)){
+						lista.push(i3GEO.arvoreDeCamadas.CAMADAS[i].name);
 					}
 				}
 				//
+				lista.reverse();
 				n = lista.length;
 				indice = 0;
 				for(i=0;i<n;i++){
 					if(lista[i] == obj.value){
-						indice = n - 1 - i;
+						indice = i; // - 1 - i;
 					}
 				}
-				i3GEO.Interface.googlemaps.insereLayer(obj.value,indice);
+				i3GEO.Interface.googlemaps.insereLayer(obj.value,(indice));
 				i3GEO.arvoreDeCamadas.alteraPropCamadas("status","2",obj.value);
 			}
 			else{
@@ -1660,7 +1661,6 @@ i3GEO.Interface = {
 			}
 			if(desligar !== "" || ligar !== "")
 			{i3GEO.php.ligatemas(temp,desligar,ligar);}
-
 		},
 		bbox: function(){
 			var bd,so,ne,bbox;

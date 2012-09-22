@@ -1929,7 +1929,7 @@ it:""
 }],
 "x57":[
 {
-pt:"Cartogramas",
+pt:"Cartogramas estat&iacute;sticos",
 en:"",
 es:"",
 it:""

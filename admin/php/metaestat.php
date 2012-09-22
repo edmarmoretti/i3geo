@@ -253,6 +253,9 @@ switch (strtoupper($funcao))
 		$m = new Metaestat();
 		if(empty($id_medida_variavel)){
 			$id_medida_variavel = $m->alteraMedidaVariavel($codigo_variavel);
+			if(!empty($nomemedida)){
+				$m->alteraMedidaVariavel("",$id_medida_variavel,$codigo_unidade_medida,$codigo_tipo_periodo,$codigo_tipo_regiao,$codigo_estat_conexao,$esquemadb,$tabela,$colunavalor,$colunaidgeo,$filtro,$nomemedida);
+			}
 		}
 		else{
 			$m->alteraMedidaVariavel("",$id_medida_variavel,$codigo_unidade_medida,$codigo_tipo_periodo,$codigo_tipo_regiao,$codigo_estat_conexao,$esquemadb,$tabela,$colunavalor,$colunaidgeo,$filtro,$nomemedida);
@@ -596,7 +599,6 @@ switch (strtoupper($funcao))
 		$tabela = "i3geoestat_medida_variavel";
 		$id = $id_medida_variavel;
 		$f = verificaFilhos();
-
 		if(!$f){
 			$m = new Metaestat();
 			retornaJSON($m->excluirRegistro("i3geoestat_medida_variavel","id_medida_variavel",$id));

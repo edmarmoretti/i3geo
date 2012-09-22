@@ -1,21 +1,34 @@
 MAP
-
-
-SYMBOLSET ../symbols/simbolos.sym
-FONTSET   "../symbols/fontes.txt"
-LAYER
-	NAME teste5
-	TYPE line
-	DATA ""
-	METADATA
-		TEMA "teste criando novo mapfile"
-		CLASSE "SIM"
-	END
-    CLASS
-        NAME ""
-        STYLE
-        	COLOR 0 0 0
-        END
+  FONTSET "../symbols/fontes.txt"
+  SYMBOLSET "../symbols/simbolos.sym"
+  LAYER
+    CONNECTION "user=postgres password=postgres dbname=dbspo host=localhost port=5432"
+    CONNECTIONTYPE POSTGIS
+    DATA "the_geom FROM (select *,(SELECT ST_Transform(ST_Segmentize(ST_MakeLine( ST_Transform(ST_SetSRID(ST_MakePoint(x1, y1),4326), 2154),ST_Transform(ST_SetSRID(ST_MakePoint(x2, y2),4326), 2154)), 	100000), 4326) ) as the_geom from dbgeo.tb_fluxo_pacientes) as foo USING UNIQUE tipo USING SRID=4326"
+    METADATA
+      "cache"	""
+      "CLASSE"	"SIM"
+      "permitekmz"	""
+      "permitedownload"	""
+      "download"	"SIM"
+      "permiteogc"	"sim"
+      "permitekml"	"sim"
+      "convcaracter"	"SIM"
+      "TEMA"	"Teste 5"
     END
-END
+    NAME "teste5"
+    STATUS OFF
+    TEMPLATE "none.htm"
+    TYPE LINE
+    UNITS METERS
+    CLASS
+      NAME ""
+      STYLE
+        COLOR 196 185 103
+        SYMBOL linha
+        WIDTH 1
+      END
+    END
+  END
+
 END

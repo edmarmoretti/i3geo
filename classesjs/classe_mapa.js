@@ -497,6 +497,14 @@ i3GEO.mapa = {
 	*/
 	dialogo:{
 		/*
+		Function: metaestat
+
+		Abre a janela de dialogo da ferramenta de cartogramas estatisticos
+		*/
+		metaestat: function(){
+			i3GEO.util.dialogoFerramenta("i3GEO.mapa.dialogo.metaestat()","metaestat","metaestat");
+		},
+		/*
 		Function: animacao
 
 		Abre a janela de dialogo da ferramenta que permite animar o mapa atual
