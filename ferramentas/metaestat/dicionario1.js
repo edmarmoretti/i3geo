@@ -30,7 +30,7 @@ it:""
 }],
 "5":[
 {
-pt:"Ou crie uma nova",
+pt:"ou crie uma nova",
 en:"",
 es:"",
 it:""
@@ -44,12 +44,26 @@ it:""
 }],
 "7":[
 {
-pt:"",
+pt:"Crie ou edite as classifica&ccedil;&otilde;es que podem ser utilizadas para representar os dados escolhidos. As classifica&ccedil;&otilde;es definem as cores para o mapa e os valores que cada classe abrange. Na pr&oacute;xima tela ser&atilde;o definidas as classes.",
 en:"",
 es:"",
 it:""
 }],
 "8":[
+{
+pt:"Edite",
+en:"",
+es:"",
+it:""
+}],
+"9":[
+{
+pt:"",
+en:"",
+es:"",
+it:""
+}],
+"10":[
 {
 pt:"",
 en:"",
