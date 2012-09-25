@@ -1371,25 +1371,31 @@ funcaoOK - string com o nome da fun&ccedil;&atilde;o que ser&aacute; executada q
 funcaoClose - nome da funcao que ser&aacute; executada quando a janela for fechada. Pode ser "" para escapar.
 
 titulo - titulo da janela
+
+modal - boolean
 */
-function core_montaEditor(funcaoOK,w,h,funcaoClose,titulo)
+function core_montaEditor(funcaoOK,w,h,funcaoClose,titulo,modal)
 {
 	if(arguments.length == 0)
 	{
 		funcaoOK = "";
 		w = "400px";
 		h = "354px";
+		modal == true;
 	}
 	if(arguments.length < 2)
 	{
 		w = "400px";
 		h = "354px";
+		modal == true;
 	}
 	if(!titulo){
 		titulo = "Editor";
+		modal == true;
 	}
 	if(!funcaoClose){
 		funcaoClose = "";
+		modal == true;
 	}
 	if(!$i("janela_editor"))
 	{
@@ -1419,7 +1425,7 @@ function core_montaEditor(funcaoOK,w,h,funcaoClose,titulo)
 				}}}
 			);
 		}
-		YAHOO.admin.container.panelEditor = new YAHOO.widget.Panel("janela_editor", { fixedcenter:true,close:true,width:w, overflow:"auto",modal: true,visible:false,constraintoviewport:true } );
+		YAHOO.admin.container.panelEditor = new YAHOO.widget.Panel("janela_editor", { fixedcenter:true,close:true,width:w, overflow:"auto",modal: modal,visible:false,constraintoviewport:true } );
 		YAHOO.admin.container.panelEditor.render();
 	}
 	else

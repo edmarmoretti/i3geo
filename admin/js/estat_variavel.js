@@ -758,7 +758,7 @@ i3GEOadmin.variaveis = {
 						if(tipo == "medidaVariavel"){
 							var ins = "",
 							dados = YAHOO.lang.JSON.parse(o.responseText);
-							core_montaEditor("","480px","300px","","SQL");
+							core_montaEditor("","480px","300px","","Testes",false);
 							ins = "<p><b>Select simples:</b> "+dados.sql;
 							ins += "<p><b>Mapserver:</b> "+dados.sqlmapserver;
 							ins += "<p><b>Última URL:</b><div id='ultimaUrl'></div> ";
