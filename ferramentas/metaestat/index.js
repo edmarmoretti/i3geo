@@ -560,7 +560,7 @@ i3GEOF.metaestat = {
 							//refaz o conteudo para mostrar a nova adicao
 							i3GEOF.metaestat.editor.removeEl("i3GEOF.metaestat.editor.t3");
 							// Enome e o id do input onde o usuario escolheu o nome da nova variavel
-							i3GEOF.metaestat.editor.t3(true,$i("Enome").value);
+							i3GEOF.metaestat.editor.t4(true,$i("Enome").value);
 						};
 						var id_classificacao = $i("i3geoCartoComboClassificacoesEditor").value;
 						if(id_classificacao !== ""){
@@ -592,7 +592,15 @@ i3GEOF.metaestat = {
 						i3GEOF.metaestat.editor.removeEl("i3GEOF.metaestat.editor.t3");
 					},
 					quartis: function(){
-						//TODO
+						//TODO quartis
+						var id_medida_variavel = $i("i3geoCartoComboMedidaVariavelEditor").value,
+							id_classificacao = $i("i3geoCartoComboClassificacoesEditor").value,
+							p = i3GEO.configura.locaplic+"/admin/php/metaestat.php?funcao=calculaClassificacao&tipo=quartil&id_classificacao="+id_classificacao+"&id_medida_variavel="+id_medida_variavel+"&g_sid="+i3GEO.configura.sid,
+							temp = function(retorno){
+								core_carregando("desativa");
+							};
+						core_carregando("ativa");
+						i3GEO.util.ajaxGet(p,temp);
 					},
 					intervalosIguais: function(){
 
@@ -728,6 +736,9 @@ i3GEOF.metaestat = {
 								"<br><br><p><input id=i3GEOFmetaestatEditorBotao6 type='button' value='"+$trad(11,i3GEOF.metaestat.dicionario1)+"' />" +
 								"&nbsp;<input id=i3GEOFmetaestatEditorBotao7 type='button' value='"+$trad(12,i3GEOF.metaestat.dicionario1)+"' />";
 								i3GEO.util.proximoAnterior("i3GEOF.metaestat.editor.t3()","i3GEOF.metaestat.editor.t5()",ins,"i3GEOF.metaestat.editor.t4","i3GEOFmetaestatEditor",true);
+								//i3GEO.util.abreColourRamp("","listaColourRamp",ncores);
+								//		'<input type=hidden  value="" id="listaColourRamp" onchange="javascript:i3GEOF.legenda.aplicaColourRamp()" />'; //utilizado pelo seletor de colourramp
+
 								new YAHOO.widget.Button(
 									"i3GEOFmetaestatEditorBotao6",
 									{onclick:{fn: i3GEOF.metaestat.editor.quartis}}

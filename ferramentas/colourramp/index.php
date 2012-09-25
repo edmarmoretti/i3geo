@@ -1,16 +1,19 @@
 <?php
-	include_once("../../classesphp/pega_variaveis.php");
-	include_once("../../classesphp/class.palette.php");
+	include_once(__DIR__."/../../classesphp/pega_variaveis.php");
+	include_once(__DIR__."/../../classesphp/class.palette.php");
 	$m = new palette();
-	$lista = implode(",",($m->listaColourRamps("../..")));
+	$lista = implode(",",($m->listaColourRamps(__DIR__."/../..")));
 	if(!isset($ncores))
 	{$ncores = 10;}
+	if(empty($locaplic)){
+		$locaplic = "../..";
+	}
 ?>
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1" />
-<script type="text/javascript" src="../../classesjs/i3geo.js"></script>
+<script type="text/javascript" src="<?php echo $locaplic;?>/classesjs/i3geo.js"></script>
 <style>
 body{
 	background-color:white;
@@ -41,7 +44,7 @@ body{
 }
 #demo_bg {
     position: relative;
-    background: url(../../pacotes/yui290/examples/slider/assets/dual_thumb_bg.gif) 0 5px no-repeat;
+    background: url(<?php echo $locaplic;?>/pacotes/yui290/build/slider/assets/dual_thumb_bg.gif) 0 5px no-repeat;
     height: 28px;
     width: 258px;
 	left: 8px;
@@ -56,7 +59,7 @@ body{
 /* Here's the highlight element */
 #demo_bg span {
     position: absolute;
-    background: url(../../pacotes/yui290/examples/slider/assets/dual_thumb_highlight.gif) 0 0 repeat-x;
+    background: url(<?php echo $locaplic;?>/pacotes/yui290/build/slider/assets/dual_thumb_highlight.gif) 0 0 repeat-x;
     top: 10px;
     left: 12px;
     height: 13px;
@@ -105,8 +108,8 @@ p .boom {
 <div id="imagens" ></div>
 <div id="demo_bg" title="Range slider">
     <span id="demo_highlight"></span>
-    <div id="demo_min_thumb"><img src="../../pacotes/yui290/examples/slider/assets/l-thumb-round.gif"></div>
-    <div id="demo_max_thumb"><img src="../../pacotes/yui290/examples/slider/assets/r-thumb-round.gif"></div>
+    <div id="demo_min_thumb"><img src="<?php echo $locaplic;?>/pacotes/yui290/build/slider/assets/l-thumb-round.gif"></div>
+    <div id="demo_max_thumb"><img src="<?php echo $locaplic;?>/pacotes/yui290/build/slider/assets/r-thumb-round.gif"></div>
 </div>
 <p><span id="demo_range">0-255</span></p>
 <div id=cores ></div>
@@ -124,7 +127,7 @@ lista = lista.split(",");
 var n = lista.length;
 var ins = "";
 for(var i=0; i<n; i++){
-	ins += "<img title='"+lista[i]+" 'onclick='geracores(\""+lista[i]+"\")' src='../../symbols/colourramp/"+lista[i]+".gif' />";
+	ins += "<img title='"+lista[i]+" 'onclick='geracores(\""+lista[i]+"\")' src='<?php echo $locaplic;?>/symbols/colourramp/"+lista[i]+".gif' />";
 }
 $i("imagens").innerHTML = ins;
 
@@ -143,7 +146,7 @@ function geracores(codigo){
 			try{
 				if(retorno.data[i].r != undefined){
 					cor = retorno.data[i].r+","+retorno.data[i].g+","+retorno.data[i].b;
-					ins += "<tr><td><img src='../../imagens/x.png' style='cursor:pointer;' title='excluir' onclick='javascript:$i(\"cor_"+cor+"\").style.display=\"none\";this.style.display=\"none\"' </td><td><p id='cor_"+cor+"' style='width:250px;heigth:10px;background-color:rgb("+cor+")'><input onchange='javascript:$i(\"cor_"+cor+"\").style.backgroundColor=this.value;' type=text size=17 value=\"rgb("+cor+")\"/></p></td></tr>";
+					ins += "<tr><td><img src='<?php echo $locaplic;?>/imagens/x.png' style='cursor:pointer;' title='excluir' onclick='javascript:$i(\"cor_"+cor+"\").style.display=\"none\";this.style.display=\"none\"' </td><td><p id='cor_"+cor+"' style='width:250px;heigth:10px;background-color:rgb("+cor+")'><input onchange='javascript:$i(\"cor_"+cor+"\").style.backgroundColor=this.value;' type=text size=17 value=\"rgb("+cor+")\"/></p></td></tr>";
 				}
 			}catch(e){}
 		}
@@ -155,9 +158,9 @@ function geracores(codigo){
 	if(nobj.value > (slider.maxVal - slider.minVal))
 	{nobj.value = slider.maxVal - slider.minVal;}
 	var ncores = nobj.value;
-	
-	var p = "../../classesphp/mapa_controle.php?funcao=geraCoresColourRamp&map_file=&g_sid=&codigo="+codigo+"&inicio="+slider.minVal+"&fim="+slider.maxVal+"&ncores="+ncores;
-	cpJSON.call(p,"foo",temp);	
+
+	var p = "<?php echo $locaplic;?>/classesphp/mapa_controle.php?funcao=geraCoresColourRamp&map_file=&g_sid=&codigo="+codigo+"&inicio="+slider.minVal+"&fim="+slider.maxVal+"&ncores="+ncores;
+	cpJSON.call(p,"foo",temp);
 }
 
 //
@@ -218,7 +221,7 @@ function aplicarCores()
         slider = YAHOO.widget.Slider.getHorizDualSlider("demo_bg",
             "demo_min_thumb", "demo_max_thumb",
             range, tickSize);
-        
+
         // Decorate the DualSlider instance with some new properties and
         // methods to maintain the highlight element
         YAHOO.lang.augmentObject(slider, {
@@ -236,7 +239,7 @@ function aplicarCores()
             updateHighlight : function () {
                 var delta = this.maxVal - this.minVal,
                     newStatus = 'ok';
-                
+
                 if (delta < boom_range) {
                     newStatus = 'boom';
                 } else if (delta < danger_range) {
