@@ -1484,6 +1484,15 @@ i3GEO.php = {
 		i3GEO.util.ajaxGet(p,funcao);
 	},
 	/*
+	Function: listaClasseClassificacao
+
+	Lista as classes de uma classificacao de uma medida de variavel do sistema de metadados estat&iacute;sticos
+	*/
+	listaClasseClassificacao: function(id_classificacao,funcao){
+		var p = i3GEO.configura.locaplic+"/admin/php/metaestat.php?funcao=listaClasseClassificacao&id_classificacao="+id_classificacao;
+		i3GEO.util.ajaxGet(p,funcao);
+	},
+	/*
 	Function: mapfileMedidaVariavel
 
 	Adiciona uma camada ao mapa baseado no sistema de metadados estat&iacute;sticos

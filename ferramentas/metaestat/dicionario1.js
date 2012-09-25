@@ -58,12 +58,33 @@ it:""
 }],
 "9":[
 {
-pt:"",
+pt:"Salvar",
 en:"",
 es:"",
 it:""
 }],
 "10":[
+{
+pt:"Utilize um dos m&eacute;todos abaixo para gerar as classes que ser&atilde;o utilizadas para representar os dados no cartograma",
+en:"",
+es:"",
+it:""
+}],
+"11":[
+{
+pt:"Divis&atilde;o em quartis",
+en:"",
+es:"",
+it:""
+}],
+"12":[
+{
+pt:"5 intervalos iguais",
+en:"",
+es:"",
+it:""
+}],
+"13":[
 {
 pt:"",
 en:"",

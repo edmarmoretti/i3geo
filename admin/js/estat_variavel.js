@@ -413,6 +413,8 @@ i3GEOadmin.variaveis = {
 					]
 				};
 			ins += core_geraLinhas(param);
+			//utilizado para passar o codigo da variavel qd for necessario
+			ins += "<input type=hidden id='Eid_medida_variavel' value='' />";
 			ins += "<br><br><br>";
 			$i("editor_bd").innerHTML = ins;
 		}
@@ -1026,7 +1028,7 @@ i3GEOadmin.variaveis = {
 			prog = i3GEO.configura.locaplic+"/admin/php/metaestat.php?funcao=alteraParametroMedida";
 		}
 		if(tipo == "classificacaoMedida"){
-			campos = new Array("nome","observacao");
+			campos = new Array("id_medida_variavel","nome","observacao");
 			par = "&id_classificacao="+id;
 			prog = i3GEO.configura.locaplic+"/admin/php/metaestat.php?funcao=alteraClassificacaoMedida";
 		}

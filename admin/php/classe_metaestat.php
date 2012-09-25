@@ -1281,5 +1281,14 @@ class Metaestat{
 		$xml .= '</result-set>' . PHP_EOL;
 		return $xml;
 	}
+	//busca o valor de uma chave em um array multiplo
+	function buscaNoArray($lista,$chave,$valor){
+		foreach($lista as $l){
+			if($l[$chave] == $valor){
+				return true;
+			}
+		}
+		return false;
+	}
 }
 ?>

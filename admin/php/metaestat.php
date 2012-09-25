@@ -229,6 +229,7 @@ switch (strtoupper($funcao))
 	case "ALTERAVARIAVEL":
 		$m = new Metaestat();
 		if(empty($codigo_variavel)){
+			//isso ira criar um novo registro
 			$codigo_variavel = $m->alteraVariavel();
 			if(!empty($nome)){
 				$m->alteraVariavel($codigo_variavel,$nome,$descricao);
@@ -252,6 +253,7 @@ switch (strtoupper($funcao))
 	case "ALTERAMEDIDAVARIAVEL":
 		$m = new Metaestat();
 		if(empty($id_medida_variavel)){
+			//isso ira criar um novo registro
 			$id_medida_variavel = $m->alteraMedidaVariavel($codigo_variavel);
 			if(!empty($nomemedida)){
 				$m->alteraMedidaVariavel("",$id_medida_variavel,$codigo_unidade_medida,$codigo_tipo_periodo,$codigo_tipo_regiao,$codigo_estat_conexao,$esquemadb,$tabela,$colunavalor,$colunaidgeo,$filtro,$nomemedida);
@@ -260,6 +262,43 @@ switch (strtoupper($funcao))
 		else{
 			$m->alteraMedidaVariavel("",$id_medida_variavel,$codigo_unidade_medida,$codigo_tipo_periodo,$codigo_tipo_regiao,$codigo_estat_conexao,$esquemadb,$tabela,$colunavalor,$colunaidgeo,$filtro,$nomemedida);
 		}
+		//verifica se a criacao da medida esta sendo feita para a tabela default
+		if($codigo_tipo_periodo < 5 && $codigo_estat_conexao == 0 && $esquemadb == "public" && $colunaidgeo == "codigoregiao"){
+			$parametros = $m->listaParametro($id_medida_variavel);
+			//adiciona os parametros de tempo conforme o tipo de periodo escolhido
+			//anual
+			if($codigo_tipo_periodo >= 0){
+				if($m->buscaNoArray($parametros,"coluna","ano") == false){
+					$id_parametro_medida = $m->alteraParametroMedida($id_medida_variavel,"","","","","");
+					$m->alteraParametroMedida($id_medida_variavel,$id_parametro_medida,"Ano","","ano","");
+				}
+				$codigo_tipo_periodo = 1;
+			}
+			//mensal
+			if($codigo_tipo_periodo >= 1){
+				if($m->buscaNoArray($parametros,"coluna","mes") == false){
+					$id_parametro_medida = $m->alteraParametroMedida($id_medida_variavel,"","","","","");
+					$m->alteraParametroMedida($id_medida_variavel,$id_parametro_medida,"Mes","","mes","");
+				}
+				$codigo_tipo_periodo = 2;
+			}
+			//diario
+			if($codigo_tipo_periodo >= 2){
+				if($m->buscaNoArray($parametros,"coluna","dia") == false){
+					$id_parametro_medida = $m->alteraParametroMedida($id_medida_variavel,"","","","","");
+					$m->alteraParametroMedida($id_medida_variavel,$id_parametro_medida,"Dia","","dia","");
+				}
+				$codigo_tipo_periodo = 3;
+			}
+			//horario
+			if($codigo_tipo_periodo >= 3){
+				if($m->buscaNoArray($parametros,"coluna","hora") == false){
+					$id_parametro_medida = $m->alteraParametroMedida($id_medida_variavel,"","","","","");
+					$m->alteraParametroMedida($id_medida_variavel,$id_parametro_medida,"Hora","","hora","");
+				}
+			}
+		}
+
 		retornaJSON($m->listaMedidaVariavel("",$id_medida_variavel));
 		exit;
 	break;
@@ -275,6 +314,7 @@ switch (strtoupper($funcao))
 	case "ALTERAPARAMETROMEDIDA":
 		$m = new Metaestat();
 		if(empty($id_parametro_medida)){
+			//isso ira criar um novo registro
 			$id_parametro_medida = $m->alteraParametroMedida($id_medida_variavel);
 		}
 		else{
@@ -295,7 +335,11 @@ switch (strtoupper($funcao))
 	case "ALTERACLASSIFICACAOMEDIDA":
 		$m = new Metaestat();
 		if(empty($id_classificacao)){
+			//isso ira criar um novo registro
 			$id_classificacao = $m->alteraClassificacaoMedida($id_medida_variavel);
+			if(!empty($nome)){
+				$m->alteraClassificacaoMedida($id_classificacao,$id_classificacao,$nome,$observacao);
+			}
 		}
 		else{
 			$m->alteraClassificacaoMedida("",$id_classificacao,$nome,$observacao);
@@ -315,6 +359,7 @@ switch (strtoupper($funcao))
 	case "ALTERACLASSECLASSIFICACAO":
 		$m = new Metaestat();
 		if(empty($id_classe)){
+			//isso ira criar um novo registro
 			$id_classe = $m->alteraClasseClassificacao($id_classificacao);
 		}
 		else{
@@ -326,6 +371,7 @@ switch (strtoupper($funcao))
 	case "ALTERALINKMEDIDA":
 		$m = new Metaestat();
 		if(empty($id_link)){
+			//isso ira criar um novo registro
 			$id_link = $m->alteraLinkMedida($id_medida_variavel);
 		}
 		else{
@@ -337,6 +383,7 @@ switch (strtoupper($funcao))
 	case "ALTERARFONTEINFO":
 		$m = new Metaestat();
 		if(empty($id_fonteinfo)){
+			//isso ira criar um novo registro
 			$id_fonteinfo = $m->alteraFonteinfo();
 		}
 		else{
@@ -438,7 +485,10 @@ switch (strtoupper($funcao))
 			$codigo_tipo_periodo = $m->alteraTipoPeriodo();
 		}
 		else{
-			$codigo_unidade_medida = $m->alteraTipoPeriodo($codigo_tipo_periodo,$nome,$descricao);
+			//impede a alteracao dos valores reservados
+			if($codigo_tipo_periodo > 4){
+				$codigo_unidade_medida = $m->alteraTipoPeriodo($codigo_tipo_periodo,$nome,$descricao);
+			}
 		}
 		retornaJSON($m->listaTipoPeriodo($codigo_tipo_periodo));
 		exit;
@@ -482,15 +532,22 @@ switch (strtoupper($funcao))
 	{JSON}
 	*/
 	case "EXCLUIRTIPOPERIODO":
-		$tabela = "i3geoestat_tipo_periodo";
-		$id = $codigo_tipo_periodo;
-		$f = verificaFilhos();
-		if(!$f){
-			$m = new Metaestat();
-			retornaJSON($m->excluirRegistro("i3geoestat_tipo_periodo","codigo_tipo_periodo",$id));
+		//impede a alteracao dos valores reservados
+		if($codigo_tipo_periodo > 4){
+			$tabela = "i3geoestat_tipo_periodo";
+			$id = $codigo_tipo_periodo;
+			$f = verificaFilhos();
+			if(!$f){
+				$m = new Metaestat();
+				retornaJSON($m->excluirRegistro("i3geoestat_tipo_periodo","codigo_tipo_periodo",$id));
+			}
+			else{
+				retornaJSON("erro");
+			}
 		}
-		else
+		else{
 			retornaJSON("erro");
+		}
 		exit;
 	break;
 	/*
@@ -543,15 +600,22 @@ switch (strtoupper($funcao))
 	{JSON}
 	*/
 	case "EXCLUIRCONEXAO":
-		$tabela = "i3geoestat_conexao";
-		$id = $codigo_estat_conexao;
-		$f = verificaFilhos();
-		if(!$f){
-			$m = new Metaestat();
-			retornaJSON($m->excluirRegistro("i3geoestat_conexao","codigo_estat_conexao",$id));
+		//impede a alteracao dos valores reservados
+		if($codigo_estat_conexao > 0){
+			$tabela = "i3geoestat_conexao";
+			$id = $codigo_estat_conexao;
+			$f = verificaFilhos();
+			if(!$f){
+				$m = new Metaestat();
+				retornaJSON($m->excluirRegistro("i3geoestat_conexao","codigo_estat_conexao",$id));
+			}
+			else{
+				retornaJSON("erro");
+			}
 		}
-		else
+		else{
 			retornaJSON("erro");
+		}
 		exit;
 	break;
 	/*

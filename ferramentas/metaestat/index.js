@@ -1,23 +1,23 @@
 /*
  T i*tle: Cartogramas estat&iacute;sticos
- 
+
  Arquivo:
- 
+
  i3geo/ferramentas/metaestat/index.js
- 
+
  Licenca:
- 
+
  GPL2
- 
+
  i3Geo Interface Integrada de Ferramentas de Geoprocessamento para Internet
- 
+
  Direitos Autorais Reservados (c) 2006 Minist&eacute;rio do Meio Ambiente Brasil
  Desenvolvedor: Edmar Moretti edmar.moretti@mma.gov.br
- 
+
  Este programa &eacute; software livre; voc&ecirc; pode redistribu&iacute;-lo
  e/ou modific&aacute;-lo sob os termos da Licen&ccedil;a P&uacute;blica Geral
  GNU conforme publicada pela Free Software Foundation;
- 
+
  Este programa &eacute; distribu&iacute;do na expectativa de que seja &uacute;til,
  por&eacute;m, SEM NENHUMA GARANTIA; nem mesmo a garantia impl&iacute;cita
  de COMERCIABILIDADE OU ADEQUA&Ccedil;&Atilde;O A UMA FINALIDADE ESPEC&Iacute;FICA.
@@ -32,7 +32,7 @@ if(typeof(i3GEOF) === 'undefined'){
 }
 /*
  C l*asse: i3GEOF.metaestat
- 
+
  Gerencia os componentes do m&oacute;dulo de gera&ccedil;&atilde;o de cartogramas estat&iacute;sticos
  */
 i3GEOF.metaestat = {
@@ -222,7 +222,7 @@ i3GEOF.metaestat = {
 				}
 			},
 			comboTipoClassificacaoOnchange: function(){
-				
+
 			},
 			comboRegiao: function(id_medida_variavel){
 				i3GEOF.metaestat.comum.aguarde($i("i3geoCartoRegioesMedidasVariavel"));
@@ -400,6 +400,7 @@ i3GEOF.metaestat = {
 					}
 				},
 				editor: {
+					//TODO incluir botao para remover registros
 					inicia: function(){
 						YAHOO.namespace("admin.container");
 						if(typeof(i3GEOF.metaestat.dicionario1) === 'undefined'){
@@ -506,7 +507,7 @@ i3GEOF.metaestat = {
 							i3GEOF.metaestat.editor.removeEl("i3GEOF.metaestat.editor.t2");
 							// Enome e o id do input onde o usuario escolheu o nome da nova variavel
 							i3GEOF.metaestat.editor.t2(true,$i("Enomemedida").value);
-							//TODO adicionar os parametros de tempo que ja existem na tabela
+							//TODO inserir fontes e links
 						};
 						i3GEOadmin.variaveis.editar("medidaVariavel","");
 						//passa o codigo da variavel
@@ -522,6 +523,10 @@ i3GEOF.metaestat = {
 						$i("Ecolunavalor").value = "valor_num";
 						//id que liga com o geo
 						$i("Ecolunaidgeo").value = "codigoregiao";
+						//unidade de medida
+						$i("Ecodigo_unidade_medida").value = 1;
+						//periodo
+						$i("Ecodigo_tipo_periodo").value = 0;
 						//impede a alteracao do filtro
 						$i("Efiltro").disabled = "disabled";
 					},
@@ -536,6 +541,30 @@ i3GEOF.metaestat = {
 						var id_medida_variavel = $i("i3geoCartoComboMedidaVariavelEditor").value;
 						if(id_medida_variavel !== ""){
 							i3GEOadmin.variaveis.editar("medidaVariavel",id_medida_variavel);
+						}
+					},
+					criaClassificacao: function(){
+						i3GEOadmin.variaveis.aposGravar = function(){
+							core_carregando("desativa");
+							//refaz o conteudo para mostrar a nova adicao
+							i3GEOF.metaestat.editor.removeEl("i3GEOF.metaestat.editor.t3");
+							// Enome e o id do input onde o usuario escolheu o nome da nova variavel
+							i3GEOF.metaestat.editor.t3(true,$i("Enome").value);
+						};
+						i3GEOadmin.variaveis.editar("classificacaoMedida","");
+						$i("Eid_medida_variavel").value = $i("i3geoCartoComboMedidaVariavelEditor").value;
+					},
+					editaClassificacao: function(){
+						i3GEOadmin.variaveis.aposGravar = function(){
+							core_carregando("desativa");
+							//refaz o conteudo para mostrar a nova adicao
+							i3GEOF.metaestat.editor.removeEl("i3GEOF.metaestat.editor.t3");
+							// Enome e o id do input onde o usuario escolheu o nome da nova variavel
+							i3GEOF.metaestat.editor.t3(true,$i("Enome").value);
+						};
+						var id_classificacao = $i("i3geoCartoComboClassificacoesEditor").value;
+						if(id_classificacao !== ""){
+							i3GEOadmin.variaveis.editar("classificacaoMedida",id_classificacao);
 						}
 					},
 					removeEl:function(id){
@@ -561,6 +590,12 @@ i3GEOF.metaestat = {
 					},
 					comboMedidaVariavelOnchange: function(combo){
 						i3GEOF.metaestat.editor.removeEl("i3GEOF.metaestat.editor.t3");
+					},
+					quartis: function(){
+						//TODO
+					},
+					intervalosIguais: function(){
+
 					},
 					t0: function(){
 						var ins = "<p class='paragrafo' >" + $trad(2,i3GEOF.metaestat.dicionario1) +
@@ -622,18 +657,18 @@ i3GEOF.metaestat = {
 								i3GEO.util.proximoAnterior("i3GEOF.metaestat.editor.t1()","i3GEOF.metaestat.editor.t3()",ins,"i3GEOF.metaestat.editor.t2","i3GEOFmetaestatEditor",true);
 								new YAHOO.widget.Button(
 									"i3GEOFmetaestatEditorBotao4",
-								{onclick:{fn: i3GEOF.metaestat.editor.editaMedidaVariavel}}
+									{onclick:{fn: i3GEOF.metaestat.editor.editaMedidaVariavel}}
 								);
 								$i("i3GEOFmetaestatEditorBotao4-button").style.width = (i3GEOF.metaestat.LARGURA / 2) + "px";
 								new YAHOO.widget.Button(
 									"i3GEOFmetaestatEditorBotao4a",
-								{onclick:{fn: i3GEOF.metaestat.editor.criaMedidaVariavel}}
+									{onclick:{fn: i3GEOF.metaestat.editor.criaMedidaVariavel}}
 								);
 								$i("i3GEOFmetaestatEditorBotao4a-button").style.width = (i3GEOF.metaestat.LARGURA / 2) + "px";
 								if(textoSelecionado){
 									i3GEOF.metaestat.editor.selComboPorTexto("i3geoCartoComboMedidaVariavelEditor",textoSelecionado);
 								}
-								
+
 							},
 							codigo_variavel = $i("i3geoCartoComboVariavelEditor").value;
 							if(codigo_variavel == ""){
@@ -645,7 +680,7 @@ i3GEOF.metaestat = {
 						}
 					},
 					t3: function(remove,textoSelecionado){
-						//TODO escolha dos parametros de classificacao
+						//TODO incluir opcao de upload de dados
 						if(remove == true){
 							//remove o conteudo anteriormente construido
 							i3GEOF.metaestat.editor.removeEl("i3GEOF.metaestat.editor.t3");
@@ -657,16 +692,54 @@ i3GEOF.metaestat = {
 						else{
 							var temp = function(dados){
 								var ins = "<p class='paragrafo' >" + $trad(7,i3GEOF.metaestat.dicionario1) + "<br><br>" +
-								"<span>" + i3GEOF.metaestat.principal.comboClassificacoesMedidaVariavel(dados,"i3geoCartoComboClassificacoesMedidaVariavelEditor","") + "</span>" +
-								"<br><br><p><input id=i3GEOFmetaestatEditorBotao5 type='button' value='"+$trad(5,i3GEOF.metaestat.dicionario1)+"' /><br>";
+								"<span>" + i3GEOF.metaestat.principal.comboClassificacoesMedidaVariavel(dados,"i3geoCartoComboClassificacoesEditor","") + "</span>" +
+								"<br><br><p><input id=i3GEOFmetaestatEditorBotao5 type='button' value='"+$trad(8,i3GEOF.metaestat.dicionario1)+"' />" +
+								"&nbsp;<input id=i3GEOFmetaestatEditorBotao5a type='button' value='"+$trad(5,i3GEOF.metaestat.dicionario1)+"' /><br>";
 								i3GEO.util.proximoAnterior("i3GEOF.metaestat.editor.t2()","i3GEOF.metaestat.editor.t4()",ins,"i3GEOF.metaestat.editor.t3","i3GEOFmetaestatEditor",true);
 								new YAHOO.widget.Button(
 									"i3GEOFmetaestatEditorBotao5",
-								{onclick:{fn: i3GEOF.metaestat.editor.criaClassificacao}}
+									{onclick:{fn: i3GEOF.metaestat.editor.editaClassificacao}}
 								);
 								$i("i3GEOFmetaestatEditorBotao5-button").style.width = (i3GEOF.metaestat.LARGURA / 2) + "px";
+								new YAHOO.widget.Button(
+									"i3GEOFmetaestatEditorBotao5a",
+									{onclick:{fn: i3GEOF.metaestat.editor.criaClassificacao}}
+								);
+								$i("i3GEOFmetaestatEditorBotao5a-button").style.width = (i3GEOF.metaestat.LARGURA / 2) + "px";
+
 							};
 							i3GEO.php.listaClassificacaoMedida($i("i3geoCartoComboMedidaVariavelEditor").value,temp);
+						}
+					},
+					t4: function(remove,textoSelecionado){
+						//TODO incluir as opcoes de escolha de cores e criacao de classes por quartil e intervalos iguais
+						if(remove == true){
+							//remove o conteudo anteriormente construido
+							i3GEOF.metaestat.editor.removeEl("i3GEOF.metaestat.editor.t4");
+						}
+						if($i("i3geoCartoComboMedidaVariavelEditor").value === ""){
+							alert($trad(9,i3GEOF.metaestat.dicionario));
+							i3GEOF.metaestat.editor.t3(false);
+						}
+						else{
+							var temp = function(dados){
+								var ins = "<p class='paragrafo' >" + $trad(10,i3GEOF.metaestat.dicionario1) + "<br><br>" +
+								"<span></span>" +
+								"<br><br><p><input id=i3GEOFmetaestatEditorBotao6 type='button' value='"+$trad(11,i3GEOF.metaestat.dicionario1)+"' />" +
+								"&nbsp;<input id=i3GEOFmetaestatEditorBotao7 type='button' value='"+$trad(12,i3GEOF.metaestat.dicionario1)+"' />";
+								i3GEO.util.proximoAnterior("i3GEOF.metaestat.editor.t3()","i3GEOF.metaestat.editor.t5()",ins,"i3GEOF.metaestat.editor.t4","i3GEOFmetaestatEditor",true);
+								new YAHOO.widget.Button(
+									"i3GEOFmetaestatEditorBotao6",
+									{onclick:{fn: i3GEOF.metaestat.editor.quartis}}
+								);
+								$i("i3GEOFmetaestatEditorBotao6-button").style.width = (i3GEOF.metaestat.LARGURA / 2) + "px";
+								new YAHOO.widget.Button(
+									"i3GEOFmetaestatEditorBotao7",
+									{onclick:{fn: i3GEOF.metaestat.editor.intervalosIguais}}
+								);
+								$i("i3GEOFmetaestatEditorBotao7-button").style.width = (i3GEOF.metaestat.LARGURA / 2) + "px";
+							};
+							i3GEO.php.listaClasseClassificacao($i("i3geoCartoComboClassificacoesEditor").value,temp);
 						}
 					}
 				},
@@ -985,7 +1058,7 @@ i3GEOF.metaestat = {
 						return ins;
 					},
 					comboClassificacoesMedidaVariavelOnchange: function(){
-						
+
 					}
 				}
 			};
