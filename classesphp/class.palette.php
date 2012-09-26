@@ -146,6 +146,39 @@ $numSteps - n&uacute;mero de cores finais
 	$conteudo = fread ($handle, filesize ($arq));
 	fclose ($handle);
 	$cores = unserialize($conteudo);
+	if(count($cores) < 250){
+		$arq = $locaplic."/symbols/colourramp/".$codigo.".dat";
+		$handle = fopen ($arq, "r");
+		$linhas = array();
+		$cores = array();
+		while (!feof ($handle)) {
+			$buffer = fgets($handle);
+			$buffer = str_replace("     "," ",$buffer);
+			$buffer = str_replace("    "," ",$buffer);
+			$buffer = str_replace("   "," ",$buffer);
+			$buffer = str_replace("  "," ",$buffer);
+			$ts = explode(" ",$buffer);
+			$linha = array();
+			foreach ($ts as $t){
+				if($t != ""){
+					$linha[] = intval($t);
+				}
+			}
+			//var_dump($linha);
+			//if($linha[1])
+			$cores[$linha[0]] = array("r"=>$linha[1],"g"=>$linha[2],"b"=>$linha[3]);
+			//if($linha[4])
+			$cores[$linha[4]] = array("r"=>$linha[5],"g"=>$linha[6],"b"=>$linha[7]);
+			//if($linha[8])
+			$cores[$linha[8]] = array("r"=>$linha[9],"g"=>$linha[10],"b"=>$linha[11]);
+			//if($linha[12])
+			$cores[$linha[12]] = array("r"=>$linha[13],"g"=>$linha[14],"b"=>$linha[15]);
+		}
+		fclose ($handle);
+		rsort($cores);
+		array_pop($cores);
+	}
+	//echo count($cores);exit;
 	if($ncores == 0)
 	{return $cores;}
 	$coresfinais = array();
