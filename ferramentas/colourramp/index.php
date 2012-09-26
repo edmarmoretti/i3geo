@@ -194,7 +194,7 @@ function aplicarCores()
 		doc.getElementById(elemento).onchange.call();
 	}
 	catch(e){}
-	window.parent.YAHOO.janelaCorRamp.xp.panel.destroy();
+	window.parent.YAHOO.i3GEO.janela.manager.find("i3geo_janelaCorRamp").destroy();
 }
 
 (function () {

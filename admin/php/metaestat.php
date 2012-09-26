@@ -252,9 +252,18 @@ switch (strtoupper($funcao))
 	*/
 	case "ALTERAMEDIDAVARIAVEL":
 		$m = new Metaestat();
+		$default = false;
+		//verifica se a criacao da medida esta sendo feita na tabela default
+		if($codigo_tipo_periodo < 5 && $codigo_estat_conexao == 0 && $esquemadb == "public" && $colunaidgeo == "codigoregiao"){
+			$default = true;
+		}
 		if(empty($id_medida_variavel)){
 			//isso ira criar um novo registro
 			$id_medida_variavel = $m->alteraMedidaVariavel($codigo_variavel);
+			//o filtro e necessario para permitir a selecao dos registros apenas do que pertence a medida da variavel escolhida
+			if($default == true){
+				$filtro = " id_medida_variavel = $id_medida_variavel ";
+			}
 			if(!empty($nomemedida)){
 				$m->alteraMedidaVariavel("",$id_medida_variavel,$codigo_unidade_medida,$codigo_tipo_periodo,$codigo_tipo_regiao,$codigo_estat_conexao,$esquemadb,$tabela,$colunavalor,$colunaidgeo,$filtro,$nomemedida);
 			}
@@ -262,10 +271,9 @@ switch (strtoupper($funcao))
 		else{
 			$m->alteraMedidaVariavel("",$id_medida_variavel,$codigo_unidade_medida,$codigo_tipo_periodo,$codigo_tipo_regiao,$codigo_estat_conexao,$esquemadb,$tabela,$colunavalor,$colunaidgeo,$filtro,$nomemedida);
 		}
-		//verifica se a criacao da medida esta sendo feita para a tabela default
-		if($codigo_tipo_periodo < 5 && $codigo_estat_conexao == 0 && $esquemadb == "public" && $colunaidgeo == "codigoregiao"){
+		//adiciona os parametros de tempo conforme o tipo de periodo escolhido
+		if($default == true){
 			$parametros = $m->listaParametro($id_medida_variavel);
-			//adiciona os parametros de tempo conforme o tipo de periodo escolhido
 			//anual
 			if($codigo_tipo_periodo >= 0){
 				if($m->buscaNoArray($parametros,"coluna","ano") == false){
@@ -298,7 +306,6 @@ switch (strtoupper($funcao))
 				}
 			}
 		}
-
 		retornaJSON($m->listaMedidaVariavel("",$id_medida_variavel));
 		exit;
 	break;
@@ -345,6 +352,38 @@ switch (strtoupper($funcao))
 			$m->alteraClassificacaoMedida("",$id_classificacao,$nome,$observacao);
 		}
 		retornaJSON($m->listaClassificacaoMedida($id_medida_variavel,$id_classificacao));
+		exit;
+	break;
+	case "CALCULACLASSIFICACAO":
+		if($tipo == "quartil"){
+			$m = new Metaestat();
+			$dados = $m->sumarioMedidaVariavel($id_medida_variavel);
+			$dados = $dados["quartis"];
+			$n = count($dados["expressoes"]);
+			//as cores vem no formato rgb(0,0,0);
+			if(!empty($cores)){
+				$cores = str_replace("rgb(","",$cores);
+				$cores = str_replace(")","",$cores);
+				$cores = explode(";",$cores);
+			}
+			$m->excluirRegistro("i3geoestat_classes","id_classificacao",$id_classificacao);
+			for($i=0;$i<$n;++$i){
+				$id_classe = $m->alteraClasseClassificacao($id_classificacao);
+				$expressao = $dados["expressoes"][$i];
+				$titulo = $dados["nomes"][$i];
+				if(!empty($cores)){
+					$cor = explode(",",$cores[$i]);
+					$vermelho = $cor[0];
+					$verde = $cor[1];
+					$azul = $cor[2];
+				}
+				$m->alteraClasseClassificacao("",$id_classe,$titulo,$expressao,$vermelho,$verde,$azul,"","","-1","-1","-1","");
+			}
+		}
+		if($tipo == "intervalosiguais"){
+			//TODO
+		}
+		retornaJSON("ok");
 		exit;
 	break;
 	/*

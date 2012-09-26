@@ -36,13 +36,13 @@ class palette{
   protected $colors=array();  //Arreglo de colores por los cuales debe pasar la paleta
 	/*
 	Variavel: $colorPath
-	
+
 	Array com os valores finais
 	*/
   public $colorPath=array();  //Arreglo de colores finales de la paleta
 	/*
 	Variavel: $colorRGB
-	
+
 	Array com os valores finais em RGB
 	*/
   public $colorRGB=array();  //Arreglo de colores finales de la paleta em rgb
@@ -50,7 +50,7 @@ class palette{
 /*
 Function: __construct
 
-Cria o objeto palette 
+Cria o objeto palette
 
 parameters:
 
@@ -123,12 +123,12 @@ $numSteps - n&uacute;mero de cores finais
     $string.="\t</tr>\n</table>\n";
     return($string);
   }
-  
+
   public function listaColourRamps($locaplic){
 	$arquivos = array();
-	if ($dh = opendir($locaplic."/symbols/colourramp")) 
+	if ($dh = opendir($locaplic."/symbols/colourramp"))
 	{
-		while (($file = readdir($dh)) !== false) 
+		while (($file = readdir($dh)) !== false)
 		{
 			if(!stristr($file, '.cores') === FALSE)
 			{
@@ -151,8 +151,10 @@ $numSteps - n&uacute;mero de cores finais
 	$coresfinais = array();
 	$p = intval(($fim - $inicio) / $ncores);
 	for($i=$inicio;$i<=$fim;$i = $i + $p){
-		if(count($coresfinais) < $ncores)
-		$coresfinais[] = $cores[$i];
+		if(count($coresfinais) < $ncores){
+			if($cores[$i])
+			$coresfinais[] = $cores[$i];
+		}
 	}
 	return $coresfinais;
   }

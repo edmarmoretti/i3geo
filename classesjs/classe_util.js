@@ -2190,7 +2190,7 @@ i3GEO.util = {
 			novoel,
 			wdocaiframe,
 			fix = false,
-			wsrc = i3GEO.configura.locaplic+"/ferramentas/colourramp/index.php?ncores="+ncores+"&doc="+janelaid+"&elemento="+elemento, //+janela+"&elemento="+elemento+"&tipo="+tipo,
+			wsrc = i3GEO.configura.locaplic+"/ferramentas/colourramp/index.php?ncores="+ncores+"&doc="+janelaid+"&elemento="+elemento+"&locaplic="+i3GEO.configura.locaplic, //+janela+"&elemento="+elemento+"&tipo="+tipo,
 			nx = "",
 			texto = "Cor",
 			id = "i3geo_janelaCorRamp",

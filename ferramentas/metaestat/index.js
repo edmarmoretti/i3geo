@@ -592,10 +592,10 @@ i3GEOF.metaestat = {
 						i3GEOF.metaestat.editor.removeEl("i3GEOF.metaestat.editor.t3");
 					},
 					quartis: function(){
-						//TODO quartis
 						var id_medida_variavel = $i("i3geoCartoComboMedidaVariavelEditor").value,
 							id_classificacao = $i("i3geoCartoComboClassificacoesEditor").value,
-							p = i3GEO.configura.locaplic+"/admin/php/metaestat.php?funcao=calculaClassificacao&tipo=quartil&id_classificacao="+id_classificacao+"&id_medida_variavel="+id_medida_variavel+"&g_sid="+i3GEO.configura.sid,
+							cores = $i("listaColourRampEditor").value,
+							p = i3GEO.configura.locaplic+"/admin/php/metaestat.php?funcao=calculaClassificacao&tipo=quartil&cores="+cores+"&id_classificacao="+id_classificacao+"&id_medida_variavel="+id_medida_variavel+"&g_sid="+i3GEO.configura.sid,
 							temp = function(retorno){
 								core_carregando("desativa");
 							};
@@ -603,7 +603,7 @@ i3GEOF.metaestat = {
 						i3GEO.util.ajaxGet(p,temp);
 					},
 					intervalosIguais: function(){
-
+//TODO int iguais
 					},
 					t0: function(){
 						var ins = "<p class='paragrafo' >" + $trad(2,i3GEOF.metaestat.dicionario1) +
@@ -719,26 +719,29 @@ i3GEOF.metaestat = {
 							i3GEO.php.listaClassificacaoMedida($i("i3geoCartoComboMedidaVariavelEditor").value,temp);
 						}
 					},
-					t4: function(remove,textoSelecionado){
-						//TODO incluir as opcoes de escolha de cores e criacao de classes por quartil e intervalos iguais
-						if(remove == true){
-							//remove o conteudo anteriormente construido
-							i3GEOF.metaestat.editor.removeEl("i3GEOF.metaestat.editor.t4");
-						}
+					t4: function(){
+						//remove o conteudo anteriormente construido
+						i3GEOF.metaestat.editor.removeEl("i3GEOF.metaestat.editor.t4");
 						if($i("i3geoCartoComboMedidaVariavelEditor").value === ""){
 							alert($trad(9,i3GEOF.metaestat.dicionario));
 							i3GEOF.metaestat.editor.t3(false);
 						}
 						else{
 							var temp = function(dados){
-								var ins = "<p class='paragrafo' >" + $trad(10,i3GEOF.metaestat.dicionario1) + "<br><br>" +
-								"<span></span>" +
-								"<br><br><p><input id=i3GEOFmetaestatEditorBotao6 type='button' value='"+$trad(11,i3GEOF.metaestat.dicionario1)+"' />" +
-								"&nbsp;<input id=i3GEOFmetaestatEditorBotao7 type='button' value='"+$trad(12,i3GEOF.metaestat.dicionario1)+"' />";
+								var ins = "<p class='paragrafo' >" + $trad(10,i3GEOF.metaestat.dicionario1) +
+								"<br><br><p>" +
+								"&nbsp;<input id=i3GEOFmetaestatEditorBotao8 type='button' value='"+$trad(13,i3GEOF.metaestat.dicionario1)+"' />" +
+								"<br><br>&nbsp;<input id=i3GEOFmetaestatEditorBotao6 type='button' value='"+$trad(11,i3GEOF.metaestat.dicionario1)+"' />" +
+								"&nbsp;<input id=i3GEOFmetaestatEditorBotao7 type='button' value='"+$trad(12,i3GEOF.metaestat.dicionario1)+"' />" +
+								'<input type=hidden  value="" id="listaColourRampEditor"  />'; //utilizado pelo seletor de colourramp;
 								i3GEO.util.proximoAnterior("i3GEOF.metaestat.editor.t3()","i3GEOF.metaestat.editor.t5()",ins,"i3GEOF.metaestat.editor.t4","i3GEOFmetaestatEditor",true);
-								//i3GEO.util.abreColourRamp("","listaColourRamp",ncores);
-								//		'<input type=hidden  value="" id="listaColourRamp" onchange="javascript:i3GEOF.legenda.aplicaColourRamp()" />'; //utilizado pelo seletor de colourramp
-
+								new YAHOO.widget.Button(
+									"i3GEOFmetaestatEditorBotao8",
+									{onclick:{fn: function(){
+										i3GEO.util.abreColourRamp("","listaColourRampEditor",5);
+									}}}
+								);
+								$i("i3GEOFmetaestatEditorBotao8-button").style.width = (i3GEOF.metaestat.LARGURA / 2) + "px";
 								new YAHOO.widget.Button(
 									"i3GEOFmetaestatEditorBotao6",
 									{onclick:{fn: i3GEOF.metaestat.editor.quartis}}
@@ -1061,14 +1064,14 @@ i3GEOF.metaestat = {
 					},
 					comboClassificacoesMedidaVariavel: function(dados,idcombo){
 						var ins,i,n = dados.length;
-						ins = "<select id='"+idcombo+"' style='box-shadow:0 1px 5px gray;width:"+(i3GEOF.metaestat.LARGURA - 20)+"px' onchange='i3GEOF.metaestat.principal.comboClassificacoesMedidaVariavelOnchange()'><option value=''>---</option>";
+						ins = "<select id='"+idcombo+"' style='box-shadow:0 1px 5px gray;width:"+(i3GEOF.metaestat.LARGURA - 20)+"px' onchange='i3GEOF.metaestat.principal.comboClassificacoesMedidaVariavelOnchange(this)'><option value=''>---</option>";
 						for(i=0;i<n;i++){
 							ins += "<option title='"+dados[i].observacao+"' value='"+dados[i].id_classificacao+"'>"+dados[i].nome+"</option>";
 						}
 						ins += "</select>";
 						return ins;
 					},
-					comboClassificacoesMedidaVariavelOnchange: function(){
+					comboClassificacoesMedidaVariavelOnchange: function(combo){
 
 					}
 				}

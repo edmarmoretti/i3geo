@@ -475,8 +475,9 @@ class Metaestat{
 			$metaVariavel = $this->listaMedidaVariavel("",$id_medida_variavel);
 			$un = $this->listaUnidadeMedida($metaVariavel["codigo_unidade_medida"]);
 			$agrupamento = "";
+			$colunavalor = $metaVariavel["colunavalor"];
 			foreach($dados as $d){
-				$valores[] = $d[$metaVariavel["colunavalor"]];
+				$valores[] = $d[$colunavalor];
 			}
 			if(!empty($agruparpor)){
 				$agrupamento = array();
@@ -484,10 +485,10 @@ class Metaestat{
 					$g = $d[$agruparpor];
 					//var_dump($d);exit;
 					if(!empty($agrupamento[$g])){
-						$agrupamento[$g] += $d[$metaVariavel["colunavalor"]];
+						$agrupamento[$g] += $d[$colunavalor];
 					}
 					else{
-						$agrupamento[$g] = $d[$metaVariavel["colunavalor"]];
+						$agrupamento[$g] = $d[$colunavalor];
 					}
 				}
 				natsort($agrupamento);
@@ -497,6 +498,7 @@ class Metaestat{
 			$min = "";
 			$max = "";
 			$quantidade = count($valores);
+			$quartis = array();
 			if($un["permitesoma"] == "1"){
 				$soma = array_sum($valores);
 			}
@@ -507,9 +509,33 @@ class Metaestat{
 				sort($valores);
 				$min = $valores[0];
 				$max = $valores[$quantidade - 1];
+				include_once(__DIR__."/../../classesphp/classe_estatistica.php");
+				$calc = new estatistica();
+				$calc->calcula($valores);
+				$v = $calc->resultado;
+				//expressao para o mapfile
+				$expressao[] = "([".$colunavalor."]<=".($v["quartil1"]).")";
+				$expressao[] = "(([".$colunavalor."]>".($v["quartil1"]).")and([".$colunavalor."]<=".($v["quartil2"])."))";
+				$expressao[] = "(([".$colunavalor."]>".($v["quartil2"]).")and([".$colunavalor."]<=".($v["quartil3"])."))";
+				$expressao[] = "([".$colunavalor."]>".($v["quartil3"]).")";
+				$nomes[] = "<= ".($v["quartil1"]);
+				$nomes[] = "> ".($v["quartil1"])." e <= ".($v["quartil2"]);
+				$nomes[] = "> ".($v["quartil2"])." e <= ".($v["quartil3"]);
+				$nomes[] = "> ".($v["quartil3"]);
+
+				$quartis = array(
+							"cortes"=>array(
+								"q1"=>$v['quartil1'],
+								"q2"=>$v['quartil2'],
+								"q3"=>$v['quartil3']
+							),
+							"expressoes"=>$expressao,
+							"nomes"=>$nomes
+						);
 			}
 			$histograma = array_count_values($valores);
 			return array(
+						"colunavalor"=>$colunavalor,
 						"soma"=>$soma,
 						"media"=>$media,
 						"menor"=>$min,
@@ -517,7 +543,8 @@ class Metaestat{
 						"quantidade"=>$quantidade,
 						"histograma"=>$histograma,
 						"grupos"=>$agrupamento,
-						"unidademedida"=>$un
+						"unidademedida"=>$un,
+						"quartis"=>$quartis
 					);
 		}
 		return false;
