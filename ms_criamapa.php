@@ -365,8 +365,9 @@ if(isset($gvsiggvp) && $gvsiggvp != ""){
 	if(isset($gvsigview) && $gvsigview != ""){
 		incluiMapaGvsig($gvsiggvp,$gvsigview);
 	}
-	else
-	{echo "Nenhuma vista foi definida &gvsigview";}
+	else{
+		echo "Nenhuma vista foi definida &gvsigview";
+	}
 }
 /*
  Par&acirc;metros adicionais.
@@ -1104,7 +1105,6 @@ function incluiMapaGvsig($gvsiggvp,$gvsigview){
 	include_once($locaplic."/pacotes/gvsig/gvsig2mapfile/class.gvsig2mapfile.php");
 	$gm = new gvsig2mapfile($gvsiggvp);
 	$dataView = $gm->getViewData($gvsigview);
-	//var_dump($dataView);exit;
 	$numlayers = $mapn->numlayers;
 	for ($i=0;$i < $numlayers;$i++)
 	{

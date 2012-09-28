@@ -17,13 +17,13 @@ if (isset($_FILES['i3GEOuploadfile']['name']))
 			if($base == "" && file_exists('/var/www/i3geo/aplicmap/geral1debianv'.$versao.'.map')){
 				$base = "/var/www/i3geo/aplicmap/geral1debianv".$versao.".map";
 			}
-			if($f == "" && file_exists('/var/www/html/i3geo/aplicmap/geral1fedorav'.$versao.'.map')){
+			if($base == "" && file_exists('/var/www/html/i3geo/aplicmap/geral1fedorav'.$versao.'.map')){
 				$base = "/var/www/html/i3geo/aplicmap/geral1fedorav".$versao.".map";
 			}
-			if($f == "" && file_exists('/opt/www/html/i3geo/aplicmap/geral1fedorav'.$versao.'.map')){
+			if($base == "" && file_exists('/opt/www/html/i3geo/aplicmap/geral1fedorav'.$versao.'.map')){
 				$base = "/opt/www/html/i3geo/aplicmap/geral1v".$versao.".map";
 			}
-			if($f == "")
+			if($base == "")
 			{$base = $locaplic."/aplicmap/geral1v".$versao.".map";}
 		}
 	}
@@ -32,6 +32,7 @@ if (isset($_FILES['i3GEOuploadfile']['name']))
 		{$base = $locaplic."/aplicmap/".$base;}
 	}
 	$mapn = ms_newMapObj($base);
+
 	//echo "<p>Carregando o arquivo...</p>";
 	//verifica nomes
 	verificaNome($_FILES['i3GEOuploadfile']['name']);
@@ -41,6 +42,7 @@ if (isset($_FILES['i3GEOuploadfile']['name']))
 	$status =  move_uploaded_file($Arquivo,$Arquivon);
 	if($status != 1)
 	{ob_clean();echo "Ocorreu um erro no envio do arquivo";exit;}
+
 	if($status == 1)
 	{
 		//echo $Arquivon;
@@ -56,6 +58,7 @@ if (isset($_FILES['i3GEOuploadfile']['name']))
 		$next = $dataView["extent"];
 		$ext = $mapn->extent;
 		$ext->setextent($next[0],$next[1],$next[2],$next[3]);
+
 		$mapn = $gm->addLayers($mapn,$views[0],$dataView["layerNames"]);
 		$mapn->save(str_replace(".gvp",".map",$Arquivon));
 		$handle = fopen(str_replace(".gvp",".map",$Arquivon), "r");

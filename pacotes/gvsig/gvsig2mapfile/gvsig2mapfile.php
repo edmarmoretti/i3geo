@@ -2,7 +2,7 @@
 	include_once("class.gvsig2mapfile.php");
 	error_reporting(E_ALL);
 	$gm = new gvsig2mapfile("C:\ms4w\Apache\htdocs\i3geo\pacotes\gvsig\gvsig2mapfile\projetoteste.gvp");
-	echo "<pre>";
+	echo "<pre>Teste<br>";
 	$nomes = $gm->getViewsNames();
 	$view = $gm->getViewByName($nomes[0]);
 	$dataView = $gm->getViewData($nomes[0]);
