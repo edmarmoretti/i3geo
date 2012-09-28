@@ -240,7 +240,7 @@ class Metaestat{
 		$dados = $this->listaMedidaVariavel("",$id_medida_variavel);
 		$dadosgeo = $this->listaTipoRegiao($dados["codigo_tipo_regiao"]);
 		$agregaregiao = false;
-		if($dados["codigo_tipo_regiao"] != $codigo_tipo_regiao){
+		if($codigo_tipo_regiao != "" && $dados["codigo_tipo_regiao"] != $codigo_tipo_regiao){
 			$agregaregiao = true;
 			$dadosgeoagregada = $this->listaTipoRegiao($codigo_tipo_regiao);
 		}
@@ -314,6 +314,7 @@ class Metaestat{
 			$conexao = $this->listaConexao($meta["codigo_estat_conexao"],true);
 			$conexao = "user=".$conexao["usuario"]." password=".$conexao["senha"]." dbname=".$conexao["bancodedados"]." host=".$conexao["host"]." port=".$conexao["porta"]."";
 			//echo $conexao;exit;
+			//echo "$id_medida_variavel,$todasascolunas,$agruparpor,$tipolayer,$codigo_tipo_regiao";exit;
 			$sql = $this->sqlMedidaVariavel($id_medida_variavel,$todasascolunas,$agruparpor,$tipolayer,$codigo_tipo_regiao);
 			$sqlf = $sql["sqlmapserver"];
 			if(!empty($filtro)){
@@ -978,10 +979,12 @@ class Metaestat{
 	$id_medida_variavel - opcional
 	*/
 	function listaMedidaVariavel($codigo_variavel,$id_medida_variavel=""){
-		$sql = "SELECT i3geoestat_medida_variavel.* ";
+		$sql = "SELECT i3geoestat_medida_variavel.*,i3geoestat_unidade_medida.permitemedia,i3geoestat_unidade_medida.permitesoma,i3geoestat_unidade_medida.nome as unidade_medida ";
 		$sql .= "FROM ".$this->esquemaadmin."i3geoestat_variavel ";
 		$sql .= "INNER JOIN ".$this->esquemaadmin."i3geoestat_medida_variavel ";
 		$sql .= "ON i3geoestat_variavel.codigo_variavel = i3geoestat_medida_variavel.codigo_variavel ";
+		$sql .= "INNER JOIN ".$this->esquemaadmin."i3geoestat_unidade_medida ";
+		$sql .= "ON i3geoestat_unidade_medida.codigo_unidade_medida = i3geoestat_medida_variavel.codigo_unidade_medida ";
 		if($codigo_variavel != ""){
 			$sql .= "WHERE i3geoestat_variavel.codigo_variavel = $codigo_variavel ";
 			if($id_medida_variavel != ""){

@@ -380,8 +380,34 @@ switch (strtoupper($funcao))
 				$m->alteraClasseClassificacao("",$id_classe,$titulo,$expressao,$vermelho,$verde,$azul,"","","-1","-1","-1","");
 			}
 		}
-		if($tipo == "intervalosiguais"){
-			//TODO
+		if($tipo == "intiguais5"){
+			$m = new Metaestat();
+			$dados = $m->sumarioMedidaVariavel($id_medida_variavel);
+			$min = $dados["menor"];
+			$max = $dados["maior"];
+			$item = $dados["colunavalor"];
+			$intervalo = ($max - $min) / 5;
+			//adiciona as classes novas
+			$intatual = $min;
+			$m->excluirRegistro("i3geoestat_classes","id_classificacao",$id_classificacao);
+			for ($i=0; $i < 5; ++$i){
+				if ($i == 5 - 1){
+					$expressao = "(([".$item."]>=".$intatual.")and([".$item."]<=".($intatual+$intervalo)."))";
+				}
+				else{
+					$expressao = "(([".$item."]>=".$intatual.")and([".$item."]<".($intatual+$intervalo)."))";
+				}
+				$titulo = ">= ".$intatual." e < que ".($intatual+$intervalo);
+				$intatual = $intatual + $intervalo;
+				$id_classe = $m->alteraClasseClassificacao($id_classificacao);
+				if(!empty($cores)){
+					$cor = explode(",",$cores[$i]);
+					$vermelho = $cor[0];
+					$verde = $cor[1];
+					$azul = $cor[2];
+				}
+				$m->alteraClasseClassificacao("",$id_classe,$titulo,$expressao,$vermelho,$verde,$azul,"","","-1","-1","-1","");
+			}
 		}
 		retornaJSON("ok");
 		exit;
@@ -917,7 +943,6 @@ switch (strtoupper($funcao))
 					'dirtmp' => $dir_tmp,
 					'barSize'=> 5000
 			);
-
 			include (__DIR__."/../../pacotes/tme/TME_i3geo.php");
 		}
 		exit;

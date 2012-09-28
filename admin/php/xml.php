@@ -225,7 +225,7 @@ function geraRSSgrupos($locaplic)
 	global $esquemaadmin;
 	$sql = "select '' as tipo_ws, n1.id_n1 as id_ws, g.nome_grupo as nome_ws,'rsstemasraiz.php?nivel=1&id='||n1.id_n1 as desc_ws,'rsssubgrupos.php?id='||n1.id_n1 as link_ws,'' as autor_ws ";
 	$sql .= "from ".$esquemaadmin."i3geoadmin_n1 as n1,".$esquemaadmin."i3geoadmin_grupos as g ";
-	$sql .= "where g.id_grupo = n1.id_grupo and n1.n1_perfil = '' group by nome_ws,desc_ws,link_ws,autor_ws order by nome_ws";
+	$sql .= "where g.id_grupo = n1.id_grupo and n1.n1_perfil = '' group by id_ws,tipo_ws,nome_ws,desc_ws,link_ws,autor_ws order by nome_ws";
 	return geraXmlRSS($locaplic,$sql,"Lista de grupos");
 }
 /*
