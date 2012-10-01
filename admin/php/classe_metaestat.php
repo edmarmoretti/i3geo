@@ -909,12 +909,16 @@ class Metaestat{
 
 	$codigo_variavel - opcional
 	*/
-	function listaVariavel($codigo_variavel=""){
-		$sql = "select * from ".$this->esquemaadmin."i3geoestat_variavel ";
+	function listaVariavel($codigo_variavel="",$filtro_esquema=""){
+		$sql = "select a.* from ".$this->esquemaadmin."i3geoestat_variavel as a ";
 		if($codigo_variavel != ""){
-			$sql .= "WHERE codigo_variavel = $codigo_variavel ";
+			$sql .= "WHERE a.codigo_variavel = $codigo_variavel ";
 		}
-		$sql .= "ORDER BY nome";
+		if($filtro_esquema != ""){
+			$sql .= ", ".$this->esquemaadmin."i3geoestat_medida_variavel as b WHERE a.codigo_variavel = b.codigo_variavel and b.esquemadb = '$filtro_esquema' ";
+		}
+		$sql .= "ORDER BY a.nome";
+		//echo $sql;exit;
 		return $this->execSQL($sql,$codigo_variavel);
 	}
 	/*

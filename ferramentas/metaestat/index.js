@@ -40,6 +40,7 @@ i3GEOF.metaestat = {
 	 * Tipo de interface utilizada para construcao dos parametros
 	 */
 	INTERFACE: "flutuante",
+	CONEXAODEFAULT: 0,
 	TOP: 50,
 	LEFT: 100,
 	LARGURA: 270,
@@ -515,7 +516,7 @@ i3GEOF.metaestat = {
 						$i("Ecodigo_variavel").value = $i("i3geoCartoComboVariavelEditor").value;
 						//define os valores que sao padrao
 						//a conexao e com o default
-						$i("Ecodigo_estat_conexao").value = 0;
+						$i("Ecodigo_estat_conexao").value = i3GEOF.metaestat.CONEXAODEFAULT;
 						//o esquema e o public
 						$i("Eesquemadb").value = "public";
 						//a tabela onde ficarao os dados

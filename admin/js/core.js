@@ -67,7 +67,7 @@ Armazena o objeto com a lista de perfis
 $perfis = "";
 function cabecalhoMetaestat(id,excluir){
 	var i,n,temp,
-		ins = "<fieldset class='cabecalhoGeral'><legend>Op&ccedil;&otilde;es principais</legend>",
+		ins = "<fieldset class='cabecalhoGeral' style='height:120px;line-height:30px'><legend>Op&ccedil;&otilde;es principais</legend>",
 		u = i3GEO.util.pegaCookie("i3geousuarionome"),
 		botoes = [
 			{id:"principal",titulo:"In&iacute;cio",link:"../index.html"},
@@ -78,6 +78,7 @@ function cabecalhoMetaestat(id,excluir){
 			{id:"tipo_regiao",titulo:"Regi&otilde;es",link:"estat_tipo_regiao.html"},
 			{id:"fonteinfo",titulo:"Fonte",link:"estat_fonteinfo.html"},
 			{id:"editor",titulo:"Editor",link:"estat_editor.html"},
+			{id:"uploaddados",titulo:"Upload",link:"estat_uploaddados.html"},
 			{id:"login",titulo:"Login",js:"i3GEO.login.dialogo.abreLogin()"}
 		];
 	n = botoes.length;
@@ -332,16 +333,17 @@ postpar - parametros quando o tipo for post
 */
 function core_makeRequest(sUrl,callback,tipo,postpar)
 {
-	/*
 	sUrl = escape(sUrl);
-	var re = new RegExp("%3F", "g");
+	re = new RegExp("%3F", "g");
 	sUrl = sUrl.replace(re,'?');
 	re = new RegExp("%3D", "g");
 	sUrl = sUrl.replace(re,'=');
 	re = new RegExp("%26", "g");
 	sUrl = sUrl.replace(re,'&');
-	*/
-	//alert(sUrl)
+
+	re = new RegExp("%3A", "g");
+	sUrl = sUrl.replace(re,':');
+
 	if(arguments.length == 2)
 	{tipo = "GET";}
 	if(postpar){

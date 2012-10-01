@@ -1425,8 +1425,11 @@ i3GEO.php = {
 
 	Obt&eacute;m a lista de vari&aacute;veis do sistema de metadados estat&iacute;sticos
 	*/
-	listaVariavel: function(funcao){
-		var p = i3GEO.configura.locaplic+"/admin/php/metaestat.php?funcao=listaVariavel&g_sid="+i3GEO.configura.sid;
+	listaVariavel: function(funcao,filtro_esquema){
+		if(!filtro_esquema){
+			filtro_esquema = "";
+		}
+		var p = i3GEO.configura.locaplic+"/admin/php/metaestat.php?funcao=listaVariavel&g_sid="+i3GEO.configura.sid+"&filtro_esquema="+filtro_esquema;
 		i3GEO.util.ajaxGet(p,funcao);
 	},
 	/*

@@ -1,0 +1,114 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
+<html>
+<head>
+<meta http-equiv="content-type" content="text/html; charset=ISO-8859-1">
+<title>Upload de dados</title>
+<style type="text/css">
+/*margin and padding on body element
+          can introduce errors in determining
+          element position and are not recommended;
+          we turn them off as a foundation for YUI
+          CSS treatments. */
+body {
+	margin: 0;
+	padding: 0;
+}
+</style>
+<script type="text/javascript" src="../js/core.js"></script>
+<script type="text/javascript" src="../../classesjs/classe_php.js"></script>
+<script type="text/javascript" src="../../ferramentas/metaestat/index.js"></script>
+<script type="text/javascript" src="../js/estat_uploaddados.js"></script>
+<link rel="stylesheet" type="text/css" href="admin.css">
+
+</head>
+<body class=" yui-skin-sam fundoPonto">
+	<div class="bordaSuperior">&nbsp;</div>
+	<div class="mascaraPrincipal" id="divGeral">
+		<div id=cabecalhoPrincipal></div>
+		<h1>
+			Metadados estat&iacute;sticos - upload de dados <img
+				src="../imagens/04.png" style="cursor: pointer" id=botaoAjuda />
+		</h1>
+
+		<div id="formulario" style="display: none">
+			<div id="ajuda" style="display: none">
+				<div class="hd">Ajuda</div>
+				<div class="bd" style="height: 144px; overflow: auto">
+					<p>Este formul&aacute;rio permite fazero upload de dados
+						utilizadas pelo sistema de metadados estat&iacute;sticos
+				</div>
+				<div class="ft"></div>
+			</div>
+			<p>
+				<br> Aten&ccedil;&atilde;o: para poder editar o banco de dados,
+				o usu&aacute;rio da conex&atilde;o escolhida deve ter direitos de
+				edi&ccedil;&atilde;o. Apenas vari&aacute;veis existentes no esquema i3geo_metaestat podem receber dados dessa forma.<br>O arquivo deve ser do tipo texto e a primeira linha deve conter os nomes das colunas<br>
+
+			<div id="i3GEOadminUploaddadosConexao" style="left: -5px;"></div><br>
+			<div id="i3GEOadminUploaddadosVariaveis" style="left: -5px;"></div>
+			<div id="i3GEOadminUploaddadosMedidas" style="left: -5px;"></div>
+			<br>
+			<form id=i3GEOupload target="i3GEOuploadiframe" action="../php/metaestat_uploaddados_submit.php" onsubmit="i3GEOadmin.uploaddados.submit();"
+				method="post" ENCTYPE="multipart/form-data">
+				<p class="paragrafo">
+					<input class=digitar type="file" size=42 name="i3GEOuploadArquivo"
+						style="top: 0px; left: 0px; cursor: pointer;">
+				</p>
+				<input type="hidden" name="MAX_FILE_SIZE" value="1000000">
+				<input type="submit" value="Enviar" >
+			</form>
+			<br>
+			<div id="i3GEOadminEditorColunas" style="left: -5px;"></div>
+			<iframe id="i3GEOuploadiframe" name="i3GEOuploadiframe" src="#" style="width:0;height:0;border:0px solid #fff;"></iframe>
+		</div>
+	</div>
+	<div id=logajax style="display: block"></div>
+	<script>
+		/*
+		 Title: Upload de dados do sistema de metadados estat&iacute;sticos
+
+		 Licenca:
+
+		 GPL2
+
+		 i3Geo Interface Integrada de Ferramentas de Geoprocessamento para Internet
+
+		 Direitos Autorais Reservados (c) 2006 Minist&eacute;rio do Meio Ambiente Brasil
+		 Desenvolvedor: Edmar Moretti edmar.moretti@mma.gov.br
+
+		 Este programa &eacute; software livre; voc&ecirc; pode redistribu&iacute;-lo
+		 e/ou modific&aacute;-lo sob os termos da Licen&ccedil;a P&uacute;blica Geral
+		 GNU conforme publicada pela Free Software Foundation;
+
+		 Este programa &eacute; distribu&iacute;do na expectativa de que seja &uacute;til,
+		 por&eacute;m, SEM NENHUMA GARANTIA; nem mesmo a garantia impl&iacute;cita
+		 de COMERCIABILIDADE OU ADEQUA&Ccedil;&Atilde;O A UMA FINALIDADE ESPEC&Iacute;FICA.
+		 Consulte a Licen&ccedil;a P&uacute;blica Geral do GNU para mais detalhes.
+		 Voc&ecirc; deve ter recebido uma cópia da Licen&ccedil;a P&uacute;blica Geral do
+		 GNU junto com este programa; se n&atilde;o, escreva para a
+		 Free Software Foundation, Inc., no endere&ccedil;o
+		 59 Temple Street, Suite 330, Boston, MA 02111-1307 USA.
+
+		 Arquivo:
+
+		 i3geo/admin/html/estat_uploaddados.html
+		 */
+		if (screen.availWidth > 700) {
+			document.getElementById("divGeral").style.width = "700px";
+		}
+		//necessario para a ferramenta login e outras
+		i3GEO.configura = {
+			locaplic : "../.."
+		};
+		cabecalhoMetaestat("cabecalhoPrincipal", "uploaddados");
+		document.getElementById("formulario").style.display = "block";
+		i3GEOadmin.uploaddados.inicia();
+		/*
+		temp = function() {
+			document.getElementById("formulario").style.display = "block";
+			initEditor();
+		};
+		i3GEO.login.verificaOperacao("admin/html/menus",i3GEO.configura.locaplic, temp, "sessao");
+		 */
+	</script>
+</body>

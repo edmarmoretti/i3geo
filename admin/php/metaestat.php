@@ -87,7 +87,10 @@ switch (strtoupper($funcao))
 	*/
 	case "LISTAVARIAVEL":
 		$m = new Metaestat();
-		retornaJSON($m->listaVariavel($codigo_variavel));
+		if(empty($filtro_esquema)){
+			$filtro_esquema = "";
+		}
+		retornaJSON($m->listaVariavel($codigo_variavel,$filtro_esquema));
 		exit;
 	break;
 	/*
@@ -254,7 +257,7 @@ switch (strtoupper($funcao))
 		$m = new Metaestat();
 		$default = false;
 		//verifica se a criacao da medida esta sendo feita na tabela default
-		if($codigo_tipo_periodo < 5 && $codigo_estat_conexao == 0 && $esquemadb == "public" && $colunaidgeo == "codigoregiao"){
+		if($codigo_tipo_periodo < 5 && $esquemadb == "i3geo_metaestat" && $colunaidgeo == "codigoregiao"){
 			$default = true;
 		}
 		if(empty($id_medida_variavel)){
