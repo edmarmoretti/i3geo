@@ -44,11 +44,11 @@ body {
 				o usu&aacute;rio da conex&atilde;o escolhida deve ter direitos de
 				edi&ccedil;&atilde;o. Apenas vari&aacute;veis existentes no esquema i3geo_metaestat podem receber dados dessa forma.<br>O arquivo deve ser do tipo texto e a primeira linha deve conter os nomes das colunas<br>
 
-			<div id="i3GEOadminUploaddadosConexao" style="left: -5px;"></div><br>
+			<div id="i3GEOadminUploaddadosConexao" style="left: -5px;"></div>
 			<div id="i3GEOadminUploaddadosVariaveis" style="left: -5px;"></div>
 			<div id="i3GEOadminUploaddadosMedidas" style="left: -5px;"></div>
 			<br>
-			<form id=i3GEOupload target="i3GEOuploadiframe" action="../php/metaestat_uploaddados_submit.php" onsubmit="i3GEOadmin.uploaddados.submit();"
+			<form id=i3GEOupload target="i3GEOuploadiframe" action="../php/metaestat_uploaddados_submit.php" onsubmit="i3GEOadmin.uploaddados.upload.submit();"
 				method="post" ENCTYPE="multipart/form-data">
 				<p class="paragrafo">
 					<input class=digitar type="file" size=42 name="i3GEOuploadArquivo"

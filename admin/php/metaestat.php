@@ -276,37 +276,30 @@ switch (strtoupper($funcao))
 		}
 		//adiciona os parametros de tempo conforme o tipo de periodo escolhido
 		if($default == true){
-			$parametros = $m->listaParametro($id_medida_variavel);
+			$m->excluirRegistro("i3geoestat_parametro_medida","id_medida_variavel",$id_medida_variavel);
+			$id_pai = 0;
 			//anual
-			if($codigo_tipo_periodo >= 0){
-				if($m->buscaNoArray($parametros,"coluna","ano") == false){
-					$id_parametro_medida = $m->alteraParametroMedida($id_medida_variavel,"","","","","");
-					$m->alteraParametroMedida($id_medida_variavel,$id_parametro_medida,"Ano","","ano","");
-				}
-				$codigo_tipo_periodo = 1;
+			if($codigo_tipo_periodo >= 1){
+				$id_parametro_medida = $m->alteraParametroMedida($id_medida_variavel,"","","","","");
+				$m->alteraParametroMedida($id_medida_variavel,$id_parametro_medida,"Ano","","ano",$id_pai);
+				$id_pai = $id_parametro_medida;
 			}
 			//mensal
-			if($codigo_tipo_periodo >= 1){
-				if($m->buscaNoArray($parametros,"coluna","mes") == false){
-					$id_parametro_medida = $m->alteraParametroMedida($id_medida_variavel,"","","","","");
-					$m->alteraParametroMedida($id_medida_variavel,$id_parametro_medida,"Mes","","mes","");
-				}
-				$codigo_tipo_periodo = 2;
+			if($codigo_tipo_periodo >= 2){
+				$id_parametro_medida = $m->alteraParametroMedida($id_medida_variavel,"","","","","");
+				$m->alteraParametroMedida($id_medida_variavel,$id_parametro_medida,"Mes","","mes",$id_pai);
+				$id_pai = $id_parametro_medida;
 			}
 			//diario
-			if($codigo_tipo_periodo >= 2){
-				if($m->buscaNoArray($parametros,"coluna","dia") == false){
-					$id_parametro_medida = $m->alteraParametroMedida($id_medida_variavel,"","","","","");
-					$m->alteraParametroMedida($id_medida_variavel,$id_parametro_medida,"Dia","","dia","");
-				}
-				$codigo_tipo_periodo = 3;
+			if($codigo_tipo_periodo >= 3){
+				$id_parametro_medida = $m->alteraParametroMedida($id_medida_variavel,"","","","","");
+				$m->alteraParametroMedida($id_medida_variavel,$id_parametro_medida,"Dia","","dia",$id_pai);
+				$id_pai = $id_parametro_medida;
 			}
 			//horario
-			if($codigo_tipo_periodo >= 3){
-				if($m->buscaNoArray($parametros,"coluna","hora") == false){
-					$id_parametro_medida = $m->alteraParametroMedida($id_medida_variavel,"","","","","");
-					$m->alteraParametroMedida($id_medida_variavel,$id_parametro_medida,"Hora","","hora","");
-				}
+			if($codigo_tipo_periodo == 4){
+				$id_parametro_medida = $m->alteraParametroMedida($id_medida_variavel,"","","","","");
+				$m->alteraParametroMedida($id_medida_variavel,$id_parametro_medida,"Hora","","hora",$id_pai);
 			}
 		}
 		retornaJSON($m->listaMedidaVariavel("",$id_medida_variavel));
@@ -358,17 +351,17 @@ switch (strtoupper($funcao))
 		exit;
 	break;
 	case "CALCULACLASSIFICACAO":
+		//as cores vem no formato rgb(0,0,0);
+		if(!empty($cores)){
+			$cores = str_replace("rgb(","",$cores);
+			$cores = str_replace(")","",$cores);
+			$cores = explode(";",$cores);
+		}
 		if($tipo == "quartil"){
 			$m = new Metaestat();
 			$dados = $m->sumarioMedidaVariavel($id_medida_variavel);
 			$dados = $dados["quartis"];
 			$n = count($dados["expressoes"]);
-			//as cores vem no formato rgb(0,0,0);
-			if(!empty($cores)){
-				$cores = str_replace("rgb(","",$cores);
-				$cores = str_replace(")","",$cores);
-				$cores = explode(";",$cores);
-			}
 			$m->excluirRegistro("i3geoestat_classes","id_classificacao",$id_classificacao);
 			for($i=0;$i<$n;++$i){
 				$id_classe = $m->alteraClasseClassificacao($id_classificacao);
@@ -621,7 +614,7 @@ switch (strtoupper($funcao))
 	/*
 	 Valor: EXCLUIRUNIDADEMEDIDA
 
-	Exclui uma unidade de medida
+	Exclui uma unidade de medida"Dados inseridos"
 
 	Retorno:
 
@@ -1128,6 +1121,11 @@ switch (strtoupper($funcao))
 		$dados = $m->relatorioCompleto($codigo_variavel);
 		$dados = $m->formataRelatorioHtml($dados);
 		retornaJSON($dados);
+		exit;
+	break;
+	case "INSERIRDADOS":
+		$m = new Metaestat();
+		retornaJSON($m->inserirDados($nomearquivoserv,$id_medida_variavel,$codigoregiao,$valor,$tipoinclusao,$ano,$mes,$dia,$hora));
 		exit;
 	break;
 }

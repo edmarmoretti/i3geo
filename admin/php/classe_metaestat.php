@@ -265,28 +265,38 @@ class Metaestat{
 			$dadosAgregacao = $this->listaAgregaRegiaoFilho($dados["codigo_tipo_regiao"], $codigo_tipo_regiao);
 			$sqlgeo = "g.".$dadosAgregacao["colunaligacao_regiaopai"].",sum(d.".$dados["colunavalor"].") as ".$dados["colunavalor"];
 		}
+		//TODO decidir se e soma ou media
 		if(empty($agruparpor)){
 			$sql .= " FROM ".$dados["esquemadb"].".".$dados["tabela"]." as d ";
 			$sqlgeo .= " FROM ".$dados["esquemadb"].".".$dados["tabela"]." as d,".$dadosgeo["esquemadb"].".".$dadosgeo["tabela"]." as g ";
 		}
 		else{
 			$sqlagrupamento = " SELECT d.".$agruparpor." FROM ".$dados["esquemadb"].".".$dados["tabela"]." as d group by ".$agruparpor." order by ".$agruparpor;
-			$sqlgeo .= " FROM (SELECT sum(".$dados["colunavalor"].") as ".$dados["colunavalor"].",".$dados["colunaidgeo"].",".$agruparpor." FROM ".$dados["esquemadb"].".".$dados["tabela"] ." group by ".$agruparpor.",".$dados["colunaidgeo"].") as d, ".$dadosgeo["esquemadb"].".".$dadosgeo["tabela"]." as g";
-			$sql .= " FROM (SELECT sum(".$dados["colunavalor"].") as ".$dados["colunavalor"].",".$dados["colunaidgeo"].",".$agruparpor." FROM ".$dados["esquemadb"].".".$dados["tabela"] ." group by ".$agruparpor.",".$dados["colunaidgeo"].") as d ";
+			$sqlgeo .= " FROM (SELECT sum(".$dados["colunavalor"].") as ".$dados["colunavalor"].",".$dados["colunaidgeo"].",".$agruparpor." FROM ".$dados["esquemadb"].".".$dados["tabela"] ." __dadosfiltro__ group by ".$agruparpor.",".$dados["colunaidgeo"].") as d, ".$dadosgeo["esquemadb"].".".$dadosgeo["tabela"]." as g";
+			$sql .= " FROM (SELECT sum(".$dados["colunavalor"].") as ".$dados["colunavalor"].",".$dados["colunaidgeo"].",".$agruparpor." FROM ".$dados["esquemadb"].".".$dados["tabela"] ." __dadosfiltro__ group by ".$agruparpor.",".$dados["colunaidgeo"].") as d ";
 		}
+		$dadosfiltro = "";
 		if(!empty($dados["filtro"])){
-			$sql .= " WHERE ".$dados["filtro"];
-			$sqlgeo .= " WHERE ".$dados["filtro"];
+			//$sql .= " WHERE ".$dados["filtro"];
+			//$sqlgeo .= " WHERE ".$dados["filtro"];
+			$dadosfiltro = " WHERE ".$dados["filtro"];
 			$filtro = true;
 		}
+		$sql = str_replace("__dadosfiltro__",$dadosfiltro,$sql);
+		$sqlgeo = str_replace("__dadosfiltro__",$dadosfiltro,$sqlgeo);
 		//join com a tabela geo
-		$j = " d.".$dados["colunaidgeo"]." = g.".$dadosgeo["identificador"];
+		$j = " d.".$dados["colunaidgeo"]."::text = g.".$dadosgeo["identificador"]."::text";
+		/*
 		if($filtro){
 			$sqlgeo .= " AND ".$j;
 		}
 		else{
 			$sqlgeo .= " WHERE ".$j;
 		}
+		*/
+		//if($filtro == false){
+			$sqlgeo .= " WHERE ".$j;
+		//}
 		//atencao: cuidado ao alterar essa string pois ') as foo' pode ser usado para replace em outras funcoes
 		$colunas = $this->colunasTabela($dados["codigo_estat_conexao"],$dados["esquemadb"],$dados["tabela"]);
 		//agregacao com uma regiao maior TODO
@@ -431,7 +441,7 @@ class Metaestat{
 		$sqlf = $sql["sql"];
 		if($sql["filtro"] == true){
 			if(!empty($filtro)){
-				$sqlf .= $sqlf." AND ".$filtro;
+				$sqlf = $sqlf." AND ".$filtro;
 			}
 		}
 		elseif(!empty($filtro)){
@@ -800,11 +810,6 @@ class Metaestat{
 			return "Error!: " . $e->getMessage();
 		}
 	}
-	/*
-	Function: alteraParametroMedida
-
-	Altera uma parametro de uma medida ou cria uma nova
-	*/
 	function alteraClassificacaoMedida($id_medida_variavel,$id_classificacao="",$nome="",$observacao=""){
 		try	{
 			if($id_classificacao != ""){
@@ -985,9 +990,9 @@ class Metaestat{
 	function listaMedidaVariavel($codigo_variavel,$id_medida_variavel=""){
 		$sql = "SELECT i3geoestat_medida_variavel.*,i3geoestat_unidade_medida.permitemedia,i3geoestat_unidade_medida.permitesoma,i3geoestat_unidade_medida.nome as unidade_medida ";
 		$sql .= "FROM ".$this->esquemaadmin."i3geoestat_variavel ";
-		$sql .= "INNER JOIN ".$this->esquemaadmin."i3geoestat_medida_variavel ";
+		$sql .= "JOIN ".$this->esquemaadmin."i3geoestat_medida_variavel ";
 		$sql .= "ON i3geoestat_variavel.codigo_variavel = i3geoestat_medida_variavel.codigo_variavel ";
-		$sql .= "INNER JOIN ".$this->esquemaadmin."i3geoestat_unidade_medida ";
+		$sql .= "JOIN ".$this->esquemaadmin."i3geoestat_unidade_medida ";
 		$sql .= "ON i3geoestat_unidade_medida.codigo_unidade_medida = i3geoestat_medida_variavel.codigo_unidade_medida ";
 		if($codigo_variavel != ""){
 			$sql .= "WHERE i3geoestat_variavel.codigo_variavel = $codigo_variavel ";
@@ -1077,7 +1082,6 @@ class Metaestat{
 			$nsm[] = $s[$parametro["coluna"]];
 		}
 		return $nsm;
-		exit;
 	}
 	/*
 	 Function: listaTipoPeriodo
@@ -1323,6 +1327,111 @@ class Metaestat{
 			}
 		}
 		return false;
+	}
+	function inserirDados($nomearquivoserv,$id_medida_variavel,$codigoregiao,$valor,$tipoinclusao,$ano="",$mes="",$dia="",$hora=""){
+		if(!file_exists($nomearquivoserv)){
+			return "Arquivo de dados nao encontrado";
+		}
+		//le o arquivo
+		$handle = fopen ($nomearquivoserv, "r");
+		$cabecalho = fgets($handle);
+		fclose ($handle);
+		$buffer = str_replace('"','',$cabecalho);
+		$buffer = str_replace("'",'',$buffer);
+		$buffer = str_replace("\n",'',$buffer);
+		$colunas = explode(";",$buffer);
+		$separador = ";";
+		if(count($colunas) == 1){
+			$colunas = explode(",",$buffer);
+			$separador = ",";
+		}
+		if(count($colunas) < 3){
+			return "Arquivo nao contem todas as colunas necessarias";
+		}
+		//define o indice das colunas existentes no arquivo csv que correspondem as colunas de destino
+		$icodigoregiao = "";
+		$ivalor = "";
+		$iano = "";
+		$imes = "";
+		$idia = "";
+		$ihora = "";
+		$n = count($colunas);
+		for($i=0;$i<$n;++$i){
+			if($colunas[$i] ==  $codigoregiao){
+				$icodigoregiao = $i;
+			}
+			if($colunas[$i] ==  $valor){
+				$ivalor = $i;
+			}
+			if($colunas[$i] ==  $ano){
+				$iano = $i;
+			}
+			if($colunas[$i] ==  $mes){
+				$imes = $i;
+			}
+			if($colunas[$i] ==  $dia){
+				$idia = $i;
+			}
+			if($colunas[$i] ==  $hora){
+				$ihora = $i;
+			}
+		}
+		$handle = fopen ($nomearquivoserv, "r");
+		$linhas = array();
+		$r = array();
+		$medidavariavel = $this->listaMedidaVariavel("",$id_medida_variavel);
+		//cria os inserts
+		while (!feof($handle)) {
+			$linha = fgets($handle);
+			if($linha != $cabecalho){
+				$linha = str_replace("\n",'',$linha);
+				$linha = explode($separador,$linha);
+				//var_dump($linha);exit;
+				if(count($linha) > 2){
+					$ano = 0;
+					$mes = 0;
+					$dia = 0;
+					$hora = 0;
+					if($iano != ""){
+						$ano = $linha[$iano];
+					}
+					if($imes != ""){
+						$mes = $linha[$imes];
+					}
+					if($idia != ""){
+						$dia = $linha[$idia];
+					}
+					if($ihora != ""){
+						$hora = $linha[$ihora];
+					}
+					$linhas[] = "INSERT INTO i3geo_metaestat.".$medidavariavel["tabela"]." (id_medida_variavel,codigoregiao,".$medidavariavel["colunavalor"].",ano,mes,dia,hora) VALUES ('$id_medida_variavel','".$linha[$icodigoregiao]."','".$linha[$ivalor]."','".$ano."','".$mes."','".$dia."','".$hora."')";
+				}
+			}
+		}
+		fclose ($handle);
+		//pega a conexao
+		$c = $this->listaConexao($medidavariavel["codigo_estat_conexao"],true);
+		//gera o objeto pdo
+		$dbh = new PDO('pgsql:dbname='.$c["bancodedados"].';user='.$c["usuario"].';password='.$c["senha"].';host='.$c["host"].';port='.$c["porta"]);
+		//verifica o tipo de operacao
+		//apaga os dados se for necessario
+		try {
+			$dbh->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+			$dbh->beginTransaction();
+			$sta = 0;
+			if($tipoinclusao == "substituir"){
+				$sth = $dbh->exec("UPDATE i3geo_metaestat.".$medidavariavel["tabela"]." SET id_medida_variavel = '".($id_medida_variavel * -1)."' WHERE id_medida_variavel = '".$id_medida_variavel."' and id_medida_variavel > 0");
+			}
+			foreach($linhas as $linha){
+				$sta += $dbh->exec($linha);
+			}
+			$dbh->commit();
+
+		} catch (Exception $e) {
+			$dbh->rollBack();
+			return "Falhou: " . $e->getMessage();
+		}
+		return "Processo concluido para ".count($linhas)." linhas";
 	}
 }
 ?>

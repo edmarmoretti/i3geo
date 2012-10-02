@@ -944,7 +944,7 @@ function core_menuCheckBox(valores,textos,selecionados,target,record,key){
 		ndiv.className= "yui-dt-editor";
 		ndiv.style.height = "144px";
 		ndiv.style.overflow = "auto";
-		ndiv.innerHTML = "<div id='core_menuCK_bd'></div>";
+		ndiv.innerHTML = "<div id='core_menuCK_bd' style='background:white;text-align:left;border:1px solid gray'></div>";
 		novoel.appendChild(ndiv);
 		document.body.appendChild(novoel);
 		og_core = new YAHOO.widget.ButtonGroup({id:"okcancel_checkbox_id", name:"okcancel_checkbox_id", container:"core_menuCK_bd" });
@@ -973,6 +973,7 @@ function core_menuCheckBox(valores,textos,selecionados,target,record,key){
 	onde.appendChild(novoCK);
 	YAHOO.admin.container.panelCK.moveTo(YAHOO.util.Dom.getX(target),YAHOO.util.Dom.getY(target));
 	YAHOO.admin.container.panelCK.show();
+	$i("core_menuCK_bd").getElementsByTagName("div")[0].style.textAlign = "left";
 }
 /*
 Function: core_combosimnao
@@ -1540,41 +1541,55 @@ function core_listaDeLetras(onde,nomeFuncao){
 	<?php if(extension_loaded('zlib')){ob_start('ob_gzhandler');} header("Content-type: text/javascript"); ?>
 	<?php if(extension_loaded('zlib')){ob_end_flush();}?>
 	*/
-	var jsfiles = new Array(
-	"../../pacotes/yui290/build/utilities/utilities.js",
-	"../../pacotes/yui290/build/yahoo-dom-event/yahoo-dom-event.js",
-	"../../pacotes/yui290/build/element/element-min.js",
-	"../../pacotes/yui290/build/datasource/datasource-min.js",
-	"../../pacotes/yui290/build/datatable/datatable-min.js",
-	"../../pacotes/yui290/build/button/button-min.js",
-	"../../pacotes/yui290/build/dragdrop/dragdrop-min.js",
-	"../../pacotes/yui290/build/container/container-min.js",
-	"../../pacotes/yui290/build/connection/connection-min.js",
-	"../../pacotes/yui290/build/treeview/treeview.js",
-	"../../pacotes/yui290/build/json/json-min.js",
-	"../../pacotes/yui290/build/menu/menu-min.js",
-	"../../pacotes/yui290/build/editor/editor-min.js",
-	"../../classesjs/compactados/classe_util_compacto.js",
-	"../../classesjs/compactados/classe_login_compacto.js",
-	"../../classesjs/compactados/classe_janela_compacto.js",
-	"../../classesjs/compactados/dicionario_compacto.js",
-	"../../classesjs/compactados/classe_idioma_compacto.js",
-	"../../classesjs/compactados/classe_guias_compacto.js",
-	"../../pacotes/cpaint/cpaint2.inc.compressed.js"
-	);
-	//
-	//arquivos css
-	//
-	var cssfiles =new Array(
-	"../../pacotes/yui290/build/tabview/assets/skins/sam/tabview.css",
-	"../html/admin.css",
-	"../../pacotes/yui290/build/fonts/fonts-min.css",
-	"../../pacotes/yui290/build/datatable/assets/skins/sam/datatable.css",
-	"../../pacotes/yui290/build/button/assets/skins/sam/button.css",
-	"../../pacotes/yui290/build/container/assets/skins/sam/container.css",
-	"../../pacotes/yui290/build/treeview/assets/skins/sam/treeview.css",
-	"../../pacotes/yui290/build/editor/assets/skins/sam/editor.css"
-	);
+	var jsfiles = [];
+	var cssfiles = [];
+	if(typeof(i3GEO) !== 'undefined' && i3GEO.locaplic){
+		scriptLocation = "";
+		jsfiles = [];
+		//
+		//arquivos css
+		//
+		cssfiles =new Array(
+			i3GEO.configura.locaplic+"/admin/html/admin.css"
+		);
+	}
+	else{
+		jsfiles = new Array(
+		"../../pacotes/yui290/build/utilities/utilities.js",
+		"../../pacotes/yui290/build/yahoo-dom-event/yahoo-dom-event.js",
+		"../../pacotes/yui290/build/element/element-min.js",
+		"../../pacotes/yui290/build/datasource/datasource-min.js",
+		"../../pacotes/yui290/build/datatable/datatable-min.js",
+		"../../pacotes/yui290/build/button/button-min.js",
+		"../../pacotes/yui290/build/dragdrop/dragdrop-min.js",
+		"../../pacotes/yui290/build/container/container-min.js",
+		"../../pacotes/yui290/build/connection/connection-min.js",
+		"../../pacotes/yui290/build/treeview/treeview.js",
+		"../../pacotes/yui290/build/json/json-min.js",
+		"../../pacotes/yui290/build/menu/menu-min.js",
+		"../../pacotes/yui290/build/editor/editor-min.js",
+		"../../classesjs/compactados/classe_util_compacto.js",
+		"../../classesjs/compactados/classe_login_compacto.js",
+		"../../classesjs/compactados/classe_janela_compacto.js",
+		"../../classesjs/compactados/dicionario_compacto.js",
+		"../../classesjs/compactados/classe_idioma_compacto.js",
+		"../../classesjs/compactados/classe_guias_compacto.js",
+		"../../pacotes/cpaint/cpaint2.inc.compressed.js"
+		);
+		//
+		//arquivos css
+		//
+		cssfiles =new Array(
+		"../../pacotes/yui290/build/tabview/assets/skins/sam/tabview.css",
+		"../html/admin.css",
+		"../../pacotes/yui290/build/fonts/fonts-min.css",
+		"../../pacotes/yui290/build/datatable/assets/skins/sam/datatable.css",
+		"../../pacotes/yui290/build/button/assets/skins/sam/button.css",
+		"../../pacotes/yui290/build/container/assets/skins/sam/container.css",
+		"../../pacotes/yui290/build/treeview/assets/skins/sam/treeview.css",
+		"../../pacotes/yui290/build/editor/assets/skins/sam/editor.css"
+		);
+	}
 	//
 	//carrega os arquivos js
 	//

@@ -11,28 +11,55 @@ i3GEOadmin.uploaddados = {
 		YAHOO.namespace("editor");
 		YAHOO.namespace("admin.container");
 		i3GEOadmin.uploaddados.variaveis.lista();
-		i3GEOadmin.uploaddados.conexao.lista();
+		//i3GEOadmin.uploaddados.conexao.lista();
 	},
 	upload:{
+		onde: "i3GEOadminEditorColunas",
 		submit: function(){
+			i3GEOadmin.uploaddados.COLUNASARQUIVO = "";
+			i3GEOadmin.uploaddados.NOMEARQUIVOSERV = "";
 			core_carregando("enviando...");
 		},
 		comboColunas: function(id){
 			var i=0,
-				c = i3GEOadmin.uploaddados.COLUNASARQUIVO,
+				c = i3GEOadmin.uploaddados.COLUNASARQUIVO.split(";"),
 				n = c.length,
-				ins = "<select id='"+id+"'>";
+				ins = "<select id='"+id+"'><option value='' >---</option>";
 			for(i=0;i<n;i++){
 				ins += "<option value='"+c[i]+"' >"+c[i]+"</option>";
 			}
-			ins = "</select>";
+			ins += "</select>";
+			return ins;
+		},
+		tipoValores: function(id){
+			var i=0,
+				c = ["inteiro","num&eacute;rico","texto"],
+				d = ["valor_int","valor_num","valor_txt"],
+				n = c.length,
+				ins = "<select id='"+id+"'><option value='' >---</option>";
+			for(i=0;i<n;i++){
+				ins += "<option value='"+d[i]+"' >"+c[i]+"</option>";
+			}
+			ins += "</select>";
+			return ins;
+		},
+		tipoInclusao: function(id){
+			var i=0,
+				c = ["substituir","acrescentar"],
+				d = ["substituir","acrescentar"],
+				n = c.length,
+				ins = "<select id='"+id+"'><option value='' >---</option>";
+			for(i=0;i<n;i++){
+				ins += "<option value='"+d[i]+"' >"+c[i]+"</option>";
+			}
+			ins += "</select>";
 			return ins;
 		},
 		fimsubmit: function(){
 			//TODO escolher a tabela
 			core_carregando("desativa");
 			var ins = "";
-			ins += "<p>Abaixo voc&circ; deve definir quais colunas do arquivo que foi enviado corresponde &agrave;s colunas do banco de dados de destino</p>" +
+			ins += "<p>Abaixo voc&ecirc; deve definir quais colunas do arquivo que foi enviado corresponde &agrave;s colunas do banco de dados de destino</p>" +
 				"<p>Cont&eacute;m os c&oacute;digos que identificam a regi&atilde;o, como o c&oacute;digo do munic&iacute;pio ou bairro</p>" +
 				i3GEOadmin.uploaddados.upload.comboColunas("i3geoupload_codigoregiao") +
 				"<p>Cont&eacute;m os valores da medida</p>" +
@@ -45,7 +72,66 @@ i3GEOadmin.uploaddados = {
 				i3GEOadmin.uploaddados.upload.comboColunas("i3geoupload_dia") +
 				"<p>Cont&eacute;m a hora (opcional)</p>" +
 				i3GEOadmin.uploaddados.upload.comboColunas("i3geoupload_hora") +
-				"<p>Tipo de valores</p>";
+				//"<p>Tipo de valores</p>" +
+				//i3GEOadmin.uploaddados.upload.tipoValores("i3geoupload_tipoval") +
+				"<p>Tipo de inclus&atilde;o</p>" +
+				i3GEOadmin.uploaddados.upload.tipoInclusao("i3geoupload_tipoinclusao") +
+				"<p><input type=button value='Concluir envio' id='i3geoupload_concluir' />";
+
+			$i(i3GEOadmin.uploaddados.upload.onde).innerHTML = ins;
+			new YAHOO.widget.Button(
+				"i3geoupload_concluir",
+				{onclick:{fn: i3GEOadmin.uploaddados.upload.concluir}}
+			);
+			$i("i3geoupload_concluir-button").style.width = i3GEOF.metaestat.LARGURA - 25 + "px";
+		},
+		verificaForm: function(){
+			var el = ["i3GEOadminEditorMedidas_combo","i3GEOadminEditorVariaveis_combo","i3geoupload_codigoregiao","i3geoupload_valor","i3geoupload_tipoinclusao"],
+				i = 0,
+				n = el.length,
+				ok = true;
+			for(i=0;i<n;i++){
+				if(!$i(el[i])){
+					ok = false;
+				}
+				if($i(el[i]) && $i(el[i]).value == ""){
+					ok = false;
+				}
+			}
+			if(i3GEOadmin.uploaddados.COLUNASARQUIVO === "" || i3GEOadmin.uploaddados.NOMEARQUIVOSERV === ""){
+				ok = false;
+			}
+			return ok;
+		},
+		concluir: function(){
+			if(i3GEOadmin.uploaddados.upload.verificaForm() == false){
+				alert("Verifique a escolha dos parametros");
+				return;
+			};
+			var par = "";
+			par += "&nomearquivoserv="+i3GEOadmin.uploaddados.NOMEARQUIVOSERV;
+			par += "&id_medida_variavel="+$i("i3GEOadminEditorMedidas_combo").value;
+			par += "&codigoregiao="+$i("i3geoupload_codigoregiao").value;
+			par += "&valor="+$i("i3geoupload_valor").value;
+			//par += "&tipoval="+$i("i3geoupload_tipoval").value;
+			par += "&tipoinclusao="+$i("i3geoupload_tipoinclusao").value;
+			par += "&ano="+$i("i3geoupload_ano").value;
+			par += "&mes="+$i("i3geoupload_mes").value;
+			par += "&dia="+$i("i3geoupload_dia").value;
+			par += "&hora="+$i("i3geoupload_hora").value;
+			var callback = {
+					success:function(o){
+						try	{
+							core_carregando("desativa");
+							alert(o.responseText);
+						}
+						catch(e){core_handleFailure(e,o.responseText);}
+					},
+					failure:core_handleFailure,
+					argument: { foo:"foo", bar:"bar" }
+			};
+			core_carregando("inserindo dados...");
+			core_makeRequest("../php/metaestat.php?funcao=inserirDados"+par,callback);
 		}
 	},
 	conexao:{
@@ -55,8 +141,8 @@ i3GEOadmin.uploaddados = {
 					success:function(o){
 						try	{
 							var dados = YAHOO.lang.JSON.parse(o.responseText),
-							temp = "<p>Escolha a conex&atilde;o com o banco:</p>";
-							temp += "<select id='i3GEOadmincodigo_estat_conexao' >";
+							temp = "<p>Escolha a conex&atilde;o com o banco que receber&aacute; os dados:</p>";
+							temp += "<select id='i3GEOadmincodigo_estat_conexao' style='box-shadow:0 1px 5px gray;width:"+(i3GEOF.metaestat.LARGURA - 20)+"px'>";
 							temp += core_comboObjeto(dados,"codigo_estat_conexao","bancodedados","","usuario");
 							temp += "</select>";
 							$i(i3GEOadmin.uploaddados.conexao.onde).innerHTML = temp;
