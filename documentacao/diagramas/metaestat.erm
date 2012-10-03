@@ -11,7 +11,7 @@
 	</page_setting>
 	<category_index>0</category_index>
 	<zoom>1.0</zoom>
-	<x>219</x>
+	<x>159</x>
 	<y>-89</y>
 	<default_color>
 		<r>255</r>
@@ -110,7 +110,7 @@
 			</connections>
 			<display>false</display>
 			<creation_date>2012-07-17 15:03:53</creation_date>
-			<updated_date>2012-09-25 10:02:07</updated_date>
+			<updated_date>2012-10-03 10:48:05</updated_date>
 			<model_property>
 				<name>Project Name</name>
 				<value></value>
@@ -1068,7 +1068,7 @@
 					</sequence>
 				</normal_column>
 				<normal_column>
-					<word_id>39</word_id>
+					<word_id>40</word_id>
 					<id>1</id>
 					<description></description>
 					<unique_key_name></unique_key_name>
@@ -1386,7 +1386,7 @@
 					</sequence>
 				</normal_column>
 				<normal_column>
-					<word_id>40</word_id>
+					<word_id>41</word_id>
 					<id>9</id>
 					<description></description>
 					<unique_key_name></unique_key_name>
@@ -1530,7 +1530,7 @@
 					</sequence>
 				</normal_column>
 				<normal_column>
-					<word_id>38</word_id>
+					<word_id>36</word_id>
 					<id>12</id>
 					<description></description>
 					<unique_key_name></unique_key_name>
@@ -2260,40 +2260,6 @@
 				</relation>
 				<relation>
 					<id>3</id>
-					<source>12</source>
-					<target>8</target>
-					<child_cardinality>1..n</child_cardinality>
-					<parent_cardinality>1</parent_cardinality>
-					<reference_for_pk>true</reference_for_pk>
-					<name></name>
-					<on_delete_action>RESTRICT</on_delete_action>
-					<on_update_action>RESTRICT</on_update_action>
-					<source_xp>-1</source_xp>
-					<source_yp>-1</source_yp>
-					<target_xp>-1</target_xp>
-					<target_yp>-1</target_yp>
-					<referenced_column>null</referenced_column>
-					<referenced_complex_unique_key>null</referenced_complex_unique_key>
-				</relation>
-				<relation>
-					<id>4</id>
-					<source>4</source>
-					<target>8</target>
-					<child_cardinality>1..n</child_cardinality>
-					<parent_cardinality>1</parent_cardinality>
-					<reference_for_pk>true</reference_for_pk>
-					<name></name>
-					<on_delete_action>RESTRICT</on_delete_action>
-					<on_update_action>RESTRICT</on_update_action>
-					<source_xp>-1</source_xp>
-					<source_yp>-1</source_yp>
-					<target_xp>-1</target_xp>
-					<target_yp>-1</target_yp>
-					<referenced_column>null</referenced_column>
-					<referenced_complex_unique_key>null</referenced_complex_unique_key>
-				</relation>
-				<relation>
-					<id>5</id>
 					<source>14</source>
 					<target>8</target>
 					<child_cardinality>1..n</child_cardinality>
@@ -2310,8 +2276,42 @@
 					<referenced_complex_unique_key>null</referenced_complex_unique_key>
 				</relation>
 				<relation>
-					<id>6</id>
+					<id>4</id>
 					<source>2</source>
+					<target>8</target>
+					<child_cardinality>1..n</child_cardinality>
+					<parent_cardinality>1</parent_cardinality>
+					<reference_for_pk>true</reference_for_pk>
+					<name></name>
+					<on_delete_action>RESTRICT</on_delete_action>
+					<on_update_action>RESTRICT</on_update_action>
+					<source_xp>-1</source_xp>
+					<source_yp>-1</source_yp>
+					<target_xp>-1</target_xp>
+					<target_yp>-1</target_yp>
+					<referenced_column>null</referenced_column>
+					<referenced_complex_unique_key>null</referenced_complex_unique_key>
+				</relation>
+				<relation>
+					<id>5</id>
+					<source>12</source>
+					<target>8</target>
+					<child_cardinality>1..n</child_cardinality>
+					<parent_cardinality>1</parent_cardinality>
+					<reference_for_pk>true</reference_for_pk>
+					<name></name>
+					<on_delete_action>RESTRICT</on_delete_action>
+					<on_update_action>RESTRICT</on_update_action>
+					<source_xp>-1</source_xp>
+					<source_yp>-1</source_yp>
+					<target_xp>-1</target_xp>
+					<target_yp>-1</target_yp>
+					<referenced_column>null</referenced_column>
+					<referenced_complex_unique_key>null</referenced_complex_unique_key>
+				</relation>
+				<relation>
+					<id>6</id>
+					<source>4</source>
 					<target>8</target>
 					<child_cardinality>1..n</child_cardinality>
 					<parent_cardinality>1</parent_cardinality>
@@ -2369,7 +2369,7 @@
 				<normal_column>
 					<id>32</id>
 					<referenced_column>0</referenced_column>
-					<relation>6</relation>
+					<relation>4</relation>
 					<description></description>
 					<unique_key_name></unique_key_name>
 					<logical_name></logical_name>
@@ -2435,7 +2435,7 @@
 				<normal_column>
 					<id>34</id>
 					<referenced_column>8</referenced_column>
-					<relation>4</relation>
+					<relation>6</relation>
 					<description></description>
 					<unique_key_name></unique_key_name>
 					<logical_name></logical_name>
@@ -2468,7 +2468,7 @@
 				<normal_column>
 					<id>35</id>
 					<referenced_column>55</referenced_column>
-					<relation>3</relation>
+					<relation>5</relation>
 					<description></description>
 					<unique_key_name></unique_key_name>
 					<logical_name></logical_name>
@@ -2501,7 +2501,7 @@
 				<normal_column>
 					<id>36</id>
 					<referenced_column>71</referenced_column>
-					<relation>5</relation>
+					<relation>3</relation>
 					<description></description>
 					<unique_key_name></unique_key_name>
 					<logical_name></logical_name>
@@ -2837,7 +2837,7 @@
 					</sequence>
 				</normal_column>
 				<normal_column>
-					<word_id>41</word_id>
+					<word_id>39</word_id>
 					<id>45</id>
 					<description></description>
 					<unique_key_name></unique_key_name>
@@ -3144,7 +3144,7 @@
 					</sequence>
 				</normal_column>
 				<normal_column>
-					<word_id>36</word_id>
+					<word_id>38</word_id>
 					<id>51</id>
 					<description></description>
 					<unique_key_name></unique_key_name>
@@ -4131,7 +4131,7 @@
 							</column_data>
 							<column_data>
 								<column_id>72</column_id>
-								<value>dbspo</value>
+								<value>geosaude</value>
 							</column_data>
 							<column_data>
 								<column_id>73</column_id>
@@ -4390,7 +4390,7 @@
 						<data>
 							<column_data>
 								<column_id>55</column_id>
-								<value>1</value>
+								<value>2</value>
 							</column_data>
 							<column_data>
 								<column_id>56</column_id>
@@ -4406,11 +4406,11 @@
 							</column_data>
 							<column_data>
 								<column_id>59</column_id>
-								<value>public</value>
+								<value>i3geo_mestaestat</value>
 							</column_data>
 							<column_data>
 								<column_id>60</column_id>
-								<value>tb_ibge</value>
+								<value>municipios</value>
 							</column_data>
 							<column_data>
 								<column_id>61</column_id>
@@ -4418,11 +4418,11 @@
 							</column_data>
 							<column_data>
 								<column_id>62</column_id>
-								<value></value>
+								<value>2010</value>
 							</column_data>
 							<column_data>
 								<column_id>63</column_id>
-								<value>ibge</value>
+								<value>co_municipio</value>
 							</column_data>
 							<column_data>
 								<column_id>64</column_id>
@@ -4444,7 +4444,7 @@
 							</column_data>
 							<column_data>
 								<column_id>56</column_id>
-								<value>Estados</value>
+								<value>Estado</value>
 							</column_data>
 							<column_data>
 								<column_id>57</column_id>
@@ -4456,11 +4456,11 @@
 							</column_data>
 							<column_data>
 								<column_id>59</column_id>
-								<value>public</value>
+								<value>i3geo_mestaestat</value>
 							</column_data>
 							<column_data>
 								<column_id>60</column_id>
-								<value>tb_ibge_estados</value>
+								<value>uf</value>
 							</column_data>
 							<column_data>
 								<column_id>61</column_id>
@@ -4468,15 +4468,65 @@
 							</column_data>
 							<column_data>
 								<column_id>62</column_id>
-								<value></value>
+								<value>2010</value>
 							</column_data>
 							<column_data>
 								<column_id>63</column_id>
-								<value>co_ibge_uf</value>
+								<value>co_uf</value>
 							</column_data>
 							<column_data>
 								<column_id>64</column_id>
 								<value>no_uf</value>
+							</column_data>
+							<column_data>
+								<column_id>65</column_id>
+								<value>4326</value>
+							</column_data>
+							<column_data>
+								<column_id>66</column_id>
+								<value>the_geom</value>
+							</column_data>
+						</data>
+						<data>
+							<column_data>
+								<column_id>55</column_id>
+								<value>1</value>
+							</column_data>
+							<column_data>
+								<column_id>56</column_id>
+								<value>Bairro</value>
+							</column_data>
+							<column_data>
+								<column_id>57</column_id>
+								<value>Limites de bairros</value>
+							</column_data>
+							<column_data>
+								<column_id>58</column_id>
+								<value>1</value>
+							</column_data>
+							<column_data>
+								<column_id>59</column_id>
+								<value>i3geo_mestaestat</value>
+							</column_data>
+							<column_data>
+								<column_id>60</column_id>
+								<value>bairros</value>
+							</column_data>
+							<column_data>
+								<column_id>61</column_id>
+								<value>the_geom</value>
+							</column_data>
+							<column_data>
+								<column_id>62</column_id>
+								<value>2010</value>
+							</column_data>
+							<column_data>
+								<column_id>63</column_id>
+								<value>co_bairro</value>
+							</column_data>
+							<column_data>
+								<column_id>64</column_id>
+								<value>no_bairro</value>
 							</column_data>
 							<column_data>
 								<column_id>65</column_id>

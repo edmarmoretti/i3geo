@@ -644,7 +644,8 @@ i3GEOF.metaestat = {
 			t0: function(){
 				var ins = "<p class='paragrafo' >" + $trad(2,i3GEOF.metaestat.dicionario1) +
 				"<br><br><p><input id=i3GEOFmetaestatEditorBotao1 type='button' value='"+$trad(3,i3GEOF.metaestat.dicionario1)+"' />" +
-				"&nbsp<input id=i3GEOFmetaestatEditorBotao2 type='button' value='"+$trad(4,i3GEOF.metaestat.dicionario1)+"' />";
+				"&nbsp<input id=i3GEOFmetaestatEditorBotao2 type='button' value='"+$trad(4,i3GEOF.metaestat.dicionario1)+"' />" +
+				"&nbsp<input id=i3GEOFmetaestatEditorBotao3 type='button' value='Upload' />";
 				i3GEO.util.proximoAnterior("","i3GEOF.metaestat.editor.t1()",ins,"i3GEOF.metaestat.editor.t0","i3GEOFmetaestatEditor");
 				new YAHOO.widget.Button(
 						"i3GEOFmetaestatEditorBotao1",
@@ -654,6 +655,39 @@ i3GEOF.metaestat = {
 				new YAHOO.widget.Button(
 						"i3GEOFmetaestatEditorBotao2",
 						{onclick:{fn: function(){alert("Oi");}}}
+				);
+				new YAHOO.widget.Button(
+						"i3GEOFmetaestatEditorBotao3",
+						{onclick:{fn: function(){
+							var cabecalho,minimiza,janela;
+							if (!$i("i3geoCartoUpload")){
+								cabecalho = function(){
+								};
+								minimiza = function(){
+									i3GEO.janela.minimiza("i3geoCartoUpload");
+								};
+								janela = i3GEO.janela.cria(
+										"500px",
+										"400px",
+										i3GEO.configura.locaplic+"/ferramentas/metaestat/upload.html",
+										"",
+										"",
+										"Upload",
+										"i3geoCartoUpload",
+										false,
+										"hd",
+										cabecalho,
+										minimiza
+								);
+								janela = janela[0];
+								YAHOO.i3GEO.janela.manager.register(janela);
+								janela.render();
+							}
+							else{
+								janela = YAHOO.i3GEO.janela.manager.find("i3geoCartoUpload");
+							}
+							janela.show();
+						}}}
 				);
 			},
 			/**
