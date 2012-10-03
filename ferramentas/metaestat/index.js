@@ -1,5 +1,5 @@
 /*
- T i*tle: Cartogramas estat&iacute;sticos
+ Title: Cartogramas estat&iacute;sticos
 
  Arquivo:
 
@@ -31,7 +31,7 @@ if(typeof(i3GEOF) === 'undefined'){
 	var i3GEOF = {};
 }
 /*
- C l*asse: i3GEOF.metaestat
+ Classe: i3GEOF.metaestat
 
  Gerencia os componentes do m&oacute;dulo de gera&ccedil;&atilde;o de cartogramas estat&iacute;sticos
  */
@@ -651,10 +651,24 @@ i3GEOF.metaestat = {
 						"i3GEOFmetaestatEditorBotaot01",
 						{onclick:{fn: function(){window.open(i3GEO.configura.locaplic+"/admin/html/estat_variavel.html");}}}
 				);
-				//TODO editor grafico
 				new YAHOO.widget.Button(
 						"i3GEOFmetaestatEditorBotaot02",
-						{onclick:{fn: function(){alert("Oi");}}}
+						{onclick:{fn: function(){
+							/*
+							var v = $i("i3geoCartoComboVariavel"),
+								m = $i("i3geoCartoComboMedidasVariavel");
+							if(!v || v.value === ""){
+								alert($trad(4,i3GEOF.metaestat.dicionario));
+								return;
+							}
+							if(!m || m.value === ""){
+								alert($trad(14,i3GEOF.metaestat.dicionario));
+								return;
+							}
+							*/
+							alert($trad(15,i3GEOF.metaestat.dicionario1));
+							window.open(i3GEO.configura.locaplic+"/ferramentas/metaestat/editorlimites.php");
+						}}}
 				);
 				new YAHOO.widget.Button(
 						"i3GEOFmetaestatEditorBotaot03",
@@ -768,7 +782,6 @@ i3GEOF.metaestat = {
 			 * Edicao da classificacao
 			 */
 			t3: function(remove,textoSelecionado){
-				//TODO incluir opcao de upload de dados
 				if(remove == true){
 					//remove o conteudo anteriormente construido
 					i3GEOF.metaestat.editor.removeEl("i3GEOF.metaestat.editor.t3");

@@ -91,4 +91,11 @@ en:"",
 es:"",
 it:""
 }],
+"14":[
+{
+pt:"Escolha uma medida primeiro",
+en:"",
+es:"",
+it:""
+}]
 };

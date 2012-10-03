@@ -24,7 +24,7 @@ it:""
 }],
 "4":[
 {
-pt:"Editor interativo",
+pt:"Editor de limites",
 en:"",
 es:"",
 it:""
@@ -101,7 +101,7 @@ it:""
 }],
 "15":[
 {
-pt:"",
+pt:"O editor sera aberto em uma nova janela do navegador",
 en:"",
 es:"",
 it:""
