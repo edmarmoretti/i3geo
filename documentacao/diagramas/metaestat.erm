@@ -110,7 +110,7 @@
 			</connections>
 			<display>false</display>
 			<creation_date>2012-07-17 15:03:53</creation_date>
-			<updated_date>2012-10-03 10:48:05</updated_date>
+			<updated_date>2012-10-03 16:13:35</updated_date>
 			<model_property>
 				<name>Project Name</name>
 				<value></value>
@@ -1068,7 +1068,7 @@
 					</sequence>
 				</normal_column>
 				<normal_column>
-					<word_id>40</word_id>
+					<word_id>37</word_id>
 					<id>1</id>
 					<description></description>
 					<unique_key_name></unique_key_name>
@@ -1259,7 +1259,7 @@
 					</sequence>
 				</normal_column>
 				<normal_column>
-					<word_id>37</word_id>
+					<word_id>36</word_id>
 					<id>6</id>
 					<description></description>
 					<unique_key_name></unique_key_name>
@@ -1291,7 +1291,7 @@
 					</sequence>
 				</normal_column>
 				<normal_column>
-					<word_id>17</word_id>
+					<word_id>16</word_id>
 					<id>7</id>
 					<description></description>
 					<unique_key_name></unique_key_name>
@@ -1386,7 +1386,7 @@
 					</sequence>
 				</normal_column>
 				<normal_column>
-					<word_id>41</word_id>
+					<word_id>38</word_id>
 					<id>9</id>
 					<description></description>
 					<unique_key_name></unique_key_name>
@@ -1418,7 +1418,7 @@
 					</sequence>
 				</normal_column>
 				<normal_column>
-					<word_id>18</word_id>
+					<word_id>17</word_id>
 					<id>10</id>
 					<description></description>
 					<unique_key_name></unique_key_name>
@@ -1530,7 +1530,7 @@
 					</sequence>
 				</normal_column>
 				<normal_column>
-					<word_id>36</word_id>
+					<word_id>40</word_id>
 					<id>12</id>
 					<description></description>
 					<unique_key_name></unique_key_name>
@@ -2243,7 +2243,7 @@
 			<connections>
 				<relation>
 					<id>2</id>
-					<source>3</source>
+					<source>4</source>
 					<target>8</target>
 					<child_cardinality>1..n</child_cardinality>
 					<parent_cardinality>1</parent_cardinality>
@@ -2260,23 +2260,6 @@
 				</relation>
 				<relation>
 					<id>3</id>
-					<source>14</source>
-					<target>8</target>
-					<child_cardinality>1..n</child_cardinality>
-					<parent_cardinality>1</parent_cardinality>
-					<reference_for_pk>true</reference_for_pk>
-					<name></name>
-					<on_delete_action>RESTRICT</on_delete_action>
-					<on_update_action>RESTRICT</on_update_action>
-					<source_xp>-1</source_xp>
-					<source_yp>-1</source_yp>
-					<target_xp>-1</target_xp>
-					<target_yp>-1</target_yp>
-					<referenced_column>null</referenced_column>
-					<referenced_complex_unique_key>null</referenced_complex_unique_key>
-				</relation>
-				<relation>
-					<id>4</id>
 					<source>2</source>
 					<target>8</target>
 					<child_cardinality>1..n</child_cardinality>
@@ -2293,7 +2276,7 @@
 					<referenced_complex_unique_key>null</referenced_complex_unique_key>
 				</relation>
 				<relation>
-					<id>5</id>
+					<id>4</id>
 					<source>12</source>
 					<target>8</target>
 					<child_cardinality>1..n</child_cardinality>
@@ -2310,8 +2293,25 @@
 					<referenced_complex_unique_key>null</referenced_complex_unique_key>
 				</relation>
 				<relation>
+					<id>5</id>
+					<source>14</source>
+					<target>8</target>
+					<child_cardinality>1..n</child_cardinality>
+					<parent_cardinality>1</parent_cardinality>
+					<reference_for_pk>true</reference_for_pk>
+					<name></name>
+					<on_delete_action>RESTRICT</on_delete_action>
+					<on_update_action>RESTRICT</on_update_action>
+					<source_xp>-1</source_xp>
+					<source_yp>-1</source_yp>
+					<target_xp>-1</target_xp>
+					<target_yp>-1</target_yp>
+					<referenced_column>null</referenced_column>
+					<referenced_complex_unique_key>null</referenced_complex_unique_key>
+				</relation>
+				<relation>
 					<id>6</id>
-					<source>4</source>
+					<source>3</source>
 					<target>8</target>
 					<child_cardinality>1..n</child_cardinality>
 					<parent_cardinality>1</parent_cardinality>
@@ -2369,7 +2369,7 @@
 				<normal_column>
 					<id>32</id>
 					<referenced_column>0</referenced_column>
-					<relation>4</relation>
+					<relation>3</relation>
 					<description></description>
 					<unique_key_name></unique_key_name>
 					<logical_name></logical_name>
@@ -2402,7 +2402,7 @@
 				<normal_column>
 					<id>33</id>
 					<referenced_column>5</referenced_column>
-					<relation>2</relation>
+					<relation>6</relation>
 					<description></description>
 					<unique_key_name></unique_key_name>
 					<logical_name></logical_name>
@@ -2435,7 +2435,7 @@
 				<normal_column>
 					<id>34</id>
 					<referenced_column>8</referenced_column>
-					<relation>6</relation>
+					<relation>2</relation>
 					<description></description>
 					<unique_key_name></unique_key_name>
 					<logical_name></logical_name>
@@ -2468,7 +2468,7 @@
 				<normal_column>
 					<id>35</id>
 					<referenced_column>55</referenced_column>
-					<relation>5</relation>
+					<relation>4</relation>
 					<description></description>
 					<unique_key_name></unique_key_name>
 					<logical_name></logical_name>
@@ -2501,7 +2501,7 @@
 				<normal_column>
 					<id>36</id>
 					<referenced_column>71</referenced_column>
-					<relation>3</relation>
+					<relation>5</relation>
 					<description></description>
 					<unique_key_name></unique_key_name>
 					<logical_name></logical_name>
@@ -3144,7 +3144,7 @@
 					</sequence>
 				</normal_column>
 				<normal_column>
-					<word_id>38</word_id>
+					<word_id>41</word_id>
 					<id>51</id>
 					<description></description>
 					<unique_key_name></unique_key_name>
@@ -3176,7 +3176,7 @@
 					</sequence>
 				</normal_column>
 				<normal_column>
-					<word_id>16</word_id>
+					<word_id>18</word_id>
 					<id>52</id>
 					<description></description>
 					<unique_key_name></unique_key_name>
@@ -4406,7 +4406,7 @@
 							</column_data>
 							<column_data>
 								<column_id>59</column_id>
-								<value>i3geo_mestaestat</value>
+								<value>i3geo_metaestat</value>
 							</column_data>
 							<column_data>
 								<column_id>60</column_id>
@@ -4456,7 +4456,7 @@
 							</column_data>
 							<column_data>
 								<column_id>59</column_id>
-								<value>i3geo_mestaestat</value>
+								<value>i3geo_metaestat</value>
 							</column_data>
 							<column_data>
 								<column_id>60</column_id>
@@ -4506,7 +4506,7 @@
 							</column_data>
 							<column_data>
 								<column_id>59</column_id>
-								<value>i3geo_mestaestat</value>
+								<value>i3geo_metaestat</value>
 							</column_data>
 							<column_data>
 								<column_id>60</column_id>
@@ -4734,7 +4734,7 @@
 							</column_data>
 							<column_data>
 								<column_id>1</column_id>
-								<value>Unidade</value>
+								<value>Quantidade</value>
 							</column_data>
 							<column_data>
 								<column_id>2</column_id>
@@ -4853,7 +4853,7 @@
 							</column_data>
 							<column_data>
 								<column_id>35</column_id>
-								<value>1</value>
+								<value>2</value>
 							</column_data>
 							<column_data>
 								<column_id>36</column_id>
@@ -4861,15 +4861,15 @@
 							</column_data>
 							<column_data>
 								<column_id>37</column_id>
-								<value>dbacoes_saude</value>
+								<value>dbdemografia</value>
 							</column_data>
 							<column_data>
 								<column_id>38</column_id>
-								<value>tb_farmacia_pop</value>
+								<value>tb_demografia</value>
 							</column_data>
 							<column_data>
 								<column_id>39</column_id>
-								<value>nu_farm_funcionando</value>
+								<value>nu_populacao</value>
 							</column_data>
 							<column_data>
 								<column_id>40</column_id>
@@ -4881,7 +4881,7 @@
 							</column_data>
 							<column_data>
 								<column_id>42</column_id>
-								<value>Número de farmácias em funcionamento por mês e ano</value>
+								<value>População residente</value>
 							</column_data>
 						</data>
 					</direct_test_data>
@@ -5081,33 +5081,7 @@
 							</column_data>
 							<column_data>
 								<column_id>50</column_id>
-								<value>mes_farm_pop</value>
-							</column_data>
-							<column_data>
-								<column_id>51</column_id>
-								<value>mês</value>
-							</column_data>
-							<column_data>
-								<column_id>52</column_id>
-								<value></value>
-							</column_data>
-							<column_data>
-								<column_id>53</column_id>
-								<value>2</value>
-							</column_data>
-							<column_data>
-								<column_id>54</column_id>
-								<value>1</value>
-							</column_data>
-						</data>
-						<data>
-							<column_data>
-								<column_id>49</column_id>
-								<value>2</value>
-							</column_data>
-							<column_data>
-								<column_id>50</column_id>
-								<value>ano_farm</value>
+								<value>nu_ano</value>
 							</column_data>
 							<column_data>
 								<column_id>51</column_id>
@@ -5233,11 +5207,11 @@
 							</column_data>
 							<column_data>
 								<column_id>9</column_id>
-								<value>Farmácias populares existentes</value>
+								<value>População</value>
 							</column_data>
 							<column_data>
 								<column_id>10</column_id>
-								<value>Quantidade de farmácias populares existentes</value>
+								<value>Caracterização da população</value>
 							</column_data>
 						</data>
 					</direct_test_data>
@@ -5302,7 +5276,7 @@
 							</column_data>
 							<column_data>
 								<column_id>12</column_id>
-								<value>Pela média</value>
+								<value>Intervalos aleatórios</value>
 							</column_data>
 							<column_data>
 								<column_id>13</column_id>
@@ -5390,11 +5364,11 @@
 							</column_data>
 							<column_data>
 								<column_id>16</column_id>
-								<value>([nu_farm_funcionando] &lt; 1)</value>
+								<value>([nu_populacao]&lt;=6379.5)</value>
 							</column_data>
 							<column_data>
 								<column_id>17</column_id>
-								<value>Nenhuma</value>
+								<value>&lt;= 6379.5</value>
 							</column_data>
 							<column_data>
 								<column_id>18</column_id>
@@ -5402,11 +5376,11 @@
 							</column_data>
 							<column_data>
 								<column_id>19</column_id>
-								<value>0</value>
+								<value>250</value>
 							</column_data>
 							<column_data>
 								<column_id>20</column_id>
-								<value>0</value>
+								<value>250</value>
 							</column_data>
 							<column_data>
 								<column_id>21</column_id>
@@ -5422,15 +5396,15 @@
 							</column_data>
 							<column_data>
 								<column_id>24</column_id>
-								<value>0</value>
+								<value></value>
 							</column_data>
 							<column_data>
 								<column_id>25</column_id>
-								<value>0</value>
+								<value></value>
 							</column_data>
 							<column_data>
 								<column_id>26</column_id>
-								<value>0</value>
+								<value></value>
 							</column_data>
 							<column_data>
 								<column_id>27</column_id>
@@ -5444,23 +5418,23 @@
 							</column_data>
 							<column_data>
 								<column_id>16</column_id>
-								<value>([nu_farm_funcionando] = 1)</value>
+								<value>(([nu_populacao]&gt;6379.5)and([nu_populacao]&lt;=12157))</value>
 							</column_data>
 							<column_data>
 								<column_id>17</column_id>
-								<value>Uma</value>
+								<value>&gt; 6379.5 e &lt;= 12157</value>
 							</column_data>
 							<column_data>
 								<column_id>18</column_id>
-								<value>0</value>
-							</column_data>
-							<column_data>
-								<column_id>19</column_id>
 								<value>255</value>
 							</column_data>
 							<column_data>
+								<column_id>19</column_id>
+								<value>230</value>
+							</column_data>
+							<column_data>
 								<column_id>20</column_id>
-								<value>0</value>
+								<value>230</value>
 							</column_data>
 							<column_data>
 								<column_id>21</column_id>
@@ -5498,15 +5472,69 @@
 							</column_data>
 							<column_data>
 								<column_id>16</column_id>
-								<value>([nu_farm_funcionando] &gt; 1)</value>
+								<value>(([nu_populacao]&gt;12157)and([nu_populacao]&lt;=22861.5))</value>
 							</column_data>
 							<column_data>
 								<column_id>17</column_id>
-								<value>Mais de uma</value>
+								<value>&gt; 12157 e &lt;= 22861.5</value>
 							</column_data>
 							<column_data>
 								<column_id>18</column_id>
-								<value>0</value>
+								<value>255</value>
+							</column_data>
+							<column_data>
+								<column_id>19</column_id>
+								<value>150</value>
+							</column_data>
+							<column_data>
+								<column_id>20</column_id>
+								<value>150</value>
+							</column_data>
+							<column_data>
+								<column_id>21</column_id>
+								<value>1</value>
+							</column_data>
+							<column_data>
+								<column_id>22</column_id>
+								<value></value>
+							</column_data>
+							<column_data>
+								<column_id>23</column_id>
+								<value></value>
+							</column_data>
+							<column_data>
+								<column_id>24</column_id>
+								<value></value>
+							</column_data>
+							<column_data>
+								<column_id>25</column_id>
+								<value></value>
+							</column_data>
+							<column_data>
+								<column_id>26</column_id>
+								<value></value>
+							</column_data>
+							<column_data>
+								<column_id>27</column_id>
+								<value></value>
+							</column_data>
+						</data>
+						<data>
+							<column_data>
+								<column_id>15</column_id>
+								<value>4</value>
+							</column_data>
+							<column_data>
+								<column_id>16</column_id>
+								<value>([nu_populacao]&gt;22861.5)</value>
+							</column_data>
+							<column_data>
+								<column_id>17</column_id>
+								<value>&gt; 22861.5</value>
+							</column_data>
+							<column_data>
+								<column_id>18</column_id>
+								<value>255</value>
 							</column_data>
 							<column_data>
 								<column_id>19</column_id>
@@ -5514,7 +5542,7 @@
 							</column_data>
 							<column_data>
 								<column_id>20</column_id>
-								<value>255</value>
+								<value>0</value>
 							</column_data>
 							<column_data>
 								<column_id>21</column_id>

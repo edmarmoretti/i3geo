@@ -643,21 +643,21 @@ i3GEOF.metaestat = {
 			 **/
 			t0: function(){
 				var ins = "<p class='paragrafo' >" + $trad(2,i3GEOF.metaestat.dicionario1) +
-				"<br><br><p><input id=i3GEOFmetaestatEditorBotao1 type='button' value='"+$trad(3,i3GEOF.metaestat.dicionario1)+"' />" +
-				"&nbsp<input id=i3GEOFmetaestatEditorBotao2 type='button' value='"+$trad(4,i3GEOF.metaestat.dicionario1)+"' />" +
-				"&nbsp<input id=i3GEOFmetaestatEditorBotao3 type='button' value='Upload' />";
+				"<br><br><p><input id=i3GEOFmetaestatEditorBotaot01 type='button' value='"+$trad(3,i3GEOF.metaestat.dicionario1)+"' />" +
+				"&nbsp<input id=i3GEOFmetaestatEditorBotaot02 type='button' value='"+$trad(4,i3GEOF.metaestat.dicionario1)+"' />" +
+				"&nbsp<input id=i3GEOFmetaestatEditorBotaot03 type='button' value='Upload' />";
 				i3GEO.util.proximoAnterior("","i3GEOF.metaestat.editor.t1()",ins,"i3GEOF.metaestat.editor.t0","i3GEOFmetaestatEditor");
 				new YAHOO.widget.Button(
-						"i3GEOFmetaestatEditorBotao1",
+						"i3GEOFmetaestatEditorBotaot01",
 						{onclick:{fn: function(){window.open(i3GEO.configura.locaplic+"/admin/html/estat_variavel.html");}}}
 				);
 				//TODO editor grafico
 				new YAHOO.widget.Button(
-						"i3GEOFmetaestatEditorBotao2",
+						"i3GEOFmetaestatEditorBotaot02",
 						{onclick:{fn: function(){alert("Oi");}}}
 				);
 				new YAHOO.widget.Button(
-						"i3GEOFmetaestatEditorBotao3",
+						"i3GEOFmetaestatEditorBotaot03",
 						{onclick:{fn: function(){
 							var cabecalho,minimiza,janela;
 							if (!$i("i3geoCartoUpload")){

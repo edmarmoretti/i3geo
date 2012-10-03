@@ -1,6 +1,4 @@
 MAP
-
-
   FONTSET "../symbols/fontes.txt"
   SYMBOLSET "../symbols/simbolos.sym"
   LAYER
@@ -26,11 +24,14 @@ MAP
       "tema"	"Acid Maps"
       "wms_server_version"	"1.1.1"
       "wms_style"	""
-    END
+    END # METADATA
     NAME "acidmap"
     OFFSITE 255 255 255
     STATUS OFF
+    TILEITEM "location"
     TYPE RASTER
     UNITS METERS
-  END
-END
+  END # LAYER
+
+END # MAP
+
