@@ -18,7 +18,7 @@ GPL2
 i3Geo Interface Integrada de Ferramentas de Geoprocessamento para Internet
 
 Direitos Autorais Reservados (c) 2006 Minist�rio do Meio Ambiente Brasil
-Desenvolvedor: Edmar Moretti edmar.moretti@mma.gov.br
+Desenvolvedor: Edmar Moretti edmar.moretti@gmail.com
 
 Este programa � software livre; voc� pode redistribu�-lo
 e/ou modific�-lo sob os termos da Licen�a P�blica Geral

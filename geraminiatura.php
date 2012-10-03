@@ -34,7 +34,7 @@ Licenca:
 i3Geo Interface Integrada de Ferramentas de Geoprocessamento para Internet
 
 Direitos Autorais Reservados (c) 2006 Minist&eacute;rio do Meio Ambiente Brasil
-Desenvolvedor: Edmar Moretti edmar.moretti@mma.gov.br
+Desenvolvedor: Edmar Moretti edmar.moretti@gmail.com
 
 Colabora&ccedil;&atilde;o: Luis Henrique Weirich de Matos
 

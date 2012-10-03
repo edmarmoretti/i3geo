@@ -6,7 +6,7 @@ GPL2
  i3Geo Interface Integrada de Ferramentas de Geoprocessamento para Internet
 
  Direitos Autorais Reservados (c) 2006 Minist&eacute;rio do Meio Ambiente Brasil
- Desenvolvedor: Edmar Moretti edmar.moretti@mma.gov.br
+ Desenvolvedor: Edmar Moretti edmar.moretti@gmail.com
 
 Esse programa utiliza parcialmente os codigos da aplicacao calculadora de carbono desenvolvido pelo
 IPAM - Instituto de Pesquisa Ambiental da Amazonia
