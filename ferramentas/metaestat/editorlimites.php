@@ -176,7 +176,7 @@ i3GEO.finalizaAPI = function(){
 	minimiza = function() {
 		i3GEO.janela.minimiza("janelaEditorLimites");
 	};
-	janela = i3GEO.janela.cria("230px", "100px", "", "", "",
+	janela = i3GEO.janela.cria("255px", "100px", "", "", "",
 		"Editor", "janelaEditorLimites", false, "hd",
 		cabecalho, minimiza);
 	$i("janelaEditorLimites_corpo").style.backgroundColor = "white";

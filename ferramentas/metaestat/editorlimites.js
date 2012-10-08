@@ -29,7 +29,7 @@ Free Software Foundation, Inc., no endereco
 //TODO traduzir
 var editorlimites = {
 	/**
-	 * Estilo do objeto DOM com a imagem de aguarde existente no cabeçalho da janela
+	 * Estilo do objeto DOM com a imagem de aguarde existente no cabecalho da janela
 	 *
 	*/
 	aguarde: "",
@@ -43,7 +43,7 @@ var editorlimites = {
 	/**
 	 * Inicia o editor
 	 *
-	 * @param {String} Id do DIV que receberá o conteúdo HTML do editor
+	 * @param {String} Id do DIV que recebera o conteudo HTML do editor. Ja deve estar criado no HTML
 	 * @return
 	*/
 	inicia: function(iddiv){
@@ -132,19 +132,11 @@ var editorlimites = {
 	html:function(){
 		var ins = '' +
 		'	<button title="Desenhar um polígono" onclick="editorlimites.digitalizaPol(this)"><img src="'+i3GEO.configura.locaplic+'/imagens/gisicons/polygon-create.png" /></button>' +
-		'	<button title="Capturar polígono de um tema" onclick="editorlimites.ativaCaptura()"><img src="'+i3GEO.configura.locaplic+'/imagens/gisicons/layer-import.png" /></button>' +
+		'	<button title="Capturar polígono de um tema" onclick="editorlimites.capturaPoligonoTema.ativa(this)"><img src="'+i3GEO.configura.locaplic+'/imagens/gisicons/layer-import.png" /></button>' +
 		'	<button title="Selecionar" onclick="editorlimites.seleciona(this)"><img src="'+i3GEO.configura.locaplic+'/imagens/gisicons/select.png" /></button>' +
 		'	<button title="Remove selecionado (n&atilde;o apaga)" onclick="editorlimites.deleteSelectedShape()"><img src="'+i3GEO.configura.locaplic+'/imagens/gisicons/selected-delete.png" /></button>' +
 		'	<button title="Salvar limite" onclick="editorlimites.salvaLimite.inicia()"><img src="'+i3GEO.configura.locaplic+'/imagens/gisicons/vector-save.png" /></button>' +
-		//'	<button title="Upload de shapefile" onclick="editorlimites.upload.criaJanelaFlutuante()"><img src="'+i3GEO.configura.locaplic+'/imagens/gisicons/open.png" /></button>' +
-		//'	<button title="Relatório CMAS" onmousedown="editorlimites.mudaicone()" onclick="editorlimites.relatorioCmas()" ><img src="'+i3GEO.configura.locaplic+'/imagens/gisicons/table.png" /></button>' +
-		//'	<button onmousedown="editorlimites.mudaicone()" id="pan" ><img  src="'+i3GEO.configura.locaplic+'/imagens/gisicons/pan.png" /></button>' +
-		//'	<button onmousedown="editorlimites.mudaicone()" id="zoomli" ><img src="'+i3GEO.configura.locaplic+'/imagens/gisicons/zoom-region.png" /></button>' +
-		//'	<button onmousedown="editorlimites.mudaicone()" id="zoomtot" ><img src="'+i3GEO.configura.locaplic+'/imagens/gisicons/zoom-extent.png" /></button>' +
-		//'	<button onmousedown="editorlimites.mudaicone()" id="identifica" ><img src="'+i3GEO.configura.locaplic+'/imagens/gisicons/identify.png" /></button>' +
-		//'	<button onmousedown="editorlimites.mudaicone()" id="mede" ><img src="'+i3GEO.configura.locaplic+'/imagens/gisicons/length-measure.png" /></button>' +
-		//'	<button onmousedown="editorlimites.mudaicone()" id="area" ><img src="'+i3GEO.configura.locaplic+'/imagens/gisicons/area-measure.png" /></button>' +
-		//'	<button title="Imprimir" onmousedown="editorlimites.mudaicone()" onclick="editorlimites.imprimir()" ><img src="'+i3GEO.configura.locaplic+'/imagens/gisicons/print.png" /></button>' +
+		'	<button title="Editar atributos" onclick="editorlimites.editarAtributos.ativa(this)"><img src="'+i3GEO.configura.locaplic+'/imagens/gisicons/annotation-form.png" /></button>' +
 		'	<button title="Ajuda" onmousedown="editorlimites.mudaicone()" onclick="editorlimites.Ajuda()" ><img src="'+i3GEO.configura.locaplic+'/imagens/gisicons/help-contents.png" /></button>' +
 		'	<br><div id="i3geoCartoRegioesEditaveisDiv" ><img style="display:block;z-index:2" src="'+i3GEO.configura.locaplic+'/imagens/aguarde.gif" /></div>'; //combo para escolher a regiao
 		return ins;
@@ -264,67 +256,73 @@ var editorlimites = {
 		}
 		return wkt;
 	},
-	ativaCaptura: function(){
-		editorlimites.mudaicone();
-		if(i3GEO.eventos.MOUSECLIQUE.toString().search("editorlimites.capturaPoligonoTema()") < 0)
-		{i3GEO.eventos.MOUSECLIQUE.push("editorlimites.capturaPoligonoTema()");}
-	},
-	capturaPoligonoTema: function(){
-		var temp,tema="",regiao="",p,par,
-			aguarde = $i("janelaEditorLimites_imagemCabecalho");
-		if(!$i("i3geoCartoRegioesEditaveis")){
-			i3GEO.eventos.MOUSECLIQUE.remove("editorlimites.capturaPoligonoTema()");
-		}
-		else{
-			temp = function(retorno){
-					var temp,re,n,i,j,
-						wkt = "",
-						colunaid = editorlimites.descregioes["a_"+regiao]["identificador"],
-						valorid = "",
-						colunanome = editorlimites.descregioes["a_"+regiao]["colunanomeregiao"],
-						valornome = "",
-						pontos = [],
-						aguarde = $i("janelaEditorLimites_imagemCabecalho");
-					//obtem os dados buscando nos itens que vem da requisicao ao wms
-					temp = retorno.data[0].resultado[0];
-					n = temp.length;
-					for(i=0;i<n;i++){
-						if(temp[i].alias == "wkt"){
-							wkt = temp[i].valor;
+	capturaPoligonoTema:{
+		ativa: function(botao){
+			editorlimites.mudaicone(botao);
+			i3GEO.util.mudaCursor(i3GEO.configura.cursores,"pointer",i3GEO.Interface.IDMAPA,i3GEO.configura.locaplic);
+			if(i3GEO.eventos.MOUSECLIQUE.toString().search("editorlimites.capturaPoligonoTema.captura()") < 0)
+			{i3GEO.eventos.MOUSECLIQUE.push("editorlimites.capturaPoligonoTema.captura()");}
+		},
+		desativa: function(){
+		},
+		captura: function(){
+			var temp,tema="",regiao="",p,par,
+				aguarde = $i("janelaEditorLimites_imagemCabecalho");
+			editorlimites.mudaicone();
+			if(!$i("i3geoCartoRegioesEditaveis")){
+				i3GEO.eventos.MOUSECLIQUE.remove("editorlimites.capturaPoligonoTema.captura()");
+			}
+			else{
+				temp = function(retorno){
+						var temp,re,n,i,j,
+							wkt = "",
+							colunaid = editorlimites.descregioes["a_"+regiao]["identificador"],
+							valorid = "",
+							colunanome = editorlimites.descregioes["a_"+regiao]["colunanomeregiao"],
+							valornome = "",
+							pontos = [],
+							aguarde = $i("janelaEditorLimites_imagemCabecalho");
+						//obtem os dados buscando nos itens que vem da requisicao ao wms
+						temp = retorno.data[0].resultado[0];
+						n = temp.length;
+						for(i=0;i<n;i++){
+							if(temp[i].alias == "wkt"){
+								wkt = temp[i].valor;
+							}
+							if(temp[i].alias == colunaid){
+								valorid = temp[i].valor;
+							}
+							if(temp[i].alias == colunanome){
+								valornome = temp[i].valor;
+							}
 						}
-						if(temp[i].alias == colunaid){
-							valorid = temp[i].valor;
+						if(aguarde){
+							aguarde.style.visibility = "hidden";
 						}
-						if(temp[i].alias == colunanome){
-							valornome = temp[i].valor;
+						re = new RegExp("POLYGON \\(\\(", "g");
+						wkt = wkt.replace(re,'');
+						re = new RegExp("\\)\\)", "g");
+						wkt = wkt.replace(re,'');
+						re = new RegExp(", ", "g");
+						wkt = wkt.replace(re,',');
+						wkt = wkt.split(",");
+						n = wkt.length;
+						for(i=0;i<n;i++){
+							j = wkt[i].split(" ");
+							pontos.push([j[0],j[1]]);
 						}
+						editorlimites.adicionaPoligonos([pontos],tema,colunaid,valorid,colunanome,valornome);
+						i3GEO.eventos.MOUSECLIQUE = [];
+					};
+				regiao = $i("i3geoCartoRegioesEditaveis").value;
+				if(regiao != ""){
+					tema = editorlimites.regioestemas["a"+regiao];
+					if(aguarde && aguarde.style.visibility == "hidden"){
+						aguarde.style.visibility = "visible";
+						p = i3GEO.configura.locaplic+"/classesphp/mapa_controle.php";
+						par = "funcao=identifica3&opcao=tema&xy="+objposicaocursor.ddx+","+objposicaocursor.ddy+"&resolucao=1&g_sid="+i3GEO.configura.sid+"&ext="+i3GEO.parametros.mapexten+"&listaDeTemas=&wkt=sim&tema="+tema;
+						cpJSON.call(p,"identifica",temp,par);
 					}
-					if(aguarde){
-						aguarde.style.visibility = "hidden";
-					}
-					re = new RegExp("POLYGON \\(\\(", "g");
-					wkt = wkt.replace(re,'');
-					re = new RegExp("\\)\\)", "g");
-					wkt = wkt.replace(re,'');
-					re = new RegExp(", ", "g");
-					wkt = wkt.replace(re,',');
-					wkt = wkt.split(",");
-					n = wkt.length;
-					for(i=0;i<n;i++){
-						j = wkt[i].split(" ");
-						pontos.push([j[0],j[1]]);
-					}
-					editorlimites.adicionaPoligonos([pontos],tema,colunaid,valorid,colunanome,valornome);
-					i3GEO.eventos.MOUSECLIQUE = [];
-				};
-			regiao = $i("i3geoCartoRegioesEditaveis").value;
-			if(regiao != ""){
-				tema = editorlimites.regioestemas["a"+regiao];
-				if(aguarde && aguarde.style.visibility == "hidden"){
-					aguarde.style.visibility = "visible";
-					p = i3GEO.configura.locaplic+"/classesphp/mapa_controle.php";
-					par = "funcao=identifica3&opcao=tema&xy="+objposicaocursor.ddx+","+objposicaocursor.ddy+"&resolucao=1&g_sid="+i3GEO.configura.sid+"&ext="+i3GEO.parametros.mapexten+"&listaDeTemas=&wkt=sim&tema="+tema;
-					cpJSON.call(p,"identifica",temp,par);
 				}
 			}
 		}
@@ -332,9 +330,9 @@ var editorlimites = {
 	/*
 	Function: mudaicone
 
-	Altera as bordas dos ícones
+	Altera as bordas dos ícones e desativa eventos anteriores
 	*/
-	mudaicone: function(){
+	mudaicone: function(botao){
 		var c = $i(editorlimites.iddiv),
 			ci = c.getElementsByTagName("img"),
 			n = ci.length,
@@ -343,19 +341,22 @@ var editorlimites = {
 			ci[i].parentNode.style.backgroundColor = "#F5F5F5";
 		}
 		i3GEO.eventos.MOUSECLIQUE = [];
+		editorlimites.capturaPoligonoTema.desativa();
+		editorlimites.editarAtributos.desativa();
+		if(botao && botao.style){
+			botao.style.backgroundColor = "#cedff2";
+		}
 	},
 	digitalizaPol: function(botao){
-		editorlimites.mudaicone();
-		botao.style.backgroundColor = "#cedff2";
+		editorlimites.mudaicone(botao);
 		i3GEO.util.mudaCursor(i3GEO.configura.cursores,"pointer",i3GEO.Interface.IDMAPA,i3GEO.configura.locaplic);
 		editorlimites.drawingManager.setOptions({
 			drawingMode: google.maps.drawing.OverlayType.POLYGON
 		});
 	},
 	seleciona: function(botao){
-		editorlimites.mudaicone();
+		editorlimites.mudaicone(botao);
 		i3GEO.util.mudaCursor(i3GEO.configura.cursores,"pointer",i3GEO.Interface.IDMAPA,i3GEO.configura.locaplic);
-		botao.style.backgroundColor = "#cedff2";
 		editorlimites.drawingManager.setOptions({
 			drawingMode: null
 		});
@@ -510,13 +511,13 @@ var editorlimites = {
 			return ins;
 		},
 		criaJanelaFlutuante: function(html){
-			var titulo,cabecalho,minimiza;
+			var titulo,cabecalho,minimiza,janela;
 			cabecalho = function(){};
 			minimiza = function(){
 				i3GEO.janela.minimiza("salvaLimite");
 			};
 			titulo = "Salva limite&nbsp;&nbsp;&nbsp;</a>";
-			i3GEO.janela.cria(
+			janela = i3GEO.janela.cria(
 				"350px",
 				"265px",
 				"",
@@ -531,6 +532,7 @@ var editorlimites = {
 			);
 			$i("salvaLimite_corpo").style.backgroundColor = "white";
 			$i("salvaLimite_corpo").innerHTML = html;
+			YAHOO.util.Event.addListener(janela[0].close, "click", editorlimites.mudaicone);
 		},
 		gravaDados: function(comwkt){
 			//TODO verificar login ao salvar
@@ -579,6 +581,88 @@ var editorlimites = {
 				},
 				p = i3GEO.configura.locaplic+"/admin/php/metaestat.php?funcao=mantemDadosRegiao&tipo=excluir";
 			cpJSON.call(p,"foo",temp,"&codigo_tipo_regiao="+codigo_tipo_regiao+"&identificador="+identificador);
+		}
+	},
+	editarAtributos: {
+		ativa: function(botao){
+			editorlimites.mudaicone(botao);
+			if(i3GEO.eventos.MOUSECLIQUE.toString().search("editorlimites.editarAtributos.captura()") < 0)
+			{i3GEO.eventos.MOUSECLIQUE.push("editorlimites.editarAtributos.captura()");}
+			var janela = YAHOO.i3GEO.janela.manager.find("editaAtributos");
+			if(janela){
+				$i("editarAtributosForm").innerHTML = "";
+			}
+			else{
+				editorlimites.editarAtributos.criaJanelaFlutuante(editorlimites.editarAtributos.html());
+				editorlimites.editarAtributos.comboVariaveis();
+			}
+		},
+		desativa: function(){
+			var janela = YAHOO.i3GEO.janela.manager.find("editaAtributos");
+			if(janela){
+				janela.destroy();
+			}
+		},
+		captura: function(){
+			if(!YAHOO.i3GEO.janela.manager.find("editaAtributos")){
+				editorlimites.mudaicone(botao);
+				return;
+			}
+			editorlimites.editarAtributos.pegaDados();
+		},
+		comboMedidas: function(){
+
+		},
+		pegaDados: function(){
+
+		},
+		salva: function(){
+
+		},
+		criaJanelaFlutuante: function(html){
+			var janela,titulo,cabecalho,minimiza;
+			cabecalho = function(){};
+			minimiza = function(){
+				i3GEO.janela.minimiza("editaAtributos");
+			};
+			titulo = "Atributos&nbsp;&nbsp;&nbsp;</a>";
+			janela = i3GEO.janela.cria(
+				"350px",
+				"265px",
+				"",
+				"",
+				"",
+				titulo,
+				"editaAtributos",
+				false,
+				"hd",
+				cabecalho,
+				minimiza
+			);
+			$i("editaAtributos_corpo").style.backgroundColor = "white";
+			$i("editaAtributos_corpo").innerHTML = html;
+			YAHOO.util.Event.addListener(janela[0].close, "click", editorlimites.mudaicone);
+		},
+		html: function(){
+			var ins = '' +
+				'<p class="paragrafo" >Clique no mapa para obter os atributos</p>' +
+				'<p class="paragrafo" ><div id="editarAtributosVariaveis" ></div></p>' +
+				'<p class="paragrafo" ><div id="editarAtributosForm" ></div></p>' +
+				'';
+			return ins;
+		},
+		comboVariaveis: function(){
+			 var temp = function(dados){
+				var i,n = dados.length, ins = '';
+				ins += '<p class="paragrafo" >Escolha uma vari&aacute;vel para editar</p>';
+				ins += "<select style='box-shadow:0 1px 5px gray;width:200px' onchange=''><option value=''>---</option>";
+				for(i=0;i<n;i++){
+					ins += "<option title='"+dados[i].descricao+"' value='"+dados[i].codigo_variavel+"'>"+dados[i].nome+"</option>";
+				}
+				ins += "</select>";
+				$i("editarAtributosVariaveis").innerHTML = ins;
+			};
+			i3GEO.php.listaVariavel(temp,"i3geo_metaestat");
 		}
 	}
 	//TODO incluir opcao para clicar e editar atributos de medida da variavel
