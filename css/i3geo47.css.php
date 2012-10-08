@@ -1450,6 +1450,11 @@ padding-right: 3px;
 .yui-skin-sam .yui-navset .yui-nav a:hover,.yui-skin-sam .yui-navset .yui-nav a:focus{
 background-color:white;
 }
+.yui-skin-sam .yui-navset .yui-nav a:hover,
+.yui-skin-sam .yui-navset .yui-nav a:focus {
+background:#bfdaff url(../pacotes/yui290/build/assets/skins/sam/sprite.png) repeat-x left -1300px; /* selected tab background */
+outline:0;
+}
 .yui-skin-sam .yui-button button, .yui-skin-sam .yui-button a {
 color:#000000;
 font-size:95%;

@@ -212,6 +212,8 @@ i3GEO.janela = {
 
 	{retorno}[2].innerHTML
 
+	Vc pode recuperar uma janela com o comando YAHOO.i3GEO.janela.manager.find(id);
+
 	Parametros:
 
 	wlargura {integer} - largura da janela em pixels

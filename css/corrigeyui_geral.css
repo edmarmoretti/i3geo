@@ -193,7 +193,7 @@ width:16px;
 	height:22px;
 	width:18px;
 }
-.ygtvdepthcell 
+.ygtvdepthcell
 {
 	background:transparent url(../pacotes/yui290/build/assets/skins/sam/treeview-sprite.gif) no-repeat scroll 0 -8000px;
 	height:22px;
@@ -229,6 +229,13 @@ td.ygtvcell{
 .yui-skin-sam .yui-navset .yui-nav a:hover,.yui-skin-sam .yui-navset .yui-nav a:focus{
 	background-color:white;
 }
+.yui-skin-sam .yui-navset .yui-nav a:hover,
+.yui-skin-sam .yui-navset .yui-nav a:focus {
+    background:#bfdaff url(../pacotes/yui290/build/assets/skins/sam/sprite.png) repeat-x left -1300px; /* selected tab background */
+    outline:0;
+}
+
+
 
 
 .yui-skin-sam .yui-button button, .yui-skin-sam .yui-button a {

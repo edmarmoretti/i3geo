@@ -21,7 +21,7 @@ GNU conforme publicada pela Free Software Foundation;
 
 Este programa &eacute; distribu&iacute;do na expectativa de que seja &uacute;til,
 por&eacute;m, SEM NENHUMA GARANTIA; nem mesmo a garantia impl&iacute;cita
-de COMERCIABILIDADE OU ADEQUA�&Atilde;O A UMA FINALIDADE ESPEC&Iacute;FICA.
+de COMERCIABILIDADE OU ADEQUACAO A UMA FINALIDADE ESPEC&Iacute;FICA.
 Consulte a Licen&ccedil;a P&uacute;blica Geral do GNU para mais detalhes.
 Voc&ecirc; deve ter recebido uma c&oacute;pia da Licen&ccedil;a P&uacute;blica Geral do
 GNU junto com este programa; se n&atilde;o, escreva para a
@@ -133,7 +133,7 @@ packer("../pacotes/balloon-tooltips/htdocs/js/balloon.js","../pacotes/balloon-to
 //packer("../pacotes/eudock/js/euDock.Image.js","../pacotes/eudock/js/euDock.Image_compacto.js","Normal");
 
 //
-//gera um �nico js para a inicializa�&atilde;o do I3Geo
+//gera um unico js para a inicializacao do I3Geo
 //
 $jsfiles = array(
 "../pacotes/mobileesp/mdetect_compacto.js",
@@ -193,7 +193,7 @@ $jsfiles = array(
 $buffer .= "\$i = function(id){return document.getElementById(id);};\n";
 salvatudojs($jsfiles,$buffer,"i3geo_tudo_compacto47.js","js");
 //
-//gera um �nico css
+//gera um unico css
 //
 
 $cssfiles = array(
@@ -242,7 +242,7 @@ $escreve = fwrite ($abre,$buffer);
 $fecha = fclose ($abre);
 chmod("../css/i3geo_ferramentas47.css",0777);
 //
-//compacta os c�digos para o Mashup do OpenLayers
+//compacta os codigos para o Mashup do OpenLayers
 //
 $jsfiles = array(
 "../pacotes/yui290/build/yahoo-dom-event/yahoo-dom-event.js",

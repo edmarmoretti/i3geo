@@ -993,17 +993,9 @@ i3GEO.php = {
 		cpJSON.call(p,"adicionaTemaIMG",retorno,par);
 	},
 	/*
-	Function: identifica
-
-	Depreciado na vers&atilde;o 4.2 (utilize "identifica2")
-	*/
-	identifica: function(funcao,x,y,resolucao,locaplic,sid){
-		var p = locaplic+"/classesphp/mapa_controle.php",
-			par = "funcao=identifica&opcao=tip&xy="+x+","+y+"&resolucao=5&g_sid="+sid;
-		cpJSON.call(p,"identifica",funcao,par);
-	},
-	/*
 	Function: identifica2
+
+	Depreciado na vers&atilde;o 4.7 (utilize "identifica3")
 
 	<IDENTIFICA2>
 	*/
@@ -1026,6 +1018,34 @@ i3GEO.php = {
 		{listaDeTemas = "";}
 		var p = locaplic+"/classesphp/mapa_controle.php",
 			par = "funcao=identifica2&opcao="+opcao+"&xy="+x+","+y+"&resolucao="+resolucao+"&g_sid="+sid+"&ext="+ext+"&listaDeTemas="+listaDeTemas;
+		if(opcao !== "tip")
+		{par += "&tema="+tema;}
+		cpJSON.call(p,"identifica",funcao,par);
+	},
+	/*
+	Function: identifica3
+
+	<IDENTIFICA3>
+	*/
+	identifica3: function(funcao,x,y,resolucao,opcao,locaplic,sid,tema,ext,listaDeTemas){
+		if(arguments.length === 4){
+			opcao = "tip";
+			locaplic = i3GEO.configura.locaplic;
+			sid = i3GEO.configura.sid;
+			ext = "";
+			listaDeTemas = "";
+			resolucao = 5;
+		}
+		if(arguments.length === 5){
+			locaplic = i3GEO.configura.locaplic;
+			sid = i3GEO.configura.sid;
+			ext = "";
+			listaDeTemas = "";
+		}
+		if(listaDeTemas === undefined)
+		{listaDeTemas = "";}
+		var p = locaplic+"/classesphp/mapa_controle.php",
+			par = "funcao=identifica3&opcao="+opcao+"&xy="+x+","+y+"&resolucao="+resolucao+"&g_sid="+sid+"&ext="+ext+"&listaDeTemas="+listaDeTemas;
 		if(opcao !== "tip")
 		{par += "&tema="+tema;}
 		cpJSON.call(p,"identifica",funcao,par);
@@ -1502,6 +1522,27 @@ i3GEO.php = {
 	*/
 	mapfileMedidaVariavel: function(funcao,id_medida_variavel,filtro,todasascolunas,tipolayer,titulolayer,id_classificacao,agruparpor,codigo_tipo_regiao){
 		var p = i3GEO.configura.locaplic+"/admin/php/metaestat.php?funcao=mapfileMedidaVariavel&formato=json&codigo_tipo_regiao="+codigo_tipo_regiao+"&id_medida_variavel="+id_medida_variavel+"&filtro="+filtro+"&todasascolunas="+todasascolunas+"&tipolayer="+tipolayer+"&titulolayer="+titulolayer+"&id_classificacao="+id_classificacao+"&agruparpor="+agruparpor+"&g_sid="+i3GEO.configura.sid;
+		i3GEO.util.ajaxGet(p,funcao);
+	},
+	/*
+	Function: listaTipoRegiao
+
+	Lista as regioes cadastradas no sistema de metadados estatisticos
+	*/
+	listaTipoRegiao: function(funcao,codigo_tipo_regiao){
+		if(!codigo_tipo_regiao){
+			codigo_tipo_regiao = "";
+		}
+		var p = i3GEO.configura.locaplic+"/admin/php/metaestat.php?funcao=listaTipoRegiao&codigo_tipo_regiao="+codigo_tipo_regiao+"&g_sid="+i3GEO.configura.sid;
+		i3GEO.util.ajaxGet(p,funcao);
+	},
+	/*
+	Function: mapfileTipoRegiao
+
+	Adiciona ao mapa camada baseada nas regioes cadastradas no sistema de metadados estatisticos
+	*/
+	mapfileTipoRegiao: function(funcao,codigo_tipo_regiao){
+		var p = i3GEO.configura.locaplic+"/admin/php/metaestat.php?funcao=mapfileTipoRegiao&codigo_tipo_regiao="+codigo_tipo_regiao+"&g_sid="+i3GEO.configura.sid;
 		i3GEO.util.ajaxGet(p,funcao);
 	}
 };

@@ -4,7 +4,7 @@
 * CPAINT - Cross-Platform Asynchronous INterface Toolkit
 *
 * http://sf.net/projects/cpaint
-* 
+*
 * released under the terms of the LGPL
 * see http://www.fsf.org/licensing/licenses/lgpl.txt for details
 *
@@ -19,12 +19,12 @@
 function cpaint() {
   /**
   * CPAINT version
-  * 
+  *
   * @access     protected
   * @var        string      version
   */
   this.version = '2.0.3';
-  
+
   /**
   * configuration options both for this class but also for  the cpaint_call() objects.
   *
@@ -39,7 +39,7 @@ function cpaint() {
   config['response_type']         = 'OBJECT';
   config['persistent_connection'] = false;
   config['use_cpaint_api']        = true;
-  
+
   /**
   * maintains the next free index in the stack
   *
@@ -50,12 +50,12 @@ function cpaint() {
 
   /**
   * property returns whether or not the browser is AJAX capable
-  * 
+  *
   * @access		public
   * @return		boolean
   */
   this.capable = test_ajax_capability();
-  
+
   /**
   * switches debug mode on/off.
   *
@@ -64,7 +64,7 @@ function cpaint() {
   * @return   void
   */
   this.set_debug = function() {
-    
+
     if (typeof arguments[0] == 'boolean') {
       if (arguments[0] === true) {
         config['debugging'] = 1;
@@ -72,7 +72,7 @@ function cpaint() {
       } else {
         config['debugging'] = 0;
       }
-      
+
     } else if (typeof arguments[0] == 'number') {
       config['debugging'] = Math.round(arguments[0]);
     }
@@ -86,7 +86,7 @@ function cpaint() {
   * @return   void
   */
   this.set_proxy_url = function() {
-    
+
     if (typeof arguments[0] == 'string') {
 
       config['proxy_url'] = arguments[0];
@@ -101,7 +101,7 @@ function cpaint() {
   * @return   void
   */
   this.set_transfer_mode = function() {
-    
+
     if (arguments[0].toUpperCase() == 'GET'
       || arguments[0].toUpperCase() == 'POST') {
 
@@ -117,7 +117,7 @@ function cpaint() {
   * @return   void
   */
   this.set_async = function() {
-    
+
     if (typeof arguments[0] == 'boolean') {
       config['async'] = arguments[0];
     }
@@ -138,7 +138,7 @@ function cpaint() {
   * @return   void
   */
   this.set_response_type = function() {
-    
+
     if (arguments[0].toUpperCase() == 'TEXT'
       || arguments[0].toUpperCase() == 'XML'
       || arguments[0].toUpperCase() == 'OBJECT'
@@ -157,13 +157,13 @@ function cpaint() {
   * @return   void
   */
   this.set_persistent_connection = function() {
-    
+
     if (typeof arguments[0] == 'boolean') {
       config['persistent_connection'] = arguments[0];
     }
   };
-  
-  
+
+
   /**
   * sets the flag whether or not to use the cpaint api on the backend.
   *
@@ -176,7 +176,7 @@ function cpaint() {
       config['use_cpaint_api'] = arguments[0];
     }
   };
-  
+
   /**
   * tests whether one of the necessary implementations
   * of the XMLHttpRequest class are available
@@ -218,7 +218,7 @@ function cpaint() {
     arguments[0] = sUrl;
     //
     var use_stack = -1;
-    
+
     if (config['persistent_connection'] == true
       && __cpaint_stack[0] != null) {
 
@@ -229,24 +229,24 @@ function cpaint() {
           use_stack = 0;
           debug('no XMLHttpObject object to re-use for persistence, creating new one later', 2);
           break;
-          
+
         case 4:
           // object is ready for a new request, no need to do anything
           use_stack = 0;
           debug('re-using the persistent connection', 2);
           break;
-          
+
         default:
           // connection is currently in use, don't do anything
           debug('the persistent connection is in use - skipping this request', 2);
       }
-      
+
     } else if (config['persistent_connection'] == true) {
       // persistent connection is active, but no object has been instanciated
       use_stack = 0;
       __cpaint_stack[use_stack] = new cpaint_call(use_stack, config, this.version);
       debug('no cpaint_call object available for re-use, created new one', 2);
-    
+
     } else {
       // no connection persistance
       use_stack = stack_count;
@@ -257,11 +257,11 @@ function cpaint() {
     // configure cpaint_call if allowed to
     if (use_stack != -1) {
       __cpaint_stack[use_stack].set_client_callback(arguments[2]);
-      
+
       // distribute according to proxy use
       if (config['proxy_url'] != '') {
         __cpaint_stack[use_stack].call_proxy(arguments);
-      
+
       } else {
         __cpaint_stack[use_stack].call_direct(arguments);
       }
@@ -282,11 +282,11 @@ function cpaint() {
   */
   var debug  = function(message, debug_level) {
     var prefix = '[CPAINT Debug] ';
-    
+
     if (debug_level < 1) {
       prefix = '[CPAINT Error] ';
     }
-    
+
     if (config['debugging'] >= debug_level) {
       alert(prefix + message);
     }
@@ -313,7 +313,7 @@ var __cpaint_transformer = new cpaint_transformer();
 /**
 * transport agent class
 *
-* creates the request object, takes care of the response, handles the 
+* creates the request object, takes care of the response, handles the
 * client callback. Is configured by the cpaint() object.
 *
 * @package      CPAINT
@@ -328,12 +328,12 @@ var __cpaint_transformer = new cpaint_transformer();
 function cpaint_call() {
   /**
   * CPAINT version
-  * 
+  *
   * @access     protected
   * @var        string      version
   */
   var version = arguments[2];
-  
+
   /**
   * configuration options both for this class objects.
   *
@@ -380,7 +380,7 @@ function cpaint_call() {
   * @return   void
   */
   this.set_client_callback = function() {
-    
+
     if (typeof arguments[0] == 'function') {
       client_callback = arguments[0];
     }
@@ -390,20 +390,20 @@ function cpaint_call() {
   * returns the ready state of the internal XMLHttpObject
   *
   * if no such object was set up already, -1 is returned
-  * 
+  *
   * @access     public
   * @return     integer
   */
   this.get_http_state = function() {
     var return_value = -1;
-    
+
     if (typeof httpobj == 'object') {
       return_value = httpobj.readyState;
     }
-    
+
     return return_value;
   };
-  
+
   /**
   * internal method for remote calls to the local server without use of the proxy script.
   *
@@ -416,12 +416,12 @@ function cpaint_call() {
     var remote_method   = call_arguments[1];
     var querystring     = '';
     var i               = 0;
-    
+
     // correct link to self
     if (url == 'SELF') {
       url = document.location.href;
     }
-  
+
     if (config['use_cpaint_api'] == true) {
       // backend uses cpaint api
       // pass parameters to remote method
@@ -434,49 +434,49 @@ function cpaint_call() {
           && isFinite(call_arguments[i])) {
           // numerical value, convert it first
           querystring += '&cpaint_argument[]=' + encodeURIComponent(JSON.stringify(Number(call_arguments[i])));
-        
+
         } else {
           querystring += '&cpaint_argument[]=' + encodeURIComponent(JSON.stringify(call_arguments[i]));
         }
       }
-    
+
       // add response type to querystring
       querystring += '&cpaint_response_type=' + config['response_type'];
-    
+
       // build header
       if (config['transfer_mode'] == 'GET') {
-				
+
         if(url.indexOf('?') != -1) {
 					url = url + '&cpaint_function=' + remote_method +	querystring;
-				
+
         } else {
-					url = url + '?cpaint_function=' + remote_method +	querystring; 
+					url = url + '?cpaint_function=' + remote_method +	querystring;
 				}
-      
+
       } else {
         querystring = 'cpaint_function=' + remote_method + querystring;
       }
-      
+
     } else {
       // backend does not use cpaint api
       // pass parameters to remote method
       for (i = 3; i < call_arguments.length; i++) {
-        
+
         if (i == 3) {
           querystring += encodeURIComponent(call_arguments[i]);
-        
+
         } else {
           querystring += '&' + encodeURIComponent(call_arguments[i]);
         }
       }
-    
+
       // build header
       if (config['transfer_mode'] == 'GET') {
         url = url + querystring;
-      } 
+      }
     }
-  
-    // open connection 
+
+    // open connection
     get_connection_object();
 
     // open connection to remote target
@@ -514,7 +514,7 @@ function cpaint_call() {
       callback();
     }
   };
-    
+
   /**
   * internal method for calls to remote servers through the proxy script.
   *
@@ -528,7 +528,7 @@ function cpaint_call() {
     var remote_method   = call_arguments[1];
     var querystring     = '';
     var i               = 0;
-    
+
     var querystring_argument_prefix = 'cpaint_argument[]=';
 
     // pass parameters to remote method
@@ -540,7 +540,7 @@ function cpaint_call() {
     for (i = 3; i < call_arguments.length; i++) {
 
       if (config['use_cpaint_api'] == true) {
-      
+
         if ((typeof call_arguments[i] == 'string'
               && call_arguments[i] != ''
               && call_arguments[i].search(/^\s+$/g) == -1)
@@ -552,7 +552,7 @@ function cpaint_call() {
         } else {
           querystring += encodeURIComponent(querystring_argument_prefix + JSON.stringify(call_arguments[i]) + '&');
         }
-        
+
       } else {
         // no CPAINT in the backend
         querystring += encodeURIComponent(querystring_argument_prefix + call_arguments[i] + '&');
@@ -562,22 +562,22 @@ function cpaint_call() {
     if (config['use_cpaint_api'] == true) {
       // add remote function name to querystring
       querystring += encodeURIComponent('&cpaint_function=' + remote_method);
-  
+
       // add response type to querystring
       querystring += encodeURIComponent('&cpaint_responsetype=' + config['response_type']);
     }
-    
+
     // build header
     if (config['transfer_mode'] == 'GET') {
-      proxyscript += '?cpaint_remote_url=' + encodeURIComponent(url) 
+      proxyscript += '?cpaint_remote_url=' + encodeURIComponent(url)
         + '&cpaint_remote_query=' + querystring
-        + '&cpaint_remote_method=' + config['transfer_mode'] 
+        + '&cpaint_remote_method=' + config['transfer_mode']
         + '&cpaint_response_type=' + config['response_type'];
 
     } else {
       querystring = 'cpaint_remote_url=' + encodeURIComponent(url)
         + '&cpaint_remote_query=' + querystring
-        + '&cpaint_remote_method=' + config['transfer_mode'] 
+        + '&cpaint_remote_method=' + config['transfer_mode']
         + '&cpaint_response_type=' + config['response_type'];
     }
 
@@ -622,8 +622,8 @@ function cpaint_call() {
   this.test_ajax_capability = function() {
     return get_connection_object();
   };
-  
-  
+
+
   /**
   * creates a new connection object.
   *
@@ -651,29 +651,29 @@ function cpaint_call() {
     }
 
     if (new_connection == true) {
-		
+
 	 try {
         httpobj = new XMLHttpRequest();
       } catch (e1) {
 
 		  try {
 			httpobj = new ActiveXObject('Msxml2.XMLHTTP');
-	  
+
 		  } catch (e) {
-			
-			try {  
+
+			try {
 			  httpobj = new ActiveXObject('Microsoft.XMLHTTP');
- 
+
 			} catch (oc) {
 			  httpobj = null;
-			} 
+			}
 		 }
 	  }
-     
-  
+
+
       if (!httpobj) {
         debug('Could not create connection object', 0);
-      
+
       } else {
         return_value = true;
       }
@@ -693,7 +693,7 @@ function cpaint_call() {
   * and if response_type = 'OBJECT' it will automatically call
   * cpaint_call.parse_ajax_xml() to have a JavaScript object structure generated.
   *
-  * after all that is done the client side callback function will be called 
+  * after all that is done the client side callback function will be called
   * with the generated response as single value.
   *
   * @access   protected
@@ -710,49 +710,52 @@ function cpaint_call() {
       }
       debug(httpobj.responseText, 1);
       debug('using response type ' + config['response_type'], 2);
-      
-	  //tenta remover cabeçalhos espúrios
+
+	  //tenta remover cabecalhos espurios
 	  //alert(httpobj.responseText);
-	  var r = httpobj.responseText;
+/*
+      var r = httpobj.responseText;
 	  r = r.split("{");
 	  if(r[0] != "" && r.length > 1);
 	  {r[0] = "";}
 	  var responseText = r.join("{");
+*/
+      var responseText = httpobj.responseText;
       // fetch correct response
       switch (config['response_type']) {
         case 'XML':
           debug(httpobj.responseXML, 2);
           response = __cpaint_transformer.xml_conversion(httpobj.responseXML);
           break;
-          
+
         case 'OBJECT':
           response = __cpaint_transformer.object_conversion(httpobj.responseXML);
           break;
-        
+
         case 'TEXT':
           response = __cpaint_transformer.text_conversion(httpobj.responseText);
           break;
-          
+
         case 'E4X':
           response = __cpaint_transformer.e4x_conversion(httpobj.responseText);
           break;
-          
+
         case 'JSON':
 		  response = __cpaint_transformer.json_conversion(responseText);
           break;
-          
+
         default:
           debug('invalid response type \'' + response_type + '\'', 0);
       }
-      
+
       // call client side callback
-      if (response != null 
+      if (response != null
         && typeof client_callback == 'function') {
         try{
-        	if(response.data)
+        	//if(response.data)
         		client_callback(response, responseText);
-        	else
-        		client_callback("", "erro");
+        	//else
+        		//client_callback("", "erro");
         }
         catch(e){
         	client_callback("", "erro");
@@ -760,21 +763,21 @@ function cpaint_call() {
       }
       // remove ourselves from the stack
       remove_from_stack();
-    
+
     } else
-    {       
+    {
 		if(httpobj.readyState==4&&httpobj.status!=200)
 		{
 			debug('invalid HTTP response code \''+Number(httpobj.status)+'\'',0);
 			if(httpobj.status==500){
 				alert("Ocorreu um erro! 500");
-				client_callback("", "erro");	
+				client_callback("", "erro");
 			}
 			else{
 				client_callback("", "erro");
 			}
-		}      
-      
+		}
+
     }
   };
 
@@ -789,7 +792,7 @@ function cpaint_call() {
     if (typeof stack_id == 'number'
       && __cpaint_stack[stack_id]
       && config['persistent_connection'] == false) {
-      
+
       __cpaint_stack[stack_id] = null;
     }
   };
@@ -804,11 +807,11 @@ function cpaint_call() {
   */
   var debug  = function(message, debug_level) {
     var prefix = '[CPAINT Debug] ';
-    
+
     if (config['debugging'] < 1) {
       prefix = '[CPAINT Error] ';
     }
-    
+
     if (config['debugging'] >= debug_level) {
       alert(prefix + message);
     }
@@ -842,7 +845,7 @@ function cpaint_transformer() {
     var return_value  = new cpaint_result_object();
     var i             = 0;
     var firstNodeName = '';
-    
+
     if (typeof xml_document == 'object'
       && xml_document != null) {
 
@@ -854,11 +857,11 @@ function cpaint_transformer() {
           break;
         }
       }
-      
+
       var ajax_response = xml_document.getElementsByTagName(firstNodeName);
 
       return_value[firstNodeName] = new Array();
-    
+
       for (i = 0; i < ajax_response.length; i++) {
         var tmp_node = create_object_structure(ajax_response[i]);
         tmp_node.id  = ajax_response[i].getAttribute('id');
@@ -882,7 +885,7 @@ function cpaint_transformer() {
   this.xml_conversion = function(xml_document) {
     return xml_document;
   };
-  
+
   /**
   * performs the necessary conversions for the TEXT response type
   *
@@ -893,7 +896,7 @@ function cpaint_transformer() {
   this.text_conversion = function(text) {
     return decode(text);
   };
-  
+
   /**
   * performs the necessary conversions for the E4X response type
   *
@@ -906,7 +909,7 @@ function cpaint_transformer() {
     text = text.replace(/^\<\?xml[^>]+\>/, '');
     return new XML(text);
   };
-  
+
   /**
   * performs the necessary conversions for the JSON response type
   *
@@ -917,7 +920,7 @@ function cpaint_transformer() {
   this.json_conversion = function(text) {
     return JSON.parse(text);
   };
-  
+
   /**
   * this method takes a HTML / XML node object and creates a
   * JavaScript object structure from it.
@@ -931,33 +934,33 @@ function cpaint_transformer() {
     var node_name = '';
     var i         = 0;
     var attrib    = 0;
-    
+
     if (stream.hasChildNodes() == true) {
       for (i = 0; i < stream.childNodes.length; i++) {
-  
+
         node_name = stream.childNodes[i].nodeName;
         node_name = node_name.replace(/[^a-zA-Z0-9_]*/g, '');
-        
+
         // reset / create subnode
         if (typeof return_value[node_name] != 'object') {
           return_value[node_name] = new Array();
         }
-        
+
         if (stream.childNodes[i].nodeType == 1) {
           var tmp_node  = create_object_structure(stream.childNodes[i]);
 
           for (attrib = 0; attrib < stream.childNodes[i].attributes.length; attrib++) {
             tmp_node.set_attribute(stream.childNodes[i].attributes[attrib].nodeName, stream.childNodes[i].attributes[attrib].nodeValue);
           }
-          
+
           return_value[node_name].push(tmp_node);
-        
+
         } else if (stream.childNodes[i].nodeType == 3) {
           return_value.data  = decode(String(stream.firstChild.data));
         }
       }
     }
-    
+
     return return_value;
   };
 
@@ -969,8 +972,8 @@ function cpaint_transformer() {
   * @return     mixed
   */
   var decode = function(rawtext) {
-    var plaintext = ''; 
-    var i         = 0; 
+    var plaintext = '';
+    var i         = 0;
     var c1        = 0;
     var c2        = 0;
     var c3        = 0;
@@ -981,12 +984,12 @@ function cpaint_transformer() {
     while (i < rawtext.length) {
       if (rawtext.charAt(i) == '\\'
         && rawtext.charAt(i + 1) == 'u') {
-        
+
         u = 0;
-        
+
         for (j = 2; j < 6; j += 1) {
           t = parseInt(rawtext.charAt(i + j), 16);
-          
+
           if (!isFinite(t)) {
             break;
           }
@@ -995,7 +998,7 @@ function cpaint_transformer() {
 
         plaintext += String.fromCharCode(u);
         i       += 6;
-      
+
       } else {
         plaintext += rawtext.charAt(i);
         i++;
@@ -1005,12 +1008,12 @@ function cpaint_transformer() {
     // convert numeric data to number type
     if (plaintext != ''
       && plaintext.search(/^\s+$/g) == -1
-      && !isNaN(plaintext) 
+      && !isNaN(plaintext)
       && isFinite(plaintext)) {
-      
+
       plaintext = Number(plaintext);
     }
-  
+
     return plaintext;
   };
 }
@@ -1029,7 +1032,7 @@ function cpaint_result_object() {
   this.id           = 0;
   this.data         = '';
   var __attributes  = new Array();
-  
+
   /**
   * Returns a subnode with the given type and id.
   *
@@ -1043,7 +1046,7 @@ function cpaint_result_object() {
     var type    = arguments[0];
     var id      = arguments[1];
     var i       = 0;
-    
+
     if (this[type]) {
 
       for (i = 0; i < this[type].length; i++) {
@@ -1057,7 +1060,7 @@ function cpaint_result_object() {
 
     return return_value;
   };
-  
+
   /**
   * retrieves the value of an attribute.
   *
@@ -1068,14 +1071,14 @@ function cpaint_result_object() {
   this.get_attribute = function() {
     var return_value  = null;
     var id            = arguments[0];
-    
+
     if (typeof __attributes[id] != 'undefined') {
       return_value = __attributes[id];
     }
-    
+
     return return_value;
   };
-  
+
   /**
   * assigns a value to an attribute.
   *
@@ -1124,7 +1127,7 @@ var JSON = {
   stringify: function (arg) {
     var c, i, l, s = '', v;
     var numeric = true;
-    
+
     switch (typeof arg) {
     case 'object':
       if (arg) {
@@ -1132,13 +1135,13 @@ var JSON = {
           // do a test whether all array keys are numeric
           for (i in arg) {
             if (i != '______array'
-              && (isNaN(i) 
+              && (isNaN(i)
                 || !isFinite(i))) {
               numeric = false;
               break;
             }
           }
-          
+
           if (numeric == true) {
             for (i = 0; i < arg.length; ++i) {
               if (typeof arg[i] != 'undefined') {

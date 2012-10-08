@@ -1,4 +1,10 @@
 //+$trad(1,i3GEOF.metaestat.dicionario)+
+if(typeof(i3GEOF) === 'undefined'){
+	var i3GEOF = {};
+}
+if(typeof(i3GEOF.metaestat) === 'undefined'){
+	i3GEOF.metaestat = {};
+}
 i3GEOF.metaestat.dicionario = {
 "1":[
 {
@@ -94,6 +100,13 @@ it:""
 "14":[
 {
 pt:"Escolha uma medida primeiro",
+en:"",
+es:"",
+it:""
+}],
+"15":[
+{
+pt:"Editar a regi&atilde;o",
 en:"",
 es:"",
 it:""

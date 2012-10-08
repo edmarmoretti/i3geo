@@ -22,7 +22,7 @@ GNU conforme publicada pela Free Software Foundation;
 
 Este programa &eacute; distribu&iacute;do na expectativa de que seja &uacute;til,
 por&eacute;m, SEM NENHUMA GARANTIA; nem mesmo a garantia impl&iacute;cita
-de COMERCIABILIDADE OU ADEQUAÃ&Atilde;O A UMA FINALIDADE ESPEC&Iacute;FICA.
+de COMERCIABILIDADE OU ADEQUAC&Atilde;O A UMA FINALIDADE ESPEC&Iacute;FICA.
 Consulte a Licen&ccedil;a P&uacute;blica Geral do GNU para mais detalhes.
 Voc&ecirc; deve ter recebido uma c&oacute;pia da Licen&ccedil;a P&uacute;blica Geral do
 GNU junto com este programa; se n&atilde;o, escreva para a
@@ -214,7 +214,7 @@ var i3GEO = {
 
 	Largura e altura do navegador ap&oacute;s a inicializa&ccedil;&atilde;o do mapa
 
-	&Eacute; utilizado como um parÃ¢metro para verificar se o mapa foi ou n&atilde;o redimensionado pelo usu&aacute;rio de forma consistente
+	&Eacute; utilizado como um parametro para verificar se o mapa foi ou n&atilde;o redimensionado pelo usu&aacute;rio de forma consistente
 
 	Type:
 	{array}
@@ -241,7 +241,7 @@ var i3GEO = {
 	Essa vari&aacute;vel &eacute; um contador utilizado para indicar quantos processos est&atilde;o ativos e que
 	ir&atilde;o executar o redesenho do mapa. O mapa s&oacute; &eacute; atualizado quando o contador for menor que 1.
 	Esse contador &eacute; utilizado no m&eacute;todo i3GEO.atualiza
-	O contador &eacute; necess&aacute;rio para evitar chamadas desnecess&aacute;rias Ã  fun&ccedil;&atilde;o de redesenho do mapa.
+	O contador &eacute; necess&aacute;rio para evitar chamadas desnecess&aacute;rias a� fun&ccedil;&atilde;o de redesenho do mapa.
 
 	Tipo:
 	{string}
@@ -317,7 +317,7 @@ var i3GEO = {
 			try{
 				var temp,abreJM;
 				if(retorno === ""){
-					alert("Ocorreu um erro no mapa - montaMapa");
+					alert("Ocorreu um erro no mapa - i3GEO.inicia.montaMapa");
 					retorno = {data:{erro: "erro"}};
 				}
 				if(retorno.data.erro){
@@ -433,7 +433,7 @@ var i3GEO = {
 	/*
 	Function: atualiza
 
-	Atualiza o mapa atual, altera a imagem do mapa os gadgets ativos e os parÃ¢metros e
+	Atualiza o mapa atual, altera a imagem do mapa os gadgets ativos e os parametros e
 	verifica a integridade do mapa em uso (arquivo mapfile)
 
 	O processo executa tamb&eacute;m a fun&ccedil;&atilde;o de atualiza&ccedil;&atilde;o espec&iacute;fica da interface atual em uso, veja
@@ -449,7 +449,7 @@ var i3GEO = {
 
 	Parametro:
 
-	retorno {String} - string com os parÃ¢metros do novo mapa. Se retorno n&atilde;o
+	retorno {String} - string com os parametros do novo mapa. Se retorno n&atilde;o
 	for especificado ou se for vazio, ser&aacute; feita uma chamada em ajax para sua obten&ccedil;&atilde;o. O resultado
 	dessa chamada &eacute; armazenada em i3GEO.parametros
 	*/

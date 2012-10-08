@@ -47,7 +47,8 @@ Este programa &eacute; software livre; voc&ecirc; pode redistribu&iacute;-lo
 e/ou modific&aacute;-lo sob os termos da Licen&ccedil;a P&uacute;blica Geral
 GNU conforme publicada pela Free Software Foundation;
 
-Este programa &eacute; distribu&iacute;do na expectativa de que seja &uacute;til,
+Este programa &eacute; distribu&iacute;do na expectativa 		//TODO MANTEMDADOSREGIAO
+de que seja &uacute;til,
 por&eacute;m, SEM NENHUMA GARANTIA; nem mesmo a garantia impl&iacute;cita
 de COMERCIABILIDADE OU ADEQUA&Ccedil;&Atilde;O A UMA FINALIDADE ESPEC&Iacute;FICA.
 Consulte a Licen&ccedil;a P&uacute;blica Geral do GNU para mais detalhes.
@@ -111,7 +112,8 @@ include_once("pega_variaveis.php");
 $interfaceTemp = $interface;
 //
 //inicializa a sess&atilde;o
-//TEMA2SLD &eacute; usado por datadownload.htm
+//TEMA2SLD &eacute; usado por datadownload.htm		//TODO MANTEMDADOSREGIAO
+
 //
 if ($funcao != "criaMapa" && $funcao != "TEMA2SLD")
 {
@@ -2221,6 +2223,8 @@ Identifica elementos no mapa.
 /*
 Valor: IDENTIFICA2
 
+Depreciado na vers&atilde;o 4.7 (utilize "identifica3")
+
 Identifica elementos no mapa.
 
 <Atributos->identifica2>
@@ -2237,6 +2241,32 @@ Identifica elementos no mapa.
 		$retorno = $m->identifica2($opcao,$xy,$resolucao,$ext,$listaDeTemas,$wkt);
 	break;
 /*
+ Valor: IDENTIFICA3
+
+Identifica elementos no mapa.
+
+<Atributos->identifica3>
+*/
+	case "IDENTIFICA3":
+		if (!isset($tema)){
+			$tema = "";
+		}
+		if (!isset($resolucao)){
+			$resolucao = 5;
+		}
+		include_once("classe_atributos.php");
+		if(!isset($ext))
+		{
+			$ext = "";
+		}
+		if(!isset($wkt))
+		{
+			$wkt = "nao";
+		}
+		$m = new Atributos($map_file,$tema,"",$ext);
+		$retorno = $m->identifica3($opcao,$xy,$resolucao,$ext,$listaDeTemas,$wkt);
+		break;
+/*
 Valor: IDENTIFICAUNICO
 
 Identifica elementos no mapa retornando apenas o valor de um &uacute;nico item.
@@ -2244,6 +2274,7 @@ Identifica elementos no mapa retornando apenas o valor de um &uacute;nico item.
 <Atributos->identificaQBP>
 */
 	case "IDENTIFICAUNICO":
+		//TODO remover o identificaQBP
 		if (!isset($resolucao)){$resolucao = 5;}
 		include_once("classe_atributos.php");
 		if(!isset($ext))

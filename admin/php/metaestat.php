@@ -893,6 +893,17 @@ switch (strtoupper($funcao))
 		exit;
 	break;
 	/*
+	Valor: MAPFILETIPOREGIAO
+
+	Gera um mapfile de um tipo de regiao
+
+	*/
+	case "MAPFILETIPOREGIAO":
+		$m = new Metaestat();
+		retornaJSON($m->mapfileTipoRegiao($codigo_tipo_regiao));
+		exit;
+	break;
+	/*
 	 Valor: KMLMEDIDAVARIAVEL
 
 	Gera um arquivo kml que pode ser aberto no googleearth
@@ -1123,9 +1134,16 @@ switch (strtoupper($funcao))
 		retornaJSON($dados);
 		exit;
 	break;
+	//insere dados com base em um arquivo csv ja existente no servidor
 	case "INSERIRDADOS":
 		$m = new Metaestat();
 		retornaJSON($m->inserirDados($nomearquivoserv,$id_medida_variavel,$codigoregiao,$valor,$tipoinclusao,$ano,$mes,$dia,$hora));
+		exit;
+	break;
+	//grava ou cria um registro de uma regiao
+	case "MANTEMDADOSREGIAO":
+		$m = new Metaestat();
+		retornaJSON($m->mantemDadosRegiao($codigo_tipo_regiao,$identificador,$identificadornovo,$nome,$wkt,$tipo));
 		exit;
 	break;
 }

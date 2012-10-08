@@ -347,6 +347,7 @@ class Metaestat{
 			$dados[] = '	CONNECTION "'.$conexao.'"';
 			$dados[] = '	CONNECTIONTYPE POSTGIS';
 			$dados[] = '	STATUS OFF';
+			$dados[] = '	TEMPLATE "none.htm"';
 			$dados[] = '	METADATA';
 			$dados[] = '		TEMA "'.$titulolayer.'"';
 			$dados[] = '		CLASSE "SIM"';
@@ -383,6 +384,56 @@ class Metaestat{
 					$dados[] = '    END';
 				}
 			}
+			$dados[] = "END";
+			$dados[] = "END";
+			$fp = fopen($arq,"w");
+			foreach ($dados as $dado){
+				fwrite($fp,$dado."\n");
+			}
+		}
+		return array("mapfile"=>$arq,"layer"=>$this->nomecache,"titulolayer"=>$titulolayer);
+	}
+	function mapfileTipoRegiao($codigo_tipo_regiao){
+		//$rand = $this->nomeRandomico();
+		$arq = $this->dir_tmp."/".$this->nomecache.".map";
+		if(!file_exists($arq)){
+			$tipolayer = "polygon";
+
+			$meta = $this->listaTipoRegiao($codigo_tipo_regiao);
+			$titulolayer = $meta["nome_tipo_regiao"];
+			$titulolayer = mb_convert_encoding($titulolayer,"ISO-8859-1",mb_detect_encoding($titulolayer));
+			$conexao = $this->listaConexao($meta["codigo_estat_conexao"],true);
+			$conexao = "user=".$conexao["usuario"]." password=".$conexao["senha"]." dbname=".$conexao["bancodedados"]." host=".$conexao["host"]." port=".$conexao["porta"]."";
+			$sqlf = $meta["colunageo"]." from (select * from ".$meta["esquemadb"].".".$meta["tabela"].") as foo using unique gid using srid=".$meta["srid"];
+
+			//FIXME calcular versao do symbolset
+			$dados[] = "MAP";
+			$dados[] = 'SYMBOLSET "'.$this->locaplic.'/symbols/simbolosv6.sym"';
+			$dados[] = 'FONTSET   "'.$this->locaplic.'/symbols/fontes.txt"';
+			$dados[] = "LAYER";
+			$dados[] = '	NAME "'.$this->nomecache.'"';
+			$dados[] = "	TYPE $tipolayer";
+			$dados[] = '	DATA "'.$sqlf.'"';
+			$dados[] = '	CONNECTION "'.$conexao.'"';
+			$dados[] = '	CONNECTIONTYPE POSTGIS';
+			$dados[] = '	TEMPLATE "none.htm"';
+			$dados[] = '	STATUS OFF';
+			$dados[] = '	METADATA';
+			$dados[] = '		TEMA "'.$titulolayer.'"';
+			$dados[] = '		CLASSE "SIM"';
+			$dados[] = '	END';
+			$dados[] = '    CLASS';
+			$dados[] = '        NAME ""';
+			$dados[] = '        STYLE';
+			$dados[] = '        	OUTLINECOLOR 255 0 0';
+			$dados[] = '        	COLOR -1 -1 -1';
+			$dados[] = '        END';
+			$dados[] = '        STYLE';
+			$dados[] = '        	OUTLINECOLOR -1 -1 -1';
+			$dados[] = '        	COLOR 255 255 255';
+			$dados[] = '        	OPACITY 20';
+			$dados[] = '        END';
+			$dados[] = '    END';
 			$dados[] = "END";
 			$dados[] = "END";
 			$fp = fopen($arq,"w");
@@ -1432,6 +1483,83 @@ class Metaestat{
 			return "Falhou: " . $e->getMessage();
 		}
 		return "Processo concluido para ".count($linhas)." linhas";
+	}
+	function mantemDadosRegiao($codigo_tipo_regiao,$identificador,$identificadornovo,$nome,$wkt="",$tipo=""){
+		if($tipo != "excluir" && ($identificadornovo == "" || $nome == "")){
+			return array("erro");
+		}
+		//pega a tabela, esquema e conexao para acessar os dados da regiao
+		$regiao = $this->listaTipoRegiao($codigo_tipo_regiao);
+		$c = $this->listaConexao($regiao["codigo_estat_conexao"],true);
+		$dbh = new PDO('pgsql:dbname='.$c["bancodedados"].';user='.$c["usuario"].';password='.$c["senha"].';host='.$c["host"].';port='.$c["porta"]);
+		//verifica se o registro com o valor do identificador novo ja existe
+		$novoexiste = false;
+		$sql = "select * from i3geo_metaestat.".$regiao["tabela"]." WHERE ".$regiao["identificador"]."::text = '$identificadornovo' ";
+		$q = $dbh->query($sql,PDO::FETCH_ASSOC);
+		$r = $q->fetchAll();
+		if(count($r) > 0){
+			$novoexiste = true;
+		}
+		//verifica se o registro com o valor do identificador existe
+		$atualexiste = false;
+		if($identificador != ""){
+			$sql = "select * from i3geo_metaestat.".$regiao["tabela"]." WHERE ".$regiao["identificador"]."::text = '$identificador' ";
+			$q = $dbh->query($sql,PDO::FETCH_ASSOC);
+			$r = $q->fetchAll();
+			if(count($r) > 0){
+				$atualexiste = true;
+			}
+		}
+		if($tipo == "excluir"){
+			$dbh->query("DELETE from i3geo_metaestat.".$regiao["tabela"]." where ".$regiao["identificador"]."::text = '$identificador' ");
+			return array("ok");
+		}
+		$nome = $this->converteTexto($nome);
+		//aborta se ja existe o registro com valor igual ao identificador novo
+		//caso o identificador novo for diferente do identificador original, o que configura uma tentativa de alteracao no codigo
+		if($identificador != $identificadornovo && $novoexiste == true){
+			return array("Falhou: codigo ja existe");
+		}
+		if($atualexiste == false && $wkt == ""){
+			return array("Falhou: nao pode inserir registro sem wkt");
+		}
+		//echo "UPDATE i3geo_metaestat.".$regiao["tabela"]." SET ".$regiao["identificador"]." = '$identificadornovo', ".$regiao["colunanomeregiao"]." = '$nome' WHERE ".$regiao["identificador"]." = '$identificador' ";
+		//faz o update
+		try {
+			$dbh->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+			$dbh->beginTransaction();
+			//no caso de update
+			if($atualexiste == true){
+				$sql = "UPDATE i3geo_metaestat.".$regiao["tabela"]." SET ".$regiao["identificador"]." = '$identificadornovo', ".$regiao["colunanomeregiao"]." = '$nome' ";
+				if($wkt != ""){
+					$sql .= ", ".$regiao["colunageo"]." = ST_GeomFromText('SRID=".$regiao["srid"].";$wkt')";
+					if($regiao["colunageo"] != $regiao["colunacentroide"]){
+						$sql .= ", ".$regiao["colunacentroide"]." = ST_centroid(ST_GeomFromText('SRID=".$regiao["srid"].";$wkt'))";
+					}
+				}
+				$sql .= " WHERE ".$regiao["identificador"]." = '$identificador' ";
+			}
+			//no caso de insert
+			else{
+				if($wkt != ""){
+					if($regiao["colunageo"] != $regiao["colunacentroide"]){
+						$sql = "INSERT INTO i3geo_metaestat.".$regiao["tabela"]." (".$regiao["identificador"].",".$regiao["colunanomeregiao"].",".$regiao["colunageo"].",".$regiao["colunacentroide"].")";
+						$sql .= " VALUES ('$identificadornovo','$nome',ST_GeomFromText('SRID=".$regiao["srid"].";$wkt'),ST_centroid(ST_GeomFromText('SRID=".$regiao["srid"].";$wkt')))";
+					}
+					else{
+						$sql = "INSERT INTO i3geo_metaestat.".$regiao["tabela"]." (".$regiao["identificador"].",".$regiao["colunanomeregiao"].",".$regiao["colunageo"].")";
+						$sql .= " VALUES ('$identificadornovo','$nome',ST_GeomFromText('SRID=".$regiao["srid"].";$wkt'))";
+					}
+				}
+			}
+			$sth = $dbh->exec($sql);
+			$dbh->commit();
+
+		} catch (Exception $e) {
+			$dbh->rollBack();
+			return array("Falhou: " . $e->getMessage());
+		}
+		return array("ok");
 	}
 }
 ?>

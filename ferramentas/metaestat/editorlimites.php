@@ -136,11 +136,13 @@ include_once(__DIR__."/../../ms_configura.php");
 		</div>
 	</div>
 </div>
-<script src="editorlimites.js"></script>
 <script type="text/javascript" src="http://maps.google.com/maps/api/js?sensor=false&libraries=drawing "></script>
-<script type="text/javascript" src="../../classesjs/i3geo.js"></script>
+<script type="text/javascript" src="../../classesjs/i3geonaocompacto.js"></script>
+<script src="dicionario.js"></script>
+<script src="editorlimites.js"></script>
 <script type="text/javascript">
 i3GEO.configura.locaplic = i3GEO.util.protocolo()+"://"+window.location.host+"/i3geo";
+i3GEO.configura.mashuppar = "mapext=-76.5125927 -39.3925675209 -29.5851853 9.49014852081";
 i3GEO.Interface.ATUAL = "googlemaps";
 i3GEO.Interface.IDCORPO = "contemImg";
 i3GEO.configura.diminuixN = 20;
@@ -174,10 +176,10 @@ i3GEO.finalizaAPI = function(){
 	minimiza = function() {
 		i3GEO.janela.minimiza("janelaEditorLimites");
 	};
-	janela = i3GEO.janela.cria("230px", "80px", "", "", "",
+	janela = i3GEO.janela.cria("230px", "100px", "", "", "",
 		"Editor", "janelaEditorLimites", false, "hd",
 		cabecalho, minimiza);
-	$i("janelaEditorLimites_corpo").style.backgroundColor = "white"
+	$i("janelaEditorLimites_corpo").style.backgroundColor = "white";
 	editorlimites.inicia("janelaEditorLimites_corpo");
 	//janela[0].moveTo(100,450);
 }

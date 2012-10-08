@@ -538,7 +538,7 @@ i3GEOF.identifica = {
 
 	Veja:
 
-	<i3GEO.php.identifica2>
+	<i3GEO.php.identifica3>
 	*/
 	buscaDadosTema: function(tema){
 		var res,opcao,resolucao,listaDeTemas="",temp;
@@ -562,7 +562,7 @@ i3GEOF.identifica = {
 				else
 				{i3GEOF.identifica.mostraDadosTema(undefined);}
 			};
-			i3GEO.php.identifica2(temp,i3GEOF.identifica.x,i3GEOF.identifica.y,resolucao,opcao,i3GEO.configura.locaplic,i3GEO.configura.sid,tema,i3GEO.parametros.mapexten,listaDeTemas);
+			i3GEO.php.identifica3(temp,i3GEOF.identifica.x,i3GEOF.identifica.y,resolucao,opcao,i3GEO.configura.locaplic,i3GEO.configura.sid,tema,i3GEO.parametros.mapexten,listaDeTemas);
 		}
 		catch(e){i3GEOF.identifica.criaJanelaFlutuante();}
 	},
@@ -618,7 +618,7 @@ i3GEOF.identifica = {
 
 	Parametros:
 
-	retorno {JSON} - objeto JSON com os dados <i3GEO.php.identifica2>
+	retorno {JSON} - objeto JSON com os dados <i3GEO.php.identifica3>
 	*/
 	mostraDadosTema: function(retorno){
 		var i,res="",ntemas,resultados,nres,cor,j,nitens,k,atualN = "todas",inicio=0,numResultados = 0,tip,link;

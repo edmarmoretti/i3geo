@@ -229,7 +229,7 @@ else
 	$shp = unserialize($conteudo);
 	$l = $mapa->getLayerByname($_GET["layer"]);
 	$indxlayer = $l->index;
-	if ($l->connectiontype != MS_POSTGIS){
+	if ($l->connectiontype !== MS_POSTGIS){
 		foreach ($shp as $indx)
 		{$mapa->querybyindex($indxlayer,-1,$indx,MS_TRUE);}
 		$qm = $mapa->querymap;
@@ -256,14 +256,24 @@ else
 		$cor->setrgb($c->red,$c->green,$c->blue);
 		$cor = $classe0->getstyle(0)->outlinecolor;
 		$cor->setrgb($c->red,$c->green,$c->blue);
-		$l->open();
-		foreach ($shp as $indx){
-			$shape = $l->getfeature($indx,-1);
-			$shape->draw($mapa,$l,$img);
+		$v = versaoMS();
+		if($v["principal"] == 6){
+			$l->open();
+			foreach ($shp as $indx){
+				$shape = $l->getShape(new resultObj($indx));
+				$shape->draw($mapa,$l,$img);
+			}
+			$l->close();
 		}
-		$l->close();
+		else{
+			$l->open();
+			foreach ($shp as $indx){
+				$shape = $l->getfeature($indx,-1);
+				$shape->draw($mapa,$l,$img);
+			}
+			$l->close();
+		}
 	}
-
 }
 if (!function_exists('imagepng'))
 {
@@ -382,5 +392,22 @@ function ilegal(){
 	echo header("Content-type: image/png \n\n");
 	imagepng($img);
 	exit;
+}
+function versaoMS()
+{
+	$v = "5.0.0";
+	$vs = explode(" ",ms_GetVersion());
+	$cvs = count($vs);
+	for ($i=0;$i<$cvs;++$i)
+	{
+		if(trim(strtolower($vs[$i])) == "version")
+		{
+			$v = $vs[$i+1];
+		}
+	}
+	$versao["completa"] = $v;
+	$v = explode(".",$v);
+	$versao["principal"] = $v[0];
+	return $versao;
 }
 ?>
