@@ -4,7 +4,7 @@
 /*
 Title: Cortina
 
-Aplica um efeito de cortina a um tema, permitindo mostr&aacute;-lo ou escond&ecirc;-lo de forma controlada por um botão deslizante.
+Aplica um efeito de cortina a um tema, permitindo mostr&aacute;-lo ou escond&ecirc;-lo de forma controlada por um bot&atilde;o deslizante.
 Funciona apenas nas interfaces que utilizam camadas m&uacute;ltiplas, como a interface openlayers
 
 Veja:
@@ -30,10 +30,10 @@ GNU conforme publicada pela Free Software Foundation;
 
 Este programa &eacute; distribu&iacute;do na expectativa de que seja &uacute;til,
 por&eacute;m, SEM NENHUMA GARANTIA; nem mesmo a garantia impl&iacute;cita
-de COMERCIABILIDADE OU ADEQUAÇÃO A UMA FINALIDADE ESPEC&Iacute;FICA.
+de COMERCIABILIDADE OU ADEQUA&Ccedil;&Atilde;O A UMA FINALIDADE ESPEC&Iacute;FICA.
 Consulte a Licen&ccedil;a P&uacute;blica Geral do GNU para mais detalhes.
 Voc&ecirc; deve ter recebido uma c&oacute;pia da Licen&ccedil;a P&uacute;blica Geral do
-GNU junto com este programa; se não, escreva para a
+GNU junto com este programa; se n&atilde;o, escreva para a
 Free Software Foundation, Inc., no endere&ccedil;o
 59 Temple Street, Suite 330, Boston, MA 02111-1307 USA.
 */
@@ -54,7 +54,7 @@ i3GEOF.cortina = {
 	/*
 	Variavel: tema
 
-	C&oacute;digo do tema definido na inicializa&ccedil;ão da janela e que ser&aacute; alvo da cortina.
+	C&oacute;digo do tema definido na inicializa&ccedil;&atilde;o da janela e que ser&aacute; alvo da cortina.
 	*/
 	tema: "",
 	/*
@@ -67,7 +67,7 @@ i3GEOF.cortina = {
 	*/
 	janela: "",
 	/*
-		Para efeitos de compatibilidade antes da vers&atilde;o 4.7 que não tinha dicion&aacute;rio
+		Para efeitos de compatibilidade antes da vers&atilde;o 4.7 que n&atilde;o tinha dicion&aacute;rio
 	*/
 	criaJanelaFlutuante: function(){
 		i3GEOF.cortina.iniciaDicionario();
@@ -113,7 +113,7 @@ i3GEOF.cortina = {
 	/*
 	Function: html
 
-	Gera o c&oacute;digo html para apresenta&ccedil;ão das op&ccedil;&otilde;es da ferramenta
+	Gera o c&oacute;digo html para apresenta&ccedil;&atilde;o das op&ccedil;&otilde;es da ferramenta
 
 	Retorno:
 
@@ -142,9 +142,9 @@ i3GEOF.cortina = {
 
 	tema {string} - codigo do tema
 
-	mx {numero} - (opcional) posi&ccedil;ão em x para onde a janela ser&aacute; movida ap&oacute;s ser criada
+	mx {numero} - (opcional) posi&ccedil;&atilde;o em x para onde a janela ser&aacute; movida ap&oacute;s ser criada
 
-	my {numero} - (opcional) posi&ccedil;ão em y para onde a janela ser&aacute; movida ap&oacute;s ser criada
+	my {numero} - (opcional) posi&ccedil;&atilde;o em y para onde a janela ser&aacute; movida ap&oacute;s ser criada
 	*/
 	iniciaJanelaFlutuante: function(tema,mx,my){
 		if(tema == undefined)

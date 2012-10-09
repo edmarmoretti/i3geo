@@ -29,10 +29,10 @@ GNU conforme publicada pela Free Software Foundation;
 
 Este programa &eacute; distribu&iacute;do na expectativa de que seja &uacute;til,
 por&eacute;m, SEM NENHUMA GARANTIA; nem mesmo a garantia impl&iacute;cita
-de COMERCIABILIDADE OU ADEQUAÇÃO A UMA FINALIDADE ESPEC&Iacute;FICA.
+de COMERCIABILIDADE OU ADEQUA&Ccedil;&Atilde;O A UMA FINALIDADE ESPEC&Iacute;FICA.
 Consulte a Licen&ccedil;a P&uacute;blica Geral do GNU para mais detalhes.
 Voc&ecirc; deve ter recebido uma c&oacute;pia da Licen&ccedil;a P&uacute;blica Geral do
-GNU junto com este programa; se não, escreva para a
+GNU junto com este programa; se n&atilde;o, escreva para a
 Free Software Foundation, Inc., no endere&ccedil;o
 59 Temple Street, Suite 330, Boston, MA 02111-1307 USA.
 */
@@ -50,7 +50,7 @@ i3GEOF.dissolve = {
 	*/
 	aguarde: "",
 	/*
-		Para efeitos de compatibilidade antes da vers&atilde;o 4.7 que não tinha dicion&aacute;rio
+		Para efeitos de compatibilidade antes da vers&atilde;o 4.7 que n&atilde;o tinha dicion&aacute;rio
 	*/
 	criaJanelaFlutuante: function(){
 		i3GEOF.dissolve.iniciaDicionario();
@@ -93,7 +93,7 @@ i3GEOF.dissolve = {
 	/*
 	Function: html
 
-	Gera o c&oacute;digo html para apresenta&ccedil;ão das op&ccedil;&otilde;es da ferramenta
+	Gera o c&oacute;digo html para apresenta&ccedil;&atilde;o das op&ccedil;&otilde;es da ferramenta
 
 	Retorno:
 
@@ -146,7 +146,7 @@ i3GEOF.dissolve = {
 	},
 	t0: function()
 	{
-		var ins = "<p class='paragrafo'>Essa ferramenta transforma v&aacute;rios pol&iacute;gonos em um s&oacute; eliminando as divisas entre eles. Caso seja escolhido um item da tabela de atributos, os pol&iacute;gonos que possu&iacute;rem o mesmo valor serão considerados no mesmo grupo e suas divisas eliminadas e caso não tenha sido escolhido nenhum item, todas os pol&iacute;gonos serão agrupados em um s&oacute;. O resultado final ser&aacute; um novo tema com pol&iacute;gonos diferentes dos originais e cuja tabela de atributos conter&aacute; apenas um item.";
+		var ins = "<p class='paragrafo'>Essa ferramenta transforma v&aacute;rios pol&iacute;gonos em um s&oacute; eliminando as divisas entre eles. Caso seja escolhido um item da tabela de atributos, os pol&iacute;gonos que possu&iacute;rem o mesmo valor ser&atilde;o considerados no mesmo grupo e suas divisas eliminadas e caso n&atilde;o tenha sido escolhido nenhum item, todas os pol&iacute;gonos ser&atilde;o agrupados em um s&oacute;. O resultado final ser&aacute; um novo tema com pol&iacute;gonos diferentes dos originais e cuja tabela de atributos conter&aacute; apenas um item.";
 		i3GEO.util.proximoAnterior("","i3GEOF.dissolve.t1()",ins,"i3GEOFgradeDePontost0","i3GEOdissolveresultado");
 	},
 	t1: function(){
@@ -173,7 +173,7 @@ i3GEOF.dissolve = {
 	/*
 	Function: criadissolve
 
-	Executa a opera&ccedil;ão de dissolve
+	Executa a opera&ccedil;&atilde;o de dissolve
 
 	Veja:
 
@@ -192,7 +192,7 @@ i3GEOF.dissolve = {
 			fim = function(retorno){
 				i3GEOF.dissolve.aguarde.visibility = "hidden";
 				if (retorno.data === undefined )
-				{$i("i3GEOdissolvefim").innerHTML = "Erro. A opera&ccedil;ão demorou muito.";}
+				{$i("i3GEOdissolvefim").innerHTML = "Erro. A opera&ccedil;&atilde;o demorou muito.";}
 				else
 				{i3GEO.atualiza();}
 			};

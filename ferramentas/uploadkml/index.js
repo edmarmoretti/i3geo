@@ -28,10 +28,10 @@ GNU conforme publicada pela Free Software Foundation;
 
 Este programa &eacute; distribu&iacute;do na expectativa de que seja &uacute;til,
 por&eacute;m, SEM NENHUMA GARANTIA; nem mesmo a garantia impl&iacute;cita
-de COMERCIABILIDADE OU ADEQUAÇÃO A UMA FINALIDADE ESPEC&Iacute;FICA.
+de COMERCIABILIDADE OU ADEQUA&Ccedil;&Atilde;O A UMA FINALIDADE ESPEC&Iacute;FICA.
 Consulte a Licen&ccedil;a P&uacute;blica Geral do GNU para mais detalhes.
 Voc&ecirc; deve ter recebido uma c&oacute;pia da Licen&ccedil;a P&uacute;blica Geral do
-GNU junto com este programa; se não, escreva para a
+GNU junto com este programa; se n&atilde;o, escreva para a
 Free Software Foundation, Inc., no endere&ccedil;o
 59 Temple Street, Suite 330, Boston, MA 02111-1307 USA.
 */
@@ -51,7 +51,7 @@ i3GEOF.uploadkml = {
 	*/
 	aguarde: "",
 	/*
-		Para efeitos de compatibilidade antes da vers&atilde;o 4.7 que não tinha dicion&aacute;rio
+		Para efeitos de compatibilidade antes da vers&atilde;o 4.7 que n&atilde;o tinha dicion&aacute;rio
 	*/
 	criaJanelaFlutuante: function(){
 		i3GEOF.uploadkml.iniciaDicionario();
@@ -103,7 +103,7 @@ i3GEOF.uploadkml = {
 	/*
 	Function: html
 
-	Gera o c&oacute;digo html para apresenta&ccedil;ão das op&ccedil;&otilde;es da ferramenta
+	Gera o c&oacute;digo html para apresenta&ccedil;&atilde;o das op&ccedil;&otilde;es da ferramenta
 
 	Retorno:
 
@@ -111,7 +111,7 @@ i3GEOF.uploadkml = {
 	*/
 	html:function(){
 		var ins = '<form id=i3GEOuploadkmlf target="i3GEOuploadkmliframe" action="'+i3GEO.configura.locaplic+'/ferramentas/uploadkml/upload.php" method="post" ENCTYPE="multipart/form-data">' +
-		'<p class="paragrafo" style=color:red >Não use arquivos ou nome de layer com espa&ccedil;os em branco ou acentua&ccedil;ão</p>' +
+		'<p class="paragrafo" style=color:red >N&atilde;o use arquivos ou nome de layer com espa&ccedil;os em branco ou acentua&ccedil;&atilde;o</p>' +
 		'<p class="paragrafo" >Arquivo kml: <br><input class=digitar type="file" size=32 name="i3GEOuploadkml" style="top:0px;left:0px;cursor:pointer;"></p>' +
 		'<p class=paragrafo >Nome do layer KML: <br><input type=text size=42 name=layerkml value=""/></p>' +
 		'<p class=paragrafo >Proje&ccedil;&atilde;o:</p>' +

@@ -27,10 +27,10 @@ GNU conforme publicada pela Free Software Foundation;
 
 Este programa &eacute; distribu&iacute;do na expectativa de que seja &uacute;til,
 por&eacute;m, SEM NENHUMA GARANTIA; nem mesmo a garantia impl&iacute;cita
-de COMERCIABILIDADE OU ADEQUAÇÃO A UMA FINALIDADE ESPEC&Iacute;FICA.
+de COMERCIABILIDADE OU ADEQUA&Ccedil;&Atilde;O A UMA FINALIDADE ESPEC&Iacute;FICA.
 Consulte a Licen&ccedil;a P&uacute;blica Geral do GNU para mais detalhes.
 Voc&ecirc; deve ter recebido uma c&oacute;pia da Licen&ccedil;a P&uacute;blica Geral do
-GNU junto com este programa; se não, escreva para a
+GNU junto com este programa; se n&atilde;o, escreva para a
 Free Software Foundation, Inc., no endere&ccedil;o
 59 Temple Street, Suite 330, Boston, MA 02111-1307 USA.
 */
@@ -48,7 +48,7 @@ i3GEOF.salvamapfile = {
 	*/
 	aguarde: "",
 	/*
-		Para efeitos de compatibilidade antes da vers&atilde;o 4.7 que não tinha dicion&aacute;rio
+		Para efeitos de compatibilidade antes da vers&atilde;o 4.7 que n&atilde;o tinha dicion&aacute;rio
 	*/
 	criaJanelaFlutuante: function(){
 		i3GEOF.salvamapfile.iniciaDicionario();
@@ -96,10 +96,10 @@ i3GEOF.salvamapfile = {
 					i3GEOF.salvamapfile.aguarde.visibility = "hidden";
 					var nome = retorno.data.nomeoriginal;
 					if(nome == ""){
-						$i(iddiv).innerHTML = "<p class=paragrafo >Não existe um arquivo mapfile cadastrado para essa camada. Utilize o sistema de administra&ccedil;ão para <a href='"+i3GEO.configura.locaplic+"/admin/html/editormapfile.html' target=_blank >criar um</a>";
+						$i(iddiv).innerHTML = "<p class=paragrafo >N&atilde;o existe um arquivo mapfile cadastrado para essa camada. Utilize o sistema de administra&ccedil;&atilde;o para <a href='"+i3GEO.configura.locaplic+"/admin/html/editormapfile.html' target=_blank >criar um</a>";
 					}
 					else{
-						var ins = "<p class=paragrafo >Apenas usu&aacute;rios cadastrados como editores podem salvar um mapfile. O tema ("+nome+") ativo possui um mapfile j&aacute; criado. Ao salvar, as defini&ccedil;&otilde;es originais  de legenda, filtros e outras, serão substitu&iacute;das pelas atuais" +
+						var ins = "<p class=paragrafo >Apenas usu&aacute;rios cadastrados como editores podem salvar um mapfile. O tema ("+nome+") ativo possui um mapfile j&aacute; criado. Ao salvar, as defini&ccedil;&otilde;es originais  de legenda, filtros e outras, ser&atilde;o substitu&iacute;das pelas atuais" +
 						'<span id="i3GEOsalvamapconcluido" style=display:none;color:red  > Conclu&iacute;do!</span></p>' +
 						'<br><p class=paragrafo ><input size=20 id=i3GEOsalvamapfilebotao1 type=button value="Salvar"  />&nbsp;&nbsp;<input size=20 id=i3GEOsalvamapfilebotao2 type=button value="Testar"  />';
 						$i(iddiv).innerHTML = ins;

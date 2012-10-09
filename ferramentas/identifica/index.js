@@ -25,10 +25,10 @@ GNU conforme publicada pela Free Software Foundation;
 
 Este programa &eacute; distribu&iacute;do na expectativa de que seja &uacute;til,
 por&eacute;m, SEM NENHUMA GARANTIA; nem mesmo a garantia impl&iacute;cita
-de COMERCIABILIDADE OU ADEQUAÇÃO A UMA FINALIDADE ESPEC&Iacute;FICA.
+de COMERCIABILIDADE OU ADEQUA&Ccedil;&Atilde;O A UMA FINALIDADE ESPEC&Iacute;FICA.
 Consulte a Licen&ccedil;a P&uacute;blica Geral do GNU para mais detalhes.
 Voc&ecirc; deve ter recebido uma c&oacute;pia da Licen&ccedil;a P&uacute;blica Geral do
-GNU junto com este programa; se não, escreva para a
+GNU junto com este programa; se n&atilde;o, escreva para a
 Free Software Foundation, Inc., no endere&ccedil;o
 59 Temple Street, Suite 330, Boston, MA 02111-1307 USA.
 */
@@ -43,7 +43,7 @@ i3GEOF.identifica = {
 	/*
 	Propriedade: mostraLinkGeohack
 
-	Mostra ou não o link para abrir o site GeoHack.
+	Mostra ou n&atilde;o o link para abrir o site GeoHack.
 
 	Este site permite o uso de v&aacute;rios buscadores dispon&iacute;veis na internet.
 
@@ -54,7 +54,7 @@ i3GEOF.identifica = {
 	/*
 	Propriedade: mostraSistemasAdicionais
 
-	Mostra ou não a lista de sistemas adicionais de busca de dados.
+	Mostra ou n&atilde;o a lista de sistemas adicionais de busca de dados.
 
 	Type:
 	{boolean}
@@ -90,7 +90,7 @@ i3GEOF.identifica = {
 	/*
 	Variavel: sistemasAdicionais
 
-	Guarda a lista de sistemas adicionais que são inclu&iacute;dos na sele&ccedil;ão de temas
+	Guarda a lista de sistemas adicionais que s&atilde;o inclu&iacute;dos na sele&ccedil;&atilde;o de temas
 
 	Type:
 	{Array}
@@ -99,7 +99,7 @@ i3GEOF.identifica = {
 	/*
 	Variavel: dadosIdentifica
 
-	Guarda os dados obtidos com a chamada em AJAX de identifica&ccedil;ão
+	Guarda os dados obtidos com a chamada em AJAX de identifica&ccedil;&atilde;o
 
 	Type:
 	{Array}
@@ -107,7 +107,7 @@ i3GEOF.identifica = {
 	dadosIdentifica: [],
 
 	/*
-		Para efeitos de compatibilidade antes da vers&atilde;o 4.7 que não tinha dicion&aacute;rio
+		Para efeitos de compatibilidade antes da vers&atilde;o 4.7 que n&atilde;o tinha dicion&aacute;rio
 	*/
 	criaJanelaFlutuante: function(){
 		i3GEOF.identifica.iniciaDicionario();
@@ -138,7 +138,7 @@ i3GEOF.identifica = {
 
 	Parameters:
 
-	tema {String} - c&oacute;digo do tema, existente no mapfile armazenado na se&ccedil;ão, que ser&aacute; consultado j&aacute; na inicializa&ccedil;ão
+	tema {String} - c&oacute;digo do tema, existente no mapfile armazenado na se&ccedil;&atilde;o, que ser&aacute; consultado j&aacute; na inicializa&ccedil;&atilde;o
 
 	x {Numeric} - coordenada x do ponto que ser&aacute; utilizado para busca dos atributos
 
@@ -146,9 +146,9 @@ i3GEOF.identifica = {
 
 	iddiv {String} - id do elemento html onde o conte&uacute;do da ferramenta ser&aacute; incluido
 
-	mostraLinkGeohack {boolean} - mostra ou não o link para o site geohacks
+	mostraLinkGeohack {boolean} - mostra ou n&atilde;o o link para o site geohacks
 
-	mostraSistemasAdicionais {boolean} - mostra ou não os sistemas adicionais de busca de dados
+	mostraSistemasAdicionais {boolean} - mostra ou n&atilde;o os sistemas adicionais de busca de dados
 	*/
 	inicia: function(tema,x,y,iddiv,mostraLinkGeohack,mostraSistemasAdicionais){
 		try{
@@ -177,7 +177,7 @@ i3GEOF.identifica = {
 					if(i3GEO.temaAtivo !== ""){
 						var ltema = i3GEO.arvoreDeCamadas.pegaTema(i3GEO.temaAtivo);
 						if(ltema.identifica == "nao" || ltema.identifica == "NAO")
-						{alert("Esse tema não permite etiquetas");}
+						{alert("Esse tema n&atilde;o permite etiquetas");}
 						else
 						{i3GEO.tema.dialogo.etiquetas(i3GEO.temaAtivo);}
 						$i("i3GEOidentificaocorrencia").innerHTML = "";
@@ -320,7 +320,7 @@ i3GEOF.identifica = {
 	/*
 	Function: html
 
-	Gera o c&oacute;digo html para apresenta&ccedil;ão das op&ccedil;&otilde;es da ferramenta
+	Gera o c&oacute;digo html para apresenta&ccedil;&atilde;o das op&ccedil;&otilde;es da ferramenta
 
 	Retorno:
 
@@ -351,7 +351,7 @@ i3GEOF.identifica = {
 		ins += '		Resolu&ccedil;&atilde;o de busca - n&uacute;mero de pixels, no entorno do ponto clicado no mapa, que ser&atilde;o utilizados na busca de dados:<br>  <input onclick="javascript:this.select();" type=text class=digitar value=5 id="i3GEOidentificaresolucao" size=2 />';
 		ins += '	</div>';
 		ins += '	<div class=guiaobj id="i3GEOidentificaguia4obj" style="left:1px;top:10px;display:none;font-size:12px;overflow:hidden" >';
-		ins += '		As etiquetas são mostradas quando o mouse &eacute; estacionado sobre um elemento.';
+		ins += '		As etiquetas s&atilde;o mostradas quando o mouse &eacute; estacionado sobre um elemento.';
 		ins += '		<br><br><input id=i3GEOidentificabotao1 size=20  type=button value="Configurar etiquetas" />';
 		ins += '	</div>';
 		ins += '	<div class=guiaobj id="i3GEOidentificaguia5obj" style="left:1px;top:10px;display:none;font-size:12px;overflow:hidden" >';
@@ -374,7 +374,7 @@ i3GEOF.identifica = {
 
 	Parametros:
 
-	tipo {String} - ligados|todos lista apenas os temas que estão vis&iacute;veis no mapa ou todos os temas
+	tipo {String} - ligados|todos lista apenas os temas que est&atilde;o vis&iacute;veis no mapa ou todos os temas
 	*/
 	listaTemas: function(tipo){
 		if(i3GEO.arvoreDeCamadas.CAMADAS !== ""){
@@ -475,7 +475,7 @@ i3GEOF.identifica = {
 
 	O resultado &eacute; inserido no div com id "listaSistemas".
 
-	Cada sistema consiste em uma URL para a qual serão passados os parâmetros x e y.
+	Cada sistema consiste em uma URL para a qual ser&atilde;o passados os parâmetros x e y.
 
 	*/
 	montaListaSistemas: function(retorno){
@@ -520,7 +520,7 @@ i3GEOF.identifica = {
 				}
 				if(divins){
 					if(i3GEO.parametros.editor.toLowerCase() == "sim"){
-						temp = "<p class=paragrafo ><a href='#' title='Op&ccedil;ão vis&iacute;vel apenas para quem &eacute; editor' style=color:red onclick=\"i3GEOF.identifica.abrejanelaIframe('1050','500','"+i3GEO.configura.locaplic+"/admin/html/webservices.html');\" >Editar a lista de sistemas adicionais</a></p>";
+						temp = "<p class=paragrafo ><a href='#' title='Op&ccedil;&atilde;o vis&iacute;vel apenas para quem &eacute; editor' style=color:red onclick=\"i3GEOF.identifica.abrejanelaIframe('1050','500','"+i3GEO.configura.locaplic+"/admin/html/webservices.html');\" >Editar a lista de sistemas adicionais</a></p>";
 					}
 					else
 					{temp = "";}
@@ -614,7 +614,7 @@ i3GEOF.identifica = {
 
 	Mostra os dados obtidos de um ou mais temas.
 
-	Recebe o resultado em JSON da opera&ccedil;ão de consulta realizada pelo servidor e formata os dados para apresenta&ccedil;ão na tela.
+	Recebe o resultado em JSON da opera&ccedil;&atilde;o de consulta realizada pelo servidor e formata os dados para apresenta&ccedil;&atilde;o na tela.
 
 	Parametros:
 

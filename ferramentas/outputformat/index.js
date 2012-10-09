@@ -28,10 +28,10 @@ GNU conforme publicada pela Free Software Foundation;
 
 Este programa &eacute; distribu&iacute;do na expectativa de que seja &uacute;til,
 por&eacute;m, SEM NENHUMA GARANTIA; nem mesmo a garantia impl&iacute;cita
-de COMERCIABILIDADE OU ADEQUAÇÃO A UMA FINALIDADE ESPEC&Iacute;FICA.
+de COMERCIABILIDADE OU ADEQUA&Ccedil;&Atilde;O A UMA FINALIDADE ESPEC&Iacute;FICA.
 Consulte a Licen&ccedil;a P&uacute;blica Geral do GNU para mais detalhes.
 Voc&ecirc; deve ter recebido uma c&oacute;pia da Licen&ccedil;a P&uacute;blica Geral do
-GNU junto com este programa; se não, escreva para a
+GNU junto com este programa; se n&atilde;o, escreva para a
 Free Software Foundation, Inc., no endere&ccedil;o
 59 Temple Street, Suite 330, Boston, MA 02111-1307 USA.
 */
@@ -49,7 +49,7 @@ i3GEOF.outputformat = {
 	*/
 	aguarde: "",
 	/*
-		Para efeitos de compatibilidade antes da vers&atilde;o 4.7 que não tinha dicion&aacute;rio
+		Para efeitos de compatibilidade antes da vers&atilde;o 4.7 que n&atilde;o tinha dicion&aacute;rio
 	*/
 	criaJanelaFlutuante: function(){
 		i3GEOF.outputformat.iniciaDicionario();
@@ -92,19 +92,19 @@ i3GEOF.outputformat = {
 	/*
 	Function: html
 
-	Gera o c&oacute;digo html para apresenta&ccedil;ão das op&ccedil;&otilde;es da ferramenta
+	Gera o c&oacute;digo html para apresenta&ccedil;&atilde;o das op&ccedil;&otilde;es da ferramenta
 
 	Retorno:
 
 	String com o c&oacute;digo html
 	*/
 	html:function(){
-		var ins = '<p class=paragrafo >Escolha o tipo de imagem para a gera&ccedil;ão do mapa. Para mais detalhes veja <a href="http://mapserver.org/mapfile/outputformat.html" target=_blank >outputformat</a></p>' +
+		var ins = '<p class=paragrafo >Escolha o tipo de imagem para a gera&ccedil;&atilde;o do mapa. Para mais detalhes veja <a href="http://mapserver.org/mapfile/outputformat.html" target=_blank >outputformat</a></p>' +
 			'<table class=lista4 width="250px">' +
 			'	<tr>' +
 			'		<td><input onclick="i3GEOF.outputformat.aplicar(\'AGG_Q\')" style="cursor:pointer;border:0px solid white;" type=radio name=i3GEOoutputformattipo value=nenhum ></td>' +
 			'		<td>png</td>' +
-			'		<td>Formato PNG com 256 cores gerado com a tecnologia AGG. Utilizado como default na versão 4.3 e posteriores do i3Geo</td>' +
+			'		<td>Formato PNG com 256 cores gerado com a tecnologia AGG. Utilizado como default na vers&atilde;o 4.3 e posteriores do i3Geo</td>' +
 			'	</tr>' +
 			'	<tr>' +
 			'		<td><input onclick="i3GEOF.outputformat.aplicar(\'jpeg\')" style="cursor:pointer;border:0px solid white;" type=radio name=i3GEOoutputformattipo value=nenhum ></td>' +

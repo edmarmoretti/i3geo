@@ -1,9 +1,9 @@
 /*
-Title: Conexão com WMS
+Title: Conex&atilde;o com WMS
 
 Acrescenta ao mapa um novo tema com base em um endere&ccedil;o de WMS
 
-O usu&aacute;rio pode indicar o endere&ccedil;o ou escolher de uma lista. A lista &eacute; pr&eacute;-definida por meio do sistema de administra&ccedil;ão
+O usu&aacute;rio pode indicar o endere&ccedil;o ou escolher de uma lista. A lista &eacute; pr&eacute;-definida por meio do sistema de administra&ccedil;&atilde;o
 do i3Geo.
 
 Veja:
@@ -29,10 +29,10 @@ GNU conforme publicada pela Free Software Foundation;
 
 Este programa &eacute; distribu&iacute;do na expectativa de que seja &uacute;til,
 por&eacute;m, SEM NENHUMA GARANTIA; nem mesmo a garantia impl&iacute;cita
-de COMERCIABILIDADE OU ADEQUAÇÃO A UMA FINALIDADE ESPEC&Iacute;FICA.
+de COMERCIABILIDADE OU ADEQUA&Ccedil;&Atilde;O A UMA FINALIDADE ESPEC&Iacute;FICA.
 Consulte a Licen&ccedil;a P&uacute;blica Geral do GNU para mais detalhes.
 Voc&ecirc; deve ter recebido uma c&oacute;pia da Licen&ccedil;a P&uacute;blica Geral do
-GNU junto com este programa; se não, escreva para a
+GNU junto com este programa; se n&atilde;o, escreva para a
 Free Software Foundation, Inc., no endere&ccedil;o
 59 Temple Street, Suite 330, Boston, MA 02111-1307 USA.
 */
@@ -60,7 +60,7 @@ function aguarde(valor){
 /*
 Function: listaRSS
 
-Monta a lista de servi&ccedil;os WMS cadastrados no sistema de administra&ccedil;ão do i3Geo
+Monta a lista de servi&ccedil;os WMS cadastrados no sistema de administra&ccedil;&atilde;o do i3Geo
 
 Veja:
 
@@ -117,7 +117,7 @@ Abre uma nova janela com o resultado da chamada GETCAPABILITIES sobre o WMS esco
 */
 function getcapabilities()
 {
-	if ($i("servico").value == ""){alert("Servi&ccedil;o não definido");}
+	if ($i("servico").value == ""){alert("Servi&ccedil;o n&atilde;o definido");}
 	else
 	{window.open($i("servico").value+"&service=wms&request=getcapabilities&version=1.1.1");}
 }
@@ -133,7 +133,7 @@ Veja:
 function clickGuia2()
 {
 	mostraGuia("guia2");
-	if ($i("servico").value == ""){alert("Servi&ccedil;o não definido");}
+	if ($i("servico").value == ""){alert("Servi&ccedil;o n&atilde;o definido");}
 	else
 	{
 		var metadados = function(retorno){
@@ -162,7 +162,7 @@ Function: clickGuia3
 
 Lista as camadas existentes no WMS escolhido.
 
-O resultado da chamada em PHP &eacute; uma string HTML j&aacute; formatada. O "radio" aponta para a fun&ccedil;ão "adiciona"
+O resultado da chamada em PHP &eacute; uma string HTML j&aacute; formatada. O "radio" aponta para a fun&ccedil;&atilde;o "adiciona"
 
 Veja:
 
@@ -195,7 +195,7 @@ function clickGuia3()
 		{$i("listatemas").innerHTML = "erro";}
 	};
 	mostraGuia("guia3");
-	if ($i("servico").value == ""){alert("Servi&ccedil;o não definido");}
+	if ($i("servico").value == ""){alert("Servi&ccedil;o n&atilde;o definido");}
 	else
 	{
 		$i("listatemas").innerHTML = "";

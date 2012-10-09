@@ -789,8 +789,8 @@ i3GEO.janela = {
 					var container = $i(idDiv),
 						c;
 					container.innerHTML = retorno.dados;
-					container.style.left = "0px";
-					container.styletextAlign = "left";
+					//container.style.left = "0px";
+					//container.styletextAlign = "left";
 					c = $i(idCombo);
 					c.style.width = "150px";
 					c.style.border = "solid #B4B4B4 1px";

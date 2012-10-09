@@ -5,7 +5,7 @@ Title: Carrega mapa salvo
 
 Envia um mapfile armazenado localmente para o servidor do i3Geo. O mapa deve ter sido salvo com a ferramenta
 de salvar mapa.
-Ao enviar o arquivo, um novo diret&oacute;rio tempor&aacute;rio &eacute; criado e o mapa &eacute; iniciado. Ao reiniciar o mapa, os layers locais são eliminados.
+Ao enviar o arquivo, um novo diret&oacute;rio tempor&aacute;rio &eacute; criado e o mapa &eacute; iniciado. Ao reiniciar o mapa, os layers locais s&atilde;o eliminados.
 O envio e processamento do mapa &eacute; feito pelo programa i3geo/ferramentas/carregamapa/upload.php
 
 Veja:
@@ -27,10 +27,10 @@ GNU conforme publicada pela Free Software Foundation;
 
 Este programa &eacute; distribu&iacute;do na expectativa de que seja &uacute;til,
 por&eacute;m, SEM NENHUMA GARANTIA; nem mesmo a garantia impl&iacute;cita
-de COMERCIABILIDADE OU ADEQUAÇÃO A UMA FINALIDADE ESPEC&Iacute;FICA.
+de COMERCIABILIDADE OU ADEQUA&Ccedil;&Atilde;O A UMA FINALIDADE ESPEC&Iacute;FICA.
 Consulte a Licen&ccedil;a P&uacute;blica Geral do GNU para mais detalhes.
 Voc&ecirc; deve ter recebido uma c&oacute;pia da Licen&ccedil;a P&uacute;blica Geral do
-GNU junto com este programa; se não, escreva para a
+GNU junto com este programa; se n&atilde;o, escreva para a
 Free Software Foundation, Inc., no endere&ccedil;o
 59 Temple Street, Suite 330, Boston, MA 02111-1307 USA.
 */
@@ -48,7 +48,7 @@ i3GEOF.carregaMapa = {
 	*/
 	aguarde: "",
 	/*
-		Para efeitos de compatibilidade antes da vers&atilde;o 4.7 que não tinha dicion&aacute;rio
+		Para efeitos de compatibilidade antes da vers&atilde;o 4.7 que n&atilde;o tinha dicion&aacute;rio
 	*/
 	criaJanelaFlutuante: function(){
 		i3GEOF.carregaMapa.iniciaDicionario();
@@ -94,7 +94,7 @@ i3GEOF.carregaMapa = {
 	/*
 	Function: html
 
-	Gera o c&oacute;digo html para apresenta&ccedil;ão das op&ccedil;&otilde;es da ferramenta
+	Gera o c&oacute;digo html para apresenta&ccedil;&atilde;o das op&ccedil;&otilde;es da ferramenta
 
 	Retorno:
 
@@ -102,7 +102,7 @@ i3GEOF.carregaMapa = {
 	*/
 	html:function(){
 		var ins = '';
-		ins += '<p class="paragrafo" >Digite o nome do arquivo .map (não utilize espa&ccedil;o em branco ou caracteres acentuados) ou busque com o navegador de arquivos:';
+		ins += '<p class="paragrafo" >Digite o nome do arquivo .map (n&atilde;o utilize espa&ccedil;o em branco ou caracteres acentuados) ou busque com o navegador de arquivos:';
 		ins += '<br><br>';
 		ins += '<form id=i3GEOcarregamapaf target="i3GEOcarregamaiframe" action="'+i3GEO.configura.locaplic+'/ferramentas/carregamapa/upload.php" method="post" ENCTYPE="multipart/form-data">';
 		ins += '<p class="paragrafo" ><input id="i3GEOcarregamapafilemap" type="file" size=25 name="i3GEOcarregamapafilemap" style="top:0px;left:0px;cursor:pointer;">';

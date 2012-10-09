@@ -4,7 +4,7 @@
 /*
 Title: Filtra tema
 
-Adiciona ou modifica o filtro de um tema. O filtro restringe quais elementos são renderizados e baseiam-se em regras
+Adiciona ou modifica o filtro de um tema. O filtro restringe quais elementos s&atilde;o renderizados e baseiam-se em regras
 aplicadas sobre a tabela de atributos
 
 Veja:
@@ -30,10 +30,10 @@ GNU conforme publicada pela Free Software Foundation;
 
 Este programa &eacute; distribu&iacute;do na expectativa de que seja &uacute;til,
 por&eacute;m, SEM NENHUMA GARANTIA; nem mesmo a garantia impl&iacute;cita
-de COMERCIABILIDADE OU ADEQUAÇÃO A UMA FINALIDADE ESPEC&Iacute;FICA.
+de COMERCIABILIDADE OU ADEQUA&Ccedil;&Atilde;O A UMA FINALIDADE ESPEC&Iacute;FICA.
 Consulte a Licen&ccedil;a P&uacute;blica Geral do GNU para mais detalhes.
 Voc&ecirc; deve ter recebido uma c&oacute;pia da Licen&ccedil;a P&uacute;blica Geral do
-GNU junto com este programa; se não, escreva para a
+GNU junto com este programa; se n&atilde;o, escreva para a
 Free Software Foundation, Inc., no endere&ccedil;o
 59 Temple Street, Suite 330, Boston, MA 02111-1307 USA.
 */
@@ -59,7 +59,7 @@ i3GEOF.filtro = {
 	*/
 	comboTemas: "",
 	/*
-		Para efeitos de compatibilidade antes da vers&atilde;o 4.7 que não tinha dicion&aacute;rio
+		Para efeitos de compatibilidade antes da vers&atilde;o 4.7 que n&atilde;o tinha dicion&aacute;rio
 	*/
 	criaJanelaFlutuante: function(){
 		i3GEOF.filtro.iniciaDicionario();
@@ -122,7 +122,7 @@ i3GEOF.filtro = {
 			);
 			i3GEO.util.mensagemAjuda("i3GEOfiltromen1",$i("i3GEOfiltromen1").innerHTML);
 			//
-			//pega a lista de itens e chama a fun&ccedil;ão de montagem das op&ccedil;&otilde;es de cria&ccedil;ão do filtro
+			//pega a lista de itens e chama a fun&ccedil;&atilde;o de montagem das op&ccedil;&otilde;es de cria&ccedil;&atilde;o do filtro
 			//
 			i3GEO.util.comboItens(
 				"none",
@@ -138,7 +138,7 @@ i3GEOF.filtro = {
 	/*
 	Function: html
 
-	Gera o c&oacute;digo html para apresenta&ccedil;ão das op&ccedil;&otilde;es da ferramenta
+	Gera o c&oacute;digo html para apresenta&ccedil;&atilde;o das op&ccedil;&otilde;es da ferramenta
 
 	Retorno:
 
@@ -195,7 +195,7 @@ i3GEOF.filtro = {
 			return;
 		}
 		//cria a janela flutuante
-		titulo = "<div style='z-index:1;position:absolute' id='i3GEOFfiltroComboCabeca' >------</div>&nbsp;&nbsp;&nbsp;"+$trad("t29")+" <a class=ajuda_usuario target=_blank href='" + i3GEO.configura.locaplic + "/ajuda_usuario.php?idcategoria=5&idajuda=38' >&nbsp;&nbsp;&nbsp;</a>";
+		titulo = "<div  id='i3GEOFfiltroComboCabeca' class='comboTemasCabecalho'>   ------</div>&nbsp;&nbsp;&nbsp;"+$trad("t29")+" <a class=ajuda_usuario target=_blank href='" + i3GEO.configura.locaplic + "/ajuda_usuario.php?idcategoria=5&idajuda=38' >&nbsp;&nbsp;&nbsp;</a>";
 		janela = i3GEO.janela.cria(
 			"480px",
 			"250px",
@@ -374,7 +374,7 @@ i3GEOF.filtro = {
 
 	Parametro:
 
-	testa {String} - sim|nao indica a realiza&ccedil;ão de teste ou aplica&ccedil;ão final do filtro
+	testa {String} - sim|nao indica a realiza&ccedil;&atilde;o de teste ou aplica&ccedil;&atilde;o final do filtro
 	*/
 	aplicaFiltro: function(testa){
 		if(arguments.length === 0)

@@ -28,10 +28,10 @@ GNU conforme publicada pela Free Software Foundation;
 
 Este programa &eacute; distribu&iacute;do na expectativa de que seja &uacute;til,
 por&eacute;m, SEM NENHUMA GARANTIA; nem mesmo a garantia impl&iacute;cita
-de COMERCIABILIDADE OU ADEQUAÇÃO A UMA FINALIDADE ESPEC&Iacute;FICA.
+de COMERCIABILIDADE OU ADEQUA&Ccedil;&Atilde;O A UMA FINALIDADE ESPEC&Iacute;FICA.
 Consulte a Licen&ccedil;a P&uacute;blica Geral do GNU para mais detalhes.
 Voc&ecirc; deve ter recebido uma c&oacute;pia da Licen&ccedil;a P&uacute;blica Geral do
-GNU junto com este programa; se não, escreva para a
+GNU junto com este programa; se n&atilde;o, escreva para a
 Free Software Foundation, Inc., no endere&ccedil;o
 59 Temple Street, Suite 330, Boston, MA 02111-1307 USA.
 */
@@ -43,7 +43,7 @@ Classe: i3GEOF.download
 */
 i3GEOF.download = {
 	/*
-		Para efeitos de compatibilidade antes da vers&atilde;o 4.7 que não tinha dicion&aacute;rio
+		Para efeitos de compatibilidade antes da vers&atilde;o 4.7 que n&atilde;o tinha dicion&aacute;rio
 	*/
 	criaJanelaFlutuante: function(tema){
 		i3GEOF.download.iniciaDicionario(tema);
@@ -70,7 +70,7 @@ i3GEOF.download = {
 	/*
 	Function: html
 	
-	Gera o c&oacute;digo html para apresenta&ccedil;ão das op&ccedil;&otilde;es da ferramenta
+	Gera o c&oacute;digo html para apresenta&ccedil;&atilde;o das op&ccedil;&otilde;es da ferramenta
 	
 	Veja:
 	
@@ -84,7 +84,7 @@ i3GEOF.download = {
 	*/
 	html:function(divid,tema){
 		var cp,p,ins,mostraDownload;
-		ins = '<p class="paragrafo" >Clique com o botão da direita do mouse sobre o(s) arquivo(s) abaixo para fazer o download.</p>';
+		ins = '<p class="paragrafo" >Clique com o bot&atilde;o da direita do mouse sobre o(s) arquivo(s) abaixo para fazer o download.</p>';
 		ins += '<p class="paragrafo" ><div id=i3GEOdownloadResultado ></div>';
 		$i(divid).innerHTML += ins;
 		mostraDownload = function(retorno){
@@ -95,7 +95,7 @@ i3GEOF.download = {
 				arqs = retorno.arquivos.split(",");
 				n = arqs.length;
 				if(retorno == "erro")
-				{ins = "<p style=color:red >Ocorreu um erro. O tema não foi encontrado. Pode ser que o c&oacute;digo do tema não existe na defini&ccedil;ão do mapfile. Informe o administrador do sistema.<br>";}
+				{ins = "<p style=color:red >Ocorreu um erro. O tema n&atilde;o foi encontrado. Pode ser que o c&oacute;digo do tema n&atilde;o existe na defini&ccedil;&atilde;o do mapfile. Informe o administrador do sistema.<br>";}
 				else{
 					for (arq=0;arq<n;arq++){
 						ins += "<a href='"+window.location.protocol+"//"+window.location.host+"/"+arqs[arq]+"'>"+arqs[arq]+"</a><br>";

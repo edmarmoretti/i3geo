@@ -1,10 +1,10 @@
 /*
-Title: Conexão com georss
+Title: Conex&atilde;o com georss
 
 Acrescenta ao mapa um novo tema com base em um endere&ccedil;o de GEORSS
 
 GEORSS &eacute; um servi&ccedil;o de not&iacute;cias que traz a coordenada geogr&aacute;fica da ocorr&ecirc;ncia (ou envelope).
-O usu&aacute;rio pode indicar o endere&ccedil;o ou escolher de uma lista. A lista &eacute; pr&eacute;-definida por meio do sistema de administra&ccedil;ão
+O usu&aacute;rio pode indicar o endere&ccedil;o ou escolher de uma lista. A lista &eacute; pr&eacute;-definida por meio do sistema de administra&ccedil;&atilde;o
 do i3Geo.
 
 Veja:
@@ -30,10 +30,10 @@ GNU conforme publicada pela Free Software Foundation;
 
 Este programa &eacute; distribu&iacute;do na expectativa de que seja &uacute;til,
 por&eacute;m, SEM NENHUMA GARANTIA; nem mesmo a garantia impl&iacute;cita
-de COMERCIABILIDADE OU ADEQUAÇÃO A UMA FINALIDADE ESPEC&Iacute;FICA.
+de COMERCIABILIDADE OU ADEQUA&Ccedil;&Atilde;O A UMA FINALIDADE ESPEC&Iacute;FICA.
 Consulte a Licen&ccedil;a P&uacute;blica Geral do GNU para mais detalhes.
 Voc&ecirc; deve ter recebido uma c&oacute;pia da Licen&ccedil;a P&uacute;blica Geral do
-GNU junto com este programa; se não, escreva para a
+GNU junto com este programa; se n&atilde;o, escreva para a
 Free Software Foundation, Inc., no endere&ccedil;o
 59 Temple Street, Suite 330, Boston, MA 02111-1307 USA.
 */
@@ -57,7 +57,7 @@ $i("guia2").onclick = function(){clickGuia2();};
 /*
 Function: clickGuia2
 
-Faz a busca dos RSS cadastrados no sistema de administra&ccedil;ão do i3Geo
+Faz a busca dos RSS cadastrados no sistema de administra&ccedil;&atilde;o do i3Geo
 
 Veja:
 
@@ -67,7 +67,7 @@ function clickGuia2()
 {
 	mostraGuia("guia2");
 	$i("resultadoget").innerHTML = "";
-	if ($i("servico").value == ""){alert("Servi&ccedil;o não definido");}
+	if ($i("servico").value == ""){alert("Servi&ccedil;o n&atilde;o definido");}
 	else
 	{
 		$i("guia2obj").style.display="block";
@@ -95,7 +95,7 @@ Monta a lista com os canais existentes no RSS escolhido
 
 Parametro:
 
-retorno {JSON} - retorno da fun&ccedil;ão clickGuia2
+retorno {JSON} - retorno da fun&ccedil;&atilde;o clickGuia2
 */
 function listaCanais(retorno)
 {

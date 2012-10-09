@@ -4,8 +4,8 @@ Title: metarproxima
 
 Acessa o Web Service do Geonames que busca esta&ccedil;&otilde;es meteorol&oacute;gicas da rede METAR mais pr&oacute;ximas de um ponto.
 
-Esse programa &eacute; utilizado na ferramenta de identifica&ccedil;ão e seu uso deve ser habilitado por meio do sistema
-de administra&ccedil;ão do i3Geo. Para isso, utilize http://localhost/i3geo/admin/html/identifica.html e insira
+Esse programa &eacute; utilizado na ferramenta de identifica&ccedil;&atilde;o e seu uso deve ser habilitado por meio do sistema
+de administra&ccedil;&atilde;o do i3Geo. Para isso, utilize http://localhost/i3geo/admin/html/identifica.html e insira
 "../ferramentas/metar/metarproxima.php" em uma nova linha na coluna "programa".
 
 Licenca:
@@ -23,10 +23,10 @@ GNU conforme publicada pela Free Software Foundation;
 
 Este programa &eacute; distribu&iacute;do na expectativa de que seja &uacute;til,
 por&eacute;m, SEM NENHUMA GARANTIA; nem mesmo a garantia impl&iacute;cita
-de COMERCIABILIDADE OU ADEQUAÇÃO A UMA FINALIDADE ESPEC&Iacute;FICA.
+de COMERCIABILIDADE OU ADEQUA&Ccedil;&Atilde;O A UMA FINALIDADE ESPEC&Iacute;FICA.
 Consulte a Licen&ccedil;a P&uacute;blica Geral do GNU para mais detalhes.
 Voc&ecirc; deve ter recebido uma c&oacute;pia da Licen&ccedil;a P&uacute;blica Geral do
-GNU junto com este programa; se não, escreva para a
+GNU junto com este programa; se n&atilde;o, escreva para a
 Free Software Foundation, Inc., no endere&ccedil;o
 59 Temple Street, Suite 330, Boston, MA 02111-1307 USA.
 
@@ -68,7 +68,7 @@ if($xml == true){
 		
 		$r = $e->xpath('stationName');
 		foreach($r as $t)
-		{$resultado .= "<p><b> Esta&ccedil;ão: </b>".$t;}
+		{$resultado .= "<p><b> Esta&ccedil;&atilde;o: </b>".$t;}
 		
 		$r = $e->xpath('ICAO');
 		foreach($r as $t)
@@ -76,7 +76,7 @@ if($xml == true){
 		
 		$r = $e->xpath('elevation');
 		foreach($r as $t)
-		{$resultado .= "<p><b> Eleva&ccedil;ão: </b>".$t;}
+		{$resultado .= "<p><b> Eleva&ccedil;&atilde;o: </b>".$t;}
 		
 		$r = $e->xpath('lat');
 		foreach($r as $t){
@@ -107,15 +107,15 @@ if($xml == true){
 		
 		$r = $e->xpath('weatherCondition');
 		foreach($r as $t)
-		{$resultado .= "<p><b> Condi&ccedil;ão: </b>".$t;}
+		{$resultado .= "<p><b> Condi&ccedil;&atilde;o: </b>".$t;}
 		
 		$r = $e->xpath('hectoPascAltimeter');
 		foreach($r as $t)
-		{$resultado .= "<p><b> Pressão: </b>".$t." hpa";}
+		{$resultado .= "<p><b> Press&atilde;o: </b>".$t." hpa";}
 		
 		$r = $e->xpath('windDirection');
 		foreach($r as $t)
-		{$resultado .= "<p><b> Dire&ccedil;ão do vento: </b>".$t;}
+		{$resultado .= "<p><b> Dire&ccedil;&atilde;o do vento: </b>".$t;}
 		
 		$r = $e->xpath('windSpeed');
 		foreach($r as $t)

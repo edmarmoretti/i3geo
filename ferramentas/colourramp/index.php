@@ -104,7 +104,7 @@ p .boom {
 <title></title>
 </head>
 <body class=" yui-skin-sam" style="margin:10px;width:260px;" >
-<p class=paragrafo style="position:relative;left:6px;width:280px;" >Clique para escolher o modelo de cores. Voc&ecirc; pode tamb&eacute;m definir os limites iniciais e finais para a gera&ccedil;ão das cores e alterar os valores obtidos editando o RGB</p>
+<p class=paragrafo style="position:relative;left:6px;width:280px;" >Clique para escolher o modelo de cores. Voc&ecirc; pode tamb&eacute;m definir os limites iniciais e finais para a gera&ccedil;&atilde;o das cores e alterar os valores obtidos editando o RGB</p>
 <div id="imagens" ></div>
 <div id="demo_bg" title="Range slider">
     <span id="demo_highlight"></span>

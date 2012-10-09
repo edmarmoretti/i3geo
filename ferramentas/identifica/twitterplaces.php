@@ -18,7 +18,7 @@ $s = PHP_SHLIB_SUFFIX;
 if(!function_exists('curl_init'))
 {@dl( 'php_curl'.'.'.$s );}
 if(!function_exists('curl_init'))
-{echo "curl não instalado";}
+{echo "curl n&atilde;o instalado";}
 $curl = curl_init();
 //lista de places
 curl_setopt ($curl, CURLOPT_URL, "http://api.twitter.com/1/geo/nearby_places.json?lat=".$_GET["y"]."&long=".$_GET["x"]."&accuracy=0&granularity=neighborhood");

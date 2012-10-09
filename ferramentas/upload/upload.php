@@ -1,6 +1,6 @@
 <?php
 //
-//caso o usu&aacute;rio seja um administrador, ele pode enviar um nome de diret&oacute;rio onde os arquivos serão armazenados
+//caso o usu&aacute;rio seja um administrador, ele pode enviar um nome de diret&oacute;rio onde os arquivos ser&atilde;o armazenados
 //na vari&aacute;vel $dirDestino
 //
 require_once("../../classesphp/pega_variaveis.php");
@@ -34,12 +34,12 @@ if (isset($_FILES['i3GEOuploadshp']['name']))
 	}
 	if(isset($dirDestino) && $dirDestino != ""){
 		if(!isset($editores))
-		{echo "<p class='paragrafo' >Lista de editores não dispon&iacute;vel. Não pode gravar fora do diret&oacute;rio tempor&aacute;rio";paraAguarde();exit;}
+		{echo "<p class='paragrafo' >Lista de editores n&atilde;o dispon&iacute;vel. N&atilde;o pode gravar fora do diret&oacute;rio tempor&aacute;rio";paraAguarde();exit;}
 		$dirmap = $dirDestino;
 		if(verificaEditores($editores) == "nao")
-		{echo "<p class='paragrafo' >Voc&ecirc; não &eacute; um editor cadastrado. Não pode gravar fora do diret&oacute;rio tempor&aacute;rio";paraAguarde();exit;}
+		{echo "<p class='paragrafo' >Voc&ecirc; n&atilde;o &eacute; um editor cadastrado. N&atilde;o pode gravar fora do diret&oacute;rio tempor&aacute;rio";paraAguarde();exit;}
 		if(!file_exists($dirmap))
-		{echo "<p class='paragrafo' >Pasta não existe no servidor";paraAguarde();exit;}
+		{echo "<p class='paragrafo' >Pasta n&atilde;o existe no servidor";paraAguarde();exit;}
 	}
 	//verifica nomes
 	verificaNome($_FILES['i3GEOuploadshp']['name']);

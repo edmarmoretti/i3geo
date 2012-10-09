@@ -2,9 +2,9 @@
 /*jslint plusplus:false,white:false,undef: false, rhino: true, onevar: true, evil: true */
 
 /*
-Title: Sele&ccedil;ão
+Title: Sele&ccedil;&atilde;o
 
-Opera&ccedil;&otilde;es de sele&ccedil;ão de elementos no mapa.
+Opera&ccedil;&otilde;es de sele&ccedil;&atilde;o de elementos no mapa.
 
 Veja:
 
@@ -29,10 +29,10 @@ GNU conforme publicada pela Free Software Foundation;
 
 Este programa &eacute; distribu&iacute;do na expectativa de que seja &uacute;til,
 por&eacute;m, SEM NENHUMA GARANTIA; nem mesmo a garantia impl&iacute;cita
-de COMERCIABILIDADE OU ADEQUAÇÃO A UMA FINALIDADE ESPEC&Iacute;FICA.
+de COMERCIABILIDADE OU ADEQUA&Ccedil;&Atilde;O A UMA FINALIDADE ESPEC&Iacute;FICA.
 Consulte a Licen&ccedil;a P&uacute;blica Geral do GNU para mais detalhes.
 Voc&ecirc; deve ter recebido uma c&oacute;pia da Licen&ccedil;a P&uacute;blica Geral do
-GNU junto com este programa; se não, escreva para a
+GNU junto com este programa; se n&atilde;o, escreva para a
 Free Software Foundation, Inc., no endere&ccedil;o
 59 Temple Street, Suite 330, Boston, MA 02111-1307 USA.
 */
@@ -51,7 +51,7 @@ i3GEOF.selecao = {
 	*/
 	aguarde: "",
 	/*
-		Para efeitos de compatibilidade antes da vers&atilde;o 4.7 que não tinha dicion&aacute;rio
+		Para efeitos de compatibilidade antes da vers&atilde;o 4.7 que n&atilde;o tinha dicion&aacute;rio
 	*/
 	criaJanelaFlutuante: function(){
 		i3GEOF.selecao.iniciaDicionario();
@@ -143,7 +143,7 @@ i3GEOF.selecao = {
 	/*
 	Function: html
 
-	Gera o c&oacute;digo html para apresenta&ccedil;ão das op&ccedil;&otilde;es da ferramenta
+	Gera o c&oacute;digo html para apresenta&ccedil;&atilde;o das op&ccedil;&otilde;es da ferramenta
 
 	Retorno:
 
@@ -173,9 +173,9 @@ i3GEOF.selecao = {
 		'	<div style=margin-left:8px;text-align:left;  >' +
 		'		<p class=paragrafo >' +
 		'		<select title="Tipo de operacao" style=position:relative;top:6px; id=i3GEOselecaotipoOperacao >' +
-		'		<option value="adiciona" >Adicionar à sele&ccedil;ão</option>' +
-		'		<option value="novo" >Nova sele&ccedil;ão</option>' +
-		'		<option value="retira" >Retirar da sele&ccedil;ão</option>' +
+		'		<option value="adiciona" >Adicionar à sele&ccedil;&atilde;o</option>' +
+		'		<option value="novo" >Nova sele&ccedil;&atilde;o</option>' +
+		'		<option value="retira" >Retirar da sele&ccedil;&atilde;o</option>' +
 		'		</select>' +
 		'		<span id=i3GEOselecaoNsel style="position:relative;top:5px;" >0</span></p>' +
 		'		<p class=paragrafo >Temas:<div id=i3GEOselecaoComboTemas style=text-align:left; ></div>' +
@@ -288,7 +288,7 @@ i3GEOF.selecao = {
 	/*
 	Function: criaCombosTemas
 
-	Cria os combos de sele&ccedil;ão de temas
+	Cria os combos de sele&ccedil;&atilde;o de temas
 	*/
 	criaCombosTemas: function(){
 		i3GEO.util.comboTemas(
@@ -352,7 +352,7 @@ i3GEOF.selecao = {
 	/*
 	Function: operacao
 
-	Executa uma opera&ccedil;ão sobre o conjunto de elementos selecionados
+	Executa uma opera&ccedil;&atilde;o sobre o conjunto de elementos selecionados
 
 	Veja:
 
@@ -360,7 +360,7 @@ i3GEOF.selecao = {
 
 	Parametro:
 
-	tipo {String} - tipo de opera&ccedil;ão inverte|limpa
+	tipo {String} - tipo de opera&ccedil;&atilde;o inverte|limpa
 	*/
 	operacao: function(tipo){
 		if(i3GEOF.selecao.aguarde.visibility === "visible")
@@ -388,11 +388,11 @@ i3GEOF.selecao = {
 	/*
 	Function: tiposel
 
-	Executa um tipo de sele&ccedil;ão interativa
+	Executa um tipo de sele&ccedil;&atilde;o interativa
 
 	Parameter:
 
-	obj {objeto dom) - objeto que foi clicado para disparar a opera&ccedil;ão. O valor identifica o tipo de opera&ccedil;ão
+	obj {objeto dom) - objeto que foi clicado para disparar a opera&ccedil;&atilde;o. O valor identifica o tipo de opera&ccedil;&atilde;o
 	*/
 	tiposel: function(obj){
 		if(i3GEOF.selecao.aguarde.visibility === "visible")
@@ -443,13 +443,13 @@ i3GEOF.selecao = {
 	/*
 	Classe: i3GEOF.selecao.box
 
-	Controla o desenho do box para a sele&ccedil;ão e executa a opera&ccedil;ão de sele&ccedil;ão
+	Controla o desenho do box para a sele&ccedil;&atilde;o e executa a opera&ccedil;&atilde;o de sele&ccedil;&atilde;o
 	*/
 	box:{
 		/*
 		Function: inicia
 
-		Marca o in&iacute;cio do desenho do box, capturando a posi&ccedil;ão do mouse
+		Marca o in&iacute;cio do desenho do box, capturando a posi&ccedil;&atilde;o do mouse
 		*/
 		inicia: function(){
 			if($i("i3GEOselecaotemasLigados").value === "")
@@ -593,7 +593,7 @@ i3GEOF.selecao = {
 
 	tema {String} - c&oacute;digo do tema
 
-	tipo {String} - tipo de opera&ccedil;ão adiciona|retira
+	tipo {String} - tipo de opera&ccedil;&atilde;o adiciona|retira
 
 	box {String} - xmin ymin xmax ymax
 	*/
@@ -631,13 +631,13 @@ i3GEOF.selecao = {
 	/*
 	Function: porxy
 
-	Executa a sele&ccedil;ão de elementos de um tema com base em um par de coordenadas xy
+	Executa a sele&ccedil;&atilde;o de elementos de um tema com base em um par de coordenadas xy
 
 	Parametros:
 
 	tema {String} - c&oacute;digo do tema
 
-	tipo {String} - tipo de opera&ccedil;ão adiciona|retira
+	tipo {String} - tipo de opera&ccedil;&atilde;o adiciona|retira
 
 	tolerancia {Integer} - tolerância de busca
 	*/
@@ -657,7 +657,7 @@ i3GEOF.selecao = {
 	/*
 	Classe: i3GEOF.selecao.poligono
 
-	Realiza a sele&ccedil;ão desenhando um pol&iacute;gono no mapa
+	Realiza a sele&ccedil;&atilde;o desenhando um pol&iacute;gono no mapa
 	*/
 	poligono:{
 		/*
@@ -746,7 +746,7 @@ i3GEOF.selecao = {
 		/*
 		Function: termina
 
-		Termina o desenho do pol&iacute;gono e executa a opera&ccedil;ão de sele&ccedil;ão
+		Termina o desenho do pol&iacute;gono e executa a opera&ccedil;&atilde;o de sele&ccedil;&atilde;o
 		*/
 		termina: function(){
 			var pontos,xs,ys,retorna,p,cp,tema=i3GEO.temaAtivo;
@@ -776,7 +776,7 @@ i3GEOF.selecao = {
 	/*
 	Function: criatema
 
-	Cria um novo tema com a sele&ccedil;ão atual
+	Cria um novo tema com a sele&ccedil;&atilde;o atual
 	*/
 	criatema: function(){
 		if(i3GEOF.selecao.aguarde.visibility === "visible")
@@ -968,7 +968,7 @@ i3GEOF.selecao = {
 	/*
 	Function: aplicaselecaoTema
 
-	Realiza a sele&ccedil;ão cruzando um tema com outro
+	Realiza a sele&ccedil;&atilde;o cruzando um tema com outro
 	*/
 	aplicaselecaoTema: function(){
 		if(i3GEOF.selecao.aguarde.visibility === "visible")

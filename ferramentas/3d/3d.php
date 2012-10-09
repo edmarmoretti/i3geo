@@ -42,7 +42,7 @@ if ($temaz=="")
 	}
 	if (file_exists($map3d))
 	{$maptemp = ms_newMapObj($map3d);}
-	if ($maptemp == ""){echo "Arquivo com o relevo não foi encontrado";return;}
+	if ($maptemp == ""){echo "Arquivo com o relevo n&atilde;o foi encontrado";return;}
 }
 $mapa = ms_newMapObj($map_file);
 //if($interface == "googlemaps")
@@ -126,7 +126,7 @@ $texto .= "}
 	solid TRUE
 height [\n";
 fwrite($fp,$texto);
-//fator redu&ccedil;ão de z
+//fator redu&ccedil;&atilde;o de z
 if(($fz == "")||($fz == 0)){$fz = 1;}
 
 for ($y = 0; $y < $sy; $y++)

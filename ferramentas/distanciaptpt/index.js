@@ -5,7 +5,7 @@
 Title: Distância entre pontos
 
 Calcula a distância entre os pontos de um tema e os pontos de outro tema criando uma nova camada.
-Al&eacute;m da distância, podem ser escolhidos itens dos temas de origem e de destino que irão ser mantidos na nova camada.
+Al&eacute;m da distância, podem ser escolhidos itens dos temas de origem e de destino que ir&atilde;o ser mantidos na nova camada.
 
 Veja:
 
@@ -30,10 +30,10 @@ GNU conforme publicada pela Free Software Foundation;
 
 Este programa &eacute; distribu&iacute;do na expectativa de que seja &uacute;til,
 por&eacute;m, SEM NENHUMA GARANTIA; nem mesmo a garantia impl&iacute;cita
-de COMERCIABILIDADE OU ADEQUAÇÃO A UMA FINALIDADE ESPEC&Iacute;FICA.
+de COMERCIABILIDADE OU ADEQUA&Ccedil;&Atilde;O A UMA FINALIDADE ESPEC&Iacute;FICA.
 Consulte a Licen&ccedil;a P&uacute;blica Geral do GNU para mais detalhes.
 Voc&ecirc; deve ter recebido uma c&oacute;pia da Licen&ccedil;a P&uacute;blica Geral do
-GNU junto com este programa; se não, escreva para a
+GNU junto com este programa; se n&atilde;o, escreva para a
 Free Software Foundation, Inc., no endere&ccedil;o
 59 Temple Street, Suite 330, Boston, MA 02111-1307 USA.
 */
@@ -51,7 +51,7 @@ i3GEOF.distanciaptpt = {
 	*/
 	aguarde: "",
 	/*
-		Para efeitos de compatibilidade antes da vers&atilde;o 4.7 que não tinha dicion&aacute;rio
+		Para efeitos de compatibilidade antes da vers&atilde;o 4.7 que n&atilde;o tinha dicion&aacute;rio
 	*/
 	criaJanelaFlutuante: function(){
 		i3GEOF.distanciaptpt.iniciaDicionario();
@@ -94,7 +94,7 @@ i3GEOF.distanciaptpt = {
 	/*
 	Function: html
 
-	Gera o c&oacute;digo html para apresenta&ccedil;ão das op&ccedil;&otilde;es da ferramenta
+	Gera o c&oacute;digo html para apresenta&ccedil;&atilde;o das op&ccedil;&otilde;es da ferramenta
 
 	Retorno:
 
@@ -185,7 +185,7 @@ i3GEOF.distanciaptpt = {
 	/*
 	Function: calcula
 
-	Executa a opera&ccedil;ão de c&aacute;lculo das distâncias
+	Executa a opera&ccedil;&atilde;o de c&aacute;lculo das distâncias
 
 	Veja:
 
@@ -205,7 +205,7 @@ i3GEOF.distanciaptpt = {
 				i3GEOF.distanciaptpt.aguarde.visibility = "visible";
 				fim = function(retorno){
 					if (retorno.data==undefined )
-					{$i("i3GEOdistanciaptptfim").innerHTML = "<p class='paragrafo' >Erro. A opera&ccedil;ão demorou muito.";}
+					{$i("i3GEOdistanciaptptfim").innerHTML = "<p class='paragrafo' >Erro. A opera&ccedil;&atilde;o demorou muito.";}
 					else
 					{i3GEO.atualiza();}
 					i3GEOF.distanciaptpt.aguarde.visibility = "hidden";

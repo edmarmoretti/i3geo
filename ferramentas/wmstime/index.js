@@ -2,7 +2,7 @@
 Title: WMS Time
 
 Acessa um servi&ccedil;o WMS-T, baseado em uma lista pr&eacute;-definida, e monta as imagens em uma sequ&ecirc;ncia temporal.
-As imagens podem ser apresentadas em sequ&ecirc;ncia, simulando uma anima&ccedil;ão.
+As imagens podem ser apresentadas em sequ&ecirc;ncia, simulando uma anima&ccedil;&atilde;o.
 
 Veja:
 
@@ -27,10 +27,10 @@ GNU conforme publicada pela Free Software Foundation;
 
 Este programa &eacute; distribu&iacute;do na expectativa de que seja &uacute;til,
 por&eacute;m, SEM NENHUMA GARANTIA; nem mesmo a garantia impl&iacute;cita
-de COMERCIABILIDADE OU ADEQUAÇÃO A UMA FINALIDADE ESPEC&Iacute;FICA.
+de COMERCIABILIDADE OU ADEQUA&Ccedil;&Atilde;O A UMA FINALIDADE ESPEC&Iacute;FICA.
 Consulte a Licen&ccedil;a P&uacute;blica Geral do GNU para mais detalhes.
 Voc&ecirc; deve ter recebido uma c&oacute;pia da Licen&ccedil;a P&uacute;blica Geral do
-GNU junto com este programa; se não, escreva para a
+GNU junto com este programa; se n&atilde;o, escreva para a
 Free Software Foundation, Inc., no endere&ccedil;o
 59 Temple Street, Suite 330, Boston, MA 02111-1307 USA.
 */
@@ -224,7 +224,7 @@ function escolheuServico(idWMS){
 /*
 Function: iniciaImagens
 
-Inicia a tela de apresenta&ccedil;ão das imagens
+Inicia a tela de apresenta&ccedil;&atilde;o das imagens
 */
 function iniciaImagens(){
 	$i("imagens").innerHTML = "";
@@ -350,7 +350,7 @@ function criaImg(tempo,id){
 /*
 Function: criaImgStatus
 
-Cria um &iacute;cone que permite parar a apresenta&ccedil;ão da anima&ccedil;ão em uma determinada imagem
+Cria um &iacute;cone que permite parar a apresenta&ccedil;&atilde;o da anima&ccedil;&atilde;o em uma determinada imagem
 
 Parametros:
 
@@ -368,7 +368,7 @@ function criaImgStatus(tempo,id){
 /*
 Function: pararImagem
 
-Parar a apresenta&ccedil;ão da anima&ccedil;ão em uma determinada imagem
+Parar a apresenta&ccedil;&atilde;o da anima&ccedil;&atilde;o em uma determinada imagem
 
 Parametro:
 

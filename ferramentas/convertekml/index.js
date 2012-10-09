@@ -3,8 +3,8 @@
 /*
 Title: Converte um tema em kml
 
-Mostra os endere&ccedil;os que permitem acessar o tema no formato KML. Essa ferramenta não processa os dados, apenas constr&oacute;i
-os links para os programas que fazem a conversão ou visualiza&ccedil;ão dos dados em KML vetorial ou do tipo GroundOverlay (via WMS)
+Mostra os endere&ccedil;os que permitem acessar o tema no formato KML. Essa ferramenta n&atilde;o processa os dados, apenas constr&oacute;i
+os links para os programas que fazem a convers&atilde;o ou visualiza&ccedil;&atilde;o dos dados em KML vetorial ou do tipo GroundOverlay (via WMS)
 
 Veja:
 
@@ -29,10 +29,10 @@ GNU conforme publicada pela Free Software Foundation;
 
 Este programa &eacute; distribu&iacute;do na expectativa de que seja &uacute;til,
 por&eacute;m, SEM NENHUMA GARANTIA; nem mesmo a garantia impl&iacute;cita
-de COMERCIABILIDADE OU ADEQUAÇÃO A UMA FINALIDADE ESPEC&Iacute;FICA.
+de COMERCIABILIDADE OU ADEQUA&Ccedil;&Atilde;O A UMA FINALIDADE ESPEC&Iacute;FICA.
 Consulte a Licen&ccedil;a P&uacute;blica Geral do GNU para mais detalhes.
 Voc&ecirc; deve ter recebido uma c&oacute;pia da Licen&ccedil;a P&uacute;blica Geral do
-GNU junto com este programa; se não, escreva para a
+GNU junto com este programa; se n&atilde;o, escreva para a
 Free Software Foundation, Inc., no endere&ccedil;o
 59 Temple Street, Suite 330, Boston, MA 02111-1307 USA.
 */
@@ -44,7 +44,7 @@ Classe: i3GEOF.converteKml
 */
 i3GEOF.converteKml = {
 	/*
-		Para efeitos de compatibilidade antes da vers&atilde;o 4.7 que não tinha dicion&aacute;rio
+		Para efeitos de compatibilidade antes da vers&atilde;o 4.7 que n&atilde;o tinha dicion&aacute;rio
 	*/
 	criaJanelaFlutuante: function(tema,tipo){
 		i3GEOF.converteKml.iniciaDicionario(tema,tipo);
@@ -71,7 +71,7 @@ i3GEOF.converteKml = {
 	/*
 	Function: html
 	
-	Gera o c&oacute;digo html para apresenta&ccedil;ão das op&ccedil;&otilde;es da ferramenta
+	Gera o c&oacute;digo html para apresenta&ccedil;&atilde;o das op&ccedil;&otilde;es da ferramenta
 
 	Parametros:
 	

@@ -22,10 +22,10 @@ GNU conforme publicada pela Free Software Foundation;
 
 Este programa &eacute; distribu&iacute;do na expectativa de que seja &uacute;til,
 por&eacute;m, SEM NENHUMA GARANTIA; nem mesmo a garantia impl&iacute;cita
-de COMERCIABILIDADE OU ADEQUAÇÃO A UMA FINALIDADE ESPEC&Iacute;FICA.
+de COMERCIABILIDADE OU ADEQUA&Ccedil;&Atilde;O A UMA FINALIDADE ESPEC&Iacute;FICA.
 Consulte a Licen&ccedil;a P&uacute;blica Geral do GNU para mais detalhes.
 Voc&ecirc; deve ter recebido uma c&oacute;pia da Licen&ccedil;a P&uacute;blica Geral do
-GNU junto com este programa; se não, escreva para a
+GNU junto com este programa; se n&atilde;o, escreva para a
 Free Software Foundation, Inc., no endere&ccedil;o
 59 Temple Street, Suite 330, Boston, MA 02111-1307 USA.
 */
@@ -58,7 +58,7 @@ i3GEOF.bufferpt = {
 	*/
 	aguarde: "",
 	/*
-		Para efeitos de compatibilidade antes da vers&atilde;o 4.7 que não tinha dicion&aacute;rio
+		Para efeitos de compatibilidade antes da vers&atilde;o 4.7 que n&atilde;o tinha dicion&aacute;rio
 	*/
 	criaJanelaFlutuante: function(){
 		i3GEOF.bufferpt.iniciaDicionario();
@@ -108,7 +108,7 @@ i3GEOF.bufferpt = {
 	/*
 	Function: html
 	
-	Gera o c&oacute;digo html para apresenta&ccedil;ão das op&ccedil;&otilde;es da ferramenta
+	Gera o c&oacute;digo html para apresenta&ccedil;&atilde;o das op&ccedil;&otilde;es da ferramenta
 	
 	Retorno:
 	
@@ -126,8 +126,8 @@ i3GEOF.bufferpt = {
 	
 	Cria a janela flutuante para controle da ferramenta.
 	
-	Os parâmetros x e y são utilizados para a defini&ccedil;ão das propriedades i3GEOF.bufferpt.x e i3GEOF.bufferpt.y. Se não forem fornecidos,
-	seus valores permanecerão como 0. Essas propriedades podem tamb&eacute;m ser definidas pela fun&ccedil;ão que ativou a ferramenta.
+	Os parâmetros x e y s&atilde;o utilizados para a defini&ccedil;&atilde;o das propriedades i3GEOF.bufferpt.x e i3GEOF.bufferpt.y. Se n&atilde;o forem fornecidos,
+	seus valores permanecer&atilde;o como 0. Essas propriedades podem tamb&eacute;m ser definidas pela fun&ccedil;&atilde;o que ativou a ferramenta.
 	
 	Parametros:
 	
@@ -187,7 +187,7 @@ i3GEOF.bufferpt = {
 				fim = function(retorno){
 					i3GEOF.bufferpt.aguarde.visibility = "hidden";
 					if (retorno.data === undefined )
-					{alert("Erro. A opera&ccedil;ão demorou muito.");}
+					{alert("Erro. A opera&ccedil;&atilde;o demorou muito.");}
 					else
 					{i3GEO.atualiza();}
 				};

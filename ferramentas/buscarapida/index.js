@@ -27,10 +27,10 @@ GNU conforme publicada pela Free Software Foundation;
 
 Este programa &eacute; distribu&iacute;do na expectativa de que seja &uacute;til,
 por&eacute;m, SEM NENHUMA GARANTIA; nem mesmo a garantia impl&iacute;cita
-de COMERCIABILIDADE OU ADEQUAÇÃO A UMA FINALIDADE ESPEC&Iacute;FICA.
+de COMERCIABILIDADE OU ADEQUA&Ccedil;&Atilde;O A UMA FINALIDADE ESPEC&Iacute;FICA.
 Consulte a Licen&ccedil;a P&uacute;blica Geral do GNU para mais detalhes.
 Voc&ecirc; deve ter recebido uma c&oacute;pia da Licen&ccedil;a P&uacute;blica Geral do
-GNU junto com este programa; se não, escreva para a
+GNU junto com este programa; se n&atilde;o, escreva para a
 Free Software Foundation, Inc., no endere&ccedil;o
 59 Temple Street, Suite 330, Boston, MA 02111-1307 USA.
 */
@@ -42,7 +42,7 @@ i3GEObuscaRapida = {
 	/*
 	Property: servico
 	
-	Endere&ccedil;o do servi&ccedil;o de busca que ser&aacute; utilizado. Esse servi&ccedil;o deve ser um Web Service no padrão reconhecido pelo i3Geo.
+	Endere&ccedil;o do servi&ccedil;o de busca que ser&aacute; utilizado. Esse servi&ccedil;o deve ser um Web Service no padr&atilde;o reconhecido pelo i3Geo.
 	
 	Type:
 	{String}
@@ -54,9 +54,9 @@ i3GEObuscaRapida = {
 	/*
 	Property: servicowms
 	
-	Endere&ccedil;o do servi&ccedil;o de busca que ser&aacute; utilizado para retornar a representa&ccedil;ão cartogr&aacute;fica do elemento encontrado.
+	Endere&ccedil;o do servi&ccedil;o de busca que ser&aacute; utilizado para retornar a representa&ccedil;&atilde;o cartogr&aacute;fica do elemento encontrado.
 	
-	Esse servi&ccedil;o deve ser um Web Service no padrão OGC com o parâmetro adicional "gid" indicando o id do elemento que ser&aacute; mostrado na tela.
+	Esse servi&ccedil;o deve ser um Web Service no padr&atilde;o OGC com o parâmetro adicional "gid" indicando o id do elemento que ser&aacute; mostrado na tela.
 	
 	Type:
 	{String}
@@ -68,13 +68,13 @@ i3GEObuscaRapida = {
 	/*
 	Property: funcaoZoom
 	
-	Nome da fun&ccedil;ão que ser&aacute; executada ao ser clicado o botão de zoom para o elemento encontrado.
+	Nome da fun&ccedil;&atilde;o que ser&aacute; executada ao ser clicado o bot&atilde;o de zoom para o elemento encontrado.
 	
-	O botão de zoom &eacute; mostrado logo ap&oacute;s cada elemento encontrado na busca.
+	O bot&atilde;o de zoom &eacute; mostrado logo ap&oacute;s cada elemento encontrado na busca.
 	
-	Alterando-se essa op&ccedil;ão, pode-se executar o busca r&aacute;pida como um gadget.
+	Alterando-se essa op&ccedil;&atilde;o, pode-se executar o busca r&aacute;pida como um gadget.
 	
-	Veja i3GEObuscaRapida.zoom para conhecer os parâmetros que essa fun&ccedil;ão ir&aacute; receber
+	Veja i3GEObuscaRapida.zoom para conhecer os parâmetros que essa fun&ccedil;&atilde;o ir&aacute; receber
 	
 	Type:
 	{String}
@@ -139,7 +139,7 @@ i3GEObuscaRapida = {
 	
 	locaplic {String} - url onde o i3geo est&aacute; instalado, pe, http://localhost/i3geo
 	
-	resultado {Function} - fun&ccedil;ão que ser&aacute; executada para processar o resultado da busca no servico definido em i3GEObuscaRapida.servicowms. O default &eacute; i3GEObuscaRapida.montaResultado
+	resultado {Function} - fun&ccedil;&atilde;o que ser&aacute; executada para processar o resultado da busca no servico definido em i3GEObuscaRapida.servicowms. O default &eacute; i3GEObuscaRapida.montaResultado
 	
 	servicosexternos {boolean} - indica se a busca ser&aacute; feita nos servi&ccedil;os de busca externos
 	
@@ -181,7 +181,7 @@ i3GEObuscaRapida = {
 
 	Parametro:
 	
-	retorno {JSON} - resultado da fun&ccedil;ão i3GEO.php.buscaRapida
+	retorno {JSON} - resultado da fun&ccedil;&atilde;o i3GEO.php.buscaRapida
 	*/
 	montaResultadoTemas: function(retorno){
 		var i,ins = "Nada encontrado nos temas ou nenhum tema permite busca.<br>";
@@ -205,13 +205,13 @@ i3GEObuscaRapida = {
 	/*
 	Function: montaResultado
 	
-	Mostra o resultado da busca. Esta &eacute; a fun&ccedil;ão default utilizada pelo m&eacute;todo inicia
+	Mostra o resultado da busca. Esta &eacute; a fun&ccedil;&atilde;o default utilizada pelo m&eacute;todo inicia
 	
 	Ap&oacute;s o resultado ser mostrado, &eacute; feita a busca na base de temas, executando-se o m&eacute;todo buscaemtemas 
 	
 	Parametro:
 	
-	retorno {JSON} - resultado da fun&ccedil;ão i3GEO.php.buscaRapida
+	retorno {JSON} - resultado da fun&ccedil;&atilde;o i3GEO.php.buscaRapida
 	*/
 	montaResultado: function(retorno){
 		var i,j,layer,
@@ -254,7 +254,7 @@ i3GEObuscaRapida = {
 	
 	Acrescenta nos resultados encontrados os dados localizados na base de temas do i3geo
 	
-	Essa fun&ccedil;ão &eacute; cahamda pelo m&eacute;todo montaResultado
+	Essa fun&ccedil;&atilde;o &eacute; cahamda pelo m&eacute;todo montaResultado
 	
 	Parameters:
 	
@@ -286,11 +286,11 @@ i3GEObuscaRapida = {
 	/*
 	Function: zoom
 	
-	Aplica a opera&ccedil;ão de zoom quando o usu&aacute;rio clica no botão de adi&ccedil;ão de um resultado ao mapa.
+	Aplica a opera&ccedil;&atilde;o de zoom quando o usu&aacute;rio clica no bot&atilde;o de adi&ccedil;&atilde;o de um resultado ao mapa.
 	
-	Essa &eacute; a fun&ccedil;ão default utilizada pela ferramenta, podendo ser substitu&iacute;da por outra se desejado.
+	Essa &eacute; a fun&ccedil;&atilde;o default utilizada pela ferramenta, podendo ser substitu&iacute;da por outra se desejado.
 	
-	Al&eacute;m de enquadrar o mapa à uma extensão geogr&aacute;fica espec&iacute;fica, uma nova camada &eacute; adicionada, mostrando o limite da ocorr&ecirc;ncia desejada.
+	Al&eacute;m de enquadrar o mapa à uma extens&atilde;o geogr&aacute;fica espec&iacute;fica, uma nova camada &eacute; adicionada, mostrando o limite da ocorr&ecirc;ncia desejada.
 	
 	Veja:
 	
@@ -357,11 +357,11 @@ i3GEObuscaRapida = {
 	/*
 	Function: mostraxy
 	
-	Mostra no mapa um retângulo representando a extensão geogr&aacute;fica de uma ocorr&ecirc;ncia encontrada na busca
+	Mostra no mapa um retângulo representando a extens&atilde;o geogr&aacute;fica de uma ocorr&ecirc;ncia encontrada na busca
 	
 	Parameters:
 	
-	texto {String} - coordenadas representando a extensão geogr&aacute;fica do elemento
+	texto {String} - coordenadas representando a extens&atilde;o geogr&aacute;fica do elemento
 	
 	tipo {string} - wkt|extent
 	*/

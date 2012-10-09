@@ -4,7 +4,7 @@
 /*
 Title: Tabela de atributos
 
-Mostra a tabela de atributos de um tema com op&ccedil;&otilde;es de sele&ccedil;ão, estat&iacute;stica, gr&aacute;ficos e relat&oacute;rios.
+Mostra a tabela de atributos de um tema com op&ccedil;&otilde;es de sele&ccedil;&atilde;o, estat&iacute;stica, gr&aacute;ficos e relat&oacute;rios.
 O tema utilizado &eacute; o que estiver definido em i3GEO.temaAtivo
 
 Veja:
@@ -30,10 +30,10 @@ GNU conforme publicada pela Free Software Foundation;
 
 Este programa &eacute; distribu&iacute;do na expectativa de que seja &uacute;til,
 por&eacute;m, SEM NENHUMA GARANTIA; nem mesmo a garantia impl&iacute;cita
-de COMERCIABILIDADE OU ADEQUAÇÃO A UMA FINALIDADE ESPEC&Iacute;FICA.
+de COMERCIABILIDADE OU ADEQUA&Ccedil;&Atilde;O A UMA FINALIDADE ESPEC&Iacute;FICA.
 Consulte a Licen&ccedil;a P&uacute;blica Geral do GNU para mais detalhes.
 Voc&ecirc; deve ter recebido uma c&oacute;pia da Licen&ccedil;a P&uacute;blica Geral do
-GNU junto com este programa; se não, escreva para a
+GNU junto com este programa; se n&atilde;o, escreva para a
 Free Software Foundation, Inc., no endere&ccedil;o
 59 Temple Street, Suite 330, Boston, MA 02111-1307 USA.
 */
@@ -81,7 +81,7 @@ i3GEOF.tabela = {
 	
 	Parametros utilizados para o gr&aacute;fico.
 	
-	&Eacute; definido em fun&ccedil;ão do tipo de gr&aacute;fico escolhido
+	&Eacute; definido em fun&ccedil;&atilde;o do tipo de gr&aacute;fico escolhido
 	
 	Type:
 	{string}
@@ -94,7 +94,7 @@ i3GEOF.tabela = {
 	*/
 	nomeArquivoGr: "",
 	/*
-		Para efeitos de compatibilidade antes da vers&atilde;o 4.7 que não tinha dicion&aacute;rio
+		Para efeitos de compatibilidade antes da vers&atilde;o 4.7 que n&atilde;o tinha dicion&aacute;rio
 	*/
 	criaJanelaFlutuante: function(){
 		i3GEOF.tabela.iniciaDicionario();
@@ -229,7 +229,7 @@ i3GEOF.tabela = {
 	/*
 	Function: html
 	
-	Gera o c&oacute;digo html para apresenta&ccedil;ão das op&ccedil;&otilde;es da ferramenta
+	Gera o c&oacute;digo html para apresenta&ccedil;&atilde;o das op&ccedil;&otilde;es da ferramenta
 	
 	Retorno:
 	
@@ -346,7 +346,7 @@ i3GEOF.tabela = {
 			i3GEO.janela.minimiza("i3GEOF.tabela");
 		};
 		//cria a janela flutuante
-		titulo = "<div style='z-index:1;position:absolute' id='i3GEOFtabelaComboCabeca' >------</div>&nbsp;&nbsp;&nbsp;"+$trad(1,i3GEOF.tabela.dicionario)+" <a class=ajuda_usuario target=_blank href='" + i3GEO.configura.locaplic + "/ajuda_usuario.php?idcategoria=5&idajuda=39' >&nbsp;&nbsp;&nbsp;</a>";
+		titulo = "<div  id='i3GEOFtabelaComboCabeca' class='comboTemasCabecalho'>   ------</div>&nbsp;&nbsp;&nbsp;"+$trad(1,i3GEOF.tabela.dicionario)+" <a class=ajuda_usuario target=_blank href='" + i3GEO.configura.locaplic + "/ajuda_usuario.php?idcategoria=5&idajuda=39' >&nbsp;&nbsp;&nbsp;</a>";
 		janela = i3GEO.janela.cria(
 			"500px",
 			"400px",
@@ -395,7 +395,7 @@ i3GEOF.tabela = {
 	/*
 	Function: ativaAutoAtualiza
 	
-	Ativa ou desativa a atualiza&ccedil;ão autom&aacute;tica da tabela quando o usu&aacute;rio navega no mapa
+	Ativa ou desativa a atualiza&ccedil;&atilde;o autom&aacute;tica da tabela quando o usu&aacute;rio navega no mapa
 	*/
 	ativaAutoAtualiza:function(obj){
 		if(obj.checked == true){
@@ -456,7 +456,7 @@ i3GEOF.tabela = {
 	/*
 	Function: montaTabela
 	
-	Monta a visualiza&ccedil;ão da tabela de atributos
+	Monta a visualiza&ccedil;&atilde;o da tabela de atributos
 	*/
 	montaTabela: function(retorno){
 		if (retorno.data !== undefined)
@@ -547,7 +547,7 @@ i3GEOF.tabela = {
 	/*
 	Function: excluiColuna
 	
-	Exclui uma coluna da visualiza&ccedil;ão da tabela
+	Exclui uma coluna da visualiza&ccedil;&atilde;o da tabela
 	*/
 	excluiColuna: function(coluna,cid){
 		i3GEOF.tabela.aguarde.visibility = "visible";
@@ -654,7 +654,7 @@ i3GEOF.tabela = {
 	/*
 	Function: listaMarcados
 	
-	Retorna um array com os &iacute;ndices dos registros que estão marcados.
+	Retorna um array com os &iacute;ndices dos registros que est&atilde;o marcados.
 	*/
 	listaMarcados: function(){
 		var lista = [],
@@ -697,7 +697,7 @@ i3GEOF.tabela = {
 	/*
 	Function: limpaSelecao
 	
-	Limpa a sele&ccedil;ão do tema da tabela
+	Limpa a sele&ccedil;&atilde;o do tema da tabela
 	*/
 	limpaSelecao: function(){
 		if(i3GEOF.tabela.aguarde.visibility === "visible")
@@ -716,7 +716,7 @@ i3GEOF.tabela = {
 	/*
 	Function: criaNovoTema
 	
-	Cria um novo tema contendo a sele&ccedil;ão existente
+	Cria um novo tema contendo a sele&ccedil;&atilde;o existente
 	*/
 	criaNovoTema: function(){
 		if(i3GEOF.tabela.aguarde.visibility === "visible")
@@ -954,7 +954,7 @@ i3GEOF.tabela = {
 				ins += "<td>"+i3GEO.util.comboSimNao("i3GEOtabelaplota3d","nao")+"</td></tr>";
 			}
 			if (id === "setasdv"){
-				ins += "<tr><td>Plota as marcas do desvio padrão?</td>";
+				ins += "<tr><td>Plota as marcas do desvio padr&atilde;o?</td>";
 				ins += "<td>"+i3GEO.util.comboSimNao("i3GEOtabelasetasdv","nao")+"</td></tr>";
 			}
 			tsl = [];		if (id === "margem"){
@@ -1196,7 +1196,7 @@ i3GEOF.tabela = {
 	/*
 	Function: combocor
 	
-	Gera uma lista de cores no padrão do R
+	Gera uma lista de cores no padr&atilde;o do R
 	*/
 	combocor: function(id,def,s){
 		var combo = "<select name="+id+" id="+id+" >";
@@ -1305,14 +1305,14 @@ i3GEOF.tabela = {
 	/*
 	Function: fusaoGrafico
 	
-	Faz a fusão do mapa com o gr&aacute;fico gerado
+	Faz a fus&atilde;o do mapa com o gr&aacute;fico gerado
 	*/
 	fusaoGrafico: function(){
 		if(i3GEOF.tabela.aguarde.visibility === "visible")
 		{return;}
 		i3GEOF.tabela.aguarde.visibility = "visible";	
 		if (i3GEOF.tabela.imagemG === ""){
-			alert("O gr&aacute;fico ainda não foi gerado.");
+			alert("O gr&aacute;fico ainda n&atilde;o foi gerado.");
 			i3GEOF.tabela.aguarde.visibility = "hidden";
 		}
 		else{
@@ -1334,7 +1334,7 @@ i3GEOF.tabela = {
 	/*
 	Function: montaPar
 	
-	Monta os parâmetros para um determinado tipo de gr&aacute;fico, que serão utilizados na chamada ajax de cria&ccedil;ão do gr&aacute;fico
+	Monta os parâmetros para um determinado tipo de gr&aacute;fico, que ser&atilde;o utilizados na chamada ajax de cria&ccedil;&atilde;o do gr&aacute;fico
 	*/
 	montapar: function(parametros){
 		try{
@@ -1375,7 +1375,7 @@ i3GEOF.tabela = {
 	/*
 	Function: relatorioTabela
 	
-	Monta o relat&oacute;rio padrão em uma nova janela
+	Monta o relat&oacute;rio padr&atilde;o em uma nova janela
 	*/
 	relatorioTabela: function(){
 		try{

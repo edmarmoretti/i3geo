@@ -24,9 +24,9 @@ Timeline_parameters='bundle=true';
 /*
 Title: Linha do tempo
 
-Cria um gr&aacute;fico de linha do tempo, tendo como base os atributos dos elementos de um tema vis&iacute;veis na extensão geogr&aacute;fica
-do mapa atual. Para possibilitar a gera&ccedil;ão do gr&aacute;fico, o layer deve estar configurado corretamente, contendo os METADATA
-espec&iacute;ficos para essa ferramenta (veja o editor de mapfile do sistema de administra&ccedil;ão do i3Geo). Essa ferramenta &eacute; baseada
+Cria um gr&aacute;fico de linha do tempo, tendo como base os atributos dos elementos de um tema vis&iacute;veis na extens&atilde;o geogr&aacute;fica
+do mapa atual. Para possibilitar a gera&ccedil;&atilde;o do gr&aacute;fico, o layer deve estar configurado corretamente, contendo os METADATA
+espec&iacute;ficos para essa ferramenta (veja o editor de mapfile do sistema de administra&ccedil;&atilde;o do i3Geo). Essa ferramenta &eacute; baseada
 no pacote TIMELINE, distribu&iacute;do junto com o i3Geo.
 
 Veja:
@@ -52,10 +52,10 @@ GNU conforme publicada pela Free Software Foundation;
 
 Este programa &eacute; distribu&iacute;do na expectativa de que seja &uacute;til,
 por&eacute;m, SEM NENHUMA GARANTIA; nem mesmo a garantia impl&iacute;cita
-de COMERCIABILIDADE OU ADEQUAÇÃO A UMA FINALIDADE ESPEC&Iacute;FICA.
+de COMERCIABILIDADE OU ADEQUA&Ccedil;&Atilde;O A UMA FINALIDADE ESPEC&Iacute;FICA.
 Consulte a Licen&ccedil;a P&uacute;blica Geral do GNU para mais detalhes.
 Voc&ecirc; deve ter recebido uma c&oacute;pia da Licen&ccedil;a P&uacute;blica Geral do
-GNU junto com este programa; se não, escreva para a
+GNU junto com este programa; se n&atilde;o, escreva para a
 Free Software Foundation, Inc., no endere&ccedil;o
 59 Temple Street, Suite 330, Boston, MA 02111-1307 USA.
 */
@@ -112,7 +112,7 @@ function inicializa(){
 /*
 Function: bandas
 
-Cria o objeto bandInfos com os parâmetros necess&aacute;rios para a cria&ccedil;ão do gr&aacute;fico
+Cria o objeto bandInfos com os parâmetros necess&aacute;rios para a cria&ccedil;&atilde;o do gr&aacute;fico
 */
 function bandas(){
 	tl_el = $i("tl");
@@ -160,7 +160,7 @@ function bandas(){
 /*
 Function: carregaDados
 
-Obt&eacute;m os dados que serão inclu&iacute;dos no gr&aacute;fico. &Eacute; criado o objeto Timeline chamado tl
+Obt&eacute;m os dados que ser&atilde;o inclu&iacute;dos no gr&aacute;fico. &Eacute; criado o objeto Timeline chamado tl
 
 Veja:
 
@@ -182,7 +182,7 @@ function carregaDados(){
 /*
 Function: tituloover
 
-Indica no mapa a localiza&ccedil;ão de um evento quando o usu&aacute;rio passa o mouse sobre o t&iacute;tulo de um evento
+Indica no mapa a localiza&ccedil;&atilde;o de um evento quando o usu&aacute;rio passa o mouse sobre o t&iacute;tulo de um evento
 
 Parametro:
 
@@ -241,7 +241,7 @@ function tituloclique(wkt){
 /*
 Function: tituloout
 
-Remove do mapa a marca de localiza&ccedil;ão do evento quando o usu&aacute;rio move o mouse para fora do t&iacute;tulo do evento
+Remove do mapa a marca de localiza&ccedil;&atilde;o do evento quando o usu&aacute;rio move o mouse para fora do t&iacute;tulo do evento
 
 */
 function tituloout(){

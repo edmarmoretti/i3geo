@@ -4,9 +4,9 @@
 /*
 Title: Buffer
 
-Realiza o c&aacute;lculo de "buffer" (região de entorno) dos elementos selecionados de um tema e adiciona uma nova
+Realiza o c&aacute;lculo de "buffer" (regi&atilde;o de entorno) dos elementos selecionados de um tema e adiciona uma nova
 camada ao mapa.
-Utiliza a fun&ccedil;ão buffer do Mapserver.
+Utiliza a fun&ccedil;&atilde;o buffer do Mapserver.
 
 Veja:
 
@@ -31,10 +31,10 @@ GNU conforme publicada pela Free Software Foundation;
 
 Este programa &eacute; distribu&iacute;do na expectativa de que seja &uacute;til,
 por&eacute;m, SEM NENHUMA GARANTIA; nem mesmo a garantia impl&iacute;cita
-de COMERCIABILIDADE OU ADEQUAÇÃO A UMA FINALIDADE ESPEC&Iacute;FICA.
+de COMERCIABILIDADE OU ADEQUA&Ccedil;&Atilde;O A UMA FINALIDADE ESPEC&Iacute;FICA.
 Consulte a Licen&ccedil;a P&uacute;blica Geral do GNU para mais detalhes.
 Voc&ecirc; deve ter recebido uma c&oacute;pia da Licen&ccedil;a P&uacute;blica Geral do
-GNU junto com este programa; se não, escreva para a
+GNU junto com este programa; se n&atilde;o, escreva para a
 Free Software Foundation, Inc., no endere&ccedil;o
 59 Temple Street, Suite 330, Boston, MA 02111-1307 USA.
 */
@@ -52,7 +52,7 @@ i3GEOF.buffer = {
 	*/
 	aguarde: "",
 	/*
-		Para efeitos de compatibilidade antes da vers&atilde;o 4.7 que não tinha dicion&aacute;rio
+		Para efeitos de compatibilidade antes da vers&atilde;o 4.7 que n&atilde;o tinha dicion&aacute;rio
 	*/
 	criaJanelaFlutuante: function(){
 		i3GEOF.buffer.iniciaDicionario();
@@ -95,7 +95,7 @@ i3GEOF.buffer = {
 	/*
 	Function: html
 
-	Gera o c&oacute;digo html para apresenta&ccedil;ão das op&ccedil;&otilde;es da ferramenta
+	Gera o c&oacute;digo html para apresenta&ccedil;&atilde;o das op&ccedil;&otilde;es da ferramenta
 
 	Retorno:
 
@@ -177,7 +177,7 @@ i3GEOF.buffer = {
 	/*
 	Function: criaBuffer
 
-	Executa a opera&ccedil;ão de gera&ccedil;ão do buffer
+	Executa a opera&ccedil;&atilde;o de gera&ccedil;&atilde;o do buffer
 
 	Veja:
 
@@ -198,7 +198,7 @@ i3GEOF.buffer = {
 				fim = function(retorno){
 					i3GEOF.buffer.aguarde.visibility = "hidden";
 					if (retorno.data === undefined )
-					{$i("i3GEObufferfim").innerHTML = "Erro. A opera&ccedil;ão demorou muito.";}
+					{$i("i3GEObufferfim").innerHTML = "Erro. A opera&ccedil;&atilde;o demorou muito.";}
 					else
 					{i3GEO.atualiza();}
 				};

@@ -4,9 +4,9 @@
 /*
 Title: Nuvem de tags
 
-Mostra uma nuvem de tags baseado nos tags de cada tema, definido no sistema de administra&ccedil;ão do i3Geo.
+Mostra uma nuvem de tags baseado nos tags de cada tema, definido no sistema de administra&ccedil;&atilde;o do i3Geo.
 Ao escolher um tag, &eacute; feita a busca dos temas que os cont&eacute;m, sendo mostrados na &aacute;rvore de temas. Opcionalmente, o
-usu&aacute;rio pode escolher um RSS para que seja feito o cruzamento entre os tags encontrados. Dessa forma, são apresentadas as not&iacute;cias
+usu&aacute;rio pode escolher um RSS para que seja feito o cruzamento entre os tags encontrados. Dessa forma, s&atilde;o apresentadas as not&iacute;cias
 referentes aos tags de cada tema.
 
 Veja:
@@ -32,10 +32,10 @@ GNU conforme publicada pela Free Software Foundation;
 
 Este programa &eacute; distribu&iacute;do na expectativa de que seja &uacute;til,
 por&eacute;m, SEM NENHUMA GARANTIA; nem mesmo a garantia impl&iacute;cita
-de COMERCIABILIDADE OU ADEQUAÇÃO A UMA FINALIDADE ESPEC&Iacute;FICA.
+de COMERCIABILIDADE OU ADEQUA&Ccedil;&Atilde;O A UMA FINALIDADE ESPEC&Iacute;FICA.
 Consulte a Licen&ccedil;a P&uacute;blica Geral do GNU para mais detalhes.
 Voc&ecirc; deve ter recebido uma c&oacute;pia da Licen&ccedil;a P&uacute;blica Geral do
-GNU junto com este programa; se não, escreva para a
+GNU junto com este programa; se n&atilde;o, escreva para a
 Free Software Foundation, Inc., no endere&ccedil;o
 59 Temple Street, Suite 330, Boston, MA 02111-1307 USA.
 */
@@ -66,7 +66,7 @@ i3GEOF.nuvemtags = {
 	*/
 	inicio: 0,
 	/*
-		Para efeitos de compatibilidade antes da vers&atilde;o 4.7 que não tinha dicion&aacute;rio
+		Para efeitos de compatibilidade antes da vers&atilde;o 4.7 que n&atilde;o tinha dicion&aacute;rio
 	*/
 	criaJanelaFlutuante: function(){
 		i3GEOF.nuvemtags.iniciaDicionario();
@@ -163,7 +163,7 @@ i3GEOF.nuvemtags = {
 	/*
 	Function: html
 
-	Gera o c&oacute;digo html para apresenta&ccedil;ão das op&ccedil;&otilde;es da ferramenta
+	Gera o c&oacute;digo html para apresenta&ccedil;&atilde;o das op&ccedil;&otilde;es da ferramenta
 
 	Retorno:
 

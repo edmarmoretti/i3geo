@@ -7,7 +7,7 @@ Title: An&aacute;lise de Geometrias
 Permite capturar geometrias de uma ou mais camadas e executar opera&ccedil;&otilde;es de an&aacute;lise.
 Ap&oacute;s o usu&aacute;rio selecionar elementos de um tema, a geometria pode ser capturada, ou seja, ela &eacute; armazenada no servidor para
 poder receber opera&ccedil;&otilde;es de an&aacute;lise. As opera&ccedil;&otilde;es envolvem c&aacute;lculos, como &aacute;rea e per&iacute;metro, al&eacute;m de processos de cruzamento
-entre geometrias. Ap&oacute;s realizar uma opera&ccedil;ão, o resultado &eacute; listado ou pode ser adicionado ao mapa como uma nova camada.
+entre geometrias. Ap&oacute;s realizar uma opera&ccedil;&atilde;o, o resultado &eacute; listado ou pode ser adicionado ao mapa como uma nova camada.
 
 As geometrias armazenadas ficam dispon&iacute;veis temporariamente, assim como o mapfile do mapa atual.
 
@@ -32,10 +32,10 @@ GNU conforme publicada pela Free Software Foundation;
 
 Este programa &eacute; distribu&iacute;do na expectativa de que seja &uacute;til,
 por&eacute;m, SEM NENHUMA GARANTIA; nem mesmo a garantia impl&iacute;cita
-de COMERCIABILIDADE OU ADEQUAÇÃO A UMA FINALIDADE ESPEC&Iacute;FICA.
+de COMERCIABILIDADE OU ADEQUA&Ccedil;&Atilde;O A UMA FINALIDADE ESPEC&Iacute;FICA.
 Consulte a Licen&ccedil;a P&uacute;blica Geral do GNU para mais detalhes.
 Voc&ecirc; deve ter recebido uma c&oacute;pia da Licen&ccedil;a P&uacute;blica Geral do
-GNU junto com este programa; se não, escreva para a
+GNU junto com este programa; se n&atilde;o, escreva para a
 Free Software Foundation, Inc., no endere&ccedil;o
 59 Temple Street, Suite 330, Boston, MA 02111-1307 USA.
 */
@@ -53,7 +53,7 @@ i3GEOF.analisaGeometrias = {
 	*/
 	aguarde: "",
 	/*
-		Para efeitos de compatibilidade antes da vers&atilde;o 4.7 que não tinha dicion&aacute;rio
+		Para efeitos de compatibilidade antes da vers&atilde;o 4.7 que n&atilde;o tinha dicion&aacute;rio
 	*/
 	criaJanelaFlutuante: function(){
 		i3GEOF.analisaGeometrias.iniciaDicionario();
@@ -152,7 +152,7 @@ i3GEOF.analisaGeometrias = {
 	/*
 	Function: html
 
-	Gera o c&oacute;digo html para apresenta&ccedil;ão das op&ccedil;&otilde;es da ferramenta
+	Gera o c&oacute;digo html para apresenta&ccedil;&atilde;o das op&ccedil;&otilde;es da ferramenta
 
 	Retorno:
 
@@ -188,7 +188,7 @@ i3GEOF.analisaGeometrias = {
 		ins += '	</div>';
 		ins += '	<div class=guiaobj id="i3GEOanalisageometrias3obj" style="left:1px;display:none;">';
 		ins += '			<p class=paragrafo ><input style="cursor:pointer;vertical-align:text-bottom" type=checkbox id=i3geoanalisageometriassemprecalcula /> Recalcula a &aacute;rea e o per&iacute;metro das novas geometrias';
-		ins += '			<p class=paragrafo >Opera&ccedil;&otilde;es que obt&eacute;m descri&ccedil;&otilde;es sobre a geometria, retornando valores que são adicionados aos itens da geometria:';
+		ins += '			<p class=paragrafo >Opera&ccedil;&otilde;es que obt&eacute;m descri&ccedil;&otilde;es sobre a geometria, retornando valores que s&atilde;o adicionados aos itens da geometria:';
 		ins += '			<p class=paragrafo ><select id=i3GEOanalisageometriasselecaocalculo style="position:relative;top:-3px;"  >';
 		ins += '				<option value="" selected >---</option>';
 		ins += '				<option value=area >&Aacute;rea</option>';
@@ -290,7 +290,7 @@ i3GEOF.analisaGeometrias = {
 
 	Seleciona um elemento do tema ativo quando o usu&aacute;rio clica no mapa
 
-	&Eacute; executado no evento de clique no mapa, definido na inicializa&ccedil;ão da ferramenta.
+	&Eacute; executado no evento de clique no mapa, definido na inicializa&ccedil;&atilde;o da ferramenta.
 
 	Veja:
 
@@ -310,7 +310,7 @@ i3GEOF.analisaGeometrias = {
 	/*
 	Function: comboTemas
 
-	Cria o combo com os temas dispon&iacute;veis (temas ligados) para sele&ccedil;ão.
+	Cria o combo com os temas dispon&iacute;veis (temas ligados) para sele&ccedil;&atilde;o.
 
 	Veja:
 
@@ -340,7 +340,7 @@ i3GEOF.analisaGeometrias = {
 	/*
 	Function: capturaGeo
 
-	Captura as geometrias selecionadas. As geometrias capturadas são armazenadas como objetos
+	Captura as geometrias selecionadas. As geometrias capturadas s&atilde;o armazenadas como objetos
 	serializados no servidor, e podem ser utilizadas nas opera&ccedil;&otilde;es de an&aacute;lise. A captura &eacute; feita sob o tema ativo e os
 	elementos selecionados.
 
@@ -388,7 +388,7 @@ i3GEOF.analisaGeometrias = {
 			p = i3GEO.configura.locaplic+"/classesphp/mapa_controle.php?g_sid="+i3GEO.configura.sid+"&funcao=listageometrias",
 			cp = new cpaint();
 		montalistageometrias = function(retorno){
-			if(retorno.data != "") //não comparar com !==
+			if(retorno.data != "") //n&atilde;o comparar com !==
 			{
 				var ins,cor,temp,j,k,i;
 				ins = "<p class=paragrafo ><input id=i3GEOanalisageometriasbotao4 type=button size=20  value='Excluir marcados' />&nbsp;&nbsp;";
@@ -497,7 +497,7 @@ i3GEOF.analisaGeometrias = {
 	/*
 	Function: pegaGeometriasMarcadas
 
-	Retorna uma lista com os ids das geometrias que estão marcadas (checkbox)
+	Retorna uma lista com os ids das geometrias que est&atilde;o marcadas (checkbox)
 	*/
 	pegaGeometriasMarcadas:function(){
 		var inputs = $i("i3GEOanalisageometriaslistadegeometrias").getElementsByTagName("input"),

@@ -4,7 +4,7 @@
 /*
 Title: Legenda gr&aacute;fica do mapa
 
-Edita a legenda que &eacute; mostrada no corpo do mapa, controlando o tamanho, posi&ccedil;ão, fontes, etc.
+Edita a legenda que &eacute; mostrada no corpo do mapa, controlando o tamanho, posi&ccedil;&atilde;o, fontes, etc.
 
 Veja:
 
@@ -29,10 +29,10 @@ GNU conforme publicada pela Free Software Foundation;
 
 Este programa &eacute; distribu&iacute;do na expectativa de que seja &uacute;til,
 por&eacute;m, SEM NENHUMA GARANTIA; nem mesmo a garantia impl&iacute;cita
-de COMERCIABILIDADE OU ADEQUAÇÃO A UMA FINALIDADE ESPEC&Iacute;FICA.
+de COMERCIABILIDADE OU ADEQUA&Ccedil;&Atilde;O A UMA FINALIDADE ESPEC&Iacute;FICA.
 Consulte a Licen&ccedil;a P&uacute;blica Geral do GNU para mais detalhes.
 Voc&ecirc; deve ter recebido uma c&oacute;pia da Licen&ccedil;a P&uacute;blica Geral do
-GNU junto com este programa; se não, escreva para a
+GNU junto com este programa; se n&atilde;o, escreva para a
 Free Software Foundation, Inc., no endere&ccedil;o
 59 Temple Street, Suite 330, Boston, MA 02111-1307 USA.
 */
@@ -51,7 +51,7 @@ i3GEOF.opcoesLegenda = {
 	*/
 	aguarde: "",
 	/*
-		Para efeitos de compatibilidade antes da vers&atilde;o 4.7 que não tinha dicion&aacute;rio
+		Para efeitos de compatibilidade antes da vers&atilde;o 4.7 que n&atilde;o tinha dicion&aacute;rio
 	*/
 	criaJanelaFlutuante: function(){
 		i3GEOF.opcoesLegenda.iniciaDicionario();
@@ -105,7 +105,7 @@ i3GEOF.opcoesLegenda = {
 	/*
 	Function: html
 
-	Gera o c&oacute;digo html para apresenta&ccedil;ão das op&ccedil;&otilde;es da ferramenta
+	Gera o c&oacute;digo html para apresenta&ccedil;&atilde;o das op&ccedil;&otilde;es da ferramenta
 
 	Retorno:
 
@@ -131,7 +131,7 @@ i3GEOF.opcoesLegenda = {
 			'<img alt="aquarela.gif" style=cursor:pointer src="'+i3GEO.configura.locaplic+'/imagens/aquarela.gif" onclick="i3GEOF.opcoesLegenda.corj(\'i3GEOopcoesLegendaoutlinecolor\')" />' +
 			'</td></tr>' +
 			'<tr><td>&nbsp;</td><td></td></tr>' +
-			'<tr><td>Posi&ccedil;ão:</td><td>' +
+			'<tr><td>Posi&ccedil;&atilde;o:</td><td>' +
 			'	<select id=i3GEOopcoesLegendaposition >' +
 			'		<option value=101 >sup. esquerdo</option>' +
 			'		<option value=107 >sup. centro</option>' +
@@ -162,7 +162,7 @@ i3GEOF.opcoesLegenda = {
 			$inputText("","","i3GEOopcoesLegendalabelsize","",4,"") +
 			'<td></tr>' +
 			'<tr><td>&nbsp;</td><td></td></tr>' +
-			'<tr><td>Fonte: (teste a fonte mais adequada para apresenta&ccedil;ão correta da acentua&ccedil;ão)</td>' +
+			'<tr><td>Fonte: (teste a fonte mais adequada para apresenta&ccedil;&atilde;o correta da acentua&ccedil;&atilde;o)</td>' +
 			'	<td id=i3GEOopcoesLegendafontef >aguarde...</td>' +
 			'</tr></table><br>'+
 			'<p class=paragrafo >' +

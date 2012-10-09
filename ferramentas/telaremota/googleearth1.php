@@ -22,7 +22,7 @@ Title: Interface GoogleEarth para a ferramenta tela remota
 
 Clone de um mapa aberto no i3Geo.
 
-O clone monitora as mudan&ccedil;as no mapa original e aplica a extensão geogr&aacute;fica e recarrega o mapfile utilizado no original.
+O clone monitora as mudan&ccedil;as no mapa original e aplica a extens&atilde;o geogr&aacute;fica e recarrega o mapfile utilizado no original.
 
 A abertura de um clone s&oacute; &eacute; poss&iacute;vel tendo-se o c&oacute;digo de abertura, gerado pela ferramenta Tela Remota do i3Geo
 
@@ -49,10 +49,10 @@ GNU conforme publicada pela Free Software Foundation;
 
 Este programa &eacute; distribu&iacute;do na expectativa de que seja &uacute;til,
 por&eacute;m, SEM NENHUMA GARANTIA; nem mesmo a garantia impl&iacute;cita
-de COMERCIABILIDADE OU ADEQUAÇÃO A UMA FINALIDADE ESPEC&Iacute;FICA.
+de COMERCIABILIDADE OU ADEQUA&Ccedil;&Atilde;O A UMA FINALIDADE ESPEC&Iacute;FICA.
 Consulte a Licen&ccedil;a P&uacute;blica Geral do GNU para mais detalhes.
 Voc&ecirc; deve ter recebido uma c&oacute;pia da Licen&ccedil;a P&uacute;blica Geral do
-GNU junto com este programa; se não, escreva para a
+GNU junto com este programa; se n&atilde;o, escreva para a
 Free Software Foundation, Inc., no endere&ccedil;o
 59 Temple Street, Suite 330, Boston, MA 02111-1307 USA.
 */

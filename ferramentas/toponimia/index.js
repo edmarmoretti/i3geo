@@ -4,8 +4,8 @@
 /*
 Title: Topon&iacute;mia de um tema
 
-Ativa a apresenta&ccedil;ão da topon&iacute;mia de um tema.
-A topon&iacute;mia &eacute; definida em fun&ccedil;ão das colunas existentes na tabela de atributos.
+Ativa a apresenta&ccedil;&atilde;o da topon&iacute;mia de um tema.
+A topon&iacute;mia &eacute; definida em fun&ccedil;&atilde;o das colunas existentes na tabela de atributos.
 
 Veja:
 
@@ -30,10 +30,10 @@ GNU conforme publicada pela Free Software Foundation;
 
 Este programa &eacute; distribu&iacute;do na expectativa de que seja &uacute;til,
 por&eacute;m, SEM NENHUMA GARANTIA; nem mesmo a garantia impl&iacute;cita
-de COMERCIABILIDADE OU ADEQUAÇÃO A UMA FINALIDADE ESPEC&Iacute;FICA.
+de COMERCIABILIDADE OU ADEQUA&Ccedil;&Atilde;O A UMA FINALIDADE ESPEC&Iacute;FICA.
 Consulte a Licen&ccedil;a P&uacute;blica Geral do GNU para mais detalhes.
 Voc&ecirc; deve ter recebido uma c&oacute;pia da Licen&ccedil;a P&uacute;blica Geral do
-GNU junto com este programa; se não, escreva para a
+GNU junto com este programa; se n&atilde;o, escreva para a
 Free Software Foundation, Inc., no endere&ccedil;o
 59 Temple Street, Suite 330, Boston, MA 02111-1307 USA.
 */
@@ -53,7 +53,7 @@ i3GEOF.toponimia = {
 	*/
 	aguarde: "",
 	/*
-		Para efeitos de compatibilidade antes da vers&atilde;o 4.7 que não tinha dicion&aacute;rio
+		Para efeitos de compatibilidade antes da vers&atilde;o 4.7 que n&atilde;o tinha dicion&aacute;rio
 	*/
 	criaJanelaFlutuante: function(){
 		i3GEOF.toponimia.iniciaDicionario();
@@ -109,7 +109,7 @@ i3GEOF.toponimia = {
 				{onclick:{fn: i3GEOF.toponimia.cria}}
 			);
 			//
-			//pega a lista de itens e chama a fun&ccedil;ão de montagem das op&ccedil;&otilde;es de escolha
+			//pega a lista de itens e chama a fun&ccedil;&atilde;o de montagem das op&ccedil;&otilde;es de escolha
 			//
 			i3GEO.util.comboItens(
 				"i3GEOtoponimiaListaItens",
@@ -128,7 +128,7 @@ i3GEOF.toponimia = {
 	/*
 	Function: html
 
-	Gera o c&oacute;digo html para apresenta&ccedil;ão das op&ccedil;&otilde;es da ferramenta
+	Gera o c&oacute;digo html para apresenta&ccedil;&atilde;o das op&ccedil;&otilde;es da ferramenta
 
 	Retorno:
 
@@ -144,7 +144,7 @@ i3GEOF.toponimia = {
 		'	</ul>' +
 		'</div><br>' +
 		'	<div class=guiaobj id="i3GEOtoponimiaguia1obj" style="left:1px;90%;display:none;">' +
-		'			<p class="paragrafo" >Escolha o item que cont&eacute;m os textos que serão mostrados no mapa<br>' +
+		'			<p class="paragrafo" >Escolha o item que cont&eacute;m os textos que ser&atilde;o mostrados no mapa<br>' +
 		'			<div id=i3GEOtoponimiaDivListaItens ></div>' +
 		'			<br>' +
 		'			<p class="paragrafo" ><input style="cursor:pointer" type="checkbox" id="i3GEOtoponimianovotema" />&nbsp;Adiciona a topon&iacute;mia no tema atual (deixe desmarcado para criar como uma nova camada)' +
@@ -272,7 +272,7 @@ i3GEOF.toponimia = {
 			return;
 		}
 		//cria a janela flutuante
-		titulo = "<div style='z-index:1;position:absolute' id='i3GEOFtoponimiaComboCabeca' >------</div><span style=margin-left:60px>"+$trad("x56")+"</span><a class=ajuda_usuario target=_blank href='" + i3GEO.configura.locaplic + "/ajuda_usuario.php?idcategoria=5&idajuda=36' >&nbsp;&nbsp;&nbsp;</a>";
+		titulo = "<div  id='i3GEOFtoponimiaComboCabeca' class='comboTemasCabecalho'>   ------</div><span style=margin-left:60px>"+$trad("x56")+"</span><a class=ajuda_usuario target=_blank href='" + i3GEO.configura.locaplic + "/ajuda_usuario.php?idcategoria=5&idajuda=36' >&nbsp;&nbsp;&nbsp;</a>";
 		janela = i3GEO.janela.cria(
 			"390px",
 			"190px",
@@ -382,7 +382,7 @@ i3GEOF.toponimia = {
 	/*
 	Function:
 
-	Testa a cria&ccedil;ão da topon&iacute;mia gerando uma imagem tempor&aacute;ria
+	Testa a cria&ccedil;&atilde;o da topon&iacute;mia gerando uma imagem tempor&aacute;ria
 
 	Veja:
 

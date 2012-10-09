@@ -4,7 +4,7 @@ Title: SIBEA-MMA (PHP)
 
 Acessa os web services do MMA para recuperar dados sobre educadores ambientais.
 
-Por ser executado dentro do I3Geo, boa parte dos parâmetros são obtidos da vari&aacute;vel de se&ccedil;ão.
+Por ser executado dentro do I3Geo, boa parte dos parâmetros s&atilde;o obtidos da vari&aacute;vel de se&ccedil;&atilde;o.
 
 Arquivos: 
 
@@ -26,10 +26,10 @@ GNU conforme publicada pela Free Software Foundation;
 
 Este programa &eacute; distribu&iacute;do na expectativa de que seja &uacute;til,
 por&eacute;m, SEM NENHUMA GARANTIA; nem mesmo a garantia impl&iacute;cita
-de COMERCIABILIDADE OU ADEQUAÇÃO A UMA FINALIDADE ESPEC&Iacute;FICA.
+de COMERCIABILIDADE OU ADEQUA&Ccedil;&Atilde;O A UMA FINALIDADE ESPEC&Iacute;FICA.
 Consulte a Licen&ccedil;a P&uacute;blica Geral do GNU para mais detalhes.
 Voc&ecirc; deve ter recebido uma c&oacute;pia da Licen&ccedil;a P&uacute;blica Geral do
-GNU junto com este programa; se não, escreva para a
+GNU junto com este programa; se n&atilde;o, escreva para a
 Free Software Foundation, Inc., no endere&ccedil;o
 59 Temple Street, Suite 330, Boston, MA 02111-1307 USA.
 
@@ -134,17 +134,17 @@ function adicionatema()
 	if ($filtro == "tipoTitulacaoMaxima")
 	{
 		$resultado = $soapclient->call("sibeaTitulacaoMaxima",$valor);
-		$nometema = "Titula&ccedil;ão m&aacute;xima";		
+		$nometema = "Titula&ccedil;&atilde;o m&aacute;xima";		
 	}
 	if ($filtro == "tipoFormacao")
 	{
 		$resultado = $soapclient->call("sibeaFormacao",$valor);
-		$nometema = "Forma&ccedil;ão";		
+		$nometema = "Forma&ccedil;&atilde;o";		
 	}
 	if ($filtro == "tipoAreaFormacao")
 	{
 		$resultado = $soapclient->call("sibeaGrandeArea",$valor);
-		$nometema = "Grande &aacute;rea de forma&ccedil;ão";		
+		$nometema = "Grande &aacute;rea de forma&ccedil;&atilde;o";		
 	}
 	//
 	//converte siafi-ibge

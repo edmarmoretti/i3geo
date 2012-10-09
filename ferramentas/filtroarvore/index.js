@@ -26,10 +26,10 @@ GNU conforme publicada pela Free Software Foundation;
 
 Este programa &eacute; distribu&iacute;do na expectativa de que seja &uacute;til,
 por&eacute;m, SEM NENHUMA GARANTIA; nem mesmo a garantia impl&iacute;cita
-de COMERCIABILIDADE OU ADEQUAÇÃO A UMA FINALIDADE ESPEC&Iacute;FICA.
+de COMERCIABILIDADE OU ADEQUA&Ccedil;&Atilde;O A UMA FINALIDADE ESPEC&Iacute;FICA.
 Consulte a Licen&ccedil;a P&uacute;blica Geral do GNU para mais detalhes.
 Voc&ecirc; deve ter recebido uma c&oacute;pia da Licen&ccedil;a P&uacute;blica Geral do
-GNU junto com este programa; se não, escreva para a
+GNU junto com este programa; se n&atilde;o, escreva para a
 Free Software Foundation, Inc., no endere&ccedil;o
 59 Temple Street, Suite 330, Boston, MA 02111-1307 USA.
 */
@@ -48,7 +48,7 @@ i3GEOF.filtroarvore = {
 	*/
 	aguarde: "",
 	/*
-		Para efeitos de compatibilidade antes da vers&atilde;o 4.7 que não tinha dicion&aacute;rio
+		Para efeitos de compatibilidade antes da vers&atilde;o 4.7 que n&atilde;o tinha dicion&aacute;rio
 	*/
 	criaJanelaFlutuante: function(){
 		i3GEOF.filtroarvore.iniciaDicionario();
@@ -90,26 +90,26 @@ i3GEOF.filtroarvore = {
 	/*
 	Function: html
 
-	Gera o c&oacute;digo html para apresenta&ccedil;ão das op&ccedil;&otilde;es da ferramenta
+	Gera o c&oacute;digo html para apresenta&ccedil;&atilde;o das op&ccedil;&otilde;es da ferramenta
 
 	Retorno:
 
 	String com o c&oacute;digo html
 	*/
 	html:function(){
-		var ins = '<p class=paragrafo >Escolha o tipo de filtro ou "nenhum" para não filtrar<br><br>' +
+		var ins = '<p class=paragrafo >Escolha o tipo de filtro ou "nenhum" para n&atilde;o filtrar<br><br>' +
 			'<select onchange="i3GEO.arvoreDeCamadas.ARVORE = null;i3GEO.arvoreDeCamadas.FILTRO = this.value;i3GEO.arvoreDeCamadas.atualiza(i3GEO.arvoreDeCamadas.CAMADAS,true)">' +
 			'<option value="naofaznada">---</option>' +
 			'<option value="">remover filtro</option>' +
 			'<option value="ligados">ligados</option>' +
 			'<option value="desligados">desligados</option>' +
-			'<option value="selecionados">com sele&ccedil;ão</option>' +
+			'<option value="selecionados">com sele&ccedil;&atilde;o</option>' +
 			'<option value="download">permitem download</option>' +
-			'<option value="wms">são do tipo WMS</option>' +
-			'<option value="raster">são do tipo raster</option>' +
+			'<option value="wms">s&atilde;o do tipo WMS</option>' +
+			'<option value="raster">s&atilde;o do tipo raster</option>' +
 			'<option value="toponimia">contem apenas texto</option>' +
 			'</select><br><br>' +
-			'Opera&ccedil;ão<br><br>' +
+			'Opera&ccedil;&atilde;o<br><br>' +
 			'<select onchange="i3GEOF.filtroarvore.lote(this)" >' +
 			'<option value="">---</option>' +
 			'<option value="excluir">excluir</option>' +
@@ -151,7 +151,7 @@ i3GEOF.filtroarvore = {
 	/*
 	Function: lote
 
-	Executa uma opera&ccedil;ão em lote sobre as camadas mostradas no mapa
+	Executa uma opera&ccedil;&atilde;o em lote sobre as camadas mostradas no mapa
 
 	*/
 	lote: function(objeto){

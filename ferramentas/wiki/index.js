@@ -3,10 +3,10 @@
 /*
 Title: Wikip&eacute;dia
 
-Busca na Wikip&eacute;dia artigos relacionados à extensão geogr&aacute;fica do mapa atual.
+Busca na Wikip&eacute;dia artigos relacionados à extens&atilde;o geogr&aacute;fica do mapa atual.
 
 A busca utiliza um Web Service do site Geonames. Para utilizar esse servi&ccedil;o &eacute; necess&aacute;rio cadastrar um usu&aacute;rio.
-Por padrão, o i3Geo utiliza o usu&aacute;rio "i3geo", que pode ter sua cota de acesso di&aacute;rio ultrapassada.
+Por padr&atilde;o, o i3Geo utiliza o usu&aacute;rio "i3geo", que pode ter sua cota de acesso di&aacute;rio ultrapassada.
 Para criar um usu&aacute;rio novo, utilize o site http://www.geonames.org/login e edite o programa i3geo/ferramentas/wiki/funcoes.php
 para alterar a vari&aacute;vel $usuarioGeonames
 
@@ -33,10 +33,10 @@ GNU conforme publicada pela Free Software Foundation;
 
 Este programa &eacute; distribu&iacute;do na expectativa de que seja &uacute;til,
 por&eacute;m, SEM NENHUMA GARANTIA; nem mesmo a garantia impl&iacute;cita
-de COMERCIABILIDADE OU ADEQUAÇÃO A UMA FINALIDADE ESPEC&Iacute;FICA.
+de COMERCIABILIDADE OU ADEQUA&Ccedil;&Atilde;O A UMA FINALIDADE ESPEC&Iacute;FICA.
 Consulte a Licen&ccedil;a P&uacute;blica Geral do GNU para mais detalhes.
 Voc&ecirc; deve ter recebido uma c&oacute;pia da Licen&ccedil;a P&uacute;blica Geral do
-GNU junto com este programa; se não, escreva para a
+GNU junto com este programa; se n&atilde;o, escreva para a
 Free Software Foundation, Inc., no endere&ccedil;o
 59 Temple Street, Suite 330, Boston, MA 02111-1307 USA.
 */
@@ -54,7 +54,7 @@ i3GEOF.wiki = {
 	*/
 	aguarde: "",
 	/*
-		Para efeitos de compatibilidade antes da vers&atilde;o 4.7 que não tinha dicion&aacute;rio
+		Para efeitos de compatibilidade antes da vers&atilde;o 4.7 que n&atilde;o tinha dicion&aacute;rio
 	*/
 	criaJanelaFlutuante: function(){
 		i3GEOF.wiki.iniciaDicionario();
@@ -108,7 +108,7 @@ i3GEOF.wiki = {
 	/*
 	Function: html
 
-	Gera o c&oacute;digo html para apresenta&ccedil;ão das op&ccedil;&otilde;es da ferramenta
+	Gera o c&oacute;digo html para apresenta&ccedil;&atilde;o das op&ccedil;&otilde;es da ferramenta
 
 	Retorno:
 
@@ -193,7 +193,7 @@ i3GEOF.wiki = {
 		mostrar = function(retorno){
 			i3GEOF.wiki.aguarde.visibility = "hidden";
 			if (retorno.data === 'undefined' ){
-				$i("i3GEOwikiLista").innerHTML = "Erro. A opera&ccedil;ão demorou muito.";
+				$i("i3GEOwikiLista").innerHTML = "Erro. A opera&ccedil;&atilde;o demorou muito.";
 				return;
 			}
 			$i("i3GEOwikiLista").innerHTML = retorno.data+"Navegue no mapa para atualizar a lista de resultados";

@@ -36,7 +36,7 @@ if($_POST["i3GEOimportarwmcurl"])
 	if(!function_exists('curl_init'))
 	{@dl( 'php_curl'.'.'.$s );}
 	if(!function_exists('curl_init'))
-	{echo "curl não instalado";}
+	{echo "curl n&atilde;o instalado";}
 	else{
 		$curl = curl_init();
 		curl_setopt ($curl, CURLOPT_URL, $_POST["i3GEOimportarwmcurl"]);

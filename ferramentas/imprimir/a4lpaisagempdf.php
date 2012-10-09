@@ -34,7 +34,7 @@ if (array_search( "MapScript", $exts) != TRUE)
 require("../../classesphp/funcoes_gerais.php");
 $nomes = nomeRandomico();
 //
-//substitui a string de conexão com o banco em cada layer se for necess&aacute;rio
+//substitui a string de conex&atilde;o com o banco em cada layer se for necess&aacute;rio
 //
 $map = ms_newMapObj($map_file);
 $temp = str_replace(".map","xxx.map",$map_file);
@@ -139,11 +139,11 @@ $pdf->Rect(3, 20, 65, $nH+2, 'D');//Legenda
 $pdf->Rect(70, 20, $nW+2, $nH+2, 'D');//Mapa
 $pdf->Image($pathMapa, 71, 21, $nW, $nH);
 $pdf->SetFont('Arial','',9);
-//$pdf->Text(14,$nH-1,"Proje&ccedil;ão Geogr&aacute;ficas");
+//$pdf->Text(14,$nH-1,"Proje&ccedil;&atilde;o Geogr&aacute;ficas");
 //$pdf->Text(14,$nH+3,"Sistema de Refer&ecirc;ncia:  SAD69");
 $pdf->Image("../../imagens/i3geo1.jpg", 23, $nH+5, 25);
 $pdf->SetFont('Arial','',9);
-$textMsg = "Proje&ccedil;ão Geogr&aacute;fica - datum SAD-69";
+$textMsg = "Proje&ccedil;&atilde;o Geogr&aacute;fica - datum SAD-69";
 $xMsg = 292/2 - $pdf->GetStringWidth($textMsg)/2;
 $pdf->Text($xMsg,$nH+28,$textMsg);
 $wLegendaMax = 63;

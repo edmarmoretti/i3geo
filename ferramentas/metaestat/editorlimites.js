@@ -123,7 +123,7 @@ var editorlimites = {
 	/*
 	Function: html
 
-	Gera o código html para apresentação das opções da ferramenta
+	Gera o código html para apresentaç&atilde;o das opções da ferramenta
 
 	Retorno:
 

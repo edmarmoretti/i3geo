@@ -36,10 +36,10 @@ GNU conforme publicada pela Free Software Foundation;
 
 Este programa &eacute; distribu&iacute;do na expectativa de que seja &uacute;til,
 por&eacute;m, SEM NENHUMA GARANTIA; nem mesmo a garantia impl&iacute;cita
-de COMERCIABILIDADE OU ADEQUAÇÃO A UMA FINALIDADE ESPEC&Iacute;FICA.
+de COMERCIABILIDADE OU ADEQUA&Ccedil;&Atilde;O A UMA FINALIDADE ESPEC&Iacute;FICA.
 Consulte a Licen&ccedil;a P&uacute;blica Geral do GNU para mais detalhes.
 Voc&ecirc; deve ter recebido uma c&oacute;pia da Licen&ccedil;a P&uacute;blica Geral do
-GNU junto com este programa; se não, escreva para a
+GNU junto com este programa; se n&atilde;o, escreva para a
 Free Software Foundation, Inc., no endere&ccedil;o
 59 Temple Street, Suite 330, Boston, MA 02111-1307 USA.
 */
@@ -47,7 +47,7 @@ Free Software Foundation, Inc., no endere&ccedil;o
 Function: inicializa
 
 Cria o mapa do Google Maps e adiciona os bot&otilde;es especiais do i3Geo. Define os eventos que disparam modifica&ccedil;&otilde;es no mapa
-principal do i3Geo quando &eacute; feita a navega&ccedil;ão.
+principal do i3Geo quando &eacute; feita a navega&ccedil;&atilde;o.
 */ 
 function inicializa(){
 	window.parent.i3GEO.util.criaPin("boxpingoogle",window.parent.i3GEO.configura.locaplic+'/imagens/dot1red.gif',"5px","5px");
@@ -204,7 +204,7 @@ function moveMapa(bd)
 /*
 Function: ondegoogle
 
-Mostra, no mapa principal, um retângulo indicando a extensão geogr&aacute;fica do mapa mostrado na janela do GM
+Mostra, no mapa principal, um retângulo indicando a extens&atilde;o geogr&aacute;fica do mapa mostrado na janela do GM
 */
 function ondegoogle()
 {
@@ -228,7 +228,7 @@ function ondegoogle()
 /*
 Function: panTogoogle
 
-Desloca o mapa principal conforme a extensão geogr&aacute;fica do mapa do GM
+Desloca o mapa principal conforme a extens&atilde;o geogr&aacute;fica do mapa do GM
 */
 function panTogoogle()
 {
@@ -245,7 +245,7 @@ function panTogoogle()
 /*
 Function: bbox
 
-Obt&eacute;m os valores de extensão geogr&aacute;fica do GM e converte para uma string no formato aceito pelo i3Geo
+Obt&eacute;m os valores de extens&atilde;o geogr&aacute;fica do GM e converte para uma string no formato aceito pelo i3Geo
 
 Return:
 
@@ -262,7 +262,7 @@ function bbox()
 /*
 Function: criaWMS
 
-Formata uma URL que transforma o mapa atual do i3Geo em um WMS, possibilitando sua inclusão como uma camada na janela GM.
+Formata uma URL que transforma o mapa atual do i3Geo em um WMS, possibilitando sua inclus&atilde;o como uma camada na janela GM.
 
 Return:
 
@@ -298,7 +298,7 @@ function ativaI3geo()
 /*
 Function: ativaI3geoRota
 
-Inicia a fun&ccedil;ão de cria&ccedil;ão de rotas, solicitando a indica&ccedil;ão do primeiro ponto
+Inicia a fun&ccedil;&atilde;o de cria&ccedil;&atilde;o de rotas, solicitando a indica&ccedil;&atilde;o do primeiro ponto
 */
 function ativaI3geoRota()
 {
@@ -309,7 +309,7 @@ function ativaI3geoRota()
 /*
 Function: parametrosRota
 
-Obt&eacute;m os parâmetros para cria&ccedil;ão da rota, inclusive o ponto de destino
+Obt&eacute;m os parâmetros para cria&ccedil;&atilde;o da rota, inclusive o ponto de destino
 */
 function parametrosRota(overlay,latlng)
 {

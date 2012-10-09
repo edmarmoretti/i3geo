@@ -31,7 +31,7 @@ es:"",
 it:""
 }],
 6: [{
-pt:"Considerar na listagem a regi&atilde;o mostrada no mapa (se essa op&ccedil;ão for desmarcada, ser&aacute; considerada a extens&atilde;o geogr&aacute;fica do mapa inicial)",
+pt:"Considerar na listagem a regi&atilde;o mostrada no mapa (se essa op&ccedil;&atilde;o for desmarcada, ser&aacute; considerada a extens&atilde;o geogr&aacute;fica do mapa inicial)",
 en:"",
 es:"",
 it:""
@@ -67,7 +67,7 @@ es:"",
 it:""
 }],
 12: [{
-pt:"Limpa a sele&ccedil;ão do mapa",
+pt:"Limpa a sele&ccedil;&atilde;o do mapa",
 en:"",
 es:"",
 it:""
@@ -79,7 +79,7 @@ es:"",
 it:""
 }],
 14: [{
-pt:"Cria um novo tema no mapa contendo a sele&ccedil;ão",
+pt:"Cria um novo tema no mapa contendo a sele&ccedil;&atilde;o",
 en:"",
 es:"",
 it:""

@@ -3,7 +3,7 @@
 /*
 Title: Tela remota
 
-Mostra um link que permite clonar o mapa atual e exib&iacute;-lo em uma outra tela. O mapa clonado &eacute; atualizado de tempos em tempos, permitindo a visualiza&ccedil;ão remota do mapa aberto poroutro usu&aacute;rio.
+Mostra um link que permite clonar o mapa atual e exib&iacute;-lo em uma outra tela. O mapa clonado &eacute; atualizado de tempos em tempos, permitindo a visualiza&ccedil;&atilde;o remota do mapa aberto poroutro usu&aacute;rio.
 
 Veja:
 
@@ -28,10 +28,10 @@ GNU conforme publicada pela Free Software Foundation;
 
 Este programa &eacute; distribu&iacute;do na expectativa de que seja &uacute;til,
 por&eacute;m, SEM NENHUMA GARANTIA; nem mesmo a garantia impl&iacute;cita
-de COMERCIABILIDADE OU ADEQUAÇÃO A UMA FINALIDADE ESPEC&Iacute;FICA.
+de COMERCIABILIDADE OU ADEQUA&Ccedil;&Atilde;O A UMA FINALIDADE ESPEC&Iacute;FICA.
 Consulte a Licen&ccedil;a P&uacute;blica Geral do GNU para mais detalhes.
 Voc&ecirc; deve ter recebido uma c&oacute;pia da Licen&ccedil;a P&uacute;blica Geral do
-GNU junto com este programa; se não, escreva para a
+GNU junto com este programa; se n&atilde;o, escreva para a
 Free Software Foundation, Inc., no endere&ccedil;o
 59 Temple Street, Suite 330, Boston, MA 02111-1307 USA.
 */
@@ -43,7 +43,7 @@ Classe: i3GEOF.telaremota
 */
 i3GEOF.telaremota = {
 	/*
-		Para efeitos de compatibilidade antes da vers&atilde;o 4.7 que não tinha dicion&aacute;rio
+		Para efeitos de compatibilidade antes da vers&atilde;o 4.7 que n&atilde;o tinha dicion&aacute;rio
 	*/
 	criaJanelaFlutuante: function(tema){
 		i3GEOF.telaremota.iniciaDicionario(tema);
@@ -70,7 +70,7 @@ i3GEOF.telaremota = {
 	/*
 	Function: html
 
-	Gera o c&oacute;digo html para apresenta&ccedil;ão das op&ccedil;&otilde;es da ferramenta
+	Gera o c&oacute;digo html para apresenta&ccedil;&atilde;o das op&ccedil;&otilde;es da ferramenta
 
 	Veja:
 
@@ -83,7 +83,7 @@ i3GEOF.telaremota = {
 	html:function(divid,tema){
 		var cp,p,ins;
 		ins = '<p class="paragrafo" >Utilize o link abaixo para abrir o mapa em outro navegador ou computador.</p>';
-		ins += '<p class="paragrafo" >Não feche essa janela ou a janela remota não receber&aacute; o valor da extensão geogr&aacute;fica do mapa original.</p>';
+		ins += '<p class="paragrafo" >N&atilde;o feche essa janela ou a janela remota n&atilde;o receber&aacute; o valor da extens&atilde;o geogr&aacute;fica do mapa original.</p>';
 		ins += '<p class="paragrafo" ><div id=i3GEOtelaremotaResultado style=text-align:left ></div>';
 		$i(divid).innerHTML += ins;
 		mostraLink = function(retorno){
@@ -153,7 +153,7 @@ i3GEOF.telaremota = {
 	/*
 	Function: gravaExtent
 
-	Grava a extensão geogr&aacute;fica do mapa atual na section PHP aberta pelo mapa atual.
+	Grava a extens&atilde;o geogr&aacute;fica do mapa atual na section PHP aberta pelo mapa atual.
 	*/
 	gravaExtent: function(){
 		var p,cp,temp;

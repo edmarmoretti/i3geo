@@ -3,9 +3,9 @@
 /*
 Title: Busca fotos
 
-Busca fotos em servi&ccedil;os como Panoramio e Flicker na região mostrada no mapa.
+Busca fotos em servi&ccedil;os como Panoramio e Flicker na regi&atilde;o mostrada no mapa.
 
-As fotos obtidas são mostradas e o usu&aacute;rio pode passar o mouse sobre elas para ver a posi&ccedil;ão no mapa.
+As fotos obtidas s&atilde;o mostradas e o usu&aacute;rio pode passar o mouse sobre elas para ver a posi&ccedil;&atilde;o no mapa.
 O c&oacute;digo para realizar a busca depende das APIs de cada servi&ccedil;o. Quando necess&aacute;rio, utiliza-se
 buscafotos/funcoes.php para realizar a busca.
 
@@ -30,10 +30,10 @@ GNU conforme publicada pela Free Software Foundation;
 
 Este programa &eacute; distribu&iacute;do na expectativa de que seja &uacute;til,
 por&eacute;m, SEM NENHUMA GARANTIA; nem mesmo a garantia impl&iacute;cita
-de COMERCIABILIDADE OU ADEQUAÇÃO A UMA FINALIDADE ESPEC&Iacute;FICA.
+de COMERCIABILIDADE OU ADEQUA&Ccedil;&Atilde;O A UMA FINALIDADE ESPEC&Iacute;FICA.
 Consulte a Licen&ccedil;a P&uacute;blica Geral do GNU para mais detalhes.
 Voc&ecirc; deve ter recebido uma c&oacute;pia da Licen&ccedil;a P&uacute;blica Geral do
-GNU junto com este programa; se não, escreva para a
+GNU junto com este programa; se n&atilde;o, escreva para a
 Free Software Foundation, Inc., no endere&ccedil;o
 59 Temple Street, Suite 330, Boston, MA 02111-1307 USA.
 */
@@ -57,7 +57,7 @@ i3GEOF.buscaFotos = {
 	*/
 	chaveFlicker: "b170cde3c3064ca44b1ae0fbe747575d",
 	/*
-		Para efeitos de compatibilidade antes da vers&atilde;o 4.7 que não tinha dicion&aacute;rio
+		Para efeitos de compatibilidade antes da vers&atilde;o 4.7 que n&atilde;o tinha dicion&aacute;rio
 	*/
 	criaJanelaFlutuante: function(){
 		i3GEOF.buscaFotos.iniciaDicionario();
@@ -120,7 +120,7 @@ i3GEOF.buscaFotos = {
 	/*
 	Function: html
 	
-	Gera o c&oacute;digo html para apresenta&ccedil;ão das op&ccedil;&otilde;es da ferramenta
+	Gera o c&oacute;digo html para apresenta&ccedil;&atilde;o das op&ccedil;&otilde;es da ferramenta
 	
 	Retorno:
 	
@@ -131,7 +131,7 @@ i3GEOF.buscaFotos = {
 		ins += '<div id=i3GEObuscafotosaviso style=display:block >';
 		ins += '<p class="paragrafo" >As fotos mostradas aqui s&atilde;o de responsabilidade dos servi&ccedil;os de hospedagem utilizados na busca e podem abranger tem&aacute;ticas diversas.';
 		ins += '<p class="paragrafo" >A busca &eacute; feita apenas para a regi&atilde;o de abrang&ecirc;ncia do mapa atual.';
-		ins += '<p class="paragrafo" >A restri&ccedil;ão de escala &eacute; necess&aacute;ria para melhorar a performance da busca.';
+		ins += '<p class="paragrafo" >A restri&ccedil;&atilde;o de escala &eacute; necess&aacute;ria para melhorar a performance da busca.';
     	if(i3GEO.parametros.mapscale > 30000001){
     		ins += '<p class="paragrafo" >O mapa atual est&aacute; fora do limite de escala.';
     		ins += '<p class="paragrafo" ><input id=i3GEObuscafotosbotao3 size=20  type=button value="Ajustar" />';
@@ -243,7 +243,7 @@ i3GEOF.buscaFotos = {
 	/*
 	Function: busca
 	
-	Procura as fotos no servidor escolhido e chama a fun&ccedil;ão correta de apresenta&ccedil;ão das fotos.
+	Procura as fotos no servidor escolhido e chama a fun&ccedil;&atilde;o correta de apresenta&ccedil;&atilde;o das fotos.
 	
 	*/
 	busca: function(pagina){
@@ -288,7 +288,7 @@ i3GEOF.buscaFotos = {
 	/*
 	Function: escondexy
 	
-	Esconde a imagem de localiza&ccedil;ão da foto no mapa
+	Esconde a imagem de localiza&ccedil;&atilde;o da foto no mapa
 	*/
 	escondexy: function(){
 		if($i("pinfoto")){
@@ -318,12 +318,12 @@ i3GEOF.buscaFotos = {
 	/*
 	Function: listafotospanoramio
 	
-	Monta a apresenta&ccedil;ão das fotos obtidas do servidor Panoramio
+	Monta a apresenta&ccedil;&atilde;o das fotos obtidas do servidor Panoramio
 	*/
 	listafotospanoramio: function(retorno){
 		i3GEOF.buscaFotos.aguarde.visibility = "hidden";
 		if (retorno.data===undefined )
-		{$i("i3GEObuscafotosresultadofotos").innerHTML = "Erro. A opera&ccedil;ão demorou muito.";return;}
+		{$i("i3GEObuscafotosresultadofotos").innerHTML = "Erro. A opera&ccedil;&atilde;o demorou muito.";return;}
 		eval("var data = "+retorno.data);
 		var ins = "",res,i,t,p;
 		if(!retorno.data)
@@ -357,7 +357,7 @@ i3GEOF.buscaFotos = {
 	/*
 	Function: listafotosflickr
 	
-	Monta a apresenta&ccedil;ão das fotos obtidas do servidor Flickr
+	Monta a apresenta&ccedil;&atilde;o das fotos obtidas do servidor Flickr
 	*/
 	listafotosflickr: function(retorno){
 		i3GEOF.buscaFotos.aguarde.visibility = "hidden";
@@ -368,7 +368,7 @@ i3GEOF.buscaFotos = {
 			t,
 			p;
 		if (retorno.data===undefined )
-		{$i("i3GEObuscafotosresultadofotos").innerHTML = "Erro. A opera&ccedil;ão demorou muito.";return;}
+		{$i("i3GEObuscafotosresultadofotos").innerHTML = "Erro. A opera&ccedil;&atilde;o demorou muito.";return;}
 		if((!retorno.data) || (retorno.data === ""))
 		{ins = "<br><span style=color:red>Problemas no acesso aos dados!</span><br><br>";$i("i3GEObuscafotosresultadofotos").innerHTML = ins;return;}
 		data = retorno.data.photo;
@@ -399,7 +399,7 @@ i3GEOF.buscaFotos = {
 	/*
 	Function: listafotoslocr
 	
-	Monta a apresenta&ccedil;ão das fotos obtidas do servidor Locr
+	Monta a apresenta&ccedil;&atilde;o das fotos obtidas do servidor Locr
 	*/
 	listafotoslocr: function(retorno){
 		i3GEOF.buscaFotos.aguarde.visibility = "hidden";
@@ -409,7 +409,7 @@ i3GEOF.buscaFotos = {
 			t,
 			p;
 		if (retorno.data === undefined )
-		{$i("i3GEObuscafotosresultadofotos").innerHTML = "Erro. A opera&ccedil;ão demorou muito.";return;}
+		{$i("i3GEObuscafotosresultadofotos").innerHTML = "Erro. A opera&ccedil;&atilde;o demorou muito.";return;}
 		eval("var data = "+retorno.data);
 		if(!retorno.data)
 		{ins += "<br><span style=color:red>Problemas no acesso aos dados!</span><br><br>";return;}

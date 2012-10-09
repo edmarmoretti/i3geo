@@ -4,7 +4,7 @@
 /*
 Title: TME
 
-Cria um arquivo KML com a representa&ccedil;ão em mapa tem&aacute;tico baseado no pacote TME
+Cria um arquivo KML com a representa&ccedil;&atilde;o em mapa tem&aacute;tico baseado no pacote TME
 
 <i3GEO.tema.dialogo.tme>
 
@@ -27,10 +27,10 @@ GNU conforme publicada pela Free Software Foundation;
 
 Este programa &eacute; distribu&iacute;do na expectativa de que seja &uacute;til,
 por&eacute;m, SEM NENHUMA GARANTIA; nem mesmo a garantia impl&iacute;cita
-de COMERCIABILIDADE OU ADEQUAÇÃO A UMA FINALIDADE ESPEC&Iacute;FICA.
+de COMERCIABILIDADE OU ADEQUA&Ccedil;&Atilde;O A UMA FINALIDADE ESPEC&Iacute;FICA.
 Consulte a Licen&ccedil;a P&uacute;blica Geral do GNU para mais detalhes.
 Voc&ecirc; deve ter recebido uma c&oacute;pia da Licen&ccedil;a P&uacute;blica Geral do
-GNU junto com este programa; se não, escreva para a
+GNU junto com este programa; se n&atilde;o, escreva para a
 Free Software Foundation, Inc., no endere&ccedil;o
 59 Temple Street, Suite 330, Boston, MA 02111-1307 USA.
 */
@@ -58,7 +58,7 @@ i3GEOF.tme = {
 	*/
 	aguarde: "",
 	/*
-		Para efeitos de compatibilidade antes da vers&atilde;o 4.7 que não tinha dicion&aacute;rio
+		Para efeitos de compatibilidade antes da vers&atilde;o 4.7 que n&atilde;o tinha dicion&aacute;rio
 	*/
 	criaJanelaFlutuante: function(){
 		i3GEOF.tme.iniciaDicionario();
@@ -120,7 +120,7 @@ i3GEOF.tme = {
 	/*
 	Function: html
 
-	Gera o c&oacute;digo html para apresenta&ccedil;ão das op&ccedil;&otilde;es da ferramenta
+	Gera o c&oacute;digo html para apresenta&ccedil;&atilde;o das op&ccedil;&otilde;es da ferramenta
 
 	Retorno:
 
@@ -132,16 +132,16 @@ i3GEOF.tme = {
 		'<p class="paragrafo" >' +
 		'T&iacute;tulo que ser&aacute; mostrado no mapa';
 		ins += $inputText("","","i3GEOTMEtitulo","",48,"") +
-		'<br><br>Descri&ccedil;ão do mapa';
+		'<br><br>Descri&ccedil;&atilde;o do mapa';
 		ins += $inputText("","","i3GEOTMEdesc","",48,"") +
 		'<br><br>Coluna que cont&eacute;m os nomes das regi&otilde;es (exemplo: nomes dos Estados ou nomes dos munic&iacute;pios):' +
 		'<div id="i3GEOTMEregioeslista" style="text-align:left;" ></div>' +
 		'<p class="paragrafo" >' +
-		'<br>Escolha uma ou mais colunas que cont&eacute;m os dados estat&iacute;sticos que serão representados:' +
+		'<br>Escolha uma ou mais colunas que cont&eacute;m os dados estat&iacute;sticos que ser&atilde;o representados:' +
 		'<div id=i3GEOtmelistai class=digitar style="text-align:left;left:0px;top:0px;330px;height:80px;overflow:auto;display:block;"></div>' +
 		'<br>' +
 		'<input id=i3GEOtmebotao1 size=35  type=button value="Aplicar" />' +
-		'<div id=i3GEOtmemen1 style=top:15px;left:0px; ><p class=paragrafo >Ser&aacute; criado um arquivo KML que pode ser aberto com o Google Earth. A coluna com os nomes das regi&otilde;es define o nome que ser&aacute; mostrado para cada elemento mapeado. Quando os nomes das colunas com os valores corresponderem a um determinado ano, ser&aacute; mostrado um botão do tipo slide no Google Earth, mas isso s&oacute; ocorre se o nome da coluna for o mesmo nome do ano, exemplo, para o ano de 1980 o nome da coluna dever&aacute; ser 1980</div>';
+		'<div id=i3GEOtmemen1 style=top:15px;left:0px; ><p class=paragrafo >Ser&aacute; criado um arquivo KML que pode ser aberto com o Google Earth. A coluna com os nomes das regi&otilde;es define o nome que ser&aacute; mostrado para cada elemento mapeado. Quando os nomes das colunas com os valores corresponderem a um determinado ano, ser&aacute; mostrado um bot&atilde;o do tipo slide no Google Earth, mas isso s&oacute; ocorre se o nome da coluna for o mesmo nome do ano, exemplo, para o ano de 1980 o nome da coluna dever&aacute; ser 1980</div>';
 		return ins;
 	},
 	/*
@@ -162,7 +162,7 @@ i3GEOF.tme = {
 			i3GEO.janela.minimiza("i3GEOF.tme");
 		};
 		//cria a janela flutuante
-		titulo = "<div style='z-index:1;position:absolute' id='i3GEOFtmeComboCabeca' >------</div><span style=margin-left:60px>tme</span><a class=ajuda_usuario target=_blank href='" + i3GEO.configura.locaplic + "/ajuda_usuario.php?idcategoria=5&idajuda=108' >&nbsp;&nbsp;&nbsp;</a>";
+		titulo = "<div  id='i3GEOFtmeComboCabeca' class='comboTemasCabecalho'>   ------</div><span style=margin-left:60px>tme</span><a class=ajuda_usuario target=_blank href='" + i3GEO.configura.locaplic + "/ajuda_usuario.php?idcategoria=5&idajuda=108' >&nbsp;&nbsp;&nbsp;</a>";
 		janela = i3GEO.janela.cria(
 			"380px",
 			"320px",
@@ -200,7 +200,7 @@ i3GEOF.tme = {
 	/*
 	Function: montaListaItens
 
-	Monta a lista de itens que poderão ser escolhidos para compor o mapa.
+	Monta a lista de itens que poder&atilde;o ser escolhidos para compor o mapa.
 
 	A lista &eacute; inserida no elemento html com id "i3GEOtmelistai"
 
@@ -226,7 +226,7 @@ i3GEOF.tme = {
 	/*
 	Function: pegaItensMarcados
 
-	Recupera os itens que foram marcados e monta uma lista para enviar como parâmetro para a fun&ccedil;ão de gera&ccedil;ão dos gr&aacute;ficos
+	Recupera os itens que foram marcados e monta uma lista para enviar como parâmetro para a fun&ccedil;&atilde;o de gera&ccedil;&atilde;o dos gr&aacute;ficos
 	*/
 	pegaItensMarcados: function(){
 		var listadeitens = [],

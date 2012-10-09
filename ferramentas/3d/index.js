@@ -4,10 +4,10 @@
 /*
 Title: 3d
 
-Gera um arquivo no formato WRL conforme a extensão geogr&aacute;fica do mapa atual. A imagem do mapa atual &eacute; sobreposta ao modelo
+Gera um arquivo no formato WRL conforme a extens&atilde;o geogr&aacute;fica do mapa atual. A imagem do mapa atual &eacute; sobreposta ao modelo
 3d. Para obter os valores de Z e compor o modelo 3d, utiliza-se por default o LAYER definido no mapfile i3geo/temasaplic/3dmap
 O usu&aacute;rio pode escolher um tema existente no mapa atual ao inv&eacute;s do default.
-A obten&ccedil;ão do valor de Z &eacute; feita com base no valor de cor do p&iacute;xel do LAYER e não no valor real da altimetria.
+A obten&ccedil;&atilde;o do valor de Z &eacute; feita com base no valor de cor do p&iacute;xel do LAYER e n&atilde;o no valor real da altimetria.
 
 Veja:
 
@@ -32,10 +32,10 @@ GNU conforme publicada pela Free Software Foundation;
 
 Este programa &eacute; distribu&iacute;do na expectativa de que seja &uacute;til,
 por&eacute;m, SEM NENHUMA GARANTIA; nem mesmo a garantia impl&iacute;cita
-de COMERCIABILIDADE OU ADEQUAÇÃO A UMA FINALIDADE ESPEC&Iacute;FICA.
+de COMERCIABILIDADE OU ADEQUA&Ccedil;&Atilde;O A UMA FINALIDADE ESPEC&Iacute;FICA.
 Consulte a Licen&ccedil;a P&uacute;blica Geral do GNU para mais detalhes.
 Voc&ecirc; deve ter recebido uma c&oacute;pia da Licen&ccedil;a P&uacute;blica Geral do
-GNU junto com este programa; se não, escreva para a
+GNU junto com este programa; se n&atilde;o, escreva para a
 Free Software Foundation, Inc., no endere&ccedil;o
 59 Temple Street, Suite 330, Boston, MA 02111-1307 USA.
 */
@@ -46,7 +46,7 @@ if(typeof(i3GEOF) === 'undefined'){
 /*
 Classe: i3GEOF.t3d
 
-Gera um arquivo para visualiza&ccedil;ão em 3d com o mapa atual.
+Gera um arquivo para visualiza&ccedil;&atilde;o em 3d com o mapa atual.
 */
 i3GEOF.t3d = {
 	/*
@@ -58,7 +58,7 @@ i3GEOF.t3d = {
 	/*
 	Propriedade: dmap
 	
-	Arquivo mapfile que cont&eacute;m o layer que ser&aacute; utilizado para a obten&ccedil;ão dos valores  de Z.
+	Arquivo mapfile que cont&eacute;m o layer que ser&aacute; utilizado para a obten&ccedil;&atilde;o dos valores  de Z.
 	O arquivo deve ficar armazenado em i3geo/aplicmap
 	
 	Tipo:
@@ -69,7 +69,7 @@ i3GEOF.t3d = {
 	*/
 	dmap: "3dmap.map",
 	/*
-		Para efeitos de compatibilidade antes da vers&atilde;o 4.7 que não tinha dicion&aacute;rio
+		Para efeitos de compatibilidade antes da vers&atilde;o 4.7 que n&atilde;o tinha dicion&aacute;rio
 	*/
 	criaJanelaFlutuante: function(){
 		i3GEOF.t3d.iniciaDicionario();
@@ -112,7 +112,7 @@ i3GEOF.t3d = {
 	/*
 	Function: html
 	
-	Gera o c&oacute;digo html para apresenta&ccedil;ão das op&ccedil;&otilde;es da ferramenta
+	Gera o c&oacute;digo html para apresenta&ccedil;&atilde;o das op&ccedil;&otilde;es da ferramenta
 	
 	Retorno:
 	

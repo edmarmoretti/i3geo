@@ -3,10 +3,10 @@
 /*
 Title: Gr&aacute;fico interativo
 
-Representa&ccedil;ão gr&aacute;fica de dados. O gr&aacute;fico &eacute; constru&iacute;do tendo como base os atributos de um tema e &eacute; modificado
-conforme o usu&aacute;rio navega pelo mapa. A renderiza&ccedil;ão do gr&aacute;fico &eacute; feito pelo navegador por meio do aplicativo openflashchart.
-Os dados que serão utilizados no gr&aacute;fico são baseados em um elemento TABLE. Esse elemento pode ser montado com base na tabela
-de atributos e editada pelo usu&aacute;rio. Os dados podem tamb&eacute;m ser inseridos como parâmetros na inicializa&ccedil;ão da ferramenta,
+Representa&ccedil;&atilde;o gr&aacute;fica de dados. O gr&aacute;fico &eacute; constru&iacute;do tendo como base os atributos de um tema e &eacute; modificado
+conforme o usu&aacute;rio navega pelo mapa. A renderiza&ccedil;&atilde;o do gr&aacute;fico &eacute; feito pelo navegador por meio do aplicativo openflashchart.
+Os dados que ser&atilde;o utilizados no gr&aacute;fico s&atilde;o baseados em um elemento TABLE. Esse elemento pode ser montado com base na tabela
+de atributos e editada pelo usu&aacute;rio. Os dados podem tamb&eacute;m ser inseridos como parâmetros na inicializa&ccedil;&atilde;o da ferramenta,
 permitindo que o gr&aacute;fico seja utilizado por outras ferramentas.
 
 Veja:
@@ -32,10 +32,10 @@ GNU conforme publicada pela Free Software Foundation;
 
 Este programa &eacute; distribu&iacute;do na expectativa de que seja &uacute;til,
 por&eacute;m, SEM NENHUMA GARANTIA; nem mesmo a garantia impl&iacute;cita
-de COMERCIABILIDADE OU ADEQUAÇÃO A UMA FINALIDADE ESPEC&Iacute;FICA.
+de COMERCIABILIDADE OU ADEQUA&Ccedil;&Atilde;O A UMA FINALIDADE ESPEC&Iacute;FICA.
 Consulte a Licen&ccedil;a P&uacute;blica Geral do GNU para mais detalhes.
 Voc&ecirc; deve ter recebido uma c&oacute;pia da Licen&ccedil;a P&uacute;blica Geral do
-GNU junto com este programa; se não, escreva para a
+GNU junto com este programa; se n&atilde;o, escreva para a
 Free Software Foundation, Inc., no endere&ccedil;o
 59 Temple Street, Suite 330, Boston, MA 02111-1307 USA.
 */
@@ -101,7 +101,7 @@ i3GEOF.graficointerativo = {
 	/*
 	Propriedade: dadospuros
 
-	Não faz nenhum tipo de processamento nos dados antes de gerar o gr&aacute;fico
+	N&atilde;o faz nenhum tipo de processamento nos dados antes de gerar o gr&aacute;fico
 
 	Type:
 	{boolean}
@@ -113,7 +113,7 @@ i3GEOF.graficointerativo = {
 	/*
 	Propriedade: navegacao
 
-	Ativa ou não a navega&ccedil;ão dinâmica do mapa
+	Ativa ou n&atilde;o a navega&ccedil;&atilde;o dinâmica do mapa
 
 	Type:
 	{boolean}
@@ -124,7 +124,7 @@ i3GEOF.graficointerativo = {
 	navegacao:false,
 
 	/*
-		Para efeitos de compatibilidade antes da vers&atilde;o 4.7 que não tinha dicion&aacute;rio
+		Para efeitos de compatibilidade antes da vers&atilde;o 4.7 que n&atilde;o tinha dicion&aacute;rio
 	*/
 	criaJanelaFlutuante: function(dados){
 		if(dados){
@@ -233,7 +233,7 @@ i3GEOF.graficointerativo = {
 	/*
 	Function: html
 
-	Gera o c&oacute;digo html para apresenta&ccedil;ão das op&ccedil;&otilde;es da ferramenta
+	Gera o c&oacute;digo html para apresenta&ccedil;&atilde;o das op&ccedil;&otilde;es da ferramenta
 
 	Retorno:
 
@@ -256,7 +256,7 @@ i3GEOF.graficointerativo = {
 		'		<tr><td>&nbsp;</td></tr>' +
 		'		<tr><td><input type=radio onclick="i3GEOF.graficointerativo.ativaTipo(this)" value="area" name="tipoGrafico" style="border:0px solid white;cursor:pointer" > </td><td>&aacute;rea 2d</td></tr>' +
 		'		<tr><td>&nbsp;</td></tr>' +
-		'		<tr><td><input type=radio onclick="i3GEOF.graficointerativo.ativaTipo(this)" value="scatter" name="tipoGrafico" style="border:0px solid white;cursor:pointer" > </td><td>distribui&ccedil;ão de pontos</td></tr>' +
+		'		<tr><td><input type=radio onclick="i3GEOF.graficointerativo.ativaTipo(this)" value="scatter" name="tipoGrafico" style="border:0px solid white;cursor:pointer" > </td><td>distribui&ccedil;&atilde;o de pontos</td></tr>' +
 		'		<tr><td>&nbsp;</td></tr>' +
 		'		<tr><td><input type=radio onclick="i3GEOF.graficointerativo.ativaTipo(this)" value="line" name="tipoGrafico" style="border:0px solid white;cursor:pointer" > </td><td>linha</td></tr>' +
 		'		<tr><td>&nbsp;</td></tr>' +
@@ -284,7 +284,7 @@ i3GEOF.graficointerativo = {
 		'	</table>' +
 		'</div> ' +
 		'<div class=guiaobj id="i3GEOgraficointerativoguia2obj" style="left:1px;display:none;top:-5px">' +
-		'	<p class=paragrafo >Escolha os dados que comporão o gr&aacute;fico: </p>' +
+		'	<p class=paragrafo >Escolha os dados que compor&atilde;o o gr&aacute;fico: </p>' +
 		'	<div class=paragrafo id=i3GEOgraficointerativoAjudaPizza >Se vc escolher para X e Y o mesmo item, ser&aacute; considerada a frequ&ecirc;ncia das ocorr&ecirc;ncias para compor cada parte da pizza. Caso contr&aacute;rio, ser&aacute; feita a soma dos valores existentes em Y para cada ocorr&ecirc;ncia existente em X.</div>' +
 		'	<p class=paragrafo >Tema:</p>' +
 		'	<div class=paragrafo id=i3GEOgraficointerativoComboTemas ></div>' +
@@ -307,9 +307,9 @@ i3GEOF.graficointerativo = {
 		'	<p class=paragrafo ><input style=cursor:pointer type=checkbox id=i3GEOgraficointerativoAcumula /> Utiliza valores acumulados</p>' +
 		'	<p class=paragrafo ><input style=cursor:pointer type=checkbox id=i3GEOgraficointerativoRelativa /> Utiliza valores relativos (%)</p>' +
 		'	<p class=paragrafo ><input style=cursor:pointer type=checkbox id=i3GEOgraficointerativoOrdenaX checked /> Ordena o eixo X</p>' +
-		'	<p class=paragrafo ><input style=cursor:pointer type=checkbox id=i3GEOgraficointerativoDadosPuros /> Não processa os valores ao obter os dados (mant&eacute;m os dados como estão na tabela de atributos) - essa op&ccedil;ão &eacute; &uacute;til nos gr&aacute;ficos de distribui&ccedil;ão de pontos</p>' +
+		'	<p class=paragrafo ><input style=cursor:pointer type=checkbox id=i3GEOgraficointerativoDadosPuros /> N&atilde;o processa os valores ao obter os dados (mant&eacute;m os dados como est&atilde;o na tabela de atributos) - essa op&ccedil;&atilde;o &eacute; &uacute;til nos gr&aacute;ficos de distribui&ccedil;&atilde;o de pontos</p>' +
 		'	<p class=paragrafo ><input style=cursor:pointer type=checkbox onclick="i3GEOF.graficointerativo.ativaNavegacao(this.checked)" /> Atualiza o gr&aacute;fico ao navegar pelo mapa</p>' +
-		'	<p class=paragrafo ><select onchange="i3GEOF.graficointerativo.obterDados()" id="i3GEOgraficointerativoTipoAgregacao" ><option value="soma">Soma</option><option value="media">M&eacute;dia</option></select> Tipo de agrega&ccedil;ão dos valores do eixo Y</p>' +
+		'	<p class=paragrafo ><select onchange="i3GEOF.graficointerativo.obterDados()" id="i3GEOgraficointerativoTipoAgregacao" ><option value="soma">Soma</option><option value="media">M&eacute;dia</option></select> Tipo de agrega&ccedil;&atilde;o dos valores do eixo Y</p>' +
 		'</div>'+
 		'<div class=guiaobj id="i3GEOgraficointerativoguia4obj" style="left:1px;display:none;top:-0px">' +
 		'</div>' +
@@ -433,7 +433,7 @@ i3GEOF.graficointerativo = {
 	/*
 	Function: configuraDados
 
-	Configura o formul&aacute;rio para obten&ccedil;ão dos dados para cada tipo de gr&aacute;fico
+	Configura o formul&aacute;rio para obten&ccedil;&atilde;o dos dados para cada tipo de gr&aacute;fico
 	*/
 	configuraDados: function(){
 		var ativa = function(comboxlinha,comboylinha,ajudapizza){
@@ -484,7 +484,7 @@ i3GEOF.graficointerativo = {
 	/*
 	Function: obterDados
 
-	Obt&eacute;m os dados que serão utilizados no gr&aacute;fico
+	Obt&eacute;m os dados que ser&atilde;o utilizados no gr&aacute;fico
 
 	Veja:
 
@@ -533,7 +533,7 @@ i3GEOF.graficointerativo = {
 	/*
 	Function: montaTabelaDados
 
-	Monta a tabela com os dados que serão utilizados no gr&aacute;fico
+	Monta a tabela com os dados que ser&atilde;o utilizados no gr&aacute;fico
 
 	Parametro:
 
@@ -920,7 +920,7 @@ i3GEOF.graficointerativo = {
 	/*
 	Function: ativaNavegacao
 
-	Ativa ou desativa a atualiza&ccedil;ão autom&aacute;tica ao navegar no mapa
+	Ativa ou desativa a atualiza&ccedil;&atilde;o autom&aacute;tica ao navegar no mapa
 	*/
 	ativaNavegacao: function(obj){
 		if(!i3GEO.Interface){

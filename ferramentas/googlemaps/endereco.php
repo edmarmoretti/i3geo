@@ -18,7 +18,7 @@ function inicializa()
    	var pt1 = function(response)
    	{  	
 		if (!response || response.Status.code != 200) {
-   			var ins = "Não foi poss&iacute;vel encontrar o endere&ccedil;o. Status Code:" + response.Status.code;
+   			var ins = "N&atilde;o foi poss&iacute;vel encontrar o endere&ccedil;o. Status Code:" + response.Status.code;
 		} else {
 			place = response.Placemark[0];
    			var ins = '<b>orig latlng:</b>' + response.name + '<br/>' 

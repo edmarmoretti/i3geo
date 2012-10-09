@@ -29,10 +29,10 @@ GNU conforme publicada pela Free Software Foundation;
 
 Este programa &eacute; distribu&iacute;do na expectativa de que seja &uacute;til,
 por&eacute;m, SEM NENHUMA GARANTIA; nem mesmo a garantia impl&iacute;cita
-de COMERCIABILIDADE OU ADEQUAÇÃO A UMA FINALIDADE ESPEC&Iacute;FICA.
+de COMERCIABILIDADE OU ADEQUA&Ccedil;&Atilde;O A UMA FINALIDADE ESPEC&Iacute;FICA.
 Consulte a Licen&ccedil;a P&uacute;blica Geral do GNU para mais detalhes.
 Voc&ecirc; deve ter recebido uma c&oacute;pia da Licen&ccedil;a P&uacute;blica Geral do
-GNU junto com este programa; se não, escreva para a
+GNU junto com este programa; se n&atilde;o, escreva para a
 Free Software Foundation, Inc., no endere&ccedil;o
 59 Temple Street, Suite 330, Boston, MA 02111-1307 USA.
 */
@@ -46,7 +46,7 @@ i3GEOF.perfil = {
 	/*
 	Variavel: pontos
 
-	Objeto com a lista de pontos iniciais enviadas como parâmetro na inicializa&ccedil;ão da ferramenta
+	Objeto com a lista de pontos iniciais enviadas como parâmetro na inicializa&ccedil;&atilde;o da ferramenta
 	*/
 	pontos: "",
 	/*
@@ -62,7 +62,7 @@ i3GEOF.perfil = {
 	*/
 	aguarde: "",
 	/*
-		Para efeitos de compatibilidade antes da vers&atilde;o 4.7 que não tinha dicion&aacute;rio
+		Para efeitos de compatibilidade antes da vers&atilde;o 4.7 que n&atilde;o tinha dicion&aacute;rio
 	*/
 	criaJanelaFlutuante: function(){
 		i3GEOF.perfil.iniciaDicionario();
@@ -109,7 +109,7 @@ i3GEOF.perfil = {
 	/*
 	Function: html
 
-	Gera o c&oacute;digo html para apresenta&ccedil;ão das op&ccedil;&otilde;es da ferramenta
+	Gera o c&oacute;digo html para apresenta&ccedil;&atilde;o das op&ccedil;&otilde;es da ferramenta
 
 	Retorno:
 
@@ -121,7 +121,7 @@ i3GEOF.perfil = {
 		ins += "<p class='paragrafo' >um tema do mapa: <div style=text-align:left; id=i3GEOFperfilTemas ></div>";
 		ins += "<div style=text-align:left; id=i3GEOFperfilDivComboItens ></div><br>";
 
-		ins += "<p class='paragrafo' ><input type=text id=i3GEOFperfilAmostragem value=20 size=3 /> N&uacute;mero de pontos que serão obtidos ao longo da linha";
+		ins += "<p class='paragrafo' ><input type=text id=i3GEOFperfilAmostragem value=20 size=3 /> N&uacute;mero de pontos que ser&atilde;o obtidos ao longo da linha";
 		ins += "<br><br><input id=i3GEOperfilbotao1 type='buttom' value='Criar gr&aacute;fico' />";
 		ins += "<br><br><div style=text-align:left id=i3GEOperfilfim ></div>";
 		return ins;
@@ -133,9 +133,9 @@ i3GEOF.perfil = {
 
 	Parametro:
 
-	pontos {objeto} - cont&eacute;m as coordenadas dos pontos que serão usados nos c&aacute;lculos, como no exemplo
+	pontos {objeto} - cont&eacute;m as coordenadas dos pontos que ser&atilde;o usados nos c&aacute;lculos, como no exemplo
 
-	pontos = {xpt: [],ypt:[]}; //xpt são os valores de x (array) e ypt os valores de y (array)
+	pontos = {xpt: [],ypt:[]}; //xpt s&atilde;o os valores de x (array) e ypt os valores de y (array)
 	*/
 	iniciaJanelaFlutuante: function(pontos){
 		var minimiza,cabecalho,janela,divid,titulo;
@@ -166,7 +166,7 @@ i3GEOF.perfil = {
 	/*
 	Function: criaPerfil
 
-	Executa a opera&ccedil;ão de gera&ccedil;ão do perfil
+	Executa a opera&ccedil;&atilde;o de gera&ccedil;&atilde;o do perfil
 
 	Veja:
 
@@ -256,7 +256,7 @@ i3GEOF.perfil = {
 
 	Parametro:
 
-	google {objeto} - objeto no padrão da API do google veja http://code.google.com/intl/pt-BR/apis/maps/documentation/elevation
+	google {objeto} - objeto no padr&atilde;o da API do google veja http://code.google.com/intl/pt-BR/apis/maps/documentation/elevation
 
 	Retorno:
 

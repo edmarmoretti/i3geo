@@ -1,9 +1,9 @@
 
 /*jslint plusplus:false,white:false,undef: false, rhino: true, onevar: true, evil: true */
 /*
-Title: Distribui&ccedil;ão de pontos
+Title: Distribui&ccedil;&atilde;o de pontos
 
-Adiciona um novo tema ao mapa em fun&ccedil;ão da an&aacute;lise de distribui&ccedil;ão de pontos.
+Adiciona um novo tema ao mapa em fun&ccedil;&atilde;o da an&aacute;lise de distribui&ccedil;&atilde;o de pontos.
 O tema com os pontos deve existir no mapa atual.
 
 Veja:
@@ -25,10 +25,10 @@ GNU conforme publicada pela Free Software Foundation;
 
 Este programa &eacute; distribu&iacute;do na expectativa de que seja &uacute;til,
 por&eacute;m, SEM NENHUMA GARANTIA; nem mesmo a garantia impl&iacute;cita
-de COMERCIABILIDADE OU ADEQUAÇÃO A UMA FINALIDADE ESPEC&Iacute;FICA.
+de COMERCIABILIDADE OU ADEQUA&Ccedil;&Atilde;O A UMA FINALIDADE ESPEC&Iacute;FICA.
 Consulte a Licen&ccedil;a P&uacute;blica Geral do GNU para mais detalhes.
 Voc&ecirc; deve ter recebido uma c&oacute;pia da Licen&ccedil;a P&uacute;blica Geral do
-GNU junto com este programa; se não, escreva para a
+GNU junto com este programa; se n&atilde;o, escreva para a
 Free Software Foundation, Inc., no endere&ccedil;o
 59 Temple Street, Suite 330, Boston, MA 02111-1307 USA.
 */
@@ -46,7 +46,7 @@ i3GEOF.pontosDistri = {
 	*/
 	aguarde: "",
 	/*
-		Para efeitos de compatibilidade antes da vers&atilde;o 4.7 que não tinha dicion&aacute;rio
+		Para efeitos de compatibilidade antes da vers&atilde;o 4.7 que n&atilde;o tinha dicion&aacute;rio
 	*/
 	criaJanelaFlutuante: function(){
 		i3GEOF.pontosDistri.iniciaDicionario();
@@ -119,7 +119,7 @@ i3GEOF.pontosDistri = {
 	/*
 	Function: html
 
-	Gera o c&oacute;digo html para apresenta&ccedil;ão das op&ccedil;&otilde;es da ferramenta
+	Gera o c&oacute;digo html para apresenta&ccedil;&atilde;o das op&ccedil;&otilde;es da ferramenta
 
 	Retorno:
 
@@ -232,7 +232,7 @@ i3GEOF.pontosDistri = {
 			"i3GEOpontosDistritemasComSel",
 			function(retorno){
 		 		if(retorno.tipo !== "dados"){
-		 			$i("i3GEOpontosDistriTemas").innerHTML = "<p class=paragrafo style=color:red >Nenhum tema de pontos com sele&ccedil;ão<span style=cursor:pointer;color:blue onclick='i3GEO.mapa.dialogo.selecao()' > Selecionar...</span></p>";
+		 			$i("i3GEOpontosDistriTemas").innerHTML = "<p class=paragrafo style=color:red >Nenhum tema de pontos com sele&ccedil;&atilde;o<span style=cursor:pointer;color:blue onclick='i3GEO.mapa.dialogo.selecao()' > Selecionar...</span></p>";
 		 			return;
 		 		}
 		 		$i("i3GEOpontosDistriTemas").innerHTML = "<p class=paragrafo >"+retorno.dados + "</p>";
@@ -262,7 +262,7 @@ i3GEOF.pontosDistri = {
 	/*
 	Function: verCores
 
-	Mostra as cores definidas nos intervalos de defini&ccedil;ão da paleta
+	Mostra as cores definidas nos intervalos de defini&ccedil;&atilde;o da paleta
 
 	Veja:
 
@@ -295,7 +295,7 @@ i3GEOF.pontosDistri = {
 	/*
 	Function: analiseDistancia
 
-	Executa a an&aacute;lise de distribui&ccedil;ão de pontos
+	Executa a an&aacute;lise de distribui&ccedil;&atilde;o de pontos
 
 	Veja:
 
@@ -403,7 +403,7 @@ i3GEOF.pontosDistri = {
 	/*
 	Function: analiseDeldir
 
-	Executa a an&aacute;lise de triangula&ccedil;ão
+	Executa a an&aacute;lise de triangula&ccedil;&atilde;o
 
 	Veja:
 

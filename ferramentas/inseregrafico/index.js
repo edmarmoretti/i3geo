@@ -26,10 +26,10 @@ GNU conforme publicada pela Free Software Foundation;
 
 Este programa &eacute; distribu&iacute;do na expectativa de que seja &uacute;til,
 por&eacute;m, SEM NENHUMA GARANTIA; nem mesmo a garantia impl&iacute;cita
-de COMERCIABILIDADE OU ADEQUAÇÃO A UMA FINALIDADE ESPEC&Iacute;FICA.
+de COMERCIABILIDADE OU ADEQUA&Ccedil;&Atilde;O A UMA FINALIDADE ESPEC&Iacute;FICA.
 Consulte a Licen&ccedil;a P&uacute;blica Geral do GNU para mais detalhes.
 Voc&ecirc; deve ter recebido uma c&oacute;pia da Licen&ccedil;a P&uacute;blica Geral do
-GNU junto com este programa; se não, escreva para a
+GNU junto com este programa; se n&atilde;o, escreva para a
 Free Software Foundation, Inc., no endere&ccedil;o
 59 Temple Street, Suite 330, Boston, MA 02111-1307 USA.
 */
@@ -48,7 +48,7 @@ i3GEOF.insereGrafico = {
 	*/
 	aguarde: "",
 	/*
-		Para efeitos de compatibilidade antes da vers&atilde;o 4.7 que não tinha dicion&aacute;rio
+		Para efeitos de compatibilidade antes da vers&atilde;o 4.7 que n&atilde;o tinha dicion&aacute;rio
 	*/
 	criaJanelaFlutuante: function(){
 		i3GEOF.insereGrafico.iniciaDicionario();
@@ -103,7 +103,7 @@ i3GEOF.insereGrafico = {
 	/*
 	Function: html
 
-	Gera o c&oacute;digo html para apresenta&ccedil;ão das op&ccedil;&otilde;es da ferramenta
+	Gera o c&oacute;digo html para apresenta&ccedil;&atilde;o das op&ccedil;&otilde;es da ferramenta
 
 	Retorno:
 
@@ -215,7 +215,7 @@ i3GEOF.insereGrafico = {
 	/*
 	Function: insere
 
-	Insere um grafico no mapa na posi&ccedil;ão clicada
+	Insere um grafico no mapa na posi&ccedil;&atilde;o clicada
 
 	O ponto &eacute; obtidos do objeto objposicaocursor e os demais parâmetros da janela interna aberta no iframe "wdocai"
 
@@ -251,7 +251,7 @@ i3GEOF.insereGrafico = {
 	/*
 	Function: comboTemas
 
-	Cria o combo com os temas dispon&iacute;veis (temas ligados) para adi&ccedil;ão dos gr&aacute;ficos.
+	Cria o combo com os temas dispon&iacute;veis (temas ligados) para adi&ccedil;&atilde;o dos gr&aacute;ficos.
 
 	Veja:
 
@@ -283,7 +283,7 @@ i3GEOF.insereGrafico = {
 	/*
 	Function: listaItens
 
-	Monta a listagem de itens de um tema com a op&ccedil;ão de sele&ccedil;ão de cor
+	Monta a listagem de itens de um tema com a op&ccedil;&atilde;o de sele&ccedil;&atilde;o de cor
 
 	Parametro:
 
@@ -318,7 +318,7 @@ i3GEOF.insereGrafico = {
 	/*
 	Function: pegaItensMarcados
 
-	Recupera os itens que foram marcados e monta uma lista para enviar como parâmetro para a fun&ccedil;ão de gera&ccedil;ão dos gr&aacute;ficos
+	Recupera os itens que foram marcados e monta uma lista para enviar como parâmetro para a fun&ccedil;&atilde;o de gera&ccedil;&atilde;o dos gr&aacute;ficos
 	*/
 	pegaItensMarcados: function(){
 		var listadeitens = [],

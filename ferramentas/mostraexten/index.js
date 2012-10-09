@@ -2,9 +2,9 @@
 /*jslint plusplus:false,white:false,undef: false, rhino: true, onevar: true, evil: true */
 
 /*
-Title: Mostra extensão
+Title: Mostra extens&atilde;o
 
-Mostra a extensão geogr&aacute;fica atual do mapa permitindo tamb&eacute;m alter&aacute;-la digitando-se os valores de lat e long
+Mostra a extens&atilde;o geogr&aacute;fica atual do mapa permitindo tamb&eacute;m alter&aacute;-la digitando-se os valores de lat e long
 
 Veja:
 
@@ -29,10 +29,10 @@ GNU conforme publicada pela Free Software Foundation;
 
 Este programa &eacute; distribu&iacute;do na expectativa de que seja &uacute;til,
 por&eacute;m, SEM NENHUMA GARANTIA; nem mesmo a garantia impl&iacute;cita
-de COMERCIABILIDADE OU ADEQUAÇÃO A UMA FINALIDADE ESPEC&Iacute;FICA.
+de COMERCIABILIDADE OU ADEQUA&Ccedil;&Atilde;O A UMA FINALIDADE ESPEC&Iacute;FICA.
 Consulte a Licen&ccedil;a P&uacute;blica Geral do GNU para mais detalhes.
 Voc&ecirc; deve ter recebido uma c&oacute;pia da Licen&ccedil;a P&uacute;blica Geral do
-GNU junto com este programa; se não, escreva para a
+GNU junto com este programa; se n&atilde;o, escreva para a
 Free Software Foundation, Inc., no endere&ccedil;o
 59 Temple Street, Suite 330, Boston, MA 02111-1307 USA.
 */
@@ -50,7 +50,7 @@ i3GEOF.mostraExten = {
 	*/
 	aguarde: "",
 	/*
-		Para efeitos de compatibilidade antes da vers&atilde;o 4.7 que não tinha dicion&aacute;rio
+		Para efeitos de compatibilidade antes da vers&atilde;o 4.7 que n&atilde;o tinha dicion&aacute;rio
 	*/
 	criaJanelaFlutuante: function(){
 		i3GEOF.mostraExten.iniciaDicionario();
@@ -97,7 +97,7 @@ i3GEOF.mostraExten = {
 	/*
 	Function: html
 
-	Gera o c&oacute;digo html para apresenta&ccedil;ão das op&ccedil;&otilde;es da ferramenta
+	Gera o c&oacute;digo html para apresenta&ccedil;&atilde;o das op&ccedil;&otilde;es da ferramenta
 
 	Retorno:
 
@@ -106,7 +106,7 @@ i3GEOF.mostraExten = {
 	html:function(){
 		var ins = '<p class="paragrafo" >Extens&atilde;o geogr&aacute;fica atual, em d&eacute;cimos de grau. As coordenadas correspondem a menor longitude, menor latitude, maior longitude e maior latitude:</p>' +
 		'<textarea id=i3GEOmostraExtenatual rows=3 cols=50 onclick="javascript:this.select();"></textarea>' +
-		'<p class="paragrafo" >	Digite as coordenadas referentes a nova extensão geogr&aacute;fica desejada para o mapa. Utilize coordenadas (graus) negativos para indicar a longitude como oeste e latitude como sul:</p>' +
+		'<p class="paragrafo" >	Digite as coordenadas referentes a nova extens&atilde;o geogr&aacute;fica desejada para o mapa. Utilize coordenadas (graus) negativos para indicar a longitude como oeste e latitude como sul:</p>' +
 		'	<table class=lista3 >' +
 		'		<tr><td>Menor longitude (oeste):</td>' +
 		'		<td>' +
@@ -132,7 +132,7 @@ i3GEOF.mostraExten = {
 		$inputText("","","i3GEOmostraExtenyym","",3,"00") +
 		$inputText("","","i3GEOmostraExtenyys","",3,"0.0") +
 		'		</td></tr></table>' +
-		'<br><p class="paragrafo" ><input id=i3GEOmostraExtenbotao1 type="button" size=14 value="Aplicar a nova extensão"  /></p>';
+		'<br><p class="paragrafo" ><input id=i3GEOmostraExtenbotao1 type="button" size=14 value="Aplicar a nova extens&atilde;o"  /></p>';
 		return ins;
 	},
 	/*
@@ -178,7 +178,7 @@ i3GEOF.mostraExten = {
 	/*
 	Function: ativaFoco
 
-	Fun&ccedil;ão que &eacute; disparada quando o usu&aacute;rio clica no cabe&ccedil;alho da ferramenta
+	Fun&ccedil;&atilde;o que &eacute; disparada quando o usu&aacute;rio clica no cabe&ccedil;alho da ferramenta
 	*/
 	ativaFoco: function(){
 		$i("i3GEOmostraExtenatual").innerHTML = i3GEO.parametros.mapexten;
@@ -189,7 +189,7 @@ i3GEOF.mostraExten = {
 	/*
 	Function: executa
 
-	Altera a extensão atual
+	Altera a extens&atilde;o atual
 
 	Veja:
 

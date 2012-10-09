@@ -28,10 +28,10 @@ GNU conforme publicada pela Free Software Foundation;
 
 Este programa &eacute; distribu&iacute;do na expectativa de que seja &uacute;til,
 por&eacute;m, SEM NENHUMA GARANTIA; nem mesmo a garantia impl&iacute;cita
-de COMERCIABILIDADE OU ADEQUAÇÃO A UMA FINALIDADE ESPEC&Iacute;FICA.
+de COMERCIABILIDADE OU ADEQUA&Ccedil;&Atilde;O A UMA FINALIDADE ESPEC&Iacute;FICA.
 Consulte a Licen&ccedil;a P&uacute;blica Geral do GNU para mais detalhes.
 Voc&ecirc; deve ter recebido uma c&oacute;pia da Licen&ccedil;a P&uacute;blica Geral do
-GNU junto com este programa; se não, escreva para a
+GNU junto com este programa; se n&atilde;o, escreva para a
 Free Software Foundation, Inc., no endere&ccedil;o
 59 Temple Street, Suite 330, Boston, MA 02111-1307 USA.
 */
@@ -49,7 +49,7 @@ i3GEOF.centroide = {
 	*/
 	aguarde: "",
 	/*
-		Para efeitos de compatibilidade antes da vers&atilde;o 4.7 que não tinha dicion&aacute;rio
+		Para efeitos de compatibilidade antes da vers&atilde;o 4.7 que n&atilde;o tinha dicion&aacute;rio
 	*/
 	criaJanelaFlutuante: function(){
 		i3GEOF.centroide.iniciaDicionario();
@@ -92,7 +92,7 @@ i3GEOF.centroide = {
 	/*
 	Function: html
 
-	Gera o c&oacute;digo html para apresenta&ccedil;ão das op&ccedil;&otilde;es da ferramenta
+	Gera o c&oacute;digo html para apresenta&ccedil;&atilde;o das op&ccedil;&otilde;es da ferramenta
 
 	Retorno:
 
@@ -166,7 +166,7 @@ i3GEOF.centroide = {
 	/*
 	Function: criacentroide
 
-	Executa a opera&ccedil;ão de c&aacute;lculo dos centr&oacute;ides
+	Executa a opera&ccedil;&atilde;o de c&aacute;lculo dos centr&oacute;ides
 
 	Veja:
 
@@ -184,7 +184,7 @@ i3GEOF.centroide = {
 			fim = function(retorno){
 				i3GEOF.centroide.aguarde.visibility = "hidden";
 				if (retorno.data === undefined )
-				{$i("i3GEOcentroidefim").innerHTML = "Erro. A opera&ccedil;ão demorou muito.";}
+				{$i("i3GEOcentroidefim").innerHTML = "Erro. A opera&ccedil;&atilde;o demorou muito.";}
 				else
 				{i3GEO.atualiza();}
 			};
