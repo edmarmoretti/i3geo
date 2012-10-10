@@ -1133,14 +1133,16 @@ i3GEOF.metaestat = {
 				$i("i3geoCartoParametrosMedidasVariavel").innerHTML = "";
 				i3GEOF.metaestat.classes.destroiJanela();
 			},
-			comboMedidasVariavel: function(dados,idcombo,stronchange){
+			comboMedidasVariavel: function(dados,idcombo,stronchange,filtroesquema){
 				i3GEOF.metaestat.DADOSMEDIDASVARIAVEL = dados;
 				var n = dados.length,
 				ins = '',
 				i;
 				ins += "<select id='"+idcombo+"' style='width:"+(i3GEOF.metaestat.LARGURA - 20)+"px' onchange='"+stronchange+"'><option value=''>---</option>";
 				for(i=0;i<n;i++){
-					ins += "<option value='"+dados[i].id_medida_variavel+"'>"+dados[i].nomemedida+"</option>";
+					if(!filtroesquema || (filtroesquema && dados[i].esquemadb != filtroesquema)){
+						ins += "<option value='"+dados[i].id_medida_variavel+"'>"+dados[i].nomemedida+"</option>";
+					}
 				}
 				ins += "</select>";
 				return ins;

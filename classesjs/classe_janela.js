@@ -453,6 +453,7 @@ i3GEO.janela = {
 	destroi: function(id){
 		var janela = YAHOO.i3GEO.janela.manager.find(id);
 		i3GEO.util.removeScriptTag(id+"_script");
+		i3GEO.util.removeScriptTag(id+".dicionario_script");
 		if(janela){
 			YAHOO.i3GEO.janela.manager.remove(janela);
 			//janela.destroy();
@@ -551,6 +552,81 @@ i3GEO.janela = {
 				janela.destroy();
 			}
 		}
+	},
+	/*
+	Function: tempoMsg
+
+	Abre uma janela com uma mensagem temporaria
+
+	Parametros:
+
+	texto {String} - texto da janela
+
+	tempo {segundos}
+	*/
+	tempoMsg: function(texto,tempo){
+		var pos,janela,attributes,anim,altura=40;
+		janela = YAHOO.i3GEO.janela.managerAguarde.find("i3geoTempoMsg");
+		pos = [0,0];
+		if($i(i3GEO.Interface.IDCORPO))
+		{pos = YAHOO.util.Dom.getXY($i(i3GEO.Interface.IDCORPO));}
+		else if ($i("contemImg"))
+		{pos = YAHOO.util.Dom.getXY($i("contemImg"));}
+		if(!janela){
+			janela = new YAHOO.widget.Panel("i3geoTempoMsg",{width:"220px",fixedcenter:false,underlay:"none",close:false,draggable:false,modal:false,monitorresize:false});
+			janela.render(document.body);
+			YAHOO.i3GEO.janela.managerAguarde.register(janela);
+		}
+		janela.setBody(texto);
+		altura = 40;
+		janela.body.style.padding="5px";
+		janela.body.style.backgroundColor="yellow";
+		janela.body.style.height="0px";
+		janela.body.style.overflow = "none";
+		janela.body.onmouseover = function(){
+			var janela = YAHOO.i3GEO.janela.managerAguarde.find("i3geoTempoMsg");
+			if(janela){
+				janela.destroy();
+			}
+		};
+
+		if(i3GEO.parametros.w > 0)
+		{janela.moveTo(pos[0] + (i3GEO.parametros.w / 2) - 120,pos[1]);}
+		else
+		{janela.moveTo(pos[0],pos[1]);}
+		janela.show();
+		attributes = {
+			height: { to: altura }
+		};
+		anim = new YAHOO.util.Anim(janela.body, attributes, 1, YAHOO.util.Easing.easeNone);
+		anim.onComplete.subscribe(function(){
+			janela.body.style.overflow = "auto";
+			janela.body.style.display = "block";
+		});
+		anim.animate();
+
+		//YAHOO.util.Dom.setStyle(temp,"opacity",i3GEO.janela.OPACIDADEAGUARDE / 100);
+		if(!tempo){
+			tempo = 4000;
+		}
+		setTimeout(
+			function(){
+				var attributes,anim,
+					janela = YAHOO.i3GEO.janela.managerAguarde.find("i3geoTempoMsg");
+				if(janela){
+					attributes = {
+						height: { to: 0 }
+					};
+					anim = new YAHOO.util.Anim(janela.body, attributes, 1, YAHOO.util.Easing.easeNone);
+					anim.onComplete.subscribe(function(){
+						janela.destroy();
+					});
+					anim.animate();
+				}
+			},
+			tempo
+		);
+
 	},
 	/*
 	Function: ativaAlerta

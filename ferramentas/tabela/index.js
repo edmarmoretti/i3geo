@@ -48,48 +48,48 @@ Classe: i3GEOF.tabela
 i3GEOF.tabela = {
 	/*
 	Variavel: aguarde
-	
+
 	Estilo do objeto DOM com a imagem de aguarde existente no cabe&ccedil;alho da janela.
 	*/
 	aguarde: "",
 	/*
 	Variavel: tipoDeGrafico
-	
+
 	Guarda o tipo de grafico escolhido pelo usu&aacute;rio
 	*/
 	tipoDeGrafico: "",
 	/*
 	Variavel: tema
-	
+
 	Tema que ser&aacute; utilizado
-	
+
 	Type:
 	{string}
 	*/
 	tema: i3GEO.temaAtivo,
 	/*
 	Variavel: registros
-	
+
 	Guarda os &iacute;ndices dos registros escolhidos na tabela
-	
+
 	Type:
 	{array}
 	*/
 	registros: [],
 	/*
 	Variavel: parametros
-	
+
 	Parametros utilizados para o gr&aacute;fico.
-	
+
 	&Eacute; definido em fun&ccedil;&atilde;o do tipo de gr&aacute;fico escolhido
-	
+
 	Type:
 	{string}
 	*/
 	parametros: "",
 	/*
 	Variable: nomeArquivoGr
-	
+
 	Nome do arquivo gerado com os dados para o gr&aacute;fico
 	*/
 	nomeArquivoGr: "",
@@ -101,11 +101,11 @@ i3GEOF.tabela = {
 	},
 	/*
 	Function: iniciaDicionario
-	
+
 	Carrega o dicion&aacute;rio e chama a fun&ccedil;&atilde;o que inicia a ferramenta
-	
+
 	O Javascript &eacute; carregado com o id i3GEOF.nomedaferramenta.dicionario_script
-	*/	
+	*/
 	iniciaDicionario: function(){
 		if(typeof(i3GEOF.tabela.dicionario) === 'undefined'){
 			i3GEO.util.scriptTag(
@@ -117,14 +117,14 @@ i3GEOF.tabela = {
 		else{
 			i3GEOF.tabela.iniciaJanelaFlutuante();
 		}
-	},	
+	},
 	/*
 	Function: inicia
-	
+
 	Inicia a ferramenta. &Eacute; chamado por criaJanelaFlutuante
-	
+
 	Parametro:
-	
+
 	iddiv {String} - id do div que receber&aacute; o conteudo HTML da ferramenta
 	*/
 	inicia: function(iddiv){
@@ -138,7 +138,7 @@ i3GEOF.tabela = {
 			i3GEO.guias.mostraGuiaFerramenta("i3GEOtabelaguia1","i3GEOtabelaguia");
 			//eventos das guias
 			$i("i3GEOtabelaguia6").onclick = function()
-			{i3GEO.guias.mostraGuiaFerramenta("i3GEOtabelaguia6","i3GEOtabelaguia");};			
+			{i3GEO.guias.mostraGuiaFerramenta("i3GEOtabelaguia6","i3GEOtabelaguia");};
 			$i("i3GEOtabelaguia1").onclick = function()
 			{i3GEO.guias.mostraGuiaFerramenta("i3GEOtabelaguia1","i3GEOtabelaguia");};
 			$i("i3GEOtabelaguia3").onclick = function(){
@@ -201,11 +201,11 @@ i3GEOF.tabela = {
 			$i("i3GEOtabelabotao6-button").style.padding = "0px 15px";
 			$i("i3GEOtabelabotaoLista-button").style.minHeight = "1em";
 			$i("i3GEOtabelabotaoLista-button").style.padding = "0px 15px";
-						
+
 			new YAHOO.widget.Button(
 				"i3GEOtabelabotao4",
 				{onclick:{fn: i3GEOF.tabela.estatistica}}
-			);			
+			);
 
 			new YAHOO.widget.Button(
 				"i3GEOtabelabotao7",
@@ -214,7 +214,7 @@ i3GEOF.tabela = {
 			new YAHOO.widget.Button(
 				"i3GEOtabelabotao5",
 				{onclick:{fn: i3GEOF.tabela.relatorioTexto}}
-			);			
+			);
 
 			//new YAHOO.widget.Button("i3GEOtabelabotao7");
 
@@ -228,11 +228,11 @@ i3GEOF.tabela = {
 	},
 	/*
 	Function: html
-	
+
 	Gera o c&oacute;digo html para apresenta&ccedil;&atilde;o das op&ccedil;&otilde;es da ferramenta
-	
+
 	Retorno:
-	
+
 	String com o c&oacute;digo html
 	*/
 	html:function(){
@@ -269,14 +269,14 @@ i3GEOF.tabela = {
 		ins += '		</div>';
 		ins += '	<div id=i3GEOtabelaguia1obj style="width:99%">';
 		ins += '		<div id=i3GEOtabelacombot style="position:relative;top:5px;left:0px;">';
-		ins += '		</div>';		
+		ins += '		</div>';
 		ins += '		<br><p class="paragrafo" ><input title="'+$trad(10,i3GEOF.tabela.dicionario)+'" id=i3GEOtabelabotao2 size=25 type=button value="'+$trad(11,i3GEOF.tabela.dicionario)+'" />';
 		ins += '		<input title="'+$trad(12,i3GEOF.tabela.dicionario)+'" id=i3GEOtabelabotao3 size=25  type=button value="'+$trad(13,i3GEOF.tabela.dicionario)+'"/>';
 		ins += '		<input title="'+$trad(14,i3GEOF.tabela.dicionario)+'" id=i3GEOtabelabotao6 size=30  type=button value="'+$trad(15,i3GEOF.tabela.dicionario)+'"/>';
 		ins += '		<div id=i3GEOtabelacontador style="background-color:rgb(240,240,240);width:100%;position:relative;top:15px;left:0px;text-align:left">';
 		ins += '			'+$trad(16,i3GEOF.tabela.dicionario)+' <img style=cursor:pointer onclick="i3GEOF.tabela.menos()" src="'+i3GEO.configura.locaplic+'/imagens/minus.gif" />';
 		ins += $inputText("","","i3GEOtabelainicio","",5,"1");
-		ins += '			'+$trad(17,i3GEOF.tabela.dicionario);
+		ins += '			'+$trad(17,i3GEOF.tabela.dicionario)+"&nbsp;";
 		ins += $inputText("","","i3GEOtabelafim","",5,"20");
 		ins += '			<img style=cursor:pointer onclick="i3GEOF.tabela.mais()" src="'+i3GEO.configura.locaplic+'/imagens/plus.gif" />';
 		ins += '			<input title="'+$trad(18,i3GEOF.tabela.dicionario)+'" id=i3GEOtabelabotaoLista size=25  type=button value="'+$trad(19,i3GEOF.tabela.dicionario)+'"/>';
@@ -299,7 +299,7 @@ i3GEOF.tabela = {
 		ins += '		<div style="top:5px;left:0px;display:block;background-color:white;" id="i3GEOtabelaresultado" >';
 		ins += '		</div>';
 		ins += '	</div>';
-		
+
 		ins += '	<div id=i3GEOtabelaguia5obj style="width:99%;display:none">';
 		ins += '		<p class="paragrafo" >'+$trad(24,i3GEOF.tabela.dicionario)+':';
 		ins += '		<p class="paragrafo" ><div id=i3GEOtabelaitensrelatorio class=digitar style="text-align:left;overflow:auto;height:100px">';
@@ -329,9 +329,9 @@ i3GEOF.tabela = {
 	},
 	/*
 	Function: criaJanelaFlutuante
-	
+
 	Cria a janela flutuante para controle da ferramenta.
-	*/	
+	*/
 	iniciaJanelaFlutuante: function(){
 		var minimiza,cabecalho,janela,divid,temp,titulo;
 		if($i("i3GEOF.tabela")){
@@ -376,13 +376,13 @@ i3GEOF.tabela = {
 				google.earth.removeEventListener(tabelaDragend);
 			}
 			if(i3GEO.eventos.ATUALIZAARVORECAMADAS.toString().search('i3GEO.janela.comboCabecalhoTemas("i3GEOFtabelaComboCabeca","i3GEOFtabelaComboCabecaSel","tabela","ligadosComTabela")') > 0)
-			{i3GEO.eventos.ATUALIZAARVORECAMADAS.remove('i3GEO.janela.comboCabecalhoTemas("i3GEOFtabelaComboCabeca","i3GEOFtabelaComboCabecaSel","tabela","ligadosComTabela")');}			
+			{i3GEO.eventos.ATUALIZAARVORECAMADAS.remove('i3GEO.janela.comboCabecalhoTemas("i3GEOFtabelaComboCabeca","i3GEOFtabelaComboCabecaSel","tabela","ligadosComTabela")');}
 		};
 		YAHOO.util.Event.addListener(janela[0].close, "click", temp);
 	},
 	/*
 	Function: ativaFoco
-	
+
 	Refaz a interface da ferramenta quando a janela flutuante tem seu foco ativado
 	*/
 	ativaFoco: function(){
@@ -394,7 +394,7 @@ i3GEOF.tabela = {
 	},
 	/*
 	Function: ativaAutoAtualiza
-	
+
 	Ativa ou desativa a atualiza&ccedil;&atilde;o autom&aacute;tica da tabela quando o usu&aacute;rio navega no mapa
 	*/
 	ativaAutoAtualiza:function(obj){
@@ -404,11 +404,11 @@ i3GEOF.tabela = {
 			}
 			if(i3GEO.Interface.ATUAL === "googlemaps"){
    				tabelaDragend = google.maps.event.addListener(i3GeoMap, "dragend", function() {i3GEOF.tabela.pegaRegistros();});
-   				tabelaZoomend = google.maps.event.addListener(i3GeoMap, "zoomend", function() {i3GEOF.tebela.pegaRegistros();});						
+   				tabelaZoomend = google.maps.event.addListener(i3GeoMap, "zoomend", function() {i3GEOF.tebela.pegaRegistros();});
 			}
 			if(i3GEO.Interface.ATUAL === "googleearth"){
    				tabelaDragend = google.earth.addEventListener(i3GeoMap.getView(), "viewchangeend", function() {i3GEOF.tabela.pegaRegistros();});
-			}			
+			}
 		}
 		else{
 			if(i3GEO.Interface.ATUAL !== "googlemaps" && i3GEO.Interface.ATUAL !== "googleearth"){
@@ -425,11 +425,11 @@ i3GEOF.tabela = {
 	},
 	/*
 	Function: pegaRegistros
-	
+
 	Pega os registros da tabela de atributos do tema
-	
+
 	Veja:
-	
+
 	<LISTAREGISTROS>
 	*/
 	pegaRegistros: function(){
@@ -448,14 +448,14 @@ i3GEOF.tabela = {
 		if ($i("i3GEOtabelatipolista").checked)
 		{tipolista = "selecionados";}
 		if ($i("i3GEOtabelalegenda").checked)
-		{dadosDaClasse = "sim";}		
+		{dadosDaClasse = "sim";}
 		p = i3GEO.configura.locaplic+"/classesphp/mapa_controle.php?g_sid="+i3GEO.configura.sid+"&funcao=listaregistros&inicio="+inicio+"&fim="+fim+"&tema="+i3GEOF.tabela.tema+"&tipo="+tiporeg+"&tipolista="+tipolista+"&ext="+i3GEO.parametros.mapexten+"&dadosDaClasse="+dadosDaClasse;
 		cp.set_response_type("JSON");
 		cp.call(p,"listaRegistros",i3GEOF.tabela.montaTabela);
 	},
 	/*
 	Function: montaTabela
-	
+
 	Monta a visualiza&ccedil;&atilde;o da tabela de atributos
 	*/
 	montaTabela: function(retorno){
@@ -512,7 +512,7 @@ i3GEOF.tabela = {
 	},
 	/*
 	Function: mais
-	
+
 	Avan&ccedil;a o contador de registros para a listagem
 	*/
 	mais:function(){
@@ -527,7 +527,7 @@ i3GEOF.tabela = {
 	},
 	/*
 	Function: menos
-	
+
 	Retrocede o contador de registros para a listagem
 	*/
 	menos: function(){
@@ -546,7 +546,7 @@ i3GEOF.tabela = {
 	},
 	/*
 	Function: excluiColuna
-	
+
 	Exclui uma coluna da visualiza&ccedil;&atilde;o da tabela
 	*/
 	excluiColuna: function(coluna,cid){
@@ -579,7 +579,7 @@ i3GEOF.tabela = {
 	},
 	/*
 	Function: ordenaColuna
-	
+
 	Ordena uma coluna da tabela
 	*/
 	ordenaColuna: function(coluna,cid){
@@ -653,7 +653,7 @@ i3GEOF.tabela = {
 	},
 	/*
 	Function: listaMarcados
-	
+
 	Retorna um array com os &iacute;ndices dos registros que est&atilde;o marcados.
 	*/
 	listaMarcados: function(){
@@ -669,11 +669,11 @@ i3GEOF.tabela = {
 	},
 	/*
 	Function: ativaSelecao
-	
+
 	Seleciona no mapa os elementos que estiverem marcados na guia 2
-	
+
 	Veja:
-	
+
 	<INCLUISEL>
 	*/
 	ativaSelecao: function(){
@@ -696,7 +696,7 @@ i3GEOF.tabela = {
 	},
 	/*
 	Function: limpaSelecao
-	
+
 	Limpa a sele&ccedil;&atilde;o do tema da tabela
 	*/
 	limpaSelecao: function(){
@@ -715,7 +715,7 @@ i3GEOF.tabela = {
 	},
 	/*
 	Function: criaNovoTema
-	
+
 	Cria um novo tema contendo a sele&ccedil;&atilde;o existente
 	*/
 	criaNovoTema: function(){
@@ -730,7 +730,7 @@ i3GEOF.tabela = {
 	},
 	/*
 	Function: comboItens
-	
+
 	Cria um combo para selecionar um item do tema escolhido
 	*/
 	comboItensEstat: function(){
@@ -778,7 +778,7 @@ i3GEOF.tabela = {
 					}
 					$i("i3GEOtabelaoperacoes").innerHTML = ins + "<br>";
 					i3GEOF.tabela.aguarde.visibility = "hidden";
-				},	
+				},
 				exclui = "",
 				cp = new cpaint(),
 				p;
@@ -810,8 +810,8 @@ i3GEOF.tabela = {
 					i3GEO.analise.dialogo.graficoInterativo();
 				}
 			}}
-		);				
-		
+		);
+
 	},
 	t1: function(){
 		var ins = "<p class='paragrafo' >Escolha o tipo de gr&aacute;fico:</p>";
@@ -897,7 +897,7 @@ i3GEOF.tabela = {
 		ins += "<td><input onclick='javascript:this.select();' class=digitar type=text value=400 size=20 id='i3GEOtabelagh' /></td></tr>";
 		ins += "<tr><td>Resolu&ccedil;&atilde;o em dpi</td>";
 		ins += "<td><input onclick='javascript:this.select();' class=digitar type=text value=72 size=20 id='i3GEOtabelares' /></td></tr>";
-	
+
 		temp = i3GEOF.tabela.parametros.split(",");
 		n = temp.length;
 		for(i=0;i < n;i++)
@@ -916,11 +916,11 @@ i3GEOF.tabela = {
 		new YAHOO.widget.Button(
 			"i3GEOtabelabotao10",
 			{onclick:{fn: function(){i3GEOF.tabela.geraGrafico(i3GEOF.tabela.mostraImagem);}}}
-		);			
+		);
 	},
 	/*
 	Function: retornaPar
-	
+
 	Monta os parâmetros adicionais de cada tipo de gr&aacute;fico
 	*/
 	retornaPar: function(id){
@@ -944,7 +944,7 @@ i3GEOF.tabela = {
 			if (id === "corlinha"){
 				ins += "<tr><td>Cor da linha</td>";
 				ins += "<td>"+i3GEOF.tabela.combocor("i3GEOtabelacorlinha","1")+"</td></tr>";
-			}	
+			}
 			if (id === "corbarras"){
 				ins += "<tr><td>Cor das barras</td>";
 				ins += "<td>"+i3GEOF.tabela.combocor("i3GEOtabelacorbarras","0")+"</td></tr>";
@@ -1195,7 +1195,7 @@ i3GEOF.tabela = {
 	},
 	/*
 	Function: combocor
-	
+
 	Gera uma lista de cores no padr&atilde;o do R
 	*/
 	combocor: function(id,def,s){
@@ -1218,18 +1218,18 @@ i3GEOF.tabela = {
 	},
 	/*
 	Function: geraGrafico
-	
+
 	Gera a imagem do gr&aacute;fico
 	*/
 	geraGrafico: function(funcao){
 		if(i3GEOF.tabela.aguarde.visibility === "visible")
 		{return;}
 		i3GEOF.tabela.aguarde.visibility = "visible";
-		
+
 		var par,p,
 			cp = new cpaint();
 		par = i3GEOF.tabela.montapar(i3GEOF.tabela.parametros);
-			
+
 		if (i3GEOF.tabela.tipoDeGrafico==="pie"){
 			p = i3GEO.configura.locaplic+"/classesphp/mapa_controle.php?g_sid="+i3GEO.configura.sid+"&funcao=graficopizza"+par;
 			cp.set_response_type("JSON");
@@ -1263,7 +1263,7 @@ i3GEOF.tabela = {
 	},
 	/*
 	Function: mostraGrafico
-	
+
 	Mostra o gr&aacute;fico gerado em uma nova janela do navegador
 	*/
 	mostraGrafico: function(retorno){
@@ -1284,9 +1284,9 @@ i3GEOF.tabela = {
 	},
 	/*
 	Function: mostraImagem
-	
+
 	Mostra o gr&aacute;fico na janela flutuante do i3Geo
-	
+
 	*/
 	mostraImagem: function(retorno){
 		i3GEOF.tabela.aguarde.visibility = "hidden";
@@ -1304,13 +1304,13 @@ i3GEOF.tabela = {
 	},
 	/*
 	Function: fusaoGrafico
-	
+
 	Faz a fus&atilde;o do mapa com o gr&aacute;fico gerado
 	*/
 	fusaoGrafico: function(){
 		if(i3GEOF.tabela.aguarde.visibility === "visible")
 		{return;}
-		i3GEOF.tabela.aguarde.visibility = "visible";	
+		i3GEOF.tabela.aguarde.visibility = "visible";
 		if (i3GEOF.tabela.imagemG === ""){
 			alert("O gr&aacute;fico ainda n&atilde;o foi gerado.");
 			i3GEOF.tabela.aguarde.visibility = "hidden";
@@ -1333,7 +1333,7 @@ i3GEOF.tabela = {
 	},
 	/*
 	Function: montaPar
-	
+
 	Monta os parâmetros para um determinado tipo de gr&aacute;fico, que ser&atilde;o utilizados na chamada ajax de cria&ccedil;&atilde;o do gr&aacute;fico
 	*/
 	montapar: function(parametros){
@@ -1359,7 +1359,7 @@ i3GEOF.tabela = {
 			{tipo = "scatter";}
 			if ($i("i3GEOtabelaagrupar"))
 			{tipo = $i("i3GEOtabelaagrupar").value;}
-			
+
 			if ((i3GEOF.tabela.tipoDeGrafico === "pie") || (i3GEOF.tabela.tipoDeGrafico === "barplot") || (i3GEOF.tabela.tipoDeGrafico === "scatter") || (i3GEOF.tabela.tipoDeGrafico === "scatterbins"))
 			{par += "&itemvalores="+$i("i3GEOFtabelagi1").value+"&itemclasses="+$i("i3GEOFtabelagi2").value+"&tema="+i3GEOF.tabela.tema+"&exclui="+$i("i3GEOtabelagexcluir").value+"&tipo="+tipo;}
 			if (i3GEOF.tabela.tipoDeGrafico === "hist")
@@ -1374,7 +1374,7 @@ i3GEOF.tabela = {
 	},
 	/*
 	Function: relatorioTabela
-	
+
 	Monta o relat&oacute;rio padr&atilde;o em uma nova janela
 	*/
 	relatorioTabela: function(){
@@ -1408,7 +1408,7 @@ i3GEOF.tabela = {
 	},
 	/*
 	Function: relatorioTexto
-	
+
 	Gera o relat&oacute;rio no formato CSV
 	*/
 	relatorioTexto: function(){

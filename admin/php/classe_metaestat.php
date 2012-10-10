@@ -1561,5 +1561,46 @@ class Metaestat{
 		}
 		return array("ok");
 	}
+	function xy2regiao($codigo_tipo_regiao,$x,$y){
+		//pega a tabela, esquema e conexao para acessar os dados da regiao
+		$regiao = $this->listaTipoRegiao($codigo_tipo_regiao);
+		$c = $this->listaConexao($regiao["codigo_estat_conexao"],true);
+		$dbh = new PDO('pgsql:dbname='.$c["bancodedados"].';user='.$c["usuario"].';password='.$c["senha"].';host='.$c["host"].';port='.$c["porta"]);
+		$sql = "select ".$regiao["identificador"]." as identificador_regiao,".$regiao["colunanomeregiao"]." as nomeregiao from i3geo_metaestat.".$regiao["tabela"]." WHERE ST_within(ST_GeomFromText('POINT($x $y)',".$regiao["srid"]."),".$regiao["colunageo"].")";
+		$q = $dbh->query($sql,PDO::FETCH_ASSOC);
+		$r = $q->fetchAll();
+		if(count($r) > 0){
+			return $r[0];
+		}
+		else{
+			return "";
+		}
+	}
+	function listaAtributosMedidaVariavelRegiao ($identificador_regiao,$id_medida_variavel){
+		$medida = $this->listaMedidaVariavel("",$id_medida_variavel);
+		$c = $this->listaConexao($medida["codigo_estat_conexao"],true);
+		//var_dump($c);exit;
+		$dbh = new PDO('pgsql:dbname='.$c["bancodedados"].';user='.$c["usuario"].';password='.$c["senha"].';host='.$c["host"].';port='.$c["porta"]);
+
+		$colunassql[] = $medida["colunavalor"]." as valormedida";
+		$alias[] = $medida["nomemedida"];
+		$colunas[] = "valormedida";
+
+		$parametros = $this->listaParametro($id_medida_variavel);
+		foreach($parametros as $p){
+			$colunassql[] = $p["coluna"];
+			$alias[] = $p["nome"];
+			$colunas[] = $p["coluna"];
+		}
+
+		$sql = "select ".implode(",",$colunassql)." from ".$medida["esquemadb"].".".$medida["tabela"]." WHERE ".$medida["colunaidgeo"]."::text = ".$identificador_regiao."::text ";
+		//echo $sql;exit;
+		if($medida["filtro"] != ""){
+			$sql .= " and ".$medida["filtro"];
+		}
+		$q = $dbh->query($sql,PDO::FETCH_ASSOC);
+		$r = $q->fetchAll();
+		return array("dados"=>$r,"aliascolunas"=>$alias,"colunas"=>$colunas);
+	}
 }
 ?>

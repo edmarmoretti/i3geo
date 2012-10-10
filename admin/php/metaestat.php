@@ -1146,5 +1146,20 @@ switch (strtoupper($funcao))
 		retornaJSON($m->mantemDadosRegiao($codigo_tipo_regiao,$identificador,$identificadornovo,$nome,$wkt,$tipo));
 		exit;
 	break;
+	case "LISTAATRIBUTOSMEDIDAVARIAVELXY":
+		$m = new Metaestat();
+		$regiao = $m->xy2regiao($codigo_tipo_regiao, $x, $y);
+		$identificador_regiao = $regiao["identificador_regiao"];
+		$resultado = array();
+		if($regiao != ""){
+			$dados = $m->listaAtributosMedidaVariavelRegiao($identificador_regiao, $id_medida_variavel);
+			$resultado = array(
+				"atributos"=>$dados,
+				"regiao"=>$regiao
+			);
+		}
+		retornaJSON($resultado);
+		exit;
+	break;
 }
 ?>

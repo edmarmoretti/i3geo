@@ -390,6 +390,7 @@ var editorlimites = {
 		if(combo.value === ""){
 			return;
 		}
+		editorlimites.editarAtributos.desativa();
 		var temp = function(retorno){
 			if(i3GEO.arvoreDeCamadas.pegaTema(retorno.layer) == ""){
 				i3GEO.php.adtema(i3GEO.atualiza,retorno.mapfile);
@@ -584,7 +585,14 @@ var editorlimites = {
 		}
 	},
 	editarAtributos: {
+		aliascolunas: "", //guarda os nomes das colunas e seus aliases para permitir a criacao de novos registros
+		x: "",
+		y: "",
 		ativa: function(botao){
+			if($i("i3geoCartoRegioesEditaveis").value == ""){
+				alert("Escolha uma regiao");
+				return;
+			}
 			editorlimites.mudaicone(botao);
 			if(i3GEO.eventos.MOUSECLIQUE.toString().search("editorlimites.editarAtributos.captura()") < 0)
 			{i3GEO.eventos.MOUSECLIQUE.push("editorlimites.editarAtributos.captura()");}
@@ -608,13 +616,50 @@ var editorlimites = {
 				editorlimites.mudaicone(botao);
 				return;
 			}
+			editorlimites.editarAtributos.x = objposicaocursor.ddx;
+			editorlimites.editarAtributos.y = objposicaocursor.ddy;
 			editorlimites.editarAtributos.pegaDados();
 		},
-		comboMedidas: function(){
-
-		},
 		pegaDados: function(){
-
+			var p = i3GEO.configura.locaplic+"/admin/php/metaestat.php?funcao=listaAtributosMedidaVariavelXY",
+				codigo_tipo_regiao = $i("i3geoCartoRegioesEditaveis").value,
+				id_medida_variavel = $i("editarAtributosComboMedidas").value,
+				temp = function(retorno){
+					var atr = retorno.atributos,
+						i = 0,
+						n = atr.dados.length,
+						j = 0,
+						nj = atr.aliascolunas.length,
+						ins = "" +
+						'<p class=paragrafo >Regi&atilde;o escolhida:</p>' +
+						'<p class=paragrafo ><b>Nome: </b>' + retorno.regiao.nomeregiao + '</p>' +
+						'<p class=paragrafo ><b>C&oacute;digo: </b>' + retorno.regiao.identificador_regiao + '</p>' +
+						'<input type=hidden name="identificador_regiao" value="' + retorno.regiao.identificador_regiao + '" />' +
+						'<p class=paragrafo >Atributos:</p>' +
+						'<input id=editarAtributosAdicionar value="Adicionar um novo" />' ;
+					$i("editarAtributosRegiao").innerHTML = ins;
+					ins = "";
+					for(i=0;i<n;i++){
+						ins += "<hr><br>";
+						for(j=0;j<nj;j++){
+							ins += '<p class=paragrafo >'+atr.aliascolunas[j]+':</p>' +
+							'<input class=digitar value="'+atr.dados[i][j]+'" name="'+atr.colunas[j]+'" />';
+						}
+					}
+					$i("editarAtributosForm").innerHTML = ins;
+					new YAHOO.widget.Button(
+							"editarAtributosAdicionar",
+							{onclick:{fn: function(){
+								var ins = "<hr><br>";
+								for(j=0;j<nj;j++){
+									ins += '<p class=paragrafo >'+atr.aliascolunas[j]+':</p>' +
+									'<input class=digitar value="" name="'+atr.colunas[j]+'" />';
+								}
+								$i("editarAtributosForm").innerHTML += ins + "<br>";
+							}}}
+					);
+				};
+			cpJSON.call(p,"foo",temp,"&codigo_tipo_regiao="+codigo_tipo_regiao+"&id_medida_variavel="+id_medida_variavel+"&x="+editorlimites.editarAtributos.x+"&y="+editorlimites.editarAtributos.y);
 		},
 		salva: function(){
 
@@ -627,7 +672,7 @@ var editorlimites = {
 			};
 			titulo = "Atributos&nbsp;&nbsp;&nbsp;</a>";
 			janela = i3GEO.janela.cria(
-				"350px",
+				"250px",
 				"265px",
 				"",
 				"",
@@ -641,12 +686,14 @@ var editorlimites = {
 			);
 			$i("editaAtributos_corpo").style.backgroundColor = "white";
 			$i("editaAtributos_corpo").innerHTML = html;
+			i3GEO.janela.tempoMsg("Ap&oacute;s escolher a medida da vari&aacute;vel, clique no mapa para escolher a regi&atilde;o.");
 			YAHOO.util.Event.addListener(janela[0].close, "click", editorlimites.mudaicone);
 		},
 		html: function(){
 			var ins = '' +
-				'<p class="paragrafo" >Clique no mapa para obter os atributos</p>' +
 				'<p class="paragrafo" ><div id="editarAtributosVariaveis" ></div></p>' +
+				'<p class="paragrafo" ><div id="editarAtributosMedidasVariavel" ></div></p>' +
+				'<p class="paragrafo" ><div id="editarAtributosRegiao" ></div></p>' +
 				'<p class="paragrafo" ><div id="editarAtributosForm" ></div></p>' +
 				'';
 			return ins;
@@ -655,7 +702,7 @@ var editorlimites = {
 			 var temp = function(dados){
 				var i,n = dados.length, ins = '';
 				ins += '<p class="paragrafo" >Escolha uma vari&aacute;vel para editar</p>';
-				ins += "<select style='box-shadow:0 1px 5px gray;width:200px' onchange=''><option value=''>---</option>";
+				ins += "<select style='box-shadow:0 1px 5px gray;width:200px' onchange='editorlimites.editarAtributos.comboMedidasVariavel(this)'><option value=''>---</option>";
 				for(i=0;i<n;i++){
 					ins += "<option title='"+dados[i].descricao+"' value='"+dados[i].codigo_variavel+"'>"+dados[i].nome+"</option>";
 				}
@@ -663,7 +710,23 @@ var editorlimites = {
 				$i("editarAtributosVariaveis").innerHTML = ins;
 			};
 			i3GEO.php.listaVariavel(temp,"i3geo_metaestat");
+		},
+		comboMedidasVariavel: function(comboMedidas){
+			 var temp = function(dados){
+				var i,n = dados.length, ins = '';
+				ins += '<p class="paragrafo" >Escolha uma medida da vari&aacute;vel para editar</p>';
+				ins += "<select id='editarAtributosComboMedidas' style='box-shadow:0 1px 5px gray;width:200px' onchange=''><option value=''>---</option>";
+				for(i=0;i<n;i++){
+					if(dados[i].esquemadb == "i3geo_metaestat" && dados[i].codigo_tipo_regiao == $i("i3geoCartoRegioesEditaveis").value){
+						ins += "<option value='"+dados[i].id_medida_variavel+"'>"+dados[i].nomemedida+"</option>";
+					}
+				}
+				ins += "</select>";
+				$i("editarAtributosMedidasVariavel").innerHTML = ins;
+			};
+			if(comboMedidas.value !== ""){
+				i3GEO.php.listaMedidaVariavel(comboMedidas.value,temp);
+			}
 		}
 	}
-	//TODO incluir opcao para clicar e editar atributos de medida da variavel
 };
