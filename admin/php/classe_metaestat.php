@@ -644,13 +644,13 @@ class Metaestat{
 
 	Altera uma medida de uma variavel ou cria uma nova
 	*/
-	function alteraMedidaVariavel($codigo_variavel,$id_medida_variavel="",$codigo_unidade_medida,$codigo_tipo_periodo,$codigo_tipo_regiao,$codigo_estat_conexao,$esquemadb,$tabela,$colunavalor,$colunaidgeo,$filtro,$nomemedida){
+	function alteraMedidaVariavel($codigo_variavel,$id_medida_variavel="",$codigo_unidade_medida,$codigo_tipo_periodo,$codigo_tipo_regiao,$codigo_estat_conexao,$esquemadb,$tabela,$colunavalor,$colunaidgeo,$colunaidunico,$filtro,$nomemedida){
 		try	{
 			if($id_medida_variavel != ""){
 				if($this->convUTF){
 					$nomemedida = utf8_encode($nomemedida);
 				}
-				$this->dbhw->query("UPDATE ".$this->esquemaadmin."i3geoestat_medida_variavel SET codigo_unidade_medida = '$codigo_unidade_medida',codigo_tipo_periodo = '$codigo_tipo_periodo',codigo_tipo_regiao = '$codigo_tipo_regiao',codigo_estat_conexao = '$codigo_estat_conexao',esquemadb = '$esquemadb',tabela = '$tabela',colunavalor = '$colunavalor',colunaidgeo = '$colunaidgeo',filtro = '$filtro',nomemedida = '$nomemedida' WHERE id_medida_variavel = $id_medida_variavel");
+				$this->dbhw->query("UPDATE ".$this->esquemaadmin."i3geoestat_medida_variavel SET codigo_unidade_medida = '$codigo_unidade_medida',codigo_tipo_periodo = '$codigo_tipo_periodo',codigo_tipo_regiao = '$codigo_tipo_regiao',codigo_estat_conexao = '$codigo_estat_conexao',esquemadb = '$esquemadb',tabela = '$tabela',colunavalor = '$colunavalor',colunaidgeo = '$colunaidgeo',colunaidunico = '$colunaidunico' ,filtro = '$filtro',nomemedida = '$nomemedida' WHERE id_medida_variavel = $id_medida_variavel");
 				$retorna = $id_medida_variavel;
 			}
 			else{
@@ -1231,6 +1231,8 @@ class Metaestat{
 			$this->execSQL($sql,"",false);
 			$sql = "UPDATE i3geoestat_medida_variavel SET colunaidgeo = '$novonome_coluna' WHERE esquemadb = '$nome_esquema' and tabela = '$nome_tabela' and colunaidgeo = '$nome_coluna'";
 			$this->execSQL($sql,"",false);
+			$sql = "UPDATE i3geoestat_medida_variavel SET colunaidunico = '$novonome_coluna' WHERE esquemadb = '$nome_esquema' and tabela = '$nome_tabela' and colunaidgeo = '$nome_coluna'";
+			$this->execSQL($sql,"",false);
 			$sql = "UPDATE i3geoestat_tipo_regiao SET colunageo = '$novonome_coluna' WHERE esquemadb = '$nome_esquema' and tabela = '$nome_tabela' ' and colunageo = '$nome_coluna'";
 			$this->execSQL($sql,"",false);
 			$sql = "UPDATE i3geoestat_tipo_regiao SET colunanomeregiao = '$novonome_coluna' WHERE esquemadb = '$nome_esquema' and tabela = '$nome_tabela' ' and colunanomeregiao = '$nome_coluna'";
@@ -1582,9 +1584,11 @@ class Metaestat{
 		//var_dump($c);exit;
 		$dbh = new PDO('pgsql:dbname='.$c["bancodedados"].';user='.$c["usuario"].';password='.$c["senha"].';host='.$c["host"].';port='.$c["porta"]);
 
-		$colunassql[] = $medida["colunavalor"]." as valormedida";
+		$colunassql[] = $medida["colunavalor"]." as valormedida, ".$medida["colunaidunico"]." as idunico ";
 		$alias[] = $medida["nomemedida"];
 		$colunas[] = "valormedida";
+		$alias[] = $medida["colunaidunico"];
+		$colunas[] = "idunico";
 
 		$parametros = $this->listaParametro($id_medida_variavel);
 		foreach($parametros as $p){

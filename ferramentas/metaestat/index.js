@@ -525,6 +525,8 @@ i3GEOF.metaestat = {
 				$i("Ecolunavalor").value = "valor_num";
 				//id que liga com o geo
 				$i("Ecolunaidgeo").value = "codigoregiao";
+				//id unico
+				$i("Ecolunaidunico").value = "gid";
 				//unidade de medida
 				$i("Ecodigo_unidade_medida").value = 1;
 				//periodo

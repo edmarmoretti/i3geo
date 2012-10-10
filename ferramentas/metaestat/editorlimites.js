@@ -629,6 +629,7 @@ var editorlimites = {
 						i = 0,
 						n = atr.dados.length,
 						j = 0,
+						idunico = "",
 						nj = atr.aliascolunas.length,
 						ins = "" +
 						'<p class=paragrafo >Regi&atilde;o escolhida:</p>' +
@@ -636,33 +637,88 @@ var editorlimites = {
 						'<p class=paragrafo ><b>C&oacute;digo: </b>' + retorno.regiao.identificador_regiao + '</p>' +
 						'<input type=hidden name="identificador_regiao" value="' + retorno.regiao.identificador_regiao + '" />' +
 						'<p class=paragrafo >Atributos:</p>' +
-						'<input id=editarAtributosAdicionar value="Adicionar um novo" />' ;
+						'<input id=editarAtributosAdicionar value="Adicionar um novo" />' +
+						'&nbsp;<input id=editarAtributosSalvar value="Salvar" />';
 					$i("editarAtributosRegiao").innerHTML = ins;
 					ins = "";
+					//registros
 					for(i=0;i<n;i++){
 						ins += "<hr><br>";
+						//descobre qual o indice que corresponde ao idunico do registro
 						for(j=0;j<nj;j++){
-							ins += '<p class=paragrafo >'+atr.aliascolunas[j]+':</p>' +
-							'<input class=digitar value="'+atr.dados[i][j]+'" name="'+atr.colunas[j]+'" />';
+							if(atr.colunas[j] !== "idunico"){
+								idunico = atr.dados[i][j];
+							}
+						}
+						//colunas
+						for(j=0;j<nj;j++){
+							if(atr.colunas[j] !== "idunico"){
+								ins += '<p class=paragrafo >'+atr.aliascolunas[j]+':<br>' +
+								'<input class=digitar id="idunico_'+idunico+'" value="'+atr.dados[i][j]+'" name="'+atr.colunas[j]+'" /></p>';
+							}
 						}
 					}
 					$i("editarAtributosForm").innerHTML = ins;
 					new YAHOO.widget.Button(
-							"editarAtributosAdicionar",
-							{onclick:{fn: function(){
-								var ins = "<hr><br>";
-								for(j=0;j<nj;j++){
-									ins += '<p class=paragrafo >'+atr.aliascolunas[j]+':</p>' +
-									'<input class=digitar value="" name="'+atr.colunas[j]+'" />';
+						"editarAtributosAdicionar",
+						{onclick:{fn: function(){
+							var ins = "<hr><br><div>";
+							for(j=0;j<nj;j++){
+								if(atr.colunas[j] !== "idunico"){
+									ins += '<p class=paragrafo >'+atr.aliascolunas[j]+':<br>' +
+									'<input class=digitar id="" value="" name="'+atr.colunas[j]+'" /></p>';
 								}
-								$i("editarAtributosForm").innerHTML += ins + "<br>";
-							}}}
+							}
+							$i("editarAtributosForm").innerHTML += ins + "</div><br>";
+						}}}
+					);
+					new YAHOO.widget.Button(
+						"editarAtributosSalvar",
+						{onclick:{fn: function(){
+							editorlimites.editarAtributos.salva();
+						}}}
 					);
 				};
 			cpJSON.call(p,"foo",temp,"&codigo_tipo_regiao="+codigo_tipo_regiao+"&id_medida_variavel="+id_medida_variavel+"&x="+editorlimites.editarAtributos.x+"&y="+editorlimites.editarAtributos.y);
 		},
 		salva: function(){
+			var container = $i("editarAtributosForm"),
+				divsT = container.getElementsByTagName("div"),
+				n = divsT.length,
+				i = 0,
+				dv = "",
+				inputs = "",
+				nj,
+				j,
+				colunas = [],
+				colunasT = [],
+				valores = [],
+				valoresT = [],
+				idsunicosT = [],
+				idsunicos = [],
+				p,
+				re = new RegExp("idunico_", "g"),//prefixo usado para marcar o id dos elementos input que contem os valores que se quer obter
+				temp = function(retorno){
 
+				};
+			for(i=0;i<n;i++){
+				dv = divsT[i];
+				inputs = dv.getElementsByTagName("input");
+				nj = inputs.length;
+				colunas = [];
+				valores = [];
+				idsunicos = [];
+				for(j=0;j<nj;j++){
+					colunas.push(inputs[j].name);
+					valores.push(inputs[j].value);
+					idsunicos.push(inputs[j].id.replace(re,''));
+				}
+				colunasT.push(colunas.join(";"));
+				valoresT.push(valores.join(";"));
+				idsunicosT.push(idsunicos.join(";"));
+			}
+			p = "&colunas="+colunasT.join("|")+"&valores="+valoresT.join("|")+"&idsunicos="+idsunicosT.join("|");
+			alert(p);
 		},
 		criaJanelaFlutuante: function(html){
 			var janela,titulo,cabecalho,minimiza;

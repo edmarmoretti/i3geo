@@ -21,7 +21,7 @@ INSERT INTO i3geoestat_unidade_medida (codigo_unidade_medida, nome, sigla, permi
 
 
 -- i3geoestat_medida_variavel
-INSERT INTO i3geoestat_medida_variavel (id_medida_variavel, codigo_unidade_medida, codigo_tipo_periodo, codigo_variavel, codigo_tipo_regiao, codigo_estat_conexao, esquemadb, tabela, colunavalor, colunaidgeo, filtro, nomemedida) VALUES ('1', '1', '2', '1', '2', '1', 'dbdemografia', 'tb_demografia', 'nu_populacao', 'co_ibge', '', 'População residente');
+INSERT INTO i3geoestat_medida_variavel (id_medida_variavel, codigo_unidade_medida, codigo_tipo_periodo, codigo_variavel, codigo_tipo_regiao, codigo_estat_conexao, esquemadb, tabela, colunavalor, colunaidgeo, filtro, nomemedida, colunaidunico) VALUES ('1', '1', '2', '1', '2', '1', 'dbdemografia', 'tb_demografia', 'nu_populacao', 'co_ibge', '', 'População residente', '');
 
 
 -- i3geoestat_parametro_medida
@@ -53,5 +53,10 @@ INSERT INTO i3geoestat_fonteinfo_medida (id_medida_variavel, id_fonteinfo) VALUE
 
 -- i3geoestat_fonteinfo
 INSERT INTO i3geoestat_fonteinfo (id_fonteinfo, titulo, link) VALUES ('1', 'Ministério da Saúde', 'http://saude.gov.br');
+
+
+-- i3geoestat_agregaregiao
+INSERT INTO i3geoestat_agregaregiao (id_agregaregiao, codigo_tipo_regiao, codigo_tipo_regiao_pai, colunaligacao_regiaopai) VALUES ('1', '1', '2', 'co_municipio');
+INSERT INTO i3geoestat_agregaregiao (id_agregaregiao, codigo_tipo_regiao, codigo_tipo_regiao_pai, colunaligacao_regiaopai) VALUES ('2', '2', '3', 'co_uf');
 
 
