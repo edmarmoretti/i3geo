@@ -699,7 +699,7 @@ var editorlimites = {
 				p,
 				re = new RegExp("idunico_", "g"),//prefixo usado para marcar o id dos elementos input que contem os valores que se quer obter
 				temp = function(retorno){
-
+					//TODO nao esquecer de refazer a lista
 				};
 			for(i=0;i<n;i++){
 				dv = divsT[i];
@@ -717,7 +717,7 @@ var editorlimites = {
 				valoresT.push(valores.join(";"));
 				idsunicosT.push(idsunicos.join(";"));
 			}
-			p = "&colunas="+colunasT.join("|")+"&valores="+valoresT.join("|")+"&idsunicos="+idsunicosT.join("|");
+			p = "&colunas="+colunasT[0]+"&valores="+valoresT.join("|")+"&idsunicos="+idsunicosT.join("|");
 			alert(p);
 		},
 		criaJanelaFlutuante: function(html){

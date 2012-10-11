@@ -577,7 +577,7 @@ i3GEO.janela = {
 			janela.render(document.body);
 			YAHOO.i3GEO.janela.managerAguarde.register(janela);
 		}
-		janela.setBody(texto);
+		janela.setBody("...");
 		altura = 40;
 		janela.body.style.padding="5px";
 		janela.body.style.backgroundColor="yellow";
@@ -598,10 +598,11 @@ i3GEO.janela = {
 		attributes = {
 			height: { to: altura }
 		};
-		anim = new YAHOO.util.Anim(janela.body, attributes, 1, YAHOO.util.Easing.easeNone);
+		anim = new YAHOO.util.Anim(janela.body, attributes, .5, YAHOO.util.Easing.easeNone);
 		anim.onComplete.subscribe(function(){
 			janela.body.style.overflow = "auto";
 			janela.body.style.display = "block";
+			janela.setBody(texto);
 		});
 		anim.animate();
 
@@ -618,7 +619,7 @@ i3GEO.janela = {
 					attributes = {
 						height: { to: 0 }
 					};
-					anim = new YAHOO.util.Anim(janela.body, attributes, 1, YAHOO.util.Easing.easeNone);
+					anim = new YAHOO.util.Anim(janela.body, attributes, .5, YAHOO.util.Easing.easeNone);
 					anim.onComplete.subscribe(function(){
 						janela.destroy();
 					});
