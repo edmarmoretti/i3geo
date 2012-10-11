@@ -95,13 +95,13 @@ i3GEOF.opcoesQuery = {
 				cp = new cpaint(),
 				retorno = function(retorno){
 					i3GEOF.opcoesQuery.aguarde.visibility = "hidden";
-					if(retorno.data.erro){alert("Ocorreu um erro");return;}
+					if(retorno.data.erro){i3GEO.janela.tempoMsg("Ocorreu um erro");return;}
 					$i("i3GEOopcoesQuerycor").value = retorno.data;
 				};
 			cp.set_response_type("JSON");
 			cp.call(p,"corQM",retorno);
 		}
-		catch(erro){alert(erro);}
+		catch(erro){i3GEO.janela.tempoMsg(erro);}
 	},
 	/*
 	Function: html

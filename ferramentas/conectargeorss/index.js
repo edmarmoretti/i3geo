@@ -67,7 +67,7 @@ function clickGuia2()
 {
 	mostraGuia("guia2");
 	$i("resultadoget").innerHTML = "";
-	if ($i("servico").value == ""){alert("Servi&ccedil;o n&atilde;o definido");}
+	if ($i("servico").value == ""){i3GEO.janela.tempoMsg("Servi&ccedil;o n&atilde;o definido");}
 	else
 	{
 		$i("guia2obj").style.display="block";

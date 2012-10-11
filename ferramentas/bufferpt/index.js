@@ -35,25 +35,25 @@ if(typeof(i3GEOF) === 'undefined'){
 /*
 Classe: i3GEOF.bufferpt
 
-Cria um novo tema com um pol&iacute;gono de entorno para uma determinada coordenada enviada como parâmetro
+Cria um novo tema com um pol&iacute;gono de entorno para uma determinada coordenada enviada como par&acirc;metro
 
 */
 i3GEOF.bufferpt = {
 	/*
 	Propriedade: x
-	
+
 	Coordenada x (longitude) do ponto
 	*/
 	x: 0,
 	/*
 	Propriedade: y
-	
+
 	Coordenada y (latitude) do ponto
 	*/
 	y: 0,
 	/*
 	Variavel: aguarde
-	
+
 	Estilo do objeto DOM com a imagem de aguarde existente no cabe&ccedil;alho da janela.
 	*/
 	aguarde: "",
@@ -65,11 +65,11 @@ i3GEOF.bufferpt = {
 	},
 	/*
 	Function: iniciaDicionario
-	
+
 	Carrega o dicion&aacute;rio e chama a fun&ccedil;&atilde;o que inicia a ferramenta
-	
+
 	O Javascript &eacute; carregado com o id i3GEOF.nomedaferramenta.dicionario_script
-	*/	
+	*/
 	iniciaDicionario: function(){
 		if(typeof(i3GEOF.bufferpt.dicionario) === 'undefined'){
 			i3GEO.util.scriptTag(
@@ -81,14 +81,14 @@ i3GEOF.bufferpt = {
 		else{
 			i3GEOF.bufferpt.iniciaJanelaFlutuante();
 		}
-	},		
+	},
 	/*
 	Function: inicia
-	
+
 	Inicia a ferramenta. &Eacute; chamado por criaJanelaFlutuante
-	
+
 	Parametro:
-	
+
 	iddiv {String} - id do div que receber&aacute; o conteudo HTML da ferramenta
 	*/
 	inicia: function(iddiv){
@@ -103,38 +103,38 @@ i3GEOF.bufferpt = {
 				{onclick:{fn: i3GEOF.bufferpt.executa}}
 			);
 		}
-		catch(erro){alert(erro);}
+		catch(erro){i3GEO.janela.tempoMsg(erro);}
 	},
 	/*
 	Function: html
-	
+
 	Gera o c&oacute;digo html para apresenta&ccedil;&atilde;o das op&ccedil;&otilde;es da ferramenta
-	
+
 	Retorno:
-	
+
 	String com o c&oacute;digo html
 	*/
 	html:function(){
 		var ins = '' +
-		'<p class=paragrafo >Distância em metros ao redor do ponto</p>' +
+		'<p class=paragrafo >Dist&acirc;ncia em metros ao redor do ponto</p>' +
 		$inputText("","","i3GEOFbufferptDistancia","",10,0) +
 		'<br><br><p class=paragrafo ><input id=i3GEObufferptbotao1 size=16  type=button value="Criar"/>';
 		return ins;
 	},
 	/*
 	Function: iniciaJanelaFlutuante
-	
+
 	Cria a janela flutuante para controle da ferramenta.
-	
-	Os parâmetros x e y s&atilde;o utilizados para a defini&ccedil;&atilde;o das propriedades i3GEOF.bufferpt.x e i3GEOF.bufferpt.y. Se n&atilde;o forem fornecidos,
+
+	Os par&acirc;metros x e y s&atilde;o utilizados para a defini&ccedil;&atilde;o das propriedades i3GEOF.bufferpt.x e i3GEOF.bufferpt.y. Se n&atilde;o forem fornecidos,
 	seus valores permanecer&atilde;o como 0. Essas propriedades podem tamb&eacute;m ser definidas pela fun&ccedil;&atilde;o que ativou a ferramenta.
-	
+
 	Parametros:
-	
+
 	x {dd} - coordenada x (longitude)
-	
+
 	y {dd} - coordenada y (latitude)
-	*/	
+	*/
 	iniciaJanelaFlutuante: function(x,y){
 		var janela,divid,titulo,cabecalho,minimiza;
 		if(x)
@@ -166,14 +166,14 @@ i3GEOF.bufferpt = {
 	},
 	/*
 	Function: executa
-	
+
 	Altera o tamanho do mapa
-	
+
 	Veja:
-	
+
 	<MUDATAMANHO>
 	*/
-	executa: function(){	
+	executa: function(){
 		try{
 			if(i3GEOF.bufferpt.aguarde.visibility === "visible")
 			{return;}
@@ -187,7 +187,7 @@ i3GEOF.bufferpt = {
 				fim = function(retorno){
 					i3GEOF.bufferpt.aguarde.visibility = "hidden";
 					if (retorno.data === undefined )
-					{alert("Erro. A opera&ccedil;&atilde;o demorou muito.");}
+					{i3GEO.janela.tempoMsg("Erro. A opera&ccedil;&atilde;o demorou muito.");}
 					else
 					{i3GEO.atualiza();}
 				};
@@ -197,11 +197,11 @@ i3GEOF.bufferpt = {
 				cp.call(p,"criaBuffer",fim);
 			}
 			else
-			{alert("Distancia invalida");}
+			{i3GEO.janela.tempoMsg("Distancia invalida");}
 		}
 		catch(e){$i("i3GEObufferfim").innerHTML = "<p class='paragrafo' >Erro. "+e;i3GEO.janela.fechaAguarde();i3GEOF.bufferpt.aguarde.visibility = "hidden";}
-		
-		
-		
-	}	
+
+
+
+	}
 };

@@ -105,7 +105,7 @@ i3GEOF.tipoimagem = {
 			};
 			i3GEO.php.criaLegendaHTML(temp,"","legendaseminput.htm");
 		}
-		catch(erro){alert(erro);}
+		catch(erro){i3GEO.janela.tempoMsg(erro);}
 
 	},
 	/*

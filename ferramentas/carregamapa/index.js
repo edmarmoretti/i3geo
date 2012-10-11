@@ -89,7 +89,7 @@ i3GEOF.carregaMapa = {
 				{onclick:{fn: i3GEOF.carregaMapa.submete}}
 			);
 		}
-		catch(erro){alert(erro);}
+		catch(erro){i3GEO.janela.tempoMsg(erro);}
 	},
 	/*
 	Function: html

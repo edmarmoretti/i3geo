@@ -215,7 +215,7 @@ i3GEO.tema = {
 			);
 		}
 		else
-		{alert($trad("x16"));}
+		{i3GEO.janela.tempoMsg($trad("x16"));}
 	},
 	/*
 	Function: invertestatuslegenda
@@ -228,7 +228,7 @@ i3GEO.tema = {
 	*/
 	invertestatuslegenda: function(idtema){
 		if(typeof(console) !== 'undefined'){console.info("i3GEO.tema.invertestatuslegenda()");}
-		alert($trad("x17"));
+		i3GEO.janela.tempoMsg($trad("x17"));
 		i3GEO.mapa.ativaTema(idtema);
 		g_operacao = "transparencia";
 		i3GEO.php.invertestatuslegenda(
@@ -286,7 +286,7 @@ i3GEO.tema = {
 			i3GEO.php.mudanome(i3GEO.atualiza,idtema,valor);
 		}
 		else
-		{alert($trad("x18"));}
+		{i3GEO.janela.tempoMsg($trad("x18"));}
 	},
 	/*
 	Function: mostralegendajanela

@@ -100,7 +100,7 @@ i3GEOF.etiqueta = {
 			);
 			i3GEOF.etiqueta.ativaFoco();
 		}
-		catch(erro){alert(erro);}
+		catch(erro){i3GEO.janela.tempoMsg(erro);}
 	},
 	/*
 	Function: html
@@ -245,7 +245,7 @@ i3GEOF.etiqueta = {
 				temp,
 				p;
 			if(lista.length === 0)
-			{alert("selecione um item");return;}
+			{i3GEO.janela.tempoMsg("selecione um item");return;}
 			i3GEOF.etiqueta.aguarde.visibility = "visible";
 			temp = function(retorno){
 				i3GEOF.etiqueta.aguarde.visibility = "hidden";
@@ -254,7 +254,7 @@ i3GEOF.etiqueta = {
 			p = i3GEO.configura.locaplic+"/classesphp/mapa_controle.php?g_sid="+i3GEO.configura.sid+"&funcao=ativaEtiquetas&tema="+i3GEO.temaAtivo+"&item="+lista.toString(",");
 			cp.set_response_type("JSON");
 			cp.call(p,"etiqueta",temp);
-		}catch(e){alert("Erro: "+e);i3GEOF.etiqueta.aguarde.visibility = "hidden";}
+		}catch(e){i3GEO.janela.tempoMsg("Erro: "+e);i3GEOF.etiqueta.aguarde.visibility = "hidden";}
 	},
 	/*
 	Function: desativa
@@ -280,6 +280,6 @@ i3GEOF.etiqueta = {
 			p = i3GEO.configura.locaplic+"/classesphp/mapa_controle.php?g_sid="+i3GEO.configura.sid+"&funcao=removeEtiquetas&tema="+i3GEO.temaAtivo;
 			cp.set_response_type("JSON");
 			cp.call(p,"etiqueta",temp);
-		}catch(e){alert("Erro: "+e);i3GEOF.etiqueta.aguarde.visibility = "hidden";}
+		}catch(e){i3GEO.janela.tempoMsg("Erro: "+e);i3GEOF.etiqueta.aguarde.visibility = "hidden";}
 	}
 };

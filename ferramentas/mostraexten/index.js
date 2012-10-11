@@ -92,7 +92,7 @@ i3GEOF.mostraExten = {
 			);
 			i3GEOF.mostraExten.ativaFoco();
 		}
-		catch(erro){alert(erro);}
+		catch(erro){i3GEO.janela.tempoMsg(erro);}
 	},
 	/*
 	Function: html
@@ -202,11 +202,11 @@ i3GEOF.mostraExten = {
 			var y = i3GEO.calculo.dms2dd($i("i3GEOmostraExtenyg").value,$i("i3GEOmostraExtenym").value,$i("i3GEOmostraExtenys").value);
 			var yy = i3GEO.calculo.dms2dd($i("i3GEOmostraExtenyyg").value,$i("i3GEOmostraExtenyym").value,$i("i3GEOmostraExtenyys").value);
 			if ((x == xx) || (y == yy))
-			{alert("Digite coordenadas v&aacute;lidas");return;}
+			{i3GEO.janela.tempoMsg("Digite coordenadas v&aacute;lidas");return;}
 			if ((x > xx) || (y > yy))
-			{alert("Digite coordenadas v&aacute;lidas");return;}
+			{i3GEO.janela.tempoMsg("Digite coordenadas v&aacute;lidas");return;}
 			i3GEO.navega.zoomExt(i3GEO.configura.locaplic,i3GEO.configura.sid,window.parent.i3GEO.parametros.tipoimagem,(x+" "+y+" "+xx+" "+yy));
 		}
-		catch(e){alert(e+" Erro. Digite coordenadas v&aacute;lidas");}
+		catch(e){i3GEO.janela.tempoMsg(e+" Erro. Digite coordenadas v&aacute;lidas");}
 	}
 };

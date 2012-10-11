@@ -104,7 +104,7 @@ i3GEOF.carregakml = {
 				{onclick:{fn: i3GEOF.carregakml.adiciona}}
 			);			
 		}
-		catch(erro){alert(erro);}
+		catch(erro){i3GEO.janela.tempoMsg(erro);}
 	},
 	/*
 	Function: html

@@ -115,7 +115,7 @@ i3GEOF.buscaFotos = {
 				i3GEOF.buscaFotos.busca(busca);
 			}
 		}
-		catch(erro){alert(erro);}
+		catch(erro){i3GEO.janela.tempoMsg(erro);}
 	},
 	/*
 	Function: html

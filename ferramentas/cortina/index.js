@@ -102,11 +102,11 @@ i3GEOF.cortina = {
 	*/
 	inicia: function(iddiv){
 		//if(navm)
-		//{alert("Esta ferramenta nao funciona adequadamente no Internet Explorer. Experimente usar o Firefox");}
+		//{i3GEO.janela.tempoMsg("Esta ferramenta nao funciona adequadamente no Internet Explorer. Experimente usar o Firefox");}
 		try{
 			$i(iddiv).innerHTML = i3GEOF.cortina.html();
 		}
-		catch(erro){alert(erro);}
+		catch(erro){i3GEO.janela.tempoMsg(erro);}
 		i3GEOF.cortina.criaslide();
 		i3GEOF.cortina.comboTemas();
 	},

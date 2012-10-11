@@ -173,7 +173,7 @@ i3GEO.mapa = {
 				$top(i3GEO.Interface.IDCORPO,imagemyi);
 			}
 		}
-		catch(e){alert("Ocorreu um erro. i3GEO.mapa.ajustaPosicao "+e);}
+		catch(e){i3GEO.janela.tempoMsg("Ocorreu um erro. i3GEO.mapa.ajustaPosicao "+e);}
 	},
 	/*
 	Function: ativaTema
@@ -245,11 +245,11 @@ i3GEO.mapa = {
 				return;
 			}
 			if(this.recupera.TENTATIVA === 0){
-				alert("Erro no mapa. Sera feita uma tentativa de recuperacao.");
+				i3GEO.janela.tempoMsg("Erro no mapa. Sera feita uma tentativa de recuperacao.");
 				i3GEO.mapa.recupera.inicia();
 			}
 			else{
-				alert("Recuperacao impossivel. Sera feita uma tentativa de reiniciar o mapa.");
+				i3GEO.janela.tempoMsg("Recuperacao impossivel. Sera feita uma tentativa de reiniciar o mapa.");
 				if (this.recupera.TENTATIVA === 1){
 					this.recupera.TENTATIVA = 2;
 					i3GEO.php.reiniciaMapa(i3GEO.atualiza);
@@ -575,7 +575,7 @@ i3GEO.mapa = {
 		*/
 		salvaMapa: function(){
 			if(i3GEO.parametros === "")
-			{alert("Essa opcao nao pode ser ativada. Consulte o administrador do sistema. Mapfile nao esta exposto.");return;}
+			{i3GEO.janela.tempoMsg("Essa opcao nao pode ser ativada. Consulte o administrador do sistema. Mapfile nao esta exposto.");return;}
 			i3GEO.util.dialogoFerramenta("i3GEO.mapa.dialogo.salvaMapa()","salvamapa","salvaMapa");
 		},
 		/*
@@ -593,7 +593,7 @@ i3GEO.mapa = {
 		*/
 		convertews: function(){
 			if(i3GEO.parametros.mapfile === "")
-			{alert("Essa opcao nao pode ser ativada. Consulte o administrador do sistema. Mapfile nao esta exposto.");return;}
+			{i3GEO.janela.tempoMsg("Essa opcao nao pode ser ativada. Consulte o administrador do sistema. Mapfile nao esta exposto.");return;}
 			i3GEO.util.dialogoFerramenta("i3GEO.mapa.dialogo.convertews()","convertews","converteMapaWS");
 		},
 		/*

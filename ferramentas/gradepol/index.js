@@ -91,7 +91,7 @@ i3GEOF.gradeDePoligonos = {
 			$i(iddiv).innerHTML += i3GEOF.gradeDePoligonos.html();
 			i3GEOF.gradeDePoligonos.t0();
 		}
-		catch(erro){alert(erro);}
+		catch(erro){i3GEO.janela.tempoMsg(erro);}
 	},
 	/*
 	Function: html
@@ -221,11 +221,11 @@ i3GEOF.gradeDePoligonos = {
 			nptx = $i("i3GEOgradedepoligonosnptx").value;
 			npty = $i("i3GEOgradedepoligonosnpty").value;
 			if ((dx == 0) || (dy == 0))
-			{alert("Distância entre as celulas n&atilde;o pode ser 0");return;}
+			{i3GEO.janela.tempoMsg("Distância entre as celulas n&atilde;o pode ser 0");return;}
 			if ((nptx == 0) || (npty == 0))
-			{alert("N&uacute;mero de pontos n&atilde;o pode ser 0");return;}
+			{i3GEO.janela.tempoMsg("N&uacute;mero de pontos n&atilde;o pode ser 0");return;}
 			if (nptx * npty > 10000)
-			{alert("N&uacute;mero de celulas n&atilde;o pode ser maior que 10.000");return;}
+			{i3GEO.janela.tempoMsg("N&uacute;mero de celulas n&atilde;o pode ser maior que 10.000");return;}
 			fim = function(retorno)
 			{
 				i3GEOF.gradeDePoligonos.aguarde.visibility = "hidden";

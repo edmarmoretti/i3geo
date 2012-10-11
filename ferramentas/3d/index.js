@@ -107,7 +107,7 @@ i3GEOF.t3d = {
 			$i(iddiv).innerHTML += i3GEOF.t3d.html();
 			i3GEOF.t3d.t0();
 		}
-		catch(erro){alert(erro);}
+		catch(erro){i3GEO.janela.tempoMsg(erro);}
 	},
 	/*
 	Function: html

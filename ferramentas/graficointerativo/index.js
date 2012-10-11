@@ -192,7 +192,7 @@ i3GEOF.graficointerativo = {
 				//var so = new swfobject(i3GEO.configura.locaplic+"/pacotes/openflashchart/open-flash-chart.swf", "i3GEOgraficointerativoGrafico1", "95%", "88%", "9", "#ffffff");
 				//var so = new swfobject();
 				function outputStatus(e) {
-					//alert("e.success = " + e.success +"\ne.id = "+ e.id +"\ne.ref = "+ e.ref);
+					//i3GEO.janela.tempoMsg("e.success = " + e.success +"\ne.id = "+ e.id +"\ne.ref = "+ e.ref);
 				}
 				swfobject.embedSWF(
 					i3GEO.configura.locaplic+"/pacotes/openflashchart/open-flash-chart.swf",
@@ -228,7 +228,7 @@ i3GEOF.graficointerativo = {
 			}
 			i3GEO.guias.mostraGuiaFerramenta("i3GEOgraficointerativoguia1","i3GEOgraficointerativoguia");
 		//}
-		//catch(erro){alert(erro);}
+		//catch(erro){i3GEO.janela.tempoMsg(erro);}
 	},
 	/*
 	Function: html
@@ -444,7 +444,7 @@ i3GEOF.graficointerativo = {
 				}catch(e){}
 			};
 		if (i3GEOF.graficointerativo.tipo === ""){
-			alert("Escolha um tipo de grafico");
+			i3GEO.janela.tempoMsg("Escolha um tipo de grafico");
 			i3GEO.guias.mostraGuiaFerramenta("i3GEOgraficointerativoguia1","i3GEOgraficointerativoguia");
 			return;
 		}
@@ -516,11 +516,11 @@ i3GEOF.graficointerativo = {
 		{ordenax = "nao";}
 
 		if(tema === "")
-		{alert("Escolha um tema");return;}
+		{i3GEO.janela.tempoMsg("Escolha um tema");return;}
 		if(x === "")
-		{alert("Escolha um item para X");return;}
+		{i3GEO.janela.tempoMsg("Escolha um item para X");return;}
 		if(y === "")
-		{alert("Escolha um item para Y");return;}
+		{i3GEO.janela.tempoMsg("Escolha um item para Y");return;}
 		monta = function(retorno){
 			i3GEOF.graficointerativo.aguarde.visibility = "hidden";
 			i3GEOF.graficointerativo.montaTabelaDados(retorno);

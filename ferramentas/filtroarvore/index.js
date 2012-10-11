@@ -85,7 +85,7 @@ i3GEOF.filtroarvore = {
 		try{
 			$i(iddiv).innerHTML += i3GEOF.filtroarvore.html();
 		}
-		catch(erro){alert(erro);}
+		catch(erro){i3GEO.janela.tempoMsg(erro);}
 	},
 	/*
 	Function: html

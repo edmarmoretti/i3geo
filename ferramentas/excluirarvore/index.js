@@ -202,7 +202,7 @@ i3GEOF.excluirarvore = {
 		if(lista.length > 0)
 		{i3GEO.php.excluitema(temp,lista);}
 		else{
-			alert("Escolha uma camada pelo menos");
+			i3GEO.janela.tempoMsg("Escolha uma camada pelo menos");
 			i3GEOF.excluirarvore.aguarde.visibility = "hidden";
 		}
 	}

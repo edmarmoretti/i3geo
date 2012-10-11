@@ -177,7 +177,7 @@ i3GEOF.identifica = {
 					if(i3GEO.temaAtivo !== ""){
 						var ltema = i3GEO.arvoreDeCamadas.pegaTema(i3GEO.temaAtivo);
 						if(ltema.identifica == "nao" || ltema.identifica == "NAO")
-						{alert("Esse tema n&atilde;o permite etiquetas");}
+						{i3GEO.janela.tempoMsg("Esse tema n&atilde;o permite etiquetas");}
 						else
 						{i3GEO.tema.dialogo.etiquetas(i3GEO.temaAtivo);}
 						$i("i3GEOidentificaocorrencia").innerHTML = "";
@@ -212,7 +212,7 @@ i3GEOF.identifica = {
 				{i3GEOF.identifica.buscaDadosTema(i3GEO.temaAtivo);}
 			}
 		}
-		catch(erro){alert(erro);}
+		catch(erro){i3GEO.janela.tempoMsg(erro);}
 
 		var Dom = YAHOO.util.Dom,
 			col1 = null,

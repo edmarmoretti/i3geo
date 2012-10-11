@@ -178,8 +178,8 @@ i3GEO.idioma = {
 	Parametro:
 
 	id - {String} C&oacute;digo do texto.
-		
-	dic - {string} Objeto que cont&eacute;m o dicion&aacute;. Por default, utiliza i3GEO.idioma.DICIONARIO	
+
+	dic - {string} Objeto que cont&eacute;m o dicion&aacute;. Por default, utiliza i3GEO.idioma.DICIONARIO
 
 	Returns:
 
@@ -368,5 +368,5 @@ $trad = function(id,dic){
 		if(typeof('g_traducao') !== "undefined")
 		{i3GEO.idioma.defineDicionario(g_traducao);}
 	}
-	catch(e){alert("Problemas com idiomas "+e);}
+	catch(e){i3GEO.janela.tempoMsg("Problemas com idiomas "+e);}
 })();

@@ -80,7 +80,7 @@ function listaRSS(g_RSS,onde)
 		var reg = /Erro/gi;
 		if (retorno.data.rss.search(reg) != -1)
 		{
-			alert("OOps! Ocorreu um erro\n"+retorno.data);
+			i3GEO.janela.tempoMsg("Oops! Ocorreu um erro\n"+retorno.data);
 			return;
 		}
 		var canais = retorno.data.canais;
@@ -117,7 +117,7 @@ Abre uma nova janela com o resultado da chamada GETCAPABILITIES sobre o WMS esco
 */
 function getcapabilities()
 {
-	if ($i("servico").value == ""){alert("Servi&ccedil;o n&atilde;o definido");}
+	if ($i("servico").value == ""){i3GEO.janela.tempoMsg("Servi&ccedil;o n&atilde;o definido");}
 	else
 	{window.open($i("servico").value+"&service=wms&request=getcapabilities&version=1.1.1");}
 }
@@ -133,7 +133,7 @@ Veja:
 function clickGuia2()
 {
 	mostraGuia("guia2");
-	if ($i("servico").value == ""){alert("Servi&ccedil;o n&atilde;o definido");}
+	if ($i("servico").value == ""){i3GEO.janela.tempoMsg("Servi&ccedil;o n&atilde;o definido");}
 	else
 	{
 		var metadados = function(retorno){
@@ -195,7 +195,7 @@ function clickGuia3()
 		{$i("listatemas").innerHTML = "erro";}
 	};
 	mostraGuia("guia3");
-	if ($i("servico").value == ""){alert("Servi&ccedil;o n&atilde;o definido");}
+	if ($i("servico").value == ""){i3GEO.janela.tempoMsg("Servi&ccedil;o n&atilde;o definido");}
 	else
 	{
 		$i("listatemas").innerHTML = "";
@@ -259,7 +259,7 @@ function seltema(tipo,tema,legenda,nometema,nomecamada,sldflag)
 		{
 			aguarde("none");
 			if(retorno.data != "ok")
-			{alert("Ooops! Problemas ao acessar o servi&ccedil;o.");aguarde("none");}
+			{i3GEO.janela.tempoMsg("Ooops! Problemas ao acessar o servi&ccedil;o.");aguarde("none");}
 			else
 			{window.parent.i3GEO.atualiza();}
 		};

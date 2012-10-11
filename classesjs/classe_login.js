@@ -128,7 +128,7 @@ i3GEO.login = {
 		var p = "",cp,temp,resultado = true;
 		if(!i3GEO.login.verificaCookieLogin()){
 			if(!funcaoErro)
-			{alert("Login!");}
+			{alert("Login...!");}
 			else{
 				funcaoErro.call();
 			}

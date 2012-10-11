@@ -67,7 +67,7 @@ i3GEO.selecao = {
 			if(doc.getElementById("tipoOperacao"))
 			{tipo = doc.getElementById("tipoOperacao").value;}
 			if (i3GEO.temaAtivo === "")
-			{alert("Nenhum tema ativo");return;}
+			{i3GEO.janela.tempoMsg("Nenhum tema ativo");return;}
 			tolerancia = doc.getElementById("toleranciapt").value;
 			//se tipo for limpa ou inverte, a operacao nao e executada no clique no mapa
 			if ((tipo !== "limpa") && (tipo !== "inverte"))
@@ -256,7 +256,7 @@ i3GEO.selecao = {
 			}
 			i3GEO.util.insereMarca.limpa();
 			g_tipoacao = "selecaopoli";
-			alert($trad("x20"));
+			i3GEO.janela.tempoMsg($trad("x20"));
 			i3GEO.desenho.criaContainerRichdraw();
 			i3GEO.desenho.richdraw.lineColor = "red";
 			i3GEO.desenho.richdraw.lineWidth = "2px";

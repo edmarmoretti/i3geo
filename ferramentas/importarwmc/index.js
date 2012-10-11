@@ -92,7 +92,7 @@ i3GEOF.importarwmc = {
 				{onclick:{fn: i3GEOF.importarwmc.submete}}
 			);
 		}
-		catch(erro){alert(erro);}
+		catch(erro){i3GEO.janela.tempoMsg(erro);}
 	},
 	/*
 	Function: html

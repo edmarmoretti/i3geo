@@ -75,7 +75,7 @@ i3GEOF.opcoesQuadros = {
 			};
 			i3GEOF.opcoesQuadros.aguarde.visibility = "hidden";
 		}
-		catch(erro){alert(erro);}
+		catch(erro){i3GEO.janela.tempoMsg(erro);}
 	},
 	/*
 	Function: html

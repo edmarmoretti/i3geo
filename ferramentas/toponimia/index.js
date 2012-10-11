@@ -123,7 +123,7 @@ i3GEOF.toponimia = {
 			);
 			i3GEO.util.comboFontes("i3GEOtoponimiaListaFonte","i3GEOtoponimiaDivListaFonte");
 		}
-		catch(erro){alert(erro);}
+		catch(erro){i3GEO.janela.tempoMsg(erro);}
 	},
 	/*
 	Function: html
@@ -310,7 +310,7 @@ i3GEOF.toponimia = {
 		var par = "",
 			novotema = "sim";
 		if($i("i3GEOtoponimiaListaItens").value == "")
-		{alert("Escolha um item");return false;}
+		{i3GEO.janela.tempoMsg("Escolha um item");return false;}
 		if($i("i3GEOtoponimiafundoc_i").value === "")
 		{$i("i3GEOtoponimiafundoc_i").value = "off";}
 		if($i("i3GEOtoponimiasombra_i").value === "")
@@ -377,7 +377,7 @@ i3GEOF.toponimia = {
 			cp = new cpaint();
 			cp.set_response_type("JSON");
 			cp.call(p,"criaToponimia",monta);
-		}catch(e){alert("Erro: "+e);i3GEOF.toponimia.aguarde.visibility = "hidden";}
+		}catch(e){i3GEO.janela.tempoMsg("Erro: "+e);i3GEOF.toponimia.aguarde.visibility = "hidden";}
 	},
 	/*
 	Function:

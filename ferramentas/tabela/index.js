@@ -224,7 +224,7 @@ i3GEOF.tabela = {
 			{$i("i3GEOtabelaguia4obj").innerHTML = $trad("x22");}
 			i3GEOF.tabela.pegaRegistros();
 		}
-		catch(erro){alert(erro);}
+		catch(erro){i3GEO.janela.tempoMsg(erro);}
 	},
 	/*
 	Function: html
@@ -387,7 +387,7 @@ i3GEOF.tabela = {
 	*/
 	ativaFoco: function(){
 		if(i3GEOF.tabela.tema !== "" && i3GEO.arvoreDeCamadas.pegaTema(i3GEOF.tabela.tema) === "")
-		{alert($trad(30,i3GEOF.tabela.dicionario));}
+		{i3GEO.janela.tempoMsg($trad(30,i3GEOF.tabela.dicionario));}
 		var i = $i("i3GEOF.tabela_c").style;
 		i3GEO.janela.ULTIMOZINDEX++;
 		i.zIndex = 21000 + i3GEO.janela.ULTIMOZINDEX;
@@ -752,7 +752,7 @@ i3GEOF.tabela = {
 	},
 	estatistica: function(){
 		if($i("i3GEOtabelaComboItensGuia3").value === "")
-		{alert("Escolha um item!");return;}
+		{i3GEO.janela.tempoMsg("Escolha um item!");return;}
 		if(i3GEOF.tabela.aguarde.visibility === "visible")
 		{return;}
 		i3GEOF.tabela.aguarde.visibility = "visible";
@@ -828,7 +828,7 @@ i3GEOF.tabela = {
 	},
 	validaT1: function(){
 	 	if (i3GEOF.tabela.tipoDeGrafico === ""){
-		  	alert("Selecione um tipo de Grafico");
+		  	i3GEO.janela.tempoMsg("Selecione um tipo de Grafico");
 		  	i3GEOF.tabela.t1();
 	 	}
 	 	else{
@@ -1191,7 +1191,7 @@ i3GEOF.tabela = {
 			}
 			return ins;
 		}
-		catch(e){alert("Erro ao capturar parametro. "+e);}
+		catch(e){i3GEO.janela.tempoMsg("Erro ao capturar parametro. "+e);}
 	},
 	/*
 	Function: combocor
@@ -1280,7 +1280,7 @@ i3GEOF.tabela = {
 			i3GEOF.tabela.nomeArquivoGr = l[2];
 		}
 		else
-		{alert("Ocorreu algum erro. Verifique os tipos de dados.");}
+		{i3GEO.janela.tempoMsg("Ocorreu algum erro. Verifique os tipos de dados.");}
 	},
 	/*
 	Function: mostraImagem
@@ -1300,7 +1300,7 @@ i3GEOF.tabela = {
 			i3GEOF.tabela.nomeArquivoGr = l[2];
 		}
 		else
-		{alert("Ocorreu algum erro. Verifique os tipos de dados.");}
+		{i3GEO.janela.tempoMsg("Ocorreu algum erro. Verifique os tipos de dados.");}
 	},
 	/*
 	Function: fusaoGrafico
@@ -1312,7 +1312,7 @@ i3GEOF.tabela = {
 		{return;}
 		i3GEOF.tabela.aguarde.visibility = "visible";
 		if (i3GEOF.tabela.imagemG === ""){
-			alert("O gr&aacute;fico ainda n&atilde;o foi gerado.");
+			i3GEO.janela.tempoMsg("O gr&aacute;fico ainda n&atilde;o foi gerado.");
 			i3GEOF.tabela.aguarde.visibility = "hidden";
 		}
 		else{
@@ -1370,7 +1370,7 @@ i3GEOF.tabela = {
 			{par += "&itemvalores="+$i("i3GEOFtabelagi1").value+"&tema="+i3GEOF.tabela.tema+"&exclui="+$i("i3GEOtabelagexcluir").value+"&tipo="+tipo+"&itemclasses="+itensEstrela;}
 			par += "&nome="+i3GEOF.tabela.nomeArquivoGr;
 			return(par);
-		}catch(e){alert("Erro: "+e);i3GEOF.tabela.aguarde.visibility = "hidden";}
+		}catch(e){i3GEO.janela.tempoMsg("Erro: "+e);i3GEOF.tabela.aguarde.visibility = "hidden";}
 	},
 	/*
 	Function: relatorioTabela
@@ -1404,7 +1404,7 @@ i3GEOF.tabela = {
 			$i("i3GEOtabelaitensrelh").value=listai;
 			$i("i3GEOtabelarelatorio").action += "?ext="+i3GEO.parametros.mapexten;
 			$i("i3GEOtabelarelatorio").submit();
-		}catch(e){alert(e);}
+		}catch(e){i3GEO.janela.tempoMsg(e);}
 	},
 	/*
 	Function: relatorioTexto
@@ -1439,6 +1439,6 @@ i3GEOF.tabela = {
 			$i("i3GEOtabelaitensrelh").value=listai;
 			$i("i3GEOtabelarelatorio").action += "?ext="+i3GEO.parametros.mapexten;
 			$i("i3GEOtabelarelatorio").submit();
-		}catch(e){alert(e);}
+		}catch(e){i3GEO.janela.tempoMsg(e);}
 	}
 };

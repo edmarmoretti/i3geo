@@ -89,7 +89,7 @@ i3GEOF.distanciaptpt = {
 			$i(iddiv).innerHTML += i3GEOF.distanciaptpt.html();
 			i3GEOF.distanciaptpt.t0();
 		}
-		catch(erro){alert(erro);}
+		catch(erro){i3GEO.janela.tempoMsg(erro);}
 	},
 	/*
 	Function: html

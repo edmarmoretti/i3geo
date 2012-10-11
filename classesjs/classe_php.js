@@ -93,9 +93,9 @@ i3GEO.php = {
 	*/
 	verifica: function(){
 		if(i3GEO.configura.locaplic === undefined)
-		{alert("i3GEO.php diz: variavel i3GEO.configura.locaplic n&atilde;o esta definida");}
+		{i3GEO.janela.tempoMsg("i3GEO.php diz: variavel i3GEO.configura.locaplic n&atilde;o esta definida");}
 		if(i3GEO.configura.sid === undefined)
-		{alert("i3GEO.php diz: variavel i3GEO.configura.sid n&atilde;o esta definida");}
+		{i3GEO.janela.tempoMsg("i3GEO.php diz: variavel i3GEO.configura.sid n&atilde;o esta definida");}
 	},
 	/*
 	Function: insereSHPgrafico
@@ -628,7 +628,7 @@ i3GEO.php = {
 		if(atualiza === undefined)
 		{atualiza = true;}
 		if(ext === undefined)
-		{alert("extensao nao definida");return;}
+		{i3GEO.janela.tempoMsg("extensao nao definida");return;}
 		retorno = function(retorno){
 			switch(i3GEO.Interface.ATUAL)
 			{

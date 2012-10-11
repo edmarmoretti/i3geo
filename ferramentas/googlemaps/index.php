@@ -303,7 +303,7 @@ Inicia a fun&ccedil;&atilde;o de cria&ccedil;&atilde;o de rotas, solicitando a i
 function ativaI3geoRota()
 {
 	rotaEvento = GEvent.addListener(map, "click", parametrosRota);
-	alert("Clique o ponto de origem da rota");
+	i3GEO.janela.tempoMsg("Clique o ponto de origem da rota");
 	counterClick++;
 }
 /*
@@ -316,7 +316,7 @@ function parametrosRota(overlay,latlng)
 	if(counterClick == 1)
 	{	
 		counterClick++;
-		alert("Clique o ponto de destino da rota");
+		i3GEO.janela.tempoMsg("Clique o ponto de destino da rota");
 		pontoRota1 = latlng
 		return;
 	}
@@ -341,7 +341,7 @@ function constroiRota()
 	var pt2 = function(response)
 	{
 		if (!response || response.Status.code != 200) {
-			alert("Status Code:" + response.Status.code);
+			i3GEO.janela.tempoMsg("Status Code:" + response.Status.code);
 			cursor("default");
 		} else {
 			place = response.Placemark[0];
@@ -362,7 +362,7 @@ function constroiRota()
 	{  	
 		map.clearOverlays();
 		if (!response || response.Status.code != 200) {
-			alert("Status Code:" + response.Status.code);
+			i3GEO.janela.tempoMsg("Status Code:" + response.Status.code);
 		} else {
 			place = response.Placemark[0];
 			point = new GLatLng(place.Point.coordinates[1],place.Point.coordinates[0]);

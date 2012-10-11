@@ -88,7 +88,7 @@ i3GEOF.dissolve = {
 			$i(iddiv).innerHTML += i3GEOF.dissolve.html();
 			i3GEOF.dissolve.t0();
 		}
-		catch(erro){alert(erro);}
+		catch(erro){i3GEO.janela.tempoMsg(erro);}
 	},
 	/*
 	Function: html

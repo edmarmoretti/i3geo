@@ -89,7 +89,7 @@ i3GEOF.salvaMapa = {
 				$i(iddiv).innerHTML += i3GEOF.salvaMapa.html()+"<a href='"+local+"' target='_blank' >Clique aqui para baixar o arquivo</a><br>";
 				$i(iddiv).innerHTML += "<a href='"+teste+"' target='_blank' >Clique aqui para testar</a>";
 			}
-			catch(erro){alert(erro);}
+			catch(erro){i3GEO.janela.tempoMsg(erro);}
 		},
 		atualiza = true,
 		geo = false;

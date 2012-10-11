@@ -87,7 +87,7 @@ i3GEOF.centromassa = {
 			$i(iddiv).innerHTML += i3GEOF.centromassa.html();
 			i3GEOF.centromassa.t0();
 		}
-		catch(erro){alert(erro);}
+		catch(erro){i3GEO.janela.tempoMsg(erro);}
 	},
 	/*
 	Function: html

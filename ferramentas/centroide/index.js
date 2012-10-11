@@ -87,7 +87,7 @@ i3GEOF.centroide = {
 			$i(iddiv).innerHTML += i3GEOF.centroide.html();
 			i3GEOF.centroide.t0();
 		}
-		catch(erro){alert(erro);}
+		catch(erro){i3GEO.janela.tempoMsg(erro);}
 	},
 	/*
 	Function: html

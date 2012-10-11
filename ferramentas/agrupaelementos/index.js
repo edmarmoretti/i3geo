@@ -88,7 +88,7 @@ i3GEOF.agrupaElementos = {
 			$i(iddiv).innerHTML += i3GEOF.agrupaElementos.html();
 			i3GEOF.agrupaElementos.t0();
 		}
-		catch(erro){alert(erro);}
+		catch(erro){i3GEO.janela.tempoMsg(erro);}
 	},
 	/*
 	Function: html
@@ -208,7 +208,7 @@ i3GEOF.agrupaElementos = {
 				cp.call(p,"agrupaElementos",fim);
 			}
 			else
-			{alert("Tema invalido");}
+			{i3GEO.janela.tempoMsg("Tema invalido");}
 		}
 		catch(e){$i("i3GEOagrupaelementosfim").innerHTML = "<p class='paragrafo' >Erro. "+e;i3GEO.janela.fechaAguarde();i3GEOF.agrupaElementos.aguarde.visibility = "hidden";}
 	},

@@ -894,7 +894,7 @@ i3GEO.util = {
 				if(i3GEO.eventos.NAVEGAMAPA.toString().search("i3GEO.util.insereMarca.limpa()") < 0)
 				{i3GEO.eventos.NAVEGAMAPA.push("i3GEO.util.insereMarca.limpa()");}
 			}
-			catch(e){alert("Ocorreu um erro. inseremarca"+e);}
+			catch(e){i3GEO.janela.tempoMsg("Ocorreu um erro. inseremarca"+e);}
 		},
 		limpa: function(){
 			try{
@@ -1592,21 +1592,21 @@ i3GEO.util = {
 				monta(i3GEO.arvoreDeCamadas.filtraCamadas("sel","sim","igual",temp));
 			}
 			else
-			{alert($trad("x13"));}
+			{i3GEO.janela.tempoMsg($trad("x13"));}
 		}
 		if(tipoCombo === "pontos"){
 			if(i3GEO.arvoreDeCamadas.CAMADAS !== ""){
 				monta(i3GEO.arvoreDeCamadas.filtraCamadas("type",0,"igual",i3GEO.arvoreDeCamadas.CAMADAS));
 			}
 			else
-			{alert($trad("x13"));}
+			{i3GEO.janela.tempoMsg($trad("x13"));}
 		}
 		if(tipoCombo === "poligonos"){
 			if(i3GEO.arvoreDeCamadas.CAMADAS !== ""){
 				monta(i3GEO.arvoreDeCamadas.filtraCamadas("type",2,"igual",i3GEO.arvoreDeCamadas.CAMADAS));
 			}
 			else
-			{alert($trad("x13"));}
+			{i3GEO.janela.tempoMsg($trad("x13"));}
 		}
 		if(tipoCombo === "poligonosSelecionados"){
 			if(i3GEO.arvoreDeCamadas.CAMADAS !== ""){
@@ -1614,7 +1614,7 @@ i3GEO.util = {
 				monta(i3GEO.arvoreDeCamadas.filtraCamadas("sel","sim","igual",temp));
 			}
 			else
-			{alert($trad("x13"));}
+			{i3GEO.janela.tempoMsg($trad("x13"));}
 		}
 		if(tipoCombo === "naolinearSelecionados"){
 			if(i3GEO.arvoreDeCamadas.CAMADAS !== ""){
@@ -1622,21 +1622,21 @@ i3GEO.util = {
 				monta(i3GEO.arvoreDeCamadas.filtraCamadas("sel","sim","igual",temp));
 			}
 			else
-			{alert($trad("x13"));}
+			{i3GEO.janela.tempoMsg($trad("x13"));}
 		}
 		if(tipoCombo === "linhaDoTempo"){
 			if(i3GEO.arvoreDeCamadas.CAMADAS !== ""){
 				monta(i3GEO.arvoreDeCamadas.filtraCamadas("linhadotempo","sim","igual",i3GEO.arvoreDeCamadas.CAMADAS));
 			}
 			else
-			{alert($trad("x13"));}
+			{i3GEO.janela.tempoMsg($trad("x13"));}
 		}
 		if(tipoCombo === ""){
 			if(i3GEO.arvoreDeCamadas.CAMADAS !== ""){
 				monta(i3GEO.arvoreDeCamadas.filtraCamadas("type","","diferente",i3GEO.arvoreDeCamadas.CAMADAS));
 			}
 			else
-			{alert($trad("x13"));}
+			{i3GEO.janela.tempoMsg($trad("x13"));}
 		}
 	},
 	/*

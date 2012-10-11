@@ -368,9 +368,9 @@ i3GEO.gadgets = {
 			if(temp){
 				fbusca = function(){
 					if(i3GEO.gadgets.PARAMETROS.mostraBuscaRapida.servicosexternos === false && i3GEO.gadgets.PARAMETROS.mostraBuscaRapida.temasmapa === false)
-					{alert($trad("x35"));return;}
+					{i3GEO.janela.tempoMsg($trad("x35"));return;}
 					if ($i("valorBuscaRapida"+id).value === "")
-					{alert($trad("x36"));return;}
+					{i3GEO.janela.tempoMsg($trad("x36"));return;}
 					i3GEO.janela.cria("300px","280px",i3GEO.configura.locaplic+"/ferramentas/buscarapida/index.htm","","",$trad("o2"));
 					return false;
 				};

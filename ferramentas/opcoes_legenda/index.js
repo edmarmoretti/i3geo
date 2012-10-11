@@ -100,7 +100,7 @@ i3GEOF.opcoesLegenda = {
 		}
 		catch(erro){if(typeof(console) !== 'undefined'){console.error(erro);}}
 		if(i3GEO.Interface.ATUAL !== "padrao")
-		{alert("Essa operacao afeta apenas a legenda utilizada na ferramenta de impressao do mapa");}
+		{i3GEO.janela.tempoMsg("Essa operacao afeta apenas a legenda utilizada na ferramenta de impressao do mapa");}
 	},
 	/*
 	Function: html
@@ -263,7 +263,7 @@ i3GEOF.opcoesLegenda = {
 					i3GEOF.opcoesLegenda.aguarde.visibility = "hidden";
 					//i3GEOF.opcoesLegenda.testa();
 				}catch(e){
-					alert("Erro. "+e);
+					i3GEO.janela.tempoMsg("Erro. "+e);
 					i3GEOF.opcoesLegenda.aguarde.visibility = "hidden";
 				}
 			};

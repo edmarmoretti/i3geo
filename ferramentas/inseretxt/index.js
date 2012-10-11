@@ -155,7 +155,7 @@ i3GEOF.inseretxt = {
 			i3GEO.util.comboFontes("i3GEOinseretxtListaFonte","i3GEOinseretxtDivListaFonte");
 			i3GEOF.inseretxt.ativaFoco();
 		}
-		catch(erro){alert(erro);}
+		catch(erro){i3GEO.janela.tempoMsg(erro);}
 	},
 	/*
 	Function: html
@@ -399,7 +399,7 @@ i3GEOF.inseretxt = {
 			if(i3GEOF.inseretxt.aguarde.visibility === "visible")
 			{return;}
 			if($i("i3GEOinseretxtguia3obj").style.display === "block"){
-				alert("Ative a guia 1 ou 2 para definir o texto");
+				i3GEO.janela.tempoMsg("Ative a guia 1 ou 2 para definir o texto");
 				return;
 			}
 			i3GEOF.inseretxt.aguarde.visibility = "visible";
@@ -413,7 +413,7 @@ i3GEOF.inseretxt = {
 			else{
 				temp = function(retorno){
 					if(retorno.data[0] == " "){
-						alert("Nada encontrado.");
+						i3GEO.janela.tempoMsg("Nada encontrado.");
 						i3GEOF.inseretxt.aguarde.visibility = "hidden";
 						return;
 					}
@@ -429,7 +429,7 @@ i3GEOF.inseretxt = {
 				}
 
 			}
-		}catch(e){alert("Erro: "+e);i3GEOF.inseretxt.aguarde.visibility = "hidden";}
+		}catch(e){i3GEO.janela.tempoMsg("Erro: "+e);i3GEOF.inseretxt.aguarde.visibility = "hidden";}
 	},
 	iniciaInsere: function(){
 		var texto = $i("i3GEOinseretxttexto").value;
@@ -443,7 +443,7 @@ i3GEOF.inseretxt = {
 					i3GEOF.inseretxt.contaPontos = 1;
 					i3GEOF.inseretxt.pontoi = objposicaocursor.ddx+" "+objposicaocursor.ddy;
 					i3GEOF.inseretxt.aguarde.visibility = "hidden";
-					alert("Clique no fim do conector");
+					i3GEO.janela.tempoMsg("Clique no fim do conector");
 					return;
 				}
 				if(i3GEOF.inseretxt.contaPontos == 1){

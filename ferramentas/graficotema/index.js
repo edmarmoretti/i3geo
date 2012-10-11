@@ -107,7 +107,7 @@ i3GEOF.graficoTema = {
 			//
 			i3GEO.php.listaItensTema(i3GEOF.graficoTema.montaListaItens,i3GEO.temaAtivo);
 		}
-		catch(erro){alert(erro);}
+		catch(erro){i3GEO.janela.tempoMsg(erro);}
 	},
 	/*
 	Function: html
@@ -284,14 +284,14 @@ i3GEOF.graficoTema = {
 				cp = new cpaint(),
 				p;
 			if(nlista < 2){
-				alert("Pelo menos dois itens devem ser escolhidos");
+				i3GEO.janela.tempoMsg("Pelo menos dois itens devem ser escolhidos");
 				return;
 			}
 			if (tipo === "PIE"){tamanho = $i("i3GEOgraficotemalargura").value;}
 			else
 			{tamanho = $i("i3GEOgraficotemalargura").value+" "+$i("i3GEOgraficotemaaltura").value;}
 			if(lista === "")
-			{alert("selecione um item");return;}
+			{i3GEO.janela.tempoMsg("selecione um item");return;}
 			i3GEOF.graficoTema.aguarde.visibility = "visible";
 			temp = function(retorno){
 				i3GEOF.graficoTema.aguarde.visibility = "hidden";
@@ -300,6 +300,6 @@ i3GEOF.graficoTema = {
 			p = i3GEO.configura.locaplic+"/classesphp/mapa_controle.php?g_sid="+i3GEO.configura.sid+"&funcao=graficotema&tema="+i3GEO.temaAtivo+"&lista="+lista+"&tamanho="+tamanho+"&tipo="+tipo+"&outlinecolor="+outlinecolor+"&offset="+offset;
 			cp.set_response_type("JSON");
 			cp.call(p,"graficotema",temp);
-		}catch(e){alert("Erro: "+e);i3GEOF.graficoTema.aguarde.visibility = "hidden";}
+		}catch(e){i3GEO.janela.tempoMsg("Erro: "+e);i3GEOF.graficoTema.aguarde.visibility = "hidden";}
 	}
 };

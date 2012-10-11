@@ -92,7 +92,7 @@ i3GEOF.gradeCoord = {
 				{onclick:{fn: i3GEOF.gradeCoord.executa}}
 			);
 		}
-		catch(erro){alert(erro);}
+		catch(erro){i3GEO.janela.tempoMsg(erro);}
 	},
 	/*
 	Function: html
@@ -208,7 +208,7 @@ i3GEOF.gradeCoord = {
 	*/
 	executa: function(){
 		if (($i("i3GEOgradeCoordintervalo").value == 0) || ($i("i3GEOgradeCoordintervalo").value == ""))
-		{alert("Entre com a distância entre as linhas");}
+		{i3GEO.janela.tempoMsg("Entre com a distância entre as linhas");}
 		else
 		{
 			if(i3GEOF.gradeCoord.aguarde.visibility === "visible")

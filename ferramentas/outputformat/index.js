@@ -86,7 +86,7 @@ i3GEOF.outputformat = {
 		try{
 			$i(iddiv).innerHTML += i3GEOF.outputformat.html();
 		}
-		catch(erro){alert(erro);}
+		catch(erro){i3GEO.janela.tempoMsg(erro);}
 
 	},
 	/*
@@ -169,11 +169,11 @@ i3GEOF.outputformat = {
 						i3GEO.Interface.atualizaMapa();
 					}
 					else
-					{alert("Nao foi possivel alterar o tipo");}
+					{i3GEO.janela.tempoMsg("Nao foi possivel alterar o tipo");}
 				};
 			cp.set_response_type("JSON");
 			cp.call(p,"void",temp);
 		}
-		catch(e){alert("Nao foi possivel alterar o tipo");i3GEOF.outputformat.aguarde.visibility = "hidden";}
+		catch(e){i3GEO.janela.tempoMsg("Nao foi possivel alterar o tipo");i3GEOF.outputformat.aguarde.visibility = "hidden";}
 	}
 };

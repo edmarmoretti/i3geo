@@ -104,7 +104,7 @@ i3GEOF.perfil = {
 				{onclick:{fn: i3GEOF.perfil.criaPerfil}}
 			);
 		}
-		catch(erro){alert(erro);}
+		catch(erro){i3GEO.janela.tempoMsg(erro);}
 	},
 	/*
 	Function: html
@@ -202,9 +202,9 @@ i3GEOF.perfil = {
 			else{
 				var pontos = i3GEOF.perfil.listaPontos(false);
 				if($i("i3GEOFperfilTemasSel").value === "")
-				{alert("Selecione um tema");return;}
+				{i3GEO.janela.tempoMsg("Selecione um tema");return;}
 				if($i("i3GEOFperfilComboItens").value === "")
-				{alert("Selecione um item");return;}
+				{i3GEO.janela.tempoMsg("Selecione um item");return;}
 				i3GEOF.perfil.aguarde.visibility = "visible";
 				i3GEO.php.dadosPerfilRelevo(fim,$i("i3GEOFperfilTemasSel").value,pontos,$i("i3GEOFperfilAmostragem").value,$i("i3GEOFperfilComboItens").value);
 			}

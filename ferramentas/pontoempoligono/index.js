@@ -90,7 +90,7 @@ i3GEOF.pontoEmPoligono = {
 			$i(iddiv).innerHTML += i3GEOF.pontoEmPoligono.html();
 			i3GEOF.pontoEmPoligono.t0();
 		}
-		catch(erro){alert(erro);}
+		catch(erro){i3GEO.janela.tempoMsg(erro);}
 	},
 	/*
 	Function: html
@@ -161,7 +161,7 @@ i3GEOF.pontoEmPoligono = {
 	},
 	t2: function(){
 		var erro = function(){
-			var ins = "<p class=alerta >Voc&ecirc; precisa escolher um tema com os pontos.";
+			var ins = "<p class=i3GEO.janela.tempoMsga >Voc&ecirc; precisa escolher um tema com os pontos.";
 			i3GEO.util.proximoAnterior("i3GEOF.pontoEmPoligono.t1()","",ins,"i3GEOF.pontoEmPoligono.t2","i3GEOpontoEmPoligonoresultado");
 		};
 		if($i("i3GEOpontoEmPoligonotemasComSelPt"))
@@ -213,14 +213,14 @@ i3GEOF.pontoEmPoligono = {
 				}
 			}
 			if (tsl == 0)
-			{alert("Escolha um tema raster ou poligonal pelo menos");}
+			{i3GEO.janela.tempoMsg("Escolha um tema raster ou poligonal pelo menos");}
 			else
 			{
 				i3GEOF.pontoEmPoligono.aguarde.visibility = "visible";
 				fim = function(retorno){
 					i3GEOF.pontoEmPoligono.aguarde.visibility = "hidden";
 					if (retorno.data==undefined )
-					{alert("Erro. A opera&ccedil;&atilde;o demorou muito.");}
+					{i3GEO.janela.tempoMsg("Erro. A opera&ccedil;&atilde;o demorou muito.");}
 					else{
 						i3GEO.atualiza();
 						i3GEO.janela.mensagemSimples(retorno.data,"Colunas");

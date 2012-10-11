@@ -115,7 +115,7 @@ i3GEOF.tme = {
 			i3GEO.util.mensagemAjuda("i3GEOtmemen1",$i("i3GEOtmemen1").innerHTML);
 			i3GEOF.tme.ativaFoco();
 		}
-		catch(erro){alert(erro);}
+		catch(erro){i3GEO.janela.tempoMsg(erro);}
 	},
 	/*
 	Function: html
@@ -262,9 +262,9 @@ i3GEOF.tme = {
 				p,
 				colunanomeregiao = $i("i3GEOTMEregioes").value;
 			if(lista.length === 0)
-			{alert("selecione um item");return;}
+			{i3GEO.janela.tempoMsg("selecione um item");return;}
 			if(colunanomeregiao === 0)
-			{alert("selecione um item com as regi&otilde;es");return;}
+			{i3GEO.janela.tempoMsg("selecione um item com as regi&otilde;es");return;}
 			i3GEOF.tme.aguarde.visibility = "visible";
 			temp = function(retorno){
 				i3GEOF.tme.aguarde.visibility = "hidden";
@@ -276,6 +276,6 @@ i3GEOF.tme = {
 			p = i3GEO.configura.locaplic+"/pacotes/tme/TME_i3geo.php?sid="+i3GEO.configura.sid+"&nomelayer="+i3GEO.temaAtivo+"&colunasvalor="+lista.toString(",")+"&colunanomeregiao="+colunanomeregiao+"&titulo="+$i("i3GEOTMEtitulo").value+"&descricao="+$i("i3GEOTMEdesc").value;
 			cp.set_response_type("JSON");
 			cp.call(p,"tme",temp);
-		}catch(e){alert("Erro: "+e);i3GEOF.tme.aguarde.visibility = "hidden";}
+		}catch(e){i3GEO.janela.tempoMsg("Erro: "+e);i3GEOF.tme.aguarde.visibility = "hidden";}
 	}
 };

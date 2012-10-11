@@ -385,7 +385,7 @@ function pararImagem(id){
 		{pararStatus();}
 	}
 	else
-	{alert("Imagem exclu&iacute;da");}
+	{i3GEO.janela.tempoMsg("Imagem exclu&iacute;da");}
 }
 /*
 Function: pararStatus
@@ -478,7 +478,7 @@ function adicionaMapa(obj){
 	var fim = function(retorno){
 		aguarde("none");
 		if (retorno.data.erro)
-		{alert(retorno.data.erro);}
+		{i3GEO.janela.tempoMsg(retorno.data.erro);}
 		else
 		{window.parent.i3GEO.atualiza("");}
 	};

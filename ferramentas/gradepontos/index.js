@@ -91,7 +91,7 @@ i3GEOF.gradeDePontos = {
 			$i(iddiv).innerHTML += i3GEOF.gradeDePontos.html();
 			i3GEOF.gradeDePontos.t0();
 		}
-		catch(erro){alert(erro);}
+		catch(erro){i3GEO.janela.tempoMsg(erro);}
 	},
 	/*
 	Function: html
@@ -220,11 +220,11 @@ i3GEOF.gradeDePontos = {
 			nptx = $i("i3GEOgradedepontosnptx").value;
 			npty = $i("i3GEOgradedepontosnpty").value;
 			if ((dx == 0) || (dy == 0))
-			{alert("Distância entre os pontos n&atilde;o pode ser 0");return;}
+			{i3GEO.janela.tempoMsg("Distância entre os pontos n&atilde;o pode ser 0");return;}
 			if ((nptx == 0) || (npty == 0))
-			{alert("N&uacute;mero de pontos n&atilde;o pode ser 0");return;}
+			{i3GEO.janela.tempoMsg("N&uacute;mero de pontos n&atilde;o pode ser 0");return;}
 			if (nptx * npty > 10000)
-			{alert("N&uacute;mero de pontos n&atilde;o pode ser maior que 10.000");return;}
+			{i3GEO.janela.tempoMsg("N&uacute;mero de pontos n&atilde;o pode ser maior que 10.000");return;}
 			fim = function(retorno)
 			{
 				i3GEOF.gradeDePontos.aguarde.visibility = "hidden";

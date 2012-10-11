@@ -133,7 +133,7 @@ i3GEOF.filtro = {
 				}
 			);
 		}
-		catch(erro){alert(erro);}
+		catch(erro){i3GEO.janela.tempoMsg(erro);}
 	},
 	/*
 	Function: html
@@ -315,7 +315,7 @@ i3GEOF.filtro = {
 			tabela = $i("i3GEOfiltroparametros");
 			tabela.appendChild(ntb);
 		}
-		catch(e){alert("Erro: "+e);}
+		catch(e){i3GEO.janela.tempoMsg("Erro: "+e);}
 	},
 	/*
 	Function: pegaFiltro
@@ -361,7 +361,7 @@ i3GEOF.filtro = {
 			cp.set_response_type("JSON");
 			cp.call(p,"insereFiltro",temp);
 		}
-		catch(e){alert("Erro: "+e);}
+		catch(e){i3GEO.janela.tempoMsg("Erro: "+e);}
 	},
 	/*
 	Function: aplicaFiltro
@@ -438,7 +438,7 @@ i3GEOF.filtro = {
 			cp.call(p,"insereFiltro",temp,"tema="+i3GEO.temaAtivo,"filtro="+filtro,"testa="+testa);
 		}
 		catch(e){
-			alert("Erro: "+e);
+			i3GEO.janela.tempoMsg("Erro: "+e);
 			i3GEOF.filtro.aguarde.visibility = "hidden";
 		}
 	}

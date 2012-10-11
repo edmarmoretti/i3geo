@@ -99,7 +99,7 @@ i3GEOF.opacidademapa = {
 		try{
 			$i(iddiv).innerHTML = i3GEOF.opacidademapa.html();
 		}
-		catch(erro){alert(erro);}
+		catch(erro){i3GEO.janela.tempoMsg(erro);}
 		i3GEOF.opacidademapa.criaslide();
 	},
 	/*

@@ -147,7 +147,7 @@ i3GEOF.nuvemtags = {
 									i3GEOF.nuvemtags.montaNuvem();
 									i3GEO.guias.mostraGuiaFerramenta("i3GEOnuvemtagsguia1","i3GEOnuvemtagsguia");
 								};
-							if (rss == ""){alert("Digite um endereco RSS");return;}
+							if (rss == ""){i3GEO.janela.tempoMsg("Digite um endereco RSS");return;}
 							i3GEOF.nuvemtags.aguarde.visibility = "visible";
 							cp.set_response_type("JSON");
 							cp.call(p,"listaTags",temp);
@@ -158,7 +158,7 @@ i3GEOF.nuvemtags = {
 			i3GEOF.nuvemtags.ativaFoco();
 			i3GEOF.nuvemtags.pegaDados();
 		}
-		catch(erro){alert(erro);}
+		catch(erro){i3GEO.janela.tempoMsg(erro);}
 	},
 	/*
 	Function: html

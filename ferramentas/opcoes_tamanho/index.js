@@ -103,7 +103,7 @@ i3GEOF.opcoesTamanho = {
 			box.style.display = "block";
 			box.style.zIndex = 6000;
 		}
-		catch(erro){alert(erro);}
+		catch(erro){i3GEO.janela.tempoMsg(erro);}
 	},
 	/*
 	Function: html

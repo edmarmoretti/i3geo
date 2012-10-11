@@ -104,7 +104,7 @@ i3GEOF.metar = {
 			}
 			i3GEOF.metar.lista();
 		}
-		catch(erro){alert(erro);}
+		catch(erro){i3GEO.janela.tempoMsg(erro);}
 	},
 	/*
 	Function: html

@@ -107,7 +107,7 @@ i3GEOF.metaestat = {
 		classes:{
 			inicia: function(iddiv){
 				if(!$i("i3geoCartoComboMedidasVariavel")){
-					alert("erro: i3geoCartoComboMedidasVariavel???");
+					i3GEO.janela.tempoMsg("erro: i3geoCartoComboMedidasVariavel???");
 					return;
 				}
 				if(!iddiv || !$i(iddiv)){
@@ -280,7 +280,7 @@ i3GEOF.metaestat = {
 					}
 				};
 				if(v != true){
-					alert("erro: "+v);
+					i3GEO.janela.tempoMsg("erro: "+v);
 				}
 				i3GEO.php.mapfileMedidaVariavel(
 						temp,
@@ -660,15 +660,15 @@ i3GEOF.metaestat = {
 							var v = $i("i3geoCartoComboVariavel"),
 								m = $i("i3geoCartoComboMedidasVariavel");
 							if(!v || v.value === ""){
-								alert($trad(4,i3GEOF.metaestat.dicionario));
+								i3GEO.janela.tempoMsg($trad(4,i3GEOF.metaestat.dicionario));
 								return;
 							}
 							if(!m || m.value === ""){
-								alert($trad(14,i3GEOF.metaestat.dicionario));
+								i3GEO.janela.tempoMsg($trad(14,i3GEOF.metaestat.dicionario));
 								return;
 							}
 							*/
-							alert($trad(15,i3GEOF.metaestat.dicionario1));
+							i3GEO.janela.tempoMsg($trad(15,i3GEOF.metaestat.dicionario1));
 							window.open(i3GEO.configura.locaplic+"/ferramentas/metaestat/editorlimites.php");
 						}}}
 				);
@@ -746,7 +746,7 @@ i3GEOF.metaestat = {
 					i3GEOF.metaestat.editor.removeEl("i3GEOF.metaestat.editor.t2");
 				}
 				if($i("i3geoCartoComboVariavelEditor").value === ""){
-					alert($trad(4,i3GEOF.metaestat.dicionario));
+					i3GEO.janela.tempoMsg($trad(4,i3GEOF.metaestat.dicionario));
 					i3GEOF.metaestat.editor.t1(false);
 				}
 				else{
@@ -773,7 +773,7 @@ i3GEOF.metaestat = {
 					},
 					codigo_variavel = $i("i3geoCartoComboVariavelEditor").value;
 					if(codigo_variavel == ""){
-						alert($trad(4,i3GEOF.metaestat.dicionario));
+						i3GEO.janela.tempoMsg($trad(4,i3GEOF.metaestat.dicionario));
 						i3GEOF.metaestat.editor.t1(false);
 						return;
 					}
@@ -789,7 +789,7 @@ i3GEOF.metaestat = {
 					i3GEOF.metaestat.editor.removeEl("i3GEOF.metaestat.editor.t3");
 				}
 				if($i("i3geoCartoComboMedidaVariavelEditor").value === ""){
-					alert($trad(2,i3GEOF.metaestat.dicionario));
+					i3GEO.janela.tempoMsg($trad(2,i3GEOF.metaestat.dicionario));
 					i3GEOF.metaestat.editor.t2(false);
 				}
 				else{
@@ -823,7 +823,7 @@ i3GEOF.metaestat = {
 				//remove o conteudo anteriormente construido
 				i3GEOF.metaestat.editor.removeEl("i3GEOF.metaestat.editor.t4");
 				if($i("i3geoCartoComboMedidaVariavelEditor").value === ""){
-					alert($trad(9,i3GEOF.metaestat.dicionario));
+					i3GEO.janela.tempoMsg($trad(9,i3GEOF.metaestat.dicionario));
 					i3GEOF.metaestat.editor.t3(false);
 				}
 				else{
@@ -1024,7 +1024,7 @@ i3GEOF.metaestat = {
 				var temp = "",
 				v = $i("i3geoCartoComboVariavel");
 				if(!v || v.value === ""){
-					alert($trad(4,i3GEOF.metaestat.dicionario));
+					i3GEO.janela.tempoMsg($trad(4,i3GEOF.metaestat.dicionario));
 				}
 				else{
 					var cabecalho,minimiza,janela;

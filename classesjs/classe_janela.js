@@ -615,6 +615,7 @@ i3GEO.janela = {
 				var attributes,anim,
 					janela = YAHOO.i3GEO.janela.managerAguarde.find("i3geoTempoMsg");
 				if(janela){
+					janela.setBody(" ");
 					janela.body.style.overflow = "none";
 					attributes = {
 						height: { to: 0 }

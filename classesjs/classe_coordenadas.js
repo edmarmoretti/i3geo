@@ -285,7 +285,7 @@ i3GEO.coordenadas = {
 			if(i3GEO.eventos.MOUSEPARADO.toString().search("atualizaCoordenadasUTM()") < 0)
 			{i3GEO.eventos.MOUSEPARADO.push("atualizaCoordenadasUTM()");}
 		}
-		catch(e){alert("mostraCoordenadasUtm: "+e.description);}
+		catch(e){i3GEO.janela.tempoMsg("mostraCoordenadasUtm: "+e.description);}
 	},
 	/*
 	Function: mostraCoordenadasGEO
@@ -326,7 +326,7 @@ i3GEO.coordenadas = {
 				}
 			}
 		}
-		catch(e){alert("mostraCoordenadasGeo: "+e.description);}
+		catch(e){i3GEO.janela.tempoMsg("mostraCoordenadasGeo: "+e.description);}
 	},
 	/*
 	Function: geo2zonaUtm
@@ -652,7 +652,7 @@ i3GEO.coordenadas = {
 				{$i(onde).innerHTML = "";}
 				onde = "i3GEOJanelaCoordenadas_corpo";
 
-				ins += "<br><a href='#' style='cursor:pointer;color:blue' onclick='new YAHOO.util.KeyListener(document.body,{alt:true,keys:67},{fn: function(type, args, obj){alert(i3GEO.coordenadas.MODOTEXTO);}}).enable();' >" +
+				ins += "<br><a href='#' style='cursor:pointer;color:blue' onclick='new YAHOO.util.KeyListener(document.body,{alt:true,keys:67},{fn: function(type, args, obj){i3GEO.janela.tempoMsg(i3GEO.coordenadas.MODOTEXTO);}}).enable();' >" +
 					"Clique aqui para ativar Alt+C para poder capturar as coordenadas</a>";
 			}
 			if(onde !== "" && $i(onde))

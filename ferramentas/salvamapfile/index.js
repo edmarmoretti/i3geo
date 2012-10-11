@@ -116,7 +116,7 @@ i3GEOF.salvamapfile = {
 			cp.set_response_type("JSON");
 			cp.call(p,"",retorno);
 		}
-		catch(erro){alert(erro);}
+		catch(erro){i3GEO.janela.tempoMsg(erro);}
 	},
 	/*
 	Function: iniciaJanelaFlutuante

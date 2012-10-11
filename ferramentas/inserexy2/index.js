@@ -160,7 +160,7 @@ i3GEOF.inserexy = {
 				"i3GEOinserexy"
 			);
 		}
-		catch(erro){alert(erro);}
+		catch(erro){i3GEO.janela.tempoMsg(erro);}
 	},
 	/*
 	Function: html
@@ -403,7 +403,7 @@ i3GEOF.inserexy = {
 			}
 		}
 		catch(e){
-			alert("Erro: "+e);
+			i3GEO.janela.tempoMsg("Erro: "+e);
 			i3GEOF.inserexy.aguarde.visibility = "hidden";
 		}
 	},
@@ -485,7 +485,7 @@ i3GEOF.inserexy = {
 			y = divs[1];
 			xy = i3GEO.calculo.destinoDD(x,y,$i("i3GEOinserexydistdd").value,direcao);
 			i3GEOF.inserexy.adiciona(xy[0]+" "+xy[1]);
-		}catch(e){alert("Erro: "+e);}
+		}catch(e){i3GEO.janela.tempoMsg("Erro: "+e);}
 	},
 	/*
 	Function: inserir
@@ -534,7 +534,7 @@ i3GEOF.inserexy = {
 			g_tipoacao = "inserexy";
 			i3GEOF.inserexy.adiciona(x+" "+y);
 		}
-		catch(e){alert("Erro: "+e);}
+		catch(e){i3GEO.janela.tempoMsg("Erro: "+e);}
 	},
 	/*
 	Functin: colar
@@ -613,7 +613,7 @@ i3GEOF.inserexy = {
 				valoritem = $i("i3GEOinserexyvalorItem").value;
 			}
 			if (tema === "")
-			{alert("Nenhum tema definido para editar");}
+			{i3GEO.janela.tempoMsg("Nenhum tema definido para editar");}
 			else{
 				temp = function(retorno){
 					if(i3GEO.Interface.ATUAL === "padrao")
@@ -708,7 +708,7 @@ i3GEOF.inserexy = {
 			cp.set_response_type("JSON");
 			cp.call(i3GEO.configura.locaplic+"/classesphp/mapa_controle.php?g_sid="+i3GEO.configura.sid+"&funcao=mostrawkt&xy="+xy,"xy2wkt",mostra);
 		}
-		catch(e){alert("Erro: "+e);i3GEOF.inserexy.aguarde.visibility = "hidden";}
+		catch(e){i3GEO.janela.tempoMsg("Erro: "+e);i3GEOF.inserexy.aguarde.visibility = "hidden";}
 	},
 	/*
 	Function: graficoPerfil
@@ -730,7 +730,7 @@ i3GEOF.inserexy = {
 				y.push(xy[1]);
 			}
 			if(x.length == 0)
-			{alert("Nenhum ponto encontrado");return;}
+			{i3GEO.janela.tempoMsg("Nenhum ponto encontrado");return;}
 			pontosdistobj = {
 				xpt: x,
 				ypt: y
@@ -738,7 +738,7 @@ i3GEOF.inserexy = {
 			i3GEO.util.scriptTag(js,"i3GEOF.perfil.criaJanelaFlutuante(pontosdistobj)","i3GEOF.perfil_script");
 
 		}
-		catch(e){alert("Erro: "+e);}
+		catch(e){i3GEO.janela.tempoMsg("Erro: "+e);}
 	}
 };
 

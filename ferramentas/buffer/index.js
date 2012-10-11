@@ -90,7 +90,7 @@ i3GEOF.buffer = {
 			$i(iddiv).innerHTML += i3GEOF.buffer.html();
 			i3GEOF.buffer.t0();
 		}
-		catch(erro){alert(erro);}
+		catch(erro){i3GEO.janela.tempoMsg(erro);}
 	},
 	/*
 	Function: html
@@ -138,7 +138,7 @@ i3GEOF.buffer = {
 		i3GEOF.buffer.aguarde = $i("i3GEOF.buffer_imagemCabecalho").style;
 		i3GEOF.buffer.inicia(divid);
 		temp = function(){
-			//alert("oi");
+			//i3GEO.janela.tempoMsg("oi");
 			if(i3GEO.eventos.ATUALIZAARVORECAMADAS.toString().search("i3GEOF.buffer.t0()") > 0)
 			{i3GEO.eventos.ATUALIZAARVORECAMADAS.remove("i3GEOF.buffer.t0()");}
 		};
@@ -208,7 +208,7 @@ i3GEOF.buffer = {
 				cp.call(p,"criaBuffer",fim);
 			}
 			else
-			{alert("Distancia invalida");}
+			{i3GEO.janela.tempoMsg("Distancia invalida");}
 		}
 		catch(e){$i("i3GEObufferfim").innerHTML = "<p class='paragrafo' >Erro. "+e;i3GEO.janela.fechaAguarde();i3GEOF.buffer.aguarde.visibility = "hidden";}
 	},

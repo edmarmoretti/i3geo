@@ -97,9 +97,9 @@ i3GEOF.opcoesEscala = {
 			);
 			i3GEOF.opcoesEscala.parametrosAtuais();
 		}
-		catch(erro){alert(erro);}
+		catch(erro){i3GEO.janela.tempoMsg(erro);}
 		if(i3GEO.Interface.ATUAL !== "padrao")
-		{alert("Essa operacao afeta apenas a barra de escala utilizada na ferramenta de impressao do mapa");}
+		{i3GEO.janela.tempoMsg("Essa operacao afeta apenas a barra de escala utilizada na ferramenta de impressao do mapa");}
 
 	},
 	/*
@@ -252,7 +252,7 @@ i3GEOF.opcoesEscala = {
 					i3GEOF.opcoesEscala.aguarde.visibility = "hidden";
 					i3GEOF.opcoesEscala.testa();
 				}catch(e){
-					alert("Erro. "+e);
+					i3GEO.janela.tempoMsg("Erro. "+e);
 					i3GEOF.opcoesEscala.aguarde.visibility = "hidden";
 				}
 			};

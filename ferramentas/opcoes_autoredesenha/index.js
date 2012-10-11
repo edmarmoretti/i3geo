@@ -96,7 +96,7 @@ i3GEOF.opcoesTempo = {
 				{onclick:{fn: i3GEO.navega.autoRedesenho.desativa}}
 			);
 		}
-		catch(erro){alert(erro);}
+		catch(erro){i3GEO.janela.tempoMsg(erro);}
 	},
 	/*
 	Function: html

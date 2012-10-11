@@ -96,7 +96,7 @@ i3GEOF.converteMapaWS = {
 			'<a href="' + enderecowms + '&request=getcapabilities&version=1.1.0&service=wms" target=blank >Clique para testar<br>';
 			$i(divid).innerHTML += ins;
 			i3GEOF.converteMapaWS.aguarde.visibility = "hidden";
-		}catch(e){alert(e);i3GEOF.converteMapaWS.aguarde.visibility = "hidden";}
+		}catch(e){i3GEO.janela.tempoMsg(e);i3GEOF.converteMapaWS.aguarde.visibility = "hidden";}
 	},
 	/*
 	Function: iniciaJanelaFlutuante

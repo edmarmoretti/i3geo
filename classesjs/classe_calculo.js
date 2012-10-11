@@ -550,7 +550,7 @@ i3GEO.calculo = {
 			bxs = bx.style;
 		}
 		else
-		{alert("Box nao encontrado");return;}
+		{i3GEO.janela.tempoMsg("Box nao encontrado");return;}
 		pos = i3GEO.util.pegaPosicaoObjeto($i(i3GEO.Interface.IDCORPO));
 		xfig = pix + (parseInt(bxs.width,10)) - pos[0];
 		yfig = piy + (parseInt(bxs.height,10)) - pos[1];

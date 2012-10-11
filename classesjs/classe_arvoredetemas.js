@@ -742,7 +742,7 @@ i3GEO.arvoreDeTemas = {
 					}
 				};
 			if(!retorno.data)
-			{alert("Ocorreu um erro");}
+			{i3GEO.janela.tempoMsg("Ocorreu um erro");}
 			else{
 				retorno = retorno.data;
 				conta = 0;
@@ -1560,7 +1560,7 @@ i3GEO.arvoreDeTemas = {
 		resultadoProcurar = function(retorno){
 			var mostra,tempNode,d,conta,ig,ngSgrupo,tempn,sg,ngTema,tempng,st,lk = "";
 			if(!retorno.data)
-			{alert("Ocorreu um erro");}
+			{i3GEO.janela.tempoMsg("Ocorreu um erro");}
 			else{
 				retorno = retorno.data;
 				conta = 0;
@@ -1679,7 +1679,7 @@ i3GEO.arvoreDeTemas = {
 					}
 				};
 			if(!retorno.data)
-			{alert("Ocorreu um erro");}
+			{i3GEO.janela.tempoMsg("Ocorreu um erro");}
 			else{
 				retorno = retorno.data;
 				conta = 0;

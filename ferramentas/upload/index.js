@@ -92,7 +92,7 @@ i3GEOF.upload = {
 				"upload"
 			);
 		}
-		catch(erro){alert(erro);}
+		catch(erro){i3GEO.janela.tempoMsg(erro);}
 	},
 	/*
 	Function: html

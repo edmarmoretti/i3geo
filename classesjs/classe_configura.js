@@ -828,7 +828,7 @@ i3GEO.configura = {
 			funcaoonclick:function()
 			{
 				if(i3GEO.arvoreDeCamadas.filtraCamadas("etiquetas","","diferente",i3GEO.arvoreDeCamadas.CAMADAS) === "")
-				{alert($trad("d31"));return;}
+				{i3GEO.janela.tempoMsg($trad("d31"));return;}
 				var temp;
 				if($i(i3GEO.Interface.IDMAPA)){
 					$i(i3GEO.Interface.IDMAPA).title = "";
@@ -1147,7 +1147,7 @@ i3GEO.configura = {
 					}
 				};
 				rotaEvento = GEvent.addListener(i3GeoMap, "click", parametrosRota);
-				alert("Clique o ponto de origem da rota");
+				i3GEO.janela.tempoMsg("Clique o ponto de origem da rota");
 			}
 		}
 	]}

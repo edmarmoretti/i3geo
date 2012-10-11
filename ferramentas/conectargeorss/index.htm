@@ -63,7 +63,7 @@ function mostraRetornoRSS(retorno)
 	var reg = /Erro/gi;
 	if (retorno.data.rss.search(reg) != -1)
 	{
-		alert("OOps! Ocorreu um erro\n"+retorno.data);
+		i3GEO.janela.tempoMsg("OOps! Ocorreu um erro\n"+retorno.data);
 		return;
 	}
 	var canais = retorno.data.canais

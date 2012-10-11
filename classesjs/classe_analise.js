@@ -135,7 +135,7 @@ i3GEO.analise = {
 		Abre a janela de dialogo da ferramenta pontosdistri
 		*/
 		pontosdistri: function(){
-			i3GEO.parametros.r === "nao" ? alert($trad("x22")) : i3GEO.util.dialogoFerramenta("i3GEO.analise.dialogo.pontosdistri()","pontosdistri","pontosDistri");
+			i3GEO.parametros.r === "nao" ? i3GEO.janela.tempoMsg($trad("x22")) : i3GEO.util.dialogoFerramenta("i3GEO.analise.dialogo.pontosdistri()","pontosdistri","pontosDistri");
 		},
 		/*
 		Function: pontoempoligono
@@ -519,7 +519,7 @@ i3GEO.analise = {
 					d = calculo.distancia(ll1[0],ll1[1],ll2[0],ll2[1]);
 					d = d * 1000;
 					g_areapixel = d * d;
-					g_areapixel < 0 ? alert("Nao e possivel calcular a area. Entre em contato com o administrador do sistema.") : montacontainer();
+					g_areapixel < 0 ? i3GEO.janela.tempoMsg("Nao e possivel calcular a area. Entre em contato com o administrador do sistema.") : montacontainer();
 				}
 			}
 			else{i3GEO.desenho.richdraw.fecha();}

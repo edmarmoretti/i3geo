@@ -105,7 +105,7 @@ function procurar(texto)
 function buscarss()
 {
 	var rss = $i("texto").value;
-	if (rss == ""){alert("Digite um endereco RSS");return;}
+	if (rss == ""){i3GEO.janela.tempoMsg("Digite um endereco RSS");return;}
 	aguarde("block");
 	$i("resultado").innerHTML = "Aguarde...";
 	var cp = new cpaint();

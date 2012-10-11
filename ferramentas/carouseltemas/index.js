@@ -150,7 +150,7 @@ i3GEOF.carouseltemas = {
 			};
 			i3GEO.php.procurartemas(listaimg,"");
 		}
-		catch(erro){alert(erro);}
+		catch(erro){i3GEO.janela.tempoMsg(erro);}
 	},
 	/*
 	Function: html
@@ -213,7 +213,7 @@ i3GEOF.carouseltemas = {
 		temp = function(retorno){
 			i3GEO.janela.fechaAguarde("i3GEO.atualiza");
 			if(retorno.data.erro){
-				alert(retorno.data.erro);
+				i3GEO.janela.tempoMsg(retorno.data.erro);
 				return;
 			}
 			i3GEO.atualiza();

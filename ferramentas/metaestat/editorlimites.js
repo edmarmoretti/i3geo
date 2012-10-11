@@ -190,7 +190,7 @@ var editorlimites = {
 			}
 		}
 		else{
-			alert("Selecione pelo menos uma figura");
+			i3GEO.janela.tempoMsg("Selecione pelo menos uma figura");
 		}
 	},
 	selectedShapes: function() {
@@ -489,7 +489,7 @@ var editorlimites = {
 				);
 			}
 			else{
-				alert("Selecione uma figura");
+				i3GEO.janela.tempoMsg("Selecione uma figura");
 			}
 		},
 		//altera um poligono que ja existia
@@ -558,7 +558,7 @@ var editorlimites = {
 			}
 			else{
 				if(identificadornovo === identificador && $i("inputNomeElemento").value === nome){
-					alert("Valores iguais ao original");
+					i3GEO.janela.tempoMsg("Valores iguais ao original");
 					return;
 				}
 			}
@@ -590,7 +590,7 @@ var editorlimites = {
 		y: "",
 		ativa: function(botao){
 			if($i("i3geoCartoRegioesEditaveis").value == ""){
-				alert("Escolha uma regiao");
+				i3GEO.janela.tempoMsg("Escolha uma regiao");
 				return;
 			}
 			editorlimites.mudaicone(botao);
@@ -708,15 +708,15 @@ var editorlimites = {
 					i3GEO.janela.fechaAguarde("aguardeSalvaAtributos");
 				};
 			if(codigo_tipo_regiao == ""){
-				alert("Problemas com o codigo da regiao");
+				i3GEO.janela.tempoMsg("Problemas com o codigo da regiao");
 				return;
 			}
 			if(id_medida_variavel == ""){
-				alert("Escolha uma medida");
+				i3GEO.janela.tempoMsg("Escolha uma medida");
 				return;
 			}
 			if(identificador_regiao == ""){
-				alert("Problemas com o identificador da regiao");
+				i3GEO.janela.tempoMsg("Problemas com o identificador da regiao");
 				return;
 			}
 			for(i=0;i<n;i++){

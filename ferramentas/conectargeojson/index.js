@@ -85,7 +85,7 @@ i3GEOF.conectargeojson = {
 	*/
 	inicia: function(iddiv){
 		if(navm)
-		{alert("N&atilde;o funciona coretamente no Internet Explorer. Use o Firefox ou outro navegador");}
+		{i3GEO.janela.tempoMsg("N&atilde;o funciona coretamente no Internet Explorer. Use o Firefox ou outro navegador");}
 		try{
 			$i(iddiv).innerHTML = i3GEOF.conectargeojson.html();
 			var monta = function(retorno){
@@ -106,7 +106,7 @@ i3GEOF.conectargeojson = {
 				{onclick:{fn: i3GEOF.conectargeojson.adiciona}}
 			);			
 		}
-		catch(erro){alert(erro);}
+		catch(erro){i3GEO.janela.tempoMsg(erro);}
 	},
 	/*
 	Function: html

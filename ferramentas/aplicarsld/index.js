@@ -92,7 +92,7 @@ i3GEOF.aplicarsld = {
 				{onclick:{fn: i3GEOF.aplicarsld.submete}}
 			);
 		}
-		catch(erro){alert(erro);}
+		catch(erro){i3GEO.janela.tempoMsg(erro);}
 	},
 	/*
 	Function: html

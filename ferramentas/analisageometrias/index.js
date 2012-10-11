@@ -147,7 +147,7 @@ i3GEOF.analisaGeometrias = {
 			i3GEOF.analisaGeometrias.aguarde.visibility = "hidden";
 			i3GEO.barraDeBotoes.ativaIcone("selecao");
 		}
-		catch(erro){alert(erro);}
+		catch(erro){i3GEO.janela.tempoMsg(erro);}
 	},
 	/*
 	Function: html
@@ -370,7 +370,7 @@ i3GEOF.analisaGeometrias = {
 			cp.set_response_type("JSON");
 			cp.call(p,"capturageo",temp);
 		}catch(e){
-			alert("Ocorreu um erro: "+e);
+			i3GEO.janela.tempoMsg("Ocorreu um erro: "+e);
 			i3GEOF.analisaGeometrias.aguarde.visibility = "hidden";
 		}
 	},
@@ -454,7 +454,7 @@ i3GEOF.analisaGeometrias = {
 		var lista,p,cp;
 		lista = i3GEOF.analisaGeometrias.pegaGeometriasMarcadas();
 		if(lista == ""){
-			alert("Nenhuma geometria foi marcada");
+			i3GEO.janela.tempoMsg("Nenhuma geometria foi marcada");
 			i3GEOF.analisaGeometrias.aguarde.visibility = "hidden";
 			return;
 		}
@@ -485,7 +485,7 @@ i3GEOF.analisaGeometrias = {
 			};
 		lista = i3GEOF.analisaGeometrias.pegaGeometriasMarcadas();
 		if(lista == ""){
-			alert("Nenhuma geometria foi marcada");
+			i3GEO.janela.tempoMsg("Nenhuma geometria foi marcada");
 			i3GEOF.analisaGeometrias.aguarde.visibility = "hidden";
 			return;
 		}
@@ -532,7 +532,7 @@ i3GEOF.analisaGeometrias = {
 			{i3GEOF.analisaGeometrias.aguarde.visibility = "visible";}
 			lista = i3GEOF.analisaGeometrias.pegaGeometriasMarcadas();
 			if(lista == ""){
-				alert("Nenhuma geometria foi marcada");
+				i3GEO.janela.tempoMsg("Nenhuma geometria foi marcada");
 				i3GEOF.analisaGeometrias.aguarde.visibility = "hidden";
 				return;
 			}
@@ -569,7 +569,7 @@ i3GEOF.analisaGeometrias = {
 
 			lista = i3GEOF.analisaGeometrias.pegaGeometriasMarcadas();
 			if(lista == ""){
-				alert("Nenhuma geometria foi marcada");
+				i3GEO.janela.tempoMsg("Nenhuma geometria foi marcada");
 				i3GEOF.analisaGeometrias.aguarde.visibility = "hidden";
 				return;
 			}
@@ -606,7 +606,7 @@ i3GEOF.analisaGeometrias = {
 			{i3GEOF.analisaGeometrias.aguarde.visibility = "visible";}
 			lista = i3GEOF.analisaGeometrias.pegaGeometriasMarcadas();
 			if(lista == ""){
-				alert("Nenhuma geometria foi marcada");
+				i3GEO.janela.tempoMsg("Nenhuma geometria foi marcada");
 				i3GEOF.analisaGeometrias.aguarde.visibility = "hidden";
 				return;
 			}

@@ -98,7 +98,7 @@ i3GEOF.insereGrafico = {
 			//i3GEO.php.listaItensTema(i3GEOF.graficoTema.montaListaItens,i3GEO.temaAtivo);
 			i3GEOF.insereGrafico.ativaFoco();
 		}
-		catch(erro){alert(erro);}
+		catch(erro){i3GEO.janela.tempoMsg(erro);}
 	},
 	/*
 	Function: html
@@ -231,11 +231,11 @@ i3GEOF.insereGrafico = {
 				shadow_height = $i("i3GEOinseregraficosombra").value,
 				itens,
 				temp;
-			if (tema === ""){alert("Nenhum tema definido para pegar os dados");}
+			if (tema === ""){i3GEO.janela.tempoMsg("Nenhum tema definido para pegar os dados");}
 			else{
 				itens = i3GEOF.insereGrafico.pegaItensMarcados();
 				if (itens === "")
-				{alert("Nenhum item foi escolhido");}
+				{i3GEO.janela.tempoMsg("Nenhum item foi escolhido");}
 				else{
 					temp = function(){
 						i3GEOF.insereGrafico.aguarde.visibility = "hidden";
@@ -370,6 +370,6 @@ i3GEOF.insereGrafico = {
 			w = w[2].id;
 			$i(w).innerHTML = par;
 		}
-		catch(e){alert("Ocorreu um erro. legendaGrafico"+e);}
+		catch(e){i3GEO.janela.tempoMsg("Ocorreu um erro. legendaGrafico"+e);}
 	}
 };

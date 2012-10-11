@@ -87,7 +87,7 @@ i3GEOF.nptpol = {
 			$i(iddiv).innerHTML += i3GEOF.nptpol.html();
 			i3GEOF.nptpol.t0();
 		}
-		catch(erro){alert(erro);}
+		catch(erro){i3GEO.janela.tempoMsg(erro);}
 	},
 	/*
 	Function: html

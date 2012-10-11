@@ -61,7 +61,7 @@ Free Software Foundation, Inc., no endere&ccedil;o
 */
 
 if(navm){
-	alert("o funcionamento da linha do tempo &eacute; muito melhor com o Firefox")
+	i3GEO.janela.tempoMsg("o funcionamento da linha do tempo &eacute; muito melhor com o Firefox")
 }
 $i = function(id){
 	return document.getElementById(id);

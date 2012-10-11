@@ -310,7 +310,7 @@ i3GEO.navega = {
 				if (retorno.data.latitude !== null)
 				{i3GEO.navega.zoomponto(locaplic,sid,retorno.data.longitude,retorno.data.latitude);}
 				else
-				{alert("Nao foi possivel identificar a localizacao.");}
+				{i3GEO.janela.tempoMsg("Nao foi possivel identificar a localizacao.");}
 			};
 			i3GEO.navega.localizaIP(locaplic,sid,mostraIP);
 		}
@@ -909,7 +909,7 @@ i3GEO.navega = {
 					var pos,volta,nimg,olente,oboxlente,olenteimg;
 					retorno = retorno.data;
 					if (retorno === "erro")
-					{alert("A lente nao pode ser criada");return;}
+					{i3GEO.janela.tempoMsg("A lente nao pode ser criada");return;}
 					volta = retorno.split(",");
 					nimg = volta[2];
 					olente = $i('lente');
