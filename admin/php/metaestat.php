@@ -1161,5 +1161,16 @@ switch (strtoupper($funcao))
 		retornaJSON($resultado);
 		exit;
 	break;
+	case "SALVAATRIBUTOSMEDIDAVARIAVEL":
+		/*	"&codigo_tipo_regiao="+codigo_tipo_regiao+"&identificador_regiao="+identificador_regiao+"&id_medida_variavel="+id_medida_variavel+"&colunas="+colunasT[0]+"&valores="+valoresT.join("|")+"&idsunicos="+idsunicosT[0]
+		*/
+		$valores = explode("|",$valores);//array de uma lista de strings com valores separados por ;
+		$idsunicos = explode(";",$idsunicos);//array
+		$colunas = explode(";",$colunas);//array
+		
+		
+		retornaJSON("ok");
+		exit;
+	break;
 }
 ?>

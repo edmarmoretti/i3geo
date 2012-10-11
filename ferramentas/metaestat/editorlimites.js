@@ -635,7 +635,7 @@ var editorlimites = {
 						'<p class=paragrafo >Regi&atilde;o escolhida:</p>' +
 						'<p class=paragrafo ><b>Nome: </b>' + retorno.regiao.nomeregiao + '</p>' +
 						'<p class=paragrafo ><b>C&oacute;digo: </b>' + retorno.regiao.identificador_regiao + '</p>' +
-						'<input type=hidden name="identificador_regiao" value="' + retorno.regiao.identificador_regiao + '" />' +
+						'<input type=hidden id="editarAtributosidentificador_regiao" value="' + retorno.regiao.identificador_regiao + '" />' +
 						'<p class=paragrafo >Atributos:</p>' +
 						'<input id=editarAtributosAdicionar value="Adicionar um novo" />' +
 						'&nbsp;<input id=editarAtributosSalvar value="Salvar" />';
@@ -688,6 +688,9 @@ var editorlimites = {
 				i = 0,
 				dv = "",
 				inputs = "",
+				codigo_tipo_regiao = $i("i3geoCartoRegioesEditaveis").value,
+				id_medida_variavel = $i("editarAtributosComboMedidas").value,
+				identificador_regiao = $i("editarAtributosidentificador_regiao"),
 				nj,
 				j,
 				colunas = [],
@@ -696,11 +699,26 @@ var editorlimites = {
 				valoresT = [],
 				idsunicosT = [],
 				idsunicos = [],
-				p,
+				p = i3GEO.configura.locaplic+"/admin/php/metaestat.php?funcao=salvaAtributosMedidaVariavel",
 				re = new RegExp("idunico_", "g"),//prefixo usado para marcar o id dos elementos input que contem os valores que se quer obter
 				temp = function(retorno){
 					//TODO nao esquecer de refazer a lista
+					editorlimites.editarAtributos.pegaDados();
+					i3GEO.janela.AGUARDEMODAL = false;
+					i3GEO.janela.fechaAguarde("aguardeSalvaAtributos");
 				};
+			if(codigo_tipo_regiao == ""){
+				alert("Problemas com o codigo da regiao");
+				return;
+			}
+			if(id_medida_variavel == ""){
+				alert("Escolha uma medida");
+				return;
+			}
+			if(identificador_regiao == ""){
+				alert("Problemas com o identificador da regiao");
+				return;
+			}
 			for(i=0;i<n;i++){
 				dv = divsT[i];
 				inputs = dv.getElementsByTagName("input");
@@ -717,8 +735,9 @@ var editorlimites = {
 				valoresT.push(valores.join(";"));
 				idsunicosT.push(idsunicos.join(";"));
 			}
-			p = "&colunas="+colunasT[0]+"&valores="+valoresT.join("|")+"&idsunicos="+idsunicosT.join("|");
-			alert(p);
+			i3GEO.janela.AGUARDEMODAL = true;
+			i3GEO.janela.abreAguarde("aguardeSalvaAtributos","Salvando...");
+			cpJSON.call(p,"foo",temp,"&codigo_tipo_regiao="+codigo_tipo_regiao+"&identificador_regiao="+identificador_regiao+"&id_medida_variavel="+id_medida_variavel+"&colunas="+colunasT[0]+"&valores="+valoresT.join("|")+"&idsunicos="+idsunicosT[0]);
 		},
 		criaJanelaFlutuante: function(html){
 			var janela,titulo,cabecalho,minimiza;

@@ -55,6 +55,7 @@ i3geo/classesphp/pega_variaveis.php
 */
 //echo "<pre>";
 //var_dump($_POST);exit;
+error_reporting(0);
 if (isset($_GET))
 {
 	foreach(array_keys($_GET) as $k)
