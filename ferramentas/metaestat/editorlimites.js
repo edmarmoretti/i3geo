@@ -48,6 +48,8 @@ var editorlimites = {
 	*/
 	inicia: function(iddiv){
 		var i,n,ics;
+		//mensagem
+		i3GEO.janela.tempoMsg("Aten&ccedil;&atilde;o: apenas tabelas no esquema i3geo_metaestat podem ser editadas.");
 		editorlimites.iddiv = iddiv;
 		$i(iddiv).innerHTML = editorlimites.html();
 		ics = $i(iddiv).getElementsByTagName("button");
@@ -137,10 +139,9 @@ var editorlimites = {
 		'	<button title="Remove selecionado (n&atilde;o apaga)" onclick="editorlimites.deleteSelectedShape()"><img src="'+i3GEO.configura.locaplic+'/imagens/gisicons/selected-delete.png" /></button>' +
 		'	<button title="Salvar limite" onclick="editorlimites.salvaLimite.inicia()"><img src="'+i3GEO.configura.locaplic+'/imagens/gisicons/vector-save.png" /></button>' +
 		'	<button title="Editar atributos" onclick="editorlimites.editarAtributos.ativa(this)"><img src="'+i3GEO.configura.locaplic+'/imagens/gisicons/annotation-form.png" /></button>' +
-		'	<button title="Ajuda" onmousedown="editorlimites.mudaicone()" onclick="editorlimites.Ajuda()" ><img src="'+i3GEO.configura.locaplic+'/imagens/gisicons/help-contents.png" /></button>' +
+		'	<button title="Ajuda" onmousedown="editorlimites.mudaicone()" onclick="editorlimites.ajuda()" ><img src="'+i3GEO.configura.locaplic+'/imagens/gisicons/help-contents.png" /></button>' +
 		'	<br><div id="i3geoCartoRegioesEditaveisDiv" ><img style="display:block;z-index:2" src="'+i3GEO.configura.locaplic+'/imagens/aguarde.gif" /></div>'; //combo para escolher a regiao
 		return ins;
-		//TODO texto do botao de ajuda
 	},
 	/*
 	Function: ativaFoco
@@ -646,15 +647,15 @@ var editorlimites = {
 						ins += "<hr><br>";
 						//descobre qual o indice que corresponde ao idunico do registro
 						for(j=0;j<nj;j++){
-							if(atr.colunas[j] !== "idunico"){
-								idunico = atr.dados[i][j];
+							if(atr.aliascolunas[j] == "idunico"){
+								idunico = atr.dados[i][atr.colunas[j]];
 							}
 						}
 						//colunas
 						for(j=0;j<nj;j++){
-							if(atr.colunas[j] !== "idunico"){
+							if(atr.aliascolunas[j] !== "idunico"){
 								ins += '<p class=paragrafo >'+atr.aliascolunas[j]+':<br>' +
-								'<input class=digitar id="idunico_'+idunico+'" value="'+atr.dados[i][j]+'" name="'+atr.colunas[j]+'" /></p>';
+								'<input class=digitar id="idunico_'+idunico+'" value="'+atr.dados[i][atr.colunas[j]]+'" name="'+atr.colunas[j]+'" /></p>';
 							}
 						}
 					}
@@ -662,14 +663,17 @@ var editorlimites = {
 					new YAHOO.widget.Button(
 						"editarAtributosAdicionar",
 						{onclick:{fn: function(){
-							var ins = "<hr><br><div>";
+							var novoel = document.createElement("div"),
+								ins = "<hr><br>";
 							for(j=0;j<nj;j++){
-								if(atr.colunas[j] !== "idunico"){
+								if(atr.aliascolunas[j] !== "idunico"){
 									ins += '<p class=paragrafo >'+atr.aliascolunas[j]+':<br>' +
 									'<input class=digitar id="" value="" name="'+atr.colunas[j]+'" /></p>';
 								}
 							}
-							$i("editarAtributosForm").innerHTML += ins + "</div><br>";
+							ins + "<br>";
+							novoel.innerHTML = ins;
+							$i("editarAtributosForm").appendChild(novoel);
 						}}}
 					);
 					new YAHOO.widget.Button(
@@ -690,7 +694,7 @@ var editorlimites = {
 				inputs = "",
 				codigo_tipo_regiao = $i("i3geoCartoRegioesEditaveis").value,
 				id_medida_variavel = $i("editarAtributosComboMedidas").value,
-				identificador_regiao = $i("editarAtributosidentificador_regiao"),
+				identificador_regiao = $i("editarAtributosidentificador_regiao").value,
 				nj,
 				j,
 				colunas = [],
@@ -698,11 +702,9 @@ var editorlimites = {
 				valores = [],
 				valoresT = [],
 				idsunicosT = [],
-				idsunicos = [],
 				p = i3GEO.configura.locaplic+"/admin/php/metaestat.php?funcao=salvaAtributosMedidaVariavel",
 				re = new RegExp("idunico_", "g"),//prefixo usado para marcar o id dos elementos input que contem os valores que se quer obter
 				temp = function(retorno){
-					//TODO nao esquecer de refazer a lista
 					editorlimites.editarAtributos.pegaDados();
 					i3GEO.janela.AGUARDEMODAL = false;
 					i3GEO.janela.fechaAguarde("aguardeSalvaAtributos");
@@ -725,19 +727,17 @@ var editorlimites = {
 				nj = inputs.length;
 				colunas = [];
 				valores = [];
-				idsunicos = [];
 				for(j=0;j<nj;j++){
 					colunas.push(inputs[j].name);
 					valores.push(inputs[j].value);
-					idsunicos.push(inputs[j].id.replace(re,''));
 				}
+				idsunicosT.push(inputs[0].id.replace(re,''));
 				colunasT.push(colunas.join(";"));
 				valoresT.push(valores.join(";"));
-				idsunicosT.push(idsunicos.join(";"));
 			}
 			i3GEO.janela.AGUARDEMODAL = true;
 			i3GEO.janela.abreAguarde("aguardeSalvaAtributos","Salvando...");
-			cpJSON.call(p,"foo",temp,"&codigo_tipo_regiao="+codigo_tipo_regiao+"&identificador_regiao="+identificador_regiao+"&id_medida_variavel="+id_medida_variavel+"&colunas="+colunasT[0]+"&valores="+valoresT.join("|")+"&idsunicos="+idsunicosT[0]);
+			cpJSON.call(p,"foo",temp,"&codigo_tipo_regiao="+codigo_tipo_regiao+"&identificador_regiao="+identificador_regiao+"&id_medida_variavel="+id_medida_variavel+"&colunas="+colunasT[0]+"&valores="+valoresT.join("|")+"&idsunicos="+idsunicosT.join(";"));
 		},
 		criaJanelaFlutuante: function(html){
 			var janela,titulo,cabecalho,minimiza;
@@ -803,5 +803,42 @@ var editorlimites = {
 				i3GEO.php.listaMedidaVariavel(comboMedidas.value,temp);
 			}
 		}
+	},
+	ajuda: function(){
+		var titulo,cabecalho,minimiza,html = "";
+		cabecalho = function(){};
+		minimiza = function(){
+			i3GEO.janela.minimiza("editaAtributosAjuda");
+		};
+		titulo = "Ajuda&nbsp;</a>";
+		i3GEO.janela.cria(
+			"400px",
+			"350px",
+			"",
+			"",
+			"",
+			titulo,
+			"editaAtributosAjuda",
+			false,
+			"hd",
+			cabecalho,
+			minimiza
+		);
+		$i("editaAtributosAjuda_corpo").style.backgroundColor = "white";
+		html += "<table class=lista8 >" +
+		"<tr><td><img src='"+i3GEO.configura.locaplic+"/imagens/gisicons/polygon-create.png' /></td>" +
+		"<td>Clique no mapa para tra&ccedil;ar um pol&iacute;gono novo. Cada clique corresponde a um v&eacute;rtice do pol&iacute;gono. Para encerrar o tra&ccedil;ado utilize um duplo clique. Ap&oacute;s tra&ccedil;ar um novo pol&iacute;gono pode-se selecion&aacute;-lo novamente e editar os v&eacute;rtices, se for necess&aacute;rio, ou mesmo apagar o pol&iacute;gono por completo. O novo pol&iacute;gono s&oacute; ser&aacute; salvo por meio da op&ccedil;&atilde;o espec&iacute;fica para isso.</td></tr>" +
+		"<tr><td><img src='"+i3GEO.configura.locaplic+"/imagens/gisicons/layer-import.png' /></td>" +
+		"<td>Utilize essa op&ccedil;&atilde;o para capturar os v&eacute;rtices de um pol&iacute;gono existente. O resultado da captura &eacute; uma figura que pode ser editada, ou seja, os v&eacute;rtices podem ser modificados de posi&ccedil;&atilde;o ou mesmo removidos. Ap&oacute;s editar, salve o novo pol&iacute;gono.</td></tr>" +
+		"<tr><td><img src='"+i3GEO.configura.locaplic+"/imagens/gisicons/select.png' /></td>" +
+		"<td>Ap&oacute;s ativar essa op&ccedil;&atilde;o clique no mapa sobre uma figura existente (que tenha sido capturada ou digtalizada). A figura passar&aacute; ent&atilde;o para o estado de 'selecionada' podendo ser utilizada por outras ferramentas de edi&ccedil;&atilde;o.</td></tr>" +
+		"<tr><td><img src='"+i3GEO.configura.locaplic+"/imagens/gisicons/selected-delete.png' /></td>" +
+		"<td>Remove da tela a figura que estiver selecionada. Essa opera&ccedil;&atilde;o n&atilde;o apaga o pol&iacute;gono do banco de dados, apenas remove do modo de edi&ccedil;&atilde;o.</td></tr>" +
+		"<tr><td><img src='"+i3GEO.configura.locaplic+"/imagens/gisicons/vector-save.png' /></td>" +
+		"<td>Salva no banco de dados a figura que estiver selecionada. Essa op&ccedil;&atilde;o altera apenas os atributos da regi&atilde;o, n&atilde;o afetando os valores armazenados em cada medida de vari&aacute;vel.</td></tr>" +
+		"<tr><td><img src='"+i3GEO.configura.locaplic+"/imagens/gisicons/annotation-form.png' /></td>" +
+		"<td>Abre um formul&aacute;rio que permite alterar os valores de uma medida de vari&aacute;vel relacionada a uma determinada regi&atilde;o. Ap&oacute;s abrir o formul&aacute;rio, clique no mapa sobre a regi&atilde;o desejada, mas escolha a medida da vari&aacute;vel primeiro. Os valores j&aacute; existentes poder&atilde;o ent&atilde;o ser alterados ou podem ser adicionados novos.</td></tr>" +
+		"</table>";
+		$i("editaAtributosAjuda_corpo").innerHTML = html;
 	}
 };

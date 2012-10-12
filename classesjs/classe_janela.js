@@ -577,12 +577,12 @@ i3GEO.janela = {
 			janela.render(document.body);
 			YAHOO.i3GEO.janela.managerAguarde.register(janela);
 		}
-		janela.setBody("...");
+		janela.setBody(texto);
 		altura = 40;
 		janela.body.style.padding="5px";
 		janela.body.style.backgroundColor="yellow";
 		janela.body.style.height="0px";
-		janela.body.style.overflow = "none";
+		janela.body.style.overflow = "hidden";
 		janela.body.onmouseover = function(){
 			var janela = YAHOO.i3GEO.janela.managerAguarde.find("i3geoTempoMsg");
 			if(janela){
@@ -602,7 +602,6 @@ i3GEO.janela = {
 		anim.onComplete.subscribe(function(){
 			janela.body.style.overflow = "auto";
 			janela.body.style.display = "block";
-			janela.setBody(texto);
 		});
 		anim.animate();
 
@@ -615,8 +614,7 @@ i3GEO.janela = {
 				var attributes,anim,
 					janela = YAHOO.i3GEO.janela.managerAguarde.find("i3geoTempoMsg");
 				if(janela){
-					janela.setBody(" ");
-					janela.body.style.overflow = "none";
+					janela.body.style.overflow = "hidden";
 					attributes = {
 						height: { to: 0 }
 					};

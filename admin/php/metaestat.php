@@ -1167,9 +1167,9 @@ switch (strtoupper($funcao))
 		$valores = explode("|",$valores);//array de uma lista de strings com valores separados por ;
 		$idsunicos = explode(";",$idsunicos);//array
 		$colunas = explode(";",$colunas);//array
-		
-		
-		retornaJSON("ok");
+		$m = new Metaestat();
+		$resultado = $m->salvaAtributosMedidaVariavel($id_medida_variavel,$codigo_tipo_regiao,$identificador_regiao,$idsunicos,$colunas,$valores);
+		retornaJSON($resultado);
 		exit;
 	break;
 }

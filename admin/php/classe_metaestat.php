@@ -1584,11 +1584,11 @@ class Metaestat{
 		//var_dump($c);exit;
 		$dbh = new PDO('pgsql:dbname='.$c["bancodedados"].';user='.$c["usuario"].';password='.$c["senha"].';host='.$c["host"].';port='.$c["porta"]);
 
-		$colunassql[] = $medida["colunavalor"]." as valormedida, ".$medida["colunaidunico"]." as idunico ";
+		$colunassql[] = $medida["colunavalor"].",".$medida["colunaidunico"];
 		$alias[] = $medida["nomemedida"];
-		$colunas[] = "valormedida";
-		$alias[] = $medida["colunaidunico"];
-		$colunas[] = "idunico";
+		$colunas[] = $medida["colunavalor"];
+		$alias[] = "idunico";
+		$colunas[] = $medida["colunaidunico"];
 
 		$parametros = $this->listaParametro($id_medida_variavel);
 		foreach($parametros as $p){
@@ -1605,6 +1605,54 @@ class Metaestat{
 		$q = $dbh->query($sql,PDO::FETCH_ASSOC);
 		$r = $q->fetchAll();
 		return array("dados"=>$r,"aliascolunas"=>$alias,"colunas"=>$colunas);
+	}
+	function salvaAtributosMedidaVariavel($id_medida_variavel,$codigo_tipo_regiao,$identificador_regiao,$idsunicos,$colunas,$valores){
+		$medida = $this->listaMedidaVariavel("",$id_medida_variavel);
+		if($medida["esquemadb"] != "i3geo_metaestat"){
+			return "erro";
+		}
+		$c = $this->listaConexao($medida["codigo_estat_conexao"],true);
+		//var_dump($c);exit;
+		$dbh = new PDO('pgsql:dbname='.$c["bancodedados"].';user='.$c["usuario"].';password='.$c["senha"].';host='.$c["host"].';port='.$c["porta"]);
+		$sql = array();
+		$nreg = count($idsunicos);
+		$ncols = count($colunas);
+		//loop pelos resgistros
+		for($i=0;$i<$nreg;++$i){
+			$id = $idsunicos[$i];
+			$vals = explode(";",$valores[$i]);
+			$sets = array();
+			//loop pelas colunas
+			for($j=0;$j<$ncols;$j++){
+				$sets[] = $colunas[$j]." = '".$vals[$j]."'";
+			}
+			if($id != ""){
+				$s = "UPDATE i3geo_metaestat.".$medida["tabela"]." SET ".implode(",",$sets);
+				$s .= " WHERE ".$medida["colunaidunico"]."::text = '".$id."' AND ".$medida["colunaidgeo"]."::text = '".$identificador_regiao."'";
+				if($medida["filtro"] != ""){
+					$s .= " AND ".$medida["filtro"];
+				}
+				$sql[] = $s;
+			}
+			else{
+				$s = "INSERT INTO i3geo_metaestat.".$medida["tabela"]." (".implode(",",$colunas).",id_medida_variavel,".$medida["colunaidgeo"].") ";
+				$s .= "VALUES ('".implode("','",$vals)."','$id_medida_variavel','$identificador_regiao') ";
+				$sql[] = $s;
+			}
+		}
+		try {
+			$dbh->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+			$dbh->beginTransaction();
+			foreach($sql as $s){
+				$sth = $dbh->exec($s);
+			}
+			$dbh->commit();
+		} catch (Exception $e) {
+			$dbh->rollBack();
+			return array("Falhou: " . $e->getMessage());
+		}
+		return array("ok");
+
 	}
 }
 ?>
