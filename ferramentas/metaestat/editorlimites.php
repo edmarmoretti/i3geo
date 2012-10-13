@@ -137,7 +137,9 @@ include_once(__DIR__."/../../ms_configura.php");
 	</div>
 </div>
 <script type="text/javascript" src="http://maps.google.com/maps/api/js?sensor=false&libraries=drawing "></script>
-<script type="text/javascript" src="../../classesjs/i3geonaocompacto.js"></script>
+<script type="text/javascript" src="../../classesjs/i3geo.js"></script>
+<script src="../../pacotes/wicket/wicket.js" type="text/javascript"></script>
+<script src="../../pacotes/wicket/wicket-gmap3.js" type="text/javascript"></script>
 <script src="dicionario.js"></script>
 <script src="editorlimites.js"></script>
 <script type="text/javascript">

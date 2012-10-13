@@ -162,8 +162,10 @@ var Wkt = (function () { // Execute function immediately
                     if (!this.extract[this.type]) {
                         return null;
                     }
-
-                    data = this.extract[this.type].apply(this, [components[i]]);
+//original
+//data = this.extract[this.type].apply(this, [components[i]]);
+//alterado por edmar
+                    data = this.extract[this.type].apply(this, [components[i][0]]);
                     if (this.isCollection()) {
                         pieces.push('(' + data + ')');
                     } else {

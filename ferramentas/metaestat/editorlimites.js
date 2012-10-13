@@ -43,6 +43,8 @@ var editorlimites = {
 	/**
 	 * Inicia o editor
 	 *
+	 * O objeto googlemap e i3GeoMap
+	 *
 	 * @param {String} Id do DIV que recebera o conteudo HTML do editor. Ja deve estar criado no HTML
 	 * @return
 	*/
@@ -229,6 +231,10 @@ var editorlimites = {
 		return {"tipo":tipo,"coordenadas":lista};
 	},
 	toWKT: function(obj){
+		var wkt = new Wkt.Wkt();
+		wkt.fromObject(obj);
+		return wkt.write();
+		/*
 		var wkt = "",
 			coordenadas = obj.coordenadas,
 			n = coordenadas.length,
@@ -256,6 +262,7 @@ var editorlimites = {
 
 		}
 		return wkt;
+		*/
 	},
 	capturaPoligonoTema:{
 		ativa: function(botao){
@@ -275,14 +282,16 @@ var editorlimites = {
 			}
 			else{
 				temp = function(retorno){
-						var temp,re,n,i,j,
+						var temp,n,i,WicketWkt,
 							wkt = "",
 							colunaid = editorlimites.descregioes["a_"+regiao]["identificador"],
 							valorid = "",
 							colunanome = editorlimites.descregioes["a_"+regiao]["colunanomeregiao"],
 							valornome = "",
-							pontos = [],
 							aguarde = $i("janelaEditorLimites_imagemCabecalho");
+						if(aguarde){
+							aguarde.style.visibility = "hidden";
+						}
 						//obtem os dados buscando nos itens que vem da requisicao ao wms
 						temp = retorno.data[0].resultado[0];
 						n = temp.length;
@@ -297,9 +306,7 @@ var editorlimites = {
 								valornome = temp[i].valor;
 							}
 						}
-						if(aguarde){
-							aguarde.style.visibility = "hidden";
-						}
+						/*
 						re = new RegExp("POLYGON \\(\\(", "g");
 						wkt = wkt.replace(re,'');
 						re = new RegExp("\\)\\)", "g");
@@ -312,7 +319,26 @@ var editorlimites = {
 							j = wkt[i].split(" ");
 							pontos.push([j[0],j[1]]);
 						}
-						editorlimites.adicionaPoligonos([pontos],tema,colunaid,valorid,colunanome,valornome);
+						*/
+						//objeto do wicket ver pacotes/wicket
+						WicketWkt = new Wkt.Wkt();
+						//wkt = "MULTIPOLYGON (((40 40, 20 45, 45 30, 40 40)), ((20 35, 45 20, 30 5, 10 10, 10 30, 20 35), (30 20, 20 25, 20 15, 30 20)))";
+						try { // Catch any malformed WKT strings
+							WicketWkt.read(wkt);
+						} catch (e1) {
+							try {
+								wkt.read(wkt.replace('\n', '').replace('\r', '').replace('\t', ''));
+							} catch (e2) {
+								if (e2.name === 'WKTError') {
+									alert('Wicket could not understand the WKT string you entered. Check that you have parentheses balanced, and try removing tabs and newline characters.');
+									return;
+								}
+							}
+						}
+						obj = WicketWkt.toObject(i3GeoMap.defaults);
+						//obj.setMap(i3GeoMap); // Add it to the map
+						//editorlimites.shapes.push(obj);
+						editorlimites.adicionaPoligonos(obj,tema,colunaid,valorid,colunanome,valornome);
 						i3GEO.eventos.MOUSECLIQUE = [];
 					};
 				regiao = $i("i3geoCartoRegioesEditaveis").value;
@@ -402,7 +428,7 @@ var editorlimites = {
 		};
 		i3GEO.php.mapfileTipoRegiao(temp,combo.value);
 	},
-	adicionaPoligonos: function(listaDePontos,tema,colunaid,valorid,colunanome,valornome){
+	adicionaPoligonos: function(obj,tema,colunaid,valorid,colunanome,valornome){
 		if(!tema){
 			tema = $i("i3geoCartoRegioesEditaveis").value;
 		}
@@ -418,6 +444,7 @@ var editorlimites = {
 		if(!valornome){
 			valornome = "";
 		}
+		/*
 		var n = listaDePontos.length,
 		i = 0,
 		nn,
@@ -425,6 +452,7 @@ var editorlimites = {
 		j,
 		pol,
 		pontos = [];
+
 		for(i=0;i<n;i++){
 			pontos = [];
 			nn = listaDePontos[i].length;
@@ -452,6 +480,56 @@ var editorlimites = {
 				editorlimites.setSelection(pol);
 			});
 			editorlimites.shapes.push(pol);
+		}
+		*/
+		var pol;
+        if (Wkt.isArray(obj)) { // Distinguish multigeometries (Arrays) from objects
+            for (i in obj) {
+                if (obj.hasOwnProperty(i) && !Wkt.isArray(obj[i])) {
+                	pol = new google.maps.Polygon({
+						path: obj[i].getPath(),
+						map: i3GeoMap,
+						fillColor: '#ffff00',
+						fillOpacity: .5,
+						strokeWeight: 2,
+						clickable: true,
+						zIndex: 1,
+						editable: true,
+						tema: tema,
+						colunaid: colunaid,
+						valorid: valorid,
+						colunanome: colunanome,
+						valornome: valornome
+					});
+					google.maps.event.addListener(pol, 'click', function() {
+						editorlimites.setSelection(pol);
+					});
+					editorlimites.shapes.push(pol);
+                }
+            }
+            return;
+        }
+		if (obj.type === 'polygon' || obj.type === 'linestring'){
+			pol = new google.maps.Polygon({
+				paths: obj.getPaths(),
+				map: i3GeoMap,
+				fillColor: '#ffff00',
+				fillOpacity: .5,
+				strokeWeight: 2,
+				clickable: true,
+				zIndex: 1,
+				editable: true,
+				tema: tema,
+				colunaid: colunaid,
+				valorid: valorid,
+				colunanome: colunanome,
+				valornome: valornome
+			});
+			google.maps.event.addListener(pol, 'click', function() {
+				editorlimites.setSelection(pol);
+			});
+			editorlimites.shapes.push(pol);
+			return;
 		}
 	},
 	salvaLimite: {
@@ -555,7 +633,7 @@ var editorlimites = {
 					i3GEO.Interface.redesenha();
 				};
 			if(comwkt === true){
-				wkt = editorlimites.toWKT(editorlimites.getCoordenadas(editorlimites.selectedShapes()[0]));
+				wkt = editorlimites.toWKT(editorlimites.selectedShapes()[0]);
 			}
 			else{
 				if(identificadornovo === identificador && $i("inputNomeElemento").value === nome){
