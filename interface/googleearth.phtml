@@ -10,13 +10,13 @@ include_once("../ms_configura.php");
         .olControlEditingToolbar  {
             float:left;
             right: 0px;
-            height:30px; 
+            height:30px;
             width: 150px;
         }
 </style>
 <title>i3GEO - Google Earth</title>
 <script type="text/javascript" src="http://www.google.com/jsapi?key=<?php echo $googleApiKey; ?>"></script>
-<script type="text/javascript" src="../classesjs/i3geo.js"></script>
+<script type="text/javascript" src="../classesjs/i3geo47.js"></script>
 </head>
 <body id="i3geo" onload='i3GEO.inicia();'>
 <center>
@@ -40,7 +40,7 @@ include_once("../ms_configura.php");
   </table>
 </td>
 <td id="contemMenu" style="text-align:right;height:0px;border-width:0pt 0pt 1px;border-color:rgb(240,240,240)">
-	 <div id="menus" ></div>    
+	 <div id="menus" ></div>
 </td>
 </tr>
 <tr>
@@ -120,9 +120,9 @@ http://localhost/i3geo/ms_criamapa.php?interface=googleearth.phtml
 */
 /*
 	Indica a localiza&ccedil;&atilde;o correta do i3geo.
-	
+
 	&Eacute; utilizada para identificar o local correto onde est&atilde;o os programas em php que s&atilde;o utilizados.
-	
+
 	Se n&atilde;o for definida, o i3Geo tentar&aacute; encontrar o local automaticamente
 */
 i3GEO.configura.locaplic = i3GEO.util.protocolo()+"://"+window.location.host+"/i3geo";
@@ -163,7 +163,7 @@ i3GEO.barraDeBotoes.AJUDA = true;
 i3GEO.mapa.legendaHTML.incluiBotaoLibera = false;
 i3GEO.gadgets.PARAMETROS.mostraMenuSuspenso.permiteLogin = true;
 i3GEO.cria();
-//veja tag body 
+//veja tag body
 //i3GEO.inicia();
 </script>
 

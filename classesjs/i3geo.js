@@ -1,5 +1,9 @@
 /*
-Title: i3geo - carregador de javascripts
+i3geo - carregador de javascripts
+
+Esse arquivo e mantido apenas para compatibilidade com instalacoes que usem a carga de javascript com o nome i3geo.js.
+
+Para uso atual, prefira o arquivo que contem a versao no nome, exemplo i3geo47.js
 
 Para uso nas interfaces HTML.
 

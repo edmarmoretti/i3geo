@@ -5,5 +5,5 @@ Utilizado como um include em ms_configura.php
 /**
  * TODO verificar antes de fechar versao
  */
-$mensagemInicia = 'Vers&atilde;o 4.7 - Alfa ';
+$mensagemInicia = 'Vers&atilde;o 4.7 - Beta 1 ';
 ?>
