@@ -215,23 +215,7 @@ if (strtoupper(substr(PHP_OS, 0, 3) == 'WIN'))
 										)
 							)
 						);
-	/*
-	Variable: editores (depreciado em fun&ccedil;&atilde;o do novo sistema de cadastro de usu&aacute;rios)
 
-	Ip dos usuarios que podem administrar o i3geo via navegador.
-
-	Separe os ips por v&iacute;rgula. Os usu&aacute;rios que tiverem seus ips listados, poder&atilde;o editar o diretório i3geo/temas, desde que os mesmos tenham direito de leitura e escrita nesse diretório.
-
-	array("127.0.0.1","localhost");
-
-	Tipo:
-	{array}
-
-	*/
-/**
- * TODO Bloquear essa variavel
- */
-	$editores = array("127.0.0.1","localhost");
 	/*
 	Variable: i3geomaster
 
@@ -477,8 +461,6 @@ else //se for linux
 	if((dirname($locaplic) == "/var/www") || (dirname($locaplic) == "/var/www/html")){
 		$dir_tmp = "/tmp/ms_tmp";
 	}
-	//@TODO Bloquear essa variavel
-	$editores = array("127.0.0.1","localhost");
 	$i3geomaster = array(
 				array("usuario"=>"admin", "senha"=>"admin")
 			);
