@@ -185,7 +185,7 @@
 			$dbhw->query("INSERT INTO ".$esquemaadmin."i3geousr_operacoespapeis VALUES(13,2)");
 			$dbhw->query("INSERT INTO ".$esquemaadmin."i3geousr_operacoespapeis VALUES(13,4)");
 			$dbhw->query("INSERT INTO ".$esquemaadmin."i3geousr_operacoespapeis VALUES(15,3)");
-			$dbhw->query("INSERT INTO ".$esquemaadmin."i3geousr_operacoespapeis VALUES ('16', '2')");
+			$dbhw->query("INSERT INTO ".$esquemaadmin."i3geousr_operacoespapeis VALUES(16,2)");
 
 			$banco = null;
 			echo "Banco criado!!! administrador: admin / admin  - n&atilde;o esque&ccedil;a de alterar essa senha na op&ccedil;&atilde;o de edi&ccedil;&atilde;o do cadastro de usu&aacute;rios";

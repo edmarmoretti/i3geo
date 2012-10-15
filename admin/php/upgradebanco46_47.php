@@ -74,11 +74,27 @@ else{
 }
 error_reporting(E_ALL);
 $tabelas = array(
-"CREATE TABLE ".$esquemaadmin."i3geousr_usuarios (ativo NUMERIC, data_cadastro TEXT, email TEXT, id_usuario INTEGER PRIMARY KEY, login TEXT, nome_usuario TEXT, senha TEXT)",
-"CREATE TABLE ".$esquemaadmin."i3geousr_papelusuario (id_papel NUMERIC, id_usuario NUMERIC)",
-"CREATE TABLE ".$esquemaadmin."i3geousr_papeis (descricao TEXT, id_papel INTEGER PRIMARY KEY, nome TEXT)",
-"CREATE TABLE ".$esquemaadmin."i3geousr_operacoes (id_operacao INTEGER PRIMARY KEY, codigo TEXT, descricao TEXT)",
-"CREATE TABLE ".$esquemaadmin."i3geousr_operacoespapeis (id_operacao NUMERIC, id_papel NUMERIC)"
+				"CREATE TABLE ".$esquemaadmin."i3geousr_usuarios (ativo NUMERIC, data_cadastro TEXT, email TEXT, id_usuario INTEGER PRIMARY KEY, login TEXT, nome_usuario TEXT, senha TEXT)",
+				"CREATE TABLE ".$esquemaadmin."i3geousr_papelusuario (id_papel NUMERIC, id_usuario NUMERIC)",
+				"CREATE TABLE ".$esquemaadmin."i3geousr_papeis (descricao TEXT, id_papel INTEGER PRIMARY KEY, nome TEXT)",
+				"CREATE TABLE ".$esquemaadmin."i3geousr_operacoes (id_operacao INTEGER PRIMARY KEY, codigo TEXT, descricao TEXT)",
+				"CREATE TABLE ".$esquemaadmin."i3geousr_operacoespapeis (id_operacao NUMERIC, id_papel NUMERIC)",
+				"CREATE TABLE ".$esquemaadmin."i3geousr_grupousuario (id_usuario NUMERIC, id_grupo NUMERIC)",
+				"CREATE TABLE ".$esquemaadmin."i3geousr_grupotema (id_grupo NUMERIC, id_tema NUMERIC)",
+				"CREATE TABLE ".$esquemaadmin."i3geousr_grupos (id_grupo INTEGER PRIMARY KEY, nome TEXT)",
+				"create table ".$esquemaadmin."i3geoestat_conexao (codigo_estat_conexao integer primary key,bancodedados text,host text,porta text,usuario text,senha text)",
+				"create table ".$esquemaadmin."i3geoestat_tipo_regiao(codigo_tipo_regiao integer primary key,nome_tipo_regiao text,descricao_tipo_regiao text,codigo_estat_conexao integer,esquemadb text,tabela text,colunageo text,data text,identificador integer,colunanomeregiao text,srid text,colunacentroide text)",
+				"create table ".$esquemaadmin."i3geoestat_agregaregiao(id_agregaregiao integer primary key,codigo_tipo_regiao integer,codigo_tipo_regiao_pai integer,colunaligacao_regiaopai text)",
+				"create table ".$esquemaadmin."i3geoestat_tipo_periodo(codigo_tipo_periodo integer primary key,nome text,descricao text)",
+				"create table ".$esquemaadmin."i3geoestat_unidade_medida(codigo_unidade_medida integer primary key,nome text,sigla text,permitesoma integer default 0,permitemedia integer default 0)",
+				"create table ".$esquemaadmin."i3geoestat_variavel(codigo_variavel integer primary key,nome text,descricao text)",
+				"create table ".$esquemaadmin."i3geoestat_medida_variavel(id_medida_variavel integer primary key,codigo_unidade_medida integer,codigo_tipo_periodo integer,codigo_variavel integer,codigo_tipo_regiao integer,codigo_estat_conexao integer,esquemadb text,tabela text,colunavalor text,colunaidgeo text,filtro text,nomemedida text,colunaidunico text)",
+				"create table ".$esquemaadmin."i3geoestat_classificacao(id_classificacao integer primary key,nome text,id_medida_variavel integer,observacao text)",
+				"create table ".$esquemaadmin."i3geoestat_classes(id_classe integer primary key,expressao text,titulo text,vermelho text,verde text,azul text,id_classificacao integer,tamanho text,simbolo text,overmelho text,overde text,oazul text,otamanho text)",
+				"create table ".$esquemaadmin."i3geoestat_fonteinfo(id_fonteinfo integer primary key,titulo text unique,link text)",
+				"create table ".$esquemaadmin."i3geoestat_fonteinfo_medida(id_medida_variavel integer not null,id_fonteinfo integer not null)",
+				"create table ".$esquemaadmin."i3geoestat_medida_variavel_link(link text,id_medida_variavel integer,nome text,id_link integer primary key)",
+				"create table ".$esquemaadmin."i3geoestat_parametro_medida(id_parametro_medida integer primary key,coluna text,nome text,descricao text,id_pai integer default 0,id_medida_variavel integer)"
 );
 foreach($tabelas as $tabela)
 {
@@ -154,6 +170,9 @@ if(!in_array($teste,15))
 	$dbhw->query("INSERT INTO ".$esquemaadmin."i3geousr_operacoes VALUES(15,'admin/html/webservices','cadastro de links para webservices')");
 if(!in_array($teste,16))
 	$dbhw->query("INSERT INTO ".$esquemaadmin."i3geousr_operacoes VALUES(16,'admin/php/editortexto','editor de texto para mapfiles')");
+if(!in_array($teste,17))
+	$dbhw->query("INSERT INTO ".$esquemaadmin."i3geousr_operacoes VALUES('17', 'admin/html/usuarios', 'cadastro de usuarios')");
+
 
 $teste = lista("select * from ".$esquemaadmin."i3geousr_operacoes","id_operacao","id_papel");
 if(!in_array($teste,'1-2'))
@@ -174,6 +193,8 @@ if(!in_array($teste,'13-4'))
 	$dbhw->query("INSERT INTO ".$esquemaadmin."i3geousr_operacoespapeis VALUES(13,4)");
 if(!in_array($teste,'15-3'))
 	$dbhw->query("INSERT INTO ".$esquemaadmin."i3geousr_operacoespapeis VALUES(15,3)");
+if(!in_array($teste,'16-2'))
+	$dbhw->query("INSERT INTO ".$esquemaadmin."i3geousr_operacoespapeis VALUES(16,2)");
 //cria o banco de dados de metadados estatisticos
 if(file_exists("../../admin/metaestat.db"))	{
 	echo "<br>Arquivo admin/metaestat.db ja existe. Vc deve apag&aacute;-lo para poder cri&aacute;-lo novamente caso precise";
