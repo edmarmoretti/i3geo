@@ -1168,6 +1168,36 @@ class Metaestat{
 		$sql .= "ORDER BY nome_tipo_regiao";
 		return $this->execSQL($sql,$codigo_tipo_regiao);
 	}
+	function listaHierarquiaRegioes($codigoregiaopai=""){
+		$sql = "select i3geoestat_tipo_regiao.codigo_tipo_regiao,i3geoestat_tipo_regiao.nome_tipo_regiao from ".$this->esquemaadmin."i3geoestat_tipo_regiao ";
+		$sql .= "LEFT JOIN ".$this->esquemaadmin."i3geoestat_agregaregiao ";
+		$sql .= "ON i3geoestat_tipo_regiao.codigo_tipo_regiao = i3geoestat_agregaregiao.codigo_tipo_regiao ";
+		if($codigoregiaopai != ""){
+			$sql .= " WHERE ".$this->esquemaadmin."i3geoestat_agregaregiao.codigo_tipo_regiao_pai = $codigoregiaopai";
+		}
+		else{
+			$sql .= "WHERE ".$this->esquemaadmin."i3geoestat_agregaregiao.codigo_tipo_regiao IS NULL";
+		}
+		return $this->execSQL($sql,"");
+	}
+	function listaDadosRegiao($codigo_tipo_regiao,$codigo_tipo_regiaopai="",$valorregiaopai=""){
+		//pega a tabela, esquema e conexao para acessar os dados da regiao
+		$regiao = $this->listaTipoRegiao($codigo_tipo_regiao);
+		$c = $this->listaConexao($regiao["codigo_estat_conexao"],true);
+		$dbh = new PDO('pgsql:dbname='.$c["bancodedados"].';user='.$c["usuario"].';password='.$c["senha"].';host='.$c["host"].';port='.$c["porta"]);
+		$c = $regiao["colunageo"];
+		$bbox = "ST_XMin($c)||' '||ST_YMin($c)||' '||ST_XMax($c)||' '||ST_YMax($c) as ext ";
+		$sql = "select $bbox,".$regiao["colunanomeregiao"]." as nome_regiao,".$regiao["identificador"]." as identificador_regiao from ".$regiao["esquemadb"].".".$regiao["tabela"];
+		if($valorregiaopai != ""){
+			$r = $this->listaAgregaRegiaoFilho($codigo_tipo_regiao,$codigo_tipo_regiaopai);
+			$sql .= " WHERE ".$r["colunaligacao_regiaopai"]."::text = '$valorregiaopai'";
+		}
+		$sql .= " order by ".$regiao["colunanomeregiao"];
+
+		$q = $dbh->query($sql,PDO::FETCH_ASSOC);
+		$r = $q->fetchAll();
+		return $r;
+	}
 	function listaAgregaRegiao($codigo_tipo_regiao,$id_agregaregiao=""){
 		$sql = "select * from ".$this->esquemaadmin."i3geoestat_agregaregiao ";
 		if($id_agregaregiao != ""){

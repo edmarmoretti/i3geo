@@ -20,7 +20,7 @@ GNU conforme publicada pela Free Software Foundation;
 
 Este programa &eacute; distribu&iacute;do na expectativa de que seja &uacute;til,
 por&eacute;m, SEM NENHUMA GARANTIA; nem mesmo a garantia impl&iacute;cita
-de COMERCIABILIDADE OU ADEQUAÇ&Atilde;O A UMA FINALIDADE ESPEC&Iacute;FICA.
+de COMERCIABILIDADE OU ADEQUACAO A UMA FINALIDADE ESPEC&Iacute;FICA.
 Consulte a Licen&ccedil;a P&uacute;blica Geral do GNU para mais detalhes.
 Voc&ecirc; deve ter recebido uma c&oacute;pia da Licen&ccedil;a P&uacute;blica Geral do
 GNU junto com este programa; se n&atilde;o, escreva para a
@@ -2092,10 +2092,15 @@ i3GEO.util = {
 	dir {string} - diretorio em i3geo/ferramentas
 
 	nome {string} - nome da classe da ferramenta
+
+	nomejs {string} - nome do arquivo javascript
 	*/
-	dialogoFerramenta: function(mensagem,dir,nome){
+	dialogoFerramenta: function(mensagem,dir,nome,nomejs){
 		if(typeof(console) !== 'undefined'){console.info(mensagem);}
-		var js = i3GEO.configura.locaplic+"/ferramentas/"+dir+"/index.js";
+		if(!nomejs){
+			nomejs = "index.js";
+		}
+		var js = i3GEO.configura.locaplic+"/ferramentas/"+dir+"/"+nomejs;
 		if(!$i("i3GEOF."+nome+"_script")){
 			i3GEO.janela.ESTILOAGUARDE = "reduzida";
 			i3GEO.util.multiStep(

@@ -1,4 +1,10 @@
 /*
+ Title: Editor vetorial de limites de regi&otilde;es do sistema METAESTAT
+
+ Arquivo:
+
+ i3geo/ferramentas/metaestat/editorlimites.js
+
 Licenca:
 
 GPL2
@@ -25,9 +31,16 @@ Free Software Foundation, Inc., no endereco
 59 Temple Street, Suite 330, Boston, MA 02111-1307 USA.
 */
 
-
+if(typeof(i3GEOF) === 'undefined'){
+	var i3GEOF = {};
+}
 //TODO traduzir
-var editorlimites = {
+/*
+ Classe: i3GEOF.editorlimites
+
+ Fun&ccedil;&otilde;es de edi&ccedil;&atilde;o vetorial utilizadas pelo editor de regi&otilde;es do sistema METAESTAT
+ */
+i3GEOF.editorlimites = {
 	/**
 	 * Estilo do objeto DOM com a imagem de aguarde existente no cabecalho da janela
 	 *
@@ -52,12 +65,12 @@ var editorlimites = {
 		var i,n,ics;
 		//mensagem
 		i3GEO.janela.tempoMsg("Aten&ccedil;&atilde;o: apenas tabelas no esquema i3geo_metaestat podem ser editadas.");
-		editorlimites.iddiv = iddiv;
-		$i(iddiv).innerHTML = editorlimites.html();
+		i3GEOF.editorlimites.iddiv = iddiv;
+		$i(iddiv).innerHTML = i3GEOF.editorlimites.html();
 		ics = $i(iddiv).getElementsByTagName("button");
 		n = ics.length;
 		i3GEO.barraDeBotoes.ativaBotoes();
-		editorlimites.comboRegiaoEditavel();
+		i3GEOF.editorlimites.comboRegiaoEditavel();
 		for(i=0;i<n;i++){
 			ics[i].style.backgroundColor = "white";
 			ics[i].className = "iconeGuiaMovel";
@@ -69,7 +82,7 @@ var editorlimites = {
 			ics[i].style.border = "1px solid gray";
 			ics[i].style.margin = "0px";
 		}
-		editorlimites.drawingManager = new google.maps.drawing.DrawingManager({
+		i3GEOF.editorlimites.drawingManager = new google.maps.drawing.DrawingManager({
 			drawingMode: google.maps.drawing.OverlayType.POLYGON,
 			drawingControl: false,
 			drawingControlOptions: {
@@ -93,12 +106,12 @@ var editorlimites = {
 				valornome: ""
 			}
 		});
-		editorlimites.drawingManager.setMap(i3GeoMap);
-		editorlimites.drawingManager.setDrawingMode(null);
-		google.maps.event.addListener(editorlimites.drawingManager, 'overlaycomplete', function(e) {
+		i3GEOF.editorlimites.drawingManager.setMap(i3GeoMap);
+		i3GEOF.editorlimites.drawingManager.setDrawingMode(null);
+		google.maps.event.addListener(i3GEOF.editorlimites.drawingManager, 'overlaycomplete', function(e) {
 			if (e.type != google.maps.drawing.OverlayType.MARKER) {
-				editorlimites.drawingManager.setDrawingMode(null);
-				editorlimites.mudaicone();
+				i3GEOF.editorlimites.drawingManager.setDrawingMode(null);
+				i3GEOF.editorlimites.mudaicone();
 				var newShape = e.overlay;
 				newShape.type = e.type;
 				newShape.tema = $i("i3geoCartoRegioesEditaveis").value;
@@ -107,21 +120,21 @@ var editorlimites = {
 				newShape.colunanome = "";
 				newShape.valornome = "";
 				google.maps.event.addListener(newShape, 'click', function() {
-					editorlimites.setSelection(newShape);
+					i3GEOF.editorlimites.setSelection(newShape);
 				});
-				editorlimites.setSelection(newShape);
-				editorlimites.shapes.push(newShape);
+				i3GEOF.editorlimites.setSelection(newShape);
+				i3GEOF.editorlimites.shapes.push(newShape);
 			}
 		});
         google.maps.event.addListener(
-        	editorlimites.drawingManager,
+        	i3GEOF.editorlimites.drawingManager,
         	'drawingmode_changed',
-        	editorlimites.clearSelection
+        	i3GEOF.editorlimites.clearSelection
         );
         google.maps.event.addListener(
         	i3GeoMap,
         	'click',
-        	editorlimites.clearSelection
+        	i3GEOF.editorlimites.clearSelection
         );
 	},
 	/*
@@ -134,15 +147,15 @@ var editorlimites = {
 	String com o código html
 	*/
 	html:function(){
-		var ins = '' +
-		'	<button title="Desenhar um polígono" onclick="editorlimites.digitalizaPol(this)"><img src="'+i3GEO.configura.locaplic+'/imagens/gisicons/polygon-create.png" /></button>' +
-		'	<button title="Capturar polígono de um tema" onclick="editorlimites.capturaPoligonoTema.ativa(this)"><img src="'+i3GEO.configura.locaplic+'/imagens/gisicons/layer-import.png" /></button>' +
-		'	<button title="Selecionar" onclick="editorlimites.seleciona(this)"><img src="'+i3GEO.configura.locaplic+'/imagens/gisicons/select.png" /></button>' +
-		'	<button title="Remove selecionado (n&atilde;o apaga)" onclick="editorlimites.deleteSelectedShape()"><img src="'+i3GEO.configura.locaplic+'/imagens/gisicons/selected-delete.png" /></button>' +
-		'	<button title="Salvar limite" onclick="editorlimites.salvaLimite.inicia()"><img src="'+i3GEO.configura.locaplic+'/imagens/gisicons/vector-save.png" /></button>' +
-		'	<button title="Editar atributos" onclick="editorlimites.editarAtributos.ativa(this)"><img src="'+i3GEO.configura.locaplic+'/imagens/gisicons/annotation-form.png" /></button>' +
-		'	<button title="Ajuda" onmousedown="editorlimites.mudaicone()" onclick="editorlimites.ajuda()" ><img src="'+i3GEO.configura.locaplic+'/imagens/gisicons/help-contents.png" /></button>' +
-		'	<br><div id="i3geoCartoRegioesEditaveisDiv" ><img style="display:block;z-index:2" src="'+i3GEO.configura.locaplic+'/imagens/aguarde.gif" /></div>'; //combo para escolher a regiao
+		var ins = '<div style=margin-left:5px >' +
+		'	<button title="Desenhar um polígono" onclick="i3GEOF.editorlimites.digitalizaPol(this)"><img src="'+i3GEO.configura.locaplic+'/imagens/gisicons/polygon-create.png" /></button>' +
+		'	<button title="Capturar polígono de um tema" onclick="i3GEOF.editorlimites.capturaPoligonoTema.ativa(this)"><img src="'+i3GEO.configura.locaplic+'/imagens/gisicons/layer-import.png" /></button>' +
+		'	<button title="Selecionar" onclick="i3GEOF.editorlimites.seleciona(this)"><img src="'+i3GEO.configura.locaplic+'/imagens/gisicons/select.png" /></button>' +
+		'	<button title="Remove selecionado (n&atilde;o apaga)" onclick="i3GEOF.editorlimites.deleteSelectedShape()"><img src="'+i3GEO.configura.locaplic+'/imagens/gisicons/selected-delete.png" /></button>' +
+		'	<button title="Salvar limite" onclick="i3GEOF.editorlimites.salvaLimite.inicia()"><img src="'+i3GEO.configura.locaplic+'/imagens/gisicons/vector-save.png" /></button>' +
+		'	<button title="Editar atributos" onclick="i3GEOF.editorlimites.editarAtributos.ativa(this)"><img src="'+i3GEO.configura.locaplic+'/imagens/gisicons/annotation-form.png" /></button>' +
+		'	<button title="Ajuda" onmousedown="i3GEOF.editorlimites.mudaicone()" onclick="i3GEOF.editorlimites.ajuda()" ><img src="'+i3GEO.configura.locaplic+'/imagens/gisicons/help-contents.png" /></button>' +
+		'	<br><div id="i3geoCartoRegioesEditaveisDiv" ><img style="display:block;z-index:2" src="'+i3GEO.configura.locaplic+'/imagens/aguarde.gif" /></div></div>'; //combo para escolher a regiao
 		return ins;
 	},
 	/*
@@ -153,20 +166,20 @@ var editorlimites = {
 	ativaFoco: function(){
 		i3GEO.util.mudaCursor(i3GEO.configura.cursores,"crosshair",i3GEO.Interface.IDMAPA,i3GEO.configura.locaplic);
 		i3GEO.barraDeBotoes.ativaIcone("pan");
-		editorlimites.mudaicone();
+		i3GEOF.editorlimites.mudaicone();
 		i3GEO.Interface.googlemaps.recalcPar();
 	},
 	setSelection: function(shape){
-		//editorlimites.clearSelection();
-		//editorlimites.selectedShape = shape;
+		//i3GEOF.editorlimites.clearSelection();
+		//i3GEOF.editorlimites.selectedShape = shape;
 		shape.setEditable(!shape.editable);
 	},
 	clearSelection: function(){
 		var i,
-			n = editorlimites.shapes.length;
+			n = i3GEOF.editorlimites.shapes.length;
 		for(i=0;i<n;i++){
-			if(editorlimites.shapes[i] != ""){
-				editorlimites.shapes[i].setEditable(false);
+			if(i3GEOF.editorlimites.shapes[i] != ""){
+				i3GEOF.editorlimites.shapes[i].setEditable(false);
 			}
 		}
 	},
@@ -175,7 +188,7 @@ var editorlimites = {
 			naoconfirma = false;
 		}
 		var i,
-		n = editorlimites.shapes.length;
+		n = i3GEOF.editorlimites.shapes.length;
 		if(n > 0){
 			if(naoconfirma === false){
 				var x = window.confirm("Remove as figuras selecionadas?");
@@ -185,9 +198,9 @@ var editorlimites = {
 			}
 			if(x){
 				for(i=0;i<n;i++){
-					if(editorlimites.shapes[i] != "" && editorlimites.shapes[i].editable === true){
-						editorlimites.shapes[i].setMap(null);
-						editorlimites.shapes[i] = "";
+					if(i3GEOF.editorlimites.shapes[i] != "" && i3GEOF.editorlimites.shapes[i].editable === true){
+						i3GEOF.editorlimites.shapes[i].setMap(null);
+						i3GEOF.editorlimites.shapes[i] = "";
 					}
 				}
 			}
@@ -198,10 +211,10 @@ var editorlimites = {
 	},
 	selectedShapes: function() {
 		var i,s = [],
-		n = editorlimites.shapes.length;
+		n = i3GEOF.editorlimites.shapes.length;
 		for(i=0;i<n;i++){
-			if(editorlimites.shapes[i] != "" && editorlimites.shapes[i].editable === true){
-				s.push(editorlimites.shapes[i]);
+			if(i3GEOF.editorlimites.shapes[i] != "" && i3GEOF.editorlimites.shapes[i].editable === true){
+				s.push(i3GEOF.editorlimites.shapes[i]);
 			}
 		}
 		return s;
@@ -209,17 +222,17 @@ var editorlimites = {
 	getCoordenadas: function(){
 		var coordenadas = [],
 			lista = [],
-			n = editorlimites.shapes.length,
+			n = i3GEOF.editorlimites.shapes.length,
 			tipo = "",
 			ps,nps,j,p,i;
 
 		for(i=0;i<n;i++){
 			coordenadas = [];
-			if(editorlimites.shapes[i] != "" && editorlimites.shapes[i].editable === true){
+			if(i3GEOF.editorlimites.shapes[i] != "" && i3GEOF.editorlimites.shapes[i].editable === true){
 				if(tipo == ""){
-					tipo = editorlimites.shapes[i].type;
+					tipo = i3GEOF.editorlimites.shapes[i].type;
 				}
-				ps = editorlimites.shapes[i].getPath();
+				ps = i3GEOF.editorlimites.shapes[i].getPath();
 				nps = ps.getLength();
 				for(j=0;j<nps;j++){
 					p = ps.getAt(j);
@@ -266,29 +279,29 @@ var editorlimites = {
 	},
 	capturaPoligonoTema:{
 		ativa: function(botao){
-			editorlimites.mudaicone(botao);
+			i3GEOF.editorlimites.mudaicone(botao);
 			i3GEO.util.mudaCursor(i3GEO.configura.cursores,"pointer",i3GEO.Interface.IDMAPA,i3GEO.configura.locaplic);
-			if(i3GEO.eventos.MOUSECLIQUE.toString().search("editorlimites.capturaPoligonoTema.captura()") < 0)
-			{i3GEO.eventos.MOUSECLIQUE.push("editorlimites.capturaPoligonoTema.captura()");}
+			if(i3GEO.eventos.MOUSECLIQUE.toString().search("i3GEOF.editorlimites.capturaPoligonoTema.captura()") < 0)
+			{i3GEO.eventos.MOUSECLIQUE.push("i3GEOF.editorlimites.capturaPoligonoTema.captura()");}
 		},
 		desativa: function(){
 		},
 		captura: function(){
 			var temp,tema="",regiao="",p,par,
-				aguarde = $i("janelaEditorLimites_imagemCabecalho");
-			editorlimites.mudaicone();
+				aguarde = $i("janelai3GEOF.editorlimites_imagemCabecalho");
+			i3GEOF.editorlimites.mudaicone();
 			if(!$i("i3geoCartoRegioesEditaveis")){
-				i3GEO.eventos.MOUSECLIQUE.remove("editorlimites.capturaPoligonoTema.captura()");
+				i3GEO.eventos.MOUSECLIQUE.remove("i3GEOF.editorlimites.capturaPoligonoTema.captura()");
 			}
 			else{
 				temp = function(retorno){
 						var temp,n,i,WicketWkt,
 							wkt = "",
-							colunaid = editorlimites.descregioes["a_"+regiao]["identificador"],
+							colunaid = i3GEOF.editorlimites.descregioes["a_"+regiao]["identificador"],
 							valorid = "",
-							colunanome = editorlimites.descregioes["a_"+regiao]["colunanomeregiao"],
+							colunanome = i3GEOF.editorlimites.descregioes["a_"+regiao]["colunanomeregiao"],
 							valornome = "",
-							aguarde = $i("janelaEditorLimites_imagemCabecalho");
+							aguarde = $i("janelai3GEOF.editorlimites_imagemCabecalho");
 						if(aguarde){
 							aguarde.style.visibility = "hidden";
 						}
@@ -337,13 +350,13 @@ var editorlimites = {
 						}
 						obj = WicketWkt.toObject(i3GeoMap.defaults);
 						//obj.setMap(i3GeoMap); // Add it to the map
-						//editorlimites.shapes.push(obj);
-						editorlimites.adicionaPoligonos(obj,tema,colunaid,valorid,colunanome,valornome);
+						//i3GEOF.editorlimites.shapes.push(obj);
+						i3GEOF.editorlimites.adicionaPoligonos(obj,tema,colunaid,valorid,colunanome,valornome);
 						i3GEO.eventos.MOUSECLIQUE = [];
 					};
 				regiao = $i("i3geoCartoRegioesEditaveis").value;
 				if(regiao != ""){
-					tema = editorlimites.regioestemas["a"+regiao];
+					tema = i3GEOF.editorlimites.regioestemas["a"+regiao];
 					if(aguarde && aguarde.style.visibility == "hidden"){
 						aguarde.style.visibility = "visible";
 						p = i3GEO.configura.locaplic+"/classesphp/mapa_controle.php";
@@ -360,7 +373,7 @@ var editorlimites = {
 	Altera as bordas dos ícones e desativa eventos anteriores
 	*/
 	mudaicone: function(botao){
-		var c = $i(editorlimites.iddiv),
+		var c = $i(i3GEOF.editorlimites.iddiv),
 			ci = c.getElementsByTagName("img"),
 			n = ci.length,
 			i;
@@ -368,23 +381,23 @@ var editorlimites = {
 			ci[i].parentNode.style.backgroundColor = "#F5F5F5";
 		}
 		i3GEO.eventos.MOUSECLIQUE = [];
-		editorlimites.capturaPoligonoTema.desativa();
-		editorlimites.editarAtributos.desativa();
+		i3GEOF.editorlimites.capturaPoligonoTema.desativa();
+		i3GEOF.editorlimites.editarAtributos.desativa();
 		if(botao && botao.style){
 			botao.style.backgroundColor = "#cedff2";
 		}
 	},
 	digitalizaPol: function(botao){
-		editorlimites.mudaicone(botao);
+		i3GEOF.editorlimites.mudaicone(botao);
 		i3GEO.util.mudaCursor(i3GEO.configura.cursores,"pointer",i3GEO.Interface.IDMAPA,i3GEO.configura.locaplic);
-		editorlimites.drawingManager.setOptions({
+		i3GEOF.editorlimites.drawingManager.setOptions({
 			drawingMode: google.maps.drawing.OverlayType.POLYGON
 		});
 	},
 	seleciona: function(botao){
-		editorlimites.mudaicone(botao);
+		i3GEOF.editorlimites.mudaicone(botao);
 		i3GEO.util.mudaCursor(i3GEO.configura.cursores,"pointer",i3GEO.Interface.IDMAPA,i3GEO.configura.locaplic);
-		editorlimites.drawingManager.setOptions({
+		i3GEOF.editorlimites.drawingManager.setOptions({
 			drawingMode: null
 		});
 	},
@@ -397,12 +410,12 @@ var editorlimites = {
 			var n = dados.length,
 			ins = '<br><p class="paragrafo" >'+$trad(15,i3GEOF.metaestat.dicionario)+':</p>',
 			i;
-			ins += "<select onchange='editorlimites.comboRegiaoEditavelOnchange(this)' id='i3geoCartoRegioesEditaveis' style='width:175px' ><option value=''>---</option>";
+			ins += "<select onchange='i3GEOF.editorlimites.comboRegiaoEditavelOnchange(this)' id='i3geoCartoRegioesEditaveis' style='width:175px' ><option value=''>---</option>";
 			for(i=0;i<n;i++){
 				//so e possivel editar nesse esquema
 				if(dados[i].esquemadb == "i3geo_metaestat"){
 					ins += "<option value='"+dados[i].codigo_tipo_regiao+"'>"+dados[i].nome_tipo_regiao+"</option>";
-					editorlimites.descregioes["a_"+dados[i].codigo_tipo_regiao] = dados[i];
+					i3GEOF.editorlimites.descregioes["a_"+dados[i].codigo_tipo_regiao] = dados[i];
 				}
 			}
 			ins += "</select>";
@@ -417,13 +430,13 @@ var editorlimites = {
 		if(combo.value === ""){
 			return;
 		}
-		editorlimites.editarAtributos.desativa();
+		i3GEOF.editorlimites.editarAtributos.desativa();
 		var temp = function(retorno){
 			if(i3GEO.arvoreDeCamadas.pegaTema(retorno.layer) == ""){
 				i3GEO.php.adtema(i3GEO.atualiza,retorno.mapfile);
 				//guarda o codigo e relaciona com a regiao
-				editorlimites.regioestemas["a"+$i("i3geoCartoRegioesEditaveis").value] = retorno.layer;
-				editorlimites.temasregioes[retorno.layer] = $i("i3geoCartoRegioesEditaveis").value;
+				i3GEOF.editorlimites.regioestemas["a"+$i("i3geoCartoRegioesEditaveis").value] = retorno.layer;
+				i3GEOF.editorlimites.temasregioes[retorno.layer] = $i("i3geoCartoRegioesEditaveis").value;
 			}
 		};
 		i3GEO.php.mapfileTipoRegiao(temp,combo.value);
@@ -477,9 +490,9 @@ var editorlimites = {
 				valornome: valornome
 			});
 			google.maps.event.addListener(pol, 'click', function() {
-				editorlimites.setSelection(pol);
+				i3GEOF.editorlimites.setSelection(pol);
 			});
-			editorlimites.shapes.push(pol);
+			i3GEOF.editorlimites.shapes.push(pol);
 		}
 		*/
 		var pol;
@@ -502,9 +515,9 @@ var editorlimites = {
 						valornome: valornome
 					});
 					google.maps.event.addListener(pol, 'click', function() {
-						editorlimites.setSelection(pol);
+						i3GEOF.editorlimites.setSelection(pol);
 					});
-					editorlimites.shapes.push(pol);
+					i3GEOF.editorlimites.shapes.push(pol);
                 }
             }
             return;
@@ -526,15 +539,15 @@ var editorlimites = {
 				valornome: valornome
 			});
 			google.maps.event.addListener(pol, 'click', function() {
-				editorlimites.setSelection(pol);
+				i3GEOF.editorlimites.setSelection(pol);
 			});
-			editorlimites.shapes.push(pol);
+			i3GEOF.editorlimites.shapes.push(pol);
 			return;
 		}
 	},
 	salvaLimite: {
 		inicia: function(){
-			var s = editorlimites.selectedShapes(),
+			var s = i3GEOF.editorlimites.selectedShapes(),
 				n = s.length,
 				janela = YAHOO.i3GEO.janela.manager.find("salvaLimite");
 			if(janela){
@@ -542,28 +555,28 @@ var editorlimites = {
 			}
 			if(n == 1){
 				s = s[0];
-				editorlimites.salvaLimite.criaJanelaFlutuante(editorlimites.salvaLimite.html(
+				i3GEOF.editorlimites.salvaLimite.criaJanelaFlutuante(i3GEOF.editorlimites.salvaLimite.html(
 					s.colunaid,
 					s.valorid,
 					s.colunanome,
 					s.valornome
 				));
 				new YAHOO.widget.Button(
-						"i3GEOFmetaestatEditorLimitesBotao1",
+						"i3GEOFmetaestati3GEOF.editorlimitesBotao1",
 						{onclick:{fn: function(){
-							editorlimites.salvaLimite.gravaDados(true);
+							i3GEOF.editorlimites.salvaLimite.gravaDados(true);
 						}}}
 				);
 				new YAHOO.widget.Button(
-						"i3GEOFmetaestatEditorLimitesBotao2",
+						"i3GEOFmetaestati3GEOF.editorlimitesBotao2",
 						{onclick:{fn: function(){
-							editorlimites.salvaLimite.gravaDados(false);
+							i3GEOF.editorlimites.salvaLimite.gravaDados(false);
 						}}}
 				);
 				new YAHOO.widget.Button(
-						"i3GEOFmetaestatEditorLimitesBotao3",
+						"i3GEOFmetaestati3GEOF.editorlimitesBotao3",
 						{onclick:{fn: function(){
-							editorlimites.salvaLimite.excluiPoligono();
+							i3GEOF.editorlimites.salvaLimite.excluiPoligono();
 						}}}
 				);
 			}
@@ -585,9 +598,9 @@ var editorlimites = {
 				'<p class=paragrafo >Nome:</p>' +
 				'<p class=paragrafo ><input class=digitar type=text id="inputNomeNovoElemento" value="'+valorNomeElemento+'" style="width:180;cursor:text" /></p>' +
 				'<p class=paragrafo >Escolha a opera&ccedil;&atilde;o desejada:</p>' +
-				'<input id=i3GEOFmetaestatEditorLimitesBotao1 type="button" value="Salvar tudo" />' +
-				'&nbsp;<input id=i3GEOFmetaestatEditorLimitesBotao2 type="button" value="Salvar apenas os atributos" />' +
-				'<br><br><input id=i3GEOFmetaestatEditorLimitesBotao3 type="button" value="Excluir pol&iacute;gono" />';
+				'<input id=i3GEOFmetaestati3GEOF.editorlimitesBotao1 type="button" value="Salvar tudo" />' +
+				'&nbsp;<input id=i3GEOFmetaestati3GEOF.editorlimitesBotao2 type="button" value="Salvar apenas os atributos" />' +
+				'<br><br><input id=i3GEOFmetaestati3GEOF.editorlimitesBotao3 type="button" value="Excluir pol&iacute;gono" />';
 			return ins;
 		},
 		criaJanelaFlutuante: function(html){
@@ -612,7 +625,7 @@ var editorlimites = {
 			);
 			$i("salvaLimite_corpo").style.backgroundColor = "white";
 			$i("salvaLimite_corpo").innerHTML = html;
-			YAHOO.util.Event.addListener(janela[0].close, "click", editorlimites.mudaicone);
+			YAHOO.util.Event.addListener(janela[0].close, "click", i3GEOF.editorlimites.mudaicone);
 		},
 		gravaDados: function(comwkt){
 			//TODO verificar login ao salvar
@@ -625,7 +638,7 @@ var editorlimites = {
 				nome = $i("inputNomeNovoElemento").value,
 				wkt = "",
 				temp = function(retorno){
-					editorlimites.deleteSelectedShape(true);
+					i3GEOF.editorlimites.deleteSelectedShape(true);
 					var janela = YAHOO.i3GEO.janela.manager.find("salvaLimite");
 					if(janela){
 						janela.destroy();
@@ -633,7 +646,7 @@ var editorlimites = {
 					i3GEO.Interface.redesenha();
 				};
 			if(comwkt === true){
-				wkt = editorlimites.toWKT(editorlimites.selectedShapes()[0]);
+				wkt = i3GEOF.editorlimites.toWKT(i3GEOF.editorlimites.selectedShapes()[0]);
 			}
 			else{
 				if(identificadornovo === identificador && $i("inputNomeElemento").value === nome){
@@ -652,7 +665,7 @@ var editorlimites = {
 			var codigo_tipo_regiao = $i("i3geoCartoRegioesEditaveis").value,
 				identificador = $i("inputIdentificadorElemento").value,
 				temp = function(retorno){
-					editorlimites.deleteSelectedShape(true);
+					i3GEOF.editorlimites.deleteSelectedShape(true);
 					var janela = YAHOO.i3GEO.janela.manager.find("salvaLimite");
 					if(janela){
 						janela.destroy();
@@ -672,16 +685,16 @@ var editorlimites = {
 				i3GEO.janela.tempoMsg("Escolha uma regiao");
 				return;
 			}
-			editorlimites.mudaicone(botao);
-			if(i3GEO.eventos.MOUSECLIQUE.toString().search("editorlimites.editarAtributos.captura()") < 0)
-			{i3GEO.eventos.MOUSECLIQUE.push("editorlimites.editarAtributos.captura()");}
+			i3GEOF.editorlimites.mudaicone(botao);
+			if(i3GEO.eventos.MOUSECLIQUE.toString().search("i3GEOF.editorlimites.editarAtributos.captura()") < 0)
+			{i3GEO.eventos.MOUSECLIQUE.push("i3GEOF.editorlimites.editarAtributos.captura()");}
 			var janela = YAHOO.i3GEO.janela.manager.find("editaAtributos");
 			if(janela){
 				$i("editarAtributosForm").innerHTML = "";
 			}
 			else{
-				editorlimites.editarAtributos.criaJanelaFlutuante(editorlimites.editarAtributos.html());
-				editorlimites.editarAtributos.comboVariaveis();
+				i3GEOF.editorlimites.editarAtributos.criaJanelaFlutuante(i3GEOF.editorlimites.editarAtributos.html());
+				i3GEOF.editorlimites.editarAtributos.comboVariaveis();
 			}
 		},
 		desativa: function(){
@@ -692,12 +705,12 @@ var editorlimites = {
 		},
 		captura: function(){
 			if(!YAHOO.i3GEO.janela.manager.find("editaAtributos")){
-				editorlimites.mudaicone(botao);
+				i3GEOF.editorlimites.mudaicone(botao);
 				return;
 			}
-			editorlimites.editarAtributos.x = objposicaocursor.ddx;
-			editorlimites.editarAtributos.y = objposicaocursor.ddy;
-			editorlimites.editarAtributos.pegaDados();
+			i3GEOF.editorlimites.editarAtributos.x = objposicaocursor.ddx;
+			i3GEOF.editorlimites.editarAtributos.y = objposicaocursor.ddy;
+			i3GEOF.editorlimites.editarAtributos.pegaDados();
 		},
 		pegaDados: function(){
 			var p = i3GEO.configura.locaplic+"/admin/php/metaestat.php?funcao=listaAtributosMedidaVariavelXY",
@@ -757,11 +770,11 @@ var editorlimites = {
 					new YAHOO.widget.Button(
 						"editarAtributosSalvar",
 						{onclick:{fn: function(){
-							editorlimites.editarAtributos.salva();
+							i3GEOF.editorlimites.editarAtributos.salva();
 						}}}
 					);
 				};
-			cpJSON.call(p,"foo",temp,"&codigo_tipo_regiao="+codigo_tipo_regiao+"&id_medida_variavel="+id_medida_variavel+"&x="+editorlimites.editarAtributos.x+"&y="+editorlimites.editarAtributos.y);
+			cpJSON.call(p,"foo",temp,"&codigo_tipo_regiao="+codigo_tipo_regiao+"&id_medida_variavel="+id_medida_variavel+"&x="+i3GEOF.editorlimites.editarAtributos.x+"&y="+i3GEOF.editorlimites.editarAtributos.y);
 		},
 		salva: function(){
 			var container = $i("editarAtributosForm"),
@@ -783,7 +796,7 @@ var editorlimites = {
 				p = i3GEO.configura.locaplic+"/admin/php/metaestat.php?funcao=salvaAtributosMedidaVariavel",
 				re = new RegExp("idunico_", "g"),//prefixo usado para marcar o id dos elementos input que contem os valores que se quer obter
 				temp = function(retorno){
-					editorlimites.editarAtributos.pegaDados();
+					i3GEOF.editorlimites.editarAtributos.pegaDados();
 					i3GEO.janela.AGUARDEMODAL = false;
 					i3GEO.janela.fechaAguarde("aguardeSalvaAtributos");
 				};
@@ -840,7 +853,7 @@ var editorlimites = {
 			$i("editaAtributos_corpo").style.backgroundColor = "white";
 			$i("editaAtributos_corpo").innerHTML = html;
 			i3GEO.janela.tempoMsg("Ap&oacute;s escolher a medida da vari&aacute;vel, clique no mapa para escolher a regi&atilde;o.");
-			YAHOO.util.Event.addListener(janela[0].close, "click", editorlimites.mudaicone);
+			YAHOO.util.Event.addListener(janela[0].close, "click", i3GEOF.editorlimites.mudaicone);
 		},
 		html: function(){
 			var ins = '' +
@@ -855,7 +868,7 @@ var editorlimites = {
 			 var temp = function(dados){
 				var i,n = dados.length, ins = '';
 				ins += '<p class="paragrafo" >Escolha uma vari&aacute;vel para editar</p>';
-				ins += "<select style='box-shadow:0 1px 5px gray;width:200px' onchange='editorlimites.editarAtributos.comboMedidasVariavel(this)'><option value=''>---</option>";
+				ins += "<select style='box-shadow:0 1px 5px gray;width:200px' onchange='i3GEOF.editorlimites.editarAtributos.comboMedidasVariavel(this)'><option value=''>---</option>";
 				for(i=0;i<n;i++){
 					ins += "<option title='"+dados[i].descricao+"' value='"+dados[i].codigo_variavel+"'>"+dados[i].nome+"</option>";
 				}

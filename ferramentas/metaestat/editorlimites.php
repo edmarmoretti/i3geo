@@ -142,6 +142,7 @@ include_once(__DIR__."/../../ms_configura.php");
 <script src="../../pacotes/wicket/wicket-gmap3.js" type="text/javascript"></script>
 <script src="dicionario.js"></script>
 <script src="editorlimites.js"></script>
+<script src="locregiao.js"></script>
 <script type="text/javascript">
 i3GEO.configura.locaplic = i3GEO.util.protocolo()+"://"+window.location.host+"/i3geo";
 i3GEO.configura.mashuppar = "mapext=-76.5125927 -39.3925675209 -29.5851853 9.49014852081";
@@ -178,12 +179,13 @@ i3GEO.finalizaAPI = function(){
 	minimiza = function() {
 		i3GEO.janela.minimiza("janelaEditorLimites");
 	};
-	janela = i3GEO.janela.cria("255px", "100px", "", "", "",
+	janela = i3GEO.janela.cria("260px", "100px", "", "", "",
 		"Editor", "janelaEditorLimites", false, "hd",
 		cabecalho, minimiza);
 	$i("janelaEditorLimites_corpo").style.backgroundColor = "white";
-	editorlimites.inicia("janelaEditorLimites_corpo");
-	//janela[0].moveTo(100,450);
+	i3GEOF.editorlimites.inicia("janelaEditorLimites_corpo");
+	i3GEOF.locregiao.iniciaJanelaFlutuante();
+	YAHOO.i3GEO.janela.manager.find("i3GEOF.locregiao").moveTo(100,40);
 }
 i3GEO.inicia();
 </script>

@@ -110,5 +110,12 @@ pt:"Editar a regi&atilde;o",
 en:"",
 es:"",
 it:""
+}],
+"16":[
+{
+pt:"Regi&atilde;o",
+en:"",
+es:"",
+it:""
 }]
 };

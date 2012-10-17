@@ -211,6 +211,17 @@ switch (strtoupper($funcao))
 		retornaJSON($m->listaTipoRegiao($codigo_tipo_regiao));
 		exit;
 	break;
+	case "LISTAHIERARQUIAREGIOES":
+		$m = new Metaestat();
+		$regioes = $m->listaHierarquiaRegioes($codigo_tipo_regiao);
+		$valores = "";
+		//se achou apenas uma regiao, pega os valores
+		if(count($regioes) < 2 && $codigo_tipo_regiao != ""){
+			$valores = $m->listaDadosRegiao($codigo_tipo_regiao,$codigoregiaopai,$valorregiaopai);
+		}
+		retornaJSON(array("regiaopai"=>$codigo_tipo_regiao,"regioes"=>$regioes,"valores"=>$valores));
+		exit;
+	break;
 	case "LISTAREGIOESMEDIDA":
 		$m = new Metaestat();
 		retornaJSON($m->listaRegioesMedida($id_medida_variavel));

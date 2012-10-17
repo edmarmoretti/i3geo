@@ -1544,5 +1544,23 @@ i3GEO.php = {
 	mapfileTipoRegiao: function(funcao,codigo_tipo_regiao){
 		var p = i3GEO.configura.locaplic+"/admin/php/metaestat.php?funcao=mapfileTipoRegiao&codigo_tipo_regiao="+codigo_tipo_regiao+"&g_sid="+i3GEO.configura.sid;
 		i3GEO.util.ajaxGet(p,funcao);
-	}
+	},
+	/*
+	Function: listaHierarquiaRegioes
+
+	Lista as regioes cadastradas no sistema de metadados estatisticos organizadas de forma hierarquica
+	*/
+	listaHierarquiaRegioes: function(funcao,codigo_tipo_regiao,codigoregiaopai,valorregiaopai){
+		if(!codigoregiaopai){
+			codigoregiaopai = "";
+		}
+		if(!valorregiaopai){
+			valorregiaopai = "";
+		}
+		if(!codigo_tipo_regiao){
+			codigo_tipo_regiao = "";
+		}
+		var p = i3GEO.configura.locaplic+"/admin/php/metaestat.php?funcao=listaHierarquiaRegioes&codigo_tipo_regiao="+codigo_tipo_regiao+"&codigoregiaopai="+codigoregiaopai+"&valorregiaopai="+valorregiaopai+"&g_sid="+i3GEO.configura.sid;
+		i3GEO.util.ajaxGet(p,funcao);
+	},
 };

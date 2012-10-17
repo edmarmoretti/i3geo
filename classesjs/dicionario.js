@@ -1943,7 +1943,7 @@ it:""
 }],
 "x59":[
 {
-pt:"",
+pt:"Localiza regi&atilde;o",
 en:"",
 es:"",
 it:""

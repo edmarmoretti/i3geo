@@ -499,10 +499,18 @@ i3GEO.mapa = {
 		/*
 		Function: metaestat
 
-		Abre a janela de dialogo da ferramenta de cartogramas estatisticos
+		Abre a janela de dialogo da ferramenta de cartogramas estatisticos METAESTAT
 		*/
 		metaestat: function(){
 			i3GEO.util.dialogoFerramenta("i3GEO.mapa.dialogo.metaestat()","metaestat","metaestat");
+		},
+		/*
+		Function: locregiao
+
+		Abre a janela de dialogo da ferramenta de busca de regiao cadastrada no METAESTAT
+		*/
+		locregiao: function(){
+			i3GEO.util.dialogoFerramenta("i3GEO.mapa.dialogo.locregiao()","metaestat","locregiao","locregiao.js");
 		},
 		/*
 		Function: animacao
