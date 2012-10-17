@@ -310,7 +310,11 @@ class Metaestat{
 		return array("sqlagrupamento"=>$sqlagrupamento,"sql"=>$sql,"sqlmapserver"=>$sqlgeo,"filtro"=>$filtro,"colunas"=>$colunas);
 	}
 	function mapfileMedidaVariavel($id_medida_variavel,$filtro="",$todasascolunas = 0,$tipolayer="polygon",$titulolayer="",$id_classificacao="",$agruparpor="",$codigo_tipo_regiao=""){
-		//$rand = $this->nomeRandomico();
+		//para permitir a inclusao de filtros, o fim do sql e marcado com /*FWi*//*FWf*/
+		//indicando onde deve comecar e terminar uma possivel clausula where
+		//ou com /*FAi*//*FAf*/
+		//para marcar que deve ser utilizado AND ao adicionar o filtro
+		//
 		$arq = $this->dir_tmp."/".$this->nomecache.".map";
 		if(!file_exists($arq)){
 			if(empty($tipolayer)){
@@ -328,10 +332,10 @@ class Metaestat{
 			$sql = $this->sqlMedidaVariavel($id_medida_variavel,$todasascolunas,$agruparpor,$tipolayer,$codigo_tipo_regiao);
 			$sqlf = $sql["sqlmapserver"];
 			if(!empty($filtro)){
-				$sqlf = str_replace("__filtro__"," AND ".$filtro,$sqlf);
+				$sqlf = str_replace("__filtro__"," AND ".$filtro." /*FAi*//*FAf*/",$sqlf);
 			}
 			else{
-				$sqlf = str_replace("__filtro__","",$sqlf);
+				$sqlf = str_replace("__filtro__","/*FWi*//*FWf*/",$sqlf);
 			}
 			$classes = "";
 			if(!empty($id_classificacao)){
@@ -351,6 +355,8 @@ class Metaestat{
 			$dados[] = '	METADATA';
 			$dados[] = '		TEMA "'.$titulolayer.'"';
 			$dados[] = '		CLASSE "SIM"';
+			$dados[] = '		METAESTAT "SIM"';
+			$dados[] = '		METAESTAT_CODIGO_TIPO_REGIAO "'.$codigo_tipo_regiao.'"';
 			$dados[] = '	END';
 			if($classes == ""){
 				$dados[] = '    CLASS';
@@ -394,7 +400,9 @@ class Metaestat{
 		return array("mapfile"=>$arq,"layer"=>$this->nomecache,"titulolayer"=>$titulolayer);
 	}
 	function mapfileTipoRegiao($codigo_tipo_regiao){
-		//$rand = $this->nomeRandomico();
+		//para permitir a inclusao de filtros, o fim do sql e marcado com /*FWi*//*FWf*/
+		//indicando onde deve comecar e terminar uma possivel clausula where
+		//
 		$arq = $this->dir_tmp."/".$this->nomecache.".map";
 		if(!file_exists($arq)){
 			$tipolayer = "polygon";
@@ -404,7 +412,7 @@ class Metaestat{
 			$titulolayer = mb_convert_encoding($titulolayer,"ISO-8859-1",mb_detect_encoding($titulolayer));
 			$conexao = $this->listaConexao($meta["codigo_estat_conexao"],true);
 			$conexao = "user=".$conexao["usuario"]." password=".$conexao["senha"]." dbname=".$conexao["bancodedados"]." host=".$conexao["host"]." port=".$conexao["porta"]."";
-			$sqlf = $meta["colunageo"]." from (select * from ".$meta["esquemadb"].".".$meta["tabela"].") as foo using unique gid using srid=".$meta["srid"];
+			$sqlf = $meta["colunageo"]." from (select * from ".$meta["esquemadb"].".".$meta["tabela"]." /*FWi*//*FWf*/) as foo using unique gid using srid=".$meta["srid"];
 
 			//FIXME calcular versao do symbolset
 			$dados[] = "MAP";
@@ -421,6 +429,8 @@ class Metaestat{
 			$dados[] = '	METADATA';
 			$dados[] = '		TEMA "'.$titulolayer.'"';
 			$dados[] = '		CLASSE "SIM"';
+			$dados[] = '		METAESTAT "SIM"';
+			$dados[] = '		METAESTAT_CODIGO_TIPO_REGIAO "'.$codigo_tipo_regiao.'"';
 			$dados[] = '	END';
 			$dados[] = '    CLASS';
 			$dados[] = '        NAME ""';
