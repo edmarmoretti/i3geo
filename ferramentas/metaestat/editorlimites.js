@@ -288,7 +288,7 @@ i3GEOF.editorlimites = {
 		},
 		captura: function(){
 			var temp,tema="",regiao="",p,par,
-				aguarde = $i("janelai3GEOF.editorlimites_imagemCabecalho");
+				aguarde = $i("janelaEditorLimites_imagemCabecalho");
 			i3GEOF.editorlimites.mudaicone();
 			if(!$i("i3geoCartoRegioesEditaveis")){
 				i3GEO.eventos.MOUSECLIQUE.remove("i3GEOF.editorlimites.capturaPoligonoTema.captura()");
@@ -301,7 +301,7 @@ i3GEOF.editorlimites = {
 							valorid = "",
 							colunanome = i3GEOF.editorlimites.descregioes["a_"+regiao]["colunanomeregiao"],
 							valornome = "",
-							aguarde = $i("janelai3GEOF.editorlimites_imagemCabecalho");
+							aguarde = $i("janelaEditorLimites_imagemCabecalho");
 						if(aguarde){
 							aguarde.style.visibility = "hidden";
 						}
