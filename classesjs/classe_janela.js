@@ -602,6 +602,7 @@ i3GEO.janela = {
 		anim.onComplete.subscribe(function(){
 			janela.body.style.overflow = "auto";
 			janela.body.style.display = "block";
+			$i("i3geoTempoMsg_c").style.zIndex = 100000;
 		});
 		anim.animate();
 

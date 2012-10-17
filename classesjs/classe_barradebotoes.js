@@ -33,7 +33,7 @@ if(typeof(i3GEO) === 'undefined'){
 	var i3GEO = {};
 }
 /*
-Classe: i3GEO.barradebotoes
+Classe: i3GEO.barraDeBotoes
 
 Constr&oacute;i a barra de bot&otilde;es flutuante
 

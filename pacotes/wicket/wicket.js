@@ -3,7 +3,13 @@ spaces:/\s+|\+/,numeric:/-*\d+\.*\d+/,comma:/\s*,\s*/,parenComma:/\)\s*,\s*\(/,d
 function(config){return this.construct[this.type].call(this,config)};this.read=function(wkt){var matches;matches=this.regExes.typeStr.exec(wkt);if(matches){this.type=matches[1].toLowerCase();this.base=matches[2];if(this.ingest[this.type])this.components=this.ingest[this.type].apply(this,[this.base])}else{console.log("Invalid WKT string provided to read()");throw{name:"WKTError",message:"Invalid WKT string provided to read()"};}return this.components};this.write=function(components){var i,pieces,data;
 components=components||this.components;pieces=[];pieces.push(this.type.toUpperCase()+"(");for(i=0;i<components.length;i+=1){if(this.isCollection()&&i>0)pieces.push(",");if(!this.extract[this.type])return null;
 //alterado por edmar moretti
-data=this.extract[this.type].apply(this,[components[i][0]]);
+                    if(components[i].length == 1){
+                    	data = this.extract[this.type].apply(this, [components[i][0]]);
+                    }
+                    else{
+                    	data = this.extract[this.type].apply(this, [components[i]]);
+                    }
+
 if(this.isCollection())pieces.push("("+data+")");else{pieces.push(data);if(i!==components.length-1)pieces.push(",")}}pieces.push(")");return pieces.join("")};this.extract={point:function(point){return point.x+this.delimiter+point.y},multipoint:function(multipoint){var i,
 parts=[];for(i=0;i<multipoint.length;i+=1)parts.push(this.extract.point.apply(this,[multipoint[i]]));return parts.join(",")},linestring:function(linestring){return this.extract.point.apply(this,[linestring])},multilinestring:function(multilinestring){var i,parts=[];for(i=0;i<multilinestring.length;i+=1)parts.push("("+this.extract.linestring.apply(this,[multilinestring[i]])+")");return parts.join(",")},polygon:function(polygon){return this.extract.multipoint.apply(this,[polygon])},multipolygon:function(multipolygon){var i,
 parts=[];for(i=0;i<multipolygon.length;i+=1)parts.push("("+this.extract.polygon.apply(this,[multipolygon[i]])+")");return parts.join(",")}};this.ingest={point:function(str){var coords=trim(str).split(this.regExes.spaces);return[{x:parseFloat(this.regExes.numeric.exec(coords[0])[0]),y:parseFloat(this.regExes.numeric.exec(coords[1])[0])}]},multipoint:function(str){var i,components,points;components=[];points=trim(str).split(this.regExes.comma);for(i=0;i<points.length;i+=1)components.push(this.ingest.point.apply(this,
