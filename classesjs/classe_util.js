@@ -2094,18 +2094,23 @@ i3GEO.util = {
 	nome {string} - nome da classe da ferramenta
 
 	nomejs {string} - nome do arquivo javascript
+
+	nomefuncao {string} - nome da funcao do javascript carregado que sera executado apos a carga, exemplo: i3GEOF.locregiao.abreComFiltro()
 	*/
-	dialogoFerramenta: function(mensagem,dir,nome,nomejs){
+	dialogoFerramenta: function(mensagem,dir,nome,nomejs,nomefuncao){
 		if(typeof(console) !== 'undefined'){console.info(mensagem);}
 		if(!nomejs){
 			nomejs = "index.js";
+		}
+		if(!nomefuncao){
+			nomefuncao = "i3GEOF."+nome+".criaJanelaFlutuante();";
 		}
 		var js = i3GEO.configura.locaplic+"/ferramentas/"+dir+"/"+nomejs;
 		if(!$i("i3GEOF."+nome+"_script")){
 			i3GEO.janela.ESTILOAGUARDE = "reduzida";
 			i3GEO.util.multiStep(
 				[i3GEO.janela.abreAguarde,i3GEO.util.scriptTag],
-				[["i3GEOF."+nome+"_script"+"aguarde","Carregando JS"],[js,"i3GEOF."+nome+".criaJanelaFlutuante()","i3GEOF."+nome+"_script"]],
+				[["i3GEOF."+nome+"_script"+"aguarde","Carregando JS"],[js,nomefuncao,"i3GEOF."+nome+"_script"]],
 				function(){}
 			);
 		}
