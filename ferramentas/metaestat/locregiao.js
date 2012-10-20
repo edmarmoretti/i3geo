@@ -61,6 +61,10 @@ i3GEOF.locregiao = {
 	criaJanelaFlutuante: function(){
 		i3GEOF.locregiao.iniciaDicionario();
 	},
+	//abre a ferramenta com a opcao de filtro ativada
+	abreComFiltro: function(){
+		alert("Oi");
+	},
 	inicia: function(divid){
 		$i(divid).innerHTML = i3GEOF.locregiao.html();
 		i3GEOF.locregiao.comboHierarquiaRegioes($i("i3geoLocregiaoTipoRegiao"));
@@ -86,7 +90,7 @@ i3GEOF.locregiao = {
 			i3GEO.janela.minimiza("i3GEOF.locregiao");
 		};
 		//cria a janela flutuante
-		titulo = $trad("x59");
+		titulo = $trad("x59")+" <a class=ajuda_usuario target=_blank href='" + i3GEO.configura.locaplic + "/ajuda_usuario.php?idcategoria=6&idajuda=111' >&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</a>";
 		janela = i3GEO.janela.cria(
 			"210px",
 			"",

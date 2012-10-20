@@ -6,6 +6,8 @@ Lista as funcionalidades cadastradas em i3geo/classesjs/dicionario_ajuda.js. A l
 
 &Eacute; utilizado pelo i3geo para fornecer ajuda ao usu&aacute;rio em como utilizar as funcionalidades cadatsradas.
 
+Os textos de ajuda ficam no javascript classesjs/dicionario_ajuda.js
+
 Licenca:
 
 GPL2
@@ -104,7 +106,7 @@ function pegaAjuda(tipo,categoria){
 
 				ins += "</div>";
 			}
-			
+
 		}
 	}
 }
@@ -141,7 +143,7 @@ function expandirtudo(){
 	for(var key in g_traducao_ajuda.ferramentas){
 		var j = document.getElementById(key);
 		if(j)
-		{expande(key);}	
+		{expande(key);}
 	}
 }
 inicia()

@@ -1947,6 +1947,20 @@ pt:"Localiza regi&atilde;o",
 en:"",
 es:"",
 it:""
+}],
+"x60":[
+{
+pt:"Cartogramas",
+en:"",
+es:"",
+it:""
+}],
+"x61":[
+{
+pt:"Filtra regi&atilde;o",
+en:"",
+es:"",
+it:""
 }]
 };
 //YAHOO.log("carregou dicionario", "Classes i3geo");

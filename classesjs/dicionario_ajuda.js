@@ -931,7 +931,16 @@ g_traducao_ajuda = {
 			complemento:"",
 			tela:"",
 			apijs:"i3GEO.arvoreDeCamadas.dialogo.excluir()"
-		}			
+		},
+		"111": {
+			titulo: "Localiza regi&otilde;es cadastradas",
+			diretorio:"i3geo/ferramentas/metaestat",
+			categoria:"6",
+			pt:"Lista as regi&otilde;es cadastradas no sistema de metadados estat&iacute;sticos conforme a hierarquia definida. Conforme uma regi&atilde;o &eacute; escolhida, o mapa tem a extens&atilde;o geogr&aacute;fica alterada, destacando a escolha. Essa mesma ferramenta &eacute; usada para aplicar filtros. Os filtros funcionam apenas nas camadas que forem oriundas da aplica&ccedil;&atilde;o de gera&ccedil;&atilde;o de cartogramas estat&iacute;sticos.",
+			complemento:"",
+			tela:"",
+			apijs:"i3GEO.mapa.dialogo.locregiao()"
+		}
 	}
 };
 
