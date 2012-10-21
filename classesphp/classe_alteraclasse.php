@@ -4,7 +4,6 @@ Title: classe_alteraclasse.php
 
 Manipula&ccedil;&atilde;o de classes e estilos de um layer
 
-
 Licenca:
 
 GPL2
@@ -241,7 +240,7 @@ $ignorar - valor que ser&aacute; ignorado na listagem final
 	function intervalosiguais($item,$nclasses,$ignorar)
 	{
 		if(!$this->layer){return "erro";}
-		$valores = pegaValores($this->mapa,$this->layer,$item,true,$ignorar);
+		$valores = $this->pegaValores($this->mapa,$this->layer,$item,true,$ignorar);
 		if (count($valores) > 0)
 		{
 			//calcula o menor valor e o maior valor
@@ -306,7 +305,7 @@ Include:
 	{
 		if(!$this->layer){return "erro";}
 
-		$valores = pegaValores($this->mapa,$this->layer,$item,true,$ignorar);
+		$valores = $this->pegaValores($this->mapa,$this->layer,$item,true,$ignorar);
 		if (count($valores) > 0)
 		{
   			if(file_exists($this->locaplic."/classe_estatistica.php"))
@@ -383,11 +382,11 @@ $itemNome - item que ser&aacute; usado para definir os nomes das classes (por de
 		if($itemNome == "" || $ignorar != "")
 		{$itemNome = $item;}
 		// pega valores
-		$vs = pegaValores($this->mapa,$this->layer,$item,false,$ignorar);
+		$vs = $this->pegaValores($this->mapa,$this->layer,$item,false,$ignorar);
 		if ($item == $itemNome)
 		{$ns = $vs;}
 		else
-		{$ns = pegaValores($this->mapa,$this->layer,$itemNome,false,$ignorar);}
+		{$ns = $this->pegaValores($this->mapa,$this->layer,$itemNome,false,$ignorar);}
 		$lista = array();
 		for ($i = 0; $i < count($vs); ++$i){
 			$temp[$vs[$i]] = $ns[$i];
@@ -699,6 +698,90 @@ $classe - id da classe
 		}
 		$this->layer->setMetaData("cache","");
 		return("ok");
+	}
+	/*
+	Function: pegaValores
+
+	Pega os valores de um item de um tema.
+
+	Parametros:
+
+	$layer {objeto} - Layer que ser&aacute; processado.
+
+	$item {string} - Item que ser&aacute; processado.
+
+	$numerico {boleano} - O item e numerico (true ou false).
+
+	$ignorar {string} - valor que ser&aacute; ignorado na listagem final
+
+	Retorno:
+
+	{array}
+	*/
+	function pegaValores($mapa,$layer,$item,$numerico=false,$ignorar="")
+	{
+		$layer->set("template","none.htm");
+		$layer->setfilter("");
+		$versao = versao();
+		$versao = $versao["principal"];
+		$ignorararray = explode(",",$ignorar);
+		if (@$layer->queryByrect($mapa->extent) == MS_SUCCESS)
+		{
+			$sopen = $layer->open();
+			if($sopen == MS_FAILURE){
+				return "erro";
+			}
+			$res_count = $layer->getNumresults();
+			$valitem = array();
+			for ($i=0;$i<$res_count;++$i)
+			{
+				if($versao == 6)
+				{
+					$shape = $layer->getShape($layer->getResult($i));
+				}
+				else{
+					$result = $layer->getResult($i);
+					$shp_index  = $result->shapeindex;
+					$shape = $layer->getfeature($shp_index,-1);
+				}
+				$v = trim($shape->values[$item]);
+				if ($numerico)
+				{
+					if (is_numeric($v))
+					{
+						if ($ignorar == "")
+						{
+							$valitem[] = $v;
+						}
+						else
+						{
+							//if ($v != $ignorar)
+							if(!in_array($v,$ignorararray))
+							{
+								$valitem[] = $v;
+							}
+						}
+					}
+				}
+				else
+				{
+					if ($ignorar == "")
+					{
+						$valitem[] = $v;
+					}
+					else
+					{
+						if(!in_array($v,$ignorararray))
+						{
+							$valitem[] = $v;
+						}
+					}
+				}
+			}
+			$fechou = $layer->close();
+		}
+		$layer->close();
+		return ($valitem);
 	}
 }
 ?>

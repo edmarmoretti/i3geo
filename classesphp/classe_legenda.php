@@ -710,7 +710,7 @@ $opacidade - Opacidade
 		if ($this->layer->getmetadata("sld") != "")
 		{
 			$sld = $this->layer->getmetadata("sld");
-			reSLD($this->arquivo,$this->nome,$sld);
+			$this->reSLD($this->arquivo,$this->nome,$sld);
 		}
 		$this->layer->setMetaData("cache","");
 		return "ok";
@@ -831,6 +831,37 @@ $width
 			$label->set("size",$t);
 		}
 		return("ok");
+	}
+	/*
+	Function: reSLD
+
+	Gera o SLD de um tema WMS.
+
+	Parametros:
+
+	$map_file {string} - arquivo map_file
+
+	$tema {string} - código do tema
+
+	$sld {string} - arquivo onde o sld ser&aacute; gravado
+	*/
+	function reSLD($map_file,$tema,$sld)
+	{
+		$map = ms_newMapObj($map_file);
+		$layer = $map->getlayerbyname($tema);
+		$layer->set("name",$layer->getmetadata("nomeoriginal"));
+		$tiporep = $layer->getmetadata("tipooriginal");
+		$layer->set("type",MS_LAYER_POLYGON);
+		if ($tiporep == "linear")
+		{$layer->set("type",MS_LAYER_LINE);}
+		if ($tiporep == "pontual")
+		{$layer->set("type",MS_LAYER_POINT);}
+		$sldf = $layer->generateSLD();
+		if (file_exists($sld))
+		{unlink($sld);}
+		$fp = fopen($sld, "a");
+		fputs( $fp, $sldf );
+		fclose($fp);
 	}
 }
 ?>

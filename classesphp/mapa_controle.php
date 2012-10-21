@@ -1802,10 +1802,20 @@ Faz a fus&atilde;o da imagem de um gr&aacute;fico com a imagem do mapa atual.
 */
 	case "FUSAOGRAFICO":
 		include_once("graficos.php");
-		//$_SESSION["utilizacgi"] = "nao";
-		//$utilizacgi = "nao";
 		restauraCon($map_file,$postgis_mapa);
-		$retorno = fusaoGrafico();
+		include_once("classe_imagem.php");
+		if($map_file != "")
+		{
+			$mapa = ms_newMapObj($map_file);
+			$imgo = $mapa->draw();
+			$nome = ($imgo->imagepath).nomeRandomico().".png";
+			$imgo->saveImage($nome);
+			$imagem = ($imgo->imageurl).basename($nome);
+		}
+		$m = new Imagem(dirname($dir_tmp).$imagem);
+		$i = $m->fundeIm(dirname($dir_tmp).$grafico);
+		imagepng($i,dirname($dir_tmp).$imagem);
+		$retorno = $imagem;
 	break;
 /*
 Valor: GRAFICOESTRELA

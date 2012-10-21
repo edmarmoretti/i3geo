@@ -102,10 +102,7 @@ $ext - Extens&atilde;o geogr&aacute;fica do mapa
 	{
   		//error_reporting(E_ALL);
 		$this->qyfile = str_replace(".map",".qy",$map_file);
-  		if(file_exists($locaplic."/funcoes_gerais.php"))
-  		include_once($locaplic."/funcoes_gerais.php");
-  		else
-  		include_once("funcoes_gerais.php");
+  		include_once(__DIR__."/funcoes_gerais.php");
 		$this->v = versao();
 		$this->v = $this->v["principal"];		
 		$this->dbaseExiste = false;
@@ -254,14 +251,14 @@ Include:
 			break;
 		}
 		//cria a imagem
-		$minmax = criaImagemR($nomearq);
+		$minmax = $this->criaImagemR($nomearq);
 		//cria as cores
 		include_once("class.palette.php");
 		$cori = RGB2hex(explode(",",$cori));
 		$corf = RGB2hex(explode(",",$corf));
 		$myPalette=new palette(array($cori,$corf),($numclasses + 1));
 		//cria os parametros das classes
-		$cls = classesRasterI($minmax[0],$minmax[1],$numclasses,$myPalette->colorRGB);
+		$cls = $this->classesRasterI($minmax[0],$minmax[1],$numclasses,$myPalette->colorRGB);
 		if (count($cls) != $numclasses){return("erro.");}
 		//adiciona o novo tema
 		if (file_exists($nomearq.".png"))
@@ -447,7 +444,7 @@ $locaplic - Onde fica o I3Geo.
 		$rcode[] = 'cat("<br><img src=contordensidade.png />\n", file = zz)';
 		$rcode[] = 'sink()';
 		$rcode[] = 'close(zz)';
-		$r = executaR($rcode,$dir_tmp,$R_path);
+		$r = $this->executaR($rcode,$dir_tmp,$R_path);
 	}
 /*
 function: mapaCluster
@@ -500,7 +497,7 @@ $sigma - Bandwidth for kernel smoother in "smooth" option.
 		$rcode[] = 'library(spatclus)';
 		$rcode[] = 'RES <- clus(d1,d2,limx='.$dimx.',limy='.$dimy.',eps=0.2)';
 		//var_dump($rcode);
-		$r = executaR($rcode,$dir_tmp,$R_path,$gfile_name);
+		$r = $this->executaR($rcode,$dir_tmp,$R_path,$gfile_name);
 		return "ok";
 	}
 
@@ -561,7 +558,7 @@ $sigma - Bandwidth for kernel smoother in "smooth" option.
 		$rcode[] = 'cat(img$yrange,file="'.$arqpt.'h",append=TRUE,fill=TRUE)';
 		$rcode[] = 'cat(img$dim,file="'.$arqpt.'h",append=TRUE,fill=TRUE)';
 		//var_dump($rcode);
-		$r = executaR($rcode,$dir_tmp,$R_path,$gfile_name);
+		$r = $this->executaR($rcode,$dir_tmp,$R_path,$gfile_name);
 		return "ok";
 	}
 /*
@@ -614,7 +611,7 @@ $locaplic - Onde fica o I3Geo.
 		$rcode[] = 'cat(img$xrange,file="'.$arqpt.'h",append=TRUE,fill=TRUE)';
 		$rcode[] = 'cat(img$yrange,file="'.$arqpt.'h",append=TRUE,fill=TRUE)';
 		$rcode[] = 'cat(img$dim,file="'.$arqpt.'h",append=TRUE,fill=TRUE)';
-		$r = executaR($rcode,$dir_tmp,$R_path,$gfile_name);
+		$r = $this->executaR($rcode,$dir_tmp,$R_path,$gfile_name);
 		return "ok";
 	}
 /*
@@ -668,7 +665,7 @@ $locaplic - Onde fica o I3Geo.
 		$rcode[] = 'cat(img$xrange,file="'.$arqpt.'h",append=TRUE,fill=TRUE)';
 		$rcode[] = 'cat(img$yrange,file="'.$arqpt.'h",append=TRUE,fill=TRUE)';
 		$rcode[] = 'cat(img$dim,file="'.$arqpt.'h",append=TRUE,fill=TRUE)';
-		$r = executaR($rcode,$dir_tmp,$R_path,$gfile_name);
+		$r = $this->executaR($rcode,$dir_tmp,$R_path,$gfile_name);
 		return "ok";
 	}
 /*
@@ -713,7 +710,7 @@ $locaplic - Onde fica o I3Geo.
 		$rcode[] = 'pt <- deldir(dadosx, dadosy)';
 		$rcode[] = 'write.csv(pt$delsgs,file="'.$arqpt.'delsgs")';
 		$rcode[] = 'write.csv(pt$dirsgs,file="'.$arqpt.'dirsgs")';
-		$r = executaR($rcode,$dir_tmp,$R_path,$gfile_name);
+		$r = $this->executaR($rcode,$dir_tmp,$R_path,$gfile_name);
 		return "ok";
 	}
 /*
@@ -2732,6 +2729,142 @@ $geos - array com os dados
 		$r = serialize($geos);
 		fwrite($fp,$r);
 		fclose($fp);
+	}
+/*
+Function: classesRasterI
+
+Gera par&acirc;metros para classifica&ccedil;&atilde;o de imagens.
+
+Gera a express&atilde;o e as cores para uso em classes com intervalos iguais para representa&ccedil;&atilde;o de imagens raster.
+
+Parametros:
+
+$minvalor {numeric} - Menor valor existente na s&eacute;rie
+
+$maxvalor {numeric} - Maior valor
+
+$nclasses {numeric} - N&uacute;mero de classes
+
+$cores {array} - Cores. Array de array de cores cores[0] = array(r,g,b)
+
+Retorno:
+
+(start code)
+array(
+	array(
+		"nomeclasse"=>,
+		"expressao"=>,
+		"cores"=>
+	)
+)
+(end)
+*/
+//error_reporting(0);
+	function classesRasterI($minvalor,$maxvalor,$nclasses,$cores)
+	{
+		$resultado = array();
+		$intervalo = intval(250 / $nclasses);
+		$trans = 250 / ($maxvalor - $minvalor);
+		$intervalo = (($maxvalor*$trans) - ($minvalor*$trans)) / $nclasses;
+		$conta = 0;
+		for ($i=0; $i < $nclasses; ++$i)
+		{
+			$expressao = "([pixel]>=".$conta." and [pixel]<".($conta+$intervalo).")";
+			$nomeclasse = ">= ".($conta/$trans)." e < que ".(($conta + $intervalo)/$trans);
+			$resultado[] = array("nomeclasse"=>$nomeclasse,"expressao"=>$expressao,"cores"=>$cores[$i]);
+			$conta = $conta + $intervalo;
+		}
+		return $resultado;
+	}
+	function executaR($rcode,$dir_tmp,$R_path,$gfile_name="")
+	{
+		$R_options = "--slave --no-save";
+		$r_name = nomeRandomico(20);
+		$r_input = $dir_tmp."/".$r_name.".R";
+		$r_output = $dir_tmp."/".$r_name.".Rout";
+		gravaDados($rcode,$r_input);
+		$command = $R_path." $R_options < $r_input > $r_output";
+		$result = "";
+		$error = "";
+		$exec_result = exec($command,$result,$error);
+		//corta a imagem final
+		//include_once("classe_imagem.php");
+		//$m = new Imagem($dir_tmp."/".$gfile_name.".png");
+		//$i = $m->cortaBorda();
+		//imagepng($i,$dir_tmp."/".$gfile_name.".png");
+		return($r_input);
+	}
+	/*
+	Function: criaImagemR
+
+	Cria uma imagem png a partir de dados armazenados em disco.
+
+	Utilizado para gerar uma imagem com base nos resultados de comandos R.
+
+	O nome da imagem criada ser&aacute; o mesmo nome de $nomearq, por&eacute;m com extens&atilde;o .png
+
+	Parametros:
+
+	$nomearq {string} - Nome do arquivo no servidor que ser&aacute; utilizado para gerar a imagem.
+
+	Retorno:
+
+	{array($minpixel,$maxpixel)} - tamanho da imagem gerada.
+	*/
+	function criaImagemR($nomearq)
+	{
+		if (!file_exists($nomearq."img"))
+		{return "erro";}
+		//pega os parametros
+		$abre = fopen($nomearq."h", "r");
+		while (!feof($abre))
+		{
+			$buffer = fgets($abre);
+			$pararray[] = $buffer;
+		}
+		fclose($abre);
+		$xsize = $pararray[0];
+		$ysize = $pararray[1];
+		$xdim = $pararray[2];
+		$ydim = $pararray[3];
+		$wh = explode(" ",$pararray[4]);
+		// pega os valores dos pixels
+		$abre = fopen($nomearq."img", "r");
+		$buffer = fgets($abre);
+		fclose($abre);
+		$pixelimg = explode(" ",$buffer);
+		$minpixel = min($pixelimg);
+		$maxpixel = max($pixelimg);
+		$trans = 250 / ($maxpixel - $minpixel);
+		$img = imagecreatetruecolor($wh[0],$wh[1]);
+		$celula = 0;
+		for ($x = 0; $x < $wh[0]; ++$x)
+		{
+			for ($y = ($wh[1] - 1); $y >= 0; $y--)
+			{
+				$cor = imagecolorresolve($img,$pixelimg[$celula] * $trans, $pixelimg[$celula] * $trans, $pixelimg[$celula] * $trans);
+				imagesetpixel($img, $x, $y,$cor);
+				$celula = $celula + 1;
+			}
+		}
+		Imagepng($img,$nomearq.".png");
+		ImageDestroy($nomearq.".png");
+		$dadosw[] = trim($xsize);
+		$dadosw[] = 0;
+		$dadosw[] = 0;
+		$dadosw[] = trim($ysize * -1);
+		$temp = explode(" ",$xdim);
+		$dadosw[] = trim($temp[0]);
+		$temp = explode(" ",$ydim);
+		$dadosw[] = trim($temp[1]);
+		$fp = fopen($nomearq.".wld","w");
+		foreach ($dadosw as $dado)
+		{
+			fwrite($fp,$dado."\n");
+		}
+		fclose($fp);
+		$retorno = array($minpixel,$maxpixel);
+		return $retorno;
 	}
 }
 ?>

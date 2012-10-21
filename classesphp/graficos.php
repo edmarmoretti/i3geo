@@ -580,4 +580,234 @@ function dadosPerfilRelevo($pontos,$opcao,$amostragem,$item="",$map_file=""){
 	}
 	return $result;
 }
+/*
+Function: executaR
+
+Executa comandos do R.
+
+Parametros:
+
+$rcode {array} - Código que ser&aacute; executado.
+
+$dir_tmp {string} - Diretório tempor&aacute;rio onde ficar&atilde;o os arquivos para processamento.
+
+$R_path {string} - Execut&aacute;vel do R.
+
+$gfile_name {string} - nome da imagem que ser&aacute; criada
+
+Retorno:
+
+{string} - nome do arquivo com o código R que foi executado
+*/
+
+function executaR($rcode,$dir_tmp,$R_path,$gfile_name="")
+{
+	$R_options = "--slave --no-save";
+	$r_name = nomeRandomico(20);
+	$r_input = $dir_tmp."/".$r_name.".R";
+	$r_output = $dir_tmp."/".$r_name.".Rout";
+	gravaDados($rcode,$r_input);
+	$command = $R_path." $R_options < $r_input > $r_output";
+	$result = "";
+	$error = "";
+	$exec_result = exec($command,$result,$error);
+	//corta a imagem final
+	//include_once("classe_imagem.php");
+	//$m = new Imagem($dir_tmp."/".$gfile_name.".png");
+	//$i = $m->cortaBorda();
+	//imagepng($i,$dir_tmp."/".$gfile_name.".png");
+	return($r_input);
+}
+/*
+Function: pegaValoresM
+
+Pega os valores de m&uacute;ltiplos itens de um tema.
+
+Se for passado apenas um item, o array de retorno ser&aacute; unidimensional.
+
+Parametros:
+
+$layer {objeto} - Layer que ser&aacute; processado.
+
+$itens {array} - Itens que ser&atilde;o processados.
+
+$exclui {string} - O registro n&atilde;o ser&aacute; considerado se um dos valores for igual a esse valor.
+
+$selecionados {string} - sim|nao Utiliza apenas os selecionados ou todos
+
+$chaves {boolean} - inclui ou n&atilde;o os nomes dos itens como chave no array resultante
+
+$centroide {boolean} - captura ou n&atilde;o o WKT com o centroide do elemento
+
+Retorno:
+
+{array}
+*/
+function pegaValoresM($mapa,$layer,$itens,$exclui="nulo",$selecionados="nao",$chaves=false,$centroide=false)
+{
+	$versao = versao();
+	$versao = $versao["principal"];
+	$prjMapa = $mapa->getProjection();
+	$prjTema = $layer->getProjection();
+	$layer->set("template","none.htm");
+	$layer->setfilter("");
+
+	$indicesel = array();
+	//pega os valores dos indices dos elementos selecionados para comparacao posterior
+	if ($selecionados == "sim")
+	{
+		$sopen = $layer->open();
+		if($sopen == MS_FAILURE){return "erro";}
+		$res_count = $layer->getNumresults();
+		for ($i = 0; $i < $res_count; ++$i)
+		{
+			$result = $layer->getResult($i);
+			$indicesel[] = $result->shapeindex;
+		}
+		$layer->close();
+	}
+	$valores = array();
+	$nclasses = $layer->numclasses;
+	if (@$layer->queryByrect($mapa->extent) == MS_SUCCESS)
+	{
+		//$layer->draw();
+		$sopen = $layer->open();
+		if($sopen == MS_FAILURE){return "erro";}
+		$res_count = $layer->getNumresults();
+
+		for ($i=0;$i<$res_count;++$i)
+		{
+			if($versao == 6){
+				$shape = $layer->getShape($layer->getResult($i));
+				$shp_index = $shape->index;
+			}
+			else{
+				$result = $layer->getResult($i);
+				$shp_index  = $result->shapeindex;
+				$shape = $layer->getfeature($shp_index,-1);
+			}
+			if (($selecionados == "sim") && (array_search($shp_index,$indicesel) === FALSE))
+			{continue;}
+			$considera = "sim";
+			//verifica se no registro deve ser considerado
+			if ($exclui != "nulo")
+			{
+				foreach ($itens as $item)
+				{if($shape->values[$item] == $exclui){$considera = "nao";}}
+			}
+			//pega os valores
+			$v = array();
+			if ($considera == "sim")
+			{
+				foreach ($itens as $item){
+					if($chaves == false)
+					{$v[] = $shape->values[$item];}
+					else
+					{$v[$item] = $shape->values[$item];}
+				}
+				if($centroide == true){
+					$c = $shape->getCentroid();
+					if (($prjTema != "") && ($prjMapa != $prjTema))
+					{
+						$projOutObj = ms_newprojectionobj($prjTema);
+						$projInObj = ms_newprojectionobj($prjMapa);
+						$c->project($projInObj, $projOutObj);
+					}
+					$v["centroide"] = "POINT(".$c->x." ".$c->y.")";
+				}
+				if($nclasses > 0){
+					$classe = $layer->getclass($shape->classindex);
+					$cor = $classe->getstyle(0)->color;
+					$v["cores"] = $cor->red." ".$cor->green." ".$cor->blue;
+				}
+				if (count($v) == 1)
+				{$valores[] = $v[0];}
+				else
+				{$valores[] = $v;}
+			}
+		}
+		$layer->close();
+	}
+	return ($valores);
+}
+/*
+Function: agrupaValores
+
+Agrupa os valores de um array por um m&eacute;todo de c&aacute;lculo.
+
+No caso de soma e m&eacute;dia, ser&aacute; considerado apenas um item e uma chave.
+
+Parametros:
+
+$lista {array} - Lista com os arrays contendo os dados que ser&atilde;o processados.
+
+$indiceChave {string} - &Iacute;ndice do array da lista que ser&aacute; considerado como a chave do array.
+
+$indiceValor {string} - &Iacute;ndice do array da lista que ser&aacute; considerado como o valor.
+
+$tipo {string} - Tipo de processamento soma|media|contagem|nenhum.
+
+Retorno:
+
+{array}
+*/
+function agrupaValores($lista,$indiceChave,$indiceValor,$tipo)
+{
+	$valores = null;
+	foreach ($lista as $linha)
+	{
+		$c = $linha[$indiceChave];
+		$v = $linha[$indiceValor];
+		if ($tipo == "conta")
+		{
+			if(@$valores[$c])
+			$valores[$c] = $valores[$c] + 1;
+			else
+			$valores[$c] = 1;
+		}
+		if (($tipo == "soma"))
+		{
+			if (($v != "") && (is_numeric($v)))
+			{
+				if(@$valores[$c])
+				$valores[$c] = $valores[$c] + $v;
+				else
+				$valores[$c] = $v;
+			}
+		}
+		if ($tipo == "media")
+		{
+			if (($v != "") && (is_numeric($v)))
+			{
+				if(@$soma[$c])
+				$soma[$c] = $soma[$c] + $v;
+				else
+				$soma[$c] = $v;
+
+				if(@$conta[$c])
+				$conta[$c] = $conta[$c] + 1;
+				else
+				$conta[$c] = 1;
+			}
+		}
+		if ($tipo == "nenhum")
+		{
+			//if (($v != "") && (is_numeric($v)))
+			//{
+				$valoresn[] = $v;
+			//}
+			$valores = $valoresn;
+		}
+	}
+	if ($tipo == "media")
+	{
+		$chaves = array_keys($conta);
+		foreach ($chaves as $c)
+		{
+			$valores[$c] = $soma[$c] / $conta[$c];
+		}
+	}
+	return ($valores);
+}
+
 ?>

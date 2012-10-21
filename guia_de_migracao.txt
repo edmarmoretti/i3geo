@@ -26,6 +26,17 @@ Para a versão 4.7
 - Os layers com a ZEE e base raster do MMA foram removidos dos mapfiles de inicialização
 - ms_configura.php
 	- Nova variável de configuração para indicar o local das bibliotecas adicionais do software R: R_libpath
+- Funções removidas de classesphp/funcoes_gerais.php e inseridas nos respectivos programas que as chamam:
+	classesRasterI
+	fusaoGrafico
+	executaR
+	criaImagemR
+	pegaValores
+	pegaValoresM
+	agrupaValores
+	reSLD
+	criaDirMapa
+	permissoesarquivo
 -------------------------------------------------------------------------------------------------
 Para a versão 4.6
 

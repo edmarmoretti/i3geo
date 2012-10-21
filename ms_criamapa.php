@@ -83,7 +83,7 @@ interface - nome da interface que ser&aacute; utilizada para abrir o mapa. As in
 
 perfil - perfil utilizado para restringir os menus de temas. ms_criamapa.php?perfil=usu&aacute;rio1
 
-caminho - caminho para os programas que ser&atilde;o inclu&iacute;dos com "include". Ao chamar o programa ms_criamapa.php por meio de "include" &eacute; necess&aacute;rio especificar essa vari&aacute;vel para indicar o caminho correto do i3geo.
+caminho - caminho relativo que indica o local onde a interface do mapa esta localizada.
 
 pontos - lista de coordenadas x e y que ser&atilde;o adicionadas como pontos no mapa.
 
@@ -130,14 +130,6 @@ gvsiggvp - endere&ccedil;o no servidor do arquivo de projeto gvSig (gvp) que ser
 gvsigview - nome da view do projeto gvSig (http://localhost/i3geo/ms_criamapa.php?gvsiggvp=c:\temp\teste.gvp&gvsigview=Untitled - 0)
 */
 
-/*
-Verifica a vari&aacute;vel $caminho
-
-Essa vari&aacute;vel deve ser definida em programas que utilizam o ms_criamapa.php via include.
-Indica onde est&aacute; o diretório i3geo para que os includes seguintes possam ser localizados.
-$caminho &eacute; sempre colocada antes do nome dos arquivos que ser&atilde;o inclu&iacute;dos, p.e.,
-require_once ($caminho."classesphp/carrega_ext.php");
-*/
 //$_COOKIE = array();
 //
 //quando $funcao existe, &eacute; pq o ms_criamapa.php est&aacute; sendo utilizado como um include em classesphp/mapa_controle.php
@@ -149,28 +141,23 @@ else
 {error_reporting(E_ALL);$debug="sim";}
 if(!isset($funcao))
 {ob_end_clean();}
-if (!isset($caminho))
-{$caminho = "";}
-if (!file_exists($caminho."classesphp/carrega_ext.php"))
-{echo "<b> Nao foi possivel localizar o diretório classephp. Provavelmente vc precisara definir a variavel $caminho";exit;}
-if (isset($parurl["caminho"]))
-{$caminho = $parurl["caminho"];}
 /*
  Carrega as extens&otilde;es PHP
 
 Carrega as extens&otilde;es utilizadas no programa de inicializa&ccedil;&atilde;o.
 A carga das extens&otilde;es geralmente &eacute; necess&aacute;ria nas instala&ccedil;&otilde;es windows (ms4w) ou quando as mesmas n&atilde;o s&atilde;o carregadas pela própria inicializa&ccedil;&atilde;o do PHP.
 */
-include_once ($caminho."classesphp/carrega_ext.php");
+include_once (__DIR__."/classesphp/carrega_ext.php");
 /*
 Include dos arquivos PHP.
 
 Inclui os programas php com fun&ccedil;&otilde;es utilizadas pelo ms_criamapa.php
 */
-include_once ($caminho."classesphp/pega_variaveis.php");
-include_once ($caminho."classesphp/funcoes_gerais.php");
+include_once (__DIR__."/classesphp/pega_variaveis.php");
+include_once (__DIR__."/classesphp/funcoes_gerais.php");
 $versao = versao();
 $versao = $versao["principal"];
+
 //
 //verifica a sessao que controla o login do usuario
 //
@@ -191,7 +178,7 @@ if(empty($_SESSION["usuario"])){
 if(isset($base))
 {$tempBaseX = $base;}
 if(!isset($dir_tmp))
-{include_once ($caminho."ms_configura.php");}
+{include_once (__DIR__."/ms_configura.php");}
 if(isset($tempBaseX) && $tempBaseX != "")
 {$base = $tempBaseX;}
 /*
@@ -467,7 +454,7 @@ if(isset($url_wms))
 adaptaLayers();
 
 if (file_exists($locaplic."/pacotes/geoip") && file_exists($locaplic."/pacotes/geoip/GeoLiteCity.dat"))
-{require_once($caminho."ms_registraip.php");}
+{require_once(__DIR__."/ms_registraip.php");}
 //echo $tmpfname;exit;
 if ($interface != "mashup")
 {abreInterface();}
@@ -518,7 +505,7 @@ function abreInterface(){
 	{
 		if(file_exists($caminho."interface/".$interface))
 		{include_once($caminho."interface/".$interface);}
-		else
+		else 
 		{include_once($interface);}
 		exit;
 	}
@@ -526,7 +513,7 @@ function abreInterface(){
 	{
 		if(file_exists($caminho."interface/".$interface))
 		{$urln = $caminho."interface/".$interface."?".session_id();}
-		else
+		else 
 		{$urln = $interface."?".session_id();}
 		if(!headers_sent())
 		{header("Location:".$urln);}
@@ -726,7 +713,7 @@ Mostra a mensagem de aguarde
 */
 function mostraAguarde()
 {
-	global $interface,$caminho,$mensagemInicia,$tituloInstituicao;
+	global $interface,$mensagemInicia,$tituloInstituicao;
 	if (!isset($interface))
 	{
 		echo "<html><head>";
@@ -735,11 +722,11 @@ function mostraAguarde()
 		echo '<div id="aguarde"><center>';
 		echo '<p class=paguarde style="font-family: Verdana, Arial, Helvetica, sans-serif;color:black;text-align:center;font-size:12pt"><b>'.$mensagemInicia.'</b><br> Aguarde...preparando o mapa</p>';
 		echo '<table><tr>';
-		echo "<td colspan=3 ><center><img src='".$caminho."imagens/i3geo1.jpg'></td></tr>";
-		echo "<tr><td><center><img src='".$caminho."imagens/pspb.png'></td>";
-		echo "<td><center><img src='".$caminho."imagens/mapserv.png'></td>";
-		echo "<td><center><img src='".$caminho."imagens/yui-logo.png'></td>";
-		echo "<td><center><a href='http://mapas.mma.gov.br/download' target=blank ><img src='".$caminho."imagens/somerights20_pt.gif' ></a></td>";
+		echo "<td colspan=3 ><center><img src='".__DIR__."/imagens/i3geo1.jpg'></td></tr>";
+		echo "<tr><td><center><img src='".__DIR__."/imagens/pspb.png'></td>";
+		echo "<td><center><img src='".__DIR__."/imagens/mapserv.png'></td>";
+		echo "<td><center><img src='".__DIR__."/imagens/yui-logo.png'></td>";
+		echo "<td><center><a href='http://mapas.mma.gov.br/download' target=blank ><img src='".__DIR__."/imagens/somerights20_pt.gif' ></a></td>";
 		echo "</tr></table>";
 		echo '<BODY bgcolor="white" style="background-color:white">';
 	}
@@ -1127,6 +1114,50 @@ function erroCriacao(){
 		$error = $error->next();
 	}
 	ms_ResetErrorList();
+}
+/*
+Function: criaDirMapa
+
+Cria os diretórios tempor&aacute;rios para a aplica&ccedil;&atilde;o.
+
+Parametro:
+
+$dir_tmp {string} - Diretório tempor&aacute;rio (no servidor) utilizado pelo mapserver.
+
+$$cachedir {string} - Diretório de cache tempor&aacute;rio definido no ms_configura.php
+
+Retorno:
+
+{boleano}
+*/
+function criaDirMapa($dir_tmp,$cachedir="")
+{
+	if(!file_exists($dir_tmp)){
+		@mkdir ($dir_tmp,0777);
+	}
+	if(file_exists($dir_tmp))
+	{
+		$tmpdirname = nomeRandomico();
+		$crdir = @mkdir ($dir_tmp."/".$tmpdirname,0777);
+		$crdiri = @mkdir ($dir_tmp."/img".$tmpdirname,0777);
+		$mapfile = $dir_tmp."/".$tmpdirname."/".$tmpdirname.".map";
+		$tmpimgname = "img".$tmpdirname;
+		@mkdir($dir_tmp."/comum",0777);
+		if($cachedir == ""){
+			@mkdir($dir_tmp."/cache",0777);
+			@mkdir($dir_tmp."/cache/googlemaps",0777);
+		}
+		else{
+			@mkdir($cachedir,0777);
+			@mkdir($cachedir."/googlemaps",0777);
+		}
+		if(file_exists($dir_tmp."/".$tmpdirname))
+		return array($mapfile,$tmpdirname,$tmpimgname);
+		else
+		{return false;}
+	}
+	else
+	{return false;}
 }
 
 ?>
