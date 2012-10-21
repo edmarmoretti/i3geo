@@ -175,7 +175,7 @@ i3GEOF.conectargeojson = {
 			reg = new RegExp("&", "g");
 			url = url.replace(reg,'#');
 			i3GEOF.conectargeojson.aguarde.visibility = "visible";
-			p = i3GEO.configura.locaplic+"/classesphp/mapa_controle.php?g_sid="+i3GEO.configura.sid+"&funcao=adicionaTemaGeoJson";
+			p = i3GEO.configura.locaplic+"/ferramentas/conectargeojson/exec.php?g_sid="+i3GEO.configura.sid+"&funcao=adicionaTemaGeoJson";
 			cp = new cpaint();
 			funcao = function(retorno){
 				i3GEOF.conectargeojson.aguarde.visibility = "hidden";

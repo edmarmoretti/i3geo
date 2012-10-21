@@ -202,7 +202,7 @@ i3GEOF.buffer = {
 					else
 					{i3GEO.atualiza();}
 				};
-				p = i3GEO.configura.locaplic+"/classesphp/mapa_controle.php?g_sid="+i3GEO.configura.sid+"&funcao=criabuffer&tema="+tema+"&distancia="+distancia+"&unir="+$i("i3GEObufferunir").value;
+				p = i3GEO.configura.locaplic+"/ferramentas/buffer/exec.php?g_sid="+i3GEO.configura.sid+"&funcao=criabuffer&tema="+tema+"&distancia="+distancia+"&unir="+$i("i3GEObufferunir").value;
 				cp = new cpaint();
 				cp.set_response_type("JSON");
 				cp.call(p,"criaBuffer",fim);

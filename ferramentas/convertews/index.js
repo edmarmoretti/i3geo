@@ -139,7 +139,7 @@ i3GEOF.converteMapaWS = {
 			}
 			i3GEOF.converteMapaWS.html(divid,enderecowms,enderecowmc);
 		};
-		p = i3GEO.configura.locaplic+"/classesphp/mapa_controle.php?g_sid="+i3GEO.configura.sid+"&funcao=convertewmswmc&h="+window.location.host;
+		p = i3GEO.configura.locaplic+"/ferramentas/convertews/exec.php?g_sid="+i3GEO.configura.sid+"&funcao=convertewmswmc&h="+window.location.host;
 		cp = new cpaint();
 		cp.set_response_type("JSON");
 		cp.call(p,"converteWMSWMC",temp);		

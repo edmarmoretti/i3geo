@@ -191,7 +191,7 @@ i3GEOF.bufferpt = {
 					else
 					{i3GEO.atualiza();}
 				};
-				p = i3GEO.configura.locaplic+"/classesphp/mapa_controle.php?g_sid="+i3GEO.configura.sid+"&funcao=criabuffer&tema=&distancia="+distancia+"&unir=nao&wkt=POINT("+i3GEOF.bufferpt.x+" "+i3GEOF.bufferpt.y+")";
+				p = i3GEO.configura.locaplic+"/ferramentas/buffer/exec.php?g_sid="+i3GEO.configura.sid+"&funcao=criabuffer&tema=&distancia="+distancia+"&unir=nao&wkt=POINT("+i3GEOF.bufferpt.x+" "+i3GEOF.bufferpt.y+")";
 				cp = new cpaint();
 				cp.set_response_type("JSON");
 				cp.call(p,"criaBuffer",fim);

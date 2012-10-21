@@ -91,7 +91,7 @@ i3GEOF.opcoesQuery = {
 				"i3GEOopcoesQuerybotao1",
 				{onclick:{fn: i3GEOF.opcoesQuery.executa}}
 			);
-			var p = i3GEO.configura.locaplic+"/classesphp/mapa_controle.php?g_sid="+i3GEO.configura.sid+"&funcao=pegaquerymapcor",
+			var p = i3GEO.configura.locaplic+"/ferramentas/opcoes_querymap/exec.php?g_sid="+i3GEO.configura.sid+"&funcao=pegaquerymapcor",
 				cp = new cpaint(),
 				retorno = function(retorno){
 					i3GEOF.opcoesQuery.aguarde.visibility = "hidden";

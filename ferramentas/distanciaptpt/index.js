@@ -210,7 +210,7 @@ i3GEOF.distanciaptpt = {
 					{i3GEO.atualiza();}
 					i3GEOF.distanciaptpt.aguarde.visibility = "hidden";
 				};
-				p = i3GEO.configura.locaplic+"/classesphp/mapa_controle.php?g_sid="+i3GEO.configura.sid+"&funcao=distanciaptpt&temaorigem="+temaOrigem+"&temadestino="+temaDestino+"&distancia="+distancia+"&itemorigem="+$i("i3GEOFdistanciaptptItemOrigem").value+"&itemdestino="+$i("i3GEOFdistanciaptptItemDestino").value+"&ext="+i3GEO.parametros.mapexten;
+				p = i3GEO.configura.locaplic+"/ferramentas/distanciaptpt/exec.php?g_sid="+i3GEO.configura.sid+"&funcao=distanciaptpt&temaorigem="+temaOrigem+"&temadestino="+temaDestino+"&distancia="+distancia+"&itemorigem="+$i("i3GEOFdistanciaptptItemOrigem").value+"&itemdestino="+$i("i3GEOFdistanciaptptItemDestino").value+"&ext="+i3GEO.parametros.mapexten;
 				cp = new cpaint();
 				cp.set_response_type("JSON");
 				cp.call(p,"distanciaptpt",fim);

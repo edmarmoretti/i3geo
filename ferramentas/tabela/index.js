@@ -689,7 +689,7 @@ i3GEOF.tabela = {
 				i3GEO.Interface.atualizaTema(retorno,i3GEOF.tabela.tema);
 				i3GEOF.tabela.aguarde.visibility = "hidden";
 			};
-		p = i3GEO.configura.locaplic+"/classesphp/mapa_controle.php?g_sid="+i3GEO.configura.sid+"&funcao=incluisel&tema="+i3GEOF.tabela.tema+"&ids="+lista.toString();
+		p = i3GEO.configura.locaplic+"/ferramentas/tabela/exec.php?g_sid="+i3GEO.configura.sid+"&funcao=incluisel&tema="+i3GEOF.tabela.tema+"&ids="+lista.toString();
 		cp = new cpaint();
 		cp.set_response_type("JSON");
 		cp.call(p,"incluiSel",temp);
@@ -784,7 +784,7 @@ i3GEOF.tabela = {
 				p;
 			if ($i("i3GEOtabelafiltro1").value !== "")
 			{exclui = $i("i3GEOtabelafiltro1").value;}
-			p = i3GEO.configura.locaplic+"/classesphp/mapa_controle.php?g_sid="+i3GEO.configura.sid+"&funcao=estatistica&item="+$i("i3GEOtabelaComboItensGuia3").value+"&tema="+i3GEOF.tabela.tema+"&exclui="+exclui+"&ext="+i3GEO.parametros.mapexten;
+			p = i3GEO.configura.locaplic+"/ferramentas/tabela/exec.php?g_sid="+i3GEO.configura.sid+"&funcao=estatistica&item="+$i("i3GEOtabelaComboItensGuia3").value+"&tema="+i3GEOF.tabela.tema+"&exclui="+exclui+"&ext="+i3GEO.parametros.mapexten;
 			cp.set_response_type("JSON");
 			cp.call(p,"estatDescritivas",monta);
 		}catch(e){
@@ -1231,32 +1231,32 @@ i3GEOF.tabela = {
 		par = i3GEOF.tabela.montapar(i3GEOF.tabela.parametros);
 
 		if (i3GEOF.tabela.tipoDeGrafico==="pie"){
-			p = i3GEO.configura.locaplic+"/classesphp/mapa_controle.php?g_sid="+i3GEO.configura.sid+"&funcao=graficopizza"+par;
+			p = i3GEO.configura.locaplic+"/ferramentas/tabela/exec.php?g_sid="+i3GEO.configura.sid+"&funcao=graficopizza"+par;
 			cp.set_response_type("JSON");
 			cp.call(p,"graficoPizza",funcao);
 		}
 		if (i3GEOF.tabela.tipoDeGrafico==="barplot"){
-			p = i3GEO.configura.locaplic+"/classesphp/mapa_controle.php?g_sid="+i3GEO.configura.sid+"&funcao=graficobarras"+par;
+			p = i3GEO.configura.locaplic+"/ferramentas/tabela/exec.php?g_sid="+i3GEO.configura.sid+"&funcao=graficobarras"+par;
 			cp.set_response_type("JSON");
 			cp.call(p,"graficoBarras",funcao);
 		}
 		if (i3GEOF.tabela.tipoDeGrafico==="hist"){
-			p = i3GEO.configura.locaplic+"/classesphp/mapa_controle.php?g_sid="+i3GEO.configura.sid+"&funcao=graficohist"+par;
+			p = i3GEO.configura.locaplic+"/ferramentas/tabela/exec.php?g_sid="+i3GEO.configura.sid+"&funcao=graficohist"+par;
 			cp.set_response_type("JSON");
 			cp.call(p,"graficoHist",funcao);
 		}
 		if (i3GEOF.tabela.tipoDeGrafico==="linhas"){
-			p = i3GEO.configura.locaplic+"/classesphp/mapa_controle.php?g_sid="+i3GEO.configura.sid+"&funcao=graficolinhas"+par;
+			p = i3GEO.configura.locaplic+"/ferramentas/tabela/exec.php?g_sid="+i3GEO.configura.sid+"&funcao=graficolinhas"+par;
 			cp.set_response_type("JSON");
 			cp.call(p,"graficoLinhas",funcao);
 		}
 		if (i3GEOF.tabela.tipoDeGrafico==="scatter"){
-			p = i3GEO.configura.locaplic+"/classesphp/mapa_controle.php?g_sid="+i3GEO.configura.sid+"&funcao=graficoscatter"+par;
+			p = i3GEO.configura.locaplic+"/ferramentas/tabela/exec.php?g_sid="+i3GEO.configura.sid+"&funcao=graficoscatter"+par;
 			cp.set_response_type("JSON");
 			cp.call(p,"graficoScatter",funcao);
 		}
 		if (i3GEOF.tabela.tipoDeGrafico==="scatterbins"){
-			p = i3GEO.configura.locaplic+"/classesphp/mapa_controle.php?g_sid="+i3GEO.configura.sid+"&funcao=graficoscatterbins"+par;
+			p = i3GEO.configura.locaplic+"/ferramentas/tabela/exec.php?g_sid="+i3GEO.configura.sid+"&funcao=graficoscatterbins"+par;
 			cp.set_response_type("JSON");
 			cp.call(p,"graficoScatterBins",funcao);
 		}
@@ -1318,7 +1318,7 @@ i3GEOF.tabela = {
 		else{
 			var cp = new cpaint(),
 				i = i3GEO.gadgets.quadros.quadrosfilme[i3GEO.gadgets.quadros.quadroatual].imagem,
-				p = i3GEO.configura.locaplic+"/classesphp/mapa_controle.php?g_sid="+i3GEO.configura.sid+"&funcao=fusaografico&imagem="+i+"&grafico="+i3GEOF.tabela.imagemG,
+				p = i3GEO.configura.locaplic+"/ferramentasqtabela/exec.php?g_sid="+i3GEO.configura.sid+"&funcao=fusaografico&imagem="+i+"&grafico="+i3GEOF.tabela.imagemG,
 				temp = function(retorno){
 					var img = retorno.data,
 						i = $i("img");

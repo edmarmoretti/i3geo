@@ -90,7 +90,7 @@ $i("resultado").innerHTML = "Aguarde...";
 cp = new cpaint();
 cp.set_response_type("JSON");
 //cp.set_debug(2)
-p = "../../classesphp/mapa_controle.php?funcao=listaTags&rss=&nrss=&g_sid="+g_sid;
+p = "../nuvemtags/exec.php?funcao=listaTags&rss=&nrss=&g_sid="+g_sid;
 cp.call(p,"listaTags",montaNuvem);
 
 function procurar(texto)
@@ -111,7 +111,7 @@ function buscarss()
 	var cp = new cpaint();
 	cp.set_response_type("JSON");
 	//cp.set_debug(2)
-	var p = g_locaplic+"/classesphp/mapa_controle.php?funcao=listaTags&g_sid="+g_sid+"&rss="+rss+"&nrss="+$i("nrss").value;
+	var p = g_locaplic+"/ferramentas/nuvemtags/exec.php?funcao=listaTags&g_sid="+g_sid+"&rss="+rss+"&nrss="+$i("nrss").value;
 	cp.call(p,"listaTags",montaNuvem);
 }
 function flash()

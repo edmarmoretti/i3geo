@@ -188,7 +188,7 @@ i3GEOF.centroide = {
 				else
 				{i3GEO.atualiza();}
 			};
-			p = i3GEO.configura.locaplic+"/classesphp/mapa_controle.php?g_sid="+i3GEO.configura.sid+"&funcao=criaCentroide&tema="+tema;
+			p = i3GEO.configura.locaplic+"/ferramentas/centroide/exec.php?g_sid="+i3GEO.configura.sid+"&funcao=criaCentroide&tema="+tema;
 			cp = new cpaint();
 			cp.set_response_type("JSON");
 			cp.call(p,"criaCentroide",fim);

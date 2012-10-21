@@ -500,7 +500,7 @@ i3GEOF.graficointerativo = {
 			x = $i("i3GEOgraficointerativoComboXid").value,
 			y = $i("i3GEOgraficointerativoComboYid").value,
 			excluir = $i("i3GEOgraficointerativoexcluir").value,
-			p = i3GEO.configura.locaplic+"/classesphp/mapa_controle.php?g_sid="+i3GEO.configura.sid+"&funcao=graficoSelecao&tema="+tema+"&itemclasses="+x+"&itemvalores="+y+"&exclui="+excluir+"&ext="+i3GEO.parametros.mapexten,
+			p = i3GEO.configura.locaplic+"/ferramentas/graficointerativo/exec.php?g_sid="+i3GEO.configura.sid+"&funcao=graficoSelecao&tema="+tema+"&itemclasses="+x+"&itemvalores="+y+"&exclui="+excluir+"&ext="+i3GEO.parametros.mapexten,
 			cp = new cpaint(),
 			tipo = $i("i3GEOgraficointerativoTipoAgregacao").value,
 			ordenax = "sim",

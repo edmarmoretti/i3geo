@@ -89,7 +89,7 @@ i3GEOF.opcoesFundo = {
 				"i3GEOopcoesFundobotao1",
 				{onclick:{fn: i3GEOF.opcoesFundo.executa}}
 			);
-			var p = i3GEO.configura.locaplic+"/classesphp/mapa_controle.php?g_sid="+i3GEO.configura.sid+"&funcao=pegacorfundo",
+			var p = i3GEO.configura.locaplic+"/ferramentas/opcoes_fundo/exec.php?g_sid="+i3GEO.configura.sid+"&funcao=pegacorfundo",
 				cp = new cpaint(),
 				retorno = function(retorno){
 					i3GEOF.opcoesFundo.aguarde.visibility = "hidden";
@@ -181,7 +181,7 @@ i3GEOF.opcoesFundo = {
 				i3GEO.atualiza();
 			},
 			cor = $i("i3GEOopcoesFundocor").value,
-			p = i3GEO.configura.locaplic+"/classesphp/mapa_controle.php?g_sid="+i3GEO.configura.sid+"&funcao=corfundo&cor="+cor,
+			p = i3GEO.configura.locaplic+"/ferramentas/opcoes_fundo/exec.php?g_sid="+i3GEO.configura.sid+"&funcao=corfundo&cor="+cor,
 			cp = new cpaint();
 		cp.set_response_type("JSON");
 		cp.call(p,"corQM",temp);

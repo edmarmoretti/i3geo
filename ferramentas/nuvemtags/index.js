@@ -140,7 +140,7 @@ i3GEOF.nuvemtags = {
 							{return;}
 							var rss = $i("i3GEOnuvemtagsRSS").value,
 								cp = new cpaint(),
-								p = i3GEO.configura.locaplic+"/classesphp/mapa_controle.php?funcao=listaTags&g_sid="+i3GEO.configura.sid+"&rss="+rss+"&nrss=20",
+								p = i3GEO.configura.locaplic+"/ferramentas/nuvemtags/exec.php?funcao=listaTags&g_sid="+i3GEO.configura.sid+"&rss="+rss+"&nrss=20",
 								temp = function(retorno){
 									i3GEOF.nuvemtags.aguarde.visibility = "hidden";
 									i3GEOF.nuvemtags.tags = retorno;
@@ -313,7 +313,7 @@ i3GEOF.nuvemtags = {
 	*/
 	pegaDados: function(){
 		var cp = new cpaint(),
-			p = i3GEO.configura.locaplic+"/classesphp/mapa_controle.php?funcao=listaTags&rss=&nrss=&g_sid="+i3GEO.configura.sid,
+			p = i3GEO.configura.locaplic+"/ferramentas/nuvemtags/exec.php?funcao=listaTags&rss=&nrss=&g_sid="+i3GEO.configura.sid,
 			temp = function(retorno){
 				i3GEOF.nuvemtags.tags = retorno;
 				i3GEOF.nuvemtags.montaNuvem();

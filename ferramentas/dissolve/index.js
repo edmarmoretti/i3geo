@@ -196,7 +196,7 @@ i3GEOF.dissolve = {
 				else
 				{i3GEO.atualiza();}
 			};
-			p = i3GEO.configura.locaplic+"/classesphp/mapa_controle.php?g_sid="+i3GEO.configura.sid+"&funcao=dissolvePoligono&tema="+tema+"&item="+item;
+			p = i3GEO.configura.locaplic+"/ferramentas/dissolve/exec.php?g_sid="+i3GEO.configura.sid+"&funcao=dissolvePoligono&tema="+tema+"&item="+item;
 			cp = new cpaint();
 			cp.set_response_type("JSON");
 			cp.call(p,"criadissolve",fim);

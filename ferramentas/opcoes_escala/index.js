@@ -218,7 +218,7 @@ i3GEOF.opcoesEscala = {
 				{i3GEO.atualiza();}
 			},
 			par = i3GEOF.opcoesEscala.parametrosFormulario(),
-			p = i3GEO.configura.locaplic+"/classesphp/mapa_controle.php?g_sid="+i3GEO.configura.sid+"&funcao=mudaescalagrafica"+par,
+			p = i3GEO.configura.locaplic+"/ferramentas/opcoes_escala/exec.php?g_sid="+i3GEO.configura.sid+"&funcao=mudaescalagrafica"+par,
 			cp = new cpaint();
 		cp.set_response_type("JSON");
 		cp.call(p,"mudaEscalaGrafica",temp);
@@ -234,7 +234,7 @@ i3GEOF.opcoesEscala = {
 	*/
 	parametrosAtuais: function(){
 		i3GEOF.opcoesEscala.aguarde.visibility = "visible";
-		var p = i3GEO.configura.locaplic+"/classesphp/mapa_controle.php?g_sid="+i3GEO.configura.sid+"&funcao=escalaparametros",
+		var p = i3GEO.configura.locaplic+"/ferramentas/opcoes_escala/exec.php?g_sid="+i3GEO.configura.sid+"&funcao=escalaparametros",
 			cp = new cpaint(),
 			temp = function(retorno){
 				try{
@@ -293,7 +293,7 @@ i3GEOF.opcoesEscala = {
 				$i("i3GEOopcoesEscalateste").src = retorno.data;
 			},
 			par = i3GEOF.opcoesEscala.parametrosFormulario(),
-			p = i3GEO.configura.locaplic+"/classesphp/mapa_controle.php?g_sid="+i3GEO.configura.sid+"&funcao=testaescalagrafica"+par,
+			p = i3GEO.configura.locaplic+"/ferramentas/opcoes_escala/exec.php?g_sid="+i3GEO.configura.sid+"&funcao=testaescalagrafica"+par,
 			cp = new cpaint();
 		//cp.set_debug(2)
 		cp.set_response_type("JSON");

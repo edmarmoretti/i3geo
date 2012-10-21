@@ -297,7 +297,7 @@ i3GEOF.graficoTema = {
 				i3GEOF.graficoTema.aguarde.visibility = "hidden";
 				i3GEO.atualiza(retorno);
 			};
-			p = i3GEO.configura.locaplic+"/classesphp/mapa_controle.php?g_sid="+i3GEO.configura.sid+"&funcao=graficotema&tema="+i3GEO.temaAtivo+"&lista="+lista+"&tamanho="+tamanho+"&tipo="+tipo+"&outlinecolor="+outlinecolor+"&offset="+offset;
+			p = i3GEO.configura.locaplic+"/ferramentas/graficotema/exec.php?g_sid="+i3GEO.configura.sid+"&funcao=graficotema&tema="+i3GEO.temaAtivo+"&lista="+lista+"&tamanho="+tamanho+"&tipo="+tipo+"&outlinecolor="+outlinecolor+"&offset="+offset;
 			cp.set_response_type("JSON");
 			cp.call(p,"graficotema",temp);
 		}catch(e){i3GEO.janela.tempoMsg("Erro: "+e);i3GEOF.graficoTema.aguarde.visibility = "hidden";}

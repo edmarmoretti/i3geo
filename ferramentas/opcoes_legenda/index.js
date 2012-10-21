@@ -229,7 +229,7 @@ i3GEOF.opcoesLegenda = {
 				{i3GEO.atualiza();}
 			},
 			par = i3GEOF.opcoesLegenda.parametrosFormulario(),
-			p = i3GEO.configura.locaplic+"/classesphp/mapa_controle.php?g_sid="+i3GEO.configura.sid+"&funcao=aplicaParametrosLegImg"+par,
+			p = i3GEO.configura.locaplic+"/ferramentas/opcoes_legenda/exec.php?g_sid="+i3GEO.configura.sid+"&funcao=aplicaParametrosLegImg"+par,
 			cp = new cpaint();
 		cp.set_response_type("JSON");
 		cp.call(p,"void",temp);
@@ -245,7 +245,7 @@ i3GEOF.opcoesLegenda = {
 	*/
 	parametrosAtuais: function(){
 		i3GEOF.opcoesLegenda.aguarde.visibility = "visible";
-		var p = i3GEO.configura.locaplic+"/classesphp/mapa_controle.php?g_sid="+i3GEO.configura.sid+"&funcao=pegaParametrosLegImg",
+		var p = i3GEO.configura.locaplic+"/ferramentas/opcoes_legenda/exec.php?g_sid="+i3GEO.configura.sid+"&funcao=pegaParametrosLegImg",
 			cp = new cpaint(),
 			temp = function(retorno){
 				try{
@@ -317,7 +317,7 @@ i3GEOF.opcoesLegenda = {
 				$i("i3GEOopcoesLegendatesteLegenda").style.display = "block";
 			},
 			par = i3GEOF.opcoesLegenda.parametrosFormulario(),
-			p = i3GEO.configura.locaplic+"/classesphp/mapa_controle.php?g_sid="+i3GEO.configura.sid+"&funcao=testaLegenda"+par,
+			p = i3GEO.configura.locaplic+"/ferramentas/opcoes_legenda/exec.php?g_sid="+i3GEO.configura.sid+"&funcao=testaLegenda"+par,
 			cp = new cpaint();
 		//cp.set_debug(2)
 		cp.set_response_type("JSON");

@@ -220,7 +220,7 @@ i3GEOF.gradeCoord = {
 			},
 			p,
 			cp;
-			p = i3GEO.configura.locaplic+"/classesphp/mapa_controle.php?g_sid="+i3GEO.configura.sid+"&funcao=gradeCoord";
+			p = i3GEO.configura.locaplic+"/ferramentas/gradecoord/exec.php?g_sid="+i3GEO.configura.sid+"&funcao=gradeCoord";
 			p += "&intervalo="+$i("i3GEOgradeCoordintervalo").value;
 			p += "&corlinha="+$i("i3GEOgradeCoordcorlinha").value;
 			p += "&larguralinha="+$i("i3GEOgradeCoordlarguralinha").value;

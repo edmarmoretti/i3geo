@@ -251,7 +251,7 @@ i3GEOF.etiqueta = {
 				i3GEOF.etiqueta.aguarde.visibility = "hidden";
 				i3GEO.atualiza(retorno);
 			};
-			p = i3GEO.configura.locaplic+"/classesphp/mapa_controle.php?g_sid="+i3GEO.configura.sid+"&funcao=ativaEtiquetas&tema="+i3GEO.temaAtivo+"&item="+lista.toString(",");
+			p = i3GEO.configura.locaplic+"/ferramentas/etiqueta/exec.php?g_sid="+i3GEO.configura.sid+"&funcao=ativaEtiquetas&tema="+i3GEO.temaAtivo+"&item="+lista.toString(",");
 			cp.set_response_type("JSON");
 			cp.call(p,"etiqueta",temp);
 		}catch(e){i3GEO.janela.tempoMsg("Erro: "+e);i3GEOF.etiqueta.aguarde.visibility = "hidden";}
@@ -277,7 +277,7 @@ i3GEOF.etiqueta = {
 				i3GEOF.etiqueta.aguarde.visibility = "hidden";
 				i3GEO.atualiza(retorno);
 			};
-			p = i3GEO.configura.locaplic+"/classesphp/mapa_controle.php?g_sid="+i3GEO.configura.sid+"&funcao=removeEtiquetas&tema="+i3GEO.temaAtivo;
+			p = i3GEO.configura.locaplic+"/ferramentas/etiqueta/exec.php?g_sid="+i3GEO.configura.sid+"&funcao=removeEtiquetas&tema="+i3GEO.temaAtivo;
 			cp.set_response_type("JSON");
 			cp.call(p,"etiqueta",temp);
 		}catch(e){i3GEO.janela.tempoMsg("Erro: "+e);i3GEOF.etiqueta.aguarde.visibility = "hidden";}

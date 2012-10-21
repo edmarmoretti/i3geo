@@ -139,7 +139,7 @@ function adicionatema(id)
 		aguarde("none");
 		window.parent.i3GEO.atualiza();
 	};
-	var p = g_locaplic+"/classesphp/mapa_controle.php?g_sid="+g_sid+"&funcao=adicionaTemaGeoRSS&canal="+id+"&servico="+$i("servico").value;
+	var p = g_locaplic+"/ferramentas/conectargeorss/exec.php?g_sid="+g_sid+"&funcao=adicionaTemaGeoRSS&canal="+id+"&servico="+$i("servico").value;
 	var cp = new cpaint();
 	//cp.set_debug(2)
 	cp.set_response_type("JSON");

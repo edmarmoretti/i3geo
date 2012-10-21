@@ -101,7 +101,7 @@ i3GEOF.telaremota = {
 			$i("i3GEOtelaremotaResultado").innerHTML = ins;
 			i3GEOF.telaremota.aguarde.visibility = "hidden";
 		};
-		p = i3GEO.configura.locaplic+"/classesphp/mapa_controle.php?g_sid="+i3GEO.configura.sid+"&funcao=telaremota";
+		p = i3GEO.configura.locaplic+"/ferramentas/telaremota/exec.php?g_sid="+i3GEO.configura.sid+"&funcao=telaremota";
 		cp = new cpaint();
 		cp.set_response_type("JSON");
 		cp.call(p,"telaremota",mostraLink);

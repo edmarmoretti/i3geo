@@ -196,7 +196,7 @@ i3GEOF.nptpol = {
 			{ext = i3GEO.Interface.googlemaps.bbox();}
 			else
 			{ext = i3GEO.parametros.mapexten;}
-			p = i3GEO.configura.locaplic+"/classesphp/mapa_controle.php?g_sid="+i3GEO.configura.sid+"&funcao=nptPol&temaPt="+$i("i3GEOnptpolPontos").value+"&temaPo="+$i("i3GEOnptpolPoligonos").value+"&ext="+ext;
+			p = i3GEO.configura.locaplic+"/ferramentas/nptpol/exec.php?g_sid="+i3GEO.configura.sid+"&funcao=nptPol&temaPt="+$i("i3GEOnptpolPontos").value+"&temaPo="+$i("i3GEOnptpolPoligonos").value+"&ext="+ext;
 			cp = new cpaint();
 			cp.set_response_type("JSON");
 			cp.call(p,"nptpol",fim);

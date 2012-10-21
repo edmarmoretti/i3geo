@@ -368,7 +368,7 @@ i3GEOF.toponimia = {
 			 		{i3GEO.atualiza();}
 				},
 				par = i3GEOF.toponimia.pegaPar(),
-				p = i3GEO.configura.locaplic+"/classesphp/mapa_controle.php?g_sid="+i3GEO.configura.sid+
+				p = i3GEO.configura.locaplic+"/ferramentas/toponimia/exec.php?g_sid="+i3GEO.configura.sid+
 					"&funcao=criatoponimia&"+par;
 			if(par === false){
 				i3GEOF.toponimia.aguarde.visibility = "hidden";
@@ -397,7 +397,7 @@ i3GEOF.toponimia = {
 		 		i3GEOF.toponimia.aguarde.visibility = "hidden";
 			},
 			par = i3GEOF.toponimia.pegaPar(),
-			p = i3GEO.configura.locaplic+"/classesphp/mapa_controle.php?g_sid="+i3GEO.configura.sid+
+			p = i3GEO.configura.locaplic+"/ferramentas/toponimia/exec.php?g_sid="+i3GEO.configura.sid+
 				"&funcao=criatoponimia&tipo=teste&"+par;
 		if(par === false){
 			i3GEOF.toponimia.aguarde.visibility = "hidden";

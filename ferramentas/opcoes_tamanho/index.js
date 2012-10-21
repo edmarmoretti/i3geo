@@ -213,7 +213,7 @@ i3GEOF.opcoesTamanho = {
 				{i3GEO.guias.ajustaAltura();}
 				i3GEO.mapa.reposicionaDobraPagina();
 			};
-			p = i3GEO.configura.locaplic+"/classesphp/mapa_controle.php?g_sid="+i3GEO.configura.sid+"&funcao=mudatamanho&altura="+a+"&largura="+l;
+			p = i3GEO.configura.locaplic+"/ferramentas/opcoes_tamanho/exec.php?g_sid="+i3GEO.configura.sid+"&funcao=mudatamanho&altura="+a+"&largura="+l;
 			cp = new cpaint();
 			cp.set_response_type("JSON");
 			cp.call(p,"mudatamanho",temp);

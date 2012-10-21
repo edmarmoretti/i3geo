@@ -234,7 +234,7 @@ i3GEOF.gradeDePoligonos = {
 				else
 				{i3GEO.atualiza("");}
 			};
-			p = i3GEO.configura.locaplic+"/classesphp/mapa_controle.php?g_sid="+i3GEO.configura.sid+"&funcao=gradedepol&xdd="+dx+"&ydd="+dy+"&px="+ix+"&py="+iy+"&nptx="+nptx+"&npty="+npty;
+			p = i3GEO.configura.locaplic+"/ferramentas/gradepol/exec.php?g_sid="+i3GEO.configura.sid+"&funcao=gradedepol&xdd="+dx+"&ydd="+dy+"&px="+ix+"&py="+iy+"&nptx="+nptx+"&npty="+npty;
 			cp = new cpaint();
 			cp.set_response_type("JSON");
 			cp.call(p,"gradeDePoligonos",fim);

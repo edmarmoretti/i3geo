@@ -327,7 +327,7 @@ i3GEOF.filtro = {
 	<PEGAFILTRO>
 	*/
 	pegaFiltro: function(){
-		var p = i3GEO.configura.locaplic+"/classesphp/mapa_controle.php?g_sid="+i3GEO.configura.sid+"&funcao=pegafiltro&tema="+i3GEO.temaAtivo,
+		var p = i3GEO.configura.locaplic+"/ferramentas/filtro/exec.php?g_sid="+i3GEO.configura.sid+"&funcao=pegafiltro&tema="+i3GEO.temaAtivo,
 			cp = new cpaint(),
 			temp = function(retorno){
 				if(retorno.data !== undefined)
@@ -350,7 +350,7 @@ i3GEOF.filtro = {
 			if(i3GEOF.filtro.aguarde.visibility === "visible")
 			{return;}
 			i3GEOF.filtro.aguarde.visibility = "visible";
-			var p = i3GEO.configura.locaplic+"/classesphp/mapa_controle.php?g_sid="+i3GEO.configura.sid+"&funcao=inserefiltro&tema="+i3GEO.temaAtivo+"&filtro=",
+			var p = i3GEO.configura.locaplic+"/ferramentas/filtro/exec.php?g_sid="+i3GEO.configura.sid+"&funcao=inserefiltro&tema="+i3GEO.temaAtivo+"&filtro=",
 				cp = new cpaint(),
 				temp = function(retorno){
 					i3GEOF.filtro.aguarde.visibility = "hidden";
@@ -417,7 +417,7 @@ i3GEOF.filtro = {
 					}
 				}
 			}
-			p = i3GEO.configura.locaplic+"/classesphp/mapa_controle.php?g_sid="+i3GEO.configura.sid+"&funcao=inserefiltro";
+			p = i3GEO.configura.locaplic+"/ferramentas/filtro/exec.php?g_sid="+i3GEO.configura.sid+"&funcao=inserefiltro";
 			cp = new cpaint();
 			cp.set_response_type("JSON");
 			cp.set_transfer_mode('POST');

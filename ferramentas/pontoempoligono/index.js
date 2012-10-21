@@ -226,7 +226,7 @@ i3GEOF.pontoEmPoligono = {
 						i3GEO.janela.mensagemSimples(retorno.data,"Colunas");
 					}
 				};
-				p = i3GEO.configura.locaplic+"/classesphp/mapa_controle.php?g_sid="+i3GEO.configura.sid+"&funcao=pontoEmPoligono&temaPt="+temapt+"&temasPo="+tsl.join(",")+"&ext="+i3GEO.parametros.mapexten;
+				p = i3GEO.configura.locaplic+"/ferramentas/pontoempoligono/exec.php?g_sid="+i3GEO.configura.sid+"&funcao=pontoEmPoligono&temaPt="+temapt+"&temasPo="+tsl.join(",")+"&ext="+i3GEO.parametros.mapexten;
 				cp = new cpaint();
 				cp.set_response_type("JSON");
 				cp.call(p,"pontoEmPoligono",fim);

@@ -317,7 +317,7 @@ i3GEOF.pontosDistri = {
 				},
 				tema = $i("i3GEOpontosDistritemasComSel").value,
 				cp = new cpaint(),
-				p = i3GEO.configura.locaplic+"/classesphp/mapa_controle.php?g_sid="+i3GEO.configura.sid+"&funcao=analiseDistriPt&tema2=&tema="+tema+"&numclasses="+n+"&cori="+ci+"&corf="+cf+"&tipo=distancia&limitepontos="+$i("i3GEOpontosDistrilimitePontos").value+"&extendelimite="+$i("i3GEOpontosDistriextendelimite").value+"&ext="+i3GEO.parametros.mapexten;
+				p = i3GEO.configura.locaplic+"/ferramentas/pontosdistri/exec.php?g_sid="+i3GEO.configura.sid+"&funcao=analiseDistriPt&tema2=&tema="+tema+"&numclasses="+n+"&cori="+ci+"&corf="+cf+"&tipo=distancia&limitepontos="+$i("i3GEOpontosDistrilimitePontos").value+"&extendelimite="+$i("i3GEOpontosDistriextendelimite").value+"&ext="+i3GEO.parametros.mapexten;
 			if(tema === ""){
 				i3GEO.janela.tempoMsg("Escolha um tema");
 				i3GEOF.pontosDistri.aguarde.visibility = "hidden";
@@ -353,7 +353,7 @@ i3GEOF.pontosDistri = {
 				},
 				tema = $i("i3GEOpontosDistritemasComSel").value,
 				cp = new cpaint(),
-				p = i3GEO.configura.locaplic+"/classesphp/mapa_controle.php?g_sid="+i3GEO.configura.sid+"&funcao=analiseDistriPt&tema2=&tema="+tema+"&numclasses="+n+"&cori="+ci+"&corf="+cf+"&tipo=densidade&limitepontos="+$i("i3GEOpontosDistrilimitePontos").value+"&extendelimite="+$i("i3GEOpontosDistriextendelimite").value+"&ext="+i3GEO.parametros.mapexten;
+				p = i3GEO.configura.locaplic+"/ferramentas/pontosdistri/exec.php?g_sid="+i3GEO.configura.sid+"&funcao=analiseDistriPt&tema2=&tema="+tema+"&numclasses="+n+"&cori="+ci+"&corf="+cf+"&tipo=densidade&limitepontos="+$i("i3GEOpontosDistrilimitePontos").value+"&extendelimite="+$i("i3GEOpontosDistriextendelimite").value+"&ext="+i3GEO.parametros.mapexten;
 			if(tema === ""){
 				i3GEO.janela.tempoMsg("Escolha um tema");
 				i3GEOF.pontosDistri.aguarde.visibility = "hidden";
@@ -389,7 +389,7 @@ i3GEOF.pontosDistri = {
 				},
 				tema = $i("i3GEOpontosDistritemasComSel").value,
 				cp = new cpaint(),
-				p = i3GEO.configura.locaplic+"/classesphp/mapa_controle.php?g_sid="+i3GEO.configura.sid+"&funcao=analiseDistriPt&tema2=&tema="+tema+"&numclasses="+n+"&cori="+ci+"&corf="+cf+"&tipo=kernel&limitepontos="+$i("i3GEOpontosDistrilimitePontos").value+"&extendelimite="+$i("i3GEOpontosDistriextendelimite").value+"&sigma="+$i("i3GEOpontosDistrisigma").value+"&ext="+i3GEO.parametros.mapexten;
+				p = i3GEO.configura.locaplic+"/ferramentas/pontosdistri/exec.php?g_sid="+i3GEO.configura.sid+"&funcao=analiseDistriPt&tema2=&tema="+tema+"&numclasses="+n+"&cori="+ci+"&corf="+cf+"&tipo=kernel&limitepontos="+$i("i3GEOpontosDistrilimitePontos").value+"&extendelimite="+$i("i3GEOpontosDistriextendelimite").value+"&sigma="+$i("i3GEOpontosDistrisigma").value+"&ext="+i3GEO.parametros.mapexten;
 			if(tema === ""){
 				i3GEO.janela.tempoMsg("Escolha um tema");
 				i3GEOF.pontosDistri.aguarde.visibility = "hidden";
@@ -423,7 +423,7 @@ i3GEOF.pontosDistri = {
 					i3GEO.atualiza();
 				},
 				cp = new cpaint(),
-				p = i3GEO.configura.locaplic+"/classesphp/mapa_controle.php?g_sid="+i3GEO.configura.sid+"&funcao=analiseDistriPt&tema2=&tema="+tema+"&numclasses=&cori=&corf=&tipo=deldir&limitepontos=&extendelimite=&sigma=&ext="+i3GEO.parametros.mapexten;
+				p = i3GEO.configura.locaplic+"/ferramentas/pontosdistri/exec.php?g_sid="+i3GEO.configura.sid+"&funcao=analiseDistriPt&tema2=&tema="+tema+"&numclasses=&cori=&corf=&tipo=deldir&limitepontos=&extendelimite=&sigma=&ext="+i3GEO.parametros.mapexten;
 			if(tema === ""){
 				i3GEO.janela.tempoMsg("Escolha um tema");
 				i3GEOF.pontosDistri.aguarde.visibility = "hidden";
@@ -460,7 +460,7 @@ i3GEOF.pontosDistri = {
 				},
 				tema = $i("i3GEOpontosDistritemasComSel").value,
 				cp = new cpaint(),
-				p = i3GEO.configura.locaplic+"/classesphp/mapa_controle.php?g_sid="+i3GEO.configura.sid+"&funcao=analiseDistriPt&tema2=&tema="+tema+"&numclasses="+n+"&cori="+ci+"&corf="+cf+"&tipo=relatorio&limitepontos="+$i("i3GEOpontosDistrilimitePontos").value+"&extendelimite="+$i("i3GEOpontosDistriextendelimite").value+"&sigma="+$i("i3GEOpontosDistrisigma").value+"&ext="+i3GEO.parametros.mapexten;
+				p = i3GEO.configura.locaplic+"/ferramentas/pontosdistri/exec.php?g_sid="+i3GEO.configura.sid+"&funcao=analiseDistriPt&tema2=&tema="+tema+"&numclasses="+n+"&cori="+ci+"&corf="+cf+"&tipo=relatorio&limitepontos="+$i("i3GEOpontosDistrilimitePontos").value+"&extendelimite="+$i("i3GEOpontosDistriextendelimite").value+"&sigma="+$i("i3GEOpontosDistrisigma").value+"&ext="+i3GEO.parametros.mapexten;
 			if(tema === ""){
 				i3GEO.janela.tempoMsg("Escolha um tema");
 				i3GEOF.pontosDistri.aguarde.visibility = "hidden";

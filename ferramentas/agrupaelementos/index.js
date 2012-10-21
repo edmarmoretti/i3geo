@@ -202,7 +202,7 @@ i3GEOF.agrupaElementos = {
 					else
 					{i3GEO.atualiza();}
 				};
-				p = i3GEO.configura.locaplic+"/classesphp/mapa_controle.php?g_sid="+i3GEO.configura.sid+"&funcao=agrupaElementos&tema="+tema+"&item="+item;
+				p = i3GEO.configura.locaplic+"/ferramentas/agrupaelementos/exec.php?g_sid="+i3GEO.configura.sid+"&funcao=agrupaElementos&tema="+tema+"&item="+item;
 				cp = new cpaint();
 				cp.set_response_type("JSON");
 				cp.call(p,"agrupaElementos",fim);

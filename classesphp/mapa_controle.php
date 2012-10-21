@@ -394,241 +394,10 @@ As geometrias s&atilde;o armazenadas no diretório tempor&aacute;rio do usu&aacut
 		$retorno = $m->capturaGeometrias($dir_tmp,$imgdir,$nome);
 	break;
 /*
-Valor: DISSOLVEPOLIGONO
-
-Elimina divisas entre pol&iacute;gonos com o mesmo atributo.
-
-Salva o mapa acrescentando um novo layer com o resultado.
-
-<Analise->dissolvePoligono>
-*/
-	case "DISSOLVEPOLIGONO":
-		include_once("classe_analise.php");
-		copiaSeguranca($map_file);
-		$m = new Analise($map_file,$tema);
-		$retorno = $m->dissolvePoligono($item,$locaplic);
-		$m->salva();
-		$_SESSION["contadorsalva"]++;
-	break;
-/*
-Valor: AGRUPAELEMENTOS
-
-Agrupa elementos em um pol&iacute;gono.
-
-Salva o mapa acrescentando um novo layer com o resultado.
-
-<Analise->agrupaElementos>
-
-*/
-	case "AGRUPAELEMENTOS":
-		include_once("classe_analise.php");
-		copiaSeguranca($map_file);
-		$m = new Analise($map_file,$tema);
-		$retorno = $m->agrupaElementos($item,$locaplic);
-		$m->salva();
-		$_SESSION["contadorsalva"]++;
-	break;
-/*
-Valor: PONTOEMPOLIGONO
-
-Cruza um tema pontual com temas poligonais ou raster.
-
-Salva o mapa acrescentando um novo layer com o resultado.
-
-<Analise->pontoEmPoligono>
-*/
-	case "PONTOEMPOLIGONO":
-		include_once("classe_analise.php");
-		copiaSeguranca($map_file);
-		$m = new Analise($map_file,$temaPt,$locaplic,$ext);
-		$retorno = $m->pontoEmPoligono($temaPt,$temasPo,$locaplic);
-		$m->salva();
-		$_SESSION["contadorsalva"]++;
-	break;
-/*
-Valor: NPTPOL
-
-Conta o n&uacute;mero de pontos em pol&iacute;gono cruzando dois temas.
-
-Salva o mapa acrescentando um novo layer com o resultado.
-
-<Analise->nptPol>
-*/
-	case "NPTPOL":
-		include_once("classe_analise.php");
-		copiaSeguranca($map_file);
-		$m = new Analise($map_file,$tema,$locaplic,$ext);
-		$retorno = $m->nptPol($temaPt,$temaPo,$locaplic);
-		$m->salva();
-		$_SESSION["contadorsalva"]++;
-	break;
-/*
-Valor: CRIABUFFER
-
-Gera entorno (buffer) nos elementos selecionados de um tema.
-
-Salva o mapa acrescentando um novo layer com o buffer.
-
-<Analise->criaBuffer>
-*/
-	case "CRIABUFFER":
-		include_once("classe_analise.php");
-		copiaSeguranca($map_file);
-		$m = new Analise($map_file,$tema,$locaplic,$ext);
-		$retorno = $m->criaBuffer($distancia,$locaplic,$unir,$wkt);
-		$m->salva();
-		$_SESSION["contadorsalva"]++;
-		//limpa selecao
-		$qyfile = str_replace(".map",".qy",$map_file);
-		if (file_exists($qyfile))
-		{unlink ($qyfile);}
-	break;
-/*
-Valor: DISTANCIAPTPT
-
-Calcula a distancia entre um ponto de origem e os pontos em um tema.
-
-S&atilde;o considerados apenas os pontos próximos definidos por um buffer.
-
-<Analise->distanciaptpt>
-*/
-	case "DISTANCIAPTPT":
-		include_once("classe_analise.php");
-		copiaSeguranca($map_file);
-		$m = new Analise($map_file,$temaorigem,$locaplic,$ext);
-		$temaoverlay = $m->criaBuffer($distancia,$locaplic);
-		$retorno = $m->distanciaptpt($temaorigem,$temadestino,$temaoverlay,$locaplic,$itemorigem,$itemdestino);
-		$m->salva();
-		$_SESSION["contadorsalva"]++;
-	break;
-/*
-Valor: CRIACENTROIDE
-
-Gera centroide dos elementos selecionados de um tema.
-
-Salva o mapa acrescentando um novo layer com os pontos.
-
-<Analise->criaCentroide>
-*/
-	case "CRIACENTROIDE":
-		include_once("classe_analise.php");
-		copiaSeguranca($map_file);
-		$m = new Analise($map_file,$tema,$locaplic,$ext);
-		$retorno = $m->criaCentroide($locaplic);
-		$m->salva();
-		$_SESSION["contadorsalva"]++;
-	break;
-/*
-Valor: CENTROMASSA
-
-Calcula o centro m&eacute;dio de uma distribui&ccedil;&atilde;o de pontos.
-
-Salva o mapa acrescentando um novo layer com o ponto.
-
-<Analise->centroMassa>
-*/
-	case "CENTROMASSA":
-		include_once("classe_analise.php");
-		copiaSeguranca($map_file);
-		$m = new Analise($map_file,$tema,$locaplic,$ext);
-		$retorno = $m->centroMassa($item);
-		$m->salva();
-		$_SESSION["contadorsalva"]++;
-	break;
-/*
-Valor: ANALISEDISTRIPT
-
-Gera an&aacute;lise de distribui&ccedil;&atilde;o de pontos.
-
-Executa script R para gerar a imagem.
-
-<Analise->analiseDistriPt>
-*/
-	case "ANALISEDISTRIPT":
-		include_once("classe_analise.php");
-		copiaSeguranca($map_file);
-		if(!isset($tema2))
-		{$tema2 = "";}
-		if(!isset($limitepontos))
-		{$limitepontos = "";}
-		$m = new Analise($map_file,$tema,$locaplic,$ext);
-		$retorno = $m->analiseDistriPt($locaplic,$dir_tmp,$R_path,$numclasses,$tipo,$cori,$corf,$tmpurl,$sigma,$limitepontos,$tema2,$extendelimite);
-		$m->salva();
-		$_SESSION["contadorsalva"]++;
-	break;
-/*
-Valor: GRADEDEPONTOS
-
-Gera uma grade de pontos com espa&ccedil;amento regular definido em d&eacute;cimos de grau.
-
-Salva o mapa acrescentando um novo layer com a grade de coordenadas.
-
-<Analise->gradeDePontos>
-*/
-	case "GRADEDEPONTOS":
-		include_once("classe_analise.php");
-		copiaSeguranca($map_file);
-		if(!isset($tema)){$tema = "";}
-		$m = new Analise($map_file,$tema);
-		$retorno = $m->gradeDePontos($xdd,$ydd,$px,$py,$locaplic,$nptx,$npty);
-		$m->salva();
-		$_SESSION["contadorsalva"]++;
-	break;
-/*
-Valor: GRADEDEPOL
-
-Gera uma grade de pol&iacute;gonos com espa&ccedil;amento regular definido em d&eacute;cimos de grau.
-
-Salva o mapa acrescentando um novo layer com a grade.
-
-<Analise->gradeDePol>
-*/
-	case "GRADEDEPOL":
-		include_once("classe_analise.php");
-		copiaSeguranca($map_file);
-		if(!isset($tema)){$tema = "";}
-		$m = new Analise($map_file,$tema);
-		$retorno = $m->gradeDePol($xdd,$ydd,$px,$py,$locaplic,$nptx,$npty);
-		$m->salva();
-		$_SESSION["contadorsalva"]++;
-	break;
-/*
-Valor: GRADEDEHEX
-
-Gera uma grade de pol&iacute;gonos hexagonais definido em d&eacute;cimos de grau.
-
-Salva o mapa acrescentando um novo layer com a grade.
-
-<Analise->gradeDeHex>
-*/
-	case "GRADEDEHEX":
-		include_once("classe_analise.php");
-		copiaSeguranca($map_file);
-		$m = new Analise($map_file,$tema);
-		if(!isset($tema)){$tema = "";}
-		$retorno = $m->gradeDeHex($xdd,$ydd,$px,$py,$locaplic,$nptx,$npty);
-		$m->salva();
-		$_SESSION["contadorsalva"]++;
-	break;
-/*
 Section: Mapa
 
 <classe_mapa.php>
 */
-/*
-Valor: TELAREMOTA
-
-Registra um ID para permitir o acesso ao mapa atual por outro navegador.
-
-O ID &eacute; adicionado à string $_SESSION["fingerprint"] separado por ','
-
-<Mapa->telaRemota>
-*/
-	case "TELAREMOTA":
-		$codigo = nomeRandomico();
-		$_SESSION["fingerprint"] .= ",".$codigo;
-		$retorno = $codigo;
-	break;
 /*
 Valor: PEGAMENSAGENS
 
@@ -709,41 +478,6 @@ Ativa ou desativa a legenda inserida no mapa.
 		redesenhaMapa();
 	break;
 /*
-Valor: MUDATAMANHO
-
-Muda o tamanho da imagem do mapa atual.
-
-<Mapa->mudaQS>
-*/
-	case "MUDATAMANHO":
-		copiaSeguranca($map_file);
-		$map = ms_newMapObj($map_file);
-		$map->setsize($largura,$altura);
-		if (connection_aborted()){exit();}
-		$salvo = $map->save($map_file);
-		include_once("classe_mapa.php");
-		$m = new Mapa($map_file);
-		$m->mudaQS($largura,$altura);
-		$retorno = "ok";
-		$_SESSION["contadorsalva"]++;
-	break;
-/*
-Valor: GRADECOORD
-
-Inclui um tema com a grade de coordenadas.
-
-<Mapa->gradeCoord>
-*/
-	case "GRADECOORD":
-		include_once("classe_mapa.php");
-		copiaSeguranca($map_file);
-		$m = new Mapa($map_file);
-		$m->gradeCoord($intervalo,$corlinha,$larguralinha,$tipolinha,$tamanhotexto,$fonte,$cortexto,$incluitexto,$mascara,$shadowcolor,$shadowsizex,$shadowsizey);
-		$m->salva();
-		$_SESSION["contadorsalva"]++;
-		redesenhaMapa();
-	break;
-/*
 Valor: CONVERTEWS
 
 Converte o mapa atual em um wms.
@@ -755,21 +489,6 @@ Converte o mapa atual em um wms.
 		$m = new Mapa($map_file);
 		if(!isset($h)){$h = "";}
 		$retorno = $m->converteWS($locaplic,$h);
-	break;
-/*
-Valor: CONVERTEWMSWMC
-
-Converte o mapa atual em um wms e wmc.
-
-<Mapa->converteWMC>
-*/
-	case "CONVERTEWMSWMC":
-		include_once("classe_mapa.php");
-		$m = new Mapa($map_file);
-		if(!isset($h)){$h = "";}
-		$wms = $m->converteWS($locmapserv,$h);
-		$wmc = $m->converteWMC($locmapserv,$h);
-		$retorno = array("wms"=>$wms,"wmc"=>$wmc);
 	break;
 /*
 Valor: QUERYMAPCOR
@@ -786,63 +505,6 @@ Altera a cor de sele&ccedil;&atilde;o.
 		$m->salva();
 		$_SESSION["contadorsalva"]++;
 		redesenhaMapa();
-	break;
-/*
-Valor: PEGAQUERYMAPCOR
-
-Pega a cor de sele&ccedil;&atilde;o atual.
-
-<Mapa->corQM>
-*/
-	case "PEGAQUERYMAPCOR":
-		include_once("classe_mapa.php");
-		$m = new Mapa($map_file);
-		$retorno = $m->corQM("");
-	break;
-/*
-Valor: CORFUNDO
-
-Altera a cor do fundo do mapa.
-
-<Mapa->corfundo>
-*/
-	case "CORFUNDO":
-		include_once("classe_mapa.php");
-		copiaSeguranca($map_file);
-		$m = new Mapa($map_file);
-		$m->corfundo($cor);
-		$m->salva();
-		//no caso da interface openlayers, o mapfile &eacute; outro
-		/*
-		$nomefundo = str_replace(".map","fundo.map",$map_file);
-		if(file_exists($nomefundo)){
-			$m = new Mapa($nomefundo);
-			$m->corfundo($cor);
-			$m->salva();
-		}
-		*/
-		$_SESSION["contadorsalva"]++;
-		redesenhaMapa();
-	break;
-/*
-Valor: PEGACORFUNDO
-
-Pega a cor do fundo do mapa atual.
-
-<Mapa->corfundo>
-*/
-	case "PEGACORFUNDO":
-		include_once("classe_mapa.php");
-		//no caso da interface openlayers, o mapfile &eacute; outro
-		/*
-		$nomefundo = str_replace(".map","fundo.map",$map_file);
-		if(file_exists($nomefundo) && $interface == "openlayers")
-		{$m = new Mapa($nomefundo);}
-		else
-		{$m = new Mapa($map_file);}
-		*/
-		$m = new Mapa($map_file);
-		$retorno = $m->corfundo("");
 	break;
 /*
 Valor: CORPO
@@ -863,44 +525,6 @@ Desenha as imagens do entorno do mapa.
 		include_once("classe_mapa.php");
 		$m = new Mapa($map_file);
 		$retorno = $m->redesenhaEntorno();
-	break;
-/*
-Valor: ADICIONATEMAGEORSS
-
-Adiciona um tema baseado em um RSS.
-
-<Mapa->adicionaTemaGeoRSS>
-*/
-	case "ADICIONATEMAGEORSS":
-		include_once("classe_mapa.php");
-		copiaSeguranca($map_file);
-		$m = new Mapa($map_file);
-		$retorno = $m->adicionaTemaGeoRSS($servico,$dir_tmp,$locaplic,$canal);
-		if ($retorno != "erro")
-		{$m->salva();$_SESSION["contadorsalva"]++;redesenhaMapa();}
-		else
-		{
-			$retorno = "erro.Nenhum dado espacializado foi encontrado.";
-		}
-	break;
-/*
-Valor: ADICIONATEMAGEOJSON
-
-Adiciona um tema baseado em uma URL GeoJson.
-
-<Mapa->adicionaTemaGeoJson>
-*/
-	case "ADICIONATEMAGEOJSON":
-		include_once("classe_mapa.php");
-		copiaSeguranca($map_file);
-		$m = new Mapa($map_file);
-		$retorno = $m->adicionaTemaGeoJson($servico,$dir_tmp,$locaplic);
-		if ($retorno != "erro")
-		{$m->salva();$_SESSION["contadorsalva"]++;redesenhaMapa();}
-		else
-		{
-			$retorno = "erro.";
-		}
 	break;
 /*
 Valor: ADICIONATEMASHP
@@ -1261,40 +885,6 @@ Insere elemento gr&aacute;fico em um tema.
 		redesenhaMapa();
 	break;
 /*
-function: ADICIONALABELCLASSE
-
-Adiciona LABEL em uma classe de um layer
-
-<Temas->adicionaLabel>
-*/
-	case "ADICIONALABELCLASSE":
-		include_once("classe_temas.php");
-		$m = new Temas($map_file,$tema);
-		$l = $m->mapa->getlayerbyname($tema);
-		if(empty($item))
-		{$retorno = "erro";}
-		else{
-			$l->set("labelitem",$item);
-			$novac = $l->getclass($classe);
-			$m->adicionaLabel($novac,$wrap,$fonte,$tamanho,$angulo,$fundo,$sombra,$cor,$outlinecolor,$shadowcolor,$shadowsizex,$shadowsizey,$force,$mindistance,$minfeaturesize,$offsetx,$offsety,$partials,$position);
-			$m->salva();
-			$retorno = "ok";
-		}
-	break;
-/*
-function: REMOVELABELCLASSE
-
-Remove LABEL em uma classe de um layer
-*/
-	case "REMOVELABELCLASSE":
-		include_once("classe_temas.php");
-		$m = new Temas($map_file,$tema);
-		$m->removeLabel($classe);
-		$m->salva();
-		$retorno = "ok";
-	break;
-
-/*
 Valor: SOBETEMA
 
 Sobe um tema na ordem de desenho.
@@ -1387,38 +977,6 @@ Muda a extens&atilde;o geogr&aacute;fica do mapa de acordo com a abrang&ecirc;nc
 		redesenhaMapa();
 	break;
 /*
-Valor: INSEREFILTRO
-
-Inclui um filtro no tema.
-
-<Temas->insereFiltro>
-*/
-	case "INSEREFILTRO":
-		include_once("classe_temas.php");
-		copiaSeguranca($map_file);
-		$m = new Temas($map_file,$tema);
-		if(!isset($testa)){$testa="";}
-		{$retorno = $m->insereFiltro($filtro,$testa);}
-		if(strtolower($testa) != "sim")
-		{
-			$m->salva();
-			$_SESSION["contadorsalva"]++;
-			redesenhaMapa();
-		}
-	break;
-/*
-Valor: PEGAFILTRO
-
-Pega a string do filtro de um tema.
-
-<Temas->pegaFiltro>
-*/
-	case "PEGAFILTRO":
-		include_once("classe_temas.php");
-		$m = new Temas($map_file,$tema);
-		$retorno = $m->pegaFiltro();
-	break;
-/*
 Valor: APLICAPROCESSOS
 
 Aplica processos em um tema do tipo imagem
@@ -1478,38 +1036,6 @@ Altera o nome do tema
 		copiaSeguranca($map_file);
 		$m = new Temas($map_file,$tema);
 		$m->mudaNome($valor);
-		$m->salva();
-		$_SESSION["contadorsalva"]++;
-		redesenhaMapa();
-	break;
-/*
-Valor: TEMA2SLD
-
-Mostra na tela o SLD de um tema
-
-<Temas->sld>
-*/
-	case "TEMA2SLD":
-		include_once("classe_temas.php");
-		$m = new Temas($map_file,$tema);
-		$sld = $m->sld();
-		echo header('Content-Disposition: attachment; filename="'.$tema.'.sld"');
-		echo header("Content-type: application/xml");
-		echo $m->sld();
-		exit;
-	break;
-/*
-Valor: GRAFICOTEMA
-
-Gera graficos automaticamente para os elementos de um tema
-
-<Temas->graficotema>
-*/
-	case "GRAFICOTEMA":
-		include_once("classe_temas.php");
-		copiaSeguranca($map_file);
-		$m = new Temas($map_file,$tema,$locaplic);
-		$m->graficotema($lista,$tamanho,$tipo,$outlinecolor,$offset);
 		$m->salva();
 		$_SESSION["contadorsalva"]++;
 		redesenhaMapa();
@@ -1688,18 +1214,6 @@ Lista os pontos dos elementos de um arquivo shp.
 		$retorno = $m->listaPontosShape();
 	break;
 /*
-Valor: LISTAPONTOSSHAPESEL
-
-Lista os pontos dos elementos selecionados de um layer
-
-<SHP->listaPontosShapeSel>
-*/
-	case "LISTAPONTOSSHAPESEL":
-		include_once("classe_shp.php");
-		$m = new SHP($map_file,$tema);
-		$retorno = $m->listaPontosShapeSel();
-	break;
-/*
 Valor: CRIASHPVAZIO
 
 Cria um shapefile vazio e acrescenta como tema ao mapa.
@@ -1714,22 +1228,6 @@ Cria um shapefile vazio e acrescenta como tema ao mapa.
 		$retorno = $m->criaSHPvazio($tituloTema);
 		$m->salva();
 		$_SESSION["contadorsalva"]++;
-	break;
-/*
-Valor: INSERESHP
-
-Insere um ponto em um shape file existente.
-
-<SHP->insereSHP>
-*/
-	case "INSERESHP":
-		include_once("classe_shp.php");
-		copiaSeguranca($map_file);
-		$m = new SHP($map_file,$tema);
-		if (!isset($projecao)){$projecao = "";}
-		$m->insereSHP($xy,$projecao,$item,$valor);
-		$_SESSION["contadorsalva"]++;
-		redesenhaMapa();
 	break;
 /*
 Valor: PEGAXYULTIMOPONTO
@@ -1770,131 +1268,6 @@ Gera string wkt de um conjunto de pontos.
 		$retorno = array($res["ponto"],$res["linha"],$res["poligono"]);
 	break;
 /*
-Section: Gr&aacute;ficos
-
-Cria&ccedil;&atilde;o de representa&ccedil;&otilde;es gr&aacute;ficas de dados estat&iacute;sticos.
-
-<graficos.php>
-*/
-/*
-Valor: GRAFICOSELECAO
-
-Pega os dados necess&aacute;rios para a gera&ccedil;&atilde;o dos gr&aacute;ficos da ferramenta sele&ccedil;&atilde;o
-
-<iniciaDadosGrafico>
-*/
-	case "GRAFICOSELECAO":
-		include_once("graficos.php");
-		if(!isset($exclui))
-		{$exclui = "";}
-		if(!isset($tipo))
-		{$tipo = "nenhum";}
-		if(!isset($ordenax))
-		{$ordenax = "nao";}
-		$retorno = iniciaDadosGrafico($map_file,$tema,$exclui,$itemclasses,$itemvalores,$tipo,false,$ext,true,$ordenax);
-	break;
-/*
-Valor: FUSAOGRAFICO
-
-Faz a fus&atilde;o da imagem de um gr&aacute;fico com a imagem do mapa atual.
-
-<fusaoGrafico>
-*/
-	case "FUSAOGRAFICO":
-		include_once("graficos.php");
-		restauraCon($map_file,$postgis_mapa);
-		include_once("classe_imagem.php");
-		if($map_file != "")
-		{
-			$mapa = ms_newMapObj($map_file);
-			$imgo = $mapa->draw();
-			$nome = ($imgo->imagepath).nomeRandomico().".png";
-			$imgo->saveImage($nome);
-			$imagem = ($imgo->imageurl).basename($nome);
-		}
-		$m = new Imagem(dirname($dir_tmp).$imagem);
-		$i = $m->fundeIm(dirname($dir_tmp).$grafico);
-		imagepng($i,dirname($dir_tmp).$imagem);
-		$retorno = $imagem;
-	break;
-/*
-Valor: GRAFICOESTRELA
-
-Cria um gr&aacute;fico do tipo estrela.
-
-<graficoEstrela>
-*/
-	case "GRAFICOESTRELA":
-		include_once("graficos.php");
-		$retorno = graficoEstrela();
-	break;
-/*
-Valor: GRAFICOSCATTER
-
-Cria um gr&aacute;fico de distribui&ccedil;&atilde;o de pontos.
-
-<graficoScatter>
-*/
-	case "GRAFICOSCATTER":
-		include_once("graficos.php");
-		$retorno = graficoScatter();
-	break;
-/*
-Valor: GRAFICOSCATTERBINS
-
-Cria um gr&aacute;fico de distribui&ccedil;&atilde;o de pontos com agrupamento em pixels (bins).
-
-<graficoScatterBins>
-*/
-	case "GRAFICOSCATTERBINS":
-		include_once("graficos.php");
-		$retorno = graficoScatterBins();
-	break;
-/*
-Valor: GRAFICOLINHAS
-
-Cria um gr&aacute;fico de linhas.
-
-<graficoLinhas>
-*/
-	case "GRAFICOLINHAS":
-		include_once("graficos.php");
-		$retorno = graficoLinhas();
-	break;
-/*
-Valor: GRAFICOHIST
-
-Cria um gr&aacute;fico de histograma.
-
-<graficoHist>
-*/
-	case "GRAFICOHIST":
-		include_once("graficos.php");
-		$retorno = graficoHist();
-	break;
-/*
-Valor: GRAFICOBARRAS
-
-Cria um gr&aacute;fico de barras.
-
-<graficoBarras>
-*/
-	case "GRAFICOBARRAS":
-		include_once("graficos.php");
-		$retorno = graficoBarras();
-	break;
-/*
-Valor: GRAFICOPIZZA
-
-Cria um gr&aacute;fico de pizza.
-
-<graficoPizza>
-*/
-	case "GRAFICOPIZZA":
-		include_once("graficos.php");
-		$retorno = graficoPizza();
-	break;
-/*
 Valor: DADOSLINHADOTEMPO
 
 Pega os dados de um tema para gera&ccedil;&atilde;o do gr&aacute;fico de linha do tempo.
@@ -1927,18 +1300,6 @@ Obt&eacute;m a lista de temas, grupos e sub-grupos.
 
 <classe_menutemas.php>
 */
-/*
-Valor: LISTATAGS
-
-Pega a lista de tags registrados nos menus de temas.
-
-<Menutemas->listatags>
-*/
-	case "LISTATAGS":
-		include_once("classe_menutemas.php");
-		$m = new Menutemas($map_file,$perfil,$locaplic,$urli3geo);
-		$retorno = $m->listatags($rss,$nrss);
-	break;
 /*
 Valor: PEGALISTADEMENUS
 
@@ -2287,18 +1648,6 @@ Identifica elementos no mapa retornando apenas o valor de um &uacute;nico item.
 		$retorno = $m->identificaQBP($tema,$xy[0],$xy[1],$map_file,$resolucao,$item,$tiporetorno="unico");
 	break;
 /*
-Valor: ESTATISTICA
-
-Calcula estat&iacute;sticas b&aacute;sicas de uma tabela de um tema.
-
-<Atributos->estatDescritivas>
-*/
-	case "ESTATISTICA":
-		include_once("classe_atributos.php");
-		$m = new Atributos($map_file,$tema,$locaplic,$ext);
-		$retorno = $m->estatDescritivas($item,$exclui);
-	break;
-/*
 Valor: LISTATEXTO
 
 Pega todos os valores dos itens de uma tabela de um tema.
@@ -2582,20 +1931,6 @@ Define as caracter&iacute;sticas de simbologia de uma classe, cria, adiciona e e
 		$_SESSION["contadorsalva"]++;
 	break;
 /*
-Valor: EDITALEGENDA
-
-Cria elementos para construir uma legenda no formato de tabela em HTML.
-
-<Legenda->tabelaLegenda>
-*/
-	case "EDITALEGENDA":
-		include_once("classe_legenda.php");
-		$m = new Legenda($map_file,$locaplic,$tema);
-		$r = $m->tabelaLegenda();
-		if (!$r){$r = "erro.Erro legenda nao disponivel";}
-		$retorno = $r;
-	break;
-/*
 Valor: CRIALEGENDAHTML
 
 Gera a legenda processando o template HTML.
@@ -2612,34 +1947,6 @@ Gera a legenda processando o template HTML.
 		$retorno = $r;
 	break;
 /*
-Valor: TESTALEGENDA
-
-Testa os par&acirc;metros de defini&ccedil;&atilde;o da legenda inserida no mapa.
-
-<Legenda->aplicaParametrosLegImg>
-*/
-	case "TESTALEGENDA":
-		include_once("classe_legenda.php");
-		copy($map_file,str_replace(".map","testeleg.map",$map_file));
-		$m = new Legenda(str_replace(".map","testeleg.map",$map_file));
-		$m->aplicaParametrosLegImg($fonte,$imagecolor,$position,$status,$outlinecolor,$keyspacingy,$keyspacingx,$keysizey,$keysizex,$height,$width,$labelsize);
-		$retorno = $m->legendaGrafica();
-	break;
-/*
-Valor: CONTAGEMCLASSE
-
-Acrescenta a contagem de elementos em cada classe.
-
-<Legenda->tabelaLegenda>
-*/
-	case "CONTAGEMCLASSE":
-		include_once("classe_legenda.php");
-		$m = new Legenda($map_file,$locaplic,$tema);
-		$r = $m->tabelaLegenda("sim");
-		if (!$r){$r = "erro.Erro legenda nao disponivel";}
-		$retorno = $r;
-	break;
-/*
 Valor: CRIALEGENDAIMAGEM
 
 Desenha a imagem da legenda.
@@ -2650,40 +1957,6 @@ Desenha a imagem da legenda.
 		include_once("classe_legenda.php");
 		$m = new Legenda($map_file);
 		$retorno = $m->legendaGrafica();
-	break;
-/*
-Valor: PEGAPARAMETROSLEGIMG
-
-Pega os par&acirc;metros da legenda embebida no mapa.
-
-<Legenda->pegaParametrosLegImg>
-*/
-	case "PEGAPARAMETROSLEGIMG":
-		include_once("classe_legenda.php");
-		$m = new Legenda($map_file);
-		$retorno = $m->pegaParametrosLegImg();
-	break;
-/*
-Valor: APLICAPARAMETROSLEGIMG
-
-Aplica um par&acirc;metro em um estilo de uma classe.
-
-<Legenda->aplicaParametrosLegImg>
-*/
-	case "APLICAPARAMETROSLEGIMG":
-		include_once("classe_legenda.php");
-		//
-		//no caso da op&ccedil;&atilde;o de legenda incluida no mapa, o modo cgi n&atilde;o desenha a imagem corretamente
-		//
-		if($status == 3)
-		{
-			$_SESSION["utilizacgi"] = "nao";
-			$utilizacgi = "nao";
-		}
-		$m = new Legenda($map_file);
-		$retorno = $m->aplicaParametrosLegImg($fonte,$imagecolor,$position,$status,$outlinecolor,$keyspacingy,$keyspacingx,$keysizey,$keysizex,$height,$width,$labelsize);
-		$m->salva();
-		$_SESSION["contadorsalva"]++;
 	break;
 /*
 Section: Escala gr&aacute;fica
@@ -2705,111 +1978,12 @@ Gera a imagem da barra de escala.
 		$retorno = $m->retornaBarraEscala();
 	break;
 /*
-Valor: TESTAESCALAGRAFICA
-
-Testa os novos par&acirc;metros de uma barra de escala.
-
-<Escala->testaescalagrafica>
-*/
-	case "TESTAESCALAGRAFICA":
-		include_once("classe_escala.php");
-		$m = new Escala($map_file);
-		$retorno = $m->testaescalagrafica($w,$h,$estilo,$intervalos,$unidade,$cor,$bcor,$ocor);
-	break;
-/*
-Valor: ESCALAPARAMETROS
-
-Pega os par&acirc;metros da barra de escala atual.
-
-<Escala->parametrosBarraEscala>
-*/
-	case "ESCALAPARAMETROS":
-		include_once("classe_escala.php");
-		$m = new Escala($map_file);
-		$retorno = $m->parametrosBarraEscala();
-	break;
-/*
-Valor: MUDAESCALAGRAFICA
-
-Aplica novos par&acirc;metros na barra de escala atual.
-
-<Escala->mudaEscalaGrafica>
-*/
-	case "MUDAESCALAGRAFICA":
-		include_once("classe_escala.php");
-		copiaSeguranca($map_file);
-		$m = new Escala($map_file);
-		$retorno = $m->mudaEscalaGrafica($w,$h,$estilo,$intervalos,$unidade,$cor,$bcor,$ocor);
-		$_SESSION["contadorsalva"]++;
-	break;
-/*
 Section: Sele&ccedil;&atilde;o
 
 Seleciona elementos do mapa ou processa a sele&ccedil;&atilde;o existente.
 
 <classe_selecao.php>
 */
-/*
-Valor: SELECAOPT
-
-Seleciona elementos utilizando um ponto.
-
-<Selecao->selecaoPT>
-*/
-	case "SELECAOPT":
-		//error_reporting(E_ALL);
-		include_once("classe_selecao.php");
-		copiaSeguranca($map_file);
-		if(!isset($xy)){$xy = "";}
-		$temas = explode(",",$tema);
-		foreach($temas as $tema)
-		{
-			$m = new Selecao($map_file,$tema,$ext);
-			$ok[] = $m->selecaoPT($xy,$tipo,$tolerancia);
-		}
-		$_SESSION["contadorsalva"]++;
-		redesenhaMapa();
-	break;
-/*
-Valor: SELECAOEXT
-
-Seleciona elementos utilizando a extens&atilde;o do mapa.
-
-<Selecao->selecaoEXT>
-*/
-	case "SELECAOEXT":
-		include_once("classe_selecao.php");
-		copiaSeguranca($map_file);
-		$temas = explode(",",$tema);
-		foreach($temas as $tema)
-		{
-			$m = new Selecao($map_file,$tema,$ext);
-			$ok[] = $m->selecaoEXT($tipo);
-		}
-		//$retorno = implode(",",$ok);
-		$_SESSION["contadorsalva"]++;
-		redesenhaMapa();
-	break;
-/*
-Valor: SELECAOBOX
-
-Seleciona elementos utilizando um ret&acirc;ngulo.
-
-<Selecao->selecaoBOX>
-*/
-	case "SELECAOBOX":
-		include_once("classe_selecao.php");
-		copiaSeguranca($map_file);
-		$temas = explode(",",$tema);
-		foreach($temas as $tema)
-		{
-			$m = new Selecao($map_file,$tema,$ext);
-			$ok[] = $m->selecaoBOX($tipo,$ext);
-		}
-		$_SESSION["contadorsalva"]++;
-		redesenhaMapa();
-	break;
-
 /*
 Valor: SELECAOATRIB
 
@@ -2824,162 +1998,6 @@ Seleciona elementos com base nos atributos.
 		$retorno = $m->selecaoAtributos($tipo,$item,$operador,$valor);
 		$_SESSION["contadorsalva"]++;
 		redesenhaMapa();
-	break;
-/*
-Valor: SELECAOATRIB2
-
-Seleciona elementos com base nos atributos utilizando sintaxe complexa.
-
-<Selecao->selecaoAtributos2>
-*/
-	case "SELECAOATRIB2":
-		include_once("classe_selecao.php");
-		copiaSeguranca($map_file);
-		$m = new Selecao($map_file,$tema,$ext);
-		$retorno = $m->selecaoAtributos2($filtro,$tipo);
-		$_SESSION["contadorsalva"]++;
-		redesenhaMapa();
-	break;
-/*
-Valor: SELECAOTEMA
-
-Sleciona elementos de um tema com base em outro tema.
-
-<Selecao->selecaoTema>
-*/
-	case "SELECAOTEMA":
-		include_once("classe_selecao.php");
-		copiaSeguranca($map_file);
-		$temas = explode(",",$tema);
-		foreach($temas as $tema)
-		{
-			$m = new Selecao($map_file,$tema);
-			$ok[] = $m->selecaoTema($temao,$tipo);
-		}
-		$retorno = implode(",",$ok);
-		$_SESSION["contadorsalva"]++;
-		redesenhaMapa();
-	break;
-/*
-Valor: SELECAOPOLI
-
-Sele&ccedil;&atilde;o por poligono (chamado via POST).
-
-<Selecao->selecaoPoli>
-*/
-	case "SELECAOPOLI":
-		//esta opera&ccedil;&atilde;o &eacute; chamada com POST via cpaint
-		//por isso precisa ser executada com start
-		copiaSeguranca($map_file);
-		$retorno = selecaoPoli($xs,$ys,$tema,$tipo);
-		$_SESSION["contadorsalva"]++;
-		redesenhaMapa();
-		//restauraCon($map_file,$postgis_mapa);
-	break;
-/*
-Valor: LIMPASEL
-
-Limpa a sele&ccedil;&atilde;o existente em um tema.
-
-<Selecao->selecaoLimpa>
-*/
-	case "LIMPASEL":
-		include_once("classe_selecao.php");
-		$m = new Selecao($map_file,$tema);
-		$retorno = $m->selecaoLimpa();
-		//
-		//&eacute; necess&aacute;rio obter os par&acirc;metros do mapa para remontar a &aacute;rvore de camadas
-		//
-		$_SESSION["contadorsalva"]++;
-		redesenhaMapa();
-	break;
-/*
-Valor: INCLUISEL
-
-Inclu&iacute; elementos em uma sele&ccedil;&atilde;o.
-
-<Selecao->incluiSel>
-*/
-	case "INCLUISEL":
-		include_once("classe_selecao.php");
-		$m = new Selecao($map_file,$tema);
-		$retorno = $m->incluiSel($ids);
-		//
-		//&eacute; necess&aacute;rio obter os par&acirc;metros do mapa para remontar a &aacute;rvore de camadas
-		//
-		$_SESSION["contadorsalva"]++;
-		redesenhaMapa();
-	break;
-/*
-Valor: CRIATEMASEL
-
-Cria um novo tema com a sele&ccedil;&atilde;o atual.
-
-<Selecao->selecao2tema>
-*/
-	case "CRIATEMASEL":
-		include_once("classe_selecao.php");
-		copiaSeguranca($map_file);
-		$m = new Selecao($map_file,$tema);
-		$retorno = $m->selecao2tema($locaplic,$dir_tmp);
-		$m->salva();
-		$_SESSION["contadorsalva"]++;
-	break;
-/*
-Section: Topon&iacute;mia
-
-Processa a topon&iacute;mia de um tema.
-
-<classe_toponimia.php>
-*/
-/*
-Valor: CRIATOPONIMIA
-
-Cria um novo tema com a topon&iacute;mia do tema atual.
-
-<Toponimia->criaToponimia>
-*/
-	case "CRIATOPONIMIA":
-		include_once("classe_toponimia.php");
-		copiaSeguranca($map_file);
-		$m = new Toponimia($map_file,$tema);
-		if(!isset($tipo))
-		{$tipo="";}
-		if(!isset($novotema))
-		{$novotema = "sim";}
-		$retorno = $m->criaToponimia($item,$position,$partials,$offsetx,$offsety,$minfeaturesize,$mindistance,$force,$shadowcolor,$shadowsizex,$shadowsizey,$outlinecolor,$cor,$sombray,$sombrax,$sombra,$fundo,$angulo,$tamanho,$fonte,$tipo,$wrap,$novotema);
-		if ($tipo != "teste")
-		{$m->salva();$_SESSION["contadorsalva"]++;}
-	break;
-/*
-Valor: ATIVAETIQUETAS
-
-Ativa as etiquetas de um tema.
-
-<Toponimia->ativaEtiquetas>
-*/
-	case "ATIVAETIQUETAS":
-		include_once("classe_toponimia.php");
-		copiaSeguranca($map_file);
-		$m = new Toponimia($map_file,$tema);
-		$retorno = $m->ativaEtiquetas($item);
-		$m->salva();
-		$_SESSION["contadorsalva"]++;
-	break;
-/*
-Valor: REMOVEETIQUETAS
-
-Desativa as etiquetas de um tema.
-
-<Toponimia->removeEtiquetas>
-*/
-	case "REMOVEETIQUETAS":
-		include_once("classe_toponimia.php");
-		copiaSeguranca($map_file);
-		$m = new Toponimia($map_file,$tema);
-		$retorno = $m->removeEtiquetas();
-		$m->salva();
-		$_SESSION["contadorsalva"]++;
 	break;
 /*
 Section: Outros
@@ -3126,28 +2144,6 @@ function alteraclassesPost($ids,$nomes,$exps)
 	$m->alteraclasses($ids,$nomes,$exps);
 	$m->salva();
 	$_SESSION["contadorsalva"]++;
-}
-/*
-Function: selecaoPoli
-
-Seleciona um tema por pol&iacute;gono baseado em uma lista de pontos.
-
-Include:
-<classe_selecao.php>
-*/
-function selecaoPoli($xs,$ys,$tema,$tipo)
-{
-	global $map_file;
-	include_once("classe_selecao.php");
-	$temas = explode(",",$tema);
-	foreach($temas as $tema)
-	{
-		$m = new Selecao($map_file,$tema);
-		$ok[] = $m->selecaoPorPoligono($tipo,$xs,$ys);
-		$m->salva();
-		$_SESSION["contadorsalva"]++;
-	}
-	return implode(",",$ok);
 }
 /*
 Function: redesenhaMapa

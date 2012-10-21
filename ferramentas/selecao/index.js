@@ -765,7 +765,7 @@ i3GEOF.selecao = {
 				$i("i3GEOselecaoNsel").innerHTML = "Selecionados: "+(nsel.nsel);
 			};
 			i3GEO.janela.abreAguarde("i3GEO.atualiza",$trad("o1"));
-			p = i3GEO.configura.locaplic+"/classesphp/mapa_controle.php?g_sid="+i3GEO.configura.sid+"&funcao=selecaoPoli";
+			p = i3GEO.configura.locaplic+"/ferramentas/selecao/exec.php?g_sid="+i3GEO.configura.sid+"&funcao=selecaoPoli";
 			cp = new cpaint();
 			//cp.set_debug(2)
 			cp.set_transfer_mode('POST');
@@ -1041,7 +1041,7 @@ i3GEOF.selecao = {
 		 	};
 			cp = new cpaint();
 			cp.set_response_type("JSON");
-			p = i3GEO.configura.locaplic+"/classesphp/mapa_controle.php?g_sid="+i3GEO.configura.sid+"&funcao=listaPontosShapeSel&tema="+i3GEO.temaAtivo;
+			p = i3GEO.configura.locaplic+"/ferramentas/selecao/exec.php?g_sid="+i3GEO.configura.sid+"&funcao=listaPontosShapeSel&tema="+i3GEO.temaAtivo;
 			cp.call(p,"listaPontosShape",temp);
 		}
 		catch(e){
