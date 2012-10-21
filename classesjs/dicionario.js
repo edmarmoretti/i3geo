@@ -1961,6 +1961,13 @@ pt:"Filtra regi&atilde;o",
 en:"",
 es:"",
 it:""
+}],
+"x62":[
+{
+pt:"Remover",
+en:"",
+es:"",
+it:""
 }]
 };
 //YAHOO.log("carregou dicionario", "Classes i3geo");

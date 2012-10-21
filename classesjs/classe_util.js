@@ -2085,6 +2085,10 @@ i3GEO.util = {
 
 	O script adicionado tera como ID "i3GEOF."+nome+"_script"
 
+	Se a funcao de inicializacao nao for definida em nomefuncao, sera utilizado "i3GEOF."+nome+".criaJanelaFlutuante();"
+
+	Se o script ja estiver carregado, a funcao de inicializacao sera executada
+
 	Parametros:
 
 	mensagem {string} - mensagem que sera enviada ao console no caso do Firefox
@@ -2115,7 +2119,7 @@ i3GEO.util = {
 			);
 		}
 		else
-		{i3GEO.util.scriptTag(js,"i3GEOF."+nome+".criaJanelaFlutuante()","i3GEOF."+nome+"_script");}
+		{i3GEO.util.scriptTag(js,nomefuncao,"i3GEOF."+nome+"_script");}
 	},
 	/*
 	Function: intersectaBox

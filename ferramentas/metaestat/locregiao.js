@@ -39,7 +39,8 @@ if(typeof(i3GEOF) === 'undefined'){
  Permite que o usu&aacute;rio escolha uma regi&atilde;o para alterar o zoom ou aplicar um filtro
  */
 i3GEOF.locregiao = {
-	codigoregiaopai: "", //guarda o valor da regiao pai que originou o ultimo combo
+	//CODIGOREGIAOPAI: "", //guarda o valor da regiao pai que originou o ultimo combo
+	ATIVAFILTRO: false, //ativa ou nao os botoes que permitem filtrar a regiao. Usado quando a ferramenta e aberta com opcao de filtragem.
 	aguarde: function(obj){
 		if(!obj){
 			return "<img style='display:block;z-index:2' src=\'"+i3GEO.configura.locaplic+"/imagens/aguarde.gif\' />";
@@ -63,11 +64,30 @@ i3GEOF.locregiao = {
 	},
 	//abre a ferramenta com a opcao de filtro ativada
 	abreComFiltro: function(){
-		alert("Oi");
+		i3GEOF.locregiao.ATIVAFILTRO = true;
+		var divbotoes = $i("i3geoLocregiaoBotoesFiltro");
+		if(!divbotoes){
+			i3GEOF.locregiao.criaJanelaFlutuante();
+		}
+		else{
+			divbotoes.style.display = "block";
+		}
 	},
 	inicia: function(divid){
 		$i(divid).innerHTML = i3GEOF.locregiao.html();
 		i3GEOF.locregiao.comboHierarquiaRegioes($i("i3geoLocregiaoTipoRegiao"));
+		//ativa os botoes de filtro
+		new YAHOO.widget.Button(
+			"i3geoLocregiaoFiltroAplica",
+			{onclick:{fn: function(){i3GEOF.locregiao.aplicaFiltro();}}}
+		);
+		new YAHOO.widget.Button(
+			"i3geoLocregiaoFiltroRemove",
+			{onclick:{fn: function(){i3GEOF.locregiao.removeFiltro();}}}
+		);
+		if(i3GEOF.locregiao.ATIVAFILTRO === true){
+			$i("i3geoLocregiaoBotoesFiltro").style.display = "block";
+		}
 	},
 	//utiliza o dicionario compartilhado
 	iniciaDicionario: function(){
@@ -83,6 +103,9 @@ i3GEOF.locregiao = {
 		}
 	},
 	iniciaJanelaFlutuante: function(){
+		if($i("i3GEOF.locregiao_corpo")){
+			return;
+		}
 		var minimiza,cabecalho,janela,divid,titulo;
 		cabecalho = function(){
 		};
@@ -110,6 +133,10 @@ i3GEOF.locregiao = {
 	},
 	html: function(){
 		var ins = '<div id="i3geoLocregiaoContainer" style="margin-left:5px;">' +
+		'<div id="i3geoLocregiaoBotoesFiltro" style="display:none" >' +
+		'<input id=i3geoLocregiaoFiltroAplica type="button" value="'+$trad("t29")+'" />&nbsp;' +
+		'<input id=i3geoLocregiaoFiltroRemove type="button" value="'+$trad("x62")+'" />' +
+		'<br><br></div>' +
 		'<div class="paragrafo" id="i3geoLocregiaoTipoRegiao" >' +
 		'</div>' +
 		'</div>';
@@ -125,7 +152,7 @@ i3GEOF.locregiao = {
 	comboHierarquiaRegioesOnChange: function(combo,codigoregiaopai,codigo_tipo_regiao,valorregiaopai){
 		var onde = combo.parentNode.getElementsByTagName("div")[0];
 		if(codigoregiaopai){
-			i3GEOF.locregiao.codigoregiaopai = codigoregiaopai;
+			//i3GEOF.locregiao.CODIGOREGIAOPAI = codigoregiaopai;
 		}
 		if(combo.value == ""){
 			onde.innerHTML = "";
@@ -176,5 +203,11 @@ i3GEOF.locregiao = {
 			return ins;
 		};
 		i3GEO.php.listaHierarquiaRegioes(temp,codigo_tipo_regiao,codigoregiaopai,valorregiaopai);
+	},
+	aplicaFiltro: function(){
+
+	},
+	removeFiltro: function(){
+
 	}
 };

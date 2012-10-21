@@ -115,24 +115,20 @@ $interfaceTemp = $interface;
 //TEMA2SLD &eacute; usado por datadownload.htm		//TODO MANTEMDADOSREGIAO
 
 //
-if ($funcao != "criaMapa" && $funcao != "TEMA2SLD")
-{
+if ($funcao != "criaMapa" && $funcao != "TEMA2SLD"){
 	session_name("i3GeoPHP");
 	if (isset($g_sid) && $g_sid != "")
 	{session_id($g_sid);}
 	session_start();
-	foreach(array_keys($_SESSION) as $k)
-	{
+	foreach(array_keys($_SESSION) as $k){
 		if(!is_array($_SESSION[$k]))
 		eval("\$".$k."='".$_SESSION[$k]."';");
 	}
 	$postgis_mapa = $_SESSION["postgis_mapa"];
-	if(isset($fingerprint))
-	{
+	if(isset($fingerprint))	{
 		//if (md5('I3GEOSEC' . $_SERVER['HTTP_USER_AGENT'] . session_id()) != $fingerprint)
 		$f = explode(",",$fingerprint);
-		if($f[0] != md5('I3GEOSEC' . $_SERVER['HTTP_USER_AGENT'] . session_id()))
-		{
+		if($f[0] != md5('I3GEOSEC' . $_SERVER['HTTP_USER_AGENT'] . session_id())){
 			include_once("funcoes_gerais.php");
 			cpjson(". Tentativa de acesso nao permitida. Inicie um novo mapa.");
 			return;
@@ -213,10 +209,7 @@ $urli3geo = str_replace("/classesphp/mapa_controle.php","",$protocolo.$_SERVER["
 //inserido na vers&atilde;o 4.6
 //
 if(!isset($locaplic)){
-	$d = "";
-	if(!file_exists("ms_configura.php"))
-	$d = "../";
-	include_once($d."ms_configura.php");
+	include_once(__DIR__."/../ms_configura.php");
 }
 //
 //substitui a string de conex&atilde;o

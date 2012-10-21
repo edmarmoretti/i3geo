@@ -2,6 +2,8 @@
 /*
  Title: Editor de limites geograficos do sistema de metadados estatisticos
 
+ Interface de mapa interativo com as opcoes de edicao vetorial dos limites das regioes cadastradas
+
  Arquivo:
 
  i3geo/ferramentas/metaestat/editorlimites.php
