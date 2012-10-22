@@ -37,7 +37,7 @@ O par&acirc;metro principal &eacute; "funcao", que define qual opera&ccedil;&ati
 
 Cada opera&ccedil;&atilde;o possu&iacute; seus próprios par&acirc;metros, que devem ser enviados tamb&eacute;m na requisi&ccedil;&atilde;o da opera&ccedil;&atilde;o.
 */
-include_once(__DIR__."/../../admin/php/admin.php");
+include(__DIR__."/../../admin/php/admin.php");
 include(__DIR__."/../../admin/php/classe_metaestat.php");
 session_name("i3GeoPHP");
 session_id($g_sid);
@@ -57,6 +57,7 @@ if(isset($fingerprint)){
 $retorno = "";
 switch (strtoupper($funcao)){
 	case "APLICAFILTROREGIAO":
+		$retorno = analise_aplicafiltroregiao($map_file,$codigo_tipo_regiao,$codigo_regiao,$codigo_tipo_regiao_pai,$codigo_regiao_pai,$tipo);
 	break;
 }
 if (!connection_aborted()){
@@ -64,5 +65,71 @@ if (!connection_aborted()){
 }
 else
 {exit();}
-
+//se $tipo for igual a "" remove os filtros
+function analise_aplicafiltroregiao($map_file,$codigo_tipo_regiao,$codigo_regiao,$codigo_tipo_regiao_pai,$codigo_regiao_pai,$tipo){
+	$mapa = ms_newMapObj($map_file);
+	$layers = analise_listaLayersMetaestat($mapa);
+	$layers = analise_listaLayersRegiao($layers,$codigo_tipo_regiao);
+	if(count($layers) > 0){
+		$m = new Metaestat();
+		$regiao = $m->listaTipoRegiao($codigo_tipo_regiao);
+		//aplica o filtro considerando os codigos que definem a propria regiao
+		if($tipo == "regiaoatual"){
+			$filtro = $regiao["esquemadb"].".".$regiao["tabela"].".".$regiao["identificador"]."::text = '$codigo_regiao'";
+		}
+		if($tipo == "regiaopai"){
+			//$filtro = $regiao["esquemadb"].".".$regiao["tabela"].".".$regiao["identificador"]."::text = '$codigo_regiao'";
+			$pai = $m->listaAgregaRegiaoFilho($codigo_tipo_regiao,$codigo_tipo_regiao_pai);
+			//var_dump($pai);exit;
+			$filtro = $regiao["esquemadb"].".".$regiao["tabela"].".".$pai["colunaligacao_regiaopai"]."::text = '$codigo_regiao_pai'";
+		}
+		foreach($layers as $l){
+			$data = $l->data;
+			//substitui os marcadores definidos na construcao do layer. Veja a classe metaestat
+			$s = explode("/*FA*/",$data);
+			if(count($s) > 1){
+				if($tipo == ""){
+					$data = $s[0]."/*FA*//*FA*/".$s[2];
+				}
+				else{
+					$data = $s[0]."/*FA*/ AND ".$filtro." /*FA*/".$s[2];
+				}
+			}
+			else{
+				$s = explode("/*FW*/",$data);
+				if(count($s) > 1){
+					if($tipo == ""){
+						$data = $s[0]."/*FW*//*FW*/".$s[2];
+					}
+					else{
+						$data = $s[0]."/*FW*/ WHERE ".$filtro." /*FW*/".$s[2];
+					}
+				}
+			}
+			$l->set("data",$data);
+		}
+	}
+	$mapa->save($map_file);
+	return "ok";
+}
+function analise_listaLayersMetaestat($mapa){
+	$c = $mapa->numlayers;
+	$layers = array();
+	for ($i=0;$i < $c;++$i){
+		$l = $mapa->getlayer($i);
+		if($l->getmetadata("METAESTAT") == "SIM"){
+			$layers[] = $l;
+		}
+	}
+	return $layers;
+}
+function analise_listaLayersRegiao($layers,$codigo_tipo_regiao){
+	$final = array();
+	foreach($layers as $l){
+		if($l->getmetadata("METAESTAT_CODIGO_TIPO_REGIAO") == $codigo_tipo_regiao){
+			$final[] = $l;
+		}
+	}
+	return $final;
+}
 ?>

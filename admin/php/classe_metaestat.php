@@ -310,11 +310,12 @@ class Metaestat{
 		return array("sqlagrupamento"=>$sqlagrupamento,"sql"=>$sql,"sqlmapserver"=>$sqlgeo,"filtro"=>$filtro,"colunas"=>$colunas);
 	}
 	function mapfileMedidaVariavel($id_medida_variavel,$filtro="",$todasascolunas = 0,$tipolayer="polygon",$titulolayer="",$id_classificacao="",$agruparpor="",$codigo_tipo_regiao=""){
-		//para permitir a inclusao de filtros, o fim do sql e marcado com /*FWi*//*FWf*/
+		//para permitir a inclusao de filtros, o fim do sql e marcado com /*FW*//*FW*/
 		//indicando onde deve comecar e terminar uma possivel clausula where
-		//ou com /*FAi*//*FAf*/
+		//ou com /*FA*//*FA*/
 		//para marcar que deve ser utilizado AND ao adicionar o filtro
-		//
+		//Layers adicionados aqui sao marcados com o metadata METAESTAT "SIM"
+		//O codigo_tipo_regiao e marcado com o metadata METAESTAT_CODIGO_TIPO_REGIAO
 		$arq = $this->dir_tmp."/".$this->nomecache.".map";
 		if(!file_exists($arq)){
 			if(empty($tipolayer)){
@@ -332,10 +333,10 @@ class Metaestat{
 			$sql = $this->sqlMedidaVariavel($id_medida_variavel,$todasascolunas,$agruparpor,$tipolayer,$codigo_tipo_regiao);
 			$sqlf = $sql["sqlmapserver"];
 			if(!empty($filtro)){
-				$sqlf = str_replace("__filtro__"," AND ".$filtro." /*FAi*//*FAf*/",$sqlf);
+				$sqlf = str_replace("__filtro__"," AND ".$filtro." /*FA*//*FA*/",$sqlf);
 			}
 			else{
-				$sqlf = str_replace("__filtro__","/*FWi*//*FWf*/",$sqlf);
+				$sqlf = str_replace("__filtro__","/*FW*//*FW*/",$sqlf);
 			}
 			$classes = "";
 			if(!empty($id_classificacao)){
@@ -400,9 +401,10 @@ class Metaestat{
 		return array("mapfile"=>$arq,"layer"=>$this->nomecache,"titulolayer"=>$titulolayer);
 	}
 	function mapfileTipoRegiao($codigo_tipo_regiao){
-		//para permitir a inclusao de filtros, o fim do sql e marcado com /*FWi*//*FWf*/
+		//para permitir a inclusao de filtros, o fim do sql e marcado com /*FW*//*FW*/
 		//indicando onde deve comecar e terminar uma possivel clausula where
-		//
+		//Layers adicionados aqui sao marcados com o metadata METAESTAT "SIM"
+		//O codigo_tipo_regiao e marcado com o metadata METAESTAT_CODIGO_TIPO_REGIAO
 		$arq = $this->dir_tmp."/".$this->nomecache.".map";
 		if(!file_exists($arq)){
 			$tipolayer = "polygon";
@@ -412,7 +414,7 @@ class Metaestat{
 			$titulolayer = mb_convert_encoding($titulolayer,"ISO-8859-1",mb_detect_encoding($titulolayer));
 			$conexao = $this->listaConexao($meta["codigo_estat_conexao"],true);
 			$conexao = "user=".$conexao["usuario"]." password=".$conexao["senha"]." dbname=".$conexao["bancodedados"]." host=".$conexao["host"]." port=".$conexao["porta"]."";
-			$sqlf = $meta["colunageo"]." from (select * from ".$meta["esquemadb"].".".$meta["tabela"]." /*FWi*//*FWf*/) as foo using unique gid using srid=".$meta["srid"];
+			$sqlf = $meta["colunageo"]." from (select * from ".$meta["esquemadb"].".".$meta["tabela"]." /*FW*//*FW*/) as foo using unique gid using srid=".$meta["srid"];
 
 			//FIXME calcular versao do symbolset
 			$dados[] = "MAP";

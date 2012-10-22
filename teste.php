@@ -1,7 +1,4 @@
 <?php
-$n = 10;
-for($i=0;$i<$n;++$i){
-	echo $i."<br>";
-}
-
+$item = preg_replace('/.*\[|\].*/i','xxxx', '[b]');
+echo $item;
 ?>

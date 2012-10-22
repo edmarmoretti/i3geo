@@ -42,6 +42,8 @@ i3GEOF.locregiao = {
 	//CODIGOREGIAOPAI: "", //guarda o valor da regiao pai que originou o ultimo combo
 	ULTIMO_CODIGO_TIPO_REGIAO: "", //ultimo tipo de regiao escolhido
 	ULTIMO_CODIGO_REGIAO: "",//ultima regiao escolhida
+	PENULTIMO_CODIGO_TIPO_REGIAO: "",
+	PENULTIMO_CODIGO_REGIAO: "",
 	ATIVAFILTRO: false, //ativa ou nao os botoes que permitem filtrar a regiao. Usado quando a ferramenta e aberta com opcao de filtragem.
 	aguarde: function(obj){
 		if(!obj){
@@ -73,6 +75,10 @@ i3GEOF.locregiao = {
 		}
 		else{
 			divbotoes.style.display = "block";
+			$i("i3geoLocregiaoTipoRegiao").innerHTML = "";
+			i3GEOF.locregiao.ULTIMO_CODIGO_REGIAO = "";
+			i3GEOF.locregiao.ULTIMO_CODIGO_TIPO_REGIAO = "";
+			i3GEOF.locregiao.comboHierarquiaRegioes($i("i3geoLocregiaoTipoRegiao"));
 		}
 	},
 	inicia: function(divid){
@@ -134,11 +140,13 @@ i3GEOF.locregiao = {
 		i3GEOF.locregiao.inicia(divid);
 	},
 	html: function(){
-		var ins = '<div id="i3geoLocregiaoContainer" style="margin-left:5px;">' +
+		var ins = "" +
 		'<div id="i3geoLocregiaoBotoesFiltro" style="display:none" >' +
 		'<input id=i3geoLocregiaoFiltroAplica type="button" value="'+$trad("t29")+'" />&nbsp;' +
 		'<input id=i3geoLocregiaoFiltroRemove type="button" value="'+$trad("x62")+'" />' +
+		'<br><input type=checkbox id=i3geoLocregiaoFiltroAplicaCk style="cursor:pointer;position:relative;top:3px;"/> Filtrar pela regi&atilde;o de n&iacute;vel superior a &uacute;ltima escolhida' +
 		'<br><br></div>' +
+		'<div id="i3geoLocregiaoContainer" style="margin-left:5px;">' +
 		'<div class="paragrafo" id="i3geoLocregiaoTipoRegiao" >' +
 		'</div>' +
 		'</div>';
@@ -153,8 +161,10 @@ i3GEOF.locregiao = {
 	},
 	comboHierarquiaRegioesOnChange: function(combo,codigoregiaopai,codigo_tipo_regiao,valorregiaopai){
 		var onde = combo.parentNode.getElementsByTagName("div")[0];
+		i3GEOF.locregiao.PENULTIMO_CODIGO_REGIAO = i3GEOF.locregiao.ULTIMO_CODIGO_REGIAO;
+		i3GEOF.locregiao.PENULTIMO_CODIGO_TIPO_REGIAO = i3GEOF.locregiao.ULTIMO_CODIGO_TIPO_REGIAO;
 		if(valorregiaopai){
-			i3GEOF.locregiao.ULTIMO_CODIGO_REGIAO = valorregiaopai.spplit(";")[0];
+			i3GEOF.locregiao.ULTIMO_CODIGO_REGIAO = valorregiaopai.split(";")[0];
 		}
 		else{
 			i3GEOF.locregiao.ULTIMO_CODIGO_REGIAO = "";
@@ -216,19 +226,35 @@ i3GEOF.locregiao = {
 		i3GEO.php.listaHierarquiaRegioes(temp,codigo_tipo_regiao,codigoregiaopai,valorregiaopai);
 	},
 	aplicaFiltro: function(){
-		var temp = function(){
+		var tipo = "regiaoatual",
+		temp = function(){
 			i3GEO.janela.AGUARDEMODAL = false;
 			i3GEO.janela.fechaAguarde("aguardeFiltroRegiao");
 			i3GEO.Interface.redesenha();
 		};
-		if(i3GEOF.locregiao.ULTIMO_CODIGO_TIPO_REGIAO != "" && i3GEOF.locregiao.CODIGO_REGIAO != ""){
-			i3GEO.janela.AGUARDEMODAL = true;
-			i3GEO.janela.abreAguarde("aguardeFiltroRegiao","Filtrando...");
-			i3GEO.php.aplicaFiltroRegiao(temp,i3GEOF.locregiao.ULTIMO_CODIGO_TIPO_REGIAO,i3GEOF.locregiao.CODIGO_REGIAO);
-			i3GEO.janela.tempoMsg("O filtro &eacute; aplicado a todas as camadas oriundas do sistema de metadados estat&iacute;cos.");
+		if($i("i3geoLocregiaoFiltroAplicaCk").checked === true){
+			tipo = "regiaopai";
 		}
+		if(tipo == "regiaoatual" && i3GEOF.locregiao.ULTIMO_CODIGO_TIPO_REGIAO == "" && i3GEOF.locregiao.ULTIMO_CODIGO_REGIAO == ""){
+			return;
+		}
+		if(tipo == "regiaopai" && i3GEOF.locregiao.PENULTIMO_CODIGO_TIPO_REGIAO == "" && i3GEOF.locregiao.PENULTIMO_CODIGO_REGIAO == ""){
+			return;
+		}
+		i3GEO.janela.AGUARDEMODAL = true;
+		i3GEO.janela.abreAguarde("aguardeFiltroRegiao","Filtrando...");
+		i3GEO.php.aplicaFiltroRegiao(temp,i3GEOF.locregiao.ULTIMO_CODIGO_TIPO_REGIAO,i3GEOF.locregiao.ULTIMO_CODIGO_REGIAO,i3GEOF.locregiao.PENULTIMO_CODIGO_TIPO_REGIAO,i3GEOF.locregiao.PENULTIMO_CODIGO_REGIAO,tipo);
+		i3GEO.janela.tempoMsg("O filtro &eacute; aplicado a todas as camadas oriundas do sistema de metadados estat&iacute;cos.");
 	},
 	removeFiltro: function(){
-
+		var tipo = "",
+		temp = function(){
+			i3GEO.janela.AGUARDEMODAL = false;
+			i3GEO.janela.fechaAguarde("aguardeFiltroRegiao");
+			i3GEO.Interface.redesenha();
+		};
+		i3GEO.janela.AGUARDEMODAL = true;
+		i3GEO.janela.abreAguarde("aguardeFiltroRegiao","Filtrando...");
+		i3GEO.php.aplicaFiltroRegiao(temp,"","","","",tipo);
 	}
 };
