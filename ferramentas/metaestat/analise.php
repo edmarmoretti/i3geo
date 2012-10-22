@@ -56,13 +56,13 @@ if(isset($fingerprint)){
 }
 $retorno = "";
 switch (strtoupper($funcao)){
-	case "LISTADRIVES":
+	case "APLICAFILTROREGIAO":
 	break;
 }
 if (!connection_aborted()){
 	cpjson($retorno);
 }
 else
-{exit();
+{exit();}
 
 ?>

@@ -40,6 +40,8 @@ if(typeof(i3GEOF) === 'undefined'){
  */
 i3GEOF.locregiao = {
 	//CODIGOREGIAOPAI: "", //guarda o valor da regiao pai que originou o ultimo combo
+	ULTIMO_CODIGO_TIPO_REGIAO: "", //ultimo tipo de regiao escolhido
+	ULTIMO_CODIGO_REGIAO: "",//ultima regiao escolhida
 	ATIVAFILTRO: false, //ativa ou nao os botoes que permitem filtrar a regiao. Usado quando a ferramenta e aberta com opcao de filtragem.
 	aguarde: function(obj){
 		if(!obj){
@@ -151,8 +153,17 @@ i3GEOF.locregiao = {
 	},
 	comboHierarquiaRegioesOnChange: function(combo,codigoregiaopai,codigo_tipo_regiao,valorregiaopai){
 		var onde = combo.parentNode.getElementsByTagName("div")[0];
+		if(valorregiaopai){
+			i3GEOF.locregiao.ULTIMO_CODIGO_REGIAO = valorregiaopai.spplit(";")[0];
+		}
+		else{
+			i3GEOF.locregiao.ULTIMO_CODIGO_REGIAO = "";
+		}
 		if(codigoregiaopai){
-			//i3GEOF.locregiao.CODIGOREGIAOPAI = codigoregiaopai;
+			i3GEOF.locregiao.ULTIMO_CODIGO_TIPO_REGIAO = codigoregiaopai;
+		}
+		else{
+			i3GEOF.locregiao.ULTIMO_CODIGO_TIPO_REGIAO = "";
 		}
 		if(combo.value == ""){
 			onde.innerHTML = "";
@@ -205,7 +216,17 @@ i3GEOF.locregiao = {
 		i3GEO.php.listaHierarquiaRegioes(temp,codigo_tipo_regiao,codigoregiaopai,valorregiaopai);
 	},
 	aplicaFiltro: function(){
-
+		var temp = function(){
+			i3GEO.janela.AGUARDEMODAL = false;
+			i3GEO.janela.fechaAguarde("aguardeFiltroRegiao");
+			i3GEO.Interface.redesenha();
+		};
+		if(i3GEOF.locregiao.ULTIMO_CODIGO_TIPO_REGIAO != "" && i3GEOF.locregiao.CODIGO_REGIAO != ""){
+			i3GEO.janela.AGUARDEMODAL = true;
+			i3GEO.janela.abreAguarde("aguardeFiltroRegiao","Filtrando...");
+			i3GEO.php.aplicaFiltroRegiao(temp,i3GEOF.locregiao.ULTIMO_CODIGO_TIPO_REGIAO,i3GEOF.locregiao.CODIGO_REGIAO);
+			i3GEO.janela.tempoMsg("O filtro &eacute; aplicado a todas as camadas oriundas do sistema de metadados estat&iacute;cos.");
+		}
 	},
 	removeFiltro: function(){
 

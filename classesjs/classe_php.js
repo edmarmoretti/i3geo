@@ -1546,4 +1546,16 @@ i3GEO.php = {
 		var p = i3GEO.configura.locaplic+"/admin/php/metaestat.php?funcao=listaHierarquiaRegioes&codigo_tipo_regiao="+codigo_tipo_regiao+"&codigoregiaopai="+codigoregiaopai+"&valorregiaopai="+valorregiaopai+"&g_sid="+i3GEO.configura.sid;
 		i3GEO.util.ajaxGet(p,funcao);
 	},
+	/*
+	Function: aplicaFiltroRegiao
+
+	Aplica um filtro no SQL que define uma camada do sistema de metadados estatisticos para filtrar para uma regiao especifica
+	*/
+	aplicaFiltroRegiao: function(funcao,codigo_tipo_regiao,codigo_regiao){
+		if(codigo_tipo_regiao === "" || codigo_regiao === ""){
+			return;
+		}
+		var p = i3GEO.configura.locaplic+"/ferramentas/metaestat/analise.php?funcao=aplicaFiltroRegiao&codigo_tipo_regiao="+codigo_tipo_regiao+"&codigoregiao="+codigo_regiao+"&g_sid="+i3GEO.configura.sid;
+		i3GEO.util.ajaxGet(p,funcao);	
+	}
 };
