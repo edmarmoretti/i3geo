@@ -130,7 +130,7 @@ i3GEOF.tabela = {
 	inicia: function(iddiv){
 		i3GEO.janela.comboCabecalhoTemas("i3GEOFtabelaComboCabeca","i3GEOFtabelaComboCabecaSel","tabela","ligadosComTabela");
 		if(i3GEO.temaAtivo === ""){
-			$i(iddiv).innerHTML = '<img src="../imagens/opcoes.gif" ><p style="position: relative; top: -35px; width: 180px; font-size: 15px; text-align: left; left: 35px;">'+$trad("x33")+'</p>';
+			$i(iddiv).innerHTML = '<p style="position: relative; top: 0px; font-size: 15px; text-align: left;">'+$trad("x33")+'</p>';
 			return;
 		}
 		try{
@@ -193,15 +193,17 @@ i3GEOF.tabela = {
 				"i3GEOtabelabotaoLista",
 				{onclick:{fn: i3GEOF.tabela.pegaRegistros}}
 			);
+			/*
 			$i("i3GEOtabelabotao2-button").style.minHeight = "1em";
 			$i("i3GEOtabelabotao2-button").style.padding = "0px 15px";
 			$i("i3GEOtabelabotao3-button").style.minHeight = "1em";
 			$i("i3GEOtabelabotao3-button").style.padding = "0px 15px";
 			$i("i3GEOtabelabotao6-button").style.minHeight = "1em";
 			$i("i3GEOtabelabotao6-button").style.padding = "0px 15px";
+			*/
 			$i("i3GEOtabelabotaoLista-button").style.minHeight = "1em";
 			$i("i3GEOtabelabotaoLista-button").style.padding = "0px 15px";
-
+			$i("i3GEOtabelabotaoLista-button").style.lineHeight = "1.2";
 			new YAHOO.widget.Button(
 				"i3GEOtabelabotao4",
 				{onclick:{fn: i3GEOF.tabela.estatistica}}
@@ -268,9 +270,9 @@ i3GEOF.tabela = {
 		ins += '		</table>';
 		ins += '		</div>';
 		ins += '	<div id=i3GEOtabelaguia1obj style="width:99%">';
-		ins += '		<div id=i3GEOtabelacombot style="position:relative;top:5px;left:0px;">';
+		ins += '		<div id=i3GEOtabelacombot style="position:relative;top:5px;left:0px;display:none;">';
 		ins += '		</div>';
-		ins += '		<br><p class="paragrafo" ><input title="'+$trad(10,i3GEOF.tabela.dicionario)+'" id=i3GEOtabelabotao2 size=25 type=button value="'+$trad(11,i3GEOF.tabela.dicionario)+'" />';
+		ins += '		<input title="'+$trad(10,i3GEOF.tabela.dicionario)+'" id=i3GEOtabelabotao2 size=25 type=button value="'+$trad(11,i3GEOF.tabela.dicionario)+'" />';
 		ins += '		<input title="'+$trad(12,i3GEOF.tabela.dicionario)+'" id=i3GEOtabelabotao3 size=25  type=button value="'+$trad(13,i3GEOF.tabela.dicionario)+'"/>';
 		ins += '		<input title="'+$trad(14,i3GEOF.tabela.dicionario)+'" id=i3GEOtabelabotao6 size=30  type=button value="'+$trad(15,i3GEOF.tabela.dicionario)+'"/>';
 		ins += '		<div id=i3GEOtabelacontador style="background-color:rgb(240,240,240);width:100%;position:relative;top:15px;left:0px;text-align:left">';
@@ -471,11 +473,11 @@ i3GEOF.tabela = {
 				imagem,
 				i3GEOtabelalegenda = $i("i3GEOtabelalegenda").checked;
 			//cabecalho da tabela
-			ins = "<table id=i3GEOtabelatabelai class=lista2 >";
-			ins += "<tr><td></td><td></td><td></td><td></td>";
+			ins = "<table id=i3GEOtabelatabelai class=lista8 >";
+			ins += "<tr><td style='background-color:yellow'></td><td style='background-color:yellow'></td><td style='background-color:yellow'></td><td style='background-color:yellow'></td>";
 			n = retorno.data[0].itens.length;
 			for (i=0;i<n;i++)
-			{ins += "<td style='background-color:yellow' ><img style=cursor:pointer onclick='i3GEOF.tabela.excluiColuna(this,"+(i * 1 + 3)+")' src='"+i3GEO.configura.locaplic+"/imagens/x.gif' title='"+$trad("t12")+"' />&nbsp;<img style=cursor:pointer onclick='i3GEOF.tabela.ordenaColuna(this,"+(i * 1 + 3)+")' src='"+i3GEO.configura.locaplic+"/imagens/ordena1.gif' title='"+$trad(31,i3GEOF.tabela.dicionario)+"' /><br><span title='"+retorno.data[0].itens[i]+"'> "+retorno.data[0].alias[i]+"</span></td>";}
+			{ins += "<td accessKey='"+(i * 1 + 4)+"' style='background-color:yellow' ><img style=cursor:pointer onclick='i3GEOF.tabela.excluiColuna(this,"+(i * 1 + 4)+")' src='"+i3GEO.configura.locaplic+"/imagens/x.gif' title='"+$trad("t12")+"' />&nbsp;<img style=cursor:pointer onclick='i3GEOF.tabela.ordenaColuna(this,"+(i * 1 + 4)+")' src='"+i3GEO.configura.locaplic+"/imagens/ordena1.gif' title='"+$trad(31,i3GEOF.tabela.dicionario)+"' /><br><span title='"+retorno.data[0].itens[i]+"'> <b>"+retorno.data[0].alias[i]+"</b></span></td>";}
 			ins += "</tr>";
 			cor = "linha";
 			n = retorno.data[1].registros.length;
@@ -554,21 +556,27 @@ i3GEOF.tabela = {
 		try{
 			var tabela = $i("i3GEOtabelatabelai"),
 				trs,
+				tds,
 				i,
 				t,
 				nt,
 				ni;
+			//pega o indice correto
+			tds = coluna.parentNode.parentNode.getElementsByTagName("td");
+			nt = tds.length;
+			for (t=0;t<nt;t++){
+				if(tds[t].accessKey == cid){
+					cid = t;
+					break;
+				}
+			}
 			trs = tabela.getElementsByTagName("tr");
 			nt = trs.length;
 			for (t=0;t<nt;t++){
-				if(trs[t].childNodes){
-					if(trs[t].childNodes[cid] !== undefined){
-						ni = trs[t].childNodes[cid].childNodes.length;
-						for (i = 0; i < ni;i++){
-							trs[t].childNodes[cid].removeChild(trs[t].childNodes[cid].childNodes[0]);
-						}
-						trs[t].childNodes[cid].innerHTML = "";
-					}
+				i = trs[t];
+				if(i.getElementsByTagName("td")[cid]){
+					ni = i.getElementsByTagName("td")[cid];
+					i.removeChild(ni);
 				}
 			}
 			i3GEOF.tabela.aguarde.visibility = "hidden";
@@ -588,6 +596,8 @@ i3GEOF.tabela = {
 			var tabela = $i("i3GEOtabelatabelai"),
 				trs = tabela.getElementsByTagName("tr"),
 				ntrs = trs.length,
+				tds,
+				nt,
 				conta = 0,
 				psort = [],
 				t,
@@ -596,6 +606,15 @@ i3GEOF.tabela = {
 				ins,
 				p,
 				e;
+			//pega o indice correto
+			tds = coluna.parentNode.parentNode.getElementsByTagName("td");
+			nt = tds.length;
+			for (t=0;t<nt;t++){
+				if(tds[t].accessKey == cid){
+					cid = t;
+					break;
+				}
+			}
 			for (t=0;t<ntrs;t++)
 			{
 				if (t < ntrs)
@@ -611,7 +630,7 @@ i3GEOF.tabela = {
 			}
 			//recosntroi a tabela
 			psortfim = psort.sort();
-			ins = "<table id=i3GEOtabelatabelai class=lista2 >";
+			ins = "<table id=i3GEOtabelatabelai class=lista8 >";
 			npsortfim = psortfim.length;
 			for (p=0;p<npsortfim;p++)
 			{

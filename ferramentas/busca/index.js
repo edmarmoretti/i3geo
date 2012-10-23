@@ -42,19 +42,19 @@ Class: i3GEOF.busca
 i3GEOF.busca = {
 	/*
 	Variavel: nbuscas
-	
+
 	N&uacute;mero de buscas j&aacute; feitas. Utilizado para posicionar as janelas de resultados.
 	*/
 	nbuscas: 0,
 	/*
 	Variavel: aguarde
-	
+
 	Objeto DOM com a imagem de aguarde existente no cabe&ccedil;alho da janela.
 	*/
 	aguarde: "",
 	/*
 	Variavel: tema
-	
+
 	C&oacute;digo do tema utilizado na busca
 	*/
 	tema: i3GEO.temaAtivo,
@@ -66,11 +66,11 @@ i3GEOF.busca = {
 	},
 	/*
 	Function: iniciaDicionario
-	
+
 	Carrega o dicion&aacute;rio e chama a fun&ccedil;&atilde;o que inicia a ferramenta
-	
+
 	O Javascript &eacute; carregado com o id i3GEOF.nomedaferramenta.dicionario_script
-	*/	
+	*/
 	iniciaDicionario: function(){
 		if(typeof(i3GEOF.busca.dicionario) === 'undefined'){
 			i3GEO.util.scriptTag(
@@ -82,20 +82,20 @@ i3GEOF.busca = {
 		else{
 			i3GEOF.busca.iniciaJanelaFlutuante();
 		}
-	},	
+	},
 	/*
 	Function: inicia
-	
+
 	Inicia a ferramenta. &Eacute; chamado por criaJanelaFlutuante
-	
+
 	Parametro:
-	
+
 	iddiv {String} - id do div que receber&aacute; o conteudo HTML da ferramenta
 	*/
 	inicia: function(iddiv){
 		i3GEO.janela.comboCabecalhoTemas("i3GEOFbuscaComboCabeca","i3GEOFbuscaComboCabecaSel","busca","ligadosComTabela");
 		if(i3GEO.temaAtivo === ""){
-			$i(iddiv).innerHTML = '<img src="../imagens/opcoes.gif" ><p style="position: relative; top: -35px; width: 180px; font-size: 15px; text-align: left; left: 35px;">Escolha um tema da lista</p>';
+			$i(iddiv).innerHTML = '<p style="position: relative; top: 0px; font-size: 15px; text-align: left;">'+$trad("x33")+'</p>';
 			return;
 		}
 		try{
@@ -105,17 +105,17 @@ i3GEOF.busca = {
 				"i3GEObuscabotao1",
 				{onclick:{fn: i3GEOF.busca.procurar}}
 			);
-		i3GEO.janela.comboCabecalhoTemas("i3GEOFbuscaComboCabeca","i3GEOFbuscaComboCabecaSel","busca","ligadosComTabela");		
+		i3GEO.janela.comboCabecalhoTemas("i3GEOFbuscaComboCabeca","i3GEOFbuscaComboCabecaSel","busca","ligadosComTabela");
 		}
 		catch(erro){alert(erro);}
 	},
 	/*
 	Function: html
-	
+
 	Gera o c&oacute;digo html para apresenta&ccedil;&atilde;o das op&ccedil;&otilde;es da ferramenta
-	
+
 	Retorno:
-	
+
 	String com o c&oacute;digo html
 	*/
 	html:function(){
@@ -148,9 +148,9 @@ i3GEOF.busca = {
 	},
 	/*
 	Function: iniciaJanelaFlutuante
-	
+
 	Cria a janela flutuante para controle da ferramenta.
-	*/	
+	*/
 	iniciaJanelaFlutuante: function(){
 		var minimiza,cabecalho,janela,divid,temp,titulo;
 		if($i("i3GEOF.busca")){
@@ -186,13 +186,13 @@ i3GEOF.busca = {
 		i3GEOF.busca.inicia(divid);
 		temp = function(){
 			if(i3GEO.eventos.ATUALIZAARVORECAMADAS.toString().search('i3GEO.janela.comboCabecalhoTemas("i3GEOFbuscaComboCabeca","i3GEOFbuscaComboCabecaSel","busca","ligadosComTabela")') > 0)
-			{i3GEO.eventos.ATUALIZAARVORECAMADAS.remove('i3GEO.janela.comboCabecalhoTemas("i3GEOFbuscaComboCabeca","i3GEOFbuscaComboCabecaSel","busca","ligadosComTabela")');}			
+			{i3GEO.eventos.ATUALIZAARVORECAMADAS.remove('i3GEO.janela.comboCabecalhoTemas("i3GEOFbuscaComboCabeca","i3GEOFbuscaComboCabecaSel","busca","ligadosComTabela")');}
 		};
-		YAHOO.util.Event.addListener(janela[0].close, "click", temp);		
+		YAHOO.util.Event.addListener(janela[0].close, "click", temp);
 	},
 	/*
 	Function: ativaFoco
-	
+
 	Refaz a interface da ferramenta quando a janela flutuante tem seu foco ativado
 	*/
 	ativaFoco: function(){
@@ -204,9 +204,9 @@ i3GEOF.busca = {
 	},
 	/*
 	Function: montaListaItens
-	
+
 	Monta a lista de itens que poder&atilde;o ser escolhidos.
-	
+
 	A lista &eacute; inserida no elemento html com id "i3GEObuscalistai"
 	*/
 	montaListaItens: function(retorno){
@@ -224,15 +224,15 @@ i3GEOF.busca = {
 			$i("i3GEObuscalistai").innerHTML = ins;
 		}
 		catch(e)
-		{$i("i3GEObuscalistai").innerHTML = "<p style=color:red >Ocorreu um erro<br>"+e;}	
+		{$i("i3GEObuscalistai").innerHTML = "<p style=color:red >Ocorreu um erro<br>"+e;}
 	},
 	/*
 	Function: procurar
-	
+
 	Executa a opera&ccedil;&atilde;o de busca
-	
+
 	Veja:
-	
+
 	<LISTAVALORESITENS>
 	*/
 	procurar: function(){
@@ -272,11 +272,11 @@ i3GEOF.busca = {
 				cp.set_response_type("json");
 				cp.call(p,"listavaloresitens",i3GEOF.busca.mostraBusca);
 			}
-		}	
+		}
 	},
 	/*
 	Function: mostraBusca
-	
+
 	Monta uma nova janela com os resultados da busca.
 	*/
 	mostraBusca: function(retorno){
@@ -298,7 +298,7 @@ i3GEOF.busca = {
 			tema,
 			posicaoleft = parseInt($i("i3GEOF.busca_c").style.left,10)+(i3GEOF.busca.nbuscas*10),
 			posicaotop  = parseInt($i("i3GEOF.busca_c").style.top,10)+(i3GEOF.busca.nbuscas*10);
-		
+
 		i3GEOF.busca.nbuscas++;
 		i3GEO.janela.cria("200px","200px","",posicaoleft+290,posicaotop,palavra,idJanela);
 		if (retorno.data !== undefined)
@@ -310,7 +310,7 @@ i3GEOF.busca = {
 				for (linha=0;linha<nlinha; linha++){
 					valores = (linhas[linha].box).split(" ");
 					x = (valores[0] * 1) + ((((valores[0] * -1) - (valores[2] * -1)) / 2) * 1);
-					y = (valores[1] * 1) + ((((valores[1] * -1) - (valores[3] * -1)) / 2) * 1);			
+					y = (valores[1] * 1) + ((((valores[1] * -1) - (valores[3] * -1)) / 2) * 1);
 					ins.push("<table><tr><td onclick='i3GEO.navega.zoomExt(\"\",\"\",\"\",\""+linhas[linha].box+"\")' style='cursor:pointer;color:navy'>zoom&nbsp;</td><td onclick='i3GEO.navega.zoomponto(\"\",\"\","+x+","+y+")' style='color:navy;cursor:pointer;'>&nbsp;localiza</td></tr></table>");
 					for (i=0;i<linhas[linha].valores.length; i++){
 						er = new RegExp(palavra, "gi");
