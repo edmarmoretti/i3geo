@@ -7,22 +7,21 @@ $retorno = ""; //string que ser&aacute; retornada ao browser via JSON
 switch (strtoupper($funcao))
 {
 /*
-Valor: GRADEDEPONTOS
+Valor: GRAFICOSELECAO
 
-Gera uma grade de pontos com espa&ccedil;amento regular definido em d&eacute;cimos de grau.
+Pega os dados necessários para a geração dos gráficos da ferramenta seleção
 
-Salva o mapa acrescentando um novo layer com a grade de coordenadas.
-
-<Analise->gradeDePontos>
+<iniciaDadosGrafico>
 */
-	case "GRADEDEPONTOS":
-		include_once(__DIR__."/../../classesphp/classe_analise.php");
-		copiaSeguranca($map_file);
-		if(!isset($tema)){$tema = "";}
-		$m = new Analise($map_file,$tema);
-		$retorno = $m->gradeDePontos($xdd,$ydd,$px,$py,$locaplic,$nptx,$npty);
-		$m->salva();
-		$_SESSION["contadorsalva"]++;
+	case "GRAFICOSELECAO":
+		include(__DIR__."/../../classesphp/graficos.php");
+		if(!isset($exclui))
+		{$exclui = "";}
+		if(!isset($tipo))
+		{$tipo = "nenhum";}
+		if(!isset($ordenax))
+		{$ordenax = "nao";}
+		$retorno = iniciaDadosGrafico($map_file,$tema,$exclui,$itemclasses,$itemvalores,$tipo,false,$ext,true,$ordenax);
 	break;
 }
 if (!connection_aborted()){
