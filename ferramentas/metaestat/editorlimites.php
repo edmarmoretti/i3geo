@@ -32,7 +32,7 @@
  */
 
 //TODO incluir verificacao de login
-
+error_reporting(0);
 include_once(__DIR__."/../../ms_configura.php");
 ?>
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">

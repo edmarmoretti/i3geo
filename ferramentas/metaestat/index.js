@@ -58,6 +58,7 @@ i3GEOF.metaestat = {
 	},
 	analise: {
 		inicia: function(iddiv){
+			var ics,n,i;
 			if(!iddiv || !$i(iddiv)){
 				iddiv = "i3geoCartoAnalise_corpo";
 			}
@@ -65,6 +66,19 @@ i3GEOF.metaestat = {
 				i3GEOF.metaestat.analise.abreJanela();
 			}
 			$i(iddiv).innerHTML = i3GEOF.metaestat.analise.html();
+			ics = $i(iddiv).getElementsByTagName("button");
+			n = ics.length;
+			for(i=0;i<n;i++){
+				ics[i].style.backgroundColor = "white";
+				ics[i].className = "iconeGuiaMovel";
+				ics[i].onmouseout = function(){this.className = "iconeGuiaMovel iconeGuiaMovelMouseOut";};
+				ics[i].onmouseover = function(){this.className = "iconeGuiaMovel iconeGuiaMovelMouseOver";};
+				ics[i].style.backgroundImage = "none";
+				ics[i].style.height = "32px";
+				ics[i].style.width = "32px";
+				ics[i].style.border = "1px solid gray";
+				ics[i].style.margin = "0px";
+			}
 		},
 		abreJanela: function(){
 			var cabecalho,minimiza,imagemxy,janela;
@@ -75,8 +89,8 @@ i3GEOF.metaestat = {
 					i3GEO.janela.minimiza("i3geoCartoAnalise");
 				};
 				janela = i3GEO.janela.cria(
-						i3GEOF.metaestat.LARGURA+"px",
-						i3GEOF.metaestat.ALTURA+"px",
+						"200px",
+						"100px",
 						"",
 						"",
 						"",
@@ -100,8 +114,20 @@ i3GEOF.metaestat = {
 		},
 		html: function(){
 			var ins = '<div id="i3geoCartoAnaliseContainer" style="margin-left:5px;">' +
+			'	<button title="Localizar regi&atilde;o" onclick="i3GEO.mapa.dialogo.locregiao()"><img src="'+i3GEO.configura.locaplic+'/imagens/gisicons/open-street-maps.png" /></button>' +
+			'	<button title="Filtrar regi&atilde;o" onclick="i3GEO.mapa.dialogo.filtraregiao()"><img src="'+i3GEO.configura.locaplic+'/imagens/gisicons/open-street-maps-filtro.png" /></button>' +
+			'	<button title="Tabela com os dados" onclick="i3GEO.tema.dialogo.tabela()"><img src="'+i3GEO.configura.locaplic+'/imagens/gisicons/table.png" /></button>' +
 			'</div>';
 			return ins;
+		},
+		mudaicone: function(){
+			var c = $i(editoripam.iddiv),
+				ci = c.getElementsByTagName("img"),
+				n = ci.length,
+				i;
+			for(i=0;i<n;i++){
+				ci[i].parentNode.style.backgroundColor = "#F5F5F5";
+			}
 		}
 	},
 	classes:{
@@ -277,6 +303,7 @@ i3GEOF.metaestat = {
 					i3GEOF.metaestat.comum.desligaCamadas();
 					i3GEO.php.adtema(i3GEO.atualiza,retorno.mapfile);
 					i3GEOF.metaestat.CAMADAS.push(retorno.layer);
+					i3GEO.mapa.ativaTema(retorno.layer);
 				}
 			};
 			if(v != true){

@@ -37,6 +37,7 @@ O par&acirc;metro principal &eacute; "funcao", que define qual opera&ccedil;&ati
 
 Cada opera&ccedil;&atilde;o possu&iacute; seus próprios par&acirc;metros, que devem ser enviados tamb&eacute;m na requisi&ccedil;&atilde;o da opera&ccedil;&atilde;o.
 */
+error_reporting(0);
 include(__DIR__."/../../admin/php/admin.php");
 include(__DIR__."/../../admin/php/classe_metaestat.php");
 session_name("i3GeoPHP");

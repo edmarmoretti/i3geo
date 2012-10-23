@@ -1088,7 +1088,7 @@ Altera uma classe de um tema, aplicando uma nova classifica&ccedil;&atilde;o ou 
 		if ($opcao == "alteraclasses")
 		{
 			//esta opera&ccedil;&atilde;o &eacute; chamada com POST via cpaint
-			error_reporting(E_ALL);
+			//error_reporting(E_ALL);
 			alteraclassesPost($ids,$nomes,$exps);
 			restauraCon($map_file,$postgis_mapa);
 			cpjson("");

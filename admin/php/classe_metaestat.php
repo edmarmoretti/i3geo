@@ -259,7 +259,17 @@ class Metaestat{
 		else{
 			$sql = " SELECT d.* ";
 		}
-		$sqlgeo = $sql.",g.".$colunageo;
+		//prepara a lista de colunas que ficarao visiveis no sql geo
+		$vis = $dadosgeo["colunasvisiveis"];
+		$vis = str_replace(" ",",",$vis);
+		$vis = str_replace(",,",",",$vis);
+		$vis = explode(",",$vis);
+		$vis[] = $colunageo;
+		$vis = array_unique($vis);
+		$vis = implode(",g.",$vis);
+		$vis = "g.".$vis;
+		//$sqlgeo = $sql.",g.".$colunageo;
+		$sqlgeo = $sql.",".$vis;
 		//
 		if($agregaregiao == true){
 			$dadosAgregacao = $this->listaAgregaRegiaoFilho($dados["codigo_tipo_regiao"], $codigo_tipo_regiao);
@@ -810,14 +820,14 @@ class Metaestat{
 
 	Altera uma regiao
 	*/
-	function alteraTipoRegiao($codigo_tipo_regiao,$nome_tipo_regiao,$descricao_tipo_regiao,$esquemadb,$tabela,$colunageo,$colunacentroide,$data,$identificador,$colunanomeregiao,$srid,$codigo_estat_conexao){
+	function alteraTipoRegiao($codigo_tipo_regiao,$nome_tipo_regiao,$descricao_tipo_regiao,$esquemadb,$tabela,$colunageo,$colunacentroide,$data,$identificador,$colunanomeregiao,$srid,$codigo_estat_conexao,$colunasvisiveis){
 		try	{
 			if($codigo_tipo_regiao != ""){
 				if($this->convUTF){
 					$nome_tipo_regiao = utf8_encode($nome_tipo_regiao);
 					$descricao_tipo_regiao = utf8_encode($descricao_tipo_regiao);
 				}
-				$this->dbhw->query("UPDATE ".$this->esquemaadmin."i3geoestat_tipo_regiao SET codigo_estat_conexao = '$codigo_estat_conexao', colunacentroide = '$colunacentroide',nome_tipo_regiao = '$nome_tipo_regiao',descricao_tipo_regiao = '$descricao_tipo_regiao',esquemadb = '$esquemadb',tabela = '$tabela',colunageo = '$colunageo',data = '$data',identificador = '$identificador',colunanomeregiao = '$colunanomeregiao', srid = '$srid' WHERE codigo_tipo_regiao = $codigo_tipo_regiao");
+				$this->dbhw->query("UPDATE ".$this->esquemaadmin."i3geoestat_tipo_regiao SET codigo_estat_conexao = '$codigo_estat_conexao', colunacentroide = '$colunacentroide',nome_tipo_regiao = '$nome_tipo_regiao',descricao_tipo_regiao = '$descricao_tipo_regiao',esquemadb = '$esquemadb',tabela = '$tabela',colunageo = '$colunageo',data = '$data',identificador = '$identificador',colunanomeregiao = '$colunanomeregiao', srid = '$srid', colunasvisiveis = '$colunasvisiveis' WHERE codigo_tipo_regiao = $codigo_tipo_regiao");
 				$retorna = $codigo_tipo_regiao;
 			}
 			else{

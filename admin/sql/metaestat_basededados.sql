@@ -11,9 +11,9 @@ INSERT INTO i3geoestat_tipo_periodo (codigo_tipo_periodo, nome, descricao) VALUE
 
 
 -- i3geoestat_tipo_regiao
-INSERT INTO i3geoestat_tipo_regiao (codigo_tipo_regiao, nome_tipo_regiao, descricao_tipo_regiao, codigo_estat_conexao, esquemadb, tabela, colunageo, data, identificador, colunanomeregiao, srid, colunacentroide) VALUES ('2', 'Município', 'Limites municipais', '1', 'i3geo_metaestat', 'municipios', 'the_geom', '2010', 'co_municipio', 'no_cidade', '4326', 'the_geom2');
-INSERT INTO i3geoestat_tipo_regiao (codigo_tipo_regiao, nome_tipo_regiao, descricao_tipo_regiao, codigo_estat_conexao, esquemadb, tabela, colunageo, data, identificador, colunanomeregiao, srid, colunacentroide) VALUES ('3', 'Estado', 'Limites estaduais', '1', 'i3geo_metaestat', 'uf', 'the_geom', '2010', 'co_uf', 'no_uf', '4326', 'the_geom');
-INSERT INTO i3geoestat_tipo_regiao (codigo_tipo_regiao, nome_tipo_regiao, descricao_tipo_regiao, codigo_estat_conexao, esquemadb, tabela, colunageo, data, identificador, colunanomeregiao, srid, colunacentroide) VALUES ('1', 'Bairro', 'Limites de bairros', '1', 'i3geo_metaestat', 'bairros', 'the_geom', '2010', 'co_bairro', 'no_bairro', '4326', 'the_geom');
+INSERT INTO i3geoestat_tipo_regiao (codigo_tipo_regiao, nome_tipo_regiao, descricao_tipo_regiao, codigo_estat_conexao, esquemadb, tabela, colunageo, data, identificador, colunanomeregiao, srid, colunacentroide, colunasvisiveis) VALUES ('2', 'Município', 'Limites municipais', '1', 'i3geo_metaestat', 'municipios', 'the_geom', '2010', 'co_municipio', 'no_cidade', '4326', 'the_geom2', 'co_municipio,no_cidade,co_uf,area_territorial,nu_ano_instalacao');
+INSERT INTO i3geoestat_tipo_regiao (codigo_tipo_regiao, nome_tipo_regiao, descricao_tipo_regiao, codigo_estat_conexao, esquemadb, tabela, colunageo, data, identificador, colunanomeregiao, srid, colunacentroide, colunasvisiveis) VALUES ('3', 'Estado', 'Limites estaduais', '1', 'i3geo_metaestat', 'uf', 'the_geom', '2010', 'co_uf', 'no_uf', '4326', 'the_geom', 'co_uf,sg_uf,no_uf,no_regiao');
+INSERT INTO i3geoestat_tipo_regiao (codigo_tipo_regiao, nome_tipo_regiao, descricao_tipo_regiao, codigo_estat_conexao, esquemadb, tabela, colunageo, data, identificador, colunanomeregiao, srid, colunacentroide, colunasvisiveis) VALUES ('1', 'Bairro', 'Limites de bairros', '1', 'i3geo_metaestat', 'bairros', 'the_geom', '2010', 'co_bairro', 'no_bairro', '4326', 'the_geom', 'co_bairro,no_bairro,no_distr,no_municip');
 
 
 -- i3geoestat_unidade_medida
