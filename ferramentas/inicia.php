@@ -44,6 +44,8 @@ if(isset($fingerprint))	{
 	}
 }
 include_once(__DIR__."/../ms_configura.php");
+include_once(__DIR__."/../classesphp/classe_vermultilayer.php");
+include_once(__DIR__."/../classesphp/classe_estatistica.php");
 //
 //substitui a string de conex&atilde;o
 //

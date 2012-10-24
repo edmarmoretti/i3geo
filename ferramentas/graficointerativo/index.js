@@ -525,6 +525,7 @@ i3GEOF.graficointerativo = {
 			i3GEOF.graficointerativo.aguarde.visibility = "hidden";
 			i3GEOF.graficointerativo.montaTabelaDados(retorno);
 			$i("i3GEOgraficointerativoguia4").onclick.call();
+			i3GEO.janela.tempoMsg("Os dados utilizados referem-se apenas &agrave; regi&atilde;o atual mostrada no mapa");
 		};
 		i3GEOF.graficointerativo.aguarde.visibility = "visible";
 		cp.set_response_type("JSON");

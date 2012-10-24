@@ -337,6 +337,7 @@ i3GEO.janela = {
 		}
 		janela.cfg.setProperty("zIndex",[10000]);
 		janela.render();
+		janela.bringToTop();
 		//ajusta estilos e outras caracter&iacute;sticas da janela criada
 		if(navm && id !== "i3geo_janelaMensagens" && i3GEO.Interface.ATUAL === "googleearth")
 		{janela.moveTo(0,0);}
@@ -856,8 +857,10 @@ i3GEO.janela = {
 	ferramenta {string} - nome da ferramenta (namespace da classe, por exemplo "tabela" para a classe i3GEOF.tabela
 
 	tipo {string} - tipo de combo
+
+	funcaoOnChange {function} - funcao que sera executada no evento onchange do combo a ser criado
 	*/
-	comboCabecalhoTemas: function(idDiv,idCombo,ferramenta,tipo){
+	comboCabecalhoTemas: function(idDiv,idCombo,ferramenta,tipo,funcaoOnChange){
 		var temp = $i(idDiv);
 		if(temp){
 			temp.innerHTML = "";
@@ -879,21 +882,28 @@ i3GEO.janela = {
 					c.style.color = "#686868";
 					if(i3GEO.temaAtivo !== "")
 					{c.value = i3GEO.temaAtivo;}
-					if(i3GEOF[ferramenta].tema)
+					if(i3GEOF[ferramenta] && i3GEOF[ferramenta].tema)
 					{c.value = i3GEOF[ferramenta].tema;}
-					if(c.value === ""){
+					if(c.value === "" && i3GEOF[ferramenta]){
 						i3GEOF[ferramenta].tema = "";
 						$i("i3GEOF."+ferramenta+"_corpo").innerHTML = "";
 					}
-					c.onchange = function(){
-						var valor = $i(idCombo).value;
-						if(valor !== ""){
-							i3GEO.mapa.ativaTema(valor);
-							i3GEOF[ferramenta].tema = valor;
-							$i("i3GEOF."+ferramenta+"_corpo").innerHTML = "";
-							eval("i3GEOF."+ferramenta+".inicia('i3GEOF."+ferramenta+"_corpo');");
-						}
-					};
+					if(funcaoOnChange && funcaoOnChange != ""){
+						c.onchange = funcaoOnChange;
+					}
+					else{
+						c.onchange = function(){
+							var valor = $i(idCombo).value;
+							if(valor !== ""){
+								i3GEO.mapa.ativaTema(valor);
+								if(i3GEOF[ferramenta]){
+									i3GEOF[ferramenta].tema = valor;
+									$i("i3GEOF."+ferramenta+"_corpo").innerHTML = "";
+									eval("i3GEOF."+ferramenta+".inicia('i3GEOF."+ferramenta+"_corpo');");
+								}
+							}
+						};
+					}
 				},
 				temp.id,
 				"",

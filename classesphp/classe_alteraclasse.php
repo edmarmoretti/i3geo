@@ -40,69 +40,66 @@ class Alteraclasse
 {
 	/*
 	Variavel: $mapa
-	
+
 	Objeto mapa
 	*/
 	public $mapa;
 	/*
 	Variavel: $arquivo
-	
+
 	Arquivo map file
 	*/
 	protected $arquivo;
 	/*
 	Variavel: $layer
-	
+
 	Objeto layer
 	*/
 	protected $layer;
 	/*
 	Variavel: $nome
-	
+
 	Nome do layer
 	*/
 	protected $nome;
 /*
 Function: __construct
 
-Cria um objeto Alteraclasse 
+Cria um objeto Alteraclasse
 
 Parametros:
 
 $map_file - Endere&ccedil;o do mapfile no servidor.
 
 $tema - nome do tema
-*/ 
+*/
 	function __construct($map_file,$tema="",$locaplic="",$ext="")
 	{
-  		//error_reporting(E_ALL);
-  		if (file_exists($locaplic."/funcoes_gerais.php"))
-  		include_once($locaplic."/funcoes_gerais.php");
-  		else
-  		include_once("funcoes_gerais.php");
-  		$this->locaplic = $locaplic;
-  		$this->mapa = ms_newMapObj($map_file);
-  		$this->arquivo = $map_file;
-  		$this->layer = "";
-  		if($tema != "" && @$this->mapa->getlayerbyname($tema))
- 		$this->layer = $this->mapa->getlayerbyname($tema);
-  		$this->nome = $tema;
+		//error_reporting(E_ALL);
+		include_once(__DIR__."/funcoes_gerais.php");
+		$this->locaplic = $locaplic;
+		$this->mapa = ms_newMapObj($map_file);
+		$this->arquivo = $map_file;
+		$this->layer = "";
+		if($tema != "" && @$this->mapa->getlayerbyname($tema))
+		$this->layer = $this->mapa->getlayerbyname($tema);
+		$this->nome = $tema;
 		if($ext && $ext != ""){
 			$e = explode(" ",$ext);
 			$extatual = $this->mapa->extent;
 			$extatual->setextent((min($e[0],$e[2])),(min($e[1],$e[3])),(max($e[0],$e[2])),(max($e[1],$e[3])));
-		}		
+		}
 	}
 /*
 function: salva
 
 Salva o mapfile atual
- 
-*/	
+
+*/
  	function salva()
  	{
-	  	if (connection_aborted()){exit();}
-	  	$this->mapa->save($this->arquivo);
+		if (connection_aborted()){exit();}
+		$this->mapa->save($this->arquivo);
 	}
 /*
 Function: aplicacoresrgb
@@ -112,7 +109,7 @@ Aplica cores nas classes atuais conforme uma lista de cores em RGB
 Parametro:
 
 cores {array} - array com a lista de valores RGB
-*/	
+*/
 	function aplicacoresrgb($cores)
 	{
 		if(!$this->layer){return "erro";}
@@ -132,7 +129,7 @@ cores {array} - array com a lista de valores RGB
 			}
 		}
 		$this->layer->setMetaData("cache","");
-		return("ok");	
+		return("ok");
 	}
 /*
 function: simbolounico
@@ -222,7 +219,7 @@ $exps - lista com as novas express&otilde;es
 				$e = str_replace("##","'",$e);
 				$classe->setexpression($e);
 			}
-		}		
+		}
 	}
 /*
 function: intervalosiguais
@@ -262,7 +259,7 @@ $ignorar - valor que ser&aacute; ignorado na listagem final
 			{
 				if ($i == $nclasses - 1)
 				{$expressao = "(([".$item."]>=".$intatual.")and([".$item."]<=".($intatual+$intervalo)."))";}
-				else 
+				else
 				{$expressao = "(([".$item."]>=".$intatual.")and([".$item."]<".($intatual+$intervalo)."))";}
 				$nomeclasse = ">= ".$intatual." e < que ".($intatual+$intervalo);
 				$intatual = $intatual + $intervalo;
@@ -332,7 +329,7 @@ Include:
 			$nomes[] = "> ".($calc["quartil1"])." e <= ".($calc["quartil2"]);
 			$nomes[] = "> ".($calc["quartil2"])." e <= ".($calc["quartil3"]);
 			$nomes[] = "> ".($calc["quartil3"]);
-			
+
 			$vcor = array(250,230,150,0);
 			for ($i=0;$i < 4;++$i)
 			{
@@ -350,7 +347,7 @@ Include:
 				{$nomeClasse = "Quartil ".($i+1)." ".$nomes[$i];}
 				if($tipoLegenda == "minimo" || $tipoLegenda == "")
 				{$nomeClasse = $nomes[$i];}
-				
+
 				$classe->set("name",$nomeClasse);
 				$ncor = $novoestilo->color;
 				$ncor->setrgb(255,$vcor[$i],$vcor[$i]);
@@ -402,7 +399,7 @@ $itemNome - item que ser&aacute; usado para definir os nomes das classes (por de
 		{
 			$temp = ms_newClassObj($this->layer);
 			ms_newStyleObj($temp);
-		}	
+		}
 		// cria classes
 		$classes = array();
 		$classpadrao = $this->layer->getClass(0);
@@ -483,7 +480,7 @@ $idclasse {numerico} - id da classe (&iacute;ndice)
 		if(!$this->layer){return "erro";}
 		$this->layer->moveclassdown($idclasse);
 		return("ok");
-	}	
+	}
 /*
 function: adicionaopacidade
 
@@ -538,7 +535,7 @@ $cor {string} - cor rgb
 		}
 		$this->layer->setMetaData("cache","");
 		return("ok");
-	}	
+	}
 /*
 function: alterageometria
 
@@ -562,11 +559,11 @@ $tipo {string} - tipo de representa&ccedil;&atilde;o
 				$estilo = $classe->getstyle($j);
 				$s = "STYLE geomtransform '$tipo' END";
 				$estilo->updateFromString($s);
-			}			
+			}
 		}
 		$this->layer->setMetaData("cache","");
 		return("ok");
-	}	
+	}
 /*
 function: alteraCoresClasses
 
@@ -584,7 +581,7 @@ Include:
 	function alteraCoresClasses($cori,$corf)
 	{
 		if(!$this->layer){return "erro";}
-		if(file_exists($this->locaplic."/class.palette.php"))		
+		if(file_exists($this->locaplic."/class.palette.php"))
 		include_once($this->locaplic."/class.palette.php");
 		else
 		include_once("class.palette.php");
@@ -694,7 +691,7 @@ $classe - id da classe
 			if($this->layer->type == 3){
 				$e = $cl->getstyle(0);
 				$e->set("opacity",0);
-			}			
+			}
 		}
 		$this->layer->setMetaData("cache","");
 		return("ok");

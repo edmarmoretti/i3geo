@@ -445,8 +445,10 @@ i3GEOF.tabela = {
 			p,
 			dadosDaClasse = "nao",
 			cp = new cpaint();
-		if ($i("i3GEOtabelatiporeg").checked)
-		{tiporeg = "mapa";}
+		if ($i("i3GEOtabelatiporeg").checked){
+			tiporeg = "mapa";
+			i3GEO.janela.tempoMsg("Os dados utilizados referem-se apenas &agrave; regi&atilde;o atual mostrada no mapa");
+		}
 		if ($i("i3GEOtabelatipolista").checked)
 		{tipolista = "selecionados";}
 		if ($i("i3GEOtabelalegenda").checked)

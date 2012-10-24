@@ -118,10 +118,7 @@ $template - nome do template para processar a legenda
 	function __construct($map_file="",$locaplic="",$tema="",$template="")
 	{
   		//error_reporting(E_ALL);
-  		if(file_exists($locaplic."/funcoes_gerais.php"))
-  		include_once($locaplic."/funcoes_gerais.php");
-  		else
-  		include_once("funcoes_gerais.php");
+  		include_once(__DIR__."/funcoes_gerais.php");
 		$this->v = versao();
 		$this->v = $this->v["principal"];
 		$this->localaplicacao = $locaplic;

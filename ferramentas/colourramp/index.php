@@ -103,18 +103,20 @@ p .boom {
 </style>
 <title></title>
 </head>
-<body class=" yui-skin-sam" style="margin:10px;width:260px;" >
-<p class=paragrafo style="position:relative;left:6px;width:280px;" >Clique para escolher o modelo de cores. Voc&ecirc; pode tamb&eacute;m definir os limites iniciais e finais para a gera&ccedil;&atilde;o das cores e alterar os valores obtidos editando o RGB</p>
+<body class=" yui-skin-sam" style="margin:10px;width:95%;" >
+<p class=paragrafo style="position:relative;left:6px;width:100%;" >Clique para escolher o modelo de cores. Voc&ecirc; pode tamb&eacute;m definir os limites iniciais e finais para a gera&ccedil;&atilde;o das cores e alterar os valores obtidos editando o RGB</p>
 <div id="imagens" ></div>
 <div id="demo_bg" title="Range slider">
     <span id="demo_highlight"></span>
     <div id="demo_min_thumb"><img src="<?php echo $locaplic;?>/pacotes/yui290/build/slider/assets/l-thumb-round.gif"></div>
     <div id="demo_max_thumb"><img src="<?php echo $locaplic;?>/pacotes/yui290/build/slider/assets/r-thumb-round.gif"></div>
 </div>
-<p><span id="demo_range">0-255</span></p>
+<p><span id="demo_range" style="text-align:center;width:280px">0-255</span></p>
 <div id=cores ></div>
-<p class=paragrafo style="position:relative;left:6px;top:5px;" >Quantas cores? <input id=ncores type=text size=3 value=<?php echo $ncores; ?> /></p>
-<p class=paragrafo style="position:relative;left:4px;"><input id=voltar size="22" type="button" value="Voltar e aplicar as cores">
+<p style="position:relative;left:6px;top:5px;text-align:left;" >
+<input id=voltar size="22" type="button" value="Aplicar as cores">&nbsp;
+Quantas cores? <input id=ncores type=text size=3 value=<?php echo $ncores; ?> />
+
 
 <script>
 new YAHOO.widget.Button(

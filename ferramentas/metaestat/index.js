@@ -122,7 +122,10 @@ i3GEOF.metaestat = {
 			'	<button title="Gr&aacute;fico interativo" onclick="i3GEO.analise.dialogo.graficoInterativo()"><img src="'+i3GEO.configura.locaplic+'/imagens/oxygen/22x22/view_statistics.png" /></button>' +
 			'	<button title="Opacidade" onclick="i3GEO.mapa.dialogo.opacidade()"><img src="'+i3GEO.configura.locaplic+'/imagens/gisicons/layer-opacity.png" /></button>' +
 			'	<button title="Anima&ccedil;&atilde;o" onclick="i3GEOF.metaestat.analise.ativaAnimacao()"><img src="'+i3GEO.configura.locaplic+'/imagens/gisicons/player-forward.png" /></button>' +
-			'</div>';
+			'	<button title="Alterar legenda" onclick="i3GEOF.metaestat.analise.alteraLegenda()"><img src="'+i3GEO.configura.locaplic+'/imagens/gisicons/calculator.png" /></button>' +
+			'	<button title="Alterar cores" onclick="i3GEOF.metaestat.analise.alteraCores()"><img src="'+i3GEO.configura.locaplic+'/imagens/gisicons/24-to-8-bits.png" /></button>' +
+			'</div>' +
+			'<input type=hidden  value="" id="listaColourRampAnaliseMetaestat" onchange="i3GEOF.metaestat.analise.aplicaColourRamp()" />'; //utilizado pelo seletor de colourramp
 			return ins;
 		},
 		ativaAnimacao: function(){
@@ -144,6 +147,42 @@ i3GEOF.metaestat = {
 				i3GEOF.animacao.listaDeCamadas(camadas);
 			};
 			i3GEO.php.listaCamadasMetaestat(temp);
+		},
+		ativaGuiaLegenda: function(){
+			if(i3GEO.temaAtivo == ""){
+				i3GEO.janela.tempoMsg("Nenhum tema est&aacute; ativo. Escolha um e depois clique na guia <b>Classes</b>");
+			}
+			i3GEOF.legenda.iniciaJanelaFlutuante();
+			i3GEO.guias.mostraGuiaFerramenta('i3GEOlegendaguia2','i3GEOlegendaguia');
+		},
+		alteraLegenda: function(){
+			i3GEO.util.dialogoFerramenta("i3GEO.tema.dialogo.editaLegenda()","legenda","legenda","index.js","i3GEOF.metaestat.analise.ativaGuiaLegenda()");
+		},
+		alteraCores: function(){
+			//listaColourRampAnaliseMetaestat e o id do elemento input que recebera a lista de cores
+			i3GEO.util.abreColourRamp("","listaColourRampAnaliseMetaestat",10);
+		},
+		//disparado no evento onchange do input que guarda o numero de cores
+		aplicaColourRamp: function(){
+			var i = $i("listaColourRampAnaliseMetaestat");
+			if(i.value != ""){
+				var p,temp,cores = i.value;
+				temp = function(){
+					i3GEO.janela.AGUARDEMODAL = false;
+					i3GEO.janela.fechaAguarde("aguardeAplicaCores");
+					i3GEO.atualiza();
+					i3GEO.Interface.atualizaTema("",i3GEO.temaAtivo);
+					i3GEO.arvoreDeCamadas.atualizaLegenda(i3GEO.temaAtivo);
+				};
+				p = i3GEO.configura.locaplic+"/classesphp/mapa_controle.php?g_sid="+i3GEO.configura.sid +
+					"&funcao=alteraclasse&opcao=aplicacoresrgb&ext=" +
+					i3GEO.parametros.mapexten +
+					"&tema="+i3GEO.temaAtivo +
+					"&cores=" + cores;
+				i3GEO.janela.AGUARDEMODAL = true;
+				i3GEO.janela.fechaAguarde("Aplicando...","aguardeAplicaCores");
+				i3GEO.util.ajaxGet(p,temp);
+			}
 		}
 	},
 	classes:{

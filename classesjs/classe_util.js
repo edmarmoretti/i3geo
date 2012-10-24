@@ -1508,7 +1508,7 @@ i3GEO.util = {
 	comboTemas: function(id,funcao,onde,nome,multiplo,tipoCombo,estilo){
 		if(typeof(console) !== 'undefined'){console.info("i3GEO.util.comboTemas()");}
 		if(!estilo){
-			estilo = "font-size:12px;"
+			estilo = "font-size:12px;";
 		}
 		if (arguments.length > 2)
 		{i3GEO.util.defineValor(onde,"innerHTML","<span style=color:red;font-size:10px; >buscando temas...</span>");}
@@ -2200,18 +2200,15 @@ i3GEO.util = {
 
 	Parametros:
 
-	janelaid {String} - id do conteudo da janela flutuante que chamou a funcao. Pode ser "" caso elemento exista em document
+	janelaid {String} - id do conteudo da janela flutuante que chamou a funcao. Pode ser "" caso o 'elemento' exista em window.document
 
-	elemento {String} - id do elemento que recebera os valores da cor selecionada
+	elemento {String} - id do elemento HTML (um input por exemplo) que recebera os valores da cor selecionada. O evento 'onchange' desse elemento sera acionado quando o botao aplicar for clicado
 
 	ncores {numerico} - numero de cores default ao abrir  o seletor de cores
 	*/
 	abreColourRamp: function(janelaid,elemento,ncores){
 		if(typeof(console) !== 'undefined'){console.info("i3GEO.util.abreColourRamp()");}
-		var janela,
-			ins,
-			novoel,
-			wdocaiframe,
+		var janela,	ins,novoel,wdocaiframe,temp,
 			fix = false,
 			wsrc = i3GEO.configura.locaplic+"/ferramentas/colourramp/index.php?ncores="+ncores+"&doc="+janelaid+"&elemento="+elemento+"&locaplic="+i3GEO.configura.locaplic, //+janela+"&elemento="+elemento+"&tipo="+tipo,
 			nx = "",
@@ -2226,7 +2223,7 @@ i3GEO.util = {
 		}
 		ins = '<div id="'+id+'_cabecalho" class="hd">';
 		ins += "<span><img id='i3geo_janelaCorRamp_imagemCabecalho' style='visibility:hidden;' src=\'"+i3GEO.configura.locaplic+"/imagens/aguarde.gif\' /></span>";
-		ins += texto;
+		ins += "<div  id='i3geo_janelaCorRampComboCabeca' class='comboTemasCabecalho' style='top:0px;'>   ------</div>&nbsp;&nbsp;&nbsp;"+texto;
 		ins += '</div><div id="i3geo_janelaCorRamp_corpo" class="bd" style="padding:5px">';
 		ins += '<iframe name="'+id+'i" id="i3geo_janelaCorRampi" valign="top" ></iframe>';
 		ins += '</div>';
@@ -2241,15 +2238,30 @@ i3GEO.util = {
 		wdocaiframe = $i("i3geo_janelaCorRampi");
 		wdocaiframe.style.display = "block";
 		wdocaiframe.src = wsrc;
-		wdocaiframe.style.height = "430px";
-		wdocaiframe.style.width = "340px";
+		wdocaiframe.style.height = "390px";
+		wdocaiframe.style.width = "100%";
 		wdocaiframe.style.border = "0px solid white";
 
 		if(nx === "" || nx === "center"){fix = true;}
-		janela = new YAHOO.widget.ResizePanel(id, { height:"480px",modal:false, width: "380px", fixedcenter: fix, constraintoviewport: false, visible: true, iframe:false} );
+		janela = new YAHOO.widget.ResizePanel(id, { height:"450px",modal:false, width: "380px", fixedcenter: fix, constraintoviewport: false, visible: true, iframe:false} );
 		YAHOO.i3GEO.janela.manager.register(janela);
 		janela.render();
 		$i(id+'_cabecalho').className = classe;
+		temp = function(){
+			var p,
+				tema = $i("i3geo_janelaCorRampComboCabecaSel").value,
+				funcao = function(retorno){
+					parent.frames["i3geo_janelaCorRampi"].document.getElementById("ncores").value = retorno.data.length;
+				};
+			if(tema !== ""){
+				i3GEO.mapa.ativaTema(tema);
+				//pega o numero de classes nalegenda do tema escolhido
+				p = i3GEO.configura.locaplic+"/ferramentas/legenda/exec.php?g_sid="+i3GEO.configura.sid+"&funcao=editalegenda&opcao=edita&tema="+tema;
+				i3GEO.util.ajaxGet(p,funcao);
+				cp = new cpaint();
+			}
+		};
+		i3GEO.janela.comboCabecalhoTemas("i3geo_janelaCorRampComboCabeca","i3geo_janelaCorRampComboCabecaSel","none","ligados",temp);
 	},
 	/*
 	Function: localizai3GEO
