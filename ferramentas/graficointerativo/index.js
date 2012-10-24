@@ -284,7 +284,6 @@ i3GEOF.graficointerativo = {
 		'</div> ' +
 		'<div class=guiaobj id="i3GEOgraficointerativoguia2obj" style="left:1px;display:none;top:-5px">' +
 		'	<p class=paragrafo >Escolha os dados que compor&atilde;o o gr&aacute;fico: </p>' +
-		'	<div class=paragrafo id=i3GEOgraficointerativoAjudaPizza >Se vc escolher para X e Y o mesmo item, ser&aacute; considerada a frequ&ecirc;ncia das ocorr&ecirc;ncias para compor cada parte da pizza. Caso contr&aacute;rio, ser&aacute; feita a soma dos valores existentes em Y para cada ocorr&ecirc;ncia existente em X.</div>' +
 		'	<p class=paragrafo >Tema:</p>' +
 		'	<div class=paragrafo id=i3GEOgraficointerativoComboTemas ></div>' +
 		'	<div class=paragrafo id=i3GEOgraficointerativoComboXlinha >' +
@@ -300,6 +299,7 @@ i3GEOF.graficointerativo = {
 		'	<p class=paragrafo ><input type=checkbox style="cursor:pointer;top:3px;position:relative;" id=i3GEOgraficointerativoCoresA /> gera cores aleat&oacute;rias</p>' +
 		'	<p class=paragrafo ><input id=i3GEOgraficointerativobotao1 type="buttom" value="Obter dados" /></p>'+
 		'	<div id=i3GEOgraficointerativoDados ></div>'+
+		'	<div class=paragrafo id=i3GEOgraficointerativoAjudaPizza >Se vc escolher para X e Y o mesmo item, ser&aacute; considerada a frequ&ecirc;ncia das ocorr&ecirc;ncias para compor cada parte da pizza. Caso contr&aacute;rio, ser&aacute; feita a soma dos valores existentes em Y para cada ocorr&ecirc;ncia existente em X.</div>' +
 		'</div>' +
 		'<div class=guiaobj id="i3GEOgraficointerativoguia3obj" style="left:1px;display:none;top:-5px">' +
 		'	<p class=paragrafo ><input style=cursor:pointer type=checkbox id=i3GEOgraficointerativoAdLinhas checked /> Adiciona as linhas em gr&aacute;ficos de barras</p>' +
@@ -414,7 +414,8 @@ i3GEOF.graficointerativo = {
 			"i3GEOgraficointerativoComboTemas",
 			"",
 			false,
-			"ligados"
+			"ligados",
+			"font-size:12px;width:350px"
 		);
 	},
 	/*

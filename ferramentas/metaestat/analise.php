@@ -60,12 +60,24 @@ switch (strtoupper($funcao)){
 	case "APLICAFILTROREGIAO":
 		$retorno = analise_aplicafiltroregiao($map_file,$codigo_tipo_regiao,$codigo_regiao,$codigo_tipo_regiao_pai,$codigo_regiao_pai,$tipo);
 	break;
+	case "LISTACAMADASMETAESTAT":
+		$retorno = analise_listaCamadasMetaestat($map_file);
+	break;
 }
 if (!connection_aborted()){
 	cpjson($retorno);
 }
 else
 {exit();}
+function analise_listaCamadasMetaestat($map_file){
+	$mapa = ms_newMapObj($map_file);
+	$layers = analise_listaLayersMetaestat($mapa);
+	$camadas = array();
+	foreach($layers as $l){
+		$camadas[] = $l->name;
+	}
+	return $camadas;
+}
 //se $tipo for igual a "" remove os filtros
 function analise_aplicafiltroregiao($map_file,$codigo_tipo_regiao,$codigo_regiao,$codigo_tipo_regiao_pai,$codigo_regiao_pai,$tipo){
 	$mapa = ms_newMapObj($map_file);

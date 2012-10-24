@@ -115,22 +115,35 @@ i3GEOF.metaestat = {
 		},
 		//TODO traduzir
 		html: function(){
-			var ins = '<div id="i3geoCartoAnaliseContainer" style="margin-left:5px;">' +
+			var ins = '<div id="i3geoCartoAnaliseContainer" style="margin-left:5px;line-height:25px">' +
 			'	<button title="Localizar regi&atilde;o" onclick="i3GEO.mapa.dialogo.locregiao()"><img src="'+i3GEO.configura.locaplic+'/imagens/gisicons/open-street-maps.png" /></button>' +
 			'	<button title="Filtrar regi&atilde;o" onclick="i3GEO.mapa.dialogo.filtraregiao()"><img src="'+i3GEO.configura.locaplic+'/imagens/gisicons/open-street-maps-filtro.png" /></button>' +
 			'	<button title="Tabela com os dados" onclick="i3GEO.tema.dialogo.tabela()"><img src="'+i3GEO.configura.locaplic+'/imagens/gisicons/table.png" /></button>' +
 			'	<button title="Gr&aacute;fico interativo" onclick="i3GEO.analise.dialogo.graficoInterativo()"><img src="'+i3GEO.configura.locaplic+'/imagens/oxygen/22x22/view_statistics.png" /></button>' +
+			'	<button title="Opacidade" onclick="i3GEO.mapa.dialogo.opacidade()"><img src="'+i3GEO.configura.locaplic+'/imagens/gisicons/layer-opacity.png" /></button>' +
+			'	<button title="Anima&ccedil;&atilde;o" onclick="i3GEOF.metaestat.analise.ativaAnimacao()"><img src="'+i3GEO.configura.locaplic+'/imagens/gisicons/player-forward.png" /></button>' +
 			'</div>';
 			return ins;
 		},
-		mudaicone: function(){
-			var c = $i(editoripam.iddiv),
-				ci = c.getElementsByTagName("img"),
-				n = ci.length,
-				i;
-			for(i=0;i<n;i++){
-				ci[i].parentNode.style.backgroundColor = "#F5F5F5";
-			}
+		ativaAnimacao: function(){
+			i3GEO.util.dialogoFerramenta("i3GEO.mapa.dialogo.animacao()","animacao","animacao","index.js","i3GEOF.metaestat.analise.listaCamadasAnimacao()");
+		},
+		listaCamadasAnimacao: function(){
+			var temp = function(retorno){
+				var temas = retorno.data,
+					n = temas.length,
+					camadas = [],
+					i,t;
+				i3GEOF.animacao.iniciaJanelaFlutuante();
+				for(i=0;i<n;i++){
+					t = i3GEO.arvoreDeCamadas.pegaTema(temas[i]);
+					if(t != ""){
+						camadas.push(t);
+					}
+				}
+				i3GEOF.animacao.listaDeCamadas(camadas);
+			};
+			i3GEO.php.listaCamadasMetaestat(temp);
 		}
 	},
 	classes:{

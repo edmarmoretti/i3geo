@@ -1555,5 +1555,14 @@ i3GEO.php = {
 		var p = i3GEO.configura.locaplic+"/ferramentas/metaestat/analise.php?funcao=aplicaFiltroRegiao&codigo_tipo_regiao="+codigo_tipo_regiao+"&codigo_regiao="+codigo_regiao+"&g_sid="+i3GEO.configura.sid;
 		p += "&tipo="+tipo+"&codigo_tipo_regiao_pai="+codigo_tipo_regiao_pai+"&codigo_regiao_pai="+codigo_regiao_pai;
 		i3GEO.util.ajaxGet(p,funcao);
+	},
+	/*
+	Function: listaCamadasMetaestat
+
+	Lista as camadas existentes no mapa e que se referem ao sistema METAESTAT
+	*/
+	listaCamadasMetaestat: function(funcao){
+		var p = i3GEO.configura.locaplic+"/ferramentas/metaestat/analise.php?funcao=listaCamadasMetaestat&g_sid="+i3GEO.configura.sid;
+		i3GEO.util.ajaxGet(p,funcao);
 	}
 };

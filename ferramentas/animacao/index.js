@@ -87,6 +87,7 @@ i3GEOF.animacao = {
 	inicia: function(iddiv){
 		i3GEOF.animacao.aguarde.visibility = "visible";
 		$i(iddiv).innerHTML = i3GEOF.animacao.html();
+		i3GEOF.animacao.listaDeCamadas();
 		i3GEO.util.mensagemAjuda("i3GEOanimacaomen1",$i("i3GEOanimacaomen1").innerHTML);
 		i3GEOF.animacao.aguarde.visibility = "hidden";
 	},
@@ -103,7 +104,6 @@ i3GEOF.animacao = {
 		var camadas = i3GEO.arvoreDeCamadas.CAMADAS,
 			n = camadas.length,
 			ins = "";
-
 		ins += "" +
 			"<div style='text-align:center;position:relative;cursor:pointer'  >" +
 			"	<img title='inicia' src='"+i3GEO.configura.locaplic+"/imagens/player_inicia.png' onclick='i3GEOF.animacao.dispara()' />&nbsp;" +
@@ -111,17 +111,25 @@ i3GEOF.animacao = {
 			"	<img title='mais rapido' src='"+i3GEO.configura.locaplic+"/imagens/player_avanca.png' onclick='i3GEOF.animacao.maisrapido()' />&nbsp;" +
 			"	<img title='mais lento' src='"+i3GEO.configura.locaplic+"/imagens/player_volta.png' onclick='i3GEOF.animacao.maislento()' />&nbsp;" +
 			"</div>" +
-			"<table id='i3GEOFanimacaoLista' style='width:95%' class='lista8'>";
+			"<div id='i3GEOFanimacaoLista' ></div><br>" +
+			'<div id=i3GEOanimacaomen1 style="display:block;left:0px;">' +
+			'	<p class=paragrafo >Marque as camadas que ser&atilde;o inclu&iacute;das na anima&ccedil;&atilde;o e depois clique no bot&atilde;o "inicia"</p>' +
+			'</div>';
+		return ins;
+	},
+	listaDeCamadas: function(camadas){
+		if(!camadas){
+			camadas = i3GEO.arvoreDeCamadas.CAMADAS;
+		}
+		var n = camadas.length,
+			ins = "<table style='width:95%' class='lista8'>";
 		while(n > 0){
 			n -= 1;
 			if(camadas[n].tema !== "")
 			{ins += "<tr><td><input class=inputsb style='cursor:pointer' type=checkbox value='"+camadas[n].name+"' /></td><td><span style=background:white id='i3GEOanima"+camadas[n].name+"'>"+camadas[n].tema+"</span></td></tr>";}
 		}
-		ins += "</table><br>" +
-			'	<div id=i3GEOanimacaomen1 style="display:block;left:0px;">' +
-			'		<p class=paragrafo >Marque as camadas que ser&atilde;o inclu&iacute;das na anima&ccedil;&atilde;o e depois clique no bot&atilde;o "inicia"</p>' +
-			'	</div>';
-		return ins;
+		ins += "</table>";
+		$i("i3GEOFanimacaoLista").innerHTML = ins;
 	},
 	/*
 	Function: iniciaJanelaFlutuante

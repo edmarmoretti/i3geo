@@ -1502,9 +1502,14 @@ i3GEO.util = {
 	multiplo {Booleano} - indica se o combo permite selecoes multiplas
 
 	tipoCombo {String} - Tipo de temas que serao incluidos no combo ligados|selecionados|raster|pontosSelecionados|pontos|linhaDoTempo
+
+	estilo {string} - estilo (css) que sera aplicado ao combo
 	*/
-	comboTemas: function(id,funcao,onde,nome,multiplo,tipoCombo){
+	comboTemas: function(id,funcao,onde,nome,multiplo,tipoCombo,estilo){
 		if(typeof(console) !== 'undefined'){console.info("i3GEO.util.comboTemas()");}
+		if(!estilo){
+			estilo = "font-size:12px;"
+		}
 		if (arguments.length > 2)
 		{i3GEO.util.defineValor(onde,"innerHTML","<span style=color:red;font-size:10px; >buscando temas...</span>");}
 		if (arguments.length === 3)
@@ -1522,9 +1527,9 @@ i3GEO.util = {
 				if (n > 0)
 				{
 					if(multiplo)
-					{comboTemas = "<select style='font-size:12px;' id='"+id+"' size='4' multiple='multiple' name='"+nome+"'>";}
+					{comboTemas = "<select style='"+estilo+"' id='"+id+"' size='4' multiple='multiple' name='"+nome+"'>";}
 					else
-					{comboTemas = "<select style='font-size:12px;' id='"+id+"' name='"+nome+"'>";}
+					{comboTemas = "<select style='"+estilo+"' id='"+id+"' name='"+nome+"'>";}
 					comboTemas += "<option value=''>----</option>";
 					for (i=0;i<n;i++){
 						if(retorno[i].nome){
@@ -2112,11 +2117,15 @@ i3GEO.util = {
 		var js = i3GEO.configura.locaplic+"/ferramentas/"+dir+"/"+nomejs;
 		if(!$i("i3GEOF."+nome+"_script")){
 			i3GEO.janela.ESTILOAGUARDE = "reduzida";
+			i3GEO.janela.abreAguarde("i3GEOF."+nome+"_script"+"aguarde","Carregando JS");
+			i3GEO.util.scriptTag(js,nomefuncao,"i3GEOF."+nome+"_script");
+			/*
 			i3GEO.util.multiStep(
 				[i3GEO.janela.abreAguarde,i3GEO.util.scriptTag],
 				[["i3GEOF."+nome+"_script"+"aguarde","Carregando JS"],[js,nomefuncao,"i3GEOF."+nome+"_script"]],
 				function(){}
 			);
+			*/
 		}
 		else
 		{i3GEO.util.scriptTag(js,nomefuncao,"i3GEOF."+nome+"_script");}
