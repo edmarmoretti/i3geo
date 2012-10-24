@@ -78,6 +78,7 @@ i3GEOF.metaestat = {
 				ics[i].style.width = "32px";
 				ics[i].style.border = "1px solid gray";
 				ics[i].style.margin = "0px";
+				ics[i].style.position = "relative";
 			}
 		},
 		abreJanela: function(){
@@ -89,7 +90,7 @@ i3GEOF.metaestat = {
 					i3GEO.janela.minimiza("i3geoCartoAnalise");
 				};
 				janela = i3GEO.janela.cria(
-						"200px",
+						"210px",
 						"100px",
 						"",
 						"",
@@ -112,11 +113,13 @@ i3GEOF.metaestat = {
 			imagemxy = i3GEO.util.pegaPosicaoObjeto($i(i3GEO.Interface.IDCORPO));
 			janela.moveTo(imagemxy[0]+(i3GEOF.metaestat.LEFT*2)+i3GEOF.metaestat.LARGURA+10,i3GEOF.metaestat.TOP);
 		},
+		//TODO traduzir
 		html: function(){
 			var ins = '<div id="i3geoCartoAnaliseContainer" style="margin-left:5px;">' +
 			'	<button title="Localizar regi&atilde;o" onclick="i3GEO.mapa.dialogo.locregiao()"><img src="'+i3GEO.configura.locaplic+'/imagens/gisicons/open-street-maps.png" /></button>' +
 			'	<button title="Filtrar regi&atilde;o" onclick="i3GEO.mapa.dialogo.filtraregiao()"><img src="'+i3GEO.configura.locaplic+'/imagens/gisicons/open-street-maps-filtro.png" /></button>' +
 			'	<button title="Tabela com os dados" onclick="i3GEO.tema.dialogo.tabela()"><img src="'+i3GEO.configura.locaplic+'/imagens/gisicons/table.png" /></button>' +
+			'	<button title="Gr&aacute;fico interativo" onclick="i3GEO.analise.dialogo.graficoInterativo()"><img src="'+i3GEO.configura.locaplic+'/imagens/oxygen/22x22/view_statistics.png" /></button>' +
 			'</div>';
 			return ins;
 		},
