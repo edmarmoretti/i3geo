@@ -69,7 +69,7 @@ Parametros:
 base - arquivo mapfile que servir&aacute; de base para a cria&ccedil;&atilde;o do mapa.Por default, s&atilde;o utilizados os arquivos existentes em i3geo/aplicmap (geral1windows, geral1,...)
 	Essa vari&aacute;vel pode ser definida em ms_configura tamb&eacute;m. Se n&atilde;o estiver definida em nenhum lugar, o i3Geo tentar&aacute; descobrir o arquivo adequado a ser utilizado.
 
-temasa - lista, separada por espa&ccedil;os, com os nomes dos arquivos map que ser&atilde;o adicionados ao mapa. Se o arquivo map n&atilde;o estiver no diretório i3geo/temas, o nome deve incluir o caminho completo no servidor. O arquivo map pode conter mais de um layer pois todos os existentes ser&atilde;o adicionados ao mapa. Por default, todos os layers encontrados nos mapfiles s&atilde;o adicionados ao mapa com o status de desenho em OFF.
+temasa - lista, separada por espa&ccedil;os, com os nomes dos arquivos map ou gvsig que ser&atilde;o adicionados ao mapa. Se o arquivo n&atilde;o estiver no diretório i3geo/temas, o nome deve incluir o caminho completo no servidor. O arquivo pode conter mais de um layer pois todos os existentes ser&atilde;o adicionados ao mapa. Por default, todos os layers encontrados nos mapfiles s&atilde;o adicionados ao mapa com o status de desenho em OFF.
 
 layers - lista, separada por espa&ccedil;os, com os nomes dos layers que ser&atilde;o ligados. A lista deve conter os nomes dos layers e n&atilde;o os nomes dos mapfiles acrescentados ao mapa. Por exemplo, ao adicionar com "temasa" um mapfile chamado "transporte" que contenha os layers "estradas" e "ferrovias" os dois layers ser&atilde;o adicionados ao mapa. Para que esses dois layers fiquem vis&iacute;veis no mapa deve-se utilizar &layers=estradas ferrovias.
 
@@ -125,9 +125,9 @@ image_wms - tipo de imagem dispon&iacute;vel
 
 versao_wms - Vers&atilde;o do WMS (necess&aacute;rio quando da inclus&atilde;o de uma camada WMS diretamente pela URL)
 
-gvsiggvp - endere&ccedil;o no servidor do arquivo de projeto gvSig (gvp) que ser&aacute; utilizado para construir o mapa (experimental)
+gvsiggvp - (depreciado na versão 4.7) endere&ccedil;o no servidor do arquivo de projeto gvSig (gvp) que ser&aacute; utilizado para construir o mapa (experimental)
 
-gvsigview - nome da view do projeto gvSig. Se nao for especificado, sera considerada a primeira view existente no projeto. Exemplo (http://localhost/i3geo/ms_criamapa.php?gvsiggvp=c:\temp\teste.gvp&gvsigview=Untitled - 0)
+gvsigview - (depreciado na versão 4.7) nome da view do projeto gvSig. Se nao for especificado, sera considerada a primeira view existente no projeto. Exemplo (http://localhost/i3geo/ms_criamapa.php?gvsiggvp=c:\temp\teste.gvp&gvsigview=Untitled - 0)
 */
 
 //$_COOKIE = array();
@@ -579,9 +579,10 @@ function ligaTemas()
 }
 /*
 Inclui os temas definidos na vari&aacute;vel $temasa
+
+Os temas devem estar em i3geo/temas
 */
-function incluiTemasIniciais()
-{
+function incluiTemasIniciais(){
 	global $temasa,$mapn,$locaplic;
 	if (strtoupper(substr(PHP_OS, 0, 3)) == 'WIN')
 	{$temasdir = $locaplic."\\temas";}
@@ -591,36 +592,47 @@ function incluiTemasIniciais()
 	$temasa = str_replace(','," ",$temasa);
 	$alayers = explode(" ",$temasa);
 	$existeraster = false;
-	foreach ($alayers as $arqt)
-	{
+	foreach ($alayers as $arqt)	{
 		$arqtemp = "";
 		$arqt = trim($arqt);
 		if ($arqt == "")
 		{continue;}
-		if (file_exists($arqt))
-		{$arqtemp = $arqt;}
+		if (file_exists($arqt)){
+			$arqtemp = $arqt;
+		}
 		$extensao = ".map";
-		if ((strtoupper(substr(PHP_OS, 0, 3) == 'WIN')) && (file_exists($temasdir."\\".$arqt."php")))
-		{$extensao = ".php";}
-		elseif (file_exists($temasdir."/".$arqt.".php"))
-		{$extensao = ".php";}
-
-		if ((strtoupper(substr(PHP_OS, 0, 3) == 'WIN')) && (file_exists($locaplic."\\aplicmap\\".$arqt.$extensao)))
-		{$arqtemp = $locaplic."\\aplicmap\\".$arqt.$extensao;}
-		elseif (file_exists($locaplic."/aplicmap/".$arqt.$extensao))
-		{$arqtemp = $locaplic."/aplicmap/".$arqt.$extensao;}
-		if ((strtoupper(substr(PHP_OS, 0, 3) == 'WIN')) && (file_exists($temasdir."\\".$arqt.$extensao)))
-		{$arqtemp = $temasdir."\\".$arqt.$extensao;}
-		elseif (file_exists($temasdir."/".$arqt.$extensao))
-		{$arqtemp = $temasdir."/".$arqt.$extensao;}
-		if($arqtemp == "")
-		{echo "<br>Imposs&iacute;vel acessar tema $arqtemp";}
-		else
-		{
-			if ($extensao == ".map" && !@ms_newMapObj($arqtemp))
-			{echo "<br>Problemas com a camada $arqtemp<br>";}
-			else
-			{
+		if ((strtoupper(substr(PHP_OS, 0, 3) == 'WIN')) && (file_exists($temasdir."\\".$arqt."php"))){
+			$extensao = ".php";
+		}
+		elseif (file_exists($temasdir."/".$arqt.".php")){
+			$extensao = ".php";
+		}
+		if ((strtoupper(substr(PHP_OS, 0, 3) == 'WIN')) && (file_exists($temasdir."\\".$arqt."gvp"))){
+			$extensao = ".gvp";
+		}
+		elseif (file_exists($temasdir."/".$arqt.".gvp")){
+			$extensao = ".gvp";
+		}
+		if ((strtoupper(substr(PHP_OS, 0, 3) == 'WIN')) && (file_exists($locaplic."\\aplicmap\\".$arqt.$extensao))){
+			$arqtemp = $locaplic."\\aplicmap\\".$arqt.$extensao;
+		}
+		elseif (file_exists($locaplic."/aplicmap/".$arqt.$extensao)){
+			$arqtemp = $locaplic."/aplicmap/".$arqt.$extensao;
+		}
+		if ((strtoupper(substr(PHP_OS, 0, 3) == 'WIN')) && (file_exists($temasdir."\\".$arqt.$extensao))){
+			$arqtemp = $temasdir."\\".$arqt.$extensao;
+		}
+		elseif (file_exists($temasdir."/".$arqt.$extensao)){
+			$arqtemp = $temasdir."/".$arqt.$extensao;
+		}
+		if($arqtemp == ""){
+			echo "<br>Imposs&iacute;vel acessar tema $arqtemp";
+		}
+		else{
+			if ($extensao == ".map" && !@ms_newMapObj($arqtemp)){
+				echo "<br>Problemas com a camada $arqtemp<br>";
+			}
+			else{
 				if($extensao == ".map"){
 					$maptemp = @ms_newMapObj($arqtemp);
 					for($i=0;$i<($maptemp->numlayers);++$i)
@@ -659,9 +671,20 @@ function incluiTemasIniciais()
 						ms_newLayerObj($mapn, $layern);
 					}
 				}
-				else{
+				if($extensao == ".php"){
 					include_once($arqtemp);
 					eval($arqt."(\$mapn);");
+				}
+				if($extensao == ".gvp"){
+					include_once($locaplic."/pacotes/gvsig/gvsig2mapfile/class.gvsig2mapfile.php");
+					$gm = new gvsig2mapfile($arqtemp);
+					$gvsigview = $gm->getViewsNames();
+					$gvsigview = $gvsigview[0];
+					$dataView = $gm->getViewData($gvsigview);
+					$next = $dataView["extent"];
+					$ext = $mapn->extent;
+					$ext->setextent($next[0],$next[1],$next[2],$next[3]);
+					$mapn = $gm->addLayers($mapn,$gvsigview,$dataView["layerNames"]);
 				}
 			}
 		}
