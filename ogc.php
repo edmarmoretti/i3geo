@@ -299,6 +299,7 @@ if ($tipo == "" || $tipo == "metadados"){
 			$dataView = $gm->getViewData($gvsigview);
 			$oMap = $gm->addLayers($oMap,$gvsigview,$dataView["layerNames"]);
 			$numlayers = $oMap->numlayers;
+			$layers = array();
 			for ($i=0;$i < $numlayers;$i++){
 				$l = $oMap->getlayer($i);
 				$l->setmetadata("gml_include_items","all");
@@ -306,8 +307,11 @@ if ($tipo == "" || $tipo == "metadados"){
 				$l->setmetadata("WMS_INCLUDE_ITEMS","all");
 				$l->setmetadata("WFS_INCLUDE_ITEMS","all");
 				$l->setmetadata("ows_srs",$listaepsg);
-				$oMap->setmetadata("ows_enable_request","*");
+				$l->set("status",MS_DEFAULT);
+				$layers[] = $l->name;
 			}
+			$req->setParameter("LAYERS", implode(",",$layers));
+			//r_dump($req);exit;
 		}
 	}
 }

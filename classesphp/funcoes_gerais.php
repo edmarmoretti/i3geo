@@ -2530,13 +2530,14 @@ function listaGruposUsrLogin(){
 	if(empty($_COOKIE["i3geocodigologin"])){
 		return array();
 	}
-	session_write_close();
 	$nameatual = session_name();
 	$idatual = session_id();
+	session_write_close();
 	session_name("i3GeoLogin");
 	session_id($_COOKIE["i3geocodigologin"]);
 	session_start();
 	$res = $_SESSION["gruposusr"];
+	session_write_close();
 	session_name("$nameatual");
 	session_id($idatual);
 	session_start();

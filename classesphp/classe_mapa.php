@@ -93,8 +93,7 @@ $map_file - Endere&ccedil;o do mapfile no servidor.
 		$this->mapa = @ms_newMapObj($map_file);
 		$this->arquivo = $map_file;
 		$c = $this->mapa->numlayers;
-		for ($i=0;$i < $c;++$i)
-		{
+		for ($i=0;$i < $c;++$i){
 			$l = $this->mapa->getlayer($i);
 			$this->layers[] = $l;
 			$this->nomes[] = $l->name;
@@ -943,46 +942,101 @@ $random - indica se os nomes dos novos layers ser&atilde;o modificados ou nao
 		//limpa selecao
 		$temas = explode(",",$temas);
 		$zoomlayer = "";
-		foreach ($temas as $nome)
-		{
+		foreach ($temas as $nome){
 			$this->adicionaAcesso($nome,$locaplic);
 			$nomemap = "";
 			//
 			//verifica se o tema &eacute; um arquivo php
 			//
+			$extensao = ".map";
 			if ((file_exists($locaplic."/temas/".$nome.".php")) || (file_exists($nome.".php"))){
+				$extensao = ".php";
+			}
+			if ((file_exists($locaplic."/temas/".$nome.".gvp")) || (file_exists($nome.".gvp"))){
+				$extensao = ".gvp";
+			}
+			if($extensao == ".php"){
 				include_once($locaplic."/temas/".$nome.".php");
 				if(function_exists($nome)){
 					eval($nome."(\$this->mapa);");
 				}
 			}
-			else
-			{
-				if (file_exists($locaplic."/temas/".$nome.".map"))
-				{$nomemap = $locaplic."/temas/".$nome.".map";}
-				if (file_exists($nome))
-				{$nomemap = $nome;}
-				if (file_exists($nome.".map"))
-				{$nomemap = $nome.".map";}
-				if ($nomemap != "")
-				{
+			if($extensao == ".gvp"){
+				if (file_exists($locaplic."/temas/".$nome.".gvp")){
+					$nomemap = $locaplic."/temas/".$nome.".gvp";
+				}
+				if (file_exists($nome)){
+					$nomemap = $nome;
+				}
+				if (file_exists($nome.".gvp")){
+					$nomemap = $nome.".gvp";
+				}
+				if ($nomemap != ""){
+					include_once($locaplic."/pacotes/gvsig/gvsig2mapfile/class.gvsig2mapfile.php");
+					$gm = new gvsig2mapfile($nomemap);
+					$gvsigview = $gm->getViewsNames();
+					$gvsigview = $gvsigview[0];
+					$dataView = $gm->getViewData($gvsigview);
+					$adicionar = array();
+					foreach($dataView["layerNames"] as $t){
+						if(!in_array($t,$this->nomes)){
+							$adicionar[] = $t;
+						}
+					}
+					$this->mapa = $gm->addLayers($this->mapa,$gvsigview,$adicionar);
+					foreach($adicionar as $nome){
+						$l = $this->mapa->getlayerbyname($nome);
+						//reposiciona o layer se for o caso
+						if ($l->group == ""){
+							$ltipo = $l->type;
+							if (($ltipo == 2) || ($ltipo == 3)){//poligono = 2
+								$indicel = $l->index;
+								$numlayers = $this->mapa->numlayers;
+								$nummove = 0;
+								for ($i = $numlayers-1;$i > 0;$i--){
+									$layerAbaixo = $this->mapa->getlayer($i);
+									$tipo = $layerAbaixo->type;
+									if (($tipo != 2) && ($tipo != 3)){
+										$nummove++;
+									}
+								}
+								for ($i=0;$i<($nummove);++$i){
+									$indicel = $l->index;
+									$this->mapa->movelayerup($indicel);
+								}
+							}
+						}
+					}
+				}
+			}
+			if($extensao == ".map"){
+				if (file_exists($locaplic."/temas/".$nome.".map")){
+					$nomemap = $locaplic."/temas/".$nome.".map";
+				}
+				if (file_exists($nome)){
+					$nomemap = $nome;
+				}
+				if (file_exists($nome.".map")){
+					$nomemap = $nome.".map";
+				}
+				if ($nomemap != ""){
 					$nmap = ms_newMapObj($nomemap);
 					$novosnomes = $nmap->getAllLayerNames();
 					//define nomes unicos para os temas
-					foreach ($novosnomes as $n)
-					{
-						if(!@$this->mapa->getlayerbyname($n))
-						{$random = "nao";}
+					foreach ($novosnomes as $n){
+						if(!@$this->mapa->getlayerbyname($n)){
+							$random = "nao";
+						}
 						$random == "sim" ? $nomeunico[$n] = nomeRandomico() : $nomeunico[$n] = $n;
 					}
 					//altera os temas para incluir o nome unico
 					//include_once($locaplic."/classesphp/funcoes_gerais.php");
-					foreach ($novosnomes as $n)
-					{
+					foreach ($novosnomes as $n){
 						$nlayer = $nmap->getlayerbyname($n);
 						//para impedir erros na legenda
-						if($nlayer->getmetadata("classe") == "")
-						{$nlayer->setmetadata("classe","");}
+						if($nlayer->getmetadata("classe") == ""){
+							$nlayer->setmetadata("classe","");
+						}
 						autoClasses($nlayer,$this->mapa);
 						$nlayer->set("status",MS_DEFAULT);
 						$nNome = str_replace(".map","",basename($nomemap));
@@ -990,8 +1044,7 @@ $random - indica se os nomes dos novos layers ser&atilde;o modificados ou nao
 						$nlayer->setmetadata("nomeoriginal",$nlayer->name);
 						$nlayer->set("name",$nomeunico[$n]);
 						//altera o nome do grupo se existir
-						if ($nlayer->group != " " && $nlayer->group != "" )
-						{
+						if ($nlayer->group != " " && $nlayer->group != "" ){
 							$lr = $nlayer->group;
 							if($nomeunico[$lr])
 							$nlayer->set("group",$nomeunico[$lr]);
@@ -1005,10 +1058,12 @@ $random - indica se os nomes dos novos layers ser&atilde;o modificados ou nao
 							$tipotemp = $nlayer->type;
 							$tiporep = $nlayer->getmetadata("tipooriginal");
 							$nlayer->set("type",MS_LAYER_POLYGON);
-							if ($tiporep == "linear")
-							{$nlayer->set("type",MS_LAYER_LINE);}
-							if ($tiporep == "pontual")
-							{$nlayer->set("type",MS_LAYER_POINT);}
+							if ($tiporep == "linear"){
+								$nlayer->set("type",MS_LAYER_LINE);
+							}
+							if ($tiporep == "pontual"){
+								$nlayer->set("type",MS_LAYER_POINT);
+							}
 							$sld = $nlayer->generateSLD();
 							if($sld != "")
 							$nlayer->setmetadata("wms_sld_body",str_replace('"',"'",$sld));
@@ -1017,30 +1072,23 @@ $random - indica se os nomes dos novos layers ser&atilde;o modificados ou nao
 						ms_newLayerObj($this->mapa, $nlayer);
 						$l = $this->mapa->getlayerbyname($nlayer->name);
 						//reposiciona o layer se for o caso
-						if ($l->group == "")
-						{
+						if ($l->group == ""){
 							$ltipo = $l->type;
-							if (($ltipo == 2) || ($ltipo == 3))//poligono = 2
-							{
+							if (($ltipo == 2) || ($ltipo == 3)){//poligono = 2
 								$indicel = $l->index;
 								$numlayers = $this->mapa->numlayers;
 								$nummove = 0;
-								for ($i = $numlayers-1;$i > 0;$i--)
-								{
+								for ($i = $numlayers-1;$i > 0;$i--){
 									$layerAbaixo = $this->mapa->getlayer($i);
 									$tipo = $layerAbaixo->type;
-									if (($tipo != 2) && ($tipo != 3))
-									{$nummove++;}
-								}
-								//echo $nummove;exit;
-								//if ($nummove > 2)
-								//{
-									for ($i=0;$i<($nummove);++$i)
-									{
-										$indicel = $l->index;
-										$this->mapa->movelayerup($indicel);
+									if (($tipo != 2) && ($tipo != 3)){
+										$nummove++;
 									}
-								//}
+								}
+								for ($i=0;$i<($nummove);++$i){
+									$indicel = $l->index;
+									$this->mapa->movelayerup($indicel);
+								}
 							}
 						}
 					}
