@@ -1,4 +1,5 @@
 <?php
+//TODO incluir arquivo gvp
 error_reporting(0);if(extension_loaded('zlib')){ob_start('ob_gzhandler');} header("Content-type: text/html");
 include_once("../ms_configura.php");
 include_once("../classesphp/pega_variaveis.php");
@@ -80,7 +81,7 @@ if(isset($botoes)){
 	if(in_array("salva",$botoes))
 	{$objBotoes[] = "'salva':true";}
 	if(in_array("ajuda",$botoes))
-	{$objBotoes[] = "'ajuda':true";}	
+	{$objBotoes[] = "'ajuda':true";}
 	if(in_array("fecha",$botoes))
 	{$objBotoes[] = "'fecha':true";}
 	if(in_array("tools",$botoes))
@@ -122,7 +123,7 @@ if($temas != "")
 	else{
 		$visiveis = str_replace(" ",",",$visiveis);
 		$visiveis = strtolower($visiveis);
-		$visiveis = explode(",",$visiveis);	
+		$visiveis = explode(",",$visiveis);
 	}
 	$objOpenLayers = array();
 	if(isset($servidor) && $servidor != "../ogc.php"){
@@ -144,7 +145,7 @@ if($temas != "")
 					$nomeMap = $tema;
 				}
 			}
-			if($nomeMap != ""){	
+			if($nomeMap != ""){
 				if(empty($layers)){
 					$layers = array();
 					$maptemp = @ms_newMapObj($nomeMap);
@@ -195,12 +196,12 @@ Par&acirc;metros:
 	incluilayergrafico (true|false) - indica se o layer que recebe elementos gr&aacute;ficos ser&aacute; adicionado ou n&atilde;o ao mapa
 	ativalayerswicther (true|false) - inicia o mapa com a caixa de escolha das camadas (layerSwitcher) aberta ou n&atilde;o. Por default, inicia fechada
 	ativarodadomouse (true|false) - ativa ou n&atilde;o o zoom com base na roda do mouse (default &eacute; true)
-	
+
 	fundo - lista com os nomes, separados por ',' dos layers que ser&atilde;o usados como fundo para o mapa. Se n&atilde;o for definido,
 			ser&aacute; usado o default. O primeiro da lista ser&aacute; o fundo ativo. Se na lista de temas de fundo estiver algum
 			tema incluido com o parametro 'temas', esses ser&atilde;o inclu&iacute;dos como temas de fundo.
 			Os seguintes fundos podem usados nessa lista:
-			
+
 			e_oce - ESRI Ocean Basemap
 			e_ims - ESRI Imagery World 2D
 			e_wsm - ESRI World Street Map
@@ -208,14 +209,14 @@ Par&acirc;metros:
 			ol_wms - base mundial da Meta Carta
 			top_wms - topon&iacute;mia do servidor do MMA usado no mapa de refer&ecirc;ncia
 			est_wms - estados do Brasil
-			
+
 	controles - lista com os nomes dos controles que ser&atilde;o adicionados ao mapa. Se n&atilde;o for definido, todos os controles ser&atilde;o adicionados
 		navigation
-		panzoombar 
-		layerswitcher 
-		scaleline 
+		panzoombar
+		layerswitcher
+		scaleline
 		mouseposition
-		overviewmap 
+		overviewmap
 		keyboarddefaults
 	botoes - lista com os nomes dos botoes que ser&atilde;o adicionados ao mapa. Se n&atilde;o for definido, todos os bot&otilde;es ser&atilde;o adicionados
 		pan
@@ -242,14 +243,14 @@ Par&acirc;metros:
 		fecha
 		corta
 
-	Para ver a lista de códigos de temas, que podem ser utilizados no par&acirc;metro 'temas', acesse: 
+	Para ver a lista de códigos de temas, que podem ser utilizados no par&acirc;metro 'temas', acesse:
 	<a href='../ogc.php?lista=temas' >lista de temas</a>. Os códigos s&atilde;o mostrados em vermelho.
 
 	Exemplo:
 
 	&lt;iframe height='400px' src='http://mapas.mma.gov.br/i3geo/mashups/openlayers.php?temas=bioma&amp;altura=350&amp;largura=350' style='border: 0px solid white;' width='400px'&gt;&lt;/iframe&gt;
 
-	";	
+	";
 	exit;
 }
 ?>

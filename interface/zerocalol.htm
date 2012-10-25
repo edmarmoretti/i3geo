@@ -4,7 +4,7 @@
 <meta http-equiv="Category" content="I3Geo Mapa interativo MMA">
 <META HTTP-EQUIV="Content-Type" CONTENT="text/html; charset=ISO-8859-1">
 <title>MMA - Mapa interativo</title>
-<script type="text/javascript" src="../classesjs/i3geo.js"></script>
+<script type="text/javascript" src="../classesjs/i3geo47.js"></script>
 <script type="text/javascript" src="../pacotes/openlayers/OpenLayers29.js.php"></script>
 
 </head>
@@ -34,12 +34,12 @@
 	<img alt="" src="../imagens/branco.gif" ID='zoomtot' style='border:0px solid white;margin-left:3px'/>
 	<img alt="" src="../imagens/branco.gif" id='identifica' style='border:0px solid white;margin-left:3px'/>
 	<img alt="" src="../imagens/branco.gif" id='mede' style='border:0px solid white;margin-left:3px'/>
-	<img alt="" src="../imagens/branco.gif" id='area' style='border:0px solid white;margin-left:3px'/>   
-	
+	<img alt="" src="../imagens/branco.gif" id='area' style='border:0px solid white;margin-left:3px'/>
+
 	<img alt="" src="../imagens/branco.gif" id='reinicia' style='border:0px solid white;margin-left:12px'/>
-	<img alt="" src="../imagens/branco.gif" id='referencia' style='border:0px solid white;margin-left:3px'/>        
-	<img alt="" src="../imagens/branco.gif" id='inserexy' style='border:0px solid white;margin-left:3px'/> 
-	<img alt="" src="../imagens/branco.gif" id='inseregrafico' style='border:0px solid white;margin-left:3px'/> 
+	<img alt="" src="../imagens/branco.gif" id='referencia' style='border:0px solid white;margin-left:3px'/>
+	<img alt="" src="../imagens/branco.gif" id='inserexy' style='border:0px solid white;margin-left:3px'/>
+	<img alt="" src="../imagens/branco.gif" id='inseregrafico' style='border:0px solid white;margin-left:3px'/>
 	<img alt="" src="../imagens/branco.gif" id='textofid' style='border:0px solid white;margin-left:0px'/>
 	<img alt="" src="../imagens/branco.gif" id='selecao' style='border:0px solid white;margin-left:3px'/>
 	<img alt="" src="../imagens/branco.gif" id='identificaBalao' style='border:0px solid white;margin-left:3px'/>
@@ -112,9 +112,9 @@ http://<host>/i3geo/interface/zerocal.htm
 */
 /*
 	Indica a localiza&ccedil;&atilde;o correta do i3geo.
-	
+
 	&Eacute; utilizada para identificar o local correto onde est&atilde;o os programas em php que s&atilde;o utilizados.
-	
+
 	Se n&atilde;o for definida, o i3Geo tentar&aacute; encontrar o local automaticamente
 */
 //i3GEO.configura.locaplic = i3GEO.util.protocolo()+"://"+window.location.host+"/i3geo";
@@ -122,48 +122,48 @@ http://<host>/i3geo/interface/zerocal.htm
 i3GEO.configura.locaplic = i3GEO.util.protocolo()+"://"+window.location.host+"/i3geo";
 i3GEO.Interface.ATUAL = "openlayers";
 i3GEO.Interface.IDCORPO = "contemImg";
-i3GEO.configura.diminuixN = 20
+i3GEO.configura.diminuixN = 20;
 
 i3GEO.Interface.openlayers.GADGETS = {
 		PanZoomBar:true,
 		PanZoom:false,
 		LayerSwitcher:true,
 		ScaleLine:true,
-		OverviewMap:false	
+		OverviewMap:false
 	};
 i3GEO.Interface.openlayers.TILES = true;
 
-i3GEO.cria()
+i3GEO.cria();
 
-i3GEO.barraDeBotoes.AUTOALTURA = false
-i3GEO.barraDeBotoes.ATIVAMENUCONTEXTO = false
-i3GEO.barraDeBotoes.COMPORTAMENTO = "laranja"
-i3GEO.idioma.IDSELETOR = "seletorIdiomas"
+i3GEO.barraDeBotoes.AUTOALTURA = false;
+i3GEO.barraDeBotoes.ATIVAMENUCONTEXTO = false;
+i3GEO.barraDeBotoes.COMPORTAMENTO = "laranja";
+i3GEO.idioma.IDSELETOR = "seletorIdiomas";
 i3GEO.interface.ATIVAMENUCONTEXTO = true;
 i3GEO.barraDeBotoes.TIPOAJUDA = "vertical";
-i3GEO.barraDeBotoes.SOICONES = true
+i3GEO.barraDeBotoes.SOICONES = true;
 i3GEO.arvoreDeTemas.TIPOBOTAO = "radio";
 i3GEO.arvoreDeTemas.ATIVATEMAIMEDIATO = true;
-OpenLayers.ImgPath = "../pacotes/openlayers/img/"
-var ims = new OpenLayers.Layer.ArcGIS93Rest( 
+OpenLayers.ImgPath = "../pacotes/openlayers/img/";
+var ims = new OpenLayers.Layer.ArcGIS93Rest(
 	"ESRI Imagery World 2D",
     "http://server.arcgisonline.com/ArcGIS/rest/services/ESRI_Imagery_World_2D/MapServer/export",
 	{},
 	{isBaseLayer:true,visibility:false}
 );
-var wsm = new OpenLayers.Layer.ArcGIS93Rest( 
+var wsm = new OpenLayers.Layer.ArcGIS93Rest(
 	"ESRI World Street Map",
     "http://server.arcgisonline.com/ArcGIS/rest/services/ESRI_StreetMap_World_2D/MapServer/export",
 	{},
 	{isBaseLayer:true,visibility:false}
 );
-var bra = new OpenLayers.Layer.WMS( 
+var bra = new OpenLayers.Layer.WMS(
 	"Base carto MMA",
     "http://mapas.mma.gov.br/cgi-bin/mapserv?map=/opt/www/html/webservices/baseraster.map",
 	{layers:"baseraster",srs:"EPSG:4618",format:"image/png",isBaseLayer:false},
 	{isBaseLayer:true,visibility:false}
 );
-var osm = new OpenLayers.Layer.WMS( 
+var osm = new OpenLayers.Layer.WMS(
 	"Open Street Map",
     "http://full.wms.geofabrik.de/std/demo_key",
 	{layers:""},

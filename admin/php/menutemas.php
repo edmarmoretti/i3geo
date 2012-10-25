@@ -481,12 +481,11 @@ switch (strtoupper($funcao))
 	case "ALTERATEMAS":
 		//$r ser&aacute; igual ao novo id criado, no caso de inser&ccedil;&atilde;o de um novo tema
 		$r = alteraTemas();
-		if($id == "")
-		{
+		if($id == ""){
 			retornaJSON($r);
 		}
-		else
-		{retornaJSON(pegaDados("select * from ".$esquemaadmin."i3geoadmin_temas where id_tema = $id"));
+		else{
+			retornaJSON(pegaDados("select * from ".$esquemaadmin."i3geoadmin_temas where id_tema = $id"));
 		}
 		exit;
 		break;
@@ -1125,26 +1124,27 @@ function alteraTemas()
 			$q = $dbh->query($sql,PDO::FETCH_ASSOC);
 			$resultado = $q->fetchAll();
 			$mapfile = $resultado[0]["codigo_tema"];
-			$mapfile = $locaplic."/temas/".$mapfile.".map";
-
-			if($mapa = @ms_newMapObj($mapfile))
-			{
-				$mapa = ms_newMapObj($mapfile);
-				$numlayers = $mapa->numlayers;
-				for ($i=0;$i < $numlayers;$i++)
+			if(file_exists($locaplic."/temas/".$mapfile.".map")){
+				$mapfile = $locaplic."/temas/".$mapfile.".map";
+				if($mapa = @ms_newMapObj($mapfile))
 				{
-					$layer = $mapa->getlayer($i);
-					$layer->setmetadata("permitedownload",strtolower($download));
-					$layer->setmetadata("permiteogc",strtolower($ogc));
-					$layer->setmetadata("permitekml",strtolower($kml));
-					$layer->setmetadata("permitekmz",strtolower($kmz));
-					if(count($nomes) == 1)
+					$mapa = ms_newMapObj($mapfile);
+					$numlayers = $mapa->numlayers;
+					for ($i=0;$i < $numlayers;$i++)
 					{
-						$layer->setmetadata("tema",$nomeo);
+						$layer = $mapa->getlayer($i);
+						$layer->setmetadata("permitedownload",strtolower($download));
+						$layer->setmetadata("permiteogc",strtolower($ogc));
+						$layer->setmetadata("permitekml",strtolower($kml));
+						$layer->setmetadata("permitekmz",strtolower($kmz));
+						if(count($nomes) == 1)
+						{
+							$layer->setmetadata("tema",$nomeo);
+						}
 					}
+					$mapa->save($mapfile);
+					removeCabecalho($mapfile);
 				}
-				$mapa->save($mapfile);
-				removeCabecalho($mapfile);
 			}
 		}
 		else

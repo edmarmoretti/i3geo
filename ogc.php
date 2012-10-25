@@ -1,4 +1,5 @@
 <?php
+//TODO incluir projeto gvsig
 /*
 Title: ogc.php
 
@@ -86,7 +87,7 @@ if(isset($format) && strtolower($format) == "application/openlayers"){
 	if(!headers_sent())
 	{header("Location:".$urln);}
 	else
-	{echo "<meta http-equiv='refresh' content='0;url=$urln'>";}	
+	{echo "<meta http-equiv='refresh' content='0;url=$urln'>";}
 }
 //
 //pega os endere&ccedil;os para compor a url de chamada do gerador de web services
@@ -184,10 +185,8 @@ $oMap->setmetadata("wms_attribution_logourl_href",$proto.$server.dirname($_SERVE
 $oMap->setmetadata("wms_attribution_onlineresource",$proto.$server.dirname($_SERVER['PHP_SELF']));
 $oMap->setmetadata("wms_attribution_title",$tituloInstituicao);
 $oMap->setmetadata("ows_enable_request","*");
-
 $e = $oMap->extent;
 $extensaoMap = ($e->minx)." ".($e->miny)." ".($e->maxx)." ".($e->maxy);
-
 if (!isset($intervalo))
 {$intervalo = "0,5000";}
 else
@@ -197,24 +196,26 @@ if(!isset($tema)){
 	{$intervalo = "0,5000";}
 	$tipo = "intervalo";
 }
-if ($tipo == "" || $tipo == "metadados")
-{
+if ($tipo == "" || $tipo == "metadados"){
 	$tema = explode(" ",$tema);
 	//para o caso do tema ser um arquivo mapfile existente em uma pasta qualquer
 	//$temai3geo = true indica que o layer ser&aacute; buscado na pasta i3geo/temas
 	$temai3geo = true;
+	//FIXME não aceita gvp quando o caminho é completo
 	if(file_exists($_GET["tema"])){
 		$nmap = ms_newMapobj($_GET["tema"]);
 		$temai3geo = false;
 		$nmap->setmetadata("ows_enable_request","*");
 	}
-	foreach ($tema as $tx)
-	{
+	foreach ($tema as $tx){
 		$extensao = ".map";
 		if(file_exists($locaplic."/temas/".$tx.".php") && $temai3geo == true){
 			$extensao = ".php";
 		}
-		if($extensao == ".map"){			
+		if(file_exists($locaplic."/temas/".$tx.".gvp") && $temai3geo == true){
+			$extensao = ".gvp";
+		}
+		if($extensao == ".map"){
 			if($temai3geo == true){
 				$nmap = ms_newMapobj($locaplic."/temas/".$tx.".map");
 				$nmap->setmetadata("ows_enable_request","*");
@@ -224,80 +225,93 @@ if ($tipo == "" || $tipo == "metadados")
 			else{
 				$ts = explode(",",str_replace(" ",",",$layers));
 			}
-			foreach ($ts as $t)
-			{
+			foreach ($ts as $t){
 				$l = $nmap->getlayerbyname($t);
-				//necess&aacute;rio pq o mapfile pode ter todos os layers como default
-				if($temai3geo == false)
-				{$l->set("status",MS_OFF);}
-				if($cache == true && strtolower($l->getmetadata('cache')) == 'sim' && $tipo == '' && count($tema) == 1){
-					carregaCacheImagem($_GET['BBOX'],$tx,$_GET['WIDTH'],$_GET['HEIGHT'],$cachedir);
+				$permite = $l->getmetadata("permiteogc");
+				if(strtolower($permite) != "nao"){
+					//necess&aacute;rio pq o mapfile pode ter todos os layers como default
+					if($temai3geo == false){
+						$l->set("status",MS_OFF);
+					}
+					if($cache == true && strtolower($l->getmetadata('cache')) == 'sim' && $tipo == '' && count($tema) == 1){
+						carregaCacheImagem($_GET['BBOX'],$tx,$_GET['WIDTH'],$_GET['HEIGHT'],$cachedir);
+					}
+					$l->setmetadata("ows_title",pegaNome($l));
+					$l->setmetadata("ows_srs",$listaepsg);
+					//essa linha &eacute; necess&aacute;ria pq as vezes no mapfile n&atilde;o tem nenhum layer com o nome igual ao nome do mapfile
+					if(count($ts)==1){
+						$l->set("name",$tx);
+					}
+					$l->setmetadata("gml_include_items","all");
+					$l->set("dump",MS_TRUE);
+					$l->setmetadata("WMS_INCLUDE_ITEMS","all");
+					$l->setmetadata("WFS_INCLUDE_ITEMS","all");
+					if(file_exists($locaplic."/temas/miniaturas/".$t.".map.mini.png")){
+						$mini = $proto.$server.dirname($_SERVER['PHP_SELF'])."/temas/miniaturas/".$t.".map.mini.png";
+						$l->setmetadata("wms_attribution_logourl_format","image/png");
+						$l->setmetadata("wms_attribution_logourl_height","50");
+						$l->setmetadata("wms_attribution_logourl_width","50");
+						$l->setmetadata("wms_attribution_logourl_href",$mini);
+					}
+					if($l->type == MS_LAYER_RASTER && $l->numclasses > 0){
+						$c = $l->getclass(0);
+						if($c->name == "")
+						{$c->name = " ";}
+					}
+					//inclui extensao geografica
+					$extensao = $l->getmetadata("EXTENSAO");
+					if($extensao == ""){
+						$extensao = $extensaoMap;
+					}
+					$l->setmetadata("wms_extent",$extensao);
+					if (!empty($postgis_mapa)){
+						if ($l->connectiontype == MS_POSTGIS){
+							$lcon = $l->connection;
+							if (($lcon == " ") || ($lcon == "") || (in_array($lcon,array_keys($postgis_mapa)))){
+								//
+								//o metadata CONEXAOORIGINAL guarda o valor original para posterior substitui&ccedil;&atilde;o
+								//
+								if(($lcon == " ") || ($lcon == "")){
+									$l->set("connection",$postgis_mapa);
+									$l->setmetadata("CONEXAOORIGINAL",$lcon);
+								}
+								else{
+									$l->set("connection",$postgis_mapa[$lcon]);
+									$l->setmetadata("CONEXAOORIGINAL",$lcon);
+								}
+							}
+						}
+					}
+					autoClasses($l,$oMap);
+					ms_newLayerObj($oMap, $l);
 				}
-				$l->setmetadata("ows_title",pegaNome($l));
-				$l->setmetadata("ows_srs",$listaepsg);
-				//essa linha &eacute; necess&aacute;ria pq as vezes no mapfile n&atilde;o tem nenhum layer com o nome igual ao nome do mapfile
-				if(count($ts)==1)
-				{$l->set("name",$tx);}
+			}
+		}
+		if($extensao == ".php"){
+			include_once($locaplic."/temas/".$tx.".php");
+			eval($tx."(\$oMap);");
+		}
+		if($extensao == ".gvp"){
+			include_once($locaplic."/pacotes/gvsig/gvsig2mapfile/class.gvsig2mapfile.php");
+			$gm = new gvsig2mapfile($locaplic."/temas/".$tx.".gvp");
+			$gvsigview = $gm->getViewsNames();
+			$gvsigview = $gvsigview[0];
+			$dataView = $gm->getViewData($gvsigview);
+			$oMap = $gm->addLayers($oMap,$gvsigview,$dataView["layerNames"]);
+			$numlayers = $oMap->numlayers;
+			for ($i=0;$i < $numlayers;$i++){
+				$l = $oMap->getlayer($i);
 				$l->setmetadata("gml_include_items","all");
 				$l->set("dump",MS_TRUE);
 				$l->setmetadata("WMS_INCLUDE_ITEMS","all");
 				$l->setmetadata("WFS_INCLUDE_ITEMS","all");
-				if(file_exists($locaplic."/temas/miniaturas/".$t.".map.mini.png"))
-				{
-					$mini = $proto.$server.dirname($_SERVER['PHP_SELF'])."/temas/miniaturas/".$t.".map.mini.png";
-					$l->setmetadata("wms_attribution_logourl_format","image/png");
-					$l->setmetadata("wms_attribution_logourl_height","50");
-					$l->setmetadata("wms_attribution_logourl_width","50");
-					$l->setmetadata("wms_attribution_logourl_href",$mini);
-				}
-				if($l->type == MS_LAYER_RASTER && $l->numclasses > 0)
-				{
-					$c = $l->getclass(0);
-					if($c->name == "")
-					{$c->name = " ";}
-				}
-				//inclui extensao geografica
-				$extensao = $l->getmetadata("EXTENSAO");
-				if($extensao == "")
-				{$extensao = $extensaoMap;}
-				$l->setmetadata("wms_extent",$extensao);
-				if (!empty($postgis_mapa))
-				{					
-					if ($l->connectiontype == MS_POSTGIS)
-					{
-						$lcon = $l->connection;
-						if (($lcon == " ") || ($lcon == "") || (in_array($lcon,array_keys($postgis_mapa))))
-						{
-							//
-							//o metadata CONEXAOORIGINAL guarda o valor original para posterior substitui&ccedil;&atilde;o
-							//				
-							if(($lcon == " ") || ($lcon == ""))
-							{
-								$l->set("connection",$postgis_mapa);
-								$l->setmetadata("CONEXAOORIGINAL",$lcon);
-							}
-							else
-							{
-								$l->set("connection",$postgis_mapa[$lcon]);
-								$l->setmetadata("CONEXAOORIGINAL",$lcon);
-							}					
-						}
-					}
-				}
-				autoClasses($l,$oMap);
-				$permite = $l->getmetadata("permiteogc");
-				if($permite != "nao")
-				ms_newLayerObj($oMap, $l);
+				$l->setmetadata("ows_srs",$listaepsg);
+				$oMap->setmetadata("ows_enable_request","*");
 			}
-		}
-		else{
-			include_once($locaplic."/temas/".$tx.".php");
-			eval($tx."(\$oMap);");
 		}
 	}
 }
-else
-{
+else{
 	$conta = 0;
 	$int = explode(",",$intervalo);
 	$codigosTema = array();
@@ -305,22 +319,15 @@ else
 	include("classesphp/classe_menutemas.php");
 	$m = new Menutemas("",$perfil,$locaplic,$urli3geo);
 	$menus = $m->pegaListaDeMenus();
-	foreach ($menus as $menu)
-	{	
+	foreach ($menus as $menu){
 		$grupos = $m->pegaListaDeGrupos($menu["idmenu"],$listasistemas="nao",$listasgrupos="sim");
-		foreach($grupos as $grupo)
-		{
-			if(strtolower($grupo["ogc"]) == "sim")
-			{
-				foreach($grupo["subgrupos"] as $sgrupo)
-				{
-					if(strtolower($sgrupo["ogc"]) == "sim")
-					{
+		foreach($grupos as $grupo){
+			if(strtolower($grupo["ogc"]) == "sim"){
+				foreach($grupo["subgrupos"] as $sgrupo){
+					if(strtolower($sgrupo["ogc"]) == "sim"){
 						$temas = $m->pegaListaDeTemas($grupo["id_n1"],$sgrupo["id_n2"],$menu["idmenu"]);
-						foreach($temas as $tema)
-						{
-							if(strtolower($tema["ogc"]) == "sim")
-							{
+						foreach($temas as $tema){
+							if(strtolower($tema["ogc"]) == "sim"){
 								$codigosTema[] = array("tema"=>$tema["tid"],"fonte"=>$tema["link"]);
 							}
 						}
@@ -332,25 +339,18 @@ else
 	//echo "<pre>";
 	//var_dump($$codigosTema);
 	//exit;
-	foreach($codigosTema as $c)
-	{
+	foreach($codigosTema as $c){
 		$codigoTema = $c["tema"];
-		if(file_exists($locaplic."/temas/".$codigoTema.".map"))
-		{
-			if (@ms_newMapobj($locaplic."/temas/".$codigoTema.".map"))
-			{
+		if(file_exists($locaplic."/temas/".$codigoTema.".map")){
+			if (@ms_newMapobj($locaplic."/temas/".$codigoTema.".map")){
 				$nmap = ms_newMapobj($locaplic."/temas/".$codigoTema.".map");
 				$nmap->setmetadata("ows_enable_request","*");
 				$ts = $nmap->getalllayernames();
-				if (count($ts) == 1)
-				{ 
-					foreach ($ts as $t)
-					{
-						if ($oMap->getlayerbyname($t) == "")
-						{
+				if (count($ts) == 1){
+					foreach ($ts as $t){
+						if ($oMap->getlayerbyname($t) == ""){
 							$conta++;
-							if (($conta >= $int[0]) && ($conta <= $int[1]))
-							{
+							if (($conta >= $int[0]) && ($conta <= $int[1])){
 								$l = $nmap->getlayerbyname($t);
 								$extensao = $l->getmetadata("EXTENSAO");
 								if($extensao == "")
@@ -364,18 +364,17 @@ else
 								$l->set("dump",MS_TRUE);
 								$l->setmetadata("WMS_INCLUDE_ITEMS","all");
 								$l->setmetadata("WFS_INCLUDE_ITEMS","all");
-								
+
 								$l->setmetadata("ows_metadataurl_href",$c["fonte"]);
 								$l->setmetadata("ows_metadataurl_type","TC211");
 								$l->setmetadata("ows_metadataurl_format","text/html");
-								if(file_exists($locaplic."/temas/miniaturas/".$t.".map.mini.png"))
-								{
+								if(file_exists($locaplic."/temas/miniaturas/".$t.".map.mini.png")){
 									$mini = $proto.$server.dirname($_SERVER['PHP_SELF'])."/temas/miniaturas/".$t.".map.mini.png";
 									$l->setmetadata("wms_attribution_logourl_format","image/png");
 									$l->setmetadata("wms_attribution_logourl_height","50");
 									$l->setmetadata("wms_attribution_logourl_width","50");
 									$l->setmetadata("wms_attribution_logourl_href",$mini);
-								}								
+								}
 								ms_newLayerObj($oMap, $l);
 							}
 						}
@@ -386,7 +385,7 @@ else
 	}
 }
 if($cache == true){
-	
+
 }
 ms_ioinstallstdouttobuffer();
 $oMap->owsdispatch($req);
@@ -401,8 +400,7 @@ ms_ioresethandlers();
 //
 //fun&ccedil;&otilde;es
 //
-function ogc_pegaListaDeMenus()
-{
+function ogc_pegaListaDeMenus(){
 	global $perfil,$locaplic,$urli3geo;
 	if(!isset($perfil)){$perfil = "";}
 	$m = new Menutemas("",$perfil,$locsistemas,$locaplic,"",$urli3geo);
@@ -410,8 +408,7 @@ function ogc_pegaListaDeMenus()
 	{$menus[] = $urli3geo."/admin/xmlmenutemas.php?id_menu=".$menu["idmenu"];}
 	return $menus;
 }
-function ogc_imprimeAjuda()
-{
+function ogc_imprimeAjuda(){
 	echo "<pre><b>Construtor de web services do I3Geo.</b><br><br>";
 	echo "Esse utilit&aacute;rio usa os arquivos mapfiles existentes em <br>";
 	echo "i3geo/temas para gerar web services no padr&atilde;o OGC.<br>";
@@ -423,32 +420,24 @@ function ogc_imprimeAjuda()
 	echo "Utilize o sistema de administra&ccedil;&atilde;o do i3Geo para configurar quais os temas da pasta i3geo/temas podem ser utilizados.";
 	echo "Utilize o parametro &intervalo=0,20 para definir o n&uacute;mero de temas desejado na fun&ccedil;&atilde;o getcapabilities.";
 }
-function ogc_imprimeListaDeTemas()
-{
+function ogc_imprimeListaDeTemas(){
 	global $urli3geo,$perfil,$locaplic;
 	$m = new Menutemas("",$perfil,$locaplic,$urli3geo);
 	$menus = $m->pegaListaDeMenus();
 	echo '<html><head><title>WMS</title><META HTTP-EQUIV="Content-Type" CONTENT="text/html; charset=ISO-8859-1"><meta name="description" content="OGC"><meta name="keywords" content="WMS OGC mapa sig gis webmapping geo geoprocessamento interativo meio ambiente MMA cartografia geografia"> <meta name="robots" content="index,follow">';
 	echo "<body><b>Lista de temas por grupos e subgrupos e endere&ccedil;os de acesso aos dados por meio de Web Services WMS (os códigos dos temas est&atilde;o em vermelho)</b><br><br>";
 	$imprimir = "";
-	foreach ($menus as $menu)
-	{
+	foreach ($menus as $menu){
 		$grupos = $m->pegaListaDeGrupos($menu["idmenu"],$listasistemas="nao",$listasgrupos="sim");
-		foreach($grupos as $grupo)
-		{
-			if(strtolower($grupo["ogc"]) == "sim")
-			{
+		foreach($grupos as $grupo){
+			if(strtolower($grupo["ogc"]) == "sim"){
 				$imprimegrupo = "<i>".$grupo["nome"]."</i>";
-				foreach($grupo["subgrupos"] as $sgrupo)
-				{
-					if(strtolower($sgrupo["ogc"]) == "sim")
-					{
+				foreach($grupo["subgrupos"] as $sgrupo){
+					if(strtolower($sgrupo["ogc"]) == "sim"){
 						$imprimesubgrupo = $sgrupo["nome"];
 						$temas = $m->pegaListaDeTemas($grupo["id_n1"],$sgrupo["id_n2"],$menu["idmenu"]);
-						foreach($temas as $tema)
-						{
-							if(strtolower($tema["ogc"]) == "sim")
-							{
+						foreach($temas as $tema){
+							if(strtolower($tema["ogc"]) == "sim"){
 								$imprimir .= $imprimegrupo."->".$imprimesubgrupo."<br>";
 								$imprimir .= "&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;";
 								$imprimir .= "<span style=color:red >".$tema["tid"]."</span>";
@@ -474,8 +463,7 @@ function carregaCacheImagem($bbox,$layer,$w,$h,$cachedir=""){
 	{$nome = $dir_tmp."/cache/".$layer."/".$nome;}
 	else
 	{$nome = $cachedir."/".$layer."/".$nome;}
-	if(file_exists($nome))
-	{
+	if(file_exists($nome)){
 		ob_start();
 		// assuming you have image data in $imagedata
 		$img = file_get_contents($nome);
@@ -494,7 +482,7 @@ function carregaCacheImagem($bbox,$layer,$w,$h,$cachedir=""){
 		print($img);
 		ob_end_flush();
 		exit;
-	}	
+	}
 	/*
 	if(file_exists($nome))
 	{

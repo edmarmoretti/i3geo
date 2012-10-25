@@ -40,6 +40,7 @@ perfil - perfis separados por espa&ccedil;os. Ao usar um perfil, ser&atilde;o mo
 
 tipoxml - (opcional) se for "kml" insere o cabe&ccedil;alho de tipo kml no xml, permitindo abrir o xml diretamente na aplica&ccedil;&atilde;o Google Earth
 */
+//TODO incluir arquivo gvp
 error_reporting(0);
 include_once ("classesphp/carrega_ext.php");
 include_once ("classesphp/classe_menutemas.php");
@@ -108,8 +109,8 @@ if ($menutemas != "" || is_array($menutemas))
 				$nome = kml_converteTexto($sgrupo->SDTIPO);
 				kml_folder($nome);
 				foreach($sgrupo->TEMA as $tema)
-				{kml_tema($tema);}		
-				echo "</Folder>\n";	
+				{kml_tema($tema);}
+				echo "</Folder>\n";
 			}
 			echo "</Folder>\n";
 		}
@@ -197,7 +198,7 @@ if(!isset($menutemas) || $menutemas == "")
 				if(count($temas) > 0)
 				{
 					foreach ($temas as $tema)
-					{kml_tema_bd($tema);}	
+					{kml_tema_bd($tema);}
 				}
 				echo "</Folder>\n";
 			}
@@ -215,21 +216,21 @@ function kml_tema_bd($tema)
 	$fonte = $tema["link_tema"];
 	else
 	$fonte = "";
-	
+
 	$nome = $tema["nome_tema"];
 	$id = $tema["codigo_tema"];
-	
+
 	if(in_array("desc_tema",$teste))
 	$desc = $tema["desc_tema"];
 	else
 	$desc = "";
-	
+
 	$fonte = "<a href='$fonte' >Fonte </a>";
 	$legenda = "<a href='$urli3geo/ogc.php?tema=$id&layer=$id&request=getlegendgraphic&service=wms&format=image/jpeg' >Legenda </a>";
 
 	$href = "$urli3geo/ogc.php?tema=$id&amp;width=800&amp;height=800&amp;VERSION=1.1.1&amp;REQUEST=GetMap&amp;SRS=EPSG:4326&amp;STYLES=&amp;BGCOLOR=0xFFFFFF&amp;FORMAT=image/png&amp;TRANSPARENT=TRUE&amp;layers=$id";
 	kml_servico($nome,$fonte,$legenda,$desc,$href);
-	
+
 	if(strtolower($tema["kmz_tema"]) == "sim")
 	{
 		$href = "$urli3geo/pacotes/kmlmapserver/kmlservice.php?request=kmz&amp;map=$id&amp;typename=$id";
@@ -241,7 +242,7 @@ function kml_cabecalho($nome,$desc)
 	echo "<Folder>\n";
 	echo " <name>".str_replace("&","&amp;",kml_converteTexto($nome))."</name>\n";
 	echo " <description>".str_replace("&","&amp;",kml_converteTexto($desc))."</description>\n";
-	echo " <open>0</open><visibility>0</visibility>\n";	
+	echo " <open>0</open><visibility>0</visibility>\n";
 }
 function kml_folder($nome)
 {
@@ -269,7 +270,7 @@ function kml_tema($tema)
 		$fonte = "<a href='$fonte' >Fonte </a>";
 		else
 		$fonte = "";
-		
+
 		$legenda = "<a href='$urli3geo/ogc.php?tema=$id&layer=$id&request=getlegendgraphic&service=wms&format=image/png' >Legenda </a>";
 		$href = "$urli3geo/ogc.php?tema=$id&amp;width=800&amp;height=800&amp;VERSION=1.1.1&amp;REQUEST=GetMap&amp;SRS=EPSG:4326&amp;STYLES=&amp;BGCOLOR=0xFFFFFF&amp;FORMAT=image/png&amp;TRANSPARENT=TRUE&amp;layers=$id";
 		kml_servico($nome,$fonte,$legenda,$desc,$href);
@@ -280,7 +281,7 @@ function kml_servico($nome,$fonte,$legenda,$desc,$href)
 	echo "   <GroundOverlay>\n";
 	echo "    <name>".str_replace("&","&amp;",kml_converteTexto($nome))."</name>\n";
 	echo "    <description><![CDATA[".$fonte.$legenda.$desc."]]></description>\n";
-	echo "    <visibility>0</visibility>\n";      
+	echo "    <visibility>0</visibility>\n";
 	echo "    <Icon>\n";
 	echo "    <viewRefreshMode>onStop</viewRefreshMode>\n";
 	echo "    <href>$href</href>\n";
@@ -293,7 +294,7 @@ function kml_networklink($nome,$fonte,$legenda,$desc,$href)
 	echo "   <NetworkLink>\n";
 	echo "    <name>".str_replace("&","&amp;",kml_converteTexto($nome))."</name>\n";
 	echo "    <description><![CDATA[".$fonte.$legenda.$desc."]]></description>\n";
-	echo "    <visibility>0</visibility>\n";      
+	echo "    <visibility>0</visibility>\n";
 	echo "    <Link>\n";
 	echo "       <viewRefreshMode>never</viewRefreshMode>\n";
 	echo "       <href>$href</href>\n";
@@ -304,6 +305,6 @@ function kml_converteTexto($i)
 {
 	global $encoding;
 	$encodingatual = mb_detect_encoding($i, 'UTF-8, UTF-7, ASCII, ISO-8859-1');
-	return mb_convert_encoding($i,$encoding,$encodingatual);	
+	return mb_convert_encoding($i,$encoding,$encodingatual);
 }
 ?>

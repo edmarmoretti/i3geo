@@ -58,7 +58,7 @@ $i = function(id)
 	for (i = 0; i < scripts.length; i++) {
 		var src = scripts[i].getAttribute('src');
 		if (src) {
-			var index = src.lastIndexOf("i3geo.js");
+			var index = src.lastIndexOf("i3geo47.js");
 			// is it found, at the end of the URL?
 			if ((index > -1) && (index + "i3geo47.js".length == src.length)) {
 				scriptLocation = src.slice(0, -"i3geo47.js".length);

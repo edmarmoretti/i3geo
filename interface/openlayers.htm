@@ -104,7 +104,7 @@
 	</div>
 </div>
 
-<script src="../classesjs/i3geo.js"></script>
+<script src="../classesjs/i3geo47.js"></script>
 <script src="../pacotes/openlayers/OpenLayers211.js.php"></script>
 <style>
 .olControlEditingToolbar1 div {
@@ -176,7 +176,7 @@ i3GEO.Interface.openlayers.TILES = true;
 //
 //desabilita o item que abre a interface "default" do menu suspenso
 //
-i3GEO.gadgets.PARAMETROS.mostraMenuSuspenso.finaliza = 'if($i("omenudataInterface1")){i3GEOoMenuBar.getMenuItem("omenudataInterface1").cfg.setProperty("text", " ");}'
+i3GEO.gadgets.PARAMETROS.mostraMenuSuspenso.finaliza = 'if($i("omenudataInterface1")){i3GEOoMenuBar.getMenuItem("omenudataInterface1").cfg.setProperty("text", " ");}';
 
 /*
 Após a cria&ccedil;&atilde;o, &eacute; criado o objeto i3geoOL que corresponde ao objeto map da API do OpenLayers.
@@ -290,7 +290,7 @@ i3GEO.finaliza = function(){
 	if($i("i3GEOlogoMarca"))
 	{$i("i3GEOlogoMarca").style.display = "none";}
 	i3GEO.mapa.insereDobraPagina("googlemaps","../imagens/dobragooglemaps.png");
-}
+};
 i3GEO.arvoreDeTemas.OPCOESADICIONAIS.navegacaoDir = true;
 //OpenLayers.DOTS_PER_INCH = 96
 //i3GEO.configura.sid = "";

@@ -10,7 +10,7 @@
 	background-image:url(../mashups/openlayers.png);
 	background-repeat:no-repeat;
 	float:right;
-	right: 0px;	
+	right: 0px;
 	height:29px;
 	margin:2px;
 	width:29px;
@@ -67,7 +67,7 @@
   <div id='guia1obj' >
 	<!-- Esta div acrescenta a op&ccedil;&atilde;o de busca r&aacute;pida, caso vc queira coloc&aacute;-la em um lugar espec&iacute;fico -->
 	<div style='left:5px;top:10px;' id=buscaRapida ></div>
-	<!--	Esta div acrescenta a lista de propriedades do mapa -->	
+	<!--	Esta div acrescenta a lista de propriedades do mapa -->
   	<div id=listaPropriedades style='top:15px;' ></div>
 	<!--	Esta div acrescenta a lista de de camadas do tipo 'baselayers' espec&iacute;ficas da interface Openlayers. Veja tamb&eacute;m a op&ccedil;&atilde;o i3GEO.Interface.openlayers.GADGETS.LayerSwitcher -->
   	<div id=listaLayersBase style='top:15px;'></div>
@@ -75,12 +75,12 @@
   	<div id=listaTemas style='top:15px;'></div>
   </div>
 
- 	<!-- se vc quiser colocar a arvore de adi&ccedil;&atilde;o de temas em um lugar espec&iacute;fico, 
+ 	<!-- se vc quiser colocar a arvore de adi&ccedil;&atilde;o de temas em um lugar espec&iacute;fico,
 	use o div abaixo, caso contr&aacute;rio, a &aacute;rvore ser&aacute; colocada na guia definida em objmapa.guiaMenu, por default a guia2
   	<div id=arvoreAdicionaTema style='top:25px;' ></div>
   	<div id=outrasOpcoesAdiciona style='top:25px;' ></div>
-  	-->	
-  
+  	-->
+
   <div id='guia2obj' style='display:none;'>Aguarde...<img alt="" src="../imagens/branco.gif" width=248 /></div>
   <div id='guia4obj' style='display:none;text-align:left'><div id='legenda' style='text-align:left'></div></div>
   <div id='guia5obj' style='display:none;text-align:left'><div id='banners' style='overflow:auto;text-align:left'>Aguarde...</div></div>
@@ -117,7 +117,7 @@
 		<!-- aqui ser&aacute; inclu&iacute;do o gadget que mostra a coordenada geogr&aacute;fica da posi&ccedil;&atilde;o do mouse -->
 		<div id=localizarxy style="text-align:left;font-size:10px;display:inline-table">Aguarde...</div>
 	  </td>
- 	  <!-- aqui ser&atilde;o inclu&iacute;das as bandeiras que permitem a troca de idioma -->	  
+ 	  <!-- aqui ser&atilde;o inclu&iacute;das as bandeiras que permitem a troca de idioma -->
 	  <td class=tdbranca  ><div id=seletorIdiomas ></div></td>
 	  <!--
 		A op&ccedil;&atilde;o de localiza&ccedil;&atilde;o 'onde estou?' baseia-se na identifica&ccedil;&atilde;o do IP do usu&aacute;rio. Para
@@ -158,7 +158,7 @@
 	</tr>
 </table>
 
-<script src="../classesjs/i3geo.js"></script>
+<script src="../classesjs/i3geo47.js"></script>
 <script src="../pacotes/openlayers/OpenLayers211.js.php"></script>
 <script>
 /*
@@ -181,10 +181,10 @@ Para definir quais bot&otilde;es das barras de ferramentas ser&atilde;o inclu&ia
 */
 /*
 	Indica a localiza&ccedil;&atilde;o correta do i3geo.
-	
+
 	&Eacute; utilizada para identificar o local correto onde est&atilde;o os programas em php que s&atilde;o utilizados.
-	
-	Se n&atilde;o for definida, o i3Geo tentar&aacute; encontrar o local automaticamente com base na tag javascript 
+
+	Se n&atilde;o for definida, o i3Geo tentar&aacute; encontrar o local automaticamente com base na tag javascript
 */
 //i3GEO.configura.locaplic = i3GEO.util.protocolo()+"://"+window.location.host+"/i3geo";
 /*
@@ -204,14 +204,14 @@ i3GEO.Interface.openlayers.GADGETS = {
 		PanZoom:false,
 		LayerSwitcher:true,
 		ScaleLine:true,
-		OverviewMap:false	
+		OverviewMap:false
 	};
 i3GEO.Interface.openlayers.TILES = true;
 
 //
 //desabilita o item que abre a interface "default" do menu suspenso
 //
-i3GEO.gadgets.PARAMETROS.mostraMenuSuspenso.finaliza = 'if($i("omenudataInterface1")){i3GEOoMenuBar.getMenuItem("omenudataInterface1").cfg.setProperty("text", " ");}'
+i3GEO.gadgets.PARAMETROS.mostraMenuSuspenso.finaliza = 'if($i("omenudataInterface1")){i3GEOoMenuBar.getMenuItem("omenudataInterface1").cfg.setProperty("text", " ");}';
 
 /*
 Após a cria&ccedil;&atilde;o, &eacute; criado o objeto i3geoOL que corresponde ao objeto map da API do OpenLayers.
@@ -260,38 +260,38 @@ OpenLayers.ImgPath = "../pacotes/openlayers/img/";
 //adiciona camadas que podem ser ativadas como fundo do mapa
 //
 (function(){
-	var oce = new OpenLayers.Layer.ArcGIS93Rest( 
+	var oce = new OpenLayers.Layer.ArcGIS93Rest(
 		"ESRI Ocean Basemap",
 		"http://server.arcgisonline.com/ArcGIS/rest/services/Ocean_Basemap/MapServer/export",
 		{format:"jpg"},
 		{isBaseLayer:true,visibility:false}
 	);
-	var ims = new OpenLayers.Layer.ArcGIS93Rest( 
+	var ims = new OpenLayers.Layer.ArcGIS93Rest(
 		"ESRI Imagery World 2D",
 		"http://server.arcgisonline.com/ArcGIS/rest/services/ESRI_Imagery_World_2D/MapServer/export",
 		{},
 		{isBaseLayer:true,visibility:false}
 	);
-	var wsm = new OpenLayers.Layer.ArcGIS93Rest( 
+	var wsm = new OpenLayers.Layer.ArcGIS93Rest(
 		"ESRI World Street Map",
 		"http://server.arcgisonline.com/ArcGIS/rest/services/ESRI_StreetMap_World_2D/MapServer/export",
 		{},
 		{isBaseLayer:true,visibility:false}
 	);
-	var bra = new OpenLayers.Layer.WMS( 
+	var bra = new OpenLayers.Layer.WMS(
 		"Base carto MMA",
 		"http://mapas.mma.gov.br/cgi-bin/mapserv?map=/opt/www/html/webservices/baseraster.map",
 		{layers:"baseraster",srs:"EPSG:4618",format:"image/png",isBaseLayer:false},
 		{isBaseLayer:true,visibility:false}
 	);
 	/*
-	var osm = new OpenLayers.Layer.WMS( 
+	var osm = new OpenLayers.Layer.WMS(
 		"Open Street Map",
 		"http://full.wms.geofabrik.de/std/demo_key",
 		{layers:""},
 		{isBaseLayer:true,visibility:false}
 	);
-	*/	
+	*/
 	i3GEO.Interface.openlayers.LAYERSADICIONAIS = [oce,ims,wsm,bra];
 })();
 //

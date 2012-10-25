@@ -35,7 +35,7 @@ function montaEditorTema(dados)
 			{ label: "Salva", value: "OK", checked: false},
 			{ label: "Cancela", value: "CANCEL", checked: false }
 		]);
-		editorBotoes.on("checkedButtonChange", on_editorCheckBoxChange);	
+		editorBotoes.on("checkedButtonChange", on_editorCheckBoxChange);
 		YAHOO.admin.container.panelEditorTema = new YAHOO.widget.Panel("janela_editor_tema", { fixedcenter:true,close:true,width:"400px", height:"400px",overflow:"auto", visible:false,constraintoviewport:true } );
 		YAHOO.admin.container.panelEditorTema.render();
 		var fecha = function()
@@ -90,19 +90,19 @@ function montaDivTemas(i)
 	ins += "<option value='WMS' ";
 	if (i.tipoa_tema == "WMS"){ins += "selected";}
 	ins += " >WMS<option></select></p>";
-	ins += "<p>Permite acesso via WMS/WFS?<br>";
+	ins += "<p>Permite acesso via WMS/WFS? (n&atilde; restringe em temas do tipo gvSIG)<br>";
 	ins += "<select  id='ogc_tema' >";
 	ins += core_combosimnao(i.ogc_tema);
 	ins += "</select></p>";
-	ins += "<p>Permite o download na aplica&ccedil;&atilde;o datadownload.htm? (n&atilde;o afeta a permiss&atilde;o de download definida no item 'disponibilidade' existente em cada layer)<br>";
+	ins += "<p>Permite o download na aplica&ccedil;&atilde;o datadownload.htm? (n&atilde; afeta temas do tipo gvSIG) (n&atilde;o afeta a permiss&atilde;o de download definida no item 'disponibilidade' existente em cada layer)<br>";
 	ins += "<select  id='download_tema' >";
 	ins += core_combosimnao(i.download_tema);
 	ins += "</select></p>";
-	ins += "<p>Permite acesso via kml?<br>";
+	ins += "<p>Permite acesso via kml? (n&atilde; restringe em temas do tipo gvSIG)<br>";
 	ins += "<select  id='kml_tema' >";
 	ins += core_combosimnao(i.kml_tema);
 	ins += "</select></p>";
-	ins += "<p>Permite acesso via kmz (kml com dados vetoriais)?<br>";
+	ins += "<p>Permite acesso via kmz (kml com dados vetoriais)? (n&atilde; restringe em temas do tipo gvSIG)<br>";
 	ins += "<select  id='kmz_tema' >";
 	ins += core_combosimnao(i.kmz_tema);
 	ins += "</select></p>";
@@ -133,7 +133,7 @@ function atualizaMiniatura(){
   		},
   		failure:core_handleFailure,
   		argument: { foo:"foo", bar:"bar" }
-	}; 
+	};
 	core_makeRequest(sUrl,callback,"GET");
 }
 function gravaDadosTema(id)
@@ -141,7 +141,7 @@ function gravaDadosTema(id)
 	//validacao
 	if($i("kml_tema") && $i("ogc_tema")){
 		if(($i("ogc_tema").value).toLowerCase() == "sim")
-		{$i("kml_tema").value = "SIM";}		
+		{$i("kml_tema").value = "SIM";}
 	}
 	if($i("kml_tema") && $i("kmz_tema")){
 		if(($i("kmz_tema").value).toLowerCase() == "sim")
@@ -190,6 +190,6 @@ function gravaDadosTema(id)
   		},
   		failure:core_handleFailure,
   		argument: { foo:"foo", bar:"bar" }
-	}; 
+	};
 	core_makeRequest(sUrl,callback,"POST");
 }

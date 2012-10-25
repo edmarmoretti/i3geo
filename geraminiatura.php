@@ -142,12 +142,17 @@ function verificaMiniatura($map,$tipo,$admin=false)
 	$tema = "";
 	$map = str_replace("\\","/",$map);
 	$map = basename($map);
-	if (file_exists($locaplic.'/temas/'.$map))
-	{$tema = $locaplic.'/temas/'.$map;}
-	if (file_exists($locaplic.'/temas/'.$map.'.map'))
-	{$tema = $locaplic.'/temas/'.$map.".map";}
-	if ($tema != "")
-	{
+	$extensao = ".map";
+	if (file_exists($locaplic.'/temas/'.$map)){
+		$tema = $locaplic.'/temas/'.$map;
+	}
+	else{
+		if (file_exists($locaplic.'/temas/'.$map.'.gvp')){
+			$extensao = ".gvp";
+		}
+		$tema = $locaplic.'/temas/'.$map.$extensao;
+	}
+	if ($tema != ""){
 		if(isset($base) && $base != ""){
 			if(file_exists($base))
 			{$f = $base;}
@@ -158,13 +163,12 @@ function verificaMiniatura($map,$tipo,$admin=false)
 				exit;
 			}
 		}
-		else
-		{
+		else{
 			$f = "";
-			if (strtoupper(substr(PHP_OS, 0, 3) == 'WIN'))
-			{$f = $locaplic."/aplicmap/geral1windowsv".$versao.".map";}
-			else
-			{
+			if (strtoupper(substr(PHP_OS, 0, 3) == 'WIN')){
+				$f = $locaplic."/aplicmap/geral1windowsv".$versao.".map";
+			}
+			else{
 				if($f == "" && file_exists('/var/www/i3geo/aplicmap/geral1debianv'.$versao.'.map')){
 					$f = "/var/www/i3geo/aplicmap/geral1debianv".$versao.".map";
 				}
@@ -174,53 +178,62 @@ function verificaMiniatura($map,$tipo,$admin=false)
 				if($f == "" && file_exists('/opt/www/html/i3geo/aplicmap/geral1fedorav'.$versao.'.map')){
 					$f = "/opt/www/html/i3geo/aplicmap/geral1v".$versao.".map";
 				}
-				if($f == "")
-				{$f = $locaplic."/aplicmap/geral1v".$versao.".map";}
+				if($f == ""){
+					$f = $locaplic."/aplicmap/geral1v".$versao.".map";
+				}
 			}
 		}
 		$mapa = ms_newMapObj($f);
-		if(@ms_newMapObj($tema))
-		{$nmapa = ms_newMapObj($tema);}
-		else
-		{
-			echo "erro no arquivo $tema <br>";
-			return;
-		}
-		$dados = "";
-		$numlayers = $nmapa->numlayers;
-		for ($i=0;$i < $numlayers;$i++)
-		{
-			$layern = $nmapa->getlayer($i);
-			$layern->set("status",MS_DEFAULT);
-			ms_newLayerObj($mapa, $layern);
-			autoClasses($layern,$mapa,$locaplic);
-			if ($layern->data == "")
-			{$dados = $layern->connection;}
-			else
-			{$dados = $layern->data;}
-			$pegarext = $teman;
-		}
-		if (isset($postgis_mapa))
-		{
-			if ($postgis_mapa != "")
-			{
-				$numlayers = $mapa->numlayers;
-				for ($i=0;$i < $numlayers;++$i)
-				{
-					$layer = $mapa->getlayer($i);
-					if ($layer->connectiontype == MS_POSTGIS)
-					{
-						if ($layer->connection == " ")
-						{
-							$layer->set("connection",$postgis_mapa);
+		if($extensao == ".map"){
+			if(@ms_newMapObj($tema)){
+				$nmapa = ms_newMapObj($tema);
+			}
+			else{
+				echo "erro no arquivo $tema <br>";
+				return;
+			}
+			$dados = "";
+			$numlayers = $nmapa->numlayers;
+			for ($i=0;$i < $numlayers;$i++){
+				$layern = $nmapa->getlayer($i);
+				$layern->set("status",MS_DEFAULT);
+				ms_newLayerObj($mapa, $layern);
+				autoClasses($layern,$mapa,$locaplic);
+				if ($layern->data == ""){
+					$dados = $layern->connection;
+				}
+				else{
+					$dados = $layern->data;
+				}
+				$pegarext = $teman->name;
+			}
+			if (isset($postgis_mapa)){
+				if ($postgis_mapa != ""){
+					$numlayers = $mapa->numlayers;
+					for ($i=0;$i < $numlayers;++$i){
+						$layer = $mapa->getlayer($i);
+						if ($layer->connectiontype == MS_POSTGIS){
+							if ($layer->connection == " "){
+								$layer->set("connection",$postgis_mapa);
+							}
 						}
 					}
 				}
 			}
+			zoomTemaMiniatura($pegarext,$mapa);
 		}
-		zoomTemaMiniatura($pegarext,$mapa);
-		if ($tipo == "mini"  || $tipo == "todos")
-		{
+		if($extensao == ".gvp"){
+			include_once($locaplic."/pacotes/gvsig/gvsig2mapfile/class.gvsig2mapfile.php");
+			$gm = new gvsig2mapfile($tema);
+			$gvsigview = $gm->getViewsNames();
+			$gvsigview = $gvsigview[0];
+			$dataView = $gm->getViewData($gvsigview);
+			$next = $dataView["extent"];
+			$ext = $mapa->extent;
+			$ext->setextent($next[0],$next[1],$next[2],$next[3]);
+			$mapa = $gm->addLayers($mapa,$gvsigview,$dataView["layerNames"]);
+		}
+		if ($tipo == "mini"  || $tipo == "todos"){
 			$mapa->setsize(50,50);
 			$sca = $mapa->scalebar;
 			$sca->set("status",MS_OFF);
@@ -230,8 +243,7 @@ function verificaMiniatura($map,$tipo,$admin=false)
 			$weboM = $mapa->web;
 			$urlM = $weboM->imageurl."/".$map;
 		}
-		if ($tipo == "grande"  || $tipo == "todos")
-		{
+		if ($tipo == "grande"  || $tipo == "todos"){
 		 	$mapa->setsize(300,300);
 			$sca = $mapa->scalebar;
 			$sca->set("status",MS_OFF);
@@ -241,23 +253,21 @@ function verificaMiniatura($map,$tipo,$admin=false)
 			$weboG = $mapa->web;
 			$urlG = $weboG->imageurl."/".$map;
 		}
-		if($tipo=="mini" || $tipo == "todos")
-		{
-			if($objImagemM->imagepath == "")
-			{echo "Erro IMAGEPATH vazio";return;}
+		if($tipo=="mini" || $tipo == "todos"){
+			if($objImagemM->imagepath == ""){
+				echo "Erro IMAGEPATH vazio";return;
+			}
 			$nomecM = ($objImagemM->imagepath).$map.".mini.png";
 			$objImagemM->saveImage($nomecM);
 		}
-		if($tipo=="grande" || $tipo == "todos")
-		{
-			if($objImagemG->imagepath == "")
-			{echo "Erro IMAGEPATH vazio";return;}
+		if($tipo=="grande" || $tipo == "todos"){
+			if($objImagemG->imagepath == ""){
+				echo "Erro IMAGEPATH vazio";return;
+			}
 			$nomecG = ($objImagemG->imagepath).$map.".grande.png";
 			$objImagemG->saveImage($nomecG);
 		}
-
-		if($admin == false)
-		{
+		if($admin == false){
 			if($tipo=="mini" || $tipo == "todos")
 			{echo "<br><img src='".$urlM.".mini.png' /><br>";}
 			if($tipo=="grande" || $tipo == "todos")
@@ -266,8 +276,7 @@ function verificaMiniatura($map,$tipo,$admin=false)
 		//
 		//copia a imagem
 		//
-		if($admin == true)
-		{
+		if($admin == true){
 			$dir = $locaplic."/temas/miniaturas";
 			$mini = $dir."/".$map.".map.mini.png";
 			$grande = $dir."/".$map.".map.grande.png";

@@ -1115,8 +1115,7 @@ function incluiMapaGvsig($gvsiggvp,$gvsigview=""){
 	}
 	$dataView = $gm->getViewData($gvsigview);
 	$numlayers = $mapn->numlayers;
-	for ($i=0;$i < $numlayers;$i++)
-	{
+	for ($i=0;$i < $numlayers;$i++){
 		$layer = $mapn->getlayer($i);
 		$layer->set("status",MS_DELETE);
 	}
