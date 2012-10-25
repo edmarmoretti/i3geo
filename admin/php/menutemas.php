@@ -1200,6 +1200,9 @@ function listaMapsTemas()
 				if(!stristr($file, '.php') === FALSE){
 					$extensao = "php";
 				}
+				if(!stristr($file, '.gvp') === FALSE){
+					$extensao = "gvp";
+				}
 				if($extensao != "")
 				{
 					$file = str_replace(".".$extensao,"",$file);
