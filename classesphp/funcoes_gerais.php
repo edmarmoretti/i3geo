@@ -1530,10 +1530,12 @@ Include:
 function downloadTema2($map_file,$tema,$locaplic,$dir_tmp,$postgis_mapa)
 {
 	ini_set("max_execution_time","1800");
-	if(file_exists($locaplic."/ms_configura.php"))
-	include($locaplic."/ms_configura.php");
-	else
-	include("../ms_configura.php");
+	if(file_exists($locaplic."/ms_configura.php")){
+		include($locaplic."/ms_configura.php");
+	}
+	else{
+		include("../ms_configura.php");
+	}
 	$versao = versao();
 	$versao = $versao["principal"];
 	$dataArquivos = array();
@@ -1542,14 +1544,13 @@ function downloadTema2($map_file,$tema,$locaplic,$dir_tmp,$postgis_mapa)
 	//
 	$nomeRand = true;
 	//echo $versao;exit;
-	if (($map_file == "") || (!@ms_newMapObj($map_file))) //a funcao foi chamada do aplicativo datadownload
-	{
+	if (($map_file == "") || (!@ms_newMapObj($map_file))){ //a funcao foi chamada do aplicativo datadownload
 		if($base == "" or !isset($base)){
 			$base = "";
-			if (strtoupper(substr(PHP_OS, 0, 3) == 'WIN'))
-			{$base = $locaplic."/aplicmap/geral1windowsv".$versao.".map";}
-			else
-			{
+			if (strtoupper(substr(PHP_OS, 0, 3) == 'WIN')){
+				$base = $locaplic."/aplicmap/geral1windowsv".$versao.".map";
+			}
+			else{
 				if($base == "" && file_exists('/var/www/i3geo/aplicmap/geral1debianv'.$versao.'.map')){
 					$base = "/var/www/i3geo/aplicmap/geral1debianv".$versao.".map";
 				}
@@ -1559,13 +1560,15 @@ function downloadTema2($map_file,$tema,$locaplic,$dir_tmp,$postgis_mapa)
 				if($base == "" && file_exists('/opt/www/html/i3geo/aplicmap/geral1fedorav'.$versao.'.map')){
 					$base = "/opt/www/html/i3geo/aplicmap/geral1v".$versao.".map";
 				}
-				if($base == "")
-				{$base = $locaplic."/aplicmap/geral1v".$versao.".map";}
+				if($base == ""){
+					$base = $locaplic."/aplicmap/geral1v".$versao.".map";
+				}
 			}
 		}
 		else{
-			if(!file_exists($base))
-			{$base = $locaplic."/aplicmap/".$base;}
+			if(!file_exists($base)){
+				$base = $locaplic."/aplicmap/".$base;
+			}
 		}
 		$map_tmp = ms_newMapObj($base);
 		$map_file = $dir_tmp."/".nomerandomico(20).".map";
@@ -1580,43 +1583,55 @@ function downloadTema2($map_file,$tema,$locaplic,$dir_tmp,$postgis_mapa)
 	$temasdir = $locaplic."/temas";
 	$map = ms_newMapObj($map_file);
 	$rectextent = $map->extent;
-	//
-	//problema aqui
-	//$tema pode ser diferente do nome do mapfile
-	//
-	$teste = @$map->getlayerbyname($tema);
-	//caso o usuario tenha usado caixa alta no nome do layer
-	if ($teste == "")
-	{$teste = @$map->getlayerbyname(strtoupper($tema));}
-	//se o layer n&atilde;o existir no mapfile, pega da pasta i3geo/temas e adiciona em $map
-	if($teste == "")
-	{
-		$maptemp = ms_newMapObj($temasdir."/".$tema.".map");
-		$numlayers = $maptemp->numlayers;
-		for ($i=0;$i < $numlayers;++$i)
-		{
-			$ll = $maptemp->getlayer($i);
-			$permite = $ll->getmetadata("permitedownload");
-			if($permite != "nao")
-			{ms_newLayerObj($map, $ll);}
-		}
+	$extensao = ".map";
+	if(file_exists($locaplic."/temas/".$tema.".gvp")){
+		$extensao = ".gvp";
+	}
+	if($extensao == ".map"){
+		//
+		//problema aqui
+		//$tema pode ser diferente do nome do mapfile
+		//
 		$teste = @$map->getlayerbyname($tema);
-		if ($teste == "")
-		{
-			$ll = $maptemp->getlayer(0);
-			$permite = $ll->getmetadata("permitedownload");
-			if($permite != "nao")
-			{
-				ms_newLayerObj($map, $ll);
-				$tema = $ll->name;
+		//caso o usuario tenha usado caixa alta no nome do layer
+		if ($teste == ""){
+			$teste = @$map->getlayerbyname(strtoupper($tema));
+		}
+		//se o layer n&atilde;o existir no mapfile, pega da pasta i3geo/temas e adiciona em $map
+		if($teste == ""){
+			$maptemp = ms_newMapObj($temasdir."/".$tema.".map");
+			$numlayers = $maptemp->numlayers;
+			for ($i=0;$i < $numlayers;++$i){
+				$ll = $maptemp->getlayer($i);
+				$permite = $ll->getmetadata("permitedownload");
+				if($permite != "nao"){
+					ms_newLayerObj($map, $ll);
+				}
+			}
+			$teste = @$map->getlayerbyname($tema);
+			if ($teste == ""){
+				$ll = $maptemp->getlayer(0);
+				$permite = $ll->getmetadata("permitedownload");
+				if($permite != "nao"){
+					ms_newLayerObj($map, $ll);
+					$tema = $ll->name;
+				}
 			}
 		}
+		else{
+			//remove o metadata com um nome de arquivo opcional, pois a fun&ccedil;&atilde;o de download pode estar sendo executada da &aacute;rvore de camadas
+			$teste = $map->getlayerbyname($tema);
+			$teste->setmetadata("arquivodownload","");
+		}
 	}
-	else
-	{
-		//remove o metadata com um nome de arquivo opcional, pois a fun&ccedil;&atilde;o de download pode estar sendo executada da &aacute;rvore de camadas
-		$teste = $map->getlayerbyname($tema);
-		$teste->setmetadata("arquivodownload","");
+	else{
+		include_once($locaplic."/pacotes/gvsig/gvsig2mapfile/class.gvsig2mapfile.php");
+		$gm = new gvsig2mapfile($locaplic."/temas/".$tema.".gvp");
+		$gvsigview = $gm->getViewsNames();
+		$gvsigview = $gvsigview[0];
+		$dataView = $gm->getViewData($gvsigview);
+		$map = $gm->addLayers($map,$gvsigview,$dataView["layerNames"]);
+		$temas = $gm->nomesLayersAdicionados;
 	}
 	//
 	//salva o mapfile com um outro nome para evitar que o mapa atual, se estiver aberto, seja modificado
@@ -1630,30 +1645,31 @@ function downloadTema2($map_file,$tema,$locaplic,$dir_tmp,$postgis_mapa)
 	//verifica se existe mais de um tema (grupo) montando o array com os temas
 	//os grupos podem ter o nome do layer em GROUP ao inv&eacute;s de NAME
 	//
-	$multilayer = 0;
-	$grupos = $map->getAllGroupNames();
-	foreach ($grupos as $grupo)
-	{
-		if ($grupo == $tema)
-		{$multilayer = 1;}
-	}
-	if ($multilayer == 1)
-	{
-		$temasnx = $map->getAllLayerNames();
-		foreach ($temasnx as $l)
-		{
-			$gl = $map->getlayerbyname($l);
-			$g = $gl->group;
-			if (($g == $tema) || ($l == $tema))
-			{$temas[] = $l;}
+	if($extensao == ".map"){
+		$multilayer = 0;
+		$grupos = $map->getAllGroupNames();
+		foreach ($grupos as $grupo){
+			if ($grupo == $tema){
+				$multilayer = 1;
+			}
+		}
+		if ($multilayer == 1){
+			$temasnx = $map->getAllLayerNames();
+			foreach ($temasnx as $l){
+				$gl = $map->getlayerbyname($l);
+				$g = $gl->group;
+				if (($g == $tema) || ($l == $tema)){
+					$temas[] = $l;
+				}
+			}
+		}
+		if ($multilayer == 0){
+			$temas[] = $tema;
 		}
 	}
-	if ($multilayer == 0)
-	{$temas[] = $tema;}
 	//$temas agora &eacute; um array com os NAMEs dos LAYERS que ser&atilde;o baixados
 	$radtmp = dirname($dir_tmp);
-	foreach ($temas as $tema)
-	{
+	foreach ($temas as $tema){
 		$l = $map->getlayerbyname($tema);
 		$novonomelayer = $tema;
 		$nomeshp = $dir_tmp."/".$novonomelayer;
@@ -1673,35 +1689,29 @@ function downloadTema2($map_file,$tema,$locaplic,$dir_tmp,$postgis_mapa)
 		//se existir um arquivo j&aacute; pronto, definido no metadata arquivodownload, ir&aacute; ser utilizado
 		//
 		$meta = $l->getmetadata("arquivodownload");
-		if($meta != "")
-		{
+		if($meta != ""){
 			//
 			//se o arquivo n&atilde;o tiver sido copiado
 			//
 			$nomecopia = $dir_tmp."/".basename($meta);
-			if(file_exists($meta))
-			{
+			if(file_exists($meta)){
 				if(!file_exists($nomecopia))
 				{copy($meta,$nomecopia);}
 			}
 			$resultado[] = basename($dir_tmp)."/".basename($nomecopia);
 		}
-		else //se n&atilde;o existir arquivo definido
-		{
+		else{ //se n&atilde;o existir arquivo definido
 			$dados = $l->data;
 			//
 			//se for imagem, copia o arquivo
 			//
-			if($l->type == MS_LAYER_RASTER)
-			{
-				if (file_exists($dados))
-				{
+			if($l->type == MS_LAYER_RASTER){
+				if (file_exists($dados)){
 					$dir = dirname($dados);
 					$arq = explode(".",basename($dados));
 					$nomecopia = $dir_tmp."/".$arq[0];
 					$exts = array("jpg","jpw","tif","tifw","tfw","png","pngw","jpgw","wld","img");
-					foreach($exts as $ext)
-					{
+					foreach($exts as $ext){
 						$copia = $nomecopia.".".$ext;
 						if(!file_exists($copia) && file_exists($dir."/".$arq[0].".".$ext))
 						{copy($dir."/".$arq[0].".".$ext,$copia);}
@@ -1709,15 +1719,15 @@ function downloadTema2($map_file,$tema,$locaplic,$dir_tmp,$postgis_mapa)
 						$resultado[] = basename($dir_tmp)."/".basename($copia);
 					}
 				}
-				else
-				{return "erro";}
+				else{
+					return "erro";
+				}
 			}
-			else //se for vetorial, extrai o arquivo
-			{
+			else{ //se for vetorial, extrai o arquivo
 				$nomeshp = criaSHP($tema,$map_file,$locaplic,$dir_tmp,$nomeRand);
-				if($nomeshp == false)
-				{return array("arquivos"=>"<span style=color:red >Ocorreu um erro, tente novamente","nreg"=>0);}
-
+				if($nomeshp == false){
+					return array("arquivos"=>"<span style=color:red >Ocorreu um erro, tente novamente","nreg"=>0);
+				}
 				$resultado[] = str_replace($radtmp."/","",$nomeshp).".shp";
 				$dataArquivos[] = date ("F d Y H:i:s.",filemtime($nomeshp.".shp"));
 
@@ -1748,8 +1758,7 @@ function downloadTema2($map_file,$tema,$locaplic,$dir_tmp,$postgis_mapa)
 	if(file_exists($temasdir."/".$tema.".map")){
 		$maptemp = ms_newMapObj($temasdir."/".$tema.".map");
 		$numlayers = $maptemp->numlayers;
-		for ($i=0;$i < $numlayers;++$i)
-		{
+		for ($i=0;$i < $numlayers;++$i){
 			$gl = $maptemp->getlayer($i);
 			$gl->set("data","");
 			$gl->set("connection","");

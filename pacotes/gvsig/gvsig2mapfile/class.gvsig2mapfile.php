@@ -7,6 +7,7 @@
 class gvsig2mapfile{
 	var $arquivoGvp;
 	var $xml;
+	var $nomesLayersAdicionados = array();
 	/**
 	 * Construtor da classe
 	 * @param string $gvp arquivo de projeto gvsig
@@ -230,6 +231,7 @@ class gvsig2mapfile{
 	}
 	function data2layer($oLayer,$dataLayer){
 		$oLayer->set("name",$this->nomeRandomico());
+		$this->nomesLayersAdicionados[] = $oLayer->name;
 		$oLayer->set("data",$dataLayer["data"]);
 		if($dataLayer["connectiontype"] != "")
 		{$oLayer->setConnectionType($dataLayer["connectiontype"]);}
