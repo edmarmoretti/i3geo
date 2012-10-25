@@ -1754,7 +1754,7 @@ it:""
 }],
 "x32":[
 {
-pt:"Enviar senha",
+pt:"Recuperar senha",
 en:"Send password",
 es:"Enviar la contraseña",
 it:""

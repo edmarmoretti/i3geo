@@ -101,19 +101,26 @@ i3GEOF.loginusuario = {
 	String com o c&oacute;digo html
 	*/
 	html:function(){
-		var u = i3GEO.util.pegaCookie("i3geousuarionome")+" - "+i3GEO.util.pegaCookie("i3geousuariologin"),
+		var usuario = i3GEO.util.pegaCookie("i3geousuariologin"),
+			u = "",
 			ins = "";
-		if(!i3GEO.util.pegaCookie("i3geousuariologin") || !i3GEO.util.pegaCookie("i3GeoLogin") || i3GEO.util.pegaCookie("i3geousuariologin") == "" || i3GEO.util.pegaCookie("i3GeoLogin") == ""){
+		if(!usuario || !i3GEO.util.pegaCookie("i3GeoLogin") || i3GEO.util.pegaCookie("i3geousuariologin") == "" || i3GEO.util.pegaCookie("i3GeoLogin") == ""){
 			u = "-";
+		}
+		else{
+			u = usuario+" - "+i3GEO.util.pegaCookie("i3geousuariologin");
+		}
+		if(!usuario || usuario == "null"){
+			usuario = "";
 		}
 		ins = '<p class="paragrafo" >'+$trad("x30")+': <b><i>'+u+"</i></b>" +
 		'<p class="paragrafo" >'+$trad("x27")+':<br>' +
-		'<input id=i3geousuario type=text style="width:250px;" value="'+i3GEO.util.pegaCookie("i3geousuariologin")+'"/>' +
+		'<input id=i3geousuario type=text style="width:250px;" value="'+usuario+'"/>' +
 		'<p class="paragrafo" >'+$trad("x28")+':<br>' +
 		'<input id=i3geosenha type=password style="width:250px;" value=""/><br>' +
 		'<p class="paragrafo" ><input id=i3GEOFloginusuario size=20  type=button value="'+$trad("x29")+'" />&nbsp;<input id=i3GEOFlogoutusuario size=20  type=button value="Logout" />' +
 		'<p class="paragrafo" onclick="i3GEOF.loginusuario.recuperarSenha()" style="cursor:pointer;color:blue;">'+$trad("x32")+'</p>' +
-		'<p class="paragrafo" onclick="i3GEOF.loginusuario.alterarSenha()" style="cursor:pointer;color:blue;">'+$trad("x52")+'</p><br>';
+		'<p class="paragrafo" onclick="i3GEOF.loginusuario.alterarSenha()" style="cursor:pointer;color:blue;">'+$trad("x52")+'</p><br><br><br>';
 		return ins;
 	},
 	/*
@@ -131,7 +138,7 @@ i3GEOF.loginusuario = {
 		titulo = "Login &nbsp;&nbsp;&nbsp;";
 		janela = i3GEO.janela.cria(
 			"260px",
-			"210px",
+			"220px",
 			"",
 			"",
 			"",
