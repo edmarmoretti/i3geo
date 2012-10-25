@@ -1,11 +1,22 @@
 <?php
+/**
+ * Manipula um arquivo GVP (projeto gvSIG) para construção de layers Mapserver
+ * @author Edmar Moretti
+ * @license GPL2
+ */
 class gvsig2mapfile{
 	var $arquivoGvp;
 	var $xml;
+	/**
+	 * Construtor da classe
+	 * @param string $gvp arquivo de projeto gvsig
+	 * @example $gm = new gvsig2mapfile($gvsiggvp);
+	 * @throws Exception
+	 */
 	function __construct($gvp)
 	{
-  		if(!file_exists($gvp))
-  		{throw new Exception("Arquivo $gvp não existe");}
+		if(!file_exists($gvp))
+		{throw new Exception("Arquivo $gvp não existe");}
 		else{
 			$this->arquivoGvp = $gvp;
 			if(function_exists("dl")){
@@ -17,6 +28,10 @@ class gvsig2mapfile{
 			$this->xml = simplexml_load_file($gvp);
 		}
 	}
+	/**
+	 * Lista de vistas existentes no projeto gvsig
+	 * @return array
+	 **/
 	function getViewsNames(){
 		$names = array();
 		$this->xml->registerXPathNamespace("tag", "http://www.gvsig.gva.es");
@@ -26,11 +41,27 @@ class gvsig2mapfile{
 		}
 		return $names;
 	}
+
+	/**
+	 * Retorna uma vista
+	 * @param string $nome
+	 * @return $xml
+	 */
 	function getViewByName($nome){
 		$this->xml->registerXPathNamespace("tag", "http://www.gvsig.gva.es");
 		$result = $this->xml->xpath("/tag:xml-tag/tag:xml-tag/tag:property[@value='ProjectView']/parent::*/tag:property[@value='".$nome."']/parent::*");
 		return $result;
 	}
+
+	/**
+	 * Obtem os dados descritivos de uma visao
+	 * @param string $nome Nome da vista
+	 * @return array (
+			"extent"=>array(xmin,ymin,xmax,ymax),
+			"proj"=>string projecao,
+			"layerNames"=>string lista de layers separados por virgula
+		)
+	 */
 	function getViewData($nome){
 		$this->xml->registerXPathNamespace("tag", "http://www.gvsig.gva.es");
 		$path = "/tag:xml-tag/tag:xml-tag/tag:property[@value='ProjectView']/parent::*/tag:property[@value='".$nome."']/parent::*/tag:xml-tag/tag:xml-tag";
@@ -48,6 +79,29 @@ class gvsig2mapfile{
 			"layerNames"=>explode(",",str_replace(" ,",",",$nomes))
 		);
 	}
+	/**
+	 * Obtem os dados de um layer
+	 * @param string $viewNome
+	 * @param string $layerNome
+	 * @return array(
+			"minScale"=> string,
+			"maxScale"=>string,
+			"visible"=>string,
+			"proj"=>string,
+			"transparency"=>string,
+			"type"=>string,
+			"data"=>string,
+			"connection"=>string,
+			"connectiontype"=>string,
+			"driverName"=>string,
+			"isLabeled"=>string,
+			"legenda"=>array(
+				"tipoLegenda"=>string,
+				"classes"=>string
+			)
+		)
+	 *
+	 */
 	function getLayerData($viewNome,$layerNome){
 		$this->xml->registerXPathNamespace("tag", "http://www.gvsig.gva.es");
 		$path = "/tag:xml-tag/tag:xml-tag/tag:property[@value='ProjectView']/parent::*/tag:property[@value='".$viewNome."']/parent::*/tag:xml-tag/tag:xml-tag/tag:xml-tag/tag:xml-tag/parent::*/tag:property[@value='".$layerNome."']/parent::*";

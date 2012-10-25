@@ -127,7 +127,7 @@ versao_wms - Vers&atilde;o do WMS (necess&aacute;rio quando da inclus&atilde;o d
 
 gvsiggvp - endere&ccedil;o no servidor do arquivo de projeto gvSig (gvp) que ser&aacute; utilizado para construir o mapa (experimental)
 
-gvsigview - nome da view do projeto gvSig (http://localhost/i3geo/ms_criamapa.php?gvsiggvp=c:\temp\teste.gvp&gvsigview=Untitled - 0)
+gvsigview - nome da view do projeto gvSig. Se nao for especificado, sera considerada a primeira view existente no projeto. Exemplo (http://localhost/i3geo/ms_criamapa.php?gvsiggvp=c:\temp\teste.gvp&gvsigview=Untitled - 0)
 */
 
 //$_COOKIE = array();
@@ -348,13 +348,8 @@ else
 /*
 Utiliza um projeto gvSig para compor o mapa
 */
-if(isset($gvsiggvp) && $gvsiggvp != ""){
-	if(isset($gvsigview) && $gvsigview != ""){
-		incluiMapaGvsig($gvsiggvp,$gvsigview);
-	}
-	else{
-		echo "Nenhuma vista foi definida &gvsigview";
-	}
+if(!empty($gvsiggvp)){
+	incluiMapaGvsig($gvsiggvp,$gvsigview);
 }
 /*
  Par&acirc;metros adicionais.
@@ -505,7 +500,7 @@ function abreInterface(){
 	{
 		if(file_exists($caminho."interface/".$interface))
 		{include_once($caminho."interface/".$interface);}
-		else 
+		else
 		{include_once($interface);}
 		exit;
 	}
@@ -513,7 +508,7 @@ function abreInterface(){
 	{
 		if(file_exists($caminho."interface/".$interface))
 		{$urln = $caminho."interface/".$interface."?".session_id();}
-		else 
+		else
 		{$urln = $interface."?".session_id();}
 		if(!headers_sent())
 		{header("Location:".$urln);}
@@ -1087,10 +1082,14 @@ function incluiTemaWms()
 /*
 Projeto gvsig
 */
-function incluiMapaGvsig($gvsiggvp,$gvsigview){
+function incluiMapaGvsig($gvsiggvp,$gvsigview=""){
 	global $mapn,$locaplic;
 	include_once($locaplic."/pacotes/gvsig/gvsig2mapfile/class.gvsig2mapfile.php");
 	$gm = new gvsig2mapfile($gvsiggvp);
+	if(empty($gvsigview)){
+		$gvsigview = $gm->getViewsNames();
+		$gvsigview = $gvsigview[0];
+	}
 	$dataView = $gm->getViewData($gvsigview);
 	$numlayers = $mapn->numlayers;
 	for ($i=0;$i < $numlayers;$i++)
