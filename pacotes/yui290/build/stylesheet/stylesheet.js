@@ -32,7 +32,7 @@ var d      = document,
 _unsetOpacity = ('opacity' in workerStyle) ?
     function (style) { style.opacity = ''; } :
     function (style) { style.filter = ''; };
-        
+
 /*
  * Normalizes the removal of an assigned style for a given property.  Expands
  * shortcut properties if necessary and handles the various names for the float property.
@@ -75,7 +75,7 @@ _unsetProperty = workerStyle.borderLeft ?
             }
         }
     };
-    
+
 /**
  * Create an instance of YAHOO.util.StyleSheet to encapsulate a css stylesheet.
  * The constructor can be called using function or constructor syntax.
@@ -103,7 +103,7 @@ _unsetProperty = workerStyle.borderLeft ?
  * <p>The optional second parameter is a string name to register the sheet as.
  * This param is largely useful when providing a node id/ref or chunk of css
  * text to create a populated instance.</p>
- * 
+ *
  * @class StyleSheet
  * @constructor
  * @param seed {String|&lt;style&gt; element} a style or link node, its id, or a name or
@@ -190,7 +190,6 @@ function StyleSheet(seed, name) {
     // 5. Initialize the cssRules map from the node
     // xdomain link nodes forbid access to the cssRules collection, so this
     // will throw an error.
-    // TODO: research alternate stylesheet, @media
     for (i = sheet[_rules].length - 1; i >= 0; --i) {
         r   = sheet[_rules][i];
         sel = r.selectorText;
@@ -375,7 +374,7 @@ function StyleSheet(seed, name) {
                         remove = true;
                     }
                 }
-                
+
                 if (remove) { // remove the rule altogether
                     rules = sheet[_rules];
                     for (i = rules.length - 1; i >= 0; --i) {

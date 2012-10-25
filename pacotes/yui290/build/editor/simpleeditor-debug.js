@@ -9,12 +9,12 @@ var Dom = YAHOO.util.Dom,
     Event = YAHOO.util.Event,
     Lang = YAHOO.lang;
     /**
-     * @module editor    
+     * @module editor
      * @description <p>Creates a rich custom Toolbar Button. Primarily used with the Rich Text Editor's Toolbar</p>
      * @class ToolbarButtonAdvanced
      * @namespace YAHOO.widget
      * @requires yahoo, dom, element, event, container_core, menu, button
-     * 
+     *
      * Provides a toolbar button based on the button and menu widgets.
      * @constructor
      * @class ToolbarButtonAdvanced
@@ -45,7 +45,7 @@ var Dom = YAHOO.util.Dom,
                 if (_menuItems[i].value == value) {
                     _menuItems[i].cfg.setProperty('checked', true);
                 }
-            }      
+            }
         };
     } else {
         YAHOO.widget.ToolbarButtonAdvanced = function() {};
@@ -58,8 +58,8 @@ var Dom = YAHOO.util.Dom,
      * @namespace YAHOO.widget
      * @requires yahoo, dom, element, event
      * @extends YAHOO.util.Element
-     * 
-     * 
+     *
+     *
      * @constructor
      * @param {String/HTMLElement} el The element to turn into a button.
      * @param {Object} attrs Object liternal containing configuration parameters.
@@ -68,7 +68,7 @@ var Dom = YAHOO.util.Dom,
     YAHOO.widget.ToolbarButton = function(el, attrs) {
         YAHOO.log('ToolbarButton Initalizing', 'info', 'ToolbarButton');
         YAHOO.log(arguments.length + ' arguments passed to constructor', 'info', 'Toolbar');
-        
+
         if (Lang.isObject(arguments[0]) && !Dom.get(el).nodeType) {
             attrs = el;
         }
@@ -82,7 +82,7 @@ var Dom = YAHOO.util.Dom,
         if (!oConfig.attributes.type) {
             oConfig.attributes.type = 'push';
         }
-        
+
         oConfig.element = document.createElement('span');
         oConfig.element.setAttribute('unselectable', 'on');
         oConfig.element.className = 'yui-button yui-' + oConfig.attributes.type + '-button';
@@ -138,10 +138,10 @@ var Dom = YAHOO.util.Dom,
                 }
             }
         },
-        /** 
+        /**
         * @method init
         * @description The ToolbarButton class's initialization method
-        */        
+        */
         init: function(p_oElement, p_oAttributes) {
             YAHOO.widget.ToolbarButton.superclass.init.call(this, p_oElement, p_oAttributes);
 
@@ -154,18 +154,18 @@ var Dom = YAHOO.util.Dom,
         },
         /**
         * @method initAttributes
-        * @description Initializes all of the configuration attributes used to create 
+        * @description Initializes all of the configuration attributes used to create
         * the toolbar.
-        * @param {Object} attr Object literal specifying a set of 
+        * @param {Object} attr Object literal specifying a set of
         * configuration attributes used to create the toolbar.
-        */        
+        */
         initAttributes: function(attr) {
             YAHOO.widget.ToolbarButton.superclass.initAttributes.call(this, attr);
             /**
             * @attribute value
             * @description The value of the button
             * @type String
-            */            
+            */
             this.setAttributeConfig('value', {
                 value: attr.value
             });
@@ -173,7 +173,7 @@ var Dom = YAHOO.util.Dom,
             * @attribute menu
             * @description The menu attribute, see YAHOO.widget.Button
             * @type Object
-            */            
+            */
             this.setAttributeConfig('menu', {
                 value: attr.menu || false
             });
@@ -181,7 +181,7 @@ var Dom = YAHOO.util.Dom,
             * @attribute type
             * @description The type of button to create: push, menu, color, select, spin
             * @type String
-            */            
+            */
             this.setAttributeConfig('type', {
                 value: attr.type,
                 writeOnce: true,
@@ -217,7 +217,7 @@ var Dom = YAHOO.util.Dom,
             * @attribute disabled
             * @description Set the button into a disabled state
             * @type String
-            */            
+            */
             this.setAttributeConfig('disabled', {
                 value: attr.disabled || false,
                 method: function(disabled) {
@@ -238,7 +238,7 @@ var Dom = YAHOO.util.Dom,
             * @attribute label
             * @description The text label for the button
             * @type String
-            */            
+            */
             this.setAttributeConfig('label', {
                 value: attr.label,
                 method: function(label) {
@@ -255,7 +255,7 @@ var Dom = YAHOO.util.Dom,
             * @attribute title
             * @description The title of the button
             * @type String
-            */            
+            */
             this.setAttributeConfig('title', {
                 value: attr.title
             });
@@ -264,7 +264,7 @@ var Dom = YAHOO.util.Dom,
             * @config container
             * @description The container that the button is rendered to, handled by Toolbar
             * @type String
-            */            
+            */
             this.setAttributeConfig('container', {
                 value: null,
                 writeOnce: true,
@@ -274,28 +274,28 @@ var Dom = YAHOO.util.Dom,
             });
 
         },
-        /** 
+        /**
         * @private
         * @method _handleSelect
         * @description The event fired when a change event gets fired on a select element
         * @param {Event} ev The change event.
-        */        
+        */
         _handleSelect: function(ev) {
             var tar = Event.getTarget(ev);
             var value = tar.options[tar.selectedIndex].value;
             this.fireEvent('change', {type: 'change', value: value });
         },
-        /** 
+        /**
         * @method getMenu
         * @description A stub function to mimic YAHOO.widget.Button's getMenu method
-        */        
+        */
         getMenu: function() {
             return this.get('menu');
         },
-        /** 
+        /**
         * @method destroy
         * @description Destroy the button
-        */        
+        */
         destroy: function() {
             Event.purgeElement(this.get('element'), true);
             this.get('element').parentNode.removeChild(this.get('element'));
@@ -304,30 +304,30 @@ var Dom = YAHOO.util.Dom,
                 if (Lang.hasOwnProperty(this, i)) {
                     this[i] = null;
                 }
-            }       
+            }
         },
-        /** 
+        /**
         * @method fireEvent
         * @description Overridden fireEvent method to prevent DOM events from firing if the button is disabled.
-        */        
+        */
         fireEvent: function(p_sType, p_aArgs) {
             //  Disabled buttons should not respond to DOM events
             if (this.DOM_EVENTS[p_sType] && this.get('disabled')) {
                 Event.stopEvent(p_aArgs);
                 return;
             }
-        
+
             YAHOO.widget.ToolbarButton.superclass.fireEvent.call(this, p_sType, p_aArgs);
         },
         /**
         * @method toString
         * @description Returns a string representing the toolbar.
         * @return {String}
-        */        
+        */
         toString: function() {
             return 'ToolbarButton (' + this.get('id') + ')';
         }
-        
+
     });
 })();
 /**
@@ -341,7 +341,7 @@ var Dom = YAHOO.util.Dom,
 var Dom = YAHOO.util.Dom,
     Event = YAHOO.util.Event,
     Lang = YAHOO.lang;
-    
+
     var getButton = function(id) {
         var button = id;
         if (Lang.isString(id)) {
@@ -370,7 +370,7 @@ var Dom = YAHOO.util.Dom,
     YAHOO.widget.Toolbar = function(el, attrs) {
         YAHOO.log('Toolbar Initalizing', 'info', 'Toolbar');
         YAHOO.log(arguments.length + ' arguments passed to constructor', 'info', 'Toolbar');
-        
+
         if (Lang.isObject(arguments[0]) && !Dom.get(el).nodeType) {
             attrs = el;
         }
@@ -378,44 +378,44 @@ var Dom = YAHOO.util.Dom,
         if (attrs) {
             Lang.augmentObject(local_attrs, attrs); //Break the config reference
         }
-        
+
 
         var oConfig = {
             element: null,
             attributes: local_attrs
         };
-        
-        
+
+
         if (Lang.isString(el) && Dom.get(el)) {
             oConfig.element = Dom.get(el);
-        } else if (Lang.isObject(el) && Dom.get(el) && Dom.get(el).nodeType) {  
+        } else if (Lang.isObject(el) && Dom.get(el) && Dom.get(el).nodeType) {
             oConfig.element = Dom.get(el);
         }
-        
+
 
         if (!oConfig.element) {
             YAHOO.log('No element defined, creating toolbar container', 'warn', 'Toolbar');
             oConfig.element = document.createElement('DIV');
             oConfig.element.id = Dom.generateId();
-            
+
             if (local_attrs.container && Dom.get(local_attrs.container)) {
                 YAHOO.log('Container found in config appending to it (' + Dom.get(local_attrs.container).id + ')', 'info', 'Toolbar');
                 Dom.get(local_attrs.container).appendChild(oConfig.element);
             }
         }
-        
+
 
         if (!oConfig.element.id) {
             oConfig.element.id = ((Lang.isString(el)) ? el : Dom.generateId());
             YAHOO.log('No element ID defined for toolbar container, creating..', 'warn', 'Toolbar');
         }
         YAHOO.log('Initing toolbar with id: ' + oConfig.element.id, 'info', 'Toolbar');
-        
+
         var fs = document.createElement('fieldset');
         var lg = document.createElement('legend');
         lg.innerHTML = 'Toolbar';
         fs.appendChild(lg);
-        
+
         var cont = document.createElement('DIV');
         oConfig.attributes.cont = cont;
         Dom.addClass(cont, 'yui-toolbar-subcont');
@@ -424,14 +424,14 @@ var Dom = YAHOO.util.Dom,
 
         oConfig.element.tabIndex = -1;
 
-        
+
         oConfig.attributes.element = oConfig.element;
         oConfig.attributes.id = oConfig.element.id;
 
         this._configuredButtons = [];
 
         YAHOO.widget.Toolbar.superclass.constructor.call(this, oConfig.element, oConfig.attributes);
-         
+
     };
 
     YAHOO.extend(YAHOO.widget.Toolbar, YAHOO.util.Element, {
@@ -447,7 +447,7 @@ var Dom = YAHOO.util.Dom,
         * @description This method is called from Menu's renderEvent to add a few more classes to the menu items
         * @param {String} ev The event that fired.
         * @param {Array} na Array of event information.
-        * @param {Object} o Button config object. 
+        * @param {Object} o Button config object.
         */
         _addMenuClasses: function(ev, na, o) {
             Dom.addClass(this.element, 'yui-toolbar-' + o.get('value') + '-menu');
@@ -460,19 +460,19 @@ var Dom = YAHOO.util.Dom,
                 Dom.addClass(items[i].element, 'yui-toolbar-' + o.get('value') + '-' + ((items[i].value) ? items[i].value.replace(/ /g, '-') : items[i]._oText.nodeValue.replace(/ /g, '-')));
             }
         },
-        /** 
+        /**
         * @property buttonType
         * @description The default button to use
         * @type Object
         */
         buttonType: YAHOO.widget.ToolbarButton,
-        /** 
+        /**
         * @property dd
         * @description The DragDrop instance associated with the Toolbar
         * @type Object
         */
         dd: null,
-        /** 
+        /**
         * @property _colorData
         * @description Object reference containing colors hex and text values.
         * @type Object
@@ -625,49 +625,49 @@ var Dom = YAHOO.util.Dom,
     '#FDEEE0': 'Marble'
 /* }}} */
         },
-        /** 
+        /**
         * @property _colorPicker
         * @description The HTML Element containing the colorPicker
         * @type HTMLElement
         */
         _colorPicker: null,
-        /** 
+        /**
         * @property STR_COLLAPSE
         * @description String for Toolbar Collapse Button
         * @type String
         */
         STR_COLLAPSE: 'Collapse Toolbar',
-        /** 
+        /**
         * @property STR_EXPAND
         * @description String for Toolbar Collapse Button - Expand
         * @type String
         */
         STR_EXPAND: 'Expand Toolbar',
-        /** 
+        /**
         * @property STR_SPIN_LABEL
         * @description String for spinbutton dynamic label. Note the {VALUE} will be replaced with YAHOO.lang.substitute
         * @type String
         */
         STR_SPIN_LABEL: 'Spin Button with value {VALUE}. Use Control Shift Up Arrow and Control Shift Down arrow keys to increase or decrease the value.',
-        /** 
+        /**
         * @property STR_SPIN_UP
         * @description String for spinbutton up
         * @type String
         */
         STR_SPIN_UP: 'Click to increase the value of this input',
-        /** 
+        /**
         * @property STR_SPIN_DOWN
         * @description String for spinbutton down
         * @type String
         */
         STR_SPIN_DOWN: 'Click to decrease the value of this input',
-        /** 
+        /**
         * @property _titlebar
         * @description Object reference to the titlebar
         * @type HTMLElement
         */
         _titlebar: null,
-        /** 
+        /**
         * @property browser
         * @description Standard browser detection
         * @type Object
@@ -750,7 +750,7 @@ var Dom = YAHOO.util.Dom,
         * @type String
         */
         CLASS_PREFIX: 'yui-toolbar',
-        /** 
+        /**
         * @method init
         * @description The Toolbar class's initialization method
         */
@@ -759,9 +759,9 @@ var Dom = YAHOO.util.Dom,
         },
         /**
         * @method initAttributes
-        * @description Initializes all of the configuration attributes used to create 
+        * @description Initializes all of the configuration attributes used to create
         * the toolbar.
-        * @param {Object} attr Object literal specifying a set of 
+        * @param {Object} attr Object literal specifying a set of
         * configuration attributes used to create the toolbar.
         */
         initAttributes: function(attr) {
@@ -818,7 +818,7 @@ var Dom = YAHOO.util.Dom,
             * </pre></code>
             * @type Array
             */
-            
+
             this.setAttributeConfig('buttons', {
                 value: [],
                 writeOnce: true,
@@ -838,7 +838,7 @@ var Dom = YAHOO.util.Dom,
                                         }
                                     }
                                 }
-                                
+
                             } else {
                                 button = this.addButton(data[i]);
                                 if (button) {
@@ -1000,7 +1000,7 @@ var Dom = YAHOO.util.Dom,
 
             /**
             * @attribute draggable
-            * @description Boolean indicating if the toolbar should be draggable.  
+            * @description Boolean indicating if the toolbar should be draggable.
             * @default false
             * @type Boolean
             */
@@ -1023,7 +1023,7 @@ var Dom = YAHOO.util.Dom,
                             }
                             this.dd = new YAHOO.util.DD(this.get('id'));
                             this.dd.setHandleElId(this._dragHandle.id);
-                            
+
                         }
                     } else {
                         YAHOO.log('Dragging disabled', 'info', 'Toolbar');
@@ -1067,7 +1067,7 @@ var Dom = YAHOO.util.Dom,
                 this._queue[this._queue.length] = ['addButtonGroup', arguments];
                 return false;
             }
-            
+
             if (!this.hasClass(this.CLASS_PREFIX + '-grouped')) {
                 this.addClass(this.CLASS_PREFIX + '-grouped');
             }
@@ -1092,14 +1092,14 @@ var Dom = YAHOO.util.Dom,
             if (!this._buttonGroupList) {
                 this._buttonGroupList = {};
             }
-            
+
             this._buttonGroupList[oGroup.group] = ul;
 
             //An array of the button ids added to this group
             //This is used for destruction later...
             var addedButtons = [],
                 button;
-            
+
 
             for (var i = 0; i < oGroup.buttons.length; i++) {
                 var li = document.createElement('li');
@@ -1214,12 +1214,12 @@ var Dom = YAHOO.util.Dom,
             } else {
                 //Add to .get('buttons') manually
                 this._configs.buttons.value[this._configs.buttons.value.length] = oButton;
-                
+
                 var tmp = new this.buttonType(_oButton);
                 tmp.get('element').tabIndex = '-1';
                 tmp.get('element').setAttribute('role', 'button');
                 tmp._selected = true;
-                
+
                 if (this.get('disabled')) {
                     //Toolbar is disabled, disable the new button too!
                     tmp.set('disabled', true);
@@ -1228,7 +1228,7 @@ var Dom = YAHOO.util.Dom,
                     oButton.id = tmp.get('id');
                 }
                 YAHOO.log('Button created (' + oButton.type + ')', 'info', 'Toolbar');
-                
+
                 if (after) {
                     var el = tmp.get('element');
                     var nextSib = null;
@@ -1304,7 +1304,7 @@ var Dom = YAHOO.util.Dom,
                         };
                         tmp.on('mousedown', showPicker, oButton, this);
                         tmp.on('keydown', showPicker, oButton, this);
-                        
+
                     } else if ((oButton.type != 'menu') && (oButton.type != 'select')) {
                         tmp.on('keypress', this._buttonClick, oButton, this);
                         tmp.on('mousedown', function(ev) {
@@ -1360,7 +1360,7 @@ var Dom = YAHOO.util.Dom,
                                 });
                             }
                         });
-                        
+
                     }
                 } else {
                     //Stop the mousedown event so we can trap the selection in the editor!
@@ -1376,12 +1376,12 @@ var Dom = YAHOO.util.Dom,
                     //Add a couple of new events for IE
                     tmp.DOM_EVENTS.focusin = true;
                     tmp.DOM_EVENTS.focusout = true;
-                    
+
                     //Stop them so we don't loose focus in the Editor
                     tmp.on('focusin', function(ev) {
                         YAHOO.util.Event.stopEvent(ev);
                     }, oButton, this);
-                    
+
                     tmp.on('focusout', function(ev) {
                         YAHOO.util.Event.stopEvent(ev);
                     }, oButton, this);
@@ -1519,9 +1519,9 @@ var Dom = YAHOO.util.Dom,
                         var info = {
                             color: tar.innerHTML,
                             colorName: this._colorData['#' + tar.innerHTML],
-                            value: this._colorPicker._button 
+                            value: this._colorPicker._button
                         };
-                    
+
                         this.fireEvent('buttonClick', { type: 'buttonClick', target: this.get('element'), button: info });
                     }
                     this.getButtonByValue(this._colorPicker._button).getMenu().hide();
@@ -1546,7 +1546,7 @@ var Dom = YAHOO.util.Dom,
         * @param {Object} _oButton <a href="YAHOO.widget.ToolbarButton.html">YAHOO.widget.ToolbarButton</a> reference
         */
         _makeColorButton: function(_oButton) {
-            if (!this._colorPicker) {   
+            if (!this._colorPicker) {
                 this._createColorPicker(this.get('id'));
             }
             _oButton.type = 'color';
@@ -1588,7 +1588,7 @@ var Dom = YAHOO.util.Dom,
                 _b2.href = '#';
                 _b1.tabIndex = '-1';
                 _b2.tabIndex = '-1';
-            
+
             //Setup the up and down arrows
             _b1.className = 'up';
             _b1.title = this.STR_SPIN_UP;
@@ -1600,7 +1600,7 @@ var Dom = YAHOO.util.Dom,
             //Append them to the container
             _par.appendChild(_b1);
             _par.appendChild(_b2);
-            
+
             var label = YAHOO.lang.substitute(this.STR_SPIN_LABEL, { VALUE: _button.get('label') });
             _button.set('title', label);
 
@@ -1616,7 +1616,7 @@ var Dom = YAHOO.util.Dom,
             if (this._titlebar && this._titlebar.firstChild) {
                 tbar = this._titlebar.firstChild;
             }
-            
+
             var _intUp = function(ev) {
                 YAHOO.util.Event.stopEvent(ev);
                 if (!_button.get('disabled') && (ev.keyCode != 9)) {
@@ -1687,7 +1687,7 @@ var Dom = YAHOO.util.Dom,
         */
         _buttonClick: function(ev, info) {
             var doEvent = true;
-            
+
             if (ev && ev.type == 'keypress') {
                 if (ev.keyCode == 9) {
                     doEvent = false;
@@ -1700,7 +1700,7 @@ var Dom = YAHOO.util.Dom,
             if (doEvent) {
                 var fireNextEvent = true,
                     retValue = false;
-                    
+
                 info.isSelected = this.isSelected(info.id);
 
                 if (info.value) {
@@ -1710,7 +1710,7 @@ var Dom = YAHOO.util.Dom,
                         fireNextEvent = false;
                     }
                 }
-                
+
                 if (info.menucmd && fireNextEvent) {
                     YAHOO.log('fireEvent::' + info.menucmd + 'Click', 'info', 'Toolbar');
                     retValue = this.fireEvent(info.menucmd + 'Click', { type: info.menucmd + 'Click', target: this.get('element'), button: info });
@@ -2069,7 +2069,7 @@ var Dom = YAHOO.util.Dom,
                     len = this._buttonList.length;
 
                 button.destroy();
-                
+
                 for (i = 0; i < len; i++) {
                     if (this._buttonList[i].get('id') != thisID) {
                         new_list[new_list.length]= this._buttonList[i];
@@ -2093,7 +2093,7 @@ var Dom = YAHOO.util.Dom,
             }
 
             this._configuredButtons = null;
-        
+
             this.get('element').innerHTML = '';
             this.get('element').className = '';
             //Brutal Object Destroy
@@ -2190,10 +2190,10 @@ var Dom = YAHOO.util.Dom,
      * @param {String/HTMLElement} el The textarea element to turn into an editor.
      * @param {Object} attrs Object liternal containing configuration parameters.
     */
-    
+
     YAHOO.widget.SimpleEditor = function(el, attrs) {
         YAHOO.log('SimpleEditor Initalizing', 'info', 'SimpleEditor');
-        
+
         var o = {};
         if (Lang.isObject(el) && (!el.tagName) && !attrs) {
             Lang.augmentObject(o, el); //Break the config reference
@@ -2235,7 +2235,7 @@ var Dom = YAHOO.util.Dom,
         var div = document.createElement('div');
         Dom.addClass(div, 'first-child');
         oConfig.attributes.element_cont.appendChild(div);
-        
+
         if (!oConfig.attributes.toolbar_cont) {
             oConfig.attributes.toolbar_cont = document.createElement('DIV');
             oConfig.attributes.toolbar_cont.id = id + '_toolbar';
@@ -2313,8 +2313,8 @@ var Dom = YAHOO.util.Dom,
                 }
 
                 this.dd = new dd(this.get('element_cont').get('element'));
-                this.toolbar.addClass('draggable'); 
-                this.dd.setHandleElId(this.toolbar._titlebar); 
+                this.toolbar.addClass('draggable');
+                this.dd.setHandleElId(this.toolbar._titlebar);
             }
         },
         /**
@@ -2368,7 +2368,7 @@ var Dom = YAHOO.util.Dom,
         /**
         * @private
         * @property _keyMap
-        * @description Named key maps for various actions in the Editor. Example: <code>CLOSE_WINDOW: { key: 87, mods: ['shift', 'ctrl'] }</code>. 
+        * @description Named key maps for various actions in the Editor. Example: <code>CLOSE_WINDOW: { key: 87, mods: ['shift', 'ctrl'] }</code>.
         * This entry shows that when key 87 (W) is found with the modifiers of shift and control, the window will close. You can customize this object to tweak keyboard shortcuts.
         * @type {Object/Mixed}
         */
@@ -2749,7 +2749,7 @@ var Dom = YAHOO.util.Dom,
             var isrc = 'javascript:;';
             if (this.browser.ie) {
                 //isrc = 'about:blank';
-                //TODO - Check this, I have changed it before..
+                //Check this, I have changed it before..
                 isrc = 'javascript:false;';
             }
             ifrmDom.setAttribute('src', isrc);
@@ -2784,7 +2784,7 @@ var Dom = YAHOO.util.Dom,
             if (!el || !el.parentNode) {
                 return false;
             }
-            
+
             while (el.parentNode) {
                 if (this._isElement(el, tag)) {
                     return el;
@@ -2950,7 +2950,7 @@ var Dom = YAHOO.util.Dom,
                 sel.removeAllRanges();
                 sel.addRange(range);
             }
-            //TODO - Check Performance
+            //Check Performance
             this.nodeChange();
         },
         /**
@@ -3066,12 +3066,12 @@ var Dom = YAHOO.util.Dom,
             Event.on(doc, 'keypress', this._handleKeyPress, this, true);
             Event.on(doc, 'keyup', this._handleKeyUp, this, true);
             Event.on(doc, 'keydown', this._handleKeyDown, this, true);
-            /* TODO -- Everyone but Opera works here..
+            /*  -- Everyone but Opera works here..
             Event.on(doc, 'paste', function() {
                 YAHOO.log('PASTE', 'info', 'SimpleEditor');
             }, this, true);
             */
- 
+
             //Focus and blur..
             Event.on(win, 'focus', this._handleFocus, this, true);
             Event.on(win, 'blur', this._handleBlur, this, true);
@@ -3129,7 +3129,7 @@ var Dom = YAHOO.util.Dom,
                 this._checkLoaded();
                 return false;
             }
-            
+
             YAHOO.log('editorLoaded', 'info', 'SimpleEditor');
             if (!raw) {
                 this.toolbar.on('buttonClick', this._handleToolbarClick, this, true);
@@ -3278,7 +3278,7 @@ var Dom = YAHOO.util.Dom,
             this.get('iframe').setStyle('visibility', '');
             if (check) {
                 this._checkLoaded(raw);
-            }            
+            }
         },
         /**
         * @private
@@ -3333,7 +3333,7 @@ var Dom = YAHOO.util.Dom,
                 if (range) {
                     elm = range.item ? range.item(0) : range.parentElement();
                     if (this._hasSelection()) {
-                        //TODO
+                        //
                         //WTF.. Why can't I get an element reference here?!??!
                     }
                     if (elm === doc.body) {
@@ -3350,7 +3350,7 @@ var Dom = YAHOO.util.Dom,
                 if (!sel || !range) {
                     return null;
                 }
-                //TODO
+                //
                 if (!this._hasSelection() && this.browser.webkit3) {
                     //check = false;
                 }
@@ -3373,7 +3373,7 @@ var Dom = YAHOO.util.Dom,
                         }
                     }
                 }
-                
+
                 if (check) {
                     if (sel.anchorNode && (sel.anchorNode.nodeType == 3)) {
                         if (sel.anchorNode.parentNode) { //next check parentNode
@@ -3400,7 +3400,7 @@ var Dom = YAHOO.util.Dom,
                     }
                }
             }
-            
+
             if (this.currentEvent !== null) {
                 try {
                     switch (this.currentEvent.type) {
@@ -3419,7 +3419,7 @@ var Dom = YAHOO.util.Dom,
                     YAHOO.log('Firefox 1.5 errors here: ' + e, 'error', 'SimpleEditor');
                 }
             } else if ((this.currentElement && this.currentElement[0]) && (!this.browser.ie)) {
-                //TODO is this still needed?
+                // is this still needed?
                 //elm = this.currentElement[0];
             }
 
@@ -3488,7 +3488,7 @@ var Dom = YAHOO.util.Dom,
         * @method _writeDomPath
         * @description Write the current DOM path out to the dompath container below the editor.
         */
-        _writeDomPath: function() { 
+        _writeDomPath: function() {
             var path = this._getDomPath(),
                 pathArr = [],
                 classPath = '',
@@ -4035,7 +4035,7 @@ var Dom = YAHOO.util.Dom,
                             } else {
                                 this._getDoc().execCommand('indent', null, '');
                             }
-                            
+
                         } else if (!this._hasSelection()) {
                             this.execCommand('inserthtml', '&nbsp;&nbsp;&nbsp;&nbsp;');
                         }
@@ -4146,8 +4146,8 @@ var Dom = YAHOO.util.Dom,
         * @private
         * @method _fixListDupIds
         * @description Some browsers will duplicate the id of an LI when created in designMode.
-        * This method will fix the duplicate id issue. However it will only preserve the first element 
-        * in the document list with the unique id. 
+        * This method will fix the duplicate id issue. However it will only preserve the first element
+        * in the document list with the unique id.
         */
         _fixListDupIds: function() {
             if (this._fixListRunning) {
@@ -4315,7 +4315,7 @@ var Dom = YAHOO.util.Dom,
             if (force === true) {
                 this._lastNodeChange = 0;
             }
-            
+
             if ((this._lastNodeChange + threshold) < thisNodeChange) {
                 if (this._fixNodesTimer === null) {
                     this._fixNodesTimer = window.setTimeout(function() {
@@ -4486,7 +4486,7 @@ var Dom = YAHOO.util.Dom,
         * @method _updateMenuChecked
         * @param {Object} button The command identifier of the button you want to check
         * @param {String} value The value of the menu item you want to check
-        * @param {<a href="YAHOO.widget.Toolbar.html">YAHOO.widget.Toolbar</a>} The Toolbar instance the button belongs to (defaults to this.toolbar) 
+        * @param {<a href="YAHOO.widget.Toolbar.html">YAHOO.widget.Toolbar</a>} The Toolbar instance the button belongs to (defaults to this.toolbar)
         * @description Gets the menu from a button instance, if the menu is not rendered it will render it. It will then search the menu for the specified value, unchecking all other items and checking the specified on.
         */
         _updateMenuChecked: function(button, value, tbar) {
@@ -4588,7 +4588,7 @@ var Dom = YAHOO.util.Dom,
                 this._orgIframe.setStyle('left', '-99999px');
                 this.set('iframe', iframe);
                 this._setInitialContent(true);
-                
+
                 if (!this._mask) {
                     this._mask = document.createElement('DIV');
                     Dom.addClass(this._mask, 'yui-editor-masked');
@@ -4663,7 +4663,7 @@ var Dom = YAHOO.util.Dom,
         * @description The label string for Image URL
         * @type String
         */
-        STR_IMAGE_URL: 'Image URL',        
+        STR_IMAGE_URL: 'Image URL',
         /**
         * @property STR_LINK_URL
         * @description The label string for the Link URL.
@@ -4719,7 +4719,7 @@ var Dom = YAHOO.util.Dom,
         * @type String
         */
         CLASS_PREFIX: 'yui-editor',
-        /** 
+        /**
         * @property browser
         * @description Standard browser detection
         * @type Object
@@ -4745,7 +4745,7 @@ var Dom = YAHOO.util.Dom,
 
             return br;
         }(),
-        /** 
+        /**
         * @method init
         * @description The Editor class' initialization method
         */
@@ -4786,7 +4786,7 @@ var Dom = YAHOO.util.Dom,
                                 { type: 'separator' },
                                 { type: 'color', label: 'Font Color', value: 'forecolor', disabled: true },
                                 { type: 'color', label: 'Background Color', value: 'backcolor', disabled: true }
-                                
+
                             ]
                         },
                         { type: 'separator' },
@@ -4820,9 +4820,9 @@ var Dom = YAHOO.util.Dom,
         },
         /**
         * @method initAttributes
-        * @description Initializes all of the configuration attributes used to create 
+        * @description Initializes all of the configuration attributes used to create
         * the editor.
-        * @param {Object} attr Object literal specifying a set of 
+        * @param {Object} attr Object literal specifying a set of
         * configuration attributes used to create the editor.
         */
         initAttributes: function(attr) {
@@ -4958,7 +4958,7 @@ var Dom = YAHOO.util.Dom,
             * @description The number of seconds that need to be in between nodeChange processing
             * @default 3
             * @type Number
-            */            
+            */
             this.setAttributeConfig('nodeChangeThreshold', {
                 value: attr.nodeChangeThreshold || 3,
                 validator: YAHOO.lang.isNumber
@@ -4969,7 +4969,7 @@ var Dom = YAHOO.util.Dom,
             * Such as highlighting an element below and above the content and hitting a toolbar button or a shortcut key.
             * @default false
             * @type Boolean
-            */            
+            */
             this.setAttributeConfig('allowNoEdit', {
                 value: attr.allowNoEdit || false,
                 validator: YAHOO.lang.isBoolean
@@ -4979,7 +4979,7 @@ var Dom = YAHOO.util.Dom,
             * @description Should the Editor limit the allowed execCommands to the ones available in the toolbar. If true, then execCommand and keyboard shortcuts will fail if they are not defined in the toolbar.
             * @default false
             * @type Boolean
-            */            
+            */
             this.setAttributeConfig('limitCommands', {
                 value: attr.limitCommands || false,
                 validator: YAHOO.lang.isBoolean
@@ -5059,7 +5059,7 @@ var Dom = YAHOO.util.Dom,
             * @description The width of the editor container.
             * @default Best guessed size of the textarea, for best results use CSS to style the width of the textarea or pass it in as an argument
             * @type String
-            */            
+            */
             this.setAttributeConfig('width', {
                 value: attr.width || Dom.getStyle(this.get('element'), 'width'),
                 method: function(width) {
@@ -5078,13 +5078,13 @@ var Dom = YAHOO.util.Dom,
                     }
                 }
             });
-                        
+
             /**
             * @attribute blankimage
             * @description The URL for the image placeholder to put in when inserting an image.
             * @default The yahooapis.com address for the current release + 'assets/blankimage.png'
             * @type String
-            */            
+            */
             this.setAttributeConfig('blankimage', {
                 value: attr.blankimage || this._getBlankImage()
             });
@@ -5118,7 +5118,7 @@ var Dom = YAHOO.util.Dom,
             }
             </pre></code>
             * @type String
-            */            
+            */
             this.setAttributeConfig('css', {
                 value: attr.css || this._defaultCSS,
                 writeOnce: true
@@ -5152,7 +5152,7 @@ var Dom = YAHOO.util.Dom,
                 </pre>
                 </code>
             * @type String
-            */            
+            */
             this.setAttributeConfig('html', {
                 value: attr.html || '<html><head><title>{TITLE}</title><meta http-equiv="Content-Type" content="text/html; charset=UTF-8" /><base href="' + this._baseHREF + '"><style>{CSS}</style><style>{HIDDEN_CSS}</style><style>{EXTRA_CSS}</style></head><body onload="document.body._rteLoaded = true;">{CONTENT}</body></html>',
                 writeOnce: true
@@ -5163,7 +5163,7 @@ var Dom = YAHOO.util.Dom,
             * @description Extra user defined css to load after the default SimpleEditor CSS
             * @default ''
             * @type String
-            */            
+            */
             this.setAttributeConfig('extracss', {
                 value: attr.extracss || '',
                 writeOnce: true
@@ -5176,7 +5176,7 @@ var Dom = YAHOO.util.Dom,
             Then it will trigger the editors save handler and place the new content back into the text area before the form is submitted.
             * @default false
             * @type Boolean
-            */            
+            */
             this.setAttributeConfig('handleSubmit', {
                 value: attr.handleSubmit || false,
                 method: function(exec) {
@@ -5242,7 +5242,7 @@ var Dom = YAHOO.util.Dom,
             * @attribute toolbar
             * @description The default toolbar config.
             * @type Object
-            */            
+            */
             this.setAttributeConfig('toolbar', {
                 value: attr.toolbar || this._defaultToolbar,
                 writeOnce: true,
@@ -5258,7 +5258,7 @@ var Dom = YAHOO.util.Dom,
             * @description Should the editor animate window movements
             * @default false unless Animation is found, then true
             * @type Boolean
-            */            
+            */
             this.setAttributeConfig('animate', {
                 value: ((attr.animate) ? ((YAHOO.util.Anim) ? true : false) : false),
                 validator: function(value) {
@@ -5274,7 +5274,7 @@ var Dom = YAHOO.util.Dom,
             * @description A reference to the panel we are using for windows.
             * @default false
             * @type Boolean
-            */            
+            */
             this.setAttributeConfig('panel', {
                 value: null,
                 writeOnce: true,
@@ -5284,14 +5284,14 @@ var Dom = YAHOO.util.Dom,
                         ret = false;
                     }
                     return ret;
-                }               
+                }
             });
             /**
             * @attribute focusAtStart
             * @description Should we focus the window when the content is ready?
             * @default false
             * @type Boolean
-            */            
+            */
             this.setAttributeConfig('focusAtStart', {
                 value: attr.focusAtStart || false,
                 writeOnce: true,
@@ -5312,7 +5312,7 @@ var Dom = YAHOO.util.Dom,
             * @description Toggle the display of the current Dom path below the editor
             * @default false
             * @type Boolean
-            */            
+            */
             this.setAttributeConfig('dompath', {
                 value: attr.dompath || false,
                 method: function(dompath) {
@@ -5335,7 +5335,7 @@ var Dom = YAHOO.util.Dom,
             * @description Should we try to adjust the markup for the following types: semantic, css, default or xhtml
             * @default "semantic"
             * @type String
-            */            
+            */
             this.setAttributeConfig('markup', {
                 value: attr.markup || 'semantic',
                 validator: function(markup) {
@@ -5354,12 +5354,12 @@ var Dom = YAHOO.util.Dom,
             * @description Should we remove linebreaks and extra spaces on cleanup
             * @default false
             * @type Boolean
-            */            
+            */
             this.setAttributeConfig('removeLineBreaks', {
                 value: attr.removeLineBreaks || false,
                 validator: YAHOO.lang.isBoolean
             });
-            
+
             /**
             * @config drag
             * @description Set this config to make the Editor draggable, pass 'proxy' to make use YAHOO.util.DDProxy.
@@ -5418,7 +5418,7 @@ var Dom = YAHOO.util.Dom,
                     img = YAHOO.util.Dom.getStyle(div, 'background-image');
                     img = img.replace('url(', '').replace(')', '').replace(/"/g, '');
                     //Adobe AIR Code
-                    img = img.replace('app:/', '');             
+                    img = img.replace('app:/', '');
                     this.set('blankimage', img);
                     this._blankImageLoaded = true;
                     div.parentNode.removeChild(div);
@@ -5447,7 +5447,7 @@ var Dom = YAHOO.util.Dom,
             if (newHeight < parseInt(this.get('height'), 10)) {
                 newHeight = parseInt(this.get('height'), 10);
             }
-            if ((height != newHeight) && (newHeight >= parseInt(this.get('height'), 10))) {   
+            if ((height != newHeight) && (newHeight >= parseInt(this.get('height'), 10))) {
                 var anim = this.get('animate');
                 this.set('animate', false);
                 this.set('height', newHeight + 'px');
@@ -5593,7 +5593,7 @@ var Dom = YAHOO.util.Dom,
                 if (Dom.getStyle(elm, 'font-family')) {
                     family = Dom.getStyle(elm, 'font-family');
                     //Adobe AIR Code
-                    family = family.replace(/'/g, '');                    
+                    family = family.replace(/'/g, '');
                 }
 
                 if (tag.substring(0, 1) == 'h') {
@@ -5632,7 +5632,7 @@ var Dom = YAHOO.util.Dom,
                 }
                 fs_button.set('label', ''+fontsize);
             }
-            
+
             if (!this._isElement(elm, 'body') && !this._isElement(elm, 'img')) {
                 this.toolbar.enableButton(fn_button);
                 this.toolbar.enableButton(fs_button);
@@ -5653,7 +5653,7 @@ var Dom = YAHOO.util.Dom,
                 this.toolbar.disableButton('indent');
             }
             this._lastButton = null;
-            
+
         },
         /**
         * @private
@@ -5667,7 +5667,7 @@ var Dom = YAHOO.util.Dom,
                     return false;
                 }
             }
-        
+
             this.toolbar.set('disabled', true); //Disable the toolbar when the prompt is showing
             var _handleAEC = function() {
                 var el = this.currentElement[0],
@@ -5736,7 +5736,7 @@ var Dom = YAHOO.util.Dom,
                     return false;
                 }
             }
-        
+
             this.toolbar.set('disabled', true); //Disable the toolbar when the prompt is showing
 
             var _handleAEC = function() {
@@ -5830,7 +5830,7 @@ var Dom = YAHOO.util.Dom,
 
             this.get('element_cont').setStyle('display', 'none');
             this.get('element_cont').addClass(this.CLASS_CONTAINER);
-            
+
             this.set('iframe', this._createIframe());
 
             window.setTimeout(function() {
@@ -5858,7 +5858,7 @@ var Dom = YAHOO.util.Dom,
             YAHOO.log('fireEvent::toolbarLoaded', 'info', 'SimpleEditor');
             this.fireEvent('toolbarLoaded', { type: 'toolbarLoaded', target: this.toolbar });
 
-            
+
             this.toolbar.on('toolbarCollapsed', function() {
                 if (this.currentWindow) {
                     this.moveWindow();
@@ -5870,7 +5870,7 @@ var Dom = YAHOO.util.Dom,
                 }
             }, this, true);
             this.toolbar.on('fontsizeClick', this._handleFontSize, this, true);
-            
+
             this.toolbar.on('colorPickerClicked', function(o) {
                 this._handleColorPicker(o);
                 return false; //Stop the buttonClick event
@@ -5882,12 +5882,12 @@ var Dom = YAHOO.util.Dom,
             this.on('windowinsertimageClose', this._handleInsertImageWindowClose, this, true);
             this.toolbar.on('createlinkClick', this._handleCreateLinkClick, this, true);
             this.on('windowcreatelinkClose', this._handleCreateLinkWindowClose, this, true);
-            
+
 
             //Replace Textarea with editable area
             this.get('parentNode').replaceChild(this.get('element_cont').get('element'), this.get('element'));
 
-            
+
             this.setStyle('visibility', 'hidden');
             this.setStyle('position', 'absolute');
             this.setStyle('top', '-9999px');
@@ -5931,7 +5931,7 @@ var Dom = YAHOO.util.Dom,
                 this._getWindow().focus();
             }
             var exec = true;
-            
+
             if (this.get('limitCommands')) {
                 if (!this.toolbar.getButtonByValue(action)) {
                     YAHOO.log('Toolbar Button for (' + action + ') was not found, skipping exec.', 'info', 'SimpleEditor');
@@ -5940,7 +5940,7 @@ var Dom = YAHOO.util.Dom,
             }
 
             this.editorDirty = true;
-            
+
             if ((typeof this['cmd_' + action.toLowerCase()] == 'function') && exec) {
                 YAHOO.log('Found execCommand override method: (cmd_' + action.toLowerCase() + ')', 'info', 'SimpleEditor');
                 var retValue = this['cmd_' + action.toLowerCase()](value);
@@ -5967,7 +5967,7 @@ var Dom = YAHOO.util.Dom,
                 this.nodeChange();
             }, this, true);
             this.fireEvent('afterExecCommand', { type: 'afterExecCommand', target: this });
-            
+
         },
     /* {{{  Command Overrides */
 
@@ -6072,7 +6072,7 @@ var Dom = YAHOO.util.Dom,
         cmd_forecolor: function(value) {
             var exec = true,
                 el = this._getSelectedElement();
-                
+
                 if (!this._isElement(el, 'body') && !this._hasSelection()) {
                     Dom.setStyle(el, 'color', value);
                     this._selectNode(el);
@@ -6142,7 +6142,7 @@ var Dom = YAHOO.util.Dom,
             * @description The issue here is that we have no way of knowing where the cursor position is
             * inside of the iframe, so we have to place the newly inserted data in the best place that we can.
             */
-            
+
             YAHOO.log('InsertImage: ' + el.tagName, 'info', 'SimpleEditor');
             if (this._isElement(el, 'img')) {
                 this.currentElement[0] = el;
@@ -6204,7 +6204,7 @@ var Dom = YAHOO.util.Dom,
                 } else {
                     _range.pasteHTML(value);
                 }
-                exec = false;                    
+                exec = false;
             }
             return [exec];
         },
@@ -6336,7 +6336,7 @@ var Dom = YAHOO.util.Dom,
                         var range = this._getDoc().body.createTextRange();
                         range.moveToElementText(new_item);
                         range.collapse(false);
-                        range.select();                       
+                        range.select();
                         new_item.id = '';
                     }
                     exec = false;
@@ -6353,7 +6353,7 @@ var Dom = YAHOO.util.Dom,
             return [this.cmd_list('ol')];
         },
         /**
-        * @method cmd_insertunorderedlist 
+        * @method cmd_insertunorderedlist
         * @param value Value passed from the execCommand method
         * @description This is an execCommand override method. It is called from execCommand when the execCommand('insertunorderedlist') is used.
         */
@@ -6460,7 +6460,7 @@ var Dom = YAHOO.util.Dom,
                 //Little Safari Hackery here..
                 el.innerHTML = '<span class="yui-non">&nbsp;</span>';
                 el = el.firstChild;
-                this._getSelection().setBaseAndExtent(el, 1, el, el.innerText.length);                    
+                this._getSelection().setBaseAndExtent(el, 1, el, el.innerText.length);
             } else if (this.browser.ie || this.browser.opera) {
                 el.innerHTML = '&nbsp;';
             }
@@ -6474,7 +6474,7 @@ var Dom = YAHOO.util.Dom,
         * @param {String} tagName (optional defaults to a) The tagname of the element that you wish to create
         * @param {Object} tagStyle (optional) Object literal containing styles to apply to the new element.
         * @description This is a work around for the various browser issues with execCommand. This method will run <code>execCommand('fontname', false, 'yui-tmp')</code> on the given selection.
-        * It will then search the document for an element with the font-family set to <strong>yui-tmp</strong> and replace that with another span that has other information in it, then assign the new span to the 
+        * It will then search the document for an element with the font-family set to <strong>yui-tmp</strong> and replace that with another span that has other information in it, then assign the new span to the
         * <code>this.currentElement</code> array, so we now have element references to the elements that were just modified. At this point we can use standard DOM manipulation to change them as we see fit.
         */
         _createCurrentElement: function(tagName, tagStyle) {
@@ -6482,7 +6482,7 @@ var Dom = YAHOO.util.Dom,
             var tar = null,
                 el = [],
                 _doc = this._getDoc();
-            
+
             if (this.currentFont) {
                 if (!tagStyle) {
                     tagStyle = {};
@@ -6539,7 +6539,7 @@ var Dom = YAHOO.util.Dom,
                         tar = YAHOO.util.Event.getTarget(this.currentEvent);
                     } else {
                         //For Safari..
-                        tar = this._getDoc().body;                        
+                        tar = this._getDoc().body;
                     }
                 }
                 if (tar) {
@@ -6590,7 +6590,7 @@ var Dom = YAHOO.util.Dom,
                     }
                 }
 
-                
+
                 for (var i = 0; i < _tmp.length; i++) {
                     if ((YAHOO.util.Dom.getStyle(_tmp[i], 'font-family') == 'yui-tmp') || (_tmp[i].face && (_tmp[i].face == 'yui-tmp'))) {
                         if (tagName !== 'span') {
@@ -6759,7 +6759,7 @@ var Dom = YAHOO.util.Dom,
             html = html.replace(/}/gi, 'LEFT_BRACKET');
 
             html = html.replace(/<strong([^>]*)>/gi, '<b$1>');
-            html = html.replace(/<\/strong>/gi, '</b>');   
+            html = html.replace(/<\/strong>/gi, '</b>');
 
             //replace embed before em check
             html = html.replace(/<embed([^>]*)>/gi, '<YUI_EMBED$1>');
@@ -6768,7 +6768,7 @@ var Dom = YAHOO.util.Dom,
             html = html.replace(/<em([^>]*)>/gi, '<i$1>');
             html = html.replace(/<\/em>/gi, '</i>');
             html = html.replace(/_moz_dirty=""/gi, '');
-            
+
             //Put embed tags back in..
             html = html.replace(/<YUI_EMBED([^>]*)>/gi, '<embed$1>');
             html = html.replace(/<\/YUI_EMBED>/gi, '</embed>');
@@ -6785,7 +6785,7 @@ var Dom = YAHOO.util.Dom,
             html = html.replace(/&lt;\/script([^>]*)&gt;/gi, '</bad>');
             //Replace the line feeds
             html = html.replace(/\r\n/g, '<YUI_LF>').replace(/\n/g, '<YUI_LF>').replace(/\r/g, '<YUI_LF>');
-            
+
             //Remove Bad HTML elements (used to be script nodes)
             html = html.replace(new RegExp('<bad([^>]*)>(.*?)<\/bad>', 'gi'), '');
             //Replace the lines feeds
@@ -6801,7 +6801,7 @@ var Dom = YAHOO.util.Dom,
         cleanHTML: function(html) {
             //Start Filtering Output
             //Begin RegExs..
-            if (!html) { 
+            if (!html) {
                 html = this.getEditorHTML();
             }
             var markup = this.get('markup');
@@ -6840,8 +6840,8 @@ var Dom = YAHOO.util.Dom,
             //normalize strikethrough
             html = html.replace(/<strike/gi, '<span style="text-decoration: line-through;"');
             html = html.replace(/\/strike>/gi, '/span>');
-            
-            
+
+
             //Case Changing
             if (this.browser.ie) {
                 html = html.replace(/text-decoration/gi, 'text-decoration');
@@ -6910,7 +6910,7 @@ var Dom = YAHOO.util.Dom,
 
 		    html = html.replace(/<YUI_EMBED([^>]*)>/g, '<embed$1>');
 		    html = html.replace(/<\/YUI_EMBED>/g, '<\/embed>');
-            
+
             //This should fix &amp;'s in URL's
             html = html.replace(/ &amp; /gi, ' YUI_AMP ');
             html = html.replace(/ &amp;/gi, ' YUI_AMP_F ');
@@ -6927,7 +6927,7 @@ var Dom = YAHOO.util.Dom,
                 html = html.replace(/\n/g, '').replace(/\r/g, '');
                 html = html.replace(/  /gi, ' '); //Replace all double spaces and replace with a single
             }
-            
+
             for (var v in this.invalidHTML) {
                 if (YAHOO.lang.hasOwnProperty(this.invalidHTML, v)) {
                     if (Lang.isObject(v) && v.keepContents) {
@@ -6948,9 +6948,9 @@ var Dom = YAHOO.util.Dom,
             for (var i = 0; i < len; i++) {
                 var ps2 = ps[i].getElementsByTagName('p');
                 if (ps2.length) {
-                    
+
                 }
-                
+
             }
             html = frag.innerHTML;
             console.log(html);
@@ -7001,7 +7001,7 @@ var Dom = YAHOO.util.Dom,
             //Remove onmouseover and onmouseout events (from MS Word comments effect)
             html = html.replace( /<(\w[^>]*) onmouseover="([^\"]*)"([^>]*)/gi, "<$1$3");
             html = html.replace( /<(\w[^>]*) onmouseout="([^\"]*)"([^>]*)/gi, "<$1$3");
-            
+
             return html;
         },
         /**
@@ -7087,7 +7087,7 @@ var Dom = YAHOO.util.Dom,
 		        html = html.replace(/ class= /gi, '');
 		        html = html.replace(/ class= >/gi, '');
             }
-            
+
             return html;
         },
         /**
@@ -7105,7 +7105,7 @@ var Dom = YAHOO.util.Dom,
                     str = str.replace(arr[i].toString(), color);
                 }
             }
-            
+
             return str;
         },
         /**
@@ -7118,7 +7118,7 @@ var Dom = YAHOO.util.Dom,
             if (css.toLowerCase().indexOf('rgb') != -1) {
                 var exp = new RegExp("(.*?)rgb\\s*?\\(\\s*?([0-9]+).*?,\\s*?([0-9]+).*?,\\s*?([0-9]+).*?\\)(.*?)", "gi");
                 var rgb = css.replace(exp, "$1,$2,$3,$4,$5").split(',');
-            
+
                 if (rgb.length == 5) {
                     var r = parseInt(rgb[1], 10).toString(16);
                     var g = parseInt(rgb[2], 10).toString(16);
@@ -7150,7 +7150,7 @@ var Dom = YAHOO.util.Dom,
 		    html = html.replace(/<br\/>/gi, '<YUI_BR>');
 		    html = html.replace(/<br \/>/gi, '<YUI_BR>');
 		    html = html.replace(/<div><YUI_BR><\/div>/gi, '<YUI_BR>');
-		    html = html.replace(/<p>(&nbsp;|&#160;)<\/p>/g, '<YUI_BR>');            
+		    html = html.replace(/<p>(&nbsp;|&#160;)<\/p>/g, '<YUI_BR>');
 		    html = html.replace(/<p><br>&nbsp;<\/p>/gi, '<YUI_BR>');
 		    html = html.replace(/<p>&nbsp;<\/p>/gi, '<YUI_BR>');
             //Fix last BR
@@ -7210,7 +7210,7 @@ var Dom = YAHOO.util.Dom,
         closeWindow: function() {
             //this.unsubscribeAll('afterExecCommand');
             this.toolbar.resetAllButtons();
-            this.focus();        
+            this.focus();
         },
         /**
         * @method destroy
@@ -7222,7 +7222,7 @@ var Dom = YAHOO.util.Dom,
                 clearTimeout(this._nodeChangeDelayTimer);
             }
             this.hide();
-        
+
             YAHOO.log('Destroying Editor', 'warn', 'SimpleEditor');
             if (this.resize) {
                 YAHOO.log('Destroying Resize', 'warn', 'SimpleEditor');
@@ -7248,7 +7248,7 @@ var Dom = YAHOO.util.Dom,
             this.get('element_cont').get('element').innerHTML = '';
             this.set('handleSubmit', false); //Remove the submit handler
             return true;
-        },        
+        },
         /**
         * @method toString
         * @description Returns a string representing the editor.
@@ -7417,7 +7417,7 @@ YAHOO.widget.EditorInfo = {
     * @private
     * @property blankImage
     * @description A reference to the blankImage url
-    * @type String 
+    * @type String
     */
     blankImage: '',
     /**
@@ -7492,6 +7492,6 @@ YAHOO.widget.EditorInfo = {
 
 
 
-    
+
 })();
 YAHOO.register("simpleeditor", YAHOO.widget.SimpleEditor, {version: "2.9.0", build: "2800"});

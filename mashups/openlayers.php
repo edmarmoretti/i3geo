@@ -1,5 +1,4 @@
 <?php
-//TODO incluir arquivo gvp
 error_reporting(0);if(extension_loaded('zlib')){ob_start('ob_gzhandler');} header("Content-type: text/html");
 include_once("../ms_configura.php");
 include_once("../classesphp/pega_variaveis.php");
@@ -136,43 +135,51 @@ if($temas != "")
 	}
 	else{
 		foreach($temas as $tema){
-			$nomeMap = "";
-			if(file_exists($locaplic."/temas/".$tema.".map")){
-				$nomeMap = $locaplic."/temas/".$tema.".map";
+			if(file_exists($locaplic."/temas/".$tema.".gvp")){
+				include_once($locaplic."/pacotes/gvsig/gvsig2mapfile/class.gvsig2mapfile.php");
+				$gm = new gvsig2mapfile($locaplic."/temas/".$tema.".gvp");
+				$gvsigview = $gm->getViewsNames();
+				$objOpenLayers[] = 'new OpenLayers.Layer.WMS( "'.$gvsigview[0].'", "../ogc.php?tema='.$tema.'&",{layers:"'.$tema.'",transparent: "true", format: "image/png"},{singleTile:false,visibility:true,isBaseLayer:false})';
 			}
 			else{
-				if(file_exists($tema)){
-					$nomeMap = $tema;
-				}
-			}
-			if($nomeMap != ""){
-				if(empty($layers)){
-					$layers = array();
-					$maptemp = @ms_newMapObj($nomeMap);
-					for($i=0;$i<($maptemp->numlayers);++$i)	{
-						$layern = $maptemp->getLayer($i);
-						$layers[] = $layern->name;
-					}
-					$nomeLayer = implode(",",$layers);
-					$tituloLayer = $layern->getmetadata("tema");
+				$nomeMap = "";
+				if(file_exists($locaplic."/temas/".$tema.".map")){
+					$nomeMap = $locaplic."/temas/".$tema.".map";
 				}
 				else{
-					$nomeLayer = str_replace(" ",",",$layers);
-					$maptemp = @ms_newMapObj($nomeMap);
-					$temp = explode(",",$layers);
-					$layern = $maptemp->getLayerByName($temp[0]);
-					$tituloLayer = $layern->getmetadata("tema");
+					if(file_exists($tema)){
+						$nomeMap = $tema;
+					}
 				}
-				$ebase = "false";
-				if(isset($fundo) && in_array($tema,$fundo))
-				{$ebase = "true";}
-				$visivel = "false";
-				if(in_array($tema,$visiveis))
-				{$visivel = "true";}
-				$objOpenLayers[] = 'new OpenLayers.Layer.WMS( "'.$tituloLayer.'", "../ogc.php?tema='.$tema.'&",{layers:"'.$nomeLayer.'",transparent: "true", format: "image/png"},{singleTile:true,visibility:'.$visivel.',isBaseLayer:'.$ebase.'})';
+				if($nomeMap != ""){
+					if(empty($layers)){
+						$layers = array();
+						$maptemp = @ms_newMapObj($nomeMap);
+						for($i=0;$i<($maptemp->numlayers);++$i)	{
+							$layern = $maptemp->getLayer($i);
+							$layers[] = $layern->name;
+						}
+						$nomeLayer = implode(",",$layers);
+						$tituloLayer = $layern->getmetadata("tema");
+					}
+					else{
+						$nomeLayer = str_replace(" ",",",$layers);
+						$maptemp = @ms_newMapObj($nomeMap);
+						$temp = explode(",",$layers);
+						$layern = $maptemp->getLayerByName($temp[0]);
+						$tituloLayer = $layern->getmetadata("tema");
+					}
+					$ebase = "false";
+					if(isset($fundo) && in_array($tema,$fundo))
+					{$ebase = "true";}
+					$visivel = "false";
+					if(in_array($tema,$visiveis))
+					{$visivel = "true";}
+					$objOpenLayers[] = 'new OpenLayers.Layer.WMS( "'.$tituloLayer.'", "../ogc.php?tema='.$tema.'&",{layers:"'.$nomeLayer.'",transparent: "true", format: "image/png"},{singleTile:true,visibility:'.$visivel.',isBaseLayer:'.$ebase.'})';
+				}
+				else
+				{echo $tema." n&atilde;o foi encontrado.<br>";}
 			}
-			else
-			{echo $tema." n&atilde;o foi encontrado.<br>";}
 		}
 	}
 }

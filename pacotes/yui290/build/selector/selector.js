@@ -5,14 +5,14 @@ http://developer.yahoo.com/yui/license.html
 version: 2.9.0
 */
 var Y = YAHOO,
-    Y_DOM = YAHOO.util.Dom, 
+    Y_DOM = YAHOO.util.Dom,
     EMPTY_ARRAY = [],
     Y_UA = Y.env.ua,
     Y_Lang = Y.lang,
     Y_DOC = document,
     Y_DOCUMENT_ELEMENT = Y_DOC.documentElement,
 
-    Y_DOM_inDoc = Y_DOM.inDocument, 
+    Y_DOM_inDoc = Y_DOM.inDocument,
     Y_mix = Y_Lang.augmentObject,
     Y_guid = Y_DOM.generateId,
 
@@ -27,7 +27,7 @@ var Y = YAHOO,
 
         return doc;
     },
-    
+
     Y_Array = function(o, startIdx) {
         var l, a, start = startIdx || 0;
 
@@ -72,9 +72,9 @@ var Y = YAHOO,
                     // filter out matches on node.name
                     // and element.id as reference to element with id === 'id'
                     for (i = 0; node = nodes[i++];) {
-                        if (node.id === id  || 
+                        if (node.id === id  ||
                                 (node.attributes && node.attributes.id &&
-                                node.attributes.id.value === id)) { 
+                                node.attributes.id.value === id)) {
                             ret.push(node);
                         }
                     }
@@ -95,8 +95,8 @@ var Y = YAHOO,
  */
 
 /**
- * Provides support for using CSS selectors to query the DOM 
- * @class Selector 
+ * Provides support for using CSS selectors to query the DOM
+ * @class Selector
  * @static
  * @for Selector
  */
@@ -141,7 +141,7 @@ Selector = {
             }
 
             return compare;
-        
+
     }),
 
     _sort: function(nodes) {
@@ -175,7 +175,7 @@ Selector = {
     },
 
     /**
-     * Retrieves a set of nodes based on a given CSS selector. 
+     * Retrieves a set of nodes based on a given CSS selector.
      * @method query
      *
      * @param {string} selector The CSS Selector to test the node against.
@@ -219,7 +219,7 @@ Selector = {
                 }
             }
 
-            if (queries.length > 1) { // remove dupes and sort by doc order 
+            if (queries.length > 1) { // remove dupes and sort by doc order
                 ret = Selector._sort(Selector._deDupe(ret));
             }
         }
@@ -295,7 +295,7 @@ Selector = {
             // we need a root if off-doc
             if (!root && !Y_DOM_inDoc(node)) {
                 parent = node.parentNode;
-                if (parent) { 
+                if (parent) {
                     root = parent;
                 } else { // only use frag when no parent to query
                     frag = node[OWNER_DOCUMENT].createDocumentFragment();
@@ -309,7 +309,7 @@ Selector = {
             if (!node.id) {
                 node.id = Y_guid();
             }
-            for (i = 0; (group = groups[i++]);) { // TODO: off-dom test
+            for (i = 0; (group = groups[i++]);) { //  off-dom test
                 group += '[id="' + node.id + '"]';
                 items = Selector.query(group, root);
 
@@ -353,7 +353,7 @@ var PARENT_NODE = 'parentNode',
     PSEUDOS = 'pseudos',
 
     SelectorCSS2 = {
-        _reRegExpTokens: /([\^\$\?\[\]\*\+\-\.\(\)\|\\])/, // TODO: move?
+        _reRegExpTokens: /([\^\$\?\[\]\*\+\-\.\(\)\|\\])/, //  move?
         SORT_RESULTS: true,
         _children: function(node, tag) {
             var ret = node.children,
@@ -389,7 +389,7 @@ var PARENT_NODE = 'parentNode',
         },
 
         /**
-         * Mapping of shorthand tokens to corresponding attribute selector 
+         * Mapping of shorthand tokens to corresponding attribute selector
          * @property shorthand
          * @type object
          */
@@ -402,7 +402,7 @@ var PARENT_NODE = 'parentNode',
         },
 
         /**
-         * List of operators and corresponding boolean functions. 
+         * List of operators and corresponding boolean functions.
          * These functions are passed the attribute and the current node's value of the attribute.
          * @property operators
          * @type object
@@ -416,9 +416,9 @@ var PARENT_NODE = 'parentNode',
         },
 
         pseudos: {
-           'first-child': function(node) { 
-                return Selector._children(node[PARENT_NODE])[0] === node; 
-            } 
+           'first-child': function(node) {
+                return Selector._children(node[PARENT_NODE])[0] === node;
+            }
         },
 
         _bruteQuery: function(selector, root, firstOnly) {
@@ -435,7 +435,7 @@ var PARENT_NODE = 'parentNode',
 
             // if we have an initial ID, set to root when in document
             /*
-            if (tokens[0] && rootDoc === root &&  
+            if (tokens[0] && rootDoc === root &&
                     (id = tokens[0].id) &&
                     rootDoc.getElementById(id)) {
                 root = rootDoc.getElementById(id);
@@ -451,7 +451,7 @@ var PARENT_NODE = 'parentNode',
                 if (root.getElementsByTagName) { // non-IE lacks DOM api on doc frags
                     // try ID first, unless no root.all && root not in document
                     // (root.all works off document, but not getElementById)
-                    // TODO: move to allById?
+                    //  move to allById?
                     if (id && (root.all || (root.nodeType === 9 || Y_DOM_inDoc(root)))) {
                         nodes = Y_DOM_allById(id, root);
                     // try className
@@ -477,7 +477,7 @@ var PARENT_NODE = 'parentNode',
 
             return ret;
         },
-        
+
         _filterNodes: function(nodes, tokens, firstOnly) {
             var i = 0,
                 j,
@@ -501,7 +501,7 @@ var PARENT_NODE = 'parentNode',
             for (i = 0; (tmpNode = node = nodes[i++]);) {
                 n = len - 1;
                 path = null;
-                
+
                 testLoop:
                 while (tmpNode && tmpNode.tagName) {
                     token = tokens[n];
@@ -532,7 +532,7 @@ var PARENT_NODE = 'parentNode',
                                         (!tmpNode.tagName ||
                                             (token.tagName && token.tagName !== tmpNode.tagName))
                                     ) {
-                                        tmpNode = tmpNode[path]; 
+                                        tmpNode = tmpNode[path];
                                     }
                                 }
                                 continue testLoop;
@@ -548,11 +548,11 @@ var PARENT_NODE = 'parentNode',
 
                         // skip non element nodes
                         while (tmpNode && !tmpNode.tagName) {
-                            tmpNode = tmpNode[path]; 
+                            tmpNode = tmpNode[path];
                         }
 
                         if (combinator.direct) { // one pass only
-                            path = null; 
+                            path = null;
                         }
 
                     } else { // success if we made it this far
@@ -604,7 +604,7 @@ var PARENT_NODE = 'parentNode',
                         token.prefilter = match[1];
 
 
-                        match[3] = escVal; 
+                        match[3] = escVal;
 
                         // escape all but ID for prefilter, which may run through QSA (via Dom.allById)
                         token[match[1]] = (match[1] === 'id') ? match[3] : escVal;
@@ -656,7 +656,7 @@ var PARENT_NODE = 'parentNode',
                         if (match[2]) {
                             match[2] = match[2].replace(/\\/g, '');
                         }
-                        return [match[2], test]; 
+                        return [match[2], test];
                     } else { // selector token not supported (possibly missing CSS3 module)
                         return false;
                     }
@@ -681,7 +681,7 @@ var PARENT_NODE = 'parentNode',
          */
         _tokenize: function(selector) {
             selector = selector || '';
-            selector = Selector._replaceShorthand(Y_Lang.trim(selector)); 
+            selector = Selector._replaceShorthand(Y_Lang.trim(selector));
             var token = Selector._getToken(),     // one token per simple selector (left selector holds combinator)
                 query = selector, // original query for debug report
                 tokens = [],    // array of tokens
@@ -747,7 +747,7 @@ var PARENT_NODE = 'parentNode',
 
         _replaceShorthand: function(selector) {
             var shorthand = Selector.shorthand,
-                esc = selector.match(Selector._re.esc), // pull escaped colon, brackets, etc. 
+                esc = selector.match(Selector._re.esc), // pull escaped colon, brackets, etc.
                 attrs,
                 pseudos,
                 re, i, len;
@@ -832,7 +832,7 @@ if (Selector.useNative && Y_DOC.querySelector) {
     an+b = get every _a_th node starting at the _b_th
     0n+b = no repeat ("0" and "n" may both be omitted (together) , e.g. "0n+1" or "1", not "0+1"), return only the _b_th element
     1n+b =  get every element starting from b ("1" may may be omitted, e.g. "1n+0" or "n+0" or "n")
-    an+0 = get every _a_th element, "0" may be omitted 
+    an+0 = get every _a_th element, "0" may be omitted
 */
 
 Selector._reNth = /^(?:([\-]?\d*)(n){1}|(odd|even)$)*([\-+]?\d*)$/;
@@ -858,7 +858,7 @@ Selector._getNth = function(node, expr, tag, reverse) {
 
     if (a === 0) { // just the first
         if (reverse) {
-            b = siblings.length - b + 1; 
+            b = siblings.length - b + 1;
         }
 
         if (siblings[b - 1] === node) {
@@ -904,11 +904,11 @@ Y_mix(Selector.pseudos, {
     'nth-of-type': function(node, expr) {
         return Selector._getNth(node, expr, node.tagName);
     },
-     
+
     'nth-last-of-type': function(node, expr) {
         return Selector._getNth(node, expr, node.tagName, true);
     },
-     
+
     'last-child': function(node) {
         var children = Selector._children(node.parentNode);
         return children[children.length - 1] === node;
@@ -917,12 +917,12 @@ Y_mix(Selector.pseudos, {
     'first-of-type': function(node) {
         return Selector._children(node.parentNode, node.tagName)[0] === node;
     },
-     
+
     'last-of-type': function(node) {
         var children = Selector._children(node.parentNode, node.tagName);
         return children[children.length - 1] === node;
     },
-     
+
     'only-child': function(node) {
         var children = Selector._children(node.parentNode);
         return children.length === 1 && children[0] === node;
@@ -963,7 +963,7 @@ Y_mix(Selector.operators, {
     '^=': '^{val}', // Match starts with value
     '!=': function(node, attr, val) { return node[attr] !== val; }, // Match starts with value
     '$=': '{val}$', // Match ends with value
-    '*=': '{val}' // Match contains value as substring 
+    '*=': '{val}' // Match contains value as substring
 });
 
 Selector.combinators['~'] = {

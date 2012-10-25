@@ -46,7 +46,7 @@ SVGRenderer.prototype.init = function(elem) {
   this.container = elem;
 
   this.container.style.MozUserSelect = 'none';
-    
+
   var svgNamespace = 'http://www.w3.org/2000/svg';
   this.svgRoot = this.container.ownerDocument.createElementNS(svgNamespace, "svg");
   this.container.appendChild(this.svgRoot);
@@ -123,11 +123,11 @@ SVGRenderer.prototype.create = function(shape, fillColor, lineColor, lineWidth, 
   if (lineColor.length == 0)
     lineColor = 'none';
   svg.setAttributeNS(null, 'stroke', lineColor);
-  
+
   svg.setAttributeNS(null, 'stroke-width', lineWidth);
-      
+
   this.svgRoot.appendChild(svg);
-  
+
   return svg;
 };
 
@@ -158,7 +158,7 @@ SVGRenderer.prototype.move = function(shape, left, top) {
 
 
 SVGRenderer.prototype.track = function(shape) {
-  // TODO
+  //
 };
 
 
@@ -179,7 +179,7 @@ SVGRenderer.prototype.resize = function(shape, fromX, fromY, toX, toY) {
       shape.setAttributeNS(null, 'cx', (fromX + deltaX / 2) + 'px');
       shape.setAttributeNS(null, 'rx', (deltaX / 2) + 'px');
     }
-  
+
     if (deltaY < 0) {
       shape.setAttributeNS(null, 'cy', (fromY + deltaY / 2) + 'px');
       shape.setAttributeNS(null, 'ry', (-deltaY / 2) + 'px');
@@ -189,7 +189,7 @@ SVGRenderer.prototype.resize = function(shape, fromX, fromY, toX, toY) {
       shape.setAttributeNS(null, 'ry', (deltaY / 2) + 'px');
     }
   }
-  else { 
+  else {
     if (deltaX < 0) {
       shape.setAttributeNS(null, 'x', toX + 'px');
       shape.setAttributeNS(null, 'width', -deltaX + 'px');
@@ -197,7 +197,7 @@ SVGRenderer.prototype.resize = function(shape, fromX, fromY, toX, toY) {
     else {
       shape.setAttributeNS(null, 'width', deltaX + 'px');
     }
-  
+
     if (deltaY < 0) {
       shape.setAttributeNS(null, 'y', toY + 'px');
       shape.setAttributeNS(null, 'height', -deltaY + 'px');
@@ -234,7 +234,7 @@ SVGRenderer.prototype.editCommand = function(shape, cmd, value)
 SVGRenderer.prototype.queryCommand = function(shape, cmd)
 {
   var result = '';
-  
+
   if (shape != null) {
     if (cmd == 'fillcolor') {
       result = shape.getAttributeNS(null, 'fill');
@@ -254,7 +254,7 @@ SVGRenderer.prototype.queryCommand = function(shape, cmd)
         result = shape.getAttributeNS(null, 'stroke-width');
     }
   }
-  
+
   return result;
 };
 

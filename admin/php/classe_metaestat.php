@@ -309,7 +309,7 @@ class Metaestat{
 		//}
 		//atencao: cuidado ao alterar essa string pois ') as foo' pode ser usado para replace em outras funcoes
 		$colunas = $this->colunasTabela($dados["codigo_estat_conexao"],$dados["esquemadb"],$dados["tabela"]);
-		//agregacao com uma regiao maior TODO
+		//@TODO - agregacao com uma regiao maior
 		if($agregaregiao == true){
 			$sqlgeo = "select pg.*,".$dados["colunavalor"]." from (select ".$sqlgeo." __filtro__ group by g.".$dadosAgregacao["colunaligacao_regiaopai"].") as fg, ".$dadosgeoagregada["esquemadb"].".".$dadosgeoagregada["tabela"]." as pg where fg.".$dadosAgregacao["colunaligacao_regiaopai"]." = pg.".$dadosgeoagregada["identificador"];
 			$sqlgeo = $colunageo." from ( $sqlgeo ) as foo using unique ".$dadosAgregacao["colunaligacao_regiaopai"]." using srid=".$dadosgeo["srid"];

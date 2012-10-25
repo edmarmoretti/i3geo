@@ -30,7 +30,7 @@ YAHOO.widget.DS_XHR.TYPE_JSON = YAHOO.util.DataSourceBase.TYPE_JSON;
 YAHOO.widget.DS_XHR.TYPE_XML = YAHOO.util.DataSourceBase.TYPE_XML;
 YAHOO.widget.DS_XHR.TYPE_FLAT = YAHOO.util.DataSourceBase.TYPE_TEXT;
 
-// TODO: widget.DS_ScriptNode.scriptCallbackParam
+//  widget.DS_ScriptNode.scriptCallbackParam
 
 
 
@@ -2863,7 +2863,7 @@ YAHOO.widget.AutoComplete.prototype._onTextboxKeyPress = function(v,oSelf) {
             }
         }
 
-        //TODO: (?) limit only to non-IE, non-Mac-FF for Korean IME support (bug 811948)
+        // (?) limit only to non-IE, non-Mac-FF for Korean IME support (bug 811948)
         // Korean IME detected
         else if(nKeyCode == 229) {
             oSelf._enableIntervalDetection();

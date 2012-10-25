@@ -761,7 +761,7 @@ class Services_JSON
     }
 
     /**
-     * @todo Ultimately, this should just call PEAR::isError()
+     * @ todo Ultimately, this should just call PEAR::isError()
      */
     function isError($data, $code = null)
     {
@@ -790,7 +790,7 @@ if (class_exists('PEAR_Error')) {
 } else {
 
     /**
-     * @todo Ultimately, this class shall be descended from PEAR_Error
+     * @ todo Ultimately, this class shall be descended from PEAR_Error
      */
     class Services_JSON_Error
     {

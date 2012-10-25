@@ -72,7 +72,7 @@ YAHOO.util.Chain.prototype = {
                 args = c.argument || [],
                 ms   = c.timeout || 0,
                 me   = this;
-                
+
             if (!(args instanceof Array)) {
                 args = [args];
             }
@@ -127,7 +127,7 @@ YAHOO.util.Chain.prototype = {
 
         return this;
     },
-    
+
     /**
      * Add a callback to the end of the queue
      * @method add
@@ -162,7 +162,7 @@ YAHOO.util.Chain.prototype = {
      * @method stop
      * @return {Chain} the Chain instance
      */
-    stop : function () { 
+    stop : function () {
         this.pause();
         this.q = [];
         return this;
@@ -171,9 +171,9 @@ YAHOO.util.Chain.prototype = {
 YAHOO.lang.augmentProto(YAHOO.util.Chain,YAHOO.util.EventProvider);
 
 /**
- * Augments the Event Utility with a <code>delegate</code> method that 
- * facilitates easy creation of delegated event listeners.  (Note: Using CSS 
- * selectors as the filtering criteria for delegated event listeners requires 
+ * Augments the Event Utility with a <code>delegate</code> method that
+ * facilitates easy creation of delegated event listeners.  (Note: Using CSS
+ * selectors as the filtering criteria for delegated event listeners requires
  * inclusion of the Selector Utility.)
  *
  * @module event-delegate
@@ -190,39 +190,39 @@ YAHOO.lang.augmentProto(YAHOO.util.Chain,YAHOO.util.EventProvider);
 
 
         getMatch = function(el, selector, container) {
-        
+
             var returnVal;
-        
+
             if (!el || el === container) {
                 returnVal = false;
             }
             else {
                 returnVal = YAHOO.util.Selector.test(el, selector) ? el: getMatch(el.parentNode, selector, container);
             }
-        
+
             return returnVal;
-        
+
         };
 
 
     Lang.augmentObject(Event, {
 
         /**
-         * Creates a delegate function used to call event listeners specified 
+         * Creates a delegate function used to call event listeners specified
          * via the <code>YAHOO.util.Event.delegate</code> method.
          *
          * @method _createDelegate
          *
          * @param {Function} fn        The method (event listener) to call.
-         * @param {Function|string} filter Function or CSS selector used to 
-         * determine for what element(s) the event listener should be called.        
-         * @param {Object}   obj    An arbitrary object that will be 
+         * @param {Function|string} filter Function or CSS selector used to
+         * determine for what element(s) the event listener should be called.
+         * @param {Object}   obj    An arbitrary object that will be
          *                             passed as a parameter to the listener.
-         * @param {Boolean|object}  overrideContext  If true, the value of the 
+         * @param {Boolean|object}  overrideContext  If true, the value of the
          *                             obj parameter becomes the execution context
          *                          of the listener. If an object, this object
          *                          becomes the execution context.
-         * @return {Function} Function that will call the event listener 
+         * @return {Function} Function that will call the event listener
          * specified by the <code>YAHOO.util.Event.delegate</code> method.
          * @private
          * @for Event
@@ -236,9 +236,9 @@ YAHOO.lang.augmentProto(YAHOO.util.Chain,YAHOO.util.EventProvider);
                     target = Event.getTarget(event),
                     selector = filter,
 
-                    //    The user might have specified the document object 
-                    //    as the delegation container, in which case it is not 
-                    //    nessary to scope the provided CSS selector(s) to the 
+                    //    The user might have specified the document object
+                    //    as the delegation container, in which case it is not
+                    //    nessary to scope the provided CSS selector(s) to the
                     //    delegation container
                     bDocument = (container.nodeType === 9),
 
@@ -259,7 +259,7 @@ YAHOO.lang.augmentProto(YAHOO.util.Chain,YAHOO.util.EventProvider);
 
                         if (!sID) {
                             sID = Event.generateId(container);
-                        }                        
+                        }
 
                         //    Scope all selectors to the container
                         sIDSelector = ("#" + sID + " ");
@@ -273,8 +273,8 @@ YAHOO.lang.augmentProto(YAHOO.util.Chain,YAHOO.util.EventProvider);
                     }
                     else if (YAHOO.util.Selector.test(target, ((selector.replace(/,/gi, " *,")) + " *"))) {
 
-                        //    The target is a descendant of an element matching 
-                        //    the selector, so crawl up to find the ancestor that 
+                        //    The target is a descendant of an element matching
+                        //    the selector, so crawl up to find the ancestor that
                         //    matches the selector
 
                         matchedEl = getMatch(target, selector, container);
@@ -286,7 +286,7 @@ YAHOO.lang.augmentProto(YAHOO.util.Chain,YAHOO.util.EventProvider);
 
                 if (matchedEl) {
 
-                    //    The default context for delegated listeners is the 
+                    //    The default context for delegated listeners is the
                     //    element that matched the filter.
 
                     context = matchedEl;
@@ -299,8 +299,8 @@ YAHOO.lang.augmentProto(YAHOO.util.Chain,YAHOO.util.EventProvider);
                         }
                     }
 
-                    //    Call the listener passing in the container and the 
-                    //    element that matched the filter in case the user 
+                    //    Call the listener passing in the container and the
+                    //    element that matched the filter in case the user
                     //    needs those.
 
                     return fn.call(context, event, matchedEl, container, obj);
@@ -313,34 +313,34 @@ YAHOO.lang.augmentProto(YAHOO.util.Chain,YAHOO.util.EventProvider);
 
 
         /**
-         * Appends a delegated event listener.  Delegated event listeners 
-         * receive three arguments by default: the DOM event, the element  
-         * specified by the filtering function or CSS selector, and the 
-         * container element (the element to which the event listener is 
-         * bound).  (Note: Using the delegate method requires the event-delegate 
-         * module.  Using CSS selectors as the filtering criteria for delegated 
+         * Appends a delegated event listener.  Delegated event listeners
+         * receive three arguments by default: the DOM event, the element
+         * specified by the filtering function or CSS selector, and the
+         * container element (the element to which the event listener is
+         * bound).  (Note: Using the delegate method requires the event-delegate
+         * module.  Using CSS selectors as the filtering criteria for delegated
          * event listeners requires inclusion of the Selector Utility.)
          *
          * @method delegate
          *
-         * @param {String|HTMLElement|Array|NodeList} container An id, an element 
-         *  reference, or a collection of ids and/or elements to assign the 
+         * @param {String|HTMLElement|Array|NodeList} container An id, an element
+         *  reference, or a collection of ids and/or elements to assign the
          *  listener to.
          * @param {String}   type     The type of event listener to append
          * @param {Function} fn        The method the event invokes
-         * @param {Function|string} filter Function or CSS selector used to 
-         * determine for what element(s) the event listener should be called. 
-         * When a function is specified, the function should return an 
-         * HTML element.  Using a CSS Selector requires the inclusion of the 
+         * @param {Function|string} filter Function or CSS selector used to
+         * determine for what element(s) the event listener should be called.
+         * When a function is specified, the function should return an
+         * HTML element.  Using a CSS Selector requires the inclusion of the
          * CSS Selector Utility.
-         * @param {Object}   obj    An arbitrary object that will be 
+         * @param {Object}   obj    An arbitrary object that will be
          *                             passed as a parameter to the listener
          * @param {Boolean|object}  overrideContext  If true, the value of the obj parameter becomes
          *                             the execution context of the listener. If an
          *                             object, this object becomes the execution
          *                             context.
          * @return {Boolean} Returns true if the action was successful or defered,
-         *                   false if one or more of the elements 
+         *                   false if one or more of the elements
          *                   could not have the listener attached,
          *                   or if the operation throws an exception.
          * @static
@@ -385,7 +385,7 @@ YAHOO.lang.augmentProto(YAHOO.util.Chain,YAHOO.util.EventProvider);
             }
 
             delegates.push([container, sType, fn, fnDelegate]);
-            
+
             return Event.on(container, sType, fnDelegate);
 
         },
@@ -396,14 +396,14 @@ YAHOO.lang.augmentProto(YAHOO.util.Chain,YAHOO.util.EventProvider);
          *
          * @method removeDelegate
          *
-         * @param {String|HTMLElement|Array|NodeList} container An id, an element 
+         * @param {String|HTMLElement|Array|NodeList} container An id, an element
          *  reference, or a collection of ids and/or elements to remove
          *  the listener from.
          * @param {String} type The type of event to remove.
          * @param {Function} fn The method the event invokes.  If fn is
-         *  undefined, then all event listeners for the type of event are 
+         *  undefined, then all event listeners for the type of event are
          *  removed.
-         * @return {boolean} Returns true if the unbind was successful, false 
+         * @return {boolean} Returns true if the unbind was successful, false
          *  otherwise.
          * @static
          * @for Event
@@ -435,14 +435,14 @@ YAHOO.lang.augmentProto(YAHOO.util.Chain,YAHOO.util.EventProvider);
                     delete delegates[index][2];
                     delete delegates[index][3];
                     delegates.splice(index, 1);
-                }        
-        
+                }
+
             }
 
             return returnVal;
 
         }
-        
+
     });
 
 }());
@@ -971,7 +971,7 @@ Selector = {
             if (!node.id) {
                 node.id = Y_guid();
             }
-            for (i = 0; (group = groups[i++]);) { // TODO: off-dom test
+            for (i = 0; (group = groups[i++]);) { //  off-dom test
                 group += '[id="' + node.id + '"]';
                 items = Selector.query(group, root);
 
@@ -1015,7 +1015,7 @@ var PARENT_NODE = 'parentNode',
     PSEUDOS = 'pseudos',
 
     SelectorCSS2 = {
-        _reRegExpTokens: /([\^\$\?\[\]\*\+\-\.\(\)\|\\])/, // TODO: move?
+        _reRegExpTokens: /([\^\$\?\[\]\*\+\-\.\(\)\|\\])/, //  move?
         SORT_RESULTS: true,
         _children: function(node, tag) {
             var ret = node.children,
@@ -1113,7 +1113,7 @@ var PARENT_NODE = 'parentNode',
                 if (root.getElementsByTagName) { // non-IE lacks DOM api on doc frags
                     // try ID first, unless no root.all && root not in document
                     // (root.all works off document, but not getElementById)
-                    // TODO: move to allById?
+                    //  move to allById?
                     if (id && (root.all || (root.nodeType === 9 || Y_DOM_inDoc(root)))) {
                         nodes = Y_DOM_allById(id, root);
                     // try className
@@ -1755,7 +1755,7 @@ YAHOO.widget.ColumnSet.prototype = {
      * @private
      */
 
-    _init : function(aDefinitions) {        
+    _init : function(aDefinitions) {
         // DOM tree representation of all Columns
         var tree = [];
         // Flat representation of all Columns
@@ -1785,10 +1785,10 @@ YAHOO.widget.ColumnSet.prototype = {
 
                 // Instantiate a new Column for each node
                 var oColumn = new YAHOO.widget.Column(currentNode);
-                
+
                 // Cross-reference Column ID back to the original object literal definition
                 currentNode.yuiColumnId = oColumn._sId;
-                
+
                 // Add the new Column to the flat list
                 flat.push(oColumn);
 
@@ -1830,7 +1830,7 @@ YAHOO.widget.ColumnSet.prototype = {
                         if(oColumn.editor && (child.editor === undefined)) {
                             child.editor = oColumn.editor;
                         }
-                        //TODO: Deprecated
+                        // Deprecated
                         if(oColumn.editorOptions && (child.editorOptions === undefined)) {
                             child.editorOptions = oColumn.editorOptions;
                         }
@@ -2026,17 +2026,17 @@ YAHOO.widget.ColumnSet.prototype = {
 
     getDefinitions : function() {
         var aDefinitions = this._aDefinitions;
-        
+
         // Internal recursive function to define Column instances
         var parseColumns = function(nodeList, oSelf) {
             // Parse each node at this depth for attributes and any children
             for(var j=0; j<nodeList.length; j++) {
                 var currentNode = nodeList[j];
-                
+
                 // Get the Column for each node
                 var oColumn = oSelf.getColumnById(currentNode.yuiColumnId);
-                
-                if(oColumn) {    
+
+                if(oColumn) {
                     // Update the current values
                     var oDefinition = oColumn.getDefinition();
                     for(var name in oDefinition) {
@@ -2045,7 +2045,7 @@ YAHOO.widget.ColumnSet.prototype = {
                         }
                     }
                 }
-                            
+
                 // The Column has descendants
                 if(YAHOO.lang.isArray(currentNode.children)) {
                     // The children themselves must also be parsed for Column instances
@@ -2151,7 +2151,7 @@ YAHOO.widget.ColumnSet.prototype = {
  */
 YAHOO.widget.Column = function(oConfigs) {
     this._sId = Dom.generateId(null, "yui-col"); // "yui-col" + YAHOO.widget.Column._nCount;
-    
+
     // Object literal defines Column attributes
     if(oConfigs && YAHOO.lang.isObject(oConfigs)) {
         for(var sConfig in oConfigs) {
@@ -2165,7 +2165,7 @@ YAHOO.widget.Column = function(oConfigs) {
     if(!YAHOO.lang.isValue(this.key)) {
         this.key = Dom.generateId(null, "yui-dt-col"); //"yui-dt-col" + YAHOO.widget.Column._nCount;
     }
-    
+
     // Assign a field if not found, defaults to key
     if(!YAHOO.lang.isValue(this.field)) {
         this.field = this.key;
@@ -2441,7 +2441,7 @@ YAHOO.widget.Column.prototype = {
 
     /**
      * When a width is not defined for a Column, maxAutoWidth defines an upper
-     * limit that the Column should be auto-sized to. If resizeable is enabled, 
+     * limit that the Column should be auto-sized to. If resizeable is enabled,
      * users may still resize to a greater width. Most useful for Columns intended
      * to hold long unbroken, unwrapped Strings, such as URLs, to prevent very
      * wide Columns from disrupting visual readability by inducing truncation.
@@ -2457,7 +2457,7 @@ YAHOO.widget.Column.prototype = {
      *
      * @property hidden
      * @type Boolean
-     * @default false     
+     * @default false
      */
     hidden : false,
 
@@ -2466,7 +2466,7 @@ YAHOO.widget.Column.prototype = {
      *
      * @property selected
      * @type Boolean
-     * @default false     
+     * @default false
      */
     selected : false,
 
@@ -2498,7 +2498,7 @@ YAHOO.widget.Column.prototype = {
      * @type String || HTMLFunction
      */
     formatter : null,
-    
+
     /**
      * Config passed to YAHOO.util.Number.format() by the 'currency' Column formatter.
      *
@@ -2529,9 +2529,9 @@ YAHOO.widget.Column.prototype = {
      * @type HTML[] | Object[]
      */
     dropdownOptions : null,
-     
+
     /**
-     * A CellEditor instance, otherwise Column is not editable.     
+     * A CellEditor instance, otherwise Column is not editable.
      *
      * @property editor
      * @type YAHOO.widget.CellEditor
@@ -2541,7 +2541,7 @@ YAHOO.widget.Column.prototype = {
     /**
      * True if Column is resizeable, false otherwise. The Drag & Drop Utility is
      * required to enable this feature. Only bottom-level and non-nested Columns are
-     * resizeble. 
+     * resizeble.
      *
      * @property resizeable
      * @type Boolean
@@ -2633,12 +2633,12 @@ YAHOO.widget.Column.prototype = {
      */
     getDefinition : function() {
         var oDefinition = {};
-        
+
         // Update the definition
         oDefinition.abbr = this.abbr;
         oDefinition.className = this.className;
         oDefinition.editor = this.editor;
-        oDefinition.editorOptions = this.editorOptions; //TODO: deprecated
+        oDefinition.editorOptions = this.editorOptions; // deprecated
         oDefinition.field = this.field;
         oDefinition.formatter = this.formatter;
         oDefinition.hidden = this.hidden;
@@ -2651,7 +2651,7 @@ YAHOO.widget.Column.prototype = {
         oDefinition.sortable = this.sortable;
         oDefinition.sortOptions = this.sortOptions;
         oDefinition.width = this.width;
-        
+
         // Bug 2529147
         oDefinition._calculatedWidth = this._calculatedWidth;
 
@@ -2667,7 +2667,7 @@ YAHOO.widget.Column.prototype = {
     getKey : function() {
         return this.key;
     },
-    
+
     /**
      * Returns field.
      *
@@ -2677,7 +2677,7 @@ YAHOO.widget.Column.prototype = {
     getField : function() {
         return this.field;
     },
-    
+
     /**
      * Returns Column key which has been sanitized for DOM (class and ID) usage
      * starts with letter, contains only letters, numbers, hyphen, or period.
@@ -2762,7 +2762,7 @@ YAHOO.widget.Column.prototype = {
     /**
      * Returns DOM reference to the TH's liner DIV element. Introduced since
      * resizeable Columns may have an extra resizer liner, making the DIV liner
-     * not reliably the TH element's first child.               
+     * not reliably the TH element's first child.
      *
      * @method getThLInerEl
      * @return {HTMLElement} TH element.
@@ -2770,7 +2770,7 @@ YAHOO.widget.Column.prototype = {
     getThLinerEl : function() {
         return this._elThLiner;
     },
-    
+
     /**
      * Returns DOM reference to the resizer element, or null.
      *
@@ -2920,10 +2920,10 @@ if(YAHOO.util.DDProxy) {
                 left = ((xy[0] - region.left) + 15), //Buffer of 15px
                 //Set right to right minus x minus width
                 right = ((region.right - xy[0] - width) + 15);
-    
+
             //Set the constraints based on the above calculations
             this.setXConstraint(left, right);
-            this.setYConstraint(10, 10);            
+            this.setYConstraint(10, 10);
         },
         _resizeProxy: function() {
             YAHOO.widget.ColumnDD.superclass._resizeProxy.apply(this, arguments);
@@ -2934,7 +2934,7 @@ if(YAHOO.util.DDProxy) {
             YAHOO.util.Dom.setStyle(this.pointer, 'display', 'block');
             var xy = YAHOO.util.Dom.getXY(el);
             YAHOO.util.Dom.setXY(this.pointer, [xy[0], (xy[1] - 5)]);
-            
+
             YAHOO.util.Dom.setStyle(dragEl, 'height', this.datatable.getContainerEl().offsetHeight + "px");
             YAHOO.util.Dom.setStyle(dragEl, 'width', (parseInt(YAHOO.util.Dom.getStyle(dragEl, 'width'),10) + 4) + 'px');
             YAHOO.util.Dom.setXY(this.dragEl, xy);
@@ -2954,7 +2954,7 @@ if(YAHOO.util.DDProxy) {
         onDragOver: function(ev, id) {
             // Validate target as a Column
             var target = this.datatable.getColumn(id);
-            if(target) {                
+            if(target) {
                 // Validate target as a top-level parent
                 var targetIndex = target.getTreeIndex();
                 while((targetIndex === null) && target.getParent()) {
@@ -2969,7 +2969,7 @@ if(YAHOO.util.DDProxy) {
                         targetX = YAHOO.util.Dom.getX(elTarget),
                         midX = targetX + ((YAHOO.util.Dom.get(elTarget).offsetWidth)/2),
                         currentIndex =  this.column.getTreeIndex();
-                    
+
                     if (mouseX < midX) {
                        YAHOO.util.Dom.setX(this.pointer, targetX);
                     } else {
@@ -3056,13 +3056,13 @@ if(YAHOO.util.DD) {
             resizerStyle.bottom = 0;
             resizerStyle.height = this.headCell.offsetHeight+"px";
         },
-    
+
         /////////////////////////////////////////////////////////////////////////////
         //
         // Public DOM event handlers
         //
         /////////////////////////////////////////////////////////////////////////////
-    
+
         /**
          * Handles mouseup events on the Column resizer.
          *
@@ -3080,7 +3080,7 @@ if(YAHOO.util.DD) {
                 }
             }
             this.resetResizerEl();
-            
+
             var el = this.headCellLiner;
             var newWidth = el.offsetWidth -
                 (parseInt(YAHOO.util.Dom.getStyle(el,"paddingLeft"),10)|0) -
@@ -3088,7 +3088,7 @@ if(YAHOO.util.DD) {
 
             this.datatable.fireEvent("columnResizeEvent", {column:this.column,target:this.headCell,width:newWidth});
         },
-    
+
         /**
          * Handles mousedown events on the Column resizer.
          *
@@ -3101,7 +3101,7 @@ if(YAHOO.util.DD) {
             this.nLinerPadding = (parseInt(YAHOO.util.Dom.getStyle(this.headCellLiner,"paddingLeft"),10)|0) +
                     (parseInt(YAHOO.util.Dom.getStyle(this.headCellLiner,"paddingRight"),10)|0);
         },
-    
+
         /**
          * Custom clickValidator to ensure Column is not in hidden state.
          *
@@ -3117,7 +3117,7 @@ if(YAHOO.util.DD) {
                                 this.DDM.handleWasClicked(target, this.id)) );
             }
         },
-    
+
         /**
          * Handles start drag on the Column resizer.
          *
@@ -3164,7 +3164,7 @@ if(YAHOO.util.DD) {
 
 /**
  * @property editorOptions
- * @deprecated Pass configs directly to CellEditor constructor. 
+ * @deprecated Pass configs directly to CellEditor constructor.
  */
 
 
@@ -3173,7 +3173,7 @@ if(YAHOO.util.DD) {
 var lang   = YAHOO.lang,
     util   = YAHOO.util,
     widget = YAHOO.widget,
-    
+
     Dom    = util.Dom,
     Ev     = util.Event,
     DT     = widget.DataTable;
@@ -3237,7 +3237,7 @@ RS.prototype = {
     // Private methods
     //
     /////////////////////////////////////////////////////////////////////////////
-    
+
     /**
      * Initializer.
      *
@@ -3265,7 +3265,7 @@ RS.prototype = {
 
         YAHOO.log("RecordSet initialized", "info", this.toString());
     },
-    
+
     /**
      * Initializes custom events.
      *
@@ -3296,7 +3296,7 @@ RS.prototype = {
      */
     _addRecord : function(oData, index) {
         var oRecord = new YAHOO.widget.Record(oData);
-        
+
         if(YAHOO.lang.isNumber(index) && (index > -1)) {
             this._records.splice(index,0,oRecord);
         }
@@ -3747,7 +3747,7 @@ RS.prototype = {
     deleteRecord : function(index) {
         if(lang.isNumber(index) && (index > -1) && (index < this.getLength())) {
             var oData = this.getRecord(index).getData();
-            
+
             this._deleteRecord(index);
             this.fireEvent("recordDeleteEvent",{data:oData,index:index});
             YAHOO.log("Record deleted at index " + index +
@@ -3768,7 +3768,7 @@ RS.prototype = {
      * @method deleteRecords
      * @param index {Number} Record's RecordSet position index.
      * @param range {Number} (optional) How many Records to delete.
-     * @return {Object[]} An array of copies of the data held by the deleted Records.     
+     * @return {Object[]} An array of copies of the data held by the deleted Records.
      */
     deleteRecords : function(index, range) {
         if(!lang.isNumber(range)) {
@@ -3778,7 +3778,7 @@ RS.prototype = {
             var recordsToDelete = this.getRecords(index, range);
             var deletedData = [], // this mistakenly held Records, not data
                 deletedObjects = []; // this passes data only
-            
+
             for(var i=0; i<recordsToDelete.length; i++) {
                 deletedData[deletedData.length] = recordsToDelete[i]; // backward compatibility
                 deletedObjects[deletedObjects.length] = recordsToDelete[i].getData();
@@ -3885,8 +3885,8 @@ lang.augmentProto(RS, util.EventProvider);
  */
 
 /**
- * @event keyUpdateEvent    
- * @deprecated Use recordValueUpdateEvent     
+ * @event keyUpdateEvent
+ * @deprecated Use recordValueUpdateEvent
  */
 
 /**
@@ -4023,7 +4023,7 @@ YAHOO.widget.Record.prototype = {
 
     /**
      * Sets given data at the given key. Use the RecordSet method updateRecordValue to trigger
-     * events. 
+     * events.
      *
      * @method setData
      * @param sKey {String} The key of the new value.
@@ -4042,7 +4042,7 @@ var lang   = YAHOO.lang,
     util   = YAHOO.util,
     widget = YAHOO.widget,
     ua     = YAHOO.env.ua,
-    
+
     Dom    = util.Dom,
     Ev     = util.Event,
     DS     = util.DataSourceBase;
@@ -4075,14 +4075,14 @@ var lang   = YAHOO.lang,
  */
 YAHOO.widget.DataTable = function(elContainer,aColumnDefs,oDataSource,oConfigs) {
     var DT = widget.DataTable;
-    
+
     ////////////////////////////////////////////////////////////////////////////
     // Backward compatibility for SDT, but prevent infinite loops
-    
+
     if(oConfigs && oConfigs.scrollable) {
         return new YAHOO.widget.ScrollingDataTable(elContainer,aColumnDefs,oDataSource,oConfigs);
     }
-    
+
     ////////////////////////////////////////////////////////////////////////////
     // Initialization
 
@@ -4123,17 +4123,17 @@ YAHOO.widget.DataTable = function(elContainer,aColumnDefs,oDataSource,oConfigs) 
         YAHOO.log("Could not instantiate DataTable due to an invalid DOM element", "error", this.toString());
         return;
     }
-            
+
     // Show message as soon as config is available
     this.showTableMessage(this.get("MSG_LOADING"), DT.CLASS_LOADING);
-    
+
     ////////////////////////////////////////////////////////////////////////////
     // Once per instance
     this._initEvents();
 
     DT._nCount++;
     DT._nCurrentCount++;
-    
+
     ////////////////////////////////////////////////////////////////////////////
     // Data integration
 
@@ -4144,7 +4144,7 @@ YAHOO.widget.DataTable = function(elContainer,aColumnDefs,oDataSource,oConfigs) 
         scope   : this,
         argument: this.getState()
     };
-    
+
     var initialLoad = this.get("initialLoad");
     if(initialLoad === true) {
         this._oDataSource.sendRequest(this.get("initialRequest"), oCallback);
@@ -4629,7 +4629,7 @@ lang.augmentObject(DT, {
 
     /**
      * Internal class variable tracking current number of DataTable instances,
-     * so that certain class values can be reset when all instances are destroyed.          
+     * so that certain class values can be reset when all instances are destroyed.
      *
      * @property DataTable._nCurrentCount
      * @type Number
@@ -4645,7 +4645,7 @@ lang.augmentObject(DT, {
      * @property DataTable._elDynStyleNode
      * @type HTMLElement
      * @private
-     * @static     
+     * @static
      */
     _elDynStyleNode : null,
 
@@ -4655,7 +4655,7 @@ lang.augmentObject(DT, {
      * @property DataTable._bDynStylesFallback
      * @type boolean
      * @private
-     * @static     
+     * @static
      */
     _bDynStylesFallback : (ua.ie) ? true : false,
 
@@ -4665,7 +4665,7 @@ lang.augmentObject(DT, {
      * @property DataTable._oDynStyles
      * @type Object
      * @private
-     * @static     
+     * @static
      */
     _oDynStyles : {},
 
@@ -4681,7 +4681,7 @@ lang.augmentObject(DT, {
      * @method DataTable._cloneObject
      * @param o {Object} Object.
      * @private
-     * @static     
+     * @static
      */
     _cloneObject: function(o) {
         if(!lang.isValue(o)) {
@@ -4740,7 +4740,6 @@ lang.augmentObject(DT, {
      */
     formatButton : function(el, oRecord, oColumn, oData, oDataTable) {
         var sValue = lang.isValue(oData) ? oData : "Click";
-        //TODO: support YAHOO.widget.Button
         //if(YAHOO.widget.Button) {
 
         //}
@@ -5095,7 +5094,7 @@ initAttributes : function(oConfigs) {
     * @attribute summary
     * @description String value for the SUMMARY attribute.
     * @type String
-    * @default ""    
+    * @default ""
     */
     this.setAttributeConfig("summary", {
         value: "",
@@ -5154,7 +5153,7 @@ initAttributes : function(oConfigs) {
     */
     this.setAttributeConfig("sortedBy", {
         value: null,
-        // TODO: accepted array for nested sorts
+        //  accepted array for nested sorts
         validator: function(oNewSortedBy) {
             if(oNewSortedBy) {
                 return (lang.isObject(oNewSortedBy) && oNewSortedBy.key);
@@ -5166,7 +5165,7 @@ initAttributes : function(oConfigs) {
         method: function(oNewSortedBy) {
             // Stash the previous value
             var oOldSortedBy = this.get("sortedBy");
-            
+
             // Workaround for bug 1827195
             this._configs.sortedBy.value = oNewSortedBy;
 
@@ -5175,12 +5174,12 @@ initAttributes : function(oConfigs) {
                 nOldColumnKeyIndex,
                 oNewColumn,
                 nNewColumnKeyIndex;
-                
+
             if(this._elThead) {
                 if(oOldSortedBy && oOldSortedBy.key && oOldSortedBy.dir) {
                     oOldColumn = this._oColumnSet.getColumn(oOldSortedBy.key);
                     nOldColumnKeyIndex = oOldColumn.getKeyIndex();
-                    
+
                     // Remove previous UI from THEAD
                     var elOldTh = oOldColumn.getThEl();
                     Dom.removeClass(elOldTh, oOldSortedBy.dir);
@@ -5189,7 +5188,7 @@ initAttributes : function(oConfigs) {
                 if(oNewSortedBy) {
                     oNewColumn = (oNewSortedBy.column) ? oNewSortedBy.column : this._oColumnSet.getColumn(oNewSortedBy.key);
                     nNewColumnKeyIndex = oNewColumn.getKeyIndex();
-    
+
                     // Update THEAD with new UI
                     var elNewTh = oNewColumn.getThEl();
                     // Backward compatibility
@@ -5206,7 +5205,7 @@ initAttributes : function(oConfigs) {
                     this.formatTheadCell(oNewColumn.getThLinerEl().firstChild, oNewColumn, oNewSortedBy);
                 }
             }
-          
+
             if(this._elTbody) {
                 // Update TBODY UI
                 this._elTbody.style.display = "none";
@@ -5223,11 +5222,11 @@ initAttributes : function(oConfigs) {
                 }
                 this._elTbody.style.display = "";
             }
-                
+
             this._clearTrTemplateEl();
         }
     });
-    
+
     /**
     * @attribute paginator
     * @description An instance of YAHOO.widget.Paginator.
@@ -5246,7 +5245,7 @@ initAttributes : function(oConfigs) {
     * @attribute caption
     * @description Value for the CAPTION element. String values are treated as
     * markup and inserted into the DOM with innerHTML. NB: Not supported in
-    * ScrollingDataTable.    
+    * ScrollingDataTable.
     * @type HTML
     */
     this.setAttributeConfig("caption", {
@@ -5281,13 +5280,13 @@ initAttributes : function(oConfigs) {
     });
 
     /**
-    * @attribute renderLoopSize      
+    * @attribute renderLoopSize
     * @description A value greater than 0 enables DOM rendering of rows to be
     * executed from a non-blocking timeout queue and sets how many rows to be
-    * rendered per timeout. Recommended for very large data sets.     
-    * @type Number      
-    * @default 0      
-    */      
+    * rendered per timeout. Recommended for very large data sets.
+    * @type Number
+    * @default 0
+    */
      this.setAttributeConfig("renderLoopSize", {
          value: 0,
          validator: lang.isNumber
@@ -5344,17 +5343,17 @@ initAttributes : function(oConfigs) {
     * sendRequest method in order to retrieve data for those states. This
     * function is passed an object literal of state data and a reference to the
     * DataTable instance:
-    *     
+    *
     * <dl>
     *   <dt>pagination<dt>
-    *   <dd>        
+    *   <dd>
     *         <dt>offsetRecord</dt>
     *         <dd>{Number} Index of the first Record of the desired page</dd>
     *         <dt>rowsPerPage</dt>
     *         <dd>{Number} Number of rows per page</dd>
     *   </dd>
     *   <dt>sortedBy</dt>
-    *   <dd>                
+    *   <dd>
     *         <dt>key</dt>
     *         <dd>{String} Key of sorted Column</dd>
     *         <dt>dir</dt>
@@ -5363,7 +5362,7 @@ initAttributes : function(oConfigs) {
     *   <dt>self</dt>
     *   <dd>The DataTable instance</dd>
     * </dl>
-    * 
+    *
     * and by default returns a String of syntax:
     * "sort={sortColumn}&dir={sortDir}&startIndex={pageStartIndex}&results={rowsPerPage}"
     * @type function
@@ -5377,7 +5376,7 @@ initAttributes : function(oConfigs) {
             var dir = (oState.sortedBy && oState.sortedBy.dir === YAHOO.widget.DataTable.CLASS_DESC) ? "desc" : "asc";
             var startIndex = (oState.pagination) ? oState.pagination.recordOffset : 0;
             var results = (oState.pagination) ? oState.pagination.rowsPerPage : null;
-            
+
             // Build the request
             return  "sort=" + sort +
                     "&dir=" + dir +
@@ -5391,7 +5390,7 @@ initAttributes : function(oConfigs) {
     * @attribute initialRequest
     * @description Defines the initial request that gets sent to the DataSource
     * during initialization. Value is ignored if initialLoad is set to any value
-    * other than true.    
+    * other than true.
     * @type MIXED
     * @default null
     */
@@ -5404,9 +5403,9 @@ initAttributes : function(oConfigs) {
     * @description Determines whether or not to load data at instantiation. By
     * default, will trigger a sendRequest() to the DataSource and pass in the
     * request defined by initialRequest. If set to false, data will not load
-    * at instantiation. Alternatively, implementers who wish to work with a 
+    * at instantiation. Alternatively, implementers who wish to work with a
     * custom payload may pass in an object literal with the following values:
-    *     
+    *
     *    <dl>
     *      <dt>request (MIXED)</dt>
     *      <dd>Request value.</dd>
@@ -5415,19 +5414,19 @@ initAttributes : function(oConfigs) {
     *      <dd>Custom data that will be passed through to the callback function.</dd>
     *    </dl>
     *
-    *                    
+    *
     * @type Boolean | Object
     * @default true
     */
     this.setAttributeConfig("initialLoad", {
         value: true
     });
-    
+
     /**
     * @attribute dynamicData
     * @description If true, sorting and pagination are relegated to the DataSource
     * for handling, using the request returned by the "generateRequest" function.
-    * Each new DataSource response blows away all previous Records. False by default, so 
+    * Each new DataSource response blows away all previous Records. False by default, so
     * sorting and pagination will be handled directly on the client side, without
     * causing any new requests for data from the DataSource.
     * @type Boolean
@@ -5448,7 +5447,7 @@ initAttributes : function(oConfigs) {
      this.setAttributeConfig("MSG_EMPTY", {
          value: "No records found.",
          validator: lang.isString
-     });      
+     });
 
     /**
      * @attribute MSG_LOADING
@@ -5456,11 +5455,11 @@ initAttributes : function(oConfigs) {
      * values are treated as markup and inserted into the DOM with innerHTML.
      * @type HTML
      * @default "Loading..."
-     */      
+     */
      this.setAttributeConfig("MSG_LOADING", {
          value: "Loading...",
          validator: lang.isString
-     });      
+     });
 
     /**
      * @attribute MSG_ERROR
@@ -5468,7 +5467,7 @@ initAttributes : function(oConfigs) {
      * values are treated as markup and inserted into the DOM with innerHTML.
      * @type HTML
      * @default "Data error."
-     */      
+     */
      this.setAttributeConfig("MSG_ERROR", {
          value: "Data error.",
          validator: lang.isString
@@ -5481,9 +5480,9 @@ initAttributes : function(oConfigs) {
      * innerHTML.
      * @type HTML
      * @default "Click to sort ascending"
-     */      
-     this.setAttributeConfig("MSG_SORTASC", {      
-         value: "Click to sort ascending",      
+     */
+     this.setAttributeConfig("MSG_SORTASC", {
+         value: "Click to sort ascending",
          validator: lang.isString,
          method: function(sParam) {
             if(this._elThead) {
@@ -5492,7 +5491,7 @@ initAttributes : function(oConfigs) {
                         allKeys[i]._elThLabel.firstChild.title = sParam;
                     }
                 }
-            }      
+            }
          }
      });
 
@@ -5503,9 +5502,9 @@ initAttributes : function(oConfigs) {
      * innerHTML.
      * @type HTML
      * @default "Click to sort descending"
-     */      
-     this.setAttributeConfig("MSG_SORTDESC", {      
-         value: "Click to sort descending",      
+     */
+     this.setAttributeConfig("MSG_SORTDESC", {
+         value: "Click to sort descending",
          validator: lang.isString,
          method: function(sParam) {
             if(this._elThead) {
@@ -5514,10 +5513,10 @@ initAttributes : function(oConfigs) {
                         allKeys[i]._elThLabel.firstChild.title = sParam;
                     }
                 }
-            }               
+            }
          }
      });
-     
+
     /**
      * @attribute currencySymbol
      * @deprecated Use currencyOptions.
@@ -5526,7 +5525,7 @@ initAttributes : function(oConfigs) {
         value: "$",
         validator: lang.isString
     });
-    
+
     /**
      * Default config passed to YAHOO.util.Number.format() by the 'currency' Column formatter.
      * @attribute currencyOptions
@@ -5535,13 +5534,13 @@ initAttributes : function(oConfigs) {
      */
     this.setAttributeConfig("currencyOptions", {
         value: {
-            prefix: this.get("currencySymbol"), // TODO: deprecate currencySymbol
+            prefix: this.get("currencySymbol"), //  deprecate currencySymbol
             decimalPlaces:2,
             decimalSeparator:".",
             thousandsSeparator:","
         }
     });
-    
+
     /**
      * Default config passed to YAHOO.util.Date.format() by the 'date' Column formatter.
      * @attribute dateOptions
@@ -5551,7 +5550,7 @@ initAttributes : function(oConfigs) {
     this.setAttributeConfig("dateOptions", {
         value: {format:"%m/%d/%Y", locale:"en"}
     });
-    
+
     /**
      * Default config passed to YAHOO.util.Number.format() by the 'number' Column formatter.
      * @attribute numberOptions
@@ -5796,7 +5795,7 @@ _sLastTrId : null,
  * Template row to create all new rows from.
  * @property _elTrTemplate
  * @type {HTMLElement}
- * @private 
+ * @private
  */
 _elTrTemplate : null,
 
@@ -5912,7 +5911,7 @@ _focusEl : function(el) {
  * @el {HTMLElement} (Optional) Element to repaint, otherwise entire document body.
  * @private
  */
-_repaintGecko : (ua.gecko) ? 
+_repaintGecko : (ua.gecko) ?
     function(el) {
         el = el || this._elContainer;
         var parent = el.parentNode;
@@ -5924,9 +5923,9 @@ _repaintGecko : (ua.gecko) ?
  * Forces Opera repaint.
  *
  * @method _repaintOpera
- * @private 
+ * @private
  */
-_repaintOpera : (ua.opera) ? 
+_repaintOpera : (ua.opera) ?
     function() {
         if(ua.opera) {
             document.documentElement.className += " ";
@@ -5941,7 +5940,7 @@ _repaintOpera : (ua.opera) ?
  * @el {HTMLElement} (Optional) Element to repaint, otherwise entire document body.
  * @private
  */
-_repaintWebkit : (ua.webkit) ? 
+_repaintWebkit : (ua.webkit) ?
     function(el) {
         el = el || this._elContainer;
         var parent = el.parentNode;
@@ -5995,7 +5994,7 @@ _initConfigs : function(oConfigs) {
  */
 _initColumnSet : function(aColumnDefs) {
     var oColumn, i, len;
-    
+
     if(this._oColumnSet) {
         // First clear _oDynStyles for existing ColumnSet and
         // uregister CellEditor Custom Events
@@ -6006,11 +6005,11 @@ _initColumnSet : function(aColumnDefs) {
                 oColumn.editor.unsubscribeAll();
             }
         }
-        
+
         this._oColumnSet = null;
         this._clearTrTemplateEl();
     }
-    
+
     if(lang.isArray(aColumnDefs)) {
         this._oColumnSet =  new YAHOO.widget.ColumnSet(aColumnDefs);
     }
@@ -6056,7 +6055,7 @@ _initDataSource : function(oDataSource) {
         var tmpTable = null;
         var tmpContainer = this._elContainer;
         var i=0;
-        //TODO: this will break if re-initing DS at runtime for SDT
+        // this will break if re-initing DS at runtime for SDT
         // Peek in container child nodes to see if TABLE already exists
         if(tmpContainer.hasChildNodes()) {
             var tmpChildren = tmpContainer.childNodes;
@@ -6101,8 +6100,8 @@ _initRecordSet : function() {
  * Initializes DOM elements.
  *
  * @method _initDomElements
- * @param elContainer {HTMLElement | String} HTML DIV element by reference or ID. 
- * return {Boolean} False in case of error, otherwise true 
+ * @param elContainer {HTMLElement | String} HTML DIV element by reference or ID.
+ * return {Boolean} False in case of error, otherwise true
  * @private
  */
 _initDomElements : function(elContainer) {
@@ -6114,9 +6113,9 @@ _initDomElements : function(elContainer) {
     this._initColgroupEl(this._elTable);
     // THEAD
     this._initTheadEl(this._elTable);
-    
+
     // Message TBODY
-    this._initMsgTbodyEl(this._elTable);  
+    this._initMsgTbodyEl(this._elTable);
 
     // Primary TBODY
     this._initTbodyEl(this._elTable);
@@ -6133,7 +6132,7 @@ _initDomElements : function(elContainer) {
  * Destroy's the DataTable outer container element, if available.
  *
  * @method _destroyContainerEl
- * @param elContainer {HTMLElement} Reference to the container element. 
+ * @param elContainer {HTMLElement} Reference to the container element.
  * @private
  */
 _destroyContainerEl : function(elContainer) {
@@ -6163,7 +6162,7 @@ _destroyContainerEl : function(elContainer) {
     }
 
     elContainer.innerHTML = "";
-    
+
     this._elContainer = null;
     this._elColgroup = null;
     this._elThead = null;
@@ -6180,7 +6179,7 @@ _destroyContainerEl : function(elContainer) {
 _initContainerEl : function(elContainer) {
     // Validate container
     elContainer = Dom.get(elContainer);
-    
+
     if(elContainer && elContainer.nodeName && (elContainer.nodeName.toLowerCase() == "div")) {
         // Destroy previous
         this._destroyContainerEl(elContainer);
@@ -6189,7 +6188,7 @@ _initContainerEl : function(elContainer) {
         Ev.addListener(elContainer, "focus", this._onTableFocus, this);
         Ev.addListener(elContainer, "dblclick", this._onTableDblclick, this);
         this._elContainer = elContainer;
-        
+
         var elMask = document.createElement("div");
         elMask.className = DT.CLASS_MASK;
         elMask.style.display = "none";
@@ -6226,7 +6225,7 @@ _destroyTableEl : function() {
 _initCaptionEl : function(sCaption) {
     if(this._elTable && sCaption) {
         // Create CAPTION element
-        if(!this._elCaption) { 
+        if(!this._elCaption) {
             this._elCaption = this._elTable.createCaption();
         }
         // Set CAPTION value
@@ -6249,13 +6248,13 @@ _initTableEl : function(elContainer) {
     if(elContainer) {
         // Destroy previous
         this._destroyTableEl();
-    
+
         // Create TABLE
-        this._elTable = elContainer.appendChild(document.createElement("table"));  
-         
+        this._elTable = elContainer.appendChild(document.createElement("table"));
+
         // Set SUMMARY attribute
         this._elTable.summary = this.get("summary");
-        
+
         // Create CAPTION element
         if(this.get("caption")) {
             this._initCaptionEl(this.get("caption"));
@@ -6306,12 +6305,12 @@ _initColgroupEl : function(elTable) {
             elCol, oColumn,
             elFragment = document.createDocumentFragment(),
             elColTemplate = document.createElement("col");
-    
+
         for(i=0,len=allKeys.length; i<len; i++) {
             oColumn = allKeys[i];
             elCol = elFragment.appendChild(elColTemplate.cloneNode(false));
         }
-    
+
         // Create COLGROUP
         var elColgroup = elTable.insertBefore(document.createElement("colgroup"), elTable.firstChild);
         elColgroup.appendChild(elFragment);
@@ -6351,7 +6350,7 @@ _removeColgroupColEl : function(index) {
  *
  * @method _reorderColgroupColEl
  * @param aKeyIndexes {Number[]} Array of indexes of removed COL element.
- * @param newIndex {Number} New index. 
+ * @param newIndex {Number} New index.
  * @private
  */
 _reorderColgroupColEl : function(aKeyIndexes, newIndex) {
@@ -6392,51 +6391,51 @@ _destroyTheadEl : function() {
  *
  * @method _initTheadEl
  * @param elTable {HTMLElement} TABLE element into which to create COLGROUP.
- * @param {HTMLElement} Initialized THEAD element. 
+ * @param {HTMLElement} Initialized THEAD element.
  * @private
  */
 _initTheadEl : function(elTable) {
     elTable = elTable || this._elTable;
-    
+
     if(elTable) {
         // Destroy previous
         this._destroyTheadEl();
-    
-        //TODO: append to DOM later for performance
+
+        // append to DOM later for performance
         var elThead = (this._elColgroup) ?
             elTable.insertBefore(document.createElement("thead"), this._elColgroup.nextSibling) :
             elTable.appendChild(document.createElement("thead"));
-    
+
         // Set up DOM events for THEAD
         Ev.addListener(elThead, "focus", this._onTheadFocus, this);
         Ev.addListener(elThead, "keydown", this._onTheadKeydown, this);
         Ev.addListener(elThead, "mousedown", this._onTableMousedown, this);
         Ev.addListener(elThead, "mouseup", this._onTableMouseup, this);
         Ev.addListener(elThead, "click", this._onTheadClick, this);
-        
+
         // Bug 2528073: mouseover/mouseout handled via mouseenter/mouseleave
         // delegation at the TABLE level
 
         // Since we can't listen for click and dblclick on the same element...
         // Attach separately to THEAD and TBODY
         ///Ev.addListener(elThead, "dblclick", this._onTableDblclick, this);
-        
+
        var oColumnSet = this._oColumnSet,
             oColumn, i,j, l;
-        
+
         // Add TRs to the THEAD
         var colTree = oColumnSet.tree;
         var elTh;
         for(i=0; i<colTree.length; i++) {
             var elTheadTr = elThead.appendChild(document.createElement("tr"));
-    
+
             // ...and create TH cells
             for(j=0; j<colTree[i].length; j++) {
                 oColumn = colTree[i][j];
                 elTh = elTheadTr.appendChild(document.createElement("th"));
                 this._initThEl(elTh,oColumn);
             }
-    
+
                 // Set FIRST/LAST on THEAD rows
                 if(i === 0) {
                     Dom.addClass(elTheadTr, DT.CLASS_FIRST);
@@ -6456,10 +6455,9 @@ _initTheadEl : function(elTable) {
         for(i=0; i<aLastHeaders.length; i++) {
             Dom.addClass(Dom.get(this.getId() +"-th-"+aLastHeaders[i]), DT.CLASS_LAST);
         }
-        
+
         YAHOO.log("TH cells for " + this._oColumnSet.keys.length + " keys created","info",this.toString());
 
-        ///TODO: try _repaintGecko(this._elContainer) instead
         // Bug 1806891
         if(ua.webkit && ua.webkit < 420) {
             var oSelf = this;
@@ -6468,11 +6466,11 @@ _initTheadEl : function(elTable) {
             },0);
             elThead.style.display = 'none';
         }
-        
+
         this._elThead = elThead;
-        
+
         // Column helpers needs _elThead to exist
-        this._initColumnHelpers();  
+        this._initColumnHelpers();
     }
 },
 
@@ -6490,14 +6488,14 @@ _initThEl : function(elTh, oColumn) {
     elTh.rowSpan = oColumn.getRowspan();
     elTh.colSpan = oColumn.getColspan();
     oColumn._elTh = elTh;
-    
+
     var elThLiner = elTh.appendChild(document.createElement("div"));
     elThLiner.id = elTh.id + "-liner"; // Needed for resizer
     elThLiner.className = DT.CLASS_LINER;
     oColumn._elThLiner = elThLiner;
-    
+
     var elThLabel = elThLiner.appendChild(document.createElement("span"));
-    elThLabel.className = DT.CLASS_LABEL;    
+    elThLabel.className = DT.CLASS_LABEL;
 
     // Assign abbr attribute
     if(oColumn.abbr) {
@@ -6507,9 +6505,9 @@ _initThEl : function(elTh, oColumn) {
     if(oColumn.hidden) {
         this._clearMinWidth(oColumn);
     }
-        
+
     elTh.className = this._getColumnClassNames(oColumn);
-            
+
     // Set Column width...
     if(oColumn.width) {
         // Validate minWidth
@@ -6518,7 +6516,7 @@ _initThEl : function(elTh, oColumn) {
         // ...for fallback cases
         if(DT._bDynStylesFallback) {
             elTh.firstChild.style.overflow = 'hidden';
-            elTh.firstChild.style.width = nWidth + 'px';        
+            elTh.firstChild.style.width = nWidth + 'px';
         }
         // ...for non fallback cases
         else {
@@ -6535,7 +6533,7 @@ _initThEl : function(elTh, oColumn) {
  *
  * @method formatTheadCell
  * @param elCellLabel {HTMLElement} The label SPAN element within the TH liner,
- * not the liner DIV element.     
+ * not the liner DIV element.
  * @param oColumn {YAHOO.widget.Column} Column instance.
  * @param oSortedBy {Object} Sort state object literal.
 */
@@ -6556,10 +6554,10 @@ formatTheadCell : function(elCellLabel, oColumn, oSortedBy) {
 
         // Generate a unique HREF for visited status
         var sHref = this.getId() + "-href-" + oColumn.getSanitizedKey();
-        
+
         // Generate a dynamic TITLE for sort status
         var sTitle = (bDesc) ? this.get("MSG_SORTDESC") : this.get("MSG_SORTASC");
-        
+
         // Format the element
         elCellLabel.innerHTML = "<a href=\"" + sHref + "\" title=\"" + sTitle + "\" class=\"" + DT.CLASS_SORTABLE + "\">" + sLabel + "</a>";
     }
@@ -6581,10 +6579,10 @@ _destroyDraggableColumns : function() {
         oColumn = this._oColumnSet.tree[0][i];
         if(oColumn._dd) {
             oColumn._dd = oColumn._dd.unreg();
-            Dom.removeClass(oColumn.getThEl(), DT.CLASS_DRAGGABLE);       
+            Dom.removeClass(oColumn.getThEl(), DT.CLASS_DRAGGABLE);
         }
     }
-    
+
     // Destroy column drag proxy
     this._destroyColumnDragTargetEl();
 },
@@ -6685,15 +6683,15 @@ _initResizeableColumns : function() {
                 elTh = oColumn.getThEl();
                 Dom.addClass(elTh, DT.CLASS_RESIZEABLE);
                 elThLiner = oColumn.getThLinerEl();
-                
+
                 // Bug 1915349: So resizer is as tall as TH when rowspan > 1
                 // Create a separate resizer liner with position:relative
                 elThResizerLiner = elTh.appendChild(document.createElement("div"));
                 elThResizerLiner.className = DT.CLASS_RESIZERLINER;
-                
+
                 // Move TH contents into the new resizer liner
                 elThResizerLiner.appendChild(elThLiner);
-                
+
                 // Create the resizer
                 elThResizer = elThResizerLiner.appendChild(document.createElement("div"));
                 elThResizer.id = elTh.id + "-resizer"; // Needed for ColumnResizer
@@ -6804,12 +6802,12 @@ _initTbodyEl : function(elTable) {
     if(elTable) {
         // Destroy previous
         this._destroyTbodyEl();
-        
+
         // Create TBODY
         var elTbody = elTable.appendChild(document.createElement("tbody"));
         elTbody.tabIndex = 0;
         elTbody.className = DT.CLASS_DATA;
-    
+
         // Set up DOM events for TBODY
         Ev.addListener(elTbody, "focus", this._onTbodyFocus, this);
         Ev.addListener(elTbody, "mousedown", this._onTableMousedown, this);
@@ -6823,8 +6821,8 @@ _initTbodyEl : function(elTable) {
         // Since we can't listen for click and dblclick on the same element...
         // Attach separately to THEAD and TBODY
         ///Ev.addListener(elTbody, "dblclick", this._onTableDblclick, this);
-        
-    
+
+
         // IE puts focus outline in the wrong place
         if(ua.ie) {
             elTbody.hideFocus=true;
@@ -6854,7 +6852,7 @@ _destroyMsgTbodyEl : function() {
  * Initializes TBODY element for messaging.
  *
  * @method _initMsgTbodyEl
- * @param elTable {HTMLElement} TABLE element into which to create TBODY 
+ * @param elTable {HTMLElement} TABLE element into which to create TBODY
  * @private
  */
 _initMsgTbodyEl : function(elTable) {
@@ -6894,7 +6892,7 @@ _initMsgTbodyEl : function(elTable) {
 _initEvents : function () {
     // Initialize Column sort
     this._initColumnSort();
-        
+
     // Add the document level click listener
     YAHOO.util.Event.addListener(document, "click", this._onDocumentClick, this);
 
@@ -6911,14 +6909,14 @@ _initEvents : function () {
     this._initCellEditing();
 },
 
-/**      
-  * Initializes Column sorting.      
-  *      
-  * @method _initColumnSort      
-  * @private      
-  */      
+/**
+  * Initializes Column sorting.
+  *
+  * @method _initColumnSort
+  * @private
+  */
 _initColumnSort : function() {
-    this.subscribe("theadCellClickEvent", this.onEventSortColumn);      
+    this.subscribe("theadCellClickEvent", this.onEventSortColumn);
 
     // Backward compatibility
     var oSortedBy = this.get("sortedBy");
@@ -6932,12 +6930,12 @@ _initColumnSort : function() {
     }
 },
 
-/**      
-  * Initializes CellEditor integration.      
-  *      
-  * @method _initCellEditing      
-  * @private      
-  */      
+/**
+  * Initializes CellEditor integration.
+  *
+  * @method _initCellEditing
+  * @private
+  */
 _initCellEditing : function() {
     this.subscribe("editorBlurEvent",function () {
         this.onEditorBlurEvent.apply(this,arguments);
@@ -6986,17 +6984,17 @@ _initCellEditing : function() {
 
 /**
  * Retruns classnames to represent current Column states.
- * @method _getColumnClassnames 
+ * @method _getColumnClassnames
  * @param oColumn {YAHOO.widget.Column} Column instance.
  * @param aAddClasses {String[]} An array of additional classnames to add to the
- * return value.  
+ * return value.
  * @return {String} A String of classnames to be assigned to TH or TD elements
- * for given Column.  
- * @private 
+ * for given Column.
+ * @private
  */
 _getColumnClassNames : function (oColumn, aAddClasses) {
     var allClasses;
-    
+
     // Add CSS classes
     if(lang.isString(oColumn.className)) {
         // Single custom class
@@ -7010,7 +7008,7 @@ _getColumnClassNames : function (oColumn, aAddClasses) {
         // no custom classes
         allClasses = [];
     }
-    
+
     // Hook for setting width with via dynamic style uses key since ID is too disposable
     allClasses[allClasses.length] = this.getId() + "-col-" +oColumn.getSanitizedKey();
 
@@ -7042,19 +7040,19 @@ _getColumnClassNames : function (oColumn, aAddClasses) {
     if(oColumn.editor) {
         allClasses[allClasses.length] = DT.CLASS_EDITABLE;
     }
-    
+
     // Addtnl classes, including First/Last
     if(aAddClasses) {
         allClasses = allClasses.concat(aAddClasses);
     }
-    
-    return allClasses.join(' ');  
+
+    return allClasses.join(' ');
 },
 
 /**
  * Clears TR element template in response to any Column state change.
  * @method _clearTrTemplateEl
- * @private 
+ * @private
  */
 _clearTrTemplateEl : function () {
     this._elTrTemplate = null;
@@ -7063,9 +7061,9 @@ _clearTrTemplateEl : function () {
 /**
  * Returns a new TR element template with TD elements classed with current
  * Column states.
- * @method _getTrTemplateEl 
+ * @method _getTrTemplateEl
  * @return {HTMLElement} A TR element to be cloned and added to the DOM.
- * @private 
+ * @private
  */
 _getTrTemplateEl : function (oRecord, index) {
     // Template is already available
@@ -7078,7 +7076,7 @@ _getTrTemplateEl : function (oRecord, index) {
             tr  = d.createElement('tr'),
             td  = d.createElement('td'),
             div = d.createElement('div');
-    
+
         // Append the liner element
         td.appendChild(div);
 
@@ -7095,29 +7093,29 @@ _getTrTemplateEl : function (oRecord, index) {
 
             // Format the base TD
             elTd = this._formatTdEl(allKeys[i], elTd, i, (i===keysLen-1));
-                        
+
             df.appendChild(elTd);
         }
         tr.appendChild(df);
         tr.className = DT.CLASS_REC;
         this._elTrTemplate = tr;
         return tr;
-    }   
+    }
 },
 
 /**
  * Formats a basic TD element.
- * @method _formatTdEl 
- * @param oColumn {YAHOO.widget.Column} Associated Column instance. 
+ * @method _formatTdEl
+ * @param oColumn {YAHOO.widget.Column} Associated Column instance.
  * @param elTd {HTMLElement} An unformatted TD element.
- * @param index {Number} Column key index. 
+ * @param index {Number} Column key index.
  * @param isLast {Boolean} True if Column is last key of the ColumnSet.
  * @return {HTMLElement} A formatted TD element.
- * @private 
+ * @private
  */
 _formatTdEl : function (oColumn, elTd, index, isLast) {
     var oColumnSet = this._oColumnSet;
-    
+
     // Set the TD's accessibility headers
     var allHeaders = oColumnSet.headers,
         allColHeaders = allHeaders[index],
@@ -7128,7 +7126,7 @@ _formatTdEl : function (oColumn, elTd, index, isLast) {
         sTdHeaders += sHeader;
     }
     elTd.headers = sTdHeaders;
-    
+
     // Class the TD element
     var aAddClasses = [];
     if(index === 0) {
@@ -7150,7 +7148,7 @@ _formatTdEl : function (oColumn, elTd, index, isLast) {
         elTd.firstChild.style.overflow = 'hidden';
         elTd.firstChild.style.width = nWidth + 'px';
     }
-    
+
     return elTd;
 },
 
@@ -7163,14 +7161,14 @@ _formatTdEl : function (oColumn, elTd, index, isLast) {
  * @method _createTrEl
  * @param oRecord {YAHOO.widget.Record} Record instance
  * @return {HTMLElement} The new TR element.  This must be added to the DOM.
- * @private 
+ * @private
  */
 _addTrEl : function (oRecord) {
     var elTrTemplate = this._getTrTemplateEl();
-    
+
     // Clone the TR template.
     var elTr = elTrTemplate.cloneNode(true);
-    
+
     // Populate content
     return this._updateTrEl(elTr,oRecord);
 },
@@ -7190,21 +7188,21 @@ _updateTrEl : function(elTr, oRecord) {
     if(ok) {
         // Hide the row to prevent constant reflows
         elTr.style.display = 'none';
-        
+
         // Update TD elements with new data
         var allTds = elTr.childNodes,
             elTd;
         for(var i=0,len=allTds.length; i<len; ++i) {
             elTd = allTds[i];
-            
+
             // Set the cell content
             this.formatCell(allTds[i].firstChild, oRecord, this._oColumnSet.keys[i]);
         }
-        
+
         // Redisplay the row for reflow
         elTr.style.display = '';
     }
-    
+
      // Record-to-TR association and tracking of FIRST/LAST
     var oldId = elTr.id,
         newId = oRecord.getId();
@@ -7322,7 +7320,7 @@ _unsetLastRow : function() {
     if(this._sLastTrId) {
         Dom.removeClass(this._sLastTrId, DT.CLASS_LAST);
         this._sLastTrId = null;
-    }   
+    }
 },
 
 /**
@@ -7420,7 +7418,7 @@ _setSelections : function() {
                 Dom.addClass(el.childNodes[oColumnSet.getColumn(allSelectedCells[i].columnKey).getKeyIndex()], DT.CLASS_SELECTED);
             }
         }
-    }       
+    }
 },
 
 
@@ -7480,40 +7478,40 @@ _setSelections : function() {
 _onRenderChainEnd : function() {
     // Hide loading message
     this.hideTableMessage();
-    
+
     // Show empty message
     if(this._elTbody.rows.length === 0) {
-        this.showTableMessage(this.get("MSG_EMPTY"), DT.CLASS_EMPTY);        
+        this.showTableMessage(this.get("MSG_EMPTY"), DT.CLASS_EMPTY);
     }
 
     // Execute in timeout thread to give implementers a chance
     // to subscribe after the constructor
     var oSelf = this;
     setTimeout(function() {
-        if((oSelf instanceof DT) && oSelf._sId) {        
+        if((oSelf instanceof DT) && oSelf._sId) {
             // Init event
             if(oSelf._bInit) {
                 oSelf._bInit = false;
                 oSelf.fireEvent("initEvent");
             }
-    
+
             // Render event
             oSelf.fireEvent("renderEvent");
             // Backward compatibility
             oSelf.fireEvent("refreshEvent");
             YAHOO.log("DataTable rendered", "info", oSelf.toString());
-    
+
             // Post-render routine
             oSelf.validateColumnWidths();
-    
+
             // Post-render event
             oSelf.fireEvent("postRenderEvent");
-            
+
             /*if(YAHOO.example.Performance.trialStart) {
                 YAHOO.log((new Date()).getTime() - YAHOO.example.Performance.trialStart.getTime() + " ms", "time");
                 YAHOO.example.Performance.trialStart = null;
             }*/
-            
+
             YAHOO.log("Post-render routine executed", "info", oSelf.toString());
         }
     }, 0);
@@ -7911,7 +7909,7 @@ _onTheadKeydown : function(e, oSelf) {
                 return;
             case "input":
             case "textarea":
-                // TODO: implement textareaKeyEvent
+                //  implement textareaKeyEvent
                 break;
             case "thead":
                 bKeepBubbling = oSelf.fireEvent("theadKeyEvent",{target:elTarget,event:e});
@@ -7959,7 +7957,7 @@ _onTbodyKeydown : function(e, oSelf) {
     else if(sMode == "singlecell") {
         oSelf._handleSingleCellSelectionByKey(e);
     }
-    
+
     if(oSelf._oCellEditor) {
         if(oSelf._oCellEditor.fireEvent) {
             oSelf._oCellEditor.fireEvent("blurEvent", {editor: oSelf._oCellEditor});
@@ -8220,7 +8218,7 @@ _onDropdownChange : function(e, oSelf) {
  *
  * @property configs
  * @type Object
- * @default {} 
+ * @default {}
  */
 configs: null,
 
@@ -8307,7 +8305,7 @@ getRecordSet : function() {
  * <dd>Selected cells as an array of object literals:
  *     {recordId:sRecordId, columnKey:sColumnKey}</dd>
  * </dl>
- *  
+ *
  * @method getState
  * @return {Object} DataTable instance state object literal values.
  */
@@ -8642,7 +8640,7 @@ getTdEl : function(cell) {
         else {
             elCell = el;
         }
-        
+
         // Make sure the TD is in this TBODY or is not in DOM
         // Bug 2527707 and bug 2263558
         if(elCell && ((elCell.parentNode.parentNode == this._elTbody) ||
@@ -8841,9 +8839,9 @@ getBelowTdEl : function(cell, forcePrimary) {
 },
 
 /**
- * Returns DOM reference to a TH liner element. Needed to normalize for resizeable 
+ * Returns DOM reference to a TH liner element. Needed to normalize for resizeable
  * Columns, which have an additional resizer liner DIV element between the TH
- * element and the liner DIV element. 
+ * element and the liner DIV element.
  *
  * @method getThLinerEl
  * @param theadCell {YAHOO.widget.Column | HTMLElement | String} Column instance,
@@ -9010,14 +9008,14 @@ load : function(oConfig) {
 /**
  * Resets a RecordSet with the given data and populates the page view
  * with the new data. Any previous data, and selection and sort states are
- * cleared. New data should be added as a separate step. 
+ * cleared. New data should be added as a separate step.
  *
  * @method initializeTable
  */
 initializeTable : function() {
     // Reset init flag
     this._bInit = true;
-    
+
     // Clear the RecordSet
     this._oRecordSet.reset();
 
@@ -9033,7 +9031,7 @@ initializeTable : function() {
     this._aSelections = null;
     this._oAnchorRecord = null;
     this._oAnchorCell = null;
-    
+
     // Clear sort
     this.set("sortedBy", null);
 },
@@ -9042,7 +9040,7 @@ initializeTable : function() {
  * Internal wrapper calls run() on render Chain instance.
  *
  * @method _runRenderChain
- * @private 
+ * @private
  */
 _runRenderChain : function() {
     this._oChainRender.run();
@@ -9094,9 +9092,9 @@ render : function() {
     var elTbody = this._elTbody,
         loopN = this.get("renderLoopSize"),
         nRecordsLength = allRecords.length;
-    
+
     // Table has rows
-    if(nRecordsLength > 0) {                
+    if(nRecordsLength > 0) {
         elTbody.style.display = "none";
         while(elTbody.lastChild) {
             elTbody.removeChild(elTbody.lastChild);
@@ -9113,7 +9111,7 @@ render : function() {
                         elRow, nextSibling;
 
                     elTbody.style.display = "none";
-                    
+
                     for(; i<endRecordIndex; i++) {
                         elRow = Dom.get(allRecords[i].getId());
                         elRow = elRow || this._addTrEl(allRecords[i]);
@@ -9121,7 +9119,7 @@ render : function() {
                         elTbody.insertBefore(elRow, nextSibling);
                     }
                     elTbody.style.display = "";
-                    
+
                     // Set up for the next loop
                     oArg.nCurrentRecord = i;
                 }
@@ -9134,7 +9132,7 @@ render : function() {
             },
             timeout: (loopN > 0) ? 0 : -1
         });
-        
+
         // Post-render tasks
         this._oChainRender.add({
             method: function(oArg) {
@@ -9151,7 +9149,7 @@ render : function() {
             scope: this,
             timeout: (loopN > 0) ? 0 : -1
         });
-     
+
     }
     // Table has no rows
     else {
@@ -9164,14 +9162,14 @@ render : function() {
                         var i = oArg.nCurrent,
                             loopN = oArg.nLoopLength,
                             nIterEnd = (i - loopN < 0) ? 0 : i - loopN;
-    
+
                         elTbody.style.display = "none";
-                        
+
                         for(; i>nIterEnd; i--) {
                             elTbody.deleteRow(-1);
                         }
                         elTbody.style.display = "";
-                        
+
                         // Set up for the next loop
                         oArg.nCurrent = i;
                     }
@@ -9179,7 +9177,7 @@ render : function() {
                 scope: this,
                 iterations: (loopN > 0) ? Math.ceil(nTotal/loopN) : 1,
                 argument: {
-                    nCurrent: nTotal, 
+                    nCurrent: nTotal,
                     nLoopLength: (loopN > 0) ? loopN : nTotal
                 },
                 timeout: (loopN > 0) ? 0 : -1
@@ -9239,10 +9237,10 @@ destroy : function() {
     var instanceName = this.toString();
 
     this._oChainRender.stop();
-    
+
     // Destroy ColumnDD and ColumnResizers
     this._destroyColumnHelpers();
-    
+
     // Destroy all CellEditors
     var oCellEditor;
     for(var i=0, len=this._oColumnSet.flat.length; i<len; i++) {
@@ -9262,7 +9260,7 @@ destroy : function() {
 
     // Unhook DOM events
     Ev.removeListener(document, "click", this._onDocumentClick);
-    
+
     // Clear out the container
     this._destroyContainerEl(this._elContainer);
 
@@ -9272,10 +9270,10 @@ destroy : function() {
             this[param] = null;
         }
     }
-    
+
     // Clean up static values
     DT._nCurrentCount--;
-    
+
     if(DT._nCurrentCount < 1) {
         if(DT._elDynStyleNode) {
             document.getElementsByTagName('head')[0].removeChild(DT._elDynStyleNode);
@@ -9351,14 +9349,14 @@ focusTbodyEl : function() {
 
 /**
  * Setting display:none on DataTable or any parent may impact width validations.
- * After setting display back to "", implementers should call this method to 
+ * After setting display back to "", implementers should call this method to
  * manually perform those validations.
  *
  * @method onShow
  */
 onShow : function() {
     this.validateColumnWidths();
-    
+
     for(var allKeys = this._oColumnSet.keys, i=0, len=allKeys.length, col; i<len; i++) {
         col = allKeys[i];
         if(col._ddResizer) {
@@ -9581,7 +9579,7 @@ getColumn : function(column) {
                 for(var i=0, len=allColumns.length; i<len; i++) {
                     if(allColumns[i].getThEl().id === elCell.id) {
                         oColumn = allColumns[i];
-                    } 
+                    }
                 }
             }
         }
@@ -9609,7 +9607,7 @@ getColumnById : function(column) {
  *
  * @method getColumnSortDir
  * @param oColumn {YAHOO.widget.Column} Column instance.
- * @param oSortedBy {Object} (optional) Specify the state, or use current state. 
+ * @param oSortedBy {Object} (optional) Specify the state, or use current state.
  * @return {String} YAHOO.widget.DataTable.CLASS_ASC or YAHOO.widget.DataTableCLASS_DESC.
  */
 getColumnSortDir : function(oColumn, oSortedBy) {
@@ -9622,7 +9620,7 @@ getColumnSortDir : function(oColumn, oSortedBy) {
             oColumn.sortOptions.defaultDir = DT.CLASS_DESC;
         }
     }
-    
+
     // What is the Column's default sort direction?
     var sortDir = (oColumn.sortOptions && oColumn.sortOptions.defaultDir) ? oColumn.sortOptions.defaultDir : DT.CLASS_ASC;
 
@@ -9671,12 +9669,12 @@ sortColumn : function(oColumn, sDir) {
         if(!oColumn.sortable) {
             Dom.addClass(this.getThEl(oColumn), DT.CLASS_SORTABLE);
         }
-        
+
         // Validate given direction
         if(sDir && (sDir !== DT.CLASS_ASC) && (sDir !== DT.CLASS_DESC)) {
             sDir = null;
         }
-        
+
         // Get the sort dir
         var sSortDir = sDir || this.getColumnSortDir(oColumn);
 
@@ -9690,18 +9688,18 @@ sortColumn : function(oColumn, sDir) {
             if(this.get("dynamicData")) {
                 // Get current state
                 var oState = this.getState();
-                
+
                 // Reset record offset, if paginated
                 if(oState.pagination) {
                     oState.pagination.recordOffset = 0;
                 }
-                
+
                 // Update sortedBy to new values
                 oState.sortedBy = {
                     key: oColumn.key,
                     dir: sSortDir
                 };
-                
+
                 // Get the request for the new state
                 var request = this.get("generateRequest")(oState, this);
 
@@ -9716,7 +9714,7 @@ sortColumn : function(oColumn, sDir) {
                     argument : oState, // Pass along the new state to the callback
                     scope : this
                 };
-                this._oDataSource.sendRequest(request, callback);            
+                this._oDataSource.sendRequest(request, callback);
             }
             // Client-side sort
             else {
@@ -9724,7 +9722,7 @@ sortColumn : function(oColumn, sDir) {
                 var sortFnc = (oColumn.sortOptions && lang.isFunction(oColumn.sortOptions.sortFunction)) ?
                         // Custom sort function
                         oColumn.sortOptions.sortFunction : null;
-                   
+
                 // Sort the Records
                 if(!bSorted || sDir || sortFnc) {
                     // Default sort function if necessary
@@ -9732,26 +9730,26 @@ sortColumn : function(oColumn, sDir) {
                     // Get the field to sort
                     var sField = (oColumn.sortOptions && oColumn.sortOptions.field) ? oColumn.sortOptions.field : oColumn.field;
 
-                    // Sort the Records        
+                    // Sort the Records
                     this._oRecordSet.sortRecords(sortFnc, ((sSortDir == DT.CLASS_DESC) ? true : false), sField);
                 }
                 // Just reverse the Records
                 else {
                     this._oRecordSet.reverseRecords();
                 }
-        
+
                 // Reset to first page if paginated
                 var oPaginator = this.get('paginator');
                 if (oPaginator) {
                     // Set page silently, so as not to fire change event.
                     oPaginator.setPage(1,true);
                 }
-        
+
                 // Update UI via sortedBy
                 this.render();
-                this.set("sortedBy", {key:oColumn.key, dir:sSortDir, column:oColumn}); 
-            }       
-            
+                this.set("sortedBy", {key:oColumn.key, dir:sSortDir, column:oColumn});
+            }
+
             this.fireEvent("columnSortEvent",{column:oColumn,dir:sSortDir});
             YAHOO.log("Column \"" + oColumn.key + "\" sorted \"" + sSortDir + "\"", "info", this.toString());
             return;
@@ -9767,7 +9765,7 @@ sortColumn : function(oColumn, sDir) {
  * @method setColumnWidth
  * @param oColumn {YAHOO.widget.Column} Column instance.
  * @param nWidth {Number} New width in pixels. A null value auto-sizes Column,
- * subject to minWidth and maxAutoWidth validations. 
+ * subject to minWidth and maxAutoWidth validations.
  */
 setColumnWidth : function(oColumn, nWidth) {
     if(!(oColumn instanceof YAHOO.widget.Column)) {
@@ -9781,10 +9779,10 @@ setColumnWidth : function(oColumn, nWidth) {
 
             // Save state
             oColumn.width = nWidth;
-            
+
             // Resize the DOM elements
             this._setColumnWidth(oColumn, nWidth+"px");
-            
+
             this.fireEvent("columnSetWidthEvent",{column:oColumn,width:nWidth});
             YAHOO.log("Set width of Column " + oColumn + " to " + nWidth + "px", "info", this.toString());
         }
@@ -9792,14 +9790,14 @@ setColumnWidth : function(oColumn, nWidth) {
         else if(nWidth === null) {
             // Save state
             oColumn.width = nWidth;
-            
+
             // Resize the DOM elements
             this._setColumnWidth(oColumn, "auto");
             this.validateColumnWidths(oColumn);
             this.fireEvent("columnUnsetWidthEvent",{column:oColumn});
             YAHOO.log("Column " + oColumn + " width unset", "info", this.toString());
         }
-                
+
         // Bug 2339454: resize then sort misaligment
         this._clearTrTemplateEl();
     }
@@ -9818,13 +9816,13 @@ setColumnWidth : function(oColumn, nWidth) {
  * @param oColumn {YAHOO.widget.Column} Column instance.
  * @param sWidth {String} New width value.
  * @param sOverflow {String} Should be "hidden" when Column width is explicitly
- * being set to a value, but should be "visible" when Column is meant to auto-fit content.  
+ * being set to a value, but should be "visible" when Column is meant to auto-fit content.
  * @private
  */
 _setColumnWidth : function(oColumn, sWidth, sOverflow) {
     if(oColumn && (oColumn.getKeyIndex() !== null)) {
         sOverflow = sOverflow || (((sWidth === '') || (sWidth === 'auto')) ? 'visible' : 'hidden');
-    
+
         // Dynamic style algorithm
         if(!DT._bDynStylesFallback) {
             this._setColumnWidthDynStyles(oColumn, sWidth, sOverflow);
@@ -9855,7 +9853,7 @@ _setColumnWidth : function(oColumn, sWidth, sOverflow) {
 _setColumnWidthDynStyles : function(oColumn, sWidth, sOverflow) {
     var s = DT._elDynStyleNode,
         rule;
-    
+
     // Create a new STYLE node
     if(!s) {
         s = document.createElement('style');
@@ -9863,17 +9861,17 @@ _setColumnWidthDynStyles : function(oColumn, sWidth, sOverflow) {
         s = document.getElementsByTagName('head').item(0).appendChild(s);
         DT._elDynStyleNode = s;
     }
-    
+
     // We have a STYLE node to update
     if(s) {
         // Use unique classname for this Column instance as a hook for resizing
         var sClassname = "." + this.getId() + "-col-" + oColumn.getSanitizedKey() + " ." + DT.CLASS_LINER;
-        
+
         // Hide for performance
         if(this._elTbody) {
             this._elTbody.style.display = 'none';
         }
-        
+
         rule = DT._oDynStyles[sClassname];
 
         // The Column does not yet have a rule
@@ -9894,14 +9892,14 @@ _setColumnWidthDynStyles : function(oColumn, sWidth, sOverflow) {
         else {
             rule.style.overflow = sOverflow;
             rule.style.width = sWidth;
-        } 
-        
+        }
+
         // Unhide
         if(this._elTbody) {
             this._elTbody.style.display = '';
         }
     }
-    
+
     // That was not a success, we must call the fallback routine
     if(!rule) {
         DT._bDynStylesFallback = true;
@@ -9912,7 +9910,7 @@ _setColumnWidthDynStyles : function(oColumn, sWidth, sOverflow) {
 /**
  * Updates width of a Column's liner DIV elements by dynamically creating a
  * function to update all element style properties in one pass. Note: This
- * technique is not supported in sandboxed environments that prohibit EVALs.    
+ * technique is not supported in sandboxed environments that prohibit EVALs.
  *
  * @method _setColumnWidthDynFunction
  * @param oColumn {YAHOO.widget.Column} Column instance.
@@ -9920,17 +9918,17 @@ _setColumnWidthDynStyles : function(oColumn, sWidth, sOverflow) {
  * @private
  */
 _setColumnWidthDynFunction : function(oColumn, sWidth, sOverflow) {
-    // TODO: why is this here?
+    //  why is this here?
     if(sWidth == 'auto') {
-        sWidth = ''; 
+        sWidth = '';
     }
-    
+
     // Create one function for each value of rows.length
     var rowslen = this._elTbody ? this._elTbody.rows.length : 0;
-    
+
     // Dynamically create the function
     if (!this._aDynFunctions[rowslen]) {
-        
+
         //Compile a custom function to do all the liner div width
         //assignments at the same time.  A unique function is required
         //for each unique number of rows in _elTbody.  This will
@@ -9950,7 +9948,7 @@ _setColumnWidthDynFunction : function(oColumn, sWidth, sOverflow) {
         //    this._elTbody.rows[99].cells[colIdx].firstChild.style.width =
         //    sWidth;
         //}
-        
+
         var i,j,k;
         var resizerDef = [
             'var colIdx=oColumn.getKeyIndex();',
@@ -9972,11 +9970,11 @@ _setColumnWidthDynFunction : function(oColumn, sWidth, sOverflow) {
         this._aDynFunctions[rowslen] =
             new Function('oColumn','sWidth','sOverflow',resizerDef.join(''));
     }
-    
+
     // Get the function to execute
     var resizerFn = this._aDynFunctions[rowslen];
 
-    // TODO: Hide TBODY for performance in _setColumnWidthDynFunction?
+    //  Hide TBODY for performance in _setColumnWidthDynFunction?
     if (resizerFn) {
         resizerFn.call(this,oColumn,sWidth,sOverflow);
     }
@@ -9999,8 +9997,8 @@ validateColumnWidths : function(oColumn) {
     if(oColumn && !oColumn.hidden && !oColumn.width && (oColumn.getKeyIndex() !== null)) {
             elThLiner = oColumn.getThLinerEl();
             if((oColumn.minWidth > 0) && (elThLiner.offsetWidth < oColumn.minWidth)) {
-                elColgroupClone.childNodes[oColumn.getKeyIndex()].style.width = 
-                        oColumn.minWidth + 
+                elColgroupClone.childNodes[oColumn.getKeyIndex()].style.width =
+                        oColumn.minWidth +
                         (parseInt(Dom.getStyle(elThLiner,"paddingLeft"),10)|0) +
                         (parseInt(Dom.getStyle(elThLiner,"paddingRight"),10)|0) + "px";
                 bNeedsValidation = true;
@@ -10016,8 +10014,8 @@ validateColumnWidths : function(oColumn) {
             if(!oColumn.hidden && !oColumn.width) {
                 elThLiner = oColumn.getThLinerEl();
                 if((oColumn.minWidth > 0) && (elThLiner.offsetWidth < oColumn.minWidth)) {
-                    elColgroupClone.childNodes[i].style.width = 
-                            oColumn.minWidth + 
+                    elColgroupClone.childNodes[i].style.width =
+                            oColumn.minWidth +
                             (parseInt(Dom.getStyle(elThLiner,"paddingLeft"),10)|0) +
                             (parseInt(Dom.getStyle(elThLiner,"paddingRight"),10)|0) + "px";
                     bNeedsValidation = true;
@@ -10076,11 +10074,11 @@ hideColumn : function(oColumn) {
     }
     // Only top-level Columns can get hidden due to issues in FF2 and SF3
     if(oColumn && !oColumn.hidden && oColumn.getTreeIndex() !== null) {
-        
+
         var allrows = this.getTbodyEl().rows;
         var l = allrows.length;
         var allDescendants = this._oColumnSet.getDescendants(oColumn);
-        
+
         // Hide each nested Column
         for(var i=0, len=allDescendants.length; i<len; i++) {
             var thisColumn = allDescendants[i];
@@ -10088,23 +10086,23 @@ hideColumn : function(oColumn) {
 
             // Style the head cell
             Dom.addClass(thisColumn.getThEl(), DT.CLASS_HIDDEN);
-            
+
             // Does this Column have body cells?
             var thisKeyIndex = thisColumn.getKeyIndex();
-            if(thisKeyIndex !== null) {                    
+            if(thisKeyIndex !== null) {
                 // Clear minWidth
                 this._clearMinWidth(oColumn);
-                
+
                 // Style the body cells
                 for(var j=0;j<l;j++) {
                     Dom.addClass(allrows[j].cells[thisKeyIndex],DT.CLASS_HIDDEN);
                 }
             }
-            
+
             this.fireEvent("columnHideEvent",{column:thisColumn});
             YAHOO.log("Column \"" + oColumn.key + "\" hidden", "info", this.toString());
         }
-      
+
         this._repaintOpera();
         this._clearTrTemplateEl();
     }
@@ -10132,12 +10130,12 @@ showColumn : function(oColumn) {
         var allrows = this.getTbodyEl().rows;
         var l = allrows.length;
         var allDescendants = this._oColumnSet.getDescendants(oColumn);
-        
+
         // Show each nested Column
         for(var i=0, len=allDescendants.length; i<len; i++) {
             var thisColumn = allDescendants[i];
             thisColumn.hidden = false;
-            
+
             // Unstyle the head cell
             Dom.removeClass(thisColumn.getThEl(), DT.CLASS_HIDDEN);
 
@@ -10146,8 +10144,8 @@ showColumn : function(oColumn) {
             if(thisKeyIndex !== null) {
                 // Restore minWidth
                 this._restoreMinWidth(oColumn);
-                
-            
+
+
                 // Unstyle the body cells
                 for(var j=0;j<l;j++) {
                     Dom.removeClass(allrows[j].cells[thisKeyIndex],DT.CLASS_HIDDEN);
@@ -10203,25 +10201,25 @@ removeColumn : function(oColumn) {
             else {
                 aKeyIndexes = [aKeyIndexes];
             }
-            
+
             if(aKeyIndexes !== null) {
                 // Sort the indexes so we can remove from the right
                 aKeyIndexes.sort(function(a, b) {return YAHOO.util.Sort.compare(a, b);});
-                
+
                 // Destroy previous THEAD
                 this._destroyTheadEl();
-    
+
                 // Create new THEAD
                 var aOrigColumnDefs = this._oColumnSet.getDefinitions();
                 oColumn = aOrigColumnDefs.splice(nColTreeIndex,1)[0];
                 this._initColumnSet(aOrigColumnDefs);
                 this._initTheadEl();
-                
+
                 // Remove COL
                 for(i=aKeyIndexes.length-1; i>-1; i--) {
                     this._removeColgroupColEl(aKeyIndexes[i]);
                 }
-                
+
                 // Remove TD
                 var allRows = this._elTbody.rows;
                 if(allRows.length > 0) {
@@ -10249,7 +10247,7 @@ removeColumn : function(oColumn) {
                     });
                     this._runRenderChain();
                 }
-        
+
                 this.fireEvent("columnRemoveEvent",{column:oColumn});
                 YAHOO.log("Column \"" + oColumn.key + "\" removed", "info", this.toString());
                 return oColumn;
@@ -10268,7 +10266,7 @@ removeColumn : function(oColumn) {
  * @param oColumn {Object | YAHOO.widget.Column} Object literal Column
  * definition or a Column instance.
  * @param index {Number} (optional) New tree index.
- * @return oColumn {YAHOO.widget.Column} Inserted Column instance. 
+ * @return oColumn {YAHOO.widget.Column} Inserted Column instance.
  */
 insertColumn : function(oColumn, index) {
     // Validate Column
@@ -10279,26 +10277,26 @@ insertColumn : function(oColumn, index) {
         YAHOO.log("Could not insert Column \"" + oColumn + "\" due to invalid argument", "warn", this.toString());
         return;
     }
-    
+
     // Validate index or append new Column to the end of the ColumnSet
     var oColumnSet = this._oColumnSet;
     if(!lang.isValue(index) || !lang.isNumber(index)) {
         index = oColumnSet.tree[0].length;
     }
-    
+
     // Destroy previous THEAD
     this._destroyTheadEl();
-    
+
     // Create new THEAD
     var aNewColumnDefs = this._oColumnSet.getDefinitions();
     aNewColumnDefs.splice(index, 0, oColumn);
     this._initColumnSet(aNewColumnDefs);
     this._initTheadEl();
-    
+
     // Need to refresh the reference
     oColumnSet = this._oColumnSet;
     var oNewColumn = oColumnSet.tree[0][index];
-    
+
     // Get key index(es) for new Column
     var i, len,
         descKeyIndexes = [];
@@ -10310,22 +10308,22 @@ insertColumn : function(oColumn, index) {
             descKeyIndexes[descKeyIndexes.length] = thisKey;
         }
     }
-    
-    if(descKeyIndexes.length > 0) {  
+
+    if(descKeyIndexes.length > 0) {
         // Sort the indexes
         var newIndex = descKeyIndexes.sort(function(a, b) {return YAHOO.util.Sort.compare(a, b);})[0];
-        
+
         // Add COL
         for(i=descKeyIndexes.length-1; i>-1; i--) {
             this._insertColgroupColEl(descKeyIndexes[i]);
         }
-            
+
         // Add TD
         var allRows = this._elTbody.rows;
         if(allRows.length > 0) {
             var loopN = this.get("renderLoopSize"),
                 loopEnd = allRows.length;
-            
+
             // Get templates for each new TD
             var aTdTemplates = [],
                 elTdTemplate;
@@ -10335,7 +10333,7 @@ insertColumn : function(oColumn, index) {
                 elTdTemplate = this._formatTdEl(this._oColumnSet.keys[thisKeyIndex], elTdTemplate, thisKeyIndex, (thisKeyIndex===this._oColumnSet.keys.length-1));
                 aTdTemplates[thisKeyIndex] = elTdTemplate;
             }
-            
+
             this._oChainRender.add({
                 method: function(oArg) {
                     if((this instanceof DT) && this._sId) {
@@ -10357,7 +10355,7 @@ insertColumn : function(oColumn, index) {
                 scope: this,
                 timeout: (loopN > 0) ? 0 : -1
             });
-            this._runRenderChain(); 
+            this._runRenderChain();
         }
 
         this.fireEvent("columnInsertEvent",{column:oColumn,index:index});
@@ -10374,7 +10372,7 @@ insertColumn : function(oColumn, index) {
  * @method reorderColumn
  * @param oColumn {YAHOO.widget.Column} Column instance.
  * @param index {Number} New tree index.
- * @return oColumn {YAHOO.widget.Column} Reordered Column instance. 
+ * @return oColumn {YAHOO.widget.Column} Reordered Column instance.
  */
 reorderColumn : function(oColumn, index) {
     // Validate Column and new index
@@ -10408,21 +10406,21 @@ reorderColumn : function(oColumn, index) {
             else {
                 aOrigKeyIndexes = [aOrigKeyIndexes];
             }
-            
-            if(aOrigKeyIndexes !== null) {                   
+
+            if(aOrigKeyIndexes !== null) {
                 // Sort the indexes
                 aOrigKeyIndexes.sort(function(a, b) {return YAHOO.util.Sort.compare(a, b);});
-                
+
                 // Destroy previous THEAD
                 this._destroyTheadEl();
-    
+
                 // Create new THEAD
                 var aColumnDefs = this._oColumnSet.getDefinitions();
                 var oColumnDef = aColumnDefs.splice(nOrigTreeIndex,1)[0];
                 aColumnDefs.splice(index, 0, oColumnDef);
                 this._initColumnSet(aColumnDefs);
                 this._initTheadEl();
-                
+
                 // Need to refresh the reference
                 var oNewColumn = this._oColumnSet.tree[0][index];
 
@@ -10447,13 +10445,13 @@ reorderColumn : function(oColumn, index) {
                 else {
                     aNewKeyIndexes = [aNewKeyIndexes];
                 }
-                
+
                 // Sort the new indexes and grab the first one for the new location
                 var newIndex = aNewKeyIndexes.sort(function(a, b) {return YAHOO.util.Sort.compare(a, b);})[0];
 
                 // Reorder COL
                 this._reorderColgroupColEl(aOrigKeyIndexes, newIndex);
-                
+
                 // Reorder TD
                 var allRows = this._elTbody.rows;
                 if(allRows.length > 0) {
@@ -10469,17 +10467,17 @@ reorderColumn : function(oColumn, index) {
                                 for(; i < len; ++i) {
                                     tmpTds = [];
                                     thisTr = allRows[i];
-                                    
+
                                     // Remove each TD
                                     for(j=aIndexes.length-1; j>-1; j--) {
                                         tmpTds.push(thisTr.removeChild(thisTr.childNodes[aIndexes[j]]));
                                     }
-                                    
+
                                     // Insert each TD
                                     nextSibling = thisTr.childNodes[newIndex] || null;
                                     for(j=tmpTds.length-1; j>-1; j--) {
                                         thisTr.insertBefore(tmpTds[j], nextSibling);
-                                    }                                    
+                                    }
                                 }
                                 oArg.nCurrentRow = i;
                             }
@@ -10491,7 +10489,7 @@ reorderColumn : function(oColumn, index) {
                     });
                     this._runRenderChain();
                 }
-        
+
                 this.fireEvent("columnReorderEvent",{column:oNewColumn, oldIndex:nOrigTreeIndex});
                 YAHOO.log("Column \"" + oNewColumn.key + "\" reordered", "info", this.toString());
                 return oNewColumn;
@@ -10515,7 +10513,7 @@ selectColumn : function(oColumn) {
         // Only bottom-level Columns can get hidden
         if(oColumn.getKeyIndex() !== null) {
             oColumn.selected = true;
-            
+
             // Update head cell
             var elTh = oColumn.getThEl();
             Dom.addClass(elTh,DT.CLASS_SELECTED);
@@ -10526,7 +10524,7 @@ selectColumn : function(oColumn) {
             oChainRender.add({
                 method: function(oArg) {
                     if((this instanceof DT) && this._sId && allRows[oArg.rowIndex] && allRows[oArg.rowIndex].cells[oArg.cellIndex]) {
-                        Dom.addClass(allRows[oArg.rowIndex].cells[oArg.cellIndex],DT.CLASS_SELECTED);                    
+                        Dom.addClass(allRows[oArg.rowIndex].cells[oArg.cellIndex],DT.CLASS_SELECTED);
                     }
                     oArg.rowIndex++;
                 },
@@ -10536,11 +10534,11 @@ selectColumn : function(oColumn) {
             });
 
             this._clearTrTemplateEl();
-            
+
             this._elTbody.style.display = "none";
             this._runRenderChain();
-            this._elTbody.style.display = "";      
-            
+            this._elTbody.style.display = "";
+
             this.fireEvent("columnSelectEvent",{column:oColumn});
             YAHOO.log("Column \"" + oColumn.key + "\" selected", "info", this.toString());
         }
@@ -10564,7 +10562,7 @@ unselectColumn : function(oColumn) {
         // Only bottom-level Columns can get hidden
         if(oColumn.getKeyIndex() !== null) {
             oColumn.selected = false;
-            
+
             // Update head cell
             var elTh = oColumn.getThEl();
             Dom.removeClass(elTh,DT.CLASS_SELECTED);
@@ -10575,21 +10573,21 @@ unselectColumn : function(oColumn) {
             oChainRender.add({
                 method: function(oArg) {
                     if((this instanceof DT) && this._sId && allRows[oArg.rowIndex] && allRows[oArg.rowIndex].cells[oArg.cellIndex]) {
-                        Dom.removeClass(allRows[oArg.rowIndex].cells[oArg.cellIndex],DT.CLASS_SELECTED); 
-                    }                   
+                        Dom.removeClass(allRows[oArg.rowIndex].cells[oArg.cellIndex],DT.CLASS_SELECTED);
+                    }
                     oArg.rowIndex++;
                 },
                 scope: this,
                 iterations:allRows.length,
                 argument: {rowIndex:0,cellIndex:oColumn.getKeyIndex()}
             });
-            
+
             this._clearTrTemplateEl();
 
             this._elTbody.style.display = "none";
             this._runRenderChain();
-            this._elTbody.style.display = "";      
-            
+            this._elTbody.style.display = "";
+
             this.fireEvent("columnUnselectEvent",{column:oColumn});
             YAHOO.log("Column \"" + oColumn.key + "\" unselected", "info", this.toString());
         }
@@ -10628,7 +10626,7 @@ getSelectedColumns : function(oColumn) {
 highlightColumn : function(column) {
     var oColumn = this.getColumn(column);
     // Only bottom-level Columns can get highlighted
-    if(oColumn && (oColumn.getKeyIndex() !== null)) {            
+    if(oColumn && (oColumn.getKeyIndex() !== null)) {
         // Update head cell
         var elTh = oColumn.getThEl();
         Dom.addClass(elTh,DT.CLASS_HIGHLIGHTED);
@@ -10639,8 +10637,8 @@ highlightColumn : function(column) {
         oChainRender.add({
             method: function(oArg) {
                 if((this instanceof DT) && this._sId && allRows[oArg.rowIndex] && allRows[oArg.rowIndex].cells[oArg.cellIndex]) {
-                    Dom.addClass(allRows[oArg.rowIndex].cells[oArg.cellIndex],DT.CLASS_HIGHLIGHTED);   
-                }                 
+                    Dom.addClass(allRows[oArg.rowIndex].cells[oArg.cellIndex],DT.CLASS_HIGHLIGHTED);
+                }
                 oArg.rowIndex++;
             },
             scope: this,
@@ -10650,8 +10648,8 @@ highlightColumn : function(column) {
         });
         this._elTbody.style.display = "none";
         this._runRenderChain();
-        this._elTbody.style.display = "";      
-            
+        this._elTbody.style.display = "";
+
         this.fireEvent("columnHighlightEvent",{column:oColumn});
         YAHOO.log("Column \"" + oColumn.key + "\" highlighed", "info", this.toString());
     }
@@ -10684,7 +10682,7 @@ unhighlightColumn : function(column) {
             method: function(oArg) {
                 if((this instanceof DT) && this._sId && allRows[oArg.rowIndex] && allRows[oArg.rowIndex].cells[oArg.cellIndex]) {
                     Dom.removeClass(allRows[oArg.rowIndex].cells[oArg.cellIndex],DT.CLASS_HIGHLIGHTED);
-                }                 
+                }
                 oArg.rowIndex++;
             },
             scope: this,
@@ -10694,8 +10692,8 @@ unhighlightColumn : function(column) {
         });
         this._elTbody.style.display = "none";
         this._runRenderChain();
-        this._elTbody.style.display = "";     
-            
+        this._elTbody.style.display = "";
+
         this.fireEvent("columnUnhighlightEvent",{column:oColumn});
         YAHOO.log("Column \"" + oColumn.key + "\" unhighlighted", "info", this.toString());
     }
@@ -10771,7 +10769,7 @@ addRow : function(oData, index) {
             var oPaginator = this.get('paginator');
 
             // Paginated
-            if (oPaginator) {     
+            if (oPaginator) {
                 // Update the paginator's totalRecords
                 var totalRecords = oPaginator.get('totalRecords');
                 if (totalRecords !== widget.Paginator.VALUE_UNLIMITED) {
@@ -10786,9 +10784,9 @@ addRow : function(oData, index) {
                     // Defer UI updates to the render method
                     this.render();
                 }
-                
+
                 this.fireEvent("rowAddEvent", {record:oRecord});
-                YAHOO.log("Added a row for Record " + YAHOO.lang.dump(oRecord) + " at RecordSet index " + recIndex, "info", this.toString()); 
+                YAHOO.log("Added a row for Record " + YAHOO.lang.dump(oRecord) + " at RecordSet index " + recIndex, "info", this.toString());
                 return;
             }
             // Not paginated
@@ -10814,10 +10812,10 @@ addRow : function(oData, index) {
                                         this._setLastRow();
                                     }
                                     // Set EVEN/ODD
-                                    this._setRowStripes();                           
-                                    
+                                    this._setRowStripes();
+
                                     this.hideTableMessage();
-            
+
                                     this.fireEvent("rowAddEvent", {record:oRecord});
                                     YAHOO.log("Added a row for Record " + YAHOO.lang.dump(oRecord) + " at RecordSet index " + recIndex, "info", this.toString());
                                 }
@@ -10830,7 +10828,7 @@ addRow : function(oData, index) {
                     this._runRenderChain();
                     return;
                 }
-            }            
+            }
         }
     }
     YAHOO.log("Could not add row at index " + index + " with " + lang.dump(oData), "warn", this.toString());
@@ -10845,7 +10843,7 @@ addRow : function(oData, index) {
  */
 addRows : function(aData, index) {
     if(lang.isNumber(index) && (index < 0 || index > this._oRecordSet.getLength())) {
-        YAHOO.log("Could not add rows at index " + index + " with " + lang.dump(aData), "warn", this.toString());    
+        YAHOO.log("Could not add rows at index " + index + " with " + lang.dump(aData), "warn", this.toString());
         return;
     }
 
@@ -10853,7 +10851,7 @@ addRows : function(aData, index) {
         var aRecords = this._oRecordSet.addRecords(aData, index);
         if(aRecords) {
             var recIndex = this.getRecordIndex(aRecords[0]);
-            
+
             // Paginated
             var oPaginator = this.get('paginator');
             if (oPaginator) {
@@ -10862,16 +10860,16 @@ addRows : function(aData, index) {
                 if (totalRecords !== widget.Paginator.VALUE_UNLIMITED) {
                     oPaginator.set('totalRecords',totalRecords + aRecords.length);
                 }
-    
+
                 var endRecIndex = (oPaginator.getPageRecords())[1];
 
                 // At least one of the new records affects the view
                 if (recIndex <= endRecIndex) {
                     this.render();
                 }
-                
+
                 this.fireEvent("rowsAddEvent", {records:aRecords});
-                YAHOO.log("Added " + aRecords.length + 
+                YAHOO.log("Added " + aRecords.length +
                         " rows at index " + this._oRecordSet.getRecordIndex(aRecords[0]) +
                         " with data " + lang.dump(aData), "info", this.toString());
                 return;
@@ -10916,10 +10914,10 @@ addRows : function(aData, index) {
                             this._setLastRow();
                         }
                         // Set EVEN/ODD
-                        this._setRowStripes();                           
+                        this._setRowStripes();
 
                         this.fireEvent("rowsAddEvent", {records:aRecords});
-                        YAHOO.log("Added " + aRecords.length + 
+                        YAHOO.log("Added " + aRecords.length +
                                 " rows at index " + this._oRecordSet.getRecordIndex(aRecords[0]) +
                                 " with data " + lang.dump(aData), "info", this.toString());
                     },
@@ -10928,12 +10926,12 @@ addRows : function(aData, index) {
                     timeout: -1 // Needs to run immediately after the DOM insertions above
                 });
                 this._runRenderChain();
-                this.hideTableMessage();                
+                this.hideTableMessage();
                 return;
-            }            
+            }
         }
     }
-    YAHOO.log("Could not add rows at index " + index + " with " + lang.dump(aData), "warn", this.toString());    
+    YAHOO.log("Could not add rows at index " + index + " with " + lang.dump(aData), "warn", this.toString());
 },
 
 /**
@@ -11051,7 +11049,7 @@ updateRows : function(startrow, aData) {
         if (!lang.isNumber(startrow)) {
             startIndex = this.getRecordIndex(startrow);
         }
-            
+
         if(lang.isNumber(startIndex) && (startIndex >= 0) && (startIndex < oRecordSet.getLength())) {
             var lastIndex = startIndex + aData.length,
                 aOldRecords = oRecordSet.getRecords(startIndex, aData.length),
@@ -11090,14 +11088,14 @@ updateRows : function(startrow, aData) {
                 if (oPaginator) {
                     var pageStartIndex = (oPaginator.getPageRecords())[0],
                         pageLastIndex = (oPaginator.getPageRecords())[1];
-    
+
                     // At least one of the new records affects the view
                     if ((startIndex >= pageStartIndex) || (lastIndex <= pageLastIndex)) {
                         this.render();
                     }
 
                     this.fireEvent("rowsAddEvent", {newRecords:aNewRecords, oldRecords:aOldRecords});
-                    YAHOO.log("Added " + aNewRecords.length + 
+                    YAHOO.log("Added " + aNewRecords.length +
                             " rows starting at index " + startIndex +
                             " with data " + lang.dump(aData), "info", this.toString());
                     return;
@@ -11109,7 +11107,7 @@ updateRows : function(startrow, aData) {
                         rowCount = aData.length, // how many needed
                         isLast = (lastIndex >= lastRowIndex),
                         isAdding = (lastIndex > lastRowIndex);
-                                           
+
                     this._oChainRender.add({
                         method: function(oArg) {
                             if((this instanceof DT) && this._sId) {
@@ -11117,7 +11115,7 @@ updateRows : function(startrow, aData) {
                                     i = oArg.nCurrentRow,
                                     j = oArg.nDataPointer,
                                     len = loopN > 0 ? Math.min(i+loopN, startIndex+aRecords.length) : startIndex+aRecords.length;
-                                    
+
                                 for(; i < len; i++,j++) {
                                     if(isAdding && (i>=lastRowIndex)) {
                                         this._elTbody.appendChild(this._addTrEl(aRecords[j]));
@@ -11146,10 +11144,10 @@ updateRows : function(startrow, aData) {
                                 this._setLastRow();
                             }
                             // Set EVEN/ODD
-                            this._setRowStripes();                           
-    
+                            this._setRowStripes();
+
                             this.fireEvent("rowsAddEvent", {newRecords:aNewRecords, oldRecords:aOldRecords});
-                            YAHOO.log("Added " + aNewRecords.length + 
+                            YAHOO.log("Added " + aNewRecords.length +
                                     " rows starting at index " + startIndex +
                                     " with data " + lang.dump(aData), "info", this.toString());
                         },
@@ -11158,9 +11156,9 @@ updateRows : function(startrow, aData) {
                         timeout: -1 // Needs to run immediately after the DOM insertions above
                     });
                     this._runRenderChain();
-                    this.hideTableMessage();                
+                    this.hideTableMessage();
                     return;
-                }            
+                }
             }
         }
     }
@@ -11181,7 +11179,7 @@ deleteRow : function(row) {
         var oRecord = this.getRecord(nRecordIndex);
         if(oRecord) {
             var nTrIndex = this.getTrIndex(nRecordIndex);
-            
+
             // Remove from selection tracker if there
             var sRecordId = oRecord.getId();
             var tracker = this._aSelections || [];
@@ -11191,10 +11189,10 @@ deleteRow : function(row) {
                     tracker.splice(j,1);
                 }
             }
-    
+
             // Delete Record from RecordSet
             var oData = this._oRecordSet.deleteRecord(nRecordIndex);
-    
+
             // Update the UI
             if(oData) {
                 // If paginated and the deleted row was on this or a prior page, just
@@ -11210,7 +11208,7 @@ deleteRow : function(row) {
                     if (totalRecords !== widget.Paginator.VALUE_UNLIMITED) {
                         oPaginator.set('totalRecords',totalRecords - 1);
                     }
-    
+
                     // The deleted record was on this or a prior page, re-render
                     if (!rng || nRecordIndex <= rng[1]) {
                         this.render();
@@ -11220,7 +11218,7 @@ deleteRow : function(row) {
                         method: function() {
                             if((this instanceof DT) && this._sId) {
                                 this.fireEvent("rowDeleteEvent", {recordIndex:nRecordIndex, oldData:oData, trElIndex:nTrIndex});
-                                YAHOO.log("Deleted row with data " + YAHOO.lang.dump(oData) + " at RecordSet index " + nRecordIndex + " and page row index " + nTrIndex, "info", this.toString());     
+                                YAHOO.log("Deleted row with data " + YAHOO.lang.dump(oData) + " at RecordSet index " + nRecordIndex + " and page row index " + nTrIndex, "info", this.toString());
                             }
                         },
                         scope: this,
@@ -11236,7 +11234,7 @@ deleteRow : function(row) {
                                 if((this instanceof DT) && this._sId) {
                                     var isLast = (nRecordIndex === this._oRecordSet.getLength());//(nTrIndex == this.getLastTrEl().sectionRowIndex);
                                     this._deleteTrEl(nTrIndex);
-                    
+
                                     // Post-delete tasks
                                     if(this._elTbody.rows.length > 0) {
                                         // Set FIRST/LAST
@@ -11249,11 +11247,11 @@ deleteRow : function(row) {
                                         // Set EVEN/ODD
                                         if(nTrIndex != this._elTbody.rows.length) {
                                             this._setRowStripes(nTrIndex);
-                                        }                                
+                                        }
                                     }
-                    
+
                                     this.fireEvent("rowDeleteEvent", {recordIndex:nRecordIndex,oldData:oData, trElIndex:nTrIndex});
-                                    YAHOO.log("Deleted row with data " + YAHOO.lang.dump(oData) + " at RecordSet index " + nRecordIndex + " and page row index " + nTrIndex, "info", this.toString());     
+                                    YAHOO.log("Deleted row with data " + YAHOO.lang.dump(oData) + " at RecordSet index " + nRecordIndex + " and page row index " + nTrIndex, "info", this.toString());
                                 }
                             },
                             scope: this,
@@ -11285,7 +11283,7 @@ deleteRows : function(row, count) {
         var oRecord = this.getRecord(nRecordIndex);
         if(oRecord) {
             var nTrIndex = this.getTrIndex(nRecordIndex);
-            
+
             // Remove from selection tracker if there
             var sRecordId = oRecord.getId();
             var tracker = this._aSelections || [];
@@ -11295,11 +11293,11 @@ deleteRows : function(row, count) {
                     tracker.splice(j,1);
                 }
             }
-    
+
             // Delete Record from RecordSet
             var highIndex = nRecordIndex;
             var lowIndex = nRecordIndex;
-        
+
             // Validate count and account for negative value
             if(count && lang.isNumber(count)) {
                 highIndex = (count > 0) ? nRecordIndex + count -1 : nRecordIndex;
@@ -11313,9 +11311,9 @@ deleteRows : function(row, count) {
             else {
                 count = 1;
             }
-            
+
             var aData = this._oRecordSet.deleteRecords(lowIndex, count);
-    
+
             // Update the UI
             if(aData) {
                 var oPaginator = this.get('paginator'),
@@ -11332,7 +11330,7 @@ deleteRows : function(row, count) {
                     if (totalRecords !== widget.Paginator.VALUE_UNLIMITED) {
                         oPaginator.set('totalRecords',totalRecords - aData.length);
                     }
-    
+
                     // The records were on this or a prior page, re-render
                     if (!rng || lowIndex <= rng[1]) {
                         this.render();
@@ -11374,14 +11372,14 @@ deleteRows : function(row, count) {
                             timeout: (loopN > 0) ? 0 : -1
                         });
                         this._oChainRender.add({
-                            method: function() {    
+                            method: function() {
                                 // Post-delete tasks
                                 if(this._elTbody.rows.length > 0) {
                                     this._setFirstRow();
                                     this._setLastRow();
                                     this._setRowStripes();
                                 }
-                                
+
                                 this.fireEvent("rowsDeleteEvent", {recordIndex:lowIndex, oldData:aData, count:count});
                                 YAHOO.log("DataTable " + count + " rows deleted starting at index " + lowIndex, "info", this.toString());
                             },
@@ -11502,14 +11500,14 @@ updateCell : function(oRecord, oColumn, oData, skipRender) {
     oColumn = (oColumn instanceof YAHOO.widget.Column) ? oColumn : this.getColumn(oColumn);
     if(oColumn && oColumn.getField() && (oRecord instanceof YAHOO.widget.Record)) {
         var sKey = oColumn.getField(),
-        
+
         // Copy data from the Record for the event that gets fired later
         //var oldData = YAHOO.widget.DataTable._cloneObject(oRecord.getData());
             oldData = oRecord.getData(sKey);
 
         // Update Record with new data
         this._oRecordSet.updateRecordValue(oRecord, sKey, oData);
-    
+
         // Update the TD only if row is on current page
         var elTd = this.getTdEl({record: oRecord, column: oColumn});
         if(elTd) {
@@ -11537,7 +11535,7 @@ updateCell : function(oRecord, oColumn, oData, skipRender) {
             YAHOO.log("DataTable cell updated: Record ID = " + oRecord.getId() +
                     ", Record index = " + this.getRecordIndex(oRecord) +
                     ", page row index = " + this.getTrIndex(oRecord) +
-                    ", Column key = " + oColumn.getKey(), "info", this.toString());   
+                    ", Column key = " + oColumn.getKey(), "info", this.toString());
         }
     }
 },
@@ -11744,7 +11742,7 @@ doBeforePaginatorChange : function(oPaginatorState) {
  * new state. If "dynamicData" is true, current selections are purged before
  * a request is sent to the DataSource for data for the new state (using the
  * request returned by "generateRequest()").
- *  
+ *
  * @method onPaginatorChangeRequest
  * @param oPaginatorState {Object} An object literal describing the proposed pagination state.
  */
@@ -11755,17 +11753,17 @@ onPaginatorChangeRequest : function (oPaginatorState) {
         if(this.get("dynamicData")) {
             // Get the current state
             var oState = this.getState();
-            
+
             // Update pagination values
             oState.pagination = oPaginatorState;
-    
+
             // Get the request for the new state
             var request = this.get("generateRequest")(oState, this);
-            
+
             // Purge selections
             this.unselectAllRows();
             this.unselectAllCells();
-            
+
             // Get the new data from the server
             var callback = {
                 success : this.onDataReturnSetRows,
@@ -11781,7 +11779,7 @@ onPaginatorChangeRequest : function (oPaginatorState) {
             // to avoid looping back through the changeRequest mechanism
             oPaginatorState.paginator.setStartIndex(oPaginatorState.recordOffset,true);
             oPaginatorState.paginator.setRowsPerPage(oPaginatorState.rowsPerPage,true);
-    
+
             // Update the UI
             this.render();
         }
@@ -12288,10 +12286,8 @@ _handleSingleSelectionByKey : function(e) {
 
             // Validate new row
             if(elNew === null) {
-                //TODO: wrap around to last tr on current page
                 //elNew = this.getLastTrEl();
 
-                //TODO: wrap back to last tr of previous page
 
                 // Top row selection is sticky
                 elNew = this.getFirstTrEl();
@@ -12302,10 +12298,8 @@ _handleSingleSelectionByKey : function(e) {
 
             // Validate new row
             if(elNew === null) {
-                //TODO: wrap around to first tr on current page
                 //elNew = this.getFirstTrEl();
 
-                //TODO: wrap forward to first tr of previous page
 
                 // Bottom row selection is sticky
                 elNew = this.getLastTrEl();
@@ -13308,9 +13302,9 @@ _handleSingleCellSelectionByKey : function(e) {
 
             // Validate new cell
             if(elNew === null) {
-                //TODO: wrap around to first tr on current page
+                // wrap around to first tr on current page
 
-                //TODO: wrap forward to first tr of next page
+                // wrap forward to first tr of next page
 
                 // Bottom selection is sticky
                 elNew = oTrigger.el;
@@ -13321,9 +13315,9 @@ _handleSingleCellSelectionByKey : function(e) {
 
             // Validate new cell
             if(elNew === null) {
-                //TODO: wrap around to last tr on current page
+                // wrap around to last tr on current page
 
-                //TODO: wrap back to last tr of previous page
+                // wrap back to last tr of previous page
 
                 // Top selection is sticky
                 elNew = oTrigger.el;
@@ -13334,9 +13328,9 @@ _handleSingleCellSelectionByKey : function(e) {
 
             // Validate new cell
             if(elNew === null) {
-                //TODO: wrap around to first td on current page
+                // wrap around to first td on current page
 
-                //TODO: wrap forward to first td of next page
+                // wrap forward to first td of next page
 
                 // Top-left selection is sticky, and release TAB focus
                 //elNew = oTrigger.el;
@@ -13348,9 +13342,9 @@ _handleSingleCellSelectionByKey : function(e) {
 
             // Validate new cell
             if(elNew === null) {
-                //TODO: wrap around to last td on current page
+                // wrap around to last td on current page
 
-                //TODO: wrap back to last td of previous page
+                // wrap back to last td of previous page
 
                 // Bottom-right selection is sticky, and release TAB focus
                 //elNew = oTrigger.el;
@@ -13359,7 +13353,7 @@ _handleSingleCellSelectionByKey : function(e) {
         }
 
         Ev.stopEvent(e);
-        
+
         // Unselect all cells
         this.unselectAllCells();
 
@@ -13417,7 +13411,7 @@ selectRow : function(row) {
         }*/
         if(tracker.indexOf) {
             index = tracker.indexOf(sRecordId);
-            
+
         }
         // ...or do it the old-fashioned way
         else {
@@ -13431,7 +13425,7 @@ selectRow : function(row) {
         if(index > -1) {
             tracker.splice(index,1);
         }
-        
+
         // Add to the end
         tracker.push(sRecordId);
         this._aSelections = tracker;
@@ -13568,7 +13562,7 @@ getSelectedTdEls : function() {
  * object literal of syntax {record:oRecord, column:oColumn}.
  */
 selectCell : function(cell) {
-//TODO: accept {record} in selectCell()
+// accept {record} in selectCell()
     var elCell = this.getTdEl(cell);
 
     if(elCell) {
@@ -13673,7 +13667,7 @@ unselectAllCells : function() {
     // Update UI
     this._unselectAllTdEls();
 
-    //TODO: send data to unselectAllCellsEvent handler
+    //send data to unselectAllCellsEvent handler
     this.fireEvent("unselectAllCellsEvent");
     YAHOO.log("Unselected all cells", "info", this.toString());
 },
@@ -13976,7 +13970,7 @@ getCellEditor : function() {
 /**
  * Activates and shows CellEditor instance for the given cell while deactivating and
  * canceling previous CellEditor. It is baked into DataTable that only one CellEditor
- * can be active at any given time. 
+ * can be active at any given time.
  *
  * @method showCellEditor
  * @param elCell {HTMLElement | String} Cell to edit.
@@ -13997,7 +13991,7 @@ showCellEditor : function(elCell, oRecord, oColumn) {
                     this.cancelCellEditor();
                 }
             }
-            
+
             if(oColumn.editor instanceof YAHOO.widget.BaseCellEditor) {
                 // Get CellEditor
                 oCellEditor = oColumn.editor;
@@ -14024,7 +14018,7 @@ showCellEditor : function(elCell, oRecord, oColumn) {
                         if(!this._oCellEditor || this._oCellEditor.container) {
                             this._initCellEditorEl();
                         }
-                        
+
                         // Update Editor values
                         oCellEditor = this._oCellEditor;
                         oCellEditor.cell = elCell;
@@ -14035,12 +14029,12 @@ showCellEditor : function(elCell, oRecord, oColumn) {
                                 oColumn.editorOptions.validator : null;
                         oCellEditor.value = oRecord.getData(oColumn.key);
                         oCellEditor.defaultValue = null;
-            
+
                         // Move Editor
                         var elContainer = oCellEditor.container;
                         var x = Dom.getX(elCell);
                         var y = Dom.getY(elCell);
-            
+
                         // SF doesn't get xy for cells in scrolling table
                         // when tbody display is set to block
                         if(isNaN(x) || isNaN(y)) {
@@ -14052,17 +14046,16 @@ showCellEditor : function(elCell, oRecord, oColumn) {
                                     this._elTbody.scrollTop + // minus tbody scroll
                                     this._elThead.offsetHeight; // account for fixed THEAD cells
                         }
-            
+
                         elContainer.style.left = x + "px";
                         elContainer.style.top = y + "px";
-            
+
                         // Hook to customize the UI
                         this.doBeforeShowCellEditor(this._oCellEditor);
-            
-                        //TODO: This is temporarily up here due so elements can be focused
+
                         // Show Editor
                         elContainer.style.display = "";
-            
+
                         // Handle ESC key
                         Ev.addListener(elContainer, "keydown", function(e, oSelf) {
                             // ESC hides Cell Editor
@@ -14074,7 +14067,7 @@ showCellEditor : function(elCell, oRecord, oColumn) {
                                 oSelf.fireEvent("editorKeydownEvent", {editor:oSelf._oCellEditor, event:e});
                             }
                         }, this);
-            
+
                         // Render Editor markup
                         var fnEditor;
                         if(lang.isString(oColumn.editor)) {
@@ -14104,19 +14097,19 @@ showCellEditor : function(elCell, oRecord, oColumn) {
                         else if(lang.isFunction(oColumn.editor)) {
                             fnEditor = oColumn.editor;
                         }
-            
+
                         if(fnEditor) {
                             // Create DOM input elements
                             fnEditor(this._oCellEditor, this);
-            
+
                             // Show Save/Cancel buttons
                             if(!oColumn.editorOptions || !oColumn.editorOptions.disableBtns) {
                                 this.showCellEditorBtns(elContainer);
                             }
-            
+
                             oCellEditor.isActive = true;
-            
-                            //TODO: verify which args to pass
+
+                            // verify which args to pass
                             this.fireEvent("editorShowEvent", {editor:oCellEditor});
                             YAHOO.log("Cell Editor shown for " + elCell, "info", this.toString());
                             return;
@@ -14125,7 +14118,7 @@ showCellEditor : function(elCell, oRecord, oColumn) {
 
 
 
-            
+
             }
         }
     }
@@ -14152,7 +14145,7 @@ _initCellEditorEl : function() {
     else {
         elCellEditor = document.body.appendChild(elCellEditor);
     }
-    
+
     // Internal tracker of Cell Editor values
     var oCellEditor = {};
     oCellEditor.container = elCellEditor;
@@ -14188,7 +14181,7 @@ saveCellEditor : function() {
             // Copy the data to pass to the event
             //var oldData = YAHOO.widget.DataTable._cloneObject(this._oCellEditor.record.getData(this._oCellEditor.column.key));
             var oldData = this._oCellEditor.record.getData(this._oCellEditor.column.key);
-    
+
             // Validate input data
             if(this._oCellEditor.validator) {
                 newData = this._oCellEditor.value = this._oCellEditor.validator.call(this, newData, oldData, this._oCellEditor);
@@ -14205,7 +14198,7 @@ saveCellEditor : function() {
             this._oRecordSet.updateRecordValue(this._oCellEditor.record, this._oCellEditor.column.key, this._oCellEditor.value);
             // Update the UI
             this.formatCell(this._oCellEditor.cell.firstChild, this._oCellEditor.record, this._oCellEditor.column);
-            
+
             // Bug fix 1764044
             this._oChainRender.add({
                 method: function() {
@@ -14216,12 +14209,12 @@ saveCellEditor : function() {
             this._oChainRender.run();
             // Clear out the Cell Editor
             this.resetCellEditor();
-    
+
             this.fireEvent("editorSaveEvent",
                     {editor:this._oCellEditor, oldData:oldData, newData:newData});
             YAHOO.log("Cell Editor input saved", "info", this.toString());
         }
-    }   
+    }
 },
 
 /**
@@ -14237,7 +14230,7 @@ cancelCellEditor : function() {
         // Backward compatibility
         else if(this._oCellEditor.isActive) {
             this.resetCellEditor();
-            //TODO: preserve values for the event?
+            // preserve values for the event?
             this.fireEvent("editorCancelEvent", {editor:this._oCellEditor});
             YAHOO.log("Cell Editor input canceled", "info", this.toString());
         }
@@ -14255,7 +14248,7 @@ destroyCellEditor : function() {
     if(this._oCellEditor) {
         this._oCellEditor.destroy();
         this._oCellEditor = null;
-    }   
+    }
 },
 
 /**
@@ -14263,7 +14256,7 @@ destroyCellEditor : function() {
  *
  * @method _onEditorShowEvent
  * @param oArgs {Object}  Custom Event args.
- * @private 
+ * @private
  */
 _onEditorShowEvent : function(oArgs) {
     this.fireEvent("editorShowEvent", oArgs);
@@ -14271,10 +14264,10 @@ _onEditorShowEvent : function(oArgs) {
 
 /**
  * Passes through keydownEvent of the active CellEditor.
- * @param oArgs {Object}  Custom Event args. 
+ * @param oArgs {Object}  Custom Event args.
  *
  * @method _onEditorKeydownEvent
- * @private 
+ * @private
  */
 _onEditorKeydownEvent : function(oArgs) {
     this.fireEvent("editorKeydownEvent", oArgs);
@@ -14284,8 +14277,8 @@ _onEditorKeydownEvent : function(oArgs) {
  * Passes through revertEvent of the active CellEditor.
  *
  * @method _onEditorRevertEvent
- * @param oArgs {Object}  Custom Event args. 
- * @private  
+ * @param oArgs {Object}  Custom Event args.
+ * @private
  */
 _onEditorRevertEvent : function(oArgs) {
     this.fireEvent("editorRevertEvent", oArgs);
@@ -14295,8 +14288,8 @@ _onEditorRevertEvent : function(oArgs) {
  * Passes through saveEvent of the active CellEditor.
  *
  * @method _onEditorSaveEvent
- * @param oArgs {Object}  Custom Event args.  
- * @private 
+ * @param oArgs {Object}  Custom Event args.
+ * @private
  */
 _onEditorSaveEvent : function(oArgs) {
     this.fireEvent("editorSaveEvent", oArgs);
@@ -14307,7 +14300,7 @@ _onEditorSaveEvent : function(oArgs) {
  *
  * @method _onEditorCancelEvent
  * @param oArgs {Object}  Custom Event args.
- * @private   
+ * @private
  */
 _onEditorCancelEvent : function(oArgs) {
     this.fireEvent("editorCancelEvent", oArgs);
@@ -14317,8 +14310,8 @@ _onEditorCancelEvent : function(oArgs) {
  * Passes through blurEvent of the active CellEditor.
  *
  * @method _onEditorBlurEvent
- * @param oArgs {Object}  Custom Event args. 
- * @private  
+ * @param oArgs {Object}  Custom Event args.
+ * @private
  */
 _onEditorBlurEvent : function(oArgs) {
     this.fireEvent("editorBlurEvent", oArgs);
@@ -14328,8 +14321,8 @@ _onEditorBlurEvent : function(oArgs) {
  * Passes through blockEvent of the active CellEditor.
  *
  * @method _onEditorBlockEvent
- * @param oArgs {Object}  Custom Event args. 
- * @private  
+ * @param oArgs {Object}  Custom Event args.
+ * @private
  */
 _onEditorBlockEvent : function(oArgs) {
     this.fireEvent("editorBlockEvent", oArgs);
@@ -14339,8 +14332,8 @@ _onEditorBlockEvent : function(oArgs) {
  * Passes through unblockEvent of the active CellEditor.
  *
  * @method _onEditorUnblockEvent
- * @param oArgs {Object}  Custom Event args. 
- * @private  
+ * @param oArgs {Object}  Custom Event args.
+ * @private
  */
 _onEditorUnblockEvent : function(oArgs) {
     this.fireEvent("editorUnblockEvent", oArgs);
@@ -14348,10 +14341,10 @@ _onEditorUnblockEvent : function(oArgs) {
 
 /**
  * Public handler of the editorBlurEvent. By default, saves on blur if
- * disableBtns is true, otherwise cancels on blur. 
+ * disableBtns is true, otherwise cancels on blur.
  *
  * @method onEditorBlurEvent
- * @param oArgs {Object}  Custom Event args.  
+ * @param oArgs {Object}  Custom Event args.
  */
 onEditorBlurEvent : function(oArgs) {
     if(oArgs.editor.disableBtns) {
@@ -14359,18 +14352,18 @@ onEditorBlurEvent : function(oArgs) {
         if(oArgs.editor.save) { // Backward incompatible
             oArgs.editor.save();
         }
-    }      
+    }
     else if(oArgs.editor.cancel) { // Backward incompatible
         // Cancel on blur
         oArgs.editor.cancel();
-    }      
+    }
 },
 
 /**
  * Public handler of the editorBlockEvent. By default, disables DataTable UI.
  *
  * @method onEditorBlockEvent
- * @param oArgs {Object}  Custom Event args.  
+ * @param oArgs {Object}  Custom Event args.
  */
 onEditorBlockEvent : function(oArgs) {
     this.disable();
@@ -14380,7 +14373,7 @@ onEditorBlockEvent : function(oArgs) {
  * Public handler of the editorUnblockEvent. By default, undisables DataTable UI.
  *
  * @method onEditorUnblockEvent
- * @param oArgs {Object}  Custom Event args.  
+ * @param oArgs {Object}  Custom Event args.
  */
 onEditorUnblockEvent : function(oArgs) {
     this.undisable();
@@ -14516,7 +14509,6 @@ doBeforeLoadData : function(sRequest, oResponse, oPayload) {
  * @param oArgs.target {HTMLElement} Target element.
  */
 onEventSortColumn : function(oArgs) {
-//TODO: support form elements in sortable columns
     var evt = oArgs.event;
     var target = oArgs.target;
 
@@ -14546,7 +14538,7 @@ onEventSelectColumn : function(oArgs) {
 
 /**
  * Custom event handler to highlight Column. Accounts for spurious
- * caused-by-child events. 
+ * caused-by-child events.
  *
  * @method onEventHighlightColumn
  * @param oArgs.event {HTMLEvent} Event object.
@@ -14558,7 +14550,7 @@ onEventHighlightColumn : function(oArgs) {
 
 /**
  * Custom event handler to unhighlight Column. Accounts for spurious
- * caused-by-child events. 
+ * caused-by-child events.
  *
  * @method onEventUnhighlightColumn
  * @param oArgs.event {HTMLEvent} Event object.
@@ -14607,7 +14599,7 @@ onEventSelectCell : function(oArgs) {
 
 /**
  * Custom event handler to highlight row. Accounts for spurious
- * caused-by-child events. 
+ * caused-by-child events.
  *
  * @method onEventHighlightRow
  * @param oArgs.event {HTMLEvent} Event object.
@@ -14619,7 +14611,7 @@ onEventHighlightRow : function(oArgs) {
 
 /**
  * Custom event handler to unhighlight row. Accounts for spurious
- * caused-by-child events. 
+ * caused-by-child events.
  *
  * @method onEventUnhighlightRow
  * @param oArgs.event {HTMLEvent} Event object.
@@ -14631,7 +14623,7 @@ onEventUnhighlightRow : function(oArgs) {
 
 /**
  * Custom event handler to highlight cell. Accounts for spurious
- * caused-by-child events. 
+ * caused-by-child events.
  *
  * @method onEventHighlightCell
  * @param oArgs.event {HTMLEvent} Event object.
@@ -14643,7 +14635,7 @@ onEventHighlightCell : function(oArgs) {
 
 /**
  * Custom event handler to unhighlight cell. Accounts for spurious
- * caused-by-child events. 
+ * caused-by-child events.
  *
  * @method onEventUnhighlightCell
  * @param oArgs.event {HTMLEvent} Event object.
@@ -14732,7 +14724,7 @@ onEventCancelCellEditor : function(oArgs) {
 onDataReturnInitializeTable : function(sRequest, oResponse, oPayload) {
     if((this instanceof DT) && this._sId) {
         this.initializeTable();
-    
+
         this.onDataReturnSetRows(sRequest,oResponse,oPayload);
     }
 },
@@ -14740,8 +14732,8 @@ onDataReturnInitializeTable : function(sRequest, oResponse, oPayload) {
 /**
  * Callback function receives reponse from DataSource, replaces all existing
  * Records in  RecordSet, updates TR elements with new data, and updates state
- * UI for pagination and sorting from payload data, if necessary. 
- *  
+ * UI for pagination and sorting from payload data, if necessary.
+ *
  * @method onDataReturnReplaceRows
  * @param oRequest {MIXED} Original generated request.
  * @param oResponse {Object} <a href="http://developer.yahoo.com/yui/datasource/#ds_oParsedResponse">Response object</a>.
@@ -14750,17 +14742,17 @@ onDataReturnInitializeTable : function(sRequest, oResponse, oPayload) {
 onDataReturnReplaceRows : function(oRequest, oResponse, oPayload) {
     if((this instanceof DT) && this._sId) {
         this.fireEvent("dataReturnEvent", {request:oRequest,response:oResponse,payload:oPayload});
-    
+
         // Pass data through abstract method for any transformations
         var ok    = this.doBeforeLoadData(oRequest, oResponse, oPayload),
             pag   = this.get('paginator'),
             index = 0;
-    
+
         // Data ok to set
         if(ok && oResponse && !oResponse.error && lang.isArray(oResponse.results)) {
             // Update Records
             this._oRecordSet.reset();
-    
+
             if (this.get('dynamicData')) {
                 if (oPayload && oPayload.pagination &&
                     lang.isNumber(oPayload.pagination.recordOffset)) {
@@ -14769,14 +14761,14 @@ onDataReturnReplaceRows : function(oRequest, oResponse, oPayload) {
                     index = pag.getStartIndex();
                 }
             }
-    
+
             this._oRecordSet.setRecords(oResponse.results, index | 0);
-            
+
             // Update state
             this._handleDataReturnPayload(oRequest, oResponse, oPayload);
-            
+
             // Update UI
-            this.render();    
+            this.render();
         }
         // Error
         else if(ok && oResponse.error) {
@@ -14798,15 +14790,15 @@ onDataReturnReplaceRows : function(oRequest, oResponse, oPayload) {
 onDataReturnAppendRows : function(sRequest, oResponse, oPayload) {
     if((this instanceof DT) && this._sId) {
         this.fireEvent("dataReturnEvent", {request:sRequest,response:oResponse,payload:oPayload});
-    
+
         // Pass data through abstract method for any transformations
         var ok = this.doBeforeLoadData(sRequest, oResponse, oPayload);
-    
+
         // Data ok to append
-        if(ok && oResponse && !oResponse.error && lang.isArray(oResponse.results)) {        
+        if(ok && oResponse && !oResponse.error && lang.isArray(oResponse.results)) {
             // Append rows
             this.addRows(oResponse.results);
-    
+
             // Update state
             this._handleDataReturnPayload(sRequest, oResponse, oPayload);
         }
@@ -14832,15 +14824,15 @@ onDataReturnAppendRows : function(sRequest, oResponse, oPayload) {
 onDataReturnInsertRows : function(sRequest, oResponse, oPayload) {
     if((this instanceof DT) && this._sId) {
         this.fireEvent("dataReturnEvent", {request:sRequest,response:oResponse,payload:oPayload});
-    
+
         // Pass data through abstract method for any transformations
         var ok = this.doBeforeLoadData(sRequest, oResponse, oPayload);
-    
+
         // Data ok to append
         if(ok && oResponse && !oResponse.error && lang.isArray(oResponse.results)) {
             // Insert rows
             this.addRows(oResponse.results, (oPayload ? oPayload.insertIndex : 0));
-    
+
             // Update state
             this._handleDataReturnPayload(sRequest, oResponse, oPayload);
         }
@@ -14866,15 +14858,15 @@ onDataReturnInsertRows : function(sRequest, oResponse, oPayload) {
 onDataReturnUpdateRows : function(sRequest, oResponse, oPayload) {
     if((this instanceof DT) && this._sId) {
         this.fireEvent("dataReturnEvent", {request:sRequest,response:oResponse,payload:oPayload});
-    
+
         // Pass data through abstract method for any transformations
         var ok = this.doBeforeLoadData(sRequest, oResponse, oPayload);
-    
+
         // Data ok to append
         if(ok && oResponse && !oResponse.error && lang.isArray(oResponse.results)) {
             // Insert rows
             this.updateRows((oPayload ? oPayload.updateIndex : 0), oResponse.results);
-    
+
             // Update state
             this._handleDataReturnPayload(sRequest, oResponse, oPayload);
         }
@@ -14888,7 +14880,7 @@ onDataReturnUpdateRows : function(sRequest, oResponse, oPayload) {
 /**
  * Callback function receives reponse from DataSource and populates the
  * RecordSet with the results.
- *  
+ *
  * @method onDataReturnSetRows
  * @param oRequest {MIXED} Original generated request.
  * @param oResponse {Object} <a href="http://developer.yahoo.com/yui/datasource/#ds_oParsedResponse">Response object</a>.
@@ -14897,12 +14889,12 @@ onDataReturnUpdateRows : function(sRequest, oResponse, oPayload) {
 onDataReturnSetRows : function(oRequest, oResponse, oPayload) {
     if((this instanceof DT) && this._sId) {
         this.fireEvent("dataReturnEvent", {request:oRequest,response:oResponse,payload:oPayload});
-    
+
         // Pass data through abstract method for any transformations
         var ok    = this.doBeforeLoadData(oRequest, oResponse, oPayload),
             pag   = this.get('paginator'),
             index = 0;
-    
+
         // Data ok to set
         if(ok && oResponse && !oResponse.error && lang.isArray(oResponse.results)) {
             // Update Records
@@ -14913,15 +14905,15 @@ onDataReturnSetRows : function(oRequest, oResponse, oPayload) {
                 } else if (pag) {
                     index = pag.getStartIndex();
                 }
-                
+
                 this._oRecordSet.reset(); // Bug 2290604: dyanmic data shouldn't keep accumulating by default
             }
-    
+
             this._oRecordSet.setRecords(oResponse.results, index | 0);
-    
+
             // Update state
             this._handleDataReturnPayload(oRequest, oResponse, oPayload);
-            
+
             // Update UI
             this.render();
         }
@@ -14937,7 +14929,7 @@ onDataReturnSetRows : function(oRequest, oResponse, oPayload) {
 
 /**
  * Hook to update oPayload before consumption.
- *  
+ *
  * @method handleDataReturnPayload
  * @param oRequest {MIXED} Original generated request.
  * @param oResponse {Object} <a href="http://developer.yahoo.com/yui/datasource/#ds_oParsedResponse">Response object</a>.
@@ -14950,7 +14942,7 @@ handleDataReturnPayload : function (oRequest, oResponse, oPayload) {
 
 /**
  * Updates the DataTable with state data sent in an onDataReturn* payload.
- *  
+ *
  * @method _handleDataReturnPayload
  * @param oRequest {MIXED} Original generated request.
  * @param oResponse {Object} <a href="http://developer.yahoo.com/yui/datasource/#ds_oParsedResponse">Response object</a>.
@@ -15100,13 +15092,13 @@ _handleDataReturnPayload : function (oRequest, oResponse, oPayload) {
      * @event tableBlurEvent
      */
 
-    /*TODO implement theadBlurEvent
+    /*implement theadBlurEvent
      * Fired when the DataTable THEAD element has a blur event.
      *
      * @event theadBlurEvent
      */
 
-    /*TODO: implement tbodyBlurEvent
+    /* implement tbodyBlurEvent
      * Fired when the DataTable TBODY element has a blur event.
      *
      * @event tbodyBlurEvent
@@ -15383,7 +15375,7 @@ _handleDataReturnPayload : function (oRequest, oResponse, oPayload) {
      * @event columnResizeEvent
      * @param oArgs.column {YAHOO.widget.Column} The Column instance.
      * @param oArgs.target {HTMLElement} The TH element.
-     * @param oArgs.width {Number} Width in pixels.     
+     * @param oArgs.width {Number} Width in pixels.
      */
 
     /**
@@ -15505,7 +15497,7 @@ _handleDataReturnPayload : function (oRequest, oResponse, oPayload) {
      * @event rowAddEvent
      * @param oArgs.record {YAHOO.widget.Record} The added Record.
      */
-     
+
     /**
      * Fired when rows are added.
      *
@@ -15529,7 +15521,7 @@ _handleDataReturnPayload : function (oRequest, oResponse, oPayload) {
      * @param oArgs.recordIndex {Number} Index of the deleted Record.
      * @param oArgs.trElIndex {Number} Index of the deleted TR element, if on current page.
      */
-     
+
     /**
      * Fired when rows are deleted.
      *
@@ -15829,10 +15821,10 @@ _handleDataReturnPayload : function (oRequest, oResponse, oPayload) {
 // Deprecated APIs
 //
 /////////////////////////////////////////////////////////////////////////////
-  
+
 /*
  * @method showCellEditorBtns
- * @deprecated Use CellEditor.renderBtns() 
+ * @deprecated Use CellEditor.renderBtns()
  */
 showCellEditorBtns : function(elContainer) {
     // Buttons
@@ -15862,7 +15854,7 @@ showCellEditorBtns : function(elContainer) {
 
 /**
  * @method resetCellEditor
- * @deprecated Use destroyCellEditor 
+ * @deprecated Use destroyCellEditor
  */
 resetCellEditor : function() {
     var elContainer = this._oCellEditor.container;
@@ -16103,13 +16095,13 @@ var lang   = YAHOO.lang,
     util   = YAHOO.util,
     widget = YAHOO.widget,
     ua     = YAHOO.env.ua,
-    
+
     Dom    = util.Dom,
     Ev     = util.Event,
     DS     = util.DataSourceBase,
     DT     = widget.DataTable,
     Pag    = widget.Paginator;
-    
+
 /**
  * The ScrollingDataTable class extends the DataTable class to provide
  * functionality for x-scrolling, y-scrolling, and xy-scrolling.
@@ -16125,7 +16117,7 @@ var lang   = YAHOO.lang,
  */
 widget.ScrollingDataTable = function(elContainer,aColumnDefs,oDataSource,oConfigs) {
     oConfigs = oConfigs || {};
-    
+
     // Prevent infinite loop
     if(oConfigs.scrollable) {
         oConfigs.scrollable = false;
@@ -16133,7 +16125,7 @@ widget.ScrollingDataTable = function(elContainer,aColumnDefs,oDataSource,oConfig
 
     this._init();
 
-    widget.ScrollingDataTable.superclass.constructor.call(this, elContainer,aColumnDefs,oDataSource,oConfigs); 
+    widget.ScrollingDataTable.superclass.constructor.call(this, elContainer,aColumnDefs,oDataSource,oConfigs);
 
     // Once per instance
     this.subscribe("columnShowEvent", this._onColumnChange);
@@ -16158,7 +16150,7 @@ lang.augmentObject(SDT, {
      * @default "yui-dt-hd"
      */
     CLASS_HEADER : "yui-dt-hd",
-    
+
     /**
      * Class name assigned to inner DataTable body container.
      *
@@ -16231,7 +16223,7 @@ _elTmpTable : null,
  * True if x-scrollbar is currently visible.
  * @property _bScrollbarX
  * @type Boolean
- * @private 
+ * @private
  */
 _bScrollbarX : null,
 
@@ -16278,8 +16270,8 @@ initAttributes : function(oConfigs) {
         method: function(oParam) {
             if(this._elHdContainer && this._elBdContainer) {
                 this._elHdContainer.style.width = oParam;
-                this._elBdContainer.style.width = oParam;            
-                this._syncScrollX();      
+                this._elBdContainer.style.width = oParam;
+                this._syncScrollX();
                 this._syncScrollOverhang();
             }
         }
@@ -16295,8 +16287,8 @@ initAttributes : function(oConfigs) {
         validator: lang.isString,
         method: function(oParam) {
             if(this._elHdContainer && this._elBdContainer) {
-                this._elBdContainer.style.height = oParam;    
-                this._syncScrollX();   
+                this._elBdContainer.style.height = oParam;
+                this._syncScrollX();
                 this._syncScrollY();
                 this._syncScrollOverhang();
             }
@@ -16305,7 +16297,7 @@ initAttributes : function(oConfigs) {
 
     /**
     * @attribute COLOR_COLUMNFILLER
-    * @description CSS color value assigned to header filler on scrollable tables.  
+    * @description CSS color value assigned to header filler on scrollable tables.
     * @type String
     * @default "#F2F2F2"
     */
@@ -16340,8 +16332,8 @@ _init : function() {
  * two separate TABLE elements.
  *
  * @method _initDomElements
- * @param elContainer {HTMLElement | String} HTML DIV element by reference or ID. 
- * return {Boolean} False in case of error, otherwise true 
+ * @param elContainer {HTMLElement | String} HTML DIV element by reference or ID.
+ * return {Boolean} False in case of error, otherwise true
  * @private
  */
 _initDomElements : function(elContainer) {
@@ -16350,19 +16342,19 @@ _initDomElements : function(elContainer) {
     if(this._elContainer && this._elHdContainer && this._elBdContainer) {
         // TABLEs
         this._initTableEl();
-        
+
         if(this._elHdTable && this._elTable) {
             // COLGROUPs
-            ///this._initColgroupEl(this._elHdTable, this._elTable);  
-            this._initColgroupEl(this._elHdTable);        
-            
+            ///this._initColgroupEl(this._elHdTable, this._elTable);
+            this._initColgroupEl(this._elHdTable);
+
             // THEADs
             this._initTheadEl(this._elHdTable, this._elTable);
-            
+
             // Primary TBODY
             this._initTbodyEl(this._elTable);
             // Message TBODY
-            this._initMsgTbodyEl(this._elTable);            
+            this._initMsgTbodyEl(this._elTable);
         }
     }
     if(!this._elContainer || !this._elTable || !this._elColgroup ||  !this._elThead || !this._elTbody || !this._elMsgTbody ||
@@ -16379,7 +16371,7 @@ _initDomElements : function(elContainer) {
  * Destroy's the DataTable outer and inner container elements, if available.
  *
  * @method _destroyContainerEl
- * @param elContainer {HTMLElement} Reference to the container element. 
+ * @param elContainer {HTMLElement} Reference to the container element.
  * @private
  */
 _destroyContainerEl : function(elContainer) {
@@ -16399,11 +16391,11 @@ _destroyContainerEl : function(elContainer) {
  */
 _initContainerEl : function(elContainer) {
     SDT.superclass._initContainerEl.call(this, elContainer);
-    
+
     if(this._elContainer) {
         elContainer = this._elContainer; // was constructor input, now is DOM ref
         Dom.addClass(elContainer, DT.CLASS_SCROLLABLE);
-        
+
         // Container for header TABLE
         var elHdContainer = document.createElement("div");
         elHdContainer.style.width = this.get("width") || "";
@@ -16411,7 +16403,7 @@ _initContainerEl : function(elContainer) {
         Dom.addClass(elHdContainer, SDT.CLASS_HEADER);
         this._elHdContainer = elHdContainer;
         elContainer.appendChild(elHdContainer);
-    
+
         // Container for body TABLE
         var elBdContainer = document.createElement("div");
         elBdContainer.style.width = this.get("width") || "";
@@ -16434,7 +16426,7 @@ _initCaptionEl : function(sCaption) {
     // Not yet supported
     /*if(this._elHdTable && sCaption) {
         // Create CAPTION element
-        if(!this._elCaption) { 
+        if(!this._elCaption) {
             this._elCaption = this._elHdTable.createCaption();
         }
         // Set CAPTION value
@@ -16456,7 +16448,7 @@ _destroyHdTableEl : function() {
     if(elTable) {
         Ev.purgeElement(elTable, true);
         elTable.parentNode.removeChild(elTable);
-        
+
         // A little out of place, but where else can we null out these extra elements?
         ///this._elBdColgroup = null;
         this._elBdThead = null;
@@ -16473,9 +16465,9 @@ _initTableEl : function() {
     // Head TABLE
     if(this._elHdContainer) {
         this._destroyHdTableEl();
-    
+
         // Create TABLE
-        this._elHdTable = this._elHdContainer.appendChild(document.createElement("table"));   
+        this._elHdTable = this._elHdContainer.appendChild(document.createElement("table"));
 
         // Set up mouseover/mouseout events via mouseenter/mouseleave delegation
         Ev.delegate(this._elHdTable, "mouseenter", this._onTableMouseover, "thead ."+DT.CLASS_LABEL, this);
@@ -16496,7 +16488,7 @@ _initTableEl : function() {
 _initTheadEl : function(elHdTable, elTable) {
     elHdTable = elHdTable || this._elHdTable;
     elTable = elTable || this._elTable;
-    
+
     // Scrolling body's THEAD
     this._initBdTheadEl(elTable);
     // Standard fixed head THEAD
@@ -16539,7 +16531,7 @@ _destroyBdTheadEl : function() {
  *
  * @method _initBdTheadEl
  * @param elTable {HTMLElement} TABLE element into which to create THEAD.
- * @return {HTMLElement} Initialized THEAD element. 
+ * @return {HTMLElement} Initialized THEAD element.
  * @private
  */
 _initBdTheadEl : function(elTable) {
@@ -16548,7 +16540,7 @@ _initBdTheadEl : function(elTable) {
         this._destroyBdTheadEl();
 
         var elThead = elTable.insertBefore(document.createElement("thead"), elTable.firstChild);
-        
+
         // Add TRs to the THEAD;
         var oColumnSet = this._oColumnSet,
             colTree = oColumnSet.tree,
@@ -16556,7 +16548,7 @@ _initBdTheadEl : function(elTable) {
 
         for(i=0, k=colTree.length; i<k; i++) {
             elTheadTr = elThead.appendChild(document.createElement("tr"));
-    
+
             // ...and create TH cells
             for(j=0, len=colTree[i].length; j<len; j++) {
                 oColumn = colTree[i][j];
@@ -16586,7 +16578,6 @@ _initBdThEl : function(elTh, oColumn) {
         elTh.abbr = oColumn.abbr;
     }
 
-    // TODO: strip links and form elements
     var sKey = oColumn.getKey();
     var sLabel = lang.isValue(oColumn.label) ? oColumn.label : sKey;
     elTh.innerHTML = sLabel;
@@ -16601,7 +16592,7 @@ _initBdThEl : function(elTh, oColumn) {
  */
 _initTbodyEl : function(elTable) {
     SDT.superclass._initTbodyEl.call(this, elTable);
-    
+
     // Bug 2105534 - Safari 3 gap
     // Bug 2492591 - IE8 offsetTop
     elTable.style.marginTop = (this._elTbody.offsetTop > 0) ?
@@ -16650,7 +16641,7 @@ _focusEl : function(el) {
     // http://developer.mozilla.org/en/docs/index.php?title=Key-navigable_custom_DHTML_widgets
     // The timeout is necessary in both IE and Firefox 1.5, to prevent scripts from doing
     // strange unexpected things as the user clicks on buttons and other controls.
-    
+
     // Bug 1921135: Wrap the whole thing in a setTimeout
     setTimeout(function() {
         setTimeout(function() {
@@ -16686,7 +16677,7 @@ _focusEl : function(el) {
  * Internal wrapper calls run() on render Chain instance.
  *
  * @method _runRenderChain
- * @private 
+ * @private
  */
 _runRenderChain : function() {
     this._storeScrollPositions();
@@ -16718,23 +16709,23 @@ _runRenderChain : function() {
 },
 
 /**
- * Restores scroll positions to stored value. 
+ * Restores scroll positions to stored value.
  *
  * @method _retoreScrollPositions
- * @private 
+ * @private
  */
  _restoreScrollPositions : function() {
     // Reset scroll positions
     if(this._nScrollTop) {
         this._elBdContainer.scrollTop = this._nScrollTop;
         this._nScrollTop = null;
-    } 
+    }
     if(this._nScrollLeft) {
         this._elBdContainer.scrollLeft = this._nScrollLeft;
         // Bug 2529024
-        this._elHdContainer.scrollLeft = this._nScrollLeft; 
+        this._elHdContainer.scrollLeft = this._nScrollLeft;
         this._nScrollLeft = null;
-    } 
+    }
 },
 
 /**
@@ -16756,15 +16747,15 @@ _validateColumnWidth : function(oColumn, elTd) {
         // Compare auto-widths
         if(elTh.offsetWidth !== elTd.offsetWidth) {
             var elWider = (elTh.offsetWidth > elTd.offsetWidth) ?
-                    oColumn.getThLinerEl() : elTd.firstChild;               
+                    oColumn.getThLinerEl() : elTd.firstChild;
 
             // Grab the wider liner width, unless the minWidth is wider
             var newWidth = Math.max(0,
                 (elWider.offsetWidth -(parseInt(Dom.getStyle(elWider,"paddingLeft"),10)|0) - (parseInt(Dom.getStyle(elWider,"paddingRight"),10)|0)),
                 oColumn.minWidth);
-                
+
             var sOverflow = 'visible';
-            
+
             // Now validate against maxAutoWidth
             if((oColumn.maxAutoWidth > 0) && (newWidth > oColumn.maxAutoWidth)) {
                 newWidth = oColumn.maxAutoWidth;
@@ -16782,7 +16773,7 @@ _validateColumnWidth : function(oColumn, elTd) {
 
 /**
  * For one or all Columns of a ScrollingDataTable, when Column is not hidden,
- * and width is not set, syncs widths of header and body cells and 
+ * and width is not set, syncs widths of header and body cells and
  * validates that width against minWidth and/or maxAutoWidth as necessary.
  *
  * @method validateColumnWidths
@@ -16807,7 +16798,7 @@ validateColumnWidths : function(oColumn) {
             this._elBdContainer.style.width = "";
         }
         this._elContainer.style.width = "";
-        
+
         //Validate just one Column
         if(oColumn && lang.isNumber(oColumn.getKeyIndex())) {
             this._validateColumnWidth(oColumn, elRow.childNodes[oColumn.getKeyIndex()]);
@@ -16819,16 +16810,16 @@ validateColumnWidths : function(oColumn) {
                 oColumn = allKeys[i];
                 // Only Columns without widths that are not hidden, unset a calculated auto-width
                 if(!oColumn.width && !oColumn.hidden && oColumn._calculatedWidth) {
-                    todos[todos.length] = oColumn;      
+                    todos[todos.length] = oColumn;
                 }
             }
-            
+
             this._elTbody.style.display = "none";
             for(i=0, len=todos.length; i<len; i++) {
                 this._setColumnWidth(todos[i], "auto", "visible");
             }
             this._elTbody.style.display = "";
-            
+
             todos = [];
 
             // Iterate through all Columns and make the store the adjustments to make in one pass
@@ -16842,26 +16833,26 @@ validateColumnWidths : function(oColumn) {
                     // Compare auto-widths
                     if(elTh.offsetWidth !== elTd.offsetWidth) {
                         var elWider = (elTh.offsetWidth > elTd.offsetWidth) ?
-                                oColumn.getThLinerEl() : elTd.firstChild;               
-                
+                                oColumn.getThLinerEl() : elTd.firstChild;
+
                         // Grab the wider liner width, unless the minWidth is wider
                         var newWidth = Math.max(0,
                             (elWider.offsetWidth -(parseInt(Dom.getStyle(elWider,"paddingLeft"),10)|0) - (parseInt(Dom.getStyle(elWider,"paddingRight"),10)|0)),
                             oColumn.minWidth);
-                            
+
                         var sOverflow = 'visible';
-                        
+
                         // Now validate against maxAutoWidth
                         if((oColumn.maxAutoWidth > 0) && (newWidth > oColumn.maxAutoWidth)) {
                             newWidth = oColumn.maxAutoWidth;
                             sOverflow = "hidden";
                         }
-                
+
                         todos[todos.length] = [oColumn, newWidth, sOverflow];
                     }
                 }
             }
-            
+
             this._elTbody.style.display = "none";
             for(i=0, len=todos.length; i<len; i++) {
                 thisTodo = todos[i];
@@ -16871,14 +16862,14 @@ validateColumnWidths : function(oColumn) {
             }
             this._elTbody.style.display = "";
         }
-    
+
         // Resnap unsnapped containers
         if(sWidth) {
             this._elHdContainer.style.width = sWidth;
             this._elBdContainer.style.width = sWidth;
-        } 
+        }
     }
-    
+
     this._syncScroll();
     this._restoreScrollPositions();
 },
@@ -16888,7 +16879,7 @@ validateColumnWidths : function(oColumn) {
  * and container width and height.
  *
  * @method _syncScroll
- * @private 
+ * @private
  */
 _syncScroll : function() {
     this._syncScrollX();
@@ -16913,11 +16904,11 @@ _syncScroll : function() {
 _syncScrollY : function() {
     var elTbody = this._elTbody,
         elBdContainer = this._elBdContainer;
-    
+
     // X-scrolling not enabled
     if(!this.get("width")) {
         // Snap outer container width to content
-        this._elContainer.style.width = 
+        this._elContainer.style.width =
                 (elBdContainer.scrollHeight > elBdContainer.clientHeight) ?
                 // but account for y-scrollbar since it is visible
                 (elTbody.parentNode.clientWidth + 19) + "px" :
@@ -16935,14 +16926,14 @@ _syncScrollY : function() {
 _syncScrollX : function() {
     var elTbody = this._elTbody,
         elBdContainer = this._elBdContainer;
-    
+
     // IE 6 and 7 only when y-scrolling not enabled
     if(!this.get("height") && (ua.ie)) {
         // Snap outer container height to content
-        elBdContainer.style.height = 
+        elBdContainer.style.height =
                 // but account for x-scrollbar if it is visible
                 (elBdContainer.scrollWidth > elBdContainer.offsetWidth ) ?
-                (elTbody.parentNode.offsetHeight + 18) + "px" : 
+                (elTbody.parentNode.offsetHeight + 18) + "px" :
                 elTbody.parentNode.offsetHeight + "px";
     }
 
@@ -16965,23 +16956,23 @@ _syncScrollOverhang : function() {
     var elBdContainer = this._elBdContainer,
         // Overhang should be either 1 (default) or 18px, depending on the location of the right edge of the table
         nPadding = 1;
-    
+
     // Y-scrollbar is visible, which is when the overhang needs to jut out
     if((elBdContainer.scrollHeight > elBdContainer.clientHeight) &&
         // X-scrollbar is also visible, which means the right is jagged, not flush with the Column
         (elBdContainer.scrollWidth > elBdContainer.clientWidth)) {
         nPadding = 18;
     }
-    
+
     this._setOverhangValue(nPadding);
-    
+
 },
 
 /**
  * Sets Column header overhang to given width.
  *
  * @method _setOverhangValue
- * @param nBorderWidth {Number} Value of new border for overhang. 
+ * @param nBorderWidth {Number} Value of new border for overhang.
  * @private
  */
 _setOverhangValue : function(nBorderWidth) {
@@ -17100,14 +17091,14 @@ removeColumn : function(oColumn) {
     // Store scroll pos
     var hdPos = this._elHdContainer.scrollLeft;
     var bdPos = this._elBdContainer.scrollLeft;
-    
+
     // Call superclass method
     oColumn = SDT.superclass.removeColumn.call(this, oColumn);
-    
+
     // Restore scroll pos
     this._elHdContainer.scrollLeft = hdPos;
     this._elBdContainer.scrollLeft = bdPos;
-    
+
     return oColumn;
 },
 
@@ -17120,20 +17111,20 @@ removeColumn : function(oColumn) {
  * @param oColumn {Object | YAHOO.widget.Column} Object literal Column
  * definition or a Column instance.
  * @param index {Number} (optional) New tree index.
- * @return oColumn {YAHOO.widget.Column} Inserted Column instance. 
+ * @return oColumn {YAHOO.widget.Column} Inserted Column instance.
  */
 insertColumn : function(oColumn, index) {
     // Store scroll pos
     var hdPos = this._elHdContainer.scrollLeft;
     var bdPos = this._elBdContainer.scrollLeft;
-    
+
     // Call superclass method
     var oNewColumn = SDT.superclass.insertColumn.call(this, oColumn, index);
-    
+
     // Restore scroll pos
     this._elHdContainer.scrollLeft = hdPos;
     this._elBdContainer.scrollLeft = bdPos;
-    
+
     return oNewColumn;
 },
 
@@ -17150,10 +17141,10 @@ reorderColumn : function(oColumn, index) {
     // Store scroll pos
     var hdPos = this._elHdContainer.scrollLeft;
     var bdPos = this._elBdContainer.scrollLeft;
-    
+
     // Call superclass method
     var oNewColumn = SDT.superclass.reorderColumn.call(this, oColumn, index);
-    
+
     // Restore scroll pos
     this._elHdContainer.scrollLeft = hdPos;
     this._elBdContainer.scrollLeft = bdPos;
@@ -17180,11 +17171,11 @@ setColumnWidth : function(oColumn, nWidth) {
 
             // Save state
             oColumn.width = nWidth;
-            
+
             // Resize the DOM elements
             this._setColumnWidth(oColumn, nWidth+"px");
             this._syncScroll();
-            
+
             this.fireEvent("columnSetWidthEvent",{column:oColumn,width:nWidth});
             YAHOO.log("Set width of Column " + oColumn + " to " + nWidth + "px", "info", this.toString());
         }
@@ -17192,14 +17183,14 @@ setColumnWidth : function(oColumn, nWidth) {
         else if(nWidth === null) {
             // Save state
             oColumn.width = nWidth;
-            
+
             // Resize the DOM elements
             this._setColumnWidth(oColumn, "auto");
             this.validateColumnWidths(oColumn);
             this.fireEvent("columnUnsetWidthEvent",{column:oColumn});
             YAHOO.log("Column " + oColumn + " width unset", "info", this.toString());
         }
-        
+
         // Bug 2339454: resize then sort misaligment
         this._clearTrTemplateEl();
     }
@@ -17349,7 +17340,7 @@ _onTheadKeydown : function(e, oSelf) {
             }
         },0);
     }
-    
+
     var elTarget = Ev.getTarget(e);
     var elTag = elTarget.nodeName.toLowerCase();
     var bKeepBubbling = true;
@@ -17359,7 +17350,7 @@ _onTheadKeydown : function(e, oSelf) {
                 return;
             case "input":
             case "textarea":
-                // TODO: implement textareaKeyEvent
+                //  implement textareaKeyEvent
                 break;
             case "thead":
                 bKeepBubbling = oSelf.fireEvent("theadKeyEvent",{target:elTarget,event:e});
@@ -17406,22 +17397,22 @@ var lang   = YAHOO.lang,
     util   = YAHOO.util,
     widget = YAHOO.widget,
     ua     = YAHOO.env.ua,
-    
+
     Dom    = util.Dom,
     Ev     = util.Event,
-    
+
     DT     = widget.DataTable;
 /****************************************************************************/
 /****************************************************************************/
 /****************************************************************************/
-    
+
 /**
  * The BaseCellEditor class provides base functionality common to all inline cell
  * editors for a DataTable widget.
  *
  * @namespace YAHOO.widget
  * @class BaseCellEditor
- * @uses YAHOO.util.EventProvider 
+ * @uses YAHOO.util.EventProvider
  * @constructor
  * @param sType {String} Type indicator, to map to YAHOO.widget.DataTable.Editors.
  * @param oConfigs {Object} (Optional) Object literal of configs.
@@ -17430,13 +17421,13 @@ widget.BaseCellEditor = function(sType, oConfigs) {
     this._sId = this._sId || Dom.generateId(null, "yui-ceditor"); // "yui-ceditor" + YAHOO.widget.BaseCellEditor._nCount++;
     YAHOO.widget.BaseCellEditor._nCount++;
     this._sType = sType;
-    
+
     // Validate inputs
-    this._initConfigs(oConfigs); 
-    
+    this._initConfigs(oConfigs);
+
     // Create Custom Events
     this._initEvents();
-             
+
     // UI needs to be drawn
     this._needsRender = true;
 };
@@ -17457,7 +17448,7 @@ lang.augmentObject(BCE, {
  * @type Number
  * @static
  * @default 0
- * @private 
+ * @private
  */
 _nCount : 0,
 
@@ -17503,7 +17494,7 @@ _sType : null,
  *
  * @property _oDataTable
  * @type YAHOO.widget.DataTable
- * @private 
+ * @private
  */
 _oDataTable : null,
 
@@ -17513,7 +17504,7 @@ _oDataTable : null,
  * @property _oColumn
  * @type YAHOO.widget.Column
  * @default null
- * @private 
+ * @private
  */
 _oColumn : null,
 
@@ -17523,7 +17514,7 @@ _oColumn : null,
  * @property _oRecord
  * @type YAHOO.widget.Record
  * @default null
- * @private 
+ * @private
  */
 _oRecord : null,
 
@@ -17542,7 +17533,7 @@ _elTd : null,
  *
  * @property _elContainer
  * @type HTMLElement
- * @private 
+ * @private
  */
 _elContainer : null,
 
@@ -17552,7 +17543,7 @@ _elContainer : null,
  * @property _elCancelBtn
  * @type HTMLElement
  * @default null
- * @private 
+ * @private
  */
 _elCancelBtn : null,
 
@@ -17562,7 +17553,7 @@ _elCancelBtn : null,
  * @property _elSaveBtn
  * @type HTMLElement
  * @default null
- * @private 
+ * @private
  */
 _elSaveBtn : null,
 
@@ -17583,7 +17574,7 @@ _elSaveBtn : null,
  * Initialize configs.
  *
  * @method _initConfigs
- * @private   
+ * @private
  */
 _initConfigs : function(oConfigs) {
     // Object literal defines CellEditor configs
@@ -17600,7 +17591,7 @@ _initConfigs : function(oConfigs) {
  * Initialize Custom Events.
  *
  * @method _initEvents
- * @private   
+ * @private
  */
 _initEvents : function() {
     this.createEvent("showEvent");
@@ -17630,11 +17621,11 @@ _initContainerEl : function() {
     elContainer.id = this.getId() + "-container"; // Needed for tracking blur event
     elContainer.style.display = "none";
     elContainer.tabIndex = 0;
-    
+
     this.className = lang.isArray(this.className) ? this.className : this.className ? [this.className] : [];
     this.className[this.className.length] = DT.CLASS_EDITOR;
     elContainer.className = this.className.join(" ");
-    
+
     document.body.insertBefore(elContainer, document.body.firstChild);
     this._elContainer = elContainer;
 },
@@ -17696,9 +17687,9 @@ _hide : function() {
 /**
  * Implementer defined function that can submit the input value to a server. This
  * function must accept the arguments fnCallback and oNewValue. When the submission
- * is complete, the function must also call fnCallback(bSuccess, oNewValue) to 
- * finish the save routine in the CellEditor. This function can also be used to 
- * perform extra validation or input value manipulation. 
+ * is complete, the function must also call fnCallback(bSuccess, oNewValue) to
+ * finish the save routine in the CellEditor. This function can also be used to
+ * perform extra validation or input value manipulation.
  *
  * @property asyncSubmitter
  * @type HTMLFunction
@@ -17892,13 +17883,13 @@ getContainerEl : function() {
  */
 destroy : function() {
     this.unsubscribeAll();
-    
+
     // Column is late-binding in attach()
     var oColumn = this.getColumn();
     if(oColumn) {
         oColumn.editor = null;
     }
-    
+
     var elContainer = this.getContainerEl();
     if (elContainer) {
         Ev.purgeElement(elContainer, true);
@@ -17941,7 +17932,7 @@ render : function() {
     if(!this.disableBtns) {
         this.renderBtns();
     }
-    
+
     this.doAfterRender();
     this._needsRender = false;
 },
@@ -17979,13 +17970,13 @@ renderBtns : function() {
  *
  * @method attach
  * @param oDataTable {YAHOO.widget.DataTable} Associated DataTable instance.
- * @param elCell {HTMLElement} Cell to edit.  
+ * @param elCell {HTMLElement} Cell to edit.
  */
 attach : function(oDataTable, elCell) {
-    // Validate 
+    // Validate
     if(oDataTable instanceof YAHOO.widget.DataTable) {
         this._oDataTable = oDataTable;
-        
+
         // Validate cell
         elCell = oDataTable.getTdEl(elCell);
         if(elCell) {
@@ -17995,7 +17986,7 @@ attach : function(oDataTable, elCell) {
             var oColumn = oDataTable.getColumn(elCell);
             if(oColumn) {
                 this._oColumn = oColumn;
-                
+
                 // Validate Record
                 var oRecord = oDataTable.getRecord(elCell);
                 if(oRecord) {
@@ -18004,7 +17995,7 @@ attach : function(oDataTable, elCell) {
                     this.value = (value !== undefined) ? value : this.defaultValue;
                     return true;
                 }
-            }            
+            }
         }
     }
     YAHOO.log("Could not attach CellEditor","error",this.toString());
@@ -18023,7 +18014,7 @@ move : function() {
         x = Dom.getX(elTd),
         y = Dom.getY(elTd);
 
-    //TODO: remove scrolling logic
+    // remove scrolling logic
     // SF doesn't get xy for cells in scrolling table
     // when tbody display is set to block
     if(isNaN(x) || isNaN(y)) {
@@ -18064,7 +18055,7 @@ show : function() {
     }
     this.focus();
     this.fireEvent("showEvent", {editor:this});
-    YAHOO.log("CellEditor shown", "info", this.toString()); 
+    YAHOO.log("CellEditor shown", "info", this.toString());
 },
 
 /**
@@ -18074,7 +18065,7 @@ show : function() {
  */
 block : function() {
     this.fireEvent("blockEvent", {editor:this});
-    YAHOO.log("CellEditor blocked", "info", this.toString()); 
+    YAHOO.log("CellEditor blocked", "info", this.toString());
 },
 
 /**
@@ -18084,7 +18075,7 @@ block : function() {
  */
 unblock : function() {
     this.fireEvent("unblockEvent", {editor:this});
-    YAHOO.log("CellEditor unblocked", "info", this.toString()); 
+    YAHOO.log("CellEditor unblocked", "info", this.toString());
 },
 
 /**
@@ -18096,7 +18087,7 @@ save : function() {
     // Get new value
     var inputValue = this.getInputValue();
     var validValue = inputValue;
-    
+
     // Validate new value
     if(this.validator) {
         validValue = this.validator.call(this.getDataTable(), inputValue, this.value, this);
@@ -18111,7 +18102,7 @@ save : function() {
             return;
         }
     }
-        
+
     var oSelf = this;
     var finishSave = function(bSuccess, oNewValue) {
         var oOrigValue = oSelf.value;
@@ -18119,10 +18110,10 @@ save : function() {
             // Update new value
             oSelf.value = oNewValue;
             oSelf.getDataTable().updateCell(oSelf.getRecord(), oSelf.getColumn(), oNewValue);
-            
+
             // Hide CellEditor
             oSelf._hide();
-            
+
             oSelf.fireEvent("saveEvent",
                     {editor:oSelf, oldData:oOrigValue, newData:oSelf.value});
             YAHOO.log("Cell Editor input saved", "info", this.toString());
@@ -18136,12 +18127,12 @@ save : function() {
         }
         oSelf.unblock();
     };
-    
+
     this.block();
     if(lang.isFunction(this.asyncSubmitter)) {
         this.asyncSubmitter.call(this, finishSave, validValue);
-    } 
-    else {   
+    }
+    else {
         finishSave(true, validValue);
     }
 },
@@ -18183,7 +18174,7 @@ doAfterRender : function() {
 
 /**
  * After rendering form, if disabledBtns is set to true, then sets up a mechanism
- * to save input without them. 
+ * to save input without them.
  *
  * @method handleDisabledBtns
  */
@@ -18240,7 +18231,7 @@ lang.augmentProto(BCE, util.EventProvider);
  * Fired when a CellEditor has a keydown.
  *
  * @event keydownEvent
- * @param oArgs.editor {YAHOO.widget.CellEditor} The CellEditor instance. 
+ * @param oArgs.editor {YAHOO.widget.CellEditor} The CellEditor instance.
  * @param oArgs.event {HTMLEvent} The event object.
  */
 
@@ -18248,7 +18239,7 @@ lang.augmentProto(BCE, util.EventProvider);
  * Fired when a CellEditor input is reverted due to invalid data.
  *
  * @event invalidDataEvent
- * @param oArgs.editor {YAHOO.widget.CellEditor} The CellEditor instance. 
+ * @param oArgs.editor {YAHOO.widget.CellEditor} The CellEditor instance.
  * @param oArgs.newData {Object} New data value from form input field.
  * @param oArgs.oldData {Object} Old data value.
  */
@@ -18257,7 +18248,7 @@ lang.augmentProto(BCE, util.EventProvider);
  * Fired when a CellEditor input is reverted due to asyncSubmitter failure.
  *
  * @event revertEvent
- * @param oArgs.editor {YAHOO.widget.CellEditor} The CellEditor instance. 
+ * @param oArgs.editor {YAHOO.widget.CellEditor} The CellEditor instance.
  * @param oArgs.newData {Object} New data value from form input field.
  * @param oArgs.oldData {Object} Old data value.
  */
@@ -18266,7 +18257,7 @@ lang.augmentProto(BCE, util.EventProvider);
  * Fired when a CellEditor input is saved.
  *
  * @event saveEvent
- * @param oArgs.editor {YAHOO.widget.CellEditor} The CellEditor instance. 
+ * @param oArgs.editor {YAHOO.widget.CellEditor} The CellEditor instance.
  * @param oArgs.newData {Object} New data value from form input field.
  * @param oArgs.oldData {Object} Old data value.
  */
@@ -18275,14 +18266,14 @@ lang.augmentProto(BCE, util.EventProvider);
  * Fired when a CellEditor input is canceled.
  *
  * @event cancelEvent
- * @param oArgs.editor {YAHOO.widget.CellEditor} The CellEditor instance. 
+ * @param oArgs.editor {YAHOO.widget.CellEditor} The CellEditor instance.
  */
 
 /**
  * Fired when a CellEditor has a blur event.
  *
  * @event blurEvent
- * @param oArgs.editor {YAHOO.widget.CellEditor} The CellEditor instance. 
+ * @param oArgs.editor {YAHOO.widget.CellEditor} The CellEditor instance.
  */
 
 
@@ -18301,7 +18292,7 @@ lang.augmentProto(BCE, util.EventProvider);
 /****************************************************************************/
 /****************************************************************************/
 /****************************************************************************/
-    
+
 /**
  * The CheckboxCellEditor class provides functionality for inline editing
  * DataTable cell data with checkboxes.
@@ -18342,7 +18333,7 @@ checkboxOptions : null,
  * Reference to the checkbox elements.
  *
  * @property checkboxes
- * @type HTMLElement[] 
+ * @type HTMLElement[]
  */
 checkboxes : null,
 
@@ -18350,7 +18341,7 @@ checkboxes : null,
  * Array of checked values
  *
  * @property value
- * @type String[] 
+ * @type String[]
  */
 value : null,
 
@@ -18368,7 +18359,7 @@ value : null,
 renderForm : function() {
     if(lang.isArray(this.checkboxOptions)) {
         var checkboxOption, checkboxValue, checkboxId, elLabel, j, len;
-        
+
         // Create the checkbox buttons in an IE-friendly way...
         for(j=0,len=this.checkboxOptions.length; j<len; j++) {
             checkboxOption = this.checkboxOptions[j];
@@ -18379,14 +18370,14 @@ renderForm : function() {
             this.getContainerEl().innerHTML += "<input type=\"checkbox\"" +
                     " id=\"" + checkboxId + "\"" + // Needed for label
                     " value=\"" + checkboxValue + "\" />";
-            
+
             // Create the labels in an IE-friendly way
             elLabel = this.getContainerEl().appendChild(document.createElement("label"));
             elLabel.htmlFor = checkboxId;
             elLabel.innerHTML = lang.isValue(checkboxOption.label) ?
                     checkboxOption.label : checkboxOption;
         }
-        
+
         // Store the reference to the checkbox elements
         var allCheckboxes = [];
         for(j=0; j<len; j++) {
@@ -18405,7 +18396,7 @@ renderForm : function() {
 
 /**
  * After rendering form, if disabledBtns is set to true, then sets up a mechanism
- * to save input without them. 
+ * to save input without them.
  *
  * @method handleDisabledBtns
  */
@@ -18426,7 +18417,7 @@ handleDisabledBtns : function() {
 resetForm : function() {
     // Normalize to array
     var originalValues = lang.isArray(this.value) ? this.value : [this.value];
-    
+
     // Match checks to value
     for(var i=0, j=this.checkboxes.length; i<j; i++) {
         this.checkboxes[i].checked = false;
@@ -18458,7 +18449,7 @@ getInputValue : function() {
         if(this.checkboxes[i].checked) {
             checkedValues[checkedValues.length] = this.checkboxes[i].value;
         }
-    }  
+    }
     return checkedValues;
 }
 
@@ -18477,14 +18468,14 @@ lang.augmentObject(widget.CheckboxCellEditor, BCE);
 /****************************************************************************/
 /****************************************************************************/
 /****************************************************************************/
-    
+
 /**
  * The DataCellEditor class provides functionality for inline editing
  * DataTable cell data with a YUI Calendar.
  *
  * @namespace YAHOO.widget
  * @class DateCellEditor
- * @extends YAHOO.widget.BaseCellEditor 
+ * @extends YAHOO.widget.BaseCellEditor
  * @constructor
  * @param oConfigs {Object} (Optional) Object literal of configs.
  */
@@ -18550,7 +18541,7 @@ renderForm : function() {
                 calContainer.id, this.calendarOptions);
         calendar.render();
         calContainer.style.cssFloat = "none";
-        
+
         // Bug 2528576
         calendar.hideEvent.subscribe(function() {this.cancel();}, this, true);
 
@@ -18558,7 +18549,7 @@ renderForm : function() {
             var calFloatClearer = this.getContainerEl().appendChild(document.createElement("div"));
             calFloatClearer.style.clear = "both";
         }
-        
+
         this.calendar = calendar;
 
         if(this.disableBtns) {
@@ -18568,12 +18559,12 @@ renderForm : function() {
     else {
         YAHOO.log("Could not find YUI Calendar", "error", this.toString());
     }
-    
+
 },
 
 /**
  * After rendering form, if disabledBtns is set to true, then sets up a mechanism
- * to save input without them. 
+ * to save input without them.
  *
  * @method handleDisabledBtns
  */
@@ -18632,14 +18623,14 @@ lang.augmentObject(widget.DateCellEditor, BCE);
 /****************************************************************************/
 /****************************************************************************/
 /****************************************************************************/
-    
+
 /**
  * The DropdownCellEditor class provides functionality for inline editing
  * DataTable cell data a SELECT element.
  *
  * @namespace YAHOO.widget
  * @class DropdownCellEditor
- * @extends YAHOO.widget.BaseCellEditor 
+ * @extends YAHOO.widget.BaseCellEditor
  * @constructor
  * @param oConfigs {Object} (Optional) Object literal of configs.
  */
@@ -18660,7 +18651,7 @@ lang.extend(widget.DropdownCellEditor, BCE, {
 /////////////////////////////////////////////////////////////////////////////
 /**
  * Array of dropdown values. Can either be a simple array (e.g.,
- * ["Alabama","Alaska","Arizona","Arkansas"]) or a an array of objects (e.g., 
+ * ["Alabama","Alaska","Arizona","Arkansas"]) or a an array of objects (e.g.,
  * [{label:"Alabama", value:"AL"}, {label:"Alaska", value:"AK"},
  * {label:"Arizona", value:"AZ"}, {label:"Arkansas", value:"AR"}]). String
  * values are treated as markup and inserted into the DOM as innerHTML.
@@ -18715,7 +18706,7 @@ renderForm : function() {
         elDropdown.size = this.size;
     }
     this.dropdown = elDropdown;
-    
+
     if(lang.isArray(this.dropdownOptions)) {
         var dropdownOption, elOption;
         for(var i=0, j=this.dropdownOptions.length; i<j; i++) {
@@ -18727,7 +18718,7 @@ renderForm : function() {
                     dropdownOption.label : dropdownOption;
             elOption = elDropdown.appendChild(elOption);
         }
-        
+
         if(this.disableBtns) {
             this.handleDisabledBtns();
         }
@@ -18736,7 +18727,7 @@ renderForm : function() {
 
 /**
  * After rendering form, if disabledBtns is set to true, then sets up a mechanism
- * to save input without them. 
+ * to save input without them.
  *
  * @method handleDisabledBtns
  */
@@ -18819,7 +18810,7 @@ focus : function() {
  */
 getInputValue : function() {
     var allOptions = this.dropdown.options;
-    
+
     // Look for multiple selections
     if(this.multiple) {
         var values = [],
@@ -18850,14 +18841,14 @@ lang.augmentObject(widget.DropdownCellEditor, BCE);
 /****************************************************************************/
 /****************************************************************************/
 /****************************************************************************/
-    
+
 /**
  * The RadioCellEditor class provides functionality for inline editing
  * DataTable cell data with radio buttons.
  *
  * @namespace YAHOO.widget
  * @class RadioCellEditor
- * @extends YAHOO.widget.BaseCellEditor 
+ * @extends YAHOO.widget.BaseCellEditor
  * @constructor
  * @param oConfigs {Object} (Optional) Object literal of configs.
  */
@@ -18909,7 +18900,7 @@ radioOptions : null,
 renderForm : function() {
     if(lang.isArray(this.radioOptions)) {
         var radioOption, radioValue, radioId, elLabel;
-        
+
         // Create the radio buttons in an IE-friendly way
         for(var i=0, len=this.radioOptions.length; i<len; i++) {
             radioOption = this.radioOptions[i];
@@ -18920,14 +18911,14 @@ renderForm : function() {
                     " name=\"" + this.getId() + "\"" +
                     " value=\"" + radioValue + "\"" +
                     " id=\"" +  radioId + "\" />"; // Needed for label
-            
+
             // Create the labels in an IE-friendly way
             elLabel = this.getContainerEl().appendChild(document.createElement("label"));
             elLabel.htmlFor = radioId;
             elLabel.innerHTML = (lang.isValue(radioOption.label)) ?
                     radioOption.label : radioOption;
         }
-        
+
         // Store the reference to the checkbox elements
         var allRadios = [],
             elRadio;
@@ -18948,7 +18939,7 @@ renderForm : function() {
 
 /**
  * After rendering form, if disabledBtns is set to true, then sets up a mechanism
- * to save input without them. 
+ * to save input without them.
  *
  * @method handleDisabledBtns
  */
@@ -19016,14 +19007,14 @@ lang.augmentObject(widget.RadioCellEditor, BCE);
 /****************************************************************************/
 /****************************************************************************/
 /****************************************************************************/
-    
+
 /**
  * The TextareaCellEditor class provides functionality for inline editing
  * DataTable cell data with a TEXTAREA element.
  *
  * @namespace YAHOO.widget
  * @class TextareaCellEditor
- * @extends YAHOO.widget.BaseCellEditor 
+ * @extends YAHOO.widget.BaseCellEditor
  * @constructor
  * @param oConfigs {Object} (Optional) Object literal of configs.
  */
@@ -19073,7 +19064,7 @@ renderForm : function() {
 
 /**
  * After rendering form, if disabledBtns is set to true, then sets up a mechanism
- * to save input without them. 
+ * to save input without them.
  *
  * @method handleDisabledBtns
  */
@@ -19081,7 +19072,7 @@ handleDisabledBtns : function() {
     Ev.addListener(this.textarea, "blur", function(v){
         // Save on blur
         this.save();
-    }, this, true);        
+    }, this, true);
 },
 
 /**
@@ -19140,14 +19131,14 @@ lang.augmentObject(widget.TextareaCellEditor, BCE);
 /****************************************************************************/
 /****************************************************************************/
 /****************************************************************************/
-    
+
 /**
  * The TextboxCellEditor class provides functionality for inline editing
  * DataTable cell data with an INPUT TYPE=TEXT element.
  *
  * @namespace YAHOO.widget
  * @class TextboxCellEditor
- * @extends YAHOO.widget.BaseCellEditor 
+ * @extends YAHOO.widget.BaseCellEditor
  * @constructor
  * @param oConfigs {Object} (Optional) Object literal of configs.
  */
@@ -19287,13 +19278,13 @@ DT.Editors = {
 /****************************************************************************/
 /****************************************************************************/
 /****************************************************************************/
-    
+
 /**
  * Factory class for instantiating a BaseCellEditor subclass.
  *
  * @namespace YAHOO.widget
  * @class CellEditor
- * @extends YAHOO.widget.BaseCellEditor 
+ * @extends YAHOO.widget.BaseCellEditor
  * @constructor
  * @param sType {String} Type indicator, to map to YAHOO.widget.DataTable.Editors.
  * @param oConfigs {Object} (Optional) Object literal of configs.

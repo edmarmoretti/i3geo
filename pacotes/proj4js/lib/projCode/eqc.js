@@ -1,4 +1,4 @@
-/* similar to equi.js FIXME proj4 uses eqc */
+
 Proj4js.Proj.eqc = {
   init : function() {
 

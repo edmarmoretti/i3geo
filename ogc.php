@@ -1,5 +1,4 @@
 <?php
-//TODO incluir projeto gvsig
 /*
 Title: ogc.php
 

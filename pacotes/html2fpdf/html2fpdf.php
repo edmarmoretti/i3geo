@@ -20,7 +20,7 @@ These 2 attributes do the same thing?!?:
 . $this->currentfont - mine
 . $this->CurrentFont - fpdf's
 
-TODO (in the future...):
+ (in the future...):
 - Make font-family, font-size, lineheight customizable
 - Increase number of HTML/CSS tags/properties, Image/Font Types, recognized/supported
 - allow BMP support? (tried with http://phpthumb.sourceforge.net/ but failed)
@@ -67,7 +67,7 @@ class HTML2FPDF extends FPDF
 //internal attributes
 var $HREF; //! string
 var $pgwidth; //! float
-var $fontlist; //! array 
+var $fontlist; //! array
 var $issetfont; //! bool
 var $issetcolor; //! bool
 var $titulo; //! string
@@ -80,7 +80,7 @@ var $I; //! int
 var $tablestart; //! bool
 var $tdbegin; //! bool
 var $table; //! array
-var $cell; //! array 
+var $cell; //! array
 var $col; //! int
 var $row; //! int
 
@@ -167,23 +167,23 @@ function HTML2FPDF($orientation='P',$unit='mm',$format='A4')
 	$this->I=0;
 
   $this->listlvl=0;
-  $this->listnum=0; 
+  $this->listnum=0;
   $this->listtype='';
   $this->listoccur=array();
   $this->listlist=array();
   $this->listitem=array();
 
   $this->tablestart=false;
-  $this->tdbegin=false; 
-  $this->table=array(); 
-  $this->cell=array();  
-  $this->col=-1; 
-  $this->row=-1; 
+  $this->tdbegin=false;
+  $this->table=array();
+  $this->cell=array();
+  $this->col=-1;
+  $this->row=-1;
 
 	$this->divbegin=false;
 	$this->divalign="L";
-	$this->divwidth=0; 
-	$this->divheight=0; 
+	$this->divwidth=0;
+	$this->divheight=0;
 	$this->divbgcolor=false;
 	$this->divcolor=false;
 	$this->divborder=0;
@@ -216,7 +216,7 @@ function HTML2FPDF($orientation='P',$unit='mm',$format='A4')
 	$this->internallink=array();
 
   $this->basepath = "";
-  
+
   $this->outlineparam = array();
   $this->outline_on = false;
 
@@ -425,7 +425,7 @@ function WriteHTML($html)
             $regexp = '|^./|';
             $path = preg_replace($regexp,'',$path);
             if($path{0} != '#') //It is not an Internal Link
-            { 
+            {
               if (strpos($path,"../") !== false ) //It is a Relative Link
               {
                   $backtrackamount = substr_count($path,"../");
@@ -440,7 +440,7 @@ function WriteHTML($html)
               }
               elseif( strpos($path,":/") === false) //It is a Local Link
               {
-                $path = $this->basepath . $path; 
+                $path = $this->basepath . $path;
               }
               //Do nothing if it is an Absolute Link
             }
@@ -537,13 +537,13 @@ function OpenTag($tag,$attr)
     case 'CENTER':
       $this->buffer_on = true;
       if ($this->tdbegin)	$this->cell[$this->row][$this->col]['a'] = $align['center'];
-      else 
+      else
       {
    			$this->divalign = $align['center'];
         if ($this->x != $this->lMargin) $this->Ln($this->lineheight);
       }
       break;
-    case 'ADDRESS': 
+    case 'ADDRESS':
       $this->buffer_on = true;
   		$this->SetStyle('I',true);
       if (!$this->tdbegin and $this->x != $this->lMargin) $this->Ln($this->lineheight);
@@ -683,12 +683,12 @@ function OpenTag($tag,$attr)
 			$this->SetStyle('B',true);
       switch($tag)
       {
-          case 'H1': 
-              $this->SetFontSize(2*$this->FontSizePt); 
+          case 'H1':
+              $this->SetFontSize(2*$this->FontSizePt);
               $this->lineheight *= 2;
               break;
-          case 'H2': 
-              $this->SetFontSize(1.5*$this->FontSizePt); 
+          case 'H2':
+              $this->SetFontSize(1.5*$this->FontSizePt);
               $this->lineheight *= 1.5;
               break;
           case 'H3':
@@ -696,14 +696,14 @@ function OpenTag($tag,$attr)
               $this->lineheight *= 1.17;
               break;
           case 'H4':
-              $this->SetFontSize($this->FontSizePt); 
+              $this->SetFontSize($this->FontSizePt);
               break;
-          case 'H5': 
-              $this->SetFontSize(0.83*$this->FontSizePt); 
+          case 'H5':
+              $this->SetFontSize(0.83*$this->FontSizePt);
               $this->lineheight *= 0.83;
               break;
-          case 'H6': 
-              $this->SetFontSize(0.67*$this->FontSizePt); 
+          case 'H6':
+              $this->SetFontSize(0.67*$this->FontSizePt);
               $this->lineheight *= 0.67;
               break;
       }
@@ -820,7 +820,7 @@ function OpenTag($tag,$attr)
         if ( $this->divheight == 0) $this->divheight = $this->lineheight;
         //Print content
     	  $this->printbuffer($this->textbuffer,true/*is out of a block (e.g. DIV,P etc.)*/);
-        $this->textbuffer=array(); 
+        $this->textbuffer=array();
       	//Reset values
         $this->divwidth = $olddivwidth;
         $this->divheight = $olddivheight;
@@ -834,7 +834,7 @@ function OpenTag($tag,$attr)
 				  else $attr['WIDTH'] = ConvertSize($attr['WIDTH'],$this->pgwidth);//$attr['WIDTH'] /= 4;
 				  if(!isset($attr['HEIGHT']))	$attr['HEIGHT'] = 0;
 				  else $attr['HEIGHT'] = ConvertSize($attr['HEIGHT'],$this->pgwidth);//$attr['HEIGHT'] /= 4;
-				  if ($this->tdbegin) 
+				  if ($this->tdbegin)
 				  {
   				  $bak_x = $this->x;
             $bak_y = $this->y;
@@ -1023,7 +1023,7 @@ function OpenTag($tag,$attr)
 		  break;
 		case 'TEXTAREA':
 		  $this->buffer_on = true;
-      $colsize = 20; //HTML default value 
+      $colsize = 20; //HTML default value
       $rowsize = 2; //HTML default value
   		if (isset($attr['COLS'])) $colsize = $attr['COLS'];
   		if (isset($attr['ROWS'])) $rowsize = $attr['ROWS'];
@@ -1071,7 +1071,7 @@ function OpenTag($tag,$attr)
         			  $this->SetFillColor(235,235,235);
         			  $this->x += 3;
                 $this->Rect($this->x,$this->y+1,3,3,'DF');
-                if ($checked) 
+                if ($checked)
                 {
                   $this->Line($this->x,$this->y+1,$this->x+3,$this->y+1+3);
                   $this->Line($this->x,$this->y+1+3,$this->x+3,$this->y+1);
@@ -1243,7 +1243,7 @@ function CloseTag($tag)
       $this->divwidth = $this->pgwidth - $x + $this->lMargin;
       //Print content
   	  $this->printbuffer($this->textbuffer,true/*is out of a block (e.g. DIV,P etc.)*/);
-      $this->textbuffer=array(); 
+      $this->textbuffer=array();
      	//Reset values
      	$this->Reset();
       $this->buffer_on=false;
@@ -1268,7 +1268,7 @@ function CloseTag($tag)
        //Reset values
        $this->Reset();
     }
-    $this->HREF=''; 
+    $this->HREF='';
   }
 	if($tag=='TH') $this->SetStyle('B',false);
 	if($tag=='TH' or $tag=='TD') $this->tdbegin = false;
@@ -1281,7 +1281,7 @@ function CloseTag($tag)
           //Check if we have borders to print
           if ($this->cssbegin and ($this->divborder or $this->dash_on or $this->dotted_on or $this->divbgcolor))
           {
-   	          $texto=''; 
+   	          $texto='';
               foreach($this->textbuffer as $vetor) $texto.=$vetor[0];
               $tempx = $this->x;
               if($this->divbgcolor) $this->Cell($this->GetStringWidth($texto),$this->lineheight,'',$this->divborder,'','L',$this->divbgcolor);
@@ -1300,7 +1300,7 @@ function CloseTag($tag)
       $this->divwidth = $this->pgwidth - $x + $this->lMargin;
       //Print content
   	  $this->printbuffer($this->textbuffer,true/*is out of a block (e.g. DIV,P etc.)*/);
-      $this->textbuffer=array(); 
+      $this->textbuffer=array();
     	//Reset values
     	$this->Reset();
     }
@@ -1312,7 +1312,7 @@ function CloseTag($tag)
 	 if(!$this->tablestart)
    {
     if ($this->divwidth == 0) $this->divwidth = $this->pgwidth;
-    if ($tag=='P') 
+    if ($tag=='P')
     {
       $this->pbegin=false;
       $this->pjustfinished=true;
@@ -1332,7 +1332,7 @@ function CloseTag($tag)
 	 $this->cssbegin=false;
 	 $this->backupcss=array();
   }
-	if($tag=='TABLE') { // TABLE-END 
+	if($tag=='TABLE') { // TABLE-END
     $this->blockjustfinished = true; //Eliminate exceeding left-side spaces
 		$this->table['cells'] = $this->cell;
 		$this->table['wc'] = array_pad(array(),$this->table['nc'],array('miw'=>0,'maw'=>0));
@@ -1343,11 +1343,11 @@ function CloseTag($tag)
 
     //Output table on PDF
 		$this->_tableWrite($this->table);
-		
+
     //Reset values
     $this->tablestart=false; //bool
     $this->table=array(); //array
-    $this->cell=array(); //array 
+    $this->cell=array(); //array
     $this->col=-1; //int
     $this->row=-1; //int
     $this->Reset();
@@ -1368,7 +1368,7 @@ function CloseTag($tag)
     {
        if (!empty($this->textbuffer)) $this->listitem[] = array($this->listlvl,$this->listnum,$this->textbuffer,$this->listoccur[$this->listlvl]);
 	     $this->textbuffer = array();
-	     $occur = $this->listoccur[$this->listlvl]; 
+	     $occur = $this->listoccur[$this->listlvl];
        $this->listlist[$this->listlvl][$occur]['MAXNUM'] = $this->listnum; //save previous lvl's maxnum
 	     $this->listlvl--;
 	     $occur = $this->listoccur[$this->listlvl];
@@ -1383,7 +1383,7 @@ function CloseTag($tag)
       if(!$this->pbegin and !$this->divbegin and !$this->tablestart)
       {
         //These 2 codelines are useless?
-   	    $texto=''; 
+   	    $texto='';
         foreach($this->textbuffer as $vetor) $texto.=$vetor[0];
         //Save x,y coords ???
         $x = $this->x;
@@ -1392,7 +1392,7 @@ function CloseTag($tag)
         $this->divwidth = $this->pgwidth;
         //Print content
     	  $this->printbuffer($this->textbuffer);
-        $this->textbuffer=array(); 
+        $this->textbuffer=array();
   			if ($this->x != $this->lMargin) $this->Ln($this->lineheight);
       	//Reset values
       	$this->Reset();
@@ -1440,7 +1440,7 @@ function CloseTag($tag)
   	 $this->currentfont='';
      $this->SetFont('arial');
 	}
-	if($tag=='B' or $tag=='I' or $tag=='U')	
+	if($tag=='B' or $tag=='I' or $tag=='U')
 	{
 	  $this->SetStyle($tag,false);
 	  if ($this->cssbegin and !$this->divbegin and !$this->pbegin and !$this->buffer_on)
@@ -1490,7 +1490,7 @@ function CloseTag($tag)
        	$this->specialcontent = '';
     }
   	$this->SetFillColor(255);
-    $this->textbuffer=array(); 
+    $this->textbuffer=array();
     $this->buffer_on = false;
   }
 	if($tag=='SELECT')
@@ -1531,7 +1531,7 @@ function CloseTag($tag)
     }
     $this->selectoption = array();
    	$this->specialcontent = '';
-    $this->textbuffer = array(); 
+    $this->textbuffer = array();
   }
 	if($tag=='SUB' or $tag=='SUP')  //subscript or superscript
 	{
@@ -1567,7 +1567,7 @@ function CloseTag($tag)
       $this->divwidth = $this->pgwidth - $x + $this->lMargin;
       //Print content
   	  $this->printbuffer($this->textbuffer,true/*is out of a block (e.g. DIV,P etc.)*/);
-      $this->textbuffer=array(); 
+      $this->textbuffer=array();
       //Reset values
     	$this->Reset();
     }
@@ -1585,7 +1585,7 @@ function CloseTag($tag)
       $this->divwidth = $this->pgwidth - $x + $this->lMargin;
       //Print content
   	  $this->printbuffer($this->textbuffer);
-      $this->textbuffer=array(); 
+      $this->textbuffer=array();
     	//Reset values
     	$this->Reset();
     }
@@ -1776,7 +1776,7 @@ function printbuffer($arrayaux,$outofblock=false,$is_table=false)
         $this->Bookmark($vetor[7]." (pg. $this->page)",0,$this->y);
         if (empty($vetor[0])) continue; //Ignore empty text
       }
-      if(isset($vetor[6]) and $vetor[6] === true) // Subscript 
+      if(isset($vetor[6]) and $vetor[6] === true) // Subscript
       {
   		   $this->SUB = true;
          $this->SetFontSize(6);
@@ -1800,7 +1800,7 @@ function printbuffer($arrayaux,$outofblock=false,$is_table=false)
       }
       if(isset($vetor[1]) and $vetor[1] != '') //LINK
       {
-        if (strpos($vetor[1],".") === false) //assuming every external link has a dot indicating extension (e.g: .html .txt .zip www.somewhere.com etc.) 
+        if (strpos($vetor[1],".") === false) //assuming every external link has a dot indicating extension (e.g: .html .txt .zip www.somewhere.com etc.)
         {
           //Repeated reference to same anchor?
           while(array_key_exists($vetor[1],$this->internallink)) $vetor[1]="#".$vetor[1];
@@ -1844,7 +1844,7 @@ function printbuffer($arrayaux,$outofblock=false,$is_table=false)
                       //xpos and ypos used in order to support: <div align='center'><img ...></div>
                       $xpos = 0;
                       $ypos = 0;
-                      if (isset($specialcontent['ypos']) and $specialcontent['ypos'] != '') $ypos = (float)$specialcontent['ypos']; 
+                      if (isset($specialcontent['ypos']) and $specialcontent['ypos'] != '') $ypos = (float)$specialcontent['ypos'];
                       if (isset($specialcontent['xpos']) and $specialcontent['xpos'] != '') $xpos = (float)$specialcontent['xpos'];
                       $width_used = (($this->x - $bak_x) + $specialcontent['width'])*$this->k; //in order to adjust x coordinate later
                       //Is this the best way of fixing x,y coordinates?
@@ -2142,7 +2142,7 @@ function ReadMetaTags($html)
  	$html = preg_replace($regexp," \$1=\"\$2\"",$html);
   $regexp = '/<meta .*?(name|content)="(.*?)" .*?(name|content)="(.*?)".*?>/si';
   preg_match_all($regexp,$html,$aux);
-  
+
   $firstattr = $aux[1];
   $secondattr = $aux[3];
   for( $i = 0 ; $i < count($aux[0]) ; $i++)
@@ -2172,14 +2172,14 @@ function ReadCSS($html)
 /*
 * This version ONLY supports:  .class {...} / #id { .... }
 * It does NOT support: body{...} / a#hover { ... } / p.right { ... } / other mixed names
-* This function must read the CSS code (internal or external) and order its value inside $this->CSS. 
+* This function must read the CSS code (internal or external) and order its value inside $this->CSS.
 */
 
 	$match = 0; // no match for instance
 	$regexp = ''; // This helps debugging: showing what is the REAL string being processed
-	
+
 	//CSS inside external files
-	$regexp = '/<link rel="stylesheet".*?href="(.+?)"\\s*?\/?>/si'; 
+	$regexp = '/<link rel="stylesheet".*?href="(.+?)"\\s*?\/?>/si';
 	$match = preg_match_all($regexp,$html,$CSSext);
   $ind = 0;
 
@@ -2204,11 +2204,11 @@ function ReadCSS($html)
     }
     elseif( strpos($path,":/") === false) //It is a Local Link
     {
-        $path = $this->basepath . $path; 
+        $path = $this->basepath . $path;
     }
     //Do nothing if it is an Absolute Link
     //END of fix path value
-    $CSSextblock = file_get_contents($path);	
+    $CSSextblock = file_get_contents($path);
 
     //Get class/id name and its characteristics from $CSSblock[1]
 	  $regexp = '/[.# ]([^.]+?)\\s*?\{(.+?)\}/s'; // '/s' PCRE_DOTALL including \n
@@ -2222,7 +2222,7 @@ function ReadCSS($html)
   		preg_match_all( $regexp, $extstyle[2][$i], $extstyleinfo);
   		$extproperties = $extstyleinfo[1];
   		$extvalues = $extstyleinfo[2];
-  		for($j = 0; $j < count($extproperties) ; $j++) 
+  		for($j = 0; $j < count($extproperties) ; $j++)
   		{
   			//Array-properties and Array-values must have the SAME SIZE!
   			$extclassproperties[strtoupper($extproperties[$j])] = trim($extvalues[$j]);
@@ -2240,7 +2240,7 @@ function ReadCSS($html)
 
 	//CSS internal
 	//Get content between tags and order it, using regexp
-	$regexp = '/<style.*?>(.*?)<\/style>/si'; // it can be <style> or <style type="txt/css"> 
+	$regexp = '/<style.*?>(.*?)<\/style>/si'; // it can be <style> or <style type="txt/css">
 	$match = preg_match($regexp,$html,$CSSblock);
 
 	if ($match) {
@@ -2256,7 +2256,7 @@ function ReadCSS($html)
   		preg_match_all( $regexp, $style[2][$i], $styleinfo);
   		$properties = $styleinfo[1];
   		$values = $styleinfo[2];
-  		for($j = 0; $j < count($properties) ; $j++) 
+  		for($j = 0; $j < count($properties) ; $j++)
   		{
   			//Array-properties and Array-values must have the SAME SIZE!
   			$classproperties[strtoupper($properties[$j])] = trim($values[$j]);
@@ -2269,7 +2269,7 @@ function ReadCSS($html)
 	} // end of match
 
 	//Remove CSS (tags and content), if any
-	$regexp = '/<style.*?>(.*?)<\/style>/si'; // it can be <style> or <style type="txt/css"> 
+	$regexp = '/<style.*?>(.*?)<\/style>/si'; // it can be <style> or <style type="txt/css">
 	$html = preg_replace($regexp,'',$html);
 
  	return $html;
@@ -2291,7 +2291,7 @@ function readInlineCSS($html)
 	//Array-properties and Array-values must have the SAME SIZE!
 	$classproperties = array();
 	for($i = 0; $i < count($properties) ; $i++) $classproperties[strtoupper($properties[$i])] = trim($values[$i]);
- 	
+
   return $classproperties;
 }
 
@@ -2376,8 +2376,8 @@ function setCSS($arrayaux)
 				case 'FONT-STYLE': // italic normal oblique
 				    switch (strtoupper($v))
 				    {
-				      case 'ITALIC': 
-				      case 'OBLIQUE': 
+				      case 'ITALIC':
+				      case 'OBLIQUE':
             		  	    $this->SetStyle('I',true);
                         break;
 				      case 'NORMAL': break;
@@ -2386,7 +2386,7 @@ function setCSS($arrayaux)
 				case 'FONT-WEIGHT': // normal bold //Does not support: bolder, lighter, 100..900(step value=100)
 				    switch (strtoupper($v))
 				    {
-				      case 'BOLD': 
+				      case 'BOLD':
             		  	    $this->SetStyle('B',true);
                         break;
 				      case 'NORMAL': break;
@@ -2405,7 +2405,7 @@ function setCSS($arrayaux)
 				    }
 				case 'TEXT-TRANSFORM': // none uppercase lowercase //Does not support: capitalize
 				    switch (strtoupper($v)) //Not working 100%
-				    { 
+				    {
 				      case 'UPPERCASE':
 				                $this->toupper=true;
 				                break;
@@ -2417,16 +2417,16 @@ function setCSS($arrayaux)
 				case 'TEXT-ALIGN': //left right center justify
 				    switch (strtoupper($v))
 				    {
-				      case 'LEFT': 
+				      case 'LEFT':
                         $this->divalign="L";
                         break;
-				      case 'CENTER': 
+				      case 'CENTER':
                         $this->divalign="C";
                         break;
-				      case 'RIGHT': 
+				      case 'RIGHT':
                         $this->divalign="R";
                         break;
-				      case 'JUSTIFY': 
+				      case 'JUSTIFY':
                         $this->divalign="J";
                         break;
 				    }
@@ -2463,7 +2463,7 @@ function SetStyle($tag,$enable)
 	foreach(array('B','I','U') as $s)
 		if($this->$s>0)
 			$style.=$s;
-			
+
 	$this->currentstyle=$style;
 	$this->SetFont('',$style);
 }
@@ -2487,7 +2487,7 @@ function DisableTags($str='')
 ////////////////////////TABLE CODE (from PDFTable)/////////////////////////////////////
 //Thanks to vietcom (vncommando at yahoo dot com)
 /*     Modified by Renato Coelho
-   in order to print tables that span more than 1 page and to allow 
+   in order to print tables that span more than 1 page and to allow
    bold,italic and the likes inside table cells (and alignment now works with styles!)
 */
 
@@ -2549,7 +2549,7 @@ function _tableColumnWidth(&$table){
 		$c = &$cs[$i][$j];
 		$lc = $j + $c['colspan'];
 		if ($lc > $nc) $lc = $nc;
-		
+
 		$wis = $wisa = 0;
 		$was = $wasa = 0;
 		$list = array();
@@ -2631,7 +2631,7 @@ function _tableWidth(&$table){
       //bent shrink essence move size measure automatic => divide against give as a whole
 				//$wi = $table['w'] - $wis;
 				$wi = ($table['w'] - $wis)/$numcols;
-				for($k=0;$k<$numcols;$k++) 
+				for($k=0;$k<$numcols;$k++)
 					//$widthcols[$k]['miw'] += ($widthcols[$k]['miw']/$wis)*$wi;
 					$widthcols[$k]['miw'] += $wi;
 			}
@@ -2662,7 +2662,7 @@ function _tableWidth(&$table){
 		}
 	}
 }
-	
+
 function _tableHeight(&$table){
 //! @return void
 //! @desc Calculates the Table Height
@@ -2825,7 +2825,7 @@ function _tableWrite(&$table){
   $tableheader = array();
 	//Draw Table Contents and Borders
 	for( $i = 0 ; $i < $numrows ; $i++ ) //Rows
-  { 
+  {
     $skippage = false;
     for( $j = 0 ; $j < $numcols ; $j++ ) //Columns
     {
@@ -2903,7 +2903,7 @@ function _tableWrite(&$table){
 
 /*
 ----  JUNK(?)/OLD CODE: ------
-// <? <- this fixes HIGHLIGHT PSPAD bug ... 
+// <? <- this fixes HIGHLIGHT PSPAD bug ...
 
 */
 

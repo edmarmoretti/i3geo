@@ -457,7 +457,7 @@ if(!YAHOO.widget.Logger) {
             YAHOO.log("Logger handling of window.onerror had already been disabled.");
         }
     };
-    
+
     /////////////////////////////////////////////////////////////////////////////
     //
     // Public events
@@ -674,13 +674,13 @@ function make(el,props) {
 function LogReader(elContainer, oConfigs) {
     this._sName = LogReader._index;
     LogReader._index++;
-    
+
     this._init.apply(this,arguments);
 
     /**
      * Render the LogReader immediately upon instantiation.  If set to false,
      * you must call myLogReader.render() to generate the UI.
-     * 
+     *
      * @property autoRender
      * @type {Boolean}
      * @default true
@@ -967,7 +967,7 @@ LogReader.prototype = {
         }
 
         this._initContainerEl();
-        
+
         this._initHeaderEl();
         this._initConsoleEl();
         this._initFooterEl();
@@ -1301,7 +1301,7 @@ LogReader.prototype = {
      */
     _sName : null,
 
-    //TODO: remove
+    // remove
     /**
      * A class member shared by all LogReaders if a container needs to be
      * created during instantiation. Will be null if a container element never needs to
@@ -1543,7 +1543,7 @@ LogReader.prototype = {
 
         for (i = styleProps.length - 1; i >= 0; --i) {
             prop = styleProps[i];
-            if (this[prop]){ 
+            if (this[prop]){
                 style[prop] = this[prop];
             }
         }
@@ -1579,9 +1579,9 @@ LogReader.prototype = {
             // Remove DOM elements
             this._elHd.innerHTML = "";
         }
-        
+
         // Create header
-        // TODO: refactor this into an innerHTML
+        //  refactor this into an innerHTML
         this._elHd = make("div",{
             className: "yui-log-hd"
         });
@@ -1650,7 +1650,7 @@ LogReader.prototype = {
                 this._elFt.innerHTML = "";
             }
 
-            // TODO: use innerHTML
+            //  use innerHTML
             this._elFt = make("div",{ className: "yui-log-ft" });
             this._elBtns = make("div", { className: "yui-log-btns" });
             this._btnPause = make("input", {
@@ -1694,7 +1694,7 @@ LogReader.prototype = {
         if(u.DD && this.draggable && this._elHd) {
             var ylog_dd = new u.DD(this._elContainer);
             ylog_dd.setHandleElId(this._elHd.id);
-            //TODO: use class name
+            // use class name
             this._elHd.style.cursor = "move";
         }
     },
@@ -1769,7 +1769,7 @@ LogReader.prototype = {
                     className: sCategory,
                     innerHTML: sCategory
                 });
-            
+
 
             // Subscribe to the click event
             Event.on(check,'click',this._onCheckCategory,this);
@@ -1807,7 +1807,7 @@ LogReader.prototype = {
                     className: sSource,
                     innerHTML: sSource
                 });
-            
+
 
             // Subscribe to the click event
             Event.on(check,'click',this._onCheckSource,this);
@@ -1860,7 +1860,7 @@ LogReader.prototype = {
             else {
                 this._filterLogs();
             }
-            
+
             if(!this.newestOnTop) {
                 this._elConsole.scrollTop = this._elConsole.scrollHeight;
             }
@@ -1890,8 +1890,8 @@ LogReader.prototype = {
             thresholdMin = 0;
         }
         entriesStartIndex = (entriesLen > thresholdMin) ? (entriesLen - thresholdMin) : 0;
-        
-        // Iterate through all log entries 
+
+        // Iterate through all log entries
         for(i=entriesStartIndex; i<entriesLen; i++) {
             // Print only the ones that filter through
             var okToPrint = false,
@@ -1960,7 +1960,7 @@ LogReader.prototype = {
      */
     _onCategoryCreate : function(sType, aArgs, oSelf) {
         var category = aArgs[0];
-        
+
         // Add category to the internal array of filters
         oSelf._categoryFilters.push(category);
 
@@ -1980,7 +1980,7 @@ LogReader.prototype = {
      */
     _onSourceCreate : function(sType, aArgs, oSelf) {
         var source = aArgs[0];
-        
+
         // Add source to the internal array of filters
         oSelf._sourceFilters.push(source);
 

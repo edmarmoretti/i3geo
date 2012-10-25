@@ -43,9 +43,9 @@ VMLRenderer.prototype = new AbstractRenderer;
 
 VMLRenderer.prototype.init = function(elem) {
   this.container = elem;
-  
+
   this.container.style.overflow = 'hidden';
-  
+
 	// Add VML includes and namespace
   elem.ownerDocument.namespaces.add("v", "urn:schemas-microsoft-com:vml");
 
@@ -86,7 +86,7 @@ VMLRenderer.prototype.create = function(shape, fillColor, lineColor, lineWidth, 
     vml.innerHTML = texto;
   }
 
-  if (shape != 'line') {  
+  if (shape != 'line') {
     vml.style.position = 'absolute';
     vml.style.left = left + "px";
     vml.style.top = top + "px";
@@ -139,7 +139,7 @@ VMLRenderer.prototype.move = function(shape, left, top) {
 
 
 VMLRenderer.prototype.track = function(shape) {
-  // TODO
+  //
 };
 
 
@@ -158,7 +158,7 @@ VMLRenderer.prototype.resize = function(shape, fromX, fromY, toX, toY) {
     }
     else {
       shape.style.width = deltaX + 'px';
-    } 
+    }
     if (deltaY < 0) {
       shape.style.top = toY + 'px';
       shape.style.height = -deltaY + 'px';

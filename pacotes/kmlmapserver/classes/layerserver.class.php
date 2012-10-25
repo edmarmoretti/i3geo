@@ -775,7 +775,7 @@ class LayerServer {
             $st =& $new_style->addChild('IconStyle');
 			if($style_data['width'] && $style_data['icon_width'] != 32){
 				/**
-				 * TODO
+				 *
 				 */
 				//$st->addChild('scale', $style_data['icon_width'] / 32);
 				$st->addChild('scale', 1);

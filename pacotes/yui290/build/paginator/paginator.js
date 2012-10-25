@@ -51,7 +51,7 @@ function Paginator(config) {
     if (Paginator.isNumeric(config.totalRecords)) {
         this.set('totalRecords',config.totalRecords,true);
     }
-    
+
     this.initUIComponents();
 
     // Update the other config values
@@ -235,7 +235,7 @@ Paginator.prototype = {
                     val = [val];
                 }
                 for (var i = 0, len = val.length; i < len; ++i) {
-                    if (isString(val[i]) || 
+                    if (isString(val[i]) ||
                         (isObject(val[i]) && val[i].nodeType === 1)) {
                         continue;
                     }
@@ -467,7 +467,7 @@ Paginator.prototype = {
      * @protected
      */
     _selfSubscribe : function () {
-        // Listen for changes to totalRecords and alwaysVisible 
+        // Listen for changes to totalRecords and alwaysVisible
         this.subscribe('totalRecordsChange',this.updateVisibility,this,true);
         this.subscribe('alwaysVisibleChange',this.updateVisibility,this,true);
 
@@ -1083,7 +1083,7 @@ Paginator.prototype = {
             }
 
             this._batch = false;
-            
+
             if (this._pageChanged) {
                 this._pageChanged = false;
 
@@ -1123,7 +1123,7 @@ Paginator.ui.CurrentPageReport = function (p) {
     p.subscribe('pageReportTemplateChange', this.update,this,true);
     p.subscribe('destroy',this.destroy,this,true);
 
-    //TODO: make this work
+    // make this work
     p.subscribe('pageReportClassChange', this.update,this,true);
 };
 
@@ -1231,10 +1231,10 @@ Paginator.ui.CurrentPageReport.prototype = {
         this.span.className = this.paginator.get('pageReportClass');
         setId(this.span, id_base + '-page-report');
         this.update();
-        
+
         return this.span;
     },
-    
+
     /**
      * Regenerate the content of the span if appropriate. Calls
      * CurrentPageReport.sprintf with the value of the pageReportTemplate
@@ -1294,7 +1294,7 @@ Paginator.ui.PageLinks = function (p) {
     p.subscribe('currentPageClassChange', this.rebuild,this,true);
     p.subscribe('destroy',this.destroy,this,true);
 
-    //TODO: Make this work
+    // Make this work
     p.subscribe('pageLinksContainerClassChange', this.rebuild,this,true);
 };
 
@@ -1572,7 +1572,7 @@ Paginator.ui.FirstPageLink = function (p) {
     p.subscribe('totalRecordsChange',this.update,this,true);
     p.subscribe('destroy',this.destroy,this,true);
 
-    // TODO: make this work
+    //  make this work
     p.subscribe('firstPageLinkLabelChange',this.update,this,true);
     p.subscribe('firstPageLinkClassChange',this.update,this,true);
 };
@@ -1747,7 +1747,7 @@ Paginator.ui.LastPageLink = function (p) {
     p.subscribe('totalRecordsChange',this.update,this,true);
     p.subscribe('destroy',this.destroy,this,true);
 
-    // TODO: make this work
+    //  make this work
     p.subscribe('lastPageLinkLabelChange',this.update,this,true);
     p.subscribe('lastPageLinkClassChange', this.update,this,true);
 };
@@ -1947,7 +1947,7 @@ Paginator.ui.NextPageLink = function (p) {
     p.subscribe('totalRecordsChange', this.update,this,true);
     p.subscribe('destroy',this.destroy,this,true);
 
-    // TODO: make this work
+    //  make this work
     p.subscribe('nextPageLinkLabelChange', this.update,this,true);
     p.subscribe('nextPageLinkClassChange', this.update,this,true);
 };
@@ -2126,7 +2126,7 @@ Paginator.ui.PreviousPageLink = function (p) {
     p.subscribe('totalRecordsChange',this.update,this,true);
     p.subscribe('destroy',this.destroy,this,true);
 
-    // TODO: make this work
+    //  make this work
     p.subscribe('previousPageLinkLabelChange',this.update,this,true);
     p.subscribe('previousPageLinkClassChange',this.update,this,true);
 };
@@ -2301,7 +2301,7 @@ Paginator.ui.RowsPerPageDropdown = function (p) {
     p.subscribe('totalRecordsChange',this._handleTotalRecordsChange,this,true);
     p.subscribe('destroy',this.destroy,this,true);
 
-    // TODO: make this work
+    //  make this work
     p.subscribe('rowsPerPageDropdownClassChange',this.rebuild,this,true);
 };
 

@@ -3437,7 +3437,7 @@ version: 2.9.0
 
             cssClass = carousel.CLASSES;
 
-            // TODO: can the _navBtns be tested against instead?
+            //  can the _navBtns be tested against instead?
             navContainer = Dom.getElementsByClassName(cssClass.NAVIGATION,
                     "DIV", carousel.get("element"));
 
@@ -3464,10 +3464,8 @@ version: 2.9.0
                     }
                 }
             } else {
-                // TODO: separate method for creating a navigation button
                 prevButton = createElement("SPAN",
                         { className: cssClass.BUTTON + cssClass.FIRST_NAV });
-                // XXX: for IE 6.x
                 Dom.setStyle(prevButton, "visibility", "visible");
                 btn = Dom.generateId();
                 prevButton.innerHTML = "<button type=\"button\" "      +
@@ -3490,10 +3488,8 @@ version: 2.9.0
                     }
                 }
             } else {
-                // TODO: separate method for creating a navigation button
                 nextButton = createElement("SPAN",
                         { className: cssClass.BUTTON + cssClass.NEXT_NAV });
-                // XXX: for IE 6.x
                 Dom.setStyle(nextButton, "visibility", "visible");
                 btn = Dom.generateId();
                 nextButton.innerHTML = "<button type=\"button\" "      +
@@ -3708,7 +3704,7 @@ version: 2.9.0
          * @return {Number} The new value that would be set
          * @protected
          */
-        _setNumVisible: function (val) { // TODO: _setNumVisible should just be reserved for setting numVisible.
+        _setNumVisible: function (val) { //  _setNumVisible should just be reserved for setting numVisible.
             var carousel = this;
 
             carousel._setClipContainerSize(carousel._clipEl, val);
@@ -3973,7 +3969,6 @@ version: 2.9.0
                     delete itemsTable.loading[pos];
                 }
             }
-            // TODO: should we add the item if oel is undefined?
 
             // sync shouldn't be necessary since we're replacing items that are already positioned
             //carousel._syncUiItems();

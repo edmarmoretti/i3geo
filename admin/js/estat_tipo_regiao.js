@@ -315,7 +315,6 @@ function gravaDados(id,recordid){
 	core_makeRequest(sUrl,callback);
 }
 function gravaDadosAgregacoes(id,recordid){
-	// TODO
 	var campos = new Array("codigo_tipo_regiao_pai","colunaligacao_regiaopai"),
 		par = "",
 		i = 0,
