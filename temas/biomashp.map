@@ -4,9 +4,9 @@ MAP
   LAYER
     CONNECTION ""
     DATA "/var/www/geodados/brasil/vegetacao/biomas.shp"
-    FOOTER "teste.htm"
+    #FOOTER "teste.htm"
     GROUP "biomashp"
-    HEADER "teste.htm"
+    #HEADER "teste.htm"
     METADATA
       "cache"	"SIM"
       "ltempoitemimagem"	""

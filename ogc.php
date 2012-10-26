@@ -237,11 +237,13 @@ if ($tipo == "" || $tipo == "metadados"){
 					}
 					$l->setmetadata("ows_title",pegaNome($l));
 					$l->setmetadata("ows_srs",$listaepsg);
+					$l->set("group","");
 					//essa linha &eacute; necess&aacute;ria pq as vezes no mapfile n&atilde;o tem nenhum layer com o nome igual ao nome do mapfile
 					if(count($ts)==1){
 						$l->set("name",$tx);
 					}
 					$l->setmetadata("gml_include_items","all");
+					$l->set("template","none.htm");
 					$l->set("dump",MS_TRUE);
 					$l->setmetadata("WMS_INCLUDE_ITEMS","all");
 					$l->setmetadata("WFS_INCLUDE_ITEMS","all");
@@ -306,6 +308,7 @@ if ($tipo == "" || $tipo == "metadados"){
 				$l->setmetadata("WMS_INCLUDE_ITEMS","all");
 				$l->setmetadata("WFS_INCLUDE_ITEMS","all");
 				$l->setmetadata("ows_srs",$listaepsg);
+				$l->setmetadata("ows_title",$l->getmetadata("TEMA"));
 				$l->set("status",MS_DEFAULT);
 				$layers[] = $l->name;
 			}
