@@ -291,26 +291,26 @@ switch (strtoupper($funcao))
 			$id_pai = 0;
 			//anual
 			if($codigo_tipo_periodo >= 1){
-				$id_parametro_medida = $m->alteraParametroMedida($id_medida_variavel,"","","","","");
-				$m->alteraParametroMedida($id_medida_variavel,$id_parametro_medida,"Ano","","ano",$id_pai);
+				$id_parametro_medida = $m->alteraParametroMedida($id_medida_variavel,"","","","","","");
+				$m->alteraParametroMedida($id_medida_variavel,$id_parametro_medida,"Ano","","ano",$id_pai,1);
 				$id_pai = $id_parametro_medida;
 			}
 			//mensal
 			if($codigo_tipo_periodo >= 2){
-				$id_parametro_medida = $m->alteraParametroMedida($id_medida_variavel,"","","","","");
-				$m->alteraParametroMedida($id_medida_variavel,$id_parametro_medida,"Mes","","mes",$id_pai);
+				$id_parametro_medida = $m->alteraParametroMedida($id_medida_variavel,"","","","","","");
+				$m->alteraParametroMedida($id_medida_variavel,$id_parametro_medida,"Mes","","mes",$id_pai,2);
 				$id_pai = $id_parametro_medida;
 			}
 			//diario
 			if($codigo_tipo_periodo >= 3){
-				$id_parametro_medida = $m->alteraParametroMedida($id_medida_variavel,"","","","","");
-				$m->alteraParametroMedida($id_medida_variavel,$id_parametro_medida,"Dia","","dia",$id_pai);
+				$id_parametro_medida = $m->alteraParametroMedida($id_medida_variavel,"","","","","","");
+				$m->alteraParametroMedida($id_medida_variavel,$id_parametro_medida,"Dia","","dia",$id_pai,3);
 				$id_pai = $id_parametro_medida;
 			}
 			//horario
 			if($codigo_tipo_periodo == 4){
-				$id_parametro_medida = $m->alteraParametroMedida($id_medida_variavel,"","","","","");
-				$m->alteraParametroMedida($id_medida_variavel,$id_parametro_medida,"Hora","","hora",$id_pai);
+				$id_parametro_medida = $m->alteraParametroMedida($id_medida_variavel,"","","","","","");
+				$m->alteraParametroMedida($id_medida_variavel,$id_parametro_medida,"Hora","","hora",$id_pai,4);
 			}
 		}
 		retornaJSON($m->listaMedidaVariavel("",$id_medida_variavel));
@@ -332,7 +332,7 @@ switch (strtoupper($funcao))
 			$id_parametro_medida = $m->alteraParametroMedida($id_medida_variavel);
 		}
 		else{
-			$m->alteraParametroMedida("",$id_parametro_medida,$nome,$descricao,$coluna,$id_pai);
+			$m->alteraParametroMedida("",$id_parametro_medida,$nome,$descricao,$coluna,$id_pai,$tipo);
 		}
 		retornaJSON($m->listaParametro($id_medida_variavel,$id_parametro_medida));
 		exit;

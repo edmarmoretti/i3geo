@@ -541,12 +541,20 @@ i3GEOadmin.variaveis = {
 						  {titulo:"Nome:",id:"Enome",size:"50",value:i.nome,tipo:"text",div:""},
 						  {titulo:"Descri&ccedil;&atilde;o:",id:"Edescricao",size:"50",value:i.descricao,tipo:"text",div:""},
 						  {titulo:"Coluna:",id:"Ecoluna",size:"50",value:i.coluna,tipo:"text",div:""},
-						  {titulo:"id_pai:",id:"Eid_pai",size:"50",value:i.id_pai,tipo:"text",div:""}
+						  {titulo:"id_pai:",id:"Eid_pai",size:"50",value:i.id_pai,tipo:"text",div:""},
+						  {titulo:"Tipo:",id:"",size:"50",value:i.tipo,tipo:"text",div:"<div id=Ctipo_parametro ></div>"}
 					]
 				};
 			ins += core_geraLinhas(param);
 			ins += "<br><br><br>";
 			$i("editor_bd").innerHTML = ins;
+			//para saber a lista de tipos, veja a descricao da tabela de parametros no MER do banco de dados
+			if($i("Ctipo_parametro")){
+				temp = "<select id='Etipo' >";
+				temp += core_comboObjeto(i3GEOadmin.variaveis.dadosAuxiliares.tiposDeParametros,"id","valor",i.tipo);
+				temp += "</select>";
+				$i("Ctipo_parametro").innerHTML = temp;
+			}
 		}
 	},
 	link: {
@@ -1024,7 +1032,7 @@ i3GEOadmin.variaveis = {
 			prog = i3GEO.configura.locaplic+"/admin/php/metaestat.php?funcao=alteraMedidaVariavel";
 		}
 		if(tipo == "parametroMedida"){
-			campos = new Array("nome","descricao","coluna","id_pai");
+			campos = new Array("nome","descricao","coluna","id_pai","tipo");
 			par = "&id_parametro_medida="+id;
 			prog = i3GEO.configura.locaplic+"/admin/php/metaestat.php?funcao=alteraParametroMedida";
 		}
@@ -1160,6 +1168,13 @@ i3GEOadmin.variaveis = {
 				success:function(o){
 					try	{
 						i3GEOadmin.variaveis.dadosAuxiliares = YAHOO.lang.JSON.parse(o.responseText);
+						i3GEOadmin.variaveis.dadosAuxiliares["tiposDeParametros"] = [
+							{"id":"0","valor":"Nao definido"},
+							{"id":"1","valor":"Ano"},
+							{"id":"2","valor":"Mes"},
+							{"id":"3","valor":"Dia"},
+							{"id":"4","valor":"Hora"}
+						];
 					}
 					catch(e){core_handleFailure(e,o.responseText);}
 				},

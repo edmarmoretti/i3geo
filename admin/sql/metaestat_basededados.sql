@@ -25,7 +25,7 @@ INSERT INTO i3geoestat_medida_variavel (id_medida_variavel, codigo_unidade_medid
 
 
 -- i3geoestat_parametro_medida
-INSERT INTO i3geoestat_parametro_medida (id_parametro_medida, coluna, nome, descricao, id_pai, id_medida_variavel) VALUES ('1', 'nu_ano', 'ano', '', '0', '1');
+INSERT INTO i3geoestat_parametro_medida (id_parametro_medida, coluna, nome, descricao, id_pai, id_medida_variavel, tipo) VALUES ('1', 'nu_ano', 'ano', '', '0', '1', '1');
 
 
 -- i3geoestat_variavel

@@ -860,7 +860,7 @@ class Metaestat{
 
 	Altera uma parametro de uma medida ou cria uma nova
 	*/
-	function alteraParametroMedida($id_medida_variavel,$id_parametro_medida="",$nome,$descricao,$coluna,$id_pai){
+	function alteraParametroMedida($id_medida_variavel,$id_parametro_medida="",$nome,$descricao,$coluna,$id_pai,$tipo="0"){
 		try	{
 			if($id_parametro_medida != ""){
 				if($this->convUTF){
@@ -868,7 +868,7 @@ class Metaestat{
 					$descricao = utf8_encode($descricao);
 				}
 				//echo "UPDATE ".$this->esquemaadmin."i3geoestat_parametro_medida SET nomeparametro = '$nomeparametro',descricao = '$descricao',coluna = '$coluna',agregavalores = '$agregavalores' WHERE id_parametro_medida = $id_parametro_medida";exit;
-				$this->dbhw->query("UPDATE ".$this->esquemaadmin."i3geoestat_parametro_medida SET nome = '$nome',descricao = '$descricao',coluna = '$coluna',id_pai = '$id_pai' WHERE id_parametro_medida = $id_parametro_medida");
+				$this->dbhw->query("UPDATE ".$this->esquemaadmin."i3geoestat_parametro_medida SET nome = '$nome',descricao = '$descricao',coluna = '$coluna',id_pai = '$id_pai', tipo = '$tipo' WHERE id_parametro_medida = $id_parametro_medida");
 				$retorna = $id_parametro_medida;
 			}
 			else{

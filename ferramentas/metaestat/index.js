@@ -124,6 +124,7 @@ i3GEOF.metaestat = {
 			'	<button title="Anima&ccedil;&atilde;o" onclick="i3GEOF.metaestat.analise.ativaAnimacao()"><img src="'+i3GEO.configura.locaplic+'/imagens/gisicons/player-forward.png" /></button>' +
 			'	<button title="Alterar legenda" onclick="i3GEOF.metaestat.analise.alteraLegenda()"><img src="'+i3GEO.configura.locaplic+'/imagens/gisicons/calculator.png" /></button>' +
 			'	<button title="Alterar cores" onclick="i3GEOF.metaestat.analise.alteraCores()"><img src="'+i3GEO.configura.locaplic+'/imagens/gisicons/24-to-8-bits.png" /></button>' +
+			'	<button title="Cortina" onclick="i3GEO.tema.dialogo.cortina()"><img src="'+i3GEO.configura.locaplic+'/imagens/gisicons/mapset.png" /></button>' +
 			'</div>' +
 			'<input type=hidden  value="" id="listaColourRampAnaliseMetaestat" onchange="i3GEOF.metaestat.analise.aplicaColourRamp()" />'; //utilizado pelo seletor de colourramp
 			return ins;
