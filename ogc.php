@@ -60,20 +60,9 @@ ogc.php?intervalo=0,50
 //valida&ccedil;&otilde;es e includes
 //
 $cache = true;
-if (!function_exists('ms_GetVersion'))
-{
-	if (strtoupper(substr(PHP_OS, 0, 3) == 'WIN'))
-	{
-		if(!@dl('php_mapscript_48.dll'))
-		dl('php_mapscript.dll');
-	}
-	else
-	{dl('php_mapscript.so');}
-}
-require_once("classesphp/carrega_ext.php");
-include("ms_configura.php");
-include("classesphp/pega_variaveis.php");
-//include("classesphp/classe_menutemas.php");
+require_once(__DIR__."/classesphp/carrega_ext.php");
+include(__DIR__."/ms_configura.php");
+include(__DIR__."/classesphp/pega_variaveis.php");
 if(!isset($temas) && isset($tema))
 {$temas = $tema;}
 //
@@ -82,7 +71,7 @@ if(!isset($temas) && isset($tema))
 if(isset($format) && strtolower($format) == "application/openlayers"){
 	if(!isset($layers))
 	{$layers = $temas;}
-	$urln = "mashups/openlayers.php?temas=".$layers."&layers=".$layers."&mapext=".$bbox."&botoes=pan,zoombox,zoomtot,identifica";
+	$urln = __DIR__."/mashups/openlayers.php?temas=".$layers."&layers=".$layers."&mapext=".$bbox."&botoes=pan,zoombox,zoomtot,identifica";
 	if(!headers_sent())
 	{header("Location:".$urln);}
 	else
@@ -100,24 +89,22 @@ $urli3geo = str_replace("/ogc.php","",$protocolo.$_SERVER["PHP_SELF"]);
 //
 //imprime na tela a ajuda
 //
-if(isset($ajuda))
-{
+if(isset($ajuda)){
 	ogc_imprimeAjuda();
 	exit;
 }
 //
 //imprime na tela a lista de temas dispon&iacute;veis
 //
-if(isset($lista) && $lista == "temas")
-{
-	include_once("classesphp/classe_menutemas.php");
+if(isset($lista) && $lista == "temas"){
+	include_once(__DIR__."/classesphp/classe_menutemas.php");
 	ogc_imprimeListaDeTemas();
 	exit;
 }
 //
 //cria o web service
 //
-include("classesphp/funcoes_gerais.php");
+include(__DIR__."/classesphp/funcoes_gerais.php");
 error_reporting(0);
 $versao = versao();
 $versao = $versao["principal"];
@@ -125,25 +112,26 @@ $req = ms_newowsrequestobj();
 $tipo = "";
 $_GET = array_merge($_GET,$_POST);
 
-if(isset($_GET["sld"]) || isset($_GET["filter"]))
-{$cache = false;}
-foreach ($_GET as $k=>$v)
-{
+if(isset($_GET["sld"]) || isset($_GET["filter"])){
+	$cache = false;
+}
+foreach ($_GET as $k=>$v){
 	$req->setParameter($k, $v);
 	if(strtolower($v) == "getcapabilities"){
 		$tipo = "metadados";
 		$cache = false;
 	}
-	if(strtolower($k) == "layers")
+	if(strtolower($k) == "layers" && empty($_GET["tema"]))
 	{$tema = $v;}
-	if(strtolower($k) == "layer")
+	if(strtolower($k) == "layer" && empty($_GET["tema"]))
 	{$tema = $v;}
 }
-if(empty($srs))
-{$srs = "";}
-if(!empty($SRS))
-{$srs = $SRS;}
-
+if(empty($srs)){
+	$srs = "";
+}
+if(!empty($SRS)){
+	$srs = $SRS;
+}
 $listaepsg = $srs." EPSG:4618 EPSG:4291 EPSG:4326 EPSG:22521 EPSG:22522 EPSG:22523 EPSG:22524 EPSG:22525 EPSG:29101 EPSG:29119 EPSG:29120 EPSG:29121 EPSG:29122 EPSG:29177 EPSG:29178 EPSG:29179 EPSG:29180 EPSG:29181 EPSG:29182 EPSG:29183 EPSG:29184 EPSG:29185";
 if(count($_GET) == 0){
 	$tipo="intervalo";
@@ -151,16 +139,17 @@ if(count($_GET) == 0){
 	$req->setParameter("SERVICE", "WMS");
 	$cache = false;
 }
-if(isset($tema) && $tipo != "metadados")
-{$tipo = "";}
-if(!isset($version))
-{$req->setParameter("VeRsIoN","1.1.0");}
+if(isset($tema) && $tipo != "metadados"){
+	$tipo = "";
+}
+if(!isset($version)){
+	$req->setParameter("VeRsIoN","1.1.0");
+}
 $oMap = ms_newMapobj($locaplic."/aplicmap/ogcwsv".$versao.".map");
 //
 //altera os caminhos das imagens
 //
-if((isset($legenda)) && (strtolower($legenda) == "sim"))
-{
+if((isset($legenda)) && (strtolower($legenda) == "sim")){
 	$leg = $oMap->legend;
 	$leg->set("status",MS_EMBED);
 	$cache = false;
@@ -168,8 +157,9 @@ if((isset($legenda)) && (strtolower($legenda) == "sim"))
 $proto = "http" . ((isset($_SERVER['HTTPS']) && $_SERVER['HTTPS'] == "on") ? "s" : "") . "://";
 $server = isset($_SERVER['HTTP_HOST']) ? $_SERVER['HTTP_HOST'] : $_SERVER['SERVER_NAME'];
 $or = $proto.$server.$_SERVER['PHP_SELF'];
-if((isset($tema)) && ($tema != "") && ($tipo=="metadados"))
-{$or = $or."?tema=".$tema."&";}
+if((isset($tema)) && ($tema != "") && ($tipo=="metadados")){
+	$or = $or."?tema=".$tema."&";
+}
 //
 //parametros no n&iacute;vel maior
 //
@@ -186,10 +176,12 @@ $oMap->setmetadata("wms_attribution_title",$tituloInstituicao);
 $oMap->setmetadata("ows_enable_request","*");
 $e = $oMap->extent;
 $extensaoMap = ($e->minx)." ".($e->miny)." ".($e->maxx)." ".($e->maxy);
-if (!isset($intervalo))
-{$intervalo = "0,5000";}
-else
-{$tipo = "intervalo";}
+if (!isset($intervalo)){
+	$intervalo = "0,5000";
+}
+else{
+	$tipo = "intervalo";
+}
 if(!isset($tema)){
 	if(!isset($intervalo))
 	{$intervalo = "0,5000";}
@@ -301,6 +293,7 @@ if ($tipo == "" || $tipo == "metadados"){
 			$oMap = $gm->addLayers($oMap,$gvsigview,$dataView["layerNames"]);
 			$numlayers = $oMap->numlayers;
 			$layers = array();
+			//$layers[] = "default";
 			for ($i=0;$i < $numlayers;$i++){
 				$l = $oMap->getlayer($i);
 				$l->setmetadata("gml_include_items","all");
@@ -309,10 +302,29 @@ if ($tipo == "" || $tipo == "metadados"){
 				$l->setmetadata("WFS_INCLUDE_ITEMS","all");
 				$l->setmetadata("ows_srs",$listaepsg);
 				$l->setmetadata("ows_title",$l->getmetadata("TEMA"));
-				$l->set("status",MS_DEFAULT);
+				$l->set("status",MS_OFF);
 				$layers[] = $l->name;
+				if(file_exists($locaplic."/temas/miniaturas/".$tx.".map.mini.png")){
+					$mini = $proto.$server.dirname($_SERVER['PHP_SELF'])."/temas/miniaturas/".$tx.".map.mini.png";
+					$l->setmetadata("wms_attribution_logourl_format","image/png");
+					$l->setmetadata("wms_attribution_logourl_height","50");
+					$l->setmetadata("wms_attribution_logourl_width","50");
+					$l->setmetadata("wms_attribution_logourl_href",$mini);
+				}
+				if($l->type == MS_LAYER_RASTER && $l->numclasses > 0){
+					$c = $l->getclass(0);
+					if($c->name == "")
+					{$c->name = " ";}
+				}
+				//inclui extensao geografica
+				$extensao = $l->getmetadata("EXTENSAO");
+				if($extensao == ""){
+					$extensao = $extensaoMap;
+				}
+				$l->setmetadata("wms_extent",$extensao);
 			}
 			$req->setParameter("LAYERS", implode(",",$layers));
+			$req->setParameter("STYLES", "");
 			//r_dump($req);exit;
 		}
 	}
