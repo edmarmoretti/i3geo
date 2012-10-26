@@ -115,7 +115,8 @@ class gvsig2mapfile{
 			$coluna = (string) $this->getValue($path."/tag:xml-tag","fieldNames");
 			$valores = (string) $this->getValue($path."/tag:xml-tag","values");
 			$tipocoluna = (string) $this->getValue($path."/tag:xml-tag","fieldTypes");
-			$classes = $this->VectorialUniqueValueLegend($result,$path1,$coluna,$tipocoluna,$valores);
+			$nomes = (string) $this->getValue($path."/tag:xml-tag","keys");
+			$classes = $this->VectorialUniqueValueLegend($result,$path1,$coluna,$tipocoluna,$valores,$nomes);
 		}
 
 		$path1 = $path."/tag:xml-tag/tag:property[@value='".$render.".SingleSymbolLegend']/parent::*/tag:xml-tag";
@@ -159,9 +160,11 @@ class gvsig2mapfile{
 			)
 		);
 	}
-	function VectorialUniqueValueLegend($result,$path1,$coluna,$tipocoluna,$valores){
+	function VectorialUniqueValueLegend($result,$path1,$coluna,$tipocoluna,$valores,$nomes){
 		$valores = ",".str_replace(" ,",",",$valores);
 		$valores = explode(",",$valores);
+		$nomes = ",".str_replace(" ,",",",$nomes);
+		$nomes = explode(",",$nomes);
 		$classes = array();
 		$c = 0;
 		while(list( , $node) = each($result)) {
@@ -171,16 +174,22 @@ class gvsig2mapfile{
 			else
 			{$classe["exp"] = "([".$coluna."] = ".$valores[$c]." )";}
 			$classe["className"] = (string) $this->getValue($path1,"className",$c);
+			$classe["nome"] = $nomes[$c];
 			$classe["desc"] = (string) $this->getValue($path1,"desc",$c);
 			$classe["color"] = (string) $this->getValue($path1,"color",$c);
 			$classe["rotation"] = (string) $this->getValue($path1,"rotation",$c);
 			$classe["offsetX"] = (string) $this->getValue($path1,"offsetX",$c);
 			$classe["offsetY"] = (string) $this->getValue($path1,"offsetY",$c);
 			$classe["size"] = (string) $this->getValue($path1,"size",$c);
-			$classe["outline"] = (string) $this->getValue($path1,"outline",$c);
 			$classe["markerStyle"] = (string) $this->getValue($path1,"markerStyle",$c);
 			$classe["hasFill"] = (string) $this->getValue($path1,"hasFill",$c);
 			$classe["hasOutline"] = (string) $this->getValue($path1,"hasOutline",$c);
+			if($classe["hasOutline"] == "true"){
+				$classe["outline"] = (string) $this->getValue($path1."/tag:xml-tag","color",0);
+			}
+			else{
+				$classe["outline"] = (string) $this->getValue($path1,"color",$c);
+			}
 			if($classe["desc"] != "")
 			{$classes[] = $classe;}
 			$c = $c + 1;
@@ -200,13 +209,16 @@ class gvsig2mapfile{
 			$classe["offsetX"] = (string) $this->getValue($path,"offsetX",$c);
 			$classe["offsetY"] = (string) $this->getValue($path,"offsetY",$c);
 			$classe["size"] = (string) $this->getValue($path,"size",$c);
-			$classe["outline"] = (string) $this->getValue($path,"outline",$c);
 			$classe["markerStyle"] = (string) $this->getValue($path,"markerStyle",$c);
 			$classe["hasFill"] = (string) $this->getValue($path,"hasFill",$c);
 			$classe["hasOutline"] = (string) $this->getValue($path,"hasOutline",$c);
 			$classe["exp"] = false;
+			$classe["nome"] = " ";
 			if($classe["hasOutline"] == "true"){
-				$classe["outline"] = $this->getValue($path."/tag:xml-tag","color");
+				$classe["outline"] = (string) $this->getValue($path."/tag:xml-tag","color");
+			}
+			else{
+				$classe["outline"] = (string) $this->getValue($path,"color",$c);
 			}
 			$classes[] = $classe;
 			$c = $c + 1;
@@ -225,12 +237,14 @@ class gvsig2mapfile{
 			$dataLayer = $this->getLayerData($gvsigview,$lname);
 			$oLayer = ms_newLayerObj($objMap);
 			$oLayer->setmetadata("TEMA",$lname);
+			$oLayer->set("template","none.htm");
 			$oLayer = $this->data2layer($oLayer,$dataLayer);
 		}
 		return $objMap;
 	}
 	function data2layer($oLayer,$dataLayer){
-		$oLayer->set("name",$this->nomeRandomico());
+		//TODO corrigir acentuação
+		$oLayer->set("name",basename($this->arquivoGvp)."_".$oLayer->index); //$this->nomeRandomico());
 		$this->nomesLayersAdicionados[] = $oLayer->name;
 		$oLayer->set("data",$dataLayer["data"]);
 		if($dataLayer["connectiontype"] != "")
@@ -254,17 +268,23 @@ class gvsig2mapfile{
 		if($tipo == "com.iver.cit.gvsig.fmap.core.symbols.SimpleFillSymbol")
 		{$oLayer->set("type",2);}
 		foreach($dataLayer["legenda"]["classes"] as $data){
+			//var_dump($data);
 			$classe = ms_newClassObj($oLayer);
+			$classe->set("name",$data["nome"]);
 			$estilo = ms_newStyleObj($classe);
 			if($oLayer->type == 0){
 				$estilo->set("symbolname","ponto");
 			}
-			$ncor = explode(",",$data["color"]);
-			if($data["hasFill"] == "true")
-			{$cor = $estilo->color;}
-			else
-			{$cor = $estilo->outlinecolor;}
-			$cor->setrgb($ncor[0],$ncor[1],$ncor[2]);
+			if($data["hasFill"] == "true"){
+				$ncor = explode(",",$data["color"]);
+				$cor = $estilo->color;
+				$cor->setrgb($ncor[0],$ncor[1],$ncor[2]);
+			}
+			if($data["hasOutline"] == "true" && $data["outline"] != ""){
+				$ncor = explode(",",$data["outline"]);
+				$cor = $estilo->outlinecolor;
+				$cor->setrgb($ncor[0],$ncor[1],$ncor[2]);
+			}
 			if($data["size"] != false)
 			{$estilo->set("size",$data["size"]);}
 			if($data["exp"] != false)
