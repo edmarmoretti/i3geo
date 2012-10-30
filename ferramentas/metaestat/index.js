@@ -92,7 +92,7 @@ i3GEOF.metaestat = {
 				};
 				janela = i3GEO.janela.cria(
 						"210px",
-						"100px",
+						"120px",
 						"",
 						"",
 						"",
@@ -125,10 +125,16 @@ i3GEOF.metaestat = {
 			'	<button title="Anima&ccedil;&atilde;o" onclick="i3GEOF.metaestat.analise.ativaAnimacao()"><img src="'+i3GEO.configura.locaplic+'/imagens/gisicons/player-forward.png" /></button>' +
 			'	<button title="Alterar legenda" onclick="i3GEOF.metaestat.analise.alteraLegenda()"><img src="'+i3GEO.configura.locaplic+'/imagens/gisicons/calculator.png" /></button>' +
 			'	<button title="Alterar cores" onclick="i3GEOF.metaestat.analise.alteraCores()"><img src="'+i3GEO.configura.locaplic+'/imagens/gisicons/24-to-8-bits.png" /></button>' +
-			'	<button title="Cortina" onclick="i3GEO.tema.dialogo.cortina()"><img src="'+i3GEO.configura.locaplic+'/imagens/gisicons/mapset.png" /></button>' +
+			'	<button title="'+$trad("t42")+'" onclick="i3GEO.tema.dialogo.cortina()"><img src="'+i3GEO.configura.locaplic+'/imagens/gisicons/mapset.png" /></button>' +
+			'	<button title="'+$trad("t49")+'" onclick="i3GEOF.metaestat.analise.ativaTme()()"><img src="'+i3GEO.configura.locaplic+'/imagens/gisicons/3d-light.png" /></button>' +
 			'</div>' +
 			'<input type=hidden  value="" id="listaColourRampAnaliseMetaestat" onchange="i3GEOF.metaestat.analise.aplicaColourRamp()" />'; //utilizado pelo seletor de colourramp
 			return ins;
+		},
+		ativaTme: function(){
+			i3GEO.tema.dialogo.tme();
+			//i3GEOF.tme.ITEMNOMEREGIOES
+			
 		},
 		ativaAnimacao: function(){
 			i3GEO.util.dialogoFerramenta("i3GEO.mapa.dialogo.animacao()","animacao","animacao","index.js","i3GEOF.metaestat.analise.listaCamadasAnimacao()");

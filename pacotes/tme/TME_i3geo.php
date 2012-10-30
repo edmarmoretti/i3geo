@@ -60,7 +60,8 @@ if(!isset($parametersTME)){
 					     'classification' => 'equal',
 						 'mapTitle' => $_GET["titulo"],
 						 'timeType' => $tipo, //para mais de um ano, escolha slider ou series
-						 'dirtmp' => $dir_tmp
+						 'dirtmp' => $dir_tmp,
+						 'barSize'=> 5000
 	                   );
 }
 $dataConnector = new DataConnector($_GET["sid"],$verificaSID);

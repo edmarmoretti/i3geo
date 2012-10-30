@@ -42,6 +42,9 @@ if(typeof(i3GEOF) === 'undefined'){
 Classe: i3GEOF.tme
 */
 i3GEOF.tme = {
+	//oopcional - nome do item da tabela de atributos que contem os nomes dos elementos
+	//utilizado para definir o valor do combo i3GEOTMEregioes
+	ITEMNOMEREGIOES: "",
 	/*
 	Variavel: tema
 
@@ -109,11 +112,17 @@ i3GEOF.tme = {
 				function(retorno){
 					if($i("i3GEOTMEregioeslista"))
 			 		{$i("i3GEOTMEregioeslista").innerHTML = retorno.dados;}
+					if(i3GEOF.tme.ITEMNOMEREGIOES != ""){
+						$i("i3GEOTMEregioes").value = i3GEOF.tme.ITEMNOMEREGIOES;
+					}
 				},
 				"i3GEOTMEregioeslista"
 			);
 			i3GEO.util.mensagemAjuda("i3GEOtmemen1",$i("i3GEOtmemen1").innerHTML);
 			i3GEOF.tme.ativaFoco();
+			if(i3GEO.arvoreDeCamadas){
+				$i("i3GEOTMEtitulo").value = i3GEO.arvoreDeCamadas.pegaTema(i3GEO.temaAtivo).tema;
+			}
 		}
 		catch(erro){i3GEO.janela.tempoMsg(erro);}
 	},
