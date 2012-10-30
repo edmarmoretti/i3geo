@@ -71,7 +71,7 @@ do arquivo correspondente ao mapfile atualmente em uso
 Quando classe_php.js &eacute; carregado, &eacute; criado o objeto cpJSON que necessita da biblioteca CPAINT. Esse objeto
 &eacute; utilizado nas chamadas AJAX.
 
-O objeto cpJSON possu&iacute; um m&eacute;todo .call que executa a opera&ccedil;&atilde;o AJAX. Esse m&eacute;todo utiliza basicamente dois parâmetros,
+O objeto cpJSON possu&iacute; um m&eacute;todo .call que executa a opera&ccedil;&atilde;o AJAX. Esse m&eacute;todo utiliza basicamente dois parametros,
 sendo o primeiro o endere&ccedil;o do programa PHP que ser&aacute; executado no servidor e o outro &eacute; o nome da fun&ccedil;&atilde;o que ir&aacute;
 receber e processar os resultados do programa. Exemplo:
 
@@ -430,7 +430,7 @@ i3GEO.php = {
 	*/
 	mudatamanho: function(funcao,altura,largura){
 		i3GEO.php.verifica();
-		var p = i3GEO.configura.locaplic+"/ferrametas/opcoes_tamanho/exec.php",
+		var p = i3GEO.configura.locaplic+"/ferramentas/opcoes_tamanho/exec.php",
 			par = "funcao=mudatamanho&altura="+altura+"&largura="+largura+"&g_sid="+i3GEO.configura.sid,
 			retorno = function(retorno){
 				i3GEO.janela.fechaAguarde("mudatamanho");

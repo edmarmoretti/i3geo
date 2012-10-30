@@ -349,8 +349,7 @@ class Atributos
 		if(!$this->layer){
 			return "erro";
 		}
-		if($this->v < 6)
-		{
+		if($this->v < 6){
 			$dadosDaClasse="nao";
 		}
 		$resultadoFinal = array();
@@ -364,23 +363,20 @@ class Atributos
 			$fim = "";
 		}
 		//se tipo for igual a brasil, define a extens&atilde;o geogr&aacute;fica total
-		if ($tipo == "brasil")
-		{
+		if ($tipo == "brasil"){
 			$this->mapa = extPadrao($this->mapa);
 		}
 		$this->layer->set("template","none.htm");
 		$this->layer->setfilter("");
-		if ($this->layer->data == "")
-		{
+		if ($this->layer->data == ""){
 			return "erro. O tema n&atilde;o tem tabela";
 		}
 		//pega os valores
-		if ((!isset($itemtema)) || ($itemtema == ""))
-		{
+		if ((!isset($itemtema)) || ($itemtema == "")){
 			$items = pegaItens($this->layer,$this->mapa);
 		}
-		else
-		{$items[] = $itemtema;
+		else{
+			$items[] = $itemtema;
 		}
 		//pega os alias definidos no metadata itensdesc
 		if($this->layer->getmetadata("itensdesc") != ""){
@@ -388,21 +384,19 @@ class Atributos
 			$aliasdesc = explode(",",$this->layer->getmetadata("itensdesc"));
 			$aliasitens = explode(",",$this->layer->getmetadata("itens"));
 			$aliasc = array_combine($aliasitens,$aliasdesc);
-			if(strtoupper($this->layer->getmetadata("convcaracter")) == "NAO")
-			{
+			if(strtoupper($this->layer->getmetadata("convcaracter")) == "NAO"){
 				$convC = false;
 			}
-			else
-			{$convC = true;
+			else{
+				$convC = true;
 			}
 			foreach($items as $i){
 				if($aliasc[$i]){
-					if($convC)
-					{
+					if($convC){
 						$alias[] = $this->converte($aliasc[$i]);
 					}
-					else
-					{$alias[] = $aliasc[$i];
+					else{
+						$alias[] = $aliasc[$i];
 					}
 				}
 				else{
@@ -418,32 +412,25 @@ class Atributos
 		$res_count = count($shapes);
 		$registros = array();
 		//lista apenas os selecionados
-		if(strtoupper($this->layer->getmetadata("convcaracter")) == "NAO")
-		{
+		if(strtoupper($this->layer->getmetadata("convcaracter")) == "NAO"){
 			$convC = false;
 		}
-		else
-		{$convC = true;
+		else{
+			$convC = true;
 		}
-		if ($tipolista == "selecionados")
-		{
+		if ($tipolista == "selecionados"){
 			$chk = "CHECKED";
-			if ($fim != "")
-			{
-				if (($res_count >= $fim) && ($fim < $res_count))
-				{
+			if ($fim != ""){
+				if (($res_count >= $fim) && ($fim < $res_count)){
 					$res_count = $fim;
 				}
 			}
-			for ($i = $inicio; $i < $res_count; ++$i)
-			{
+			for ($i = $inicio; $i < $res_count; ++$i){
 				$valitem = array();
 				$shape = $shapes[$i];
-				foreach ($items as $item)
-				{
+				foreach ($items as $item){
 					$valori = trim($shape->values[$item]);
-					if($convC == true)
-					{
+					if($convC == true){
 						$valori = $this->converte($valori);
 					}
 					$valitem[] = array("item"=>$item,"valor"=>$valori);
@@ -457,26 +444,22 @@ class Atributos
 							"nome"=>$nome
 					);
 				}
+
 				$registros[] = array("indice"=>$indx,"valores"=>$valitem,"status"=>$chk,"classe"=>$classe);
 			}
 			$resultadoFinal[] = array("registros"=>$registros);
 		}
-		if ($tipolista == "tudo")
-		{
+		if ($tipolista == "tudo"){
 			//ini_set('memory_limit', '500M');
 			$shp_atual = array();
-			for ($i = 0; $i < $res_count;++$i)
-			{
+			for ($i = 0; $i < $res_count;++$i){
 				$shp_atual[$i] = $shapes[$i];;
 			}
 			$chk = "";
-			if (@$this->layer->queryByrect($this->mapa->extent) == MS_SUCCESS)
-			{
+			if (@$this->layer->queryByrect($this->mapa->extent) == MS_SUCCESS){
 				$res_count = $this->layer->getNumresults();
-				if ($fim != "")
-				{
-					if (($res_count >= $fim) && ($fim < $res_count))
-					{
+				if ($fim != ""){
+					if (($res_count >= $fim) && ($fim < $res_count)){
 						$res_count = $fim;
 					}
 				}
@@ -484,8 +467,8 @@ class Atributos
 				if($sopen == MS_FAILURE){
 					return "erro";
 				}
-				for ($i = $inicio; $i < $res_count; ++$i)
-				{
+				$valoresunicos = array();
+				for ($i = $inicio; $i < $res_count; ++$i){
 					$valitem = array();
 					if($this->v == 6){
 						$shape = $this->layer->getShape($this->layer->getResult($i));
@@ -496,26 +479,31 @@ class Atributos
 						$indx  = $result->shapeindex;
 						$shape = $this->layer->getfeature($indx,-1);
 					}
-					foreach ($items as $item)
-					{
+
+					foreach ($items as $item){
 						$valori = "";
-						if(@$shape->values[$item])
-						{
+						if(@$shape->values[$item]){
 							$valori = ($shape->values[$item]);
 						}
-						if($convC == true)
-						{
+						if($convC == true){
 							$valori = $this->converte($valori);
 						}
-						$valitem[] = array("item"=>$item,"valor"=>$valori);
+						if($unico == "sim"){
+							if(!in_array($valori,$valoresunicos)){
+								$valitem[] = array("item"=>$item,"valor"=>$valori);
+							}
+							$valoresunicos[] = $valori;
+						}
+						else{
+							$valitem[] = array("item"=>$item,"valor"=>$valori);
+						}
 					}
 					//if (in_array($shp_index,$shp_atual))
-					if(isset($shp_atual[$indx]))
-					{
+					if(isset($shp_atual[$indx])){
 						$chk = "CHECKED";
 					}
 					$classe = "";
-					if($dadosDaClasse == "sim"){
+					if($dadosDaClasse == "sim" && $unico != "sim"){
 						$indice = $this->layer->getClassIndex($shape);
 						$nome = $this->layer->getclass($indice)->name;
 						$classe = array(
@@ -523,7 +511,9 @@ class Atributos
 								"nome"=>$nome
 						);
 					}
-					$registros[] = array("indice"=>$indx,"valores"=>$valitem,"status"=>$chk,"classe"=>$classe);
+					if(count($valitem) > 0){
+						$registros[] = array("indice"=>$indx,"valores"=>$valitem,"status"=>$chk,"classe"=>$classe);
+					}
 					$chk = "";
 				}
 				$this->layer->close();

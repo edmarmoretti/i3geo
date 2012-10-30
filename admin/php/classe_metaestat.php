@@ -275,15 +275,21 @@ class Metaestat{
 			$dadosAgregacao = $this->listaAgregaRegiaoFilho($dados["codigo_tipo_regiao"], $codigo_tipo_regiao);
 			$sqlgeo = "g.".$dadosAgregacao["colunaligacao_regiaopai"].",sum(d.".$dados["colunavalor"].") as ".$dados["colunavalor"];
 		}
-		//TODO decidir se e soma ou media
+		$tipoconta = "";
+		if($dados["permitesoma"] == 1){
+			$tipoconta = "sum";
+		}
+		elseif($dados["permitemedia"] == 1){
+			$tipoconta = "mean";
+		}
 		if(empty($agruparpor)){
 			$sql .= " FROM ".$dados["esquemadb"].".".$dados["tabela"]." as d ";
 			$sqlgeo .= " FROM ".$dados["esquemadb"].".".$dados["tabela"]." as d,".$dadosgeo["esquemadb"].".".$dadosgeo["tabela"]." as g ";
 		}
 		else{
 			$sqlagrupamento = " SELECT d.".$agruparpor." FROM ".$dados["esquemadb"].".".$dados["tabela"]." as d group by ".$agruparpor." order by ".$agruparpor;
-			$sqlgeo .= " FROM (SELECT sum(".$dados["colunavalor"].") as ".$dados["colunavalor"].",".$dados["colunaidgeo"].",".$agruparpor." FROM ".$dados["esquemadb"].".".$dados["tabela"] ." __dadosfiltro__ group by ".$agruparpor.",".$dados["colunaidgeo"].") as d, ".$dadosgeo["esquemadb"].".".$dadosgeo["tabela"]." as g";
-			$sql .= " FROM (SELECT sum(".$dados["colunavalor"].") as ".$dados["colunavalor"].",".$dados["colunaidgeo"].",".$agruparpor." FROM ".$dados["esquemadb"].".".$dados["tabela"] ." __dadosfiltro__ group by ".$agruparpor.",".$dados["colunaidgeo"].") as d ";
+			$sqlgeo .= " FROM (SELECT $tipoconta(".$dados["colunavalor"].") as ".$dados["colunavalor"].",".$dados["colunaidgeo"].",".$agruparpor." FROM ".$dados["esquemadb"].".".$dados["tabela"] ." __dadosfiltro__ group by ".$agruparpor.",".$dados["colunaidgeo"].") as d, ".$dadosgeo["esquemadb"].".".$dadosgeo["tabela"]." as g";
+			$sql .= " FROM (SELECT $tipoconta(".$dados["colunavalor"].") as ".$dados["colunavalor"].",".$dados["colunaidgeo"].",".$agruparpor." FROM ".$dados["esquemadb"].".".$dados["tabela"] ." __dadosfiltro__ group by ".$agruparpor.",".$dados["colunaidgeo"].") as d ";
 		}
 		$dadosfiltro = "";
 		if(!empty($dados["filtro"])){
@@ -324,8 +330,10 @@ class Metaestat{
 		//indicando onde deve comecar e terminar uma possivel clausula where
 		//ou com /*FA*//*FA*/
 		//para marcar que deve ser utilizado AND ao adicionar o filtro
+		//utiliza-se da mesma forma /*FAT*//*FAT*/ e /*FWT*//*FWT*/ para os filtros de tempo
 		//Layers adicionados aqui sao marcados com o metadata METAESTAT "SIM"
 		//O codigo_tipo_regiao e marcado com o metadata METAESTAT_CODIGO_TIPO_REGIAO
+		//O id da medida da variavel e marcado com o metadata ID_MEDIDA_VARIAVEL
 		$arq = $this->dir_tmp."/".$this->nomecache.".map";
 		if(!file_exists($arq)){
 			if(empty($tipolayer)){
@@ -343,10 +351,10 @@ class Metaestat{
 			$sql = $this->sqlMedidaVariavel($id_medida_variavel,$todasascolunas,$agruparpor,$tipolayer,$codigo_tipo_regiao);
 			$sqlf = $sql["sqlmapserver"];
 			if(!empty($filtro)){
-				$sqlf = str_replace("__filtro__"," AND ".$filtro." /*FA*//*FA*/",$sqlf);
+				$sqlf = str_replace("__filtro__"," AND ".$filtro." /*FA*//*FA*/ /*FAT*//*FAT*/",$sqlf);
 			}
 			else{
-				$sqlf = str_replace("__filtro__","/*FW*//*FW*/",$sqlf);
+				$sqlf = str_replace("__filtro__","/*FW*//*FW*/ /*FWT*//*FWT*/",$sqlf);
 			}
 			$classes = "";
 			if(!empty($id_classificacao)){
@@ -368,6 +376,7 @@ class Metaestat{
 			$dados[] = '		CLASSE "SIM"';
 			$dados[] = '		METAESTAT "SIM"';
 			$dados[] = '		METAESTAT_CODIGO_TIPO_REGIAO "'.$codigo_tipo_regiao.'"';
+			$dados[] = '		ID_MEDIDA_VARIAVEL "'.$id_medida_variavel.'"';
 			$dados[] = '	END';
 			if($classes == ""){
 				$dados[] = '    CLASS';
@@ -426,7 +435,6 @@ class Metaestat{
 			$conexao = "user=".$conexao["usuario"]." password=".$conexao["senha"]." dbname=".$conexao["bancodedados"]." host=".$conexao["host"]." port=".$conexao["porta"]."";
 			$sqlf = $meta["colunageo"]." from (select * from ".$meta["esquemadb"].".".$meta["tabela"]." /*FW*//*FW*/) as foo using unique gid using srid=".$meta["srid"];
 
-			//FIXME calcular versao do symbolset
 			$dados[] = "MAP";
 			$dados[] = 'SYMBOLSET "'.$this->locaplic.'/symbols/simbolosv6.sym"';
 			$dados[] = 'FONTSET   "'.$this->locaplic.'/symbols/fontes.txt"';

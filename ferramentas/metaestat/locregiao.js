@@ -230,7 +230,7 @@ i3GEOF.locregiao = {
 		temp = function(){
 			i3GEO.janela.AGUARDEMODAL = false;
 			i3GEO.janela.fechaAguarde("aguardeFiltroRegiao");
-			i3GEO.Interface.redesenha();
+			i3GEO.Interface.atualizaMapa();
 		};
 		if($i("i3geoLocregiaoFiltroAplicaCk").checked === true){
 			tipo = "regiaopai";
@@ -251,7 +251,7 @@ i3GEOF.locregiao = {
 		temp = function(){
 			i3GEO.janela.AGUARDEMODAL = false;
 			i3GEO.janela.fechaAguarde("aguardeFiltroRegiao");
-			i3GEO.Interface.redesenha();
+			i3GEO.Interface.atualizaMapa();
 		};
 		i3GEO.janela.AGUARDEMODAL = true;
 		i3GEO.janela.abreAguarde("aguardeFiltroRegiao","Filtrando...");

@@ -254,7 +254,7 @@ i3GEOF.filtro = {
 					i3GEO.temaAtivo,
 					itemTema,
 					function(retorno){
-						$i("i3GEOfiltrovalores").innerHTML = "<br><p class=paragrafo >Escolha o valor:"+retorno.dados+"</p>";
+						$i("i3GEOfiltrovalores").innerHTML = "<br><p class=paragrafo >Escolha o valor:"+this.dados+"</p>";
 						if ($i("i3GEOfiltrocbitens")){
 							$i("i3GEOfiltrocbitens").onchange = function()
 							{obj.value = this.value;};

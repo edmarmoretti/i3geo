@@ -1674,6 +1674,7 @@ Pega todos os valores dos itens de uma tabela de um tema.
 		if(!isset($fim)){$fim = "";}
 		if(!isset($tipolista)){$tipolista = "";}
 		if(!isset($itemtema)){$itemtema = "";}
+		if(!isset($unico)){$unico = "";}
 		$legenda = "";
 		if(!isset($dadosDaClasse)){$dadosDaClasse = "nao";}
 		else{
@@ -1686,7 +1687,7 @@ Pega todos os valores dos itens de uma tabela de um tema.
 				}
 			}
 		}
-		$retorno = $m->listaRegistros($itemtema,$tipo,"",$inicio,$fim,$tipolista,$dadosDaClasse);
+		$retorno = $m->listaRegistros($itemtema,$tipo,$unico,$inicio,$fim,$tipolista,$dadosDaClasse);
 		$retorno["legenda"] = $legenda;
 	break;
 /*
