@@ -189,7 +189,7 @@ i3GEOF.metaestat = {
 		filtraPeriodo: {
 			//CAMADAS: "",
 			inicia: function(){
-				i3GEO.janela.tempoMsg("O filtro de per&iacute;odo s&oacute; pode ser aplicado nas camadas (vari&aacute;veis) que possuem dados temporais");
+				i3GEO.janela.tempoMsg("Ao agregar dados por per&iacute;odo a forma de c&aacute;lculo (soma ou m&eacute;dia) &eacute; mantida conforme o orginal da camada j&aacute; existente");
 				if($i("i3GEOF.filtraperiodo_corpo")){
 					return;
 				}
