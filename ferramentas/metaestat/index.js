@@ -305,6 +305,7 @@ i3GEOF.metaestat = {
 				i3GEO.php.listaValoresParametroMedidaVariavel(id_parametro_medida,temp);
 			},
 			adicionaFiltro: function(){
+				i3GEO.janela.tempoMsg("O filtro de tempo n&atilde;o modifica as camadas que foram criadas considerando-se uma data espec&iacute;fica");
 				var p,pini,pfim,
 				temp = function(retorno){
 					i3GEO.janela.fechaAguarde("aguardeAplicaFiltro");
@@ -328,6 +329,20 @@ i3GEOF.metaestat = {
 					i3GEO.janela.fechaAguarde("aguardeAplicaFiltro");
 					return;
 				}
+				i3GEO.util.ajaxGet(p,temp);
+			},
+			removeFiltro: function(){
+				var p,
+				temp = function(retorno){
+					i3GEO.janela.fechaAguarde("aguardeAplicaFiltro");
+					i3GEO.Interface.atualizaMapa();
+				};
+				i3GEO.janela.AGUARDEMODAL = true;
+				i3GEO.janela.abreAguarde("aguardeAplicaFiltro","Aplicando...");
+				i3GEO.janela.AGUARDEMODAL = false;
+				p = i3GEO.configura.locaplic+"/ferramentas/metaestat/analise.php?funcao=removeFiltroTempo" +
+					"&tema="+$i("i3GEOF.filtraperiodo.comboCamada").value +
+					"&g_sid="+i3GEO.configura.sid;
 				i3GEO.util.ajaxGet(p,temp);
 			},
 			pegaParametros:function(id){

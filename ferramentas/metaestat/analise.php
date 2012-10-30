@@ -69,6 +69,9 @@ switch (strtoupper($funcao)){
 	case "APLICAFILTROTEMPO":
 		$retorno = analise_aplicaFiltroTempo($map_file,$tema,$pari,$vali,$parf,$valf);
 	break;
+	case "REMOVEFILTROTEMPO":
+		$retorno = analise_removeFiltroTempo($map_file,$tema);
+	break;
 	case "LISTAFILTROTEMPO":
 		$retorno = listaFiltroTempoRaiz($map_file,$nivel);
 	break;
@@ -126,7 +129,6 @@ function analise_listaCamadasFiltroTempo($map_file){
 	}
 	return $camadas;
 }
-
 function analise_aplicaFiltroTempo($map_file,$tema,$pari,$vali,$parf,$valf){
 	$mapa = ms_newMapObj($map_file);
 	$layer = $mapa->getlayerbyname($tema);
@@ -152,30 +154,21 @@ function analise_aplicaFiltroTempo($map_file,$tema,$pari,$vali,$parf,$valf){
 	}
 	$filtro = implode(" AND ",$filtro);
 	//substitui as strings de filtro no mapfile
-	//verifica se o sql existente necessita de where
-	$where = false;
-	if (strpos($data, "/*FW*/") === true){
-		$where = true;
-	}
-	//se where for verdadeiro, verifica se ja existe o where no filtro normal
-	if($where == true){
-		if(strpos($data, "/*FW*//*FW*/") === true){
-			//nesse caso o where deve ir no filtro de tempo
-			$s = explode("/*FWT*/",$data);
-			$data = $s[0]."/*FWT*/ WHERE ".$filtro." /*FWT*/".$s[2];
-		}
-		else{
-			//nesse caso o where ja existe
-			$s = explode("/*FWT*/",$data);
-			$data = $s[0]."/*FWT*/ ".$filtro." /*FWT*/".$s[2];
-		}
-	}
-	else{
-
-	}
-	//se where for falso, inclui o filtro de tempo normalmente
-
-	echo $data;exit;
+	$s = explode("/*FAT*/",$data);
+	$data = $s[0]."/*FAT*/ AND ".$filtro." /*FAT*/".$s[2];
+	$layer->set("data",$data);
+	$mapa->save($map_file);
+	return "ok";
+}
+function analise_removeFiltroTempo($map_file,$tema){
+	$mapa = ms_newMapObj($map_file);
+	$layer = $mapa->getlayerbyname($tema);
+	$data = $layer->data;
+	//substitui as strings de filtro no mapfile
+	$s = explode("/*FAT*/",$data);
+	$data = $s[0]."/*FAT*//*FAT*/".$s[2];
+	$layer->set("data",$data);
+	$mapa->save($map_file);
 	return "ok";
 }
 function analise_listaCamadasMetaestat($map_file){
@@ -218,20 +211,6 @@ function analise_aplicafiltroregiao($map_file,$codigo_tipo_regiao,$codigo_regiao
 				}
 				else{
 					$data = $s[0]."/*FA*/ AND ".$filtro." /*FA*/".$s[2];
-				}
-			}
-			else{
-				$s = explode("/*FW*/",$data);
-				if(count($s) > 1){
-					if($tipo == ""){
-						$data = $s[0]."/*FW*//*FW*/".$s[2];
-					}
-					else{
-
-						$data = $s[0]."/*FW*/ WHERE ".$filtro." /*FW*/".$s[2];
-						//para o caso de ja existir a clausula where no filtro de tempo
-						$data = str_replace("/*FWT*/ WHERE ","/*FWT*/ ");
-					}
 				}
 			}
 			$l->set("data",$data);

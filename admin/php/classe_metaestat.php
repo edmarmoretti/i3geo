@@ -302,17 +302,7 @@ class Metaestat{
 		$sqlgeo = str_replace("__dadosfiltro__",$dadosfiltro,$sqlgeo);
 		//join com a tabela geo
 		$j = " d.".$dados["colunaidgeo"]."::text = g.".$dadosgeo["identificador"]."::text";
-		/*
-		if($filtro){
-			$sqlgeo .= " AND ".$j;
-		}
-		else{
-			$sqlgeo .= " WHERE ".$j;
-		}
-		*/
-		//if($filtro == false){
-			$sqlgeo .= " WHERE ".$j;
-		//}
+		$sqlgeo .= " WHERE ".$j;
 		//atencao: cuidado ao alterar essa string pois ') as foo' pode ser usado para replace em outras funcoes
 		$colunas = $this->colunasTabela($dados["codigo_estat_conexao"],$dados["esquemadb"],$dados["tabela"]);
 		//@TODO - agregacao com uma regiao maior
@@ -346,15 +336,13 @@ class Metaestat{
 			$titulolayer = mb_convert_encoding($titulolayer,"ISO-8859-1",mb_detect_encoding($titulolayer));
 			$conexao = $this->listaConexao($meta["codigo_estat_conexao"],true);
 			$conexao = "user=".$conexao["usuario"]." password=".$conexao["senha"]." dbname=".$conexao["bancodedados"]." host=".$conexao["host"]." port=".$conexao["porta"]."";
-			//echo $conexao;exit;
-			//echo "$id_medida_variavel,$todasascolunas,$agruparpor,$tipolayer,$codigo_tipo_regiao";exit;
 			$sql = $this->sqlMedidaVariavel($id_medida_variavel,$todasascolunas,$agruparpor,$tipolayer,$codigo_tipo_regiao);
 			$sqlf = $sql["sqlmapserver"];
 			if(!empty($filtro)){
 				$sqlf = str_replace("__filtro__"," AND ".$filtro." /*FA*//*FA*/ /*FAT*//*FAT*/",$sqlf);
 			}
 			else{
-				$sqlf = str_replace("__filtro__","/*FW*//*FW*/ /*FWT*//*FWT*/",$sqlf);
+				$sqlf = str_replace("__filtro__"," /*FA*//*FA*/ /*FAT*//*FAT*/",$sqlf);
 			}
 			$classes = "";
 			if(!empty($id_classificacao)){
