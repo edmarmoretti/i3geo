@@ -147,6 +147,18 @@ i3GEO.arvoreDeCamadas = {
 	*/
 	ARRASTARORDEM: true,
 	/*
+	Propriedade: REFRESH
+
+	Mostra ou n&atilde;o a op&ccedil;&atilde;o que permite atualizar a árvore
+
+	Default:
+	{true}
+
+	Type:
+	{boolean}
+	*/
+	REFRESH: true,
+	/*
 	Propriedade: ARRASTARLIXEIRA
 
 	Ativa a op&ccedil;&atilde;o de arrastar um tema para a lixeria quando se quer remov&ecirc;-lo do mapa.
@@ -712,6 +724,9 @@ i3GEO.arvoreDeCamadas = {
 			estilo = function(i){
 				return " onmouseout='javascript:this.className = \""+i+" iconeMini iconeGuiaMovelMouseOut\";' onmouseover='javascript:this.className = \""+i+" iconeMini iconeGuiaMovelMouseOver\";' class='"+i+" iconeMini iconeGuiaMovelMouseOut' src='"+imb+"' style='cursor:pointer;text-align:left' ";
 			};
+		if(this.REFRESH === true){
+			ins += "<img "+estilo("refresh")+" onclick='i3GEO.arvoreDeCamadas.atualiza(i3GEO.arvoreDeCamadas.CAMADAS,true)' title='Refresh' id='i3geo_refresh'/>";
+		}
 		if(this.ARRASTARLIXEIRA === true)
 		{ins += "<img "+estilo("i3geo_lixeira")+" onclick='i3GEO.arvoreDeCamadas.dialogo.excluir();' id='i3geo_lixeira' title='"+$trad("t2")+"' />";}
 		if(this.FILTRAR === true)
