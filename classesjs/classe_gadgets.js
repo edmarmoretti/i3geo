@@ -520,7 +520,7 @@ i3GEO.gadgets = {
 							{id:"omenudataAdminu1",text: "Login", url: "javascript:i3GEO.login.dialogo.abreLogin()" },
 							{id:"omenudataAdminu2",text: "Logout", url: "javascript:i3GEO.login.dialogo.abreLogout()" }
 						);
-						i3GEO.login.recarrega = true;
+						//i3GEO.login.recarrega = true;
 					}
 					if(i3GEO.login.verificaCookieLogin()){
 						i3GEO.configura.oMenuData.submenus.i3GeoAdmin.push(

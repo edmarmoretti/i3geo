@@ -101,7 +101,7 @@ i3GEO.login = {
 				if($i(i3GEO.login.divnomelogin)){
 					$i(i3GEO.login.divnomelogin).innerHTML = "";
 				}
-				if(i3GEO.login.recarrega == true){
+				if(i3GEO.login.recarrega === true){
 					document.location.reload();
 				}
 			}
@@ -115,9 +115,8 @@ i3GEO.login = {
 	},
 	verificaCookieLogin: function(){
 		var a = i3GEO.util.pegaCookie("i3geocodigologin"),
-			b = i3GEO.util.pegaCookie("i3geocodigologin"),
-			c = i3GEO.util.pegaCookie("i3geousuarionome");
-		if(a && b && c && a != "" && b != "" && c != ""){
+			b = i3GEO.util.pegaCookie("i3geousuarionome");
+		if(a && b && a != "" && b != ""){
 			return true;
 		}
 		else{

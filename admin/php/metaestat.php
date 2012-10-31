@@ -37,21 +37,52 @@ O par&acirc;metro principal &eacute; "funcao", que define qual opera&ccedil;&ati
 Cada opera&ccedil;&atilde;o possu&iacute; seus próprios par&acirc;metros, que devem ser enviados tamb&eacute;m na requisi&ccedil;&atilde;o da opera&ccedil;&atilde;o.
 */
 include_once(__DIR__."/admin.php");
-/*
+
 include_once(__DIR__."/login.php");
 
 $funcoesEdicao = array(
-		"ALTERARSISTEMAS",
-		"ALTERARFUNCOES",
-		"EXCLUIRSISTEMA",
-		"EXCLUIRFUNCAO"
+	"ALTERAVARIAVEL",
+	"ALTERAMEDIDAVARIAVEL",
+	"ALTERAPARAMETROMEDIDA",
+	"ALTERACLASSIFICACAOMEDIDA",
+	"CALCULACLASSIFICACAO",
+	"ALTERACLASSECLASSIFICACAO",
+	"ALTERALINKMEDIDA",
+	"ALTERARFONTEINFO",
+	"ADICIONAFONTEINFOMEDIDA",
+	"ALTERARUNIDADEMEDIDA",
+	"ALTERARCONEXAO",
+	"ALTERARTIPOREGIAO",
+	"ALTERAAGREGAREGIAO",
+	"ALTERARTIPOPERIODO",
+	"EXCLUIRVARIAVEL",
+	"EXCLUIRTIPOPERIODO",
+	"EXCLUIRUNIDADEMEDIDA",
+	"EXCLUIRFONTEINFO",
+	"EXCLUIRFONTEINFOMEDIDA",
+	"EXCLUIRCONEXAO",
+	"EXCLUIRTIPOREGIAO",
+	"EXCLUIRAGREGAREGIAO",
+	"EXCLUIRMEDIDAVARIAVEL",
+	"EXCLUIRPARAMETROMEDIDA",
+	"EXCLUIRCLASSIFICACAOMEDIDA",
+	"EXCLUIRCLASSECLASSIFICACAO",
+	"EXCLUIRLINKMEDIDA",
+	"CRIATABELADB",
+	"ALTERANOMETABELADB",
+	"COPIATABELADB",
+	"CRIACOLUNADB",
+	"ALTERANOMECOLUNADB",
+	"INSERIRDADOS",
+	"MANTEMDADOSREGIAO",
+	"SALVAATRIBUTOSMEDIDAVARIAVEL"
 );
 if(in_array(strtoupper($funcao),$funcoesEdicao)){
-	if(verificaOperacaoSessao("admin/html/sistemas") == false){
+	if(verificaOperacaoSessao("admin/metaestat/geral") == false){
 		retornaJSON("Vc nao pode realizar essa operacao.");exit;
 	}
 }
-*/
+
 include(__DIR__."/classe_metaestat.php");
 error_reporting(0);
 //faz a busca da fun&ccedil;&atilde;o que deve ser executada

@@ -547,6 +547,10 @@ i3GEOF.editorlimites = {
 	},
 	salvaLimite: {
 		inicia: function(){
+			if(i3GEO.login.verificaCookieLogin() === false){
+				i3GEO.janela.tempoMsg("Voc&ecirc; precisa fazer login para usar essa op&ccedil;&atilde;o");
+				return;
+			}
 			var s = i3GEOF.editorlimites.selectedShapes(),
 				n = s.length,
 				janela = YAHOO.i3GEO.janela.manager.find("salvaLimite");
@@ -777,6 +781,10 @@ i3GEOF.editorlimites = {
 			cpJSON.call(p,"foo",temp,"&codigo_tipo_regiao="+codigo_tipo_regiao+"&id_medida_variavel="+id_medida_variavel+"&x="+i3GEOF.editorlimites.editarAtributos.x+"&y="+i3GEOF.editorlimites.editarAtributos.y);
 		},
 		salva: function(){
+			if(i3GEO.login.verificaCookieLogin() === false){
+				i3GEO.janela.tempoMsg("Voc&ecirc; precisa fazer login para usar essa op&ccedil;&atilde;o");
+				return;
+			}
 			var container = $i("editarAtributosForm"),
 				divsT = container.getElementsByTagName("div"),
 				n = divsT.length,
@@ -797,7 +805,6 @@ i3GEOF.editorlimites = {
 				re = new RegExp("idunico_", "g"),//prefixo usado para marcar o id dos elementos input que contem os valores que se quer obter
 				temp = function(retorno){
 					i3GEOF.editorlimites.editarAtributos.pegaDados();
-					i3GEO.janela.AGUARDEMODAL = false;
 					i3GEO.janela.fechaAguarde("aguardeSalvaAtributos");
 				};
 			if(codigo_tipo_regiao == ""){
@@ -828,6 +835,7 @@ i3GEOF.editorlimites = {
 			}
 			i3GEO.janela.AGUARDEMODAL = true;
 			i3GEO.janela.abreAguarde("aguardeSalvaAtributos","Salvando...");
+			i3GEO.janela.AGUARDEMODAL = false;
 			cpJSON.call(p,"foo",temp,"&codigo_tipo_regiao="+codigo_tipo_regiao+"&identificador_regiao="+identificador_regiao+"&id_medida_variavel="+id_medida_variavel+"&colunas="+colunasT[0]+"&valores="+valoresT.join("|")+"&idsunicos="+idsunicosT.join(";"));
 		},
 		criaJanelaFlutuante: function(html){

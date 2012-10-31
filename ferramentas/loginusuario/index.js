@@ -185,7 +185,7 @@ i3GEOF.loginusuario = {
 				i3GEO.util.insereCookie("i3geousuariologin",u,1);
 				i3GEO.util.insereCookie("i3geousuarionome",retorno.data.nome,1);
 				i3GEO.janela.destroi("i3GEOF.loginusuario");
-				if(i3GEO.login.recarrega == true){
+				if(i3GEO.login.recarrega === true){
 					document.location.reload();
 					return;
 				}

@@ -23,6 +23,7 @@ INSERT INTO i3geousr_operacoes (id_operacao, codigo, descricao) VALUES ('14', 'a
 INSERT INTO i3geousr_operacoes (id_operacao, codigo, descricao) VALUES ('15', 'admin/html/webservices', 'cadastro de links para webservices');
 INSERT INTO i3geousr_operacoes (id_operacao, codigo, descricao) VALUES ('16', 'admin/php/editortexto', 'editor de textos para edicao de mapfiles');
 INSERT INTO i3geousr_operacoes (id_operacao, codigo, descricao) VALUES ('17', 'admin/html/usuarios', 'cadastro de usuarios');
+INSERT INTO i3geousr_operacoes (id_operacao, codigo, descricao) VALUES ('18', 'admin/metaestat/geral', 'permite edicoes mais comuns do sistema de metadados estatisticos');
 
 
 -- i3geousr_operacoespapeis
@@ -36,6 +37,7 @@ INSERT INTO i3geousr_operacoespapeis (id_operacao, id_papel) VALUES ('10', '3');
 INSERT INTO i3geousr_operacoespapeis (id_operacao, id_papel) VALUES ('13', '2');
 INSERT INTO i3geousr_operacoespapeis (id_operacao, id_papel) VALUES ('13', '4');
 INSERT INTO i3geousr_operacoespapeis (id_operacao, id_papel) VALUES ('15', '3');
+INSERT INTO i3geousr_operacoespapeis (id_operacao, id_papel) VALUES ('18', '1');
 
 
 -- i3geousr_papeis

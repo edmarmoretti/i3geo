@@ -172,6 +172,8 @@ if(!in_array($teste,16))
 	$dbhw->query("INSERT INTO ".$esquemaadmin."i3geousr_operacoes VALUES(16,'admin/php/editortexto','editor de texto para mapfiles')");
 if(!in_array($teste,17))
 	$dbhw->query("INSERT INTO ".$esquemaadmin."i3geousr_operacoes VALUES('17', 'admin/html/usuarios', 'cadastro de usuarios')");
+if(!in_array($teste,18))
+	$dbhw->query("INSERT INTO ".$esquemaadmin."i3geousr_operacoes VALUES('18', 'admin/metaestat/geral', 'permite edicoes mais comuns do sistema de metadados estatisticos')");
 
 
 $teste = lista("select * from ".$esquemaadmin."i3geousr_operacoes","id_operacao","id_papel");
@@ -195,6 +197,8 @@ if(!in_array($teste,'15-3'))
 	$dbhw->query("INSERT INTO ".$esquemaadmin."i3geousr_operacoespapeis VALUES(15,3)");
 if(!in_array($teste,'16-2'))
 	$dbhw->query("INSERT INTO ".$esquemaadmin."i3geousr_operacoespapeis VALUES(16,2)");
+if(!in_array($teste,'18-1'))
+	$dbhw->query("INSERT INTO ".$esquemaadmin."i3geousr_operacoespapeis VALUES(18,1)");
 //cria o banco de dados de metadados estatisticos
 if(file_exists("../../admin/metaestat.db"))	{
 	echo "<br>Arquivo admin/metaestat.db ja existe. Vc deve apag&aacute;-lo para poder cri&aacute;-lo novamente caso precise";

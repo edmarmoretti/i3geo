@@ -11,7 +11,7 @@
 	</page_setting>
 	<category_index>0</category_index>
 	<zoom>1.0</zoom>
-	<x>193</x>
+	<x>0</x>
 	<y>0</y>
 	<default_color>
 		<r>230</r>
@@ -97,7 +97,7 @@
 			<id></id>
 			<height>-1</height>
 			<width>-1</width>
-				<font_name>Segoe UI</font_name>
+				<font_name>Ubuntu</font_name>
 				<font_size>9</font_size>
 			<x>50</x>
 			<y>50</y>
@@ -110,7 +110,7 @@
 			</connections>
 			<display>false</display>
 			<creation_date>2012-07-19 01:51:14</creation_date>
-			<updated_date>2012-09-09 13:19:23</updated_date>
+			<updated_date>2012-10-31 11:59:37</updated_date>
 			<model_property>
 				<name>Project Name</name>
 				<value></value>
@@ -656,7 +656,7 @@
 			<connections>
 				<relation>
 					<id>0</id>
-					<source>4</source>
+					<source>1</source>
 					<target>2</target>
 					<child_cardinality>1..n</child_cardinality>
 					<parent_cardinality>1</parent_cardinality>
@@ -673,7 +673,7 @@
 				</relation>
 				<relation>
 					<id>1</id>
-					<source>1</source>
+					<source>4</source>
 					<target>2</target>
 					<child_cardinality>1..n</child_cardinality>
 					<parent_cardinality>1</parent_cardinality>
@@ -699,7 +699,7 @@
 				<normal_column>
 					<id>7</id>
 					<referenced_column>0</referenced_column>
-					<relation>1</relation>
+					<relation>0</relation>
 					<description></description>
 					<unique_key_name></unique_key_name>
 					<logical_name></logical_name>
@@ -732,7 +732,7 @@
 				<normal_column>
 					<id>8</id>
 					<referenced_column>11</referenced_column>
-					<relation>0</relation>
+					<relation>1</relation>
 					<description></description>
 					<unique_key_name></unique_key_name>
 					<logical_name></logical_name>
@@ -787,7 +787,7 @@
 			<connections>
 				<relation>
 					<id>2</id>
-					<source>6</source>
+					<source>4</source>
 					<target>3</target>
 					<child_cardinality>1..n</child_cardinality>
 					<parent_cardinality>1</parent_cardinality>
@@ -804,7 +804,7 @@
 				</relation>
 				<relation>
 					<id>3</id>
-					<source>4</source>
+					<source>6</source>
 					<target>3</target>
 					<child_cardinality>1..n</child_cardinality>
 					<parent_cardinality>1</parent_cardinality>
@@ -830,7 +830,7 @@
 				<normal_column>
 					<id>9</id>
 					<referenced_column>16</referenced_column>
-					<relation>2</relation>
+					<relation>3</relation>
 					<description></description>
 					<unique_key_name></unique_key_name>
 					<logical_name></logical_name>
@@ -863,7 +863,7 @@
 				<normal_column>
 					<id>10</id>
 					<referenced_column>11</referenced_column>
-					<relation>3</relation>
+					<relation>2</relation>
 					<description></description>
 					<unique_key_name></unique_key_name>
 					<logical_name></logical_name>
@@ -989,7 +989,7 @@
 					</sequence>
 				</normal_column>
 				<normal_column>
-					<word_id>3</word_id>
+					<word_id>4</word_id>
 					<id>13</id>
 					<description></description>
 					<unique_key_name></unique_key_name>
@@ -1045,7 +1045,7 @@
 			<connections>
 				<relation>
 					<id>4</id>
-					<source>1</source>
+					<source>7</source>
 					<target>5</target>
 					<child_cardinality>1..n</child_cardinality>
 					<parent_cardinality>1</parent_cardinality>
@@ -1062,7 +1062,7 @@
 				</relation>
 				<relation>
 					<id>5</id>
-					<source>7</source>
+					<source>1</source>
 					<target>5</target>
 					<child_cardinality>1..n</child_cardinality>
 					<parent_cardinality>1</parent_cardinality>
@@ -1088,7 +1088,7 @@
 				<normal_column>
 					<id>14</id>
 					<referenced_column>0</referenced_column>
-					<relation>4</relation>
+					<relation>5</relation>
 					<description></description>
 					<unique_key_name></unique_key_name>
 					<logical_name></logical_name>
@@ -1121,7 +1121,7 @@
 				<normal_column>
 					<id>15</id>
 					<referenced_column>19</referenced_column>
-					<relation>5</relation>
+					<relation>4</relation>
 					<description></description>
 					<unique_key_name></unique_key_name>
 					<logical_name></logical_name>
@@ -1247,7 +1247,7 @@
 					</sequence>
 				</normal_column>
 				<normal_column>
-					<word_id>4</word_id>
+					<word_id>3</word_id>
 					<id>18</id>
 					<description></description>
 					<unique_key_name></unique_key_name>
@@ -2010,6 +2010,20 @@
 								<value>cadastro de usuarios</value>
 							</column_data>
 						</data>
+						<data>
+							<column_data>
+								<column_id>16</column_id>
+								<value>18</value>
+							</column_data>
+							<column_data>
+								<column_id>17</column_id>
+								<value>admin/metaestat/geral</value>
+							</column_data>
+							<column_data>
+								<column_id>18</column_id>
+								<value>permite edicoes mais comuns do sistema de metadados estatisticos</value>
+							</column_data>
+						</data>
 					</direct_test_data>
 					<repeat_test_data>
 						<test_data_num>0</test_data_num>
@@ -2163,6 +2177,16 @@
 							<column_data>
 								<column_id>10</column_id>
 								<value>3</value>
+							</column_data>
+						</data>
+						<data>
+							<column_data>
+								<column_id>9</column_id>
+								<value>18</value>
+							</column_data>
+							<column_data>
+								<column_id>10</column_id>
+								<value>1</value>
 							</column_data>
 						</data>
 					</direct_test_data>

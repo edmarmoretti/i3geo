@@ -189,6 +189,8 @@ i3GEO.finalizaAPI = function(){
 	i3GEOF.locregiao.iniciaJanelaFlutuante();
 	YAHOO.i3GEO.janela.manager.find("i3GEOF.locregiao").moveTo(100,40);
 }
+//a pagina nao e recarregada quando o usuario faz login
+i3GEO.login.recarrega = false;
 i3GEO.inicia();
 </script>
 </body>

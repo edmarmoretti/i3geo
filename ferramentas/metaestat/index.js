@@ -716,15 +716,22 @@ i3GEOF.metaestat = {
 			);
 		},
 		ativa: function(iddiv){
-			i3GEOadmin.variaveis.inicia();
-			if(!iddiv){
-				iddiv = "i3geoCartoEditor_corpo";
-			}
-			if(i3GEOF.metaestat.INTERFACE == "flutuante"){
-				i3GEOF.metaestat.editor.abreJanela();
-			}
-			$i(iddiv).innerHTML = i3GEOF.metaestat.editor.html();
-			i3GEOF.metaestat.editor.t0();
+			var loginok = function(){
+				i3GEOadmin.variaveis.inicia();
+				if(!iddiv){
+					iddiv = "i3geoCartoEditor_corpo";
+				}
+				if(i3GEOF.metaestat.INTERFACE == "flutuante"){
+					i3GEOF.metaestat.editor.abreJanela();
+				}
+				$i(iddiv).innerHTML = i3GEOF.metaestat.editor.html();
+				i3GEOF.metaestat.editor.t0();
+			},
+			loginNok = function(){
+				i3GEO.janela.tempoMsg("Voc&ecirc; precisa fazer login para usar essa op&ccedil;&atilde;o");
+			};
+			//verifica login
+			i3GEO.login.verificaOperacao("admin/metaestat/geral",i3GEO.configura.locaplic, loginok, "sessao",loginNok);
 		},
 		abreJanela: function(){
 			var cabecalho,minimiza,imagemxy,janela;
