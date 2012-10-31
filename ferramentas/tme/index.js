@@ -42,9 +42,12 @@ if(typeof(i3GEOF) === 'undefined'){
 Classe: i3GEOF.tme
 */
 i3GEOF.tme = {
-	//oopcional - nome do item da tabela de atributos que contem os nomes dos elementos
+	//opcional - nome do item da tabela de atributos que contem os nomes dos elementos
 	//utilizado para definir o valor do combo i3GEOTMEregioes
 	ITEMNOMEREGIOES: "",
+	//opcional - nome do item da tabela de atributos que contem os dados dos elementos
+	//utilizado para definir item que iniciará marcado na lista de itens que indica a coluna que contem os dados
+	ITEMDADOS: "",
 	/*
 	Variavel: tema
 
@@ -146,7 +149,7 @@ i3GEOF.tme = {
 		'<br><br>Coluna que cont&eacute;m os nomes das regi&otilde;es (exemplo: nomes dos Estados ou nomes dos munic&iacute;pios):' +
 		'<div id="i3GEOTMEregioeslista" style="text-align:left;" ></div>' +
 		'<p class="paragrafo" >' +
-		'<br>Escolha uma ou mais colunas que cont&eacute;m os dados estat&iacute;sticos que ser&atilde;o representados:' +
+		'<br>Escolha uma ou mais colunas com os dados estat&iacute;sticos que ser&atilde;o representados:' +
 		'<div id=i3GEOtmelistai class=digitar style="text-align:left;left:0px;top:0px;330px;height:80px;overflow:auto;display:block;"></div>' +
 		'<br>' +
 		'<input id=i3GEOtmebotao1 size=35  type=button value="Aplicar" />' +
@@ -212,8 +215,6 @@ i3GEOF.tme = {
 	Monta a lista de itens que poder&atilde;o ser escolhidos para compor o mapa.
 
 	A lista &eacute; inserida no elemento html com id "i3GEOtmelistai"
-
-	TODO marcar os itens existentes
 	*/
 	montaListaItens: function(retorno){
 		var ins,i,n,item;
@@ -228,6 +229,9 @@ i3GEOF.tme = {
 			}
 			$i("i3GEOtmelistai").innerHTML = ins.join("");
 			ins.push("</table>");
+			if(i3GEOF.tme.ITEMDADOS != "" && $i("i3GEOtme"+i3GEOF.tme.ITEMDADOS)){
+				$i("i3GEOtme"+i3GEOF.tme.ITEMDADOS).checked = true;
+			}
 		}
 		catch(e)
 		{$i("i3GEOtmelistai").innerHTML = "<p style=color:red >Ocorreu um erro<br>"+e;}

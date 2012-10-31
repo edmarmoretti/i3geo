@@ -126,15 +126,32 @@ i3GEOF.metaestat = {
 			'	<button title="Alterar legenda" onclick="i3GEOF.metaestat.analise.alteraLegenda()"><img src="'+i3GEO.configura.locaplic+'/imagens/gisicons/calculator.png" /></button>' +
 			'	<button title="Alterar cores" onclick="i3GEOF.metaestat.analise.alteraCores()"><img src="'+i3GEO.configura.locaplic+'/imagens/gisicons/24-to-8-bits.png" /></button>' +
 			'	<button title="'+$trad("t42")+'" onclick="i3GEO.tema.dialogo.cortina()"><img src="'+i3GEO.configura.locaplic+'/imagens/gisicons/mapset.png" /></button>' +
-			'	<button title="'+$trad("t49")+'" onclick="i3GEOF.metaestat.analise.ativaTme()()"><img src="'+i3GEO.configura.locaplic+'/imagens/gisicons/3d-light.png" /></button>' +
+			'	<button title="'+$trad("t49")+'" onclick="i3GEOF.metaestat.analise.ativaTme()"><img src="'+i3GEO.configura.locaplic+'/imagens/gisicons/3d-light.png" /></button>' +
 			'</div>' +
 			'<input type=hidden  value="" id="listaColourRampAnaliseMetaestat" onchange="i3GEOF.metaestat.analise.aplicaColourRamp()" />'; //utilizado pelo seletor de colourramp
 			return ins;
 		},
 		ativaTme: function(){
-			i3GEO.tema.dialogo.tme();
+			if(i3GEO.temaAtivo != ""){
+				//faz a carga do javascript e depois executa abreTme para definir os parametros
+				i3GEO.util.dialogoFerramenta("i3GEO.tema.dialogo.tme()","tme","tme","index.js","i3GEOF.metaestat.analise.abreTme()");
+			}
+			else{
+				i3GEO.tema.dialogo.tme();
+			}
+		},
+		abreTme: function(){
 			//i3GEOF.tme.ITEMNOMEREGIOES
-			
+			var p = i3GEO.configura.locaplic+"/ferramentas/metaestat/analise.php?g_sid="+i3GEO.configura.sid +
+				"&funcao=pegaDadosTME&tema="+i3GEO.temaAtivo,
+				temp = function(retorno){
+					i3GEO.janela.fechaAguarde("aguardeBuscaDados");
+					i3GEOF.tme.ITEMNOMEREGIOES = retorno.data.itemNomeRegioes;
+					i3GEOF.tme.ITEMDADOS = retorno.data.itemDados;
+					i3GEOF.tme.iniciaJanelaFlutuante();
+				};
+			i3GEO.janela.abreAguarde("aguardeBuscaDados","Aguarde...");
+			i3GEO.util.ajaxGet(p,temp);
 		},
 		ativaAnimacao: function(){
 			i3GEO.util.dialogoFerramenta("i3GEO.mapa.dialogo.animacao()","animacao","animacao","index.js","i3GEOF.metaestat.analise.listaCamadasAnimacao()");
@@ -187,7 +204,7 @@ i3GEOF.metaestat = {
 					"&tema="+i3GEO.temaAtivo +
 					"&cores=" + cores;
 				i3GEO.janela.AGUARDEMODAL = true;
-				i3GEO.janela.abreAguarde("Aplicando...","aguardeAplicaCores");
+				i3GEO.janela.abreAguarde("aguardeAplicaCores","Aplicando...");
 				i3GEO.janela.AGUARDEMODAL = false;
 				i3GEO.util.ajaxGet(p,temp);
 			}

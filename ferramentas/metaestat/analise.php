@@ -75,12 +75,30 @@ switch (strtoupper($funcao)){
 	case "LISTAFILTROTEMPO":
 		$retorno = listaFiltroTempoRaiz($map_file,$nivel);
 	break;
+	case "PEGADADOSTME":
+		$retorno = pegaDadosTME($map_file,$tema);
+	break;
 }
 if (!connection_aborted()){
 	cpjson($retorno);
 }
 else
 {exit();}
+function pegaDadosTME($map_file,$tema){
+	$retorno = array("itemNomeRegioes"=>"","itemDados"=>"");
+	$mapa = ms_newMapObj($map_file);
+	$layer = $mapa->getlayerbyname($tema);
+	$id_medida_variavel = $layer->getmetadata("ID_MEDIDA_VARIAVEL");
+	$m = new Metaestat();
+
+	if($id_medida_variavel != ""){
+		$variavel = $m->listaMedidaVariavel("",$id_medida_variavel);
+		$codigo_tipo_regiao = $variavel["codigo_tipo_regiao"];
+		$regioes = $m->listaTipoRegiao($codigo_tipo_regiao);
+		$retorno = array("itemNomeRegioes"=>$regioes["colunanomeregiao"],"itemDados"=>$variavel["colunavalor"]);
+	}
+	return $retorno;
+}
 function listaFiltroTempoRaiz($map_file,$nivel){
 	$mapa = ms_newMapObj($map_file);
 	$layers = analise_listaLayersMetaestat($mapa);
