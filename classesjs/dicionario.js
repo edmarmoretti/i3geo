@@ -1369,7 +1369,7 @@ it:"Misura l'area di un poligono tracciato sullo schermo. Il calcolo della super
 }],
 "d21at":[
 {
-pt:-"&aacute;rea",
+pt:"&aacute;rea",
 en:"area",
 es:"&aacute;rea",
 it:"&aacute;rea"

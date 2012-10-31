@@ -1152,6 +1152,16 @@ i3GEO.configura = {
 				rotaEvento = GEvent.addListener(i3GeoMap, "click", parametrosRota);
 				i3GEO.janela.tempoMsg("Clique o ponto de origem da rota");
 			}
+		},
+		{
+			//abre a legenda
+			iddiv:"abreJanelaLegenda",
+			tipo:"",
+			dica:$trad("p3"),
+			titulo:$trad("p3"),
+			funcaoonclick:function(){
+				i3GEO.mapa.legendaHTML.libera("sim");
+			}
 		}
 	]}
 };

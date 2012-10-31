@@ -427,8 +427,15 @@ i3GEO.mapa = {
 		Function: libera
 
 		Libera a legenda criando uma janela flutuante sobre o mapa
+
+		Parametros:
+
+		ck - sim|nao - (opcional) inclui ou nao o checkbox que permitem desligar a camada
 		*/
-		libera: function(){
+		libera: function(ck){
+			if(!ck){
+				ck = "nao";
+			}
 			if(typeof(console) !== 'undefined'){console.info("i3GEO.mapa.legendaHTML.libera()");}
 			var temp = function(retorno){
 				var novoel,temp,n,i,janela;
@@ -436,7 +443,7 @@ i3GEO.mapa = {
 					novoel = document.createElement("div");
 					novoel.id = "moveLegi";
 					novoel.style.display="block";
-					temp = '<div class="hd"  >Legenda</div>';
+					temp = '<div class="hd"  >'+$trad("p3")+'</div>';
 					temp += '<div id="wlegenda" style="display:block;padding:5px 2px 5px 0px;text-align:left;background-color:white;height:300px;width:300px;overflow:auto" ></div>';
 					novoel.innerHTML = temp;
 					document.body.appendChild(novoel);
@@ -455,10 +462,12 @@ i3GEO.mapa = {
 					janela = YAHOO.i3GEO.janela.manager.find("moveLegi");
 				}
 				$i("wlegenda").innerHTML = retorno.data.legenda;
-				temp = $i("wlegenda").getElementsByTagName("input");
-				n = temp.length;
-				for(i=0;i<n;i += 1){
-					temp[i].style.display = "none";
+				if(ck === "nao"){
+					temp = $i("wlegenda").getElementsByTagName("input");
+					n = temp.length;
+					for(i=0;i<n;i += 1){
+						temp[i].style.display = "none";
+					}
 				}
 				janela.show();
 			};

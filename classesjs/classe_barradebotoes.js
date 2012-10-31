@@ -277,6 +277,8 @@ i3GEO.barraDeBotoes = {
 
 	INCLUIBOTAO: {
 
+		abreJanelaLegenda: false,
+
 		zoomli: false,
 
 		zoomiauto: false,
@@ -334,6 +336,7 @@ i3GEO.barraDeBotoes = {
 	{obj}
 	*/
 	INCLUIBOTAO: {
+		abreJanelaLegenda: true,
 		localizar: true,
 		zoomli: true,
 		zoomiauto: false,
@@ -420,7 +423,9 @@ i3GEO.barraDeBotoes = {
 
 		barraedicao: "/imagens/gisicons/eudock/editopen.png",
 
-		localizar: "/imagens/gisicons/eudock/search.png"
+		localizar: "/imagens/gisicons/eudock/search.png",
+
+		abreJanelaLegenda: "/imagens/gisicons/eudock/legenda.png"
 	}
 
 	Type:
@@ -452,7 +457,8 @@ i3GEO.barraDeBotoes = {
 		inseregrafico: "/imagens/gisicons/eudock/grafico.png",
 		v3d: "/imagens/gisicons/eudock/v3d.png",
 		barraedicao: "/imagens/gisicons/eudock/editopen.png",
-		localizar: "/imagens/gisicons/eudock/search.png"
+		localizar: "/imagens/gisicons/eudock/search.png",
+		abreJanelaLegenda: "/imagens/gisicons/eudock/show-legend.png"
 	},
 	/*
 	Propriedade: TEMPLATEBOTAO
