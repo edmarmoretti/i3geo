@@ -1360,7 +1360,7 @@ function criaSHP($tema,$map_file,$locaplic,$dir_tmp,$nomeRand=TRUE)
 	if ($layer->type == MS_LAYER_LINE){$tipol = MS_SHP_ARC;}
 	if ($layer->type == MS_LAYER_POLYGON){$tipol = MS_SHP_POLYGON;}
 	if ($nomeRand == true)
-	{$novonomelayer = nomeRandomico(20);}
+	{$novonomelayer = $tema."_".nomeRandomico(5);}
 	else
 	{$novonomelayer = $tema;}
 	$nomeshp = $dir_tmp."/".$novonomelayer;

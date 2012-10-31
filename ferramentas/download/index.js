@@ -50,34 +50,43 @@ i3GEOF.download = {
 	},
 	/*
 	Function: iniciaDicionario
-	
+
 	Carrega o dicion&aacute;rio e chama a fun&ccedil;&atilde;o que inicia a ferramenta
-	
+
 	O Javascript &eacute; carregado com o id i3GEOF.nomedaferramenta.dicionario_script
-	*/	
+	*/
 	iniciaDicionario: function(tema){
 		if(typeof(i3GEOF.download.dicionario) === 'undefined'){
-			i3GEO.util.scriptTag(
-				i3GEO.configura.locaplic+"/ferramentas/download/dicionario.js",
-				"i3GEOF.download.iniciaJanelaFlutuante('"+tema+"')",
-				"i3GEOF.download.dicionario_script"
-			);
+			if(!tema){
+				i3GEO.util.scriptTag(
+					i3GEO.configura.locaplic+"/ferramentas/download/dicionario.js",
+					"i3GEOF.download.iniciaJanelaFlutuante()",
+					"i3GEOF.download.dicionario_script"
+				);
+			}
+			else{
+				i3GEO.util.scriptTag(
+					i3GEO.configura.locaplic+"/ferramentas/download/dicionario.js",
+					"i3GEOF.download.iniciaJanelaFlutuante('"+tema+"')",
+					"i3GEOF.download.dicionario_script"
+				);
+			}
 		}
 		else{
 			i3GEOF.download.iniciaJanelaFlutuante(tema);
 		}
-	},	
+	},
 	/*
 	Function: html
-	
+
 	Gera o c&oacute;digo html para apresenta&ccedil;&atilde;o das op&ccedil;&otilde;es da ferramenta
-	
+
 	Veja:
-	
+
 	<DOWNLOAD2>
 
 	Parametros:
-	
+
 	divid {String} - id do div que receber&aacute; o conteudo HTML da ferramenta
 
 	tema {String} - c&oacute;digo do tema
@@ -112,17 +121,17 @@ i3GEOF.download = {
 		p = i3GEO.configura.locaplic+"/classesphp/mapa_controle.php?g_sid="+i3GEO.configura.sid+"&funcao=download2&tema="+tema;
 		cp = new cpaint();
 		cp.set_response_type("JSON");
-		cp.call(p,"downloadTema",mostraDownload);		
+		cp.call(p,"downloadTema",mostraDownload);
 	},
 	/*
 	Function: iniciaJanelaFlutuante
-	
+
 	Cria a janela flutuante para controle da ferramenta.
-	
+
 	Parametros:
-	
+
 	tema {String} - c&oacute;digo do tema
-	*/	
+	*/
 	iniciaJanelaFlutuante: function(tema){
 		var janela,divid,titulo;
 		if(arguments.length == 0)
