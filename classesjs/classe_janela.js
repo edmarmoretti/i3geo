@@ -579,12 +579,12 @@ i3GEO.janela = {
 			YAHOO.i3GEO.janela.managerAguarde.register(janela);
 		}
 		janela.setBody(texto);
-		altura = 40;
+		altura = 70;
 		janela.body.style.padding="5px";
 		janela.body.style.backgroundColor="yellow";
 		janela.body.style.height="0px";
 		janela.body.style.overflow = "hidden";
-		janela.body.onmouseover = function(){
+		janela.body.onclick = function(){
 			var janela = YAHOO.i3GEO.janela.managerAguarde.find("i3geoTempoMsg");
 			if(janela){
 				janela.destroy();

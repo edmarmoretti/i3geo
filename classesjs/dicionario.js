@@ -1968,6 +1968,13 @@ pt:"Remover",
 en:"",
 es:"",
 it:""
+}],
+"x63":[
+{
+pt:"Para salvar as configura&ccedil;&otilde;es de uma camada,<br> utilize a op&ccedil;&atilde;o existente na &aacute;rvore de camadas no n&oacute; correspondente ao tema (basta expandir o tema para visualizar as op&ccedil;&otilde;es)<br><br>",
+en:"",
+es:"",
+it:""
 }]
 };
 //YAHOO.log("carregou dicionario", "Classes i3geo");
