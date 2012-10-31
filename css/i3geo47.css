@@ -763,6 +763,15 @@ background-position: 0px -1078px;
 width:18px;
 height:18px;
 }
+#i3geo_refresh
+{
+background-image:URL('../imagens/visual/default/sprite.png');
+background-repeat: no-repeat;
+background-position: 0px -2205px;
+width:18px;
+height:18px;
+cursor:pointer;
+}
 .upload
 {
 background-image:URL('../imagens/visual/default/sprite.png');
