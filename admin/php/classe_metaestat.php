@@ -264,10 +264,10 @@ class Metaestat{
 		$vis = str_replace(" ",",",$vis);
 		$vis = str_replace(",,",",",$vis);
 		$vis = explode(",",$vis);
-		$vis[] = $colunageo;
+		//$vis[] = "st_setsrid($colunageo,".$dadosgeo["srid"].") as $colunageo";
 		$vis = array_unique($vis);
 		$vis = implode(",g.",$vis);
-		$vis = "g.".$vis;
+		$vis = "g.".$vis.",st_setsrid(g.".$colunageo.",".$dadosgeo["srid"].") as ".$colunageo;
 		//$sqlgeo = $sql.",g.".$colunageo;
 		$sqlgeo = $sql.",".$vis;
 		//
@@ -371,6 +371,10 @@ class Metaestat{
 				$dados[] = '        NAME ""';
 				$dados[] = '        STYLE';
 				$dados[] = '        	COLOR 200 0 0';
+				if(strtolower($tipolayer) == "point"){
+					$dados[] = '        SYMBOL "ponto"';
+					$dados[] = '        SIZE 5';
+				}
 				$dados[] = '        END';
 				$dados[] = '    END';
 			}
@@ -385,8 +389,14 @@ class Metaestat{
 					if(!empty($classe["tamanho"])){
 						$dados[] = '        SIZE '.$classe["tamanho"];
 					}
+					elseif(strtolower($tipolayer) == "point"){
+						$dados[] = '        SIZE 5';
+					}
 					if(!empty($classe["simbolo"])){
 						$dados[] = '        SYMBOL '.$classe["simbolo"];
+					}
+					elseif(strtolower($tipolayer) == "point"){
+						$dados[] = '        SYMBOL ponto';
 					}
 					if(!empty($classe["otamanho"])){
 						$dados[] = '        OUTLINEWIDTH '.$classe["otamanho"];

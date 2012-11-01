@@ -2218,6 +2218,7 @@ function cpjson($obj){
 	}
 	else
 	{
+		ob_end_clean();
 		include_once("../pacotes/cpaint/cpaint2.inc.php");
 		$cp = new cpaint();
 		$cp->set_data($obj);

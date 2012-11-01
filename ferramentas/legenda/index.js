@@ -366,23 +366,25 @@ i3GEOF.legenda = {
 		'	</div>'+
 		'</div>'+
 		'<div id=i3GEOlegendaguia2obj style="width:99%;text-align:left;">'+
-		'	<p class=paragrafo >&nbsp;<input type=checkbox onclick="" checked id=i3GEOFlegendaaplicaextent style="cursor:pointer;border:0px solid white;" /> <span style="cursor:pointer;position:relative;top:-2px;">marque para considerar apenas os elementos vis&iacute;veis na extens&atilde;o geogr&aacute;fica atual, caso contr&aacute;rio, ser&aacute; considerada a extens&atilde;o geogr&aacute;fica inicial do mapa</span></p>' +
-		'	<p class=paragrafo >Ao gerar as classes, ignorar os valores (separe com v&iacute;rgula):<br>'+
+		'	<div id=i3GEOFlegendaClassesOpcionais >' +
+		'		<p class=paragrafo >&nbsp;<input type=checkbox onclick="" checked id=i3GEOFlegendaaplicaextent style="cursor:pointer;border:0px solid white;" /> <span style="cursor:pointer;position:relative;top:-2px;">marque para considerar apenas os elementos vis&iacute;veis na extens&atilde;o geogr&aacute;fica atual, caso contr&aacute;rio, ser&aacute; considerada a extens&atilde;o geogr&aacute;fica inicial do mapa</span></p>' +
+		'		<p class=paragrafo >Ao gerar as classes, ignorar os valores (separe com v&iacute;rgula):<br>'+
 		$inputText("","","i3GEOlegendaignorar","",20,"") +
-		'	<hr><p class=paragrafo >Transforma a representa&ccedil;&atilde;o geom&eacute;trica dos elementos do tema. Ap&oacute;s alterar esse parâmetro, pode ser necess&aacute;rio modificar as caracter&iacute;sticas do s&iacute;mbolo.</p>'+
-		'	<p class=paragrafo >' +
-		'	<select id=i3GEOlegentaTipoGeo >'+
-		'		<option value="">nenhuma transforma&ccedil;&atilde;o</option>'+
-		'		<option value="centroid">centr&oacute;ide</option>'+
-		'		<option value="bbox">box</option>'+
-		'		<option value="vertices">v&eacute;rtices</option>'+
-		'		<option value="start">v&eacute;rtice inicial</option>'+
-		'		<option value="end">v&eacute;rtice final</option>'+
-		'	</select>'+
-		'	<p class=paragrafo >' +
-		'	<input id=i3GEOlegendabotao17 size="35" type="button" value="Altera geometria"></p>'+
-		'	<hr><p class=paragrafo >Altera o tipo de representa&ccedil;&atilde;o do tema. Se for poligonal, passa para linear e vice-versa.</p>'+
-		'	<p class=paragrafo ><input id=i3GEOlegendabotao7 size="25" type="button" value="Altera tipo"></p>'+
+		'		<hr><p class=paragrafo >Transforma a representa&ccedil;&atilde;o geom&eacute;trica dos elementos do tema. Ap&oacute;s alterar esse parâmetro, pode ser necess&aacute;rio modificar as caracter&iacute;sticas do s&iacute;mbolo.</p>'+
+		'		<p class=paragrafo >' +
+		'		<select id=i3GEOlegentaTipoGeo >'+
+		'			<option value="">nenhuma transforma&ccedil;&atilde;o</option>'+
+		'			<option value="centroid">centr&oacute;ide</option>'+
+		'			<option value="bbox">box</option>'+
+		'			<option value="vertices">v&eacute;rtices</option>'+
+		'			<option value="start">v&eacute;rtice inicial</option>'+
+		'			<option value="end">v&eacute;rtice final</option>'+
+		'		</select>'+
+		'		<p class=paragrafo >' +
+		'		<input id=i3GEOlegendabotao17 size="35" type="button" value="Altera geometria"></p>'+
+		'		<hr><p class=paragrafo >Altera o tipo de representa&ccedil;&atilde;o do tema. Se for poligonal, passa para linear e vice-versa.</p>'+
+		'		<p class=paragrafo ><input id=i3GEOlegendabotao7 size="25" type="button" value="Altera tipo"></p>'+
+		'	</div>' +
 		'	<hr><p class=paragrafo >Todos os elementos ser&atilde;o desenhados com um &uacute;nico s&iacute;mbolo</p>'+
 		'	<p class=paragrafo ><input id=i3GEOlegendabotao5 size="25" type="button" value="S&iacute;mbolo &uacute;nico"></p>'+
 		'	<hr><p class=paragrafo >Cada ocorr&ecirc;ncia de um valor para o item selecionado, ser&aacute; desenhado com o mesmo s&iacute;mbolo</p>'+

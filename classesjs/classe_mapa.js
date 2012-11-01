@@ -511,7 +511,7 @@ i3GEO.mapa = {
 		Abre a janela de dialogo da ferramenta de cartogramas estatisticos METAESTAT
 		*/
 		metaestat: function(){
-			i3GEO.util.dialogoFerramenta("i3GEO.mapa.dialogo.metaestat()","metaestat","metaestat");
+			i3GEO.util.dialogoFerramenta("i3GEO.mapa.dialogo.metaestat()","metaestat","metaestat","index.js","i3GEOF.metaestat.inicia()");
 		},
 		/*
 		Function: locregiao

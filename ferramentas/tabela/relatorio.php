@@ -40,6 +40,7 @@ if($ext && $ext != ""){
 }
 $layer = $mapa->getlayerbyname($temarel);
 $layer->set("template","none.html");
+//$layer->set("data",$layer->data."options='-c client_encoding=LATIN1'");
 $existesel = "nao";
 /*
 if (file_exists($map_file."qy"))
@@ -61,11 +62,12 @@ for ($i = 0; $i < $res_count; $i++)
 	$valitem = array();
 	if($versao == 6)
 	{$shape = $layer->getShape($layer->getResult($i));}
-	else{$shape = $layer->getFeature($layer->getResult($i)->shapeindex);}	
+	else{$shape = $layer->getFeature($layer->getResult($i)->shapeindex);}
 	$grupo = "";
 	foreach ($itensrel as $item)
 	{
 		$v = trim($shape->values[$item]);
+		//$v = mb_convert_encoding($v,mb_detect_encoding($v),"ISO-8859-1");
 		if (function_exists("mb_convert_encoding") && $convC == true)
 		{$v = mb_convert_encoding($v,"UTF-8","ISO-8859-1");}
 		$valitem[$item] = $v;
@@ -102,9 +104,11 @@ if(isset($tiporel) && $tiporel == "csv")
 	exit;
 }
 ?>
-<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/strict.dtd">
+
 <html>
 <head>
+<META HTTP-EQUIV="Content-Type" CONTENT="text/html; charset=ISO-8859-1">
 <title>i3Geo</title>
 </head>
 <style>
@@ -263,7 +267,7 @@ function calculaarea($geo)
 	$shape = ms_shapeObjFromWkt($g);
 	$rect = $shape->bounds;
 	$projInObj = ms_newprojectionobj("proj=latlong");
-	$projOutObj = ms_newprojectionobj("proj=laea,lat_0=".$rect->miny.",lon_0=".$rect->minx.",x_0=500000,y_0=10000000,ellps=GRS67,units=m,no_defs");					
+	$projOutObj = ms_newprojectionobj("proj=laea,lat_0=".$rect->miny.",lon_0=".$rect->minx.",x_0=500000,y_0=10000000,ellps=GRS67,units=m,no_defs");
 	$shape->project($projInObj, $projOutObj);
 	$s = $shape->towkt();
 	$shape = ms_shapeObjFromWkt($s);

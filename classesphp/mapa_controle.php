@@ -181,6 +181,7 @@ if ($funcao == "criaMapa")
 	$interface = "mashup";
 	include_once("ms_criamapa.php");
 	$_SESSION["interface"] = $interfaceTemp;
+
 	cpjson(session_id());
 	//ver funcoes_gerais.php
 	validaAcessoTemas($_SESSION("map_file"));
