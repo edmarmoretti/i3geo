@@ -135,7 +135,9 @@ i3GEOF.metaestat = {
 			return ins;
 		},
 		comboCamadas: function(){
-			//i3geoCartoAnaliseCamadas
+			if(!$i("i3geoCartoAnaliseCamadas")){
+				return;
+			}
 			var temp = function(retorno){
 				var temas = retorno.data,
 					n = temas.length,
@@ -1010,6 +1012,10 @@ i3GEOF.metaestat = {
 			temp = function(retorno){
 				core_carregando("desativa");
 			};
+			if(cores == ""){
+				alert("Escolha as cores primeiro");
+				return;
+			}
 			core_carregando("ativa");
 			i3GEO.util.ajaxGet(p,temp);
 		},
@@ -1021,6 +1027,10 @@ i3GEOF.metaestat = {
 			temp = function(retorno){
 				core_carregando("desativa");
 			};
+			if(cores == ""){
+				alert("Escolha as cores primeiro");
+				return;
+			}
 			core_carregando("ativa");
 			i3GEO.util.ajaxGet(p,temp);
 		},

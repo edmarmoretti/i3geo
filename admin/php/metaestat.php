@@ -415,7 +415,7 @@ switch (strtoupper($funcao))
 					$verde = $cor[1];
 					$azul = $cor[2];
 				}
-				$m->alteraClasseClassificacao("",$id_classe,$titulo,$expressao,$vermelho,$verde,$azul,"","","-1","-1","-1","");
+				$m->alteraClasseClassificacao("",$id_classe,$titulo,$expressao,$vermelho,$verde,$azul,"","","255","255","255","2");
 			}
 		}
 		if($tipo == "intiguais5"){
@@ -444,7 +444,7 @@ switch (strtoupper($funcao))
 					$verde = $cor[1];
 					$azul = $cor[2];
 				}
-				$m->alteraClasseClassificacao("",$id_classe,$titulo,$expressao,$vermelho,$verde,$azul,"","","-1","-1","-1","");
+				$m->alteraClasseClassificacao("",$id_classe,$titulo,$expressao,$vermelho,$verde,$azul,"","","255","255","255","2");
 			}
 		}
 		retornaJSON("ok");

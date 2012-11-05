@@ -211,12 +211,13 @@ class Atributos
 		}
 		//error_reporting(E_ALL);
 		$this->layer->set("template","none.htm");
-		$this->layer->setfilter("");
+		//$this->layer->setfilter("");
 		$ext = "";
 		//procura o registro e pega a extens&atilde;o geogr&aacute;fica
 		if($this->v == 6){
 			$this->layer->open();
 			$shape = $this->layer->getShape(new resultObj($registro));
+			//$shape = $this->layer->getShape($this->layer->getResult($registro));
 		}
 		else{
 			if (@$this->layer->open() == MS_SUCCESS)
@@ -230,6 +231,7 @@ class Atributos
 				}
 			}
 		}
+
 		$ext = $this->extensaoShape($shape);
 		return($ext);
 	}
@@ -444,8 +446,8 @@ class Atributos
 							"nome"=>$nome
 					);
 				}
-
-				$registros[] = array("indice"=>$indx,"valores"=>$valitem,"status"=>$chk,"classe"=>$classe);
+				$ext = $this->extensaoShape($shape);
+				$registros[] = array("indice"=>$indx,"valores"=>$valitem,"status"=>$chk,"classe"=>$classe,"ext"=>$ext);
 			}
 			$resultadoFinal[] = array("registros"=>$registros);
 		}
@@ -512,7 +514,8 @@ class Atributos
 						);
 					}
 					if(count($valitem) > 0){
-						$registros[] = array("indice"=>$indx,"valores"=>$valitem,"status"=>$chk,"classe"=>$classe);
+						$ext = $this->extensaoShape($shape);
+						$registros[] = array("indice"=>$indx,"valores"=>$valitem,"status"=>$chk,"classe"=>$classe,"ext"=>$ext);
 					}
 					$chk = "";
 				}

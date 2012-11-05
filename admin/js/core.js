@@ -1451,6 +1451,11 @@ function core_montaEditor(funcaoOK,w,h,funcaoClose,titulo,modal)
 	};
 	YAHOO.util.Event.addListener(YAHOO.admin.container.panelEditor.close, "click", fecha);
 	YAHOO.admin.container.panelEditor.show();
+	//registra a janela no gerenciador de janelas default da classe i3GEO.janela caso ela exista
+	try{
+		YAHOO.i3GEO.janela.manager.register(YAHOO.admin.container.panelEditor);
+	}
+	catch(e){}
 }
 /*
 Function idiomaSel

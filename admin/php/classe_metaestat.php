@@ -1641,13 +1641,11 @@ class Metaestat{
 		$c = $this->listaConexao($medida["codigo_estat_conexao"],true);
 		//var_dump($c);exit;
 		$dbh = new PDO('pgsql:dbname='.$c["bancodedados"].';user='.$c["usuario"].';password='.$c["senha"].';host='.$c["host"].';port='.$c["porta"]);
-
 		$colunassql[] = $medida["colunavalor"].",".$medida["colunaidunico"];
 		$alias[] = $medida["nomemedida"];
 		$colunas[] = $medida["colunavalor"];
 		$alias[] = "idunico";
 		$colunas[] = $medida["colunaidunico"];
-
 		$parametros = $this->listaParametro($id_medida_variavel);
 		foreach($parametros as $p){
 			$colunassql[] = $p["coluna"];
@@ -1656,7 +1654,6 @@ class Metaestat{
 		}
 
 		$sql = "select ".implode(",",$colunassql)." from ".$medida["esquemadb"].".".$medida["tabela"]." WHERE ".$medida["colunaidgeo"]."::text = ".$identificador_regiao."::text ";
-		//echo $sql;exit;
 		if($medida["filtro"] != ""){
 			$sql .= " and ".$medida["filtro"];
 		}

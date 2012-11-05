@@ -485,7 +485,11 @@ i3GEOF.tabela = {
 			n = retorno.data[1].registros.length;
 			for (i=0;i<n;i++){
 				ins += "<tr><td><img style=cursor:pointer onclick='i3GEOF.tabela.excluiLinha(this)' src='"+i3GEO.configura.locaplic+"/imagens/x.gif' title='"+$trad("t12")+"' /></td>";
-				ins += "<td><img style=cursor:pointer onclick='i3GEOF.tabela.zoomLinha(this)' src='"+i3GEO.configura.locaplic+"/imagens/o.gif' title='zoom' ids="+retorno.data[1].registros[i].indice+" /></td>";
+				ins += "<td>";
+				if(retorno.data[1].registros[i].ext && retorno.data[1].registros[i].ext != ""){
+					ins += "<img style=cursor:pointer onclick='i3GEOF.tabela.zoomExt(\""+retorno.data[1].registros[i].ext+"\")' src='"+i3GEO.configura.locaplic+"/imagens/o.gif' title='zoom' ids="+retorno.data[1].registros[i].indice+" />";
+				}
+				ins += "</td>";
 				stat = "";
 				if(retorno.data[1].registros[i].status === "CHECKED")
 				{stat = "CHECKED";}
@@ -652,6 +656,18 @@ i3GEOF.tabela = {
 		} while (p.childNodes.length > 0);
 		p.parentNode.removeChild(p);
 	},
+	zoomExt: function(ext){
+		if(i3GEOF.tabela.aguarde.visibility === "visible")
+		{return;}
+		i3GEOF.tabela.aguarde.visibility = "visible";
+		var funcao = function(){
+			i3GEOF.tabela.aguarde.visibility = "hidden";
+			i3GEOF.tabela.pegaRegistros();
+			i3GEO.atualiza();
+		};
+		i3GEO.php.mudaext(funcao,"nenhum",ext);
+	},
+	//depreciado
 	zoomLinha: function(celula){
 		if(i3GEOF.tabela.aguarde.visibility === "visible")
 		{return;}

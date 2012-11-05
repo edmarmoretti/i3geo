@@ -45,7 +45,7 @@ it:""
 }],
 "7":[
 {
-pt:"Crie ou edite as classifica&ccedil;&otilde;es que podem ser utilizadas para representar os dados escolhidos. As classifica&ccedil;&otilde;es definem as cores para o mapa e os valores que cada classe abrange. Na pr&oacute;xima tela ser&atilde;o definidas as classes.",
+pt:"Crie ou edite as classifica&ccedil;&otilde;es que podem ser utilizadas para representar os dados escolhidos. As classifica&ccedil;&otilde;es definem as cores para o mapa e os valores que cada classe abrange. Nessa tela o nome da classifica&ccedil;&atilde;o &eacute; definido, e na pr&oacute;xima tela ser&atilde;o definidas as classes.",
 en:"",
 es:"",
 it:""
