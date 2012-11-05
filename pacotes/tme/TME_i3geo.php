@@ -39,7 +39,9 @@ if(!isset($download)){
 	$download = false;
 }
 if(!isset($_GET["sid"]) && $verificaSID == true)
-{echo "Erro. Acesso não permitido";exit;}
+{
+	echo "Erro. Acesso não permitido";exit;
+}
 if(!isset($dir_tmp)){
 	include(__DIR__."/../../ms_configura.php");
 }
@@ -54,15 +56,22 @@ if(!isset($parametersTME)){
 		$ano = $colunas[0];
 		$tipo = "year";
 	}
-	$parametersTME = array( 'mapType'        => 'bar',
-	   			  	     'indicator'      => 'valores',
-					     'year'           => $ano,
-					     'classification' => 'equal',
-						 'mapTitle' => $_GET["titulo"],
-						 'timeType' => $tipo, //para mais de um ano, escolha slider ou series
-						 'dirtmp' => $dir_tmp,
-						 'barSize'=> 5000
-	                   );
+	if(empty($barSize)){
+		$barSize = 5000;
+	}
+	if(empty($maxHeight)){
+		$maxHeight = 2000000;
+	}
+	$parametersTME = array( 'mapType' => 'bar',
+			'indicator' => 'valores',
+			'year' => $ano,
+			'classification' => 'quantile',
+			'mapTitle' => $_GET["titulo"],
+			'timeType' => $tipo, //para mais de um ano, escolha slider ou series
+			'dirtmp' => $dir_tmp,
+			'barSize'=> $barSize,
+			'maxHeight' => $maxHeight
+	);
 }
 $dataConnector = new DataConnector($_GET["sid"],$verificaSID);
 $dataStore = $dataConnector->getDataStore($_GET["nomelayer"],$colunas,$_GET["colunanomeregiao"],$_GET["titulo"],$_GET["descricao"],"");
@@ -72,7 +81,9 @@ $map = new ThematicMap($dataStore, $parametersTME);
 $file = $map->getKML($dataConnector->url,$download);
 if(!$download){
 	if(!function_exists("cpjson"))
-	{require(__DIR__."/../../classesphp/funcoes_gerais.php");}
+	{
+		require(__DIR__."/../../classesphp/funcoes_gerais.php");
+	}
 	cpjson(array('url' => $file));
 }
 //echo "<p><a href='$file'>$file</a>";

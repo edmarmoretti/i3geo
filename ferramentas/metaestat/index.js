@@ -647,10 +647,14 @@ i3GEOF.metaestat = {
 			temp = function(retorno){
 				if(i3GEO.arvoreDeCamadas.pegaTema(retorno.layer) == ""){
 					i3GEOF.metaestat.comum.desligaCamadas();
-					i3GEO.php.adtema(i3GEO.atualiza,retorno.mapfile);
-					i3GEOF.metaestat.CAMADAS.push(retorno.layer);
-					i3GEO.mapa.ativaTema(retorno.layer);
-					i3GEOF.metaestat.analise.comboCamadas();
+					var atualiza = function(){
+						i3GEO.atualiza();
+						i3GEOF.metaestat.CAMADAS.push(retorno.layer);
+						i3GEO.mapa.ativaTema(retorno.layer);
+						i3GEOF.metaestat.analise.comboCamadas();
+					};
+					i3GEO.php.adtema(atualiza,retorno.mapfile);
+
 				}
 			};
 			if(v != true){

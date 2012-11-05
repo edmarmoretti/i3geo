@@ -550,7 +550,7 @@ i3GEO.gadgets = {
 					if(!temp.style.height || parseInt(temp.style.height) === 0)
 					{temp.style.height = "21px";}
 				}
-				ins += '<div class="bd" style="top:0px;'+alinhamento+'display:block;align:right;border: 0px solid white;z-index:6000;line-height:1.4" >' +
+				ins += '<div class="bd" style="top:0px;'+alinhamento+'display:block;align:right;border: 0px solid white;z-index:3;line-height:1.4" >' +
 					'<ul class="first-of-type" style="display:block;border:0px solid white;top:10px;">';
 				n = confm.menu.length;
 				estilo = "padding-bottom:3px;top:0px;border: 0px solid white;";

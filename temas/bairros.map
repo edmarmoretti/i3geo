@@ -1,18 +1,22 @@
 MAP
   FONTSET "/var/www/i3geo/symbols/fontes.txt"
   SYMBOLSET "/var/www/i3geo/symbols/simbolosv6.sym"
-LAYER
+  LAYER
     CONNECTION "user=postgres password=postgres dbname=geosaude host=localhost port=5432"
     CONNECTIONTYPE POSTGIS
     DATA "the_geom from (select * from i3geo_metaestat.bairros) as foo using unique gid using srid=4326"
     METADATA
+      "ID_MEDIDA_VARIAVEL"	""
+      "cache"	""
       "CLASSE"	"SIM"
+      "METAESTAT_CODIGO_TIPO_REGIAO"	""
+      "metaestat"	"NAO"
+      "convcaracter"	""
       "TEMA"	"Bairros IBGE"
     END # METADATA
     NAME "bairros"
     STATUS DEFAULT
     TEMPLATE "none.htm"
-    TILEITEM "location"
     TYPE POLYGON
     UNITS METERS
     CLASS
@@ -30,4 +34,6 @@ LAYER
       END # STYLE
     END # CLASS
   END # LAYER
-END
+
+END # MAP
+

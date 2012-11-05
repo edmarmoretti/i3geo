@@ -1160,7 +1160,7 @@ function sobeDesce()
 }
 function criarNovoMap()
 {
-	global $nome,$codigo,$locaplic,$it,$en,$es,$esquemaadmin;
+	global $nome,$codigo,$locaplic,$it,$en,$es,$esquemaadmin,$metaestat;
 	$arq = $locaplic."/temas/".$codigo.".map";
 	if(!file_exists($arq))
 	{
@@ -1169,11 +1169,21 @@ function criarNovoMap()
 		$dados[] = 'FONTSET   "../symbols/fontes.txt"';
 		$dados[] = "LAYER";
 		$dados[] = "	NAME $codigo";
-		$dados[] = "	TYPE line";
+		$dados[] = '	TEMPLATE "none.htm"';
+		if(!empty($metaestat) && $metaestat == "SIM"){
+			$dados[] = '	CONNECTIONTYPE POSTGIS';
+			$dados[] = "	TYPE polygon";
+		}
+		else{
+			$dados[] = "	TYPE line";
+		}
 		$dados[] = '	DATA ""';
 		$dados[] = '	METADATA';
 		$dados[] = '		TEMA "'.$nome.'"';
 		$dados[] = '		CLASSE "SIM"';
+		if(!empty($metaestat) && $metaestat == "SIM"){
+			$dados[] = '		METAESTAT "SIM"';
+		}
 		$dados[] = '	END';
 		$dados[] = '    CLASS';
 		$dados[] = '        NAME ""';
@@ -1575,6 +1585,12 @@ function pegaConexao()
 	}
 	$dados["projection"] = str_replace("+i","i",$dados["projection"]);
 	$dados["convcaracter"] = $layer->getmetadata("convcaracter");
+	//informacoes sobre a integracao com o sistema de metadados estatisticos
+	$dados["metaestat"] = $layer->getmetadata("metaestat");
+	if($dados["metaestat"] == ""){
+		$dados["metaestat"] = "NAO";
+	}
+
 	$dados["colunas"] = implode(",",pegaItens($layer));
 	if($layer->connectiontype == 7 || $layer->connectiontype == 9){
 		$dados["tipooriginal"] = $layer->getmetadata("tipooriginal");
@@ -1583,17 +1599,29 @@ function pegaConexao()
 }
 function alterarConexao()
 {
-	global $convcaracter,$cache,$tipooriginal,$filteritem,$filter,$projection,$type,$dir_tmp,$testar,$codigoMap,$codigoLayer,$locaplic,$connection,$connectiontype,$data,$tileitem,$tileindex;
+	global $metaestat,$convcaracter,$cache,$tipooriginal,$filteritem,$filter,$projection,$type,$dir_tmp,$testar,$codigoMap,$codigoLayer,$locaplic,$connection,$connectiontype,$data,$tileitem,$tileindex;
 	$mapfile = $locaplic."/temas/".$codigoMap.".map";
 	$mapa = ms_newMapObj($mapfile);
 	$layer = $mapa->getlayerbyname($codigoLayer);
+	//quando o layer estiver conectado com o METAESTAT, alguns parametros sao default
+	if(strtoupper($metaestat) == "SIM"){
+		$connectiontype = 6;
+		$filteritem = "";
+		$filter = "";
+		$data = "";
+		$connection = "";
+	}
+	else{
+		$layer->setmetadata("METAESTAT_CODIGO_TIPO_REGIAO","");
+		$layer->setmetadata("ID_MEDIDA_VARIAVEL","");
+	}
+	$layer->setmetadata("metaestat",$metaestat);
 	$layer->set("connection",$connection);
-	if(ms_GetVersionInt() > 50201)
-	{
+	if(ms_GetVersionInt() > 50201){
 		$layer->setconnectiontype($connectiontype);
 	}
-	else
-	{$layer->set("connectiontype",$connectiontype);
+	else{
+		$layer->set("connectiontype",$connectiontype);
 	}
 	$layer->set("data",$data);
 	$layer->set("tileitem",$tileitem);

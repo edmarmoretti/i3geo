@@ -953,7 +953,7 @@ function core_menuCheckBox(valores,textos,selecionados,target,record,key){
 			{ label: "Cancel", value: "CANCEL", checked: false }
 		]);
 		og_core.on("checkedButtonChange", on_menuCheckBoxChange);
-		YAHOO.admin.container.panelCK = new YAHOO.widget.Overlay("core_menuCK", { zindex:"100",close:false,underlay:false,width:"300px", height:"200px",overflow:"auto", visible:false,constraintoviewport:true } );
+		YAHOO.admin.container.panelCK = new YAHOO.widget.Overlay("core_menuCK", { zindex:"100",close:false,underlay:false,width:"300px", height:"200px",overflow:"auto", visible:false,constraintoviewport:false } );
 		YAHOO.admin.container.panelCK.render();
 	}
 	onde = $i("core_menuCK_bd");
@@ -1428,7 +1428,7 @@ function core_montaEditor(funcaoOK,w,h,funcaoClose,titulo,modal)
 				}}}
 			);
 		}
-		YAHOO.admin.container.panelEditor = new YAHOO.widget.Panel("janela_editor", { fixedcenter:true,close:true,width:w, overflow:"auto",modal: modal,visible:false,constraintoviewport:true } );
+		YAHOO.admin.container.panelEditor = new YAHOO.widget.Panel("janela_editor", { fixedcenter:"contained",close:true,width:w, overflow:"auto",modal: modal,visible:false,constraintoviewport:true } );
 		YAHOO.admin.container.panelEditor.render();
 	}
 	else
@@ -1479,16 +1479,24 @@ function core_abreCor(janela,elemento)
 }
 function core_desativaforms(lista){
 	var n = lista.length,
-		i;
+		i,t;
 	for (i=0;i<n;i++){
-		$i(lista[i]).style.background = "pink";
+		t = $i(lista[i]);
+		if(t){
+			//t.style.background = "pink";
+			t.disabled = true;
+		}
 	}
 }
 function core_ativaforms(lista){
 	var n = lista.length,
-		i;
+		i,t;
 	for (i=0;i<n;i++){
-		$i(lista[i]).style.background = "white";
+		t = $i(lista[i]);
+		if(t){
+			//t.style.background = "white";
+			t.disabled = false;
+		}
 	}
 }
 function core_listaDeLetras(onde,nomeFuncao){

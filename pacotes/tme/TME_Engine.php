@@ -40,7 +40,7 @@ class ThematicMap
     public $showNames = false;
     public $timeType = 'year';              // year / series / slider
     public $maxHeight = 2000000;        // Prism / Bar
-	public $symbolMaxSize;                    // Symbol
+	public $symbolMaxSize;                    // Symbol$imgBrand
     public $barSize = 50000;
     public $maxValue;
     public $minValue;
@@ -105,7 +105,9 @@ class ThematicMap
         else $this->mapDescription = $this->indicator['description']; // Use default from indicator
 
         if (isset($paramArray['mapSource'])) $this->mapSource = $paramArray['mapSource'];
-        else $this->mapSource = 'Statistics from ' . $this->indicator['source']; // Use default from indicator
+        else {
+        	//$this->mapSource = 'Statistics from ' . $this->indicator['source']; // Use default from indicator
+        }
 
         // Other optional parameters
         if (isset($paramArray['timeType']))       $this->timeType       = $paramArray['timeType'];
@@ -172,7 +174,7 @@ class ThematicMap
         include(__DIR__."/../kmlmapserver/classes/zip.class.php");
         $zip = new zipfile();
         // Add balloon logo to archieve (300 x 30 px)
-       	$zip->addFile($this->logoline, 'files/balloonlogo.png');
+        $zip->addFile($this->logoline, 'files/balloonlogo.png');
 
         // KML header
         $kml = "<?xml version='1.0' encoding='UTF-8'?>" . PHP_EOL
@@ -186,12 +188,12 @@ class ThematicMap
              . "    <open>1</open>" . PHP_EOL
              . "    <Snippet maxLines='1'>$this->mapSource</Snippet>" . PHP_EOL
              . "    <description><![CDATA[ $this->mapDescription <p>$this->mapSource</p>$this->engine ]]></description>" . PHP_EOL;
-
+//TODO logomarca?
         // Add style for indicator balloon
         $kmlStyles = "    <Style id='balloonStyle'>" . PHP_EOL
                    . "      <BalloonStyle>" . PHP_EOL
                    . "        <text><![CDATA[" . PHP_EOL
-                   . "          <a href='http://thematicmapping.org'><img src='files/balloonlogo.png'></a>" . PHP_EOL
+                   . "          <a href='http://thematicmapping.org'><img src='http://localhost/ms_tmp/balloonlogo.png'></a>" . PHP_EOL
                    . "          <p><b><font size='+2'>$[name]</font></b></p>" . PHP_EOL
                    . "          <p>$[description]</p>" . PHP_EOL
                    . "        ]]></text>" . PHP_EOL
@@ -210,7 +212,8 @@ class ThematicMap
 
             // Add colour legend to KMZ archieve
             if ($this->showLegend) {
-                $zip->addFile(self::getColourLegend(), 'files/legend.png');
+                $imgLegenda = self::getColourLegend();
+            	$zip->addFile($imgLegenda,'files/legend.png');
             }
             $kmlSingleColour = ''; // Colours needs to be defined for each feature
             //$kmlColour = self::rgb2bgr($this->noDataColour); // Not in use, only so the variable has a value
@@ -342,10 +345,10 @@ class ThematicMap
                 } // switch symbol
         } // switch type
 
-
+//TODO corrigir logo
         $kmlStyles .= "      <BalloonStyle>" . PHP_EOL
                     . "        <text><![CDATA[" . PHP_EOL
-                    . "          <a href='http://thematicmapping.org'><img src='files/balloonlogo.png'></a>" . PHP_EOL
+                    . "          <a href='http://thematicmapping.org'><img src='http://localhost/ms_tmp/balloonlogo.png'></a>" . PHP_EOL
                     . "          <p><b><font size='+2'>$[name]</font></b></p>" . PHP_EOL
                     . "          <p>$this->mapTitle: $[Snippet]</p>" . PHP_EOL
                     . "          <p>$this->mapDescription</p>" . PHP_EOL
@@ -408,6 +411,7 @@ class ThematicMap
             foreach ($this->dataStore['features'] as $featureID => $feature)
             {
     			$name = $feature['name'];
+    			//TODO corrigir acentuacao
 				//if (!mb_detect_encoding($name,"UTF-8",true))
 				//{$name = mb_convert_encoding($name,"UTF-8","ISO-8859-1");}
 				$name = "<![CDATA[ ".$name." ]]>";
@@ -428,8 +432,7 @@ class ThematicMap
                 if (isset($this->indicator['values'][$year][$featureID])) {
     			    // Extract value from dataStore
        				$value = $this->indicator['values'][$year][$featureID];
-       				$valueText = $valueLabel = number_format($value);
-
+       				$valueText = $valueLabel = number_format($value, 2, ',', '.');
                     // Colour scale
                     if ($this->colourType == 'scale') {
                         if ($this->classification != 'unclassed') {
@@ -607,11 +610,19 @@ $z->close();age':
         // Close Years folder
         $kmlFolder .= "    </Folder>" . PHP_EOL;
 
+        // Create logo with title and source and add to archieve
+        if ($this->showTitle) {
+        	$imgBrand = self::mapTitleImage();
+        	$zip->addFile($imgBrand, 'files/brand.png');
+        }
+        else {
+        	$zip->addFile($this->logo, 'files/brand.png');
+        }
         // Add title
         $kml .= "    <ScreenOverlay>" . PHP_EOL
               . "      <name>Título</name>" . PHP_EOL
               . "      <Icon>" . PHP_EOL
-              . "        <href>files/brand.png</href>" . PHP_EOL
+              . "        <href>http://localhost/ms_tmp/".basename($imgBrand)."</href>" . PHP_EOL
               . "      </Icon>" . PHP_EOL
               . "      <overlayXY x='0.01' y='0.99' xunits='fraction' yunits='fraction'/>" . PHP_EOL
               . "      <screenXY x='0.01' y='0.99' xunits='fraction' yunits='fraction'/>" . PHP_EOL
@@ -623,7 +634,7 @@ $z->close();age':
             $kml .= "    <ScreenOverlay>" . PHP_EOL
                   . "      <name>Legenda</name>" . PHP_EOL
                   . "      <Icon>" . PHP_EOL
-                  . "        <href>files/legend.png</href>" . PHP_EOL
+                  . "        <href>http://localhost/ms_tmp/".basename($imgLegenda)."</href>" . PHP_EOL
                   . "      </Icon>" . PHP_EOL
                   . "      <overlayXY x='0.01' y='0.14' xunits='fraction' yunits='fraction'/>" . PHP_EOL
                   . "      <screenXY x='0.01' y='0.14' xunits='fraction' yunits='fraction'/>" . PHP_EOL
@@ -652,13 +663,7 @@ $z->close();age':
         //$zip->addFromString("doc.kml", $kml);
         $zip->addFile($kml, 'doc.kml');//edmar
 
-        // Create logo with title and source and add to archieve
-        if ($this->showTitle) {
-            $zip->addFile(self::mapTitleImage(), 'files/brand.png');
-        }
-        else {
-            $zip->addFile($this->logo, 'files/brand.png');
-        }
+
         //$zip->close();
         $zip->output($file);//edmar
         if($download){
@@ -875,8 +880,11 @@ $z->close();age':
                 }
 
                 // print min and max values
-                imagestring($legend, 3, $width+29, $height-6, number_format($this->minValue, $this->precision), $fontColour);
-                imagestring($legend, 3, $width+29, -3, number_format($this->maxValue, $this->precision), $fontColour);
+                //number_format(($s / $ocorrencias),2,",",".")
+                //imagestring($legend, 3, $width+29, $height-6, number_format($this->minValue, $this->precision), $fontColour);
+                //imagestring($legend, 3, $width+29, -3, number_format($this->maxValue, $this->precision), $fontColour);
+                imagestring($legend, 3, $width+29, $height-6, number_format($this->minValue, 2,",","."), $fontColour);
+                imagestring($legend, 3, $width+29, -3, number_format($this->maxValue, 2,",","."), $fontColour);
 
                 break;
 
@@ -884,7 +892,8 @@ $z->close();age':
             default:
                $ypos = 0;
                $interval = $height / $this->numClasses;
-               foreach($this->classColours as $key => $colour){
+               $v = $this->classColours;
+               foreach($v as $key => $colour){
                     $red   = hexdec(substr($colour, 0, 2));
                     $green = hexdec(substr($colour, 2, 2));
                     $blue  = hexdec(substr($colour, 4, 2));
@@ -892,11 +901,14 @@ $z->close();age':
                     $classColour = imagecolorallocate($legend, $red, $green, $blue);
                     imagefilledrectangle($legend, 21, $height-$ypos+2, $width+20, $height-$ypos-$interval, $classColour);
 
-                    imagestring($legend, 3, $width+29, $height-$ypos-5, number_format($this->classBreaks[$key], $this->precision), $fontColour);
+                    //imagestring($legend, 3, $width+29, $height-$ypos-5, number_format($this->classBreaks[$key], $this->precision), $fontColour);
+                    imagestring($legend, 3, $width+29, $height-$ypos-5, number_format($this->classBreaks[$key], 2,",","."), $fontColour);
 
                     $ypos += $interval;
                }
-               imagestring($legend, 3, $width+29, -3, number_format($this->classBreaks[$key+1], $this->precision), $fontColour);
+               //imagestring($legend, 3, $width+29, -3, number_format($this->classBreaks[$key+1], $this->precision), $fontColour);
+               imagestring($legend, 3, $width+29, -3, number_format($this->classBreaks[$key+1], 2,",","."), $fontColour);
+
         }
 
         // Border around colour scale
@@ -904,7 +916,7 @@ $z->close();age':
         imagerectangle($legend, 20, 1, $width+21, $height+3, $white);
 
         // Legend title
-        imagestringup($legend, 3, 0, ($height/2)+(strlen($this->mapTitle)/2)*7, $this->mapTitle, $white);
+        //imagestringup($legend, 3, 0, ($height/2)+(strlen($this->mapTitle)/2)*7, $this->mapTitle, $white);
 
         // Save legend
         $file = $this->dirtmp.'/legend'. time() .'.png';
@@ -944,6 +956,7 @@ $z->close();age':
 
             case 'quantile':
                 $values = array_values($this->indicator['values'][$this->year]);
+                sort($values);
                 $numValues = count($values);
                 $classNum = $numValues / $numClasses; // Number in each class
                 for ($i = 0; $i < $numClasses; $i++) {
@@ -966,6 +979,7 @@ $z->close();age':
 
     function getClass($value){
         $class = 0;
+        //var_dump($this->classBreaks);exit;
         for ($i = 1; $i < count($this->classBreaks); $i++) {
             if ($value > $this->classBreaks[$i] && $value <= $this->classBreaks[$i+1]) {
                 $class = $i;

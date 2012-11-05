@@ -183,6 +183,10 @@ function ativaBotaoAdicionaMapfile(idBotao)
 		core_montaEditor("adicionaNovoMapfile()","450px","660px","","","Mapfile");
 		ins = "<p><b>Nome do novo arquivo mapfile (sem .map) </b>n&atilde;o utilize caracteres acentuados ou espa&ccedil;os em branco</p>";
 		ins += "<input size=50 type=text id='Ecodigo' value='' /></p>";
+		ins += "<p><b>Esse mapfile baseia-se no sistema de metadados estat&iacute;sticos?</b> Caso escolha sim, a conex&atilde;o com o banco e o sql de acesso aos dados ser&atilde;o constru&iacute;dos de forma din&acirc;mica</p>";
+		ins += "<select id='Emetaestat' >";
+		ins += core_combosimnao("nao");
+		ins += "</select>";
 		ins += "<p><b>T&iacute;tulo do novo tema</b></p>";
 		ins += "<p>Em portugu&ecirc;s: </p>";
 		ins += "<input size=50 type=text id='Etitulo' value='' /></p>";
@@ -657,17 +661,17 @@ Adiciona um novo mapfile
 */
 function adicionaNovoMapfile()
 {
-	var nome = $i("Etitulo").value;
-	var it = $i("EtituloIT").value;
-	var es = $i("EtituloES").value;
-	var en = $i("EtituloEN").value;
-	var codigo = $i("Ecodigo").value;
+	var nome = $i("Etitulo").value,
+		it = $i("EtituloIT").value,
+		es = $i("EtituloES").value,
+		en = $i("EtituloEN").value,
+		codigo = $i("Ecodigo").value,
+		metaestat = $i("Emetaestat").value;
 	if(codigo === "")
 	{alert("Digite o nome do arquivo");return;}
-	sUrl = "../php/editormapfile.php?funcao=criarNovoMap&nome="+nome+"&codigo="+codigo+"&it="+it+"&en="+en+"&es="+es;
+	sUrl = "../php/editormapfile.php?funcao=criarNovoMap&nome="+nome+"&codigo="+codigo+"&it="+it+"&en="+en+"&es="+es+"&metaestat="+metaestat;
 	core_carregando("ativa");
 	core_carregando(" adicionando um novo mapfile");
-
 	var callback =
 	{
 		success:function(o)
@@ -1443,8 +1447,11 @@ function montaEditorDispo(dados)
 function montaEditorDados(dados)
 {
 	var idsForms = ["connection","data","tileitem","tileindex","type","tipooriginal"];
+	var idsMetaestat = ["connection","data","tileitem","tileindex","tipooriginal"];
 	var param = {
 		"linhas":[
+		{ajuda:"Indica se as defini&ccedil;&otilde;es da camada est&atilde;o relacionadas ao sistema de metadados estat&iacute;sticos. Se estiver, alguns par&acirc;metros s&atilde;o obtidos de forma autom&aacute;tica, como a conex&atilde;o e o SQL de acesso aos dados.",
+		titulo:"Esse mapfile est&aacute; integrado ao sistema de metadados estat&iacute;sticos?",id:"",value:dados.metaestat,tipo:"text",div:"<div id=cMetaestat ></div>"},
 		{ajuda:"Type of connection. Default is local.",
 		titulo:"Connectiontype",id:"",value:"",div:"<div id=cConnectiontype ></div>",tipo:"text"},
 		{ajuda:"Aplica a convers&atilde;o de caracteres nas ferramentas que obt&eacute;m os dados descritivos referentes aos elementos do LAYER. Em alguns casos, a convers&atilde;o pode provocar problemas de acentua&ccedil;&atilde;o. Se isso ocorrer, na ferramenta tabela por exemplo, experimente marcar essa op&ccedil;&atilde;o como 'nao'",
@@ -1468,7 +1475,7 @@ function montaEditorDados(dados)
 		{ajuda:"Name of the tileindex file or layer. A tileindex is similar to an ArcInfo library index. The tileindex contains polygon features for each tile. The item that contains the location of the tiled data is given using the TILEITEM parameter. When a file is used as the tileindex for shapefile or raster layers, the tileindex should be a shapefile. For CONNECTIONTYPE OGR layers, any OGR supported datasource can be a tileindex. Normally the location should contain the path to the tile file relative to the shapepath, not relative to the tileindex itself. If the DATA parameter contains a value then it is added to the end of the location. When a tileindex layer is used, it works similarly to directly referring to a file, but any supported feature source can be used (ie. postgres, oracle).NOTE: All files in the tileindex should have the same coordinate system, and for vector files the same set of attributes in the same order.",
 		titulo:"tileindex",id:"tileindex",value:dados.tileindex,tipo:"text"},
 		{ajuda:"Tipo de representa&ccedil;&atilde;o das fei&ccedil;&otilde;es mostradas da camada. &Eacute; importante definir esse par&acirc;metro para que as fun&ccedil;&otilde;es de gera&ccedil;&atilde;o de SLD funcionem corretamente.",
-		titulo:"Tipo de representa&ccedil;&atilde;o (tipooriginal) - para temas do tipo WMS",id:"",value:dados.tipooriginal,tipo:"text",div:"<div id=cTipooriginal ></div>"}
+		titulo:"Tipo de representa&ccedil;&atilde;o (tipooriginal) - para temas do tipo WMS",id:"",value:dados.tipooriginal,tipo:"text",div:"<div id=cTipoOriginal ></div>"}
 		]
 	};
 	var ins = "<input type=button title='Salvar' value='Salvar' id=salvarEditor />";
@@ -1488,17 +1495,24 @@ function montaEditorDados(dados)
 	ins += core_geraLinhas(param);
 	ins += "<br><br><br>";
 	$i("editor_bd").innerHTML = ins;
+
+	if($i("cMetaestat")){
+		temp = "<select id='metaestat' >";
+		temp += core_combosimnao(dados.metaestat);
+		temp += "</select>";
+		$i("cMetaestat").innerHTML = temp;
+	}
 	if($i("cCache")){
 		temp = "<select id='cache' >";
 		temp += core_combosimnao(dados.cache);
 		temp += "</select>";
 		$i("cCache").innerHTML = temp;
 	}
-	if($i("cTipooriginal")){
+	if($i("cTipoOriginal")){
 		temp = "<select id='tipooriginal' >";
 		temp += core_comboObjeto(objtipooriginal,"valor","texto",dados.tipooriginal);
 		temp += "</select>";
-		$i("cTipooriginal").innerHTML = temp;
+		$i("cTipoOriginal").innerHTML = temp;
 	}
 
 	temp = "<select id='connectiontype' >";
@@ -1526,7 +1540,6 @@ function montaEditorDados(dados)
 	{salvarDadosEditor('conexao',dados.codigoMap,dados.codigoLayer,"","",true);};
 	new YAHOO.widget.Button("testarEditor",{ onclick: { fn: temp }});
 
-	core_desativaforms(idsForms);
 	$i("connectiontype").onchange = function(){
 		core_desativaforms(idsForms);
 		var valor = $i("connectiontype").value,
@@ -1546,7 +1559,26 @@ function montaEditorDados(dados)
 		{d = ["connection","type","tipooriginal"];}
 		core_ativaforms(d);
 	};
-	$i("connectiontype").onchange.call();
+	$i("metaestat").onchange = function(){
+		core_desativaforms(idsMetaestat);
+		var valor = $i("metaestat").value,
+			d = [];
+		if(valor === "SIM"){
+			d = [];
+		}
+		else{
+			core_desativaforms(idsForms);
+			$i("connectiontype").onchange.call();
+		}
+		core_ativaforms(d);
+	};
+	if(dados.metaestat === "SIM"){
+		core_desativaforms(idsMetaestat);
+	}
+	else{
+		core_desativaforms(idsForms);
+		$i("connectiontype").onchange.call();
+	}
 }
 
 function montaEditorMetadados(dados)
@@ -1979,7 +2011,7 @@ function salvarDadosEditor(tipo,codigoMap,codigoLayer,indiceClasse,indiceEstilo,
 	}
 	if(tipo == "conexao")
 	{
-		campos = new Array("cache","projection","type","connection","data","connectiontype","tileitem","tileindex","filteritem","filter","tipooriginal","convcaracter");
+		campos = new Array("metaestat","cache","projection","type","connection","data","connectiontype","tileitem","tileindex","filteritem","filter","tipooriginal","convcaracter");
 		par = "&codigoMap="+codigoMap+"&codigoLayer="+codigoLayer;
 		prog = "../php/editormapfile.php?funcao=alterarConexao";
 	}
@@ -2018,8 +2050,13 @@ function salvarDadosEditor(tipo,codigoMap,codigoLayer,indiceClasse,indiceEstilo,
 	prog += "&testar="+testar;
 	try{
 		for (var i=0;i<campos.length;i++){
-			if($i(campos[i]))
-			{par += "&"+campos[i]+"="+($i(campos[i]).value);}
+			if($i(campos[i])){
+				var valor = "";
+				if($i(campos[i]).disabled === false){
+					valor = $i(campos[i]).value;
+				}
+				par += "&"+campos[i]+"="+ valor;
+			}
 		}
 	}catch(e){alert(e);}
 	core_carregando("ativa");

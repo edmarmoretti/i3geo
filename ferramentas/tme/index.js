@@ -140,19 +140,23 @@ i3GEOF.tme = {
 	*/
 	html:function(){
 		var ins = '' +
-		'<div style="text-align:left;" id=i3GEOTMEresultado ></div>' +
+		'<div style="text-align:left;background:yellow;" id=i3GEOTMEresultado ></div>' +
+		'<input id=i3GEOtmebotao1 size=35  type=button value="Gerar KML" /><br><br>' +
 		'<p class="paragrafo" >' +
 		'T&iacute;tulo que ser&aacute; mostrado no mapa';
 		ins += $inputText("","","i3GEOTMEtitulo","",48,"") +
 		'<br><br>Descri&ccedil;&atilde;o do mapa';
 		ins += $inputText("","","i3GEOTMEdesc","",48,"") +
+		'<br><br>Altura m&aacute;xima das barras (em metros)';
+		ins += $inputText("","","i3GEOTMEbarSize","",20,"50000") +
+		'<br><br>Largura m&aacute;xima das barras (em metros)';
+		ins += $inputText("","","i3GEOTMEmaxHeight","",20,"100") +
 		'<br><br>Coluna que cont&eacute;m os nomes das regi&otilde;es (exemplo: nomes dos Estados ou nomes dos munic&iacute;pios):' +
 		'<div id="i3GEOTMEregioeslista" style="text-align:left;" ></div>' +
 		'<p class="paragrafo" >' +
 		'<br>Escolha uma ou mais colunas com os dados estat&iacute;sticos que ser&atilde;o representados:' +
 		'<div id=i3GEOtmelistai class=digitar style="text-align:left;left:0px;top:0px;330px;height:80px;overflow:auto;display:block;"></div>' +
 		'<br>' +
-		'<input id=i3GEOtmebotao1 size=35  type=button value="Aplicar" />' +
 		'<div id=i3GEOtmemen1 style=top:15px;left:0px; ><p class=paragrafo >Ser&aacute; criado um arquivo KML que pode ser aberto com o Google Earth. A coluna com os nomes das regi&otilde;es define o nome que ser&aacute; mostrado para cada elemento mapeado. Quando os nomes das colunas com os valores corresponderem a um determinado ano, ser&aacute; mostrado um bot&atilde;o do tipo slide no Google Earth, mas isso s&oacute; ocorre se o nome da coluna for o mesmo nome do ano, exemplo, para o ano de 1980 o nome da coluna dever&aacute; ser 1980</div>';
 		return ins;
 	},
@@ -284,9 +288,8 @@ i3GEOF.tme = {
 				var ins = "<p class=paragrafo >Clique no arquivo para fazer o download:<br><a href='"+retorno.data.url+"' target=new >"+retorno.data.url+"</a><br>";
 				ins += "<br>Ou clique para abrir no i3Geo:<br><a href='"+i3GEO.configura.locaplic+"/ms_criamapa.php?interface=googleearth.phtml&kmlurl="+retorno.data.url+"' target='new' >interface Google Earth</a><br>";
 				$i("i3GEOTMEresultado").innerHTML = ins;
-
 			};
-			p = i3GEO.configura.locaplic+"/pacotes/tme/TME_i3geo.php?sid="+i3GEO.configura.sid+"&nomelayer="+i3GEO.temaAtivo+"&colunasvalor="+lista.toString(",")+"&colunanomeregiao="+colunanomeregiao+"&titulo="+$i("i3GEOTMEtitulo").value+"&descricao="+$i("i3GEOTMEdesc").value;
+			p = i3GEO.configura.locaplic+"/pacotes/tme/TME_i3geo.php?maxHeight="+$i("i3GEOTMEmaxHeight").value+"&barSize="+$i("i3GEOTMEbarSize").value+"&sid="+i3GEO.configura.sid+"&nomelayer="+i3GEO.temaAtivo+"&colunasvalor="+lista.toString(",")+"&colunanomeregiao="+colunanomeregiao+"&titulo="+$i("i3GEOTMEtitulo").value+"&descricao="+$i("i3GEOTMEdesc").value;
 			cp.set_response_type("JSON");
 			cp.call(p,"tme",temp);
 		}catch(e){i3GEO.janela.tempoMsg("Erro: "+e);i3GEOF.tme.aguarde.visibility = "hidden";}

@@ -169,9 +169,15 @@ class DataConnector
 			{$shape = $layer->getShape($layer->getResult($i));}
 			else{$shape = $layer->getFeature($layer->getResult($i)->shapeindex);}
 			$pt = $shape->getCentroid();
+			$texto = $shape->values[$colunanomeregiao];
+			/*
+			if(!mb_detect_encoding($texto,"ISO-8859-1",true)){
+				$texto = mb_convert_encoding($texto,"ISO-8859-1","UTF-8");
+			}
+			*/
 			$dataStore['features'][$i] = array(
 				"featureID"=>$i,
-				"name"=>$shape->values[$colunanomeregiao],
+				"name"=>$texto,
 				"lon"=>$pt->x,
 				"lat"=>$pt->y,
 				"wkt"=>$shape->toWkt()

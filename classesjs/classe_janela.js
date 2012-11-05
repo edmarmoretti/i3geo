@@ -188,7 +188,7 @@ i3GEO.janela = {
 
 	Cada vez que uma janela flutuante &eacute; criada, esse valor &eacute; acrescido de 1
 	*/
-	ULTIMOZINDEX : 0,
+	ULTIMOZINDEX : 5,
 	/*
 	Function: prepara
 
@@ -274,7 +274,7 @@ i3GEO.janela = {
 			i3GEO.janela.TRANSICAOSUAVE = false;
 			ifr = true;
 		}
-		fix = false;
+		fix = "contained";
 		if(nx === "" || nx === "center")
 		{fix = true;}
 		//no IE, com CSS3, a sombra n&atilde;o funciona
@@ -324,8 +324,8 @@ i3GEO.janela = {
 		}
 		//cria a janela
 		if(waltura === "auto")
-		{janela = new YAHOO.widget.Panel(id, { iframe:ifr,modal:modal, width: wlargurA,underlay:"none", fixedcenter: fix, constraintoviewport: false, visible: true,monitorresize:false,dragOnly:true,keylisteners:null} );}
-		else{janela = new YAHOO.widget.ResizePanel(id, { hideMode:'offsets',iframe:ifr,underlay:underlay, modal:modal, width: wlargurA, fixedcenter: fix, constraintoviewport: false, visible: true,monitorresize:false,dragOnly:true,keylisteners:null} );}
+		{janela = new YAHOO.widget.Panel(id, { iframe:ifr,modal:modal, width: wlargurA,underlay:"none", fixedcenter: fix, constraintoviewport: true, visible: true,monitorresize:false,dragOnly:true,keylisteners:null} );}
+		else{janela = new YAHOO.widget.ResizePanel(id, { hideMode:'offsets',iframe:ifr,underlay:underlay, modal:modal, width: wlargurA, fixedcenter: fix, constraintoviewport: true, visible: true,monitorresize:false,dragOnly:true,keylisteners:null} );}
 		if(nx !== "" && nx !== "center"){
 			janela.moveTo(nx,ny + 50);
 		}
@@ -335,14 +335,14 @@ i3GEO.janela = {
 					{effect:YAHOO.widget.ContainerEffect.FADE,duration:0.5}
 			]);
 		}
-		janela.cfg.setProperty("zIndex",[10000]);
+		janela.cfg.setProperty("zIndex",[4]);
 		janela.render();
 		janela.bringToTop();
 		//ajusta estilos e outras caracter&iacute;sticas da janela criada
 		if(navm && id !== "i3geo_janelaMensagens" && i3GEO.Interface.ATUAL === "googleearth")
 		{janela.moveTo(0,0);}
 		if(ifr === true)
-		{janela.iframe.style.zIndex = 0;}
+		{janela.iframe.style.zIndex = 4;}
 		temp = $i(id+"_corpo");
 		if(temp){
 			if(navm)
@@ -355,7 +355,8 @@ i3GEO.janela = {
 		if(funcaoMinimiza)
 		{$i(id+"_minimizaCabecalho").onclick = funcaoMinimiza;}
 		YAHOO.util.Event.addListener(janela.close, "click", i3GEO.janela.fecha,janela,{id:id},true);
-		return([janela,$i(id+"_cabecalho"),$i(id+"_corpo")]);
+		$i(id+"_c").style.zIndex = 20000;
+		return([janela,$i(id+"_cabecalho"),temp]);
 	},
 	/*
 	function: minimiza
