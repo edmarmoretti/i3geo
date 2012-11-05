@@ -362,6 +362,7 @@ Include:
 */
 	function redesenhaCorpo($tipoimagem,$utilizacgi,$locmapserv)
 	{
+		ms_ResetErrorList();
 		if(file_exists($this->locaplic."/classe_imagem.php"))
   		include_once($this->locaplic."/classe_imagem.php");
   		else

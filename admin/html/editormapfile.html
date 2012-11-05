@@ -68,7 +68,8 @@ body {
 					<div class="ft"></div>
 				</div>
 				<input onclick="" type=button id=adiciona
-					value="Criar um novo mapfile" /> <input onclick="" type=button
+					value="Criar um novo mapfile" /> <input onclick="" type=button id=uploadGvsig
+					value="Upload gvSIG" /> <input onclick="" type=button
 					id=semmapfiles value="Verificar temas sem mapfiles" /> <br> <br>
 				Al&eacute;m de criar os mapfiles, &eacute; necess&aacute;rio definir
 				as caracter&iacute;sticas de cada LAYER nas op&ccedil;&otilde;es
@@ -183,7 +184,7 @@ body {
 			core_listaDeLetras("filtroDeLetras","filtraLetra");
 			document.getElementById("formulario").style.display = "block";
 			initMenu();
-		}
+		};
 		i3GEO.login.verificaOperacao("admin/html/editormapfile",i3GEO.configura.locaplic, temp, "sessao");
 	</script>
 </body>

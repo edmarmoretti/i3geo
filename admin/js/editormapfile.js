@@ -145,6 +145,7 @@ function initMenu()
 	}
 	ativaBotaoAdicionaMapfile("adiciona");
 	ativaBotaoVerificarOrfaos("semmapfiles");
+	ativaBotaoUploadGvsig("uploadGvsig");
 
 	core_carregando("ativa");
 	core_carregando("buscando temas...");
@@ -156,6 +157,21 @@ function ativaBotaoVerificarOrfaos(idBotao)
 	var temp = function(){
 		core_montaEditor("","450px","660px","","Verificar");
 		verificaOrfaos();
+	};
+	//cria o bot&atilde;o de adi&ccedil;&atilde;o de um novo menu
+	new YAHOO.widget.Button(idBotao,{ onclick: { fn: temp } });
+}
+function ativaBotaoUploadGvsig(idBotao)
+{
+	var temp = function(){
+		var ins = '<form id=i3GEOuploadgvp target="i3GEOuploadgvpiframe" action="../php/uploadgvp.php" method="post" ENCTYPE="multipart/form-data">' +
+		'<p class="paragrafo" >Arquivo gvp: <br><input class=digitar type="file" size=20 name="i3GEOuploadgvp" style="top:0px;left:0px;cursor:pointer;"></p>' +
+		'<p class="paragrafo" ><input id=i3GEOuploadgvpbotao1 type="submit" value="Enviar" size=12 name="submit">' +
+		'<input type="hidden" name="MAX_FILE_SIZE" value="100000">' +
+		'</form>' +
+		'<br><iframe name=i3GEOuploadgvpiframe style="text-align:left;border:1px solid gray;" width="98%" height="150px"></iframe>';
+		core_montaEditor("","350px","320px","","UploadGvp");
+		$i("editor_bd").innerHTML = ins;
 	};
 	//cria o bot&atilde;o de adi&ccedil;&atilde;o de um novo menu
 	new YAHOO.widget.Button(idBotao,{ onclick: { fn: temp } });
@@ -263,6 +279,10 @@ function montaNosRaiz(redesenha)
 		conteudo += "&nbsp;<img style=\"width:12px;position:relative;cursor:pointer;top:2px\" onclick=\"editorTemaMapfile('"+$mapfiles[i].codigo+"')\" title='editar tema associado' src=\"../imagens/03.png\" />";
 		if(iconePlus){
 			conteudo += "<a style='border:solid white 0px;text-decoration:none;' href='../php/editortexto.php?mapfile="+$mapfiles[i].codigo+"' target=_self >&nbsp;<img title='Editor de textos' style=\"border:0px solid white;width:12px;position:relative;cursor:pointer;top:2px\" src=\"../imagens/06.png\" /></a>";
+		}
+		//opcao de download se for gvsig
+		if($mapfiles[i].extensao === "gvp"){
+			conteudo += "&nbsp;<img style=\"width:12px;position:relative;cursor:pointer;top:2px\" onclick=\"downloadGvp('"+$mapfiles[i].codigo+"')\" title='download' src=\"../imagens/down1.gif\" />";
 		}
 		conteudo += "&nbsp;<img style=\"width:12px;position:relative;cursor:pointer;top:2px\" onclick=\"testarMapfile('"+$mapfiles[i].codigo+"','"+$mapfiles[i].extensao+"')\" title='testar!' src=\"../imagens/41.png\" />";
 		conteudo += "&nbsp;<img width=20px style=\"position:relative;cursor:pointer;top:2px\" onclick=\"javascript:window.open('../../ms_criamapa.php?layers="+$mapfiles[i].codigo+"')\" title='abrir no i3Geo' src=\"../../imagens/i3geo2.jpg\" />";
@@ -942,6 +962,18 @@ function excluirMapfile(codigoMap)
 	var no = tree.getNodeByProperty("id",codigoMap);
 	var sUrl = "../php/editormapfile.php?funcao=excluirMapfile&codigoMap="+codigoMap;
 	core_excluiNoTree(sUrl,no,mensagem,codigoMap);
+}
+/*
+Function: downloadGvp
+
+Download de arquivo .gvp
+
+<DOWNLOADGVP>
+*/
+function downloadGvp(codigoMap)
+{
+	var sUrl = "../php/editormapfile.php?funcao=downloadGvp&codigoMap="+codigoMap;
+	window.open(sUrl,"new");
 }
 /*
 Function: clonarMapfile

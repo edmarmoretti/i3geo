@@ -134,6 +134,7 @@ gvsigview - (depreciado na versão 4.7) nome da view do projeto gvSig. Se nao for
 //
 //quando $funcao existe, &eacute; pq o ms_criamapa.php est&aacute; sendo utilizado como um include em classesphp/mapa_controle.php
 //
+ms_ResetErrorList();
 $parurl = array_merge($_GET,$_POST);
 if (!isset($parurl["debug"]))
 {error_reporting(0);$debug="nao";}
@@ -423,7 +424,6 @@ $_SESSION["imgurl"] = strtolower($protocolo[0])."://".$_SERVER['HTTP_HOST'].$atu
 $_SESSION["tmpurl"] = strtolower($protocolo[0])."://".$_SERVER['HTTP_HOST'].$atual;
 $_SESSION["map_file"] = $tmpfname;
 $_SESSION["mapext"] = $mapext;
-
 if (isset($executa))
 {
 	if (file_exists($executa))
@@ -452,8 +452,7 @@ if (file_exists($locaplic."/pacotes/geoip") && file_exists($locaplic."/pacotes/g
 {require_once(__DIR__."/ms_registraip.php");}
 //echo $tmpfname;exit;
 if ($interface != "mashup")
-{abreInterface();}
-
+{abreInterface($interface,$caminho,$tempo);}
 /*
 Adapta os dados de cada layer.
 
@@ -492,20 +491,17 @@ function adaptaLayers(){
 /*
 Redireciona para o HTML definido em $interface, abrindo o mapa
 */
-function abreInterface(){
-	global $interface,$caminho,$tempo;
+function abreInterface($interface,$caminho,$tempo){
 	$nomeInterface = explode(".",basename($interface));
 	//$_SESSION["interface"] = $nomeInterface[0];
-	if (count(explode(".php",$interface)) > 1)
-	{
+	if (count(explode(".php",$interface)) > 1){
 		if(file_exists($caminho."interface/".$interface))
 		{include_once($caminho."interface/".$interface);}
 		else
 		{include_once($interface);}
 		exit;
 	}
-	else
-	{
+	else{
 		if(file_exists($caminho."interface/".$interface))
 		{$urln = $caminho."interface/".$interface."?".session_id();}
 		else
@@ -635,8 +631,7 @@ function incluiTemasIniciais(){
 			else{
 				if($extensao == ".map"){
 					$maptemp = @ms_newMapObj($arqtemp);
-					for($i=0;$i<($maptemp->numlayers);++$i)
-					{
+					for($i=0;$i<($maptemp->numlayers);++$i){
 						//error_reporting(E_ALL);
 						$layern = $maptemp->getLayer($i);
 						if($layern->type == MS_LAYER_RASTER)
@@ -692,8 +687,7 @@ function incluiTemasIniciais(){
 	//
 	//muda para RGB para melhorar o desenho da imagem raster
 	//
-	if($existeraster)
-	{
+	if($existeraster){
 		//$of = $mapn->outputformat;
 		//$of->set("imagemode",MS_IMAGEMODE_RGB);
 	}

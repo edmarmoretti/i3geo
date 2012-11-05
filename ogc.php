@@ -409,7 +409,7 @@ ms_ioinstallstdouttobuffer();
 $oMap->owsdispatch($req);
 $contenttype = ms_iostripstdoutbuffercontenttype();
 if(strtolower($request) == "getcapabilities")
-{header('Content-Disposition: attachment; filename=getcapabilities.xml"');}
+{header('Content-Disposition: attachment; filename=getcapabilities.xml');}
 //header("Content-type: application/xml");
 header("Content-type: $contenttype");
 

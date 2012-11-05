@@ -160,8 +160,7 @@ include_once ("carrega_ext.php");
 if(!function_exists("sobeAnno")){
 	include_once("funcoes_gerais.php");
 }
-if ($funcao == "criaMapa")
-{
+if($funcao == "criaMapa"){
 	session_name("i3GeoPHP");
 	unset($GLOBALS);
 	session_destroy();
@@ -181,10 +180,12 @@ if ($funcao == "criaMapa")
 	$interface = "mashup";
 	include_once("ms_criamapa.php");
 	$_SESSION["interface"] = $interfaceTemp;
-
-	cpjson(session_id());
+	$temp = $_SESSION["map_file"];
+	$id = session_id();
+	session_write_close();
 	//ver funcoes_gerais.php
-	validaAcessoTemas($_SESSION("map_file"));
+	validaAcessoTemas($temp);
+	cpjson($id);
 	return;
 }
 if (!isset($map_file))

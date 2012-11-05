@@ -2212,13 +2212,13 @@ Parametro:
 $obj {array} - objeto que ser&aacute; convertido
 */
 function cpjson($obj){
-	if(function_exists("json_encode"))
-	{
+	if(ob_get_contents ()){
+		ob_end_clean();
+	}
+	if(function_exists("json_encode")){
 		echojson(array2json($obj));
 	}
-	else
-	{
-		ob_end_clean();
+	else{
 		include_once("../pacotes/cpaint/cpaint2.inc.php");
 		$cp = new cpaint();
 		$cp->set_data($obj);
@@ -2534,7 +2534,7 @@ function listaTemasIndevidos(){
 /*
  Function: listaGruposUsrLogin
 
-Lista os os grupos ao qual pertence o usuario atualmente logado
+Lista os grupos ao qual pertence o usuario atualmente logado
 */
 function listaGruposUsrLogin(){
 	if(empty($_COOKIE["i3geocodigologin"])){

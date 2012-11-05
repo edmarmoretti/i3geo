@@ -62,7 +62,8 @@ $funcoesEdicao = array(
 		"ALTERARMETADADOS",
 		"ALTERARGERAL",
 		"ALTERARCLASSEGERAL",
-		"ALTERARCLASSELABEL"
+		"ALTERARCLASSELABEL",
+		"DOWNLOADGVP"
 );
 if(in_array(strtoupper($funcao),$funcoesEdicao)){
 	$f = @fopen("$locaplic/temas/teste.txt",w);
@@ -123,6 +124,18 @@ switch (strtoupper($funcao))
 
 		{JSON}
 		*/
+	case "DOWNLOADGVP":
+		if(file_exists($locaplic."/temas/".$codigoMap.".gvp")){
+			ob_end_clean();
+			header('Content-type: application/octet-stream');
+			header('Content-Disposition: attachment; filename='.$codigoMap.'.gvp');
+			echo file_get_contents($locaplic."/temas/".$codigoMap.".gvp");
+		}
+		else{
+			echo "Arquivo nao encontrado";
+		}
+		exit;
+	break;
 	case "EDITASIMBOLO":
 		include_once("$locaplic/classesphp/classe_legenda.php");
 		if($base == "" or !isset($base)){
