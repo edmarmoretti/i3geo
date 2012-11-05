@@ -1707,7 +1707,35 @@ class Metaestat{
 			return array("Falhou: " . $e->getMessage());
 		}
 		return array("ok");
-
+	}
+	function excluiAtributosMedidaVariavel($id_medida_variavel,$codigo_tipo_regiao,$identificador_regiao,$id){
+		$medida = $this->listaMedidaVariavel("",$id_medida_variavel);
+		if($medida["esquemadb"] != "i3geo_metaestat"){
+			return "erro";
+		}
+		$c = $this->listaConexao($medida["codigo_estat_conexao"],true);
+		$dbh = new PDO('pgsql:dbname='.$c["bancodedados"].';user='.$c["usuario"].';password='.$c["senha"].';host='.$c["host"].';port='.$c["porta"]);
+		$sql = array();
+		if($id_medida_variavel != "" && $codigo_tipo_regiao != "" && $identificador_regiao != "" && $id != ""){
+			$s = "DELETE from i3geo_metaestat.".$medida["tabela"];
+			$s .= " WHERE ".$medida["colunaidunico"]."::text = '".$id."' AND ".$medida["colunaidgeo"]."::text = '".$identificador_regiao."'";
+			if($medida["filtro"] != ""){
+				$s .= " AND ".$medida["filtro"];
+			}
+			$sql[] = $s;
+		}
+		try {
+			$dbh->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+			$dbh->beginTransaction();
+			foreach($sql as $s){
+				$sth = $dbh->exec($s);
+			}
+			$dbh->commit();
+		} catch (Exception $e) {
+			$dbh->rollBack();
+			return array("Falhou: " . $e->getMessage());
+		}
+		return array("ok");
 	}
 }
 ?>

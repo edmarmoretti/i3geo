@@ -739,13 +739,13 @@ i3GEOF.editorlimites = {
 					ins = "";
 					//registros
 					for(i=0;i<n;i++){
-						ins += "<hr><br>";
 						//descobre qual o indice que corresponde ao idunico do registro
 						for(j=0;j<nj;j++){
 							if(atr.aliascolunas[j] == "idunico"){
 								idunico = atr.dados[i][atr.colunas[j]];
 							}
 						}
+						ins += "<hr><div><p class=paragrafo style='color:blue;cursor:pointer' onclick='i3GEOF.editorlimites.editarAtributos.excluir("+idunico+")' >excluir</p>";
 						//colunas
 						for(j=0;j<nj;j++){
 							if(atr.aliascolunas[j] !== "idunico"){
@@ -766,7 +766,7 @@ i3GEOF.editorlimites = {
 									'<input class=digitar id="" value="" name="'+atr.colunas[j]+'" /></p>';
 								}
 							}
-							ins + "<br>";
+							ins + "<br></div>";
 							novoel.innerHTML = ins;
 							$i("editarAtributosForm").appendChild(novoel);
 						}}}
@@ -779,6 +779,22 @@ i3GEOF.editorlimites = {
 					);
 				};
 			cpJSON.call(p,"foo",temp,"&codigo_tipo_regiao="+codigo_tipo_regiao+"&id_medida_variavel="+id_medida_variavel+"&x="+i3GEOF.editorlimites.editarAtributos.x+"&y="+i3GEOF.editorlimites.editarAtributos.y);
+		},
+		//TODO redesenhar as camadas que sofrerem alterações em função do salvar ou excluir
+		excluir: function(id){
+			var p = i3GEO.configura.locaplic+"/admin/php/metaestat.php?funcao=excluiAtributosMedidaVariavel",
+				codigo_tipo_regiao = $i("i3geoCartoRegioesEditaveis").value,
+				id_medida_variavel = $i("editarAtributosComboMedidas").value,
+				identificador_regiao = $i("editarAtributosidentificador_regiao").value,
+				temp = function(retorno){
+					i3GEOF.editorlimites.editarAtributos.pegaDados();
+					i3GEO.janela.fechaAguarde("aguardeSalvaAtributos");
+				};
+			i3GEO.janela.AGUARDEMODAL = true;
+			i3GEO.janela.abreAguarde("aguardeSalvaAtributos","Salvando...");
+			i3GEO.janela.AGUARDEMODAL = false;
+			cpJSON.call(p,"foo",temp,"&codigo_tipo_regiao="+codigo_tipo_regiao+"&identificador_regiao="+identificador_regiao+"&id_medida_variavel="+id_medida_variavel+"&id="+id);
+
 		},
 		salva: function(){
 			if(i3GEO.login.verificaCookieLogin() === false){

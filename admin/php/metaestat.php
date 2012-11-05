@@ -75,7 +75,8 @@ $funcoesEdicao = array(
 	"ALTERANOMECOLUNADB",
 	"INSERIRDADOS",
 	"MANTEMDADOSREGIAO",
-	"SALVAATRIBUTOSMEDIDAVARIAVEL"
+	"SALVAATRIBUTOSMEDIDAVARIAVEL",
+	"EXCLUIATRIBUTOSMEDIDAVARIAVEL"
 );
 if(in_array(strtoupper($funcao),$funcoesEdicao)){
 	if(verificaOperacaoSessao("admin/metaestat/geral") == false){
@@ -1211,6 +1212,12 @@ switch (strtoupper($funcao))
 		$colunas = explode(";",$colunas);//array
 		$m = new Metaestat();
 		$resultado = $m->salvaAtributosMedidaVariavel($id_medida_variavel,$codigo_tipo_regiao,$identificador_regiao,$idsunicos,$colunas,$valores);
+		retornaJSON($resultado);
+		exit;
+	break;
+	case "EXCLUIATRIBUTOSMEDIDAVARIAVEL":
+		$m = new Metaestat();
+		$resultado = $m->excluiAtributosMedidaVariavel($id_medida_variavel,$codigo_tipo_regiao,$identificador_regiao,$id);
 		retornaJSON($resultado);
 		exit;
 	break;
