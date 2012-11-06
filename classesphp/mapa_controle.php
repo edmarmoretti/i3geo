@@ -1081,6 +1081,8 @@ Altera uma classe de um tema, aplicando uma nova classifica&ccedil;&atilde;o ou 
 		{$retorno = $m->valorunico($item,$ignorar);}
 		if ($opcao == "intervalosiguais")
 		{$retorno = $m->intervalosiguais($item,$nclasses,$ignorar);}
+		if ($opcao == "quantil")
+		{$retorno = $m->quantil($item,$nclasses,$ignorar);}
 		if ($opcao == "quartis")
 		{
 			if(!isset($tipoLegenda))

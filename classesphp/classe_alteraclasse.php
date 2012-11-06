@@ -272,6 +272,8 @@ $ignorar - valor que ser&aacute; ignorado na listagem final
 				}
 				$ncor = $novoestilo->color;
 				$ncor->setrgb((mt_rand(0,255)),(mt_rand(0,255)),(mt_rand(0,255)));
+				$ncor = $novoestilo->outlinecolor;
+				$ncor->setrgb(255,255,255);
 				$classe->setexpression($expressao);
 				$classe->set("name",$nomeclasse);
 				$classe->set("title",($this->layer->name)."+".$i);
@@ -281,6 +283,76 @@ $ignorar - valor que ser&aacute; ignorado na listagem final
 		}
 		else
 		{return ("erro. Nenhum valor numerico no item");}
+	}
+	/*
+	 function: quantil
+
+	Cria classes em um objeto layer com intervalos baseados no calculo de quantil
+
+	Parametros:
+
+	$item - item da tabela de atributos
+
+	$nclasses - n&uacute;mero de classes
+
+	$ignorar - valor que ser&aacute; ignorado na listagem final
+	*/
+	function quantil($item,$nclasses,$ignorar)
+	{
+		if(!$this->layer){return "erro";}
+		$valores = $this->pegaValores($this->mapa,$this->layer,$item,true,$ignorar);
+		if (count($valores) > 0){
+			//rotina obtida do pacote TME
+			sort($valores);
+			$valores = array_unique($valores);
+			$numValues = count($valores);
+			$classNum = $numValues / $nclasses; // Number in each class
+			for ($i = 0; $i < $nclasses; $i++) {
+				$position = (int)($classNum * $i);
+				$classBreaks[] = $valores[$position];
+			}
+			$classBreaks[] = $valores[$numValues-1]; // Last class break = biggest value
+			//echo "<pre>";var_dump($classBreaks);exit;
+			$numclassesatual = $this->layer->numclasses;
+			//apaga todas as classes existentes
+			$classetemp = $this->layer->getClass(0);
+			$estilotemp = $classetemp->getStyle(0);
+			for ($i=0; $i < $numclassesatual; ++$i){
+				$classe = $this->layer->getClass($i);
+				$classe->set("status",MS_DELETE);
+			}
+			//adiciona as classes novas
+			for ($i=0; $i < $nclasses; ++$i){
+				$expressao = "(([".$item."]>".$classBreaks[$i].")and([".$item."]<=".$classBreaks[$i + 1]."))";
+				$nomeclasse = "> ".$classBreaks[$i]." e <= que ".($classBreaks[$i + 1]);
+				if($i == 0){
+					$expressao = "([".$item."]<=".$classBreaks[$i + 1].")";
+					$nomeclasse = "<= que ".($classBreaks[$i + 1]);
+				}
+				if($i == ($nclasses - 1)){
+					$expressao = "([".$item."] >=".$classBreaks[$i].")";
+					$nomeclasse = ">= que ".($classBreaks[$i]);
+				}
+				$classe = ms_newClassObj($this->layer);
+				$novoestilo = ms_newStyleObj($classe);
+				if ($this->layer->type == 0){
+					$novoestilo->set("symbolname","ponto");
+					$novoestilo->set("size","6");
+				}
+				$ncor = $novoestilo->color;
+				$ncor->setrgb((mt_rand(0,255)),(mt_rand(0,255)),(mt_rand(0,255)));
+				$ncor = $novoestilo->outlinecolor;
+				$ncor->setrgb(255,255,255);
+				$classe->setexpression($expressao);
+				$classe->set("name",$nomeclasse);
+				//$classe->set("title",($this->layer->name)."+".$i);
+			}
+			$this->layer->setMetaData("cache","");
+			return ("ok");
+		}
+		else{
+			return ("erro. Nenhum valor numerico no item");
+		}
 	}
 /*
 function: quartis
@@ -351,6 +423,8 @@ Include:
 				$classe->set("name",$nomeClasse);
 				$ncor = $novoestilo->color;
 				$ncor->setrgb(255,$vcor[$i],$vcor[$i]);
+				$ncor = $novoestilo->outlinecolor;
+				$ncor->setrgb(255,255,255);
 			}
 			$this->layer->setMetaData("cache","");
 			return ("ok");
@@ -426,6 +500,8 @@ $itemNome - item que ser&aacute; usado para definir os nomes das classes (por de
 			$estilo = $classes[$i]->getStyle(0);
 			$ncor = $estilo->color;
 			$ncor->setrgb((mt_rand(0,255)),(mt_rand(0,255)),(mt_rand(0,255)));
+			$ncor = $estilo->outlinecolor;
+			$ncor->setrgb(255,255,255);
 			if ($this->layer->type == 0) //tipo ponto
 			{
 				$estilo->set("symbolname","ponto");

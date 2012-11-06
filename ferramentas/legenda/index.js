@@ -216,11 +216,18 @@ i3GEOF.legenda = {
 				{onclick:{fn: i3GEOF.legenda.valorC}}
 			);
 			$i("i3GEOlegendabotao8-button").style.width = "200px";
+
 			new YAHOO.widget.Button(
 				"i3GEOlegendabotao9",
 				{onclick:{fn: i3GEOF.legenda.valorQ}}
 			);
 			$i("i3GEOlegendabotao9-button").style.width = "200px";
+
+			new YAHOO.widget.Button(
+				"i3GEOlegendabotaoQuantil",
+				{onclick:{fn: i3GEOF.legenda.valorQu}}
+			);
+			$i("i3GEOlegendabotaoQuantil-button").style.width = "200px";
 
 			new YAHOO.widget.Button(
 				"i3GEOlegendabotao10",
@@ -394,6 +401,7 @@ i3GEOF.legenda = {
 		'	<p class=paragrafo >N&uacute;mero de classes:'+
 		$inputText("","","i3GEOlegendanclasses","",3,"5") +
 		'	<p class=paragrafo ><input id=i3GEOlegendabotao8 size="25" type="button" value="Intervalos iguais">'+
+		'	&nbsp;<input id=i3GEOlegendabotaoQuantil size="25" type="button" value="Quantil">'+
 		'	<hr><p class=paragrafo >Cria classes para um item num&eacute;rico utilizando os quartis (o item utilizado &eacute; o mesmo indicado acima)</p>'+
 		'	<p class=paragrafo ><input id=i3GEOlegendabotao9 size="25" type="button" value="Quartis">'+
 		'	<p class=paragrafo >Estilo dos nomes das classes: ' +
@@ -1084,6 +1092,35 @@ i3GEOF.legenda = {
 			var item = $i("i3GEOlegendaSelItem").value,
 				p = i3GEO.configura.locaplic+"/classesphp/mapa_controle.php?g_sid="+i3GEO.configura.sid+"&funcao=alteraclasse&tema="+i3GEOF.legenda.tema+"&item="+item+"&opcao=quartis&ignorar="+$i("i3GEOlegendaignorar").value+"&ext="+i3GEO.parametros.mapexten+"&tipoLegenda="+$i("estiloClassesQuartis").value,
 				cp = new cpaint();
+				fim = function(){
+					i3GEOF.legenda.aposAlterarLegenda();
+					i3GEOF.legenda.aguarde.visibility = "hidden";
+				};
+			if (item == "")
+			{i3GEO.janela.tempoMsg("Selecione um item!");return;}
+			i3GEOF.legenda.aguarde.visibility = "visible";
+			cp.set_response_type("JSON");
+			cp.call(p,"alteraclasse",fim);
+		}
+		catch(e){i3GEO.janela.tempoMsg("Erro: "+ e);i3GEOF.legenda.aguarde.visibility = "hidden";}
+	},
+	/*
+	Function: valorQu
+
+	Altera a leganda do tema por meio do calculo de quantis
+
+	Veja:
+
+	<ALTERACLASSE>
+	*/
+	valorQu: function(){
+		try{
+			if(i3GEOF.legenda.aguarde.visibility === "visible")
+			{return;}
+			var item = $i("i3GEOlegendaSelItem").value,
+				nclasses = $i("i3GEOlegendanclasses").value,
+				p = i3GEO.configura.locaplic+"/classesphp/mapa_controle.php?g_sid="+i3GEO.configura.sid+"&funcao=alteraclasse&nclasses="+nclasses+"&tema="+i3GEOF.legenda.tema+"&item="+item+"&opcao=quantil&ignorar="+$i("i3GEOlegendaignorar").value+"&ext="+i3GEO.parametros.mapexten,
+				cp = new cpaint(),
 				fim = function(){
 					i3GEOF.legenda.aposAlterarLegenda();
 					i3GEOF.legenda.aguarde.visibility = "hidden";
