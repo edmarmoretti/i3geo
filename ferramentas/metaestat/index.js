@@ -129,6 +129,7 @@ i3GEOF.metaestat = {
 			'	<button title="'+$trad("t42")+'" onclick="i3GEO.tema.dialogo.cortina()"><img src="'+i3GEO.configura.locaplic+'/imagens/gisicons/mapset.png" /></button>' +
 			'	<button title="'+$trad("t49")+'" onclick="i3GEOF.metaestat.analise.ativaTme()"><img src="'+i3GEO.configura.locaplic+'/imagens/gisicons/3d-light.png" /></button>' +
 			'	<button title="Estat&iacute;sticas gerais" onclick="i3GEOF.metaestat.analise.estatistica()"><img src="'+i3GEO.configura.locaplic+'/imagens/gisicons/stats.png" /></button>' +
+			'	<button title="Ativa/Desativa contorno" onclick="i3GEOF.metaestat.analise.contorno()"><img src="'+i3GEO.configura.locaplic+'/imagens/gisicons/boundary-remove-add.png" /></button>' +
 			'</div>' +
 			'<div id="i3geoCartoAnaliseCamadas" style="margin-left:5px;line-height:25px"></div>' +
 			'<input type=hidden  value="" id="listaColourRampAnaliseMetaestat" onchange="i3GEOF.metaestat.analise.aplicaColourRamp()" />'; //utilizado pelo seletor de colourramp
@@ -158,14 +159,30 @@ i3GEOF.metaestat = {
 			};
 			i3GEO.php.listaCamadasMetaestat(temp);
 		},
+		contorno: function(){
+			if($i("i3geoCartoAnaliseCamadasCombo").value == ""){
+				i3GEO.janela.tempoMsg("Ative uma camada primeiro");
+				return;
+			}
+			i3GEO.mapa.ativaTema($i("i3geoCartoAnaliseCamadasCombo").value);
+			var p = i3GEO.configura.locaplic+"/ferramentas/metaestat/analise.php?g_sid="+i3GEO.configura.sid +
+				"&funcao=alteraContorno&tema="+$i("i3geoCartoAnaliseCamadasCombo").value,
+				temp = function(retorno){
+					i3GEO.janela.fechaAguarde("aguardecontorno");
+					i3GEO.atualiza();
+					i3GEO.Interface.atualizaTema("",i3GEO.temaAtivo);
+					i3GEO.arvoreDeCamadas.atualizaLegenda(i3GEO.temaAtivo);
+				};
+			i3GEO.janela.abreAguarde("aguardecontorno","Aguarde...");
+			i3GEO.util.ajaxGet(p,temp);
+		},
 		ativaTme: function(){
-			if(i3GEO.temaAtivo != ""){
-				//faz a carga do javascript e depois executa abreTme para definir os parametros
-				i3GEO.util.dialogoFerramenta("i3GEO.tema.dialogo.tme()","tme","tme","index.js","i3GEOF.metaestat.analise.abreTme()");
+			if($i("i3geoCartoAnaliseCamadasCombo").value == ""){
+				i3GEO.janela.tempoMsg("Ative uma camada primeiro");
+				return;
 			}
-			else{
-				i3GEO.tema.dialogo.tme();
-			}
+			i3GEO.mapa.ativaTema($i("i3geoCartoAnaliseCamadasCombo").value);
+			i3GEO.util.dialogoFerramenta("i3GEO.tema.dialogo.tme()","tme","tme","index.js","i3GEOF.metaestat.analise.abreTme()");
 		},
 		abreTme: function(){
 			//i3GEOF.tme.ITEMNOMEREGIOES
@@ -181,10 +198,11 @@ i3GEOF.metaestat = {
 			i3GEO.util.ajaxGet(p,temp);
 		},
 		estatistica: function(){
-			if(i3GEO.temaAtivo == ""){
+			if($i("i3geoCartoAnaliseCamadasCombo").value == ""){
 				i3GEO.janela.tempoMsg("Ative uma camada primeiro");
 				return;
 			}
+			i3GEO.mapa.ativaTema($i("i3geoCartoAnaliseCamadasCombo").value);
 			//primeiro pega o nome da coluna que contem os dados
 			//depois busca as estatisticas
 			var p = i3GEO.configura.locaplic+"/ferramentas/metaestat/analise.php?g_sid="+i3GEO.configura.sid +
@@ -254,9 +272,11 @@ i3GEOF.metaestat = {
 			i3GEO.php.listaCamadasMetaestat(temp);
 		},
 		ativaEditorLegenda: function(){
-			if(i3GEO.temaAtivo == ""){
-				i3GEO.janela.tempoMsg("Nenhum tema est&aacute; ativo. Escolha um e depois clique na guia <b>Classes</b>");
+			if($i("i3geoCartoAnaliseCamadasCombo").value == ""){
+				i3GEO.janela.tempoMsg("Ative uma camada primeiro");
+				return;
 			}
+			i3GEO.mapa.ativaTema($i("i3geoCartoAnaliseCamadasCombo").value);
 			i3GEOF.legenda.iniciaJanelaFlutuante();
 			i3GEO.guias.mostraGuiaFerramenta('i3GEOlegendaguia2','i3GEOlegendaguia');
 			//desmarca a opcao que considera apenas os elementos visiveis
@@ -878,6 +898,7 @@ i3GEOF.metaestat = {
 				i3GEOF.metaestat.editor.removeEl("i3GEOF.metaestat.editor.t1");
 				// Enome e o id do input onde o usuario escolheu o nome da nova variavel
 				i3GEOF.metaestat.editor.t1(true,$i("Enome").value);
+				i3GEOF.metaestat.principal.inicia();
 			};
 			i3GEOadmin.variaveis.editar("variavel","");
 		},
@@ -888,6 +909,7 @@ i3GEOF.metaestat = {
 				i3GEOF.metaestat.editor.removeEl("i3GEOF.metaestat.editor.t1");
 				// Enome e o id do input onde o usuario escolheu o nome da nova variavel
 				i3GEOF.metaestat.editor.t1(true,$i("Enome").value);
+				i3GEOF.metaestat.principal.inicia();
 			};
 			var codigo_variavel = $i("i3geoCartoComboVariavelEditor").value;
 			if(codigo_variavel !== ""){
@@ -901,6 +923,7 @@ i3GEOF.metaestat = {
 				i3GEOF.metaestat.editor.removeEl("i3GEOF.metaestat.editor.t2");
 				// Enome e o id do input onde o usuario escolheu o nome da nova variavel
 				i3GEOF.metaestat.editor.t2(true,$i("Enomemedida").value);
+				i3GEOF.metaestat.principal.inicia();
 			};
 			i3GEOadmin.variaveis.editar("medidaVariavel","");
 			//passa o codigo da variavel
@@ -932,6 +955,7 @@ i3GEOF.metaestat = {
 				i3GEOF.metaestat.editor.removeEl("i3GEOF.metaestat.editor.t2");
 				// Enome e o id do input onde o usuario escolheu o nome da nova variavel
 				i3GEOF.metaestat.editor.t2(true,$i("Enomemedida").value);
+				i3GEOF.metaestat.principal.inicia();
 			};
 			var id_medida_variavel = $i("i3geoCartoComboMedidaVariavelEditor").value;
 			if(id_medida_variavel !== ""){

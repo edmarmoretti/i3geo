@@ -107,7 +107,7 @@ select option:hover {
 .tdclara
 {color:#2F4632;border: 0px solid #DFDFDF;padding: 0px;background-color:#DFDFDF;margin:0px;text-align: center;font-size: 12px;font-family: Verdana, Arial, Helvetica, sans-serif;z-index:1000;position:relative;}
 .tdbranca
-{border-collapse: collapse;color:#2F4632;border: 0px solid #DFDFDF;padding: 0px;background-color:#FFFFFF;margin:0px;text-align: center;font-size: 12px;font-family: Verdana, Arial, Helvetica, sans-serif;z-index:1000;position:relative;}
+{border-collapse: collapse;color:#2F4632;border: 0px solid #DFDFDF;padding: 0px;background-color:#FFFFFF;margin:0px;text-align: center;font-size: 12px;font-family: Verdana, Arial, Helvetica, sans-serif;position:relative;}
 .tdtxtleft
 {color:#2F4632;border: 0px solid #DFDFDF;padding: 0px;background-color:#FFFFFF;margin:0px;text-align: left;font-size: 12px;font-family: Verdana, Arial, Helvetica, sans-serif;}
 .tdtxtjust

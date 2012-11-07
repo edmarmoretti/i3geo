@@ -355,7 +355,7 @@ i3GEO.janela = {
 		if(funcaoMinimiza)
 		{$i(id+"_minimizaCabecalho").onclick = funcaoMinimiza;}
 		YAHOO.util.Event.addListener(janela.close, "click", i3GEO.janela.fecha,janela,{id:id},true);
-		$i(id+"_c").style.zIndex = 20000;
+		//$i(id+"_c").style.zIndex = 20000;
 		return([janela,$i(id+"_cabecalho"),temp]);
 	},
 	/*

@@ -58,6 +58,7 @@ function montaTabela(dados){
 		                {label:"Conexão",key:"codigo_estat_conexao",formatter:formatTexto},
 		                {label:"Nomes das regi&otilde;es",resizeable:false,key:"colunanomeregiao",formatter:formatTexto},
 		                {label:"Colunas vis&iacute;veis (separa com v&iacute;rgula)",resizeable:false,key:"colunasvisiveis",formatter:formatTexto},
+		                {label:"Apelidos das colunas vis&iacute;veis (separa com v&iacute;rgula)",resizeable:false,key:"apelidos",formatter:formatTexto},
 		                {label:"SRID",key:"srid",formatter:formatTexto}
 		                ];
 		myDataSource = new YAHOO.util.DataSource(dados);
@@ -65,7 +66,7 @@ function montaTabela(dados){
 
 		myDataSource.responseType = YAHOO.util.DataSource.TYPE_JSARRAY;
 		myDataSource.responseSchema = {
-				fields: ["codigo_tipo_regiao","nome_tipo_regiao","descricao_tipo_regiao","esquemadb","tabela","colunageo","colunacentroide","data","identificador","codigo_estat_conexao","colunanomeregiao","colunasvisiveis","srid"]
+				fields: ["codigo_tipo_regiao","nome_tipo_regiao","descricao_tipo_regiao","esquemadb","tabela","colunageo","colunacentroide","data","identificador","codigo_estat_conexao","colunanomeregiao","colunasvisiveis","apelidos","srid"]
 		};
 		myDataTable.subscribe(
 			'cellClickEvent',
@@ -261,6 +262,7 @@ function montaDiv(i){
 			{titulo:"C&oacute;digo da conex&atilde;o com o banco:",id:"Ecodigo_estat_conexao",size:"50",value:i.codigo_estat_conexao,tipo:"text",div:""},
 			{titulo:"Coluna com o nome da regi&atilde;o:",id:"Ecolunanomeregiao",size:"50",value:i.colunanomeregiao,tipo:"text",div:""},
 			{titulo:"Colunas que ficar&atilde;o vis&iacute;veis no mapa:",id:"Ecolunasvisiveis",size:"50",value:i.colunasvisiveis,tipo:"text",div:""},
+			{titulo:"Apelidos das colunas que ficar&atilde;o vis&iacute;veis no mapa:",id:"Eapelidos",size:"50",value:i.apelidos,tipo:"text",div:""},
 			{titulo:"C&oacute;digo SRID:",id:"Esrid",size:"50",value:i.srid,tipo:"text",div:""}
 			]
 		},
@@ -282,7 +284,7 @@ function montaDivAgregacoes(i){
 }
 
 function gravaDados(id,recordid){
-	var campos = new Array("codigo_estat_conexao","nome_tipo_regiao","descricao_tipo_regiao","esquemadb","tabela","colunageo","colunacentroide","data","identificador","colunanomeregiao","srid","colunasvisiveis"),
+	var campos = new Array("codigo_estat_conexao","nome_tipo_regiao","descricao_tipo_regiao","esquemadb","tabela","colunageo","colunacentroide","data","identificador","colunanomeregiao","srid","colunasvisiveis","apelidos"),
 		par = "",
 		i = 0,
 		sUrl,callback;

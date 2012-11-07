@@ -104,7 +104,7 @@ top:2px;
 .tdclara
 {color:#2F4632;border: 0px solid #DFDFDF;padding: 0px;background-color:#DFDFDF;margin:0px;text-align: center;font-size: 12px;font-family: Verdana, Arial, Helvetica, sans-serif;z-index:1000;position:relative;}
 .tdbranca
-{border-collapse: collapse;color:#2F4632;border: 0px solid #DFDFDF;padding: 0px;background-color:#FFFFFF;margin:0px;text-align: center;font-size: 12px;font-family: Verdana, Arial, Helvetica, sans-serif;z-index:1000;position:relative;}
+{border-collapse: collapse;color:#2F4632;border: 0px solid #DFDFDF;padding: 0px;background-color:#FFFFFF;margin:0px;text-align: center;font-size: 12px;font-family: Verdana, Arial, Helvetica, sans-serif;position:relative;}
 .tdtxtleft
 {color:#2F4632;border: 0px solid #DFDFDF;padding: 0px;background-color:#FFFFFF;margin:0px;text-align: left;font-size: 12px;font-family: Verdana, Arial, Helvetica, sans-serif;}
 .tdtxtjust
@@ -1366,7 +1366,7 @@ width:16px;
 }
 .yui-navset{
 background:#d8d8d8 url(../pacotes/yui290/build/assets/skins/sam/sprite.png) repeat-x; /* tab background */
-z-index:3000;
+z-index:1;/* 3000 */
 }
 .ygtvtn
 {

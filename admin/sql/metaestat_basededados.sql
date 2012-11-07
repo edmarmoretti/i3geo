@@ -11,9 +11,9 @@ INSERT INTO i3geoestat_tipo_periodo (codigo_tipo_periodo, nome, descricao) VALUE
 
 
 -- i3geoestat_tipo_regiao
-INSERT INTO i3geoestat_tipo_regiao (codigo_tipo_regiao, nome_tipo_regiao, descricao_tipo_regiao, codigo_estat_conexao, esquemadb, tabela, colunageo, data, identificador, colunanomeregiao, srid, colunacentroide, colunasvisiveis) VALUES ('2', 'Município', 'Limites municipais', '1', 'i3geo_metaestat', 'municipios', 'the_geom', '2010', 'co_municipio', 'no_cidade', '4326', 'the_geom2', 'co_municipio,no_cidade,co_uf,area_territorial,nu_ano_instalacao');
-INSERT INTO i3geoestat_tipo_regiao (codigo_tipo_regiao, nome_tipo_regiao, descricao_tipo_regiao, codigo_estat_conexao, esquemadb, tabela, colunageo, data, identificador, colunanomeregiao, srid, colunacentroide, colunasvisiveis) VALUES ('3', 'Estado', 'Limites estaduais', '1', 'i3geo_metaestat', 'uf', 'the_geom', '2010', 'co_uf', 'no_uf', '4326', 'the_geom', 'co_uf,sg_uf,no_uf,no_regiao');
-INSERT INTO i3geoestat_tipo_regiao (codigo_tipo_regiao, nome_tipo_regiao, descricao_tipo_regiao, codigo_estat_conexao, esquemadb, tabela, colunageo, data, identificador, colunanomeregiao, srid, colunacentroide, colunasvisiveis) VALUES ('1', 'Bairro', 'Limites de bairros', '1', 'i3geo_metaestat', 'bairros', 'the_geom', '2010', 'co_bairro', 'no_bairro', '4326', 'the_geom', 'co_bairro,no_bairro,no_distr,no_municip');
+INSERT INTO i3geoestat_tipo_regiao (codigo_tipo_regiao, nome_tipo_regiao, descricao_tipo_regiao, codigo_estat_conexao, esquemadb, tabela, colunageo, data, identificador, colunanomeregiao, srid, colunacentroide, colunasvisiveis, apelidos) VALUES ('2', 'Município', 'Limites municipais', '1', 'i3geo_metaestat', 'municipios', 'the_geom', '2010', 'co_municipio', 'no_cidade', '4326', 'the_geom2', 'co_municipio,no_cidade,co_uf,sg_uf,area_territorial,nu_ano_instalacao', 'Código ibge,Nome,Código UF,UF,Área,Ano de criação');
+INSERT INTO i3geoestat_tipo_regiao (codigo_tipo_regiao, nome_tipo_regiao, descricao_tipo_regiao, codigo_estat_conexao, esquemadb, tabela, colunageo, data, identificador, colunanomeregiao, srid, colunacentroide, colunasvisiveis, apelidos) VALUES ('3', 'Estado', 'Limites estaduais', '1', 'i3geo_metaestat', 'uf', 'the_geom', '2010', 'co_uf', 'no_uf', '4326', 'the_geom', 'co_uf,sg_uf,no_uf,no_regiao', 'Código UF,Sigla,Nome');
+INSERT INTO i3geoestat_tipo_regiao (codigo_tipo_regiao, nome_tipo_regiao, descricao_tipo_regiao, codigo_estat_conexao, esquemadb, tabela, colunageo, data, identificador, colunanomeregiao, srid, colunacentroide, colunasvisiveis, apelidos) VALUES ('1', 'Bairro', 'Limites de bairros', '1', 'i3geo_metaestat', 'bairros', 'the_geom', '2010', 'co_bairro', 'no_bairro', '4326', 'the_geom', 'co_bairro,no_bairro,no_distr,no_municip', 'Código bairro,Nome,Distrito,Município');
 
 
 -- i3geoestat_unidade_medida
@@ -37,10 +37,10 @@ INSERT INTO i3geoestat_classificacao (id_classificacao, nome, id_medida_variavel
 
 
 -- i3geoestat_classes
-INSERT INTO i3geoestat_classes (id_classe, expressao, titulo, vermelho, verde, azul, id_classificacao, tamanho, simbolo, overmelho, overde, oazul, otamanho) VALUES ('1', '([nu_populacao]<=6379.5)', '<= 6379.5', '255', '250', '250', '1', '', '', '', '', '', '');
-INSERT INTO i3geoestat_classes (id_classe, expressao, titulo, vermelho, verde, azul, id_classificacao, tamanho, simbolo, overmelho, overde, oazul, otamanho) VALUES ('2', '(([nu_populacao]>6379.5)and([nu_populacao]<=12157))', '> 6379.5 e <= 12157', '255', '230', '230', '1', '', '', '', '', '', '');
-INSERT INTO i3geoestat_classes (id_classe, expressao, titulo, vermelho, verde, azul, id_classificacao, tamanho, simbolo, overmelho, overde, oazul, otamanho) VALUES ('3', '(([nu_populacao]>12157)and([nu_populacao]<=22861.5))', '> 12157 e <= 22861.5', '255', '150', '150', '1', '', '', '', '', '', '');
-INSERT INTO i3geoestat_classes (id_classe, expressao, titulo, vermelho, verde, azul, id_classificacao, tamanho, simbolo, overmelho, overde, oazul, otamanho) VALUES ('4', '([nu_populacao]>22861.5)', '> 22861.5', '255', '0', '0', '1', '', '', '', '', '', '');
+INSERT INTO i3geoestat_classes (id_classe, expressao, titulo, vermelho, verde, azul, id_classificacao, tamanho, simbolo, overmelho, overde, oazul, otamanho) VALUES ('1', '([nu_populacao]<=6379.5)', '<= 6379.5', '255', '250', '250', '1', '', '', '255', '255', '255', '');
+INSERT INTO i3geoestat_classes (id_classe, expressao, titulo, vermelho, verde, azul, id_classificacao, tamanho, simbolo, overmelho, overde, oazul, otamanho) VALUES ('2', '(([nu_populacao]>6379.5)and([nu_populacao]<=12157))', '> 6379.5 e <= 12157', '255', '230', '230', '1', '', '', '255', '255', '255', '');
+INSERT INTO i3geoestat_classes (id_classe, expressao, titulo, vermelho, verde, azul, id_classificacao, tamanho, simbolo, overmelho, overde, oazul, otamanho) VALUES ('3', '(([nu_populacao]>12157)and([nu_populacao]<=22861.5))', '> 12157 e <= 22861.5', '255', '150', '150', '1', '', '', '255', '255', '255', '');
+INSERT INTO i3geoestat_classes (id_classe, expressao, titulo, vermelho, verde, azul, id_classificacao, tamanho, simbolo, overmelho, overde, oazul, otamanho) VALUES ('4', '([nu_populacao]>22861.5)', '> 22861.5', '255', '0', '0', '1', '', '', '255', '255', '255', '');
 
 
 -- i3geoestat_medida_variavel_link

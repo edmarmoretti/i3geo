@@ -450,6 +450,7 @@ i3GEO.mapa = {
 					janela = new YAHOO.widget.Panel("moveLegi", {width:"302px", fixedcenter: true, constraintoviewport: false, underlay:"shadow", close:true, visible:true, draggable:true, modal:false,iframe:true } );
 					YAHOO.i3GEO.janela.manager.register(janela);
 					janela.render();
+					YAHOO.util.Event.addListener(janela.close, "click", i3GEO.janela.fecha,janela,{id:"moveLegi"},true);
 					novoel.onmouseover = function(){
 						if($i("moveLegi").style.display === "block")
 						{YAHOO.util.Dom.setStyle("moveLegi", "opacity", 1);}

@@ -63,6 +63,8 @@ create table i3geoestat_tipo_regiao
 	colunacentroide text,
 	-- lista de noes de colunas que ficarão visíveis quando os sql de acesso aos dados forem montados
 	colunasvisiveis text,
+	-- apelidos das colunas visíveis. deve estar na mesma ordem das colunas visíveis e separados por  vírgulas. opcional.
+	apelidos text,
 	foreign key (codigo_estat_conexao)
 	references i3geoestat_conexao (codigo_estat_conexao)
 );
@@ -80,10 +82,10 @@ create table i3geoestat_agregaregiao
 );
 
 
--- lista controlada de tipos de período de tempo
-create table i3geoestat_tipo_periodo
+-- tabela com o nome e descrição de uma variável variável
+create table i3geoestat_variavel
 (
-	codigo_tipo_periodo integer not null unique primary key autoincrement,
+	codigo_variavel integer not null unique primary key autoincrement,
 	nome text,
 	descricao text
 );
@@ -101,10 +103,10 @@ create table i3geoestat_unidade_medida
 );
 
 
--- tabela com o nome e descrição de uma variável variável
-create table i3geoestat_variavel
+-- lista controlada de tipos de período de tempo
+create table i3geoestat_tipo_periodo
 (
-	codigo_variavel integer not null unique primary key autoincrement,
+	codigo_tipo_periodo integer not null unique primary key autoincrement,
 	nome text,
 	descricao text
 );
@@ -133,16 +135,16 @@ create table i3geoestat_medida_variavel
 	nomemedida text,
 	-- nome da coluna da tabela que contem os dados e que é um identificador único de cada registro
 	colunaidunico text,
+	foreign key (codigo_variavel)
+	references i3geoestat_variavel (codigo_variavel),
 	foreign key (codigo_tipo_regiao)
 	references i3geoestat_tipo_regiao (codigo_tipo_regiao),
-	foreign key (codigo_estat_conexao)
-	references i3geoestat_conexao (codigo_estat_conexao),
-	foreign key (codigo_tipo_periodo)
-	references i3geoestat_tipo_periodo (codigo_tipo_periodo),
 	foreign key (codigo_unidade_medida)
 	references i3geoestat_unidade_medida (codigo_unidade_medida),
-	foreign key (codigo_variavel)
-	references i3geoestat_variavel (codigo_variavel)
+	foreign key (codigo_tipo_periodo)
+	references i3geoestat_tipo_periodo (codigo_tipo_periodo),
+	foreign key (codigo_estat_conexao)
+	references i3geoestat_conexao (codigo_estat_conexao)
 );
 
 

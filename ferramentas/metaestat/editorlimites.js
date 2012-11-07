@@ -762,7 +762,7 @@ i3GEOF.editorlimites = {
 								ins = "<hr><br>";
 							for(j=0;j<nj;j++){
 								if(atr.aliascolunas[j] !== "idunico"){
-									ins += '<p class=paragrafo >'+atr.aliascolunas[j]+':<br>' +
+									ins += '<p class=paragrafo >'+atr.aliascolunas[j]+' - '+atr.descricao[j]+':<br>' +
 									'<input class=digitar id="" value="" name="'+atr.colunas[j]+'" /></p>';
 								}
 							}

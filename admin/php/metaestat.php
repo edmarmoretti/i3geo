@@ -557,7 +557,7 @@ switch (strtoupper($funcao))
 			$codigo_tipo_regiao = $m->alteraTipoRegiao();
 		}
 		else{
-			$codigo_tipo_regiao = $m->alteraTipoRegiao($codigo_tipo_regiao,$nome_tipo_regiao,$descricao_tipo_regiao,$esquemadb,$tabela,$colunageo,$colunacentroide,$data,$identificador,$colunanomeregiao,$srid,$codigo_estat_conexao,$colunasvisiveis);
+			$codigo_tipo_regiao = $m->alteraTipoRegiao($codigo_tipo_regiao,$nome_tipo_regiao,$descricao_tipo_regiao,$esquemadb,$tabela,$colunageo,$colunacentroide,$data,$identificador,$colunanomeregiao,$srid,$codigo_estat_conexao,$colunasvisiveis,$apelidos);
 		}
 		retornaJSON($m->listaTipoRegiao($codigo_tipo_regiao));
 		exit;

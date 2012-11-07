@@ -78,12 +78,35 @@ switch (strtoupper($funcao)){
 	case "PEGADADOSTME":
 		$retorno = pegaDadosTME($map_file,$tema);
 	break;
+	case "ALTERACONTORNO":
+		$retorno = alteraContorno($map_file,$tema);
+	break;
 }
 if (!connection_aborted()){
 	cpjson($retorno);
 }
 else
 {exit();}
+function alteraContorno($map_file,$tema){
+	$mapa = ms_newMapObj($map_file);
+	$layer = $mapa->getlayerbyname($tema);
+	$numclasses = $layer->numclasses;
+	if ($numclasses > 0){
+		for ($i=0; $i < $numclasses; ++$i)	{
+			$classe = $layer->getClass($i);
+			$estilo = $classe->getstyle(0);
+			$outl = $estilo->outlinecolor;
+			if($outl->red == -1){
+				$outl->setrgb(255,255,255);
+			}
+			else{
+				$outl->setrgb(-1,-1,-1);
+			}
+		}
+		$mapa->save($map_file);
+	}
+	return "ok";
+}
 function pegaDadosTME($map_file,$tema){
 	$retorno = array("itemNomeRegioes"=>"","itemDados"=>"");
 	$mapa = ms_newMapObj($map_file);

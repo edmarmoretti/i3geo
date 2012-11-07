@@ -252,24 +252,55 @@ class Metaestat{
 		}
 		if($todasascolunas == 0){
 			$sql = " SELECT d.".$dados["colunavalor"].",d.".$dados["colunaidgeo"];
+			$colunas[] = $dados["colunavalor"];
+			$colunas[] = $dados["colunaidgeo"];
 			if(!empty($agruparpor)){
-				$sql .= ",d.".$agruparpor;
+				$temp = explode(",",$agruparpor);
+				$sql .= ",d.".implode(",d.",$temp);
+				$colunas = array_merge($colunas,$temp);
 			}
 		}
 		else{
 			$sql = " SELECT d.* ";
+			$colunas = $this->colunasTabela($dados["codigo_estat_conexao"],$dados["esquemadb"],$dados["tabela"]);
 		}
 		//prepara a lista de colunas que ficarao visiveis no sql geo
 		$vis = $dadosgeo["colunasvisiveis"];
 		$vis = str_replace(" ",",",$vis);
 		$vis = str_replace(",,",",",$vis);
-		$vis = explode(",",$vis);
+		$colunasvisiveis = explode(",",$vis);
 		//$vis[] = "st_setsrid($colunageo,".$dadosgeo["srid"].") as $colunageo";
-		$vis = array_unique($vis);
-		$vis = implode(",g.",$vis);
+		$colunasvisiveis = array_unique($colunasvisiveis);
+		$colunas = array_merge($colunas,$colunasvisiveis);
+		$vis = implode(",g.",$colunasvisiveis);
 		$vis = "g.".$vis.",st_setsrid(g.".$colunageo.",".$dadosgeo["srid"].") as ".$colunageo;
 		//$sqlgeo = $sql.",g.".$colunageo;
 		$sqlgeo = $sql.",".$vis;
+		//
+		//prepara os alias das colunas
+		//
+		$alias = $colunas;
+		$n = count($colunas);
+		for($i=0;$i<$n;$i++){
+			if($colunas[$i] === $dados["colunavalor"]){
+				$alias[$i] = mb_convert_encoding($dados["nomemedida"],"ISO-8859-1",mb_detect_encoding($dados["nomemedida"]));
+			}
+		}
+		$aliasvis = $dadosgeo["apelidos"];
+		$aliasvis = str_replace(" ",",",$aliasvis);
+		$aliasvis = str_replace(",,",",",$aliasvis);
+		$aliasvis = explode(",",$aliasvis);
+		if(count($aliasvis) == count($colunasvisiveis)){
+			$n = count($colunas);
+			for($i=0;$i<$n;$i++){
+				$nj = count($colunasvisiveis);
+				for($j=0;$j<$nj;$j++){
+					if($colunas[$i] === $colunasvisiveis[$j]){
+						$alias[$i] = mb_convert_encoding($aliasvis[$j],"ISO-8859-1",mb_detect_encoding($aliasvis[$j]));
+					}
+				}
+			}
+		}
 		//
 		if($agregaregiao == true){
 			$dadosAgregacao = $this->listaAgregaRegiaoFilho($dados["codigo_tipo_regiao"], $codigo_tipo_regiao);
@@ -303,17 +334,17 @@ class Metaestat{
 		//join com a tabela geo
 		$j = " d.".$dados["colunaidgeo"]."::text = g.".$dadosgeo["identificador"]."::text";
 		$sqlgeo .= " WHERE ".$j;
-		//atencao: cuidado ao alterar essa string pois ') as foo' pode ser usado para replace em outras funcoes
-		$colunas = $this->colunasTabela($dados["codigo_estat_conexao"],$dados["esquemadb"],$dados["tabela"]);
+
+
 		//@TODO - agregacao com uma regiao maior
 		if($agregaregiao == true){
-			$sqlgeo = "select pg.*,".$dados["colunavalor"]." from (select ".$sqlgeo." __filtro__ group by g.".$dadosAgregacao["colunaligacao_regiaopai"].") as fg, ".$dadosgeoagregada["esquemadb"].".".$dadosgeoagregada["tabela"]." as pg where fg.".$dadosAgregacao["colunaligacao_regiaopai"]." = pg.".$dadosgeoagregada["identificador"];
+			//$sqlgeo = "select pg.*,".$dados["colunavalor"]." from (select ".$sqlgeo." __filtro__ group by g.".$dadosAgregacao["colunaligacao_regiaopai"].") as fg, ".$dadosgeoagregada["esquemadb"].".".$dadosgeoagregada["tabela"]." as pg where fg.".$dadosAgregacao["colunaligacao_regiaopai"]." = pg.".$dadosgeoagregada["identificador"];
 			$sqlgeo = $colunageo." from ( $sqlgeo ) as foo using unique ".$dadosAgregacao["colunaligacao_regiaopai"]." using srid=".$dadosgeo["srid"];
 		}
 		else{
 			$sqlgeo = $colunageo." from (".$sqlgeo." __filtro__ ) as foo using unique ".$dados["colunaidgeo"]." using srid=".$dadosgeo["srid"];
 		}
-		return array("sqlagrupamento"=>$sqlagrupamento,"sql"=>$sql,"sqlmapserver"=>$sqlgeo,"filtro"=>$filtro,"colunas"=>$colunas);
+		return array("sqlagrupamento"=>$sqlagrupamento,"sql"=>$sql,"sqlmapserver"=>$sqlgeo,"filtro"=>$filtro,"colunas"=>$colunas,"alias"=>$alias);
 	}
 	function mapfileMedidaVariavel($id_medida_variavel,$filtro="",$todasascolunas = 0,$tipolayer="polygon",$titulolayer="",$id_classificacao="",$agruparpor="",$codigo_tipo_regiao=""){
 		//para permitir a inclusao de filtros, o fim do sql e marcado com /*FW*//*FW*/
@@ -365,6 +396,8 @@ class Metaestat{
 			$dados[] = '		METAESTAT "SIM"';
 			$dados[] = '		METAESTAT_CODIGO_TIPO_REGIAO "'.$codigo_tipo_regiao.'"';
 			$dados[] = '		ID_MEDIDA_VARIAVEL "'.$id_medida_variavel.'"';
+			$dados[] = '		ITENS "'.implode(",",$sql["colunas"]).'"';
+			$dados[] = '		ITENSDESC "'.implode(",",$sql["alias"]).'"';
 			$dados[] = '	END';
 			if($classes == ""){
 				$dados[] = '    CLASS';
@@ -382,7 +415,7 @@ class Metaestat{
 				foreach($classes as $classe){
 					//var_dump($classe);exit;
 					$dados[] = '    CLASS';
-					$dados[] = '        NAME "'.mb_convert_encoding($classe["titulo"],"ISO-8859-1",mb_detect_encoding($titulolayer)).'"';
+					$dados[] = '        NAME "'.mb_convert_encoding($classe["titulo"],"ISO-8859-1",mb_detect_encoding($classe["titulo"])).'"';
 					$dados[] = '        EXPRESSION '.$classe["expressao"];
 					$dados[] = '        STYLE';
 					$dados[] = '        	COLOR '.$classe["vermelho"].' '.$classe["verde"].' '.$classe["azul"];
@@ -826,14 +859,14 @@ class Metaestat{
 
 	Altera uma regiao
 	*/
-	function alteraTipoRegiao($codigo_tipo_regiao,$nome_tipo_regiao,$descricao_tipo_regiao,$esquemadb,$tabela,$colunageo,$colunacentroide,$data,$identificador,$colunanomeregiao,$srid,$codigo_estat_conexao,$colunasvisiveis){
+	function alteraTipoRegiao($codigo_tipo_regiao,$nome_tipo_regiao,$descricao_tipo_regiao,$esquemadb,$tabela,$colunageo,$colunacentroide,$data,$identificador,$colunanomeregiao,$srid,$codigo_estat_conexao,$colunasvisiveis,$apelidos){
 		try	{
 			if($codigo_tipo_regiao != ""){
 				if($this->convUTF){
 					$nome_tipo_regiao = utf8_encode($nome_tipo_regiao);
 					$descricao_tipo_regiao = utf8_encode($descricao_tipo_regiao);
 				}
-				$this->dbhw->query("UPDATE ".$this->esquemaadmin."i3geoestat_tipo_regiao SET codigo_estat_conexao = '$codigo_estat_conexao', colunacentroide = '$colunacentroide',nome_tipo_regiao = '$nome_tipo_regiao',descricao_tipo_regiao = '$descricao_tipo_regiao',esquemadb = '$esquemadb',tabela = '$tabela',colunageo = '$colunageo',data = '$data',identificador = '$identificador',colunanomeregiao = '$colunanomeregiao', srid = '$srid', colunasvisiveis = '$colunasvisiveis' WHERE codigo_tipo_regiao = $codigo_tipo_regiao");
+				$this->dbhw->query("UPDATE ".$this->esquemaadmin."i3geoestat_tipo_regiao SET codigo_estat_conexao = '$codigo_estat_conexao', colunacentroide = '$colunacentroide',nome_tipo_regiao = '$nome_tipo_regiao',descricao_tipo_regiao = '$descricao_tipo_regiao',esquemadb = '$esquemadb',tabela = '$tabela',colunageo = '$colunageo',data = '$data',identificador = '$identificador',colunanomeregiao = '$colunanomeregiao', srid = '$srid', colunasvisiveis = '$colunasvisiveis', apelidos = '$apelidos' WHERE codigo_tipo_regiao = $codigo_tipo_regiao");
 				$retorna = $codigo_tipo_regiao;
 			}
 			else{
@@ -1646,10 +1679,12 @@ class Metaestat{
 		$colunas[] = $medida["colunavalor"];
 		$alias[] = "idunico";
 		$colunas[] = $medida["colunaidunico"];
+		$descricao[] = $medida["unidade_medida"];
 		$parametros = $this->listaParametro($id_medida_variavel);
 		foreach($parametros as $p){
 			$colunassql[] = $p["coluna"];
 			$alias[] = $p["nome"];
+			$descricao[] = $p["descricao"];
 			$colunas[] = $p["coluna"];
 		}
 
@@ -1659,7 +1694,7 @@ class Metaestat{
 		}
 		$q = $dbh->query($sql,PDO::FETCH_ASSOC);
 		$r = $q->fetchAll();
-		return array("dados"=>$r,"aliascolunas"=>$alias,"colunas"=>$colunas);
+		return array("dados"=>$r,"aliascolunas"=>$alias,"colunas"=>$colunas,"descricao"=>$descricao);
 	}
 	function salvaAtributosMedidaVariavel($id_medida_variavel,$codigo_tipo_regiao,$identificador_regiao,$idsunicos,$colunas,$valores){
 		$medida = $this->listaMedidaVariavel("",$id_medida_variavel);

@@ -128,7 +128,7 @@ width:16px;
 
 .yui-navset{
     background:#d8d8d8 url(../pacotes/yui290/build/assets/skins/sam/sprite.png) repeat-x; /* tab background */
-	z-index:3000;
+	z-index:1;/* 3000 */
 }
 
 .ygtvtn
