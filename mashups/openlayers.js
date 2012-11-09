@@ -179,15 +179,17 @@ i3GEO.editorOL = {
 		}
 		if(i3GEO.editorOL.fundo != ""){
 			for(i=nfundo-1;i>=0;i--){
-				try{
-					eval("i3GEO.editorOL."+fundo[i]+".transitionEffect = 'resize';");
-					eval("i3GEO.editorOL."+fundo[i]+".setVisibility(false);");
-					eval("i3GEO.editorOL."+fundo[i]+".singleTile = single;");
-					eval("alayers.push(i3GEO.editorOL."+fundo[i]+");");
-				}
-				catch(e){
-					if(alayers[0])
-					{alayers[0].setVisibility(true);}
+				if(fundo[i] != ""){
+					try{
+						eval("i3GEO.editorOL."+fundo[i]+".transitionEffect = 'resize';");
+						eval("i3GEO.editorOL."+fundo[i]+".setVisibility(false);");
+						eval("i3GEO.editorOL."+fundo[i]+".singleTile = single;");
+						eval("alayers.push(i3GEO.editorOL."+fundo[i]+");");
+					}
+					catch(e){
+						if(alayers[0])
+						{alayers[0].setVisibility(true);}
+					}
 				}
 			}
 		}

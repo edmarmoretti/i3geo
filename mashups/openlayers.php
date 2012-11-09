@@ -115,13 +115,13 @@ if(isset($temas)){
 if($temas != "")
 {
 	$temas = str_replace(" ",",",$temas);
-	$temas = strtolower($temas);
+	//$temas = strtolower($temas);
 	$temas = explode(",",$temas);
 	if(!isset($visiveis))
 	{$visiveis = $temas;}
 	else{
 		$visiveis = str_replace(" ",",",$visiveis);
-		$visiveis = strtolower($visiveis);
+		//$visiveis = strtolower($visiveis);
 		$visiveis = explode(",",$visiveis);
 	}
 	$objOpenLayers = array();
@@ -207,6 +207,7 @@ Par&acirc;metros:
 	fundo - lista com os nomes, separados por ',' dos layers que ser&atilde;o usados como fundo para o mapa. Se n&atilde;o for definido,
 			ser&aacute; usado o default. O primeiro da lista ser&aacute; o fundo ativo. Se na lista de temas de fundo estiver algum
 			tema incluido com o parametro 'temas', esses ser&atilde;o inclu&iacute;dos como temas de fundo.
+			Quando for vazio, o ultimo layer sera considerado como o layer de fundo
 			Os seguintes fundos podem usados nessa lista:
 
 			e_oce - ESRI Ocean Basemap
@@ -389,6 +390,11 @@ else
 }
 ?>
 i3GEO.editorOL.mapa = new OpenLayers.Map('i3geoMapa',{controls:[]});
+<?php if(empty($fundo)){
+	echo "i3GEO.editorOL.mapa.allOverlays = true;";
+}
+?>
+
 i3GEO.editorOL.inicia();
 </script>
 </body>
