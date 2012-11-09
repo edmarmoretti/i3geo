@@ -450,7 +450,7 @@ class Metaestat{
 		}
 		return array("mapfile"=>$arq,"layer"=>$this->nomecache,"titulolayer"=>$titulolayer);
 	}
-	function mapfileTipoRegiao($codigo_tipo_regiao){
+	function mapfileTipoRegiao($codigo_tipo_regiao,$outlinecolor="255,0,0",$width=1){
 		//para permitir a inclusao de filtros, o fim do sql e marcado com /*FW*//*FW*/
 		//indicando onde deve comecar e terminar uma possivel clausula where
 		//Layers adicionados aqui sao marcados com o metadata METAESTAT "SIM"
@@ -458,14 +458,13 @@ class Metaestat{
 		$arq = $this->dir_tmp."/".$this->nomecache.".map";
 		if(!file_exists($arq)){
 			$tipolayer = "polygon";
-
 			$meta = $this->listaTipoRegiao($codigo_tipo_regiao);
 			$titulolayer = $meta["nome_tipo_regiao"];
 			$titulolayer = mb_convert_encoding($titulolayer,"ISO-8859-1",mb_detect_encoding($titulolayer));
 			$conexao = $this->listaConexao($meta["codigo_estat_conexao"],true);
 			$conexao = "user=".$conexao["usuario"]." password=".$conexao["senha"]." dbname=".$conexao["bancodedados"]." host=".$conexao["host"]." port=".$conexao["porta"]."";
 			$sqlf = $meta["colunageo"]." from (select * from ".$meta["esquemadb"].".".$meta["tabela"]." /*FW*//*FW*/) as foo using unique gid using srid=".$meta["srid"];
-
+			$outlinecolor = str_replace(","," ",$outlinecolor);
 			$dados[] = "MAP";
 			$dados[] = 'SYMBOLSET "'.$this->locaplic.'/symbols/simbolosv6.sym"';
 			$dados[] = 'FONTSET   "'.$this->locaplic.'/symbols/fontes.txt"';
@@ -486,14 +485,15 @@ class Metaestat{
 			$dados[] = '    CLASS';
 			$dados[] = '        NAME ""';
 			$dados[] = '        STYLE';
-			$dados[] = '        	OUTLINECOLOR 255 0 0';
+			$dados[] = '        	OUTLINECOLOR '.$outlinecolor;
 			$dados[] = '        	COLOR -1 -1 -1';
+			$dados[] = '        	WIDTH '.$width;
 			$dados[] = '        END';
-			$dados[] = '        STYLE';
-			$dados[] = '        	OUTLINECOLOR -1 -1 -1';
-			$dados[] = '        	COLOR 255 255 255';
-			$dados[] = '        	OPACITY 20';
-			$dados[] = '        END';
+			//$dados[] = '        STYLE';
+			//$dados[] = '        	OUTLINECOLOR -1 -1 -1';
+			//$dados[] = '        	COLOR 255 255 255';
+			//$dados[] = '        	OPACITY 20';
+			//$dados[] = '        END';
 			$dados[] = '    END';
 			$dados[] = "END";
 			$dados[] = "END";

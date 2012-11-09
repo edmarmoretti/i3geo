@@ -943,7 +943,13 @@ switch (strtoupper($funcao))
 	*/
 	case "MAPFILETIPOREGIAO":
 		$m = new Metaestat();
-		retornaJSON($m->mapfileTipoRegiao($codigo_tipo_regiao));
+		if(empty($outlinecolor)){
+			$outlinecolor = "255,0,0";
+		}
+		if(empty($width)){
+			$width = 1;
+		}
+		retornaJSON($m->mapfileTipoRegiao($codigo_tipo_regiao,$outlinecolor,$width));
 		exit;
 	break;
 	/*

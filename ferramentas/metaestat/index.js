@@ -118,6 +118,7 @@ i3GEOF.metaestat = {
 		html: function(){
 			var ins = '<div id="i3geoCartoAnaliseContainer" style="margin-left:5px;line-height:25px">' +
 			'	<button title="Localizar regi&atilde;o" onclick="i3GEO.mapa.dialogo.locregiao()"><img src="'+i3GEO.configura.locaplic+'/imagens/gisicons/open-street-maps.png" /></button>' +
+			'	<button title="Mostra no mapa as regi&otilde;es" onclick="i3GEOF.metaestat.analise.mostraRegiao()"><img src="'+i3GEO.configura.locaplic+'/imagens/gisicons/open-street-maps-show.png" /></button>' +
 			'	<button title="Filtrar regi&atilde;o" onclick="i3GEO.mapa.dialogo.filtraregiao()"><img src="'+i3GEO.configura.locaplic+'/imagens/gisicons/open-street-maps-filtro.png" /></button>' +
 			'	<button title="Filtrar per&iacute;odo" onclick="i3GEOF.metaestat.analise.filtraPeriodo.inicia()"><img src="'+i3GEO.configura.locaplic+'/imagens/gisicons/open-street-maps-filtrotime.png" /></button>' +
 			'	<button title="Tabela com os dados" onclick="i3GEO.tema.dialogo.tabela()"><img src="'+i3GEO.configura.locaplic+'/imagens/gisicons/table.png" /></button>' +
@@ -158,6 +159,18 @@ i3GEOF.metaestat = {
 				//{i3GEO.eventos.ATUALIZAARVORECAMADAS.push('i3GEOF.metaestat.analise.comboCamadas()');}
 			};
 			i3GEO.php.listaCamadasMetaestat(temp);
+		},
+		mostraRegiao: function(){
+			if(typeof(i3GEOF.mostraregiao) === 'undefined'){
+				i3GEO.util.scriptTag(
+						i3GEO.configura.locaplic+"/ferramentas/metaestat/mostraregiao.js",
+						"i3GEOF.mostraregiao.iniciaJanelaFlutuante()",
+						"i3GEOF.mostraregiao_script"
+				);
+			}
+			else{
+				i3GEOF.mostraregiao.iniciaJanelaFlutuante();
+			}
 		},
 		contorno: function(){
 			if($i("i3geoCartoAnaliseCamadasCombo").value == ""){
