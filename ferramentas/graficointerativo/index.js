@@ -189,8 +189,6 @@ i3GEOF.graficointerativo = {
 			};
 			$i("i3GEOgraficointerativoguia4").onclick = function(){
 				i3GEO.guias.mostraGuiaFerramenta("i3GEOgraficointerativoguia4","i3GEOgraficointerativoguia");
-				//var so = new swfobject(i3GEO.configura.locaplic+"/pacotes/openflashchart/open-flash-chart.swf", "i3GEOgraficointerativoGrafico1", "95%", "88%", "9", "#ffffff");
-				//var so = new swfobject();
 				function outputStatus(e) {
 					//i3GEO.janela.tempoMsg("e.success = " + e.success +"\ne.id = "+ e.id +"\ne.ref = "+ e.ref);
 				}
@@ -212,8 +210,14 @@ i3GEOF.graficointerativo = {
 				var t = $i("i3GEOgraficointerativoGrafico");
 				t.style.display = "block";
 				t.style.position = "relative";
-				t.style.top = "-15px";
+				t.style.top = "-5px";
 			};
+			$i("i3GEOgraficointerativoguia5").onclick = function(){
+				i3GEO.guias.mostraGuiaFerramenta("i3GEOgraficointerativoguia5","i3GEOgraficointerativoguia");
+				$i("i3GEOgraficointerativoGrafico").style.display = "none";
+				$i("i3GEOgraficointerativoguia5obj").innerHTML = "<textarea rows='20' cols='52' >"+(i3GEOF.graficointerativo.tabela2csv()).join("\n")+"</textarea>";
+			};
+
 			i3GEOF.graficointerativo.ativaFoco();
 			i3GEOF.graficointerativo.comboTemas();
 			new YAHOO.widget.Button(
@@ -244,10 +248,11 @@ i3GEOF.graficointerativo = {
 		ins = '' +
 		'<div id=i3GEOgraficointerativoguiasYUI class="yui-navset" style="top:0px;cursor:pointer;left:0px;">' +
 		'	<ul class="yui-nav" style="border-width:0pt 0pt 0px;border-color:rgb(240,240,240);border-bottom-color:white;">' +
+		'		<li><a href="#ancora"><em><div id="i3GEOgraficointerativoguia3" style="text-align:center;left:0px;" ><img class="ticPropriedades2" style="height:14px" title="'+$trad("p13")+'" src="'+i3GEO.configura.locaplic+'/imagens/visual/default/branco.gif"></div></em></a></li>' +
 		'		<li><a href="#ancora"><em><div id="i3GEOgraficointerativoguia1" style="text-align:center;left:0px;" >Tipo</div></em></a></li>' +
 		'		<li><a href="#ancora"><em><div id="i3GEOgraficointerativoguia2" style="text-align:center;left:0px;" >Dados</div></em></a></li>' +
-		'		<li><a href="#ancora"><em><div id="i3GEOgraficointerativoguia3" style="text-align:center;left:0px;" >Propriedades</div></em></a></li>' +
 		'		<li><a href="#ancora"><em><div id="i3GEOgraficointerativoguia4" style="text-align:center;left:0px;" >Gr&aacute;fico</div></em></a></li>' +
+		'		<li><a href="#ancora"><em><div id="i3GEOgraficointerativoguia5" style="text-align:center;left:0px;" >CSV</div></em></a></li>' +
 		'	</ul>' +
 		'</div><br>' +
 		'<div class=guiaobj id="i3GEOgraficointerativoguia1obj" style="left:1px;display:none;">' +
@@ -310,9 +315,12 @@ i3GEOF.graficointerativo = {
 		'	<p class=paragrafo ><input style=cursor:pointer type=checkbox onclick="i3GEOF.graficointerativo.ativaNavegacao(this.checked)" /> Atualiza o gr&aacute;fico ao navegar pelo mapa</p>' +
 		'	<p class=paragrafo ><select onchange="i3GEOF.graficointerativo.obterDados()" id="i3GEOgraficointerativoTipoAgregacao" ><option value="soma">Soma</option><option value="media">M&eacute;dia</option></select> Tipo de agrega&ccedil;&atilde;o dos valores do eixo Y</p>' +
 		'</div>'+
-		'<div class=guiaobj id="i3GEOgraficointerativoguia4obj" style="left:1px;display:none;top:-0px">' +
+		'<div class=guiaobj id="i3GEOgraficointerativoguia4obj" style="left:1px;display:none;top:-10px">' +
+		'<a href="#" onclick="i3GEOF.graficointerativo.novaJanela()" >abrir em uma janela separada</a>' +
 		'</div>' +
-		'<div id="i3GEOgraficointerativoGrafico" style="position:relative;top:-10px;display:none"></div>';
+		'<div class=guiaobj id="i3GEOgraficointerativoguia5obj" style="font-size:10px;left:10px;display:none;top:-0px">' +
+		'</div>' +
+		'<div id="i3GEOgraficointerativoGrafico" style="position:relative;top:-5px;display:none"></div>';
 		return ins;
 	},
 	/*
@@ -339,7 +347,7 @@ i3GEOF.graficointerativo = {
 		titulo = "&nbsp;&nbsp;&nbsp;"+$trad("t37b")+" <a class=ajuda_usuario target=_blank href='" + i3GEO.configura.locaplic + "/ajuda_usuario.php?idcategoria=3&idajuda=84' >&nbsp;&nbsp;&nbsp;</a>";
 		janela = i3GEO.janela.cria(
 			"380px",
-			"300px",
+			"310px",
 			"",
 			"",
 			"",
@@ -387,6 +395,37 @@ i3GEOF.graficointerativo = {
 		var i = $i("i3GEOF.graficointerativo_c").style;
 		i3GEO.janela.ULTIMOZINDEX++;
 		i.zIndex = i3GEO.janela.ULTIMOZINDEX;
+	},
+	novaJanela: function(){
+		var janela = "",
+			divid,
+			g = $i("i3GEOgraficointerativoGrafico"),
+			v = g.cloneNode(true),
+			cabecalho = function(){},
+			id = YAHOO.util.Dom.generateId(),
+			minimiza = function(){
+				i3GEO.janela.minimiza(id);
+			},
+			titulo = "&nbsp;&nbsp;&nbsp;"+i3GEOF.graficointerativo.titulo;
+		janela = i3GEO.janela.cria(
+			"380px",
+			"280px",
+			"",
+			"",
+			"",
+			titulo,
+			id,
+			false,
+			"hd",
+			cabecalho,
+			minimiza
+		);
+		divid = janela[2].id;
+		$i(divid).style.marginTop = "10px";
+		v = g.cloneNode(true);
+		v.id = id+"ngrafico";
+		v.style.marginTop = "0px";
+		$i(divid).appendChild(v);
 	},
 	/*
 	Function: comboTemas
@@ -584,6 +623,28 @@ i3GEOF.graficointerativo = {
 		}
 		ins.push("</table><br>");
 		$i("i3GEOgraficointerativoDados").innerHTML = ins.join("");
+	},
+	/*
+	Function: tabela2csv
+
+	Obt&eacute;m os dados da tabela em CSV
+	*/
+	tabela2csv: function(){
+		var inputs = $i("i3GEOgraficointerativoDados").getElementsByTagName("input"),
+			ninputs = inputs.length,
+			i,
+			legendaX = "",
+			legendaY = "",
+			csv = [];
+		if($i("i3GEOgraficointerativoComboXid"))
+		{legendaX = $i("i3GEOgraficointerativoComboXid").value;}
+		if($i("i3GEOgraficointerativoComboYid"))
+		{legendaY = $i("i3GEOgraficointerativoComboYid").value;}
+		csv.push(legendaX+";"+legendaY);
+		for(i=0;i<ninputs;i = i + 3){
+			csv.push(inputs[i].value+";"+inputs[i+1].value * 1);
+		}
+		return csv;
 	},
 	/*
 	Function: tabela2dados
@@ -916,7 +977,7 @@ i3GEOF.graficointerativo = {
 			}
 			tabela.innerHTML = ins;
 		}
-		catch(e){if(typeof(console) !== 'undefined'){console.error(e);}}
+		catch(e){}
 	},
 	/*
 	Function: ativaNavegacao
