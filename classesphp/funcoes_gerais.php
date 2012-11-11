@@ -93,7 +93,7 @@ function corE($label,$cor,$elemento,$sombrax=1,$sombray=1)
 			}
 			else
 			{$corres = $label->$elemento;}
-			$cori = explode(",",$cor);
+			$cori = explode(" ",$cor);
 			$corres->setRGB($cori[0],$cori[1],$cori[2]);
 		}
 	}

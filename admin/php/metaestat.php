@@ -949,7 +949,10 @@ switch (strtoupper($funcao))
 		if(empty($width)){
 			$width = 1;
 		}
-		retornaJSON($m->mapfileTipoRegiao($codigo_tipo_regiao,$outlinecolor,$width));
+		if(empty($nomes)){
+			$nomes = "nao";
+		}
+		retornaJSON($m->mapfileTipoRegiao($codigo_tipo_regiao,$outlinecolor,$width,$nomes));
 		exit;
 	break;
 	/*

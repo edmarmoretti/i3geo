@@ -117,6 +117,7 @@ i3GEOF.mostraregiao = {
 		'<input id=i3geomostraregiaoAplica type="button" value="'+$trad("p14")+'" />&nbsp;' +
 		'<br><br><div class="paragrafo" id="i3geomostraregiaoTipoRegiao" >' +
 		'</div>' +
+		'<p class=paragrafo ><input type=checkbox id="i3geomostraregiaoNomes" style="cursor:pointer;position:relative;top:2px;" /> Inclui nomes</p>' +
 		'<p class=paragrafo >Contorno:</p>' +
 		'Cor: &nbsp;' + $inputText("","","i3geomostraregiaoOutlinecolor","",12,"255,0,0") +
 		'&nbsp;<img alt="aquarela.gif" style=position:relative;top:2px;cursor:pointer src="'+i3GEO.configura.locaplic+'/imagens/aquarela.gif" onclick="i3GEOF.mostraregiao.corj(\'i3geomostraregiaoOutlinecolor\')" /> ' +
@@ -145,13 +146,15 @@ i3GEOF.mostraregiao = {
 		i3GEO.php.listaTipoRegiao(temp);
 	},
 	aplica: function(){
-		var combo = $i("i3geomostraregiaoComboTipoRegiao");
+		var combo = $i("i3geomostraregiaoComboTipoRegiao"),
+			nomes = $i("i3geomostraregiaoNomes");
 		if (combo.value === ""){
 			i3GEO.janela.tempoMsg("Escolha uma regi&atilde;o");
 			return;
 		}
-		i3GEO.janela.fechaAguarde("aguardeMostraRegiao");
+		i3GEO.janela.abreAguarde("aguardeMostraRegiao","Aguarde...");
 		var temp = function(retorno){
+			i3GEO.janela.fechaAguarde("aguardeMostraRegiao");
 			if(retorno.layer == ""){
 				i3GEO.atualiza();
 				return;
@@ -160,7 +163,13 @@ i3GEOF.mostraregiao = {
 				i3GEO.php.adtema(i3GEO.atualiza,retorno.mapfile);
 			}
 		};
-		i3GEO.php.mapfileTipoRegiao(temp,combo.value,$i("i3geomostraregiaoOutlinecolor").value,$i("i3geomostraregiaoWidth").value);
+		if(nomes.checked == true){
+			nomes = "sim";
+		}
+		else{
+			nomes = "nao";
+		}
+		i3GEO.php.mapfileTipoRegiao(temp,combo.value,$i("i3geomostraregiaoOutlinecolor").value,$i("i3geomostraregiaoWidth").value,nomes);
 	},
 	corj: function(obj){
 		i3GEO.util.abreCor("",obj);

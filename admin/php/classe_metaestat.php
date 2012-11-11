@@ -450,7 +450,7 @@ class Metaestat{
 		}
 		return array("mapfile"=>$arq,"layer"=>$this->nomecache,"titulolayer"=>$titulolayer);
 	}
-	function mapfileTipoRegiao($codigo_tipo_regiao,$outlinecolor="255,0,0",$width=1){
+	function mapfileTipoRegiao($codigo_tipo_regiao,$outlinecolor="255,0,0",$width=1,$nomes="nao"){
 		//para permitir a inclusao de filtros, o fim do sql e marcado com /*FW*//*FW*/
 		//indicando onde deve comecar e terminar uma possivel clausula where
 		//Layers adicionados aqui sao marcados com o metadata METAESTAT "SIM"
@@ -463,7 +463,13 @@ class Metaestat{
 			$titulolayer = mb_convert_encoding($titulolayer,"ISO-8859-1",mb_detect_encoding($titulolayer));
 			$conexao = $this->listaConexao($meta["codigo_estat_conexao"],true);
 			$conexao = "user=".$conexao["usuario"]." password=".$conexao["senha"]." dbname=".$conexao["bancodedados"]." host=".$conexao["host"]." port=".$conexao["porta"]."";
-			$sqlf = $meta["colunageo"]." from (select * from ".$meta["esquemadb"].".".$meta["tabela"]." /*FW*//*FW*/) as foo using unique gid using srid=".$meta["srid"];
+			$colunageo = $meta["colunageo"];
+			$srid = $meta["srid"];
+			//st_setsrid(".$colunageo.",".$srid.") as ".$colunageo
+			$vis = $meta["colunasvisiveis"];
+			$vis = str_replace(" ",",",$vis);
+			$vis = str_replace(",,",",",$vis);
+			$sqlf = $meta["colunageo"]." from (select st_setsrid(".$colunageo.",".$srid.") as $colunageo,$vis,gid from ".$meta["esquemadb"].".".$meta["tabela"]." /*FW*//*FW*/) as foo using unique gid using srid=".$srid;
 			$outlinecolor = str_replace(","," ",$outlinecolor);
 			$dados[] = "MAP";
 			$dados[] = 'SYMBOLSET "'.$this->locaplic.'/symbols/simbolosv6.sym"';
@@ -496,6 +502,41 @@ class Metaestat{
 			//$dados[] = '        END';
 			$dados[] = '    END';
 			$dados[] = "END";
+			//toponimia
+			if($nomes == "sim"){
+				$dados[] = "LAYER";
+				$dados[] = '	NAME "'.$this->nomecache.'_anno"';
+				$dados[] = "	TYPE ANNOTATION";
+				$dados[] = '	DATA "'.$sqlf.'"';
+				$dados[] = '	CONNECTION "'.$conexao.'"';
+				$dados[] = '	CONNECTIONTYPE POSTGIS';
+				$dados[] = '	TEMPLATE "none.htm"';
+				$dados[] = '	STATUS OFF';
+				$dados[] = '    LABELITEM "'.$meta["colunanomeregiao"].'"';
+				$dados[] = '	METADATA';
+				$dados[] = '		TEMA "'.$titulolayer.' (nomes)"';
+				$dados[] = '		CLASSE "SIM"';
+				$dados[] = '		METAESTAT "SIM"';
+				$dados[] = '		METAESTAT_CODIGO_TIPO_REGIAO "'.$codigo_tipo_regiao.'"';
+				$dados[] = '	END';
+				$dados[] = '    CLASS';
+				$dados[] = '        NAME ""';
+ 				$dados[] = '        LABEL';
+				$dados[] = '           FONT "arial"';
+				$dados[] = '           SIZE 10';
+				$dados[] = '           COLOR 0 0 0';
+				$dados[] = '           MINDISTANCE 0';
+				$dados[] = '           MINFEATURESIZE 0';
+				$dados[] = '           OFFSET 0 0';
+ 				$dados[] = '           OUTLINECOLOR 255 255 255';
+ 				$dados[] = '           PARTIALS FALSE';
+ 				$dados[] = '           POSITION AUTO';
+				$dados[] = '           SHADOWSIZE 1 1';
+				$dados[] = '           TYPE TRUETYPE';
+				$dados[] = '        END';
+				$dados[] = '    END';
+				$dados[] = "END";			
+			}
 			$dados[] = "END";
 			$fp = fopen($arq,"w");
 			foreach ($dados as $dado){

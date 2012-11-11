@@ -1524,15 +1524,18 @@ i3GEO.php = {
 
 	Adiciona ao mapa camada baseada nas regioes cadastradas no sistema de metadados estatisticos
 	*/
-	mapfileTipoRegiao: function(funcao,codigo_tipo_regiao,outlinecolor,width){
+	mapfileTipoRegiao: function(funcao,codigo_tipo_regiao,outlinecolor,width,nomes){
 		if(!outlinecolor){
 			outlinecolor = "255,0,0";
 		}
 		if(!width){
 			width = 1;
 		}
+		if(!nomes){
+			nome = "nao";
+		}
 		var p = i3GEO.configura.locaplic+"/admin/php/metaestat.php?funcao=mapfileTipoRegiao&codigo_tipo_regiao="+codigo_tipo_regiao+"&g_sid="+i3GEO.configura.sid;
-		p += "&outlinecolor="+outlinecolor+"&width="+width;
+		p += "&outlinecolor="+outlinecolor+"&width="+width+"&nomes="+nomes;
 		i3GEO.util.ajaxGet(p,funcao);
 	},
 	/*
