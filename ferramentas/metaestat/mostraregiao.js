@@ -111,6 +111,7 @@ i3GEOF.mostraregiao = {
 		i3GEOF.mostraregiao.inicia(divid);
 		i3GEO.janela.tempoMsg("Utilize a guia lateral para ligar/desligar camadas que j&aacute; estejam no mapa");
 	},
+	//TODO incluir toponimia
 	html: function(){
 		var ins = "" +
 		'<input id=i3geomostraregiaoAplica type="button" value="'+$trad("p14")+'" />&nbsp;' +

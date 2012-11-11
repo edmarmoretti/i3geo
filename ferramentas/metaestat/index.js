@@ -131,6 +131,8 @@ i3GEOF.metaestat = {
 			'	<button title="'+$trad("t49")+'" onclick="i3GEOF.metaestat.analise.ativaTme()"><img src="'+i3GEO.configura.locaplic+'/imagens/gisicons/3d-light.png" /></button>' +
 			'	<button title="Estat&iacute;sticas gerais" onclick="i3GEOF.metaestat.analise.estatistica()"><img src="'+i3GEO.configura.locaplic+'/imagens/gisicons/stats.png" /></button>' +
 			'	<button title="Ativa/Desativa contorno" onclick="i3GEOF.metaestat.analise.contorno()"><img src="'+i3GEO.configura.locaplic+'/imagens/gisicons/boundary-remove-add.png" /></button>' +
+			'	<button title="Altera representa&ccedil;&atilde;o" onclick="i3GEOF.metaestat.analise.alteraRepresentacao()"><img src="'+i3GEO.configura.locaplic+'/imagens/gisicons/shape.png" /></button>' +
+
 			'</div>' +
 			'<div id="i3geoCartoAnaliseCamadas" style="margin-left:5px;line-height:25px"></div>' +
 			'<input type=hidden  value="" id="listaColourRampAnaliseMetaestat" onchange="i3GEOF.metaestat.analise.aplicaColourRamp()" />'; //utilizado pelo seletor de colourramp
@@ -159,6 +161,9 @@ i3GEOF.metaestat = {
 				//{i3GEO.eventos.ATUALIZAARVORECAMADAS.push('i3GEOF.metaestat.analise.comboCamadas()');}
 			};
 			i3GEO.php.listaCamadasMetaestat(temp);
+		},
+		alteraRepresentacao: function(){
+			
 		},
 		mostraRegiao: function(){
 			if(typeof(i3GEOF.mostraregiao) === 'undefined'){
