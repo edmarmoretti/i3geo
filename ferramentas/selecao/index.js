@@ -179,7 +179,7 @@ i3GEOF.selecao = {
 		'		</select>' +
 		'		<span id=i3GEOselecaoNsel style="position:relative;top:5px;" >0</span></p>' +
 		'		<p class=paragrafo >Temas:<div id=i3GEOselecaoComboTemas style=text-align:left; ></div>' +
-		'		<p class=paragrafo >Dist&acirc;ncia utilizada ao selecionar por ponto (em metros):' +
+		'		<br><p class=paragrafo >Dist&acirc;ncia utilizada ao selecionar por ponto (em metros):' +
 		$inputText("","","i3GEOselecaotoleranciapt","",3,"0") +
 		'		</p><div id=i3GEOselecaomen1 style=left:0px;width:100%; >' +
 		'		<p class=paragrafo >Escolha o(s) tema(s) alvo(s) e o tipo de opera&ccedil;&atilde;o. ' +
@@ -309,7 +309,8 @@ i3GEOF.selecao = {
 			"i3GEOselecaoComboTemas",
 			"",
 			true,
-			"ligados"
+			"ligados",
+			"width:440px;font-size:10px"
 		);
 	},
 	/*
@@ -601,6 +602,7 @@ i3GEOF.selecao = {
 		if(typeof(console) !== 'undefined')
 		{console.info("i3GEO.navega.selecao.porbox()");}
 		var retorna = function(retorno){
+			i3GEO.janela.fechaAguarde("i3GEO.atualiza");
 			var nsel;
 			if(i3GEO.Interface.ATUAL === "padrao")
 			{i3GEO.atualiza(retorno);}

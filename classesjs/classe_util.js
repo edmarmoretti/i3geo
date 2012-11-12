@@ -1541,7 +1541,7 @@ i3GEO.util = {
 							tema = retorno[i].name;
 						}
 						if(retorno[i].escondido !== "sim")
-						{comboTemas += "<option value="+tema+" >"+nome+"</option>";}
+						{comboTemas += "<option title='"+nome+"' value="+tema+" >"+nome+"</option>";}
 					}
 					comboTemas += "</select>";
 					temp = {dados:comboTemas,tipo:"dados"};
