@@ -146,7 +146,7 @@ i3GEOF.metaestat = {
 				var temas = retorno.data,
 					n = temas.length,
 					i,t,ins;
-				ins = "<p class=paragrafo >Ativar a camada:</p><select id='i3geoCartoAnaliseCamadasCombo' onchange='i3GEOF.metaestat.comum.ativaCamada(this.value)' style='width:250px;' ><option value=''>---</option>";
+				ins = "<p class=paragrafo style='position:relative;top:5px;'>Ativar a camada:</p><select id='i3geoCartoAnaliseCamadasCombo' onchange='i3GEOF.metaestat.comum.ativaCamada(this.value)' style='width:250px;' ><option value=''>---</option>";
 				for(i=0;i<n;i++){
 					t = i3GEO.arvoreDeCamadas.pegaTema(temas[i]);
 					if(t != ""){
@@ -163,7 +163,16 @@ i3GEOF.metaestat = {
 			i3GEO.php.listaCamadasMetaestat(temp);
 		},
 		alteraRep: function(){
-			
+			if(typeof(i3GEOF.alterarep) === 'undefined'){
+				i3GEO.util.scriptTag(
+						i3GEO.configura.locaplic+"/ferramentas/metaestat/alterarep.js",
+						"i3GEOF.alterarep.iniciaJanelaFlutuante()",
+						"i3GEOF.alterarep_script"
+				);
+			}
+			else{
+				i3GEOF.alterarep.iniciaJanelaFlutuante();
+			}
 		},
 		mostraRegiao: function(){
 			if(typeof(i3GEOF.mostraregiao) === 'undefined'){

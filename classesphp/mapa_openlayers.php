@@ -265,24 +265,30 @@ if(trim($_GET["TIPOIMAGEM"]) != "" && trim($_GET["TIPOIMAGEM"]) != "nenhum")
 	imagedestroy($img);
 }
 else{
-	if($cache == true)
-	{$nomer = salvaCacheImagem($cachedir,$_GET["BBOX"],$nomecache,$map_fileX,$_GET["WIDTH"],$_GET["HEIGHT"]);}
-	else{
-		if($img->imagepath == "")
-		{echo "Erro IMAGEPATH vazio";exit;}
-		$nomer = ($img->imagepath)."imgtemp".nomeRand().".png";
-		$img->saveImage($nomer);
-	}
-	header('Content-Length: '.filesize($nomer));
-	header('Content-Type: image/png');
 	if($cache == true){
+		$nomer = salvaCacheImagem($cachedir,$_GET["BBOX"],$nomecache,$map_fileX,$_GET["WIDTH"],$_GET["HEIGHT"]);
+		header('Content-Length: '.filesize($nomer));
+		header('Content-Type: image/png');
 		header('Cache-Control: max-age=3600, must-revalidate');
 		header('Expires: ' . gmdate('D, d M Y H:i:s', time()+24*60*60) . ' GMT');
 		header('Last-Modified: '.gmdate('D, d M Y H:i:s', filemtime($nomer)).' GMT', true, 200);
-		$etag = md5_file($nomer);
-		header('Etag: '.$etag);
+		//$etag = md5_file($nomer);
+		//header('Etag: '.$etag);
+		fpassthru(fopen($nomer, 'rb'));
 	}
-	fpassthru(fopen($nomer, 'rb'));
+	else{
+		if($img->imagepath == "")
+		{echo "Erro IMAGEPATH vazio";exit;}
+		/*
+		$nomer = ($img->imagepath)."imgtemp".nomeRand().".png";
+		$img->saveImage($nomer);
+		header('Content-Length: '.filesize($nomer));
+		header('Content-Type: image/png');
+		fpassthru(fopen($nomer, 'rb'));
+		*/
+		header('Content-Type: image/png');
+		$img->saveImage();
+	}
 	exit;
 }
 function salvaCacheImagem($cachedir,$bbox,$layer,$map,$w,$h){

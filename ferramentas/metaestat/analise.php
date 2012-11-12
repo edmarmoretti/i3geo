@@ -81,12 +81,62 @@ switch (strtoupper($funcao)){
 	case "ALTERACONTORNO":
 		$retorno = alteraContorno($map_file,$tema);
 	break;
+	case "CLASSES2CIRCULOS":
+		$retorno = classes2circulos($map_file,$tema,"variatamanho");
+	break;
+	case "CLASSES2CIRCULOS1":
+		$retorno = classes2circulos($map_file,$tema,"variacor");
+	break;
 }
 if (!connection_aborted()){
 	cpjson($retorno);
 }
 else
 {exit();}
+function classes2circulos($map_file,$tema,$tipo){
+	$mapa = ms_newMapObj($map_file);
+	$l = $mapa->getlayerbyname($tema);
+	$layer = ms_newLayerObj($mapa,$l);
+	$l->set("status",MS_OFF);
+	$layer->set("status",MS_DEFAULT);
+	$layer->set("opacity",50);
+	$nome = $layer->name.nomeRandomico(4);
+	$layer->set("name",$nome);
+	if($layer->type != MS_LAYER_POINT){
+		$layer->set("type",0);
+		$m = new Metaestat();
+		$regiao = $m->listaTipoRegiao($layer->getmetadata("METAESTAT_CODIGO_TIPO_REGIAO"));
+		//repare que existe uma virgula apos o nome da coluna com a geometria, isso e necessario para substituir a string correta
+		if($regiao["colunacentroide"] != ""){
+			$stringgeo = "g.".$regiao["colunageo"].",";
+			$data = str_replace($stringgeo,"g.".$regiao["colunacentroide"].",",$layer->data);
+		}
+		else{
+			$stringgeo = 'st_setsrid(g.".'.$regiao["colunageo"].'.",".'.$regiao["srid"].'.")';
+			$data = str_replace($stringgeo,"st_centroid($stringgeo)",$layer->data);
+		}
+		$layer->set("data",$data);
+	}
+	$layer->setmetadata("tema",$layer->getmetadata("tema")." - circ");
+	$numclasses = $layer->numclasses;
+	if($tipo == "variatamanho" || $tipo == "variacor"){
+		if ($numclasses > 0){
+			for ($i=0; $i < $numclasses; ++$i)	{
+				$classe = $layer->getClass($i);
+				$estilo = $classe->getstyle(0);
+				$estilo->set("symbolname","ponto");
+				if($tipo == "variatamanho"){
+					$estilo->set("size",$i * 6);
+				}
+				if($tipo == "variacor"){
+					$estilo->set("size",12);
+				}
+			}
+		}
+	}
+	$mapa->save($map_file);
+	return $nome;
+}
 function alteraContorno($map_file,$tema){
 	$mapa = ms_newMapObj($map_file);
 	$layer = $mapa->getlayerbyname($tema);
