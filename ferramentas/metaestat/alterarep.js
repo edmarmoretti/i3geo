@@ -70,6 +70,11 @@ i3GEOF.alterarep = {
 			{onclick:{fn: function(){i3GEOF.alterarep.circulos("variacor");}}}
 		);
 		$i("i3geoalterarepCirculos1-button").style.width = 230 + "px";
+		new YAHOO.widget.Button(
+			"i3geoalterarepCirculos2",
+			{onclick:{fn: function(){i3GEOF.alterarep.circulos("continuo");}}}
+		);
+		$i("i3geoalterarepCirculos2-button").style.width = 230 + "px";
 	},
 	//utiliza o dicionario compartilhado
 	iniciaDicionario: function(){
@@ -118,8 +123,9 @@ i3GEOF.alterarep = {
 		var ins = "" +
 		'	<fieldset style="padding:5px;margin:2px;">'+
 		'	<legend>C&iacute;rculos representando os valores</legend>'+
-		'		<input id=i3geoalterarepCirculos type="button" value="Mant&ecirc;m as cores e varia o tamanho" /><br><br>'+
-		'		<input id=i3geoalterarepCirculos1 type="button" value="Mant&ecirc;m as cores" />'+
+		'		<input id=i3geoalterarepCirculos type="button" value="Mant&ecirc;m as classes e varia o tamanho" /><br><br>'+
+		'		<input id=i3geoalterarepCirculos1 type="button" value="Tamanho &uacute;nico" /><br><br>'+
+		'		<input id=i3geoalterarepCirculos2 type="button" value="Tamanho cont&iacute;nuo" />'+
 		'	</fieldset><br>';
 		return ins;
 	},
@@ -132,11 +138,15 @@ i3GEOF.alterarep = {
 		var p = i3GEO.configura.locaplic+"/ferramentas/metaestat/analise.php?g_sid="+i3GEO.configura.sid +
 			"&tema="+$i("i3geoCartoAnaliseCamadasCombo").value,
 			temp = function(retorno){
-			i3GEO.janela.fechaAguarde("alterarep1");
-			var atualiza = function(){
+				i3GEO.janela.fechaAguarde("alterarep1");
+				if(retorno.data == ""){
+					i3GEO.janela.tempoMsg("A camada escolhida n&atilde;o permite essa opera&ccedil;&atilde;o");
+					return;
+				}
+				var atualiza = function(){
 					i3GEO.atualiza();
-					i3GEOF.metaestat.CAMADAS.push(retorno.layer);
-					i3GEO.mapa.ativaTema(retorno.layer);
+					i3GEOF.metaestat.CAMADAS.push(retorno.data);
+					//i3GEO.mapa.ativaTema(retorno.data);
 					i3GEOF.metaestat.analise.comboCamadas();
 				};
 				i3GEO.php.adtema(atualiza,retorno.mapfile);
@@ -147,6 +157,9 @@ i3GEOF.alterarep = {
 		}
 		if(tipo == "variacor"){
 			p += "&funcao=classes2circulos1";
+		}
+		if(tipo == "continuo"){
+			p += "&funcao=classes2circulos2";
 		}
 		i3GEO.util.ajaxGet(p,temp);
 	},

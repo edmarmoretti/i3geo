@@ -695,7 +695,7 @@ i3GEO.configura = {
 			funcaoonclick:function(){
 				if(i3GEO.Interface.ATUAL === "googlemaps"){
 					//alert("Pressione a tecla CTRL junto com o bot&atilde;o esquerdo do mouse");
-					i3GEO.janela.mensagemSimples("Pressione a tecla CTRL junto com o bot&atilde;o esquerdo do mouse e arraste para definir a &aacute;rea de zoom","?");
+					i3GEO.janela.tempoMsg("Pressione a tecla CTRL junto com o bot&atilde;o esquerdo do mouse e arraste para definir a &aacute;rea de zoom");
 					g_tipoacao='pan';
 					g_operacao='navega';
 					i3GEO.barraDeBotoes.ativaIcone("pan");

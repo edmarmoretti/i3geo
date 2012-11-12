@@ -55,7 +55,7 @@ class Alteraclasse
 
 	Objeto layer
 	*/
-	protected $layer;
+	public $layer;
 	/*
 	Variavel: $nome
 
@@ -81,8 +81,9 @@ $tema - nome do tema
 		$this->mapa = ms_newMapObj($map_file);
 		$this->arquivo = $map_file;
 		$this->layer = "";
-		if($tema != "" && @$this->mapa->getlayerbyname($tema))
-		$this->layer = $this->mapa->getlayerbyname($tema);
+		if($tema != "" && @$this->mapa->getlayerbyname($tema)){
+			$this->layer = $this->mapa->getlayerbyname($tema);
+		}
 		$this->nome = $tema;
 		if($ext && $ext != ""){
 			$e = explode(" ",$ext);

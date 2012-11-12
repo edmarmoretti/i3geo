@@ -87,6 +87,9 @@ switch (strtoupper($funcao)){
 	case "CLASSES2CIRCULOS1":
 		$retorno = classes2circulos($map_file,$tema,"variacor");
 	break;
+	case "CLASSES2CIRCULOS2":
+		$retorno = classes2circulos($map_file,$tema,"continuo");
+	break;
 }
 if (!connection_aborted()){
 	cpjson($retorno);
@@ -94,18 +97,26 @@ if (!connection_aborted()){
 else
 {exit();}
 function classes2circulos($map_file,$tema,$tipo){
+	$nome = basename($map_file).$tema.$tipo;
 	$mapa = ms_newMapObj($map_file);
+	$teste = $mapa->getlayerbyname($nome);
+	if($teste != ""){
+		return "";
+	}
 	$l = $mapa->getlayerbyname($tema);
+	if($l->getmetadata("METAESTAT_DERIVADO") == "sim"){
+		return "";
+	}
 	$layer = ms_newLayerObj($mapa,$l);
 	$l->set("status",MS_OFF);
 	$layer->set("status",MS_DEFAULT);
 	$layer->set("opacity",50);
-	$nome = $layer->name.nomeRandomico(4);
+
 	$layer->set("name",$nome);
+	$meta = new Metaestat();
 	if($layer->type != MS_LAYER_POINT){
 		$layer->set("type",0);
-		$m = new Metaestat();
-		$regiao = $m->listaTipoRegiao($layer->getmetadata("METAESTAT_CODIGO_TIPO_REGIAO"));
+		$regiao = $meta->listaTipoRegiao($layer->getmetadata("METAESTAT_CODIGO_TIPO_REGIAO"));
 		//repare que existe uma virgula apos o nome da coluna com a geometria, isso e necessario para substituir a string correta
 		if($regiao["colunacentroide"] != ""){
 			$stringgeo = "g.".$regiao["colunageo"].",";
@@ -117,9 +128,14 @@ function classes2circulos($map_file,$tema,$tipo){
 		}
 		$layer->set("data",$data);
 	}
-	$layer->setmetadata("tema",$layer->getmetadata("tema")." - circ");
 	$numclasses = $layer->numclasses;
 	if($tipo == "variatamanho" || $tipo == "variacor"){
+		if($tipo == "variatamanho"){
+			$layer->setmetadata("tema",$layer->getmetadata("tema")." - circ");
+		}
+		if($tipo == "variacor"){
+			$layer->setmetadata("tema",$layer->getmetadata("tema")." - ponto");
+		}
 		if ($numclasses > 0){
 			for ($i=0; $i < $numclasses; ++$i)	{
 				$classe = $layer->getClass($i);
@@ -134,6 +150,47 @@ function classes2circulos($map_file,$tema,$tipo){
 			}
 		}
 	}
+	if($tipo == "continuo"){
+		$nometemp = str_replace(basename($map_file),nomeRandomico(5).basename($map_file),$map_file);
+		$mapa->save($nometemp);
+		//$mapatemp = ms_newMapObj($nometemp);
+		$medidavariavel = $meta->listaMedidaVariavel("",$layer->getmetadata("ID_MEDIDA_VARIAVEL"));
+		include_once("../../classesphp/classe_alteraclasse.php");
+		$m = new Alteraclasse($nometemp,$layer->name,"","");
+		$valores = $m->pegaValores($m->mapa,$m->layer,$medidavariavel["colunavalor"],true,0);
+		$min = min($valores);
+		$max = max($valores);
+		$layer->setmetadata("tema",$layer->getmetadata("tema")." - cont");
+		$layer->set("type",MS_LAYER_CHART);
+		$layer->set("opacity",60);
+		$layer->setprocessing("CHART_TYPE=pie");
+		$layer->setprocessing("CHART_SIZE_RANGE=".$medidavariavel["colunavalor"]." 10 150 ".$min." ".$max);
+		if ($numclasses > 0){
+			for ($i=0; $i < $numclasses; ++$i)	{
+				$classe = $layer->getClass($i);
+				$classe->set("status",MS_DELETE);
+			}
+		}
+		$classe = ms_newClassObj($layer);
+		$novoestilo = ms_newStyleObj($classe);
+		//$novoestilo->set("symbolname","ponto");
+		$novoestilo->set("size","6");
+		$ncor = $novoestilo->color;
+		$ncor->setrgb(247,145,29);
+		$ncor = $novoestilo->outlinecolor;
+		$ncor->setrgb(255,255,255);
+		//$novoestilo->setbinding(MS_STYLE_BINDING_SIZE, $medidavariavel["colunavalor"]);
+		//
+		$classe = ms_newClassObj($layer);
+		$novoestilo = ms_newStyleObj($classe);
+		//$novoestilo->set("symbolname","ponto");
+		$novoestilo->set("size","6");
+		$ncor = $novoestilo->color;
+		$ncor->setrgb(247,145,29);
+		$ncor = $novoestilo->outlinecolor;
+		$ncor->setrgb(255,255,255);;
+	}
+	$layer->setmetadata("METAESTAT_DERIVADO","sim");
 	$mapa->save($map_file);
 	return $nome;
 }
