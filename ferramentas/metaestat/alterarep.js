@@ -62,19 +62,34 @@ i3GEOF.alterarep = {
 		$i(divid).innerHTML = i3GEOF.alterarep.html();
 		new YAHOO.widget.Button(
 			"i3geoalterarepCirculos",
-			{onclick:{fn: function(){i3GEOF.alterarep.circulos("variatamanho");}}}
+			{onclick:{fn: function(){i3GEOF.alterarep.aplica("variatamanho");}}}
 		);
 		$i("i3geoalterarepCirculos-button").style.width = 230 + "px";
 		new YAHOO.widget.Button(
 			"i3geoalterarepCirculos1",
-			{onclick:{fn: function(){i3GEOF.alterarep.circulos("variacor");}}}
+			{onclick:{fn: function(){i3GEOF.alterarep.aplica("variacor");}}}
 		);
 		$i("i3geoalterarepCirculos1-button").style.width = 230 + "px";
 		new YAHOO.widget.Button(
 			"i3geoalterarepCirculos2",
-			{onclick:{fn: function(){i3GEOF.alterarep.circulos("continuo");}}}
+			{onclick:{fn: function(){i3GEOF.alterarep.aplica("continuo");}}}
 		);
 		$i("i3geoalterarepCirculos2-button").style.width = 230 + "px";
+		new YAHOO.widget.Button(
+			"i3geoalterarepArea",
+			{onclick:{fn: function(){i3GEOF.alterarep.aplica("pontos");}}}
+		);
+		$i("i3geoalterarepArea-button").style.width = 230 + "px";
+		new YAHOO.widget.Button(
+			"i3geoalterarepArea1",
+			{onclick:{fn: function(){i3GEOF.alterarep.aplica("hachureas");}}}
+		);
+		$i("i3geoalterarepArea1-button").style.width = 230 + "px";
+		new YAHOO.widget.Button(
+			"i3geoalterarepArea2",
+			{onclick:{fn: function(){i3GEOF.alterarep.aplica("opacidade");}}}
+		);
+		$i("i3geoalterarepArea2-button").style.width = 230 + "px";
 	},
 	//utiliza o dicionario compartilhado
 	iniciaDicionario: function(){
@@ -126,10 +141,16 @@ i3GEOF.alterarep = {
 		'		<input id=i3geoalterarepCirculos type="button" value="Mant&ecirc;m as classes e varia o tamanho" /><br><br>'+
 		'		<input id=i3geoalterarepCirculos1 type="button" value="Tamanho &uacute;nico" /><br><br>'+
 		'		<input id=i3geoalterarepCirculos2 type="button" value="Tamanho cont&iacute;nuo" />'+
+		'	</fieldset><br>'+
+		'	<fieldset style="padding:5px;margin:2px;">'+
+		'	<legend>Preenchimento de &aacute;rea</legend>'+
+		'		<input id=i3geoalterarepArea type="button" value="Com pontos" /><br><br>'+
+		'		<input id=i3geoalterarepArea1 type="button" value="Com hachureas" /><br><br>'+
+		'		<input id=i3geoalterarepArea2 type="button" value="Com varia&ccedil;&atilde;o de opacidade" /><br><br>'+
 		'	</fieldset><br>';
 		return ins;
 	},
-	circulos: function(tipo){
+	aplica: function(tipo){
 		if($i("i3geoCartoAnaliseCamadasCombo").value == ""){
 			i3GEO.janela.tempoMsg("Ative uma camada primeiro");
 			return;
@@ -160,6 +181,15 @@ i3GEOF.alterarep = {
 		}
 		if(tipo == "continuo"){
 			p += "&funcao=classes2circulos2";
+		}
+		if(tipo == "pontos"){
+			p += "&funcao=classes2pontos";
+		}
+		if(tipo == "hachureas"){
+			p += "&funcao=classes2hach";
+		}
+		if(tipo == "opacidade"){
+			p += "&funcao=classes2opacidade";
 		}
 		i3GEO.util.ajaxGet(p,temp);
 	},

@@ -132,7 +132,7 @@ i3GEOF.metaestat = {
 			'	<button title="Estat&iacute;sticas gerais" onclick="i3GEOF.metaestat.analise.estatistica()"><img src="'+i3GEO.configura.locaplic+'/imagens/gisicons/stats.png" /></button>' +
 			'	<button title="Ativa/Desativa contorno" onclick="i3GEOF.metaestat.analise.contorno()"><img src="'+i3GEO.configura.locaplic+'/imagens/gisicons/boundary-remove-add.png" /></button>' +
 			'	<button title="Altera representa&ccedil;&atilde;o" onclick="i3GEOF.metaestat.analise.alteraRep()"><img src="'+i3GEO.configura.locaplic+'/imagens/gisicons/shape.png" /></button>' +
-
+			'	<button title="Mapa de calor" onclick="i3GEOF.metaestat.analise.calor()"><img src="'+i3GEO.configura.locaplic+'/imagens/gisicons/dem.png" /></button>' +
 			'</div>' +
 			'<div id="i3geoCartoAnaliseCamadas" style="margin-left:5px;line-height:25px"></div>' +
 			'<input type=hidden  value="" id="listaColourRampAnaliseMetaestat" onchange="i3GEOF.metaestat.analise.aplicaColourRamp()" />'; //utilizado pelo seletor de colourramp
@@ -173,6 +173,25 @@ i3GEOF.metaestat = {
 			else{
 				i3GEOF.alterarep.iniciaJanelaFlutuante();
 			}
+		},
+		calor: function(){
+			if($i("i3geoCartoAnaliseCamadasCombo").value == ""){
+				i3GEO.janela.tempoMsg("Ative uma camada primeiro");
+				return;
+			}
+			if(!window.confirm("Gera o mapa de calor? Isso pode demorar...")){
+				return;
+			}
+			i3GEO.janela.tempoMsg("Ser&aacute; considerada apenas a regi&atilde;o mostrada no mapa");
+			i3GEO.mapa.ativaTema($i("i3geoCartoAnaliseCamadasCombo").value);
+			var p = i3GEO.configura.locaplic+"/ferramentas/metaestat/analise.php?g_sid="+i3GEO.configura.sid +
+				"&funcao=calor&tema="+$i("i3geoCartoAnaliseCamadasCombo").value+"&ext="+i3GEO.parametros.mapexten,
+				temp = function(retorno){
+					i3GEO.janela.fechaAguarde("aguardecalor");
+					i3GEO.atualiza();
+				};
+			i3GEO.janela.abreAguarde("aguardecalor","Aguarde...");
+			i3GEO.util.ajaxGet(p,temp);
 		},
 		mostraRegiao: function(){
 			if(typeof(i3GEOF.mostraregiao) === 'undefined'){

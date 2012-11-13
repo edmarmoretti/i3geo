@@ -1507,15 +1507,15 @@ i3GEO.util = {
 	*/
 	comboTemas: function(id,funcao,onde,nome,multiplo,tipoCombo,estilo){
 		if(typeof(console) !== 'undefined'){console.info("i3GEO.util.comboTemas()");}
-		if(!estilo){
-			estilo = "font-size:12px;";
-		}
 		if (arguments.length > 2)
 		{i3GEO.util.defineValor(onde,"innerHTML","<span style=color:red;font-size:10px; >buscando temas...</span>");}
 		if (arguments.length === 3)
 		{nome = "";}
 		if (arguments.length < 5)
 		{multiplo = false;}
+		if(!estilo){
+			estilo = "font-size: 12px;width: 95%;";
+		}
 		var monta, temp, temp1, temp2;
 		monta = function(retorno){
 			var i,comboTemas,n,nome = "";
@@ -1541,7 +1541,7 @@ i3GEO.util = {
 							tema = retorno[i].name;
 						}
 						if(retorno[i].escondido !== "sim")
-						{comboTemas += "<option title='"+nome+"' value="+tema+" >"+nome+"</option>";}
+						{comboTemas += "<option value="+tema+" >"+nome+"</option>";}
 					}
 					comboTemas += "</select>";
 					temp = {dados:comboTemas,tipo:"dados"};

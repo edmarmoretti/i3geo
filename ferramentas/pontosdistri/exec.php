@@ -23,6 +23,9 @@ Executa script R para gerar a imagem.
 		if(!isset($limitepontos))
 		{$limitepontos = "";}
 		$m = new Analise($map_file,$tema,$locaplic,$ext);
+		if(empty($item)){
+			$item = "";
+		}
 		$retorno = $m->analiseDistriPt($locaplic,$dir_tmp,$R_path,$numclasses,$tipo,$cori,$corf,$tmpurl,$sigma,$limitepontos,$tema2,$extendelimite);
 		$m->salva();
 		$_SESSION["contadorsalva"]++;

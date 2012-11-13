@@ -90,12 +90,106 @@ switch (strtoupper($funcao)){
 	case "CLASSES2CIRCULOS2":
 		$retorno = classes2circulos($map_file,$tema,"continuo");
 	break;
+	case "CLASSES2PONTOS":
+		$retorno = classes2preenchimento($map_file,$tema,"ponto");
+	break;
+	case "CLASSES2HACH":
+		$retorno = classes2preenchimento($map_file,$tema,"hachurea");
+	break;
+	case "CLASSES2OPACIDADE":
+		$retorno = classes2preenchimento($map_file,$tema,"opacidade");
+	break;
+	case "CALOR":
+		$retorno = mapaDeCalor($map_file,$tema);
+	break;
 }
 if (!connection_aborted()){
 	cpjson($retorno);
 }
 else
 {exit();}
+function mapaDeCalor($map_file,$tema){
+	global $locaplic,$dir_tmp,$R_path,$ext;
+	$nome = basename($map_file).$tema."calor";
+	$mapa = ms_newMapObj($map_file);
+	$teste = $mapa->getlayerbyname($nome);
+	if($teste != ""){
+		return "";
+	}
+	$layer = $mapa->getlayerbyname($tema);
+	if($layer->getmetadata("METAESTAT_DERIVADO") == "sim"){
+		return "";
+	}
+	$layer->set("status",MS_OFF);
+	$mapa->save($map_file);
+	$meta = new Metaestat();
+	$medidavariavel = $meta->listaMedidaVariavel("",$layer->getmetadata("ID_MEDIDA_VARIAVEL"));
+	include_once("../../classesphp/classe_analise.php");
+	$m = new Analise($map_file,$tema,$locaplic,$ext);
+	$retorno = $m->analiseDistriPt($locaplic,$dir_tmp,$R_path,50,"densidade","243,217,173","255,0,0","",0,true,"",2,$medidavariavel["colunavalor"]);
+	$m->salva();
+	return $retorno;
+}
+function classes2preenchimento($map_file,$tema,$tipo){
+	$nome = basename($map_file).$tema.$tipo;
+	$mapa = ms_newMapObj($map_file);
+	$teste = $mapa->getlayerbyname($nome);
+	if($teste != ""){
+		return "";
+	}
+	$l = $mapa->getlayerbyname($tema);
+	if($l->getmetadata("METAESTAT_DERIVADO") == "sim"){
+		return "";
+	}
+	$layer = ms_newLayerObj($mapa,$l);
+	$l->set("status",MS_OFF);
+	$layer->set("status",MS_DEFAULT);
+	$layer->set("opacity",50);
+	$layer->set("name",$nome);
+	if($layer->type != MS_LAYER_POLYGON){
+		return "";
+	}
+	$numclasses = $layer->numclasses;
+	if($tipo == "ponto" || $tipo == "hachurea"){
+		if($tipo == "ponto"){
+			$layer->setmetadata("tema",$layer->getmetadata("tema")." - pontos");
+			$s = "ponto";
+			$si = 10;
+			$w = 4;
+		}
+		if($tipo == "hachurea"){
+			$layer->setmetadata("tema",$layer->getmetadata("tema")." - hachurea");
+			$s = "p3";
+			$si = 5;
+			$w = 1;
+		}
+		if ($numclasses > 0){
+			for ($i=0; $i < $numclasses; ++$i)	{
+				$classe = $layer->getClass($i);
+				$estilo = $classe->getstyle(0);
+				$estilo->set("symbolname",$s);
+				$estilo->set("size",$si);
+				$estilo->set("width",$w);
+			}
+		}
+	}
+	if($tipo == "opacidade"){
+		$layer->setmetadata("tema",$layer->getmetadata("tema")." - opac");
+		if ($numclasses > 0){
+			$delta = 90 / $numclasses;
+			$o = $delta;
+			for ($i=0; $i < $numclasses; ++$i)	{
+				$classe = $layer->getClass($i);
+				$estilo = $classe->getstyle(0);
+				$estilo->set("opacity",$o);
+				$o = $o + $delta;
+			}
+		}
+	}
+	$layer->setmetadata("METAESTAT_DERIVADO","sim");
+	$mapa->save($map_file);
+	return $nome;
+}
 function classes2circulos($map_file,$tema,$tipo){
 	$nome = basename($map_file).$tema.$tipo;
 	$mapa = ms_newMapObj($map_file);
