@@ -912,6 +912,13 @@ i3GEO.janela = {
 				tipo
 			);
 		}
+		//
+		//a busca nao funciona com parametros dentro de parenteses
+		//por isso e necessario zerar o array
+		//
+		if(i3GEO.eventos.ATUALIZAARVORECAMADAS.length > 20){
+			i3GEO.eventos.ATUALIZAARVORECAMADAS = [];
+		}
 		temp = "i3GEO.janela.comboCabecalhoTemas('"+idDiv+"','"+idCombo+"','"+ferramenta+"','"+tipo+"')";
 		if(i3GEO.eventos.ATUALIZAARVORECAMADAS.toString().search(temp) < 0)
 		{i3GEO.eventos.ATUALIZAARVORECAMADAS.push(temp);}
