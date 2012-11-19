@@ -480,7 +480,10 @@ else //se for linux
  * TODO verificar qual o endereco padrao no Ubuntu
  */
 	$R_libpath = "";
-	$postgis_mapa = "";
+	$postgis_mapa = array(
+		"teste"=>"user=postgres password=postgres dbname=postgis host=localhost port=5432 options='-c client_encoding=LATIN1'",
+		"postgres"=>"user=postgres password=postgres dbname=postgis host=localhost port=5432",
+	);
 	$utilizacgi = "nao";
 	$expoeMapfile = "sim";
 	$conexaoadmin = "";//$locaplic."/admin/php/conexaopostgresql.php";

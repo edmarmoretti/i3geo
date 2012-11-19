@@ -33,6 +33,10 @@ Arquivo:
 
 i3geo/admin/php/parsemapfile.php
 */
+//TODO permitir acesso apenas com login e senha
+//TODO verificar restricao de acesso ao tema
+
+return;
 include("../../ms_configura.php");
 include_once("../../classesphp/funcoes_gerais.php");
 include_once("../../classesphp/carrega_ext.php");
@@ -152,7 +156,7 @@ function legendaValorUnico($layername)
 		$expressao = str_replace("'eq","=",$expressao);
 		$expressao = str_replace("'eq ","=",$expressao);
 		$expressao = str_replace("' eq","=",$expressao);
-		$expressao = str_replace("' eq ","=",$expressao);	
+		$expressao = str_replace("' eq ","=",$expressao);
 		$temp = explode("=",$expressao);
 		$temp = trim($temp[1]);
 		$temp = trim(str_replace("'","",$temp));
@@ -212,7 +216,7 @@ function legendaValorUnico($layername)
 	$xml .= "</xml-tag>\n";
 	echo header("Content-type: application/xml");
 	echo $xml;
-	exit;		
+	exit;
 }
 function legendaSimples($layername)
 {
@@ -256,7 +260,7 @@ function legendaSimples($layername)
 	$xml .= "</xml-tag>\n";
 	echo header("Content-type: application/xml");
 	echo $xml;
-	exit;		
+	exit;
 }
 //
 //gera xml com par&acirc;metros do mapfile
@@ -265,7 +269,7 @@ function mapfile()
 {
 	global $codigoLayer,$mapfile,$mapa,$objcontype,$objlayertypes,$forcawms,$postgis_mapa;
 	$layers = $mapa->getalllayernames();
-	$dados = array(); 
+	$dados = array();
 	$xml = "<"."\x3F"."xml version='1.0' encoding='ISO-8859-1' "."\x3F".">";
 	$xml .= "\n<parsemapfile>\n";
 	$xml .= "<tiposconexao>".implode(",",$objcontype)."</tiposconexao>\n";
@@ -282,7 +286,7 @@ function mapfile()
 			else
 			{
 				if($layer->group == $layer->name)
-				{$nlayers[] = $layer->name;}	
+				{$nlayers[] = $layer->name;}
 			}
 			$layers = $nlayers;
 		}
@@ -296,7 +300,7 @@ function mapfile()
 		if (@$layer->open() == MS_SUCCESS)
 		{$colunas = implode(",",$layer->getItems());}
 		else
-		{$colunas = "*";}		
+		{$colunas = "*";}
 		$ct = $objcontype[$layer->connectiontype];
 		$tagLegenda = "parsemapfile.php?id=".$codigoLayer."&amp;layername=".$layer->name."&amp;tipoparse=legenda";
 		$nomeLayer = $layer->name;
@@ -335,7 +339,7 @@ function mapfile()
 			$xml .= "<format>image/png</format>";
 			$xml .= "<style>$s</style>";
 			$tagLegenda = "";
-		}	
+		}
 		$xml .= "<geraxmllegenda>$tagLegenda</geraxmllegenda>";
 		$xml .= "<connectiontype>".$ct."</connectiontype>\n";
 		$xml .= "<data>$d</data>\n";
@@ -349,7 +353,7 @@ function mapfile()
 				if(($con == " ") || ($con == ""))
 				{$con = $postgis_mapa;}
 				else
-				{$con = $postgis_mapa[$con];}					
+				{$con = $postgis_mapa[$con];}
 			}
 			$xml .= "<user>".preg_replace('/.*user\s*=\s*([a-zA-Z0-9_.]+).*/i', '\1', $con)."</user>\n";
 			$xml .= "<password>".preg_replace('/.*password\s*=\s*([a-zA-Z0-9_.]+).*/i', '\1', $con)."</password>\n";
@@ -375,7 +379,7 @@ function mapfile()
 			$xml .= "<type>".$objlayertypes[$layer->type]."</type>\n";
 			$xml .= "<filter>".$layer->getfilterstring()."</filter>\n";
 			$xml .= "<filteritem>$layer->filteritem</filteritem>\n";
-			$xml .= "<labelangleitem>$layer->labelangleitem</labelangleitem>\n";
+			//$xml .= "<labelangleitem>".$layer->labelangleitem."</labelangleitem>\n";
 			$xml .= "<labelitem>$layer->labelitem</labelitem>\n";
 			$xml .= "<labelmaxscale>$layer->labelmaxscaledenom</labelmaxscale>\n";
 			$xml .= "<labelminscale>$layer->labelminscaledenom</labelminscale>\n";
@@ -394,7 +398,7 @@ function mapfile()
 			$xml .= "<tolerance>$layer->tolerance</tolerance>\n";
 			$xml .= "<toleranceunits>$layer->toleranceunits</toleranceunits>\n";
 			$xml .= "<sizeunits>$layer->sizeunits</sizeunits>\n";
-			$xml .= "<projection>$layer->getProjection</projection>\n";
+			$xml .= "<projection>".$layer->getProjection()."</projection>\n";
 			$xml .= "<classes>\n";
 			$xml = pegaClasses($xml);
 			$xml .= "</classes>\n";
