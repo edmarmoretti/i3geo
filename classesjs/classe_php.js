@@ -1387,6 +1387,16 @@ i3GEO.php = {
 		cpJSON.call(p,"pegadata",funcao,par);
 	},
 	/*
+	Function: pegaMetaData
+
+	<PEGAMETADATA>
+	*/
+	pegaMetaData: function(funcao,tema){
+		var p = i3GEO.configura.locaplic+"/classesphp/mapa_controle.php",
+			par = "g_sid="+i3GEO.configura.sid+"&funcao=pegametadata&tema="+tema;
+		cpJSON.call(p,"pegametadata",funcao,par);
+	},
+	/*
 	Function: alteraData
 
 	<ALTERADATA>

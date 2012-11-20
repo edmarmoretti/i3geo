@@ -777,6 +777,24 @@ Obt&eacute;m o nome de um layer e de seu arquivo mapfile original.
 		$m = new Temas($map_file,$tema);
 		$retorno = $m->peganomelayer();
 	break;
+	/*
+	 Valor: PEGAMETADATA
+
+	Obt&eacute;m os metadados de um tema
+
+	Tema pode ser um mapfile existente em i3geo/temas
+
+	<Temas->pegametadata>
+	*/
+	case "PEGAMETADATA":
+		include_once("classe_temas.php");
+		//pode pegar os metadata de um mapfile existente em i3geo/temas
+		if(file_exists(__DIR__."/../temas/".$tema.".map")){
+			$map_file = __DIR__."/../temas/".$tema.".map";
+		}
+		$m = new Temas($map_file,$tema);
+		$retorno = $m->pegametadata();
+	break;
 /*
 Valor: PEGADATA
 

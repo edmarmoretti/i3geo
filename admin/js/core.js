@@ -909,11 +909,16 @@ selecionados - array com os valores marcados
 
 target - objeto para receber o resultado
 
-record - objeto record
+record - objeto record (utilize "" para escapar)
 
-key - chave (nome do item)
+key - chave (nome do item) (utilize "" para escapar)
+
+unico - sim|nao indicando se apenas um pode ser escolhido
 */
-function core_menuCheckBox(valores,textos,selecionados,target,record,key){
+function core_menuCheckBox(valores,textos,selecionados,target,record,key,unico){
+	if(!unico){
+		unico = "nao";
+	}
 	function on_menuCheckBoxChange(p_oEvent){
 		var cks,i,
 		ins = [];
@@ -925,7 +930,7 @@ function core_menuCheckBox(valores,textos,selecionados,target,record,key){
 					ins.push(cks[i].value);
 				}
 			}
-			if(record){
+			if(record && record != ""){
 				target.innerHTML = "<pre ><p>"+ins.toString()+"</pre>";
 				record.setData(key,ins.toString());
 			}
@@ -942,18 +947,20 @@ function core_menuCheckBox(valores,textos,selecionados,target,record,key){
 		novoel.id =  "core_menuCK";
 		ndiv = document.createElement("div");
 		ndiv.className= "yui-dt-editor";
+		ndiv.style.backgroundColor = "white";
 		ndiv.style.height = "144px";
 		ndiv.style.overflow = "auto";
-		ndiv.innerHTML = "<div id='core_menuCK_bd' style='background:white;text-align:left;border:1px solid gray'></div>";
+		ndiv.innerHTML = "<div id='core_botoesCabecalho' ></div><br>" +
+			"<div id='core_menuCK_bd' style='background:white;text-align:left;border:1px solid gray'></div>";
 		novoel.appendChild(ndiv);
 		document.body.appendChild(novoel);
-		og_core = new YAHOO.widget.ButtonGroup({id:"okcancel_checkbox_id", name:"okcancel_checkbox_id", container:"core_menuCK_bd" });
+		og_core = new YAHOO.widget.ButtonGroup({id:"okcancel_checkbox_id", name:"okcancel_checkbox_id", container:"core_botoesCabecalho" });
 		og_core.addButtons([
 			{ label: "OK", value: "OK", checked: false},
-			{ label: "Cancel", value: "CANCEL", checked: false }
+			{ label: "Fecha", value: "CANCEL", checked: false }
 		]);
 		og_core.on("checkedButtonChange", on_menuCheckBoxChange);
-		YAHOO.admin.container.panelCK = new YAHOO.widget.Overlay("core_menuCK", { zindex:"100",close:false,underlay:false,width:"300px", height:"200px",overflow:"auto", visible:false,constraintoviewport:false } );
+		YAHOO.admin.container.panelCK = new YAHOO.widget.Panel("core_menuCK", { draggable:false,modal:true,zindex:"100",close:false,underlay:false,width:"168px", height:"158px",overflow:"auto", visible:false,constraintoviewport:false } );
 		YAHOO.admin.container.panelCK.render();
 	}
 	onde = $i("core_menuCK_bd");
@@ -966,7 +973,12 @@ function core_menuCheckBox(valores,textos,selecionados,target,record,key){
 			if(selecionados[j] == valores[i])
 			ck = "CHECKED";
 		}
-		ins.push("<input type=checkbox id='CK_"+valores[i]+"' value='"+valores[i]+"' "+ck+" />"+textos[i]+"<br>");
+		if(unico === "nao"){
+			ins.push("<input type=checkbox id='CK_"+valores[i]+"' value='"+valores[i]+"' "+ck+" />"+textos[i]+"<br>");
+		}
+		else{
+			ins.push("<input style='position:relative;top:2px;' type=radio name=escolha_core_menuCheckBox id='CK_"+valores[i]+"' value='"+valores[i]+"' "+ck+" />"+textos[i]+"<br>");
+		}
 	}
 	ins.push("<br>");
 	novoCK.innerHTML = ins.join(" ");

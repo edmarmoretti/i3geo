@@ -122,7 +122,6 @@ $ext - (opcional) extens&atilde;o geogr&aacute;fica que ser&aacute; aplicada ao 
 		{
 			$this->mapa = ms_newMapObj($map_file);
 			$this->arquivo = $map_file;
-
 			if($tema != "")
 			{
 				$listaTemas = str_replace(" ",",",$tema);
@@ -161,6 +160,25 @@ Salva o mapfile atual
  	{
 	  	if (connection_aborted()){exit();}
 	  	$this->mapa->save($this->arquivo);
+	}
+/*
+ function: pegaMetadata
+
+Pega os metadata do tema
+
+parameter:
+
+*/
+	function pegaMetadata(){
+		if(!$this->layer){return "erro";}
+		$buscar = array("METAESTAT","METAESTAT_ID_MEDIDA_VARIAVEL");
+		$meta = array();
+		foreach($buscar as $b){
+			$meta[$b] = $this->layer->getmetadata($b);
+		}
+		return array(
+			$this->layer->name => $meta
+		);
 	}
 /*
 function: aplicaProcessos

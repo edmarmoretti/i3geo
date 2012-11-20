@@ -1142,7 +1142,7 @@ class Metaestat{
 	$id_medida_variavel - opcional
 	*/
 	function listaMedidaVariavel($codigo_variavel,$id_medida_variavel=""){
-		$sql = "SELECT i3geoestat_medida_variavel.*,i3geoestat_unidade_medida.permitemedia,i3geoestat_unidade_medida.permitesoma,i3geoestat_unidade_medida.nome as unidade_medida ";
+		$sql = "SELECT i3geoestat_medida_variavel.*,i3geoestat_variavel.nome as nome_variavel,i3geoestat_unidade_medida.permitemedia,i3geoestat_unidade_medida.permitesoma,i3geoestat_unidade_medida.nome as unidade_medida ";
 		$sql .= "FROM ".$this->esquemaadmin."i3geoestat_variavel ";
 		$sql .= "JOIN ".$this->esquemaadmin."i3geoestat_medida_variavel ";
 		$sql .= "ON i3geoestat_variavel.codigo_variavel = i3geoestat_medida_variavel.codigo_variavel ";
@@ -1154,7 +1154,7 @@ class Metaestat{
 				$sql .= "AND i3geoestat_medida_variavel.id_medida_variavel = $id_medida_variavel ";
 			}
 		}
-		else{
+		elseif($id_medida_variavel != "") {
 			$sql .= "WHERE i3geoestat_medida_variavel.id_medida_variavel = $id_medida_variavel ";
 		}
 		return $this->execSQL($sql,$id_medida_variavel);

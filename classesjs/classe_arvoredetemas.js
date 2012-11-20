@@ -1762,36 +1762,55 @@ i3GEO.arvoreDeTemas = {
 		//
 		//verifica se o tema ja existe no mapa
 		//
-		if(tsl.length === 1 && i3GEO.arvoreDeCamadas.pegaTema(tsl[0]) !== ""){
+		if(i3GEO.arvoreDeCamadas.pegaTema(tsl[0]) !== ""){
 			temp = window.confirm("O tema existe no mapa. Adiciona novamente?");
 			if(!temp){return;}
 		}
 		if(tsl.length > 0){
-			temp = function(retorno){
-				i3GEO.atualiza();
-				//
-				//verifica se deve ser ativada uma outra guia que nao a atual
-				//
-				if(i3GEO.arvoreDeTemas.RETORNAGUIA !== ""){
-					if(i3GEO.arvoreDeTemas.RETORNAGUIA !== i3GEO.guias.ATUAL){
-						i3GEO.guias.escondeGuias();
-						i3GEO.guias.mostra(i3GEO.arvoreDeTemas.RETORNAGUIA);
+			//verifica se o tema esta vinculado ao sistema de metadados estatisticos
+			temp = i3GEO.arvoreDeTemas.ARVORE.getNodeByProperty("idtema",tsl[0]);
+			if(temp && temp.data.tipoa_tema === "META"){
+				//obtem os parametros do tema
+				temp = function(retorno){
+					var id = retorno.data[tsl[0]]["METAESTAT_ID_MEDIDA_VARIAVEL"];
+					i3GEO.util.dialogoFerramenta(
+						"i3GEO.mapa.dialogo.metaestat()",
+						"metaestat",
+						"metaestat",
+						"index.js",
+						"i3GEOF.metaestat.inicia('flutuanteSimples','',"+id+")"
+					);
+
+				};
+				i3GEO.php.pegaMetaData(temp,tsl[0]);
+			}
+			else{
+				temp = function(retorno){
+					i3GEO.atualiza();
+					//
+					//verifica se deve ser ativada uma outra guia que nao a atual
+					//
+					if(i3GEO.arvoreDeTemas.RETORNAGUIA !== ""){
+						if(i3GEO.arvoreDeTemas.RETORNAGUIA !== i3GEO.guias.ATUAL){
+							i3GEO.guias.escondeGuias();
+							i3GEO.guias.mostra(i3GEO.arvoreDeTemas.RETORNAGUIA);
+						}
 					}
-				}
-				//
-				//verifica se a janela da ferramenta identifica esta ativa para atualizar a lista de temas
-				//
-				try{
-					if($i("i3GEOidentificalistaTemas")){
-						i3GEOF.identifica.listaTemas();
-						g_tipoacao = "identifica";
+					//
+					//verifica se a janela da ferramenta identifica esta ativa para atualizar a lista de temas
+					//
+					try{
+						if($i("i3GEOidentificalistaTemas")){
+							i3GEOF.identifica.listaTemas();
+							g_tipoacao = "identifica";
+						}
 					}
-				}
-				catch(r){
-					if(typeof(console) !== 'undefined'){console.error(r);}
-				}
-			};
-			i3GEO.php.adtema(temp,tsl.toString());
+					catch(r){
+						if(typeof(console) !== 'undefined'){console.error(r);}
+					}
+				};
+				i3GEO.php.adtema(temp,tsl.toString());
+			}
 		}
 	},
 	/*

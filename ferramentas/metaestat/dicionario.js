@@ -117,5 +117,12 @@ pt:"Regi&atilde;o",
 en:"",
 es:"",
 it:""
+}],
+"17":[
+{
+pt:"Escolha um tipo de regi&atilde;o (limites utilizados para representar os valores) e o tipo de classifica&ccedil;&atilde;o dos dados, depois escolha os valores para os par&acirc;metros , se houver. Para adicionar a camada ao mapa, clique no bot&atilde;o de adi&ccedil;&atilde;o e feche a janela para continuar usando o mapa.",
+en:"",
+es:"",
+it:""
 }]
 };

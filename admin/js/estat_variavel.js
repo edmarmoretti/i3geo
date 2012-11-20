@@ -1199,7 +1199,7 @@ i3GEOadmin.variaveis = {
 							valores.push(dados[i].esquema);
 							textos.push(dados[i].esquema);
 						}
-						core_menuCheckBox(valores,textos,selecionados,eleValue);
+						core_menuCheckBox(valores,textos,selecionados,eleValue,"","","sim");
 					}
 					catch(e){core_handleFailure(e,o.responseText);}
 				},
@@ -1228,7 +1228,7 @@ i3GEOadmin.variaveis = {
 							valores.push(dados[i].tabela);
 							textos.push(dados[i].tabela);
 						}
-						core_menuCheckBox(valores,textos,selecionados,eleValue);
+						core_menuCheckBox(valores,textos,selecionados,eleValue,"","","sim");
 					}
 					catch(e){core_handleFailure(e,o.responseText);}
 				},
@@ -1258,7 +1258,7 @@ i3GEOadmin.variaveis = {
 							valores.push(dados[i]);
 							textos.push(dados[i]);
 						}
-						core_menuCheckBox(valores,textos,selecionados,eleValue);
+						core_menuCheckBox(valores,textos,selecionados,eleValue,"","","sim");
 					}
 					catch(e){core_handleFailure(e,o.responseText);}
 				},
