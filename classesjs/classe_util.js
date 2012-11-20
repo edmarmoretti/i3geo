@@ -254,7 +254,7 @@ i3GEO.util = {
 		return keys;
 	},
 	/*
-	Function: criaBotaoAplicar
+	Function: criaBotaoAplicar (depreciado)
 
 	Cria um botao flutuante do tipo aplicar.
 

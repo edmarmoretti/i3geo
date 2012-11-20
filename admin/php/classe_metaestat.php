@@ -354,7 +354,8 @@ class Metaestat{
 		//utiliza-se da mesma forma /*FAT*//*FAT*/ e /*FWT*//*FWT*/ para os filtros de tempo
 		//Layers adicionados aqui sao marcados com o metadata METAESTAT "SIM"
 		//O codigo_tipo_regiao e marcado com o metadata METAESTAT_CODIGO_TIPO_REGIAO
-		//O id da medida da variavel e marcado com o metadata ID_MEDIDA_VARIAVEL
+		//O id da medida da variavel e marcado com o metadata METAESTAT_ID_MEDIDA_VARIAVEL
+		//outros metadados tambem sao utilizados, veja em admin/php/editormapfile.php
 		$arq = $this->dir_tmp."/".$this->nomecache.".map";
 		if(!file_exists($arq)){
 			if(empty($tipolayer)){
@@ -395,7 +396,7 @@ class Metaestat{
 			$dados[] = '		CLASSE "SIM"';
 			$dados[] = '		METAESTAT "SIM"';
 			$dados[] = '		METAESTAT_CODIGO_TIPO_REGIAO "'.$codigo_tipo_regiao.'"';
-			$dados[] = '		ID_MEDIDA_VARIAVEL "'.$id_medida_variavel.'"';
+			$dados[] = '		METAESTAT_ID_MEDIDA_VARIAVEL "'.$id_medida_variavel.'"';
 			$dados[] = '		ITENS "'.implode(",",$sql["colunas"]).'"';
 			$dados[] = '		ITENSDESC "'.implode(",",$sql["alias"]).'"';
 			$dados[] = '	END';
@@ -535,7 +536,7 @@ class Metaestat{
 				$dados[] = '           TYPE TRUETYPE';
 				$dados[] = '        END';
 				$dados[] = '    END';
-				$dados[] = "END";			
+				$dados[] = "END";
 			}
 			$dados[] = "END";
 			$fp = fopen($arq,"w");

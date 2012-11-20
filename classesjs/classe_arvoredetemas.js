@@ -220,7 +220,7 @@ i3GEO.arvoreDeTemas = {
 	*/
 	ATIVATEMA: "",
 	/*
-	Propriedade: ATIVATEMAIMEDIATO
+	Propriedade: ATIVATEMAIMEDIATO (depreciado)
 
 	Adiciona ao mapa o tema clicado imediatamente, sem a definicao de um temporizador ou necessidade de se clicar no botao "aplicar".
 
@@ -230,7 +230,7 @@ i3GEO.arvoreDeTemas = {
 	Default:
 	{false}
 	*/
-	ATIVATEMAIMEDIATO: false,
+	ATIVATEMAIMEDIATO: true,
 	/*
 	Propriedade: IDSMENUS
 
@@ -1238,6 +1238,7 @@ i3GEO.arvoreDeTemas = {
 							kmz:temas[i].kmz,
 							download:temas[i].download,
 							permitecomentario:temas[i].permitecomentario,
+							tipoa_tema:temas[i].tipoa_tema,
 							bookmark:"sim",
 							expanded:false,
 							isLeaf:false,
@@ -1327,10 +1328,13 @@ i3GEO.arvoreDeTemas = {
 		if(i3GEO.arvoreDeTemas.ATIVATEMA !== "")
 		{clique = "onclick=\""+i3GEO.arvoreDeTemas.ATIVATEMA+"\"";}
 		else{
+			clique = "onclick='i3GEO.arvoreDeTemas.adicionaTemas([\""+tema.tid+"\"])'";
+			/*
 			if(i3GEO.arvoreDeTemas.ATIVATEMAIMEDIATO === false)
 			{clique = "onclick='i3GEO.util.criaBotaoAplicar(\"i3GEO.arvoreDeTemas.adicionaTemas\",\""+$trad("p14")+"\",\"i3geoBotaoAplicar\",this)'";}
 			else
 			{clique = "onclick='i3GEO.arvoreDeTemas.adicionaTemas([\""+tema.tid+"\"])'";}
+			*/
 		}
 		html += clique;
 		if(i3GEO.arvoreDeTemas.TIPOBOTAO !== "download")
@@ -1740,10 +1744,12 @@ i3GEO.arvoreDeTemas = {
 		//
 		//zera o contador de tempo
 		//
+		/*
 		try{
 			clearTimeout(tempoBotaoAplicar);
 		}catch(e){}
 		tempoBotaoAplicar = "";
+		*/
 		i3GEO.mapa.ativaTema("");
 		//
 		//pega os temas ativados na arvore de menus

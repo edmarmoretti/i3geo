@@ -1067,6 +1067,7 @@ function alteraSubGrupos()
 /*
  Registra um mapfile na tabela de temas
 */
+//TODO testar isso pq acrescentei tipoa_tema
 function registraTema()
 {
 	global $codigo_tema,$esquemaadmin;
@@ -1078,7 +1079,7 @@ function registraTema()
 		$dados = pegaDados($sql);
 		if(count($dados) == 0)
 		{
-			$dbhw->query("INSERT INTO ".$esquemaadmin."i3geoadmin_temas (nome_tema,codigo_tema,kml_tema,kmz_tema,ogc_tema,download_tema,tags_tema,link_tema,desc_tema) VALUES ('$codigo_tema','$codigo_tema','SIM','NAO','SIM','SIM','','','')");
+			$dbhw->query("INSERT INTO ".$esquemaadmin."i3geoadmin_temas (tipoa_tema,nome_tema,codigo_tema,kml_tema,kmz_tema,ogc_tema,download_tema,tags_tema,link_tema,desc_tema) VALUES ('','$codigo_tema','$codigo_tema','SIM','NAO','SIM','SIM','','','')");
 		}
 		$dbhw = null;
 		$dbh = null;
@@ -1137,6 +1138,12 @@ function alteraTemas()
 						$layer->setmetadata("permiteogc",strtolower($ogc));
 						$layer->setmetadata("permitekml",strtolower($kml));
 						$layer->setmetadata("permitekmz",strtolower($kmz));
+						//zera os metadados do sistema METAESTAT
+						if($tipoa != "META"){
+							$layer->setmetadata("METAESTAT_CODIGO_TIPO_REGIAO","");
+							$layer->setmetadata("METAESTAT_ID_MEDIDA_VARIAVEL","");
+							$layer->setmetadata("metaestat","");
+						}
 						if(count($nomes) == 1)
 						{
 							$layer->setmetadata("tema",$nomeo);

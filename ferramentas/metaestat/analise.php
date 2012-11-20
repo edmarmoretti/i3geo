@@ -123,7 +123,7 @@ function mapaDeCalor($map_file,$tema){
 	$layer->set("status",MS_OFF);
 	$mapa->save($map_file);
 	$meta = new Metaestat();
-	$medidavariavel = $meta->listaMedidaVariavel("",$layer->getmetadata("ID_MEDIDA_VARIAVEL"));
+	$medidavariavel = $meta->listaMedidaVariavel("",$layer->getmetadata("METAESTAT_ID_MEDIDA_VARIAVEL"));
 	include_once("../../classesphp/classe_analise.php");
 	$m = new Analise($map_file,$tema,$locaplic,$ext);
 	$retorno = $m->analiseDistriPt($locaplic,$dir_tmp,$R_path,50,"densidade","243,217,173","255,0,0","",0,true,"",2,$medidavariavel["colunavalor"]);
@@ -248,7 +248,7 @@ function classes2circulos($map_file,$tema,$tipo){
 		$nometemp = str_replace(basename($map_file),nomeRandomico(5).basename($map_file),$map_file);
 		$mapa->save($nometemp);
 		//$mapatemp = ms_newMapObj($nometemp);
-		$medidavariavel = $meta->listaMedidaVariavel("",$layer->getmetadata("ID_MEDIDA_VARIAVEL"));
+		$medidavariavel = $meta->listaMedidaVariavel("",$layer->getmetadata("METAESTAT_ID_MEDIDA_VARIAVEL"));
 		include_once("../../classesphp/classe_alteraclasse.php");
 		$m = new Alteraclasse($nometemp,$layer->name,"","");
 		$valores = $m->pegaValores($m->mapa,$m->layer,$medidavariavel["colunavalor"],true,0);
@@ -330,7 +330,7 @@ function listaFiltroTempoRaiz($map_file,$nivel){
 	//pega os parametros de tempo
 	$filtros = array();
 	foreach($layers as $l){
-		$id_medida_variavel = $l->getmetadata("ID_MEDIDA_VARIAVEL");
+		$id_medida_variavel = $l->getmetadata("METAESTAT_ID_MEDIDA_VARIAVEL");
 		if($id_medida_variavel != ""){
 			//pega os parametros que sao do tipo tempo (1, 2, e 3)
 			$parametros = $m->listaParametro($id_medida_variavel);
@@ -353,7 +353,7 @@ function analise_listaCamadasFiltroTempo($map_file){
 	//pega os parametros de tempo
 	$camadas = array();
 	foreach($layers as $l){
-		$id_medida_variavel = $l->getmetadata("ID_MEDIDA_VARIAVEL");
+		$id_medida_variavel = $l->getmetadata("METAESTAT_ID_MEDIDA_VARIAVEL");
 		if($id_medida_variavel != ""){
 			//pega os parametros que sao do tipo tempo (1, 2, e 3)
 			$parametros = $m->listaParametro($id_medida_variavel);

@@ -162,7 +162,7 @@ i3GEO.gadgets.PARAMETROS.mostraMenuSuspenso.permiteLogin = true;
 i3GEO.idioma.IDSELETOR = "seletorIdiomas";
 i3GEO.Interface.ATIVAMENUCONTEXTO = true;
 i3GEO.arvoreDeTemas.TIPOBOTAO = "radio";
-i3GEO.arvoreDeTemas.ATIVATEMAIMEDIATO = true;
+
 i3GEO.arvoreDeTemas.OPCOESADICIONAIS.comentario = false;
 i3GEO.mapa.AUTORESIZE = true;
 i3GEO.arvoreDeCamadas.MOSTRALISTAKML = false;

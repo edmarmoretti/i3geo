@@ -804,6 +804,7 @@ function gravaDados(tipo,id)
   				{
   					if(tipo == "grupo")
   					{
+  						var obj = document.getElementById("Eid_grupo");
   						var texto = obj.options[obj.selectedIndex].text;
   						var objpub = document.getElementById("Epublicado");
   						var publicado = objpub.options[objpub.selectedIndex].value;
@@ -819,6 +820,7 @@ function gravaDados(tipo,id)
   					}
   					if(tipo == "subgrupo")
   					{
+  						var obj = document.getElementById("Eid_subgrupo");
   						var texto = obj.options[obj.selectedIndex].text;
 
   						var objpub = document.getElementById("Epublicado");
@@ -836,6 +838,7 @@ function gravaDados(tipo,id)
   					}
   					if(tipo == "tema")
   					{
+  						var obj = document.getElementById("Eid_tema");
   						var texto = obj.options[obj.selectedIndex].text;
 
   						var objpub = document.getElementById("Epublicado");

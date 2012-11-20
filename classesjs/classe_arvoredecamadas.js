@@ -1386,11 +1386,13 @@ i3GEO.arvoreDeCamadas = {
 			i3GEO.atualiza();
 			i3GEO.janela.fechaAguarde("redesenha");
 		};
+		/*
 		try{clearTimeout(tempoBotaoAplicar);}
 		catch(erro){
 			if(typeof(console) !== 'undefined'){console.error(erro);}
 		}
 		tempoBotaoAplicar = "";
+		*/
 		if(tipo === "normal"){
 			i3GEO.php.ligatemas(temp,t[1].toString(),t[0].toString());
 			return;

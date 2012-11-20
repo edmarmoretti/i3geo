@@ -1446,12 +1446,15 @@ function montaEditorDispo(dados)
 
 function montaEditorDados(dados)
 {
-	var idsForms = ["connection","data","tileitem","tileindex","type","tipooriginal"];
+	var idsForms = ["connection","data","tileitem","tileindex","type","tipooriginal","metaestat_id_medida_variavel"];
 	var idsMetaestat = ["connection","data","tileitem","tileindex","tipooriginal"];
 	var param = {
 		"linhas":[
 		{ajuda:"Indica se as defini&ccedil;&otilde;es da camada est&atilde;o relacionadas ao sistema de metadados estat&iacute;sticos. Se estiver, alguns par&acirc;metros s&atilde;o obtidos de forma autom&aacute;tica, como a conex&atilde;o e o SQL de acesso aos dados.",
 		titulo:"Esse mapfile est&aacute; integrado ao sistema de metadados estat&iacute;sticos?",id:"",value:dados.metaestat,tipo:"text",div:"<div id=cMetaestat ></div>"},
+		//TODO colocar icone para escolher o id
+		{ajuda:"ID da medida da vari&aacute;vel que relaciona a camada ao sistema de metadados estat&iacute;sticos. S&oacute; deve ser definido se o mapfile for integrado a esse sistema.",
+		titulo:"ID da variável no sistema de metadados estatísticos",id:"metaestat_id_medida_variavel",value:dados.metaestat_id_medida_variavel,tipo:"text",div:""},
 		{ajuda:"Type of connection. Default is local.",
 		titulo:"Connectiontype",id:"",value:"",div:"<div id=cConnectiontype ></div>",tipo:"text"},
 		{ajuda:"Aplica a convers&atilde;o de caracteres nas ferramentas que obt&eacute;m os dados descritivos referentes aos elementos do LAYER. Em alguns casos, a convers&atilde;o pode provocar problemas de acentua&ccedil;&atilde;o. Se isso ocorrer, na ferramenta tabela por exemplo, experimente marcar essa op&ccedil;&atilde;o como 'nao'",
@@ -1485,7 +1488,7 @@ function montaEditorDados(dados)
 	{
 		ins += "<p>Os seguintes 'alias' est&atilde;o definidos em ms_configura como nomes de conex&otilde;es: ";
 		ins += dados.postgis_mapa;
-		ins += "<br>Os campos em cores n&atilde;o s&atilde;o compat&iacute;veis com o tipo de conex&atilde;o.</p><br>";
+		ins += "</p><br>";
 	}
 	if(dados.colunas != "" && dados.colunas != undefined)
 	{
@@ -1500,7 +1503,9 @@ function montaEditorDados(dados)
 		temp = "<select id='metaestat' >";
 		temp += core_combosimnao(dados.metaestat);
 		temp += "</select>";
+		//temp += "&nbsp;<input type=button value='Par&acirc;metros' id=parametrosMetaestat />";
 		$i("cMetaestat").innerHTML = temp;
+		//new YAHOO.widget.Button("parametrosMetaestat",{ onclick: { fn: parametrosMetaestat }});
 	}
 	if($i("cCache")){
 		temp = "<select id='cache' >";
@@ -1564,7 +1569,7 @@ function montaEditorDados(dados)
 		var valor = $i("metaestat").value,
 			d = [];
 		if(valor === "SIM"){
-			d = [];
+			d = ["metaestat_id_medida_variavel"];
 		}
 		else{
 			core_desativaforms(idsForms);
@@ -1580,7 +1585,6 @@ function montaEditorDados(dados)
 		$i("connectiontype").onchange.call();
 	}
 }
-
 function montaEditorMetadados(dados)
 {
 	var paramRaster = {
@@ -2011,7 +2015,7 @@ function salvarDadosEditor(tipo,codigoMap,codigoLayer,indiceClasse,indiceEstilo,
 	}
 	if(tipo == "conexao")
 	{
-		campos = new Array("metaestat","cache","projection","type","connection","data","connectiontype","tileitem","tileindex","filteritem","filter","tipooriginal","convcaracter");
+		campos = new Array("metaestat_id_medida_variavel","metaestat","cache","projection","type","connection","data","connectiontype","tileitem","tileindex","filteritem","filter","tipooriginal","convcaracter");
 		par = "&codigoMap="+codigoMap+"&codigoLayer="+codigoLayer;
 		prog = "../php/editormapfile.php?funcao=alterarConexao";
 	}

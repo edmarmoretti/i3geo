@@ -83,15 +83,20 @@ function montaDivTemas(i)
 	ins += "<p>Tags (separe com espa&ccedil;o). Voc&ecirc; pode digitar novos tags ou pegar da lista abaixo (opcional):";
 	ins += "<input type=text size=40 value='"+i.tags_tema+"' id='tags_tema' ><br>";
 	ins += "<div id=comboTags >Buscando...</div>";
-	ins += "<p>Tipo (preencha apenas se for do tipo WMS):<br>";
-	ins += "<select  id='tipo_tema' />";
+	//tipoa_tema pode receber o valor META indicando que baseia-se no sistema de metadados estatisticos
+	//nesse caso, tipoa_tema e preenchido pelo editor de mapfile
+	ins += "<p>Tipo (preencha apenas se contiver layers do tipo WMS ou se for baseado no sistema METAESTAT):<br>";
+	ins += "<select  id='tipoa_tema' />";
 	ins += "<option value='' ";
 	if (i.tipoa_tema == ""){ins += "selected";}
 	ins += ">Normal</option>";
+	ins += "<option value='META' ";
+	if (i.tipoa_tema == "META"){ins += "selected";}
+	ins += ">Vinculado ao METAESTAT</option>";
 	ins += "<option value='WMS' ";
 	if (i.tipoa_tema == "WMS"){ins += "selected";}
 	ins += " >WMS<option></select></p>";
-	ins += "<p>Permite acesso via WMS/WFS? (n&atilde; restringe em temas do tipo gvSIG)<br>";
+	ins += "<p>Permite acesso via WMS/WFS? (n&atilde;o ocasiona restri&ccedil;&atilde;o em temas do tipo gvSIG)<br>";
 	ins += "<select  id='ogc_tema' >";
 	ins += core_combosimnao(i.ogc_tema);
 	ins += "</select></p>";
@@ -150,7 +155,7 @@ function gravaDadosTema(id)
 		if(($i("kml_tema").value).toLowerCase() == "nao")
 		{$i("kmz_tema").value = "NAO";}
 	}
-	var campos = new Array("nome","desc","link","tags","tipo","ogc","download","kml","codigo","kmz");
+	var campos = new Array("tipoa","nome","desc","link","tags","tipo","ogc","download","kml","codigo","kmz");
 	var par = "";
 	for (var i=0;i<campos.length;i++)
 	{

@@ -1181,8 +1181,13 @@ function criarNovoMap()
 		$dados[] = '	METADATA';
 		$dados[] = '		TEMA "'.$nome.'"';
 		$dados[] = '		CLASSE "SIM"';
+		$tipoa_tema = "";
 		if(!empty($metaestat) && $metaestat == "SIM"){
 			$dados[] = '		METAESTAT "SIM"';
+			//para marcar no banco de dados de administracao
+			$tipoa_tema = "META";
+			//METAESTAT_CODIGO_TIPO_REGIAO
+			//ID_MEDIDA_VARIAVEL
 		}
 		$dados[] = '	END';
 		$dados[] = '    CLASS';
@@ -1203,7 +1208,7 @@ function criarNovoMap()
 			$nome = utf8_encode($nome);
 			$desc = utf8_encode($desc);
 		}
-		$dbhw->query("INSERT INTO ".$esquemaadmin."i3geoadmin_temas (link_tema,kml_tema,kmz_tema,ogc_tema,download_tema,desc_tema,tipoa_tema,tags_tema,nome_tema,codigo_tema,it,es,en) VALUES ('','','', '','','','','','$nome','$codigo','$it','$es','$en')");
+		$dbhw->query("INSERT INTO ".$esquemaadmin."i3geoadmin_temas (link_tema,kml_tema,kmz_tema,ogc_tema,download_tema,desc_tema,tipoa_tema,tags_tema,nome_tema,codigo_tema,it,es,en) VALUES ('','','', '','','','$tipoa_tema','','$nome','$codigo','$it','$es','$en')");
 		$dbh = null;
 		$dbhw = null;
 		return "ok";
@@ -1590,6 +1595,7 @@ function pegaConexao()
 	if($dados["metaestat"] == ""){
 		$dados["metaestat"] = "NAO";
 	}
+	$dados["metaestat_id_medida_variavel"] = $layer->getmetadata("metaestat_id_medida_variavel");
 
 	$dados["colunas"] = implode(",",pegaItens($layer));
 	if($layer->connectiontype == 7 || $layer->connectiontype == 9){
@@ -1599,23 +1605,35 @@ function pegaConexao()
 }
 function alterarConexao()
 {
-	global $metaestat,$convcaracter,$cache,$tipooriginal,$filteritem,$filter,$projection,$type,$dir_tmp,$testar,$codigoMap,$codigoLayer,$locaplic,$connection,$connectiontype,$data,$tileitem,$tileindex;
+	global $esquemaadmin,$metaestat_id_medida_variavel,$metaestat,$convcaracter,$cache,$tipooriginal,$filteritem,$filter,$projection,$type,$dir_tmp,$testar,$codigoMap,$codigoLayer,$locaplic,$connection,$connectiontype,$data,$tileitem,$tileindex;
 	$mapfile = $locaplic."/temas/".$codigoMap.".map";
 	$mapa = ms_newMapObj($mapfile);
 	$layer = $mapa->getlayerbyname($codigoLayer);
 	//quando o layer estiver conectado com o METAESTAT, alguns parametros sao default
+	include("conexao.php");
+	//e necessario atualizar o banco de dados de administracao, por isso e feito a verificacao do registro ou nao do mapfile no banco
+	$sql = "SELECT * from ".$esquemaadmin."i3geoadmin_temas where codigo_tema = '$codigoMap'";
+	$dados = pegaDados($sql);
+	if(count($dados) == 0){
+		$dbhw->query("INSERT INTO ".$esquemaadmin."i3geoadmin_temas (tipoa_tema,nome_tema,codigo_tema,kml_tema,kmz_tema,ogc_tema,download_tema,tags_tema,link_tema,desc_tema) VALUES ('META','$codigoMap','$codigoMap','SIM','NAO','SIM','SIM','','','')");
+	}
 	if(strtoupper($metaestat) == "SIM"){
 		$connectiontype = 6;
 		$filteritem = "";
 		$filter = "";
 		$data = "";
 		$connection = "";
+		//echo "UPDATE ".$esquemaadmin."i3geoadmin_temas SET tipoa_tema='META' WHERE codigo_tema = '$codigoMap'";exit;
+		$dbhw->query("UPDATE ".$esquemaadmin."i3geoadmin_temas SET tipoa_tema='META' WHERE codigo_tema = '$codigoMap'");
+		$layer->setmetadata("metaestat","SIM");
+		$layer->setmetadata("METAESTAT_ID_MEDIDA_VARIAVEL",$metaestat_id_medida_variavel);
 	}
 	else{
 		$layer->setmetadata("METAESTAT_CODIGO_TIPO_REGIAO","");
-		$layer->setmetadata("ID_MEDIDA_VARIAVEL","");
+		$layer->setmetadata("METAESTAT_ID_MEDIDA_VARIAVEL","");
+		$layer->setmetadata("metaestat","");
+		$dbhw->query("UPDATE ".$esquemaadmin."i3geoadmin_temas SET tipoa_tema='' WHERE codigo_tema = '$codigoMap'");
 	}
-	$layer->setmetadata("metaestat",$metaestat);
 	$layer->set("connection",$connection);
 	if(ms_GetVersionInt() > 50201){
 		$layer->setconnectiontype($connectiontype);
