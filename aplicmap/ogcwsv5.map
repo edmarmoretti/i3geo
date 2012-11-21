@@ -12,7 +12,7 @@ MAP
   #CONFIG MS_ERRORFILE "/ms4w/tmp/ms_error.txt"
   NAME "i3geoogc"
   DEBUG OFF
-  #DEBUG 5 
+  #DEBUG 5
 	OUTPUTFORMAT
 		NAME 'png'
 		MIMETYPE "image/png"
@@ -84,6 +84,7 @@ MAP
   WEB
     IMAGEPATH "/var/tmp/ms_tmp/"
     IMAGEURL "/ms_tmp/"
+    #nao coloque texto com acentuacao aqui
     METADATA
       "ows_country"	"Brasil"
       "ows_keywordlist"	"i3Geo"
@@ -93,7 +94,7 @@ MAP
       "ows_addresstype"	"uri"
       "ows_context_version"	"1.0.0"
       "ows_abstract"	"Web services gerados da base de dados do i3Geo. Para chamar um tema especificamente, veja o sistema de ajuda, digitando no navegador web ogc.php?ajuda=, para uma lista compacta de todos os servicos, digite ogc.php?lista=temas"
-      "ows_contactposition"	"Administrador do sítio web"
+      "ows_contactposition"	"Administrador do sitio web"
       "ows_stateorprovince"	"DF"
       "ows_contactorganization"	"Coordenacao Geral de TI"
       "ows_name"	"i3geoogc"
