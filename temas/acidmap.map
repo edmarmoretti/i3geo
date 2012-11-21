@@ -33,8 +33,13 @@ MAP
     NAME "acidmap"
     OFFSITE 255 255 255
     STATUS OFF
+    TILEITEM "location"
     TYPE RASTER
     UNITS METERS
+    CLASS
+    END # CLASS
+    CLASS
+    END # CLASS
   END # LAYER
 
 END # MAP

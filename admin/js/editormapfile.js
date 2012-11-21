@@ -315,7 +315,7 @@ Monta as op&ccedil;&otilde;es de edi&ccedil;&atilde;o b&aacute;sicas de um LAYER
 */
 function montaRaizTema(no,dados)
 {
-	var tempNodeR = "";
+	var tempNode = "",tempNodeR = "";
 	//no que permite listar os grupos de usuarios registrados para o mapfile
 	if(!tree.getNodeByProperty("etiquetaGrupousrTema",no.data.codigoMap))
 	{
@@ -324,7 +324,7 @@ function montaRaizTema(no,dados)
 		tempNodeR.isLeaf = false;
 		var conteudo = "<span style=\"cursor:pointer;\" onclick=\"editorGrupousr('"+no.data.id_tema+"','"+no.data.codigoMap+"')\" ><img style='position:relative;top:2px' src=\"../imagens/05.png\" /><i>Adicionar um novo</i></span>";
 		var d = {html:conteudo};
-		var tempNode = new YAHOO.widget.HTMLNode(d, tempNodeR, false,true);
+		tempNode = new YAHOO.widget.HTMLNode(d, tempNodeR, false,true);
 		tempNode.isLeaf = true;
 	}
 	//adiciona a lista de grupos de usuarios no no
@@ -450,9 +450,10 @@ function montaParametrosTemas(no,dados,redesenha)
 	}
 	if(!tree.getNodeByProperty("etiquetaClasses",id))
 	{
-		var d = {id:id,codigoMap:codigoMap,codigoLayer:codigoLayer,tipo:"etiquetaClasses",etiquetaClasses:id,html:"<i>&nbsp;Classes</i>"};
+		var d = {id:id,codigoLayer:codigoLayer,tipo:"etiquetaClasses",etiquetaClasses:id,html:"<i>&nbsp;Classes</i>"};
 		tempNodeR = new YAHOO.widget.HTMLNode(d, no, false,true);
 		tempNodeR.isLeaf = false;
+
 
 		conteudo = "<span style='cursor:pointer;' onclick=\"adicionaNovaClasse('"+codigoMap+"','"+codigoLayer+"')\" ><img  style='position:relative;top:2px' src=\"../imagens/05.png\" /> Adicionar uma classe</span>";
 		var d = {html:conteudo};
@@ -468,7 +469,9 @@ function montaParametrosTemas(no,dados,redesenha)
 		var d = {html:conteudo};
 		var tempNode = new YAHOO.widget.HTMLNode(d, tempNodeR, false,true);
 		tempNode.isLeaf = true;
+
 	}
+
 	for (var i=0, j=dados.length; i<j; i++)
 	{
 		var d = conteudoNoClasse(no.data.codigoMap,codigoLayer,dados[i].indice,dados[i].nome);
@@ -476,6 +479,7 @@ function montaParametrosTemas(no,dados,redesenha)
 		tempNode.setDynamicLoad(loadClasseData, iconMode);
 		tempNode.isLeaf = false;
 	}
+
 	tree.draw();
 }
 function loadClasseData(node, fnLoadComplete)
@@ -1453,7 +1457,6 @@ function montaEditorDados(dados)
 			"linhas":[
 			{ajuda:"Indica se as defini&ccedil;&otilde;es da camada est&atilde;o relacionadas ao sistema de metadados estat&iacute;sticos. Se estiver, alguns par&acirc;metros s&atilde;o obtidos de forma autom&aacute;tica, como a conex&atilde;o e o SQL de acesso aos dados.",
 			titulo:"Esse mapfile est&aacute; integrado ao sistema de metadados estat&iacute;sticos?",id:"",value:dados.metaestat,tipo:"text",div:"<div id=cMetaestat ></div>"},
-			//TODO colocar icone para escolher o id
 			{ajuda:"ID da medida da vari&aacute;vel que relaciona a camada ao sistema de metadados estat&iacute;sticos. S&oacute; deve ser definido se o mapfile for integrado a esse sistema.",
 			titulo:"ID da variável no sistema de metadados estatísticos <img onclick='selIdMedidaVariavel(\"metaestat_id_medida_variavel\",\"metaestat_id_medida_variavel\")' src='"+limg+"' style='cursor:pointer;position :relative;top:2px'/>",id:"metaestat_id_medida_variavel",value:dados.metaestat_id_medida_variavel,tipo:"text",div:""},
 			{ajuda:"Type of connection. Default is local.",

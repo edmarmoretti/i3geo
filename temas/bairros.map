@@ -11,12 +11,13 @@ MAP
       "CLASSE"	"SIM"
       "METAESTAT_CODIGO_TIPO_REGIAO"	""
       "metaestat"	"NAO"
-      "convcaracter"	""
       "TEMA"	"Bairros IBGE"
+      "convcaracter"	""
     END # METADATA
     NAME "bairros"
     STATUS DEFAULT
     TEMPLATE "none.htm"
+    TILEITEM "location"
     TYPE POLYGON
     UNITS METERS
     CLASS
@@ -25,6 +26,7 @@ MAP
         ANGLE 0
         OFFSET 0 0
         OUTLINECOLOR 255 0 0
+        SYMBOL "p0"
       END # STYLE
       STYLE
         ANGLE 0

@@ -109,21 +109,7 @@ switch (strtoupper($funcao))
 		retornaJSON(criarNovoMap());
 		exit;
 		break;
-		/*
-		 Valor: EDITASIMBOLO
 
-		Lista os s&iacute;mbolos de um determinado tipo
-
-		Parametros:
-
-		tipo {string} - tipo de layer
-
-		onclick {string} - fun&ccedil;&atilde;o javascript que ser&aacute; executada ao se clicar no s&iacute;mbilo
-
-		Retorno:
-
-		{JSON}
-		*/
 	case "DOWNLOADGVP":
 		if(file_exists($locaplic."/temas/".$codigoMap.".gvp")){
 			ob_end_clean();
@@ -136,9 +122,26 @@ switch (strtoupper($funcao))
 		}
 		exit;
 	break;
+	/*
+	 Valor: EDITASIMBOLO
+
+	Lista os s&iacute;mbolos de um determinado tipo
+
+	Parametros:
+
+	tipo {string} - tipo de layer
+
+	onclick {string} - fun&ccedil;&atilde;o javascript que ser&aacute; executada ao se clicar no s&iacute;mbilo
+
+	Retorno:
+
+	{JSON}
+	*/
 	case "EDITASIMBOLO":
-		include_once("$locaplic/classesphp/classe_legenda.php");
-		if($base == "" or !isset($base)){
+		include_once(__DIR__."/../../classesphp/classe_legenda.php");
+		$versao = versao();
+		$versao = $versao["principal"];
+		if($base == "" || !isset($base)){
 			$base = "";
 			if (strtoupper(substr(PHP_OS, 0, 3) == 'WIN'))
 			{
@@ -168,7 +171,7 @@ switch (strtoupper($funcao))
 			}
 		}
 		$m = new Legenda($base,$locaplic);
-		retornaJSON($m->listaSimbolos($tipo,$dir_tmp,"",$onclick));
+		retornaJSON($m->listaSimbolos($tipo,$dir_tmp,"",$onclick,8,1,true));
 		exit;
 		break;
 		/*
@@ -1270,6 +1273,10 @@ function criarNovaClasse()
 	$mapfile = $locaplic."/temas/".$codigoMap.".map";
 	$mapa = ms_newMapObj($mapfile);
 	$nl = $mapa->getlayerbyname($codigoLayer);
+	$dados = array();
+	if(strtoupper($nl->getmetadata("metaestat")) === "SIM"){
+		return "erro";
+	}
 	$nclasses = $nl->numclasses;
 	$classe = ms_newClassObj($nl);
 	$mapa->save($mapfile);
@@ -1359,6 +1366,9 @@ function listaClasses()
 	$mapfile = $locaplic."/temas/".$codigoMap.".map";
 	$mapa = ms_newMapObj($mapfile);
 	$layer = $mapa->getlayerbyname($codigoLayer);
+	if(strtoupper($layer->getmetadata("metaestat")) === "SIM"){
+		return $dados;
+	}
 	$nclasses = $layer->numclasses;
 	for($i=0;$i<$nclasses;++$i)
 	{
@@ -1374,6 +1384,9 @@ function listaEstilos()
 	$mapfile = $locaplic."/temas/".$codigoMap.".map";
 	$mapa = ms_newMapObj($mapfile);
 	$layer = $mapa->getlayerbyname($codigoLayer);
+	if(strtoupper($layer->getmetadata("metaestat")) === "SIM"){
+		return $dados;
+	}
 	$classe = $layer->getclass($indiceClasse);
 	$numestilos = $classe->numstyles;
 	for($i=0;$i<$numestilos;++$i)
@@ -1492,7 +1505,6 @@ function alterarComport()
 	removeCabecalho($mapfile);
 	return "ok";
 }
-
 function pegaTitulo()
 {
 	global $codigoMap,$codigoLayer,$locaplic,$postgis_mapa;
@@ -1742,6 +1754,9 @@ function alterarMetadados()
 	$mapfile = $locaplic."/temas/".$codigoMap.".map";
 	$mapa = ms_newMapObj($mapfile);
 	$layer = $mapa->getlayerbyname($codigoLayer);
+	if(strtoupper($layer->getmetadata("metaestat")) === "SIM"){
+		return "erro. Layer METAESTAT";
+	}
 	$layer->setmetadata("itens",$itens);
 	$layer->setmetadata("itensdesc",$itensdesc);
 	$layer->setmetadata("itenslink",$itenslink);
@@ -1849,6 +1864,9 @@ function alterarClasseGeral()
 	$mapfile = $locaplic."/temas/".$codigoMap.".map";
 	$mapa = ms_newMapObj($mapfile);
 	$layer = $mapa->getlayerbyname($codigoLayer);
+	if(strtoupper($layer->getmetadata("metaestat")) === "SIM"){
+		return "erro. Layer METAESTAT";
+	}
 	$classe = $layer->getclass($indiceClasse);
 	$classe->set("name",$name);
 	$classe->set("title",$title);
@@ -1925,6 +1943,9 @@ function alterarClasseLabel()
 	$mapfile = $locaplic."/temas/".$codigoMap.".map";
 	$mapa = ms_newMapObj($mapfile);
 	$layer = $mapa->getlayerbyname($codigoLayer);
+	if(strtoupper($layer->getmetadata("metaestat")) === "SIM"){
+		return "erro. Layer METAESTAT";
+	}
 	$classe = $layer->getclass($indiceClasse);
 	$label = $classe->label;
 	if ($label != "")
@@ -2002,6 +2023,9 @@ function alterarEstilo()
 	$mapfile = $locaplic."/temas/".$codigoMap.".map";
 	$mapa = ms_newMapObj($mapfile);
 	$layer = $mapa->getlayerbyname($codigoLayer);
+	if(strtoupper($layer->getmetadata("metaestat")) === "SIM"){
+		return "erro. Layer METAESTAT";
+	}
 	$nclasses = $layer->numclasses;
 	$classe = $layer->getclass($indiceClasse);
 	$estilo = $classe->getstyle($indiceEstilo);
