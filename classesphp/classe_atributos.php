@@ -358,10 +358,10 @@ class Atributos
 		if ((!isset($tipolista)) || ($tipolista=="")){
 			$tipolista = "tudo";
 		}
-		if (!isset($inicio)){
+		if (empty($inicio)){
 			$inicio = 0;
 		}
-		if (!isset($fim)){
+		if (empty($fim)){
 			$fim = "";
 		}
 		//se tipo for igual a brasil, define a extens&atilde;o geogr&aacute;fica total
@@ -507,7 +507,12 @@ class Atributos
 					$classe = "";
 					if($dadosDaClasse == "sim" && $unico != "sim"){
 						$indice = $this->layer->getClassIndex($shape);
-						$nome = $this->layer->getclass($indice)->name;
+						if($indice >= 0){
+							$nome = $this->layer->getclass($indice)->name;
+						}
+						else{
+							$nome = "";
+						}
 						$classe = array(
 								"indice"=>$indice,
 								"nome"=>$nome
@@ -515,6 +520,7 @@ class Atributos
 					}
 					if(count($valitem) > 0){
 						$ext = $this->extensaoShape($shape);
+						//echo "<br>".$indx;
 						$registros[] = array("indice"=>$indx,"valores"=>$valitem,"status"=>$chk,"classe"=>$classe,"ext"=>$ext);
 					}
 					$chk = "";

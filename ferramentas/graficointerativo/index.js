@@ -316,7 +316,7 @@ i3GEOF.graficointerativo = {
 		'	<p class=paragrafo ><select onchange="i3GEOF.graficointerativo.obterDados()" id="i3GEOgraficointerativoTipoAgregacao" ><option value="soma">Soma</option><option value="media">M&eacute;dia</option></select> Tipo de agrega&ccedil;&atilde;o dos valores do eixo Y</p>' +
 		'</div>'+
 		'<div class=guiaobj id="i3GEOgraficointerativoguia4obj" style="left:1px;display:none;top:-10px">' +
-		'<a href="#" onclick="i3GEOF.graficointerativo.novaJanela()" >abrir em uma janela separada</a>' +
+		'	<a href="#" onclick="i3GEOF.graficointerativo.novaJanela()" >abrir em uma janela separada</a>' +
 		'</div>' +
 		'<div class=guiaobj id="i3GEOgraficointerativoguia5obj" style="font-size:10px;left:10px;display:none;top:-0px">' +
 		'</div>' +

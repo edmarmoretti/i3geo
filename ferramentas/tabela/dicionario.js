@@ -211,7 +211,19 @@ es:"",
 it:""
 }],
 36: [{
-pt:"",
+pt:"abrir em uma janela separada",
+en:"",
+es:"",
+it:""
+}],
+37: [{
+pt:"Marque uma coluna para vincular com outras tabelas. Marque uma linha para localizar em todas as tabelas abertas",
+en:"",
+es:"",
+it:""
+}],
+38: [{
+pt:"Os dados utilizados referem-se apenas &agrave; regi&atilde;o atual mostrada no mapa",
 en:"",
 es:"",
 it:""
