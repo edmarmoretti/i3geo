@@ -312,7 +312,7 @@ function pegaDadosTME($map_file,$tema){
 	$retorno = array("itemNomeRegioes"=>"","itemDados"=>"");
 	$mapa = ms_newMapObj($map_file);
 	$layer = $mapa->getlayerbyname($tema);
-	$id_medida_variavel = $layer->getmetadata("ID_MEDIDA_VARIAVEL");
+	$id_medida_variavel = $layer->getmetadata("METAESTAT_ID_MEDIDA_VARIAVEL");
 	$m = new Metaestat();
 
 	if($id_medida_variavel != ""){

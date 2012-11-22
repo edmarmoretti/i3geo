@@ -361,7 +361,7 @@ else{
 		}
 	}
 	//echo "<pre>";
-	//var_dump($$codigosTema);
+	//var_dump($codigosTema);
 	//exit;
 	foreach($codigosTema as $c){
 		$codigoTema = $c["tema"];
@@ -503,7 +503,7 @@ function ogc_imprimeListaDeTemasWfs(){
 								$imprimir .= "<span style=color:red >".$tema["tid"]."</span>";
 								$imprimir .= "&nbsp;-&nbsp;".$tema["nome"]."&nbsp";
 								$imprimir .= "&nbsp;<a href='".$urli3geo."/ogc.php?tema=".$tema["tid"]."&service=wfs&request=getcapabilities' >Getcapabilities</a>";
-								$imprimir .= "&nbsp;<a href='".$urli3geo."/ogc.php?tema=".$tema["tid"]."&SRS=EPSG:4618&WIDTH=500&HEIGHT=500&BBOX=-76.5125927,-39.3925675209,-29.5851853,9.49014852081&FORMAT=image/png&service=wfs&version=1.1.0&request=getfeature&typename=".$tema["tid"]."' >Getfeature </a>";
+								$imprimir .= "&nbsp;<a href='".$urli3geo."/ogc.php?tema=".$tema["tid"]."&SRS=EPSG:4618&service=wfs&version=1.1.0&request=getfeature&typename=".$tema["tid"]."' >Getfeature </a>";
 								if($tema["link"] != " ")
 									$imprimir .= "&nbsp;&nbsp;<a href='".$tema["link"]."' >fonte</a>";
 								$imprimir .= "<br>";

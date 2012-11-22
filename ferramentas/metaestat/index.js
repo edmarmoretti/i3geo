@@ -607,7 +607,7 @@ i3GEOF.metaestat = {
 			}
 			janela.show();
 			imagemxy = i3GEO.util.pegaPosicaoObjeto($i(i3GEO.Interface.IDCORPO));
-			janela.moveTo(imagemxy[0]+i3GEOF.metaestat.LEFT+i3GEOF.metaestat.LARGURA+10,i3GEOF.metaestat.TOP);
+			janela.moveTo(imagemxy[0]+i3GEOF.metaestat.LEFT+i3GEOF.metaestat.LARGURA+20,i3GEOF.metaestat.TOP);
 		},
 		destroiJanela: function(){
 			var janela = YAHOO.i3GEO.janela.manager.find("i3geoCartoClasses");

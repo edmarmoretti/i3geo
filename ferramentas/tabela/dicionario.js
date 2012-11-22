@@ -227,5 +227,11 @@ pt:"Os dados utilizados referem-se apenas &agrave; regi&atilde;o atual mostrada 
 en:"",
 es:"",
 it:""
+}],
+39: [{
+pt:"Marque uma coluna primeiro",
+en:"",
+es:"",
+it:""
 }]
 };

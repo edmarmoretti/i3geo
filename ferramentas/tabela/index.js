@@ -405,24 +405,63 @@ i3GEOF.tabela = {
 			i3GEO.vincularTabelas = {};
 			i3GEO.vincularTabelas.janelas = [];
 			i3GEO.vincularTabelas.colunas = {};
+			i3GEO.vincularTabelas.colunasVazias = 3;
 			i3GEO.vincularTabelas.atualiza = function(idtabela,objinput){
 				var v = objinput.parentNode.parentNode.cloneNode(true),
 					onde = $i("selecao_"+idtabela),
 					ntab = i3GEO.vincularTabelas.janelas.length,
-					i;
+					valorcel="",i,temp,n,tabtempid,c,tabcomp,linhas,j,valor;
 				if(onde.firstChild){
 					onde.removeChild(onde.firstChild);
 				}
-				onde.appendChild(v);
 				//verifica se a coluna foi escolhida
-				//pega o valor da celula escolhida
-				//loop pelas tabelas
-				for(i=0;i<ntab;i++){
-					//verifica se a tabela existe
-					//verifica se tem coluna escolhida
-					//loop pelas linhas
+				if(i3GEO.vincularTabelas.colunas[idtabela] == undefined || i3GEO.vincularTabelas.colunas[idtabela] === ""){
+					i3GEO.janela.tempoMsg($trad(39,i3GEOF.tabela.dicionario));
 				}
-				//$i(idtabela+"_corpo").scrollTop = 0;
+				else{
+					onde.appendChild(v);
+					$i(idtabela+"_corpo").scrollTop = 0;
+					//pega o valor da celula escolhida
+					temp = v.getElementsByTagName("td");
+					c =  i3GEO.vincularTabelas.colunas[idtabela];
+					valorcel = temp[i3GEO.vincularTabelas.colunasVazias + c].innerHTML;
+					valorcel = valorcel.trim();
+					valorcel = valorcel.toLowerCase();
+					//loop pelas tabelas
+					for(i=0;i<ntab;i++){
+						//verifica se a tabela existe
+						tabtempid = i3GEO.vincularTabelas.janelas[i];
+						if($i(tabtempid+"_corpo") && tabtempid != idtabela){
+							onde = $i("selecao_"+tabtempid);
+							//verifica se tem coluna escolhida
+							c =  i3GEO.vincularTabelas.colunas[tabtempid];
+							if(c !== undefined && c !== ""){
+								//tabela com os dados da janela
+								tabcomp = $i(tabtempid+"_corpo").getElementsByTagName("table")[1];
+								//remove o conteudo do lugar onde o resultado sera mostrado
+								temp = $i(tabtempid+"_corpo").getElementsByTagName("table")[0];
+								if(temp.firstChild){
+									temp.removeChild(temp.firstChild);
+								}
+								//linhas da tabela
+								linhas = tabcomp.getElementsByTagName("tr");
+								n = linhas.length;
+								//loop nas linhas
+								for(j=0;j<n;j++){
+									valor = linhas[j].getElementsByTagName("td")[i3GEO.vincularTabelas.colunasVazias + c].innerHTML;
+									valor = valor.trim();
+									valor = valor.toLowerCase();
+									if(valorcel == valor){
+										v = linhas[j].cloneNode(true);
+										onde.appendChild(v);
+									}
+								}
+							}
+
+						}
+
+					}
+				}
 			};
 			i3GEO.janela.tempoMsg($trad(37,i3GEOF.tabela.dicionario));
 		}
