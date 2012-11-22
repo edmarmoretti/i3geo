@@ -4,10 +4,9 @@ MAP
   LAYER
     CONNECTION ""
     DATA "/var/www/geodados/brasil/vegetacao/biomas.shp"
-    #FOOTER "teste.htm"
     GROUP "biomashp"
-    #HEADER "teste.htm"
     METADATA
+      "METAESTAT_ID_MEDIDA_VARIAVEL"	""
       "cache"	"SIM"
       "ltempoitemimagem"	""
       "ltempoitemdescricao"	""
@@ -20,14 +19,16 @@ MAP
       "description_template"	""
       "iconetema"	"http://www.gpsdrive.de/development/map-icons/square.small/leisure/park.png"
       "ltempoitemlink"	""
+      "METAESTAT_CODIGO_TIPO_REGIAO"	""
       "extensao"	"-44 -23 -39 -21"
       "palletefile"	""
       "NOMEORIGINAL"	""
       "ltempoformatodata"	""
       "permitedownload"	"sim"
       "ltempoitemicone"	""
+      "metaestat"	""
       "download"	"SIM"
-      "permiteogc"	""
+      "permiteogc"	"sim"
       "permitekml"	"sim"
       "TEMA"	"Biomas shapefile"
       "convcaracter"	""
@@ -47,6 +48,7 @@ MAP
       NAME "CAATINGA"
       EXPRESSION ('[CD_LEGENDA]'eq'CAATINGA')
       STYLE
+        ANGLE 0
         COLOR 21 44 114
         OFFSET 0 0
       END # STYLE
@@ -56,6 +58,7 @@ MAP
       NAME "PAMPA"
       EXPRESSION ('[CD_LEGENDA]'eq'PAMPA')
       STYLE
+        ANGLE 0
         COLOR 225 189 199
         OFFSET 0 0
       END # STYLE
@@ -65,6 +68,7 @@ MAP
       NAME "CERRADO"
       EXPRESSION ('[CD_LEGENDA]'eq'CERRADO')
       STYLE
+        ANGLE 0
         COLOR 17 235 39
         OFFSET 0 0
       END # STYLE
@@ -74,6 +78,7 @@ MAP
       NAME "PANTANAL"
       EXPRESSION ('[CD_LEGENDA]'eq'PANTANAL')
       STYLE
+        ANGLE 0
         COLOR 242 192 145
         OFFSET 0 0
       END # STYLE
@@ -83,6 +88,7 @@ MAP
       NAME "AMAZONIA"
       EXPRESSION ('[CD_LEGENDA]'eq'AMAZONIA')
       STYLE
+        ANGLE 0
         COLOR 149 120 37
         OFFSET 0 0
       END # STYLE
@@ -92,6 +98,7 @@ MAP
       NAME "MATA ATLANTICA"
       EXPRESSION ('[CD_LEGENDA]'eq'MATA ATLANTICA')
       STYLE
+        ANGLE 0
         COLOR 208 160 125
         OFFSET 0 0
       END # STYLE

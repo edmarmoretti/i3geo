@@ -404,6 +404,26 @@ i3GEOF.tabela = {
 		if(typeof(i3GEO.vincularTabelas) === 'undefined'){
 			i3GEO.vincularTabelas = {};
 			i3GEO.vincularTabelas.janelas = [];
+			i3GEO.vincularTabelas.colunas = {};
+			i3GEO.vincularTabelas.atualiza = function(idtabela,objinput){
+				var v = objinput.parentNode.parentNode.cloneNode(true),
+					onde = $i("selecao_"+idtabela),
+					ntab = i3GEO.vincularTabelas.janelas.length,
+					i;
+				if(onde.firstChild){
+					onde.removeChild(onde.firstChild);
+				}
+				onde.appendChild(v);
+				//verifica se a coluna foi escolhida
+				//pega o valor da celula escolhida
+				//loop pelas tabelas
+				for(i=0;i<ntab;i++){
+					//verifica se a tabela existe
+					//verifica se tem coluna escolhida
+					//loop pelas linhas
+				}
+				//$i(idtabela+"_corpo").scrollTop = 0;
+			};
 			i3GEO.janela.tempoMsg($trad(37,i3GEOF.tabela.dicionario));
 		}
 		var janela = "",
@@ -429,6 +449,7 @@ i3GEOF.tabela = {
 		);
 		divid = janela[2].id;
 		i3GEO.vincularTabelas.janelas.push(id);
+		i3GEO.vincularTabelas.colunas[id] = "";
 		temp = function(retorno){
 			i3GEOF.tabela.aguarde.visibility = "hidden";
 			if (retorno.data !== undefined){
@@ -441,18 +462,19 @@ i3GEOF.tabela = {
 					imagem,
 					i3GEOtabelalegenda = true;
 				//cabecalho da tabela
-				ins = "<table class=lista8 style='width:100%'>";
+				ins = "<table class=lista4 style='width:100%' id='selecao_"+id+"'></table><br>";
+				ins += "<table class=lista8 style='width:100%'>";
 				ins += "<tr><td></td><td></td><td></td>";
 				n = retorno.data[0].itens.length;
 				for (i=0;i<n;i++){
-					ins += "<td style='background-color:yellow' ><input type=radio name='coluna_"+id+"' style='cursor:pointer;' /><br><b>"+retorno.data[0].alias[i]+"</b></td>";
+					ins += "<td style='background-color:yellow' ><input onclick='javascript:i3GEO.vincularTabelas.colunas[\""+id+"\"] = "+i+";' type=radio id=name='coluna_"+id+"_"+i+"' name='coluna_"+id+"' style='cursor:pointer;' /><br><b>"+retorno.data[0].alias[i]+"</b></td>";
 				}
 				ins += "</tr>";
 				cor = "linha";
 				n = retorno.data[1].registros.length;
 				for (i=0;i<n;i++){
 					ins += "<tr>";
-					ins += "<td><input type=radio name='linha_"+id+"' style='cursor:pointer;' /></td>";
+					ins += "<td><input type=radio onclick='javascript:i3GEO.vincularTabelas.atualiza(\""+id+"\",this)' name='linha_"+id+"' style='cursor:pointer;' /></td>";
 					ins += "<td>";
 					if(retorno.data[1].registros[i].ext && retorno.data[1].registros[i].ext != ""){
 						ins += "<img style=cursor:pointer onclick='i3GEO.navega.zoomExt(\"\",\"\",\"\",\""+retorno.data[1].registros[i].ext+"\")' src='"+i3GEO.configura.locaplic+"/imagens/o.gif' title='zoom' ids="+retorno.data[1].registros[i].indice+" />";

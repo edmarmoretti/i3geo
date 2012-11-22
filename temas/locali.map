@@ -3,9 +3,9 @@ MAP
   SYMBOLSET "/var/www/i3geo/symbols/simbolosv6.sym"
   LAYER
     CONNECTION ""
-
     DATA "/var/www/i3geo/aplicmap/dados/locali"
     METADATA
+      "METAESTAT_ID_MEDIDA_VARIAVEL"	""
       "cache"	"sim"
       "TIP"	"TIPO,ANOCRIA,NOMELOC"
       "LTEMPOITEMIMAGEM"	""
@@ -20,64 +20,67 @@ MAP
       "LTEMPOITEMTITULO"	"NOMELOC"
       "description_template"	""
       "LTEMPOITEMLINK"	""
+      "METAESTAT_CODIGO_TIPO_REGIAO"	""
       "palletefile"	""
       "nomeoriginal"	"locali"
-      "permitedownload"	""
+      "permitedownload"	"sim"
       "LTEMPOFORMATODATA"	"iso8601"
       "permitecomentario"	""
       "LTEMPOITEMICONE"	""
+      "metaestat"	""
       "itembuscarapida"	"NOMELOC"
       "arquivodownload"	""
       "arquivokmz"	""
       "permitekml"	"sim"
-      "permiteogc"	""
+      "permiteogc"	"sim"
       "transitioneffect"	"NAO"
       "TEMA"	"Localidades"
       "editorsql"	""
       "LTEMPOCONVENCODE"	"SIM"
       "LTEMPOITEMFIM"	""
       "legendaimg"	""
-    END
+    END # METADATA
+    MINSCALEDENOM 500000
     NAME "locali"
     STATUS DEFAULT
     TEMPLATE "none.htm"
+    TILEITEM "location"
     TYPE POINT
     UNITS METERS
-	MINSCALEDENOM 500000
     CLASS
       NAME "Vila"
       EXPRESSION ('[TIPO]'eq'Vila')
       STYLE
-        ANGLE 360
+        ANGLE 0
         COLOR 250 193 4
+        OFFSET 0 0
         SIZE 4
         SYMBOL "ponto"
-        WIDTH 1
-      END
-    END
+      END # STYLE
+    END # CLASS
     CLASS
       NAME "Cidade"
       EXPRESSION ('[TIPO]'eq'Cidade')
       STYLE
-        ANGLE 360
+        ANGLE 0
         COLOR 62 9 41
+        OFFSET 0 0
         SIZE 6
         SYMBOL "ponto"
-        WIDTH 1
-      END
-    END
+      END # STYLE
+    END # CLASS
     CLASS
       NAME "Capital"
       EXPRESSION ('[TIPO]'eq'Capital')
       STYLE
-        ANGLE 360
+        ANGLE 0
         COLOR 112 203 244
+        OFFSET 0 0
         SIZE 6
         SYMBOL "capital"
-        WIDTH 1
-      END
-    END
-  END
+      END # STYLE
+    END # CLASS
+  END # LAYER
 
-END
+END # MAP
 

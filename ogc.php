@@ -32,6 +32,7 @@ Arquivo: i3geo/ogc.php
 Parametros:
 
 lista - se for igual a "temas", mostra uma lista dos temas dispon&iacute;veis
+		se for igual a "temaswfs", mostra a lista de temas wfs
 
 ajuda - se for definida na URL, mostra uma ajuda ao usu&aacute;rio
 
@@ -99,6 +100,11 @@ if(isset($ajuda)){
 if(isset($lista) && $lista == "temas"){
 	include_once(__DIR__."/classesphp/classe_menutemas.php");
 	ogc_imprimeListaDeTemas();
+	exit;
+}
+if(isset($lista) && $lista == "temaswfs"){
+	include_once(__DIR__."/classesphp/classe_menutemas.php");
+	ogc_imprimeListaDeTemasWfs();
 	exit;
 }
 //
@@ -443,7 +449,7 @@ function ogc_imprimeListaDeTemas(){
 	$m = new Menutemas("",$perfil,$locaplic,$urli3geo);
 	$menus = $m->pegaListaDeMenus();
 	echo '<html><head><title>WMS</title><META HTTP-EQUIV="Content-Type" CONTENT="text/html; charset=ISO-8859-1"><meta name="description" content="OGC"><meta name="keywords" content="WMS OGC mapa sig gis webmapping geo geoprocessamento interativo meio ambiente MMA cartografia geografia"> <meta name="robots" content="index,follow">';
-	echo "<body><b>Lista de temas por grupos e subgrupos e endere&ccedil;os de acesso aos dados por meio de Web Services WMS (os códigos dos temas est&atilde;o em vermelho)</b><br><br>";
+	echo "<body><b>Lista de temas por grupos e subgrupos e endere&ccedil;os de acesso aos dados por meio de Web Services WMS (os c&oacute;digos dos temas est&atilde;o em vermelho)</b><br><br>";
 	$imprimir = "";
 	foreach ($menus as $menu){
 		$grupos = $m->pegaListaDeGrupos($menu["idmenu"],$listasistemas="nao",$listasgrupos="sim");
@@ -464,6 +470,42 @@ function ogc_imprimeListaDeTemas(){
 								$imprimir .= "&nbsp;<a href='".$urli3geo."/ogc.php?tema=".$tema["tid"]."&SRS=EPSG:4618&WIDTH=500&HEIGHT=500&BBOX=-76.5125927,-39.3925675209,-29.5851853,9.49014852081&FORMAT=image/png&service=wms&version=1.1.0&request=getmap&layers=".$tema["tid"]."' >GetMap </a>";
 								if($tema["link"] != " ")
 								$imprimir .= "&nbsp;&nbsp;<a href='".$tema["link"]."' >fonte</a>";
+								$imprimir .= "<br>";
+							}
+						}
+					}
+				}
+			}
+		}
+	}
+	echo $imprimir."</body></html>";
+}
+function ogc_imprimeListaDeTemasWfs(){
+	global $urli3geo,$perfil,$locaplic;
+	$m = new Menutemas("",$perfil,$locaplic,$urli3geo);
+	$menus = $m->pegaListaDeMenus();
+	echo '<html><head><title>WFS</title><META HTTP-EQUIV="Content-Type" CONTENT="text/html; charset=ISO-8859-1"><meta name="description" content="OGC"><meta name="keywords" content="WMS OGC mapa sig gis webmapping geo geoprocessamento interativo meio ambiente MMA cartografia geografia"> <meta name="robots" content="index,follow">';
+	echo "<body><b>Lista de temas por grupos e subgrupos e endere&ccedil;os de acesso aos dados por meio de Web Services WFS (os c&oacute;digos dos temas est&atilde;o em vermelho)</b><br><br>";
+	$imprimir = "";
+	foreach ($menus as $menu){
+		$grupos = $m->pegaListaDeGrupos($menu["idmenu"],$listasistemas="nao",$listasgrupos="sim");
+		foreach($grupos as $grupo){
+			if(strtolower($grupo["ogc"]) == "sim"){
+				$imprimegrupo = "<i>".$grupo["nome"]."</i>";
+				foreach($grupo["subgrupos"] as $sgrupo){
+					if(strtolower($sgrupo["ogc"]) == "sim"){
+						$imprimesubgrupo = $sgrupo["nome"];
+						$temas = $m->pegaListaDeTemas($grupo["id_n1"],$sgrupo["id_n2"],$menu["idmenu"]);
+						foreach($temas as $tema){
+							if(strtolower($tema["ogc"]) == "sim" && strtolower($tema["down"]) !== "nao"){
+								$imprimir .= $imprimegrupo."->".$imprimesubgrupo."<br>";
+								$imprimir .= "&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;";
+								$imprimir .= "<span style=color:red >".$tema["tid"]."</span>";
+								$imprimir .= "&nbsp;-&nbsp;".$tema["nome"]."&nbsp";
+								$imprimir .= "&nbsp;<a href='".$urli3geo."/ogc.php?tema=".$tema["tid"]."&service=wfs&request=getcapabilities' >Getcapabilities</a>";
+								$imprimir .= "&nbsp;<a href='".$urli3geo."/ogc.php?tema=".$tema["tid"]."&SRS=EPSG:4618&WIDTH=500&HEIGHT=500&BBOX=-76.5125927,-39.3925675209,-29.5851853,9.49014852081&FORMAT=image/png&service=wfs&version=1.1.0&request=getfeature&typename=".$tema["tid"]."' >Getfeature </a>";
+								if($tema["link"] != " ")
+									$imprimir .= "&nbsp;&nbsp;<a href='".$tema["link"]."' >fonte</a>";
 								$imprimir .= "<br>";
 							}
 						}
