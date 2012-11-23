@@ -411,7 +411,8 @@ i3GEOF.tabela = {
 					onde = $i("selecao_"+idtabela),
 					ntab = i3GEO.vincularTabelas.janelas.length,
 					valorcel="",i,temp,n,tabtempid,c,tabcomp,linhas,j,valor;
-				if(onde.firstChild){
+				n = onde.childNodes.length;
+				for(i=0;i<n;i++){
 					onde.removeChild(onde.firstChild);
 				}
 				//verifica se a coluna foi escolhida
@@ -419,7 +420,7 @@ i3GEOF.tabela = {
 					i3GEO.janela.tempoMsg($trad(39,i3GEOF.tabela.dicionario));
 				}
 				else{
-					onde.appendChild(v);
+					//onde.appendChild(v);
 					$i(idtabela+"_corpo").scrollTop = 0;
 					//pega o valor da celula escolhida
 					temp = v.getElementsByTagName("td");
@@ -440,11 +441,15 @@ i3GEOF.tabela = {
 								tabcomp = $i(tabtempid+"_corpo").getElementsByTagName("table")[1];
 								//remove o conteudo do lugar onde o resultado sera mostrado
 								temp = $i(tabtempid+"_corpo").getElementsByTagName("table")[0];
-								if(temp.firstChild){
-									temp.removeChild(temp.firstChild);
+								n = temp.childNodes.length;
+								for(i=0;i<n;i++){
+									temp.removeChild(onde.firstChild);
 								}
 								//linhas da tabela
 								linhas = tabcomp.getElementsByTagName("tr");
+								//insere o cabecalho
+								v = linhas[0].cloneNode(true);
+								onde.appendChild(v);
 								n = linhas.length;
 								//loop nas linhas
 								for(j=0;j<n;j++){
@@ -457,7 +462,6 @@ i3GEOF.tabela = {
 									}
 								}
 							}
-
 						}
 
 					}
