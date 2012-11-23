@@ -1,6 +1,6 @@
 <?php
 /*
-Title: ogc.php
+ Title: ogc.php
 
 Gera web services nos padr&otilde;es OGC
 
@@ -23,7 +23,7 @@ por&eacute;m, SEM NENHUMA GARANTIA; nem mesmo a garantia impl&iacute;cita
 de COMERCIABILIDADE OU ADEQUA&Ccedil;&Atilde;O A UMA FINALIDADE ESPEC&Iacute;FICA.
 Consulte a Licen&ccedil;a P&uacute;blica Geral do GNU para mais detalhes.
 Voc&ecirc; deve ter recebido uma cópia da Licen&ccedil;a P&uacute;blica Geral do
-GNU junto com este programa; se n&atilde;o, escreva para a
+	GNU junto com este programa; se n&atilde;o, escreva para a
 Free Software Foundation, Inc., no endere&ccedil;o
 59 Temple Street, Suite 330, Boston, MA 02111-1307 USA.
 
@@ -32,7 +32,7 @@ Arquivo: i3geo/ogc.php
 Parametros:
 
 lista - se for igual a "temas", mostra uma lista dos temas dispon&iacute;veis
-		se for igual a "temaswfs", mostra a lista de temas wfs
+se for igual a "temaswfs", mostra a lista de temas wfs
 
 ajuda - se for definida na URL, mostra uma ajuda ao usu&aacute;rio
 
@@ -45,7 +45,7 @@ legenda - mostra a legenda no corpo do mapa sim|nao
 perfil - perfil utilizado para escolher os menus
 
 format - (opcional) pode ser utilizado a op&ccedil;&atilde;o &format=application/openlayers para abrir o mashup do OpenLayers com as camadas definida em temas, exemplo
-		http://localhost/i3geo/ogc.php?temas=biomashp&format=application/openlayers&bbox=-54,-14,-50,-10
+http://localhost/i3geo/ogc.php?temas=biomashp&format=application/openlayers&bbox=-54,-14,-50,-10
 
 Exemplos:
 
@@ -65,18 +65,25 @@ require_once(__DIR__."/classesphp/carrega_ext.php");
 include(__DIR__."/ms_configura.php");
 include(__DIR__."/classesphp/pega_variaveis.php");
 if(!isset($temas) && isset($tema))
-{$temas = $tema;}
+{
+	$temas = $tema;
+}
 //
 //para operar como o Geoserver
 //
 if(isset($format) && strtolower($format) == "application/openlayers"){
 	if(!isset($layers))
-	{$layers = $temas;}
+	{
+		$layers = $temas;
+	}
 	$urln = __DIR__."/mashups/openlayers.php?temas=".$layers."&layers=".$layers."&mapext=".$bbox."&botoes=pan,zoombox,zoomtot,identifica";
 	if(!headers_sent())
-	{header("Location:".$urln);}
+	{
+		header("Location:".$urln);
+	}
 	else
-	{echo "<meta http-equiv='refresh' content='0;url=$urln'>";}
+	{echo "<meta http-equiv='refresh' content='0;url=$urln'>";
+	}
 }
 //
 //pega os endere&ccedil;os para compor a url de chamada do gerador de web services
@@ -128,9 +135,13 @@ foreach ($_GET as $k=>$v){
 		$cache = false;
 	}
 	if(strtolower($k) == "layers" && empty($_GET["tema"]))
-	{$tema = $v;}
+	{
+		$tema = $v;
+	}
 	if(strtolower($k) == "layer" && empty($_GET["tema"]))
-	{$tema = $v;}
+	{
+		$tema = $v;
+	}
 }
 if(empty($srs)){
 	$srs = "";
@@ -145,6 +156,7 @@ if(count($_GET) == 0){
 	$req->setParameter("SERVICE", "WMS");
 	$cache = false;
 }
+
 if(isset($tema) && $tipo != "metadados"){
 	$tipo = "";
 }
@@ -190,7 +202,9 @@ else{
 }
 if(!isset($tema)){
 	if(!isset($intervalo))
-	{$intervalo = "0,5000";}
+	{
+		$intervalo = "0,5000";
+	}
 	$tipo = "intervalo";
 }
 if ($tipo == "" || $tipo == "metadados"){
@@ -218,7 +232,9 @@ if ($tipo == "" || $tipo == "metadados"){
 				$nmap->setmetadata("ows_enable_request","*");
 			}
 			if($temai3geo == false || empty($layers))
-			{$ts = $nmap->getalllayernames();}
+			{
+				$ts = $nmap->getalllayernames();
+			}
 			else{
 				$ts = explode(",",str_replace(" ",",",$layers));
 			}
@@ -255,7 +271,9 @@ if ($tipo == "" || $tipo == "metadados"){
 					if($l->type == MS_LAYER_RASTER && $l->numclasses > 0){
 						$c = $l->getclass(0);
 						if($c->name == "")
-						{$c->name = " ";}
+						{
+							$c->name = " ";
+						}
 					}
 					//inclui extensao geografica
 					$extensao = $l->getmetadata("EXTENSAO");
@@ -320,7 +338,9 @@ if ($tipo == "" || $tipo == "metadados"){
 				if($l->type == MS_LAYER_RASTER && $l->numclasses > 0){
 					$c = $l->getclass(0);
 					if($c->name == "")
-					{$c->name = " ";}
+					{
+						$c->name = " ";
+					}
 				}
 				//inclui extensao geografica
 				$extensao = $l->getmetadata("EXTENSAO");
@@ -339,7 +359,9 @@ else{
 	$conta = 0;
 	$int = explode(",",$intervalo);
 	$codigosTema = array();
-	if(empty($perfil)){$perfil = "";}
+	if(empty($perfil)){
+		$perfil = "";
+	}
 	include("classesphp/classe_menutemas.php");
 	$m = new Menutemas("",$perfil,$locaplic,$urli3geo);
 	$menus = $m->pegaListaDeMenus();
@@ -378,7 +400,9 @@ else{
 								$l = $nmap->getlayerbyname($t);
 								$extensao = $l->getmetadata("EXTENSAO");
 								if($extensao == "")
-								{$extensao = $extensaoMap;}
+								{
+									$extensao = $extensaoMap;
+								}
 								$l->setmetadata("wms_extent",$extensao);
 
 								$l->setmetadata("ows_title",pegaNome($l));
@@ -405,6 +429,14 @@ else{
 					}
 				}
 			}
+			else{
+				echo "Erro no arquivo ".$locaplic."/temas/".$codigoTema.".map <br>";
+				$error = ms_GetErrorObj();
+				while($error && $error->code != MS_NOERR){
+					printf("<br>Error in %s: %s<br>\n", $error->routine, $error->message);
+					$error = $error->next();
+				}
+			}
 		}
 	}
 }
@@ -415,7 +447,9 @@ ms_ioinstallstdouttobuffer();
 $oMap->owsdispatch($req);
 $contenttype = ms_iostripstdoutbuffercontenttype();
 if(strtolower($request) == "getcapabilities")
-{header('Content-Disposition: attachment; filename=getcapabilities.xml');}
+{
+	header('Content-Disposition: attachment; filename=getcapabilities.xml');
+}
 //header("Content-type: application/xml");
 header("Content-type: $contenttype");
 
@@ -426,10 +460,14 @@ ms_ioresethandlers();
 //
 function ogc_pegaListaDeMenus(){
 	global $perfil,$locaplic,$urli3geo;
-	if(!isset($perfil)){$perfil = "";}
+	if(!isset($perfil)){
+		$perfil = "";
+	}
 	$m = new Menutemas("",$perfil,$locsistemas,$locaplic,"",$urli3geo);
 	foreach($m->pegaListaDeMenus() as $menu)
-	{$menus[] = $urli3geo."/admin/xmlmenutemas.php?id_menu=".$menu["idmenu"];}
+	{
+		$menus[] = $urli3geo."/admin/xmlmenutemas.php?id_menu=".$menu["idmenu"];
+	}
 	return $menus;
 }
 function ogc_imprimeAjuda(){
@@ -469,7 +507,7 @@ function ogc_imprimeListaDeTemas(){
 								$imprimir .= "&nbsp;<a href='".$urli3geo."/ogc.php?tema=".$tema["tid"]."&service=wms&request=getcapabilities' >Getcapabilities</a>";
 								$imprimir .= "&nbsp;<a href='".$urli3geo."/ogc.php?tema=".$tema["tid"]."&SRS=EPSG:4618&WIDTH=500&HEIGHT=500&BBOX=-76.5125927,-39.3925675209,-29.5851853,9.49014852081&FORMAT=image/png&service=wms&version=1.1.0&request=getmap&layers=".$tema["tid"]."' >GetMap </a>";
 								if($tema["link"] != " ")
-								$imprimir .= "&nbsp;&nbsp;<a href='".$tema["link"]."' >fonte</a>";
+									$imprimir .= "&nbsp;&nbsp;<a href='".$tema["link"]."' >fonte</a>";
 								$imprimir .= "<br>";
 							}
 						}
@@ -520,9 +558,12 @@ function carregaCacheImagem($bbox,$layer,$w,$h,$cachedir=""){
 	global $dir_tmp;
 	$nome = $w.$h.$bbox.".png";
 	if($cachedir == "")
-	{$nome = $dir_tmp."/cache/".$layer."/".$nome;}
+	{
+		$nome = $dir_tmp."/cache/".$layer."/".$nome;
+	}
 	else
-	{$nome = $cachedir."/".$layer."/".$nome;}
+	{$nome = $cachedir."/".$layer."/".$nome;
+	}
 	if(file_exists($nome)){
 		ob_start();
 		// assuming you have image data in $imagedata
@@ -544,44 +585,40 @@ function carregaCacheImagem($bbox,$layer,$w,$h,$cachedir=""){
 		exit;
 	}
 	/*
-	if(file_exists($nome))
+	 if(file_exists($nome))
+	 {
+	if (!function_exists('imagepng'))
 	{
-		if (!function_exists('imagepng'))
-		{
-			$s = PHP_SHLIB_SUFFIX;
-			@dl( 'php_gd2.'.$s );
-			if (!function_exists('imagepng'))
-			@dl( 'php_gd.'.$s );
-		}
-		@$img = imagecreatefrompng($nome);
-		if(!$img)
-		{
-			$img  = imagecreatetruecolor($w, $h);
-			imagealphablending($img, false);
-			imagesavealpha($img, true);
+	$s = PHP_SHLIB_SUFFIX;
+	@dl( 'php_gd2.'.$s );
+	if (!function_exists('imagepng'))
+		@dl( 'php_gd.'.$s );
+	}
+	@$img = imagecreatefrompng($nome);
+	if(!$img)
+	{
+	$img  = imagecreatetruecolor($w, $h);
+	imagealphablending($img, false);
+	imagesavealpha($img, true);
 
-			$bgc = imagecolorallocatealpha($img, 255, 255, 255,127);
-			$tc  = imagecolorallocate($img, 255, 0, 0);
+	$bgc = imagecolorallocatealpha($img, 255, 255, 255,127);
+	$tc  = imagecolorallocate($img, 255, 0, 0);
 
-			imagefilledrectangle($img, 0, 0, $w, $h, $bgc);
-			imagestring($img, 3, 5, 5, 'Erro ao ler ' . $nome, $tc);
-		}
-		else
-		{
-			imagealphablending($img, false);
-			imagesavealpha($img, true);
-		}
-		ob_clean();
-		error_reporting(0);
-		echo header("Content-type: image/png \n\n");
-		imagepng($img);
-		imagedestroy($img);
-		exit;
+	imagefilledrectangle($img, 0, 0, $w, $h, $bgc);
+	imagestring($img, 3, 5, 5, 'Erro ao ler ' . $nome, $tc);
+	}
+	else
+	{
+	imagealphablending($img, false);
+	imagesavealpha($img, true);
+	}
+	ob_clean();
+	error_reporting(0);
+	echo header("Content-type: image/png \n\n");
+	imagepng($img);
+	imagedestroy($img);
+	exit;
 	}
 	*/
 }
-
 ?>
-
-
-
