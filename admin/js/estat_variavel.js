@@ -681,6 +681,32 @@ i3GEOadmin.variaveis = {
 		ins += "<br><br><br>";
 		$i("editor_bd").innerHTML = ins;
 	},
+	editarMontaFormulario: function(dados,tipo,id){
+		if(tipo == "variavel"){
+			core_montaEditor("i3GEOadmin.variaveis.gravaDados('variavel','"+id+"')","450px","200px","","Editor de vari&aacute;vel");
+			i3GEOadmin.variaveis.montaDivVariavel(dados);
+		}
+		if(tipo == "medidaVariavel"){
+			core_montaEditor("i3GEOadmin.variaveis.gravaDados('medidaVariavel','"+id+"')","450px","200px","","Editor de medidas");
+			i3GEOadmin.variaveis.medidas.montaDiv(dados);
+		}
+		if(tipo == "parametroMedida"){
+			core_montaEditor("i3GEOadmin.variaveis.gravaDados('parametroMedida','"+id+"')","450px","200px","","Editor de par&acirc;metros");
+			i3GEOadmin.variaveis.parametro.montaDiv(dados);
+		}
+		if(tipo == "classificacaoMedida"){
+			core_montaEditor("i3GEOadmin.variaveis.gravaDados('classificacaoMedida','"+id+"')","450px","200px","","Editor de classifica&ccedil;&atilde;o");
+			i3GEOadmin.variaveis.classificacao.montaDiv(dados);
+		}
+		if(tipo == "classeClassificacao"){
+			core_montaEditor("i3GEOadmin.variaveis.gravaDados('classeClassificacao','"+id+"')","450px","200px","","Editor de classe");
+			i3GEOadmin.variaveis.classes.montaDiv(dados);
+		}
+		if(tipo == "linkMedida"){
+			core_montaEditor("i3GEOadmin.variaveis.gravaDados('linkMedida','"+id+"')","450px","200px","","Editor de links");
+			i3GEO.variaveis.link.montaDiv(dados);
+		}
+	},
 	editar: function(tipo,id) {
 		core_carregando("ativa");
 		core_carregando(" buscando dados");
@@ -692,30 +718,7 @@ i3GEOadmin.variaveis = {
 						if(o){
 							dados = YAHOO.lang.JSON.parse(o.responseText);
 						}
-						if(tipo == "variavel"){
-							core_montaEditor("i3GEOadmin.variaveis.gravaDados('variavel','"+id+"')","450px","200px","","Editor de vari&aacute;vel");
-							i3GEOadmin.variaveis.montaDivVariavel(dados);
-						}
-						if(tipo == "medidaVariavel"){
-							core_montaEditor("i3GEOadmin.variaveis.gravaDados('medidaVariavel','"+id+"')","450px","200px","","Editor de medidas");
-							i3GEOadmin.variaveis.medidas.montaDiv(dados);
-						}
-						if(tipo == "parametroMedida"){
-							core_montaEditor("i3GEOadmin.variaveis.gravaDados('parametroMedida','"+id+"')","450px","200px","","Editor de par&acirc;metros");
-							i3GEOadmin.variaveis.parametro.montaDiv(dados);
-						}
-						if(tipo == "classificacaoMedida"){
-							core_montaEditor("i3GEOadmin.variaveis.gravaDados('classificacaoMedida','"+id+"')","450px","200px","","Editor de classifica&ccedil;&atilde;o");
-							i3GEOadmin.variaveis.classificacao.montaDiv(dados);
-						}
-						if(tipo == "classeClassificacao"){
-							core_montaEditor("i3GEOadmin.variaveis.gravaDados('classeClassificacao','"+id+"')","450px","200px","","Editor de classe");
-							i3GEOadmin.variaveis.classes.montaDiv(dados);
-						}
-						if(tipo == "linkMedida"){
-							core_montaEditor("i3GEOadmin.variaveis.gravaDados('linkMedida','"+id+"')","450px","200px","","Editor de links");
-							i3GEO.variaveis.link.montaDiv(dados);
-						}
+						i3GEOadmin.variaveis.editarMontaFormulario(dados,tipo,id);
 						core_carregando("desativa");
 					}
 					catch(e){core_handleFailure(e,"");}

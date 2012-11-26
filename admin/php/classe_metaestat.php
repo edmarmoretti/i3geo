@@ -202,6 +202,7 @@ class Metaestat{
 		$id = $id->fetchAll();
 		$id = $id[0][$colunaid];
 		$this->dbhw->query("UPDATE ".$this->esquemaadmin.$tabela." SET $colunatemp = '' WHERE $colunaid = $id AND $colunatemp = '$idtemp'");
+
 		return $id;
 	}
 	function excluirRegistro($tabela,$coluna,$id)
@@ -758,6 +759,7 @@ class Metaestat{
 			}
 			else{
 				$retorna = $this->insertId("i3geoestat_medida_variavel","nomemedida","id_medida_variavel");
+				//echo "UPDATE ".$this->esquemaadmin."i3geoestat_medida_variavel SET codigo_variavel = $codigo_variavel WHERE id_medida_variavel = $retorna";exit;
 				if($retorna){
 					$this->dbhw->query("UPDATE ".$this->esquemaadmin."i3geoestat_medida_variavel SET codigo_variavel = $codigo_variavel WHERE id_medida_variavel = $retorna");
 				}
@@ -1146,7 +1148,7 @@ class Metaestat{
 		$sql .= "FROM ".$this->esquemaadmin."i3geoestat_variavel ";
 		$sql .= "JOIN ".$this->esquemaadmin."i3geoestat_medida_variavel ";
 		$sql .= "ON i3geoestat_variavel.codigo_variavel = i3geoestat_medida_variavel.codigo_variavel ";
-		$sql .= "JOIN ".$this->esquemaadmin."i3geoestat_unidade_medida ";
+		$sql .= "LEFT JOIN ".$this->esquemaadmin."i3geoestat_unidade_medida ";
 		$sql .= "ON i3geoestat_unidade_medida.codigo_unidade_medida = i3geoestat_medida_variavel.codigo_unidade_medida ";
 		if($codigo_variavel != ""){
 			$sql .= "WHERE i3geoestat_variavel.codigo_variavel = $codigo_variavel ";
@@ -1157,6 +1159,7 @@ class Metaestat{
 		elseif($id_medida_variavel != "") {
 			$sql .= "WHERE i3geoestat_medida_variavel.id_medida_variavel = $id_medida_variavel ";
 		}
+		//echo $sql;exit;
 		return $this->execSQL($sql,$id_medida_variavel);
 	}
 	/*
