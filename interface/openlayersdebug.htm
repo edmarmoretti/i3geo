@@ -163,6 +163,9 @@ i3GEO.Interface.openlayers.GADGETS = {
 		OverviewMap:false
 	};
 i3GEO.Interface.openlayers.TILES = true;
+i3GEO.Interface.openlayers.parametrosMap.scales = [
+	105000000,50000000,21000000,10000000,5000000,1000000,500000,250000,100000,50000,25000,10000,5000,1000,100
+];
 //
 //controla o tamanho da barra de zoom
 //
@@ -171,7 +174,7 @@ i3GEO.Interface.openlayers.TILES = true;
 //
 //desabilita o item que abre a interface "default" do menu suspenso
 //
-i3GEO.gadgets.PARAMETROS.mostraMenuSuspenso.finaliza = 'if($i("omenudataInterface1")){i3GEOoMenuBar.getMenuItem("omenudataInterface1").cfg.setProperty("text", " ");}'
+i3GEO.gadgets.PARAMETROS.mostraMenuSuspenso.finaliza = 'if($i("omenudataInterface1")){i3GEOoMenuBar.getMenuItem("omenudataInterface1").cfg.setProperty("text", " ");}';
 
 /*
 Após a cria&ccedil;&atilde;o, &eacute; criado o objeto i3geoOL que corresponde ao objeto map da API do OpenLayers.

@@ -447,6 +447,15 @@ i3GEO.Interface = {
 	*/
 	openlayers:{
 		/*
+		Propriedade: parametrosMap
+
+		Permite incluir parametros da API do OpenLayers não previstos no i3Geo. Veja em http://dev.openlayers.org/releases/OpenLayers-2.12/doc/apidocs/files/OpenLayers/Map-js.html
+
+		Exemplo i3GEO.Interface.openlayers.parametrosMap.scales = [50000000, 30000000, 10000000, 5000000];
+		*/
+		parametrosMap: {
+		},
+		/*
 		Propriedade: FUNDOTEMA
 
 		Estilo "background" do nome do tema na &aacute;rvore de camadas enquanto o mesmo est&aacute; sendo carregado.
@@ -590,15 +599,24 @@ i3GEO.Interface = {
 				bb.INCLUIBOTAO.zoomli = true;
 				bb.INCLUIBOTAO.pan = true;
 				bb.INCLUIBOTAO.zoomtot = true;
-				i3geoOL = new OpenLayers.Map('openlayers', {
-					controls: [],
-					fractionalZoom: false,
-					minResolution: "auto",
-					minExtent: new OpenLayers.Bounds(mi[0],mi[1],mi[2],mi[3]),
-					maxResolution: "auto",
-					maxExtent: new OpenLayers.Bounds(ma[0],ma[1],ma[2],ma[3]),
-					allOverlays: false
-				});
+				i3GEO.Interface.openlayers.parametrosMap.controls = [];
+				i3GEO.Interface.openlayers.parametrosMap.fractionalZoom = false;
+				if(!i3GEO.Interface.openlayers.parametrosMap.minResolution){
+					i3GEO.Interface.openlayers.parametrosMap.minResolution = "auto";
+				}
+				if(!i3GEO.Interface.openlayers.parametrosMap.minExtent){
+					i3GEO.Interface.openlayers.parametrosMap.minExtent = new OpenLayers.Bounds(mi[0],mi[1],mi[2],mi[3]);
+				}
+				if(!i3GEO.Interface.openlayers.parametrosMap.maxResolution){
+					i3GEO.Interface.openlayers.parametrosMap.maxResolution = "auto";
+				}
+				if(!i3GEO.Interface.openlayers.parametrosMap.maxExtent){
+					i3GEO.Interface.openlayers.parametrosMap.maxExtent = new OpenLayers.Bounds(ma[0],ma[1],ma[2],ma[3]);
+				}
+				if(!i3GEO.Interface.openlayers.parametrosMap.allOverlays){
+					i3GEO.Interface.openlayers.parametrosMap.allOverlays = false;
+				}
+				i3geoOL = new OpenLayers.Map('openlayers', i3GEO.Interface.openlayers.parametrosMap);
 			}
 		},
 		inicia: function(){
