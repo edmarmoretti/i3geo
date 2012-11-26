@@ -6,11 +6,11 @@
              <form name="theForm" method="POST" action="javascript:void(csw_client.getRecords())">
                <select name="queryable">
 				 <option value="anytext">Qualquer lugar</option>
-				 <option value="title">Título</option>
-				 <option value="subject">Descri&ccedil;&atilde;o</option>
+				 <option value="title">Titulo</option>
+				 <option value="subject">Descricao</option>
                </select>
                <select name="operator">
-				 <option value="contains">cont&eacute;m</option>
+				 <option value="contains">contem</option>
 				 <option value="equals">igual</option>
                </select>
                <input type="text" name="query" value="" size="24"/>
@@ -25,8 +25,8 @@
 				 <option value="xml">XML</option>
                </select>
 		<select id="sortby" name="sortby">
-				 <option value="none">N&atilde;o ordena</option>
-				 <option value="title">Ordena pelo t&iacute;tulo</option>
+				 <option value="none">Nao ordena</option>
+				 <option value="title">Ordena pelo titulo</option>
                </select>
                <p/>
                <!--input type="hidden" name="schema" value="http://www.opengis.net/cat/csw/2.0.2"/-->
@@ -36,7 +36,7 @@
                <input type="button" value="pesquisar" onClick="javascript:void(csw_client.getRecords())"/>
 			 </form>
 	       </div>
-		   
+
 		   <div id="results-container">
 		     <div  class="csw-main2" id="results">
 		       <div class="csw-contents">
@@ -44,10 +44,10 @@
 		       </div>
 			 </div>
 		   </div>
-		   
+
          </div>
        </div><!-- main -->
-     </div><!-- query-container -->	  
+     </div><!-- query-container -->
      <p/>
 	 <div id="popup">
 	   <div class="close">
@@ -58,6 +58,6 @@
 	       <div id="metadata"></div>
 	     </div>
        </div>
-     </div><!-- popup -->		 
+     </div><!-- popup -->
      <div id="overlay" style="visibility:hidden"></div>
      </div><!-- cswclient -->

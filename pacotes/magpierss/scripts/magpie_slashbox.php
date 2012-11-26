@@ -2,12 +2,12 @@
 
 define('MAGPIE_DIR', '../');
 require_once(MAGPIE_DIR.'rss_fetch.inc');
-	
+
 $url = $_GET['rss_url'];
 
 ?>
 
-<html
+<html>
 <body LINK="#999999" VLINK="#000000">
 
 <form>
@@ -38,15 +38,15 @@ echo "</pre>";
 function slashbox ($rss) {
 	echo "<table cellpadding=2 cellspacing=0><tr>";
 	echo "<td bgcolor=#006666>";
-	
+
 	# get the channel title and link properties off of the rss object
 	#
 	$title = $rss->channel['title'];
 	$link = $rss->channel['link'];
-	
+
 	echo "<a href=$link><font color=#FFFFFF><b>$title</b></font></a>";
 	echo "</td></tr>";
-	
+
 	# foreach over each item in the array.
 	# displaying simple links
 	#
@@ -58,8 +58,8 @@ function slashbox ($rss) {
 		echo "<a href=$item[link]>";
 		echo $item['title'];
 		echo "</a></td></tr>";
-	}		
-	
+	}
+
 	echo "</table>";
 }
 
