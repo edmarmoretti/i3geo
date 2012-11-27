@@ -240,72 +240,84 @@ class Metaestat{
 		$filtro = false;
 		$dados = $this->listaMedidaVariavel("",$id_medida_variavel);
 		$dadosgeo = $this->listaTipoRegiao($dados["codigo_tipo_regiao"]);
+		//indica se os dados sao agregados a uma regiao de nivel superior
 		$agregaregiao = false;
+		$colunas = array();
 		if($codigo_tipo_regiao != "" && $dados["codigo_tipo_regiao"] != $codigo_tipo_regiao){
 			$agregaregiao = true;
+			//guarda os dados da regiao que agrega a regiao original da medida variavel
 			$dadosgeoagregada = $this->listaTipoRegiao($codigo_tipo_regiao);
-		}
-		if($tipolayer != "point"){
-			$colunageo = $dadosgeo["colunageo"];
-		}
-		else{
-			$colunageo = $dadosgeo["colunacentroide"];
-		}
-		if($todasascolunas == 0){
-			$sql = " SELECT d.".$dados["colunavalor"].",d.".$dados["colunaidgeo"];
-			$colunas[] = $dados["colunavalor"];
-			$colunas[] = $dados["colunaidgeo"];
-			if(!empty($agruparpor)){
-				$temp = explode(",",$agruparpor);
-				$sql .= ",d.".implode(",d.",$temp);
-				$colunas = array_merge($colunas,$temp);
+			if($tipolayer != "point"){
+				$colunageo = $dadosgeoagregada["colunageo"];
+			}
+			else{
+				$colunageo = $dadosgeoagregada["colunacentroide"];
 			}
 		}
 		else{
-			$sql = " SELECT d.* ";
-			$colunas = $this->colunasTabela($dados["codigo_estat_conexao"],$dados["esquemadb"],$dados["tabela"]);
-		}
-		//prepara a lista de colunas que ficarao visiveis no sql geo
-		$vis = $dadosgeo["colunasvisiveis"];
-		$vis = str_replace(" ",",",$vis);
-		$vis = str_replace(",,",",",$vis);
-		$colunasvisiveis = explode(",",$vis);
-		//$vis[] = "st_setsrid($colunageo,".$dadosgeo["srid"].") as $colunageo";
-		$colunasvisiveis = array_unique($colunasvisiveis);
-		$colunas = array_merge($colunas,$colunasvisiveis);
-		$vis = implode(",g.",$colunasvisiveis);
-		$vis = "g.".$vis.",st_setsrid(g.".$colunageo.",".$dadosgeo["srid"].") as ".$colunageo;
-		//$sqlgeo = $sql.",g.".$colunageo;
-		$sqlgeo = $sql.",".$vis;
-		//
-		//prepara os alias das colunas
-		//
-		$alias = $colunas;
-		$n = count($colunas);
-		for($i=0;$i<$n;$i++){
-			if($colunas[$i] === $dados["colunavalor"]){
-				$alias[$i] = mb_convert_encoding($dados["nomemedida"],"ISO-8859-1",mb_detect_encoding($dados["nomemedida"]));
+			if($tipolayer != "point"){
+				$colunageo = $dadosgeo["colunageo"];
+			}
+			else{
+				$colunageo = $dadosgeo["colunacentroide"];
 			}
 		}
-		$aliasvis = $dadosgeo["apelidos"];
-		$aliasvis = str_replace(" ",",",$aliasvis);
-		$aliasvis = str_replace(",,",",",$aliasvis);
-		$aliasvis = explode(",",$aliasvis);
-		if(count($aliasvis) == count($colunasvisiveis)){
+		if($agregaregiao == false){
+			if($todasascolunas == 0){
+				$sql = " SELECT d.".$dados["colunavalor"].",d.".$dados["colunaidgeo"];
+				$colunas[] = $dados["colunavalor"];
+				$colunas[] = $dados["colunaidgeo"];
+				if(!empty($agruparpor)){
+					$temp = explode(",",$agruparpor);
+					$sql .= ",d.".implode(",d.",$temp);
+					$colunas = array_merge($colunas,$temp);
+				}
+			}
+			else{
+				$sql = " SELECT d.* ";
+				$colunas = $this->colunasTabela($dados["codigo_estat_conexao"],$dados["esquemadb"],$dados["tabela"]);
+			}
+			//prepara a lista de colunas que ficarao visiveis no sql geo
+			$vis = $dadosgeo["colunasvisiveis"];
+			$vis = str_replace(" ",",",$vis);
+			$vis = str_replace(",,",",",$vis);
+			$colunasvisiveis = explode(",",$vis);
+			//$vis[] = "st_setsrid($colunageo,".$dadosgeo["srid"].") as $colunageo";
+			$colunasvisiveis = array_unique($colunasvisiveis);
+			$colunas = array_merge($colunas,$colunasvisiveis);
+			$vis = implode(",g.",$colunasvisiveis);
+			$vis = "g.".$vis.",st_setsrid(g.".$colunageo.",".$dadosgeo["srid"].") as ".$colunageo;
+			//$sqlgeo = $sql.",g.".$colunageo;
+			$sqlgeo = $sql.",".$vis;
+			//
+			//prepara os alias das colunas
+			//
+			$alias = $colunas;
 			$n = count($colunas);
 			for($i=0;$i<$n;$i++){
-				$nj = count($colunasvisiveis);
-				for($j=0;$j<$nj;$j++){
-					if($colunas[$i] === $colunasvisiveis[$j]){
-						$alias[$i] = mb_convert_encoding($aliasvis[$j],"ISO-8859-1",mb_detect_encoding($aliasvis[$j]));
+				if($colunas[$i] === $dados["colunavalor"]){
+					$alias[$i] = mb_convert_encoding($dados["nomemedida"],"ISO-8859-1",mb_detect_encoding($dados["nomemedida"]));
+				}
+			}
+			$aliasvis = $dadosgeo["apelidos"];
+			$aliasvis = str_replace(" ",",",$aliasvis);
+			$aliasvis = str_replace(",,",",",$aliasvis);
+			$aliasvis = explode(",",$aliasvis);
+			if(count($aliasvis) == count($colunasvisiveis)){
+				$n = count($colunas);
+				for($i=0;$i<$n;$i++){
+					$nj = count($colunasvisiveis);
+					for($j=0;$j<$nj;$j++){
+						if($colunas[$i] === $colunasvisiveis[$j]){
+							$alias[$i] = mb_convert_encoding($aliasvis[$j],"ISO-8859-1",mb_detect_encoding($aliasvis[$j]));
+						}
 					}
 				}
 			}
 		}
-		//
-		if($agregaregiao == true){
+		else{
 			$dadosAgregacao = $this->listaAgregaRegiaoFilho($dados["codigo_tipo_regiao"], $codigo_tipo_regiao);
-			$sqlgeo = "g.".$dadosAgregacao["colunaligacao_regiaopai"].",sum(d.".$dados["colunavalor"].") as ".$dados["colunavalor"];
+			$sqlgeo =  "SELECT st_setsrid(g.".$colunageo.",".$dadosgeo["srid"].") as the_geom ,g.".$dadosAgregacao["colunaligacao_regiaopai"].",d.".$dados["colunavalor"]." as ".$dados["colunavalor"];
 		}
 		$tipoconta = "";
 		if($dados["permitesoma"] == 1){
@@ -320,8 +332,14 @@ class Metaestat{
 		}
 		else{
 			$sqlagrupamento = " SELECT d.".$agruparpor." FROM ".$dados["esquemadb"].".".$dados["tabela"]." as d group by ".$agruparpor." order by ".$agruparpor;
-			$sqlgeo .= " FROM (SELECT $tipoconta(".$dados["colunavalor"].") as ".$dados["colunavalor"].",".$dados["colunaidgeo"].",".$agruparpor." FROM ".$dados["esquemadb"].".".$dados["tabela"] ." __dadosfiltro__ group by ".$agruparpor.",".$dados["colunaidgeo"].") as d, ".$dadosgeo["esquemadb"].".".$dadosgeo["tabela"]." as g";
-			$sql .= " FROM (SELECT $tipoconta(".$dados["colunavalor"].") as ".$dados["colunavalor"].",".$dados["colunaidgeo"].",".$agruparpor." FROM ".$dados["esquemadb"].".".$dados["tabela"] ." __dadosfiltro__ group by ".$agruparpor.",".$dados["colunaidgeo"].") as d ";
+			if($agregaregiao == true){
+				$sqlgeo .= " FROM (SELECT $tipoconta(".$dados["colunavalor"].") as ".$dados["colunavalor"].",".$dadosAgregacao["colunaligacao_regiaopai"].",".$agruparpor." FROM ".$dados["esquemadb"].".".$dados["tabela"] ." __dadosfiltro__ group by ".$agruparpor.",".$dadosAgregacao["colunaligacao_regiaopai"].") as d, ".$dadosgeo["esquemadb"].".".$dadosgeoagregada["tabela"]." as g";
+				$sql .= " FROM (SELECT $tipoconta(".$dados["colunavalor"].") as ".$dados["colunavalor"].",".$dadosAgregacao["colunaligacao_regiaopai"].",".$agruparpor." FROM ".$dados["esquemadb"].".".$dados["tabela"] ." __dadosfiltro__ group by ".$agruparpor.",".$dadosAgregacao["colunaligacao_regiaopai"].") as d ";
+			}
+			else{
+				$sqlgeo .= " FROM (SELECT $tipoconta(".$dados["colunavalor"].") as ".$dados["colunavalor"].",".$dados["colunaidgeo"].",".$agruparpor." FROM ".$dados["esquemadb"].".".$dados["tabela"] ." __dadosfiltro__ group by ".$agruparpor.",".$dados["colunaidgeo"].") as d, ".$dadosgeo["esquemadb"].".".$dadosgeo["tabela"]." as g";
+				$sql .= " FROM (SELECT $tipoconta(".$dados["colunavalor"].") as ".$dados["colunavalor"].",".$dados["colunaidgeo"].",".$agruparpor." FROM ".$dados["esquemadb"].".".$dados["tabela"] ." __dadosfiltro__ group by ".$agruparpor.",".$dados["colunaidgeo"].") as d ";
+			}
 		}
 		$dadosfiltro = "";
 		if(!empty($dados["filtro"])){
@@ -333,14 +351,17 @@ class Metaestat{
 		$sql = str_replace("__dadosfiltro__",$dadosfiltro,$sql);
 		$sqlgeo = str_replace("__dadosfiltro__",$dadosfiltro,$sqlgeo);
 		//join com a tabela geo
-		$j = " d.".$dados["colunaidgeo"]."::text = g.".$dadosgeo["identificador"]."::text";
+		if($agregaregiao == true){
+			$j = " g.".$dadosgeoagregada["identificador"]."::text = d.".$dadosAgregacao["colunaligacao_regiaopai"]."::text";
+		}
+		else{
+			$j = " d.".$dados["colunaidgeo"]."::text = g.".$dadosgeo["identificador"]."::text";
+		}
 		$sqlgeo .= " WHERE ".$j;
 
-
-		//@TODO - agregacao com uma regiao maior
 		if($agregaregiao == true){
 			//$sqlgeo = "select pg.*,".$dados["colunavalor"]." from (select ".$sqlgeo." __filtro__ group by g.".$dadosAgregacao["colunaligacao_regiaopai"].") as fg, ".$dadosgeoagregada["esquemadb"].".".$dadosgeoagregada["tabela"]." as pg where fg.".$dadosAgregacao["colunaligacao_regiaopai"]." = pg.".$dadosgeoagregada["identificador"];
-			$sqlgeo = $colunageo." from ( $sqlgeo ) as foo using unique ".$dadosAgregacao["colunaligacao_regiaopai"]." using srid=".$dadosgeo["srid"];
+			$sqlgeo = $colunageo." from ( ".$sqlgeo." __filtro__  ) as foo using unique ".$dadosAgregacao["colunaligacao_regiaopai"]." using srid=".$dadosgeo["srid"];
 		}
 		else{
 			$sqlgeo = $colunageo." from (".$sqlgeo." __filtro__ ) as foo using unique ".$dados["colunaidgeo"]." using srid=".$dadosgeo["srid"];
@@ -370,7 +391,9 @@ class Metaestat{
 			$conexao = $this->listaConexao($meta["codigo_estat_conexao"],true);
 			$conexao = "user=".$conexao["usuario"]." password=".$conexao["senha"]." dbname=".$conexao["bancodedados"]." host=".$conexao["host"]." port=".$conexao["porta"]."";
 			$sql = $this->sqlMedidaVariavel($id_medida_variavel,$todasascolunas,$agruparpor,$tipolayer,$codigo_tipo_regiao);
+
 			$sqlf = $sql["sqlmapserver"];
+			//echo $sqlf;exit;
 			if(!empty($filtro)){
 				$sqlf = str_replace("__filtro__"," AND ".$filtro." /*FA*//*FA*/ /*FAT*//*FAT*/",$sqlf);
 			}
@@ -398,8 +421,10 @@ class Metaestat{
 			$dados[] = '		METAESTAT "SIM"';
 			$dados[] = '		METAESTAT_CODIGO_TIPO_REGIAO "'.$codigo_tipo_regiao.'"';
 			$dados[] = '		METAESTAT_ID_MEDIDA_VARIAVEL "'.$id_medida_variavel.'"';
-			$dados[] = '		ITENS "'.implode(",",$sql["colunas"]).'"';
-			$dados[] = '		ITENSDESC "'.implode(",",$sql["alias"]).'"';
+			if(count($sql["colunas"]) > 0){
+				$dados[] = '		ITENS "'.implode(",",$sql["colunas"]).'"';
+				$dados[] = '		ITENSDESC "'.implode(",",$sql["alias"]).'"';
+			}
 			$dados[] = '	END';
 			if($classes == ""){
 				$dados[] = '    CLASS';
