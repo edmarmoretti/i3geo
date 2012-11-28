@@ -13,7 +13,7 @@ Se vc está fazendo um upgrade do i3geo, faça cópia dos diretórios temas, aplicma
 e dos arquivos ms_configura.php. Consulte o documento i3geo/guia_de_migracao.txt para verificar
 quais cuidados vc deve tomar nos upgrades
 
-Altere a senha da variável $i3geomaster existente em ms_configura.php para sua maior segurança.
+Altere a senha da variável $i3geomaster existente em ms_configura.php para desbloquear o i3geo.
 
 ---------
 
