@@ -166,7 +166,7 @@ function adicionaNosUsuarios(dados,redesenha){
 		conteudo += "&nbsp;<img style=\"position:relative;cursor:pointer;top:2px\" onclick=\"editar('usuario','"+dados[i].id_usuario+"')\" title=editar src=\"../imagens/06.png\" /><b>";
 		conteudo += "&nbsp;<img style=\"position:relative;cursor:pointer;top:2px;width:25px;\" onclick=\"emailsenha('"+dados[i].id_usuario+"')\" title='enviar senha' src=\"../imagens/07.png\" /><b>";
 		if(dados[i].nome_usuario && dados[i].nome_usuario != "")
-		{conteudo += "&nbsp;<span>"+dados[i].nome_usuario+" - "+dados[i].login+" ativo: "+dados[i].ativo+"</span>";}
+		{conteudo += "&nbsp;<span>"+dados[i].nome_usuario+" - "+dados[i].login+" - ativo: "+dados[i].ativo+"</span>";}
 		else
 		{conteudo += "&nbsp;<span style=color:red >Edite para definir o usu&aacute;rio!!!</span>";}
 		var d = {html:conteudo,id_usuario:dados[i].id_usuario,tipo:"usuario"};

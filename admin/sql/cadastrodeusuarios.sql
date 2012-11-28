@@ -61,10 +61,10 @@ create table i3geousr_grupousuario
 	id_usuario integer not null,
 	-- identificador único do grupo
 	id_grupo integer not null,
-	foreign key (id_usuario)
-	references i3geousr_usuarios (id_usuario),
 	foreign key (id_grupo)
-	references i3geousr_grupos (id_grupo)
+	references i3geousr_grupos (id_grupo),
+	foreign key (id_usuario)
+	references i3geousr_usuarios (id_usuario)
 );
 
 
@@ -91,10 +91,10 @@ create table i3geousr_operacoespapeis
 (
 	id_operacao integer not null,
 	id_papel integer not null,
-	foreign key (id_operacao)
-	references i3geousr_operacoes (id_operacao),
 	foreign key (id_papel)
-	references i3geousr_papeis (id_papel)
+	references i3geousr_papeis (id_papel),
+	foreign key (id_operacao)
+	references i3geousr_operacoes (id_operacao)
 );
 
 

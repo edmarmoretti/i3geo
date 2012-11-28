@@ -73,6 +73,7 @@ else{
 	}
 }
 error_reporting(E_ALL);
+//tabelas do controle de usuarios e sistema metaestat
 $tabelas = array(
 				"CREATE TABLE ".$esquemaadmin."i3geousr_usuarios (ativo NUMERIC, data_cadastro TEXT, email TEXT, id_usuario INTEGER PRIMARY KEY, login TEXT, nome_usuario TEXT, senha TEXT)",
 				"CREATE TABLE ".$esquemaadmin."i3geousr_papelusuario (id_papel NUMERIC, id_usuario NUMERIC)",
@@ -128,6 +129,10 @@ if(!in_array($teste,3))
 	$dbhw->query("INSERT INTO ".$esquemaadmin."i3geousr_papeis VALUES('Podem alterar a arvore do catalogo e dos atlas',3,'publicadores')");
 if(!in_array($teste,4))
 	$dbhw->query("INSERT INTO ".$esquemaadmin."i3geousr_papeis VALUES('Podem editar dados geograficos',4,'editoresgeo')");
+if(!in_array($teste,5))
+	$dbhw->query("INSERT INTO ".$esquemaadmin."i3geousr_papeis VALUES ('Podem administrar o sistema METAESTAT','5', 'adminmetaestat')");
+
+
 
 $teste = lista("select * from ".$esquemaadmin."i3geousr_usuarios","id_usuario");
 if(!in_array($teste,1))
@@ -199,6 +204,8 @@ if(!in_array($teste,'16-2'))
 	$dbhw->query("INSERT INTO ".$esquemaadmin."i3geousr_operacoespapeis VALUES(16,2)");
 if(!in_array($teste,'18-1'))
 	$dbhw->query("INSERT INTO ".$esquemaadmin."i3geousr_operacoespapeis VALUES(18,1)");
+if(!in_array($teste,'18-5'))
+	$dbhw->query("INSERT INTO ".$esquemaadmin."i3geousr_operacoespapeis VALUES (18,5)");
 //cria o banco de dados de metadados estatisticos
 if(file_exists("../../admin/metaestat.db"))	{
 	echo "<br>Arquivo admin/metaestat.db ja existe. Vc deve apag&aacute;-lo para poder cri&aacute;-lo novamente caso precise";

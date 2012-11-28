@@ -209,8 +209,9 @@ function verificaPapelSessao($id_papel){
 }
 function verificaOperacaoSessao($operacao){
 	$resultado = false;
-	//verifica se e administrador
+	//avalidacao consulta $_SESSION, que e definida no login
 	if(validaSessao()){
+		//verifica se e administrador, caso positivo, permite qq operacao
 		foreach($_SESSION["papeis"] as $p){
 			if($p == 1){
 				return true;

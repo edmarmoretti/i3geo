@@ -7,7 +7,7 @@ LAYER
   NAME estadosl # ok
   TYPE line
   STATUS DEFAULT
-  DATA "c:/ms4w/apache/htdocs/i3geo/aplicmap/dados/estados.shp"
+  DATA "/var/www/i3geo/aplicmap/dados/estados.shp"
   TEMPLATE "estados.htm"
   METADATA
 	  ITENS "ESTADO"

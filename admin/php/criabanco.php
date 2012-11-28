@@ -51,6 +51,7 @@
 		include("admin.php");
 		error_reporting(E_ALL);
 		$tabelas = array(
+				//tabelas gerais do sistema de administracao
 				"CREATE TABLE ".$esquemaadmin."i3geoadmin_grupos (desc_grupo TEXT, id_grupo INTEGER PRIMARY KEY, nome_grupo TEXT, it TEXT, es TEXT, en TEXT)",
 				"CREATE TABLE ".$esquemaadmin."i3geoadmin_sistemasf (abrir_funcao TEXT, h_funcao NUMERIC, id_funcao INTEGER PRIMARY KEY, id_sistema NUMERIC, nome_funcao TEXT, perfil_funcao TEXT, w_funcao NUMERIC)",
 				"CREATE TABLE ".$esquemaadmin."i3geoadmin_subgrupos (desc_subgrupo TEXT, id_subgrupo INTEGER PRIMARY KEY, nome_subgrupo TEXT, it TEXT, es TEXT, en TEXT)",
@@ -70,6 +71,7 @@
 				"CREATE TABLE ".$esquemaadmin."i3geoadmin_n2 (publicado TEXT, ordem NUMERIC, id_n1 NUMERIC, id_n2 INTEGER PRIMARY KEY, id_subgrupo NUMERIC, n2_perfil TEXT)",
 				"CREATE TABLE ".$esquemaadmin."i3geoadmin_n3 (publicado TEXT, ordem NUMERIC, id_n2 NUMERIC, id_n3 INTEGER PRIMARY KEY, id_tema NUMERIC, n3_perfil TEXT)",
 				"CREATE TABLE ".$esquemaadmin."i3geoadmin_comentarios (comentario TEXT, data TEXT, openidnome TEXT, openidimagem TEXT, openidservico TEXT, openidusuario TEXT, openidurl TEXT, id_tema NUMERIC)",
+				//tabelas do sistema de controle de usuarios
 				"CREATE TABLE ".$esquemaadmin."i3geousr_usuarios (ativo NUMERIC, data_cadastro TEXT, email TEXT, id_usuario INTEGER PRIMARY KEY, login TEXT, nome_usuario TEXT, senha TEXT)",
 				"CREATE TABLE ".$esquemaadmin."i3geousr_papelusuario (id_papel NUMERIC, id_usuario NUMERIC)",
 				"CREATE TABLE ".$esquemaadmin."i3geousr_papeis (descricao TEXT, id_papel INTEGER PRIMARY KEY, nome TEXT)",
@@ -78,6 +80,7 @@
 				"CREATE TABLE ".$esquemaadmin."i3geousr_grupousuario (id_usuario NUMERIC, id_grupo NUMERIC)",
 				"CREATE TABLE ".$esquemaadmin."i3geousr_grupotema (id_grupo NUMERIC, id_tema NUMERIC)",
 				"CREATE TABLE ".$esquemaadmin."i3geousr_grupos (id_grupo INTEGER PRIMARY KEY, nome TEXT)",
+				//tabelas do sistema metaestat
 				"create table ".$esquemaadmin."i3geoestat_conexao (codigo_estat_conexao integer primary key,bancodedados text,host text,porta text,usuario text,senha text)",
 				"create table ".$esquemaadmin."i3geoestat_tipo_regiao(codigo_tipo_regiao integer primary key,nome_tipo_regiao text,descricao_tipo_regiao text,codigo_estat_conexao integer,esquemadb text,tabela text,colunageo text,data text,identificador integer,colunanomeregiao text,srid text,colunacentroide text, colunasvisiveis text, apelidos text)",
 				"create table ".$esquemaadmin."i3geoestat_agregaregiao(id_agregaregiao integer primary key,codigo_tipo_regiao integer,codigo_tipo_regiao_pai integer,colunaligacao_regiaopai text)",
@@ -92,6 +95,7 @@
 				"create table ".$esquemaadmin."i3geoestat_medida_variavel_link(link text,id_medida_variavel integer,nome text,id_link integer primary key)",
 				"create table ".$esquemaadmin."i3geoestat_parametro_medida(id_parametro_medida integer primary key,coluna text,nome text,descricao text,id_pai integer default 0,id_medida_variavel integer)"
 		);
+		//valida o usuario e aplica
 		if($conexaoadmin == ""){
 			if(empty($_POST["senha"]) || empty($_POST["usuario"])){
 				criabancoformularioLoginMaster("criabanco.php");
@@ -148,16 +152,19 @@
 			//echo $tabela."<br>";
 			$q = $dbhw->query($tabela);
 		}
+		//insercao de dados default
 		if(!empty($banco)){
+			//papeis
 			$dbhw->query("INSERT INTO ".$esquemaadmin."i3geousr_papeis VALUES('Podem executar qualquer tarefa, inclusive cadastrar novos administradores',1,'admin')");
 			$dbhw->query("INSERT INTO ".$esquemaadmin."i3geousr_papeis VALUES('Podem criar/editar qualquer tema (mapfile) mas nao podem editar a arvore do catalogo de temas',2,'editores')");
 			$dbhw->query("INSERT INTO ".$esquemaadmin."i3geousr_papeis VALUES('Podem alterar a arvore do catalogo e dos atlas',3,'publicadores')");
 			$dbhw->query("INSERT INTO ".$esquemaadmin."i3geousr_papeis VALUES('Podem editar dados geograficos',4,'editoresgeo')");
-
+			$dbhw->query("INSERT INTO ".$esquemaadmin."i3geousr_papeis VALUES ('Podem administrar o sistema METAESTAT','5', 'adminmetaestat')");
+			//usuarios - inclui apenas o admin
 			$dbhw->query("INSERT INTO ".$esquemaadmin."i3geousr_usuarios VALUES(1,'','',1,'admin','admin','admin')");
-
+			//papel do usuario
 			$dbhw->query("INSERT INTO ".$esquemaadmin."i3geousr_papelusuario VALUES(1,1)");
-
+			//operacoes controladas
 			$dbhw->query("INSERT INTO ".$esquemaadmin."i3geousr_operacoes VALUES(1,'admin/html/editormapfile','editor de mapfiles do sistema de administracao')");
 			$dbhw->query("INSERT INTO ".$esquemaadmin."i3geousr_operacoes VALUES(2,'admin/html/operacoes','abre o editor de operacoes')");
 			$dbhw->query("INSERT INTO ".$esquemaadmin."i3geousr_operacoes VALUES(3,'teste/','teste')");
@@ -176,7 +183,7 @@
 			$dbhw->query("INSERT INTO ".$esquemaadmin."i3geousr_operacoes VALUES('16', 'admin/php/editortexto', 'editor de textos para edicao de mapfiles')");
 			$dbhw->query("INSERT INTO ".$esquemaadmin."i3geousr_operacoes VALUES('17', 'admin/html/usuarios', 'cadastro de usuarios')");
 			$dbhw->query("INSERT INTO ".$esquemaadmin."i3geousr_operacoes VALUES('18', 'admin/metaestat/geral', 'permite edicoes mais comuns do sistema de metadados estatisticos')");
-
+			//papeis por operacao
 			$dbhw->query("INSERT INTO ".$esquemaadmin."i3geousr_operacoespapeis VALUES(1,2)");
 			$dbhw->query("INSERT INTO ".$esquemaadmin."i3geousr_operacoespapeis VALUES(1,3)");
 			$dbhw->query("INSERT INTO ".$esquemaadmin."i3geousr_operacoespapeis VALUES(4,3)");
@@ -188,6 +195,7 @@
 			$dbhw->query("INSERT INTO ".$esquemaadmin."i3geousr_operacoespapeis VALUES(15,3)");
 			$dbhw->query("INSERT INTO ".$esquemaadmin."i3geousr_operacoespapeis VALUES(16,2)");
 			$dbhw->query("INSERT INTO ".$esquemaadmin."i3geousr_operacoespapeis VALUES(18,1)");
+			$dbhw->query("INSERT INTO ".$esquemaadmin."i3geousr_operacoespapeis VALUES ('18', '5')");
 
 			$banco = null;
 			echo "Banco criado!!! administrador: admin / admin  - n&atilde;o esque&ccedil;a de alterar essa senha na op&ccedil;&atilde;o de edi&ccedil;&atilde;o do cadastro de usu&aacute;rios";

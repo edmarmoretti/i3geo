@@ -3,6 +3,7 @@ INSERT INTO i3geousr_usuarios (id_usuario, ativo, data_cadastro, email, login, n
 INSERT INTO i3geousr_usuarios (id_usuario, ativo, data_cadastro, email, login, nome_usuario, senha) VALUES ('2', '1', '', '', 'editor', 'teste de editor', 'editor');
 INSERT INTO i3geousr_usuarios (id_usuario, ativo, data_cadastro, email, login, nome_usuario, senha) VALUES ('3', '1', '', '', 'publicador', 'teste de publicador', 'publicador');
 INSERT INTO i3geousr_usuarios (id_usuario, ativo, data_cadastro, email, login, nome_usuario, senha) VALUES ('4', '1', '', '', 'editorgeo', 'teste de editor geo', 'editorgeo');
+INSERT INTO i3geousr_usuarios (id_usuario, ativo, data_cadastro, email, login, nome_usuario, senha) VALUES ('5', '1', '', '', 'editormetaestat', 'teste de editor do METAESTAT', 'editormetaestat');
 
 
 -- i3geousr_operacoes
@@ -38,6 +39,7 @@ INSERT INTO i3geousr_operacoespapeis (id_operacao, id_papel) VALUES ('13', '2');
 INSERT INTO i3geousr_operacoespapeis (id_operacao, id_papel) VALUES ('13', '4');
 INSERT INTO i3geousr_operacoespapeis (id_operacao, id_papel) VALUES ('15', '3');
 INSERT INTO i3geousr_operacoespapeis (id_operacao, id_papel) VALUES ('18', '1');
+INSERT INTO i3geousr_operacoespapeis (id_operacao, id_papel) VALUES ('18', '5');
 
 
 -- i3geousr_papeis
@@ -45,6 +47,7 @@ INSERT INTO i3geousr_papeis (id_papel, nome, descricao) VALUES ('1', 'admin', 'P
 INSERT INTO i3geousr_papeis (id_papel, nome, descricao) VALUES ('2', 'editores', 'Podem criar/editar qualquer tema (mapfile) mas nao podem editar a arvore do catalogo de temas');
 INSERT INTO i3geousr_papeis (id_papel, nome, descricao) VALUES ('3', 'publicadores', 'Podem alterar a arvore do catalogo de temas e dos atlas');
 INSERT INTO i3geousr_papeis (id_papel, nome, descricao) VALUES ('4', 'editoresgeo', 'Podem editar dados geograficos');
+INSERT INTO i3geousr_papeis (id_papel, nome, descricao) VALUES ('5', 'adminmetaestat', 'Podem administrar o sistema METAESTAT');
 
 
 -- i3geousr_papelusuario
@@ -52,5 +55,6 @@ INSERT INTO i3geousr_papelusuario (id_usuario, id_papel) VALUES ('2', '2');
 INSERT INTO i3geousr_papelusuario (id_usuario, id_papel) VALUES ('3', '3');
 INSERT INTO i3geousr_papelusuario (id_usuario, id_papel) VALUES ('4', '4');
 INSERT INTO i3geousr_papelusuario (id_usuario, id_papel) VALUES ('1', '1');
+INSERT INTO i3geousr_papelusuario (id_usuario, id_papel) VALUES ('5', '5');
 
 

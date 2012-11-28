@@ -41,7 +41,7 @@
 		<suspend_validator>false</suspend_validator>
 		<export_setting>
 			<category_name_to_export>All</category_name_to_export>
-			<ddl_output>c:\ms4w\apache\htdocs\i3geo\admin\sql\cadastrodeusuarios.sql</ddl_output>
+			<ddl_output>/var/www/i3geo/admin/sql/cadastrodeusuarios.sql</ddl_output>
 			<excel_output></excel_output>
 			<excel_template></excel_template>
 			<image_output></image_output>
@@ -110,7 +110,7 @@
 			</connections>
 			<display>false</display>
 			<creation_date>2012-07-19 01:51:14</creation_date>
-			<updated_date>2012-10-31 11:59:37</updated_date>
+			<updated_date>2012-11-28 09:04:26</updated_date>
 			<model_property>
 				<name>Project Name</name>
 				<value></value>
@@ -656,7 +656,7 @@
 			<connections>
 				<relation>
 					<id>0</id>
-					<source>1</source>
+					<source>4</source>
 					<target>2</target>
 					<child_cardinality>1..n</child_cardinality>
 					<parent_cardinality>1</parent_cardinality>
@@ -673,7 +673,7 @@
 				</relation>
 				<relation>
 					<id>1</id>
-					<source>4</source>
+					<source>1</source>
 					<target>2</target>
 					<child_cardinality>1..n</child_cardinality>
 					<parent_cardinality>1</parent_cardinality>
@@ -699,7 +699,7 @@
 				<normal_column>
 					<id>7</id>
 					<referenced_column>0</referenced_column>
-					<relation>0</relation>
+					<relation>1</relation>
 					<description></description>
 					<unique_key_name></unique_key_name>
 					<logical_name></logical_name>
@@ -732,7 +732,7 @@
 				<normal_column>
 					<id>8</id>
 					<referenced_column>11</referenced_column>
-					<relation>1</relation>
+					<relation>0</relation>
 					<description></description>
 					<unique_key_name></unique_key_name>
 					<logical_name></logical_name>
@@ -989,7 +989,7 @@
 					</sequence>
 				</normal_column>
 				<normal_column>
-					<word_id>4</word_id>
+					<word_id>3</word_id>
 					<id>13</id>
 					<description></description>
 					<unique_key_name></unique_key_name>
@@ -1247,7 +1247,7 @@
 					</sequence>
 				</normal_column>
 				<normal_column>
-					<word_id>3</word_id>
+					<word_id>4</word_id>
 					<id>18</id>
 					<description></description>
 					<unique_key_name></unique_key_name>
@@ -1655,6 +1655,36 @@
 							<column_data>
 								<column_id>6</column_id>
 								<value>editorgeo</value>
+							</column_data>
+						</data>
+						<data>
+							<column_data>
+								<column_id>0</column_id>
+								<value>5</value>
+							</column_data>
+							<column_data>
+								<column_id>1</column_id>
+								<value>1</value>
+							</column_data>
+							<column_data>
+								<column_id>2</column_id>
+								<value></value>
+							</column_data>
+							<column_data>
+								<column_id>3</column_id>
+								<value></value>
+							</column_data>
+							<column_data>
+								<column_id>4</column_id>
+								<value>editormetaestat</value>
+							</column_data>
+							<column_data>
+								<column_id>5</column_id>
+								<value>teste de editor do METAESTAT</value>
+							</column_data>
+							<column_data>
+								<column_id>6</column_id>
+								<value>editormetaestat</value>
 							</column_data>
 						</data>
 					</direct_test_data>
@@ -2189,6 +2219,16 @@
 								<value>1</value>
 							</column_data>
 						</data>
+						<data>
+							<column_data>
+								<column_id>9</column_id>
+								<value>18</value>
+							</column_data>
+							<column_data>
+								<column_id>10</column_id>
+								<value>5</value>
+							</column_data>
+						</data>
 					</direct_test_data>
 					<repeat_test_data>
 						<test_data_num>0</test_data_num>
@@ -2285,6 +2325,20 @@
 								<value>Podem editar dados geograficos</value>
 							</column_data>
 						</data>
+						<data>
+							<column_data>
+								<column_id>11</column_id>
+								<value>5</value>
+							</column_data>
+							<column_data>
+								<column_id>12</column_id>
+								<value>adminmetaestat</value>
+							</column_data>
+							<column_data>
+								<column_id>13</column_id>
+								<value>Podem administrar o sistema METAESTAT</value>
+							</column_data>
+						</data>
 					</direct_test_data>
 					<repeat_test_data>
 						<test_data_num>0</test_data_num>
@@ -2378,6 +2432,16 @@
 							<column_data>
 								<column_id>8</column_id>
 								<value>1</value>
+							</column_data>
+						</data>
+						<data>
+							<column_data>
+								<column_id>7</column_id>
+								<value>5</value>
+							</column_data>
+							<column_data>
+								<column_id>8</column_id>
+								<value>5</value>
 							</column_data>
 						</data>
 					</direct_test_data>
