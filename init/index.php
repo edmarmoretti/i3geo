@@ -72,14 +72,13 @@ h1{
 <div id="bandeiras" ></div>
 	<a href="remover.php" ><table class="r">
 		<tr>
-			<td><img src="../imagens/oxygen/22x22/dialog-close" /><br><script>document.write($trad(1,g_traducao_init));</script></script></a></td>
+			<td><img src="../imagens/oxygen/22x22/dialog-close" /><br><script>document.write($trad(1,g_traducao_init));</script></a></td>
 		</tr>
 	</table></a>
 
 	<a href="testei3geo" ><table class="r">
 		<tr>
-			<td><img src="../imagens/i3geo1.png" /><br>Servidor
-					de testes do i3Geo</a></td>
+			<td><img src="../imagens/i3geo1.png" /><br><script>document.write($trad(2,g_traducao_init));</script></a></td>
 		</tr>
 	</table></a>
 </body>

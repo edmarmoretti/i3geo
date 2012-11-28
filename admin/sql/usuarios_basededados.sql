@@ -1,5 +1,5 @@
 -- i3geousr_usuarios
-INSERT INTO i3geousr_usuarios (id_usuario, ativo, data_cadastro, email, login, nome_usuario, senha) VALUES ('1', '1', '', '', 'admin', 'administrador do i3geo', 'admin');
+INSERT INTO i3geousr_usuarios (id_usuario, ativo, data_cadastro, email, login, nome_usuario, senha) VALUES ('1', '0', '', '', 'admingeral', 'administrador do i3geo', 'admingeral');
 INSERT INTO i3geousr_usuarios (id_usuario, ativo, data_cadastro, email, login, nome_usuario, senha) VALUES ('2', '1', '', '', 'editor', 'teste de editor', 'editor');
 INSERT INTO i3geousr_usuarios (id_usuario, ativo, data_cadastro, email, login, nome_usuario, senha) VALUES ('3', '1', '', '', 'publicador', 'teste de publicador', 'publicador');
 INSERT INTO i3geousr_usuarios (id_usuario, ativo, data_cadastro, email, login, nome_usuario, senha) VALUES ('4', '1', '', '', 'editorgeo', 'teste de editor geo', 'editorgeo');

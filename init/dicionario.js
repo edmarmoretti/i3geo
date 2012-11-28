@@ -5,5 +5,12 @@ pt:"Remover essa tela de apresenta&ccedil;&atilde;o (depois voc&ecirc; poder&aac
 en:"",
 es:"",
 it:""
+}],
+2: [
+{
+pt:"Teste da instala&ccedil;&atilde;o",
+en:"",
+es:"",
+it:""
 }]
 };

@@ -136,7 +136,7 @@ if(!in_array($teste,5))
 
 $teste = lista("select * from ".$esquemaadmin."i3geousr_usuarios","id_usuario");
 if(!in_array($teste,1))
-	$dbhw->query("INSERT INTO ".$esquemaadmin."i3geousr_usuarios VALUES(1,'','',1,'admin','admin','admin')");
+	$dbhw->query("INSERT INTO ".$esquemaadmin."i3geousr_usuarios VALUES(1,'','',0,'admingeral','admingeral','admingeral')");
 
 $teste = lista("select * from ".$esquemaadmin."i3geousr_papelusuario","id_usuario","id_papel");
 if(!in_array($teste,"1-1"))
