@@ -60,7 +60,7 @@ include_once("admin/php/admin.php");
 include_once("admin/php/conexao.php");
 
 if($i3geomaster[0]["usuario"] == "admin" && $i3geomaster[0]["senha"] == "admin" ){
-	echo "<p style='color:red;font-size:14px'>ATEN&Ccedil;&Atilde;O!!! Sua seguran&ccedil;a esta vulner&aacute;vel: edite o arquivo i3geo/ms_configura.php e altere o login e senha da vari&aacute;vel i3geomaster";
+	echo "<p style='color:red;font-size:14px'>ATEN&Ccedil;&Atilde;O!!! Sua seguran&ccedil;a esta vulner&aacute;vel: edite o arquivo i3geo/ms_configura.php e altere o login e senha da vari&aacute;vel i3geomaster</p><br><br>";
 }
 
 if(empty($_POST["senha"]) || empty($_POST["usuario"])){
