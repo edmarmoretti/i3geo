@@ -100,5 +100,11 @@ es:""
 pt:"Guia de migra&ccedil;&atilde;o",
 en:"",
 es:""
+}],
+18: [
+{
+pt:"Integre mapas em outras aplica&ccedil;&otilde;es",
+en:"",
+es:""
 }]
 };

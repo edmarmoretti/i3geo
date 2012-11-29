@@ -99,6 +99,12 @@ h1{
 		</tr>
 	</table></a>
 
+	<a href="../mashups" ><table class="r" style="box-shadow: 0 8px 10px 0 orange;">
+		<tr>
+			<td><img src="../imagens/oxygen/22x22/openlayers.png" /><br><script>document.write($trad(18,g_traducao_init));</script></a></td>
+		</tr>
+	</table></a>
+
 	<a href="../interface/googlemaps.phtml" ><table class="r" style="box-shadow: 0 8px 10px 0 orange;">
 		<tr>
 			<td><img src="../imagens/oxygen/22x22/googlemaps.png" /><br><script>document.write($trad(6,g_traducao_init));</script></a></td>
