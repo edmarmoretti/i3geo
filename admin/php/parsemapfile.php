@@ -7,6 +7,10 @@ Converte um mapfile em um arquivo XML
 O padr&atilde;o XML utilizado &eacute; compat&iacute;vel com a estrutura de um projeto do softwrae GVSIG ate a vers&atilde;o 1.1
 Esse XML &eacute; utilizado pelo plugin do i3Geo para GVSIG, que permite visualizar a &aacute;rvore de temas do i3Geo dentro do GVSIG.
 
+No caso de layers que fazem acesso a banco de dados, a string de conexao e bloqueada por default
+
+Para desbloquear e necessario editar a variavel de configuracao existente nesse mesmo arquivo
+
 Licenca:
 
 GPL2
@@ -33,14 +37,17 @@ Arquivo:
 
 i3geo/admin/php/parsemapfile.php
 */
-//TODO permitir acesso apenas com login e senha
-//TODO verificar restricao de acesso ao tema
-
-//return;
 include("../../ms_configura.php");
 include_once("../../classesphp/funcoes_gerais.php");
 include_once("../../classesphp/carrega_ext.php");
 include_once("../../classesphp/pega_variaveis.php");
+//
+//essa variavel indica se a senha do banco e bloqueada ou nao caso
+//o tema seja do tipo postgis
+//por default e feito o bloqueio
+//
+$bloqueiaStringConexao = true;
+//
 error_reporting(0);
 if(!isset($forcawms)){$forcawms = "nao";}
 $objcontype[0] = "MS_INLINE";
@@ -70,6 +77,13 @@ $objlayertypes[8] = "MS_LAYER_CHART";
 
 $codigoLayer = $id;
 $mapfile = $locaplic."/temas/".$codigoLayer.".map";
+//remove temas restritos pelo sistema de controle de usuarios
+$indevidos = validaAcessoTemas($mapfile,false);
+if($indevidos == true){
+	echo "Encontrados layers restritos";
+	exit;
+}
+//
 $mapa = ms_newMapObj($mapfile);
 if(!isset($tipoparse) || $tipoparse=="")
 {mapfile();exit;}
@@ -267,7 +281,7 @@ function legendaSimples($layername)
 //
 function mapfile()
 {
-	global $codigoLayer,$mapfile,$mapa,$objcontype,$objlayertypes,$forcawms,$postgis_mapa;
+	global $codigoLayer,$mapfile,$mapa,$objcontype,$objlayertypes,$forcawms,$postgis_mapa,$bloqueiaStringConexao;
 	$layers = $mapa->getalllayernames();
 	$dados = array();
 	$xml = "<"."\x3F"."xml version='1.0' encoding='ISO-8859-1' "."\x3F".">";
@@ -355,11 +369,20 @@ function mapfile()
 				else
 				{$con = $postgis_mapa[$con];}
 			}
-			$xml .= "<user>".preg_replace('/.*user\s*=\s*([a-zA-Z0-9_.]+).*/i', '\1', $con)."</user>\n";
-			$xml .= "<password>".preg_replace('/.*password\s*=\s*([a-zA-Z0-9_.]+).*/i', '\1', $con)."</password>\n";
-			$xml .= "<dbname>".preg_replace('/.*dbname\s*=\s*([a-zA-Z0-9_.]+).*/i', '\1', $con)."</dbname>\n";
-			$xml .= "<host>".preg_replace('/.*host\s*=\s*([a-zA-Z0-9_.]+).*/i', '\1', $con)."</host>\n";
-			$xml .= "<port>".preg_replace('/.*port\s*=\s*([a-zA-Z0-9_.]+).*/i', '\1', $con)."</port>\n";
+			if($bloqueiaStringConexao == true){
+				$xml .= "<user>bloqueado (veja i3geo/admin/php/parsemapfile)</user>\n";
+				$xml .= "<password></password>\n";
+				$xml .= "<dbname></dbname>\n";
+				$xml .= "<host></host>\n";
+				$xml .= "<port></port>\n";
+			}
+			else{
+				$xml .= "<user>".preg_replace('/.*user\s*=\s*([a-zA-Z0-9_.]+).*/i', '\1', $con)."</user>\n";
+				$xml .= "<password>".preg_replace('/.*password\s*=\s*([a-zA-Z0-9_.]+).*/i', '\1', $con)."</password>\n";
+				$xml .= "<dbname>".preg_replace('/.*dbname\s*=\s*([a-zA-Z0-9_.]+).*/i', '\1', $con)."</dbname>\n";
+				$xml .= "<host>".preg_replace('/.*host\s*=\s*([a-zA-Z0-9_.]+).*/i', '\1', $con)."</host>\n";
+				$xml .= "<port>".preg_replace('/.*port\s*=\s*([a-zA-Z0-9_.]+).*/i', '\1', $con)."</port>\n";
+			}
 			$xml .= "</connection>\n";
 			$d = explode("(",$d);
 			$d = explode(")",$d[1]);
@@ -448,5 +471,4 @@ function pegaEstilos($xml,$classe)
 	}
 	return $xml;
 }
-
 ?>

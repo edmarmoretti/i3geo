@@ -1,53 +1,56 @@
 MAP
-
-
   FONTSET "../symbols/fontes.txt"
   SYMBOLSET "../symbols/simbolos.sym"
   LAYER
     CONNECTION ""
     DATA "c:\ms4w\apache\htdocs\i3geo\aplicmap\dados\sc22\povoado.shp"
     METADATA
-      "temporizador" "5"
-	  "cache"	""
+      "METAESTAT_ID_MEDIDA_VARIAVEL"	""
       "ltempoitemimagem"	""
-      "CLASSE"	"SIM"
+      "cache"	""
       "ltempoitemdescricao"	""
-      "palletestep"	""
+      "CLASSE"	"SIM"
       "ltempoiteminicio"	""
-      "permitekmz"	"sim"
+      "palletestep"	""
       "ltempoitemtip"	""
-      "description_template"	""
-      "ltempoitemtitulo"	""
+      "permitekmz"	"sim"
+      "temporizador"	"5"
       "iconetema"	""
+      "ltempoitemtitulo"	""
+      "description_template"	""
       "ltempoitemlink"	""
+      "METAESTAT_CODIGO_TIPO_REGIAO"	""
       "palletefile"	""
-      "permitedownload"	"sim"
       "ltempoformatodata"	""
-      "ltempoitemicone"	""
+      "permitedownload"	"sim"
       "permitecomentario"	"NAO"
+      "ltempoitemicone"	""
+      "metaestat"	""
       "download"	"SIM"
+      "arquivokmz"	"c:\ms4w\apache\htdocs\i3geo\aplicmap\dados\povoado.kmz"
       "arquivodownload"	""
-	  "arquivokmz" "c:\ms4w\apache\htdocs\i3geo\aplicmap\dados\povoado.kmz"
-      "permitekml"	"sim"
       "permiteogc"	""
+      "permitekml"	"sim"
       "TEMA"	"Povoado"
       "editorsql"	""
-      "ltempoitemfim"	""
       "legendaimg"	"http://www.rockingsmileys.com/wp-content/uploads/2011/03/Happy_eyebrowes_smileys-150x150.png"
-    END
+      "ltempoitemfim"	""
+    END # METADATA
     NAME "povoado"
     STATUS OFF
+    TILEITEM "location"
     TYPE POINT
     UNITS METERS
     CLASS
       NAME ""
       STYLE
-        ANGLE 360
         COLOR 0 0 0
+        OFFSET 0 0
         SIZE 5
         SYMBOL "ponto"
-        WIDTH 1
-      END
-    END
-  END
-END
+      END # STYLE
+    END # CLASS
+  END # LAYER
+
+END # MAP
+

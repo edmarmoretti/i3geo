@@ -2451,18 +2451,33 @@ function retornaShapesSelecionados($objLayer,$map_file,$objMapa){
 Function: validaAcessoTemas
 
 Remocao dos layers com restricoes de acesso registradas no sistema de controle de usuarios
+
+Remove os layers indevidos (considerando o usuario logado) de um mapfile com opção de salvar ou nao o arquivo apos a remocao
+
+Parametros:
+
+$map_file - nome do arquivo mapfile, podendo ser um dos que existem em i3geo/temas desde que com o nome completo
+
+$salva - salva o mapfile com os layers removidos ou nao
+
+Retorno: boolean indicando se o mapfile contem layers indevidos
 */
-function validaAcessoTemas($map_file){
+function validaAcessoTemas($map_file,$salva = true){
 	$indevidos = listaLayersIndevidos($map_file);
+	$existeIndevidos = false;
 	if(count($indevidos) > 0){
+		$existeIndevidos = true;
 		$m = ms_newMapObj($map_file);
 		foreach($indevidos as $i){
 			$l = $m->getlayerbyname($i);
 			$l->set("status",MS_DELETE);
 		}
-		$m->save($map_file);
+		//salva o mapfile
+		if($salva == true){
+			$m->save($map_file);
+		}
 	}
-	return;
+	return $existeIndevidos;
 }
 /*
 Function: listaTemasRestritos
@@ -2500,6 +2515,10 @@ function listaLayersIndevidos($map_file){
 		for ($i=0;$i < $c;++$i)	{
 			$layer = $m->getlayer($i);
 			$meta = $layer->getmetadata("arquivotemaoriginal");
+			//pode ser que o metadata nao esteja definido ainda
+			if($meta == ""){
+				$meta = str_replace(".map","",basename($map_file));
+			}
 			if($meta != ""){
 				$t = $restritos[$meta];
 				if($t && !in_array($t,$gruposusr)){
