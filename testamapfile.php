@@ -152,11 +152,11 @@ function verifica($map,$solegenda){
 		if (file_exists('temas/'.$map.'.gvp'))
 		{$tema = 'temas/'.$map.".gvp";}
 	}
-	if(($tipo == "") || ($tipo == "todos")){
-		echo "<hr><br><br><span style='color:red' ><b>Testando: $tema </span><pre></b>";
-	}
 	if(!file_exists($tema)){
 		$tema = $locaplic."/".$tema;
+	}
+	if(($tipo == "") || ($tipo == "todos")){
+		echo "<hr><br><br><span style='color:red' ><b>Testando: $tema </span><pre></b>";
 	}
 	if(!file_exists($tema)){
 		echo "Arquivo ".$map." n&atilde;o encontrado.";
@@ -234,7 +234,16 @@ function verifica($map,$solegenda){
 			}
 			else{
 				if(@ms_newMapObj($locaplic."/".$tema)){
-					$nmapa = ms_newMapObj($locaplic."/".$tema);
+					if(!function_exists("validaAcessoTemas")){
+						include($locaplic."/classesphp/funcoes_gerais.php");
+					}
+					if(validaAcessoTemas($locaplic."/".$tema,false)  == false){
+						$nmapa = ms_newMapObj($locaplic."/".$tema);
+					}
+					else{
+						echo "tema restrito <br>";
+						exit;
+					}
 				}
 				else{
 					echo "erro no arquivo $map <br>";
@@ -250,7 +259,7 @@ function verifica($map,$solegenda){
 			$numlayers = $nmapa->numlayers;
 			$dados = "";
 			for ($i=0;$i < $numlayers;$i++){
-				$layern = $mapa->getlayer($i);
+				$layern = $nmapa->getlayer($i);
 				$layern->set("status",MS_DEFAULT);
 				if (!empty($postgis_mapa)){
 					if ($layern->connectiontype == MS_POSTGIS){
