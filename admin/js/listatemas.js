@@ -1,4 +1,3 @@
-//TODO incluir upload de arquivo gvp
 function editorTemaMapfile(mapfile)
 {
 	core_pegaDados("buscando dados...","../php/menutemas.php?funcao=pegaTemaPorMapfile&codigo_tema="+mapfile,"montaEditorTema");

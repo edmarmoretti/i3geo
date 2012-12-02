@@ -34,7 +34,6 @@ Free Software Foundation, Inc., no endereco
 if(typeof(i3GEOF) === 'undefined'){
 	var i3GEOF = {};
 }
-//TODO traduzir
 /*
  Classe: i3GEOF.editorlimites
 
@@ -632,7 +631,10 @@ i3GEOF.editorlimites = {
 			YAHOO.util.Event.addListener(janela[0].close, "click", i3GEOF.editorlimites.mudaicone);
 		},
 		gravaDados: function(comwkt){
-			//TODO verificar login ao salvar
+			if(i3GEO.login.verificaCookieLogin() === false){
+				i3GEO.janela.tempoMsg("Voc&ecirc; precisa fazer login para usar essa op&ccedil;&atilde;o");
+				return;
+			}
 			if(!window.confirm("Grava mesmo os dados?")){
 				return;
 			}
@@ -662,7 +664,10 @@ i3GEOF.editorlimites = {
 			cpJSON.call(p,"foo",temp,"&codigo_tipo_regiao="+codigo_tipo_regiao+"&identificadornovo="+identificadornovo+"&identificador="+identificador+"&nome="+nome+"&wkt="+wkt);
 		},
 		excluiPoligono: function(){
-			//TODO verificar login
+			if(i3GEO.login.verificaCookieLogin() === false){
+				i3GEO.janela.tempoMsg("Voc&ecirc; precisa fazer login para usar essa op&ccedil;&atilde;o");
+				return;
+			}
 			if(!window.confirm("Exclui mesmo o poligono?")){
 				return;
 			}
@@ -782,6 +787,10 @@ i3GEOF.editorlimites = {
 		},
 		//TODO redesenhar as camadas que sofrerem alterações em função do salvar ou excluir
 		excluir: function(id){
+			if(i3GEO.login.verificaCookieLogin() === false){
+				i3GEO.janela.tempoMsg("Voc&ecirc; precisa fazer login para usar essa op&ccedil;&atilde;o");
+				return;
+			}
 			var p = i3GEO.configura.locaplic+"/admin/php/metaestat.php?funcao=excluiAtributosMedidaVariavel",
 				codigo_tipo_regiao = $i("i3geoCartoRegioesEditaveis").value,
 				id_medida_variavel = $i("editarAtributosComboMedidas").value,

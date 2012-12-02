@@ -33,22 +33,8 @@ Arquivo:
 
 i3geo/admin/php/xml.php
 */
-/**
- * TODO verificar login para mostrar ou não o q não estiver publicado
- */
 if(!function_exists("verificaEditores")){
 	include_once(__DIR__."/../../classesphp/funcoes_gerais.php");
-	/*
-	if(isset($locaplic))
-	{include_once($locaplic."/classesphp/funcoes_gerais.php");}
-	else
-	{
-		if(file_exists("../../classesphp/funcoes_gerais.php"))
-		{
-			include_once("../../classesphp/funcoes_gerais.php");
-		}
-	}
-	*/
 }
 //
 //processa a vari&aacute;vel $esquemaadmin definida em ms_configura.php

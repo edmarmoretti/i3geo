@@ -1659,14 +1659,13 @@ Identifica elementos no mapa retornando apenas o valor de um &uacute;nico item.
 <Atributos->identificaQBP>
 */
 	case "IDENTIFICAUNICO":
-		//TODO remover o identificaQBP
 		if (!isset($resolucao)){$resolucao = 5;}
 		include_once("classe_atributos.php");
 		if(!isset($ext))
 		{$ext = "";}
 		$m = new Atributos($map_file,$tema,"",$ext);
 		$xy = explode(",",$xy);
-		$retorno = $m->identificaQBP($tema,$xy[0],$xy[1],$map_file,$resolucao,$item,$tiporetorno="unico");
+		$retorno = $m->identificaQBP3($tema,$xy[0],$xy[1],$map_file,$resolucao,$item,$tiporetorno="unico");
 	break;
 /*
 Valor: LISTATEXTO

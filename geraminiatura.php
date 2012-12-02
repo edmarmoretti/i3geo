@@ -61,6 +61,7 @@ Parametro:
 
 tipo - tipo de retorno mini|grande|todos
 */
+
 //clearstatcache();
 error_reporting(E_ALL);
 //set_time_limit(300);
@@ -78,13 +79,14 @@ if (!function_exists('ms_GetVersion'))
 	else
 	{dl('php_mapscript.so');}
 }
-//para o caso de ser feito um include desse programa
-$locaplic = __DIR__;
+/*
 include($locaplic."/ms_configura.php");
 if(!function_exists("versao"))
 {include($locaplic."/classesphp/funcoes_gerais.php");}
 require_once($locaplic."/classesphp/pega_variaveis.php");
 include_once ($locaplic."/classesphp/carrega_ext.php");
+*/
+include_once (__DIR__."/admin/php/admin.php");
 $versao = versao();
 $versao = $versao["principal"];
 //
@@ -105,6 +107,19 @@ if($tipo == "mini" || $tipo == "todos" || $tipo == "grande" || $tipo == "")
 		echo "<br><a href='geraminiatura.php?tipo=grande' >Gerar apenas as grandes</a>";
 		echo "</div></body></html>";
 		exit;
+	}
+	//verifica login
+	if(empty($_POST["senha"]) || empty($_POST["usuario"])){
+		formularioLoginMaster("geraminiatura.php");
+		echo "<input type=hidden name=tipo value='$tipo'  />";
+		exit;
+	}
+	else{
+		$continua = verificaMaster($_POST["usuario"],$_POST["senha"],$i3geomaster);
+		if($continua == false){
+			echo "Usu&aacute;rio n&atilde;o registrado em i3geo/ms_configura.php na vari&aacute;vel i3geomaster";
+			exit;
+		}
 	}
 	error_reporting(E_ALL);
 	$arqs = listaArquivos("temas");

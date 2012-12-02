@@ -35,7 +35,6 @@ if(typeof(i3GEOF) === 'undefined'){
 
  Gerencia os componentes do m&oacute;dulo de gera&ccedil;&atilde;o de cartogramas estat&iacute;sticos
  */
-//TODO traduzir
 i3GEOF.metaestat = {
 	/**
 	 * Tipo de interface utilizada para construcao dos parametros

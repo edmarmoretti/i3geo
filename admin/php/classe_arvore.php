@@ -863,22 +863,22 @@ class Arvore
 	}
 	/**
 	 *
-	 * TODO corrigir acentuacao
+	 * TODO sempre verificar a acentuacao das palavras nessa funcao
 	 */
 	function removeAcentos($s)
 	{
-		$s = ereg_replace("[&aacute;à&acirc;&atilde;]","a",$s);
-		$s = ereg_replace("[&Aacute;À&Acirc;&Atilde;]","A",$s);
-		$s = ereg_replace("[&eacute;è&ecirc;]","e",$s);
-		$s = ereg_replace("[&iacute;]","i",$s);
-		$s = ereg_replace("[&Iacute;]","I",$s);
-		$s = ereg_replace("[&Eacute;È&Ecirc;]","E",$s);
-		$s = ereg_replace("[óò&ocirc;&otilde;]","o",$s);
-		$s = ereg_replace("[ÓÒ&Ocirc;&Otilde;]","O",$s);
-		$s = ereg_replace("[&uacute;ùû]","u",$s);
-		$s = ereg_replace("[&Uacute;ÙÛ]","U",$s);
-		$s = str_replace("&ccedil;","c",$s);
-		$s = str_replace("&Ccedil;","C",$s);
+		$s = ereg_replace("[áàâã]","a",$s);
+		$s = ereg_replace("[ÁÀÂÃ]","A",$s);
+		$s = ereg_replace("[éèê]","e",$s);
+		$s = ereg_replace("[í]","i",$s);
+		$s = ereg_replace("[Í]","I",$s);
+		$s = ereg_replace("[ÊÈÊ]","E",$s);
+		$s = ereg_replace("[óòôõ]","o",$s);
+		$s = ereg_replace("[ÓÒÔÕ]","O",$s);
+		$s = ereg_replace("[úùû]","u",$s);
+		$s = ereg_replace("[ÚÙÛ]","U",$s);
+		$s = str_replace("ç","c",$s);
+		$s = str_replace("Ç","C",$s);
 		//$str = htmlentities($s);
 		$str = preg_replace("/(&)([a-z])([a-z]+;)/i", '$2', $s);
 		$str = preg_replace("/[^A-Z0-9]/i", ' ', $str);

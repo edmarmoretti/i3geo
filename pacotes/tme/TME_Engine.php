@@ -188,12 +188,11 @@ class ThematicMap
              . "    <open>1</open>" . PHP_EOL
              . "    <Snippet maxLines='1'>$this->mapSource</Snippet>" . PHP_EOL
              . "    <description><![CDATA[ $this->mapDescription <p>$this->mapSource</p>$this->engine ]]></description>" . PHP_EOL;
-//TODO logomarca?
         // Add style for indicator balloon
         $kmlStyles = "    <Style id='balloonStyle'>" . PHP_EOL
                    . "      <BalloonStyle>" . PHP_EOL
                    . "        <text><![CDATA[" . PHP_EOL
-                   . "          <a href='http://thematicmapping.org'><img src='http://localhost/ms_tmp/balloonlogo.png'></a>" . PHP_EOL
+                   . "          <a href='http://thematicmapping.org'><img src='http://thematicmapping.org/engine/files/balloonlogo.png'></a>" . PHP_EOL
                    . "          <p><b><font size='+2'>$[name]</font></b></p>" . PHP_EOL
                    . "          <p>$[description]</p>" . PHP_EOL
                    . "        ]]></text>" . PHP_EOL
@@ -345,10 +344,9 @@ class ThematicMap
                 } // switch symbol
         } // switch type
 
-//TODO corrigir logo
         $kmlStyles .= "      <BalloonStyle>" . PHP_EOL
                     . "        <text><![CDATA[" . PHP_EOL
-                    . "          <a href='http://thematicmapping.org'><img src='http://localhost/ms_tmp/balloonlogo.png'></a>" . PHP_EOL
+                    . "          <a href='http://thematicmapping.org'><img src='http://thematicmapping.org/engine/files/balloonlogo.png'></a>" . PHP_EOL
                     . "          <p><b><font size='+2'>$[name]</font></b></p>" . PHP_EOL
                     . "          <p>$this->mapTitle: $[Snippet]</p>" . PHP_EOL
                     . "          <p>$this->mapDescription</p>" . PHP_EOL

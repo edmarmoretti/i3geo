@@ -56,7 +56,6 @@ i3GEOadmin.uploaddados = {
 			return ins;
 		},
 		fimsubmit: function(){
-			//TODO escolher a tabela
 			core_carregando("desativa");
 			var ins = "";
 			ins += "<p>Abaixo voc&ecirc; deve definir quais colunas do arquivo que foi enviado corresponde &agrave;s colunas do banco de dados de destino</p>" +

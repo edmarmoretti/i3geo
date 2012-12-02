@@ -60,7 +60,7 @@ include_once("admin/php/admin.php");
 include_once("admin/php/conexao.php");
 
 if($i3geomaster[0]["usuario"] == "admin" && $i3geomaster[0]["senha"] == "admin" ){
-	echo "<p style='font-size:14px;color:red'>ATEN&Ccedil;&Atilde;O!!! Essa instala&ccedil;&atilde;o est&aacute; vulner&aacute;vel: edite o arquivo i3geo/ms_configura.php e altere o login e senha da vari&aacute;vel i3geomaster";
+	echo "<p style='font-size:14px;color:red'>ATEN&Ccedil;&Atilde;O!!! Essa instala&ccedil;&atilde;o est&aacute; vulner&aacute;vel: edite o arquivo i3geo/ms_configura.php e altere o login e senha da vari&aacute;vel i3geomaster</p>";
 }
 
 if(empty($_POST["senha"]) || empty($_POST["usuario"])){
@@ -141,7 +141,7 @@ echo "<pre>";
 echo "verificando banco de dados de administra&ccedil;&atilde;o...\n";
 /**
  *
- * TODO verificar tabelas antes de fechar versao
+ * TODO sempre verificar tabelas antes de fechar versao
  */
 $tabelas = array(
 	"i3geoadmin_sistemasf"=>"abrir_funcao,h_funcao,id_funcao,id_sistema,nome_funcao,perfil_funcao,w_funcao",
@@ -164,11 +164,27 @@ $tabelas = array(
 	"i3geoadmin_menus"=>"it,es,en,publicado_menu,perfil_menu,aberto,desc_menu,id_menu,nome_menu",
 	"i3geoadmin_comentarios"=>"comentario,data,openidnome,openidimagem,openidservico,openidusuario,openidurl,id_tema",
 	"i3geoadmin_acessostema"=>"codigo_tema,nacessos,dia,mes,ano",
-	"i3geoadmin_usuarios"=>"ativo,data_cadastro,email,id_usuario,login,nome_usuario,senha",
-	"i3geoadmin_papeis"=> "descricao,id_papel,nome",
-	"i3geoadmin_papelusuario"=> "id_papel,id_usuario",
-	"i3geoadmin_operacoes" => "id_operacao,codigo,descricao",
-	"i3geoadmin_operacoespapeis" => "id_operacao,id_papel"
+	"i3geousr_usuarios"=>"ativo,data_cadastro,email,id_usuario,login,nome_usuario,senha",
+	"i3geousr_papeis"=> "descricao,id_papel,nome",
+	"i3geousr_papelusuario"=> "id_papel,id_usuario",
+	"i3geousr_operacoes" => "id_operacao,codigo,descricao",
+	"i3geousr_operacoespapeis" => "id_operacao,id_papel",
+	"i3geousr_grupos" => "descricao,nome,id_grupo",
+	"i3geousr_grupotema" => "id_tema,id_grupo",
+	"i3geousr_grupousuario" => "id_grupo,id_usuario",
+	"i3geoestat_conexao" => "codigo_estat_conexao,bancodedados,host,porta,usuario,senha",
+	"i3geoestat_tipo_regiao" => "codigo_tipo_regiao,nome_tipo_regiao,descricao_tipo_regiao,codigo_estat_conexao,esquemadb,tabela,colunageo,data,identificador,colunanomeregiao,srid,colunacentroide,colunasvisiveis,apelidos",
+	"i3geoestat_agregaregiao" => "id_agregaregiao,codigo_tipo_regiao,codigo_tipo_regiao_pai,colunaligacao_regiaopai",
+	"i3geoestat_tipo_periodo" => "codigo_tipo_periodo,nome,descricao",
+	"i3geoestat_unidade_medida" => "codigo_unidade_medida,nome,sigla,permitesoma,permitemedia",
+	"i3geoestat_variavel" => "codigo_variavel,nome,descricao",
+	"i3geoestat_medida_variavel" => "id_medida_variavel,codigo_unidade_medida,codigo_tipo_periodo,codigo_variavel,codigo_tipo_regiao,codigo_estat_conexao,esquemadb,tabela,colunavalor,colunaidgeo,filtro,nomemedida,colunaidunico",
+	"i3geoestat_classificacao" => "id_classificacao,nome,id_medida_variavel,observacao",
+	"i3geoestat_classes" => "id_classe,expressao,titulo,vermelho,verde,azul,id_classificacao,tamanho,simbolo,overmelho,overde,oazul,otamanho",
+	"i3geoestat_fonteinfo" => "id_fonteinfo,titulo,link",
+	"i3geoestat_fonteinfo_medida" => "id_medida_variavel,id_fonteinfo",
+	"i3geoestat_medida_variavel_link" => "link,id_medida_variavel,nome,id_link",
+	"i3geoestat_parametro_medida" => "id_parametro_medida,coluna,nome,descricao,id_pai,id_medida_variavel"
 );
 include_once("admin/php/conexao.php");
 if(!empty($esquemaadmin)){

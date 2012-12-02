@@ -181,7 +181,7 @@ $googleApiKey = "ABQIAAAAKguAlmd-hSDulF2T_tfWMxT3OAK09d_ZSDyC36iPGlww-4j-9xSrR2Z
 if (strtoupper(substr(PHP_OS, 0, 3) == 'WIN'))
 {
 	/*
-	Variable: navegadoresLocais
+	Variable: navegadoresLocais (DEPRECIADO)
 
 	Ip dos usuarios que podem navegar no servidor para acessar arquivos de dados geogr&aacute;ficos.
 
@@ -202,19 +202,7 @@ if (strtoupper(substr(PHP_OS, 0, 3) == 'WIN'))
 	Tipo:
 	{array}
 	*/
-	/**
-	 *
-	 * TODO bloquear essa variavel
-	 */
-	$navegadoresLocais = array(
-							array(
-							"ip"=>"127.0.0.1",
-							"drives"=>array(
-										array("caminho"=>"c:/","nome"=>"c"),
-										array("caminho"=>"d:/","nome"=>"d")
-										)
-							)
-						);
+	$navegadoresLocais = "depreciado";
 
 	/*
 	Variable: i3geomaster
@@ -222,12 +210,6 @@ if (strtoupper(substr(PHP_OS, 0, 3) == 'WIN'))
 	Usu&aacute;rio e senha que podem realizar opera&ccedil;&otilde;es de administra&ccedil;&atilde;o inicial do i3Geo, como a cria&ccedil;&atilde;o do banco de dados de administra&ccedil;&atilde;o ou opera&ccedil;&otilde;es cr&iacute;ticas do sistema
 
 	*/
-	/**
-	 *
-	 * TODO Documentar no manual do sistema de administra&ccedil;&atilde;o
-	 * TODO compatibilizar essa senha com phpliteadmin
-	 * TODO alterar antes de fechar versao final
-	 */
 	$i3geomaster = array(
 			array("usuario"=>"admin", "senha"=>"admin")
 	);
@@ -289,13 +271,12 @@ if (strtoupper(substr(PHP_OS, 0, 3) == 'WIN'))
 	{string}
 	*/
 	$R_path = "c:/r/win/bin/R.exe";
-	/**
-	 * TODO listar aqui os nomes das bibliotecas
-	 **/
 	/*
 	Variable: R_pathlib
 
 	Onde ficam as bibliotecas adicionais necess&aacute;rias ao funcionamento do R
+
+	Instale no R as bibliotecas SPATSTAT e DELDIR. No Ubuntu, experimente usar o software RKWard que possui um instalador de bibliotecas
 
 	Tipo:
 	{string}
@@ -402,10 +383,6 @@ if (strtoupper(substr(PHP_OS, 0, 3) == 'WIN'))
 	Tipo:
 	{string}
 	*/
-	/**
-	 *
-	 * TODO Atualizar a documenta&ccedil;&atilde;o sobre isso
-	 */
 	$esquemaadmin = "";
 	/*
 	 Variable: interfacePadrao
@@ -475,10 +452,7 @@ else //se for linux
 							)
 						);
 	$locmapserv = "/cgi-bin/mapserv";
-	$R_path = "R";//se vc n&atilde;o instalou o R no seu servidor, tente o endere&ccedil;o $R_path = $locaplic."/pacotes/r/linux/r";
-/**
- * TODO verificar qual o endereco padrao no Ubuntu
- */
+	$R_path = "R";
 	$R_libpath = "";
 	$postgis_mapa = array(
 		"teste"=>"user=postgres password=postgres dbname=postgis host=localhost port=5432 options='-c client_encoding=LATIN1'",

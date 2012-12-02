@@ -1,6 +1,6 @@
 <?php
 /*
-Title: ms_configura.php
+Title: ms_configura.php (DEPRECIADO)
 
 Fun&ccedil;&otilde;es utilizadas pelo editor do arquivo ms_configura
 
@@ -40,11 +40,8 @@ Cada opera&ccedil;&atilde;o possu&iacute; seus próprios par&acirc;metros, que de
 
 */
 include_once("admin.php");
-/**
- * TODO depreciar
- */
 //faz a busca da fun&ccedil;&atilde;o que deve ser executada
-switch (strtoupper($funcao))
+switch (strtoupper($funcaox))
 {
 	/*
 	Note:

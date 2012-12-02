@@ -41,7 +41,26 @@ O par&acirc;metro principal &eacute; "funcao", que define qual opera&ccedil;&ati
 Cada opera&ccedil;&atilde;o possu&iacute; seus proprios par&acirc;metros, que devem ser enviados tamb&eacute;m na requisi&ccedil;&atilde;o da opera&ccedil;&atilde;o.
 
 */
-include_once("admin.php");
+include_once(__DIR__."/admin.php");
+include_once(__DIR__."/login.php");
+$funcoesEdicao = array(
+		"ALTERAMENUS",
+		"ALTERAGRUPOS",
+		"ALTERASUBGRUPOS",
+		"ATUALIZAMINIATURA",
+		"ALTERATEMAS",
+		"ALTERATAGS",
+		"ALTERAPERFIS",
+		"EXCLUIRREGISTRO"
+
+);
+if(in_array(strtoupper($funcao),$funcoesEdicao)){
+	if(verificaOperacaoSessao("admin/html/arvore") == false){
+		retornaJSON("Vc nao pode realizar essa operacao.");exit;
+	}
+}
+
+
 if(!isset($funcao))
 {
 	$funcao = "";
@@ -55,9 +74,6 @@ if($idioma == "")
 	$idioma = "pt";
 }
 //faz a busca da fun&ccedil;&atilde;o que deve ser executada
-/**
- * TODO incluir verificacao de login
- */
 switch (strtoupper($funcao))
 {
 	/*
@@ -1067,7 +1083,6 @@ function alteraSubGrupos()
 /*
  Registra um mapfile na tabela de temas
 */
-//TODO testar isso pq acrescentei tipoa_tema
 function registraTema()
 {
 	global $codigo_tema,$esquemaadmin;

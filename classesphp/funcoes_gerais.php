@@ -2313,7 +2313,7 @@ function carregaquery2($mapfile,&$objlayer,&$objmapa)
 	return "nao";
 }
 /*
-Function: verificaEditores
+Function: verificaEditores (DEPRECIADO)
 
 Verifica se o usu&aacute;rio atual est&aacute; cadastrado como editor
 
@@ -2325,9 +2325,9 @@ Return:
 
 {string} - sim|nao
 */
-//TODO remover
 function verificaEditores($editores)
 {
+	return;
 	if (strtolower($_SERVER['HTTP_HOST']) == "localhost")
 	{return "sim";}
 	$editor = "nao";

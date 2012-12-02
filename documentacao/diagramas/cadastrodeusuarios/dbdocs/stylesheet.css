@@ -1,0 +1,59 @@
+/* javadoc �X�^�C���V�[�g   */
+
+/* �F��t�H���g�Ȃǂ̃X�^�C�������̃f�t�H���g�l���㏑������ɂ́A�����Œ�`���܂��B   */
+
+/* �y�[�W�̃o�b�N�O���E���h�̐F   */
+body { background-color: #FFFFFF }
+
+/* �e�[�u���̐F   */
+.TableHeadingColor     { background: #CCCCFF } /* �Z�����F   */
+.TableSubHeadingColor  { background: #EEEEFF } /* �������F   */
+.TableRowColor         { background: #FFFFFF } /* ��   */
+
+/* �����̃t���[���̃��X�g�Ɏg�p����t�H���g   */
+.FrameTitleFont   { font-size: 10pts; font-family: Helvetica, Arial, san-serif }
+.FrameHeadingFont { font-size: 1.2em; font-family: Helvetica, Arial, san-serif; font-weight : bold; }
+.FrameItemFont    { font-size: 10pts; font-family: Helvetica, Arial, san-serif }
+
+/* �t���[���ɂ�����A��菬�����A�Z���t�Ȃ��t�H���g�̗�   */
+/* .FrameItemFont  { font-size: 10pt; font-family: Helvetica, Arial, sans-serif } */
+
+/* �i�r�Q�[�V�����o�[�̃t�H���g�ƐF   */
+.NavBarCell1    {
+	background-color:#EEEEFF;
+	font-family: Arial, Helvetica, sans-serif; color:#000000;
+	font-weight : bold;
+}/* �������F   */
+
+.NavBarCell1Rev {
+	background-color:#00008B;
+	font-family: Arial, Helvetica, sans-serif; color:#FFFFFF;
+	font-weight : bold;
+}/* �Z����   */
+
+.NavBarCell2    {
+	background-color:#FFFFFF;
+	font-family: Arial, Helvetica, sans-serif; background-color:#FFFFFF;
+	font-size : 0.6em;
+	font-weight : bold;
+	padding-left : 0.5em;
+}
+
+.NavBarCell3    { font-family: Arial, Helvetica, sans-serif; background-color:#FFFFFF;}
+
+.AttributeTable {
+	width : 100%;
+}
+
+.AttributeTable TR.TableHeadingColor {
+	font-size : 1.6em;
+	font-wight : bold;
+	text-align : left;
+}
+
+.AttributeTable TH {
+}
+
+.AttributeTable TD {
+}
+

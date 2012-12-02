@@ -62,9 +62,6 @@ error_reporting(0);
 //
 //pega as variaveis passadas com get ou post
 //
-/**
- * TODO documentar o sistema de login
- */
 include_once(__DIR__."/../../classesphp/pega_variaveis.php");
 include_once(__DIR__."/admin.php");
 session_write_close();
@@ -146,23 +143,42 @@ switch (strtoupper($funcao))
 		}
 		cpjson($retorno);
 	break;
+	/*
+	Valor: RECUPERARSENHA
+
+	Cria uma nova senha para um usuario enviando-a por e-mailo
+
+	Paremeter:
+
+	$usuario
+	*/
 	case "RECUPERARSENHA":
 		$retorno = false;
 		if(!empty($usuario)){
-			$retorno = recuperarSenha();
+			$retorno = recuperarSenha($usuario);
 		}
 		cpjson($retorno);
 	break;
+	/*
+	Valor: ALTERARSENHA
+
+	Altera a senha de um usuario
+
+	Paremeter:
+
+	$usuario
+
+	$novasenha
+	*/
 	case "ALTERARSENHA":
 		$retorno = false;
 		if(!empty($usuario)){
-			$retorno = alterarSenha();
+			$retorno = alterarSenha($usuario,$novaSenha);
 		}
 		cpjson($retorno);
-		break;
+	break;
 }
-function alterarSenha(){
-	global $usuario,$novaSenha;
+function alterarSenha($usuario,$novaSenha){
 	include(__DIR__."/conexao.php");
 	$dados = pegaDados("select * from ".$esquemaadmin."i3geousr_usuarios where senha = '".md5($_SESSION["senha"])."' and login = '$usuario' and ativo = 1",$locaplic);
 	if(count($dados) > 0){
@@ -178,8 +194,7 @@ function alterarSenha(){
 		return false;
 	}
 }
-function recuperarSenha(){
-	global $usuario,$novaSenha;
+function recuperarSenha($usuario){
 	include(__DIR__."/conexao.php");
 	$novaSenha = rand(9000,1000000);
 	$dados = pegaDados("select * from ".$esquemaadmin."i3geousr_usuarios where login = '$usuario' and ativo = 1",$locaplic);
@@ -195,6 +210,9 @@ function recuperarSenha(){
 		return false;
 	}
 }
+//
+//verifica se um determinado papel esta registrado na variavel SESSION
+//
 function verificaPapelSessao($id_papel){
 	$resultado = false;
 	//verifica se e administrador
@@ -207,6 +225,9 @@ function verificaPapelSessao($id_papel){
 	}
 	return $resultado;
 }
+//
+//verifica se uma determinada operacao esta registrada na variavel SESSION
+//
 function verificaOperacaoSessao($operacao){
 	$resultado = false;
 	//avalidacao consulta $_SESSION, que e definida no login
@@ -223,6 +244,9 @@ function verificaOperacaoSessao($operacao){
 	}
 	return $resultado;
 }
+//
+//verifica se o usuario esta logado
+//
 function validaSessao(){
 	$fingerprint = 'I3GEOLOGIN' . $_SERVER['HTTP_USER_AGENT'];
 	if($_SESSION['fingerprint'] != md5($fingerprint . session_id())){
@@ -233,6 +257,10 @@ function validaSessao(){
 	}
 	return true;
 }
+//
+//faz a autenticacao de um usuario baseado no login e senha
+//registra as operacoes, papeis e grupos do usuario na SESSION
+//
 function autenticaUsuario($usuario,$senha){
 	include(__DIR__."/conexao.php");
 	$senhamd5 = md5($senha);
@@ -282,6 +310,9 @@ function autenticaUsuario($usuario,$senha){
 		}
 	}
 }
+//
+//faz o logout do usuario destruindo os cookies e session
+//
 function logoutUsuario(){
 	$_COOKIE = array();
 	$_SESSION = array();

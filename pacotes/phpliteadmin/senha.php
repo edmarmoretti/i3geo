@@ -1,3 +1,3 @@
 <?php
-$password = "admin";
+$password = $i3geomaster[0]["senha"];
 ?>

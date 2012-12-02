@@ -94,7 +94,6 @@ i3GEO.coordenadas = {
 
 	Para desativar a apresenta&ccedil;&atilde;o de uma proje&ccedil;&atilde;o altere o valor de "ativo".
 	*/
-	//TODO incluir documentacao sobre como alterar isso
 	config: {
 		"geoProj":{
 			idhtml: "localizarxy",

@@ -44,9 +44,9 @@
 				Veja tamb&eacute;m:<br><br>
 				<a href="../documentacao/diagramas/mer_banco_de_dados_de_administracao.png"
 					target="_new">diagrama MER </a>do banco de dados de administra&ccedil;&atilde;o.<br>
-				<a href="../documentacao/diagramas/cadastrodeusuarios.png"
+				<a href="../documentacao/diagramas/cadastrodeusuarios/dbdocs/index.html"
 					target="_new">diagrama MER </a>do banco de dados de usu&aacute;rios.<br>
-				<a href="../documentacao/diagramas/metaestat.png"
+				<a href="../documentacao/diagramas/metaestat/dbdocs/index.html"
 					target="_new">diagrama MER </a>do banco de dados do sistema de metadados estat&iacute;sticos.<br>
 			</p>
 			<fieldset>
@@ -117,11 +117,6 @@
 							<td><div class=aplicar></div></td>
 							<td>Testar a instala&ccedil;&atilde;o do i3geo
 								(testainstal.php)</td>
-						</tr>
-						<tr onclick="abre('html/mapfiles.html')">
-							<td><div class=aplicar></div></td>
-							<td>Editar os arquivos mapfile b&aacute;sicos utilizados na
-								inicializa&ccedil;&atilde;o</td>
 						</tr>
 					</table>
 				</div>
@@ -605,7 +600,7 @@ i3geo/admin/index.html
 */
 
 /**
- * TODO criar página com os diagramas e colocar o link aqui
+ * TODO sempre atualizar as pagina com os diagramas
  */
 
 if(screen.availWidth > 700)
@@ -615,22 +610,22 @@ navm = false;
 //seta as vari&aacute;veis navn e navm
 var app = navigator.appName.substring(0,1);
 if (app==='N'){navn=true;}else{navm=true;}
-var etrs = document.getElementsByTagName("tr")
-for(t = 0;t < etrs.length;t++)
+var etrs = document.getElementsByTagName("tr");
+for(var t = 0;t < etrs.length;t++)
 {
 	etrs[t].onmouseover = function()
-	{this.style.backgroundColor = "beige"}
+	{this.style.backgroundColor = "beige";};
 	etrs[t].onmouseout = function()
-	{this.style.backgroundColor = ""}
+	{this.style.backgroundColor = "";};
 }
-var etrs = document.getElementsByTagName("legend")
-for(t = 0;t < etrs.length;t++)
+var etrs = document.getElementsByTagName("legend");
+for(var t = 0;t < etrs.length;t++)
 {
 	etrs[t].innerHTML = "<img src='../imagens/desce.gif' id='img_"+t+"' >&nbsp;" + etrs[t].innerHTML;
 	etrs[t].onclick = function()
 	{
 		var c = this.parentNode.childNodes;
-		for(h = 0;h < c.length;h++)
+		for(var h = 0;h < c.length;h++)
 		{
 			if(c[h].style && c[h].tagName != "LEGEND")
 			{
@@ -645,12 +640,12 @@ for(t = 0;t < etrs.length;t++)
 				}
 			}
 		}
-	}
+	};
 }
 function ajuda(i,t)
-{document.getElementById(i).style.display="block";t.style.display="none"}
+{document.getElementById(i).style.display="block";t.style.display="none";}
 function abre(url)
-{window.location.href = url}
+{window.location.href = url;}
 if(navm)
 {$i("mensagemIE").style.display = "block";}
 //necessario para a ferramenta login e outras

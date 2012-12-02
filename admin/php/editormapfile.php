@@ -66,6 +66,11 @@ $funcoesEdicao = array(
 		"DOWNLOADGVP"
 );
 if(in_array(strtoupper($funcao),$funcoesEdicao)){
+	if(verificaOperacaoSessao("admin/html/editormapfile") == false){
+		retornaJSON("Vc nao pode realizar essa operacao.");exit;
+	}
+}
+if(in_array(strtoupper($funcao),$funcoesEdicao)){
 	$f = @fopen("$locaplic/temas/teste.txt",w);
 	@fclose($f);
 	if (!file_exists("$locaplic/temas/teste.txt")){

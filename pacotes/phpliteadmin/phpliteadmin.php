@@ -30,23 +30,9 @@
 //adicionado por edmar
 include_once ("../../ms_configura.php");
 $editor = false;
-if (strtolower($_SERVER['HTTP_HOST']) == "localhost")
-{$editor = true;}
-if($editores != ""){
-	foreach ($editores as $e){
-		$ip = "UNKNOWN";
-		if (getenv("HTTP_CLIENT_IP")) $ip = getenv("HTTP_CLIENT_IP");
-		else if(getenv("HTTP_X_FORWARDED_FOR")) $ip = getenv("HTTP_X_FORWARDED_FOR");
-		else if(getenv("REMOTE_ADDR")) $ip = getenv("REMOTE_ADDR");
-		else $ip = "UNKNOWN";
-		if ($e == $ip){$editor=true;}
-	}
-}
-if($editor == false)
-{echo "Vc n&atilde;o &eacute; um editor cadastrado em i3geo/ms_configura.php";exit;}
-
+if (strtolower($_SERVER['HTTP_HOST']) !== "localhost")
+{echo "Acesso permitido apenas via localhost";exit;}
 //please report any bugs you encounter to http://code.google.com/p/phpliteadmin/issues/list
-
 //password to gain access (change this to something more secure than 'admin')
 //$password = "admin";
 include_once("senha.php");
@@ -76,7 +62,7 @@ else{
 			"path"=> basename($arquivosqlite),
 			"name"=> "admin.db"
 		)
-	);	
+	);
 	$conAdmin = "";
 	$conAdminw = "";
 	$dbhw = "";
@@ -135,7 +121,7 @@ if($directory!==false)
 {
 	if($directory[strlen($directory)-1]=="/") //if user has a trailing slash in the directory, remove it
 		$directory = substr($directory, 0, strlen($directory)-1);
-		
+
 	if(is_dir($directory)) //make sure the directory is valid
 	{
 		$arr = scandir($directory);
@@ -887,7 +873,7 @@ hr
 	border: 0;
 	color: #bbb;
 	background-color: #bbb;
-	width: 100%;	
+	width: 100%;
 }
 a:hover
 {
@@ -944,7 +930,7 @@ input, select, textarea
 /* just input buttons */
 input.btn
 {
-	cursor:pointer;	
+	cursor:pointer;
 }
 input.btn:hover
 {
@@ -2182,13 +2168,13 @@ else //user is authorized - display the main application
 
 				if(!isset($_SESSION[COOKIENAME.'numRows']))
 					$_SESSION[COOKIENAME.'numRows'] = 30;
-				
+
 				if(isset($_SESSION[COOKIENAME.'currentTable']) && $_SESSION[COOKIENAME.'currentTable']!=$_GET['table'])
 				{
 					unset($_SESSION[COOKIENAME.'sort']);
-					unset($_SESSION[COOKIENAME.'order']);	
+					unset($_SESSION[COOKIENAME.'order']);
 				}
-				
+
 				$query = "SELECT Count(*) FROM ".$_GET['table'];
 				$rowCount = $db->select($query);
 				$rowCount = intval($rowCount[0]);
@@ -2196,7 +2182,7 @@ else //user is authorized - display the main application
 				$remainder = intval($rowCount % $_SESSION[COOKIENAME.'numRows']);
 				if($remainder==0)
 					$remainder = $_SESSION[COOKIENAME.'numRows'];
-				
+
 				echo "<div style='overflow:hidden;'>";
 				//previous button
 				if($_POST['startRow']>0)
@@ -2216,7 +2202,7 @@ else //user is authorized - display the main application
 					echo "</form>";
 					echo "</div>";
 				}
-				
+
 				//show certain number buttons
 				echo "<div style='float:left; overflow:hidden;'>";
 				echo "<form action='".PAGE."?action=row_view&table=".$_GET['table']."' method='post'>";
@@ -2229,7 +2215,7 @@ else //user is authorized - display the main application
 					echo "<input type='text' name='startRow' style='width:90px;' value='0'/>";
 				echo "</form>";
 				echo "</div>";
-				
+
 				//next button
 				if(intval($_POST['startRow']+$_SESSION[COOKIENAME.'numRows'])<$rowCount)
 				{
@@ -2250,7 +2236,7 @@ else //user is authorized - display the main application
 				}
 				echo "<div style='clear:both;'></div>";
 				echo "</div>";
-				
+
 				if(!isset($_GET['sort']))
 					$_GET['sort'] = NULL;
 				if(!isset($_GET['order']))
@@ -2897,7 +2883,7 @@ else //user is authorized - display the main application
 			$query = "SELECT sqlite_version() AS sqlite_version";
 			$queryVersion = $db->select($query);
 			$realVersion = $queryVersion['sqlite_version'];
-			
+
 			echo "<b>Database name</b>: ".$db->getName()."<br/>";
 			echo "<b>Path to database</b>: ".$db->getPath()."<br/>";
 			echo "<b>Size of database</b>: ".$db->getSize()."<br/>";
@@ -2924,7 +2910,7 @@ else //user is authorized - display the main application
 				echo "<td class='tdheader' colspan='10'>Action</td>";
 				echo "<td class='tdheader'>Records</td>";
 				echo "</tr>";
-				
+
 				$totalRecords = 0;
 				for($i=0; $i<sizeof($result); $i++)
 				{
@@ -2934,7 +2920,7 @@ else //user is authorized - display the main application
 						$totalRecords += $records;
 						$tdWithClass = "<td class='td".($i%2 ? "1" : "2")."'>";
 						$tdWithClassLeft = "<td class='td".($i%2 ? "1" : "2")."' style='text-align:left;'>";
-						
+
 						echo "<tr>";
 						echo $tdWithClassLeft;
 						echo "<a href='".PAGE."?table=".$result[$i]['name']."&action=row_view'>".$result[$i]['name']."</a><br/>";
