@@ -24,11 +24,11 @@ catch(ee)
 <div class="mascaraPrincipal" id="divGeral" style=text-align:left >
 <?php
 /*
-Title: Testa a instala&ccedil;&atilde;o do i3Geo
+Testa a instala&ccedil;&atilde;o do i3Geo
 
 Executa testes e aponta erros na instala&ccedil;&atilde;o.
 
-Licenca:
+Licenca
 
 GPL2
 
@@ -49,10 +49,6 @@ Voc&ecirc; deve ter recebido uma cópia da Licen&ccedil;a P&uacute;blica Geral do
 GNU junto com este programa; se n&atilde;o, escreva para a
 Free Software Foundation, Inc., no endere&ccedil;o
 59 Temple Street, Suite 330, Boston, MA 02111-1307 USA.
-
-Arquivo:
-
-i3geo/testainstal.php
 
 */
 $locaplic = __DIR__;
@@ -323,8 +319,6 @@ echo "<p><img src=$nome /></p></body></html>";
 
 function saindo($men){echo "<span style=color:red ><br><b>Erro. Saindo...".$men;}
 /*
-Function: permissoesarquivo
-
 Retorna as permiss&otilde;es de um arquivo
 
 Parametros:

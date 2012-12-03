@@ -1,6 +1,6 @@
 <?php
 /*
-Title: Testa um mapfile
+Testa um mapfile
 
 Permite testar um mapfile espec&iacute;fico existente no diretório "temas" ou gerar uma imagem miniatura.
 

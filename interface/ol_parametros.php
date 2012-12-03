@@ -123,7 +123,7 @@
 </style>
 <script>
 /*
-Title: Interface Openlayers parametrizada
+Interface Openlayers parametrizada
 
 Abre a interface openlayers com passagem de par&acirc;metros
 
