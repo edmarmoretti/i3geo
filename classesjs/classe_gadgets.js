@@ -81,7 +81,7 @@ i3GEO.gadgets = {
 
 		"mostraBuscaRapida":
 
-		{idhtml:"buscaRapida",servicosexternos:true,temasmapa:false},
+		{idhtml:"buscaRapida",servicosexternos:true,temasmapa:false,google:true},//google so funciona na interface google maps ou earth
 
 		"mostraVisual":
 
@@ -130,7 +130,7 @@ i3GEO.gadgets = {
 		"mostraEscalaGrafica":
 		{idhtml:"escalaGrafica"},
 		"mostraBuscaRapida":
-		{idhtml:"buscaRapida",servicosexternos:true,temasmapa:false},
+		{idhtml:"buscaRapida",servicosexternos:true,temasmapa:false,google:true},
 		"mostraVisual":
 		{idhtml:""},
 		"mostraHistoricoZoom":
@@ -356,10 +356,6 @@ i3GEO.gadgets = {
 		{id = i3GEO.gadgets.PARAMETROS.mostraBuscaRapida.idhtml;}
 		i3GEO.gadgets.mostraBuscaRapida.id = id;
 		if($i(id)){
-			//depreciado na vers&atilde;o 4.5
-			i3geo_buscaRapida = function(){
-				alert("i3geo_buscaRapida foi depreciada");
-			};
 			i = "<form id=i3GEObotaoFormBuscaRapida"+id+" >"+$inputText(id,"256","valorBuscaRapida"+id,$trad("x34"),"20",$trad("o2"))+"</form>";
 			ins = "<table><tr><td><a class=ajuda_usuario target=_blank href='"+i3GEO.configura.locaplic+"/ajuda_usuario.php?idcategoria=8&idajuda=71' >&nbsp;&nbsp;&nbsp;&nbsp;</a></td><td>"+i+"</td>";
 			ins += "<td><img src='"+i3GEO.util.$im("branco.gif")+"' title='"+$trad("p13")+"' class='ticPropriedades2' id=i3GEObotaoPropriedadesBuscaRapida"+id+" style='margin-right:5px;margin-left:5px;'/></td>";
@@ -367,7 +363,7 @@ i3GEO.gadgets = {
 			temp = $i(id);
 			if(temp){
 				fbusca = function(){
-					if(i3GEO.gadgets.PARAMETROS.mostraBuscaRapida.servicosexternos === false && i3GEO.gadgets.PARAMETROS.mostraBuscaRapida.temasmapa === false)
+					if(i3GEO.gadgets.PARAMETROS.mostraBuscaRapida.google === false && i3GEO.gadgets.PARAMETROS.mostraBuscaRapida.servicosexternos === false && i3GEO.gadgets.PARAMETROS.mostraBuscaRapida.temasmapa === false)
 					{i3GEO.janela.tempoMsg($trad("x35"));return;}
 					if ($i("valorBuscaRapida"+id).value === "")
 					{i3GEO.janela.tempoMsg($trad("x36"));return;}
@@ -380,7 +376,8 @@ i3GEO.gadgets = {
 				$i("i3GEObotaoPropriedadesBuscaRapida"+id).onclick = function(){
 					var ins,
 						interno = "",
-						externo = "";
+						externo = "",
+						google = "";
 					i3GEO.janela.cria("300px","150px","","","",$trad("s5"),"i3GEOpropriedadesBuscaRapida"+id);
 					if(i3GEO.gadgets.PARAMETROS.mostraBuscaRapida.servicosexternos)
 					{externo = "checked";}
@@ -391,8 +388,16 @@ i3GEO.gadgets = {
 						"<tr><td><input style=cursor:pointer onclick='i3GEO.gadgets.PARAMETROS.mostraBuscaRapida.servicosexternos = this.checked' type=checkbox " +
 						externo + " ></td><td> " +
 						$trad("x38") + "</td></tr>" +
-						"<tr><td><input style=cursor:pointer onclick='i3GEO.gadgets.PARAMETROS.mostraBuscaRapida.temasmapa = this.checked' type=checkbox "+interno+" ></td><td>"+$trad("x39")+"</td></tr>" +
-						"</table><br>" +
+						"<tr><td><input style=cursor:pointer onclick='i3GEO.gadgets.PARAMETROS.mostraBuscaRapida.temasmapa = this.checked' type=checkbox "+interno+" ></td><td>"+$trad("x39")+"</td></tr>";
+					if(i3GEO.Interface.ATUAL === "googlemaps"){
+						if(i3GEO.gadgets.PARAMETROS.mostraBuscaRapida.google)
+						{google = "checked";}
+						ins += "<tr><td><input style=cursor:pointer onclick='i3GEO.gadgets.PARAMETROS.mostraBuscaRapida.google = this.checked' type=checkbox "+google+" ></td><td>Google</td></tr>";
+					}
+					else{
+						i3GEO.gadgets.PARAMETROS.mostraBuscaRapida.google = false;
+					}
+					ins += "</table><br>" +
 						"<p class=paragrafo >"+$trad("x40")+"</p>";
 					$i("i3GEOpropriedadesBuscaRapida"+id+"_corpo").innerHTML = ins;
 				};

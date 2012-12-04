@@ -1757,7 +1757,8 @@ i3GEO.Interface = {
 			}
 		},
 		zoom2extent:function(mapexten){
-			var pol = mapexten,
+			var re = new RegExp(",","g"),
+				pol = mapexten.replace(re," "),
 				ret = pol.split(" "),
 				sw = new google.maps.LatLng(ret[1],ret[0]),
 				ne = new google.maps.LatLng(ret[3],ret[2]);
