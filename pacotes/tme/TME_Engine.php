@@ -409,7 +409,6 @@ class ThematicMap
             foreach ($this->dataStore['features'] as $featureID => $feature)
             {
     			$name = $feature['name'];
-    			//TODO corrigir acentuacao
 				//if (!mb_detect_encoding($name,"UTF-8",true))
 				//{$name = mb_convert_encoding($name,"UTF-8","ISO-8859-1");}
 				$name = "<![CDATA[ ".$name." ]]>";

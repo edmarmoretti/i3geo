@@ -41,7 +41,6 @@ Free Software Foundation, Inc., no endere&ccedil;o
 if(typeof(i3GEOF) === 'undefined'){
 	var i3GEOF = {};
 }
-//TODO documentar a opcao de relacionamento entre tabelas no manual de usuario
 /*
 Classe: i3GEOF.tabela
 */

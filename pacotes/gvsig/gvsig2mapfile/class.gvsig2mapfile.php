@@ -243,7 +243,6 @@ class gvsig2mapfile{
 		return $objMap;
 	}
 	function data2layer($oLayer,$dataLayer){
-		//TODO corrigir acentuacao
 		$oLayer->set("name",basename($this->arquivoGvp)."_".$oLayer->index); //$this->nomeRandomico());
 		$this->nomesLayersAdicionados[] = $oLayer->name;
 		$oLayer->set("data",$dataLayer["data"]);
