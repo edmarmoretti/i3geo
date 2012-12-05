@@ -182,6 +182,7 @@ i3GEO.configura = {
 			{ id:"omenudataInterface11",text: $trad("p20"), url: "javascript:i3GEO.mapa.dialogo.telaRemota()" }
 			],
 			"ferramentas": [
+			//mapas
 			{ id:"omenudataFerramentas0a",text: '<span style=color:gray;text-decoration:underline; ><b>'+$trad("g4a")+'</b></span>',url: "#"},
 			{ id:"omenudataFerramentas5a",text: $trad("x59"), url: "javascript:i3GEO.mapa.dialogo.locregiao()"},
 			{ id:"omenudataFerramentas6a",text: $trad("x61"), url: "javascript:i3GEO.mapa.dialogo.filtraregiao()"},
@@ -189,6 +190,8 @@ i3GEO.configura = {
 			{ id:"omenudataFerramentas1a",text: $trad("t20"), url: "javascript:i3GEO.mapa.dialogo.opacidade()"},
 			{ id:"omenudataFerramentas2a",text: $trad("p21"), url: "javascript:i3GEO.mapa.dialogo.animacao()"},
 			{ id:"omenudataFerramentas3a",text: $trad("d24t"), url: "javascript:i3GEO.mapa.dialogo.selecao();"},
+			{ id:"omenudataFerramentas7a",text: $trad("x64"), url: "javascript:i3GEO.mapa.dialogo.congelaMapa();"},
+			//temas
 			{ id:"omenudataFerramentas0b",text: '<span style=color:gray;text-decoration:underline; ><b>'+$trad("a7")+'</b></span>',url: "#"},
 			{ id:"omenudataFerramentas1b",text: $trad("t31"), url: "javascript:i3GEO.tema.dialogo.tabela()"},
 			{ id:"omenudataFerramentas2b",text: $trad("t23"), url: "javascript:i3GEO.tema.dialogo.procuraratrib()"},
@@ -199,11 +202,14 @@ i3GEO.configura = {
 			{ id:"omenudataFerramentas7b",text: $trad("t42"), url: "javascript:i3GEO.tema.dialogo.cortina()"},
 			{ id:"omenudataFerramentas8b",text: $trad("t37a"), url: "javascript:i3GEO.tema.dialogo.graficotema()"},
 			{ id:"omenudataFerramentas9b",text: $trad("t37b"), url: "javascript:i3GEO.analise.dialogo.graficoInterativo()" },
+			//cartogramas
 			{ id:"omenudataFerramentas0e",text: '<span style=color:gray;text-decoration:underline; ><b>'+$trad("x60")+'</b></span>',url: "#"},
 			{ id:"omenudataFerramentas1e",text: $trad("x57"), url: "javascript:i3GEO.mapa.dialogo.metaestat()"},
 			{ id:"omenudataFerramentas3e",text: $trad("t49"), url: "javascript:i3GEO.tema.dialogo.tme()"},
+			//conexoes
 			{ id:"omenudataFerramentas0c",text: '<span style=color:gray;text-decoration:underline; ><b>'+$trad("a15")+'</b></span>',url: "#"},
 			{ id:"omenudataFerramentas1c",text: $trad("a16"), url: "javascript:i3GEO.arvoreDeTemas.dialogo.conectaservico()"},
+			//upload
 			{ id:"omenudataFerramentas0d",text: '<span style=color:gray;text-decoration:underline; ><b>Upload</b></span>',url: "#"},
 			{ id:"omenudataFerramentas3d",text: "Vetor (shp,dbf,csv,gpx,kml)", url: "javascript:i3GEO.arvoreDeTemas.dialogo.uploadarquivo()"}
 			]

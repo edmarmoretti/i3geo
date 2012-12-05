@@ -507,6 +507,36 @@ i3GEO.mapa = {
 	*/
 	dialogo:{
 		/*
+		Function: congelaMapa
+
+		Congela a visão atual do mapa mostrando-o em uma janela flutuante
+		*/
+		congelaMapa: function(){
+			var url="",
+				idjanela = YAHOO.util.Dom.generateId(),
+				cabecalho = function(){
+				},
+				minimiza = function(){
+					i3GEO.janela.minimiza(idjanela);
+				};
+			if(i3GEO.Interface.ATUAL === "openlayers" || i3GEO.Interface.ATUAL === "googlemaps"){
+				url = i3GEO.configura.locaplic+"/ferramentas/congelamapa/openlayers.php?g_sid="+i3GEO.configura.sid+"&ext="+i3GEO.parametros.mapexten;
+				i3GEO.janela.cria(
+					"500px",
+					"350px",
+					url,
+					"",
+					"",
+					$trad("x64"),
+					idjanela,
+					false,
+					"hd",
+					cabecalho,
+					minimiza
+				);
+			}
+		},
+		/*
 		Function: metaestat
 
 		Abre a janela de dialogo da ferramenta de cartogramas estatisticos METAESTAT

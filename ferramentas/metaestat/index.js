@@ -145,6 +145,7 @@ i3GEOF.metaestat = {
 			'	<button title="Ativa/Desativa contorno" onclick="i3GEOF.metaestat.analise.contorno()"><img src="'+i3GEO.configura.locaplic+'/imagens/gisicons/boundary-remove-add.png" /></button>' +
 			'	<button title="Altera representa&ccedil;&atilde;o" onclick="i3GEOF.metaestat.analise.alteraRep()"><img src="'+i3GEO.configura.locaplic+'/imagens/gisicons/shape.png" /></button>' +
 			'	<button title="Mapa de calor" onclick="i3GEOF.metaestat.analise.calor()"><img src="'+i3GEO.configura.locaplic+'/imagens/gisicons/dem.png" /></button>' +
+			'	<button title="Congela vis&atilde;o" onclick="i3GEO.mapa.dialogo.congelaMapa()"><img src="'+i3GEO.configura.locaplic+'/imagens/gisicons/mapset-add.png" /></button>' +
 			'</div>' +
 			'<div id="i3geoCartoAnaliseCamadas" style="margin-left:5px;line-height:25px"></div>' +
 			'<input type=hidden  value="" id="listaColourRampAnaliseMetaestat" onchange="i3GEOF.metaestat.analise.aplicaColourRamp()" />'; //utilizado pelo seletor de colourramp

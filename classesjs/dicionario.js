@@ -1975,6 +1975,13 @@ pt:"Para salvar as configura&ccedil;&otilde;es de uma camada,<br> utilize a op&c
 en:"",
 es:"",
 it:""
+}],
+"x64":[
+{
+pt:"Congela a vis&atilde;o atual",
+en:"",
+es:"",
+it:""
 }]
 };
 //YAHOO.log("carregou dicionario", "Classes i3geo");

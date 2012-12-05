@@ -263,7 +263,7 @@ if ($tipo == "" || $tipo == "metadados"){
 					$l->setmetadata("ows_srs",$listaepsg);
 					$l->set("group","");
 					//essa linha &eacute; necess&aacute;ria pq as vezes no mapfile n&atilde;o tem nenhum layer com o nome igual ao nome do mapfile
-					if(count($ts)==1){
+					if(count($ts)==1 && $temai3geo == true){
 						$l->set("name",$tx);
 					}
 					$l->setmetadata("gml_include_items","all");
@@ -311,6 +311,7 @@ if ($tipo == "" || $tipo == "metadados"){
 					}
 					autoClasses($l,$oMap);
 					ms_newLayerObj($oMap, $l);
+					//$req->setParameter("LAYERS", "mundo");
 				}
 			}
 		}
