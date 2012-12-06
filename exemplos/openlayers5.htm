@@ -31,7 +31,7 @@
   </table>
 </td>
 <td id="contemMenu" style="text-align:right;height:0px;border-width:0pt 0pt 1px;border-color:rgb(240,240,240)">
-	 <div id="menus" ></div>    
+	 <div id="menus" ></div>
 </td>
 </tr>
 <tr>
@@ -84,7 +84,7 @@
 	background-image:url(../mashups/openlayers.png);
 	background-repeat:no-repeat;
 	float:right;
-	right: 0px;	
+	right: 0px;
 	height:29px;
 	margin:2px;
 	width:29px;
@@ -97,6 +97,7 @@ var g_localimg = i3GEO.util.protocolo()+"://"+window.location.host+"/i3geo/image
 //
 //muda a extens&atilde;o m&aacute;xima
 //
+i3GEO.configura.mashuppar = "&mapext=-63.712484 -20.765721 -42.385294 -9.136698";
 i3GEO.Interface.openlayers.MAXEXTENT = [-63.712484, -20.765721, -42.385294, -9.136698];
 
 i3GEO.Interface.openlayers.TILES = true;
@@ -108,7 +109,7 @@ i3GEO.Interface.openlayers.GADGETS = {
 		PanZoom:false,
 		LayerSwitcher:false,
 		ScaleLine:true,
-		OverviewMap:false	
+		OverviewMap:false
 	};
 i3GEO.cria();
 i3GEO.configura.mapaRefDisplay = "none";
@@ -128,31 +129,26 @@ i3GEO.Interface.ATIVAMENUCONTEXTO = true
 i3GEO.arvoreDeTemas.TIPOBOTAO = "radio";
 i3GEO.arvoreDeTemas.ATIVATEMAIMEDIATO = true
 OpenLayers.ImgPath = "../pacotes/openlayers/img/"
-var ims = new OpenLayers.Layer.ArcGIS93Rest( 
+var ims = new OpenLayers.Layer.ArcGIS93Rest(
 	"ESRI Imagery World 2D",
     "http://server.arcgisonline.com/ArcGIS/rest/services/ESRI_Imagery_World_2D/MapServer/export",
 	{},
 	{isBaseLayer:true,visibility:false}
 );
-var wsm = new OpenLayers.Layer.ArcGIS93Rest( 
+var wsm = new OpenLayers.Layer.ArcGIS93Rest(
 	"ESRI World Street Map",
     "http://server.arcgisonline.com/ArcGIS/rest/services/ESRI_StreetMap_World_2D/MapServer/export",
 	{},
 	{isBaseLayer:true,visibility:false}
 );
-var bra = new OpenLayers.Layer.WMS( 
+var bra = new OpenLayers.Layer.WMS(
 	"Base carto MMA",
     "http://mapas.mma.gov.br/cgi-bin/mapserv?map=/opt/www/html/webservices/baseraster.map",
 	{layers:"baseraster",srs:"EPSG:4618",format:"image/png",isBaseLayer:false},
 	{isBaseLayer:true,visibility:false}
 );
-var osm = new OpenLayers.Layer.WMS( 
-	"Open Street Map",
-    "http://data1.vizure.net/server/services/request.php?jname=/wms",
-	{},
-	{isBaseLayer:true,visibility:false}
-);
-i3GEO.Interface.openlayers.LAYERSADICIONAIS = [ims,wsm,bra,osm];
+
+i3GEO.Interface.openlayers.LAYERSADICIONAIS = [ims,wsm,bra];
 i3GEO.inicia();
 </script>
 </body>

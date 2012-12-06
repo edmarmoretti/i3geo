@@ -1740,23 +1740,37 @@ i3GEO.arvoreDeTemas = {
 	*/
 	adicionaTemas: function(tsl){
 		if(typeof(console) !== 'undefined'){console.info("i3GEO.arvoreDeTemas.adicionaTemas()");}
-		var temp;
-		//
-		//zera o contador de tempo
-		//
-		/*
-		try{
-			clearTimeout(tempoBotaoAplicar);
-		}catch(e){}
-		tempoBotaoAplicar = "";
-		*/
+		var temp,
+			tempAdiciona = function(retorno){
+				i3GEO.atualiza();
+				//
+				//verifica se deve ser ativada uma outra guia que nao a atual
+				//
+				if(i3GEO.arvoreDeTemas.RETORNAGUIA !== ""){
+					if(i3GEO.arvoreDeTemas.RETORNAGUIA !== i3GEO.guias.ATUAL){
+						i3GEO.guias.escondeGuias();
+						i3GEO.guias.mostra(i3GEO.arvoreDeTemas.RETORNAGUIA);
+					}
+				}
+				//
+				//verifica se a janela da ferramenta identifica esta ativa para atualizar a lista de temas
+				//
+				try{
+					if($i("i3GEOidentificalistaTemas")){
+						i3GEOF.identifica.listaTemas();
+						g_tipoacao = "identifica";
+					}
+				}
+				catch(r){
+					if(typeof(console) !== 'undefined'){console.error(r);}
+				}
+			};
 		i3GEO.mapa.ativaTema("");
 		//
 		//pega os temas ativados na arvore de menus
 		//
 		if(arguments.length !== 1)
 		{tsl = i3GEO.arvoreDeTemas.listaTemasAtivos();}
-		//i3GEO.arvoreDeTemas.desativaCheckbox();
 		//
 		//se forem encontrados temas ativos na arvore de menus, o mapa e redesenhado com a adicao de novos temas
 		//
@@ -1768,48 +1782,29 @@ i3GEO.arvoreDeTemas = {
 		}
 		if(tsl.length > 0){
 			//verifica se o tema esta vinculado ao sistema de metadados estatisticos
-			temp = i3GEO.arvoreDeTemas.ARVORE.getNodeByProperty("idtema",tsl[0]);
-			if(temp && temp.data.tipoa_tema === "META"){
-				//obtem os parametros do tema
-				temp = function(retorno){
-					var id = retorno.data[tsl[0]]["METAESTAT_ID_MEDIDA_VARIAVEL"];
-					i3GEO.util.dialogoFerramenta(
-						"i3GEO.mapa.dialogo.metaestat()",
-						"metaestat",
-						"metaestat",
-						"index.js",
-						"i3GEOF.metaestat.inicia('flutuanteSimples','',"+id+")"
-					);
+			if(i3GEO.arvoreDeTemas.ARVORE){
+				temp = i3GEO.arvoreDeTemas.ARVORE.getNodeByProperty("idtema",tsl[0]);
+				if(temp && temp.data.tipoa_tema === "META"){
+					//obtem os parametros do tema
+					temp = function(retorno){
+						var id = retorno.data[tsl[0]]["METAESTAT_ID_MEDIDA_VARIAVEL"];
+						i3GEO.util.dialogoFerramenta(
+							"i3GEO.mapa.dialogo.metaestat()",
+							"metaestat",
+							"metaestat",
+							"index.js",
+							"i3GEOF.metaestat.inicia('flutuanteSimples','',"+id+")"
+						);
 
-				};
-				i3GEO.php.pegaMetaData(temp,tsl[0]);
+					};
+					i3GEO.php.pegaMetaData(temp,tsl[0]);
+				}
+				else{
+					i3GEO.php.adtema(tempAdiciona,tsl.toString());
+				}
 			}
 			else{
-				temp = function(retorno){
-					i3GEO.atualiza();
-					//
-					//verifica se deve ser ativada uma outra guia que nao a atual
-					//
-					if(i3GEO.arvoreDeTemas.RETORNAGUIA !== ""){
-						if(i3GEO.arvoreDeTemas.RETORNAGUIA !== i3GEO.guias.ATUAL){
-							i3GEO.guias.escondeGuias();
-							i3GEO.guias.mostra(i3GEO.arvoreDeTemas.RETORNAGUIA);
-						}
-					}
-					//
-					//verifica se a janela da ferramenta identifica esta ativa para atualizar a lista de temas
-					//
-					try{
-						if($i("i3GEOidentificalistaTemas")){
-							i3GEOF.identifica.listaTemas();
-							g_tipoacao = "identifica";
-						}
-					}
-					catch(r){
-						if(typeof(console) !== 'undefined'){console.error(r);}
-					}
-				};
-				i3GEO.php.adtema(temp,tsl.toString());
+				i3GEO.php.adtema(tempAdiciona,tsl.toString());
 			}
 		}
 	},

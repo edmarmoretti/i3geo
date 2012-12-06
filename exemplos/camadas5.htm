@@ -91,7 +91,7 @@
 	background-image:url(../mashups/openlayers.png);
 	background-repeat:no-repeat;
 	float:right;
-	right: 0px;	
+	right: 0px;
 	height:29px;
 	margin:2px;
 	width:29px;
@@ -99,7 +99,8 @@
 }
 </style>
 <script>
-alert("Experimente abrir a guia móvel e clique na camada Limite Estadual para desativ&aacute;-la");
+i3GEO.configura.mashuppar = "&temasa=estadosl locali";
+alert("Experimente abrir a guia movel e clique na camada Limite Estadual para desativa-la");
 //
 //exemplo de como manipular os checkbox da &aacute;rvore de camadas
 //
@@ -119,7 +120,7 @@ function novaFuncaoLigaDesliga(objInput){
 	//altera a situa&ccedil;&atilde;o de outros temas
 	if(codigoTema == "estadosl"){
 		//captura o checkbox de outra camada
-		ck = i3GEO.arvoreDeCamadas.capturaCheckBox("estados");
+		ck = i3GEO.arvoreDeCamadas.capturaCheckBox("locali");
 		//se o estado da camada desejada for igual ao da camada clicada, n&atilde;o faz nada
 		if(ck.checked != objInput.checked){
 			//coloca o checkbox no mesmo estado daquele que foi clicado
@@ -144,7 +145,7 @@ i3GEO.Interface.openlayers.GADGETS = {
 		PanZoom:false,
 		LayerSwitcher:true,
 		ScaleLine:true,
-		OverviewMap:false	
+		OverviewMap:false
 	};
 i3GEO.Interface.openlayers.TILES = true;
 i3GEO.gadgets.PARAMETROS.mostraMenuSuspenso.finaliza = 'if($i("omenudataInterface1")){i3GEOoMenuBar.getMenuItem("omenudataInterface1").cfg.setProperty("text", " ");}'
@@ -166,25 +167,25 @@ i3GEO.guias.TIPO = "movel";
 i3GEO.guias.guiaMovel.config.topGuiaMovel = 0;
 OpenLayers.ImgPath = "../pacotes/openlayers/img/";
 (function(){
-	var oce = new OpenLayers.Layer.ArcGIS93Rest( 
+	var oce = new OpenLayers.Layer.ArcGIS93Rest(
 		"ESRI Ocean Basemap",
 		"http://server.arcgisonline.com/ArcGIS/rest/services/Ocean_Basemap/MapServer/export",
 		{format:"jpeg"},
 		{isBaseLayer:true,visibility:false}
 	);
-	var ims = new OpenLayers.Layer.ArcGIS93Rest( 
+	var ims = new OpenLayers.Layer.ArcGIS93Rest(
 		"ESRI Imagery World 2D",
 		"http://server.arcgisonline.com/ArcGIS/rest/services/ESRI_Imagery_World_2D/MapServer/export",
 		{format:"jpeg"},
 		{isBaseLayer:true,visibility:false}
 	);
-	var wsm = new OpenLayers.Layer.ArcGIS93Rest( 
+	var wsm = new OpenLayers.Layer.ArcGIS93Rest(
 		"ESRI World Street Map",
 		"http://server.arcgisonline.com/ArcGIS/rest/services/ESRI_StreetMap_World_2D/MapServer/export",
 		{format:"jpeg"},
 		{isBaseLayer:true,visibility:false}
 	);
-	var bra = new OpenLayers.Layer.WMS( 
+	var bra = new OpenLayers.Layer.WMS(
 		"Base carto MMA",
 		"http://mapas.mma.gov.br/cgi-bin/mapserv?map=/opt/www/html/webservices/baseraster.map",
 		{layers:"baseraster",srs:"EPSG:4618",format:"image/png",isBaseLayer:false},
