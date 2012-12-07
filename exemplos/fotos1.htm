@@ -8,13 +8,13 @@
 	Leitura dos programas javaScript e estilos.
 	Os códigos do i3geo s&atilde;o compactados para tornar o carregamento mais r&aacute;pido.
 	Se vc alterar os códigos originais, n&atilde;o se esque&ccedil;a de compact&aacute;-los com classesjs/compactajs.php.
-	Para depurar o código sem ter de compact&aacute;-los, substitua na linha abaixo 
+	Para depurar o código sem ter de compact&aacute;-los, substitua na linha abaixo
 	o arquivo i3geo.js por i3geo.js
 -->
 <script type="text/javascript" src="../classesjs/i3geo.js"></script>
 <script type="text/javascript" src="../pacotes/openlayers/OpenLayers211.js.php"></script>
 
-	<style> 
+	<style>
 	.yui-log .i3geo {background-color:yellow;} /* customize a color */
 	.yui-log .redesenho {background-color:yellow;} /* customize a color */
 	.yui-log .janela {background-color:yellow;} /* customize a color */
@@ -45,7 +45,7 @@
 	border: 1px solid #aaa;
 	width: 290px;
 	*width:298px; /*IE*/
-	
+
 }
 .accordiontable{
 	text-align:left;
@@ -96,9 +96,9 @@
 }
 .accordion dd.getHeight {
 	display: block;
-}	 
-	 
-	</style> 
+}
+
+	</style>
 </head>
 <body id="i3geo">
 
@@ -112,7 +112,7 @@
 </tr>
 <tr style="border:0px" >
 <td colspan=2 id="contemMenu" style="text-align:right;height:19px;border-width:0pt 0pt 1px;border-color:rgb(240,240,240)">
-	 <div id="menus" ></div>    
+	 <div id="menus" ></div>
 </td>
 </tr>
 <tr style="border:0px">
@@ -197,7 +197,7 @@ i3GEO.Interface.openlayers.GADGETS = {
 		PanZoom:false,
 		LayerSwitcher:true,
 		ScaleLine:true,
-		OverviewMap:false	
+		OverviewMap:false
 	};
 i3GEO.Interface.openlayers.TILES = false;
 
@@ -235,7 +235,7 @@ i3GEO.guias.ORDEM = ["guiaDeFotos","temas","adiciona","legenda"];
 i3GEO.guias.ATUAL = "guiaDeFotos";
 i3GEO.inicia();
 
-var js = i3GEO.configura.locaplic+"/ferramentas/buscafotos/index.js.php";
+var js = i3GEO.configura.locaplic+"/ferramentas/buscafotos/index.js";
 i3GEO.util.scriptTag(js,"i3GEOF.buscaFotos.inicia('listaDeFotos',1)","i3GEOF.buscaFotos_script");
 
 </script>

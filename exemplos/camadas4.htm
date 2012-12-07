@@ -1,22 +1,31 @@
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
-<meta http-equiv="Category" content="I3Geo Mapa interativo MMA geoprocessamento sig mobile">
+<meta http-equiv="Category" content="i3Geo Mapa interativo MMA geoprocessamento sig mobile">
 <META HTTP-EQUIV="Content-Type" CONTENT="text/html; charset=ISO-8859-1">
-<title>i3Geo - Mapa interativo</title>
-<script type="text/javascript" src="../classesjs/i3geo.js"></script>
-	<style> 
-	.yui-log .i3geo {background-color:yellow;} /* customize a color */
-	.yui-log .redesenho {background-color:yellow;} /* customize a color */
-	.yui-log .janela {background-color:yellow;} /* customize a color */
-	.yui-log-bd {text-align:left;}
-	.yui-log-entry yui-log-verbose, p{text-align:left;}
-	 .info {text-align:left;}
-	</style> 
+<title>i3GEO - OpenLayers</title>
+<!-- estilo necess&aacute;rio para a ferramenta de edi&ccedil;&atilde;o -->
+<style>
+.olControlEditingToolbar1 div {
+	background-image:url(../mashups/openlayers.png);
+	background-repeat:no-repeat;
+	float:right;
+	right: 0px;
+	height:29px;
+	margin:2px;
+	width:29px;
+	cursor:pointer;
+}
+</style>
 </head>
 <body id="i3geo">
-
+<!-- inclui o nome do usuario logado -->
+<div id="i3GEONomeLogin" style="position:absolute;left:10px;top:12px;font-size:11px;z-index:50000"></div>
 <table id='mst' summary="" style='display:none;' width=100% cellspacing='0'>
+
+<!--
+	Inclui a barra superior. Se vc n&atilde;o quiser o menu, &eacute; só comentar o TR
+-->
 <tr style="border:0px">
 	<td colspan=2 id="barraSuperior" style="background-image:url('../imagens/visual/default/cabeca.png');height:10px"></td>
 </tr>
@@ -24,143 +33,186 @@
 <td>
   <table width=100% cellspacing=0 cellpadding=0 >
    <tr>
-   <td title="libera guias" class=tdclaro id=encolheFerramentas style="vertical-align:top;width:5px;text-align:left;"></td>
+   <td></td>
    <td>
+    <!--
+    	Guias principais, n&atilde;o mude o ID, apenas o nome se for desejado
+		Para remover uma guia, basta comentar a linha
+    -->
     <div class=verdeescuro style="top:0px;cursor:pointer;">
-	 <div id=guia1 class=guia >Temas</div>
-	 <div id=guia4 class=guia >Legenda</div>
-	 <div id=guia5 class=guia >Links</div>
+	 <div id=guia1 class=guia ></div>
+	 <div id=guia2 class=guia ></div>
+	 <div id=guia4 class=guia ></div>
+	 <div id=guia5 class=guia ></div>
     </div>
    </td>
+
    </tr>
   </table>
 </td>
 <td id="contemMenu" style="text-align:right;height:0px;border-width:0pt 0pt 1px;border-color:rgb(240,240,240)">
-	 <div id="menus" ></div>    
+	<!--
+		menu suspenso
+	-->
+	<div id="menus" ></div>
 </td>
 </tr>
 <tr>
  <td class=tdbranca id=contemFerramentas style="vertical-align:top;width:300px;text-align:left;">
+  <!--
+  	As divs guiaNobj guardam o conte&uacute;do que &eacute; mostrado quando a guia &eacute; clicada
+  	Para cada bot&atilde;o na guia deve haver um div com o conte&uacute;do, pe.
+  	o div com id=guia1 deve ter um div com id=guia1obj
+  -->
   <div id='guia1obj' >
+	<div style='left:5px;top:10px;' id=buscaRapida ></div>
+	<!--	Esta div acrescenta a lista de propriedades do mapa -->
+  	<div id=listaPropriedades style='top:15px;' ></div>
+	<!--	Esta div acrescenta a lista de de camadas do tipo 'baselayers' espec&iacute;ficas da interface Openlayers. Veja tamb&eacute;m a op&ccedil;&atilde;o i3GEO.Interface.openlayers.GADGETS.LayerSwitcher -->
+  	<div id=listaLayersBase style='top:15px;'></div>
+	<br>
 	<input style="cursor:pointer;left:-60px;top:10px;position:relative;" id=botaoMaisTemas size=10 type=button value="Adicionar mais temas" onclick="janelaMaisTemas()" />
+
+	<!--	Esta div acrescenta a lista de de camadas dispon&iacute;veis no mapa atual -->
   	<div id=listaTemas style='top:15px;'></div>
   </div>
   <div id='guia4obj' style='display:none;text-align:left'><div id='legenda' style='text-align:left'></div></div>
-  <div id='guia5obj' style='display:none;text-align:left'><div id='banners' style='overflow:auto;text-align:left'>Aguarde...</div></div>
  </td>
  <td style="vertical-align:top;border-width:0px;">
   <table width="100%" style="vertical-align:top;border-width:0px">
-   <tr><td  class=verdeclaro id=contemImg >
-    <div id=corpoMapa style="background-image:url('../imagens/i3geo1bw.jpg');"></div>
+    <tr><td  class=verdeclaro id=contemImg >
+    <div id=corpoMapa style="position:relative;background-image:url('../imagens/i3geo1bw.jpg');"></div>
    </td></tr>
   </table>
  </td>
  </tr>
+
 <tr>
+
  <td class=tdbranca >
- 	<div id=visual ></div>
+ 	<!--
+ 		Nesse div s&atilde;o inclu&iacute;dos os &iacute;cones que permitem ao usu&aacute;rio modificar o visual de cores dos &iacute;cones
+ 		<div id=visual ></div>
+ 	-->
+	<!-- bot&atilde;o de compartilhamento em redes sociais -->
+	<div id=i3GEOcompartilhar style="text-align:left;border-top:1px solid rgb(250,250,250);padding-top:1px" ></div>
+ 	<!-- aqui ser&aacute; inclu&iacute;do o contador de tempo quando o temporizador de redesenho do mapa estiver ativo -->
  	<div id=tempoRedesenho style=color:green;background-color:black;width:50px;display:none ></div>
  </td>
  <td class=tdbranca >
-  <table width=100% ><tr>
-  <td class=tdbranca ></td>
-  <td class=tdbranca style=text-align:center >
-  	<div id=localizarxy >
-  	Aguarde...
-  	</div>
-  </td>
-  <td class=tdbranca ><div id=escala ></div></td>
-  <td class=tdbranca ><div id=ondeestou ></div></td>
+  <table width=100% >
+  <tr>
+	  <td class=tdbranca >
+		<!-- aqui ser&aacute; inclu&iacute;da a escala num&eacute;rica -->
+		<div id=escala style="text-align:right;" ></div>
+	  </td>
+	  <td class=tdbranca  >
+		<!-- aqui ser&aacute; inclu&iacute;do o gadget que mostra a coordenada geogr&aacute;fica da posi&ccedil;&atilde;o do mouse -->
+		<div id=localizarxy style="text-align:left;font-size:10px;display:inline-table">Aguarde...</div>
+	  </td>
+ 	  <!-- aqui ser&atilde;o inclu&iacute;das as bandeiras que permitem a troca de idioma -->
+	  <td class=tdbranca  ><div id=seletorIdiomas ></div></td>
+	  <!--
+		A op&ccedil;&atilde;o de localiza&ccedil;&atilde;o 'onde estou?' baseia-se na identifica&ccedil;&atilde;o do IP do usu&aacute;rio. Para
+		que esta op&ccedil;&atilde;o funcione corretamente, deve estar instalado no I3Geo o pacote geoIP. Veja no
+		SVN do portal do software p&uacute;blico o diretório arquivos_vers&otilde;es/pacotes para maiores informa&ccedil;&otilde;es
+	  -->
+	  <td class=tdbranca  ><div id=ondeestou ></div></td>
   </tr>
-  <tr><td></td><td class="tdbranca"><div style="text-align:left;font-size:10px;background-color:white;display:none;" id=mostraUTM ></div></td><td></td></tr>
+  <!-- esta div recebe o c&aacute;lculo do posicionamento do mouse em coordenadas UTM
+  As coordenadas UTM apenas ser&atilde;o mostradas nessa div se o par&acirc;metro
+  i3GEO.gadgets.mostraCoordenadasUTM.idhtml for diferente de i3GEO.gadgets.mostraCoordenadasGEO.idhtml
+  se os IDs forem iguais, o tipo de coordenada mostrada ser&aacute; intercalada, ora UTM ora GEO.
+  <tr><td></td><td class="tdbranca"><div style="text-align:left;font-size:8px;background-color:white;display:none;" id=mostraUTM ></div></td><td></td></tr>
+   -->
   </table>
  </td>
 </tr>
 <tr style="border:0px"><td colspan=3 id="barraInferior" style="background-image:url('../imagens/visual/default/rodape.png');height:10px"></td></tr>
+<!-- aqui s&atilde;o mostradas imagens obtidas do metadata mensagem que pode existir em cada layer -->
 <tr style="border:0px"><td colspan=3 style=background-color:black ><input style="border:0px none; background-color:black;color:white;font-size:12pt;" type="text" size="1" id="i3geo_letreiro" ></td></tr>
-<tr style="border:0px"><td colspan=3 style=background-color:black;color:white  id="emailInstituicao">geoprocessamento@mma.gov.br</td></tr>
+<!-- esse elemento &eacute; preenchido automaticamente pelo i3Geo, conforme definido em ms_configura.php -->
+<tr style="border:0px"><td colspan=3 style=background-color:black;color:white id="emailInstituicao">@</td></tr>
 
 </table>
-</center>
-<div id=barraDeBotoes1 style='display:none'> 
-   <table style="width:100%"><caption style="text-align:center">&nbsp;</caption><tr><td style='background-color:rgb(250,250,250);'><div ID='historicozoom' ></div></td></tr><tr><td style=height:5px ></td></tr></table>
-   <table title="zoom" style="width:100%"><caption style="text-align:center">&nbsp;</caption><tr><td style='background-color:rgb(250,250,250);'><img title="zoom" alt="" src="../imagens/branco.gif" id='zoomli'/></td></tr></table>
-   <table title="desloca" style="width:100%"><caption style="text-align:center">&nbsp;</caption><tr><td style='background-color:rgb(250,250,250);'><img title="desloca" alt="" src="../imagens/branco.gif" ID='pan'/></td></tr></table>
-   <table title="info" style="width:100%"><caption style="text-align:center">&nbsp;</caption><tr><td style='background-color:rgb(250,250,250);'><img title="info" alt="" src="../imagens/branco.gif" id='identifica'/></td></tr></table>
-   <table title="geral" style="width:100%"><caption style="text-align:center">&nbsp;</caption><tr><td style='background-color:rgb(250,250,250);'><img title="geral" alt="" src="../imagens/branco.gif" ID='zoomtot'/></td></tr></table> 
-   <table title="mede" style="width:100%"><caption style="text-align:center">&nbsp;</caption><tr><td style='background-color:rgb(250,250,250);'><img title="mede" alt="" src="../imagens/branco.gif" id='mede'/></td></tr></table> 
-   <table title="area" style="width:100%"><caption style="text-align:center">&nbsp;</caption><tr><td style='background-color:rgb(250,250,250);'><img title="area" alt="" src="../imagens/branco.gif" id='area'/></td></tr></table>   
-</div>
-<div id=barraDeBotoes2 style='display:none'>
-	<table style="width:100%"><caption style="text-align:center">&nbsp;</caption>
-	<tr><td style='background-color:rgb(250,250,250);'><img title="" alt="" src="../imagens/branco.gif" id='sobeferramentas'/></td></tr>
-	</table>
-	<div style='display:inline;background-color:rgb(250,250,250);'>
-		<p style='font-size:6px;'>&nbsp;</p>
-		<img title="imprimir" alt="" src="../imagens/branco.gif" id='imprimir'/>
-	</div>
+<table id="i3GEOlogoMarcaX" style='margin: 0px auto;box-shadow:0 1px 13px gray;border-radius:5px;'>
+	<tr>
+		<td><div id=versaoi3geo ></div><h2 style="font-size:10px;font-family: Verdana, Arial, Helvetica, sans-serif;">i3Geo - Software livre para cria&ccedil;&atilde;o de mapas interativos e geoprocessamento</h2><h3 style="font-size:10px;font-family: Verdana, Arial, Helvetica, sans-serif;">Baseado no Mapserver, &eacute; licenciado sob GPL e integra o Portal do Software P&uacute;blico Brasileiro</h3></td>
+	</tr>
+	<tr>
+		<td style="padding:10px;"><img style="width:560px;height:81px" alt="" src='../imagens/logo_inicio.png' ></td>
+	</tr>
+	<tr>
+		<td>
+			<!--
+			<script id="ohloh" type="text/javascript" src="http://www.ohloh.net/p/150688/widgets/project_users.js?style=red"></script>
+			-->
+		</td>
+	</tr>
+</table>
 
-	<div style='display:inline;background-color:rgb(250,250,250);'>
-		<p style='font-size:6px;'>&nbsp;</p>
-		<img title="reinicia" alt="" src="../imagens/branco.gif" id='reinicia'/>
-	</div>
-	
-	<div style='display:inline;background-color:rgb(250,250,250);'>
-		<p style='font-size:6px;'>&nbsp;</p>
-		<img title="extensao" alt="" src="../imagens/branco.gif" id='exten'/>
-	</div>        
+<script src="../classesjs/i3geo47.js"></script>
+<script src="../pacotes/openlayers/OpenLayers211.js.php"></script>
+<script>
+i3GEO.configura.locaplic = i3GEO.util.protocolo()+"://"+window.location.host+"/i3geo";
+i3GEO.configura.autotamanho = false;
+i3GEO.Interface.ATUAL = "openlayers";
+i3GEO.Interface.IDCORPO = "contemImg";
 
-	<div style='display:inline;background-color:rgb(250,250,250);'>
-		<p style='font-size:6px;'>&nbsp;</p>
-		<img title="referencia" alt="" src="../imagens/branco.gif" id='referencia'/>
-	</div>        
-	<div style='display:inline;background-color:rgb(250,250,250);'>
-		<p style='font-size:6px;'>&nbsp;</p>
-		<img title="insere xy" alt="" src="../imagens/branco.gif" id='inserexy'/>
-	</div> 
-	<div style='display:inline;background-color:rgb(250,250,250);'>
-		<p style='font-size:6px;'>&nbsp;</p>
-		<img title="texto" alt="" src="../imagens/branco.gif" id='textofid'/>
-	</div>
-	<div style='display:inline;background-color:rgb(250,250,250);'>
-		<p style='font-size:6px;'>&nbsp;</p>
-		<img title="selecao" alt="" src="../imagens/branco.gif" id='selecao'/>
-	</div>
-	<div style='display:inline;background-color:rgb(250,250,250);'>
-		<p style='font-size:6px;'>&nbsp;</p>
-		<img  title="google" alt="" src="../imagens/branco.gif" id='google'/>
-	</div>
-	<div style='display:inline;background-color:rgb(250,250,250);'>
-		<p style='font-size:6px;'>&nbsp;</p>
-		<img title="insere grafico" alt="" src="../imagens/branco.gif" id='inseregrafico'/>
-	</div> 
-	<div style='display:none;background-color:rgb(250,250,250);'>
-		<p style='font-size:6px;'>&nbsp;</p>
-		<img title="lente" alt="" src="../imagens/branco.gif" id='lentei'/>
-	</div>
-	<div style='display:none;background-color:rgb(250,250,250);'>
-		<p style='font-size:6px;'>&nbsp;</p>
-		<img  title="scielo" alt="" src="../imagens/branco.gif" id='scielo'/>
-	</div>
-	<div style='display:none;background-color:rgb(250,250,250);'>
-		<p style='font-size:6px;'>&nbsp;</p>
-		<img  title="confluencias" alt="" src="../imagens/branco.gif" id='confluence'/>
-	</div>
-	<div style='display:none;background-color:rgb(250,250,250);'>
-		<p style='font-size:6px;'>&nbsp;</p>
-		<img  title="busca na wikipedia" alt="" src="../imagens/branco.gif" id='wiki'/>
-	</div>
-	<div style='display:none;background-color:rgb(250,250,250);'>
-		<p style='font-size:6px;'>&nbsp;</p>
-		<img  title="3d" alt="" src="../imagens/branco.gif" id='v3d'/>
-	</div>
-	<div style='display:none;background-color:rgb(250,250,250);'>
-		<p style='font-size:6px;'>&nbsp;</p>
-		<img  title="fotos" alt="" src="../imagens/branco.gif" id='buscafotos'/>
-	</div>
-   <table style="width:100%;"><tr><td style='background-color:rgb(250,250,250);'><p style='font-size:6px;'>&nbsp;</p><img title="" alt="" src="../imagens/branco.gif" id='desceferramentas'/></td></tr></table>
-</div>
-<script type="text/javascript">
+i3GEO.Interface.openlayers.GADGETS = {
+		PanZoomBar:true,
+		PanZoom:false,
+		LayerSwitcher:true,
+		ScaleLine:true,
+		OverviewMap:false
+	};
+i3GEO.Interface.openlayers.TILES = true;
+i3GEO.gadgets.PARAMETROS.mostraMenuSuspenso.finaliza = 'if($i("omenudataInterface1")){i3GEOoMenuBar.getMenuItem("omenudataInterface1").cfg.setProperty("text", " ");}';
+i3GEO.cria();
+i3GEO.configura.mapaRefDisplay = "none";
+
+i3GEO.barraDeBotoes.TIPO = "olhodepeixe";
+i3GEO.barraDeBotoes.OFFSET = -170;
+
+i3GEO.configura.oMenuData["submenus"]["janelas"] = [];
+i3GEO.gadgets.PARAMETROS.mostraMenuSuspenso.permiteLogin = true;
+i3GEO.idioma.IDSELETOR = "seletorIdiomas";
+i3GEO.Interface.ATIVAMENUCONTEXTO = false;
+i3GEO.arvoreDeTemas.TIPOBOTAO = "radio";
+
+i3GEO.arvoreDeTemas.OPCOESADICIONAIS.comentarios = true;
+i3GEO.arvoreDeCamadas.VERIFICAABRANGENCIATEMAS = true;
+i3GEO.arvoreDeCamadas.MOSTRALISTAKML = false;
+i3GEO.mapa.AUTORESIZE = true;
+OpenLayers.ImgPath = "../pacotes/openlayers/img/";
+(function(){
+	var oce = new OpenLayers.Layer.ArcGIS93Rest(
+		"ESRI Ocean Basemap",
+		"http://server.arcgisonline.com/ArcGIS/rest/services/Ocean_Basemap/MapServer/export",
+		{format:"jpg"},
+		{isBaseLayer:true,visibility:false}
+	);
+	var ims = new OpenLayers.Layer.ArcGIS93Rest(
+		"ESRI Imagery World 2D",
+		"http://server.arcgisonline.com/ArcGIS/rest/services/ESRI_Imagery_World_2D/MapServer/export",
+		{},
+		{isBaseLayer:true,visibility:false}
+	);
+	var wsm = new OpenLayers.Layer.ArcGIS93Rest(
+		"ESRI World Street Map",
+		"http://server.arcgisonline.com/ArcGIS/rest/services/ESRI_StreetMap_World_2D/MapServer/export",
+		{},
+		{isBaseLayer:true,visibility:false}
+	);
+	var bra = new OpenLayers.Layer.WMS(
+		"Base carto MMA",
+		"http://mapas.mma.gov.br/cgi-bin/mapserv?map=/opt/www/html/webservices/baseraster.map",
+		{layers:"baseraster",srs:"EPSG:4618",format:"image/png",isBaseLayer:false},
+		{isBaseLayer:true,visibility:false}
+	);
+	i3GEO.Interface.openlayers.LAYERSADICIONAIS = [oce,ims,wsm,bra];
+})();
+
 function janelaMaisTemas(){
 	var janela = i3GEO.janela.cria("400px","380px","","","","+ Temas","maisTemas");
 	janela[2].style.textAlign="left"
@@ -177,9 +229,7 @@ i3GEO.arvoreDeCamadas.LEGENDAEXPANDIDA = false;
 i3GEO.arvoreDeCamadas.OPCOESTEMAS = false
 i3GEO.arvoreDeCamadas.OPCOESICONES = false
 i3GEO.configura.templateLegenda = "legenda3.htm"
-i3GEO.cria()
 i3GEO.inicia();
-
 </script>
 </body>
 </html>

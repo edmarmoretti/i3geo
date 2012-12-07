@@ -46,13 +46,13 @@ Class: i3GEOF.buscaFotos
 i3GEOF.buscaFotos = {
 	/*
 	Variavel: aguarde
-	
+
 	Objeto DOM com a imagem de aguarde existente no cabe&ccedil;alho da janela.
 	*/
 	aguarde: "",
 	/*
 	Propriedade: chaveFlicker
-	
+
 	C&oacute;digo de acesso aos web services do Flicker
 	*/
 	chaveFlicker: "b170cde3c3064ca44b1ae0fbe747575d",
@@ -64,11 +64,11 @@ i3GEOF.buscaFotos = {
 	},
 	/*
 	Function: iniciaDicionario
-	
+
 	Carrega o dicion&aacute;rio e chama a fun&ccedil;&atilde;o que inicia a ferramenta
-	
+
 	O Javascript &eacute; carregado com o id i3GEOF.nomedaferramenta.dicionario_script
-	*/	
+	*/
 	iniciaDicionario: function(){
 		if(typeof(i3GEOF.buscaFotos.dicionario) === 'undefined'){
 			i3GEO.util.scriptTag(
@@ -80,16 +80,16 @@ i3GEOF.buscaFotos = {
 		else{
 			i3GEOF.buscaFotos.iniciaJanelaFlutuante();
 		}
-	},		
+	},
 	/*
 	Function: inicia
-	
+
 	Inicia a ferramenta. &Eacute; chamado por criaJanelaFlutuante
-	
+
 	Parametro:
-	
+
 	iddiv {String} - id do div que receber&aacute; o conteudo HTML da ferramenta
-	
+
 	pagina {integer} - (opcional) p&aacute;gina que ser&aacute; mostrada. Se for definida a janela de busca ser&aacute; mostrada j&aacute; de in&iacute;cio por meio do servi&ccedil;o do panoramio
 	*/
 	inicia: function(iddiv,busca){
@@ -106,7 +106,7 @@ i3GEOF.buscaFotos = {
 				i3GEO.navega.aplicaEscala(i3GEO.configura.locaplic,i3GEO.configura.sid,300000);
 				i3GEOF.buscaFotos.mostraMenu();
 			}}});
-			
+
 			i3GEOF.buscaFotos.ativaFoco();
 			i3GEO.eventos.NAVEGAMAPA.push("i3GEOF.buscaFotos.busca('1')");
 			if(busca){
@@ -119,11 +119,11 @@ i3GEOF.buscaFotos = {
 	},
 	/*
 	Function: html
-	
+
 	Gera o c&oacute;digo html para apresenta&ccedil;&atilde;o das op&ccedil;&otilde;es da ferramenta
-	
+
 	Retorno:
-	
+
 	String com o c&oacute;digo html
 	*/
 	html:function(){
@@ -158,15 +158,15 @@ i3GEOF.buscaFotos = {
 		ins += '	<input type=radio style="top:2px;background-color:#f2f2f2;border:0px solid white;cursor:pointer;position:relative;" onclick="i3GEOF.buscaFotos.esconde(this)" name=buscador value=locr id=i3GEObuscafotosbuscalocr /><a href="http://www.locr.com" target="_blank" >Locr</a>';
 		ins += '	</div>';
 		ins += '	<div id="i3GEObuscafotospaginas" style="top:10px;"></div><br>';
-		ins += '	<div style="top:0px;left:5px;display:block;width:99%;overflow:auto"  id="i3GEObuscafotosresultadofotos" ></div>';
+		ins += '	<div style="top:0px;left:5px;display:block;width:95%;overflow:auto"  id="i3GEObuscafotosresultadofotos" ></div>';
 		ins += '</div>';
 		return ins;
 	},
 	/*
 	Function: iniciaJanelaFlutuante
-	
+
 	Cria a janela flutuante para controle da ferramenta.
-	*/	
+	*/
 	iniciaJanelaFlutuante: function(){
 		var minimiza,cabecalho,janela,divid,temp,titulo;
 		//funcao que sera executada ao ser clicado no cabe&ccedil;alho da janela
@@ -197,11 +197,11 @@ i3GEOF.buscaFotos = {
 		temp = function(){
 			i3GEO.eventos.NAVEGAMAPA.remove("i3GEOF.buscaFotos.busca('1')");
 		};
-		YAHOO.util.Event.addListener(janela[0].close, "click", temp);		
+		YAHOO.util.Event.addListener(janela[0].close, "click", temp);
 	},
 	/*
 	Function: ativaFoco
-	
+
 	Refaz a interface da ferramenta quando a janela flutuante tem seu foco ativado
 	*/
 	ativaFoco: function(){
@@ -215,7 +215,7 @@ i3GEOF.buscaFotos = {
 	},
 	/*
 	Function: mostraMenu
-	
+
 	Mostra o menu de escolha do provedor de fotos e esconde o aviso inicial
 	*/
 	mostraMenu: function(){
@@ -224,11 +224,11 @@ i3GEOF.buscaFotos = {
 	},
 	/*
 	Function: esconde
-	
+
 	Esconde as op&ccedil;&otilde;es de busca dos servidores de fotos e mostra as op&ccedil;&otilde;es do objeto especificado
-	
+
 	Parametro:
-	
+
 	obj - objeto que ter&aacute; o estilo modificado para display = none
 	*/
 	esconde: function (obj){
@@ -238,13 +238,13 @@ i3GEOF.buscaFotos = {
 		if(obj.value === "flickr")
 		{$i("i3GEObuscafotosf").style.display="block";}
 		else
-		{i3GEOF.buscaFotos.busca("1");}	
+		{i3GEOF.buscaFotos.busca("1");}
 	},
 	/*
 	Function: busca
-	
+
 	Procura as fotos no servidor escolhido e chama a fun&ccedil;&atilde;o correta de apresenta&ccedil;&atilde;o das fotos.
-	
+
 	*/
 	busca: function(pagina){
 		i3GEOF.buscaFotos.aguarde.visibility = "visible";
@@ -287,7 +287,7 @@ i3GEOF.buscaFotos = {
 	},
 	/*
 	Function: escondexy
-	
+
 	Esconde a imagem de localiza&ccedil;&atilde;o da foto no mapa
 	*/
 	escondexy: function(){
@@ -300,7 +300,7 @@ i3GEOF.buscaFotos = {
 	},
 	/*
 	Function: mostraxy
-	
+
 	Mostra a imagem que localiza a foto no mapa
 	*/
 	mostraxy: function(xy){
@@ -317,7 +317,7 @@ i3GEOF.buscaFotos = {
 	},
 	/*
 	Function: listafotospanoramio
-	
+
 	Monta a apresenta&ccedil;&atilde;o das fotos obtidas do servidor Panoramio
 	*/
 	listafotospanoramio: function(retorno){
@@ -339,9 +339,9 @@ i3GEOF.buscaFotos = {
 					ins += "<img src='"+data.photos[i].photo_file_url+"' ";
 					ins += " onmouseout='i3GEOF.buscaFotos.escondexy()' ";
 					ins += " onmouseover='i3GEOF.buscaFotos.mostraxy(\""+data.photos[i].latitude+","+data.photos[i].longitude+"\")'";
-					ins += " onclick='javascript:window.open(\""+data.photos[i].owner_url+"\")' ";	
+					ins += " onclick='javascript:window.open(\""+data.photos[i].owner_url+"\")' ";
 					t = data.photos[i].owner_name+" - "+data.photos[i].photo_title;
-					ins += "title='"+t+"' style='margin:3px;cursor:pointer;' />";			
+					ins += "title='"+t+"' style='margin:3px;cursor:pointer;' />";
 				}
 			}
 		}
@@ -356,7 +356,7 @@ i3GEOF.buscaFotos = {
 	},
 	/*
 	Function: listafotosflickr
-	
+
 	Monta a apresenta&ccedil;&atilde;o das fotos obtidas do servidor Flickr
 	*/
 	listafotosflickr: function(retorno){
@@ -383,7 +383,7 @@ i3GEOF.buscaFotos = {
 				ins += "<img src='http://farm"+data[i].farm+".static.flickr.com/"+data[i].server+"/"+data[i].id+"_"+data[i].secret+"_s.jpg' ";
 				ins += " onmouseout='i3GEOF.buscaFotos.escondexy()' ";
 				ins += " onmouseover='i3GEOF.buscaFotos.mostraxy(\""+data[i].latitude+","+data[i].longitude+"\")'";
-				ins += " onclick='javascript:window.open(\"http://www.flickr.com/photos/"+data[i].owner+"/"+data[i].id+"\")' ";	
+				ins += " onclick='javascript:window.open(\"http://www.flickr.com/photos/"+data[i].owner+"/"+data[i].id+"\")' ";
 				t = data[i].title;
 				ins += "title='"+t+"' style='margin:3px;cursor:pointer;' />";
 			}
@@ -398,7 +398,7 @@ i3GEOF.buscaFotos = {
 	},
 	/*
 	Function: listafotoslocr
-	
+
 	Monta a apresenta&ccedil;&atilde;o das fotos obtidas do servidor Locr
 	*/
 	listafotoslocr: function(retorno){
