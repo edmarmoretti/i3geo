@@ -116,6 +116,7 @@ class gvsig2mapfile{
 			$valores = (string) $this->getValue($path."/tag:xml-tag","values");
 			$tipocoluna = (string) $this->getValue($path."/tag:xml-tag","fieldTypes");
 			$nomes = (string) $this->getValue($path."/tag:xml-tag","keys");
+
 			$classes = $this->VectorialUniqueValueLegend($result,$path1,$coluna,$tipocoluna,$valores,$nomes);
 		}
 
@@ -123,6 +124,7 @@ class gvsig2mapfile{
 		$result = $this->xml->xpath($path1);
 		if($result != FALSE)
 		{$classes = $this->SingleSymbolLegend($result,$path1);}
+
 		//
 		//obtem a conexão
 		//a senha não pode ser obtida, então, é usado o mesmo nome de usuário em seu lugar. No i3Geo deve-se prever isso na variável de substituição de string.
@@ -167,6 +169,7 @@ class gvsig2mapfile{
 		$nomes = explode(",",$nomes);
 		$classes = array();
 		$c = 0;
+
 		while(list( , $node) = each($result)) {
 			$classe = array();
 			if($tipocoluna == 12)
@@ -194,35 +197,40 @@ class gvsig2mapfile{
 			{$classes[] = $classe;}
 			$c = $c + 1;
 		}
+
+		//com.iver.cit.gvsig.fmap.rendering.ZSort
 		return $classes;
 	}
 	function SingleSymbolLegend($result,$path){
 		$classes = array();
 		$c = 0;
-		//var_dump($result);exit;
+
 		while(list( , $node) = each($result)) {
 			$classe = array();
 			$classe["className"] = (string) $this->getValue($path,"className",$c);
-			$classe["desc"] = (string) $this->getValue($path,"desc",$c);
-			$classe["color"] = (string) $this->getValue($path,"color",$c);
-			$classe["rotation"] = (string) $this->getValue($path,"rotation",$c);
-			$classe["offsetX"] = (string) $this->getValue($path,"offsetX",$c);
-			$classe["offsetY"] = (string) $this->getValue($path,"offsetY",$c);
-			$classe["size"] = (string) $this->getValue($path,"size",$c);
-			$classe["markerStyle"] = (string) $this->getValue($path,"markerStyle",$c);
-			$classe["hasFill"] = (string) $this->getValue($path,"hasFill",$c);
-			$classe["hasOutline"] = (string) $this->getValue($path,"hasOutline",$c);
-			$classe["exp"] = false;
-			$classe["nome"] = " ";
-			if($classe["hasOutline"] == "true"){
-				$classe["outline"] = (string) $this->getValue($path."/tag:xml-tag","color");
+			if($classe["className"] != "com.iver.cit.gvsig.fmap.rendering.ZSort"){
+				$classe["desc"] = (string) $this->getValue($path,"desc",$c);
+				$classe["color"] = (string) $this->getValue($path,"color",$c);
+				$classe["rotation"] = (string) $this->getValue($path,"rotation",$c);
+				$classe["offsetX"] = (string) $this->getValue($path,"offsetX",$c);
+				$classe["offsetY"] = (string) $this->getValue($path,"offsetY",$c);
+				$classe["size"] = (string) $this->getValue($path,"size",$c);
+				$classe["markerStyle"] = (string) $this->getValue($path,"markerStyle",$c);
+				$classe["hasFill"] = (string) $this->getValue($path,"hasFill",$c);
+				$classe["hasOutline"] = (string) $this->getValue($path,"hasOutline",$c);
+				$classe["exp"] = false;
+				$classe["nome"] = " ";
+				if($classe["hasOutline"] == "true"){
+					$classe["outline"] = (string) $this->getValue($path."/tag:xml-tag","color");
+				}
+				else{
+					$classe["outline"] = (string) $this->getValue($path,"color",$c);
+				}
+				$classes[] = $classe;
+				$c = $c + 1;
 			}
-			else{
-				$classe["outline"] = (string) $this->getValue($path,"color",$c);
-			}
-			$classes[] = $classe;
-			$c = $c + 1;
 		}
+
 		return $classes;
 	}
 	function getValue($path,$key,$i=0){
@@ -266,6 +274,7 @@ class gvsig2mapfile{
 		{$oLayer->set("type",0);}
 		if($tipo == "com.iver.cit.gvsig.fmap.core.symbols.SimpleFillSymbol")
 		{$oLayer->set("type",2);}
+
 		foreach($dataLayer["legenda"]["classes"] as $data){
 			//var_dump($data);
 			$classe = ms_newClassObj($oLayer);
@@ -289,6 +298,7 @@ class gvsig2mapfile{
 			if($data["exp"] != false)
 			{$classe->setExpression($data["exp"]);}
 		}
+
 		return $oLayer;
 	}
 	function findAttribute($object, $attribute) {
