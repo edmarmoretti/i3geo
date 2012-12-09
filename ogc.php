@@ -323,9 +323,10 @@ if ($tipo == "" || $tipo == "metadados"){
 			include_once($locaplic."/pacotes/gvsig/gvsig2mapfile/class.gvsig2mapfile.php");
 			$gm = new gvsig2mapfile($locaplic."/temas/".$tx.".gvp");
 			$gvsigview = $gm->getViewsNames();
-			$gvsigview = $gvsigview[0];
-			$dataView = $gm->getViewData($gvsigview);
-			$oMap = $gm->addLayers($oMap,$gvsigview,$dataView["layerNames"]);
+			foreach($gvsigview as $gv){
+				$dataView = $gm->getViewData($gv);
+				$oMap = $gm->addLayers($oMap,$gv,$dataView["layerNames"]);
+			}
 			$numlayers = $oMap->numlayers;
 			$layers = array();
 			//$layers[] = "default";

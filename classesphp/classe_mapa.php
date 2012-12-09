@@ -976,15 +976,16 @@ $random - indica se os nomes dos novos layers ser&atilde;o modificados ou nao
 					include_once($locaplic."/pacotes/gvsig/gvsig2mapfile/class.gvsig2mapfile.php");
 					$gm = new gvsig2mapfile($nomemap);
 					$gvsigview = $gm->getViewsNames();
-					$gvsigview = $gvsigview[0];
-					$dataView = $gm->getViewData($gvsigview);
-					$adicionar = array();
-					foreach($dataView["layerNames"] as $t){
-						if(!in_array($t,$this->nomes)){
-							$adicionar[] = $t;
+					foreach($gvsigview as $gv){
+						$dataView = $gm->getViewData($gvsigview);
+						$adicionar = array();
+						foreach($dataView["layerNames"] as $t){
+							if(!in_array($t,$this->nomes)){
+								$adicionar[] = $t;
+							}
 						}
+						$this->mapa = $gm->addLayers($this->mapa,$gv,$adicionar);
 					}
-					$this->mapa = $gm->addLayers($this->mapa,$gvsigview,$adicionar);
 					foreach($adicionar as $nome){
 						$l = $this->mapa->getlayerbyname($nome);
 						//reposiciona o layer se for o caso

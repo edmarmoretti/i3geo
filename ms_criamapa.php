@@ -125,9 +125,9 @@ image_wms - tipo de imagem dispon&iacute;vel
 
 versao_wms - Vers&atilde;o do WMS (necess&aacute;rio quando da inclus&atilde;o de uma camada WMS diretamente pela URL)
 
-gvsiggvp - (depreciado na versão 4.7) endere&ccedil;o no servidor do arquivo de projeto gvSig (gvp) que ser&aacute; utilizado para construir o mapa (experimental)
+gvsiggvp - (depreciado na versão 4.7 - utilize o parametro temasa) endere&ccedil;o no servidor do arquivo de projeto gvSig (gvp) que ser&aacute; utilizado para construir o mapa (experimental)
 
-gvsigview - (depreciado na versão 4.7) nome da view do projeto gvSig. Se nao for especificado, sera considerada a primeira view existente no projeto. Exemplo (http://localhost/i3geo/ms_criamapa.php?gvsiggvp=c:\temp\teste.gvp&gvsigview=Untitled - 0)
+gvsigview - lista com nomes de views existentes no projeto gvSig separado por virgula. Se for vazio, serao adicionadas todas as views. Exemplo (http://localhost/i3geo/ms_criamapa.php?gvsiggvp=c:\temp\teste.gvp&gvsigview=Untitled - 0)
 */
 
 //$_COOKIE = array();
@@ -680,12 +680,13 @@ function incluiTemasIniciais(){
 					include_once($locaplic."/pacotes/gvsig/gvsig2mapfile/class.gvsig2mapfile.php");
 					$gm = new gvsig2mapfile($arqtemp);
 					$gvsigview = $gm->getViewsNames();
-					$gvsigview = $gvsigview[0];
-					$dataView = $gm->getViewData($gvsigview);
+					foreach($gvsigview as $v){
+						$dataView = $gm->getViewData($v);
+						$mapn = $gm->addLayers($mapn,$v,$dataView["layerNames"]);
+					}
 					$next = $dataView["extent"];
 					$ext = $mapn->extent;
 					$ext->setextent($next[0],$next[1],$next[2],$next[3]);
-					$mapn = $gm->addLayers($mapn,$gvsigview,$dataView["layerNames"]);
 				}
 			}
 		}
@@ -1111,18 +1112,26 @@ function incluiMapaGvsig($gvsiggvp,$gvsigview=""){
 	$gm = new gvsig2mapfile($gvsiggvp);
 	if(empty($gvsigview)){
 		$gvsigview = $gm->getViewsNames();
-		$gvsigview = $gvsigview[0];
+		//$gvsigview = $gvsigview[0];
 	}
-	$dataView = $gm->getViewData($gvsigview);
+	else{
+		$gvsigview = str_replace(" ",",",$gvsigview);
+		$gvsigview = explode(",",$gvsigview);
+	}
 	$numlayers = $mapn->numlayers;
 	for ($i=0;$i < $numlayers;$i++){
 		$layer = $mapn->getlayer($i);
 		$layer->set("status",MS_DELETE);
 	}
+	foreach($gvsigview as $v){
+		if($v != ""){
+			$dataView = $gm->getViewData($v);
+			$mapn = $gm->addLayers($mapn,$gvsigview,$dataView["layerNames"]);
+		}
+	}
 	$next = $dataView["extent"];
 	$ext = $mapn->extent;
 	$ext->setextent($next[0],$next[1],$next[2],$next[3]);
-	$mapn = $gm->addLayers($mapn,$gvsigview,$dataView["layerNames"]);
 }
 /*
 Captura e mostra os erros de processamento do mapserver

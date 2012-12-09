@@ -1530,6 +1530,7 @@ Include:
 function downloadTema2($map_file,$tema,$locaplic,$dir_tmp,$postgis_mapa)
 {
 	ini_set("max_execution_time","1800");
+	$temas = array();
 	if(file_exists($locaplic."/ms_configura.php")){
 		include($locaplic."/ms_configura.php");
 	}
@@ -1628,10 +1629,12 @@ function downloadTema2($map_file,$tema,$locaplic,$dir_tmp,$postgis_mapa)
 		include_once($locaplic."/pacotes/gvsig/gvsig2mapfile/class.gvsig2mapfile.php");
 		$gm = new gvsig2mapfile($locaplic."/temas/".$tema.".gvp");
 		$gvsigview = $gm->getViewsNames();
-		$gvsigview = $gvsigview[0];
-		$dataView = $gm->getViewData($gvsigview);
-		$map = $gm->addLayers($map,$gvsigview,$dataView["layerNames"]);
-		$temas = $gm->nomesLayersAdicionados;
+		foreach($gvsigview as $gv){
+			$dataView = $gm->getViewData($gvsigview);
+			$map = $gm->addLayers($map,$gvsigview,$dataView["layerNames"]);
+			$temas = array_merge($temas,$gm->nomesLayersAdicionados);
+		}
+		//$temas = $gm->nomesLayersAdicionados;
 	}
 	//
 	//salva o mapfile com um outro nome para evitar que o mapa atual, se estiver aberto, seja modificado

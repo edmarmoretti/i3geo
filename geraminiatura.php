@@ -241,12 +241,13 @@ function verificaMiniatura($map,$tipo,$admin=false)
 			include_once($locaplic."/pacotes/gvsig/gvsig2mapfile/class.gvsig2mapfile.php");
 			$gm = new gvsig2mapfile($tema);
 			$gvsigview = $gm->getViewsNames();
-			$gvsigview = $gvsigview[0];
-			$dataView = $gm->getViewData($gvsigview);
+			foreach($gvsigview as $v){
+				$dataView = $gm->getViewData($v);
+				$mapa = $gm->addLayers($mapa,$v,$dataView["layerNames"]);
+			}
 			$next = $dataView["extent"];
 			$ext = $mapa->extent;
 			$ext->setextent($next[0],$next[1],$next[2],$next[3]);
-			$mapa = $gm->addLayers($mapa,$gvsigview,$dataView["layerNames"]);
 		}
 		if ($tipo == "mini"  || $tipo == "todos"){
 			$mapa->setsize(50,50);

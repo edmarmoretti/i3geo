@@ -43,26 +43,32 @@ if (isset($_FILES['i3GEOuploadfile']['name']))
 	if($status != 1)
 	{ob_clean();echo "Ocorreu um erro no envio do arquivo";exit;}
 
-	if($status == 1)
-	{
+	if($status == 1){
 		//echo $Arquivon;
+		$nomefim = str_replace(".gvp",".map",$Arquivon);
+		echo "#arquivo final: $nomefim <br>";
 		$gm = new gvsig2mapfile($Arquivon);
-		$views = $gm->getViewsNames();
-		$dataView = $gm->getViewData($views[0]);
 		$numlayers = $mapn->numlayers;
-		for ($i=0;$i < $numlayers;$i++)
-		{
+		for ($i=0;$i < $numlayers;$i++){
 			$layer = $mapn->getlayer($i);
 			$layer->set("status",MS_DELETE);
+		}
+		$views = $gm->getViewsNames();
+		foreach($views as $v){
+			echo "#vista: ".$v;
+			$dataView = $gm->getViewData($v);
+			$layernames = $dataView["layerNames"];
+			echo "<br>#layers: ".implode(", ",$layernames)."<br>";
+			$mapn = $gm->addLayers($mapn,$v,$layernames);
+			$mapn->save($nomefim);
 		}
 		$next = $dataView["extent"];
 		$ext = $mapn->extent;
 		$ext->setextent($next[0],$next[1],$next[2],$next[3]);
 
-		$mapn = $gm->addLayers($mapn,$views[0],$dataView["layerNames"]);
-		$mapn->save(str_replace(".gvp",".map",$Arquivon));
+		$mapn->save($nomefim);
 		$handle = fopen(str_replace(".gvp",".map",$Arquivon), "r");
-		echo "<html>";
+		echo "<html>#mapfile: <br>";
 		while (!feof($handle))
     	{
         	$linha = fgets($handle);
