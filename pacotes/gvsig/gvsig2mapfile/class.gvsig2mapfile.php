@@ -261,8 +261,10 @@ class gvsig2mapfile{
 		$oLayer->set("status",MS_DEFAULT);
 		if($dataLayer["visible"] == "false")
 		{$oLayer->set("status",MS_OFF);}
-		$opacidade = ($dataLayer["transparency"] * 100) / 255;
-		$oLayer->set("opacity",$opacidade);
+		if(!empty($dataLayer["transparency"])){
+			$opacidade = ($dataLayer["transparency"] * 100) / 255;
+			$oLayer->set("opacity",$opacidade);
+		}
 		if($dataLayer["minScale"] > 0)
 		{$oLayer->set("minscaledenom",$dataLayer["minScale"]);}
 		if($dataLayer["maxScale"] > 0)
@@ -283,15 +285,17 @@ class gvsig2mapfile{
 			if($oLayer->type == 0){
 				$estilo->set("symbolname","ponto");
 			}
-			if($data["hasFill"] == "true"){
-				$ncor = explode(",",$data["color"]);
-				$cor = $estilo->color;
-				$cor->setrgb($ncor[0],$ncor[1],$ncor[2]);
-			}
-			if($data["hasOutline"] == "true" && $data["outline"] != ""){
-				$ncor = explode(",",$data["outline"]);
-				$cor = $estilo->outlinecolor;
-				$cor->setrgb($ncor[0],$ncor[1],$ncor[2]);
+			if(!empty($data["color"])){
+				if($data["hasFill"] == "true"){
+					$ncor = explode(",",$data["color"]);
+					$cor = $estilo->color;
+					$cor->setrgb($ncor[0],$ncor[1],$ncor[2]);
+				}
+				if($data["hasOutline"] == "true" && $data["outline"] != ""){
+					$ncor = explode(",",$data["outline"]);
+					$cor = $estilo->outlinecolor;
+					$cor->setrgb($ncor[0],$ncor[1],$ncor[2]);
+				}
 			}
 			if($data["size"] != false)
 			{$estilo->set("size",$data["size"]);}
