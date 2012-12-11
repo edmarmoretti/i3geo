@@ -4147,7 +4147,10 @@ if(botoes.fecha===true){
 button = new OpenLayers.Control.Button({
 displayClass: "editorOLfecha",
 trigger: function(){
-var temp = window.confirm("Remove a edi&ccedil;&atilde;o?");
+var temp = window.confirm("Remove a edicao?");
+if(i3GEO.eventos){
+i3GEO.eventos.cliquePerm.ativa();
+}
 i3GEOpanelEditor.destroy();
 try{YAHOO.temaativo.container.panel.destroy();}catch(e){}
 try{YAHOO.procura.container.panel.destroy();}catch(e){}

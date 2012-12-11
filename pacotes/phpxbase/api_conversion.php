@@ -2,8 +2,8 @@
 /**
 * ----------------------------------------------------------------
 *			XBase
-*			api_conversion.php	
-* 
+*			api_conversion.php
+*
 *  Developer        : Erwin Kooi
 *  released at      : Jan 2006
 *  last modified by : Erwin Kooi
@@ -12,35 +12,29 @@
 *  You're free to use this code as long as you don't alter it
 *  Copyright (c) 2005 Cyane Dynamic Web Solutions
 *  Info? Mail to info@cyane.nl
-* 
+*
 * --------------------------------------------------------------
 *
 * This file implements the default dBase functions as described in the PHP docs
 *
 **/
-if (isset($locaplic))
-{
-	require_once "$locaplic/pacotes/phpxbase/Column.class.php";
-	require_once "$locaplic/pacotes/phpxbase/Record.class.php";
-	require_once "$locaplic/pacotes/phpxbase/Table.class.php";
-	require_once "$locaplic/pacotes/phpxbase/WritableTable.class.php";
+if(!isset($locaplic)){
+	$locaplic = __DIR__."/../../";
 }
-else
-{
-	require_once "../pacotes/phpxbase/Column.class.php";
-	require_once "../pacotes/phpxbase/Record.class.php";
-	require_once "../pacotes/phpxbase/Table.class.php";
-	require_once "../pacotes/phpxbase/WritableTable.class.php";
-}
+require_once "$locaplic/pacotes/phpxbase/Column.class.php";
+require_once "$locaplic/pacotes/phpxbase/Record.class.php";
+require_once "$locaplic/pacotes/phpxbase/Table.class.php";
+require_once "$locaplic/pacotes/phpxbase/WritableTable.class.php";
+
 function xbase_add_record($xbase_identifier=false,$record) { // - Add a record (array of values) to a dBase database
 	if (!($xbase=&xbase_getInstance($xbase_identifier))) return false;
 	$r =& $xbase->appendRecord();
 	foreach ($record as $i=>$v) {
 		if (is_object($i))
 			$r->setString($i,$v);
-		else if (is_numeric($i)) 
+		else if (is_numeric($i))
 			$r->setStringByIndex($i,$v);
-		else 
+		else
 			$r->setStringByName($i,$v);
 	}
 	$xbase->writeRecord();
@@ -63,17 +57,17 @@ function xbase_get_header_info($xbase_identifier=false) { // - Get the header in
 	$result = array();
 	foreach ($xbase->columns as $column) {
 		$result[] = array(
-			"name"=>$column->name, 
-			"type"=>$column->type, 
-			"length"=>$column->length, 
-			"precision"=>$column->decimalCount, 
-			"format"=>"%s", 
+			"name"=>$column->name,
+			"type"=>$column->type,
+			"length"=>$column->length,
+			"precision"=>$column->decimalCount,
+			"format"=>"%s",
 			"offset"=>$column->bytePos,
 		);
 	}
 	return $result;
 }
-function xbase_get_record_with_names($xbase_identifier=false,$record) { // - Gets a record from a dBase database as an associative array 
+function xbase_get_record_with_names($xbase_identifier=false,$record) { // - Gets a record from a dBase database as an associative array
 	if (!($xbase=&xbase_getInstance($xbase_identifier))) return false;
 	$r =& $xbase->moveTo($record-1);
 	$result = array();
@@ -93,11 +87,11 @@ function xbase_get_record($xbase_identifier=false) { // - Gets a record from a d
 	$result["deleted"] = $r->isDeleted();
 	return $result;
 }
-function xbase_numfields($xbase_identifier=false) { // - Find out how many fields are in a dBase database 
+function xbase_numfields($xbase_identifier=false) { // - Find out how many fields are in a dBase database
 	if (!($xbase=&xbase_getInstance($xbase_identifier))) return false;
 	return $xbase->getColumnCount();
 }
-function xbase_numrecords($xbase_identifier=false) { // - Find out how many records are in a dBase database 
+function xbase_numrecords($xbase_identifier=false) { // - Find out how many records are in a dBase database
 	if (!($xbase=&xbase_getInstance($xbase_identifier))) return false;
 	return $xbase->getRecordCount();
 }
@@ -121,9 +115,9 @@ function xbase_replace_record($xbase_identifier=false,$record,$record_number) { 
 	foreach ($record as $i=>$v) {
 		if (is_object($i))
 			$r->setString($i,$v);
-		else if (is_numeric($i)) 
+		else if (is_numeric($i))
 			$r->setStringByIndex($i,$v);
-		else 
+		else
 			$r->setStringByName($i,$v);
 	}
 	$xbase->writeRecord();

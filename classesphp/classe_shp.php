@@ -38,45 +38,45 @@ class SHP
 {
 	/*
 	Variavel: $mapa
-	
+
 	Objeto mapa
 	*/
 	public $mapa;
 	/*
 	Variavel: $arquivo
-	
+
 	Arquivo map file
 	*/
 	protected $arquivo;
 	/*
 	Variavel: $layer
-	
+
 	Objeto layer
 	*/
 	protected $layer;
 	/*
 	Variavel: $nome
-	
+
 	Nome do layer
 	*/
 	protected $nome;
 	/*
 	Variavel: $dbaseExiste
-	
+
 	Indica se a biblioteca dbase est&aacute; carregada
 	*/
 	protected $dbaseExiste;
 	/*
 	Variavel: $v
-	
+
 	Vers&atilde;o atual do Mapserver (primeiro d&iacute;gito)
 	*/
 	public $v;
-	
+
 /*
 function: __construct
 
-Cria um objeto map e seta a variavel tema 
+Cria um objeto map e seta a variavel tema
 
 parameters:
 
@@ -89,16 +89,21 @@ $ext - extensao geogr&aacute;fica que ser&aacute; aplicada ao mapa
 	function __construct($map_file,$tema="",$locaplic="",$ext="")
 	{
   		if (!function_exists('ms_newMapObj')) {return false;}
-  		if(file_exists($locaplic."/funcoes_gerais.php"))
-  		include_once($locaplic."/funcoes_gerais.php");
-  		else
-  		include_once("funcoes_gerais.php");
-		$this->v = versao();
+  		if($locaplic == ""){
+  			$locaplic = __DIR__."/..";
+  		}
+  		if(file_exists($locaplic."/funcoes_gerais.php")){
+  			include_once($locaplic."/funcoes_gerais.php");
+  		}
+  		else{
+  			include_once(__DIR__."/funcoes_gerais.php");
+  		}
+  		$this->v = versao();
 		$this->v = $this->v["principal"];
 		$this->dbaseExiste = false;
 		if(function_exists("dbase_create"))
 		{$this->dbaseExiste = true;}
-		
+
   		$this->locaplic = $locaplic;
   		$this->mapa = ms_newMapObj($map_file);
   		$this->arquivo = $map_file;
@@ -112,13 +117,13 @@ $ext - extensao geogr&aacute;fica que ser&aacute; aplicada ao mapa
 			$e = explode(" ",$ext);
 			$extatual = $this->mapa->extent;
 			$extatual->setextent((min($e[0],$e[2])),(min($e[1],$e[3])),(max($e[0],$e[2])),(max($e[1],$e[3])));
-		}		
+		}
 	}
 /*
 function: salva
 
-Salva o mapfile atual 
-*/	
+Salva o mapfile atual
+*/
  	function salva()
  	{
 	  	if (connection_aborted()){exit();}
@@ -145,7 +150,7 @@ Nome do tema criado.
 		if($this->dbaseExiste == false){
 			if(file_exists($this->locaplic."/pacotes/phpxbase/api_conversion.php"))
 			{include_once($this->locaplic."/pacotes/phpxbase/api_conversion.php");}
-			else	
+			else
 			{include_once "../pacotes/phpxbase/api_conversion.php";}
 			$db = xbase_create($nomeshp.".dbf", $def);
 			xbase_close($db);
@@ -190,23 +195,28 @@ $projecao - código epsg da proje&ccedil;&atilde;o das coordenadas
 	{
 		if(!$this->layer){return "erro";}
 		if($this->dbaseExiste == false){
-			if(file_exists($this->locaplic."/pacotes/phpxbase/api_conversion.php"))
-			include_once($this->locaplic."/pacotes/phpxbase/api_conversion.php");
-			else	
-			include_once "../pacotes/phpxbase/api_conversion.php";
+			if(file_exists($this->locaplic."/pacotes/phpxbase/api_conversion.php")){
+				include_once($this->locaplic."/pacotes/phpxbase/api_conversion.php");
+			}
+			else{
+				include_once "../pacotes/phpxbase/api_conversion.php";
+			}
 		}
+
 		$xy = explode(" ",$xy);
 		$data = $this->layer->data;
 		$data = explode(".shp",$data);
 		$data = $data[0];
+
 		$items = pegaItens($this->layer);
 		$dbname = $data.".dbf";
-		
-		if($this->dbaseExiste == false)
-		$db=xbase_open($dbname,2);
-		else
-		$db=dbase_open($dbname,2);
-		
+
+		if($this->dbaseExiste == false){
+			$db=xbase_open($dbname,2);
+		}
+		else{
+			$db=dbase_open($dbname,2);
+		}
 		for($i=0;$i<(count($xy) / 2);++$i)
 		{
 			$reg = array();
@@ -345,7 +355,7 @@ array - xy
 */
 	function listaPontosShape()
 	{
-		if(!$this->layer){return "erro";}		
+		if(!$this->layer){return "erro";}
 		$sopen = $this->layer->open();
 		if($sopen == MS_FAILURE){return "erro";}
 		$prjMapa = $this->mapa->getProjection();
@@ -401,7 +411,7 @@ array - xy
 		}
 		$fechou = $this->layer->close();
 		return $xy;
-	}	
+	}
 /*
 function: ultimoXY
 
@@ -439,7 +449,7 @@ array("layerprj"=>$xylayer,"mapprj"=>$xymapa)
 			$xymapa = array("x"=>$pt->x,"y"=>$pt->y);
 		}
 		else
-		{$xymapa = $xylayer;}	
+		{$xymapa = $xylayer;}
 		return array("layerprj"=>$xylayer,"mapprj"=>$xymapa);
 	}
 
@@ -480,7 +490,7 @@ $para - linha|poligono
 		{
 			if(file_exists($this->locaplic."/pacotes/phpxbase/api_conversion.php"))
 			{include_once($this->locaplic."/pacotes/phpxbase/api_conversion.php");}
-			else	
+			else
 			{include_once "../pacotes/phpxbase/api_conversion.php";}
 			$db = xbase_create($nomeshp.".dbf", $def);
 		}
@@ -490,10 +500,10 @@ $para - linha|poligono
 		$reg = array();
 		$novoshpf = ms_newShapefileObj($nomeshp.".shp", $tipol);
 		$this->layer->open();
-		
+
 		$prjMapa = $this->mapa->getProjection();
 		$prjTema = $this->layer->getProjection();
-		
+
 		$ret = $this->mapa->extent;
 		if (($prjTema != "") && ($prjMapa != $prjTema))
 		{
@@ -533,7 +543,7 @@ $para - linha|poligono
 		else
 		{
 			dbase_add_record($db,$reg);
-			dbase_close($db);			
+			dbase_close($db);
 		}
 		$this->layer->close();
 		//cria o novo layer

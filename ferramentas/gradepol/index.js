@@ -55,7 +55,7 @@ i3GEOF.gradeDePoligonos = {
 		Para efeitos de compatibilidade antes da vers&atilde;o 4.7 que n&atilde;o tinha dicion&aacute;rio
 	*/
 	criaJanelaFlutuante: function(){
-		i3GEOF.distanciaptpt.iniciaDicionario();
+		i3GEOF.gradeDePoligonos.iniciaDicionario();
 	},
 	/*
 	Function: iniciaDicionario
@@ -116,7 +116,7 @@ i3GEOF.gradeDePoligonos = {
 	Cria a janela flutuante para controle da ferramenta.
 	*/
 	iniciaJanelaFlutuante: function(){
-		var minimiza,cabecalho,janela,divid,titulo;
+		var minimiza,cabecalho,janela,divid,titulo,temp;
 		//cria a janela flutuante
 		titulo = $trad("u7")+" <a class=ajuda_usuario target=_blank href='" + i3GEO.configura.locaplic + "/ajuda_usuario.php?idcategoria=3&idajuda=14' >&nbsp;&nbsp;&nbsp;</a>";
 		cabecalho = function(){
@@ -141,6 +141,11 @@ i3GEOF.gradeDePoligonos = {
 		divid = janela[2].id;
 		i3GEOF.gradeDePoligonos.aguarde = $i("i3GEOF.gradeDePoligonos_imagemCabecalho").style;
 		i3GEOF.gradeDePoligonos.inicia(divid);
+		temp = function(){
+			i3GEO.eventos.cliquePerm.ativa();
+			i3GEO.eventos.MOUSECLIQUE.remove("i3GEOF.gradeDePoligonos.capturaPonto()");
+		};
+		YAHOO.util.Event.addListener(janela[0].close, "click", temp);
 	},
 	t0: function()
 	{
@@ -162,8 +167,7 @@ i3GEOF.gradeDePoligonos = {
 		i3GEO.util.proximoAnterior("i3GEOF.gradeDePoligonos.t0()","i3GEOF.gradeDePoligonos.t2()",ins,"i3GEOF.gradeDePoligonos.t1","i3GEOgradedepoligonosresultado");
 	},
 	t2: function(){
-		var temp,
-			ins = "<p class='paragrafo'>Coordenadas do ponto inicial superior esquerdo (utilize o sinal negativo no grau quando ao sul do equador e a oeste). <b>Voc&ecirc; pode clicar no mapa para pegar o ponto.</b>";
+		var ins = "<p class='paragrafo'>Coordenadas do ponto inicial superior esquerdo (utilize o sinal negativo no grau quando ao sul do equador e a oeste). <b>Voc&ecirc; pode clicar no mapa para pegar o ponto.</b>";
 		ins += "<p class='paragrafo'>em X: ";
 		ins += "Grau<input onclick='javascript:this.select();' class=digitar id='i3GEOgradedepoligonosixg' title='grau'  type=text size=3 value='-00'/>";
 		ins += "Minuto<input onclick='javascript:this.select();' class=digitar id='i3GEOgradedepoligonosixm' title='minuto'  type=text size=5 value='00'/>";
@@ -174,13 +178,10 @@ i3GEOF.gradeDePoligonos = {
 		ins += "Segundo<input onclick='javascript:this.select();' class=digitar id='i3GEOgradedepoligonosiys' title='segundo'  type=text size=5 value='00.00'/>";
 		g_tipoacao = "capturaponto";
 		i3GEO.util.proximoAnterior("i3GEOF.gradeDePoligonos.t1()","i3GEOF.gradeDePoligonos.t3()",ins,"i3GEOF.gradeDePoligonos.t2","i3GEOgradedepoligonosresultado");
-
-		if(i3GEO.eventos.MOUSECLIQUE.toString().search("i3GEOF.gradeDePoligonos.capturaPonto()") < 0)
-		{i3GEO.eventos.MOUSECLIQUE.push("i3GEOF.gradeDePoligonos.capturaPonto()");}
-		temp = function(){
-			i3GEO.eventos.MOUSECLIQUE.remove("i3GEOF.gradeDePoligonos.capturaPonto()");
-		};
-		YAHOO.util.Event.addListener(janela[0].close, "click", temp);
+		i3GEO.eventos.cliquePerm.desativa();
+		if(i3GEO.eventos.MOUSECLIQUE.toString().search("i3GEOF.gradeDePoligonos.capturaPonto()") < 0){
+			i3GEO.eventos.MOUSECLIQUE.push("i3GEOF.gradeDePoligonos.capturaPonto()");
+		}
 	},
 	t3: function(){
 		var ins = "<p class='paragrafo'>N&uacute;mero de c&eacute;lulas. Total m&aacute;ximo de 10.000";

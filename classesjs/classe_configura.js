@@ -270,7 +270,7 @@ i3GEO.configura = {
 	Default:
 	{"200px"}
 	*/
-	alturatip: "200px",
+	alturatip: "100px",
 	/*
 	Propriedade: larguratip
 
@@ -793,6 +793,7 @@ i3GEO.configura = {
 			funcaoonclick:function()
 			{
 				var temp;
+				i3GEO.eventos.cliquePerm.desativa();
 				if($i(i3GEO.Interface.IDMAPA)){
 					$i(i3GEO.Interface.IDMAPA).title = "";
 					temp = "identifica";

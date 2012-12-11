@@ -1200,12 +1200,14 @@ i3GEO.Interface = {
 			//ativa os eventos controlados pela API do OL
 			//
 			i3geoOL.events.register("movestart",i3geoOL,function(e){
+				//if(typeof(console) !== 'undefined'){console.error("movestart");}
 				var xy;
 				modoAtual = "move";
 				xy = i3GEO.navega.centroDoMapa();
 				i3GEO.navega.marcaCentroDoMapa(xy);
 			});
 			i3geoOL.events.register("moveend",i3geoOL,function(e){
+				//if(typeof(console) !== 'undefined'){console.error("moveend");}
 				var xy;
 				modoAtual = "";
 				i3GEO.Interface.openlayers.recalcPar();
@@ -1216,11 +1218,13 @@ i3GEO.Interface = {
 				//
 				xy = i3GEO.navega.centroDoMapa();
 				i3GEO.coordenadas.mostraCoordenadas(false,"",xy[0],xy[1]);
+				i3GEO.eventos.cliquePerm.status = false;
 			});
 			i3geoOL.events.register("mousemove", i3geoOL, function(e){
 				var p,lonlat,d,pos;
-				if(modoAtual === "move")
-				{return;}
+				if(modoAtual === "move"){
+					return;
+				}
 				p = e.xy;
 				//altera o indicador de localizacao
 				lonlat = i3geoOL.getLonLatFromPixel(p);
@@ -1272,6 +1276,7 @@ i3GEO.Interface = {
 			m = ext.split(" ");
 			b = new OpenLayers.Bounds(m[0],m[1],m[2],m[3]);
 			i3geoOL.zoomToExtent(b);
+			i3GEO.eventos.cliquePerm.status = true;
 		},
 		pan2ponto:function(x,y){
 			i3geoOL.panTo(new OpenLayers.LonLat(x,y));
@@ -1555,6 +1560,7 @@ i3GEO.Interface = {
 				//
 				xy = i3GEO.navega.centroDoMapa();
 				i3GEO.coordenadas.mostraCoordenadas(false,"",xy[0],xy[1]);
+				i3GEO.eventos.cliquePerm.status = false;
 			});
 			google.maps.event.addListener(i3GeoMap, "tilesloaded", function() {
 				i3GEO.Interface.googlemaps.recalcPar();
@@ -2265,6 +2271,7 @@ i3GEO.Interface = {
 				"viewchangeend",
 				function(e){
 					i3GEO.Interface.googleearth.recalcPar();
+					i3GEO.eventos.cliquePerm.status = false;
 				}
 			);
 			google.earth.addEventListener(

@@ -182,8 +182,10 @@ i3GEOF.insereGrafico = {
 		i3GEOF.insereGrafico.aguarde = $i("i3GEOF.insereGrafico_imagemCabecalho").style;
 		if(i3GEO.eventos.MOUSECLIQUE.toString().search("i3GEOF.insereGrafico.insere()") < 0)
 		{i3GEO.eventos.MOUSECLIQUE.push("i3GEOF.insereGrafico.insere()");}
+		i3GEO.eventos.cliquePerm.desativa();
 		temp = function(){
 			i3GEO.eventos.MOUSECLIQUE.remove("i3GEOF.insereGrafico.insere()");
+			i3GEO.eventos.cliquePerm.ativa();
 			//if(i3GEO.eventos.ATUALIZAARVORECAMADAS.toString().search("i3GEOF.insereGrafico.comboTemas()") > 0)
 			//{i3GEO.eventos.ATUALIZAARVORECAMADAS.remove("i3GEOF.insereGrafico.comboTemas()");}
 		};
@@ -198,6 +200,7 @@ i3GEOF.insereGrafico = {
 	Refaz a interface da ferramenta quando a janela flutuante tem seu foco ativado
 	*/
 	ativaFoco: function(){
+		i3GEO.eventos.cliquePerm.desativa();
 		if(g_tipoacao !== 'inseregrafico'){
 			i3GEO.barraDeBotoes.ativaIcone("inseregrafico");
 			g_tipoacao='inseregrafico';

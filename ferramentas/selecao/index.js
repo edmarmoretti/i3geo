@@ -250,8 +250,9 @@ i3GEOF.selecao = {
 		{i3GEO.eventos.ATUALIZAARVORECAMADAS.push("i3GEOF.selecao.criaCombosTemas()");}
 		if(i3GEO.eventos.MOUSECLIQUE.toString().search("i3GEOF.selecao.clique()") < 0)
 		{i3GEO.eventos.MOUSECLIQUE.push("i3GEOF.selecao.clique()");}
-
+		i3GEO.eventos.cliquePerm.desativa();
 		temp = function(){
+			i3GEO.eventos.cliquePerm.ativa();
 			if(i3GEO.eventos.ATUALIZAARVORECAMADAS.toString().search("i3GEOF.selecao.criaCombosTemas()") > 0)
 			{i3GEO.eventos.ATUALIZAARVORECAMADAS.remove("i3GEOF.selecao.criaCombosTemas()");}
 			i3GEO.barraDeBotoes.ativaPadrao();
@@ -271,6 +272,7 @@ i3GEOF.selecao = {
 	Refaz a interface da ferramenta quando a janela flutuante tem seu foco ativado
 	*/
 	ativaFoco: function(){
+		i3GEO.eventos.cliquePerm.desativa();
 		i3GEO.util.mudaCursor(i3GEO.configura.cursores,"crosshair",i3GEO.Interface.IDMAPA,i3GEO.configura.locaplic);
 		i3GEO.barraDeBotoes.ativaIcone("selecao");
 		i3GEOF.selecao.pegaTemasSel();

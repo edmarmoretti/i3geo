@@ -140,7 +140,7 @@ i3GEO.eventos = {
 	Default:
 	{[]}
 	*/
-	MOUSEUP: [],
+	MOUSEUP: ["i3GEO.eventos.cliquePerm.executa()"],
 	/*
 	Propriedade: MOUSECLIQUE
 
@@ -153,6 +153,20 @@ i3GEO.eventos = {
 	{["i3GEO.eventos.cliqueCapturaPt()"]}
 	*/
 	MOUSECLIQUE: ["i3GEO.eventos.cliqueCapturaPt()"],
+	/*
+	Propriedade: MOUSECLIQUEPERM
+
+	Armazena as fun&ccedil;&otilde;es permanentes que ser&atilde;o executadas quando o usu&aacute;rio clica sobre o mapa
+
+	As opera&ccedil;&otilde;es definidas aqui normalmente n&atilde;o fazem verifica&ccedil;&atilde;o de status de outras ferramentas e podem ser bloqueadas momentaneamente alterando-se i3GEO.eventos.cliquePerm.status
+
+	Tipo:
+	{Array}
+
+	Default:
+	{[]}
+	*/
+	MOUSECLIQUEPERM: [i3GEO.configura.funcaoTip],
 	/*
 	Variavel: TIMERPARADO
 
@@ -171,7 +185,6 @@ i3GEO.eventos = {
 
 	*/
 	mouseParado: function()	{
-		if(typeof(console) !== 'undefined'){console.info("i3GEO.eventos.mouseParado()");}
 		try
 		{clearTimeout(this.TIMERPARADO);}
 		catch(e){this.TIMERPARADO = "";}
@@ -196,7 +209,6 @@ i3GEO.eventos = {
 	Executa as fun&ccedil;&otilde;es armazenadas em NAVEGAMAPA, ou seja, opera&ccedil;&otilde;es executadas quando o mapa tem sua extens&atilde;o geogr&aacute;fica alterada.
 	*/
 	navegaMapa: function(){
-		if(typeof(console) !== 'undefined'){console.info("i3GEO.eventos.navegaMapa()");}
 		i3GEO.eventos.executaEventos(this.NAVEGAMAPA);
 	},
 	/*
@@ -213,7 +225,6 @@ i3GEO.eventos = {
 	Executa as fun&ccedil;&otilde;es armazenadas em MOUSEDOWN.
 	*/
 	mousedownMapa: function(){
-		if(typeof(console) !== 'undefined'){console.info("i3GEO.eventos.mousedownMapa()");}
 		i3GEO.eventos.executaEventos(this.MOUSEDOWN);
 	},
 	/*
@@ -222,7 +233,6 @@ i3GEO.eventos = {
 	Executa as fun&ccedil;&otilde;es armazenadas em MOUSEUP.
 	*/
 	mouseupMapa: function(){
-		if(typeof(console) !== 'undefined'){console.info("i3GEO.eventos.mouseupMapa()");}
 		i3GEO.eventos.executaEventos(this.MOUSEUP);
 	},
 	/*
@@ -231,8 +241,70 @@ i3GEO.eventos = {
 	Executa as fun&ccedil;&otilde;es armazenadas em MOUSECLIQUE.
 	*/
 	mousecliqueMapa: function(){
-		if(typeof(console) !== 'undefined'){console.info("i3GEO.eventos.mousecliqueMapa()");}
 		i3GEO.eventos.executaEventos(this.MOUSECLIQUE);
+	},
+	/*
+	Function: cliquePerm
+
+	Executa as fun&ccedil;&otilde;es armazenadas em MOUSECLIQUEPERM
+
+	i3GEO.eventos.cliquePerm.executa &eacute; definido como um evento de clique sobre o mapa
+
+	Essas s&atilde;o opera&ccedil;&otilde;es que ocorrem de forma permanente sempre que o usu&aacute;rio clica no mapa. As opera&ccedil;&otilde;es de clique devem alterar o status desse objeto para bloquear a execu&ccedil;&atilde;o quando for o caso
+
+	Exemplo, pode ser necess&aacute;rio bloquear as fun&ccedil;&otilde;es permanentes quando o usu&aacute;rio clica no mapa para calcular dist&acirc;ncias, para isso, altere i3GEO.eventos.cliquePerm.status = false e depois volte para true
+	*/
+	cliquePerm: {
+		/*
+		Propriedade: ativo
+
+		Indica se as opera&ccedil;&otilde;es permanentes ser&atilde;o ou n&atilde;o executadas
+
+		Essa propriedade bloqueia todas as opera&ccedil;&otilde;es mesmo que moment&acirc;neamente o status esteja true
+
+		Type: boolean
+		*/
+		ativo: true,
+		/*
+		Propriedade: status
+
+		Indica se as opera&ccedil;&otilde;es permanentes ser&atilde;o ou n&atilde;o executadas se 'ativo' estiver true. Status pode ser moment&acirc;neo e controlado em tempo de execu&ccedil;&atilde;o
+
+		Type: boolean
+		*/
+		status: true,
+		/*
+		Function executa
+
+		Executa os eventos definidos em MOUSECLIQUEPERM
+		*/
+		executa: function(){
+			if(i3GEO.eventos.cliquePerm.ativo === true && i3GEO.eventos.cliquePerm.status === true){
+				i3GEO.eventos.executaEventos(i3GEO.eventos.MOUSECLIQUEPERM);
+			}
+		},
+		/*
+		Function ativa
+
+		Ativa os cliques permanentes
+		*/
+		ativa: function(){
+			if(i3GEO.eventos.cliquePerm.ativoinicial === true){
+				i3GEO.eventos.cliquePerm.ativo = true;
+			}
+		},
+		/*
+		Function desativa
+
+		Desaativa momentaneamente os cliques permanentes
+		*/
+		desativa: function(){
+			if(i3GEO.eventos.cliquePerm.ativoinicial === true){
+				i3GEO.eventos.cliquePerm.ativo = false;
+			}
+		},
+		//uso interno, definido na criacao do mapa
+		ativoinicial: true
 	},
 	/*
 	Function: executaEventos
@@ -458,10 +530,14 @@ i3GEO.eventos = {
 			{i3GEO.eventos.mousedownMapa();}
 		};
 		docMapa.onclick = function(exy){
+			//if(typeof(console) !== 'undefined'){console.error("click");}
 			if(!i3GEO.eventos.botaoDireita(exy))
 			{i3GEO.eventos.mousecliqueMapa();}
+			//ativa o clique sobre o mapa (o evento click e desativado no evento moveend da interface
+			i3GEO.eventos.cliquePerm.status = true;
 		};
 		docMapa.onmouseup = function(exy){
+			//if(typeof(console) !== 'undefined'){console.error("up");}
 			if(!i3GEO.eventos.botaoDireita(exy))
 			{i3GEO.eventos.mouseupMapa();}
 		};

@@ -500,7 +500,6 @@ i3GEO.navega = {
 	i3GEO.eventos.MOUSEPARADO
 	*/
 	mostraRosaDosVentos: function(){
-		if(typeof(console) !== 'undefined'){console.info("i3GEO.navega.mostraRosaDosVentos()");}
 		var novoel,setas,i;
 		try{
 			if(i3GEO.configura.mostraRosaDosVentos === "nao")

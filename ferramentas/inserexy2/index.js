@@ -314,7 +314,9 @@ i3GEOF.inserexy = {
 
 		if(i3GEO.eventos.MOUSECLIQUE.toString().search("i3GEOF.inserexy.adicionaClique()") < 0)
 		{i3GEO.eventos.MOUSECLIQUE.push("i3GEOF.inserexy.adicionaClique()");}
+		i3GEO.eventos.cliquePerm.desativa();
 		temp = function(){
+			i3GEO.eventos.cliquePerm.ativa();
 			i3GEO.barraDeBotoes.ativaPadrao();
 			i3GEO.eventos.MOUSECLIQUE.remove("i3GEOF.inserexy.adicionaClique()");
 		};
@@ -327,6 +329,7 @@ i3GEOF.inserexy = {
 	Refaz a interface da ferramenta quando a janela flutuante tem seu foco ativado
 	*/
 	ativaFoco: function(){
+		i3GEO.eventos.cliquePerm.desativa();
 		i3GEO.util.mudaCursor(i3GEO.configura.cursores,"crosshair",i3GEO.Interface.IDMAPA,i3GEO.configura.locaplic);
 		i3GEO.barraDeBotoes.ativaIcone("inserexy");
 		g_tipoacao='inserexy';

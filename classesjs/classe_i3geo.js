@@ -310,6 +310,8 @@ var i3GEO = {
 	*/
 	inicia:function(retorno){
 		if(typeof(console) !== 'undefined'){console.info("i3GEO.inicia()");}
+		//define o valor inicial da variavel que controla as etiquetas quando o usuario clica no mapa
+		i3GEO.eventos.cliquePerm.ativoinicial = i3GEO.eventos.cliquePerm.ativo;
 		var montaMapa,mashup,tamanho;
 		if(typeof("i3GEOmantemCompatibilidade") === 'function')
 		{i3GEOmantemCompatibilidade();}

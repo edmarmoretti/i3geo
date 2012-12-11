@@ -1432,6 +1432,7 @@ i3GEO.barraDeBotoes = {
 		inicia: function(){
 			//if(navm)
 			//{alert("O editor n&atilde;o funciona corretamente nesse navegador.");}
+			i3GEO.eventos.cliquePerm.desativa();
 			i3GEO.barraDeBotoes.editor.carregaJs("janelaEditorVetorial");
 		},
 		carregaJs: function(idjanela){

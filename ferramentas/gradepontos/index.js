@@ -116,7 +116,7 @@ i3GEOF.gradeDePontos = {
 	Cria a janela flutuante para controle da ferramenta.
 	*/
 	iniciaJanelaFlutuante: function(){
-		var minimiza,cabecalho,janela,divid,titulo;
+		var minimiza,cabecalho,janela,divid,titulo,temp;
 		//cria a janela flutuante
 		titulo = $trad("u8")+" <a class=ajuda_usuario target=_blank href='" + i3GEO.configura.locaplic + "/ajuda_usuario.php?idcategoria=3&idajuda=15' >&nbsp;&nbsp;&nbsp;</a>";
 		cabecalho = function(){
@@ -141,6 +141,11 @@ i3GEOF.gradeDePontos = {
 		divid = janela[2].id;
 		i3GEOF.gradeDePontos.aguarde = $i("i3GEOF.gradeDePontos_imagemCabecalho").style;
 		i3GEOF.gradeDePontos.inicia(divid);
+		temp = function(){
+			i3GEO.eventos.MOUSECLIQUE.remove("i3GEOF.gradeDePontos.capturaPonto()");
+			i3GEO.eventos.cliquePerm.ativa();
+		};
+		YAHOO.util.Event.addListener(janela[0].close, "click", temp);
 	},
 	t0: function()
 	{
@@ -162,8 +167,7 @@ i3GEOF.gradeDePontos = {
 		i3GEO.util.proximoAnterior("i3GEOF.gradeDePontos.t0()","i3GEOF.gradeDePontos.t2()",ins,"i3GEOF.gradeDePontos.t1","i3GEOgradedepontosresultado");
 	},
 	t2: function(){
-		var temp,
-			ins = "<p class='paragrafo'>Coordenadas do ponto inicial superior esquerdo (utilize o sinal negativo no grau quando ao sul do equador e a oeste). <b>Voc&ecirc; pode clicar no mapa para pegar o ponto.</b>";
+		var ins = "<p class='paragrafo'>Coordenadas do ponto inicial superior esquerdo (utilize o sinal negativo no grau quando ao sul do equador e a oeste). <b>Voc&ecirc; pode clicar no mapa para pegar o ponto.</b>";
 		ins += "<p class='paragrafo'>em X: ";
 		ins += "Grau<input onclick='javascript:this.select();' class=digitar id='i3GEOgradedepontosixg' title='grau'  type=text size=3 value='-00'/>";
 		ins += "Minuto<input onclick='javascript:this.select();' class=digitar id='i3GEOgradedepontosixm' title='minuto'  type=text size=5 value='00'/>";
@@ -176,10 +180,6 @@ i3GEOF.gradeDePontos = {
 		i3GEO.util.proximoAnterior("i3GEOF.gradeDePontos.t1()","i3GEOF.gradeDePontos.t3()",ins,"i3GEOF.gradeDePontos.t2","i3GEOgradedepontosresultado");
 		if(i3GEO.eventos.MOUSECLIQUE.toString().search("i3GEOF.gradeDePontos.capturaPonto()") < 0)
 		{i3GEO.eventos.MOUSECLIQUE.push("i3GEOF.gradeDePontos.capturaPonto()");}
-		temp = function(){
-			i3GEO.eventos.MOUSECLIQUE.remove("i3GEOF.gradeDePontos.capturaPonto()");
-		};
-		YAHOO.util.Event.addListener(janela[0].close, "click", temp);
 	},
 	t3: function(){
 		var ins = "<p class='paragrafo'>N&uacute;mero de pontos. Total m&aacute;ximo de 10.000";

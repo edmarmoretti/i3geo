@@ -200,8 +200,5 @@ i3GEOF.bufferpt = {
 			{i3GEO.janela.tempoMsg("Distancia invalida");}
 		}
 		catch(e){$i("i3GEObufferfim").innerHTML = "<p class='paragrafo' >Erro. "+e;i3GEO.janela.fechaAguarde();i3GEOF.bufferpt.aguarde.visibility = "hidden";}
-
-
-
 	}
 };

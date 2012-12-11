@@ -114,9 +114,6 @@ function iniciaMapa()
 	if(!isset($kmlurl))
 	{$kmlurl = "";}
 	error_reporting(0);
-	//
-	//pega o xml com os sietmas para identifica&ccedil;&atilde;o
-	//
 	if(!isset($interface)){$interface = "";}
 	if($interface == "openlayers"){
 		$m = ms_newMapObj($map_file);
@@ -221,7 +218,8 @@ function iniciaMapa()
 	//cuidado ao mexer aqui
 	//o mapa precisa ser salvo para registrar a extens&atilde;o geogr&aacute;fica
 	//
-	$imgo = $m->mapa->draw();
+	//$imgo = $m->mapa->draw();
+	$imgo = $m->mapa->prepareImage();
 	$m->salva($map_file);
 	$e = $m->mapa->extent;
 	$ext = ($e->minx)." ".($e->miny)." ".($e->maxx)." ".($e->maxy);

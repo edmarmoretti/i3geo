@@ -141,7 +141,9 @@ var parametrosURL = {
 		{echo "false";}
 	?>
 };
-
+//ativa ou desativa o balao de info ao clicar no mapa
+i3GEO.eventos.cliquePerm.ativo = true;
+//
 i3GEO.configura.locaplic = i3GEO.util.protocolo()+"://"+window.location.host+"/i3geo";
 i3GEO.configura.autotamanho = false;
 i3GEO.Interface.ATUAL = "openlayers";

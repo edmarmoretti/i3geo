@@ -244,7 +244,6 @@ i3GEO.util = {
 	(Array) - array com as chaves.
 	*/
 	listaChaves: function (obj) {
-		if(typeof(console) !== 'undefined'){console.info("i3GEO.util.listaChaves()");}
 		var keys,key = "";
 		keys = [];
 		for(key in obj){

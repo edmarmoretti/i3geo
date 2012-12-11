@@ -223,6 +223,7 @@ i3GEO.analise = {
 		*/
 		inicia: function(){
 			if(typeof(console) !== 'undefined'){console.info("i3GEO.analise.medeDistancia.inicia()");}
+			i3GEO.eventos.cliquePerm.desativa();
 			pontosdistobj = {
 				xpt: [],
 				ypt: [],
@@ -320,6 +321,7 @@ i3GEO.analise = {
 		*/
 		fechaJanela: function(){
 			var janela;
+			i3GEO.eventos.cliquePerm.ativa();
 			i3GEO.Interface.ATUAL !== "googleearth" ? i3GEO.desenho.richdraw.fecha() : i3GEO.Interface.googleearth.removePlacemark("divGeometriasTemp");
 			i3GEO.util.removeChild("pontosins");
 			if($i("divGeometriasTemp"))
@@ -475,6 +477,7 @@ i3GEO.analise = {
 		*/
 		inicia: function(){
 			if(typeof(console) !== 'undefined'){console.info("i3GEO.analise.medeArea.inicia()");}
+			i3GEO.eventos.cliquePerm.desativa();
 			pontosdistobj = {
 				xpt: [],
 				ypt: [],
@@ -561,6 +564,7 @@ i3GEO.analise = {
 		*/
 		fechaJanela: function(){
 			var janela;
+			i3GEO.eventos.cliquePerm.ativa();
 			i3GEO.desenho.richdraw.fecha();
 			i3GEO.util.removeChild("pontosArea",document.body);
 			i3GEO.eventos.MOUSECLIQUE.remove("i3GEO.analise.medeArea.clique()");
