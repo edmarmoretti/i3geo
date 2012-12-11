@@ -404,6 +404,10 @@ class Metaestat{
 			if(!empty($id_classificacao)){
 				$classes = $this->listaClasseClassificacao($id_classificacao);
 			}
+			else{
+				$classificacoes = $this->listaClassificacaoMedida($id_medida_variavel);
+				$classes = $this->listaClasseClassificacao($classificacoes[0]["id_classificacao"]);
+			}
 			$dados[] = "MAP";
 			$dados[] = 'SYMBOLSET "'.$this->locaplic.'/symbols/simbolosv6.sym"';
 			$dados[] = 'FONTSET   "'.$this->locaplic.'/symbols/fontes.txt"';

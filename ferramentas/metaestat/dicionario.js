@@ -22,7 +22,7 @@ it:""
 }],
 "3":[
 {
-pt:"Mais info",
+pt:"Mais informa&ccedil;&otilde;es",
 en:"",
 es:"",
 it:""
@@ -71,7 +71,7 @@ it:""
 }],
 "10":[
 {
-pt:"Criar camada",
+pt:"Nova camada",
 en:"",
 es:"",
 it:""
@@ -92,7 +92,7 @@ it:""
 }],
 "13":[
 {
-pt:"Escolha um tipo de regi&atilde;o",
+pt:"Escolha um tipo de limite geogr&aacute;fico",
 en:"",
 es:"",
 it:""
@@ -106,21 +106,28 @@ it:""
 }],
 "15":[
 {
-pt:"Editar a regi&atilde;o",
+pt:"Editar limite geogr&aacute;fico",
 en:"",
 es:"",
 it:""
 }],
 "16":[
 {
-pt:"Regi&atilde;o",
+pt:"Limite geogr&aacute;fico",
 en:"",
 es:"",
 it:""
 }],
 "17":[
 {
-pt:"Escolha um tipo de regi&atilde;o (limites utilizados para representar os valores) e o tipo de classifica&ccedil;&atilde;o dos dados, depois escolha os valores para os par&acirc;metros , se houver. Para adicionar a camada ao mapa, clique no bot&atilde;o de adi&ccedil;&atilde;o e feche a janela para continuar usando o mapa.",
+pt:"Escolha um tipo de limite geogr&aacute;fico (limites utilizados para representar os valores) e o tipo de classifica&ccedil;&atilde;o dos dados, depois escolha os valores para os par&acirc;metros , se houver. Para adicionar a camada ao mapa, clique no bot&atilde;o de adi&ccedil;&atilde;o e feche a janela para continuar usando o mapa.",
+en:"",
+es:"",
+it:""
+}],
+"18":[
+{
+pt:"Propriedades da camada",
 en:"",
 es:"",
 it:""
