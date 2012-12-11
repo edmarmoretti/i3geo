@@ -659,6 +659,8 @@ i3GEO.navega = {
 	Controla o desenho de um box na tela para executar o zoom por box
 	*/
 	zoomBox: {
+		boxxini: 0,
+		boxyini: 0,
 		/*
 		Function: inicia
 
@@ -679,10 +681,10 @@ i3GEO.navega = {
 			i.display="block";
 			i.left = objposicaocursor.telax + "px";
 			i.top = objposicaocursor.telay + "px";
-			boxxini = objposicaocursor.telax;
-			boxyini = objposicaocursor.telay;
-			tamanhox = 0;
-			tamanhoy = 0;
+			i3GEO.navega.boxxini = objposicaocursor.telax;
+			i3GEO.navega.boxyini = objposicaocursor.telay;
+			//tamanhox = 0;
+			//tamanhoy = 0;
 			if(i3GEO.eventos.MOUSEMOVE.toString().search("i3GEO.navega.zoomBox.desloca()") < 0)
 			{i3GEO.eventos.MOUSEMOVE.push("i3GEO.navega.zoomBox.desloca()");}
 			if(i3GEO.eventos.MOUSEUP.toString().search("i3GEO.navega.zoomBox.termina()") < 0)
@@ -738,7 +740,9 @@ i3GEO.navega = {
 		Desloca o box conforme o mouse &eacute; movimentado
 		*/
 		desloca: function(){
-			var bxs,ppx,py;
+			var bxs,ppx,py,
+				boxxini = i3GEO.navega.boxxini,
+				boxyini = i3GEO.navega.boxyini;
 			if(i3GEO.navega.timerNavega !== null)
 			{return;}
 			if(g_tipoacao !== 'zoomli')
@@ -812,7 +816,6 @@ i3GEO.navega = {
 					i3GEO.Interface.googlemaps.zoom2extent(v);
 					return;
 				}
-
 				f = "i3GEO.navega.timerNavega = null;i3GEO.navega.zoomExt('"+i3GEO.configura.locaplic+"','"+i3GEO.configura.sid+"','"+i3GEO.configura.tipoimagem+"','"+v+"')";
 				if(i3GEO.navega.timerNavega !== undefined)
 				{clearTimeout(i3GEO.navega.timerNavega);}

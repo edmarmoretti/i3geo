@@ -40,25 +40,25 @@ class Navegacao
 {
 	/*
 	Variavel: $mapa
-	
+
 	Objeto mapa
 	*/
 	public $mapa;
 	/*
 	Variavel: $arquivo
-	
+
 	Arquivo map file
 	*/
 	protected $arquivo;
-	
+
 /*
 function: __construct
 
-Cria um objeto avegacao 
+Cria um objeto avegacao
 
 parameters:
-$map_file - string $map_file Endere&ccedil;o do mapfile no servidor. 
-*/  	
+$map_file - string $map_file Endere&ccedil;o do mapfile no servidor.
+*/
 	function __construct($map_file,$locaplic="")
 	{
   		//error_reporting(E_ALL);
@@ -72,8 +72,8 @@ $map_file - string $map_file Endere&ccedil;o do mapfile no servidor.
 /*
 function: salva
 
-Salva o mapfile atual 
-*/	
+Salva o mapfile atual
+*/
  	function salva()
  	{
 	  	if (connection_aborted()){exit();}
@@ -96,7 +96,7 @@ string - nome da imagem gravada
 		{return ($imgo->imageurl).basename($nome);}
 		else
 		{return "erro";}
-	}	
+	}
 /*
 function: afasta
 
@@ -113,7 +113,6 @@ $nivel - nivel de zoom
 		$pt = ms_newPointObj();
 		if ($pt->setXY(($this->mapa->width) / 2, ($this->mapa->height) / 2) != -1)
 		{$this->mapa->zoompoint(($nivel * -1),$pt,($this->mapa->width),($this->mapa->height),$this->mapa->extent);}
-		$pt->free();
 		return("ok");
 	}
 /*
@@ -125,14 +124,13 @@ O centro do mapa permanece inalterado, mudando-se apenas a escala.
 
 paremeter:
 $nivel - integer N&iacute;vel de zoom.
-*/	
+*/
 	function aproxima($nivel)
 	{
 		$this->mapa->preparequery();
 		$pt = ms_newPointObj();
 		if ($pt->setXY(($this->mapa->width) / 2, ($this->mapa->height) / 2) != -1)
 		{$this->mapa->zoompoint($nivel,$pt,($this->mapa->width),($this->mapa->height),$this->mapa->extent);}
-		$pt->free();
 		return("ok");
 	}
 /*
@@ -170,7 +168,7 @@ $ext - extens&atilde;o geogr&aacute;fica que ser&aacute; aplicada ao mapa
 			$e = explode(" ",$ext);
 			$extatual = $this->mapa->extent;
 			$extatual->setextent((min($e[0],$e[2])),(min($e[1],$e[3])),(max($e[0],$e[2])),(max($e[1],$e[3])));
-		}	 	
+		}
 		$this->mapa->setsize(($this->mapa->width) * $resolucao,($this->mapa->height) * $resolucao);
 	}
 /*
@@ -185,7 +183,7 @@ $y - Valor de y em coordenadas de imagem.
 
 $escala - Valor da escala (utilizado quando o clique &eacute; feito sobre o mapa de refer&ecirc;ncia).
 
-$tipo - ref| Indica se o ponto foi clicado no mapa ou no mapa de refer&ecirc;ncia 
+$tipo - ref| Indica se o ponto foi clicado no mapa ou no mapa de refer&ecirc;ncia
 */
 	function pan($x,$y,$escala,$tipo)
 	{
@@ -199,7 +197,6 @@ $tipo - ref| Indica se o ponto foi clicado no mapa ou no mapa de refer&ecirc;nci
 		{$this->mapa->zoomscale($escala,$pt,($r->width),($r->height),($r->extent));}
 		else
 		{$this->mapa->zoompoint(1,$pt,($this->mapa->width),($this->mapa->height),($this->mapa->extent));}
-		$pt->free();
 		return ("ok");
 	}
 /*
@@ -239,7 +236,6 @@ $escala - Escala a ser aplicada.
 		$pt = ms_newPointObj();
 		$pt->setXY(($this->mapa->width) / 2, ($this->mapa->height) / 2);
 		$this->mapa->zoomscale($escala,$pt,($this->mapa->width),($this->mapa->height),$this->mapa->extent);
-		$pt->free();
 		return("ok");
 	}
 /*
@@ -257,7 +253,6 @@ $xy - XY com as coordenadas separado por espa&ccedil;o
 		$e = $this->mapa->extent;
 		$pt = xy2imagem($this->arquivo,$xy);
 		$this->mapa->zoompoint(1,$pt,($this->mapa->width),($this->mapa->height),$e);
-		$pt->free();
-	}	
+	}
 }
 ?>

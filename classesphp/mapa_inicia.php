@@ -117,6 +117,8 @@ function iniciaMapa()
 	if(!isset($interface)){$interface = "";}
 	if($interface == "openlayers"){
 		$m = ms_newMapObj($map_file);
+		$e = $m->extent;
+		$ext = ($e->minx)." ".($e->miny)." ".($e->maxx)." ".($e->maxy);
 		$c = $m->numlayers;
 		for ($i=0;$i < $c;++$i)
 		{
@@ -132,6 +134,8 @@ function iniciaMapa()
 	if($interface == "googlemaps" || $interface == "googleearth")
 	{
 		$m = ms_newMapObj($map_file);
+		$e = $m->extent;
+		$ext = ($e->minx)." ".($e->miny)." ".($e->maxx)." ".($e->maxy);
 		if($interface == "googlemaps"){
 			$m->setProjection("proj=merc,a=6378137,b=6378137,lat_ts=0.0,lon_0=0.0,x_0=0.0,y_0=0,k=1.0,units=m");
 		}
@@ -221,8 +225,8 @@ function iniciaMapa()
 	//$imgo = $m->mapa->draw();
 	$imgo = $m->mapa->prepareImage();
 	$m->salva($map_file);
-	$e = $m->mapa->extent;
-	$ext = ($e->minx)." ".($e->miny)." ".($e->maxx)." ".($e->maxy);
+	//$e = $m->mapa->extent;
+	//$ext = ($e->minx)." ".($e->miny)." ".($e->maxx)." ".($e->maxy);
 	$escalaMapa = $m->mapa->scaledenom;
 	$celula = $m->mapa->cellsize;
 	//

@@ -498,6 +498,8 @@ i3GEO.eventos = {
 			objposicaocursor.dentroDomapa = true;
 			this.onmousemove=function(exy){
 				//var executar = new Function("i3GEO.eventos.mouseParado().call");
+				//ativa o clique sobre o mapa (o evento click e desativado no evento moveend da interface
+				i3GEO.eventos.cliquePerm.status = true;
 				i3GEO.eventos.posicaoMouseMapa(exy);
 				try{
 					try
@@ -534,7 +536,7 @@ i3GEO.eventos = {
 			if(!i3GEO.eventos.botaoDireita(exy))
 			{i3GEO.eventos.mousecliqueMapa();}
 			//ativa o clique sobre o mapa (o evento click e desativado no evento moveend da interface
-			i3GEO.eventos.cliquePerm.status = true;
+			//i3GEO.eventos.cliquePerm.status = true;
 		};
 		docMapa.onmouseup = function(exy){
 			//if(typeof(console) !== 'undefined'){console.error("up");}

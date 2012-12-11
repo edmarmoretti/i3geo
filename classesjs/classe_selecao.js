@@ -90,8 +90,8 @@ i3GEO.selecao = {
 
 			boxxini = objposicaocursor.imgx + adicionaxyBox[0];
 			boxyini = objposicaocursor.imgy + adicionaxyBox[1];
-			tamanhox = 0;
-			tamanhoy = 0;
+			//tamanhox = 0;
+			//tamanhoy = 0;
 			if(i3GEO.eventos.MOUSEMOVE.toString().search("i3GEO.selecao.box.desloca()") < 0)
 			{i3GEO.eventos.MOUSEMOVE.push("i3GEO.selecao.box.desloca()");}
 			if(i3GEO.eventos.MOUSEUP.toString().search("i3GEO.selecao.box.termina()") < 0)
