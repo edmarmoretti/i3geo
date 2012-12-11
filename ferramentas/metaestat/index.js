@@ -129,11 +129,12 @@ i3GEOF.metaestat = {
 		},
 		html: function(){
 			var ins = '<div id="i3geoCartoAnaliseContainer" style="margin-left:5px;line-height:25px">' +
-			'	<button title="Localizar regi&atilde;o" onclick="i3GEO.mapa.dialogo.locregiao()"><img src="'+i3GEO.configura.locaplic+'/imagens/gisicons/open-street-maps.png" /></button>' +
-			'	<button title="Mostra no mapa as regi&otilde;es" onclick="i3GEOF.metaestat.analise.mostraRegiao()"><img src="'+i3GEO.configura.locaplic+'/imagens/gisicons/open-street-maps-show.png" /></button>' +
-			'	<button title="Filtrar regi&atilde;o" onclick="i3GEO.mapa.dialogo.filtraregiao()"><img src="'+i3GEO.configura.locaplic+'/imagens/gisicons/open-street-maps-filtro.png" /></button>' +
-			'	<button title="Filtrar per&iacute;odo" onclick="i3GEOF.metaestat.analise.filtraPeriodo.inicia()"><img src="'+i3GEO.configura.locaplic+'/imagens/gisicons/open-street-maps-filtrotime.png" /></button>' +
-			'	<button title="Tabela com os dados" onclick="i3GEO.tema.dialogo.tabela()"><img src="'+i3GEO.configura.locaplic+'/imagens/gisicons/table.png" /></button>' +
+			'<div id="i3geoCartoAnaliseCamadas" style="top:-5px;height:50px"></div>' +
+			'	<button title="Focar o mapa em um determinado limite geogr&aacute;fico" onclick="i3GEO.mapa.dialogo.locregiao()"><img src="'+i3GEO.configura.locaplic+'/imagens/gisicons/open-street-maps.png" /></button>' +
+			'	<button title="Mostra no mapa os limites geogr&aacute;ficos cadastrados" onclick="i3GEOF.metaestat.analise.mostraRegiao()"><img src="'+i3GEO.configura.locaplic+'/imagens/gisicons/open-street-maps-show.png" /></button>' +
+			'	<button title="Mostrar apenas os dados de determinado limite geogr&aacute;fico" onclick="i3GEO.mapa.dialogo.filtraregiao()"><img src="'+i3GEO.configura.locaplic+'/imagens/gisicons/open-street-maps-filtro.png" /></button>' +
+			'	<button title="Mostrar apenas os dados de um per&iacute;odo de tempo" onclick="i3GEOF.metaestat.analise.filtraPeriodo.inicia()"><img src="'+i3GEO.configura.locaplic+'/imagens/gisicons/open-street-maps-filtrotime.png" /></button>' +
+			'	<button title="Tabela de atributos" onclick="i3GEO.tema.dialogo.tabela()"><img src="'+i3GEO.configura.locaplic+'/imagens/gisicons/table.png" /></button>' +
 			'	<button title="Gr&aacute;fico interativo" onclick="i3GEO.analise.dialogo.graficoInterativo()"><img src="'+i3GEO.configura.locaplic+'/imagens/oxygen/22x22/view_statistics.png" /></button>' +
 			'	<button title="Opacidade" onclick="i3GEO.mapa.dialogo.opacidade()"><img src="'+i3GEO.configura.locaplic+'/imagens/gisicons/layer-opacity.png" /></button>' +
 			'	<button title="Anima&ccedil;&atilde;o" onclick="i3GEOF.metaestat.analise.ativaAnimacao()"><img src="'+i3GEO.configura.locaplic+'/imagens/gisicons/player-forward.png" /></button>' +
@@ -142,12 +143,11 @@ i3GEOF.metaestat = {
 			'	<button title="'+$trad("t42")+'" onclick="i3GEO.tema.dialogo.cortina()"><img src="'+i3GEO.configura.locaplic+'/imagens/gisicons/mapset.png" /></button>' +
 			'	<button title="'+$trad("t49")+'" onclick="i3GEOF.metaestat.analise.ativaTme()"><img src="'+i3GEO.configura.locaplic+'/imagens/gisicons/3d-light.png" /></button>' +
 			'	<button title="Estat&iacute;sticas gerais" onclick="i3GEOF.metaestat.analise.estatistica()"><img src="'+i3GEO.configura.locaplic+'/imagens/gisicons/stats.png" /></button>' +
-			'	<button title="Ativa/Desativa contorno" onclick="i3GEOF.metaestat.analise.contorno()"><img src="'+i3GEO.configura.locaplic+'/imagens/gisicons/boundary-remove-add.png" /></button>' +
-			'	<button title="Altera representa&ccedil;&atilde;o" onclick="i3GEOF.metaestat.analise.alteraRep()"><img src="'+i3GEO.configura.locaplic+'/imagens/gisicons/shape.png" /></button>' +
+			'	<button title="Ativa/Desativa contorno dos limites geogr&aacute;ficos" onclick="i3GEOF.metaestat.analise.contorno()"><img src="'+i3GEO.configura.locaplic+'/imagens/gisicons/boundary-remove-add.png" /></button>' +
+			'	<button title="Altera a forma de representa&ccedil;&atilde;o gr&aacute;fica" onclick="i3GEOF.metaestat.analise.alteraRep()"><img src="'+i3GEO.configura.locaplic+'/imagens/gisicons/shape.png" /></button>' +
 			'	<button title="Mapa de calor" onclick="i3GEOF.metaestat.analise.calor()"><img src="'+i3GEO.configura.locaplic+'/imagens/gisicons/dem.png" /></button>' +
 			'	<button title="Congela vis&atilde;o" onclick="i3GEO.mapa.dialogo.congelaMapa()"><img src="'+i3GEO.configura.locaplic+'/imagens/gisicons/mapset-add.png" /></button>' +
 			'</div>' +
-			'<div id="i3geoCartoAnaliseCamadas" style="margin-left:5px;line-height:25px"></div>' +
 			'<input type=hidden  value="" id="listaColourRampAnaliseMetaestat" onchange="i3GEOF.metaestat.analise.aplicaColourRamp()" />'; //utilizado pelo seletor de colourramp
 			return ins;
 		},
