@@ -63,10 +63,12 @@ i3GEOF.mostraregiao = {
 	inicia: function(divid){
 		$i(divid).innerHTML = i3GEOF.mostraregiao.html();
 		i3GEOF.mostraregiao.comboRegioes($i("i3geomostraregiaoTipoRegiao"));
+		YAHOO.i3GEO.janela.manager.find("i3GEOF.mostraregiao").setFooter('<input id=i3geomostraregiaoAplica type="button" value="'+$trad("p14")+'" />');
 		new YAHOO.widget.Button(
 			"i3geomostraregiaoAplica",
 			{onclick:{fn: function(){i3GEOF.mostraregiao.aplica();}}}
 		);
+		$i("i3geomostraregiaoAplica-button").style.width = "180px";
 	},
 	//utiliza o dicionario compartilhado
 	iniciaDicionario: function(){
@@ -113,15 +115,14 @@ i3GEOF.mostraregiao = {
 	},
 	html: function(){
 		var ins = "" +
-		'<input id=i3geomostraregiaoAplica type="button" value="'+$trad("p14")+'" />&nbsp;' +
-		'<br><br><div class="paragrafo" id="i3geomostraregiaoTipoRegiao" >' +
+		'<div class="paragrafo" id="i3geomostraregiaoTipoRegiao" >' +
 		'</div>' +
 		'<p class=paragrafo ><input type=checkbox id="i3geomostraregiaoNomes" style="cursor:pointer;position:relative;top:2px;" /> Inclui nomes</p>' +
 		'<p class=paragrafo >Contorno:</p>' +
 		'Cor: &nbsp;' + $inputText("","","i3geomostraregiaoOutlinecolor","",12,"255,0,0") +
 		'&nbsp;<img alt="aquarela.gif" style=position:relative;top:2px;cursor:pointer src="'+i3GEO.configura.locaplic+'/imagens/aquarela.gif" onclick="i3GEOF.mostraregiao.corj(\'i3geomostraregiaoOutlinecolor\')" /> ' +
 		'<br><br>Largura: &nbsp;' + $inputText("","","i3geomostraregiaoWidth","",3,"1") +
-		'<br>' ;
+		'<br><br>' ;
 		return ins;
 	},
 	comboRegioes: function(objonde){
@@ -154,13 +155,8 @@ i3GEOF.mostraregiao = {
 		i3GEO.janela.abreAguarde("aguardeMostraRegiao","Aguarde...");
 		var temp = function(retorno){
 			i3GEO.janela.fechaAguarde("aguardeMostraRegiao");
-			if(retorno.layer == ""){
-				i3GEO.atualiza();
-				return;
-			}
-			if(i3GEO.arvoreDeCamadas.pegaTema(retorno.layer) == ""){
-				i3GEO.php.adtema(i3GEO.atualiza,retorno.mapfile);
-			}
+			i3GEO.atualiza();
+
 		};
 		if(nomes.checked == true){
 			nomes = "sim";
@@ -168,7 +164,17 @@ i3GEOF.mostraregiao = {
 		else{
 			nomes = "nao";
 		}
-		i3GEO.php.mapfileTipoRegiao(temp,combo.value,$i("i3geomostraregiaoOutlinecolor").value,$i("i3geomostraregiaoWidth").value,nomes);
+		i3GEO.janela.AGUARDEMODAL = true;
+		i3GEO.janela.abreAguarde("aguardeMostraRegiao","Aplicando...");
+		i3GEO.janela.AGUARDEMODAL = false;
+		p = i3GEO.configura.locaplic+"/ferramentas/metaestat/analise.php?funcao=adicionaLimiteRegiao"+
+			"&codigo_tipo_regiao="+combo.value+
+			"&g_sid="+i3GEO.configura.sid+
+			"&outlinecolor="+$i("i3geomostraregiaoOutlinecolor").value+
+			"&width="+$i("i3geomostraregiaoWidth").value+
+			"&nomes="+nomes;
+		i3GEO.util.ajaxGet(p,temp);
+		//i3GEO.php.mapfileTipoRegiao(temp,combo.value,$i("i3geomostraregiaoOutlinecolor").value,$i("i3geomostraregiaoWidth").value,nomes);
 	},
 	corj: function(obj){
 		i3GEO.util.abreCor("",obj);

@@ -484,12 +484,17 @@ class Metaestat{
 		}
 		return array("mapfile"=>$arq,"layer"=>$this->nomecache,"titulolayer"=>$titulolayer);
 	}
-	function mapfileTipoRegiao($codigo_tipo_regiao,$outlinecolor="255,0,0",$width=1,$nomes="nao"){
+	function mapfileTipoRegiao($codigo_tipo_regiao,$outlinecolor="255,0,0",$width=1,$nomes="nao",$forcaArquivo=false){
 		//para permitir a inclusao de filtros, o fim do sql e marcado com /*FW*//*FW*/
 		//indicando onde deve comecar e terminar uma possivel clausula where
 		//Layers adicionados aqui sao marcados com o metadata METAESTAT "SIM"
 		//O codigo_tipo_regiao e marcado com o metadata METAESTAT_CODIGO_TIPO_REGIAO
-		$arq = $this->dir_tmp."/".$this->nomecache.".map";
+		if($forcaArquivo == false){
+			$arq = $this->dir_tmp."/".$this->nomecache.".map";
+		}
+		else{
+			$arq = $this->dir_tmp."/".$this->nomecache.nomeRandomico(3).".map";
+		}
 		if(!file_exists($arq)){
 			$tipolayer = "polygon";
 			$meta = $this->listaTipoRegiao($codigo_tipo_regiao);
@@ -577,7 +582,7 @@ class Metaestat{
 				fwrite($fp,$dado."\n");
 			}
 		}
-		return array("mapfile"=>$arq,"layer"=>$this->nomecache,"titulolayer"=>$titulolayer);
+		return array("mapfile"=>$arq,"layer"=>$this->nomecache,"titulolayer"=>$titulolayer,"codigo_tipo_regiao"=>$codigo_tipo_regiao);
 	}
 	function mapfileCompleto($mapfile){
 		$f = $this->base;

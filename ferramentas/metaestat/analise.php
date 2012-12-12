@@ -102,12 +102,49 @@ switch (strtoupper($funcao)){
 	case "CALOR":
 		$retorno = mapaDeCalor($map_file,$tema);
 	break;
+	case "ADICIONALIMITEREGIAO":
+		if(empty($outlinecolor)){
+			$outlinecolor = "255,0,0";
+		}
+		if(empty($width)){
+			$width = 1;
+		}
+		if(empty($nomes)){
+			$nomes = "nao";
+		}
+		$retorno = adicionaLimiteRegiao($map_file,$codigo_tipo_regiao,$outlinecolor,$width,$nomes);
+	break;
 }
 if (!connection_aborted()){
 	cpjson($retorno);
 }
 else
 {exit();}
+function adicionaLimiteRegiao($map_file,$codigo_tipo_regiao,$outlinecolor,$width,$nomes){
+	global $locaplic,$dir_tmp;
+	$m = new Metaestat();
+	$res = $m->mapfileTipoRegiao($codigo_tipo_regiao,$outlinecolor,$width,$nomes,true);
+	$mapaNovo = ms_newMapObj($res["mapfile"]);
+	$layerNovo = $mapaNovo->getlayerbyname($res["layer"]);
+	$layerNovo->set("status",MS_DEFAULT);
+	$dataNovo = $layerNovo->data;
+	$mapa = ms_newMapObj($map_file);
+	$c = $mapa->numlayers;
+	for($i=0;$i < $c;++$i){
+		$l = $mapa->getlayer($i);
+		if($l->data == $dataNovo){
+			$l->set("status",MS_DELETE);
+		}
+	}
+	ms_newLayerObj($mapa, $layerNovo);
+	if($nomes == "sim"){
+		$layerNovo = $mapaNovo->getlayerbyname($res["layer"]."_anno");
+		$layerNovo->set("status",MS_DEFAULT);
+		ms_newLayerObj($mapa, $layerNovo);
+	}
+	$mapa->save($map_file);
+	return "ok";
+}
 function mapaDeCalor($map_file,$tema){
 	global $locaplic,$dir_tmp,$R_path,$ext;
 	$nome = basename($map_file).$tema."calor";
