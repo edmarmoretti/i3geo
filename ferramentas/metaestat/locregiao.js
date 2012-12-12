@@ -118,7 +118,7 @@ i3GEOF.locregiao = {
 		};
 		//cria a janela flutuante
 		if(i3GEOF.locregiao.ATIVAFILTRO === true){
-			titulo = "Filtro ";
+			titulo = "Filtro geogr&aacute;fico";
 		}
 		else{
 			titulo = $trad("x59");

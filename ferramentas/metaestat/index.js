@@ -391,7 +391,7 @@ i3GEOF.metaestat = {
 					i3GEO.janela.minimiza("i3GEOF.filtraperiodo");
 				};
 				//cria a janela flutuante
-				titulo = "Filtro&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</a>";
+				titulo = "Filtro temporal&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</a>";
 				i3GEO.janela.cria(
 					"260px",
 					"340px",
