@@ -103,7 +103,10 @@ $ext - Extens&atilde;o geogr&aacute;fica do mapa
   		//error_reporting(E_ALL);
 		$this->qyfile = str_replace(".map",".qy",$map_file);
   		include_once(__DIR__."/funcoes_gerais.php");
-		$this->v = versao();
+		if(empty($locaplic)){
+			$locaplic = __DIR__."/..";
+		}
+  		$this->v = versao();
 		$this->v = $this->v["principal"];
 		$this->dbaseExiste = false;
 		if(function_exists("dbase_create"))
