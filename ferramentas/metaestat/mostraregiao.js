@@ -148,7 +148,7 @@ i3GEOF.mostraregiao = {
 		var combo = $i("i3geomostraregiaoComboTipoRegiao"),
 			nomes = $i("i3geomostraregiaoNomes");
 		if (combo.value === ""){
-			i3GEO.janela.tempoMsg("Escolha uma regi&atilde;o");
+			i3GEO.janela.tempoMsg("Escolha um limite geogr&aacute;fico");
 			return;
 		}
 		i3GEO.janela.abreAguarde("aguardeMostraRegiao","Aguarde...");

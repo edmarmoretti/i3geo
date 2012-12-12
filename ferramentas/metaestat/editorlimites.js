@@ -733,7 +733,7 @@ i3GEOF.editorlimites = {
 						idunico = "",
 						nj = atr.aliascolunas.length,
 						ins = "" +
-						'<p class=paragrafo >Regi&atilde;o escolhida:</p>' +
+						'<p class=paragrafo >Limite geogr&aacute;fico escolhido:</p>' +
 						'<p class=paragrafo ><b>Nome: </b>' + retorno.regiao.nomeregiao + '</p>' +
 						'<p class=paragrafo ><b>C&oacute;digo: </b>' + retorno.regiao.identificador_regiao + '</p>' +
 						'<input type=hidden id="editarAtributosidentificador_regiao" value="' + retorno.regiao.identificador_regiao + '" />' +
@@ -885,7 +885,7 @@ i3GEOF.editorlimites = {
 			);
 			$i("editaAtributos_corpo").style.backgroundColor = "white";
 			$i("editaAtributos_corpo").innerHTML = html;
-			i3GEO.janela.tempoMsg("Ap&oacute;s escolher a medida da vari&aacute;vel, clique no mapa para escolher a regi&atilde;o.");
+			i3GEO.janela.tempoMsg("Ap&oacute;s escolher a medida da vari&aacute;vel, clique no mapa para escolher o limite geogr&aacute;fico.");
 			YAHOO.util.Event.addListener(janela[0].close, "click", i3GEOF.editorlimites.mudaicone);
 		},
 		html: function(){
@@ -959,7 +959,7 @@ i3GEOF.editorlimites = {
 		"<tr><td><img src='"+i3GEO.configura.locaplic+"/imagens/gisicons/selected-delete.png' /></td>" +
 		"<td>Remove da tela a figura que estiver selecionada. Essa opera&ccedil;&atilde;o n&atilde;o apaga o pol&iacute;gono do banco de dados, apenas remove do modo de edi&ccedil;&atilde;o.</td></tr>" +
 		"<tr><td><img src='"+i3GEO.configura.locaplic+"/imagens/gisicons/vector-save.png' /></td>" +
-		"<td>Salva no banco de dados a figura que estiver selecionada. Essa op&ccedil;&atilde;o altera apenas os atributos da regi&atilde;o, n&atilde;o afetando os valores armazenados em cada medida de vari&aacute;vel.</td></tr>" +
+		"<td>Salva no banco de dados a figura que estiver selecionada. Essa op&ccedil;&atilde;o altera apenas os atributos do limite geogr&aacute;fico, n&atilde;o afetando os valores armazenados em cada medida de vari&aacute;vel.</td></tr>" +
 		"<tr><td><img src='"+i3GEO.configura.locaplic+"/imagens/gisicons/annotation-form.png' /></td>" +
 		"<td>Abre um formul&aacute;rio que permite alterar os valores de uma medida de vari&aacute;vel relacionada a uma determinada regi&atilde;o. Ap&oacute;s abrir o formul&aacute;rio, clique no mapa sobre a regi&atilde;o desejada, mas escolha a medida da vari&aacute;vel primeiro. Os valores j&aacute; existentes poder&atilde;o ent&atilde;o ser alterados ou podem ser adicionados novos.</td></tr>" +
 		"</table>";

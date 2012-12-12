@@ -59,7 +59,7 @@ i3GEOadmin.uploaddados = {
 			core_carregando("desativa");
 			var ins = "";
 			ins += "<p>Abaixo voc&ecirc; deve definir quais colunas do arquivo que foi enviado corresponde &agrave;s colunas do banco de dados de destino</p>" +
-				"<p>Cont&eacute;m os c&oacute;digos que identificam a regi&atilde;o, como o c&oacute;digo do munic&iacute;pio ou bairro</p>" +
+				"<p>Cont&eacute;m os c&oacute;digos que identificam o limite geogr&aacute;fico, como o c&oacute;digo do munic&iacute;pio ou bairro</p>" +
 				i3GEOadmin.uploaddados.upload.comboColunas("i3geoupload_codigoregiao") +
 				"<p>Cont&eacute;m os valores da medida</p>" +
 				i3GEOadmin.uploaddados.upload.comboColunas("i3geoupload_valor") +

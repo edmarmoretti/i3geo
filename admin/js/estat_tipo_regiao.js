@@ -140,7 +140,7 @@ function montaTabelaAgregacoes(dados){
 		{key:"excluir",label:"excluir",formatter:formatExclui},
 		{key:"mais",label:"editar",formatter:formatMais},
 		{label:"c&oacute;digo",key:"id_agregaregiao", formatter:formatTexto},
-		{label:"Regi&atilde;o",resizeable:true,key:"codigo_tipo_regiao", formatter:formatTexto},
+		{label:"Tipo de limite",resizeable:true,key:"codigo_tipo_regiao", formatter:formatTexto},
 		{label:"Pai",resizeable:true,key:"codigo_tipo_regiao_pai", formatter:formatTexto},
 		{label:"Coluna de ligacao",key:"colunaligacao_regiaopai",formatter:formatTexto}
 		];
@@ -260,7 +260,7 @@ function montaDiv(i){
 			{titulo:"Data a qual se referem os dados:",id:"Edata",size:"50",value:i.data,tipo:"text",div:""},
 			{titulo:"Coluna com o c&oacute;digo de cada registro:",id:"Eidentificador",size:"50",value:i.identificador,tipo:"text",div:""},
 			{titulo:"C&oacute;digo da conex&atilde;o com o banco:",id:"Ecodigo_estat_conexao",size:"50",value:i.codigo_estat_conexao,tipo:"text",div:""},
-			{titulo:"Coluna com o nome da regi&atilde;o:",id:"Ecolunanomeregiao",size:"50",value:i.colunanomeregiao,tipo:"text",div:""},
+			{titulo:"Coluna com o nome ddo limite geogr&aacute;fico:",id:"Ecolunanomeregiao",size:"50",value:i.colunanomeregiao,tipo:"text",div:""},
 			{titulo:"Colunas que ficar&atilde;o vis&iacute;veis no mapa:",id:"Ecolunasvisiveis",size:"50",value:i.colunasvisiveis,tipo:"text",div:""},
 			{titulo:"Apelidos das colunas que ficar&atilde;o vis&iacute;veis no mapa:",id:"Eapelidos",size:"50",value:i.apelidos,tipo:"text",div:""},
 			{titulo:"C&oacute;digo SRID:",id:"Esrid",size:"50",value:i.srid,tipo:"text",div:""}
@@ -274,8 +274,8 @@ function montaDiv(i){
 function montaDivAgregacoes(i){
 	var param = {
 			"linhas":[
-			{titulo:"C&oacute;digo da regi&atilde;o de n&iacute;vel superior:",id:"Ecodigo_tipo_regiao_pai",size:"50",value:i.codigo_tipo_regiao_pai,tipo:"text",div:""},
-			{titulo:"Coluna na tabela da regi&atilde;o de n&iacute;vel inferior que permite a liga&ccedil;&atilde;o:",id:"Ecolunaligacao_regiaopai",size:"50",value:i.colunaligacao_regiaopai,tipo:"text",div:""}
+			{titulo:"C&oacute;digo do limite geogr&aacute;fico de n&iacute;vel superior:",id:"Ecodigo_tipo_regiao_pai",size:"50",value:i.codigo_tipo_regiao_pai,tipo:"text",div:""},
+			{titulo:"Coluna na tabela do limite geogr&aacute;fico de n&iacute;vel inferior que permite a liga&ccedil;&atilde;o:",id:"Ecolunaligacao_regiaopai",size:"50",value:i.colunaligacao_regiaopai,tipo:"text",div:""}
 			]
 		},
 		ins = "";
