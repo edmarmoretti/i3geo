@@ -592,6 +592,26 @@ i3GEO.gadgets = {
 						}
 					}
 				};
+				//esses eventos fazem com que os itens de um menu fiquem sempre sobre outros elementos do mapa
+				temp = $i("contemMenu");
+				if(temp){
+					i3GEOoMenuBarLocal.subscribe(
+						"beforeShow",
+						function(){
+							$i("contemMenu").style.zIndex = 5000;
+							return;
+						},
+						i3GEO.configura.oMenuData.submenus
+					);
+					i3GEOoMenuBarLocal.subscribe(
+						"beforeHide",
+						function(){
+							$i("contemMenu").style.zIndex = 1;
+							return;
+						},
+						i3GEO.configura.oMenuData.submenus
+					);
+				}
 				i3GEOoMenuBar.addMenu(i3GEOoMenuBarLocal);
 				i3GEOoMenuBarLocal.beforeRenderEvent.subscribe(onMenuBarBeforeRender);
 				i3GEOoMenuBarLocal.render();
