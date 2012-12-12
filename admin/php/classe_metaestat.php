@@ -391,7 +391,10 @@ class Metaestat{
 			$conexao = $this->listaConexao($meta["codigo_estat_conexao"],true);
 			$conexao = "user=".$conexao["usuario"]." password=".$conexao["senha"]." dbname=".$conexao["bancodedados"]." host=".$conexao["host"]." port=".$conexao["porta"]."";
 			$sql = $this->sqlMedidaVariavel($id_medida_variavel,$todasascolunas,$agruparpor,$tipolayer,$codigo_tipo_regiao);
-
+			if(empty($codigo_tipo_regiao)){
+				$d = $this->listaMedidaVariavel("",$id_medida_variavel);
+				$codigo_tipo_regiao = $d["codigo_tipo_regiao"];
+			}
 			$sqlf = $sql["sqlmapserver"];
 			//echo $sqlf;exit;
 			if(!empty($filtro)){
@@ -1304,7 +1307,7 @@ class Metaestat{
 		return $this->execSQL($sql,$codigo_tipo_regiao);
 	}
 	function listaHierarquiaRegioes($codigoregiaopai=""){
-		$sql = "select i3geoestat_tipo_regiao.codigo_tipo_regiao,i3geoestat_tipo_regiao.nome_tipo_regiao from ".$this->esquemaadmin."i3geoestat_tipo_regiao ";
+		$sql = "select i3geoestat_agregaregiao.colunaligacao_regiaopai,i3geoestat_tipo_regiao.codigo_tipo_regiao,i3geoestat_tipo_regiao.nome_tipo_regiao from ".$this->esquemaadmin."i3geoestat_tipo_regiao ";
 		$sql .= "LEFT JOIN ".$this->esquemaadmin."i3geoestat_agregaregiao ";
 		$sql .= "ON i3geoestat_tipo_regiao.codigo_tipo_regiao = i3geoestat_agregaregiao.codigo_tipo_regiao ";
 		if($codigoregiaopai != ""){

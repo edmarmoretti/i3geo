@@ -1943,7 +1943,7 @@ it:""
 }],
 "x59":[
 {
-pt:"Localiza regi&atilde;o",
+pt:"Localiza limite",
 en:"",
 es:"",
 it:""
@@ -1957,7 +1957,7 @@ it:""
 }],
 "x61":[
 {
-pt:"Filtra regi&atilde;o",
+pt:"Filtra limite",
 en:"",
 es:"",
 it:""

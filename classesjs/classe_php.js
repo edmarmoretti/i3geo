@@ -1571,9 +1571,9 @@ i3GEO.php = {
 
 	Aplica um filtro no SQL que define uma camada do sistema de metadados estatisticos para filtrar para uma regiao especifica
 	*/
-	aplicaFiltroRegiao: function(funcao,codigo_tipo_regiao,codigo_regiao,codigo_tipo_regiao_pai,codigo_regiao_pai,tipo){
+	aplicaFiltroRegiao: function(funcao,codigo_tipo_regiao,codigo_regiao){
 		var p = i3GEO.configura.locaplic+"/ferramentas/metaestat/analise.php?funcao=aplicaFiltroRegiao&codigo_tipo_regiao="+codigo_tipo_regiao+"&codigo_regiao="+codigo_regiao+"&g_sid="+i3GEO.configura.sid;
-		p += "&tipo="+tipo+"&codigo_tipo_regiao_pai="+codigo_tipo_regiao_pai+"&codigo_regiao_pai="+codigo_regiao_pai;
+		//p += "&tipo="+tipo+"&codigo_tipo_regiao_pai="+codigo_tipo_regiao_pai+"&codigo_regiao_pai="+codigo_regiao_pai;
 		i3GEO.util.ajaxGet(p,funcao);
 	},
 	/*

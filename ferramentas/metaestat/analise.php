@@ -58,7 +58,7 @@ if(isset($fingerprint)){
 $retorno = "";
 switch (strtoupper($funcao)){
 	case "APLICAFILTROREGIAO":
-		$retorno = analise_aplicafiltroregiao($map_file,$codigo_tipo_regiao,$codigo_regiao,$codigo_tipo_regiao_pai,$codigo_regiao_pai,$tipo);
+		$retorno = analise_aplicafiltroregiao($map_file,$codigo_tipo_regiao,$codigo_regiao);
 	break;
 	case "LISTACAMADASMETAESTAT":
 		$retorno = analise_listaCamadasMetaestat($map_file);
@@ -423,39 +423,41 @@ function analise_listaCamadasMetaestat($map_file){
 	return $camadas;
 }
 //se $tipo for igual a "" remove os filtros
-function analise_aplicafiltroregiao($map_file,$codigo_tipo_regiao,$codigo_regiao,$codigo_tipo_regiao_pai,$codigo_regiao_pai,$tipo=""){
+function analise_aplicafiltroregiao($map_file,$codigo_tipo_regiao,$codigo_regiao){
+	//echo $codigo_tipo_regiao;exit;
+	$m = new Metaestat();
 	$mapa = ms_newMapObj($map_file);
-	$layers = analise_listaLayersMetaestat($mapa);
-	if($codigo_tipo_regiao != ""){
-		$layers = analise_listaLayersRegiao($layers,$codigo_tipo_regiao);
-	}
-	if(count($layers) > 0){
-		$m = new Metaestat();
-		$regiao = $m->listaTipoRegiao($codigo_tipo_regiao);
-		//aplica o filtro considerando os codigos que definem a propria regiao
-		$filtro = "";
-		if($tipo == "regiaoatual"){
-			$filtro = $regiao["esquemadb"].".".$regiao["tabela"].".".$regiao["identificador"]."::text = '$codigo_regiao'";
-		}
-		if($tipo == "regiaopai"){
-			//$filtro = $regiao["esquemadb"].".".$regiao["tabela"].".".$regiao["identificador"]."::text = '$codigo_regiao'";
-			$pai = $m->listaAgregaRegiaoFilho($codigo_tipo_regiao,$codigo_tipo_regiao_pai);
-			//var_dump($pai);exit;
-			$filtro = "g.".$pai["colunaligacao_regiaopai"]."::text = '$codigo_regiao_pai'";
-		}
-		foreach($layers as $l){
-			$data = $l->data;
-			//substitui os marcadores definidos na construcao do layer. Veja a classe metaestat
-			$s = explode("/*FA*/",$data);
-			if(count($s) > 1){
-				if($tipo == ""){
+	$layersm = analise_listaLayersMetaestat($mapa);
+	if(count($layersm) > 0){
+		//remove o filtro
+		if(empty($codigo_tipo_regiao)){
+			foreach($layersm as $l){
+				$data = $l->data;
+				//substitui os marcadores definidos na construcao do layer. Veja a classe metaestat
+				$s = explode("/*FA*/",$data);
+				if(count($s) > 1){
 					$data = $s[0]."/*FA*//*FA*/".$s[2];
 				}
-				else{
-					$data = $s[0]."/*FA*/ AND ".$filtro." /*FA*/".$s[2];
+				$l->set("data",$data);
+			}
+		}
+		else{
+			//pega as regioes que sao filhos de $codigo_tipo_regiao
+			$regioesfilho = $m->listaHierarquiaRegioes($codigo_tipo_regiao);
+			foreach($regioesfilho as $r){
+				$regiao = $m->listaTipoRegiao($r["codigo_tipo_regiao"]);
+				$filtro = "g.".$r["colunaligacao_regiaopai"]."::text = '$codigo_regiao'";
+				$layers = analise_listaLayersRegiao($layersm,$r["codigo_tipo_regiao"]);
+				foreach($layers as $l){
+					$data = $l->data;
+					//substitui os marcadores definidos na construcao do layer. Veja a classe metaestat
+					$s = explode("/*FA*/",$data);
+					if(count($s) > 1){
+						$data = $s[0]."/*FA*/ AND ".$filtro." /*FA*/".$s[2];
+					}
+					$l->set("data",$data);
 				}
 			}
-			$l->set("data",$data);
 		}
 	}
 	$mapa->save($map_file);

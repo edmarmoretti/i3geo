@@ -86,10 +86,6 @@ i3GEOF.locregiao = {
 		i3GEOF.locregiao.comboHierarquiaRegioes($i("i3geoLocregiaoTipoRegiao"));
 		//ativa os botoes de filtro
 		new YAHOO.widget.Button(
-			"i3geoLocregiaoFiltroAplica",
-			{onclick:{fn: function(){i3GEOF.locregiao.aplicaFiltro();}}}
-		);
-		new YAHOO.widget.Button(
 			"i3geoLocregiaoFiltroRemove",
 			{onclick:{fn: function(){i3GEOF.locregiao.removeFiltro();}}}
 		);
@@ -121,9 +117,15 @@ i3GEOF.locregiao = {
 			i3GEO.janela.minimiza("i3GEOF.locregiao");
 		};
 		//cria a janela flutuante
-		titulo = $trad("x59")+" <a class=ajuda_usuario target=_blank href='" + i3GEO.configura.locaplic + "/ajuda_usuario.php?idcategoria=6&idajuda=111' >&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</a>";
+		if(i3GEOF.locregiao.ATIVAFILTRO === true){
+			titulo = "Filtro ";
+		}
+		else{
+			titulo = $trad("x59");
+		}
+		titulo += " <a class=ajuda_usuario target=_blank href='" + i3GEO.configura.locaplic + "/ajuda_usuario.php?idcategoria=6&idajuda=111' >&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</a>";
 		janela = i3GEO.janela.cria(
-			"210px",
+			"215px",
 			"",
 			"",
 			"",
@@ -142,13 +144,12 @@ i3GEOF.locregiao = {
 	html: function(){
 		var ins = "" +
 		'<div id="i3geoLocregiaoBotoesFiltro" style="display:none" >' +
-		'<input id=i3geoLocregiaoFiltroAplica type="button" value="'+$trad("t29")+'" />&nbsp;' +
-		'<input id=i3geoLocregiaoFiltroRemove type="button" value="'+$trad("x62")+'" />' +
-		'<br><input type=checkbox id=i3geoLocregiaoFiltroAplicaCk style="cursor:pointer;position:relative;top:3px;"/> Filtrar pela regi&atilde;o de n&iacute;vel superior a &uacute;ltima escolhida' +
+		'	<input id=i3geoLocregiaoFiltroRemove type="button" value="Remove o filtro" />' +
 		'<br><br></div>' +
 		'<div id="i3geoLocregiaoContainer" style="margin-left:5px;">' +
-		'<div class="paragrafo" id="i3geoLocregiaoTipoRegiao" >' +
-		'</div>' +
+		'	<input type=checkbox id=i3geoLocregiaoNavegaAutoCk checked style="cursor:pointer;position:relative;top:3px;"/> Navega&ccedil;&atilde;o autom&aacute;tica<br><br>' +
+		'	<div class="paragrafo" id="i3geoLocregiaoTipoRegiao" >' +
+		'	</div>' +
 		'</div>';
 		return ins;
 	},
@@ -182,7 +183,7 @@ i3GEOF.locregiao = {
 		if(!codigo_tipo_regiao){
 			codigo_tipo_regiao = combo.value;
 		}
-		if(valorregiaopai){
+		if(valorregiaopai && $i("i3geoLocregiaoNavegaAutoCk").checked === true){
 			valorregiaopai = i3GEOF.locregiao.zoom(valorregiaopai);
 		}
 		i3GEOF.locregiao.comboHierarquiaRegioes(onde,codigoregiaopai,codigo_tipo_regiao,valorregiaopai);
@@ -194,7 +195,13 @@ i3GEOF.locregiao = {
 		var temp = function(dados){
 			var onc= "",
 			ins = '',
-			i,n;
+			i,n,icone;
+			if(i3GEOF.locregiao.ATIVAFILTRO === true){
+				icone = "<img title='Aplica filtro' src='"+i3GEO.configura.locaplic+"/imagens/oxygen/16x16/view-filter.png' style='position:relative;cursor:pointer;top:3px;left:5px' onclick='i3GEOF.locregiao.aplicaFiltro(this.parentNode.firstChild.value,"+dados.regiaopai+")' />";
+			}
+			else{
+				icone = "<img title='Zoom para...' src='"+i3GEO.configura.locaplic+"/imagens/ic_zoom.png' style='position:relative;cursor:pointer;top:3px;left:5px' onclick='i3GEOF.locregiao.zoom(this.parentNode.firstChild.value)' />";
+			}
 			if(dados.valores == ""){
 				n = dados.regioes.length;
 				onc = 'i3GEOF.locregiao.comboHierarquiaRegioesOnChange(this,this.value)';
@@ -216,7 +223,7 @@ i3GEOF.locregiao = {
 				for(i=0;i<n;i++){
 					ins += "<option value='"+dados.valores[i].identificador_regiao+";"+dados.valores[i].ext+"'>"+dados.valores[i].nome_regiao+"</option>";
 				}
-				ins += "</select><br><br><div class='paragrafo'></div>";
+				ins += "</select>"+icone+"<br><br><div class='paragrafo'></div>";
 			}
 			if(objonde){
 				objonde.innerHTML = ins;
@@ -225,25 +232,19 @@ i3GEOF.locregiao = {
 		};
 		i3GEO.php.listaHierarquiaRegioes(temp,codigo_tipo_regiao,codigoregiaopai,valorregiaopai);
 	},
-	aplicaFiltro: function(){
-		var tipo = "regiaoatual",
-		temp = function(){
-			i3GEO.janela.AGUARDEMODAL = false;
-			i3GEO.janela.fechaAguarde("aguardeFiltroRegiao");
-			i3GEO.Interface.atualizaMapa();
-		};
-		if($i("i3geoLocregiaoFiltroAplicaCk").checked === true){
-			tipo = "regiaopai";
-		}
-		if(tipo == "regiaoatual" && i3GEOF.locregiao.ULTIMO_CODIGO_TIPO_REGIAO == "" && i3GEOF.locregiao.ULTIMO_CODIGO_REGIAO == ""){
+	aplicaFiltro: function(codigo_regiao,codigo_tipo_regiao){
+		if(codigo_regiao === "" || codigo_tipo_regiao === ""){
 			return;
 		}
-		if(tipo == "regiaopai" && i3GEOF.locregiao.PENULTIMO_CODIGO_TIPO_REGIAO == "" && i3GEOF.locregiao.PENULTIMO_CODIGO_REGIAO == ""){
-			return;
-		}
+		codigo_regiao = codigo_regiao.split(";")[0];
+		var temp = function(){
+				i3GEO.janela.AGUARDEMODAL = false;
+				i3GEO.janela.fechaAguarde("aguardeFiltroRegiao");
+				i3GEO.Interface.atualizaMapa();
+			};
 		i3GEO.janela.AGUARDEMODAL = true;
 		i3GEO.janela.abreAguarde("aguardeFiltroRegiao","Filtrando...");
-		i3GEO.php.aplicaFiltroRegiao(temp,i3GEOF.locregiao.ULTIMO_CODIGO_TIPO_REGIAO,i3GEOF.locregiao.ULTIMO_CODIGO_REGIAO,i3GEOF.locregiao.PENULTIMO_CODIGO_TIPO_REGIAO,i3GEOF.locregiao.PENULTIMO_CODIGO_REGIAO,tipo);
+		i3GEO.php.aplicaFiltroRegiao(temp,codigo_tipo_regiao,codigo_regiao);
 		i3GEO.janela.tempoMsg("O filtro &eacute; aplicado a todas as camadas oriundas do sistema de metadados estat&iacute;cos.");
 	},
 	removeFiltro: function(){

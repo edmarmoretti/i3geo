@@ -1536,7 +1536,9 @@ i3GEOF.metaestat = {
 						minimiza
 				);
 				janela = janela[0];
-				YAHOO.i3GEO.janela.manager.register(janela);
+				if(!YAHOO.i3GEO.janela.manager.find("i3geoCartoParametros")){
+					YAHOO.i3GEO.janela.manager.register(janela);
+				}
 				janela.render();
 			}
 			else{
