@@ -1449,7 +1449,6 @@ $item {string} - (opcional) Item q ser&aacute; utilizado para ponderar os valore
 			$pt = $shape->line(0)->point(0);
 			$xs += ($pt->x * $pondera);
 			$ys += ($pt->y * $pondera);
-
 		}
 		//gera o novo arquivo shape file
 		// cria o shapefile
@@ -1467,11 +1466,12 @@ $item {string} - (opcional) Item q ser&aacute; utilizado para ponderar os valore
 		else
 		$db=dbase_open($dbname,2);
 		$reg[] = "";
-
+		$res_count = count($lshapes);
 		$shp = ms_newShapeObj(MS_SHP_POINT);
 		$linha = ms_newLineObj();
 		$linha->addXY(($xs / $res_count),($ys / $res_count));
 		$shp->add($linha);
+
 		$novoshpf->addShape($shp);
 		if($this->dbaseExiste == false)
 		xbase_add_record($db,$reg);
@@ -1489,7 +1489,7 @@ $item {string} - (opcional) Item q ser&aacute; utilizado para ponderar os valore
 		$novolayer->setmetadata("TEMALOCAL","SIM");
 		$classe = $novolayer->getclass(0);
 		$estilo = $classe->getstyle(0);
-		$estilo->set("size","12");
+		$estilo->set("size","14");
 		//limpa selecao
 		if (file_exists($this->qyfile))
 		{unlink ($this->qyfile);}
