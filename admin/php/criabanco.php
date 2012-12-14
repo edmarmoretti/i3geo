@@ -120,7 +120,7 @@
 					$dbhw = new PDO('sqlite:../../admin/admin.db');
 				}
 				else{
-					//TODO sempre criar um arquivo sqlite vazio apenas com as tabelas
+					//TODO RC2 criar um arquivo sqlite vazio apenas com as tabelas
 					echo "<br>A fun&ccedil;&atilde;o de cria&ccedil;&atilde;o do banco sqlite n&atilde;o existe no PHP. Vc pode usar o arquivo i3geo/admin/adminvazio.db e renome&aacute;-lo para admin.db.";
 				}
 			}

@@ -137,7 +137,7 @@ echo "<pre>";
 echo "verificando banco de dados de administra&ccedil;&atilde;o...\n";
 /**
  *
- * TODO sempre verificar tabelas antes de fechar versao
+ * TODO RC2 verificar tabelas antes de fechar versao
  */
 $tabelas = array(
 	"i3geoadmin_sistemasf"=>"abrir_funcao,h_funcao,id_funcao,id_sistema,nome_funcao,perfil_funcao,w_funcao",
