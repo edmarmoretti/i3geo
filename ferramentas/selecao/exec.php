@@ -38,7 +38,6 @@ Limpa a sele&ccedil;&atilde;o existente em um tema.
 		$_SESSION["contadorsalva"]++;
 		redesenhaMapa();
 	break;
-
 /*
 Valor: SELECAOTEMA
 
@@ -194,46 +193,5 @@ function selecaoPoli($xs,$ys,$tema,$tipo)
 		$_SESSION["contadorsalva"]++;
 	}
 	return implode(",",$ok);
-}
-function redesenhaMapa()
-{
-	global $tempo,$map_file,$tipoimagem,$cp,$postgis_mapa,$utilizacgi,$locmapserv,$interface,$mapexten;
-	if($tipoimagem != "nenhum" && $tipoimagem != "")
-	{$utilizacgi = "nao";}
-	if (connection_aborted()){exit();}
-	if($interface == "googleearth" && $mapexten != ""){
-		include_once(__DIR__."/../../classesphp/classe_navegacao.php");
-		$m = new Navegacao($map_file);
-		$m->mudaExtensao($mapexten);
-		$m->salva();
-	}
-	include_once(__DIR__."/../../classesphp/classe_mapa.php");
-	$m = New Mapa($map_file);
-	$par = $m->parametrosTemas();
-	//
-	//na interface googlemaps n&atilde;o &eacute; necess&aacute;rio gerar a imagem
-	//
-	$e = $m->mapa->extent;
-	$ext = $e->minx." ".$e->miny." ".$e->maxx." ".$e->maxy;
-	$res["mapimagem"] = "";
-	$res["mapexten"] = $ext;
-	$res["mapres"] = "";
-	$res["erro"] = "";
-	$res["mapscale"] = "";
-	$res["pixelsize"] = "";
-	$res["mapimagem"] = "";
-	$res["w"] = $m->mapa->width;
-	$res["h"] = $m->mapa->height;
-	$res["mappath"] = "";
-	$res["mapurl"] = "";
-	$res["mensagens"] = $m->pegaMensagens();
-	$res["tempo"] = microtime(1) - $tempo;
-	restauraCon($map_file,$postgis_mapa);
-	ob_clean();
-	if ($par == "")
-	{$retorno = "erro";}
-	else
-	{$retorno = array("variaveis"=>$res,"temas"=>$par);}
-	cpjson($retorno);
 }
 ?>

@@ -40,50 +40,50 @@ class Selecao
 {
 	/*
 	Variavel: $mapa
-	
+
 	Objeto mapa
 	*/
 	public $mapa;
 	/*
 	Variavel: $arquivo
-	
+
 	Arquivo map file
 	*/
 	protected $arquivo;
 	/*
 	Variavel: $layer
-	
+
 	Objeto layer
 	*/
 	protected $layer;
 	/*
 	Variavel: $nome
-	
+
 	Nome do layer
 	*/
 	protected $nome;
 	/*
 	Variavel: $qyfile
-	
+
 	Nome do arquivo de sele&ccedil;&atilde;o (.qy)
 	*/
 	public $qyfile;
 	/*
 	Variavel: $projO
-	
+
 	Objeto projection original do mapa. Obtido apenas na interface Googlemaps
 	*/
 	public $projO;
 	/*
 	Variavel: $v
-	
+
 	Vers&atilde;o atual do Mapserver (primeiro d&iacute;gito)
 	*/
 	public $v;
 /*
 Function: __construct
 
-Cria um objeto Selecao 
+Cria um objeto Selecao
 
 O tipo de interface usada pelo mapa &eacute; obtido do metadata "interface". Se for a interface Googlemaps, &eacute; feita a altera&ccedil;&atilde;o tempor&aacute;ria da proje&ccedil;&atilde;o do mapa.
 
@@ -98,10 +98,7 @@ $ext - extens&atilde;o geogr&aacute;fica do mapa
 
 	function __construct($map_file,$tema="",$ext="")
 	{
-  		if(file_exists($locaplic."/funcoes_gerais.php"))
-  		include_once($locaplic."/funcoes_gerais.php");
-  		else
-  		include_once("funcoes_gerais.php");
+  		include_once(__DIR__."/funcoes_gerais.php");
 		$this->v = versao();
 		$this->v = $this->v["principal"];
 		$this->qyfile = str_replace(".map",".qy",$map_file);
@@ -128,25 +125,25 @@ $ext - extens&atilde;o geogr&aacute;fica do mapa
 		if($this->mapa->getmetadata("interface") == "googlemaps"){
 			$this->projO = $this->mapa->getProjection();
 			$this->mapa->setProjection("init=epsg:4618,a=6378137,b=6378137");
-		}		
+		}
 	}
 /*
 function: salva
 
-Salva o mapfile atual 
-*/	
+Salva o mapfile atual
+*/
  	function salva()
  	{
 	  	if (connection_aborted()){exit();}
 	  	if($this->mapa->getmetadata("interface") == "googlemaps")
-		{$this->mapa->setProjection($this->projO);}		
+		{$this->mapa->setProjection($this->projO);}
 	  	$this->mapa->save($this->arquivo);
 	}
 /*
 function: nSel
 
-Retorna o n&uacute;mero de elementos selecionados 
-*/	
+Retorna o n&uacute;mero de elementos selecionados
+*/
 	function nSel(){
 		return $this->layer->getNumresults();
 	}
@@ -171,7 +168,7 @@ $ys - lista de coordenadas y separadas por virgula
 		{
 			$this->selecaoLimpa();
 			$tipo = "adiciona";
-		}		
+		}
 		if ($tipo == "limpa")
 		{return($this->selecaoLimpa());}
 		if ($tipo == "inverte")
@@ -193,7 +190,7 @@ $ys - lista de coordenadas y separadas por virgula
 		$shp_atual = array();
 		if($this->qyfileTema != "" && file_exists($this->qyfileTema))
 		{$shp_atual = $this->unserializeQ($this->qyfileTema);}
-		
+
 		$shpi = array();
 		//transforma os pontos em shape
 		$s = ms_newShapeObj(MS_SHAPE_POLYGON);
@@ -272,7 +269,7 @@ $tipo - Tipo de opera&ccedil;&atilde;o adiciona|retira|inverte|limpa|novo
 		$shp_atual = array();
 		if($this->qyfileTema != "" && file_exists($this->qyfileTema))
 		{$shp_atual = $this->unserializeQ($this->qyfileTema);}
-		
+
 		$shpi = array();
 		$i = $layero->index;
 		$selecao = "";
@@ -288,7 +285,7 @@ $tipo - Tipo de opera&ccedil;&atilde;o adiciona|retira|inverte|limpa|novo
 				else{
 					$result = $layero->getResult($i);
 					$s  = $result->shapeindex;
-					$sh = $layero->getfeature($s,-1);				
+					$sh = $layero->getfeature($s,-1);
 				}
 				$tiposh = $sh->type;
 				if ($tiposh == 2)
@@ -445,7 +442,7 @@ $valor - Valor.
 		$shp_atual = array();
 		if($this->qyfileTema != "" && file_exists($this->qyfileTema))
 		{$shp_atual = $this->unserializeQ($this->qyfileTema);}
-		
+
 		$shpi = array();
 		if($this->layer->connectiontype == MS_POSTGIS)
 		{
@@ -455,7 +452,7 @@ $valor - Valor.
 			{$this->layer->querybyattributes($item,$operador,1);}
 		}
 		else
-		{		
+		{
 			if($valor != "")
 			{
 				if(!is_numeric($valor))
@@ -466,7 +463,7 @@ $valor - Valor.
 			else
 			{
 				$this->layer->querybyattributes($item,$operador,1);
-			}			
+			}
 		}
 		$res_count = $this->layer->getNumresults();
 		$shpi = array();
@@ -483,15 +480,15 @@ $valor - Valor.
 	}
 	/*
 	function: selecaoAtributos2
-	
+
 	Sele&ccedil;&atilde;o por atributo. Permite composi&ccedil;&atilde;o de atributos.
-	
+
 	parameters:
-	
+
 	$filtro - Express&atilde;o de sele&ccedil;&atilde;o
-	
+
 	$tipo - Tipo de opera&ccedil;&atilde;o adiciona|retira|inverte|limpa|novo
-	*/	
+	*/
 	function selecaoAtributos2($filtro,$tipo)
 	{
 		$items = pegaItens($this->layer);
@@ -499,7 +496,7 @@ $valor - Valor.
 		{
 			$this->selecaoLimpa();
 			$tipo = "adiciona";
-		}	
+		}
 		if ($tipo == "limpa")
 		{return($this->selecaoLimpa());}
 		if ($tipo == "inverte")
@@ -519,13 +516,13 @@ $valor - Valor.
 		}
 		$this->mapa->freequery($indxlayer);
 		*/
-		
+
 		$shp_atual = array();
 		if($this->qyfileTema != "" && file_exists($this->qyfileTema))
 		{$shp_atual = $this->unserializeQ($this->qyfileTema);}
-		
+
 		$shpi = array();
-		
+
 		$filtro = str_replace("|","'",$filtro);
 		if ($this->layer->connectiontype == MS_POSTGIS)
 		{
@@ -567,7 +564,7 @@ $tipo - Tipo de opera&ccedil;&atilde;o adiciona|retira|inverte|limpa|novo
 		{
 			$this->selecaoLimpa();
 			$tipo = "adiciona";
-		}	
+		}
 		if ($tipo == "limpa")
 		{return ($this->selecaoLimpa());}
 		if ($tipo == "inverte")
@@ -675,7 +672,7 @@ Inverte sele&ccedil;&atilde;o do tema.
 		if (file_exists($this->qyfile))
 		{$this->mapa->loadquery($this->qyfile);}
 		$indxlayer = $this->layer->index;
-		
+
 		/*
 		$res_count = $this->layer->getNumresults();
 		$shp_atual = array();
@@ -689,7 +686,7 @@ Inverte sele&ccedil;&atilde;o do tema.
 		$shp_atual = array();
 		if($this->qyfileTema != "" && file_exists($this->qyfileTema))
 		{$shp_atual = $this->unserializeQ($this->qyfileTema);}
-		
+
 		$this->layer->queryByrect($this->mapa->extent);
 		$res_count = $this->layer->getNumresults();
 		$shp_todos = array();
@@ -826,7 +823,7 @@ $tipo - Tipo de opera&ccedil;&atilde;o adiciona|retira|inverte|limpa|novo
 		{
 			$this->selecaoLimpa();
 			$tipo = "adiciona";
-		}	
+		}
 		if(!$this->layer){return "erro";}
 		$this->layer->set("tolerance",0);
 		if ($tipo == "limpa")
@@ -849,7 +846,7 @@ $tipo - Tipo de opera&ccedil;&atilde;o adiciona|retira|inverte|limpa|novo
 		$shp_atual = array();
 		if($this->qyfileTema != "" && file_exists($this->qyfileTema))
 		{$shp_atual = $this->unserializeQ($this->qyfileTema);}
-		
+
 		$shpi = array();
 		$rect = $this->mapa->extent;
 		$ident = @$this->layer->queryByRect($rect);
@@ -908,7 +905,7 @@ $ext - coordenadas separadas por espa&ccedil;os no estilo xmin ymin xmax ymax
 		$shp_atual = array();
 		if($this->qyfileTema != "" && file_exists($this->qyfileTema))
 		{$shp_atual = $this->unserializeQ($this->qyfileTema);}
-		
+
 		$shpi = array();
 		$temp = explode(" ",$ext);
 		$rect = ms_newRectObj();
@@ -939,7 +936,7 @@ Deserializa um arquivo.
 
 Parametros:
 $arquivo - arquivo que ser&aacute; processado
-*/ 	 	
+*/
 	function unserializeQ($arq)
 	{
 		$handle = fopen ($arq, "r");
@@ -956,7 +953,7 @@ Parametros:
 $arquivo - arquivo que ser&aacute; processado
 
 $geos - array com os dados
-*/ 	 	
+*/
 	function serializeQ($arq,$geos)
 	{
 		if (file_exists($arq))
@@ -965,6 +962,6 @@ $geos - array com os dados
 		$r = serialize($geos);
 		fwrite($fp,$r);
 		fclose($fp);
-	}	
+	}
 }
 ?>
