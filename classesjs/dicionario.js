@@ -1982,6 +1982,27 @@ pt:"Congela a vis&atilde;o atual",
 en:"",
 es:"",
 it:""
+}],
+"x64":[
+{
+pt:"Item",
+en:"",
+es:"",
+it:""
+}],
+"x65":[
+{
+pt:"Buscando itens...",
+en:"",
+es:"",
+it:""
+}],
+"x66":[
+{
+pt:"Ocorreu um erro",
+en:"",
+es:"",
+it:""
 }]
 };
 //YAHOO.log("carregou dicionario", "Classes i3geo");

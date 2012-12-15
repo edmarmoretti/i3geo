@@ -15,14 +15,38 @@ $versao = versao();
 $versao = $versao["principal"];
 substituiCon($map_file,$postgis_mapa);
 $temp = explode(",",$nomesrel);
-$colunas = array();
-foreach($temp as $t)
-{
-	$t1=explode(";",$t);
-	$colunas[] = $t1[0];
+$colunasTemp = array();
+foreach($temp as $t){
+	$t1Temp=explode(";",$t);
+	$colunasTemp[] = $t1Temp[0];
 }
+//reordena as colunas
+$ordem = explode(",",$ordemrel);
+if(count($ordem) > 0){
+	$itensrelTemp = explode(",",$itensrel);
+	$itensrel = array();
+	$colunas = array();
+	$n = count($colunasTemp);
+	for($i=0;$i<$n;$i++){
+		$colunas[$ordem[$i]] = $colunasTemp[$i];
+		$t1[$ordem[$i]] = $t1Temp[$i];
+		$itensrel[$ordem[$i]] = $itensrelTemp[$i];
+	}
+	if(count($colunas) == count($colunasTemp)){
+		ksort($colunas);
+		ksort($t1);
+		ksort($itensrel);
+		$itensrel = implode(",",$itensrel);
+	}
+}
+else{
+	$colunas = $colunasTemp;
+	$t1 = $t1Temp;
+}
+
 if($itemagruparel != ""  && !in_array($itemagruparel,$colunas))
 {$colunas[] = $itemagruparel;}
+
 $temp = explode(",",$itensrel);
 $itensrel = array();
 foreach($temp as $t)

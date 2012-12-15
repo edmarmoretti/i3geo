@@ -149,6 +149,7 @@ i3GEOF.tabela = {
 				i3GEO.guias.mostraGuiaFerramenta("i3GEOtabelaguia4","i3GEOtabelaguia");
 				i3GEOF.tabela.t0();
 			};
+			//relatorio
 			$i("i3GEOtabelaguia5").onclick = function(){
 				i3GEO.guias.mostraGuiaFerramenta("i3GEOtabelaguia5","i3GEOtabelaguia");
 				i3GEO.util.checkItensEditaveis(
@@ -159,7 +160,8 @@ i3GEOF.tabela = {
 					},
 					"i3GEOtabelaitensrelatorio",
 					50,
-					""
+					"",
+					"sim"
 				);
 				i3GEO.util.comboItens(
 					"i3GEOtabelaagrupaItem",
@@ -192,14 +194,6 @@ i3GEOF.tabela = {
 				"i3GEOtabelabotaoLista",
 				{onclick:{fn: i3GEOF.tabela.pegaRegistros}}
 			);
-			/*
-			$i("i3GEOtabelabotao2-button").style.minHeight = "1em";
-			$i("i3GEOtabelabotao2-button").style.padding = "0px 15px";
-			$i("i3GEOtabelabotao3-button").style.minHeight = "1em";
-			$i("i3GEOtabelabotao3-button").style.padding = "0px 15px";
-			$i("i3GEOtabelabotao6-button").style.minHeight = "1em";
-			$i("i3GEOtabelabotao6-button").style.padding = "0px 15px";
-			*/
 			$i("i3GEOtabelabotaoLista-button").style.minHeight = "1em";
 			$i("i3GEOtabelabotaoLista-button").style.padding = "0px 15px";
 			$i("i3GEOtabelabotaoLista-button").style.lineHeight = "1.2";
@@ -323,6 +317,7 @@ i3GEOF.tabela = {
 		ins += '			<input type=hidden id=i3GEOtabelaitemagruparelh name=itemagruparel value="" />';
 		ins += '			<input type=hidden id=i3GEOtabelaitensrelh name=itensrel value="" />';
 		ins += '			<input type=hidden id=i3GEOtabelanomesrelh name=nomesrel value="" />';
+		ins += '			<input type=hidden id=i3GEOtabelaordemrel name=ordemrel value="" />';
 		ins += '			<input type=hidden id=i3GEOtabelaexcluirvalorh name=excluirvalor value="" />';
 		ins += '			<input type=hidden id=i3GEOtabelatiporelh name=tiporel value="" />';
 		ins += '		</form>';
@@ -1602,19 +1597,24 @@ i3GEOF.tabela = {
 			$i("i3GEOtabelaitemagruparelh").value=$i("i3GEOtabelaagrupaItem").value;
 			var inputs = $i("i3GEOtabelaitensrelatorio").getElementsByTagName("input"),
 				listai = [],
+				listaordem = [],
 				listanomes = [],
-				nome,
+				nome,ordem,
 				i,
 				n = inputs.length;
-			for (i=0;i<n; i++)
-			{
-				if (inputs[i].checked == true)
-				{
+			for (i=0;i<n; i++){
+				if (inputs[i].type === "checkbox" && inputs[i].checked == true){
 					listai.push(inputs[i].id+";"+inputs[i].name);
 					nome = $i(inputs[i].id+inputs[i].name).value;
 					listanomes.push(nome);
+					ordem = $i("ordem_"+inputs[i].id+inputs[i].name).value;
+					if(ordem === ""){
+						ordem = 0;
+					}
+					listaordem.push(ordem);
 				}
 			}
+			$i("i3GEOtabelaordemrel").value=listaordem;
 			$i("i3GEOtabelanomesrelh").value=listanomes;
 			$i("i3GEOtabelaitensrelh").value=listai;
 			$i("i3GEOtabelarelatorio").action += "?ext="+i3GEO.parametros.mapexten;

@@ -1934,11 +1934,16 @@ i3GEO.util = {
 	size {numeric} - tamanho dos elementos input editaveis
 
 	prefixo {string} - Prefixo que sera usado no id de cada elemento
+
+	ordenacao {sim|nao} - Indica se a colouna que permite indicar a ordem das escolhas sera ou nao incluida
 	*/
-	checkItensEditaveis: function(tema,funcao,onde,size,prefixo){
+	checkItensEditaveis: function(tema,funcao,onde,size,prefixo,ordenacao){
 		if(typeof(console) !== 'undefined'){console.info("i3GEO.util.checkItensEditaveis()");}
+		if(!ordenacao || ordenacao == ""){
+			ordenacao == "nao";
+		}
 		if (onde !== "")
-		{$i(onde).innerHTML="<span style=color:red;font-size:10px; >buscando itens...</span>";}
+		{$i(onde).innerHTML="<span style=color:red;font-size:10px; >"+$trad("x65")+"</span>";}
 		var monta = function(retorno)
 		{
 			var ins = [],
@@ -1947,18 +1952,30 @@ i3GEO.util = {
 				n;
 			if (retorno.data !== undefined)
 			{
-				ins.push("<table class=lista3 >");
+				if(ordenacao === "sim"){
+					ins.push("<table class=lista3 ><tr><td></td><td>"+$trad("x64")+"</td><td>Ordem</td>");
+				}
+				else{
+					ins.push("<table class=lista3 ><tr><td></td><td>"+$trad("x64")+"</td><td></td>");
+				}
 				n = retorno.data.valores.length;
 				for (i=0;i<n; i++){
 					ins.push("<tr><td><input size=2 style='cursor:pointer' name='"+retorno.data.valores[i].tema+"' type=checkbox id='"+prefixo+retorno.data.valores[i].item+"' /></td>");
-					ins.push("<td><input style='text-align:left; cursor:text;' onclick='javascript:this.select();' id='"+prefixo+retorno.data.valores[i].item+retorno.data.valores[i].tema+"' type=text size='"+size+"' value='"+retorno.data.valores[i].item+"' /></td></tr>");
+					ins.push("<td><input style='text-align:left; cursor:text;' onclick='javascript:this.select();' id='"+prefixo+retorno.data.valores[i].item+retorno.data.valores[i].tema+"' type=text size='"+size+"' value='"+retorno.data.valores[i].item+"' /></td>");
+					if(ordenacao === "sim"){
+						ins.push("<td><input style='text-align:left; cursor:text;' id='ordem_"+prefixo+retorno.data.valores[i].item+retorno.data.valores[i].tema+"' type=text size='3' value='"+i+"' /></td>");
+					}
+					else{
+						ins.push("<td></td>");
+					}
+					ins.push("</tr>");
 				}
 				ins.push("</table>");
 				ins = ins.join('');
 				temp = {dados:ins,tipo:"dados"};
 			}
 			else
-			{temp = {dados:'<div class=erro >Ocorreu um erro</div>',tipo:"erro"};}
+			{temp = {dados:'<div class=erro >'+$trad("x66")+'</div>',tipo:"erro"};}
 			funcao.call(this,temp);
 		};
 		i3GEO.php.listaItensTema(monta,tema);

@@ -139,7 +139,7 @@ es:"",
 it:""
 }],
 24: [{
-pt:"Escolha os itens que dever&atilde;o constar no relat&oacute;rio. Voc&ecirc; pode alterar os nomes originais das colunas para melhorar o cabe&ccedil;alho do relat&oacute;rio",
+pt:"Escolha os itens que dever&atilde;o constar no relat&oacute;rio. Voc&ecirc; pode alterar os nomes originais das colunas para melhorar o cabe&ccedil;alho do relat&oacute;rio e tamb&eacute;m definir a ordem das colunas no relat&oacute;rio",
 en:"",
 es:"",
 it:""
