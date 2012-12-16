@@ -1251,7 +1251,7 @@ class Metaestat{
 	$id_parametro_variavel - opcional
 	*/
 	function listaParametro($id_medida_variavel,$id_parametro_medida=""){
-		$sql = "SELECT i3geoestat_parametro_medida.* ";
+		$sql = "SELECT i3geoestat_parametro_medida.*,i3geoestat_medida_variavel.* ";
 		$sql .= "FROM ".$this->esquemaadmin."i3geoestat_parametro_medida ";
 		$sql .= "INNER JOIN ".$this->esquemaadmin."i3geoestat_medida_variavel ";
 		$sql .= "ON i3geoestat_parametro_medida.id_medida_variavel = i3geoestat_medida_variavel.id_medida_variavel ";
