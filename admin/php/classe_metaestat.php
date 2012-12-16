@@ -1423,11 +1423,10 @@ class Metaestat{
 	function descreveColunasTabela($codigo_estat_conexao,$nome_esquema,$nome_tabela){
 		return $this->execSQLDB($codigo_estat_conexao,"SELECT a.attnum,a.attname AS field,t.typname AS type,a.attlen AS length,a.atttypmod AS lengthvar,a.attnotnull AS notnull,p.nspname as esquema FROM pg_class c,pg_attribute a,pg_type t,pg_namespace p WHERE c.relname = '$nome_tabela' and p.nspname = '$nome_esquema' and a.attnum > 0 and a.attrelid = c.oid and a.atttypid = t.oid and c.relnamespace = p.oid ORDER BY a.attname");
 	}
-	function relatorioCompleto($codigo_variavel=""){
+	function relatorioCompleto($codigo_variavel="",$dadosGerenciais="nao"){
 		$dados = array();
-
 		if($codigo_variavel != "" || !empty($codigo_variavel)){
-			$vs[] = $this->listaVariavel($codigo_variavel);;
+			$vs[] = $this->listaVariavel($codigo_variavel);
 		}
 		else{
 			$vs = $this->listaVariavel();
@@ -1437,6 +1436,7 @@ class Metaestat{
 			$nivel1["titulo"] = $v["nome"];
 			$nivel1["descricao"] = $v["descricao"];
 			$ms = $this->listaMedidaVariavel($v["codigo_variavel"]);
+			$nivel1["filhos"] = array();
 			foreach($ms as $m){
 				$nivel2["id"] = $m["id_medida_variavel"];
 				$nivel2["titulo"] = $m["nomemedida"];
@@ -1449,7 +1449,11 @@ class Metaestat{
 				$nivel2["descricao"] = $unidade.", ".$periodo.", ".$regiao;
 				$nivel2["fontes"] = $this->listaFonteinfoMedida($m["id_medida_variavel"]);
 				$nivel2["links"] = $this->listaLinkMedida($m["id_medida_variavel"]);
-				$nivel1["filho"] = $nivel2;
+				$nivel2["dadosgerenciais"] = "";
+				if($dadosGerenciais == "sim"){
+					$nivel2["dadosgerenciais"] = $m;
+				}
+				$nivel1["filhos"][] = $nivel2;
 			}
 			$dados[] = $nivel1;
 		}
@@ -1457,24 +1461,38 @@ class Metaestat{
 	}
 	//$dados vem de relatorioCompleto
 	function formataRelatorioHtml($dados){
-		$html = "<div class='var_div_relatorio'>";
+		$html[] = "<div class='var_div_relatorio'>";
 		$var_cor = "var_cor1";
 		foreach($dados as $variavel){
-			$html .= "<div class='".$var_cor."'>";
-			$html .= "<h1>".$variavel["titulo"]."</h1>";
-			$html .= "<p><i>".$variavel["descricao"]."</i></p>";
-			$f = $variavel["filho"];
-			$html .= "<h2>".$f["titulo"]."</h2>";
-			$html .= "<p><i>".$f["descricao"]."</i></p>";
-			$html .= "<p><b>Fontes:</b></p>";
-			foreach($f["fontes"] as $fonte){
-				$html .= "<p><a href='".$fonte["link"]."' >".$fonte["titulo"]."</a></p>";
+			$html[] = "<div class='".$var_cor."'>";
+			$html[] = "<h1>".$variavel["titulo"]."</h1>";
+			$html[] = "<p><i>".$variavel["descricao"]."</i></p>";
+			$filhos = $variavel["filhos"];
+			foreach($filhos as $f){
+				$html[] = "<h2 style='position:relative;left:10px;'>".$f["titulo"]."</h2>";
+				$html[] = "<div style='position:relative;left:20px;'>";
+				$html[] = "<p><i>".$f["descricao"]."</i></p>";
+				$html[] = "<p><b>Fontes:</b></p>";
+				foreach($f["fontes"] as $fonte){
+					$html[] = "<p><a href='".$fonte["link"]."' >".$fonte["titulo"]."</a></p>";
+				}
+				$html[] = "<p><b>Links:</b></p>";
+				foreach($f["links"] as $link){
+					$html[] = "<p><a href='".$link["link"]."' >".$link["nome"]."</a></p>";
+				}
+				if($f["dadosgerenciais"] != ""){
+					$html[] = "<span style='color:gray'>";
+					$html[] = "esquemadb = ".$f["dadosgerenciais"][esquemadb].", ";
+					$html[] = "tabela = ".$f["dadosgerenciais"][tabela].", ";
+					$html[] = "colunavalor = ".$f["dadosgerenciais"][colunavalor].", ";
+					$html[] = "colunaidgeo = ".$f["dadosgerenciais"][colunaidgeo].", ";
+					$html[] = "filtro = ".$f["dadosgerenciais"][filtro].", ";
+					$html[] = "colunaidunico = ".$f["dadosgerenciais"][colunaidunico];
+					$html[] = "</span>";
+				}
+				$html[] = "</div>";
 			}
-			$html .= "<p><b>Links:</b></p>";
-			foreach($f["links"] as $link){
-				$html .= "<p><a href='".$link["link"]."' >".$link["nome"]."</a></p>";
-			}
-			$html .= "</div>";
+			$html[] = "</div>";
 			if($var_cor == "var_cor1"){
 				$var_cor = "var_cor2";
 			}
@@ -1482,8 +1500,8 @@ class Metaestat{
 				$var_cor = "var_cor1";
 			}
 		}
-		$html .= "</div>";
-		return $html;
+		$html[] = "</div><br><br>";
+		return implode("",$html);
 	}
 	function formataXML($dados){
 		$chaves = array_keys($dados[0]);

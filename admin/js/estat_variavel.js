@@ -61,7 +61,7 @@ i3GEOadmin.variaveis = {
 		if(!$i(idBotao)){
 			return;
 		}
-		var sUrl = i3GEO.configura.locaplic+"/admin/php/metaestat.php?funcao=relatorioCompleto",
+		var sUrl = i3GEO.configura.locaplic+"/admin/php/metaestat.php?funcao=relatorioCompleto&dadosGerenciais=sim",
 			adiciona = function(){
 				core_carregando("ativa");
 				core_carregando(" Aguarde");

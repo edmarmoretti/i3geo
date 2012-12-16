@@ -1181,7 +1181,7 @@ switch (strtoupper($funcao))
 		if(empty($codigo_variavel)){
 			$codigo_variavel = "";
 		}
-		$dados = $m->relatorioCompleto($codigo_variavel);
+		$dados = $m->relatorioCompleto($codigo_variavel,$dadosGerenciais);
 		$dados = $m->formataRelatorioHtml($dados);
 		retornaJSON($dados);
 		exit;
