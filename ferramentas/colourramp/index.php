@@ -21,32 +21,33 @@ body{
 }
 #imagens {
 	border:1px solid #EBEBEB;
-	height:120px;
+	height:80px;
 	overflow:auto;
 	position:relative;
 	text-align:center;
-	width:280px;
+	width:250px;
 	left:8px;
 }
 #cores {
 	border:1px solid #EBEBEB;
-	height:120px;
+	height:80px;
 	overflow:auto;
 	position:relative;
 	text-align:center;
-	width:280px;
+	width:250px;
 	left:8px;
 }
 #imagens img{
-	width: 246px;
+	width: 236px;
 	cursor:pointer;
 	left:10px;
+	height: 20px;
 }
 #demo_bg {
     position: relative;
     background: url(<?php echo $locaplic;?>/pacotes/yui290/build/slider/assets/dual_thumb_bg.gif) 0 5px no-repeat;
     height: 28px;
-    width: 258px;
+    width: 238px;
 	left: 8px;
 }
 
@@ -63,7 +64,7 @@ body{
     top: 10px;
     left: 12px;
     height: 13px;
-    width: 246px;
+    width: 226px;
 }
 
 #demo_bg .caution {
@@ -103,27 +104,31 @@ p .boom {
 </style>
 <title></title>
 </head>
-<body class=" yui-skin-sam" style="margin:10px;width:95%;" >
-<p class=paragrafo style="position:relative;left:6px;width:100%;" >Clique para escolher o modelo de cores. Voc&ecirc; pode tamb&eacute;m definir os limites iniciais e finais para a gera&ccedil;&atilde;o das cores e alterar os valores obtidos editando o RGB</p>
+<body class=" yui-skin-sam" style="margin:0px;width:253px;" >
+<p class=paragrafo style="position:relative;left:6px;width:100%;" >
+Quantas cores voc&ecirc; quer gerar? <input id=ncores type=text size=3 value=<?php echo $ncores; ?> /><br>
+Clique para escolher o modelo de cores
+</p>
 <div id="imagens" ></div>
 <div id="demo_bg" title="Range slider">
     <span id="demo_highlight"></span>
     <div id="demo_min_thumb"><img src="<?php echo $locaplic;?>/pacotes/yui290/build/slider/assets/l-thumb-round.gif"></div>
     <div id="demo_max_thumb"><img src="<?php echo $locaplic;?>/pacotes/yui290/build/slider/assets/r-thumb-round.gif"></div>
 </div>
-<p><span id="demo_range" style="text-align:center;width:280px">0-255</span></p>
+<p style="text-align:center;width:250px"><span id="demo_range" >0-255</span></p>
 <div id=cores ></div>
 <p style="position:relative;left:6px;top:5px;text-align:left;" >
-<input id=voltar size="22" type="button" value="Aplicar as cores">&nbsp;
-Quantas cores? <input id=ncores type=text size=3 value=<?php echo $ncores; ?> />
-
-
+<input id=voltar size="22" type="button" value="Aplicar cores">&nbsp;
+</p>
+<div class="paragrafo" style="border:1px solid #EBEBEB;position:relative;top:0px;position:relative;left:6px;width:250px;height:80px;overflow:auto;" >
+<b>Para atualizar a lista de cores geradas, clique novamente sobre a barra de cor.</b> Voc&ecirc; pode tamb&eacute;m definir os limites inicial e final (use a barra deslizante) e alterar os valores obtidos editando diretamente o RGB
+</div>
 <script>
 new YAHOO.widget.Button(
 	"voltar",
 	{onclick:{fn: function(){aplicarCores();}}}
 );
-
+$i("voltar-button").style.width = "250px"
 var lista = "<?php echo $lista;?>";
 lista = lista.split(",");
 var n = lista.length;
@@ -148,7 +153,7 @@ function geracores(codigo){
 			try{
 				if(retorno.data[i].r != undefined){
 					cor = retorno.data[i].r+","+retorno.data[i].g+","+retorno.data[i].b;
-					ins += "<tr><td><img src='<?php echo $locaplic;?>/imagens/x.png' style='cursor:pointer;' title='excluir' onclick='javascript:$i(\"cor_"+cor+"\").style.display=\"none\";this.style.display=\"none\"' </td><td><p id='cor_"+cor+"' style='width:250px;heigth:10px;background-color:rgb("+cor+")'><input onchange='javascript:$i(\"cor_"+cor+"\").style.backgroundColor=this.value;' type=text size=17 value=\"rgb("+cor+")\"/></p></td></tr>";
+					ins += "<tr><td style='width:10px'><img src='<?php echo $locaplic;?>/imagens/x.png' style='cursor:pointer;' title='excluir' onclick='javascript:$i(\"cor_"+cor+"\").style.display=\"none\";this.style.display=\"none\"' </td><td style='width:100%' ><p id='cor_"+cor+"' style='width:100%;heigth:10px;background-color:rgb("+cor+")'><input onchange='javascript:$i(\"cor_"+cor+"\").style.backgroundColor=this.value;' type=text size=17 value=\"rgb("+cor+")\"/></p></td></tr>";
 				}
 			}catch(e){}
 		}
@@ -205,7 +210,7 @@ function aplicarCores()
     var Dom = YAHOO.util.Dom;
 
     // Slider has a range of 300 pixels
-    var range = 255;
+    var range = 235;
 
     // Set up 12 pixel ticks
     var tickSize = 1;

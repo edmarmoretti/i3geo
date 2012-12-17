@@ -2240,7 +2240,7 @@ i3GEO.util = {
 			fix = false,
 			wsrc = i3GEO.configura.locaplic+"/ferramentas/colourramp/index.php?ncores="+ncores+"&doc="+janelaid+"&elemento="+elemento+"&locaplic="+i3GEO.configura.locaplic, //+janela+"&elemento="+elemento+"&tipo="+tipo,
 			nx = "",
-			texto = "Cor",
+			texto = "",
 			id = "i3geo_janelaCorRamp",
 			classe = "hd";
 		if($i(id)){
@@ -2266,12 +2266,12 @@ i3GEO.util = {
 		wdocaiframe = $i("i3geo_janelaCorRampi");
 		wdocaiframe.style.display = "block";
 		wdocaiframe.src = wsrc;
-		wdocaiframe.style.height = "390px";
+		wdocaiframe.style.height = "380px";
 		wdocaiframe.style.width = "100%";
 		wdocaiframe.style.border = "0px solid white";
 
 		if(nx === "" || nx === "center"){fix = true;}
-		janela = new YAHOO.widget.ResizePanel(id, { height:"450px",modal:false, width: "380px", fixedcenter: fix, constraintoviewport: false, visible: true, iframe:false} );
+		janela = new YAHOO.widget.ResizePanel(id, { height:"430px",modal:false, width: "280px", fixedcenter: fix, constraintoviewport: false, visible: true, iframe:false} );
 		YAHOO.i3GEO.janela.manager.register(janela);
 		janela.render();
 		$i(id+'_cabecalho').className = classe;
