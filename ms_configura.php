@@ -142,10 +142,7 @@ $twitteroauth = array(
 	Tipo:
 	{string}
 */
-if(file_exists("versao.php"))
-{include_once("versao.php");}
-else
-{$mensagemInicia = "";}
+include(__DIR__."/versao.php");
 /*
 	Variable: tituloInstituicao
 

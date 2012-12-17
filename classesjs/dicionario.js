@@ -2003,6 +2003,20 @@ pt:"Ocorreu um erro",
 en:"",
 es:"",
 it:""
+}],
+"x67":[
+{
+pt:"Comunidade i3Geo",
+en:"",
+es:"",
+it:""
+}],
+"x68":[
+{
+pt:"Vers&atilde;o",
+en:"",
+es:"",
+it:""
 }]
 };
 //YAHOO.log("carregou dicionario", "Classes i3geo");

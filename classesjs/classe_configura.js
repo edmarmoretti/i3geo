@@ -124,7 +124,7 @@ i3GEO.configura = {
 		],
 		submenus:{
 			"ajudaMenu": [
-			{ id:"omenudataAjudamenu1",text: $trad("u1"), url: "http://www.softwarepublico.gov.br/spb/ver-comunidade?community_id=1444332", target:"_blank" },
+			{ id:"omenudataAjudamenu9",text: $trad("x68"), url: "javascript:i3GEO.janela.tempoMsg(i3GEO.parametros.mensageminicia)" },
 			{ id:"omenudataAjudamenu2",text: $trad("u2"), url: "javascript:i3GEO.ajuda.abreDoc()" },
 			/**
 			 * TODO RC2 gerar arquivo PDF atualizado com a documentacao para usuario
@@ -132,6 +132,7 @@ i3GEO.configura = {
 			{ id:"omenudataAjudamenu3",text: $trad("u4a"), url: "javascript:i3GEO.ajuda.abreDoc('/documentacao/manual-i3geo-4_7-pt.pdf')" },
 			{ id:"omenudataAjudamenu4",text: $trad("u4"), url: "http://www.softwarepublico.gov.br/dotlrn/clubs/i3geo/file-storage/index?folder%5fid=22667525", target:"_blank" },
 			{ id:"omenudataAjudamenu5",text: $trad("u5a"), url: "http://www.softwarepublico.gov.br", target:"_blank" },
+			{ id:"omenudataAjudamenu1",text: $trad("x67"), url: "http://www.softwarepublico.gov.br/spb/ver-comunidade?community_id=1444332", target:"_blank" },
 			{ id:"omenudataAjudamenu7",text: $trad("u5b"), url: "javascript:i3GEO.ajuda.abreDoc('/ajuda_usuario.php')"},
 			{ id:"omenudataAjudamenu8",text: $trad("u5c"), url: "javascript:i3GEO.ajuda.redesSociais()" }
 			],
