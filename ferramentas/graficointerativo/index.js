@@ -190,7 +190,7 @@ i3GEOF.graficointerativo = {
 			$i("i3GEOgraficointerativoguia4").onclick = function(){
 				i3GEO.guias.mostraGuiaFerramenta("i3GEOgraficointerativoguia4","i3GEOgraficointerativoguia");
 				function outputStatus(e) {
-					//i3GEO.janela.tempoMsg("e.success = " + e.success +"\ne.id = "+ e.id +"\ne.ref = "+ e.ref);
+					//alert("oi");
 				}
 				swfobject.embedSWF(
 					i3GEO.configura.locaplic+"/pacotes/openflashchart/open-flash-chart.swf",
@@ -211,6 +211,7 @@ i3GEOF.graficointerativo = {
 				t.style.display = "block";
 				t.style.position = "relative";
 				t.style.top = "-5px";
+				t.visibility = "visible";
 			};
 			$i("i3GEOgraficointerativoguia5").onclick = function(){
 				i3GEO.guias.mostraGuiaFerramenta("i3GEOgraficointerativoguia5","i3GEOgraficointerativoguia");
@@ -421,7 +422,7 @@ i3GEOF.graficointerativo = {
 			minimiza
 		);
 		divid = janela[2].id;
-		$i(divid).style.marginTop = "10px";
+		$i(divid).style.marginTop = "0px";
 		v = g.cloneNode(true);
 		v.id = id+"ngrafico";
 		v.style.marginTop = "0px";
@@ -506,14 +507,24 @@ i3GEOF.graficointerativo = {
 			"i3GEOgraficointerativoComboXid",
 			tema,
 			function(retorno){
-		 		if(retorno.tipo === "erro"){
+				if(retorno.tipo === "erro"){
 		 			$i("i3GEOgraficointerativoComboX").innerHTML = "<br><br><span style='color:red'>erro ao ler os itens do tema de origem</span><br><br>";
 		 			$i("i3GEOgraficointerativoComboY").innerHTML = "<br><br><span style='color:red'>erro ao ler os itens do tema de origem</span><br><br>";
 		 		}
 		 		else{
-		 			$i("i3GEOgraficointerativoComboY").innerHTML = retorno.dados;
+		 			$i("i3GEOgraficointerativoComboY").innerHTML = retorno.dados + "&nbsp;<input title='Digite o t&iacute;tulo' class=digitar type=text size=20 id=i3GEOgraficointerativoComboYidTitulo value='' />";
 		 			$i("i3GEOgraficointerativoComboXid").id = "i3GEOgraficointerativoComboYid";
-		 			$i("i3GEOgraficointerativoComboX").innerHTML = retorno.dados;
+		 			$i("i3GEOgraficointerativoComboX").innerHTML = retorno.dados + "&nbsp;<input title='Digite o t&iacute;tulo' class=digitar type=text size=20 id=i3GEOgraficointerativoComboXidTitulo value='' />";
+		 			$i("i3GEOgraficointerativoComboXid").style.width = "160px";
+		 			$i("i3GEOgraficointerativoComboYid").style.width = "160px";
+		 			$i("i3GEOgraficointerativoComboXid").onchange = function(){
+		 				var combo = $i("i3GEOgraficointerativoComboXid");
+		 				$i("i3GEOgraficointerativoComboXidTitulo").value = combo.options[combo.selectedIndex].label;
+		 			};
+		 			$i("i3GEOgraficointerativoComboYid").onchange = function(){
+		 				var combo = $i("i3GEOgraficointerativoComboYid");
+		 				$i("i3GEOgraficointerativoComboYidTitulo").value = combo.options[combo.selectedIndex].label;
+		 			};
 		 		}
 			},
 			"i3GEOgraficointerativoComboX",
@@ -697,9 +708,9 @@ i3GEOF.graficointerativo = {
 		if(i3GEOF.graficointerativo.titulo != "")
 		{titulo = i3GEOF.graficointerativo.titulo;}
 		if($i("i3GEOgraficointerativoComboXid"))
-		{legendaX = $i("i3GEOgraficointerativoComboXid").value;}
+		{legendaX = $i("i3GEOgraficointerativoComboXidTitulo").value;}
 		if($i("i3GEOgraficointerativoComboYid"))
-		{legendaY = $i("i3GEOgraficointerativoComboYid").value;}
+		{legendaY = $i("i3GEOgraficointerativoComboYidTitulo").value;}
 		for(i=0;i<ninputs;i = i + 3){
 			temp = inputs[i+1].value * 1;
 			total += temp;

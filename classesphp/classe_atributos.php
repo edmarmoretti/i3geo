@@ -245,27 +245,56 @@ class Atributos
 		//verifica se o tema &eacute; um grupo e cria um array com a lista de temas
 		$vermultilayer = new vermultilayer();
 		$vermultilayer->verifica($this->arquivo,$this->nome);
-		if ($vermultilayer->resultado == 1) // o tema e multi layer
-		{$l = $vermultilayer->temasvisiveis;
+		if ($vermultilayer->resultado == 1){ // o tema e multi layer
+			$l = $vermultilayer->temasvisiveis;
 		}
-		else
-		{$l[] = $this->nome;
+		else{
+			$l[] = $this->nome;
 		}
 		//pega os itens de cada layer
 		$lista = array();
-		foreach ($l as $tema)
-		{
+		foreach ($l as $tema){
 			$layer = $this->mapa->getlayerbyname($tema);
 			$layer->set("template","none.htm");
 			//pega o nome correto do tema
 			$nometmp = pegaNome($layer,"UTF-8");
 			$nomestemas[] = $nometmp;
-			if($layer->data != "" || $layer->connectiontype == 7)
-			{
+			if($layer->data != "" || $layer->connectiontype == 7){
 				$items = pegaItens($layer,$this->mapa);
-				foreach ($items as $item)
-				{
-					$lista[] = array("item"=>$item,"nome"=>$nometmp,"tema"=>$tema);
+				//pega os alias
+				if($this->layer->getmetadata("itensdesc") != ""){
+					$alias = array();
+					$aliasdesc = explode(",",$this->layer->getmetadata("itensdesc"));
+					$aliasitens = explode(",",$this->layer->getmetadata("itens"));
+					$aliasc = array_combine($aliasitens,$aliasdesc);
+					if(strtoupper($this->layer->getmetadata("convcaracter")) == "NAO"){
+						$convC = false;
+					}
+					else{
+						$convC = true;
+					}
+					foreach($items as $i){
+						if($aliasc[$i]){
+							if($convC){
+								$alias[$i] = $this->converte($aliasc[$i]);
+							}
+							else{
+								$alias[$i] = $aliasc[$i];
+							}
+						}
+						else{
+							$alias[$i] = $i;
+						}
+					}
+				}
+				foreach ($items as $item){
+					if($alias[$item]){
+						$a = $alias[$item];
+					}
+					else{
+						$a = "";
+					}
+					$lista[] = array("item"=>$item,"nome"=>$nometmp,"tema"=>$tema,"alias"=>$a);
 				}
 			}
 		}
@@ -1467,8 +1496,7 @@ class Atributos
 		{
 			$its = $layer->getmetadata("ITENS"); // itens
 			if ($item != "") //utilizado pela funcao tip
-			{$its = $item;
-			}
+			{$its = $item;}
 			if ($its != "")
 			{
 				$descis = $layer->getmetadata("ITENSDESC"); // descri&ccedil;&atilde;o dos itens

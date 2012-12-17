@@ -1779,9 +1779,14 @@ i3GEO.util = {
 	onde {String} - id do elemento HTML que recebera o combo. e utilizado apenas para inserir uma mensagem de aguarde.
 
 	nome {String} - valor que sera incluido no parametro "name" do elemento "select".
+
+	alias {string} sim|nao indica se para os nomes dos itens sera usado o alias (default= sim)
 	*/
-	comboItens: function(id,tema,funcao,onde,nome){
+	comboItens: function(id,tema,funcao,onde,nome,alias){
 		if(typeof(console) !== 'undefined'){console.info("i3GEO.util.comboItens()");}
+		if(!alias){
+			alias = "sim";
+		}
 		if (arguments.length > 3)
 		{$i(onde).innerHTML="<span style=color:red;font-size:10px; >buscando itens...</span>";}
 		if (arguments.length !== 5)
@@ -1789,15 +1794,22 @@ i3GEO.util = {
 
 		var monta = function(retorno)
 		{
-			var ins,temp,i;
+			var ins,temp,i,nm;
 			if (retorno.data !== undefined){
 				ins = [];
 				ins.push("<select  id='"+id+"' name='"+nome+"'>");
 				ins.push("<option value='' >---</option>");
 				temp = retorno.data.valores.length;
 				for (i=0;i<temp; i++){
-					if (retorno.data.valores[i].tema === tema)
-					{ins.push("<option value='"+retorno.data.valores[i].item+"' >"+retorno.data.valores[i].item+"</option>");}
+					if (retorno.data.valores[i].tema === tema){
+						if(alias == "sim"){
+							nm = retorno.data.valores[i].alias;
+						}
+						else{
+							retorno.data.valores[i].item
+						}
+						ins.push("<option value='"+retorno.data.valores[i].item+"' >"+nm+"</option>");
+					}
 				}
 				ins.push("</select>");
 				ins = ins.join('');

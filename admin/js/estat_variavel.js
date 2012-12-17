@@ -513,7 +513,7 @@ i3GEOadmin.variaveis = {
 				if(dados[i].nome != "")
 				{conteudo += "&nbsp;<span><b>"+dados[i].nome+"</b><span style=color:gray > - "+dados[i].descricao+" id: "+dados[i].id_parametro_medida+"</span></span>";}
 				else
-				{conteudo += "&nbsp;<span style=color:red >Edite para definir a nova medida!!!</span>";}
+				{conteudo += "&nbsp;<span style=color:red >Edite para definir o novo par&acirc;metro!!!</span>";}
 				d = {html:conteudo,id_parametro_medida:dados[i].id_parametro_medida,tipo:"parametro"};
 				tempNode = new YAHOO.widget.HTMLNode(d, no, false,true);
 				tempNode.isLeaf = true;
