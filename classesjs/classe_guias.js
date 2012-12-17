@@ -73,7 +73,7 @@ i3GEO.guias = {
 	/*
 	Propriedade: CONFIGURA
 
-	Define os par�metros de cada guia que ser&aacute; mostrada no mapa, como t&iacute;tulo, conte&uacute;do, etc.
+	Define os par&acirc;metros de cada guia que ser&aacute; mostrada no mapa, como t&iacute;tulo, conte&uacute;do, etc.
 
 	Voc&ecirc; pode modificar o nome de uma guia como no exemplo
 
@@ -256,7 +256,7 @@ i3GEO.guias = {
 			nguias = guias.length;
 		//
 		//no caso de TIPO === "movel", as guias n&atilde;o s&atilde;o constru&iacute;das de imediato, apenas &eacute; criado um objeto
-		//com os par�metros necess&aacute;rios para a cria&ccedil;&atilde;o das guias
+		//com os par&acirc;metros necess&aacute;rios para a cria&ccedil;&atilde;o das guias
 		//
 		if(i3GEO.guias.TIPO === "movel"){
 			i3GEO.guias.IDGUIAS = "i3GEOguiaMovelConteudo";

@@ -37,7 +37,7 @@ Classe: i3GEO.barraDeBotoes
 
 Constr&oacute;i a barra de bot&otilde;es flutuante
 
-Veja tamb&eacute;m classe_interface.js (i3GEO.Interface) que possu&iacute; par�metros que permitem ajustar a posi&ccedil;&atilde;o das barras no mapa
+Veja tamb&eacute;m classe_interface.js (i3GEO.Interface) que possu&iacute; par&acirc;metros que permitem ajustar a posi&ccedil;&atilde;o das barras no mapa
 */
 i3GEO.barraDeBotoes = {
 	/*
@@ -899,7 +899,7 @@ i3GEO.barraDeBotoes = {
 
 	A barra de zoom &eacute; inserida automaticamente na barra de botoes 1 se esta existir
 
-	Caso i3GEO.barraDeBotoes.TIPO === "olhodepeixe" os par�metros s&atilde;o ignorados.
+	Caso i3GEO.barraDeBotoes.TIPO === "olhodepeixe" os par&acirc;metros s&atilde;o ignorados.
 
 	Exemplo:
 
@@ -1266,7 +1266,7 @@ i3GEO.barraDeBotoes = {
 	/*
 	Function: recria
 
-	Recria uma barra de ferramentas j&aacute; aberta aplicando os par�metros de configura&ccedil;&atilde;o definidos (vari&aacute;veis)
+	Recria uma barra de ferramentas j&aacute; aberta aplicando os par&acirc;metros de configura&ccedil;&atilde;o definidos (vari&aacute;veis)
 
 	Parametro:
 

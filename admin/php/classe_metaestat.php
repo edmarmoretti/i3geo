@@ -680,7 +680,9 @@ class Metaestat{
 			$agrupamento = "";
 			$colunavalor = $metaVariavel["colunavalor"];
 			foreach($dados as $d){
-				$valores[] = $d[$colunavalor];
+				if($d[$colunavalor]){
+					$valores[] = $d[$colunavalor];
+				}
 			}
 			if(!empty($agruparpor)){
 				$agrupamento = array();
@@ -710,6 +712,7 @@ class Metaestat{
 			}
 			if($un["permitesoma"] == "1" || $un["permitemedia"] == "1"){
 				sort($valores);
+				//var_dump($valores);exit;
 				$min = $valores[0];
 				$max = $valores[$quantidade - 1];
 				include_once(__DIR__."/../../classesphp/classe_estatistica.php");
@@ -719,13 +722,16 @@ class Metaestat{
 				//expressao para o mapfile
 				$expressao[] = "([".$colunavalor."]<=".($v["quartil1"]).")";
 				$expressao[] = "(([".$colunavalor."]>".($v["quartil1"]).")and([".$colunavalor."]<=".($v["quartil2"])."))";
-				$expressao[] = "(([".$colunavalor."]>".($v["quartil2"]).")and([".$colunavalor."]<=".($v["quartil3"])."))";
-				$expressao[] = "([".$colunavalor."]>".($v["quartil3"]).")";
+				if($v["quartil3"] != 0){
+					$expressao[] = "(([".$colunavalor."]>".($v["quartil2"]).")and([".$colunavalor."]<=".($v["quartil3"])."))";
+					$expressao[] = "([".$colunavalor."]>".($v["quartil3"]).")";
+				}
 				$nomes[] = "<= ".($v["quartil1"]);
 				$nomes[] = "> ".($v["quartil1"])." e <= ".($v["quartil2"]);
-				$nomes[] = "> ".($v["quartil2"])." e <= ".($v["quartil3"]);
-				$nomes[] = "> ".($v["quartil3"]);
-
+				if($v["quartil3"] != 0){
+					$nomes[] = "> ".($v["quartil2"])." e <= ".($v["quartil3"]);
+					$nomes[] = "> ".($v["quartil3"]);
+				}
 				$quartis = array(
 							"cortes"=>array(
 								"q1"=>$v['quartil1'],
@@ -737,6 +743,7 @@ class Metaestat{
 						);
 			}
 			$histograma = array_count_values($valores);
+			//echo "<pre>".var_dump($quartis);exit;
 			return array(
 						"colunavalor"=>$colunavalor,
 						"soma"=>$soma,

@@ -396,15 +396,18 @@ Include:
 			//adiciona as classes novas
 			$expressao[] = "([".$item."]<=".($calc["quartil1"]).")";
 			$expressao[] = "(([".$item."]>".($calc["quartil1"]).")and([".$item."]<=".($calc["quartil2"])."))";
-			$expressao[] = "(([".$item."]>".($calc["quartil2"]).")and([".$item."]<=".($calc["quartil3"])."))";
-			$expressao[] = "([".$item."]>".($calc["quartil3"]).")";
+			if($calc["quartil3"] != 0){
+				$expressao[] = "(([".$item."]>".($calc["quartil2"]).")and([".$item."]<=".($calc["quartil3"])."))";
+				$expressao[] = "([".$item."]>".($calc["quartil3"]).")";
+			}
 			$nomes[] = "<= ".($calc["quartil1"]);
 			$nomes[] = "> ".($calc["quartil1"])." e <= ".($calc["quartil2"]);
-			$nomes[] = "> ".($calc["quartil2"])." e <= ".($calc["quartil3"]);
-			$nomes[] = "> ".($calc["quartil3"]);
-
+			if($calc["quartil3"] != 0){
+				$nomes[] = "> ".($calc["quartil2"])." e <= ".($calc["quartil3"]);
+				$nomes[] = "> ".($calc["quartil3"]);
+			}
 			$vcor = array(250,230,150,0);
-			for ($i=0;$i < 4;++$i)
+			for ($i=0;$i < count($nomes);++$i)
 			{
 				$classe = ms_newClassObj($this->layer);
 				$novoestilo = ms_newStyleObj($classe);

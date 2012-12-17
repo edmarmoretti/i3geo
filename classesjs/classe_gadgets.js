@@ -44,18 +44,18 @@ i3GEO.gadgets = {
 
 	Parametros de inicializa&ccedil;&atilde;o dos gadgets.
 
-	Essa vari&aacute;vel define os par�metros individuais de cada gadget e o ID do elemento HTML onde
-	o gadget ser&aacute; inclu&iacute;do (par�metro "idhtml").
+	Essa vari&aacute;vel define os parametros individuais de cada gadget e o ID do elemento HTML onde
+	o gadget ser&aacute; inclu&iacute;do (parametro "idhtml").
 
-	Cada tipo de gadget pode ter par�metros espec&iacute;ficos, descritos a seguir.
+	Cada tipo de gadget pode ter parametros espec&iacute;ficos, descritos a seguir.
 
 	i3GEO.gadgets.PARAMETROS.mostraBuscaRapida.servicosexternos = true|false //indica que os servi&ccedil;os de buscas externos ao i3Geo ser&atilde;o ou n&atilde;o mostrados
 	i3GEO.gadgets.PARAMETROS.mostraBuscaRapida.temasmapa =  true|false //indica se a busca ser&aacute; feita ou n&atilde;o nas camadas existentes no mapa
 	i3GEO.gadgets.PARAMETROS.mostraMenuSuspenso.deslocaEsquerda = 0 //n&uacute;mero de pixels que indica o quanto o menu ser&aacute; deslocado para a esquerda
 	i3GEO.gadgets.PARAMETROS.mostraMenuSuspenso.finaliza = "" //nome de uma fun&ccedil;&atilde;o que ser&aacute; executada quando a constru&ccedil;&atilde;o do menu tiver terminado
-	i3GEO.gadgets.PARAMETROS.mostraMenuSuspenso.parametrosYUI = {} //objeto contendo par�metros adicionais da API YUI para menus
+	i3GEO.gadgets.PARAMETROS.mostraMenuSuspenso.parametrosYUI = {} //objeto contendo par&acirc;metros adicionais da API YUI para menus
 
-	Voc&ecirc; pode acessar os par�metros da seguinte forma:
+	Voc&ecirc; pode acessar os par&acirc;metros da seguinte forma:
 
 	i3GEO.gadgets.PARAMETROS.mostraMenuSuspenso.deslocaEsquerda = 400;
 
@@ -518,7 +518,7 @@ i3GEO.gadgets = {
 			//inclui op&ccedil;&atilde;o admin
 			try{
 				if(ms.permiteLogin === true || i3GEO.parametros.editor === "sim"){
-					i3GEO.configura.oMenuData.menu.push({nome:"Admin",id:"i3GeoAdmin"});
+					i3GEO.configura.oMenuData.menu.push({nome:"Admin/Login",id:"i3GeoAdmin"});
 					i3GEO.configura.oMenuData.submenus.i3GeoAdmin = [];
 					if(ms.permiteLogin === true){
 						i3GEO.configura.oMenuData.submenus.i3GeoAdmin.push(

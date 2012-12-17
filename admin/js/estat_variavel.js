@@ -690,27 +690,27 @@ i3GEOadmin.variaveis = {
 	},
 	editarMontaFormulario: function(dados,tipo,id){
 		if(tipo == "variavel"){
-			core_montaEditor("i3GEOadmin.variaveis.gravaDados('variavel','"+id+"')","450px","200px","","Editor de vari&aacute;vel");
+			core_montaEditor("i3GEOadmin.variaveis.gravaDados('variavel','"+id+"')","450px","200px","","Editor de vari&aacute;vel",true);
 			i3GEOadmin.variaveis.montaDivVariavel(dados);
 		}
 		if(tipo == "medidaVariavel"){
-			core_montaEditor("i3GEOadmin.variaveis.gravaDados('medidaVariavel','"+id+"')","450px","200px","","Editor de medidas");
+			core_montaEditor("i3GEOadmin.variaveis.gravaDados('medidaVariavel','"+id+"')","450px","200px","","Editor de medidas",true);
 			i3GEOadmin.variaveis.medidas.montaDiv(dados);
 		}
 		if(tipo == "parametroMedida"){
-			core_montaEditor("i3GEOadmin.variaveis.gravaDados('parametroMedida','"+id+"')","450px","200px","","Editor de par&acirc;metros");
+			core_montaEditor("i3GEOadmin.variaveis.gravaDados('parametroMedida','"+id+"')","450px","200px","","Editor de par&acirc;metros",true);
 			i3GEOadmin.variaveis.parametro.montaDiv(dados);
 		}
 		if(tipo == "classificacaoMedida"){
-			core_montaEditor("i3GEOadmin.variaveis.gravaDados('classificacaoMedida','"+id+"')","450px","200px","","Editor de classifica&ccedil;&atilde;o");
+			core_montaEditor("i3GEOadmin.variaveis.gravaDados('classificacaoMedida','"+id+"')","450px","200px","","Editor de classifica&ccedil;&atilde;o",true);
 			i3GEOadmin.variaveis.classificacao.montaDiv(dados);
 		}
 		if(tipo == "classeClassificacao"){
-			core_montaEditor("i3GEOadmin.variaveis.gravaDados('classeClassificacao','"+id+"')","450px","200px","","Editor de classe");
+			core_montaEditor("i3GEOadmin.variaveis.gravaDados('classeClassificacao','"+id+"')","450px","200px","","Editor de classe",true);
 			i3GEOadmin.variaveis.classes.montaDiv(dados);
 		}
 		if(tipo == "linkMedida"){
-			core_montaEditor("i3GEOadmin.variaveis.gravaDados('linkMedida','"+id+"')","450px","200px","","Editor de links");
+			core_montaEditor("i3GEOadmin.variaveis.gravaDados('linkMedida','"+id+"')","450px","200px","","Editor de links",true);
 			i3GEOadmin.variaveis.link.montaDiv(dados);
 		}
 	},
@@ -1082,6 +1082,9 @@ i3GEOadmin.variaveis = {
 								i3GEOadmin.variaveis.aposGravar.call([tipo,id]);
 								if(!YAHOO.lang.isObject(tree)){
 									core_carregando("desativa");
+									if(YAHOO && YAHOO.admin && YAHOO.admin.container && YAHOO.admin.container.panelEditor){
+										YAHOO.admin.container.panelEditor.destroy();
+									}
 									return;
 								}
 								no = tree.getNodeByProperty("codigo_variavel",id);
@@ -1093,6 +1096,9 @@ i3GEOadmin.variaveis = {
 								i3GEOadmin.variaveis.aposGravar.call([tipo,id]);
 								if(!YAHOO.lang.isObject(tree)){
 									core_carregando("desativa");
+									if(YAHOO && YAHOO.admin && YAHOO.admin.container && YAHOO.admin.container.panelEditor){
+										YAHOO.admin.container.panelEditor.destroy();
+									}
 									return;
 								}
 								no = tree.getNodeByProperty("id_medida_variavel",id);
@@ -1104,6 +1110,9 @@ i3GEOadmin.variaveis = {
 								i3GEOadmin.variaveis.aposGravar.call([tipo,id]);
 								if(!YAHOO.lang.isObject(tree)){
 									core_carregando("desativa");
+									if(YAHOO && YAHOO.admin && YAHOO.admin.container && YAHOO.admin.container.panelEditor){
+										YAHOO.admin.container.panelEditor.destroy();
+									}
 									return;
 								}
 								no = tree.getNodeByProperty("id_parametro_medida",id);
@@ -1115,6 +1124,9 @@ i3GEOadmin.variaveis = {
 								i3GEOadmin.variaveis.aposGravar.call([tipo,id]);
 								if(!YAHOO.lang.isObject(tree)){
 									core_carregando("desativa");
+									if(YAHOO && YAHOO.admin && YAHOO.admin.container && YAHOO.admin.container.panelEditor){
+										YAHOO.admin.container.panelEditor.destroy();
+									}
 									return;
 								}
 								no = tree.getNodeByProperty("id_classificacao",id);
@@ -1126,6 +1138,9 @@ i3GEOadmin.variaveis = {
 								i3GEOadmin.variaveis.aposGravar.call([tipo,id]);
 								if(!YAHOO.lang.isObject(tree)){
 									core_carregando("desativa");
+									if(YAHOO && YAHOO.admin && YAHOO.admin.container && YAHOO.admin.container.panelEditor){
+										YAHOO.admin.container.panelEditor.destroy();
+									}
 									return;
 								}
 								no = tree.getNodeByProperty("id_classe",id);
@@ -1137,6 +1152,9 @@ i3GEOadmin.variaveis = {
 								i3GEOadmin.variaveis.aposGravar.call([tipo,id]);
 								if(!YAHOO.lang.isObject(tree)){
 									core_carregando("desativa");
+									if(YAHOO && YAHOO.admin && YAHOO.admin.container && YAHOO.admin.container.panelEditor){
+										YAHOO.admin.container.panelEditor.destroy();
+									}
 									return;
 								}
 								no = tree.getNodeByProperty("id_link",id);
@@ -1148,6 +1166,9 @@ i3GEOadmin.variaveis = {
 								i3GEOadmin.variaveis.aposGravar.call([tipo,id]);
 								if(!YAHOO.lang.isObject(tree)){
 									core_carregando("desativa");
+									if(YAHOO && YAHOO.admin && YAHOO.admin.container && YAHOO.admin.container.panelEditor){
+										YAHOO.admin.container.panelEditor.destroy();
+									}
 									return;
 								}
 								no = tree.getNodeByProperty("no_fonteinfo",id);

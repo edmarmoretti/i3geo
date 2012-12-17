@@ -5,7 +5,7 @@ Fun��es que controlam a interface do editor da �rvore de temas
 
 Atuam no controle dos n�s da �rvore
 
-Pode-se enviar par�metros pela URL utilizada na inclus�o desse script
+Pode-se enviar par&acirc;metros pela URL utilizada na inclus�o desse script
 
 Exemplo:
 
