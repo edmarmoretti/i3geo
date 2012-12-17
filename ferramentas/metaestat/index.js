@@ -1129,6 +1129,7 @@ i3GEOF.metaestat = {
 			};
 			if(cores == ""){
 				i3GEO.janela.tempoMsg("Escolha as cores primeiro. Depois acione a op&ccedil;&atilde;o de classifica&ccedil;&atilde;o novamente");
+				$i("listaColourRampEditor").onchange = function(){i3GEOF.metaestat.editor.quartis();};
 				i3GEO.util.abreColourRamp("","listaColourRampEditor",5);
 				return;
 			}
@@ -1146,6 +1147,7 @@ i3GEOF.metaestat = {
 			};
 			if(cores == ""){
 				alert("Escolha as cores primeiro");
+				$i("listaColourRampEditor").onchange = function(){i3GEOF.metaestat.editor.intervalosIguais();};
 				i3GEO.util.abreColourRamp("","listaColourRampEditor",5);
 				return;
 			}

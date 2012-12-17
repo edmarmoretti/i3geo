@@ -305,7 +305,7 @@ $ignorar - valor que ser&aacute; ignorado na listagem final
 		if (count($valores) > 0){
 			//rotina obtida do pacote TME
 			sort($valores);
-			$valores = array_unique($valores);
+			//$valores = array_unique($valores);
 			$numValues = count($valores);
 			$classNum = $numValues / $nclasses; // Number in each class
 			for ($i = 0; $i < $nclasses; $i++) {
