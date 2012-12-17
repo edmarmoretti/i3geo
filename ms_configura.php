@@ -5,8 +5,8 @@ Title: Vari&aacute;veis de inicializa&ccedil;&atilde;o ms_configura.php
 Nesse programa PHP s&atilde;o definidas as vari&aacute;veis globais principais necess&aacute;rias ao funcionamento do I3Geo do lado do servidor web.
 
 O ms_configura &eacute; inclu&iacute;do em v&aacute;rios programas do i3Geo e os valores das vari&aacute;veis devem ser editados
-caso a instala&ccedil;&atilde;o do i3geo tenha sido feita em um diretório diferente do padr&atilde;o.
-No windows o diretório padr&atilde;o &eacute; c:\ms4w\apache\htdocs\i3geo e no linux &eacute; /opt/www/html/i3geo
+caso a instala&ccedil;&atilde;o do i3geo tenha sido feita em um diret&oacute;rio diferente do padr&atilde;o.
+No windows o diret&oacute;rio padr&atilde;o &eacute; c:\ms4w\apache\htdocs\i3geo e no linux &eacute; /opt/www/html/i3geo
 
 Para verificar a instala&ccedil;&atilde;o do i3geo utilize o programa i3geo/testainstal.php, que pode fornecer algumas dicas
 caso estejam ocorrendo problemas na inicialliza&ccedil;&atilde;o.
@@ -34,7 +34,7 @@ Este programa &eacute; distribu&iacute;do na expectativa de que seja &uacute;til
 por&eacute;m, SEM NENHUMA GARANTIA; nem mesmo a garantia impl&iacute;cita
 de COMERCIABILIDADE OU ADEQUA&Ccedil;&Atilde;O A UMA FINALIDADE ESPEC&Iacute;FICA.
 Consulte a Licen&ccedil;a P&uacute;blica Geral do GNU para mais detalhes.
-Voc&ecirc; deve ter recebido uma cópia da Licen&ccedil;a P&uacute;blica Geral do
+Voc&ecirc; deve ter recebido uma c&oacute;pia da Licen&ccedil;a P&uacute;blica Geral do
 GNU junto com este programa; se n&atilde;o, escreva para a
 Free Software Foundation, Inc., no endere&ccedil;o
 59 Temple Street, Suite 330, Boston, MA 02111-1307 USA.
@@ -187,9 +187,9 @@ if (strtoupper(substr(PHP_OS, 0, 3) == 'WIN'))
 
 	O i3geo possibilita que os usu&aacute;rios acessem dados geogr&aacute;ficos no servidor diretamente, navegando pelo sistema de arquivos.
 	Isso possibilita o acesso aos dados mesmo que n&atilde;o constem na &aacute;rvore de temas definida em menutemas/menutemas.xml
-	Por seguran&ccedil;a, essa funcionalidade só &eacute; ativada para n&uacute;meros IP espec&iacute;ficos, definidos nessa vari&aacute;vel.
+	Por seguran&ccedil;a, essa funcionalidade s&oacute; &eacute; ativada para n&uacute;meros IP espec&iacute;ficos, definidos nessa vari&aacute;vel.
 
-	Para cada IP registrado, deve-se definir os diretórios que ser&atilde;o acess&iacute;veis, conforme mostrado abaixo.
+	Para cada IP registrado, deve-se definir os diret&oacute;rios que ser&atilde;o acess&iacute;veis, conforme mostrado abaixo.
 
 	A valida&ccedil;&atilde;o do IP &eacute; feita com javascript, na inicializa&ccedil;&atilde;o do mapa, a vari&aacute;vel javascript objmapa.navegacaoDir &eacute; definida como sim (caso $navegadoresLocais for diferente de "") ou nao.
 
@@ -197,7 +197,7 @@ if (strtoupper(substr(PHP_OS, 0, 3) == 'WIN'))
 
 	$navegadoresLocais = "";
 
-	Com a op&ccedil;&atilde;o ativa na interface do mapa, o ip do cliente &eacute; verificado e caso estiver registrado no array, a navega&ccedil;&atilde;o pelos diretórios do servidor ser&aacute; permitida. Para mais detalhes, veja a ferramenta i3geo/ferramentas/navegacaodir
+	Com a op&ccedil;&atilde;o ativa na interface do mapa, o ip do cliente &eacute; verificado e caso estiver registrado no array, a navega&ccedil;&atilde;o pelos diret&oacute;rios do servidor ser&aacute; permitida. Para mais detalhes, veja a ferramenta i3geo/ferramentas/navegacaodir
 
 	Tipo:
 	{array}
@@ -216,7 +216,7 @@ if (strtoupper(substr(PHP_OS, 0, 3) == 'WIN'))
 	/*
 	Variable: dir_tmp
 
-	Caminho completo do diretório tempor&aacute;rio utilizado pelo mapserver.
+	Caminho completo do diret&oacute;rio tempor&aacute;rio utilizado pelo mapserver.
 
 	Tipo:
 	{string}
@@ -234,7 +234,7 @@ if (strtoupper(substr(PHP_OS, 0, 3) == 'WIN'))
 	/*
 	Variable: locmapserv
 
-	Localiza&ccedil;&atilde;o do execut&aacute;vel do Mapserver conforme deve ser acrescentado a URL após o nome do host.
+	Localiza&ccedil;&atilde;o do execut&aacute;vel do Mapserver conforme deve ser acrescentado a URL ap&oacute;s o nome do host.
 
 	Essa vari&aacute;vel &eacute; necess&aacute;ria em processos que utilizam o mapserver no modo CGI.
 
@@ -326,7 +326,7 @@ if (strtoupper(substr(PHP_OS, 0, 3) == 'WIN'))
 
 	Por default, o mapserver desenha o mapa via php, por&eacute;m, pode-se alterar o modo de desenho.
 
-	No modo normal, a imagem do mapa &eacute; gerada e armazenada no diretório ms_tmp. Após a gera&ccedil;&atilde;o da imagem
+	No modo normal, a imagem do mapa &eacute; gerada e armazenada no diret&oacute;rio ms_tmp. Ap&oacute;s a gera&ccedil;&atilde;o da imagem
 	o endere&ccedil;o do arquivo &eacute; retornado ao mapa (retorno via Ajax) e o javascript se encarrega de alterar o
 	endere&ccedil;o da imagem no navegador. Com o uso do CGI a imagem n&atilde;o &eacute; gerada, sendo repassado ao navegador
 	o endere&ccedil;o do cgi acrescentado do nome do mapfile, fazendo com que a imagem seja retornada diretamente.
@@ -361,7 +361,7 @@ if (strtoupper(substr(PHP_OS, 0, 3) == 'WIN'))
 
 	 Se voc&ecirc; quiser utilizar a conex&atilde;o default, baseado no SQLITE, mantenha essa vari&aacute;vel vazia.
 
-	 O uso do banco de dados n&atilde;o &eacute; obrigatório, uma vez que os arquivos podem ser mantidos em disco (arquivos XML).
+	 O uso do banco de dados n&atilde;o &eacute; obrigat&oacute;rio, uma vez que os arquivos podem ser mantidos em disco (arquivos XML).
 
 	 O programa PHP que estabelece a conex&atilde;o deve retornar objetos com nomes padronizados. Veja o arquivo i3geo/admin/conexao.php para maiores detalhes.
 
@@ -420,7 +420,7 @@ if (strtoupper(substr(PHP_OS, 0, 3) == 'WIN'))
 
 	Os layers que permitem cache s&atilde;o definidos no sistema de administra&ccedil;&atilde;o do i3Geo.
 
-	Se cachedir for vazia, ser&aacute; utilizado o default do i3geo (diretório tempor&aacute;rio)
+	Se cachedir for vazia, ser&aacute; utilizado o default do i3geo (diret&oacute;rio tempor&aacute;rio)
 
 	Exemplo
 
@@ -430,7 +430,7 @@ if (strtoupper(substr(PHP_OS, 0, 3) == 'WIN'))
 }
 else //se for linux
 {
-	//verifica se est&aacute; sendo utilizado o diretório "opt" ou "var"
+	//verifica se est&aacute; sendo utilizado o diret&oacute;rio "opt" ou "var"
 	$locaplic = __DIR__;
 	if(dirname($locaplic) == "/opt/www/html"){
 		$dir_tmp = "/var/tmp/ms_tmp";

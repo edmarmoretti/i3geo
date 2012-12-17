@@ -4,9 +4,7 @@
 <meta name="url" content="http://www.softwarepublico.gov.br" />
 <meta name="description" content="i3Geo" />
 <meta name="keywords" content="i3geo mapa geoprocessamento" />
-<meta name="charset" content="ISO-8859-1" />
 <META HTTP-EQUIV="Content-Type" CONTENT="text/html; charset=ISO-8859-1">
-<meta name="revisit-after" content="1" />
 <?php
 $cache_expire = 1;
 header("Pragma: public");
@@ -69,101 +67,101 @@ h1 {
 ?>
 		<div id="bandeiras"></div>
 
-		<a href="remover.php"><table class="r">
+		<a target=_blank href="remover.php"><table class="r">
 				<tr>
 					<td><img src="../imagens/oxygen/22x22/dialog-close" /><br> <script>document.write($trad(1,g_traducao_init));</script></a>
 					</td>
 				</tr>
-			</table> </a> <a href="../testainstal.php"><table class="r">
+			</table> </a> <a target=_blank href="../testainstal.php"><table class="r">
 				<tr>
 					<td><img src="../imagens/oxygen/22x22/application-vnd.scribus.png" /><br>
 						<script>document.write($trad(2,g_traducao_init));</script></a></td>
 				</tr>
-			</table> </a> <a href="../admin"><table class="r">
+			</table> </a> <a target=_blank href="../admin"><table class="r">
 				<tr>
 					<td><img src="../imagens/oxygen/22x22/preferences-system.png" /><br>
 						<script>document.write($trad(3,g_traducao_init));</script></a></td>
 				</tr>
-			</table> </a> <a href="../interface/openlayers.htm"><table class="r"
+			</table> </a> <a target=_blank href="../interface/openlayers.htm"><table class="r"
 				style="box-shadow: 0 8px 10px 0 orange;">
 				<tr>
 					<td><img src="../imagens/oxygen/22x22/openlayers.png" /><br> <script>document.write($trad(4,g_traducao_init));</script></a>
 					</td>
 				</tr>
-			</table> </a> <a href="../interface/openlayersdebug.htm"><table
+			</table> </a> <a target=_blank href="../interface/openlayersdebug.htm"><table
 				class="r" style="box-shadow: 0 8px 10px 0 orange;">
 				<tr>
 					<td><img src="../imagens/oxygen/22x22/openlayers.png" /><br> <script>document.write($trad(5,g_traducao_init));</script></a>
 					</td>
 				</tr>
-			</table> </a> <a href="../mashups"><table class="r"
+			</table> </a> <a target=_blank href="../mashups"><table class="r"
 				style="box-shadow: 0 8px 10px 0 orange;">
 				<tr>
 					<td><img src="../imagens/oxygen/22x22/openlayers.png" /><br> <script>document.write($trad(18,g_traducao_init));</script></a>
 					</td>
 				</tr>
-			</table> </a> <a href="../interface/googlemaps.phtml"><table
+			</table> </a> <a target=_blank href="../interface/googlemaps.phtml"><table
 				class="r" style="box-shadow: 0 8px 10px 0 orange;">
 				<tr>
 					<td><img src="../imagens/oxygen/22x22/googlemaps.png" /><br> <script>document.write($trad(6,g_traducao_init));</script></a>
 					</td>
 				</tr>
-			</table> </a> <a href="../interface/googleearth.phtml"><table
+			</table> </a> <a target=_blank href="../interface/googleearth.phtml"><table
 				class="r" style="box-shadow: 0 8px 10px 0 orange;">
 				<tr>
 					<td><img src="../imagens/oxygen/22x22/googleearth.png" /><br> <script>document.write($trad(7,g_traducao_init));</script></a>
 					</td>
 				</tr>
-			</table> </a> <a href="../interface/carto_ol.htm"><table class="r"
+			</table> </a> <a target=_blank href="../interface/carto_ol.htm"><table class="r"
 				style="box-shadow: 0 8px 10px 0 orange;">
 				<tr>
 					<td><img src="../imagens/oxygen/22x22/kspread.png" /><br> <script>document.write($trad(8,g_traducao_init));</script></a>
 					</td>
 				</tr>
-			</table> </a> <a href="../ferramentas/metaestat/editorlimites.php"><table
+			</table> </a> <a target=_blank href="../ferramentas/metaestat/editorlimites.php"><table
 				class="r">
 				<tr>
 					<td><img src="../imagens/oxygen/22x22/draw-freehand.png" /><br> <script>document.write($trad(9,g_traducao_init));</script></a>
 					</td>
 				</tr>
-			</table> </a> <a href="../datadownload.htm"><table class="r">
+			</table> </a> <a target=_blank href="../datadownload.htm"><table class="r">
 				<tr>
 					<td><img src="../imagens/oxygen/22x22/download.png" /><br> <script>document.write($trad(10,g_traducao_init));</script></a>
 					</td>
 				</tr>
-			</table> </a> <a href="../ogc.htm"><table class="r">
+			</table> </a> <a target=_blank href="../ogc.htm"><table class="r">
 				<tr>
 					<td><img src="../imagens/oxygen/22x22/internet-web-browser.png" /><br>
 						<script>document.write($trad(11,g_traducao_init));</script></a></td>
 				</tr>
-			</table> </a> <a href="../kml.php"><table class="r">
+			</table> </a> <a target=_blank href="../kml.php"><table class="r">
 				<tr>
 					<td><img src="../imagens/oxygen/22x22/internet-web-browser.png" /><br>
 						<script>document.write($trad(12,g_traducao_init));</script></a></td>
 				</tr>
-			</table> </a> <a href="../geradordelinks.htm"><table class="r">
+			</table> </a> <a target=_blank href="../geradordelinks.htm"><table class="r">
 				<tr>
 					<td><img
 						src="../imagens/oxygen/22x22/preferences-web-browser-shortcuts.png" /><br>
 						<script>document.write($trad(13,g_traducao_init));</script></a></td>
 				</tr>
-			</table> </a> <a href="../exemplos"><table class="r">
+			</table> </a> <a target=_blank href="../exemplos"><table class="r">
 				<tr>
 					<td><img src="../imagens/oxygen/22x22/help-contents.png" /><br> <script>document.write($trad(14,g_traducao_init));</script></a>
 					</td>
 				</tr>
-			</table> </a> <a href="../documentacao/manual-i3geo-4_7-pt.pdf"><table
+			</table> </a> <a target=_blank href="../documentacao/manual-i3geo-4_7-pt.pdf"><table
 				class="r">
 				<tr>
 					<td><img src="../imagens/oxygen/22x22/help-contents.png" /><br> <script>document.write($trad(15,g_traducao_init));</script></a>
 					</td>
 				</tr>
-			</table> </a> <a href="../guia_de_migracao.txt"><table class="r">
+			</table> </a> <a target=_blank href="../guia_de_migracao.txt"><table class="r">
 				<tr>
 					<td><img src="../imagens/oxygen/22x22/help-contents.png" /><br> <script>document.write($trad(17,g_traducao_init));</script></a>
 					</td>
 				</tr>
-			</table> </a> <a href="http://svn.softwarepublico.gov.br/trac/i3geo"><table
+			</table> </a> <a target=_blank href="http://svn.softwarepublico.gov.br/trac/i3geo"><table
 				class="r">
 				<tr>
 					<td><img src="../imagens/oxygen/22x22/kbugbuster.png" /><br> <script>document.write($trad(16,g_traducao_init));</script></a>
