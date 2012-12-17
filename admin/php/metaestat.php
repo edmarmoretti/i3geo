@@ -73,6 +73,7 @@ $funcoesEdicao = array(
 	"COPIATABELADB",
 	"CRIACOLUNADB",
 	"ALTERANOMECOLUNADB",
+	"OBTEMDADOSTABELADB",
 	"INSERIRDADOS",
 	"MANTEMDADOSREGIAO",
 	"SALVAATRIBUTOSMEDIDAVARIAVEL",
@@ -1148,6 +1149,11 @@ switch (strtoupper($funcao))
 			exit;
 		}
 		retornaJSON($m->alteraNomeColunaDB($codigo_estat_conexao,$nome_esquema,$nome_tabela,$nome_coluna,$novonome_coluna));
+		exit;
+	break;
+	case "OBTEMDADOSTABELADB":
+		$m = new Metaestat();
+		retornaJSON($m->obtemDadosTabelaDB($codigo_estat_conexao,$nome_esquema,$nome_tabela));
 		exit;
 	break;
 	/*

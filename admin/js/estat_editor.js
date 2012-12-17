@@ -17,7 +17,7 @@ i3GEOadmin.editor = {
 	verificaEsquema: function(nomeEsquema){
 		if(nomeEsquema != "i3geo_metaestat"){
 			alert("Operacao permitida apenas para o esquema i3geo_metaestat");
-			return;
+			return false;
 		}
 	},
 	conexao:{
@@ -86,11 +86,10 @@ i3GEOadmin.editor = {
 							temp += core_comboObjeto(dados,"tabela","tabela");
 							temp += "</select>";
 							temp += "" +
-									"<p>Digite um nome: <input id='i3GEOadmintabelaNomeNovo' title='digite o nome' type=text width=30 style='cursor:text' />" +
-									"<p><input type=button value='Criar tabela' id='i3GEOadmintabelaCriar' onclick='i3GEOadmin.editor.tabela.criar()'/>" +
-									"<input type=button value='Alterar nome atual' id='i3GEOadmintabelaAlterarNome' onclick='i3GEOadmin.editor.tabela.alterarNome()'/>" +
-									"<input type=button value='Copiar para' id='i3GEOadmintabelaCopiar' onclick='i3GEOadmin.editor.tabela.copiar()'/>";
-
+								"<p><input type=button value='Mostrar os dados' id='i3GEOadmintabelaMostrar' onclick='i3GEOadmin.editor.tabela.mostrar()'/>" +
+								"<input type=button value='Criar uma nova tabela' id='i3GEOadmintabelaCriar' onclick='i3GEOadmin.editor.tabela.criar()'/>" +
+								"<input type=button value='Alterar nome atual' id='i3GEOadmintabelaAlterarNome' onclick='i3GEOadmin.editor.tabela.alterarNome()'/>" +
+								"<input type=button value='Copiar para' id='i3GEOadmintabelaCopiar' onclick='i3GEOadmin.editor.tabela.copiar()'/>";
 							$i(i3GEOadmin.editor.tabela.onde).innerHTML = temp+"</fieldset>";
 							core_carregando("desativa");
 							$i(i3GEOadmin.editor.coluna.onde).innerHTML = "";
@@ -112,9 +111,6 @@ i3GEOadmin.editor = {
 			core_makeRequest("../php/metaestat.php?funcao=tabelasEsquema&formato=json&nome_esquema="+nome_esquema+"&codigo_estat_conexao="+codigo_estat_conexao,callback);
 		},
 		criar: function(){
-			if(!window.confirm("Cria nova tabela?")){
-				return;
-			}
 			var callback = {
 					success:function(o){
 						try	{
@@ -126,25 +122,25 @@ i3GEOadmin.editor = {
 					failure:core_handleFailure,
 					argument: { foo:"foo", bar:"bar" }
 			},
-			novaTabela = $i("i3GEOadmintabelaNomeNovo").value,
+			novaTabela = "",
 			nomeEsquema = $i("i3GEOadminesquema").value;
 			if(i3GEOadmin.editor.verificaEsquema(nomeEsquema) == false){
 				return;
 			}
-			if(novaTabela == ""){
-				alert("Digite um nome");
-				return;
-			}
-			if(i3GEOadmin.editor.tabela.verificaExiste(novaTabela) == false){
-				core_carregando("adicionando...");
-				core_makeRequest("../php/metaestat.php?funcao=criaTabelaDB&formato=json&nome_tabela="+novaTabela+"&nome_esquema="+nomeEsquema+"&codigo_estat_conexao="+$i("i3GEOadmincodigo_estat_conexao").value,callback);
-			}
-			else{
-				alert("Tabela ja existe");
+			novaTabela = window.prompt("Novo nome:","");
+			if (novaTabela!=null && novaTabela!=""){
+				if(i3GEOadmin.editor.tabela.verificaExiste(novaTabela) == false){
+					core_carregando("adicionando...");
+					core_makeRequest("../php/metaestat.php?funcao=criaTabelaDB&formato=json&nome_tabela="+novaTabela+"&nome_esquema="+nomeEsquema+"&codigo_estat_conexao="+$i("i3GEOadmincodigo_estat_conexao").value,callback);
+				}
+				else{
+					alert("Tabela ja existe");
+				}
 			}
 		},
 		alterarNome: function(){
-			if(!window.confirm("Altera o nome?")){
+			if($i("i3GEOadmintabela").value == ""){
+				alert("Escolha a tabela");
 				return;
 			}
 			var callback = {
@@ -158,25 +154,25 @@ i3GEOadmin.editor = {
 					failure:core_handleFailure,
 					argument: { foo:"foo", bar:"bar" }
 			},
-			novaTabela = $i("i3GEOadmintabelaNomeNovo").value,
+			novaTabela = "",
 			nomeEsquema = $i("i3GEOadminesquema").value;
 			if(i3GEOadmin.editor.verificaEsquema(nomeEsquema) == false){
 				return;
 			}
-			if(novaTabela == ""){
-				alert("Digite um nome");
-				return;
-			}
-			if(i3GEOadmin.editor.tabela.verificaExiste(novaTabela) == false){
-				core_carregando("adicionando...");
-				core_makeRequest("../php/metaestat.php?funcao=alteraNomeTabelaDB&formato=json&nome_tabela="+$i("i3GEOadmintabela").value+"&novonome_tabela="+novaTabela+"&nome_esquema="+nomeEsquema+"&codigo_estat_conexao="+$i("i3GEOadmincodigo_estat_conexao").value,callback);
-			}
-			else{
-				alert("Tabela ja existe");
+			novaTabela = window.prompt("Novo nome:","");
+			if (novaTabela!=null && novaTabela!=""){
+				if(i3GEOadmin.editor.tabela.verificaExiste(novaTabela) == false){
+					core_carregando("adicionando...");
+					core_makeRequest("../php/metaestat.php?funcao=alteraNomeTabelaDB&formato=json&nome_tabela="+$i("i3GEOadmintabela").value+"&novonome_tabela="+novaTabela+"&nome_esquema="+nomeEsquema+"&codigo_estat_conexao="+$i("i3GEOadmincodigo_estat_conexao").value,callback);
+				}
+				else{
+					alert("Tabela ja existe");
+				}
 			}
 		},
 		copiar: function(){
-			if(!window.confirm("Copiar tabela?")){
+			if($i("i3GEOadmintabela").value == ""){
+				alert("Escolha a tabela");
 				return;
 			}
 			var callback = {
@@ -190,22 +186,63 @@ i3GEOadmin.editor = {
 					failure:core_handleFailure,
 					argument: { foo:"foo", bar:"bar" }
 			},
-			novaTabela = $i("i3GEOadmintabelaNomeNovo").value,
+			novaTabela = "",
 			nomeEsquema = $i("i3GEOadminesquema").value;
 			if(i3GEOadmin.editor.verificaEsquema(nomeEsquema) == false){
 				return;
 			}
-			if(novaTabela == ""){
-				alert("Digite um nome");
+			novaTabela = window.prompt("Novo nome:","");
+			if (novaTabela!=null && novaTabela!=""){
+				if(i3GEOadmin.editor.tabela.verificaExiste(novaTabela) == false){
+					core_carregando("adicionando...");
+					core_makeRequest("../php/metaestat.php?funcao=copiaTabelaDB&formato=json&nome_tabela="+$i("i3GEOadmintabela").value+"&novonome_tabela="+novaTabela+"&nome_esquema="+nomeEsquema+"&codigo_estat_conexao="+$i("i3GEOadmincodigo_estat_conexao").value,callback);
+				}
+				else{
+					alert("Tabela ja existe");
+				}
+			}
+		},
+		mostrar: function(){
+			if($i("i3GEOadmintabela").value == ""){
+				alert("Escolha a tabela");
 				return;
 			}
-			if(i3GEOadmin.editor.tabela.verificaExiste(novaTabela) == false){
-				core_carregando("adicionando...");
-				core_makeRequest("../php/metaestat.php?funcao=copiaTabelaDB&formato=json&nome_tabela="+$i("i3GEOadmintabela").value+"&novonome_tabela="+novaTabela+"&nome_esquema="+nomeEsquema+"&codigo_estat_conexao="+$i("i3GEOadmincodigo_estat_conexao").value,callback);
-			}
-			else{
-				alert("Tabela ja existe");
-			}
+			var callback = {
+					success:function(o){
+						try	{
+							core_carregando("desativa");
+							var dados = YAHOO.lang.JSON.parse(o.responseText),
+								ncolunas = dados.colunas.length,
+								linhas = dados.linhas,
+								nlinhas = linhas.length,
+								tabela = [],
+								i,j,l,w;
+							tabela.push("<head><body><table style='border:1px solid black'><tr>");
+							for(i=0;i<ncolunas;i++){
+								tabela.push("<td style='border:1px solid gray' >"+dados.colunas[i].field+"</td>");
+							}
+							tabela.push("</tr>");
+							for(i=0;i<nlinhas;i++){
+								tabela.push("<tr>");
+								l = linhas[i];
+								for(j=0;j<ncolunas;j++){
+									tabela.push("<td style='border:1px solid beige'>"+l[j]+"</td>");
+								}
+								tabela.push("</tr>");
+							}
+							tabela.push("</table></body></head>");
+							w = window.open();
+							w.document.write(tabela.join(""));
+							w.document.close();
+						}
+						catch(e){core_handleFailure(e,o.responseText);}
+					},
+					failure:core_handleFailure,
+					argument: { foo:"foo", bar:"bar" }
+			},
+			nomeEsquema = $i("i3GEOadminesquema").value;
+			core_carregando("obtendo dados...");
+			core_makeRequest("../php/metaestat.php?funcao=obtemDadosTabelaDB&formato=json&nome_tabela="+$i("i3GEOadmintabela").value+"&nome_esquema="+nomeEsquema+"&codigo_estat_conexao="+$i("i3GEOadmincodigo_estat_conexao").value,callback);
 		},
 		verificaExiste: function(valor){
 			var combo = $i("i3GEOadmintabela"),
@@ -231,11 +268,8 @@ i3GEOadmin.editor = {
 							temp += core_comboObjeto(dados,"","");
 							temp += "</select>";
 							temp += "" +
-									"<p>Digite um nome: <input id='i3GEOadmincolunaNomeNovo' title='digite o nome' type=text width=30 style='cursor:text' />" +
-									"<p>Tipo (integer, numeric, text, geometry): <input id='i3GEOadmincolunaTipo' title='digite o tipo' type=text width=30 style='cursor:text' />" +
-									"<p><input type=button value='Adicionar a nova coluna' id='i3GEOadmincolunaCriar' onclick='i3GEOadmin.editor.coluna.criar()'/>" +
-									"<input type=button value='Alterar nome atual' id='i3GEOadmincolunaAlterarNome' onclick='i3GEOadmin.editor.coluna.alterarNome()'/>" +
-									"<p>Digite um novo nome e um tipo caso queira criar uma nova coluna";
+									"<p><input type=button value='Adicionar uma nova coluna' id='i3GEOadmincolunaCriar' onclick='i3GEOadmin.editor.coluna.criar()'/>" +
+									"<input type=button value='Alterar o nome atual' id='i3GEOadmincolunaAlterarNome' onclick='i3GEOadmin.editor.coluna.alterarNome()'/>";
 							$i(i3GEOadmin.editor.coluna.onde).innerHTML = temp+"</fieldset>";
 							core_carregando("desativa");
 						}
@@ -256,9 +290,6 @@ i3GEOadmin.editor = {
 			core_makeRequest("../php/metaestat.php?funcao=colunasTabela&formato=json&nome_tabela="+nome_tabela+"&nome_esquema="+nome_esquema+"&codigo_estat_conexao="+codigo_estat_conexao,callback);
 		},
 		criar: function(){
-			if(!window.confirm("Cria nova coluna?")){
-				return;
-			}
 			var callback = {
 					success:function(o){
 						try	{
@@ -270,30 +301,30 @@ i3GEOadmin.editor = {
 					failure:core_handleFailure,
 					argument: { foo:"foo", bar:"bar" }
 			},
-			novaColuna = $i("i3GEOadmincolunaNomeNovo").value,
-			tipo = $i("i3GEOadmincolunaTipo").value,
+			novaColuna = "",
+			tipo = "",
 			nomeEsquema = $i("i3GEOadminesquema").value,
 			nomeTabela = $i("i3GEOadmintabela").value;
 			if(i3GEOadmin.editor.verificaEsquema(nomeEsquema) == false){
 				return;
 			}
-			if(novaColuna == ""){
-				alert("Digite um nome");
-				return;
-			}
-			if(i3GEOadmin.editor.coluna.verificaExiste(novaColuna) == false){
-				core_carregando("adicionando...");
-				core_makeRequest("../php/metaestat.php?funcao=criaColunaDB&formato=json&tipo="+tipo+"&nova_coluna="+novaColuna+"&nome_tabela="+nomeTabela+"&nome_esquema="+nomeEsquema+"&codigo_estat_conexao="+$i("i3GEOadmincodigo_estat_conexao").value,callback);
-			}
-			else{
-				alert("Coluna ja existe");
+
+			novaColuna = window.prompt("Nome:","");
+			if (novaColuna!=null && novaColuna!=""){
+				tipo = window.prompt("Tipo (integer, numeric, text, geometry):","");
+				if (tipo!=null && tipo!=""){
+					if(i3GEOadmin.editor.coluna.verificaExiste(novaColuna) == false){
+						core_carregando("adicionando...");
+						core_makeRequest("../php/metaestat.php?funcao=criaColunaDB&formato=json&tipo="+tipo+"&nova_coluna="+novaColuna+"&nome_tabela="+nomeTabela+"&nome_esquema="+nomeEsquema+"&codigo_estat_conexao="+$i("i3GEOadmincodigo_estat_conexao").value,callback);
+					}
+					else{
+						alert("Coluna ja existe");
+					}
+				}
 			}
 		},
 		alterarNome: function(){
-			if(!window.confirm("Altera o nome?")){
-				return;
-			}
-			var callback = {
+			var novaColuna="",callback = {
 					success:function(o){
 						try	{
 							core_carregando("desativa");
@@ -304,22 +335,20 @@ i3GEOadmin.editor = {
 					failure:core_handleFailure,
 					argument: { foo:"foo", bar:"bar" }
 			},
-			novaColuna = $i("i3GEOadmincolunaNomeNovo").value,
 			nomeEsquema = $i("i3GEOadminesquema").value,
 			nomeColuna = $i("i3GEOadmincoluna").value;
-			if(i3GEOadmin.editor.verificaEsquema(nomeEsquema) == false){
-				return;
-			}
-			if(novaColuna == ""){
-				alert("Digite um nome");
-				return;
-			}
-			if(i3GEOadmin.editor.coluna.verificaExiste(novaColuna) == false){
-				core_carregando("adicionando...");
-				core_makeRequest("../php/metaestat.php?funcao=alteraNomeColunaDB&formato=json&nome_coluna="+nomeColuna+"&nome_tabela="+$i("i3GEOadmintabela").value+"&novonome_coluna="+novaColuna+"&nome_esquema="+nomeEsquema+"&codigo_estat_conexao="+$i("i3GEOadmincodigo_estat_conexao").value,callback);
-			}
-			else{
-				alert("Coluna ja existe");
+			novaColuna = window.prompt("Novo nome:","");
+			if (novaColuna!=null && novaColuna!=""){
+				if(i3GEOadmin.editor.verificaEsquema(nomeEsquema) == false){
+					return;
+				}
+				if(i3GEOadmin.editor.coluna.verificaExiste(novaColuna) == false){
+					core_carregando("adicionando...");
+					core_makeRequest("../php/metaestat.php?funcao=alteraNomeColunaDB&formato=json&nome_coluna="+nomeColuna+"&nome_tabela="+$i("i3GEOadmintabela").value+"&novonome_coluna="+novaColuna+"&nome_esquema="+nomeEsquema+"&codigo_estat_conexao="+$i("i3GEOadmincodigo_estat_conexao").value,callback);
+				}
+				else{
+					alert("Coluna ja existe");
+				}
 			}
 		},
 		verificaExiste: function(valor){
