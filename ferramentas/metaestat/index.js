@@ -1333,6 +1333,7 @@ i3GEOF.metaestat = {
 				i3GEOF.metaestat.editor.t3(false);
 			}
 			else{
+				//formulario semelhante existe em i3geo/admin/js/estat_variavel.js (classesAuto)
 				var temp = function(dados){
 					var soma = i3GEOF.metaestat.editor.dadoMedidaSelecionada("permitesoma"),
 					media = i3GEOF.metaestat.editor.dadoMedidaSelecionada("permitemedia"),

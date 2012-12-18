@@ -1806,7 +1806,7 @@ i3GEO.util = {
 							nm = retorno.data.valores[i].alias;
 						}
 						else{
-							retorno.data.valores[i].item
+							nm = retorno.data.valores[i].item;
 						}
 						ins.push("<option value='"+retorno.data.valores[i].item+"' >"+nm+"</option>");
 					}
@@ -2251,7 +2251,10 @@ i3GEO.util = {
 		}
 		ins = '<div id="'+id+'_cabecalho" class="hd">';
 		ins += "<span><img id='i3geo_janelaCorRamp_imagemCabecalho' style='visibility:hidden;' src=\'"+i3GEO.configura.locaplic+"/imagens/aguarde.gif\' /></span>";
-		ins += "<div  id='i3geo_janelaCorRampComboCabeca' class='comboTemasCabecalho' style='top:0px;'>   ------</div>&nbsp;&nbsp;&nbsp;"+texto;
+		if(i3GEO && i3GEO.arvoreDeCamadas){
+			ins += "<div  id='i3geo_janelaCorRampComboCabeca' class='comboTemasCabecalho' style='top:0px;'>   ------</div>";
+		}
+		ins += "&nbsp;&nbsp;&nbsp;"+texto;
 		ins += '</div><div id="i3geo_janelaCorRamp_corpo" class="bd" style="padding:5px">';
 		ins += '<iframe name="'+id+'i" id="i3geo_janelaCorRampi" valign="top" ></iframe>';
 		ins += '</div>';
@@ -2275,21 +2278,23 @@ i3GEO.util = {
 		YAHOO.i3GEO.janela.manager.register(janela);
 		janela.render();
 		$i(id+'_cabecalho').className = classe;
-		temp = function(){
-			var p,
-				tema = $i("i3geo_janelaCorRampComboCabecaSel").value,
-				funcao = function(retorno){
-					parent.frames["i3geo_janelaCorRampi"].document.getElementById("ncores").value = retorno.data.length;
-				};
-			if(tema !== ""){
-				i3GEO.mapa.ativaTema(tema);
-				//pega o numero de classes nalegenda do tema escolhido
-				p = i3GEO.configura.locaplic+"/ferramentas/legenda/exec.php?g_sid="+i3GEO.configura.sid+"&funcao=editalegenda&opcao=edita&tema="+tema;
-				i3GEO.util.ajaxGet(p,funcao);
-				cp = new cpaint();
-			}
-		};
-		i3GEO.janela.comboCabecalhoTemas("i3geo_janelaCorRampComboCabeca","i3geo_janelaCorRampComboCabecaSel","none","ligados",temp);
+		if($i("i3geo_janelaCorRampComboCabeca")){
+			temp = function(){
+				var p,
+					tema = $i("i3geo_janelaCorRampComboCabecaSel").value,
+					funcao = function(retorno){
+						parent.frames["i3geo_janelaCorRampi"].document.getElementById("ncores").value = retorno.data.length;
+					};
+				if(tema !== ""){
+					i3GEO.mapa.ativaTema(tema);
+					//pega o numero de classes nalegenda do tema escolhido
+					p = i3GEO.configura.locaplic+"/ferramentas/legenda/exec.php?g_sid="+i3GEO.configura.sid+"&funcao=editalegenda&opcao=edita&tema="+tema;
+					i3GEO.util.ajaxGet(p,funcao);
+					cp = new cpaint();
+				}
+			};
+			i3GEO.janela.comboCabecalhoTemas("i3geo_janelaCorRampComboCabeca","i3geo_janelaCorRampComboCabecaSel","none","ligados",temp);
+		}
 	},
 	/*
 	Function: localizai3GEO

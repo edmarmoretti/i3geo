@@ -380,6 +380,8 @@ i3GEOadmin.variaveis = {
 			for (i=0, j=dados.length; i<j; i++)	{
 				conteudo = "&nbsp;<img style=\"position:relative;cursor:pointer;top:0px\" onclick=\"i3GEOadmin.variaveis.excluir('classificacaoMedida','"+dados[i].id_classificacao+"')\" title=excluir width='10px' heigth='10px' src=\"../imagens/01.png\" />";
 				conteudo += "&nbsp;<img style=\"position:relative;cursor:pointer;top:2px\" onclick=\"i3GEOadmin.variaveis.editar('classificacaoMedida','"+dados[i].id_classificacao+"')\" title=editar src=\"../imagens/06.png\" /><b>";
+				conteudo += "&nbsp;<img style=\"position:relative;cursor:pointer;top:2px\" onclick=\"i3GEOadmin.variaveis.classificacao.classesAuto('"+dados[i].id_classificacao+"','"+no.data.no_classificacao+"')\" title='criar classes' src=\"../imagens/accessories-calculator.png\" /><b>";
+
 				if(dados[i].nome != "")
 				{conteudo += "&nbsp;<span><b>"+dados[i].nome+"</b><span style=color:gray > Obs.: "+dados[i].observacao+" id: "+dados[i].id_classificacao+"</span></span>";}
 				else
@@ -390,6 +392,83 @@ i3GEOadmin.variaveis = {
 				tempNode.setDynamicLoad(loadNodeData, 1);
 			}
 			if(redesenha){tree.draw();}
+		},
+		classesAuto: function(id_classificacao,id_medida_variavel){
+			core_montaEditor("","450px","200px","","Criar classes");
+			var ins = "<p class='paragrafo' >Utilize um dos m&eacute;todos abaixo para gerar as classes que ser&atilde;o utilizadas para representar os dados no cartograma" +
+			"<br><br><p>" +
+			"&nbsp;<input id=i3GEOFmetaestatEditorBotao8 type='button' value='Escolher cores' />" +
+			"<br><br>";
+			ins += "&nbsp;<input id=i3GEOFmetaestatEditorBotao6 type='button' value='Divis&atilde;o em quartis' />" +
+			"&nbsp;<input id=i3GEOFmetaestatEditorBotao7 type='button' value='5 intervalos iguais' />";
+			ins += '<input type=hidden  value="" id="listaColourRampEditor"  />'; //utilizado pelo seletor de colourramp;
+			$i("editor_bd").innerHTML = ins;
+			new YAHOO.widget.Button(
+					"i3GEOFmetaestatEditorBotao8",
+					{onclick:{fn:
+						function(){
+							i3GEO.util.abreColourRamp("","listaColourRampEditor",5);
+						}
+					}}
+			);
+			new YAHOO.widget.Button(
+				"i3GEOFmetaestatEditorBotao6",
+				{onclick:{fn:
+					function(){
+						var cores = $i("listaColourRampEditor").value,
+							p = i3GEO.configura.locaplic+"/admin/php/metaestat.php?funcao=calculaClassificacao&tipo=quartil&cores="+cores+"&id_classificacao="+id_classificacao+"&id_medida_variavel="+id_medida_variavel,
+							callback;
+						if(cores == ""){
+							alert("Escolha as cores primeiro");
+							return;
+						}
+						callback = {
+								success:function(o){
+									try	{
+										core_carregando("desativa");
+										var no = tree.getNodeByProperty("id_classificacao",id_classificacao);
+										tree.removeChildren(no) ;
+										no.expand();
+									}
+									catch(e){core_handleFailure(e,o.responseText);}
+								},
+								failure:core_handleFailure,
+								argument: { foo:"foo", bar:"bar" }
+						};
+						core_carregando("ativa");
+						core_makeRequest(p,callback);
+					}
+				}}
+			);
+			new YAHOO.widget.Button(
+					"i3GEOFmetaestatEditorBotao7",
+				{onclick:{fn:
+					function(){
+						var cores = $i("listaColourRampEditor").value,
+							p = i3GEO.configura.locaplic+"/admin/php/metaestat.php?funcao=calculaClassificacao&tipo=intiguais5&cores="+cores+"&id_classificacao="+id_classificacao+"&id_medida_variavel="+id_medida_variavel,
+							callback;
+						if(cores == ""){
+							alert("Escolha as cores primeiro");
+							return;
+						}
+						callback = {
+								success:function(o){
+									try	{
+										core_carregando("desativa");
+										var no = tree.getNodeByProperty("id_classificacao",id_classificacao);
+										tree.removeChildren(no) ;
+										no.expand();
+									}
+									catch(e){core_handleFailure(e,o.responseText);}
+								},
+								failure:core_handleFailure,
+								argument: { foo:"foo", bar:"bar" }
+						};
+						core_carregando("ativa");
+						core_makeRequest(p,callback);
+					}
+				}}
+			);
 		},
 		adicionar: function(id_medida_variavel){
 			var no = tree.getNodeByProperty("no_classificacao",id_medida_variavel),
