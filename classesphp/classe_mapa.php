@@ -293,6 +293,7 @@ string - javascript com os parametros
 					$wmsformat = $oLayer->getmetadata("wms_format");
 					$wmssrs = $oLayer->getmetadata("wms_srs");
 					$wmstile = $oLayer->getmetadata("wms_tile");
+					$wmsname = $oLayer->getmetadata("wms_name");
 					if($wmstile == 1){
 						$wmsurl = ($oLayer->connection);
 					}
@@ -327,6 +328,7 @@ string - javascript com os parametros
 					"aplicaextensao"=>$aplicaextensao,
 					"transitioneffect"=>$transitioneffect,
 					"wmsurl"=>$wmsurl,
+					"wmsname"=>$wmsname,
 					"wmsformat"=>$wmsformat,
 					"wmssrs"=>$wmssrs,
 					"wmstile"=>$wmstile,

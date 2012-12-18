@@ -165,9 +165,11 @@ i3GEO.Interface.openlayers.GADGETS = {
 		OverviewMap:false
 	};
 i3GEO.Interface.openlayers.TILES = true;
+/*
 i3GEO.Interface.openlayers.parametrosMap.scales = [
 	105000000,50000000,21000000,10000000,5000000,1000000,500000,250000,100000,50000,25000,10000,5000,1000,100
 ];
+*/
 //
 //controla o tamanho da barra de zoom
 //
@@ -267,15 +269,21 @@ OpenLayers.ImgPath = "../pacotes/openlayers/img/";
 		{layers:"baseraster",srs:"EPSG:4618",format:"image/png",isBaseLayer:false},
 		{isBaseLayer:true,visibility:false}
 	);
-
 	/*
-	var osm = new OpenLayers.Layer.WMS(
-		"Open Street Map",
-		"http://full.wms.geofabrik.de/std/demo_key",
-		{layers:""},
-		{isBaseLayer:true,visibility:false}
-	);
+var tms = new OpenLayers.Layer.TMS(
+    "My Layer",
+    "http://tilecache.osgeo.org/wms-c/Basic.py/",
+    {
+        layername: "basic",
+        type: "png",
+        // set if different than the bottom left of map.maxExtent
+        tileOrigin: new OpenLayers.LonLat(-180,-90),
+        isBaseLayer:true,
+        visibility:true
+    }
+);
 	*/
+
 	i3GEO.Interface.openlayers.LAYERSADICIONAIS = [oce,ims,wsm,bra];
 })();
 //

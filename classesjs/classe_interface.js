@@ -454,6 +454,7 @@ i3GEO.Interface = {
 		Exemplo i3GEO.Interface.openlayers.parametrosMap.scales = [50000000, 30000000, 10000000, 5000000];
 		*/
 		parametrosMap: {
+			resolutions: [0.703125,0.3515625,0.17578125,0.087890625,0.0439453125,0.02197265625,0.010986328125,0.0054931640625,0.00274658203125,0.001373291015625,0.0006866455078125,0.00034332275390625,0.000171661376953125,0.0000858306884765625,0.00004291534423828125,0.000021457672119140625]
 		},
 		/*
 		Propriedade: FUNDOTEMA
@@ -975,7 +976,7 @@ i3GEO.Interface = {
 							 * TODO não funciona
 							 */
 							if(camada.wmstile == 1){
-								layer = new OpenLayers.Layer.TMS(camada.name, camada.wmsurl,{layername:camada.nomeoriginal,type:'png'});
+								layer = new OpenLayers.Layer.TMS(camada.name, camada.wmsurl,{isBaseLayer:false,layername:camada.wmsname,type:'png'});
 							}
 							else{
 								layer = new OpenLayers.Layer.WMS(camada.name, urllayer,{LAYERS:camada.name,format:camada.wmsformat,transparent:true},opcoes);
@@ -1278,7 +1279,7 @@ i3GEO.Interface = {
 			var m,b;
 			m = ext.split(" ");
 			b = new OpenLayers.Bounds(m[0],m[1],m[2],m[3]);
-			i3geoOL.zoomToExtent(b);
+			i3geoOL.zoomToExtent(b,true);
 			i3GEO.eventos.cliquePerm.status = true;
 		},
 		pan2ponto:function(x,y){
