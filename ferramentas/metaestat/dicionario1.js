@@ -66,7 +66,7 @@ it:""
 }],
 "10":[
 {
-pt:"Utilize um dos m&eacute;todos abaixo para gerar as classes que ser&atilde;o utilizadas para representar os dados no cartograma",
+pt:"Utilize um dos m&eacute;todos abaixo para gerar as classes com seus respectivos intervalos. Voc&ecirc; pode refazer o c&aacute;lculo quantas vezes quiser, experimentando diferentes m&eacute;todos",
 en:"",
 es:"",
 it:""
@@ -108,19 +108,33 @@ it:""
 }],
 "16":[
 {
-pt:"",
+pt:"Escolha primeiro as cores que ser&atilde;o utilizadas para representar cada classe no mapa",
 en:"",
 es:"",
 it:""
 }],
 "17":[
 {
-pt:"",
+pt:"Se voc&ecirc; estiver criando uma medida de vari&aacute;vel que ainda n&atilde;o possu&iacute; dados, experimente criar classes com base em uma estimativa dos valores que no futuro ser&atilde;o inseridos",
 en:"",
 es:"",
 it:""
 }],
 "18":[
+{
+pt:"Menor valor esperado",
+en:"",
+es:"",
+it:""
+}],
+"19":[
+{
+pt:"Maior valor",
+en:"",
+es:"",
+it:""
+}],
+"20":[
 {
 pt:"",
 en:"",

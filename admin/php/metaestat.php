@@ -449,6 +449,35 @@ switch (strtoupper($funcao))
 				$m->alteraClasseClassificacao("",$id_classe,$titulo,$expressao,$vermelho,$verde,$azul,"","","255","255","255","2");
 			}
 		}
+		//o menor e o maior valor sao enviados como parametro ($min e $max)
+		if($tipo == "intiguais5mm"){
+			$m = new Metaestat();
+			$dados = $m->sumarioMedidaVariavel($id_medida_variavel);
+			$item = $dados["colunavalor"];
+			$intervalo = ($max - $min) / 5;
+			//adiciona as classes novas
+			$intatual = $min;
+			$m->excluirRegistro("i3geoestat_classes","id_classificacao",$id_classificacao);
+			for ($i=0; $i < 5; ++$i){
+				if ($i == 5 - 1){
+					$expressao = "(([".$item."]>=".$intatual.")and([".$item."]<=".($intatual+$intervalo)."))";
+				}
+				else{
+					$expressao = "(([".$item."]>=".$intatual.")and([".$item."]<".($intatual+$intervalo)."))";
+				}
+				$titulo = ">= ".$intatual." e < que ".($intatual+$intervalo);
+				$intatual = $intatual + $intervalo;
+				$id_classe = $m->alteraClasseClassificacao($id_classificacao);
+				if(!empty($cores)){
+					$cor = explode(",",$cores[$i]);
+					$vermelho = $cor[0];
+					$verde = $cor[1];
+					$azul = $cor[2];
+				}
+				$m->alteraClasseClassificacao("",$id_classe,$titulo,$expressao,$vermelho,$verde,$azul,"","","255","255","255","2");
+			}
+		}
+
 		retornaJSON("ok");
 		exit;
 	break;

@@ -1136,6 +1136,28 @@ i3GEOF.metaestat = {
 			core_carregando("ativa");
 			i3GEO.util.ajaxGet(p,temp);
 		},
+		intervalosIguaisMM: function(){
+			var id_medida_variavel = $i("i3geoCartoComboMedidaVariavelEditor").value,
+				id_classificacao = $i("i3geoCartoComboClassificacoesEditor").value,
+				cores = $i("listaColourRampEditor").value,
+				p = i3GEO.configura.locaplic+"/admin/php/metaestat.php?funcao=calculaClassificacao&tipo=intiguais5mm" +
+					"&cores="+cores+"&id_classificacao="+id_classificacao+"&id_medida_variavel="+id_medida_variavel+
+					"&min="+$i("i3GEOFmetaestatEditorVmin").value +
+					"&max="+$i("i3GEOFmetaestatEditorVmax").value +
+					"&g_sid="+i3GEO.configura.sid,
+				temp = function(retorno){
+					core_carregando("desativa");
+					YAHOO.i3GEO.janela.manager.find("i3geoCartoEditor").destroy();
+				};
+			if(cores == ""){
+				alert("Escolha as cores primeiro");
+				$i("listaColourRampEditor").onchange = function(){i3GEOF.metaestat.editor.intervalosIguais();};
+				i3GEO.util.abreColourRamp("","listaColourRampEditor",5);
+				return;
+			}
+			core_carregando("ativa");
+			i3GEO.util.ajaxGet(p,temp);
+		},
 		intervalosIguais: function(){
 			var id_medida_variavel = $i("i3geoCartoComboMedidaVariavelEditor").value,
 			id_classificacao = $i("i3geoCartoComboClassificacoesEditor").value,
@@ -1337,15 +1359,21 @@ i3GEOF.metaestat = {
 				var temp = function(dados){
 					var soma = i3GEOF.metaestat.editor.dadoMedidaSelecionada("permitesoma"),
 					media = i3GEOF.metaestat.editor.dadoMedidaSelecionada("permitemedia"),
-					ins = "<p class='paragrafo' >" + $trad(10,i3GEOF.metaestat.dicionario1) +
-					"<br><br><p>" +
+					ins = "<p class='paragrafo' >" + $trad(16,i3GEOF.metaestat.dicionario1) + "</p>"+
 					"&nbsp;<input id=i3GEOFmetaestatEditorBotao8 type='button' value='"+$trad(13,i3GEOF.metaestat.dicionario1)+"' />" +
-					"<br><br>";
+					"<br><p class='paragrafo' >" + $trad(10,i3GEOF.metaestat.dicionario1) + "</p>";
 					if(soma == 1 || media == 1){
 						ins += "&nbsp;<input id=i3GEOFmetaestatEditorBotao6 type='button' value='"+$trad(11,i3GEOF.metaestat.dicionario1)+"' />" +
 						"&nbsp;<input id=i3GEOFmetaestatEditorBotao7 type='button' value='"+$trad(12,i3GEOF.metaestat.dicionario1)+"' />";
 					}
-					ins += '<input type=hidden  value="" id="listaColourRampEditor"  />'; //utilizado pelo seletor de colourramp;
+					ins += '<input type=hidden  value="" id="listaColourRampEditor"  />' + //utilizado pelo seletor de colourramp;
+						"<br><p class='paragrafo' >" + $trad(17,i3GEOF.metaestat.dicionario1) + "</p>" +
+						"<p class='paragrafo' >" + $trad(18,i3GEOF.metaestat.dicionario1) +
+						"&nbsp;<input type=text class=digitar size=5 value=1 id=i3GEOFmetaestatEditorVmin />&nbsp;&nbsp;" +
+						$trad(19,i3GEOF.metaestat.dicionario1) +
+						"&nbsp;<input type=text class=digitar size=5 value=100 id=i3GEOFmetaestatEditorVmax /></p>" +
+						"<input id='i3GEOFmetaestatEditorBotao9' type='button' value='"+$trad(12,i3GEOF.metaestat.dicionario1)+"' />";
+
 					i3GEO.util.proximoAnterior("i3GEOF.metaestat.editor.t3()","",ins,"i3GEOF.metaestat.editor.t4","i3GEOFmetaestatEditor",true);
 					new YAHOO.widget.Button(
 							"i3GEOFmetaestatEditorBotao8",
@@ -1360,11 +1388,18 @@ i3GEOF.metaestat = {
 								{onclick:{fn: i3GEOF.metaestat.editor.quartis}}
 						);
 						$i("i3GEOFmetaestatEditorBotao6-button").style.width = (i3GEOF.metaestat.LARGURA / 2) + "px";
+
 						new YAHOO.widget.Button(
 								"i3GEOFmetaestatEditorBotao7",
 								{onclick:{fn: i3GEOF.metaestat.editor.intervalosIguais}}
 						);
 						$i("i3GEOFmetaestatEditorBotao7-button").style.width = (i3GEOF.metaestat.LARGURA / 2) + "px";
+
+						new YAHOO.widget.Button(
+								"i3GEOFmetaestatEditorBotao9",
+								{onclick:{fn: i3GEOF.metaestat.editor.intervalosIguaisMM}}
+						);
+						$i("i3GEOFmetaestatEditorBotao9-button").style.width = (i3GEOF.metaestat.LARGURA / 2) + "px";
 					}
 				};
 				i3GEO.php.listaClasseClassificacao($i("i3geoCartoComboClassificacoesEditor").value,temp);
