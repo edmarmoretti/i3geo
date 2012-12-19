@@ -366,7 +366,7 @@ class Metaestat{
 		else{
 			$sqlgeo = $colunageo." from (".$sqlgeo." __filtro__ ) as foo using unique ".$dados["colunaidgeo"]." using srid=".$dadosgeo["srid"];
 		}
-		return array("sqlagrupamento"=>$sqlagrupamento,"sql"=>$sql,"sqlmapserver"=>$sqlgeo,"filtro"=>$filtro,"colunas"=>$colunas,"alias"=>$alias);
+		return array("sqlagrupamento"=>$sqlagrupamento,"sql"=>$sql,"sqlmapserver"=>$sqlgeo,"filtro"=>$filtro,"colunas"=>$colunas,"alias"=>$alias,"colunavalor"=>$dados["colunavalor"]);
 	}
 	function mapfileMedidaVariavel($id_medida_variavel,$filtro="",$todasascolunas = 0,$tipolayer="polygon",$titulolayer="",$id_classificacao="",$agruparpor="",$codigo_tipo_regiao=""){
 		//para permitir a inclusao de filtros, o fim do sql e marcado com /*FW*//*FW*/
@@ -424,13 +424,14 @@ class Metaestat{
 			$dados[] = '	TEMPLATE "none.htm"';
 			$dados[] = '	METADATA';
 			$dados[] = '		TEMA "'.$titulolayer.'"';
+			$dados[] = '		TIP "'.$sql["colunavalor"].'"';
 			$dados[] = '		CLASSE "SIM"';
 			$dados[] = '		METAESTAT "SIM"';
 			$dados[] = '		METAESTAT_CODIGO_TIPO_REGIAO "'.$codigo_tipo_regiao.'"';
 			$dados[] = '		METAESTAT_ID_MEDIDA_VARIAVEL "'.$id_medida_variavel.'"';
 			if(count($sql["colunas"]) > 0){
-				$dados[] = '		ITENS "'.implode(",",$sql["colunas"]).'"';
-				$dados[] = '		ITENSDESC "'.implode(",",$sql["alias"]).'"';
+				$dados[] = '	ITENS "'.implode(",",$sql["colunas"]).'"';
+				$dados[] = '	ITENSDESC "'.implode(",",$sql["alias"]).'"';
 			}
 			$dados[] = '	END';
 			if($classes == ""){
@@ -526,6 +527,7 @@ class Metaestat{
 			$dados[] = '		CLASSE "SIM"';
 			$dados[] = '		METAESTAT "SIM"';
 			$dados[] = '		METAESTAT_CODIGO_TIPO_REGIAO "'.$codigo_tipo_regiao.'"';
+			$dados[] = '		TIP "'.$vis.'"';
 			$dados[] = '	END';
 			$dados[] = '    CLASS';
 			$dados[] = '        NAME ""';
