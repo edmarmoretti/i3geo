@@ -53,6 +53,13 @@ i3GEOF.toponimia = {
 	*/
 	aguarde: "",
 	/*
+	Propriedade: ATIVAITEM
+
+	Sera marcado como selecionado no combo com a lista de itens
+	*/
+	ATIVAITEM: "",
+
+	/*
 		Para efeitos de compatibilidade antes da vers&atilde;o 4.7 que n&atilde;o tinha dicion&aacute;rio
 	*/
 	criaJanelaFlutuante: function(){
@@ -117,6 +124,7 @@ i3GEOF.toponimia = {
 				function(retorno){
 		 			$i("i3GEOtoponimiaDivListaItens").innerHTML = '<p class="paragrafo" >'+retorno.dados;
 		 			$i("i3GEOtoponimiaDivListaItens").style.display = "block";
+		 			$i("i3GEOtoponimiaListaItens").value = i3GEOF.toponimia.ATIVAITEM;
 				},
 				"i3GEOtoponimiaDivListaItens",
 				""

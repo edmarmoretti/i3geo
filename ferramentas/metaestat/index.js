@@ -147,6 +147,7 @@ i3GEOF.metaestat = {
 			'	<button title="Altera a forma de representa&ccedil;&atilde;o gr&aacute;fica" onclick="i3GEOF.metaestat.analise.alteraRep()"><img src="'+i3GEO.configura.locaplic+'/imagens/gisicons/shape.png" /></button>' +
 			'	<button title="Mapa de calor" onclick="i3GEOF.metaestat.analise.calor()"><img src="'+i3GEO.configura.locaplic+'/imagens/gisicons/dem.png" /></button>' +
 			'	<button title="Congela vis&atilde;o" onclick="i3GEO.mapa.dialogo.congelaMapa()"><img src="'+i3GEO.configura.locaplic+'/imagens/gisicons/mapset-add.png" /></button>' +
+			'	<button title="Mostra os valores como textos no mapa" onclick="i3GEOF.metaestat.analise.toponimia()"><img src="'+i3GEO.configura.locaplic+'/imagens/gisicons/label.png" /></button>' +
 			'</div>' +
 			'<input type=hidden  value="" id="listaColourRampAnaliseMetaestat" onchange="i3GEOF.metaestat.analise.aplicaColourRamp()" />'; //utilizado pelo seletor de colourramp
 			return ins;
@@ -174,6 +175,25 @@ i3GEOF.metaestat = {
 				//{i3GEO.eventos.ATUALIZAARVORECAMADAS.push('i3GEOF.metaestat.analise.comboCamadas()');}
 			};
 			i3GEO.php.listaCamadasMetaestat(temp);
+		},
+		toponimia: function(){
+			if($i("i3geoCartoAnaliseCamadasCombo").value == ""){
+				i3GEO.janela.tempoMsg("Ative uma camada primeiro");
+				return;
+			}
+			i3GEO.mapa.ativaTema($i("i3geoCartoAnaliseCamadasCombo").value);
+			i3GEO.util.dialogoFerramenta("i3GEO.tema.dialogo.toponimia()","toponimia","toponimia","index.js","i3GEOF.metaestat.analise.abreToponimia()");
+		},
+		abreToponimia: function(){
+			var p = i3GEO.configura.locaplic+"/ferramentas/metaestat/analise.php?g_sid="+i3GEO.configura.sid +
+				"&funcao=pegaDadosTME&tema="+i3GEO.temaAtivo,
+				temp = function(retorno){
+					i3GEO.janela.fechaAguarde("aguardeBuscaDados");
+					i3GEOF.toponimia.ATIVAITEM = retorno.data.itemDados;
+					i3GEOF.toponimia.iniciaJanelaFlutuante();
+				};
+			i3GEO.janela.abreAguarde("aguardeBuscaDados","Aguarde...");
+			i3GEO.util.ajaxGet(p,temp);
 		},
 		alteraRep: function(){
 			if(typeof(i3GEOF.alterarep) === 'undefined'){
