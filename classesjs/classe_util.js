@@ -1804,6 +1804,9 @@ i3GEO.util = {
 					if (retorno.data.valores[i].tema === tema){
 						if(alias == "sim"){
 							nm = retorno.data.valores[i].alias;
+							if(nm === ""){
+								nm = retorno.data.valores[i].item;
+							}
 						}
 						else{
 							nm = retorno.data.valores[i].item;

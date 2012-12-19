@@ -1,3 +1,15 @@
+var callback = {
+	success:function(o){
+		try	{
+			dadosAuxiliares = YAHOO.lang.JSON.parse(o.responseText);
+		}
+		catch(e){core_handleFailure(e,o.responseText);}
+	},
+	failure:core_handleFailure,
+	argument: { foo:"foo", bar:"bar" }
+};
+core_makeRequest("../php/metaestat.php?funcao=listaDadosTabelasAuxiliares",callback);
+
 function initEditor(){
 	YAHOO.namespace("admin.container");
 	core_ativaBotaoAdicionaLinha("../php/metaestat.php?funcao=alterarTipoRegiao","adicionaNovaLinha","pegaDados");
@@ -49,16 +61,16 @@ function montaTabela(dados){
 		                {label:"c&oacute;digo",key:"codigo_tipo_regiao", formatter:formatTexto},
 		                {label:"Nome",resizeable:true,key:"nome_tipo_regiao", formatter:formatTexto},
 		                {label:"Descri&ccedil;&atilde;o",resizeable:true,key:"descricao_tipo_regiao", formatter:formatTexto},
+		                {label:"Conex&atilde;o",key:"codigo_estat_conexao",formatter:formatTexto},
 		                {label:"Esquema",key:"esquemadb",formatter:formatTexto},
 		                {label:"Tabela",key:"tabela",formatter:formatTexto},
-		                {label:"Coluna geo",key:"colunageo",formatter:formatTexto},
+		                {label:"Geometria",key:"colunageo",formatter:formatTexto},
 		                {label:"Centr&oacute;ide",key:"colunacentroide",formatter:formatTexto},
 		                {label:"Data",key:"data",formatter:formatTexto},
-		                {label:"C&oacute;digo",key:"identificador",formatter:formatTexto},
-		                {label:"Conexão",key:"codigo_estat_conexao",formatter:formatTexto},
-		                {label:"Nomes das regi&otilde;es",resizeable:false,key:"colunanomeregiao",formatter:formatTexto},
+		                {label:"Regi&atilde;o",key:"identificador",formatter:formatTexto},
+		                {label:"Nomes",resizeable:false,key:"colunanomeregiao",formatter:formatTexto},
 		                {label:"Colunas vis&iacute;veis (separa com v&iacute;rgula)",resizeable:false,key:"colunasvisiveis",formatter:formatTexto},
-		                {label:"Apelidos das colunas vis&iacute;veis (separa com v&iacute;rgula)",resizeable:false,key:"apelidos",formatter:formatTexto},
+		                {label:"Apelidos",resizeable:false,key:"apelidos",formatter:formatTexto},
 		                {label:"SRID",key:"srid",formatter:formatTexto}
 		                ];
 		myDataSource = new YAHOO.util.DataSource(dados);
@@ -215,7 +227,7 @@ function montaEditor(dados,id,recordid){
 		YAHOO.admin.container.panelEditor2.render();
 	}
 	YAHOO.admin.container.panelEditor2.show();
-	$i("editor_bd2").innerHTML = montaDiv(dados);
+	montaDiv(dados);
 	core_carregando("desativa");
 }
 function montaEditorAgregacoes(dados,id,recordid){
@@ -249,27 +261,33 @@ function montaEditorAgregacoes(dados,id,recordid){
 	core_carregando("desativa");
 }
 function montaDiv(i){
-	var param = {
+	var limg = "../../imagens/crialeg.jpg",
+		param = {
 			"linhas":[
 			{titulo:"Nome:",id:"Enome_tipo_regiao",size:"50",value:i.nome_tipo_regiao,tipo:"text",div:""},
 			{titulo:"Descri&ccedil;&atilde;o:",id:"Edescricao_tipo_regiao",size:"50",value:i.descricao_tipo_regiao,tipo:"text",div:""},
-			{titulo:"Esquema no banco de dados:",id:"Eesquemadb",size:"50",value:i.esquemadb,tipo:"text",div:""},
-			{titulo:"Tabela:",id:"Etabela",size:"50",value:i.tabela,tipo:"text",div:""},
-			{titulo:"Coluna com a geometria principal (normalmente poligonal):",id:"Ecolunageo",size:"50",value:i.colunageo,tipo:"text",div:""},
-			{titulo:"Coluna com pontos (pode ser a mesmo que a anterior):",id:"Ecolunacentroide",size:"50",value:i.colunacentroide,tipo:"text",div:""},
+			{titulo:"C&oacute;digo da conex&atilde;o com o banco:",id:"",size:"50",value:i.codigo_estat_conexao,tipo:"text",div:"<div id=Ccodigo_estat_conexao ></div>"},
+			{titulo:"Esquema no banco de dados: <img onclick='selEsquema(\"Eesquemadb\",\"Ecodigo_estat_conexao\")' src='"+limg+"' style='cursor:pointer;position :relative;top:2px'/>",id:"Eesquemadb",size:"50",value:i.esquemadb,tipo:"text",div:""},
+			{titulo:"Tabela: <img onclick='selTabela(\"Etabela\",\"Ecodigo_estat_conexao\",\"Eesquemadb\")' src='"+limg+"' style='cursor:pointer;position :relative;top:2px'/>",id:"Etabela",size:"50",value:i.tabela,tipo:"text",div:""},
+			{titulo:"Coluna com a geometria principal (normalmente poligonal): <img onclick='selColuna(\"Ecolunageo\",\"Ecodigo_estat_conexao\",\"Eesquemadb\",\"Etabela\")' src='"+limg+"' style='cursor:pointer;position :relative;top:2px'/>",id:"Ecolunageo",size:"50",value:i.colunageo,tipo:"text",div:""},
+			{titulo:"Coluna com pontos (pode ser a mesmo que a anterior):<img onclick='selColuna(\"Ecolunacentroide\",\"Ecodigo_estat_conexao\",\"Eesquemadb\",\"Etabela\")' src='"+limg+"' style='cursor:pointer;position :relative;top:2px'/>",id:"Ecolunacentroide",size:"50",value:i.colunacentroide,tipo:"text",div:""},
 			{titulo:"Data a qual se referem os dados:",id:"Edata",size:"50",value:i.data,tipo:"text",div:""},
-			{titulo:"Coluna com o c&oacute;digo de cada registro:",id:"Eidentificador",size:"50",value:i.identificador,tipo:"text",div:""},
-			{titulo:"C&oacute;digo da conex&atilde;o com o banco:",id:"Ecodigo_estat_conexao",size:"50",value:i.codigo_estat_conexao,tipo:"text",div:""},
-			{titulo:"Coluna com o nome ddo limite geogr&aacute;fico:",id:"Ecolunanomeregiao",size:"50",value:i.colunanomeregiao,tipo:"text",div:""},
+			{titulo:"Coluna com o c&oacute;digo de cada registro:<img onclick='selColuna(\"Eidentificador\",\"Ecodigo_estat_conexao\",\"Eesquemadb\",\"Etabela\")' src='"+limg+"' style='cursor:pointer;position :relative;top:2px'/>",id:"Eidentificador",size:"50",value:i.identificador,tipo:"text",div:""},
+			{titulo:"Coluna com o nome do limite geogr&aacute;fico:<img onclick='selColuna(\"Ecolunanomeregiao\",\"Ecodigo_estat_conexao\",\"Eesquemadb\",\"Etabela\")' src='"+limg+"' style='cursor:pointer;position :relative;top:2px'/>",id:"Ecolunanomeregiao",size:"50",value:i.colunanomeregiao,tipo:"text",div:""},
 			{titulo:"Colunas que ficar&atilde;o vis&iacute;veis no mapa:",id:"Ecolunasvisiveis",size:"50",value:i.colunasvisiveis,tipo:"text",div:""},
 			{titulo:"Apelidos das colunas que ficar&atilde;o vis&iacute;veis no mapa:",id:"Eapelidos",size:"50",value:i.apelidos,tipo:"text",div:""},
 			{titulo:"C&oacute;digo SRID:",id:"Esrid",size:"50",value:i.srid,tipo:"text",div:""}
 			]
 		},
 		ins = "";
-
 	ins += core_geraLinhas(param);
-	return(ins);
+	$i("editor_bd2").innerHTML = ins;
+	if($i("Ccodigo_estat_conexao")){
+		temp = "<select id='Ecodigo_estat_conexao' >";
+		temp += core_comboObjeto(dadosAuxiliares.conexao,"codigo_estat_conexao","bancodedados",i.codigo_estat_conexao);
+		temp += "</select>";
+		$i("Ccodigo_estat_conexao").innerHTML = temp;
+	}
 }
 function montaDivAgregacoes(i){
 	var param = {
@@ -359,4 +377,92 @@ function excluiLinhaAgregacao(id,row){
 		sUrl = "../php/metaestat.php?funcao=excluirAgregaRegiao&id_agregaregiao="+id;
 	core_excluiLinha(sUrl,row,mensagem);
 }
+function selEsquema(idEleValue,idEleCodigoConexao){
+	var eleValue = $i(idEleValue),
+	eleCodigoConexao = $i(idEleCodigoConexao),
+	callback = {
+			success:function(o){
+				try	{
+					var dados = YAHOO.lang.JSON.parse(o.responseText),
+					n = dados.length,
+					i,
+					valores = [],
+					textos = [],
+					selecionados = [eleValue.value];
+					for(i=0;i<n;i++){
+						valores.push(dados[i].esquema);
+						textos.push(dados[i].esquema);
+					}
+					core_menuCheckBox(valores,textos,selecionados,eleValue,"","","sim");
+				}
+				catch(e){core_handleFailure(e,o.responseText);}
+			},
+			failure:core_handleFailure,
+			argument: { foo:"foo", bar:"bar" }
+	};
+	if(!eleValue || !eleCodigoConexao){
+		return;
+	}
+	core_makeRequest("../php/metaestat.php?funcao=esquemasConexao&formato=json&codigo_estat_conexao="+eleCodigoConexao.value,callback);
+}
+function selTabela(idEleValue,idEleCodigoConexao,idEleNomeEsquema){
+	var eleValue = $i(idEleValue),
+	eleCodigoConexao = $i(idEleCodigoConexao),
+	eleNomeEsquema = $i(idEleNomeEsquema),
+	callback = {
+		success:function(o){
+			try	{
+				var dados = YAHOO.lang.JSON.parse(o.responseText),
+				n = dados.length,
+				i,
+				valores = [],
+				textos = [],
+				selecionados = [eleValue.value];
+				for(i=0;i<n;i++){
+					valores.push(dados[i].tabela);
+					textos.push(dados[i].tabela);
+				}
+				core_menuCheckBox(valores,textos,selecionados,eleValue,"","","sim");
+			}
+			catch(e){core_handleFailure(e,o.responseText);}
+		},
+		failure:core_handleFailure,
+		argument: { foo:"foo", bar:"bar" }
+	};
+	if(!eleValue || !eleCodigoConexao || !eleNomeEsquema){
+		return;
+	}
+	core_makeRequest(i3GEO.configura.locaplic+"/admin/php/metaestat.php?funcao=tabelasEsquema&formato=json&codigo_estat_conexao="+eleCodigoConexao.value+"&nome_esquema="+eleNomeEsquema.value,callback);
+}
+function selColuna(idEleValue,idEleCodigoConexao,idEleNomeEsquema,idEleNomeTabela){
+	var eleValue = $i(idEleValue),
+	eleCodigoConexao = $i(idEleCodigoConexao),
+	eleNomeEsquema = $i(idEleNomeEsquema),
+	eleNomeTabela = $i(idEleNomeTabela),
+	callback = {
+		success:function(o){
+			try	{
+				var dados = YAHOO.lang.JSON.parse(o.responseText),
+				n = dados.length,
+				i,
+				valores = [],
+				textos = [],
+				selecionados = [eleValue.value];
+				for(i=0;i<n;i++){
+					valores.push(dados[i]);
+					textos.push(dados[i]);
+				}
+				core_menuCheckBox(valores,textos,selecionados,eleValue,"","","sim");
+			}
+			catch(e){core_handleFailure(e,o.responseText);}
+		},
+		failure:core_handleFailure,
+		argument: { foo:"foo", bar:"bar" }
+	};
+	if(!eleValue || !eleCodigoConexao || !eleNomeEsquema || !eleNomeTabela){
+		return;
+	}
+	core_makeRequest(i3GEO.configura.locaplic+"/admin/php/metaestat.php?funcao=colunasTabela&formato=json&codigo_estat_conexao="+eleCodigoConexao.value+"&nome_esquema="+eleNomeEsquema.value+"&nome_tabela="+eleNomeTabela.value,callback);
+}
+
 //YAHOO.util.Event.addListener(window, "load", initMenu);

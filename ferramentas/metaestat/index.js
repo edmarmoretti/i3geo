@@ -129,7 +129,7 @@ i3GEOF.metaestat = {
 		},
 		html: function(){
 			var ins = '<div id="i3geoCartoAnaliseContainer" style="margin-left:5px;line-height:25px">' +
-			'<div id="i3geoCartoAnaliseCamadas" style="top:-5px;height:50px"></div>' +
+			'<div id="i3geoCartoAnaliseCamadas" style="top:-5px;height:50px;display:none"></div>' +
 			'	<button title="Focar o mapa em um determinado limite geogr&aacute;fico" onclick="i3GEO.mapa.dialogo.locregiao()"><img src="'+i3GEO.configura.locaplic+'/imagens/gisicons/open-street-maps.png" /></button>' +
 			'	<button title="Mostra no mapa os limites geogr&aacute;ficos cadastrados" onclick="i3GEOF.metaestat.analise.mostraRegiao()"><img src="'+i3GEO.configura.locaplic+'/imagens/gisicons/open-street-maps-show.png" /></button>' +
 			'	<button title="Mostrar apenas os dados de determinado limite geogr&aacute;fico" onclick="i3GEO.mapa.dialogo.filtraregiao()"><img src="'+i3GEO.configura.locaplic+'/imagens/gisicons/open-street-maps-filtro.png" /></button>' +
@@ -171,6 +171,7 @@ i3GEOF.metaestat = {
 				if(i3GEO.temaAtivo != ""){
 					$i("i3geoCartoAnaliseCamadasCombo").value = i3GEO.temaAtivo;
 				}
+				$i("i3geoCartoAnaliseCamadas").style.display = "block";
 				//if(i3GEO.eventos.ATUALIZAARVORECAMADAS.toString().search('i3GEOF.metaestat.analise.comboCamadas()') < 0)
 				//{i3GEO.eventos.ATUALIZAARVORECAMADAS.push('i3GEOF.metaestat.analise.comboCamadas()');}
 			};

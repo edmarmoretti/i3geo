@@ -243,6 +243,7 @@ class Metaestat{
 		//indica se os dados sao agregados a uma regiao de nivel superior
 		$agregaregiao = false;
 		$colunas = array();
+
 		if($codigo_tipo_regiao != "" && $dados["codigo_tipo_regiao"] != $codigo_tipo_regiao){
 			$agregaregiao = true;
 			//guarda os dados da regiao que agrega a regiao original da medida variavel
@@ -326,9 +327,18 @@ class Metaestat{
 		elseif($dados["permitemedia"] == 1){
 			$tipoconta = "mean";
 		}
+		$sqlagrupamento = "";
 		if(empty($agruparpor)){
-			$sql .= " FROM ".$dados["esquemadb"].".".$dados["tabela"]." as d ";
-			$sqlgeo .= " FROM ".$dados["esquemadb"].".".$dados["tabela"]." as d,".$dadosgeo["esquemadb"].".".$dadosgeo["tabela"]." as g ";
+			//$sql .= " FROM ".$dados["esquemadb"].".".$dados["tabela"]." as d ";
+			//$sqlgeo .= " FROM ".$dados["esquemadb"].".".$dados["tabela"]." as d,".$dadosgeo["esquemadb"].".".$dadosgeo["tabela"]." as g ";
+			if($agregaregiao == true){
+				$sqlgeo .= " FROM (SELECT $tipoconta(".$dados["colunavalor"].") as ".$dados["colunavalor"].",sb.".$dadosAgregacao["colunaligacao_regiaopai"]." FROM ".$dados["esquemadb"].".".$dados["tabela"] ." as sa,".$dadosgeo["esquemadb"].".".$dadosgeo["tabela"] ." as sb WHERE sa.".$dados["colunaidgeo"]." = sb.".$dadosgeo["identificador"]." __dadosfiltro__ group by sb.".$dadosAgregacao["colunaligacao_regiaopai"].") as d, ".$dadosgeo["esquemadb"].".".$dadosgeoagregada["tabela"]." as g";
+				$sql .= " FROM (SELECT $tipoconta(".$dados["colunavalor"].") as ".$dados["colunavalor"].",sb.".$dadosAgregacao["colunaligacao_regiaopai"]." FROM ".$dados["esquemadb"].".".$dados["tabela"]." as sa,".$dadosgeo["esquemadb"].".".$dadosgeo["tabela"]." as sb WHERE	sa.".$dados["colunaidgeo"]." = sb.".$dadosgeo["identificador"]." __dadosfiltro__ group by sb.".$dadosAgregacao["colunaligacao_regiaopai"].") as d ";
+			}
+			else{
+				$sqlgeo .= " FROM (SELECT ".$dados["colunavalor"].",".$dados["colunaidgeo"]." FROM ".$dados["esquemadb"].".".$dados["tabela"] ." __dadosfiltro__ ) as d, ".$dadosgeo["esquemadb"].".".$dadosgeo["tabela"]." as g";
+				$sql .= " FROM (SELECT ".$dados["colunavalor"].",".$dados["colunaidgeo"]." FROM ".$dados["esquemadb"].".".$dados["tabela"] ." __dadosfiltro__ ) as d ";
+			}
 		}
 		else{
 			$sqlagrupamento = " SELECT d.".$agruparpor." FROM ".$dados["esquemadb"].".".$dados["tabela"]." as d group by ".$agruparpor." order by ".$agruparpor;
@@ -366,6 +376,7 @@ class Metaestat{
 		else{
 			$sqlgeo = $colunageo." from (".$sqlgeo." __filtro__ ) as foo using unique ".$dados["colunaidgeo"]." using srid=".$dadosgeo["srid"];
 		}
+		//echo $sqlgeo;exit;
 		return array("sqlagrupamento"=>$sqlagrupamento,"sql"=>$sql,"sqlmapserver"=>$sqlgeo,"filtro"=>$filtro,"colunas"=>$colunas,"alias"=>$alias,"colunavalor"=>$dados["colunavalor"]);
 	}
 	function mapfileMedidaVariavel($id_medida_variavel,$filtro="",$todasascolunas = 0,$tipolayer="polygon",$titulolayer="",$id_classificacao="",$agruparpor="",$codigo_tipo_regiao=""){
