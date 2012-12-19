@@ -422,7 +422,7 @@ i3GEO.configura = {
 	Default:
 	{""}
 	*/
-	templateLegenda: "",
+	templateLegenda: "legenda4.htm",
 	/*
 	Propriedade: mashuppar
 

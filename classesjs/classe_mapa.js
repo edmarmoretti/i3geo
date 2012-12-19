@@ -317,7 +317,7 @@ i3GEO.mapa = {
 		Default:
 		{true}
 		*/
-		incluiBotaoLibera: true,
+		incluiBotaoLibera: false,
 		/*
 		Variavel:  ID
 
@@ -363,7 +363,7 @@ i3GEO.mapa = {
 						if ((retorno.data !== "erro") && (retorno.data !== undefined)){
 							ins = "";
 							if(i3GEO.mapa.legendaHTML.incluiBotaoLibera === true)
-							{ins += '<div style="cursor: pointer; text-align: left; font-size: 10px; display: block; height: 35px;" onclick="i3GEO.mapa.legendaHTML.libera()"><img id="soltaLeg" src="../imagens/branco.gif" title="clique para liberar" style="margin: 5px; position: relative;"> <p style="position: relative; left: -45px; top: -22px;">Mostra a legenda em uma janela</p></div>';}
+							{ins += '<div style="cursor: pointer; text-align: left; font-size: 10px; display: block; height: 35px;" onclick="i3GEO.mapa.legendaHTML.libera()"><img id="soltaLeg" src="../imagens/branco.gif" title="clique para liberar" style="margin: 5px; position: relative;"> <p style="position: relative; left: -35px; top: -22px;">'+$trad("x11")+'</p></div>';}
 							temp = retorno.data.legenda;
 							temp = temp.replace(re,"");
 							ins += "<div id='corpoLegi' >"+ temp + "</div>";

@@ -1,0 +1,12 @@
+[leg_layer_html opt_flag=1]<table class=legendatemas cellspacing=0 width=248 >[if name=TEMA oper=neq value=NAO]<table [if name=CLASSE oper=eq value=NAO] style=display:none;  [/if] ><tr><td style=text-align:left ><b><span class=legendaTema ><input value="[leg_layer_name]" name="layer" onclick="i3GEO.mapa.legendaHTML.ativaDesativaTema(this)" type=checkbox checked class=inputsb style=cursor:pointer;position:relative;top:2px;left:2px; >&nbsp;[metadata name=TEMA]</span></b><br>  </td></tr>
+[if name=legendawms oper=isset ]<tr><td style=text-align:left ><img src='[metadata name=legendawms]' /></td></tr>
+[/if][if name=legendaimg oper=isset ]<tr><td style=text-align:left >
+<img src='[metadata name=legendaimg]' /></td></tr>[/if]</table>[/if][/leg_layer_html][leg_class_html][if name=CLASSE oper=neq value=NAO]
+<table style=margin-top:5px;position:relative;left:15px; >
+<tr><td style=width:20px;text-align:left; >
+<input type=checkbox checked title=liga/desliga class=inputsb style='border: 0px solid red;cursor:pointer' value=[leg_class_index] name=[leg_layer_name] onclick='i3GEO.arvoreDeCamadas.inverteStatusClasse(this)' />
+</td>
+<td style=text-align:left >
+<img src=[leg_icon  width=16 height=16 ] /></td>
+<td width=195 style=text-align:left; ><span style=font-size:9px;position:relative;left:2px; >[leg_class_name]</span></td>
+</tr></table>[/if]</table>[/leg_class_html]

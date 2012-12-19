@@ -284,7 +284,6 @@ i3GEO.ajuda = {
 	texto {String} - texto a ser mostrado
 	*/
 	mostraJanela: function(texto){
-		if(typeof(console) !== 'undefined'){console.info("i3GEO.ajuda.mostraJanela()");}
 		var j = $i(this.DIVAJUDA),
 			k = $i("janelaMenTexto"),
 			jm = $i("i3geo_janelaMensagens"),
