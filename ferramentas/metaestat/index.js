@@ -809,7 +809,10 @@ i3GEOF.metaestat = {
 			if(i3GEOF.metaestat.parametros.dados.length == 0 || i3GEOF.metaestat.INTERFACE === "flutuanteSimples"){
 				return "";
 			}
-			//se tiver parametro e todos estiverem vazios, aborta
+			//deixa vazio para que o titulo seja definido pelo PHP que monta o mapfile
+			if(i3GEOF.metaestat.comum.tipoRep[1] == ""){
+				return "";
+			}
 			var i,n,c,titulo,
 			t=[],
 			dados = i3GEOF.metaestat.parametros.dados;

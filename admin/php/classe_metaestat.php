@@ -239,6 +239,7 @@ class Metaestat{
 	function sqlMedidaVariavel($id_medida_variavel,$todasascolunas,$agruparpor="",$tipolayer="polygon",$codigo_tipo_regiao = ""){
 		$filtro = false;
 		$dados = $this->listaMedidaVariavel("",$id_medida_variavel);
+		$titulo = $dados["nomemedida"];
 		$dadosgeo = $this->listaTipoRegiao($dados["codigo_tipo_regiao"]);
 		//indica se os dados sao agregados a uma regiao de nivel superior
 		$agregaregiao = false;
@@ -250,18 +251,24 @@ class Metaestat{
 			$dadosgeoagregada = $this->listaTipoRegiao($codigo_tipo_regiao);
 			if($tipolayer != "point"){
 				$colunageo = $dadosgeoagregada["colunageo"];
+				$titulo .= " (pol) ";
 			}
 			else{
 				$colunageo = $dadosgeoagregada["colunacentroide"];
+				$titulo .= " (pt) ";
 			}
+			$titulo .= $dadosagregada["nome_tipo_regiao"];
 		}
 		else{
 			if($tipolayer != "point"){
 				$colunageo = $dadosgeo["colunageo"];
+				$titulo .= " (pol) ";
 			}
 			else{
 				$colunageo = $dadosgeo["colunacentroide"];
+				$titulo .= " (pt) ";
 			}
+			$titulo .= $dadosgeo["nome_tipo_regiao"];
 		}
 		if($agregaregiao == false){
 			if($todasascolunas == 0){
@@ -377,7 +384,7 @@ class Metaestat{
 			$sqlgeo = $colunageo." from (".$sqlgeo." __filtro__ ) as foo using unique ".$dados["colunaidgeo"]." using srid=".$dadosgeo["srid"];
 		}
 		//echo $sqlgeo;exit;
-		return array("sqlagrupamento"=>$sqlagrupamento,"sql"=>$sql,"sqlmapserver"=>$sqlgeo,"filtro"=>$filtro,"colunas"=>$colunas,"alias"=>$alias,"colunavalor"=>$dados["colunavalor"]);
+		return array("sqlagrupamento"=>$sqlagrupamento,"sql"=>$sql,"sqlmapserver"=>$sqlgeo,"filtro"=>$filtro,"colunas"=>$colunas,"alias"=>$alias,"colunavalor"=>$dados["colunavalor"],"titulo"=>$titulo);
 	}
 	function mapfileMedidaVariavel($id_medida_variavel,$filtro="",$todasascolunas = 0,$tipolayer="polygon",$titulolayer="",$id_classificacao="",$agruparpor="",$codigo_tipo_regiao=""){
 		//para permitir a inclusao de filtros, o fim do sql e marcado com /*FW*//*FW*/
@@ -398,7 +405,6 @@ class Metaestat{
 			if($titulolayer == ""){
 				$titulolayer = $meta["nomemedida"];
 			}
-			$titulolayer = mb_convert_encoding($titulolayer,"ISO-8859-1",mb_detect_encoding($titulolayer));
 			$conexao = $this->listaConexao($meta["codigo_estat_conexao"],true);
 			$conexao = "user=".$conexao["usuario"]." password=".$conexao["senha"]." dbname=".$conexao["bancodedados"]." host=".$conexao["host"]." port=".$conexao["porta"]."";
 			$sql = $this->sqlMedidaVariavel($id_medida_variavel,$todasascolunas,$agruparpor,$tipolayer,$codigo_tipo_regiao);
@@ -410,6 +416,7 @@ class Metaestat{
 			//echo $sqlf;exit;
 			if(!empty($filtro)){
 				$sqlf = str_replace("__filtro__"," AND ".$filtro." /*FA*//*FA*/ /*FAT*//*FAT*/",$sqlf);
+				$sql["titulo"] .= ", ".$filtro;
 			}
 			else{
 				$sqlf = str_replace("__filtro__"," /*FA*//*FA*/ /*FAT*//*FAT*/",$sqlf);
@@ -421,6 +428,12 @@ class Metaestat{
 			else{
 				$classificacoes = $this->listaClassificacaoMedida($id_medida_variavel);
 				$classes = $this->listaClasseClassificacao($classificacoes[0]["id_classificacao"]);
+			}
+			if(empty($titulolayer)){
+				$titulolayer = mb_convert_encoding($titulolayer,"ISO-8859-1",mb_detect_encoding($titulolayer));
+			}
+			else{
+				$titulolayer = mb_convert_encoding($sql["titulo"],"ISO-8859-1",mb_detect_encoding($sql["titulo"]));
 			}
 			$dados[] = "MAP";
 			$dados[] = 'SYMBOLSET "'.$this->locaplic.'/symbols/simbolosv6.sym"';
@@ -440,6 +453,10 @@ class Metaestat{
 			$dados[] = '		METAESTAT "SIM"';
 			$dados[] = '		METAESTAT_CODIGO_TIPO_REGIAO "'.$codigo_tipo_regiao.'"';
 			$dados[] = '		METAESTAT_ID_MEDIDA_VARIAVEL "'.$id_medida_variavel.'"';
+			//marca se a tabela e editavel, verificando se esta no esquema padrao
+			if($meta["esquemadb"] == "i3geo_metaestat"){
+				$dados[] = '		METAESTATEDITAVEL "SIM"';
+			}
 			if(count($sql["colunas"]) > 0){
 				$dados[] = '	ITENS "'.implode(",",$sql["colunas"]).'"';
 				$dados[] = '	ITENSDESC "'.implode(",",$sql["alias"]).'"';
