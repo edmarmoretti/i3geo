@@ -1296,6 +1296,7 @@ class Atributos
 	Processa o resultado da identifica&ccedil;&atilde;o de um elemento compondo um array de strings formatadas.
 
 	parameters:
+
 	$listatemas - Lista de temas
 
 	$resultados - Resultados de cada tema.
@@ -1305,20 +1306,48 @@ class Atributos
 	function retornaI2($listatemas,$resultados,$map)
 	{
 		$final = array();
-		foreach ($listatemas as $tema)
-		{
+		foreach ($listatemas as $tema){
+			$editavel = "";
 			$layer = $map->getlayerbyname($tema);
 			$nometmp = $tema;
-			if (strtoupper($layer->getMetaData("TEMA")) != "NAO")
-			{
+			if (strtoupper($layer->getMetaData("TEMA")) != "NAO"){
 				$nometmp = $layer->getMetaData("TEMA");
 			}
-			else if ($layer->getMetaData("ALTTEMA") != "")
-			{
+			else if ($layer->getMetaData("ALTTEMA") != ""){
 				$nometmp = $layer->getMetaData("ALTTEMA");
 			}
 			$nometmp = $this->converte($nometmp);
-			$final[] = array("nome"=>$nometmp,"resultado"=>$resultados[$tema]);
+			//verifica se e editavel no metaestat
+			if($layer->getmetadata("METAESTATEDITAVEL") == "SIM"){
+				//verifica login
+				session_write_close();
+				session_name("i3GeoLogin");
+				if(!empty($_COOKIE["i3geocodigologin"])){
+					session_id($_COOKIE["i3geocodigologin"]);
+					session_start();
+					//verifica usuario
+					if($_SESSION["usuario"] == $_COOKIE["i3geousuariologin"]){
+						//verifica se e administrador
+						foreach($_SESSION["papeis"] as $p){
+							if($p == 1){
+								$editavel = "sim";
+							}
+						}
+						//verifica operacao
+						if(!empty($_SESSION["operacoes"]["admin/metaestat/geral"])){
+							$editavel = "sim";
+						}
+						if($editavel == "sim"){
+							include_once(__DIR__."/../admin/php/classe_metaestat.php");
+							$m = $m = new Metaestat();
+							$medidaVariavel = $m->listaMedidaVariavel("",$layer->getMetaData("METAESTAT_ID_MEDIDA_VARIAVEL"));
+							$editavel = $medidaVariavel["colunavalor"];
+						}
+					}
+				}
+
+			}
+			$final[] = array("nome"=>$nometmp,"resultado"=>$resultados[$tema],"editavel"=>$editavel);
 		}
 		return $final;
 	}
@@ -2199,7 +2228,11 @@ class Atributos
 			$ident = @$layer->queryByPoint($pt, 1, -1);
 		}
 		if ($ident == MS_SUCCESS){
-			$ident = @$layer->queryByPoint($pt, 1, -1);
+			//$ident = @$layer->queryByPoint($pt, 1, -1);
+			//verifica se o layer e editavel no sistema METAESTAT
+			$editavel = "nao";
+
+			//
 			$sopen = $layer->open();
 			$res_count = $layer->getNumresults();
 			if(strtoupper($layer->getmetadata("convcaracter")) == "NAO"){
@@ -2270,6 +2303,7 @@ class Atributos
 								$etiqueta = "sim";
 							}
 							$arraytemp = array(
+									"item"=>$it,
 									"alias"=>$this->converte($itensdesc[$conta]),
 									"valor"=>$val,
 									"link"=>$link,
