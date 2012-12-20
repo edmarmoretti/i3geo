@@ -1307,7 +1307,11 @@ class Atributos
 	{
 		$final = array();
 		foreach ($listatemas as $tema){
+			//para dados que sao oriundos do METAESTAT
 			$editavel = "";
+			$colunaidunico = "";
+			$id_medida_variavel = "";
+			//
 			$layer = $map->getlayerbyname($tema);
 			$nometmp = $tema;
 			if (strtoupper($layer->getMetaData("TEMA")) != "NAO"){
@@ -1338,16 +1342,24 @@ class Atributos
 							$editavel = "sim";
 						}
 						if($editavel == "sim"){
-							include_once(__DIR__."/../admin/php/classe_metaestat.php");
-							$m = $m = new Metaestat();
-							$medidaVariavel = $m->listaMedidaVariavel("",$layer->getMetaData("METAESTAT_ID_MEDIDA_VARIAVEL"));
-							$editavel = $medidaVariavel["colunavalor"];
+							$id_medida_variavel = $layer->getMetaData("METAESTAT_ID_MEDIDA_VARIAVEL");
+							if($id_medida_variavel != ""){
+								include_once(__DIR__."/../admin/php/classe_metaestat.php");
+								$m = new Metaestat();
+								$medidaVariavel = $m->listaMedidaVariavel("",$id_medida_variavel);
+								$editavel = $medidaVariavel["colunavalor"];
+								$colunaidunico = $medidaVariavel["colunaidunico"];
+								$codigo_tipo_regiao = $medidaVariavel["codigo_tipo_regiao"];
+							}
+							else{
+								$editavel = "nao";
+							}
 						}
 					}
 				}
 
 			}
-			$final[] = array("nome"=>$nometmp,"resultado"=>$resultados[$tema],"editavel"=>$editavel);
+			$final[] = array("nome"=>$nometmp,"resultado"=>$resultados[$tema],"editavel"=>$editavel,"colunaidunico"=>$colunaidunico,"id_medida_variavel"=>$id_medida_variavel,"codigo_tipo_regiao"=>$codigo_tipo_regiao);
 		}
 		return $final;
 	}

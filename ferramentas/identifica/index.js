@@ -351,10 +351,10 @@ i3GEOF.identifica = {
 		ins += '	<div class=guiaobj id="i3GEOidentificaguia2obj" style="left:1px">';
 		ins += '	</div>';
 		ins += '	<div class=guiaobj id="i3GEOidentificaguia3obj" style="left:1px;top:10px;display:none;font-size:12px;overflow:hidden" >';
-		ins += '		Resolu&ccedil;&atilde;o de busca - n&uacute;mero de pixels, no entorno do ponto clicado no mapa, que ser&atilde;o utilizados na busca de dados:<br><br>'
+		ins += '		Resolu&ccedil;&atilde;o de busca - n&uacute;mero de pixels, no entorno do ponto clicado no mapa, que ser&atilde;o utilizados na busca de dados:<br><br>';
 		ins += '&nbsp;&nbsp;'+$inputText("","10","i3GEOidentificaresolucao","","5","5");
 		//<input onclick="javascript:this.select();" type=text class=digitar value=5 id="i3GEOidentificaresolucao" size=2 />';
-		ins += '	</div>';
+		ins += '	<br><br></div>';
 		ins += '	<div class=guiaobj id="i3GEOidentificaguia4obj" style="left:1px;top:10px;display:none;font-size:12px;overflow:hidden" >';
 		ins += '		As etiquetas s&atilde;o mostradas quando o mouse &eacute; estacionado sobre um elemento.';
 		ins += '		<br><br><input id=i3GEOidentificabotao1 size=20  type=button value="Configurar etiquetas" />';
@@ -626,7 +626,7 @@ i3GEOF.identifica = {
 	retorno {JSON} - objeto JSON com os dados <i3GEO.php.identifica3>
 	*/
 	mostraDadosTema: function(retorno){
-		var i,res="",ntemas,resultados,nres,cor,j,nitens,k,atualN = "todas",inicio=0,numResultados = 0,tip,link,textovalor;
+		var idreg,idsalva,paramsalva,i,res="",ntemas,resultados,nres,cor,j,nitens,k,atualN = "todas",inicio=0,numResultados = 0,tip,link,textovalor;
 
 		if($i("i3GEOFidentificaNocorrencias"))
 		{atualN = $i("i3GEOFidentificaNocorrencias").value;}
@@ -656,13 +656,22 @@ i3GEOF.identifica = {
 					for(j=inicio;j<nres;j++)
 					{
 						nitens = resultados[j].length;
+						//pega o valor do item que e o id unico no sistema METAESTAT
+						idreg = "";
+						for(k=0;k<nitens;k++){
+							if(resultados[j][k].item === retorno[i].colunaidunico){
+								idreg = resultados[j][k].valor;
+							}
+						}
 						for(k=0;k<nitens;k++){
 							tip = "&nbsp;&nbsp;";
 							textovalor = resultados[j][k].valor;
-							if(resultados[j][k].item === retorno[i].editavel){
+							if(resultados[j][k].item === retorno[i].editavel && idreg != ""){
+								idsalva = "idsalva"+retorno[i].codigo_tipo_regiao+"_"+retorno[i].id_medida_variavel+"_"+idreg;
+								paramsalva = retorno[i].id_medida_variavel+","+idreg+",\""+retorno[i].editavel+"\","+retorno[i].codigo_tipo_regiao;
 								textovalor = "<br><img title='' src='"+i3GEO.configura.locaplic+"/imagens/branco.gif' style='margin-right:2px;position:relative;top:3px;width:12px;'>" +
-									"<img title='Salvar' src='"+i3GEO.configura.locaplic+"/imagens/oxygen/16x16/media-floppy.png' style='cursor:pointer;margin-right:2px;position:relative;top:3px;width:12px;'>" +
-									"<input type=text value='"+textovalor+"' class=digitar style='widh:210px' />";
+									"<img onclick='i3GEOF.identifica.salvaDados("+paramsalva+")' title='Salvar' src='"+i3GEO.configura.locaplic+"/imagens/oxygen/16x16/media-floppy.png' style='cursor:pointer;margin-right:2px;position:relative;top:3px;width:12px;'>" +
+									"<input id='"+idsalva+"' type=text value='"+textovalor+"' class=digitar style='widh:210px' />";
 							}
 							if(resultados[j][k].tip && resultados[j][k].tip.toLowerCase() == "sim"){
 								tip = "<img style='margin-right:2px;position:relative;top:3px;width:12px;' src='"+i3GEO.configura.locaplic+"/imagens/tips.png' title='Etiqueta ativa' />";
@@ -694,6 +703,23 @@ i3GEOF.identifica = {
 			if(ntemas == 1)
 			{res = i3GEOF.identifica.montaOpcoesIdentificaOcorrencia(atualN,numResultados) + res;}
 			$i("i3GEOidentificaocorrencia").innerHTML=res;
+		}
+	},
+	salvaDados: function(id_medida_variavel,idreg,coluna,codigo_tipo_regiao,tema){
+		var p = i3GEO.configura.locaplic+"/admin/php/metaestat.php?funcao=salvaAtributosMedidaVariavel",
+			idvalor = $i("idsalva"+codigo_tipo_regiao+"_"+id_medida_variavel+"_"+idreg),
+			temp = function(retorno){
+				i3GEO.janela.fechaAguarde("aguardeSalvaAtributos");
+				i3GEO.Interface.atualizaTema("",i3GEOF.identifica.tema);
+			};
+		if(idvalor){
+			i3GEO.janela.AGUARDEMODAL = true;
+			i3GEO.janela.abreAguarde("aguardeSalvaAtributos","Salvando...");
+			i3GEO.janela.AGUARDEMODAL = false;
+			cpJSON.call(p,"foo",temp,"&codigo_tipo_regiao="+codigo_tipo_regiao+"&identificador_regiao=&id_medida_variavel="+id_medida_variavel+"&colunas="+coluna+"&valores="+idvalor.value+"&idsunicos="+idreg);
+		}
+		else{
+			alert("ocorreu um erro");
 		}
 	},
 	montaOpcoesIdentificaOcorrencia: function(atual,nres){

@@ -272,7 +272,13 @@ class Metaestat{
 		}
 		if($agregaregiao == false){
 			if($todasascolunas == 0){
-				$sql = " SELECT d.".$dados["colunavalor"].",d.".$dados["colunaidgeo"];
+				if($dados["colunaidunico"] != $dados["colunaidgeo"]){
+					$sql = " SELECT d.".$dados["colunaidunico"].",d.".$dados["colunavalor"].",d.".$dados["colunaidgeo"];
+					$colunas[] = $dados["colunaidunico"];
+				}
+				else{
+					$sql = " SELECT d.".$dados["colunavalor"].",d.".$dados["colunaidgeo"];
+				}
 				$colunas[] = $dados["colunavalor"];
 				$colunas[] = $dados["colunaidgeo"];
 				if(!empty($agruparpor)){
@@ -343,7 +349,12 @@ class Metaestat{
 				$sql .= " FROM (SELECT $tipoconta(".$dados["colunavalor"].") as ".$dados["colunavalor"].",sb.".$dadosAgregacao["colunaligacao_regiaopai"]." FROM ".$dados["esquemadb"].".".$dados["tabela"]." as sa,".$dadosgeo["esquemadb"].".".$dadosgeo["tabela"]." as sb WHERE	sa.".$dados["colunaidgeo"]." = sb.".$dadosgeo["identificador"]." __dadosfiltro__ group by sb.".$dadosAgregacao["colunaligacao_regiaopai"].") as d ";
 			}
 			else{
-				$sqlgeo .= " FROM (SELECT ".$dados["colunavalor"].",".$dados["colunaidgeo"]." FROM ".$dados["esquemadb"].".".$dados["tabela"] ." __dadosfiltro__ ) as d, ".$dadosgeo["esquemadb"].".".$dadosgeo["tabela"]." as g";
+				if($dados["colunaidgeo"] == $dados["colunaidunico"]){
+					$sqlgeo .= " FROM (SELECT ".$dados["colunavalor"].",".$dados["colunaidgeo"]." FROM ".$dados["esquemadb"].".".$dados["tabela"] ." __dadosfiltro__ ) as d, ".$dadosgeo["esquemadb"].".".$dadosgeo["tabela"]." as g";
+				}
+				else{
+					$sqlgeo .= " FROM (SELECT ".$dados["colunavalor"].",".$dados["colunaidgeo"].",".$dados["colunaidunico"]." FROM ".$dados["esquemadb"].".".$dados["tabela"] ." __dadosfiltro__ ) as d, ".$dadosgeo["esquemadb"].".".$dadosgeo["tabela"]." as g";
+				}
 				$sql .= " FROM (SELECT ".$dados["colunavalor"].",".$dados["colunaidgeo"]." FROM ".$dados["esquemadb"].".".$dados["tabela"] ." __dadosfiltro__ ) as d ";
 			}
 		}
@@ -381,7 +392,7 @@ class Metaestat{
 			$sqlgeo = $colunageo." from ( ".$sqlgeo." __filtro__  ) as foo using unique ".$dadosAgregacao["colunaligacao_regiaopai"]." using srid=".$dadosgeo["srid"];
 		}
 		else{
-			$sqlgeo = $colunageo." from (".$sqlgeo." __filtro__ ) as foo using unique ".$dados["colunaidgeo"]." using srid=".$dadosgeo["srid"];
+			$sqlgeo = $colunageo." from (".$sqlgeo." __filtro__ ) as foo using unique ".$dados["colunaidunico"]." using srid=".$dadosgeo["srid"];
 		}
 		//echo $sqlgeo;exit;
 		return array("sqlagrupamento"=>$sqlagrupamento,"sql"=>$sql,"sqlmapserver"=>$sqlgeo,"filtro"=>$filtro,"colunas"=>$colunas,"alias"=>$alias,"colunavalor"=>$dados["colunavalor"],"titulo"=>$titulo);
@@ -1868,7 +1879,10 @@ class Metaestat{
 			}
 			if($id != ""){
 				$s = "UPDATE i3geo_metaestat.".$medida["tabela"]." SET ".implode(",",$sets);
-				$s .= " WHERE ".$medida["colunaidunico"]."::text = '".$id."' AND ".$medida["colunaidgeo"]."::text = '".$identificador_regiao."'";
+				$s .= " WHERE ".$medida["colunaidunico"]."::text = '".$id."'";
+				if(!empty($identificador_regiao)){
+					$s .= " AND ".$medida["colunaidgeo"]."::text = '".$identificador_regiao."'";
+				}
 				if($medida["filtro"] != ""){
 					$s .= " AND ".$medida["filtro"];
 				}
