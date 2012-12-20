@@ -351,7 +351,9 @@ i3GEOF.identifica = {
 		ins += '	<div class=guiaobj id="i3GEOidentificaguia2obj" style="left:1px">';
 		ins += '	</div>';
 		ins += '	<div class=guiaobj id="i3GEOidentificaguia3obj" style="left:1px;top:10px;display:none;font-size:12px;overflow:hidden" >';
-		ins += '		Resolu&ccedil;&atilde;o de busca - n&uacute;mero de pixels, no entorno do ponto clicado no mapa, que ser&atilde;o utilizados na busca de dados:<br>  <input onclick="javascript:this.select();" type=text class=digitar value=5 id="i3GEOidentificaresolucao" size=2 />';
+		ins += '		Resolu&ccedil;&atilde;o de busca - n&uacute;mero de pixels, no entorno do ponto clicado no mapa, que ser&atilde;o utilizados na busca de dados:<br><br>'
+		ins += '&nbsp;&nbsp;'+$inputText("","10","i3GEOidentificaresolucao","","5","5");
+		//<input onclick="javascript:this.select();" type=text class=digitar value=5 id="i3GEOidentificaresolucao" size=2 />';
 		ins += '	</div>';
 		ins += '	<div class=guiaobj id="i3GEOidentificaguia4obj" style="left:1px;top:10px;display:none;font-size:12px;overflow:hidden" >';
 		ins += '		As etiquetas s&atilde;o mostradas quando o mouse &eacute; estacionado sobre um elemento.';
@@ -660,7 +662,7 @@ i3GEOF.identifica = {
 							if(resultados[j][k].item === retorno[i].editavel){
 								textovalor = "<br><img title='' src='"+i3GEO.configura.locaplic+"/imagens/branco.gif' style='margin-right:2px;position:relative;top:3px;width:12px;'>" +
 									"<img title='Salvar' src='"+i3GEO.configura.locaplic+"/imagens/oxygen/16x16/media-floppy.png' style='cursor:pointer;margin-right:2px;position:relative;top:3px;width:12px;'>" +
-									"<input size=30 type=text value='"+textovalor+"' class=digitar />";
+									"<input type=text value='"+textovalor+"' class=digitar style='widh:210px' />";
 							}
 							if(resultados[j][k].tip && resultados[j][k].tip.toLowerCase() == "sim"){
 								tip = "<img style='margin-right:2px;position:relative;top:3px;width:12px;' src='"+i3GEO.configura.locaplic+"/imagens/tips.png' title='Etiqueta ativa' />";
