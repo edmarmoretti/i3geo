@@ -6,6 +6,7 @@
 <meta name="description" content="i3Geo" />
 <meta name="keywords" content="i3geo mapa geoprocessamento" />
 <META HTTP-EQUIV="Content-Type" CONTENT="text/html; charset=ISO-8859-1">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
 <?php
 $cache_expire = 1;
 header("Pragma: public");
@@ -70,7 +71,7 @@ h1 {
 
 		<a target=_blank href="remover.php"><table class="r">
 				<tr>
-					<td><img src="../imagens/oxygen/22x22/dialog-close" /><br> <script>document.write($trad(1,g_traducao_init));</script></a>
+					<td><img src="../imagens/oxygen/22x22/dialog-close.png" /><br> <script>document.write($trad(1,g_traducao_init));</script></a>
 					</td>
 				</tr>
 			</table> </a> <a target=_blank href="../testainstal.php"><table class="r">
