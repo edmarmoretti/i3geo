@@ -6,7 +6,7 @@
 <meta name="description" content="i3Geo" />
 <meta name="keywords" content="i3geo mapa geoprocessamento" />
 <META HTTP-EQUIV="Content-Type" CONTENT="text/html; charset=ISO-8859-1">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="viewport" content="width=device-width, initial-scale=0.8">
 <?php
 $cache_expire = 1;
 header("Pragma: public");
@@ -19,7 +19,7 @@ include("../ms_configura.php");
 <script type="text/javascript" src="dicionario.js"></script>
 <style>
 body {
-	margin: 0.5 cm;
+	margin: 0.5 cm auto;
 	padding-top: 12px;
 	COLOR: #2F4632;
 	text-align: center;
@@ -55,6 +55,9 @@ h1 {
 #bandeiras {
 	width: 80px;
 	text-align: left;
+}
+a {
+margin: 0px auto;
 }
 </style>
 </head>
@@ -170,6 +173,7 @@ h1 {
 					</td>
 				</tr>
 			</table> </a>
+
 	</div>
 </body>
 <script>
