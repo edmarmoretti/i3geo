@@ -6,7 +6,7 @@
 <meta name="description" content="i3Geo" />
 <meta name="keywords" content="i3geo mapa geoprocessamento" />
 <META HTTP-EQUIV="Content-Type" CONTENT="text/html; charset=ISO-8859-1">
-<meta name="viewport" content="width=device-width, initial-scale=0.8">
+<meta name="viewport" content="width=device-width, initial-scale=1.2">
 <?php
 $cache_expire = 1;
 header("Pragma: public");
@@ -62,7 +62,6 @@ margin: 0px auto;
 </style>
 </head>
 <body style="background-color: white;">
-
 	<div id="conteudo"
 		style="background-color: white; background-image: url(../imagens/i3geo1bw.jpg);">
 		<?php
