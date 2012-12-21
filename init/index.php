@@ -6,7 +6,7 @@
 <meta name="description" content="i3Geo" />
 <meta name="keywords" content="i3geo mapa geoprocessamento" />
 <META HTTP-EQUIV="Content-Type" CONTENT="text/html; charset=ISO-8859-1">
-<meta name="viewport" content="width=device-width, initial-scale=1.2">
+<meta name="viewport" content="width=device-width, initial-scale=2">
 <?php
 $cache_expire = 1;
 header("Pragma: public");
