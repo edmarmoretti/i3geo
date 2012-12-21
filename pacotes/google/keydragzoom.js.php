@@ -6,7 +6,7 @@
  * @fileoverview This library adds a drag zoom capability to a Google map.
  *  When drag zoom is enabled, holding down a user-defined hot key <code>(shift | ctrl | alt)</code>
  *  while dragging a box around an area of interest will zoom the map
- *  to that area when the hot key is released. 
+ *  to that area when the hot key is released.
  *  Only one line of code is needed: <code>google.maps.Map.enableKeyDragZoom();</code>
  *  <p>
  *  Note that if the map's container has a border around it, the border widths must be specified
@@ -35,7 +35,7 @@
    * in an MSIE environment. Not called for other browsers
    * because getComputedStyle() returns pixel widths automatically.
    * @param {String} widthValue
-   */ 
+   */
   var toPixels = function (widthValue) {
     var px;
     switch (widthValue) {
@@ -172,7 +172,7 @@
       div.style.filter = "alpha(opacity=" + (div.style.opacity * 100) + ")";
     }
   };
-    
+
   /**
    * @name KeyDragZoomOptions
    * @class This class represents the optional parameter passed into <code>google.maps.Map.enableDragBoxZoom</code>.
@@ -206,7 +206,7 @@
     this.prjov_ = ov;
   }
   /**
-   * Init the tool. 
+   * Init the tool.
    * @param {google.maps.Map} map
    * @param {KeyDragZoomOptions} opt_zoomOpts
    */
@@ -226,7 +226,7 @@
       opacity: 0.0,
       cursor: 'crosshair'
     });
-    // allow overwrite 
+    // allow overwrite
     setVals(this.paneDiv_.style, opt_zoomOpts.paneStyle);
     // stuff that cannot be overwritten
     setVals(this.paneDiv_.style, {
@@ -263,7 +263,7 @@
     });
     this.keyUpListener_ = google.maps.event.addDomListener(document, 'keyup', function (e) {
       me.onKeyUp_(e);
-    }); 
+    });
     this.mouseDownListener_ = google.maps.event.addDomListener(this.paneDiv_, 'mousedown', function (e) {
       me.onMouseDown_(e);
     });
@@ -274,9 +274,9 @@
       me.onMouseMove_(e);
     });
     this.mouseUpListener_ = google.maps.event.addDomListener(document, 'mouseup', function (e) {
-      me.onMouseUp_(e); 
+      me.onMouseUp_(e);
     });
-  
+
     this.hotKeyDown_ = false;
     this.dragging_ = false;
     this.startPt_ = null;
@@ -287,7 +287,7 @@
     this.mapPosn_ = getElementPosition(this.map_.getDiv());
     this.mouseDown_ = false;
   };
- 
+
   /**
    * Returns true if the hot key is being pressed when an event occurs.
    * @param {Event} e
@@ -324,9 +324,9 @@
     }
     return isHot;
   };
-  
+
   /**
-   * Checks if the mouse is on top of the map. The position is captured 
+   * Checks if the mouse is on top of the map. The position is captured
    * in onMouseMove_.
    * @return true if mouse is on top of the map div.
    */
@@ -342,7 +342,7 @@
       return false;
     }
   };
-  
+
   /**
    * Show or hide the overlay pane, depending on whether the mouse is over the map.
    */
@@ -367,10 +367,12 @@
   DragZoom.prototype.onKeyDown_ = function (e) {
     var me = this;
     if (this.map_ && !this.hotKeyDown_ && this.isHotKeyDown_(e)) {
+      //desativa o clique permanente
+      i3GEO.eventos.cliquePerm.desativa();
       me.hotKeyDown_ = true;
       me.setPaneVisibility_();
      /**
-       * This event is fired when the hot key is pressed. 
+       * This event is fired when the hot key is pressed.
        * @name DragZoom#activate
        * @event
        */
@@ -406,7 +408,7 @@
       var prj = this.prjov_.getProjection();
       var latlng = prj.fromDivPixelToLatLng(this.startPt_);
       /**
-       * This event is fired when the drag operation begins. 
+       * This event is fired when the drag operation begins.
        * @name DragZoom#dragstart
        * @param {GLatLng} startLatLng
        * @event
@@ -441,14 +443,14 @@
       /**
        * This event is repeatedly fired while the user drags the box. The southwest and northeast
        * point are passed as parameters of type <code>google.maps.Point</code> (for performance reasons),
-       * relative to the map container. Note: the event listener is responsible 
+       * relative to the map container. Note: the event listener is responsible
        * for converting Pixel to LatLng, if necessary.
-       * @name DragZoom#drag 
+       * @name DragZoom#drag
        * @param {google.maps.Point} southwestPixel
        * @param {google.maps.Point} northeastPixel
        * @event
        */
-      google.maps.event.trigger(this, 'drag', new google.maps.Point(left, top + height), new google.maps.Point(left + width, top)); 
+      google.maps.event.trigger(this, 'drag', new google.maps.Point(left, top + height), new google.maps.Point(left + width, top));
     } else if (!this.mouseDown_) {
       this.setPaneVisibility_();
     }
@@ -459,13 +461,15 @@
    */
   DragZoom.prototype.onMouseUp_ = function (e) {
     this.mouseDown_ = false;
+      //desativa o clique permanente
+      i3GEO.eventos.cliquePerm.ativa();
     if (this.dragging_) {
       var left = Math.min(this.startPt_.x, this.endPt_.x);
       var top = Math.min(this.startPt_.y, this.endPt_.y);
       var width = Math.abs(this.startPt_.x - this.endPt_.x);
       var height = Math.abs(this.startPt_.y - this.endPt_.y);
       var prj = this.prjov_.getProjection();
-      // 2009-05-29: since V3 does not have fromContainerPixel, 
+      // 2009-05-29: since V3 does not have fromContainerPixel,
       //needs find offset here
       var containerPos = getElementPosition(this.map_.getDiv());
       var mapPanePos = getElementPosition(this.prjov_.getPanes().mapPane);
@@ -478,7 +482,7 @@
       this.dragging_ = false;
       this.boxDiv_.style.display = 'none';
       /**
-       * This event is fired when the drag operation ends. 
+       * This event is fired when the drag operation ends.
        * Note that the event is not fired if the hot key is released before the drag operation ends.
        * @name DragZoom#dragend
        * @param {GLatLngBounds} newBounds
@@ -487,7 +491,7 @@
       google.maps.event.trigger(this, 'dragend', bnds);
     }
   };
- 
+
   /**
    * Handle key up.
    * @param {Event} e
@@ -500,16 +504,16 @@
       this.paneDiv_.style.display = "none";
       /**
        * This event is fired while the user release the key
-       * @name DragZoom#deactivate 
+       * @name DragZoom#deactivate
        * @event
        */
-      google.maps.event.trigger(this, 'deactivate'); 
+      google.maps.event.trigger(this, 'deactivate');
     }
   };
-  
-  
 
-            
+
+
+
   /**
    * @name google.maps.Map
    * @class These are new methods added to the Google Maps API's
@@ -518,10 +522,10 @@
    */
   /**
    * Enable drag zoom. The user can zoom to an area of interest by holding down the hot key
-   * <code>(shift | ctrl | alt )</code> while dragging a box around the area. 
+   * <code>(shift | ctrl | alt )</code> while dragging a box around the area.
    * @param {KeyDragZoomOptions} opt_zoomOpts
    */
-  
+
   google.maps.Map.prototype.enableKeyDragZoom = function (opt_zoomOpts) {
     this.dragZoom_ = new DragZoom(this, opt_zoomOpts);
   };
