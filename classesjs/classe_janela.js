@@ -349,6 +349,7 @@ i3GEO.janela = {
 			{temp.style.paddingRight = "0px";}
 			temp.style.width = parseInt(temp.style.width,10) - 2 + "px";
 		}
+		YAHOO.util.Event.addListener($i(id), "click", YAHOO.util.Event.stopPropagation);
 		//finaliza
 		if(funcaoCabecalho)
 		{$i(id+'_cabecalho').onclick = funcaoCabecalho;}

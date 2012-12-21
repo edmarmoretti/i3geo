@@ -2017,6 +2017,13 @@ pt:"Vers&atilde;o",
 en:"",
 es:"",
 it:""
+}],
+"x69":[
+{
+pt:"Pressione a tecla CTRL junto com o bot&atilde;o esquerdo do mouse e arraste para definir a &aacute;rea de zoom",
+en:"",
+es:"",
+it:""
 }]
 };
 //YAHOO.log("carregou dicionario", "Classes i3geo");

@@ -112,6 +112,8 @@ i3GEO.navega = {
 			xy = i3GEO.calculo.dd2tela(xy[0]*1,xy[1]*1,$i(i3GEO.Interface.IDMAPA),i3GEO.parametros.mapexten,i3GEO.parametros.pixelsize);
 			i3GEO.util.criaPin("i3GeoCentroDoMapa",i3GEO.configura.locaplic+'/imagens/alvo.png','30px','30px');
 			i3GEO.util.posicionaImagemNoMapa("i3GeoCentroDoMapa",xy[0],xy[1]);
+			//FIXME ao passar sobre a marca de centro na operacao de pan dispara o evento que finaliza o pan
+			//YAHOO.util.Event.addListener($i("i3GeoCentroDoMapa"), "mouseover", function(){$i("i3GeoCentroDoMapa").style.display="none";});
 		}
 	},
 	/*

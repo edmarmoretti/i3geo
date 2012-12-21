@@ -760,6 +760,7 @@ i3GEO.guias = {
 			temp.width = "0px"; //config.larguraGuiaMovel + "px";
 			temp.height = config.alturaGuiaMovel + "px";
 			temp.backgroundColor = "white";
+			temp.boxShadow = "0 8px 10px 0 #888888";
 
 			temp = $i("i3GEOguiaMovelPuxador").style;
 			temp.top = ((config.alturaGuiaMovel  - config.alturaPuxador) / 2 ) + "px";

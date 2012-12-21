@@ -702,7 +702,7 @@ i3GEO.configura = {
 			funcaoonclick:function(){
 				if(i3GEO.Interface.ATUAL === "googlemaps"){
 					//alert("Pressione a tecla CTRL junto com o bot&atilde;o esquerdo do mouse");
-					i3GEO.janela.tempoMsg("Pressione a tecla CTRL junto com o bot&atilde;o esquerdo do mouse e arraste para definir a &aacute;rea de zoom");
+					i3GEO.janela.tempoMsg($trad("x69"));
 					g_tipoacao='pan';
 					g_operacao='navega';
 					i3GEO.barraDeBotoes.ativaIcone("pan");
@@ -733,6 +733,8 @@ i3GEO.configura = {
 		},
 		{
 			//Ativa o bot&atilde;o que realiza a opera&ccedil;&atilde;o de deslocamento (pan).
+			//ao fazer o pan e motrada uma marca no centro do mapa, veja em
+			//i3GEO.navega.marcaCentroDoMapa
 			iddiv:"pan",
 			tipo:"dinamico",
 			dica:$trad("d4"),

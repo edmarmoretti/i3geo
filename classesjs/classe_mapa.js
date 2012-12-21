@@ -79,10 +79,17 @@ i3GEO.mapa = {
 		}
 		novoel.src = imagem;
 		novoel.id = "i3GEOdobraPagina";
-		if(tipo === "googlemaps")
-		{novoel.onclick = function(){i3GEO.Interface.atual2gm.inicia();};}
-		if(tipo === "openlayers")
-		{novoel.onclick = function(){i3GEO.Interface.atual2ol.inicia();};}
+		YAHOO.util.Event.addListener(novoel, "click", YAHOO.util.Event.stopPropagation);
+		if(tipo === "googlemaps"){
+			novoel.onclick = function(evt){
+				i3GEO.Interface.atual2gm.inicia();
+			};
+		}
+		if(tipo === "openlayers"){
+			novoel.onclick = function(evt){
+				i3GEO.Interface.atual2ol.inicia();
+			};
+		}
 		novoel.style.cursor = "pointer";
 		novoel.style.position = "absolute";
 		novoel.style.top = i3GEO.parametros.h - 35 + "px";
