@@ -6,7 +6,7 @@
 <meta name="description" content="i3Geo" />
 <meta name="keywords" content="i3geo mapa geoprocessamento" />
 <META HTTP-EQUIV="Content-Type" CONTENT="text/html; charset=ISO-8859-1">
-<meta name="viewport" content="width=device-width, initial-scale=2">
+<meta name="viewport" content="width=device-width, initial-scale=1">
 <?php
 $cache_expire = 1;
 header("Pragma: public");
@@ -179,6 +179,6 @@ margin: 0px auto;
 i3GEO.configura.locaplic = "..";
 i3GEO.idioma.IDSELETOR = "bandeiras";
 i3GEO.idioma.mostraSeletor();
-$i("conteudo").style.height = screen.availHeight + "px";
+$i("conteudo").style.height = i3GEO.util.getScrollHeight() + "px";
 </script>
 </html>

@@ -1255,10 +1255,9 @@ i3GEO.util = {
 
 	Return:
 
-	altura
+	largura
 	*/
 	getScrollerWidth: function() {
-		if(typeof(console) !== 'undefined'){console.info("i3GEO.util.getScrollerWidth()");}
 		var scr = null,
 			inn = null,
 			wNoScroll = 0,
@@ -1289,6 +1288,38 @@ i3GEO.util = {
 		document.body.removeChild(document.body.lastChild);
 		// Pixel width of the scroller
 		return (wNoScroll - wScroll);
+	},
+	/*
+	Function: getScrollHeight
+
+	Calcula o tamanho vertical do browser
+
+	http://w3schools.invisionzone.com/index.php?showtopic=45977
+
+	Return:
+
+	altura
+	*/
+	getScrollHeight: function() {
+		var mx = Math.max,d=document;
+		return mx(
+				mx(d.body.scrollHeight, d.documentElement.scrollHeight),
+				mx(d.body.offsetHeight, d.documentElement.offsetHeight),
+				mx(d.body.clientHeight, d.documentElement.clientHeight)
+		);
+
+		/*
+		var maxDisplacement=0;
+		window.scrollTo(0,10000000);
+		if( typeof self.pageYOffset!='undefined' )
+			maxDisplacement=self.pageYOffset;
+		else if( document.compatMode && document.compatMode != 'BackCompat' )
+			maxDisplacement=document.documentElement.scrollTop ;
+		else if( document.body && typeof(document.body.scrollTop)!='undefined' )
+			maxDisplacement=document.body.scrollTop;
+		window.scrollTo(0,0);
+		return maxDisplacement;
+		*/
 	},
 	/*
 	Function: scriptTag
@@ -2491,7 +2522,7 @@ i3GEO.util = {
 			c = DetectaMobile("DetectMobileLong");
 		if(c === false)
 		{return false;}
-		p = confirm("Direciona para a versao adaptada para tablets?");
+		p = confirm("Direciona para a versao adaptada para dispositivos moveis?");
 		if(p){
 			window.location = i3GEO.configura.locaplic+'/interface/'+i3GEO.Interface.ALTTABLET+'?'+i3GEO.configura.sid;
 			return true;
