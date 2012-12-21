@@ -340,6 +340,18 @@ i3GEO.Interface = {
 		i3GEO.Interface[i3GEO.Interface.ATUAL].atualizaTema(retorno,tema);
 	},
 	/*
+	Function: ligaDesliga
+
+	Liga/desliga um tema
+
+	Parametros:
+
+	{object} objeto do tipo checkbox que foi acionado na arvore de camadas
+	*/
+	ligaDesliga: function(obj){
+		i3GEO.Interface[i3GEO.Interface.ATUAL].ligaDesliga(obj);
+	},
+	/*
 	Function: adicionaKml
 
 	Aplica o m&eacute;todo de adi&ccedil;&atilde;o de kml ao mapa conforme a interface atual
@@ -701,7 +713,7 @@ i3GEO.Interface = {
 			};
 			//corrigido na vers&atilde;o 4.7 do i3geo (n&atilde;o tinha o if)
 			if(i3GEO.arvoreDeCamadas.ATIVATEMA === "")
-			{i3GEO.arvoreDeCamadas.ATIVATEMA = "i3GEO.Interface.openlayers.ligaDesliga(this);i3GEO.eventos.executaEventos(i3GEO.eventos.ATUALIZAARVORECAMADAS);";}
+			{i3GEO.arvoreDeCamadas.ATIVATEMA = "i3GEO.Interface.ligaDesliga(this);i3GEO.eventos.executaEventos(i3GEO.eventos.ATUALIZAARVORECAMADAS);";}
 			i3GEO.util.multiStep([
 					i3GEO.coordenadas.mostraCoordenadas,
 					montaMapa,
@@ -1491,7 +1503,7 @@ i3GEO.Interface = {
 					i3GEO.util.arvore("<b>"+$trad("p13")+"</b>","listaPropriedades",i3GEO.configura.listaDePropriedadesDoMapa);
 				}
 				if(i3GEO.arvoreDeCamadas.ATIVATEMA === "")
-				{i3GEO.arvoreDeCamadas.ATIVATEMA = "i3GEO.Interface.googlemaps.ligaDesliga(this)";}
+				{i3GEO.arvoreDeCamadas.ATIVATEMA = "i3GEO.Interface.ligaDesliga(this)";}
 				i3GEO.arvoreDeCamadas.cria("",i3GEO.arvoreDeCamadas.CAMADAS,i3GEO.configura.sid,i3GEO.configura.locaplic);
 				if(i3GEO.arvoreDeCamadas.MOSTRALISTAKML === true)
 				{i3GEO.Interface.googlemaps.adicionaListaKml();}
