@@ -547,6 +547,10 @@ i3GEOF.identifica = {
 	*/
 	buscaDadosTema: function(tema){
 		var res,opcao,resolucao,listaDeTemas="",temp;
+		if(tema == ""){
+			i3GEOF.identifica.criaJanelaFlutuante();
+			return;
+		}
 		try{
 			$i("i3GEOidentificaocorrencia").innerHTML = "<img src='"+i3GEO.configura.locaplic+"/imagens/aguarde.gif' />";
 			res = $i("i3GEOidentificaresolucao");

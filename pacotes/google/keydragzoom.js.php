@@ -461,9 +461,9 @@
    */
   DragZoom.prototype.onMouseUp_ = function (e) {
     this.mouseDown_ = false;
+    if (this.dragging_) {
       //desativa o clique permanente
       i3GEO.eventos.cliquePerm.ativa();
-    if (this.dragging_) {
       var left = Math.min(this.startPt_.x, this.endPt_.x);
       var top = Math.min(this.startPt_.y, this.endPt_.y);
       var width = Math.abs(this.startPt_.x - this.endPt_.x);

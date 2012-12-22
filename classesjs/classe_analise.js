@@ -388,7 +388,6 @@ i3GEO.analise = {
 						}
 						if(i3GEO.Interface.ATUAL === "googleearth")
 						{i3GEO.Interface.googleearth.insereMarca(d+" km",objposicaocursor.ddx,objposicaocursor.ddy,"","divGeometriasTemp");}
-
 					}
 					//cria a linha ligando os dois ultimos pontos
 					if(i3GEO.Interface.ATUAL === "googleearth"){

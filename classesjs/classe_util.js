@@ -671,7 +671,7 @@ i3GEO.util = {
 	array[top,left] - valores em pixel da posicao calculada da imagem
 	*/
 	posicionaImagemNoMapa: function(id,x,y){
-		if(typeof(console) !== 'undefined'){console.info("i3GEO.util.posicionaImagemNoMapa()");}
+		if(typeof(console) !== 'undefined'){console.warn("i3GEO.util.posicionaImagemNoMapa()");}
 		var i,mx,my;
 		if(x && x != "")
 		{objposicaocursor.telax = x;}
@@ -680,10 +680,11 @@ i3GEO.util = {
 		i = $i(id);
 		mx = parseInt(i.style.width,10) / 2;
 		my = parseInt(i.style.height,10) / 2;
+		//alert(objposicaocursor.telax+" "+objposicaocursor.telay)
 		i.style.position = "absolute";
-		i.style.top = objposicaocursor.telay - my + "px";
+		i.style.top = objposicaocursor.telay + "px";
 		i.style.left = objposicaocursor.telax - mx + "px";
-		return [objposicaocursor.telay - my,objposicaocursor.telax - mx];
+		return [objposicaocursor.telay + my,objposicaocursor.telax - mx];
 	},
 	/*
 	Function: escondePin

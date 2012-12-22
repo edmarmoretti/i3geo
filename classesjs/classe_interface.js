@@ -1463,6 +1463,16 @@ i3GEO.Interface = {
 				catch(e){alert(e);return;}
 				if(dobra)
 				{$i(i3GEO.Interface.IDMAPA).appendChild(dobra);}
+
+				i3GeoMap.setMapTypeId(i3GEO.Interface.googlemaps.TIPOMAPA);
+				sw = new google.maps.LatLng(ret[1],ret[0]);
+				ne = new google.maps.LatLng(ret[3],ret[2]);
+
+				i3GeoMap.fitBounds(new google.maps.LatLngBounds(sw,ne));
+
+				//FIXME Isso provoca um loop infinito e trava
+				//i3GeoMap.setZoom(i3GeoMap.getZoom()+1);
+
 				//
 				//carrega o javascript que permite fazer o zoom por box
 				//
@@ -1470,11 +1480,6 @@ i3GEO.Interface = {
 					js = i3GEO.configura.locaplic+"/pacotes/google/keydragzoom.js.php";
 					i3GEO.util.scriptTag(js,"i3GEO.Interface.googlemaps.ativaZoomBox()","keydragzoom_script");
 				}
-				i3GeoMap.setMapTypeId(i3GEO.Interface.googlemaps.TIPOMAPA);
-				sw = new google.maps.LatLng(ret[1],ret[0]);
-				ne = new google.maps.LatLng(ret[3],ret[2]);
-				i3GeoMap.fitBounds(new google.maps.LatLngBounds(sw,ne));
-
 				i3GeoMapOverlay = new google.maps.OverlayView();
 				i3GeoMapOverlay.draw = function() {};
 
@@ -1785,6 +1790,7 @@ i3GEO.Interface = {
 				sw = new google.maps.LatLng(ret[1],ret[0]),
 				ne = new google.maps.LatLng(ret[3],ret[2]);
 			i3GeoMap.fitBounds(new google.maps.LatLngBounds(sw,ne));
+			//i3GeoMap.setZoom(i3GeoMap.getZoom()+1);
 		},
 		pan2ponto: function(x,y){
 			i3GeoMap.panTo(new google.maps.LatLng(y,x));
