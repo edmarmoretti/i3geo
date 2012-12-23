@@ -2020,7 +2020,14 @@ it:""
 }],
 "x69":[
 {
-pt:"Pressione a tecla CTRL junto com o bot&atilde;o esquerdo do mouse e arraste para definir a &aacute;rea de zoom",
+pt:"Pressione a tecla CTRL junto com o bot&atilde;o esquerdo do mouse e arraste para definir a &aacute;rea que será aproximada",
+en:"",
+es:"",
+it:""
+}],
+"x70":[
+{
+pt:"Utilize os dedos em um movimento de pin&ccedil;a para definir a &aacute;rea que ser&aacute; aproximada ou afastada",
 en:"",
 es:"",
 it:""

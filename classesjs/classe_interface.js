@@ -688,6 +688,7 @@ i3GEO.Interface = {
 				//
 				if(i3GEO.Interface.TABLET === false){
 					i3GEO.Interface.openlayers.OLpan = new OpenLayers.Control.Navigation();
+					//OpenLayers.Handler.MOD_SHIFT = OpenLayers.Handler.MOD_CTRL;
 					i3GEO.Interface.openlayers.OLzoom = new OpenLayers.Control.ZoomBox();
 					i3GEO.Interface.openlayers.OLpanel = new OpenLayers.Control.Panel();
 					i3GEO.Interface.openlayers.OLpanel.addControls([i3GEO.Interface.openlayers.OLpan,i3GEO.Interface.openlayers.OLzoom]);

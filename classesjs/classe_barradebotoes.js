@@ -558,14 +558,6 @@ i3GEO.barraDeBotoes = {
 		if(i3GEO.barraDeBotoes.ATIVA === false){
 			return;
 		}
-		//
-		//desativa a fun&ccedil;&atilde;o de zoom por box nativa do OpenLayers
-		//
-		if(i3GEO.Interface.ATUAL==="openlayers"){
-			try
-			{i3GEO.Interface.openlayers.OLzoom.deactivate();}
-			catch(e){}
-		}
 		var estilo,temp,ist,cor,ko;
 		this.BOTAOCLICADO = icone;
 		ko = this.LISTABOTOES.length-1;
