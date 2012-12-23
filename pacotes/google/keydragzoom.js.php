@@ -2,7 +2,7 @@
 /**
  * @name Key Drag Zoom for V3
  * @version 1.0
- * @author: Nianwei Liu [nianwei at gmail dot com] & Gary Little [gary at luxcentral dot com]
+ * @author: Nianwei Liu [nianwei at gmail dot com] e Gary Little [gary at luxcentral dot com]
  * @fileoverview This library adds a drag zoom capability to a Google map.
  *  When drag zoom is enabled, holding down a user-defined hot key <code>(shift | ctrl | alt)</code>
  *  while dragging a box around an area of interest will zoom the map

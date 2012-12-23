@@ -1560,8 +1560,7 @@ i3GEO.Interface = {
 			i3GeoMap.overlayMapTypes.insertAt(indice, i);
 		},
 		registraEventos: function(){
-			var pos,
-				modoAtual = "";
+			var modoAtual = "";
 			google.maps.event.addListener(i3GeoMap, "dragstart", function() {
 				g_operacao = "";
 				g_tipoacao = "";
@@ -1598,9 +1597,9 @@ i3GEO.Interface = {
 				xy = i3GEO.navega.centroDoMapa();
 				i3GEO.coordenadas.mostraCoordenadas(false,"",xy[0],xy[1]);
 			});
-			pos = i3GEO.util.pegaPosicaoObjeto($i(i3GEO.Interface.IDMAPA));
 			google.maps.event.addListener(i3GeoMap, "mousemove", function(ponto) {
-				var teladms,tela;
+				var teladms,tela,
+					pos = i3GEO.util.pegaPosicaoObjeto($i(i3GEO.Interface.IDMAPA));
 				if(modoAtual === "move")
 				{return;}
 				ponto = ponto.latLng;

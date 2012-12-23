@@ -393,10 +393,8 @@ i3GEO.eventos = {
 			if(typeof(console) !== 'undefined'){console.error(erro);}
 		}
 		if (container !== "divGeometriasTemp" && container !== "mapaReferencia"){
-			if(i3GEO.util.in_array(i3GEO.Interface.ATUAL,["googlemaps","googleearth","openlayers"]))
-			{return;}
+			return;
 		}
-
 		//
 		//verifica sob qual objeto o mouse est&aacute; se movendo
 		//

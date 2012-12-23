@@ -441,10 +441,10 @@ i3GEO.util = {
 	{Array} - array com a posicao [x,y]
 	*/
 	pegaPosicaoObjeto: function(obj){
-		if(obj)
-		{
-			if(!obj.style)
-			{return [0,0];}
+		if(obj){
+			if(!obj.style){
+				return [0,0];
+			}
 			var curleft = 0,curtop = 0;
 			if(obj){
 				if (obj.offsetParent) {
@@ -458,8 +458,9 @@ i3GEO.util = {
 			}
 			return [curleft+document.body.scrollLeft,curtop+document.body.scrollTop];
 		}
-		else
-		{return [0,0];}
+		else{
+			return [0,0];
+		}
 	},
 	/*
 		Function: pegaElementoPai
@@ -632,10 +633,8 @@ i3GEO.util = {
 		if(arguments.length < 4 || h === ""){
 			h = 25;
 		}
-		if (!$i(id))
-		{
+		if (!$i(id)){
 			var novoel = document.createElement("img");
-			novoel.id = id;
 			novoel.style.zIndex=10000;
 			novoel.style.position="absolute";
 			novoel.style.width=parseInt(w,10)+"px";
@@ -643,8 +642,12 @@ i3GEO.util = {
 			novoel.style.top="0px";
 			novoel.style.left="0px";
 			novoel.src = imagem;
-			if(id === "boxpin")
-			{novoel.onmouseover = function(){$i("boxpin").style.display="none";};}
+			novoel.id = id;
+			if(id === "boxpin"){
+				novoel.onmouseover = function(){
+					$i("boxpin").style.display="none";
+				};
+			}
 			else if(mouseover){
 				novoel.onmouseover = mouseover;
 			}
@@ -680,11 +683,9 @@ i3GEO.util = {
 		i = $i(id);
 		mx = parseInt(i.style.width,10) / 2;
 		my = parseInt(i.style.height,10) / 2;
-		//alert(objposicaocursor.telax+" "+objposicaocursor.telay)
-		i.style.position = "absolute";
-		i.style.top = objposicaocursor.telay + "px";
+		i.style.top = objposicaocursor.telay - my + "px";
 		i.style.left = objposicaocursor.telax - mx + "px";
-		return [objposicaocursor.telay + my,objposicaocursor.telax - mx];
+		return [objposicaocursor.telay - my,objposicaocursor.telax - mx];
 	},
 	/*
 	Function: escondePin
@@ -2374,7 +2375,7 @@ i3GEO.util = {
 
 	Remove um filho de um elemento DOM
 
-	Pode-se especificar o pai e o filha a ser removido ou simplesmente o ID do no que se quer remover
+	Pode-se especificar o pai e o filho a ser removido ou simplesmente o ID do no que se quer remover
 
 	Parametros:
 

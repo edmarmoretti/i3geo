@@ -816,6 +816,7 @@ i3GEO.configura = {
 						//$i("i3GEOmarcaIdentifica").style.display = "none";
 					},
 					i;
+					//alert(objposicaocursor.telay)
 					i3GEO.util.criaPin("i3GEOmarcaIdentifica",i3GEO.configura.locaplic+"/imagens/marcaidentify.png",48,48,temp);
 					i3GEO.util.posicionaImagemNoMapa("i3GEOmarcaIdentifica");
 					i = $i("i3GEOmarcaIdentifica");
