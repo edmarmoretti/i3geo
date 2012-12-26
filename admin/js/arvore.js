@@ -1,11 +1,11 @@
 /*
 Title: arvore.js
 
-Fun��es que controlam a interface do editor da �rvore de temas
+Funcoes que controlam a interface do editor da arvore de temas
 
-Atuam no controle dos n�s da �rvore
+Atuam no controle dos nos da arvore
 
-Pode-se enviar par&acirc;metros pela URL utilizada na inclus�o desse script
+Pode-se enviar par&acirc;metros pela URL utilizada na inclusao desse script
 
 Exemplo:
 
@@ -17,20 +17,20 @@ GPL2
 
 i3Geo Interface Integrada de Ferramentas de Geoprocessamento para Internet
 
-Direitos Autorais Reservados (c) 2006 Minist�rio do Meio Ambiente Brasil
+Direitos Autorais Reservados (c) 2006 Minist&eacute;rio do Meio Ambiente Brasil
 Desenvolvedor: Edmar Moretti edmar.moretti@gmail.com
 
-Este programa � software livre; voc� pode redistribu�-lo
-e/ou modific�-lo sob os termos da Licen�a P�blica Geral
+Este programa &eacute; software livre; voc&ecirc; pode redistribu&iacute;-lo
+e/ou modific&aacute;-lo sob os termos da Licen&ccedil;a P&uacute;blica Geral
 GNU conforme publicada pela Free Software Foundation;
 
-Este programa � distribu�do na expectativa de que seja �til,
-por�m, SEM NENHUMA GARANTIA; nem mesmo a garantia impl�cita
-de COMERCIABILIDADE OU ADEQUA��O A UMA FINALIDADE ESPEC�FICA.
-Consulte a Licen�a P�blica Geral do GNU para mais detalhes.
-Voc� deve ter recebido uma c�pia da Licen�a P�blica Geral do
-GNU junto com este programa; se n�o, escreva para a
-Free Software Foundation, Inc., no endere�o
+Este programa &eacute; distribu&iacute;do na expectativa de que seja &uacute;til,
+por&eacute;m, SEM NENHUMA GARANTIA; nem mesmo a garantia impl&iacute;cita
+de COMERCIABILIDADE OU ADEQUA&Ccedil;&Atilde;O A UMA FINALIDADE ESPEC&Iacute;FICA.
+Consulte a Licen&ccedil;a P&uacute;blica Geral do GNU para mais detalhes.
+Voc&ecirc; deve ter recebido uma cópia da Licen&ccedil;a P&uacute;blica Geral do
+GNU junto com este programa; se n&atilde;o, escreva para a
+Free Software Foundation, Inc., no endere&ccedil;o
 59 Temple Street, Suite 330, Boston, MA 02111-1307 USA.
 
 Arquivo:
@@ -58,7 +58,7 @@ YAHOO.namespace("admin.container");
 /*
 Function: initMenu
 
-Inicializa a �rvore
+Inicializa a arvore
 */
 function initMenu(){
 	var editorDeMenus = function()	{
@@ -75,7 +75,7 @@ function initMenu(){
 		},
 		editorDeSubGrupos = function()	{
 			if($i("editor_bd")){return;}
-			core_montaEditor("","600px","500px","","Subgrupos");
+			core_montaEditor("","650px","500px","","Subgrupos");
 			$i("editor_bd").innerHTML = '<p class=paragrafo ><input type=button id=adicionaNovoSubGrupo value="Adicionar um novo subgrupo" style="left:-5px;" /></p><br><br><div id="letras_SG" ></div><br><div id="tabela" style="left:-5px;"> </div>';
 			i3GEOadmin.subgrupos.inicia();
 		};
@@ -90,7 +90,7 @@ function initMenu(){
 /*
 Function: pegaMenus
 
-Obt�m a lista de menus e monta os n�s principais da �rvore
+Obtem a lista de menus e monta os nos principais da arvore
 
 <PEGAMENUS>
 */
@@ -104,7 +104,7 @@ function pegaMenus()
 /*
 Function: montaArvore
 
-Monta a �rvore de temas
+Monta a arvore de temas
 
 <PEGAGRUPOS>
 */
@@ -363,7 +363,7 @@ function montaConteudoNo(id,publicado,nome,tipo){
 	if(nome)
 	conteudo += "<span "+cor+" >"+nome+"<span style='color:gray'> id: "+id+"</span></span>";
 	else
-	conteudo += "<span "+cor+" > ??? vc precisa editar esse n�</span>";
+	conteudo += "<span "+cor+" > ??? vc precisa editar esse n&oacute;</span>";
 	return conteudo;
 }
 function montaTemasRaiz(no,dados,redesenha)
@@ -678,46 +678,46 @@ function editar(tipo,id)
 }
 function montaDivGrupo(i)
 {
-	var ins = "<br>Escolha o grupo para esse n�:<br><br>";
+	var ins = "<br>Escolha o grupo para esse n&iacute;vel:<br><br>";
 	ins += "<div id=comboGrupo >Buscando...</div>";
-	ins += "<p>Perfis que podem ver: </p>";
-	ins += "<input size=50 type=text id='En1_perfil' value='"+i.n1_perfil+"' /></p>";
-	ins += "<div id=comboPerfil >Buscando...</div>";
-	ins += "<br>Publicado?<br>";
+	ins += "Perfis que podem ver:<br><br>";
+	ins += "<input type=text id='En1_perfil' value='"+i.n1_perfil+"' style='position:relative;width:200px;float:left;' />";
+	ins += "<div id=comboPerfil style='left:5px;float:left;position:relative;width:100px;'>Buscando...</div>";
+	ins += "<p style='float:left;width:200px;' >Publicado?<br><br>";
 	ins += "<select id='Epublicado' >";
 	ins += core_combosimnao(i.publicado);
 	ins += "</select>";
-	ins += "<br><br><br><br>";
+	ins += "<br><br>";
 	ins += "<input type=hidden value="+i.ordem+" id='Eordem' />";
 	return(ins);
 }
 function montaDivSubGrupo(i)
 {
-	var ins = "<br>Escolha o sub-grupo para esse n�:<br><br>";
+	var ins = "<br>Escolha o sub-grupo para esse n&iacute;vel:<br><br>";
 	ins += "<div id=comboSubGrupo >Buscando...</div>";
-	ins += "<p>Perfis que podem ver: </p>";
-	ins += "<input size=50 type=text id='En2_perfil' value='"+i.n2_perfil+"' /></p>";
-	ins += "<div id=comboPerfil >Buscando...</div>";
-	ins += "<br>Publicado?<br>";
+	ins += "Perfis que podem ver: <br><br>";
+	ins += "<input type=text id='En2_perfil' value='"+i.n2_perfil+"' style='position:relative;width:200px;float:left;' />";
+	ins += "<div id=comboPerfil style='left:5px;float:left;position:relative;width:100px;' >Buscando...</div>";
+	ins += "<p style='float:left;width:200px;'>Publicado?<br><br>";
 	ins += "<select id='Epublicado' >";
 	ins += core_combosimnao(i.publicado);
 	ins += "</select>";
-	ins += "<br><br><br><br>";
+	ins += "<br>";
 	ins += "<input type=hidden value="+i.ordem+" id='Eordem' />";
 	return(ins);
 }
 function montaDivTema(i)
 {
-	var ins = "<br>Escolha o tema para esse n�:<br><br>";
+	var ins = "<br>Escolha o tema para esse n&iacute;vel:<br><br>";
 	ins += "<div id=comboTema >Buscando...</div>";
-	ins += "<p>Perfis que podem ver: </p>";
-	ins += "<input type=text id='En3_perfil' value='"+i.n3_perfil+"' /></p>";
-	ins += "<div id=comboPerfil >Buscando...</div>";
-	ins += "<br>Publicado?<br>";
+	ins += "Perfis que podem ver: <br><br>";
+	ins += "<input type=text id='En3_perfil' value='"+i.n3_perfil+"' style='position:relative;width:200px;float:left;'/>";
+	ins += "<div id=comboPerfil style='left:5px;float:left;position:relative;width:100px;'>Buscando...</div>";
+	ins += "<p style='float:left;width:200px;'>Publicado?<br><br>";
 	ins += "<select id='Epublicado' >";
 	ins += core_combosimnao(i.publicado);
 	ins += "</select>";
-	ins += "<br>Ordem<br>";
+	ins += "<p style='float:left;width:200px;'>Ordem<br><br>";
 	ins += "<input size=10 type=text value="+i.ordem+" id='Eordem' />";;
 	return(ins);
 }
@@ -726,10 +726,8 @@ function montaDivRaiz(i)
 	var ins = "<br>Tema:<br><br>";
 	ins += "<div id=comboTema >Buscando...</div>";
 	ins += "<p>Perfis que podem ver: </p>";
-	ins += "<input size=50 type=text id='Eperfil' value='"+i.perfil+"' /></p>";
+	ins += "<input size=45 type=text id='Eperfil' value='"+i.perfil+"' /></p>";
 	ins += "<div id=comboPerfil >Buscando...</div>";
-	ins += "<br><br>Para criar um novo mapfile clique <a href='../html/editormapfile.html' target=_blank >aqui</a>.";
-	ins += "<br><br>Para criar um novo perfil clique <a href='../html/perfis.html' target=_blank >aqui</a>.";
 	ins += "<input type=hidden value="+i.ordem+" id='Eordem' />";
 	return(ins);
 }
@@ -797,7 +795,7 @@ function gravaDados(tipo,id)
   			{
   				if(YAHOO.lang.JSON.parse(o.responseText) == "erro")
   				{
-  					core_carregando("<span style=color:red >N�o foi poss�vel excluir. Verifique se n�o existem menus vinculados a este tema</span>");
+  					core_carregando("<span style=color:red >Nao foi possivel excluir. Verifique se nao existem menus vinculados a este tema</span>");
   					setTimeout("core_carregando('desativa')",3000);
   				}
   				else

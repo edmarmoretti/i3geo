@@ -80,6 +80,7 @@ function retornaJSON($obj)
 	//{
 	include_once($locaplic."/pacotes/cpaint/JSON/json2.php");
 	error_reporting(0);
+	ob_end_clean();
 	$j = new Services_JSON();
 	$texto = $j->encode($obj);
 	if (!mb_detect_encoding($texto,"UTF-8",true))

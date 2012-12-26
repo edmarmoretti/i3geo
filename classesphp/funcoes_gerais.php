@@ -2494,11 +2494,13 @@ function listaTemasRestritos(){
 	$res = pegaDados("select id_grupo,codigo_tema from ".$esquemaadmin."i3geousr_grupotema as gt,".$esquemaadmin."i3geoadmin_temas as te where gt.id_tema = te.id_tema");
 	$restritos = array();
 	foreach ($res as $r){
-		if($restritos[$r["codigo_tema"]]){
-			array_push($restritos[$r["codigo_tema"]],$r["id_grupo"]);
-		}
-		else{
-			$restritos[$r["codigo_tema"]] = array($r["id_grupo"]);
+		if(!empty ($restritos[$r["codigo_tema"]])){
+			if($restritos[$r["codigo_tema"]]){
+				array_push($restritos[$r["codigo_tema"]],$r["id_grupo"]);
+			}
+			else{
+				$restritos[$r["codigo_tema"]] = array($r["id_grupo"]);
+			}
 		}
 	}
 	return $restritos;

@@ -324,7 +324,7 @@ switch (strtoupper($funcao))
 		{JSON}
 		*/
 	case "PEGASUBGRUPOS":
-		if(isset($id_grupo) && $id_grupo != "")	{
+		if(isset($id_subgrupo) && $id_subgrupo != ""){
 			$dados = pegaDados("SELECT * from ".$esquemaadmin."i3geoadmin_subgrupos WHERE id_subgrupo = $id_subgrupo order by nome_subgrupo");
 		}
 		else{
@@ -344,8 +344,7 @@ switch (strtoupper($funcao))
 		*/
 	case "PEGASUBGRUPOS2":
 		$nome = "nome_subgrupo";
-		if($idioma != "pt")
-		{
+		if($idioma != "pt"){
 			$nome = $idioma;
 		}
 		$dados = pegaDados("SELECT desc_subgrupo,id_subgrupo,$nome as 'nome_subgrupo' from ".$esquemaadmin."i3geoadmin_subgrupos order by nome_subgrupo");

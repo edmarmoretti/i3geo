@@ -64,6 +64,7 @@ error_reporting(0);
 //
 include_once(__DIR__."/../../classesphp/pega_variaveis.php");
 include_once(__DIR__."/admin.php");
+error_reporting(0);
 session_write_close();
 session_name("i3GeoLogin");
 //se o usuario estiver tentando fazer login

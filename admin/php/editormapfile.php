@@ -229,7 +229,7 @@ switch (strtoupper($funcao))
 		{JSON}
 		*/
 	case "LIMPARCACHEMAPFILE":
-		error_reporting(E_ALL);
+		error_reporting(0);
 		$mapfile = $locaplic."/temas/".$codigoMap.".map";
 		$mapa = ms_newMapObj($mapfile);
 		$nomes = $mapa->getalllayernames();
@@ -277,27 +277,30 @@ switch (strtoupper($funcao))
 	case "EXCLUIRMAPFILE":
 		//pega oid do tema
 		$dados = pegaDados("SELECT id_tema from ".$esquemaadmin."i3geoadmin_temas WHERE codigo_tema = '".$codigoMap."'");
-		if(count($dados) > 0)
-		{
+		if(count($dados) > 0){
 			$id = $dados[0]["id_tema"];
 		}
 		$tabela = "mapfiles";
 		$coluna = "id_tema";
 		$f = verificaFilhos();
-		if($f)
-		{
+		if($f){
 			retornaJSON("erro");
 			exit;
 		}
-		else
-		{
-			if(file_exists("$locaplic/temas/".$codigoMap.".map"))
-			{
+		else{
+			if(file_exists("$locaplic/temas/".$codigoMap.".map")){
 				unlink("$locaplic/temas/".$codigoMap.".map");
 			}
+			else{
+				if(file_exists("$locaplic/temas/".$codigoMap.".gvp")){
+					unlink("$locaplic/temas/".$codigoMap.".gvp");
+				}
+				if(file_exists("$locaplic/temas/".$codigoMap.".php")){
+					unlink("$locaplic/temas/".$codigoMap.".php");
+				}				
+			}
 			$tabela = "i3geoadmin_temas";
-			if($id)
-			{
+			if($id){
 				exclui();
 			}
 			retornaJSON("ok");
