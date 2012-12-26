@@ -3,6 +3,7 @@ GUIA DE UPDATES
 -------------------------------------------------------------------------------------------------
 Para a versão 4.7
 
+- Criada a pasta init que contém uma nova página de inicialização
 - O banco de dados de administração foi alterado. Deve ser executado o programa de upgrade do banco, existente em i3geo/admin.
 - Para permitir o upgrade é necessário ter um usuário master cadastrado em i3geo/ms_configura.php
 - A interface Flamingo foi removida definitivamente
