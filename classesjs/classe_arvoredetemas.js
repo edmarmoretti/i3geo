@@ -975,7 +975,7 @@ i3GEO.arvoreDeTemas = {
 			if(dados[i].publicado.toLowerCase() !== "nao")
 			{conteudo = "<b>&nbsp;<span title='"+(dados[i].desc)+"'>"+dados[i].nomemenu+"</span>"+editor;}
 			else
-			{conteudo = "<b>&nbsp;<span title='nao publicado' ><s>"+dados[i].nomemenu+"</s></span>"+editor;}
+			{conteudo = "<b>&nbsp;<span title='nao publicado' style='color:red'>"+dados[i].nomemenu+"</span>"+editor;}
 			tempNode = new YAHOO.widget.HTMLNode(
 				{html:conteudo,idmenu:dados[i].idmenu,enableHighlight:false,expanded:false},
 				root
@@ -1003,7 +1003,7 @@ i3GEO.arvoreDeTemas = {
 					nomeSis = sis[ig].NOME;
 					if(sis[ig].PUBLICADO){
 						if(sis[ig].PUBLICADO.toLowerCase() === "nao")
-						{nomeSis = "<s>"+sis[ig].NOME+"</s>";}
+						{nomeSis = "<span style='color:red'>"+sis[ig].NOME+"</span>";}
 					}
 					sisNode = new YAHOO.widget.HTMLNode(
 						{html:nomeSis,expanded:false,enableHighlight:false},
@@ -1114,7 +1114,7 @@ i3GEO.arvoreDeTemas = {
 					//sendo necessario o uso da ordem dos grupos como identificador
 					if(grupos[i].publicado){
 						if(grupos[i].publicado === "NAO"){
-							grupos[i].nome = "<span title='nao publicado' ><s>"+grupos[i].nome+"</s></span>";
+							grupos[i].nome = "<span title='nao publicado' style='color:red'>"+grupos[i].nome+"</span>";
 						}
 					}
 					d = {html:grupos[i].nome+editor,idmenu:node.data.idmenu,idgrupo:i};
@@ -1188,7 +1188,7 @@ i3GEO.arvoreDeTemas = {
 					//sendo necessario o uso da ordem dos grupos como identificador
 					if(subgrupos[i].publicado){
 						if(subgrupos[i].publicado === "NAO"){
-							subgrupos[i].nome = "<span title='nao publicado' ><s>"+subgrupos[i].nome+"</s></span>";
+							subgrupos[i].nome = "<span title='nao publicado' style='color:red'>"+subgrupos[i].nome+"</span>";
 						}
 					}
 					d = {html:subgrupos[i].nome+editor,idmenu:node.data.idmenu,idgrupo:node.data.idgrupo,idsubgrupo:i};
@@ -1225,7 +1225,7 @@ i3GEO.arvoreDeTemas = {
 				if(mostra){
 					if(temas[i].publicado){
 						if(temas[i].publicado === "NAO"){
-							temas[i].nome = "<span title='nao publicado' ><s>"+temas[i].nome+"</s></span>";
+							temas[i].nome = "<span title='nao publicado' style='color:red' >"+temas[i].nome+"</span>";
 						}
 					}
 					tempNode = new YAHOO.widget.HTMLNode(

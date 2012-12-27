@@ -1158,7 +1158,7 @@ Abre o editor de conex&atilde;o com a fonte dos dados de um layer
 */
 function editorDados(codigoMap,codigoLayer)
 {
-	core_montaEditor("","450px","650px","","Conex&atilde;o");
+	core_montaEditor("","500px","650px","","Conex&atilde;o");
 	var sUrl = "../php/editormapfile.php?funcao=pegaConexao&codigoMap="+codigoMap+"&codigoLayer="+codigoLayer;
 	core_pegaDados("Obtendo dados...",sUrl,"montaEditorDados");
 }

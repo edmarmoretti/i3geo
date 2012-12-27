@@ -643,7 +643,12 @@ i3GEOF.metaestat = {
 			$i("i3GEOcartoClassesBotaoAaplicar-button").style.width = i3GEOF.metaestat.LARGURA - 15 + "px";
 		},
 		aplicar: function(){
-			i3GEOF.metaestat.comum.tipoRep = [$i("i3geoCartoComboTipoRep").value,$i("i3geoCartoComboTipoRep").options[$i("i3geoCartoComboTipoRep").selectedIndex].label];
+			if($i("i3geoCartoComboTipoRep") && $i("i3geoCartoComboTipoRep").options){
+				i3GEOF.metaestat.comum.tipoRep = [$i("i3geoCartoComboTipoRep").value,$i("i3geoCartoComboTipoRep").options[$i("i3geoCartoComboTipoRep").selectedIndex].label];
+			}
+			else{
+				i3GEOF.metaestat.comum.tipoRep = [$i("i3geoCartoComboTipoRep").value,""];			
+			}
 			i3GEOF.metaestat.comum.tipoClassificacao = [$i("i3geoCartoComboTipoClassificacao").value,$i("i3geoCartoComboTipoClassificacao").options[$i("i3geoCartoComboTipoClassificacao").selectedIndex].label];
 			i3GEOF.metaestat.comum.tipoRegiao = [$i("i3geoCartoComboRegioesMedidasVariavel").value,$i("i3geoCartoComboRegioesMedidasVariavel").options[$i("i3geoCartoComboRegioesMedidasVariavel").selectedIndex].label];
 			i3GEOF.metaestat.classes.destroiJanela();
@@ -784,6 +789,10 @@ i3GEOF.metaestat = {
 			if(v != true){
 				i3GEO.janela.tempoMsg("erro: "+v);
 				return;
+			}
+			//e necessario obter os parametros nesa interface
+			if(i3GEOF.metaestat.INTERFACE == "flutuanteSimples"){
+				i3GEOF.metaestat.classes.aplicar();
 			}
 			i3GEO.php.mapfileMedidaVariavel(
 				temp,
@@ -1543,21 +1552,22 @@ i3GEOF.metaestat = {
 				$i(iddiv).innerHTML = i3GEOF.metaestat.principal.html();
 				i3GEOF.metaestat.principal.opcoesVariaveis();
 			}
-			//interface qd a medida da variavel ja tiver sido definida
+			//interface qd a medida da variavel ja tiver sido definida. Utilizada ao adicionar uma camada via catalogo de temas
 			if(i3GEOF.metaestat.INTERFACE == "flutuanteSimples"){
 				i3GEOF.metaestat.principal.abreJanela();
 				$i(iddiv).innerHTML = i3GEOF.metaestat.principal.html();
 				//i3GEOF.metaestat.principal.opcoesVariaveis();
 				$i("i3geoCartoVariaveis").innerHTML = "Aguarde...";
-				$i("i3geoCartoVariaveis").innerHTML = '<input style=width: type="button" id="i3GEOcartoBotaoAdicionarCamada" onclick="i3GEOF.metaestat.principal.maisInfo()" value="'+$trad(7,i3GEOF.metaestat.dicionario)+'"class="paragrafo" style="cursor:pointer;color:blue" />' +
-					"<br><br><input type=hidden value='"+i3GEOF.metaestat.ID_MEDIDA_VARIAVEL+"' id='i3geoCartoComboMedidasVariavel' />" +
+				$i("i3geoCartoVariaveis").innerHTML = '' +
+					"<input type=hidden value='"+i3GEOF.metaestat.ID_MEDIDA_VARIAVEL+"' id='i3geoCartoComboMedidasVariavel' />" +
 					"<input type=hidden value='0' id='i3geoCartoComboVariavel' />" +
 					"<input type=hidden value='0' id='i3geoCartoComboTipoRep' />" +
 					"<div id='i3geoCartoRegioesMedidasVariavel'></div>" +
 					"<br><div id='i3geoCartoTipoClassificacao'></div>" +
 					"<br><div id='i3geoCartoParametrosMedidasVariavel'></div>" +
 					"<p class=paragrafo >"+$trad(17,i3GEOF.metaestat.dicionario) + "</p>";
-				//i3GEOF.metaestat.classes.botaoAdicionarCamada();
+				
+				i3GEOF.metaestat.principal.botaoAdicionaCamada();
 				i3GEOF.metaestat.classes.comboRegiao(i3GEOF.metaestat.ID_MEDIDA_VARIAVEL);
 				i3GEOF.metaestat.classes.comboTipoClassificacao();
 				i3GEOF.metaestat.parametros.lista(i3GEOF.metaestat.ID_MEDIDA_VARIAVEL);

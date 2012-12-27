@@ -12,8 +12,8 @@ MAP
       "permitedownload"	"nao"
       "metaestat"	""
       "DOWNLOAD"	"sim"
-      "permiteogc"	"sim"
       "permitekml"	"sim"
+      "permiteogc"	"sim"
       "tema"	"_Imagem cbersgeo"
     END # METADATA
     NAME "_wcbersgeo"
