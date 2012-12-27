@@ -979,7 +979,7 @@ $random - indica se os nomes dos novos layers ser&atilde;o modificados ou nao
 					$gm = new gvsig2mapfile($nomemap);
 					$gvsigview = $gm->getViewsNames();
 					foreach($gvsigview as $gv){
-						$dataView = $gm->getViewData($gvsigview);
+						$dataView = $gm->getViewData($gv);
 						$adicionar = array();
 						foreach($dataView["layerNames"] as $t){
 							if(!in_array($t,$this->nomes)){
