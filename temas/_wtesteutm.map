@@ -1,0 +1,40 @@
+MAP
+  FONTSET "../symbols/fontes.txt"
+  SYMBOLSET "../symbols/simbolos.sym"
+  LAYER
+    CONNECTION ""
+    DATA "C:\ms4w\Apache\htdocs\i3geo\aplicmap\dados\utm21.shp"
+    METADATA
+      "METAESTAT_ID_MEDIDA_VARIAVEL"	""
+      "CLASSE"	"SIM"
+      "palletestep"	""
+      "permitekmz"	"nao"
+      "METAESTAT_CODIGO_TIPO_REGIAO"	""
+      "palletefile"	""
+      "permitedownload"	"sim"
+      "metaestat"	""
+      "download"	"SIM"
+      "arquivodownload"	""
+      "permitekml"	"sim"
+      "permiteogc"	"sim"
+      "TEMA"	"_Teste de projeção utm"
+    END # METADATA
+    NAME "testeutm"
+    PROJECTION
+      "init=epsg:29181"
+    END # PROJECTION
+    STATUS OFF
+    TILEITEM "location"
+    TYPE POLYGON
+    UNITS METERS
+    CLASS
+      NAME " "
+      STYLE
+        COLOR 162 179 93
+        OFFSET 0 0
+      END # STYLE
+    END # CLASS
+  END # LAYER
+
+END # MAP
+

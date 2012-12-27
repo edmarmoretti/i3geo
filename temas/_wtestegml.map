@@ -1,0 +1,38 @@
+MAP
+  FONTSET "../symbols/fontes.txt"
+  SYMBOLSET "../symbols/simbolos.sym"
+  LAYER
+    CONNECTION "c:/ms4w/apache/htdocs/i3geo/aplicmap/dados/ucsfi.gml"
+    CONNECTIONTYPE OGR
+    METADATA
+      "METAESTAT_ID_MEDIDA_VARIAVEL"	""
+      "cache"	"sim"
+      "CLASSE"	"SIM"
+      "permitekmz"	"nao"
+      "METAESTAT_CODIGO_TIPO_REGIAO"	""
+      "permitedownload"	"sim"
+      "metaestat"	""
+      "download"	"nao"
+      "permitekml"	"sim"
+      "permiteogc"	"sim"
+      "tema"	"Unidades de conservação federais de proteção integral"
+      "aplicaextensao"	"NAO"
+    END # METADATA
+    NAME "_wtestegml"
+    STATUS OFF
+    TILEITEM "location"
+    OPACITY 70
+    TYPE POLYGON
+    UNITS METERS
+    CLASS
+      NAME ""
+      STYLE
+        COLOR 20 158 10
+        OFFSET 0 0
+        OUTLINECOLOR 17 87 6
+      END # STYLE
+    END # CLASS
+  END # LAYER
+
+END # MAP
+

@@ -1,0 +1,93 @@
+MAP
+  FONTSET "../symbols/fontes.txt"
+  SYMBOLSET "../symbols/simbolos.sym"
+  LAYER
+    CONNECTION "user=geodados password=geodados dbname=geodados host=pgsql1.mma.gov.br port=5432"
+    CONNECTIONTYPE POSTGIS
+    DATA "the_geom FROM (select * FROM brasil.bbrareg1) as foo USING UNIQUE gid USING SRID=4291"
+    METADATA
+      "METAESTAT_ID_MEDIDA_VARIAVEL"	""
+      "cache"	""
+      "CLASSE"	"SIM"
+      "permitekmz"	"nao"
+      "ITENSDESC"	"Nome"
+      "iconetema"	""
+      "METAESTAT_CODIGO_TIPO_REGIAO"	""
+      "permitedownload"	"sim"
+      "metaestat"	""
+      "ITENS"	"cd_legenda"
+      "permiteogc"	"sim"
+      "permitekml"	"sim"
+      "convcaracter"	""
+      "TEMA"	"Bioma com erro"
+    END # METADATA
+    NAME "_wbiomaerro"
+    STATUS OFF
+    TEMPLATE "none.htm"
+    OPACITY 80
+    TYPE POLYGON
+    UNITS METERS
+    CLASS
+      NAME "Amazônia"
+      EXPRESSION ('[id]'eq '1')
+      STYLE
+        ANGLE 0
+        COLOR 255 255 204
+        OFFSET 0 0
+        OUTLINECOLOR 50 50 50
+      END # STYLE
+    END # CLASS
+    CLASS
+      NAME "Caatinga"
+      EXPRESSION ('[id]'eq '2')
+      STYLE
+        ANGLE 0
+        COLOR 232 220 201
+        OFFSET 0 0
+        OUTLINECOLOR 50 50 50
+      END # STYLE
+    END # CLASS
+    CLASS
+      NAME "Cerrado"
+      EXPRESSION ('[id]'eq '3')
+      STYLE
+        ANGLE 0
+        COLOR 244 214 0
+        OFFSET 0 0
+        OUTLINECOLOR 50 50 50
+      END # STYLE
+    END # CLASS
+    CLASS
+      NAME "Pantanal"
+      EXPRESSION ('[id]'eq '6')
+      STYLE
+        ANGLE 0
+        COLOR 200 200 241
+        OFFSET 0 0
+        OUTLINECOLOR 50 50 50
+      END # STYLE
+    END # CLASS
+    CLASS
+      NAME "Pampa"
+      EXPRESSION ('[id]'eq '5')
+      STYLE
+        ANGLE 0
+        COLOR 143 189 192
+        OFFSET 0 0
+        OUTLINECOLOR 50 50 50
+      END # STYLE
+    END # CLASS
+    CLASS
+      NAME "Mata Atlântica"
+      EXPRESSION ('[id]'eq '4')
+      STYLE
+        ANGLE 0
+        COLOR 218 255 216
+        OFFSET 0 0
+        OUTLINECOLOR 50 50 50
+      END # STYLE
+    END # CLASS
+  END # LAYER
+
+END # MAP
+

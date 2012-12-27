@@ -1,0 +1,54 @@
+MAP
+  FONTSET "../symbols/fontes.txt"
+  SYMBOLSET "../symbols/simbolos.sym"
+  LAYER
+    DATA "/var/www/i3geo/aplicmap/dados/biomas.shp"
+    METADATA
+      "METAESTAT_ID_MEDIDA_VARIAVEL"	""
+      "ltempoitemimagem"	""
+      "cache"	"SIM"
+      "ltempoitemdescricao"	""
+      "CLASSE"	"SIM"
+      "ltempoiteminicio"	""
+      "palletestep"	""
+      "ltempoitemtip"	""
+      "permitekmz"	"nao"
+      "iconetema"	""
+      "ltempoitemtitulo"	""
+      "description_template"	""
+      "ITENSDESC"	"Nome"
+      "ltempoitemlink"	""
+      "CLASSESNOME"	"CD_LEGENDA"
+      "METAESTAT_CODIGO_TIPO_REGIAO"	""
+      "palletefile"	""
+      "ltempoformatodata"	""
+      "permitedownload"	"sim"
+      "ltempoitemicone"	""
+      "CLASSESITEM"	"ID"
+      "metaestat"	""
+      "CLASSESCOR"	"COR"
+      "arquivodownload"	""
+      "ITENS"	"CD_LEGENDA"
+      "permiteogc"	"sim"
+      "permitekml"	"sim"
+      "TEMA"	"_Teste de geração automática de classes em dados vetoriais"
+      "editorsql"	""
+      "ltempoitemfim"	""
+    END # METADATA
+    NAME "_wautolegenda_exemplo"
+    STATUS OFF
+    TEMPLATE "none.htm"
+    TILEITEM "location"
+    TYPE POLYGON
+    UNITS METERS
+    CLASS
+      STYLE
+        ANGLE 0
+        OFFSET 0 0
+        OUTLINECOLOR 50 50 50
+      END # STYLE
+    END # CLASS
+  END # LAYER
+
+END # MAP
+

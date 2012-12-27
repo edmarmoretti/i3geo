@@ -1,0 +1,49 @@
+MAP
+  FONTSET "../symbols/fontes.txt"
+  SYMBOLSET "../symbols/simbolos.sym"
+  LAYER
+    CONNECTION "http://www.geoservicos.inde.gov.br/geoserver/wms?"
+    CONNECTIONTYPE WMS
+    METADATA
+      "wms_srs"	"EPSG:4326"
+      "METAESTAT_ID_MEDIDA_VARIAVEL"	""
+      "CLASSE"	"SIM"
+      "palletestep"	""
+      "permitekmz"	"nao"
+      "description_template"	""
+      "METAESTAT_CODIGO_TIPO_REGIAO"	""
+      "wms_force_separate_request"	"1"
+      "formatosinfo"	"text/plain,text/html,application/vnd.ogc.gml"
+      "wms_name"	"IBGE:Transporte_Rodoviario_Acesso"
+      "palletefile"	""
+      "permitedownload"	"sim"
+      "metaestat"	""
+      "download"	"NAO"
+      "wms_format"	"image/png"
+      "arquivodownload"	""
+      "wms_connectiontimeout"	"30"
+      "permitekml"	"sim"
+      "permiteogc"	"sim"
+      "TEMA"	"ibgetransporterodoviarioacesso"
+      "editorsql"	"NAO"
+      "aplicaextensao"	"NAO"
+      "identifica"	"SIM"
+      "wms_server_version"	"1.1.1"
+    END # METADATA
+    NAME "_wtesteibge"
+    STATUS OFF
+    TILEITEM "location"
+    TYPE RASTER
+    UNITS METERS
+    CLASS
+      NAME ""
+      STYLE
+        ANGLE 0
+        COLOR 0 0 0
+        OFFSET 0 0
+      END # STYLE
+    END # CLASS
+  END # LAYER
+
+END # MAP
+

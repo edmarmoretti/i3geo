@@ -1,0 +1,49 @@
+MAP
+  FONTSET "../symbols/fontes.txt"
+  SYMBOLSET "../symbols/simbolos.sym"
+  LAYER
+    CONNECTION "http://mapas.mma.gov.br/cgi-bin/mapserv?map=/opt/www/html/webservices/ucs.map"
+    CONNECTIONTYPE WMS
+    DATA ""
+    METADATA
+      "wms_srs"	"EPSG:4291"
+      "METAESTAT_ID_MEDIDA_VARIAVEL"	""
+      "wms_exceptions_format"	"application/vnd.ogc.se_xml"
+      "CLASSE"	"SIM"
+      "permitekmz"	"nao"
+      "METAESTAT_CODIGO_TIPO_REGIAO"	""
+      "wms_force_separate_request"	"1"
+      "wms_name"	"ucsfi"
+      "formatosinfo"	"text/plain,application/vnd.ogc.gml"
+      "nomeoriginal"	"ucsfi"
+      "permitedownload"	"sim"
+      "metaestat"	""
+      "wms_formatlist"	"image/gif,image/png,image/png; mode=24bit,image/jpeg,image/wbmp,image/tiff"
+      "wms_format"	"image/png"
+      "wms_connectiontimeout"	"30"
+      "permiteogc"	"sim"
+      "permitekml"	"sim"
+      "TEMA"	"Unidades de conservacao federais de proteção integral(dados preliminares)"
+      "wms_server_version"	"1.1.1"
+      "wms_style"	"default"
+    END # METADATA
+    NAME "atlas_ucsf"
+    OFFSITE 255 255 255
+    STATUS OFF
+    TILEITEM "location"
+    TOLERANCE 0
+    TYPE RASTER
+    UNITS METERS
+    CLASS
+      NAME " "
+      STYLE
+        ANGLE 0
+        COLOR 200 50 0
+        OFFSET 0 0
+        OUTLINECOLOR 0 0 0
+      END # STYLE
+    END # CLASS
+  END # LAYER
+
+END # MAP
+

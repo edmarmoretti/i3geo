@@ -1,0 +1,29 @@
+MAP
+  FONTSET "../symbols/fontes.txt"
+  SYMBOLSET "../symbols/simbolos.sym"
+  LAYER
+    CONNECTION "user=postgres dbname=geonetwork264 host=localhost port=5432 password=postgres"
+    CONNECTIONTYPE POSTGIS
+    DATA "the_geom FROM (select id::integer as gid,the_geom,'http://localhost:8080/geonetwork/srv/br/metadata.show?id='||id as link from spatialindex) as foo USING UNIQUE gid USING SRID=4291"
+    METADATA
+      "CLASSE"	"SIM"
+	  "ITENS" "gid"
+	  "ITENSDESC" "Metadado"
+	  "ITENSLINK" "http://localhost:8080/geonetwork/srv/br/metadata.show?id=[gid]"
+      "TEMA"	"Índice espacial do Geonetwork"
+    END
+    NAME "geonetworkindice"
+    STATUS OFF
+    TEMPLATE "none.htm"
+    TYPE POLYGON
+    UNITS METERS
+    CLASS
+      NAME ""
+      STYLE
+        ANGLE 360
+        OUTLINECOLOR 196 185 103
+        OPACITY 100
+      END
+    END
+  END
+END

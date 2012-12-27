@@ -1,0 +1,45 @@
+MAP
+  FONTSET "../symbols/fontes.txt"
+  SYMBOLSET "../symbols/simbolos.sym"
+  LAYER
+    CONNECTION "http://tilecache.osgeo.org/wms-c/Basic.py/"
+    CONNECTIONTYPE WMS
+    DATA ""
+    METADATA
+      "wms_srs"	"EPSG:4326"
+      "METAESTAT_ID_MEDIDA_VARIAVEL"	""
+      "wms_exceptions_format"	"application/vnd.ogc.se_xml"
+      "CLASSE"	"SIM"
+      "wfs"	"nao"
+      "permitekmz"	"nao"
+      "METAESTAT_CODIGO_TIPO_REGIAO"	""
+      "TEXTO"	"NAO"
+      "wms_force_separate_request"	"1"
+      "formatosinfo"	"text/plain,text/html,application/vnd.ogc.gml"
+      "wms_name"	"basic"
+      "permitedownload"	"sim"
+      "metaestat"	""
+      "wms_formatlist"	"image/png"
+      "wms_format"	"image/png"
+      "wms_connectiontimeout"	"30"
+      "wms_tile"	"1"
+      "permiteogc"	"sim"
+      "permitekml"	"sim"
+      "TEMA"	"Teste TMS tile map"
+      "wms_server_version"	"1.1.1"
+      "wms_style"	"basic"
+    END # METADATA
+    NAME "_wtestetms"
+    OFFSITE 255 255 255
+    STATUS DEFAULT
+    TILEITEM "location"
+    TOLERANCE 0
+    TYPE RASTER
+    UNITS METERS
+    CLASS
+      NAME " "
+    END # CLASS
+  END # LAYER
+
+END # MAP
+

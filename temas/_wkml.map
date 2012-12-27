@@ -1,0 +1,41 @@
+MAP
+  FONTSET "../symbols/fontes.txt"
+  SYMBOLSET "../symbols/simbolos.sym"
+  LAYER
+    CONNECTION "c:\ms4w\apache\htdocs\i3geo\aplicmap\dados\teste.kml"
+    CONNECTIONTYPE OGR
+    DATA "Trovit"
+    METADATA
+      "METAESTAT_ID_MEDIDA_VARIAVEL"	""
+      "CLASSE"	"SIM"
+      "permitekmz"	"nao"
+      "METAESTAT_CODIGO_TIPO_REGIAO"	""
+      "TEXTO"	"NAO"
+      "TEMALOCAL"	"SIM"
+      "permitedownload"	"sim"
+      "metaestat"	""
+      "DOWNLOAD"	"SIM"
+      "permitekml"	"sim"
+      "permiteogc"	"sim"
+      "TEMA"	"teste"
+    END # METADATA
+    NAME "_wkml"
+    STATUS DEFAULT
+    TEMPLATE "none.htm"
+    TILEITEM "location"
+    TYPE POINT
+    UNITS METERS
+    CLASS
+      NAME ""
+      STYLE
+        COLOR 200 50 0
+        OFFSET 0 0
+        OUTLINECOLOR 0 0 0
+        SIZE 6
+        SYMBOL "ponto"
+      END # STYLE
+    END # CLASS
+  END # LAYER
+
+END # MAP
+

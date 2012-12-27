@@ -1,0 +1,83 @@
+MAP
+  FONTSET "../symbols/fontes.txt"
+  SYMBOLSET "../symbols/simbolos.sym"
+  LAYER
+    CONNECTION ""
+    DATA "c:\ms4w\apache\htdocs\i3geo\aplicmap\dados\locali.shp"
+    METADATA
+      "METAESTAT_ID_MEDIDA_VARIAVEL"	""
+      "LTEMPOITEMIMAGEM"	""
+      "TIP"	"TIPO,ANOCRIA,NOMELOC"
+      "LTEMPOITEMDESCRICAO"	"TIPO"
+      "CLASSE"	"SIM"
+      "palletestep"	""
+      "LTEMPOITEMINICIO"	"ANOCRIA"
+      "temporizador"	""
+      "LTEMPOITEMTIP"	"ANOCRIA"
+      "permitekmz"	"sim"
+      "description_template"	""
+      "LTEMPOITEMTITULO"	"NOMELOC"
+      "iconetema"	""
+      "LTEMPOITEMLINK"	""
+      "METAESTAT_CODIGO_TIPO_REGIAO"	""
+      "palletefile"	""
+      "LTEMPOFORMATODATA"	"iso8601"
+      "permitedownload"	"sim"
+      "LTEMPOITEMICONE"	""
+      "permitecomentario"	""
+      "metaestat"	""
+      "itembuscarapida"	"NOMELOC"
+      "arquivokmz"	""
+      "arquivodownload"	""
+      "transitioneffect"	"NAO"
+      "permiteogc"	"sim"
+      "permitekml"	"sim"
+      "TEMA"	"Localidades (usar com timeline)"
+      "LTEMPOCONVENCODE"	"SIM"
+      "editorsql"	""
+      "legendaimg"	""
+      "LTEMPOITEMFIM"	""
+    END # METADATA
+    NAME "_wlocali"
+    STATUS DEFAULT
+    TEMPLATE "none.htm"
+    TILEITEM "location"
+    TYPE POINT
+    UNITS METERS
+    CLASS
+      NAME "Vila"
+      EXPRESSION ('[TIPO]'eq'Vila')
+      STYLE
+        ANGLE 0
+        COLOR 250 193 4
+        OFFSET 0 0
+        SIZE 4
+        SYMBOL "ponto"
+      END # STYLE
+    END # CLASS
+    CLASS
+      NAME "Cidade"
+      EXPRESSION ('[TIPO]'eq'Cidade')
+      STYLE
+        ANGLE 0
+        COLOR 62 9 41
+        OFFSET 0 0
+        SIZE 6
+        SYMBOL "ponto"
+      END # STYLE
+    END # CLASS
+    CLASS
+      NAME "Capital"
+      EXPRESSION ('[TIPO]'eq'Capital')
+      STYLE
+        ANGLE 0
+        COLOR 112 203 244
+        OFFSET 0 0
+        SIZE 6
+        SYMBOL "capital"
+      END # STYLE
+    END # CLASS
+  END # LAYER
+
+END # MAP
+

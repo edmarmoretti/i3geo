@@ -1,0 +1,29 @@
+MAP
+  FONTSET "../symbols/fontes.txt"
+  SYMBOLSET "../symbols/simbolos.sym"
+  LAYER
+    DATA "c://ms4w/Apache/htdocs/i3geo/aplicmap/cinza.png"
+    METADATA
+      "METAESTAT_ID_MEDIDA_VARIAVEL"	""
+      "palletestep"	"20"
+      "permitekmz"	"nao"
+      "METAESTAT_CODIGO_TIPO_REGIAO"	""
+      "palletefile"	"c://ms4w/Apache/htdocs/i3geo/symbols/testepalete.txt"
+      "extensao"	"-45.3164908803 -18.728115624 -36.4701672412 -13.692240792"
+      "permitedownload"	"sim"
+      "metaestat"	""
+      "DOWNLOAD"	"sim"
+      "permitekml"	"sim"
+      "permiteogc"	"sim"
+      "tema"	"teste palete"
+    END # METADATA
+    NAME "_wcinzapalete"
+    STATUS DEFAULT
+    TEMPLATE "none.htm"
+    TILEITEM "location"
+    TYPE RASTER
+    UNITS METERS
+  END # LAYER
+
+END # MAP
+

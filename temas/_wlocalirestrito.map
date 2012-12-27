@@ -1,0 +1,56 @@
+MAP
+  FONTSET "../symbols/fontes.txt"
+  SYMBOLSET "../symbols/simbolos.sym"
+  LAYER
+    DATA "c:\ms4w\apache\htdocs\i3geo\aplicmap\dados\locali"
+    METADATA
+      "METAESTAT_ID_MEDIDA_VARIAVEL"	""
+      "TIP"	"TIPO,ANOCRIA,NOMELOC"
+      "LTEMPOITEMIMAGEM"	""
+      "CLASSE"	"SIM"
+      "LTEMPOITEMDESCRICAO"	"TIPO"
+      "LTEMPOITEMINICIO"	"ANOCRIA"
+      "palletestep"	""
+      "permitekmz"	"nao"
+      "LTEMPOITEMTIP"	"ANOCRIA"
+      "temporizador"	""
+      "iconetema"	""
+      "LTEMPOITEMTITULO"	"NOMELOC"
+      "description_template"	""
+      "LTEMPOITEMLINK"	""
+      "METAESTAT_CODIGO_TIPO_REGIAO"	""
+      "palletefile"	""
+      "nomeoriginal"	"locali"
+      "permitedownload"	"sim"
+      "permitecomentario"	""
+      "metaestat"	""
+      "itembuscarapida"	"NOMELOC"
+      "arquivodownload"	""
+      "arquivokmz"	""
+      "permitekml"	"sim"
+      "permiteogc"	"sim"
+      "transitioneffect"	"NAO"
+      "TEMA"	"_Localidades com restrição de acesso"
+      "editorsql"	""
+      "legendaimg"	""
+    END # METADATA
+    NAME "localirestrito"
+    STATUS DEFAULT
+    TEMPLATE "none.htm"
+    TILEITEM "location"
+    TYPE POINT
+    UNITS METERS
+    CLASS
+      NAME "Pontos"
+      STYLE
+        ANGLE 0
+        COLOR 255 0 0
+        OFFSET 0 0
+        SIZE 4
+        SYMBOL "ponto"
+      END # STYLE
+    END # CLASS
+  END # LAYER
+
+END # MAP
+

@@ -1,0 +1,40 @@
+MAP
+  FONTSET "../symbols/fontes.txt"
+  SYMBOLSET "../symbols/simbolos.sym"
+  LAYER
+    CONNECTION ""
+    DATA "C:\ms4w\Apache\htdocs\i3geo\aplicmap\dados\locali.shp"
+    METADATA
+      "METAESTAT_ID_MEDIDA_VARIAVEL"	""
+      "CLASSE"	"SIM"
+      "palletestep"	""
+      "permitekmz"	"nao"
+      "DESCRIPTION_TEMPLATE"	"Teste de template para KML  UF: %ESTADO%  Município: %NOMEMUN%"
+      "METAESTAT_CODIGO_TIPO_REGIAO"	""
+      "palletefile"	""
+      "permitedownload"	"sim"
+      "metaestat"	""
+      "download"	"SIM"
+      "arquivodownload"	""
+      "permitekml"	"sim"
+      "permiteogc"	"sim"
+      "TEMA"	"Teste de pontos com template kml"
+    END # METADATA
+    NAME "_wtestepttemplatekml"
+    STATUS OFF
+    TILEITEM "location"
+    TYPE POINT
+    UNITS METERS
+    CLASS
+      NAME " "
+      STYLE
+        COLOR 255 0 0
+        OFFSET 0 0
+        SIZE 8
+        SYMBOL "marca"
+      END # STYLE
+    END # CLASS
+  END # LAYER
+
+END # MAP
+

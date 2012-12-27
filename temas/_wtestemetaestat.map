@@ -1,0 +1,38 @@
+MAP
+  FONTSET "../symbols/fontes.txt"
+  SYMBOLSET "../symbols/simbolosv6.sym"
+
+  LAYER
+    CONNECTION ""
+    CONNECTIONTYPE POSTGIS
+    DATA ""
+    METADATA
+      "METAESTAT_ID_MEDIDA_VARIAVEL"	"1"
+      "cache"	""
+      "CLASSE"	"SIM"
+      "permitekmz"	"nao"
+      "METAESTAT_CODIGO_TIPO_REGIAO"	""
+      "permitedownload"	"sim"
+      "METAESTAT"	"SIM"
+      "permitekml"	"sim"
+      "permiteogc"	"sim"
+      "TEMA"	"_Teste de tema baseado no METAESTAT"
+      "convcaracter"	""
+    END # METADATA
+    NAME "_wtestemetaestat"
+    STATUS OFF
+    TEMPLATE "none.htm"
+    TILEITEM "location"
+    TYPE POLYGON
+    UNITS METERS
+    CLASS
+      NAME ""
+      STYLE
+        ANGLE 0
+        COLOR 0 0 0
+        OFFSET 0 0
+      END # STYLE
+    END # CLASS
+  END # LAYER
+
+END # MAP

@@ -1,0 +1,36 @@
+MAP
+  FONTSET "../symbols/fontes.txt"
+  SYMBOLSET "../symbols/simbolos.sym"
+  LAYER
+    DATA "C:\ms4w\Apache\htdocs\i3geo\aplicmap\dados\cbersgeo.img"
+    METADATA
+      "METAESTAT_ID_MEDIDA_VARIAVEL"	""
+      "classe"	"NAO"
+      "permitekmz"	"nao"
+      "iconetema"	""
+      "METAESTAT_CODIGO_TIPO_REGIAO"	""
+      "permitedownload"	"sim"
+      "metaestat"	""
+      "DOWNLOAD"	"sim"
+      "permitekml"	"sim"
+      "permiteogc"	"sim"
+      "tema"	"_Imagem cbersgeo"
+    END # METADATA
+    NAME "_wcbersgrupo"
+    STATUS DEFAULT
+    TILEITEM "location"
+    TYPE RASTER
+    UNITS METERS
+    CLASS
+      NAME ""
+      STYLE
+        ANGLE 0
+        COLOR 0 255 255
+        OFFSET 0 0
+        OUTLINECOLOR 0 0 0
+      END # STYLE
+    END # CLASS
+  END # LAYER
+
+END # MAP
+

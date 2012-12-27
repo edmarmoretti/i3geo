@@ -1,0 +1,46 @@
+MAP
+
+
+  FONTSET "../symbols/fontes.txt"
+  SYMBOLSET "../symbols/simbolos.sym"
+  LAYER
+    CONNECTION "teste"
+    CONNECTIONTYPE POSTGIS
+    DATA "the_geom FROM (select * FROM teste.vegetacao) as foo USING UNIQUE gid USING SRID=4291"
+    METADATA
+      "ltempoitemimagem"	""
+      "cache"	"SIM"
+      "ltempoitemdescricao"	""
+      "CLASSE"	"SIM"
+      "ltempoiteminicio"	""
+      "palletestep"	""
+      "ltempoitemtip"	""
+      "iconetema"	""
+      "ltempoitemtitulo"	""
+      "description_template"	""
+      "ltempoitemlink"	""
+      "palletefile"	""
+      "ltempoformatodata"	""
+      "ltempoitemicone"	""
+      "download"	"SIM"
+      "arquivodownload"	""
+      "TEMA"	"Teste de substituição de string"
+      "editorsql"	""
+      "ltempoitemfim"	""
+    END
+    NAME "testesubsstring"
+    STATUS OFF
+    TEMPLATE "none.htm"
+    TYPE POLYGON
+    UNITS METERS
+    CLASS
+      NAME "Teste"
+      STYLE
+        ANGLE 360
+        COLOR 196 185 103
+        OPACITY 100
+        SYMBOL 0
+      END
+    END
+  END
+END
