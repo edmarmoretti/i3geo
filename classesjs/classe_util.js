@@ -753,14 +753,10 @@ i3GEO.util = {
 			{$i(idPai).style.width=larguraIdPai+"px";}
 			$i(idPai).style.padding="3";
 			$i(idPai).style.textAlign="center";
-			//$i(idPai).onmouseover = function()
-			//{this.className = "digitarMouseover";};
-			//$i(idPai).onmouseout = function()
-			//{this.className = "";};
 		}
 		if(!onch)
 		{onch = "";}
-		return "<input onchange=\""+onch+"\" tabindex='0' onmouseover='javascript:this.className=\"digitarOver\";' onmouseout='javascript:this.className=\"digitar\";' onclick='javascript:this.select();this.className=\"digitarMouseclick\";' id='"+idInput+"' title='"+titulo+"' type='text' size='"+digitos+"' class='digitar' value='"+valor+"' name='"+nome+"' />";
+		return "<span class=digitar onmouseover='javascript:this.className=\"digitarOver\";' onmouseout='javascript:this.className=\"digitar\";' ><input onchange=\""+onch+"\" tabindex='0'  onclick='javascript:this.select();' id='"+idInput+"' title='"+titulo+"' type='text' size='"+digitos+"' class='digitar' value='"+valor+"' name='"+nome+"' /></span>";
 	},
 	$inputTextMudaCor: function(obj){
 		var n = obj.value.split(" ");

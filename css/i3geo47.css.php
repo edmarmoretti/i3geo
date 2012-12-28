@@ -980,7 +980,7 @@ width:10px;
 height:11px;
 cursor:pointer;
 }
-.refresh
+.i3geo_refresh2
 {
 background-image:URL('../imagens/visual/default/sprite.png');
 background-repeat: no-repeat;
@@ -1475,6 +1475,14 @@ min-height:1em;
 padding:0 10px;
 }
 .yui-resize .yui-resize-handle{position:absolute;z-index:1;font-size:0;margin:0;padding:0;zoom:1;height:250px;width:5px;}
+.ygtvcontent {
+font-size:12px;
+padding:0 3px 10px 0;
+}
+.ygtvcell {
+font-size:12px;
+padding:0 3px 5px 0;
+}
 div.olMap {
 z-index: 0;
 padding: 0px!important;

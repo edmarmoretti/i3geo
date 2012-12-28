@@ -725,7 +725,7 @@ i3GEO.arvoreDeCamadas = {
 				return " onmouseout='javascript:this.className = \""+i+" iconeMini iconeGuiaMovelMouseOut\";' onmouseover='javascript:this.className = \""+i+" iconeMini iconeGuiaMovelMouseOver\";' class='"+i+" iconeMini iconeGuiaMovelMouseOut' src='"+imb+"' style='cursor:pointer;text-align:left' ";
 			};
 		if(this.REFRESH === true){
-			ins += "<img "+estilo("refresh")+" onclick='i3GEO.arvoreDeCamadas.atualiza(i3GEO.arvoreDeCamadas.CAMADAS,true)' title='Refresh' id='i3geo_refresh'/>";
+			ins += "<img "+estilo("i3geo_refresh2")+" onclick='i3GEO.arvoreDeCamadas.atualiza(i3GEO.arvoreDeCamadas.CAMADAS,true)' title='Refresh' id='i3geo_refresh'/>";
 		}
 		if(this.ARRASTARLIXEIRA === true)
 		{ins += "<img "+estilo("i3geo_lixeira")+" onclick='i3GEO.arvoreDeCamadas.dialogo.excluir();' id='i3geo_lixeira' title='"+$trad("t2")+"' />";}
