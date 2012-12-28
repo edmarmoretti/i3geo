@@ -4,7 +4,7 @@
 
 Cria um arquivo no formato XML para o aplicativo arvore hiperbolica.
 
-A ï¿½rvore hiperbolica e montada por um applet que carrega um XML contendo a estrutura de nos.
+A arvore hiperbolica e montada por um applet que carrega um XML contendo a estrutura de nos.
 
 Esse programa le o banco de administra&ccedil;&atilde;o e monta o XML contendo os menus, grupos, subgrupos e temas.
 
@@ -34,7 +34,7 @@ Este programa &eacute; distribu&iacute;do na expectativa de que seja &uacute;til
 por&eacute;m, SEM NENHUMA GARANTIA; nem mesmo a garantia impl&iacute;cita
 de COMERCIABILIDADE OU ADEQUA&Ccedil;&Atilde;O A UMA FINALIDADE ESPEC&Iacute;FICA.
 Consulte a Licen&ccedil;a P&uacute;blica Geral do GNU para mais detalhes.
-Voc&ecirc; deve ter recebido uma cópia da Licen&ccedil;a P&uacute;blica Geral do
+Voc&ecirc; deve ter recebido uma copia da Licen&ccedil;a P&uacute;blica Geral do
 	GNU junto com este programa; se n&atilde;o, escreva para a
 Free Software Foundation, Inc., no endere&ccedil;o
 59 Temple Street, Suite 330, Boston, MA 02111-1307 USA.
@@ -68,19 +68,14 @@ $xml .= "<capa>";
 //
 //obtem a lista de menus
 //
-$menus = pegaDados("SELECT * from ".$esquemaadmin."i3geoadmin_menus order by nome_menu ",$locaplic);
+$menus = pegaDados("SELECT * from ".$esquemaadmin."i3geoadmin_menus where publicado_menu != 'NAO' order by nome_menu ",$locaplic);
 $xml .= '<termo cor="#FFFFFF" id="00" nome="Dados geo">';
 $contador = 0;
 $xml .= '<item cor="#FFFFCC" id="'.$contador.'" tipo="TE1" nome="Menus" familia="1" />  '."\n";
 //
 //varre cada menu
 //
-foreach ($menus as $menu)
-{
-	if(strtolower($menu["publicado_menu"]) == "nao")
-	{
-		continue;
-	}
+foreach ($menus as $menu){
 	$id = $menu["id_menu"];
 	$nome = html_entity_decode($menu["nome_menu"]);
 	$nome = h_converteTexto($nome);
@@ -89,7 +84,7 @@ foreach ($menus as $menu)
 	//
 	//obtem a lista de grupos
 	//
-	$grupos = pegaDados("select i3geoadmin_grupos.nome_grupo,id_n1,id_menu from ".$esquemaadmin."i3geoadmin_n1 LEFT JOIN ".$esquemaadmin."i3geoadmin_grupos ON i3geoadmin_n1.id_grupo = i3geoadmin_grupos.id_grupo where id_menu='$id' order by ordem",$locaplic);
+	$grupos = pegaDados("select i3geoadmin_grupos.nome_grupo,id_n1,id_menu from ".$esquemaadmin."i3geoadmin_n1 LEFT JOIN ".$esquemaadmin."i3geoadmin_grupos ON i3geoadmin_n1.id_grupo = i3geoadmin_grupos.id_grupo where id_menu='$id' and i3geoadmin_n1.publicado != 'NAO' order by ordem",$locaplic);
 	for($i=0;$i < count($grupos);++$i)
 	{
 		$contador++;
@@ -102,7 +97,13 @@ foreach ($menus as $menu)
 		//
 		//obtem os temas na raiz do grupo
 		//
-		$temasRaizGrupo = pegaDados("select i3geoadmin_temas.tags_tema as tags_tema,i3geoadmin_temas.codigo_tema as codigo_tema,i3geoadmin_raiz.id_tema,nome_tema as nome_tema,perfil FROM ".$esquemaadmin."i3geoadmin_raiz LEFT JOIN ".$esquemaadmin."i3geoadmin_temas ON i3geoadmin_temas.id_tema = i3geoadmin_raiz.id_tema where i3geoadmin_raiz.nivel = 1 and i3geoadmin_raiz.id_nivel = ".$grupos[$i]["id_n1"]." order by ordem");
+		$temasRaizGrupo = pegaDados("
+			select i3geoadmin_temas.tags_tema as tags_tema,i3geoadmin_temas.codigo_tema as codigo_tema,i3geoadmin_raiz.id_tema,nome_tema as nome_tema,perfil 
+			FROM ".$esquemaadmin."i3geoadmin_raiz 
+			LEFT JOIN ".$esquemaadmin."i3geoadmin_temas ON i3geoadmin_temas.id_tema = i3geoadmin_raiz.id_tema 
+			LEFT JOIN ".$esquemaadmin."i3geousr_grupotema ON i3geoadmin_raiz.id_tema = i3geousr_grupotema.id_tema
+			where i3geousr_grupotema.id_grupo is null and i3geoadmin_raiz.nivel = 1 and i3geoadmin_raiz.id_nivel = ".$grupos[$i]["id_n1"]." order by ordem");
+
 		//var_dump($temasRaizGrupo);exit;
 		$t = obtemTemas($temasRaizGrupo,$contador,$id);
 		$xml .= $t[0];
@@ -110,7 +111,7 @@ foreach ($menus as $menu)
 		//
 		//obtem os subgrupos
 		//
-		$subgrupos = pegaDados("select i3geoadmin_subgrupos.nome_subgrupo,i3geoadmin_n2.id_n2 from ".$esquemaadmin."i3geoadmin_n2 LEFT JOIN ".$esquemaadmin."i3geoadmin_subgrupos ON i3geoadmin_n2.id_subgrupo = i3geoadmin_subgrupos.id_subgrupo where i3geoadmin_n2.id_n1='$idgrupo' order by ordem",$locaplic);
+		$subgrupos = pegaDados("select i3geoadmin_subgrupos.nome_subgrupo,i3geoadmin_n2.id_n2 from ".$esquemaadmin."i3geoadmin_n2 LEFT JOIN ".$esquemaadmin."i3geoadmin_subgrupos ON i3geoadmin_n2.id_subgrupo = i3geoadmin_subgrupos.id_subgrupo where i3geoadmin_n2.id_n1='$idgrupo' and i3geoadmin_n2.publicado != 'NAO' order by ordem",$locaplic);
 		if(count($subgrupos) > 0)
 			$xml .= '<item cor="#FF9966" id="'.$contador.'" tipo="TE4" nome="SUBGRUPOS" familia="'.$id.'" />  '."\n";
 		for($j=0;$j < count($subgrupos);++$j)
@@ -123,7 +124,14 @@ foreach ($menus as $menu)
 			$contador++;
 			$xml .= '<item cor="#FF6633" id="'.$contador.'" tipo="TE6" nome="TEMAS" familia="'.$id.'" />  '."\n";
 			$id_n2 = $subgrupos[$j]["id_n2"];
-			$temas = pegaDados("select i3geoadmin_temas.tags_tema,i3geoadmin_temas.nome_tema,i3geoadmin_temas.codigo_tema,i3geoadmin_n3.id_n3 from ".$esquemaadmin."i3geoadmin_n3 LEFT JOIN ".$esquemaadmin."i3geoadmin_temas ON i3geoadmin_n3.id_tema = i3geoadmin_temas.id_tema where i3geoadmin_n3.id_n2='$id_n2' order by ordem",$locaplic);
+			$temas = pegaDados("
+				select i3geoadmin_temas.tags_tema,i3geoadmin_temas.nome_tema,i3geoadmin_temas.codigo_tema,i3geoadmin_n3.id_n3 
+				from ".$esquemaadmin."i3geoadmin_n3 
+				LEFT JOIN ".$esquemaadmin."i3geoadmin_temas ON i3geoadmin_n3.id_tema = i3geoadmin_temas.id_tema 
+				LEFT JOIN ".$esquemaadmin."i3geousr_grupotema ON i3geoadmin_n3.id_tema = i3geousr_grupotema.id_tema
+				where i3geousr_grupotema.id_grupo is null and i3geoadmin_n3.id_n2='$id_n2' and i3geoadmin_n3.publicado != 'NAO' order by ordem",$locaplic
+			);
+			//var_dump($temas);exit;
 			$t = obtemTemas($temas,$contador,$id);
 			$xml .= $t[0];
 			$contador += $t[1];

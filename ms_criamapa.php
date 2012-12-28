@@ -645,7 +645,7 @@ function incluiTemasIniciais(){
 						if ($layern->name == "estadosl")
 						{$layern->set("data",$locaplic."/aplicmap/dados/estados.shp");}
 						$layern->setmetadata("nomeoriginal",$layern->name);
-						$nNome = str_replace(".map","",basename($arqtemp)).
+						$nNome = str_replace(".map","",basename($arqtemp));
 						$layern->setmetadata("arquivotemaoriginal",$nNome);
 						autoClasses($layern,$mapn);
 						//

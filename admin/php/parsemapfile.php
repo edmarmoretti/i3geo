@@ -292,9 +292,9 @@ function mapfile()
 	$nlayers = array();
 	foreach ($layers as $layer)
 	{
+		$layer = $mapa->getlayerbyname($layer);
 		if($objcontype[$layer->connectiontype] != MS_WMS )
 		{
-			$layer = $mapa->getlayerbyname($layer);
 			if($layer->group == "")
 			{$nlayers[] = $layer->name;}
 			else

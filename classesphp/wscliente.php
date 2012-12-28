@@ -430,7 +430,7 @@ function listaRSSws2()
 		}
 		else
 		{$canali = simplexml_load_file($rss);}
-		$linhas[] = "<a href='".$endereco."' target=blank ><img style='border:0px solid white' src='../../imagens/rss.gif' /></a>####";
+		$linhas[] = "<a href='".$endereco."' target=blank ><img style='border:0px solid white' src='http://i3geo.com.br/i3geo/imagens/rss.gif' /></a>####";
 		//var_dump($canali);
 		foreach ($canali->channel->item as $item)
 		{

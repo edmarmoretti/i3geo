@@ -20,7 +20,6 @@ MAP
       "LTEMPOITEMLINK"	""
       "METAESTAT_CODIGO_TIPO_REGIAO"	""
       "palletefile"	""
-      "nomeoriginal"	"locali"
       "permitedownload"	"sim"
       "permitecomentario"	""
       "metaestat"	""
@@ -34,7 +33,7 @@ MAP
       "editorsql"	""
       "legendaimg"	""
     END # METADATA
-    NAME "localirestrito"
+    NAME "_wlocalirestrito"
     STATUS DEFAULT
     TEMPLATE "none.htm"
     TILEITEM "location"

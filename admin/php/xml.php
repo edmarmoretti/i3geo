@@ -33,9 +33,6 @@ Arquivo:
 
 i3geo/admin/php/xml.php
 */
-if(!function_exists("verificaEditores")){
-	include_once(__DIR__."/../../classesphp/funcoes_gerais.php");
-}
 //
 //processa a vari&aacute;vel $esquemaadmin definida em ms_configura.php
 //essa vari&aacute;vel precisa ter um . no final quando n&atilde;o for vazia, evitando erros na inclus&atilde;o dentro dos SQLs
@@ -146,7 +143,12 @@ RSS
 function geraRSStemas($locaplic,$id_n2)
 {
 	global $esquemaadmin;
-	$sql = "select '' as tipo_ws, t.codigo_tema as id_ws,t.nome_tema as nome_ws,'' as desc_ws,'php/parsemapfile.php?id='||t.codigo_tema as link_ws,t.link_tema as autor_ws from ".$esquemaadmin."i3geoadmin_n3 as n3,".$esquemaadmin."i3geoadmin_temas as t where t.id_tema = n3.id_tema and n3.id_n2 = '$id_n2' and n3.n3_perfil = '' order by nome_ws";
+	$sql = "
+		select '' as tipo_ws, i3geoadmin_temas.codigo_tema as id_ws,i3geoadmin_temas.nome_tema as nome_ws,'' as desc_ws,'php/parsemapfile.php?id='||i3geoadmin_temas.codigo_tema as link_ws,i3geoadmin_temas.link_tema as autor_ws 
+		from ".$esquemaadmin."i3geoadmin_n3 as n3 
+		LEFT JOIN ".$esquemaadmin."i3geoadmin_temas ON i3geoadmin_temas.id_tema = n3.id_tema 
+		LEFT JOIN ".$esquemaadmin."i3geousr_grupotema ON n3.id_tema = i3geousr_grupotema.id_tema
+		where i3geousr_grupotema.id_grupo is null and i3geoadmin_temas.id_tema = n3.id_tema and n3.id_n2 = '$id_n2' and n3.n3_perfil = '' and n3.publicado != 'NAO' order by nome_ws";
 	return geraXmlRSS($locaplic,$sql,"Lista de temas");
 }
 /*
@@ -169,7 +171,12 @@ RSS
 function geraRSStemasRaiz($locaplic,$id,$nivel)
 {
 	global $esquemaadmin;
-	$sql = "select '' as tipo_ws, t.codigo_tema as id_ws,t.nome_tema as nome_ws,'' as desc_ws,'php/parsemapfile.php?id='||t.codigo_tema as link_ws,t.link_tema as autor_ws from ".$esquemaadmin."i3geoadmin_raiz as r,".$esquemaadmin."i3geoadmin_temas as t where t.id_tema = r.id_tema and r.nivel = '$nivel' and r.id_nivel = '$id' order by nome_ws";
+	$sql = "
+	select '' as tipo_ws, i3geoadmin_temas.codigo_tema as id_ws,i3geoadmin_temas.nome_tema as nome_ws,'' as desc_ws,'php/parsemapfile.php?id='||i3geoadmin_temas.codigo_tema as link_ws,i3geoadmin_temas.link_tema as autor_ws 
+	from ".$esquemaadmin."i3geoadmin_raiz as r  
+	LEFT JOIN ".$esquemaadmin."i3geoadmin_temas ON i3geoadmin_temas.id_tema = r.id_tema 
+	LEFT JOIN ".$esquemaadmin."i3geousr_grupotema ON r.id_tema = i3geousr_grupotema.id_tema 
+	where i3geousr_grupotema.id_grupo is null and i3geoadmin_temas.id_tema = r.id_tema and r.nivel = '$nivel' and r.id_nivel = '$id' order by nome_ws";
 	return geraXmlRSS($locaplic,$sql,"Temas na raiz");
 }
 /*
@@ -190,7 +197,8 @@ RSS
 function geraRSSsubgrupos($locaplic,$id_n1)
 {
 	global $esquemaadmin;
-	$sql = "select '' as tipo_ws, n2.id_n2 as id_ws,g.nome_subgrupo as nome_ws,'' as desc_ws,'rsstemas.php?id='||n2.id_n2 as link_ws,'' as autor_ws from ".$esquemaadmin."i3geoadmin_n2 as n2,".$esquemaadmin."i3geoadmin_subgrupos as g where g.id_subgrupo = n2.id_subgrupo and n2.id_n1 = '$id_n1' and n2.n2_perfil = '' order by nome_ws";
+	$sql = "select '' as tipo_ws, n2.id_n2 as id_ws,g.nome_subgrupo as nome_ws,'' as desc_ws,'rsstemas.php?id='||n2.id_n2 as link_ws,'' as autor_ws from ".$esquemaadmin."i3geoadmin_n2 as n2,".$esquemaadmin."i3geoadmin_subgrupos as g ";
+	$sql .= " where g.id_subgrupo = n2.id_subgrupo and n2.id_n1 = '$id_n1' and n2.n2_perfil = '' and n2.publicado != 'NAO' order by nome_ws";
 	return geraXmlRSS($locaplic,$sql,"Lista de sub-grupos");
 }
 /*
@@ -211,7 +219,7 @@ function geraRSSgrupos($locaplic)
 	global $esquemaadmin;
 	$sql = "select '' as tipo_ws, n1.id_n1 as id_ws, g.nome_grupo as nome_ws,'rsstemasraiz.php?nivel=1&id='||n1.id_n1 as desc_ws,'rsssubgrupos.php?id='||n1.id_n1 as link_ws,'' as autor_ws ";
 	$sql .= "from ".$esquemaadmin."i3geoadmin_n1 as n1,".$esquemaadmin."i3geoadmin_grupos as g ";
-	$sql .= "where g.id_grupo = n1.id_grupo and n1.n1_perfil = '' group by id_ws,tipo_ws,nome_ws,desc_ws,link_ws,autor_ws order by nome_ws";
+	$sql .= "where g.id_grupo = n1.id_grupo and n1.n1_perfil = '' and n1.publicado != 'NAO' group by id_ws,tipo_ws,nome_ws,desc_ws,link_ws,autor_ws order by nome_ws";
 	return geraXmlRSS($locaplic,$sql,"Lista de grupos");
 }
 /*
@@ -338,9 +346,12 @@ function geraRSStemasDownload($locaplic)
 		and n1.id_grupo = g.id_grupo
 		and (t.download_tema != 'nao' and t.download_tema != 'NAO')
 		and t.tipoa_tema != 'WMS'
-		and n3.n3_perfil = ''
+		and n3.n3_perfil = '' 
 		and n2.n2_perfil = ''
 		and n1.n1_perfil = ''
+		and n3.publicado != 'NAO' 
+		and n2.publicado != 'NAO' 
+		and n1.publicado != 'NAO'
 	";
 	//echo $sql;exit;
 	return geraXmlRSS($locaplic,$sql,"Temas para download");
@@ -376,6 +387,9 @@ function geraRSStemasKml($locaplic)
 		and n3.n3_perfil = ''
 		and n2.n2_perfil = ''
 		and n1.n1_perfil = ''
+		and n3.publicado != 'NAO' 
+		and n2.publicado != 'NAO' 
+		and n1.publicado != 'NAO'
 	";
 	//echo $sql;exit;
 	return geraXmlRSS($locaplic,$sql,"Temas em KML");
@@ -412,6 +426,9 @@ function geraRSStemasOgc($locaplic)
 		and n3.n3_perfil = ''
 		and n2.n2_perfil = ''
 		and n1.n1_perfil = ''
+		and n3.publicado != 'NAO' 
+		and n2.publicado != 'NAO' 
+		and n1.publicado != 'NAO'
 	";
 	//echo $sql;exit;
 	return geraXmlRSS($locaplic,$sql,"Temas em KML");

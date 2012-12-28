@@ -110,7 +110,7 @@ function iniciaMapa()
 	if(!function_exists("validaAcessoTemas")){
 		include_once("funcoes_gerais.php");
 	}
-	validaAcessoTemas($_SESSION["map_file"]);
+	validaAcessoTemas($map_file);
 	if(!isset($kmlurl))
 	{$kmlurl = "";}
 	error_reporting(0);

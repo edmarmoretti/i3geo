@@ -2466,6 +2466,7 @@ $salva - salva o mapfile com os layers removidos ou nao
 Retorno: boolean indicando se o mapfile contem layers indevidos
 */
 function validaAcessoTemas($map_file,$salva = true){
+	error_reporting(0);
 	$indevidos = listaLayersIndevidos($map_file);
 	$existeIndevidos = false;
 	if(count($indevidos) > 0){
@@ -2491,16 +2492,15 @@ O retorno e um array com a chave sendo o codigo do tema e o valor um array com a
 */
 function listaTemasRestritos(){
 	include_once(__DIR__."/../admin/php/admin.php");
+	error_reporting(0);
 	$res = pegaDados("select id_grupo,codigo_tema from ".$esquemaadmin."i3geousr_grupotema as gt,".$esquemaadmin."i3geoadmin_temas as te where gt.id_tema = te.id_tema");
 	$restritos = array();
 	foreach ($res as $r){
-		if(!empty ($restritos[$r["codigo_tema"]])){
-			if($restritos[$r["codigo_tema"]]){
-				array_push($restritos[$r["codigo_tema"]],$r["id_grupo"]);
-			}
-			else{
-				$restritos[$r["codigo_tema"]] = array($r["id_grupo"]);
-			}
+		if(in_array($r["codigo_tema"],$restritos)){
+			array_push($restritos[$r["codigo_tema"]],$r["id_grupo"]);
+		}
+		else{
+			$restritos[$r["codigo_tema"]] = array($r["id_grupo"]);
 		}
 	}
 	return $restritos;
@@ -2511,10 +2511,26 @@ Function: listaLayersIndevidos
 Lista os layers de um mapfile que sao restritos e que nao sao permitidos ao usuario logado
 */
 function listaLayersIndevidos($map_file){
+	error_reporting(0);
 	$indevidos = array();
 	$restritos = listaTemasRestritos();
+	/*
+		array(1) {
+		  ["_wlocalirestrito"]=>
+		  array(1) {
+			[0]=>
+			string(1) "1"
+		  }
+		}	
+	*/
 	if(count($restritos) > 0){
 		$gruposusr = listaGruposUsrLogin();
+		/*
+		array(1) {
+			[0]=>
+			string(1) "1"
+		}
+		*/
 		$m = ms_newMapObj($map_file);
 		$c = $m->numlayers;
 		for ($i=0;$i < $c;++$i)	{
@@ -2525,9 +2541,18 @@ function listaLayersIndevidos($map_file){
 				$meta = str_replace(".map","",basename($map_file));
 			}
 			if($meta != ""){
-				$t = $restritos[$meta];
-				if($t && !in_array($t,$gruposusr)){
-					array_push($indevidos,$layer->name);
+				if(in_array($meta,array_keys($restritos))){
+					$indevido = true;
+					foreach($gruposusr as $g){
+						foreach($restritos[$meta] as $r){
+							if($g == $r){
+								$indevido = false;
+							}
+						}
+					}
+					if($indevido == true){
+						array_push($indevidos,$layer->name);
+					}
 				}
 			}
 		}
@@ -2540,6 +2565,7 @@ function listaLayersIndevidos($map_file){
 Lista os temas que sao restritos e que nao sao permitidos ao usuario logado
 */
 function listaTemasIndevidos(){
+	error_reporting(0);
 	$indevidos = array();
 	$restritos = listaTemasRestritos();
 	if(count($restritos) > 0){
@@ -2561,6 +2587,7 @@ function listaTemasIndevidos(){
 Lista os grupos ao qual pertence o usuario atualmente logado
 */
 function listaGruposUsrLogin(){
+	error_reporting(0);
 	if(empty($_COOKIE["i3geocodigologin"])){
 		return array();
 	}
