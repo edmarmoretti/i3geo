@@ -170,8 +170,11 @@ if($temas != "")
 						$tituloLayer = $layern->getmetadata("tema");
 					}
 					$ebase = "false";
-					if(isset($fundo) && in_array($tema,$fundo))
-					{$ebase = "true";}
+					if(isset($fundo) && $fundo != ""){
+						if(in_array($tema,$fundo)){
+							$ebase = "true";
+						}
+					}
 					$visivel = "false";
 					if(in_array($tema,$visiveis))
 					{$visivel = "true";}
@@ -365,30 +368,29 @@ i3GEO.editorOL.ativarodadomouse = "<?php
 	else
 	{echo "true";}
 ?>";
-<?php if(isset($fundo)){
+<?php 
+if(isset($fundo) && $fundo != ""){
 	echo "i3GEO.editorOL.fundo = '".implode(",",$fundo)."';";
 }
-?>
-<?php if(isset($controles)){
+
+if(isset($controles)){
 	echo "i3GEO.editorOL.controle = [".implode(",",$objControles)."];";
 }
-?>
-<?php if(isset($numzoomlevels)){
+if(isset($numzoomlevels)){
 	echo "i3GEO.editorOL.numzoom = ".$numzoomlevels.";";
 }
-?>
-<?php
 if(isset($maxextent)){
 	$maxextent = str_replace(" ",",",$maxextent);
 	echo "i3GEO.editorOL.maxext = new OpenLayers.Bounds(".$maxextent.");";
 }
 else
 {echo "i3GEO.editorOL.maxext = new OpenLayers.Bounds(-76.5125927,-39.3925675209,-29.5851853,9.49014852081);";}
-?>
-<?php
 if(isset($mapext)){
 	$mapext = str_replace(" ",",",$mapext);
 	echo "i3GEO.editorOL.mapext = new OpenLayers.Bounds(".$mapext.");";
+}
+if(empty($fundo)){
+	//echo "i3GEO.editorOL.mapa.allOverlays = true;";
 }
 ?>
 i3GEO.editorOL.mapa = new OpenLayers.Map(
@@ -398,11 +400,6 @@ i3GEO.editorOL.mapa = new OpenLayers.Map(
 		resolutions:[0.703125,0.3515625,0.17578125,0.087890625,0.0439453125,0.02197265625,0.010986328125,0.0054931640625,0.00274658203125,0.001373291015625,0.0006866455078125,0.00034332275390625,0.000171661376953125,0.0000858306884765625,0.00004291534423828125,0.000021457672119140625]
 	}
 );
-<?php if(empty($fundo)){
-	echo "i3GEO.editorOL.mapa.allOverlays = true;";
-}
-?>
-
 i3GEO.editorOL.inicia();
 </script>
 </body>
