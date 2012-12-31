@@ -146,7 +146,7 @@ i3GEOF.agrupaElementos = {
 	},
 	t0: function()
 	{
-		var ins = "<p class='paragrafo' >Essa ferramenta transforma v&aacute;rios elementos selecionados de um tema em um s&oacute; gerando um pol&iacute;gono para cada grupo.";
+		var ins = "<p class='paragrafo' >Essa ferramenta transforma v&aacute;rios elementos selecionados de um tema em um s&oacute; gerando um pol&iacute;gono para cada grupo (pol&iacute;gonos convexos).";
 		ins += "<p class='paragrafo' >Para definir quais elementos devem ser unidos uns com os outros &eacute; preciso escolher um item da tabela de atributos do tema.";
 		ins += "Os elementos que possu&iacute;rem o mesmo valor ser&atilde;o considerados no mesmo grupo. Caso n&atilde; tenha sido escolhido nenhum item, todas os elementos ser&atilde;o agrupados em um s&oacute;";
 		ins += "<p class='paragrafo' >O resultado final ser&aacute; um novo tema com elementos diferentes dos originais e cuja tabela de atributos conter&aacute; apenas o item escolhido.";
