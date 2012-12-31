@@ -285,7 +285,7 @@ i3GEOF.pontoEmPoligono = {
 			"",
 			"polraster",
 			"i3GEOpontoEmPoligono",
-			40
+			"260px"
 		);
 	}
 };

@@ -216,6 +216,14 @@ i3GEO.finaliza = function(){
 i3GEO.gadgets.PARAMETROS.mostraMenuSuspenso.permiteLogin = true;
 i3GEO.arvoreDeTemas.OPCOESADICIONAIS.navegacaoDir = true;
 i3GEO.configura.sid = "";
+//
+//define a funcao que sera executada ao clicar no mapa
+//default (balao do tipo etiqueta)
+i3GEO.eventos.MOUSECLIQUEPERM = [i3GEO.configura.funcaoTip];
+//alternativo (janela de identificacao
+//i3GEO.eventos.MOUSECLIQUEPERM = [i3GEO.configura.funcaoIdentifica];
+//
+
 i3GEO.inicia();
 
 </script>

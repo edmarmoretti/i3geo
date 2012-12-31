@@ -157,6 +157,12 @@ i3GEO.Interface.IDCORPO = "contemImg";
 //ativa ou desativa o balao de info ao clicar no mapa
 i3GEO.eventos.cliquePerm.ativo = true;
 //
+//define a funcao que sera executada ao clicar no mapa
+//default (balao do tipo etiqueta)
+i3GEO.eventos.MOUSECLIQUEPERM = [i3GEO.configura.funcaoTip];
+//alternativo (janela de identificacao
+//i3GEO.eventos.MOUSECLIQUEPERM = [i3GEO.configura.funcaoIdentifica];
+//
 i3GEO.Interface.openlayers.GADGETS = {
 		PanZoomBar:true,
 		PanZoom:false,

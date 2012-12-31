@@ -783,7 +783,6 @@ i3GEO.configura = {
 			funcaoonclick:function()
 			{
 				var temp;
-				i3GEO.eventos.cliquePerm.desativa();
 				if($i(i3GEO.Interface.IDMAPA)){
 					$i(i3GEO.Interface.IDMAPA).title = "";
 					temp = "identifica";
@@ -792,31 +791,13 @@ i3GEO.configura = {
 					i3GEO.util.mudaCursor(i3GEO.configura.cursores,temp,i3GEO.Interface.IDMAPA,i3GEO.configura.locaplic);
 				}
 				i3GEO.barraDeBotoes.ativaIcone("identifica");
-				g_tipoacao='identifica';
-				g_operacao='identifica';
-				cliqueIdentifica = function(){
-					if (g_operacao === "identifica" || i3GEO.barraDeBotoes.BOTAOPADRAO === "identifica"){
-						g_operacao = "identifica";
-						eval(i3GEO.configura.funcaoIdentifica);
-					}
-					var temp = function(){
-						//$i("i3GEOmarcaIdentifica").style.display = "none";
-					},
-					i;
-					//alert(objposicaocursor.telay)
-					i3GEO.util.criaPin("i3GEOmarcaIdentifica",i3GEO.configura.locaplic+"/imagens/marcaidentify.png",48,48,temp);
-					i3GEO.util.posicionaImagemNoMapa("i3GEOmarcaIdentifica");
-					i = $i("i3GEOmarcaIdentifica");
-					if(i){
-						i.style.display = "block";
-					}
-				};
-				if(i3GEO.eventos.MOUSECLIQUE.toString().search("cliqueIdentifica()") < 0)
-				{i3GEO.eventos.MOUSECLIQUE.push("cliqueIdentifica()");}
-				if(i3GEO.eventos.MOUSECLIQUE.toString().search("verificaTip()") > 0)
-				{i3GEO.eventos.MOUSECLIQUE.remove("verificaTip()");}
-				if(i3GEO.eventos.MOUSEPARADO.toString().search("verificaTip()") > 0)
-				{i3GEO.eventos.MOUSEPARADO.remove("verificaTip()");}
+				//desativa as outras operacoes de clique, mas apenas se nao for a mesma que ativa o identifica
+				if(i3GEO.eventos.MOUSECLIQUEPERM.toString().search(i3GEO.configura.funcaoTip) >= 0){
+					i3GEO.eventos.MOUSECLIQUEPERM.remove(i3GEO.configura.funcaoTip);
+				}
+				if(i3GEO.eventos.MOUSECLIQUEPERM.toString().search(i3GEO.configura.funcaoIdentifica) < 0){
+					i3GEO.eventos.MOUSECLIQUEPERM.push(i3GEO.configura.funcaoIdentifica);
+				}
 			}
 		},
 		{
@@ -839,29 +820,21 @@ i3GEO.configura = {
 					i3GEO.util.mudaCursor(i3GEO.configura.cursores,temp,i3GEO.Interface.IDMAPA,i3GEO.configura.locaplic);
 				}
 				i3GEO.barraDeBotoes.ativaIcone("identificaBalao");
-				g_tipoacao='identifica';
-				g_operacao='identifica';
-				verificaTip = function(){
-					//
-					//cancela se existir alguma ferramenta ativa
-					//
-					if(i3GEO.util.verificaScriptTag("i3GEOF") === true)
-					{return;}
-					//if(g_operacao !== "identifica" || i3GEOF.identifica){return;}
-					if($i("marcaIdentifica")){return;}
-					//funcao default para pegar os dados
-					if (g_operacao === "identifica"){
-						eval(i3GEO.configura.funcaoTip);
-					}
-					else
-					{i3GEO.eventos.MOUSEPARADO.remove("verificaTip()");}
-				};
+				//desativa as outras operacoes de clique, mas apenas se nao for a mesma que ativa o identifica
+				if(i3GEO.eventos.MOUSECLIQUEPERM.toString().search(i3GEO.configura.funcaoIdentifica) >= 0){
+					i3GEO.eventos.MOUSECLIQUEPERM.remove(i3GEO.configura.funcaoIdentifica);
+				}
+				if(i3GEO.eventos.MOUSECLIQUEPERM.toString().search(i3GEO.configura.funcaoTip) < 0){
+					i3GEO.eventos.MOUSECLIQUEPERM.push(i3GEO.configura.funcaoTip);
+				}			
+				/*
 				if(i3GEO.eventos.MOUSECLIQUE.toString().search("cliqueIdentifica()") > 0)
 				{i3GEO.eventos.MOUSECLIQUE.remove("cliqueIdentifica()");}
 				if(i3GEO.eventos.MOUSECLIQUE.toString().search("verificaTip()") < 0)
 				{i3GEO.eventos.MOUSECLIQUE.push("verificaTip()");}
 				if(i3GEO.eventos.MOUSEPARADO.toString().search("verificaTip()") < 0)
 				{i3GEO.eventos.MOUSEPARADO.push("verificaTip()");}
+				*/
 			}
 		},
 		{

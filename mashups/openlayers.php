@@ -165,8 +165,8 @@ if($temas != "")
 					else{
 						$nomeLayer = str_replace(" ",",",$layers);
 						$maptemp = @ms_newMapObj($nomeMap);
-						$temp = explode(",",$layers);
-						$layern = $maptemp->getLayerByName($temp[0]);
+						//$temp = explode(",",$layers);
+						$layern = $maptemp->getLayerByName($layers[0]);
 						$tituloLayer = $layern->getmetadata("tema");
 					}
 					$ebase = "false";
@@ -266,6 +266,7 @@ Par&acirc;metros:
 <html>
 <head>
 <META HTTP-EQUIV="Content-Type" CONTENT="text/html; charset=ISO-8859-1">
+
 <!--
 <link rel="stylesheet" type="text/css" href="../pacotes/yui290/build/fonts/fonts-min.css" />
 <link rel="stylesheet" type="text/css" href="../pacotes/yui290/build/container/assets/skins/sam/container.css" />
@@ -273,10 +274,10 @@ Par&acirc;metros:
 <script type="text/javascript" src="../pacotes/yui290/build/dragdrop/dragdrop-min.js"></script>
 <script type="text/javascript" src="../pacotes/yui290/build/container/container-min.js"></script>
 <script type="text/javascript" src="../classesjs/compactados/classe_calculo_compacto.js"></script>
-<script type="text/javascript" src="../pacotes/openlayers/OpenLayers29.js"></script>
-<script type="text/javascript" src="openlayers.js.php"></script>
--->
+<script type="text/javascript" src="../pacotes/openlayers/OpenLayers211.js"></script>
+<script type="text/javascript" src="openlayers.js"></script>
 
+-->
 <script type="text/javascript" src="openlayers_compacto.js.php"></script>
 <script type="text/javascript" src="../classesjs/compactados/classe_util_compacto.js"></script>
 <link rel="stylesheet" href="openlayers_compacto.css" type="text/css" />
@@ -384,13 +385,19 @@ if(isset($maxextent)){
 else
 {echo "i3GEO.editorOL.maxext = new OpenLayers.Bounds(-76.5125927,-39.3925675209,-29.5851853,9.49014852081);";}
 ?>
-<?php if(isset($mapext)){
+<?php
+if(isset($mapext)){
 	$mapext = str_replace(" ",",",$mapext);
 	echo "i3GEO.editorOL.mapext = new OpenLayers.Bounds(".$mapext.");";
 }
 ?>
-i3GEO.editorOL.mapa = new OpenLayers.Map('i3geoMapa',{controls:[],resolutions:[0.703125,0.3515625,0.17578125,0.087890625,0.0439453125,0.02197265625,0.010986328125,0.0054931640625,0.00274658203125,0.001373291015625,0.0006866455078125,0.00034332275390625,0.000171661376953125,0.0000858306884765625,0.00004291534423828125,0.000021457672119140625]
-});
+i3GEO.editorOL.mapa = new OpenLayers.Map(
+	'i3geoMapa',
+	{
+		controls:[],
+		resolutions:[0.703125,0.3515625,0.17578125,0.087890625,0.0439453125,0.02197265625,0.010986328125,0.0054931640625,0.00274658203125,0.001373291015625,0.0006866455078125,0.00034332275390625,0.000171661376953125,0.0000858306884765625,0.00004291534423828125,0.000021457672119140625]
+	}
+);
 <?php if(empty($fundo)){
 	echo "i3GEO.editorOL.mapa.allOverlays = true;";
 }

@@ -171,6 +171,13 @@ var osm = new OpenLayers.Layer.WMS(
 );
 
 i3GEO.Interface.openlayers.LAYERSADICIONAIS = [ims,wsm,bra,osm];
+//
+//define a funcao que sera executada ao clicar no mapa
+//default (balao do tipo etiqueta)
+i3GEO.eventos.MOUSECLIQUEPERM = [i3GEO.configura.funcaoTip];
+//alternativo (janela de identificacao
+//i3GEO.eventos.MOUSECLIQUEPERM = [i3GEO.configura.funcaoIdentifica];
+//
 
 i3GEO.inicia();
 </script>

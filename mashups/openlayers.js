@@ -164,16 +164,6 @@ i3GEO.editorOL = {
 		}
 		if(i3GEO.editorOL.mapa === "")
 		{alert("O objeto i3GEO.editorOL.mapa precisa ser criado com new OpenLayers.Map()");return;}
-		if(i3GEO.editorOL.maxext !== ""){
-			i3GEO.editorOL.mapa.setOptions({
-				maxExtent: i3GEO.editorOL.maxext
-			});
-		}
-		if(i3GEO.editorOL.numzoom !== ""){
-			i3GEO.editorOL.mapa.setOptions({
-				numZoomLevels: i3GEO.editorOL.numzoom
-			});
-		}
 		for(i=0;i<ncontroles;i++){
 			i3GEO.editorOL.mapa.addControl(i3GEO.editorOL.controles[i]);
 		}
@@ -206,10 +196,7 @@ i3GEO.editorOL = {
 		}
 		i3GEO.editorOL.adicionaKml();
 		i3GEO.editorOL.adicionaMarcas();
-		if(i3GEO.editorOL.maxext !== "")
-		{i3GEO.editorOL.mapa.zoomToMaxExtent();}
-		if(i3GEO.editorOL.mapext != "")
-		{i3GEO.editorOL.mapa.zoomToExtent(i3GEO.editorOL.mapext);}
+
 		i3GEO.editorOL.coordenadas();
 		i3GEO.editorOL.criaJanelaBusca();
 		i3GEO.editorOL.criaBotoes(i3GEO.editorOL.botoes);
@@ -217,6 +204,23 @@ i3GEO.editorOL = {
 		{i3GEO.editorOL.ativaLayerSwitcher();}
 		if(i3GEO.editorOL.ativarodadomouse === false)
 		{i3GEO.editorOL.desativaRodaDoMouse();}
+		
+		if(i3GEO.editorOL.numzoom !== ""){
+			i3GEO.editorOL.mapa.setOptions({
+				numZoomLevels: i3GEO.editorOL.numzoom
+			});
+		}
+		if(i3GEO.editorOL.maxext !== ""){
+			i3GEO.editorOL.mapa.setOptions({
+				maxExtent: i3GEO.editorOL.maxext
+			});
+		}
+		if(i3GEO.editorOL.mapext != ""){
+			i3GEO.editorOL.mapa.zoomToExtent(i3GEO.editorOL.mapext);
+		}
+		else{
+			i3GEO.editorOL.mapa.zoomToMaxExtent();
+		}
 	},
 	criaLayerGrafico: function(){
 		var	sketchSymbolizers = {

@@ -1724,7 +1724,7 @@ i3GEO.util = {
 								tema = retorno[i].name;
 							}
 							comboTemas += "<tr><td><input size=2 style='cursor:pointer' type=checkbox name='"+tema+"' /></td>";
-							comboTemas += "<td>&nbsp;<input style='text-align:left; cursor:text;' onclick='javascript:this.select();' id='"+prefixo+tema+"' type=text size='"+size+"' value='"+nome+"' /></td></tr>";
+							comboTemas += "<td>&nbsp;<input style='text-align:left;width:"+size+" cursor:text;' onclick='javascript:this.select();' id='"+prefixo+tema+"' type=text value='"+nome+"' /></td></tr>";
 						}
 						comboTemas += "</table>";
 						temp = {dados:comboTemas,tipo:"dados"};
@@ -2005,7 +2005,7 @@ i3GEO.util = {
 				n = retorno.data.valores.length;
 				for (i=0;i<n; i++){
 					ins.push("<tr><td><input size=2 style='cursor:pointer' name='"+retorno.data.valores[i].tema+"' type=checkbox id='"+prefixo+retorno.data.valores[i].item+"' /></td>");
-					ins.push("<td><input style='text-align:left; cursor:text;' onclick='javascript:this.select();' id='"+prefixo+retorno.data.valores[i].item+retorno.data.valores[i].tema+"' type=text size='"+size+"' value='"+retorno.data.valores[i].item+"' /></td>");
+					ins.push("<td><input style='text-align:left;cursor:text;width:"+size+"' onclick='javascript:this.select();' id='"+prefixo+retorno.data.valores[i].item+retorno.data.valores[i].tema+"' type=text value='"+retorno.data.valores[i].item+"' /></td>");
 					if(ordenacao === "sim"){
 						ins.push("<td><input style='text-align:left; cursor:text;' id='ordem_"+prefixo+retorno.data.valores[i].item+retorno.data.valores[i].tema+"' type=text size='3' value='"+i+"' /></td>");
 					}

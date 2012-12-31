@@ -159,7 +159,7 @@ i3GEOF.tabela = {
 						{$i("i3GEOtabelaitensrelatorio").innerHTML = retorno.dados;}
 					},
 					"i3GEOtabelaitensrelatorio",
-					50,
+					"320px",
 					"",
 					"sim"
 				);

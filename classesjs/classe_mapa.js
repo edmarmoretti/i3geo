@@ -771,7 +771,7 @@ i3GEO.mapa = {
 		*/
 		cliqueIdentificaDefault: function(){
 			if(typeof(console) !== 'undefined'){console.info("i3GEO.mapa.dialogo.cliqueIdentificaDefault()");}
-			if (g_tipoacao === "identifica"){
+			//if (g_tipoacao === "identifica"){
 				i3GEO.eventos.MOUSEPARADO.remove("verificaTip()");
 				if(typeof(i3GEOF.identifica) === 'undefined'){
 					//javascript que sera carregado
@@ -785,7 +785,7 @@ i3GEO.mapa = {
 					i3GEOF.identifica.buscaDadosTema(i3GEO.temaAtivo);
 					return;
 				}
-			}
+			//}
 		},
 		/*
 		Function: verificaTipDefault

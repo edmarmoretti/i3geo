@@ -198,6 +198,13 @@ OpenLayers.ImgPath = "../pacotes/openlayers/img/";
 	);
 	i3GEO.Interface.openlayers.LAYERSADICIONAIS = [bra,osm];
 })();
+//
+//define a funcao que sera executada ao clicar no mapa
+//default (balao do tipo etiqueta)
+i3GEO.eventos.MOUSECLIQUEPERM = [i3GEO.configura.funcaoTip];
+//alternativo (janela de identificacao
+//i3GEO.eventos.MOUSECLIQUEPERM = [i3GEO.configura.funcaoIdentifica];
+//
 
 //
 //substitui a janela de alerta normal do navegador por uma janela estilizada. Pode ser comentado sem problemas. No Safari apresentou problemas.

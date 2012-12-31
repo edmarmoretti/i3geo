@@ -335,6 +335,7 @@ i3GEO.analise = {
 				YAHOO.i3GEO.janela.manager.remove(janela);
 				janela.destroy();
 			}
+			i3GEO.barraDeBotoes.ativaIcone("pointer");
 		},
 		/*
 		Function: clique
@@ -575,6 +576,7 @@ i3GEO.analise = {
 				YAHOO.i3GEO.janela.manager.remove(janela);
 				janela.destroy();
 			}
+			i3GEO.barraDeBotoes.ativaIcone("pointer");
 		},
 		/*
 		Function: clique

@@ -19,7 +19,7 @@ include("../ms_configura.php");
 <script type="text/javascript" src="dicionario.js"></script>
 <style>
 body {
-	margin: 0.5 cm auto;
+	margin: 0.2cm;
 	padding-top: 12px;
 	COLOR: #2F4632;
 	text-align: center;

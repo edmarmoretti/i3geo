@@ -126,6 +126,13 @@ i3GEO.idioma.IDSELETOR = "seletorIdiomas";
 i3GEO.interface.ATIVAMENUCONTEXTO = true;
 i3GEO.barraDeBotoes.TIPOAJUDA = "vertical";
 i3GEO.barraDeBotoes.SOICONES = true;
+//
+//define a funcao que sera executada ao clicar no mapa
+//default (balao do tipo etiqueta)
+i3GEO.eventos.MOUSECLIQUEPERM = [i3GEO.configura.funcaoTip];
+//alternativo (janela de identificacao
+//i3GEO.eventos.MOUSECLIQUEPERM = [i3GEO.configura.funcaoIdentifica];
+//
 
 i3GEO.inicia();
 if($i("escala") && i3GEO.parametros.w < 500)

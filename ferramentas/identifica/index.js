@@ -277,13 +277,10 @@ i3GEOF.identifica = {
 			minimiza
 		);
 		divid = janela[2].id;
-		i3GEO.eventos.cliquePerm.desativa();
 		i3GEOF.identifica.inicia(i3GEO.temaAtivo,objposicaocursor.ddx,objposicaocursor.ddy,divid,true,true);
 		$i("i3GEOF.identifica_corpo").style.backgroundColor = "white";
 		if(i3GEO.Interface.ATUAL !== "googleearth"){
 			temp = function(){
-				i3GEO.eventos.cliquePerm.ativa();
-				i3GEO.eventos.MOUSECLIQUE.remove("cliqueIdentifica()");
 				i3GEO.barraDeBotoes.ativaBotoes();
 				i3GEOF.identifica.limpaMarca();
 				if(i3GEO.eventos.NAVEGAMAPA.toString().search("i3GEOF.identifica") > 0)
@@ -310,7 +307,7 @@ i3GEOF.identifica = {
 	Refaz a interface da ferramenta quando a janela flutuante tem seu foco ativado
 	*/
 	ativaFoco: function(){
-		i3GEO.eventos.cliquePerm.desativa();
+		//i3GEO.eventos.cliquePerm.desativa();
 		i3GEOF.identifica.listaTemas("ligados");
 		var i = $i("i3GEOF.identifica_c").style;
 		i3GEO.janela.ULTIMOZINDEX++;

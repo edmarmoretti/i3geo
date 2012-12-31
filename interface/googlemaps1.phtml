@@ -166,6 +166,14 @@ i3GEO.arvoreDeTemas.OPCOESADICIONAIS.comentario = true;
 i3GEO.mapa.AUTORESIZE = true;
 i3GEO.arvoreDeCamadas.MOSTRALISTAKML = false;
 //
+//define a funcao que sera executada ao clicar no mapa
+//default (balao do tipo etiqueta)
+i3GEO.eventos.MOUSECLIQUEPERM = [i3GEO.configura.funcaoTip];
+//alternativo (janela de identificacao
+//i3GEO.eventos.MOUSECLIQUEPERM = [i3GEO.configura.funcaoIdentifica];
+//
+
+//
 //substitui a janela de alerta normal do navegador por uma janela estilizada. Pode ser comentado sem problemas.
 //
 //i3GEO.janela.ativaAlerta();

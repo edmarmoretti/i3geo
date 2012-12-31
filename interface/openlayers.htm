@@ -300,6 +300,14 @@ i3GEO.finaliza = function(){
 	i3GEO.mapa.insereDobraPagina("googlemaps","../imagens/dobragooglemaps.png");
 };
 i3GEO.arvoreDeTemas.OPCOESADICIONAIS.navegacaoDir = true;
+//
+//define a funcao que sera executada ao clicar no mapa
+//default (balao do tipo etiqueta)
+i3GEO.eventos.MOUSECLIQUEPERM = [i3GEO.configura.funcaoTip];
+//alternativo (janela de identificacao
+//i3GEO.eventos.MOUSECLIQUEPERM = [i3GEO.configura.funcaoIdentifica];
+//
+
 //OpenLayers.DOTS_PER_INCH = 96
 //i3GEO.configura.sid = "";
 i3GEO.inicia();

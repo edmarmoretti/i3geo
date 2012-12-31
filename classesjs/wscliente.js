@@ -552,7 +552,7 @@ function i3geo_wscliente_configura(loc_i3geo,corpo,enderecows,enderecowms,rssws,
 				for (var i=0;i<pars.length; i++)
 				{
 					var temp = pars[i].split("#");
-					ins+= "<br>"+temp[0]+"&nbsp("+temp[1]+")<input type=text size=20 value='' id=xxx"+temp[0]+" /><br>";
+					ins+= "<br>"+temp[0]+"&nbsp("+temp[1]+")<input type=text style=width:140px; value='' id=xxx"+temp[0]+" /><br>";
 				}
 				$i($i3geo_wscliente.corpo).innerHTML = ins+"</div>";
 			}
