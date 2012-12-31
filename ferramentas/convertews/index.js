@@ -53,7 +53,7 @@ i3GEOF.converteMapaWS = {
 		Para efeitos de compatibilidade antes da vers&atilde;o 4.7 que n&atilde;o tinha dicion&aacute;rio
 	*/
 	criaJanelaFlutuante: function(){
-		i3GEOF.carregaMapa.iniciaDicionario();
+		i3GEOF.converteMapaWS.iniciaDicionario();
 	},
 	/*
 	Function: iniciaDicionario

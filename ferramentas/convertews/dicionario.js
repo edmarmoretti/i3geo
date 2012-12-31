@@ -1,5 +1,5 @@
-//+$trad(1,i3GEOF.convertews.dicionario)+
-i3GEOF.convertews.dicionario = {
+//+$trad(1,i3GEOF.converteMapaWS.dicionario)+
+i3GEOF.converteMapaWS.dicionario = {
 1: [{
 pt:"",
 en:"",
