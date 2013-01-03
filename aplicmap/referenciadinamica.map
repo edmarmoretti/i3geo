@@ -5,13 +5,15 @@ LAYER
       NAME "refdin"
       TYPE RASTER
       STATUS default
-      CONNECTION "http://mapas.mma.gov.br/cgi-bin/mapserv?map=/opt/www/html/webservices/baseref.map&"
+      #CONNECTION "http://mapas.mma.gov.br/cgi-bin/mapserv?map=/opt/www/html/webservices/baseref.map&"
+      CONNECTION "http://labs.metacarta.com/wms/vmap0"
       CONNECTIONTYPE WMS
       METADATA
         "wms_srs"	"EPSG:4326"
         "wms_exceptions_format"	"application/vnd.ogc.se_xml"
-        "wms_name"	"base"
-        "wms_formatlist"	"image/gif,image/png,image/png"
+        #"wms_name"	"base"
+        "wms_name"	"basic"
+        "wms_formatlist"	"image/png"
         "wms_format"	"image/png"
         "wms_connectiontimeout"	"20"
         "wms_server_version"	"1.1.1"

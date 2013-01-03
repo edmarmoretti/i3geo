@@ -276,15 +276,19 @@ OpenLayers.ImgPath = "../pacotes/openlayers/img/";
 		{layers:"baseraster",srs:"EPSG:4618",format:"image/png",isBaseLayer:false},
 		{isBaseLayer:true,visibility:false}
 	);
-	/*
-	var osm = new OpenLayers.Layer.WMS(
-		"Open Street Map",
-		"http://full.wms.geofabrik.de/std/demo_key",
-		{layers:""},
-		{isBaseLayer:true,visibility:false}
+	var tms = new OpenLayers.Layer.TMS(
+	    "OSGEO",
+	    "http://tilecache.osgeo.org/wms-c/Basic.py/",
+	    {
+	        layername: "basic",
+	        type: "png",
+	        // set if different than the bottom left of map.maxExtent
+	        tileOrigin: new OpenLayers.LonLat(-180,-90),
+	        isBaseLayer:true,
+	        visibility:false
+	    }
 	);
-	*/
-	i3GEO.Interface.openlayers.LAYERSADICIONAIS = [oce,ims,wsm,bra];
+	i3GEO.Interface.openlayers.LAYERSADICIONAIS = [oce,ims,wsm,tms,bra];
 })();
 //
 //substitui a janela de alerta normal do navegador por uma janela estilizada. Pode ser comentado sem problemas. No Safari apresentou problemas.

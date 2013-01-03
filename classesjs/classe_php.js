@@ -514,12 +514,18 @@ i3GEO.php = {
 
 	<REFERENCIADINAMICA>
 	*/
-	referenciadinamica: function(funcao,zoom,tipo){
+	referenciadinamica: function(funcao,zoom,tipo,w,h){
 		i3GEO.php.verifica();
+		if(!w){
+			w = "";
+		}
+		if(!h){
+			h = "";
+		}
 		if(arguments.length === 2)
 		{tipo = "dinamico";}
 		var p = i3GEO.configura.locaplic+"/classesphp/mapa_controle.php",
-			par = "funcao=referenciadinamica&g_sid="+i3GEO.configura.sid+"&zoom="+zoom+"&tipo="+tipo+"&ext="+i3GEO.parametros.mapexten;
+			par = "funcao=referenciadinamica&g_sid="+i3GEO.configura.sid+"&zoom="+zoom+"&tipo="+tipo+"&ext="+i3GEO.parametros.mapexten+"&w="+w+"&h="+h;
 		cpJSON.call(p,"retornaReferenciaDinamica",funcao,par);
 	},
 	/*

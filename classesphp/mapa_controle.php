@@ -737,7 +737,7 @@ Gera a imagem do mapa de refer&ecirc;ncia de forma din&acirc;mica, variando com 
 		$nomeImagem = nomeRandomico();
 		if(!isset($ext))
 		{$ext = "";}
-		$retorno = retornaReferenciaDinamica($ext);
+		$retorno = retornaReferenciaDinamica($ext,$w,$h);
 	break;
 /*
 Valor: MUDAOUTPUTFORMAT

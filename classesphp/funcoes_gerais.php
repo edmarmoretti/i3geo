@@ -658,11 +658,15 @@ Parametros:
 
 $ext {string} - (opcional) extens&atilde;o geogr&aacute;fica do mapa
 
+$w {numeric} - (opcional) largura da imagem
+
+$h {numeric} - (opcional) altura da imagem
+
 Retorno:
 
 String contendo vari&aacute;veis no formato javascript
 */
-function retornaReferenciaDinamica($ext="")
+function retornaReferenciaDinamica($ext="",$w="",$h="")
 {
 	global $nomeImagem,$map_file,$utilizacgi,$locmapserv,$locaplic,$zoom,$tipo,$interface;
 	//
@@ -685,8 +689,7 @@ function retornaReferenciaDinamica($ext="")
 	}
 	$maptemp = ms_newMapObj($locaplic."/aplicmap/referenciadinamica.map");
 	$nomeLayerRef = "";
-	if($tipo != "mapa")
-	{
+	if($tipo != "mapa"){
 		$layern = $maptemp->getlayerbyname("refdin");
 		ms_newLayerObj($objMapa, $layern);
 	}
@@ -694,8 +697,12 @@ function retornaReferenciaDinamica($ext="")
 	ms_newLayerObj($objMapa, $layern);
 
 	$r = $objMapa->reference;
-	$w = $r->width;
-	$h = $r->height;
+	if($w == ""){
+		$w = $r->width;
+	}
+	if($h == ""){
+		$h = $r->height;
+	}
 	$emt = $objMapa->extent;
 	$em = ms_newRectObj();
 	$em->set("minx",$emt->minx);
@@ -716,7 +723,7 @@ function retornaReferenciaDinamica($ext="")
 	$nomer = ($objImagem->imagepath)."ref".$nomeImagem.".png";
 	$objImagem->saveImage($nomer);
 	$nomer = ($objImagem->imageurl).basename($nomer);
-	$s =  "var refimagem='".$nomer."';var refwidth=".$objImagem->width.";var refheight=".$objImagem->height.";var refpath='".$objImagem->imagepath."';var refurl='".$objImagem->imageurl."'";
+	$s =  "var refimagem='".$nomer."';var refwidth=".$w.";var refheight=".$h.";var refpath='".$objImagem->imagepath."';var refurl='".$objImagem->imageurl."'";
 	$mapa = ms_newMapObj($map_file);
 	if($interface == "googlemaps")
 	{$mapa->setProjection("init=epsg:4618");}
@@ -732,7 +739,7 @@ function retornaReferenciaDinamica($ext="")
 		$mapa->setmetadata("referenciaextentoriginal",$original);
 	}
 	$s .= ";var extentref = '".$emt->minx." ".$emt->miny." ".$emt->maxx." ".$emt->maxy."';";
-	$d = (abs($emt->maxx - $emt->minx)) / ($objImagem->width);
+	$d = (abs($emt->maxx - $emt->minx)) / ($w);
 	$s .= "g_celularef = ".$d.";";
 	$emt = $objMapa->extent;
 	$r->set("minx",$emt->minx);
@@ -2521,7 +2528,7 @@ function listaLayersIndevidos($map_file){
 			[0]=>
 			string(1) "1"
 		  }
-		}	
+		}
 	*/
 	if(count($restritos) > 0){
 		$gruposusr = listaGruposUsrLogin();
