@@ -1047,7 +1047,7 @@ i3GEO.navega = {
 				$i("img_d").style.top = 0 + "px";
 				$i("img_d").style.width = i3GEO.parametros.w + "px";
 				$i("img_d").style.height = i3GEO.parametros.h + "px";
-				$i("div_d").style.clip = 'rect(0 75 75 0)';
+				$i("div_d").style.clip = 'rect(0px 75px 75px 0px)';
 				novoeli = document.createElement("div");
 				novoeli.id = "div_di";
 				novoel.appendChild(novoeli);
@@ -1115,7 +1115,7 @@ i3GEO.navega = {
 		*/
 		movimenta: function(){
 			if(i3GEO.navega.destacaTema.ESTAATIVO === "sim")
-			{$i("div_d").style.clip = 'rect('+(objposicaocursor.imgy - i3GEO.navega.destacaTema.TAMANHO)+" "+(objposicaocursor.imgx - 10)+" "+(objposicaocursor.imgy - 10)+" "+(objposicaocursor.imgx - i3GEO.navega.destacaTema.TAMANHO)+')';}
+			{$i("div_d").style.clip = 'rect('+(objposicaocursor.imgy - i3GEO.navega.destacaTema.TAMANHO)+"px "+(objposicaocursor.imgx - 10)+"px "+(objposicaocursor.imgy - 10)+"px "+(objposicaocursor.imgx - i3GEO.navega.destacaTema.TAMANHO)+'px)';}
 		}
 	},
 	/*

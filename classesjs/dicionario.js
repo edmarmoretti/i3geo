@@ -1880,7 +1880,7 @@ it:""
 }],
 "x50":[
 {
-pt:"Feche para parar destaque",
+pt:"Feche para parar",
 en:"",
 es:"",
 it:""
