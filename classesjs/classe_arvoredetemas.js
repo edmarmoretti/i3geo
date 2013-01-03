@@ -1481,7 +1481,7 @@ i3GEO.arvoreDeTemas = {
 				return " onmouseout='javascript:this.className = \""+i+" iconeMini iconeGuiaMovelMouseOut\";' onmouseover='javascript:this.className = \""+i+" iconeMini iconeGuiaMovelMouseOver\";' class='"+i+" iconeMini iconeGuiaMovelMouseOut' src='"+imb+"' style='cursor:pointer;text-align:left' ";
 			};
 		if(OPCOESADICIONAIS.refresh === true){
-			ins += "<td><img "+estilo("refresh")+" onclick='i3GEO.arvoreDeTemas.atualiza()' title='Refresh'/></td>";
+			ins += "<td><img "+estilo("i3geo_refresh2")+" onclick='i3GEO.arvoreDeTemas.atualiza()' title='Refresh'/></td>";
 			t += 20;
 		}
 		if(OPCOESADICIONAIS.uploadarquivo === true){

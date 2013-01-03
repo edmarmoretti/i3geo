@@ -1355,21 +1355,26 @@ function criaSHP($tema,$map_file,$locaplic,$dir_tmp,$nomeRand=TRUE)
 	$versao = versao();
 	$versao = $versao["principal"];
 	//para manipular dbf
-	if(file_exists($locaplic."/pacotes/phpxbase/api_conversion.php"))
-	include_once($locaplic."/pacotes/phpxbase/api_conversion.php");
-	else
-	include_once "../pacotes/phpxbase/api_conversion.php";
+	if(file_exists($locaplic."/pacotes/phpxbase/api_conversion.php")){
+		include_once($locaplic."/pacotes/phpxbase/api_conversion.php");
+	}
+	else{
+		include_once "../pacotes/phpxbase/api_conversion.php";
+	}
 	$map = @ms_newMapObj($map_file);
 	$layer = $map->getlayerbyname($tema);
 	$layer->set("template","none.htm");
 	$diretorio = dirname($dir_tmp);
 	$tipol = MS_SHP_POINT;
-	if ($layer->type == MS_LAYER_LINE){$tipol = MS_SHP_ARC;}
-	if ($layer->type == MS_LAYER_POLYGON){$tipol = MS_SHP_POLYGON;}
+	if ($layer->type == MS_LAYER_LINE)
+	{$tipol = MS_SHP_ARC;}
+	if ($layer->type == MS_LAYER_POLYGON)
+	{$tipol = MS_SHP_POLYGON;}
 	if ($nomeRand == true)
 	{$novonomelayer = $tema."_".nomeRandomico(5);}
 	else
 	{$novonomelayer = $tema;}
+	$novonomelayer = str_replace(".","-",$novonomelayer);
 	$nomeshp = $dir_tmp."/".$novonomelayer;
 	if(file_exists($nomeshp.".shp"))
 	{return $nomeshp;}
@@ -1377,8 +1382,7 @@ function criaSHP($tema,$map_file,$locaplic,$dir_tmp,$nomeRand=TRUE)
 	//se for do tipo features
 	$data = $layer->data;
 	$resultadoFinal = true;
-	if ($data == "")
-	{
+	if($data == ""){
 		$def[] = array("ID","C","50");
 		$reg[] = 0;
 		if(!function_exists("dbase_create")){
@@ -1403,14 +1407,12 @@ function criaSHP($tema,$map_file,$locaplic,$dir_tmp,$nomeRand=TRUE)
 		$novoshpf->addShape($shape);
 		$resultadoFinal = true;
 	}
-	else
-	{
+	else{
 		$items = pegaItens($layer);
 		// cria o dbf
 		$def = array();
 		$cni = 0;
-		foreach ($items as $ni)
-		{
+		foreach ($items as $ni){
 			$temp = strtoupper($ni);
 			$temp = substr($temp,0,8).$cni;
 			//
@@ -1419,6 +1421,7 @@ function criaSHP($tema,$map_file,$locaplic,$dir_tmp,$nomeRand=TRUE)
 			$def[] = array($temp,"C","254");
 			$cni = $cni + 1;
 		}
+
 		if(!function_exists("dbase_create"))
 		{$db = xbase_create($nomeshp.".dbf", $def);}
 		else
@@ -1432,8 +1435,8 @@ function criaSHP($tema,$map_file,$locaplic,$dir_tmp,$nomeRand=TRUE)
 		{@$layer->queryByrect($map->extent);}
 		//pega cada registro
 		$res_count = $layer->getNumresults();
-		if ($res_count > 0)
-		{
+		//echo $res_count;exit;
+		if ($res_count > 0){
 			$sopen = $layer->open();
 			if($sopen == MS_FAILURE){return "erro";}
 			for ($i = 0; $i < $res_count; ++$i)
