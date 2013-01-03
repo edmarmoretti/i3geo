@@ -290,16 +290,14 @@ Include:
 		//pega os valores
 		include_once($this->locaplic."/classesphp/classe_atributos.php");
 		$m = new Atributos($this->arquivo,$this->tema);
+		//FIXME alterar para a nova funcao de identificacao
 		$shape = $m->identificaQBP($this->nome,$x,$y,$this->arquivo,0,"","shape");
-		if ((is_array($shape)) && ($shape[0] == " "))
-		{
+		if ((is_array($shape)) && ($shape[0] == " ")){
 			return("erro.Nenhum valor encontrado");
 		}
-		else
-		{
+		else{
 			$itens = explode("*",$itens);
-			foreach ($itens as $i)
-			{
+			foreach ($itens as $i){
 				$ii = explode(",",$i);
 				$v = $shape->values[$ii[0]];
 				if (!is_numeric($v))
@@ -309,8 +307,7 @@ Include:
 			}
 			$data = implode("*",$valor);
 			$cores = implode("*",$cor);
-			if ($tipo == "pizza")
-			{
+			if ($tipo == "pizza"){
 				//gera a figura
 				include_once($this->locaplic."/classesphp/graficopizza.php");
 				$res = graficopizza($data,$width,$inclinacao,$shadow_height,$cores,$this->arquivo,$temaedit);
@@ -318,7 +315,7 @@ Include:
 			}
 			//insere simbolo
 			$nomes = nomeRandomico();
-			$nId = ms_newsymbolobj($this->mapa, "foto");
+			$nId = ms_newsymbolobj($this->mapa, $img[0]);
 			$oSymbol = $this->mapa->getsymbolobjectbyid($nId);
 			$oSymbol->set("inmapfile", MS_TRUE);
 			$oSymbol->set("type",MS_SYMBOL_PIXMAP);
