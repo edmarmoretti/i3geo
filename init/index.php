@@ -74,9 +74,9 @@ a {
 		style="background-color: white; background-image: url(../imagens/i3geo1bw.jpg);">
 		<?php
 		if($i3geomaster[0]["usuario"] == "admin" && $i3geomaster[0]["senha"] == "admin" ){
-	echo "<p style='font-size:14px;color:red'>ATEN&Ccedil;&Atilde;O!!! Essa instala&ccedil;&atilde;o est&aacute; vulner&aacute;vel: edite o arquivo i3geo/ms_configura.php e altere o login e senha da vari&aacute;vel i3geomaster";
-}
-?>
+			echo "<p style='font-size:14px;color:red'><script>document.write($"."trad(19,g_traducao_init));</script>";
+		}
+		?>
 		<div id="bandeiras"></div>
 
 		<a target=_blank href="remover.php" class="r"><table >
@@ -138,13 +138,13 @@ a {
 					<td><img src="../imagens/oxygen/22x22/draw-freehand.png" /><br> <script>document.write($trad(9,g_traducao_init));</script></a>
 					</td>
 				</tr>
-			</table> </a> 
+			</table> </a>
 			<a target=_blank href="../datadownload.htm" class="r"><table >
 				<tr>
 					<td><img src="../imagens/oxygen/22x22/download.png" /><br> <script>document.write($trad(10,g_traducao_init));</script></a>
 					</td>
 				</tr>
-			</table> </a> 
+			</table> </a>
 			<a target=_blank href="../ogc.htm" class="r"><table >
 				<tr>
 					<td><img src="../imagens/oxygen/22x22/internet-web-browser.png" /><br>

@@ -106,5 +106,11 @@ es:""
 pt:"Integre mapas em outras aplica&ccedil;&otilde;es",
 en:"",
 es:""
+}],
+19: [
+{
+pt:"ATEN&Ccedil;&Atilde;O!!! Essa instala&ccedil;&atilde;o est&aacute; vulner&aacute;vel: edite o arquivo i3geo/ms_configura.php e altere o login e senha definidos na vari&aacute;vel $i3geomaster.<br>Ao acessar o i3Geo em um servidor que n&atilde;o seja o localhost os mapas ficar&atilde;o bloqueados at&eacute; que essa edi&ccedil;&atilde;o seja feita.",
+en:"",
+es:""
 }]
 };
