@@ -101,7 +101,7 @@ i3GEOF.opcoesTamanho = {
 			box.style.width = i3GEO.parametros.w + "px";
 			box.style.height = i3GEO.parametros.h + "px";
 			box.style.display = "block";
-			box.style.zIndex = 6000;
+			box.style.zIndex = 2;
 		}
 		catch(erro){i3GEO.janela.tempoMsg(erro);}
 	},
