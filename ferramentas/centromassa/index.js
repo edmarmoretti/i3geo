@@ -44,7 +44,7 @@ Classe: i3GEOF.centromassa
 i3GEOF.centromassa = {
 	/*
 	Variavel: aguarde
-	
+
 	Estilo do objeto DOM com a imagem de aguarde existente no cabe&ccedil;alho da janela.
 	*/
 	aguarde: "",
@@ -56,11 +56,11 @@ i3GEOF.centromassa = {
 	},
 	/*
 	Function: iniciaDicionario
-	
+
 	Carrega o dicion&aacute;rio e chama a fun&ccedil;&atilde;o que inicia a ferramenta
-	
+
 	O Javascript &eacute; carregado com o id i3GEOF.nomedaferramenta.dicionario_script
-	*/	
+	*/
 	iniciaDicionario: function(){
 		if(typeof(i3GEOF.centromassa.dicionario) === 'undefined'){
 			i3GEO.util.scriptTag(
@@ -72,14 +72,14 @@ i3GEOF.centromassa = {
 		else{
 			i3GEOF.centromassa.iniciaJanelaFlutuante();
 		}
-	},	
+	},
 	/*
 	Function: inicia
-	
+
 	Inicia a ferramenta. &Eacute; chamado por criaJanelaFlutuante
-	
+
 	Parametro:
-	
+
 	iddiv {String} - id do div que receber&aacute; o conteudo HTML da ferramenta
 	*/
 	inicia: function(iddiv){
@@ -91,11 +91,11 @@ i3GEOF.centromassa = {
 	},
 	/*
 	Function: html
-	
+
 	Gera o c&oacute;digo html para apresenta&ccedil;&atilde;o das op&ccedil;&otilde;es da ferramenta
-	
+
 	Retorno:
-	
+
 	String com o c&oacute;digo html
 	*/
 	html:function(){
@@ -108,9 +108,9 @@ i3GEOF.centromassa = {
 	},
 	/*
 	Function: iniciaJanelaFlutuante
-	
+
 	Cria a janela flutuante para controle da ferramenta.
-	*/	
+	*/
 	iniciaJanelaFlutuante: function(){
 		var minimiza,cabecalho,janela,divid,temp,titulo;
 		//cria a janela flutuante
@@ -164,15 +164,15 @@ i3GEOF.centromassa = {
 		new YAHOO.widget.Button(
 			"i3GEOcentromassabotao1",
 			{onclick:{fn: i3GEOF.centromassa.calcula}}
-		);		
+		);
 	},
 	/*
 	Function: calcula
-	
+
 	Faz o c&aacute;lculo
-	
+
 	Veja:
-	
+
 	<centromassa>
 	*/
 	calcula: function(){
@@ -189,12 +189,18 @@ i3GEOF.centromassa = {
 				{i3GEO.atualiza();}
 				i3GEOF.centromassa.aguarde.visibility = "hidden";
 			},
+			tema = $i("i3GEOFcentromassaPontos").value,
 			ext;
 			if(i3GEO.Interface.ATUAL === "googlemaps")
 			{ext = i3GEO.Interface.googlemaps.bbox();}
 			else
 			{ext = i3GEO.parametros.mapexten;}
-			p = i3GEO.configura.locaplic+"/ferramentas/centromassa/exec.php?g_sid="+i3GEO.configura.sid+"&funcao=centromassa&tema="+$i("i3GEOFcentromassaPontos").value+"&item="+$i("i3GEOFcentromassaItem").value+"&ext="+ext;
+			if(tema == ""){
+				i3GEO.janela.tempo("Selecione um tema");
+				i3GEOF.centromassa.aguarde.visibility = "hidden";
+				return;
+			}
+			p = i3GEO.configura.locaplic+"/ferramentas/centromassa/exec.php?g_sid="+i3GEO.configura.sid+"&funcao=centromassa&tema="+tema+"&item="+$i("i3GEOFcentromassaItem").value+"&ext="+ext;
 			cp = new cpaint();
 			cp.set_response_type("JSON");
 			cp.call(p,"centromassa",fim);
@@ -203,11 +209,11 @@ i3GEOF.centromassa = {
 	},
 	/*
 	Function: comboTemasPontos
-	
+
 	Cria um combo com a lista de temas pontuais
-	
+
 	Veja:
-	
+
 	<i3GEO.util.comboTemas>
 	*/
 	comboTemasPontos: function(){
@@ -230,22 +236,22 @@ i3GEOF.centromassa = {
 					{c.value = i3GEO.temaAtivo;}
 		 			$i("i3GEOondeItens").style.display = "block";
 					$i("i3GEOondeItens").innerHTML = "Aguarde...";
-					i3GEOF.centromassa.comboItens();					
+					i3GEOF.centromassa.comboItens();
 				}
 			},
 			"i3GEOcentromassaDivPontos",
 			"",
 			false,
 			"pontos"
-		);	
+		);
 	},
 	/*
 	Function: comboItens
-	
+
 	Cria um combo para escolha de um item do tema
 
 	Veja:
-	
+
 	<i3GEO.util.comboItens>
 
 	*/
