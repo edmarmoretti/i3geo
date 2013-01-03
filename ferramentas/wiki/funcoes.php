@@ -14,7 +14,7 @@ function listaartigos()
 	global $ret, $cp, $usuarioGeonames;
 	$e = explode(" ",$ret);
 	$url = "http://api.geonames.org/wikipediaBoundingBox?username=".$usuarioGeonames."&style=full&north=".$e[3]."&south=".$e[1]."&east=".$e[2]."&west=".$e[0]."&maxRows=20";
-	echo $url;
+	//echo $url;
 	$xml = simplexml_load_file($url."&lang=pt");
 	$conta = 0;
 	$fim = array();
