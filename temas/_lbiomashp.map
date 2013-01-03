@@ -16,7 +16,7 @@ MAP
       "permitekml"	"sim"
       "TEMA"	"Biomas shapefile (acentuação)"
     END # METADATA
-    NAME "_wbiomashp"
+    NAME "_lbiomashp"
     PROCESSING "ITEMS=CD_LEGENDA"
     STATUS OFF
     TEMPLATE "none.htm"
