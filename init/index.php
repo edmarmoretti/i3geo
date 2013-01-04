@@ -99,37 +99,37 @@ a {
 			</table> </a>
 			<a target=_blank href="../interface/openlayers.htm" class="r" style="box-shadow: 0 8px 10px 0 orange;"><table>
 				<tr>
-					<td><img src="../imagens/oxygen/22x22/openlayers.png" /><br> <script>document.write($trad(4,g_traducao_init));</script></a>
+					<td><img src="openlayers.png" /><br> <script>document.write($trad(4,g_traducao_init));</script></a>
 					</td>
 				</tr>
 			</table> </a>
 			<a target=_blank href="../interface/openlayersdebug.htm" class="r" style="box-shadow: 0 8px 10px 0 orange;"><table>
 				<tr>
-					<td><img src="../imagens/oxygen/22x22/openlayers.png" /><br> <script>document.write($trad(5,g_traducao_init));</script></a>
+					<td><img src="openlayersdebug.png" /><br> <script>document.write($trad(5,g_traducao_init));</script></a>
 					</td>
 				</tr>
 			</table> </a>
 			<a target=_blank href="../mashups" class="r" style="box-shadow: 0 8px 10px 0 orange;"><table >
 				<tr>
-					<td><img src="../imagens/oxygen/22x22/openlayers.png" /><br> <script>document.write($trad(18,g_traducao_init));</script></a>
+					<td><img src="mashup.png" /><br> <script>document.write($trad(18,g_traducao_init));</script></a>
 					</td>
 				</tr>
 			</table> </a>
 			<a target=_blank href="../interface/googlemaps.phtml" class="r" style="box-shadow: 0 8px 10px 0 orange;"><table>
 				<tr>
-					<td><img src="../imagens/oxygen/22x22/googlemaps.png" /><br> <script>document.write($trad(6,g_traducao_init));</script></a>
+					<td><img src="googlemaps.png" /><br> <script>document.write($trad(6,g_traducao_init));</script></a>
 					</td>
 				</tr>
 			</table> </a>
 			<a target=_blank href="../interface/googleearth.phtml" class="r" style="box-shadow: 0 8px 10px 0 orange;"><table>
 				<tr>
-					<td><img src="../imagens/oxygen/22x22/googleearth.png" /><br> <script>document.write($trad(7,g_traducao_init));</script></a>
+					<td><img src="googleearth.png" /><br> <script>document.write($trad(7,g_traducao_init));</script></a>
 					</td>
 				</tr>
 			</table> </a>
 			<a target=_blank href="../interface/carto_ol.htm" class="r" style="box-shadow: 0 8px 10px 0 orange;"><table >
 				<tr>
-					<td><img src="../imagens/oxygen/22x22/kspread.png" /><br> <script>document.write($trad(8,g_traducao_init));</script></a>
+					<td><img src="cartogramas.png" /><br> <script>document.write($trad(8,g_traducao_init));</script></a>
 					</td>
 				</tr>
 			</table> </a>
