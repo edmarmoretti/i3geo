@@ -435,8 +435,9 @@ else //se for linux
 	if((dirname($locaplic) == "/var/www") || (dirname($locaplic) == "/var/www/html")){
 		$dir_tmp = "/tmp/ms_tmp";
 	}
+	//TODO v47 alterar a senha para admin
 	$i3geomaster = array(
-				array("usuario"=>"admin", "senha"=>"admin")
+				array("usuario"=>"admin", "senha"=>"adminx")
 			);
 
 	$navegadoresLocais = array(
