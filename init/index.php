@@ -34,7 +34,7 @@ body {
 	box-shadow: rgb(136, 136, 136) 0 8px 10px 0;
 	float: left;
 	height: 150px;
-	margin: 10px 10px 10px auto;
+	margin: 10px 25px 10px auto;
 	padding: 5px;
 	width: 200px;
 	background: white;

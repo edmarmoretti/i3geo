@@ -47,6 +47,18 @@ Exemplos:
 */
 i3GEO.arvoreDeCamadas = {
 	/*
+	Propriedade: TEMPLATELEGENDA
+
+	Nome do template HTML que sera usado para compor a legenda. O HTML deve ser armazenado em i3geo/aplicmap
+
+	Default:
+	{legenda5.htm}
+
+	Type:
+	{string}
+	*/
+	TEMPLATELEGENDA: "legenda5.htm",
+	/*
 	Propriedade: BARRAPROGRESSO
 
 	Mostra uma barra com o progresso do desenho das camadas do mapa
@@ -1153,8 +1165,8 @@ i3GEO.arvoreDeCamadas = {
 				}
 			}
 		};
-		if(i3GEO.configura.templateLegenda !== "")
-		{i3GEO.php.criaLegendaHTML(retorna,idtema,i3GEO.configura.templateLegenda);}
+		if(i3GEO.arvoreDeCamadas.TEMPLATELEGENDA !== "")
+		{i3GEO.php.criaLegendaHTML(retorna,idtema,i3GEO.arvoreDeCamadas.TEMPLATELEGENDA);}
 		else
 		{i3GEO.php.criaLegendaHTML(retorna,idtema);}
 	},

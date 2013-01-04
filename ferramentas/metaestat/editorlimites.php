@@ -189,6 +189,7 @@ i3GEO.finalizaAPI = function(){
 }
 //a pagina nao e recarregada quando o usuario faz login
 i3GEO.login.recarrega = false;
+i3GEO.eventos.cliquePerm.ativo = false;
 i3GEO.inicia();
 </script>
 </body>
