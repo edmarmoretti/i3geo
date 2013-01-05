@@ -402,7 +402,7 @@ i3GEO.guias = {
 			}
 		}
 		catch(e){
-			if(typeof(console) !== 'undefined'){console.error(e);}
+			if(typeof(console) !== 'undefined'){console.error("i3GEO.guias.cria "+e);}
 		}
 		if(i3GEO.guias.TIPO !== "tablet"){
 			i3GEO.guias.mostra(i3GEO.guias.ATUAL);

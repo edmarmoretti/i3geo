@@ -200,7 +200,7 @@ i3GEO.eventos = {
 				}
 			}
 		}catch(e){
-			if(typeof(console) !== 'undefined'){console.error(e);}
+			if(typeof(console) !== 'undefined'){console.error("i3GEO.eventos.mouseParado"+e);}
 		}
 	},
 	/*

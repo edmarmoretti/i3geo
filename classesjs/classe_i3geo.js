@@ -517,7 +517,7 @@ var i3GEO = {
 			{corpoMapa.call();return;}
 		}
 		catch(e){
-			if(typeof(console) !== 'undefined'){console.error(e);}
+			if(typeof(console) !== 'undefined'){console.error("i3GEO.atualiza "+e);}
 		}
 		erro = function(){
 			var c = confirm("Ocorreu um erro, quer tentar novamente?");

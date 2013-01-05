@@ -321,7 +321,7 @@ i3GEO.tema = {
 		if(tipoOperacao === "abrejanela"){
 			try{clearTimeout(mostralegendajanelaTimer);}
 			catch(e){
-				if(typeof(console) !== 'undefined'){console.error(e);}
+				if(typeof(console) !== 'undefined'){console.error("i3GEO.tema.mostralegendajanela "+e);}
 			}
 			if(!$i("janelaLegenda"+idtema)){
 				var janela = i3GEO.janela.cria("250px","","","","",nome,"janelaLegenda"+idtema,false);

@@ -241,7 +241,7 @@ i3GEO.desenho = {
 				try
 				{i3GEO.desenho.richdraw.renderer.resize(objeto,0,0,objposicaocursor.imgx,objposicaocursor.imgy);}
 				catch(erro){
-					if(typeof(console) !== 'undefined'){console.error(erro);}
+					if(typeof(console) !== 'undefined'){console.error("i3GEO.desenho "+erro);}
 				}
 			}
 			if(tipo==="insereCirculo"){
@@ -255,7 +255,7 @@ i3GEO.desenho = {
 					i3GEO.desenho.richdraw.renderer.create('text', '', i3GEO.desenho.richdraw.textColor, i3GEO.desenho.richdraw.lineWidth, pontosdistobj.ximg[n-1],pontosdistobj.yimg[n-1],"","",texto);
 				}
 				catch(men){
-					if(typeof(console) !== 'undefined'){console.error(men);}
+					if(typeof(console) !== 'undefined'){console.error("i3GEO.desenho "+men);}
 				}
 			}
 		}

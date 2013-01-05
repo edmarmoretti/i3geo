@@ -428,7 +428,7 @@ i3GEO.maparef = {
 		}
 		catch(e){
 			i3GEO.janela.fechaAguarde("i3GEO.atualiza");
-			if(typeof(console) !== 'undefined'){console.error(e);}
+			if(typeof(console) !== 'undefined'){console.error("i3GEO.mapaRef.click "+e);}
 		}
 	}
 };

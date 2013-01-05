@@ -83,7 +83,7 @@ i3GEO.analise = {
 				}
 				catch(e){
 					i3GEO.eventos.NAVEGAMAPA.remove("atualizaLinhaDoTempo()");
-					if(typeof(console) !== 'undefined'){console.error(e);}
+					if(typeof(console) !== 'undefined'){console.error("i3GEO.analise.linhaDoTempo "+e);}
 				}
 			};
 			if(i3GEO.eventos.NAVEGAMAPA.toString().search("atualizaLinhaDoTempo()") < 0)

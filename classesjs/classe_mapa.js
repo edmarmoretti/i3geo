@@ -262,7 +262,7 @@ i3GEO.mapa = {
 					i3GEO.php.reiniciaMapa(i3GEO.atualiza);
 				}
 			}
-			if(typeof(console) !== 'undefined'){console.error(e);}
+			if(typeof(console) !== 'undefined'){console.error("i3GEO.mapa.verifica "+e);}
 		}
 	},
 	/*
