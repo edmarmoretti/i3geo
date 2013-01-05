@@ -309,7 +309,7 @@ i3GEO.eventos = {
 	/*
 	Function: executaEventos
 
-	Executa a pilha de nomes de fun&ccedil;&otilde;es armazenados em um array
+	Executa a pilha de nomes de funcoes ou funcoes armazenados em um array
 
 	Parameter:
 
@@ -322,8 +322,14 @@ i3GEO.eventos = {
 				f = eventos.length-1;
 				if (f >= 0){
 					do{
-						if(eventos[f] !== "")
-						{eval(eventos[f]);}
+						if(eventos[f] !== ""){
+							if(typeof(eventos[f]) === "function"){
+								eventos[f].call();
+							}
+							else{
+								eval(eventos[f]);
+							}
+						}
 					}
 					while(f--);
 				}

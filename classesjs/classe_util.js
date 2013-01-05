@@ -197,7 +197,7 @@ i3GEO.util = {
 	expira - {numerico} Dias que levara para expirar
 	*/
 	insereCookie: function(nome,valor,expira) {
-		if(typeof(console) !== 'undefined'){console.info("i3GEO.util.insereCookie()");}
+		if(typeof(console) !== 'undefined'){console.info("i3GEO.util.insereCookie("+nome+")");}
 		if(!expira){
 			expira = 10;
 		}
@@ -219,7 +219,7 @@ i3GEO.util = {
 	(String) - valor do cookie
 	*/
 	pegaCookie: function(nome){
-		if(typeof(console) !== 'undefined'){console.info("i3GEO.util.pegaCookie()");}
+		if(typeof(console) !== 'undefined'){console.info("i3GEO.util.pegaCookie("+nome+")");}
 		var cookies,i,fim;
 		cookies = document.cookie;
 		i = cookies.indexOf(nome);

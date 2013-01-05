@@ -267,7 +267,7 @@ var i3GEO = {
 		if (temp[1]){
 			i3GEO.configura.sid = temp[1];
 			//
-			//O # precisa ser removido, caso contr&aacute;rio, a op&ccedil;&atilde;o de reload da p&aacute;gina pelo browser as vezes n&atilde;o funciona
+			//O # precisa ser removido, caso contrario, a opcao de reload da pagina pelo browser as vezes nao funciona
 			//
 			if (i3GEO.configura.sid.split("#")[0])
 			{i3GEO.configura.sid = i3GEO.configura.sid.split("#")[0];}
@@ -281,7 +281,7 @@ var i3GEO = {
 			{return;}
 		}
 		//
-		//tenta definir automaticamente a vari&aacute;vel que indica a localiza&ccedil;&atilde;o do i3geo
+		//tenta definir automaticamente a variavel que indica a localizacao do i3geo
 		//
 		if(!i3GEO.configura.locaplic || i3GEO.configura.locaplic === ""){
 			i3GEO.util.localizai3GEO();
@@ -339,6 +339,16 @@ var i3GEO = {
 						i3GEO.parametros.pixelsize = i3GEO.parametros.pixelsize*1;
 						i3GEO.parametros.w = i3GEO.parametros.w*1;
 						i3GEO.parametros.h = i3GEO.parametros.h*1;
+						//obtem o cookie com a ultima extensao geografica
+						if(i3GEO.configura.guardaExtensao === true){
+							temp = i3GEO.util.pegaCookie("i3geoUltimaExtensao");
+							if(temp){
+								i3GEO.parametros.mapexten = i3GEO.util.pegaCookie("i3geoUltimaExtensao");
+							}
+							i3GEO.eventos.NAVEGAMAPA.push(function(){
+								i3GEO.util.insereCookie("i3geoUltimaExtensao",i3GEO.parametros.mapexten);
+							});
+						}
 						//
 						i3GEO.arvoreDeCamadas.CAMADAS = retorno.data.temas;
 						if(retorno.data.variaveis.navegacaoDir.toLowerCase() === "sim")

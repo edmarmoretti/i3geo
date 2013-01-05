@@ -52,6 +52,20 @@ alert(i3GEO.configura.locaplic)
 */
 i3GEO.configura = {
 	/*
+	Propriedade: guardaExtensao
+
+	Indica se a extensao geografica do mapa sera armazenada como um cookie
+
+	Se for true a extensao geografica e armazenada sempre que o evento de navegacoa no mapa for disparado
+
+	Tipo:
+	{boolean}
+
+	Default:
+	{true}
+	*/
+	guardaExtensao: true,
+	/*
 	Propriedade: grupoLayers
 
 	Lista de grupos e seus respectivos layers, para montagem da &aacute;rvore de camadas.
@@ -826,7 +840,7 @@ i3GEO.configura = {
 				}
 				if(i3GEO.eventos.MOUSECLIQUEPERM.toString().search(i3GEO.configura.funcaoTip) < 0){
 					i3GEO.eventos.MOUSECLIQUEPERM.push(i3GEO.configura.funcaoTip);
-				}			
+				}
 				/*
 				if(i3GEO.eventos.MOUSECLIQUE.toString().search("cliqueIdentifica()") > 0)
 				{i3GEO.eventos.MOUSECLIQUE.remove("cliqueIdentifica()");}
