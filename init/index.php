@@ -188,13 +188,30 @@ a {
 					</td>
 				</tr>
 			</table> </a>
-
+			<a href="#" class="r" style="width: 230px; height: 380px"><table>
+				<tr>
+					<td>
+					<a class="twitter-timeline"  href="https://twitter.com/i3geo" data-widget-id="288061915689787392" width="220" height="350">Tweets @i3Geo</a>
+<script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0];if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src="//platform.twitter.com/widgets.js";fjs.parentNode.insertBefore(js,fjs);}}(document,"script","twitter-wjs");</script>
+					</td>
+				</tr>
+			</table> </a>
+			<a href="#" class="r" style="width: 230px; height: 380px"><table>
+				<tr>
+					<td><a class="twitter-timeline"
+						href="https://twitter.com/search?q=@i3geo"
+						data-widget-id="288053202174222336" width="220" height="350">Tweets #i3Geo</a>
+						<script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0];if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src="//platform.twitter.com/widgets.js";fjs.parentNode.insertBefore(js,fjs);}}(document,"script","twitter-wjs");</script>
+					</td>
+				</tr>
+			</table> </a>
 	</div>
 </body>
 <script>
 i3GEO.configura.locaplic = "..";
 i3GEO.idioma.IDSELETOR = "bandeiras";
 i3GEO.idioma.mostraSeletor();
+i3GEO.barraDeBotoes.ATIVA = false;
 $i("conteudo").style.height = i3GEO.util.getScrollHeight() + "px";
 </script>
 </html>

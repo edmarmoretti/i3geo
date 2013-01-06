@@ -770,9 +770,30 @@ i3GEO.barraDeBotoes = {
 
 	*/
 	inicializaBarraOP: function(){
-		if(i3GEO.barraDeBotoes.ATIVA === false){
+		if(i3GEO.barraDeBotoes.ATIVA === false || !$i(i3GEO.Interface.IDCORPO)){
 			return;
 		}
+		//isso veio do js do eudock
+		if (document.onmousemove)
+			euEnv.onmousemoveBK = document.onmousemove;
+		document.onmousemove  = on_MouseMove;
+
+		if (document.onmousedown)
+			euEnv.onmousedownBK = document.onmousedown;
+		document.onmousedown  = on_MouseDown;
+
+		if (document.onmouseup)
+			euEnv.onmouseupBK = document.onmouseup;
+		document.onmouseup    = on_MouseUp;
+
+		if (document.onclick)
+			euEnv.onclickBK = document.onclick;
+		document.onclick      = on_MouseClick;
+
+		euDimensioni();
+		offsEut();
+		euThread();
+		//
 		i3GEO.barraDeBotoes.AJUDA = false;
 		euEnv.imageBasePath=i3GEO.configura.locaplic+"/pacotes/eudock/";
 		var botao,

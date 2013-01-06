@@ -1069,7 +1069,7 @@ function euThread(){
     euEnv.timeout=window.setTimeout("euThread();",euEnv.refreshTime);
 
     euEnv.exeThread = false;
-    if (euEnv.mouseMoved)
+    if (euEnv && euEnv.mouseMoved)
 		for (var i in euEnv.euDockArray)
 			if (euEnv.euDockArray[i].mouseMove)
 				euEnv.exeThread |= euEnv.euDockArray[i].mouseMove(euEnv.euScrOfX+euEnv.x,euEnv.euScrOfY+euEnv.y);
@@ -1136,24 +1136,28 @@ function on_MouseClick(e) {
 		return euEnv.onclickBK(e);
 	return true;
 };
+//comentario adicionado por edmar moretti
+//a inicializacao foi incluida em classe_barradebotoes.js
+/*
 
-if (document.onmousemove)
-	euEnv.onmousemoveBK = document.onmousemove;
-document.onmousemove  = on_MouseMove;
+	if (document.onmousemove)
+		euEnv.onmousemoveBK = document.onmousemove;
+	document.onmousemove  = on_MouseMove;
 
-if (document.onmousedown)
-	euEnv.onmousedownBK = document.onmousedown;
-document.onmousedown  = on_MouseDown;
+	if (document.onmousedown)
+		euEnv.onmousedownBK = document.onmousedown;
+	document.onmousedown  = on_MouseDown;
 
-if (document.onmouseup)
-	euEnv.onmouseupBK = document.onmouseup;
-document.onmouseup    = on_MouseUp;
+	if (document.onmouseup)
+		euEnv.onmouseupBK = document.onmouseup;
+	document.onmouseup    = on_MouseUp;
 
-if (document.onclick)
-	euEnv.onclickBK = document.onclick;
-document.onclick      = on_MouseClick;
+	if (document.onclick)
+		euEnv.onclickBK = document.onclick;
+	document.onclick      = on_MouseClick;
 
-euDimensioni();
-offsEut();
-euThread();
-
+	euDimensioni();
+	offsEut();
+	euThread();
+}
+*/
