@@ -5,12 +5,15 @@ drop table i3geoestat_agregaregiao;
 drop table i3geoestat_classes;
 drop table i3geoestat_classificacao;
 drop table i3geoestat_fonteinfo_medida;
+drop table i3geoestat_mapa_tema;
 drop table i3geoestat_medida_variavel_link;
 drop table i3geoestat_parametro_medida;
 drop table i3geoestat_medida_variavel;
 drop table i3geoestat_tipo_regiao;
 drop table i3geoestat_conexao;
 drop table i3geoestat_fonteinfo;
+drop table i3geoestat_mapa_grupo;
+drop table i3geoestat_mapa;
 drop table i3geoestat_tipo_periodo;
 drop table i3geoestat_unidade_medida;
 drop table i3geoestat_variavel;
@@ -82,6 +85,15 @@ create table i3geoestat_agregaregiao
 );
 
 
+-- lista controlada de tipos de período de tempo
+create table i3geoestat_tipo_periodo
+(
+	codigo_tipo_periodo integer not null unique primary key autoincrement,
+	nome text,
+	descricao text
+);
+
+
 -- tabela com o nome e descrição de uma variável variável
 create table i3geoestat_variavel
 (
@@ -100,15 +112,6 @@ create table i3geoestat_unidade_medida
 	permitesoma integer default 0,
 	-- o tipo de unidade permite o cálculo de média aritmética? (0 ou 1)
 	permitemedia integer default 0
-);
-
-
--- lista controlada de tipos de período de tempo
-create table i3geoestat_tipo_periodo
-(
-	codigo_tipo_periodo integer not null unique primary key autoincrement,
-	nome text,
-	descricao text
 );
 
 
@@ -135,14 +138,14 @@ create table i3geoestat_medida_variavel
 	nomemedida text,
 	-- nome da coluna da tabela que contem os dados e que é um identificador único de cada registro
 	colunaidunico text,
-	foreign key (codigo_variavel)
-	references i3geoestat_variavel (codigo_variavel),
-	foreign key (codigo_tipo_regiao)
-	references i3geoestat_tipo_regiao (codigo_tipo_regiao),
-	foreign key (codigo_unidade_medida)
-	references i3geoestat_unidade_medida (codigo_unidade_medida),
 	foreign key (codigo_tipo_periodo)
 	references i3geoestat_tipo_periodo (codigo_tipo_periodo),
+	foreign key (codigo_tipo_regiao)
+	references i3geoestat_tipo_regiao (codigo_tipo_regiao),
+	foreign key (codigo_variavel)
+	references i3geoestat_variavel (codigo_variavel),
+	foreign key (codigo_unidade_medida)
+	references i3geoestat_unidade_medida (codigo_unidade_medida),
 	foreign key (codigo_estat_conexao)
 	references i3geoestat_conexao (codigo_estat_conexao)
 );
@@ -206,10 +209,51 @@ create table i3geoestat_fonteinfo_medida
 (
 	id_medida_variavel integer not null,
 	id_fonteinfo integer not null,
-	foreign key (id_medida_variavel)
-	references i3geoestat_medida_variavel (id_medida_variavel),
 	foreign key (id_fonteinfo)
-	references i3geoestat_fonteinfo (id_fonteinfo)
+	references i3geoestat_fonteinfo (id_fonteinfo),
+	foreign key (id_medida_variavel)
+	references i3geoestat_medida_variavel (id_medida_variavel)
+);
+
+
+create table i3geoestat_mapa
+(
+	-- identificador unico do mapa
+	id_mapa integer not null,
+	titulo text not null,
+	-- nome do template para compor a interface
+	template text,
+	-- nome do logo localizado a esquerda do mapa
+	logoesquerdo text,
+	-- nome ddo logo localizado a direita do mapa
+	logodireito text,
+	-- indica se o mapa esta publicado ou nao (sim=1, nao=0)
+	publicado integer
+);
+
+
+create table i3geoestat_mapa_grupo
+(
+	id_mapa_grupo integer not null,
+	-- identificador unico do mapa
+	id_mapa integer not null,
+	titulo text,
+	foreign key (id_mapa)
+	references i3geoestat_mapa (id_mapa)
+);
+
+
+create table i3geoestat_mapa_tema
+(
+	id_mapa_tema integer not null,
+	id_mapa_grupo integer not null,
+	-- titulo do tema, se for vazio, usa o definido no sistema metaestat
+	titulo text,
+	id_medida_variavel integer not null unique,
+	foreign key (id_mapa_grupo)
+	references i3geoestat_mapa_grupo (id_mapa_grupo),
+	foreign key (id_medida_variavel)
+	references i3geoestat_medida_variavel (id_medida_variavel)
 );
 
 
