@@ -1,0 +1,20 @@
+MAP
+  FONTSET "../symbols/fontes.txt"
+  SYMBOLSET "../symbols/simbolos.sym"
+	LAYER
+	 NAME testedxf
+	 TYPE line
+	 CONNECTIONTYPE OGR
+	 CONNECTION "/var/www/temp/smmap-80.dxf"
+    PROJECTION
+      "init=epsg:29193"
+    END # PROJECTION
+	 STATUS default
+	 #STYLEITEM "AUTO"
+	 CLASS
+	   NAME ""
+	   COLOR 0 0 0
+	 END
+	END
+
+END
