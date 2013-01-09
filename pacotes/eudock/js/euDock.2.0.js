@@ -681,7 +681,7 @@ var euOPAQUE      = 16;
 			this.addIcon = function(args,params){
 				//if(!id)
 				//{var id = 'euDock_icon_'+euEnv.Kost.next();}
-				var id = params.id;
+				var i,id = params.id;
 				var id = 'euDock_icon_'+euEnv.Kost.next();
 				euEnv.euDockArray[id] = new euDockIcon(id,this);
 				euEnv.euDockArray[id].addElement(args);

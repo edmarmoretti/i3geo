@@ -715,6 +715,7 @@ i3GEO.Interface = {
 			//corrigido na vers&atilde;o 4.7 do i3geo (n&atilde;o tinha o if)
 			if(i3GEO.arvoreDeCamadas.ATIVATEMA === "")
 			{i3GEO.arvoreDeCamadas.ATIVATEMA = "i3GEO.Interface.ligaDesliga(this);i3GEO.eventos.executaEventos(i3GEO.eventos.ATUALIZAARVORECAMADAS);";}
+			
 			i3GEO.util.multiStep([
 					i3GEO.coordenadas.mostraCoordenadas,
 					montaMapa,

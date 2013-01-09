@@ -752,7 +752,7 @@ i3GEO.barraDeBotoes = {
 			b = l.length-1;
 		if (b >= 0){
 			do{
-				temp = l[b].iddiv;
+				//temp = l[b].iddiv;
 				if (l[b].iddiv === iddiv){
 					return l[b];
 				}
@@ -789,7 +789,6 @@ i3GEO.barraDeBotoes = {
 		if (document.onclick)
 			euEnv.onclickBK = document.onclick;
 		document.onclick      = on_MouseClick;
-
 		euDimensioni();
 		offsEut();
 		euThread();
@@ -818,7 +817,6 @@ i3GEO.barraDeBotoes = {
 		dock.setIconsOffset(7);
 		if(i3GEO.barraDeBotoes.MAXBOTOES > 0)
 		{n = i3GEO.barraDeBotoes.MAXBOTOES;}
-
 		for(i=0;i<n;i+=1){
 			if(i3GEO.barraDeBotoes.INCLUIBOTAO[chaves[i]] && i3GEO.barraDeBotoes.INCLUIBOTAO[chaves[i]] === true){
 				botao = i3GEO.barraDeBotoes.defBotao(chaves[i]);
