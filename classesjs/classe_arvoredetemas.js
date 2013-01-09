@@ -992,7 +992,7 @@ i3GEO.arvoreDeTemas = {
 					iglt = sis.length;
 					tempNode = new YAHOO.widget.HTMLNode(
 						{
-							html:"<b>Sistemas</b>"+" <a class=ajuda_usuario target=_blank href='"+i3GEO.configura.locaplic+"/ajuda_usuario.php?idcategoria=4&idajuda=34' >&nbsp;&nbsp;&nbsp;</a>",
+							html:"<b>"+$trad("a11")+"</b>"+" <a class=ajuda_usuario target=_blank href='"+i3GEO.configura.locaplic+"/ajuda_usuario.php?idcategoria=4&idajuda=34' >&nbsp;&nbsp;&nbsp;</a>",
 							expanded:false,enableHighlight:false
 						},
 						root
@@ -1012,7 +1012,7 @@ i3GEO.arvoreDeTemas = {
 					funcoes = sis[ig].FUNCOES;
 					tempf = funcoes.length;
 					for (ig2=0;ig2<tempf;ig2+=1){
-						abre = "i3GEO.janela.cria('"+(funcoes[ig2].W)+"px','"+(funcoes[ig2].H)+"px','"+(funcoes[ig2].ABRIR)+"','','',"+$trad("a11")+")";
+						abre = "i3GEO.janela.cria('"+(funcoes[ig2].W)+"px','"+(funcoes[ig2].H)+"px','"+(funcoes[ig2].ABRIR)+"','','','"+$trad("a11")+"')";
 						nomeFunc = "<a href='#' onclick=\""+abre+"\">"+funcoes[ig2].NOME+"</a>";
 						new YAHOO.widget.HTMLNode(
 							{html:nomeFunc,expanded:false,enableHighlight:false,isLeaf:true},
