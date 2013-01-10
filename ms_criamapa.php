@@ -207,7 +207,13 @@ $protocolo = explode("/",$_SERVER['SERVER_PROTOCOL']);
 
 As vari&aacute;veis v&ecirc;m do arquivo ms_configura.php e s&atilde;o armazenadas em uma se&ccedil;&atilde;o com nome espec&iacute;fico para o i3geo.
 */
-if (!isset($mapext)){$mapext="";}
+if (!isset($mapext)){
+	$mapext="";
+}
+else{
+	$mapext = str_replace(","," ",$mapext);
+	setcookie("i3geoUltimaExtensao", $mapext);
+}
 $cachedir_ = $cachedir;
 $dir_tmp_ = $dir_tmp;
 $emailInstituicao_ = $emailInstituicao;

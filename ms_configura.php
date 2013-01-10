@@ -445,7 +445,8 @@ else //se for linux
 								"ip"=>"127.0.0.1",
 								"drives"=>array(
 									array("caminho"=>"/home","nome"=>"home"),
-									array("caminho"=>"/tmp","nome"=>"tmp")
+									array("caminho"=>"/tmp","nome"=>"tmp"),
+									array("caminho"=>"/var/www","nome"=>"www")
 								)
 							)
 						);

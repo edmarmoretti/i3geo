@@ -317,7 +317,7 @@ var i3GEO = {
 		{i3GEOmantemCompatibilidade();}
 		montaMapa = function(retorno){
 			try{
-				var temp,abreJM;
+				var temp,abreJM,reg;
 				if(retorno === ""){
 					alert("Ocorreu um erro no mapa - i3GEO.inicia.montaMapa");
 					retorno = {data:{erro: "erro"}};
@@ -342,8 +342,10 @@ var i3GEO = {
 						//obtem o cookie com a ultima extensao geografica
 						if(i3GEO.configura.guardaExtensao === true){
 							temp = i3GEO.util.pegaCookie("i3geoUltimaExtensao");
+							reg = new RegExp("\\+", "g");
+							temp = temp.replace(reg,' ');
 							if(temp){
-								i3GEO.parametros.mapexten = i3GEO.util.pegaCookie("i3geoUltimaExtensao");
+								i3GEO.parametros.mapexten = temp;
 							}
 							i3GEO.eventos.NAVEGAMAPA.push(function(){
 								i3GEO.util.insereCookie("i3geoUltimaExtensao",i3GEO.parametros.mapexten);

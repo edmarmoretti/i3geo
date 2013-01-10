@@ -5,6 +5,8 @@ MAP
 	 NAME testedxf
 	 TYPE line
 	 CONNECTIONTYPE OGR
+	 #smmap-80
+	 #MAPA
 	 CONNECTION "/var/www/temp/smmap-80.dxf"
     PROJECTION
       "init=epsg:29193"

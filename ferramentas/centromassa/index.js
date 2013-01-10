@@ -196,7 +196,7 @@ i3GEOF.centromassa = {
 			else
 			{ext = i3GEO.parametros.mapexten;}
 			if(tema == ""){
-				i3GEO.janela.tempo("Selecione um tema");
+				i3GEO.janela.tempoMsg("Selecione um tema");
 				i3GEOF.centromassa.aguarde.visibility = "hidden";
 				return;
 			}
