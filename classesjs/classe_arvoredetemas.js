@@ -822,8 +822,10 @@ i3GEO.arvoreDeTemas = {
 	*/
 	atualiza: function(){
 		if(typeof(console) !== 'undefined'){console.info("i3GEO.arvoreDeTemas.atualiza()");}
-		i3GEO.arvoreDeTemas.ARVORE = null;
-		i3GEO.arvoreDeTemas.cria(i3GEO.arvoreDeTemas.SID,i3GEO.arvoreDeTemas.LOCAPLIC,i3GEO.arvoreDeTemas.IDHTML);
+		if($i(i3GEO.arvoreDeTemas.IDHTML)){
+			i3GEO.arvoreDeTemas.ARVORE = null;
+			i3GEO.arvoreDeTemas.cria(i3GEO.arvoreDeTemas.SID,i3GEO.arvoreDeTemas.LOCAPLIC,i3GEO.arvoreDeTemas.IDHTML);
+		}
 	},
 	/*
 	Function: montaArvore

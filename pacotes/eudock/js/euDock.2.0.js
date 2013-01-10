@@ -1102,8 +1102,8 @@ function on_MouseMove(e) {
 	euEnv.x = e.clientX;
 	euEnv.y = e.clientY;
 	euEnv.mouseMoved = true;
-	if (euEnv.onmousemoveBK)
-		return euEnv.onmousemoveBK(e);
+	//if (euEnv.onmousemoveBK)
+		//return euEnv.onmousemoveBK(e);
 	return true;
 };
 
@@ -1112,8 +1112,8 @@ function on_MouseDown(e) {
 	for (var i in euEnv.euDockArray)
 		if (euEnv.euDockArray[i].mouseDown)
 			euEnv.exeThread |= euEnv.euDockArray[i].mouseDown(euEnv.euScrOfX+e.clientX,euEnv.euScrOfY+e.clientY);
-	if (euEnv.onmousedownBK)
-		return euEnv.onmousedownBK(e);
+	//if (euEnv.onmousedownBK)
+		//return euEnv.onmousedownBK(e);
 	return true;
 };
 
@@ -1122,8 +1122,8 @@ function on_MouseUp(e) {
 	for (var i in euEnv.euDockArray)
 		if (euEnv.euDockArray[i].mouseUp)
 			euEnv.exeThread |= euEnv.euDockArray[i].mouseUp(euEnv.euScrOfX+e.clientX,euEnv.euScrOfY+e.clientY);
-	if (euEnv.onmouseupBK)
-		return euEnv.onmouseupBK(e);
+	//if (euEnv.onmouseupBK)
+		//return euEnv.onmouseupBK(e);
 	return true;
 };
 
@@ -1132,8 +1132,8 @@ function on_MouseClick(e) {
 	for (var i in euEnv.euDockArray)
 		if (euEnv.euDockArray[i].mouseClick)
 			euEnv.exeThread |= euEnv.euDockArray[i].mouseClick(euEnv.euScrOfX+e.clientX,euEnv.euScrOfY+e.clientY);
-	if (euEnv.onclickBK)
-		return euEnv.onclickBK(e);
+	//if (euEnv.onclickBK)
+		//return euEnv.onclickBK(e);
 	return true;
 };
 //comentario adicionado por edmar moretti

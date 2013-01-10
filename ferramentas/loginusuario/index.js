@@ -179,6 +179,10 @@ i3GEOF.loginusuario = {
 				else{
 					alert($trad("x31"));
 				}
+				if(i3GEO.parametros){
+					i3GEO.parametros.editor = "nao";
+					i3GEO.arvoreDeTemas.atualiza();
+				}
 			}
 			else{
 				i3GEO.util.insereCookie("i3geocodigologin",retorno.data.id,1);
@@ -197,6 +201,10 @@ i3GEOF.loginusuario = {
 				}
 				else{
 					alert("Login OK -> "+retorno.data.nome);
+				}
+				if(i3GEO.parametros){
+					i3GEO.parametros.editor = "sim";
+					i3GEO.arvoreDeTemas.atualiza();
 				}
 			}
 		};

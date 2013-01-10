@@ -523,10 +523,15 @@ i3GEO.gadgets = {
 					if(ms.permiteLogin === true){
 						i3GEO.configura.oMenuData.submenus.i3GeoAdmin.push(
 							{id:"omenudataAdminu1",text: "Login", url: "javascript:i3GEO.login.dialogo.abreLogin()" },
-							{id:"omenudataAdminu2",text: "Logout", url: "javascript:i3GEO.login.dialogo.abreLogout()" }
+							{id:"omenudataAdminu2",text: "Logout", url: "javascript:i3GEO.login.dialogo.abreLogout()" },
+							{id:"omenudataAdmin1",text: $trad("x1"), url: "javascript:var w = window.open(i3GEO.configura.locaplic+'/admin/index.html')" },
+							{id:"omenudataAdmin2",text: $trad("g1a"), url: "javascript:var w = window.open(i3GEO.configura.locaplic+'/admin/html/arvore.html')" },
+							{id:"omenudataAdmin3",text: $trad("x10"), url: "javascript:i3GEO.arvoreDeTemas.abrejanelaIframe('900','700','"+i3GEO.configura.locaplic+"/admin/html/menus.html\')"},
+							{id:"omenudataAdmin4",text: $trad("t44"), url: "javascript:i3GEO.janela.tempoMsg($trad('x63'))"}
 						);
 						//i3GEO.login.recarrega = true;
 					}
+					/*
 					if(i3GEO.login.verificaCookieLogin()){
 						i3GEO.configura.oMenuData.submenus.i3GeoAdmin.push(
 							{id:"omenudataAdmin1",text: $trad("x1"), url: "javascript:var w = window.open(i3GEO.configura.locaplic+'/admin/index.html')" },
@@ -535,6 +540,7 @@ i3GEO.gadgets = {
 							{id:"omenudataAdmin4",text: $trad("t44"), url: "javascript:i3GEO.janela.tempoMsg($trad('x63'))"}
 						);
 					}
+					*/
 				}
 			}
 			catch(e){}
