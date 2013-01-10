@@ -880,21 +880,21 @@ i3GEO.arvoreDeTemas = {
 		if(i3GEO.parametros.editor === "sim"){
 			tempNode = new YAHOO.widget.HTMLNode(
 				{
-					html:"<a style='color:red' title='op&ccedil;&atilde;o vis&iacute;vel apenas para editores' href='../admin' target=blank >Sistema de administra&ccedil;&atilde;o</a>",
+					html:"<a style='color:red' title='"+$trad("x7")+"' href='../admin' target=blank >"+$trad("x8")+"</a>",
 					idmenu:"",enableHighlight:false,expanded:false
 				},
 				root
 			);
 			tempNode = new YAHOO.widget.HTMLNode(
 				{
-					html:"<a style='color:red' title='op&ccedil;&atilde;o vis&iacute;vel apenas para editores' href='../admin/html/arvore.html' target=blank >Editar &aacute;rvore</a>",
+					html:"<a style='color:red' title='"+$trad("x7")+"' href='../admin/html/arvore.html' target=blank >"+$trad("x9")+"</a>",
 					idmenu:"",enableHighlight:false,expanded:false
 				},
 				root
 			);
 			tempNode = new YAHOO.widget.HTMLNode(
 				{
-					html:"<span style='color:red;cursor:pointer' title='op&ccedil;&atilde;o vis&iacute;vel apenas para editores' onclick='i3GEO.arvoreDeTemas.abrejanelaIframe(\"900\",\"500\",\""+i3GEO.configura.locaplic+"/admin/html/menus.html\")' target=blank >Editar menus</span>",
+					html:"<span style='color:red;cursor:pointer' title='"+$trad("x7")+"' onclick='i3GEO.arvoreDeTemas.abrejanelaIframe(\"900\",\"500\",\""+i3GEO.configura.locaplic+"/admin/html/menus.html\")' target=blank >"+$trad("x10")+"</span>",
 					idmenu:"",enableHighlight:false,expanded:false
 				},
 				root
@@ -2306,7 +2306,14 @@ i3GEO.arvoreDeTemas = {
 	s {string} - src do iframe
 	*/
 	abrejanelaIframe: function(w,h,s){
-		var janelaeditor = i3GEO.janela.cria(w,h,s,parseInt(Math.random()*100,10),10,s,"janela"+i3GEO.util.randomRGB(),false);
+		var i = parseInt(Math.random()*100,10),
+			janelaeditor = i3GEO.janela.cria(w,h,s,i,10,s,"janela"+i,false),
+			wdocaiframe = "";
+		wdocaiframe = $i("janela"+i+"i");
+		if(wdocaiframe){
+			wdocaiframe.style.width = "100%";
+			wdocaiframe.style.height = "100%";
+		}
 		YAHOO.util.Event.addListener(janelaeditor[0].close, "click", i3GEO.arvoreDeTemas.atualiza,janelaeditor[0].panel,{id:janelaeditor[0].id},true);
 	}
 };

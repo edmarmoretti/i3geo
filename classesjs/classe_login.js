@@ -104,6 +104,10 @@ i3GEO.login = {
 				if(i3GEO.login.recarrega === true){
 					document.location.reload();
 				}
+				if(i3GEO.parametros){
+					i3GEO.parametros.editor = "nao";
+					i3GEO.arvoreDeTemas.atualiza();
+				}
 			}
 		}
 	},
