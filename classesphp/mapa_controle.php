@@ -1052,6 +1052,7 @@ Altera o nome do tema
 */
 	case "MUDANOME":
 		include_once("classe_temas.php");
+		$valor = mb_convert_encoding($valor,"ISO-8859-1",mb_detect_encoding($valor));
 		copiaSeguranca($map_file);
 		$m = new Temas($map_file,$tema);
 		$m->mudaNome($valor);
