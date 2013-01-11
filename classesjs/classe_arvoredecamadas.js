@@ -890,6 +890,9 @@ i3GEO.arvoreDeCamadas = {
 									};
 									i3GEO.php.reordenatemas(temp,lista);
 								}
+								else{
+									i3GEO.arvoreDeCamadas.atualiza(i3GEO.arvoreDeCamadas.CAMADAS,true);
+								}
 							}
 						}
 					}
@@ -1325,7 +1328,6 @@ i3GEO.arvoreDeCamadas = {
 
 		if(i3GEO.tema.TEMPORIZADORESID[tema.name] == undefined && tema.temporizador != "")
 		{i3GEO.tema.temporizador(tema.name,tema.temporizador);}
-
 
 		return(html);
 	},
