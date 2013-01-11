@@ -252,7 +252,7 @@ i3GEOF.nuvemtags = {
 			r,
 			n;
 		if(retorno.data){
-			tags = "<p class=paragrafo >Clique na TAG para localizar temas relacionados</p>";
+			tags = "<p class=paragrafo >Clique na TAG para localizar temas relacionados. Os temas encontrados s&atilde;o mostrados na &aacute;rvore de temas</p>";
 			tags += "<p class=paragrafo ><input type=buttom id=i3GEOnuvemtagsbotao1 value='menos tags' />&nbsp;";
 			tags +="<input type=buttom id=i3GEOnuvemtagsbotao2 value='mais tags' /></p>";
 			//tags +="<span onmouseout='this.style.textDecoration=\"none\"' onmouseover='this.style.textDecoration=\"underline\"' onclick='javascript:flash();' style='cursor:pointer;vertical-align:middle;color:navy;font-size:'12'pt;'>animar</span><br><br>"

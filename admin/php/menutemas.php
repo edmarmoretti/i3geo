@@ -41,6 +41,7 @@ O par&acirc;metro principal &eacute; "funcao", que define qual opera&ccedil;&ati
 Cada opera&ccedil;&atilde;o possu&iacute; seus proprios par&acirc;metros, que devem ser enviados tamb&eacute;m na requisi&ccedil;&atilde;o da opera&ccedil;&atilde;o.
 
 */
+
 include_once(__DIR__."/admin.php");
 include_once(__DIR__."/login.php");
 $funcoesEdicao = array(
@@ -52,7 +53,6 @@ $funcoesEdicao = array(
 		"ALTERATAGS",
 		"ALTERAPERFIS",
 		"EXCLUIRREGISTRO"
-
 );
 if(in_array(strtoupper($funcao),$funcoesEdicao)){
 	if(verificaOperacaoSessao("admin/html/arvore") == false){
@@ -73,6 +73,7 @@ if($idioma == "")
 {
 	$idioma = "pt";
 }
+
 //faz a busca da fun&ccedil;&atilde;o que deve ser executada
 switch (strtoupper($funcao))
 {

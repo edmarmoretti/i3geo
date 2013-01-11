@@ -12,8 +12,8 @@ MAP
       "METAESTAT_CODIGO_TIPO_REGIAO"	""
       "permitedownload"	"sim"
       "metaestat"	""
-      "permiteogc"	"sim"
       "permitekml"	"sim"
+      "permiteogc"	"sim"
       "TEMA"	"Biomas shapefile (acentuação)"
     END # METADATA
     NAME "_lbiomashp"
