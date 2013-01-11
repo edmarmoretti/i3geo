@@ -1570,30 +1570,32 @@ $canal - Identificador do canal (ordem em que est&aacute; no RSS)
 	{
 		$xml = simplexml_load_file($servico);
 		$conta = 0;
-		foreach($xml->channel as $c)
-		{
+		foreach($xml->channel as $c){
 			if ($conta == $canal)
 			{$canal = $c;}
 		}
 		$resultado = array();
 		$tipog = "";
-		foreach ($canal->item as $item)
-		{
+		foreach ($canal->item as $item){
 			$env = array();
 			//define o tipo
-			if ($item->xpath('geo:lat')){$tipog = "geo";}
-			if ($item->xpath('georss:point')){$tipog = "georsspoint";}
-			if ($item->xpath('georss:where')){$tipog = "envelope";}
-			if ($tipog == "envelope")
-			{
+			if ($item->xpath('geo:lat'))
+			{$tipog = "geo";}
+			if ($item->xpath('georss:point'))
+			{$tipog = "georsspoint";}
+			if ($item->xpath('georss:where'))
+			{$tipog = "envelope";}
+			if ($tipog == "envelope"){
 				foreach ($item->xpath('georss:where') as $w)
 				{
 					foreach ($w->xpath('gml:Envelope') as $e)
 					{
-						$lc = $e->xpath('gml:lowerCorner');
-						$uc = $e->xpath('gml:upperCorner');
-						$lc = explode(" ",$lc[0]);
-						$uc = explode(" ",$uc[0]);
+						//$lc = $e->xpath('gml:lowerCorner');
+						$lc = (string) $e->children('gml', TRUE)->lowerCorner;
+						//$uc = $e->xpath('gml:upperCorner');
+						$uc = (string) $e->children('gml', TRUE)->upperCorner;
+						$lc = explode(" ",$lc);
+						$uc = explode(" ",$uc);
 						if (is_numeric($lc[0]))
 						{
 							$ymin = $lc[0];
@@ -1606,33 +1608,32 @@ $canal - Identificador do canal (ordem em que est&aacute; no RSS)
 					}
 				}
 			}
-			if ($tipog == "geo")
-			{
-				if ($item->xpath('geo:lon'))
-				{$x = $item->xpath('geo:lon');}
-				else
-				{$x = $item->xpath('geo:long');}
-				$y = $item->xpath('geo:lat');
-				$env = array($y[0],$x[0]);
+			if ($tipog == "geo"){
+				if ($item->xpath('geo:lon')){
+					$x = (string) $item->children('geo', TRUE)->lon;
+				}
+				else{
+					$x = (string) $item->children('geo', TRUE)->long;
+				}
+				//$y = $item->xpath('geo:lat');
+				$y = (string) $item->children('geo', TRUE)->lat;
+				$env = array($y,$x);
+
 			}
 			if ($tipog == "georsspoint")
 			{
-				$temp = $item->xpath('georss:point');
-				$env = array( explode(" ",$temp[0]) );
+				//$temp = $item->xpath('georss:point');
+				$temp = (string) $item->children('georss', TRUE)->point;
+				$env = array( explode(" ",$temp) );
 			}
-			if (count($env) > 0)
-			{
+			if (count($env) > 0){
 				$resultado[] = array(ixml($item,"title"),ixml($item,"link"),ixml($item,"description"),ixml($item,"category"),$env);
 			}
 		}
 		//cria o shapefile com os dados
-		if (count($resultado) > 0)
-		{
+		if (count($resultado) > 0){
 			//para manipular dbf
-			if (file_exists($this->locaplic."/pacotes/phpxbase/api_conversion.php"))
-			include_once ($this->locaplic."/pacotes/phpxbase/api_conversion.php");
-			else
-			include_once ("../pacotes/phpxbase/api_conversion.php");
+			include_once (__DIR__."/../pacotes/phpxbase/api_conversion.php");
 			$diretorio = dirname($this->arquivo);
 			$tipol = MS_SHP_POLYGON;
 			if ($tipog == "georsspoint"){$tipol = MS_SHP_POINT;}
@@ -1654,11 +1655,9 @@ $canal - Identificador do canal (ordem em que est&aacute; no RSS)
 			$reg = array();
 			$novoshpf = ms_newShapefileObj($nomeshp.".shp", -2);
 			//acrescenta os shapes
-			foreach ($resultado as $r)
-			{
+			foreach ($resultado as $r){
 				$pts = $r[4];
-				if ($tipol == MS_SHP_POLYGON)
-				{
+				if ($tipol == MS_SHP_POLYGON){
 					$shp = ms_newShapeObj(MS_SHP_POLYGON);
 					$linha = ms_newLineObj();
 					$linha->addXY($pts[0],$pts[3]);
@@ -1667,8 +1666,7 @@ $canal - Identificador do canal (ordem em que est&aacute; no RSS)
 					$linha->addXY($pts[0],$pts[1]);
 					$linha->addXY($pts[0],$pts[3]);
 				}
-				else
-				{
+				else{
 					$shp = ms_newShapeObj(MS_SHP_POINT);
 					$linha = ms_newLineObj();
 					$linha->addXY($pts[1],$pts[0]);
@@ -1680,10 +1678,13 @@ $canal - Identificador do canal (ordem em que est&aacute; no RSS)
 				$reg = array();
 			}
 			xbase_close($db);
-			if ($tipog == "georsspoint" || $tipog == "geo")
-			{$tipol = MS_LAYER_POINT;}
-			else
-			{$tipol = MS_LAYER_POLYGON;}
+			if ($tipog == "georsspoint" || $tipog == "geo"){
+				$tipol = MS_LAYER_POINT;
+			}
+			else{
+				$tipol = MS_LAYER_POLYGON;
+			}
+
 			$layer = criaLayer($this->mapa,$tipol,MS_DEFAULT,"GeoRSS","SIM");
 			$layer->set("data",$nomeshp.".shp");
 			$layer->set("name",basename($nomeshp));

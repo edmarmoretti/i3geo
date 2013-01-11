@@ -99,7 +99,7 @@ retorno {JSON} - retorno da fun&ccedil;&atilde;o clickGuia2
 */
 function listaCanais(retorno)
 {
-	var i,ins = "Clique no bot&atilde;o 'mapa' para incluir os dados do canal desejado<br>";
+	var i,ins = "Escolha um dos itens para incluir os dados do canal no mapa<br>";
 	if (retorno.data != undefined)
 	{
 		retorno = retorno.data;

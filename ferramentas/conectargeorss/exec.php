@@ -20,8 +20,7 @@ Adiciona um tema baseado em um RSS.
 		$retorno = $m->adicionaTemaGeoRSS($servico,$dir_tmp,$locaplic,$canal);
 		if ($retorno != "erro")
 		{$m->salva();$_SESSION["contadorsalva"]++;redesenhaMapa();}
-		else
-		{
+		else{
 			$retorno = "erro.Nenhum dado espacializado foi encontrado.";
 		}
 	break;
