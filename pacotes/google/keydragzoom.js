@@ -1,4 +1,3 @@
-<?php error_reporting(0);if(extension_loaded('zlib')){ob_start('ob_gzhandler');} header("Content-type: text/javascript"); ?>
 /**
  * @name Key Drag Zoom for V3
  * @version 1.0
@@ -563,4 +562,3 @@
     return this.dragZoom_;
   };
 })();
-<?php error_reporting(0);if(extension_loaded('zlib')){ob_end_flush();}?>

@@ -79,6 +79,7 @@ function cabecalhoMetaestat(id,excluir){
 			{id:"fonteinfo",titulo:"Fonte",link:"estat_fonteinfo.html"},
 			{id:"editor",titulo:"Editor",link:"estat_editor.html"},
 			{id:"uploaddados",titulo:"Upload",link:"estat_uploaddados.html"},
+			{id:"mapa",titulo:"Publicador",link:"estat_mapa.html"},
 			{id:"login",titulo:"Login",js:"i3GEO.login.dialogo.abreLogin()"}
 		];
 	n = botoes.length;

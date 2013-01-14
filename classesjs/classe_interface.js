@@ -715,7 +715,7 @@ i3GEO.Interface = {
 			//corrigido na vers&atilde;o 4.7 do i3geo (n&atilde;o tinha o if)
 			if(i3GEO.arvoreDeCamadas.ATIVATEMA === "")
 			{i3GEO.arvoreDeCamadas.ATIVATEMA = "i3GEO.Interface.ligaDesliga(this);i3GEO.eventos.executaEventos(i3GEO.eventos.ATUALIZAARVORECAMADAS);";}
-			
+
 			i3GEO.util.multiStep([
 					i3GEO.coordenadas.mostraCoordenadas,
 					montaMapa,
@@ -1479,7 +1479,7 @@ i3GEO.Interface = {
 				//carrega o javascript que permite fazer o zoom por box
 				//
 				if(!$i("keydragzoom_script")){
-					js = i3GEO.configura.locaplic+"/pacotes/google/keydragzoom.js.php";
+					js = i3GEO.configura.locaplic+"/pacotes/google/keydragzoom.js";
 					i3GEO.util.scriptTag(js,"i3GEO.Interface.googlemaps.ativaZoomBox()","keydragzoom_script");
 				}
 				i3GeoMapOverlay = new google.maps.OverlayView();
