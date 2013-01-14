@@ -39,7 +39,7 @@ i3geo/admin/js/arvore.js
 */
 //
 //obtem os parametros da url
-//testando
+//
 YAHOO.namespace("admin.container");
 (function(){
 	$id_menu = "";

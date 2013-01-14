@@ -342,9 +342,8 @@ var i3GEO = {
 						//obtem o cookie com a ultima extensao geografica
 						if(i3GEO.configura.guardaExtensao === true){
 							temp = i3GEO.util.pegaCookie("i3geoUltimaExtensao");
-							reg = new RegExp("\\+", "g");
-							temp = temp.replace(reg,' ');
 							if(temp){
+								temp = temp.replace(/[\-\[\]\/\{\}\(\)\*\+\?\.\\\^\$\|]/g, " ");
 								i3GEO.parametros.mapexten = temp;
 							}
 							i3GEO.eventos.NAVEGAMAPA.push(function(){
