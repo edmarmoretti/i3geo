@@ -202,7 +202,6 @@ class Metaestat{
 		$id = $id->fetchAll();
 		$id = $id[0][$colunaid];
 		$this->dbhw->query("UPDATE ".$this->esquemaadmin.$tabela." SET $colunatemp = '' WHERE $colunaid = $id AND $colunatemp = '$idtemp'");
-
 		return $id;
 	}
 	function excluirRegistro($tabela,$coluna,$id)
@@ -801,6 +800,57 @@ class Metaestat{
 		return false;
 	}
 	/*
+	 Function: alteraMapa
+
+	Altera um mapa ou adiciona um novo
+
+	*/
+	function alteraMapa($id_mapa="",$titulo="",$template="",$logoesquerdo="",$logodireito="",$publicado=""){
+		try	{
+			if($this->convUTF){
+				$titulo = utf8_encode($titulo);
+			}
+			if($id_mapa != ""){
+				$this->dbhw->query("UPDATE ".$this->esquemaadmin."i3geoestat_mapa SET titulo='$titulo',template='$template',logoesquerdo='$logoesquerdo',logodireito='$logodireito',publicado='$publicado' WHERE id_mapa = $id_mapa");
+				$retorna = $id_mapa;
+			}
+			else{
+				$retorna = $this->insertId("i3geoestat_mapa","titulo","id_mapa");
+			}
+			return $retorna;
+		}
+		catch (PDOException $e)	{
+			return "Error!: " . $e->getMessage();
+		}
+	}
+	/*
+	 Function: alteraMapaGrupo
+
+	Altera um grupo de um mapa ou adiciona um novo
+
+	*/
+	function alteraMapaGrupo($id_mapa,$id_mapa_grupo="",$titulo=""){
+		try	{
+			if($this->convUTF){
+				$titulo = utf8_encode($titulo);
+			}
+			if($id_mapa_grupo != ""){
+				$this->dbhw->query("UPDATE ".$this->esquemaadmin."i3geoestat_mapa_grupo SET titulo='$titulo' WHERE id_mapa_grupo = $id_mapa_grupo");
+				$retorna = $id_mapa_grupo;
+			}
+			else{
+				$retorna = $this->insertId("i3geoestat_mapa_grupo","titulo","id_mapa_grupo");
+				if($retorna){
+					$this->dbhw->query("UPDATE ".$this->esquemaadmin."i3geoestat_mapa_grupo SET id_mapa = $id_mapa WHERE id_mapa_grupo = $retorna");
+				}
+			}
+			return $retorna;
+		}
+		catch (PDOException $e)	{
+			return "Error!: " . $e->getMessage();
+		}
+	}
+	/*
 	 Function: alteraVariavel
 
 	Altera uma variavel ou cria uma nova
@@ -1099,6 +1149,38 @@ class Metaestat{
 		catch (PDOException $e)	{
 			return "Error!: " . $e->getMessage();
 		}
+	}
+	/*
+	Function: listaMapas
+
+	Lista os mapas cadastrados para publicacao
+
+	Parametros:
+
+	$id_mapa - opcional
+	*/
+	function listaMapas($id_mapa=""){
+		$sql = "select * from ".$this->esquemaadmin."i3geoestat_mapa ";
+		if($id_mapa != ""){
+			$sql .= "WHERE id_mapa = $id_mapa ";
+		}
+		$sql .= "ORDER BY titulo";
+		return $this->execSQL($sql,$id_mapa);
+	}
+	/*
+	 Function: listaGruposMapa
+
+	Lista os grupos de um mapa cadastrados para publicacao
+	*/
+	function listaGruposMapa($id_mapa,$id_mapa_grupo){
+		if(!empty($id_mapa)){
+			$sql = "SELECT * from ".$this->esquemaadmin."i3geoestat_mapa_grupo WHERE id_mapa = $id_mapa";
+		}
+		if(!empty($id_mapa_grupo)){
+			$sql = "SELECT * from ".$this->esquemaadmin."i3geoestat_mapa_grupo WHERE id_mapa_grupo = $id_mapa_grupo";
+		}
+		$sql .= " ORDER BY titulo";
+		return $this->execSQL($sql,$id_mapa_grupo);
 	}
 	/*
 	 Function: listaUnidadeMedida

@@ -41,6 +41,8 @@ include_once(__DIR__."/admin.php");
 include_once(__DIR__."/login.php");
 
 $funcoesEdicao = array(
+	"ALTERAMAPAGRUPO",
+	"ALTERAMAPA",
 	"ALTERAVARIAVEL",
 	"ALTERAMEDIDAVARIAVEL",
 	"ALTERAPARAMETROMEDIDA",
@@ -55,6 +57,8 @@ $funcoesEdicao = array(
 	"ALTERARTIPOREGIAO",
 	"ALTERAAGREGAREGIAO",
 	"ALTERARTIPOPERIODO",
+	"EXCLUIRMAPA",
+	"EXCLUIRMAPAGRUPO",
 	"EXCLUIRVARIAVEL",
 	"EXCLUIRTIPOPERIODO",
 	"EXCLUIRUNIDADEMEDIDA",
@@ -267,7 +271,37 @@ switch (strtoupper($funcao))
 		}
 		retornaJSON($m->listaAgregaRegiao($codigo_tipo_regiao,$id_agregaregiao));
 		exit;
+	case "LISTAMAPAS":
+		$m = new Metaestat();
+		if(empty($id_mapa)){
+			$id_mapa = "";
+		}
+		retornaJSON($m->listaMapas($id_mapa));
+		exit;
 	break;
+	case "LISTAGRUPOSMAPA":
+		$m = new Metaestat();
+		retornaJSON($m->listaGruposMapa($id_mapa,$id_mapa_grupo));
+		exit;
+	break;
+	//lista os templates que o usuario pode escolher para publicar mapas
+	//a pasta com alista e definida na variavel $metaestatTemplates localizada no ms_configura.php
+	case "LISTATEMPLATESMAPA":
+		if(empty($metaestatTemplates)){
+			$metaestatTemplates = __DIR__."/../../ferramentas/metaestat/templates";
+		}
+		retornaJSON(listaArquivos($metaestatTemplates));
+		exit;
+	break;
+	//lista os logos que o usuario pode escolher para publicar mapas
+	//a pasta com alista e definida na variavel $metaestatTemplates/logos localizada no ms_configura.php
+	case "LISTALOGOSMAPA":
+		if(empty($metaestatTemplates)){
+			$metaestatTemplates = __DIR__."/../../ferramentas/metaestat/templates";
+		}
+		retornaJSON(listaArquivos($metaestatTemplates."/logos"));
+		exit;
+		break;
 	/*
 	Valor: ALTERARVARIAVEL
 
@@ -625,6 +659,76 @@ switch (strtoupper($funcao))
 			}
 		}
 		retornaJSON($m->listaTipoPeriodo($codigo_tipo_periodo));
+		exit;
+	break;
+	/*
+	 Valor: ALTERAMAPA
+
+	Altera a tabela de mapas para publicacao
+
+	Retorno:
+
+	{JSON}
+	*/
+	case "ALTERAMAPA":
+		$m = new Metaestat();
+		if(empty($id_mapa)){
+			$id_mapa = $m->alteraMapa();
+		}
+		else{
+			$id_mapa = $m->alteraMapa($id_mapa,$titulo,$template,$logoesquerdo,$logodireito,$publicado);
+		}
+		retornaJSON($m->listaMapas($id_mapa));
+		exit;
+	break;
+	/*
+	 Valor: ALTERAMAPAGRUPO
+
+	Altera a tabela de grupos para publicacao
+
+	Retorno:
+
+	{JSON}
+	*/
+	case "ALTERAMAPAGRUPO":
+		$m = new Metaestat();
+		if(empty($id_mapa_grupo)){
+			$id_mapa_grupo = $m->alteraMapaGrupo($id_mapa);
+		}
+		else{
+			$id_mapa_grupo = $m->alteraMapaGrupo($id_mapa,$id_mapa_grupo,$titulo);
+		}
+		retornaJSON($m->listaGruposMapa($id_mapa,$id_mapa_grupo));
+		exit;
+	break;
+	/*
+	 Valor: EXCLUIRMAPA
+
+	Exclui um mapa do publicador
+
+	*/
+	case "EXCLUIRMAPA":
+		$tabela = "i3geoestat_mapa";
+		$id = $id_mapa;
+		$f = verificaFilhos();
+		if(!$f){
+			$m = new Metaestat();
+			retornaJSON($m->excluirRegistro("i3geoestat_mapa","id_mapa",$id));
+		}
+		else
+			retornaJSON("erro");
+	exit;
+	break;
+	case "EXCLUIRMAPAGRUPO":
+		$tabela = "i3geoestat_mapa_grupo";
+		$id = $id_mapa_grupo;
+		$f = verificaFilhos();
+		if(!$f){
+			$m = new Metaestat();
+			retornaJSON($m->excluirRegistro("i3geoestat_mapa_grupo","id_mapa_grupo",$id));
+		}
+		else
+			retornaJSON("erro");
 		exit;
 	break;
 	/*

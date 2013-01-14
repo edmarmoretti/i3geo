@@ -387,27 +387,28 @@ Retorno:
 */
 function listaArquivos($diretorio)
 {
-	if (!is_dir($diretorio))
-	{
+	if (!is_dir($diretorio)){
 		$diretorio = "../".$diretorio;
 	}
-	if (is_dir($diretorio))
-	{
+	if (is_dir($diretorio)){
 		$dirs = array();
 		$arqs = array();
+		$nomes = array();
 		$d = dir($diretorio);
 		while (($nd = $d->read()) != FALSE)
 		{
 			if ($nd != "." && $nd != "..")
 			{
 				$ext = explode(".",$nd);
-				if (count($ext)>1)
-				{$arqs[] = $nd;}
+				if (count($ext)>1){
+					$arqs[] = $nd;
+					$nomes[] = basename($nd);
+				}
 				if (count($ext)==1)
 				{$dirs[] = $nd;}
 			}
 		}
-		return array("diretorios"=>$dirs,"arquivos"=>$arqs);
+		return array("diretorios"=>$dirs,"arquivos"=>$arqs,"nomes"=>$nomes);
 	}
 	else
 	{return "erro";}

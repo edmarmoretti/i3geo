@@ -222,6 +222,18 @@ function verificaFilhos()
 	try
 	{
 		$res = false;
+		if($tabela == "i3geoestat_mapa_grupo")
+		{
+			$grupo = pegaDados("select * from ".$esquemaadmin."i3geoestat_mapa_tema where id_mapa_grupo=$id");
+			if(count($grupo) > 0)
+				$res = true;
+		}
+		if($tabela == "i3geoestat_mapa")
+		{
+			$grupo = pegaDados("select * from ".$esquemaadmin."i3geoestat_mapa_grupo where id_mapa=$id");
+			if(count($grupo) > 0)
+				$res = true;
+		}
 		if($tabela == "i3geoestat_classificacao")
 		{
 			$r = pegaDados("select * from ".$esquemaadmin."i3geoestat_classes where id_classificacao=$id");

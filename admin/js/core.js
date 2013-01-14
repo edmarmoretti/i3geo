@@ -987,10 +987,12 @@ function core_menuCheckBox(valores,textos,selecionados,target,record,key,unico){
 			ins.push("<input style='position:relative;top:2px;cursor:pointer;' type=radio name=escolha_core_menuCheckBox id='CK_"+valores[i]+"' value='"+valores[i]+"' "+ck+" />"+textos[i]+"<br>");
 		}
 	}
-	ins.push("<br>");
-	novoCK.innerHTML = ins.join(" ");
-	novoCK.style.width = "100%";
-	onde.appendChild(novoCK);
+	if(valores.length > 0){
+		ins.push("<br>");
+		novoCK.innerHTML = ins.join(" ");
+		novoCK.style.width = "100%";
+		onde.appendChild(novoCK);
+	}
 	YAHOO.admin.container.panelCK.moveTo(YAHOO.util.Dom.getX(target),YAHOO.util.Dom.getY(target));
 	YAHOO.admin.container.panelCK.show();
 	$i("core_menuCK_bd").getElementsByTagName("div")[0].style.textAlign = "left";

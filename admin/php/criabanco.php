@@ -95,9 +95,9 @@
 				"create table ".$esquemaadmin."i3geoestat_fonteinfo_medida(id_medida_variavel integer not null,id_fonteinfo integer not null)",
 				"create table ".$esquemaadmin."i3geoestat_medida_variavel_link(link text,id_medida_variavel integer,nome text,id_link integer primary key)",
 				"create table ".$esquemaadmin."i3geoestat_parametro_medida(id_parametro_medida integer primary key,coluna text,nome text,descricao text,id_pai integer default 0,id_medida_variavel integer)",
-				"create table ".$esquemaadmin."create table i3geoestat_mapa(id_mapa integer not null,titulo text not null,template text,logoesquerdo text,logodireito text,publicado integer)",
-				"create table ".$esquemaadmin."create table i3geoestat_mapa_grupo(id_mapa_grupo integer not null,id_mapa integer not null,titulo text,foreign key (id_mapa)references i3geoestat_mapa (id_mapa))",
-				"create table ".$esquemaadmin."create table i3geoestat_mapa_tema(id_mapa_tema integer not null,id_mapa_grupo integer not null,titulo text,id_medida_variavel integer not null unique,foreign key (id_mapa_grupo) references i3geoestat_mapa_grupo (id_mapa_grupo),foreign key (id_medida_variavel)references i3geoestat_medida_variavel (id_medida_variavel))"
+				"create table ".$esquemaadmin."i3geoestat_mapa(id_mapa integer not null unique primary key autoincrement,titulo text,template text,logoesquerdo text,logodireito text,publicado integer)",
+				"create table ".$esquemaadmin."i3geoestat_mapa_grupo(id_mapa_grupo integer not null unique primary key autoincrement,id_mapa integer,titulo text,foreign key (id_mapa) references i3geoestat_mapa (id_mapa))",
+				"create table ".$esquemaadmin."i3geoestat_mapa_tema (id_mapa_tema integer not null unique primary key autoincrement,id_mapa_grupo integer,titulo text,id_medida_variavel integer unique,foreign key (id_mapa_grupo) references i3geoestat_mapa_grupo (id_mapa_grupo),foreign key (id_medida_variavel) references i3geoestat_medida_variavel (id_medida_variavel))"
 		);
 		//valida o usuario e aplica
 		if($conexaoadmin == ""){

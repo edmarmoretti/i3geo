@@ -174,6 +174,18 @@ $emailInstituicao = "geoprocessamento@mma.gov.br";
 	{string}
 */
 $googleApiKey = "ABQIAAAAKguAlmd-hSDulF2T_tfWMxT3OAK09d_ZSDyC36iPGlww-4j-9xSrR2ZZUxVeZC01q8anfe5ntl_U4w";
+/*
+Variable: metaestatTemplates
+
+Indica a pasta onde ficam os templates utilizados para a publicacao de mapas. E utilizado pelo sistema de metadados estatisticos.
+O default e a pasta i3geo/ferramentas/metaestat/templates
+Utilize sempre o caminho completo
+A pasta com os templates deve conter uma pasta chamada "logos" para guardar as logomarcas utilizadas pelos mapas
+
+Tipo:
+{string}
+*/
+$metaestatTemplates = __DIR__."/ferramentas/metaestat/templates";
 
 if (strtoupper(substr(PHP_OS, 0, 3) == 'WIN'))
 {
