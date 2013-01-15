@@ -45,7 +45,7 @@ MAP
       STYLE
         ANGLE 0
         OFFSET 0 0
-        OUTLINECOLOR 50 50 50
+        OUTLINECOLOR 250 50 50
       END # STYLE
     END # CLASS
   END # LAYER

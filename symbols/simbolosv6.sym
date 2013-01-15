@@ -1,17 +1,13 @@
 SYMBOLSET
-#
-#este arquivo está aqui para efeitos de compatibilidade
-#arquivos .map dentro de i3geo/temas podem ainda estar usando esse arquivo
-#
-	Symbol 
-		NAME '0' 
-		TYPE VECTOR 
-		FILLED TRUE 
-		POINTS 
-		0 0 
-		END 
+	Symbol
+		NAME '0'
+		TYPE VECTOR
+		FILLED TRUE
+		POINTS
+		0 0
+		END
 	END
-  SYMBOL 
+  SYMBOL
     NAME 'cruzeta'
 		TYPE VECTOR
 		POINTS
@@ -22,11 +18,11 @@ SYMBOLSET
     1 0.5
 		END
 	END
-  SYMBOL 
-    NAME 'google1' 
+  SYMBOL
+    NAME 'google1'
 		TYPE VECTOR
-		FILLED TRUE 
-		POINTS 
+		FILLED TRUE
+		POINTS
 			90	-363
 			140	-363
 			165	-347
@@ -59,22 +55,22 @@ SYMBOLSET
 			51	-347
 			73	-363
 			120	-363
-		END 
+		END
 	END
 
-	Symbol 
-		NAME 'p0' 
-		TYPE VECTOR 
-		FILLED TRUE 
-		POINTS 
-		0 1 
-		0 0 
-		1 0 
-		1 1 
-		0 1 
-		END 
+	Symbol
+		NAME 'p0'
+		TYPE VECTOR
+		FILLED TRUE
+		POINTS
+		0 1
+		0 0
+		1 0
+		1 1
+		0 1
+		END
   END
-	
+
   Symbol
     Name "p1"
     Type VECTOR
@@ -84,7 +80,7 @@ SYMBOLSET
     1 1
     END
   END
-	
+
   Symbol
     Name "p2"
     Type VECTOR
@@ -125,7 +121,7 @@ SYMBOLSET
     0 1
     END
   END
-  
+
   Symbol
     Name "p6"
     Type VECTOR
@@ -136,7 +132,7 @@ SYMBOLSET
     1 0
     END
   END
-	
+
   Symbol
     Name "p7"
     Type VECTOR
@@ -160,7 +156,7 @@ SYMBOLSET
 		3 3
     END
   END
-	
+
   Symbol
     Name "p9"
     Type VECTOR
@@ -183,9 +179,9 @@ SYMBOLSET
     1 1
     END
   END
-	
-  Symbol 
-	  name "pt2" 
+
+  Symbol
+	  name "pt2"
     TYPE ELLIPSE
     POINTS 1 1 END
     FILLED true
@@ -197,26 +193,26 @@ SYMBOLSET
     POINTS 1 1 END
     Transparent 0
   END
-	
-	
+
+
   Symbol
     Name "aviao"
     Type PIXMAP
     Image "aviao.png"
   END
-  
+
   Symbol
     Name "rosa200"
     Type PIXMAP
     Image "rosa200.png"
-  END  
-	
+  END
+
   Symbol
     Name "seta"
     Type PIXMAP
     Image "seta.png"
   END
-	
+
   Symbol
     Name "aviao1"
     Type PIXMAP
@@ -246,7 +242,7 @@ SYMBOLSET
     Type PIXMAP
     Image "sul.png"
   END
-  
+
   Symbol
     Name "sede"
     Type PIXMAP
@@ -259,7 +255,7 @@ SYMBOLSET
     Type PIXMAP
     Image "cidmun.png"
   END
-	
+
   Symbol
     Name "capital"
     Type PIXMAP
@@ -289,13 +285,13 @@ SYMBOLSET
     Type PIXMAP
     Image "xyr.png"
   END
-	
+
   Symbol
     Name "porto"
     Type PIXMAP
     Image "porto.png"
   END
-	
+
   Symbol
     Name "ref"
     Type PIXMAP
@@ -307,7 +303,7 @@ SYMBOLSET
     Type PIXMAP
     Image "foto.png"
   END
-	
+
   Symbol
     Name "filme"
     Type PIXMAP
@@ -320,7 +316,7 @@ SYMBOLSET
     Image "marca.png"
   END
 
-	
+
   Symbol
     Name "ponto"
     Type ELLIPSE
@@ -331,21 +327,21 @@ SYMBOLSET
     1 1
     END
   END
- 
-	Symbol 
-		NAME 'quadrado' 
-		TYPE VECTOR 
-		FILLED TRUE 
-		POINTS 
-		0 1 
-		0 0 
-		1 0 
-		1 1 
-		0 1 
-		END 
+
+	Symbol
+		NAME 'quadrado'
+		TYPE VECTOR
+		FILLED TRUE
+		POINTS
+		0 1
+		0 0
+		1 0
+		1 1
+		0 1
+		END
 	END
 
-	SYMBOL 
+	SYMBOL
   	NAME "estrela"
   	TYPE vector
   	FILLED TRUE
@@ -361,26 +357,26 @@ SYMBOLSET
 		91 77
 		131 48
 		81 48
-  	END 
+  	END
 	END
 
-  SYMBOL 
-    NAME 'triangulo' 
-		TYPE VECTOR 
-		FILLED TRUE 
-		POINTS 
-		0 1 
-		.5 0 
-		1 1 
-		0 1 
-		END 
+  SYMBOL
+    NAME 'triangulo'
+		TYPE VECTOR
+		FILLED TRUE
+		POINTS
+		0 1
+		.5 0
+		1 1
+		0 1
+		END
 	END
 
-  SYMBOL 
-    NAME 'industria' 
-		TYPE VECTOR 
-		FILLED TRUE 
-		POINTS 
+  SYMBOL
+    NAME 'industria'
+		TYPE VECTOR
+		FILLED TRUE
+		POINTS
 		0 2
 		0 5
 		4 5
@@ -388,14 +384,14 @@ SYMBOLSET
 		3 0
 		3 2
 		0 2
-		END 
+		END
 	END
-	
-  SYMBOL 
-    NAME 'torre' 
-		TYPE VECTOR 
-		FILLED FALSE 
-		POINTS 
+
+  SYMBOL
+    NAME 'torre'
+		TYPE VECTOR
+		FILLED FALSE
+		POINTS
 		2 0
 		3 4
 		4 4
@@ -404,14 +400,14 @@ SYMBOLSET
 		0 4
 		1 4
 		2 0
-		END 
+		END
 	END
-	
-  SYMBOL 
-    NAME 'mineracao' 
-		TYPE VECTOR 
-		FILLED FALSE 
-		POINTS 
+
+  SYMBOL
+    NAME 'mineracao'
+		TYPE VECTOR
+		FILLED FALSE
+		POINTS
 		0 0
 		5 5
 		4 6
@@ -419,14 +415,14 @@ SYMBOLSET
 		2 6
 		0 5
 		5 0
-		END 
+		END
 	END
 
-  SYMBOL 
-    NAME 'templo' 
-		TYPE VECTOR 
-		FILLED FALSE 
-		POINTS 
+  SYMBOL
+    NAME 'templo'
+		TYPE VECTOR
+		FILLED FALSE
+		POINTS
 		2 0
 		3 0
 		3 1
@@ -444,14 +440,14 @@ SYMBOLSET
 		1 1
 		2 1
 		2 0
-		END 
+		END
 	END
-	
-  SYMBOL 
-    NAME 'saude' 
-		TYPE VECTOR 
-		FILLED TRUE 
-		POINTS 
+
+  SYMBOL
+    NAME 'saude'
+		TYPE VECTOR
+		FILLED TRUE
+		POINTS
 		2 0
 		3 0
 		3 1
@@ -465,14 +461,14 @@ SYMBOLSET
 		1 1
 		2 1
 		2 0
-		END 
+		END
 	END
-	
-  SYMBOL 
-    NAME 'escola' 
-		TYPE VECTOR 
-		FILLED FALSE 
-		POINTS 
+
+  SYMBOL
+    NAME 'escola'
+		TYPE VECTOR
+		FILLED FALSE
+		POINTS
 		2 0
 		5 2
 		3 2
@@ -483,14 +479,14 @@ SYMBOLSET
 		0 4
 		2 4
 		2 0
-		END 
+		END
 	END
 
-  SYMBOL 
-    NAME 'cruz' 
-		TYPE VECTOR 
-		FILLED TRUE 
-		POINTS 
+  SYMBOL
+    NAME 'cruz'
+		TYPE VECTOR
+		FILLED TRUE
+		POINTS
 		2 0
 		3 0
 		3 1
@@ -504,16 +500,16 @@ SYMBOLSET
 		0 1
 		2 1
 		2 0
-		END 
+		END
 	END
 
-Symbol 
-	name "circle" 
-	Type ELLIPSE 
-	Filled true 
-	POINTS 
-		1 1 
-		END 
+Symbol
+	name "circle"
+	Type ELLIPSE
+	Filled true
+	POINTS
+		1 1
+		END
 END
 Symbol
   Name 'ferrovia-line1'
@@ -546,9 +542,9 @@ END
     END
   #PATTERN     1 13 1 13   END
   END
-	
-  Symbol 
-	  name "pt2l" 
+
+  Symbol
+	  name "pt2l"
     TYPE ELLIPSE
     POINTS 1 1 END
     FILLED true
@@ -562,7 +558,7 @@ END
     Transparent 0
   #PATTERN    1 13 1 13  END
   END
-	
+
   Symbol
     Name "linha"
     Type ELLIPSE
@@ -579,34 +575,34 @@ END
   #PATTERN    10 20 10 20  END
   END
 
-	Symbol 
-	name "dashed" 
-	Type ELLIPSE 
-	FILLED true 
-	POINTS 
-		1 1 
-		END 
-	#PATTERN 8 3	END 
+	Symbol
+	name "dashed"
+	Type ELLIPSE
+	FILLED true
+	POINTS
+		1 1
+		END
+	#PATTERN 8 3	END
   END
 
-	Symbol 
-	name "dashed1" 
-	Type ELLIPSE 
-	FILLED true 
-	POINTS 
-		1 1 
-		END 
-	#PATTERN 8 8 1 8 	END 
-  END 
+	Symbol
+	name "dashed1"
+	Type ELLIPSE
+	FILLED true
+	POINTS
+		1 1
+		END
+	#PATTERN 8 8 1 8 	END
+  END
 
-	Symbol 
-	name "dashed2" 
-	Type ELLIPSE 
-	FILLED true 
-	POINTS 
+	Symbol
+	name "dashed2"
+	Type ELLIPSE
+	FILLED true
+	POINTS
     2 0
-		END 
-  END 	
+		END
+  END
 
   Symbol
     Name "setal"
@@ -623,8 +619,8 @@ END
   #PATTERN    1 13 1 13  END
 
   END
-		
-	
+
+
   Symbol
     Name "pontol"
     Type ELLIPSE
@@ -637,23 +633,23 @@ END
   #PATTERN    1 13 1 13  END
 
   END
- 
-	Symbol 
-		NAME 'quadradol' 
-		TYPE VECTOR 
-		FILLED TRUE 
-		POINTS 
-		0 1 
-		0 0 
-		1 0 
-		1 1 
-		0 1 
-		END 
+
+	Symbol
+		NAME 'quadradol'
+		TYPE VECTOR
+		FILLED TRUE
+		POINTS
+		0 1
+		0 0
+		1 0
+		1 1
+		0 1
+		END
   #PATTERN    1 13 1 13  END
 
 	END
 
-	SYMBOL 
+	SYMBOL
   	NAME "estrelal"
   	TYPE vector
   	FILLED TRUE
@@ -669,32 +665,32 @@ END
 		91 77
 		131 48
 		81 48
-  	END 
+  	END
   #PATTERN    1 13 1 13  END
 
 	END
 
-  SYMBOL 
-    NAME 'triangulol' 
-		TYPE VECTOR 
-		FILLED TRUE 
-		POINTS 
-		0 1 
-		.5 0 
-		1 1 
-		0 1 
-		END 
+  SYMBOL
+    NAME 'triangulol'
+		TYPE VECTOR
+		FILLED TRUE
+		POINTS
+		0 1
+		.5 0
+		1 1
+		0 1
+		END
   #PATTERN    1 13 1 13  END
 
 	END
 
-Symbol 
-	name "circlel" 
-	Type ELLIPSE 
-	Filled true 
-	POINTS 
-		1 1 
-		END 
+Symbol
+	name "circlel"
+	Type ELLIPSE
+	Filled true
+	POINTS
+		1 1
+		END
   #PATTERN    1 13 1 13  END
 
 END

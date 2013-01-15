@@ -22,7 +22,7 @@ body {
 			href="../html/editormapfile.html" target="_self">Voltar</a><br> <br>
 		<form action="editortexto.php?mapfile=<?php echo $_GET["mapfile"];?>"
 			method=post>
-			<input type=submit value="Salvar" /><input type=button value="Testar"
+			<input type=submit value="Salvar (tamb&eacute;m atualiza o mapa)" /><input type=button value="Testar"
 				onclick="testar()" /><input type=button value="Testar no i3Geo"
 				onclick="abrirI3geo()" /> (Salve antes de testar)<br> <br>
 			<div id="comboMapfiles">Aguarde...</div>
@@ -49,13 +49,15 @@ body {
 				fclose($fp);
 			}
 			echo "Edite:<br>";
-			echo "<TEXTAREA name=texto cols=100 rows=20 style='width:100%'>";
+			echo "<TEXTAREA name=texto cols=100 rows=20 style='width:500px;float:left;height:500px'>";
 			echo file_get_contents($mapfile);
 			echo "</TEXTAREA>";
+			echo "<iframe id='mapaPreview' src='../../mashups/openlayers.php?controles=navigation,panzoombar,scaleline,mouseposition&botoes=identifica&largura=490&temas=".$mapfile."' cols=100 rows=20 style='position:relative;top:2px;overflow:hidden;width:500px;height:500px;border:1px solid gray;'>";
+			echo "</iframe>";
 			echo "<input type=hidden name=tipo value=gravar />";
 			$mapa = ms_newMapObj($mapfile);
 			$n = $mapa->numlayers;
-			echo "Colunas dos layers:<br><br>";
+			echo "<br><br>Colunas dos layers:<br><br>";
 			for($i=0;$i<$n;$i++){
 				$l = $mapa->getlayer($i);
 				echo $l->name.": ".(implode(",",pegaItens($l)))."<br><br>";

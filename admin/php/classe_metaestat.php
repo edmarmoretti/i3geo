@@ -851,6 +851,33 @@ class Metaestat{
 		}
 	}
 	/*
+	 Function: alteraMapaTema
+
+	Altera um tema de um grupo de um mapa ou adiciona um novo
+
+	*/
+	function alteraMapaTema($id_mapa_grupo,$id_mapa_tema="",$titulo="",$id_medida_variavel=""){
+		try	{
+			if($this->convUTF){
+				$titulo = utf8_encode($titulo);
+			}
+			if($id_mapa_tema != ""){
+				$this->dbhw->query("UPDATE ".$this->esquemaadmin."i3geoestat_mapa_tema SET titulo='$titulo',id_medida_variavel='$id_medida_variavel' WHERE id_mapa_tema = $id_mapa_tema");
+				$retorna = $id_mapa_tema;
+			}
+			else{
+				$retorna = $this->insertId("i3geoestat_mapa_tema","titulo","id_mapa_tema");
+				if($retorna){
+					$this->dbhw->query("UPDATE ".$this->esquemaadmin."i3geoestat_mapa_tema SET id_mapa_grupo = $id_mapa_grupo WHERE id_mapa_tema = $retorna");
+				}
+			}
+			return $retorna;
+		}
+		catch (PDOException $e)	{
+			return "Error!: " . $e->getMessage();
+		}
+	}
+	/*
 	 Function: alteraVariavel
 
 	Altera uma variavel ou cria uma nova
@@ -1181,6 +1208,21 @@ class Metaestat{
 		}
 		$sql .= " ORDER BY titulo";
 		return $this->execSQL($sql,$id_mapa_grupo);
+	}
+	/*
+	 Function: listaTemasMapa
+
+	Lista os temas de um grupo de um mapa cadastrados para publicacao
+	*/
+	function listaTemasMapa($id_mapa_grupo,$id_mapa_tema){
+		if(!empty($id_mapa_grupo)){
+			$sql = "SELECT * from ".$this->esquemaadmin."i3geoestat_mapa_tema WHERE id_mapa_grupo = $id_mapa_grupo";
+		}
+		if(!empty($id_mapa_tema)){
+			$sql = "SELECT * from ".$this->esquemaadmin."i3geoestat_mapa_tema WHERE id_mapa_tema = $id_mapa_tema";
+		}
+		$sql .= " ORDER BY titulo";
+		return $this->execSQL($sql,$id_mapa_tema);
 	}
 	/*
 	 Function: listaUnidadeMedida

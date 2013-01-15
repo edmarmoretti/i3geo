@@ -98,24 +98,24 @@ function adicionaNosTemas(no,dados,redesenha)
 {
 	if(!redesenha)
 	{
-		var conteudo = "<span onclick=\"adicionarTema('"+no.data.id_prancha+"')\" style=\"cursor:pointer;\" ><img style=\"position:relative;top:0px\" width='10px' heigth='10px' src=\"../imagens/05.png\" /><i>Adicionar novo tema:</i></span>";
+		var conteudo = "<span onclick=\"adicionarTema('"+no.data.id_mapa_grupo+"')\" style=\"cursor:pointer;\" ><img style=\"position:relative;top:0px\" width='10px' heigth='10px' src=\"../imagens/05.png\" /><i>Adicionar novo tema:</i></span>";
 		var d = {html:conteudo};
 		var tempNode = new YAHOO.widget.HTMLNode(d, no, false,true);
 		tempNode.isLeaf = true;
 	}
 	for (var i=0, j=dados.length; i<j; i++)
 	{
-		if(dados[i].nome_tema == "null" || !dados[i].nome_tema || dados[i].codigo_tema == "")
-		{dados[i].nome_tema = "";}
+		if(dados[i].titulo == "null" || !dados[i].titulo || dados[i].id_mapa_tema == "")
+		{dados[i].titulo = "";}
 		var conteudo = "";
-		conteudo += "&nbsp;<img style=\"position:relative;cursor:pointer;top:0px\" onclick=\"excluir('tema','"+dados[i].id_tema+"')\" title=excluir width='10px' heigth='10px' src=\"../imagens/01.png\" />";
-		conteudo += "&nbsp;<img style=\"position:relative;cursor:pointer;top:0px\" onclick=\"testarMapfile('"+dados[i].codigo_tema+"')\" title=testar width='10px' heigth='10px' src=\"../imagens/41.png\" />";
-		conteudo += "&nbsp;<img style=\"position:relative;cursor:pointer;top:0px\" onclick=\"editar('tema','"+dados[i].id_tema+"')\" title=editar width='10px' heigth='10px' src=\"../imagens/06.png\" />";
-		if(dados[i].codigo_tema != "")
-		{conteudo += "&nbsp;<span>"+dados[i].codigo_tema+" - </span><span style=color:gray >"+dados[i].nome_tema+"</span>";}
+		conteudo += "&nbsp;<img style=\"position:relative;cursor:pointer;top:0px\" onclick=\"excluir('tema','"+dados[i].id_mapa_tema+"')\" title=excluir width='10px' heigth='10px' src=\"../imagens/01.png\" />";
+		conteudo += "&nbsp;<img style=\"position:relative;cursor:pointer;top:0px\" onclick=\"testarMapfile('"+dados[i].id_mapa_tema+"')\" title=testar width='10px' heigth='10px' src=\"../imagens/41.png\" />";
+		conteudo += "&nbsp;<img style=\"position:relative;cursor:pointer;top:0px\" onclick=\"editar('tema','"+dados[i].id_mapa_tema+"')\" title=editar width='10px' heigth='10px' src=\"../imagens/06.png\" />";
+		if(dados[i].id_mapa_tema != "")
+		{conteudo += "&nbsp;<span>"+dados[i].titulo+"</span>";}
 		else
 		{conteudo += "&nbsp;<span style=color:red >Edite para definir o tema!!!</span>";}
-		var d = {html:conteudo,id_tema:dados[i].id_tema,tipo:"tema"};
+		var d = {html:conteudo,id_mapa_tema:dados[i].id_mapa_tema,tipo:"tema"};
 		var tempNode = new YAHOO.widget.HTMLNode(d, no, false,true);
 		tempNode.isLeaf = true;
 	}
@@ -131,7 +131,7 @@ function adicionaNosGrupos(no,dados,redesenha)
 	}
 	function loadTemasData(node, fnLoadComplete)
 	{
-		var sUrl = "../php/atlas.php?funcao=listaTemasMapa&id_mapa_grupo="+node.data.id_mapa_grupo;
+		var sUrl = "../php/metaestat.php?funcao=listaTemasMapa&id_mapa_grupo="+node.data.id_mapa_grupo;
 		var callback =
 		{
 			success: function(oResponse)
@@ -221,11 +221,10 @@ function editar(tipo,id)
 				}
 				if(tipo == "tema")
 				{
-					var dados = YAHOO.lang.JSON.parse(o.responseText)[0];
+					var dados = YAHOO.lang.JSON.parse(o.responseText);
 					core_montaEditor("gravaDados('tema','"+id+"')");
 					$i("editor_bd").innerHTML = montaDivTema(dados);
 					core_carregando("desativa");
-					core_comboMapfiles("comboTemaIni","Ecodigo_tema",dados.codigo_tema,"",true);
 				}
 				core_carregando("desativa");
 			}
@@ -239,21 +238,21 @@ function editar(tipo,id)
 	if(tipo == "grupo")
 	{sUrl = "../php/metaestat.php?funcao=listaGruposMapa&id_mapa_grupo="+id;}
 	if(tipo == "tema")
-	{sUrl = "../php/atlas.php?funcao=pegaDadosTema&id_tema="+id;}
+	{sUrl = "../php/metaestat.php?funcao=listaTemasMapa&id_mapa_tema="+id;}
 	if(sUrl)
 	{core_makeRequest(sUrl,callback);}
 }
 function montaDivTema(i)
 {
+	var param =
+	{
+		"linhas":[
+		{titulo:"T&iacute;tulo:",id:"Etitulo",size:"50",value:i.titulo,tipo:"text",div:""},
+		{titulo:"ID da medida de uma vari&aacute;vel:",id:"Eid_medida_variavel",size:"50",value:i.id_medida_variavel,tipo:"text",div:""}
+		]
+	};
 	var ins = "";
-	ins += "<br>Código do tema:<br>";
-	ins += "<div id=comboTemaIni ></div>";
-
-	ins += "Ligado (ao abrir a prancha, esse tema estar&aacute; vis&iacute;vel)?<br>";
-	ins += "<select id='Eligado_tema' >";
-	ins += core_combosimnao(i.ligado_tema);
-	ins += "</select>";
-	ins += "<input type=hidden value='"+i.ordem_tema+"' id='Eordem_tema' />";
+	ins += core_geraLinhas(param);
 	return(ins);
 }
 function montaDivGrupo(i)
@@ -352,7 +351,7 @@ function excluir(tipo,id)
 	if(tipo == "tema")
 	{
 		no = tree.getNodeByProperty("id_tema",id);
-		sUrl = "../php/atlas.php?funcao=excluirTema&id="+id;
+		sUrl = "../php/metaestat.php?funcao=excluirMapaTema&id_mapa_tema="+id;
 	}
 	if(sUrl)
 	{core_excluiNoTree(sUrl,no,mensagem);}
@@ -366,15 +365,15 @@ Adiciona um novo tema
 */
 function adicionarTema(id)
 {
-	var no = tree.getNodeByProperty("id_prancha",id);
-	var sUrl = "../php/atlas.php?funcao=alterarTema&id_prancha="+id;
+	var no = tree.getNodeByProperty("id_mapa_grupo",id);
+	var sUrl = "../php/metaestat.php?funcao=alteraMapaTema&id_mapa_grupo="+id;
 	var callback =
 	{
 		success: function(oResponse)
 		{
-			var dados = YAHOO.lang.JSON.parse(oResponse.responseText)[0];
-			adicionaNosTemas(no,dados,true);
-			editar('tema',dados[dados.length-1].id_tema);
+			var dados = YAHOO.lang.JSON.parse(oResponse.responseText);
+			adicionaNosTemas(no,[dados],true);
+			editar('tema',dados.id_mapa_tema);
 		},
   		failure:core_handleFailure,
   		argument: { foo:"foo", bar:"bar" }
@@ -428,9 +427,9 @@ function gravaDados(tipo,id)
 	}
 	if(tipo == "tema")
 	{
-		campos = new Array("codigo_tema","ordem_tema","ligado_tema");
-		par = "&id_tema="+id;
-		prog = "../php/atlas.php?funcao=alterarTema";
+		campos = new Array("titulo","id_medida_variavel");
+		par = "&id_mapa_tema="+id;
+		prog = "../php/metaestat.php?funcao=alteraMapaTema";
 	}
 	for (var i=0;i<campos.length;i++)
 	{par += "&"+campos[i]+"="+($i("E"+campos[i]).value);}
@@ -464,8 +463,8 @@ function gravaDados(tipo,id)
   					}
   					if(tipo == "tema")
   					{
-  						var no = tree.getNodeByProperty("id_tema",id);
-  						no.getContentEl().getElementsByTagName("span")[0].innerHTML = document.getElementById("Ecodigo_tema").value;
+  						var no = tree.getNodeByProperty("id_mapa_tema",id);
+  						no.getContentEl().getElementsByTagName("span")[0].innerHTML = document.getElementById("Etitulo").value;
 						no.getContentEl().getElementsByTagName("span")[0].style.color = "";
   						no.html = no.getContentEl().innerHTML;
   					}

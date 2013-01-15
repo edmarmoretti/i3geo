@@ -11,9 +11,9 @@ drop table i3geoestat_medida_variavel;
 drop table i3geoestat_tipo_regiao;
 drop table i3geoestat_conexao;
 drop table i3geoestat_fonteinfo;
-drop table i3geoestat_mapa_tema;
 drop table i3geoestat_mapa_grupo;
 drop table i3geoestat_mapa;
+drop table i3geoestat_mapa_tema;
 drop table i3geoestat_tipo_periodo;
 drop table i3geoestat_unidade_medida;
 drop table i3geoestat_variavel;
@@ -249,7 +249,7 @@ create table i3geoestat_mapa_tema
 	id_mapa_grupo integer,
 	-- titulo do tema, se for vazio, usa o definido no sistema metaestat
 	titulo text,
-	id_medida_variavel integer unique,
+	id_medida_variavel integer,
 	foreign key (id_mapa_grupo)
 	references i3geoestat_mapa_grupo (id_mapa_grupo),
 	foreign key (id_medida_variavel)

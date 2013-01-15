@@ -368,13 +368,13 @@ i3GEO.editorOL.ativarodadomouse = "<?php
 	else
 	{echo "true";}
 ?>";
-<?php 
+<?php
 if(isset($fundo) && $fundo != ""){
 	echo "i3GEO.editorOL.fundo = '".implode(",",$fundo)."';";
 }
 
 if(isset($controles)){
-	echo "i3GEO.editorOL.controle = [".implode(",",$objControles)."];";
+	echo "i3GEO.editorOL.controles = [".implode(",",$objControles)."];";
 }
 if(isset($numzoomlevels)){
 	echo "i3GEO.editorOL.numzoom = ".$numzoomlevels.";";

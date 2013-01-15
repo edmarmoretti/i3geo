@@ -42,6 +42,7 @@ include_once(__DIR__."/login.php");
 
 $funcoesEdicao = array(
 	"ALTERAMAPAGRUPO",
+	"ALTERAMAPATEMA",
 	"ALTERAMAPA",
 	"ALTERAVARIAVEL",
 	"ALTERAMEDIDAVARIAVEL",
@@ -59,6 +60,7 @@ $funcoesEdicao = array(
 	"ALTERARTIPOPERIODO",
 	"EXCLUIRMAPA",
 	"EXCLUIRMAPAGRUPO",
+	"EXCLUIRMAPATEMA",
 	"EXCLUIRVARIAVEL",
 	"EXCLUIRTIPOPERIODO",
 	"EXCLUIRUNIDADEMEDIDA",
@@ -282,6 +284,11 @@ switch (strtoupper($funcao))
 	case "LISTAGRUPOSMAPA":
 		$m = new Metaestat();
 		retornaJSON($m->listaGruposMapa($id_mapa,$id_mapa_grupo));
+		exit;
+	break;
+	case "LISTATEMASMAPA":
+		$m = new Metaestat();
+		retornaJSON($m->listaTemasMapa($id_mapa_grupo,$id_mapa_tema));
 		exit;
 	break;
 	//lista os templates que o usuario pode escolher para publicar mapas
@@ -701,6 +708,17 @@ switch (strtoupper($funcao))
 		retornaJSON($m->listaGruposMapa($id_mapa,$id_mapa_grupo));
 		exit;
 	break;
+	case "ALTERAMAPATEMA":
+		$m = new Metaestat();
+		if(empty($id_mapa_tema)){
+			$id_mapa_tema = $m->alteraMapaTema($id_mapa_grupo);
+		}
+		else{
+			$id_mapa_tema = $m->alteraMapaTema($id_mapa_grupo,$id_mapa_tema,$titulo,$id_medida_variavel);
+		}
+		retornaJSON($m->listaTemasMapa($id_mapa_grupo,$id_mapa_tema));
+		exit;
+	break;
 	/*
 	 Valor: EXCLUIRMAPA
 
@@ -729,6 +747,13 @@ switch (strtoupper($funcao))
 		}
 		else
 			retornaJSON("erro");
+		exit;
+	break;
+	case "EXCLUIRMAPATEMA":
+		$tabela = "i3geoestat_mapa_tema";
+		$id = $id_mapa_tema;
+		$m = new Metaestat();
+		retornaJSON($m->excluirRegistro("i3geoestat_mapa_tema","id_mapa_tema",$id));
 		exit;
 	break;
 	/*
