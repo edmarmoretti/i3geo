@@ -7,6 +7,10 @@ Inicializa o editor de mapas
 function initMenu()
 {
 	ativaBotaoAdiciona("../php/metaestat.php?funcao=alteraMapa","adiciona");
+	new YAHOO.widget.Button("upload",{ onclick: { fn: function(){
+		core_montaEditor();
+		$i("editor_bd").innerHTML = formUploadImagem();
+	} } });
 	core_carregando("ativa");
 	core_ativaPainelAjuda("ajuda","botaoAjuda");
 	core_pegaDados("buscando mapas...","../php/metaestat.php?funcao=listaMapas","montaArvore");
@@ -35,6 +39,16 @@ function ativaBotaoAdiciona(sUrl,idBotao)
 		core_makeRequest(sUrl,callback);
 	};
 	new YAHOO.widget.Button(idBotao,{ onclick: { fn: adiciona } });
+}
+function formUploadImagem(){
+	var ins = '' +
+	'<form id=uploadimagem target="i3GEOuploadiframe" action="../php/estat_mapa_upload.php" method="post" ENCTYPE="multipart/form-data" >' +
+		'<p>Imagem (jpg ou png) se o arquivo j&aacute; existir, ser&aacute; substitu&iacute;do: <br><input type="file" size=22 name="uploadimagem" style="top:0px;left:0px;cursor:pointer;"></p>' +
+		'<p><input type="submit" size=12 name="submit">' +
+		'<input type="hidden" name="MAX_FILE_SIZE" value="1000000">' +
+	'</form>' +
+	'<iframe name=i3GEOuploadiframe style="text-align:left;border:1px solid gray;" width="98%" height="160px"></iframe>';
+	return ins;
 }
 /*
 Function: montaArvore
@@ -223,7 +237,7 @@ function editar(tipo,id)
 				{
 					var dados = YAHOO.lang.JSON.parse(o.responseText);
 					core_montaEditor("gravaDados('tema','"+id+"')");
-					$i("editor_bd").innerHTML = montaDivTema(dados);
+					montaDivTema(dados);
 					core_carregando("desativa");
 				}
 				core_carregando("desativa");
@@ -244,16 +258,24 @@ function editar(tipo,id)
 }
 function montaDivTema(i)
 {
-	var param =
-	{
-		"linhas":[
-		{titulo:"T&iacute;tulo:",id:"Etitulo",size:"50",value:i.titulo,tipo:"text",div:""},
-		{titulo:"ID da medida de uma vari&aacute;vel:",id:"Eid_medida_variavel",size:"50",value:i.id_medida_variavel,tipo:"text",div:""}
-		]
-	};
-	var ins = "";
+	var sUrl = "../php/metaestat.php?funcao=relatorioCompleto&dadosGerenciais=nao&detalhes=nao",
+		ins = "",
+		callback = {
+			success:function(o){
+				ins += "<br><div>"+YAHOO.lang.JSON.parse(o.responseText)+"</div>";
+				$i("editor_bd").innerHTML = ins;
+			},
+			failure: function(){return ins;},
+			argument: { foo:"foo", bar:"bar" }
+		},
+		param = {
+			"linhas":[
+			{titulo:"T&iacute;tulo:",id:"Etitulo",size:"50",value:i.titulo,tipo:"text",div:""},
+			{titulo:"ID da medida de uma vari&aacute;vel (veja em ID no relat&oacute;rio abaixo):",id:"Eid_medida_variavel",size:"50",value:i.id_medida_variavel,tipo:"text",div:""}
+			]
+		};
 	ins += core_geraLinhas(param);
-	return(ins);
+	core_makeRequest(sUrl,callback);
 }
 function montaDivGrupo(i)
 {

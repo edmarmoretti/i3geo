@@ -1645,35 +1645,37 @@ class Metaestat{
 		return $dados;
 	}
 	//$dados vem de relatorioCompleto
-	function formataRelatorioHtml($dados){
+	function formataRelatorioHtml($dados,$detalhes="sim"){
 		$html[] = "<div class='var_div_relatorio'>";
 		$var_cor = "var_cor1";
 		foreach($dados as $variavel){
 			$html[] = "<div class='".$var_cor."'>";
-			$html[] = "<h1>".$variavel["titulo"]."</h1>";
-			$html[] = "<p><i>".$variavel["descricao"]."</i></p>";
+			$html[] = "<h1>".$variavel["titulo"];
+			$html[] = "<span style='color:rgb(190,190,190)'> (<i>".$variavel["descricao"]."</i>)</span></h1>";
 			$filhos = $variavel["filhos"];
 			foreach($filhos as $f){
-				$html[] = "<h2 style='position:relative;left:10px;'>".$f["titulo"]."</h2>";
+				$html[] = "<h2 style='position:relative;left:10px;'>ID: <u>".$f["id"]."</u> - ".$f["titulo"]."</h2>";
 				$html[] = "<div style='position:relative;left:20px;'>";
 				$html[] = "<p><i>".$f["descricao"]."</i></p>";
-				$html[] = "<p><b>Fontes:</b></p>";
-				foreach($f["fontes"] as $fonte){
-					$html[] = "<p><a href='".$fonte["link"]."' >".$fonte["titulo"]."</a></p>";
-				}
-				$html[] = "<p><b>Links:</b></p>";
-				foreach($f["links"] as $link){
-					$html[] = "<p><a href='".$link["link"]."' >".$link["nome"]."</a></p>";
-				}
-				if($f["dadosgerenciais"] != ""){
-					$html[] = "<span style='color:gray'>";
-					$html[] = "esquemadb = ".$f["dadosgerenciais"][esquemadb].", ";
-					$html[] = "tabela = ".$f["dadosgerenciais"][tabela].", ";
-					$html[] = "colunavalor = ".$f["dadosgerenciais"][colunavalor].", ";
-					$html[] = "colunaidgeo = ".$f["dadosgerenciais"][colunaidgeo].", ";
-					$html[] = "filtro = ".$f["dadosgerenciais"][filtro].", ";
-					$html[] = "colunaidunico = ".$f["dadosgerenciais"][colunaidunico];
-					$html[] = "</span>";
+				if($detalhes == "sim"){
+					$html[] = "<p><b>Fontes:</b></p>";
+					foreach($f["fontes"] as $fonte){
+						$html[] = "<p><a href='".$fonte["link"]."' >".$fonte["titulo"]."</a></p>";
+					}
+					$html[] = "<p><b>Links:</b></p>";
+					foreach($f["links"] as $link){
+						$html[] = "<p><a href='".$link["link"]."' >".$link["nome"]."</a></p>";
+					}
+					if($f["dadosgerenciais"] != ""){
+						$html[] = "<span style='color:gray'>";
+						$html[] = "esquemadb = ".$f["dadosgerenciais"][esquemadb].", ";
+						$html[] = "tabela = ".$f["dadosgerenciais"][tabela].", ";
+						$html[] = "colunavalor = ".$f["dadosgerenciais"][colunavalor].", ";
+						$html[] = "colunaidgeo = ".$f["dadosgerenciais"][colunaidgeo].", ";
+						$html[] = "filtro = ".$f["dadosgerenciais"][filtro].", ";
+						$html[] = "colunaidunico = ".$f["dadosgerenciais"][colunaidunico];
+						$html[] = "</span>";
+					}
 				}
 				$html[] = "</div>";
 			}

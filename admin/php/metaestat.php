@@ -1346,7 +1346,10 @@ switch (strtoupper($funcao))
 			$codigo_variavel = "";
 		}
 		$dados = $m->relatorioCompleto($codigo_variavel,$dadosGerenciais);
-		$dados = $m->formataRelatorioHtml($dados);
+		if(empty($detalhes)){
+			$detalhes = "sim";
+		}
+		$dados = $m->formataRelatorioHtml($dados,$detalhes);
 		retornaJSON($dados);
 		exit;
 	break;
