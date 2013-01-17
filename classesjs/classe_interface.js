@@ -302,10 +302,12 @@ i3GEO.Interface = {
 	Parametro:
 
 	opacidade {numerico} - 0 a 1
+
+	layer {string} - (opcional) se for vazio aplica ao mapa todo
 	*/
-	aplicaOpacidade: function(opacidade){
+	aplicaOpacidade: function(opacidade,layer){
 		if(typeof(console) !== 'undefined'){console.info("i3GEO.Interface.atualizaMapa()");}
-		i3GEO.Interface[i3GEO.Interface.ATUAL].aplicaOpacidade(opacidade);
+		i3GEO.Interface[i3GEO.Interface.ATUAL].aplicaOpacidade(opacidade,layer);
 	},
 	/*
 	Function: atualizaMapa
@@ -750,16 +752,20 @@ i3GEO.Interface = {
 				{eval(i3GEO.finalizaAPI);}
 			}
 		},
-		aplicaOpacidade: function(opacidade){
+		aplicaOpacidade: function(opacidade,layer){
 			var nlayers = i3GEO.arvoreDeCamadas.CAMADAS.length,
-				layer,
-				i,
-				camada;
+				l,i,camada;
+			if(!layer){
+				layer = "";
+			}
 			for(i=nlayers-1;i>=0;i--){
 				camada = i3GEO.arvoreDeCamadas.CAMADAS[i];
-				layer = i3geoOL.getLayersByName(camada.name)[0];
-				if(layer && layer.isBaseLayer === false)
-				{layer.setOpacity(opacidade);}
+				l = i3geoOL.getLayersByName(camada.name)[0];
+				if(l && l.isBaseLayer === false){
+					if(layer == "" || layer == camada.name){
+						l.setOpacity(opacidade);
+					}
+				}
 			}
 		},
 		adicionaListaKml: function(){
@@ -1729,17 +1735,21 @@ i3GEO.Interface = {
 			{i3GEO.barraDeBotoes.inicializaBarra("barraDeBotoes2","i3geo_barra2",false,x2,y2);}
 			i3GEO.barraDeBotoes.ativaBotoes();
 		},
-		aplicaOpacidade: function(opacidade){
+		aplicaOpacidade: function(opacidade,layer){
 			var nlayers = i3GEO.arvoreDeCamadas.CAMADAS.length,
-				i,
-				camada,
-				div;
+				i,camada,div;
+			if(!layer){
+				layer = "";
+			}
 			for (i=0;i<nlayers;i++){
 				camada = i3GEO.arvoreDeCamadas.CAMADAS[i];
 				if(camada && camada.name){
 					div = i3GEO.Interface.googlemaps.retornaDivLayer(camada.name);
-					if(div)
-					{YAHOO.util.Dom.setStyle(div, "opacity", opacidade);}
+					if(div){
+						if(layer == "" || layer == camada.name){
+							YAHOO.util.Dom.setStyle(div, "opacity", opacidade);
+						}
+					}
 				}
 			}
 		},

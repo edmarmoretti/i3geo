@@ -96,6 +96,7 @@ i3GEOF.opacidademapa = {
 	iddiv {String} - id do div que receber&aacute; o conteudo HTML da ferramenta
 	*/
 	inicia: function(iddiv){
+		i3GEO.janela.comboCabecalhoTemas("i3GEOFopacidademapaComboCabeca","i3GEOFopacidademapaComboCabecaSel","tabela","ligados");
 		try{
 			$i(iddiv).innerHTML = i3GEOF.opacidademapa.html();
 		}
@@ -142,7 +143,7 @@ i3GEOF.opacidademapa = {
 		};
 		var janela,divid,titulo;
 		//cria a janela flutuante
-		titulo = $trad("t20")+" <a class=ajuda_usuario target=_blank href='" + i3GEO.configura.locaplic + "/ajuda_usuario.php?idcategoria=5&idajuda=102' >&nbsp;&nbsp;&nbsp;</a>";
+		titulo = "<div  id='i3GEOFopacidademapaComboCabeca' class='comboTemasCabecalho'>------</div>&nbsp;&nbsp;&nbsp;"+$trad("t20")+" <a class=ajuda_usuario target=_blank href='" + i3GEO.configura.locaplic + "/ajuda_usuario.php?idcategoria=5&idajuda=102' >&nbsp;&nbsp;&nbsp;</a>";
 		janela = i3GEO.janela.cria(
 			"230px",
 			"40px",
@@ -164,6 +165,9 @@ i3GEOF.opacidademapa = {
 		$i("i3GEOF.opacidademapa_corpo").style.textAlign = "left";
 		i3GEOF.opacidademapa.aguarde = $i("i3GEOF.opacidademapa_imagemCabecalho").style;
 		i3GEOF.opacidademapa.inicia(divid);
+		if(i3GEO.Interface.ATUAL == "googleearth"){
+			$i('i3GEOFopacidademapaComboCabeca').style.display = "none";
+		}
 	},
 	/*
 	Function: criaslide
@@ -174,7 +178,7 @@ i3GEOF.opacidademapa = {
 		i3GEOF.opacidademapa.slider = YAHOO.widget.Slider.getHorizSlider($i("slider-bg"),$i("slider-thumb"), 0, 200, 0);
 		i3GEOF.opacidademapa.slider.setValue(200,false);
 		i3GEOF.opacidademapa.slider.subscribe("change", function(offsetFromStart) {
-			i3GEO.Interface.aplicaOpacidade(offsetFromStart / 200);
+			i3GEO.Interface.aplicaOpacidade(offsetFromStart / 200,$i("i3GEOFopacidademapaComboCabecaSel").value);
 		});
 		if(navm){
 			$i("slider-bg").style.left = "-100px";
