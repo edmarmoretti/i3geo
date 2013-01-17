@@ -1,5 +1,29 @@
 YAHOO.namespace("admin.container");
 /*
+Licenca:
+
+GPL2
+
+i3Geo Interface Integrada de Ferramentas de Geoprocessamento para Internet
+
+Direitos Autorais Reservados (c) 2012 Edmar Moretti
+Desenvolvedor: Edmar Moretti edmar.moretti@gmail.com
+
+Este programa &eacute; software livre; voc&ecirc; pode redistribu&iacute;-lo
+e/ou modific&aacute;-lo sob os termos da Licen&ccedil;a P&uacute;blica Geral
+GNU conforme publicada pela Free Software Foundation;
+
+Este programa &eacute; distribu&iacute;do na expectativa de que seja &uacute;til,
+por&eacute;m, SEM NENHUMA GARANTIA; nem mesmo a garantia impl&iacute;cita
+de COMERCIABILIDADE OU ADEQUA&Ccedil;&Atilde;O A UMA FINALIDADE ESPEC&Iacute;FICA.
+Consulte a Licen&ccedil;a P&uacute;blica Geral do GNU para mais detalhes.
+Voc&ecirc; deve ter recebido uma cópia da Licen&ccedil;a P&uacute;blica Geral do
+	GNU junto com este programa; se n&atilde;o, escreva para a
+Free Software Foundation, Inc., no endere&ccedil;o
+59 Temple Street, Suite 330, Boston, MA 02111-1307 USA.
+
+*/
+/*
 Function: initMenu
 
 Inicializa o editor de mapas
@@ -42,7 +66,7 @@ function ativaBotaoAdiciona(sUrl,idBotao)
 }
 function formUploadImagem(){
 	var ins = '' +
-	'<form id=uploadimagem target="i3GEOuploadiframe" action="../php/estat_mapa_upload.php" method="post" ENCTYPE="multipart/form-data" >' +
+	'<form id=uploadimagem target="i3GEOuploadiframe" action="../php/metaestat_mapa_uploadimagem.php" method="post" ENCTYPE="multipart/form-data" >' +
 		'<p>Imagem (jpg ou png) se o arquivo j&aacute; existir, ser&aacute; substitu&iacute;do: <br><input type="file" size=22 name="uploadimagem" style="top:0px;left:0px;cursor:pointer;"></p>' +
 		'<p><input type="submit" size=12 name="submit">' +
 		'<input type="hidden" name="MAX_FILE_SIZE" value="1000000">' +
@@ -199,10 +223,10 @@ function adicionaNosMapa(dados,redesenha)
 		conteudo += "&nbsp;<img style=\"position:relative;cursor:pointer;top:2px\" onclick=\"excluir('mapa','"+dados[i].id_mapa+"')\" title=excluir src=\"../imagens/01.png\" />";
 		conteudo += "&nbsp;<img style=\"position:relative;cursor:pointer;top:2px\" onclick=\"editar('mapa','"+dados[i].id_mapa+"')\" title=editar src=\"../imagens/06.png\" /><b>";
 		conteudo += "&nbsp;<img style=\"width:25px;position:relative;cursor:pointer;top:2px\" onclick=\"abreMapa('"+dados[i].id_mapa+"')\" title=editar src=\"../../imagens/i3geo2.jpg\" /><b>";
-		if(dados[i].titulo_atlas != "")
-		{conteudo += "&nbsp;<span>"+dados[i].titulo+"</span>";}
+		if(dados[i].titulo != "")
+		{conteudo += "&nbsp;id "+dados[i].id_mapa+" - <span>"+dados[i].titulo+"</span>";}
 		else
-		{conteudo += "&nbsp;<span style=color:red >Edite para definir o Mapa!!!</span>";}
+		{conteudo += "&nbsp;id "+dados[i].id_mapa+" - <span style=color:red >Edite para definir o Mapa!!!</span>";}
 		var d = {html:conteudo,id_mapa:dados[i].id_mapa,tipo:"mapa"};
 		new YAHOO.widget.HTMLNode(d, root, false,true);
 	}

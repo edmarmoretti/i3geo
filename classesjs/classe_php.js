@@ -1590,5 +1590,23 @@ i3GEO.php = {
 	listaCamadasMetaestat: function(funcao){
 		var p = i3GEO.configura.locaplic+"/ferramentas/metaestat/analise.php?funcao=listaCamadasMetaestat&g_sid="+i3GEO.configura.sid;
 		i3GEO.util.ajaxGet(p,funcao);
+	},
+	/*
+	Function: listaGruposMapaMetaestat
+
+	Lista os grupos cadastrados no sistema de publicacao de mapas do METAESTAT
+	*/
+	listaGruposMapaMetaestat: function(funcao,id_mapa){
+		var p = i3GEO.configura.locaplic+"/admin/php/metaestat.php?funcao=listaGruposMapa&id_mapa="+id_mapa;
+		i3GEO.util.ajaxGet(p,funcao);
+	},
+	/*
+	Function: listaTemasMapaMetaestat
+
+	Lista os temas cadastrados no sistema de publicacao de mapas do METAESTAT
+	*/
+	listaTemasMapaMetaestat: function(funcao,id_mapa_grupo){
+		var p = i3GEO.configura.locaplic+"/admin/php/metaestat.php?funcao=listaTemasMapa&id_mapa_grupo="+id_mapa_grupo;
+		i3GEO.util.ajaxGet(p,funcao);
 	}
 };

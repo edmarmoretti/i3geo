@@ -2,7 +2,7 @@
 /*
 Title: metaestat.php
 
-Fun&ccedil;&otilde;es utilizadas pelo sistema de metadados de dados estat&iacute;sticos
+Fun&ccedil;&otilde;es utilizadas pelo sistema de metadados estat&iacute;sticos
 
 Licenca:
 
@@ -39,7 +39,7 @@ Cada opera&ccedil;&atilde;o possu&iacute; seus próprios par&acirc;metros, que de
 include_once(__DIR__."/admin.php");
 
 include_once(__DIR__."/login.php");
-
+//lista de funcoes que passam pela validacao de login
 $funcoesEdicao = array(
 	"ALTERAMAPAGRUPO",
 	"ALTERAMAPATEMA",
@@ -86,11 +86,12 @@ $funcoesEdicao = array(
 	"EXCLUIATRIBUTOSMEDIDAVARIAVEL"
 );
 if(in_array(strtoupper($funcao),$funcoesEdicao)){
+	//se a funcao esta no array eh feita a verificacao se o usuario esta logado e se ele esta em um grupo que
+	//permite o uso da operacao admin/metaestat/geral
 	if(verificaOperacaoSessao("admin/metaestat/geral") == false){
 		retornaJSON("Vc nao pode realizar essa operacao.");exit;
 	}
 }
-
 include(__DIR__."/classe_metaestat.php");
 error_reporting(0);
 //faz a busca da fun&ccedil;&atilde;o que deve ser executada
@@ -297,6 +298,9 @@ switch (strtoupper($funcao))
 		if(empty($metaestatTemplates)){
 			$metaestatTemplates = __DIR__."/../../ferramentas/metaestat/templates";
 		}
+		else{
+			$metaestatTemplates = $locaplic.$metaestatTemplates;
+		}
 		retornaJSON(listaArquivos($metaestatTemplates));
 		exit;
 	break;
@@ -305,6 +309,9 @@ switch (strtoupper($funcao))
 	case "LISTALOGOSMAPA":
 		if(empty($metaestatTemplates)){
 			$metaestatTemplates = __DIR__."/../../ferramentas/metaestat/templates";
+		}
+		else{
+			$metaestatTemplates = $locaplic.$metaestatTemplates;
 		}
 		retornaJSON(listaArquivos($metaestatTemplates."/logos"));
 		exit;
