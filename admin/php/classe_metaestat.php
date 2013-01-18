@@ -17,7 +17,7 @@ Desenvolvedor: Edmar Moretti edmar.moretti@gmail.com
 
 Este programa &eacute; software livre; voc&ecirc; pode redistribu&iacute;-lo
 e/ou modific&aacute;-lo sob os termos da Licen&ccedil;a P&uacute;blica Geral
-GNU conforme publicada pela Free Software Foundation;
+GNU conforme publicada pela listaDadosRegiao Software Foundation;
 
 Este programa &eacute; distribu&iacute;do na expectativa de que seja &uacute;til,
 por&eacute;m, SEM NENHUMA GARANTIA; nem mesmo a garantia impl&iacute;cita
@@ -1510,7 +1510,10 @@ class Metaestat{
 		$sql .= " order by ".$regiao["colunanomeregiao"];
 
 		$q = $dbh->query($sql,PDO::FETCH_ASSOC);
-		$r = $q->fetchAll();
+		$r = array();
+		if($q){
+			$r = $q->fetchAll();
+		}
 		return $r;
 	}
 	function listaAgregaRegiao($codigo_tipo_regiao,$id_agregaregiao=""){

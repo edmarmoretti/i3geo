@@ -95,7 +95,7 @@ i3GEOF.locregiao = {
 	},
 	//utiliza o dicionario compartilhado
 	iniciaDicionario: function(){
-		if(typeof(i3GEOF.metaestat.dicionario) === 'undefined'){
+		if(!i3GEOF.metaestat || typeof(i3GEOF.metaestat.dicionario) === 'undefined'){
 			i3GEO.util.scriptTag(
 				i3GEO.configura.locaplic+"/ferramentas/metaestat/dicionario.js",
 				"i3GEOF.locregiao.iniciaJanelaFlutuante()",
