@@ -296,12 +296,14 @@ switch (strtoupper($funcao))
 	//a pasta com alista e definida na variavel $metaestatTemplates localizada no ms_configura.php
 	case "LISTATEMPLATESMAPA":
 		if(empty($metaestatTemplates)){
-			$metaestatTemplates = __DIR__."/../../ferramentas/metaestat/templates";
+			$d = __DIR__."/../../ferramentas/metaestat/templates";
 		}
 		else{
-			$metaestatTemplates = $locaplic.$metaestatTemplates;
+			$d = $locaplic.$metaestatTemplates;
 		}
-		retornaJSON(listaArquivos($metaestatTemplates));
+		$arq = listaArquivos($d);
+		$arq["metaestatTemplates"] = $metaestatTemplates;
+		retornaJSON($arq);
 		exit;
 	break;
 	//lista os logos que o usuario pode escolher para publicar mapas

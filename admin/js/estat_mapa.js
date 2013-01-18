@@ -147,7 +147,6 @@ function adicionaNosTemas(no,dados,redesenha)
 		{dados[i].titulo = "";}
 		var conteudo = "";
 		conteudo += "&nbsp;<img style=\"position:relative;cursor:pointer;top:0px\" onclick=\"excluir('tema','"+dados[i].id_mapa_tema+"')\" title=excluir width='10px' heigth='10px' src=\"../imagens/01.png\" />";
-		conteudo += "&nbsp;<img style=\"position:relative;cursor:pointer;top:0px\" onclick=\"testarMapfile('"+dados[i].id_mapa_tema+"')\" title=testar width='10px' heigth='10px' src=\"../imagens/41.png\" />";
 		conteudo += "&nbsp;<img style=\"position:relative;cursor:pointer;top:0px\" onclick=\"editar('tema','"+dados[i].id_mapa_tema+"')\" title=editar width='10px' heigth='10px' src=\"../imagens/06.png\" />";
 		if(dados[i].id_mapa_tema != "")
 		{conteudo += "&nbsp;<span>"+dados[i].titulo+"</span>";}
@@ -222,7 +221,7 @@ function adicionaNosMapa(dados,redesenha)
 		var conteudo = "";
 		conteudo += "&nbsp;<img style=\"position:relative;cursor:pointer;top:2px\" onclick=\"excluir('mapa','"+dados[i].id_mapa+"')\" title=excluir src=\"../imagens/01.png\" />";
 		conteudo += "&nbsp;<img style=\"position:relative;cursor:pointer;top:2px\" onclick=\"editar('mapa','"+dados[i].id_mapa+"')\" title=editar src=\"../imagens/06.png\" /><b>";
-		conteudo += "&nbsp;<img style=\"width:25px;position:relative;cursor:pointer;top:2px\" onclick=\"abreMapa('"+dados[i].id_mapa+"')\" title=editar src=\"../../imagens/i3geo2.jpg\" /><b>";
+		conteudo += "&nbsp;<img style=\"width:25px;position:relative;cursor:pointer;top:2px\" onclick=\"testaMapaTemplate(\'"+dados[i].template+"\',"+dados[i].id_mapa+")\" title=editar src=\"../../imagens/i3geo2.jpg\" /><b>";
 		if(dados[i].titulo != "")
 		{conteudo += "&nbsp;id "+dados[i].id_mapa+" - <span>"+dados[i].titulo+"</span>";}
 		else
@@ -231,6 +230,17 @@ function adicionaNosMapa(dados,redesenha)
 		new YAHOO.widget.HTMLNode(d, root, false,true);
 	}
 	if(redesenha){tree.draw();}
+}
+function testaMapaTemplate(template,id_mapa){
+	if(template == ""){
+		alert("Template nao definido");
+		return;
+	}
+	var p = i3GEO.configura.locaplic+"/admin/php/metaestat.php?funcao=listaTemplatesMapa";
+	i3GEO.util.ajaxGet(p,function(retorno){
+		var url = i3GEO.configura.locaplic+retorno.metaestatTemplates+"/"+template+"?id="+id_mapa;
+		window.open(url,"_blank");
+	});
 }
 function editar(tipo,id)
 {

@@ -2031,6 +2031,13 @@ pt:"Utilize os dedos em um movimento de pin&ccedil;a para definir a &aacute;rea 
 en:"",
 es:"",
 it:""
+}],
+"x71":[
+{
+pt:"Cartogramas estat&iacute;sticos cadastrados",
+en:"",
+es:"",
+it:""
 }]
 };
 //YAHOO.log("carregou dicionario", "Classes i3geo");

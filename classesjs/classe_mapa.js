@@ -552,6 +552,14 @@ i3GEO.mapa = {
 			i3GEO.util.dialogoFerramenta("i3GEO.mapa.dialogo.metaestat()","metaestat","metaestat","index.js","i3GEOF.metaestat.inicia()");
 		},
 		/*
+		Function: metaestatListaMapas
+
+		Lista os mapas publicados no METAESTAT
+		*/
+		metaestatListaMapas: function(){
+			i3GEO.util.dialogoFerramenta("i3GEO.mapa.dialogo.metaestatListaMapas()","metaestat","listamapas","listamapas.js","i3GEOF.listamapas.iniciaJanelaFlutuante()");
+		},
+		/*
 		Function: locregiao
 
 		Abre a janela de dialogo da ferramenta de busca de regiao cadastrada no METAESTAT

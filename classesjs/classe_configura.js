@@ -220,6 +220,7 @@ i3GEO.configura = {
 			//cartogramas
 			{ id:"omenudataFerramentas0e",text: '<span style=color:gray;text-decoration:underline; ><b>'+$trad("x60")+'</b></span>',url: "#"},
 			{ id:"omenudataFerramentas1e",text: $trad("x57"), url: "javascript:i3GEO.mapa.dialogo.metaestat()"},
+			{ id:"omenudataFerramentas4e",text: $trad("x71"), url: "javascript:i3GEO.mapa.dialogo.metaestatListaMapas()"},
 			{ id:"omenudataFerramentas3e",text: $trad("t49"), url: "javascript:i3GEO.tema.dialogo.tme()"},
 			//conexoes
 			{ id:"omenudataFerramentas0c",text: '<span style=color:gray;text-decoration:underline; ><b>'+$trad("a15")+'</b></span>',url: "#"},

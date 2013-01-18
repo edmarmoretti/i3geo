@@ -48,7 +48,7 @@ $dadosmapa = dadosmapa("../../../");
 <head>
 <meta http-equiv="Category" content="i3Geo Mapa interativo MS SAGE geoprocessamento sig mobile">
 <META HTTP-EQUIV="Content-Type" CONTENT="text/html; charset=iso-8859-1">
-<title><?php echo $dadosmapa["titulo"]; ?></title>
+<title>Cartogramas</title>
 <style>
 .banner {
 	text-align: right;
