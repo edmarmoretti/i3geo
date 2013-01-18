@@ -1976,7 +1976,7 @@ en:"",
 es:"",
 it:""
 }],
-"x64":[
+"x64a":[
 {
 pt:"Congela a vis&atilde;o atual",
 en:"",

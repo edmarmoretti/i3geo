@@ -38,102 +38,6 @@ Free Software Foundation, Inc., no endere&ccedil;o
 //tipo = 1 anual, 2 mensal, 3 diario
 wms_configura = {
 	"1": {
-		titulo: "JPL NASA - Daily planet",
-		servico:"http://onearth.jpl.nasa.gov/wms.cgi?",
-		layers:"daily_planet",
-		styles:"",
-		srs:"EPSG:4326",
-		format:"image/jpeg",
-		descricao:"Dados di&aacute;rios dispon&iacute;veis desde 12 de janeiro de 2007. A contiunously updating composite of visual images from TERRA MODIS scenes, see http://modis.gsfc.nasa.gov for details about MODIS. This dataset is built local on the OnEarth server, it updates as soon as scenes are available, usually with a 6 to 24 hour delay from real time. Images are produced from MODIS scenes using the HDFLook application. Base resolution is 8 arcseconds per pixel.",
-		anoInicio: 2008,
-		mesInicio: 11,
-		diaInicio: 7,
-		anoFim: 2008,
-		mesFim: 11,
-		diaFim: 12,
-		tipo: 3
-	},
-	"2": {
-		titulo: "JPL NASA - Daily afternoon",
-		servico:"http://onearth.jpl.nasa.gov/wms.cgi?",
-		layers:"daily_afternoon",
-		styles:"",
-		srs:"EPSG:4326",
-		format:"image/jpeg",
-		descricao:"Dados di&aacute;rios dispon&iacute;veis desde 12 de janeiro de 2008. A contiunously updating composite of visual images from AQUA MODIS scenes, see http://modis.gsfc.nasa.gov for details about MODIS. This dataset is built local on the OnEarth server, it updates as soon as scenes are available, usually with a 6 to 24 hour delay from real time. Images are produced from MODIS scenes using the HDFLook application. Base resolution is 8 arcseconds per pixel.",
-		anoInicio: 2008,
-		mesInicio: 11,
-		diaInicio: 7,
-		anoFim: 2008,
-		mesFim: 11,
-		diaFim: 12,
-		tipo: 3
-	},
-	"3": {
-		titulo: "JPL NASA - Daily terra 721 pseudocolor",
-		servico:"http://onearth.jpl.nasa.gov/wms.cgi?",
-		layers:"daily_terra_721",
-		styles:"",
-		srs:"EPSG:4326",
-		format:"image/jpeg",
-		descricao:"Dados di&aacute;rios dispon&iacute;veis desde 1 de janeiro de 2006 at&eacute; 12 de mar&ccedil;o de 2008. This layer is no longer updated. Daily generated mosaic of TERRA images released by the MODIS Rapid Response System, http://rapidfire.gsfc.nasa.gov/. Updates every day, at about 1200Z, with images taken during the previous day. Maximum resolution is 8 arcseconds per pixel",
-		anoInicio: 2006,
-		mesInicio: 1,
-		diaInicio: 1,
-		anoFim: 2006,
-		mesFim: 1,
-		diaFim: 12,
-		tipo: 3
-	},
-	"4": {
-		titulo: "JPL NASA - Daily aqua 721 pseudocolor",
-		servico:"http://onearth.jpl.nasa.gov/wms.cgi?",
-		layers:"daily_aqua_721",
-		styles:"",
-		srs:"EPSG:4326",
-		format:"image/jpeg",
-		descricao:"Dados di&aacute;rios dispon&iacute;veis desde 1 de janeiro de 2006 at&eacute; 12 de mar&ccedil;o de 2008. This layer is no longer updated. Daily generated mosaic of AQUA images released by the MODIS Rapid Response System, http://rapidfire.gsfc.nasa.gov/. Updates every day, at about 1200Z, with images taken during the previous day. Maximum resolution is 8 arcseconds per pixel",
-		anoInicio: 2006,
-		mesInicio: 1,
-		diaInicio: 1,
-		anoFim: 2006,
-		mesFim: 1,
-		diaFim: 12,
-		tipo: 3
-	},
-	"5": {
-		titulo: "JPL NASA - Terra NDVI",
-		servico:"http://onearth.jpl.nasa.gov/wms.cgi?",
-		layers:"daily_terra_ndvi",
-		styles:"",
-		srs:"EPSG:4326",
-		format:"image/jpeg",
-		descricao:"Dados di&aacute;rios dispon&iacute;veis desde 1 de janeiro de 2006 at&eacute; 12 de mar&ccedil;o de 2008. This layer is no longer updated. Daily generated mosaic of TERRA images released by the MODIS Rapid Response System, http://rapidfire.gsfc.nasa.gov/. Updates every day, at about 1200Z, with images taken during the previous day. Maximum resolution is 8 arcseconds per pixel",
-		anoInicio: 2006,
-		mesInicio: 1,
-		diaInicio: 1,
-		anoFim: 2006,
-		mesFim: 1,
-		diaFim: 12,
-		tipo: 3
-	},
-	"6": {
-		titulo: "JPL NASA - Aqua NDVI",
-		servico:"http://onearth.jpl.nasa.gov/wms.cgi?",
-		layers:"daily_aqua_ndvi",
-		styles:"",
-		srs:"EPSG:4326",
-		format:"image/jpeg",
-		descricao:"Dados di&aacute;rios dispon&iacute;veis desde 1 de janeiro de 2006 at&eacute; 12 de mar&ccedil;o de 2008. This layer is no longer updated. Daily generated mosaic of AQUA images released by the MODIS Rapid Response System, http://rapidfire.gsfc.nasa.gov/. Updates every day, at about 1200Z, with images taken during the previous day. Maximum resolution is 8 arcseconds per pixel",
-		anoInicio: 2006,
-		mesInicio: 1,
-		diaInicio: 1,
-		anoFim: 2006,
-		mesFim: 1,
-		diaFim: 12,
-		tipo: 3
-	},
-	"7": {
 		titulo: "Active Fires (1 month - Terra/MODIS)",
 		servico:"http://neowms.sci.gsfc.nasa.gov/wms/wms?",
 		layers:"MOD14A1_M_FIRE",
@@ -151,14 +55,14 @@ wms_configura = {
 	}
 };
 ins = "<p>Escolha o servi&ccedil;o de fornecimento de dados (WMS-T)</p>";
-ins += "<select style='width:353px;border:1px solid gray;' onchange='escolheuServico(this.value)'>";
+ins += "<select style='width:95%;border:1px solid gray;' onchange='escolheuServico(this.value)'>";
 ins += "<option value='' >---</option>";
 for(key in wms_configura){
 	ins += "<option value='"+key+"'>"+wms_configura[key].titulo+"</option>";
 }
 ins += "</select>";
-ins += "<p><input onclick='javascript:this.select();' type=text id=iServico size=54 />";
-ins += "<p><TEXTAREA id='WMS_descricao' rows='3' cols='52' ></TEXTAREA></p>";
+ins += "<p><input onclick='javascript:this.select();' type=text id=iServico style=width:95% />";
+ins += "<p><TEXTAREA id='WMS_descricao' rows='3' style='width:95%' ></TEXTAREA></p>";
 ins += "<table style='text-align:left'>";
 ins += "<tr><td style='text-align:left'>Ano inicial: </td><td><input onclick='javascript:this.select();' type=text value='0' id=WMS_anoinicio size=4 />";
 ins += "<td style='text-align:left'>Ano final: </td><td><input onclick='javascript:this.select();' type=text value='0' id=WMS_anofim size=4 /></tr>";
@@ -172,7 +76,7 @@ ins += "<td style='text-align:left'>Dia final: </td><td><input onclick='javascri
 ins += "</table>";
 //ins += "<div style='position:absolute;left:120px;top:180px'>"
 ins += "<p>Obter uma imagem por: ";
-ins += "<div id='divumaImagemPor'></div>";
+ins += "<div id='divumaImagemPor' style=width:200px; ></div>";
 
 
 ins += "<div onclick='iniciaImagens()' style='text-align:left;left:0px;top:20px;'><input id='botao1' size=18 type='button' value='Continuar' /></div>";
@@ -206,7 +110,7 @@ function escolheuServico(idWMS){
 	//if(tipoServico > 2)
 	$i("WMS_diafim").value = wms_configura[idWMS].diaFim;
 
-	var ins = "<select id='umaImagemPor' style='border:1px solid gray'>";
+	var ins = "<select id='umaImagemPor' style='border:1px solid gray;width:150px'>";
 	if(tipoServico == 1){
 		ins += "<option value='ano' selected >Ano</option></select>";
 	}
@@ -241,8 +145,8 @@ function iniciaImagens(){
 	//var time = "2008-01-01"
 	w = window.parent.i3GEO.parametros.w; //985
 	h = window.parent.i3GEO.parametros.h;
-	dw = w / 2;
-	dh = h / 2;
+	dw = 540;
+	dh = 245;
 
 	anoInicio = $i("WMS_anoinicio").value;
 	mesInicio = $i("WMS_mesinicio").value;

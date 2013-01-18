@@ -2219,24 +2219,16 @@ i3GEO.arvoreDeTemas = {
 		Abre a janela para adicionar temas tendo como fonte um web service do tipo wms-t (time)
 		*/
 		conectarwmst: function(){
-			var l,a;
-			if(i3GEO.parametros.w)
-			{l = i3GEO.parametros.w + 150;}
-			else
-			{l = 400;}
-			if(i3GEO.parametros.h)
-			{a = i3GEO.parametros.h + 200;}
-			else
-			{a = 350;}
-			i3GEO.janela.cria(l/2 + "px",a/2 + "px",i3GEO.configura.locaplic+"/ferramentas/wmstime/index.htm","","",+$trad("x46")+" <a class=ajuda_usuario target=_blank href='"+i3GEO.configura.locaplic+"/ajuda_usuario.php?idcategoria=4&idajuda=76' >&nbsp;&nbsp;&nbsp;</a>");
+			i3GEO.janela.cria("600px","400px",i3GEO.configura.locaplic+"/ferramentas/wmstime/index.htm","","",$trad("x46")+" <a class=ajuda_usuario target=_blank href='"+i3GEO.configura.locaplic+"/ajuda_usuario.php?idcategoria=4&idajuda=76' >&nbsp;&nbsp;&nbsp;</a>");
 		},
 		/*
 		Function: conectarwfs
 
 		Abre a janela para adicionar temas tendo como fonte um web service do tipo wfs
 		*/
-		conectarwfs: function()
-		{i3GEO.janela.cria("400px","300px",i3GEO.configura.locaplic+"/ferramentas/conectarwfs/index.htm","","","WFS");},
+		conectarwfs: function(){
+			i3GEO.janela.cria("400px","300px",i3GEO.configura.locaplic+"/ferramentas/conectarwfs/index.htm","","","WFS");
+		},
 		/*
 		Function: conectargeojson
 
