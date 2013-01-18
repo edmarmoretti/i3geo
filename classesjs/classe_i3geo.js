@@ -340,6 +340,9 @@ var i3GEO = {
 						i3GEO.parametros.pixelsize = i3GEO.parametros.pixelsize*1;
 						i3GEO.parametros.w = i3GEO.parametros.w*1;
 						i3GEO.parametros.h = i3GEO.parametros.h*1;
+						if(i3GEO.Interface.ATUAL === "googleearth"){
+							i3GEO.configura.guardaExtensao = false;
+						}
 						//obtem o cookie com a ultima extensao geografica
 						if(i3GEO.configura.guardaExtensao === true){
 							temp = i3GEO.util.pegaCookie("i3geoUltimaExtensao");

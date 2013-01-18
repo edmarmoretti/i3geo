@@ -67,6 +67,7 @@ else{
 error_reporting(E_ALL);
 //tabelas do controle de usuarios e sistema metaestat
 $tabelas = array(
+		"ALTER TABLE ".$esquemaadmin."i3geoadmin_mapas ADD mapfile TEXT",
 		"CREATE TABLE ".$esquemaadmin."i3geousr_usuarios (ativo NUMERIC, data_cadastro TEXT, email TEXT, id_usuario INTEGER PRIMARY KEY, login TEXT, nome_usuario TEXT, senha TEXT)",
 		"CREATE TABLE ".$esquemaadmin."i3geousr_papelusuario (id_papel NUMERIC, id_usuario NUMERIC)",
 		"CREATE TABLE ".$esquemaadmin."i3geousr_papeis (descricao TEXT, id_papel INTEGER PRIMARY KEY, nome TEXT)",

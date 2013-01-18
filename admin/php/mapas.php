@@ -68,9 +68,11 @@ switch (strtoupper($funcao))
 	{JSON}
 	*/
 	case "PEGAMAPAS":
-		retornaJSON(pegaDados("SELECT id_mapa,nome_mapa,ordem_mapa from ".$esquemaadmin."i3geoadmin_mapas order by ordem_mapa"));
+		$semmapfile = pegaDados("SELECT id_mapa,nome_mapa,ordem_mapa,'nao' as contemmapfile from ".$esquemaadmin."i3geoadmin_mapas where mapfile = '' or mapfile is null order by ordem_mapa");
+		$commapfile = pegaDados("SELECT id_mapa,nome_mapa,ordem_mapa,'sim' as contemmapfile from ".$esquemaadmin."i3geoadmin_mapas where mapfile != '' and mapfile is not null order by ordem_mapa");
+		retornaJSON(array_merge($semmapfile,$commapfile));
 		exit;
-		break;
+	break;
 		/*
 		 Valor: PEGADADOSMAPA
 

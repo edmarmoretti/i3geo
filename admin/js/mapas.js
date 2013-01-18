@@ -36,7 +36,7 @@ i3GEOadmin.mapas = {
 	dados: "",
 	letra: "",
 	dataTable: null,
-	colunas: ["id_mapa","publicado_mapa","ordem_mapa","perfil_mapa","ligados_mapa","temas_mapa","desc_mapa","ext_mapa","imagem_mapa","linkdireto_mapa","nome_mapa","outros_mapa"],
+	colunas: ["id_mapa","publicado_mapa","ordem_mapa","perfil_mapa","ligados_mapa","temas_mapa","desc_mapa","ext_mapa","imagem_mapa","linkdireto_mapa","nome_mapa","outros_mapa","contemmapfile"],
 	formatTexto: function(elCell, oRecord, oColumn, oData){
 		if(oData === ""){
 			oData = "<span style='color:gray' ></span>";
@@ -55,7 +55,8 @@ i3GEOadmin.mapas = {
 			{key:"mais",label:"editar",formatter:i3GEOadmin.mapas.formatMais},
 			{label:"id",key:"id_mapa", formatter:i3GEOadmin.mapas.formatTexto},
 			{label:"nome",resizeable:true,key:"nome_mapa", formatter:i3GEOadmin.mapas.formatTexto},
-			{label:"ordem",resizeable:true,key:"ordem_mapa", formatter:i3GEOadmin.mapas.formatTexto}
+			{label:"ordem",resizeable:true,key:"ordem_mapa", formatter:i3GEOadmin.mapas.formatTexto},
+			{label:"contem mapfile",resizeable:true,key:"contemmapfile", formatter:i3GEOadmin.mapas.formatTexto}
 		];
 	},
 	/*
