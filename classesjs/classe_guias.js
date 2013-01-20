@@ -142,10 +142,13 @@ i3GEO.guias = {
 			titulo:"Links",
 			id:"guia5",
 			idconteudo:"guia5obj",
-			click: function(){
+			click: function(onde){
+				if(!onde){
+					onde = i3GEO.guias.CONFIGURA.mapas.idconteudo;
+				}
 				var pegaMapas = function(retorno){
 					var ins,mapa,ig1lt,ig1,nome,lkd,link,temp;
-					ins = "<br><div id='banners' style='overflow:auto;text-align:left'>";
+					ins = "<br><div id='banners' style='overflow:auto;text-align:center'>";
 					mapa = retorno.data.mapas;
 					ig1lt = mapa.length;
 					ig1=0;
@@ -165,13 +168,13 @@ i3GEO.guias = {
 							{link += "&"+temp.OUTROS;}
 							if (lkd !== "")
 							{link = lkd;}
-							ins += "<div><a href='"+link+"'><img src='"+temp.IMAGEM+"'></a></div><br>";
-							ins += "<div><p style=text-align:center >"+nome+"</p></div><br>";
+							ins += "<div style=text-align:center ><a href='"+link+"' style=text-align:center ><img src='"+temp.IMAGEM+"'></a></div><br>";
+							ins += "<div><p style=text-align:center;cursor:pointer >"+nome+"</p></div><br>";
 							ig1++;
 						}
 						while(ig1<ig1lt);
 					}
-					$i(i3GEO.guias.CONFIGURA.mapas.idconteudo).innerHTML = ins+"</div>";
+					$i(onde).innerHTML = ins+"</div>";
 				};
 				$i(i3GEO.guias.CONFIGURA.mapas.idconteudo).innerHTML = "Aguarde...";
 				i3GEO.guias.mostra("mapas");

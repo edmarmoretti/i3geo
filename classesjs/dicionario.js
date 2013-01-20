@@ -2034,7 +2034,7 @@ it:""
 }],
 "x71":[
 {
-pt:"Cartogramas estat&iacute;sticos cadastrados",
+pt:"Aplicativos estat&iacute;sticos cadastrados",
 en:"",
 es:"",
 it:""

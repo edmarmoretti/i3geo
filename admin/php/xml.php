@@ -61,7 +61,7 @@ String na estrutura XML
 function geraXmlSistemas($perfil,$locaplic,$editores)
 {
 	global $esquemaadmin;
-	$editor = verificaEditores($editores);
+	$editor = "nao";//verificaEditores($editores);
 	if (!isset($perfil)){$perfil = "";}
 	$perfil = str_replace(","," ",$perfil);
 	$perfil = explode(" ",$perfil);
@@ -508,7 +508,7 @@ function geraXmlAtlas($locaplic,$editores)
 	//$q = "select * from i3geoadmin_atlas";
 	$qatlas = $dbh->query("select * from ".$esquemaadmin."i3geoadmin_atlas");
 
-	$editor = verificaEditores($editores);
+	$editor = "nao";//$editor = verificaEditores($editores);
 	foreach($qatlas as $row)
 	{
 		$mostra = true;
@@ -545,7 +545,7 @@ function geraXmlAtlas($locaplic,$editores)
 function geraXmlIdentifica($perfil,$locaplic,$editores)
 {
 	global $esquemaadmin;
-	$editor = verificaEditores($editores);
+	$editor = "nao";//$editor = verificaEditores($editores);
 	if (!isset($perfil)){$perfil = "";}
 	$perfil = str_replace(","," ",$perfil);
 	$perfil = explode(" ",$perfil);
@@ -597,7 +597,7 @@ function geraXmlMapas($perfil,$locaplic,$editores)
 	$xml .= "\n<MAPAS>\n";
 	$q = "select * from ".$esquemaadmin."i3geoadmin_mapas";
 	$q = $dbh->query($q);
-	$editor = verificaEditores($editores);
+	$editor = "nao";//$editor = "nao";//verificaEditores($editores);
 	foreach($q as $row)
 	{
 		$mostraMapa = false;
@@ -612,6 +612,7 @@ function geraXmlMapas($perfil,$locaplic,$editores)
 		{$mostraMapa = false;}
 		if($editor)
 		{$mostraMapa = true;}
+
 		if($mostraMapa)
 		{
 			$xml .= "<MAPA>\n";

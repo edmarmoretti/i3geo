@@ -79,25 +79,68 @@ i3GEOF.salvaMapa = {
 	iddiv {String} - id do div que receber&aacute; o conteudo HTML da ferramenta
 	*/
 	inicia: function(iddiv){
-		var temp = function(){
+		$i(iddiv).innerHTML = i3GEOF.salvaMapa.html();
+		var temp = function(dados){
+				i3GEOF.salvaMapa.htmlMapaLocal("i3GEOFsalvaMapaLocal");
+				i3GEOF.salvaMapa.htmlMapaBanco("i3GEOFsalvaMapaBanco");
+			},
+			atualiza = true,
+			geo = false;
+		if(i3GEO.Interface.ATUAL === "googlemaps" || i3GEO.Interface.ATUAL === "googleearth"){
+			atualiza = false;
+			geo = true;
+		}
+		i3GEO.php.mudaext(temp,"nenhum",i3GEO.parametros.mapexten,i3GEO.configura.locaplic,i3GEO.configura.sid,atualiza,geo);
+	},
+	htmlMapaBanco: function(onde){
+		onde = $i(onde);
+		if(onde){
+			try{
+				var map_file = i3GEO.parametros.mapfile,
+					local = map_file.split("ms_tmp");
+				teste = i3GEO.configura.locaplic+"/testamapfile.php?map="+map_file;
+				local = i3GEO.util.protocolo()+"://"+window.location.host+"/ms_tmp"+local[1];
+				onde.innerHTML = "<a href='"+local+"' target='_blank' >Clique aqui para salvar o mapa</a><br>" +
+					"<a href='#' onclick='i3GEOF.salvaMapa.listaDeMapasBanco()'>Clique aqui para ver a lista de mapas</a>";
+			}
+			catch(erro){i3GEO.janela.tempoMsg(erro);}
+		}
+	},
+	htmlMapaLocal: function(onde){
+		onde = $i(onde);
+		if(onde){
 			try{
 				var teste,
 					map_file = i3GEO.parametros.mapfile,
 					local = map_file.split("ms_tmp");
 				teste = i3GEO.configura.locaplic+"/testamapfile.php?map="+map_file;
 				local = i3GEO.util.protocolo()+"://"+window.location.host+"/ms_tmp"+local[1];
-				$i(iddiv).innerHTML += i3GEOF.salvaMapa.html()+"<a href='"+local+"' target='_blank' >Clique aqui para baixar o arquivo</a><br>";
-				$i(iddiv).innerHTML += "<a href='"+teste+"' target='_blank' >Clique aqui para testar</a>";
+				onde.innerHTML = "<a href='"+local+"' target='_blank' >Clique aqui para baixar o arquivo</a><br>" +
+					"<a href='"+teste+"' target='_blank' >Clique aqui para testar</a>";
 			}
 			catch(erro){i3GEO.janela.tempoMsg(erro);}
-		},
-		atualiza = true,
-		geo = false;
-		if(i3GEO.Interface.ATUAL === "googlemaps" || i3GEO.Interface.ATUAL === "googleearth"){
-			atualiza = false;
-			geo = true;
 		}
-		i3GEO.php.mudaext(temp,"nenhum",i3GEO.parametros.mapexten,i3GEO.configura.locaplic,i3GEO.configura.sid,atualiza,geo);
+	},
+	listaDeMapasBanco: function(){
+		if(i3GEO.guias.CONFIGURA["mapas"]){
+			var janela,divid;
+			janela = i3GEO.janela.cria(
+				"200px",
+				"450px",
+				"",
+				"",
+				"",
+				"",
+				"i3GEOFsalvaMapaLista",
+				false,
+				"hd"
+			);
+			divid = janela[2].id;
+			i3GEO.guias.CONFIGURA["mapas"].click.call(this,divid);
+		}
+		else{
+			window.open(i3GEO.configura.locaplic+"/admin/xmlmapas.php","_blank");
+		}
 	},
 	/*
 	Function: html
@@ -110,9 +153,20 @@ i3GEOF.salvaMapa = {
 	*/
 	html:function(){
 		var ins = '';
-		ins += '<p class="paragrafo" >Salvando o mapa atual, voc&ecirc; poder&aacute; carreg&aacute;-lo novamente. Clique no link abaixo com o bot&atilde;o direito do mouse e salve o arquivo em seu computador.';
-		ins += '<p class="paragrafo" >Para carregar o mapa salvo anteriormente, utilize a op&ccedil;&atilde;o de carregar mapa.';
-		ins += '<p class="paragrafo" >';
+		ins += '<p class="paragrafo" >Salvando o mapa atual, voc&ecirc; poder&aacute; carreg&aacute;-lo novamente.</p>' +
+			'<p class="paragrafo" >Existem duas maneiras de fazer isso, conforme explicado a seguir.</p>' +
+			'<div style=background-color:white;padding:5px;margin:5px >' +
+			'	<p class="paragrafo" ><b>1- </b>Armazene o arquivo de configura&ccedil;&atilde;o do mapa em seu computador, ' +
+			'	fazendo o download. Isso permitir&aacute; que voc&ecirc; faça o upload desse mesmo arquivo, restaurando o mapa. '+
+			'	<p class="paragrafo" >Clique no link abaixo com o bot&atilde;o direito do mouse e salve o arquivo em seu computador.' +
+			'	Para carregar o mapa salvo utilize a op&ccedil;&atilde;o de carregar mapa.' +
+			'	<div id="i3GEOFsalvaMapaLocal"></div>' +
+			'</div>' +
+			'<div style=background-color:white;padding:5px;margin:5px >' +
+			'	<p class="paragrafo" ><b>2- </b>Fa&ccedil;a login e cadastre o mapa atual no banco de dados existente no servidor web.' +
+			'	Com isso o mapa ser&aacute; salvo de forma permanente e outros usu&aacute;rios poderão utiliz&aacute;-lo. Consulte o admnistrador do site que você está utilizando para saber mais sobre a pol&iacute;tica de uso do mapa que for salvo' +
+			'	<div id="i3GEOFsalvaMapaBanco"></div>' +
+			'</div><br>';
 		return ins;
 	},
 	/*
