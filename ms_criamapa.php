@@ -128,6 +128,8 @@ versao_wms - Vers&atilde;o do WMS (necess&aacute;rio quando da inclus&atilde;o d
 gvsiggvp - (depreciado na versão 4.7 - utilize o parametro temasa) endere&ccedil;o no servidor do arquivo de projeto gvSig (gvp) que ser&aacute; utilizado para construir o mapa (experimental)
 
 gvsigview - lista com nomes de views existentes no projeto gvSig separado por virgula. Se for vazio, serao adicionadas todas as views. Exemplo (http://localhost/i3geo/ms_criamapa.php?gvsiggvp=c:\temp\teste.gvp&gvsigview=Untitled - 0)
+//TODO documentar esse parametro
+restauramapa - id do mapa armazenado no sistema de administracao e que sera restaurado para ser aberto novamente (veja em i3geo/admin/html/mapas.html)
 */
 
 //$_COOKIE = array();
@@ -172,16 +174,44 @@ if(empty($_SESSION["usuario"])){
 	session_destroy();
 }
 */
+
 //
 //a vari&aacute;vel $base pode ser definida em ms_configura, mas a prefer&ecirc;ncia &eacute; pela defini&ccedil;&atilde;o j&aacute; existente
 //por isso, $base &eacute; guardada em uma vari&aacute;vel e retomada após o include de ms_configura.php
+//se restauramapa estiver definido, usa o mapfile guardado no banco como a base
 //
-if(isset($base))
-{$tempBaseX = $base;}
-if(!isset($dir_tmp))
-{include_once (__DIR__."/ms_configura.php");}
-if(isset($tempBaseX) && $tempBaseX != "")
-{$base = $tempBaseX;}
+if(!empty($restauramapa)){
+	include(__DIR__."/admin/php/conexao.php");
+	if(!empty($esquemaadmin)){
+		$esquemaadmin = $esquemaadmin.".";
+	}
+	$q = $dbh->query("select * from ".$esquemaadmin."i3geoadmin_mapas where id_mapa=$restauramapa ",PDO::FETCH_ASSOC);
+	$mapasalvo = $q->fetchAll();
+	$mapasalvo = $mapasalvo[0];
+	if(strtoupper($mapasalvo["publicado"]) != "NAO"){
+		$base = $dir_tmp."/".nomeRandomico().".map";
+		$baseh = fopen($base,'w');
+		$s = fwrite($baseh,base64_decode($mapasalvo["mapfile"]));
+		fclose($baseh);
+	}
+	$dbh = null;
+	$dbhw = null;
+	$m = ms_newMapObj($base);
+	$w = $m->web;
+	$w->set("imagepath",dirname($w->imagepath)."/");
+	$w->set("imageurl",dirname($w->imageurl)."/");
+	$m->save($base);
+}else{
+	if(isset($base)){
+		$tempBaseX = $base;
+	}
+	if(!isset($dir_tmp)){
+		include_once (__DIR__."/ms_configura.php");
+	}
+	if(isset($tempBaseX) && $tempBaseX != ""){
+		$base = $tempBaseX;
+	}
+}
 //verifica se o usuario trocou a senha do master
 //TODO ao publicar v47 final incluir observacao sobre esse bloqueio no site do SPB
 if($_SERVER['HTTP_HOST'] != "localhost" && ($i3geomaster[0]["usuario"] == "admin" && $i3geomaster[0]["senha"] == "admin") ){
@@ -375,8 +405,7 @@ if (!isset ($map_reference_image)) //arquivo com a imagem de refer&ecirc;ncia
 {$map_reference_image = $map->reference->image;}
 if (!isset ($map_reference_extent)) //extens&atilde;o geogr&aacute;fica da imagem do mapa de refer&ecirc;ncia
 {$map_reference_extent = $map->reference->extent->minx." ".$map->reference->extent->miny." ".$map->reference->extent->maxx." ".$map->reference->extent->maxy;}
-if(!isset($interface))
-{
+if(!isset($interface)){
 	if(!isset($interfacePadrao))
 	{$interfacePadrao = "openlayers.htm";}
 	$interface = $interfacePadrao;

@@ -2617,6 +2617,16 @@ i3GEO.util = {
 		return ret;
 	},
 	ajaxGet: function(sUrl,funcaoRetorno){
+		sUrl = escape(sUrl);
+		re = new RegExp("%3F", "g");
+		sUrl = sUrl.replace(re,'?');
+		re = new RegExp("%3D", "g");
+		sUrl = sUrl.replace(re,'=');
+		re = new RegExp("%26", "g");
+		sUrl = sUrl.replace(re,'&');
+
+		re = new RegExp("%3A", "g");
+		sUrl = sUrl.replace(re,':');
 		var falhou = function(e){
 				alert(e);
 			},

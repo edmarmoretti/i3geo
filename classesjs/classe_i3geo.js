@@ -354,6 +354,11 @@ var i3GEO = {
 								i3GEO.util.insereCookie("i3geoUltimaExtensao",i3GEO.parametros.mapexten);
 							});
 						}
+						//anula os cookies de login se for necessario
+						//o servidor verifica se na sessao o login esta ativo
+						if(i3GEO.parametros.logado === "nao"){
+							i3GEO.login.anulaCookie;
+						}
 						//
 						i3GEO.arvoreDeCamadas.CAMADAS = retorno.data.temas;
 						if(retorno.data.variaveis.navegacaoDir.toLowerCase() === "sim")

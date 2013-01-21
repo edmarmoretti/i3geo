@@ -93,9 +93,10 @@ $tabelas = array(
 		"create table ".$esquemaadmin."i3geoestat_mapa_grupo(id_mapa_grupo integer not null unique primary key autoincrement,id_mapa integer,titulo text,foreign key (id_mapa) references i3geoestat_mapa (id_mapa))",
 		"create table ".$esquemaadmin."i3geoestat_mapa_tema (id_mapa_tema integer not null unique primary key autoincrement,id_mapa_grupo integer,titulo text,id_medida_variavel integer,foreign key (id_mapa_grupo) references i3geoestat_mapa_grupo (id_mapa_grupo),foreign key (id_medida_variavel) references i3geoestat_medida_variavel (id_medida_variavel))"
 );
+$drivename = $dbhw->getAttribute(PDO::ATTR_DRIVER_NAME);
 foreach($tabelas as $tabela)
 {
-	if($dbhw->getAttribute(PDO::ATTR_DRIVER_NAME) == "pgsql")
+	if($drivename == "pgsql")
 	{
 		$tabela = str_replace("INTEGER PRIMARY KEY","SERIAL PRIMARY KEY NOT NULL",$tabela);
 	}

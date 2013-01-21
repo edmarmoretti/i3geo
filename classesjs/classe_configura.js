@@ -179,6 +179,7 @@ i3GEO.configura = {
 			"arquivos": [
 			{ id:"omenudataArquivos1",text: $trad("u17"), url: "javascript:i3GEO.mapa.dialogo.salvaMapa()" },
 			{ id:"omenudataArquivos2",text: $trad("u18"), url: "javascript:i3GEO.mapa.dialogo.carregaMapa()" },
+			{ id:"omenudataArquivos6",text: $trad("x72"), url: "javascript:i3GEO.mapa.dialogo.listaDeMapasBanco()" },
 			{ id:"omenudataArquivos4",text: $trad("u20"), url: "javascript:i3GEO.mapa.dialogo.convertews()" },
 			{ id:"omenudataArquivos5",text: $trad("u20a"), url: "javascript:i3GEO.mapa.dialogo.convertekml()" }
 			],

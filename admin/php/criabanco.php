@@ -127,21 +127,6 @@
 					echo "<br>A fun&ccedil;&atilde;o de cria&ccedil;&atilde;o do banco sqlite n&atilde;o existe no PHP. Vc pode usar o arquivo i3geo/admin/adminvazio.db e renome&aacute;-lo para admin.db.";
 				}
 			}
-			if(file_exists("../../admin/metaestat.db"))	{
-				echo "<br>Arquivo admin/metaestat.db ja existe. Vc deve apag&aacute;-lo para poder cri&aacute;-lo novamente caso precise";
-			}
-			else{
-				//FIXME nao funciona
-				//if(function_exists("SQLite3")){
-				//cria o banco de dados de metadados estatisticos
-				//$banco = new SQLite3("../../admin/metaestat.db",SQLITE3_OPEN_CREATE);
-				//$banco->close();
-				//}
-				//else{
-					//echo "<br>A fun&ccedil;&atilde;o de cria&ccedil;&atilde;o do banco sqlite3 n&atilde;o existe no PHP. N&atilde;o foi poss&iacute;vel criar o bando para o sistema de metadados.";
-					//exit;
-				//}
-			}
 		}
 		else{
 			include($conexaoadmin);
@@ -149,8 +134,9 @@
 		if(empty($dbhw)){
 			echo "<br>Fim";exit;
 		}
+		$drivename = $dbhw->getAttribute(PDO::ATTR_DRIVER_NAME);
 		foreach($tabelas as $tabela){
-			if($dbhw->getAttribute(PDO::ATTR_DRIVER_NAME) == "pgsql"){
+			if($drivename == "pgsql"){
 				$tabela = str_replace("INTEGER PRIMARY KEY","SERIAL PRIMARY KEY NOT NULL",$tabela);
 			}
 			//echo $tabela."<br>";

@@ -2038,6 +2038,13 @@ pt:"Aplicativos estat&iacute;sticos cadastrados",
 en:"",
 es:"",
 it:""
+}],
+"x72":[
+{
+pt:"Lista de mapas cadastrados",
+en:"",
+es:"",
+it:""
 }]
 };
 //YAHOO.log("carregou dicionario", "Classes i3geo");

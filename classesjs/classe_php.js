@@ -1608,5 +1608,19 @@ i3GEO.php = {
 	listaTemasMapaMetaestat: function(funcao,id_mapa_grupo){
 		var p = i3GEO.configura.locaplic+"/admin/php/metaestat.php?funcao=listaTemasMapa&id_mapa_grupo="+id_mapa_grupo;
 		i3GEO.util.ajaxGet(p,funcao);
+	},
+	/*
+	Function: salvaMapaBanco
+
+	Salva o mapfile atual no banco de dados de administracao
+	*/
+	salvaMapaBanco: function(funcao,titulo){
+		var url = (window.location.href.split("?")[0]),
+			p = i3GEO.configura.locaplic+"/admin/php/mapas.php?";
+			par = "funcao=salvaMapfile" +
+			"&url=" + url.replace("#","") +
+			"&arqmapfile=" + i3GEO.parametros.mapfile +
+			"&nome_mapa=" + titulo;
+		i3GEO.util.ajaxGet(p+par,funcao);
 	}
 };

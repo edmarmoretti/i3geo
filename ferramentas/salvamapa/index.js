@@ -100,8 +100,9 @@ i3GEOF.salvaMapa = {
 					local = map_file.split("ms_tmp");
 				teste = i3GEO.configura.locaplic+"/testamapfile.php?map="+map_file;
 				local = i3GEO.util.protocolo()+"://"+window.location.host+"/ms_tmp"+local[1];
-				onde.innerHTML = "<a href='"+local+"' target='_blank' >Clique aqui para salvar o mapa</a><br>" +
-					"<a href='#' onclick='i3GEOF.salvaMapa.listaDeMapasBanco()'>Clique aqui para ver a lista de mapas</a>";
+				onde.innerHTML = "<a href='#' onclick='i3GEOF.salvaMapa.salvaMapaBanco()' >Clique aqui para salvar o mapa</a><br>" +
+					"<a href='#' onclick='i3GEO.mapa.dialogo.listaDeMapasBanco()'>Clique aqui para ver a lista de mapas</a><br>" +
+					"<a href='"+i3GEO.configura.locaplic+"/admin/html/mapas.html' target='_blank' >Clique aqui para editar a lista de mapas</a>";
 			}
 			catch(erro){i3GEO.janela.tempoMsg(erro);}
 		}
@@ -121,25 +122,30 @@ i3GEOF.salvaMapa = {
 			catch(erro){i3GEO.janela.tempoMsg(erro);}
 		}
 	},
-	listaDeMapasBanco: function(){
-		if(i3GEO.guias.CONFIGURA["mapas"]){
-			var janela,divid;
-			janela = i3GEO.janela.cria(
-				"200px",
-				"450px",
-				"",
-				"",
-				"",
-				"",
-				"i3GEOFsalvaMapaLista",
-				false,
-				"hd"
-			);
-			divid = janela[2].id;
-			i3GEO.guias.CONFIGURA["mapas"].click.call(this,divid);
+	salvaMapaBanco: function(){
+		var login = i3GEO.login.verificaCookieLogin(),
+			titulo="",temp="";
+		if(login === false){
+			i3GEO.login.dialogo.abreLogin();
 		}
 		else{
-			window.open(i3GEO.configura.locaplic+"/admin/xmlmapas.php","_blank");
+			titulo = window.prompt("Titulo do mapa","");
+			temp = function(retorno){
+				if(retorno.id && retorno.id != ""){
+					i3GEO.janela.tempoMsg("Mapa salvo");
+				}
+				else{
+					if(retorno.status){
+						i3GEO.janela.tempoMsg(retorno.status);
+					}
+					else{
+						i3GEO.janela.tempoMsg(retorno);
+					}
+				}
+			};
+			if(titulo){
+				i3GEO.php.salvaMapaBanco(temp,titulo);
+			}
 		}
 	},
 	/*
@@ -185,7 +191,7 @@ i3GEOF.salvaMapa = {
 			"",
 			titulo,
 			"i3GEOF.salvaMapa",
-			true,
+			false,
 			"hd"
 		);
 		divid = janela[2].id;

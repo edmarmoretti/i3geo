@@ -240,11 +240,13 @@ i3GEOadmin.mapas = {
 		var i,c,sUrl, callback,
 			campos = i3GEOadmin.mapas.colunas,
 			par = "",
-			n = campos.length;
+			n = campos.length,
+			reg = new RegExp("&", "g");
 		for (i=0;i<n;i++){
 			c = $i("E"+campos[i].key);
 			if(c){
-				par += "&"+campos[i].key+"="+(c.value);
+				//substitui o & dos parametros
+				par += "&"+campos[i].key+"="+(c.value.replace(reg,'*'));
 			}
 		}
 		par += "&id_mapa="+id;

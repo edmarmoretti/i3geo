@@ -514,6 +514,32 @@ i3GEO.mapa = {
 	*/
 	dialogo:{
 		/*
+		Function: listaDeMapasBanco
+
+		Lista os mapas cadastrados no sistema de administracao do i3geo
+		*/
+		listaDeMapasBanco: function(){
+			if(i3GEO.guias.CONFIGURA["mapas"]){
+				var janela,divid;
+				janela = i3GEO.janela.cria(
+					"200px",
+					"450px",
+					"",
+					"",
+					"",
+					"",
+					"i3GEOFsalvaMapaLista",
+					false,
+					"hd"
+				);
+				divid = janela[2].id;
+				i3GEO.guias.CONFIGURA["mapas"].click.call(this,divid);
+			}
+			else{
+				window.open(i3GEO.configura.locaplic+"/admin/xmlmapas.php","_blank");
+			}
+		},
+		/*
 		Function: congelaMapa
 
 		Congela a visão atual do mapa mostrando-o em uma janela flutuante

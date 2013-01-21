@@ -297,22 +297,29 @@ function iniciaMapa()
 	//papeis do usuario se estiver logado
 	//
 	$res["papeis"] = array();
+	$logado = "nao";
 	if(!empty($_COOKIE["i3geocodigologin"])){
 		session_write_close();
 		session_name("i3GeoLogin");
 		session_id($_COOKIE["i3geocodigologin"]);
 		session_start();
 		//var_dump($_SESSION);exit;
+		$logado = "sim";
 		if(!empty($_SESSION["usuario"]) && $_SESSION["usuario"] == $_COOKIE["i3geousuariologin"]){
 			$res["papeis"] = $_SESSION["papeis"];
 		}
-	}
-	//verifica se o usuario logado pode ver as opcoes de edicao do sistema de admin dentro do mapa
-	foreach($res["papeis"] as $p){
-		if($p < 3){
-			$res["editor"] = "sim";
+		else{
+			$logado = "nao";
 		}
+		//verifica se o usuario logado pode ver as opcoes de edicao do sistema de admin dentro do mapa
+		foreach($res["papeis"] as $p){
+			if($p < 3){
+				$res["editor"] = "sim";
+			}
+		}
+
 	}
+
 	//
 	$res["mapexten"] = $ext;
 	$res["mapscale"] = $escalaMapa;
@@ -356,6 +363,7 @@ function iniciaMapa()
 	$res["emailInstituicao"] = $emailInstituicao;
 	$res["cordefundo"] = $cordefundo;
 	$res["copyright"] = $copyright;
+	$res["logado"] = $logado;
 	copy($map_file,(str_replace(".map","reinc.map",$map_file)));
 	copy($map_file,(str_replace(".map","seguranca.map",$map_file)));
 	ob_clean();

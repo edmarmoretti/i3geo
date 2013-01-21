@@ -39,14 +39,16 @@ O par&acirc;metro principal &eacute; "funcao", que define qual opera&ccedil;&ati
 Cada opera&ccedil;&atilde;o possu&iacute; seus próprios par&acirc;metros, que devem ser enviados tamb&eacute;m na requisi&ccedil;&atilde;o da opera&ccedil;&atilde;o.
 
 */
+
 include_once(__DIR__."/login.php");
 $funcoesEdicao = array(
 		"ALTERARMAPA",
-		"EXCLUIRMAPA"
+		"EXCLUIRMAPA",
+		"SALVAMAPFILE"
 );
 if(in_array(strtoupper($funcao),$funcoesEdicao)){
 	if(verificaOperacaoSessao("admin/html/mapas") == false){
-		retornaJSON("Vc nao pode realizar essa operacao.");exit;
+		retornaJSON("Vc nao pode realizar essa operacao. Tente fazer login novamente.");exit;
 	}
 }
 error_reporting(0);
@@ -148,32 +150,83 @@ switch (strtoupper($funcao))
 	case "EXCLUIRMAPA":
 		retornaJSON(excluirMapa());
 		exit;
-		break;
+	break;
+	/*
+	 Valor: SALVAMAPFILE
+
+	Salva um mapfile no banco
+
+	Parametro:
+
+	url {string} - url de acesso a interface do mapa que iniciou o processo de salvar o mapa
+
+	titulo {string} - titulo do mapa
+
+	mapfile {string} - mapfile na pasta temporária
+
+	Retorno:
+
+	{JSON}
+	*/
+	case "SALVAMAPFILE":
+		retornaJSON(salvaMapfile());
+		exit;
+	break;
+}
+function salvaMapfile(){
+	global $esquemaadmin,$nome_mapa,$arqmapfile,$url;
+	try{
+		$handle = fopen ($arqmapfile, 'r');
+		$conteudo = fread ($handle, filesize ($arqmapfile));
+		fclose ($handle);
+		$conteudo = base64_encode($conteudo);
+
+		if($conteudo == false){
+			return array("id"=>"","status"=>"erro");
+		}
+		require_once("conexao.php");
+		if($convUTF){
+			$nome_mapa = utf8_encode($nome_mapa);
+		}
+		$retorna = "";
+		$id_temp = (rand (9000,10000)) * -1;
+		//echo "INSERT INTO ".$esquemaadmin."i3geoadmin_mapas (publicado_mapa,ordem_mapa,perfil_mapa,desc_mapa,ext_mapa,imagem_mapa,linkdireto_mapa,outros_mapa,temas_mapa,ligados_mapa,nome_mapa) VALUES ('',0,'','','','','','','','','$id_temp')";exit;
+		$dbhw->query("INSERT INTO ".$esquemaadmin."i3geoadmin_mapas (publicado_mapa,ordem_mapa,perfil_mapa,desc_mapa,ext_mapa,imagem_mapa,linkdireto_mapa,outros_mapa,temas_mapa,ligados_mapa,nome_mapa) VALUES ('',0,'','','','','','','','','$id_temp')");
+		$id = $dbh->query("SELECT * FROM ".$esquemaadmin."i3geoadmin_mapas WHERE nome_mapa = '$id_temp'");
+		$id = $id->fetchAll();
+		$id = $id[0]['id_mapa'];
+		$dbhw->query("UPDATE ".$esquemaadmin."i3geoadmin_mapas SET mapfile = '$conteudo', publicado_mapa = 'sim', nome_mapa = '$nome_mapa', outros_mapa = '&restauramapa=$id&interface=$url' WHERE id_mapa = $id AND nome_mapa = '$id_temp'");
+		$retorna = $id;
+		$dbhw = null;
+		$dbh = null;
+		return array("id"=>$retorna,"status"=>"ok");
+	}
+	catch (PDOException $e){
+		return array("id"=>"","status"=>"Error!: " . $e->getMessage());
+	}
 }
 /*
  Altera o registro de um mapa
 */
-function alterarMapa()
-{
+function alterarMapa(){
 	global $esquemaadmin,$publicado_mapa,$ordem_mapa,$id_mapa,$desc_mapa,$ext_mapa,$imagem_mapa,$outros_mapa,$nome_mapa,$linkdireto_mapa,$temas_mapa,$ligados_mapa,$perfil_mapa;
+	//substitui a string do parametro outros
+	$outros_mapa = str_replace("*","&",$outros_mapa);
 	try
 	{
 		require_once("conexao.php");
-		if($convUTF)
-		{
+		if($convUTF){
 			$nome_mapa = utf8_encode($nome_mapa);
 			$desc_mapa = utf8_encode($desc_mapa);
 		}
 		$retorna = "";
-		if($id_mapa != "")
-		{
+		if($id_mapa != ""){
 			$dbhw->query("UPDATE ".$esquemaadmin."i3geoadmin_mapas SET publicado_mapa='$publicado_mapa',ordem_mapa='$ordem_mapa',desc_mapa = '$desc_mapa',ext_mapa = '$ext_mapa',imagem_mapa = '$imagem_mapa',outros_mapa = '$outros_mapa',nome_mapa = '$nome_mapa', linkdireto_mapa = '$linkdireto_mapa',temas_mapa = '$temas_mapa',ligados_mapa = '$ligados_mapa',perfil_mapa = '$perfil_mapa' WHERE id_mapa = $id_mapa");
 			$retorna = $id_mapa;
 		}
-		else
-		{
-			$idtemp = (rand (9000,10000)) * -1;
-			$dbhw->query("INSERT INTO ".$esquemaadmin."i3geoadmin_mapas (publicado_mapa,ordem_mapa,perfil_mapa,desc_mapa,ext_mapa,imagem_mapa,linkdireto_mapa,outros_mapa,temas_mapa,ligados_mapa,nome_mapa) VALUES ('',0,'','','','','','','','','$id_temp')");
+		else{
+			$id_temp = (rand (9000,10000)) * -1;
+			$dbhw->query("INSERT INTO ".$esquemaadmin."i3geoadmin_mapas (publicado_mapa,ordem_mapa,perfil_mapa,desc_mapa,ext_mapa,imagem_mapa,linkdireto_mapa,outros_mapa,temas_mapa,ligados_mapa,nome_mapa,mapfile) VALUES ('',0,'','','','','','','','','$id_temp','')");
 			$id = $dbh->query("SELECT * FROM ".$esquemaadmin."i3geoadmin_mapas WHERE nome_mapa = '$id_temp'");
 			$id = $id->fetchAll();
 			$id = $id[0]['id_mapa'];
@@ -184,8 +237,7 @@ function alterarMapa()
 		$dbh = null;
 		return $retorna;
 	}
-	catch (PDOException $e)
-	{
+	catch (PDOException $e){
 		return "Error!: " . $e->getMessage();
 	}
 }
