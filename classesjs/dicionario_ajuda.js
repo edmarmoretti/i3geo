@@ -85,7 +85,7 @@ g_traducao_ajuda = {
 			titulo: "Salvar mapa",
 			diretorio:"i3geo/ferramentas/salvamapa",
 			categoria:"2",
-			pt:"O mapa que o usu&aacute;rio est&aacute; utilizando pode ser salvo localmente (na m&aacute;quina do usu&aacute;rio) para ser aberto posteriormente. Isso permite que um trabalho seja continuado em outro momento, uma vez que o mapa em uso &eacute; sempre perdido quando o usu&aacute;rio fecha o navegador.",
+			pt:"O mapa que o usu&aacute;rio est&aacute; utilizando pode ser salvo localmente (na m&aacute;quina do usu&aacute;rio) ou no banco de dados no servidor onde o i3Geo est&aacute; instalado. para ser aberto posteriormente. Isso permite que um trabalho seja continuado em outro momento, uma vez que o mapa em uso &eacute; sempre perdido quando o usu&aacute;rio fecha o navegador.",
 			complemento:"Os dados locais que foram criados n&atilde;o s&atilde;o salvos, sendo necess&aacute;rio o seu download quando desejado. Isso afeta as op&ccedil;&otilde;es de inclus&atilde;o de pontos ou convers&atilde;o de elementos selecionados em camadas.",
 			tela:"ferramentas/salvamapa/exemplo.htm",
 			apijs:"i3GEO.mapa.dialogo.salvaMapa()"

@@ -174,7 +174,7 @@ switch (strtoupper($funcao))
 	break;
 }
 function salvaMapfile(){
-	global $esquemaadmin,$nome_mapa,$arqmapfile,$url;
+	global $esquemaadmin,$nome_mapa,$arqmapfile,$url,$id_mapa;
 	try{
 		$handle = fopen ($arqmapfile, 'r');
 		$conteudo = fread ($handle, filesize ($arqmapfile));
@@ -189,13 +189,18 @@ function salvaMapfile(){
 			$nome_mapa = utf8_encode($nome_mapa);
 		}
 		$retorna = "";
-		$id_temp = (rand (9000,10000)) * -1;
-		//echo "INSERT INTO ".$esquemaadmin."i3geoadmin_mapas (publicado_mapa,ordem_mapa,perfil_mapa,desc_mapa,ext_mapa,imagem_mapa,linkdireto_mapa,outros_mapa,temas_mapa,ligados_mapa,nome_mapa) VALUES ('',0,'','','','','','','','','$id_temp')";exit;
-		$dbhw->query("INSERT INTO ".$esquemaadmin."i3geoadmin_mapas (publicado_mapa,ordem_mapa,perfil_mapa,desc_mapa,ext_mapa,imagem_mapa,linkdireto_mapa,outros_mapa,temas_mapa,ligados_mapa,nome_mapa) VALUES ('',0,'','','','','','','','','$id_temp')");
-		$id = $dbh->query("SELECT * FROM ".$esquemaadmin."i3geoadmin_mapas WHERE nome_mapa = '$id_temp'");
-		$id = $id->fetchAll();
-		$id = $id[0]['id_mapa'];
-		$dbhw->query("UPDATE ".$esquemaadmin."i3geoadmin_mapas SET mapfile = '$conteudo', publicado_mapa = 'sim', nome_mapa = '$nome_mapa', outros_mapa = '&restauramapa=$id&interface=$url' WHERE id_mapa = $id AND nome_mapa = '$id_temp'");
+		if(empty($id_mapa)){
+			$id_temp = (rand (9000,10000)) * -1;
+			//echo "INSERT INTO ".$esquemaadmin."i3geoadmin_mapas (publicado_mapa,ordem_mapa,perfil_mapa,desc_mapa,ext_mapa,imagem_mapa,linkdireto_mapa,outros_mapa,temas_mapa,ligados_mapa,nome_mapa) VALUES ('',0,'','','','','','','','','$id_temp')";exit;
+			$dbhw->query("INSERT INTO ".$esquemaadmin."i3geoadmin_mapas (publicado_mapa,ordem_mapa,perfil_mapa,desc_mapa,ext_mapa,imagem_mapa,linkdireto_mapa,outros_mapa,temas_mapa,ligados_mapa,nome_mapa) VALUES ('',0,'','','','','','','','','$id_temp')");
+			$id = $dbh->query("SELECT * FROM ".$esquemaadmin."i3geoadmin_mapas WHERE nome_mapa = '$id_temp'");
+			$id = $id->fetchAll();
+			$id = $id[0]['id_mapa'];
+		}
+		else{
+			$id = $id_mapa;
+		}
+		$dbhw->query("UPDATE ".$esquemaadmin."i3geoadmin_mapas SET mapfile = '$conteudo', publicado_mapa = 'sim', nome_mapa = '$nome_mapa', outros_mapa = '&restauramapa=$id&interface=$url' WHERE id_mapa =".$id);
 		$retorna = $id;
 		$dbhw = null;
 		$dbh = null;

@@ -124,12 +124,13 @@ i3GEOF.salvaMapa = {
 	},
 	salvaMapaBanco: function(){
 		var login = i3GEO.login.verificaCookieLogin(),
-			titulo="",temp="";
+			titulo="",temp="",id_mapa="";
 		if(login === false){
 			i3GEO.login.dialogo.abreLogin();
 		}
 		else{
 			titulo = window.prompt("Titulo do mapa","");
+			id_mapa = window.prompt("Especifique o id se o mapa já existir, se for um mapa novo, deixe em branco");
 			temp = function(retorno){
 				if(retorno.id && retorno.id != ""){
 					i3GEO.janela.tempoMsg("Mapa salvo");
@@ -144,7 +145,7 @@ i3GEOF.salvaMapa = {
 				}
 			};
 			if(titulo){
-				i3GEO.php.salvaMapaBanco(temp,titulo);
+				i3GEO.php.salvaMapaBanco(temp,titulo,id_mapa);
 			}
 		}
 	},
