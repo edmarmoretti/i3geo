@@ -62,30 +62,28 @@ i3geo/classesphp/mapa_googlemaps.php
 //error_reporting(E_ALL);
 error_reporting(0);
 clearstatcache();
-if (!function_exists('ms_GetVersion'))
-{
-	$s = PHP_SHLIB_SUFFIX;
-	@dl( 'php_mapscript.'.$s );
-	$ler_extensoes[] = 'php_mapscript';
-}
 //verifica&ccedil;&atilde;o de seguran&ccedil;a
 $_SESSION = array();
 session_name("i3GeoPHP");
-if(@$_GET["g_sid"])
-{session_id($_GET["g_sid"]);}
-else
-{ilegal();}
-session_start();
-if(@$_SESSION["fingerprint"])
-{
-	$f = explode(",",$_SESSION["fingerprint"]);
-	if (md5('I3GEOSEC' . $_SERVER['HTTP_USER_AGENT'] . session_id()) != $f[0] && !in_array($_GET["telaR"],$f) )
-	{ilegal();}
+if(@$_GET["g_sid"]){
+	session_id($_GET["g_sid"]);
 }
-else
-{exit;}
-if(!isset($_SESSION["map_file"]))
-{exit;}
+else{
+	ilegal();
+}
+session_start();
+if(@$_SESSION["fingerprint"]){
+	$f = explode(",",$_SESSION["fingerprint"]);
+	if (md5('I3GEOSEC' . $_SERVER['HTTP_USER_AGENT'] . session_id()) != $f[0] && !in_array($_GET["telaR"],$f) ){
+		ilegal();
+	}
+}
+else{
+	exit;
+}
+if(!isset($_SESSION["map_file"])){
+	exit;
+}
 //
 $map_fileX = $_SESSION["map_file"];
 $postgis_mapa = $_SESSION["postgis_mapa"];
@@ -94,15 +92,16 @@ $cachedir = $_SESSION["cachedir"];
 //converte a requisi&ccedil;&atilde;o do tile em coordenadas geo
 //http://wiki.openstreetmap.org/wiki/Slippy_map_tilenames#tile_numbers_to_lon.2Flat_2
 //
-	$x = $_GET["X"];
-	$y = $_GET["Y"];
-	$n = pow(2, $_GET["Z"]);
-	$lon1 = $x / $n * 360.0 - 180.0;
-	$lat2 = rad2deg(atan(sinh(pi() * (1 - 2 * $y / $n))));
-	$x++;
-	$y++;
-	$lon2 = $x / $n * 360.0 - 180.0;
-	$lat1 = rad2deg(atan(sinh(pi() * (1 - 2 * $y / $n))));
+$x = $_GET["X"];
+$y = $_GET["Y"];
+$z = $_GET["Z"];
+$n = pow(2,$z);
+$lon1 = $x / $n * 360.0 - 180.0;
+$lat2 = rad2deg(atan(sinh(pi() * (1 - 2 * $y / $n))));
+$x++;
+$y++;
+$lon2 = $x / $n * 360.0 - 180.0;
+$lat1 = rad2deg(atan(sinh(pi() * (1 - 2 * $y / $n))));
 
 $projInObj = ms_newprojectionobj("proj=latlong,a=6378137,b=6378137");
 $projOutObj = ms_newprojectionobj("proj=merc,a=6378137,b=6378137,lat_ts=0.0,lon_0=0.0,x_0=0.0,y_0=0,k=1.0,units=m");
@@ -116,70 +115,59 @@ $poPoint2->project($projInObj, $projOutObj);
 $_GET["BBOX"] = $poPoint1->x." ".$poPoint1->y." ".$poPoint2->x." ".$poPoint2->y;
 $_GET["mapext"] = str_replace(","," ",$_GET["BBOX"]);
 
-if(!isset($_GET["WIDTH"]))
-{$_GET["WIDTH"] = "256";}
-if(!isset($_GET["HEIGHT"]))
-{$_GET["HEIGHT"] = "256";}
-$_GET["map_size"] = $_GET["WIDTH"]." ".$_GET["HEIGHT"];
-
 $mapa = ms_newMapObj($map_fileX);
 $ret = $mapa->extent;
 $qyfile = dirname($map_fileX)."/".$_GET["layer"].".php";
 $qy = file_exists($qyfile);
 $cache = false;
-if(!isset($_GET["telaR"])){//no caso de projecoes remotas, o mapfile nao´e alterado
-
+if(!isset($_GET["telaR"])){
+	//no caso de projecoes remotas, o mapfile nao´e alterado
 	$numlayers = $mapa->numlayers;
-	for ($i=0;$i < $numlayers;++$i)
-	{
+	for ($i=0;$i < $numlayers;++$i){
 		$l = $mapa->getlayer($i);
 		$layerName = $l->name;
-		if ($l->getmetadata("classesnome") != "")
-		{
-			if(!function_exists("autoClasses"))
-			{include_once("funcoes_gerais.php");}
-			autoClasses($l,$mapa);
-		}
-		if($layerName != $_GET["layer"])
-		{$l->set("status",MS_OFF);}
-		if($layerName == $_GET["layer"] || $l->group == $_GET["layer"] && $l->group != "")
-		{
+		$l->set("status",MS_OFF);
+		if($layerName == $_GET["layer"] || $l->group == $_GET["layer"] && $l->group != ""){
+			$l->set("template","none.htm");
 			$l->set("status",MS_DEFAULT);
-			if (!empty($postgis_mapa))
-			{
-				if ($l->connectiontype == MS_POSTGIS)
-				{
+			if ($l->getmetadata("classesnome") != ""){
+				if(!function_exists("autoClasses")){
+					include_once("funcoes_gerais.php");
+				}
+				autoClasses($l,$mapa);
+			}
+			if(!empty($postgis_mapa)){
+				if($l->connectiontype == MS_POSTGIS){
 					$lcon = $l->connection;
-					if (($lcon == " ") || ($lcon == "") || (in_array($lcon,array_keys($postgis_mapa))))
-					{
-						if(($lcon == " ") || ($lcon == ""))
-						{$l->set("connection",$postgis_mapa);}
-						else
-						{$l->set("connection",$postgis_mapa[$lcon]);}
+					if (($lcon == " ") || ($lcon == "") || (in_array($lcon,array_keys($postgis_mapa)))){
+						if(($lcon == " ") || ($lcon == "")){
+							$l->set("connection",$postgis_mapa);
+						}
+						else{
+							$l->set("connection",$postgis_mapa[$lcon]);
+						}
 					}
 				}
 			}
-			if($l->getProjection() == "" )
-			{$l->setProjection("proj=latlong,a=6378137,b=6378137");}
-		}
-		if($layerName == $_GET["layer"])
-		{
-			if(strtolower($l->getmetadata("cache")) == "sim")
-			{
-				$cache = true;
-				$nomecache = $l->getmetadata("nomeoriginal");
-				if($nomecache == "")
-				{$nomecache = $layerName;}
+			if($l->getProjection() == "" ){
+				$l->setProjection("proj=latlong,a=6378137,b=6378137");
 			}
 		}
-		$l->set("template","none.htm");
+		if($layerName == $_GET["layer"]){
+			if(strtolower($l->getmetadata("cache")) == "sim"){
+				$cache = true;
+				$nomecache = $l->getmetadata("nomeoriginal");
+				if($nomecache == ""){
+					$nomecache = $layerName;
+				}
+			}
+		}
 	}
 }
 else{
 	$mapa->setProjection("proj=merc,a=6378137,b=6378137,lat_ts=0.0,lon_0=0.0,x_0=0.0,y_0=0,k=1.0,units=m");
 	$numlayers = $mapa->numlayers;
-	for ($i=0;$i < $numlayers;++$i)
-	{
+	for ($i=0;$i < $numlayers;++$i){
 		$l = $mapa->getlayer($i);
 		if($l->getProjection() == "" )
 		{$l->setProjection("proj=latlong,a=6378137,b=6378137");}
@@ -187,19 +175,16 @@ else{
 }
 if($_GET["layer"] == "")
 {$cache = true;}
-if($_GET == false)
-{$cache = false;}
-if(strtolower($_GET["DESLIGACACHE"]) == "sim")
-{$cache = false;}
-if(trim($_GET["TIPOIMAGEM"]) != "" && trim($_GET["TIPOIMAGEM"]) != "nenhum")
-{$cache = false;}
-if($qy)
-{$cache = false;}
-if($cache == true)
-{carregaCacheImagem($cachedir,$_GET["BBOX"],$nomecache,$map_fileX,$_GET["WIDTH"],$_GET["HEIGHT"]);}
 
-$map_size = explode(" ",$_GET["map_size"]);
-$mapa->setsize($map_size[0],$map_size[1]);
+if(($_GET == false) || ($qy) || (strtolower($_GET["DESLIGACACHE"]) == "sim"))
+{$cache = false;}
+elseif(trim($_GET["TIPOIMAGEM"]) != "" && trim($_GET["TIPOIMAGEM"]) != "nenhum")
+{$cache = false;}
+
+if($cache == true){
+	carregaCacheImagem();
+}
+$mapa->setsize(256,256);
 $mapext = explode(" ",$_GET["mapext"]);
 $mapa->setExtent($mapext[0],$mapext[1],$mapext[2],$mapext[3]);
 
@@ -213,16 +198,16 @@ if(!isset($_GET["telaR"])){
 	$escala->set("status",MS_OFF);
 }
 //
-//se o layer n&atilde;o for do tipo fundo
+//se o layer nao for do tipo fundo
 //
 if($_GET["tipolayer"] != "fundo")
 {$o->set("transparent",MS_TRUE);}
 if(trim($_GET["TIPOIMAGEM"]) != "" && trim($_GET["TIPOIMAGEM"]) != "nenhum")
 {$o->setOption("QUANTIZE_FORCE","OFF");}
-if($qy != true)
-{$img = $mapa->draw();}
-else
-{
+if($qy != true){
+	$img = $mapa->draw();
+}
+else{
 	$handle = fopen ($qyfile, "r");
 	$conteudo = fread ($handle, filesize ($qyfile));
 	fclose ($handle);
@@ -275,8 +260,7 @@ else
 		}
 	}
 }
-if (!function_exists('imagepng'))
-{
+if (!function_exists('imagepng')){
 	$s = PHP_SHLIB_SUFFIX;
 	@dl( 'php_gd.'.$s );
 	if (!function_exists('imagepng'))
@@ -284,8 +268,7 @@ if (!function_exists('imagepng'))
 	if (!function_exists('imagepng'))
 	{$_GET["TIPOIMAGEM"] = "";}
 }
-if(trim($_GET["TIPOIMAGEM"]) != "" && trim($_GET["TIPOIMAGEM"]) != "nenhum")
-{
+if(trim($_GET["TIPOIMAGEM"]) != "" && trim($_GET["TIPOIMAGEM"]) != "nenhum"){
 	if($img->imagepath == "")
 	{echo "Erro IMAGEPATH vazio";exit;}
 	$nomer = ($img->imagepath)."filtroimgtemp".nomeRand().".png";
@@ -299,46 +282,56 @@ if(trim($_GET["TIPOIMAGEM"]) != "" && trim($_GET["TIPOIMAGEM"]) != "nenhum")
 	imagepng($img);
 }
 else{
-	/*
-	if($cache == true)
-	{$nomer = salvaCacheImagem($cachedir,$_GET["BBOX"],$nomecache,$map_fileX,$_GET["WIDTH"],$_GET["HEIGHT"]);}
-	else{
-		if($img->imagepath == "")
-		{echo "Erro IMAGEPATH vazio";exit;}
-		$nomer = ($img->imagepath)."imgtemp".nomeRand().".png";
-		$img->saveImage($nomer);
-	}
-	header('Content-Length: '.filesize($nomer));
-	header('Content-Type: image/png');
-	fpassthru(fopen($nomer, 'rb'));
-	exit;
-	*/
 	if($cache == true){
-		$nomer = salvaCacheImagem($cachedir,$_GET["BBOX"],$nomecache,$map_fileX,$_GET["WIDTH"],$_GET["HEIGHT"]);
+		$nomer = salvaCacheImagem();
 		header('Content-Length: '.filesize($nomer));
 		header('Content-Type: image/png');
 		header('Cache-Control: max-age=3600, must-revalidate');
 		header('Expires: ' . gmdate('D, d M Y H:i:s', time()+24*60*60) . ' GMT');
 		header('Last-Modified: '.gmdate('D, d M Y H:i:s', filemtime($nomer)).' GMT', true, 200);
-		//$etag = md5_file($nomer);
-		//header('Etag: '.$etag);
 		fpassthru(fopen($nomer, 'rb'));
 	}
 	else{
 		if($img->imagepath == "")
 		{echo "Erro IMAGEPATH vazio";exit;}
-		/*
-		$nomer = ($img->imagepath)."imgtemp".nomeRand().".png";
-		$img->saveImage($nomer);
-		header('Content-Length: '.filesize($nomer));
-		header('Content-Type: image/png');
-		fpassthru(fopen($nomer, 'rb'));
-		*/
 		header('Content-Type: image/png');
 		$img->saveImage();
 	}
 	exit;
 }
+//$cachedir e definido no ms_configura.php
+function salvaCacheImagem(){
+	global $img,$cachedir,$x,$y,$z,$map_fileX;
+	$layer = $_GET["layer"];
+	if($layer == "")
+	{$layer = "fundo";}
+	if($cachedir == ""){
+		$cachedir = dirname(dirname($map_fileX))."/cache";
+	}
+	$c = $cachedir."/googlemaps/$layer/$z/$x";
+	if(!file_exists($c."/$y.png")){
+		mkdir($cachedir."/googlemaps/$layer/$z/$x",0777,true);
+		$img->saveImage($c."/$y.png");
+	}
+	return $nome;
+}
+function carregaCacheImagem(){
+	global $img,$cachedir,$x,$y,$z,$map_fileX;
+	$layer = $_GET["layer"];
+	if($layer == "")
+	{$layer = "fundo";}
+	if($cachedir == ""){
+		$cachedir = dirname(dirname($map_fileX))."/cache";
+	}
+	$c = $cachedir."/googlemaps/$layer/$z/$x";
+	if(file_exists($c."/$y.png")){
+		header('Content-Length: '.filesize($c."/$y.png"));
+		header('Content-Type: image/png');
+		fpassthru(fopen($c."/$y.png", 'rb'));
+		exit;
+	}
+}
+/*
 function salvaCacheImagem($cachedir,$bbox,$layer,$map,$w,$h){
 	global $img,$map_size;
 	//layers que s&atilde;o sempre iguais
@@ -367,14 +360,14 @@ function carregaCacheImagem($cachedir,$bbox,$layer,$map,$w,$h){
 	{$nome = dirname(dirname($map))."/cache/googlemaps/".$layer."/".$nome;}
 	else
 	{$nome = $cachedir."/googlemaps/".$layer."/".$nome;}
-	if(file_exists($nome))
-	{
+	if(file_exists($nome)){
 		header('Content-Length: '.filesize($nome));
 		header('Content-Type: image/png');
 		fpassthru(fopen($nome, 'rb'));
 		exit;
 	}
 }
+*/
 function nomeRand($n=10)
 {
 	$nomes = "";
