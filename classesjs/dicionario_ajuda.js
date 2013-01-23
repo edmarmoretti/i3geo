@@ -846,7 +846,7 @@ g_traducao_ajuda = {
 			titulo: "Temporizador",
 			diretorio:"",
 			categoria:"5",
-			pt:"Aplica um temporizador que atualiza uma determinada camada ap&oacute;s um intervalo de tempo e de forma cont&iacute;nua.",
+			pt:"Aplica um temporizador que atualiza uma determinada camada ap&oacute;s um intervalo de tempo e de forma cont&iacute;nua. Para finalizar o temporizador, digite o ou vazio e aplique novamente.",
 			complemento:"",
 			tela:"",
 			apijs:"i3GEO.tema.temporizador()"

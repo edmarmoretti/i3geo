@@ -817,18 +817,18 @@ i3GEO.php = {
 			switch(i3GEO.Interface.ATUAL)
 			{
 				case "googlemaps":
+					i3GEO.Interface.googlemaps.zoom2extent(retorno.data.variaveis.mapexten);
 					i3GEO.atualizaParametros(retorno.data.variaveis);
-					i3GEO.Interface.googlemaps.zoom2extent(i3GEO.parametros.mapexten);
 					i3GEO.janela.fechaAguarde("zoomtema");
 					break;
 				case "googleearth":
+					i3GEO.Interface.googleearth.zoom2extent(retorno.data.variaveis.mapexten);
 					i3GEO.atualizaParametros(retorno.data.variaveis);
-					i3GEO.Interface.googleearth.zoom2extent(i3GEO.parametros.mapexten);
 					i3GEO.janela.fechaAguarde("zoomtema");
 					break;
 				case "openlayers":
+					i3GEO.Interface.openlayers.zoom2ext(retorno.data.variaveis.mapexten);
 					i3GEO.atualizaParametros(retorno.data.variaveis);
-					i3GEO.Interface.openlayers.zoom2ext(i3GEO.parametros.mapexten);
 					i3GEO.janela.fechaAguarde("zoomtema");
 					break;
 			}
