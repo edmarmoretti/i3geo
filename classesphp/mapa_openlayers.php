@@ -62,16 +62,39 @@ error_reporting(0);
 //carrega dados da se&ccedil;&atilde;o, verifica seguran&ccedil;a
 inicializa();
 //
-//map_fileX &eacute; necess&aacute;rio caso register_globals = On no PHP.INI
+//calcula a extensao geografica com base no x,y,z
+//nos casos do modo notile, a requisicao e feita como se fosse um wms
+//quando for do tipo tms $_GET["tms"] contem os parametros do tile
+if(isset($_GET["tms"])){
+	$_GET["WIDTH"] = 256;
+	$_GET["HEIGHT"] = 256;
+	$temp = explode("/",$_GET["tms"]);
+	$z = $temp[2];
+	$x = $temp[3];
+	$y = str_replace(".png","",$temp[4]);
+
+	$n = pow(2,$z+1);
+	$lon1 = $x / $n * 360.0 - 180.0;
+	$lon2 = ($x+1) / $n * 360.0 - 180.0;
+	$n = pow(2,$z);
+	$lat1 = $y / $n * 180.0 - 90.0;
+	$lat2 = ($y+1) / $n * 180.0 - 90.0;
+	$_GET["BBOX"] = $lon1." ".$lat1." ".$lon2." ".$lat2;
+}
+
+//
+//map_fileX e para o caso register_globals = On no PHP.INI
 $map_fileX = $_SESSION["map_file"];
-if(isset($_GET["tipolayer"]) && $_GET["tipolayer"] == "fundo")
-{$map_fileX = str_replace(".map","fundo.map",$map_fileX);}
+if(isset($_GET["tipolayer"]) && $_GET["tipolayer"] == "fundo"){
+	$map_fileX = str_replace(".map","fundo.map",$map_fileX);
+}
 $postgis_mapa = $_SESSION["postgis_mapa"];
 $cachedir = $_SESSION["cachedir"];
 if(isset($_GET["BBOX"])){
 	$_GET["mapext"] = str_replace(","," ",$_GET["BBOX"]);
 	$_GET["map_size"] = $_GET["WIDTH"]." ".$_GET["HEIGHT"];
 }
+$_GET["TIPOIMAGEM"] = trim($_GET["TIPOIMAGEM"]);
 $mapa = ms_newMapObj($map_fileX);
 //
 //resolve o problema da sele&ccedil;&atilde;o na vers&atilde;o nova do mapserver
@@ -84,28 +107,24 @@ $qy = file_exists($qyfile);
 if(!isset($_GET["telaR"])){//no caso de projecoes remotas, o mapfile nao e alterado
 	$numlayers = $mapa->numlayers;
 	$cache = false;
-	for($i = 0;$i < $numlayers;++$i)
-	{
+	for($i = 0;$i < $numlayers;++$i){
 		$l = $mapa->getLayer($i);
-		if ($l->getmetadata("classesnome") != "")
-		{
-			if(!function_exists("autoClasses"))
-			{include_once("funcoes_gerais.php");}
-			autoClasses($l,$mapa);
-		}
 		$layerName = $l->name;
-		if($layerName != $_GET["layer"])
-		{$l->set("status",MS_OFF);}
-		if($layerName == $_GET["layer"] || $l->group == $_GET["layer"] && $l->group != "")
-		{
+		if($layerName != $_GET["layer"]){
+			$l->set("status",MS_OFF);
+		}
+		if($layerName == $_GET["layer"] || $l->group == $_GET["layer"] && $l->group != ""){
+			if ($l->getmetadata("classesnome") != ""){
+				if(!function_exists("autoClasses"))
+				{include_once("funcoes_gerais.php");}
+				autoClasses($l,$mapa);
+			}
 			$l->set("status",MS_DEFAULT);
-			if (!empty($postgis_mapa))
-			{
-				if ($l->connectiontype == MS_POSTGIS)
-				{
+			$l->set("template","none.htm");
+			if (!empty($postgis_mapa)){
+				if ($l->connectiontype == MS_POSTGIS){
 					$lcon = $l->connection;
-					if (($lcon == " ") || ($lcon == "") || (in_array($lcon,array_keys($postgis_mapa))))
-					{
+					if (($lcon == " ") || ($lcon == "") || (in_array($lcon,array_keys($postgis_mapa)))){
 						if(($lcon == " ") || ($lcon == ""))
 						{$l->set("connection",$postgis_mapa);}
 						else
@@ -114,17 +133,15 @@ if(!isset($_GET["telaR"])){//no caso de projecoes remotas, o mapfile nao e alter
 				}
 			}
 		}
-		if($layerName == $_GET["layer"])
-		{
-			if(strtolower($l->getmetadata("cache")) == "sim")
-			{
+		if($layerName == $_GET["layer"]){
+			if(strtolower($l->getmetadata("cache")) == "sim"){
 				$cache = true;
 				$nomecache = $l->getmetadata("nomeoriginal");
-				if($nomecache == "")
-				{$nomecache = $layerName;}
+				if($nomecache == ""){
+					$nomecache = $layerName;
+				}
 			}
 		}
-		$l->set("template","none.htm");
 		if($_GET["REQUEST"] == "GetFeatureInfo" || $_GET["REQUEST"] == "getfeature"){
 			$l->setmetadata("gml_include_items","all");
 			$l->setmetadata("WMS_INCLUDE_ITEMS","all");
@@ -135,21 +152,22 @@ if(!isset($_GET["telaR"])){//no caso de projecoes remotas, o mapfile nao e alter
 		}
 	}
 }
+if (!function_exists('imagepng'))
+{$_GET["TIPOIMAGEM"] = "";}
+
 if($_GET["layer"] == "")
 {$cache = true;}
-if($_GET == false)
-{$cache = false;}
-if(!empty($_GET["DESLIGACACHE"])){
-	if(strtolower($_GET["DESLIGACACHE"]) == "sim")
-	{$cache = false;}
-}
-if(trim($_GET["TIPOIMAGEM"]) != "" && trim($_GET["TIPOIMAGEM"]) != "nenhum")
-{$cache = false;}
-if($qy)
-{$cache = false;}
-if($cache == true)
-{carregaCacheImagem($cachedir,$_GET["BBOX"],$nomecache,$map_fileX,$_GET["WIDTH"],$_GET["HEIGHT"]);}
 
+if(($_GET == false) || ($qy) || (strtolower($_GET["DESLIGACACHE"]) == "sim")){
+	$cache = false;
+}
+elseif($_GET["TIPOIMAGEM"] != "" && $_GET["TIPOIMAGEM"] != "nenhum")
+{$cache = false;}
+
+if($cache == true){
+	//carregaCacheImagem($cachedir,$_GET["BBOX"],$nomecache,$map_fileX,$_GET["WIDTH"],$_GET["HEIGHT"]);
+	carregaCacheImagem($cachedir,$map,$tms);
+}
 $map_size = explode(" ",$_GET["map_size"]);
 $mapa->setsize($map_size[0],$map_size[1]);
 if(isset($_GET["mapext"])){
@@ -191,11 +209,9 @@ if(!isset($_GET["telaR"])){
 //
 if($_GET["tipolayer"] != "fundo")
 {$o->set("transparent",MS_TRUE);}
-
 if($qy != true)
 {$img = $mapa->draw();}
-else
-{
+else{
 	$handle = fopen ($qyfile, "r");
 	$conteudo = fread ($handle, filesize ($qyfile));
 	fclose ($handle);
@@ -240,17 +256,8 @@ else
 	}
 	$cache = false;
 }
-if (!function_exists('imagepng'))
-{
-	$s = PHP_SHLIB_SUFFIX;
-	@dl( 'php_gd.'.$s );
-	if (!function_exists('imagepng'))
-	{@dl( 'php_gd2.'.$s );}
-	if (!function_exists('imagepng'))
-	{$_GET["TIPOIMAGEM"] = "";}
-}
-if(trim($_GET["TIPOIMAGEM"]) != "" && trim($_GET["TIPOIMAGEM"]) != "nenhum")
-{
+
+if($_GET["TIPOIMAGEM"] != "" && $_GET["TIPOIMAGEM"] != "nenhum"){
 	if($img->imagepath == "")
 	{echo "Erro IMAGEPATH vazio";exit;}
 	$nomer = ($img->imagepath)."filtroimgtemp".nomeRand().".png";
@@ -266,53 +273,58 @@ if(trim($_GET["TIPOIMAGEM"]) != "" && trim($_GET["TIPOIMAGEM"]) != "nenhum")
 }
 else{
 	if($cache == true){
-		$nomer = salvaCacheImagem($cachedir,$_GET["BBOX"],$nomecache,$map_fileX,$_GET["WIDTH"],$_GET["HEIGHT"]);
+		//$nomer = salvaCacheImagem($cachedir,$_GET["BBOX"],$nomecache,$map_fileX,$_GET["WIDTH"],$_GET["HEIGHT"]);
+		$nomer = salvaCacheImagem($cachedir,$map_fileX,$_GET["tms"]);
 		header('Content-Length: '.filesize($nomer));
 		header('Content-Type: image/png');
 		header('Cache-Control: max-age=3600, must-revalidate');
 		header('Expires: ' . gmdate('D, d M Y H:i:s', time()+24*60*60) . ' GMT');
 		header('Last-Modified: '.gmdate('D, d M Y H:i:s', filemtime($nomer)).' GMT', true, 200);
-		//$etag = md5_file($nomer);
-		//header('Etag: '.$etag);
 		fpassthru(fopen($nomer, 'rb'));
 	}
 	else{
 		if($img->imagepath == "")
 		{echo "Erro IMAGEPATH vazio";exit;}
-		/*
-		$nomer = ($img->imagepath)."imgtemp".nomeRand().".png";
-		$img->saveImage($nomer);
-		header('Content-Length: '.filesize($nomer));
-		header('Content-Type: image/png');
-		fpassthru(fopen($nomer, 'rb'));
-		*/
 		header('Content-Type: image/png');
 		$img->saveImage();
 	}
 	exit;
 }
-function salvaCacheImagem($cachedir,$bbox,$layer,$map,$w,$h){
-	global $img,$map_size;
-	//echo "oi".$cachedir;exit;
-	//layers que s&atilde;o sempre iguais
-	if($layer == "copyright" || $layer == "")
-	{$bbox = "";}
-	if($layer == "")
-	{$layer = "fundo";}
-	if($cachedir == "")
-	{$cachedir = dirname(dirname($map))."/cache/".$layer;}
-	else
-	{$cachedir = $cachedir."/".$layer;}
-	$nome = $cachedir."/".$w.$h.$bbox.".png";
-	if(!file_exists($nome))
-	{
-		@mkdir($cachedir,0777);
+function salvaCacheImagem($cachedir,$map,$tms){
+	global $img;
+	if($cachedir == ""){
+		$nome = dirname(dirname($map))."/cache".$tms;
+	}
+	else{
+		$nome = $cachedir.$tms;
+	}
+	if(!file_exists($nome)){
+		@mkdir(dirname($nome),0777,true);
 		$img->saveImage($nome);
 		chmod($nome,0777);
 	}
 	return $nome;
 }
-function carregaCacheImagem($cachedir,$bbox,$layer,$map,$w,$h){
+function carregaCacheImagem($cachedir,$map,$tms){
+	if($cachedir == ""){
+		$nome = dirname(dirname($map))."/cache".$tms;
+	}
+	else{
+		$nome = $cachedir.$tms;
+	}
+	if(file_exists($nome)){
+		header('Content-Length: '.filesize($nome));
+		header('Content-Type: image/png');
+		header('Cache-Control: max-age=3600, must-revalidate');
+		header('Expires: ' . gmdate('D, d M Y H:i:s', time()+24*60*60) . ' GMT');
+		header('Last-Modified: '.gmdate('D, d M Y H:i:s', filemtime($nome)).' GMT', true, 200);
+		$etag = md5_file($nome);
+		header('Etag: '.$etag);
+		fpassthru(fopen($nome, 'rb'));
+		exit;
+	}
+}
+function XcarregaCacheImagem($cachedir,$bbox,$layer,$map,$w,$h){
 	if($layer == "copyright" || $layer == "")
 	{$bbox = "";}
 	if($layer == "")
@@ -322,28 +334,7 @@ function carregaCacheImagem($cachedir,$bbox,$layer,$map,$w,$h){
 	{$nome = dirname(dirname($map))."/cache/".$layer."/".$nome;}
 	else
 	{$nome = $cachedir."/".$layer."/".$nome;}
-	if(file_exists($nome))
-	{
-/*
-		header('Accept-Ranges: bytes');
-		header('Content-Length: '.filesize($nome));
-		header('Content-Type: image/png');
-		ob_start;
-		ob_flush();
-		readfile($nome);
-		exit;
-
-		ob_start();
-		// assuming you have image data in $imagedata
-		$img = file_get_contents($nome);
-		$length = strlen($img);
-		header('Accept-Ranges: bytes');
-		header('Content-Length: '.$length);
-		header('Content-Type: image/png');
-		print($img);
-		ob_end_flush();
-		exit;
-*/
+	if(file_exists($nome)){
 		header('Content-Length: '.filesize($nome));
 		header('Content-Type: image/png');
 		header('Cache-Control: max-age=3600, must-revalidate');
@@ -393,23 +384,15 @@ function filtraImg($nomer,$tipoimagem){
 }
 function inicializa(){
 	clearstatcache();
-	//$_COOKIE = array();
-	if (!function_exists('ms_GetVersion')){
-		$s = PHP_SHLIB_SUFFIX;
-		@dl( 'php_mapscript.'.$s );
-		$ler_extensoes[] = 'php_mapscript';
-	}
-	//verifica&ccedil;&atilde;o de seguran&ccedil;a
-	//$_SESSION = array();
 	session_name("i3GeoPHP");
-	if(@$_GET["g_sid"])
-	{session_id($_GET["g_sid"]);}
-	else
-	{ilegal();}
+	if(@$_GET["g_sid"]){
+		session_id($_GET["g_sid"]);
+	}
+	else{
+		ilegal();
+	}
 	session_start();
-	//var_dump($_SESSION);exit;
-	if(@$_SESSION["fingerprint"])
-	{
+	if(@$_SESSION["fingerprint"]){
 		$f = explode(",",$_SESSION["fingerprint"]);
 		if (md5('I3GEOSEC' . $_SERVER['HTTP_USER_AGENT'] . session_id()) != $f[0] && !in_array($_GET["telaR"],$f) )
 		{ilegal();}

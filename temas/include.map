@@ -1,0 +1,1 @@
+CONNECTION "user=postgres password=postgres dbname=geosaude host=localhost port=5432"

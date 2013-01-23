@@ -102,6 +102,8 @@ $x++;
 $y++;
 $lon2 = $x / $n * 360.0 - 180.0;
 $lat1 = rad2deg(atan(sinh(pi() * (1 - 2 * $y / $n))));
+$x--;
+$y--;
 
 $projInObj = ms_newprojectionobj("proj=latlong,a=6378137,b=6378137");
 $projOutObj = ms_newprojectionobj("proj=merc,a=6378137,b=6378137,lat_ts=0.0,lon_0=0.0,x_0=0.0,y_0=0,k=1.0,units=m");
@@ -156,10 +158,6 @@ if(!isset($_GET["telaR"])){
 		if($layerName == $_GET["layer"]){
 			if(strtolower($l->getmetadata("cache")) == "sim"){
 				$cache = true;
-				$nomecache = $l->getmetadata("nomeoriginal");
-				if($nomecache == ""){
-					$nomecache = $layerName;
-				}
 			}
 		}
 	}
@@ -312,6 +310,7 @@ function salvaCacheImagem(){
 	if(!file_exists($c."/$y.png")){
 		mkdir($cachedir."/googlemaps/$layer/$z/$x",0777,true);
 		$img->saveImage($c."/$y.png");
+		chmod($c."/$y.png",0777);
 	}
 	return $nome;
 }

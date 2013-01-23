@@ -987,13 +987,10 @@ i3GEO.Interface = {
 						temp = camada.type === 0 ? opcoes.gutter = 20 : opcoes.gutter = 0;
 						temp = camada.transitioneffect === "nao" ? opcoes.transitionEffect = "null" : opcoes.transitionEffect = "resize";
 						//
-						//layers marcados com o metadata wms_tile com valor 1 sao inseridos com Layer.TileCache
+						//layers marcados com o metadata wmstile com valor 1 sao inseridos com Layer.TileCache
 						//
 						if(camada.connectiontype === 7 && camada.wmsurl !== "" && camada.usasld.toLowerCase() != "sim"){
 							urllayer = camada.wmsurl+"&r="+Math.random();
-							/**
-							 * TODO não funciona
-							 */
 							if(camada.wmstile == 1){
 								layer = new OpenLayers.Layer.TMS(camada.name, camada.wmsurl,{isBaseLayer:false,layername:camada.wmsname,type:'png'});
 							}
@@ -1009,17 +1006,40 @@ i3GEO.Interface = {
 							else{
 								temp = camada.type === 3 ? opcoes.singleTile = false : opcoes.singleTile = !(i3GEO.Interface.openlayers.TILES);
 							}
-							if(camada.wmstile == 1){
-								layer = new OpenLayers.Layer.TileCache(camada.name, urllayer,{LAYERS:camada.name,map_imagetype:i3GEO.Interface.OUTPUTFORMAT},opcoes);
+							if(opcoes.singleTile === true){
+								layer = new OpenLayers.Layer.WMS(
+									camada.name,
+									urllayer,
+									{
+										LAYERS:camada.name,
+										format:camada.wmsformat,
+										transparent:true
+									},
+									opcoes
+								);
+								//layer = new OpenLayers.Layer.TileCache(camada.name, urllayer,{LAYERS:camada.name,map_imagetype:i3GEO.Interface.OUTPUTFORMAT},opcoes);
 							}
 							else{
-								layer = new OpenLayers.Layer.WMS(camada.name, urllayer,{LAYERS:camada.name,map_imagetype:i3GEO.Interface.OUTPUTFORMAT},opcoes);
+								layer = new OpenLayers.Layer.TMS(
+									camada.name,
+									urllayer,
+									{
+										isBaseLayer:false,
+										serviceVersion:"&tms=",
+										type:"png",
+										layername:camada.name,
+										map_imagetype:i3GEO.Interface.OUTPUTFORMAT,
+										tileOrigin: new OpenLayers.LonLat(-180, -90)
+									},
+									opcoes
+								);
 							}
 						}
 					}
 					catch(e){}
-					if(camada.escondido.toLowerCase() === "sim")
-					{layer.transitionEffect = "null";}
+					if(camada.escondido.toLowerCase() === "sim"){
+						layer.transitionEffect = "null";
+					}
 					i3geoOL.addLayer(layer);
 				}
 				else
