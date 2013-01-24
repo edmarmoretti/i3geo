@@ -1105,7 +1105,8 @@ i3GEO.Interface = {
 					url = layers[i].url;
 					reg = new RegExp(parametro+"([=])+([a-zA-Z0-9_]*)");
 					layers[i].url = url.replace(reg,"");
-					eval("layers[i].mergeNewParams({"+parametro+":valor})");
+					//eval("layers[i].mergeNewParams({"+parametro+":valor})");
+					layers[i].url = layers[i].url+"&"+parametro+"="+valor;
 					layers[i].redraw();
 				}
 			}

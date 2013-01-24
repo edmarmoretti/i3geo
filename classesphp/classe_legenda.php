@@ -264,16 +264,12 @@ Desenha a imagem da legenda.
 return:
 string de variaveis no formato javascript que permitem montar a legenda.
 */
-	function legendaGrafica()
-	{
-		$numlayers = $this->$mapa->numlayers;
-		for ($i=0;$i < $numlayers;++$i)
-		{
-			$layer = $this->$mapa->getlayer($i);
-			if (($layer->data != "") && (strtoupper($layer->getmetadata("escondido")) != "SIM") && (strtoupper($layer->getmetadata("tema")) != "NAO"))
-			{
-				if ($layer->numclasses > 0)
-				{
+	function legendaGrafica(){
+		$numlayers = $this->mapa->numlayers;
+		for ($i=0;$i < $numlayers;++$i){
+			$layer = $this->mapa->getlayer($i);
+			if (($layer->data != "") && (strtoupper($layer->getmetadata("escondido")) != "SIM") && (strtoupper($layer->getmetadata("tema")) != "NAO")){
+				if ($layer->numclasses > 0){
 					$classe = $layer->getclass(0);
 					if (($classe->name == "") || ($classe->name == " "))
 					{$classe->set("name",$layer->getmetadata("tema"));}
