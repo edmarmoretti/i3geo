@@ -47,19 +47,19 @@ Class: i3GEOF.carouseltemas
 i3GEOF.carouseltemas = {
 	/*
 	Propriedade: numVisible
-	
+
 	N&uacute;mero de imagens vis&iacute;veis
 	*/
 	numVisible: 3,
 	/*
 	Propriedade: incluiAmpliacao
-	
+
 	Inclui ou n&atilde;o a imagem ampliada ao passar o mouse sobre a miniatura
 	*/
 	incluiAmpliacao: true,
 	/*
 	Variavel: aguarde
-	
+
 	Estilo do objeto DOM com a imagem de aguarde existente no cabe&ccedil;alho da janela.
 	*/
 	aguarde: "",
@@ -71,11 +71,11 @@ i3GEOF.carouseltemas = {
 	},
 	/*
 	Function: iniciaDicionario
-	
+
 	Carrega o dicion&aacute;rio e chama a fun&ccedil;&atilde;o que inicia a ferramenta
-	
+
 	O Javascript &eacute; carregado com o id i3GEOF.nomedaferramenta.dicionario_script
-	*/	
+	*/
 	iniciaDicionario: function(){
 		if(typeof(i3GEOF.carouseltemas.dicionario) === 'undefined'){
 			i3GEO.util.scriptTag(
@@ -87,14 +87,14 @@ i3GEOF.carouseltemas = {
 		else{
 			i3GEOF.carouseltemas.iniciaJanelaFlutuante();
 		}
-	},		
+	},
 	/*
 	Function: inicia
-	
+
 	Inicia a ferramenta. &Eacute; chamado por criaJanelaFlutuante
-	
+
 	Parametro:
-	
+
 	iddiv {String} - id do div que receber&aacute; o conteudo HTML da ferramenta
 	*/
 	inicia: function(iddiv){
@@ -115,7 +115,7 @@ i3GEOF.carouseltemas = {
 					max;
 				if(retorno.data == undefined)
 				{return;}
-				ngrupos = retorno.data.length;				
+				ngrupos = retorno.data.length;
 				for(i=0;i<ngrupos;i++){
 					grupo = retorno.data[i];
 					ntemasg = grupo.temas.length;
@@ -148,17 +148,17 @@ i3GEOF.carouseltemas = {
 				carousel.render();
 				carousel.show();
 			};
-			i3GEO.php.procurartemas(listaimg,"");
+			i3GEO.php.procurartemas2(listaimg,"");
 		}
 		catch(erro){i3GEO.janela.tempoMsg(erro);}
 	},
 	/*
 	Function: html
-	
+
 	Gera o c&oacute;digo html para apresenta&ccedil;&atilde;o das op&ccedil;&otilde;es da ferramenta
-	
+
 	Retorno:
-	
+
 	String com o c&oacute;digo html
 	*/
 	html:function(){
@@ -169,9 +169,9 @@ i3GEOF.carouseltemas = {
 	},
 	/*
 	Function: iniciaJanelaFlutuante
-	
+
 	Cria a janela flutuante para controle da ferramenta.
-	*/	
+	*/
 	iniciaJanelaFlutuante: function(){
 		var janela,divid,titulo,cabecalho,minimiza;
 		cabecalho = function(){};
@@ -201,11 +201,11 @@ i3GEOF.carouseltemas = {
 	},
 	/*
 	Function: insereTema
-	
+
 	Insere no mapa o tema escolhido
-	
+
 	Veja:
-	
+
 	<adtema>
 	*/
 	insereTema: function(codigotema){
@@ -222,7 +222,7 @@ i3GEOF.carouseltemas = {
 	},
 	/*
 	Function: amplia
-	
+
 	Mostra a imagem ampliada
 	*/
 	amplia: function(imagem){

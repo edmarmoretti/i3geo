@@ -1007,7 +1007,9 @@ i3GEO.configura = {
 			titulo:$trad("d20t"),
 			funcaoonclick:function(){
 				var temp = function(){
-					var url = (window.location.href.split("?"));
+					var url = window.location.href;
+					url = url.replace("#","");
+					url = url.split("?");
 					window.location.href = url[0]+"?"+i3GEO.configura.sid;
 				};
 				i3GEO.php.reiniciaMapa(temp);
