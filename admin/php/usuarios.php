@@ -117,6 +117,7 @@ switch (strtoupper($funcao))
 	break;
 	case "EXCLUIRPAPELUSUARIO":
 		retornaJSON(excluirPapelUsuario());
+		exit;
 	break;
 	case "LISTAPAPEIS":
 		retornaJSON(pegaDados("SELECT * from ".$esquemaadmin."i3geousr_papeis order by nome"));
