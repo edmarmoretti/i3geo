@@ -50,7 +50,7 @@ i3GEOF.listamapas = {
 			"",
 			"",
 			"",
-			$trad("x71"),
+			"Mapas",
 			"i3GEOF.listamapas",
 			false,
 			"hd",

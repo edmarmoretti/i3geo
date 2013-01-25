@@ -177,7 +177,8 @@ function alterarUsuarios()
 			if($senha == ""){
 				$senha = md5($idtemp);
 			}
-			$dbhw->query("INSERT INTO ".$esquemaadmin."i3geousr_usuarios (senha,nome_usuario,ativo) VALUES ('$senha','$idtemp',0)");
+			//echo "INSERT INTO ".$esquemaadmin."i3geousr_usuarios (senha,nome_usuario,ativo) VALUES ('$senha','$idtemp',0)";exit;
+			$dbhw->query("INSERT INTO ".$esquemaadmin."i3geousr_usuarios (login,senha,nome_usuario,ativo) VALUES ('$idtemp','$senha','$idtemp',0)");
 			$id = $dbh->query("SELECT id_usuario FROM ".$esquemaadmin."i3geousr_usuarios WHERE nome_usuario = '$idtemp'");
 			$id = $id->fetchAll();
 			$id = $id[0]['id_usuario'];

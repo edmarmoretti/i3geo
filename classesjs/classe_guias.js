@@ -176,7 +176,9 @@ i3GEO.guias = {
 					}
 					$i(onde).innerHTML = ins+"</div>";
 				};
-				$i(i3GEO.guias.CONFIGURA.mapas.idconteudo).innerHTML = "Aguarde...";
+				if($i(i3GEO.guias.CONFIGURA.mapas.idconteudo)){
+					$i(i3GEO.guias.CONFIGURA.mapas.idconteudo).innerHTML = "Aguarde...";
+				}
 				i3GEO.guias.mostra("mapas");
 				i3GEO.php.pegaMapas(pegaMapas);
 			}
@@ -502,6 +504,9 @@ i3GEO.guias = {
 		//
 		//se a guia clicada j&aacute; estiver aberta na interface com TABLET
 		//
+		if(!$i(i3GEO.guias.CONFIGURA[guia].idconteudo)){
+			return;
+		}
 		if($i(i3GEO.guias.CONFIGURA[guia].idconteudo).style.display === "block" && i3GEO.guias.TIPO === "tablet"){
 			i3GEO.guias.escondeGuias();
 			return;

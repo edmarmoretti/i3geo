@@ -420,7 +420,7 @@ i3GEO.php = {
 	pegaMapas: function(funcao){
 		i3GEO.php.verifica();
 		var p = i3GEO.configura.locaplic+"/classesphp/mapa_controle.php",
-			par = "funcao=pegaMapas&g_sid="+i3GEO.configura.sid;
+			par = "&map_file=&funcao=pegaMapas&g_sid="+i3GEO.configura.sid;
 		cpJSON.call(p,"pegaSistemas",funcao,par);
 	},
 	/*

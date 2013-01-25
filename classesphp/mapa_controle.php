@@ -108,13 +108,18 @@ error_reporting(0);
 //pega as variaveis passadas com get ou post
 //
 $tempo = microtime(1);
+
 include_once("pega_variaveis.php");
+
 $interfaceTemp = $interface;
 //
-//inicializa a sess&atilde;o
-//TEMA2SLD &eacute; usado por datadownload.htm
+//inicializa a sessao
+//algumas funcoes sao utilizadas por outros aplicativos e por isso
+//nao passam por essa critica
+//TEMA2SLD e usado por datadownload.htm
+//PEGAMAPAS e utilizado em varias funcoes
 //
-if ($funcao != "criaMapa" && $funcao != "TEMA2SLD"){
+if ($funcao != "criaMapa" && strtoupper($funcao) != "TEMA2SLD" && strtoupper($funcao) != "PEGAMAPAS"){
 	session_name("i3GeoPHP");
 	if (isset($g_sid) && $g_sid != "")
 	{session_id($g_sid);}
@@ -196,6 +201,7 @@ if (!isset($map_file))
 	ilegal();
 	exit;
 }
+
 include_once("classe_vermultilayer.php");
 include_once("classe_estatistica.php");
 if (isset($debug) && strtolower($debug) == "sim")
@@ -203,6 +209,7 @@ if (isset($debug) && strtolower($debug) == "sim")
 //
 //identifica qual a url do i3geo
 //
+
 $protocolo = explode("/",$_SERVER['SERVER_PROTOCOL']);
 $protocolo = strtolower($protocolo[0]) . '://'.$_SERVER['HTTP_HOST'];//$_SERVER['SERVER_NAME'] .":". $_SERVER['SERVER_PORT'];
 $urli3geo = str_replace("/classesphp/mapa_controle.php","",$protocolo.$_SERVER["PHP_SELF"]);
