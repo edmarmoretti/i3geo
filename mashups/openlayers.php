@@ -112,8 +112,7 @@ if(isset($fundo) && $fundo != ""){
 if(isset($temas)){
 	$objOpenLayers = array();
 }
-if($temas != "")
-{
+if($temas != ""){
 	$temas = str_replace(" ",",",$temas);
 	//$temas = strtolower($temas);
 	$temas = explode(",",$temas);
@@ -152,6 +151,7 @@ if($temas != "")
 					}
 				}
 				if($nomeMap != ""){
+
 					if(empty($layers)){
 						$layers = array();
 						$maptemp = @ms_newMapObj($nomeMap);
@@ -164,6 +164,7 @@ if($temas != "")
 					}
 					else{
 						$nomeLayer = str_replace(" ",",",$layers);
+						$layers = explode(",",$layers);
 						$maptemp = @ms_newMapObj($nomeMap);
 						//$temp = explode(",",$layers);
 						$layern = $maptemp->getLayerByName($layers[0]);
@@ -186,6 +187,7 @@ if($temas != "")
 		}
 	}
 }
+
 function ajuda(){
 	echo "
 <pre><b>

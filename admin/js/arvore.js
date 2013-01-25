@@ -28,7 +28,7 @@ Este programa &eacute; distribu&iacute;do na expectativa de que seja &uacute;til
 por&eacute;m, SEM NENHUMA GARANTIA; nem mesmo a garantia impl&iacute;cita
 de COMERCIABILIDADE OU ADEQUA&Ccedil;&Atilde;O A UMA FINALIDADE ESPEC&Iacute;FICA.
 Consulte a Licen&ccedil;a P&uacute;blica Geral do GNU para mais detalhes.
-Voc&ecirc; deve ter recebido uma cópia da Licen&ccedil;a P&uacute;blica Geral do
+Voc&ecirc; deve ter recebido uma copia da Licen&ccedil;a P&uacute;blica Geral do
 GNU junto com este programa; se n&atilde;o, escreva para a
 Free Software Foundation, Inc., no endere&ccedil;o
 59 Temple Street, Suite 330, Boston, MA 02111-1307 USA.
@@ -166,7 +166,7 @@ function temaIconMode()
 	{currentIconMode = newVal;}
 }
 //
-//adiciona os menus na �rvore
+//adiciona os menus na arvore
 //
 function montaNosMenus(dados,redesenha)
 {
@@ -194,14 +194,13 @@ function montaNosMenus(dados,redesenha)
 /*
 Function: montaNosGrupos
 
-Monta os n�s com os grupos e permite abrir os subgrupos
 
 <PEGASUBGRUPOS>
 */
 function montaNosGrupos(idmenu,no,dados,redesenha)
 {
 	var tempNodeR = null;
-	//pega os temas que ficam na raiz da �rvore
+	//pega os temas que ficam na raiz da arvore
 	if(!tree.getNodeByProperty("etiquetaTemasRaiz","menu_"+idmenu))
 	{montaTemasRaiz(no,dados,true);}
 	//pega os grupos do menu
@@ -291,8 +290,6 @@ function loadTemasData(node, fnLoadComplete)
 /*
 Function: montaNosSubgrupos
 
-Monta os n�s com os temas
-
 <PEGATEMAS>
 */
 function montaNosSubgrupos(idmenu,no,dados,redesenha)
@@ -336,7 +333,7 @@ function montaTemas(idmenu,no,dados,redesenha)
 	if(!tree.getNodeByProperty("etiquetaTemas",no.data.id_n2))
 	{
 		var d = {tipo:"etiqueta",etiquetaTemas:no.data.id_n2,html:"<i style=color:gray >Temas</i>"};
-		tempNodeR = new YAHOO.widget.HTMLNode(d, no, false,true);
+		tempNodeR = new YAHOO.widget.HTMLNode(d, no, true,true);
 		tempNodeR.isLeaf = false;
 		var conteudo = "<span onclick=\"novoTema('"+idmenu+"','"+no.data.id_n2+"')\" style=\"cursor:pointer;\"><img style=\"position:relative;top:2px\" src=\"../imagens/05.png\" /><i style=color:gray > Adicionar um novo</i></span>";
 		var d = {html:conteudo};
@@ -743,7 +740,7 @@ function registraPerfil(valor,id)
 /*
 Function: gravaDados
 
-Altera dados de um n�
+Altera dados de um no
 
 <ALTERARGRUPO>
 

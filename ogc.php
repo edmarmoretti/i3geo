@@ -72,17 +72,16 @@ if(!isset($temas) && isset($tema))
 //para operar como o Geoserver
 //
 if(isset($format) && strtolower($format) == "application/openlayers"){
-	if(!isset($layers))
-	{
+	//var_dump($_SERVER);exit;
+	if(!isset($layers)){
 		$layers = $temas;
 	}
-	$urln = __DIR__."/mashups/openlayers.php?temas=".$layers."&layers=".$layers."&mapext=".$bbox."&botoes=pan,zoombox,zoomtot,identifica";
-	if(!headers_sent())
-	{
+	$urln = dirname($_SERVER["PHP_SELF"])."/mashups/openlayers.php?temas=".$layers."&layers=".$layers."&mapext=".$bbox."&botoes=pan,zoombox,zoomtot,identifica";
+	if(!headers_sent()){
 		header("Location:".$urln);
 	}
-	else
-	{echo "<meta http-equiv='refresh' content='0;url=$urln'>";
+	else{
+		echo "<meta http-equiv='refresh' content='0;url=$urln'>";
 	}
 }
 //

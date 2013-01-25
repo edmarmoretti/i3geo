@@ -148,14 +148,16 @@ function adicionaNosPapeis(no,dados,redesenha)
 	}
 	for (var i=0, j=dados.length; i<j; i++)
 	{
-		var conteudo = "&nbsp;<img style=\"position:relative;cursor:pointer;top:0px\" onclick=\"excluir('papel','"+dados[i].id_usuario+"','"+dados[i].id_papel+"')\" title=excluir width='10px' heigth='10px' src=\"../imagens/01.png\" />";
-		if(dados[i].nome != "")
-		{conteudo += "&nbsp;<span><b>"+dados[i].nome+"</b> - "+dados[i].descricao+"</span>";}
-		else
-		{conteudo += "&nbsp;<span style=color:red >Edite para definir o papel!!!</span>";}
-		var d = {html:conteudo,id_nopapel:dados[i].id_usuario+"_"+dados[i].id_papel,tipo:"papel"};
-		var tempNode = new YAHOO.widget.HTMLNode(d, no, false,true);
-		tempNode.isLeaf = true;
+		if(!tree.getNodeByProperty("id_nopapel",dados[i].id_usuario+"_"+dados[i].id_papel)){
+			var conteudo = "&nbsp;<img style=\"position:relative;cursor:pointer;top:0px\" onclick=\"excluir('papel','"+dados[i].id_usuario+"','"+dados[i].id_papel+"')\" title=excluir width='10px' heigth='10px' src=\"../imagens/01.png\" />";
+			if(dados[i].nome != "")
+			{conteudo += "&nbsp;<span><b>"+dados[i].nome+"</b> - "+dados[i].descricao+"</span>";}
+			else
+			{conteudo += "&nbsp;<span style=color:red >Edite para definir o papel!!!</span>";}
+			var d = {html:conteudo,id_nopapel:dados[i].id_usuario+"_"+dados[i].id_papel,tipo:"papel"};
+			var tempNode = new YAHOO.widget.HTMLNode(d, no, false,true);
+			tempNode.isLeaf = true;
+		}
 	}
 	if(redesenha){tree.draw();}
 }
@@ -164,7 +166,7 @@ function adicionaNosUsuarios(dados,redesenha){
 	for (var i=0, j=dados.length; i<j; i++){
 		var conteudo = "&nbsp;<img style=\"position:relative;cursor:pointer;top:0px\" onclick=\"excluir('usuario','"+dados[i].id_usuario+"')\" title=excluir width='10px' heigth='10px' src=\"../imagens/01.png\" />";
 		conteudo += "&nbsp;<img style=\"position:relative;cursor:pointer;top:2px\" onclick=\"editar('usuario','"+dados[i].id_usuario+"')\" title=editar src=\"../imagens/06.png\" /><b>";
-		conteudo += "&nbsp;<img style=\"position:relative;cursor:pointer;top:2px;width:25px;\" onclick=\"emailsenha('"+dados[i].id_usuario+"')\" title='enviar senha' src=\"../imagens/07.png\" /><b>";
+		conteudo += "&nbsp;<img style=\"position:relative;cursor:pointer;top:0px;width:25px;\" onclick=\"emailsenha('"+dados[i].id_usuario+"')\" title='enviar senha' src=\"../imagens/07.png\" /><b>";
 		if(dados[i].nome_usuario && dados[i].nome_usuario != "")
 		{conteudo += "&nbsp;<span>"+dados[i].nome_usuario+" - "+dados[i].login+" - ativo: "+dados[i].ativo+"</span>";}
 		else
@@ -310,7 +312,7 @@ function emailsenha(id_usuario)
 /*
 Function: gravaDados
 
-Altera dados de um elemento do Atlas
+Altera dados de um elemento do cadastro
 
 <ALTERARATLAS>
 
