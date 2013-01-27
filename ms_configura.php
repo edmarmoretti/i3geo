@@ -220,7 +220,7 @@ if (strtoupper(substr(PHP_OS, 0, 3) == 'WIN'))
 
 	*/
 	$i3geomaster = array(
-			array("usuario"=>"admin", "senha"=>"admin")
+			array("usuario"=>"admin", "senha"=>"adminx")
 	);
 	/*
 	Variable: dir_tmp
