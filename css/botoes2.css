@@ -203,6 +203,14 @@
     height: 15px;
     width: 15px;
 }
+.ticDownload
+{
+    background-image: url("../imagens/visual/default/sprite.png");
+    background-position: 0 -1124px;
+    background-repeat: no-repeat;
+    height: 15px;
+    width: 15px;
+}
 .carregarKml
 {
 	background-image:URL('../imagens/visual/default/sprite2.png');

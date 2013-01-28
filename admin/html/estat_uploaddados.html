@@ -48,24 +48,27 @@ body {
 			<div id="i3GEOadminUploaddadosVariaveis" style="left: -5px;"></div>
 			<div id="i3GEOadminUploaddadosMedidas" style="left: -5px;"></div>
 			<br>
-			<form id=i3GEOupload target="i3GEOuploadiframe" action="../php/metaestat_uploaddados_submit.php" onsubmit="i3GEOadmin.uploaddados.upload.submit();"
-				method="post" ENCTYPE="multipart/form-data">
-				<p class="paragrafo">
-					<input class=digitar type="file" size=42 name="i3GEOuploadArquivo"
-						style="top: 0px; left: 0px; cursor: pointer;">
-				</p>
-				<input type="hidden" name="MAX_FILE_SIZE" value="1000000">
-				<input type="submit" value="Enviar" >
-			</form>
-			<br>
-			<div id="i3GEOadminEditorColunas" style="left: -5px;"></div>
-			<iframe id="i3GEOuploadiframe" name="i3GEOuploadiframe" src="#" style="width:0;height:0;border:0px solid #fff;"></iframe>
+			<fieldset>
+				<legend>Upload de valores (arquivo CSV)</legend>
+				<form id=i3GEOupload target="i3GEOuploadiframe" action="../php/metaestat_uploaddados_submit.php" onsubmit="i3GEOadmin.uploaddados.upload.submit();"
+					method="post" ENCTYPE="multipart/form-data">
+					<p class="paragrafo">
+						<input class=digitar type="file" size=42 name="i3GEOuploadArquivo"
+							style="top: 0px; left: 0px; cursor: pointer;">
+					</p>
+					<input type="hidden" name="MAX_FILE_SIZE" value="1000000">
+					<input type="submit" value="Enviar" >
+				</form>
+				<br>
+				<div id="i3GEOadminEditorColunas" style="left: -5px;"></div>
+				<iframe id="i3GEOuploadiframe" name="i3GEOuploadiframe" src="#" style="width:0;height:0;border:0px solid #fff;"></iframe>
+			</fieldset>
 		</div>
 	</div>
 	<div id=logajax style="display: block"></div>
 	<script>
 		/*
-		 Title: Upload de dados do sistema de metadados estat&iacute;sticos
+		 Upload de dados do sistema de metadados estat&iacute;sticos
 
 		 Licenca:
 

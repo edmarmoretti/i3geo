@@ -238,6 +238,11 @@ class Metaestat{
 	function sqlMedidaVariavel($id_medida_variavel,$todasascolunas,$agruparpor="",$tipolayer="polygon",$codigo_tipo_regiao = ""){
 		$filtro = false;
 		$dados = $this->listaMedidaVariavel("",$id_medida_variavel);
+		$pp = $this->listaParametro($id_medida_variavel,"",0);
+		foreach($pp as $p){
+			$parametrosMedida[] = $p["coluna"];
+		}
+		//var_dump($parametrosMedida);exit;
 		$titulo = $dados["nomemedida"];
 		$dadosgeo = $this->listaTipoRegiao($dados["codigo_tipo_regiao"]);
 		//indica se os dados sao agregados a uma regiao de nivel superior
@@ -354,7 +359,13 @@ class Metaestat{
 				else{
 					$sqlgeo .= " FROM (SELECT ".$dados["colunavalor"].",".$dados["colunaidgeo"].",".$dados["colunaidunico"]." FROM ".$dados["esquemadb"].".".$dados["tabela"] ." __dadosfiltro__ ) as d, ".$dadosgeo["esquemadb"].".".$dadosgeo["tabela"]." as g";
 				}
-				$sql .= " FROM (SELECT ".$dados["colunavalor"].",".$dados["colunaidgeo"]." FROM ".$dados["esquemadb"].".".$dados["tabela"] ." __dadosfiltro__ ) as d ";
+				if(count($parametrosMedida) > 0){
+					$parametrosMedida = implode(",",$parametrosMedida).",";
+				}
+				else{
+					$parametrosMedida = "";
+				}
+				$sql .= " FROM (SELECT $parametrosMedida".$dados["colunavalor"].",".$dados["colunaidgeo"]." FROM ".$dados["esquemadb"].".".$dados["tabela"] ." __dadosfiltro__ ) as d ";
 			}
 		}
 		else{
@@ -679,7 +690,6 @@ class Metaestat{
 		elseif(!empty($filtro)){
 			$sqlf .= " WHERE ".$filtro;
 		}
-		//echo $sqlf;exit;
 		$metaVariavel = $this->listaMedidaVariavel("",$id_medida_variavel);
 		if(!empty($metaVariavel["codigo_estat_conexao"])){
 			$c = $this->listaConexao($metaVariavel["codigo_estat_conexao"],true);
@@ -1414,7 +1424,7 @@ class Metaestat{
 	/*
 	 Function: listaParametro
 
-	Lista as variaveis cadastradas ou uma unica variavel
+	Lista os parametros cadastradas ou uma unica variavel
 
 	Parametros:
 
@@ -1422,7 +1432,7 @@ class Metaestat{
 
 	$id_parametro_variavel - opcional
 	*/
-	function listaParametro($id_medida_variavel,$id_parametro_medida=""){
+	function listaParametro($id_medida_variavel,$id_parametro_medida="",$id_pai=""){
 		$sql = "SELECT i3geoestat_parametro_medida.*,i3geoestat_medida_variavel.* ";
 		$sql .= "FROM ".$this->esquemaadmin."i3geoestat_parametro_medida ";
 		$sql .= "INNER JOIN ".$this->esquemaadmin."i3geoestat_medida_variavel ";
@@ -1435,6 +1445,9 @@ class Metaestat{
 		}
 		else{
 			$sql .= "WHERE i3geoestat_parametro_medida.id_parametro_medida = $id_parametro_medida ";
+		}
+		if($id_pai != ""){
+			$sql .= " AND id_pai = $id_pai";
 		}
 		//echo $sql;exit;
 		return $this->execSQL($sql,$id_parametro_medida);

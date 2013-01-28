@@ -163,8 +163,8 @@ i3GEOadmin.uploaddados = {
 			i3GEO.php.listaVariavel(i3GEOadmin.uploaddados.variaveis.combo,"i3geo_metaestat");
 		},
 		combo: function(dados){
-			$i(i3GEOadmin.uploaddados.variaveis.onde).innerHTML = "<p>Escolha a vari&aacute;vel que receberá os dados</p>" +
-				i3GEOF.metaestat.principal.comboVariaveis(dados,"i3GEOadminEditorVariaveis_combo","i3GEOadmin.uploaddados.medidas.lista()");
+			$i(i3GEOadmin.uploaddados.variaveis.onde).innerHTML = "<p>Escolha a vari&aacute;vel</p>" +
+				i3GEOF.metaestat.principal.comboVariaveis(dados,"i3GEOadminEditorVariaveis_combo","i3GEOadmin.uploaddados.medidas.lista()","","nao");
 		}
 	},
 	medidas:{

@@ -1072,6 +1072,12 @@ switch (strtoupper($funcao))
 			header("Content-type: application/xml");
 			echo($m->formataXML($dados));
 		}
+		if($formato == "csv"){
+			require_once(__DIR__."/../../pacotes/parsecsv/parsecsv.lib.php");
+			$csv = new parseCSV();
+			$csv->titles = array_keys($dados[0]);
+			$csv->output(true, 'mvar'.$id_medida_variavel.'_'.date('dmY').'.csv', $dados);
+		}
 		exit;
 	break;
 	/*

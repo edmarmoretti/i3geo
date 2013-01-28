@@ -240,7 +240,8 @@ i3GEOF.editorlimites = {
 				lista.push(coordenadas);
 			}
 		}
-		return {"tipo":tipo,"coordenadas":lista};
+		p = {"tipo":tipo,"coordenadas":lista};
+		return p;
 	},
 	toWKT: function(obj){
 		var wkt = new Wkt.Wkt();
