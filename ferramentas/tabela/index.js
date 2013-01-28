@@ -1589,6 +1589,7 @@ i3GEOF.tabela = {
 	*/
 	relatorioTabela: function(){
 		try{
+			$i("i3GEOtabelatiporelh").value = "";
 			$i("i3GEOtabelaarearelh").value = $i("i3GEOtabelacalculaarea").checked;
 			$i("i3GEOtabelastatrelh").value = $i("i3GEOtabelacalculaestat").checked;
 			$i("i3GEOtabelaexcluirvalorh").value = $i("i3GEOtabelaexcestat").value;
@@ -1600,7 +1601,7 @@ i3GEOF.tabela = {
 				listaordem = [],
 				listanomes = [],
 				nome,ordem,
-				i,
+				i,temp,
 				n = inputs.length;
 			for (i=0;i<n; i++){
 				if (inputs[i].type === "checkbox" && inputs[i].checked == true){
@@ -1617,8 +1618,10 @@ i3GEOF.tabela = {
 			$i("i3GEOtabelaordemrel").value=listaordem;
 			$i("i3GEOtabelanomesrelh").value=listanomes;
 			$i("i3GEOtabelaitensrelh").value=listai;
+			temp = $i("i3GEOtabelarelatorio").action;
 			$i("i3GEOtabelarelatorio").action += "?ext="+i3GEO.parametros.mapexten;
 			$i("i3GEOtabelarelatorio").submit();
+			$i("i3GEOtabelarelatorio").action = temp;
 		}catch(e){i3GEO.janela.tempoMsg(e);}
 	},
 	/*
@@ -1639,7 +1642,7 @@ i3GEOF.tabela = {
 				listai = [],
 				listanomes = [],
 				nome,
-				i,
+				i,temp,
 				n = inputs.length;
 			for (i=0;i<n; i++)
 			{
@@ -1652,8 +1655,10 @@ i3GEOF.tabela = {
 			}
 			$i("i3GEOtabelanomesrelh").value=listanomes;
 			$i("i3GEOtabelaitensrelh").value=listai;
+			temp = $i("i3GEOtabelarelatorio").action;
 			$i("i3GEOtabelarelatorio").action += "?ext="+i3GEO.parametros.mapexten;
 			$i("i3GEOtabelarelatorio").submit();
+			$i("i3GEOtabelarelatorio").action = temp;
 		}catch(e){i3GEO.janela.tempoMsg(e);}
 	}
 };
