@@ -86,11 +86,32 @@ i3GEOadmin.editor = {
 							temp += core_comboObjeto(dados,"tabela","tabela");
 							temp += "</select>";
 							temp += "" +
-								"<p><input type=button value='Mostrar os dados' id='i3GEOadmintabelaMostrar' onclick='i3GEOadmin.editor.tabela.mostrar()'/>" +
-								"<input type=button value='Criar uma nova tabela' id='i3GEOadmintabelaCriar' onclick='i3GEOadmin.editor.tabela.criar()'/>" +
-								"<input type=button value='Alterar nome atual' id='i3GEOadmintabelaAlterarNome' onclick='i3GEOadmin.editor.tabela.alterarNome()'/>" +
-								"<input type=button value='Copiar para' id='i3GEOadmintabelaCopiar' onclick='i3GEOadmin.editor.tabela.copiar()'/>";
+								"<p><input type=button value='Relat&oacute;rio' id='i3GEOadmintabelaMostrar' />" +
+								"<input type=button value='CSV' id='i3GEOadmintabelaCsv'/>" +
+								"<input type=button value='Criar uma nova tabela' id='i3GEOadmintabelaCriar' />" +
+								"<input type=button value='Alterar nome atual' id='i3GEOadmintabelaAlterarNome' />" +
+								"<input type=button value='Copiar para' id='i3GEOadmintabelaCopiar' />";
 							$i(i3GEOadmin.editor.tabela.onde).innerHTML = temp+"</fieldset>";
+							new YAHOO.widget.Button(
+								"i3GEOadmintabelaMostrar",
+								{onclick:{fn: i3GEOadmin.editor.tabela.mostrar}}
+							);
+							new YAHOO.widget.Button(
+								"i3GEOadmintabelaCsv",
+								{onclick:{fn: i3GEOadmin.editor.tabela.csv}}
+							);
+							new YAHOO.widget.Button(
+								"i3GEOadmintabelaCriar",
+								{onclick:{fn: i3GEOadmin.editor.tabela.criar}}
+							);
+							new YAHOO.widget.Button(
+								"i3GEOadmintabelaAlterarNome",
+								{onclick:{fn: i3GEOadmin.editor.tabela.alterarNome }}
+							);
+							new YAHOO.widget.Button(
+								"i3GEOadmintabelaCopiar",
+								{onclick:{fn: i3GEOadmin.editor.tabela.copiar }}
+							);
 							core_carregando("desativa");
 							$i(i3GEOadmin.editor.coluna.onde).innerHTML = "";
 						}
@@ -242,7 +263,15 @@ i3GEOadmin.editor = {
 			},
 			nomeEsquema = $i("i3GEOadminesquema").value;
 			core_carregando("obtendo dados...");
-			core_makeRequest("../php/metaestat.php?funcao=obtemDadosTabelaDB&formato=json&nome_tabela="+$i("i3GEOadmintabela").value+"&nome_esquema="+nomeEsquema+"&codigo_estat_conexao="+$i("i3GEOadmincodigo_estat_conexao").value,callback);
+			core_makeRequest("../php/metaestat.php?funcao=obtemDadosTabelaDB&geo=nao&formato=json&nome_tabela="+$i("i3GEOadmintabela").value+"&nome_esquema="+nomeEsquema+"&codigo_estat_conexao="+$i("i3GEOadmincodigo_estat_conexao").value,callback);
+		},
+		csv: function(){
+			if($i("i3GEOadmintabela").value == ""){
+				alert("Escolha a tabela");
+				return;
+			}
+			nomeEsquema = $i("i3GEOadminesquema").value;
+			window.open("../php/metaestat.php?funcao=obtemDadosTabelaDB&geo=nao&formato=csv&nome_tabela="+$i("i3GEOadmintabela").value+"&nome_esquema="+nomeEsquema+"&codigo_estat_conexao="+$i("i3GEOadmincodigo_estat_conexao").value);
 		},
 		verificaExiste: function(valor){
 			var combo = $i("i3GEOadmintabela"),
@@ -268,9 +297,17 @@ i3GEOadmin.editor = {
 							temp += core_comboObjeto(dados,"","");
 							temp += "</select>";
 							temp += "" +
-									"<p><input type=button value='Adicionar uma nova coluna' id='i3GEOadmincolunaCriar' onclick='i3GEOadmin.editor.coluna.criar()'/>" +
-									"<input type=button value='Alterar o nome atual' id='i3GEOadmincolunaAlterarNome' onclick='i3GEOadmin.editor.coluna.alterarNome()'/>";
+									"<p><input type=button value='Adicionar uma nova coluna' id='i3GEOadmincolunaCriar' />" +
+									"<input type=button value='Alterar o nome atual' id='i3GEOadmincolunaAlterarNome' />";
 							$i(i3GEOadmin.editor.coluna.onde).innerHTML = temp+"</fieldset>";
+							new YAHOO.widget.Button(
+								"i3GEOadmincolunaCriar",
+								{onclick:{fn: i3GEOadmin.editor.coluna.criar}}
+							);
+							new YAHOO.widget.Button(
+								"i3GEOadmincolunaAlterarNome",
+								{onclick:{fn: i3GEOadmin.editor.coluna.alterarNome}}
+							);
 							core_carregando("desativa");
 						}
 						catch(e){core_handleFailure(e,o.responseText);}

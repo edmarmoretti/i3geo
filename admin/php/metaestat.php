@@ -1326,7 +1326,17 @@ switch (strtoupper($funcao))
 	break;
 	case "OBTEMDADOSTABELADB":
 		$m = new Metaestat();
-		retornaJSON($m->obtemDadosTabelaDB($codigo_estat_conexao,$nome_esquema,$nome_tabela));
+		if($formato == "json"){
+			retornaJSON($m->obtemDadosTabelaDB($codigo_estat_conexao,$nome_esquema,$nome_tabela,$geo));
+		}
+		if($formato == "csv"){
+			$dados = $m->obtemDadosTabelaDB($codigo_estat_conexao,$nome_esquema,$nome_tabela,$geo);
+			require_once(__DIR__."/../../pacotes/parsecsv/parsecsv.lib.php");
+			$csv = new parseCSV();
+			//$csv->encoding('UTF-16', 'UTF-8');
+			$csv->titles = $dados["nomescolunas"];
+			$csv->output(true, 'mvar'.$nome_tabela.'_'.date('dmY').'.csv', $dados["linhas"]);
+		}
 		exit;
 	break;
 	/*

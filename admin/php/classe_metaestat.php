@@ -1611,18 +1611,29 @@ class Metaestat{
 	function descreveColunasTabela($codigo_estat_conexao,$nome_esquema,$nome_tabela){
 		return $this->execSQLDB($codigo_estat_conexao,"SELECT a.attnum,a.attname AS field,t.typname AS type,a.attlen AS length,a.atttypmod AS lengthvar,a.attnotnull AS notnull,p.nspname as esquema FROM pg_class c,pg_attribute a,pg_type t,pg_namespace p WHERE c.relname = '$nome_tabela' and p.nspname = '$nome_esquema' and a.attnum > 0 and a.attrelid = c.oid and a.atttypid = t.oid and c.relnamespace = p.oid ORDER BY a.attname");
 	}
-	function obtemDadosTabelaDB($codigo_estat_conexao,$nome_esquema,$nome_tabela){
-		$colunas = $this->descreveColunasTabela($codigo_estat_conexao, $nome_esquema, $nome_tabela);
-		$dados = $this->execSQLDB($codigo_estat_conexao,"SELECT * from ".$nome_esquema.".".$nome_tabela );
+	function obtemDadosTabelaDB($codigo_estat_conexao,$nome_esquema,$nome_tabela,$geo="nao"){
+		$desccolunas = $this->descreveColunasTabela($codigo_estat_conexao, $nome_esquema, $nome_tabela);
+		$colunas = array();
+		foreach($desccolunas as $d){
+			if($geo == "sim"){
+				$colunas[] = $d["field"];
+			}
+			else{
+				if($d["type"] != "geometry" && $d["type"] != "geography"){
+					$colunas[] = $d["field"];
+				}
+			}
+		}
+		$dados = $this->execSQLDB($codigo_estat_conexao,"SELECT ".implode(",",$colunas)." from ".$nome_esquema.".".$nome_tabela );
 		$linhas = array();
 		foreach($dados as $d){
 			$l = array();
 			foreach($colunas as $c){
-				$l[] = $d[$c["field"]];
+				$l[] = $d[$c];
 			}
 			$linhas[] = $l;
 		}
-		return array("colunas"=>$colunas,"linhas"=>$linhas);
+		return array("nomescolunas"=>$colunas,"colunas"=>$desccolunas,"linhas"=>$linhas);
 	}
 	function relatorioCompleto($codigo_variavel="",$dadosGerenciais="nao"){
 		$dados = array();
