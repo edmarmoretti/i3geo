@@ -1441,6 +1441,7 @@ switch (strtoupper($funcao))
 		fclose($handle);
 
 		$ziper = new zipfile();
+
 		$ziper->addFile($contentsshp, basename($shp).'.shp');
 		$ziper->addFile($contentsshx, basename($shp).'.shx');
 		$ziper->addFile($contentsdbf, basename($shp).'.dbf');

@@ -2128,7 +2128,7 @@ class Metaestat{
 		foreach($dados["colunas"] as $t){
 			$temp = strtoupper($t["field"]);
 			if(strlen($temp) > 10){
-				$temp = substr($t["field"],0,8).($cni++);
+				$temp = substr($temp,0,8).($cni++);
 			}
 			if($t["type"] == "varchar" || $t["type"] == "char" || $t["type"] == "character varying" || $t["type"] == "character" || $t["type"] == "text"){
 				$def[] = array($temp,"C","254");

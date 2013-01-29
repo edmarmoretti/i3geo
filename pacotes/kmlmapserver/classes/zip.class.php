@@ -95,7 +95,9 @@ class zipfile
      */
     function addFile($data, $name, $time = 0)
     {
-        $name     = str_replace('\\', '/', $name);
+    	//adicionado por edmar moretti
+    	$data = preg_replace('/\x{EF}\x{BB}\x{BF}/','',$data);
+    	$name     = str_replace('\\', '/', $name);
 
         $dtime    = dechex($this->unix2DosTime($time));
         $hexdtime = '\x' . $dtime[6] . $dtime[7]
@@ -219,7 +221,7 @@ class zipfile
      */
     function output($file)
     {
-        $fp=fopen($file,"w");
+        $fp=fopen($file,"wb");
         fwrite($fp,$this->file());
         fclose($fp);
     }
