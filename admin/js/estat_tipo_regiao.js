@@ -54,8 +54,12 @@ function montaTabela(dados){
 		formatRel = function(elCell, oRecord, oColumn){
 			elCell.innerHTML = "<div class=editar style='text-align:center' ></div>";
 		},
+		formatShp = function(elCell, oRecord, oColumn){
+			elCell.innerHTML = "<div class=download style='text-align:center' ></div>";
+		},
 		myColumnDefs = [
 		                {key:"excluir",label:"excluir",formatter:formatExclui},
+		                {key:"shapefile",label:"shapefile",formatter:formatShp},
 		                {key:"rel",label:"agrega&ccedil;&otilde;es",formatter:formatRel},
 		                {key:"mais",label:"editar",formatter:formatMais},
 		                {label:"c&oacute;digo",key:"codigo_tipo_regiao", formatter:formatTexto},
@@ -118,6 +122,13 @@ function montaTabela(dados){
 					$clicouId = record.getData('codigo_tipo_regiao');
 					$recordid = record.getId();
 					pegaDadosAgregacoes(record.getData('codigo_tipo_regiao'));
+				}
+				if (column.key == 'shapefile'){
+					if(window.confirm("Confirma o download?")){
+						record = this.getRecord(target);
+						sUrl = "../php/metaestat.php?funcao=regiao2shp&codigo_tipo_regiao="+record.getData('codigo_tipo_regiao');
+						window.open(sUrl,"blank");
+					}
 				}
 			}
 		);

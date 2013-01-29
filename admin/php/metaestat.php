@@ -83,7 +83,8 @@ $funcoesEdicao = array(
 	"INSERIRDADOS",
 	"MANTEMDADOSREGIAO",
 	"SALVAATRIBUTOSMEDIDAVARIAVEL",
-	"EXCLUIATRIBUTOSMEDIDAVARIAVEL"
+	"EXCLUIATRIBUTOSMEDIDAVARIAVEL",
+	"REGIAO2SHP"
 );
 if(in_array(strtoupper($funcao),$funcoesEdicao)){
 	//se a funcao esta no array eh feita a verificacao se o usuario esta logado e se ele esta em um grupo que
@@ -1421,6 +1422,33 @@ switch (strtoupper($funcao))
 		$resultado = $m->excluiAtributosMedidaVariavel($id_medida_variavel,$codigo_tipo_regiao,$identificador_regiao,$id);
 		retornaJSON($resultado);
 		exit;
+	break;
+	case "REGIAO2SHP":
+		$m = new Metaestat();
+		$shp = $m->regiao2shp($codigo_tipo_regiao);
+		include(__DIR__."/../../pacotes/kmlmapserver/classes/zip.class.php");
+
+		$handle = fopen($shp.".shp", "r");
+		$contentsshp = fread($handle, filesize($shp.".shp"));
+		fclose($handle);
+
+		$handle = fopen($shp.".shp", "r");
+		$contentsdbf = fread($handle, filesize($shp.".dbf"));
+		fclose($handle);
+
+		$handle = fopen($shp.".shp", "r");
+		$contentsshx = fread($handle, filesize($shp.".shx"));
+		fclose($handle);
+
+		$ziper = new zipfile();
+		$ziper->addFile($contentsshp, basename($shp).'.shp');
+		$ziper->addFile($contentsshx, basename($shp).'.shx');
+		$ziper->addFile($contentsdbf, basename($shp).'.dbf');
+		$arq = $shp.".zip";
+		$ziper->output($arq);
+		$dirtmp = basename(dirname($arq));
+		$d = "/ms_tmp/".basename($arq);
+		echo "<html><script> window.location.assign('$d'); </script></html>";
 	break;
 }
 ?>

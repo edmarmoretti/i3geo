@@ -46,49 +46,51 @@ if (isset($_FILES['i3GEOuploaddbffile']['name']))
 			if($i3GEOuploaddbftipoarquivo != "dbf"){
 				if($i3GEOuploaddbftipoarquivo == "csvpv"){$separador = ";";}
 				if($i3GEOuploaddbftipoarquivo == "csvv"){$separador = ",";}
-				include_once("../../pacotes/classesphp/class.CSVHandler.php");
 				include_once "../../pacotes/phpxbase/api_conversion.php";
-				$csv = new CSVHandler($dirmap."/".$_FILES['i3GEOuploaddbffile']['name'],$separador,"record");
-				$dados = $csv->ReadCSV();
+				include_once("../../pacotes/parsecsv/parsecsv.lib.php");
+				$csv = new parseCSV();
+				$csv->delimiter = $separador;
+				$dados = $csv->parse($dirmap."/".$_FILES['i3GEOuploaddbffile']['name']);
 				$conta = 0;
 				$xy = array();
-				foreach($csv->HeaderData as $i)
-				{	
+				$colunas = array_keys($csv->data[0]);
+				foreach($colunas as $i){
 					$i = strtoupper($i);
 					$i = trim($i);
-					if(($i != $nomex) && ($i != $nomey))
-					{
+					if(($i != $nomex) && ($i != $nomey)){
 						$i = str_replace("_","",$i);
 						$i = str_replace("-","",$i);
-						$i= substr($i, 0, 7);
-						$def[] = array($i.$conta,"C","255");
+						if(strlen($i) > 10){
+							$i= substr($i, 0, 7).$conta++;
+						}
+						$def[] = array($i,"C","255");
 					}
-					else
-					{$def[] = array($i,"C","255");}
-					$conta++;
+					else{
+						$def[] = array($i,"C","255");
+					}
 				}
-				if(!function_exists("dbase_create"))
-				{xbase_create($dirmap."/".$nome.".dbf", $def);}
-				else
-				{dbase_create($dirmap."/".$nome.".dbf", $def);}				
-				$db=xbase_open($dirmap."/".$nome.".dbf",2);		
-				foreach($dados as $d){
+				if(!function_exists("dbase_create")){
+					xbase_create($dirmap."/".$nome.".dbf", $def);
+				}
+				else{
+					dbase_create($dirmap."/".$nome.".dbf", $def);
+				}
+				$db=xbase_open($dirmap."/".$nome.".dbf",2);
+				foreach($csv->data as $d){
 					$reg = array();
-					foreach($d as $i)
-					{$reg[] = $i;}
-					xbase_add_record($db,$reg);	
+					foreach($d as $i){
+						$reg[] = $i;
+					}
+					xbase_add_record($db,$reg);
 				}
 				xbase_close($db);
 			}
 			echo "<p>Arquivo enviado. Criando shape file...</p>";
-
 			$novoshpf = ms_newShapefileObj($nomeshp, MS_SHP_POINT);
 			$novoshpf->free();
 			$shapefileObj = ms_newShapefileObj($nomeshp,-2);
-			if($i3GEOuploaddbftipoarquivo != "dbf")
-			{
-				foreach($dados as $d)
-				{
+			if($i3GEOuploaddbftipoarquivo != "dbf"){
+				foreach($csv->data as $d){
 					$poPoint = ms_newpointobj();
 					$poPoint->setXY($d[$i3GEOuploaddbfnomex],$d[$i3GEOuploaddbfnomey]);
 					$shapefileObj->addpoint($poPoint);
@@ -108,7 +110,7 @@ if (isset($_FILES['i3GEOuploaddbffile']['name']))
 					$shapefileObj->addpoint($poPoint);
 				}
 			}
-			$shapefileObj->free();	
+			$shapefileObj->free();
 			$novolayer = ms_newLayerObj($mapa);
 			$novolayer->set("data",$nomeshp);
 			$novolayer->set("name",basename($nomeshp));
@@ -116,7 +118,7 @@ if (isset($_FILES['i3GEOuploaddbffile']['name']))
 			$novolayer->setmetadata("DOWNLOAD","SIM");
 			$novolayer->setmetadata("TEMALOCAL","SIM");
 			$novolayer->setmetadata("CLASSE","SIM");
-			$novolayer->setmetadata("TEXTO","NAO");			
+			$novolayer->setmetadata("TEXTO","NAO");
 			$novolayer->set("type",MS_LAYER_POINT);
 			$novolayer->setfilter("");
 			$classe = ms_newClassObj($novolayer);

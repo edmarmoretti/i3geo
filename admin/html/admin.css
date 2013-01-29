@@ -134,6 +134,15 @@ input {
 	height: 20px;
 }
 
+.download {
+	background-image: URL('../imagens/download.png');
+	background-repeat: no-repeat;
+	background-position: 0px 0px;
+	cursor: pointer;
+	width: 20px;
+	height: 20px;
+}
+
 .sobe {
 	background-image: URL('../imagens/34.png');
 	background-repeat: no-repeat;

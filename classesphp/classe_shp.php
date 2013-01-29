@@ -86,37 +86,38 @@ $tema - nome do tema
 
 $ext - extensao geogr&aacute;fica que ser&aacute; aplicada ao mapa
 */
-	function __construct($map_file,$tema="",$locaplic="",$ext="")
-	{
-  		if (!function_exists('ms_newMapObj')) {return false;}
-  		if($locaplic == ""){
-  			$locaplic = __DIR__."/..";
-  		}
-  		if(file_exists($locaplic."/funcoes_gerais.php")){
-  			include_once($locaplic."/funcoes_gerais.php");
-  		}
-  		else{
-  			include_once(__DIR__."/funcoes_gerais.php");
-  		}
-  		$this->v = versao();
+	function __construct($map_file="",$tema="",$locaplic="",$ext=""){
+		if (!function_exists('ms_newMapObj')){return false;}
+		if($locaplic == ""){
+			include (__DIR__."/../ms_configura.php");
+		}
+		if(!function_exists("corRGB")){
+			include_once(__DIR__."/funcoes_gerais.php");
+		}
+		$this->v = versao();
 		$this->v = $this->v["principal"];
 		$this->dbaseExiste = false;
 		if(function_exists("dbase_create"))
 		{$this->dbaseExiste = true;}
+		$this->locaplic = $locaplic;
 
-  		$this->locaplic = $locaplic;
-  		$this->mapa = ms_newMapObj($map_file);
-  		$this->arquivo = $map_file;
-  		$this->tema = $tema;
-  		if($tema != "" && @$this->mapa->getlayerbyname($tema))
-  		{
-  			$this->layer = $this->mapa->getlayerbyname($tema);
-  		}
-  		$this->nome = $tema;
-		if($ext && $ext != ""){
-			$e = explode(" ",$ext);
-			$extatual = $this->mapa->extent;
-			$extatual->setextent((min($e[0],$e[2])),(min($e[1],$e[3])),(max($e[0],$e[2])),(max($e[1],$e[3])));
+		if($map_file != ""){
+			$this->mapa = ms_newMapObj($map_file);
+			$this->arquivo = $map_file;
+			$this->tema = $tema;
+			if($tema != "" && @$this->mapa->getlayerbyname($tema)){
+				$this->layer = $this->mapa->getlayerbyname($tema);
+			}
+			$this->nome = $tema;
+			if($ext && $ext != ""){
+				$e = explode(" ",$ext);
+				$extatual = $this->mapa->extent;
+				$extatual->setextent((min($e[0],$e[2])),(min($e[1],$e[3])),(max($e[0],$e[2])),(max($e[1],$e[3])));
+			}
+		}
+		else{
+			$this->mapa = "";
+			$this->arquivo = $dir_tmp."/".nomeRandomico();
 		}
 	}
 /*
@@ -126,8 +127,10 @@ Salva o mapfile atual
 */
  	function salva()
  	{
-	  	if (connection_aborted()){exit();}
-	  	$this->mapa->save($this->arquivo);
+		if (connection_aborted()){
+			exit();
+		}
+		$this->mapa->save($this->arquivo);
 	}
 /*
 function: criaSHPvazio
@@ -136,17 +139,30 @@ Cria um shape file do tipo pontual vazio no diretório local
 
 Parameter:
 
-$tituloTema - t&iacute;tulo do novo tema
+$tituloTema - (opcional) titulo do novo tema
+
+$nomeshp - (opcional) nome do arquivo que sera criado
+
+$def - (opcional) array com as definicoes das colunas que serao criadas no DBF
+
+$tipol - (opcional) tipo de shape conforme as constantes definidas no Mapserver MS_SHP_
 
 return:
+
 Nome do tema criado.
 */
-	function criaSHPvazio($tituloTema="")
-	{
-		$diretorio = dirname($this->arquivo);
+	function criaSHPvazio($tituloTema="",$nomeshp="",$def="",$tipol=""){
 		$novonomelayer = nomeRandomico();
-		$nomeshp = $diretorio."/".$novonomelayer;
-		$def[] = array("ID","C","50");
+		if($nomeshp == ""){
+			$diretorio = dirname($this->arquivo);
+			$nomeshp = $diretorio."/".$novonomelayer;
+		}
+		if($def == ""){
+			$def[] = array("ID","C","50");
+		}
+		if($tipol == ""){
+			$tipol = MS_SHP_POINT;
+		}
 		if($this->dbaseExiste == false){
 			if(file_exists($this->locaplic."/pacotes/phpxbase/api_conversion.php"))
 			{include_once($this->locaplic."/pacotes/phpxbase/api_conversion.php");}
@@ -155,31 +171,35 @@ Nome do tema criado.
 			$db = xbase_create($nomeshp.".dbf", $def);
 			xbase_close($db);
 		}
-		else
-		{
+		else{
 			$db = dbase_create($nomeshp.".dbf", $def);
 			dbase_close($db);
 		}
-		$tipol = MS_SHP_POINT;
-		$l = criaLayer($this->mapa,MS_LAYER_POINT,MS_DEFAULT,"Ins","SIM");
-		$novoshpf = ms_newShapefileObj($nomeshp, $tipol);
+		$novoshpf = ms_newShapefileObj($nomeshp, MS_SHP_POINT);
 		$novoshpf = ms_newShapefileObj($nomeshp.".shp", -2);
-		if($tituloTema == "")
-		{$tituloTema = $novonomelayer." pontos";}
-		$l->setmetadata("tema",$tituloTema);
-		$l->setmetadata("TEMALOCAL","SIM");
-		$l->setmetadata("DOWNLOAD","sim");
-		$l->set("data",$nomeshp);
-		$l->set("name",$novonomelayer);
-		$classe = $l->getclass(0);
-		$estilo = $classe->getstyle(0);
-		$estilo->set("symbolname","ponto");
-		$estilo->set("size",6);
-		$cor = $estilo->color;
-		$cor->setrgb(255,210,0);
-		$cor = $estilo->outlinecolor;
-		$cor->setrgb(255,0,0);
-		return($novonomelayer);
+
+		if($this->mapa != ""){
+			if($tituloTema == "")
+			{$tituloTema = $novonomelayer." pontos";}
+			$l = criaLayer($this->mapa,MS_LAYER_POINT,MS_DEFAULT,"Ins","SIM");
+			$l->setmetadata("tema",$tituloTema);
+			$l->setmetadata("TEMALOCAL","SIM");
+			$l->setmetadata("DOWNLOAD","sim");
+			$l->set("data",$nomeshp);
+			$l->set("name",$novonomelayer);
+			$classe = $l->getclass(0);
+			$estilo = $classe->getstyle(0);
+			$estilo->set("symbolname","ponto");
+			$estilo->set("size",6);
+			$cor = $estilo->color;
+			$cor->setrgb(255,210,0);
+			$cor = $estilo->outlinecolor;
+			$cor->setrgb(255,0,0);
+			return($novonomelayer);
+		}
+		else{
+			return ($nomeshp);
+		}
 	}
 /*
 function: insereSHP

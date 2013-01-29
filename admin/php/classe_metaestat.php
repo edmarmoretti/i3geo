@@ -1480,6 +1480,27 @@ class Metaestat{
 		return $this->execSQL($sql,$codigo_tipo_periodo);
 	}
 	/*
+	Function: listaDimensaoRegiao
+
+	Lista a dimensao de uma tabela contendo as regioes
+
+	*/
+	function listaPropGeoRegiao($codigo_tipo_regiao){
+		//st_dimension returns 0 for POINT, 1 for LINESTRING, 2 for POLYGON
+		$regiao = $this->listaTipoRegiao($codigo_tipo_regiao);
+		$c = $this->listaConexao($regiao["codigo_estat_conexao"],true);
+		$dbh = new PDO('pgsql:dbname='.$c["bancodedados"].';user='.$c["usuario"].';password='.$c["senha"].';host='.$c["host"].';port='.$c["porta"]);
+		$c = $regiao["colunageo"];
+		$sql = "select st_dimension(".$regiao["colunageo"].") as st_dimension from ".$regiao["esquemadb"].".".$regiao["tabela"]." limit 1";
+		$q = $dbh->query($sql,PDO::FETCH_ASSOC);
+		$r = array();
+		if($q){
+			$r = $q->fetchAll();
+			$r = $r[0];
+		}
+		return $r;
+	}
+	/*
 	Function: listaTipoRegiao
 
 	Lista os tipos de regiao cadastrados ou uma unica
@@ -1614,17 +1635,18 @@ class Metaestat{
 	function obtemDadosTabelaDB($codigo_estat_conexao,$nome_esquema,$nome_tabela,$geo="nao"){
 		$desccolunas = $this->descreveColunasTabela($codigo_estat_conexao, $nome_esquema, $nome_tabela);
 		$colunas = array();
+		$colsql = array();
 		foreach($desccolunas as $d){
-			if($geo == "sim"){
+			if($d["type"] != "geometry" && $d["type"] != "geography"){
 				$colunas[] = $d["field"];
+				$colsql[] = $d["field"];
 			}
-			else{
-				if($d["type"] != "geometry" && $d["type"] != "geography"){
-					$colunas[] = $d["field"];
-				}
+			elseif($geo == "sim"){
+				$colunas[] = $d["field"];
+				$colsql[] = "ST_AsText(".$d["field"].") as ".$d["field"];
 			}
 		}
-		$dados = $this->execSQLDB($codigo_estat_conexao,"SELECT ".implode(",",$colunas)." from ".$nome_esquema.".".$nome_tabela );
+		$dados = $this->execSQLDB($codigo_estat_conexao,"SELECT ".implode(",",$colsql)." from ".$nome_esquema.".".$nome_tabela );
 		$linhas = array();
 		foreach($dados as $d){
 			$l = array();
@@ -2088,6 +2110,84 @@ class Metaestat{
 			return array("Falhou: " . $e->getMessage());
 		}
 		return array("ok");
+	}
+	function regiao2shp($codigo_tipo_regiao){
+		$regiao = $this->listaTipoRegiao($codigo_tipo_regiao);
+		$dados = $this->obtemDadosTabelaDB($regiao["codigo_estat_conexao"],$regiao["esquemadb"],$regiao["tabela"],"sim");
+		$tipol = $this->listaPropGeoRegiao($codigo_tipo_regiao);
+		include_once(__DIR__."/../../classesphp/classe_shp.php");
+		$s = new SHP();
+		//st_dimension returns 0 for POINT, 1 for LINESTRING, 2 for POLYGON
+		//echo MS_SHP_POINT.", ".MS_SHP_ARC.", ".MS_SHP_POLYGON.", ".MS_SHP_MULTIPOINT;
+		//1, 3, 5, 8
+		$conv[0] = 1;
+		$conv[1] = 3;
+		$conv[2] = 5;
+		//cria as colunas
+		$cni = 0;
+		foreach($dados["colunas"] as $t){
+			$temp = strtoupper($t["field"]);
+			if(strlen($temp) > 10){
+				$temp = substr($t["field"],0,8).($cni++);
+			}
+			if($t["type"] == "varchar" || $t["type"] == "char" || $t["type"] == "character varying" || $t["type"] == "character" || $t["type"] == "text"){
+				$def[] = array($temp,"C","254");
+			}
+			else{
+				if($t["lengthvar"] < 0){
+					$t["lengthvar"] = 0;
+				}
+				$def[] = array($temp,"N", $t["length"],$t["lengthvar"]);
+			}
+		}
+		$nomeshp = $this->dir_tmp."/regiao$codigo_tipo_regiao"."_".$this->nomeRandomico();
+		$dbaseExiste = false;
+		if(function_exists("dbase_create")){
+			$dbaseExiste = true;
+		}
+		//para manipular dbf
+		if($dbaseExiste == false){
+			if(file_exists($this->locaplic."/pacotes/phpxbase/api_conversion.php"))
+			{include_once($this->locaplic."/pacotes/phpxbase/api_conversion.php");}
+			else
+			{include_once "../pacotes/phpxbase/api_conversion.php";}
+			$db = xbase_create($nomeshp.".dbf", $def);
+		}
+		else
+		{$db = dbase_create($nomeshp.".dbf", $def);}
+		$dbname = $nomeshp.".dbf";
+		$reg = array();
+		$novoshpf = ms_newShapefileObj($nomeshp.".shp", $conv[$tipol["st_dimension"]]);
+		$cols = $dados["colunas"];
+		$nc = count($dados["colunas"]);
+		foreach($dados["linhas"] as $l){
+			$reg = array();
+			for($i=0;$i<$nc;$i++){
+				if($cols[$i]["type"] != "geometry" && $cols[$i]["type"] != "geography"){
+					$reg[] = $l[$i];
+				}
+				else{
+					$reg[] = 0;
+					if($cols[$i]["field"] == $regiao["colunageo"]){
+						$shape = ms_shapeObjFromWkt($l[$i]);
+					}
+				}
+			}
+			$novoshpf->addShape($shape);
+			if($dbaseExiste == false){
+				xbase_add_record($db,$reg);
+			}
+			else{
+				dbase_add_record($db,$reg);
+			}
+		}
+		if($this->dbaseExiste == false){
+			xbase_close($db);
+		}
+		else{
+			dbase_close($db);
+		}
+		return $nomeshp;
 	}
 }
 ?>
