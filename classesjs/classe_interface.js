@@ -2385,6 +2385,7 @@ i3GEO.Interface = {
 					cabecalho,
 					minimiza
 				);
+			$i("i3GEOF.ferramentasGE_c").style.zIndex = 100;
 			i3GEO.barraDeBotoes.TEMPLATEBOTAO = '<div style="display:inline;background-color:rgb(250,250,250);"><img src="'+i3GEO.configura.locaplic+'/imagens/branco.gif" id="$$"/></div>&nbsp;';
 			i3GEO.barraDeBotoes.inicializaBarra("barraDeBotoes2","",false,"200","200",janela[2].id);
 			i3GEO.barraDeBotoes.ativaBotoes();

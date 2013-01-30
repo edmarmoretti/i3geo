@@ -90,7 +90,7 @@ include_once("../ms_configura.php");
 <tr style="border:0px"><td colspan=3 style=background-color:black;color:white  id="emailInstituicao">geoprocessamento@mma.gov.br</td></tr>
 </table>
 </center>
-<table id="i3GEOlogoMarcaX" style='margin: 0px auto;box-shadow:0 1px 13px gray;border-radius:5px;'>
+<table id="i3GEOlogoMarca" style='margin: 0px auto;box-shadow:0 1px 13px gray;border-radius:5px;'>
 	<tr>
 		<td><div id=versaoi3geo ></div><h2 style="font-size:10px;font-family: Verdana, Arial, Helvetica, sans-serif;">i3Geo - Software livre para cria&ccedil;&atilde;o de mapas interativos e geoprocessamento</h2><h3 style="font-size:10px;font-family: Verdana, Arial, Helvetica, sans-serif;">Baseado no Mapserver, &eacute; licenciado sob GPL e integra o Portal do Software P&uacute;blico Brasileiro</h3></td>
 	</tr>
@@ -154,6 +154,7 @@ i3GEO.barraDeBotoes.INCLUIBOTAO = {
 	inseregrafico: true,
 	v3d: true
 };
+
 //
 //se for IE n&atilde;o mostra o bot&atilde;o de c&aacute;lculo de distancias
 //
@@ -162,7 +163,7 @@ if(navm)
 i3GEO.barraDeBotoes.BOTAOPADRAO = "";
 i3GEO.barraDeBotoes.AUTO = true;
 i3GEO.arvoreDeTemas.TIPOBOTAO = "radio";
-
+i3GEO.ajuda.ATIVAJANELA = false;
 i3GEO.barraDeBotoes.AJUDA = true;
 i3GEO.mapa.legendaHTML.incluiBotaoLibera = false;
 i3GEO.gadgets.PARAMETROS.mostraMenuSuspenso.permiteLogin = true;
