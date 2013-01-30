@@ -2709,6 +2709,9 @@ i3GEO.Interface = {
 			dist = r * Math.tan(d / 2);
 			// get the altitude using the chord length
 			alt = dist/(Math.tan(fov * Math.PI / 180.0));
+			if(alt < 0){
+				alt = alt * -1;
+			}
 			camera.setAltitude(alt);
 			i3GeoMap.getView().setAbstractView(camera);
 		},

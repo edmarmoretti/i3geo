@@ -1,0 +1,184 @@
+<?php
+include_once("../ms_configura.php");
+?>
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+<meta http-equiv="Category" content="I3Geo Mapa interativo MMA">
+<META HTTP-EQUIV="Content-Type" CONTENT="text/html; charset=ISO-8859-1">
+    <style type="text/css">
+        .olControlEditingToolbar  {
+            float:left;
+            right: 0px;
+            height:30px;
+            width: 150px;
+        }
+</style>
+<title>i3GEO - Google Earth</title>
+<script type="text/javascript" src="http://www.google.com/jsapi?key=<?php echo $googleApiKey; ?>"></script>
+<script type="text/javascript" src="../classesjs/i3geonaocompacto.js"></script>
+</head>
+<body id="i3geo" onload='i3GEO.inicia();'>
+<center>
+<table id='mst' summary="" style='display:none' width=100% cellspacing='0'>
+<tr style="border:0px">
+	<td colspan=2 id="barraSuperior" style="background-image:url('../imagens/visual/default/cabeca.png');height:10px"></td>
+</tr>
+<tr>
+<td>
+  <table width=100% cellspacing=0 cellpadding=0 >
+   <tr>
+   <td>
+    <div class=verdeescuro style="top:0px;cursor:pointer;">
+	 <div id=guia1 class=guia ></div>
+	 <div id=guia2 class=guia ></div>
+	 <div id=guia4 class=guia ></div>
+	 <div id=guia5 class=guia ></div>
+    </div>
+   </td>
+   </tr>
+  </table>
+</td>
+<td id="contemMenu" style="text-align:right;height:0px;border-width:0pt 0pt 1px;border-color:rgb(240,240,240)">
+	 <div id="menus" ></div>
+</td>
+</tr>
+<tr>
+ <td class=tdbranca id=contemFerramentas style="vertical-align:top;width:300px;text-align:left;">
+  <div id='guia1obj' >
+  	<div style='left:5px;top:10px;' id=buscaRapida ></div>
+  	<div id=listaPropriedades style='top:15px;' ></div>
+  	<div id=listaTemas style='top:15px;'></div>
+  </div>
+  <div id='guia2obj' style='display:none;'>Aguarde...<img alt="" src="../imagens/branco.gif" width=248 /></div>
+  <div id='guia4obj' style='display:none;text-align:left'><div id='legenda' style='text-align:left'></div></div>
+  <div id='guia5obj' style='display:none;text-align:left'><div id='banners' style='overflow:auto;text-align:left'>Aguarde...</div></div>
+ </td>
+ <td style="vertical-align:top;border-width:0px;">
+  <table width="100%" style="vertical-align:top;border-width:0px">
+   <tr><td  class=verdeclaro id=contemImg >
+	<div id=googleearth style="background-image:url('../imagens/i3geo1bw.jpg');"></div>
+   </td></tr>
+  </table>
+ </td>
+ </tr>
+<tr>
+ <td class=tdbranca >
+ 	<div id="seletorIdiomas" ></div>
+ 	<div id=tempoRedesenho style=color:green;background-color:black;width:50px;display:none ></div>
+ </td>
+ <td class=tdbranca >
+  <table width=100% ><tr>
+  <td class=tdbranca >
+  </td>
+  <td class=tdbranca style=text-align:center >
+	<div id=escala ></div>
+  </td>
+  <td class=tdbranca >
+    	<div id=inserirKml ></div>
+  </td>
+  <td class=tdbranca >
+  	<div id=localizarxy ></div>
+  </td>
+  </tr>
+  <tr><td></td><td class="tdbranca"><div style="text-align:left;font-size:10px;background-color:white;display:none;" id=mostraUTM ></div></td><td></td></tr>
+  </table>
+ </td>
+</tr>
+<tr style="border:0px"><td colspan=3 id="barraInferior" style="background-image:url('../imagens/visual/default/rodape.png');height:10px"></td></tr>
+<tr style="border:0px"><td colspan=3 style=background-color:black ><input style="border:0px none; background-color:black;color:white;font-size:12pt;" type="text" size="1" id="i3geo_letreiro" ></td></tr>
+<tr style="border:0px"><td colspan=3 style=background-color:black;color:white  id="emailInstituicao">geoprocessamento@mma.gov.br</td></tr>
+</table>
+</center>
+<table id="i3GEOlogoMarca" style='margin: 0px auto;box-shadow:0 1px 13px gray;border-radius:5px;'>
+	<tr>
+		<td><div id=versaoi3geo ></div><h2 style="font-size:10px;font-family: Verdana, Arial, Helvetica, sans-serif;">i3Geo - Software livre para cria&ccedil;&atilde;o de mapas interativos e geoprocessamento</h2><h3 style="font-size:10px;font-family: Verdana, Arial, Helvetica, sans-serif;">Baseado no Mapserver, &eacute; licenciado sob GPL e integra o Portal do Software P&uacute;blico Brasileiro</h3></td>
+	</tr>
+	<tr>
+		<td style="padding:10px;"><img style="width:560px;height:81px" alt="" src='../imagens/logo_inicio.png' ></td>
+	</tr>
+	<tr>
+		<td>
+			<!--
+			<script id="ohloh" type="text/javascript" src="http://www.ohloh.net/p/150688/widgets/project_users.js?style=red"></script>
+			-->
+		</td>
+	</tr>
+</table>
+<script type="text/javascript">
+/*
+Google Earth (experimental)
+
+Abre o i3geo com a navega&ccedil;&atilde;o controlada pelo Google Earth em 3d.
+
+File: i3geo/interface/googleearth.htm
+
+Exemplo:
+
+http://localhost/i3geo/ms_criamapa.php?interface=googleearth.phtml
+
+*/
+/*
+	Indica a localiza&ccedil;&atilde;o correta do i3geo.
+
+	&Eacute; utilizada para identificar o local correto onde est&atilde;o os programas em php que s&atilde;o utilizados.
+
+	Se n&atilde;o for definida, o i3Geo tentar&aacute; encontrar o local automaticamente
+*/
+i3GEO.configura.locaplic = i3GEO.util.protocolo()+"://"+window.location.host+"/i3geo";
+//ativa ou desativa o balao de info ao clicar no mapa
+i3GEO.eventos.cliquePerm.ativo = true;
+//
+i3GEO.barraDeBotoes.COMPORTAMENTO = "laranja";
+i3GEO.Interface.ATUAL = "googleearth";
+i3GEO.Interface.IDCORPO = "contemImg";
+i3GEO.barraDeBotoes.INCLUIBOTAO = {
+	abreJanelaLegenda: true,
+	identifica: true,
+	identificaBalao: true,
+	mede: true,
+	area: false,
+	imprimir: true,
+	reinicia: false,
+	exten: true,
+	referencia: false,
+	inserexy: true,
+	textofid: true,
+	selecao: true,
+	google: false,
+	buscafotos: true,
+	wiki: true,
+	metar: true,
+	lentei: false,
+	confluence: true,
+	inseregrafico: true,
+	v3d: true
+};
+
+//
+//se for IE n&atilde;o mostra o bot&atilde;o de c&aacute;lculo de distancias
+//
+if(navm)
+{i3GEO.barraDeBotoes.INCLUIBOTAO.mede = false;}
+i3GEO.barraDeBotoes.BOTAOPADRAO = "";
+i3GEO.barraDeBotoes.AUTO = true;
+i3GEO.arvoreDeTemas.TIPOBOTAO = "radio";
+i3GEO.ajuda.ATIVAJANELA = false;
+i3GEO.barraDeBotoes.AJUDA = true;
+i3GEO.mapa.legendaHTML.incluiBotaoLibera = false;
+i3GEO.gadgets.PARAMETROS.mostraMenuSuspenso.permiteLogin = true;
+i3GEO.cria();
+//
+//define a funcao que sera executada ao clicar no mapa
+//default (balao do tipo etiqueta)
+i3GEO.eventos.MOUSECLIQUEPERM = [i3GEO.configura.funcaoTip];
+//alternativo (janela de identificacao
+//i3GEO.eventos.MOUSECLIQUEPERM = [i3GEO.configura.funcaoIdentifica];
+//
+
+//veja tag body
+//i3GEO.inicia();
+</script>
+
+</body>
+</html>
