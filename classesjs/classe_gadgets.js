@@ -226,8 +226,8 @@ i3GEO.gadgets = {
 		{id = i3GEO.gadgets.PARAMETROS.mostraInserirKml.idhtml;}
 		if($i(id)){
 			if(!$i("i3geo_urlkml")){
-				i = $inputText(id,"290","i3geo_urlkml","kml url","40","");
-				ins = "<table><tr><td>Kml: "+i;
+				i = $inputText(id,"290","i3geo_urlkml","kml url","35","kml");
+				ins = "<table><tr><td>"+i;
 				temp = 'i3GEO.Interface.adicionaKml();';
 				ins += "</td><td><img src='"+i3GEO.util.$im("branco.gif")+"' class='tic' onclick='"+temp+"' /></td></tr></table>";
 				$i(id).innerHTML = ins;

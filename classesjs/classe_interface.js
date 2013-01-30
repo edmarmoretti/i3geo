@@ -2067,7 +2067,9 @@ i3GEO.Interface = {
 		atualizaTema:function(retorno,tema){
 			var layer = i3GEO.Interface.googleearth.retornaObjetoLayer(tema),
 				hr = layer.getLink().getHref();
-			hr = hr.replace("&&&&&","");
+			//layer.getLink().setRefreshMode(2);
+			//layer.getLink().setRefreshInterval(1);
+			hr = hr.replace("&&&&&&&&&&&&&&&&&&&","");
 			layer.getLink().setHref(hr+"&");
 			if(retorno === "")
 			{return;}
@@ -2257,16 +2259,17 @@ i3GEO.Interface = {
 			i3GEO.php.googleearth(montaMapa);
 		},
 		criaLayers: function(){
-			var nlayers = i3GEO.arvoreDeCamadas.CAMADAS.length,
+			var nlayers = i3GEO.arvoreDeCamadas.CAMADAS.length - 1,
 				i,
 				camada,
 				indice,
 				layer;
-			for (i=0;i<nlayers;i++){
+			for (i=nlayers;i>=0;i--){
 				camada = i3GEO.arvoreDeCamadas.CAMADAS[i];
 				indice = i3GEO.Interface.googleearth.retornaIndiceLayer(camada.name);
 				layer = i3GEO.Interface.googleearth.retornaObjetoLayer(camada.name);
-				if(indice === false){
+				//nao mude para ===
+				if(indice == false){
 					layer = i3GEO.Interface.googleearth.insereLayer(camada.name);
 				}
 				try{
@@ -2315,8 +2318,9 @@ i3GEO.Interface = {
 				indice = false,
 				i;
 			for(i=0;i<n;i++){
-				if(i3GeoMap.getFeatures().getChildNodes().item(i).getName() === nomeLayer)
-				{indice = i3GeoMap.getFeatures().getChildNodes().item(i);}
+				if(i3GeoMap.getFeatures().getChildNodes().item(i).getName() === nomeLayer){
+					indice = i3GeoMap.getFeatures().getChildNodes().item(i);
+				}
 			}
 			return indice;
 		},
