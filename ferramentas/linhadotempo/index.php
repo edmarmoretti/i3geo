@@ -3,7 +3,7 @@
 <script src="../../classesjs/i3geo.js" type="text/javascript"></script>
 <script>
 Timeline_ajax_url="../../pacotes/simile/timeline_2.3.0/timeline_ajax/simile-ajax-api.js";
-Timeline_urlPrefix='../../pacotes/simile/timeline_2.3.0/timeline_js/';       
+Timeline_urlPrefix='../../pacotes/simile/timeline_2.3.0/timeline_js/';
 Timeline_parameters='bundle=true';
 </script>
 <script src="../../pacotes/simile/timeline_2.3.0/timeline_js/timeline-api.js" type="text/javascript"></script>
@@ -123,8 +123,8 @@ function bandas(){
 		theme1.autoWidth = false;
 		bandInfos = [
 			Timeline.createBandInfo({
-				width:          "20%", 
-				intervalUnit:   Timeline.DateTime.DECADE, 
+				width:          "20%",
+				intervalUnit:   Timeline.DateTime.DECADE,
 				intervalPixels: 200,
 				overview:       true,
 				eventSource:    eventSource1
@@ -132,7 +132,7 @@ function bandas(){
 
 			Timeline.createBandInfo({
 				width:          "80%",
-				intervalUnit:   Timeline.DateTime.YEAR, 
+				intervalUnit:   Timeline.DateTime.YEAR,
 				intervalPixels: 200,
 				eventSource:    eventSource1,
 				theme:          theme1,
@@ -147,7 +147,7 @@ function bandas(){
 		bandInfos = [
 			Timeline.createBandInfo({
 				width:          "100%",
-				intervalUnit:   Timeline.DateTime.DECADE, 
+				intervalUnit:   Timeline.DateTime.DECADE,
 				intervalPixels: 200,
 				eventSource:    eventSource1,
 				theme:          theme1,
@@ -172,9 +172,9 @@ function carregaDados(){
 		//eventSource1.clear();
 		$i("totaleventos").innerHTML = retorno.data.events.length+" eventos";
 		tl = Timeline.create(tl_el, bandInfos, Timeline.HORIZONTAL);
-		eventSource1.loadJSON(retorno.data, '.'); // The data was stored into the 
+		eventSource1.loadJSON(retorno.data, '.'); // The data was stored into the
 		tl.layout(); // display the Timeline
-		tl.getBand(0).scrollToCenter(Timeline.DateTime.parseGregorianDateTime(retorno.data.maiorano));		
+		tl.getBand(0).scrollToCenter(Timeline.DateTime.parseGregorianDateTime(retorno.data.maiorano));
 	}
 	var p = window.parent.i3GEO.configura.locaplic+"/classesphp/mapa_controle.php?funcao=dadosLinhaDoTempo&g_sid="+window.parent.i3GEO.configura.sid+"&tema="+$i("tema").value+"&ext="+window.parent.i3GEO.parametros.mapexten;
 	cpJSON.call(p,"void",retorna);
@@ -234,8 +234,8 @@ function tituloclique(wkt){
 		window.parent.i3GEO.atualiza(retorno);
 		window.parent.i3GEO.Interface.atualizaTema(retorno,$i("tema").value);
 	};
-	
-	window.parent.i3GEO.janela.abreAguarde("i3GEO.atualiza",$trad("o1"));
+
+	//window.parent.i3GEO.janela.abreAguarde("i3GEO.atualiza",$trad("o1"));
 	window.parent.i3GEO.php.selecaopt(retorna,$i("tema").value,wkt[0]+" "+wkt[1],"adiciona",0);
 }
 /*
@@ -252,15 +252,15 @@ Function: onResize
 
 Modifica o tamanho da linha do tempo se a janela da ferramenta tiver seu tamanho modificado
 */
-function onResize() { 
-     if (resizeTimerID == null) { 
-         resizeTimerID = window.setTimeout(function() { 
-             resizeTimerID = null; 
-             tl.layout(); 
-         }, 500); 
-     } 
+function onResize() {
+     if (resizeTimerID == null) {
+         resizeTimerID = window.setTimeout(function() {
+             resizeTimerID = null;
+             tl.layout();
+         }, 500);
+     }
  }
-</script>	
+</script>
 </body>
 
 </html>

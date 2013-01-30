@@ -524,7 +524,7 @@ function dadosLinhaDoTempo($map_file,$tema,$ext="")
 		else {$link = $dado[$link];}
 		$titulo = $dado[$itemtitulo];
 		$desc = $dado[$itemdescricao];
-		if(function_exists("mb_convert_encoding") && $converteE == "sim"){
+		if(function_exists("mb_convert_encoding") && strtolower($converteE) == "sim"){
 			$titulo = mb_convert_encoding($titulo,"UTF-8","ISO-8859-1");
 			$desc = mb_convert_encoding($desc,"UTF-8","ISO-8859-1");
 		}
