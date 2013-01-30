@@ -1107,7 +1107,7 @@ i3GEOadmin.variaveis = {
 		{core_excluiNoTree(sUrl,no,mensagem);}
 	},
 	gravaDados: function(tipo,id){
-		var sUrl,i,campos = null,
+		var reg,temp,sUrl,i,campos = null,
 		par = null,
 		prog = null;
 		if(tipo == "variavel"){
@@ -1131,9 +1131,13 @@ i3GEOadmin.variaveis = {
 			prog = i3GEO.configura.locaplic+"/admin/php/metaestat.php?funcao=alteraClassificacaoMedida";
 		}
 		if(tipo == "classeClassificacao"){
-			campos = new Array("titulo","expressao","azul","verde","vermelho","tamanho","simbolo","otamanho","overde","oazul","overmelho");
+			campos = new Array("titulo","azul","verde","vermelho","tamanho","simbolo","otamanho","overde","oazul","overmelho");
 			par = "&id_classe="+id;
-			prog = i3GEO.configura.locaplic+"/admin/php/metaestat.php?funcao=alteraClasseClassificacao";
+			//troca o < por | para evitar problemas de passagem de parametro
+			temp = $i("Eexpressao").value;
+			reg = new RegExp("<", "g");
+			temp = temp.replace(reg,'|');
+			prog = i3GEO.configura.locaplic+"/admin/php/metaestat.php?funcao=alteraClasseClassificacao&expressao="+temp;
 		}
 		if(tipo == "linkMedida"){
 			campos = new Array("nome","link");

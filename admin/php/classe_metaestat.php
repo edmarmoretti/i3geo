@@ -1172,6 +1172,9 @@ class Metaestat{
 					$titulo = utf8_encode($titulo);
 				}
 				//echo "UPDATE ".$this->esquemaadmin."i3geoestat_classe SET azul = '$azul', verde = '$verde', vermelho = '$vermelho',expressao = '$expressao', titulo = '$titulo' WHERE id_classe = $id_classe";exit;
+				//o sinal de | e substituido por < para compatibilizar pois o contrario e feito no lado do cliente
+				//essa troca e feita para evitar um erro na passagem de parametro, que remove o <
+				$expressao = str_replace("|","<",$expressao);
 				$this->dbhw->query("UPDATE ".$this->esquemaadmin."i3geoestat_classes SET tamanho='$tamanho',simbolo='$simbolo',overmelho='$overmelho',overde='$overde',oazul='$oazul',otamanho='$otamanho',azul = '$azul', verde = '$verde', vermelho = '$vermelho',expressao = '$expressao', titulo = '$titulo' WHERE id_classe = $id_classe");
 				$retorna = $id_classe;
 			}
