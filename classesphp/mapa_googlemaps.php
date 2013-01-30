@@ -95,6 +95,14 @@ $cachedir = $_SESSION["cachedir"];
 $x = $_GET["X"];
 $y = $_GET["Y"];
 $z = $_GET["Z"];
+
+$qyfile = dirname($map_fileX)."/".$_GET["layer"].".php";
+$qy = file_exists($qyfile);
+
+if($qy == false && $_GET["cache"] == "sim" && $_GET["DESLIGACACHE"] != "sim"){
+	carregaCacheImagem($_SESSION["cachedir"],$_SESSION["map_file"],$_GET["tms"]);
+}
+
 $n = pow(2,$z);
 $lon1 = $x / $n * 360.0 - 180.0;
 $lat2 = rad2deg(atan(sinh(pi() * (1 - 2 * $y / $n))));
@@ -119,8 +127,7 @@ $_GET["mapext"] = str_replace(","," ",$_GET["BBOX"]);
 
 $mapa = ms_newMapObj($map_fileX);
 $ret = $mapa->extent;
-$qyfile = dirname($map_fileX)."/".$_GET["layer"].".php";
-$qy = file_exists($qyfile);
+
 $cache = false;
 if(!isset($_GET["telaR"])){
 	//no caso de projecoes remotas, o mapfile nao´e alterado
@@ -216,8 +223,8 @@ else{
 		foreach ($shp as $indx)
 		{$mapa->querybyindex($indxlayer,-1,$indx,MS_TRUE);}
 		$qm = $mapa->querymap;
-		$qm->set("width",$map_size[0]);
-		$qm->set("height",$map_size[1]);
+		$qm->set("width",255);
+		$qm->set("height",255);
 		$img = $mapa->drawQuery();
 	}
 	else{

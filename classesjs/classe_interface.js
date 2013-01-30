@@ -1565,16 +1565,16 @@ i3GEO.Interface = {
 				if(!indice){
 					//nao utilize !== aqui
 					if(camada.status != 0){
-						i3GEO.Interface.googlemaps.insereLayer(camada.name,0);
+						i3GEO.Interface.googlemaps.insereLayer(camada.name,0,camada.cache);
 					}
 				}
 			}
 		},
-		criaImageMap: function(nomeLayer){
+		criaImageMap: function(nomeLayer,cache){
 			var i3GEOTileO = "",s;
 			s = "i3GEOTileO = new google.maps.ImageMapType({ "+
 					"getTileUrl: function(coord, zoom) {" +
-					"	var url = '" + i3GEO.configura.locaplic +"/classesphp/mapa_googlemaps.php?g_sid=" + i3GEO.configura.sid +
+					"	var url = '" + i3GEO.configura.locaplic +"/classesphp/mapa_googlemaps.php?g_sid=" + i3GEO.configura.sid + "&cache=" + cache +
 					"&Z=' + zoom + '&X=' + coord.x + '&Y=' + coord.y + '&layer=" + nomeLayer + i3GEO.Interface.googlemaps.PARAMETROSLAYER +'&r='+Math.random()+"';" +
 					"	return url+'&nd='+i3GEO.Interface.googlemaps.posfixo; " +
 					"}, "+
@@ -1585,8 +1585,8 @@ i3GEO.Interface = {
 			eval(s);
 			return i3GEOTileO;
 		},
-		insereLayer: function(nomeLayer,indice){
-			var i = i3GEO.Interface.googlemaps.criaImageMap(nomeLayer);
+		insereLayer: function(nomeLayer,indice,cache){
+			var i = i3GEO.Interface.googlemaps.criaImageMap(nomeLayer,cache);
 			i3GeoMap.overlayMapTypes.insertAt(indice, i);
 		},
 		registraEventos: function(){

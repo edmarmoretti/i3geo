@@ -81,12 +81,19 @@ if(isset($_GET["tms"])){
 	$lat2 = ($y+1) / $n * 180.0 - 90.0;
 	$_GET["BBOX"] = $lon1." ".$lat1." ".$lon2." ".$lat2;
 }
-if($_GET["cache"] == "sim" && $_GET["DESLIGACACHE"] != "sim"){
+$map_fileX = $_SESSION["map_file"];
+//
+//resolve o problema da sele&ccedil;&atilde;o na vers&atilde;o nova do mapserver
+//
+$qyfile = dirname($map_fileX)."/".$_GET["layer"].".php";
+$qy = file_exists($qyfile);
+
+if($qy == false && $_GET["cache"] == "sim" && $_GET["DESLIGACACHE"] != "sim"){
 	carregaCacheImagem($_SESSION["cachedir"],$_SESSION["map_file"],$_GET["tms"]);
 }
 //
 //map_fileX e para o caso register_globals = On no PHP.INI
-$map_fileX = $_SESSION["map_file"];
+
 if(isset($_GET["tipolayer"]) && $_GET["tipolayer"] == "fundo"){
 	$map_fileX = str_replace(".map","fundo.map",$map_fileX);
 }
@@ -98,11 +105,7 @@ if(isset($_GET["BBOX"])){
 }
 $_GET["TIPOIMAGEM"] = trim($_GET["TIPOIMAGEM"]);
 $mapa = ms_newMapObj($map_fileX);
-//
-//resolve o problema da sele&ccedil;&atilde;o na vers&atilde;o nova do mapserver
-//
-$qyfile = dirname($map_fileX)."/".$_GET["layer"].".php";
-$qy = file_exists($qyfile);
+
 //
 //processa os layers do mapfile
 //
