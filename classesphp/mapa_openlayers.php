@@ -81,7 +81,9 @@ if(isset($_GET["tms"])){
 	$lat2 = ($y+1) / $n * 180.0 - 90.0;
 	$_GET["BBOX"] = $lon1." ".$lat1." ".$lon2." ".$lat2;
 }
-
+if($_GET["cache"] == "sim" && $_GET["DESLIGACACHE"] != "sim"){
+	carregaCacheImagem($_SESSION["cachedir"],$_SESSION["map_file"],$_GET["tms"]);
+}
 //
 //map_fileX e para o caso register_globals = On no PHP.INI
 $map_fileX = $_SESSION["map_file"];

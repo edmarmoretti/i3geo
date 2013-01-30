@@ -15,6 +15,7 @@ MAP
       "permitekml"	"sim"
       "permiteogc"	"sim"
       "tema"	"_Imagem cbersgeo"
+      "cache" "sim"
     END # METADATA
     NAME "_wcbersgeo"
     STATUS DEFAULT

@@ -272,6 +272,12 @@ string - javascript com os parametros
 				if($oLayer->getmetadata("ltempoformatodata") !== "")
 				{$ltempo = "sim";}
 				//
+				//verifica se o tema faz cache automatico
+				//
+				$cache = "nao";
+				if(strtoupper($oLayer->getmetadata("cache")) == "SIM")
+				{$cache = "sim";}
+				//
 				//verifica se o tema receber&aacute; efeito de transi&ccedil;&atilde;o de zoom
 				//
 				$transitioneffect = "sim";
@@ -336,7 +342,8 @@ string - javascript com os parametros
 					"temporizador"=>($oLayer->getmetadata("temporizador")),
 					"permiteogc"=>($oLayer->getmetadata("permiteogc")),
 					"itembuscarapida"=>($oLayer->getmetadata("itembuscarapida")),
-					"usasld"=>$usasld
+					"usasld"=>$usasld,
+					"cache"=>$cache
 				);
 			}
 		}

@@ -982,7 +982,7 @@ i3GEO.Interface = {
 				//o copyright &eacute; colocado no mapa como um elemento html. O LAYER com "name = copyright " s&oacute; &eacute; usado
 				//para persistir no mapfile em fun&ccedil;&atilde;od as opera&ccedil;&otilde;es de impress&atilde;o
 				if(i3geoOL.getLayersByName(camada.name).length === 0 && camada.name.toLowerCase() != "copyright"){
-					urllayer = url+"&layer="+camada.name+"&r="+Math.random();
+					urllayer = url+"&cache="+camada.cache+"&layer="+camada.name+"&r="+Math.random();
 					try{
 						temp = camada.type === 0 ? opcoes.gutter = 20 : opcoes.gutter = 0;
 						temp = camada.transitioneffect === "nao" ? opcoes.transitionEffect = "null" : opcoes.transitionEffect = "resize";
@@ -1205,6 +1205,7 @@ i3GEO.Interface = {
 					layers[i].mergeNewParams({r:Math.random()});
 					layers[i].url = layers[i].url.replace("&&&&&&&&&&&&&&","");
 					layers[i].url = layers[i].url+"&&";
+					layer.url = layer.url.replace("&cache=sim","&cache=nao");
 					if(layers[i].visibility === true){
 						layers[i].redraw();
 					}
@@ -1218,6 +1219,7 @@ i3GEO.Interface = {
 					layer.mergeNewParams({r:Math.random()});
 					layer.url = layer.url.replace("&&&&&&&&&&&&&&","");
 					layer.url = layer.url+"&&";
+					layer.url = layer.url.replace("&cache=sim","&cache=nao");
 					layer.redraw();
 				}
 			}
