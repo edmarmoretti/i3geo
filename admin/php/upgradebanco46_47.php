@@ -176,6 +176,9 @@ if(!in_array($teste,17))
 	$dbhw->query("INSERT INTO ".$esquemaadmin."i3geousr_operacoes VALUES('17', 'admin/html/usuarios', 'cadastro de usuarios')");
 if(!in_array($teste,18))
 	$dbhw->query("INSERT INTO ".$esquemaadmin."i3geousr_operacoes VALUES('18', 'admin/metaestat/geral', 'permite edicoes mais comuns do sistema de metadados estatisticos')");
+if(!in_array($teste,19))
+	$dbhw->query("INSERT INTO ".$esquemaadmin."i3geousr_operacoes VALUES('19', 'admin/metaestat/editorbanco', 'permite gerenciar as tabelas do banco')");
+
 
 
 $teste = lista("select * from ".$esquemaadmin."i3geousr_operacoes","id_operacao","id_papel");

@@ -55,13 +55,13 @@ function montaTabela(dados){
 			elCell.innerHTML = "<div class=editar style='text-align:center' ></div>";
 		},
 		formatShp = function(elCell, oRecord, oColumn){
-			elCell.innerHTML = "<div class=download style='text-align:center' ></div>";
+			elCell.innerHTML = "<div class=download style='text-align:center' title='shape file' ></div>";
 		},
 		myColumnDefs = [
 		                {key:"excluir",label:"excluir",formatter:formatExclui},
-		                {key:"shapefile",label:"shapefile",formatter:formatShp},
+		                {key:"shapefile",label:"download",formatter:formatShp},
 		                {key:"rel",label:"agrega&ccedil;&otilde;es",formatter:formatRel},
-		                {key:"mais",label:"editar",formatter:formatMais},
+		                {key:"mais",label:"propriedades",formatter:formatMais},
 		                {label:"c&oacute;digo",key:"codigo_tipo_regiao", formatter:formatTexto},
 		                {label:"Nome",resizeable:true,key:"nome_tipo_regiao", formatter:formatTexto},
 		                {label:"Descri&ccedil;&atilde;o",resizeable:true,key:"descricao_tipo_regiao", formatter:formatTexto},

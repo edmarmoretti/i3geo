@@ -173,6 +173,8 @@
 			$dbhw->query("INSERT INTO ".$esquemaadmin."i3geousr_operacoes VALUES('16', 'admin/php/editortexto', 'editor de textos para edicao de mapfiles')");
 			$dbhw->query("INSERT INTO ".$esquemaadmin."i3geousr_operacoes VALUES('17', 'admin/html/usuarios', 'cadastro de usuarios')");
 			$dbhw->query("INSERT INTO ".$esquemaadmin."i3geousr_operacoes VALUES('18', 'admin/metaestat/geral', 'permite edicoes mais comuns do sistema de metadados estatisticos')");
+			$dbhw->query("INSERT INTO ".$esquemaadmin."i3geousr_operacoes VALUES('19', 'admin/metaestat/editorbanco', 'permite gerenciar as tabelas do banco')");
+
 			//papeis por operacao
 			$dbhw->query("INSERT INTO ".$esquemaadmin."i3geousr_operacoespapeis VALUES(1,2)");
 			$dbhw->query("INSERT INTO ".$esquemaadmin."i3geousr_operacoespapeis VALUES(1,3)");

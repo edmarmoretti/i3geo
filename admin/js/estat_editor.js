@@ -81,17 +81,23 @@ i3GEOadmin.editor = {
 					success:function(o){
 						try	{
 							var dados = YAHOO.lang.JSON.parse(o.responseText),
-							temp = "<fieldset>Escolha uma tabela: ";
-							temp += "<select id='i3GEOadmintabela' onchange='i3GEOadmin.editor.coluna.lista()'>";
+							temp = "<fieldset>" +
+							"<p><input type=button value='Upload Shapefile' id='i3GEOadmin_botaoupload' /></p>" +
+							"<div id='i3GEOadmin_formupload'></div>" +
+							"Escolha uma tabela existente: " +
+							"<select id='i3GEOadmintabela' onchange='i3GEOadmin.editor.coluna.lista()'>";
 							temp += core_comboObjeto(dados,"tabela","tabela");
-							temp += "</select>";
-							temp += "" +
+							temp += "</select>" +
 								"<p><input type=button value='Relat&oacute;rio' id='i3GEOadmintabelaMostrar' />" +
 								"<input type=button value='CSV' id='i3GEOadmintabelaCsv'/>" +
 								"<input type=button value='Criar uma nova tabela' id='i3GEOadmintabelaCriar' />" +
 								"<input type=button value='Alterar nome atual' id='i3GEOadmintabelaAlterarNome' />" +
 								"<input type=button value='Copiar para' id='i3GEOadmintabelaCopiar' />";
 							$i(i3GEOadmin.editor.tabela.onde).innerHTML = temp+"</fieldset>";
+							new YAHOO.widget.Button(
+								"i3GEOadmin_botaoupload",
+								{onclick:{fn: i3GEOadmin.editor.uploadshp.inicia}}
+							);
 							new YAHOO.widget.Button(
 								"i3GEOadmintabelaMostrar",
 								{onclick:{fn: i3GEOadmin.editor.tabela.mostrar}}
@@ -399,5 +405,50 @@ i3GEOadmin.editor = {
 			}
 			return false;
 		}
+	},
+	uploadshp: {
+		inicia: function(){
+			var onde = $i("i3GEOadmin_formupload");
+			if(onde.innerHTML != ""){
+				onde.innerHTML = "";
+				return;
+			}
+			$i("i3GEOadmin_formupload").innerHTML = i3GEOadmin.editor.uploadshp.formulario();
+			new YAHOO.widget.Button(
+				"i3GEOuploadsubmit",
+				{onclick:{fn: i3GEOadmin.editor.uploadshp.submit}}
+			);
+		},
+		formulario: function(){
+			var ins = '<fieldset><form id=i3GEOuploadf target="i3GEOuploadiframe" action="../php/metaestat_uploadshp_submit.php" method="post" ENCTYPE="multipart/form-data">' +
+			'<p class="paragrafo" >shp: <br><input class=digitar type="file" size=22 name="i3GEOuploadshp" style="top:0px;left:0px;cursor:pointer;"></p>' +
+			'<p class="paragrafo" >shx: <br><input class=digitar type="file" size=22 name="i3GEOuploadshx" style="top:0px;left:0px;cursor:pointer;"></p>' +
+			'<p class="paragrafo" >dbf: <br><input class=digitar type="file" size=22 name="i3GEOuploaddbf" style="top:0px;left:0px;cursor:pointer;"></p>' +
+			'<p class="paragrafo" >Nome da nova tabela:<br><input class=digitar type="text" size=20 id="tabelaDestino" name="tabelaDestino" style="top:0px;left:0px;cursor:pointer;"></p>' +
+			'<p class="paragrafo" >C&oacute;digo da proje&ccedil;&atilde;o (SRID):<br><input class=digitar type="text" value="4326" size=20 id="srid" name="srid" style="top:0px;left:0px;cursor:pointer;"></p>' +
+
+			'<p class="paragrafo" ><input id=i3GEOuploadsubmit type="button" value="Enviar" size=12 />' +
+			'<input type="hidden" name="MAX_FILE_SIZE" value="1000000">' +
+			'<input type="hidden" id="i3GEOuploadcodigoconexao" name="i3GEOuploadcodigoconexao" value="">' +
+			'<input type="hidden" id="i3GEOuploadesquema" name="i3GEOuploadesquema" value="">' +
+			'</form>' +
+			"<p class='paragrafo' style=color:red >N&atilde;o utilize '_' no nome do arquivo. Apenas letras e n&uacute;meros s&atilde;o aceitos!!!</p>" +
+			'<iframe name=i3GEOuploadiframe style="text-align:left;border:1px solid gray;" width="98%" height="60px"></iframe></fieldset>';
+			return ins;
+		},
+		submit: function(){
+			if($i("tabelaDestino").value == ""){
+				alert("Digite o nome da tabela a ser criada");
+				return;
+			}
+			if($i("srid").value == ""){
+				alert("Digite o valor do SRID");
+				return;
+			}
+			$i("i3GEOuploadcodigoconexao").value = $i("i3GEOadmincodigo_estat_conexao").value;
+			$i("i3GEOuploadesquema").value = $i("i3GEOadminesquema").value;
+			$i("i3GEOuploadf").submit();
+		}
 	}
+
 };
