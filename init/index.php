@@ -135,7 +135,7 @@ a {
 			</table> </a>
 			<a target=_blank href="../ferramentas/metaestat/editorlimites.php" class="r"><table>
 				<tr>
-					<td><img src="../imagens/oxygen/22x22/draw-freehand.png" /><br> <script>document.write($trad(9,g_traducao_init));</script></a>
+					<td><img src="editor.png" /><br> <script>document.write($trad(9,g_traducao_init));</script></a>
 					</td>
 				</tr>
 			</table> </a>
