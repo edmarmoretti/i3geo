@@ -20,7 +20,7 @@ if(screen.availWidth > 700)
 </script>
 <?php
 /*
-Title: geraminiatura.php
+Title: Gerador de miniaturas (thumbnails)
 
 Gera as miniaturas dos mapas baseado nos mapfiles existentes em i3geo/temas. As miniaturas s&atilde;o utilizadas no i3geo na guia temas para mostrar um preview de cada tema.
 

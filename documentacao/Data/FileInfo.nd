@@ -1,91 +1,92 @@
-1.51
+Development Release 02-10-2007 (1.35 base)
 JavaScript
-/var/www/i3geo/classesjs/redesenho.js	1337177949	0	/var/www/i3geo/classesjs/redesenho.js
-/var/www/i3geo/mashups/openlayers_compacto.css.php	1359584412	0	/var/www/i3geo/mashups/openlayers_compacto.css.php
-/var/www/i3geo/classesjs/classe_tema.js	1358977064	1	Temas
-/var/www/i3geo/classesjs/classe_mapa.js	1359135670	1	Mapa
-/var/www/i3geo/leiame.txt	1354111792	0	/var/www/i3geo/leiame.txt
-/var/www/i3geo/mashups/openlayers.js	1357213780	0	/var/www/i3geo/mashups/openlayers.js
-/var/www/i3geo/exemplos/atlas/leiame.txt	1340848246	0	/var/www/i3geo/exemplos/atlas/leiame.txt
-/var/www/i3geo/classesjs/classe_login.js	1357851849	1	Controle de usu&aacute;rio
-/var/www/i3geo/interface/googlemaps.phtml	1357213780	0	/var/www/i3geo/interface/googlemaps.phtml
-/var/www/i3geo/symbols/testepalete.txt	1337178350	0	/var/www/i3geo/symbols/testepalete.txt
-/var/www/i3geo/ms_registraip.php	1349299267	1	ms_registraip.php
-/var/www/i3geo/exemplos/executafuncao.php	1340848247	0	/var/www/i3geo/exemplos/executafuncao.php
-/var/www/i3geo/init/remover.php	1359742700	0	/var/www/i3geo/init/remover.php
-/var/www/i3geo/classesjs/classe_selecao.js	1357356440	0	/var/www/i3geo/classesjs/classe_selecao.js
-/var/www/i3geo/teste.php	1350924650	0	/var/www/i3geo/teste.php
-/var/www/i3geo/interface/googlemaps1.phtml	1357213780	0	/var/www/i3geo/interface/googlemaps1.phtml
-/var/www/i3geo/.metadata/.plugins/org.eclipse.wst.jsdt.core/libraries/xhr.js	1337177955	0	/var/www/i3geo/.metadata/.plugins/org.eclipse.wst.jsdt.core/libraries/xhr.js
-/var/www/i3geo/classesjs/classe_ajuda.js	1355874182	1	Ajuda
-/var/www/i3geo/classesjs/atlas.js	1349299291	1	Atlas
-/var/www/i3geo/classesjs/teste.txt	1359505169	0	/var/www/i3geo/classesjs/teste.txt
-/var/www/i3geo/classesjs/classe_arvoredecamadas.js	1357873785	1	&Aacute;rvore de camadas
-/var/www/i3geo/interface/ol_parametros.php	1357213780	0	/var/www/i3geo/interface/ol_parametros.php
-/var/www/i3geo/exemplos/login3.php	1353380349	0	/var/www/i3geo/exemplos/login3.php
-/var/www/i3geo/teste.sql	1340906109	0	/var/www/i3geo/teste.sql
-/var/www/i3geo/interface/googlemapsdebug.phtml	1358821740	0	/var/www/i3geo/interface/googlemapsdebug.phtml
-/var/www/i3geo/.metadata/.plugins/org.eclipse.wst.jsdt.core/libraries/dom5.js	1337177955	0	/var/www/i3geo/.metadata/.plugins/org.eclipse.wst.jsdt.core/libraries/dom5.js
-/var/www/i3geo/classesjs/classe_eventos.js	1357356368	1	Eventos
-/var/www/i3geo/mashups/openlayers_compacto.js	1359584412	0	/var/www/i3geo/mashups/openlayers_compacto.js
-/var/www/i3geo/interface/googleearth.phtml	1359584413	0	/var/www/i3geo/interface/googleearth.phtml
-/var/www/i3geo/ogc.php	1359148536	1	ogc.php
-/var/www/i3geo/ms_criamapa.php	1358795352	1	Inicializa o i3Geo via URL ms_criamapa.php
-/var/www/i3geo/classesjs/classe_i3geo.js	1358785900	1	i3Geo
-/var/www/i3geo/classesjs/classe_arvoredetemas.js	1358472892	1	arvore de temas
-/var/www/i3geo/classesjs/wscliente.js	1357213779	1	Cliente de web services
-/var/www/i3geo/ms_configura.php	1359368404	1	Vari&aacute;veis de inicializa&ccedil;&atilde;o ms_configura.php
-/var/www/i3geo/classesjs/classe_util.js	1358784376	1	Utilit&aacute;rios
-/var/www/i3geo/exemplos/atlas/i3geo.js	1337177955	0	/var/www/i3geo/exemplos/atlas/i3geo.js
-/var/www/i3geo/twitter2geo.php	1349299267	1	twitter2geo.php
-/var/www/i3geo/classesjs/datadownload.js	1349299291	1	Data download
-/var/www/i3geo/temas/_ltestephp.php	1357213781	0	/var/www/i3geo/temas/_ltestephp.php
-/var/www/i3geo/interface/googleearthdebug.phtml	1359584413	0	/var/www/i3geo/interface/googleearthdebug.phtml
-/var/www/i3geo/classesjs/classe_php.js	1359138700	1	PHP
-/var/www/i3geo/exemplos/googlemapssanfona.phtml	1353380349	0	/var/www/i3geo/exemplos/googlemapssanfona.phtml
-/var/www/i3geo/geraminiatura.php	1355084258	1	geraminiatura.php
-/var/www/i3geo/symbols/fontes.txt	1337178363	0	/var/www/i3geo/symbols/fontes.txt
-/var/www/i3geo/.metadata/.plugins/org.eclipse.wst.jsdt.core/indexes/savedIndexNames.txt	1337177955	0	/var/www/i3geo/.metadata/.plugins/org.eclipse.wst.jsdt.core/indexes/savedIndexNames.txt
-/var/www/i3geo/init/index.php	1359743043	0	/var/www/i3geo/init/index.php
-/var/www/i3geo/temas/teste.txt	1359147147	0	/var/www/i3geo/temas/teste.txt
-/var/www/i3geo/mashups/teste.txt	1359505169	0	/var/www/i3geo/mashups/teste.txt
-/var/www/i3geo/classesjs/i3geonaocompacto.js	1346443160	0	/var/www/i3geo/classesjs/i3geonaocompacto.js
-/var/www/i3geo/classesjs/classe_calculo.js	1349979371	1	C&aacute;lculos
-/var/www/i3geo/.metadata/.plugins/org.eclipse.wst.jsdt.core/libraries/system.js	1337177955	0	/var/www/i3geo/.metadata/.plugins/org.eclipse.wst.jsdt.core/libraries/system.js
-/var/www/i3geo/classesjs/classe_guias.js	1359136576	1	Guias
-/var/www/i3geo/classesjs/geradordelinks.js	1357213779	1	Gerador de links
-/var/www/i3geo/mashups/openlayers_compacto.js.php	1359584412	0	/var/www/i3geo/mashups/openlayers_compacto.js.php
-/var/www/i3geo/kml.php	1351215924	1	kml.php
-/var/www/i3geo/classesjs/classe_analise.js	1357356574	1	Analise geografica
-/var/www/i3geo/ajuda_usuario.php	1350739271	1	ajuda_usuario.php
-/var/www/i3geo/classesjs/classe_gadgets.js	1359584409	1	Gadgets (objetos marginais do mapa)
-/var/www/i3geo/classesjs/classe_janela.js	1357852552	1	Janelas
-/var/www/i3geo/versao.php	1355448363	0	/var/www/i3geo/versao.php
-/var/www/i3geo/classesjs/classe_configura.js	1359050094	1	Configura&ccedil;&otilde;es gerais
-/var/www/i3geo/.metadata/.plugins/org.eclipse.wst.jsdt.core/libraries/baseBrowserLibrary.js	1337177955	0	/var/www/i3geo/.metadata/.plugins/org.eclipse.wst.jsdt.core/libraries/baseBrowserLibrary.js
-/var/www/i3geo/temas/_wtestephp.php	1357213781	0	/var/www/i3geo/temas/_wtestephp.php
-/var/www/i3geo/mashups/openlayers_ajuda.php	1340848302	0	/var/www/i3geo/mashups/openlayers_ajuda.php
-/var/www/i3geo/licenca.txt	1337178538	0	/var/www/i3geo/licenca.txt
-/var/www/i3geo/testainstal.php	1355448182	0	/var/www/i3geo/testainstal.php
-/var/www/i3geo/classesjs/classe_coordenadas.js	1357213779	1	Coordenadas
-/var/www/i3geo/classesjs/i3geo.js	1351168227	0	/var/www/i3geo/classesjs/i3geo.js
-/var/www/i3geo/.metadata/.plugins/org.eclipse.wst.jsdt.core/libraries/browserWindow.js	1337177955	0	/var/www/i3geo/.metadata/.plugins/org.eclipse.wst.jsdt.core/libraries/browserWindow.js
-/var/www/i3geo/classesjs/classe_social.js	1349299291	1	Social
-/var/www/i3geo/classesjs/classe_maparef.js	1357356692	1	Mapa de refer&ecirc;ncia
-/var/www/i3geo/mashups/openlayers.php	1359149232	0	/var/www/i3geo/mashups/openlayers.php
-/var/www/i3geo/classesjs/dicionario_ajuda.js	1358977737	0	/var/www/i3geo/classesjs/dicionario_ajuda.js
-/var/www/i3geo/mashups/openlayers.js.php	1340394244	0	/var/www/i3geo/mashups/openlayers.js.php
-/var/www/i3geo/guia_de_migracao.txt	1357213782	0	/var/www/i3geo/guia_de_migracao.txt
-/var/www/i3geo/classesjs/classe_navega.js	1357220682	1	Navega&ccedil;&atilde;o sobre o mapa
-/var/www/i3geo/classesjs/i3geo47.js	1351168383	0	/var/www/i3geo/classesjs/i3geo47.js
-/var/www/i3geo/classesjs/dicionario.js	1358777177	0	/var/www/i3geo/classesjs/dicionario.js
-/var/www/i3geo/classesjs/classe_idioma.js	1349978881	1	Idioma
-/var/www/i3geo/classesjs/i3geo_tudo_compacto47.js.php	1359584409	0	/var/www/i3geo/classesjs/i3geo_tudo_compacto47.js.php
-/var/www/i3geo/symbols/colourramp/geradat.php	1348691292	0	/var/www/i3geo/symbols/colourramp/geradat.php
-/var/www/i3geo/init/dicionario.js	1357230211	0	/var/www/i3geo/init/dicionario.js
-/var/www/i3geo/classesjs/classe_desenho.js	1357356518	1	Desenho de elementos gr&aacute;ficos
-/var/www/i3geo/classesjs/i3geo_tudo_compacto47.js	1359584409	0	/var/www/i3geo/classesjs/i3geo_tudo_compacto47.js
-/var/www/i3geo/testamapfile.php	1358220339	0	/var/www/i3geo/testamapfile.php
-/var/www/i3geo/classesjs/classe_barradebotoes.js	1357700837	1	Barra de bot&otilde;es
-/var/www/i3geo/classesjs/compactajs.php	1349545070	1	Compactador de javascript
-/var/www/i3geo/classesjs/classe_interface.js	1359584409	1	Interface
+C:\ms4w\Apache\htdocs\i3geo\classesjs\teste.txt	1359584271	0	C:\ms4w\Apache\htdocs\i3geo\classesjs\teste.txt
+C:\ms4w\Apache\htdocs\i3geo\mashups\teste.txt	1359584271	0	C:\ms4w\Apache\htdocs\i3geo\mashups\teste.txt
+C:\ms4w\Apache\htdocs\i3geo\classesjs\geradordelinks.js	1358473764	1	Gerador de links
+C:\ms4w\Apache\htdocs\i3geo\classesjs\classe_guias.js	1359574300	1	Guias
+C:\ms4w\Apache\htdocs\i3geo\geradordelinks.htm	1354504780	0	C:\ms4w\Apache\htdocs\i3geo\geradordelinks.htm
+C:\ms4w\Apache\htdocs\i3geo\.metadata\.plugins\org.eclipse.wst.jsdt.core\indexes\savedIndexNames.txt	1337181555	0	C:\ms4w\Apache\htdocs\i3geo\.metadata\.plugins\org.eclipse.wst.jsdt.core\indexes\savedIndexNames.txt
+C:\ms4w\Apache\htdocs\i3geo\index.htm	1354490897	0	C:\ms4w\Apache\htdocs\i3geo\index.htm
+C:\ms4w\Apache\htdocs\i3geo\teste.php	1354490924	0	C:\ms4w\Apache\htdocs\i3geo\teste.php
+C:\ms4w\Apache\htdocs\i3geo\datadownload.htm	1354504488	0	C:\ms4w\Apache\htdocs\i3geo\datadownload.htm
+C:\ms4w\Apache\htdocs\i3geo\classesjs\redesenho.js	1354501764	0	C:\ms4w\Apache\htdocs\i3geo\classesjs\redesenho.js
+C:\ms4w\Apache\htdocs\i3geo\classesjs\i3geo_tudo_compacto47.js	1359584273	0	C:\ms4w\Apache\htdocs\i3geo\classesjs\i3geo_tudo_compacto47.js
+C:\ms4w\Apache\htdocs\i3geo\classesjs\classe_login.js	1358473764	1	Controle de usu&aacute;rio
+C:\ms4w\Apache\htdocs\i3geo\classesjs\classe_configura.js	1359574300	1	Configura&ccedil;&otilde;es gerais
+C:\ms4w\Apache\htdocs\i3geo\classesjs\atlas.js	1354501766	1	Atlas
+C:\ms4w\Apache\htdocs\i3geo\ogc.htm	1354505484	0	C:\ms4w\Apache\htdocs\i3geo\ogc.htm
+C:\ms4w\Apache\htdocs\i3geo\mashups\openlayers.js	1358473770	0	C:\ms4w\Apache\htdocs\i3geo\mashups\openlayers.js
+C:\ms4w\Apache\htdocs\i3geo\classesjs\classe_coordenadas.js	1358473762	1	Coordenadas
+C:\ms4w\Apache\htdocs\i3geo\geraminiatura.php	1359757823	1	Gerador de miniaturas (thumbnails)
+C:\ms4w\Apache\htdocs\i3geo\guia_de_migracao.txt	1358473804	0	C:\ms4w\Apache\htdocs\i3geo\guia_de_migracao.txt
+C:\ms4w\Apache\htdocs\i3geo\classesjs\classe_idioma.js	1354501766	1	Idioma
+C:\ms4w\Apache\htdocs\i3geo\classesjs\classe_gadgets.js	1359580787	1	Gadgets (objetos marginais do mapa)
+C:\ms4w\Apache\htdocs\i3geo\wscliente.htm	1354504907	0	C:\ms4w\Apache\htdocs\i3geo\wscliente.htm
+C:\ms4w\Apache\htdocs\i3geo\ms_configura.php	1359574310	1	Vari&aacute;veis de inicializa&ccedil;&atilde;o ms_configura.php
+C:\ms4w\Apache\htdocs\i3geo\.metadata\.plugins\org.eclipse.ltk.ui.refactoring\dialog_settings.xml	1337181555	0	C:\ms4w\Apache\htdocs\i3geo\.metadata\.plugins\org.eclipse.ltk.ui.refactoring\dialog_settings.xml
+C:\ms4w\Apache\htdocs\i3geo\classesjs\classe_arvoredetemas.js	1358473764	1	arvore de temas
+C:\ms4w\Apache\htdocs\i3geo\.metadata\.plugins\org.eclipse.wst.jsdt.core\libraries\xhr.js	1337181555	0	C:\ms4w\Apache\htdocs\i3geo\.metadata\.plugins\org.eclipse.wst.jsdt.core\libraries\xhr.js
+C:\ms4w\Apache\htdocs\i3geo\classesjs\classe_arvoredecamadas.js	1358473762	1	&Aacute;rvore de camadas
+C:\ms4w\Apache\htdocs\i3geo\ms_criamapa.php	1359574310	1	Inicializa o i3Geo via URL ms_criamapa.php
+C:\ms4w\Apache\htdocs\i3geo\classesjs\classe_analise.js	1358473762	1	Analise geografica
+C:\ms4w\Apache\htdocs\i3geo\teste.sql	1340909709	0	C:\ms4w\Apache\htdocs\i3geo\teste.sql
+C:\ms4w\Apache\htdocs\i3geo\.metadata\.plugins\org.eclipse.wst.jsdt.ui\OpenTypeHistory.xml	1337181556	0	C:\ms4w\Apache\htdocs\i3geo\.metadata\.plugins\org.eclipse.wst.jsdt.ui\OpenTypeHistory.xml
+C:\ms4w\Apache\htdocs\i3geo\classesjs\classe_desenho.js	1358473762	1	Desenho de elementos gr&aacute;ficos
+C:\ms4w\Apache\htdocs\i3geo\classesjs\classe_interface.js	1359584249	1	Interface
+C:\ms4w\Apache\htdocs\i3geo\.metadata\.plugins\org.eclipse.wst.jsdt.core\libraries\browserWindow.js	1337181555	0	C:\ms4w\Apache\htdocs\i3geo\.metadata\.plugins\org.eclipse.wst.jsdt.core\libraries\browserWindow.js
+C:\ms4w\Apache\htdocs\i3geo\classesjs\classe_eventos.js	1358473762	1	Eventos
+C:\ms4w\Apache\htdocs\i3geo\classesjs\classe_calculo.js	1354501767	1	C&aacute;lculos
+C:\ms4w\Apache\htdocs\i3geo\principal.htm	1354493049	0	C:\ms4w\Apache\htdocs\i3geo\principal.htm
+C:\ms4w\Apache\htdocs\i3geo\testamapfile.php	1358473767	0	C:\ms4w\Apache\htdocs\i3geo\testamapfile.php
+C:\ms4w\Apache\htdocs\i3geo\mashups\openlayers.php	1359574303	0	C:\ms4w\Apache\htdocs\i3geo\mashups\openlayers.php
+C:\ms4w\Apache\htdocs\i3geo\.metadata\.plugins\org.eclipse.ui.ide\dialog_settings.xml	1337181555	0	C:\ms4w\Apache\htdocs\i3geo\.metadata\.plugins\org.eclipse.ui.ide\dialog_settings.xml
+C:\ms4w\Apache\htdocs\i3geo\classesjs\classe_selecao.js	1358473764	0	C:\ms4w\Apache\htdocs\i3geo\classesjs\classe_selecao.js
+C:\ms4w\Apache\htdocs\i3geo\.metadata\.plugins\org.eclipse.wst.jsdt.core\libraries\baseBrowserLibrary.js	1337181555	0	C:\ms4w\Apache\htdocs\i3geo\.metadata\.plugins\org.eclipse.wst.jsdt.core\libraries\baseBrowserLibrary.js
+C:\ms4w\Apache\htdocs\i3geo\.metadata\.plugins\org.eclipse.wst.jsdt.ui\QualifiedTypeNameHistory.xml	1337181556	0	C:\ms4w\Apache\htdocs\i3geo\.metadata\.plugins\org.eclipse.wst.jsdt.ui\QualifiedTypeNameHistory.xml
+C:\ms4w\Apache\htdocs\i3geo\classesjs\classe_social.js	1354501766	1	Social
+C:\ms4w\Apache\htdocs\i3geo\classesjs\classe_i3geo.js	1359577433	1	i3Geo
+C:\ms4w\Apache\htdocs\i3geo\classesjs\dicionario_ajuda.js	1359574300	0	C:\ms4w\Apache\htdocs\i3geo\classesjs\dicionario_ajuda.js
+C:\ms4w\Apache\htdocs\i3geo\classesjs\datadownload.js	1354501767	1	Data download
+C:\ms4w\Apache\htdocs\i3geo\twitter2geo.php	1359757677	0	twitter2geo.php
+C:\ms4w\Apache\htdocs\i3geo\mashups\openlayers_compacto.css.php	1359584274	0	C:\ms4w\Apache\htdocs\i3geo\mashups\openlayers_compacto.css.php
+C:\ms4w\Apache\htdocs\i3geo\classesjs\compactajs.php	1354501767	1	Compactador de javascript
+C:\ms4w\Apache\htdocs\i3geo\.metadata\.plugins\org.eclipse.ui.workbench\workingsets.xml	1337181556	0	C:\ms4w\Apache\htdocs\i3geo\.metadata\.plugins\org.eclipse.ui.workbench\workingsets.xml
+C:\ms4w\Apache\htdocs\i3geo\classesjs\classe_util.js	1359574300	1	Utilit&aacute;rios
+C:\ms4w\Apache\htdocs\i3geo\classesjs\classe_maparef.js	1358473764	1	Mapa de refer&ecirc;ncia
+C:\ms4w\Apache\htdocs\i3geo\classesjs\dicionario.js	1359574298	0	C:\ms4w\Apache\htdocs\i3geo\classesjs\dicionario.js
+C:\ms4w\Apache\htdocs\i3geo\kml.php	1359757895	1	Cat&aacute;logo de temas em KML
+C:\ms4w\Apache\htdocs\i3geo\mashups\openlayers_compacto.js.php	1359584274	0	C:\ms4w\Apache\htdocs\i3geo\mashups\openlayers_compacto.js.php
+C:\ms4w\Apache\htdocs\i3geo\.metadata\.plugins\org.eclipse.wst.jsdt.ui\dialog_settings.xml	1337181556	0	C:\ms4w\Apache\htdocs\i3geo\.metadata\.plugins\org.eclipse.wst.jsdt.ui\dialog_settings.xml
+C:\ms4w\Apache\htdocs\i3geo\classesjs\i3geo_tudo_compacto47.js.php	1359584273	0	C:\ms4w\Apache\htdocs\i3geo\classesjs\i3geo_tudo_compacto47.js.php
+C:\ms4w\Apache\htdocs\i3geo\classesjs\i3geo.js	1354501763	0	C:\ms4w\Apache\htdocs\i3geo\classesjs\i3geo.js
+C:\ms4w\Apache\htdocs\i3geo\hiperbolica.html	1354504818	0	C:\ms4w\Apache\htdocs\i3geo\hiperbolica.html
+C:\ms4w\Apache\htdocs\i3geo\.metadata\.plugins\org.eclipse.wst.jsdt.core\libraries\dom5.js	1337181555	0	C:\ms4w\Apache\htdocs\i3geo\.metadata\.plugins\org.eclipse.wst.jsdt.core\libraries\dom5.js
+C:\ms4w\Apache\htdocs\i3geo\classesjs\i3geonaocompacto.js	1354501767	0	C:\ms4w\Apache\htdocs\i3geo\classesjs\i3geonaocompacto.js
+C:\ms4w\Apache\htdocs\i3geo\.metadata\.plugins\org.eclipse.jdt.ui\QualifiedTypeNameHistory.xml	1337181556	0	C:\ms4w\Apache\htdocs\i3geo\.metadata\.plugins\org.eclipse.jdt.ui\QualifiedTypeNameHistory.xml
+C:\ms4w\Apache\htdocs\i3geo\mashups\openlayers_ajuda.php	1340851902	0	C:\ms4w\Apache\htdocs\i3geo\mashups\openlayers_ajuda.php
+C:\ms4w\Apache\htdocs\i3geo\classesjs\wscliente.js	1358473764	1	Cliente de web services
+C:\ms4w\Apache\htdocs\i3geo\.metadata\.plugins\org.eclipse.ui.workbench\dialog_settings.xml	1337181556	0	C:\ms4w\Apache\htdocs\i3geo\.metadata\.plugins\org.eclipse.ui.workbench\dialog_settings.xml
+C:\ms4w\Apache\htdocs\i3geo\ajuda_usuario.php	1359757803	1	Lista de funcionalidades
+C:\ms4w\Apache\htdocs\i3geo\classesjs\classe_tema.js	1359574298	1	Temas
+C:\ms4w\Apache\htdocs\i3geo\ogc_iso19115_exemplo.xml	1337181782	0	C:\ms4w\Apache\htdocs\i3geo\ogc_iso19115_exemplo.xml
+C:\ms4w\Apache\htdocs\i3geo\.metadata\.plugins\org.eclipse.ui.workbench\workbench.xml	1337181556	0	C:\ms4w\Apache\htdocs\i3geo\.metadata\.plugins\org.eclipse.ui.workbench\workbench.xml
+C:\ms4w\Apache\htdocs\i3geo\.metadata\.plugins\org.eclipse.wst.jsdt.core\libraries\system.js	1337181555	0	C:\ms4w\Apache\htdocs\i3geo\.metadata\.plugins\org.eclipse.wst.jsdt.core\libraries\system.js
+C:\ms4w\Apache\htdocs\i3geo\testainstal.php	1358473771	0	C:\ms4w\Apache\htdocs\i3geo\testainstal.php
+C:\ms4w\Apache\htdocs\i3geo\index.html	1354490924	0	C:\ms4w\Apache\htdocs\i3geo\index.html
+C:\ms4w\Apache\htdocs\i3geo\ogc.php	1359757922	1	Gerador de serviços OGC
+C:\ms4w\Apache\htdocs\i3geo\testainicializacao.htm	1340851839	0	C:\ms4w\Apache\htdocs\i3geo\testainicializacao.htm
+C:\ms4w\Apache\htdocs\i3geo\ms_registraip.php	1359757659	0	ms_registraip.php
+C:\ms4w\Apache\htdocs\i3geo\classesjs\classe_barradebotoes.js	1358473764	1	Barra de bot&otilde;es
+C:\ms4w\Apache\htdocs\i3geo\classesjs\classe_janela.js	1358473764	1	Janelas
+C:\ms4w\Apache\htdocs\i3geo\mashups\index.html	1358473770	1	Mashups
+C:\ms4w\Apache\htdocs\i3geo\versao.php	1358473772	0	C:\ms4w\Apache\htdocs\i3geo\versao.php
+C:\ms4w\Apache\htdocs\i3geo\classesjs\classe_ajuda.js	1358473762	1	Ajuda
+C:\ms4w\Apache\htdocs\i3geo\mashups\openlayers.js.php	1340397844	0	C:\ms4w\Apache\htdocs\i3geo\mashups\openlayers.js.php
+C:\ms4w\Apache\htdocs\i3geo\classesjs\i3geo47.js	1354501764	0	C:\ms4w\Apache\htdocs\i3geo\classesjs\i3geo47.js
+C:\ms4w\Apache\htdocs\i3geo\leiame.txt	1354490924	0	C:\ms4w\Apache\htdocs\i3geo\leiame.txt
+C:\ms4w\Apache\htdocs\i3geo\classesjs\classe_navega.js	1358473764	1	Navega&ccedil;&atilde;o sobre o mapa
+C:\ms4w\Apache\htdocs\i3geo\classesjs\classe_mapa.js	1359574298	1	Mapa
+C:\ms4w\Apache\htdocs\i3geo\classesjs\classe_php.js	1359574300	1	PHP
+C:\ms4w\Apache\htdocs\i3geo\.metadata\.plugins\org.eclipse.jdt.ui\OpenTypeHistory.xml	1337181556	0	C:\ms4w\Apache\htdocs\i3geo\.metadata\.plugins\org.eclipse.jdt.ui\OpenTypeHistory.xml
+C:\ms4w\Apache\htdocs\i3geo\licenca.txt	1337182138	0	C:\ms4w\Apache\htdocs\i3geo\licenca.txt
+C:\ms4w\Apache\htdocs\i3geo\mashups\openlayers_compacto.js	1359584274	0	C:\ms4w\Apache\htdocs\i3geo\mashups\openlayers_compacto.js

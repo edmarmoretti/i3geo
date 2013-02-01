@@ -1,6 +1,6 @@
 <?php
 /*
-Title: kml.php
+Title: Cat&aacute;logo de temas em KML
 
 Gerador de menu em kml para uso no Google Earth
 

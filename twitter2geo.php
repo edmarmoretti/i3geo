@@ -1,7 +1,5 @@
 <?php
 /*
-Title: twitter2geo.php
-
 Converte mensagens registradas no twitter, para um determinado TAG, em um arquivo georreferenciado
 
 As mensagens s&atilde;o consideradas apenas qd possu&iacute;rem as TAGs #x ou #y, ou ent&atilde;o, #lat ou #long

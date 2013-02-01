@@ -1,7 +1,5 @@
 <?php
 /*
-Title: ms_registraip.php
-
 Com esta op&ccedil;&atilde;o ativada, toda vez que um usu&aacute;rio abre o i3geo seu IP &eacute; identificado e a coordenada geogr&aacute;fica &eacute; pesquisada 
 no banco de dados pacotes/geoip/GeoLiteCity.dat. A coordenada &eacute; ent&atilde;o registrada em um banco de dados cuja conex&atilde;o &eacute; definida 
 na vari&aacute;vel $conexao.

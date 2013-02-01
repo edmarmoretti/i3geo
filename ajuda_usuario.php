@@ -1,6 +1,6 @@
 <?php
 /*
-Title: ajuda_usuario.php
+Title: Lista de funcionalidades
 
 Lista as funcionalidades cadastradas em i3geo/classesjs/dicionario_ajuda.js. A listagem &eacute; organizada em grupos que podem ser expandidos individualmente ou no total.
 

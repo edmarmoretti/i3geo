@@ -1,6 +1,6 @@
 <?php
 /*
- Title: ogc.php
+ Title: Gerador de serviços OGC
 
 Gera web services nos padr&otilde;es OGC
 

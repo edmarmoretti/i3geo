@@ -1,4 +1,4 @@
-Format: 1.51
+Format: Development Release 02-10-2007 (1.35 base)
 
 # This is the Natural Docs topics file for this project.  If you change anything
 # here, it will apply to THIS PROJECT ONLY.  If you'd like to change something
@@ -55,6 +55,9 @@ Format: 1.51
 # Class Hierarchy: [yes|no]
 #    Whether the topics are part of the class hierarchy.  Defaults to no.
 #
+# Variable Type: [yes|no]
+#    Whether the topics can be a variable type.  Defaults to no.
+#
 # Page Title If First: [yes|no]
 #    Whether the topic's title becomes the page title if it's the first one in
 #    a file.  Defaults to no.
@@ -72,7 +75,7 @@ Format: 1.51
 # their behavior or add keywords:
 #
 #    Generic, Class, Interface, Section, File, Group, Function, Variable,
-#    Property, Type, Constant, Enumeration, Event, Delegate, Macro,
+#    Property, Type, Constant, Enumeration, Event, Delegate, Case, Macro,
 #    Database, Database Table, Database View, Database Index, Database
 #    Cursor, Database Trigger, Cookie, Build Target
 
