@@ -201,6 +201,7 @@ function iniciaMapa()
 	//
 	//salva as altera&ccedil;&otilde;es feitas
 	//
+	$m->mapa->setmetadata("ows_enable_request","*");
 	$m->salva();
 	//prepara a legenda para incluir no mapa, preenchendo os nomes das classes em branco
 	if (strtolower($embedLegenda) == "sim")

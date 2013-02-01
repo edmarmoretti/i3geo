@@ -1,0 +1,467 @@
+Format: Development Release 02-10-2007 (1.35 base)
+
+
+Title: i3Geo
+SubTitle: Documentação dos códigos
+
+# You can add a footer to your documentation like this:
+# Footer: [text]
+# If you want to add a copyright notice, this would be the place to do it.
+Timestamp: Gerado em day month, year
+#   m     - One or two digit month.  January is "1"
+#   mm    - Always two digit month.  January is "01"
+#   mon   - Short month word.  January is "Jan"
+#   month - Long month word.  January is "January"
+#   d     - One or two digit day.  1 is "1"
+#   dd    - Always two digit day.  1 is "01"
+#   day   - Day with letter extension.  1 is "1st"
+#   yy    - Two digit year.  2006 is "06"
+#   yyyy  - Four digit year.  2006 is "2006"
+#   year  - Four digit year.  2006 is "2006"
+
+# These are indexes you deleted, so Natural Docs will not add them again
+# unless you remove them from this line.
+
+Don't Index: Properties
+
+
+# --------------------------------------------------------------------------
+# 
+# Cut and paste the lines below to change the order in which your files
+# appear on the menu.  Don't worry about adding or removing files, Natural
+# Docs will take care of that.
+# 
+# You can further organize the menu by grouping the entries.  Add a
+# "Group: [name] {" line to start a group, and add a "}" to end it.
+# 
+# You can add text and web links to the menu by adding "Text: [text]" and
+# "Link: [name] ([URL])" lines, respectively.
+# 
+# The formatting and comments are auto-generated, so don't worry about
+# neatness when editing the file.  Natural Docs will clean it up the next
+# time it is run.  When working with groups, just deal with the braces and
+# forget about the indentation and comments.
+# 
+# --------------------------------------------------------------------------
+
+
+Link: Portal do Software Público  (http://softwarepublico.gov.br)
+File: ms_criamapa.php  (ms_criamapa.php)
+
+Group: Diagramas  {
+
+   Group: Figuras  {
+
+      Link: banco de dados de administração  (../diagramas/mer_banco_de_dados_de_administracao.png)
+      Link: banco de dados de usuários - gerado com Eclipse + ERMaster  (../diagramas/cadastrodeusuarios)
+      Link: banco de dados de metadados estatisticos - gerado com Eclipse + ERMaster  (../diagramas/metaestat)
+      Link: Arquitetura  (../diagramas/arquitetura.png)
+      Link: Caso de uso geral  (../diagramas/caso_de_uso_geral.png)
+      Link: Atividade abrir mapa interativo  (../diagramas/atividade_abrir_mapa_interativo.png)
+      Link: Atividade atualizar versão  (../diagramas/atividade_atualizar_versao.png)
+      Link: Atividade gerar arquivo de uma nova versão  (../diagramas/atividade_gerar_arquivo_nova_versao.png)
+      Link: Atividade gerar pacote de correções  (../diagramas/atividade_gerar_pacote_de_correcoes.png)
+      }  # Group: Figuras
+
+   Group: Arquivos originais  {
+
+      Link: Baixe o software DIA  (http://dia-installer.de/)
+      Link: MER do banco de dados de administração  (../diagramas/mer_banco_de_dados_de_administracao.dia)
+      Link: Arquitetura  (../diagramas/arquitetura.dia)
+      Link: Caso de uso geral  (../diagramas/caso_de_uso_geral.dia)
+      Link: Atividade abrir mapa interativo  (../diagramas/atividade_abrir_mapa_interativo.dia)
+      Link: Atividade atualizar versão  (../diagramas/atividade_atualizar_versao.dia)
+      Link: Atividade gerar arquivo de uma nova versão  (../diagramas/atividade_gerar_arquivo_nova_versao.dia)
+      Link: Atividade gerar pacote de correções  (../diagramas/atividade_gerar_pacote_de_correcoes.dia)
+      }  # Group: Arquivos originais
+
+   }  # Group: Diagramas
+
+Group: Javascript  {
+
+   Group: Classes  {
+
+      File: i3Geo  (classesjs\classe_i3geo.js)
+      File: Arvore de camadas  (no auto-title, classesjs\classe_arvoredecamadas.js)
+      File: Arvore de temas  (no auto-title, classesjs\classe_arvoredetemas.js)
+      File: Ajuda  (classesjs\classe_ajuda.js)
+      File: Analise geografica  (no auto-title, classesjs\classe_analise.js)
+      File: Barra de bot&amp;otilde;es  (no auto-title, classesjs\classe_barradebotoes.js)
+      File: C&amp;aacute;lculos  (no auto-title, classesjs\classe_calculo.js)
+      File: Cliente de web services  (classesjs\wscliente.js)
+      File: Compactador de javascript  (classesjs\compactajs.php)
+      File: Configura&amp;ccedil;&amp;otilde;es gerais  (no auto-title, classesjs\classe_configura.js)
+      File: Controle de usu&amp;aacute;rio  (classesjs\classe_login.js)
+      File: Coordenadas  (classesjs\classe_coordenadas.js)
+      File: Desenho de elementos gr&amp;aacute;ficos  (no auto-title, classesjs\classe_desenho.js)
+      File: Eventos  (classesjs\classe_eventos.js)
+      File: Gadgets &lparen;objetos marginais do mapa&rparen;  (classesjs\classe_gadgets.js)
+      File: Guias  (classesjs\classe_guias.js)
+      File: Idioma  (classesjs\classe_idioma.js)
+      File: Interface  (classesjs\classe_interface.js)
+      File: Janelas  (classesjs\classe_janela.js)
+      File: Mapa  (classesjs\classe_mapa.js)
+      File: Mapa de refer&amp;ecirc;ncia  (no auto-title, classesjs\classe_maparef.js)
+      File: Navega&amp;ccedil;&amp;atilde;o sobre o mapa  (no auto-title, classesjs\classe_navega.js)
+      File: PHP  (classesjs\classe_php.js)
+      File: Temas  (classesjs\classe_tema.js)
+      File: Utilit&amp;aacute;rios  (no auto-title, classesjs\classe_util.js)
+      File: Social  (classesjs\classe_social.js)
+      }  # Group: Classes
+
+   Group: JS de aplicativos específicos  {
+
+      File: Atlas  (classesjs\atlas.js)
+      File: Data download  (classesjs\datadownload.js)
+      File: Gerador de links  (classesjs\geradordelinks.js)
+      }  # Group: JS de aplicativos específicos
+
+   }  # Group: Javascript
+
+Group: PHP  {
+
+   File: mapa_controle.php  (classesphp\mapa_controle.php)
+   File: mapa_inicia.php  (classesphp\mapa_inicia.php)
+   File: Vari&amp;aacute;veis de inicializa&amp;ccedil;&amp;atilde;o ms_configura.php  (no auto-title, ms_configura.php)
+
+   Group: Programas de uso geral (includes)  {
+
+      File: carrega_ext.php  (classesphp\carrega_ext.php)
+      File: funcoes_gerais.php  (classesphp\funcoes_gerais.php)
+      File: pega_variaveis.php  (classesphp\pega_variaveis.php)
+      }  # Group: Programas de uso geral (includes)
+
+   Group: Classes  {
+
+      File: classe_alteraclasse.php  (classesphp\classe_alteraclasse.php)
+      File: classe_analise.php  (classesphp\classe_analise.php)
+      File: classe_atlas.php  (classesphp\classe_atlas.php)
+      File: classe_atributos  (classesphp\classe_atributos.php)
+      File: classe_escala.php  (classesphp\classe_escala.php)
+      File: classe_estatistica.php  (classesphp\classe_estatistica.php)
+      File: classe_imagem.php  (classesphp\classe_imagem.php)
+      File: classe_legenda.php  (classesphp\classe_legenda.php)
+      File: classe_mapa.php  (classesphp\classe_mapa.php)
+      File: classe_menutemas.php  (classesphp\classe_menutemas.php)
+      File: classe_navegacao.php  (classesphp\classe_navegacao.php)
+      File: class.palette.php  (classesphp\class.palette.php)
+      File: classe_selecao.php  (classesphp\classe_selecao.php)
+      File: classe_shp.php  (classesphp\classe_shp.php)
+      File: classe_temas.php  (classesphp\classe_temas.php)
+      File: classe_toponimia.php  (classesphp\classe_toponimia.php)
+      File: classe_vermultilayer.php  (classesphp\classe_vermultilayer.php)
+      }  # Group: Classes
+
+   Group: Funções  {
+
+      File: atlas_controle.php  (classesphp\atlas_controle.php)
+      File: graficopizza.php  (classesphp\graficopizza.php)
+      File: graficos.php  (classesphp\graficos.php)
+      File: parse_cgi.php  (classesphp\parse_cgi.php)
+      File: wmswfs.php  (classesphp\wmswfs.php)
+      File: wscliente.php  (classesphp\wscliente.php)
+      }  # Group: Funções
+
+   Group: Serviços de renderização das interfaces  {
+
+      File: mapa_googleearth.php  (classesphp\mapa_googleearth.php)
+      File: mapa_googlemaps.php  (classesphp\mapa_googlemaps.php)
+      File: mapa_openlayers.php  (classesphp\mapa_openlayers.php)
+      }  # Group: Serviços de renderização das interfaces
+
+   }  # Group: PHP
+
+Group: Aplicativos adicionais  {
+
+   File: ms_registraip.php  (ms_registraip.php)
+   File: ogc.php  (ogc.php)
+   File: kml.php  (kml.php)
+   File: geraminiatura.php  (geraminiatura.php)
+   File: ajuda_usuario.php  (ajuda_usuario.php)
+   File: Mashups  (mashups\index.html)
+   File: twitter2geo.php  (twitter2geo.php)
+
+   Group: Atlas  {
+
+      File: index.htm  (atlas\index.htm)
+      File: index.html  (atlas\index.html)
+      File: Interface padr&amp;atilde;o dos Atlas  (no auto-title, atlas\geral.htm)
+      }  # Group: Atlas
+
+   Group: Ferramentas  {
+
+      File: 3d  (ferramentas\3d\index.js)
+      File: Adiciona um tema ao mapa com base em um arquivo GeoJson existente na Web  (ferramentas\conectargeojson\index.js)
+      File: Adiciona um tema ao mapa com base em um arquivo KML existente na Web  (ferramentas\carregakml\index.js)
+      File: ADICIONATEMAGEOJSON  (ferramentas\conectargeojson\exec.php)
+      File: ADICIONATEMAGEORSS  (ferramentas\conectargeorss\exec.php)
+      File: Agrupa elementos  (ferramentas\agrupaelementos\index.js)
+      File: AGRUPAELEMENTOS  (ferramentas\agrupaelementos\exec.php)
+      File: An&amp;aacute;lise de Geometrias  (ferramentas\analisageometrias\index.js)
+      File: ANALISEDISTRIPT  (ferramentas\pontosdistri\exec.php)
+      File: Anima&amp;ccedil;&amp;atilde;o  (ferramentas\animacao\index.js)
+      File: aplicarsld  (ferramentas\aplicarsld\index.js)
+      File: Auto redesenho  (ferramentas\opcoes_autoredesenha\index.js)
+      File: Barra de escala  (ferramentas\opcoes_escala\index.js)
+      File: Buffer  (ferramentas\buffer\index.js)
+      File: Buffer em um ponto  (ferramentas\bufferpt\index.js)
+      File: Busca de dados nos atributos de um tema  (ferramentas\busca\index.js)
+      File: Busca fotos  (ferramentas\buscafotos\index.js)
+      File: Busca metadados na INDE  (ferramentas\buscainde\index.js)
+      File: Busca r&amp;aacute;pida  (no auto-title, ferramentas\buscarapida\index.js)
+      File: Carrega mapa salvo  (ferramentas\carregamapa\index.js)
+      File: Carrosel de temas  (ferramentas\carouseltemas\index.js)
+      File: Centr&amp;oacute;ide  (ferramentas\centroide\index.js)
+      File: Centro de massa  (ferramentas\centromassa\index.js)
+      File: CENTROMASSA  (ferramentas\centromassa\exec.php)
+      File: Conex&amp;atilde;o com georss  (no auto-title, ferramentas\conectargeorss\index.js)
+      File: Conex&amp;atilde;o com WMS  (no auto-title, ferramentas\conectarwms\index.js)
+      File: Confluencias  (ferramentas\confluence\index.js)
+      File: Converte um mapa em kml  (ferramentas\convertemapakml\index.js)
+      File: Converte um mapa em WMS  (ferramentas\convertews\index.js)
+      File: Converte um tema em kml  (ferramentas\convertekml\index.js)
+      File: CONVERTEWMSWMC  (ferramentas\convertews\exec.php)
+      File: Cor da sele&amp;ccedil;&amp;atilde;o  (ferramentas\opcoes_querymap\index.js)
+      File: Cor do fundo do mapa  (ferramentas\opcoes_fundo\index.js)
+      File: Cortina  (ferramentas\cortina\index.js)
+      File: CRIABUFFER  (ferramentas\buffer\exec.php)
+      File: CRIACENTROIDE  (ferramentas\centroide\exec.php)
+      File: CRIATOPONIMIA  (ferramentas\toponimia\exec.php)
+      File: Dissolve elementos de um tema  (ferramentas\dissolve\index.js)
+      File: DISSOLVEPOLIGONO  (ferramentas\dissolve\exec.php)
+      File: Distância entre pontos  (ferramentas\distanciaptpt\index.js)
+      File: DISTANCIAPTPT  (ferramentas\distanciaptpt\exec.php)
+      File: Distribui&amp;ccedil;&amp;atilde;o de pontos  (ferramentas\pontosdistri\index.js)
+      File: Download de um tema  (ferramentas\download\index.js)
+      File: Editor de legenda  (ferramentas\legenda\index.js)
+      File: Editor de SQL  (ferramentas\editorsql\index.js)
+      File: Esp&amp;eacute;cies &lparen;PHP&rparen;  (no auto-title, ferramentas\especies\pesquisa.php)
+      File: Espï¿½cies &lparen;JavaScript&rparen;  (ferramentas\especies\pesquisa.htm)
+      File: Etiqueta  (ferramentas\etiqueta\index.js)
+      File: etiqueta\exec.php  (ferramentas\etiqueta\exec.php)
+      File: Excluir camadas em lote  (ferramentas\excluirarvore\index.js)
+      File: Filtra tema  (ferramentas\filtro\index.js)
+      File: Filtro da &amp;aacute;rvore de camadas  (ferramentas\filtroarvore\index.js)
+      File: filtro\exec.php  (ferramentas\filtro\exec.php)
+      File: Formato de imagem  (ferramentas\outputformat\index.js)
+      File: Google Maps  (ferramentas\googlemaps\index.php)
+      File: GPX  (ferramentas\uploadgpx\index.js)
+      File: Gr&amp;aacute;fico interativo  (ferramentas\graficointerativo\index.js)
+      File: Gr&amp;aacute;fico tema  (ferramentas\graficotema\index.js)
+      File: Gr&amp;aacute;ficos  (ferramentas\gradecoord\exec.php)
+      File: Grade de coordenadas  (ferramentas\gradecoord\index.js)
+      File: Grade de hex&amp;aacute;gonos  (ferramentas\gradehex\index.js)
+      File: Grade de pol&amp;iacute;gonos  (ferramentas\gradepol\index.js)
+      File: Grade de pontos  (ferramentas\gradepontos\index.js)
+      File: GRADEDEHEX  (ferramentas\gradehex\exec.php)
+      File: GRADEDEPOL  (ferramentas\gradepol\exec.php)
+      File: GRADEDEPONTOS  (ferramentas\gradepontos\exec.php)
+      File: GRAFICOSELECAO  (ferramentas\graficointerativo\exec.php)
+      File: GRAFICOTEMA  (ferramentas\graficotema\exec.php)
+      File: Identifica  (ferramentas\identifica\index.js)
+      File: Importar WMC  (ferramentas\importarwmc\index.js)
+
+      Group: Imprimir  {
+
+         File: Imprimir  (ferramentas\imprimir\index.js)
+         File: Licen&amp;ccedil;a  (no auto-title, ferramentas\imprimir\geotif.php)
+         File: Licen&amp;ccedil;a  (no auto-title, ferramentas\imprimir\svg.php)
+         File: Licen&amp;ccedil;a  (no auto-title, ferramentas\imprimir\aggpng.php)
+         }  # Group: Imprimir
+
+      File: Insere gr&amp;aacute;fico interativo  (ferramentas\inseregrafico\index.js)
+      File: Insere ponto  (ferramentas\inserexy2\index.js)
+      File: Insere textos  (ferramentas\inseretxt\index.js)
+      File: INSERESHP  (ferramentas\inserexy2\exec.php)
+      File: Legenda gr&amp;aacute;fica do mapa  (ferramentas\opcoes_legenda\index.js)
+      File: legenda\exec.php  (ferramentas\legenda\exec.php)
+      File: Linha do tempo  (ferramentas\linhadotempo\index.php)
+      File: LISTATAGS  (ferramentas\nuvemtags\exec.php)
+      File: Login  (ferramentas\loginusuario\index.js)
+
+      Group: Metaestat  {
+
+         File: analise.php  (ferramentas\metaestat\analise.php)
+         File: Cartogramas estat&amp;iacute;sticos  (ferramentas\metaestat\index.js)
+         File: Editor de limites geograficos do sistema de metadados estatisticos  (ferramentas\metaestat\editorlimites.php)
+         File: Editor vetorial de limites de regi&amp;otilde;es do sistema METAESTAT  (ferramentas\metaestat\editorlimites.js)
+         File: Ferramenta que mostra opcoes adicionais de analise do m&amp;oacute;dulo METAESTAT  (ferramentas\metaestat\alterarep.js)
+         File: Ferramenta que permite localizar uma regi&amp;atilde;o baseada no cadastro do m&amp;oacute;dulo METAESTAT  (ferramentas\metaestat\locregiao.js)
+         File: Ferramenta que permite mostrar os limites de um tipo de regi&amp;atilde;o baseada no cadastro do m&amp;oacute;dulo METAESTAT  (ferramentas\metaestat\mostraregiao.js)
+         }  # Group: Metaestat
+
+      Group: Metar  {
+
+         File: i3GEOF.metar  (ferramentas\metar\index.js)
+         File: metarextensao  (ferramentas\metar\metarextensao.php)
+         File: metarproxima  (ferramentas\metar\metarproxima.php)
+         }  # Group: Metar
+
+      File: Mostra extens&amp;atilde;o  (ferramentas\mostraexten\index.js)
+      File: MUDATAMANHO  (ferramentas\opcoes_tamanho\exec.php)
+      File: N&amp;uacute;mero de pontos em pol&amp;iacute;gonos  (ferramentas\nptpol\index.js)
+      File: NPTPOL  (ferramentas\nptpol\exec.php)
+      File: Nuvem de tags  (ferramentas\nuvemtags\index.js)
+      File: Op&amp;ccedil;&amp;otilde;es de filtro de imagem  (ferramentas\tipoimagem\index.js)
+      File: Op&amp;ccedil;&amp;otilde;es de labels  (ferramentas\opcoes_label\index.js)
+      File: opacidademapa  (ferramentas\opacidademapa\index.js)
+      File: opcoes_escala\exec.php  (ferramentas\opcoes_escala\exec.php)
+      File: opcoes_fundo\exec.php  (ferramentas\opcoes_fundo\exec.php)
+      File: opcoes_legenda\exec.php  (ferramentas\opcoes_legenda\exec.php)
+      File: PEGAQUERYMAPCOR  (ferramentas\opcoes_querymap\exec.php)
+      File: Perfil  (ferramentas\perfil\index.js)
+      File: Ponto em pol&amp;iacute;gono  (ferramentas\pontoempoligono\index.js)
+      File: PONTOEMPOLIGONO  (ferramentas\pontoempoligono\exec.php)
+      File: Quadros de anima&amp;ccedil;&amp;atilde;o  (ferramentas\opcoes_quadros\index.js)
+      File: Redes sociais  (ferramentas\redessociais\index.php)
+      File: Salva as defini&amp;ccedil;&amp;otilde;es de uma camada no arquivo mapfile correspondente  (ferramentas\salvamapfile\index.js)
+      File: Salva mapa  (ferramentas\salvamapa\index.js)
+      File: Sele&amp;ccedil;&amp;atilde;o  (ferramentas\selecao\index.js)
+      File: selecao\exec.php  (ferramentas\selecao\exec.php)
+      File: SIBEA-MMA &lparen;JavaScript&rparen;  (ferramentas\sibea\pesquisa.htm)
+      File: SIBEA-MMA &lparen;PHP&rparen;  (ferramentas\sibea\pesquisa.php)
+      File: Tabela de atributos  (ferramentas\tabela\index.js)
+      File: tabela\exec.php  (ferramentas\tabela\exec.php)
+      File: Tamanho do mapa  (ferramentas\opcoes_tamanho\index.js)
+
+      Group: Telaremota  {
+
+         File: Interface GoogleEarth para a ferramenta tela remota  (ferramentas\telaremota\googleearth1.php)
+         File: Interface GoogleMaps para a ferramenta tela remota  (ferramentas\telaremota\googlemaps1.php)
+         File: Interface OpenLayers para a ferramenta tela remota  (ferramentas\telaremota\openlayers1.php)
+         File: Monotor remoto  (ferramentas\telaremota\recuperamapa.php)
+         File: Tela remota  (ferramentas\telaremota\index.js)
+         File: TELAREMOTA  (ferramentas\telaremota\exec.php)
+         }  # Group: Telaremota
+
+      File: TME  (ferramentas\tme\index.js)
+      File: Topon&amp;iacute;mia de um tema  (ferramentas\toponimia\index.js)
+      File: Upload de arquivo dbf  (ferramentas\uploaddbf\index.js)
+      File: Upload de arquivo shapefile  (ferramentas\upload\index.js)
+      File: Upload KML  (ferramentas\uploadkml\index.js)
+      File: Wikip&amp;eacute;dia  (ferramentas\wiki\index.js)
+      File: WMS Time  (ferramentas\wmstime\index.js)
+      }  # Group: Ferramentas
+
+   }  # Group: Aplicativos adicionais
+
+Group: Sistema de Administração  {
+
+   File: abrefontemapfile  (admin\abrefontemapfile.php)
+   File: hiperbolica  (admin\hiperbolica.php)
+
+   Group: Html  {
+
+      File: Ajuste de mapfiles  (admin\html\incluimap.html)
+      File: Cadastro de grupos de usuarios  (admin\html\gruposusuarios.html)
+      File: Cadastro de usuarios  (admin\html\usuarios.html)
+      File: Cadatro de vari&amp;aacute;veis estat&amp;iacute;sticas  (admin\html\estat_variavel.html)
+      File: Editor da &amp;aacute;rvore de menus  (no auto-title, admin\html\arvore.html)
+      File: Editor da interface Atlas  (admin\html\atlas.html)
+      File: Editor da lista de conexoes do sistema de metadados estat&amp;iacute;sticos  (admin\html\estat_conexao.html)
+      File: Editor da lista de fontes do sistema de metadados estat&amp;iacute;sticos  (admin\html\estat_fonteinfo.html)
+      File: Editor da lista de menus  (admin\html\menus.html)
+      File: Editor da lista de regi&amp;otilde;es do sistema de metadados estat&amp;iacute;sticos  (admin\html\estat_tipo_regiao.html)
+      File: Editor da lista de tipos de per&amp;iacute;odos de tempo do sistema de metadados estat&amp;iacute;sticos  (admin\html\estat_tipo_periodo.html)
+      File: Editor da lista de unidades de medida do sistema de metadados estat&amp;iacute;sticos  (admin\html\estat_unidade_medida.html)
+      File: Editor das opera&amp;ccedil;&amp;otilde;es sob controle  (admin\html\operacoes.html)
+      File: Editor de mapfiles  (admin\html\editormapfile.html)
+      File: Editor de mapfiles de inicializa&amp;ccedil;&amp;atilde;o  (no auto-title, admin\html\mapfiles.html)
+      File: Editor de tabelas do sistema de metadados estat&amp;iacute;sticos  (admin\html\estat_editor.html)
+      File: Editor do ms_configura  (admin\html\ms_configura.html)
+      File: Editor do ogcws.map  (admin\html\ogcws.html)
+      File: Mapas  (admin\html\mapas.html)
+      File: Op&amp;ccedil;&amp;otilde;es da ferramenta identifica  (no auto-title, admin\html\identifica.html)
+      File: Perfis  (admin\html\perfis.html)
+      File: Sistemas de adi&amp;ccedil;&amp;atilde;o de temas  (no auto-title, admin\html\sistemas.html)
+      File: Subir shapefile  (admin\html\subirshapefile.html)
+      File: Tags  (admin\html\tags.html)
+      File: Upload de dados do sistema de metadados estat&amp;iacute;sticos  (admin\html\estat_uploaddados.html)
+      File: Web Services  (admin\html\webservices.html)
+      }  # Group: Html
+
+   Group: Js  {
+
+      File: arvore.js  (admin\js\arvore.js)
+      File: atlas.js  (admin\js\atlas.js)
+      File: core.js  (admin\js\core.js)
+      File: editormapfile.js  (admin\js\editormapfile.js)
+      File: grupos.js  (admin\js\grupos.js)
+      File: gruposusuarios.js  (admin\js\gruposusuarios.js)
+      File: identifica.js  (admin\js\identifica.js)
+      File: importar.js  (admin\js\importar.js)
+      File: mapas.js  (admin\js\mapas.js)
+      File: mapfiles.js  (admin\js\mapfiles.js)
+      File: menu.js  (admin\js\menu.js)
+      File: ms_configura.js  (admin\js\ms_configura.js)
+      File: ogcws.js  (admin\js\ogcws.js)
+      File: operacoes.js  (admin\js\operacoes.js)
+      File: perfis.js  (admin\js\perfis.js)
+      File: sistemas.js  (admin\js\sistemas.js)
+      File: subgrupos.js  (admin\js\subgrupos.js)
+      File: tags.js  (admin\js\tags.js)
+      File: usuarios.js  (admin\js\usuarios.js)
+      File: webservices.js  (admin\js\webservices.js)
+      }  # Group: Js
+
+   File: Menu principal  (admin\index.html)
+
+   Group: Php  {
+
+      File: arvore.php  (admin\php\arvore.php)
+      File: atlas.php  (admin\php\atlas.php)
+      File: classe_arvore.php  (admin\php\classe_arvore.php)
+      File: classe_metaestat.php  (admin\php\classe_metaestat.php)
+      File: conexao.php  (admin\php\conexao.php)
+      File: criabanco.php  (admin\php\criabanco.php)
+      File: editormapfile.php  (admin\php\editormapfile.php)
+      File: Estat&amp;iacute;sticas do banco de dados de administra&amp;ccedil;&amp;atilde;o  (no auto-title, admin\php\estatisticas.php)
+      File: Fun&amp;ccedil;&amp;otilde;es de uso geral  (no auto-title, admin\php\admin.php)
+      File: funcoes_login.php  (admin\php\login.php)
+      File: gruposusuarios.php  (admin\php\gruposusuarios.php)
+      File: identifica.php  (admin\php\identifica.php)
+      File: incluiMAP.php  (admin\php\incluiMAP.php)
+      File: mapas.php  (admin\php\mapas.php)
+      File: mapfiles.php  (admin\php\mapfiles.php)
+      File: menutemas.php  (admin\php\menutemas.php)
+      File: metaestat.php  (admin\php\metaestat.php)
+      File: ms_configura.php &lparen;DEPRECIADO&rparen;  (no auto-title, admin\php\ms_configura.php)
+      File: ogcws.php  (admin\php\ogcws.php)
+      File: operacoes.php  (admin\php\operacoes.php)
+      File: parsemapfile.php  (admin\php\parsemapfile.php)
+      File: sistemas.php  (admin\php\sistemas.php)
+      File: sqlite.php  (admin\php\sqlite.php)
+      File: upgradebanco44_45.php  (admin\php\upgradebanco44_45.php)
+      File: upgradebanco46_47.php  (admin\php\upgradebanco46_47.php)
+      File: usuarios.php  (admin\php\usuarios.php)
+      File: webservices.php  (admin\php\webservices.php)
+      File: xml.php  (admin\php\xml.php)
+      }  # Group: Php
+
+   File: rsscomentariostemas  (admin\rsscomentariostemas.php)
+   File: rssgrupos  (admin\rssgrupos.php)
+   File: rsssubgrupos  (admin\rsssubgrupos.php)
+   File: rsstemas  (admin\rsstemas.php)
+   File: rsstemasdownload  (admin\rsstemasdownload.php)
+   File: rsstemaskml  (admin\rsstemaskml.php)
+   File: rsstemasogc  (admin\rsstemasogc.php)
+   File: rsstemasraiz  (admin\rsstemasraiz.php)
+   File: xmlgeorss  (admin\xmlgeorss.php)
+   File: xmlidentifica  (admin\xmlidentifica.php)
+   File: xmlkmlrss  (admin\xmlkmlrss.php)
+   File: xmllinksdownload  (admin\xmllinksdownload.php)
+   File: xmlmapas  (admin\xmlmapas.php)
+   File: xmlservicoswms  (admin\xmlservicoswms.php)
+   File: xmlservicosws  (admin\xmlservicosws.php)
+   File: xmlsistemas  (admin\xmlsistemas.php)
+   }  # Group: Sistema de Administração
+
+Group: Index  {
+
+   Index: Everything
+   Function Index: Functions
+   Arquivo Index: Arquivos
+   Classe Index: Classe
+   File Index: Files
+   }  # Group: Index
+
