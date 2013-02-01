@@ -6,9 +6,10 @@
 </head>
 
 <body class="yui-skin-sam fundoPonto" >
-
 <div class="bordaSuperior"  >&nbsp;</div>
 <div class="mascaraPrincipal" id="divGeral" style=text-align:left >
+Remove a tela inicial de apresenta&ccedil;&atilde;o do i3Geo substituindo-a pela inicialliza&ccedil;&atilde;o direta do mapa.
+Ap&oacute;s remover, a tela inicial pode ser vista utilizando-se o endere&ccedil;o i3geo/init.
 <?php
 $locaplic = __DIR__."/..";
 include_once("../admin/php/admin.php");

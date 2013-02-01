@@ -14,7 +14,6 @@ header("Cache-Control: max-age=".$cache_expire);
 header('Expires: ' . gmdate('D, d M Y H:i:s', time()+$cache_expire) . ' GMT');
 include("../ms_configura.php");
 ?>
-
 <script type="text/javascript" src="../classesjs/i3geo.js"></script>
 <script type="text/javascript" src="dicionario.js"></script>
 <style>
@@ -70,21 +69,14 @@ a {
 </style>
 </head>
 <body style="background-color: white;">
-	<div id="conteudo"
-		style="background-color: white; background-image: url(../imagens/i3geo1bw.jpg);">
+	<div id="conteudo" style="background-color: white; background-image: url(../imagens/i3geo1bw.jpg);">
+	<div>
 		<?php
 		if($i3geomaster[0]["usuario"] == "admin" && $i3geomaster[0]["senha"] == "admin" ){
 			echo "<p style='font-size:14px;color:red'><script>document.write($"."trad(19,g_traducao_init));</script>";
 		}
 		?>
 		<div id="bandeiras"></div>
-
-		<a target=_blank href="remover.php" class="r"><table >
-				<tr>
-					<td><img src="../imagens/oxygen/22x22/dialog-close.png" /><br> <script>document.write($trad(1,g_traducao_init));</script></a>
-					</td>
-				</tr>
-			</table> </a>
 			<a target=_blank href="../testainstal.php" class="r"><table >
 				<tr>
 					<td><img src="../imagens/oxygen/22x22/application-vnd.scribus.png" /><br>
@@ -188,6 +180,8 @@ a {
 					</td>
 				</tr>
 			</table> </a>
+	</div>
+	<div style="float:left" >
 			<a href="#" class="r" style="width: 230px; height: 380px"><table>
 				<tr>
 					<td>
@@ -205,6 +199,7 @@ a {
 					</td>
 				</tr>
 			</table> </a>
+	</div>
 	</div>
 </body>
 <script>
