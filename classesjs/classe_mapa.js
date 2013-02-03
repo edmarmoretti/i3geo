@@ -1,12 +1,19 @@
-/*jslint plusplus:false,white:false,undef: false, rhino: true, onevar: true, evil: false */
 /*
 Title: Mapa
+
+i3GEO.mapa
+
+Executa opera&ccedil;&otilde;es obre o mapa principal
+
+Em i3GEO.mapa.dialogo estao as funcoes de abertura dos dialogos para alteracao das propriedades do mapa,
+como cor de fundo, tipo de imagem, legenda etc.
+
 
 Arquivo:
 
 i3geo/classesjs/classe_mapa.js
 
-Licenca:
+Licen&ccedil;a:
 
 GPL2
 
@@ -32,14 +39,6 @@ Free Software Foundation, Inc., no endere&ccedil;o
 if(typeof(i3GEO) === 'undefined'){
 	var i3GEO = {};
 }
-/*
-Classe: i3GEO.mapa
-
-Cria e processa o mapa principal
-
-Em i3GEO.mapa.dialogo estao as funcoes de abertura dos dialogos para alteracao das propriedades do mapa,
-como cor de fundo, tipo de imagem, legenda etc.
-*/
 i3GEO.mapa = {
 	/*
 	Propriedade: AUTORESIZE
@@ -54,7 +53,6 @@ i3GEO.mapa = {
 	*/
 	AUTORESIZE: false,
 	/*
-	Variavel: GEOXML
 	Armazena o nome dos objetos geoXml adicionados ao mapa pela API do google maps
 
 	Tipo:
@@ -99,8 +97,6 @@ i3GEO.mapa = {
 		$i(i3GEO.Interface.IDMAPA).appendChild(novoel);
 	},
 	/*
-	Function: reposicionaDobraPagina
-
 	Reposiciona o icone do tipo "dobra de pagina"
 	*/
 	reposicionaDobraPagina: function(){
@@ -112,8 +108,6 @@ i3GEO.mapa = {
 		novoel.style.left = i3GEO.parametros.w - 35 + "px";
 	},
 	/*
-	Function: ativaAutoResize
-
 	Ativa o redimensionamento automatico do mapa sempre que o navegador for redimensionado
 
 	e definido como um evento do elemento window
@@ -146,8 +140,6 @@ i3GEO.mapa = {
 		};
 	},
 	/*
-	Function: ajustaPosicao
-
 	Ajusta o posicionamento do corpo do mapa
 
 	Esse ajuste e necessario na inicializacao, uma vez que o mapa utiliza style.position='absolute'
@@ -224,8 +216,6 @@ i3GEO.mapa = {
 		}
 	},
 	/*
-	Function: verifica
-
 	Verifica se ocorreu algum problema na atualizacao do corpo do mapa e inicia o processo de tentativa de recuperacao
 
 	Parametro:
@@ -266,8 +256,6 @@ i3GEO.mapa = {
 		}
 	},
 	/*
-	Classe: i3GEO.mapa.recupera
-
 	Tenta recuperar o mapa caso ocorra algum problema
 
 	O i3Geo mantem sempre uma copia do arquivo mapfile em uso. Essa funcao tenta
@@ -275,8 +263,6 @@ i3GEO.mapa = {
 	*/
 	recupera:{
 		/*
-		Variavel: TENTATIVA
-
 		Armazena a quantidade de tentativas de recuperacao que foram feitas
 
 		Tipo:
@@ -284,8 +270,6 @@ i3GEO.mapa = {
 		*/
 		TENTATIVA: 0,
 		/*
-		Function: inicia
-
 		Inicia a tentativa de recuperacao
 		*/
 		inicia: function(){
@@ -297,8 +281,6 @@ i3GEO.mapa = {
 			}
 		},
 		/*
-		Function: restaura
-
 		Restaura o mapa para a copia de seguranca existente no servidor
 		*/
 		restaura: function(){
@@ -326,8 +308,6 @@ i3GEO.mapa = {
 		*/
 		incluiBotaoLibera: false,
 		/*
-		Variavel:  ID
-
 		Armazena o id definido na criacao da legenda
 		*/
 		ID: "",
@@ -394,8 +374,6 @@ i3GEO.mapa = {
 			{i3GEO.mapa.legendaHTML.obtem(temp);}
 		},
 		/*
-		Function: obtem
-
 		Faz a chamada em AJAX que gera a legenda
 
 		O resultado e processado pela funcao passada como parametro
@@ -409,8 +387,6 @@ i3GEO.mapa = {
 			i3GEO.php.criaLegendaHTML(funcao,"",i3GEO.configura.templateLegenda);
 		},
 		/*
-		Function: ativaDesativaTema
-
 		Liga ou desliga um unico tema. Utilizado pela legenda HTML, permitindo que um tema seja processado diretamente na legenda.
 
 		Parametro:
@@ -483,8 +459,6 @@ i3GEO.mapa = {
 		}
 	},
 	/*
-	Classe: i3GEO.mapa.legendaIMAGEM
-
 	Controla a obtencao da legenda do mapa na forma de uma imagem
 
 	e utilizado principalmente para armazenar as imagens para a funcao de
@@ -492,8 +466,6 @@ i3GEO.mapa = {
 	*/
 	legendaIMAGEM:{
 		/*
-		Function: obtem
-
 		Faz a chamada em AJAX que gera a legenda
 
 		O resultado e processado pela funcao passada como parametro
@@ -822,8 +794,6 @@ i3GEO.mapa = {
 			//}
 		},
 		/*
-		Function: verificaTipDefault
-
 		Mostra etiquetas no mapa com informacoes sobre os temas com etiquetas ativas
 
 		Essa e a funcao padrao definida em i3GEO.configura

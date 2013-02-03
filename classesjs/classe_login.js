@@ -1,9 +1,15 @@
 /*
 Title: Controle de usu&aacute;rio
 
+i3GEO.login
+
+Controla o sistema de login e &aacute;rea restrita dos usu&aacute;rios
+
+Em i3GEO.login.dialogo estao as funcoes de abertura dos dialogos
+
 Arquivo: i3geo/classesjs/classe_login.js
 
-Licenca:
+Licen&ccedil;a:
 
 GPL2
 
@@ -31,16 +37,11 @@ if(typeof(i3GEO) === 'undefined'){
 if(typeof(i3GEOF) === 'undefined'){
 	var i3GEOF = {};
 }
-/*
-Classe: i3GEO.login
-
-Controla o sistema de login e &aacute;rea restrita dos usu&aacute;rios
-*/
 i3GEO.login = {
 	/*
 		Variavel: divnomelogin
 
-		Id do elemento div que recebera o nome do usuario apos o login.
+		Id do elemento div que recebera o nome do usuario apos o login para ser mostrado no mapa.
 	 */
 	divnomelogin: "i3GEONomeLogin",
 	/*
@@ -79,6 +80,22 @@ i3GEO.login = {
 	{null}
 	*/
 	funcaoLoginErro: null,
+	/*
+	Classe: i3GEO.login.dialogo
+
+	Abre as telas de 
+
+	Exemplo:
+
+	Para abrir a mensagem de dialogo de login, utilize
+
+	i3GEO.login.dialogo.abreLogin();
+	
+	Para abrir a mensagem de dialogo de logout, utilize
+
+	i3GEO.login.dialogo.abreLogout()	
+	*/
+
 	dialogo: {
 		abreLogin: function(locaplic){
 			var js;

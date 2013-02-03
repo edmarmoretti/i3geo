@@ -1,12 +1,17 @@
-/*jslint plusplus:false,white:false,undef: false, rhino: true, onevar: true, evil: false */
 /*
 Title: Janelas
+
+i3GEO.janela
+
+Abre janelas flutuantes
+
+As janelas s&atilde;o criadas por meio da biblioteca YUI
 
 Arquivo:
 
 i3geo/classesjs/classe_janela.js
 
-Licenca:
+Licen&ccedil;a:
 
 GPL2
 
@@ -32,8 +37,6 @@ if(typeof(i3GEO) === 'undefined'){
 	var i3GEO = {};
 }
 /*
-Objeto: YAHOO.i3GEO.janela
-
 Namespace da biblioteca YUI utilizado para armazenar janelas flutuantes
 
 Type:
@@ -41,8 +44,6 @@ Type:
 */
 YAHOO.namespace("i3GEO.janela");
 /*
-Objeto: YAHOO.i3GEO.janela.manager
-
 Gerenciador das janelas flutuantes da biblioteca YUI
 
 Type:
@@ -53,21 +54,12 @@ YAHOO.i3GEO.janela.manager = new YAHOO.widget.OverlayManager();
 YAHOO.namespace("janelaDoca.xp");
 YAHOO.janelaDoca.xp.manager = new YAHOO.widget.OverlayManager();
 /*
-Objeto: YAHOO.i3GEO.janela.managerAguarde
-
 Gerenciador das janelas de aguarde da biblioteca YUI
 
 Type:
 {YAHOO.widget.OverlayManager}
 */
 YAHOO.i3GEO.janela.managerAguarde = new YAHOO.widget.OverlayManager();
-/*
-Classe: i3GEO.janela
-
-Abre janelas flutuantes
-
-As janelas s&atilde;o criadas por meio da biblioteca YUI
-*/
 i3GEO.janela = {
 	/*
 	Propriedade: ESTILOABD
@@ -108,8 +100,6 @@ i3GEO.janela = {
 	*/
 	AGUARDEMODAL: false,
 	/*
-	Propriedade: ANTESCRIA
-
 	Lista com os nomes das fun&ccedil;&otilde;es que ser&atilde;o executadas antes de abrir a janela.
 
 	Este &eacute; um array que pode ser modificado utilizando-se as fun&ccedil;&otilde;es javascript de
@@ -123,8 +113,6 @@ i3GEO.janela = {
 	*/
 	ANTESCRIA: ["i3GEO.janela.prepara()"],
 	/*
-	Propriedade: ANTESFECHA
-
 	Lista com os nomes das fun&ccedil;&otilde;es que ser&atilde;o executadas antes de fechar a janela.
 
 	Este &eacute; um array que pode ser modificado utilizando-se as fun&ccedil;&otilde;es javascript de
@@ -178,20 +166,14 @@ i3GEO.janela = {
 	*/
 	OPACIDADEAGUARDE: 50,
 	/*
-	Variavel: TIPS
-
 	Lista os tips inseridos no mapa, possibilitando sua remo&ccedil;&atilde;o em lote
 	*/
 	TIPS: [],
 	/*
-	Variavel: ULTIMOZINDEX (depreciado)
-
 	Cada vez que uma janela flutuante &eacute; criada, esse valor &eacute; acrescido de 1
 	*/
 	ULTIMOZINDEX : 5,
 	/*
-	Function: prepara
-
 	Executa fun&ccedil;&otilde;es default antes de abrir a janela
 	*/
 	prepara: function(){
@@ -360,8 +342,6 @@ i3GEO.janela = {
 		return([janela,$i(id+"_cabecalho"),temp]);
 	},
 	/*
-	function: minimiza
-
 	Minimiza ou maximiza a janela
 
 	Parametro:
@@ -414,8 +394,6 @@ i3GEO.janela = {
 		}
 	},
 	/*
-	Function: fecha
-
 	Aplica a op&ccedil;&atilde;o definida em ANTESFECHA e elimina alguns objetos que s&atilde;o comumente adicionados por algumas opera&ccedil;&otilde;es do i3geo
 	como richdraw, box, pin
 
@@ -445,8 +423,6 @@ i3GEO.janela = {
 		i3GEO.janela.destroi(id);
 	},
 	/*
-	Function: destroi
-
 	Destroi uma janela sem aplicar as funcoes adicionais
 
 	Parametros:
@@ -634,8 +610,6 @@ i3GEO.janela = {
 
 	},
 	/*
-	Function: ativaAlerta
-
 	Substitui a janel&ccedil;a de alerta padr&atilde;o do sistema operacional por uma outra customizada
 
 	Parametros:
@@ -707,8 +681,6 @@ i3GEO.janela = {
 		janela.show();
 	},
 	/*
-	Function: tip
-
 	Cria um DIV e posiciona sobre o mapa na posi&ccedil;&atilde;o do mouse.
 
 	Parametro:
@@ -766,8 +738,6 @@ i3GEO.janela = {
 		return(Nid);
 	},
 	/*
-	Function: excluiTips
-
 	Exclui os tips armazenados na vari&aacute;vel i3GEO.janela.TIPS
 
 	Parametro:
@@ -843,8 +813,6 @@ i3GEO.janela = {
 		});
 	},
 	/*
-	Function: comboCabecalhoTemas
-
 	Adiciona no cabe&ccedil;alho da janela um combo com a lista de temas para janelas abertas por ferramentas
 
 	Essa fun&ccedil;&atilde;o &eacute; utilizada pelas ferramentas que operam sobre um determinado tema. O combo permite que o usu&aacute;rio

@@ -1,13 +1,20 @@
-/*jslint plusplus:false,white:false,undef: false, rhino: true, onevar: true, evil: true */
-
 /*
 Title: Mapa de refer&ecirc;ncia
+
+i3GEO.maparef
+
+Cria e processa o mapa de refer&ecirc;ncia
+
+Exemplo:
+
+i3Geo.maparef.inicia()
+
 
 Arquivo:
 
 i3geo/classesjs/classe_maparef.js
 
-Licenca:
+Licen&ccedil;a:
 
 GPL2
 
@@ -32,15 +39,6 @@ Free Software Foundation, Inc., no endere&ccedil;o
 if(typeof(i3GEO) === 'undefined'){
 	var i3GEO = {};
 }
-/*
-Classe: i3GEO.maparef
-
-Cria e processa o mapa de refer&ecirc;ncia
-
-Exemplo:
-
-i3Geo.maparef.inicia()
-*/
 i3GEO.maparef = {
 	/*
 	Propriedade: fatorZoomDinamico
@@ -138,11 +136,6 @@ i3GEO.maparef = {
 	{0}
 	*/
 	RIGHT:20,
-	/*
-	Function: inicia
-
-	Inicializa o mapa de refer&ecirc;ncia
-	*/
 	W: function(){
 		var w = parseInt(i3GEO.parametros.w,10)/5;
 		if(w < 150){
@@ -159,6 +152,11 @@ i3GEO.maparef = {
 			return parseInt(h,10);
 		}
 	},
+	/*
+	Function: inicia
+
+	Inicializa o mapa de refer&ecirc;ncia
+	*/
 	inicia: function(){
 		if(typeof(console) !== 'undefined'){console.info("i3GEO.maparef.inicia()");}
 		var r,pos,novoel,ins,temp,moveX,moveY,escondeRef,janela;
@@ -312,8 +310,6 @@ i3GEO.maparef = {
 		}
 	},
 	/*
-	Function: processaImagem
-
 	Substitu&iacute; a imagem do mapa de refer&ecirc;ncia pela &uacute;ltima gerada.
 
 	Esta fun&ccedil;&atilde;o processa os dados de uma chamada AJAX para atualizar o mapa de refer&ecirc;ncia
@@ -350,8 +346,6 @@ i3GEO.maparef = {
 		}
 	},
 	/*
-	Function: atualizaBox
-
 	Atualiza o tamanho e a posi&ccedil;&atilde;o do box que indica a extens&atilde;o geogr&aacute;fica do mapa atual
 
 	O box &eacute; um div com id = "boxref".
@@ -413,8 +407,6 @@ i3GEO.maparef = {
 		{return box;}
 	},
 	/*
-	Function: click
-
 	Ocorre quando o usu&aacute;rio clica sobre o mapa de refer&ecirc;ncia, deslocando o mapa principal
 	*/
 	click: function(){

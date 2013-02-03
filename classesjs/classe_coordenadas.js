@@ -1,10 +1,19 @@
-/*jslint plusplus:false,white:false,undef: false, rhino: true, onevar: true, evil: false */
 /*
 Title: Coordenadas
 
+i3GEO.coordenadas
+
+Inclui elementos HTML especiais no mapa para apresenta&ccedil;&atilde;o de coordenadas.
+
+Cont&eacute;m fun&ccedil;&otilde;es que permitem a convers&atilde;o de coordenadas, entre sistemas de proje&ccedil;&atilde;o deiferentes, com base na biblioteca Proj4js.
+Cria tamb&eacute;m o bloco de apresenta&ccedil;&atilde;o de coordenadas com base na posi&ccedil;&atilde;o do mouse sobre o mapa.
+Mais informa&ccedil;&otilde;es em http://trac.osgeo.org/proj4js/
+Para adicionar novas proje&ccedil;&otilde;es ou modificar as atuais, edit a vari&aacute;vel i3GEO.coordenadas.config e defOrigem
+
+
 Arquivo: i3geo/classesjs/classe_coordenadas.js
 
-Licenca:
+Licen&ccedil;a:
 
 GPL2
 
@@ -29,17 +38,6 @@ Free Software Foundation, Inc., no endere&ccedil;o
 if(typeof(i3GEO) === 'undefined'){
 	var i3GEO = {};
 }
-/*
-Classe: i3GEO.coordenadas
-
-Inclui elementos HTML especiais no mapa para apresenta&ccedil;&atilde;o de coordenadas.
-
-Cont&eacute;m fun&ccedil;&otilde;es que permitem a convers&atilde;o de coordenadas, entre sistemas de proje&ccedil;&atilde;o deiferentes, com base na biblioteca Proj4js.
-Cria tamb&eacute;m o bloco de apresenta&ccedil;&atilde;o de coordenadas com base na posi&ccedil;&atilde;o do mouse sobre o mapa.
-Mais informa&ccedil;&otilde;es em http://trac.osgeo.org/proj4js/
-Para adicionar novas proje&ccedil;&otilde;es ou modificar as atuais, edit a vari&aacute;vel i3GEO.coordenadas.config e defOrigem
-
-*/
 i3GEO.coordenadas = {
 	/*
 	Propriedade: formato
@@ -170,8 +168,6 @@ i3GEO.coordenadas = {
 		}
 	},
 	/*
-	Propriedade: PARAMETROS (depreciado)
-
 	Parametros de inicializa&ccedil;&atilde;o dos componentes.
 
 	Essa vari&aacute;vel define os parâmetros individuais de cada componente que pode ser utilizado no mapa.
@@ -431,8 +427,6 @@ i3GEO.coordenadas = {
 		return ins;
 	},
 	/*
-	Function: atualizaProj4
-
 	Atualiza os valores em uma tabela do tipo x e y com base na biblioteca Proj4
 
 	http://trac.osgeo.org/proj4js/wiki/UserGuide
@@ -524,8 +518,6 @@ i3GEO.coordenadas = {
 		return p;
 	},
 	/*
-	Function: ativaBloco
-
 	Mostra um tipo de coordenada e esconde os outros.
 
 	Mostra o que estiver definido em i3GEO.coordenadas.padrao
@@ -549,8 +541,6 @@ i3GEO.coordenadas = {
 		}
 	},
 	/*
-	Function: mudaTipo
-
 	Muda o tipo de coordenada que est&aacute; sendo mostrada no formato "bloco".
 
 	Parametro:

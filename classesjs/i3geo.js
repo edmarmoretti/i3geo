@@ -17,7 +17,7 @@ Arquivo:
 
 i3geo/classesjs/i3geo.js
 
-Licenca:
+Licen&ccedil;a:
 
 GPL2
 

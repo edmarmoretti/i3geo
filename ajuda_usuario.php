@@ -2,13 +2,17 @@
 /*
 Title: Lista de funcionalidades
 
-Lista as funcionalidades cadastradas em i3geo/classesjs/dicionario_ajuda.js. A listagem &eacute; organizada em grupos que podem ser expandidos individualmente ou no total.
+Lista as principais funcionalidades do i3Geo. Em i3geo/classesjs/dicionario_ajuda.js ficam cadastrados os textos. A listagem &eacute; organizada em grupos que podem ser expandidos individualmente ou no total, mostrando assim uma lista completa de fun&ccedil;&otilde;s.
 
-&Eacute; utilizado pelo i3geo para fornecer ajuda ao usu&aacute;rio em como utilizar as funcionalidades cadatsradas.
+&Eacute; utilizado pelo i3geo para fornecer ajuda ao usu&aacute;rio por meio de links posicionados em cabe&ccedil;alhos de janelas por exemplo.
 
-Os textos de ajuda ficam no javascript classesjs/dicionario_ajuda.js
+Os textos de ajuda ficam no javascript classesjs/dicionario_ajuda.js . Para mostrar uma funcionalidade, utilize por exemplo
 
-Licenca:
+http://localhost/i3geo/ajuda_usuario.php?idajuda=1
+
+para obter o ID veja em dicionario_ajuda.js
+
+Licen&ccedil;a:
 
 GPL2
 
@@ -32,11 +36,11 @@ Free Software Foundation, Inc., no endere&ccedil;o
 
 Arquivo: i3geo/ajuda_usuario.php
 
-Parametros:
+Par&acirc;metros:
 
-idcategoria {string} - (opcional) id da categoria que ser&aacute; listada. Lista apenas uma categoria de funcionalidade
+idcategoria - id da categoria. Lista apenas uma categoria
 
-idajuda {string} - (opcional) id da funcionalidade. Lista apenas uma funcionalidade
+idajuda - id da funcionalidade. Lista apenas uma funcionalidade
 */
 include("classesphp/pega_variaveis.php");
 include("ms_configura.php");
@@ -86,8 +90,7 @@ function pegaAjuda(tipo,categoria){
 	for(var k in obj){
 		if(idajuda != "" && idajuda != k)
 		{}
-		else
-		{
+		else{
 			if(idajuda == "" && categoria != obj[k].categoria){}
 			else{
 				ins += "<br><li onclick='expande(\""+k+"\")' style='cursor:pointer;font-size:16px;color:#759555'><b>"+obj[k].titulo+"</b></li>";
@@ -103,10 +106,8 @@ function pegaAjuda(tipo,categoria){
 				if(obj[k].gadget){
 					ins += "<p><a href='"+obj[k].gadget+"' target=_blank style='padding-left:20px' >Gadget</a></p>";
 				}
-
 				ins += "</div>";
 			}
-
 		}
 	}
 }
@@ -116,16 +117,20 @@ function inicia()
 	for(var key in g_traducao_ajuda_categorias){
 		if(idcategoria != "" && idcategoria != key)
 		{}
-		else
-		{
+		else{
 			if(idajuda == "")
 			ins += "<p style='font-size:18px' ><b>"+g_traducao_ajuda_categorias[key].titulo+"</b></p>";
-			if(g_traducao_ajuda_categorias[key].observacao)
+			if(g_traducao_ajuda_categorias[key].observacao && idajuda == "")
 			ins += "<p style='font-size:14px;color:gray' >"+g_traducao_ajuda_categorias[key].observacao+"</p>";
 			if(idajuda == "")
 			pegaAjuda("ferramentas",key);
 			else{
 				pegaAjuda("ferramentas",g_traducao_ajuda_categorias[key]);
+			}
+			if(idcategoria == ""){
+				document.getElementById("resultado").innerHTML = ins+"</div>";
+				expande(idajuda);
+				return;
 			}
 		}
 	}

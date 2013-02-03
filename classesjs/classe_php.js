@@ -1,12 +1,37 @@
-/*jslint plusplus:false,white:false,undef: false, rhino: true, onevar: true, evil: true */
 /*
 Title: PHP
+
+i3GEO.php
+
+Chamadas em AJAX que executam programas no lado do servidor
+
+Muitos dos parâmetros exigidos pelos programas em PHP s&atilde;o obtidos da vari&aacute;vel
+de se&ccedil;&atilde;o aberta no servidor quando o i3Geo &eacute; inicializado, &eacute; o caso por exemplo do nome
+do arquivo correspondente ao mapfile atualmente em uso
+
+Quando classe_php.js &eacute; carregado, &eacute; criado o objeto cpJSON que necessita da biblioteca CPAINT. Esse objeto
+&eacute; utilizado nas chamadas AJAX.
+
+O objeto cpJSON possu&iacute; um m&eacute;todo .call que executa a opera&ccedil;&atilde;o AJAX. Esse m&eacute;todo utiliza basicamente dois parametros,
+sendo o primeiro o endere&ccedil;o do programa PHP que ser&aacute; executado no servidor e o outro &eacute; o nome da fun&ccedil;&atilde;o que ir&aacute;
+receber e processar os resultados do programa. Exemplo:
+
+cpJSON.call(p,"",funcao);
+
+"p" &eacute; a URL e funcao o nome da fun&ccedil;&atilde;o
+
+Para compor "p" o i3geo utiliza normalmente a vari&aacute;vel i3GEO.configura.locaplic e i3GEO.configura.sid, por exemplo:
+
+var p = i3GEO.configura.locaplic+"/classesphp/mapa_controle.php?funcao=insereSHPgrafico&g_sid="+i3GEO.configura.sid
+
+Para mais detalhes sobre as fun&ccedil;&otilde;es, veja <mapa_controle.php>
+
 
 Arquivo:
 
 i3geo/classesjs/classe_php.js
 
-Licenca:
+Licen&ccedil;a:
 
 GPL2
 
@@ -59,32 +84,6 @@ cpJSON = new cpaint();
 cpJSON.set_response_type("JSON");
 cpJSON.set_transfer_mode("POST");
 
-/*
-Classe: i3GEO.php
-
-Chamadas em AJAX que executam programas no lado do servidor
-
-Muitos dos parâmetros exigidos pelos programas em PHP s&atilde;o obtidos da vari&aacute;vel
-de se&ccedil;&atilde;o aberta no servidor quando o i3Geo &eacute; inicializado, &eacute; o caso por exemplo do nome
-do arquivo correspondente ao mapfile atualmente em uso
-
-Quando classe_php.js &eacute; carregado, &eacute; criado o objeto cpJSON que necessita da biblioteca CPAINT. Esse objeto
-&eacute; utilizado nas chamadas AJAX.
-
-O objeto cpJSON possu&iacute; um m&eacute;todo .call que executa a opera&ccedil;&atilde;o AJAX. Esse m&eacute;todo utiliza basicamente dois parametros,
-sendo o primeiro o endere&ccedil;o do programa PHP que ser&aacute; executado no servidor e o outro &eacute; o nome da fun&ccedil;&atilde;o que ir&aacute;
-receber e processar os resultados do programa. Exemplo:
-
-cpJSON.call(p,"",funcao);
-
-"p" &eacute; a URL e funcao o nome da fun&ccedil;&atilde;o
-
-Para compor "p" o i3geo utiliza normalmente a vari&aacute;vel i3GEO.configura.locaplic e i3GEO.configura.sid, por exemplo:
-
-var p = i3GEO.configura.locaplic+"/classesphp/mapa_controle.php?funcao=insereSHPgrafico&g_sid="+i3GEO.configura.sid
-
-Para mais detalhes sobre as fun&ccedil;&otilde;es, veja <mapa_controle.php>
-*/
 i3GEO.php = {
 	/*
 	Function: verifica

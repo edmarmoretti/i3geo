@@ -22,7 +22,7 @@ http://localhost/i3geo/ms_criamapa.php?temasa=estadosl bioma&layers=estadosl bio
 
 Caso a inicializa&ccedil;&atilde;o do i3geo ocorra por um outro programa PHP, o ms_criamapa.php deve ser executado via include. Nesse caso, os par&acirc;metros devem ser especificados como vari&aacute;veis, p.e.,
 
-$temasa=bioma;
+$temasa="bioma";
 
 include("ms_criamapa.php");
 
@@ -40,7 +40,7 @@ Link:
 
 http://localhost/i3geo/ms_criamapa.php
 
-Licenca:
+Licen&ccedil;a:
 
 GPL2
 
@@ -64,10 +64,10 @@ Free Software Foundation, Inc., no endere&ccedil;o
 
 Arquivo: i3geo/ms_criamapa.php
 
-Parametros:
+Par&acirc;metros:
 
-base - arquivo mapfile que servir&aacute; de base para a cria&ccedil;&atilde;o do mapa.Por default, s&atilde;o utilizados os arquivos existentes em i3geo/aplicmap (geral1windows, geral1,...)
-	Essa vari&aacute;vel pode ser definida em ms_configura tamb&eacute;m. Se n&atilde;o estiver definida em nenhum lugar, o i3Geo tentar&aacute; descobrir o arquivo adequado a ser utilizado.
+base - arquivo mapfile que servir&aacute; de base para a cria&ccedil;&atilde;o do mapa. Por default, s&atilde;o utilizados os arquivos existentes em i3geo/aplicmap (geral1windows, geral1,...)
+	Essa vari&aacute;vel pode ser definida em ms_configura tamb&eacute;m. Se n&atilde;o estiver definida em nenhum lugar, o i3Geo tentar&aacute; descobrir o arquivo adequado a ser utilizado. Voc&ecirc; pode utilizar essa op&ccedil;&atilde;o para abrir um mapa com as camadas que você quiser, mas para evitar redund&acirc;ncias, prefira o uso de &temasa
 
 temasa - lista, separada por espa&ccedil;os, com os nomes dos arquivos map ou gvsig que ser&atilde;o adicionados ao mapa. Se o arquivo n&atilde;o estiver no diretório i3geo/temas, o nome deve incluir o caminho completo no servidor. O arquivo pode conter mais de um layer pois todos os existentes ser&atilde;o adicionados ao mapa. Por default, todos os layers encontrados nos mapfiles s&atilde;o adicionados ao mapa com o status de desenho em OFF.
 
@@ -119,7 +119,7 @@ style_wms - estilo do layer
 
 nome_wms - nome da camada (titulo)
 
-srs_wms - código da proje&ccedil;&atilde;o
+srs_wms - c&oacute;digo da proje&ccedil;&atilde;o
 
 image_wms - tipo de imagem dispon&iacute;vel
 
@@ -129,7 +129,7 @@ gvsiggvp - (depreciado na versão 4.7 - utilize o parametro temasa) endere&ccedil
 
 gvsigview - lista com nomes de views existentes no projeto gvSig separado por virgula. Se for vazio, serao adicionadas todas as views. Exemplo (http://localhost/i3geo/ms_criamapa.php?gvsiggvp=c:\temp\teste.gvp&gvsigview=Untitled - 0)
 //TODO documentar esse parametro
-restauramapa - id do mapa armazenado no sistema de administracao e que sera restaurado para ser aberto novamente (veja em i3geo/admin/html/mapas.html)
+restauramapa - id do mapa armazenado no sistema de administracao e que ser&aacute; restaurado para ser aberto novamente (veja em i3geo/admin/html/mapas.html)
 */
 
 //$_COOKIE = array();
@@ -1181,8 +1181,6 @@ function erroCriacao(){
 	ms_ResetErrorList();
 }
 /*
-Function: criaDirMapa
-
 Cria os diretórios tempor&aacute;rios para a aplica&ccedil;&atilde;o.
 
 Parametro:
@@ -1224,5 +1222,4 @@ function criaDirMapa($dir_tmp,$cachedir="")
 	else
 	{return false;}
 }
-
 ?>

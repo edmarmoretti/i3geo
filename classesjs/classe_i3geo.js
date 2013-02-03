@@ -1,13 +1,32 @@
-/*jslint plusplus:false,white:false,undef: false, rhino: true, onevar: true, evil: false */
-
 /*
 Title: i3Geo
+
+A classe i3GEO possu&iacute; os m&eacute;todos de cria&ccedil;&atilde;o e atualiza&ccedil;&atilde;o do mapa. Todas as subclasses
+s&atilde;o baseadas em i3GEO, por exemplo, para criar uma janela flutuante sobre o mapa,
+utilize i3GEO.janela.cria()
+
+Para inicializar o mapa, utilize i3GEO.inicia() e para atualizar o mapa, utilize i3GEO.atualiza().
+Ap&oacute;s terminado o processo de inicializa&ccedil;&atilde;o, pode-se executar uma fun&ccedil;&atilde;o de ajuste. Essa fun&ccedil;&atilde;o
+deve ser definida em i3GEO.finaliza, por exemplo i3GEO.finaliza = "funcaoDeAjuste()" ou i3GEO.finaliza = function(){}
+
+Ao inicializar ou atualizar o i3Geo, &eacute; feita uma chamada em AJAX
+para a obten&ccedil;&atilde;o dos parametros necess&aacute;rios ao funcionamento do mapa. Esses parametros
+s&atilde;o armazenados na vari&aacute;vel i3GEO.parametros
+
+Nessa classe est&atilde;o dispon&iacute;veis vari&aacute;veis internas utilizadas em v&aacute;rias fun&ccedil;&otilde;es, como i3GEO.temaAtivo
+
+i3GEOF
+
+Esse objeto recebe os m&eacute;todos sob demanda por meio de inje&ccedil;&atilde;o de javascripts (script tag). &Eacute; utilizado pelas ferramentas existentes em i3geo/ferramentas.
+
+Cada javascript inserido na p&aacute;gina adiciona novos objetos, como por exemplo i3GEOF.buffer.
+
 
 Arquivo:
 
 i3geo/classesjs/classe_i3geo.js
 
-Licenca:
+Licen&ccedil;a:
 
 GPL2
 
@@ -29,16 +48,9 @@ GNU junto com este programa; se n&atilde;o, escreva para a
 Free Software Foundation, Inc., no endere&ccedil;o
 59 Temple Street, Suite 330, Boston, MA 02111-1307 USA.
 */
-/*
-Classe: i3GEOF
-
-Esse objeto recebe os m&eacute;todos sob demanda por meio de inje&ccedil;&atilde;o de javascripts (script tag). &Eacute; utilizado pelas ferramentas existentes em i3geo/ferramentas.
-
-Cada javascript inserido na p&aacute;gina adiciona novos objetos, como por exemplo i3GEOF.buffer.
-*/
 i3GEOF = [];
 /*
-Objeto: YAHOO.i3GEO
+YAHOO.i3GEO
 
 Namespace da biblioteca YUI que &eacute; reutiliz&aacute;vel em v&aacute;rios trechos de c&oacute;digo do i3Geo
 
@@ -46,23 +58,6 @@ Type:
 {YAHOO.namespace}
 */
 YAHOO.namespace("i3GEO");
-/*
-Classe: i3GEO
-
-A classe i3GEO possu&iacute; os m&eacute;todos de cria&ccedil;&atilde;o e atualiza&ccedil;&atilde;o do mapa. Todas as subclasses
-s&atilde;o baseadas em i3GEO, por exemplo, para criar uma janela flutuante sobre o mapa,
-utilize i3GEO.janela.cria()
-
-Para inicializar o mapa, utilize i3GEO.inicia() e para atualizar o mapa, utilize i3GEO.atualiza().
-Ap&oacute;s terminado o processo de inicializa&ccedil;&atilde;o, pode-se executar uma fun&ccedil;&atilde;o de ajuste. Essa fun&ccedil;&atilde;o
-deve ser definida em i3GEO.finaliza, por exemplo i3GEO.finaliza = "funcaoDeAjuste()" ou i3GEO.finaliza = function(){}
-
-Ao inicializar ou atualizar o i3Geo, &eacute; feita uma chamada em AJAX
-para a obten&ccedil;&atilde;o dos parametros necess&aacute;rios ao funcionamento do mapa. Esses parametros
-s&atilde;o armazenados na vari&aacute;vel i3GEO.parametros
-
-Nessa classe est&atilde;o dispon&iacute;veis vari&aacute;veis internas utilizadas em v&aacute;rias fun&ccedil;&otilde;es, como i3GEO.temaAtivo
-*/
 var i3GEO = {
 	/*
 	Propriedade: parametros
@@ -171,8 +166,6 @@ var i3GEO = {
 		editor: "nao"
 	},
 	/*
-	Propriedade: scrollerWidth
-
 	Largura da barra de rolagem do navegador. Se for igual a "", a largura ser&aacute; calculada automaticamente.
 
 	O valor "scrollerWidth" ser&aacute; utilizado no calculo da largura do mapa. Se vc n&atilde;o quer diminuir o tamanho do mapa,
@@ -210,8 +203,6 @@ var i3GEO = {
 	*/
 	finalizaAPI:"",
 	/*
-	Variavel: tamanhodoc
-
 	Largura e altura do navegador ap&oacute;s a inicializa&ccedil;&atilde;o do mapa
 
 	&Eacute; utilizado como um parametro para verificar se o mapa foi ou n&atilde;o redimensionado pelo usu&aacute;rio de forma consistente
@@ -236,8 +227,6 @@ var i3GEO = {
 	*/
 	temaAtivo: "",
 	/*
-	Variavel: contadorAtualiza
-
 	Essa vari&aacute;vel &eacute; um contador utilizado para indicar quantos processos est&atilde;o ativos e que
 	ir&atilde;o executar o redesenho do mapa. O mapa s&oacute; &eacute; atualizado quando o contador for menor que 1.
 	Esse contador &eacute; utilizado no m&eacute;todo i3GEO.atualiza
@@ -435,8 +424,6 @@ var i3GEO = {
 		//eval(i3GEO.finaliza);
 	},
 	/*
-	Function: aposIniciar
-
 	Executa opera&ccedil;&otilde;es ap&oacute;s o mapa ter sido posicionado na tela
 
 	Executa tamb&eacute;m o que for definido em i3Geo.finaliza
@@ -590,8 +577,6 @@ var i3GEO = {
 		}
 	},
 	/*
-	Function: calculaTamanho
-
 	Calcula o tamanho do mapa atual e define alguns elementos HTML do mapa
 
 	Return:
@@ -651,8 +636,6 @@ var i3GEO = {
 		return [w,h];
 	},
 	/*
-	Function: reCalculaTamanho
-
 	Recalcula o tamanho do mapa com base nas configura&ccedil;&otilde;es do navegador
 
 	Return:
@@ -722,8 +705,6 @@ var i3GEO = {
 		return [w,h];
 	},
 	/*
-	Function: atualizaParametros
-
 	Atualiza os valores da vari&aacute;vel i3GEO.parametros
 
 	Parametro:

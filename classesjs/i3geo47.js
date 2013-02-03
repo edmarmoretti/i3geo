@@ -13,7 +13,7 @@ Arquivo:
 
 i3geo/classesjs/i3geo47.js
 
-Licenca:
+Licen&ccedil;a:
 
 GPL2
 

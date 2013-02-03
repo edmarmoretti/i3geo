@@ -1,13 +1,13 @@
 <?php
 /*
- Title: Gerador de serviços OGC
+ Title: Gerador de servi&ccedil;os OGC
 
-Gera web services nos padr&otilde;es OGC
+Gera web services nos padr&otilde;es OGC para os temas existentes na pasta i3geo/temas
 
-A lista de proje&ccedil;&otilde;es mostradas na fun&ccedil;&atilde;o getcapabilities &eacute; definida na vari&aacute;vel $listaepsg. Edite essa vari&aacute;vel
+A lista de proje&ccedil;&otilde;es mostradas na fun&ccedil;&atilde;o getcapabilities &eacute; definida na vari&aacute;vel $listaepsg. Edite essa vari&aacute;vel diretamente no programa 
 se forem necess&aacute;rias outras proje&ccedil;&otilde;es al&eacute;m das existentes
 
-Licenca:
+Licen&ccedil;a:
 
 i3Geo Interface Integrada de Ferramentas de Geoprocessamento para Internet
 
@@ -29,25 +29,26 @@ Free Software Foundation, Inc., no endere&ccedil;o
 
 Arquivo: i3geo/ogc.php
 
-Parametros:
+Par&acirc;metros:
 
-lista - se for igual a "temas", mostra uma lista dos temas dispon&iacute;veis
-se for igual a "temaswfs", mostra a lista de temas wfs
+lista - (opcional) se for igual a "temas", mostra uma lista de links em HTML dos temas dispon&iacute;veis,
+se for igual a "temaswfs", mostra a lista de links WFS
 
-ajuda - se for definida na URL, mostra uma ajuda ao usu&aacute;rio
+ajuda - (opcional) mostra uma ajuda ao usu&aacute;rio
 
-tema - nome do tema do servi&ccedil;o. Se for definido, o web service conter&aacute; apenas esse tema. O tema &eacute; o nome do mapfile existente em i3geo/temas, mas pode ser especificado um mapfile existente em outra pasta. Nesse caso, deve-se especificar o caminho completo para o arquivo.
+tema - (opcional) nome do tema que ser&aacute; mostrado no servi&ccedil;o. Se for definido, o web service conter&aacute; apenas esse tema. O tema &eacute; o nome do mapfile existente em i3geo/temas, mas pode ser especificado um mapfile existente em outra pasta. Nesse caso, deve-se especificar o caminho completo para o arquivo. Se n&atilde;o for definido, ser&atilde;o considerados todos os temas
 
-intervalo - valor inicial e final com o n&uacute;mero de temas que ser&atilde;o mostrados no servi&ccedil;o
+intervalo - (opcional) valor inicial e final com o n&uacute;mero de temas que ser&atilde;o mostrados no servi&ccedil;o
 
-legenda - mostra a legenda no corpo do mapa sim|nao
+legenda - (opcional) mostra a legenda no corpo do mapa sim|nao
 
-perfil - perfil utilizado para escolher os menus
+perfil - (opcional) perfil utilizado para restringir os temas que ser&atilde;o mostrados
 
-format - (opcional) pode ser utilizado a op&ccedil;&atilde;o &format=application/openlayers para abrir o mashup do OpenLayers com as camadas definida em temas, exemplo
-http://localhost/i3geo/ogc.php?temas=biomashp&format=application/openlayers&bbox=-54,-14,-50,-10
+format - (opcional) pode ser utilizado a op&ccedil;&atilde;o &format=application/openlayers para abrir o mashup do OpenLayers com as camadas definida em temas
 
 Exemplos:
+
+ogc.php?temas=biomashp&format=application/openlayers&bbox=-54,-14,-50,-10
 
 ogc.php?lista=temas
 
@@ -566,6 +567,7 @@ function ogc_imprimeListaDeTemasWfs(){
 	}
 	echo $imprimir."</body></html>";
 }
+//FIXME cache fora do novo padrao de xyz
 function carregaCacheImagem($bbox,$layer,$w,$h,$cachedir=""){
 	global $dir_tmp;
 	$nome = $w.$h.$bbox.".png";
@@ -596,41 +598,5 @@ function carregaCacheImagem($bbox,$layer,$w,$h,$cachedir=""){
 		ob_end_flush();
 		exit;
 	}
-	/*
-	 if(file_exists($nome))
-	 {
-	if (!function_exists('imagepng'))
-	{
-	$s = PHP_SHLIB_SUFFIX;
-	@dl( 'php_gd2.'.$s );
-	if (!function_exists('imagepng'))
-		@dl( 'php_gd.'.$s );
-	}
-	@$img = imagecreatefrompng($nome);
-	if(!$img)
-	{
-	$img  = imagecreatetruecolor($w, $h);
-	imagealphablending($img, false);
-	imagesavealpha($img, true);
-
-	$bgc = imagecolorallocatealpha($img, 255, 255, 255,127);
-	$tc  = imagecolorallocate($img, 255, 0, 0);
-
-	imagefilledrectangle($img, 0, 0, $w, $h, $bgc);
-	imagestring($img, 3, 5, 5, 'Erro ao ler ' . $nome, $tc);
-	}
-	else
-	{
-	imagealphablending($img, false);
-	imagesavealpha($img, true);
-	}
-	ob_clean();
-	error_reporting(0);
-	echo header("Content-type: image/png \n\n");
-	imagepng($img);
-	imagedestroy($img);
-	exit;
-	}
-	*/
 }
 ?>

@@ -1,12 +1,25 @@
-/*jslint plusplus:false,white:false,undef: false, rhino: true, onevar: true, evil: false */
 /*
 Title: Interface
+
+i3GEO.Interface
+
+Funcoes que controlam o comportamento espec&iacute;fico de determinadas interfaces
+
+As interfaces s&atilde;o definidas na inicializa&ccedil;&atilde;o do i3Geo, por exemplo, openlayers,etc
+
+A classe "interface" cont&eacute;m os m&eacute;tdos espec&iacute;ficos utilizados nessas interfaces
+
+Exemplo:
+
+Para iniciar o i3geo com uma interface espec&iacute;fica, utilize http://localhost/i3geo/ms_criamapa.php?interface=googlemaps.phtml
+O HTML deve conter as defini&ccedil;&otilde;es da interface criada e deve estar armazenado em i3geo/aplicmap
+
 
 Arquivo:
 
 i3geo/classesjs/classe_interface.js
 
-Licenca:
+Licen&ccedil;a:
 
 GPL2
 
@@ -31,25 +44,11 @@ Free Software Foundation, Inc., no endere&ccedil;o
 if(typeof(i3GEO) === 'undefined'){
 	var i3GEO = {};
 }
-/*
-Classe: i3GEO.Interface
-
-Funcoes que controlam o comportamento espec&iacute;fico de determinadas interfaces
-
-As interfaces s&atilde;o definidas na inicializa&ccedil;&atilde;o do i3Geo, por exemplo, openlayers,etc
-
-A classe "interface" cont&eacute;m os m&eacute;tdos espec&iacute;ficos utilizados nessas interfaces
-
-Exemplo:
-
-Para iniciar o i3geo com uma interface espec&iacute;fica, utilize http://localhost/i3geo/ms_criamapa.php?interface=googlemaps.phtml
-O HTML deve conter as defini&ccedil;&otilde;es da interface criada e deve estar armazenado em i3geo/aplicmap
-*/
 i3GEO.Interface = {
 	/*
 	Propriedade: TABLET
 
-	Aplica configura&ccedil;&otilde;es especiais para uso em tablets.
+	Quando true, s&atilde;o aplicadas configura&ccedil;&otilde;es especiais para uso em tablets.
 
 	Altera o posicionamento da barra de bot&otilde;es e comportamento das guias. Veja o exemplo interface/openlayers_t.htm.
 
@@ -77,8 +76,6 @@ i3GEO.Interface = {
 	*/
 	ALTTABLET: "openlayers_t.htm",
 	/*
-	Propriedade: OUTPUTFORMAT
-
 	Formato de gera&ccedil;&atilde;o da imagem.
 
 	Os formatos devem estar definidos no mapfile geral1windows.map e geral1.map. A defini&ccedil;&atilde;o dessa vari&aacute;vel n&atilde;o afeta a interface padr&atilde;o, que utiliza a defini&ccedil;&atilde;o que estiver ativa nos mapfiles de inicializa&ccedil;&atilde;o.
@@ -176,8 +173,6 @@ i3GEO.Interface = {
 	*/
 	IDCORPO: "corpoMapa",
 	/*
-	Propriedade: ATIVAMENUCONTEXTO
-
 	Indica se o menu de contexto deve ser ativado
 
 	Tipo:
@@ -196,8 +191,6 @@ i3GEO.Interface = {
 	*/
 	IDMAPA: "",
 	/*
-	Variavel: STATUS
-
 	Indica o status atual do mapa.
 
 	&Eacute; utilizado para verificar o status do mapa e bloquear ou n&atilde;o determinadas fun&ccedil;&otilde;es.
@@ -214,8 +207,6 @@ i3GEO.Interface = {
 		trocando: false
 	},
 	/*
-	Function: atual2gm
-
 	Troca o renderizador do mapa passando a usar a API do Google Maps
 	*/
 	atual2gm: {
@@ -250,8 +241,6 @@ i3GEO.Interface = {
 		}
 	},
 	/*
-	Function: atual2ol
-
 	Troca o renderizador do mapa passando a usar a API do Open Layers
 	*/
 	atual2ol: {
@@ -368,8 +357,6 @@ i3GEO.Interface = {
 		{i3GEO.Interface.openlayers.adicionaKml("foo");}
 	},
 	/*
-	Function: cria
-
 	Cria ou altera os elementos HTML necess&aacute;rios para a interface
 
 	Essa fun&ccedil;&atilde;o &eacute; executada na inicializa&ccedil;&atilde;o do i3geo
@@ -385,8 +372,6 @@ i3GEO.Interface = {
 		i3GEO.Interface[i3GEO.Interface.ATUAL].cria(w,h);
 	},
 	/*
-	Function: inicia
-
 	Inicia a interface
 	*/
 	inicia: function(w,h){
@@ -430,8 +415,6 @@ i3GEO.Interface = {
 		i3GEO.Interface[i3GEO.Interface.ATUAL].alteraParametroLayers(parametro,valor);
 	},
 	/*
-	Function: ativaBotoes
-
 	Ativa os bot&otilde;es de ferramentas
 	*/
 	ativaBotoes: function(){
@@ -497,8 +480,6 @@ i3GEO.Interface = {
 		*/
 		TILES: false,
 		/*
-		Propriedade: BUFFER
-
 		N&uacute;mero de TILES na &aacute;rea n&atilde;o vis&iacute;vel do mapa
 
 		Tipo:
@@ -1393,8 +1374,6 @@ i3GEO.Interface = {
 		*/
 		ZOOMSCALE: [591657550,295828775,147914387,73957193,36978596,18489298,9244649,4622324,2311162,1155581,577790,288895,144447,72223,36111,18055,9027,4513,2256,1128],
 		/*
-		Variable: PARAMETROSLAYER
-
 		Parâmetros adicionais que s&atilde;o inseridos na URL que define cada layer
 
 		Tipo:
@@ -1402,8 +1381,6 @@ i3GEO.Interface = {
 		*/
 		PARAMETROSLAYER: "&TIPOIMAGEM="+i3GEO.configura.tipoimagem,
 		/*
-		Variable: posfixo
-
 		String acrescentada à url de cada tile para garantir a remo&ccedil;&atilde;o do cache local
 
 		Type:
@@ -2013,8 +1990,6 @@ i3GEO.Interface = {
 		*/
 		PARAMETROSLAYER: "&TIPOIMAGEM="+i3GEO.configura.tipoimagem,
 		/*
-		Variable: posfixo
-
 		String acrescentada à url de cada tile para garantir a remo&ccedil;&atilde;o do cache local
 
 		Type:

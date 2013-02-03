@@ -1,13 +1,23 @@
-/*jslint white:false,undef: false, rhino: true, onevar: true, evil: false */
-
 /*
 Title: Barra de bot&otilde;es
 
+i3GEO.barraDeBotoes
+
+Constr&oacute;i a barra de bot&otilde;es flutuante
+
+Veja tamb&eacute;m classe_interface.js (i3GEO.Interface) que possu&iacute; par&acirc;metros que permitem ajustar a posi&ccedil;&atilde;o das barras no mapa
+
+Exemplo:
+
+	Para alterar as op&ccedil;&otilde;es modifique as propriedades colocando um c&oacute;digo como o seguinte no javascript utilizado na interface de mapa que estiver sendo utilizada
+
+	i3GEO.barraDeBotoes.tipo = "olhodepeixe";
+	
 Arquivo:
 
 i3geo/classesjs/classe_barradebotoes.js
 
-Licenca:
+Licen&ccedil;a:
 
 GPL2
 
@@ -32,13 +42,6 @@ Free Software Foundation, Inc., no endere&ccedil;o
 if(typeof(i3GEO) === 'undefined'){
 	var i3GEO = {};
 }
-/*
-Classe: i3GEO.barraDeBotoes
-
-Constr&oacute;i a barra de bot&otilde;es flutuante
-
-Veja tamb&eacute;m classe_interface.js (i3GEO.Interface) que possu&iacute; par&acirc;metros que permitem ajustar a posi&ccedil;&atilde;o das barras no mapa
-*/
 i3GEO.barraDeBotoes = {
 	/*
 	Propriedade: ATIVA

@@ -1,12 +1,10 @@
 <?php
 /*
-Title: Compactador de javascript
-
 Compacta os arquivos js e css utilizados pelo I3Geo.
 
 Deve ser executado sempre que forem feitas altera&ccedil;&otilde;es nos arquivos javascript existentes em classesjs ou nos arquivos de estilo existentes em css.
 
-Licenca:
+Licen&ccedil;a:
 
 GPL2
 

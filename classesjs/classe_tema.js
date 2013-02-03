@@ -1,10 +1,16 @@
-/*jslint plusplus:false,white:false,undef: false, rhino: true, onevar: true, evil: true */
 /*
 Title: Temas
 
-File: i3geo/classesjs/classe_tema.js
+i3GEO.tema
 
-Licenca:
+Funcoes de dialogo e processamento de propriedades de um tema existente no mapa
+
+Em i3GEO.tema.dialogo estao as funcoes de abertura dos dialogos para alteracao das propriedades do tema,
+
+
+Arquivo: i3geo/classesjs/classe_tema.js
+
+Licen&ccedil;a:
 
 GPL2
 
@@ -29,17 +35,8 @@ Free Software Foundation, Inc., no endere&ccedil;o
 if(typeof(i3GEO) === 'undefined'){
 	var i3GEO = {};
 }
-/*
-Classe: i3GEO.tema
-
-Funcoes de dialogo e processamento de propriedades de um tema existente no mapa
-
-Em i3GEO.tema.dialogo estao as funcoes de abertura dos dialogos para alteracao das propriedades do tema,
-*/
 i3GEO.tema = {
 	/*
-	Variable: TEMPORIZADORESID
-
 	Objeto que contem os identificadores dos temporizadores (setInterval) estabelecidos para cada camada
 
 	Type:
@@ -87,8 +84,6 @@ i3GEO.tema = {
 		window.open(i3GEO.configura.locaplic+"/admin/abrefontemapfile.php?tema="+tema);
 	},
 	/*
-	Function: sobe
-
 	Sobe um tema na ordem de desenho
 
 	Parametros:
@@ -113,8 +108,6 @@ i3GEO.tema = {
 		);
 	},
 	/*
-	Function: desce
-
 	Desce um tema na ordem de desenho
 
 	Parametros:
@@ -188,8 +181,6 @@ i3GEO.tema = {
 		);
 	},
 	/*
-	Function: mudatransp
-
 	Muda a transparencia de um tema
 
 	Parametros:

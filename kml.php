@@ -2,17 +2,13 @@
 /*
 Title: Cat&aacute;logo de temas em KML
 
-Gerador de menu em kml para uso no Google Earth
-
-L&ecirc; o(s) menu(s) de temas e acrescenta os links necess&aacute;rios ao acesso aos dados no Google Earth. Veja mais detalhes em ajuda/googleearth.htm
-
-Utilize o par&acirc;metro "idioma" para definir a linguagem utilizada (por default &eacute; pt)
+Gera um arquivo KML contendo os temas existentes no cat&aacute;logo. Esse KML pode ser utilizado no Google Earth para que os temas possam ser vistos nesse aplicativo seguindo a mesma estrutura de organiza&ccedil;&atilde;o 
 
 Exemplo
 
 kml.php?idioma=en
 
-Licenca:
+Licen&ccedil;a:
 
 i3Geo Interface Integrada de Ferramentas de Geoprocessamento para Internet
 
@@ -34,11 +30,13 @@ Free Software Foundation, Inc., no endere&ccedil;o
 
 Arquivo: i3geo/kml.php
 
-Parametro:
+Par&acirc;metros:
 
 perfil - perfis separados por espa&ccedil;os. Ao usar um perfil, ser&atilde;o mostrados apenas os temas dispon&iacute;veis para o perfil indicado.
 
-tipoxml - (opcional) se for "kml" insere o cabe&ccedil;alho de tipo kml no xml, permitindo abrir o xml diretamente na aplica&ccedil;&atilde;o Google Earth
+tipoxml - (opcional) quando definido como "kml" ser&aacute; inserido o cabe&ccedil;alho de tipo kml no xml, possibilitando abrir o xml diretamente na aplica&ccedil;&atilde;o Google Earth
+
+idioma - pt|en|es
 */
 //TODO incluir arquivo gvp
 error_reporting(0);

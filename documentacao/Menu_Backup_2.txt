@@ -2,7 +2,7 @@ Format: Development Release 02-10-2007 (1.35 base)
 
 
 Title: i3Geo
-SubTitle: Par&amp;acirc;metros de configura&amp;ccedil;&amp;atilde;o e customiza&amp;ccedil;&amp;atilde;o
+SubTitle: Par&acirc;metros de configura&ccedil;&atilde;o e customiza&ccedil;&atilde;o
 
 Footer: O i3Geo é Software Livre
 Timestamp: Gerado em day month, year
@@ -43,24 +43,24 @@ Don't Index: Properties
 # --------------------------------------------------------------------------
 
 
-Link: Portal do Software P&amp;uacute;blico Brasileiro  (http://www.softwarepublico.gov.br)
+Link: Portal do Software P&uacute;blico Brasileiro  (http://www.softwarepublico.gov.br)
 
 Group: Classesjs  {
 
-   File: &amp;Aacute;rvore de camadas  (classesjs\classe_arvoredecamadas.js)
+   File: &Aacute;rvore de camadas  (classesjs\classe_arvoredecamadas.js)
    File: Ajuda  (classesjs\classe_ajuda.js)
    File: Analise geografica  (classesjs\classe_analise.js)
    File: arvore de temas  (classesjs\classe_arvoredetemas.js)
    File: Atlas  (classesjs\atlas.js)
-   File: Barra de bot&amp;otilde;es  (classesjs\classe_barradebotoes.js)
-   File: C&amp;aacute;lculos  (classesjs\classe_calculo.js)
+   File: Barra de bot&otilde;es  (classesjs\classe_barradebotoes.js)
+   File: C&aacute;lculos  (classesjs\classe_calculo.js)
    File: Cliente de web services  (classesjs\wscliente.js)
    File: Compactador de javascript  (classesjs\compactajs.php)
-   File: Configura&amp;ccedil;&amp;otilde;es gerais  (classesjs\classe_configura.js)
-   File: Controle de usu&amp;aacute;rio  (classesjs\classe_login.js)
+   File: Configura&ccedil;&otilde;es gerais  (classesjs\classe_configura.js)
+   File: Controle de usu&aacute;rio  (classesjs\classe_login.js)
    File: Coordenadas  (classesjs\classe_coordenadas.js)
    File: Data download  (classesjs\datadownload.js)
-   File: Desenho de elementos gr&amp;aacute;ficos  (classesjs\classe_desenho.js)
+   File: Desenho de elementos gr&aacute;ficos  (classesjs\classe_desenho.js)
    File: Eventos  (classesjs\classe_eventos.js)
    File: Gadgets &lparen;objetos marginais do mapa&rparen;  (classesjs\classe_gadgets.js)
    File: Gerador de links  (classesjs\geradordelinks.js)
@@ -70,12 +70,12 @@ Group: Classesjs  {
    File: Interface  (classesjs\classe_interface.js)
    File: Janelas  (classesjs\classe_janela.js)
    File: Mapa  (classesjs\classe_mapa.js)
-   File: Mapa de refer&amp;ecirc;ncia  (classesjs\classe_maparef.js)
-   File: Navega&amp;ccedil;&amp;atilde;o sobre o mapa  (classesjs\classe_navega.js)
+   File: Mapa de refer&ecirc;ncia  (classesjs\classe_maparef.js)
+   File: Navega&ccedil;&atilde;o sobre o mapa  (classesjs\classe_navega.js)
    File: PHP  (classesjs\classe_php.js)
    File: Social  (classesjs\classe_social.js)
    File: Temas  (classesjs\classe_tema.js)
-   File: Utilit&amp;aacute;rios  (classesjs\classe_util.js)
+   File: Utilit&aacute;rios  (classesjs\classe_util.js)
    }  # Group: Classesjs
 
 Group: Diagramas e SQL  {
@@ -111,7 +111,7 @@ Group: Atlas  {
 
    File: index.htm  (atlas\index.htm)
    File: index.html  (atlas\index.html)
-   File: Interface padr&amp;atilde;o dos Atlas  (atlas\geral.htm)
+   File: Interface padr&atilde;o dos Atlas  (atlas\geral.htm)
    }  # Group: Atlas
 
 File: ajuda_usuario.php  (ajuda_usuario.php)
@@ -120,7 +120,7 @@ File: Inicializa o i3Geo via URL ms_criamapa.php  (ms_criamapa.php)
 File: kml.php  (kml.php)
 File: Mashups  (mashups\index.html)
 File: ogc.php  (ogc.php)
-File: Vari&amp;aacute;veis de inicializa&amp;ccedil;&amp;atilde;o ms_configura.php  (ms_configura.php)
+File: Vari&aacute;veis de inicializa&ccedil;&atilde;o ms_configura.php  (ms_configura.php)
 
 Group: Admin  {
 
@@ -132,25 +132,25 @@ Group: Admin  {
       File: Ajuste de mapfiles  (admin\html\incluimap.html)
       File: Cadastro de grupos de usuarios  (admin\html\gruposusuarios.html)
       File: Cadastro de usuarios  (admin\html\usuarios.html)
-      File: Cadatro de vari&amp;aacute;veis estat&amp;iacute;sticas  (admin\html\estat_variavel.html)
-      File: Editor da &amp;aacute;rvore de menus  (admin\html\arvore.html)
+      File: Cadatro de vari&aacute;veis estat&iacute;sticas  (admin\html\estat_variavel.html)
+      File: Editor da &aacute;rvore de menus  (admin\html\arvore.html)
       File: Editor da interface Atlas  (admin\html\atlas.html)
-      File: Editor da lista de conexoes do sistema de metadados estat&amp;iacute;sticos  (admin\html\estat_conexao.html)
-      File: Editor da lista de fontes do sistema de metadados estat&amp;iacute;sticos  (admin\html\estat_fonteinfo.html)
+      File: Editor da lista de conexoes do sistema de metadados estat&iacute;sticos  (admin\html\estat_conexao.html)
+      File: Editor da lista de fontes do sistema de metadados estat&iacute;sticos  (admin\html\estat_fonteinfo.html)
       File: Editor da lista de menus  (admin\html\menus.html)
-      File: Editor da lista de regi&amp;otilde;es do sistema de metadados estat&amp;iacute;sticos  (admin\html\estat_tipo_regiao.html)
-      File: Editor da lista de tipos de per&amp;iacute;odos de tempo do sistema de metadados estat&amp;iacute;sticos  (admin\html\estat_tipo_periodo.html)
-      File: Editor da lista de unidades de medida do sistema de metadados estat&amp;iacute;sticos  (admin\html\estat_unidade_medida.html)
-      File: Editor das opera&amp;ccedil;&amp;otilde;es sob controle  (admin\html\operacoes.html)
+      File: Editor da lista de regi&otilde;es do sistema de metadados estat&iacute;sticos  (admin\html\estat_tipo_regiao.html)
+      File: Editor da lista de tipos de per&iacute;odos de tempo do sistema de metadados estat&iacute;sticos  (admin\html\estat_tipo_periodo.html)
+      File: Editor da lista de unidades de medida do sistema de metadados estat&iacute;sticos  (admin\html\estat_unidade_medida.html)
+      File: Editor das opera&ccedil;&otilde;es sob controle  (admin\html\operacoes.html)
       File: Editor de mapfiles  (admin\html\editormapfile.html)
-      File: Editor de mapfiles de inicializa&amp;ccedil;&amp;atilde;o  (admin\html\mapfiles.html)
-      File: Editor de tabelas do sistema de metadados estat&amp;iacute;sticos  (admin\html\estat_editor.html)
+      File: Editor de mapfiles de inicializa&ccedil;&atilde;o  (admin\html\mapfiles.html)
+      File: Editor de tabelas do sistema de metadados estat&iacute;sticos  (admin\html\estat_editor.html)
       File: Editor do ms_configura  (admin\html\ms_configura.html)
       File: Editor do ogcws.map  (admin\html\ogcws.html)
       File: Mapas  (admin\html\mapas.html)
-      File: Op&amp;ccedil;&amp;otilde;es da ferramenta identifica  (admin\html\identifica.html)
+      File: Op&ccedil;&otilde;es da ferramenta identifica  (admin\html\identifica.html)
       File: Perfis  (admin\html\perfis.html)
-      File: Sistemas de adi&amp;ccedil;&amp;atilde;o de temas  (admin\html\sistemas.html)
+      File: Sistemas de adi&ccedil;&atilde;o de temas  (admin\html\sistemas.html)
       File: Subir shapefile  (admin\html\subirshapefile.html)
       File: Tags  (admin\html\tags.html)
       File: Web Services  (admin\html\webservices.html)
@@ -192,8 +192,8 @@ Group: Admin  {
       File: conexao.php  (admin\php\conexao.php)
       File: criabanco.php  (admin\php\criabanco.php)
       File: editormapfile.php  (admin\php\editormapfile.php)
-      File: Estat&amp;iacute;sticas do banco de dados de administra&amp;ccedil;&amp;atilde;o  (admin\php\estatisticas.php)
-      File: Fun&amp;ccedil;&amp;otilde;es de uso geral  (admin\php\admin.php)
+      File: Estat&iacute;sticas do banco de dados de administra&ccedil;&atilde;o  (admin\php\estatisticas.php)
+      File: Fun&ccedil;&otilde;es de uso geral  (admin\php\admin.php)
       File: funcoes_login.php  (admin\php\login.php)
       File: gruposusuarios.php  (admin\php\gruposusuarios.php)
       File: identifica.php  (admin\php\identifica.php)

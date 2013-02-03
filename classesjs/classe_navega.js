@@ -1,12 +1,21 @@
-/*jslint plusplus:false,white:false,undef: false, rhino: true, onevar: true, evil: true */
 /*
 Title: Navega&ccedil;&atilde;o sobre o mapa
+
+i3GEO.navega
+
+Realiza opera&ccedil;&otilde;es de navega&ccedil;&atilde;o do mapa, como zoom, pan, etc..
+
+Quando todos os argumentos da fun&ccedil;&atilde;o forem opcionais, basta usar nomeFuncao(),
+nos casos em que os primeiros argumentos forem opcionais e os demais obrigat&oacute;rios,
+utilize "" no lugar do argumento que se quer usar o default, exemplo,
+nomeFuncao("","",10)
+
 
 Arquivo:
 
 i3geo/classesjs/classe_navega.js
 
-Licenca:
+Licen&ccedil;a:
 
 GPL2
 
@@ -31,20 +40,8 @@ Free Software Foundation, Inc., no endere&ccedil;o
 if(typeof(i3GEO) === 'undefined'){
 	var i3GEO = {};
 }
-/*
-Classe: i3GEO.navega
-
-Realiza opera&ccedil;&otilde;es de navega&ccedil;&atilde;o do mapa, como zoom, pan, etc..
-
-Quando todos os argumentos da fun&ccedil;&atilde;o forem opcionais, basta usar nomeFuncao(),
-nos casos em que os primeiros argumentos forem opcionais e os demais obrigat&oacute;rios,
-utilize "" no lugar do argumento que se quer usar o default, exemplo,
-nomeFuncao("","",10)
-*/
 i3GEO.navega = {
 	/*
-	Propriedade: TEMPONAVEGAR
-
 	Tempo em milisegundos que ser&aacute; esperado para executar uma opera&ccedil;&atilde;o de navega&ccedil;&atilde;o sobre o mapa.
 
 	Controla o lapso de tempo utilizado para disparar as fun&ccedil;&otilde;es do tipo navega&ccedil;&atilde;o
@@ -69,8 +66,6 @@ i3GEO.navega = {
 	*/
 	FATORZOOM: 2,
 	/*
-	Variavel: timerNavega
-
 	Objeto do tipo timer utilizado no contador de tempo para o delay de execu&ccedil;&atilde;o das fun&ccedil;&otilde;es de navega&ccedil;&atilde;o
 	*/
 	timerNavega: null,
@@ -268,8 +263,6 @@ i3GEO.navega = {
 		}
 	},
 	/*
-	Function: localizaIP
-
 	Localiza as coordenadas baseadas no n&uacute;mero IP do usu&aacute;rio.
 
 	Parametros:
@@ -289,8 +282,6 @@ i3GEO.navega = {
 		i3GEO.php.localizaIP(funcao);
 	},
 	/*
-	Function: zoomIP
-
 	Mostra no mapa um ponto baseado na localiza&ccedil;&atilde;o do usu&aacute;rio.
 
 	Parametros:
@@ -576,8 +567,6 @@ i3GEO.navega = {
 		*/
 		INTERVALO: 0,
 		/*
-		Variavel: ID
-
 		Guarda o valor do ID do elemento HTML que receber&aacute; o contador de tempo
 
 		Tipo:
@@ -623,8 +612,6 @@ i3GEO.navega = {
 			{$i(i3GEO.navega.autoRedesenho.ID).style.display = "none";}
 		},
 		/*
-		Function: redesenha
-
 		Redesenha o mapa quando o contador de tempo chegar a zero
 		*/
 		redesenha: function(){
@@ -645,8 +632,6 @@ i3GEO.navega = {
 			i3GEO.navega.autoRedesenho.ativa(i3GEO.navega.autoRedesenho.ID);
 		},
 		/*
-		Function: contagem
-
 		Faz a contagem do tempo
 		*/
 		contagem: function(){
@@ -656,16 +641,12 @@ i3GEO.navega = {
 		}
 	},
 	/*
-	Classe: i3GEO.navega.zoomBox
-
 	Controla o desenho de um box na tela para executar o zoom por box
 	*/
 	zoomBox: {
 		boxxini: 0,
 		boxyini: 0,
 		/*
-		Function: inicia
-
 		Marca o in&iacute;cio do desenho do box, capturando a posi&ccedil;&atilde;o do mouse
 		*/
 		inicia: function(){
@@ -693,8 +674,6 @@ i3GEO.navega = {
 			{i3GEO.eventos.MOUSEUP.push("i3GEO.navega.zoomBox.termina()");}
 		},
 		/*
-		Function: criaBox
-
 		Cria o DIV que ser&aacute; utilizado para desenhar o box no mapa
 		*/
 		criaBox: function(){
@@ -737,8 +716,6 @@ i3GEO.navega = {
 			}
 		},
 		/*
-		Function: desloca
-
 		Desloca o box conforme o mouse &eacute; movimentado
 		*/
 		desloca: function(){
@@ -776,8 +753,6 @@ i3GEO.navega = {
 			}
 		},
 		/*
-		Function: termina
-
 		Para o desenho do box, captura seu tamanho e faz o zoom no mapa
 		*/
 		termina: function(){
@@ -860,8 +835,6 @@ i3GEO.navega = {
 		*/
 		POSICAOY:0,
 		/*
-		Variavel: ESTAATIVA
-
 		Indica se a lente foi ou n&atilde;o aberta
 		*/
 		ESTAATIVA: "nao",
@@ -902,8 +875,6 @@ i3GEO.navega = {
 			{i3GEO.eventos.MOUSEMOVE.push("i3GEO.navega.lente.movimenta()");}
 		},
 		/*
-		Function: atualiza
-
 		Atualiza a imagem da lente aberta
 		*/
 		atualiza: function(){
@@ -951,7 +922,7 @@ i3GEO.navega = {
 		/*
 		Function: desativa
 
-		Desativa alente aberta
+		Desativa a lente aberta
 		*/
 		desativa: function(){
 			if(typeof(console) !== 'undefined'){console.info("i3GEO.navega.lente.desativa()");}
@@ -963,8 +934,6 @@ i3GEO.navega = {
 			i3GEO.eventos.NAVEGAMAPA.remove("i3GEO.navega.lente.atualiza()");
 		},
 		/*
-		Function: movimenta
-
 		Movimenta a imagem dentro da lente para refletir a posi&ccedil;&atilde;o do mouse
 		*/
 		movimenta: function(){
@@ -1009,15 +978,11 @@ i3GEO.navega = {
 		*/
 		TAMANHO: 75,
 		/*
-		Indica se o destaque est&aacute; ou n&atilde;o ativo
-
 		Tipo:
 		{sim|nao}
 		*/
 		ESTAATIVO: "nao",
 		/*
-		Tema que est&aacute; sendo destacado
-
 		Tipo:
 		{C&oacute;digo do tema}
 		*/
@@ -1064,8 +1029,6 @@ i3GEO.navega = {
 			{i3GEO.eventos.MOUSEMOVE.push("i3GEO.navega.destacaTema.movimenta()");}
 		},
 		/*
-		Function: atualiza
-
 		Atualiza o destaque
 
 		&Eacute; definido para o evento de navega&ccedil;&atilde;o do mapa
@@ -1107,8 +1070,6 @@ i3GEO.navega = {
 			document.body.removeChild($i("div_d"));
 		},
 		/*
-		Function: movimenta
-
 		Movimenta o destaque conforme o mouse move
 
 		&Eacute; definido para o evento de deslocamento do mouse
@@ -1119,14 +1080,10 @@ i3GEO.navega = {
 		}
 	},
 	/*
-	Classe: i3GEO.navega.barraDeZoom
-
 	Controla a barra (slide) de zoom
 	*/
 	barraDeZoom: {
 		/*
-		Function: cria
-
 		Cria os elementos HTML para a barra de zoom
 
 		Return:
@@ -1150,8 +1107,6 @@ i3GEO.navega = {
 			return temp;
 		},
 		/*
-		Function: ativa
-
 		Ativa os bot&otilde;es da barra de zoom
 		*/
 		ativa: function(){

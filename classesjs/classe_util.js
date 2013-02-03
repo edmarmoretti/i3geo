@@ -1,11 +1,15 @@
 /*
 Title: Utilit&aacute;rios
 
+i3GEO.util
+
+Fun&ccedil;&otilde;es de uso geral
+
 Arquivo:
 
 i3geo/classesjs/classe_util.js
 
-Licenca:
+Licen&ccedil;a:
 
 GPL2
 
@@ -31,8 +35,6 @@ if(typeof(i3GEO) === 'undefined'){
 	var i3GEO = {};
 }
 /*
-Propriedade: navm
-
 Verdadeiro (true) se o navegador for o Internet Explorer
 
 Tipo:
@@ -43,8 +45,6 @@ Default:
 */
 navm = false;
 /*
-Propriedade: navn
-
 Verdadeiro (true) se o navegador for o Firefox
 
 Tipo:
@@ -56,8 +56,6 @@ Default:
 */
 navn = false;
 /*
-Propriedade: chro
-
 Verdadeiro (true) se o navegador for o Chrome
 
 Tipo:
@@ -68,8 +66,6 @@ Default:
 */
 chro = navigator.userAgent.toLowerCase().indexOf('chrome') > -1;
 /*
-Propriedade: opera
-
 Verdadeiro (true) se o navegador for o Opera
 
 Tipo:
@@ -84,8 +80,6 @@ if (navigator.appName.substring(0,1) === 'M'){navm=true;}
 if(opera === true)
 {navn = true;}
 /*
-Variavel: g_operacao
-
 Nome da ultima operacao que foi executada.
 
 Dependendo do tipo de operacao sao aplicadas as atualizacoes necessarias aos componentes do mapa. Por exemplo, redesenha o corpo do mapa, atualiza a lista de temas, etc.
@@ -94,8 +88,6 @@ Essas operacoes sao controladas pela funcao ajaxiniciaparametros.
 */
 g_operacao = "";
 /*
-Variavel: g_tipoacao
-
 Tipo de acao que esta sendo executada.
 Quando o usuario clica no mapa, essa variavel e pesquisada para definir o tipo de operacao que deve ser executada.
 E definida quando o usuario seleciona uma determinada ferramenta do i3Geo.
@@ -132,16 +124,8 @@ Array.prototype.remove=function(s){
 		}
 	}catch(e){}
 };
-
-/*
-Classe: i3GEO.util
-
-Utilitarios.
-*/
 i3GEO.util = {
 	/*
-	Variavel: PINS
-
 	Elementos IMG criados na funcao criaPin
 
 	Tipo:
@@ -149,8 +133,6 @@ i3GEO.util = {
 	*/
 	PINS: [],
 	/*
-	Variavel:BOXES
-
 	Elementos DIV criados na funcao criaBox
 
 	Tipo:
@@ -253,8 +235,6 @@ i3GEO.util = {
 		return keys;
 	},
 	/*
-	Function: criaBotaoAplicar (depreciado)
-
 	Cria um botao flutuante do tipo aplicar.
 
 	O novo botao e adicionado no DOM com ID "i3geo_aplicar" e posicionado sobre o objeto definido
@@ -465,7 +445,7 @@ i3GEO.util = {
 	/*
 		Function: pegaElementoPai
 
-		Pega o elemento pai de um elemento clicado para identificar o codigo do tema.
+		Pega o elemento pai de um elemento clicado
 
 		Parametros:
 
@@ -558,8 +538,6 @@ i3GEO.util = {
 		catch(e){}
 	},
 	/*
-	Function: criaBox
-
 	Cria um elemento div na pagina atual.
 
 	Esse elemento pode ser utilizado para desenhar retangulos sobre o mapa
@@ -587,8 +565,6 @@ i3GEO.util = {
 		{$i(id).style.display="block";}
 	},
 	/*
-	Function: escondeBox
-
 	Esconde os BOXES com IDs registrados em i3GEO.util.BOXES
 
 	Os ids sao criado pela funcao criaBox
@@ -811,8 +787,6 @@ i3GEO.util = {
 	*/
 	insereMarca:{
 		/*
-		Armazena o valor do ID do div criado para inserir pontos
-
 		Tipo:
 		{Array}
 		*/
@@ -1064,7 +1038,7 @@ i3GEO.util = {
 	/*
 	Function: aparece
 
-	Aplica efeito de aparecimento suave de um objetov
+	Aplica efeito de aparecimento suave de um objeto
 
 	Parametros:
 
@@ -2329,8 +2303,6 @@ i3GEO.util = {
 		}
 	},
 	/*
-	Function: localizai3GEO
-
 	Tenta identificar onde os JS do i3Geo estao localizados
 
 	Aplica o resultado a variavel i3GEO.configura.locaplic
@@ -2616,6 +2588,23 @@ i3GEO.util = {
 		}
 		return ret;
 	},
+	/*
+	Function: ajaxGet
+	
+	Faz uma requisi&ccedil;&atilde;o ao servidor por meio de AJAX
+	
+	A fun&ccedil;&atilde;o de processamento do resultado ir&aacute; receber um objeto JSON como par&acirc;metro
+	
+	Exemplo:
+	
+	i3GEO.util.ajaxGet("http://localhost/teste.php",function(retorno){alert(retorno);})
+	
+	Parametros:
+	
+	sUrl - url que ser&aacute; requisitada
+	
+	funcaoRetorno - fun&ccedil;&atilde;o que ir&aacute; processar o resultado
+	*/
 	ajaxGet: function(sUrl,funcaoRetorno){
 		sUrl = escape(sUrl);
 		re = new RegExp("%3F", "g");

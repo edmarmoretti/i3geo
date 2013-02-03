@@ -1,13 +1,22 @@
-/*jslint white:false,undef: false, rhino: true, onevar: true, evil: false */
-
 /*
-Title: arvore de temas
+Title: &Aacute;rvore de temas
+
+i3GEO.arvoreDeTemas
+
+Monta a &aacute;rvore com os temas dispon&iacute;veis para ser adicionados ao mapa
+
+Exemplos:
+
+	Para alterar as op&ccedil;&otilde;es da &aacute;rvore, modifique as propriedades colocando um c&oacute;digo como o seguinte no javascript utilizado na interface de mapa que estiver sendo utilizada
+
+	i3GEO.arvoreDeTemas.INCLUISISTEMAS = false;
+
 
 Arquivo:
 
 i3geo/classesjs/classe_arvoredetemas.js
 
-Licenca:
+Licen&ccedil;a:
 
 GPL2
 
@@ -28,14 +37,12 @@ Voc&ecirc; deve ter recebido uma c&oacute;pia da Licen&ccedil;a P&uacute;blica G
 GNU junto com este programa; se n&atilde;o, escreva para a
 Free Software Foundation, Inc., no endere&ccedil;o
 59 Temple Street, Suite 330, Boston, MA 02111-1307 USA.
+
 */
 if(typeof(i3GEO) === 'undefined'){
 	var i3GEO = {};
 }
 /*
-Classe: i3GEO.arvoreDeTemas
-
-Monta a arvore com os temas disponiveis para ser adicionados ao mapa.
 */
 i3GEO.arvoreDeTemas = {
 	/*
@@ -45,7 +52,7 @@ i3GEO.arvoreDeTemas = {
 
 	"uploadarquivo" quando "true" indica que sera mostrado o icone de upload de arquivos e o icoe de conexao com servicos
 
-	Example:
+	Exemplo:
 
 	var obj = {
 
@@ -180,7 +187,7 @@ i3GEO.arvoreDeTemas = {
 	/*
 	Propriedade: FILTRADOWNLOAD
 
-	Nao mostra na arvore os nos que nao possuem temas para download
+	Mostra apenas os temas que permitem download
 
 	Tipo:
 	{Boolean}
@@ -189,7 +196,7 @@ i3GEO.arvoreDeTemas = {
 	/*
 	Propriedade: FILTRAOGC
 
-	Nao mostra na arvore os nos que nao permitem a geracao de WMS
+	Mostra apenas os temas que permitem o uso de servi&ccedil;os OGC
 
 	Tipo:
 	{Boolean}
@@ -220,8 +227,6 @@ i3GEO.arvoreDeTemas = {
 	*/
 	ATIVATEMA: "",
 	/*
-	Propriedade: ATIVATEMAIMEDIATO (depreciado)
-
 	Adiciona ao mapa o tema clicado imediatamente, sem a definicao de um temporizador ou necessidade de se clicar no botao "aplicar".
 
 	Tipo:
@@ -256,8 +261,6 @@ i3GEO.arvoreDeTemas = {
 	*/
 	RETORNAGUIA: "",
 	/*
-	Variavel: IDHTML
-
 	Armazena o ID do elemento HTML onde a arvore sera incluida
 
 	Tipo:
@@ -265,8 +268,6 @@ i3GEO.arvoreDeTemas = {
 	*/
 	IDHTML: "arvoreAdicionaTema",
 	/*
-	Variavel: LOCAPLIC
-
 	Endereco da aplicacao i3geo. Utilizado para definir o caminho para a chamada em AJAX.
 
 	Tipo:
@@ -274,8 +275,6 @@ i3GEO.arvoreDeTemas = {
 	*/
 	LOCAPLIC: null,
 	/*
-	Variavel: SID
-
 	Codigo da secao aberta no servidor pelo i3Geo
 
 	Tipo:
@@ -292,8 +291,6 @@ i3GEO.arvoreDeTemas = {
 	*/
 	ARVORE: null,
 	/*
-	Variavel: DRIVES
-
 	Objeto JSON com a lista de drives no servidor que podem ser abertos na opcao de navegacao pelos diretorios
 
 	Tipo:
@@ -301,8 +298,6 @@ i3GEO.arvoreDeTemas = {
 	*/
 	DRIVES: null,
 	/*
-	Variavel: SISTEMAS
-
 	Objeto JSON com a lista de sistemas existentes
 
 	Tipo:
@@ -310,8 +305,6 @@ i3GEO.arvoreDeTemas = {
 	*/
 	SISTEMAS: null,
 	/*
-	Variavel: MENUS
-
 	Armazena o objeto JSON com a lista de menus resultante da funcao listaMenus
 
 	Tipo:
@@ -319,8 +312,6 @@ i3GEO.arvoreDeTemas = {
 	*/
 	MENUS: null,
 	/*
-	Variavel: GRUPOS
-
 	Armazena o objeto JSON com a ultima lista de grupos obtida
 
 	Tipo:
@@ -328,8 +319,6 @@ i3GEO.arvoreDeTemas = {
 	*/
 	GRUPOS: null,
 	/*
-	Variavel: SUBGRUPOS
-
 	Armazena o objeto JSON com a ultima lista de sub-grupos obtida
 
 	Tipo:
@@ -337,8 +326,6 @@ i3GEO.arvoreDeTemas = {
 	*/
 	SUBGRUPOS: null,
 	/*
-	Variavel: TEMAS
-
 	Armazena o objeto JSON com a ultima lista de temas obtida
 
 	Tipo:
@@ -393,8 +380,6 @@ i3GEO.arvoreDeTemas = {
 		window.setTimeout("i3GEO.arvoreDeTemas.IDHTML = '"+idold+"';",520);
 	},
 	/*
-	Function: listaWMS
-
 	Lista os WMS cadastrados preenchendo o no OGC-WMS
 	*/
 	listaWMS: function(){
@@ -423,8 +408,6 @@ i3GEO.arvoreDeTemas = {
 		i3GEO.php.listaRSSwsARRAY(monta,"WMS");
 	},
 	/*
-	Function: listaLayersWMS
-
 	Lista os layers de um WMS e preenche o no OGC-WMS
 	*/
 	listaLayersWMS: function(node){
@@ -487,8 +470,6 @@ i3GEO.arvoreDeTemas = {
 		i3GEO.php.listaLayersWMS(monta,node.data.url,(node.data.nivel*1 + 1),node.data.id_ws,node.data.layer);
 	},
 	/*
-	Function: montaTextoTemaWMS
-
 	Monta o texto que sera mostrado ao lado de cada layer de um WMS, permitindo incluir o layer no mapa.
 	*/
 	montaTextoTemaWMS: function(servico,layer,estilo,titulo,proj,formatoinfo,versao,formatoimg,cor){
@@ -644,8 +625,6 @@ i3GEO.arvoreDeTemas = {
 		i3GEO.php.pegalistadetemas(retorno,id_menu,id_grupo,id_subgrupo);
 	},
 	/*
-	Function: listaSistemas
-
 	Lista os sistemas especiais de adicao de temas.
 
 	O resultado e armazenado em i3GEO.arvoreDeTemas.SISTEMAS
@@ -668,8 +647,6 @@ i3GEO.arvoreDeTemas = {
 		i3GEO.php.pegaSistemas(retorno);
 	},
 	/*
-	Function: listaDrives
-
 	Lista os enderecos no servidor dos drives que podem ser abertos pela opcao de navegacao em arquivos no servidor.
 
 	Alista de drives deve ser definida emi3geo/ms_configura.php
@@ -697,8 +674,6 @@ i3GEO.arvoreDeTemas = {
 		i3GEO.php.listadrives(retorno);
 	},
 	/*
-	Function: listaEstrelas
-
 	Busca e insere na arvore de temas os temas que contem um certo nivel de estrelas
 
 	Parametros:
@@ -828,8 +803,6 @@ i3GEO.arvoreDeTemas = {
 		}
 	},
 	/*
-	Function: montaArvore
-
 	Monta a arvore incluindo os nos do primeiro nivel.
 
 	A opcao de carga dinamica dos nos filhos e definida para a montagem dos grupos.
@@ -1072,8 +1045,6 @@ i3GEO.arvoreDeTemas = {
 		}
 	},
 	/*
-	Function: montaGrupos
-
 	Monta a lista de grupos de um no principal da arvore.
 
 	A opcao de carga dinamica dos nos filhos e definida para a montagem dos sub-grupos.
@@ -1137,8 +1108,6 @@ i3GEO.arvoreDeTemas = {
 		i3GEO.arvoreDeTemas.listaGrupos(i3GEO.arvoreDeTemas.SID,i3GEO.arvoreDeTemas.LOCAPLIC,node.data.idmenu,temp);
 	},
 	/*
-	Function: montaSubGrupos
-
 	Monta a lista de sub-grupos de um no do tipo grupo.
 
 	A opcao de carga dinamica dos nos filhos e definida para a montagem dos temas.
@@ -1225,8 +1194,6 @@ i3GEO.arvoreDeTemas = {
 		i3GEO.arvoreDeTemas.listaSubGrupos(i3GEO.arvoreDeTemas.SID,i3GEO.arvoreDeTemas.LOCAPLIC,node.data.idmenu,node.data.idgrupo,temp);
 	},
 	/*
-	Function: montaTemas
-
 	Monta a lista de temas de um no.
 	*/
 	montaTemas: function(node){
@@ -1275,8 +1242,6 @@ i3GEO.arvoreDeTemas = {
 		i3GEO.arvoreDeTemas.listaTemas(i3GEO.arvoreDeTemas.SID,i3GEO.arvoreDeTemas.LOCAPLIC,node.data.idmenu,node.data.idgrupo,node.data.idsubgrupo,temp);
 	},
 	/*
-	Function: montaDir
-
 	Inclui na arvore o navegador de diretorios
 
 	Parametro:
@@ -1320,8 +1285,6 @@ i3GEO.arvoreDeTemas = {
 		i3GEO.php.listaarquivos(montaLista,node.data.caminho);
 	},
 	/*
-	Function: montaTextoTema
-
 	Monta o texto com o titulo do tema.
 
 	Parametros:
@@ -1389,8 +1352,6 @@ i3GEO.arvoreDeTemas = {
 		return(html);
 	},
 	/*
-	Function: propTemas
-
 	Monta o no com informacoes adicionais sobre o tema.
 
 	Parametro:
@@ -1465,8 +1426,6 @@ i3GEO.arvoreDeTemas = {
 		node.loadComplete();
 	},
 	/*
-	Function: outrasOpcoesHTML
-
 	Constroi o HTML com as opcoes adicionais de inclusao de temas (upload de shp, etc.).
 
 	Return:
@@ -1567,8 +1526,6 @@ i3GEO.arvoreDeTemas = {
 		while(i<n);
 	},
 	/*
-	Function: listaTemasAtivos
-
 	Lista os temas com checkbox marcados.
 
 	Return:
@@ -2285,8 +2242,6 @@ i3GEO.arvoreDeTemas = {
 		}
 	},
 	/*
-	Function abrejanelaIframe
-
 	Abre uma janela flutuante contendo um iframe
 
 	Parametros:

@@ -1,13 +1,29 @@
-/*jslint white:false,undef: false, rhino: true, onevar: true, evil: false */
-
 /*
 Title: Ajuda
+
+i3GEO.ajuda
+
+Manipula&ccedil;&atilde;o das mensagens de ajuda.
+
+Permite definir a mensagem padr&atilde;o da janela de mensagens. Abrir a janela e definir seu conte&uacute;do.
+Controla tamb&eacute;m o letreiro m&oacute;vel que mostra mensagens especiais definidas em cada layer adicionado ao mapa.
+
+Exemplos:
+
+	Se vc n&atilde;o quiser que a janela de ajuda seja aberta, inclua em seu HTML ou javascript
+
+	i3GEO.ajuda.ATIVAJANELA = false;
+
+	Para enviar uma mensagem para a janela, utilize
+
+	i3GEO.ajuda.mostraJanela("texto");
+
 
 Arquivo:
 
 i3geo/classesjs/classe_ajuda.js
 
-Licenca:
+Licen&ccedil;a:
 
 GPL2
 
@@ -32,24 +48,6 @@ Free Software Foundation, Inc., no endere&ccedil;o
 if(typeof(i3GEO) === 'undefined'){
 	var i3GEO = {};
 }
-/*
-Classe: i3GEO.ajuda
-
-Manipula&ccedil;&atilde;o das mensagens de ajuda.
-
-Permite definir a mensagem padr&atilde;o da janela de mensagens. Abrir a janela e definir seu conte&uacute;do.
-Controla tamb&eacute;m o letreiro m&oacute;vel que mostra mensagens especiais definidas em cada layer adicionado ao mapa.
-
-Exemplos:
-
-	Se vc n&atilde;o quiser que a janela de ajuda seja aberta, inclua em seu HTML ou javascript
-
-	i3GEO.ajuda.ATIVAJANELA = false;
-
-	Para enviar uma mensagem para a janela, utilize
-
-	i3GEO.ajuda.mostraJanela("texto");
-*/
 i3GEO.ajuda = {
 	/*
 	Propriedade: ATIVAJANELA
@@ -190,8 +188,6 @@ i3GEO.ajuda = {
 		}
 	},
 	/*
-	Function: ativaCookie
-
 	Ativa o cookie g_janelaMen e inclui o valor "sim".
 
 	Toda a vez que a janela &eacute; aberta, o cookie &eacute; ativado.
@@ -204,8 +200,6 @@ i3GEO.ajuda = {
 		i("botoesAjuda","sim");
 	},
 	/*
-	Function: ativaLetreiro
-
 	Busca mensagens no metadata "MENSAGEM" existentes nos layers do mapa.
 
 	Se existirem mensagens, as mesmas s&atilde;o inclu&iacute;das no letreiro.
@@ -253,8 +247,6 @@ i3GEO.ajuda = {
 		}
 	},
 	/*
-	Function: desativaCookie
-
 	Desativa o cookie g_janelaMen.
 
 	Toda a vez que a janela &eacute; fechada, o cookie &eacute; desativado.

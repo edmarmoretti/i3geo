@@ -169,10 +169,9 @@ i3GEOF.etiqueta = {
 	Refaz a interface da ferramenta quando a janela flutuante tem seu foco ativado
 	*/
 	ativaFoco: function(){
-		i3GEO.php.listaItensTema(i3GEOF.etiqueta.montaListaItens,i3GEO.temaAtivo);
-		//var i = $i("i3GEOF.etiqueta_c").style;
-		//i3GEO.janela.ULTIMOZINDEX++;
-		//i.zIndex = 21000 + i3GEO.janela.ULTIMOZINDEX;
+		if(i3GEO.temaAtivo != ""){
+			i3GEO.php.listaItensTema(i3GEOF.etiqueta.montaListaItens,i3GEO.temaAtivo);
+		}
 	},
 	/*
 	Function: montaListaItens

@@ -1,13 +1,15 @@
-/*jslint white:false,undef: false, rhino: true, onevar: true, evil: false */
-
 /*
 Title: C&aacute;lculos
+
+i3GEO.calculo
+
+Utilit&aacute;rios para c&aacute;lculos.
 
 Arquivo:
 
 i3geo/classesjs/classe_calculo.js
 
-Licenca:
+Licen&ccedil;a:
 
 GPL2
 
@@ -32,11 +34,6 @@ Free Software Foundation, Inc., no endere&ccedil;o
 if(typeof(i3GEO) === 'undefined'){
 	var i3GEO = {};
 }
-/*
-Classe: i3GEO.calculo
-
-Utilit&aacute;rios para c&aacute;lculos.
-*/
 i3GEO.calculo = {
 	/*
 	Propriedade: metododistancia
@@ -524,8 +521,6 @@ i3GEO.calculo = {
 		return [(lon2 * 180 / Math.PI),(lat2 * 180 / Math.PI)];
 	},
 	/*
-	Function: rect2ext
-
 	Calcula a extens&atilde;o geogr&aacute;fica de um retângulo desenhado sobre o mapa.
 
 	Parametros:

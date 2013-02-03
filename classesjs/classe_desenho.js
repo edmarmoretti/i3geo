@@ -1,13 +1,25 @@
-/*jslint plusplus:false,white:false,undef: false, rhino: true, onevar: true, evil: false */
-
 /*
 Title: Desenho de elementos gr&aacute;ficos
+
+i3GEO.desenho
+
+Controla as opera&ccedil;&otilde;es de desenho sobre o mapa
+
+Por desenho, entende-se elementos que s&atilde;o inclu&iacute;dos graficamente no mapa,
+como por exemplo, linhas, pontos, c&iacute;rculos, etc e que n&atilde;o comp&otilde;em layers
+com dados
+
+As opera&ccedil;&otilde;es de desenho s&atilde;o baseadas na biblioteca Richdraw (i3geo/pacotes/richdraw)
+
+Link:
+
+http://starkravingfinkle.org/blog/2006/04/richdraw-simple-vmlsvg-editor/
 
 Arquivo:
 
 i3geo/classesjs/classe_desenho.js
 
-Licenca:
+Licen&ccedil;a:
 
 GPL2
 
@@ -32,22 +44,6 @@ Free Software Foundation, Inc., no endere&ccedil;o
 if(typeof(i3GEO) === 'undefined'){
 	var i3GEO = {};
 }
-/*
-Classe: i3GEO.desenho
-
-Controla as opera&ccedil;&otilde;es de desenho sobre o mapa
-
-Por desenho, entende-se elementos que s&atilde;o inclu&iacute;dos graficamente no mapa,
-como por exemplo, linhas, pontos, c&iacute;rculos, etc e que n&atilde;o comp&otilde;em layers
-com dados
-
-As opera&ccedil;&otilde;es de desenho s&atilde;o baseadas na biblioteca Richdraw (i3geo/pacotes/richdraw)
-
-Link:
-
-http://starkravingfinkle.org/blog/2006/04/richdraw-simple-vmlsvg-editor/
-
-*/
 i3GEO.desenho = {
 	/*
 	Variavel: richdraw
@@ -100,8 +96,6 @@ i3GEO.desenho = {
 	*/
 	estiloPadrao: "normal",
 	/*
-	Function: criaContainerRichdraw
-
 	Cria os elementos 'dom' necess&aacute;rios ao uso das fun&ccedil;&otilde;es de desenho sobre o mapa.
 
 	As ferramentas de c&aacute;lculo de distâncias e &aacute;reas utilizam esse container.
@@ -173,8 +167,6 @@ i3GEO.desenho = {
 		catch(men){alert("Erro ao tentar criar container richdraw "+men);}
 	},
 	/*
-	Function: criaDivContainer
-
 	Cria o elemento DIV que ser&aacute; utilizado para renderizar os elementos gr&aacute;ficos.
 	Nesse DIV ser&atilde;o inclu&iacute;dos os elementos de desenho em SVG ou VML
 
@@ -216,8 +208,6 @@ i3GEO.desenho = {
 		return ($i("divGeometriasTemp"));
 	},
 	/*
-	Function: aplica
-
 	Desenha ou reposiciona elementos na tela usando a biblioteca richdraw
 
 	Parametros:
@@ -261,8 +251,6 @@ i3GEO.desenho = {
 		}
 	},
 	/*
-	Function: insereCirculo
-
 	Insere um circulo no container de elementos gr&aacute;ficos
 
 	Parametros:
@@ -282,8 +270,6 @@ i3GEO.desenho = {
 		}
 	},
 	/*
-	Function: definePadrao
-
 	Aplica um determinado padrao de estilos para os novos elementos que ser&atilde;o adicionados
 
 	Parametro:
@@ -299,8 +285,6 @@ i3GEO.desenho = {
 		i3GEO.desenho.richdraw.editCommand('textcolor', padrao.textcolor);
 	},
 	/*
-	Function: caixaEstilos
-
 	Cria uma caixa de sele&ccedil;&atilde;o para escolha do estilo a ser utilizado
 	*/
 	caixaEstilos: function(){

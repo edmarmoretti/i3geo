@@ -1,6 +1,4 @@
 /*
-Title: Data download
-
 Sistema de download de dados geogr&aacute;ficos.
 
 Lista os temas configurados no menu de temas e que permitem download.
@@ -15,7 +13,7 @@ Arquivo:
 
 i3geo/classesjs/datadownload.js
 
-Licenca:
+Licen&ccedil;a:
 
 GPL2
 
@@ -42,8 +40,6 @@ Veja:
 <datadownload.htm>
 */
 /*
-Propriedade: g_locaplic
-
 Indica a localiza&ccedil;&atilde;o do i3geo. Por default, procura no diret&oacute;rio onde foi executada a plica&ccedil;&atilde;o datadownload.
 No caso do datadownload.htm ser disparado de outro local, &eacute; necess&aacute;rio definir essa vari&aacute;vel antes de chamar a fun&ccedil;&atilde;o DDinicia
 */
@@ -71,8 +67,6 @@ g_i3geo = "";
 //
 g_arvoreClicks = "";
 /*
-Propriedade: g_tipo
-
 Tipo de acesso aos dados.
 
 g_tipo &eacute; uma vari&aacute;vel que pode ser definida antes de iniciar a funcao DDinicia
@@ -104,8 +98,6 @@ no sistema de administra&ccedil;&atilde;o do i3geo
 */
 g_tipo = "menutemas";
 /*
-Propriedade: g_dirbaseDown
-
 Url para o endere&ccedil;o definido em g_dirbase.
 &Eacute; utilizada para montar o link de acesso aos arquivos quando g_tipo = 'dir'
 
@@ -116,8 +108,6 @@ Tipo:
 g_dirbaseDown = "";
 
 /*
-Propriedade: g_dirbase
-
 Endere&ccedil;o no servidor onde est&atilde;o os arquivos ou diret&oacute;rios que poder&atilde;o ser acessados
 
 Tipo:
@@ -126,8 +116,6 @@ Tipo:
 */
 g_dirbase = "";
 /*
-Propriedade: g_dirarquivos
-
 Endere&ccedil;o do diret&oacute;rio que ser&aacute; acessado na inicializa&ccedil;&atilde;o da aplica&ccedil;&atilde;o
 
 Tipo:
@@ -136,8 +124,6 @@ Tipo:
 */
 g_dirarquivos = "";
 /*
-Function: DDinicia
-
 Inicia o aplicativo montando a &aacute;rvore de op&ccedil;&otilde;es e preenchendo a DIV arvore.
 
 Deve existir no HTML um DIV com id='arvore'.
@@ -173,8 +159,6 @@ function DDinicia()
 	}
 }
 /*
-Function: processaDiretorios
-
 Cahamado pela fun&ccedil;&atilde;o DDinicia. Recebe os dados da fun&ccedil;&atilde;o Ajax com a lista de diretorios.
 
 Monta a &aacute;rvore para navega&ccedil;&atilde;o pelos diret&oacute;rios.
@@ -204,8 +188,6 @@ function processaDiretorios(retorno)
 	}
 }
 /*
-Function: expandeDiretorio
-
 Expande um diret&oacute;rio quando o usu&aacute;rio clica no n&oacute; da &aacute;rvore de diret&oacute;rios.
 
 Definido na fun&ccedil;&atilde;o processaDiretorios. Ap&oacute;s serem mostrados os sub-diret&oacute;rios &eacute; disparada a fun&ccedil;&atilde;o listaArquivos para mostrar a lista de arquivos existentes no diret&oacute;rio selecionado.
@@ -236,8 +218,6 @@ function expandeDiretorio(id)
 	cp.call(p,"listaDiretorios",volta);
 }
 /*
-Function: listaArquivos
-
 Lista os arquivos de um diret&oacute;rio.
 
 No HTML deve existir um DIV com id='corpo'. Nesse div ser&aacute; inclu&iacute;da a lista.
@@ -281,8 +261,6 @@ function listaArquivos(dir)
 	cp.call(p,"listaDiretorios",volta);
 }
 /*
-Function: download
-
 Gera os arquivos para download do shape file de um tema.
 
 Parametros:
@@ -311,8 +289,6 @@ function datadownload_download(tema)
 	cp.call(p,"downloadTema2",mostraDownload);
 }
 /*
-Function: mostraDownload
-
 Mostra na tela os arquivos convertidos para shape file com link para download.
 */
 function mostraDownload(retorno)
@@ -348,8 +324,6 @@ function mostraDownload(retorno)
 	YAHOO.datadownloadLista.panel.show();
 }
 /*
-Function: dataDownloadLinks
-
 Mostra uma lista de links baseado em um arquivo rss.
 
 Utilizado para acrescentar outros links no sistema de download

@@ -1,5 +1,5 @@
 /*
-Title: Cliente de web services
+Cliente de web services
 
 Classe javascript da aplica&ccedil;&atilde;o de consulta de web services.
 
@@ -9,7 +9,7 @@ Arquivo:
 
 i3geo/classesjs/wscliente.js
 
-Licenca:
+Licen&ccedil;a:
 
 GPL2
 
@@ -66,9 +66,7 @@ Veja:
 	}
 	document.write(allScriptTags);
 })();
-/**
-Classe: i3geo_wscliente_configura
-
+/*
 Cria o objeto javascript com os parâmetros de configura&ccedil;&atilde;o da api e com as fun&ccedil;&otilde;es de manipula&ccedil;&atilde;o dos elementos da interface.
 
 Example:
@@ -141,8 +139,6 @@ function i3geo_wscliente_configura(loc_i3geo,corpo,enderecows,enderecowms,rssws,
 	*/
 	this.funcao = "";
 	/*
-	Function: inicia
-
 	Monta a &aacute;rvore de op&ccedil;&otilde;es preenchendo a div definida em this.corpo
 	*/
 	this.inicia = function()
@@ -194,8 +190,6 @@ function i3geo_wscliente_configura(loc_i3geo,corpo,enderecows,enderecowms,rssws,
 		}
 	};
 	/*
-	Function: ativa
-
 	Ativa uma op&ccedil;&atilde;o escolhida pelo usu&aacute;rio, mostrando o seu respectivo texto no navegador. &Eacute; utilizado nas op&ccedil;&otilde;es que apresentam textos explicativos. 
 
 	O conte&uacute;do do div (id) &eacute; lido e inclu&iacute;do na div corpo
@@ -212,8 +206,6 @@ function i3geo_wscliente_configura(loc_i3geo,corpo,enderecows,enderecowms,rssws,
 		$i(this.corpo).innerHTML = novo.innerHTML;
 	};
 	/*
-	Function: listaLinkServicos
-
 	Mostra links que permitem ao usu&aacute;rio abrir os RSSs cadastrados para determinado servi&ccedil;o.
 
 	Parametros:
@@ -235,8 +227,6 @@ function i3geo_wscliente_configura(loc_i3geo,corpo,enderecows,enderecowms,rssws,
 		$i(this.corpo).innerHTML = ins;
 	};
 	/*
-	Function: servicosws
-
 	Lista os web services existentes nos arquivos definidos na vari&aacute;vel rssws.
 
 	&Eacute; feita a leitura dos arquivos RSS e montada uma lista clic&aacute;vel com os servi&ccedil;os encontrados.
@@ -280,8 +270,6 @@ function i3geo_wscliente_configura(loc_i3geo,corpo,enderecows,enderecowms,rssws,
 		}
 	};
 	/*
-	Function: servicoswms
-
 	Lista os web services existentes no arquivo definido na vari&aacute;vel rsswms.
 
 	A vari&aacute;vel rsswms deve ser definida no arquivo html que inicia o wscliente.
@@ -352,8 +340,6 @@ function i3geo_wscliente_configura(loc_i3geo,corpo,enderecows,enderecowms,rssws,
 		}
 	};
 	/*
-	Function: getcapabilities
-
 	Executa ajax para buscar resultado do getcapabilities.
 
 	Parâmetros:
@@ -384,8 +370,6 @@ function i3geo_wscliente_configura(loc_i3geo,corpo,enderecows,enderecowms,rssws,
 		$i(this.corpo).innerHTML = "<p>Nenhum servi&ccedil;o foi escolhido.</p>";
 	};
 	/*
-	Function: listatemas
-
 	Busca a lista de temas de um WMS ou WFS
 	*/
 	this.listatemas = function()
@@ -419,8 +403,6 @@ function i3geo_wscliente_configura(loc_i3geo,corpo,enderecows,enderecowms,rssws,
 		cp.call(p,"temaswms",WCmostraTemas);
 	};
 	/*
-	Function: verMapa
-
 	Mostra o mapa
 
 	*/
@@ -480,8 +462,6 @@ function i3geo_wscliente_configura(loc_i3geo,corpo,enderecows,enderecowms,rssws,
 		});
 	};
 	/*
-	Function: listafuncoes
-
 	Busca a lista de fun&ccedil;&otilde;es de um WS
 
 	*/
@@ -528,8 +508,6 @@ function i3geo_wscliente_configura(loc_i3geo,corpo,enderecows,enderecowms,rssws,
 		$i(this.corpo).innerHTML = "<p>Nenhum servi&ccedil;o foi escolhido.</p>";
 	};
 	/*
-	Function: selParFuncao
-
 	Lista os parâmetros de uma fun&ccedil;&atilde;o para o usu&aacute;rio digitar os valores.
 
 	Parâmetros:
@@ -569,8 +547,6 @@ function i3geo_wscliente_configura(loc_i3geo,corpo,enderecows,enderecowms,rssws,
 		cp.call(p,"parFuncoesws",WCmostraParFuncoes);
 	};
 	/*
-	Function: chamadados
-
 	Busca os dados de uma fun&ccedil;&atilde;o de um servi&ccedil;o
 
 	*/
@@ -602,8 +578,6 @@ function i3geo_wscliente_configura(loc_i3geo,corpo,enderecows,enderecowms,rssws,
 		cp.call(p,"dadosWS",monta);
 	};
 	/*
-	Function: wsdl
-
 	Abre o servico WSDL em uma nova janela
 
 	*/
@@ -612,8 +586,6 @@ function i3geo_wscliente_configura(loc_i3geo,corpo,enderecows,enderecowms,rssws,
 }
 
 /*
-Function: i3geo_wscliente_inicia
-
 Inicia a interface do cliente de web services.
 
 Parametros:
@@ -638,8 +610,6 @@ function i3geo_wscliente_inicia(objeto_i3geo_wscliente_configura)
 }
 
 /*
-Function: seltema
-
 Seta as vari&aacute;veis necess&aacute;rias para visualizar o mapa com o OpenLayers ap&oacute;s o usu&aacute;rio escolher uma camada de um servi&ccedil;o.
 
 Essa fun&ccedil;&atilde;o &eacute; chamada por padr&atilde;o quando uma camada &eacute; escolhida na lista de camadas retornada pelo i3geo.

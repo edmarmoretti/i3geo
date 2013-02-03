@@ -22,14 +22,14 @@ if(screen.availWidth > 700)
 /*
 Title: Gerador de miniaturas (thumbnails)
 
-Gera as miniaturas dos mapas baseado nos mapfiles existentes em i3geo/temas. As miniaturas s&atilde;o utilizadas no i3geo na guia temas para mostrar um preview de cada tema.
+Gera as miniaturas dos mapas baseado nos mapfiles existentes em i3geo/temas. As miniaturas s&atilde;o utilizadas no i3geo na guia temas para mostrar um preview.
 
 Por padr&atilde;o, as imagens s&atilde;o armazenadas no diretório tempor&aacute;rio do i3geo e devem ser movidas para o diretório i3geo/temas/miniaturas
 para poderem ser utilizadas. O programa verifica se a miniatura j&aacute; existe no diretório temas/miniaturas e gera apenas as que faltarem.
 
 &Eacute; utilizado tamb&eacute;m como um include pelo sistema de administra&ccedil;&atilde;o, permitindo armazenar as miniaturas no local correto.
 
-Licenca:
+Licen&ccedil;a:
 
 i3Geo Interface Integrada de Ferramentas de Geoprocessamento para Internet
 
@@ -57,9 +57,10 @@ Exemplo:
 
 geraminiatura.php?tipo=mini
 
-Parametro:
+Par&acirc;metro:
 
-tipo - tipo de retorno mini|grande|todos
+tipo - tipo de imagem que ser&aacute; gerada mini|grande|todos
+
 */
 
 //clearstatcache();

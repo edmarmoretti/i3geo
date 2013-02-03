@@ -1,13 +1,17 @@
-/*jslint white:false,undef: false, rhino: true, onevar: true, evil: false */
-
 /*
-Title: Analise geografica
+Title: An&aacute;lise geogr&aacute;fica
+
+i3GEO.analise
+
+Fun&ccedil;oes de gera&ccedil;&atilde;o das analises e abertura dos dialogos das opcoes de analise espacial
+
+Em i3GEO.analise.dialogo estao as funcoes de abertura dos dialogos
 
 Arquivo:
 
 i3geo/classesjs/classe_analise.js
 
-Licenca:
+Licen&ccedil;a:
 
 GPL2
 
@@ -32,13 +36,6 @@ Free Software Foundation, Inc., no endere&ccedil;o
 if(typeof(i3GEO) === 'undefined'){
 	var i3GEO = {};
 }
-/*
-Classe: i3GEO.analise
-
-Funcoes de geracao das analises e abertura dos dialogos das opcoes de analise espacial
-
-Em i3GEO.analise.dialogo estao as funcoes de abertura dos dialogos
-*/
 i3GEO.analise = {
 	/*
 	Classe: i3GEO.analise.dialogo
@@ -261,8 +258,6 @@ i3GEO.analise = {
 			}
 		},
 		/*
-		Function: criaJanela
-
 		Cria a janela para mostrar os resultados da medicao
 		*/
 		criaJanela: function(){
@@ -338,8 +333,6 @@ i3GEO.analise = {
 			i3GEO.barraDeBotoes.ativaIcone("pointer");
 		},
 		/*
-		Function: clique
-
 		Adiciona uma marca na tela e realiza o calculo de distancia dos pontos inseridos
 		*/
 		clique: function(){
@@ -402,8 +395,6 @@ i3GEO.analise = {
 			}
 		},
 		/*
-		Function: paraCalculo
-
 		Para o calculo de distancias e ativa o botao "pan"
 		*/
 		paraCalculo: function(){
@@ -412,8 +403,6 @@ i3GEO.analise = {
 			botaoPan ? botaoPan.onclick.call() : i3GEO.barraDeBotoes.ativaBotoes();
 		},
 		/*
-		Function: movimento
-
 		Realiza os calculos e desenho da linha conforme o usuario movimenta o mouse
 		*/
 		movimento: function(){
@@ -528,8 +517,6 @@ i3GEO.analise = {
 			else{i3GEO.desenho.richdraw.fecha();}
 		},
 		/*
-		Function: criaJanela
-
 		Cria a janela para mostrar os resultados da medicao
 		*/
 		criaJanela: function(){
@@ -579,8 +566,6 @@ i3GEO.analise = {
 			i3GEO.barraDeBotoes.ativaIcone("pointer");
 		},
 		/*
-		Function: clique
-
 		Adiciona uma marca na tela e realiza o calculo de distancia dos pontos inseridos
 		*/
 		clique: function(){
@@ -630,8 +615,6 @@ i3GEO.analise = {
 			}
 		},
 		/*
-		Function: paraCalculo
-
 		Para o calculo de area e ativa o botao "pan"
 		*/
 		paraCalculo: function(){
@@ -640,8 +623,6 @@ i3GEO.analise = {
 			botaoPan ? botaoPan.onclick.call() : i3GEO.barraDeBotoes.ativaBotoes();
 		},
 		/*
-		Function: movimento
-
 		Realiza o desenho do poligono conforme o usuario movimenta o mouse
 		*/
 		movimento: function(){

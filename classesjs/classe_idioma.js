@@ -1,12 +1,34 @@
-/*jslint plusplus:false,white:false,undef: false, rhino: true, onevar: true, evil: false */
 /*
 Title: Idioma
+
+i3geo.idioma
+
+Tradu&ccedil;&atilde;o da interface principal.
+
+Fornece os m&eacute;todos para traduzir frases para idiomas espec&iacute;ficos.
+
+O dicion&aacute;rio &eacute; definido em i3geo/classesjs/dicionario.js
+
+Se voc&ecirc; est&aacute; customizando o i3geo,acrescentandonovas funcionalidades,
+utilize o m&eacute;todo alteraDicionario para acrescentar novas tradu&ccedil;&otilde;es, dessa forma,
+quandoo usu&aacute;rio escolher oidioma ainterface ser&aacute; adaptada corretamente.
+
+Exemplos:
+
+i3GEO.idioma.define("pt");
+
+i3GEO.idioma.defineDicionario(g_traducao);
+
+i3GEO.idioma.alteraDicionario("d22","novo oi");
+
+alert($trad("d22"))
+
 
 Arquivo:
 
 i3geo/classesjs/classe_idioma.js
 
-Licenca:
+Licen&ccedil;a:
 
 GPL2
 
@@ -31,29 +53,6 @@ Free Software Foundation, Inc., no endere&ccedil;o
 if(typeof(i3GEO) === 'undefined'){
 	var i3GEO = {};
 }
-/*
-Classe: i3geo.idioma
-
-Tradu&ccedil;&atilde;o da interface principal.
-
-Fornece os m&eacute;todos para traduzir frases para idiomas espec&iacute;ficos.
-
-O dicion&aacute;rio &eacute; definido em i3geo/classesjs/dicionario.js
-
-Se voc&ecirc; est&aacute; customizando o i3geo,acrescentandonovas funcionalidades,
-utilize o m&eacute;todo alteraDicionario para acrescentar novas tradu&ccedil;&otilde;es, dessa forma,
-quandoo usu&aacute;rio escolher oidioma ainterface ser&aacute; adaptada corretamente.
-
-Exemplos:
-
-i3GEO.idioma.define("pt");
-
-i3GEO.idioma.defineDicionario(g_traducao);
-
-i3GEO.idioma.alteraDicionario("d22","novo oi");
-
-alert($trad("d22"))
-*/
 i3GEO.idioma = {
 	/*
 	Propriedade: MOSTRASELETOR

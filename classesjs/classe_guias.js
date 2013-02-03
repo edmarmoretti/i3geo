@@ -1,13 +1,18 @@
-/*jslint plusplus:false,white:false,undef: false, rhino: true, onevar: true, evil: false */
-
 /*
 Title: Guias
+
+i3GEO.guias
+
+Cria e controla os blocos de op&ccedil;&otilde;es ativados por meio de guias ou bot&otilde;es
+
+Para configurar as guias do mapa principal utilize i3GEO.guias.configura = ...
+
 
 Arquivo:
 
 i3geo/classesjs/classe_guias.js
 
-Licenca:
+Licen&ccedil;a:
 
 GPL2
 
@@ -22,7 +27,7 @@ GNU conforme publicada pela Free Software Foundation;
 
 Este programa &eacute; distribu&iacute;do na expectativa de que seja &uacute;til,
 por&eacute;m, SEM NENHUMA GARANTIA; nem mesmo a garantia impl&iacute;cita
-de COMERCIABILIDADE OU ADEQUA�&Atilde;O A UMA FINALIDADE ESPEC&Iacute;FICA.
+de COMERCIABILIDADE OU ADEQUA&Ccedil;&Atilde;O A UMA FINALIDADE ESPEC&Iacute;FICA.
 Consulte a Licen&ccedil;a P&uacute;blica Geral do GNU para mais detalhes.
 Voc&ecirc; deve ter recebido uma c&oacute;pia da Licen&ccedil;a P&uacute;blica Geral do
 GNU junto com este programa; se n&atilde;o, escreva para a
@@ -32,19 +37,11 @@ Free Software Foundation, Inc., no endere&ccedil;o
 if(typeof(i3GEO) === 'undefined'){
 	var i3GEO = {};
 }
-/*
-Classe: i3GEO.guias
-
-Cria e controla os blocos de op&ccedil;&otilde;es ativados por meio de guias ou bot&otilde;es
-
-Para configurar as guias do mapa principal utilize i3GEO.guias.configura = ...
-
-*/
 i3GEO.guias = {
 	/*
 	Variavel: ATUAL
 
-	Guia que est&aacute; ativa
+	Guia que est&aacute; ativa ou que ser&aacute; ativada ao iniciar o mapa
 
 	O nome da guia &eacute; a definida na vari&aacute;vel i3GEO.guias.CONFIGURA
 
@@ -417,8 +414,6 @@ i3GEO.guias = {
 		{i3GEO.guias.escondeGuias();}
 	},
 	/*
-	Function: ajustaAltura
-
 	Ajusta a altura das guias conforme a altura da imagem do mapa
 	*/
 	ajustaAltura: function(){
@@ -453,8 +448,6 @@ i3GEO.guias = {
 		}
 	},
 	/*
-	Function: escondeGuias
-
 	Esconde todas as guias
 	*/
 	escondeGuias: function(){
@@ -488,8 +481,6 @@ i3GEO.guias = {
 		}
 	},
 	/*
-	Function: mostra
-
 	Mostra no mapa uma determinada guia
 
 	Parametro:
@@ -583,8 +574,6 @@ i3GEO.guias = {
 		}
 	},
 	/*
-	Function: libera
-
 	Libera as guias do local atual, colocando-as em uma janela flutuante sobre o mapa.
 	*/
 	libera: function(){
@@ -670,8 +659,6 @@ i3GEO.guias = {
 		}
 	},
 	/*
-	Function: mostraGuiaFerramenta
-
 	Mostra uma determinada guia em uma janela do tipo ferramenta.
 
 	As guias s&atilde;o constru&iacute;das pelo construtor da ferramenta
@@ -709,8 +696,6 @@ i3GEO.guias = {
 		*/
 		ABERTA: false,
 		/*
-		Propriedade: config
-
 		Define os valores de posicionamento dos elementos que comp&otilde;em a guia
 		*/
 		config: {
@@ -728,8 +713,6 @@ i3GEO.guias = {
 			}
 		},
 		/*
-		Variavel: left
-
 		Valor de posicionamento a esquerda, calculado na inicializa&ccedil;&atilde;o
 		*/
 		left: 0,
@@ -814,8 +797,6 @@ i3GEO.guias = {
 			{i3GEO.guias.guiaMovel.abreFecha();}
 		},
 		/*
-		Function: mostraIcones
-
 		Mostra os &iacute;cones que acionam cada guia
 		*/
 		mostraIcones: function(){
@@ -839,8 +820,6 @@ i3GEO.guias = {
 			}
 		},
 		/*
-		Function: desativaIcones
-
 		Altera a cor do fundo dos &iacute;cones, voltando ao original
 		*/
 		desativaIcones:function(){
@@ -853,8 +832,6 @@ i3GEO.guias = {
 			}
 		},
 		/*
-		Function: ativa
-
 		Ativa o conte&uacute;do de determinada guia
 
 		Parametro:
@@ -874,8 +851,6 @@ i3GEO.guias = {
 			}
 		},
 		/*
-		Function: reposiciona
-
 		Reposiciona a guia m&oacute;vel quando o mapa muda de tamanho
 		*/
 		reposiciona: function(){

@@ -1,12 +1,16 @@
-/*jslint plusplus:false,white:false,undef: false, rhino: true, onevar: true, evil: true */
 /*
 Title: Social
+
+i3GEO.social
+
+Op&ccedil;&otilde;es de compartilhamento e uso de redes sociais.
+
 
 Arquivo:
 
 i3geo/classesjs/classe_social.js
 
-Licenca:
+Licen&ccedil;a:
 
 GPL2
 
@@ -31,11 +35,6 @@ Free Software Foundation, Inc., no endere&ccedil;o
 if(typeof(i3GEO) === 'undefined'){
 	var i3GEO = {};
 }
-/*
-Classe: i3GEO.social
-
-Op&ccedil;&otilde;es de compartilhamento e uso de redes sociais.
-*/
 i3GEO.social = {
 	curtirFacebook: function(url,tipo){
 		if(tipo === "comtotal")

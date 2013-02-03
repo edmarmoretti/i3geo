@@ -1,13 +1,28 @@
-/*jslint plusplus:false,white:false,undef: false, rhino: true, onevar: true, evil: false */
-
 /*
 Title: Configura&ccedil;&otilde;es gerais
+
+i3GEO.configura
+
+Configura&ccedil;&atilde;o do i3geo
+
+Vc pode alterar com esta classe a maioria dos parâmetros que controlam
+o funcionamento do i3geo.
+
+Exemplo:
+
+i3GEO.configura.embedLegenda = "nao"
+
+i3GEO.configura.cursores.ff = "/imagens/cursores/identifica2.png"
+
+i3GEO.configura.cursores.ie = "/imagens/cursores/identifica2.cur"
+
+alert(i3GEO.configura.locaplic)
 
 Arquivo:
 
 i3geo/classesjs/classe_configura.js
 
-Licenca:
+Licen&ccedil;a:
 
 GPL2
 
@@ -32,24 +47,6 @@ Free Software Foundation, Inc., no endere&ccedil;o
 if(typeof(i3GEO) === 'undefined'){
 	var i3GEO = {};
 }
-/*
-Classe: i3GEO.configura
-
-Configura&ccedil;&atilde;o do i3geo
-
-Vc pode alterar com esta classe a maioria dos parâmetros que controlam
-o funcionamento do i3geo.
-
-Exemplo:
-
-i3GEO.configura.embedLegenda = "nao"
-
-i3GEO.configura.cursores.ff = "/imagens/cursores/identifica2.png"
-
-i3GEO.configura.cursores.ie = "/imagens/cursores/identifica2.cur"
-
-alert(i3GEO.configura.locaplic)
-*/
 i3GEO.configura = {
 	/*
 	Propriedade: guardaExtensao
@@ -391,8 +388,6 @@ i3GEO.configura = {
 	*/
 	autotamanho: false,
 	/*
-	Propriedade: map3d
-
 	Vari&aacute;vel que define o nome do map_file que possu&iacute; o layer para uso na fun&ccedil;&atilde;o 3d.
 	Pode ser utilizado o caminho completo, se n&atilde;o, busca no diret&oacute;rio aplicmap.
 
@@ -461,8 +456,6 @@ i3GEO.configura = {
 	*/
 	mashuppar: "",
 	/*
-	Propriedade: sid
-
 	C&oacute;digo da se&ccedil;&atilde;o aberta pelo i3Geo no servidor.
 
 	O c&oacute;digo &eacute; gerado na inicializa&ccedil;&atilde;o do i3Geo pelo programa ms_criamapa.php
@@ -472,8 +465,6 @@ i3GEO.configura = {
 	*/
 	sid: "",
 	/*
-	Propriedade: locaplic
-
 	Localiza&ccedil;&atilde;o da instala&ccedil;&atilde;o do i3geo (URI)
 
 	Por default, &eacute; definida na inicializa&ccedil;&atilde;o do i3Geo
@@ -498,8 +489,6 @@ i3GEO.configura = {
 	*/
 	mapaRefDisplay: "block",
 	/*
-	Propriedade: visual (depreciado)
-
 	Tipo de visual que ser&aacute; utilizado no mapa.
 
 	A lista de visuais existentes &eacute; obtida na inicializa&ccedil;&atilde;o do i3geo.

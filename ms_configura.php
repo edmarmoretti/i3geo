@@ -217,6 +217,9 @@ if (strtoupper(substr(PHP_OS, 0, 3) == 'WIN'))
 	Variable: i3geomaster
 
 	Usu&aacute;rio e senha que podem realizar opera&ccedil;&otilde;es de administra&ccedil;&atilde;o inicial do i3Geo, como a cria&ccedil;&atilde;o do banco de dados de administra&ccedil;&atilde;o ou opera&ccedil;&otilde;es cr&iacute;ticas do sistema
+	
+	Tipo:
+	{array}
 
 	*/
 	$i3geomaster = array(
@@ -420,6 +423,9 @@ if (strtoupper(substr(PHP_OS, 0, 3) == 'WIN'))
 	A escolha depende do sistema operacional e da vers&atilde;o do Mapserver.
 
 	Vc pode usar essa vari&aacute;vel para customizar a inicializa&ccedil;&atilde;o do mapa.
+	
+	Tipo:
+	{string}
 	*/
 	$base = "";
 	/*
@@ -434,6 +440,9 @@ if (strtoupper(substr(PHP_OS, 0, 3) == 'WIN'))
 	Exemplo
 
 	$cachedir = 'c:/temp/cache';
+	
+	Tipo:
+	{string}
 	*/
 	$cachedir = "";
 }

@@ -1,12 +1,32 @@
-/*jslint plusplus:false,white:false,undef: false, rhino: true, onevar: true, evil: false */
 /*
 Title: Eventos
+
+i3GEO.eventos
+
+Controla as opera&ccedil;&otilde;es que s&atilde;o executadas em eventos que ocorrem no mapa.
+
+As listas de opera&ccedil;&otilde;es consistem em vari&aacute;veis com nomes de fun&ccedil;&otilde;es.
+
+As listas s&atilde;o inicializadas com algunmas fun&ccedil;&otilde;es j&aacute; embutidas, mas podem ser acrescentadas outras.
+
+Exemplos:
+
+	Para incluir uma fun&ccedil;&atilde;o em um determinado evento utilize
+
+	if(i3GEO.eventos.NAVEGAMAPA.toString().search("i3GEO.gadgets.atualizaEscalaNumerica()") < 0)
+
+	{i3GEO.eventos.NAVEGAMAPA.push("i3GEO.gadgets.atualizaEscalaNumerica()");}
+
+	Para remover utilize
+
+	i3GEO.eventos.NAVEGAMAPA.remove("i3GEO.gadgets.atualizaEscalaNumerica()");
+
 
 Arquivo:
 
 i3geo/classesjs/classe_eventos.js
 
-Licenca:
+Licen&ccedil;a:
 
 GPL2
 
@@ -43,31 +63,8 @@ objposicaocursor = {
 	refx: "",
 	refy: ""
 };
-/*
-Classe: i3GEO.eventos
-
-Controla as opera&ccedil;&otilde;es que s&atilde;o executadas em eventos que ocorrem no mapa.
-
-As listas de opera&ccedil;&otilde;es consistem em vari&aacute;veis com nomes de fun&ccedil;&otilde;es.
-
-As listas s&atilde;o inicializadas com algunmas fun&ccedil;&otilde;es j&aacute; embutidas, mas podem ser acrescentadas outras.
-
-Exemplos:
-
-	Para incluir uma fun&ccedil;&atilde;o em um determinado evento utilize
-
-	if(i3GEO.eventos.NAVEGAMAPA.toString().search("i3GEO.gadgets.atualizaEscalaNumerica()") < 0)
-
-	{i3GEO.eventos.NAVEGAMAPA.push("i3GEO.gadgets.atualizaEscalaNumerica()");}
-
-	Para remover utilize
-
-	i3GEO.eventos.NAVEGAMAPA.remove("i3GEO.gadgets.atualizaEscalaNumerica()");
-*/
 i3GEO.eventos = {
 	/*
-	Propriedade: ATUALIZAARVORECAMADAS
-
 	Armazena as fun&ccedil;&otilde;es (eventos) que ser&atilde;o executadas quando a &aacute;rvore de camadas for atualizada.
 
 	Tipo:
@@ -75,8 +72,6 @@ i3GEO.eventos = {
 	*/
 	ATUALIZAARVORECAMADAS: [],
 	/*
-	Propriedade: ATIVATEMA
-
 	Armazena as fun&ccedil;&otilde;es (eventos) que ser&atilde;o executadas quando um tema da &aacute;rvore de camadas &eacute; ativado.
 
 	Tipo:
@@ -84,8 +79,6 @@ i3GEO.eventos = {
 	*/
 	ATIVATEMA: [],
 	/*
-	Propriedade: NAVEGAMAPA
-
 	Armazena as fun&ccedil;&otilde;es que ser&atilde;o executadas quando &eacute; feita uma opera&ccedil;&atilde;o de navega&ccedil;&atilde;o sobre o mapa.
 
 	Tipo:
@@ -93,8 +86,6 @@ i3GEO.eventos = {
 	*/
 	NAVEGAMAPA: [],
 	/*
-	Propriedade: MOUSEPARADO
-
 	Armazena as fun&ccedil;&otilde;es que ser&atilde;o executadas quando o usu&aacute;rio estaciona o mouse sobre o mapa
 	por alguns instantes.
 
@@ -106,8 +97,6 @@ i3GEO.eventos = {
 	*/
 	MOUSEPARADO: ["i3GEO.navega.mostraRosaDosVentos()"],
 	/*
-	Propriedade: MOUSEMOVE
-
 	Armazena as fun&ccedil;&otilde;es que ser&atilde;o executadas quando o usu&aacute;rio move o mouse sobre o mapa
 
 	Tipo:
@@ -118,8 +107,6 @@ i3GEO.eventos = {
 	*/
 	MOUSEMOVE: [],
 	/*
-	Propriedade: MOUSEDOWN
-
 	Armazena as fun&ccedil;&otilde;es que ser&atilde;o executadas quando o usu&aacute;rio pressiona o bot&atilde;o do mouse sobre o mapa
 
 	Tipo:
@@ -130,8 +117,6 @@ i3GEO.eventos = {
 	*/
 	MOUSEDOWN: [],
 	/*
-	Propriedade: MOUSEUP
-
 	Armazena as fun&ccedil;&otilde;es que ser&atilde;o executadas quando o usu&aacute;rio solta o bot&atilde;o do mouse sobre o mapa
 
 	Tipo:
@@ -142,8 +127,6 @@ i3GEO.eventos = {
 	*/
 	MOUSEUP: ["i3GEO.eventos.cliquePerm.executa()"],
 	/*
-	Propriedade: MOUSECLIQUE
-
 	Armazena as fun&ccedil;&otilde;es que ser&atilde;o executadas quando o usu&aacute;rio clica sobre o mapa
 
 	Tipo:
@@ -154,8 +137,6 @@ i3GEO.eventos = {
 	*/
 	MOUSECLIQUE: ["i3GEO.eventos.cliqueCapturaPt()"],
 	/*
-	Propriedade: MOUSECLIQUEPERM
-
 	Armazena as fun&ccedil;&otilde;es permanentes que ser&atilde;o executadas quando o usu&aacute;rio clica sobre o mapa
 
 	As opera&ccedil;&otilde;es definidas aqui normalmente n&atilde;o fazem verifica&ccedil;&atilde;o de status de outras ferramentas e podem ser bloqueadas momentaneamente alterando-se i3GEO.eventos.cliquePerm.status
@@ -168,8 +149,6 @@ i3GEO.eventos = {
 	*/
 	MOUSECLIQUEPERM: [i3GEO.configura.funcaoTip],
 	/*
-	Variavel: TIMERPARADO
-
 	Timer utilizado pelo contador do mouse parado
 
 	Tipo:
@@ -256,8 +235,6 @@ i3GEO.eventos = {
 	*/
 	cliquePerm: {
 		/*
-		Propriedade: ativo
-
 		Indica se as opera&ccedil;&otilde;es permanentes ser&atilde;o ou n&atilde;o executadas
 
 		Essa propriedade bloqueia todas as opera&ccedil;&otilde;es mesmo que moment&acirc;neamente o status esteja true
@@ -274,8 +251,6 @@ i3GEO.eventos = {
 		*/
 		status: true,
 		/*
-		Function executa
-
 		Executa os eventos definidos em MOUSECLIQUEPERM
 		*/
 		executa: function(){
@@ -307,8 +282,6 @@ i3GEO.eventos = {
 		ativoinicial: true
 	},
 	/*
-	Function: executaEventos
-
 	Executa a pilha de nomes de funcoes ou funcoes armazenados em um array
 
 	Parameter:
@@ -341,8 +314,6 @@ i3GEO.eventos = {
 		}
 	},
 	/*
-	Function posicaoMouseMapa
-
 	Captura a posi&ccedil;&atilde;o do mouse sobre um mapa. O c&aacute;lculo pode ser feito sobre o corpo do mapa principal ou sob o corpo do mapa de refer&ecirc;ncia
 
 	O resultado dos c&aacute;lculos s&atilde;o armazenados no objeto objposicaocursor
@@ -484,8 +455,6 @@ i3GEO.eventos = {
 		};
 	},
 	/*
-	Function: ativa
-
 	Ativa os eventos relacionados ao mapa (movimenta&ccedil;&atilde;o do mouse sobre o mapa)
 
 	Define o que ser&aacute; executado quando o mouse &eacute; clicado ou movido sobre o mapa.
@@ -549,8 +518,6 @@ i3GEO.eventos = {
 		};
 	},
 	/*
-	Function: botaoDireita
-
 	Retorna true se o bot&atilde;o da direita foi utilizado no evento do mouse
 
 	Parametro:
@@ -571,8 +538,6 @@ i3GEO.eventos = {
 		catch(e){return false;}
 	},
 	/*
-	Function: cliqueCapturaPt
-
 	Captura um ponto na tela e retorna o resultado para a janela interna que estiver aberta.
 
 	As coordenadas do ponto, em DMS, s&atilde;o repassadas para os campos do tipo input da janela interna que estiver aberta.

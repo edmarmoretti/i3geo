@@ -19,7 +19,7 @@ i3geo/classesjs/compactados/funcoes_compacto.js
 
 As depend&ecirc;ncias s&atilde;o carregadas pelo pr&oacute;prio geradordelinks.js, n&atilde;o sendo necess&aacute;rio incluir no HTML.
 
-Licenca:
+Licen&ccedil;a:
 
 GPL2
 

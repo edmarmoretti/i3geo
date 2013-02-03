@@ -1,10 +1,18 @@
-/*jslint plusplus:false,white:false,undef: false, rhino: true, onevar: true, evil: false */
 /*
 Title: Gadgets (objetos marginais do mapa)
 
+i3GEO.gadgets
+
+Inclui elementos especiais no mapa
+
+Os elementos s&atilde;o opcionais e adicionam funcionalidades ao mapa.
+
+Outras funcionalidades s&atilde;o definidas em bot&otilde;es. Veja <classe_configura.js>
+
+
 Arquivo: i3geo/classesjs/classe_gadgets.js
 
-Licenca:
+Licen&ccedil;a:
 
 GPL2
 
@@ -29,15 +37,6 @@ Free Software Foundation, Inc., no endere&ccedil;o
 if(typeof(i3GEO) === 'undefined'){
 	var i3GEO = {};
 }
-/*
-Classe: i3GEO.gadgets
-
-Inclui elementos especiais no mapa
-
-Os elementos s&atilde;o opcionais e adicionam funcionalidades ao mapa.
-
-Outras funcionalidades s&atilde;o definidas em bot&otilde;es. Veja <classe_configura.js>
-*/
 i3GEO.gadgets = {
 	/*
 	Propriedade: PARAMETROS
@@ -185,7 +184,7 @@ i3GEO.gadgets = {
 		i3GEO.util.defineValor(id,"innerHTML",i3GEO.parametros.mensageminicia);
 	},
 	/*
-	Function: mostraCoordenadasUTM (depreciado utilize i3GEO.coordenadas)
+	mostraCoordenadasUTM (depreciado utilize i3GEO.coordenadas)
 	*/
 	mostraCoordenadasUTM: function(id){
 		try{
@@ -195,7 +194,7 @@ i3GEO.gadgets = {
 		i3GEO.coordenadas.mostraCoordenadasUTM(id);
 	},
 	/*
-	Function: mostraCoordenadasGEO (depreciado utilize i3GEO.coordenadas)
+	mostraCoordenadasGEO (depreciado utilize i3GEO.coordenadas)
 	*/
 	mostraCoordenadasGEO: function(id){
 		try{
@@ -405,7 +404,7 @@ i3GEO.gadgets = {
 		}
 	},
 	/*
-	Function: mostraHistoricoZoom
+	mostraHistoricoZoom
 
 	Mostra na barra de zoom os &iacute;cones que controlam a visualiza&ccedil;&atilde;o do hist&oacute;rico da navega&ccedil;&atilde;o sobre o mapa
 
@@ -432,7 +431,7 @@ i3GEO.gadgets = {
 		}
 	},
 	/*
-	Classe: i3GEO.gadgets.visual (depreciado)
+	i3GEO.gadgets.visual (depreciado)
 
 	Gera os &iacute;cones e controla as op&ccedil;&otilde;es de modifica&ccedil;&atilde;o do visual do mapa.
 
@@ -447,8 +446,6 @@ i3GEO.gadgets = {
 	*/
 	visual: {
 		/*
-		Function: inicia (depreciado)
-
 		Constr&oacute;i os &iacute;cones de escolha do visual.
 
 		Parametro:
@@ -459,8 +456,6 @@ i3GEO.gadgets = {
 			alert("A i3GEO.gadgets.visual foi depreciado");
 		},
 		/*
-		Function: troca (depreciado)
-
 		Troca o visual atual. A lista de visuais dispon&iacute;veis &eacute; obtida em i3GEO.parametros.listavisual
 
 		Parametro:

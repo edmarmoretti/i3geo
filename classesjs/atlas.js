@@ -1,6 +1,4 @@
 /*
-Title: Atlas
-
 Executa as opera&ccedil;&otilde;es da interface Atlas.
 
 Para abrir os atlas utilize http://localhost/i3geo/atlas
@@ -9,7 +7,7 @@ A defini&ccedil;&atilde;o dos atlas &eacute; feita em i3geo/menutemas/menutemas.
 
 Arquivo: i3geo/classesjs/atlas.js
 
-Licenca:
+Licen&ccedil;a:
 
 GPL2
 
@@ -32,22 +30,16 @@ Free Software Foundation, Inc., no endere&ccedil;o
 59 Temple Street, Suite 330, Boston, MA 02111-1307 USA.
 */
 /*
-Variavel: listaAtlas
-
 Objeto com as informa&ccedil;&otilde;es b&aacute;sicas sobre os Atlas existentes.
 
 Essa lista &eacute; obtida lendo-se o arquivo xml definido em atlasxml ou no sistema de administra&ccedil;&atilde;o
 */
 listaAtlas = "";
 /*
-Variavel: atlasxml
-
 Endere&ccedil;o do arquivo xml com a lista de atlas.
 */
 atlasxml = "";
 /*
-Function: iniciaAtlas
-
 Inicializa o Atlas.
 
 Pega o t&iacute;tulo e monta as pranchas
@@ -152,8 +144,6 @@ function iniciaAtlas(combow,atlasId)
 	cpObjAtlas.call(p,"pegaListaDePranchas",monta);
 }
 /*
-Function: iniciaListaAtlas
-
 Mostra a lista de Atlas dispon&iacute;veis para que o usu&aacute;rio possa escolher qual abrir.
 */
 function iniciaListaAtlas()
@@ -164,8 +154,6 @@ function iniciaListaAtlas()
 	pegaListaDeAtlas();
 }
 /*
-Function: pegaListaDeAtlas
-
 Pega a lista de Atlas e caracter&iacute;sticas principais de cada um.
 */
 function pegaListaDeAtlas()
@@ -220,8 +208,6 @@ function pegaListaDeAtlas()
 	{alert("Div listaAtlas nao existe");}
 }
 /*
-Function: abreatlas
-
 Abre um Atlas espec&iacute;fico escolhido pelo usu&aacute;rio
 
 Parametros:
@@ -235,8 +221,6 @@ function abreatlas(id)
 	window.location = inicia;
 }
 /*
-Function: abrePrancha
-
 Ativa uma prancha, adicionando e ativando as camadas espec&iacute;ficas.
 
 Parametros:
@@ -270,8 +254,6 @@ function abrePrancha(id)
 	cpObjAtlas.call(p,"abrePrancha",monta);
 }
 /*
-Function: atlas2i3geo
-
 Abre o mapa atualmente aberto no i3geo utilizando a interface padr&atilde;o.
 */
 function atlas2i3geo()
