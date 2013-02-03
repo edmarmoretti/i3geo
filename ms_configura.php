@@ -223,7 +223,7 @@ if (strtoupper(substr(PHP_OS, 0, 3) == 'WIN'))
 
 	*/
 	$i3geomaster = array(
-			array("usuario"=>"admin", "senha"=>"adminx")
+			array("usuario"=>"admin", "senha"=>"admin")
 	);
 	/*
 	Variable: dir_tmp
@@ -458,7 +458,7 @@ else //se for linux
 	}
 	//TODO v47 alterar a senha para admin
 	$i3geomaster = array(
-				array("usuario"=>"admin", "senha"=>"adminx")
+				array("usuario"=>"admin", "senha"=>"admin")
 			);
 
 	$navegadoresLocais = array(
