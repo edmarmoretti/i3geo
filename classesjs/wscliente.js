@@ -595,8 +595,6 @@ objeto_i3geo_wscliente_configura - objeto com os parâmentros de configura&ccedil
 function i3geo_wscliente_inicia(objeto_i3geo_wscliente_configura)
 {
 	/*
-	Propriedade: $i3geo_wscliente
-
 	Cont&eacute;m o objeto $i3geo_wscliente com todas as propriedades e fun&ccedil;&otilde;es de controle da interface
 	*/
 	$i3geo_wscliente = objeto_i3geo_wscliente_configura;

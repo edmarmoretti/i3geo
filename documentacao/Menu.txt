@@ -53,9 +53,8 @@ File: Vari&aacute;veis de inicializa&ccedil;&atilde;o ms_configura.php  (ms_conf
 
 Group: API  {
 
-   File: $i3geo_wscliente  (classesjs\wscliente.js)
    File: &Aacute;rvore de temas  (classesjs\classe_arvoredetemas.js)
-   File: Árvore de camadas  (no auto-title, classesjs\classe_arvoredecamadas.js)
+   File: &Aacutervore de camadas  (no auto-title, classesjs\classe_arvoredecamadas.js)
    File: Ajuda  (classesjs\classe_ajuda.js)
    File: An&aacute;lise geogr&aacute;fica  (classesjs\classe_analise.js)
    File: Barra de bot&otilde;es  (classesjs\classe_barradebotoes.js)
