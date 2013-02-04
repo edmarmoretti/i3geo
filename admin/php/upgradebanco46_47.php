@@ -55,6 +55,7 @@ include_once("conexao.php");
 
 if(empty($_POST["senha"]) || empty($_POST["usuario"])){
 	formularioLoginMaster("upgradebanco46_47.php");
+	echo "<br><input type=checkbox name=mostraSoSQL /> Mostra apenas o SQL";
 	exit;
 }
 else{
@@ -94,118 +95,122 @@ $tabelas = array(
 		"create table ".$esquemaadmin."i3geoestat_mapa_tema (id_mapa_tema integer not null unique primary key autoincrement,id_mapa_grupo integer,titulo text,id_medida_variavel integer,foreign key (id_mapa_grupo) references i3geoestat_mapa_grupo (id_mapa_grupo),foreign key (id_medida_variavel) references i3geoestat_medida_variavel (id_medida_variavel))"
 );
 $drivename = $dbhw->getAttribute(PDO::ATTR_DRIVER_NAME);
-foreach($tabelas as $tabela)
-{
-	if($drivename == "pgsql")
-	{
+foreach($tabelas as $tabela){
+	if($drivename == "pgsql"){
 		$tabela = str_replace("INTEGER PRIMARY KEY","SERIAL PRIMARY KEY NOT NULL",$tabela);
 	}
-	$q = $dbhw->query($tabela);
-   	if($q)
-   	{
-		echo "<br>Feito!!!<pre>";
-		var_dump($tabelas);
-   	}
-   	else
-   	{
-		echo "<pre>Ocorreu algum problema na criação das tabelas. Tabelas que deveriam ter sido criadas:\n";
-
-		//$e = $dbhw->errorInfo();
-		//throw new Exception($e[2]);
-   	}
+	if($_POST["mostraSoSQL"] != "on"){
+		$q = $dbhw->query($tabela);
+	   	if($q){
+			echo "<br>Feito!!!<pre><br>";
+	   	}
+	   	else{
+			echo "<pre>Ocorreu algum problema na criação das tabelas. Tabelas que deveriam ter sido criadas:\n";
+	   	}
+	}
 }
-echo "Tabelas:\n";
-var_dump($tabelas);
-echo "Inserindo os registros default\n";
+foreach($tabelas as $tabela){
+	if($drivename == "pgsql"){
+		$tabela = str_replace("INTEGER PRIMARY KEY","SERIAL PRIMARY KEY NOT NULL",$tabela);
+	}
+	echo "Tabelas:\n";
+	echo $tabela.";<br>";
+}
+//var_dump($tabelas);
+echo "<br><br>Inserindo os registros default\n";
 $teste = lista("select * from ".$esquemaadmin."i3geousr_papeis","id_papel");
+$sql = array();
 if(!in_array($teste,1))
-	$dbhw->query("INSERT INTO ".$esquemaadmin."i3geousr_papeis VALUES('Podem executar qualquer tarefa, inclusive cadastrar novos administradores',1,'admin')");
+	$sql["INSERT INTO ".$esquemaadmin."i3geousr_papeis VALUES('Podem executar qualquer tarefa, inclusive cadastrar novos administradores',1,'admin')"];
 if(!in_array($teste,2))
-	$dbhw->query("INSERT INTO ".$esquemaadmin."i3geousr_papeis VALUES('Podem criar/editar qualquer tema (mapfile) mas nao podem editar a arvore do catalogo de temas',2,'editores')");
+	$sql["INSERT INTO ".$esquemaadmin."i3geousr_papeis VALUES('Podem criar/editar qualquer tema (mapfile) mas nao podem editar a arvore do catalogo de temas',2,'editores')"];
 if(!in_array($teste,3))
-	$dbhw->query("INSERT INTO ".$esquemaadmin."i3geousr_papeis VALUES('Podem alterar a arvore do catalogo e dos atlas',3,'publicadores')");
+	$sql["INSERT INTO ".$esquemaadmin."i3geousr_papeis VALUES('Podem alterar a arvore do catalogo e dos atlas',3,'publicadores')"];
 if(!in_array($teste,4))
-	$dbhw->query("INSERT INTO ".$esquemaadmin."i3geousr_papeis VALUES('Podem editar dados geograficos',4,'editoresgeo')");
+	$sql["INSERT INTO ".$esquemaadmin."i3geousr_papeis VALUES('Podem editar dados geograficos',4,'editoresgeo')"];
 if(!in_array($teste,5))
-	$dbhw->query("INSERT INTO ".$esquemaadmin."i3geousr_papeis VALUES ('Podem administrar o sistema METAESTAT','5', 'adminmetaestat')");
-
-
-
+	$sql["INSERT INTO ".$esquemaadmin."i3geousr_papeis VALUES ('Podem administrar o sistema METAESTAT','5', 'adminmetaestat')"];
 $teste = lista("select * from ".$esquemaadmin."i3geousr_usuarios","id_usuario");
 if(!in_array($teste,1))
-	$dbhw->query("INSERT INTO ".$esquemaadmin."i3geousr_usuarios VALUES(1,'','',0,'admingeral','admingeral','admingeral')");
+	$sql["INSERT INTO ".$esquemaadmin."i3geousr_usuarios VALUES(1,'','',0,'admingeral','admingeral','admingeral')"];
 
 $teste = lista("select * from ".$esquemaadmin."i3geousr_papelusuario","id_usuario","id_papel");
 if(!in_array($teste,"1-1"))
-	$dbhw->query("INSERT INTO ".$esquemaadmin."i3geousr_papelusuario VALUES(1,1)");
+	$sql["INSERT INTO ".$esquemaadmin."i3geousr_papelusuario VALUES(1,1)"];
 
 $teste = lista("select * from ".$esquemaadmin."i3geousr_operacoes","id_operacao");
 if(!in_array($teste,1))
-	$dbhw->query("INSERT INTO ".$esquemaadmin."i3geousr_operacoes VALUES(1,'admin/html/editormapfile','editor de mapfiles do sistema de administracao')");
+	$sql["INSERT INTO ".$esquemaadmin."i3geousr_operacoes VALUES(1,'admin/html/editormapfile','editor de mapfiles do sistema de administracao')"];
 if(!in_array($teste,2))
-	$dbhw->query("INSERT INTO ".$esquemaadmin."i3geousr_operacoes VALUES(2,'admin/html/operacoes','abre o editor de operacoes')");
+	$sql["INSERT INTO ".$esquemaadmin."i3geousr_operacoes VALUES(2,'admin/html/operacoes','abre o editor de operacoes')"];
 if(!in_array($teste,3))
-	$dbhw->query("INSERT INTO ".$esquemaadmin."i3geousr_operacoes VALUES(3,'teste/','teste')");
+	$sql["INSERT INTO ".$esquemaadmin."i3geousr_operacoes VALUES(3,'teste/','teste')"];
 if(!in_array($teste,4))
-	$dbhw->query("INSERT INTO ".$esquemaadmin."i3geousr_operacoes VALUES(4,'admin/html/arvore','edicao da arvore do catalogo de temas')");
+	$sql["INSERT INTO ".$esquemaadmin."i3geousr_operacoes VALUES(4,'admin/html/arvore','edicao da arvore do catalogo de temas')"];
 if(!in_array($teste,5))
-	$dbhw->query("INSERT INTO ".$esquemaadmin."i3geousr_operacoes VALUES(5,'admin/html/menus','edicao da lista de menus')");
+	$sql["INSERT INTO ".$esquemaadmin."i3geousr_operacoes VALUES(5,'admin/html/menus','edicao da lista de menus')"];
 if(!in_array($teste,6))
-	$dbhw->query("INSERT INTO ".$esquemaadmin."i3geousr_operacoes VALUES(6,'admin/html/ogcws','edicao das preferencias do servico WMS')");
+	$sql["INSERT INTO ".$esquemaadmin."i3geousr_operacoes VALUES(6,'admin/html/ogcws','edicao das preferencias do servico WMS')"];
 if(!in_array($teste,7))
-	$dbhw->query("INSERT INTO ".$esquemaadmin."i3geousr_operacoes VALUES(7,'admin/html/atlas','edicao de atlas')");
+	$sql["INSERT INTO ".$esquemaadmin."i3geousr_operacoes VALUES(7,'admin/html/atlas','edicao de atlas')"];
 if(!in_array($teste,8))
-	$dbhw->query("INSERT INTO ".$esquemaadmin."i3geousr_operacoes VALUES(8,'admin/html/identifica','lista de sistemas incluidos na ferramenta de identificacao')");
+	$sql["INSERT INTO ".$esquemaadmin."i3geousr_operacoes VALUES(8,'admin/html/identifica','lista de sistemas incluidos na ferramenta de identificacao')"];
 if(!in_array($teste,9))
-	$dbhw->query("INSERT INTO ".$esquemaadmin."i3geousr_operacoes VALUES(9,'admin/html/incluimap','adapta mapfiles antigos para versoes novas do Mapserver')");
+	$sql["INSERT INTO ".$esquemaadmin."i3geousr_operacoes VALUES(9,'admin/html/incluimap','adapta mapfiles antigos para versoes novas do Mapserver')"];
 if(!in_array($teste,10))
-	$dbhw->query("INSERT INTO ".$esquemaadmin."i3geousr_operacoes VALUES(10,'admin/html/mapas','lista de links para mapas')");
+	$sql["INSERT INTO ".$esquemaadmin."i3geousr_operacoes VALUES(10,'admin/html/mapas','lista de links para mapas')"];
 if(!in_array($teste,11))
-	$dbhw->query("INSERT INTO ".$esquemaadmin."i3geousr_operacoes VALUES(11,'admin/html/perfis','lista controlada de perfis')");
+	$sql["INSERT INTO ".$esquemaadmin."i3geousr_operacoes VALUES(11,'admin/html/perfis','lista controlada de perfis')"];
 if(!in_array($teste,12))
-	$dbhw->query("INSERT INTO ".$esquemaadmin."i3geousr_operacoes VALUES(12,'admin/html/sistemas','lista de sistemas complementares que sao mostrados no catalogo')");
+	$sql["INSERT INTO ".$esquemaadmin."i3geousr_operacoes VALUES(12,'admin/html/sistemas','lista de sistemas complementares que sao mostrados no catalogo')"];
 if(!in_array($teste,13))
-	$dbhw->query("INSERT INTO ".$esquemaadmin."i3geousr_operacoes VALUES(13,'admin/html/subirshapefile','upload de shapefile para uma pasta especifica no servidor')");
+	$sql["INSERT INTO ".$esquemaadmin."i3geousr_operacoes VALUES(13,'admin/html/subirshapefile','upload de shapefile para uma pasta especifica no servidor')"];
 if(!in_array($teste,14))
-	$dbhw->query("INSERT INTO ".$esquemaadmin."i3geousr_operacoes VALUES(14,'admin/html/tags','edicao da lista controlada de tags')");
+	$sql["INSERT INTO ".$esquemaadmin."i3geousr_operacoes VALUES(14,'admin/html/tags','edicao da lista controlada de tags')"];
 if(!in_array($teste,15))
-	$dbhw->query("INSERT INTO ".$esquemaadmin."i3geousr_operacoes VALUES(15,'admin/html/webservices','cadastro de links para webservices')");
+	$sql["INSERT INTO ".$esquemaadmin."i3geousr_operacoes VALUES(15,'admin/html/webservices','cadastro de links para webservices')"];
 if(!in_array($teste,16))
-	$dbhw->query("INSERT INTO ".$esquemaadmin."i3geousr_operacoes VALUES(16,'admin/php/editortexto','editor de texto para mapfiles')");
+	$sql["INSERT INTO ".$esquemaadmin."i3geousr_operacoes VALUES(16,'admin/php/editortexto','editor de texto para mapfiles')"];
 if(!in_array($teste,17))
-	$dbhw->query("INSERT INTO ".$esquemaadmin."i3geousr_operacoes VALUES('17', 'admin/html/usuarios', 'cadastro de usuarios')");
+	$sql["INSERT INTO ".$esquemaadmin."i3geousr_operacoes VALUES('17', 'admin/html/usuarios', 'cadastro de usuarios')"];
 if(!in_array($teste,18))
-	$dbhw->query("INSERT INTO ".$esquemaadmin."i3geousr_operacoes VALUES('18', 'admin/metaestat/geral', 'permite edicoes mais comuns do sistema de metadados estatisticos')");
+	$sql["INSERT INTO ".$esquemaadmin."i3geousr_operacoes VALUES('18', 'admin/metaestat/geral', 'permite edicoes mais comuns do sistema de metadados estatisticos')"];
 if(!in_array($teste,19))
-	$dbhw->query("INSERT INTO ".$esquemaadmin."i3geousr_operacoes VALUES('19', 'admin/metaestat/editorbanco', 'permite gerenciar as tabelas do banco')");
-
-
+	$sql["INSERT INTO ".$esquemaadmin."i3geousr_operacoes VALUES('19', 'admin/metaestat/editorbanco', 'permite gerenciar as tabelas do banco')"];
 
 $teste = lista("select * from ".$esquemaadmin."i3geousr_operacoes","id_operacao","id_papel");
 if(!in_array($teste,'1-2'))
-	$dbhw->query("INSERT INTO ".$esquemaadmin."i3geousr_operacoespapeis VALUES(1,2)");
+	$sql["INSERT INTO ".$esquemaadmin."i3geousr_operacoespapeis VALUES(1,2)"];
 if(!in_array($teste,'1-3'))
-	$dbhw->query("INSERT INTO ".$esquemaadmin."i3geousr_operacoespapeis VALUES(1,3)");
+	$sql["INSERT INTO ".$esquemaadmin."i3geousr_operacoespapeis VALUES(1,3)"];
 if(!in_array($teste,'4-3'))
-	$dbhw->query("INSERT INTO ".$esquemaadmin."i3geousr_operacoespapeis VALUES(4,3)");
+	$sql["INSERT INTO ".$esquemaadmin."i3geousr_operacoespapeis VALUES(4,3)"];
 if(!in_array($teste,'5-3'))
-	$dbhw->query("INSERT INTO ".$esquemaadmin."i3geousr_operacoespapeis VALUES(5,3)");
+	$sql["INSERT INTO ".$esquemaadmin."i3geousr_operacoespapeis VALUES(5,3)"];
 if(!in_array($teste,'7-3'))
-	$dbhw->query("INSERT INTO ".$esquemaadmin."i3geousr_operacoespapeis VALUES(7,3)");
+	$sql["INSERT INTO ".$esquemaadmin."i3geousr_operacoespapeis VALUES(7,3)"];
 if(!in_array($teste,'10-3'))
-	$dbhw->query("INSERT INTO ".$esquemaadmin."i3geousr_operacoespapeis VALUES(10,3)");
+	$sql["INSERT INTO ".$esquemaadmin."i3geousr_operacoespapeis VALUES(10,3)"];
 if(!in_array($teste,'13-2'))
-	$dbhw->query("INSERT INTO ".$esquemaadmin."i3geousr_operacoespapeis VALUES(13,2)");
+	$sql["INSERT INTO ".$esquemaadmin."i3geousr_operacoespapeis VALUES(13,2)"];
 if(!in_array($teste,'13-4'))
-	$dbhw->query("INSERT INTO ".$esquemaadmin."i3geousr_operacoespapeis VALUES(13,4)");
+	$sql["INSERT INTO ".$esquemaadmin."i3geousr_operacoespapeis VALUES(13,4)"];
 if(!in_array($teste,'15-3'))
-	$dbhw->query("INSERT INTO ".$esquemaadmin."i3geousr_operacoespapeis VALUES(15,3)");
+	$sql["INSERT INTO ".$esquemaadmin."i3geousr_operacoespapeis VALUES(15,3)"];
 if(!in_array($teste,'16-2'))
-	$dbhw->query("INSERT INTO ".$esquemaadmin."i3geousr_operacoespapeis VALUES(16,2)");
+	$sql["INSERT INTO ".$esquemaadmin."i3geousr_operacoespapeis VALUES(16,2)"];
 if(!in_array($teste,'18-1'))
-	$dbhw->query("INSERT INTO ".$esquemaadmin."i3geousr_operacoespapeis VALUES(18,1)");
+	$sql["INSERT INTO ".$esquemaadmin."i3geousr_operacoespapeis VALUES(18,1)"];
 if(!in_array($teste,'18-5'))
-	$dbhw->query("INSERT INTO ".$esquemaadmin."i3geousr_operacoespapeis VALUES (18,5)");
+	$sql["INSERT INTO ".$esquemaadmin."i3geousr_operacoespapeis VALUES (18,5)"];
+
+echo "<br>Inserts:<br>";
+foreach($sql as $s){
+	if($_POST["mostraSoSQL"] != "on"){
+		$dbhw->query($s);
+	}
+	echo $s.";<br>";
+}
 //cria o banco de dados de metadados estatisticos
 if(file_exists("../../admin/metaestat.db"))	{
 	echo "<br>Arquivo admin/metaestat.db ja existe. Vc deve apag&aacute;-lo para poder cri&aacute;-lo novamente caso precise";

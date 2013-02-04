@@ -413,7 +413,7 @@ Parametros:
 action {string} - php que ser&aacute; executado no submit do formul&aacute;rio
 */
 function formularioLoginMaster($action){
-	echo "<form method=post action=$action >";
+	echo "<form id=formularioLoginMaster method=post action=$action >";
 	echo "<br>Essa conex&atilde;o pode n&atilde;o ser segura e os dados de usu&aacute;rio/senha podem ser descobertos<br><br>";
 	echo "Nome do usu&aacute;rio master cadastrado em ms_configura.php:<br> <input type=text name=usuario /><br>";
 	echo "Senha:<br> <input type=password name=senha /><br>";
