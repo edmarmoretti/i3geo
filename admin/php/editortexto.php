@@ -54,6 +54,7 @@ body {
 			echo "<TEXTAREA name=texto cols=100 rows=20 style='width:500px;float:left;height:500px'>";
 			echo file_get_contents($mapfile);
 			echo "</TEXTAREA>";
+			$mapfile = str_replace("\\","/",$mapfile);
 			echo "<iframe id='mapaPreview' src='../../mashups/openlayers.php?controles=navigation,panzoombar,scaleline,mouseposition&botoes=identifica&largura=490&fundo=".$mapfile."&temas=".$mapfile."' cols=100 rows=20 style='position:relative;top:2px;overflow:hidden;width:500px;height:500px;border:1px solid gray;'>";
 			echo "</iframe>";
 			echo "<input type=hidden name=tipo value=gravar />";
