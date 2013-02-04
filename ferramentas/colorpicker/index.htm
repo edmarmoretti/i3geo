@@ -76,7 +76,8 @@ function aplicarCor()
 	navn = false; // netscape
 	var doc,ncor,
 		app = navigator.appName.substring(0,1),
-		tipo = "";
+		tipo = "",
+		sep = ",";
 
 	if (app=='N') navn=true; else navm=true;
 	try{
@@ -89,8 +90,11 @@ function aplicarCor()
 	}
 	catch(e){doc = window.parent.document;var tipo = "rgb";}
 	var elemento = unescape(((((window.location.href).split("elemento="))[1]).split("&"))[0] );
-	if(tipo == "rgb")
-	{ncor = document.getElementById("yui-picker-r").value+","+document.getElementById("yui-picker-g").value+","+document.getElementById("yui-picker-b").value;}
+	if(tipo == "rgbSep"){
+		sep = " ";
+	}
+	if(tipo == "rgb" || tipo == "rgbSep")
+	{ncor = document.getElementById("yui-picker-r").value+sep+document.getElementById("yui-picker-g").value+sep+document.getElementById("yui-picker-b").value;}
 	else
 	{ncor = "#"+document.getElementById("yui-picker-hex").value;}
 	doc.getElementById(elemento).value = ncor;
@@ -102,7 +106,7 @@ function aplicarCor()
 	//window.parent.YAHOO.janelaCor.xp.panel.destroy();
 }
 
-
+window.parent.document.body.scrollTop = window.parent.document.documentElement.scrollTop = 0;
 </script>
 
 <!--END SOURCE CODE FOR EXAMPLE =============================== -->

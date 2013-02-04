@@ -911,7 +911,7 @@ i3GEO.util = {
 
 	elemento {String} - id do elemento que recebera os valores da cor selecionada
 
-	tipo {String} - opcional pode ser definido como rgb ou hex indicando o tipo de retorno da cor
+	tipo {String} - opcional pode ser definido como rgb,rgbSep (separado por espacos em branco) ou hex indicando o tipo de retorno da cor
 	*/
 	abreCor: function(janelaid,elemento,tipo){
 		if(typeof(console) !== 'undefined'){console.info("i3GEO.util.abreCor()");}
@@ -2590,19 +2590,19 @@ i3GEO.util = {
 	},
 	/*
 	Function: ajaxGet
-	
+
 	Faz uma requisi&ccedil;&atilde;o ao servidor por meio de AJAX
-	
+
 	A fun&ccedil;&atilde;o de processamento do resultado ir&aacute; receber um objeto JSON como par&acirc;metro
-	
+
 	Exemplo:
-	
+
 	i3GEO.util.ajaxGet("http://localhost/teste.php",function(retorno){alert(retorno);})
-	
+
 	Parametros:
-	
+
 	sUrl - url que ser&aacute; requisitada
-	
+
 	funcaoRetorno - fun&ccedil;&atilde;o que ir&aacute; processar o resultado
 	*/
 	ajaxGet: function(sUrl,funcaoRetorno){

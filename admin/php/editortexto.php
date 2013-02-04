@@ -25,6 +25,7 @@ body {
 			<input type=submit value="Salvar (tamb&eacute;m atualiza o mapa)" /><input type=button value="Testar"
 				onclick="testar()" /><input type=button value="Testar no i3Geo"
 				onclick="abrirI3geo()" /> (Salve antes de testar)<br> <br>
+			<div id="letras"></div>
 			<div id="comboMapfiles">Aguarde...</div>
 			<br>
 			<?php
@@ -48,11 +49,12 @@ body {
 				fwrite($fp,$gravarTexto);
 				fclose($fp);
 			}
+			echo 'RGB: <input type=text value="clique" size=10 id="corrgb" onclick="i3GEO.util.abreCor(\'\',\'corrgb\',\'rgbSep\')" /><br><br>';
 			echo "Edite:<br>";
 			echo "<TEXTAREA name=texto cols=100 rows=20 style='width:500px;float:left;height:500px'>";
 			echo file_get_contents($mapfile);
 			echo "</TEXTAREA>";
-			echo "<iframe id='mapaPreview' src='../../mashups/openlayers.php?controles=navigation,panzoombar,scaleline,mouseposition&botoes=identifica&largura=490&temas=".$mapfile."' cols=100 rows=20 style='position:relative;top:2px;overflow:hidden;width:500px;height:500px;border:1px solid gray;'>";
+			echo "<iframe id='mapaPreview' src='../../mashups/openlayers.php?controles=navigation,panzoombar,scaleline,mouseposition&botoes=identifica&largura=490&fundo=".$mapfile."&temas=".$mapfile."' cols=100 rows=20 style='position:relative;top:2px;overflow:hidden;width:500px;height:500px;border:1px solid gray;'>";
 			echo "</iframe>";
 			echo "<input type=hidden name=tipo value=gravar />";
 			$mapa = ms_newMapObj($mapfile);
@@ -68,6 +70,25 @@ body {
 	<script type="text/javascript" src="../js/core.js"></script>
 	<script src="../../classesjs/classe_util.js" type="text/javascript"></script>
 	<script>
+i3GEO.configura = {locaplic: "../../"};
+
+ins = "<p><div id=filtroDeLetras ></div><br>";
+document.getElementById("letras").innerHTML = ins;
+core_listaDeLetras("filtroDeLetras","filtraLetra");
+if(i3GEO.util.pegaCookie("I3GEOletraAdmin")) {
+	letraAtual = i3GEO.util.pegaCookie("I3GEOletraAdmin");
+}
+else{
+	letraAtual = "";
+}
+function filtraLetra(letra) {
+	letraAtual = letra;
+	if (letra == "Todos") {
+		letra = "";
+	}
+	i3GEO.util.insereCookie("I3GEOletraAdmin", letra);
+	core_pegaMapfiles("comboMapfiles()", letra);
+}
 function comboMapfiles(){
 	var n = $mapfiles.length,
 		i,ins;
@@ -80,7 +101,7 @@ function comboMapfiles(){
 	ins += "</select>";
 	$i("comboMapfiles").innerHTML = ins;
 };
-core_pegaMapfiles("comboMapfiles()","","");
+core_pegaMapfiles("comboMapfiles()",letraAtual,"");
 function mudaMapfile(obj){
 	if(obj.value != ""){
 		window.location.href = "editortexto.php?mapfile="+obj.value;
