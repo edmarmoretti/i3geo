@@ -123,6 +123,7 @@ i3GEOF.salvaMapa = {
 		}
 	},
 	salvaMapaBanco: function(){
+		//TODO melhorar essa interface
 		var login = i3GEO.login.verificaCookieLogin(),
 			titulo="",temp="",id_mapa="";
 		if(login === false){
@@ -130,7 +131,10 @@ i3GEOF.salvaMapa = {
 		}
 		else{
 			titulo = window.prompt("Titulo do mapa","");
-			id_mapa = window.prompt("Especifique o id se o mapa já existir, se for um mapa novo, deixe em branco");
+			if(!titulo){
+				return;
+			}
+			id_mapa = window.prompt("ID do mapa, se for um mapa novo, deixe em branco");
 			temp = function(retorno){
 				if(retorno.id && retorno.id != ""){
 					i3GEO.janela.tempoMsg("Mapa salvo");

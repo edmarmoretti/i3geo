@@ -167,6 +167,7 @@ Veja:
 <DADOSLINHADOTEMPO>
 */
 function carregaDados(){
+	//alert(window.parent.i3GEO.parametros.mapexten)
 	tl_el.innerHTML = "<span style=color:red; >Aguarde...</span>";
 	var retorna = function(retorno){
 		//eventSource1.clear();

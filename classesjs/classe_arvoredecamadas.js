@@ -332,55 +332,55 @@ i3GEO.arvoreDeCamadas = {
 	Exemplo de como alterar um valor diretamente no javascript da interface do mapa
 
 	i3GEO.arvoreDeCamadas.FUNCOES.excluir = false;
-	
+
 	i3GEO.arvoreDeCamadas.FUNCOES.farolescala = false;
-	
+
 	Default:
-	
+
 		farolescala = true;
-		
+
 		excluir = true;
-		
+
 		sobe = true;
-		
+
 		desce = true;
-		
+
 		fonte = true;
-		
+
 		zoomtema = true;
-		
+
 		compartilhar = true;
-		
+
 		opacidade = true;
-		
+
 		mudanome = true;
-		
+
 		procurar = true;
-		
+
 		toponimia = true;
-		
+
 		etiquetas = true;
-		
+
 		filtrar = true;
-		
+
 		tabela = true;
-		
+
 		grafico = true;
-		
+
 		editorlegenda = true;
-		
+
 		destacar = true;
-		
+
 		cortina = true;
-		
+
 		sql = true;
-		
+
 		comentar = true;
-		
+
 		temporizador = true;
-		
+
 		wms = true;
-		
+
 		tme = true;
 
 	*/
@@ -422,13 +422,13 @@ i3GEO.arvoreDeCamadas = {
 	"CAMADAS":[
 
 		{
-		
+
 			aplicaextensao: "nao", //altera ou nao a extens&atilde;o geogr&aacute;fica do mapa ao adicionar esssa camada
 
 			cache: "sim", //cache autom&aacute;tico de imagens ativo ou n&atilde;o
-	
+
 			clas se: "SIM", //as classes s&atilde;o ou n&atilde;o mostradas na legenda
-	
+
 			connectiontype: 1, //tipo de conex&atilde;o com os dados (conforme constantes do Mapserver)
 
 			contextoescala: "nao", //o tema tem a visualiza&ccedil;&atilde;o restrita ou n&atilde;o em fun&ccedil;&atilde;o da escala do mapa
@@ -436,13 +436,13 @@ i3GEO.arvoreDeCamadas = {
 			download: "", //o usu&aacute;rio pode ou n&atilde;o fazer o download dos dados
 
 			editorsql: "nao", //&eacute; poss&iacute;vel ou n&atilde;o editar o SQL que define o acesso aos dados (qd aplic&aacute;vel)
-	
+
 			escala: 0, //escala original dos dados
-	
+
 			escondido: "nao", //indica se o tema &eacute; mostrado no mapa mas não nas listagens ou na legenda
-	
+
 			etiquetas: "FIPS_CNTRY,GMI_CNTRY,CNTRY_NAME", //lista de itens que são mostrados no bal&atilde;o de identifica&ccedil;&atilde;o
-	
+
 			exttema: "", //extens&atilde;o geogr&aacute;fica da camada
 
 			features: "nao", // indica se possu&iacute; elemento inline
@@ -460,7 +460,7 @@ i3GEO.arvoreDeCamadas = {
 			nomeoriginal: "", //nome do tema conforme definido originalmente ao ser adicionado ao mapa
 
 			nsel: 0, //n&uacute;mero de elementos que est&atilde;o selecionados
-	
+
 			permitecomentario: "nao", //permite ou n&atilde;o receber coment&aacute;rios do usu&aacute;rio
 
 			permiteogc: "", //permite ou n&atilde;o ser fornecido como WMS
@@ -493,7 +493,7 @@ i3GEO.arvoreDeCamadas = {
 
 			wmsurl: "",
 
-			zoomtema: "sim" //ao adicionar a camada ao mapa deve ou n&atilde;o ser ajustado conforme a extens&atilde;o do tema	
+			zoomtema: "sim" //ao adicionar a camada ao mapa deve ou n&atilde;o ser ajustado conforme a extens&atilde;o do tema
 		}
 	]
 
@@ -578,7 +578,7 @@ i3GEO.arvoreDeCamadas = {
 		}
 		var novoel;
 		//inclui o div para a barra de progresso
-		if(i3GEO.arvoreDeCamadas.BARRAPROGRESSO === true && i3GEO.Interface.ATUAL === "openlayers"){
+		if(i3GEO.arvoreDeCamadas.BARRAPROGRESSO === true && i3GEO.Interface.ATUAL !== "googleearth"){
 			if(!$i("i3GEOprogressoDiv")){
 				novoel = document.createElement("div");
 				novoel.id = "i3GEOprogressoDiv";

@@ -1461,6 +1461,9 @@ i3GEO.Interface = {
 			var pol,ret,montaMapa;
 			pol = i3GEO.parametros.mapexten;
 			ret = pol.split(" ");
+			if($i("i3GEOprogressoDiv")){
+				$i("i3GEOprogressoDiv").style.display = "block";
+			}
 			montaMapa = function(retorno){
 				var sw,ne,
 				dobra = $i("i3GEOdobraPagina");
@@ -1474,9 +1477,7 @@ i3GEO.Interface = {
 				i3GeoMap.setMapTypeId(i3GEO.Interface.googlemaps.TIPOMAPA);
 				sw = new google.maps.LatLng(ret[1],ret[0]);
 				ne = new google.maps.LatLng(ret[3],ret[2]);
-
 				i3GeoMap.fitBounds(new google.maps.LatLngBounds(sw,ne));
-
 				//FIXME Isso provoca um loop infinito e trava
 				//i3GeoMap.setZoom(i3GeoMap.getZoom()+1);
 
@@ -1546,6 +1547,7 @@ i3GEO.Interface = {
 					}
 				}
 			}
+			i3GEO.Interface.googlemaps.recalcPar();
 		},
 		criaImageMap: function(nomeLayer,cache){
 			var i3GEOTileO = "",s;
@@ -1590,6 +1592,9 @@ i3GEO.Interface = {
 				i3GEO.eventos.cliquePerm.status = false;
 			});
 			google.maps.event.addListener(i3GeoMap, "tilesloaded", function() {
+				if($i("i3GEOprogressoDiv")){
+					$i("i3GEOprogressoDiv").style.display = "none";
+				}
 				i3GEO.Interface.googlemaps.recalcPar();
 			});
 			google.maps.event.addListener(i3GeoMap, "bounds_changed", function() {
@@ -1603,6 +1608,9 @@ i3GEO.Interface = {
 				//
 				xy = i3GEO.navega.centroDoMapa();
 				i3GEO.coordenadas.mostraCoordenadas(false,"",xy[0],xy[1]);
+				if($i("i3GEOprogressoDiv")){
+					$i("i3GEOprogressoDiv").style.display = "block";
+				}
 			});
 			google.maps.event.addListener(i3GeoMap, "mousemove", function(ponto) {
 				var teladms,tela,
