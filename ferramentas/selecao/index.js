@@ -163,7 +163,7 @@ i3GEOF.selecao = {
 		if(i3GEO.Interface.ATUAL != "googlemaps" && i3GEO.Interface.ATUAL != "googleearth")
 		{ins += '	<button title="Desenhe um poligono no mapa para selecionar" onclick="i3GEOF.selecao.tiposel(this)" value="i3GEOselecaopoli"><img id=i3GEOselecaopoli src="'+i3GEO.configura.locaplic+'/imagens/gisicons/select-polygon.png" /></button>';}
 		ins += '	<button title="Seleciona o que estiver visivel no mapa" onclick="i3GEOF.selecao.tiposel(this)" value="i3GEOselecaoext" ><img id=i3GEOselecaoext src="'+i3GEO.configura.locaplic+'/imagens/gisicons/map.png" /></button>';
-		if(i3GEO.Interface.ATUAL != "googlemaps" && i3GEO.Interface.ATUAL != "googleearth")
+		if(i3GEO.Interface.ATUAL != "googlemaps" && i3GEO.Interface.ATUAL != "googleearth" && !navm)
 		{ins += '	<button title="Desenhe um retangulo no mapa para selecionar" onclick="i3GEOF.selecao.tiposel(this)" value="i3GEOselecaobox" ><img id=i3GEOselecaobox src="'+i3GEO.configura.locaplic+'/imagens/gisicons/select-rectangle.png" /></button>';}
 		ins += '	<button title="Inverte a selecao" onclick="i3GEOF.selecao.operacao(\'inverte\')"><img src="'+i3GEO.configura.locaplic+'/imagens/gisicons/selection-invert.png" /></button>' +
 		'	<button title="Limpa a selecao" onclick="i3GEOF.selecao.operacao(\'limpa\')"><img src="'+i3GEO.configura.locaplic+'/imagens/gisicons/selected-delete.png" /></button>' +
@@ -459,6 +459,7 @@ i3GEOF.selecao = {
 			{i3GEO.janela.tempoMsg("Escolha um tema");return;}
 			if(g_tipoacao !== 'selecaobox')
 			{return;}
+			
 			i3GEO.Interface.openlayers.OLpan.deactivate();
 			i3geoOL.removeControl(i3GEO.Interface.openlayers.OLpan);
 			i3GEOF.selecao.box.criaBox();
@@ -606,8 +607,6 @@ i3GEOF.selecao = {
 		var retorna = function(retorno){
 			i3GEO.janela.fechaAguarde("i3GEO.atualiza");
 			var nsel;
-			if(i3GEO.Interface.ATUAL === "padrao")
-			{i3GEO.atualiza(retorno);}
 			i3GEO.Interface.atualizaTema(retorno,tema);
 			nsel = i3GEO.arvoreDeCamadas.pegaTema(tema,retorno.data.temas);
 			$i("i3GEOselecaoNsel").innerHTML = "Selecionados: "+(nsel.nsel);
@@ -696,12 +695,8 @@ i3GEOF.selecao = {
 			if (g_tipoacao === "selecaopoli"){
 				var n = pontosdistobj.xpt.length;
 				if (n > 0){
-					if(navm)
-					{i3GEO.desenho.aplica("resizePoligono",pontosdistobj.linhas[n-1],n);}
-					else{
-						i3GEO.desenho.aplica("resizePoligono",pontosdistobj.linhastemp,1);
-						i3GEO.desenho.aplica("resizeLinha",pontosdistobj.linhas[n-1],n);
-					}
+					i3GEO.desenho.aplica("resizePoligono",pontosdistobj.linhastemp,1);
+					i3GEO.desenho.aplica("resizeLinha",pontosdistobj.linhas[n-1],n);
 				}
 			}
 		},
@@ -724,6 +719,21 @@ i3GEOF.selecao = {
 			//inclui a linha para ligar com o ponto inicial
 			if (n === 0){
 				try	{
+					pontosdistobj.linhastemp = i3GEO.desenho.richdraw.renderer.create(i3GEO.desenho.richdraw.mode, i3GEO.desenho.richdraw.fillColor, i3GEO.desenho.richdraw.lineColor, i3GEO.desenho.richdraw.lineWidth, pontosdistobj.ximg[n]-1,pontosdistobj.yimg[n]-1,pontosdistobj.ximg[0]-1,pontosdistobj.yimg[0]-1);
+				}
+				catch(e){
+					if(typeof(console) !== 'undefined'){console.error(e);}
+				}
+			}
+			try{
+				pontosdistobj.linhas[n] = i3GEO.desenho.richdraw.renderer.create(i3GEO.desenho.richdraw.mode, i3GEO.desenho.richdraw.fillColor, i3GEO.desenho.richdraw.lineColor, i3GEO.desenho.richdraw.lineWidth, pontosdistobj.ximg[n]-1,pontosdistobj.yimg[n]-1,pontosdistobj.ximg[n]-1,pontosdistobj.yimg[n]-1);
+			}
+			catch(e){
+				if(typeof(console) !== 'undefined'){console.error(e);}
+			}
+			/*
+			if (n === 0){
+				try	{
 					if (navn)
 					{pontosdistobj.linhastemp = i3GEO.desenho.richdraw.renderer.create(i3GEO.desenho.richdraw.mode, i3GEO.desenho.richdraw.fillColor, i3GEO.desenho.richdraw.lineColor, i3GEO.desenho.richdraw.lineWidth, pontosdistobj.ximg[n]-1,pontosdistobj.yimg[n]-1,pontosdistobj.ximg[0]-1,pontosdistobj.yimg[0]-1);}
 				}
@@ -742,6 +752,7 @@ i3GEOF.selecao = {
 			catch(e){
 				if(typeof(console) !== 'undefined'){console.error(e);}
 			}
+			*/
 			if(i3GEO.Interface.ATUAL === "padrao" || i3GEO.Interface.ATUAL === "openlayers" || i3GEO.Interface.ATUAL === "googlemaps")
 			{i3GEO.util.insereMarca.cria(objposicaocursor.imgx,objposicaocursor.imgy,i3GEOF.selecao.poligono.termina,"divGeometriasTemp");}
 			if(i3GEO.Interface.ATUAL === "googleearth")

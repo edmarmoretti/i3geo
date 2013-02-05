@@ -1,5 +1,5 @@
 //+$trad(1,i3GEOF.convertemapakml.dicionario)+
-i3GEOF.convertemapakml.dicionario = {
+i3GEOF.converteMapaKml.dicionario = {
 1: [{
 pt:"",
 en:"",

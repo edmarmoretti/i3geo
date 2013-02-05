@@ -189,8 +189,9 @@ $metaestatTemplates = "/ferramentas/metaestat/templates";
 
 if (strtoupper(substr(PHP_OS, 0, 3) == 'WIN'))
 {
+	//TODO controlar pelo sistema de login de usuario
 	/*
-	Variable: navegadoresLocais (DEPRECIADO)
+	Variable: navegadoresLocais
 
 	Ip dos usuarios que podem navegar no servidor para acessar arquivos de dados geogr&aacute;ficos.
 
@@ -211,7 +212,14 @@ if (strtoupper(substr(PHP_OS, 0, 3) == 'WIN'))
 	Tipo:
 	{array}
 	*/
-	$navegadoresLocais = "depreciado";
+	$navegadoresLocais = array(
+							array(
+								"ip"=>"127.0.0.1",
+								"drives"=>array(
+									array("caminho"=>"c:","nome"=>"c:")
+								)
+							)
+						);
 
 	/*
 	Variable: i3geomaster

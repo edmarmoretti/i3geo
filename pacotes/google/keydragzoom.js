@@ -61,7 +61,8 @@
   var getBorderWidths = function (h) {
     var computedStyle;
     var bw = {};
-    if (document.defaultView && document.defaultView.getComputedStyle) {
+    
+	if (document.defaultView && document.defaultView.getComputedStyle) {
       computedStyle = h.ownerDocument.defaultView.getComputedStyle(h, "");
       if (computedStyle) {
         // The computed styles are always in pixel units (good!)
