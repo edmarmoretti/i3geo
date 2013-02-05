@@ -105,9 +105,9 @@ i3GEOF.upload = {
 	*/
 	html:function(){
 		var ins = '<form id=i3GEOuploadf target="i3GEOuploadiframe" action="'+i3GEO.configura.locaplic+'/ferramentas/upload/upload.php" method="post" ENCTYPE="multipart/form-data">' +
-		'<p class="paragrafo" >shp: <br><input class=digitar type="file" size=22 name="i3GEOuploadshp" style="top:0px;left:0px;cursor:pointer;"></p>' +
-		'<p class="paragrafo" >shx: <br><input class=digitar type="file" size=22 name="i3GEOuploadshx" style="top:0px;left:0px;cursor:pointer;"></p>' +
-		'<p class="paragrafo" >dbf: <br><input class=digitar type="file" size=22 name="i3GEOuploaddbf" style="top:0px;left:0px;cursor:pointer;"></p>';
+		'<p class="paragrafo" >shp: <br><input type="file" size=22 name="i3GEOuploadshp" style="top:0px;left:0px;cursor:pointer;"></p>' +
+		'<p class="paragrafo" >shx: <br><input type="file" size=22 name="i3GEOuploadshx" style="top:0px;left:0px;cursor:pointer;"></p>' +
+		'<p class="paragrafo" >dbf: <br><input type="file" size=22 name="i3GEOuploaddbf" style="top:0px;left:0px;cursor:pointer;"></p>';
 		if(i3GEO.parametros.editor === "sim")
 		{ins += '<p class="paragrafo" >pasta no servidor onde os dados<br>ser&atilde;o armazenados (opcional):<br><input class=digitar type="text" size=45 name="dirDestino" style="top:0px;left:0px;cursor:pointer;"></p>';}
 		ins += '<p class="paragrafo" >Tipo de geometria: ' +

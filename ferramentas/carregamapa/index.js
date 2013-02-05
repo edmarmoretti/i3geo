@@ -84,6 +84,7 @@ i3GEOF.carregaMapa = {
 	inicia: function(iddiv){
 		try{
 			$i(iddiv).innerHTML += i3GEOF.carregaMapa.html();
+			document.body.scrollTop = document.documentElement.scrollTop = 0;
 			new YAHOO.widget.Button(
 				"i3GEOcarregamapabotao1",
 				{onclick:{fn: i3GEOF.carregaMapa.submete}}
@@ -102,17 +103,16 @@ i3GEOF.carregaMapa = {
 	*/
 	html:function(){
 		var ins = '';
-		ins += '<p class="paragrafo" >Digite o nome do arquivo .map (n&atilde;o utilize espa&ccedil;o em branco ou caracteres acentuados) ou busque com o navegador de arquivos:';
-		ins += '<br><br>';
-		ins += '<form id=i3GEOcarregamapaf target="i3GEOcarregamaiframe" action="'+i3GEO.configura.locaplic+'/ferramentas/carregamapa/upload.php" method="post" ENCTYPE="multipart/form-data">';
-		ins += '<p class="paragrafo" ><input id="i3GEOcarregamapafilemap" type="file" name="i3GEOcarregamapafilemap" size="22" style="top:0px;left:0px;cursor:pointer;">';
-		ins += '<br><br>';
-		ins += '<p class="paragrafo" ><input id=i3GEOcarregamapabotao1 type="button" value="Carregar arquivo" size=12 name="submit">';
-		ins += '<input type=hidden name=g_sid value="'+i3GEO.configura.sid+'" >';
-		ins += '<input type="hidden" name="MAX_FILE_SIZE" value="10000">';
-		ins += '<input type=hidden id=i3GEOcarregamapanomearq name=i3GEOcarregamapanomearq value="" >';
-		ins += '</form>';
-		ins += '<br><iframe name=i3GEOcarregamaiframe width="98%" height="70px" style="text-align:left;border:1px solid gray;" ></iframe>';
+		ins += '<form id=i3GEOcarregamapaf target="i3GEOcarregamaiframe" action="'+i3GEO.configura.locaplic+'/ferramentas/carregamapa/upload.php" method="post" ENCTYPE="multipart/form-data" >' +
+			'<p class="paragrafo" >Arquivo para upload:' +
+			'<br><br>' +
+			'<p class="paragrafo" ><input type="file" name="i3GEOcarregamapafilemap" size="22" style="top:0px;left:0px;cursor:pointer;">' +
+			'<br><br>' +
+			'<p class="paragrafo" ><input id=i3GEOcarregamapabotao1 type="button" value="Carregar arquivo" size=12 name="submit"><br>' +
+			'<input type=hidden name=g_sid value="'+i3GEO.configura.sid+'" >' +
+			'<input type="hidden" name="MAX_FILE_SIZE" value="100000" >' +
+			'</form>' +
+			'<br><iframe name=i3GEOcarregamaiframe width="98%" height="70px" style="text-align:left;border:1px solid gray;" ></iframe>';
 		return ins;
 	},
 	/*
@@ -144,8 +144,9 @@ i3GEOF.carregaMapa = {
 	Envia o arquivo para o servidor
 	*/
 	submete: function(){
+		if(i3GEOF.carregaMapa.aguarde.visibility==="visible")
+		{return;}
 		i3GEOF.carregaMapa.aguarde.visibility="visible";
-		$i("i3GEOcarregamapanomearq").value = $i("i3GEOcarregamapafilemap").value;
 		$i("i3GEOcarregamapaf").submit();
 	}
 };
