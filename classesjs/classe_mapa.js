@@ -357,9 +357,9 @@ i3GEO.mapa = {
 							$i(i3GEO.mapa.legendaHTML.ID).innerHTML = ins;
 						}
 					}
-					if ($i("wlegenda")){
-						$i("wlegenda").innerHTML = retorno.data.legenda;
-						elementos = $i("wlegenda").getElementsByTagName("input");
+					if ($i("wlegenda_corpo")){
+						$i("wlegenda_corpo").innerHTML = retorno.data.legenda;
+						elementos = $i("wlegenda_corpo").getElementsByTagName("input");
 						for(i=0;i<elementos.length;i += 1)
 						{elementos[i].style.display="none";}
 					}
@@ -369,7 +369,7 @@ i3GEO.mapa = {
 				if(idleg && idleg.style.display === "block")
 				{i3GEO.mapa.legendaHTML.obtem(temp);}
 			}
-			idleg = $i("wlegenda");
+			idleg = $i("wlegenda_corpo");
 			if (idleg && idleg.style.display === "block")
 			{i3GEO.mapa.legendaHTML.obtem(temp);}
 		},
@@ -421,6 +421,44 @@ i3GEO.mapa = {
 			}
 			if(typeof(console) !== 'undefined'){console.info("i3GEO.mapa.legendaHTML.libera()");}
 			var temp = function(retorno){
+				if (!$i("wlegenda")){
+					cabecalho = function(){
+					};
+					minimiza = function(){
+						i3GEO.janela.minimiza("wlegenda");
+					};
+					janela = i3GEO.janela.cria(
+							"302px",
+							"300px",
+							"",
+							"",
+							"",
+							$trad("p3"),
+							"wlegenda",
+							false,
+							"hd",
+							cabecalho,
+							minimiza
+					);
+					janela = janela[0];
+					YAHOO.i3GEO.janela.manager.register(janela);
+					janela.render();
+				}
+				else{
+					janela = YAHOO.i3GEO.janela.manager.find("wlegenda");
+				}
+				$i("wlegenda_corpo").innerHTML = retorno.data.legenda;
+				$i("wlegenda_corpo").style.backgroundColor = "white";
+				if(ck === "nao"){
+					temp = $i("wlegenda_corpo").getElementsByTagName("input");
+					n = temp.length;
+					for(i=0;i<n;i += 1){
+						temp[i].style.display = "none";
+					}
+				}
+				janela.show();
+
+				/*
 				var novoel,temp,n,i,janela;
 				if (!$i("moveLegi")){
 					novoel = document.createElement("div");
@@ -430,17 +468,19 @@ i3GEO.mapa = {
 					temp += '<div id="wlegenda" style="display:block;padding:5px 2px 5px 0px;text-align:left;background-color:white;height:300px;width:300px;overflow:auto" ></div>';
 					novoel.innerHTML = temp;
 					document.body.appendChild(novoel);
-					janela = new YAHOO.widget.Panel("moveLegi", {width:"302px", fixedcenter: true, constraintoviewport: false, underlay:"shadow", close:true, visible:true, draggable:true, modal:false,iframe:true } );
+					janela = new YAHOO.widget.Panel("moveLegi", {width:"302px", fixedcenter: true, constraintoviewport: false, underlay:"none", close:true, visible:true, draggable:true, modal:false,iframe:true } );
 					YAHOO.i3GEO.janela.manager.register(janela);
 					janela.render();
 					YAHOO.util.Event.addListener(janela.close, "click", i3GEO.janela.fecha,janela,{id:"moveLegi"},true);
-					novoel.onmouseover = function(){
-						if($i("moveLegi").style.display === "block")
-						{YAHOO.util.Dom.setStyle("moveLegi", "opacity", 1);}
-					};
-					novoel.onmouseout = function(){
-						YAHOO.util.Dom.setStyle("moveLegi", "opacity", 0.20);
-					};
+					if(i3GEO.Interface.ATUAL !== "googleearth"){
+						novoel.onmouseover = function(){
+							if($i("moveLegi").style.display === "block")
+							{YAHOO.util.Dom.setStyle("moveLegi", "opacity", 1);}
+						};
+						novoel.onmouseout = function(){
+							YAHOO.util.Dom.setStyle("moveLegi", "opacity", 0.20);
+						};
+					}
 				}
 				else{
 					janela = YAHOO.i3GEO.janela.manager.find("moveLegi");
@@ -453,7 +493,10 @@ i3GEO.mapa = {
 						temp[i].style.display = "none";
 					}
 				}
+				janela.cfg.setProperty("zIndex",[4]);
+				janela.iframe.style.zIndex = 4;
 				janela.show();
+				*/
 			};
 			i3GEO.mapa.legendaHTML.obtem(temp);
 		}
