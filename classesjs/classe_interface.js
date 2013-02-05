@@ -963,7 +963,12 @@ i3GEO.Interface = {
 				//o copyright &eacute; colocado no mapa como um elemento html. O LAYER com "name = copyright " s&oacute; &eacute; usado
 				//para persistir no mapfile em fun&ccedil;&atilde;od as opera&ccedil;&otilde;es de impress&atilde;o
 				if(i3geoOL.getLayersByName(camada.name).length === 0 && camada.name.toLowerCase() != "copyright"){
-					urllayer = url+"&cache="+camada.cache+"&layer="+camada.name+"&r="+Math.random();
+					if(camada.cache){
+						urllayer = url+"&cache="+camada.cache+"&layer="+camada.name+"&r="+Math.random();
+					}
+					else{
+						urllayer = url+"&cache=&layer="+camada.name+"&r="+Math.random();
+					}
 					try{
 						temp = camada.type === 0 ? opcoes.gutter = 20 : opcoes.gutter = 0;
 						temp = camada.transitioneffect === "nao" ? opcoes.transitionEffect = "null" : opcoes.transitionEffect = "resize";
@@ -1551,6 +1556,9 @@ i3GEO.Interface = {
 		},
 		criaImageMap: function(nomeLayer,cache){
 			var i3GEOTileO = "",s;
+			if(cache == "undefined" || cache == undefined){
+				cache = "";
+			}
 			s = "i3GEOTileO = new google.maps.ImageMapType({ "+
 					"getTileUrl: function(coord, zoom) {" +
 					"	var url = '" + i3GEO.configura.locaplic +"/classesphp/mapa_googlemaps.php?g_sid=" + i3GEO.configura.sid + "&cache=" + cache +

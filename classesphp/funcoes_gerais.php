@@ -498,7 +498,7 @@ Retorno:
 */
 function substituiCon($map_file,$postgis_mapa)
 {
-	error_reporting(0);
+	error_reporting(E_ALL);
 	if (!empty($postgis_mapa) && (file_exists($map_file)))
 	{
 		if(!@ms_newMapObj($map_file)){return false;}

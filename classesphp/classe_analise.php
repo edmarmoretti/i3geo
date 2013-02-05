@@ -288,7 +288,7 @@ Include:
 				$classe->set("name",$cls[$i]["nomeclasse"]);
 			}
 			$of = $this->mapa->outputformat;
-			$of->set("imagemode",MS_IMAGEMODE_RGB);
+			//$of->set("imagemode",MS_IMAGEMODE_RGB);
 			//
 			//reposiciona o layer
 			//

@@ -194,6 +194,7 @@ string - javascript com os parametros
 */
 	function parametrosTemas()
 	{
+		$temas = array();
 		$existesel = false;
 		$dir = dirname($this->arquivo);
 		//$qy = file_exists($this->qyfile);
