@@ -618,8 +618,7 @@ i3GEO.navega = {
 			if(typeof(console) !== 'undefined'){console.info("i3GEO.navega.autoRedesenho.redesenha()");}
 			clearTimeout(i3GEO.navega.tempoRedesenho);
 			clearTimeout(i3GEO.navega.contaTempoRedesenho);
-			switch(i3GEO.Interface.ATUAL)
-			{
+			switch(i3GEO.Interface.ATUAL){
 				case "openlayers":
 					i3GEO.Interface.openlayers.atualizaMapa();
 					break;

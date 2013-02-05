@@ -1186,7 +1186,7 @@ i3GEO.Interface = {
 					layers[i].mergeNewParams({r:Math.random()});
 					layers[i].url = layers[i].url.replace("&&&&&&&&&&&&&&","");
 					layers[i].url = layers[i].url+"&&";
-					layer.url = layer.url.replace("&cache=sim","&cache=nao");
+					layers[i].url = layers[i].url.replace("&cache=sim","&cache=nao");
 					if(layers[i].visibility === true){
 						layers[i].redraw();
 					}
