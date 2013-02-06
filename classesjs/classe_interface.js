@@ -2353,6 +2353,15 @@ i3GEO.Interface = {
 					{i3GEO.Interface.googleearth.aguarde.visibility = "hidden";}
 				}
 			);
+			/*
+			google.earth.addEventListener(
+				i3GeoMap.getView(),
+				'viewchangeend',
+				function(event){
+					i3GEO.eventos.MOUSECLIQUE = [];
+				}
+			);
+			*/
 		},
 		recalcPar: function(){
 			var bounds;

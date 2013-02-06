@@ -797,12 +797,23 @@ i3GEO.configura = {
 					i3GEO.util.mudaCursor(i3GEO.configura.cursores,temp,i3GEO.Interface.IDMAPA,i3GEO.configura.locaplic);
 				}
 				i3GEO.barraDeBotoes.ativaIcone("identifica");
-				//desativa as outras operacoes de clique, mas apenas se nao for a mesma que ativa o identifica
-				if(i3GEO.eventos.MOUSECLIQUEPERM.toString().search(i3GEO.configura.funcaoTip) >= 0){
-					i3GEO.eventos.MOUSECLIQUEPERM.remove(i3GEO.configura.funcaoTip);
+				if(i3GEO.Interface.ATUAL === "googleearth"){
+					//caso seja um clique para desativar
+					if(i3GEO.eventos.MOUSECLIQUE.toString().search(i3GEO.configura.funcaoIdentifica) >= 0){
+						i3GEO.eventos.MOUSECLIQUE.remove(i3GEO.configura.funcaoIdentifica);
+						return;
+					}
+					//na opcao de identificacao so e permitido um evento
+					i3GEO.eventos.MOUSECLIQUE = [i3GEO.configura.funcaoIdentifica];
 				}
-				if(i3GEO.eventos.MOUSECLIQUEPERM.toString().search(i3GEO.configura.funcaoIdentifica) < 0){
-					i3GEO.eventos.MOUSECLIQUEPERM.push(i3GEO.configura.funcaoIdentifica);
+				else{
+					//desativa as outras operacoes de clique, mas apenas se nao for a mesma que ativa o identifica
+					if(i3GEO.eventos.MOUSECLIQUEPERM.toString().search(i3GEO.configura.funcaoTip) >= 0){
+						i3GEO.eventos.MOUSECLIQUEPERM.remove(i3GEO.configura.funcaoTip);
+					}
+					if(i3GEO.eventos.MOUSECLIQUEPERM.toString().search(i3GEO.configura.funcaoIdentifica) < 0){
+						i3GEO.eventos.MOUSECLIQUEPERM.push(i3GEO.configura.funcaoIdentifica);
+					}
 				}
 			}
 		},
@@ -826,21 +837,24 @@ i3GEO.configura = {
 					i3GEO.util.mudaCursor(i3GEO.configura.cursores,temp,i3GEO.Interface.IDMAPA,i3GEO.configura.locaplic);
 				}
 				i3GEO.barraDeBotoes.ativaIcone("identificaBalao");
-				//desativa as outras operacoes de clique, mas apenas se nao for a mesma que ativa o identifica
-				if(i3GEO.eventos.MOUSECLIQUEPERM.toString().search(i3GEO.configura.funcaoIdentifica) >= 0){
-					i3GEO.eventos.MOUSECLIQUEPERM.remove(i3GEO.configura.funcaoIdentifica);
+				if(i3GEO.Interface.ATUAL === "googleearth"){
+					//caso seja um clique para desativar
+					if(i3GEO.eventos.MOUSECLIQUE.toString().search(i3GEO.configura.funcaoTip) >= 0){
+						i3GEO.eventos.MOUSECLIQUE.remove(i3GEO.configura.funcaoTip);
+						return;
+					}
+					//na opcao de identificacao so e permitido um evento
+					i3GEO.eventos.MOUSECLIQUE = [i3GEO.configura.funcaoTip];
 				}
-				if(i3GEO.eventos.MOUSECLIQUEPERM.toString().search(i3GEO.configura.funcaoTip) < 0){
-					i3GEO.eventos.MOUSECLIQUEPERM.push(i3GEO.configura.funcaoTip);
+				else{
+					//desativa as outras operacoes de clique, mas apenas se nao for a mesma que ativa o identifica
+					if(i3GEO.eventos.MOUSECLIQUEPERM.toString().search(i3GEO.configura.funcaoIdentifica) >= 0){
+						i3GEO.eventos.MOUSECLIQUEPERM.remove(i3GEO.configura.funcaoIdentifica);
+					}
+					if(i3GEO.eventos.MOUSECLIQUEPERM.toString().search(i3GEO.configura.funcaoTip) < 0){
+						i3GEO.eventos.MOUSECLIQUEPERM.push(i3GEO.configura.funcaoTip);
+					}
 				}
-				/*
-				if(i3GEO.eventos.MOUSECLIQUE.toString().search("cliqueIdentifica()") > 0)
-				{i3GEO.eventos.MOUSECLIQUE.remove("cliqueIdentifica()");}
-				if(i3GEO.eventos.MOUSECLIQUE.toString().search("verificaTip()") < 0)
-				{i3GEO.eventos.MOUSECLIQUE.push("verificaTip()");}
-				if(i3GEO.eventos.MOUSEPARADO.toString().search("verificaTip()") < 0)
-				{i3GEO.eventos.MOUSEPARADO.push("verificaTip()");}
-				*/
 			}
 		},
 		{

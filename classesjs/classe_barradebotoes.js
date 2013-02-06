@@ -561,7 +561,10 @@ i3GEO.barraDeBotoes = {
 		if(i3GEO.barraDeBotoes.ATIVA === false){
 			return;
 		}
-		var estilo,temp,ist,cor,ko;
+		var estilo,temp,ist,cor,ko,estiloatual;
+		if($i(icone)){
+			estiloatual = $i(icone).style.backgroundColor;
+		}		
 		this.BOTAOCLICADO = icone;
 		ko = this.LISTABOTOES.length-1;
 		if(this.COMPORTAMENTO === "padrao"){
@@ -649,7 +652,12 @@ i3GEO.barraDeBotoes = {
 				}
 				//else
 				//{estilo.border = "0px solid white";}
-				estilo.backgroundColor = cor;
+				if(estiloatual == cor){
+					estilo.backgroundColor = 'white';
+				}
+				else{
+					estilo.backgroundColor = cor;
+				}
 			}
 		}
 	},

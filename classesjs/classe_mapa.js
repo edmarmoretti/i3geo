@@ -820,21 +820,23 @@ i3GEO.mapa = {
 		*/
 		cliqueIdentificaDefault: function(){
 			if(typeof(console) !== 'undefined'){console.info("i3GEO.mapa.dialogo.cliqueIdentificaDefault()");}
-			//if (g_tipoacao === "identifica"){
-				i3GEO.eventos.MOUSEPARADO.remove("verificaTip()");
-				if(typeof(i3GEOF.identifica) === 'undefined'){
-					//javascript que sera carregado
-					var js = i3GEO.configura.locaplic+"/ferramentas/identifica/index.js";
-					//carrega o script
-					i3GEO.util.scriptTag(js,"i3GEOF.identifica.criaJanelaFlutuante()","i3GEOF.identifica_script");
-				}
-				else{
-					i3GEOF.identifica.x = objposicaocursor.ddx;
-					i3GEOF.identifica.y = objposicaocursor.ddy;
-					i3GEOF.identifica.buscaDadosTema(i3GEO.temaAtivo);
-					return;
-				}
-			//}
+			i3GEO.eventos.MOUSEPARADO.remove("verificaTip()");
+			//na interface googleearth verifica se existe mais eventos no mouseclick
+			if(i3GEO.Interface.ATUAL === "googleearth" && i3GEO.eventos.MOUSECLIQUE.length > 1){
+				return;
+			}
+			if(typeof(i3GEOF.identifica) === 'undefined'){
+				//javascript que sera carregado
+				var js = i3GEO.configura.locaplic+"/ferramentas/identifica/index.js";
+				//carrega o script
+				i3GEO.util.scriptTag(js,"i3GEOF.identifica.criaJanelaFlutuante()","i3GEOF.identifica_script");
+			}
+			else{
+				i3GEOF.identifica.x = objposicaocursor.ddx;
+				i3GEOF.identifica.y = objposicaocursor.ddy;
+				i3GEOF.identifica.buscaDadosTema(i3GEO.temaAtivo);
+				return;
+			}
 		},
 		/*
 		Mostra etiquetas no mapa com informacoes sobre os temas com etiquetas ativas
@@ -843,6 +845,10 @@ i3GEO.mapa = {
 		*/
 		verificaTipDefault: function(){
 			if(typeof(console) !== 'undefined'){console.info("i3GEO.mapa.dialogo.verificaTipDefault()");}
+			//na interface googleearth verifica se existe mais eventos no mouseclick
+			if(i3GEO.Interface.ATUAL === "googleearth" && i3GEO.eventos.MOUSECLIQUE.length > 1){
+				return;
+			}
 			var ntemas,etiquetas,j,retorna;
 			ntemas = i3GEO.arvoreDeCamadas.CAMADAS.length;
 			etiquetas = false;
