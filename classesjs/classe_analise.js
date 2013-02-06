@@ -245,7 +245,7 @@ i3GEO.analise = {
 				if(i3GEO.Interface.ATUAL !== "googleearth"){
 					i3GEO.desenho.criaContainerRichdraw();
 					i3GEO.desenho.richdraw.lineColor = "black";
-					i3GEO.desenho.richdraw.lineWidth = "1px";
+					i3GEO.desenho.richdraw.lineWidth = "2px";
 				}
 				g_tipoacao = "mede";
 			}
@@ -378,7 +378,7 @@ i3GEO.analise = {
 					}
 					if($i("parartextos") && $i("parartextos").checked === true ){
 						if(i3GEO.util.in_array(i3GEO.Interface.ATUAL,["openlayers","googlemaps"])){
-							i3GEO.desenho.aplica("insereTexto","",n,d+" km");
+							i3GEO.desenho.aplica("insereTexto","",n+1,d+" km");
 						}
 						if(i3GEO.Interface.ATUAL === "googleearth")
 						{i3GEO.Interface.googleearth.insereMarca(d+" km",objposicaocursor.ddx,objposicaocursor.ddy,"","divGeometriasTemp");}
@@ -389,8 +389,8 @@ i3GEO.analise = {
 					}
 				}
 				if(i3GEO.util.in_array(i3GEO.Interface.ATUAL,["openlayers","googlemaps"])){
-					i3GEO.util.insereMarca.cria(objposicaocursor.imgx,objposicaocursor.imgy,i3GEO.analise.medeDistancia.paraCalculo,"divGeometriasTemp");
-					i3GEO.desenho.insereCirculo(objposicaocursor.imgx,objposicaocursor.imgy,3);
+					i3GEO.util.insereMarca.cria(objposicaocursor.imgx,objposicaocursor.imgy,i3GEO.analise.medeDistancia.paraCalculo,"divGeometriasTemp","",i3GEO.configura.locaplic+"/imagens/estasel.png",6,6);
+					i3GEO.desenho.insereCirculo(objposicaocursor.imgx,objposicaocursor.imgy,3,"white");
 				}
 			}
 		},

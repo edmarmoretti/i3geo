@@ -221,7 +221,7 @@ i3GEO.desenho = {
 	texto {string} - texto que ser&aacute; inserido no tipo "insereTexto"
 	*/
 	aplica: function(tipo,objeto,n,texto){
-		var dy,dx,w;
+		var dy,dx,w,c;
 		if(i3GEO.desenho.richdraw && $i(i3GEO.Interface.IDCORPO)){
 			//pos = i3GEO.util.pegaPosicaoObjeto($i(i3GEO.Interface.IDCORPO));
 			//
@@ -238,11 +238,18 @@ i3GEO.desenho = {
 				dx = Math.pow(((pontosdistobj.xtela[n])*1) - ((pontosdistobj.xtela[n-1])*1),2);
 				dy = Math.pow(((pontosdistobj.ytela[n])*1) - ((pontosdistobj.ytela[n-1])*1),2);
 				w = Math.sqrt(dx + dy);
-				i3GEO.desenho.insereCirculo(pontosdistobj.ximg[n-1],pontosdistobj.yimg[n-1],w);
+				c = "";
+				if(navn){
+					c = 'rgba(255,255,255,0';
+				}
+				if(chro){
+					c = "";
+				}
+				i3GEO.desenho.insereCirculo(pontosdistobj.ximg[n-1],pontosdistobj.yimg[n-1],w,c);
 			}
 			if(tipo==="insereTexto"){
 				try{
-					i3GEO.desenho.richdraw.renderer.create('text', '', i3GEO.desenho.richdraw.textColor, i3GEO.desenho.richdraw.lineWidth, pontosdistobj.ximg[n-1],pontosdistobj.yimg[n-1],"","",texto);
+					i3GEO.desenho.richdraw.renderer.create('text', '', i3GEO.desenho.richdraw.textColor, 1, pontosdistobj.ximg[n-1],pontosdistobj.yimg[n-1],"","",texto);
 				}
 				catch(men){
 					if(typeof(console) !== 'undefined'){console.error("i3GEO.desenho "+men);}
@@ -260,10 +267,15 @@ i3GEO.desenho = {
 	y {numerico} - posi&ccedil;&atilde;o do ponto em coordenadas de imagem
 
 	w {numerico} - raio do c&iacute;rculo em pixels
+	
+	b {string} - cor do fundo
 	*/
-	insereCirculo: function(x,y,w){
+	insereCirculo: function(x,y,w,b){
+		if(!b){
+			b = "";
+		}
 		try{
-			i3GEO.desenho.richdraw.renderer.create('circ', '', i3GEO.desenho.richdraw.circColor, i3GEO.desenho.richdraw.lineWidth, x,y,w,w);
+			i3GEO.desenho.richdraw.renderer.create('circ', b, i3GEO.desenho.richdraw.circColor, i3GEO.desenho.richdraw.lineWidth, x,y,w,w);
 		}
 		catch(men){
 			if(typeof(console) !== 'undefined'){console.error(men);}

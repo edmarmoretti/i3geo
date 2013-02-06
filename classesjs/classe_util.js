@@ -812,9 +812,19 @@ i3GEO.util = {
 		texto {String} - (apenas para interface Google Earth) nome que sera adicionado junto da marca
 
 		srci {string} - (opcional) endereco da imagem (sera incluido em SRC do tag IMG)
+		
+		w {numeric} - (opcional) largura
+		
+		h {numeric} - (opcional) altura
 		*/
-		cria:function(xi,yi,funcaoOnclick,container,texto,srci){
+		cria:function(xi,yi,funcaoOnclick,container,texto,srci,w,h){
 			if(typeof(console) !== 'undefined'){console.info("i3GEO.util.insereMarca.cria()");}
+			if(!w){
+				w = 5;
+			}
+			if(!h){
+				h = 5;
+			}
 			if(!srci || srci === "")
 			{srci = i3GEO.configura.locaplic+"/imagens/dot2.gif";}
 			if(i3GEO.Interface.ATUAL === "googleearth"){
@@ -846,10 +856,10 @@ i3GEO.util = {
 				i = novoel.style;
 				i.position = "absolute";
 				i.zIndex=2000;
-				i.top=(yi - 2)+"px";
-				i.left=(xi - 2)+"px";
-				i.width="5px";
-				i.height="5px";
+				i.top=(yi - (h/2))+"px";
+				i.left=(xi - (w/2))+"px";
+				i.width= w+"px";
+				i.height= h+"px";
 				novoimg = document.createElement("img");
 				if (funcaoOnclick !== "")
 				{novoimg.onclick = funcaoOnclick;}
@@ -857,8 +867,8 @@ i3GEO.util = {
 				{novoimg.onclick=function(){i3GEO.util.insereMarca.limpa();};}
 				novoimg.src=srci;
 				temp = novoimg.style;
-				temp.width="5px";
-				temp.height="5px";
+				temp.width= w+"px";
+				temp.height= h+"px";
 				temp.zIndex=2000;
 				novoel.appendChild(novoimg);
 				container.appendChild(novoel);
