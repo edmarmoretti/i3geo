@@ -552,7 +552,7 @@ i3GEO.janela = {
 		else if ($i("contemImg"))
 		{pos = YAHOO.util.Dom.getXY($i("contemImg"));}
 		if(!janela){
-			janela = new YAHOO.widget.Panel("i3geoTempoMsg",{width:"220px",fixedcenter:false,underlay:"none",close:false,draggable:false,modal:false,monitorresize:false});
+			janela = new YAHOO.widget.Panel("i3geoTempoMsg",{width:"220px",fixedcenter:false,underlay:"none",close:false,draggable:false,modal:false,monitorresize:false,iframe:true});
 			janela.render(document.body);
 			YAHOO.i3GEO.janela.managerAguarde.register(janela);
 		}
@@ -560,7 +560,12 @@ i3GEO.janela = {
 		altura = 70;
 		janela.body.style.padding="5px";
 		janela.body.style.backgroundColor="yellow";
-		janela.body.style.height="0px";
+		if(i3GEO.Interface.ATUAL != "googleearth"){
+			janela.body.style.height="0px";
+		}
+		else{
+			janela.body.style.height= altura+"px";
+		}
 		janela.body.style.overflow = "hidden";
 		janela.body.onclick = function(){
 			var janela = YAHOO.i3GEO.janela.managerAguarde.find("i3geoTempoMsg");
@@ -574,17 +579,18 @@ i3GEO.janela = {
 		else
 		{janela.moveTo(pos[0],pos[1]);}
 		janela.show();
-		attributes = {
-			height: { to: altura }
-		};
-		anim = new YAHOO.util.Anim(janela.body, attributes, .5, YAHOO.util.Easing.easeNone);
-		anim.onComplete.subscribe(function(){
-			janela.body.style.overflow = "auto";
-			janela.body.style.display = "block";
-			$i("i3geoTempoMsg_c").style.zIndex = 100000;
-		});
-		anim.animate();
-
+		if(i3GEO.Interface.ATUAL != "googleearth"){
+			attributes = {
+				height: { to: altura }
+			};
+			anim = new YAHOO.util.Anim(janela.body, attributes, .5, YAHOO.util.Easing.easeNone);
+			anim.onComplete.subscribe(function(){
+				janela.body.style.overflow = "auto";
+				janela.body.style.display = "block";
+				$i("i3geoTempoMsg_c").style.zIndex = 100000;
+			});
+			anim.animate();
+		}
 		//YAHOO.util.Dom.setStyle(temp,"opacity",i3GEO.janela.OPACIDADEAGUARDE / 100);
 		if(!tempo){
 			tempo = 4000;
@@ -593,16 +599,21 @@ i3GEO.janela = {
 			function(){
 				var attributes,anim,
 					janela = YAHOO.i3GEO.janela.managerAguarde.find("i3geoTempoMsg");
-				if(janela){
-					janela.body.style.overflow = "hidden";
-					attributes = {
-						height: { to: 0 }
-					};
-					anim = new YAHOO.util.Anim(janela.body, attributes, .5, YAHOO.util.Easing.easeNone);
-					anim.onComplete.subscribe(function(){
-						janela.destroy();
-					});
-					anim.animate();
+				if(i3GEO.Interface.ATUAL != "googleearth"){
+					if(janela){
+						janela.body.style.overflow = "hidden";
+						attributes = {
+							height: { to: 0 }
+						};
+						anim = new YAHOO.util.Anim(janela.body, attributes, .5, YAHOO.util.Easing.easeNone);
+						anim.onComplete.subscribe(function(){
+							janela.destroy();
+						});
+						anim.animate();
+					}
+				}
+				else{
+					janela.destroy();
 				}
 			},
 			tempo
