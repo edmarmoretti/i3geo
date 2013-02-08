@@ -225,13 +225,13 @@ if (strtoupper(substr(PHP_OS, 0, 3) == 'WIN'))
 	Variable: i3geomaster
 
 	Usu&aacute;rio e senha que podem realizar opera&ccedil;&otilde;es de administra&ccedil;&atilde;o inicial do i3Geo, como a cria&ccedil;&atilde;o do banco de dados de administra&ccedil;&atilde;o ou opera&ccedil;&otilde;es cr&iacute;ticas do sistema
-	
+
 	Tipo:
 	{array}
 
 	*/
 	$i3geomaster = array(
-			array("usuario"=>"admin", "senha"=>"admin")
+			array("usuario"=>"admin", "senha"=>"adminx")
 	);
 	/*
 	Variable: dir_tmp
@@ -431,7 +431,7 @@ if (strtoupper(substr(PHP_OS, 0, 3) == 'WIN'))
 	A escolha depende do sistema operacional e da vers&atilde;o do Mapserver.
 
 	Vc pode usar essa vari&aacute;vel para customizar a inicializa&ccedil;&atilde;o do mapa.
-	
+
 	Tipo:
 	{string}
 	*/
@@ -448,7 +448,7 @@ if (strtoupper(substr(PHP_OS, 0, 3) == 'WIN'))
 	Exemplo
 
 	$cachedir = 'c:/temp/cache';
-	
+
 	Tipo:
 	{string}
 	*/
@@ -466,7 +466,7 @@ else //se for linux
 	}
 	//TODO v47 alterar a senha para admin
 	$i3geomaster = array(
-				array("usuario"=>"admin", "senha"=>"admin")
+				array("usuario"=>"admin", "senha"=>"adminx")
 			);
 
 	$navegadoresLocais = array(
