@@ -812,9 +812,9 @@ i3GEO.util = {
 		texto {String} - (apenas para interface Google Earth) nome que sera adicionado junto da marca
 
 		srci {string} - (opcional) endereco da imagem (sera incluido em SRC do tag IMG)
-		
+
 		w {numeric} - (opcional) largura
-		
+
 		h {numeric} - (opcional) altura
 		*/
 		cria:function(xi,yi,funcaoOnclick,container,texto,srci,w,h){
@@ -2642,6 +2642,79 @@ i3GEO.util = {
 		  		argument: { foo:"foo", bar:"bar" }
 			};
 		YAHOO.util.Connect.asyncRequest("GET", sUrl, callback);
+	},
+	/*
+	Verifica se a função html de armazenamento local esta disponivel no navegador
+	*/
+	verifica_html5_storage: function(){
+		if(typeof(Storage)!=="undefined"){
+			return true;
+		}
+		else{
+			return false;
+		}
+	},
+	/*
+	Function: pegaDadosLocal
+
+	Obtem um valor armazenado localmente
+
+	Parametro:
+
+	item {string} - key a ser obtido
+
+	Return: array
+	*/
+	pegaDadosLocal: function(item){
+		if(i3GEO.util.verifica_html5_storage() && localStorage[item]){
+			return localStorage[item].split("$");
+		}
+		else{
+			return [];
+		}
+	},
+	/*
+	Function: limpaDadosLocal
+
+	Limpa os dados locais
+
+	Parametro:
+
+	item {string} - key a ser limpo
+	*/
+	limpaDadosLocal: function(item){
+		if(i3GEO.util.verifica_html5_storage() && localStorage[item]){
+			localStorage[item] = undefined;
+		}
+	},
+	/*
+	Function: gravaDadosLocal
+
+	Grava um valor localmente
+
+	Parametro:
+
+	item {string} - key a ser gravado
+
+	valor {string} - valor a ser gravado
+
+	*/
+	gravaDadosLocal: function(item,valor){
+		if(i3GEO.util.verifica_html5_storage()){
+			var itens = i3GEO.util.pegaDadosLocal(item);
+			if(itens){
+				itens.remove(valor);
+				itens.push(valor);
+				localStorage[item] = itens.join("$");
+			}
+			else{
+				localStorage[item] = valor;
+			}
+			return true;
+		}
+		else{
+			return false;
+		}
 	}
 };
 //

@@ -77,109 +77,7 @@ a {
 		}
 		?>
 		<div id="bandeiras"></div>
-			<a target=_blank href="../testainstal.php" class="r"><table >
-				<tr>
-					<td><img src="../imagens/oxygen/22x22/application-vnd.scribus.png" /><br>
-						<script>document.write($trad(2,g_traducao_init));</script></a></td>
-				</tr>
-			</table> </a>
-			<a target=_blank href="../admin" class="r"><table >
-				<tr>
-					<td><img src="../imagens/oxygen/22x22/preferences-system.png" /><br>
-						<script>document.write($trad(3,g_traducao_init));</script></a></td>
-				</tr>
-			</table> </a>
-			<a target=_blank href="../interface/openlayers.htm" class="r" style="box-shadow: 0 8px 10px 0 orange;"><table>
-				<tr>
-					<td><img src="openlayers.png" /><br> <script>document.write($trad(4,g_traducao_init));</script></a>
-					</td>
-				</tr>
-			</table> </a>
-			<a target=_blank href="../interface/openlayersdebug.htm" class="r" style="box-shadow: 0 8px 10px 0 orange;"><table>
-				<tr>
-					<td><img src="openlayersdebug.png" /><br> <script>document.write($trad(5,g_traducao_init));</script></a>
-					</td>
-				</tr>
-			</table> </a>
-			<a target=_blank href="../mashups" class="r" style="box-shadow: 0 8px 10px 0 orange;"><table >
-				<tr>
-					<td><img src="mashup.png" /><br> <script>document.write($trad(18,g_traducao_init));</script></a>
-					</td>
-				</tr>
-			</table> </a>
-			<a target=_blank href="../interface/googlemaps.phtml" class="r" style="box-shadow: 0 8px 10px 0 orange;"><table>
-				<tr>
-					<td><img src="googlemaps.png" /><br> <script>document.write($trad(6,g_traducao_init));</script></a>
-					</td>
-				</tr>
-			</table> </a>
-			<a target=_blank href="../interface/googleearth.phtml" class="r" style="box-shadow: 0 8px 10px 0 orange;"><table>
-				<tr>
-					<td><img src="googleearth.png" /><br> <script>document.write($trad(7,g_traducao_init));</script></a>
-					</td>
-				</tr>
-			</table> </a>
-			<a target=_blank href="../interface/carto_ol.htm" class="r" style="box-shadow: 0 8px 10px 0 orange;"><table >
-				<tr>
-					<td><img src="cartogramas.png" /><br> <script>document.write($trad(8,g_traducao_init));</script></a>
-					</td>
-				</tr>
-			</table> </a>
-			<a target=_blank href="../ferramentas/metaestat/editorlimites.php" class="r"><table>
-				<tr>
-					<td><img src="editor.png" /><br> <script>document.write($trad(9,g_traducao_init));</script></a>
-					</td>
-				</tr>
-			</table> </a>
-			<a target=_blank href="../datadownload.htm" class="r"><table >
-				<tr>
-					<td><img src="../imagens/oxygen/22x22/download.png" /><br> <script>document.write($trad(10,g_traducao_init));</script></a>
-					</td>
-				</tr>
-			</table> </a>
-			<a target=_blank href="../ogc.htm" class="r"><table >
-				<tr>
-					<td><img src="../imagens/oxygen/22x22/internet-web-browser.png" /><br>
-						<script>document.write($trad(11,g_traducao_init));</script></a></td>
-				</tr>
-			</table> </a>
-			<a target=_blank href="../kml.php" class="r"><table >
-				<tr>
-					<td><img src="../imagens/oxygen/22x22/internet-web-browser.png" /><br>
-						<script>document.write($trad(12,g_traducao_init));</script></a></td>
-				</tr>
-			</table> </a>
-			<a target=_blank href="../geradordelinks.htm" class="r"><table >
-				<tr>
-					<td><img
-						src="../imagens/oxygen/22x22/preferences-web-browser-shortcuts.png" /><br>
-						<script>document.write($trad(13,g_traducao_init));</script></a></td>
-				</tr>
-			</table> </a>
-			<a target=_blank href="../exemplos" class="r"><table >
-				<tr>
-					<td><img src="../imagens/oxygen/22x22/help-contents.png" /><br> <script>document.write($trad(14,g_traducao_init));</script></a>
-					</td>
-				</tr>
-			</table> </a>
-			<a target=_blank href="../documentacao/manual-i3geo-4_7-pt.pdf" class="r"><table>
-				<tr>
-					<td><img src="../imagens/oxygen/22x22/help-contents.png" /><br> <script>document.write($trad(15,g_traducao_init));</script></a>
-					</td>
-				</tr>
-			</table> </a>
-			<a target=_blank href="../guia_de_migracao.txt" class="r"><table >
-				<tr>
-					<td><img src="../imagens/oxygen/22x22/help-contents.png" /><br> <script>document.write($trad(17,g_traducao_init));</script></a>
-					</td>
-				</tr>
-			</table> </a>
-			<a target=_blank href="http://svn.softwarepublico.gov.br/trac/i3geo" class="r"><table>
-				<tr>
-					<td><img src="../imagens/oxygen/22x22/kbugbuster.png" /><br> <script>document.write($trad(16,g_traducao_init));</script></a>
-					</td>
-				</tr>
-			</table> </a>
+		<div id="botoes" ></div>
 	</div>
 	<div style="float:left" >
 			<a href="#" class="r" style="width: 230px; height: 380px"><table>
@@ -203,10 +101,97 @@ a {
 	</div>
 </body>
 <script>
+botoesIni = [];
+botoesIni.push({
+	"img":"../imagens/oxygen/22x22/application-vnd.scribus.png",
+	"href":"../testainstal.php",
+	"titulo":$trad(2,g_traducao_init)
+	},{
+	"img":"../imagens/oxygen/22x22/preferences-system.png",
+	"href":"../admin",
+	"titulo":$trad(3,g_traducao_init)
+	},{
+	"img":"openlayers.png",
+	"href":"../interface/openlayers.htm",
+	"titulo":$trad(4,g_traducao_init)
+	},{
+	"img":"openlayersdebug.png",
+	"href":"../interface/openlayersdebug.htm",
+	"titulo":$trad(5,g_traducao_init)
+	},{
+	"img":"mashup.png",
+	"href":"../mashups",
+	"titulo":$trad(18,g_traducao_init)
+	},{
+	"img":"googlemaps.png",
+	"href":"../interface/googlemaps.phtml",
+	"titulo":$trad(6,g_traducao_init)
+	},{
+	"img":"googleearth.png",
+	"href":"../interface/googleearth.phtml",
+	"titulo":$trad(7,g_traducao_init)
+	},{
+	"img":"cartogramas.png",
+	"href":"../interface/carto_ol.htm",
+	"titulo":$trad(8,g_traducao_init)
+	},{
+	"img":"editor.png",
+	"href":"../ferramentas/metaestat/editorlimites.php",
+	"titulo":$trad(9,g_traducao_init)
+	},{
+	"img":"../imagens/oxygen/22x22/download.png",
+	"href":"../datadownload.htm",
+	"titulo":$trad(10,g_traducao_init)
+	},{
+	"img":"../imagens/oxygen/22x22/internet-web-browser.png",
+	"href":"../ogc.htm",
+	"titulo":$trad(11,g_traducao_init)
+	},{
+	"img":"../imagens/oxygen/22x22/internet-web-browser.png",
+	"href":"../kml.php",
+	"titulo":$trad(12,g_traducao_init)
+	},{
+	"img":"../imagens/oxygen/22x22/preferences-web-browser-shortcuts.png",
+	"href":"../geradordelinks.htm",
+	"titulo":$trad(13,g_traducao_init)
+	},{
+	"img":"../imagens/oxygen/22x22/help-contents.png",
+	"href":"../exemplos",
+	"titulo":$trad(14,g_traducao_init)
+	},{
+	"img":"../imagens/oxygen/22x22/help-contents.png",
+	"href":"../documentacao/manual-i3geo-4_7-pt.pdf",
+	"titulo":$trad(15,g_traducao_init)
+	},{
+	"img":"../imagens/oxygen/22x22/help-contents.png",
+	"href":"../guia_de_migracao.txt",
+	"titulo":$trad(17,g_traducao_init)
+	},{
+	"img":"../imagens/oxygen/22x22/kbugbuster.png",
+	"href":"http://svn.softwarepublico.gov.br/trac/i3geo",
+	"titulo":$trad(16,g_traducao_init)
+	}
+);
+mostraBotoes();
+
 i3GEO.configura.locaplic = "..";
 i3GEO.idioma.IDSELETOR = "bandeiras";
 i3GEO.idioma.mostraSeletor();
 i3GEO.barraDeBotoes.ATIVA = false;
-$i("conteudo").style.height = i3GEO.util.getScrollHeight() + "px";
+function mostraBotoes(){
+	var ins = [],i,n = botoesIni.length,l,local = [],texto;
+	for(i=0;i<n;i++){
+		if(botoesIni[i].href === ""){
+			texto = '<span class="r"><table ><tr><td><img src="'+botoesIni[i].img+'" /><br>'+botoesIni[i].titulo+'</a></td></tr></table></span>'
+		}
+		else{
+			texto = '<a target=_blank href="'+botoesIni[i].href+'" class="r"><table ><tr><td><img src="'+botoesIni[i].img+'" /><br>'+botoesIni[i].titulo+'</a></td></tr></table></a>';
+		}
+		ins.push(texto);
+	}
+	$i("botoes").innerHTML = ins.join("");
+	$i("conteudo").style.height = i3GEO.util.getScrollHeight() + "px";
+}
+
 </script>
 </html>
