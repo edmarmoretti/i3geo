@@ -215,7 +215,7 @@ if(!empty($restauramapa)){
 //verifica se o usuario trocou a senha do master
 //TODO ao publicar v47 final incluir observacao sobre esse bloqueio no site do SPB
 if($_SERVER['HTTP_HOST'] != "localhost" && ($i3geomaster[0]["usuario"] == "admin" && $i3geomaster[0]["senha"] == "admin") ){
-	echo "<p style='font-size:14px;color:red'>Bloqueado. ATEN&Ccedil;&Atilde;O!!! Essa instala&ccedil;&atilde;o est&aacute; vulner&aacute;vel: edite o arquivo i3geo/ms_configura.php e altere o login e senha da vari&aacute;vel i3geomaster";
+	echo json_encode(array("bloqueado"=>"Bloqueado. ATENCAO!!! Acesso bloqueado: edite o arquivo i3geo/ms_configura.php e altere o login e senha da variavel i3geomaster"));
 	exit;
 }
 /*

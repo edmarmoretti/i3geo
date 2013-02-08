@@ -308,6 +308,11 @@ var i3GEO = {
 		montaMapa = function(retorno){
 			try{
 				var temp,abreJM;
+				//verifica se existe bloqueio em funcao da senha no ms_configura.php
+				if(retorno.bloqueado){
+					alert(retorno.bloqueado);
+					exit;
+				}
 				if(retorno === ""){
 					alert("Ocorreu um erro no mapa - i3GEO.inicia.montaMapa");
 					retorno = {data:{erro: "erro"}};
@@ -403,6 +408,11 @@ var i3GEO = {
 		//
 		if(i3GEO.configura.sid===""){
 			mashup = function (retorno){
+				//verifica se existe bloqueio em funcao da senha no ms_configura.php
+				if(retorno.bloqueado){
+					alert(retorno.bloqueado);
+					exit;
+				}
 				i3GEO.configura.sid = retorno.data;
 				i3GEO.inicia(retorno);
 			};
