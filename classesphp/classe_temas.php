@@ -969,7 +969,6 @@ tema - código do tema
 					{
 							foreach($sgrupo->TEMA as $t)
 							{
-
 								$link = ixml($t,"TLINK");
 								$tid = ixml($t,"TID");
 								if($tid == $tema)

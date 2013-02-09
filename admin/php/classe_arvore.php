@@ -540,14 +540,39 @@ class Arvore
 	function pegaTema($id_tema)
 	{
 		$q =  $this->execSQL($this->sql_temas." and id_tema = '$id_tema' ");
-		if($q)
-		{
+		if($q){
 			return $q;
 		}
 		else{
 			//caso de banco de dados antigo
 			$sql = "select kmz_tema,'0' as nacessos,id_tema,kml_tema,ogc_tema,download_tema,tags_tema,tipoa_tema,link_tema,desc_tema,nome_tema,codigo_tema  from ".$this->esquemaadmin."i3geoadmin_temas	";
 			$q = $this->execSQL($sql." where id_tema = '$id_tema' ");
+			return $q;
+		}
+	}
+	/*
+	 Function: pegaTemaPorCodigo
+
+	Retorna os dados de um tema buscando por codigo
+
+	Parametros:
+
+	codigo_tema {string}
+
+	Return:
+
+	{array}
+	*/
+	function pegaTemaPorCodigo($codigo_tema)
+	{
+		$q =  $this->execSQL($this->sql_temas." and codigo_tema = '$codigo_tema' ");
+		if($q){
+			return $q;
+		}
+		else{
+			//caso de banco de dados antigo
+			$sql = "select kmz_tema,'0' as nacessos,id_tema,kml_tema,ogc_tema,download_tema,tags_tema,tipoa_tema,link_tema,desc_tema,nome_tema,codigo_tema  from ".$this->esquemaadmin."i3geoadmin_temas	";
+			$q = $this->execSQL($sql." where codigo_tema = '$codigo_tema' ");
 			return $q;
 		}
 	}

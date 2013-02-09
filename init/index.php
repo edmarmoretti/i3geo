@@ -1,5 +1,4 @@
 ﻿<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/strict.dtd">
-
 <html>
 <head>
 <meta name="url" content="http://www.softwarepublico.gov.br" />
@@ -16,15 +15,17 @@ include("../ms_configura.php");
 ?>
 <script type="text/javascript" src="../classesjs/i3geo.js"></script>
 <script type="text/javascript" src="dicionario.js"></script>
+<link rel="stylesheet" type="text/css" href="../admin/html/admin.css">
+
 <style>
 body {
-	margin: 0.2cm;
-	padding-top: 12px;
+	padding-top: 0px;
 	COLOR: #2F4632;
 	text-align: center;
 	font-size: 0.6cm;
 	font-family: Verdana, Arial, Helvetica, sans-serif;
-	background: rgb(250, 250, 250);
+	background-color: white;
+	background-image: url(../imagens/i3geo1bw.jpg);
 }
 
 .r {
@@ -33,7 +34,7 @@ body {
 	box-shadow: rgb(136, 136, 136) 0 8px 10px 0;
 	float: left;
 	height: 150px;
-	margin: 10px 25px 10px auto;
+	margin: 0px 25px 20px auto;
 	padding: 5px;
 	width: 200px;
 	background: white;
@@ -42,6 +43,7 @@ body {
 	position: relative;
 	display:block;
 	text-align:center;
+	z-index: 2;
 }
 table{
 	width: 100%;
@@ -57,10 +59,12 @@ h1 {
 	text-align: left;
 	margin: 25px;
 }
-
 #bandeiras {
 	width: 80px;
 	text-align: left;
+	position:absolute;
+	left: 0.2cm;
+	z-index:10;
 }
 a {
 	margin: 0px auto;
@@ -68,15 +72,19 @@ a {
 }
 </style>
 </head>
-<body style="background-color: white;">
-	<div id="conteudo" style="background-color: white; background-image: url(../imagens/i3geo1bw.jpg);">
-	<div>
+<body class=" yui-skin-sam " >
+
+<center>
+<div id="bandeiras"></div>
+<div class="bordaSuperior" style="z-index:1;">&nbsp;</div>
+
+<div id="conteudo" style="position:relative;top:-10px;margin: 0 0 0.2cm 0.2cm;">
+	<div style="margin-top:0px;">
 		<?php
 		if($i3geomaster[0]["usuario"] == "admin" && $i3geomaster[0]["senha"] == "admin" ){
 			echo "<p style='font-size:14px;color:red'><script>document.write($"."trad(19,g_traducao_init));</script>";
 		}
 		?>
-		<div id="bandeiras"></div>
 		<div id="botoes" ></div>
 	</div>
 	<div style="float:left" >
@@ -98,7 +106,7 @@ a {
 				</tr>
 			</table> </a>
 	</div>
-	</div>
+</div>
 </body>
 <script>
 botoesIni = [];
