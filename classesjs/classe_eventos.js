@@ -220,7 +220,6 @@ i3GEO.eventos = {
 	Executa as fun&ccedil;&otilde;es armazenadas em MOUSECLIQUE.
 	*/
 	mousecliqueMapa: function(){
-		alert("oi");
 		i3GEO.eventos.executaEventos(this.MOUSECLIQUE);
 	},
 	/*
