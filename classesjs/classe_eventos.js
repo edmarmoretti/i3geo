@@ -505,6 +505,7 @@ i3GEO.eventos = {
 			{i3GEO.eventos.mousedownMapa();}
 		};
 		docMapa.onclick = function(exy){
+			
 			//if(typeof(console) !== 'undefined'){console.error("click");}
 			if(!i3GEO.eventos.botaoDireita(exy))
 			{i3GEO.eventos.mousecliqueMapa();}
@@ -545,6 +546,7 @@ i3GEO.eventos = {
 	ixg,ixm,ixs,iyg,iym,iys
 	*/
 	cliqueCapturaPt: function(ixg,ixm,ixs,iyg,iym,iys){
+		alert("oi")
 		if(typeof(console) !== 'undefined'){console.info("i3GEO.eventos.cliqueCapturaPt()");}
 		var x,y,doc = document;
 		if(arguments.length === 0){
