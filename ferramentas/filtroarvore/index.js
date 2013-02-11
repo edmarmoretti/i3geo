@@ -158,9 +158,13 @@ i3GEOF.filtroarvore = {
 		var operacao = objeto.value,
 			lista = i3GEO.arvoreDeCamadas.listaLigadosDesligados();
 		if(operacao === "excluir"){
-			if(window.confirm("Remove todos do mapa?")){
-				i3GEO.php.excluitema(i3GEO.atualiza,lista[2]);
-			}
+			i3GEO.janela.confirma(
+				"Remove todos do mapa?",
+				300,
+				$trad("x14"),
+				$trad("x15"),
+				function(){i3GEO.php.excluitema(i3GEO.atualiza,lista[2]);}
+			);
 		}
 		objeto.value = "";
 	}

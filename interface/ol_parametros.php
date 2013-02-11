@@ -225,6 +225,10 @@ i3GEO.eventos.MOUSECLIQUEPERM = [i3GEO.configura.funcaoTip];
 //
 
 i3GEO.inicia();
+//
+//substitui a janela de alerta normal do navegador por uma janela estilizada. Pode ser comentado sem problemas. No Safari apresentou problemas.
+//
+i3GEO.janela.ativaAlerta();
 
 </script>
 </body>

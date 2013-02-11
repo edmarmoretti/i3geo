@@ -706,11 +706,11 @@ i3GEO.configura = {
 			dica:$trad("d3"),
 			titulo:$trad("d3t"),
 			funcaoonclick:function(){
-				if(i3GEO.Interface.TABLET === false){
-					i3GEO.janela.tempoMsg($trad("x69"));
+				if(i3GEO.util.detectaTablet() || i3GEO.util.detectaMobile()){
+					i3GEO.janela.tempoMsg($trad("x70"));
 				}
 				else{
-					i3GEO.janela.tempoMsg($trad("x70"));
+					i3GEO.janela.tempoMsg($trad("x69"));
 				}
 				if(i3GEO.Interface.ATUAL === "googlemaps"){
 					//alert("Pressione a tecla CTRL junto com o bot&atilde;o esquerdo do mouse");

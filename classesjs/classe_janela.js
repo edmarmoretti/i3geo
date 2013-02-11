@@ -628,31 +628,115 @@ i3GEO.janela = {
 	texto {String} - texto da mensagem
 	*/
 	ativaAlerta: function(){
-		YAHOO.namespace("i3GEO.janela.dialogInfo");
-		YAHOO.i3GEO.janela.dialogInfo = new YAHOO.widget.SimpleDialog("simpledialog1",
-		{
-			width: "300px",
-			fixedcenter: true,
-			visible: false,
-			draggable: false,
-			zIndex: 100000,
-			textAlign: "left",
-			close: true,
-			modal: true,
-			effect:{effect:YAHOO.widget.ContainerEffect.FADE,duration:0.25},
-			constraintoviewport: true,
-			buttons: [ { text:"fecha", handler: function(){this.hide();}, isDefault:true }],
-			icon: YAHOO.widget.SimpleDialog.ICON_WARN,
-			text: ""
-		});
-		//YAHOO.i3GEO.janela.dialogInfo.cfg.setProperty("icon",YAHOO.widget.SimpleDialog.ICON_WARN);
-		YAHOO.i3GEO.janela.manager.register(YAHOO.i3GEO.janela.dialogInfo);
-		YAHOO.i3GEO.janela.dialogInfo.setHeader("Alerta");
-		YAHOO.i3GEO.janela.dialogInfo.render(document.body);
 		window.alert = function(texto){
-			YAHOO.i3GEO.janela.dialogInfo.cfg.setProperty("text",texto);
-			YAHOO.i3GEO.janela.dialogInfo.show();
+			var textoI = "",
+				janela = YAHOO.i3GEO.janela.managerAguarde.find("alerta");
+			if(!janela){
+				janela = new YAHOO.widget.SimpleDialog("alerta",{
+					width: "300px",
+					fixedcenter: true,
+					visible: false,
+					draggable: false,
+					zIndex: 100000,
+					textAlign: "left",
+					close: true,
+					modal: false,
+					effect:{effect:YAHOO.widget.ContainerEffect.FADE,duration:0.25},
+					constraintoviewport: true,
+					buttons: [ { text:$trad("x74"), handler: function(){this.destroy();}, isDefault:true }],
+					icon: YAHOO.widget.SimpleDialog.ICON_WARN,
+					text: ""
+				});
+				//YAHOO.i3GEO.janela.dialogInfo.cfg.setProperty("icon",YAHOO.widget.SimpleDialog.ICON_WARN);
+				YAHOO.i3GEO.janela.managerAguarde.register(janela);
+				janela.setHeader(" ");
+				janela.render(document.body);
+			}
+			var textoI = janela.cfg.getProperty("text");
+			if(textoI != ""){
+				textoI += "<br>";
+			}
+			texto = textoI + texto;
+			janela.cfg.setProperty("text",texto);
+			janela.show();
 		};
+	},
+	/*
+	Janela de confirmacao
+
+	Parametros:
+
+	pergunta {string} - texto da pegunta
+	
+	w {numeric} - largura da janela
+	
+	resposta1 {string} - (opcional) texto do botao 1
+	
+	resposta2 {string} - (opcional) texto do botao 2
+	
+	funcao1  {function} - (opcional) funcao do botao 1
+	
+	funcao2 {function} - (opcional) funcao do botao 2
+	*/
+	confirma: function(pergunta,w,resposta1,resposta2,funcao1,funcao2){
+		var f1,f2,janela = YAHOO.i3GEO.janela.managerAguarde.find("confirma");
+		if(!w || w == ""){
+			w = 300;
+		}
+		if(!funcao1 || funcao1 == ""){
+			f1 = function(){
+				YAHOO.i3GEO.janela.managerAguarde.find("confirma").destroy();
+				return true;
+			}
+		}
+		else{
+			f1 = function(){
+				YAHOO.i3GEO.janela.managerAguarde.find("confirma").destroy();
+				funcao1.call();
+			}		
+		}
+		if(!funcao2 || funcao2 == ""){
+			f2 = function(){
+				YAHOO.i3GEO.janela.managerAguarde.find("confirma").destroy();
+				return false;
+			}
+		}
+		else{
+			f2 = function(){
+				YAHOO.i3GEO.janela.managerAguarde.find("confirma").destroy();
+				funcao2.call();
+			}		
+		}
+		if(!resposta1 || resposta1 == ""){
+			resposta1 = $trad("x58");
+		}
+		if(!resposta2 || resposta2 == ""){
+			resposta2 = $trad("x75");
+		}
+		if(!janela){
+			janela = new YAHOO.widget.SimpleDialog("confirma",{
+				width: w+"px",
+				fixedcenter: true,
+				visible: false,
+				draggable: false,
+				zIndex: 100000,
+				textAlign: "left",
+				close: false,
+				modal: false,
+				effect:{effect:YAHOO.widget.ContainerEffect.FADE,duration:0.25},
+				constraintoviewport: true,
+				buttons: [
+					{ text: resposta1, handler:f1 },
+					{ text: resposta2,  handler:f2 } 
+				],
+				icon: YAHOO.widget.SimpleDialog.ICON_HELP,
+				text: pergunta
+			});
+			YAHOO.i3GEO.janela.managerAguarde.register(janela);
+			janela.setHeader(" ");
+			janela.render(document.body);
+			janela.show();
+		}
 	},
 	/*
 	Function: mensagemSimples
@@ -669,8 +753,7 @@ i3GEO.janela = {
 			janela = YAHOO.i3GEO.janela.manager.find("mensagemSimples1");
 		}
 		else{
-			janela = new YAHOO.widget.SimpleDialog("mensagemSimples1",
-			{
+			janela = new YAHOO.widget.SimpleDialog("mensagemSimples1",{
 				width: "300px",
 				fixedcenter: true,
 				visible: true,

@@ -72,9 +72,9 @@ i3GEO.Interface = {
 	{string}
 
 	Default:
-	{openlayers_t.htm}
+	{""}
 	*/
-	ALTTABLET: "openlayers_t.htm",
+	ALTTABLET: "",
 	/*
 	Formato de gera&ccedil;&atilde;o da imagem.
 

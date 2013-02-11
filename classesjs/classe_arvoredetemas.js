@@ -1739,7 +1739,8 @@ i3GEO.arvoreDeTemas = {
 	*/
 	adicionaTemas: function(tsl){
 		if(typeof(console) !== 'undefined'){console.info("i3GEO.arvoreDeTemas.adicionaTemas()");}
-		var temp,
+		var exec,
+			temp,
 			tempAdiciona = function(retorno){
 				i3GEO.atualiza();
 				//
@@ -1770,40 +1771,50 @@ i3GEO.arvoreDeTemas = {
 		//
 		if(arguments.length !== 1)
 		{tsl = i3GEO.arvoreDeTemas.listaTemasAtivos();}
-		//
-		//se forem encontrados temas ativos na arvore de menus, o mapa e redesenhado com a adicao de novos temas
-		//
-		//verifica se o tema ja existe no mapa
-		//
-		if(i3GEO.arvoreDeCamadas.pegaTema(tsl[0]) !== ""){
-			temp = window.confirm("O tema existe no mapa. Adiciona novamente?");
-			if(!temp){return;}
-		}
 		if(tsl.length > 0){
-			//verifica se o tema esta vinculado ao sistema de metadados estatisticos
-			if(i3GEO.arvoreDeTemas.ARVORE){
-				temp = i3GEO.arvoreDeTemas.ARVORE.getNodeByProperty("idtema",tsl[0]);
-				if(temp && temp.data.tipoa_tema === "META"){
-					//obtem os parametros do tema
-					temp = function(retorno){
-						var id = retorno.data[tsl[0]]["METAESTAT_ID_MEDIDA_VARIAVEL"];
-						i3GEO.util.dialogoFerramenta(
-							"i3GEO.mapa.dialogo.metaestat()",
-							"metaestat",
-							"metaestat",
-							"index.js",
-							"i3GEOF.metaestat.inicia('flutuanteSimples','',"+id+")"
-						);
+			exec = function(tsl){
+				//verifica se o tema esta vinculado ao sistema de metadados estatisticos
+				if(i3GEO.arvoreDeTemas.ARVORE){
+					temp = i3GEO.arvoreDeTemas.ARVORE.getNodeByProperty("idtema",tsl[0]);
+					if(temp && temp.data.tipoa_tema === "META"){
+						//obtem os parametros do tema
+						temp = function(retorno){
+							var id = retorno.data[tsl[0]]["METAESTAT_ID_MEDIDA_VARIAVEL"];
+							i3GEO.util.dialogoFerramenta(
+								"i3GEO.mapa.dialogo.metaestat()",
+								"metaestat",
+								"metaestat",
+								"index.js",
+								"i3GEOF.metaestat.inicia('flutuanteSimples','',"+id+")"
+							);
 
-					};
-					i3GEO.php.pegaMetaData(temp,tsl[0]);
+						};
+						i3GEO.php.pegaMetaData(temp,tsl[0]);
+					}
+					else{
+						i3GEO.php.adtema(tempAdiciona,tsl.toString());
+					}
 				}
 				else{
 					i3GEO.php.adtema(tempAdiciona,tsl.toString());
 				}
+			};
+			//
+			//se forem encontrados temas ativos na arvore de menus, o mapa e redesenhado com a adicao de novos temas
+			//
+			//verifica se o tema ja existe no mapa
+			//
+			if(i3GEO.arvoreDeCamadas.pegaTema(tsl[0]) !== ""){
+				i3GEO.janela.confirma(
+					$trad("x76"),
+					300,
+					$trad("x14"),
+					$trad("x15"),
+					function(){exec(tsl);}
+				);
 			}
 			else{
-				i3GEO.php.adtema(tempAdiciona,tsl.toString());
+				exec.call(this,tsl);
 			}
 		}
 	},

@@ -2052,6 +2052,27 @@ pt:"Direciona para a versao adaptada para dispositivos moveis?",
 en:"",
 es:"",
 it:""
+}],
+"x74":[
+{
+pt:"Fecha",
+en:"Close",
+es:"",
+it:""
+}],
+"x75":[
+{
+pt:"Cancela",
+en:"Cancel",
+es:"",
+it:""
+}],
+"x76":[
+{
+pt:"O tema j&aacute;existe no mapa. Adiciona novamente?",
+en:"",
+es:"",
+it:""
 }]
 };
 //YAHOO.log("carregou dicionario", "Classes i3geo");
