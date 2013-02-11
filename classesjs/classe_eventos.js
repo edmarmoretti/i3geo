@@ -220,6 +220,7 @@ i3GEO.eventos = {
 	Executa as fun&ccedil;&otilde;es armazenadas em MOUSECLIQUE.
 	*/
 	mousecliqueMapa: function(){
+		alert("oi");
 		i3GEO.eventos.executaEventos(this.MOUSECLIQUE);
 	},
 	/*
@@ -505,12 +506,8 @@ i3GEO.eventos = {
 			{i3GEO.eventos.mousedownMapa();}
 		};
 		docMapa.onclick = function(exy){
-			
-			//if(typeof(console) !== 'undefined'){console.error("click");}
 			if(!i3GEO.eventos.botaoDireita(exy))
 			{i3GEO.eventos.mousecliqueMapa();}
-			//ativa o clique sobre o mapa (o evento click e desativado no evento moveend da interface
-			//i3GEO.eventos.cliquePerm.status = true;
 		};
 		docMapa.onmouseup = function(exy){
 			//if(typeof(console) !== 'undefined'){console.error("up");}
@@ -546,7 +543,6 @@ i3GEO.eventos = {
 	ixg,ixm,ixs,iyg,iym,iys
 	*/
 	cliqueCapturaPt: function(ixg,ixm,ixs,iyg,iym,iys){
-		alert("oi")
 		if(typeof(console) !== 'undefined'){console.info("i3GEO.eventos.cliqueCapturaPt()");}
 		var x,y,doc = document;
 		if(arguments.length === 0){
