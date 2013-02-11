@@ -267,7 +267,7 @@ var i3GEO = {
 		if(i3GEO.configura.sid === 'undefined')
 		{i3GEO.configura.sid = "";}
 		if(i3GEO.Interface.ALTTABLET != ""){
-			if(i3GEO.util.detectaTablet())
+			if(i3GEO.util.detectaMobile())
 			{return;}
 		}
 		//

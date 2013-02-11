@@ -2491,18 +2491,40 @@ i3GEO.util = {
 	/*
 	Function: detectaTablet
 
+	Verifica se esta em uso um dispositivo do tipo tablet
+
+	Se for detectado, utiliza a interface alternativa definida em i3GEO.Interface.ALTTABLET
+
+	A deteccao e feita com base em i3geo/pacotes/mobileesp/mdetect.js
+	
+	*/
+	detectaTablet: function(){
+		var p,
+			c = DetectaMobile("DetectTierTablet");
+		if(c === false)
+		{return false;}
+		p = confirm($trad("x73"));
+		if(p){
+			window.location = i3GEO.configura.locaplic+'/interface/'+i3GEO.Interface.ALTTABLET+'?'+i3GEO.configura.sid;
+			return true;
+		}
+	},	
+	/*
+	Function: detectaMobile
+
 	Verifica se esta em uso um dispositivo do tipo movel
 
 	Se for detectado, utiliza a interface alternativa definida em i3GEO.Interface.ALTTABLET
 
 	A deteccao e feita com base em i3geo/pacotes/mobileesp/mdetect.js
+	
 	*/
-	detectaTablet: function(){
+	detectaMobile: function(){
 		var p,
 			c = DetectaMobile("DetectMobileLong");
 		if(c === false)
 		{return false;}
-		p = confirm("Direciona para a versao adaptada para dispositivos moveis?");
+		p = confirm($trad("x73"));
 		if(p){
 			window.location = i3GEO.configura.locaplic+'/interface/'+i3GEO.Interface.ALTTABLET+'?'+i3GEO.configura.sid;
 			return true;

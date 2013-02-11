@@ -1,4 +1,6 @@
-//foi tudo incluido em uma função para evitar variáveis globais
+//foi tudo incluido em uma funcao unica para evitar variáveis globais
+//veja no final do script os parametros que podem ser utilizados
+//
 function DetectaMobile(funcao){
 /* *******************************************
 // Copyright 2010-2011, Anthony Hand
@@ -831,4 +833,6 @@ if(funcao == "DetectAndroidTablet")
 {return DetectAndroidTablet();}
 if(funcao == "DetectAndroid")
 {return DetectAndroid();}
+if(funcao == "DetectTierTablet")
+{return DetectTierTablet();}
 }

@@ -2045,6 +2045,13 @@ pt:"Lista de mapas cadastrados",
 en:"",
 es:"",
 it:""
+}],
+"x73":[
+{
+pt:"Direciona para a versao adaptada para dispositivos moveis?",
+en:"",
+es:"",
+it:""
 }]
 };
 //YAHOO.log("carregou dicionario", "Classes i3geo");
