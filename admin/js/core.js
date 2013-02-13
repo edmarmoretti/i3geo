@@ -1543,7 +1543,16 @@ function core_listaDeLetras(onde,nomeFuncao){
 	if(onde != ""){
 		o = document.getElementById(onde);
 		if(o){
-			o.innerHTML = ins;
+			o.innerHTML = "<form id=forminiciais >Iniciais: <input name='' onchange='' value='"+letraAtual+"' id=iniciaisLetras type=text style=width:40px;cursor:pointer /> ou </form><div style=position:relative;top:5px; id='_listaDeLetras' >"+ins+"</div>";
+			document.getElementById("forminiciais").onsubmit = function(){
+				var v = document.getElementById("iniciaisLetras").value;
+				i3GEO.util.insereCookie("I3GEOletraAdmin", v);
+				eval(nomeFuncao+"('"+v+"');");
+				return false;
+			};
+			document.getElementById("_listaDeLetras").onclick = function(){
+				document.getElementById("iniciaisLetras").value = letraAtual;
+			};
 		}
 	}
 	else{

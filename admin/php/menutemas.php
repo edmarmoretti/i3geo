@@ -1230,8 +1230,7 @@ function listaMapsTemas()
 					$file = str_replace(".".$extensao,"",$file);
 					if(isset($letra) && $letra != "")
 					{
-						if(strtolower(substr(basename($file),0,1)) == strtolower($letra))
-						{
+						if(strtolower(substr(basename($file),0,strlen($letra))) == strtolower($letra)){
 							$arquivos[] = array("nome"=>$file,"extensao"=>$extensao);
 						}
 					}

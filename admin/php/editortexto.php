@@ -93,7 +93,7 @@ function filtraLetra(letra) {
 function comboMapfiles(){
 	var n = $mapfiles.length,
 		i,ins;
-	ins = "<select onchange='mudaMapfile(this)'><option value=''>Edite outro mapfile</option>";
+	ins = "<select id='selectComboMapfile' onchange='mudaMapfile(this)'><option value=''>Edite outro mapfile</option>";
 	for(i=0;i<n;i++){
 		if($mapfiles[i].extensao === "map"){
 			ins += "<option value='"+$mapfiles[i].codigo+"'>"+$mapfiles[i].codigo+" - "+$mapfiles[i].nome+"</optiona>";
@@ -101,6 +101,7 @@ function comboMapfiles(){
 	}
 	ins += "</select>";
 	$i("comboMapfiles").innerHTML = ins;
+	$i("selectComboMapfile").value = "<?php echo $_GET["mapfile"];?>";
 };
 core_pegaMapfiles("comboMapfiles()",letraAtual,"");
 function mudaMapfile(obj){

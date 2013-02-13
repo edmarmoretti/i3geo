@@ -151,35 +151,26 @@ if($temas != ""){
 					}
 				}
 				if($nomeMap != ""){
-
-					if(empty($layers)){
-						$layers = array();
-						$maptemp = @ms_newMapObj($nomeMap);
+					$layers = array();
+					$maptemp = @ms_newMapObj($nomeMap);
+					if($maptemp){
 						for($i=0;$i<($maptemp->numlayers);++$i)	{
 							$layern = $maptemp->getLayer($i);
 							$layers[] = $layern->name;
 						}
 						$nomeLayer = implode(",",$layers);
 						$tituloLayer = $layern->getmetadata("tema");
-					}
-					else{
-						$nomeLayer = str_replace(" ",",",$layers);
-						$layers = explode(",",$layers);
-						$maptemp = @ms_newMapObj($nomeMap);
-						//$temp = explode(",",$layers);
-						$layern = $maptemp->getLayerByName($layers[0]);
-						$tituloLayer = $layern->getmetadata("tema");
-					}
-					$ebase = "false";
-					if(isset($fundo) && $fundo != ""){
-						if(in_array($tema,$fundo)){
-							$ebase = "true";
+						$ebase = "false";
+						if(isset($fundo) && $fundo != ""){
+							if(in_array($tema,$fundo)){
+								$ebase = "true";
+							}
 						}
+						$visivel = "false";
+						if(in_array($tema,$visiveis))
+						{$visivel = "true";}
+						$objOpenLayers[] = 'new OpenLayers.Layer.WMS( "'.$tituloLayer.'", "../ogc.php?tema='.$tema.'&",{layers:"'.$nomeLayer.'",transparent: "true", format: "image/png"},{singleTile:true,visibility:'.$visivel.',isBaseLayer:'.$ebase.'})';
 					}
-					$visivel = "false";
-					if(in_array($tema,$visiveis))
-					{$visivel = "true";}
-					$objOpenLayers[] = 'new OpenLayers.Layer.WMS( "'.$tituloLayer.'", "../ogc.php?tema='.$tema.'&",{layers:"'.$nomeLayer.'",transparent: "true", format: "image/png"},{singleTile:true,visibility:'.$visivel.',isBaseLayer:'.$ebase.'})';
 				}
 				else
 				{echo $tema." n&atilde;o foi encontrado.<br>";}
