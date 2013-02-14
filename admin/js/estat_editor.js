@@ -88,7 +88,7 @@ i3GEOadmin.editor = {
 							"<select id='i3GEOadmintabela' onchange='i3GEOadmin.editor.coluna.lista()'>";
 							temp += core_comboObjeto(dados,"tabela","tabela");
 							temp += "</select>" +
-								"<p><input type=button value='Relat&oacute;rio' id='i3GEOadmintabelaMostrar' />" +
+								"<p><input type=button value='Mostrar dados' id='i3GEOadmintabelaMostrar' />" +
 								"<input type=button value='CSV' id='i3GEOadmintabelaCsv'/>" +
 								"<input type=button value='Criar uma nova tabela' id='i3GEOadmintabelaCriar' />" +
 								"<input type=button value='Alterar nome atual' id='i3GEOadmintabelaAlterarNome' />" +
@@ -234,7 +234,9 @@ i3GEOadmin.editor = {
 				alert("Escolha a tabela");
 				return;
 			}
-			var callback = {
+			
+			var nreg = window.prompt("Numero maximo de registros"),
+				callback = {
 					success:function(o){
 						try	{
 							core_carregando("desativa");
@@ -269,7 +271,7 @@ i3GEOadmin.editor = {
 			},
 			nomeEsquema = $i("i3GEOadminesquema").value;
 			core_carregando("obtendo dados...");
-			core_makeRequest("../php/metaestat.php?funcao=obtemDadosTabelaDB&geo=nao&formato=json&nome_tabela="+$i("i3GEOadmintabela").value+"&nome_esquema="+nomeEsquema+"&codigo_estat_conexao="+$i("i3GEOadmincodigo_estat_conexao").value,callback);
+			core_makeRequest("../php/metaestat.php?funcao=obtemDadosTabelaDB&nreg="+nreg+"&geo=nao&formato=json&nome_tabela="+$i("i3GEOadmintabela").value+"&nome_esquema="+nomeEsquema+"&codigo_estat_conexao="+$i("i3GEOadmincodigo_estat_conexao").value,callback);
 		},
 		csv: function(){
 			if($i("i3GEOadmintabela").value == ""){

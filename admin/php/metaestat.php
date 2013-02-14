@@ -1328,10 +1328,10 @@ switch (strtoupper($funcao))
 	case "OBTEMDADOSTABELADB":
 		$m = new Metaestat();
 		if($formato == "json"){
-			retornaJSON($m->obtemDadosTabelaDB($codigo_estat_conexao,$nome_esquema,$nome_tabela,$geo));
+			retornaJSON($m->obtemDadosTabelaDB($codigo_estat_conexao,$nome_esquema,$nome_tabela,$geo,$nreg));
 		}
 		if($formato == "csv"){
-			$dados = $m->obtemDadosTabelaDB($codigo_estat_conexao,$nome_esquema,$nome_tabela,$geo);
+			$dados = $m->obtemDadosTabelaDB($codigo_estat_conexao,$nome_esquema,$nome_tabela,$geo,$nreg);
 			require_once(__DIR__."/../../pacotes/parsecsv/parsecsv.lib.php");
 			$csv = new parseCSV();
 			//$csv->encoding('UTF-16', 'UTF-8');

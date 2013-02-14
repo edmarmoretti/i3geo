@@ -33,11 +33,11 @@ if (isset($_FILES['i3GEOuploadshp']['name']))
 		$dirmap = dirname($map_file);
 	}
 	if(isset($dirDestino) && $dirDestino != ""){
-		if(!isset($editores))
-		{echo "<p class='paragrafo' >Lista de editores n&atilde;o dispon&iacute;vel. N&atilde;o pode gravar fora do diret&oacute;rio tempor&aacute;rio";paraAguarde();exit;}
 		$dirmap = $dirDestino;
-		if(verificaEditores($editores) == "nao")
-		{echo "<p class='paragrafo' >Voc&ecirc; n&atilde;o &eacute; um editor cadastrado. N&atilde;o pode gravar fora do diret&oacute;rio tempor&aacute;rio";paraAguarde();exit;}
+		include_once(__DIR__."/../../admin/php/login.php");
+		if(verificaOperacaoSessao("admin/php/editortexto") == false){
+			echo "Vc nao pode realizar salvar os dados no servidor em uma pasta espec&iacute;fica";exit;
+		}
 		if(!file_exists($dirmap))
 		{echo "<p class='paragrafo' >Pasta n&atilde;o existe no servidor";paraAguarde();exit;}
 	}
