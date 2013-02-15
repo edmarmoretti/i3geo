@@ -3,6 +3,12 @@ GUIA DE UPDATES
 -------------------------------------------------------------------------------------------------
 Para a versão 4.7
 
+- para testar via javascript se a versão é a 4.7, utilize:
+
+	if(i3GEO.eventos.cliquePerm){
+		//seu codigo vai aqui
+	}
+
 - Criada a pasta init que contém uma nova página de inicialização
 - O banco de dados de administração foi alterado. Deve ser executado o programa de upgrade do banco, existente em i3geo/admin.
 - Para permitir o upgrade é necessário ter um usuário master cadastrado em i3geo/ms_configura.php

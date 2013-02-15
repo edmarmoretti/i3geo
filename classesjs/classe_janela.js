@@ -739,6 +739,22 @@ i3GEO.janela = {
 		}
 	},
 	/*
+	Janela de prompt para entrada de dados
+
+	Parametros:
+
+	pergunta {string} - texto da pegunta
+	
+	w {numeric} - largura da janela
+	
+	funcaoOk  {function} - (opcional) funcao do botao 1
+	
+	funcaoCancela {function} - (opcional) funcao do botao 2
+	*/
+	prompt: function(pergunta,w,funcaoOk,funcaoCancela){
+		i3GEO.janelaconfirma: function(pergunta,w,resposta1,resposta2,funcao1,funcao2)
+	},
+	/*
 	Function: mensagemSimples
 
 	Mostra uma janela simples com uma mensagem

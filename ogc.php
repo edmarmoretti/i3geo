@@ -505,18 +505,18 @@ function ogc_imprimeListaDeTemas(){
 	foreach ($menus as $menu){
 		$grupos = $m->pegaListaDeGrupos($menu["idmenu"],$listasistemas="nao",$listasgrupos="sim");
 		foreach($grupos as $grupo){
-			if(strtolower($grupo["ogc"]) == "sim"){
-				$imprimegrupo = "<i>".$grupo["nome"]."</i>";
+			if(!empty($grupo["ogc"]) && strtolower($grupo["ogc"]) == "sim"){
+				$imprimegrupo = "<i>".texto2iso($grupo["nome"])."</i>";
 				foreach($grupo["subgrupos"] as $sgrupo){
 					if(strtolower($sgrupo["ogc"]) == "sim"){
 						$imprimesubgrupo = $sgrupo["nome"];
 						$temas = $m->pegaListaDeTemas($grupo["id_n1"],$sgrupo["id_n2"],$menu["idmenu"]);
 						foreach($temas as $tema){
 							if(strtolower($tema["ogc"]) == "sim"){
-								$imprimir .= $imprimegrupo."->".$imprimesubgrupo."<br>";
+								$imprimir .= texto2iso($imprimegrupo)."->".texto2iso($imprimesubgrupo)."<br>";
 								$imprimir .= "&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;";
 								$imprimir .= "<span style=color:red >".$tema["tid"]."</span>";
-								$imprimir .= "&nbsp;-&nbsp;".$tema["nome"]."&nbsp";
+								$imprimir .= "&nbsp;-&nbsp;".texto2iso($tema["nome"])."&nbsp";
 								$imprimir .= "&nbsp;<a href='".$urli3geo."/ogc.php?tema=".$tema["tid"]."&service=wms&request=getcapabilities' >Getcapabilities</a>";
 								$imprimir .= "&nbsp;<a href='".$urli3geo."/ogc.php?tema=".$tema["tid"]."&SRS=EPSG:4618&WIDTH=500&HEIGHT=500&BBOX=-76.5125927,-39.3925675209,-29.5851853,9.49014852081&FORMAT=image/png&service=wms&version=1.1.0&request=getmap&layers=".$tema["tid"]."' >GetMap </a>";
 								if($tema["link"] != " ")
@@ -598,5 +598,13 @@ function carregaCacheImagem($bbox,$layer,$w,$h,$cachedir=""){
 		ob_end_flush();
 		exit;
 	}
+}
+function texto2iso($texto){
+	if (function_exists("mb_convert_encoding")){
+		if (mb_detect_encoding($texto,"UTF-8",true)){
+			$texto = mb_convert_encoding($texto,"ISO-8859-1","UTF-8");
+		}
+	}
+	return $texto;
 }
 ?>
