@@ -63,9 +63,8 @@ $idioma - (opcional) pt|en|es|it
 */
 	function __construct($map_file="",$perfil="",$locaplic="",$urli3geo="",$editores="",$idioma="pt")
 	{
-		if($locaplic == "")
-		{
-			include(__DIR__."/../ms_configura.php");}
+		if($locaplic == ""){
+			include(__DIR__."/../ms_configura.php");
 		}
 		$perfil = str_replace(" ",",",$perfil);
 		$this->perfil = explode(",",$perfil);

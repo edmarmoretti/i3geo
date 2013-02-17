@@ -691,8 +691,8 @@ i3GEO.janela = {
 		}
 		else{
 			f1 = function(){
-				YAHOO.i3GEO.janela.managerAguarde.find("confirma").destroy();
 				funcao1.call();
+				YAHOO.i3GEO.janela.managerAguarde.find("confirma").destroy();
 			}		
 		}
 		if(!funcao2 || funcao2 == ""){
@@ -713,46 +713,51 @@ i3GEO.janela = {
 		if(!resposta2 || resposta2 == ""){
 			resposta2 = $trad("x75");
 		}
-		if(!janela){
-			janela = new YAHOO.widget.SimpleDialog("confirma",{
-				width: w+"px",
-				fixedcenter: true,
-				visible: false,
-				draggable: false,
-				zIndex: 100000,
-				textAlign: "left",
-				close: false,
-				modal: false,
-				effect:{effect:YAHOO.widget.ContainerEffect.FADE,duration:0.25},
-				constraintoviewport: true,
-				buttons: [
-					{ text: resposta1, handler:f1 },
-					{ text: resposta2,  handler:f2 } 
-				],
-				icon: YAHOO.widget.SimpleDialog.ICON_HELP,
-				text: pergunta
-			});
-			YAHOO.i3GEO.janela.managerAguarde.register(janela);
-			janela.setHeader(" ");
-			janela.render(document.body);
-			janela.show();
+		if(janela){
+			janela.destroy();
 		}
+		janela = new YAHOO.widget.SimpleDialog("confirma",{
+			width: w+"px",
+			fixedcenter: true,
+			visible: false,
+			draggable: false,
+			zIndex: 100000,
+			textAlign: "left",
+			close: false,
+			modal: false,
+			effect:{effect:YAHOO.widget.ContainerEffect.FADE,duration:0.25},
+			constraintoviewport: true,
+			buttons: [
+				{ text: resposta1, handler:f1 },
+				{ text: resposta2,  handler:f2 } 
+			],
+			icon: YAHOO.widget.SimpleDialog.ICON_HELP,
+			text: pergunta
+		});
+		YAHOO.i3GEO.janela.managerAguarde.register(janela);
+		janela.setHeader(" ");
+		janela.render(document.body);
+		janela.show();
 	},
 	/*
 	Janela de prompt para entrada de dados
+	
+	O campo para digitacao contem o ID 'i3GEOjanelaprompt'
 
 	Parametros:
 
 	pergunta {string} - texto da pegunta
 	
-	w {numeric} - largura da janela
+	funcaoOk  {function} - (opcional) funcao do botao ok
 	
-	funcaoOk  {function} - (opcional) funcao do botao 1
-	
-	funcaoCancela {function} - (opcional) funcao do botao 2
+	valorDefault {string}
 	*/
-	prompt: function(pergunta,w,funcaoOk,funcaoCancela){
-		i3GEO.janelaconfirma: function(pergunta,w,resposta1,resposta2,funcao1,funcao2)
+	prompt: function(pergunta,funcaoOk,valorDefault){
+		if(!valorDefault){
+			valorDefault = "";
+		}
+		var i = "<br><input id='i3GEOjanelaprompt' type=text value='"+valorDefault+"' style='position:relative;top:5px;width:98%;cursor:text;' />";	
+		i3GEO.janela.confirma(pergunta+i,"","","",funcaoOk);
 	},
 	/*
 	Function: mensagemSimples

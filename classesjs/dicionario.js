@@ -1936,7 +1936,7 @@ it:""
 }],
 "x58":[
 {
-pt:"Continua?",
+pt:"Continua",
 en:"",
 es:"",
 it:""

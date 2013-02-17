@@ -385,11 +385,10 @@ i3GEOF.inserexy = {
 	criatemaeditavel: function(){
 		if(i3GEOF.inserexy.aguarde.visibility === "visible")
 		{return;}
-	 	try{
-		 	var tituloTema,cp,p,temp;
-		 	temp = "Pontos inseridos "+parseInt((Math.random() * 100),10);
-		 	tituloTema = window.prompt("Titulo do novo tema",temp);
-			if (tituloTema != null){
+		var funcaoOK = function(){
+			try{
+				var tituloTema,cp,p;
+				tituloTema = $i("i3GEOjanelaprompt").value;
 				if(tituloTema === "")
 				{tituloTema = "Pontos inseridos "+Math.random();}
 				i3GEOF.inserexy.aguarde.visibility = "visible";
@@ -404,11 +403,12 @@ i3GEOF.inserexy = {
 				p = i3GEO.configura.locaplic+"/classesphp/mapa_controle.php?g_sid="+i3GEO.configura.sid+"&funcao=criashpvazio&tituloTema="+tituloTema;
 				cp.call(p,"criaSHPvazio",temp);
 			}
-		}
-		catch(e){
-			i3GEO.janela.tempoMsg("Erro: "+e);
-			i3GEOF.inserexy.aguarde.visibility = "hidden";
-		}
+			catch(e){
+				i3GEO.janela.tempoMsg("Erro: "+e);
+				i3GEOF.inserexy.aguarde.visibility = "hidden";
+			}
+		};
+		i3GEO.janela.prompt("T&iacute;tulo do novo tema",funcaoOK,"Pontos inseridos "+parseInt((Math.random() * 100),10));
 	},
 	/*
 	Function: listaPontos

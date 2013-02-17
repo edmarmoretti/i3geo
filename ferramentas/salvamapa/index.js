@@ -124,33 +124,35 @@ i3GEOF.salvaMapa = {
 	},
 	salvaMapaBanco: function(){
 		//TODO melhorar essa interface
-		var login = i3GEO.login.verificaCookieLogin(),
-			titulo="",temp="",id_mapa="";
+		var texto,funcaoOK,login = i3GEO.login.verificaCookieLogin();
 		if(login === false){
 			i3GEO.login.dialogo.abreLogin();
 		}
 		else{
-			titulo = window.prompt("Titulo do mapa","");
-			if(!titulo){
-				return;
-			}
-			id_mapa = window.prompt("ID do mapa, se for um mapa novo, deixe em branco");
-			temp = function(retorno){
-				if(retorno.id && retorno.id != ""){
-					i3GEO.janela.tempoMsg("Mapa salvo");
+			funcaoOK = function(){
+				var temp,
+					id_mapa = $i("salvamapaId").value,
+					titulo = $i("i3GEOjanelaprompt").value;
+				if(titulo === ""){
+					return;
 				}
-				else{
-					if(retorno.status){
-						i3GEO.janela.tempoMsg(retorno.status);
+				temp = function(retorno){
+					if(retorno.id && retorno.id != ""){
+						i3GEO.janela.tempoMsg("Mapa salvo");
 					}
 					else{
-						i3GEO.janela.tempoMsg(retorno);
+						if(retorno.status){
+							i3GEO.janela.tempoMsg(retorno.status);
+						}
+						else{
+							i3GEO.janela.tempoMsg(retorno);
+						}
 					}
-				}
-			};
-			if(titulo){
+				};
 				i3GEO.php.salvaMapaBanco(temp,titulo,id_mapa);
-			}
+			};
+			texto = "ID do mapa que ser&aacute; atualizado (opcional).<br>Se for um mapa novo, deixe em branco<br><input id=salvamapaId  type=text /><br>";
+			i3GEO.janela.prompt(texto + "<br>T&iacute;tulo do mapa",funcaoOK);
 		}
 	},
 	/*
