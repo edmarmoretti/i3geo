@@ -61,6 +61,17 @@ if($i3geomaster[0]["usuario"] == "admin" && $i3geomaster[0]["senha"] == "admin" 
 
 if(empty($_POST["senha"]) || empty($_POST["usuario"])){
 	formularioLoginMaster("testainstal.php");
+	//opcoes de criacao de pastas
+	if (strtoupper(substr(PHP_OS, 0, 3) != 'WIN')){
+		echo "<script>";
+		echo "var f = document.getElementById('formularioLoginMaster');";
+		echo "var ins = '<br><br><input type=checkbox name=criaPastaMstmp unchecked /> Cria a pasta /tmp/ms_tmp<br><br>';";
+		echo "ins += '<input type=checkbox name=criaLink unchecked /> Cria o link simbolico /var/www/ms_tmp<br><br>';";
+		echo "ins += '<input type=checkbox name=permPastaI3geo unchecked /> Altera as permissoes da pasta /var/www/i3geo<br>';";
+		echo "f.innerHTML += ins;";
+
+		echo "</script>";
+	}
 	exit;
 }
 else{
@@ -99,6 +110,48 @@ echo "---<br>";
 
 if (get_cfg_var("safe_mode") == 1){
 	echo "<span style=color:red >Problema: safe_mode no php.ini deveria estar como 'Off'. O i3Geo n&atilde;o ir&aacute; funcionar!!!<br></span>";
+}
+
+//executa as opcoes linux definidas no formulario
+if($_POST["criaPastaMstmp"] == "on"){
+	echo "<br>Criando a pasta /tmp/ms_tmp\n";
+	if(!file_exists("/tmp/ms_tmp")){
+		@mkdir ("/tmp/ms_tmp",0777);
+	}
+	else{
+		chmod("/tmp/ms_tmp",0777);
+	}
+	if(!file_exists("/tmp/ms_tmp")){
+		echo "<span style=color:red >Arquivo /tmp/ms_tmp n&atilde;o pode ser criado\n";
+	}
+	else{
+		echo "...OK\n";
+	}
+}
+if($_POST["criaLink"] == "on"){
+	echo "<br>Criando o link simb&oacute;lico /var/www/ms_tmp\n";
+	if(!file_exists("/var/www/ms_tmp")){
+		@symlink("/tmp/ms_tmp","/var/www/ms_tmp");
+	}
+	else{
+		chmod("/var/www/ms_tmp",0777);
+	}
+	if(!file_exists("/var/www/ms_tmp")){
+		echo "<span style=color:red >Link /var/www/ms_tmp n&atilde;o pode ser criado\n";
+	}
+	else{
+		echo "...OK\n";
+	}
+}
+if($_POST["permPastaI3geo"] == "on"){
+	echo "<br>Alterando permiss&otilde;es /var/www/i3geo i3geo/temas i3geo/admin i3geo/admin/admin.db\n";
+	if(!file_exists("/var/www/i3geo")){
+		chmod("/var/www/i3geo",0777);
+		chmod("/var/www/i3geo/temas",0777);
+		chmod("/var/www/i3geo/admin",0777);
+		chmod("/var/www/i3geo/admin/admin.db",0777);
+		echo "...OK\n";
+	}
 }
 echo "<br><pre>Extens&otilde;es:<br>";
 if (!extension_loaded("curl")){
