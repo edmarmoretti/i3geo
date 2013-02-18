@@ -57,7 +57,6 @@ if(!isset($esquemaadmin)){
 //indica se deve ser feita a convers&atilde;o para UTF8 ao gravar os dados
 //
 $convUTF = true;
-
 if($conexaoadmin == ""){
 	$arquivosqlite = $locaplic."/admin/admin.db";
 	if(!file_exists($arquivosqlite)){
@@ -67,7 +66,16 @@ if($conexaoadmin == ""){
 	$conAdmin = "sqlite:$arquivosqlite";
 	$conAdminw = "sqlite:$arquivosqlite";
 	if(!extension_loaded("PDO")){
-		echo "A extensao do PHP 'PDO' nao esta instalada.";
+		echo "<span style=color:red >A extensao do PHP 'PDO' nao esta instalada.";
+		exit;
+	}
+	if (!extension_loaded( "pdo_sqlite")){
+		echo "<span style=color:red >Problema: n&atilde;o est&aacute; instalado a pdo_sqlite<br></span>";
+		exit;
+	}
+	if (!extension_loaded( "SQLite") && !extension_loaded( "sqlite3")){
+		echo "<span style=color:red >Problema: n&atilde;o est&aacute; instalado a SQLite<br></span>";
+		exit;
 	}
 	try	{
 		//para escrita
@@ -79,7 +87,6 @@ if($conexaoadmin == ""){
 		print "Erro ao criar o objeto PDO!: " . $e->getMessage() . "<br/> Talvez exista alguma incompatibilidade entre o PHP e o banco admin.db. Vc pode apagar o arquivo menutemas/admin.db e recria-lo com admin/php/criasqlite.php";
 		die();
 	}
-
 }
 else
 	include($conexaoadmin);

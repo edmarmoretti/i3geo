@@ -53,8 +53,7 @@ Free Software Foundation, Inc., no endere&ccedil;o
 */
 $locaplic = __DIR__;
 include_once("admin/php/admin.php");
-include_once("admin/php/conexao.php");
-
+include_once("ms_configura.php");
 if($i3geomaster[0]["usuario"] == "admin" && $i3geomaster[0]["senha"] == "admin" ){
 	echo "<p style='font-size:14px;color:red'>ATEN&Ccedil;&Atilde;O!!! Essa instala&ccedil;&atilde;o est&aacute; vulner&aacute;vel: edite o arquivo i3geo/ms_configura.php e altere o login e senha da vari&aacute;vel i3geomaster</p>";
 }
@@ -186,7 +185,7 @@ if($conexaoadmin == "" && file_exists($locaplic."/admin/admin.db")){
 	echo permissoesarquivo($locaplic."/admin/admin.db")."<br>";
 }
 echo "<pre>";
-
+include_once("admin/php/conexao.php");
 echo "verificando banco de dados de administra&ccedil;&atilde;o...\n";
 /**
  *
