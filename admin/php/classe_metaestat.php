@@ -1706,13 +1706,13 @@ class Metaestat{
 		$var_cor = "var_cor1";
 		foreach($dados as $variavel){
 			$html[] = "<div class='".$var_cor."'>";
-			$html[] = "<h1>".$variavel["titulo"];
-			$html[] = "<span style='color:rgb(190,190,190)'> (<i>".$variavel["descricao"]."</i>)</span></h1>";
+			$html[] = "<h1 style=padding:3px; ><b>".$variavel["titulo"];
+			$html[] = "</b><br><span style='color:rgb(100,100,100)'>".$variavel["descricao"]."</span></h1>";
 			$filhos = $variavel["filhos"];
 			foreach($filhos as $f){
 				$html[] = "<h2 style='position:relative;left:10px;'>ID: <u>".$f["id"]."</u> - ".$f["titulo"]."</h2>";
-				$html[] = "<div style='position:relative;left:20px;'>";
-				$html[] = "<p><i>".$f["descricao"]."</i></p>";
+				$html[] = "<div style='position:relative;padding-left:20px;'>";
+				$html[] = "<p>".$f["descricao"]."</p>";
 				if($detalhes == "sim"){
 					$html[] = "<p><b>Fontes:</b></p>";
 					foreach($f["fontes"] as $fonte){
