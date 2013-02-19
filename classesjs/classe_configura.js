@@ -706,7 +706,7 @@ i3GEO.configura = {
 			dica:$trad("d3"),
 			titulo:$trad("d3t"),
 			funcaoonclick:function(){
-				if(i3GEO.util.detectaTablet() || i3GEO.util.detectaMobile()){
+				if(DetectaMobile("DetectMobileLong")){
 					i3GEO.janela.tempoMsg($trad("x70"));
 				}
 				else{
