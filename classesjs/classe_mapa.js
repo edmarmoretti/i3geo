@@ -820,6 +820,11 @@ i3GEO.mapa = {
 		*/
 		cliqueIdentificaDefault: function(){
 			if(typeof(console) !== 'undefined'){console.info("i3GEO.mapa.dialogo.cliqueIdentificaDefault()");}
+			//evita ativar a ferramenta se o botao nao estiver ativo
+			//e estiver no modo de clique permanente
+			if(i3GEO.barraDeBotoes.BOTAOCLICADO !== "identifica" && i3GEO.eventos.cliquePerm.ativo === false){
+				return;
+			}
 			i3GEO.eventos.MOUSEPARADO.remove("verificaTip()");
 			//na interface googleearth verifica se existe mais eventos no mouseclick
 			if(i3GEO.Interface.ATUAL === "googleearth" && i3GEO.eventos.MOUSECLIQUE.length > 1){
@@ -845,6 +850,9 @@ i3GEO.mapa = {
 		*/
 		verificaTipDefault: function(){
 			if(typeof(console) !== 'undefined'){console.info("i3GEO.mapa.dialogo.verificaTipDefault()");}
+			if(i3GEO.barraDeBotoes.BOTAOCLICADO !== "identificaBalao" && i3GEO.eventos.cliquePerm.ativo === false){
+				return;
+			}
 			//na interface googleearth verifica se existe mais eventos no mouseclick
 			if(i3GEO.Interface.ATUAL === "googleearth" && i3GEO.eventos.MOUSECLIQUE.length > 1){
 				return;

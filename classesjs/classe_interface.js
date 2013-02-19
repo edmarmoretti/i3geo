@@ -1255,6 +1255,7 @@ i3GEO.Interface = {
 				//if(typeof(console) !== 'undefined'){console.error("movestart");}
 				var xy;
 				modoAtual = "move";
+				i3GEO.barraDeBotoes.BOTAOCLICADO = "pan";
 				xy = i3GEO.navega.centroDoMapa();
 				i3GEO.navega.marcaCentroDoMapa(xy);
 			});

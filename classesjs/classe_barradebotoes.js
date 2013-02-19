@@ -12,7 +12,7 @@ Exemplo:
 	Para alterar as op&ccedil;&otilde;es modifique as propriedades colocando um c&oacute;digo como o seguinte no javascript utilizado na interface de mapa que estiver sendo utilizada
 
 	i3GEO.barraDeBotoes.tipo = "olhodepeixe";
-	
+
 Arquivo:
 
 i3geo/classesjs/classe_barradebotoes.js
@@ -564,18 +564,18 @@ i3GEO.barraDeBotoes = {
 		var estilo,temp,ist,cor,ko,estiloatual;
 		if($i(icone)){
 			estiloatual = $i(icone).style.backgroundColor;
-		}		
-		this.BOTAOCLICADO = icone;
-		ko = this.LISTABOTOES.length-1;
-		if(this.COMPORTAMENTO === "padrao"){
+		}
+		i3GEO.barraDeBotoes.BOTAOCLICADO = icone;
+		ko = i3GEO.barraDeBotoes.LISTABOTOES.length-1;
+		if(i3GEO.barraDeBotoes.COMPORTAMENTO === "padrao"){
 			if(ko >= 0){
 				do{
-					temp = $i(this.LISTABOTOES[ko].iddiv);
-					if (this.LISTABOTOES[ko].tipo==="dinamico" && temp){
+					temp = $i(i3GEO.barraDeBotoes.LISTABOTOES[ko].iddiv);
+					if (i3GEO.barraDeBotoes.LISTABOTOES[ko].tipo==="dinamico" && temp){
 						ist = temp.style;
 						ist.borderWidth="1px";
 						ist.borderColor='white';
-						if(this.SOICONES === true){
+						if(i3GEO.barraDeBotoes.SOICONES === true){
 							ist.borderLeftColor='rgb(50,50,50)';
 							ist.borderBottomColor='rgb(50,50,50)';
 						}
@@ -586,16 +586,16 @@ i3GEO.barraDeBotoes = {
 			//ativa o icone
 			if($i(icone)){
 				estilo = $i(icone).style;
-				if(this.SOICONES === false){
+				if(i3GEO.barraDeBotoes.SOICONES === false){
 					estilo.borderColor='white';
 					estilo.borderWidth="1px";
 				}
 			}
 		}
-		if(this.COMPORTAMENTO === "destacado"){
+		if(i3GEO.barraDeBotoes.COMPORTAMENTO === "destacado"){
 			if(ko >= 0){
 				do{
-					temp = $i(this.LISTABOTOES[ko].iddiv);
+					temp = $i(i3GEO.barraDeBotoes.LISTABOTOES[ko].iddiv);
 					if (temp){
 						ist = temp.style;
 						ist.borderWidth="1px";
@@ -607,19 +607,19 @@ i3GEO.barraDeBotoes = {
 			//ativa o icone
 			if($i(icone)){
 				estilo = $i(icone).style;
-				if(this.SOICONES === false){
+				if(i3GEO.barraDeBotoes.SOICONES === false){
 					estilo.borderColor='black';
 					estilo.borderWidth="1px";
 				}
 			}
 		}
-		if(i3GEO.util.in_array(this.COMPORTAMENTO,["laranja","vermelho","cinza"])){
+		if(i3GEO.util.in_array(i3GEO.barraDeBotoes.COMPORTAMENTO,["laranja","vermelho","cinza"])){
 			if(ko >= 0){
 				do{
-					temp = $i(this.LISTABOTOES[ko].iddiv);
+					temp = $i(i3GEO.barraDeBotoes.LISTABOTOES[ko].iddiv);
 					if (temp){
 						ist = temp.style;
-						if(this.SOICONES === false){
+						if(i3GEO.barraDeBotoes.SOICONES === false){
 							ist.borderWidth="1px";
 							ist.borderColor='white';
 							ist.backgroundColor='white';
@@ -630,7 +630,7 @@ i3GEO.barraDeBotoes = {
 				}
 				while(ko--);
 			}
-			switch(this.COMPORTAMENTO){
+			switch(i3GEO.barraDeBotoes.COMPORTAMENTO){
 				case "laranja":
 					cor = "orange";
 					break;
@@ -646,7 +646,7 @@ i3GEO.barraDeBotoes = {
 			//ativa o icone
 			if($i(icone)){
 				estilo = $i(icone).style;
-				if(this.SOICONES === false){
+				if(i3GEO.barraDeBotoes.SOICONES === false){
 					estilo.borderColor='black';
 					estilo.borderWidth="1px";
 				}
