@@ -166,7 +166,15 @@ i3GEO.guias = {
 							if (lkd !== "")
 							{link = lkd;}
 							ins += "<div style=background-color:white;padding:5px;margin:5px ><div style=text-align:center ><a href='"+link+"' style=text-align:center;text-decoration:none; ><img src='"+temp.IMAGEM+"'></a></div><br>";
-							ins += "<div><p class=paragrafo style=text-align:center;cursor:pointer ><a href='"+link+"' style=text-align:center;text-decoration:none; >"+nome+"</a></p></div></div>";
+							if(temp.CONTEMMAPFILE == "nao"){
+								ins += "<div><p class=paragrafo style=text-align:center;cursor:pointer ><a href='"+link+"' style=text-align:center;text-decoration:none; >"+nome+"</a></p></div></div>";
+							}
+							else{
+								ins += "<div><p class=paragrafo style=text-align:center;cursor:pointer >" +
+									"<a href='"+link+"' style=text-align:center;text-decoration:none; >"+nome+"</a>" +
+									"<br><a target=_blank href='"+i3GEO.configura.locaplic+"/mashups/openlayers.php?"+temp.OUTROS+"' style=text-align:center;text-decoration:none;color:gray; >Preview</a>" +
+									"</p></div></div>";
+							}
 							ig1++;
 						}
 						while(ig1<ig1lt);

@@ -1,9 +1,44 @@
 <?php
-error_reporting(0);if(extension_loaded('zlib')){ob_start('ob_gzhandler');} header("Content-type: text/html");
 include_once("../ms_configura.php");
 include_once("../classesphp/pega_variaveis.php");
 include_once("../classesphp/carrega_ext.php");
 error_reporting(E_ALL);
+//
+//recupera um mapa salvo no banco de administracao
+//
+if(!empty($restauramapa)){
+	include(__DIR__."/../admin/php/conexao.php");
+	if(!empty($esquemaadmin)){
+		$esquemaadmin = $esquemaadmin.".";
+	}
+	$q = $dbh->query("select * from ".$esquemaadmin."i3geoadmin_mapas where id_mapa=$restauramapa ",PDO::FETCH_ASSOC);
+	$mapasalvo = $q->fetchAll();
+	$mapasalvo = $mapasalvo[0];
+	if(strtoupper($mapasalvo["publicado"]) != "NAO"){
+		$xbase = $dir_tmp."/".nomeRandomicoM().".map";
+		$baseh = fopen($xbase,'w');
+		$s = fwrite($baseh,base64_decode($mapasalvo["mapfile"]));
+		fclose($baseh);
+	}
+	$dbh = null;
+	$dbhw = null;
+	$m = ms_newMapObj($xbase);
+	$w = $m->web;
+	$w->set("imagepath",dirname($w->imagepath)."/");
+	$w->set("imageurl",dirname($w->imageurl)."/");
+	//apaga algumas camadas
+	$l = $m->getlayerbyname("rosadosventos");
+	if($l != ""){
+		$l->set("status",MS_DELETE);
+	}
+	$l = $m->getlayerbyname("copyright");
+	if($l != ""){
+		$l->set("status",MS_DELETE);
+	}
+	$m->save($xbase);
+	$fundo = $xbase;
+	$temas = $xbase;
+}
 //
 //imprime na tela a ajuda ao usu&aacute;rio
 //
@@ -178,12 +213,20 @@ if($temas != ""){
 		}
 	}
 }
-
+function nomeRandomicoM($n=10){
+	$nomes = "";
+	$a = 'azertyuiopqsdfghjklmwxcvbnABCDEFGHIJKLMNOPQRSTUVWXYZ';
+	$max = 51;
+	for($i=0; $i < $n; ++$i)
+	{$nomes .= $a{mt_rand(0, $max)};}
+	return $nomes;
+}
 function ajuda(){
 	echo "
 <pre><b>
 Mashup OpenLayers
 Par&acirc;metros:
+	restauramapa - id do mapa armazenado no sistema de administracao e que ser&aacute; restaurado para ser aberto novamente (veja em i3geo/admin/html/mapas.html)
 	kml - lista de endere&ccedil;os (url) de um arquivos kml que ser&atilde;o adicionados ao mapa. Separado por ','
 	servidor - por default &eacute; ../ogc.php o que for&ccedil;a o uso do i3geo local. Esse &eacute; o programa que ser&aacute; utilizado em conjunto com a lista definida no par&acirc;metro 'temas'
 	temas - lista com os temas (mapfiles) do i3Geo que ser&atilde;o inclu&iacute;dos no mapa. Pode ser inclu&iacute;do um arquivo mapfile que esteja fora da pasta i3geo/temas. Nesse caso, deve-se definir o caminho completo do arquivo e tamb&eacute;m o par&acirc;metro &layers
@@ -397,4 +440,3 @@ i3GEO.editorOL.inicia();
 </script>
 </body>
 </html>
-<?php if(extension_loaded('zlib')){ob_end_flush();}?>

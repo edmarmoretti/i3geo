@@ -128,7 +128,7 @@ versao_wms - Vers&atilde;o do WMS (necess&aacute;rio quando da inclus&atilde;o d
 gvsiggvp - (depreciado na versão 4.7 - utilize o parametro temasa) endere&ccedil;o no servidor do arquivo de projeto gvSig (gvp) que ser&aacute; utilizado para construir o mapa (experimental)
 
 gvsigview - lista com nomes de views existentes no projeto gvSig separado por virgula. Se for vazio, serao adicionadas todas as views. Exemplo (http://localhost/i3geo/ms_criamapa.php?gvsiggvp=c:\temp\teste.gvp&gvsigview=Untitled - 0)
-//TODO documentar esse parametro
+
 restauramapa - id do mapa armazenado no sistema de administracao e que ser&aacute; restaurado para ser aberto novamente (veja em i3geo/admin/html/mapas.html)
 */
 
