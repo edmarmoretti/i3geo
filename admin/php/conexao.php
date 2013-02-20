@@ -59,6 +59,7 @@ if(!isset($esquemaadmin)){
 $convUTF = true;
 if($conexaoadmin == ""){
 	$arquivosqlite = $locaplic."/admin/admin.db";
+	chmod($arquivosqlite,0777);
 	if(!file_exists($arquivosqlite)){
 		echo "O arquivo admin.db n&atilde;o existe. Utilize i3geo/admin/criabanco.php para criar o banco de dados SQLITE.";
 		exit;
