@@ -272,7 +272,7 @@ function iniciaMapa()
 	if($imgo->imagepath == "")
 	{echo "Erro IMAGEPATH vazio";exit;}
 	$nomer = ($imgo->imagepath)."mapa".$nomes.".png";
-	$imgo->saveImage($nomer);
+	//$imgo->saveImage($nomer);
 	if (isset($utilizacgi) && strtolower($utilizacgi) == "sim")
 	{$nomer = $locmapserv."?map=".$map_file."&mode=map";}
 	else

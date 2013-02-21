@@ -52,7 +52,9 @@ $funcao = "";
 $locaplic = __DIR__."/../..";
 include_once("admin.php");
 include_once("conexao.php");
-
+if(!empty($esquemaadmin)){
+	$esquemaadmin = $esquemaadmin.".";
+}
 if(empty($_POST["senha"]) || empty($_POST["usuario"])){
 	formularioLoginMaster("upgradebanco46_47.php");
 	echo "<br><input type=checkbox name=mostraSoSQL /> Mostra apenas o SQL";
