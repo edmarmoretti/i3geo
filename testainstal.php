@@ -64,9 +64,9 @@ if(empty($_POST["senha"]) || empty($_POST["usuario"])){
 	if (strtoupper(substr(PHP_OS, 0, 3) != 'WIN')){
 		echo "<script>";
 		echo "var f = document.getElementById('formularioLoginMaster');";
-		echo "var ins = '<br><br><input type=checkbox name=criaPastaMstmp unchecked /> Cria a pasta /tmp/ms_tmp<br><br>';";
-		echo "ins += '<input type=checkbox name=criaLink unchecked /> Cria o link simbolico /var/www/ms_tmp<br><br>';";
-		echo "ins += '<input type=checkbox name=permPastaI3geo unchecked /> Altera as permissoes da pasta /var/www/i3geo<br>';";
+		echo "var ins = '<br><br><input type=checkbox name=criaPastaMstmp unchecked /> Cria a pasta $dir_tmp <br><br>';";
+		echo "ins += '<input type=checkbox name=criaLink unchecked /> Cria o link simbolico ".__DIR__."/../ms_tmp <br><br>';";
+		echo "ins += '<input type=checkbox name=permPastaI3geo unchecked /> Altera as permissoes da pasta $locaplic <br>';";
 		echo "f.innerHTML += ins;";
 
 		echo "</script>";
@@ -113,42 +113,43 @@ if (get_cfg_var("safe_mode") == 1){
 
 //executa as opcoes linux definidas no formulario
 if($_POST["criaPastaMstmp"] == "on"){
-	echo "<br>Criando a pasta /tmp/ms_tmp\n";
-	if(!file_exists("/tmp/ms_tmp")){
-		@mkdir ("/tmp/ms_tmp",0777);
+	echo "<br>Criando a pasta $dir_tmp \n";
+	if(!file_exists($dir_tmp)){
+		@mkdir ($dir_tmp,0777);
 	}
 	else{
-		chmod("/tmp/ms_tmp",0777);
+		chmod($dir_tmp,0777);
 	}
-	if(!file_exists("/tmp/ms_tmp")){
-		echo "<span style=color:red >Arquivo /tmp/ms_tmp n&atilde;o pode ser criado\n";
+	if(!file_exists($dir_tmp)){
+		echo "<span style=color:red >Arquivo $dir_tmp n&atilde;o pode ser criado\n";
 	}
 	else{
 		echo "...OK\n";
 	}
 }
 if($_POST["criaLink"] == "on"){
-	echo "<br>Criando o link simb&oacute;lico /var/www/ms_tmp\n";
-	if(!file_exists("/var/www/ms_tmp")){
-		@symlink("/tmp/ms_tmp","/var/www/ms_tmp");
+	$d = __DIR__."/../ms_tmp";
+	echo "<br>Criando o link simb&oacute;lico $d \n";
+	if(!file_exists($d)){
+		@symlink($dir_tmp,$d);
 	}
 	else{
-		chmod("/var/www/ms_tmp",0777);
+		chmod($d,0777);
 	}
 	if(!file_exists("/var/www/ms_tmp")){
-		echo "<span style=color:red >Link /var/www/ms_tmp n&atilde;o pode ser criado\n";
+		echo "<span style=color:red >Link $d n&atilde;o pode ser criado\n";
 	}
 	else{
 		echo "...OK\n";
 	}
 }
 if($_POST["permPastaI3geo"] == "on"){
-	echo "<br>Alterando permiss&otilde;es /var/www/i3geo i3geo/temas i3geo/admin i3geo/admin/admin.db\n";
-	if(!file_exists("/var/www/i3geo")){
-		chmod("/var/www/i3geo",0777);
-		chmod("/var/www/i3geo/temas",0777);
-		chmod("/var/www/i3geo/admin",0777);
-		chmod("/var/www/i3geo/admin/admin.db",0777);
+	echo "<br>Alterando permiss&otilde;es i3geo i3geo/temas i3geo/admin i3geo/admin/admin.db\n";
+	if(file_exists($locaplic)){
+		chmod($locaplic,0777);
+		chmod($locaplic."/temas",0777);
+		chmod($locaplic."/admin",0777);
+		chmod($locaplic."/admin/admin.db",0777);
 		echo "...OK\n";
 	}
 }

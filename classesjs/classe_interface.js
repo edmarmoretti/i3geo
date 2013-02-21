@@ -575,11 +575,26 @@ i3GEO.Interface = {
 				f.style.height = h+"px";
 			}
 			i3GEO.Interface.IDMAPA = "openlayers";
+			i3GEO.Interface.openlayers.parametrosMap.controls = [];
+			i3GEO.Interface.openlayers.parametrosMap.fractionalZoom = false;
+			if(!i3GEO.Interface.openlayers.parametrosMap.minResolution){
+				i3GEO.Interface.openlayers.parametrosMap.minResolution = "auto";
+			}
+			if(!i3GEO.Interface.openlayers.parametrosMap.minExtent){
+				i3GEO.Interface.openlayers.parametrosMap.minExtent = new OpenLayers.Bounds(mi[0],mi[1],mi[2],mi[3]);
+			}
+			if(!i3GEO.Interface.openlayers.parametrosMap.maxResolution){
+				i3GEO.Interface.openlayers.parametrosMap.maxResolution = "auto";
+			}
+			if(!i3GEO.Interface.openlayers.parametrosMap.maxExtent){
+				i3GEO.Interface.openlayers.parametrosMap.maxExtent = new OpenLayers.Bounds(ma[0],ma[1],ma[2],ma[3]);
+			}
+			if(!i3GEO.Interface.openlayers.parametrosMap.allOverlays){
+				i3GEO.Interface.openlayers.parametrosMap.allOverlays = false;
+			}
 			if(i3GEO.Interface.TABLET === true){
-				i3geoOL = new OpenLayers.Map({
-					div: "openlayers",
-					theme: null,
-					controls: [
+				i3GEO.Interface.openlayers.parametrosMap.theme = null;
+				i3GEO.Interface.openlayers.parametrosMap.controls = [
 						new OpenLayers.Control.Attribution(),
 						new OpenLayers.Control.TouchNavigation({
 							dragPanOptions: {
@@ -588,32 +603,14 @@ i3GEO.Interface = {
 							}
 						}),
 						new OpenLayers.Control.ZoomPanel()
-					]
-				});
+				];
 			}
 			else{
 				bb.INCLUIBOTAO.zoomli = true;
 				bb.INCLUIBOTAO.pan = true;
 				bb.INCLUIBOTAO.zoomtot = true;
-				i3GEO.Interface.openlayers.parametrosMap.controls = [];
-				i3GEO.Interface.openlayers.parametrosMap.fractionalZoom = false;
-				if(!i3GEO.Interface.openlayers.parametrosMap.minResolution){
-					i3GEO.Interface.openlayers.parametrosMap.minResolution = "auto";
-				}
-				if(!i3GEO.Interface.openlayers.parametrosMap.minExtent){
-					i3GEO.Interface.openlayers.parametrosMap.minExtent = new OpenLayers.Bounds(mi[0],mi[1],mi[2],mi[3]);
-				}
-				if(!i3GEO.Interface.openlayers.parametrosMap.maxResolution){
-					i3GEO.Interface.openlayers.parametrosMap.maxResolution = "auto";
-				}
-				if(!i3GEO.Interface.openlayers.parametrosMap.maxExtent){
-					i3GEO.Interface.openlayers.parametrosMap.maxExtent = new OpenLayers.Bounds(ma[0],ma[1],ma[2],ma[3]);
-				}
-				if(!i3GEO.Interface.openlayers.parametrosMap.allOverlays){
-					i3GEO.Interface.openlayers.parametrosMap.allOverlays = false;
-				}
-				i3geoOL = new OpenLayers.Map('openlayers', i3GEO.Interface.openlayers.parametrosMap);
 			}
+			i3geoOL = new OpenLayers.Map('openlayers', i3GEO.Interface.openlayers.parametrosMap);
 		},
 		inicia: function(){
 			//
