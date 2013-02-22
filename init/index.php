@@ -172,6 +172,10 @@ botoesIni.push({
 	"titulo":$trad(15,g_traducao_init)
 	},{
 	"img":"../imagens/oxygen/22x22/help-contents.png",
+	"href":"../documentacao/manual-admin-i3geo-4_7-pt.pdf",
+	"titulo":$trad(21,g_traducao_init)
+	},{
+	"img":"../imagens/oxygen/22x22/help-contents.png",
 	"href":"../guia_de_migracao.txt",
 	"titulo":$trad(17,g_traducao_init)
 	},{

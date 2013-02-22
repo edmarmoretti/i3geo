@@ -118,5 +118,11 @@ es:""
 pt:"Incluia um link apenas na sua p&aacute;gina",
 en:"",
 es:""
+}],
+21: [
+{
+pt:"Manual de administra&ccedil;&atilde;o",
+en:"",
+es:""
 }]
 };
