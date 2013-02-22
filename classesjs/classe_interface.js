@@ -1531,7 +1531,7 @@ i3GEO.Interface = {
 				else{
 					if(i3GEO.finalizaAPI != "")
 					{eval(i3GEO.finalizaAPI);}
-				}
+				}				
 			};
 			i3GEO.php.googlemaps(montaMapa);
 		},
@@ -1636,7 +1636,7 @@ i3GEO.Interface = {
 					telax: tela.x + pos[0],
 					telay: tela.y + pos[1]
 				};
-			});
+			});			
 		},
 		retornaIndiceLayer: function(nomeLayer){
 			var i = false;

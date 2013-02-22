@@ -818,8 +818,14 @@ i3GEO.mapa = {
 
 		Abre a janela de dialogo da ferramenta identifica
 		*/
-		cliqueIdentificaDefault: function(){
+		cliqueIdentificaDefault: function(e){
 			if(typeof(console) !== 'undefined'){console.info("i3GEO.mapa.dialogo.cliqueIdentificaDefault()");}
+			//@FIXIT nada elegante
+			//evita clicar sobre a barra do googlemaps
+			if(objposicaocursor.telax < 40 && i3GEO.Interface.ATUAL === "googlemaps"){
+				return;
+			}
+
 			//evita ativar a ferramenta se o botao nao estiver ativo
 			//e estiver no modo de clique permanente
 			if(i3GEO.barraDeBotoes.BOTAOCLICADO !== "identifica" && i3GEO.eventos.cliquePerm.ativo === false){
@@ -849,6 +855,11 @@ i3GEO.mapa = {
 		Essa e a funcao padrao definida em i3GEO.configura
 		*/
 		verificaTipDefault: function(){
+			//evita clicar sobre a barra do googlemaps
+			//@FIXIT nada elegante
+			if(objposicaocursor.telax < 40 && i3GEO.Interface.ATUAL === "googlemaps"){
+				return;
+			}
 			if(typeof(console) !== 'undefined'){console.info("i3GEO.mapa.dialogo.verificaTipDefault()");}
 			if(i3GEO.barraDeBotoes.BOTAOCLICADO !== "identificaBalao" && i3GEO.eventos.cliquePerm.ativo === false){
 				return;
