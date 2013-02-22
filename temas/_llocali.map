@@ -6,7 +6,7 @@ MAP
     DATA "/var/www/i3geo/aplicmap/dados/locali.shp"
     METADATA
       "METAESTAT_ID_MEDIDA_VARIAVEL"	""
-      "cache"	""
+      "cache"	"sim"
       "LTEMPOITEMIMAGEM"	""
       "TIP"	"TIPO,ANOCRIA,NOMELOC"
       "LTEMPOITEMDESCRICAO"	"TIPO"

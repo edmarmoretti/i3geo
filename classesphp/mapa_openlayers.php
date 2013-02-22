@@ -169,7 +169,7 @@ if(($_GET == false) || ($qy) || (strtolower($_GET["DESLIGACACHE"]) == "sim")){
 elseif($_GET["TIPOIMAGEM"] != "" && $_GET["TIPOIMAGEM"] != "nenhum")
 {$cache = false;}
 
-if($cache == true){
+if($cache == true && $_GET["cache"] != "nao"){
 	//carregaCacheImagem($cachedir,$_GET["BBOX"],$nomecache,$map_fileX,$_GET["WIDTH"],$_GET["HEIGHT"]);
 	carregaCacheImagem($cachedir,$map,$tms);
 }
@@ -201,6 +201,7 @@ if($_GET["REQUEST"] == "GetFeatureInfo" || $_GET["request"] == "getfeature"){
 	ms_ioresethandlers();
 	exit;
 }
+
 $o = $mapa->outputformat;
 $o->set("imagemode",MS_IMAGEMODE_RGBA);
 if(!isset($_GET["telaR"])){
@@ -261,7 +262,6 @@ else{
 	}
 	$cache = false;
 }
-
 if($_GET["TIPOIMAGEM"] != "" && $_GET["TIPOIMAGEM"] != "nenhum"){
 	if($img->imagepath == "")
 	{echo "Erro IMAGEPATH vazio";exit;}
@@ -277,7 +277,7 @@ if($_GET["TIPOIMAGEM"] != "" && $_GET["TIPOIMAGEM"] != "nenhum"){
 	imagedestroy($img);
 }
 else{
-	if($cache == true){
+	if($cache == true && $_GET["cache"] != "nao"){
 		//$nomer = salvaCacheImagem($cachedir,$_GET["BBOX"],$nomecache,$map_fileX,$_GET["WIDTH"],$_GET["HEIGHT"]);
 		$nomer = salvaCacheImagem($cachedir,$map_fileX,$_GET["tms"]);
 		header('Content-Length: '.filesize($nomer));
@@ -293,7 +293,6 @@ else{
 		header('Content-Type: image/png');
 		$img->saveImage();
 	}
-	exit;
 }
 function salvaCacheImagem($cachedir,$map,$tms){
 	global $img;
