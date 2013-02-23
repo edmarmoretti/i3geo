@@ -25,7 +25,7 @@ cursor:help;
 }
 P {
 	text-align: left;
-	font-size: 12pt;
+	font-size: 13pt;
 	font-family: Verdana, Arial, Helvetica, sans-serif;
 }
 
@@ -35,20 +35,20 @@ legend {
 	background-color: white;
 	color: navy;
 	text-align: left;
-	font-size: 12px;
+	font-size: 13pt;
 	font-family: Verdana, Arial, Helvetica, sans-serif;
 }
 
 .mensagem {
 	color: black;
 	text-align: left;
-	font-size: 12px;
+	font-size: 12pt;
 	font-family: Verdana, Arial, Helvetica, sans-serif;
 }
 
 h1 {
 	text-align: left;
-	font-size: 15px;
+	font-size: 15pt;
 	font-family: Verdana, Arial, Helvetica, sans-serif;
 }
 
@@ -201,6 +201,7 @@ fieldset {
 	position: relative;
 	top: -15px;
 	width: 100%;
+	max-width:650pt;
 	text-align: left;
 	background-color: white;
 	margin: 0px auto;
