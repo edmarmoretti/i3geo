@@ -14,6 +14,9 @@ z-index: 3000;
 background: url(../../pacotes/yui290/build/container/img/corner_resize.gif) left bottom no-repeat;
 cursor: se-resize;
 }
+.yui-skin-sam .yui-button button, .yui-skin-sam .yui-button a, .yui-skin-sam .yui-button a:visited{
+	font-size:10pt;
+}
 .ajuda_usuario
 {
 background-image:url(../../imagens/external.png);
