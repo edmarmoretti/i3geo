@@ -57,7 +57,8 @@ i3GEOadmin.periodo = {
 			myDataSource.responseSchema = {
 				fields: i3GEOadmin.periodo.colunas
 			};
-			i3GEOadmin.periodo.dataTable = new YAHOO.widget.DataTable("tabela", i3GEOadmin.periodo.defColunas(), myDataSource);
+			//i3GEOadmin.periodo.dataTable = new YAHOO.widget.DataTable("tabela", i3GEOadmin.periodo.defColunas(), myDataSource);
+			i3GEOadmin.periodo.dataTable = new YAHOO.widget.ScrollingDataTable("tabela", i3GEOadmin.periodo.defColunas(), myDataSource,{width:"100%"});
 			i3GEOadmin.periodo.dataTable.subscribe('cellClickEvent',function(ev){
 				var sUrl, callback,$clicouId, $recordid,
 					target = YAHOO.util.Event.getTarget(ev),

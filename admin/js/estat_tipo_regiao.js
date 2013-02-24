@@ -78,7 +78,7 @@ function montaTabela(dados){
 		                {label:"SRID",key:"srid",formatter:formatTexto}
 		                ];
 		myDataSource = new YAHOO.util.DataSource(dados);
-		myDataTable = new YAHOO.widget.DataTable("tabela", myColumnDefs, myDataSource);
+		myDataTable = new YAHOO.widget.ScrollingDataTable("tabela", myColumnDefs, myDataSource,{width:"100%"});
 
 		myDataSource.responseType = YAHOO.util.DataSource.TYPE_JSARRAY;
 		myDataSource.responseSchema = {
@@ -139,7 +139,7 @@ function iniciaEditorAgregacoes(dados,codigo_tipo_regiao){
 	core_carregando("desativa");
 	//if($i("editor_bd")){return;}
 	core_montaEditor("","550px","250px","","Agrega&ccedil;&otilde;es");
-	$i("editor_bd").innerHTML = '<p class=paragrafo ><p class=paragrafo ><input type=button id=adicionaNovaAgregacao value="Adicionar nova rela&ccedil;&atilde;o" style="left:-5px;" /></p><p><br><br><div id="tabelaAgrega" style="left:-5px;"> </div>';
+	$i("editor_bd").innerHTML = '<p class=paragrafo ><input type=button id=adicionaNovaAgregacao value="Adicionar nova rela&ccedil;&atilde;o" style="left:-5px;" /></p><p><div id="tabelaAgrega" style="left:-5px;"> </div>';
 	core_ativaBotaoAdicionaLinha("../php/metaestat.php?funcao=alteraAgregaRegiao&codigo_tipo_regiao="+codigo_tipo_regiao,"adicionaNovaAgregacao","pegaDadosAgregacoes('"+codigo_tipo_regiao+"')");
 	montaTabelaAgregacoes(dados);
 }

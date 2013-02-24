@@ -99,7 +99,8 @@ i3GEOadmin.subgrupos = {
 			myDataSource.responseSchema = {
 				fields: i3GEOadmin.subgrupos.colunas
 			};
-			i3GEOadmin.subgrupos.dataTable = new YAHOO.widget.DataTable("tabela", i3GEOadmin.subgrupos.defColunas(), myDataSource);
+			//i3GEOadmin.subgrupos.dataTable = new YAHOO.widget.DataTable("tabela", i3GEOadmin.subgrupos.defColunas(), myDataSource);
+			i3GEOadmin.subgrupos.dataTable = new YAHOO.widget.ScrollingDataTable("tabela", i3GEOadmin.subgrupos.defColunas(), myDataSource,{width:"100%"});
 			i3GEOadmin.subgrupos.dataTable.subscribe('cellClickEvent',function(ev){
 				var sUrl, callback,$clicouId, $recordid,
 					target = YAHOO.util.Event.getTarget(ev),

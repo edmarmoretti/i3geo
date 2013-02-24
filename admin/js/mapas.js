@@ -89,7 +89,8 @@ i3GEOadmin.mapas = {
 			myDataSource.responseSchema = {
 				fields: i3GEOadmin.mapas.colunas
 			};
-			i3GEOadmin.mapas.dataTable = new YAHOO.widget.DataTable("tabela", i3GEOadmin.mapas.defColunas(), myDataSource);
+			//i3GEOadmin.mapas.dataTable = new YAHOO.widget.DataTable("tabela", i3GEOadmin.mapas.defColunas(), myDataSource);
+			i3GEOadmin.mapas.dataTable = new YAHOO.widget.ScrollingDataTable("tabela", i3GEOadmin.mapas.defColunas(), myDataSource,{width:"100%"});
 			i3GEOadmin.mapas.dataTable.subscribe('cellClickEvent',function(ev){
 				var sUrl, callback,$clicouId, $recordid,
 					target = YAHOO.util.Event.getTarget(ev),
@@ -167,7 +168,7 @@ i3GEOadmin.mapas = {
 		ins += "<input size=10 type=text id=Eordem_mapa value='"+i.ordem_mapa+"' /></p>";
 
 		ins += "<p>Nome do mapa:<br>";
-		ins += "<input size=50 type=text id=Enome_mapa value='"+i.nome_mapa+"' /></p>";
+		ins += "<input size=35 type=text id=Enome_mapa value='"+i.nome_mapa+"' /></p>";
 
 		ins += "<p>Publicado?<br>";
 		ins += "<select  id='Epublicado_mapa' >";
@@ -175,31 +176,31 @@ i3GEOadmin.mapas = {
 		ins += "</select></p>";
 
 		ins += "<p>Descri&ccedil;&atilde;o:<br>";
-		ins += "<input size=50 type=text id=Edesc_mapa value='"+i.desc_mapa+"' /></p>";
+		ins += "<input size=35 type=text id=Edesc_mapa value='"+i.desc_mapa+"' /></p>";
 
 		ins += "<p>Extens&atilde;o geogr&aacute;fica:<br>";
-		ins += "<input size=50 type=text id=Eext_mapa value='"+i.ext_mapa+"' /></p>";
+		ins += "<input size=35 type=text id=Eext_mapa value='"+i.ext_mapa+"' /></p>";
 
 		ins += "<p>URL da imagem miniatura:<br>";
-		ins += "<input size=50 type=text id=Eimagem_mapa value='"+i.imagem_mapa+"' /></p>";
+		ins += "<input size=35 type=text id=Eimagem_mapa value='"+i.imagem_mapa+"' /></p>";
 		ins += "<img src='"+i.imagem_mapa+"' />";
 
 		ins += "<p>Temas que ser&atilde;o inclu&iacute;dos nesse mapa (utilize os códigos dos mapfiles mostrados na lista abaixo): </p>";
-		ins += "<input size=50 type=text id='Etemas_mapa' value='"+i.temas_mapa+"' /></p>";
+		ins += "<input size=35 type=text id='Etemas_mapa' value='"+i.temas_mapa+"' /></p>";
 		ins += "<div id=comboMapfiles >Buscando...</div>";
 
 		ins += "<p>Temas que ser&atilde;o ligados. Devem constar na lista de temas inclu&iacute;dos: </p>";
-		ins += "<input size=50 type=text id='Eligados_mapa' value='"+i.ligados_mapa+"' /></p>";
+		ins += "<input size=35 type=text id='Eligados_mapa' value='"+i.ligados_mapa+"' /></p>";
 
 		ins += "<p>Perfis que podem ver este mapa: </p>";
-		ins += "<input size=50 type=text id='Eperfil_mapa' value='"+i.perfil_mapa+"' /></p>";
+		ins += "<input size=35 type=text id='Eperfil_mapa' value='"+i.perfil_mapa+"' /></p>";
 		ins += "<div id=comboPerfis >Buscando...</div>";
 
 		ins += "<p>Outros par&acirc;metros (separe com '&'):<br>";
-		ins += "<input size=50 type=text id=Eoutros_mapa value='"+i.outros_mapa+"' /></p>";
+		ins += "<input size=35 type=text id=Eoutros_mapa value='"+i.outros_mapa+"' /></p>";
 
 		ins += "<p>Link direto para abertura do mapa (despreza os outros par&acirc;metros):<br>";
-		ins += "<input size=50 type=text id=Elinkdireto_mapa value='"+i.linkdireto_mapa+"' /></p>";
+		ins += "<input size=35 type=text id=Elinkdireto_mapa value='"+i.linkdireto_mapa+"' /></p>";
 		ins += "<br><br><br>";
 		return(ins);
 	},

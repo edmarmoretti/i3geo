@@ -20,6 +20,9 @@ cursor: se-resize;
 .yui-skin-sam .yui-button button, .yui-skin-sam .yui-button a, .yui-skin-sam .yui-button a:visited{
 	font-size:10pt;
 }
+.yui-skin-sam .yui-button {
+    margin: 0.25em;
+}
 .ajuda_usuario
 {
 background-image:url(../../imagens/external.png);
@@ -31,17 +34,21 @@ cursor:help;
 }
 P {
 	text-align: left;
-	font-size: 13pt;
+	font-size: 12pt;
 	font-family: Verdana, Arial, Helvetica, sans-serif;
 }
-
+P  b{
+	text-align: left;
+	font-size: 10pt;
+	font-family: Verdana, Arial, Helvetica, sans-serif;
+}
 legend {
 	font-weight: bold;
 	cursor: pointer;
 	background-color: white;
 	color: navy;
 	text-align: left;
-	font-size: 13pt;
+	font-size: 11pt;
 	font-family: Verdana, Arial, Helvetica, sans-serif;
 }
 
@@ -78,7 +85,7 @@ input {
 .lista1 td {
 	cursor: pointer;
 	text-align: left;
-	font-size: 14px;
+	font-size: 12pt;
 	font-family: Verdana, Arial, Helvetica, sans-serif;
 }
 

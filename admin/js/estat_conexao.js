@@ -63,7 +63,8 @@ i3GEOadmin.conexao = {
 			myDataSource.responseSchema = {
 				fields: i3GEOadmin.conexao.colunas
 			};
-			i3GEOadmin.conexao.dataTable = new YAHOO.widget.DataTable("tabela", i3GEOadmin.conexao.defColunas(), myDataSource);
+			//i3GEOadmin.conexao.dataTable = new YAHOO.widget.DataTable("tabela", i3GEOadmin.conexao.defColunas(), myDataSource);
+			i3GEOadmin.conexao.dataTable = new YAHOO.widget.ScrollingDataTable("tabela", i3GEOadmin.conexao.defColunas(), myDataSource,{width:"100%"});
 			i3GEOadmin.conexao.dataTable.subscribe('cellClickEvent',function(ev){
 				var sUrl, callback,$clicouId, $recordid,
 					target = YAHOO.util.Event.getTarget(ev),

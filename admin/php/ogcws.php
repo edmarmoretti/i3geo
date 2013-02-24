@@ -44,7 +44,6 @@ if(verificaOperacaoSessao("admin/html/ogcws") == false){
 //error_reporting(E_ALL);
 $versao = versao();
 $map_file = $locaplic."/aplicmap/ogcwsv".$versao["principal"].".map";
-
 $mapa = ms_newMapObj($map_file);
 $web = $mapa->web;
 //faz a busca da fun&ccedil;&atilde;o que deve ser executada
@@ -83,9 +82,8 @@ switch (strtoupper($funcao))
 			"ows_name"
 		);
 		$par = array();
-		foreach ($vs as $v)
-		{
-			$par[$v] = utf8_encode($web->metadata->get($v));
+		foreach ($vs as $v){
+			$par[$v] = utf8_encode($mapa->getmetadata($v));
 		}
 		$par["mapfile"] = $map_file;
 		retornaJSON($par);

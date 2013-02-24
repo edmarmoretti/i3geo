@@ -57,7 +57,8 @@ i3GEOadmin.fonteinfo = {
 			myDataSource.responseSchema = {
 				fields: i3GEOadmin.fonteinfo.colunas
 			};
-			i3GEOadmin.fonteinfo.dataTable = new YAHOO.widget.DataTable("tabela", i3GEOadmin.fonteinfo.defColunas(), myDataSource);
+			//i3GEOadmin.fonteinfo.dataTable = new YAHOO.widget.DataTable("tabela", i3GEOadmin.fonteinfo.defColunas(), myDataSource);
+			i3GEOadmin.fonteinfo.dataTable = new YAHOO.widget.ScrollingDataTable("tabela", i3GEOadmin.fonteinfo.defColunas(), myDataSource,{width:"100%"});
 			i3GEOadmin.fonteinfo.dataTable.subscribe('cellClickEvent',function(ev){
 				var sUrl, callback,$clicouId, $recordid,
 					target = YAHOO.util.Event.getTarget(ev),

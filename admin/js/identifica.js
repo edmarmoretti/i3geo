@@ -90,7 +90,8 @@ i3GEOadmin.identifica = {
 			myDataSource.responseSchema = {
 				fields: i3GEOadmin.identifica.colunas
 			};
-			i3GEOadmin.identifica.dataTable = new YAHOO.widget.DataTable("tabela", i3GEOadmin.identifica.defColunas(), myDataSource);
+			//i3GEOadmin.identifica.dataTable = new YAHOO.widget.DataTable("tabela", i3GEOadmin.identifica.defColunas(), myDataSource);
+			i3GEOadmin.identifica.dataTable = new YAHOO.widget.ScrollingDataTable("tabela", i3GEOadmin.identifica.defColunas(), myDataSource,{width:"100%"});
 			i3GEOadmin.identifica.dataTable.subscribe('cellClickEvent',function(ev){
 				var sUrl, callback,$clicouId, $recordid,
 					target = YAHOO.util.Event.getTarget(ev),

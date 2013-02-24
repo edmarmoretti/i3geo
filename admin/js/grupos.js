@@ -124,7 +124,8 @@ i3GEOadmin.grupos = {
 			myDataSource.responseSchema = {
 				fields: i3GEOadmin.grupos.colunas
 			};
-			i3GEOadmin.grupos.dataTable = new YAHOO.widget.DataTable("tabela", i3GEOadmin.grupos.defColunas(), myDataSource);
+			//i3GEOadmin.grupos.dataTable = new YAHOO.widget.DataTable("tabela", i3GEOadmin.grupos.defColunas(), myDataSource);
+			i3GEOadmin.grupos.dataTable = new YAHOO.widget.ScrollingDataTable("tabela", i3GEOadmin.grupos.defColunas(), myDataSource,{width:"100%"});
 			i3GEOadmin.grupos.dataTable.subscribe('cellClickEvent',function(ev){
 				var sUrl, callback,$clicouId, $recordid,
 					target = YAHOO.util.Event.getTarget(ev),

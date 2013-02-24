@@ -101,7 +101,8 @@ i3GEOadmin.menus = {
 			myDataSource.responseSchema = {
 				fields: i3GEOadmin.menus.colunas
 			};
-			i3GEOadmin.menus.dataTable = new YAHOO.widget.DataTable("tabela", i3GEOadmin.menus.defColunas(), myDataSource);
+			//i3GEOadmin.menus.dataTable = new YAHOO.widget.DataTable("tabela", i3GEOadmin.menus.defColunas(), myDataSource);
+			i3GEOadmin.menus.dataTable = new YAHOO.widget.ScrollingDataTable("tabela", i3GEOadmin.menus.defColunas(), myDataSource,{width:"100%"});
 			i3GEOadmin.menus.dataTable.subscribe('cellClickEvent',function(ev){
 				var sUrl, callback,$clicouId, $recordid,
 					target = YAHOO.util.Event.getTarget(ev),

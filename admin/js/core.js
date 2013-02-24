@@ -1100,7 +1100,7 @@ function core_geraLinhas(dados)
 			{
 				if(!p.value)
 				p.value = "";
-				resultado += "<input size="+p.size+" type=text id="+p.id+" value=\""+p.value+"\" />";
+				resultado += "<input style=width:90%; type=text id="+p.id+" value=\""+p.value+"\" />";
 				if(p.tipo == "cor")
 				{
 					resultado += "&nbsp;<img src='../../imagens/aquarela.gif' style='cursor:pointer;' onclick='core_abreCor(\"\",\""+p.id+"\");' />";
@@ -1523,7 +1523,7 @@ function core_ativaforms(lista){
 }
 function core_listaDeLetras(onde,nomeFuncao){
 	//letraAtual guarda a última letra clicada
-	var o,i,ins= "",
+	var o,i,ins= "<p><b>",
 		letras = ["Todos","A","B","C","D","E","F","G","H","I","J","K","L","M","N","O","P","Q","R","S","T","U","V","X","Y","Z","_","1","2","3","4","5","6","7","8","9"],
 		nletras = letras.length;
 	if(!i3GEO.util){
@@ -1540,10 +1540,11 @@ function core_listaDeLetras(onde,nomeFuncao){
 				+ "\")' style='color:blue;cursor:pointer;padding:1px;border: 1px solid #C8C8FA'>"
 				+ letras[i] + "</span>&nbsp;";
 	}
+	ins += "</b></p>";
 	if(onde != ""){
 		o = document.getElementById(onde);
 		if(o){
-			o.innerHTML = "<form id=forminiciais >Iniciais: <input name='' onchange='' value='"+letraAtual+"' id=iniciaisLetras type=text style=width:40px;cursor:pointer /> ou </form><div style=position:relative;top:5px; id='_listaDeLetras' >"+ins+"</div>";
+			o.innerHTML = "<fieldset style=padding:2px; ><form id=forminiciais ><p><b>Iniciais: <input name='' onchange='' value='"+letraAtual+"' id=iniciaisLetras type=text style=width:40px;cursor:pointer /> ou </form><div style=position:relative;top:1px; id='_listaDeLetras' >"+ins+"</div></b></p></fieldset>";
 			document.getElementById("forminiciais").onsubmit = function(){
 				var v = document.getElementById("iniciaisLetras").value;
 				i3GEO.util.insereCookie("I3GEOletraAdmin", v);

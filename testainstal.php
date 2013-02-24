@@ -433,9 +433,6 @@ function permissoesarquivo($arquivo){
 
 ?>
 </div>
-<script>
-if(screen.availWidth > 700)
-{document.getElementById("divGeral").style.width = "700px";}
-</script>
+
 </body>
 </html>

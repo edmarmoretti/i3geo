@@ -95,7 +95,8 @@ i3GEOadmin.webservices = {
 			myDataSource.responseSchema = {
 				fields: i3GEOadmin.webservices.colunas
 			};
-			i3GEOadmin.webservices.dataTable = new YAHOO.widget.DataTable("tabela", i3GEOadmin.webservices.defColunas(), myDataSource);
+			//i3GEOadmin.webservices.dataTable = new YAHOO.widget.DataTable("tabela", i3GEOadmin.webservices.defColunas(), myDataSource);
+			i3GEOadmin.webservices.dataTable = new YAHOO.widget.ScrollingDataTable("tabela", i3GEOadmin.webservices.defColunas(), myDataSource,{width:"100%"});
 			i3GEOadmin.webservices.dataTable.subscribe('cellClickEvent',function(ev){
 				var sUrl, callback,$clicouId, $recordid,
 					target = YAHOO.util.Event.getTarget(ev),

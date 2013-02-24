@@ -309,7 +309,7 @@ i3GEOadmin.variaveis = {
 					          ]
 			};
 			ins += core_geraLinhas(param);
-			ins += "<br><br><br>";
+			//ins += "<br><br><br>";
 			//utilizado para passar o codigo da variavel qd for necessario
 			ins += "<input type=hidden id='Ecodigo_variavel' value='' />";
 			$i("editor_bd").innerHTML = ins;
@@ -495,7 +495,7 @@ i3GEOadmin.variaveis = {
 			ins += core_geraLinhas(param);
 			//utilizado para passar o codigo da variavel qd for necessario
 			ins += "<input type=hidden id='Eid_medida_variavel' value='' />";
-			ins += "<br><br><br>";
+			//ins += "<br><br><br>";
 			$i("editor_bd").innerHTML = ins;
 		}
 	},
@@ -563,7 +563,7 @@ i3GEOadmin.variaveis = {
 				]
 			};
 			ins += core_geraLinhas(param);
-			ins += "<br><br><br>";
+			//ins += "<br><br><br>";
 			$i("editor_bd").innerHTML = ins;
 		}
 	},
@@ -696,7 +696,7 @@ i3GEOadmin.variaveis = {
 				          ]
 			};
 			ins += core_geraLinhas(param);
-			ins += "<br><br><br>";
+			//ins += "<br><br><br>";
 			$i("editor_bd").innerHTML = ins;
 		}
 	},
@@ -764,7 +764,7 @@ i3GEOadmin.variaveis = {
 				          ]
 		};
 		ins += core_geraLinhas(param);
-		ins += "<br><br><br>";
+		//ins += "<br><br><br>";
 		$i("editor_bd").innerHTML = ins;
 	},
 	editarMontaFormulario: function(dados,tipo,id){

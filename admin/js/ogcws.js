@@ -163,4 +163,3 @@ function salva(variavel)
 		$i(variavel).value = original;
 	}
 }
-YAHOO.util.Event.addListener(window, "load", initMenu);
