@@ -626,7 +626,7 @@ function editar(tipo,id)
 				if(tipo == "grupo")
 				{
 					var dados = YAHOO.lang.JSON.parse(o.responseText)[0];
-					core_montaEditor("gravaDados('grupo','"+id+"')");
+					core_montaEditor("gravaDados('grupo','"+id+"')","400px","400px");
 					$i("editor_bd").innerHTML = montaDivGrupo(dados);
 					core_comboGrupos("comboGrupo","Eid_grupo",dados.id_grupo,"");
 					core_comboPerfis("comboPerfil","Eperfil_grupo","","registraPerfil(this.value,\"En1_perfil\")");
@@ -634,7 +634,7 @@ function editar(tipo,id)
 				if(tipo == "subgrupo")
 				{
 					var dados = YAHOO.lang.JSON.parse(o.responseText)[0];
-					core_montaEditor("gravaDados('subgrupo','"+id+"')");
+					core_montaEditor("gravaDados('subgrupo','"+id+"')","400px","400px");
 					$i("editor_bd").innerHTML = montaDivSubGrupo(dados);
 					core_comboSubGrupos("comboSubGrupo","Eid_subgrupo",dados.id_subgrupo,"");
 					core_comboPerfis("comboPerfil","Eperfil_subgrupo","","registraPerfil(this.value,\"En2_perfil\")");
@@ -642,7 +642,7 @@ function editar(tipo,id)
 				if(tipo == "tema")
 				{
 					var dados = YAHOO.lang.JSON.parse(o.responseText)[0];
-					core_montaEditor("gravaDados('tema','"+id+"')");
+					core_montaEditor("gravaDados('tema','"+id+"')","400px","400px");
 					$i("editor_bd").innerHTML = montaDivTema(dados);
 					core_comboTemas("comboTema","Eid_tema",dados.id_tema,"");
 					core_comboPerfis("comboPerfil","Eperfil_tema","","registraPerfil(this.value,\"En3_perfil\")");
@@ -675,12 +675,12 @@ function editar(tipo,id)
 }
 function montaDivGrupo(i)
 {
-	var ins = "<br>Escolha o grupo para esse n&iacute;vel:<br><br>";
+	var ins = "<p>Escolha o grupo para esse n&iacute;vel:</p>";
 	ins += "<div id=comboGrupo >Buscando...</div>";
-	ins += "Perfis que podem ver:<br><br>";
+	ins += "<p>Perfis que podem ver:</p>";
 	ins += "<input type=text id='En1_perfil' value='"+i.n1_perfil+"' style='position:relative;width:200px;float:left;' />";
 	ins += "<div id=comboPerfil style='left:5px;float:left;position:relative;width:100px;'>Buscando...</div>";
-	ins += "<p style='float:left;width:200px;' >Publicado?<br><br>";
+	ins += "<p style='width:200px;' >Publicado?<br><br>";
 	ins += "<select id='Epublicado' >";
 	ins += core_combosimnao(i.publicado);
 	ins += "</select>";
@@ -690,12 +690,12 @@ function montaDivGrupo(i)
 }
 function montaDivSubGrupo(i)
 {
-	var ins = "<br>Escolha o sub-grupo para esse n&iacute;vel:<br><br>";
+	var ins = "<p>Escolha o sub-grupo para esse n&iacute;vel:</p>";
 	ins += "<div id=comboSubGrupo >Buscando...</div>";
-	ins += "Perfis que podem ver: <br><br>";
+	ins += "<p>Perfis que podem ver: </p>";
 	ins += "<input type=text id='En2_perfil' value='"+i.n2_perfil+"' style='position:relative;width:200px;float:left;' />";
 	ins += "<div id=comboPerfil style='left:5px;float:left;position:relative;width:100px;' >Buscando...</div>";
-	ins += "<p style='float:left;width:200px;'>Publicado?<br><br>";
+	ins += "<p style='width:200px;'>Publicado?<br><br>";
 	ins += "<select id='Epublicado' >";
 	ins += core_combosimnao(i.publicado);
 	ins += "</select>";
@@ -705,22 +705,22 @@ function montaDivSubGrupo(i)
 }
 function montaDivTema(i)
 {
-	var ins = "<br>Escolha o tema para esse n&iacute;vel:<br><br>";
+	var ins = "<p>Escolha o tema para esse n&iacute;vel:</p>";
 	ins += "<div id=comboTema >Buscando...</div>";
-	ins += "Perfis que podem ver: <br><br>";
+	ins += "<p>Perfis que podem ver: </p>";
 	ins += "<input type=text id='En3_perfil' value='"+i.n3_perfil+"' style='position:relative;width:200px;float:left;'/>";
 	ins += "<div id=comboPerfil style='left:5px;float:left;position:relative;width:100px;'>Buscando...</div>";
 	ins += "<p style='float:left;width:200px;'>Publicado?<br><br>";
 	ins += "<select id='Epublicado' >";
 	ins += core_combosimnao(i.publicado);
 	ins += "</select>";
-	ins += "<p style='float:left;width:200px;'>Ordem<br><br>";
+	ins += "<p style='width:200px;'>Ordem<br><br>";
 	ins += "<input size=10 type=text value="+i.ordem+" id='Eordem' />";;
 	return(ins);
 }
 function montaDivRaiz(i)
 {
-	var ins = "<br>Tema:<br><br>";
+	var ins = "<p>Tema:</p>";
 	ins += "<div id=comboTema >Buscando...</div>";
 	ins += "<p>Perfis que podem ver: </p>";
 	ins += "<input size=45 type=text id='Eperfil' value='"+i.perfil+"' /></p>";

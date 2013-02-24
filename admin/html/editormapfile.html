@@ -30,7 +30,7 @@ body {
 	<center>
 		<div class="bordaSuperior">&nbsp;</div>
 		<div class="mascaraPrincipal" id="divGeral">
-			<div id=cabecalhoPrincipal></div>
+			<div id=cabecalhoPrincipal ></div>
 			<h1>
 				Administra&ccedil;&atilde;o do i3geo - mapfiles dos temas <img
 					src="../imagens/04.png" style="cursor: pointer" id=botaoAjuda />
@@ -134,9 +134,6 @@ body {
 	</script>
 
 	<script>
-		if (screen.availWidth > 700) {
-			document.getElementById("divGeral").style.width = "700px";
-		}
 		if(i3GEO.util.pegaCookie("I3GEOletraAdmin")) {
 			letraAtual = i3GEO.util.pegaCookie("I3GEOletraAdmin");
 		}

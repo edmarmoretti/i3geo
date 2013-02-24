@@ -1,3 +1,6 @@
+.paragrafo{
+	font-size: 10pt;
+}
 .yui-navset {
     background: url("../../pacotes/yui290/build/assets/skins/sam/sprite.png") repeat-x scroll 0 0 #D8D8D8;
     z-index: 3000;

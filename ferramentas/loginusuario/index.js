@@ -138,7 +138,7 @@ i3GEOF.loginusuario = {
 		titulo = "Login &nbsp;&nbsp;&nbsp;";
 		janela = i3GEO.janela.cria(
 			"270px",
-			"220px",
+			"",
 			"",
 			"",
 			"",
@@ -150,6 +150,7 @@ i3GEOF.loginusuario = {
 			minimiza
 		);
 		divid = janela[2].id;
+		janela[0].cfg.setProperty("constraintoviewport",false);
 		i3GEOF.loginusuario.aguarde = $i("i3GEOF.loginusuario_imagemCabecalho").style;
 		$i("i3GEOF.loginusuario_corpo").style.backgroundColor = "white";
 		i3GEOF.loginusuario.inicia(divid);

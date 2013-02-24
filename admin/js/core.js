@@ -67,7 +67,7 @@ Armazena o objeto com a lista de perfis
 $perfis = "";
 function cabecalhoMetaestat(id,excluir){
 	var i,n,temp,
-		ins = "<fieldset class='cabecalhoGeral' style='height:120px;line-height:30px'><legend>Op&ccedil;&otilde;es principais</legend>",
+		ins = "<fieldset><legend>Op&ccedil;&otilde;es principais</legend>",
 		u = i3GEO.util.pegaCookie("i3geousuarionome"),
 		botoes = [
 			{id:"principal",titulo:"In&iacute;cio",link:"../index.html"},
@@ -91,7 +91,7 @@ function cabecalhoMetaestat(id,excluir){
 	if(!u){
 		u = "-";
 	}
-	ins += "<div id='i3GEONomeLogin' > Login: "+u+"</div>";
+	ins += "<div id='i3GEONomeLogin' style=width:100%; > Login: "+u+"</div>";
 	ins += "</fieldset>";
 	temp = $i(id);
 	temp.innerHTML = ins;
@@ -119,7 +119,7 @@ function cabecalhoMetaestat(id,excluir){
 
 function cabecalhoUsuarios(id,excluir){
 	var i,n,temp,
-		ins = "<fieldset class='cabecalhoGeral'><legend>Op&ccedil;&otilde;es principais</legend>",
+		ins = "<fieldset ><legend>Op&ccedil;&otilde;es principais</legend>",
 		u = i3GEO.util.pegaCookie("i3geousuarionome"),
 		botoes = [
 			{id:"principal",titulo:"In&iacute;cio",link:"../index.html"},
@@ -137,7 +137,7 @@ function cabecalhoUsuarios(id,excluir){
 	if(!u){
 		u = "-";
 	}
-	ins += "<div id='i3GEONomeLogin' > Login: "+u+"</div>";
+	ins += "<div id='i3GEONomeLogin' style=width:100%; > Login: "+u+"</div>";
 	ins += "</fieldset>";
 	temp = $i(id);
 	temp.innerHTML = ins;
@@ -164,7 +164,7 @@ function cabecalhoUsuarios(id,excluir){
 }
 function cabecalhoGeral(id,excluir){
 	var i,n,temp,
-		ins = "<fieldset class='cabecalhoGeral'><legend>Op&ccedil;&otilde;es principais</legend>",
+		ins = "<fieldset ><legend>Op&ccedil;&otilde;es principais</legend>",
 		u = i3GEO.util.pegaCookie("i3geousuarionome"),
 		botoes = [
 			{id:"principal",titulo:"In&iacute;cio",link:"../index.html"},
@@ -183,7 +183,7 @@ function cabecalhoGeral(id,excluir){
 	if(!u){
 		u = "-";
 	}
-	ins += "<div id='i3GEONomeLogin' > Login: "+u+"</div>";
+	ins += "<div id='i3GEONomeLogin' style=width:100%; > Login: "+u+"</div>";
 	ins += "</fieldset>";
 	temp = $i(id);
 	temp.innerHTML = ins;

@@ -159,7 +159,7 @@ i3GEOadmin.subgrupos = {
 				{ label: "Cancela", value: "CANCEL", checked: false }
 			]);
 			editorBotoes.on("checkedButtonChange", on_editorCheckBoxChange);
-			YAHOO.subgrupos.panelEditor2 = new YAHOO.widget.Panel("janela_editor2", { modal:true,fixedcenter:true,close:false,width:"400px", height:"480px",overflow:"auto", visible:false,constraintoviewport:true } );
+			YAHOO.subgrupos.panelEditor2 = new YAHOO.widget.Panel("janela_editor2", { modal:true,fixedcenter:true,close:false,width:"450px", height:"480px",overflow:"auto", visible:false,constraintoviewport:true } );
 			YAHOO.subgrupos.panelEditor2.render();
 		}
 		YAHOO.subgrupos.panelEditor2.show();
