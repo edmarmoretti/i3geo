@@ -14,19 +14,18 @@ body {
 </head>
 <body class=" yui-skin-sam fundoPonto">
 	<div class="bordaSuperior">&nbsp;</div>
-	<div class="mascaraPrincipal" id="divGeral" style="width: 80%">
+	<div class="mascaraPrincipal" id="divGeral" style="width: 100%;max-width:95%">
 		<div id=cabecalhoPrincipal></div>
 		<h1>Editor de mapfiles</h1>
 		<a href="http://mapserver.org/mapfile/index.html#mapfile"
 			target="_new">Documenta&ccedil;&atilde;o do Mapserver</a><br> <br> <a
 			href="../html/editormapfile.html" target="_self">Voltar</a><br> <br>
-		<form action="editortexto.php?mapfile=<?php echo $_GET["mapfile"];?>"
-			method=post>
+		<form style="width: 98%;" action="editortexto.php?mapfile=<?php echo $_GET["mapfile"];?>" method=post>
 			<input type=submit value="Salvar (tamb&eacute;m atualiza o mapa)" /><input type=button value="Testar"
 				onclick="testar()" /><input type=button value="Testar no i3Geo"
 				onclick="abrirI3geo()" /> (Salve antes de testar)<br> <br>
-			<div id="letras"></div>
-			<div id="comboMapfiles">Aguarde...</div>
+			<div id="letras" style="width: 100%;max-width:750px"></div>
+			<div id="comboMapfiles" style="width: 100%;max-width:450px">Aguarde...</div>
 			<br>
 			<?php
 			//evita erros removendo caracteres PHP
