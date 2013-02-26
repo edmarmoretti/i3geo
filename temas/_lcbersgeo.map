@@ -17,7 +17,7 @@ MAP
       "tema"	"_Imagem cbersgeo"
       "cache" "sim"
     END # METADATA
-    NAME "_wcbersgeo"
+    NAME "_lcbersgeo"
     STATUS DEFAULT
     TILEITEM "location"
     TYPE RASTER

@@ -28,7 +28,7 @@ MAP
       "editorsql"	""
       "ltempoitemfim"	""
     END
-    NAME "testesubsstring"
+    NAME "_testesubsstring"
     STATUS OFF
     TEMPLATE "none.htm"
     TYPE POLYGON

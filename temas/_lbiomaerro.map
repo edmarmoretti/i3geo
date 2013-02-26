@@ -21,7 +21,7 @@ MAP
       "TEMA"	"Bioma com erro"
       "convcaracter"	""
     END # METADATA
-    NAME "_wbiomaerro"
+    NAME "_lbiomaerro"
     STATUS OFF
     TEMPLATE "none.htm"
     TILEITEM "location"

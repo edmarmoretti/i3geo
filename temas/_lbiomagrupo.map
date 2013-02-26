@@ -17,7 +17,7 @@ MAP
       "permiteogc"	"sim"
       "TEMA"	"Biomas shapefile (acentuação)"
     END # METADATA
-    NAME "_wbiomagrupo"
+    NAME "_lbiomagrupo"
     PROCESSING "ITEMS=CD_LEGENDA"
     STATUS OFF
     TEMPLATE "none.htm"

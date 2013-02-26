@@ -17,7 +17,7 @@ MAP
       "permitekml"	"sim"
       "tema"	"teste palete"
     END # METADATA
-    NAME "_wcinzapalete"
+    NAME "_lcinzapalete"
     STATUS DEFAULT
     TEMPLATE "none.htm"
     TILEITEM "location"

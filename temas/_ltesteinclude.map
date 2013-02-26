@@ -20,7 +20,7 @@ MAP
       "TEMA"	"Bairros IBGE"
       "convcaracter"	""
     END # METADATA
-    NAME "w_bairros"
+    NAME "l_bairros"
     STATUS DEFAULT
     TEMPLATE "none.htm"
     TILEITEM "location"

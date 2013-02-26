@@ -22,7 +22,7 @@ MAP
       "aplicaextensao"	"SIM"
       "legendaimg"	""
     END # METADATA
-    NAME "_wbiomashpzoom"
+    NAME "_lbiomashpzoom"
     PROCESSING "ITEMS=CD_LEGENDA"
     STATUS OFF
     TEMPLATE "none.htm"

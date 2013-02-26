@@ -18,7 +18,7 @@ MAP
       "tema"	"Unidades de conservação federais de proteção integral"
       "aplicaextensao"	"NAO"
     END # METADATA
-    NAME "_wtestegml"
+    NAME "_ltestegml"
     STATUS OFF
     TILEITEM "location"
     OPACITY 70

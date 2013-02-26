@@ -20,7 +20,7 @@ MAP
       "permitekml"	"sim"
       "TEMA"	"Teste de pontos com template kml"
     END # METADATA
-    NAME "_wtestepttemplatekml"
+    NAME "_ltestepttemplatekml"
     STATUS OFF
     TILEITEM "location"
     TYPE POINT

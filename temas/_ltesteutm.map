@@ -19,7 +19,7 @@ MAP
       "permitekml"	"sim"
       "TEMA"	"_Teste de projeção utm"
     END # METADATA
-    NAME "testeutm"
+    NAME "_ltesteutm"
     PROJECTION
       "init=epsg:29181"
     END # PROJECTION

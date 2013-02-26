@@ -27,7 +27,7 @@ MAP
       "wms_server_version"	"1.1.1"
       "wms_style"	"default"
     END # METADATA
-    NAME "atlas_ucsf"
+    NAME "_ucsfwms"
     OFFSITE 255 255 255
     STATUS OFF
     TILEITEM "location"

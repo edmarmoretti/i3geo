@@ -19,7 +19,7 @@ MAP
       "permitekml"	"sim"
       "TEMA"	"teste"
     END # METADATA
-    NAME "_wkml"
+    NAME "_lkml"
     STATUS DEFAULT
     TEMPLATE "none.htm"
     TILEITEM "location"

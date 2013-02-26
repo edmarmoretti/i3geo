@@ -40,7 +40,7 @@ MAP
       "legendaimg"	""
       "LTEMPOITEMFIM"	""
     END # METADATA
-    NAME "_wlocali"
+    NAME "_llocali"
     STATUS DEFAULT
     TEMPLATE "none.htm"
     TYPE POINT

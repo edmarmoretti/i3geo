@@ -16,7 +16,7 @@ MAP
       "permitekml"	"sim"
       "tema"	"_Imagem cbersgeo"
     END # METADATA
-    NAME "_wcbersgrupo"
+    NAME "_lcbersgrupo"
     STATUS DEFAULT
     TILEITEM "location"
     TYPE RASTER

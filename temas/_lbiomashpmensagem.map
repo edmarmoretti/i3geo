@@ -18,7 +18,7 @@ MAP
       "permiteogc"	"sim"
       "TEMA"	"Biomas com icone na árvore"
     END # METADATA
-    NAME "_wbiomashpmensagem"
+    NAME "_lbiomashpmensagem"
     PROCESSING "ITEMS=CD_LEGENDA"
     STATUS OFF
     TEMPLATE "none.htm"

@@ -18,7 +18,7 @@ MAP
       "permitekml"	"sim"
       "TEMA"	"Biomas com icone na árvore"
     END # METADATA
-    NAME "_wbiomashpicone"
+    NAME "_lbiomashpicone"
     PROCESSING "ITEMS=CD_LEGENDA"
     STATUS OFF
     TEMPLATE "none.htm"
