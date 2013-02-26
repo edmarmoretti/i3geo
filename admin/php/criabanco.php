@@ -62,7 +62,7 @@
 				"CREATE TABLE ".$esquemaadmin."i3geoadmin_atlasp (ordem_prancha NUMERIC, desc_prancha TEXT, h_prancha NUMERIC, icone_prancha TEXT, id_atlas NUMERIC, id_prancha INTEGER PRIMARY KEY, link_prancha TEXT, mapext_prancha TEXT, titulo_prancha TEXT, w_prancha NUMERIC)",
 				"CREATE TABLE ".$esquemaadmin."i3geoadmin_atlast (ordem_tema NUMERIC, codigo_tema TEXT, id_prancha TEXT, id_tema INTEGER PRIMARY KEY, ligado_tema TEXT)",
 				"CREATE TABLE ".$esquemaadmin."i3geoadmin_menus (publicado_menu TEXT, perfil_menu TEXT, aberto TEXT, desc_menu TEXT, id_menu INTEGER PRIMARY KEY, nome_menu TEXT, it TEXT, es TEXT, en TEXT)",
-				"CREATE TABLE ".$esquemaadmin."i3geoadmin_mapas (publicado_mapa TEXT, ordem_mapa NUMERIC, perfil_mapa TEXT, ligados_mapa TEXT, temas_mapa TEXT, desc_mapa TEXT, ext_mapa TEXT, id_mapa INTEGER PRIMARY KEY, imagem_mapa TEXT, linkdireto_mapa TEXT, nome_mapa TEXT, outros_mapa TEXT, , mapfile TEXT)",
+				"CREATE TABLE ".$esquemaadmin."i3geoadmin_mapas (publicado_mapa TEXT, ordem_mapa NUMERIC, perfil_mapa TEXT, ligados_mapa TEXT, temas_mapa TEXT, desc_mapa TEXT, ext_mapa TEXT, id_mapa INTEGER PRIMARY KEY, imagem_mapa TEXT, linkdireto_mapa TEXT, nome_mapa TEXT, outros_mapa TEXT, mapfile TEXT)",
 				"CREATE TABLE ".$esquemaadmin."i3geoadmin_atlas (publicado_atlas TEXT, ordem_atlas NUMERIC, basemapfile_atlas TEXT, desc_atlas TEXT, h_atlas NUMERIC, icone_atlas TEXT, id_atlas INTEGER PRIMARY KEY, link_atlas TEXT, pranchadefault_atlas TEXT, template_atlas TEXT, tipoguias_atlas TEXT, titulo_atlas TEXT, w_atlas NUMERIC)",
 				"CREATE TABLE ".$esquemaadmin."i3geoadmin_sistemas (publicado_sistema TEXT, id_sistema INTEGER PRIMARY KEY, nome_sistema TEXT, perfil_sistema TEXT)",
 				"CREATE TABLE ".$esquemaadmin."i3geoadmin_identifica (publicado_i TEXT, abrir_i TEXT, id_i INTEGER PRIMARY KEY, nome_i TEXT, target_i TEXT)",
@@ -100,6 +100,7 @@
 				"create table ".$esquemaadmin."i3geoestat_mapa_tema (id_mapa_tema integer not null unique primary key autoincrement,id_mapa_grupo integer,titulo text,id_medida_variavel integer,foreign key (id_mapa_grupo) references i3geoestat_mapa_grupo (id_mapa_grupo),foreign key (id_medida_variavel) references i3geoestat_medida_variavel (id_medida_variavel))"
 		);
 		//valida o usuario e aplica
+		$exts = get_loaded_extensions();
 		if($conexaoadmin == ""){
 			if(empty($_POST["senha"]) || empty($_POST["usuario"])){
 				criabancoformularioLoginMaster("criabanco.php");
@@ -112,20 +113,38 @@
 					exit;
 				}
 			}
-			if(file_exists("../../admin/admin.db"))	{
+			if(file_exists("../admin.db"))	{
 				echo "<br>Arquivo admin/admin.db ja existe. Vc deve apag&aacute;-lo para poder cri&aacute;-lo novamente caso precise";
 			}
 			else{
-				if(function_exists("sqlite_open")){
-					//cria o banco de dados de administracao
-					$banco = sqlite_open("../../admin/admin.db",0666);
-					$banco = null;
-					$dbhw = new PDO('sqlite:../../admin/admin.db');
+				//@TODO v5.0 criar um arquivo sqlite vazio apenas com as tabelas
+				copy("../admin_vazio.db","../admin.db");
+				chmod("../admin.db",0777);
+				if(file_exists("../admin.db")){
+					echo "Banco copiado ../admin.db !!!";
+					$dbhw = new PDO('sqlite:../admin.db');
+					$banco = "ok";
 				}
 				else{
-					//TODO RC2 criar um arquivo sqlite vazio apenas com as tabelas
+					echo "erro";
+				}
+				//@FIXME a criacao do banco nao funciona no PHP (Linux)
+				/*
+				if(function_exists("sqlite_open")){
+					$banco = sqlite_open("../admin.db",0666);
+					$banco = null;
+					$dbhw = new PDO('sqlite:../admin.db');
+				}
+				elseif(in_array("sqlite3",$exts)){
+					$banco = new SQLite3("../admin.db",SQLITE3_OPEN_CREATE);
+					echo $banco;exit;
+					$banco->close();
+					$dbhw = new PDO('sqlite:../admin.db');
+				}
+				if(!function_exists("sqlite_open") && !in_array("sqlite3",$exts)){
 					echo "<br>A fun&ccedil;&atilde;o de cria&ccedil;&atilde;o do banco sqlite n&atilde;o existe no PHP. Vc pode usar o arquivo i3geo/admin/adminvazio.db e renome&aacute;-lo para admin.db.";
 				}
+				*/
 			}
 		}
 		else{
@@ -190,7 +209,7 @@
 			$dbhw->query("INSERT INTO ".$esquemaadmin."i3geousr_operacoespapeis VALUES ('18', '5')");
 
 			$banco = null;
-			echo "Banco criado!!! administrador: admin / admin  - n&atilde;o esque&ccedil;a de alterar essa senha na op&ccedil;&atilde;o de edi&ccedil;&atilde;o do cadastro de usu&aacute;rios";
+			echo "Banco criado!!!";
 		}
 		function criabancoformularioLoginMaster($action){
 			echo "<form method=post action=$action >";
