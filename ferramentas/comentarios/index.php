@@ -65,9 +65,9 @@ function listaComentarios()
 	$locaplic = "../..";
 	include("../../admin/php/conexao.php");
 	if(!empty($esquemaadmin)){
-		$esquemaadmin = $esquemaadmin.".";
+		$esquemaadmin = str_replace(".","",$esquemaadmin).".";
 	}
-	$data = gmdate("d-m-Y\TH:i:s\Z"); 
+	$data = gmdate("d-m-Y\TH:i:s\Z");
 	$id_tema = $dbh->query("select * from ".$esquemaadmin."i3geoadmin_temas where codigo_tema = '".$_SESSION["tema"]."' ",PDO::FETCH_ASSOC);
     $id_tema = $id_tema->fetchAll();
 	$id_tema = $id_tema[0]["id_tema"];
@@ -97,9 +97,9 @@ function gravaComentario()
 	//necess&aacute;rio para os includes do admin.php
 	include_once("../../admin/php/conexao.php");
 	if(!empty($esquemaadmin)){
-		$esquemaadmin = $esquemaadmin.".";
+		$esquemaadmin = str_replace(".","",$esquemaadmin).".";
 	}
-	$data = gmdate("d-m-Y\TH:i:s\Z"); 
+	$data = gmdate("d-m-Y\TH:i:s\Z");
 	$id_tema = $dbh->query("select * from ".$esquemaadmin."i3geoadmin_temas where codigo_tema = '".$_SESSION["tema"]."' ",PDO::FETCH_ASSOC);
     $id_tema = $id_tema->fetchAll();
 	$id_tema = $id_tema[0]["id_tema"];
@@ -114,7 +114,7 @@ function converte($texto){
 	$texto = mb_convert_encoding($texto,mb_detect_encoding($texto),"UTF-8");
 	else
 	$texto = mb_convert_encoding($texto,mb_detect_encoding($texto),"ISO-8859-1");
-	return $texto;	
+	return $texto;
 }
 ?>
 <script>

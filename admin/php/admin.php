@@ -55,7 +55,7 @@ $mapfile = mapfilebase($base,$locaplic);
 //essa variavel precisa ter um . no final quando nao for vazia, evitando erros na inclusao dentro dos SQLs
 //
 if(!empty($esquemaadmin)){
-	$esquemaadmin = $esquemaadmin.".";
+	$esquemaadmin = str_replace(".","",$esquemaadmin).".";
 }
 
 /*
@@ -180,6 +180,7 @@ function pegaDados($sql,$locaplic="")
 		include("conexao.php");
 	else
 		include("$locaplic/admin/php/conexao.php");
+
 	error_reporting(E_ALL);
 	$q = $dbh->query($sql,PDO::FETCH_ASSOC);
 	if($q)

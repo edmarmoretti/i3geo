@@ -190,7 +190,7 @@ include_once("admin/php/conexao.php");
 echo "verificando banco de dados de administra&ccedil;&atilde;o...\n";
 /**
  *
- * TODO RC2 verificar tabelas antes de fechar versao
+ * TODO V5.0 verificar tabelas antes de fechar versao
  */
 $tabelas = array(
 	"i3geoadmin_sistemasf"=>"abrir_funcao,h_funcao,id_funcao,id_sistema,nome_funcao,perfil_funcao,w_funcao",
@@ -237,7 +237,7 @@ $tabelas = array(
 );
 include_once("admin/php/conexao.php");
 if(!empty($esquemaadmin)){
-	$esquemaadmin = $esquemaadmin.".";
+	$esquemaadmin = str_replace(".","",$esquemaadmin).".";
 }
 
 foreach(array_keys($tabelas) as $tabela)

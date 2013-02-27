@@ -9,7 +9,7 @@ error_reporting(E_ALL);
 if(!empty($restauramapa)){
 	include(__DIR__."/../admin/php/conexao.php");
 	if(!empty($esquemaadmin)){
-		$esquemaadmin = $esquemaadmin.".";
+		$esquemaadmin = str_replace(".","",$esquemaadmin).".";
 	}
 	$q = $dbh->query("select * from ".$esquemaadmin."i3geoadmin_mapas where id_mapa=$restauramapa ",PDO::FETCH_ASSOC);
 	$mapasalvo = $q->fetchAll();

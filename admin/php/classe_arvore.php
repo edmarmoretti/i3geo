@@ -73,7 +73,7 @@ class Arvore
 		include($locaplic."/admin/php/conexao.php");
 		$this->esquemaadmin = "";
 		if(!empty($esquemaadmin)){
-			$this->esquemaadmin = $esquemaadmin.".";
+			$this->esquemaadmin = str_replace(".","",$esquemaadmin).".";
 		}
 		if(!isset($convUTF)){
 			$convUTF = true;

@@ -62,7 +62,7 @@ class Metaestat{
 		$this->dbhw = $dbhw;
 		$this->esquemaadmin = "";
 		if(!empty($esquemaadmin)){
-			$this->esquemaadmin = $esquemaadmin.".";
+			$this->esquemaadmin = str_replace(".","",$esquemaadmin).".";
 		}
 		$this->nomecache = $this->nomeCache();
 	}

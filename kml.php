@@ -2,7 +2,7 @@
 /*
 Title: Cat&aacute;logo de temas em KML
 
-Gera um arquivo KML contendo os temas existentes no cat&aacute;logo. Esse KML pode ser utilizado no Google Earth para que os temas possam ser vistos nesse aplicativo seguindo a mesma estrutura de organiza&ccedil;&atilde;o 
+Gera um arquivo KML contendo os temas existentes no cat&aacute;logo. Esse KML pode ser utilizado no Google Earth para que os temas possam ser vistos nesse aplicativo seguindo a mesma estrutura de organiza&ccedil;&atilde;o
 
 Exemplo
 
@@ -75,7 +75,7 @@ if(!isset($perfil)){$perfil = "";}
 echo "<Document><name>Menu i3geo</name><open>0</open><description></description><visibility>0</visibility>\n";
 include(__DIR__."/admin/php/admin.php");
 if(!empty($esquemaadmin)){
-	$esquemaadmin = $esquemaadmin.".";
+	$esquemaadmin = str_replace(".","",$esquemaadmin).".";
 }
 if($idioma == "pt")
 {$coluna = "nome_menu";}

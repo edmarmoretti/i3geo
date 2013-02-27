@@ -270,6 +270,7 @@ function autenticaUsuario($usuario,$senha){
 		$pa = pegaDados("select * from ".$esquemaadmin."i3geousr_papelusuario ",$locaplic);
 		$op = pegadados("SELECT O.codigo, PU.id_usuario FROM ".$esquemaadmin."i3geousr_operacoes AS O JOIN ".$esquemaadmin."i3geousr_operacoespapeis AS OP ON O.id_operacao = OP.id_operacao JOIN ".$esquemaadmin."i3geousr_papelusuario AS PU ON OP.id_papel = PU.id_papel	",$locaplic);
 		$gr = pegadados("SELECT * from ".$esquemaadmin."i3geousr_grupousuario ");
+
 		$operacoes = array();
 		foreach($op as $o){
 			$operacoes[$o["codigo"]] = true;

@@ -54,7 +54,7 @@ include("$locaplic/admin/php/conexao.php");
 //essa variavel precisa ter um . no final quando nao for vazia, evitando erros na inclusao dentro dos SQLs
 //
 if(!empty($esquemaadmin)){
-	$esquemaadmin = $esquemaadmin.".";
+	$esquemaadmin = str_replace(".","",$esquemaadmin).".";
 }
 $encoding = "UTF-8";
 if($convUTF)
@@ -98,9 +98,9 @@ foreach ($menus as $menu){
 		//obtem os temas na raiz do grupo
 		//
 		$temasRaizGrupo = pegaDados("
-			select i3geoadmin_temas.tags_tema as tags_tema,i3geoadmin_temas.codigo_tema as codigo_tema,i3geoadmin_raiz.id_tema,nome_tema as nome_tema,perfil 
-			FROM ".$esquemaadmin."i3geoadmin_raiz 
-			LEFT JOIN ".$esquemaadmin."i3geoadmin_temas ON i3geoadmin_temas.id_tema = i3geoadmin_raiz.id_tema 
+			select i3geoadmin_temas.tags_tema as tags_tema,i3geoadmin_temas.codigo_tema as codigo_tema,i3geoadmin_raiz.id_tema,nome_tema as nome_tema,perfil
+			FROM ".$esquemaadmin."i3geoadmin_raiz
+			LEFT JOIN ".$esquemaadmin."i3geoadmin_temas ON i3geoadmin_temas.id_tema = i3geoadmin_raiz.id_tema
 			LEFT JOIN ".$esquemaadmin."i3geousr_grupotema ON i3geoadmin_raiz.id_tema = i3geousr_grupotema.id_tema
 			where i3geousr_grupotema.id_grupo is null and i3geoadmin_raiz.nivel = 1 and i3geoadmin_raiz.id_nivel = ".$grupos[$i]["id_n1"]." order by ordem");
 
@@ -125,9 +125,9 @@ foreach ($menus as $menu){
 			$xml .= '<item cor="#FF6633" id="'.$contador.'" tipo="TE6" nome="TEMAS" familia="'.$id.'" />  '."\n";
 			$id_n2 = $subgrupos[$j]["id_n2"];
 			$temas = pegaDados("
-				select i3geoadmin_temas.tags_tema,i3geoadmin_temas.nome_tema,i3geoadmin_temas.codigo_tema,i3geoadmin_n3.id_n3 
-				from ".$esquemaadmin."i3geoadmin_n3 
-				LEFT JOIN ".$esquemaadmin."i3geoadmin_temas ON i3geoadmin_n3.id_tema = i3geoadmin_temas.id_tema 
+				select i3geoadmin_temas.tags_tema,i3geoadmin_temas.nome_tema,i3geoadmin_temas.codigo_tema,i3geoadmin_n3.id_n3
+				from ".$esquemaadmin."i3geoadmin_n3
+				LEFT JOIN ".$esquemaadmin."i3geoadmin_temas ON i3geoadmin_n3.id_tema = i3geoadmin_temas.id_tema
 				LEFT JOIN ".$esquemaadmin."i3geousr_grupotema ON i3geoadmin_n3.id_tema = i3geousr_grupotema.id_tema
 				where i3geousr_grupotema.id_grupo is null and i3geoadmin_n3.id_n2='$id_n2' and i3geoadmin_n3.publicado != 'NAO' order by ordem",$locaplic
 			);

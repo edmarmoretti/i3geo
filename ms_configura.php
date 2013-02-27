@@ -380,13 +380,11 @@ Esse arquivo &eacute; inclu&iacute;do no programa i3geo/admin/conexao.php
 
 O banco de dados administrativo &eacute; utilizado para definir coisas como a &aacute;rvore de temas, &aacute;rvore de mapas, etc.
 
-O banco de dados, originalmente, &eacute; montado em SQLITE, por&eacute;m, em ambientes corporativos, sugere-se o uso de bancos de daods mais robustos.
+O banco de dados, originalmente, &eacute; montado em SQLITE, por&eacute;m, em ambientes corporativos, sugere-se o uso de bancos de dados mais robustos.
 
 Se voc&ecirc; quiser utilizar a conex&atilde;o default, baseado no SQLITE, mantenha essa vari&aacute;vel vazia.
 
-O uso do banco de dados n&atilde;o &eacute; obrigat&oacute;rio, uma vez que os arquivos podem ser mantidos em disco (arquivos XML).
-
-O programa PHP que estabelece a conex&atilde;o deve retornar objetos com nomes padronizados. Veja o arquivo i3geo/admin/conexao.php para maiores detalhes.
+O programa PHP que estabelece a conex&atilde;o deve retornar objetos com nomes padronizados. Veja o arquivo i3geo/admin/conexao.php e i3geo/admin/php/conexaopostgresql.php para maiores detalhes.
 
 Exemplos:
 

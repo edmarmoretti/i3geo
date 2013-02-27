@@ -41,7 +41,7 @@ if (!isset($esquemaadmin)){
 	include_once(__DIR__."/../../ms_configura.php");
 }
 if(!empty($esquemaadmin)){
-	$esquemaadmin = $esquemaadmin.".";
+	$esquemaadmin = str_replace(".","",$esquemaadmin).".";
 }
 /*
 Function: geraXmlSistemas (depreciado)
