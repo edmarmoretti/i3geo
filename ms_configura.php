@@ -60,7 +60,7 @@ array(array("usuario"=>"admin", "senha"=>"adminx"));
 */
 //@TODO v47 alterar a senha para admin
 $i3geomaster = array(
-		array("usuario"=>"admin", "senha"=>"adminx")
+		array("usuario"=>"admin", "senha"=>"admin")
 );
 /*
 	Variavel: linkedinoauth (ainda n&atilde;o implementado)

@@ -82,7 +82,7 @@ a {
 	<div style="margin-top:0px;">
 		<?php
 		if($i3geomaster[0]["usuario"] == "admin" && $i3geomaster[0]["senha"] == "admin" ){
-			echo "<p style='font-size:14px;color:red'><script>document.write($"."trad(19,g_traducao_init));</script>";
+			echo "<p style='font-size:14px;color:red;margin-top:20px;'><script>document.write($"."trad(19,g_traducao_init));</script>";
 		}
 		?>
 		<div id="botoes" ></div>
