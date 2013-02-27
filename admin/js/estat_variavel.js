@@ -600,7 +600,8 @@ i3GEOadmin.variaveis = {
 			if(redesenha){tree.draw();}
 		},
 		adicionar: function(id_medida_variavel){
-			var no = tree.getNodeByProperty("id_medida_variavel",id_medida_variavel),
+			var no = tree.getNodeByProperty("no_parametros",id_medida_variavel),
+
 			sUrl = i3GEO.configura.locaplic+"/admin/php/metaestat.php?funcao=alteraParametroMedida&id_medida_variavel="+id_medida_variavel,
 			callback = 	{
 				success: function(oResponse){
@@ -711,7 +712,7 @@ i3GEOadmin.variaveis = {
 			if(!redesenha)	{
 				tempNode = new YAHOO.widget.HTMLNode(
 						{
-							html:"<span style=\"cursor:pointer;\" onclick=\"i3GEOadmin.variaveis.fonte.adicionar('"+no.data.no_fonteinfo+"')\" ><img style=\"position:relative;top:2px\" src=\"../imagens/05.png\" /><i>Adicionar nova fonte</i></span>"
+							html:"<span style=\"cursor:pointer;\" onclick=\"i3GEOadmin.variaveis.editar('fonteinfo','"+no.data.no_fonteinfo+"')\" ><img style=\"position:relative;top:2px\" src=\"../imagens/05.png\" /><i>Adicionar nova fonte</i></span>"
 						},
 						no,
 						false,
@@ -733,20 +734,22 @@ i3GEOadmin.variaveis = {
 			}
 			if(redesenha){tree.draw();}
 		},
+		/*
 		adicionar: function(id_medida_variavel,id_fonteinfo){
 			var no = tree.getNodeByProperty("no_fonteinfo",id_medida_variavel),
-			sUrl = i3GEO.configura.locaplic+"/admin/php/metaestat.php?funcao=alteraFonteinfo&id_medida_variavel="+id_medida_variavel,
+			sUrl = i3GEO.configura.locaplic+"/admin/php/metaestat.php?funcao=adicinaFonteinfoMedida&id_medida_variavel="+id_medida_variavel,
 			callback = 	{
 				success: function(oResponse){
 					var dados = YAHOO.lang.JSON.parse(oResponse.responseText);
 					i3GEOadmin.variaveis.fonte.adicionaNos(no,[dados],true);
-					i3GEOadmin.variaveis.editar('fonteinfo',dados.id_fonteinfo);
+					i3GEOadmin.variaveis.editar('fonteinfo',id_medida_variavel);
 				},
 				failure:core_handleFailure,
 				argument: { foo:"foo", bar:"bar" }
 			};
 			core_makeRequest(sUrl,callback);
 		},
+		*/
 		montaDiv: function(dados){
 			ins = "<br><b>Escolha a Fonte:</b><br><br>";
 			ins += "<select style='width:400px;' id='Eid_fonteinfo' >";

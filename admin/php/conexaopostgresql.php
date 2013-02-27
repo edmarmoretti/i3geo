@@ -1,8 +1,8 @@
 <?php
 try
 {
-	$dbh = new PDO('pgsql:dbname=postgres;user=postgres;password=postgres;host=localhost');
-	$dbhw = new PDO('pgsql:dbname=postgres;user=postgres;password=postgres;host=localhost');
+	$dbh = new PDO('pgsql:dbname=teste;user=postgres;password=postgres;host=localhost');
+	$dbhw = new PDO('pgsql:dbname=teste;user=postgres;password=postgres;host=localhost');
 }
 catch (PDOException $e)
 {

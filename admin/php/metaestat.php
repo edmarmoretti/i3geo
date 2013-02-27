@@ -51,7 +51,7 @@ $funcoesEdicao = array(
 	"CALCULACLASSIFICACAO",
 	"ALTERACLASSECLASSIFICACAO",
 	"ALTERALINKMEDIDA",
-	"ALTERARFONTEINFO",
+	"ALTERAFONTEINFO",
 	"ADICIONAFONTEINFOMEDIDA",
 	"ALTERARUNIDADEMEDIDA",
 	"ALTERARCONEXAO",
@@ -565,7 +565,7 @@ switch (strtoupper($funcao))
 		retornaJSON($m->listaLinkMedida($id_medida_variavel,$id_link));
 		exit;
 	break;
-	case "ALTERARFONTEINFO":
+	case "ALTERAFONTEINFO":
 		$m = new Metaestat();
 		if(empty($id_fonteinfo)){
 			//isso ira criar um novo registro
@@ -579,6 +579,7 @@ switch (strtoupper($funcao))
 	break;
 	case "ADICIONAFONTEINFOMEDIDA":
 		$m = new Metaestat();
+		//echo $id_medida_variavel;exit;
 		$m->adicinaFonteinfoMedida($id_medida_variavel,$id_fonteinfo);
 		retornaJSON($m->listaFonteInfo($id_fonteinfo));
 		exit;

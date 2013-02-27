@@ -197,6 +197,7 @@ class Metaestat{
 	function insertId($tabela,$colunatemp,$colunaid){
 		$idtemp = (rand (9000,10000)) * -1;
 		//echo "INSERT INTO ".$this->esquemaadmin.$tabela." ($colunatemp) VALUES ('$idtemp')";exit;
+
 		$this->dbhw->query("INSERT INTO ".$this->esquemaadmin.$tabela." ($colunatemp) VALUES ('$idtemp')");
 		$id = $this->dbh->query("SELECT $colunaid FROM ".$this->esquemaadmin.$tabela." WHERE $colunatemp = '$idtemp'");
 		$id = $id->fetchAll();
@@ -1038,6 +1039,7 @@ class Metaestat{
 					$nome = utf8_encode($nome);
 					$descricao = utf8_encode($descricao);
 				}
+				//echo "UPDATE ".$this->esquemaadmin."i3geoestat_tipo_periodo SET nome = '$nome', descricao = '$descricao' WHERE codigo_tipo_periodo = $codigo_tipo_periodo";exit;
 				$this->dbhw->query("UPDATE ".$this->esquemaadmin."i3geoestat_tipo_periodo SET nome = '$nome', descricao = '$descricao' WHERE codigo_tipo_periodo = $codigo_tipo_periodo");
 				$retorna = $codigo_tipo_periodo;
 			}
@@ -1082,6 +1084,7 @@ class Metaestat{
 					$nome_tipo_regiao = utf8_encode($nome_tipo_regiao);
 					$descricao_tipo_regiao = utf8_encode($descricao_tipo_regiao);
 				}
+				//echo "UPDATE ".$this->esquemaadmin."i3geoestat_tipo_regiao SET codigo_estat_conexao = '$codigo_estat_conexao', colunacentroide = '$colunacentroide',nome_tipo_regiao = '$nome_tipo_regiao',descricao_tipo_regiao = '$descricao_tipo_regiao',esquemadb = '$esquemadb',tabela = '$tabela',colunageo = '$colunageo',data = '$data',identificador = '$identificador',colunanomeregiao = '$colunanomeregiao', srid = '$srid', colunasvisiveis = '$colunasvisiveis', apelidos = '$apelidos' WHERE codigo_tipo_regiao = $codigo_tipo_regiao";exit;
 				$this->dbhw->query("UPDATE ".$this->esquemaadmin."i3geoestat_tipo_regiao SET codigo_estat_conexao = '$codigo_estat_conexao', colunacentroide = '$colunacentroide',nome_tipo_regiao = '$nome_tipo_regiao',descricao_tipo_regiao = '$descricao_tipo_regiao',esquemadb = '$esquemadb',tabela = '$tabela',colunageo = '$colunageo',data = '$data',identificador = '$identificador',colunanomeregiao = '$colunanomeregiao', srid = '$srid', colunasvisiveis = '$colunasvisiveis', apelidos = '$apelidos' WHERE codigo_tipo_regiao = $codigo_tipo_regiao");
 				$retorna = $codigo_tipo_regiao;
 			}
@@ -1122,7 +1125,7 @@ class Metaestat{
 					$nome = utf8_encode($nome);
 					$descricao = utf8_encode($descricao);
 				}
-				//echo "UPDATE ".$this->esquemaadmin."i3geoestat_parametro_medida SET nomeparametro = '$nomeparametro',descricao = '$descricao',coluna = '$coluna',agregavalores = '$agregavalores' WHERE id_parametro_medida = $id_parametro_medida";exit;
+				//echo "UPDATE ".$this->esquemaadmin."i3geoestat_parametro_medida SET nome = '$nome',descricao = '$descricao',coluna = '$coluna',id_pai = '$id_pai', tipo = '$tipo' WHERE id_parametro_medida = $id_parametro_medida";exit;
 				$this->dbhw->query("UPDATE ".$this->esquemaadmin."i3geoestat_parametro_medida SET nome = '$nome',descricao = '$descricao',coluna = '$coluna',id_pai = '$id_pai', tipo = '$tipo' WHERE id_parametro_medida = $id_parametro_medida");
 				$retorna = $id_parametro_medida;
 			}
@@ -1281,6 +1284,7 @@ class Metaestat{
 		$sql .= "ON i3geoestat_fonteinfo.id_fonteinfo = i3geoestat_fonteinfo_medida.id_fonteinfo ";
 		$sql .= "WHERE i3geoestat_fonteinfo_medida.id_medida_variavel = $id_medida_variavel ";
 		$sql .= "ORDER BY titulo";
+		//echo $sql;exit;
 		return $this->execSQL($sql,$id_fonteinfo);
 	}
 	/*

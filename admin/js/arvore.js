@@ -626,7 +626,7 @@ function editar(tipo,id)
 				if(tipo == "grupo")
 				{
 					var dados = YAHOO.lang.JSON.parse(o.responseText)[0];
-					core_montaEditor("gravawDados('grupo','"+id+"')","400px","400px");
+					core_montaEditor("gravaDados('grupo','"+id+"')","400px","400px");
 					$i("editor_bd").innerHTML = montaDivGrupo(dados);
 					core_comboGrupos("comboGrupo","Eid_grupo",dados.id_grupo,"");
 					core_comboPerfis("comboPerfil","Eperfil_grupo","","registraPerfil(this.value,\"En1_perfil\")");

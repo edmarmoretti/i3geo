@@ -34,7 +34,7 @@ i3GEOadmin.fonteinfo = {
 		YAHOO.namespace("fonteinfo");
 		YAHOO.namespace("admin.container");
 		core_ativaPainelAjuda("ajuda","botaoAjuda");
-		core_ativaBotaoAdicionaLinha("../php/metaestat.php?funcao=alterarFonteinfo","adicionaNovaLinha","i3GEOadmin.fonteinfo.obtem");
+		core_ativaBotaoAdicionaLinha("../php/metaestat.php?funcao=alteraFonteinfo","adicionaNovaLinha","i3GEOadmin.fonteinfo.obtem");
 		i3GEOadmin.fonteinfo.obtem();
 	},
 	/*

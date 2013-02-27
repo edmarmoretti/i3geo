@@ -265,22 +265,24 @@ function alterarSistemas()
 function alterarFuncoes()
 {
 	global $esquemaadmin,$id_sistema,$id_funcao,$perfil_funcao,$nome_funcao,$w_funcao,$h_funcao,$abrir_funcao;
-	try
-	{
+	if(empty($w_funcao)){
+		$w_funcao = 200;
+	}
+	if(empty($h_funcao)){
+		$h_funcao = 200;
+	}
+	try{
     	require_once("conexao.php");
-		if($convUTF)
-		{
+		if($convUTF){
 			$nome_funcao = utf8_encode($nome_funcao);
 		}
-    	if($id_funcao != "")
-    	{
+    	if($id_funcao != ""){
     		$dbhw->query("UPDATE ".$esquemaadmin."i3geoadmin_sistemasf SET nome_funcao = '$nome_funcao',perfil_funcao = '$perfil_funcao', w_funcao = '$w_funcao',h_funcao = '$h_funcao', abrir_funcao = '$abrir_funcao' WHERE id_funcao = $id_funcao");
     		$retorna = $id_funcao;
     	}
-    	else
-    	{
+    	else{
     		$idtemp = (rand (9000,10000)) * -1;
-			$dbhw->query("INSERT INTO ".$esquemaadmin."i3geoadmin_sistemasf (id_sistema,nome_funcao,perfil_funcao,w_funcao,h_funcao,abrir_funcao) VALUES ('$id_sistema','$idtemp','','$w','$h','')");
+			$dbhw->query("INSERT INTO ".$esquemaadmin."i3geoadmin_sistemasf (id_sistema,nome_funcao) VALUES ('$id_sistema','$idtemp')");
 			$id = $dbh->query("SELECT id_funcao FROM ".$esquemaadmin."i3geoadmin_sistemasf WHERE nome_funcao = '$idtemp'");
 			$id = $id->fetchAll();
 			$id = $id[0]['id_funcao'];
