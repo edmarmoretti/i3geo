@@ -22,7 +22,7 @@ i3GEOadmin.uploaddados = {
 		},
 		comboColunas: function(id){
 			var i=0,
-				c = i3GEOadmin.uploaddados.COLUNASARQUIVO.split(";"),
+				c = i3GEOadmin.uploaddados.COLUNASARQUIVO.split(","),
 				n = c.length,
 				ins = "<select id='"+id+"'><option value='' >---</option>";
 			for(i=0;i<n;i++){

@@ -673,6 +673,7 @@ function adicionaNovoMapfile()
 		metaestat = $i("Emetaestat").value;
 	if(codigo === "")
 	{alert("Digite o nome do arquivo");return;}
+	codigo = codigo.toLowerCase();
 	sUrl = "../php/editormapfile.php?funcao=criarNovoMap&nome="+nome+"&codigo="+codigo+"&it="+it+"&en="+en+"&es="+es+"&metaestat="+metaestat;
 	core_carregando("ativa");
 	core_carregando(" adicionando um novo mapfile");

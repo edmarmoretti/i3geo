@@ -1,12 +1,13 @@
 <?php
 $colunasarquivo = "";
 $nomearquivoserv = "";
-//var_dump($_FILES);
+error_reporting(E_ALL);
 if (isset($_FILES['i3GEOuploadArquivo']['name']))
 {
 	require_once (__DIR__."/../../ms_configura.php");
 	$Arquivoup = $_FILES['i3GEOuploadArquivo']['tmp_name'];
 	$nomearquivoserv = $dir_tmp."/upload".basename($Arquivoup);
+	//echo $nomearquivoserv;
 	if(file_exists($nomearquivoserv)){
 		unlink($nomearquivoserv);
 	}
@@ -17,16 +18,26 @@ if (isset($_FILES['i3GEOuploadArquivo']['name']))
 		$buffer = str_replace('"','',$buffer);
 		$buffer = str_replace("'",'',$buffer);
 		$buffer = str_replace("\n",'',$buffer);
+		$buffer = str_replace("\r",'',$buffer);
 		$colunas = explode(";",$buffer);
 		if(count($colunas) == 1){
 			$colunas = explode(",",$buffer);
 		}
-		$colunasarquivo = implode(";",$colunas);
+		//var_dump($colunas);
+		$colunasarquivo = implode(",",$colunas);
 	}
 }
+//echo $colunasarquivo;
+//$colunasarquivo = "ano,codigoregiao,dia,gid,hora,id_medida_variavel,mes,valor_int,valor_num,valor_txt ";
 ?>
+<html>
 <script>
-window.parent.i3GEOadmin.uploaddados.COLUNASARQUIVO = "<?php echo $colunasarquivo;?>";
-window.parent.i3GEOadmin.uploaddados.NOMEARQUIVOSERV = "<?php echo $nomearquivoserv;?>";
+
+<?php echo "c = '$colunasarquivo';";?>
+<?php echo "d = '$nomearquivoserv';";?>
+window.parent.i3GEOadmin.uploaddados.COLUNASARQUIVO = c;
+window.parent.i3GEOadmin.uploaddados.NOMEARQUIVOSERV = d;
 window.parent.i3GEOadmin.uploaddados.upload.fimsubmit();
+
 </script>
+</html>
