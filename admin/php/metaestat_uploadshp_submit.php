@@ -69,18 +69,20 @@ if (isset($_FILES['i3GEOuploadshp']['name'])){
 	$layer = ms_newLayerObj($mapObj);
 	$layer->set("data",$arqshp);
 	$layer->open();
-	$colunas = $layer->getItems();
-
+	$colunasTemp = $layer->getItems();
+	$colunas = array();
+	foreach($colunasTemp as $c){
+		if(!is_numeric($c)){
+			$colunas[] = $c;
+		}
+	}
+	
 	echo "<br>Numshapes: ". $numshapes;
 	$tipo = $shapefileObj->type;
 	echo "<br>Tipo: ". $tipo;
 	echo "<br>Colunas: ";
 	var_dump($colunas);
-
 	$sqinsert = array();
-
-
-
 	//verifica o tipo de coluna
 	$tipoColuna = array();
 	if($numshapes < 10){
@@ -140,6 +142,7 @@ if (isset($_FILES['i3GEOuploadshp']['name'])){
 	} catch (PDOException $e) {
 		echo 'Connection failed: ' . $e->getMessage();
 	}
+	
 	foreach($sqltabela as $linha){
 		try {
 			$dbh->query($linha);
@@ -154,7 +157,7 @@ if (isset($_FILES['i3GEOuploadshp']['name'])){
 			echo 'Erro: ' . $e->getMessage();
 		}
 	}
-	echo "<br>Feito!!!";
+	echo "<br>Feito!!!<br>Fa&ccedil;a o reload da p&aacute;gina";
 }
 else{
 	echo "<p class='paragrafo' >Erro ao enviar o arquivo. Talvez o tamanho do arquivo seja maior do que o permitido.</p>";

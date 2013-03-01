@@ -423,11 +423,12 @@ i3GEOadmin.editor = {
 		},
 		formulario: function(){
 			var ins = '<fieldset><form id=i3GEOuploadf target="i3GEOuploadiframe" action="../php/metaestat_uploadshp_submit.php" method="post" ENCTYPE="multipart/form-data">' +
+			'<p class="paragrafo" >Ap&oacute;s terminar o processo, atualize essa p&aacute;gina</p>' +
 			'<p class="paragrafo" >shp: <br><input class=digitar type="file" size=22 name="i3GEOuploadshp" style="top:0px;left:0px;cursor:pointer;"></p>' +
 			'<p class="paragrafo" >shx: <br><input class=digitar type="file" size=22 name="i3GEOuploadshx" style="top:0px;left:0px;cursor:pointer;"></p>' +
 			'<p class="paragrafo" >dbf: <br><input class=digitar type="file" size=22 name="i3GEOuploaddbf" style="top:0px;left:0px;cursor:pointer;"></p>' +
 			'<p class="paragrafo" >Nome da nova tabela:<br><input class=digitar type="text" size=20 id="tabelaDestino" name="tabelaDestino" style="top:0px;left:0px;cursor:pointer;"></p>' +
-			'<p class="paragrafo" >C&oacute;digo da proje&ccedil;&atilde;o (SRID):<br><input class=digitar type="text" value="4326" size=20 id="srid" name="srid" style="top:0px;left:0px;cursor:pointer;"></p>' +
+			'<p class="paragrafo" >C&oacute;digo da proje&ccedil;&atilde;o (SRID) Assegure-se que o shapefile esteja na proje&ccedil;&atilde;o geogr&aacute;fica se voc&ecirc; for usar com o sistema de metadados estat&iacute;sticos :<br><input class=digitar type="text" value="4326" size=20 id="srid" name="srid" style="top:0px;left:0px;cursor:pointer;"></p>' +
 
 			'<p class="paragrafo" ><input id=i3GEOuploadsubmit type="button" value="Enviar" size=12 />' +
 			'<input type="hidden" name="MAX_FILE_SIZE" value="1000000">' +
@@ -435,7 +436,7 @@ i3GEOadmin.editor = {
 			'<input type="hidden" id="i3GEOuploadesquema" name="i3GEOuploadesquema" value="">' +
 			'</form>' +
 			"<p class='paragrafo' style=color:red >N&atilde;o utilize '_' no nome do arquivo. Apenas letras e n&uacute;meros s&atilde;o aceitos!!!</p>" +
-			'<iframe name=i3GEOuploadiframe style="text-align:left;border:1px solid gray;" width="98%" height="60px"></iframe></fieldset>';
+			'<iframe name=i3GEOuploadiframe style="text-align:left;border:1px solid gray;" width="98%" height="400px"></iframe></fieldset>';
 			return ins;
 		},
 		submit: function(){
