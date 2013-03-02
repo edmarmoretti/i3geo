@@ -27,10 +27,10 @@ i3GEOadmin.editor = {
 					success:function(o){
 						try	{
 							var dados = YAHOO.lang.JSON.parse(o.responseText),
-							temp = "Escolha a conex&atilde;o com o banco: ";
+							temp = "<p>Escolha a conex&atilde;o com o banco: ";
 							temp += "<select id='i3GEOadmincodigo_estat_conexao' onchange='i3GEOadmin.editor.esquema.lista()'>";
 							temp += core_comboObjeto(dados,"codigo_estat_conexao","bancodedados","","usuario");
-							temp += "</select>";
+							temp += "</select></p>";
 							$i(i3GEOadmin.editor.conexao.onde).innerHTML = temp;
 							core_carregando("desativa");
 						}
@@ -50,10 +50,10 @@ i3GEOadmin.editor = {
 					success:function(o){
 						try	{
 							var dados = YAHOO.lang.JSON.parse(o.responseText),
-							temp = "<fieldset>Escolha um esquema: ";
+							temp = "<fieldset><p>Escolha um esquema: ";
 							temp += "<select id='i3GEOadminesquema' onchange='i3GEOadmin.editor.tabela.lista()'>";
 							temp += core_comboObjeto(dados,"esquema","esquema");
-							temp += "</select>";
+							temp += "</select></p>";
 							$i(i3GEOadmin.editor.esquema.onde).innerHTML = temp+"</fieldset>";
 							core_carregando("desativa");
 							$i(i3GEOadmin.editor.tabela.onde).innerHTML = "";
@@ -82,13 +82,13 @@ i3GEOadmin.editor = {
 						try	{
 							var dados = YAHOO.lang.JSON.parse(o.responseText),
 							temp = "<fieldset>" +
-							"<p><input type=button value='Upload Shapefile' id='i3GEOadmin_botaoupload' /></p>" +
+							"<p class=paragrafo ><input type=button value='Upload Shapefile' id='i3GEOadmin_botaoupload' /></p>" +
 							"<div id='i3GEOadmin_formupload'></div>" +
-							"Escolha uma tabela existente: " +
+							"<p>Escolha uma tabela existente: " +
 							"<select id='i3GEOadmintabela' onchange='i3GEOadmin.editor.coluna.lista()'>";
 							temp += core_comboObjeto(dados,"tabela","tabela");
 							temp += "</select>" +
-								"<p><input type=button value='Mostrar dados' id='i3GEOadmintabelaMostrar' />" +
+								"<p class=paragrafo ><input type=button value='Mostrar dados' id='i3GEOadmintabelaMostrar' />" +
 								"<input type=button value='CSV' id='i3GEOadmintabelaCsv'/>" +
 								"<input type=button value='Criar uma nova tabela' id='i3GEOadmintabelaCriar' />" +
 								"<input type=button value='Alterar nome atual' id='i3GEOadmintabelaAlterarNome' />" +
@@ -300,12 +300,12 @@ i3GEOadmin.editor = {
 					success:function(o){
 						try	{
 							var dados = YAHOO.lang.JSON.parse(o.responseText),
-							temp = "<fieldset>Escolha uma coluna: ";
+							temp = "<fieldset><p>Escolha uma coluna: ";
 							temp += "<select id='i3GEOadmincoluna' >";
 							temp += core_comboObjeto(dados,"","");
-							temp += "</select>";
+							temp += "</select></p>";
 							temp += "" +
-									"<p><input type=button value='Adicionar uma nova coluna' id='i3GEOadmincolunaCriar' />" +
+									"<p class=paragrafo ><input type=button value='Adicionar uma nova coluna' id='i3GEOadmincolunaCriar' />" +
 									"<input type=button value='Alterar o nome atual' id='i3GEOadmincolunaAlterarNome' />";
 							$i(i3GEOadmin.editor.coluna.onde).innerHTML = temp+"</fieldset>";
 							new YAHOO.widget.Button(

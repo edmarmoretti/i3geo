@@ -1,5 +1,5 @@
 .letras{
-	font-size: 0.5em;
+	font-size: 1em;
 }
 
 .paragrafo{
@@ -43,7 +43,7 @@ P {
 }
 P  b{
 	text-align: left;
-	font-size: 1.26em;
+	font-size: 0.9em;
 	font-family: Verdana, Arial, Helvetica, sans-serif;
 }
 legend {

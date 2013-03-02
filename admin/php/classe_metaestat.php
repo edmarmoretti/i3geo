@@ -560,6 +560,7 @@ class Metaestat{
 			$vis = str_replace(" ",",",$vis);
 			$vis = str_replace(",,",",",$vis);
 			$sqlf = $meta["colunageo"]." from (select st_setsrid(".$colunageo.",".$srid.") as $colunageo,$vis,gid from ".$meta["esquemadb"].".".$meta["tabela"]." /*FW*//*FW*/) as foo using unique gid using srid=".$srid;
+			$sqlf = str_replace(",,",",",$sqlf);
 			$outlinecolor = str_replace(","," ",$outlinecolor);
 			$dados[] = "MAP";
 			$dados[] = 'SYMBOLSET "'.$this->locaplic.'/symbols/simbolosv6.sym"';
