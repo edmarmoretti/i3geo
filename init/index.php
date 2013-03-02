@@ -78,6 +78,7 @@ a {
 <div id="bandeiras"></div>
 <div class="bordaSuperior" style="z-index:1;">&nbsp;</div>
 
+<div class="mascaraPrincipal" style="max-width:718pt">
 <div id="conteudo" style="position:relative;top:-10px;margin: 0 0 0.2cm 0.2cm;">
 	<div style="margin-top:0px;">
 		<?php
@@ -106,6 +107,8 @@ a {
 				</tr>
 			</table> </a>
 	</div>
+</div>
+
 </div>
 </body>
 <script>
