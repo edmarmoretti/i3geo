@@ -1544,7 +1544,7 @@ function core_listaDeLetras(onde,nomeFuncao){
 	if(onde != ""){
 		o = document.getElementById(onde);
 		if(o){
-			o.innerHTML = "<fieldset style=padding:2px; ><form id=forminiciais ><p><b>Iniciais: <input name='' onchange='' value='"+letraAtual+"' id=iniciaisLetras type=text style=width:40px;cursor:pointer /> ou </form><div style=position:relative;top:1px; id='_listaDeLetras' >"+ins+"</div></b></p></fieldset>";
+			o.innerHTML = "<fieldset style=padding:2px; class=letras ><form id=forminiciais ><p><b>Iniciais: <input name='' onchange='' value='"+letraAtual+"' id=iniciaisLetras type=text style=width:40px;cursor:pointer /> ou </form><div style=position:relative;top:1px; id='_listaDeLetras' >"+ins+"</div></b></p></fieldset>";
 			document.getElementById("forminiciais").onsubmit = function(){
 				var v = document.getElementById("iniciaisLetras").value;
 				i3GEO.util.insereCookie("I3GEOletraAdmin", v);

@@ -1,3 +1,7 @@
+.letras{
+	font-size: 0.5em;
+}
+
 .paragrafo{
 	font-size: 10pt;
 }
@@ -18,7 +22,7 @@ background: url(../../pacotes/yui290/build/container/img/corner_resize.gif) left
 cursor: se-resize;
 }
 .yui-skin-sam .yui-button button, .yui-skin-sam .yui-button a, .yui-skin-sam .yui-button a:visited{
-	font-size:10pt;
+	font-size:1.26em;
 }
 .yui-skin-sam .yui-button {
     margin: 0.25em;
@@ -34,12 +38,12 @@ cursor:help;
 }
 P {
 	text-align: left;
-	font-size: 12pt;
+	font-size: 1.26em;
 	font-family: Verdana, Arial, Helvetica, sans-serif;
 }
 P  b{
 	text-align: left;
-	font-size: 10pt;
+	font-size: 1.26em;
 	font-family: Verdana, Arial, Helvetica, sans-serif;
 }
 legend {
@@ -48,20 +52,20 @@ legend {
 	background-color: white;
 	color: navy;
 	text-align: left;
-	font-size: 11pt;
+	font-size: 1.26em;
 	font-family: Verdana, Arial, Helvetica, sans-serif;
 }
 
 .mensagem {
 	color: black;
 	text-align: left;
-	font-size: 12pt;
+	font-size: 1.26em;
 	font-family: Verdana, Arial, Helvetica, sans-serif;
 }
 
 h1 {
 	text-align: left;
-	font-size: 15pt;
+	font-size: 1.5em;
 	font-family: Verdana, Arial, Helvetica, sans-serif;
 }
 
@@ -78,14 +82,14 @@ input {
 	color: #2F4632;
 	margin: 0px;
 	text-align: left;
-	font-size: 10px;
+	font-size: 1.26em;
 	font-family: Verdana, Arial, Helvetica, sans-serif;
 }
 
 .lista1 td {
 	cursor: pointer;
 	text-align: left;
-	font-size: 12pt;
+	font-size: 1.26em;
 	font-family: Verdana, Arial, Helvetica, sans-serif;
 }
 
@@ -191,7 +195,7 @@ input {
 .textoAjuda {
 	color: black;
 	text-align: left;
-	font-size: 12px;
+	font-size: 1.26em;
 	font-family: Verdana, Arial, Helvetica, sans-serif;
 }
 

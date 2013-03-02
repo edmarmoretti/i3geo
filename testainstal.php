@@ -112,7 +112,7 @@ if (get_cfg_var("safe_mode") == 1){
 }
 
 //executa as opcoes linux definidas no formulario
-if($_POST["criaPastaMstmp"] == "on"){
+if(!empty($_POST["criaPastaMstmp"]) && $_POST["criaPastaMstmp"] == "on"){
 	echo "<br>Criando a pasta $dir_tmp \n";
 	if(!file_exists($dir_tmp)){
 		@mkdir ($dir_tmp,0777);
@@ -127,7 +127,7 @@ if($_POST["criaPastaMstmp"] == "on"){
 		echo "...OK\n";
 	}
 }
-if($_POST["criaLink"] == "on"){
+if(!empty($_POST["criaPastaMstmp"]) && $_POST["criaLink"] == "on"){
 	$d = __DIR__."/../ms_tmp";
 	echo "<br>Criando o link simb&oacute;lico $d \n";
 	if(!file_exists($d)){
@@ -143,7 +143,7 @@ if($_POST["criaLink"] == "on"){
 		echo "...OK\n";
 	}
 }
-if($_POST["permPastaI3geo"] == "on"){
+if(!empty($_POST["criaPastaMstmp"]) && $_POST["permPastaI3geo"] == "on"){
 	echo "<br>Alterando permiss&otilde;es i3geo i3geo/temas i3geo/admin i3geo/admin/admin.db\n";
 	if(file_exists($locaplic)){
 		chmod($locaplic,0777);
