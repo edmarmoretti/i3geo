@@ -45,7 +45,7 @@ Classe: i3GEOF.converteMapaWS
 i3GEOF.converteMapaWS = {
 	/*
 	Variavel: aguarde
-	
+
 	Estilo do objeto DOM com a imagem de aguarde existente no cabe&ccedil;alho da janela.
 	*/
 	aguarde: "",
@@ -57,11 +57,11 @@ i3GEOF.converteMapaWS = {
 	},
 	/*
 	Function: iniciaDicionario
-	
+
 	Carrega o dicion&aacute;rio e chama a fun&ccedil;&atilde;o que inicia a ferramenta
-	
+
 	O Javascript &eacute; carregado com o id i3GEOF.nomedaferramenta.dicionario_script
-	*/	
+	*/
 	iniciaDicionario: function(){
 		if(typeof(i3GEOF.converteMapaWS.dicionario) === 'undefined'){
 			i3GEO.util.scriptTag(
@@ -73,14 +73,14 @@ i3GEOF.converteMapaWS = {
 		else{
 			i3GEOF.converteMapaWS.iniciaJanelaFlutuante();
 		}
-	},	
+	},
 	/*
 	Function: html
-	
+
 	Gera o c&oacute;digo html para apresenta&ccedil;&atilde;o das op&ccedil;&otilde;es da ferramenta
 
 	Parametros:
-	
+
 	divid {String} - id do div que receber&aacute; o conteudo HTML da ferramenta
 
 	*/
@@ -90,7 +90,7 @@ i3GEOF.converteMapaWS = {
 			'<p class="paragrafo" >O "web service" criado, utiliza o padr&atilde;o WMS, conforme definido pelo OGC. A disponibilidade do endere&ccedil;o &eacute; tempor&aacute;ria, permanecendo ativa apenas no dia em que foi criado.' +
 			'<p class="paragrafo" >O Web Map Context (WMC) pode ou n&atilde;o ser gerado dependendo da configura&ccedil;&atilde;o do servidor onde o i3Geo est&aacute; instalado. <a href="'+enderecowmc+'" target=_blank >Clique para obter o Web Map Context</a>'+
 			'<p class="paragrafo" ><b>WMS: </b></p>' +
-			'<p class="paragrafo" > <textarea cols="65" rows="3" style=cursor:pointer onclick="javascript:this.select()">' +
+			'<p class="paragrafo" > <textarea cols="55" rows="3" style=cursor:pointer onclick="javascript:this.select()">' +
 			enderecowms + '</textarea></p>' +
 			'<p class="paragrafo" >' +
 			'<a href="' + enderecowms + '&request=getcapabilities&version=1.1.0&service=wms" target=blank >Clique para testar<br>';
@@ -100,13 +100,13 @@ i3GEOF.converteMapaWS = {
 	},
 	/*
 	Function: iniciaJanelaFlutuante
-	
+
 	Cria a janela flutuante para controle da ferramenta.
-	
+
 	Veja:
-	
+
 	<CONVERTEWMSWMC>
-	*/	
+	*/
 	iniciaJanelaFlutuante: function(){
 		var janela,divid,temp,titulo,p,cp;
 		cabecalho = function(){};
@@ -142,6 +142,6 @@ i3GEOF.converteMapaWS = {
 		p = i3GEO.configura.locaplic+"/ferramentas/convertews/exec.php?g_sid="+i3GEO.configura.sid+"&funcao=convertewmswmc&h="+window.location.host;
 		cp = new cpaint();
 		cp.set_response_type("JSON");
-		cp.call(p,"converteWMSWMC",temp);		
+		cp.call(p,"converteWMSWMC",temp);
 	}
 };

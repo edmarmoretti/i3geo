@@ -105,7 +105,7 @@ i3GEOF.aplicarsld = {
 	*/
 	html:function(){
 		var ins = '<form id=i3GEOaplicarsldf target="i3GEOaplicarsldiframe" action="'+i3GEO.configura.locaplic+'/ferramentas/aplicarsld/upload.php?tema='+i3GEO.temaAtivo+'" method="post" ENCTYPE="multipart/form-data">' +
-		'<p class="paragrafo" >Arquivo SLD: <br><input type="file" size=42 name="i3GEOaplicarsld" style="top:0px;left:0px;cursor:pointer;"></p>' +
+		'<p class="paragrafo" >Arquivo SLD: <br><input type="file" size=18 name="i3GEOaplicarsld" style="top:0px;left:0px;cursor:pointer;"></p>' +
 		'<br><p class="paragrafo" ><input id=i3GEOaplicarsldbotao1 type="button" value="Aplicar" size=12 name="submit">' +
 		'<input type=hidden name=g_sid value="'+i3GEO.configura.sid+'" >' +
 		'<input type="hidden" name="MAX_FILE_SIZE" value="100000">' +

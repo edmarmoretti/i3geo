@@ -115,7 +115,7 @@ i3GEOF.uploaddbf = {
 		'<p class="paragrafo" >nome da coluna x: <br><input class=digitar type="text" size=32 name="i3GEOuploaddbfnomex" style="top:0px;left:0px"></p>' +
 		'<p class="paragrafo" >nome da coluna y: <br><input class=digitar type="text" size=32 name="i3GEOuploaddbfnomey" style="top:0px;left:0px"></p>' +
 
-		'<p class="paragrafo" >arquivo: <br><input type="file" size=22 name="i3GEOuploaddbffile" style="top:0px;left:0px;cursor:pointer;"></p>' +
+		'<p class="paragrafo" >arquivo: <br><input type="file" size=18 name="i3GEOuploaddbffile" style="top:0px;left:0px;cursor:pointer;"></p>' +
 		'<p class=paragrafo >Proje&ccedil;&atilde;o:</p>' +
 		'<div id=i3GEOuploaddbfListaepsg width="98%" style="text-align:left;border:1px solid gray;left:0px;overflow:auto;height:60px"></div>' +
 		'<br><p class="paragrafo" ><input id=i3GEOuploaddbfbotao1 type="button" value="Criar camada" size=12 name="submit">' +

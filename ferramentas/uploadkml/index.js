@@ -138,7 +138,7 @@ i3GEOF.uploadkml = {
 		titulo = "KML <a class=ajuda_usuario target=_blank href='" + i3GEO.configura.locaplic + "/ajuda_usuario.php?idcategoria=4&idajuda=104' >&nbsp;&nbsp;&nbsp;</a>";
 		janela = i3GEO.janela.cria(
 			"450px",
-			"360px",
+			"390px",
 			"",
 			"",
 			"",

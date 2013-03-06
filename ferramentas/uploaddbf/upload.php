@@ -85,10 +85,18 @@ if (isset($_FILES['i3GEOuploaddbffile']['name']))
 				}
 				xbase_close($db);
 			}
-			echo "<p>Arquivo enviado. Criando shape file...</p>";
+			else{
+				copy($dirmap."/".$_FILES['i3GEOuploaddbffile']['name'],$dirmap."/".$nome.".dbf");
+			}
+			echo "<p>Arquivo enviado. Criando shape file...$nomeshp </p>";
 			$novoshpf = ms_newShapefileObj($nomeshp, MS_SHP_POINT);
 			$novoshpf->free();
+			if(!file_exists($nomeshp)){
+				echo "<p>Erro ao criar arquivo shapefile</p>";
+				paraAguarde();
+			}
 			$shapefileObj = ms_newShapefileObj($nomeshp,-2);
+
 			if($i3GEOuploaddbftipoarquivo != "dbf"){
 				foreach($csv->data as $d){
 					$poPoint = ms_newpointobj();
@@ -99,8 +107,10 @@ if (isset($_FILES['i3GEOuploaddbffile']['name']))
 			else
 			{
 				require_once("../../pacotes/phpxbase/api_conversion.php");
+				echo "<p>Lendo arquivo ".$dirmap."/".$_FILES['i3GEOuploaddbffile']['name']."</p>";
 				$dbf = xbase_open($dirmap."/".$_FILES['i3GEOuploaddbffile']['name']);
 				$records = xbase_numrecords($dbf);
+				echo "<p>Numero de pontos: $records</p>";
 				$record = array();
 				for($x = 1; $x <= $records; $x++)
 				{
@@ -150,6 +160,7 @@ if (isset($_FILES['i3GEOuploaddbffile']['name']))
 	else
 	{
 		echo "<p>Erro ao enviar o arquivo.</p>";
+		paraAguarde();
 	}
 }
 paraAguarde();
