@@ -22,7 +22,7 @@ background: url(../../pacotes/yui290/build/container/img/corner_resize.gif) left
 cursor: se-resize;
 }
 .yui-skin-sam .yui-button button, .yui-skin-sam .yui-button a, .yui-skin-sam .yui-button a:visited{
-	font-size:1.26em;
+	font-size:1em;
 }
 .yui-skin-sam .yui-button {
     margin: 0.25em;
