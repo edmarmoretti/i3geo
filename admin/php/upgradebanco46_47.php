@@ -104,14 +104,14 @@ foreach($tabelas as $tabela){
 	if($_POST["mostraSoSQL"] != "on"){
 		$q = $dbhw->query($tabela);
 	   	if($q){
-			echo "<br>Feito!!!<pre><br>";
+			echo "<br>Feito!!!<br>";
 	   	}
 	   	else{
-			echo "<pre>Ocorreu algum problema na criação das tabelas. Tabelas que deveriam ter sido criadas:\n";
+			echo "<br><br>Ocorreu algum problema na cria&ccedil;&atilde;o da tabela (ou j&aacute; existe)<br> $tabela \n";
 	   	}
 	}
 }
-echo "Tabelas:<br><br>";
+echo "<br><br>Tabelas:<br><br>";
 foreach($tabelas as $tabela){
 	if($drivename == "pgsql"){
 		$tabela = str_replace("INTEGER PRIMARY KEY","SERIAL PRIMARY KEY NOT NULL",$tabela);
