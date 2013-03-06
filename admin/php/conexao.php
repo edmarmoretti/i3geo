@@ -50,7 +50,10 @@ else{
 if(!isset($conexaoadmin)){
 	$conexaoadmin = "";
 }
-elseif($conexaoadmin != ""){
+if(!isset($esquemaadmin)){
+	$esquemaadmin = "";
+}
+if($esquemaadmin != ""){
 	$esquemaadmin = str_replace(".","",$esquemaadmin).".";
 }
 //
