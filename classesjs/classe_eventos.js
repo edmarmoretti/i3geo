@@ -338,7 +338,7 @@ i3GEO.eventos = {
 			objposicaocursor.refx: posicao x no mapa de refer&ecirc;ncia em pixels
 
 			objposicaocursor.refy: posicao x no mapa de refer&ecirc;ncia em pixels
-
+			
 	Parameters:
 
 	e {Event object} - objeto do tipo evento disparado sobre o objeto em foco

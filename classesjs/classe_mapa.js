@@ -822,7 +822,7 @@ i3GEO.mapa = {
 			if(typeof(console) !== 'undefined'){console.info("i3GEO.mapa.dialogo.cliqueIdentificaDefault()");}
 			//@FIXIT nada elegante
 			//evita clicar sobre a barra do googlemaps
-			if(objposicaocursor.telax < 40 && i3GEO.Interface.ATUAL === "googlemaps"){
+			if(objposicaocursor.imgx < 70){
 				return;
 			}
 
@@ -857,7 +857,8 @@ i3GEO.mapa = {
 		verificaTipDefault: function(){
 			//evita clicar sobre a barra do googlemaps
 			//@FIXIT nada elegante
-			if(objposicaocursor.telax < 40 && i3GEO.Interface.ATUAL === "googlemaps"){
+			//console.warn(objposicaocursor.imgx)
+			if(objposicaocursor.imgx < 70){
 				return;
 			}
 			if(typeof(console) !== 'undefined'){console.info("i3GEO.mapa.dialogo.verificaTipDefault()");}
