@@ -732,7 +732,7 @@ i3GEO.gadgets = {
 					n = sub.length;
 					ins = "";
 					for(i=0;i<n;i++){
-						ins += "<p class='listaMenuItem' ><a href='"+sub[i].url+"' target='_blank'>"+sub[i].text+"</a>";
+						ins += "<p class='listaMenuItem' ><a href='"+sub[i].url+"' target='_self'>"+sub[i].text+"</a>";
 					}
 					$i("menulista_"+nomeMenu).innerHTML += ins;
 				}
