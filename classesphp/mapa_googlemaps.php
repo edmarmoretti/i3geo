@@ -7,12 +7,12 @@ das vari&aacute;veis de conex&atilde;o com banco e outras opera&ccedil;&otilde;e
 
 &Eacute; utilizado especificamente nas interfaces que utilizam a biblioteca Googlemaps.
 
-Precisa do código da "section" PHP aberta pelo i3Geo ou o código para acesso especial indicado no par&acirc;metro telaR
+Precisa do codigo da "section" PHP aberta pelo i3Geo ou o codigo para acesso especial indicado no par&acirc;metro telaR
 (veja a ferramenta TELAREMOTA).
 
 Parametros:
 
-g_sid {string} - código da "section" PHP
+g_sid {string} - codigo da "section" PHP
 
 telaR {string} - (opcional) utilizado para autorizar o uso do mapfile aberto (deve estar registrado em $fingerprint (vari&aacute;vel de se&ccedil;&atilde;o)
 
@@ -24,7 +24,7 @@ WIDTH {numeric} - largura do mapa
 
 HEIGHT {numeric} - altura do mapa
 
-layer {string} - código do layer existente no mapa que ser&aacute; desenhado (ignorado quando telaR for definido)
+layer {string} - codigo do layer existente no mapa que ser&aacute; desenhado (ignorado quando telaR for definido)
 
 DESLIGACACHE {sim|nao} - for&ccedil;a a n&atilde;o usar o cache de imagens qd definido como "sim", do contr&aacute;rio, o uso ou n&atilde;o do cache ser&aacute; definido automaticamente
 
@@ -49,7 +49,7 @@ Este programa &eacute; distribu&iacute;do na expectativa de que seja &uacute;til
 por&eacute;m, SEM NENHUMA GARANTIA; nem mesmo a garantia impl&iacute;cita
 de COMERCIABILIDADE OU ADEQUA&Ccedil;&Atilde;O A UMA FINALIDADE ESPEC&Iacute;FICA.
 Consulte a Licen&ccedil;a P&uacute;blica Geral do GNU para mais detalhes.
-Voc&ecirc; deve ter recebido uma cópia da Licen&ccedil;a P&uacute;blica Geral do
+Voc&ecirc; deve ter recebido uma copia da Licen&ccedil;a P&uacute;blica Geral do
 GNU junto com este programa; se n&atilde;o, escreva para a
 Free Software Foundation, Inc., no endere&ccedil;o
 59 Temple Street, Suite 330, Boston, MA 02111-1307 USA.
@@ -76,24 +76,6 @@ if(@$_SESSION["fingerprint"]){
 	$f = explode(",",$_SESSION["fingerprint"]);
 	if (md5('I3GEOSEC' . $_SERVER['HTTP_USER_AGENT'] . session_id()) != $f[0] && !in_array($_GET["telaR"],$f) ){
 		ilegal();
-	}	else{
-		if($img->imagepath == "")
-		{echo "Erro IMAGEPATH vazio";exit;}
-		if(ms_GetVersionInt() != 60003	){
-			header('Content-Type: image/png');
-			$img->saveImage();
-		}
-		else{
-			$nomer = ($img->imagepath)."temp".nomeRand().".png";
-			$img->saveImage($nomer);
-			$img = imagecreatefrompng($nomer);
-			imagealphablending($img, false);
-			imagesavealpha($img, true);
-			ob_clean();
-			echo header("Content-type: image/png \n\n");
-			imagepng($img);
-			imagedestroy($img);
-		}
 	}
 }
 else{
@@ -148,7 +130,7 @@ $ret = $mapa->extent;
 
 $cache = false;
 if(!isset($_GET["telaR"])){
-	//no caso de projecoes remotas, o mapfile nao´e alterado
+	//no caso de projecoes remotas, o mapfile nao e alterado
 	$numlayers = $mapa->numlayers;
 	for ($i=0;$i < $numlayers;++$i){
 		$l = $mapa->getlayer($i);
@@ -315,9 +297,7 @@ else{
 		fpassthru(fopen($nomer, 'rb'));
 	}
 	else{
-		if($img->imagepath == "")
-		{echo "Erro IMAGEPATH vazio";exit;}
-		if(ms_GetVersionInt() != 60003	){
+			if(ms_GetVersionInt() != 60003	){
 			header('Content-Type: image/png');
 			$img->saveImage();
 		}

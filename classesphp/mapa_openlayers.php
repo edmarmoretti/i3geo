@@ -7,7 +7,7 @@ das vari&aacute;veis de conex&atilde;o com banco e outras opera&ccedil;&otilde;e
 
 &Eacute; utilizado especificamente nas interfaces que utilizam a biblioteca OpenLayers em LAYERS do tipo WMS.
 
-Precisa do código da "section" PHP aberta pelo i3Geo ou o código para acesso especial indicado no par&acirc;metro telaR
+Precisa do codigo da "section" PHP aberta pelo i3Geo ou o codigo para acesso especial indicado no par&acirc;metro telaR
 (veja a ferramenta TELAREMOTA).
 
 Parametros:
@@ -24,7 +24,7 @@ WIDTH {numeric} - largura do mapa
 
 HEIGHT {numeric} - altura do mapa
 
-layer {string} - código do layer existente no mapa que ser&aacute; desenhado (ignorado quando telaR for definido)
+layer {string} - codigo do layer existente no mapa que ser&aacute; desenhado (ignorado quando telaR for definido)
 
 DESLIGACACHE {sim|nao} - for&ccedil;a a n&atilde;o usar o cache de imagens qd definido como "sim", do contr&aacute;rio, o uso ou n&atilde;o do cache ser&aacute; definido automaticamente
 
