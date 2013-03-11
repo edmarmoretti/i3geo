@@ -76,6 +76,24 @@ if(@$_SESSION["fingerprint"]){
 	$f = explode(",",$_SESSION["fingerprint"]);
 	if (md5('I3GEOSEC' . $_SERVER['HTTP_USER_AGENT'] . session_id()) != $f[0] && !in_array($_GET["telaR"],$f) ){
 		ilegal();
+	}	else{
+		if($img->imagepath == "")
+		{echo "Erro IMAGEPATH vazio";exit;}
+		if(ms_GetVersionInt() != 60003	){
+			header('Content-Type: image/png');
+			$img->saveImage();
+		}
+		else{
+			$nomer = ($img->imagepath)."temp".nomeRand().".png";
+			$img->saveImage($nomer);
+			$img = imagecreatefrompng($nomer);
+			imagealphablending($img, false);
+			imagesavealpha($img, true);
+			ob_clean();
+			echo header("Content-type: image/png \n\n");
+			imagepng($img);
+			imagedestroy($img);
+		}
 	}
 }
 else{
@@ -299,8 +317,21 @@ else{
 	else{
 		if($img->imagepath == "")
 		{echo "Erro IMAGEPATH vazio";exit;}
-		header('Content-Type: image/png');
-		$img->saveImage();
+		if(ms_GetVersionInt() != 60003	){
+			header('Content-Type: image/png');
+			$img->saveImage();
+		}
+		else{
+			$nomer = ($img->imagepath)."temp".nomeRand().".png";
+			$img->saveImage($nomer);
+			$img = imagecreatefrompng($nomer);
+			imagealphablending($img, false);
+			imagesavealpha($img, true);
+			ob_clean();
+			echo header("Content-type: image/png \n\n");
+			imagepng($img);
+			imagedestroy($img);
+		}
 	}
 	exit;
 }

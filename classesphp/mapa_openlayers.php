@@ -290,8 +290,21 @@ else{
 	else{
 		if($img->imagepath == "")
 		{echo "Erro IMAGEPATH vazio";exit;}
-		header('Content-Type: image/png');
-		$img->saveImage();
+		if(ms_GetVersionInt() != 60003	){
+			header('Content-Type: image/png');
+			$img->saveImage();
+		}
+		else{
+			$nomer = ($img->imagepath)."temp".nomeRand().".png";
+			$img->saveImage($nomer);
+			$img = imagecreatefrompng($nomer);
+			imagealphablending($img, false);
+			imagesavealpha($img, true);
+			ob_clean();
+			echo header("Content-type: image/png \n\n");
+			imagepng($img);
+			imagedestroy($img);
+		}
 	}
 }
 function salvaCacheImagem($cachedir,$map,$tms){
