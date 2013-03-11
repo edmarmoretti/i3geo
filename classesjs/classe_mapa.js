@@ -316,8 +316,10 @@ i3GEO.mapa = {
 
 		Cria a legenda HTML
 
-		A legenda e incluida no id definido. Se id for igual a "", sera apenas definido o evento de atualizacao
-		permitindo que seja criada a janela flutuante apenas, por exemplo:
+		O elemento HTML definido em ID deve ter style=display:block
+
+		A legenda e incluida no id definido. Se id for igual a "", sera apenas definido o evento de atualizacao,
+		permitindo que seja criada a janela flutuante, por exemplo:
 
 		i3GEO.mapa.legendaHTML.cria("");
 		i3GEO.mapa.legendaHTML.libera();
