@@ -22,13 +22,6 @@ as instruções que ficam no item "documentacao". Para ter acesso ao portal, vc te
 
 ---------
 
-Se vc é usuário windows, descompacte o arquivo do i3geo adequado na raiz do drive "c". No final vc terá
-um diretório c:\ms4w
-Clique duas vezes em c:\ms4w\apache-install.bat para ativar o servidor Apache. Depois, abra o navegador
-para internet e digite o endereço http://localhost/i3geo ou http://localhost/i3geo/principal.htm
-
----------
-
 A partir da versão 3.9 do i3geo foi incluida uma página principal com endereços para
 os aplicativos que vêm com o i3geo (não esqueça de dar uma olhada):
 http://localhost/i3geo/principal.htm
@@ -36,18 +29,10 @@ http://localhost/i3geo/principal.htm
 ---------
 
 Se vc é usuário linux, dê preferência para instalar o i3geo no diretório:
-/opt/www/html/i3geo
+/var/www/i3geo
 e o diretório temporário em
-/var/tmp/ms_tmp
+/tmp/ms_tmp
 Assim vc não precisará alterar os arquivos de configuração.
-
----------
-
-Se vc não seguiu essa última dica, pode ser necessário editar alguns arquivos, como:
-
-ms_configura.php
-aplicmap/geral1.map
-aplicmap/ogcws.map
 
 ---------
 
@@ -80,3 +65,40 @@ o fórum da comunidade i3geo.
 
 Edite o arquivo aplicmap/ogcws.map para incluir os dados da sua instituição que serão mostrados
 nos web services automáticos gerados com i3geo/ogc.php
+
+---------
+
+Se vc é usuário windows, descompacte o arquivo do i3geo adequado na raiz do drive "c". No final vc terá
+um diretório c:\ms4w
+Clique duas vezes em c:\ms4w\apache-install.bat para ativar o servidor Apache. Depois, abra o navegador
+para internet e digite o endereço http://localhost/i3geo
+
+---------
+
+Se vc é usuário Ubuntu, siga o seguinte roteiro:
+
+http://edmarmoretti.blogspot.com.br/2013/03/instalacao-do-i3geo-no-ubuntu-12-ou.html
+
+---------
+
+Após instalar utilize o localhost/i3geo/testainstal.php para ver se está tudo certo.
+
+---------
+
+Se o testaisntal.php estiver mostrando os mapas e mesmo assim ao abrir o i3Geo as camadas não são mostradas, considere o seguinte:
+
+Alguns usuários reportaram problemas em algumas instalações do Mapserver. Esses usuários conseguem adicionar camadas
+ao mapa mas nada é mostrado, mesmo quando as questões de projeção e outras estão todas configuradas de acordo. Se esse for o seu caso,
+experimente trocar os arquivos de renderização fazendo o seguinte:
+
+altere os nomes dos seguintes arquivos para mantê-los como cópia:
+
+i3geo/classesphp/mapa_openlayers.php -> mapa_openlayers_original.php
+i3geo/classesphp/mapa_googlemaps.php -> mapa_googlemaps_original.php
+
+altere os nomes dos arquivos alternativos:
+
+i3geo/classesphp/mapa_openlayers_alternativo.php -> mapa_openlayers.php
+i3geo/classesphp/mapa_googlemaps_alternativo.php -> mapa_googlemaps.php
+
+
