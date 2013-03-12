@@ -297,7 +297,7 @@ switch (strtoupper($funcao))
 				}
 				if(file_exists("$locaplic/temas/".$codigoMap.".php")){
 					unlink("$locaplic/temas/".$codigoMap.".php");
-				}				
+				}
 			}
 			$tabela = "i3geoadmin_temas";
 			if($id){
@@ -1543,6 +1543,8 @@ function alterarTitulo()
 	$layer->setmetadata("mensagem",$mensagem);
 	$layer->setmetadata("escala",$escala);
 	$layer->setmetadata("extensao",$extensao);
+	//$e = explode(" ",$extensao);
+	//$layer->setExtent($e[0],$e[1],$e[2],$e[3]);
 	$layer->set("group",$group);
 	$mapa->save($mapfile);
 	removeCabecalho($mapfile);
